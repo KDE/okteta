@@ -158,7 +158,7 @@ void KColumnsView::paintEmptyArea( QPainter *P, int cx ,int cy, int cw, int ch)
 
 void KColumnsView::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
 {
-  //kdDebug() << "drawContents(" << cx<<","<<cw<<"#"<<cy<<","<<ch<<")\n";
+  //kdDebug(1501) << "drawContents(" << cx<<","<<cw<<"#"<<cy<<","<<ch<<")\n";
   // calculate affected lines
   int FirstLine = lineAt( cy );
 

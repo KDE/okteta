@@ -1337,7 +1337,7 @@ void KHexEdit::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
 
 void KHexEdit::updateColumn( KColumn &Column )
 {
-  //kdDebug() << "updateColumn\n";
+  //kdDebug(1501) << "updateColumn\n";
   updateContents( Column.x(), 0, Column.width(), totalHeight() );
 }
 

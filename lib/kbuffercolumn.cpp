@@ -384,7 +384,7 @@ void KBufferColumn::paintFirstLine( QPainter *P, KPixelX cx, KPixelX cw, int Fir
   PaintPositions = posOfRelX( PaintX, PaintW );
   PaintLine = FirstLine;
 
-//  kdDebug() << "paintFirstLine:"<<cx<<","<<cw<<"|" <<PaintX<<","<<PaintW << ")\n";
+//  kdDebug(1501) << "paintFirstLine:"<<cx<<","<<cw<<"|" <<PaintX<<","<<PaintW << ")\n";
 
 //  paintPositions( P, PaintLine++, PaintPositions );
   paintLine( P, PaintLine++ );
@@ -400,7 +400,7 @@ void KBufferColumn::paintNextLine( QPainter *P )
 
 void KBufferColumn::paintLine( QPainter *P, int Line ) // TODO: could be removed???
 {
-//  kdDebug() << "paintLine line: "<<Line<<" Start: "<<PaintPositions.start()<<" End: "<<PaintPositions.end() << "\n";
+//  kdDebug(1501) << "paintLine line: "<<Line<<" Start: "<<PaintPositions.start()<<" End: "<<PaintPositions.end() << "\n";
   // no bytes to paint?
 //   if( !Layout->hasContent(Line) )
 //     return;
