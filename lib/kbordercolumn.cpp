@@ -29,10 +29,11 @@ static const KPixelX DefaultWidth = 9;
 static const KPixelX LineX = DefaultWidth / 2;
 
 
-KBorderColumn::KBorderColumn( KColumnsView *V )
- : KColumn( V )
+KBorderColumn::KBorderColumn( KColumnsView *V, bool M )
+ : KColumn( V ),
+   Middle( M )
 {
-  setWidth( DefaultWidth );
+  setWidth( M?DefaultWidth:LineX-1 );
 }
 
 KBorderColumn::~KBorderColumn()
@@ -46,9 +47,12 @@ void KBorderColumn::paintLine( QPainter *P )
   {
     KColumn::paintBlankLine( P );
 
-    int GridColor = View->style().styleHint( QStyle::SH_Table_GridLineColor, View );
-    P->setPen( GridColor != -1 ? (QRgb)GridColor : View->colorGroup().mid() );
-    P->drawLine( LineX, 0, LineX, LineHeight-1 ) ;
+    if( Middle )
+    {
+      int GridColor = View->style().styleHint( QStyle::SH_Table_GridLineColor, View );
+      P->setPen( GridColor != -1 ? (QRgb)GridColor : View->colorGroup().mid() );
+      P->drawLine( LineX, 0, LineX, LineHeight-1 ) ;
+    }
   }
 }
 

@@ -100,9 +100,9 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, WFla
 
   // creating the columns in the needed order
   OffsetColumn =       new KOffsetColumn( this, DefaultFirstLineOffset, DefaultNoOfBytesPerLine, KOffsetFormat::Hexadecimal );
-  FirstBorderColumn =  new KBorderColumn( this );
+  FirstBorderColumn =  new KBorderColumn( this, false );
   ValueColumn =        new KValueColumn( this, DataBuffer, BufferLayout, BufferRanges );
-  SecondBorderColumn = new KBorderColumn( this );
+  SecondBorderColumn = new KBorderColumn( this, true );
   CharColumn =         new KCharColumn( this, DataBuffer, BufferLayout, BufferRanges );
 
   // select the active column

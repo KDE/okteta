@@ -34,9 +34,9 @@ static const unsigned int StartsBefore = 1;
 static const unsigned int EndsLater = 2;
 static const char EmptyByte = ' ';
 
-static const int DefaultCursorWidth = 2;
-static const int DefaultByteSpacingWidth = 3;
-static const int DefaultGroupSpacingWidth = 9;
+static const KPixelX DefaultCursorWidth = 2;
+static const KPixelX DefaultByteSpacingWidth = 3;
+static const KPixelX DefaultGroupSpacingWidth = 9;
 static const int DefaultNoOfGroupedBytes = 4;
 
 KBufferColumn::KBufferColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R )

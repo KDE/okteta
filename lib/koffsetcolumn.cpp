@@ -42,7 +42,8 @@ KOffsetColumn::~KOffsetColumn()
 
 void KOffsetColumn::paintLine( QPainter *P, int Line )
 {
-  KColumn::paintBlankLine( P );
+  const QColor &ButtonColor = View->colorGroup().button();
+  P->fillRect( 0,0,width(),LineHeight, QBrush(ButtonColor,Qt::SolidPattern) );
 
   printFunction()( CodedOffset,FirstLineOffset+Delta*Line );
   P->drawText( 0, DigitBaseLine, QString().append(CodedOffset) );

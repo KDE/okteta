@@ -31,7 +31,7 @@ namespace KHE
 class KBorderColumn : public KColumn
 {
   public:
-    KBorderColumn( KColumnsView *V );
+    KBorderColumn( KColumnsView *V, bool M );
     ~KBorderColumn();
 
   public: // KColumn-API
@@ -40,6 +40,10 @@ class KBorderColumn : public KColumn
 
   protected:
    virtual void paintLine( QPainter *P );
+
+  protected:
+    /** true if we are between two columns and should show a line */
+    bool Middle;
 };
 
 }

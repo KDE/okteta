@@ -40,10 +40,7 @@ class KOffsetColumn : public KColumn
     virtual void paintNextLine( QPainter *P );
 
   public:
-    int firstLineOffset() const;
     void setFirstLineOffset( int FLO );
-
-    int delta() const;
     void setDelta( int D );
 
     void setFormat( KOffsetFormat::KFormat F );
@@ -52,9 +49,11 @@ class KOffsetColumn : public KColumn
     /** */
     void setMetrics( KPixelX DW, KPixelY DBL );
 
-  public:
-    int codingWidth()                      const;
-    KOffsetFormat::print printFunction()   const;
+  public: // read access
+    int delta() const;
+    int firstLineOffset() const;
+    int codingWidth() const;
+    KOffsetFormat::print printFunction() const;
 
 
   protected:
