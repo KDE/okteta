@@ -55,7 +55,7 @@ KCharColumn::~KCharColumn()
 void KCharColumn::drawByte( QPainter *P, char /*Byte*/, KHEChar B, const QColor &Color ) const
 {
   // make a drawable String out of it
-  QString BS( B.isUndefined() ? UndefinedChar : !(ShowUnprintable || B.isPrint()) ? SubstituteChar : B );
+  QString BS( B.isUndefined() ? KHEChar(UndefinedChar) : ( !(ShowUnprintable || B.isPrint()) ? KHEChar(SubstituteChar) : B ));
 
   P->setPen( Color );
   P->drawText( 0, DigitBaseLine, BS );

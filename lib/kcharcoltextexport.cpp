@@ -61,7 +61,7 @@ void KCharColTextExport::print( QString &T ) const
     // print char
     KHEChar B = CharCodec->decode( *PrintData );
 
-    T.append( B.isUndefined() ? UndefinedChar : !B.isPrint() ? SubstituteChar : B );
+    T.append( B.isUndefined() ? KHEChar(UndefinedChar) : !B.isPrint() ? KHEChar(SubstituteChar) : B );
     e = t + 1;
   }
 
