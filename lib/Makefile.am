@@ -3,8 +3,8 @@
 
 INCLUDES    = $(all_includes)
 
-lib_LTLIBRARIES =  libkhexedit.la
-libkhexedit_la_LDFLAGS = -version-info 1:7:1 $(all_libraries) $(KDE_RPATH)
+noinst_LTLIBRARIES =  libkhexedit.la
+libkhexedit_la_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 libkhexedit_la_SOURCES = kcolumn.cpp kbordercolumn.cpp koffsetcolumn.cpp kbuffercolumn.cpp khexcolumn.cpp ktextcolumn.cpp \
                          kcolumnsview.cpp khexedit.cpp kbytesedit.cpp \
                          kbytecodec.cpp koffsetformat.cpp \
