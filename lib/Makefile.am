@@ -1,5 +1,8 @@
 INCLUDES    = $(all_includes)
 
+# TODO: as to be read in kdelibs/NAMING:
+# change the name of the lib to something different than "lib<existing_appname>.la" before installing
+
 # this library is used by the kbytesedit part, more parts are to come
 noinst_LTLIBRARIES =  libkhexedit.la
 libkhexedit_la_LDFLAGS = $(all_libraries) $(KDE_RPATH)
