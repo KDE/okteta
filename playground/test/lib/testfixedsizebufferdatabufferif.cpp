@@ -30,14 +30,7 @@ static const int FixedSizeBufferSize = 60;
 KFixedSizeBufferDataBufferIfTest::KFixedSizeBufferDataBufferIfTest()
  : KDataBufferIfTest( "KFixedSizeBufferDataBufferIfTest" )
 {
-  TestSection.set( 10,40 );
-
-  KFixedSizeBuffer *Buffer = new KFixedSizeBuffer( FixedSizeBufferSize );
-  char *Data = Buffer->rawData();
-  for( char i=0; i<FixedSizeBufferSize; ++i )
-    Data[i] = i+1;
-
-  DataBuffer = Buffer;
+  DataBuffer = new KFixedSizeBuffer( FixedSizeBufferSize );
 }
 
 

@@ -31,12 +31,7 @@ static const int PlainBufferSize = 60;
 KPlainBufferDataBufferIfTest::KPlainBufferDataBufferIfTest()
  : KDataBufferIfTest( "KPlainBufferDataBufferIfTest" )
 {
-  TestSection.set( 10,40 );
-
   KPlainBuffer *PlainBuffer = new KPlainBuffer( PlainBufferSize );
-  char *Data = PlainBuffer->data();
-  for( char i=0; i<PlainBufferSize; ++i )
-    Data[i] = i+1;
   PlainBuffer->setReadOnly( false );
 
   DataBuffer = PlainBuffer;

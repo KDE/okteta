@@ -37,9 +37,6 @@ class KDataBufferIfTest : public KDE::Test::SlotTest
     /** pointer to the buffer to test */
     KHE::KDataBuffer *DataBuffer;
 
-    /** */
-    KHE::KSection TestSection;
-
   protected:
     KDataBufferIfTest( const char* Name );
   public:
@@ -51,7 +48,7 @@ class KDataBufferIfTest : public KDE::Test::SlotTest
     void testSetGet();
 
     void testRemove();
-    //void testInsert();
+    void testInsert();
     //void testReplace();
 };
 

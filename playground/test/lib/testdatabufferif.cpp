@@ -24,22 +24,43 @@
 using namespace KDE::Test;
 using namespace KHE;
 
-static const char MarkChar = 'c';
-static const char PaintChar = 'b';
+static const char FirstMarkChar = 2;
+static const char SecondMarkChar = 3;
+static const char PaintChar = 1;
 static const char BlankChar = '\0';
 
-/*
-static void fillBuffer( KDataBuffer *Buffer )
+// fills the buffer with char from b to e
+static void textureBuffer( KDataBuffer *DataBuffer, unsigned char b = 1, unsigned char e = 255 )
 {
-  char *Data = Buffer->rawData();
-  for( char i=0; i<FixedSizeBufferSize; ++i )
-    Buffer->Data[i] = i+1;
+  int Size = DataBuffer->size();
 
+  unsigned char c = b;
+  for( int i=0; i<Size; ++i )
+  {
+    if( c == e )
+      c = b;
+    else
+      c++;
+    DataBuffer->setDatum(i, c );
+  }
 }
-*/
+
+static void list( KDataBuffer *DataBuffer, const char* Name )
+{
+  int Size = DataBuffer->size();
+  for( int i=0; i<Size; ++i )
+  {
+    kdDebug() << Name<<":"<<i<<":"<<DataBuffer->datum(i) << endl;
+  }
+}
 
 void KDataBufferIfTest::testCopyTo()
 {
+  if( !DataBuffer->isReadOnly() )
+    // prepare Buffer
+    textureBuffer( DataBuffer );
+
+  //
   int CopySize = 10;
   int Size = DataBuffer->size();
   KSection Range( 0, CopySize-1 );
@@ -70,6 +91,11 @@ void KDataBufferIfTest::testCopyTo()
 
 void KDataBufferIfTest::testFill()
 {
+  // can we alter the buffer at all?
+  if( DataBuffer->isReadOnly() )
+    // skip
+    return;
+
   int FillSize = 10;
   int Size = DataBuffer->size();
   KSection Range( 0, FillSize, true );
@@ -134,6 +160,7 @@ void KDataBufferIfTest::testRemove()
     // skip
     return;
 
+  textureBuffer( DataBuffer );
   int RemoveSize = 10;
   // create Copy
   int Size = DataBuffer->size();
@@ -170,13 +197,11 @@ void KDataBufferIfTest::testRemove()
   Removed = DataBuffer->remove( Range );
   Range.setEndByWidth( Removed );
 
-  KT_ASSERT_EQUALS( "remove() at start data before", Copy.compare(*DataBuffer,0,Range.start()-1,0), 0 );
   KT_ASSERT_EQUALS( "remove() at start data behind",
                     Copy.compare( *DataBuffer,KSection(Range.start(),Size-Removed-1),Range.end()+1), 0 );
   KT_ASSERT_EQUALS( "modified by remove()", DataBuffer->isModified(), Removed > 0 );
 }
 
-/*
 
 void KDataBufferIfTest::testInsert()
 {
@@ -186,49 +211,65 @@ void KDataBufferIfTest::testInsert()
     return;
 
   // create Copy
+  int InsertSize = 10;
   int Size = DataBuffer->size();
-  KFixedSizeBuffer Copy( Size );
+  KFixedSizeBuffer Copy( Size+3*InsertSize );
   DataBuffer->copyTo( Copy.rawData(), 0, Size );
 
   // create InsertData
-  static const char InsertChar = '\0';
-  static const char InsertBeforeChar = '\0';
-  static const char InsertBehindChar = '\0';
-  int InsertSize = 10;
-  KFixedSizeBuffer InsertData( InsertSize, InsertChar );
-  InsertData.rawData()[0] = InsertBeginChar;
-  InsertData.rawData()[InsertSize-1] = InsertEndChar;
+  KFixedSizeBuffer InsertData( InsertSize );
+  textureBuffer( &InsertData, 10, 100 );
 
-  //
+  // insert at begin
+  textureBuffer( DataBuffer,100,255 );
+  DataBuffer->copyTo( Copy.rawData(), 0, Size );
   DataBuffer->setModified( false );
-  KSection Range( Size-RemoveSize, Size-1 );
-  int Removed = DataBuffer->remove( Range );
-  Range.setEndByWidth( Removed );
+  KSection Range( 0, 0 );
 
-  KT_ASSERT_EQUALS( "remove() at end data before", Copy.compare(*DataBuffer,0,Range.start()-1,0), 0 );
-  KT_ASSERT_EQUALS( "modified by remove()", DataBuffer->isModified(), Removed > 0 );
+  int Inserted = DataBuffer->insert( Range.start(), InsertData.rawData(), InsertSize );
+  Range.setEndByWidth( Inserted );
 
+  KT_ASSERT_EQUALS( "insert() at begin: data inserted", InsertData.compare(*DataBuffer,Range,0), 0 );
+  KT_ASSERT_EQUALS( "insert() at begin: data behind",
+                    Copy.compare(*DataBuffer,Range.end()+1,Size-Range.end()-1,Range.start()), 0 );
+  KT_ASSERT_EQUALS( "modified by insert()",  DataBuffer->isModified(), Inserted > 0 );
 
-  int Size = DataBuffer->size();
-  KSection Range( 0, InsertSize, true );
-
-  KFixedSizeBuffer Copy( Size, InsertChar );
-
-  KT_ASSERT_EQUALS( "fill() all",  Copy.compare(*DataBuffer), 0 );
-
+  // insert at mid
+  Size = DataBuffer->size();
+  textureBuffer( DataBuffer,100,255 );
+  DataBuffer->copyTo( Copy.rawData(), 0, Size );
   DataBuffer->setModified( false );
+  Range.setStart( Size/2 );
 
-  //
-  int Inserted = DataBuffer->insert( Range.start(), Copy.rawData(), Range.width() );
+  Inserted = DataBuffer->insert( Range.start(), InsertData.rawData(), InsertSize );
+  Range.setEndByWidth( Inserted );
 
-  KT_ASSERT_EQUALS( "insert() at begin: before", DataBuffer->datum(Range.end()+1), BlankChar );
-  KT_ASSERT_EQUALS( "insert() at begin: data inserted", DataBuffer->compare(Copy,Range,Range.start()), 0 );
-  KT_ASSERT_EQUALS( "insert() at begin: before", DataBuffer->datum(Range.end()+1), BlankChar );
-  KT_ASSERT( "insert() data behind",
-             DataBuffer->compare(Copy,KSection(TestSection.end()+1,Size-1),TestSection.end()+1) == 0 );
+  KT_ASSERT_EQUALS( "insert() at mid: data before", Copy.compare(*DataBuffer, 0,Range.start(),0), 0 );
+  KT_ASSERT_EQUALS( "insert() at mid: data inserted", InsertData.compare(*DataBuffer,Range,0), 0 );
+  KT_ASSERT_EQUALS( "insert() at mid: data behind",
+                    Copy.compare(*DataBuffer,Range.end()+1,Size-Range.end()-1,Range.start()), 0 );
+  KT_ASSERT_EQUALS( "modified by insert()",  DataBuffer->isModified(), Inserted > 0 );
+
+  // insert at end
+  Size = DataBuffer->size();
+  textureBuffer( DataBuffer,100,255 );
+  DataBuffer->copyTo( Copy.rawData(), 0, Size );
+  DataBuffer->setModified( false );
+  Range.setStart( Size );
+
+  Inserted = DataBuffer->insert( Range.start(), InsertData.rawData(), InsertSize );
+  Range.setEndByWidth( Inserted );
+
+//   list( DataBuffer, "DataBuffer" );
+//   list( &Copy, "Copy" );
+//   kdDebug() << QString("(%1-%2").arg(Range.start()).arg(Range.end()) << endl;
+  KT_ASSERT_EQUALS( "insert() at end: data before", Copy.compare(*DataBuffer, 0,Range.start(),0), 0 );
+  if( Range.isValid() )
+  KT_ASSERT_EQUALS( "insert() at end: data inserted", InsertData.compare(*DataBuffer,Range,0), 0 );
   KT_ASSERT_EQUALS( "modified by insert()",  DataBuffer->isModified(), Inserted > 0 );
 }
 
+/*
 
 
 void KDataBufferIfTest::testAddRemove()
