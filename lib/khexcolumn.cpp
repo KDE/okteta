@@ -18,7 +18,7 @@
 // c specific
 #include <ctype.h>
 // c++ specififc
-#include <iostream>
+// #include <iostream>
 // qt specific
 #include <qpainter.h>
 // app specific
@@ -46,6 +46,7 @@ static inline QColor colorForByte( const char Byte )
 
 KHexColumn::KHexColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R )
  : KBufferColumn( CV, B, L, R ),
+   Coding( NoCoding ),
    BinaryGapWidth( DefaultBinaryGapWidth )
 {
   setCoding( DefaultCoding );
