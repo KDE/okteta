@@ -18,7 +18,6 @@ METASOURCES = AUTO
 messages: rc.cpp
 	$(XGETTEXT) *.cpp -o $(podir)/khexedit.pot
 
-KDE_ICON = khexedit
 
 # this is where the kdelnk file will go
 kdelnkdir = $(kde_appsdir)/Utilities
