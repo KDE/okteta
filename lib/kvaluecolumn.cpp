@@ -24,6 +24,7 @@
 #include "kbufferranges.h"
 #include "kvaluecolumn.h"
 #include "helper.h"
+#include "kcharcodec.h"
 
 using namespace KHE;
 
@@ -102,15 +103,17 @@ void KValueColumn::recalcByteWidth()
 // perhaps sometimes there will be a grammar
 void KValueColumn::paintEditedByte( QPainter *P, char Byte, const char *EditBuffer )
 {
+  KHEChar B = Codec->decode( Byte );
+
   const QColorGroup &CG = View->colorGroup();
 
-  P->fillRect( 0,0,ByteWidth,LineHeight, QBrush(colorForByte(Byte),Qt::SolidPattern) );
+  P->fillRect( 0,0,ByteWidth,LineHeight, QBrush(colorForChar(B),Qt::SolidPattern) );
 
   drawCode( P, EditBuffer, CG.base() );
 }
 
 
-void KValueColumn::drawByte( QPainter *P, char Byte, const QColor &Color ) const
+void KValueColumn::drawByte( QPainter *P, char Byte, KHEChar /*B*/, const QColor &Color ) const
 {
   codingFunction()( CodedByte, Byte );
   drawCode( P, CodedByte, Color );
@@ -123,9 +126,9 @@ void KValueColumn::drawCode( QPainter *P, const char *Code, const QColor &Color 
   if( Coding == BinaryCoding )
   {
     // leave a gap in the middle
-    P->drawText( 0, DigitBaseLine, QString::fromLocal8Bit(Code,4) );
-    P->drawText( BinaryHalfOffset, DigitBaseLine, QString::fromLocal8Bit(&Code[4],4) );
+    P->drawText( 0, DigitBaseLine, QString::fromAscii(Code,4) );
+    P->drawText( BinaryHalfOffset, DigitBaseLine, QString::fromAscii(&Code[4],4) );
   }
   else
-    P->drawText( 0, DigitBaseLine, QString::fromLocal8Bit(Code) );
+    P->drawText( 0, DigitBaseLine, QString::fromAscii(Code) );
 }

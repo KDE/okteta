@@ -1,8 +1,8 @@
 /***************************************************************************
-                          helper.h  -  description
+                          kebcdic1047charcodec.h  -  description
                              -------------------
-    begin                : Fri Oct 03 2003
-    copyright            : (C) 2003 by Friedrich W. H. Kossebau
+    begin                : Sa Nov 27 2004
+    copyright            : (C) 2004 by Friedrich W. H. Kossebau
     email                : Friedrich.W.H@Kossebau.de
  ***************************************************************************/
 
@@ -14,18 +14,36 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KHEXEDIT_HELPER
-#define KHEXEDIT_HELPER
 
-// qt specific
-#include <qcolor.h>
-// lib specific
-#include <khechar.h>
+#ifndef KHE_KEBCDIC1047CHARCODEC_H
+#define KHE_KEBCDIC1047CHARCODEC_H
 
-// temporary solution until syntax highlighting is implemented
-static inline QColor colorForChar( const KHE::KHEChar Byte )
+
+#include "kcharcodec.h"
+
+namespace KHE
 {
-  return Byte.isUndefined() ? Qt::yellow : Byte.isPunct() ? Qt::red : Byte.isPrint() ? Qt::black : Qt::blue;
+
+//
+class KEBCDIC1047CharCodec : public KCharCodec
+{
+  protected:
+    KEBCDIC1047CharCodec();
+
+  public:
+    virtual KHEChar decode( char Byte ) const;
+
+  public:
+    virtual bool encode( char *D, const QChar &C ) const;
+
+  public:
+    static KEBCDIC1047CharCodec *create();
+};
+
+inline KEBCDIC1047CharCodec::KEBCDIC1047CharCodec() {}
+
+inline KEBCDIC1047CharCodec *KEBCDIC1047CharCodec::create() { return new KEBCDIC1047CharCodec(); }
+
 }
 
 #endif

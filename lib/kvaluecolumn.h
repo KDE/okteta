@@ -18,6 +18,7 @@
 #ifndef KHE_KVALUECOLUMN_H
 #define KHE_KVALUECOLUMN_H
 
+#include "kbytecodec.h"
 #include "kbuffercolumn.h"
 
 
@@ -67,8 +68,8 @@ class KValueColumn : public KBufferColumn
     bool digitsFilled( unsigned char Value ) const;
 
   protected: // KBufferColumn API
-    void drawByte( QPainter *P, char Byte, const QColor &Color ) const;
-    void recalcByteWidth();
+    virtual void drawByte( QPainter *P, char Byte, KHEChar B, const QColor &Color ) const;
+    virtual void recalcByteWidth();
 
   protected:
     void drawCode( QPainter *P, const char *Code, const QColor &Color ) const;

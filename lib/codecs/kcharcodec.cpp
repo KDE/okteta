@@ -1,8 +1,8 @@
 /***************************************************************************
-                          helper.h  -  description
+                          kcharcodec.cpp  -  description
                              -------------------
-    begin                : Fri Oct 03 2003
-    copyright            : (C) 2003 by Friedrich W. H. Kossebau
+    begin                : Do Nov 25 2004
+    copyright            : (C) 2004 by Friedrich W. H. Kossebau
     email                : Friedrich.W.H@Kossebau.de
  ***************************************************************************/
 
@@ -14,18 +14,34 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KHEXEDIT_HELPER
-#define KHEXEDIT_HELPER
 
-// qt specific
-#include <qcolor.h>
-// lib specific
-#include <khechar.h>
 
-// temporary solution until syntax highlighting is implemented
-static inline QColor colorForChar( const KHE::KHEChar Byte )
+#include "kcharcodec.h"
+#include "ktextcharcodec.h"
+#include "kebcdic1047charcodec.h"
+
+using namespace KHE;
+
+/*QStringList KCharCodec::descriptiveCodecNames()
 {
-  return Byte.isUndefined() ? Qt::yellow : Byte.isPunct() ? Qt::red : Byte.isPrint() ? Qt::black : Qt::blue;
 }
+*/
 
-#endif
+
+KCharCodec *KCharCodec::create( KEncoding C )
+{
+  KCharCodec *Codec;
+  switch( C )
+  {
+    case ISO8859_1Encoding: Codec = KTextCharCodec::create("ISO 8859-1"); break;
+    case EBCDIC1047Encoding: Codec = KEBCDIC1047CharCodec::create(); break;
+    case LocalEncoding: // trigger default
+    default: Codec = 0;
+  }
+
+  // ensure at least a codec
+  if( Codec == 0 )
+    Codec = KTextCharCodec::createLocal();
+
+  return Codec;
+}

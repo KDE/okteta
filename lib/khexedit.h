@@ -46,6 +46,7 @@ class KBufferRanges;
 class KBufferDrag;
 
 class KCursor;
+class KCharCodec;
 
 class KHexEditPrivate;
 
@@ -101,7 +102,8 @@ class KHexEdit : public KColumnsView
 
     enum KResizeStyle { NoResize=0, LockGrouping=1, FullSizeUsage=2, MaxResizeStyleId=0xFF };
     enum KCoding { HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, MaxCodingId=0xFFFF };
-    enum KEncoding { LocalEncoding=0, ISO8859_1Encoding=1, MaxEncodingId=0xFFFF };
+    enum KEncoding { LocalEncoding=0, ISO8859_1Encoding=1, EBCDIC1047Encoding=2,
+                     StartOfOwnEncoding=0x8000, MaxEncodingId=0xFFFF };
 
     enum KBufferColumnId { ValueColumnId=1, CharColumnId=2 };
 
@@ -164,6 +166,8 @@ class KHexEdit : public KColumnsView
       * @return substitute character 
       */
     QChar substituteChar() const;
+    /** returns the actually used undefined character for "undefined" chars, default is '?' */
+    QChar undefinedChar() const;
     /**
       * @return encoding used in the char column
       */
@@ -281,6 +285,10 @@ class KHexEdit : public KColumnsView
       * returns true if there was a change
       */
     void setSubstituteChar( QChar SC );
+    /** sets the undefined character for "undefined" chars
+     * returns true if there was a change
+     */
+    void setUndefinedChar( QChar UC );
     /** sets the encoding of the char column. Default is KHE::LocalEncoding.
       * If the encoding is not available the format will not be changed. */
     void setEncoding( KEncoding C );
@@ -462,7 +470,7 @@ class KHexEdit : public KColumnsView
   protected:
     KOffsetColumn *OffsetColumn;
     KBorderColumn *FirstBorderColumn;
-    KValueColumn    *ValueColumn;
+    KValueColumn  *ValueColumn;
     KBorderColumn *SecondBorderColumn;
     KCharColumn   *CharColumn;
 
@@ -486,6 +494,8 @@ class KHexEdit : public KColumnsView
     KCursor *CursorPixmaps;
     /** buffer with the  */
     char *ByteBuffer;
+    /** */
+    KCharCodec *Codec;
     /** stores the number of actual digits */
     int LengthOfByteBuffer;
     /** */
@@ -508,6 +518,9 @@ class KHexEdit : public KColumnsView
   protected: // parameters
     /** style of resizing */
     KResizeStyle ResizeStyle;
+    /** */
+    KEncoding Encoding;
+
     /** flag if tab key should be ignored */
     bool TabChangesFocus:1;
     /** flag whether the widget is set to readonly. Cannot override the databuffer's setting, of course. */

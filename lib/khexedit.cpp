@@ -44,6 +44,7 @@
 #include "kbufferdrag.h"
 #include "kcursor.h"
 #include "kbytecodec.h"
+#include "kcharcodec.h"
 #include "khexedit.h"
 
 using namespace KHE;
@@ -54,6 +55,7 @@ static const int DefaultStartOffset = 0;//5;
 static const int DefaultFirstLineOffset = 0;
 static const int DefaultNoOfBytesPerLine =  16;
 static const KHexEdit::KResizeStyle DefaultResizeStyle = KHexEdit::FullSizeUsage;
+static const KHexEdit::KEncoding DefaultEncoding = KHexEdit::LocalEncoding;
 static const int DefaultScrollTimerPeriod = 100;
 static const int InsertCursorWidth = 2;
 
@@ -71,8 +73,10 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, WFla
    TrippleClickTimer( new QTimer(this) ),
    CursorPixmaps( new KCursor() ),
    ByteBuffer( new char[KByteCodec::MaxCodingWidth+1] ),
+   Codec( 0 ),
    ClipboardMode( QClipboard::Clipboard ),
    ResizeStyle( DefaultResizeStyle ),
+   Encoding( MaxEncodingId ), // forces update
    TabChangesFocus( false ),
    ReadOnly( false ),
 //    Modified( false ),
@@ -104,6 +108,8 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, WFla
   // select the active column
   ActiveColumn = &charColumn();
   InactiveColumn = &valueColumn();
+
+  setEncoding( DefaultEncoding );
 
 #ifdef QT_ONLY
   QFont FixedFont( "fixed", 10 );
@@ -150,7 +156,8 @@ bool KHexEdit::isModified()                    const { return DataBuffer->isModi
 bool KHexEdit::tabChangesFocus()               const { return TabChangesFocus; }
 bool KHexEdit::showUnprintable()               const { return charColumn().showUnprintable(); }
 QChar KHexEdit::substituteChar()               const { return charColumn().substituteChar(); }
-KHexEdit::KEncoding KHexEdit::encoding()       const { return (KHexEdit::KEncoding)charColumn().encoding(); }
+QChar KHexEdit::undefinedChar()                const { return charColumn().undefinedChar(); }
+KHexEdit::KEncoding KHexEdit::encoding()       const { return (KHexEdit::KEncoding)Encoding; }
 
 int KHexEdit::cursorPosition() const { return BufferCursor->index(); }
 bool KHexEdit::isCursorBehind() const { return BufferCursor->isBehind(); }
@@ -326,6 +333,15 @@ void KHexEdit::setSubstituteChar( QChar SC )
   unpauseCursor();
 }
 
+void KHexEdit::setUndefinedChar( QChar UC )
+{
+  if( !charColumn().setUndefinedChar(UC) )
+    return;
+  pauseCursor();
+  updateColumn( charColumn() );
+  unpauseCursor();
+}
+
 void KHexEdit::setShowUnprintable( bool SU )
 {
   if( !charColumn().setShowUnprintable(SU) )
@@ -338,9 +354,21 @@ void KHexEdit::setShowUnprintable( bool SU )
 
 void KHexEdit::setEncoding( KEncoding C )
 {
-  if( !charColumn().setEncoding((KHE::KEncoding)C) )
+  if( Encoding == C )
     return;
 
+  KCharCodec *NC = KCharCodec::create( (KHE::KEncoding)C );
+  if( NC == 0 )
+    return;
+
+  valueColumn().setCodec( NC );
+  charColumn().setCodec( NC );
+
+  delete Codec;
+  Codec = NC;
+  Encoding = C;
+
+  updateColumn( valueColumn() );
   updateColumn( charColumn() );
 }
 
@@ -1412,7 +1440,8 @@ void KHexEdit::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
 void KHexEdit::updateColumn( KColumn &Column )
 {
   //kdDebug(1501) << "updateColumn\n";
-  updateContents( Column.x(), 0, Column.width(), totalHeight() );
+  if( Column.isVisible() )
+    updateContents( Column.x(), 0, Column.width(), totalHeight() );
 }
 
 
@@ -1657,11 +1686,8 @@ bool KHexEdit::handleLetter( QKeyEvent *KeyEvent )
   if( ActiveColumn == &charColumn() )
   {
     QByteArray D( 1 );
-    const QString &S = KeyEvent->text();
-    if( charColumn().encoding() == KHE::LocalEncoding )
-      D[0] = S.local8Bit()[0];
-    else
-      D[0] = S.latin1()[0];
+    if( !Codec->encode(&D[0],KeyEvent->text()[0]) )
+      return false;
 //         clearUndoRedoInfo = false;
     insert( D );
     ensureCursorVisible();    

@@ -35,6 +35,9 @@ namespace KHE
     ISO8859_1Encoding=1,
 //    /** don't use; not implemented: the most common EBCDIC codepage */
 //    CECP1047Encoding=2,
+    EBCDIC1047Encoding=2,
+    /** Offset for own encodings which are bound in by plugins */
+    StartOfOwnEncoding=0x8000,
     /** this should enable extension without breaking binary compatibility */
     MaxEncodingId=0xFFFF
   };

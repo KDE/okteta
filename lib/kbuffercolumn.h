@@ -21,7 +21,7 @@
 // lib specific
 #include "khe.h"
 #include "kdatabuffer.h"
-#include "kbytecodec.h"
+#include "khechar.h"
 #include "kcolumn.h"
 #include "kbufferlayout.h"
 #include "ksection.h"
@@ -34,6 +34,7 @@ namespace KHE
 
 // class KHexEdit;
 class KBufferRanges;
+class KCharCodec;
 
 const int NoByteFound = -1;
 
@@ -114,6 +115,8 @@ class KBufferColumn : public KColumn
     void set( KDataBuffer *B );
     /** creates new buffer for x-values; to be called on any change of NoOfBytesPerLine or metrics */
     void resetXBuffer();
+    /** sets the codec to be used by the char column. */
+    void setCodec( KCharCodec *C );
 
   public: // functional logic
     /** returns byte positions covered by pixels with absolute x-coord x */
@@ -161,7 +164,7 @@ class KBufferColumn : public KColumn
 
   protected: // API to be refined
     /** default implementation simply prints the byte as ASCII */
-    virtual void drawByte( QPainter *P, char Byte, const QColor &Color ) const;
+    virtual void drawByte( QPainter *P, char Byte, KHEChar B, const QColor &Color ) const;
     /** default implementation sets byte width to one digit width */
     virtual void recalcByteWidth();
 
@@ -184,6 +187,8 @@ class KBufferColumn : public KColumn
     const KBufferLayout *Layout;
     /** pointer to the ranges */
     KBufferRanges *Ranges;
+    /** */
+    KCharCodec *Codec;
 
     /** */
     KPixelX DigitWidth;
@@ -238,6 +243,8 @@ inline KSection KBufferColumn::visiblePositions() const { return PaintPositions;
 
 inline const KBufferLayout *KBufferColumn::layout() const { return Layout; }
 
+
+inline void KBufferColumn::setCodec( KCharCodec *C ) { Codec = C; }
 }
 
 #endif

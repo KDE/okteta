@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
- 
+
 #ifndef KHE_KOFFSETFORMAT_H
 #define KHE_KOFFSETFORMAT_H
 
@@ -45,11 +45,11 @@ class KOffsetFormat
     /** */
     static print printFunction( int i );
 
-  public:    
+  public:
     static void printHexadecimalOffset( char *Buffer, unsigned int Offset );
     static void printHexadecimalSmallOffset( char *Buffer, unsigned int Offset );
     static void printDecimalOffset( char *Buffer, unsigned int Offset );
-    
+
   protected:
     /** */
     static const unsigned int CodingWidth[2]; //TODO: would sizeof(Coding} work?

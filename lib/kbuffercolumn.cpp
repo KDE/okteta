@@ -26,6 +26,7 @@
 #include "kbufferlayout.h"
 #include "kbufferranges.h"
 #include "helper.h"
+#include "kcharcodec.h"
 
 using namespace KHE;
 
@@ -507,7 +508,8 @@ void KBufferColumn::paintPlain( QPainter *P, KSection Positions, int Index )
     // draw the byte
     P->translate( x, 0 );
     char Byte = Buffer->datum( Index );
-    drawByte( P, Byte, colorForByte(Byte) );
+    KHEChar B = Codec->decode( Byte );
+    drawByte( P, Byte, B, colorForChar(B) );
 
     P->translate( -x, 0 );
   }
@@ -521,7 +523,7 @@ void KBufferColumn::paintSelection( QPainter *P, KSection Positions, int Index, 
   paintRange( P, CG.highlight(), Positions, Flag );
 
   const QColor &HTC = CG.highlightedText();
-  // paint all the bytes affected:repa
+  // paint all the bytes affected
   for( int p=Positions.start(); p<=Positions.end(); ++p,++Index )
   {
     KPixelX x = relXOfPos( p );
@@ -529,7 +531,8 @@ void KBufferColumn::paintSelection( QPainter *P, KSection Positions, int Index, 
     // draw the byte
     P->translate( x, 0 );
     char Byte = Buffer->datum( Index );
-    drawByte( P, Byte, HTC );
+    KHEChar B = Codec->decode( Byte );
+    drawByte( P, Byte, B, HTC );
 
     P->translate( -x, 0 );
   }
@@ -551,7 +554,8 @@ void KBufferColumn::paintMarking( QPainter *P, KSection Positions, int Index, in
     // draw the byte
     P->translate( x, 0 );
     char Byte = Buffer->datum( Index );
-    drawByte( P, Byte, BC );
+    KHEChar B = Codec->decode( Byte );
+    drawByte( P, Byte, B, BC );
 
     P->translate( -x, 0 );
   }
@@ -592,6 +596,7 @@ void KBufferColumn::paintRange( QPainter *P, const QColor &Color, KSection Posit
 void KBufferColumn::paintByte( QPainter *P, int Index )
 {
   char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : EmptyByte;
+  KHEChar B = Codec->decode( Byte );
 
   const QColorGroup &CG = View->colorGroup();
   QColor Color = CG.text();
@@ -612,14 +617,14 @@ void KBufferColumn::paintByte( QPainter *P, int Index )
     else
     {
       Brush.setColor( CG.base() );
-      Color = colorForByte( Byte );
+      Color = colorForChar( B );
     }
   }
 
   P->fillRect( 0,0,ByteWidth,LineHeight, Brush );
 
   if( Index > -1 )
-    drawByte( P, Byte, Color );
+    drawByte( P, Byte, B, Color );
 }
 
 
@@ -627,7 +632,9 @@ void KBufferColumn::paintFramedByte( QPainter *P, int Index, KFrameStyle FrameSt
 {
   paintByte( P, Index );
   char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : EmptyByte;
-  P->setPen( colorForByte(Byte) );
+  KHEChar B = Codec->decode( Byte );
+
+  P->setPen( colorForChar(B) );
   if( FrameStyle == Frame )
     P->drawRect( 0, 0, ByteWidth, LineHeight );
   else if( FrameStyle == Left )
@@ -640,14 +647,15 @@ void KBufferColumn::paintFramedByte( QPainter *P, int Index, KFrameStyle FrameSt
 void KBufferColumn::paintCursor( QPainter *P, int Index )
 {
   char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : EmptyByte;
-  P->fillRect( 0, 0, ByteWidth, LineHeight, QBrush(colorForByte(Byte),Qt::SolidPattern) );
+  KHEChar B = Codec->decode( Byte );
+  P->fillRect( 0, 0, ByteWidth, LineHeight, QBrush(colorForChar(B),Qt::SolidPattern) );
 }
 
 
-void KBufferColumn::drawByte( QPainter *P, char Byte, const QColor &Color ) const
+void KBufferColumn::drawByte( QPainter *P, char /*Byte*/, KHEChar B, const QColor &Color ) const
 {
   P->setPen( Color );
-  P->drawText( 0, DigitBaseLine, QString::fromAscii(&Byte,1) );
+  P->drawText( 0, DigitBaseLine, B );
 }
 
 

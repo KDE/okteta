@@ -19,7 +19,6 @@
 #include <ctype.h>
 // qt specific
 #include <qpainter.h>
-#include <qtextcodec.h>
 // kde specific
 #include <kcharsets.h>
 #include <klocale.h>
@@ -33,21 +32,19 @@
 
 using namespace KHE;
 
-static const KEncoding DefaultEncoding =        LocalEncoding;
 static const bool      DefaultShowUnprintable = false;
 static const QChar     DefaultSubstituteChar =  '.';
+static const QChar     DefaultUndefinedChar =   '?';
 
 static const unsigned char LowestPrintableChar = 32;
 
 KCharColumn::KCharColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R )
  : KBufferColumn( CV, B, L, R ),
-   Encoding( MaxEncodingId ), // forces update
-   Codec( 0 ),
    ShowUnprintable( DefaultShowUnprintable ),
-   SubstituteChar( DefaultSubstituteChar )
+   SubstituteChar( DefaultSubstituteChar ),
+   UndefinedChar( DefaultUndefinedChar )
 {
   setSpacing( 0, 0, 0 );
-  setEncoding( DefaultEncoding );
 }
 
 
@@ -55,38 +52,10 @@ KCharColumn::~KCharColumn()
 {
 }
 
-
-bool KCharColumn::setEncoding( KEncoding C )
+void KCharColumn::drawByte( QPainter *P, char /*Byte*/, KHEChar B, const QColor &Color ) const
 {
-  if( Encoding == C )
-    return false;
-
-  switch( C )
-  {
-    case ISO8859_1Encoding: Codec = KGlobal::charsets()->codecForName( "ISO8859-1" ); break;
-    case LocalEncoding: ;
-    default: Codec = KGlobal::locale()->codecForEncoding();
-  }
-  Encoding = C;
-  return true;
-}
-
-
-
-void KCharColumn::drawByte( QPainter *P, char Byte, const QColor &Color ) const
-{
-//   QString BS = ( (unsigned char)Byte < LowestPrintableChar && !ShowUnprintable ) ?
-//                  SubstituteChar :
-//                  Encoding == LocalEncoding ? QString::fromLocal8Bit(&Byte,1): QString::fromLatin1(&Byte,1);
-
-
-  QString BS = Codec->toUnicode( &Byte, 1 );
-  if( !ShowUnprintable )
-  {
-    QCharRef B = BS.at(0);
-    if( !B.isPrint() )
-      BS.at(0) = SubstituteChar;
-  }
+  // make a drawable String out of it
+  QString BS( B.isUndefined() ? UndefinedChar : !(ShowUnprintable || B.isPrint()) ? SubstituteChar : B );
 
   P->setPen( Color );
   P->drawText( 0, DigitBaseLine, BS );

@@ -1,3 +1,5 @@
+SUBDIRS = codecs
+
 INCLUDES    = $(all_includes)
 
 METASOURCES = AUTO
@@ -5,7 +7,7 @@ METASOURCES = AUTO
 # this library is used by the kbytesedit part and the khepart part
 lib_LTLIBRARIES =  libkhexeditcommon.la
 libkhexeditcommon_la_LDFLAGS = $(all_libraries) -no-undefined
-libkhexeditcommon_la_LIBADD =  $(LIB_KDECORE)
+libkhexeditcommon_la_LIBADD =  codecs/libkcharcodecs.la $(LIB_KDECORE)
 libkhexeditcommon_la_SOURCES = kcolumn.cpp kbordercolumn.cpp koffsetcolumn.cpp \
                                kbuffercolumn.cpp kvaluecolumn.cpp kcharcolumn.cpp \
                                kcolumnsview.cpp khexedit.cpp kbytesedit.cpp \
@@ -26,6 +28,7 @@ noinst_HEADERS = kcolumn.h kbordercolumn.h koffsetcolumn.h \
                  kbuffercoord.h kselection.h \
                  kcursor.h kbufferdrag.h \
                  kcoordrange.h ksectionlist.h kcoordrangelist.h \
+                 khechar.h kcharcodec.h \
                  kcoltextexport.h kbordercoltextexport.h koffsetcoltextexport.h \
                  kbuffercoltextexport.h kvaluecoltextexport.h kcharcoltextexport.h \
                  kadds.h khe.h krange.h ksection.h \

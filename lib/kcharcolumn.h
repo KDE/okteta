@@ -25,7 +25,6 @@
 
 class QPainter;
 class QColor;
-class QTextCodec;
 
 
 namespace KHE
@@ -54,9 +53,10 @@ class KCharColumn : public KBufferColumn
       * returns true if there was a change
       */
     bool setSubstituteChar( QChar SC );
-    /** sets the encoding of the char column. Default is KHE::LocalEncoding.
-      * If the encoding is not available the format will not be changed. */
-    bool setEncoding( KEncoding C );
+    /** sets the undefined character for "undefined" chars
+      * returns true if there was a change
+      */
+    bool setUndefinedChar( QChar UC );
 
 
   public: // value access
@@ -66,34 +66,40 @@ class KCharColumn : public KBufferColumn
     bool showUnprintable() const;
     /** returns the actually used substitute character for "unprintable" chars, default is '.' */
     QChar substituteChar() const;
-    /** */
-    KEncoding encoding() const;
+    /** returns the actually used undefined character for "undefined" chars, default is '?' */
+    QChar undefinedChar() const;
 
 
   protected: // KBufferColumn API
-    virtual void drawByte( QPainter *P, char Byte, const QColor &Color ) const;
+    virtual void drawByte( QPainter *P, char Byte, KHEChar B, const QColor &Color ) const;
 
   protected:
-    /** */
-    KEncoding Encoding;
-    /** */
-    QTextCodec *Codec;
     /** */
     bool ShowUnprintable;
     /** */
     QChar SubstituteChar;
+    /** */
+    QChar UndefinedChar;
 };
 
 
 inline bool KCharColumn::showUnprintable()  const { return ShowUnprintable; }
 inline QChar KCharColumn::substituteChar()  const { return SubstituteChar; }
-inline KEncoding KCharColumn::encoding()    const { return Encoding; }
+inline QChar KCharColumn::undefinedChar()   const { return UndefinedChar; }
 
 inline bool KCharColumn::setSubstituteChar( QChar SC )
 {
   if( SubstituteChar == SC )
     return false;
   SubstituteChar = SC;
+  return true;
+}
+
+inline bool KCharColumn::setUndefinedChar( QChar UC )
+{
+  if( UndefinedChar == UC )
+    return false;
+  UndefinedChar = UC;
   return true;
 }
 
