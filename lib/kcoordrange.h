@@ -37,7 +37,15 @@ typedef KRange<KBufferCoord> KBasicCoordRange;
 class KCoordRange : public KRange<KBufferCoord>
 {
   public:
+    /** 
+      * @param SC start coord
+      * @param EC end coord
+      */
     KCoordRange( KBufferCoord SC, KBufferCoord EC );
+    /** 
+      * @param Pos start and end pos
+      * @param Lines start and end line
+      */
     KCoordRange( KSection Pos, KSection Lines );
     KCoordRange();
     ~KCoordRange();
@@ -49,15 +57,22 @@ class KCoordRange : public KRange<KBufferCoord>
     bool operator==( const KCoordRange &S ) const;
 
   public:
-    /** returns the number of points covered if a line has a length of LineLength.
-      * If the range is invalid the behaviour is undefined
+    /** calculates the number of coords that are covered if a line has the given length.
+      * If the range is invalid the behaviour is undefined.
+      * @param LineLength 
+      * @return the number of points covered if a line has a length of LineLength.
       */
     int width( int LineLength ) const;
-    /** returns the number of lines covered.
-      * If the range is invalid the behaviour is undefined
+    /** calculates the number of lines that are covered by the range.
+      * If the range is invalid the behaviour is undefined.
+      * @return number of lines covered
       */
     int lines() const;
-    /** */
+    /** tests if the given line is included by the range. 
+      * If the range is invalid or the line < 0 the behaviour is undefined.      
+      * @param Line index of line
+      * @return @c true if Line is included, otherwise @c false
+      */
     bool includesLine( int Line ) const;
 };
 

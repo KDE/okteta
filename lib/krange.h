@@ -74,7 +74,9 @@ class KRange
     void extendEndTo( T Limit )    { if( End < Limit ) End = Limit; }
 
   public: // value access
+    /** @return start */
     T start() const { return Start; }
+    /** @return end */
     T end() const   { return End; }
 
 
