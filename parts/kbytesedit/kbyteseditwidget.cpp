@@ -314,6 +314,6 @@ void KBytesEditWidget::unZoom()
 
 typedef K_TYPELIST_1( KBytesEditWidget ) Product;
 K_EXPORT_COMPONENT_FACTORY( libkbyteseditwidget, KGenericFactory<Product>( "kbytesedit" ) )
-//K_EXPORT_COMPONENT_FACTORY( libkbyteseditwidget, KGenericFactory<MyPlugin> );
+//K_EXPORT_COMPONENT_FACTORY( libkbyteseditwidget, KGenericFactory<MyPlugin> )
 
 #include "kbyteseditwidget.moc"
