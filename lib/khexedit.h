@@ -242,6 +242,8 @@ class KHexEdit : public KColumnsView
   // byte editing
     /** steps inside editing the byte in the hec column */
     bool goInsideByte();
+    /** */
+    void goOutsideByte();
     /** increases the byte in the buffer TODO: what about going inside the buffer and the like? */
     bool incByte();
     /** increases the byte in the buffer */
@@ -313,6 +315,7 @@ class KHexEdit : public KColumnsView
     void pasteFromSource( QMimeSource *Source );
     void removeData( KSection Indizes );
     bool handleByteEditKey( QKeyEvent *KeyEvent );
+    void syncEditedByte();
 
   protected:
     void fitToNoOfBytesPerLine();

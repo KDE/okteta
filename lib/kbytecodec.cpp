@@ -314,7 +314,7 @@ bool KByteCodec::isValidOctalDigit( unsigned char Digit )
 }
 bool KByteCodec::isValidBinaryDigit( unsigned char Digit )
 {
-  return Digit == '0' && Digit == '1';
+  return Digit == '0' || Digit == '1';
 }
 bool KByteCodec::isValidDummyDigit( unsigned char /*Digit*/ )
 {
@@ -345,7 +345,7 @@ bool KByteCodec::turnToDecimalValue( unsigned char *Digit )
 {
   if( isValidDecimalDigit(*Digit) )
   {
-    Digit -= '0';
+    *Digit -= '0';
     return true;
   }
   return false;
@@ -355,7 +355,7 @@ bool KByteCodec::turnToOctalValue( unsigned char *Digit )
 {
   if( isValidOctalDigit(*Digit) )
   {
-    Digit -= '0';
+    *Digit -= '0';
     return true;
   }
   return false;
@@ -365,7 +365,7 @@ bool KByteCodec::turnToBinaryValue( unsigned char *Digit )
 {
   if( isValidBinaryDigit(*Digit) )
   {
-    Digit -= '0';
+    *Digit -= '0';
     return true;
   }
   return false;

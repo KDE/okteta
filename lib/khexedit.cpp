@@ -713,7 +713,6 @@ void KHexEdit::insert( const QByteArray &D )
       int OldIndex = BufferCursor->trueIndex();
       int W = DataBuffer->insert( OldIndex, D.data(), D.size() );
       updateLength();
-      std::cout << "End"<<InputAfterEnd<<" OldIndex"<<OldIndex<<"Pos"<<BufferCursor->pos()<<std::endl;
       if( W > 0 )
       {
         if( InputAfterEnd )
@@ -721,7 +720,6 @@ void KHexEdit::insert( const QByteArray &D )
         else
           BufferCursor->gotoNextByte( W );
         BufferRanges->addChangedRange( KSection(OldIndex,DataBuffer->size()-1) );
-      std::cout << "Behind" << BufferCursor->isBehind()<<"Index"<<BufferCursor->index()<<"Pos"<<BufferCursor->pos()<<std::endl;
       }
       else
       {
@@ -742,14 +740,16 @@ void KHexEdit::insert( const QByteArray &D )
 
 void KHexEdit::removeSelectedData()
 {
+  if( OverWrite )
+    return;
+
   pauseCursorBlinking();
 
   KSection Selection = BufferRanges->selection();
 
   BufferRanges->removeFurtherSelections();
 
-  if( !OverWrite )
-    removeData( Selection );
+  removeData( Selection );
   BufferRanges->removeSelection();
 
   repaintChanged();
@@ -798,13 +798,20 @@ void KHexEdit::updateLength()
 }
 
 
+void KHexEdit::goOutsideByte()
+{
+  drawEditedByte( false );
+  BufferCursor->setInsideByte( false );
+  drawFrameCursor( false );
+}
+
+
 bool KHexEdit::goInsideByte()
 {
   int ValidIndex = BufferCursor->validIndex();
   if( ValidIndex == -1 || !OverWrite || isReadOnly() || BufferCursor->isBehind() )
-  {
     return false;
-  }
+  // switch to hex column if needed
   if( ActiveColumn == &textColumn() )
   {
     pauseCursorBlinking();
@@ -812,13 +819,12 @@ bool KHexEdit::goInsideByte()
     InactiveColumn = &textColumn();
     unpauseCursorBlinking();
   }
+
   BufferCursor->setInsideByte( true );
   OldValue = EditValue = (unsigned char)DataBuffer->datum( ValidIndex );
 
-  hexColumn().codingFunction()( ByteBuffer, EditValue );
+  syncEditedByte();
   drawEditedByte( true );
-
-  std::cout << "going inside byte" << std::endl;
 
   // put Cursor at the end (implemented later)
   return true;
@@ -832,7 +838,7 @@ bool KHexEdit::incByte()
   if( EditValue < 255 )
   {
     ++EditValue;
-    hexColumn().codingFunction()( ByteBuffer, EditValue );
+    syncEditedByte();
     drawEditedByte( true );
     return true;
   }
@@ -847,7 +853,7 @@ bool KHexEdit::decByte()
   if( EditValue > 0 )
   {
     --EditValue;
-    hexColumn().codingFunction()( ByteBuffer, EditValue );
+    syncEditedByte();
     drawEditedByte( true );
     return true;
   }
@@ -997,17 +1003,14 @@ void KHexEdit::stopCursorBlinking()
 void KHexEdit::pauseCursorBlinking()
 {
   if( BufferCursor->isInsideByte() )
-  {
-    BufferCursor->setInsideByte( false );
-    drawEditedByte( false );
-  }
+    goOutsideByte();
   else
   {
     // must Cursor be removed?
     if( BlinkCursorVisible )
       drawCursor( false );
+    drawFrameCursor( false );
   }
-  drawFrameCursor( false );
 
   CursorHidden = true;
 }
@@ -1110,6 +1113,12 @@ void KHexEdit::drawFrameCursor( bool FrameOn )
 }
 
 
+void KHexEdit::syncEditedByte()
+{
+  hexColumn().codingFunction()( ByteBuffer, EditValue );
+  DataBuffer->replace( BufferCursor->index(), 1, (char*)&EditValue, 1 );
+}
+
 void KHexEdit::drawEditedByte( bool Edited )
 {
   // any reason to skip the cursor drawing?
@@ -1120,7 +1129,6 @@ void KHexEdit::drawEditedByte( bool Edited )
     return;
 
   int Index = BufferCursor->index();
-  DataBuffer->replace( Index, 1, (char*)&EditValue, 1 );
 
   QPainter Painter;
   pointPainterToCursor( Painter, activeColumn() );
@@ -1134,6 +1142,7 @@ void KHexEdit::drawEditedByte( bool Edited )
   else
     activeColumn().paintByte( &Painter, Index );
 }
+
 
 void KHexEdit::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
 {
@@ -1161,12 +1170,16 @@ bool KHexEdit::handleByteEditKey( QKeyEvent *KeyEvent )
       break;
     case Key_Escape:
       EditValue = OldValue;
-      drawEditedByte( false );
+      std::cout << "ESC to:"<<EditValue<<std::endl;
+      syncEditedByte();
+      goOutsideByte();
+      KeyUsed = true;
+      break;
     case Key_Backspace:
       if( EditValue > 0 )
       {
         hexColumn().removingFunction()( &EditValue );
-        hexColumn().codingFunction()( ByteBuffer, EditValue );
+        syncEditedByte();
         drawEditedByte( true );
       }
       else
@@ -1183,7 +1196,7 @@ bool KHexEdit::handleByteEditKey( QKeyEvent *KeyEvent )
 //         std::cout << "Trying to add:" << D[0] << " to " << (unsigned int)EditValue <<"";
         if( hexColumn().addingFunction()(&EditValue,D[0]) )
         {
-          hexColumn().codingFunction()( ByteBuffer, EditValue );
+          syncEditedByte();
           drawEditedByte( true );
         }
         else
@@ -1365,6 +1378,7 @@ void KHexEdit::keyPressEvent( QKeyEvent *KeyEvent )
         }
         else
         {
+          // switching to byte edit mode
           int ValidIndex = BufferCursor->validIndex();
           if( ValidIndex == -1 )
           {
@@ -1390,26 +1404,27 @@ void KHexEdit::keyPressEvent( QKeyEvent *KeyEvent )
               break;
           }
           OldValue = (unsigned char)DataBuffer->datum( ValidIndex );
+          std::cout << "vorher: " << OldValue;
           EditValue = 0;
           bool KeyValid = hexColumn().addingFunction()( &EditValue, D[0] );
-          if( KeyValid )
+          if( KeyValid && !BufferRanges->hasSelection() )
           {
             hexColumn().codingFunction()( ByteBuffer, EditValue );
             BufferCursor->setInsideByte( true );
 
             if( !OverWrite )
             {
-              // turn key into initial byte
-              // if !succeded
-              //   emit inputFailed();
-              //   break;
-              // insert inital byteSpacingWidth
-              // turn to byteedit mode
+//               QByteArray N( 1 );
+//               N[0] = EditValue;
+//               insert( N );
+//               goInsideByte();
             }
+            syncEditedByte();
             drawEditedByte( true );
           }
           else
             emit inputFailed();
+          std::cout << "nachher: "<<OldValue << std::endl;
         }
         break;
       }
@@ -1983,28 +1998,36 @@ void KHexEdit::contentsMouseDoubleClickEvent( QMouseEvent *e )
   DoubleClickLine = BufferCursor->line();
 
   int Index = BufferCursor->index();
-  // for doubleclick we try to select the word that includes this index
-  if( DataBuffer->isWordChar(Index) )
+
+  if( ActiveColumn == &textColumn() )
   {
-    KSection Word = DataBuffer->wordSection( Index );
-    if( Word.isValid() )
+    // for doubleclick we try to select the word that includes this index
+    if( DataBuffer->isWordChar(Index) )
     {
-      pauseCursorBlinking();
-      BufferRanges->setSelection( Word );
-      BufferCursor->gotoIndex( Word.end()+1 );
-      repaintChanged();
-      unpauseCursorBlinking();
+      KSection Word = DataBuffer->wordSection( Index );
+      if( Word.isValid() )
+      {
+        pauseCursorBlinking();
+        BufferRanges->setSelection( Word );
+        BufferCursor->gotoIndex( Word.end()+1 );
+        repaintChanged();
+        unpauseCursorBlinking();
+      }
     }
+    // as we already have a doubleclick maybe it is a tripple click
+    TrippleClickTimer->start( qApp->doubleClickInterval(), true );
+    DoubleClickPoint = e->globalPos();
+  }
+  else
+  {
+    goInsideByte();
   }
 
-  // as we already have a doubleclick maybe it is a tripple click
-  TrippleClickTimer->start( qApp->doubleClickInterval(), true );
-  DoubleClickPoint = e->globalPos();
 
   InDoubleClick = true; //
   MousePressed = true;
 
-  emit doubleClicked( indexByPoint(e->pos()) );
+  emit doubleClicked( Index );
 }
 
 
