@@ -83,10 +83,9 @@ BytesEditApp::BytesEditApp()
     Q_ASSERT( BytesEdit ); // This should not fail!
 
     // now use the editor.
-    //BytesEdit = new KHE::KBytesEdit( this );
-    BytesEdit->setData( Buffer, BufferSize, -1, false );
-    BytesEdit->setMaxDataSize( BufferSize );
-    //BytesEdit->setMaxDataSize( 25 );
+//    BytesEdit->setData( Buffer, BufferSize, -1, false );
+//    BytesEdit->setMaxDataSize( BufferSize );
+    BytesEdit->setMaxDataSize( 25 );
     BytesEdit->setReadOnly( false );
     BytesEdit->setAutoDelete( true );
 #if 0
@@ -114,7 +113,7 @@ BytesEditApp::BytesEditApp()
     {
       TextColumn->setShowUnprintable( false );
       TextColumn->setSubstituteChar( '*' );
-      TextColumn->setEncoding( KHE::TextColumnInterface::/*ISO8859_1Encoding*/LocalEncoding );
+      TextColumn->setEncoding( KHE::TextColumnInterface::ISO8859_1Encoding/*/LocalEncoding*/ );
     }
     Clipboard = KHE::clipboardInterface( BytesEditWidget );
     Zoom = KHE::zoomInterface( BytesEditWidget );
@@ -240,7 +239,7 @@ void BytesEditApp::setReadOnly()
 
 void BytesEditApp::optionsConfigureKeys()
 {
-    KKeyDialog::configureKeys(actionCollection(), RCFileName );
+    KKeyDialog::configure( actionCollection() );
 }
 
 void BytesEditApp::optionsConfigureToolbars()

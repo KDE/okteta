@@ -20,7 +20,7 @@ int main( int argc, char* argv[] )
   memcpy( &Buffer[23], "This is a test text.", 21 );
 
 
-  KCmdLineArgs::init( argc, argv, "Example","","" );
+  KCmdLineArgs::init( argc, argv, "Example","","","" );
   KApplication app( argc, argv );
 
   QWidget *BytesEditWidget = createBytesEditWidget();
