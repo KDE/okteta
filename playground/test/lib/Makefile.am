@@ -3,7 +3,11 @@ LIB_KTEST = $(top_builddir)/kdeutil/kde/test/libkdetest.la
 
 METASOURCES = AUTO
 
-check_PROGRAMS = testsection
+check_PROGRAMS = testcoord testsection
+
+testcoord_SOURCES = testcoord.cpp
+testcoord_LDFLAGS = $(all_libraries) $(KDE_RPATH)
+testcoord_LDADD = $(LIB_KHEXEDIT) $(LIB_KTEST)
 
 testsection_SOURCES = testsection.cpp
 testsection_LDFLAGS = $(all_libraries) $(KDE_RPATH)
