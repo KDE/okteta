@@ -37,7 +37,11 @@ namespace KHE
 class KSelection : public KSection
 {
   public:
+    /** creates a selection with a given start.
+      * @param Index index in front of which the selection begins
+      */
     KSelection( int Index );
+    /** creates an invalid selection */
     KSelection();
     ~KSelection();
 
@@ -46,18 +50,52 @@ class KSelection : public KSection
     KSelection &operator=( const KSection &S );
 
   public: // modification access
-    /** */
+    /** starts the selection. 
+      * For this the anchor, start and end are set to the given index,
+      * so the initial selection is empty.
+      * @param Index index in front of which the selection begins
+      */
     void setStart( int Index );
+    /** sets the end of the current selection 
+      * If the end is before the start the selection will reach from the given index 
+      * @param Index index in front of which the selection ends
+      */
     void setEnd( int Index );
-    /***/
+    /** sets the selection to be invalid
+      */
     void cancel();
+    /** sets the anchor to the start 
+      * If the selection has not started the behaviour is undefined.
+      */
+    void setForward();
+    /** sets the anchor to the end
+      * If the selection has not started the behaviour is undefined.
+      */
+    void setBackward();
+    /** swaps anchor from start to end or vice versa 
+      * If the selection has not started the behaviour is undefined.
+      */
+    void reverse();
 
   public: // value access
+    /** 
+      * @return anchor value
+      */
     int anchor() const;
 
   public: // logic access
+    /** 
+      * @return @c true if the anchor has been set, otherwise @c false.
+      */
     bool started() const;
+    /** 
+      * @return @c true if the anchor has been set and the selection is empty, otherwise @c false.
+      */
     bool justStarted() const;
+    /** 
+      * @return @c true if the anchor is at the begin of the selection 
+      */
+    bool isForward() const;
 
   protected:
     /** cursor index where the selection starts */
@@ -68,10 +106,20 @@ class KSelection : public KSection
 inline KSelection::KSelection() : Anchor( -1 ) {}
 inline KSelection::KSelection( int Index ) : Anchor( Index )  {}
 inline KSelection::~KSelection() {}
+
 inline KSelection &KSelection::operator=( const KSelection &S )
-{ KSection::operator=(S); Anchor = S.Anchor; return *this; }
+{ 
+  KSection::operator=(S); 
+  Anchor = S.Anchor; 
+  return *this; 
+}
+
 inline KSelection &KSelection::operator=( const KSection &S )
-{ KSection::operator=(S); Anchor = start(); return *this; }
+{ 
+  KSection::operator=(S); 
+  Anchor = start(); 
+  return *this; 
+}
 
 
 inline void KSelection::setStart( int Index )
@@ -100,6 +148,21 @@ inline void KSelection::setEnd( int Index )
   }
 }
 
+inline void KSelection::reverse() 
+{
+   Anchor = isForward() ? end()+1 : start();
+}
+
+inline void KSelection::setForward() 
+{
+   Anchor = start();
+}
+
+inline void KSelection::setBackward() 
+{
+   Anchor = end()+1;
+}
+
 inline int KSelection::anchor() const { return Anchor; }
 
 inline void KSelection::cancel() { Anchor = -1; unset(); }
@@ -107,6 +170,9 @@ inline void KSelection::cancel() { Anchor = -1; unset(); }
 inline bool KSelection::started() const { return Anchor != -1; }
 
 inline bool KSelection::justStarted() const { return Anchor != -1 && start() == -1; }
+
+inline bool KSelection::isForward() const { return Anchor == start(); }
+
 }
 
 #endif
