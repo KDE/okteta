@@ -72,7 +72,6 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, WFla
    DragStartTimer( new QTimer(this) ),
    TrippleClickTimer( new QTimer(this) ),
    CursorPixmaps( new KCursor() ),
-   ByteBuffer( new char[KByteCodec::MaxCodingWidth+1] ),
    Codec( 0 ),
    ClipboardMode( QClipboard::Clipboard ),
    ResizeStyle( DefaultResizeStyle ),
@@ -136,7 +135,6 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, WFla
 
 KHexEdit::~KHexEdit()
 {
-  delete [] ByteBuffer;
 }
 
 
@@ -258,13 +256,16 @@ void KHexEdit::setBufferSpacing( KPixelX ByteSpacing, int NoOfGroupedBytes, KPix
 
 void KHexEdit::setCoding( KCoding C )
 {
-  int OldCodingWidth = valueColumn().codingWidth();
+  uint OldCodingWidth = valueColumn().byteCodec()->encodingWidth();
 
   if( !valueColumn().setCoding((KHE::KCoding)C) )
     return;
 
+  uint NewCodingWidth = valueColumn().byteCodec()->encodingWidth();
+  ByteBuffer.setLength( NewCodingWidth ); //hack for now
+
   // no change in the width?
-  if( valueColumn().codingWidth() == OldCodingWidth )
+  if( NewCodingWidth == OldCodingWidth )
     updateColumn( valueColumn() );
   else
     updateViewByWidth();
@@ -357,7 +358,7 @@ void KHexEdit::setEncoding( KEncoding C )
   if( Encoding == C )
     return;
 
-  KCharCodec *NC = KCharCodec::create( (KHE::KEncoding)C );
+  KCharCodec *NC = KCharCodec::createCodec( (KHE::KEncoding)C );
   if( NC == 0 )
     return;
 
@@ -744,24 +745,29 @@ KBufferDrag *KHexEdit::dragObject( QWidget *Parent ) const
   if( !BufferRanges->hasSelection() )
     return 0;
 
+  const KOffsetColumn *OC;
   const KValueColumn *HC;
   const KCharColumn *TC;
   KCoordRange Range;
 
   if( static_cast<KHE::KCharColumn *>( ActiveColumn ) == &charColumn() )
   {
+    OC = 0;
     HC = 0;
     TC = 0;
   }
   else
   {
-    HC = &valueColumn();
+    OC = OffsetColumn->isVisible() ? OffsetColumn : 0;
+    HC = valueColumn().isVisible() ? &valueColumn() : 0;
     TC = charColumn().isVisible() ? &charColumn() : 0;
     KSection S = BufferRanges->selection();
     Range.set( BufferLayout->coordOfIndex(S.start()),BufferLayout->coordOfIndex(S.end()) );
   }
 
-  return new KBufferDrag( selectedData(), Range, OffsetColumn,HC,TC, charColumn().substituteChar(), Parent );
+  return new KBufferDrag( selectedData(), Range, OC, HC, TC,
+                          charColumn().substituteChar(), charColumn().undefinedChar(),
+                          (KHE::KEncoding)Encoding, Parent );
 }
 
 
@@ -1047,7 +1053,7 @@ bool KHexEdit::decByte()
 
 void KHexEdit::syncEditedByte()
 {
-  valueColumn().codingFunction()( ByteBuffer, EditValue );
+  valueColumn().byteCodec()->encode( ByteBuffer, 0, EditValue );
   DataBuffer->replace( BufferCursor->index(), 1, (char*)&EditValue, 1 );
 }
 
@@ -1474,7 +1480,7 @@ bool KHexEdit::handleByteEditKey( QKeyEvent *KeyEvent )
     case Key_Backspace:
       if( EditValue > 0 )
       {
-        valueColumn().removingFunction()( &EditValue );
+        valueColumn().byteCodec()->removeLastDigit( &EditValue );
         syncEditedByte();
         updateCursor(); //paintEditedByte( true );
       }
@@ -1487,10 +1493,10 @@ bool KHexEdit::handleByteEditKey( QKeyEvent *KeyEvent )
           && ( !(KeyEvent->state()&( ControlButton | AltButton | MetaButton )) )
           && ( !KeyEvent->ascii() || KeyEvent->ascii() >= 32 ) )
       {
-        if( valueColumn().appendingFunction()(&EditValue,KeyEvent->ascii()) )
+        if( valueColumn().byteCodec()->appendDigit(&EditValue,KeyEvent->ascii()) )
         {
           syncEditedByte();
-          if( EditModeByInsert && valueColumn().digitsFilled(EditValue) )
+          if( EditModeByInsert && valueColumn().byteCodec()->digitsFilledLimit()<=EditValue )
             goOutsideByte( true );
           else
             updateCursor();
@@ -1716,7 +1722,7 @@ bool KHexEdit::handleLetter( QKeyEvent *KeyEvent )
     }
 
     EditValue = 0;
-    bool KeyValid = valueColumn().appendingFunction()( &EditValue, KeyEvent->ascii() );
+    bool KeyValid = valueColumn().byteCodec()->appendDigit( &EditValue, KeyEvent->ascii() );
     if( !KeyValid )
       return false;
 
@@ -1977,13 +1983,11 @@ void KHexEdit::repaintChanged()
   // TODO: we do this only to let the scrollview handle new or removed lines. overlaps with repaintRange
   resizeContents( totalWidth(), totalHeight() );
 
-  KPixelX cx = contentsX();
-  KPixelY cy = contentsY();
-  KPixelX cw = visibleWidth();
-  KPixelY ch = visibleHeight();
+  KPixelXs Xs( contentsX(), visibleWidth(), true );
+  KPixelYs Ys( contentsY(), visibleHeight(), true );
 
   // calculate affected lines/indizes
-  KSection VisibleLines = visibleLines( KPixelYs(cy,ch,false) );
+  KSection VisibleLines = visibleLines( Ys );
   KSection FullPositions( 0, BufferLayout->noOfBytesPerLine()-1 );
   KCoordRange VisibleRange( FullPositions, VisibleLines );
 //   std::cout << "repaintChanged->"<<FirstIndex<<":"<<FirstLine<<","<<LastIndex<<":"<<LastLine<<std::endl;
@@ -1994,10 +1998,10 @@ void KHexEdit::repaintChanged()
   KBufferColumn *C = ValueColumn;
   while( true )
   {
-    if( C->isVisible() && C->overlaps(KPixelXs(cx,cw)) )
+    if( C->isVisible() && C->overlaps(Xs) )
     {
       RepaintColumns.append( C );
-      C->preparePainting( cx, cw );
+      C->preparePainting( Xs );
     }
 
     if( C == CharColumn )
@@ -2309,7 +2313,7 @@ void KHexEdit::contentsMouseDoubleClickEvent( QMouseEvent *e )
   if( ActiveColumn == &charColumn() )
   {
     selectWord( Index );
-    
+
     // as we already have a doubleclick maybe it is a tripple click
     TrippleClickTimer->start( qApp->doubleClickInterval(), true );
     DoubleClickPoint = e->globalPos();
@@ -2358,7 +2362,7 @@ void KHexEdit::handleMouseMove( const QPoint& Point ) // handles the move of the
     {
       BufferRanges->ensureWordSelectionForward( false );
       NewIndex = DataBuffer->indexOfLeftWordSelect( NewIndex );
-    } 
+    }
     // or behind?
     else if( NewIndex > FirstWordSelection.end() )
     {
@@ -2367,12 +2371,12 @@ void KHexEdit::handleMouseMove( const QPoint& Point ) // handles the move of the
     }
     // or inside?
     else
-    {   
+    {
       BufferRanges->ensureWordSelectionForward( true );
       NewIndex = FirstWordSelection.end()+1;
     }
-  
-    BufferCursor->gotoIndex( NewIndex );    
+
+    BufferCursor->gotoIndex( NewIndex );
   }
 
   if( BufferRanges->selectionStarted() )
@@ -2415,7 +2419,7 @@ void KHexEdit::contentsDragEnterEvent( QDragEnterEvent *e )
     e->ignore();
     return;
   }
-  
+
   e->acceptAction();
   InDnD = true;
 }
@@ -2429,12 +2433,12 @@ void KHexEdit::contentsDragMoveEvent( QDragMoveEvent *e )
     e->ignore();
     return;
   }
-  
+
   // let text cursor follow mouse
   pauseCursor( true );
   placeCursor( e->pos() );
   unpauseCursor();
-  
+
   e->acceptAction();
 }
 
@@ -2456,10 +2460,10 @@ void KHexEdit::contentsDropEvent( QDropEvent *e )
   // leave state
   InDnD = false;
   e->acceptAction();
-  
+
   if( !KBufferDrag::canDecode(e) ) //TODO: why do we acept the action still?
     return;
-   
+
   // is this an internal dnd?
   if( e->source() == this || e->source() == viewport() )
     handleInternalDrag( e );
@@ -2468,7 +2472,7 @@ void KHexEdit::contentsDropEvent( QDropEvent *e )
    //BufferRanges->removeSelection(); 
     pasteFromSource( e ); 
   }
-  
+
   // emit appropriate signals.
   emit selectionChanged();
   emit cursorPositionChanged( BufferCursor->index() );
@@ -2479,12 +2483,12 @@ void KHexEdit::handleInternalDrag( QDropEvent *e )
 {
   // stop ui
   pauseCursor();
-    
+
   // get drag origin
   KSection Selection = BufferRanges->selection();
   int InsertIndex = BufferCursor->realIndex();
-    
-  // is this a move?    
+
+  // is this a move?
   if( e->action() == QDropEvent::Move )
   {
     // ignore the copy hold in the event but only move 
@@ -2501,7 +2505,7 @@ void KHexEdit::handleInternalDrag( QDropEvent *e )
     // get data  
     QByteArray Data;
     if( KBufferDrag::decode(e,Data) && !Data.isEmpty() )
-    {    
+    {
       if( OverWrite )
       {
         KSection Section( InsertIndex, Data.size(), false );
@@ -2522,15 +2526,15 @@ void KHexEdit::handleInternalDrag( QDropEvent *e )
           BufferCursor->gotoCIndex( InsertIndex + NoOfInserted );
           BufferRanges->addChangedRange( KSection(InsertIndex,DataBuffer->size()-1) );
         }
-      }    
+      }
     }
   }
   BufferRanges->removeSelection();
   repaintChanged();
   ensureCursorVisible();
-         
+
   // open ui
-  unpauseCursor();    
+  unpauseCursor();
 }
 
 

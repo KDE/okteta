@@ -15,6 +15,9 @@
  ***************************************************************************/
 
 
+// qt specific
+#include <qstring.h>
+// lib specific
 #include "koffsetcolumn.h" 
 #include "koffsetcoltextexport.h"
 
@@ -35,20 +38,24 @@ int KOffsetColTextExport::charsPerLine() const
 }
 
 
-void KOffsetColTextExport::printFirstLine( char **T, int Line ) const
+void KOffsetColTextExport::printFirstLine( QString &T, int Line ) const
 {
   PrintLine = Line;
   print( T );
 }
 
-void KOffsetColTextExport::printNextLine( char **T ) const
+void KOffsetColTextExport::printNextLine( QString &T ) const
 {
   print( T );
 }
 
-void KOffsetColTextExport::print( char **T ) const
+void KOffsetColTextExport::print( QString &T ) const
 {
-  printFunction( *T, FirstLineOffset + Delta*PrintLine );
-  *T += CodingWidth;
+  // TODO: fix me (no more printFunction)
+  char *B = new char[CodingWidth+1];
+  printFunction( B, FirstLineOffset + Delta*PrintLine );
+  T.append( B );
+  delete [] B;
+
   ++PrintLine;
 }

@@ -14,31 +14,32 @@
  *                                                                         *
  ***************************************************************************/
 
-// c specific
-#include <string.h>
+
 // lib specific
 #include "kbufferlayout.h"
 #include "kcharcolumn.h"
+#include "kcharcodec.h"
 #include "kcharcoltextexport.h"
 
 using namespace KHE;
 
-static const unsigned char TELowestPrintableChar = 32;
 
-
-KCharColTextExport::KCharColTextExport( const KCharColumn* TC, const char *D, KCoordRange CR )
+KCharColTextExport::KCharColTextExport( const KCharColumn* TC, const char *D, KCoordRange CR, KEncoding E )
  : KBufferColTextExport( TC, D, CR, 1 ),
-   SubstituteChar( TC->substituteChar() )
+   CharCodec( KCharCodec::createCodec(E) ),
+   SubstituteChar( TC->substituteChar() ),
+   UndefinedChar( TC->undefinedChar() )
 {
 }
 
 
 KCharColTextExport::~KCharColTextExport()
 {
+  delete CharCodec;
 }
 
 
-void KCharColTextExport::print( char **T ) const
+void KCharColTextExport::print( QString &T ) const
 {
   int p = 0;
   int pEnd = NoOfBytesPerLine;
@@ -49,20 +50,22 @@ void KCharColTextExport::print( char **T ) const
     pEnd = CoordRange.end().pos()+1;
 
   // draw individual chars
-  char *e = *T;
+  uint e = 0;
   for( ; p<pEnd; ++p, ++PrintData )
   {
     // get next position
-    char *t = *T + Pos[p];
+    uint t = Pos[p];
     // clear spacing
-    memset( e, ' ', t-e );
+    T.append( whiteSpace(t-e) );
 
-    unsigned char D = *PrintData;
-    *t = D<TELowestPrintableChar ? SubstituteChar : D;
+    // print char
+    KHEChar B = CharCodec->decode( *PrintData );
+
+    T.append( B.isUndefined() ? UndefinedChar : !B.isPrint() ? SubstituteChar : B );
     e = t + 1;
   }
 
-  *T += NoOfCharsPerLine;
-  memset( e, ' ', *T-e );
+  T.append( whiteSpace(NoOfCharsPerLine-e) );
+
   ++PrintLine;
 }

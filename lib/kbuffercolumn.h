@@ -59,7 +59,7 @@ class KBufferColumn : public KColumn
     virtual void paintNextLine( QPainter *P );
 
   public:
-    void preparePainting( KPixelX cx, KPixelX cw );
+    void preparePainting( KPixelXs Xs );
 
   public:
     void paintLine( QPainter *P, int Line );

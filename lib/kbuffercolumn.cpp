@@ -346,27 +346,7 @@ KPixelXs KBufferColumn::relWideXPixelsOfPos( KSection Positions ) const
 }
 
 
-void KBufferColumn::preparePainting( KPixelX cx, KPixelX cw )
-{
-  // translate
-  cx -= x();
-
-  // calculating the most right relative x to paint
-  KPixelX LastX = cx + cw - 1;
-  if( LastX >= width() )
-    LastX = width()-1;
-
-  // calculating the most left relative x to paint
-  PaintX = cx > 0 ? cx : 0;
-  // calculating the width
-  PaintW = LastX - PaintX + 1;
-
-  // get line positions to paint
-  PaintPositions = posOfRelX( PaintX, PaintW );
-}
-
-
-void KBufferColumn::paintFirstLine( QPainter *P, KPixelXs Xs, int FirstLine )
+void KBufferColumn::preparePainting( KPixelXs Xs )
 {
   Xs.restrictTo( XSpan );
   // translate
@@ -379,6 +359,13 @@ void KBufferColumn::paintFirstLine( QPainter *P, KPixelXs Xs, int FirstLine )
 
   // get line positions to paint
   PaintPositions = posOfRelX( PaintX, PaintW );
+}
+
+
+void KBufferColumn::paintFirstLine( QPainter *P, KPixelXs Xs, int FirstLine )
+{
+  preparePainting( Xs );
+
   PaintLine = FirstLine;
 
 //  kdDebug(1501) << "paintFirstLine:"<<cx<<","<<cw<<"|" <<PaintX<<","<<PaintW << ")\n";

@@ -15,30 +15,33 @@
  ***************************************************************************/
 
 
-// c specific
-#include <string.h>
+// qt specific
+#include <qstring.h>
 // lib specific
 #include "kbordercoltextexport.h"
 
+
 using namespace KHE;
+
+static const uint BorderColumnTEWidth = 3;
+
 
 int KBorderColTextExport::charsPerLine() const
 {
-  return 3;
+  return BorderColumnTEWidth;
 }
 
-void KBorderColTextExport::printFirstLine( char **T, int /*Line*/ ) const
+void KBorderColTextExport::printFirstLine( QString &T, int /*Line*/ ) const
 {
   print( T );
 }
 
-void KBorderColTextExport::printNextLine( char **T ) const
+void KBorderColTextExport::printNextLine( QString &T ) const
 {
   print( T );
 }
 
-void KBorderColTextExport::print( char **T ) const
+void KBorderColTextExport::print( QString &T ) const
 {
-  memcpy( *T, " | ", 3 );
-  *T += 3;
+  T.append( " | " );
 }

@@ -493,7 +493,7 @@ class KHexEdit : public KColumnsView
     /** object to store the blinking cursor pixmaps */
     KCursor *CursorPixmaps;
     /** buffer with the  */
-    char *ByteBuffer;
+    QString ByteBuffer;
     /** */
     KCharCodec *Codec;
     /** stores the number of actual digits */

@@ -15,8 +15,6 @@
  ***************************************************************************/
 
 
-// c specific
-#include <string.h>
 // lib specific
 #include "kbufferlayout.h"
 #include "kvaluecolumn.h"
@@ -27,21 +25,20 @@
 using namespace KHE;
 
 KValueColTextExport::KValueColTextExport( const KValueColumn* HC, const char *D, KCoordRange CR )
- : KBufferColTextExport( HC, D, CR, HC->codingWidth() ),
-   CodingWidth( HC->codingWidth() ),
-   CodingFunction( HC->codingFunction() )
+  : KBufferColTextExport( HC, D, CR, HC->byteCodec()->encodingWidth() ),
+   ByteCodec( KByteCodec::createCodec(HC->coding()) )
 {
 }
 
 
 KValueColTextExport::~KValueColTextExport()
 {
+  delete ByteCodec;
 }
 
 
-// Duh, hacky, hacky, is because codingFunction writes one byte (\0) behind the end
-// TODO: write the last into a buffer and copy without the \0
-void KValueColTextExport::print( char **T ) const
+
+void KValueColTextExport::print( QString &T ) const
 {
   int p = 0;
   int pEnd = NoOfBytesPerLine;
@@ -51,20 +48,22 @@ void KValueColTextExport::print( char **T ) const
   if( PrintLine == CoordRange.end().line() )
     pEnd = CoordRange.end().pos()+1;
 
+  QString E;
+  E.setLength( ByteCodec->encodingWidth() );
   // draw individual chars
-  char *e = *T;
+  uint e = 0;
   for( ; p<pEnd; ++p, ++PrintData )
   {
     // get next position
-    char *t = *T + Pos[p];
+    uint t = Pos[p];
     // clear spacing
-    memset( e, ' ', t-e );
-    CodingFunction( t, *PrintData );
-    e = t + CodingWidth;
+    T.append( whiteSpace(t-e) );
+    ByteCodec->encode( E, 0, *PrintData );
+    T.append( E );
+    e = t + ByteCodec->encodingWidth();
   }
 
-  *T += NoOfCharsPerLine;
-  memset( e, ' ', *T-e );
+  T.append( whiteSpace(NoOfCharsPerLine-e) );
   ++PrintLine;
 }
 

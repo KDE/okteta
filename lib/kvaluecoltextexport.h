@@ -35,12 +35,11 @@ class KValueColTextExport : public KBufferColTextExport
     virtual ~KValueColTextExport();
 
   protected:
-    virtual void print( char **T ) const;
+    virtual void print( QString &T ) const;
 
 
   protected:
-    int CodingWidth;
-    KByteCodec::coding CodingFunction;
+    KByteCodec *ByteCodec;
 };
 
 }

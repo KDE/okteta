@@ -26,13 +26,13 @@ namespace KHE
 class KBorderColTextExport : public KColTextExport
 {
   public: // API
-    void printFirstLine( char **T, int Line ) const;
-    void printNextLine( char **T ) const;
+    void printFirstLine( QString &T, int Line ) const;
+    void printNextLine( QString &T) const;
     /** tells how much chars per line are needed */
     int charsPerLine() const ;
 
   protected:
-    void print( char **T ) const;
+    void print( QString &T ) const;
 };
 
 }

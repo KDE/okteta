@@ -28,7 +28,7 @@ using namespace KHE;
 */
 
 
-KCharCodec *KCharCodec::create( KEncoding C )
+KCharCodec *KCharCodec::createCodec( KEncoding C )
 {
   KCharCodec *Codec;
   switch( C )

@@ -36,6 +36,7 @@ static const int     DefaultBinaryGapWidth = 1;
 KValueColumn::KValueColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R )
  : KBufferColumn( CV, B, L, R ),
    Coding( NotDefaultCoding ),
+   ByteCodec( 0 ),
    BinaryGapWidth( DefaultBinaryGapWidth )
 {
   setCoding( DefaultCoding );
@@ -54,12 +55,11 @@ bool KValueColumn::setCoding( KCoding C )
   if( Coding == C )
     return false;
 
+  delete ByteCodec;
+
   Coding = C;
-  CodingWidth = KByteCodec::codingWidth( Coding );
-  DigitsFilledLimit = KByteCodec::digitsFilledLimit( Coding );
-  CodingFunction = KByteCodec::codingFunction( Coding );
-  AppendingFunction = KByteCodec::appendingFunction( Coding );
-  RemovingLastDigitFunction = KByteCodec::removingLastDigitFunction( Coding );
+  ByteCodec = KByteCodec::createCodec( Coding );
+  CodedByte.setLength( ByteCodec->encodingWidth() );
 
   // recalculate depend sizes
   recalcByteWidth();
@@ -89,7 +89,7 @@ bool KValueColumn::setBinaryGapWidth( KPixelX BGW )
 
 void KValueColumn::recalcByteWidth()
 {
-  ByteWidth = CodingWidth * DigitWidth;
+  ByteWidth = ByteCodec->encodingWidth() * DigitWidth;
 
   if( Coding == BinaryCoding )
   {
@@ -101,7 +101,7 @@ void KValueColumn::recalcByteWidth()
 
 
 // perhaps sometimes there will be a grammar
-void KValueColumn::paintEditedByte( QPainter *P, char Byte, const char *EditBuffer )
+void KValueColumn::paintEditedByte( QPainter *P, char Byte, const QString &EditBuffer )
 {
   KHEChar B = Codec->decode( Byte );
 
@@ -115,20 +115,20 @@ void KValueColumn::paintEditedByte( QPainter *P, char Byte, const char *EditBuff
 
 void KValueColumn::drawByte( QPainter *P, char Byte, KHEChar /*B*/, const QColor &Color ) const
 {
-  codingFunction()( CodedByte, Byte );
+  ByteCodec->encode( CodedByte, 0, Byte );
   drawCode( P, CodedByte, Color );
 }
 
 
-void KValueColumn::drawCode( QPainter *P, const char *Code, const QColor &Color ) const
+void KValueColumn::drawCode( QPainter *P, const QString &Code, const QColor &Color ) const
 {
   P->setPen( Color );
   if( Coding == BinaryCoding )
   {
     // leave a gap in the middle
-    P->drawText( 0, DigitBaseLine, QString::fromAscii(Code,4) );
-    P->drawText( BinaryHalfOffset, DigitBaseLine, QString::fromAscii(&Code[4],4) );
+    P->drawText( 0, DigitBaseLine, Code.left(4) );
+    P->drawText( BinaryHalfOffset, DigitBaseLine, Code.right(4) );
   }
   else
-    P->drawText( 0, DigitBaseLine, QString::fromAscii(Code) );
+    P->drawText( 0, DigitBaseLine, Code );
 }

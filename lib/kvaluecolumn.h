@@ -18,6 +18,7 @@
 #ifndef KHE_KVALUECOLUMN_H
 #define KHE_KVALUECOLUMN_H
 
+// lib specific
 #include "kbytecodec.h"
 #include "kbuffercolumn.h"
 
@@ -25,7 +26,6 @@
 namespace KHE
 {
 
-// class KValueEdit;
 class KBufferRanges;
 
 
@@ -40,7 +40,7 @@ class KValueColumn : public KBufferColumn
     virtual ~KValueColumn();
 
   public:
-    void paintEditedByte( QPainter *P, char Byte, const char *EditBuffer );
+    void paintEditedByte( QPainter *P, char Byte, const QString &EditBuffer );
 
   public: // modification access
     /**
@@ -55,55 +55,37 @@ class KValueColumn : public KBufferColumn
 
 
   public: // value access
-    KPixelX binaryGapWidth()                 const;
-    KCoding coding()                         const;
-    int codingWidth()                        const;
+    KPixelX binaryGapWidth()      const;
+    KCoding coding()              const;
+    const KByteCodec *byteCodec() const;
 
-    KByteCodec::coding codingFunction()              const;
-    KByteCodec::appending appendingFunction()        const;
-    KByteCodec::removingLastDigit removingFunction() const;
-
-  public: // service
-    /** returns true if there cannot be any digit appended to Value in the actual coding */
-    bool digitsFilled( unsigned char Value ) const;
 
   protected: // KBufferColumn API
     virtual void drawByte( QPainter *P, char Byte, KHEChar B, const QColor &Color ) const;
     virtual void recalcByteWidth();
 
   protected:
-    void drawCode( QPainter *P, const char *Code, const QColor &Color ) const;
+    void drawCode( QPainter *P, const QString &Code, const QColor &Color ) const;
 
-
-  protected:
-    /** buffer to hold the formatted coding */
-    mutable char CodedByte[KByteCodec::MaxCodingWidth+1];
-
-  protected:  // individual data
-    /***/
+  protected: // set data
+    /** */
     KCoding Coding;
-    /** buffers coding width */
-    int CodingWidth;
-    unsigned char DigitsFilledLimit;
-    KByteCodec::coding CodingFunction;
-    KByteCodec::appending AppendingFunction;
-    KByteCodec::removingLastDigit RemovingLastDigitFunction;
-
+    /** */
+    KByteCodec *ByteCodec;
     /** */
     KPixelX BinaryGapWidth;
+
+  protected: // buffered data
+    /** buffer to hold the formatted coding */
+    mutable QString CodedByte;
     /** calculated: Offset in pixels of the second half of the binary */
     KPixelX BinaryHalfOffset;
 };
 
 
-inline KPixelX KValueColumn::binaryGapWidth()             const { return BinaryGapWidth; }
-inline int KValueColumn::codingWidth()                    const { return CodingWidth; }
-inline bool KValueColumn::digitsFilled( unsigned char V ) const { return V >= DigitsFilledLimit; }
-inline KCoding KValueColumn::coding()                     const { return Coding; }
-
-inline KByteCodec::coding KValueColumn::codingFunction()              const { return CodingFunction; }
-inline KByteCodec::appending KValueColumn::appendingFunction()        const { return AppendingFunction; }
-inline KByteCodec::removingLastDigit KValueColumn::removingFunction() const { return RemovingLastDigitFunction; }
+inline KPixelX KValueColumn::binaryGapWidth()        const { return BinaryGapWidth; }
+inline KCoding KValueColumn::coding()                const { return Coding; }
+inline const KByteCodec *KValueColumn::byteCodec()   const { return ByteCodec; }
 
 }
 

@@ -30,7 +30,7 @@ class KCharCodec
 {
   public:
     /** */
-    static KCharCodec* create( KEncoding E );
+    static KCharCodec* createCodec( KEncoding E );
 
     //static QStringList descriptiveCodecNames();
 

@@ -28,6 +28,10 @@ using namespace KHE;
 static const int DefaultTEByteSpacingWidth = 1;
 static const int TEGroupSpacingWidth = 3;
 
+QString KBufferColTextExport::whiteSpace( uint s )
+{
+  return QString().fill( ' ', s );
+}
 
 KBufferColTextExport::KBufferColTextExport( const KBufferColumn* BufferColumn, const char *D,
                                             KCoordRange CR, int ByteWidth )
@@ -82,7 +86,7 @@ int KBufferColTextExport::charsPerLine() const
 }
 
 
-void KBufferColTextExport::printFirstLine( char **T, int Line ) const
+void KBufferColTextExport::printFirstLine( QString &T, int Line ) const
 {
   PrintLine = Line;
   PrintData = Data;
@@ -90,15 +94,15 @@ void KBufferColTextExport::printFirstLine( char **T, int Line ) const
 }
 
 
-void KBufferColTextExport::printNextLine( char **T ) const
+void KBufferColTextExport::printNextLine( QString &T ) const
 {
   print( T );
 }
 
 
-void KBufferColTextExport::print( char **T ) const
+void KBufferColTextExport::print( QString &T ) const
 {
-  memset( *T, ' ', NoOfCharsPerLine );
+  T.append( whiteSpace(NoOfCharsPerLine) );
   ++PrintLine;
 }
 

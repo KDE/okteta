@@ -21,6 +21,7 @@
 // qt specific
 #include <qdragobject.h>
 // lib specific
+#include "khe.h"
 #include "kcoordrange.h"
 #include "kcoltextexport.h"
 
@@ -41,14 +42,10 @@ class KBufferDrag : public QDragObject
     Q_OBJECT
 
   public:
-    static const char *OctetStream;
-    static const char *PlainText;
-
-  public:
     // TODO: make this call somewhat more generic
     KBufferDrag( const QByteArray &, KCoordRange Range,
                  const KOffsetColumn *OC, const KValueColumn *HC, const KCharColumn *TC,
-                 char SC,
+                 QChar SC, QChar UC, KEncoding E,
                  QWidget *Source = 0, const char *Name = 0 );
     KBufferDrag( QWidget *Source = 0, const char *Name = 0 );
     ~KBufferDrag();
@@ -60,19 +57,19 @@ class KBufferDrag : public QDragObject
   public:
     virtual void setData( const QByteArray &);
 
-
   public:
     static bool canDecode( const QMimeSource* Source );
     static bool decode( const QMimeSource* Source, QByteArray &Dest );
-
 
   protected:
     QByteArray Data;
     KCoordRange CoordRange;
     /** collection of all the columns. All columns will be autodeleted. */
-    KColTextExportPtr* Columns;
-    int NoOfCol;
-    char SubstituteChar;
+    KColTextExportPtr Columns[5];
+    uint NoOfCol;
+    QChar SubstituteChar;
+    QChar UndefinedChar;
+    KEncoding Encoding;
 };
 
 }
