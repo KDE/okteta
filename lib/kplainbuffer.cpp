@@ -108,7 +108,7 @@ int KPlainBuffer::remove( KSection Remove )
 }
 
 
-int KPlainBuffer::replace( KSection Remove, const char* D, int InputLength )
+unsigned int KPlainBuffer::replace( KSection Remove, const char* D, unsigned int InputLength )
 {
   // check all parameters
   if( Remove.start() >= (int)Size || (Remove.width()==0 && InputLength==0) )
@@ -116,7 +116,7 @@ int KPlainBuffer::replace( KSection Remove, const char* D, int InputLength )
 
   Remove.restrictEndTo( Size-1 );
 
-  unsigned int SizeDiff = InputLength - Remove.width();
+  int SizeDiff = InputLength - Remove.width();
   unsigned int NewSize = Size + SizeDiff;
   // check if buffer does not get to big TODO: make algo simplier and less if else
   if( MaxSize != -1 && (int)NewSize > MaxSize)
@@ -235,6 +235,7 @@ int KPlainBuffer::move( int DestPos, KSection SourceSection )
   memcpy( &Data[SmallPartDest], Temp, SmallPartLength );
   delete [] Temp;
 
+  Modified = true;
   return MovedLength < DisplacedLength ? SmallPartDest : LargePartDest;
 }
 
@@ -253,6 +254,7 @@ int KPlainBuffer::fill( const char FChar, int FillLength, unsigned int Pos )
     FillLength = addSize( FillLength, Pos, false );
 
   memset( &Data[Pos], FChar, FillLength );
+  Modified = true;
   return FillLength;
 }
 

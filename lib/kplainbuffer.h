@@ -54,7 +54,7 @@ class KPlainBuffer : public KDataBuffer
 
     virtual int insert( int Pos, const char*, int Length );
     virtual int remove( KSection Remove );
-    virtual int replace( KSection Remove, const char*, int InputLength );
+    virtual unsigned int replace( KSection Remove, const char*, unsigned int InputLength );
     virtual int move( int DestPos, KSection SourceSection );
     virtual int fill( const char FillChar, int Length = -1, unsigned int Pos = 0 );
     virtual void setDatum( unsigned int Offset, const char Char );
@@ -115,7 +115,8 @@ inline int KPlainBuffer::size()                        const { return Size; }
 inline bool KPlainBuffer::isReadOnly()   const { return ReadOnly; }
 inline bool KPlainBuffer::isModified()   const { return Modified; }
 
-inline void KPlainBuffer::setDatum( unsigned int Offset, const char Char ) { Data[Offset] = Char; }
+inline void KPlainBuffer::setDatum( unsigned int Offset, const char Char )
+{ Data[Offset] = Char; Modified = true; }
 
 inline void KPlainBuffer::setReadOnly( bool RO )    { ReadOnly = RO; }
 inline void KPlainBuffer::setModified( bool M )     { Modified = M; }

@@ -146,12 +146,13 @@ class KHEXEDIT_EXPORT KDataBuffer
       * @param SourceLength
       * @return length of replacced data
       */
-    virtual int replace( KSection DestSection, const char* Source, int SourceLength ) = 0;
+    virtual unsigned int replace( KSection DestSection, const char* Source, unsigned int SourceLength ) = 0;
     /** convenience function, behaves as above */
-    int replace( int Pos, int RemoveLength, const char* Source, int SourceLength );
+    unsigned int replace( unsigned int Pos, unsigned int RemoveLength,
+                          const char* Source, unsigned int SourceLength );
 
     /** moves a part of the data to a new position, while floating the other data around
-      * when moving to a higher place the lentzh of the block must be taken into account
+      * when moving to a higher place the length of the block must be taken into account
       * if the new positions extend beyond the buffers end the section is moved to the end.
       * @param DesPos position of the data where the section should be moved behind
       * @param SourceSection data section to be moved
@@ -169,7 +170,7 @@ class KHEXEDIT_EXPORT KDataBuffer
     virtual int fill( const char FillChar, int Length = -1, unsigned int Pos = 0 ) = 0;
 
     /** sets a single byte
-     * if the offset is not valid the behaviout is undefined
+     * if the offset is not valid the behaviour is undefined
      * @param Offset offset of the datum requested
      * @param Char new byte value
      */
@@ -234,7 +235,8 @@ inline const char *KDataBuffer::dataSet( int Offset, int Length ) const
 inline int KDataBuffer::remove( int Pos, int Length )
 { return remove( KSection(Pos,Pos+Length-1) ); }
 
-inline int KDataBuffer::replace( int Pos, int RemoveLength, const char* D, int InputLength )
+inline unsigned int KDataBuffer::replace( unsigned int Pos, unsigned int RemoveLength,
+                                 const char* D, unsigned int InputLength )
 { return replace( KSection(Pos,Pos+RemoveLength-1), D, InputLength ); }
 
 inline bool KDataBuffer::isReadOnly() const { return false; }

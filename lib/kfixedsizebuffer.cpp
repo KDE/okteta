@@ -22,7 +22,7 @@
 
 using namespace KHE;
 
-KFixedSizeBuffer::KFixedSizeBuffer( char *D, int S, char FUC )
+KFixedSizeBuffer::KFixedSizeBuffer( char *D, unsigned int S, char FUC )
   : Data( D ),
    Size( S ),
    FillUpChar( FUC ),
@@ -32,7 +32,7 @@ KFixedSizeBuffer::KFixedSizeBuffer( char *D, int S, char FUC )
 {
 }
 
-KFixedSizeBuffer::KFixedSizeBuffer( int S, char FUC )
+KFixedSizeBuffer::KFixedSizeBuffer( unsigned int S, char FUC )
   : Data( new char[S] ),
    Size( S ),
    FillUpChar( FUC ),
@@ -54,16 +54,16 @@ KFixedSizeBuffer::~KFixedSizeBuffer()
 int KFixedSizeBuffer::insert( int Pos, const char* D, int InputLength )
 {
   // check all parameters
-  if( Pos >= Size || InputLength == 0 )
+  if( Pos >= (int)Size || InputLength == 0 )
     return 0;
-  if( Pos + InputLength > Size )
+  if( Pos + InputLength > (int)Size )
     InputLength = Size - Pos;
 
-  int BehindInsertPos = Pos + InputLength;
+  unsigned int BehindInsertPos = Pos + InputLength;
   // fmove right data behind the input range
-  fmove( BehindInsertPos, Pos, Size-BehindInsertPos );
+  memmove( &Data[BehindInsertPos], &Data[Pos], Size-BehindInsertPos );
   // insert input
-  fcopy( Pos, D, InputLength );
+  memcpy( &Data[Pos], D, InputLength );
 
   Modified = true;
   return InputLength;
@@ -72,7 +72,7 @@ int KFixedSizeBuffer::insert( int Pos, const char* D, int InputLength )
 
 int KFixedSizeBuffer::remove( KSection Remove )
 {
-  if( Remove.start() >= Size || Remove.width() == 0 )
+  if( Remove.start() >= (int)Size || Remove.width() == 0 )
     return 0;
 
   Remove.restrictEndTo( Size-1 );
@@ -80,7 +80,7 @@ int KFixedSizeBuffer::remove( KSection Remove )
   int RemoveLength = Remove.width();
   int BehindRemovePos = Remove.end()+1;;
   // fmove right data behind the input range
-  fmove( Remove.start(), BehindRemovePos, Size-BehindRemovePos );
+  memmove( &Data[Remove.start()], &Data[BehindRemovePos], Size-BehindRemovePos );
   // clear freed space
   reset( Size-RemoveLength, RemoveLength );
 
@@ -89,7 +89,7 @@ int KFixedSizeBuffer::remove( KSection Remove )
 }
 
 
-int KFixedSizeBuffer::replace( KSection Remove, const char* D, int InputLength )
+unsigned int KFixedSizeBuffer::replace( KSection Remove, const char* D, unsigned int InputLength )
 {
   // check all parameters
   if( Remove.startsBehind( Size-1 ) || (Remove.width()==0 && InputLength==0) )
@@ -104,25 +104,26 @@ int KFixedSizeBuffer::replace( KSection Remove, const char* D, int InputLength )
   // is input longer than removed?
   if( SizeDiff > 0 )
   {
-    int BehindInsertPos = Remove.start() + InputLength;
+    unsigned int BehindInsertPos = Remove.start() + InputLength;
     // fmove right data behind the input range
-    fmove( BehindInsertPos, Remove.end()+1, Size-BehindInsertPos );
+    memmove( &Data[BehindInsertPos], &Data[Remove.end()+1], Size-BehindInsertPos );
   }
   // is input smaller than removed?
   else if( SizeDiff < 0 )
   {
-    int BehindRemovePos = Remove.end()+1;
+    unsigned int BehindRemovePos = Remove.end()+1;
     // fmove right data behind the input range
-    fmove( Remove.start()+InputLength, BehindRemovePos, Size-BehindRemovePos );
-    // clear freed space
-    reset( Size-SizeDiff, SizeDiff );
+    memmove( &Data[Remove.start()+InputLength], &Data[BehindRemovePos], Size-BehindRemovePos );
+   // clear freed space
+    reset( Size+SizeDiff, -SizeDiff );
   }
   // insert input
-  fcopy( Remove.start(), D, InputLength );
+  memcpy( &Data[Remove.start()], D, InputLength );
 
   Modified = true;
   return InputLength;
 }
+
 
 int KFixedSizeBuffer::move( int DestPos, KSection SourceSection )
 {
@@ -189,6 +190,7 @@ int KFixedSizeBuffer::move( int DestPos, KSection SourceSection )
   memcpy( &Data[SmallPartDest], Temp, SmallPartLength );
   delete [] Temp;
 
+  Modified = true;
   return MovedLength < DisplacedLength ? SmallPartDest : LargePartDest;
 }
 
@@ -196,7 +198,7 @@ int KFixedSizeBuffer::move( int DestPos, KSection SourceSection )
 int KFixedSizeBuffer::fill( const char FChar, int FillLength, unsigned int Pos )
 {
   // nothing to fill
-  if( (int)Pos >= Size )
+  if( Pos >= Size )
     return 0;
 
   unsigned int LengthToEnd = Size - Pos;
@@ -205,6 +207,7 @@ int KFixedSizeBuffer::fill( const char FChar, int FillLength, unsigned int Pos )
     FillLength = LengthToEnd;
 
   memset( &Data[Pos], FChar, FillLength );
+  Modified = true;
   return FillLength;
 }
 
@@ -218,7 +221,7 @@ int KFixedSizeBuffer::compare( const KDataBuffer &Other, KSection OtherRange, un
     return 1;
 
   // check own values
-  if( (int)Pos >= Size )
+  if( Pos >= Size )
     return -1;
 
   int ValueByLength = 0; // default: equal
@@ -263,19 +266,7 @@ int KFixedSizeBuffer::find(  const char*/*KeyData*/, int /*Length*/, KSection /*
 int KFixedSizeBuffer::rfind( const char*, int /*Length*/, int /*Pos*/ ) const { return 0; }
 
 
-void KFixedSizeBuffer::reset( int Pos, int Length )
+void KFixedSizeBuffer::reset( unsigned int Pos, unsigned int Length )
 {
   memset( &Data[Pos], FillUpChar, Length );
-}
-
-
-void KFixedSizeBuffer::fmove( int DestPos, int SourcePos, int Length )
-{
-  memmove( &Data[DestPos], &Data[SourcePos], Length ); // TODO: this misses the wrap around
-}
-
-
-void KFixedSizeBuffer::fcopy( int DestPos, const char *Source, int SourceLength )
-{
-  memcpy( &Data[DestPos], Source, SourceLength );
 }

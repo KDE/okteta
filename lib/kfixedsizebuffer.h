@@ -33,9 +33,9 @@ class KFixedSizeBuffer : public KDataBuffer
 {
   public:
     /** creates a readonly buffer around the given data */
-    KFixedSizeBuffer( char *D, int S, char FUC = '\0' );
+    KFixedSizeBuffer( char *D, unsigned int S, char FUC = '\0' );
     /** creates a writeable buffer which is deleted at the end */
-    KFixedSizeBuffer( int S, char FUC = '\0' );
+    KFixedSizeBuffer( unsigned int S, char FUC = '\0' );
     virtual ~KFixedSizeBuffer();
 
   public: // KDataBuffer API
@@ -48,7 +48,7 @@ class KFixedSizeBuffer : public KDataBuffer
 
     virtual int insert( int Pos, const char*, int Length );
     virtual int remove( KSection Remove );
-    virtual int replace( KSection Remove, const char*, int InputLength );
+    virtual unsigned int replace( KSection Remove, const char*, unsigned int InputLength );
     virtual int move( int DestPos, KSection SourceSection );
     virtual int fill( const char FillChar, int Length = -1, unsigned int Pos = 0 );
     virtual void setDatum( unsigned int Offset, const char Char );
@@ -70,15 +70,13 @@ class KFixedSizeBuffer : public KDataBuffer
     char *rawData() const;
 
   protected:
-    void fmove( int DestPos, int SourcePos, int Length );
-    void reset( int Pos, int Length );
-    void fcopy( int DestPos, const char *Source, int SourceLength );
+    void reset( unsigned int Pos, unsigned int Length );
 
   protected:
     /** */
     char *Data;
     /***/
-    int Size;
+    unsigned int Size;
     /** */
     char FillUpChar;
     /**  */
@@ -96,7 +94,8 @@ inline const char *KFixedSizeBuffer::dataSet( KSection S ) const { return &Data[
 inline char KFixedSizeBuffer::datum( unsigned int Offset ) const { return Data[Offset]; }
 inline int KFixedSizeBuffer::size() const  { return Size; }
 
-inline void KFixedSizeBuffer::setDatum( unsigned int Offset, const char Char ) { Data[Offset] = Char; }
+inline void KFixedSizeBuffer::setDatum( unsigned int Offset, const char Char )
+{ Data[Offset] = Char; Modified = true; }
 
 inline bool KFixedSizeBuffer::isReadOnly()   const { return ReadOnly; }
 inline bool KFixedSizeBuffer::isModified()   const { return Modified; }

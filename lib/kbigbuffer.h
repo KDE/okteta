@@ -52,7 +52,7 @@ class KHEXEDIT_EXPORT KBigBuffer : public KDataBuffer
 
     virtual int insert( int Pos, const char*, int Length );
     virtual int remove( KSection S );
-    virtual int replace( KSection S, const char*, int InputLength );
+    virtual unsigned int replace( KSection S, const char*, unsigned int InputLength );
     virtual int move( int DestPos, KSection SourceSection );
     virtual int fill( char FillChar, int Length = -1, unsigned int Pos = 0 );
     virtual void setDatum( unsigned int Offset, const char Char );

@@ -83,7 +83,7 @@ int KBigBuffer::remove( KSection /*Section*/ )
   return 0;
 }
 
-int KBigBuffer::replace( KSection /*Section*/, const char*, int /*Length*/ )
+unsigned int KBigBuffer::replace( KSection /*Section*/, const char*, unsigned int /*Length*/ )
 {
   return 0;
 }

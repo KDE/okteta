@@ -47,7 +47,7 @@ class KWrappingROBuffer : public KReadOnlyBuffer
 
     virtual int insert( int Pos, const char*, int Length );
     virtual int remove( KSection S );
-    virtual int replace( KSection S, const char*, int Length );
+    virtual unsigned int replace( KSection S, const char*, unsigned int Length );
     virtual int fill( const char FillChar, int, int );
     virtual void setDatum( unsigned int Offset, const char Char );
 
@@ -75,7 +75,7 @@ inline char KWrappingROBuffer::datum( unsigned int Offset ) const { return Data[
 
 inline int KWrappingROBuffer::insert( int, const char*, int )        { return 0; }
 inline int KWrappingROBuffer::remove( KSection )                     { return 0; }
-inline int KWrappingROBuffer::replace( KSection, const char*, int )  { return 0; }
+inline unsigned int KWrappingROBuffer::replace( KSection, const char*, unsigned int )  { return 0; }
 inline int KWrappingROBuffer::fill( const char , int, int )          { return 0; }
 inline void KWrappingROBuffer::setDatum( unsigned int, const char )  {}
 
