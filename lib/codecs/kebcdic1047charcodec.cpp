@@ -96,11 +96,12 @@ static unsigned char EBCDICChars[256] =
 
 bool KEBCDIC1047CharCodec::encode( char *D, const QChar &C ) const
 {
+  int I = C.unicode();
   // not in range?
-  if( QChar(0x00FF) < C )
+  if( 0x00FF < I )
     return false;
 
-  *D = EBCDICChars[C];
+  *D = EBCDICChars[I];
   return true;
 }
 
