@@ -92,21 +92,28 @@ class KHexEditPart : public KParts::ReadWritePart
     void unselect();
     void slotSetCoding();
     void slotSetShowUnprintable();
+    void slotSetResizeStyle();
 
   private:
     KHE::KHexEdit *m_HexEdit;
     char* m_Buffer;
     KHE::KBigBuffer m_Wrapping;
 
+    // edit menu
     KAction *SaveAction;
     KAction *CutAction;
     KAction *CopyAction;
 
+    // view menu
     KRadioAction *HexCodingAction;
     KRadioAction *DecCodingAction;
     KRadioAction *OctCodingAction;
     KRadioAction *BinCodingAction;
     KToggleAction *ShowUnprintableAction;
+    // settings menu
+    KRadioAction *NoResizeAction;
+    KRadioAction *LockGroupsAction;
+    KRadioAction *FullSizeUsageAction;
 };
 
 #endif

@@ -36,6 +36,7 @@ using namespace KHE;
 static const char *RCFileName =    "khexedit2partui.rc";
 
 static const char *CodingGroupId = "ColumnCoding";
+static const char *ResizeStyleGroupId = "ResizeStyle";
 
 
 KHexEditPart::KHexEditPart( QWidget *parentWidget, const char *widgetName,
@@ -100,11 +101,19 @@ void KHexEditPart::setupActions()
 
   ShowUnprintableAction = new KToggleAction( i18n("Show unprintabe chars(<32)"), 0, this, SLOT(slotSetShowUnprintable()), actionCollection(), "view_showunprintable" );
 
+  NoResizeAction =      new KRadioAction( i18n("&No Resize"),       0, this, SLOT(slotSetResizeStyle()), actionCollection(), "settings_noresize" );
+  LockGroupsAction =    new KRadioAction( i18n("&Lock groups"),     0, this, SLOT(slotSetResizeStyle()), actionCollection(), "settings_lockgroups" );
+  FullSizeUsageAction = new KRadioAction( i18n("&Full size usage"), 0, this, SLOT(slotSetResizeStyle()), actionCollection(), "settings_fullsizeusage" );
+
+  NoResizeAction->setExclusiveGroup( ResizeStyleGroupId );
+  LockGroupsAction->setExclusiveGroup( ResizeStyleGroupId );
+  FullSizeUsageAction->setExclusiveGroup( ResizeStyleGroupId );
+
   KStdAction::zoomIn(  m_HexEdit, SLOT(zoomIn()),   actionCollection() );
   KStdAction::zoomOut( m_HexEdit, SLOT(zoomOut()),  actionCollection() );
 
   // set our XML-UI resource file
-  setXMLFile( RCFileName );
+  setXMLFile( RCFileName ); 
 }
 
 
@@ -256,4 +265,20 @@ void KHexEditPart::slotSetShowUnprintable()
   m_HexEdit->setShowUnprintable( ShowUnprintableAction->isChecked() );
 }
 
+void KHexEditPart::slotSetResizeStyle()
+{
+  // TODO: find out if there is a way to use the exclusivegroup somehow
+  KHexEdit::KResizeStyle ResizeStyle;
+  if( NoResizeAction->isChecked() )
+    ResizeStyle = KHexEdit::NoResize;
+  else if( LockGroupsAction->isChecked() )
+    ResizeStyle = KHexEdit::LockGrouping;
+  else if( FullSizeUsageAction->isChecked() )
+    ResizeStyle = KHexEdit::FullSizeUsage;
+  else
+    //should not be reached;
+    ResizeStyle = KHexEdit::FullSizeUsage;
+
+  m_HexEdit->setResizeStyle( ResizeStyle );
+}
 #include "khepart.moc"

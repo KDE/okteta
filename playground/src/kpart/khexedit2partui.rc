@@ -102,6 +102,11 @@
       <Action name="searchbar_above"/>
       <Action name="searchbar_below"/>
     </Menu>
+    <Menu name="resizestyle" append="show_merge"><text>&amp;ResizeStyle</text>
+      <Action name="settings_noresize"/>
+      <Action name="settings_lockgroups"/>
+      <Action name="settings_fullsizeusage"/>
+    </Menu>
 <!--     <Action name="favorites"/> //-->
   </Menu>
 </MenuBar>
