@@ -15,6 +15,8 @@
  ***************************************************************************/
 
 
+// qt specific
+#include <kaction.h>
 // app specific
 #include "khexedit.h"
 #include "khepart.h"
@@ -23,22 +25,22 @@
 using namespace KHE;
 
 
-KHexEditBrowserExtension::KHexEditBrowserExtension( KHexEditPart *P, KHexEdit* HE )
+KHexEditBrowserExtension::KHexEditBrowserExtension( KHexEditPart *P )
   : KParts::BrowserExtension( P, "khexeditpartbrowserextension" ),
-  HexEdit( HE )
+  HexEditPart( P )
 {
-  connect( HexEdit, SIGNAL( selectionChanged() ), this, SLOT( slotSelectionChanged() ) );
+  connect( HexEditPart->HexEdit, SIGNAL( selectionChanged() ), this, SLOT( slotSelectionChanged() ) );
 }
 
 void KHexEditBrowserExtension::copy()
 {
-  HexEdit->copy();
+  HexEditPart->HexEdit->copy();
 }
 
 
 void KHexEditBrowserExtension::slotSelectionChanged()
 {
-  emit enableAction( "copy", HexEdit->hasSelectedData() );
+  emit enableAction( "copy", HexEditPart->HexEdit->hasSelectedData() );
 }
 
 
@@ -46,10 +48,14 @@ void KHexEditBrowserExtension::saveState( QDataStream &stream )
 {
   KParts::BrowserExtension::saveState( stream );
 
-  stream << (int)HexEdit->resizeStyle() << (int)HexEdit->coding() 
+  KHexEdit *HexEdit = HexEditPart->HexEdit;
+
+  stream << (int)HexEdit->offsetColumnVisible() << HexEdit->visibleBufferColumns()
+      << (int)HexEdit->resizeStyle() << (int)HexEdit->coding() 
       << (int)HexEdit->encoding() << (int)HexEdit->showUnprintable()
       << HexEdit->contentsX() << HexEdit->contentsY()
-      << HexEdit->cursorPosition() << (int)HexEdit->isCursorBehind();
+      << HexEdit->cursorPosition() << (int)HexEdit->isCursorBehind()
+      << HexEdit->cursorColumn();
 }
 
 
@@ -57,6 +63,8 @@ void KHexEditBrowserExtension::restoreState( QDataStream &stream )
 {
   KParts::BrowserExtension::restoreState( stream );
 
+  int OffsetColumnVisible;
+  int VisibleBufferColumns;
   int ResizeStyle;
   int Coding;
   int Encoding;
@@ -64,13 +72,22 @@ void KHexEditBrowserExtension::restoreState( QDataStream &stream )
   int x, y;
   int Position;
   int CursorBehind;
+  int CursorColumn;
 
-  stream >> ResizeStyle >> Coding >> Encoding >> ShowUnprintable >> x >> y >> Position >> CursorBehind;
+  stream >> OffsetColumnVisible >> VisibleBufferColumns >> ResizeStyle >> Coding >> Encoding >> ShowUnprintable 
+         >> x >> y >> Position >> CursorBehind >> CursorColumn;
 
-  HexEdit->setResizeStyle( (KHE::KHexEdit::KResizeStyle)ResizeStyle );
-  HexEdit->setCoding( (KHE::KHexEdit::KCoding)Coding );
-  HexEdit->setEncoding( (KHE::KHexEdit::KEncoding)Encoding );
+  KHexEdit *HexEdit = HexEditPart->HexEdit;
+
+  HexEdit->toggleOffsetColumn( OffsetColumnVisible );
+  HexEdit->showBufferColumns( VisibleBufferColumns );
+  HexEdit->setResizeStyle( (KHexEdit::KResizeStyle)ResizeStyle );
+  HexEdit->setCoding( (KHexEdit::KCoding)Coding );
+  HexEdit->setEncoding( (KHexEdit::KEncoding)Encoding );
   HexEdit->setShowUnprintable( ShowUnprintable );
   HexEdit->setContentsPos( x, y );
   HexEdit->setCursorPosition( Position, CursorBehind );
+  HexEdit->setCursorColumn( (KHexEdit::KBufferColumnId)CursorColumn );
+
+  HexEditPart->fitActionSettings();
 }

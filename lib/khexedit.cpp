@@ -123,7 +123,7 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, WFla
   connect( CursorBlinkTimer, SIGNAL(timeout()), this, SLOT(blinkCursor()) );
   connect( ScrollTimer,      SIGNAL(timeout()), this, SLOT(autoScrollTimerDone()) );
   connect( DragStartTimer,   SIGNAL(timeout()), this, SLOT(startDrag()) );
-  
+
   viewport()->setAcceptDrops( true );
 }
 
@@ -154,11 +154,17 @@ KHexEdit::KEncoding KHexEdit::encoding()       const { return (KHexEdit::KEncodi
 
 int KHexEdit::cursorPosition() const { return BufferCursor->index(); }
 bool KHexEdit::isCursorBehind() const { return BufferCursor->isBehind(); }
+KHexEdit::KBufferColumnId KHexEdit::cursorColumn() const
+{ return static_cast<KHE::KValueColumn *>( ActiveColumn ) == &valueColumn()? ValueColumnId : CharColumnId; }
 
 void KHexEdit::setOverwriteOnly( bool OO )    { OverWriteOnly = OO; if( OverWriteOnly ) setOverwriteMode( true ); }
 void KHexEdit::setModified( bool M )          { DataBuffer->setModified(M); }
 void KHexEdit::setTabChangesFocus( bool TCF ) { TabChangesFocus = TCF; }
 void KHexEdit::setFirstLineOffset( int FLO )  { OffsetColumn->setFirstLineOffset( FLO ); }
+
+bool KHexEdit::offsetColumnVisible() const { return offsetColumn().isVisible(); }
+int KHexEdit::visibleBufferColumns() const
+{ return (valueColumn().isVisible() ? ValueColumnId : 0) | (charColumn().isVisible() ? CharColumnId : 0); }
 
 
 void KHexEdit::setOverwriteMode( bool OM )
@@ -452,6 +458,20 @@ void KHexEdit::setNoOfLines( int NewNoOfLines )
 }
 
 
+void KHexEdit::toggleOffsetColumn( bool Visible )
+{
+  bool OCVisible = offsetColumn().isVisible();
+  // no change?
+  if( OCVisible == Visible )
+    return;
+
+  offsetColumn().setVisible( Visible );
+  FirstBorderColumn[0].setVisible( Visible );
+
+  updateViewByWidth();
+}
+
+
 QSize KHexEdit::sizeHint() const
 {
   return QSize( totalWidth(), totalHeight() );
@@ -514,8 +534,8 @@ int KHexEdit::fittingBytesPerLine( const QSize &NewSize ) const
   // prepare needed values
   KPixelX DigitWidth = valueColumn().digitWidth();
   KPixelX TextByteWidth = charColumn().isVisible() ? DigitWidth : 0;
-  KPixelX HexByteWidth = valueColumn().byteWidth();
-  KPixelX ByteSpacingWidth = valueColumn().byteSpacingWidth();
+  KPixelX HexByteWidth = valueColumn().isVisible() ? valueColumn().byteWidth() : 0;
+  KPixelX ByteSpacingWidth = valueColumn().isVisible() ? valueColumn().byteSpacingWidth() : 0;
   KPixelX GroupSpacingWidth;
   int NoOfGroupedBytes = valueColumn().noOfGroupedBytes();
   // no grouping?
@@ -526,7 +546,7 @@ int KHexEdit::fittingBytesPerLine( const QSize &NewSize ) const
     GroupSpacingWidth = 0;
   }
   else
-    GroupSpacingWidth = valueColumn().groupSpacingWidth();
+    GroupSpacingWidth = valueColumn().isVisible() ? valueColumn().groupSpacingWidth() : 0;
 
   KPixelX HexByteGroupWidth =  NoOfGroupedBytes * HexByteWidth + (NoOfGroupedBytes-1)*ByteSpacingWidth;
   KPixelX TextByteGroupWidth = NoOfGroupedBytes * TextByteWidth;
@@ -1038,6 +1058,54 @@ void KHexEdit::setCursorPosition( int Index, bool Behind )
 }
 
 
+void KHexEdit::showBufferColumns( int CCs )
+{
+  int Columns = visibleBufferColumns();
+
+  // no changes or no column selected?
+  if( CCs == Columns || !(CCs&( ValueColumnId | CharColumnId )) )
+    return;
+
+  valueColumn().setVisible( ValueColumnId & CCs );
+  charColumn().setVisible( CharColumnId & CCs );
+  SecondBorderColumn->setVisible( CCs == (ValueColumnId|CharColumnId) );
+
+  // active column not visible anymore?
+  if( !activeColumn().isVisible() )
+  {
+    KBufferColumn *H = ActiveColumn;
+    ActiveColumn = InactiveColumn;
+    InactiveColumn = H;
+  }
+
+  updateViewByWidth();
+}
+
+
+void KHexEdit::setCursorColumn( KBufferColumnId CC )
+{
+  // no changes or not visible?
+  if( CC == cursorColumn()
+      || (CC == ValueColumnId && !valueColumn().isVisible())
+      || (CC == CharColumnId && !charColumn().isVisible()) )
+    return;
+
+  pauseCursor( true );
+
+  if( CC == ValueColumnId )
+  {
+    ActiveColumn = &valueColumn();
+    InactiveColumn = &charColumn();
+  }
+  else
+  {
+    ActiveColumn = &charColumn();
+    InactiveColumn = &valueColumn();
+  }
+  ensureCursorVisible();
+  unpauseCursor();
+}
+
 void KHexEdit::placeCursor( const QPoint &Point )
 {
   resetInputContext();
@@ -1293,6 +1361,7 @@ void KHexEdit::paintInactiveCursor( bool CursorOn )
   // any reason to skip the cursor drawing?
   if( !isUpdatesEnabled()
       || !viewport()->isUpdatesEnabled()
+      || !inactiveColumn().isVisible()
       || (CursorOn && !hasFocus() && !viewport()->hasFocus() && !InDnD)  )
     return;
 

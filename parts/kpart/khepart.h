@@ -45,6 +45,8 @@ class KHexEditPart : public KParts::ReadOnlyPart
 {
     Q_OBJECT
 
+    friend class KHexEditBrowserExtension;
+
   public:
     KHexEditPart( QWidget *ParentWidget, const char *WidgetName, QObject *Parent, const char *Name,
                   bool BrowserViewWanted );
@@ -56,6 +58,7 @@ class KHexEditPart : public KParts::ReadOnlyPart
 
   protected:
     void setupActions( bool BrowserViewWanted );
+    void fitActionSettings();
 
   protected slots:
     // used to catch changes in the HexEdit widget
@@ -67,10 +70,12 @@ class KHexEditPart : public KParts::ReadOnlyPart
     void slotSetEncoding();
     void slotSetShowUnprintable();
     void slotSetResizeStyle();
+    void slotToggleOffsetColumn();
+    void slotToggleValueCharColumns();
 
   private:
-    KHexEdit *m_HexEdit;
-    KBigBuffer m_Wrapping;
+    KHexEdit *HexEdit;
+    KBigBuffer Wrapping;
 
     // edit menu
     KAction *CopyAction;
@@ -86,6 +91,10 @@ class KHexEditPart : public KParts::ReadOnlyPart
     KRadioAction *NoResizeAction;
     KRadioAction *LockGroupsAction;
     KRadioAction *FullSizeUsageAction;
+    KToggleAction *ShowOffsetColumnAction;
+    KRadioAction *ShowOnlyValueAction;
+    KRadioAction *ShowOnlyCharAction;
+    KRadioAction *ShowValueCharAction;
 };
 
 }

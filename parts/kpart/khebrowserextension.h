@@ -25,7 +25,6 @@ namespace KHE
 {
 
 // forward declaration
-class KHexEdit;
 class KHexEditPart;
 
 /**
@@ -37,7 +36,7 @@ class KHexEditBrowserExtension : public KParts::BrowserExtension
     Q_OBJECT
 
   public:
-    KHexEditBrowserExtension( KHexEditPart *P, KHexEdit *HE );
+    KHexEditBrowserExtension( KHexEditPart *P );
 
   public: // KParts::BrowserExtension API
     virtual void saveState( QDataStream &stream );
@@ -51,7 +50,7 @@ class KHexEditBrowserExtension : public KParts::BrowserExtension
     void slotSelectionChanged();
 
   protected:
-    KHexEdit *HexEdit;
+    KHexEditPart *HexEditPart;
 };
 
 }

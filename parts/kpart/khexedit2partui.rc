@@ -8,20 +8,20 @@
   </Menu>
   <Menu name="view">
     <Separator/>
-    <Action name="view_zoom_in"/>
-    <Action name="view_zoom_out"/>
+    <Action name="view_zoom_in" />
+    <Action name="view_zoom_out" />
     <Separator/>
     <Action name="view_showunprintable"/>
     <Separator/>
     <Menu name="coding"><text>&amp;Value Coding</text>
-      <Action name="view_hexcoding"/>
-      <Action name="view_deccoding"/>
-      <Action name="view_octcoding"/>
-      <Action name="view_bincoding"/>
+      <Action name="view_hexcoding" />
+      <Action name="view_deccoding" />
+      <Action name="view_octcoding" />
+      <Action name="view_bincoding" />
     </Menu>
     <Menu name="encoding"><text>Document &amp;Encoding</text>
-      <Action name="view_localencoding"/>
-      <Action name="view_asciiencoding"/>
+      <Action name="view_localencoding" />
+      <Action name="view_asciiencoding" />
 <!--      <Action name="enc_ebcdic"/>
        <Action name="enc_custom"/> //-->
     </Menu>
@@ -29,26 +29,33 @@
   <Menu name="settings">
     <Separator/>
     <Menu name="resizestyle" group="show_merge"><text>&amp;Resize Style</text>
-      <Action name="settings_noresize"/>
-      <Action name="settings_lockgroups"/>
-      <Action name="settings_fullsizeusage"/>
+      <Action name="settings_noresize" />
+      <Action name="settings_lockgroups" />
+      <Action name="settings_fullsizeusage" />
+    </Menu>
+    <Menu name="columns" group="show_merge"><text>&amp;Columns</text>
+      <Action name="settings_showoffsetcolumn" />
+      <Separator/>
+      <Action name="settings_showonlyvalue" />
+      <Action name="settings_showonlychar" />
+      <Action name="settings_showvaluechar" />
     </Menu>
   </Menu>
 </MenuBar>
 
 <ToolBar name="mainToolBar"><text>Main Toolbar</text>
   <Action name="edit_copy" />
-  <Action name="view_zoom_in"/>
-  <Action name="view_zoom_out"/>
+  <Action name="view_zoom_in" />
+  <Action name="view_zoom_out" />
 </ToolBar>
 
 <!-- Editor popup menu //-->
 <Menu name="editor_popup">
-  <Action name="view_hexcoding"/>
-  <Action name="view_deccoding"/>
-  <Action name="view_octcoding"/>
-  <Action name="view_bincoding"/>
+  <Action name="view_hexcoding" />
+  <Action name="view_deccoding" />
+  <Action name="view_octcoding" />
+  <Action name="view_bincoding" />
   <Separator/>
-  <Action name="resize_lock"/>
+  <Action name="resize_lock" />
 </Menu>
 </kpartgui>

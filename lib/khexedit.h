@@ -103,6 +103,8 @@ class KHexEdit : public KColumnsView
     enum KCoding { HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, MaxCodingId=0xFFFF };
     enum KEncoding { LocalEncoding=0, ISO8859_1Encoding=1, MaxEncodingId=0xFFFF };
 
+    enum KBufferColumnId { ValueColumnId=1, CharColumnId=2 };
+
 
   public:
     KHexEdit( KDataBuffer *Buffer = 0, QWidget *Parent = 0, const char *Name = 0, WFlags F = 0 );
@@ -128,6 +130,7 @@ class KHexEdit : public KColumnsView
     int cursorPosition() const;
     /***/
     bool isCursorBehind() const;
+    KBufferColumnId cursorColumn() const;
 
     bool isOverwriteMode() const;
     bool isOverwriteOnly() const;
@@ -140,6 +143,9 @@ class KHexEdit : public KColumnsView
     int noOfBytesPerLine() const;
     int startOffset() const;
     int firstLineOffset() const;
+
+    bool offsetColumnVisible() const;
+    int visibleBufferColumns() const;
 
   // value column
     KCoding coding() const;
@@ -193,6 +199,8 @@ class KHexEdit : public KColumnsView
     void setCursorPosition( int Index, bool Behind=false );
     /** puts the cursor in the column at the pos of Point (in absolute coord), does not handle the drawing */
     void placeCursor( const QPoint &Point );
+    /***/
+    void setCursorColumn( KBufferColumnId );
 //    void repaintByte( int row, int column, bool Erase = true );
 //    void updateByte( int row, int column );
 //    void ensureByteVisible( int row, int column );
@@ -201,8 +209,10 @@ class KHexEdit : public KColumnsView
     /** */
     void setDataBuffer( KDataBuffer *B );
 
-//    /** switches the Offset column on/off */
-//    void toggleOffsetColumn( bool Visible );
+    /** switches the Offset column on/off */
+    void toggleOffsetColumn( bool Visible );
+    /** */
+    void showBufferColumns( int Columns );
     /** scrolls the view as much as needed to have the cursor fully visible */
     void ensureCursorVisible();
 
