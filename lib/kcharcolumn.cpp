@@ -19,6 +19,11 @@
 #include <ctype.h>
 // qt specific
 #include <qpainter.h>
+#include <qtextcodec.h>
+// kde specific
+#include <kcharsets.h>
+#include <klocale.h>
+#include <kglobal.h>
 // lib specific
 #include "kcolumnsview.h"
 #include "kbuffercursor.h"
@@ -36,11 +41,13 @@ static const unsigned char LowestPrintableChar = 32;
 
 KCharColumn::KCharColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R )
  : KBufferColumn( CV, B, L, R ),
-   Encoding( DefaultEncoding ),
+   Encoding( MaxEncodingId ), // forces update
+   Codec( 0 ),
    ShowUnprintable( DefaultShowUnprintable ),
    SubstituteChar( DefaultSubstituteChar )
 {
   setSpacing( 0, 0, 0 );
+  setEncoding( DefaultEncoding );
 }
 
 
@@ -49,12 +56,37 @@ KCharColumn::~KCharColumn()
 }
 
 
+bool KCharColumn::setEncoding( KEncoding C )
+{
+  if( Encoding == C )
+    return false;
+
+  switch( C )
+  {
+    case ISO8859_1Encoding: Codec = KGlobal::charsets()->codecForName( "ISO8859-1" ); break;
+    case LocalEncoding: ;
+    default: Codec = KGlobal::locale()->codecForEncoding();
+  }
+  Encoding = C;
+  return true;
+}
+
+
 
 void KCharColumn::drawByte( QPainter *P, char Byte, const QColor &Color ) const
 {
-  QString BS = ( (unsigned char)Byte < LowestPrintableChar && !ShowUnprintable ) ?
-                 SubstituteChar :
-                 Encoding == LocalEncoding ? QString::fromLocal8Bit(&Byte,1): QString::fromLatin1(&Byte,1);
+//   QString BS = ( (unsigned char)Byte < LowestPrintableChar && !ShowUnprintable ) ?
+//                  SubstituteChar :
+//                  Encoding == LocalEncoding ? QString::fromLocal8Bit(&Byte,1): QString::fromLatin1(&Byte,1);
+
+
+  QString BS = Codec->toUnicode( &Byte, 1 );
+  if( !ShowUnprintable )
+  {
+    QCharRef B = BS.at(0);
+    if( !B.isPrint() )
+      BS.at(0) = SubstituteChar;
+  }
 
   P->setPen( Color );
   P->drawText( 0, DigitBaseLine, BS );

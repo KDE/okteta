@@ -25,6 +25,8 @@
 
 class QPainter;
 class QColor;
+class QTextCodec;
+
 
 namespace KHE
 {
@@ -75,6 +77,8 @@ class KCharColumn : public KBufferColumn
     /** */
     KEncoding Encoding;
     /** */
+    QTextCodec *Codec;
+    /** */
     bool ShowUnprintable;
     /** */
     QChar SubstituteChar;
@@ -98,14 +102,6 @@ inline bool KCharColumn::setShowUnprintable( bool SU )
   if( ShowUnprintable == SU )
     return false;
   ShowUnprintable = SU;
-  return true;
-}
-
-inline bool KCharColumn::setEncoding( KEncoding C )
-{
-  if( Encoding == C )
-    return false;
-  Encoding = C;
   return true;
 }
 
