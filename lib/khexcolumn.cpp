@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
- 
+
 // c++ specififc
 // #include <iostream>
 // qt specific
@@ -30,12 +30,13 @@
 using namespace KHE;
 
 static const KCoding DefaultCoding = HexadecimalCoding;
+static const KCoding NotDefaultCoding = DecimalCoding;
 static const int DefaultBinaryGapWidth = 1;
 
 
 KHexColumn::KHexColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R )
  : KBufferColumn( CV, B, L, R ),
-   Coding( NoCoding ),
+   Coding( NotDefaultCoding ),
    BinaryGapWidth( DefaultBinaryGapWidth )
 {
   setCoding( DefaultCoding );

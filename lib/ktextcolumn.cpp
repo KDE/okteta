@@ -31,11 +31,13 @@
 
 using namespace KHE;
 
+static KEncoding DefaultEncoding = LocalEncoding;
 static bool DefaultShowUnprintable = false;
 static QChar DefaultSubstituteChar = '.';
 
 KTextColumn::KTextColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R )
  : KBufferColumn( CV, B, L, R ),
+   Encoding( DefaultEncoding ),
    ShowUnprintable( DefaultShowUnprintable ),
    SubstituteChar( DefaultSubstituteChar )
 {
@@ -53,7 +55,7 @@ void KTextColumn::drawByte( QPainter *P, char Byte, const QColor &Color ) const
 {
   QString BS = ( (unsigned char)Byte < 32 && !ShowUnprintable ) ?
                  SubstituteChar :
-                 QString::fromAscii(&Byte,1);
+                 Encoding == LocalEncoding ? QString::fromLocal8Bit(&Byte,1): QString::fromLatin1(&Byte,1);
 
   P->setPen( Color );
   P->drawText( 0, DigitBaseLine, BS );

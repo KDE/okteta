@@ -55,6 +55,10 @@ class KTextColumn : public KBufferColumn
       * returns true if there was a change
       */
     bool setSubstituteChar( QChar SC );
+    /** sets the encoding of the text column. Default is KHE::LocalEncoding.
+      * If the encoding is not available the format will not be changed. */
+    bool setEncoding( KEncoding C );
+
 
   public: // value access
     /** returns true if "unprintable" chars (>32) are displayed in the text column
@@ -63,12 +67,16 @@ class KTextColumn : public KBufferColumn
     bool showUnprintable() const;
     /** returns the actually used substitute character for "unprintable" chars, default is '.' */
     QChar substituteChar() const;
+    /** */
+    KEncoding encoding() const;
 
 
   protected: // KBufferColumn API
     virtual void drawByte( QPainter *P, char Byte, const QColor &Color ) const;
 
   protected:
+    /** */
+    KEncoding Encoding;
     /** */
     bool ShowUnprintable;
     /** */
@@ -78,6 +86,7 @@ class KTextColumn : public KBufferColumn
 
 inline bool KTextColumn::showUnprintable()  const { return ShowUnprintable; }
 inline QChar KTextColumn::substituteChar()  const { return SubstituteChar; }
+inline KEncoding KTextColumn::encoding()    const { return Encoding; }
 
 inline bool KTextColumn::setSubstituteChar( QChar SC )
 {
@@ -92,6 +101,14 @@ inline bool KTextColumn::setShowUnprintable( bool SU )
   if( ShowUnprintable == SU )
     return false;
   ShowUnprintable = SU;
+  return true;
+}
+
+inline bool KTextColumn::setEncoding( KEncoding C )
+{
+  if( Encoding == C )
+    return false;
+  Encoding = C;
   return true;
 }
 

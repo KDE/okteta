@@ -134,6 +134,11 @@ void KBytesEditWidget::setBinaryGapWidth( int BGW )
   BytesEdit->setBinaryGapWidth( BGW );
 }
 
+void KBytesEditWidget::setEncoding( KEncoding C )
+{
+  BytesEdit->setEncoding( (KHE::KHexEdit::KEncoding)C );
+}
+
 void KBytesEditWidget::setShowUnprintable( bool SU )
 {
   BytesEdit->setShowUnprintable( SU );
@@ -228,6 +233,11 @@ bool KBytesEditWidget::showUnprintable() const
 QChar KBytesEditWidget::substituteChar() const
 {
   return BytesEdit->substituteChar();
+}
+
+KBytesEditWidget::KEncoding KBytesEditWidget::encoding() const
+{
+  return (KEncoding)BytesEdit->encoding();
 }
 
 

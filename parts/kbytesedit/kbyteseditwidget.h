@@ -135,12 +135,17 @@ class KBytesEditWidget : public QWidget, public KHE::BytesEditInterface,
       * returns true if there was a change
       */
     virtual void setSubstituteChar( QChar SC );
+    /** sets the encoding of the text column. Default is KHE::LocalEncoding.
+      * If the encoding is not available the format will not be changed. */
+    virtual void setEncoding( KEncoding C );
     /** returns true if "unprintable" chars (>32) are displayed in the text column
       * with their corresponding character, default is false
       */
     virtual bool showUnprintable() const;
     /** returns the actually used substitute character for "unprintable" chars, default is '.' */
     virtual QChar substituteChar() const;
+    /** */
+    virtual KEncoding encoding()   const;
 
   public: // edit interface
     /** */

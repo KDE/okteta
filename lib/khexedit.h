@@ -90,8 +90,9 @@ class KHexEdit : public KColumnsView
                        MoveLineStart, MoveHome, MoveLineEnd, MoveEnd };
     enum KKeyboardAction { ActionDelete, ActionWordDelete, ActionBackspace, ActionWordBackspace };
 
-    enum KResizeStyle { NoResize, LockGrouping, FullSizeUsage };
-    enum KCoding { HexadecimalCoding=0, DecimalCoding, OctalCoding, BinaryCoding, NoCoding };
+    enum KResizeStyle { NoResize=0, LockGrouping=1, FullSizeUsage=2, MaxResizeStyleId=0xFF };
+    enum KCoding { HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, MaxCodingId=0xFF };
+    enum KEncoding { LocalEncoding=0, ISO8859_1Encoding=1, MaxEncodingId=0xFF };
 
 
   public:
@@ -139,6 +140,8 @@ class KHexEdit : public KColumnsView
     bool showUnprintable() const;
     /** returns the actually used substitute character for "unprintable" chars, default is '.' */
     QChar substituteChar() const;
+    /** */
+    KEncoding encoding() const;
 
 
   public: // logic value service
@@ -249,6 +252,9 @@ class KHexEdit : public KColumnsView
       * returns true if there was a change
       */
     void setSubstituteChar( QChar SC );
+    /** sets the encoding of the text column. Default is KHE::LocalEncoding.
+      * If the encoding is not available the format will not be changed. */
+    void setEncoding( KEncoding C );
 
   // interaction
     /** de-/selects all data */

@@ -144,6 +144,7 @@ bool KHexEdit::isModified()                    const { return DataBuffer->isModi
 bool KHexEdit::tabChangesFocus()               const { return TabChangesFocus; }
 bool KHexEdit::showUnprintable()               const { return textColumn().showUnprintable(); }
 QChar KHexEdit::substituteChar()               const { return textColumn().substituteChar(); }
+KHexEdit::KEncoding KHexEdit::encoding()       const { return (KHexEdit::KEncoding)textColumn().encoding(); }
 
 void KHexEdit::setOverwriteOnly( bool OO )    { OverWriteOnly = OO; if( OverWriteOnly ) setOverwriteMode( true ); }
 void KHexEdit::setModified( bool M )          { DataBuffer->setModified(M); }
@@ -315,6 +316,15 @@ void KHexEdit::setShowUnprintable( bool SU )
   pauseCursor();
   updateColumn( textColumn() );
   unpauseCursor();
+}
+
+
+void KHexEdit::setEncoding( KEncoding C )
+{
+  if( !textColumn().setEncoding((KHE::KEncoding)C) )
+    return;
+
+  updateColumn( textColumn() );
 }
 
 
@@ -1344,9 +1354,7 @@ bool KHexEdit::handleByteEditKey( QKeyEvent *KeyEvent )
           && ( !(KeyEvent->state()&( ControlButton | AltButton | MetaButton )) )
           && ( !KeyEvent->ascii() || KeyEvent->ascii() >= 32 ) )
       {
-        QByteArray D( 1 );
-        D[0] = KeyEvent->ascii();
-        if( hexColumn().appendingFunction()(&EditValue,D[0]) )
+        if( hexColumn().appendingFunction()(&EditValue,KeyEvent->ascii()) )
         {
           syncEditedByte();
           if( EditModeByInsert && hexColumn().digitsFilled(EditValue) )
@@ -1542,10 +1550,14 @@ void KHexEdit::keyPressEvent( QKeyEvent *KeyEvent )
 
 bool KHexEdit::handleLetter( QKeyEvent *KeyEvent )
 {
-  QByteArray D( 1 );
-  D[0] = KeyEvent->ascii();
   if( ActiveColumn == &textColumn() )
   {
+    QByteArray D( 1 );
+    const QString &S = KeyEvent->text();
+    if( textColumn().encoding() == KHE::LocalEncoding )
+      D[0] = S.local8Bit()[0];
+    else
+      D[0] = S.latin1()[0];
 //         clearUndoRedoInfo = false;
     insert( D );
   }
@@ -1573,7 +1585,7 @@ bool KHexEdit::handleLetter( QKeyEvent *KeyEvent )
     }
 
     EditValue = 0;
-    bool KeyValid = hexColumn().appendingFunction()( &EditValue, D[0] );
+    bool KeyValid = hexColumn().appendingFunction()( &EditValue, KeyEvent->ascii() );
     if( !KeyValid )
       return false;
 
