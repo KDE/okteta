@@ -75,7 +75,7 @@ class KHEXEDIT_EXPORT KDataBuffer
 
 
   public: // data access API
-    /** locates working range 
+    /** locates working range
       * The idea behind is to tell buffer which range will be requested in the following time,
       * so that e.g. the corresponding pages will be loaded in advance
       * TODO: do we really need this? Where will this lead to real enhancements?
@@ -102,7 +102,7 @@ class KHEXEDIT_EXPORT KDataBuffer
       * if the offset is not valid the behaviout is undefined
       * @param Offset offset of the datum requested
       */
-    virtual char datum( int Offset ) const = 0;
+    virtual char datum( unsigned int Offset ) const = 0;
 
     /**
       * @return the size of the data
@@ -122,8 +122,8 @@ class KHEXEDIT_EXPORT KDataBuffer
 
 
   public: // modification API
-    /** inserts bytes copied from the given source at Position. 
-      * The original data beginnung at the position is moved 
+    /** inserts bytes copied from the given source at Position.
+      * The original data beginnung at the position is moved
       * with the buffer enlarged as needed
       * If the buffer is readOnly this is a noop and returns 0.
       * @param Pos
@@ -134,7 +134,7 @@ class KHEXEDIT_EXPORT KDataBuffer
     virtual int insert( int Pos, const char* Source, int SourceLength );
 
     /** removes beginning with position as much as possible
-      * @param Section 
+      * @param Section
       * @return length of removed data
       */
     virtual int remove( KSection Section );
@@ -143,7 +143,7 @@ class KHEXEDIT_EXPORT KDataBuffer
 
     /** replaces as much as possible
       * @param DestSection
-      * @param Source 
+      * @param Source
       * @param SourceLength
       * @return length of replacced data
       */
@@ -168,6 +168,13 @@ class KHEXEDIT_EXPORT KDataBuffer
      * @return number of filled characters
      */
     virtual int fill( const char FillChar, int Length = -1, unsigned int Pos = 0 ) = 0;
+
+    /** sets a single byte
+     * if the offset is not valid the behaviout is undefined
+     * @param Offset offset of the datum requested
+     * @param Char new byte value
+     */
+    virtual void setDatum( unsigned int Offset, const char Char ) = 0;
 
     /** sets the modified flag for the buffer
       * @param M
@@ -281,7 +288,7 @@ class KHEXEDIT_EXPORT KDataBuffer
       * If the end of the section is lower then the start the search continues at the start???
       * @param 
       * @param Length length of search string
-      * @param Section section within the keydata is to be found 
+      * @param Section section within the keydata is to be found
       * @return index of the first occurence or -1
       */
     virtual int find( const char*KeyData, int Length, KSection Section ) const = 0;

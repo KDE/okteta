@@ -45,7 +45,7 @@ class KHEXEDIT_EXPORT KBigBuffer : public KDataBuffer
   public: // KDataBuffer API
     virtual bool prepareRange( KSection Range ) const;
     virtual const char *dataSet( KSection S ) const;
-    virtual char datum( int Offset ) const;
+    virtual char datum( unsigned int Offset ) const;
     virtual int size() const;
     virtual bool isReadOnly() const;
     virtual bool isModified() const;
@@ -55,6 +55,7 @@ class KHEXEDIT_EXPORT KBigBuffer : public KDataBuffer
     virtual int replace( KSection S, const char*, int InputLength );
     virtual int move( int DestPos, KSection SourceSection );
     virtual int fill( char FillChar, int Length = -1, unsigned int Pos = 0 );
+    virtual void setDatum( unsigned int Offset, const char Char );
 
     virtual void setModified( bool M = true );
 
@@ -71,8 +72,8 @@ class KHEXEDIT_EXPORT KBigBuffer : public KDataBuffer
     bool close();
 
   protected:
-    bool ensurePageLoaded( int PageIndex ) const;
-    bool freePage( int PageIndex ) const;
+    bool ensurePageLoaded( unsigned int PageIndex ) const;
+    bool freePage( unsigned int PageIndex ) const;
 
 
   protected:
@@ -83,11 +84,11 @@ class KHEXEDIT_EXPORT KBigBuffer : public KDataBuffer
     bool IsOpen:1;
     bool AtEOF:1;
     /** maximum number of pages which could be currently loaded */
-    int NoOfUsedPages;
+    unsigned int NoOfUsedPages;
     /**  number of actually not used pages (in terms of NoOfUsedPages) */
     mutable int NoOfFreePages;
     /** number of bytes in a page */
-    int PageSize;
+    unsigned int PageSize;
     /** first currently loaded page */
     mutable int FirstPage;
     /** last currently loaded page */
@@ -95,10 +96,10 @@ class KHEXEDIT_EXPORT KBigBuffer : public KDataBuffer
     /** */
     mutable KPageOfChar Data;
     /** */
-    int Size;
+    unsigned int Size;
 
     /** current offset */
-    mutable int OffsetOfActualPage;
+    mutable unsigned int OffsetOfActualPage;
     /** points to the actual page */
     mutable char* ActualPage;
 };
@@ -108,6 +109,8 @@ inline bool KBigBuffer::isReadOnly() const   { return ReadOnly; }
 inline bool KBigBuffer::isModified() const   { return false; }
 inline void KBigBuffer::setReadOnly( bool RO ) { ReadOnly = RO; }
 inline void KBigBuffer::setModified( bool )  {}
+
+inline void KBigBuffer::setDatum( unsigned int, const char )  {}
 
 inline bool KBigBuffer::isOpen() const { return File.isOpen(); }
 

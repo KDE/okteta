@@ -52,20 +52,20 @@ bool KBigBuffer::prepareRange( KSection /*Range*/ ) const
 
 const char *KBigBuffer::dataSet( KSection /*Section*/ ) const
 {
-  return 0L;
+  return 0;
 }
 
 
-char KBigBuffer::datum( int DatumOffset ) const
+char KBigBuffer::datum( unsigned int DatumOffset ) const
 {
 //   std::cout << "reading datum " << DatumOffset << std::endl;
   int OffsetInPage = DatumOffset - OffsetOfActualPage;
   // there shouldn't be any need to check l
-  if( OffsetInPage >= 0 && OffsetInPage < PageSize )
+  if( OffsetInPage >= 0 && OffsetInPage < (int)PageSize )
     return ActualPage[OffsetInPage];
 
   // load the page
-  int PageIndex = DatumOffset / PageSize;
+  unsigned int PageIndex = DatumOffset / PageSize;
   ensurePageLoaded( PageIndex );
   return ActualPage[DatumOffset-OffsetOfActualPage];
 }
@@ -123,7 +123,7 @@ bool KBigBuffer::open( const QString& FileName )
   // initialize Page pointers
   Data.resize( NoOfPages );
   for( KPageOfChar::iterator D=Data.begin(); D!=Data.end(); ++D )
-    *D = 0L;
+    *D = 0;
 
   FirstPage = LastPage = 0;
 
@@ -154,12 +154,12 @@ bool KBigBuffer::close()
 }
 
 
-bool KBigBuffer::ensurePageLoaded( int PageIndex ) const
+bool KBigBuffer::ensurePageLoaded( unsigned int PageIndex ) const
 {
   if( !isOpen() )
     return false;
   // page loaded?
-  if( Data[PageIndex] != 0L )
+  if( Data[PageIndex] != 0 )
   {
     ActualPage = Data[PageIndex];
     OffsetOfActualPage = PageIndex * PageSize;
@@ -189,10 +189,10 @@ bool KBigBuffer::ensurePageLoaded( int PageIndex ) const
   if( Success )
   {
     // correct bounds
-    if( PageIndex < FirstPage )
+    if( (int)PageIndex < FirstPage )
       FirstPage = PageIndex;
 
-    if( PageIndex > LastPage )
+    if( (int)PageIndex > LastPage )
       LastPage = PageIndex;
 
     ActualPage = Data[PageIndex];
@@ -203,14 +203,14 @@ bool KBigBuffer::ensurePageLoaded( int PageIndex ) const
 }
 
 
-bool KBigBuffer::freePage( int PageIndex ) const
+bool KBigBuffer::freePage( unsigned int PageIndex ) const
 {
   // check range and if is loaded at all
-  if( PageIndex < 0 || (unsigned int)PageIndex >= Data.size() || !Data[PageIndex] )
+  if( (unsigned int)PageIndex >= Data.size() || !Data[PageIndex] )
     return false;
 //   std::cout << "freeing page " << PageIndex << std::endl;
   delete [] Data[PageIndex];
-  Data[PageIndex] = 0L;
+  Data[PageIndex] = 0;
   ++NoOfFreePages;
   return true;
 }

@@ -43,11 +43,6 @@ const char *KWrappingROBuffer::dataSet( KSection S ) const
 }
 
 
-char KWrappingROBuffer::datum( int Offset ) const
-{
-  return Data[Offset];
-}
-
 void KWrappingROBuffer::set( const char* D, int L )
 {
   Data = D;

@@ -47,7 +47,7 @@ class KPlainBuffer : public KDataBuffer
     virtual bool prepareRange( KSection Range ) const;
     //virtual KDataBufferIterator *iterator() const;
     virtual const char *dataSet( KSection S ) const;
-    virtual char datum( int Offset ) const;
+    virtual char datum( unsigned int Offset ) const;
     virtual int size() const;
     virtual bool isReadOnly() const;
     virtual bool isModified() const;
@@ -57,6 +57,7 @@ class KPlainBuffer : public KDataBuffer
     virtual int replace( KSection Remove, const char*, int InputLength );
     virtual int move( int DestPos, KSection SourceSection );
     virtual int fill( const char FillChar, int Length = -1, unsigned int Pos = 0 );
+    virtual void setDatum( unsigned int Offset, const char Char );
 
     virtual void setModified( bool M = true );
 
@@ -108,11 +109,13 @@ class KPlainBuffer : public KDataBuffer
 
 inline bool KPlainBuffer::prepareRange( KSection )     const { return true; }
 inline const char *KPlainBuffer::dataSet( KSection S ) const { return &Data[S.start()]; }
-inline char KPlainBuffer::datum( int Offset )          const { return Data[Offset]; }
+inline char KPlainBuffer::datum( unsigned int Offset ) const { return Data[Offset]; }
 inline int KPlainBuffer::size()                        const { return Size; }
 
 inline bool KPlainBuffer::isReadOnly()   const { return ReadOnly; }
 inline bool KPlainBuffer::isModified()   const { return Modified; }
+
+inline void KPlainBuffer::setDatum( unsigned int Offset, const char Char ) { Data[Offset] = Char; }
 
 inline void KPlainBuffer::setReadOnly( bool RO )    { ReadOnly = RO; }
 inline void KPlainBuffer::setModified( bool M )     { Modified = M; }

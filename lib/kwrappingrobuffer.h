@@ -41,7 +41,7 @@ class KWrappingROBuffer : public KReadOnlyBuffer
   public: // KDataBuffer API
     virtual bool prepareRange( KSection Range ) const;
     virtual const char *dataSet( KSection S ) const;
-    virtual char datum( int Offset ) const;
+    virtual char datum( unsigned int Offset ) const;
     virtual int size() const;
     virtual bool isModified() const;
 
@@ -49,6 +49,7 @@ class KWrappingROBuffer : public KReadOnlyBuffer
     virtual int remove( KSection S );
     virtual int replace( KSection S, const char*, int Length );
     virtual int fill( const char FillChar, int, int );
+    virtual void setDatum( unsigned int Offset, const char Char );
 
     virtual void setModified( bool M );
 
@@ -70,11 +71,13 @@ inline int KWrappingROBuffer::size() const { return Size; }
 inline bool KWrappingROBuffer::isModified() const { return Modified; }
 
 inline bool KWrappingROBuffer::prepareRange( KSection ) const     { return true; }
+inline char KWrappingROBuffer::datum( unsigned int Offset ) const { return Data[Offset]; }
 
 inline int KWrappingROBuffer::insert( int, const char*, int )        { return 0; }
 inline int KWrappingROBuffer::remove( KSection )                     { return 0; }
 inline int KWrappingROBuffer::replace( KSection, const char*, int )  { return 0; }
 inline int KWrappingROBuffer::fill( const char , int, int )          { return 0; }
+inline void KWrappingROBuffer::setDatum( unsigned int, const char )  {}
 
 inline void KWrappingROBuffer::setModified( bool M )  { Modified = M; }
 }

@@ -41,7 +41,7 @@ class KFixedSizeBuffer : public KDataBuffer
   public: // KDataBuffer API
     virtual bool prepareRange( KSection Range ) const;
     virtual const char *dataSet( KSection S ) const;
-    virtual char datum( int Offset ) const;
+    virtual char datum( unsigned int Offset ) const;
     virtual int size() const;
     virtual bool isReadOnly() const;
     virtual bool isModified() const;
@@ -51,6 +51,7 @@ class KFixedSizeBuffer : public KDataBuffer
     virtual int replace( KSection Remove, const char*, int InputLength );
     virtual int move( int DestPos, KSection SourceSection );
     virtual int fill( const char FillChar, int Length = -1, unsigned int Pos = 0 );
+    virtual void setDatum( unsigned int Offset, const char Char );
 
     virtual void setModified( bool M = true );
 
@@ -92,9 +93,10 @@ class KFixedSizeBuffer : public KDataBuffer
 inline bool KFixedSizeBuffer::prepareRange( KSection ) const { return true; }
 inline const char *KFixedSizeBuffer::dataSet( KSection S ) const { return &Data[S.start()]; }
 
-inline char KFixedSizeBuffer::datum( int Offset ) const { return Data[Offset]; }
+inline char KFixedSizeBuffer::datum( unsigned int Offset ) const { return Data[Offset]; }
 inline int KFixedSizeBuffer::size() const  { return Size; }
 
+inline void KFixedSizeBuffer::setDatum( unsigned int Offset, const char Char ) { Data[Offset] = Char; }
 
 inline bool KFixedSizeBuffer::isReadOnly()   const { return ReadOnly; }
 inline bool KFixedSizeBuffer::isModified()   const { return Modified; }
