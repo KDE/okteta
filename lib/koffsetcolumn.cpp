@@ -50,7 +50,7 @@ void KOffsetColumn::paintLine( QPainter *P, int Line )
 }
 
 
-void KOffsetColumn::paintFirstLine( QPainter *P, KPixelX, KPixelX, int FirstLine )
+void KOffsetColumn::paintFirstLine( QPainter *P, KPixelXs, int FirstLine )
 {
   PaintLine = FirstLine;
   paintLine( P, PaintLine++ );
@@ -62,6 +62,15 @@ void KOffsetColumn::paintNextLine( QPainter *P )
   paintLine( P, PaintLine++ );
 }
 
+
+
+void KOffsetColumn::paintEmptyColumn( QPainter *P, KPixelXs Xs, KPixelYs Ys )
+{
+  Xs.restrictTo( XSpan );
+
+  const QColor &ButtonColor = View->colorGroup().button();
+  P->fillRect( Xs.start(), Ys.start(), Xs.width(), Ys.width(), QBrush(ButtonColor,Qt::SolidPattern) );
+}
 
 void KOffsetColumn::setFormat( KOffsetFormat::KFormat F )
 {

@@ -73,9 +73,9 @@ class KColumnsView : public QScrollView
 
   public: // services
     /** gives the index of the line that would include y in pixel coord.
-      * y needs not be inside the total height.
+      * y is not forced to be inside the total height.
       */
-    int lineAt( KPixelY y ) const;
+    uint lineAt( KPixelY y ) const;
     /** gives the index of the first and the last line that would be visible
       * these lines might not contain anything
       */
@@ -143,9 +143,9 @@ class KColumnsView : public QScrollView
 };
 
 
-inline int KColumnsView::noOfLines()         const { return NoOfLines; }
-inline KPixelY KColumnsView::lineHeight()    const { return LineHeight; }
-inline int KColumnsView::lineAt( KPixelY y ) const { return LineHeight ? y / LineHeight : -1; }
+inline int KColumnsView::noOfLines()          const { return NoOfLines; }
+inline KPixelY KColumnsView::lineHeight()     const { return LineHeight; }
+inline uint KColumnsView::lineAt( KPixelY y ) const { return LineHeight!=0 ? y / LineHeight : 0; }
 inline KSection KColumnsView::visibleLines() const
 {
   KPixelY cy = contentsY();

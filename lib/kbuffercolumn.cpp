@@ -366,20 +366,16 @@ void KBufferColumn::preparePainting( KPixelX cx, KPixelX cw )
 }
 
 
-void KBufferColumn::paintFirstLine( QPainter *P, KPixelX cx, KPixelX cw, int FirstLine )
+void KBufferColumn::paintFirstLine( QPainter *P, KPixelXs Xs, int FirstLine )
 {
+  Xs.restrictTo( XSpan );
   // translate
-  cx -= x();
+  Xs.moveBy( -x() );
 
-  // calculating the most right relative x to paint
-  KPixelX LastX = cx + cw - 1;
-  if( LastX >= width() )
-    LastX = width()-1;
 
-  // calculating the most left relative x to paint
-  PaintX = cx > 0 ? cx : 0;
-  // calculating the width
-  PaintW = LastX - PaintX + 1;
+  // store the values
+  PaintX = Xs.start();
+  PaintW = Xs.width();
 
   // get line positions to paint
   PaintPositions = posOfRelX( PaintX, PaintW );

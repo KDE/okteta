@@ -36,8 +36,10 @@ class KOffsetColumn : public KColumn
     virtual ~KOffsetColumn();
 
   public:  // KColumn API
-    virtual void paintFirstLine( QPainter *P, KPixelX cx, KPixelX cw, int FirstLine );
+    virtual void paintFirstLine( QPainter *P, KPixelXs Xs, int FirstLine );
     virtual void paintNextLine( QPainter *P );
+    virtual void paintEmptyColumn( QPainter *P, KPixelXs Xs, KPixelYs Ys );
+
 
   public:
     void setFirstLineOffset( int FLO );

@@ -35,8 +35,9 @@ class KBorderColumn : public KColumn
     ~KBorderColumn();
 
   public: // KColumn-API
-    virtual void paintFirstLine( QPainter *P, KPixelX cx, KPixelX cw, int FirstLine );
+    virtual void paintFirstLine( QPainter *P, KPixelXs Xs, int FirstLine );
     virtual void paintNextLine( QPainter *P );
+    virtual void paintEmptyColumn( QPainter *P, KPixelXs Xs, KPixelYs Ys );
 
   protected:
    virtual void paintLine( QPainter *P );
@@ -47,4 +48,5 @@ class KBorderColumn : public KColumn
 };
 
 }
+
 #endif

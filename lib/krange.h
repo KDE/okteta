@@ -72,6 +72,12 @@ class KRange
     void extendStartTo( T Limit )  { if( Start > Limit ) Start = Limit; }
     /** extends the section's end to Limit. If the section is invalid the behaviour is undefined */
     void extendEndTo( T Limit )    { if( End < Limit ) End = Limit; }
+    /** moves the section defined by a new start. If the section is invalid the behaviour is undefined */
+    void moveToStart( T S ) { End += S - Start; Start = S; }
+    /** moves the section defined by a new start. If the section is invalid the behaviour is undefined */
+    void moveToEnd( T E )   { Start += E - End; End = E; }
+    /** moves the section by D. If the section is invalid the behaviour is undefined */
+    void moveBy( T D )      { Start += D; End += D; }
 
   public: // value access
     /** @return start */

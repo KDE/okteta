@@ -138,97 +138,96 @@ void KColumnsView::repaintView()
 
 void KColumnsView::paintEmptyArea( QPainter *P, int cx ,int cy, int cw, int ch)
 {
-  // is the viewport (content) totally filled?
-  if( totalWidth() >= viewport()->width() && totalHeight() >= viewport()->height() )
-    return;
-
-  // Region of the rect we should draw
-  contentsToViewport( cx, cy, cx, cy );
-  QRegion Region( QRect(cx,cy,cw,ch) );
-  // Subtract all the columns from it
-  Region = Region.subtract( QRect(contentsToViewport( QPoint(0,0) ),totalViewSize()) );
-
-  // finally draw the rectangles (transformed as needed)
-  QMemArray<QRect> Rectangles = Region.rects();
-  const QBrush &Brush = backgroundBrush();
-  for( int i=0; i<(int)Rectangles.count(); ++i )
-    P->fillRect( Rectangles[i], Brush );
+  P->fillRect( cx, cy, cw, ch, backgroundBrush() );
 }
 
 
 void KColumnsView::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
 {
   //kdDebug(1501) << "drawContents(" << cx<<","<<cw<<"#"<<cy<<","<<ch<<")\n";
-  // calculate affected lines
-  int FirstLine = lineAt( cy );
-
+  KPixelXs AffectedXs( cx, cw, true );
   // content to be shown?
-  if( NoOfLines > 0 && FirstLine != -1 && cx < TotalWidth )
+  if( AffectedXs.startsBefore(TotalWidth) )
   {
-    // correct bounds
-    int LastLine = lineAt( cy + ch - 1 );
-    if( LastLine < 0 || LastLine >= NoOfLines )
-      LastLine = NoOfLines - 1;
+    KPixelYs AffectedYs( cy, ch, true );
 
     // collect affected columns
     QPtrList<KColumn> RedrawColumns;
     for( KColumn *C=Columns.first(); C; C=Columns.next() )
-      if( C->isVisible() && C->overlaps(cx,cx+cw-1) )
+      if( C->isVisible() && C->overlaps(AffectedXs) )
         RedrawColumns.append( C );
 
-    if( !RedrawColumns.isEmpty() )
+    // any lines to be drawn?
+    if( NoOfLines > 0 )
     {
-      QPainter Paint;
-      Paint.begin( &LineBuffer, this );
+      // calculate affected lines
+      KSection AffectedLines = visibleLines( AffectedYs );
+      AffectedLines.restrictEndTo( NoOfLines - 1 );
 
-      // starting painting with the first line
-      KColumn *C = RedrawColumns.first();
-      Paint.translate( C->x(), 0 );
-
-      for( ; C; C=RedrawColumns.next() )
+      if( AffectedLines.isValid() )
       {
-        C->paintFirstLine( &Paint, cx, cw, FirstLine );
-        Paint.translate( C->width(), 0 );
-      }
-
-      // Go through the other lines
-      KPixelY y = FirstLine*LineHeight;
-      int l = FirstLine;
-      while( true )
-      {
-        Paint.end();
-        P->drawPixmap( cx, y, LineBuffer, cx, 0, cw, LineHeight ); // bitBlt directly impossible: lack of real coord
-
-        // copy to screen
-//        bitBlt( viewport(), cx - contentsX(), y - contentsY(),
-//                &LineBuffer, cx, 0, cw, LineHeight );
-
-        ++l;
-        y += LineHeight;
-
-        if( l > LastLine )
-          break;
-
-        // to avoid flickers we first paint to the linebuffer
+        QPainter Paint;
         Paint.begin( &LineBuffer, this );
 
+        // starting painting with the first line
         KColumn *C = RedrawColumns.first();
         Paint.translate( C->x(), 0 );
 
         for( ; C; C=RedrawColumns.next() )
         {
-          C->paintNextLine( &Paint );
+          C->paintFirstLine( &Paint, AffectedXs, AffectedLines.start() );
           Paint.translate( C->width(), 0 );
         }
 
-        if( HorizontalGrid && cx < TotalWidth )
-          Paint.drawLine( cx, LineHeight-1, TotalWidth-1, LineHeight-1 );  // TODO: use a additional TotalHeight?
+        // Go through the other lines
+        KPixelY y = AffectedLines.start() * LineHeight;
+        int l = AffectedLines.start();
+        while( true )
+        {
+          Paint.end();
+          P->drawPixmap( cx, y, LineBuffer, cx, 0, cw, LineHeight ); // bitBlt directly impossible: lack of real coord
+
+          // copy to screen
+//        bitBlt( viewport(), cx - contentsX(), y - contentsY(),
+//                &LineBuffer, cx, 0, cw, LineHeight );
+
+          ++l;
+          y += LineHeight;
+
+          if( l > AffectedLines.end() )
+            break;
+
+          // to avoid flickers we first paint to the linebuffer
+          Paint.begin( &LineBuffer, this );
+
+          KColumn *C = RedrawColumns.first();
+          Paint.translate( C->x(), 0 );
+
+          for( ; C; C=RedrawColumns.next() )
+          {
+            C->paintNextLine( &Paint );
+            Paint.translate( C->width(), 0 );
+          }
+
+          if( HorizontalGrid && cx < TotalWidth )
+            Paint.drawLine( cx, LineHeight-1, TotalWidth-1, LineHeight-1 );  // TODO: use a additional TotalHeight?
+        }
       }
+    }
+
+    // draw empty columns?
+    AffectedYs.setStart( totalHeight() );
+    if( AffectedYs.isValid() )
+    {
+      for( KColumn *C = RedrawColumns.first(); C; C=RedrawColumns.next() )
+        C->paintEmptyColumn( P, AffectedXs, AffectedYs );
     }
   }
 
   // Paint empty rects
-  paintEmptyArea( P, cx, cy, cw, ch );
+  AffectedXs.setStart( TotalWidth );
+  if( AffectedXs.isValid() )
+    paintEmptyArea( P, AffectedXs.start(), cy, AffectedXs.width(), ch );
 }
 
 // Implemented to get rid of a compiler warning

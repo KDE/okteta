@@ -1994,7 +1994,7 @@ void KHexEdit::repaintChanged()
   KBufferColumn *C = ValueColumn;
   while( true )
   {
-    if( C->isVisible() && C->overlaps(cx,cx+cw-1) )
+    if( C->isVisible() && C->overlaps(KPixelXs(cx,cw)) )
     {
       RepaintColumns.append( C );
       C->preparePainting( cx, cw );

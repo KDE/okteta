@@ -19,7 +19,9 @@
 #define KHE_KCOLUMN_H
 
 
+// lib specific
 #include "kadds.h"
+#include "ksection.h"
 
 class QPainter;
 
@@ -53,12 +55,14 @@ class KColumn
       * @param cw
       * @param FirstLine no of the first of the range of lines to paint
       */
-    virtual void paintFirstLine( QPainter *P, KPixelX cx, KPixelX cw, int FirstLine );
+    virtual void paintFirstLine( QPainter *P, KPixelXs Xs, int FirstLine );
     /** the actual painting call for a column's line.
       * The default implementation simply paints the background
       */
     virtual void paintNextLine( QPainter *P );
 
+    /** */
+    virtual void paintEmptyColumn( QPainter *P, KPixelXs Xs, KPixelYs Ys );
 
   public: // modification access
     /** sets starting point of the column */
@@ -82,7 +86,7 @@ class KColumn
 
   public: // functional logic
     /** true if column overlaps with pixels between x-positions x1, x2 */
-    bool overlaps( KPixelX x1, KPixelX x2 ) const;
+    bool overlaps( KPixelXs Xs ) const;
 
   protected:
     /** sets width of the column */
@@ -99,29 +103,23 @@ class KColumn
     /** buffered value */
     KPixelY LineHeight;
 
-  private:
     /** left offset x in pixel */
-    KPixelX m_X;
-    /** most right x in pixel */
-    KPixelX m_RightX;
-    /** total width in pixel */
-    KPixelX m_Width;
+    KPixelXs XSpan;
 };
 
 
-inline KPixelX KColumn::x()            const { return m_X; }
-inline KPixelX KColumn::rightX()       const { return m_RightX; }
-inline KPixelX KColumn::width()        const { return m_Width; }
+inline KPixelX KColumn::x()            const { return XSpan.start(); }
+inline KPixelX KColumn::rightX()       const { return XSpan.end(); }
+inline KPixelX KColumn::width()        const { return XSpan.width(); }
 inline bool    KColumn::isVisible()    const { return Visible; }
-inline KPixelX KColumn::visibleWidth() const { return Visible ? m_Width : 0; }
+inline KPixelX KColumn::visibleWidth() const { return Visible ? XSpan.width(): 0; }
 
-inline void KColumn::setX( KPixelX NewX )       { m_X = NewX; m_RightX = m_X+m_Width-1; }
-inline void KColumn::setWidth( KPixelX W )      { m_Width = W; m_RightX = m_X+m_Width-1; }
+inline void KColumn::setX( KPixelX NewX )       { XSpan.moveToStart( NewX ); }
+inline void KColumn::setWidth( KPixelX W )      { XSpan.setEndByWidth( W ); }
 inline void KColumn::setVisible( bool V )       { Visible = V; }
 inline void KColumn::setLineHeight( KPixelY H ) { LineHeight = H; }
 
-inline bool KColumn::overlaps( KPixelX x1, KPixelX x2 ) const
-{ return m_X <= x2 && m_RightX >= x1; }
+inline bool KColumn::overlaps( KPixelXs Xs ) const { return XSpan.overlaps(Xs); }
 
 }
 

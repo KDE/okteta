@@ -55,7 +55,7 @@ class KBufferColumn : public KColumn
 
 
   public: // KColumn-API
-    virtual void paintFirstLine( QPainter *P, KPixelX cx, KPixelX cw, int FirstLine );
+    virtual void paintFirstLine( QPainter *P, KPixelXs Xs, int FirstLine );
     virtual void paintNextLine( QPainter *P );
 
   public:

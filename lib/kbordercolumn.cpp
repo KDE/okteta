@@ -57,7 +57,7 @@ void KBorderColumn::paintLine( QPainter *P )
 }
 
 
-void KBorderColumn::paintFirstLine( QPainter *P, KPixelX , KPixelX , int )
+void KBorderColumn::paintFirstLine( QPainter *P, KPixelXs , int )
 {
   paintLine( P );
 }
@@ -66,4 +66,17 @@ void KBorderColumn::paintFirstLine( QPainter *P, KPixelX , KPixelX , int )
 void KBorderColumn::paintNextLine( QPainter *P )
 {
   paintLine( P );
+}
+
+void KBorderColumn::paintEmptyColumn( QPainter *P, KPixelXs Xs, KPixelYs Ys )
+{
+  KColumn::paintEmptyColumn( P,Xs,Ys );
+
+  KPixelX LX = x() + LineX;
+  if( Middle && Xs.includes(LX) )
+  {
+    int GridColor = View->style().styleHint( QStyle::SH_Table_GridLineColor, View );
+    P->setPen( GridColor != -1 ? (QRgb)GridColor : View->colorGroup().mid() );
+    P->drawLine( LX, Ys.start(), LX, Ys.end() ) ;
+  }
 }

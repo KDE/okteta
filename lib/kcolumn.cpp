@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
-
+ 
 // qt specific
 #include <qpainter.h>
 // lib specific
@@ -28,15 +28,13 @@ KColumn::KColumn( KColumnsView *V )
  : View( V ),
    Visible( true ),  //TODO: would false be better?
    LineHeight( V->lineHeight() ),
-   m_X( 0 ),
-   m_RightX( 0 ),
-   m_Width( 0 )
+   XSpan( 0,0,true )
 {
   V->addColumn( this );
 }
 
 
-void KColumn::paintFirstLine( QPainter *P, KPixelX , KPixelX, int /*FirstLine*/ )
+void KColumn::paintFirstLine( QPainter *P, KPixelXs, int /*FirstLine*/ )
 {
   paintBlankLine( P );
 }
@@ -51,8 +49,12 @@ void KColumn::paintNextLine( QPainter *P )
 void KColumn::paintBlankLine( QPainter *P ) const
 {
   if( LineHeight > 0 )
-  {
-    const QBrush &Brush = View->backgroundBrush();
-    P->fillRect( 0,0,width(),LineHeight, Brush );
-  }
+    P->fillRect( 0,0,width(),LineHeight, View->backgroundBrush() );
+}
+
+
+void KColumn::paintEmptyColumn( QPainter *P, KPixelXs Xs, KPixelYs Ys )
+{
+  Xs.restrictTo( XSpan );
+  P->fillRect( Xs.start(), Ys.start(), Xs.width(), Ys.width(), View->backgroundBrush() );
 }
