@@ -77,6 +77,9 @@ class KBufferCursor
     bool operator==( const KBufferCursor &c ) const;
     bool operator!=( const KBufferCursor &c ) const { return !(*this == c); }
 
+  public:
+    void setNewPosAllowed( bool NPA );
+
   public: // state value access
     int index() const;
     int pos() const;
@@ -88,11 +91,16 @@ class KBufferCursor
       * Attention: this could be outside the data's range if the cursor is behind the last byte!
       */
     int trueIndex() const;
+    /** returns the true index if it is valid. That is if the cursor is tagged as "behind" the actual index
+      * it's true index is the next one. If the index is outside the data's range -1 is returned
+      */
+    int validIndex() const;
 
     int digitPos() const;
 
     bool isValid() const;
     bool insideByte() const;
+    bool newPosAllowed() const;
 
   public: // index calculation service
     /** returns the index at the start of the cursor's line */
@@ -131,7 +139,7 @@ class KBufferCursor
     bool atStart() const;
     bool atEnd() const;
     /** could only be true in InsertMode: Cursor is behind the last byte */
-    bool behindEnd() const;
+    bool isBehindEnd() const;
     bool atLineStart() const;
     bool atLineEnd() const;
 
@@ -152,7 +160,10 @@ class KBufferCursor
     /** tells whether the cursor is actually behind the actual position.
       * This is used for selection to the end of a line or the whole buffer.
       */
-    bool Behind;
+    bool Behind : 1;
+
+    /** tells whether there could be a position behind the end of the layout */
+    bool NewPosAllowed : 1;
 
     /** Position inside a byte; -1 if outside */
     int DigitPos;

@@ -669,38 +669,45 @@ void KBufferColumn::drawByte( QPainter *P, const char Byte, const QColor &Color 
 }
 
 
+// TODO: think about if any of the three cursor related functions needs more than to know about which byte...
+// perhaps sometimes there will be a grammar
 void KBufferColumn::paintByte( QPainter *P, int Index )
 {
-  char Byte = Buffer->datum( Index );
+  char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : ' ';
 
   const QColorGroup &CG = View->colorGroup();
   QColor Color = CG.text();
-  QBrush Brush( Qt::SolidPattern );
-  if( Ranges->markingIncludes(Index) )
+  QBrush Brush( CG.base(), Qt::SolidPattern );
+
+  if( Index > -1 )
   {
-    Brush.setColor( CG.text() );
-    Color = CG.base();
-  }
-  else if( Ranges->selectionIncludes(Index) )
-  {
-    Brush.setColor( CG.highlight() );
-    Color = CG.highlightedText();
-  }
-  else
-  {
-    Brush.setColor( CG.base() );
-    Color = colorForByte( Byte );
+    if( Ranges->markingIncludes(Index) )
+    {
+      Brush.setColor( CG.text() );
+      Color = CG.base();
+    }
+    else if( Ranges->selectionIncludes(Index) )
+    {
+      Brush.setColor( CG.highlight() );
+      Color = CG.highlightedText();
+    }
+    else
+    {
+      Brush.setColor( CG.base() );
+      Color = colorForByte( Byte );
+    }
   }
 
   P->fillRect( 0,0,ByteWidth,LineHeight, Brush );
 
-  drawByte( P, Byte, Color );
+  if( Index > -1 )
+    drawByte( P, Byte, Color );
 }
 
 
 void KBufferColumn::paintFrame( QPainter *P, int Index )
 {
-  char Byte = Buffer->datum( Index );
+  char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : ' ';
   P->setPen( colorForByte(Byte) );
   P->drawRect( 0, 0, ByteWidth, LineHeight );
 }
@@ -708,7 +715,7 @@ void KBufferColumn::paintFrame( QPainter *P, int Index )
 
 void KBufferColumn::paintCursor( QPainter *P, int Index )
 {
-  char Byte = Buffer->datum( Index );
+  char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : ' ';
   P->fillRect( 0, 0, ByteWidth, LineHeight, QBrush(colorForByte(Byte),Qt::SolidPattern) );
 }
 

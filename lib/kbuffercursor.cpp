@@ -15,6 +15,8 @@
  ***************************************************************************/
 
 
+#include <iostream>
+
 // app specific
 #include "kbufferlayout.h"
 #include "kbuffercursor.h"
@@ -25,7 +27,8 @@ KBufferCursor::KBufferCursor( const KBufferLayout *L )
  : Layout( L ),
    Index( -1 ),
    Coord( 0, 0 ),
-   Behind( false )
+   Behind( false ),
+   NewPosAllowed( false )
 {
 }
 
@@ -35,6 +38,8 @@ KBufferCursor::KBufferCursor( const KBufferCursor &C )
   Index = C.Index;
   Coord = C.Coord;
   Behind = C.Behind;
+
+  NewPosAllowed = C.NewPosAllowed;
 }
 
 
@@ -48,6 +53,8 @@ KBufferCursor &KBufferCursor::operator=( const KBufferCursor &C )
   Coord = C.Coord;
   Behind = C.Behind;
 
+  NewPosAllowed = C.NewPosAllowed;
+
   return *this;
 }
 
@@ -57,6 +64,29 @@ bool KBufferCursor::operator==( const KBufferCursor &C ) const
   return Index == C.Index && Behind == C.Behind && DigitPos == C.DigitPos;
 }
 
+void KBufferCursor::setNewPosAllowed( bool NPA )
+{
+  NewPosAllowed = NPA;
+  // reposition Cursor
+  if( trueIndex() > Layout->length()-1 && Coord.pos() < Layout->noOfBytesPerLine()-1 )
+  {
+    if( NewPosAllowed )
+    {
+      Behind = false;
+      ++Index;
+      Coord.goRight();
+    }
+    else
+    {
+      Behind = true;
+      --Index;
+      Coord.goLeft();
+    }
+  }
+}
+
+
+int KBufferCursor::validIndex()     const { return Index<Layout->length() ? Index : -1; }
 
 void KBufferCursor::gotoPreviousByte()
 {
@@ -95,10 +125,29 @@ void KBufferCursor::gotoPreviousByte( int D )
 
 void KBufferCursor::gotoNextByte()
 {
-  if( Index == Layout->length()-1 )
+  if( NewPosAllowed )
   {
-    Behind = true;
-    return;
+    if( Index == Layout->length()-1 )
+    {
+      if( Coord.pos() < Layout->noOfBytesPerLine()-1 )
+      {
+        ++Index;
+        Coord.goRight();
+      }
+      else
+        Behind = true;
+      return;
+    }
+    else if( Index == Layout->length() )
+      return;
+  }
+  else
+  {
+    if( Index == Layout->length()-1 )
+    {
+      Behind = true;
+      return;
+    }
   }
 
   ++Index;
@@ -174,12 +223,7 @@ void KBufferCursor::gotoDown()
     Coord.goDown();
     // behind End?
     if( Coord.isLaterInLineThan(Layout->final()) )
-    {
-      // set to end
-      Coord.setPos( Layout->finalPos() );
-      Index = Layout->length() - 1;
-      Behind = true;
-    }
+      gotoEnd();
     else
       Index += Layout->noOfBytesPerLine();
   }
@@ -210,7 +254,15 @@ void KBufferCursor::gotoLineEnd()
 {
   Index = Layout->indexAtLineEnd( Coord.line() );
   Coord.goLineEnd( Layout->noOfBytesPerLine()-1, Layout->final() );
-  Behind = true;
+
+  if( NewPosAllowed && Coord.pos() < Layout->noOfBytesPerLine()-1 )
+  {
+    ++Index;
+    Coord.goRight();
+    Behind = false;
+  }
+  else
+    Behind = true;
 }
 
 
@@ -226,7 +278,16 @@ void KBufferCursor::gotoEnd()
 {
   Index = Layout->length()-1;
   Coord = Layout->final();
-  Behind = true;
+
+  if( NewPosAllowed && (Coord.pos() < Layout->noOfBytesPerLine()-1) )
+  {
+    ++Index;
+    Coord.goRight();
+    Behind = false;
+
+  }
+  else
+    Behind = true;
 }
 
 
@@ -242,7 +303,15 @@ void KBufferCursor::gotoCCoord( const KBufferCoord &C )
 {
   Coord = Layout->correctCoord( C );
   Index = Layout->indexAtCCoord( Coord );
-  Behind = C > Coord;
+  if(  C > Coord )
+  {
+    if( NewPosAllowed && Coord.pos() < Layout->noOfBytesPerLine()-1 )
+      ++Index;
+    else
+      Behind = true;
+  }
+  else
+    Behind = false;
 }
 
 
@@ -312,9 +381,9 @@ bool KBufferCursor::atEnd() const
   return Index == Layout->length() - 1;
 }
 
-/*inline*/ bool KBufferCursor::behindEnd() const
+bool KBufferCursor::isBehindEnd() const
 {
-  return Index == Layout->length();
+  return trueIndex() >= Layout->length();
 }
 
 

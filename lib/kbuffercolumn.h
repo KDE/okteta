@@ -59,9 +59,17 @@ class KBufferColumn : public KColumn
   public:
     void paintLine( QPainter *P, int Line );
     void paintPositions( QPainter *P, int Line, KSection Positions );
+    /** paints a cursor based on the type of the byte.
+      * @param Index Index of the byte to paint the cursor for. If -1 a space is used as char.
+      */
     void paintCursor( QPainter *P, int Index );
+    /** paints the byte with background.
+      * @param Index Index of the byte to paint. If -1 only the background is painted.
+      */
     void paintByte( QPainter *P, int Index );
-    /** paints a frame to the char*/
+    /** paints a frame to the char.
+      * @param Index Index of the byte to paint the frame for. If -1 a space is used as char.
+      */
     void paintFrame( QPainter *P, int Index );
 
   public: // modification access

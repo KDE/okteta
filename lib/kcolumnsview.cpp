@@ -14,8 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
- 
-#include <iostream>
+
+// #include <iostream>
 
 #include <qpainter.h>
 
@@ -50,14 +50,12 @@ KColumnsView::~KColumnsView()
 
 void KColumnsView::setNoOfLines( int NewNoOfLines )
 {
-  std::cout<<"NoOfLines"<<NewNoOfLines<<std::endl;
   NoOfLines = NewNoOfLines;
 }
 
 
 void KColumnsView::setLineHeight( KPixelY LH )
 {
-  std::cout<<"LineHeight"<<LH<<std::endl;
   LineHeight = LH;
   for( KColumn *C=Columns.first(); C; C=Columns.next() )
     C->setLineHeight( LineHeight );
@@ -93,7 +91,6 @@ void KColumnsView::updateLineBufferSize()
 int KColumnsView::noOfLinesPerPage() const
 {
   int NoOfLinesPerPage = (visibleHeight()-1) / LineHeight; // -1 ensures to get always the last visible line
-  std::cout << "calc NoLpP:"<<NoOfLinesPerPage<<"="<<visibleHeight()-1<<"/"<<LineHeight<<std::endl;
 
   if( NoOfLinesPerPage == 0 )
     // ensure to move down at least one line
@@ -155,8 +152,6 @@ void KColumnsView::paintEmptyArea( QPainter *P, int cx ,int cy, int cw, int ch)
 
 void KColumnsView::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
 {
-//   std::cout << "drawContents" << std::endl;
-
   // calculate affected lines
   int FirstLine = lineAt( cy );
 
@@ -168,9 +163,6 @@ void KColumnsView::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
     if( LastLine < 0 || LastLine >= NoOfLines )
       LastLine = NoOfLines - 1;
 
-//   std::cout << "drawContents" << "NoOfLines" << NoOfLines
-//             << "FirstLine" << FirstLine << "LastLine" << LastLine
-//             << "LineHeight" << LineHeight << std::endl;
     // collect affected columns
     QList<KColumn> RedrawColumns;
     for( KColumn *C=Columns.first(); C; C=Columns.next() )

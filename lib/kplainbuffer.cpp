@@ -63,8 +63,12 @@ KPlainBuffer::~KPlainBuffer()
 int KPlainBuffer::insert( int Pos, const char* D, int Length )
 {
   // check all parameters
-  if( Pos >= Size || Length == 0 )
+  if( Length == 0 )
     return 0;
+
+  // correct for appending
+  if( Pos > Size )
+    Pos = Size;
 
   int NewSize = Size + Length;
   // check if buffer does not get to big TODO: make algo simplier and less if else

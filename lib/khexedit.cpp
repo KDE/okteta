@@ -153,11 +153,14 @@ void KHexEdit::setOverwriteMode( bool OM )
     return;
 
   OverWrite = OM;
-  if( !CursorHidden )
-  {
+
+  bool NCH = !CursorHidden;
+  if( NCH )
     pauseCursorBlinking();
+  BufferCursor->setNewPosAllowed( !OverWrite );
+  if( NCH )
     unpauseCursorBlinking();
-  }
+
   emit cutAvailable( !OverWrite && BufferRanges->hasSelection() );
 }
 
@@ -349,7 +352,7 @@ void KHexEdit::fitInLine()
   {
     int FittingBytesPerLine = fittingBytesPerLine( size() );
 
-    std::cout<<"FitBpL"<<FittingBytesPerLine<<std::endl;
+//     std::cout<<"FitBpL"<<FittingBytesPerLine<<std::endl;
 
     // changes?
     if( BufferLayout->setNoOfBytesPerLine(FittingBytesPerLine) )
@@ -664,7 +667,7 @@ void KHexEdit::insert( const QByteArray &D )
       // replacing the normal data, at least until the end
       KSection Section( BufferCursor->trueIndex(), D.size(), false );
       Section.restrictEndTo( BufferLayout->length()-1 );
-      if( Section.isValid() )
+      if( Section.isValid() && !BufferCursor->isBehind() )
       {
         int W = DataBuffer->replace( Section, D.data(), Section.width() );
         BufferCursor->gotoNextByte( W );
@@ -686,6 +689,7 @@ void KHexEdit::insert( const QByteArray &D )
       KSection Selection = BufferRanges->selection();
       int OldLastIndex = BufferLayout->length() - 1;
       int W = DataBuffer->replace( Selection, D.data(), D.size() );
+      updateLength();
       BufferCursor->gotoIndex( Selection.start() + W );
       if( W > 0 )
       {
@@ -701,12 +705,19 @@ void KHexEdit::insert( const QByteArray &D )
     }
     else
     {
+      int InputAfterEnd = BufferCursor->isBehindEnd();
       int OldIndex = BufferCursor->trueIndex();
       int W = DataBuffer->insert( OldIndex, D.data(), D.size() );
+      updateLength();
+      std::cout << "End"<<InputAfterEnd<<" OldIndex"<<OldIndex<<"Pos"<<BufferCursor->pos()<<std::endl;
       if( W > 0 )
       {
-        BufferCursor->gotoNextByte( W );
+        if( InputAfterEnd )
+          BufferCursor->gotoEnd();
+        else
+          BufferCursor->gotoNextByte( W );
         BufferRanges->addChangedRange( KSection(OldIndex,DataBuffer->size()-1) );
+      std::cout << "Behind" << BufferCursor->isBehind()<<"Index"<<BufferCursor->index()<<"Pos"<<BufferCursor->pos()<<std::endl;
       }
       else
       {
@@ -715,7 +726,6 @@ void KHexEdit::insert( const QByteArray &D )
         return;
       }
     }
-    updateLength();
   }
   repaintChanged();
 
@@ -921,7 +931,7 @@ void KHexEdit::unpauseCursorBlinking()
   {
     createCursorPixmaps();
     drawCursor( true );
-  drawFrameCursor( true );
+    drawFrameCursor( true );
 //     std::cout << "Index:" << BufferCursor->index() << "(" << BufferCursor->trueIndex() << ")" <<std::endl;
   }
 }
@@ -929,44 +939,34 @@ void KHexEdit::unpauseCursorBlinking()
 
 void KHexEdit::createCursorPixmaps()
 {
-  if( BufferLayout->length() > 0 )
+  // create CursorPixmaps
+  CursorPixmaps->setSize( activeColumn().byteWidth(), LineHeight );
+
+  int Index = BufferCursor->validIndex();
+
+  QPainter Paint;
+  Paint.begin( &CursorPixmaps->offPixmap(), this );
+  activeColumn().paintByte( &Paint, Index );
+  Paint.end();
+
+  Paint.begin( &CursorPixmaps->onPixmap(), this );
+  activeColumn().paintCursor( &Paint, Index );
+  Paint.end();
+
+  // calculat the shape
+  KPixelX CursorX;
+  KPixelX CursorW;
+  if( BufferCursor->isBehind() )
   {
-    // create CursorPixmaps
-    CursorPixmaps->setSize( activeColumn().byteWidth(), LineHeight );
-
-    int Index = BufferCursor->index();
-
-    QPainter Paint;
-    Paint.begin( &CursorPixmaps->offPixmap(), this );
-    activeColumn().paintByte( &Paint, Index );
-    Paint.end();
-
-    Paint.begin( &CursorPixmaps->onPixmap(), this );
-    activeColumn().paintCursor( &Paint, Index );
-    Paint.end();
-
-    // calculat the shape
-    KPixelX CursorX;
-    KPixelX CursorW;
-    if( BufferCursor->isBehind() )
-    {
-      CursorX = QMAX( 0, CursorPixmaps->onPixmap().width()-3 );
-      CursorW = QMAX( 0, 2 );
-    }
-    else if( OverWrite )
-    {
-      CursorX = 0;
-      CursorW = -1;
-    }
-    else
-    {
-      CursorX = 0;
-      CursorW = 2;
-    }
-    CursorPixmaps->setShape( CursorX, CursorW );
+    CursorX = QMAX( 0, CursorPixmaps->onPixmap().width()-3 );
+    CursorW = 2;
   }
   else
-    CursorPixmaps->setSize( 0, 0 );
+  {
+    CursorX = 0;
+    CursorW = OverWrite ? -1 : 2;
+  }
+  CursorPixmaps->setShape( CursorX, CursorW );
 }
 
 
@@ -1518,14 +1518,14 @@ void KHexEdit::drawFrameCursor( bool FrameOn )
 
   QPainter Painter( viewport() );
   Painter.translate( x,y );
-
-  int Index = BufferCursor->index();
-  if( Index < 0 )
-    return;
+  int Index = BufferCursor->validIndex();
   if( FrameOn )
     inactiveColumn().paintFrame( &Painter, Index );
   else
     inactiveColumn().paintByte( &Painter, Index );
+
+  Painter.fillRect( 0, 0, 10, 10 );
+std::cout<<"Frame"<<FrameOn<<"index"<<Index<<std::endl;
 }
 
 

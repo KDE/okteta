@@ -14,23 +14,13 @@
  *                                                                         *
  ***************************************************************************/
 
- 
-#include <iostream>
+
+// #include <iostream>
 
 #include "kbufferlayout.h"
 
 using namespace KHE;
 
-#if 0
-KBufferLayout::KBufferLayout()
- : NoOfBytesPerLine( 1 ),
-   StartOffset( 0 ),
-   Length( 0 )
-//    Start( 0,0 ),
-//    Final( 0,0 )
-{
-}
-#endif
 
 
 KBufferLayout::KBufferLayout( int NoBpL, int SO, int L )
@@ -74,7 +64,6 @@ bool KBufferLayout::setNoOfBytesPerLine( int N )
 
   NoOfBytesPerLine = N;
 
-  std::cout<<"NoBpL:"<<NoOfBytesPerLine<<std::endl;
   calcStart();
   calcEnd();
   return true;
@@ -83,7 +72,6 @@ bool KBufferLayout::setNoOfBytesPerLine( int N )
 
 void KBufferLayout::setNoOfLinesPerPage( int N )
 {
-  std::cout<<"NoLpP:"<<N<<std::endl;
   NoOfLinesPerPage = N;
 }
 
@@ -100,7 +88,6 @@ bool KBufferLayout::setLength( int L )
   // accepting the value, rejecting < 0
   Length = L;
 
-  std::cout<<"Len:"<<Length<<std::endl;
   calcEnd();
   return true;
 }
@@ -121,8 +108,6 @@ void KBufferLayout::calcEnd()
     ContentCoords.setEnd( KBufferCoord(Length-1+StartOffset,NoOfBytesPerLine,false) );
   else
     ContentCoords.setEnd( KBufferCoord() );
-
-  std::cout <<"Layout::noOfLines: "<<noOfLines() << std::endl;
 }
 
 
