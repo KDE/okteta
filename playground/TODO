@@ -35,16 +35,26 @@ offering input behind the last char
 if the buffer is not filled up and the actual size can be extended show the cursor bnot behind but as a full cursor
 
 
+mark the maximum size of a buffer
+---------------------------------
+for buffers that have been given a maximum size there should be a visual marker for the maximal size
+
+
 KNOWN BUGS
 ==========
 incorrect cursor shape on font change
 when setting new coding the resizestyle is not reflected
-entering a letter at the end of an filled buffer sets the cursor from behind to on the last char, so the next key hit will overwrite this one
-entering a letter on the last char of a filled buffer doesn't put the cursor behind the last char.
-dragging in overwrite mode cuts the dragged array
-Ctrl+Delete on behind the last word should delete until the end
-beim Tastaturselektieren abwärts in die letzte Zeile springt der Cusor auf das letzte, nicht hinter das letzte
 doing the first selection the cursor is redrawm too late (into the selection)
-doesn't get the right nooflinesperpage in the beginning
+
+
+SOLVED:
+Ctrl+Delete on behind the last word should delete until the end
+selecting the whole line doesn't copy it to the mouse buffer
+dragging in overwrite mode cuts the dragged array
 inserting doesn't result in the right to be repainted range (no actually?)
+entering a letter on the last char of a filled buffer doesn't put the cursor behind the last char.
+entering a letter at the end of an filled buffer sets the cursor from behind to on the last char, so the next key hit will overwrite this one
+beim Tastaturselektieren abwärts in die letzte Zeile springt der Cusor auf das letzte, nicht hinter das letzte
+backspace in overwrite mode should move the cursor one to the left instead of remove
+doesn't get the right nooflinesperpage in the beginning
 pos key doesn't result in a jump to the first but the last pos

@@ -101,6 +101,11 @@ class KDataBuffer
       * if no other nonwordchar preceds that of the first byte;
       * if the actual byte is already a nonwordchar the index is returned
       */
+    virtual int indexOfBeforeNextWordStart( int Index, KWordCharType CharType = Readable ) const;
+    /** returns index of the last preceding wordchar byte,
+      * if no other nonwordchar preceds that of the first byte;
+      * if the actual byte is already a nonwordchar the index is returned
+      */
     virtual int indexOfWordStart( int Index, KWordCharType CharType = Readable ) const;
     /** returns index of the last following wordchar byte or,
       * if no other nonwordchar follows, that of the last byte;

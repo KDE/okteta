@@ -173,6 +173,7 @@ void KHexEdit::setDataBuffer( KDataBuffer *B )
 
   fitInLine();
   updateWidths();
+
   BufferLayout->setNoOfLinesPerPage( noOfLinesPerPage() );
 
   // ensure that the widget is readonly if the buffer is TODO
@@ -348,24 +349,22 @@ void KHexEdit::fitInLine()
   {
     int FittingBytesPerLine = fittingBytesPerLine( size() );
 
+    std::cout<<"FitBpL"<<FittingBytesPerLine<<std::endl;
+
     // changes?
     if( BufferLayout->setNoOfBytesPerLine(FittingBytesPerLine) )
       fitToNoOfBytesPerLine();
-    else
-      NoOfLines = BufferLayout->noOfLines();
   }
-  else
-    NoOfLines = BufferLayout->noOfLines();
 }
 
 
 void KHexEdit::fitToNoOfBytesPerLine()
 {
-  NoOfLines = BufferLayout->noOfLines();
-
   offsetColumn().setDelta( BufferLayout->noOfBytesPerLine() );
   hexColumn().resetXBuffer();
   textColumn().resetXBuffer();
+
+  setNoOfLines( BufferLayout->noOfLines() );
 }
 
 
@@ -379,7 +378,7 @@ QSize KHexEdit::minimumSizeHint() const
 {
   // TODO: better minimal width (visibility!)
   return QSize( offsetColumn().visibleWidth()+BorderColumn[0]->visibleWidth()+BorderColumn[1]->visibleWidth()+hexColumn().byteWidth()+textColumn().byteWidth(),
-                lineHeight() + NoOfLines>1? style().pixelMetric(QStyle::PM_ScrollBarExtent):0 );
+                lineHeight() + noOfLines()>1? style().pixelMetric(QStyle::PM_ScrollBarExtent):0 );
 }
 
 
@@ -393,7 +392,10 @@ void KHexEdit::resizeEvent( QResizeEvent *ResizeEvent )
 
     // changes?
     if( BufferLayout->setNoOfBytesPerLine(FittingBytesPerLine) )
+    {
+      setNoOfLines( BufferLayout->noOfLines() );
       updateViewByWidth();
+    }
   }
 
   QScrollView::resizeEvent( ResizeEvent );
@@ -662,9 +664,18 @@ void KHexEdit::insert( const QByteArray &D )
       // replacing the normal data, at least until the end
       KSection Section( BufferCursor->trueIndex(), D.size(), false );
       Section.restrictEndTo( BufferLayout->length()-1 );
-      int W = DataBuffer->replace( Section, D.data(), Section.width() );
-      BufferCursor->gotoNextByte( W );
-      BufferRanges->addChangedRange( Section );
+      if( Section.isValid() )
+      {
+        int W = DataBuffer->replace( Section, D.data(), Section.width() );
+        BufferCursor->gotoNextByte( W );
+        BufferRanges->addChangedRange( Section );
+      }
+      else
+      {
+        unpauseCursorBlinking();
+        emit inputFailed();
+        return;
+      }
     }
   }
   else
@@ -695,7 +706,13 @@ void KHexEdit::insert( const QByteArray &D )
       if( W > 0 )
       {
         BufferCursor->gotoNextByte( W );
-        BufferRanges->addChangedRange( KSection(OldIndex,W,false) );
+        BufferRanges->addChangedRange( KSection(OldIndex,DataBuffer->size()-1) );
+      }
+      else
+      {
+        unpauseCursorBlinking();
+        emit inputFailed();
+        return;
       }
     }
     updateLength();
@@ -717,7 +734,8 @@ void KHexEdit::removeSelectedData()
 
   BufferRanges->removeFurtherSelections();
 
-  removeData( Selection );
+  if( !OverWrite )
+    removeData( Selection );
   BufferRanges->removeSelection();
 
   repaintChanged();
@@ -762,8 +780,7 @@ void KHexEdit::removeData( KSection Indizes )
 void KHexEdit::updateLength()
 {
   BufferLayout->setLength( DataBuffer->size() );
-  NoOfLines = BufferLayout->noOfLines();
-  resizeContents( totalWidth(), totalHeight() );
+  setNoOfLines( BufferLayout->noOfLines() );
 }
 
 
@@ -812,19 +829,21 @@ int KHexEdit::indexByPoint( const QPoint &Point ) const
 }
 
 
+void KHexEdit::showEvent( QShowEvent *e )
+{
+    KColumnsView::showEvent( e );
+    BufferLayout->setNoOfLinesPerPage( noOfLinesPerPage() );
+}
+
+
 bool KHexEdit::eventFilter( QObject *O, QEvent *E )
 {
   if( O == this || O == viewport() )
   {
     if( E->type() == QEvent::FocusIn )
-    {
-
       startCursorBlinking();
-    }
     else if( E->type() == QEvent::FocusOut )
-    {
       stopCursorBlinking();
-    }
   }
 
 //   if( O == this && E->type() == QEvent::PaletteChange )
@@ -1172,18 +1191,21 @@ void KHexEdit::moveCursor( KMoveAction Action, bool Select )
 void KHexEdit::moveCursor( KMoveAction Action )
 {
   resetInputContext();
-  int NewIndex;
   switch( Action )
   {
     case MoveBackward:     BufferCursor->gotoPreviousByte(); break;
-    case MoveWordBackward: NewIndex = BufferCursor->trueIndex();
-                           NewIndex = DataBuffer->indexOfPreviousWordStart( NewIndex, KDataBuffer::Readable );
-                           BufferCursor->gotoIndex( NewIndex );
+    case MoveWordBackward: {
+                             int NewIndex = BufferCursor->trueIndex();
+                             NewIndex = DataBuffer->indexOfPreviousWordStart( NewIndex, KDataBuffer::Readable );
+                             BufferCursor->gotoIndex( NewIndex );
+                           }
                            break;
     case MoveForward:      BufferCursor->gotoNextByte();     break;
-    case MoveWordForward:  NewIndex = BufferCursor->trueIndex();
-                           NewIndex = DataBuffer->indexOfNextWordStart( NewIndex, KDataBuffer::Readable );
-                           BufferCursor->gotoIndex( NewIndex );
+    case MoveWordForward:  {
+                             int NewIndex = BufferCursor->trueIndex();
+                             NewIndex = DataBuffer->indexOfNextWordStart( NewIndex, KDataBuffer::Readable );
+                             BufferCursor->gotoIndex( NewIndex );
+                           }
                            break;
     case MoveUp:           BufferCursor->gotoUp();             break;
     case MovePgUp:         BufferCursor->gotoPageUp();         break;
@@ -1199,7 +1221,7 @@ void KHexEdit::moveCursor( KMoveAction Action )
 
 void KHexEdit::doKeyboardAction( KKeyboardAction Action )
 {
-  if( isReadOnly() || OverWrite )
+  if( isReadOnly() )//|| OverWrite )
     return;
 
   pauseCursorBlinking();
@@ -1234,7 +1256,7 @@ void KHexEdit::doKeyboardAction( KKeyboardAction Action )
 //         doc->setSelectionEnd( QTextDocument::Temp, *cursor );
 //         removeSelectedData( QTextDocument::Temp );
 //       }
-
+      if( !OverWrite )
       {
         int Index = BufferCursor->trueIndex();
         if( Index < BufferLayout->length() )
@@ -1243,22 +1265,27 @@ void KHexEdit::doKeyboardAction( KKeyboardAction Action )
           if( Index == BufferLayout->length() )
             BufferCursor->gotoEnd();
         }
-        break;
       }
-    case ActionWordDelete:
+      break;
+
+    case ActionWordDelete: // kills data until the start of the next word
+      if( !OverWrite )
       {
         int Index = BufferCursor->trueIndex();
         if( Index < BufferLayout->length() )
         {
-          int WordEnd = DataBuffer->indexOfWordEnd( Index );
-          removeData( KSection(Index,WordEnd) );
+          int End = DataBuffer->indexOfBeforeNextWordStart( Index );
+          removeData( KSection(Index,End) );
           if( Index == BufferLayout->length() )
             BufferCursor->gotoEnd();
         }
-        break;
       }
+      break;
 
     case ActionBackspace:
+      if( OverWrite )
+        BufferCursor->gotoPreviousByte();
+      else
       {
         int DeleteIndex = BufferCursor->trueIndex() - 1;
         if( DeleteIndex >= 0 )
@@ -1269,8 +1296,8 @@ void KHexEdit::doKeyboardAction( KKeyboardAction Action )
           else
             BufferCursor->gotoPreviousByte();
         }
-        break;
       }
+      break;
 
 //       if( Action == ActionBackspace && !cursor->atParagStart() )
 //       {
@@ -1313,7 +1340,8 @@ void KHexEdit::doKeyboardAction( KKeyboardAction Action )
         if( LeftIndex >= 0 )
         {
           int WordStart = DataBuffer->indexOfPreviousWordStart( LeftIndex );
-          removeData( KSection(WordStart,LeftIndex) );
+          if( !OverWrite )
+            removeData( KSection(WordStart,LeftIndex) );
           if( WordStart == BufferLayout->length() )
             BufferCursor->gotoEnd();
           else
@@ -1334,6 +1362,8 @@ void KHexEdit::repaintChanged()
 {
   if( !isUpdatesEnabled() || !viewport()->isUpdatesEnabled() || !BufferRanges->isModified() )
     return;
+
+  resizeContents( totalWidth(), totalHeight() );
 
   KPixelX cx = contentsX();
   KPixelY cy = contentsY();
@@ -1519,37 +1549,37 @@ void KHexEdit::ensureCursorVisible()
 
 void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
 {
-  // select whole line?
-  if( TrippleClickTimer->isActive()
-      && (e->globalPos()-DoubleClickPoint).manhattanLength() < QApplication::startDragDistance() )
-  {
-    pauseCursorBlinking();
-    BufferRanges->setSelectionStart( BufferLayout->indexAtLineStart(DoubleClickLine) );
-    BufferCursor->gotoLineEnd();
-    BufferRanges->setSelectionEnd( BufferCursor->trueIndex() );
-    repaintChanged();
-    unpauseCursorBlinking();
-    return;
-  }
-
 //   clearUndoRedo();
-  MousePoint = e->pos();
   pauseCursorBlinking();
 
   // care about a left button press?
   if( e->button() == LeftButton )
   {
     MousePressed = true;
-    placeCursor( e->pos() );
+
+    // select whole line?
+    if( TrippleClickTimer->isActive()
+        && (e->globalPos()-DoubleClickPoint).manhattanLength() < QApplication::startDragDistance() )
+    {
+      BufferRanges->setSelectionStart( BufferLayout->indexAtLineStart(DoubleClickLine) );
+      BufferCursor->gotoLineEnd();
+      BufferRanges->setSelectionEnd( BufferCursor->trueIndex() );
+      repaintChanged();
+      unpauseCursorBlinking();
+      return;
+    }
+
+    MousePoint = e->pos();
+    placeCursor( MousePoint );
     ensureCursorVisible();
 
     // start of a drag perhaps?
-    if( BufferRanges->selectionIncludes(indexByPoint( e->pos() )) )
+    if( BufferRanges->selectionIncludes(indexByPoint( MousePoint )) )
     {
       DragStartPossible = true;
       unpauseCursorBlinking();
       DragStartTimer->start( QApplication::startDragTime(), true );
-      DragStartPoint = e->pos();
+      DragStartPoint = MousePoint;
       return;
     }
 
@@ -1754,6 +1784,7 @@ void KHexEdit::handleMouseMove( const QPoint& Point ) // handles the move of the
 {
   // no scrolltimer and outside of viewport?
   if( !ScrollTimer->isActive() && Point.y() < contentsY() || Point.y() > contentsY() + visibleHeight() )
+
     ScrollTimer->start( DefaultScrollTimerPeriod, false );
   // scrolltimer but inside of viewport?
   else if( ScrollTimer->isActive() && Point.y() >= contentsY() && Point.y() <= contentsY() + visibleHeight() )
@@ -1810,7 +1841,7 @@ void KHexEdit::startDrag()
   if( !Drag )
     return;
 
-  if( isReadOnly() )
+  if( isReadOnly() || OverWrite )
     Drag->dragCopy();
   else if( Drag->drag() && QDragObject::target() != this && QDragObject::target() != viewport() )
     removeSelectedData();

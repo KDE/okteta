@@ -111,6 +111,25 @@ int KDataBuffer::indexOfNextWordStart( int Index, KDataBuffer::KWordCharType Cha
 }
 
 
+int KDataBuffer::indexOfBeforeNextWordStart( int Index, KDataBuffer::KWordCharType CharType ) const
+{
+  bool LookingForFirstWordChar = false;
+  for( ; Index<size(); ++Index )
+  {
+    if( ::isWordChar(datum(Index),CharType) )
+    {
+      if( !LookingForFirstWordChar )
+        continue;
+      return Index-1;
+    }
+    else if( !LookingForFirstWordChar )
+      LookingForFirstWordChar = true;
+  }
+  // if no more word found, go to the end
+  return size()-1;
+}
+
+
 int KDataBuffer::indexOfWordStart( int Index, KDataBuffer::KWordCharType CharType ) const
 {
   for( --Index; Index >= 0; --Index )

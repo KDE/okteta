@@ -52,11 +52,17 @@ class KColumnsView : public QScrollView
     virtual void paintEmptyArea( QPainter *p, int cx, int cy, int cw, int ch );
     virtual void drawContents( QPainter *p, int cx, int cy, int cw, int ch );
 
-  public:
+  public: //
     /** sets height of all lines and propagates this information to all columns
+      * doesn't update the content size
       * @param NewLineHeight height in pixels
       */
     void setLineHeight( KPixelY NewLineHeight );
+    /** sets the number of lines
+      * doesn't update the content size
+      * @param NewNoOfLines new number of lines to display
+      */
+    void setNoOfLines( int NewNoOfLines );
 
   public: // data-wise sizes
     /** returns the number of all lines */
@@ -99,7 +105,7 @@ class KColumnsView : public QScrollView
     /** hiding it*/
     void drawContents( QPainter* );
 
-    
+
   protected: // calculated
     /** collection of all the columns. All columns will be autodeleted. */
     QPtrList<KColumn> Columns;
@@ -124,6 +130,7 @@ class KColumnsView : public QScrollView
 };
 
 
+inline int KColumnsView::noOfLines()         const { return NoOfLines; }
 inline KPixelY KColumnsView::lineHeight()    const { return LineHeight; }
 inline int KColumnsView::lineAt( KPixelY y ) const { return LineHeight ? y / LineHeight : -1; }
 

@@ -250,11 +250,14 @@ class KHexEdit : public KColumnsView
     void copyAvailable( bool Really );
     /** there has been a change to the buffer */
     void bufferChanged();
+    /** the input was not even partially inserted */
+    void inputFailed();
 
 
   protected: // QWidget API
     virtual void keyPressEvent( QKeyEvent *KeyEvent );
     virtual void resizeEvent( QResizeEvent *ResizeEvent );
+    virtual void showEvent( QShowEvent *e );
 
   protected: // QScrollView API
     virtual void contentsMousePressEvent( QMouseEvent *e );
@@ -324,7 +327,7 @@ class KHexEdit : public KColumnsView
     KBufferCursor *BufferCursor;
     /** */
     KBufferRanges *BufferRanges;
-    // TODO: Timer for syncing hexediting with textColumn
+    // TODO: Timer for syncing hexediting with textColumnvoid KHexEdit::showEvent( QShowEvent *e )
 
   protected:
     KOffsetColumn *OffsetColumn;

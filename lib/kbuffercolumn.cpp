@@ -454,12 +454,12 @@ void KBufferColumn::paintNextLine( QPainter *P )
 }
 
 
-void KBufferColumn::paintLine( QPainter *P, int Line )
+void KBufferColumn::paintLine( QPainter *P, int Line ) // TODO: could be removed???
 {
 // std::cout << "paintLine line: "<<Line<<" Start: "<<PaintPositions.start()<<" End: "<<PaintPositions.end() << std::endl;
   // no bytes to paint?
-  if( !Layout->hasContent(Line) )
-    return;
+//   if( !Layout->hasContent(Line) )
+//     return;
 
   paintPositions( P, Line, PaintPositions );
 

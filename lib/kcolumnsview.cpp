@@ -15,10 +15,10 @@
  ***************************************************************************/
 
  
-// #include <iostream>
- 
+#include <iostream>
+
 #include <qpainter.h>
-  
+
 #include "kcolumn.h"
 #include "kcolumnsview.h"
 
@@ -48,38 +48,16 @@ KColumnsView::~KColumnsView()
 }
 
 
-void KColumnsView::updateView()
+void KColumnsView::setNoOfLines( int NewNoOfLines )
 {
-  resizeContents( totalWidth(), totalHeight() );
-  update();
-}
-
-void KColumnsView::repaintView()
-{
-  resizeContents( totalWidth(), totalHeight() );
-  repaintContents( false );
-}
-
-void KColumnsView::addColumn( KColumn *C )
-{
-//   if( Reversed )
-//     Columns.prepend( C );
-//   else
-    Columns.append( C );
-
-  updateWidths();
-}
-
-void KColumnsView::removeColumn( KColumn *C )
-{
-  Columns.remove( C );
-
-  updateWidths();
+  std::cout<<"NoOfLines"<<NewNoOfLines<<std::endl;
+  NoOfLines = NewNoOfLines;
 }
 
 
 void KColumnsView::setLineHeight( KPixelY LH )
 {
+  std::cout<<"LineHeight"<<LH<<std::endl;
   LineHeight = LH;
   for( KColumn *C=Columns.first(); C; C=Columns.next() )
     C->setLineHeight( LineHeight );
@@ -115,11 +93,43 @@ void KColumnsView::updateLineBufferSize()
 int KColumnsView::noOfLinesPerPage() const
 {
   int NoOfLinesPerPage = (visibleHeight()-1) / LineHeight; // -1 ensures to get always the last visible line
+  std::cout << "calc NoLpP:"<<NoOfLinesPerPage<<"="<<visibleHeight()-1<<"/"<<LineHeight<<std::endl;
 
   if( NoOfLinesPerPage == 0 )
     // ensure to move down at least one line
     NoOfLinesPerPage = 1;
   return NoOfLinesPerPage;
+}
+
+void KColumnsView::addColumn( KColumn *C )
+{
+//   if( Reversed )
+//     Columns.prepend( C );
+//   else
+    Columns.append( C );
+
+  updateWidths();
+}
+
+
+void KColumnsView::removeColumn( KColumn *C )
+{
+  Columns.remove( C );
+
+  updateWidths();
+}
+
+void KColumnsView::updateView()
+{
+  resizeContents( totalWidth(), totalHeight() );
+  update();
+}
+
+
+void KColumnsView::repaintView()
+{
+  resizeContents( totalWidth(), totalHeight() );
+  repaintContents( false );
 }
 
 

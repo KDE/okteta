@@ -89,3 +89,4 @@ Okay, this will the first public release...
 added a frame cursor for the inactive column
 removed close to all artefacts
 cleaned up selection by mouse
+new signal inputFailed() to signal if a user's input (like key press) is not even partially inserted

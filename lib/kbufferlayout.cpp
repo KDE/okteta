@@ -15,7 +15,7 @@
  ***************************************************************************/
 
  
-// #include <iostream>
+#include <iostream>
 
 #include "kbufferlayout.h"
 
@@ -64,13 +64,17 @@ bool KBufferLayout::setStartOffset( int SO )
 
 bool KBufferLayout::setNoOfBytesPerLine( int N )
 {
+  // accepting the value, rejecting 0
+  if( N < 1 )
+    N = 1;
+
   // no changes?
   if( NoOfBytesPerLine == N )
     return false;
 
-  // accpting the value, rejecting 0
-  NoOfBytesPerLine = N<1 ? 1 : N;
+  NoOfBytesPerLine = N;
 
+  std::cout<<"NoBpL:"<<NoOfBytesPerLine<<std::endl;
   calcStart();
   calcEnd();
   return true;
@@ -79,18 +83,24 @@ bool KBufferLayout::setNoOfBytesPerLine( int N )
 
 void KBufferLayout::setNoOfLinesPerPage( int N )
 {
+  std::cout<<"NoLpP:"<<N<<std::endl;
   NoOfLinesPerPage = N;
 }
 
 
 bool KBufferLayout::setLength( int L )
 {
+  // accepting the value, rejecting < 0
+  if( L < 0 )
+    L = 0;
+
   if( Length == L )
     return false;
 
   // accepting the value, rejecting < 0
-  Length = L<0?0:L;
+  Length = L;
 
+  std::cout<<"Len:"<<Length<<std::endl;
   calcEnd();
   return true;
 }
@@ -98,8 +108,12 @@ bool KBufferLayout::setLength( int L )
 
 void KBufferLayout::calcStart()
 {
-  ContentCoords.setStart( KBufferCoord(StartOffset,NoOfBytesPerLine,false) );
+  if( Length > 0 )
+    ContentCoords.setStart( KBufferCoord(StartOffset,NoOfBytesPerLine,false) );
+  else
+    ContentCoords.setStart( KBufferCoord() );
 }
+
 
 void KBufferLayout::calcEnd()
 {
@@ -107,6 +121,8 @@ void KBufferLayout::calcEnd()
     ContentCoords.setEnd( KBufferCoord(Length-1+StartOffset,NoOfBytesPerLine,false) );
   else
     ContentCoords.setEnd( KBufferCoord() );
+
+  std::cout <<"Layout::noOfLines: "<<noOfLines() << std::endl;
 }
 
 

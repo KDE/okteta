@@ -118,14 +118,11 @@ void KBufferCursor::gotoNextByte( int D ) // TODO: think about consistency with 
     ++D;
     Behind = false;
   }
-  if( Layout->length()-1-Index < D )
-  {
-    if( Index == Layout->length()-1 )
-      return;
+  // would we end behind the end?
+  if( Layout->length()-1 < Index+D )
     gotoEnd();
-  }
-
-  gotoIndex( Index + D );
+  else
+    gotoIndex( Index + D );
 }
 
 
@@ -181,6 +178,7 @@ void KBufferCursor::gotoDown()
       // set to end
       Coord.setPos( Layout->finalPos() );
       Index = Layout->length() - 1;
+      Behind = true;
     }
     else
       Index += Layout->noOfBytesPerLine();
@@ -203,7 +201,7 @@ int KBufferCursor::indexAtLineEnd() const
 void KBufferCursor::gotoLineStart()
 {
   Index = Layout->indexAtLineStart( Coord.line() );
-  Coord.goLineStart( Layout->final() );
+  Coord.goLineStart( Layout->start() );
   Behind = false;
 }
 
