@@ -69,6 +69,7 @@ const unsigned int KByteCodec::CodingWidth[NoOfCodings] = { 2, 3, 3, 8, 0 };
 const char KByteCodec::Digit[MaxNoOfDigits] =      { '0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F' };
 const char KByteCodec::SmallDigit[MaxNoOfDigits] = { '0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f' };
 
+const unsigned char KByteCodec::DigitsFilledLimit[NoOfCodings] = { 16,26,64,128,0 };
 
 void KByteCodec::toHexadecimal( char *Digits, unsigned char Char )
 {
@@ -275,7 +276,17 @@ const unsigned char *KByteCodec::fromDummy( unsigned char *Char, const unsigned 
 
 bool KByteCodec::isValidHexadecimalDigit( unsigned char Digit )
 {
-  return (Digit >= 'A' && Digit <= 'F') || (Digit >= 'a' && Digit <= 'f');
+  return isValidDecimalDigit(Digit) || isValidBigHexadecimalDigit(Digit) || isValidSmallHexadecimalDigit(Digit);
+}
+
+bool KByteCodec::isValidBigHexadecimalDigit( unsigned char Digit )
+{
+  return (Digit >= 'A' && Digit <= 'F');
+}
+
+bool KByteCodec::isValidSmallHexadecimalDigit( unsigned char Digit )
+{
+  return (Digit >= 'a' && Digit <= 'f');
 }
 
 bool KByteCodec::isValidDecimalDigit( unsigned char Digit )
@@ -300,9 +311,9 @@ bool KByteCodec::turnToHexadecimalValue( unsigned char *Digit )
 {
   if( isValidDecimalDigit(*Digit) )
     *Digit -= '0';
-  else if( *Digit >= 'A' && *Digit <= 'F' )
+  else if( isValidBigHexadecimalDigit(*Digit) )
     *Digit -= 'A' - 10;
-  else if( *Digit >= 'a' && *Digit <= 'f' )
+  else if( isValidSmallHexadecimalDigit(*Digit) )
     *Digit -= 'a' - 10;
   else
     return false;

@@ -342,16 +342,16 @@ KPixelX KBufferColumn::relXOfPos( int Pos )      const { return PosX ? PosX[Pos]
 KPixelX KBufferColumn::relRightXOfPos( int Pos ) const { return PosRightX ? PosRightX[Pos] : 0; }
 
 
-KSection KBufferColumn::wideXPixelsOfPos( KSection Positions ) const
+KPixelXs KBufferColumn::wideXPixelsOfPos( KSection Positions ) const
 {
-  return KSection( Positions.start()>0?rightXOfPos(Positions.start()-1)+1:xOfPos(Positions.start()),
+  return KPixelXs( Positions.start()>0?rightXOfPos(Positions.start()-1)+1:xOfPos(Positions.start()),
                    Positions.end()<LastPos?xOfPos(Positions.end()+1)-1:rightXOfPos(Positions.end())  );
 }
 
 
-KSection KBufferColumn::relWideXPixelsOfPos( KSection Positions ) const
+KPixelXs KBufferColumn::relWideXPixelsOfPos( KSection Positions ) const
 {
-  return KSection( Positions.start()>0?relRightXOfPos(Positions.start()-1)+1:relXOfPos(Positions.start()),
+  return KPixelXs( Positions.start()>0?relRightXOfPos(Positions.start()-1)+1:relXOfPos(Positions.start()),
                    Positions.end()<LastPos?relXOfPos(Positions.end()+1)-1:relRightXOfPos(Positions.end())  );
 }
 

@@ -24,7 +24,7 @@
 #include <qscrollview.h>
 
 #include "kadds.h"
-
+#include "ksection.h" // TODO: think about moving this out of the public API
 
 namespace KHE
 {
@@ -80,11 +80,19 @@ class KColumnsView : public QScrollView
     /** returns the height of all lines together */
     KPixelY totalHeight() const;
 
-  public:
+  public: // services
     /** gives the index of the line that would include y in pixel coord.
       * y needs not be inside the total height.
       */
     int lineAt( KPixelY y ) const;
+    /** gives the index of the first and the last line that would be visible
+      * these lines might not contain anything
+      */
+    KSection visibleLines() const;
+    /** gives the index of the first and the last line that would be visible in the given pixel range
+      * these lines might not contain anything
+      */
+    KSection visibleLines( KPixelYs YPixels ) const;
 
 
   protected:
@@ -133,6 +141,17 @@ class KColumnsView : public QScrollView
 inline int KColumnsView::noOfLines()         const { return NoOfLines; }
 inline KPixelY KColumnsView::lineHeight()    const { return LineHeight; }
 inline int KColumnsView::lineAt( KPixelY y ) const { return LineHeight ? y / LineHeight : -1; }
+inline KSection KColumnsView::visibleLines() const
+{
+  KPixelY cy = contentsY();
+  KPixelY ch = visibleHeight();
+  return KSection( lineAt(cy), lineAt(cy+ch-1) );
+}
+
+inline KSection KColumnsView::visibleLines( KPixelYs YPixels ) const
+{
+  return KSection( lineAt(YPixels.start()), lineAt(YPixels.end()) );
+}
 
 inline KPixelY KColumnsView::totalHeight()   const { return NoOfLines*LineHeight; }
 inline KPixelX KColumnsView::totalWidth()    const { return TotalWidth; }

@@ -64,6 +64,9 @@ class KHexColumn : public KBufferColumn
     KByteCodec::adding addingFunction()      const;
     KByteCodec::removingLastDigit removingFunction() const;
 
+  public: // service
+    /** returns true if there cannot be any digit appended to Value in the actual coding */
+    bool digitsFilled( unsigned char Value ) const;
 
   protected: // KBufferColumn API
     void drawByte( QPainter *P, char Byte, const QColor &Color ) const;
@@ -82,6 +85,7 @@ class KHexColumn : public KBufferColumn
     KCoding Coding;
     /** buffers coding width */
     int CodingWidth;
+    unsigned char DigitsFilledLimit;
     KByteCodec::coding CodingFunction;
     KByteCodec::adding AddingFunction;
     KByteCodec::removingLastDigit RemovingLastDigitFunction;
@@ -95,6 +99,7 @@ class KHexColumn : public KBufferColumn
 
 inline KPixelX KHexColumn::binaryGapWidth()             const { return BinaryGapWidth; }
 inline int KHexColumn::codingWidth()                    const { return CodingWidth; }
+inline bool KHexColumn::digitsFilled( unsigned char V ) const { return V >= DigitsFilledLimit; }
 inline KCoding KHexColumn::coding()                     const { return Coding; }
 inline KByteCodec::coding KHexColumn::codingFunction()  const { return CodingFunction; }
 inline KByteCodec::adding KHexColumn::addingFunction()  const { return AddingFunction; }

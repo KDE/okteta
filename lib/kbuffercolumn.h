@@ -133,9 +133,9 @@ class KBufferColumn : public KColumn
     /** returns the positions that overlap with the absolute x-coords */
     KSection visiblePositions( KPixelX x, KPixelX w ) const;
     /** returns the */
-    KSection wideXPixelsOfPos( KSection Positions ) const;
+    KPixelXs wideXPixelsOfPos( KSection Positions ) const;
     /** */
-    KSection relWideXPixelsOfPos( KSection Positions ) const;
+    KPixelXs relWideXPixelsOfPos( KSection Positions ) const;
 
   public: // value access
     KPixelX byteWidth()                      const;

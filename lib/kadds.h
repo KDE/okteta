@@ -15,9 +15,17 @@
  ***************************************************************************/
 
 
+namespace KHE
+{
 // some possibly usefull aditions to KDE
 
 // these are to emphasize that measuring unit is pixel and which direction
 typedef int KPixelX;
 typedef int KPixelY;
 
+class KSection;
+
+typedef KSection KPixelXs;
+typedef KSection KPixelYs;
+
+}

@@ -79,28 +79,29 @@ class KBufferCursor
 
   public:
     void setNewPosAllowed( bool NPA=true );
-    void setInsideByte( bool IB=true );
 
   public: // state value access
+    /** the index that is drawn at the actual coord */
     int index() const;
+    /** the pos of the actual coord */
     int pos() const;
+    /** the line of the actual coord */
     int line() const;
+    /** the actual coord */
     KBufferCoord coord() const;
+    /** true if the cursor is located to the right of the actual coord but still shown at the coord */
     bool isBehind() const;
     /** returns the true index. That is if the cursor is tagged as "behind" the actual index
       * it's true index is the next one.
       * Attention: this could be outside the data's range if the cursor is behind the last byte!
       */
     int trueIndex() const;
-    /** returns the true index if it is valid. That is if the cursor is tagged as "behind" the actual index
-      * it's true index is the next one. If the index is outside the data's range -1 is returned
+    /** returns the true index if it is valid index that is it is inside the data's range.
+      * Otherwise -1 is returned
       */
     int validIndex() const;
 
-    int digitPos() const;
-
     bool isValid() const;
-    bool isInsideByte() const;
     bool newPosAllowed() const;
 
   public: // index calculation service
@@ -114,6 +115,7 @@ class KBufferCursor
     void gotoCoord( const KBufferCoord &C );
     void gotoCIndex( int I );
     void gotoCCoord( const KBufferCoord &C );
+    void gotoTrueIndex();
 
     void gotoPreviousByte();
     void gotoNextByte();
@@ -131,10 +133,6 @@ class KBufferCursor
 
     void updateCoord();
 
-  public: // buffer modification commands TODO: should they stay here?
-//    void insert( const QString &s, bool checkNewLine, QMemArray<KBufferStringChar> *formatting = 0 );
-    /** removes the actual byte, returns false if at the end */
-//    bool remove();
 
   public: // logical state access
     bool atStart() const;
@@ -143,10 +141,6 @@ class KBufferCursor
     bool isBehindEnd() const;
     bool atLineStart() const;
     bool atLineEnd() const;
-
-  public:
-    /** sets actual byte to the intermediate edit state */
-    void dumpEditState();
 
 
   private:
@@ -165,12 +159,6 @@ class KBufferCursor
 
     /** tells whether there could be a position behind the end of the layout */
     bool NewPosAllowed : 1;
-
-    /** Position inside a byte; -1 if outside */
-    int DigitPos;
-
-    /** Editing  a byte digit by digit? */
-    bool InsideByte : 1;
 };
 
 
@@ -182,11 +170,6 @@ inline bool KBufferCursor::isBehind()      const { return Behind; }
 inline int KBufferCursor::trueIndex()      const { return Index + (Behind?1:0); }
 
 inline bool KBufferCursor::isValid()  const { return Index != -1; }
-
-inline int KBufferCursor::digitPos()    const { return DigitPos; }
-inline bool KBufferCursor::isInsideByte() const { return InsideByte; }
-
-inline void KBufferCursor::setInsideByte( bool IB ) { InsideByte = IB; }
 
 }
 

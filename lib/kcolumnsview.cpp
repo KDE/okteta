@@ -147,7 +147,7 @@ void KColumnsView::paintEmptyArea( QPainter *P, int cx ,int cy, int cw, int ch)
   // finally draw the rectangles (transformed as needed)
   QMemArray<QRect> Rectangles = Region.rects();
   const QBrush &Brush = backgroundBrush();
-  for( int i=0; i<(int)Rectangles.count(); ++i )
+  for( int i=0; i<(int)Rectangles.count(); ++i ) 
     P->fillRect( Rectangles[i], Brush );
 }
 

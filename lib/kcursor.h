@@ -37,9 +37,9 @@ class KCursor
 
   public:
     /** sets size of the full cursor */
-    void setSize( int Width, int Height );
+    void setSize( KPixelX Width, KPixelY Height );
     /** sets the shape of the cursor to be drawn */
-    void setShape( int X, int W );
+    void setShape( KPixelX X, KPixelX W );
 
   public: // access
     const QPixmap &onPixmap() const;

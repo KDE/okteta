@@ -63,6 +63,8 @@ class KByteCodec
     /** */
     static unsigned int codingWidth( KCoding C );
     /** */
+    static unsigned char digitsFilledLimit( KCoding C );
+    /** */
     static coding codingFunction( KCoding C );
     /** */
     static coding shortCodingFunction( KCoding C );
@@ -131,6 +133,9 @@ class KByteCodec
     static bool turnToBinaryValue( unsigned char *Digit );
     static bool turnToDummyValue( unsigned char *Digit );
 
+    static bool isValidBigHexadecimalDigit( unsigned char Digit );
+    static bool isValidSmallHexadecimalDigit( unsigned char Digit );
+
     static bool isValidHexadecimalDigit( unsigned char Digit );
     static bool isValidDecimalDigit( unsigned char Digit );
     static bool isValidOctalDigit( unsigned char Digit );
@@ -140,6 +145,8 @@ class KByteCodec
   protected:
     /** */
     static const unsigned int CodingWidth[NoOfCodings];
+    /** */
+    static const unsigned char DigitsFilledLimit[NoOfCodings];
     /** */
     static const coding CodingFunction[NoOfCodings];
     /** */
@@ -155,7 +162,7 @@ class KByteCodec
 
 
   protected:
-    /** buffer with paintable qdigits, should be faster than calculating chars online */
+    /** buffer with paintable digits, should be faster than calculating chars online */
     static const char Digit[MaxNoOfDigits];
     /** buffer with digits a-f lower */
     static const char SmallDigit[MaxNoOfDigits];
@@ -164,6 +171,9 @@ class KByteCodec
 
 inline unsigned int KByteCodec::codingWidth( KCoding C )
 { return CodingWidth[C]; }
+
+inline unsigned char KByteCodec::digitsFilledLimit( KCoding C )
+{ return DigitsFilledLimit[ C]; }
 
 inline KByteCodec::coding KByteCodec::codingFunction( KCoding C )
 { return CodingFunction[C]; }

@@ -28,8 +28,7 @@ KBufferCursor::KBufferCursor( const KBufferLayout *L )
    Index( -1 ),
    Coord( 0, 0 ),
    Behind( false ),
-   NewPosAllowed( false ),
-   InsideByte( false )
+   NewPosAllowed( false )
 {
 }
 /*
@@ -62,7 +61,7 @@ KBufferCursor &KBufferCursor::operator=( const KBufferCursor &C )
 
 bool KBufferCursor::operator==( const KBufferCursor &C ) const
 {
-  return Index == C.Index && Behind == C.Behind && DigitPos == C.DigitPos;
+  return Index == C.Index && Behind == C.Behind ;//&& DigitPos == C.DigitPos;
 }
 
 void KBufferCursor::setNewPosAllowed( bool NPA )
@@ -309,6 +308,17 @@ void KBufferCursor::gotoIndex( int i )
   Index = i;
   Coord = Layout->coordOfIndex( Index );
   Behind = false;
+}
+
+
+void KBufferCursor::gotoTrueIndex()
+{
+  if( Behind )
+  {
+    ++Index;
+    Coord = Layout->coordOfIndex( Index );
+    Behind = false;
+  }
 }
 
 

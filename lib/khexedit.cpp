@@ -61,7 +61,7 @@ static const int DefaultScrollTimerPeriod = 100;
 
 
 KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, WFlags Flags )
- : KColumnsView( /*kapp->reverseLayout(),*/ Parent, Name, Flags ),
+ : KColumnsView( Parent, Name, Flags ),
    DataBuffer( Buffer ),
    BufferLayout( new KBufferLayout(DefaultNoOfBytesPerLine,DefaultStartOffset,0) ),
    BufferCursor( new KBufferCursor(BufferLayout) ),
@@ -81,9 +81,10 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, WFla
    OverWrite( true ),
    InDnD( false ),
    DragStartPossible( false ),
-   CursorHidden( false ),
+   CursorPaused( false ),
    BlinkCursorVisible( false ),
-   Zooming( false ),
+   InZooming( false ),
+   EditModeByInsert( false ),
    d( 0 )
 {
   if( DataBuffer )
@@ -150,17 +151,19 @@ void KHexEdit::setFirstLineOffset( int FLO )  { OffsetColumn->setFirstLineOffset
 
 void KHexEdit::setOverwriteMode( bool OM )
 {
-  if( OverWriteOnly && !OM )
+  if( (OverWriteOnly && !OM) || (OverWrite == OM) )
     return;
 
   OverWrite = OM;
 
-  bool NCH = !CursorHidden;
-  if( NCH )
-    pauseCursorBlinking();
+  bool ChangeCursor = !(CursorPaused || InEditMode);
+  if( ChangeCursor )
+    pauseCursor();
+
   BufferCursor->setNewPosAllowed( !OverWrite );
-  if( NCH )
-    unpauseCursorBlinking();
+
+  if( ChangeCursor )
+    unpauseCursor();
 
   emit cutAvailable( !OverWrite && BufferRanges->hasSelection() );
 }
@@ -278,7 +281,7 @@ void KHexEdit::setBinaryGapWidth( int/*KPixelX*/ BGW )
 
 void KHexEdit::fontChange( const QFont &/*OldFont*/ )
 {
-  if( !Zooming )
+  if( !InZooming )
     DefaultFontSize = font().pointSize();
 
   QFontMetrics FM( fontMetrics() );
@@ -298,15 +301,17 @@ void KHexEdit::fontChange( const QFont &/*OldFont*/ )
 
 void KHexEdit::updateViewByWidth()
 {
-  pauseCursorBlinking();
+  pauseCursor();
+
   fitToNoOfBytesPerLine();
   updateWidths();
 
-  repaintView();
+  updateView();
 
   BufferCursor->updateCoord();
   ensureCursorVisible();
-  unpauseCursorBlinking();
+
+  unpauseCursor();
 }
 
 
@@ -315,30 +320,30 @@ void KHexEdit::zoomOut()        { zoomOut( DefaultZoomStep ); }
 
 void KHexEdit::zoomIn( int PointInc )
 {
-  Zooming = true;
+  InZooming = true;
   QFont F( font() );
   F.setPointSize( QFontInfo(F).pointSize() + PointInc );
   setFont( F );
-  Zooming = false;
+  InZooming = false;
 }
 
 void KHexEdit::zoomOut( int PointDec )
 {
-  Zooming = true;
+  InZooming = true;
   QFont F( font() );
   F.setPointSize( QMAX( 1, QFontInfo(F).pointSize() - PointDec ) );
   setFont( F );
-  Zooming = false;
+  InZooming = false;
 }
 
 
 void KHexEdit::zoomTo( int PointSize )
 {
-  Zooming = true;
+  InZooming = true;
   QFont F( font() );
   F.setPointSize( PointSize );
   setFont( F );
-  Zooming = false;
+  InZooming = false;
 }
 
 
@@ -552,7 +557,8 @@ int KHexEdit::fittingBytesPerLine( const QSize &NewSize ) const
 
 void KHexEdit::selectAll( bool Select )
 {
-  pauseCursorBlinking();
+  pauseCursor( true );
+
   if( !Select )
     BufferRanges->removeSelection();
   else
@@ -560,9 +566,10 @@ void KHexEdit::selectAll( bool Select )
     BufferRanges->setSelection( KSection(0,BufferLayout->length()-1) );
     BufferCursor->gotoEnd();
   }
-  unpauseCursorBlinking();
 
   repaintChanged();
+
+  unpauseCursor();
 
   if( !OverWrite ) emit cutAvailable( BufferRanges->hasSelection() );
   emit copyAvailable( BufferRanges->hasSelection() );
@@ -652,7 +659,7 @@ void KHexEdit::paste()
 
 void KHexEdit::pasteFromSource( QMimeSource *Source )
 {
-  if( !Source || !Source->provides(KBufferDrag::OctetStream) )
+  if( !Source || !KBufferDrag::canDecode(Source) )
     return;
 
   QByteArray Data;
@@ -666,7 +673,13 @@ void KHexEdit::pasteFromSource( QMimeSource *Source )
 
 void KHexEdit::insert( const QByteArray &D )
 {
-  pauseCursorBlinking();
+  if( InEditMode )
+  {
+    emit inputFailed();
+    return;
+  }
+
+  pauseCursor();
 
   if( OverWrite )
   {
@@ -694,7 +707,8 @@ void KHexEdit::insert( const QByteArray &D )
       }
       else
       {
-        unpauseCursorBlinking();
+        unpauseCursor();
+
         emit inputFailed();
         return;
       }
@@ -724,7 +738,7 @@ void KHexEdit::insert( const QByteArray &D )
     }
     else
     {
-      int InputAfterEnd = BufferCursor->isBehindEnd();
+      bool InputAfterEnd = BufferCursor->isBehindEnd();
       int OldIndex = BufferCursor->trueIndex();
       int W = DataBuffer->insert( OldIndex, D.data(), D.size() );
       updateLength();
@@ -738,7 +752,8 @@ void KHexEdit::insert( const QByteArray &D )
       }
       else
       {
-        unpauseCursorBlinking();
+        unpauseCursor();
+
         emit inputFailed();
         return;
       }
@@ -746,7 +761,7 @@ void KHexEdit::insert( const QByteArray &D )
   }
   repaintChanged();
 
-  unpauseCursorBlinking();
+  unpauseCursor();
 
   emit bufferChanged();
   emit selectionChanged();
@@ -755,10 +770,10 @@ void KHexEdit::insert( const QByteArray &D )
 
 void KHexEdit::removeSelectedData()
 {
-  if( OverWrite )
+  if( isReadOnly() || OverWrite || InEditMode )
     return;
 
-  pauseCursorBlinking();
+  pauseCursor();
 
   KSection Selection = BufferRanges->selection();
 
@@ -778,7 +793,7 @@ void KHexEdit::removeSelectedData()
     viewport()->setCursor( isReadOnly() ? arrowCursor : ibeamCursor );
   }
 
-  unpauseCursorBlinking();
+  unpauseCursor();
 
   emit bufferChanged();
   emit selectionChanged();
@@ -813,33 +828,44 @@ void KHexEdit::updateLength()
 }
 
 
-void KHexEdit::goOutsideByte()
+void KHexEdit::goOutsideByte( bool MoveToNext )
 {
-  drawEditedByte( false );
-  BufferCursor->setInsideByte( false );
-  drawFrameCursor( false );
+  pauseCursor( true );
+
+  if( MoveToNext )
+    BufferCursor->gotoNextByte();
+
+  unpauseCursor();
 }
 
 
 bool KHexEdit::goInsideByte()
 {
+  if( InEditMode )
+   return true;
+
   int ValidIndex = BufferCursor->validIndex();
   if( ValidIndex == -1 || !OverWrite || isReadOnly() || BufferCursor->isBehind() )
     return false;
-  // switch to hex column if needed
-  if( ActiveColumn == &textColumn() )
+
+  bool ColumnSwitch = (ActiveColumn == &textColumn());
+
+  //
+  InEditMode = true;
+  EditModeByInsert = false;
+
+  if( ColumnSwitch )
   {
-    pauseCursorBlinking();
     ActiveColumn = &hexColumn();
     InactiveColumn = &textColumn();
-    unpauseCursorBlinking();
   }
 
-  BufferCursor->setInsideByte( true );
   OldValue = EditValue = (unsigned char)DataBuffer->datum( ValidIndex );
-
   syncEditedByte();
-  drawEditedByte( true );
+
+  paintActiveCursor( true );
+  if( ColumnSwitch )
+    paintInactiveCursor( true );
 
   // put Cursor at the end (implemented later)
   return true;
@@ -848,13 +874,14 @@ bool KHexEdit::goInsideByte()
 
 bool KHexEdit::incByte()
 {
-  if( !BufferCursor->isInsideByte() && !goInsideByte() )
+  if( !InEditMode && !goInsideByte() )
     return false;
   if( EditValue < 255 )
   {
     ++EditValue;
     syncEditedByte();
-    drawEditedByte( true );
+
+    updateCursor();
     return true;
   }
   else
@@ -863,18 +890,27 @@ bool KHexEdit::incByte()
 
 bool KHexEdit::decByte()
 {
-  if( !BufferCursor->isInsideByte() && !goInsideByte() )
+  if( !InEditMode && !goInsideByte() )
     return false;
   if( EditValue > 0 )
   {
     --EditValue;
     syncEditedByte();
-    drawEditedByte( true );
+
+    updateCursor();// paintEditedByte( true );
     return true;
   }
   else
     return false;
 }
+
+
+void KHexEdit::syncEditedByte()
+{
+  hexColumn().codingFunction()( ByteBuffer, EditValue );
+  DataBuffer->replace( BufferCursor->index(), 1, (char*)&EditValue, 1 );
+}
+
 
 
 void KHexEdit::clipboardChanged()
@@ -887,21 +923,24 @@ void KHexEdit::clipboardChanged()
 
 void KHexEdit::setCursorPosition( int Index )
 {
-  pauseCursorBlinking();
+  pauseCursor( true );
+
   BufferCursor->gotoCIndex( Index );
 
   BufferRanges->removeSelection();
   if( BufferRanges->isModified() )
   {
+    repaintChanged();
+
     viewport()->setCursor( isReadOnly() ? arrowCursor : ibeamCursor );
 
     if( !OverWrite ) emit cutAvailable( BufferRanges->hasSelection() );
-    repaintChanged();
     emit copyAvailable( BufferRanges->hasSelection() );
     emit selectionChanged();
   }
   ensureCursorVisible();
-  unpauseCursorBlinking();
+
+  unpauseCursor();
 }
 
 
@@ -954,9 +993,17 @@ bool KHexEdit::eventFilter( QObject *O, QEvent *E )
   if( O == this || O == viewport() )
   {
     if( E->type() == QEvent::FocusIn )
-      startCursorBlinking();
+    {
+      //
+      if( !BufferCursor->isValid() )
+        BufferCursor->gotoIndex( 0 );
+
+      startCursor();
+    }
     else if( E->type() == QEvent::FocusOut )
-      stopCursorBlinking();
+    {
+      stopCursor();
+    }
   }
 
 //   if( O == this && E->type() == QEvent::PaletteChange )
@@ -981,28 +1028,60 @@ bool KHexEdit::eventFilter( QObject *O, QEvent *E )
 void KHexEdit::blinkCursor()
 {
   // skip the cursor drawing?
-  if( CursorHidden )
+  if( CursorPaused || InEditMode )
     return;
 
   // switch the cursor state
-  drawCursor( !BlinkCursorVisible );
+  paintActiveCursor( !BlinkCursorVisible );
 }
 
 
-void KHexEdit::startCursorBlinking()
+void KHexEdit::startCursor()
 {
-  CursorHidden = false;
-  if( !BufferCursor->isValid() )
-    BufferCursor->gotoIndex( 0 );
+  CursorPaused = false;
 
   createCursorPixmaps();
-  drawCursor( true );
-  drawFrameCursor( true );
+
+  paintActiveCursor( true );
+  paintInactiveCursor( true );
 
   CursorBlinkTimer->start( QApplication::cursorFlashTime()/2 );
 }
 
 
+void KHexEdit::unpauseCursor()
+{
+  CursorPaused = false;
+
+  updateCursor();
+}
+
+
+void KHexEdit::updateCursor()
+{
+  if( CursorBlinkTimer->isActive() && BufferCursor->isValid() )
+  {
+    createCursorPixmaps();
+
+    paintActiveCursor( true );
+    paintInactiveCursor( true );
+  }
+}
+
+/*
+void KHexEdit::unpauseCursorBlinking()
+{
+  CursorPaused = false;
+
+  if( CursorBlinkTimer->isActive() && BufferCursor->isValid() )
+  {
+    createCursorPixmaps();
+    drawCursor( true );
+    paintInactiveCursor( true );
+  }
+}
+*/
+/*
 void KHexEdit::stopCursorBlinking()
 {
   CursorBlinkTimer->stop();
@@ -1010,38 +1089,44 @@ void KHexEdit::stopCursorBlinking()
   // must Cursor be removed?
   if( BlinkCursorVisible )
     drawCursor( false );
-  drawFrameCursor( false );
-  CursorHidden = true;
+  paintInactiveCursor( false );
+  CursorPaused = true;
 }
 
 
 void KHexEdit::pauseCursorBlinking()
 {
-  if( BufferCursor->isInsideByte() )
-    goOutsideByte();
-  else
+//   if( InEditMode )
+//     goOutsideByte();
+//   else
   {
     // must Cursor be removed?
     if( BlinkCursorVisible )
       drawCursor( false );
-    drawFrameCursor( false );
+    paintInactiveCursor( false );
   }
 
-  CursorHidden = true;
+  CursorPaused = true;
+}
+*/
+void KHexEdit::stopCursor()
+{
+  CursorBlinkTimer->stop();
+
+  pauseCursor();
 }
 
 
-void KHexEdit::unpauseCursorBlinking()
+void KHexEdit::pauseCursor( bool LeaveEdit )
 {
-  CursorHidden = false;
 
-  if( CursorBlinkTimer->isActive() && BufferCursor->isValid() )
-  {
-    createCursorPixmaps();
-    drawCursor( true );
-    drawFrameCursor( true );
-//     std::cout << "Index:" << BufferCursor->index() << "(" << BufferCursor->trueIndex() << ")" <<std::endl;
-  }
+  if( !InEditMode || LeaveEdit )
+    paintActiveCursor( false );
+  paintInactiveCursor( false );
+
+  if( LeaveEdit )
+    InEditMode = false;
+  CursorPaused = true;
 }
 
 
@@ -1088,74 +1173,68 @@ void KHexEdit::pointPainterToCursor( QPainter &Painter, const KBufferColumn &Col
 }
 
 
-void KHexEdit::drawCursor( bool CursorOn )
+void KHexEdit::paintActiveCursor( bool CursorOn )
 {
   // any reason to skip the cursor drawing?
   if( !isUpdatesEnabled() || !viewport()->isUpdatesEnabled()
-//       || (!style().styleHint( QStyle::SH_BlinkCursorWhenTextSelected ) && !selectedText().isEmpty())
       || (CursorOn && !hasFocus() && !viewport()->hasFocus() && !InDnD )
-      || BufferCursor->isInsideByte()
       /*|| isReadOnly()*/ )
     return;
 
-  QPainter Painter;
-  pointPainterToCursor( Painter, activeColumn() );
-  Painter.drawPixmap( CursorPixmaps->cursorX(), 0,
-                      CursorOn?CursorPixmaps->onPixmap():CursorPixmaps->offPixmap(),
-                      CursorPixmaps->cursorX(),0,CursorPixmaps->cursorW(),-1 );
+  if( InEditMode )
+    paintEditedByte( CursorOn );
+  else
+  {
+    QPainter Painter;
+    pointPainterToCursor( Painter, activeColumn() );
 
-  // store state
-  BlinkCursorVisible = CursorOn;
+    Painter.drawPixmap( CursorPixmaps->cursorX(), 0,
+                        CursorOn?CursorPixmaps->onPixmap():CursorPixmaps->offPixmap(),
+                        CursorPixmaps->cursorX(),0,CursorPixmaps->cursorW(),-1 );
+    // store state
+    BlinkCursorVisible = CursorOn;
+  }
 }
 
 
-void KHexEdit::drawFrameCursor( bool FrameOn )
+void KHexEdit::paintInactiveCursor( bool CursorOn )
 {
   // any reason to skip the cursor drawing?
-  if( !isUpdatesEnabled() || !viewport()->isUpdatesEnabled()
-//       || (!style().styleHint( QStyle::SH_BlinkCursorWhenTextSelected ) && !selectedText().isEmpty())
-      || (FrameOn && !hasFocus() && !viewport()->hasFocus() && !InDnD )
-       /*|| isReadOnly()*/ )
+  if( !isUpdatesEnabled()
+      || !viewport()->isUpdatesEnabled()
+      || (CursorOn && !hasFocus() && !viewport()->hasFocus() && !InDnD)  )
     return;
+
+  int Index = BufferCursor->validIndex();
 
   QPainter Painter;
   pointPainterToCursor( Painter, inactiveColumn() );
-  int Index = BufferCursor->validIndex();
-  if( FrameOn )
-    inactiveColumn().paintFramedByte( &Painter, Index );
+  if( CursorOn )
+  {
+//     if( OverWrite || InEditMode )
+      inactiveColumn().paintFramedByte( &Painter, Index );
+//     else
+//       inactiveColumn().paintFramedByte( &Painter, Index );
+  }
   else
     inactiveColumn().paintByte( &Painter, Index );
 }
 
 
-void KHexEdit::syncEditedByte()
-{
-  hexColumn().codingFunction()( ByteBuffer, EditValue );
-  DataBuffer->replace( BufferCursor->index(), 1, (char*)&EditValue, 1 );
-}
-
-void KHexEdit::drawEditedByte( bool Edited )
+void KHexEdit::paintEditedByte( bool Edited )
 {
   // any reason to skip the cursor drawing?
-  if( !isUpdatesEnabled() || !viewport()->isUpdatesEnabled()
-//       || (!style().styleHint( QStyle::SH_BlinkCursorWhenTextSelected ) && !selectedText().isEmpty())
-//       || (FrameOn && !hasFocus() && !viewport()->hasFocus() && !InDnD )
-       /*|| isReadOnly()*/ )
+  if( !isUpdatesEnabled() || !viewport()->isUpdatesEnabled() )
     return;
 
   int Index = BufferCursor->index();
 
   QPainter Painter;
-  pointPainterToCursor( Painter, activeColumn() );
+  pointPainterToCursor( Painter, hexColumn() );
   if( Edited )
-  {
     hexColumn().paintEditedByte( &Painter, EditValue, ByteBuffer );
-    Painter.end();
-    pointPainterToCursor( Painter, textColumn() );
-    textColumn().paintFramedByte( &Painter, Index );
-  }
   else
-    activeColumn().paintByte( &Painter, Index );
+    hexColumn().paintByte( &Painter, Index );
 }
 
 
@@ -1165,12 +1244,14 @@ void KHexEdit::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
   // TODO: update non blinking cursors. Should this perhaps be done in the buffercolumn?
   // Then it needs to know about inactive, insideByte and the like... well...
   // perhaps subclassing the buffer columns even more, to KTextColumn and KHexColumn?
+
+  if( !CursorPaused && visibleLines(KPixelYs(cy,ch,false)).includes(BufferCursor->line()) )
+    updateCursor();
 }
 
 
 bool KHexEdit::handleByteEditKey( QKeyEvent *KeyEvent )
 {
-  std::cout << "Input to inside Byte: ";
   bool KeyUsed = false;
   //
   switch( KeyEvent->key() )
@@ -1183,9 +1264,14 @@ bool KHexEdit::handleByteEditKey( QKeyEvent *KeyEvent )
       decByte();
       KeyUsed = true;
       break;
+    case Key_Enter:
+    case Key_Return:
+    case Key_Space:
+      goOutsideByte( !OverWrite );
+      KeyUsed = true;
+      break;
     case Key_Escape:
       EditValue = OldValue;
-      std::cout << "ESC to:"<<EditValue<<std::endl;
       syncEditedByte();
       goOutsideByte();
       KeyUsed = true;
@@ -1195,7 +1281,7 @@ bool KHexEdit::handleByteEditKey( QKeyEvent *KeyEvent )
       {
         hexColumn().removingFunction()( &EditValue );
         syncEditedByte();
-        drawEditedByte( true );
+        updateCursor(); //paintEditedByte( true );
       }
       else
         emit inputFailed();
@@ -1208,21 +1294,21 @@ bool KHexEdit::handleByteEditKey( QKeyEvent *KeyEvent )
       {
         QByteArray D( 1 );
         D[0] = KeyEvent->ascii();
-//         std::cout << "Trying to add:" << D[0] << " to " << (unsigned int)EditValue <<"";
         if( hexColumn().addingFunction()(&EditValue,D[0]) )
         {
           syncEditedByte();
-          drawEditedByte( true );
+          if( EditModeByInsert && hexColumn().digitsFilled(EditValue) )
+            goOutsideByte( true );
+          else
+            updateCursor();
         }
         else
         {
-//           std::cout << " failed";
           emit inputFailed();
         }
         KeyUsed = true;
       }
   }
-  std::cout << std::endl;
 
   return KeyUsed;
 }
@@ -1230,7 +1316,7 @@ bool KHexEdit::handleByteEditKey( QKeyEvent *KeyEvent )
 
 void KHexEdit::keyPressEvent( QKeyEvent *KeyEvent )
 {
-  if( BufferCursor->isInsideByte() && handleByteEditKey(KeyEvent) )
+  if( InEditMode && handleByteEditKey(KeyEvent) )
     return;
 //  changeIntervalTimer->stop();
 //  interval = 10;
@@ -1299,10 +1385,10 @@ void KHexEdit::keyPressEvent( QKeyEvent *KeyEvent )
         }
         if( hexColumn().isVisible() )
         {
-          pauseCursorBlinking();
+          pauseCursor();
           ActiveColumn = &hexColumn();
           InactiveColumn = &textColumn();
-          unpauseCursorBlinking();
+          unpauseCursor();
         }
         break;
       }
@@ -1316,10 +1402,10 @@ void KHexEdit::keyPressEvent( QKeyEvent *KeyEvent )
           KeyEvent->ignore();
           break;
         }
-        pauseCursorBlinking();
+        pauseCursor( true );
         ActiveColumn = &textColumn();
         InactiveColumn = &hexColumn();
-        unpauseCursorBlinking();
+        unpauseCursor();
       }
       break;
 
@@ -1384,69 +1470,11 @@ void KHexEdit::keyPressEvent( QKeyEvent *KeyEvent )
           && ( !(KeyEvent->state()&( ControlButton | AltButton | MetaButton )) )
           && ( !KeyEvent->ascii() || KeyEvent->ascii() >= 32 ) )
       {
-        QByteArray D( 1 );
-        D[0] = KeyEvent->ascii();
-        if( ActiveColumn == &textColumn() )
-        {
-//         clearUndoRedoInfo = false;
-          insert( D );
-        }
-        else
-        {
-          // switching to byte edit mode
-          int ValidIndex = BufferCursor->validIndex();
-          if( ValidIndex == -1 )
-          {
-            emit inputFailed();
-            break;
-          }
-          // check for plus/minus
-          if( OverWrite && !isReadOnly() )
-          {
-            bool KeyUsed = false;
-            switch( KeyEvent->key() )
-            {
-              case Key_Plus:
-                incByte();
-                KeyUsed = true;
-                break;
-              case Key_Minus:
-                decByte();
-                KeyUsed = true;
-                break;
-            }
-            if( KeyUsed )
-              break;
-          }
-          OldValue = (unsigned char)DataBuffer->datum( ValidIndex );
-          std::cout << "vorher: " << OldValue;
-          EditValue = 0;
-          bool KeyValid = hexColumn().addingFunction()( &EditValue, D[0] );
-          if( KeyValid && !BufferRanges->hasSelection() )
-          {
-            hexColumn().codingFunction()( ByteBuffer, EditValue );
-            BufferCursor->setInsideByte( true );
-
-            if( !OverWrite )
-            {
-//               QByteArray N( 1 );
-//               N[0] = EditValue;
-//               insert( N );
-//               goInsideByte();
-            }
-            syncEditedByte();
-            drawEditedByte( true );
-          }
-          else
-            emit inputFailed();
-          std::cout << "nachher: "<<OldValue << std::endl;
-        }
-        break;
+        if( isReadOnly() || !handleLetter(KeyEvent) )
+          emit inputFailed();
       }
       else
         KeyUnknown = true;
-
-        //QScrollView::keyPressEvent( KeyEvent ); useful where????
   }
 
   emit cursorPositionChanged( BufferCursor->index() );
@@ -1460,9 +1488,81 @@ void KHexEdit::keyPressEvent( QKeyEvent *KeyEvent )
 }
 
 
+bool KHexEdit::handleLetter( QKeyEvent *KeyEvent )
+{
+  QByteArray D( 1 );
+  D[0] = KeyEvent->ascii();
+  if( ActiveColumn == &textColumn() )
+  {
+//         clearUndoRedoInfo = false;
+    insert( D );
+  }
+  else
+  {
+    // switching to byte edit mode
+    int ValidIndex = BufferCursor->validIndex();
+    if( ValidIndex == -1 )
+      return false;
+
+    // check for plus/minus
+    if( OverWrite )
+    {
+      switch( KeyEvent->key() )
+      {
+        case Key_Plus:
+          return incByte();
+        case Key_Minus:
+          return decByte();
+      }
+    }
+
+    OldValue = (unsigned char)DataBuffer->datum( ValidIndex );
+    EditValue = 0;
+    bool KeyValid = hexColumn().addingFunction()( &EditValue, D[0] );
+    if( !KeyValid || BufferRanges->hasSelection() )
+      return false;
+
+    pauseCursor();
+
+    if( OverWrite )
+    {
+      InEditMode = true;
+      EditModeByInsert = true;
+    }
+    else
+    {
+      int Index = BufferCursor->trueIndex();
+      int W = DataBuffer->insert( Index, (char*)&EditValue, 1 );
+      if( W > 0 )
+      {
+        updateLength();
+        BufferRanges->addChangedRange( KSection(Index+1,DataBuffer->size()-1) );
+        BufferCursor->gotoTrueIndex();
+        InEditMode = true;
+        EditModeByInsert = true;
+        repaintChanged();
+        ensureCursorVisible();
+      }
+      else
+      {
+        unpauseCursor();
+        return false;
+      }
+    }
+
+    syncEditedByte();
+
+    unpauseCursor();
+
+    emit bufferChanged();
+  }
+  return true;
+}
+
+
 void KHexEdit::moveCursor( KMoveAction Action, bool Select )
 {
-  pauseCursorBlinking();
+  pauseCursor( true );
 
   if( Select )
   {
@@ -1491,11 +1591,10 @@ void KHexEdit::moveCursor( KMoveAction Action, bool Select )
     }
   }
 
-  if( BufferRanges->isModified() ) // TODO: would it be possible to move this behind ensureCursorVisible?
-    repaintChanged();
+  repaintChanged();
   ensureCursorVisible();
 
-  unpauseCursorBlinking();
+  unpauseCursor();
 }
 
 
@@ -1533,10 +1632,10 @@ void KHexEdit::moveCursor( KMoveAction Action )
 
 void KHexEdit::doKeyboardAction( KKeyboardAction Action )
 {
-  if( isReadOnly() )//|| OverWrite )
+  if( isReadOnly() )
     return;
 
-  pauseCursorBlinking();
+  pauseCursor( true );
 
   switch( Action )
   {
@@ -1664,8 +1763,10 @@ void KHexEdit::doKeyboardAction( KKeyboardAction Action )
 
   repaintChanged();
   ensureCursorVisible();
-  unpauseCursorBlinking();
 
+  unpauseCursor();
+
+  emit cursorPositionChanged( BufferCursor->index() );
   emit bufferChanged();
 }
 
@@ -1687,7 +1788,7 @@ void KHexEdit::repaintChanged()
   Paint.translate( -cx, -cy );
 
   // calculate affected lines/indizes
-  KSection VisibleLines( lineAt(cy), lineAt(cy+ch-1) );
+  KSection VisibleLines = visibleLines( KPixelYs(cy,ch,false) );
   KSection FullPositions( 0, BufferLayout->noOfBytesPerLine() );
   KCoordRange VisibleRange( FullPositions, VisibleLines );
 //   std::cout << "repaintChanged->"<<FirstIndex<<":"<<FirstLine<<","<<LastIndex<<":"<<LastLine<<std::endl;
@@ -1771,7 +1872,7 @@ void KHexEdit::paintLine( QPainter *P, KBufferColumn *C, int Line, KSection Posi
 //   std::cout << "  paintLine->"<<Line<< ":"<<FirstPos<<","<<LastPos<<std::endl;
 
   // calculating pixel values
-  KSection XPixels = C->wideXPixelsOfPos( Positions );
+  KPixelXs XPixels = C->wideXPixelsOfPos( Positions );
 
   KPixelY cy = Line * LineHeight;
 
@@ -1823,7 +1924,7 @@ void KHexEdit::ensureCursorVisible()
 void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
 {
 //   clearUndoRedo();
-  pauseCursorBlinking();
+  pauseCursor( true );
 
   // care about a left button press?
   if( e->button() == LeftButton )
@@ -1838,7 +1939,8 @@ void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
       BufferCursor->gotoLineEnd();
       BufferRanges->setSelectionEnd( BufferCursor->trueIndex() );
       repaintChanged();
-      unpauseCursorBlinking();
+
+      unpauseCursor();
       return;
     }
 
@@ -1850,7 +1952,8 @@ void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
     if( BufferRanges->selectionIncludes(indexByPoint( MousePoint )) )
     {
       DragStartPossible = true;
-      unpauseCursorBlinking();
+
+      unpauseCursor();
       DragStartTimer->start( QApplication::startDragTime(), true );
       DragStartPoint = MousePoint;
       return;
@@ -1893,7 +1996,8 @@ void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
     repaintChanged();
     viewport()->setCursor( isReadOnly() ? arrowCursor : ibeamCursor );
   }
-  unpauseCursorBlinking();
+
+  unpauseCursor();
 }
 
 
@@ -1951,7 +2055,8 @@ void KHexEdit::contentsMouseReleaseEvent( QMouseEvent *e )
   {
     selectAll( false );
     MousePressed = false;
-    unpauseCursorBlinking();
+
+    unpauseCursor();
   }
 
   if( MousePressed )
@@ -1971,7 +2076,7 @@ void KHexEdit::contentsMouseReleaseEvent( QMouseEvent *e )
   // middle mouse button paste?
   else if( e->button() == MidButton && !isReadOnly() )
   {
-    pauseCursorBlinking();
+    pauseCursor();
 
     placeCursor( e->pos() );
     ensureCursorVisible();
@@ -1992,7 +2097,7 @@ void KHexEdit::contentsMouseReleaseEvent( QMouseEvent *e )
     paste();
     ClipboardMode = QClipboard::Clipboard;
 
-    unpauseCursorBlinking();
+    unpauseCursor();
   }
 
   emit cursorPositionChanged( BufferCursor->index() );
@@ -2030,11 +2135,13 @@ void KHexEdit::contentsMouseDoubleClickEvent( QMouseEvent *e )
       KSection Word = DataBuffer->wordSection( Index );
       if( Word.isValid() )
       {
-        pauseCursorBlinking();
+        pauseCursor();
+
         BufferRanges->setSelection( Word );
         BufferCursor->gotoIndex( Word.end()+1 );
         repaintChanged();
-        unpauseCursorBlinking();
+
+        unpauseCursor();
       }
     }
     // as we already have a doubleclick maybe it is a tripple click
@@ -2071,7 +2178,7 @@ void KHexEdit::handleMouseMove( const QPoint& Point ) // handles the move of the
   else if( ScrollTimer->isActive() && Point.y() >= contentsY() && Point.y() <= contentsY() + visibleHeight() )
     ScrollTimer->stop();
 
-  pauseCursorBlinking();
+  pauseCursor();
 
   int OldIndex = BufferCursor->index();
   int OldLine = BufferCursor->line();
@@ -2104,11 +2211,10 @@ void KHexEdit::handleMouseMove( const QPoint& Point ) // handles the move of the
   if( BufferRanges->selectionStarted() )
     BufferRanges->setSelectionEnd( BufferCursor->trueIndex() );
 
-  if( BufferRanges->isModified() )
-    repaintChanged();
-
+  repaintChanged();
   ensureCursorVisible();
-  unpauseCursorBlinking();
+
+  unpauseCursor();
 }
 
 
@@ -2150,9 +2256,11 @@ void KHexEdit::contentsDragMoveEvent( QDragMoveEvent *e )
     return;
   }
   // let text cursor follow mouse
-  pauseCursorBlinking();
+  pauseCursor( true );
+
   placeCursor( e->pos() );
-  unpauseCursorBlinking();
+
+  unpauseCursor();
   e->acceptAction();
 }
 
@@ -2192,12 +2300,14 @@ void KHexEdit::contentsDropEvent( QDropEvent *e )
     viewport()->setCursor( isReadOnly() ? arrowCursor : ibeamCursor );
 
   BufferRanges->removeSelection();
-  pauseCursorBlinking();
+
+  pauseCursor();
 
   pasteFromSource( e );
 
   BufferCursor->gotoIndex( InsertIndex );
-  unpauseCursorBlinking();
+
+  unpauseCursor();
 
   // emit appropriate signals.
   emit selectionChanged();
@@ -2265,14 +2375,6 @@ void KHexEdit::contentsContextMenuEvent( QContextMenuEvent *e )
     copy();
   else if( r == d->id[IdPaste] )
     paste();
-}
-#endif
-
-// editing
-#if 0
-void KBufferCursor::dumpEditState()
-{
-  Buffer->replace( ByteEdit->dump(), 1, Pos );
 }
 #endif
 

@@ -32,7 +32,7 @@ KCursor::~KCursor()
 
 
 
-void KCursor::setSize( int Width, int Height )
+void KCursor::setSize( KPixelX Width, KPixelY Height )
 {
   if( Width != OnPixmap.width() || Height != OnPixmap.height() )
   {
@@ -42,7 +42,7 @@ void KCursor::setSize( int Width, int Height )
 }
 
 
-void KCursor::setShape( int X, int W )
+void KCursor::setShape( KPixelX X, KPixelX W )
 {
   CursorX = X;
   CursorW = W;

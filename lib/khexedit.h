@@ -23,7 +23,6 @@
 // app specific
 // #include "khe.h"
 #include "kcolumnsview.h"
-#include "ksection.h" // TODO: try to move this out of this API
 
 class QTimer;
 
@@ -91,10 +90,6 @@ class KHexEdit : public KColumnsView
     enum KCoding { HexadecimalCoding=0, DecimalCoding, OctalCoding, BinaryCoding, NoCoding };
 
 
-  protected:
-    static const int NoOfBufferColumns = 2;
-
-
   public:
     KHexEdit( KDataBuffer *Buffer = 0, QWidget *Parent = 0, const char *Name = 0, WFlags F = 0 );
     virtual ~KHexEdit();
@@ -147,17 +142,24 @@ class KHexEdit : public KColumnsView
     /** returns a deep copy of the selected data */
     QByteArray selectedData() const;
 
+  public:
+    const KOffsetColumn& offsetColumn() const;
+    const KHexColumn& hexColumn()    const;
+    const KTextColumn& textColumn()   const;
+    const KBufferColumn& activeColumn() const;
+    const KBufferColumn& inactiveColumn() const;
+
+
   public: // modification access
+    /** moves the cursor according to the action, handles all drawing */
     void moveCursor( KMoveAction Action );
-    /** puts the cursor in the column at the pos of Point (in absolute coord)*/
-    void placeCursor( const QPoint &Point );
-    /** */
+    /** puts the cursor to the position of index, handles all drawing */
     void setCursorPosition( int Index );
+    /** puts the cursor in the column at the pos of Point (in absolute coord), does not handle the drawing */
+    void placeCursor( const QPoint &Point );
 //    void repaintByte( int row, int column, bool Erase = true );
 //    void updateByte( int row, int column );
 //    void ensureByteVisible( int row, int column );
-
-    void insert( const QByteArray &D );
 
   public slots:
     /** */
@@ -213,14 +215,16 @@ class KHexEdit : public KColumnsView
     void setBinaryGapWidth( int BGW );
 
   // interaction
+    /** de-/selects all data */
+    void selectAll( bool select );
     /**  */
     void moveCursor( KMoveAction Action, bool Select );
     /** executes keyboard Action \a Action. This is normally called by a key event handler. */
     void doKeyboardAction( KKeyboardAction Action );
     /** removes the selected data, takes care of the cursor */
-    void removeSelectedData();
-    /** de-/selects all data */
-    void selectAll( bool select );
+    virtual void removeSelectedData();
+    /** inserts */
+    virtual void insert( const QByteArray &D );
 
   // clipboard interaction
     virtual void copy();
@@ -235,18 +239,22 @@ class KHexEdit : public KColumnsView
     virtual void zoomTo( int PointSize );
     virtual void unZoom();
 
-  // cursor blinking
-    virtual void startCursorBlinking();
-    virtual void stopCursorBlinking();
-    virtual void pauseCursorBlinking();
-    virtual void unpauseCursorBlinking();
+  // cursor control
+    /** we have focus again, start the timer */
+    virtual void startCursor();
+    /** we lost focus, stop the timer */
+    virtual void stopCursor();
+    /** simply pauses any blinking, i.e. ignores any calls to blinkCursor */
+    virtual void pauseCursor( bool LeaveEdit = false );
+    /** undoes pauseCursor */
+    virtual void unpauseCursor();
 
   // byte editing
     /** steps inside editing the byte in the hec column */
     bool goInsideByte();
     /** */
-    void goOutsideByte();
-    /** increases the byte in the buffer TODO: what about going inside the buffer and the like? */
+    void goOutsideByte( bool MoveToNext = false );
+    /** increases the byte in the buffer */
     bool incByte();
     /** increases the byte in the buffer */
     bool decByte();
@@ -296,20 +304,17 @@ class KHexEdit : public KColumnsView
     KBufferColumn& activeColumn();
     KBufferColumn& inactiveColumn();
 
-    const KOffsetColumn& offsetColumn() const;
-    const KHexColumn& hexColumn()    const;
-    const KTextColumn& textColumn()   const;
-    const KBufferColumn& activeColumn() const;
-    const KBufferColumn& inactiveColumn() const;
-
+    // recreates the cursor pixmaps and paints active and inactive cursors if doable
+    void updateCursor();
     void createCursorPixmaps();
     void pointPainterToCursor( QPainter &Painter, const KBufferColumn &Column ) const;
     /** repaints all the parts that are signed as changed */
     void repaintChanged();
     /** draws the blinking cursor or removes it */
-    void drawCursor( bool CursorOn );
-    void drawFrameCursor( bool FrameOn );
-    void drawEditedByte( bool Edited );
+    void paintActiveCursor( bool CursorOn );
+    void paintInactiveCursor( bool CursorOn );
+    void paintEditedByte( bool Edited );
+
     void handleMouseMove( const QPoint& Point );
     bool hasChanged( const KCoordRange &VisibleRange, KCoordRange *ChangedRange ) const;
     void paintLine( QPainter *P, KBufferColumn *C, int Line, KSection Positions ) const;
@@ -317,6 +322,7 @@ class KHexEdit : public KColumnsView
     void pasteFromSource( QMimeSource *Source );
     void removeData( KSection Indizes );
     bool handleByteEditKey( QKeyEvent *KeyEvent );
+    bool handleLetter( QKeyEvent *KeyEvent );
     void syncEditedByte();
 
   protected:
@@ -349,7 +355,7 @@ class KHexEdit : public KColumnsView
     KBufferCursor *BufferCursor;
     /** */
     KBufferRanges *BufferRanges;
-    // TODO: Timer for syncing hexediting with textColumnvoid KHexEdit::showEvent( QShowEvent *e )
+    // TODO: Timer for syncing hexediting with textColumn... no needed?
 
   protected:
     KOffsetColumn *OffsetColumn;
@@ -400,7 +406,7 @@ class KHexEdit : public KColumnsView
     KResizeStyle ResizeStyle;
     /** flag if tab key should be ignored */
     bool TabChangesFocus:1;
-    /** */
+    /** flag whether the widget is set to readonly. Cannot override the databuffer's setting, of course. */
     bool ReadOnly:1;
     /** */
     bool OverWriteOnly:1;
@@ -415,11 +421,15 @@ class KHexEdit : public KColumnsView
     /** flag if a drag might have started */
     bool DragStartPossible:1;
     /** flag if the cursor should be invisible */
-    bool CursorHidden:1;
+    bool CursorPaused:1;
     /** flag if the cursor is visible */
     bool BlinkCursorVisible:1;
-    /** flag whether teh font is changed due to a zooming */
-    bool Zooming:1;
+    /** flag whether the font is changed due to a zooming */
+    bool InZooming:1;
+    /** flag whether we are in editing mode */
+    bool InEditMode:1;
+    /** flag whether byte edit mode was reached by inserting */
+    bool EditModeByInsert:1;
 
   private:
     /** the binary compatibility saving helper */

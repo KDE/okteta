@@ -66,6 +66,7 @@ bool KHexColumn::setCoding( KCoding C )
 
   Coding = C;
   CodingWidth = KByteCodec::codingWidth( Coding );
+  DigitsFilledLimit = KByteCodec::digitsFilledLimit( Coding );
   CodingFunction = KByteCodec::codingFunction( Coding );
   AddingFunction = KByteCodec::addingFunction( Coding );
   RemovingLastDigitFunction = KByteCodec::removingLastDigitFunction( Coding );
