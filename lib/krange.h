@@ -52,8 +52,6 @@ class KRange
     void setEnd( T E )    { End = E; }
     /** sets the section to null */
     void unset()           { Start = End = null(); }
-    ///** translate the section by offset. If the section is invalid the behaviour is undefined */
-    //void translate( T Offset ) { Start += Offset; End += Offset; }
     /** restricts the section to Limit. If one of both is invalid the behaviour is undefined */
     void restrictTo( const KRange &Limit )
     { if( Start < Limit.start() ) Start = Limit.start(); if( End > Limit.end() ) End = Limit.end(); }
@@ -110,7 +108,7 @@ class KRange
     /** returns true if the section covers at least one index */
     bool isValid() const { return Start != null() && Start <= End; }
     /** returns true if the section has not been set */
-    bool isNull() const { return Start == null() && End == null(); }
+    bool isEmpty() const { return Start == null() && End == null(); }
 
 
   protected:
