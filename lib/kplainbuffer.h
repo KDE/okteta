@@ -87,10 +87,10 @@ class KPlainBuffer : public KDataBuffer
     int Size;
     /** Size of data array */
     int RawSize;
-    /** */
+    /** maximal size of array, unlimited if -1 */
     int MaxSize;
     /** flag whether the initially given memory should be kept */
-    bool KeepsMemory;
+    bool KeepsMemory:1;
     /**  */
     bool ReadOnly:1;
     /** */
