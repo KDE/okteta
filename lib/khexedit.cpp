@@ -2021,11 +2021,11 @@ void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
     else
     {
       if( isReadOnly() || !(e->state()&ShiftButton) )
-        BufferRanges->setSelectionStart( BufferCursor->index() );
+        BufferRanges->setSelectionStart( BufferCursor->trueIndex() );
       else
       {
-        BufferRanges->setSelectionStart( BufferCursor->index() );
-        BufferRanges->setSelectionEnd( BufferCursor->index() );
+        BufferRanges->setSelectionStart( BufferCursor->trueIndex() );
+        BufferRanges->setSelectionEnd( BufferCursor->trueIndex() );
       }
     }
 
