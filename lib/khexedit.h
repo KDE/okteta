@@ -43,6 +43,12 @@ class KBufferCursor;
 class KBufferLayout;
 class KBufferRanges;
 
+class KController;
+class KTabController;
+class KNavigator;
+class KValueEditor;
+class KCharEditor;
+
 class KBufferDrag;
 
 class KCursor;
@@ -67,6 +73,12 @@ class KHexEditPrivate;
 
 class KHexEdit : public KColumnsView
 {
+  friend class KTabController;
+  friend class KNavigator;
+  friend class KEditor;
+  friend class KValueEditor;
+  friend class KCharEditor;
+
   Q_OBJECT
   Q_ENUMS( KResizeStyle KCoding )
   Q_PROPERTY( bool OverwriteMode READ isOverwriteMode WRITE setOverwriteMode )
@@ -95,11 +107,6 @@ class KHexEdit : public KColumnsView
   Q_PROPERTY( QChar SubstituteChar READ substituteChar WRITE setSubstituteChar )
 
   public:
-    enum KMoveAction { MoveBackward, MoveWordBackward, MoveForward, MoveWordForward,
-                       MoveUp, MovePgUp, MoveDown, MovePgDown,
-                       MoveLineStart, MoveHome, MoveLineEnd, MoveEnd };
-    enum KKeyboardAction { ActionDelete, ActionWordDelete, ActionBackspace, ActionWordBackspace };
-
     enum KResizeStyle { NoResize=0, LockGrouping=1, FullSizeUsage=2, MaxResizeStyleId=0xFF };
     enum KCoding { HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, MaxCodingId=0xFFFF };
     enum KEncoding { LocalEncoding=0, ISO8859_1Encoding=1, EBCDIC1047Encoding=2,
@@ -195,8 +202,6 @@ class KHexEdit : public KColumnsView
     QByteArray selectedData() const;
 
   public: // modification access
-    /** moves the cursor according to the action, handles all drawing */
-    void moveCursor( KMoveAction Action );
     /** puts the cursor to the position of index, handles all drawing 
       * @param Index 
       */
@@ -298,10 +303,6 @@ class KHexEdit : public KColumnsView
     void selectAll( bool select );
     /** selects word at index, returns true if there is one */
     bool selectWord( /*unsigned*/ int Index /*, Chartype*/ );
-    /**  */
-    void moveCursor( KMoveAction Action, bool Select );
-    /** executes keyboard Action \a Action. This is normally called by a key event handler. */
-    void doKeyboardAction( KKeyboardAction Action );
     /** removes the selected data, takes care of the cursor */
     virtual void removeSelectedData();
     /** inserts */
@@ -330,17 +331,6 @@ class KHexEdit : public KColumnsView
     /** undoes pauseCursor */
     virtual void unpauseCursor();
 
-  // byte editing
-    /** steps inside editing the byte in the value column */
-    bool goInsideByte();
-    /** */
-    void goOutsideByte( bool MoveToNext = false );
-    /** increases the byte in the buffer */
-    bool incByte();
-    /** increases the byte in the buffer */
-    bool decByte();
-
-
 
   signals:
     /** Index of the byte that was clicked */
@@ -357,8 +347,6 @@ class KHexEdit : public KColumnsView
     void copyAvailable( bool Really );
     /** there has been a change to the buffer */
     void bufferChanged();
-    /** the input was not even partially inserted */
-    void inputFailed();
 
 
   protected: // QWidget API
@@ -383,12 +371,10 @@ class KHexEdit : public KColumnsView
 
 
   protected: // element accessor functions
-    KOffsetColumn& offsetColumn();
     KValueColumn& valueColumn();
     KCharColumn& charColumn();
     KBufferColumn& activeColumn();
     KBufferColumn& inactiveColumn();
-    const KOffsetColumn& offsetColumn() const;
     const KValueColumn& valueColumn()    const;
     const KCharColumn& charColumn()   const;
     const KBufferColumn& activeColumn() const;
@@ -400,8 +386,6 @@ class KHexEdit : public KColumnsView
     void updateViewByWidth();
     /** repaints all the parts that are signed as changed */
     void repaintChanged();
-    bool handleByteEditKey( QKeyEvent *KeyEvent );
-    bool handleLetter( QKeyEvent *KeyEvent );
 
   protected: // drawing related operations
     /** recreates the cursor pixmaps and paints active and inactive cursors if doable */
@@ -411,7 +395,6 @@ class KHexEdit : public KColumnsView
     /** draws the blinking cursor or removes it */
     void paintActiveCursor( bool CursorOn );
     void paintInactiveCursor( bool CursorOn );
-    void paintEditedByte( bool Edited );
     void paintLine( KBufferColumn *C, int Line, KSection Positions );
 
   protected: // partial operations
@@ -424,8 +407,6 @@ class KHexEdit : public KColumnsView
       * @return true if there was a change within the visible range
       */
     bool hasChanged( const KCoordRange &VisibleRange, KCoordRange *ChangedRange ) const;
-    /** copies the actual edit value to the databuffer and updates the coding string */
-    void syncEditedByte();
     void handleInternalDrag( QDropEvent *e );
 
   protected:
@@ -439,7 +420,7 @@ class KHexEdit : public KColumnsView
     void updateLength();
     /** calls updateContent for the Column */
     void updateColumn( KColumn &Column );
-
+    void emitSelectionSignals();
 
   protected slots:
     /** gets called by the cursor blink timer */
@@ -479,6 +460,17 @@ class KHexEdit : public KColumnsView
     /** points to the column without keyboard focus (if there is) */
     KBufferColumn *InactiveColumn;
 
+    /** the actual input controller */
+    KController *Controller;
+    /** */
+    KTabController *TabController;
+    /** */
+    KNavigator *Navigator;
+    /** */
+    KValueEditor *ValueEditor;
+    /** */
+    KCharEditor *CharEditor;
+
   protected:
     /** Timer that controls the blinking of the cursor */
     QTimer *CursorBlinkTimer;
@@ -492,16 +484,8 @@ class KHexEdit : public KColumnsView
 
     /** object to store the blinking cursor pixmaps */
     KCursor *CursorPixmaps;
-    /** buffer with the  */
-    QString ByteBuffer;
     /** */
     KCharCodec *Codec;
-    /** stores the number of actual digits */
-    int LengthOfByteBuffer;
-    /** */
-    unsigned char EditValue;
-    /** stores the old byte value */
-    unsigned char OldValue;
 
   protected:
     /** point at which the current double click happended (used by TrippleClick) */
@@ -521,8 +505,6 @@ class KHexEdit : public KColumnsView
     /** */
     KEncoding Encoding;
 
-    /** flag if tab key should be ignored */
-    bool TabChangesFocus:1;
     /** flag whether the widget is set to readonly. Cannot override the databuffer's setting, of course. */
     bool ReadOnly:1;
     /** flag if only overwrite is allowed */
@@ -543,10 +525,6 @@ class KHexEdit : public KColumnsView
     bool BlinkCursorVisible:1;
     /** flag whether the font is changed due to a zooming */
     bool InZooming:1;
-    /** flag whether we are in byte digits editing mode */
-    bool InEditMode:1;
-    /** flag whether byte edit mode was reached by inserting */
-    bool EditModeByInsert:1;
 
   private:
     /** the binary compatibility saving helper */
@@ -558,13 +536,11 @@ class KHexEdit : public KColumnsView
 };
 
 
-inline const KOffsetColumn& KHexEdit::offsetColumn()   const { return *OffsetColumn; }
 inline const KValueColumn& KHexEdit::valueColumn()     const { return *ValueColumn; }
 inline const KCharColumn& KHexEdit::charColumn()       const { return *CharColumn; }
 inline const KBufferColumn& KHexEdit::activeColumn()   const { return *ActiveColumn; }
 inline const KBufferColumn& KHexEdit::inactiveColumn() const { return *InactiveColumn; }
 
-inline KOffsetColumn& KHexEdit::offsetColumn()   { return *OffsetColumn; }
 inline KValueColumn& KHexEdit::valueColumn()     { return *ValueColumn; }
 inline KCharColumn& KHexEdit::charColumn()       { return *CharColumn; }
 inline KBufferColumn& KHexEdit::activeColumn()   { return *ActiveColumn; }

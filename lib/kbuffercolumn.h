@@ -155,6 +155,7 @@ class KBufferColumn : public KColumn
     int lastPos()  const;
     KSection visiblePositions() const;
     const KBufferLayout *layout() const;
+    KCharCodec* codec() const;
 
   protected:
     /** */
@@ -245,6 +246,8 @@ inline const KBufferLayout *KBufferColumn::layout() const { return Layout; }
 
 
 inline void KBufferColumn::setCodec( KCharCodec *C ) { Codec = C; }
+inline KCharCodec* KBufferColumn::codec() const { return Codec; }
+
 }
 
 #endif

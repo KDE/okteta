@@ -14,8 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
- 
-//#include <kdebug.h>
+
+#include <kdebug.h>
 
 // c specific
 #include <stdlib.h>
@@ -41,6 +41,10 @@
 #include "kbuffercursor.h"
 #include "kbufferlayout.h"
 #include "kbufferranges.h"
+#include "controller/ktabcontroller.h"
+#include "controller/knavigator.h"
+#include "controller/kvalueeditor.h"
+#include "controller/kchareditor.h"
 #include "kbufferdrag.h"
 #include "kcursor.h"
 #include "kbytecodec.h"
@@ -76,7 +80,6 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, WFla
    ClipboardMode( QClipboard::Clipboard ),
    ResizeStyle( DefaultResizeStyle ),
    Encoding( MaxEncodingId ), // forces update
-   TabChangesFocus( false ),
    ReadOnly( false ),
 //    Modified( false ),
    OverWriteOnly( false ),
@@ -85,11 +88,9 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, WFla
    InDoubleClick( false ),
    InDnD( false ),
    DragStartPossible( false ),
-   CursorPaused( false ),
+     CursorPaused( false ),
    BlinkCursorVisible( false ),
    InZooming( false ),
-   InEditMode( false ),
-   EditModeByInsert( false ),
    d( 0 )
 {
   // initalize layout
@@ -109,6 +110,13 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, WFla
   InactiveColumn = &valueColumn();
 
   setEncoding( DefaultEncoding );
+
+  TabController = new KTabController( this, 0 );
+  Navigator = new KNavigator( this, TabController );
+  ValueEditor = new KValueEditor( ValueColumn, BufferCursor, this, Navigator );
+  CharEditor = new KCharEditor( CharColumn, BufferCursor, this, Navigator );
+
+  Controller = Navigator;
 
 #ifdef QT_ONLY
   QFont FixedFont( "fixed", 10 );
@@ -135,6 +143,10 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, WFla
 
 KHexEdit::~KHexEdit()
 {
+  delete TabController;
+  delete Navigator;
+  delete ValueEditor;
+  delete CharEditor;
 }
 
 
@@ -151,7 +163,7 @@ bool KHexEdit::isOverwriteMode()               const { return OverWrite; }
 bool KHexEdit::isOverwriteOnly()               const { return OverWriteOnly; }
 bool KHexEdit::isReadOnly()                    const { return ReadOnly; }
 bool KHexEdit::isModified()                    const { return DataBuffer->isModified(); }
-bool KHexEdit::tabChangesFocus()               const { return TabChangesFocus; }
+bool KHexEdit::tabChangesFocus()               const { return TabController->tabChangesFocus(); }
 bool KHexEdit::showUnprintable()               const { return charColumn().showUnprintable(); }
 QChar KHexEdit::substituteChar()               const { return charColumn().substituteChar(); }
 QChar KHexEdit::undefinedChar()                const { return charColumn().undefinedChar(); }
@@ -164,10 +176,10 @@ KHexEdit::KBufferColumnId KHexEdit::cursorColumn() const
 
 void KHexEdit::setOverwriteOnly( bool OO )    { OverWriteOnly = OO; if( OverWriteOnly ) setOverwriteMode( true ); }
 void KHexEdit::setModified( bool M )          { DataBuffer->setModified(M); }
-void KHexEdit::setTabChangesFocus( bool TCF ) { TabChangesFocus = TCF; }
+void KHexEdit::setTabChangesFocus( bool TCF ) { TabController->setTabChangesFocus(TCF); }
 void KHexEdit::setFirstLineOffset( int FLO )  { OffsetColumn->setFirstLineOffset( FLO ); }
 
-bool KHexEdit::offsetColumnVisible() const { return offsetColumn().isVisible(); }
+bool KHexEdit::offsetColumnVisible() const { return OffsetColumn->isVisible(); }
 int KHexEdit::visibleBufferColumns() const
 { return (valueColumn().isVisible() ? ValueColumnId : 0) | (charColumn().isVisible() ? CharColumnId : 0); }
 
@@ -181,7 +193,7 @@ void KHexEdit::setOverwriteMode( bool OM )
 
   // affected:
   // cursor shape
-  bool ChangeCursor = !(CursorPaused || InEditMode);
+  bool ChangeCursor = !( CursorPaused || ValueEditor->isInEditMode() );
   if( ChangeCursor )
     pauseCursor();
 
@@ -197,7 +209,7 @@ void KHexEdit::setOverwriteMode( bool OM )
 void KHexEdit::setDataBuffer( KDataBuffer *B )
 {
   //pauseCursor();
-  InEditMode = false;
+  ValueEditor->reset();
   CursorPaused = true;
 
   DataBuffer = B;
@@ -210,7 +222,7 @@ void KHexEdit::setDataBuffer( KDataBuffer *B )
   adjustLayoutToSize();
 
   // ensure that the widget is readonly if the buffer is
-  if( DataBuffer->isReadOnly() && !isReadOnly() )
+  if( DataBuffer->isReadOnly() )
     setReadOnly( true );
 
   updateView();
@@ -242,6 +254,9 @@ void KHexEdit::setReadOnly( bool RO )
 {
   // don't set editor readwrite if databuffer is readonly
   ReadOnly = (DataBuffer && DataBuffer->isReadOnly()) ? true : RO;
+
+  Controller = ReadOnly ? (KController*)Navigator :
+      cursorColumn() == CharColumnId ? (KController*)CharEditor : (KController*)ValueEditor;
 }
 
 
@@ -262,7 +277,7 @@ void KHexEdit::setCoding( KCoding C )
     return;
 
   uint NewCodingWidth = valueColumn().byteCodec()->encodingWidth();
-  ByteBuffer.setLength( NewCodingWidth ); //hack for now
+  ValueEditor->ByteBuffer.setLength( NewCodingWidth ); //hack for now
 
   // no change in the width?
   if( NewCodingWidth == OldCodingWidth )
@@ -391,7 +406,7 @@ void KHexEdit::fontChange( const QFont &OldFont )
   // update all dependant structures
   BufferLayout->setNoOfLinesPerPage( noOfLinesPerPage() );
 
-  offsetColumn().setMetrics( DigitWidth, DigitBaseLine );
+  OffsetColumn->setMetrics( DigitWidth, DigitBaseLine );
   valueColumn().setMetrics( DigitWidth, DigitBaseLine );
   charColumn().setMetrics( DigitWidth, DigitBaseLine );
 
@@ -473,7 +488,7 @@ void KHexEdit::adjustLayoutToSize()
 
 void KHexEdit::adjustToLayoutNoOfBytesPerLine()
 {
-  offsetColumn().setDelta( BufferLayout->noOfBytesPerLine() );
+  OffsetColumn->setDelta( BufferLayout->noOfBytesPerLine() );
   valueColumn().resetXBuffer();
   charColumn().resetXBuffer();
 
@@ -489,13 +504,13 @@ void KHexEdit::setNoOfLines( int NewNoOfLines )
 
 void KHexEdit::toggleOffsetColumn( bool Visible )
 {
-  bool OCVisible = offsetColumn().isVisible();
+  bool OCVisible = OffsetColumn->isVisible();
   // no change?
   if( OCVisible == Visible )
     return;
 
-  offsetColumn().setVisible( Visible );
-  FirstBorderColumn[0].setVisible( Visible );
+  OffsetColumn->setVisible( Visible );
+  FirstBorderColumn->setVisible( Visible );
 
   updateViewByWidth();
 }
@@ -510,7 +525,7 @@ QSize KHexEdit::sizeHint() const
 QSize KHexEdit::minimumSizeHint() const
 {
   // TODO: better minimal width (visibility!)
-  return QSize( offsetColumn().visibleWidth()+FirstBorderColumn->visibleWidth()+SecondBorderColumn->visibleWidth()+valueColumn().byteWidth()+charColumn().byteWidth(),
+  return QSize( OffsetColumn->visibleWidth()+FirstBorderColumn->visibleWidth()+SecondBorderColumn->visibleWidth()+valueColumn().byteWidth()+charColumn().byteWidth(),
                 lineHeight() + noOfLines()>1? style().pixelMetric(QStyle::PM_ScrollBarExtent):0 );
 }
 
@@ -822,13 +837,7 @@ void KHexEdit::pasteFromSource( QMimeSource *Source )
 
 void KHexEdit::insert( const QByteArray &D )
 {
-  if( InEditMode )
-  {
-    emit inputFailed();
-    return;
-  }
-
-  pauseCursor();
+  pauseCursor( true );
 
   if( OverWrite )
   {
@@ -853,13 +862,6 @@ void KHexEdit::insert( const QByteArray &D )
         int W = DataBuffer->replace( Section, D.data(), Section.width() );
         BufferCursor->gotoNextByte( W );
         BufferRanges->addChangedRange( Section );
-      }
-      else
-      {
-        unpauseCursor();
-
-        emit inputFailed();
-        return;
       }
     }
   }
@@ -891,6 +893,7 @@ void KHexEdit::insert( const QByteArray &D )
       int OldIndex = BufferCursor->realIndex();
       int W = DataBuffer->insert( OldIndex, D.data(), D.size() );
       updateLength();
+      // worked?
       if( W > 0 )
       {
         if( Appending )
@@ -899,16 +902,10 @@ void KHexEdit::insert( const QByteArray &D )
           BufferCursor->gotoNextByte( W );
         BufferRanges->addChangedRange( KSection(OldIndex,DataBuffer->size()-1) );
       }
-      else
-      {
-        unpauseCursor();
-
-        emit inputFailed();
-        return;
-      }
     }
   }
   repaintChanged();
+  ensureCursorVisible();
 
   unpauseCursor();
 
@@ -919,7 +916,8 @@ void KHexEdit::insert( const QByteArray &D )
 
 void KHexEdit::removeSelectedData()
 {
-  if( isReadOnly() || OverWrite || InEditMode )
+  // Can't we do this?
+  if( isReadOnly() || OverWrite || ValueEditor->isInEditMode() )
     return;
 
   pauseCursor();
@@ -974,91 +972,6 @@ void KHexEdit::updateLength()
 }
 
 
-void KHexEdit::goOutsideByte( bool MoveToNext )
-{
-  pauseCursor( true );
-
-  if( MoveToNext )
-    BufferCursor->gotoNextByte();
-
-  unpauseCursor();
-}
-
-
-bool KHexEdit::goInsideByte()
-{
-  if( InEditMode )
-   return true;
-
-  int ValidIndex = BufferCursor->validIndex();
-  if( ValidIndex == -1 || !OverWrite || isReadOnly() || BufferCursor->isBehind() )
-    return false;
-
-  bool ColumnSwitch = (ActiveColumn == &charColumn());
-
-  //
-  InEditMode = true;
-  EditModeByInsert = false;
-
-  if( ColumnSwitch )
-  {
-    ActiveColumn = &valueColumn();
-    InactiveColumn = &charColumn();
-  }
-
-  OldValue = EditValue = (unsigned char)DataBuffer->datum( ValidIndex );
-  syncEditedByte();
-
-  paintActiveCursor( true );
-  if( ColumnSwitch )
-    paintInactiveCursor( true );
-
-  // put Cursor at the end (implemented later)
-  return true;
-}
-
-
-bool KHexEdit::incByte()
-{
-  if( !InEditMode && !goInsideByte() )
-    return false;
-  if( EditValue < 255 )
-  {
-    ++EditValue;
-    syncEditedByte();
-
-    updateCursor();
-    return true;
-  }
-  else
-    return false;
-}
-
-bool KHexEdit::decByte()
-{
-  if( !InEditMode && !goInsideByte() )
-    return false;
-  if( EditValue > 0 )
-  {
-    --EditValue;
-    syncEditedByte();
-
-    updateCursor();// paintEditedByte( true );
-    return true;
-  }
-  else
-    return false;
-}
-
-
-void KHexEdit::syncEditedByte()
-{
-  valueColumn().byteCodec()->encode( ByteBuffer, 0, EditValue );
-  DataBuffer->replace( BufferCursor->index(), 1, (char*)&EditValue, 1 );
-}
-
-
-
 void KHexEdit::clipboardChanged()
 {
   // don't listen to selection changes
@@ -1110,6 +1023,8 @@ void KHexEdit::showBufferColumns( int CCs )
     KBufferColumn *H = ActiveColumn;
     ActiveColumn = InactiveColumn;
     InactiveColumn = H;
+    Controller = ReadOnly ? (KController*)Navigator :
+      cursorColumn() == CharColumnId ? (KController*)CharEditor : (KController*)ValueEditor;
   }
 
   updateViewByWidth();
@@ -1136,9 +1051,13 @@ void KHexEdit::setCursorColumn( KBufferColumnId CC )
     ActiveColumn = &charColumn();
     InactiveColumn = &valueColumn();
   }
+  Controller = ReadOnly ? (KController*)Navigator :
+    cursorColumn() == CharColumnId ? (KController*)CharEditor : (KController*)ValueEditor;
+
   ensureCursorVisible();
   unpauseCursor();
 }
+
 
 void KHexEdit::placeCursor( const QPoint &Point )
 {
@@ -1155,6 +1074,8 @@ void KHexEdit::placeCursor( const QPoint &Point )
     ActiveColumn = &valueColumn();
     InactiveColumn = &charColumn();
   }
+  Controller = ReadOnly ? (KController*)Navigator :
+      cursorColumn() == CharColumnId ? (KController*)CharEditor : (KController*)ValueEditor;
 
   // get coord of click and whether this click was closer to the end of the pos
   KBufferCoord C( activeColumn().magPosOfX(Point.x()), lineAt(Point.y()) );
@@ -1220,7 +1141,7 @@ bool KHexEdit::eventFilter( QObject *O, QEvent *E )
 void KHexEdit::blinkCursor()
 {
   // skip the cursor drawing?
-  if( CursorPaused || InEditMode )
+  if( CursorPaused || ValueEditor->isInEditMode() )
     return;
 
   // switch the cursor state
@@ -1232,10 +1153,7 @@ void KHexEdit::startCursor()
 {
   CursorPaused = false;
 
-  createCursorPixmaps();
-
-  paintActiveCursor( true );
-  paintInactiveCursor( true );
+  updateCursor();
 
   CursorBlinkTimer->start( QApplication::cursorFlashTime()/2 );
 }
@@ -1243,65 +1161,22 @@ void KHexEdit::startCursor()
 
 void KHexEdit::unpauseCursor()
 {
-// std::cout << "unpauseCursor" <<std::endl;
   CursorPaused = false;
 
-  updateCursor();
+  if( CursorBlinkTimer->isActive() )
+    updateCursor();
 }
 
 
 void KHexEdit::updateCursor()
 {
-  if( CursorBlinkTimer->isActive() )
-  {
-    createCursorPixmaps();
+  createCursorPixmaps();
 
-    paintActiveCursor( true );
-    paintInactiveCursor( true );
-  }
-}
-
-/*
-void KHexEdit::unpauseCursorBlinking()
-{
-  CursorPaused = false;
-
-  if( CursorBlinkTimer->isActive() && BufferCursor->isValid() )
-  {
-    createCursorPixmaps();
-    drawCursor( true );
-    paintInactiveCursor( true );
-  }
-}
-*/
-/*
-void KHexEdit::stopCursorBlinking()
-{
-  CursorBlinkTimer->stop();
-
-  // must Cursor be removed?
-  if( BlinkCursorVisible )
-    drawCursor( false );
-  paintInactiveCursor( false );
-  CursorPaused = true;
+  paintActiveCursor( true );
+  paintInactiveCursor( true );
 }
 
 
-void KHexEdit::pauseCursorBlinking()
-{
-//   if( InEditMode )
-//     goOutsideByte();
-//   else
-  {
-    // must Cursor be removed?
-    if( BlinkCursorVisible )
-      drawCursor( false );
-    paintInactiveCursor( false );
-  }
-
-  CursorPaused = true;
-}
-*/
 void KHexEdit::stopCursor()
 {
   CursorBlinkTimer->stop();
@@ -1312,13 +1187,11 @@ void KHexEdit::stopCursor()
 
 void KHexEdit::pauseCursor( bool LeaveEdit )
 {
-// std::cout << "pauseCursor" <<std::endl;
-  if( !InEditMode || LeaveEdit )
-    paintActiveCursor( false );
+  paintActiveCursor( false );
   paintInactiveCursor( false );
 
   if( LeaveEdit )
-    InEditMode = false;
+    ValueEditor->InEditMode = false;
   CursorPaused = true;
 }
 
@@ -1370,16 +1243,24 @@ void KHexEdit::paintActiveCursor( bool CursorOn )
 {
   // any reason to skip the cursor drawing?
   if( !isUpdatesEnabled() || !viewport()->isUpdatesEnabled()
-      || (CursorOn && !hasFocus() && !viewport()->hasFocus() && !InDnD )
-      /*|| isReadOnly()*/ )
+      || (CursorOn && !hasFocus() && !viewport()->hasFocus() && !InDnD ) )
     return;
 
-  if( InEditMode )
-    paintEditedByte( CursorOn );
+  QPainter Painter;
+  pointPainterToCursor( Painter, activeColumn() );
+
+  // paint edited byte?
+  if( ValueEditor->isInEditMode() )
+  {
+    int Index = BufferCursor->index();
+
+    if( CursorOn )
+      valueColumn().paintEditedByte( &Painter, ValueEditor->EditValue, ValueEditor->ByteBuffer );
+    else
+      valueColumn().paintByte( &Painter, Index );
+  }
   else
   {
-    QPainter Painter;
-    pointPainterToCursor( Painter, activeColumn() );
 
     Painter.drawPixmap( CursorPixmaps->cursorX(), 0,
                         CursorOn?CursorPixmaps->onPixmap():CursorPixmaps->offPixmap(),
@@ -1405,29 +1286,14 @@ void KHexEdit::paintInactiveCursor( bool CursorOn )
   pointPainterToCursor( Painter, inactiveColumn() );
   if( CursorOn )
   {
-    KBufferColumn::KFrameStyle Style = BufferCursor->isBehind()?KBufferColumn::Right:
-                                       (OverWrite||InEditMode)?KBufferColumn::Frame:KBufferColumn::Left;
+    KBufferColumn::KFrameStyle Style =
+      BufferCursor->isBehind() ? KBufferColumn::Right :
+      (OverWrite||ValueEditor->isInEditMode()) ? KBufferColumn::Frame :
+      KBufferColumn::Left;
     inactiveColumn().paintFramedByte( &Painter, Index, Style );
   }
   else
     inactiveColumn().paintByte( &Painter, Index );
-}
-
-
-void KHexEdit::paintEditedByte( bool Edited )
-{
-  // any reason to skip the cursor drawing?
-  if( !isUpdatesEnabled() || !viewport()->isUpdatesEnabled() )
-    return;
-
-  int Index = BufferCursor->index();
-
-  QPainter Painter;
-  pointPainterToCursor( Painter, valueColumn() );
-  if( Edited )
-    valueColumn().paintEditedByte( &Painter, EditValue, ByteBuffer );
-  else
-    valueColumn().paintByte( &Painter, Index );
 }
 
 
@@ -1439,9 +1305,11 @@ void KHexEdit::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
   // perhaps subclassing the buffer columns even more, to KCharColumn and KValueColumn?
 
   if( !CursorPaused && visibleLines(KPixelYs(cy,ch,false)).includes(BufferCursor->line()) )
-    updateCursor();
+  {
+    paintActiveCursor( true );
+    paintInactiveCursor( true );
+  }
 }
-
 
 void KHexEdit::updateColumn( KColumn &Column )
 {
@@ -1450,528 +1318,18 @@ void KHexEdit::updateColumn( KColumn &Column )
     updateContents( Column.x(), 0, Column.width(), totalHeight() );
 }
 
-
-bool KHexEdit::handleByteEditKey( QKeyEvent *KeyEvent )
+void KHexEdit::emitSelectionSignals()
 {
-  bool KeyUsed = false;
-  //
-  switch( KeyEvent->key() )
-  {
-    case Key_Plus:
-      incByte();
-      KeyUsed = true;
-      break;
-    case Key_Minus:
-      decByte();
-      KeyUsed = true;
-      break;
-    case Key_Enter:
-    case Key_Return:
-    case Key_Space:
-      goOutsideByte( !OverWrite );
-      KeyUsed = true;
-      break;
-    case Key_Escape:
-      EditValue = OldValue;
-      syncEditedByte();
-      goOutsideByte();
-      KeyUsed = true;
-      break;
-    case Key_Backspace:
-      if( EditValue > 0 )
-      {
-        valueColumn().byteCodec()->removeLastDigit( &EditValue );
-        syncEditedByte();
-        updateCursor(); //paintEditedByte( true );
-      }
-      else
-        emit inputFailed();
-      KeyUsed = true;
-      break;
-    default:
-      if( KeyEvent->text().length() > 0
-          && ( !(KeyEvent->state()&( ControlButton | AltButton | MetaButton )) )
-          && ( !KeyEvent->ascii() || KeyEvent->ascii() >= 32 ) )
-      {
-        if( valueColumn().byteCodec()->appendDigit(&EditValue,KeyEvent->ascii()) )
-        {
-          syncEditedByte();
-          if( EditModeByInsert && valueColumn().byteCodec()->digitsFilledLimit()<=EditValue )
-            goOutsideByte( true );
-          else
-            updateCursor();
-        }
-        else
-        {
-          emit inputFailed();
-        }
-        KeyUsed = true;
-      }
-  }
-
-  return KeyUsed;
+  if( !OverWrite ) emit cutAvailable( BufferRanges->hasSelection() );
+  emit copyAvailable( BufferRanges->hasSelection() );
+  emit selectionChanged();
 }
 
 
 void KHexEdit::keyPressEvent( QKeyEvent *KeyEvent )
 {
-  if( InEditMode && handleByteEditKey(KeyEvent) )
-    return;
-//  changeIntervalTimer->stop();
-//  interval = 10;
-  bool KeyUnknown = false;
-
-  // handle selection
-  BufferRanges->removeFurtherSelections();
-  if( BufferRanges->isModified() )
-    repaintChanged();
-
-  bool clearUndoRedoInfo = true;
-  bool ShiftPressed =  KeyEvent->state() & ShiftButton;
-  bool ControlPressed = KeyEvent->state() & ControlButton;
-  bool AltPressed = KeyEvent->state() & AltButton;
-
-  // we only care for cursor keys and the like, won't hardcode any other keys
-  // we also don't check whether the commands are allowed
-  // as the commands are also available as API so the check has to be done
-  // in each command anyway
-  switch( KeyEvent->key() )
-  {
-    case Key_Left:
-      moveCursor( ControlPressed ? MoveWordBackward : MoveBackward, ShiftPressed );
-      break;
-    case Key_Right:
-      moveCursor( ControlPressed ? MoveWordForward : MoveForward, ShiftPressed );
-      break;
-    case Key_Up:
-      moveCursor( ControlPressed ? MovePgUp : MoveUp, ShiftPressed );
-      break;
-    case Key_Down:
-      moveCursor( ControlPressed ? MovePgDown : MoveDown, ShiftPressed );
-      break;
-    case Key_Home:
-      moveCursor( ControlPressed ? MoveHome : MoveLineStart, ShiftPressed );
-      break;
-    case Key_End:
-      moveCursor( ControlPressed ? MoveEnd : MoveLineEnd, ShiftPressed );
-      break;
-    case Key_Prior:
-      moveCursor( MovePgUp, ShiftPressed );
-      break;
-    case Key_Next:
-      moveCursor( MovePgDown, ShiftPressed );
-      break;
-    case Key_Return:
-    case Key_Enter:
-      goInsideByte();
-//       if( isReadOnly() )
-//         viewport()->setCursor( arrowCursor );
-
-//       doKeyboardAction( ActionReturn );
-//       emit returnPressed();
-
-//       KeyEvent->ignore();
-      break;
-    case Key_Tab:
-      if( ActiveColumn == &charColumn() )
-      {
-        // in last column we care about tab changes focus
-        if( TabChangesFocus && !ShiftPressed )
-        {
-          // leave tab for parent widget
-          KeyEvent->ignore();
-          break;
-        }
-        if( valueColumn().isVisible() )
-        {
-          pauseCursor();
-          ActiveColumn = &valueColumn();
-          InactiveColumn = &charColumn();
-          unpauseCursor();
-        }
-        break;
-      }
-
-      if( charColumn().isVisible() )
-      {
-        // in last column we care about tab changes focus
-        if( TabChangesFocus && ShiftPressed )
-        {
-          // leave tab for parent widget
-          KeyEvent->ignore();
-          break;
-        }
-        pauseCursor( true );
-        ActiveColumn = &charColumn();
-        InactiveColumn = &valueColumn();
-        unpauseCursor();
-      }
-      break;
-
-    case Key_Delete:
-      if( ShiftPressed )
-        cut();
-      else if( BufferRanges->hasSelection() )
-        removeSelectedData();
-      else
-      {
-        doKeyboardAction( ControlPressed ? ActionWordDelete : ActionDelete );
-        clearUndoRedoInfo = false;
-      }
-      break;
-
-    case Key_Insert:
-      if( ShiftPressed )
-        paste();
-      else if( ControlPressed )
-        copy();
-      else
-        setOverwriteMode( !OverWrite );
-      break;
-
-    case Key_Backspace:
-      if( AltPressed )
-      {
-        if( ControlPressed )
-          break;
-        else if( ShiftPressed )
-        {
-//           redo();
-          break;
-        }
-        else
-        {
-//           undo();
-          break;
-        }
-      }
-      else if( BufferRanges->hasSelection() )
-      {
-        removeSelectedData();
-        break;
-      }
-
-      doKeyboardAction( ControlPressed ? ActionWordBackspace : ActionBackspace );
-      clearUndoRedoInfo = false;
-      break;
-    case Key_F16: // "Copy" key on Sun keyboards
-      copy();
-      break;
-    case Key_F18: // "Paste" key on Sun keyboards
-      paste();
-      break;
-    case Key_F20: // "Cut" key on Sun keyboards
-      cut();
-      break;
-
-    default:
-      if( KeyEvent->text().length() > 0
-          && ( !(KeyEvent->state()&( ControlButton | AltButton | MetaButton )) )
-          && ( !KeyEvent->ascii() || KeyEvent->ascii() >= 32 ) )
-      {
-        if( isReadOnly() || !handleLetter(KeyEvent) )
-          emit inputFailed();
-      }
-      else
-        KeyUnknown = true;
-  }
-
-  emit cursorPositionChanged( BufferCursor->index() );
-
-//   if( clearUndoRedoInfo )
-//     clearUndoRedo();
-//   changeIntervalTimer->start( 100, true );
-
-  if( KeyUnknown )
+  if( !Controller->handleKeyPress( KeyEvent ) )
     KeyEvent->ignore();
-}
-
-
-bool KHexEdit::handleLetter( QKeyEvent *KeyEvent )
-{
-  if( ActiveColumn == &charColumn() )
-  {
-    QByteArray D( 1 );
-    if( !Codec->encode(&D[0],KeyEvent->text()[0]) )
-      return false;
-//         clearUndoRedoInfo = false;
-    insert( D );
-    ensureCursorVisible();    
-  }
-  else
-  {
-    if( BufferRanges->hasSelection() )
-      return false;
-
-    if( OverWrite )
-    {
-      int ValidIndex = BufferCursor->validIndex();
-      if( ValidIndex == -1 || BufferCursor->isBehind() )
-        return false;
-
-      // check for plus/minus
-      switch( KeyEvent->key() )
-      {
-        case Key_Plus:
-          return incByte();
-        case Key_Minus:
-          return decByte();
-      }
-
-      OldValue = (unsigned char)DataBuffer->datum( ValidIndex );
-    }
-
-    EditValue = 0;
-    bool KeyValid = valueColumn().byteCodec()->appendDigit( &EditValue, KeyEvent->ascii() );
-    if( !KeyValid )
-      return false;
-
-    pauseCursor();
-
-    if( OverWrite )
-    {
-      InEditMode = true;
-      EditModeByInsert = true;
-    }
-    else
-    {
-      int Index = BufferCursor->realIndex();
-      int W = DataBuffer->insert( Index, (char*)&EditValue, 1 );
-      if( W > 0 )
-      {
-        updateLength();
-        BufferRanges->addChangedRange( KSection(Index+1,DataBuffer->size()-1) );
-        BufferCursor->gotoRealIndex();
-        InEditMode = true;
-        EditModeByInsert = true;
-        repaintChanged();
-        ensureCursorVisible();
-      }
-      else
-      {
-        unpauseCursor();
-        return false;
-      }
-    }
-
-    syncEditedByte();
-
-    unpauseCursor();
-
-    emit bufferChanged();
-  }
-  return true;
-}
-
-
-void KHexEdit::moveCursor( KMoveAction Action, bool Select )
-{
-  pauseCursor( true );
-
-  if( Select )
-  {
-    if( !BufferRanges->selectionStarted() )
-      BufferRanges->setSelectionStart( BufferCursor->realIndex() );
-
-    moveCursor( Action );
-    BufferRanges->setSelectionEnd( BufferCursor->realIndex() );
-
-    if( !OverWrite ) emit cutAvailable( BufferRanges->hasSelection() );
-    emit copyAvailable( BufferRanges->hasSelection() );
-    emit selectionChanged();
-  }
-  else
-  {
-    moveCursor( Action );
-    BufferRanges->removeSelection();
-
-    if( BufferRanges->isModified() )
-    {
-      viewport()->setCursor( isReadOnly() ? arrowCursor : ibeamCursor );
-
-      if( !OverWrite ) emit cutAvailable( BufferRanges->hasSelection() );
-      emit copyAvailable( BufferRanges->hasSelection() );
-      emit selectionChanged();
-    }
-  }
-
-  repaintChanged();
-  ensureCursorVisible();
-
-  unpauseCursor();
-}
-
-
-// TODO: table of member functions, indexes by enum CursorAction (CharType would be stored at cursor)
-void KHexEdit::moveCursor( KMoveAction Action )
-{
-  resetInputContext();
-  switch( Action )
-  {
-    case MoveBackward:     BufferCursor->gotoPreviousByte(); break;
-    case MoveWordBackward: {
-                             int NewIndex = BufferCursor->realIndex();
-                             NewIndex = DataBuffer->indexOfPreviousWordStart( NewIndex, KDataBuffer::Readable );
-                             BufferCursor->gotoIndex( NewIndex );
-                           }
-                           break;
-    case MoveForward:      BufferCursor->gotoNextByte();     break;
-    case MoveWordForward:  {
-                             int NewIndex = BufferCursor->realIndex();
-                             NewIndex = DataBuffer->indexOfNextWordStart( NewIndex, KDataBuffer::Readable );
-                             BufferCursor->gotoCIndex( NewIndex );
-                           }
-                           break;
-    case MoveUp:           BufferCursor->gotoUp();             break;
-    case MovePgUp:         BufferCursor->gotoPageUp();         break;
-    case MoveDown:         BufferCursor->gotoDown();           break;
-    case MovePgDown:       BufferCursor->gotoPageDown();       break;
-    case MoveLineStart:    BufferCursor->gotoLineStart();      break;
-    case MoveHome:         BufferCursor->gotoStart();          break;
-    case MoveLineEnd:      BufferCursor->gotoLineEnd();        break;
-    case MoveEnd:          BufferCursor->gotoEnd();            break;
-  }
-}
-
-
-void KHexEdit::doKeyboardAction( KKeyboardAction Action )
-{
-  if( isReadOnly() )
-    return;
-
-  pauseCursor( true );
-
-  switch( Action )
-  {
-    case ActionDelete:
-//       if( BufferCursor->isBehind() )
-//       {
-//         if ( undoEnabled )
-//         {
-//           checkUndoRedoInfo( UndoRedoInfo::Delete );
-//           if ( !undoRedoInfo.valid() )
-//           {
-//             undoRedoInfo.id = cursor->paragraph()->paragId();
-//             undoRedoInfo.index = cursor->index();
-//             undoRedoInfo.d->text = QString::null;
-//           }
-//           undoRedoInfo.d->text.insert( undoRedoInfo.d->text.length(), cursor->paragraph()->at( cursor->index() ), true );
-//         }
-//         cursor->remove();
-//       }
-//       else
-//       {
-//         clearUndoRedo();
-//         doc->setSelectionStart( QTextDocument::Temp, *cursor );
-//         if( Action == ActionWordDelete && !cursor->atParagEnd() )
-//           Cursor->gotoNextWord();
-//         else
-//           Cursor->gotoNextLetter();
-//
-//         doc->setSelectionEnd( QTextDocument::Temp, *cursor );
-//         removeSelectedData( QTextDocument::Temp );
-//       }
-      if( !OverWrite )
-      {
-        int Index = BufferCursor->realIndex();
-        if( Index < BufferLayout->length() )
-        {
-          removeData( KSection(Index,1,false) );
-          if( Index == BufferLayout->length() )
-            BufferCursor->gotoEnd();
-        }
-      }
-      break;
-
-    case ActionWordDelete: // kills data until the start of the next word
-      if( !OverWrite )
-      {
-        int Index = BufferCursor->realIndex();
-        if( Index < BufferLayout->length() )
-        {
-          int End = DataBuffer->indexOfBeforeNextWordStart( Index );
-          removeData( KSection(Index,End) );
-          if( Index == BufferLayout->length() )
-            BufferCursor->gotoEnd();
-        }
-      }
-      break;
-
-    case ActionBackspace:
-      if( OverWrite )
-        BufferCursor->gotoPreviousByte();
-      else
-      {
-        int DeleteIndex = BufferCursor->realIndex() - 1;
-        if( DeleteIndex >= 0 )
-        {
-          removeData( KSection(DeleteIndex,1,false) );
-          if( DeleteIndex == BufferLayout->length() )
-            BufferCursor->gotoEnd();
-          else
-            BufferCursor->gotoPreviousByte();
-        }
-      }
-      break;
-
-//       if( Action == ActionBackspace && !cursor->atParagStart() )
-//       {
-//         if( undoEnabled )
-//         {
-//           checkUndoRedoInfo( UndoRedoInfo::Delete );
-//           if( !undoRedoInfo.valid() )
-//           {
-//             undoRedoInfo.id = cursor->paragraph()->paragId();
-//             undoRedoInfo.index = cursor->index();
-//             undoRedoInfo.d->text = QString::null;
-//           }
-//         }
-//         cursor->gotoPreviousLetter();
-//         if ( undoEnabled )
-//         {
-//           undoRedoInfo.d->text.insert( 0, cursor->paragraph()->at( cursor->index() ), true );
-//           undoRedoInfo.index = cursor->index();
-//         }
-//         cursor->remove();
-//         lastFormatted = cursor->paragraph();
-//       }
-//       else if( cursor->paragraph()->prev()
-//                || (Action == ActionWordBackspace && !cursor->atParagStart()) )
-//       {
-//         clearUndoRedo();
-//         doc->setSelectionStart( QTextDocument::Temp, *cursor );
-//
-//         if ( Action == ActionWordBackspace && !cursor->atParagStart() )
-//           cursor->gotoPreviousWord();
-//         else
-//           cursor->gotoPreviousLetter();
-//
-//         doc->setSelectionEnd( QTextDocument::Temp, *cursor );
-//         removeSelectedData( QTextDocument::Temp );
-//       }
-    case ActionWordBackspace:
-      {
-        int LeftIndex = BufferCursor->realIndex() - 1;
-        if( LeftIndex >= 0 )
-        {
-          int WordStart = DataBuffer->indexOfPreviousWordStart( LeftIndex );
-          if( !OverWrite )
-            removeData( KSection(WordStart,LeftIndex) );
-          if( WordStart == BufferLayout->length() )
-            BufferCursor->gotoEnd();
-          else
-            BufferCursor->gotoIndex(WordStart);
-        }
-      }
-  }
-
-  repaintChanged();
-  ensureCursorVisible();
-
-  unpauseCursor();
-
-  emit cursorPositionChanged( BufferCursor->index() );
-  emit bufferChanged();
 }
 
 
@@ -1984,13 +1342,6 @@ void KHexEdit::repaintChanged()
   resizeContents( totalWidth(), totalHeight() );
 
   KPixelXs Xs( contentsX(), visibleWidth(), true );
-  KPixelYs Ys( contentsY(), visibleHeight(), true );
-
-  // calculate affected lines/indizes
-  KSection VisibleLines = visibleLines( Ys );
-  KSection FullPositions( 0, BufferLayout->noOfBytesPerLine()-1 );
-  KCoordRange VisibleRange( FullPositions, VisibleLines );
-//   std::cout << "repaintChanged->"<<FirstIndex<<":"<<FirstLine<<","<<LastIndex<<":"<<LastLine<<std::endl;
 
   // collect affected buffer columns
   QPtrList<KBufferColumn> RepaintColumns;
@@ -2009,8 +1360,15 @@ void KHexEdit::repaintChanged()
     C = CharColumn;
   }
 
+  // any colums to paint?
   if( RepaintColumns.count() > 0 )
   {
+    KPixelYs Ys( contentsY(), visibleHeight(), true );
+
+    // calculate affected lines/indizes
+    KSection FullPositions( 0, BufferLayout->noOfBytesPerLine()-1 );
+    KCoordRange VisibleRange( FullPositions, visibleLines(Ys) );
+
     KCoordRange ChangedRange;
     // as there might be multiple selections on this line redo until no more is changed
     while( hasChanged(VisibleRange,&ChangedRange) )
@@ -2111,10 +1469,10 @@ void KHexEdit::ensureCursorVisible()
 //     return;
 //   }
 
-  KPixelX x = activeColumn().x() + activeColumn().xOfPos( BufferCursor->pos() );
+  KPixelX x = activeColumn().xOfPos( BufferCursor->pos() )+ activeColumn().byteWidth()/2;
   KPixelY y = LineHeight * BufferCursor->line() + LineHeight/2;
-  int xMargin = 1; // TODO: reasoning of the values 1 and 2 (below)
-  int yMargin = LineHeight/2 + 2;
+  int xMargin = activeColumn().byteWidth()/2 + 1;
+  int yMargin = LineHeight/2 + 1;
   ensureVisible( x, y, xMargin, yMargin );
 }
 
@@ -2318,11 +1676,8 @@ void KHexEdit::contentsMouseDoubleClickEvent( QMouseEvent *e )
     TrippleClickTimer->start( qApp->doubleClickInterval(), true );
     DoubleClickPoint = e->globalPos();
   }
-  else
-  {
-    goInsideByte();
-  }
-
+//  else
+//    ValueEditor->goInsideByte(); TODO: make this possible again
 
   InDoubleClick = true; //
   MousePressed = true;
