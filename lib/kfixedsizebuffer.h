@@ -20,13 +20,16 @@
 
 #include <kdatabuffer.h>
 
+namespace KHE
+{
+
 /** base class for all Data buffers that are used to display
   * TODO: think about a way to inform KHexEdit that there has been
   * a change in the buffer outside. what kind of changes are possible?
   *@author Friedrich W. H. Kossebau
   */
 
-class KFixedSizeBuffer : public KHE::KDataBuffer
+class KFixedSizeBuffer : public KDataBuffer
 {
   public:
     KFixedSizeBuffer( char *D, int S, char FUC = '\0' );
@@ -34,9 +37,9 @@ class KFixedSizeBuffer : public KHE::KDataBuffer
 
   public: // KDataBuffer API
     /** locates working range, returns false if failed */
-    virtual bool prepareRange( KHE::KSection Range );
+    virtual bool prepareRange( KSection Range );
     /** expects pointer to memory, should be in prepared range */
-    virtual const char *dataSet( KHE::KSection S ) const;
+    virtual const char *dataSet( KSection S ) const;
     /** */
     virtual char datum( int Offset ) const;
     /***/
@@ -49,9 +52,9 @@ class KFixedSizeBuffer : public KHE::KDataBuffer
     /** inserts at Position */
     virtual int insert( int Pos, const char*, int Length );
     /** removes beginning with position as much as possible, returns length of removed */
-    virtual int remove( KHE::KSection Remove );
+    virtual int remove( KSection Remove );
     /** replaces as much as possible, returns length of substituted */
-    virtual int replace( KHE::KSection Remove, const char*, int InputLength );
+    virtual int replace( KSection Remove, const char*, int InputLength );
 
     virtual void setModified( bool M = true );
 
@@ -84,8 +87,8 @@ class KFixedSizeBuffer : public KHE::KDataBuffer
 };
 
 
-inline bool KFixedSizeBuffer::prepareRange( KHE::KSection ) { return true; }
-inline const char *KFixedSizeBuffer::dataSet( KHE::KSection S ) const { return &Data[S.start()]; }
+inline bool KFixedSizeBuffer::prepareRange( KSection ) { return true; }
+inline const char *KFixedSizeBuffer::dataSet( KSection S ) const { return &Data[S.start()]; }
 
 inline char KFixedSizeBuffer::datum( int Offset ) const { return Data[Offset]; }
 inline int KFixedSizeBuffer::size() const  { return Size; }
@@ -96,5 +99,7 @@ inline bool KFixedSizeBuffer::isModified()   const { return Modified; }
 
 inline void KFixedSizeBuffer::setReadOnly( bool RO )  { ReadOnly = RO; }
 inline void KFixedSizeBuffer::setModified( bool M )   { Modified = M; }
+
+}
 
 #endif
