@@ -1,0 +1,11 @@
+Test suite for the KHexEdit2 library and parts
+----------------------------------------------
+(see kdeutils/khexedit/{lib,parts})
+
+
+* uses Tim Jansen's KDE::Test framework (found in kdenonbeta/kdeutil)
+
+* Unsermake still misses support for the TESTS variable so you have to 
+  call the test apps manually
+
+* not tested with automake but should work as supposed
