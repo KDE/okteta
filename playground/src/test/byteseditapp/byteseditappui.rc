@@ -22,7 +22,7 @@
     <Action name="view_showunprintable"/>
   </Menu>
   <Menu name="settings">
-    <Menu name=""><text>&amp;Settings</text>
+    <Menu name=""><text>&amp;ResizeStyle</text>
       <Action name="settings_noresize"/>
       <Action name="settings_lockgroups"/>
       <Action name="settings_fullsizeusage"/>
