@@ -147,9 +147,9 @@ void KHexEditPart::fitActionSettings()
 
   const KHexEdit::KEncoding Encoding = HexEdit->encoding();
   if( Encoding == KHexEdit::LocalEncoding )
-    AsciiEncodingAction->setChecked( true );
-  else //if( Encoding == KHexEdit::ISO8859_1Encoding )
     LocalEncodingAction->setChecked( true );
+  else //if( Encoding == KHexEdit::ISO8859_1Encoding )
+    AsciiEncodingAction->setChecked( true );
 
   const KHexEdit::KResizeStyle ResizeStyle = HexEdit->resizeStyle();
   if( ResizeStyle == KHexEdit::NoResize )
@@ -250,9 +250,9 @@ void KHexEditPart::slotSetEncoding()
   // TODO: find out if there is a way to use the exclusivegroup somehow
   KHexEdit::KEncoding Encoding;
   if( AsciiEncodingAction->isChecked() )
-    Encoding = KHexEdit::LocalEncoding;
-  else if( LocalEncodingAction->isChecked() )
     Encoding = KHexEdit::ISO8859_1Encoding;
+  else if( LocalEncodingAction->isChecked() )
+    Encoding = KHexEdit::LocalEncoding;
   else
     //should not be reached;
     Encoding = KHexEdit::LocalEncoding;
