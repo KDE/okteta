@@ -20,7 +20,6 @@
 #include <limits.h>
 // c++ specific
 //#include <limits>
-#include <iostream>
 // qt specific
 #include <qstyle.h>
 #include <qpainter.h>
@@ -2018,41 +2017,33 @@ void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
     if( BufferRanges->selectionIncludes(indexByPoint( MousePoint )) )
     {
       DragStartPossible = true;
-
-      unpauseCursor();
       DragStartTimer->start( QApplication::startDragTime(), true );
       DragStartPoint = MousePoint;
+
+      unpauseCursor();
       return;
     }
 
+    int RealIndex = BufferCursor->realIndex();
     if( BufferRanges->selectionStarted() )
     {
       if( e->state() & ShiftButton )
-        BufferRanges->setSelectionEnd( BufferCursor->realIndex() );
+        BufferRanges->setSelectionEnd( RealIndex );
       else
       {
         BufferRanges->removeSelection();
-        BufferRanges->setSelectionStart( BufferCursor->realIndex() );
+        BufferRanges->setSelectionStart( RealIndex );
       }
     }
-    else
+    else // start of a new selection possible
     {
-      if( isReadOnly() || !(e->state()&ShiftButton) )
-        BufferRanges->setSelectionStart( BufferCursor->realIndex() );
-      else
-      {
-        BufferRanges->setSelectionStart( BufferCursor->realIndex() );
-        BufferRanges->setSelectionEnd( BufferCursor->realIndex() );
-      }
+      BufferRanges->setSelectionStart( RealIndex );
+
+      if( !isReadOnly() && (e->state()&ShiftButton) ) // TODO: why only for readwrite?
+        BufferRanges->setSelectionEnd( RealIndex );
     }
 
     BufferRanges->removeFurtherSelections();
-
-    if( BufferRanges->isModified() )
-    {
-      repaintChanged();
-      viewport()->setCursor( isReadOnly() ? arrowCursor : ibeamCursor );
-    }
   }
   else if( e->button() == MidButton )
     BufferRanges->removeSelection();
@@ -2092,8 +2083,6 @@ void KHexEdit::contentsMouseMoveEvent( QMouseEvent *e )
     bool InSelection = BufferRanges->hasSelection() && BufferRanges->selectionIncludes( indexByPoint(e->pos()) );
     viewport()->setCursor( InSelection?arrowCursor:ibeamCursor );
   }
-
-//  placeCursor( e->pos() );
 }
 
 
@@ -2108,35 +2097,35 @@ void KHexEdit::contentsMouseReleaseEvent( QMouseEvent *e )
     emit clicked( Index );
   }
 
-  int OldIndex = BufferCursor->index();
-
-  if( ScrollTimer->isActive() )
-    ScrollTimer->stop();
-
-  if( DragStartTimer->isActive() )
-    DragStartTimer->stop();
-
-  // still dreaming about a drag start?
-  if( DragStartPossible )
-  {
-    selectAll( false );
-    MousePressed = false;
-
-    unpauseCursor();
-  }
-
   if( MousePressed )
   {
     MousePressed = false;
-    if( QApplication::clipboard()->supportsSelection() )
+
+    if( ScrollTimer->isActive() )
+      ScrollTimer->stop();
+
+    // was only click inside selection, nothing dragged?
+    if( DragStartPossible )
     {
-      ClipboardMode = QClipboard::Selection;
-      disconnect( QApplication::clipboard(), SIGNAL(selectionChanged()), this, 0);
+      selectAll( false );
+      DragStartTimer->stop();
+      DragStartPossible = false;
 
-      copy();
+      unpauseCursor();
+    }
+    // was end of selection operation?
+    else if( BufferRanges->hasSelection() )
+    {
+      if( QApplication::clipboard()->supportsSelection() )
+      {
+        ClipboardMode = QClipboard::Selection;
+        disconnect( QApplication::clipboard(), SIGNAL(selectionChanged()), this, 0);
 
-      connect( QApplication::clipboard(), SIGNAL(selectionChanged()), this, SLOT(clipboardChanged()) );
-      ClipboardMode = QClipboard::Clipboard;
+        copy();
+
+        connect( QApplication::clipboard(), SIGNAL(selectionChanged()), this, SLOT(clipboardChanged()) );
+        ClipboardMode = QClipboard::Clipboard;
+      }
     }
   }
   // middle mouse button paste?
@@ -2145,24 +2134,19 @@ void KHexEdit::contentsMouseReleaseEvent( QMouseEvent *e )
     pauseCursor();
 
     placeCursor( e->pos() );
-    ensureCursorVisible();
-    if( BufferRanges->hasSelection() )
+
+    // replace no selection?
+    if( BufferRanges->hasSelection() && !BufferRanges->selectionIncludes(BufferCursor->index()) )
       BufferRanges->removeSelection();
 
-    BufferRanges->setSelectionStart( OldIndex );
-    BufferRanges->setSelectionStart( BufferCursor->index() );
-
-    BufferRanges->removeFurtherSelections();
-
-    if( BufferRanges->isModified() )
-    {
-      repaintChanged();
-      viewport()->setCursor( ibeamCursor );
-    }
     ClipboardMode = QClipboard::Selection;
     paste();
     ClipboardMode = QClipboard::Clipboard;
 
+    // ensure selection changes to be drawn TODO: create a insert/pasteAtCursor that leaves out drawing
+    repaintChanged();
+
+    ensureCursorVisible();
     unpauseCursor();
   }
 
