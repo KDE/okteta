@@ -22,6 +22,7 @@
 #include "kdatabuffer.h"
 #include "kbufferranges.h"
 #include "kbuffercursor.h"
+#include "kwordbufferservice.h"
 #include "khexedit.h"
 #include "knavigator.h"
 
@@ -101,15 +102,15 @@ void KNavigator::moveCursor( KMoveAction Action, bool Select )
   {
     case MoveBackward:     BufferCursor->gotoPreviousByte(); break;
     case MoveWordBackward: {
-      int NewIndex = BufferCursor->realIndex();
-      NewIndex = HexEdit->DataBuffer->indexOfPreviousWordStart( NewIndex, KDataBuffer::Readable );
+      KWordBufferService WBS( HexEdit->DataBuffer, HexEdit->Codec );
+      int NewIndex = WBS.indexOfPreviousWordStart( BufferCursor->realIndex() );
       BufferCursor->gotoIndex( NewIndex );
     }
     break;
     case MoveForward:      BufferCursor->gotoNextByte();     break;
     case MoveWordForward:  {
-      int NewIndex = BufferCursor->realIndex();
-      NewIndex = HexEdit->DataBuffer->indexOfNextWordStart( NewIndex, KDataBuffer::Readable );
+      KWordBufferService WBS( HexEdit->DataBuffer, HexEdit->Codec );
+      int NewIndex = WBS.indexOfNextWordStart( BufferCursor->realIndex() );
       BufferCursor->gotoCIndex( NewIndex );
     }
     break;

@@ -21,6 +21,7 @@
 #include "kbufferranges.h"
 #include "kbufferlayout.h"
 #include "kbuffercursor.h"
+#include "kwordbufferservice.h"
 #include "khexedit.h"
 #include "keditor.h"
 
@@ -142,7 +143,8 @@ void KEditor::doEditAction( KEditAction Action )
           int Index = BufferCursor->realIndex();
           if( Index < HexEdit->BufferLayout->length() )
           {
-            int End = HexEdit->DataBuffer->indexOfBeforeNextWordStart( Index );
+            KWordBufferService WBS( HexEdit->DataBuffer, HexEdit->Codec );
+            int End = WBS.indexOfBeforeNextWordStart( Index );
             HexEdit->removeData( KSection(Index,End) );
             if( Index == HexEdit->BufferLayout->length() )
               BufferCursor->gotoEnd();
@@ -171,7 +173,8 @@ void KEditor::doEditAction( KEditAction Action )
       int LeftIndex = BufferCursor->realIndex() - 1;
       if( LeftIndex >= 0 )
       {
-        int WordStart = HexEdit->DataBuffer->indexOfPreviousWordStart( LeftIndex );
+        KWordBufferService WBS( HexEdit->DataBuffer, HexEdit->Codec );
+        int WordStart = WBS.indexOfPreviousWordStart( LeftIndex );
         if( !HexEdit->OverWrite )
           HexEdit->removeData( KSection(WordStart,LeftIndex) );
         if( WordStart == HexEdit->BufferLayout->length() )

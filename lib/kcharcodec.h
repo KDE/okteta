@@ -23,13 +23,13 @@
 // lib specific
 #include "khe.h"
 #include "khechar.h"
+#include "khexedit_export.h"
 
-#include <kdemacros.h>
 
 namespace KHE
 {
 
-class KDE_EXPORT KCharCodec
+class KHEXEDIT_EXPORT KCharCodec
 {
   public:
     /** */

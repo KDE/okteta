@@ -16,6 +16,7 @@ libkhexeditcommon_la_SOURCES = kcolumn.cpp kbordercolumn.cpp koffsetcolumn.cpp \
                                kplainbuffer.cpp kfixedsizebuffer.cpp kbigbuffer.cpp \
                                kbuffercursor.cpp kbufferlayout.cpp kbufferranges.cpp \
                                kcursor.cpp kbufferdrag.cpp \
+                               kwordbufferservice.cpp \
                                ksectionlist.cpp kcoordrangelist.cpp \
                                kbordercoltextexport.cpp koffsetcoltextexport.cpp \
                                kbuffercoltextexport.cpp kvaluecoltextexport.cpp kcharcoltextexport.cpp
@@ -32,6 +33,7 @@ noinst_HEADERS = kcolumn.h kbordercolumn.h koffsetcolumn.h \
                  kcoltextexport.h kbordercoltextexport.h koffsetcoltextexport.h \
                  kbuffercoltextexport.h kvaluecoltextexport.h kcharcoltextexport.h \
                  kadds.h khe.h krange.h ksection.h \
+                 kwordbufferservice.h \
                  kcolumnsview.h khexedit.h kbytesedit.h \
                  kplainbuffer.h kfixedsizebuffer.h kbigbuffer.h \
                  kdatabuffer.h kreadonlybuffer.h kwrappingrobuffer.h

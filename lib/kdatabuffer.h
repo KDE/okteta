@@ -19,6 +19,7 @@
 #define KHE_KDATABUFFER_H
 
 
+// lib specific
 #include "ksection.h"
 #include "khexedit_export.h"
 
@@ -65,8 +66,6 @@ class KHEXEDIT_EXPORT KDataBuffer
 {
   friend class KDataBufferIterator;
 
-  public:
-    enum KWordCharType { Any, Printable, Readable };
 
   protected:
     KDataBuffer();
@@ -194,87 +193,6 @@ class KHEXEDIT_EXPORT KDataBuffer
     int copyTo( char* Dest, int Pos, int n ) const;
 
 
-  public: // word API
-    /** searches for the start of the word including the given index.
-      * if no other nonwordchar preceds this is 0;
-      * If the byte at the given Index is already a nonword char the given index is returned.
-      * @param Index index to start with
-      * @param CharType
-      * @return index of the first char of the current word or the given index if there is none
-      */
-    virtual int indexOfWordStart( int Index, KWordCharType CharType = Readable ) const;
-    virtual int indexOfLeftWordSelect( int Index, KWordCharType CharType = Readable ) const;
-    /** searches for the end of the word including the given index.
-      * If the byte at the given Index is already a nonword char the given index is returned.
-      * if no other nonwordchar follows, that of the last byte;
-      * @param Index index to start with
-      * @param CharType
-      * @return index of the last char of the current word or the given index if there is none
-      */
-    virtual int indexOfWordEnd( int Index, KWordCharType CharType = Readable ) const;
-    /** searches for the first char after the end of the word including the given index.
-      * If the byte at the given Index is already a nonword char the given index is returned.
-      * if no other nonwordchar follows that of behind the last byte;
-      * @param Index index to start with
-      * @param CharType
-      * @return index of the first char after the current word or the given index if there is none
-      */
-    virtual int indexOfRightWordSelect( int Index, KWordCharType CharType = Readable ) const;
-    /** searches for the first char after the end of the word including the given index.
-      * If the byte at the given Index is already a nonword char the given index is returned.
-      * if no other nonwordchar follows that of behind the last byte;
-      * @param Index index to start with
-      * @param CharType
-      * @return index of the first char after the current word or the given index if there is none
-      */
-//    virtual int indexOfBehindLeftWordEnd( int Index, KWordCharType CharType = Readable ) const;
-    /** searches for the first char after the end of the word including the given index.
-      * If the byte at the given Index is already a nonword char the given index is returned.
-      * if no other nonwordchar follows that of behind the last byte;
-      * @param Index index to start with
-      * @param CharType
-      * @return index of the first char after the current word or the given index if there is none
-      */
-//    virtual int indexOfBehindRightWordEnd( int Index, KWordCharType CharType = Readable ) const;
-    /** searches the start of the next previous word that does not include the given index,
-      * if no further word is found 0 is returned.
-      * if the index is out of range the behaviour is undefined.
-      * @param Index
-      * @param CharType
-      * @return index of the next previous word start or 0
-      */
-    virtual int indexOfPreviousWordStart( int Index, KWordCharType CharType = Readable ) const;
-    /** searches for the start of the next word not including the given index.
-      * if there isn't a next word the index behind end is returned
-      * @param Index
-      * @param CharType
-      * @return index of the start of the next word or behind end
-      */
-    virtual int indexOfNextWordStart( int Index, KWordCharType CharType = Readable ) const;
-    /** searches for the start of the next word not including the given index.
-      * if there isn't a next word the index of the end is returned
-      * @param Index index to start with
-      * @param CharType
-      * @return index of the last nonword char before the next word or the last index
-      */
-    virtual int indexOfBeforeNextWordStart( int Index, KWordCharType CharType = Readable ) const;
-
-    /** if Index is out of range the behaviour is undefined
-      * @param Index
-      * @param CharType
-      * @return @c true if the byte at position i is a char of type CharType 
-      */
-    bool isWordChar( int Index, KWordCharType CharType = Readable ) const;
-
-    /** returns the section with a word around index.
-      * if there is no word the section is empty
-      * @param Index
-      * @param CharType
-      * @return the section with a word around index.
-      */
-    virtual KSection wordSection( int Index, KWordCharType CharType = Readable  ) const;
-
-
   public: // finding API
     /** searches beginning with byte at Pos.
       * @param 
@@ -320,7 +238,6 @@ inline int KDataBuffer::replace( int Pos, int RemoveLength, const char* D, int I
 { return replace( KSection(Pos,Pos+RemoveLength-1), D, InputLength ); }
 
 inline bool KDataBuffer::isReadOnly() const { return false; }
-
 
 }
 

@@ -49,6 +49,7 @@
 #include "kcursor.h"
 #include "kbytecodec.h"
 #include "kcharcodec.h"
+#include "kwordbufferservice.h"
 #include "khexedit.h"
 
 using namespace KHE;
@@ -727,20 +728,21 @@ bool KHexEdit::selectWord( /*unsigned TODO:change all unneeded signed into unsig
 {
   if( Index >= 0 && Index < BufferLayout->length()  )
   {
-      KSection WordSection = DataBuffer->wordSection( Index );
-      if( WordSection.isValid() )
-      {
-        pauseCursor();
+    KWordBufferService WBS( DataBuffer, Codec );
+    KSection WordSection = WBS.wordSection( Index );
+    if( WordSection.isValid() )
+    {
+      pauseCursor();
 
-        BufferRanges->setFirstWordSelection( WordSection );
-        BufferCursor->gotoIndex( WordSection.end()+1 );
-        repaintChanged();
+      BufferRanges->setFirstWordSelection( WordSection );
+      BufferCursor->gotoIndex( WordSection.end()+1 );
+      repaintChanged();
 
-        unpauseCursor();
-        return true;
-      }
-   }
-   return false;
+      unpauseCursor();
+      return true;
+    }
+  }
+  return false;
 }
 
 
@@ -1742,17 +1744,18 @@ void KHexEdit::handleMouseMove( const QPoint& Point ) // handles the move of the
   {
     int NewIndex = BufferCursor->realIndex();
     KSection FirstWordSelection = BufferRanges->firstWordSelection();
+    KWordBufferService WBS( DataBuffer, Codec );
     // are we before the selection?
     if( NewIndex < FirstWordSelection.start() )
     {
       BufferRanges->ensureWordSelectionForward( false );
-      NewIndex = DataBuffer->indexOfLeftWordSelect( NewIndex );
+      NewIndex = WBS.indexOfLeftWordSelect( NewIndex );
     }
     // or behind?
     else if( NewIndex > FirstWordSelection.end() )
     {
       BufferRanges->ensureWordSelectionForward( true );
-      NewIndex = DataBuffer->indexOfRightWordSelect( NewIndex );
+      NewIndex = WBS.indexOfRightWordSelect( NewIndex );
     }
     // or inside?
     else
