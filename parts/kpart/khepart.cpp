@@ -95,7 +95,8 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
   EncodingAction = new KSelectAction( i18n("&Char Encoding"), 0, AC, "view_charencoding" );
   List.clear();
   List.append( i18n("&Local") );
-  List.append( i18n("&ISO8859-1") );
+  List.append( "&ISO 8859-1" );
+  List.append( "&EBCDIC 1047" );
   EncodingAction->setItems( List );
   connect( EncodingAction, SIGNAL(activated(int)), this, SLOT(slotSetEncoding(int)) );
 
