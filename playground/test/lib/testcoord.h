@@ -20,29 +20,36 @@
 
 // kde specific
 #include <kde/test/slottest.h>
-// test specific
-#include <kbuffercoord.h>
 
 class CoordTest : public KDE::Test::SlotTest 
 {
   Q_OBJECT
-  
-  protected:
-    KHE::KBufferCoord Coord;
-    
+
   public:
     CoordTest();
-  
-  public: // SlotTest API
-    void setUp();
-    void tearDown();
-  
+
   public slots: // test functions
-    void testCoordCopyEquals();
-    void testCoordSet();
-    void testCoordGoto();
-    void testCoordCompare();
-    void testCoordByIndex();
+    void testConstructor();
+    void testSetConstructor();
+    void testCopyConstructor();
+    void testEquals();
+    void testAssign();
+    void testSetPosLine();
+    void testSet();
+    void testIsAtStart();
+    void testGotoStart();
+    void testGo();
+    void testGoN();
+    void testGotoControlled();
+    void testGoLineStart();
+    void testGoLineEnd();
+    void testCompareOperator();
+    void testIsBelowIsAbove();
+    void testIsLaterPriorInLineThan();
+    void testIsBeforeLineStart();
+    void testIsBeforeLineEnd();
+    void testIndexNWidth();
+
 };
 
 #endif

@@ -18,7 +18,8 @@
 // kde specific
 #include <kde/test/slottest.h>
 #include <kde/test/testrunner.h>
-// app specific
+// test specific
+#include <ksection.h>
 #include "testsection.h"
 
 // namespaces
@@ -29,18 +30,11 @@ using namespace KHE;
 static const int Start = 3;
 static const int End = 15;
 
+static const int Width = End - Start + 1;
 
-SectionTest::SectionTest() 
- :  SlotTest( "SectionTest" ) 
-{
-}
 
-void SectionTest::setUp() 
-{
-  Section.set( Start, End );
-}
-
-void SectionTest::tearDown() 
+SectionTest::SectionTest()
+  :  SlotTest( "SectionTest" ) // TODO: replace this by using the object->className()
 {
 }
 
@@ -48,37 +42,94 @@ void SectionTest::tearDown()
 
 //---------------------------------------------------------------------------- Tests -----
 
-void SectionTest::testSectionCopyCompare() 
+void SectionTest::testConstructorByEnd()
 {
-  KT_ASSERT_EQUALS( "start()", Section.start(), Start );
-  KT_ASSERT_EQUALS( "end()", Section.end(), End );
-
-  KSection S1 = Section;
-  KT_ASSERT( "Test ==", S1 == Section );    
-  
-  KSection S2;
-  KT_ASSERT( "isNull()", S2.isNull() );
-  S2 = KSection( S1.start(), S1.end() + S1.width() );
-  KT_ASSERT( "!isNull()", !S2.isNull() );
-  KT_ASSERT_EQUALS( "width()" , S2.width(), S1.width() * 2 );
-  
-  int i = S1.start();
-  KT_ASSERT( "includes, min", S1.includes(i) );
-  --i;
-  KT_ASSERT( "!includes, min", !S1.includes(i) );
-  i = S1.end();
-  KT_ASSERT("includes, max", S1.includes(i) );
-  ++i;
-  KT_ASSERT("!includes, max", !S1.includes(i) );
-  
-  KT_ASSERT("hi, this is wrong", false ); 
+  KSection Section( Start, End );
+  KT_ASSERT_EQUALS( "Start by constructor", Section.start(), Start );
+  KT_ASSERT_EQUALS( "End by constructor", Section.end(), End );
+  KT_ASSERT_EQUALS( "Width by constructor", Section.width(), Width );
 }
 
+void SectionTest::testConstructorByWidth()
+{
+  KSection Section( Start, Width, true );
+  KT_ASSERT_EQUALS( "Start by constructor", Section.start(), Start );
+  KT_ASSERT_EQUALS( "End by constructor", Section.end(), End );
+  KT_ASSERT_EQUALS( "Width by constructor", Section.width(), Width );
+}
+
+void SectionTest::testSimpleConstructor()
+{
+  KSection Section;
+  KT_ASSERT( "Simpleconstructor", Section.isEmpty() );
+}
+
+void SectionTest::testSetGetStart()
+{
+  KSection Section;
+  Section.setStart( Start );
+  KT_ASSERT_EQUALS( "Start by set", Section.start(), Start );
+}
+
+void SectionTest::testSetGetEnd()
+{
+  KSection Section;
+  Section.setEnd( End );
+  KT_ASSERT_EQUALS( "End by set", Section.end(), End );
+}
+
+
+void SectionTest::testSetGetWidth()
+{
+  KSection Section;
+  Section.setStart( Start );
+  Section.setEndByWidth( Width );
+  KT_ASSERT_EQUALS( "End by Width", Section.end(), End );
+  KT_ASSERT_EQUALS( "Width by Width", Section.width(), Width );
+  Section.setEnd( End );
+  Section.setStartByWidth( Width );
+  KT_ASSERT_EQUALS( "Start by Width", Section.start(), Start );
+  KT_ASSERT_EQUALS( "Width by Width", Section.width(), Width );
+}
+
+void SectionTest::testIsEmpty()
+{
+  KSection Section( Start, End );
+  KT_ASSERT( "!isEmpty()", !Section.isEmpty() );
+  Section.unset();
+  KT_ASSERT( "isEmpty()", Section.isEmpty() );
+}
+
+void SectionTest::testCompare()
+{
+  KSection Section( Start, End );
+  KSection OtherSection( Start, End );
+  KT_ASSERT( "operator==", Section == OtherSection );
+  OtherSection.set(Start+1, End);
+  KT_ASSERT( "!operator==", ! (Section == OtherSection) );
+  OtherSection.set(Start, End+1);
+  KT_ASSERT( "!operator==", ! (Section == OtherSection) );
+}
+
+//
+void SectionTest::testIncludes()
+{
+  KSection Section( Start, End );
+  int i = Section.start();
+  KT_ASSERT( "includes, min", Section.includes(i) );
+  --i;
+  KT_ASSERT( "!includes, min", !Section.includes(i) );
+  i = Section.end();
+  KT_ASSERT( "includes, max", Section.includes(i) );
+  ++i;
+  KT_ASSERT( "!includes, max", !Section.includes(i) );
+}
 
 int main( int, char** )
 {
   SectionTest t;
   return TestRunner( &t ).run();
 }
+
 
 #include "testsection.moc"

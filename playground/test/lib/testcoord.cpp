@@ -18,7 +18,8 @@
 // kde specific
 #include <kde/test/slottest.h>
 #include <kde/test/testrunner.h>
-// app specific
+// test specific
+#include <kbuffercoord.h>
 #include "testcoord.h"
 
 // namespaces
@@ -35,148 +36,234 @@ static const int Steps = 5;
 
 
 CoordTest::CoordTest() 
- :  SlotTest( "CoordTest" ) 
+ :  SlotTest( "CoordTest" )
 {
 }
-
-void CoordTest::setUp() 
-{
-  Coord.set( Pos, Line );
-}
-
-void CoordTest::tearDown() 
-{
-}
-
 
 
 //---------------------------------------------------------------------------- Tests -----
 
-void CoordTest::testCoordCopyEquals() 
+void CoordTest::testConstructor()
 {
-  KBufferCoord C1( Coord );
-  KT_ASSERT( "Test ==", C1 == Coord );    
-  KBufferCoord C2;
-  KT_ASSERT( "Test !=", C2 != C1 );    
-  KT_ASSERT( "isAtStart()", C2.isAtStart() );
-  C2 = KBufferCoord( C1.pos(), C1.line() );
-  KT_ASSERT( "!isAtStart()", !C2.isAtStart() );
-  KBufferCoord C3;
-  C3 = C1;
-  KT_ASSERT( "operator=", C1 == C3 );
+  KBufferCoord Coord;
+
+  KT_ASSERT_EQUALS( "pos()", Coord.pos(), 0 );
+  KT_ASSERT_EQUALS( "line()", Coord.line(), 0 );
 }
 
 
-void CoordTest::testCoordSet() 
+void CoordTest::testSetConstructor()
 {
+  KBufferCoord Coord( Pos, Line );
+
   KT_ASSERT_EQUALS( "pos()", Coord.pos(), Pos );
   KT_ASSERT_EQUALS( "line()", Coord.line(), Line );
-
-  // setX
-  KBufferCoord C1;
-  C1.setPos( Pos );
-  KT_ASSERT_EQUALS( "setPos()", C1.pos(), Pos );    
-  C1.setLine( Line );
-  KT_ASSERT_EQUALS( "setLine()", C1.line(), Line );    
-  
-  // set
-  KBufferCoord C2;
-  C2.set( Pos, Line );
-  KT_ASSERT( "set()", C2 == C1  );
 }
 
 
-void CoordTest::testCoordGoto() 
+void CoordTest::testCopyConstructor()
 {
-  KBufferCoord C2 = Coord;
-  C2.gotoStart();
-  KT_ASSERT( "gotoStart()", C2.isAtStart() );
- 
-  // goX
-  C2 = Coord;
-  C2.goRight(); C2.goDown(); C2.goLeft(); C2.goUp();
-  KT_ASSERT( "going clockwise by one", C2 == Coord ); 
-  C2.goUp(); C2.goLeft(); C2.goDown(); C2.goRight();
-  KT_ASSERT( "going against clockwise by one", C2 == Coord ); 
-  
-  // goX( n )
-  C2.goRight( Steps ); C2.goDown( Steps ); C2.goLeft( Steps ); C2.goUp( Steps );
-  KT_ASSERT( "going clockwise by 5" , C2 == Coord ); 
-  C2.goUp( Steps ); C2.goLeft( Steps ); C2.goDown( Steps ); C2.goRight( Steps );
-  KT_ASSERT( "going against clockwise by 5", C2 == Coord );   
-  
-  // goControlled
-  KBufferCoord C1( MaxPos, Coord.line() );
-  C2 = C1;
-  C1.gotoStartOfNextLine();
-  C2.goCRight( MaxPos );
-  KT_ASSERT( "gotoStartOfNextLine(), goCRight()", C1 == C2 );
-  C1.gotoEndOfPreviousLine( MaxPos );
-  C2.goCLeft( MaxPos );
-  KT_ASSERT( "gotoEndOfPreviousLine(), goCLeft()", C1 == C2 ); 
-  
-  // goLimited
-  C1 = C2 = Coord;
-  C2.goLineStart( C1 );
-  KT_ASSERT( "goLineStart(), same line", C1 == C2 );
-  C2.goUp();
-  C2.goLineStart( C1 );
-  KT_ASSERT( "goLineStart(), another line", C2.pos() == 0 );
-  C2.goLineEnd( MaxPos, C1 );
-  KT_ASSERT( "goLineEnd(), another line", C2.pos() == MaxPos );
-  C2.goDown();
-  C2.goLineEnd( MaxPos, C1 );
-  KT_ASSERT( "goLineEnd(), same line", C1 == C2 );
-}
+  KBufferCoord Coord( Pos, Line );
+  KBufferCoord OtherCoord( Coord );
 
-void CoordTest::testCoordCompare() 
-{
-  KBufferCoord C1 = Coord;
-  KBufferCoord C2( C1.pos()+1, C1.line() );
-  KT_ASSERT( "operator>()", C2>C1 );
-  
-  // isBelow, isAbove
-  C2.setLine( C1.line() );
-  C2.goDown();
-  KT_ASSERT( "isBelow()", C2.isBelow(C1.line()) );
-  KT_ASSERT( "!isAbove()", !C2.isAbove(C1.line()) );
-  C2.goUp(2);
-  KT_ASSERT( "isAbove()", C2.isAbove(C1.line()) );
-  KT_ASSERT( "!isBelow()", !C2.isBelow(C1.line()) );
-  C2.goDown();
-  KT_ASSERT( "!isBelow() && !isAbove()", !C2.isBelow(C1.line()) && !C2.isAbove(C1.line()) );
-
-  // isLaterInLineThan, isPriorInLineThan
-  C2 = C1;
-  C2.goRight();
-  KT_ASSERT( "isLaterInLineThan()", C2.isLaterInLineThan(C1) );
-  KT_ASSERT( "!isPriorInLineThan()", !C2.isPriorInLineThan(C1) );
-  C2.goLeft(2);
-  KT_ASSERT( "isPriorInLineThan()", C2.isPriorInLineThan(C1) );
-  KT_ASSERT( "!isLaterInLineThan()", !C2.isLaterInLineThan(C1) );
-  C2.goRight();
-  KT_ASSERT( "!isLaterInLineThan() && !isPriorInLineThan()", 
-             !C2.isLaterInLineThan(C1) && !C2.isPriorInLineThan(C1) );
-             
-  // isBehindLineStart
-  C2.setPos( 1 );
-  KT_ASSERT( "isBehindLineStart()", C2.isBehindLineStart() );
-  C2.goLeft();
-  KT_ASSERT( "!isBehindLineStart()", !C2.isBehindLineStart() );
-  
-  // isBeforeLineEnd
-  C2.setPos( MaxPos-1 );
-  KT_ASSERT( "isBeforeLineEnd()", C2.isBeforeLineEnd(MaxPos) );
-  C2.goRight();
-  KT_ASSERT( "!isBeforeLineEnd()", !C2.isBeforeLineEnd(MaxPos) );
+  KT_ASSERT_EQUALS( "pos()", OtherCoord.pos(), Pos );
+  KT_ASSERT_EQUALS( "line()", OtherCoord.line(), Line );
 }
 
 
-void CoordTest::testCoordByIndex() 
+void CoordTest::testEquals()
 {
-  KBufferCoord C2;
-  C2.setByIndexNWidth( Index, LineWidth );
-  KT_ASSERT_EQUALS( "indexByLineWidth()" , C2.indexByLineWidth(LineWidth), Index ); 
+  KBufferCoord Coord( Pos, Line );
+
+  KBufferCoord OtherCoord( Coord );
+  KT_ASSERT_EQUALS( "Test ==", OtherCoord == Coord, true );
+  OtherCoord.goRight();
+  KT_ASSERT_EQUALS( "Test !=", OtherCoord != Coord, true );
+}
+
+
+void CoordTest::testAssign()
+{
+  KBufferCoord Coord( Pos, Line );
+
+  KBufferCoord OtherCoord;
+  OtherCoord = Coord;
+  KT_ASSERT( "operator=", OtherCoord == Coord );
+}
+
+
+void CoordTest::testSetPosLine()
+{
+  KBufferCoord Coord;
+  Coord.setPos( Pos );
+  KT_ASSERT_EQUALS( "setPos()", Coord.pos(), Pos );
+  Coord.setLine( Line );
+  KT_ASSERT_EQUALS( "setLine()", Coord.line(), Line );
+}
+
+
+void CoordTest::testSet()
+{
+  KBufferCoord Coord;
+  Coord.set( Pos, Line );
+  KT_ASSERT( "set()", Coord.pos()==Pos && Coord.line()==Line );
+}
+
+
+void CoordTest::testIsAtStart()
+{
+  KBufferCoord Coord(0,0);
+
+  KT_ASSERT( "", Coord.isAtStart() );
+}
+
+
+void CoordTest::testGotoStart()
+{
+  KBufferCoord Coord;
+  Coord.gotoStart();
+  KT_ASSERT( "gotoStart()", Coord.isAtStart() );
+}
+
+
+void CoordTest::testGo()
+{
+  KBufferCoord Coord( Pos, Line );
+  KBufferCoord OtherCoord( Coord );
+  OtherCoord.goRight(); OtherCoord.goDown(); OtherCoord.goLeft(); OtherCoord.goUp();
+  KT_ASSERT( "going clockwise by one", OtherCoord == Coord );
+  OtherCoord.goUp(); OtherCoord.goLeft(); OtherCoord.goDown(); OtherCoord.goRight();
+  KT_ASSERT( "going against clockwise by one", OtherCoord == Coord );
+}
+
+
+void CoordTest::testGoN()
+{
+  KBufferCoord Coord( Pos, Line );
+  KBufferCoord OtherCoord( Coord );
+  OtherCoord.goRight( Steps ); OtherCoord.goDown( Steps );
+  OtherCoord.goLeft( Steps ); OtherCoord.goUp( Steps );
+  KT_ASSERT( "going clockwise by N" , OtherCoord == Coord );
+  OtherCoord.goUp( Steps ); OtherCoord.goLeft( Steps );
+  OtherCoord.goDown( Steps ); OtherCoord.goRight( Steps );
+  KT_ASSERT( "going against clockwise by N", OtherCoord == Coord );
+}
+
+
+void CoordTest::testGotoControlled()
+{
+  KBufferCoord Coord( MaxPos, Line );
+  KBufferCoord OtherCoord( Coord );
+
+  Coord.gotoStartOfNextLine();
+  OtherCoord.goCRight( MaxPos );
+  KT_ASSERT( "gotoStartOfNextLine(), goCRight()", Coord == OtherCoord );
+  Coord.gotoEndOfPreviousLine( MaxPos );
+  OtherCoord.goCLeft( MaxPos );
+  KT_ASSERT( "gotoEndOfPreviousLine(), goCLeft()", Coord == OtherCoord );
+}
+
+
+void CoordTest::testGoLineStart()
+{
+  KBufferCoord Coord( Pos, Line );
+  KBufferCoord OtherCoord;
+
+  OtherCoord.setLine( Coord.line() );
+  OtherCoord.goLineStart( Coord );
+  KT_ASSERT( "goLineStart(), same line", Coord == OtherCoord );
+  OtherCoord.goUp();
+  OtherCoord.goLineStart( Coord );
+  KT_ASSERT_EQUALS( "goLineStart(), another line", OtherCoord.pos(), 0 );
+}
+
+
+void CoordTest::testGoLineEnd()
+{
+  KBufferCoord Coord( Pos, Line );
+  KBufferCoord OtherCoord;
+
+  OtherCoord.setLine( Coord.line() );
+  OtherCoord.goLineEnd( MaxPos, Coord );
+  KT_ASSERT( "goLineEnd(), same line", Coord == OtherCoord );
+  OtherCoord.goDown();
+  OtherCoord.goLineEnd( MaxPos, Coord );
+  KT_ASSERT_EQUALS( "goLineEnd(), another line", OtherCoord.pos(), MaxPos );
+}
+
+void CoordTest::testCompareOperator()
+{
+  KBufferCoord Coord( Pos, Line );
+  KBufferCoord OtherCoord( Coord );
+
+  OtherCoord.goRight();
+  KT_ASSERT( "operator>()", OtherCoord>Coord );
+  KT_ASSERT( "!operator<()", !(OtherCoord<Coord) );
+  OtherCoord.goLeft(2);
+  KT_ASSERT( "operator<()", OtherCoord<Coord );
+  KT_ASSERT( "!operator>()", !(OtherCoord>Coord) );
+  OtherCoord.goRight();
+  KT_ASSERT( "!operator>()", !(OtherCoord>Coord) );
+  KT_ASSERT( "!operator<()", !(OtherCoord<Coord) );
+}
+
+
+void CoordTest::testIsBelowIsAbove()
+{
+  KBufferCoord Coord( Pos, Line );
+  KBufferCoord OtherCoord( Coord );
+
+  OtherCoord.goDown();
+  KT_ASSERT( "isBelow()", OtherCoord.isBelow(Coord.line()) );
+  KT_ASSERT( "!isAbove()", !OtherCoord.isAbove(Coord.line()) );
+  OtherCoord.goUp( 2 );
+  KT_ASSERT( "isAbove()", OtherCoord.isAbove(Coord.line()) );
+  KT_ASSERT( "!isBelow()", !OtherCoord.isBelow(Coord.line()) );
+  OtherCoord.goDown();
+  KT_ASSERT( "!isAbove()", !OtherCoord.isAbove(Coord.line()) );
+  KT_ASSERT( "!isBelow()", !OtherCoord.isBelow(Coord.line()) );
+}
+
+void CoordTest::testIsLaterPriorInLineThan()
+{
+  KBufferCoord Coord( Pos, Line );
+  KBufferCoord OtherCoord( Coord );
+
+  OtherCoord.goRight();
+  KT_ASSERT( "isLaterInLineThan()", OtherCoord.isLaterInLineThan(Coord) );
+  KT_ASSERT( "!isPriorInLineThan()", !OtherCoord.isPriorInLineThan(Coord) );
+  OtherCoord.goLeft(2);
+  KT_ASSERT( "isPriorInLineThan()", OtherCoord.isPriorInLineThan(Coord) );
+  KT_ASSERT( "!isLaterInLineThan()", !OtherCoord.isLaterInLineThan(Coord) );
+  OtherCoord.goRight();
+  KT_ASSERT( "!isPriorInLineThan()", !OtherCoord.isPriorInLineThan(Coord) );
+  KT_ASSERT( "!isLaterInLineThan()", !OtherCoord.isLaterInLineThan(Coord) );
+}
+
+void CoordTest::testIsBeforeLineStart()
+{
+  KBufferCoord Coord( 1, Line );
+
+  KT_ASSERT_EQUALS( "isBehindLineStart()", Coord.isBehindLineStart(), true );
+  Coord.goLeft();
+  KT_ASSERT_EQUALS( "!isBehindLineStart()", Coord.isBehindLineStart(), false );
+}
+
+void CoordTest::testIsBeforeLineEnd()
+{
+  KBufferCoord Coord( MaxPos-1, Line );
+
+  KT_ASSERT_EQUALS( "isBeforeLineEnd()", Coord.isBeforeLineEnd(MaxPos), true );
+  Coord.goRight();
+  KT_ASSERT_EQUALS( "!isBeforeLineEnd()", Coord.isBeforeLineEnd(MaxPos), false );
+}
+
+
+void CoordTest::testIndexNWidth()
+{
+  KBufferCoord Coord;
+  Coord.setByIndexNWidth( Index, LineWidth );
+  KT_ASSERT_EQUALS( "indexByLineWidth()", Coord.indexByLineWidth(LineWidth), Index );
 }
 
 

@@ -20,25 +20,24 @@
 
 // kde specific
 #include <kde/test/slottest.h>
-// test specific
-#include <ksection.h>
 
 class SectionTest : public KDE::Test::SlotTest 
 {
   Q_OBJECT
-  
-  protected:
-    KHE::KSection Section;
-    
+
   public:
     SectionTest();
-  
-  public: // SlotTest API
-    void setUp();
-    void tearDown();
-  
+
   public slots: // test functions
-    void testSectionCopyCompare();
+    void testConstructorByEnd();
+    void testConstructorByWidth();
+    void testSimpleConstructor();
+    void testSetGetStart();
+    void testSetGetEnd();
+    void testSetGetWidth();
+    void testIsEmpty();
+    void testCompare();
+    void testIncludes();
 };
 
 #endif
