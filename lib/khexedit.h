@@ -51,6 +51,15 @@ class KHexEditPrivate;
 
 
 /** the main widget
+  * 
+  * The functions split up in helper functions and those that are complete.
+  * 
+  * Complete functions can be called from the outside and leave the widget in 
+  * a consistent state. They care for exceptions so one can safely call them in all 
+  * situations (like empty buffer, cursor behind end etc.)
+  *
+  * Helper functions do only partial tasks and need to be completed. They often do not 
+  * check for exceptions so one has to care for this.
   *
   *@author Friedrich W. H. Kossebau
   */
@@ -127,50 +136,56 @@ class KHexEdit : public KColumnsView
     int noOfBytesPerLine() const;
     int startOffset() const;
     int firstLineOffset() const;
+    
   // value column
     KCoding coding() const;
     int/*KPixelX*/ byteSpacingWidth() const;
     int noOfGroupedBytes() const;
     int/*KPixelX*/ groupSpacingWidth() const;
     int/*KPixelX*/ binaryGapWidth() const;
+    
   // char column
-    /** returns true if "unprintable" chars (>32) are displayed in the char column
-      * with their corresponding character, default is false
+    /** reports if "unprintable" chars (value<32) are displayed in the char column
+      * with their original character. Default is false
+      * @return @c true if original chars are displayed, otherwise @c false 
       */
     bool showUnprintable() const;
-    /** returns the actually used substitute character for "unprintable" chars, default is '.' */
+    /** gives the used substitute character for "unprintable" chars, default is '.'
+      * @return substitute character 
+      */
     QChar substituteChar() const;
-    /** */
+    /**
+      * @return encoding used in the char column
+      */
     KEncoding encoding() const;
 
 
   public: // logic value service
-    /** returns the number of bytes per line that fit into a widget with the given size
+    /** calculates the number of bytes per line that fit into a widget with the given size
       * tests whether a vertical scroll bar is needed at all or not due to the given width
       * takes the frame width into account
-      *@param TestSize Size the widget might have
+      * @param TestSize Size the widget might have
+      * @return number of bytes per line that fit into a widget with the given size
       */
     int fittingBytesPerLine( const QSize &TestSize ) const;
-    /** returns the index of the byte that is displayed around the point (in viewport coordinate system)
+    /** detects the index of the byte at the given point
+      * @param Point in viewport coordinate system
+      * @return index of the byte that covers the point
       */
     int indexByPoint(const QPoint &Point ) const;
 
   public:
-    /** returns a deep copy of the selected data */
+    /** 
+      * @return deep copy of the selected data 
+      */
     QByteArray selectedData() const;
-
-  public:
-    const KOffsetColumn& offsetColumn() const;
-    const KValueColumn& valueColumn()    const;
-    const KCharColumn& charColumn()   const;
-    const KBufferColumn& activeColumn() const;
-    const KBufferColumn& inactiveColumn() const;
-
 
   public: // modification access
     /** moves the cursor according to the action, handles all drawing */
     void moveCursor( KMoveAction Action );
-    /** puts the cursor to the position of index, handles all drawing */
+    /** puts the cursor to the position of index, handles all drawing 
+      * @param Index 
+      */
     void setCursorPosition( int Index );
     /** puts the cursor in the column at the pos of Point (in absolute coord), does not handle the drawing */
     void placeCursor( const QPoint &Point );
@@ -259,6 +274,8 @@ class KHexEdit : public KColumnsView
   // interaction
     /** de-/selects all data */
     void selectAll( bool select );
+    /** selects word at index, returns true if there is one */
+    bool selectWord( /*unsigned*/ int Index /*, Chartype*/ );
     /**  */
     void moveCursor( KMoveAction Action, bool Select );
     /** executes keyboard Action \a Action. This is normally called by a key event handler. */
@@ -342,6 +359,19 @@ class KHexEdit : public KColumnsView
   protected: // KColumnsView API
     virtual void setNoOfLines( int NewNoOfLines );
 
+  
+  protected: // element accessor functions
+    KOffsetColumn& offsetColumn();
+    KValueColumn& valueColumn();
+    KCharColumn& charColumn();
+    KBufferColumn& activeColumn();
+    KBufferColumn& inactiveColumn();
+    const KOffsetColumn& offsetColumn() const;
+    const KValueColumn& valueColumn()    const;
+    const KCharColumn& charColumn()   const;
+    const KBufferColumn& activeColumn() const;
+    const KBufferColumn& inactiveColumn() const;
+  
   protected: // atomic ui operations
     /** handles screen update in case of a change to any of the width sizes
       */
@@ -363,12 +393,6 @@ class KHexEdit : public KColumnsView
     void paintLine( KBufferColumn *C, int Line, KSection Positions );
 
   protected: // partial operations
-    KOffsetColumn& offsetColumn();
-    KValueColumn& valueColumn();
-    KCharColumn& charColumn();
-    KBufferColumn& activeColumn();
-    KBufferColumn& inactiveColumn();
-
     void handleMouseMove( const QPoint& Point );
     KBufferDrag *dragObject( bool F = false, QWidget *Parent = 0 ) const;
     void pasteFromSource( QMimeSource *Source );
@@ -418,8 +442,8 @@ class KHexEdit : public KColumnsView
     KBufferCursor *BufferCursor;
     /** */
     KBufferRanges *BufferRanges;
-    // TODO: Timer for syncing hexediting with charColumn... no needed?
 
+    
   protected:
     KOffsetColumn *OffsetColumn;
     KBorderColumn *FirstBorderColumn;
@@ -455,13 +479,15 @@ class KHexEdit : public KColumnsView
     unsigned char OldValue;
 
   protected:
-    /** */
-    QPoint MousePoint;
-    QPoint OldMousePoint;
+    /** point at which the current double click happended (used by TrippleClick) */
     QPoint DoubleClickPoint;
-    QPoint DragStartPoint;
+    /** line in which the current double click happended (used by TrippleClick) */
     int DoubleClickLine;
+    /** point at which the current dragging started */
+    QPoint DragStartPoint;
+    /** */
     QClipboard::Mode ClipboardMode;
+    /** font size as set by user (used for zooming) */
     int DefaultFontSize;
 
   protected: // parameters
@@ -471,9 +497,9 @@ class KHexEdit : public KColumnsView
     bool TabChangesFocus:1;
     /** flag whether the widget is set to readonly. Cannot override the databuffer's setting, of course. */
     bool ReadOnly:1;
-    /** */
+    /** flag if only overwrite is allowed */
     bool OverWriteOnly:1;
-    /** */
+    /** flag if overwrite mode is active */
     bool OverWrite:1;
     /** flag if a mouse button is pressed */
     bool MousePressed:1;

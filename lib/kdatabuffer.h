@@ -39,98 +39,195 @@ class KDataBuffer
     KDataBuffer();
     virtual ~KDataBuffer();
 
+    
   public: // data access API
-    /** locates working range, returns false if failed */
+    /** locates working range 
+      * The idea behind is to tell buffer which range will be requested in the following time, 
+      * so that e.g. the corresponding pages will be loaded in advance
+      * TODO: do we really need this? Where will this lead to real enhancements?
+      * @param Range  
+      * @return @c true if successfull, @c false otherwise
+      */
     virtual bool prepareRange( KSection Range ) const = 0;
-    /** locates working range, returns false if failed */
+    /** convenience function, same as above */
     bool prepareRange( int Offset, int Length ) const;
+    
     /** expects pointer to memory, should be in prepared range
       * it is only expected to be a valid pointer until any further call
       * to this or any modifying function
+      * @param Section 
+      * @return pointer to 
       */
     virtual const char *dataSet( KSection Section ) const = 0;
-    /** expects pointer to memory, should be in prepared range
-      * it is only expected to be a valid pointer until any further call
-      * to this or any modifying function
-      */
+    /** convenience function, same as above */
     const char *dataSet( int Offset, int Length ) const;
-    /** call for a single byte
-      + there will not be a check for the validity of the given offset
+    
+    /** requests a single byte
+      * if the offset is not valid the behaviout is undefined
+      * @param Offset offset of the datum requested
       */
     virtual char datum( int Offset ) const = 0;
-    /** returns the size of the data */
+    
+    /** 
+      * @return the size of the data 
+      */
     virtual int size() const = 0;
 
+    
   public: // state read API
-    /** is the buffer changeable? */
+    /** 
+      * @return @c true if the buffer can only be read, @c false if writing is allowed 
+      */
     virtual bool isReadOnly() const;
-    /** has the buffer been modified? */
+    /**      
+      * @return @c true if the buffer has been modified, @c false otherwise
+      */
     virtual bool isModified() const = 0;
 
+    
   public: // modification API
-    /** inserts at Position, returns length of inserted */
-    virtual int insert( int Pos, const char* D, int Length );
-    /** removes beginning with position as much as possible, returns length of removed
+    /** inserts bytes copied from the given source at Position. 
+      * The original data beginnung at the position is moved 
+      * with the buffer enlarged as needed
+      * If the buffer is readOnly this is a noop and returns 0.
+      * @param Pos
+      * @param Source data source
+      * @param SourceLength number of bytes to copy
+      * @return length of inserted data
+      */
+    virtual int insert( int Pos, const char* Source, int SourceLength );
+    
+    /** removes beginning with position as much as possible
+      * @param Section 
+      * @return length of removed data
       */
     virtual int remove( KSection Section );
-    /** removes beginning with position as much as possible, returns length of removed
-      * convenience function, behaves as above
-      */
+    /** convenience function, behaves as above */
     int remove( int Pos, int Length );
-    /** replaces as much as possible, returns length of inserted */
-    virtual int replace( KSection Section, const char* D, int InputLength ) = 0;
-    /** replaces as much as possible, returns length of inserted */
-    int replace( int Pos, int RemoveLength, const char* D, int InputLength );
+    
+    /** replaces as much as possible
+      * @param DestSection
+      * @param Source 
+      * @param SourceLength
+      * @return length of replacced data
+      */
+    virtual int replace( KSection DestSection, const char* Source, int SourceLength ) = 0;
+    /** convenience function, behaves as above */
+    int replace( int Pos, int RemoveLength, const char* Source, int SourceLength );
 
-    /** has the buffer been modified? */
+    /** sets the modified flag for the buffer 
+      * @param M 
+      */
     virtual void setModified( bool M ) = 0;
 
 
-  public:
-    /** copies n bytes beginning at Pos , returns number of copied bytes */
-    virtual int copyTo( char* Dest, int Pos, int n ) const;
+  public: // service functions
+    /** copies the data of the section into a given array Dest. If the section extends the buffers range 
+      * the section is limited to the buffer's end. If the section is invalid the behaviour is undefined.
+      * @param Dest pointer to a char array large enough to hold the copied section
+      * @param Source
+      * @return number of copied bytes 
+      */
+    virtual int copyTo( char* Dest, KSection Source ) const;
+    /** convenience function, behaves as above */
+    int copyTo( char* Dest, int Pos, int n ) const;
 
-    /** returns the index of the previous */
-    virtual int indexOfPreviousWordStart( int Index, KWordCharType CharType = Readable ) const;
-    /** returns index of the last preceding wordchar byte,
-      * if no other nonwordchar preceds that of the first byte;
-      * if the actual byte is already a nonwordchar the index is returned
-      */
-    virtual int indexOfNextWordStart( int Index, KWordCharType CharType = Readable ) const;
-    /** returns index of the last preceding wordchar byte,
-      * if no other nonwordchar preceds that of the first byte;
-      * if the actual byte is already a nonwordchar the index is returned
-      */
-    virtual int indexOfBeforeNextWordStart( int Index, KWordCharType CharType = Readable ) const;
-    /** returns index of the last preceding wordchar byte,
-      * if no other nonwordchar preceds that of the first byte;
-      * if the actual byte is already a nonwordchar the index is returned
+    
+  public: // word API
+    /** searches for the start of the word including the given index.
+      * if no other nonwordchar preceds this is 0;
+      * If the byte at the given Index is already a nonword char the given index is returned.
+      * @param Index index to start with
+      * @param CharType
+      * @return index of the first char of the current word or the given index if there is none
       */
     virtual int indexOfWordStart( int Index, KWordCharType CharType = Readable ) const;
-    /** returns index of the last following wordchar byte or,
+    virtual int indexOfLeftWordSelect( int Index, KWordCharType CharType = Readable ) const;
+    /** searches for the end of the word including the given index.
+      * If the byte at the given Index is already a nonword char the given index is returned.
       * if no other nonwordchar follows, that of the last byte;
-      * if the actual byte is already a nonwordchar the index is returned
+      * @param Index index to start with
+      * @param CharType
+      * @return index of the last char of the current word or the given index if there is none
       */
     virtual int indexOfWordEnd( int Index, KWordCharType CharType = Readable ) const;
-    /** returns index of the first following nonwordchar byte,
+    /** searches for the first char after the end of the word including the given index.
+      * If the byte at the given Index is already a nonword char the given index is returned.
       * if no other nonwordchar follows that of behind the last byte;
-      * if the actual byte is already a nonwordchar the index is returned
+      * @param Index index to start with
+      * @param CharType
+      * @return index of the first char after the current word or the given index if there is none
       */
-    virtual int indexOfBehindWordEnd( int Index, KWordCharType CharType = Readable ) const;
+    virtual int indexOfRightWordSelect( int Index, KWordCharType CharType = Readable ) const;
+    /** searches for the first char after the end of the word including the given index.
+      * If the byte at the given Index is already a nonword char the given index is returned.
+      * if no other nonwordchar follows that of behind the last byte;
+      * @param Index index to start with
+      * @param CharType
+      * @return index of the first char after the current word or the given index if there is none
+      */
+//    virtual int indexOfBehindLeftWordEnd( int Index, KWordCharType CharType = Readable ) const;
+    /** searches for the first char after the end of the word including the given index.
+      * If the byte at the given Index is already a nonword char the given index is returned.
+      * if no other nonwordchar follows that of behind the last byte;
+      * @param Index index to start with
+      * @param CharType
+      * @return index of the first char after the current word or the given index if there is none
+      */
+//    virtual int indexOfBehindRightWordEnd( int Index, KWordCharType CharType = Readable ) const;
+    /** searches the start of the next previous word that does not include the given index,
+      * if no further word is found 0 is returned.
+      * if the index is out of range the behaviour is undefined.
+      * @param Index
+      * @param CharType
+      * @return index of the next previous word start or 0
+      */
+    virtual int indexOfPreviousWordStart( int Index, KWordCharType CharType = Readable ) const;
+    /** searches for the start of the next word not including the given index.
+      * if there isn't a next word the index behind end is returned
+      * @param Index
+      * @param CharType
+      * @return index of the start of the next word or behind end
+      */
+    virtual int indexOfNextWordStart( int Index, KWordCharType CharType = Readable ) const;
+    /** searches for the start of the next word not including the given index.
+      * if there isn't a next word the index of the end is returned
+      * @param Index index to start with
+      * @param CharType
+      * @return index of the last nonword char before the next word or the last index
+      */
+    virtual int indexOfBeforeNextWordStart( int Index, KWordCharType CharType = Readable ) const;
 
-    /** returns true if the byte at position i is a char of type CharType */
+    /** if Index is out of range the behaviour is undefined
+      * @param Index
+      * @param CharType 
+      * @return @c true if the byte at position i is a char of type CharType 
+      */
     bool isWordChar( int Index, KWordCharType CharType = Readable ) const;
 
     /** returns the section with a word around index.
-      * if there is no word the section contains only the index
+      * if there is no word the section is empty
+      * @param Index     
+      * @param CharType 
+      * @return the section with a word around index.
       */
     virtual KSection wordSection( int Index, KWordCharType CharType = Readable  ) const;
 
 
   public: // finding API
-    /** searches beginning with byte at Pos, returns -1 if nothing found */
+    /** searches beginning with byte at Pos.
+      * @param 
+      * @param Length length of search string
+      * @param Pos the position to start the search
+      * @return index of the first  or -1
+      */
     virtual int find( const char*, int Length, int Pos = 0 ) const = 0;
-    /** searches backward beginning with byte at Pos, returns -1 if nothing found */
+    /** searches backward beginning with byte at Pos.
+      * @param 
+      * @param Length length of search string
+      * @param Pos the position to start the search. If -1 the search starts at the end.
+      * @return index of the first  or -1
+      */
     virtual int rfind( const char*, int Length, int Pos = -1 ) const = 0;
 
 /*     virtual int find( const QString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */
@@ -152,8 +249,7 @@ inline int KDataBuffer::remove( int Pos, int Length )
 inline int KDataBuffer::replace( int Pos, int RemoveLength, const char* D, int InputLength )
 { return replace( KSection(Pos,Pos+RemoveLength-1), D, InputLength ); }
 
-inline bool KDataBuffer::isReadOnly() const
-{ return false; }
+inline bool KDataBuffer::isReadOnly() const { return false; }
 
 
 }

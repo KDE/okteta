@@ -37,10 +37,17 @@ int KDataBuffer::remove( KSection Remove )
 
 int KDataBuffer::copyTo( char* Dest, int Pos, int Length ) const
 {
-  int LastPos = Pos + Length - 1;
-  for( int i=Pos; i<=LastPos; ++i )
+  return copyTo( Dest, KSection(Pos,Length,false) );
+}
+
+
+
+int KDataBuffer::copyTo( char* Dest, KSection Source ) const
+{
+  Source.restrictEndTo( size()-1 );
+  for( int i=Source.start(); i<=Source.end(); ++i )
     *Dest++ = datum( i );
-  return Length;
+  return Source.width();
 }
 
 
@@ -69,15 +76,14 @@ bool KDataBuffer::isWordChar( int Index, KDataBuffer::KWordCharType CharType ) c
 
 int KDataBuffer::indexOfPreviousWordStart( int Index, KDataBuffer::KWordCharType CharType ) const
 {
-  if( Index > 0 )
-    --Index;
-
-  // if after goto previous letter we are still at the end
-  if( Index == size()-1 )
+  // already at the start or can the result only be 0?
+  if( Index <= 0 || size() < 3 )
     return 0;
 
+  // search in two rounds: first for the next char, than for the next nonchar
+  // after that return the index of the one before
   bool LookingForFirstWordChar = false;
-  for( ; Index >= 0; --Index )
+  for( --Index; Index >= 0; --Index )
   {
     if( !::isWordChar(datum( Index ),CharType) )
     {
@@ -107,7 +113,7 @@ int KDataBuffer::indexOfNextWordStart( int Index, KDataBuffer::KWordCharType Cha
       LookingForFirstWordChar = true;
   }
   // if no more word found, go to the end
-  return size()-1;
+  return size();
 }
 
 
@@ -148,24 +154,101 @@ int KDataBuffer::indexOfWordEnd( int Index, KDataBuffer::KWordCharType CharType 
     if( !::isWordChar(datum(Index),CharType) )
       return Index-1;
   }
-  // if no more word found, go to the end
+  // word reaches the end
   return size()-1;
 }
 
 
+int KDataBuffer::indexOfLeftWordSelect( int Index, KDataBuffer::KWordCharType CharType ) const
+{
+  // word at Index?
+  if( ::isWordChar(datum(Index),CharType) )
+  {
+    // search for word start to the left
+    for( --Index; Index>=0; --Index )
+    {
+      if( !::isWordChar(datum(Index),CharType) )
+        return Index+1;
+    }
+    // reached start, so return it
+    return 0;
+  }
+  else
+  {
+    // search for word start to the right
+    for( ++Index; Index<size(); ++Index )
+    {
+      if( ::isWordChar(datum(Index),CharType) )
+        return Index;
+    }
+    // word reaches the end, so step behind
+    return size();
+  }
+}
+
+
+int KDataBuffer::indexOfRightWordSelect( int Index, KDataBuffer::KWordCharType CharType ) const
+{
+  // no word at Index?
+  if( !::isWordChar(datum(Index),CharType) )
+  {
+    // search for word end to the left
+    for( --Index; Index>=0; --Index )
+    {
+      if( ::isWordChar(datum(Index),CharType) )
+        return Index+1;
+    }
+    // reached start, so return it
+    return 0;
+  }
+  else
+  {
+    for( ++Index; Index<size(); ++Index )
+    {
+      // search for word end to the right
+      if( !::isWordChar(datum(Index),CharType) )
+        return Index;
+    }
+    // word reaches the end, so step behind
+    return size();
+  }
+}
+
+/*
 int KDataBuffer::indexOfBehindWordEnd( int Index, KDataBuffer::KWordCharType CharType ) const
+{
+  // no word at Index?
+  return !::isWordChar(datum(Index),CharType) ? indexOfBehindLeftWordEnd(Index,CharType) : indexOfBehindRightWordEnd(Index+1,CharType)
+}
+
+
+int KDataBuffer::indexOfBehindRightWordEnd( int Index, KDataBuffer::KWordCharType CharType ) const
 {
   for( ; Index<size(); ++Index )
   {
     if( !::isWordChar(datum(Index),CharType) )
       return Index;
   }
-  // if no more word found, go to the end
+  // word reaches the end, so step behind
   return size();
 }
 
 
+int KDataBuffer::indexOfBehindLeftWordEnd( int Index, KDataBuffer::KWordCharType CharType ) const
+{
+  for( --Index; Index>=0; --Index )
+  {
+    if( ::isWordChar(datum(Index),CharType) )
+      return Index+1;
+  }
+  // word reaches the end, so step behind
+  return 0;
+}
+*/
+
 KSection KDataBuffer::wordSection( int Index, KWordCharType CharType ) const
 {
-  return KSection( indexOfWordStart(Index,CharType), indexOfWordEnd(Index,CharType) );
+  return ( isWordChar(Index, CharType) ) ? 
+         KSection( indexOfWordStart(Index,CharType), indexOfWordEnd(Index,CharType) ) : 
+	 KSection();
 }

@@ -18,7 +18,7 @@
 
 // c specific
 #include <stdlib.h>
-#include <limits.h>
+//#include <limits.h>
 // c++ specific
 //#include <limits>
 // qt specific
@@ -620,6 +620,27 @@ int KHexEdit::fittingBytesPerLine( const QSize &NewSize ) const
   }
 
   return FittingBytesPerLine;
+}
+
+
+bool KHexEdit::selectWord( /*unsigned TODO:change all unneeded signed into unsigned!*/ int Index )
+{
+  if( Index >= 0 && Index < BufferLayout->length()  )
+  {
+      KSection WordSection = DataBuffer->wordSection( Index );
+      if( WordSection.isValid() )
+      {
+        pauseCursor();
+
+        BufferRanges->setFirstWordSelection( WordSection );
+        BufferCursor->gotoIndex( WordSection.end()+1 );
+        repaintChanged();
+
+        unpauseCursor();
+        return true;
+      }
+   }
+   return false;
 }
 
 
@@ -1688,7 +1709,7 @@ void KHexEdit::moveCursor( KMoveAction Action )
     case MoveWordForward:  {
                              int NewIndex = BufferCursor->realIndex();
                              NewIndex = DataBuffer->indexOfNextWordStart( NewIndex, KDataBuffer::Readable );
-                             BufferCursor->gotoIndex( NewIndex );
+                             BufferCursor->gotoCIndex( NewIndex );
                            }
                            break;
     case MoveUp:           BufferCursor->gotoUp();             break;
@@ -2014,12 +2035,12 @@ void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
       return;
     }
 
-    MousePoint = e->pos();
+    QPoint MousePoint = e->pos();
     placeCursor( MousePoint );
     ensureCursorVisible();
 
     // start of a drag perhaps?
-    if( BufferRanges->selectionIncludes(indexByPoint( MousePoint )) )
+    if( BufferRanges->selectionIncludes(BufferCursor->index()) )
     {
       DragStartPossible = true;
       DragStartTimer->start( QApplication::startDragTime(), true );
@@ -2078,9 +2099,8 @@ void KHexEdit::contentsMouseMoveEvent( QMouseEvent *e )
       return;
     }
     // selecting
-    MousePoint = e->pos();
+    QPoint MousePoint = e->pos();
     handleMouseMove( MousePoint );
-    OldMousePoint = MousePoint;
   }
   else if( !isReadOnly() )
   {
@@ -2093,7 +2113,7 @@ void KHexEdit::contentsMouseMoveEvent( QMouseEvent *e )
 
 void KHexEdit::contentsMouseReleaseEvent( QMouseEvent *e )
 {
-  // this is not the release of a doubleclick so we need to provess it?
+  // this is not the release of a doubleclick so we need to process it?
   if( !InDoubleClick )
   {
     int Line = lineAt( e->pos().y() );
@@ -2180,25 +2200,12 @@ void KHexEdit::contentsMouseDoubleClickEvent( QMouseEvent *e )
 
   DoubleClickLine = BufferCursor->line();
 
-  int Index = BufferCursor->index();
+  int Index = BufferCursor->validIndex();
 
   if( ActiveColumn == &charColumn() )
   {
-    // for doubleclick we try to select the word that includes this index
-    if( DataBuffer->isWordChar(Index) )
-    {
-      KSection Word = DataBuffer->wordSection( Index );
-      if( Word.isValid() )
-      {
-        pauseCursor();
-
-        BufferRanges->setSelection( Word );
-        BufferCursor->gotoIndex( Word.end()+1 );
-        repaintChanged();
-
-        unpauseCursor();
-      }
-    }
+    selectWord( Index );
+    
     // as we already have a doubleclick maybe it is a tripple click
     TrippleClickTimer->start( qApp->doubleClickInterval(), true );
     DoubleClickPoint = e->globalPos();
@@ -2227,7 +2234,6 @@ void KHexEdit::handleMouseMove( const QPoint& Point ) // handles the move of the
 {
   // no scrolltimer and outside of viewport?
   if( !ScrollTimer->isActive() && Point.y() < contentsY() || Point.y() > contentsY() + visibleHeight() )
-
     ScrollTimer->start( DefaultScrollTimerPeriod, false );
   // scrolltimer but inside of viewport?
   else if( ScrollTimer->isActive() && Point.y() >= contentsY() && Point.y() <= contentsY() + visibleHeight() )
@@ -2235,39 +2241,40 @@ void KHexEdit::handleMouseMove( const QPoint& Point ) // handles the move of the
 
   pauseCursor();
 
-  int OldIndex = BufferCursor->index();
-  int OldLine = BufferCursor->line();
-
   placeCursor( Point );
+  ensureCursorVisible();
 
-  if( InDoubleClick )
+  // do wordwise selection?
+  if( InDoubleClick && BufferRanges->hasFirstWordSelection() ) 
   {
-    // find out which is the closest: the last index, the one of the next word or the one of the previous one
-    int NewIndex = BufferCursor->index();
-    int IndexWordStart = DataBuffer->indexOfWordStart( NewIndex );
-    int IndexWordEnd = DataBuffer->indexOfWordEnd( NewIndex );
-    int XDistanceToOrigin = abs( activeColumn().xOfPos(OldIndex) - MousePoint.x() );
-    int XDistanceToPrevWord = abs( activeColumn().xOfPos(IndexWordStart) - MousePoint.x() );
-    int XDistanceToNextWord = abs( activeColumn().xOfPos(IndexWordEnd) - MousePoint.x() );
-
-    // is not in the same line?
-    if( BufferCursor->line() != OldLine )
-      // make sure XDistanceToOrigin won't win
-      XDistanceToOrigin = INT_MAX; //std::numeric_limits<int>::max();
-
-    if( XDistanceToOrigin < XDistanceToPrevWord && XDistanceToOrigin < XDistanceToNextWord )
-      BufferCursor->gotoIndex( OldIndex );
-    else if( XDistanceToPrevWord < XDistanceToNextWord )
-      BufferCursor->gotoIndex( IndexWordStart );
+    int NewIndex = BufferCursor->realIndex();
+    KSection FirstWordSelection = BufferRanges->firstWordSelection();
+    // are we before the selection?
+    if( NewIndex < FirstWordSelection.start() )
+    {
+      BufferRanges->ensureWordSelectionForward( false );
+      NewIndex = DataBuffer->indexOfLeftWordSelect( NewIndex );
+    } 
+    // or behind?
+    else if( NewIndex > FirstWordSelection.end() )
+    {
+      BufferRanges->ensureWordSelectionForward( true );
+      NewIndex = DataBuffer->indexOfRightWordSelect( NewIndex );
+    }
+    // or inside?
     else
-      BufferCursor->gotoIndex( IndexWordEnd );
+    {   
+      BufferRanges->ensureWordSelectionForward( true );
+      NewIndex = FirstWordSelection.end()+1;
+    }
+  
+    BufferCursor->gotoIndex( NewIndex );    
   }
 
   if( BufferRanges->selectionStarted() )
     BufferRanges->setSelectionEnd( BufferCursor->realIndex() );
 
   repaintChanged();
-  ensureCursorVisible();
 
   unpauseCursor();
 }
