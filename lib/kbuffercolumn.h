@@ -61,6 +61,8 @@ class KBufferColumn : public KColumn
     void paintPositions( QPainter *P, int Line, KSection Positions );
     void paintCursor( QPainter *P, int Index );
     void paintByte( QPainter *P, int Index );
+    /** paints a frame to the char*/
+    void paintFrame( QPainter *P, int Index );
 
   public: // modification access
     /**

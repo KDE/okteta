@@ -273,17 +273,20 @@ class KHexEdit : public KColumnsView
     KBufferColumn& hexColumn();
     KBufferColumn& textColumn();
     KBufferColumn& activeColumn();
+    KBufferColumn& inactiveColumn();
 
     const KOffsetColumn& offsetColumn() const;
     const KBufferColumn& hexColumn()    const;
     const KBufferColumn& textColumn()   const;
     const KBufferColumn& activeColumn() const;
+    const KBufferColumn& inactiveColumn() const;
 
     void createCursorPixmaps();
     /** repaints all the parts that are signed as changed */
     void repaintChanged();
     /** draws the blinking cursor or removes it */
     void drawCursor( bool CursorOn );
+    void drawFrameCursor( bool FrameOn );
     void handleMouseMove( const QPoint& Point );
     bool hasChanged( const KCoordRange &VisibleRange, KCoordRange *ChangedRange ) const;
     void paintLine( QPainter *P, KBufferColumn *C, int Line, KSection Positions ) const;
@@ -330,6 +333,8 @@ class KHexEdit : public KColumnsView
 
     /** points to the column with keyboard focus */
     KBufferColumn *ActiveColumn;
+    /** points to the column without keyboard focus (if there is) */
+    KBufferColumn *InactiveColumn;
 
   protected:
     QTimer *CursorBlinkTimer;
@@ -385,15 +390,17 @@ class KHexEdit : public KColumnsView
     KHexEdit &operator=( const KHexEdit & );
 };
 
-inline const KOffsetColumn& KHexEdit::offsetColumn() const { return *OffsetColumn; }
-inline const KBufferColumn& KHexEdit::hexColumn()    const { return *BufferColumn[0]; }
-inline const KBufferColumn& KHexEdit::textColumn()   const { return *BufferColumn[1]; }
-inline const KBufferColumn& KHexEdit::activeColumn() const { return *ActiveColumn; }
+inline const KOffsetColumn& KHexEdit::offsetColumn()   const { return *OffsetColumn; }
+inline const KBufferColumn& KHexEdit::hexColumn()      const { return *BufferColumn[0]; }
+inline const KBufferColumn& KHexEdit::textColumn()     const { return *BufferColumn[1]; }
+inline const KBufferColumn& KHexEdit::activeColumn()   const { return *ActiveColumn; }
+inline const KBufferColumn& KHexEdit::inactiveColumn() const { return *InactiveColumn; }
 
-inline KOffsetColumn& KHexEdit::offsetColumn() { return *OffsetColumn; }
-inline KBufferColumn& KHexEdit::hexColumn()    { return *BufferColumn[0]; }
-inline KBufferColumn& KHexEdit::textColumn()   { return *BufferColumn[1]; }
-inline KBufferColumn& KHexEdit::activeColumn() { return *ActiveColumn; }
+inline KOffsetColumn& KHexEdit::offsetColumn()   { return *OffsetColumn; }
+inline KBufferColumn& KHexEdit::hexColumn()      { return *BufferColumn[0]; }
+inline KBufferColumn& KHexEdit::textColumn()     { return *BufferColumn[1]; }
+inline KBufferColumn& KHexEdit::activeColumn()   { return *ActiveColumn; }
+inline KBufferColumn& KHexEdit::inactiveColumn() { return *InactiveColumn; }
 
 }
 

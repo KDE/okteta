@@ -678,6 +678,14 @@ void KBufferColumn::paintByte( QPainter *P, int Index )
 }
 
 
+void KBufferColumn::paintFrame( QPainter *P, int Index )
+{
+  char Byte = Buffer->datum( Index );
+  P->setPen( colorForByte(Byte) );
+  P->drawRect( 0, 0, ByteWidth, LineHeight );
+}
+
+
 void KBufferColumn::paintCursor( QPainter *P, int Index )
 {
   char Byte = Buffer->datum( Index );

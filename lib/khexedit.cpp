@@ -97,6 +97,7 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, WFla
 
   // select the active column
   ActiveColumn = &textColumn();
+  InactiveColumn = &hexColumn();
 
 #ifdef QT_ONLY
   QFont FixedFont( "fixed", 10 );
@@ -778,9 +779,15 @@ void KHexEdit::placeCursor( const QPoint &Point )
   resetInputContext();
 
   if( textColumn().isVisible() && Point.x() >= textColumn().x() )
+  {
     ActiveColumn = &textColumn();
+    InactiveColumn = &hexColumn();
+  }
   else
+  {
     ActiveColumn = &hexColumn();
+    InactiveColumn = &textColumn();
+  }
 
   KBufferCoord C( activeColumn().posOfX(Point.x()), lineAt(Point.y()) );
 
@@ -853,6 +860,7 @@ void KHexEdit::startCursorBlinking()
   {
     createCursorPixmaps();
     drawCursor( true );
+    drawFrameCursor( true );
   }
   CursorBlinkTimer->start( QApplication::cursorFlashTime()/2 );
 }
@@ -865,6 +873,7 @@ void KHexEdit::stopCursorBlinking()
   // must Cursor be removed?
   if( BlinkCursorVisible )
     drawCursor( false );
+  drawFrameCursor( false );
   CursorHidden = true;
 }
 
@@ -874,6 +883,7 @@ void KHexEdit::pauseCursorBlinking()
   // must Cursor be removed?
   if( BlinkCursorVisible )
     drawCursor( false );
+  drawFrameCursor( false );
 
   CursorHidden = true;
 }
@@ -887,6 +897,7 @@ void KHexEdit::unpauseCursorBlinking()
   {
     createCursorPixmaps();
     drawCursor( true );
+  drawFrameCursor( true );
 //     std::cout << "Index:" << BufferCursor->index() << "(" << BufferCursor->trueIndex() << ")" <<std::endl;
   }
 }
@@ -1006,6 +1017,7 @@ void KHexEdit::keyPressEvent( QKeyEvent *KeyEvent )
         {
           pauseCursorBlinking();
           ActiveColumn = &hexColumn();
+          InactiveColumn = &textColumn();
           unpauseCursorBlinking();
         }
         break;
@@ -1022,6 +1034,7 @@ void KHexEdit::keyPressEvent( QKeyEvent *KeyEvent )
         }
         pauseCursorBlinking();
         ActiveColumn = &textColumn();
+        InactiveColumn = &hexColumn();
         unpauseCursorBlinking();
       }
       break;
@@ -1450,9 +1463,34 @@ void KHexEdit::drawCursor( bool CursorOn )
   Painter.drawPixmap( x+CursorPixmaps->cursorX(), y,
                       CursorOn?CursorPixmaps->onPixmap():CursorPixmaps->offPixmap(),
                       CursorPixmaps->cursorX(),0,CursorPixmaps->cursorW(),-1 );
-
+ 
   // store state
   BlinkCursorVisible = CursorOn;
+}
+
+
+void KHexEdit::drawFrameCursor( bool FrameOn )
+{
+  // any reason to skip the cursor drawing?
+//   if( !isUpdatesEnabled() || !viewport()->isUpdatesEnabled()
+//       || (!style().styleHint( QStyle::SH_BlinkCursorWhenTextSelected ) && !selectedText().isEmpty())
+//       || (FrameOn && !hasFocus() && !viewport()->hasFocus() && !InDnD )
+//       /*|| isReadOnly()*/ )
+//     return;
+
+  KPixelX x = inactiveColumn().xOfPos( BufferCursor->pos() ) - contentsX();
+  KPixelY y = LineHeight * BufferCursor->line() - contentsY();
+
+  QPainter Painter( viewport() );
+  Painter.translate( x,y );
+
+  int Index = BufferCursor->index();
+  if( Index < 0 )
+    return;
+  if( FrameOn )
+    inactiveColumn().paintFrame( &Painter, Index );
+  else
+    inactiveColumn().paintByte( &Painter, Index );
 }
 
 
