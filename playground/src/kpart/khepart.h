@@ -105,7 +105,6 @@ class KHexEditPart : public KParts::ReadWritePart
     KRadioAction *DecCodingAction;
     KRadioAction *OctCodingAction;
     KRadioAction *BinCodingAction;
-    KRadioAction *AscCodingAction;
 };
 
 #endif

@@ -90,13 +90,11 @@ void KHexEditPart::setupActions()
   DecCodingAction = new KRadioAction( i18n("&Decimal"),     0, this, SLOT(slotSetCoding()), actionCollection(), "view_deccoding" );
   OctCodingAction = new KRadioAction( i18n("&Octal"),       0, this, SLOT(slotSetCoding()), actionCollection(), "view_octcoding" );
   BinCodingAction = new KRadioAction( i18n("&Binary"),      0, this, SLOT(slotSetCoding()), actionCollection(), "view_bincoding" );
-  AscCodingAction = new KRadioAction( i18n("&ASCII"),       0, this, SLOT(slotSetCoding()), actionCollection(), "view_asciicoding" );
 
   HexCodingAction->setExclusiveGroup( CodingGroupId );
   DecCodingAction->setExclusiveGroup( CodingGroupId );
   OctCodingAction->setExclusiveGroup( CodingGroupId );
   BinCodingAction->setExclusiveGroup( CodingGroupId );
-  AscCodingAction->setExclusiveGroup( CodingGroupId );
 
 
   KStdAction::zoomIn(  m_HexEdit, SLOT(zoomIn()),   actionCollection() );
@@ -233,6 +231,7 @@ void KHexEditPart::slotSelectionChanged()
 
 void KHexEditPart::slotSetCoding()
 {
+  // TODO: find out if there is a way to use the exclusivegroup somehow
   KHexEdit::KCoding Coding;
   if( HexCodingAction->isChecked() )
     Coding = KHexEdit::HexadecimalCoding;
@@ -242,8 +241,9 @@ void KHexEditPart::slotSetCoding()
     Coding = KHexEdit::OctalCoding;
   else if( BinCodingAction->isChecked() )
     Coding = KHexEdit::BinaryCoding;
-  else //if( AscCodingAction->isChecked() )
-    Coding = KHexEdit::ASCIICoding;
+  else
+    //should not be reached;
+    Coding = KHexEdit::HexadecimalCoding;
 
   m_HexEdit->setCoding( Coding );
 }
