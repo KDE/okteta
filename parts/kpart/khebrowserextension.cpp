@@ -48,7 +48,8 @@ void KHexEditBrowserExtension::saveState( QDataStream &stream )
 
   stream << (int)HexEdit->resizeStyle() << (int)HexEdit->coding() 
       << (int)HexEdit->encoding() << (int)HexEdit->showUnprintable()
-      << HexEdit->contentsX() << HexEdit->contentsY();
+      << HexEdit->contentsX() << HexEdit->contentsY()
+      << HexEdit->cursorPosition() << (int)HexEdit->isCursorBehind();
 }
 
 
@@ -61,12 +62,15 @@ void KHexEditBrowserExtension::restoreState( QDataStream &stream )
   int Encoding;
   int ShowUnprintable;
   int x, y;
+  int Position;
+  int CursorBehind;
 
-  stream >> ResizeStyle >> Coding >> Encoding >> ShowUnprintable >> x >> y;
+  stream >> ResizeStyle >> Coding >> Encoding >> ShowUnprintable >> x >> y >> Position >> CursorBehind;
 
   HexEdit->setResizeStyle( (KHE::KHexEdit::KResizeStyle)ResizeStyle );
   HexEdit->setCoding( (KHE::KHexEdit::KCoding)Coding );
   HexEdit->setEncoding( (KHE::KHexEdit::KEncoding)Encoding );
   HexEdit->setShowUnprintable( ShowUnprintable );
   HexEdit->setContentsPos( x, y );
+  HexEdit->setCursorPosition( Position, CursorBehind );
 }
