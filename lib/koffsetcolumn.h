@@ -52,13 +52,19 @@ class KOffsetColumn : public KColumn
     /** */
     void setMetrics( KPixelX DW, KPixelY DBL );
 
+  public:
+    int codingWidth()                      const;
+    KOffsetFormat::print printFunction()   const;
+
+
   protected:
     /** recalculates all x values */
     void recalcX();
     /** paints full line */
     void paintLine( QPainter *P, int Line );
 
-  protected:
+
+  protected: // user settings
     /** starting offset of the first line
       * if different from StartOffset results in leading space
       */
@@ -66,6 +72,7 @@ class KOffsetColumn : public KColumn
     /** offset delta per line */
     int Delta;
 
+  protected: // pixel related
     /** size of the line margin */
     int Margin;
     /** */
@@ -73,15 +80,16 @@ class KOffsetColumn : public KColumn
     /** */
     KPixelY DigitBaseLine;
 
-    /** buffer to hold the formatted coding */
-    mutable char CodedOffset[KOffsetFormat::MaxFormatWidth+1];
-
+  protected: // general layout
     KOffsetFormat::KFormat Format;
 
     int CodingWidth;
-    KOffsetFormat::print printFunction;
+    KOffsetFormat::print PrintFunction;
 
-  protected:
+    /** buffer to hold the formatted coding */
+    mutable char CodedOffset[KOffsetFormat::MaxFormatWidth+1];
+
+  protected: // firstnext trips related
     /** */
     int PaintLine;
 };
@@ -91,6 +99,9 @@ inline int KOffsetColumn::firstLineOffset()  const  { return FirstLineOffset; }
 inline void KOffsetColumn::setFirstLineOffset( int FLO ) { FirstLineOffset = FLO; }
 inline int KOffsetColumn::delta() const { return Delta; }
 inline void KOffsetColumn::setDelta( int D )  { Delta = D; }
+
+inline int KOffsetColumn::codingWidth()                       const { return CodingWidth; }
+inline KOffsetFormat::print KOffsetColumn::printFunction()    const { return PrintFunction; }
 
 }
 

@@ -14,16 +14,24 @@
  *                                                                         *
  ***************************************************************************/
 
- 
+
 #ifndef KBUFFERDRAG_H
 #define KBUFFERDRAG_H
 
 // qt specific
 #include <qdragobject.h>
+// app specific
+#include "kcoordrange.h"
+#include "kcoltextexport.h"
 
 namespace KHE
 {
 
+// class KBorderColumn;
+class KOffsetColumn;
+class KBufferColumn;
+
+typedef KColTextExport* KColTextExportPtr;
 /**
   *@author Friedrich W. H. Kossebau
   */
@@ -36,7 +44,9 @@ class KBufferDrag : public QDragObject
     static const char *PlainText;
 
   public:
-    KBufferDrag( const QByteArray &, QWidget *Source = 0, const char *Name = 0 );
+    // TODO: make this call somewhat more generic
+    KBufferDrag( const QByteArray &, KCoordRange Range, const KOffsetColumn *OC, const KBufferColumn *HC, const KBufferColumn *TC,
+                 QWidget *Source = 0, const char *Name = 0 );
     KBufferDrag( QWidget *Source = 0, const char *Name = 0 );
     ~KBufferDrag();
 
@@ -55,6 +65,11 @@ class KBufferDrag : public QDragObject
 
   protected:
     QByteArray Data;
+    KCoordRange CoordRange;
+    /** collection of all the columns. All columns will be autodeleted. */
+    KColTextExportPtr* Columns;
+    int NoOfCol;
+
 };
 
 }

@@ -591,12 +591,29 @@ QByteArray KHexEdit::selectedData() const
 }
 
 
-KBufferDrag *KHexEdit::dragObject( QWidget *Parent ) const
+KBufferDrag *KHexEdit::dragObject( bool F, QWidget *Parent ) const
 {
   if( !BufferRanges->hasSelection() )
     return 0L;
 
-  return new KBufferDrag( selectedData(), Parent );
+  const KBufferColumn *HC;
+  const KBufferColumn *TC;
+  KCoordRange Range;
+
+  if( ActiveColumn == &textColumn() || !F )
+  {
+    HC = 0L;
+    TC = 0L;
+  }
+  else
+  {
+    HC = &hexColumn();
+    TC = textColumn().isVisible() ? &textColumn() : 0L;
+    KSection S = BufferRanges->selection();
+    Range.set( BufferLayout->coordOfIndex(S.start()),BufferLayout->coordOfIndex(S.end()) );
+  }
+
+  return new KBufferDrag( selectedData(), Range, OffsetColumn,HC,TC, Parent );
 }
 
 
@@ -2095,7 +2112,7 @@ void KHexEdit::startDrag()
   InDoubleClick = false;
   DragStartPossible = false;
 
-  QDragObject *Drag = dragObject( viewport() );
+  QDragObject *Drag = dragObject( true, viewport() );
   if( !Drag )
     return;
 

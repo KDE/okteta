@@ -12,7 +12,8 @@ libkhexedit_la_SOURCES = kcolumn.cpp kbordercolumn.cpp koffsetcolumn.cpp kbuffer
                          kplainbuffer.cpp kfixedsizebuffer.cpp kbigbuffer.cpp \
                          kbuffercursor.cpp kbufferlayout.cpp kbufferranges.cpp \
                          kcursor.cpp kbufferdrag.cpp \
-                         ksectionlist.cpp kcoordrangelist.cpp
+                         ksectionlist.cpp kcoordrangelist.cpp \
+                         kbuffercoltextexport.cpp kbordercoltextexport.cpp koffsetcoltextexport.cpp
 
 khexeditincludedir = $(includedir)/khexedit
 khexeditinclude_HEADERS = kadds.h khe.h krange.h ksection.h \
@@ -25,7 +26,8 @@ noinst_HEADERS = kcolumn.h kbordercolumn.h koffsetcolumn.h kbuffercolumn.h \
                  kbuffercursor.h kbufferlayout.h kbufferranges.h \
                  kbuffercoord.h kselection.h \
                  kcursor.h kbufferdrag.h \
-                 kcoordrange.h ksectionlist.h kcoordrangelist.h
+                 kcoordrange.h ksectionlist.h kcoordrangelist.h \
+                 kcoltextexport.h kbuffercoltextexport.h kbordercoltextexport.h koffsetcoltextexport.h
 
 
 METASOURCES = AUTO

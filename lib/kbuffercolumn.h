@@ -26,6 +26,7 @@
 #include "ksection.h"
 
 class QPainter;
+class QColor;
 
 namespace KHE
 {
@@ -166,6 +167,7 @@ class KBufferColumn : public KColumn
     int firstPos() const;
     int lastPos()  const;
     KSection visiblePositions() const;
+    const KBufferLayout *layout() const;
 
   protected:
     /** */
@@ -193,7 +195,7 @@ class KBufferColumn : public KColumn
     /** pointer to the buffer */
     KDataBuffer *Buffer;
     /** pointer to the layout */
-    KBufferLayout *Layout;
+    const KBufferLayout *Layout;
     /** pointer to the ranges */
     KBufferRanges *Ranges;
 
@@ -270,6 +272,8 @@ inline KByteCodec::removingLastDigit KBufferColumn::removingFunction()      cons
 inline int KBufferColumn::firstPos() const { return PaintPositions.start(); }
 inline int KBufferColumn::lastPos()  const { return PaintPositions.end(); }
 inline KSection KBufferColumn::visiblePositions() const { return PaintPositions; }
+
+inline const KBufferLayout *KBufferColumn::layout() const { return Layout; }
 
 }
 

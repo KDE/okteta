@@ -311,7 +311,7 @@ class KHexEdit : public KColumnsView
     void handleMouseMove( const QPoint& Point );
     bool hasChanged( const KCoordRange &VisibleRange, KCoordRange *ChangedRange ) const;
     void paintLine( QPainter *P, KBufferColumn *C, int Line, KSection Positions ) const;
-    KBufferDrag *dragObject( QWidget *Parent = 0 ) const;
+    KBufferDrag *dragObject( bool F = false, QWidget *Parent = 0 ) const;
     void pasteFromSource( QMimeSource *Source );
     void removeData( KSection Indizes );
     bool handleByteEditKey( QKeyEvent *KeyEvent );

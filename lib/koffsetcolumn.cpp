@@ -16,7 +16,7 @@
 
 // qt specific
 #include "qpainter.h"
-// app specific 
+// app specific
 #include "kcolumnsview.h"
 #include "koffsetcolumn.h"
 
@@ -44,7 +44,7 @@ void KOffsetColumn::paintLine( QPainter *P, int Line )
 {
   KColumn::paintBlankLine( P );
 
-  printFunction( CodedOffset,FirstLineOffset+Delta*Line );
+  printFunction()( CodedOffset,FirstLineOffset+Delta*Line );
   P->drawText( 0, DigitBaseLine, QString().append(CodedOffset) );
 }
 
@@ -71,7 +71,7 @@ void KOffsetColumn::setFormat( KOffsetFormat::KFormat F )
   Format = F;
 
   CodingWidth = KOffsetFormat::codingWidth( Format );
-  printFunction = KOffsetFormat::printFunction( Format );
+  PrintFunction = KOffsetFormat::printFunction( Format );
 
   recalcX();
 }  

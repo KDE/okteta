@@ -14,23 +14,44 @@
  *                                                                         *
  ***************************************************************************/
 
- 
+#include <iostream>
+using namespace std;
 // c specific
 #include <string.h>
 // c++ speciofic
 #include <iostream>
 // app specific
 #include "kbufferdrag.h"
+#include "kbordercoltextexport.h"
+#include "koffsetcoltextexport.h"
+#include "kbuffercoltextexport.h"
 
 using namespace KHE;
 
 const char *KBufferDrag::OctetStream = "application/octet-stream";
 const char *KBufferDrag::PlainText = "text/plain";
 
-KBufferDrag::KBufferDrag( const QByteArray &D, QWidget *Source, const char *Name )
-  :QDragObject( Source, Name )
+KBufferDrag::KBufferDrag( const QByteArray &D, KCoordRange Range,
+                          const KOffsetColumn *OC, const KBufferColumn *HC, const KBufferColumn *TC,
+                          QWidget *Source, const char *Name )
+  :QDragObject( Source, Name ),
+   CoordRange( Range )
 {
   setData( D );
+
+  Columns = new KColTextExportPtr[5];
+  NoOfCol = 0;
+  if( HC )
+  {
+    Columns[NoOfCol++] = new KOffsetColTextExport( OC );
+    Columns[NoOfCol++] = new KBorderColTextExport();
+    Columns[NoOfCol++] = new KBufferColTextExport( HC, Data.data(), CoordRange );
+    if( TC )
+    {
+      Columns[NoOfCol++] = new KBorderColTextExport();
+      Columns[NoOfCol] = new KBufferColTextExport( TC, Data.data(), CoordRange );
+    }
+  }
 }
 
 
@@ -42,6 +63,9 @@ KBufferDrag::KBufferDrag( QWidget *Source, const char *Name )
 
 KBufferDrag::~KBufferDrag()
 {
+  for( int i=0; i<NoOfCol; ++i )
+    delete Columns[i];
+  delete [] Columns;
 }
 
 
@@ -70,10 +94,47 @@ QByteArray KBufferDrag::encodedData( const char *Format ) const
     {
 //       std::cout << "using " << PlainText << std::endl;
       QByteArray TextData;
-      TextData.duplicate( Data );
-      char *D = TextData.data();
-      for( unsigned int i=0; i<TextData.size(); ++i,++D )
-      { char B = *D; if( B < 32 && B != '\t' && B != '\n' ) *D = ' '; }
+      if( NoOfCol == 0 )
+      {
+        // duplicate the data and subsitute all non-printable items with a space
+        TextData.duplicate( Data );
+        char *D = TextData.data();
+        for( unsigned int i=0; i<TextData.size(); ++i,++D )
+        { char B = *D; if( B < 32 && B != '\t' && B != '\n' ) *D = ' '; }
+      }
+      else
+      {
+        // initialize: one for the newline \n
+        int NeededMemory = 1;
+        for( int i=0; i<NoOfCol; ++i )
+        {
+          NeededMemory += Columns[i]->charsPerLine();
+          cout << "MEM:" << NeededMemory << endl;
+        }
+        // scale with the number of lines
+        NeededMemory *= CoordRange.lines();
+        cout << "FMEM:" << NeededMemory << endl;
+        // find out needed size
+        if( !TextData.resize( NeededMemory+500 ) )
+          cout <<"Duh"<<endl;
+        cout << "A" << endl;
+        // now fill
+        char *D = TextData.data();
+        int l = CoordRange.start().line();
+        cout << "startline: "<<l<<endl;
+        for( int i=0; i<NoOfCol; ++i )
+          Columns[i]->printFirstLine( &D, l );
+        *D++ = '\n';
+        cout << "firstline done"<<endl;
+        for( ; l<=CoordRange.end().line(); ++l )
+        {
+          for( int i=0; i<NoOfCol; ++i )
+            Columns[i]->printNextLine( &D );
+          *D++ = '\n';
+          cout << "line"<<l<<" done"<<endl;
+        }
+        cout << "done. should:"<<TextData.size()<< " is:"<<D-TextData.data()<<endl;
+      }
       return( TextData );
     }
   }
