@@ -49,7 +49,6 @@ class KCursor;
 
 class KHexEditPrivate;
 
-//enum KResizeStyle { NoResize, LockGrouping, FullSizeUsage };
 
 /** the main widget
   *
@@ -60,16 +59,17 @@ class KHexEdit : public KColumnsView
 {
   Q_OBJECT
   Q_ENUMS( KResizeStyle KCoding )
-  Q_PROPERTY( KResizeStyle ResizeStyle READ resizeStyle WRITE setResizeStyle )
-  Q_PROPERTY( int NoOfBytesPerLine READ noOfBytesPerLine WRITE setNoOfBytesPerLine )
-  Q_PROPERTY( bool TabChangesFocus READ tabChangesFocus WRITE setTabChangesFocus )
   Q_PROPERTY( bool OverwriteMode READ isOverwriteMode WRITE setOverwriteMode )
   Q_PROPERTY( bool OverwriteOnly READ isOverwriteOnly WRITE setOverwriteOnly )
   Q_PROPERTY( bool Modified READ isModified WRITE setModified DESIGNABLE false )
   Q_PROPERTY( bool ReadOnly READ isReadOnly WRITE setReadOnly )
- 
+
+  Q_PROPERTY( int NoOfBytesPerLine READ noOfBytesPerLine WRITE setNoOfBytesPerLine )
+  Q_PROPERTY( bool TabChangesFocus READ tabChangesFocus WRITE setTabChangesFocus )
+
   //Q_PROPERTY( bool hasSelectedData READ hasSelectedData )
   //Q_PROPERTY( QByteArray SelectedData READ selectedData )
+  Q_PROPERTY( KResizeStyle ResizeStyle READ resizeStyle WRITE setResizeStyle )
   Q_PROPERTY( int StartOffset READ startOffset WRITE setStartOffset )
   Q_PROPERTY( int FirstLineOffset READ firstLineOffset WRITE setFirstLineOffset )
   //_PROPERTY( int undoDepth READ undoDepth WRITE setUndoDepth )
@@ -105,13 +105,16 @@ class KHexEdit : public KColumnsView
   public: // QWidget API
 //    void focusInEvent( QFocusEvent *FocusEvent ); // TODO: why don't these work?
 //    void focusOutEvent( QFocusEvent *FocusEvent );
-    bool eventFilter( QObject *O, QEvent *E );
+    virtual bool eventFilter( QObject *O, QEvent *E );
 
     virtual QSize sizeHint() const;
     virtual QSize minimumSizeHint() const;
 
 
   public: // value access
+    /** returns true if there is a selected range in the array */
+    bool hasSelectedData() const;
+
     bool isOverwriteMode() const;
     bool isOverwriteOnly() const;
     bool isReadOnly() const;
@@ -119,17 +122,17 @@ class KHexEdit : public KColumnsView
 
     bool tabChangesFocus() const;
 
+    KResizeStyle resizeStyle() const;
     int noOfBytesPerLine() const;
     int startOffset() const;
     int firstLineOffset() const;
-    KResizeStyle resizeStyle() const;
+  // hex column
     KCoding coding() const;
     int/*KPixelX*/ byteSpacingWidth() const;
     int noOfGroupedBytes() const;
     int/*KPixelX*/ groupSpacingWidth() const;
     int/*KPixelX*/ binaryGapWidth() const;
-    /** returns true if there is a selected range in the array */
-    bool hasSelectedData() const;
+  // text column
     /** returns true if "unprintable" chars (>32) are displayed in the text column
       * with their corresponding character, default is false
       */
@@ -206,12 +209,21 @@ class KHexEdit : public KColumnsView
     /** sets offset of the char in the upper left corner */
     void setFirstLineOffset( int FLO );
   // hex column parameters
-    /** */
-    void setByteSpacingWidth( int BSW ) ;
-    /** */
+    /** sets the spacing between the bytes in the hex column
+      * @param BSW spacing between the bytes in pixels
+      * default is 3
+      */
+    void setByteSpacingWidth( int/*KPixelX*/ BSW ) ;
+    /** sets the number of grouped bytes in the hex column
+      * @param NoGB numbers of grouped bytes, 0 means no grouping
+      * default is 4
+      */
     void setNoOfGroupedBytes( int NoGB );
-    /** */
-    void setGroupSpacingWidth( int GSW );
+    /** sets the spacing between the groups of bytes in the hex column
+      * @param GSW spacing between the groups in pixels
+      * default is 9
+      */
+    void setGroupSpacingWidth( int/*KPixelX*/ GSW );
     /** sets the spacing in the middle of a binary byte in the hex column
       * @param BinaryGapW spacing in the middle of a binary in pixels
       * returns true if there was a change
@@ -328,7 +340,7 @@ class KHexEdit : public KColumnsView
     KBufferColumn& activeColumn();
     KBufferColumn& inactiveColumn();
 
-    // recreates the cursor pixmaps and paints active and inactive cursors if doable
+    /** recreates the cursor pixmaps and paints active and inactive cursors if doable */
     void updateCursor();
     void createCursorPixmaps();
     void pointPainterToCursor( QPainter &Painter, const KBufferColumn &Column ) const;

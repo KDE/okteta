@@ -16,12 +16,6 @@ libkhexedit_la_SOURCES = kcolumn.cpp kbordercolumn.cpp koffsetcolumn.cpp kbuffer
                          kbordercoltextexport.cpp koffsetcoltextexport.cpp \
                          kbuffercoltextexport.cpp khexcoltextexport.cpp ktextcoltextexport.cpp
 
-khexeditincludedir = $(includedir)/khexedit
-khexeditinclude_HEADERS = kadds.h khe.h krange.h ksection.h \
-                          kcolumnsview.h khexedit.h kbytesedit.h \
-                          kplainbuffer.h kfixedsizebuffer.h kbigbuffer.h\
-                          kdatabuffer.h kreadonlybuffer.h kwrappingrobuffer.h
-
 noinst_HEADERS = kcolumn.h kbordercolumn.h koffsetcolumn.h kbuffercolumn.h khexcolumn.h ktextcolumn.h \
                  kbytecodec.h koffsetformat.h \
                  kbuffercursor.h kbufferlayout.h kbufferranges.h \
@@ -29,7 +23,10 @@ noinst_HEADERS = kcolumn.h kbordercolumn.h koffsetcolumn.h kbuffercolumn.h khexc
                  kcursor.h kbufferdrag.h \
                  kcoordrange.h ksectionlist.h kcoordrangelist.h \
                  kcoltextexport.h kbordercoltextexport.h koffsetcoltextexport.h \
-                 kbuffercoltextexport.h khexcoltextexport.h ktextcoltextexport.h
-
+                 kbuffercoltextexport.h khexcoltextexport.h ktextcoltextexport.h \
+                 kadds.h khe.h krange.h ksection.h \
+                 kcolumnsview.h khexedit.h kbytesedit.h \
+                 kplainbuffer.h kfixedsizebuffer.h kbigbuffer.h \
+                 kdatabuffer.h kreadonlybuffer.h kwrappingrobuffer.h
 
 METASOURCES = AUTO

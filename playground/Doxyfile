@@ -5,7 +5,7 @@
 #---------------------------------------------------------------------------
 PROJECT_NAME           = khexedit2
 PROJECT_NUMBER         = 0.1.7
-OUTPUT_DIRECTORY       = doc/API/
+OUTPUT_DIRECTORY       = /home/kossebau/Programmieren/KHexEdit2/doc/API
 OUTPUT_LANGUAGE        = English
 USE_WINDOWS_ENCODING   = NO
 EXTRACT_ALL            = YES
@@ -85,9 +85,10 @@ FILE_PATTERNS          = *.c \
                          *.moc \
                          *.xpm
 RECURSIVE              = YES
-EXCLUDE                = 
+EXCLUDE                = /home/kossebau/Programmieren/KDE/kdecvs/kdenonbeta/khexedit2/src/lib/export/
 EXCLUDE_SYMLINKS       = NO
-EXCLUDE_PATTERNS       = *.moc.cpp
+EXCLUDE_PATTERNS       = *.moc.cpp \
+                         *.moc
 EXAMPLE_PATH           = 
 EXAMPLE_PATTERNS       = *
 EXAMPLE_RECURSIVE      = NO
@@ -112,17 +113,17 @@ IGNORE_PREFIX          =
 # configuration options related to the HTML output
 #---------------------------------------------------------------------------
 GENERATE_HTML          = YES
-HTML_OUTPUT            = doc/API/
+HTML_OUTPUT            = HTML
 HTML_FILE_EXTENSION    = .html
-HTML_HEADER            =
-HTML_FOOTER            =
-HTML_STYLESHEET        =
+HTML_HEADER            = 
+HTML_FOOTER            = 
+HTML_STYLESHEET        = 
 HTML_ALIGN_MEMBERS     = YES
 GENERATE_HTMLHELP      = NO
-CHM_FILE               =
-HHC_LOCATION           =
+CHM_FILE               = 
+HHC_LOCATION           = 
 GENERATE_CHI           = NO
-BINARY_TOC             = NO
+BINARY_TOC             = YES
 TOC_EXPAND             = NO
 DISABLE_INDEX          = NO
 ENUM_VALUES_PER_LINE   = 4
@@ -137,8 +138,8 @@ LATEX_CMD_NAME         = latex
 MAKEINDEX_CMD_NAME     = makeindex
 COMPACT_LATEX          = NO
 PAPER_TYPE             = a4wide
-EXTRA_PACKAGES         =
-LATEX_HEADER           =
+EXTRA_PACKAGES         = 
+LATEX_HEADER           = 
 PDF_HYPERLINKS         = NO
 USE_PDFLATEX           = NO
 LATEX_BATCHMODE        = NO
@@ -150,8 +151,8 @@ GENERATE_RTF           = NO
 RTF_OUTPUT             = rtf
 COMPACT_RTF            = NO
 RTF_HYPERLINKS         = NO
-RTF_STYLESHEET_FILE    =
-RTF_EXTENSIONS_FILE    =
+RTF_STYLESHEET_FILE    = 
+RTF_EXTENSIONS_FILE    = 
 #---------------------------------------------------------------------------
 # configuration options related to the man page output
 #---------------------------------------------------------------------------
@@ -163,8 +164,8 @@ MAN_LINKS              = NO
 # configuration options related to the XML output
 #---------------------------------------------------------------------------
 GENERATE_XML           = NO
-XML_SCHEMA             =
-XML_DTD                =
+XML_SCHEMA             = 
+XML_DTD                = 
 #---------------------------------------------------------------------------
 # configuration options for the AutoGen Definitions output
 #---------------------------------------------------------------------------
@@ -175,29 +176,29 @@ GENERATE_AUTOGEN_DEF   = NO
 GENERATE_PERLMOD       = NO
 PERLMOD_LATEX          = NO
 PERLMOD_PRETTY         = YES
-PERLMOD_MAKEVAR_PREFIX =
+PERLMOD_MAKEVAR_PREFIX = 
 #---------------------------------------------------------------------------
-# Configuration options related to the preprocessor
+# Configuration options related to the preprocessor   
 #---------------------------------------------------------------------------
 ENABLE_PREPROCESSING   = YES
 MACRO_EXPANSION        = NO
 EXPAND_ONLY_PREDEF     = NO
 SEARCH_INCLUDES        = YES
-INCLUDE_PATH           =
-INCLUDE_FILE_PATTERNS  =
-PREDEFINED             =
-EXPAND_AS_DEFINED      =
+INCLUDE_PATH           = 
+INCLUDE_FILE_PATTERNS  = 
+PREDEFINED             = 
+EXPAND_AS_DEFINED      = 
 SKIP_FUNCTION_MACROS   = YES
 #---------------------------------------------------------------------------
-# Configuration::addtions related to external references
+# Configuration::addtions related to external references   
 #---------------------------------------------------------------------------
-TAGFILES               =
-GENERATE_TAGFILE       =
+TAGFILES               = 
+GENERATE_TAGFILE       = 
 ALLEXTERNALS           = NO
 EXTERNAL_GROUPS        = YES
 PERL_PATH              = /usr/bin/perl
 #---------------------------------------------------------------------------
-# Configuration options related to the dot tool
+# Configuration options related to the dot tool   
 #---------------------------------------------------------------------------
 CLASS_DIAGRAMS         = YES
 HIDE_UNDOC_RELATIONS   = YES
@@ -209,20 +210,20 @@ INCLUDE_GRAPH          = YES
 INCLUDED_BY_GRAPH      = YES
 GRAPHICAL_HIERARCHY    = YES
 DOT_IMAGE_FORMAT       = png
-DOT_PATH               =
-DOTFILE_DIRS           =
+DOT_PATH               = 
+DOTFILE_DIRS           = 
 MAX_DOT_GRAPH_WIDTH    = 1024
 MAX_DOT_GRAPH_HEIGHT   = 1024
 MAX_DOT_GRAPH_DEPTH    = 1000
 GENERATE_LEGEND        = YES
 DOT_CLEANUP            = YES
 #---------------------------------------------------------------------------
-# Configuration::addtions related to the search engine
+# Configuration::addtions related to the search engine   
 #---------------------------------------------------------------------------
 SEARCHENGINE           = NO
 CGI_NAME               = search.cgi
-CGI_URL                =
-DOC_URL                =
-DOC_ABSPATH            =
+CGI_URL                = 
+DOC_URL                = 
+DOC_ABSPATH            = 
 BIN_ABSPATH            = /usr/local/bin/
-EXT_DOC_PATHS          =
+EXT_DOC_PATHS          = 

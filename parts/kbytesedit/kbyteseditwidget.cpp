@@ -33,6 +33,7 @@ KBytesEditWidget::KBytesEditWidget( QWidget *parent, const char *name, const QSt
   BytesEdit = new KHE::KBytesEdit( this, "BytesEdit" );
   Layout->addWidget( BytesEdit );
 //   connect( _editor, SIGNAL( canUndo(bool) ), this, SIGNAL( canUndo(bool) ) );
+  connect( BytesEdit, SIGNAL(copyAvailable( bool )), this, SIGNAL(copyAvailable( bool )) );
 }
 
 
@@ -74,9 +75,23 @@ void KBytesEditWidget::setCoding( KCoding C )
 {
   BytesEdit->setCoding( (KHE::KHexEdit::KCoding) C );
 }
+
 void KBytesEditWidget::setResizeStyle( KResizeStyle Style )
 {
   BytesEdit->setResizeStyle( (KHE::KHexEdit::KResizeStyle) Style );
+}
+int KBytesEditWidget::noOfBytesPerLine() const
+{
+  return BytesEdit->noOfBytesPerLine();
+}
+
+KBytesEditWidget::KResizeStyle KBytesEditWidget::resizeStyle() const
+{
+  return (KResizeStyle)BytesEdit->resizeStyle();
+}
+void KBytesEditWidget::setNoOfBytesPerLine( int NoCpL )
+{
+  BytesEdit->setNoOfBytesPerLine( NoCpL );
 }
 
 
@@ -98,10 +113,6 @@ void KBytesEditWidget::setModified( bool b )
   BytesEdit->setModified( b );
 }
 
-void KBytesEditWidget::setNoOfBytesPerLine( int NoCpL )
-{
-  BytesEdit->setNoOfBytesPerLine( NoCpL );
-}
 
 void KBytesEditWidget::setByteSpacingWidth( int BSW )
 {
@@ -183,15 +194,6 @@ bool KBytesEditWidget::isReadOnly() const
 // }
 
 
-int KBytesEditWidget::noOfBytesPerLine() const
-{
-  return BytesEdit->noOfBytesPerLine();
-}
-
-KBytesEditWidget::KResizeStyle KBytesEditWidget::resizeStyle() const
-{
-  return (KResizeStyle)BytesEdit->resizeStyle();
-}
 
 KBytesEditWidget::KCoding KBytesEditWidget::coding() const
 {
@@ -257,7 +259,7 @@ void KBytesEditWidget::selectAll( bool Select )
   BytesEdit->selectAll( Select );
 }
 
-  // clipboard interaction
+  // clipboard interface
 void KBytesEditWidget::copy()
 {
   BytesEdit->copy();
@@ -273,7 +275,40 @@ void KBytesEditWidget::paste()
   BytesEdit->paste();
 }
 
+// zooming interface
+void KBytesEditWidget::zoomIn( int PointInc )
+{
+  BytesEdit->zoomIn( PointInc );
+}
+
+void KBytesEditWidget::zoomIn()
+{
+  BytesEdit->zoomIn();
+}
+
+void KBytesEditWidget::zoomOut( int PointDec )
+{
+  BytesEdit->zoomOut( PointDec );
+}
+
+void KBytesEditWidget::zoomOut()
+{
+  BytesEdit->zoomOut();
+}
+
+void KBytesEditWidget::zoomTo( int PointSize )
+{
+  BytesEdit->zoomTo( PointSize );
+}
+
+void KBytesEditWidget::unZoom()
+{
+  BytesEdit->unZoom();
+}
+
+
 typedef K_TYPELIST_1( KBytesEditWidget ) Product;
-K_EXPORT_COMPONENT_FACTORY( libkbyteseditwidget, KGenericFactory<Product>( "khexedit" ) )
+K_EXPORT_COMPONENT_FACTORY( libkbyteseditwidget, KGenericFactory<Product>( "kbytesedit" ) )
+//K_EXPORT_COMPONENT_FACTORY( libkbyteseditwidget, KGenericFactory<MyPlugin> );
 
 #include "kbyteseditwidget.moc"

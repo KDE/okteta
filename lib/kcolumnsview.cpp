@@ -28,7 +28,7 @@ using namespace KHE;
 static bool DefaultHorizontalGrid = false;
 
 KColumnsView::KColumnsView( /*bool R,*/ QWidget *Parent, const char *Name, WFlags Flags )
- : QScrollView( Parent, Name, Flags | WRepaintNoErase | WStaticContents ),
+ : QScrollView( Parent, Name, Flags | WRepaintNoErase /*| WStaticContents*/ ),
    NoOfLines( 0 ),
    LineHeight( 0 ),
    TotalWidth( 0 ),

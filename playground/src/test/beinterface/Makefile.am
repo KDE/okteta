@@ -1,4 +1,4 @@
-INCLUDES = $(all_includes)
+INCLUDES = $(all_includes) -I../../interface
 
 bin_PROGRAMS = testbeif
 testbeif_SOURCES = main.cpp

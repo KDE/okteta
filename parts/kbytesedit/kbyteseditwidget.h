@@ -19,29 +19,35 @@
 #define KBYTESEDITWIDGET_H
 
 #include <qwidget.h>
-#include <kbyteseditinterface.h>
+// app specific
+#include <byteseditinterface.h>
+#include <hexcolumninterface.h>
+#include <textcolumninterface.h>
+#include <zoominterface.h>
+#include <clipboardinterface.h>
+
 
 namespace KHE {
 class KBytesEdit;
 }
 
 /**
-   Simple hex editor/viewer.
+   hex editor/viewer.
 
    @author Friedrich W. H. Kossebau <Friedrich.W.H@Kossebau.de>
    @version 0.1
  **/
-class KBytesEditWidget : public QWidget, public KBytesEditInterface
+class KBytesEditWidget : public QWidget, public KHE::BytesEditInterface,
+                         public KHE::HexColumnInterface, public KHE::TextColumnInterface,
+                         public KHE::ZoomInterface, public KHE::ClipboardInterface
 {
   Q_OBJECT
+
   public:
+    /** constructor API as demanded by KGenericFactory */
     KBytesEditWidget( QWidget *parent, const char *name, const QStringList & = QStringList() );
 
-  signals:
-
-  public slots:
-
-  public: // set methods
+  public: // bytesedit interface
     /** hands over to the editor a new byte array.
       * If there exists an old one and autodelete is set the old one gets deleted.
       * @param D pointer to memory
@@ -50,8 +56,7 @@ class KBytesEditWidget : public QWidget, public KBytesEditInterface
       * @param KM keep the memory on resize (RS is the maximum size)
       */
     virtual void setData( char *D, int S, int RS = -1, bool KM = true );
-    /** sets whether the given array should be handled read only or not */
-    virtual void setReadOnly( bool RO = true );
+
     /** sets the maximal size of the actual byte array. If the actual array is already larger
       * it will not be modified but there can be only done non-inserting actions
       * until the array's is below the limit
@@ -65,19 +70,42 @@ class KBytesEditWidget : public QWidget, public KBytesEditInterface
       */
     virtual void setKeepsMemory( bool KM = true );
     /** */
+    virtual char *data() const;
+    /** returns the size of the actual byte array */
+    virtual int dataSize() const;
+    /** returns the maximal allowed size for the byte array */
+    virtual int maxDataSize () const;
+    /** returns whether autodelete is set for the byte array */
+    virtual bool isAutoDelete() const;
+    /** returns whether the memory of the byte array is kept */
+    virtual bool keepsMemory() const;
+    /** */
+    virtual bool isOverwriteMode() const;
+    virtual bool isOverwriteOnly() const;
+    virtual bool isReadOnly() const;
+    virtual bool isModified() const;
+    /** switches the array */
+    virtual void resetData( char *D, int S, bool Repaint );
+    /** repaint the indizes from i1 to i2 */
+    virtual void repaintRange( int i1, int i2 );
+
+  public: // cursor interface
+    /** */
     virtual void setCursorPosition( int Index );
-    /** sets the format of the hex column. Default is KHE::HexadecimalCoding */
-    virtual void setCoding( KCoding C );
+//     virtual bool tabChangesFocus() const;
+
+  public: // layout interface ??
     /** sets the resizestyle for the hex column. Default is KHE::FullSizeUsage */
     virtual void setResizeStyle( KResizeStyle Style );
-    /** sets whether the widget is overwriteonly or not. Default is false. */
-    virtual void setOverwriteOnly( bool b );
-    /** sets whether the widget is in overwrite mode or not. Default is true. */
-    virtual void setOverwriteMode( bool b );
-    /** sets whether the data should be treated modified or not */
-    virtual void setModified( bool b );
     /** sets the number of bytes per line, switching the resize style to KHE::NoResize */
     virtual void setNoOfBytesPerLine( int NoCpL );
+
+    virtual int noOfBytesPerLine() const;
+    virtual KResizeStyle resizeStyle() const;
+
+  public: // hex column
+    /** sets the format of the hex column. Default is KHE::HexadecimalCoding */
+    virtual void setCoding( KCoding C );
     /** sets the spacing between the bytes in pixels */
     virtual void setByteSpacingWidth( int BSW );
     /** sets the numbers of grouped bytes, 0 means no grouping, Default is 4 */
@@ -88,6 +116,15 @@ class KBytesEditWidget : public QWidget, public KBytesEditInterface
       * @param BinaryGapW spacing in the middle of a binary in pixels
       */
     virtual void setBinaryGapWidth( int BGW );
+
+    virtual KCoding coding() const;
+    virtual int byteSpacingWidth() const;
+
+    virtual int noOfGroupedBytes() const;
+    virtual int groupSpacingWidth() const;
+    virtual int binaryGapWidth() const;
+
+  public:  // text column
     /** sets whether "unprintable" chars (>32) should be displayed in the text column
       * with their corresponding character.
       * @param SU
@@ -98,36 +135,6 @@ class KBytesEditWidget : public QWidget, public KBytesEditInterface
       * returns true if there was a change
       */
     virtual void setSubstituteChar( QChar SC );
-
-
-  public: // get methods
-    virtual char *data() const;
-    /** returns the size of the actual byte array */
-    virtual int dataSize() const;
-    /** returns the maximal allowed size for the byte array */
-    virtual int maxDataSize () const;
-    /** returns whether autodelete is set for the byte array */
-    virtual bool isAutoDelete() const;
-    /** returns whether the memory of the byte array is kept */
-    virtual bool keepsMemory() const;
-
-    /** */
-    virtual bool isOverwriteMode() const;
-    virtual bool isOverwriteOnly() const;
-    virtual bool isReadOnly() const;
-    virtual bool isModified() const;
-
-//     virtual bool tabChangesFocus() const;
-
-    virtual int noOfBytesPerLine() const;
-    virtual KResizeStyle resizeStyle() const;
-    virtual KCoding coding() const;
-    virtual int byteSpacingWidth() const;
-
-    virtual int noOfGroupedBytes() const;
-    virtual int groupSpacingWidth() const;
-    virtual int binaryGapWidth() const;
-  // text column
     /** returns true if "unprintable" chars (>32) are displayed in the text column
       * with their corresponding character, default is false
       */
@@ -135,32 +142,37 @@ class KBytesEditWidget : public QWidget, public KBytesEditInterface
     /** returns the actually used substitute character for "unprintable" chars, default is '.' */
     virtual QChar substituteChar() const;
 
-    /** returns true if there is a selected range in the array */
-    virtual bool hasSelectedData() const;
-
-  public: // call for action
-    /** switches the array */
-    virtual void resetData( char *D, int S, bool Repaint );
-    /** repaint the indizes from i1 to i2 */
-    virtual void repaintRange( int i1, int i2 );
+  public: // edit interface
     /** */
     virtual void insert( const QByteArray &D );
     /** de-/selects all data */
     virtual void selectAll( bool select );
+    /** returns true if there is a selected range in the array */
+    virtual bool hasSelectedData() const;
 
-  // clipboard interaction
+  public slots:
+  // bytesedit interface
+    virtual void setReadOnly( bool RO = true );
+    virtual void setOverwriteOnly( bool b );
+    virtual void setOverwriteMode( bool b );
+    virtual void setModified( bool b );
+
+  // clipboard interface
     virtual void copy();
     virtual void cut();
     virtual void paste();
 
-  // zooming
-//     virtual void zoomIn( int PointInc );
-//     virtual void zoomIn();
-//     virtual void zoomOut( int PointInc );
-//     virtual void zoomOut();
-//     virtual void zoomTo( int PointSize );
-//     virtual void unZoom();
+  // zooming interface
+    virtual void zoomIn( int PointInc );
+    virtual void zoomIn();
+    virtual void zoomOut( int PointDec );
+    virtual void zoomOut();
+    virtual void zoomTo( int PointSize );
+    virtual void unZoom();
 
+  signals:
+  // clipboard interface
+    virtual void copyAvailable( bool Really );
 
   protected:
     KHE::KBytesEdit* BytesEdit;
