@@ -48,7 +48,7 @@
 
 using namespace KHE;
 
-static const int NoOfColumns = 3;
+//static const int NoOfColumns = 3;
 
 /** zooming is done in steps of font size points */
 static const int DefaultZoomStep = 1;
@@ -71,7 +71,7 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, WFla
    DragStartTimer( new QTimer(this) ),
    TrippleClickTimer( new QTimer(this) ),
    CursorPixmaps( new KCursor() ),
-   ByteBuffer( new char[KByteCodec::MaxCodingWidth] ),
+   ByteBuffer( new char[KByteCodec::MaxCodingWidth+1] ),
    ClipboardMode( QClipboard::Clipboard ),
    ResizeStyle( DefaultResizeStyle ),
    TabChangesFocus( false ),
@@ -87,15 +87,17 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, WFla
    EditModeByInsert( false ),
    d( 0 )
 {
+  // initalize layout
   if( DataBuffer )
     BufferLayout->setLength( DataBuffer->size() );
+  BufferLayout->setNoOfLinesPerPage( noOfLinesPerPage() );
 
   // creating the columns in the needed order
-  OffsetColumn = new KOffsetColumn( this, DefaultFirstLineOffset, DefaultNoOfBytesPerLine, KOffsetFormat::Hexadecimal );
-  FirstBorderColumn = new KBorderColumn( this );
-  HexColumn = new KHexColumn( this, DataBuffer, BufferLayout, BufferRanges );
+  OffsetColumn =       new KOffsetColumn( this, DefaultFirstLineOffset, DefaultNoOfBytesPerLine, KOffsetFormat::Hexadecimal );
+  FirstBorderColumn =  new KBorderColumn( this );
+  HexColumn =          new KHexColumn( this, DataBuffer, BufferLayout, BufferRanges );
   SecondBorderColumn = new KBorderColumn( this );
-  TextColumn = new KTextColumn( this, DataBuffer, BufferLayout, BufferRanges );
+  TextColumn =         new KTextColumn( this, DataBuffer, BufferLayout, BufferRanges );
 
   // select the active column
   ActiveColumn = &textColumn();
@@ -109,7 +111,7 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, WFla
   setFont( KGlobalSettings::fixedFont() );
 #endif
 
-  //
+  // get the full control
   viewport()->setFocusProxy( this );
   viewport()->setFocusPolicy( WheelFocus );
 
@@ -158,6 +160,8 @@ void KHexEdit::setOverwriteMode( bool OM )
 
   OverWrite = OM;
 
+  // affected:
+  // cursor shape
   bool ChangeCursor = !(CursorPaused || InEditMode);
   if( ChangeCursor )
     pauseCursor();
@@ -173,23 +177,25 @@ void KHexEdit::setOverwriteMode( bool OM )
 
 void KHexEdit::setDataBuffer( KDataBuffer *B )
 {
+  pauseCursor();
+
   DataBuffer = B;
-
-  BufferLayout->setLength( DataBuffer->size() );
-
   hexColumn().set( DataBuffer );
   textColumn().set( DataBuffer);
 
-  fitInLine();
-  updateWidths();
-
-  BufferLayout->setNoOfLinesPerPage( noOfLinesPerPage() );
+  // affected:
+  // length -> no of lines -> width
+  BufferLayout->setLength( DataBuffer->size() );
+  adjustToLayoutNoOfLines();
 
   // ensure that the widget is readonly if the buffer is TODO
 //   if( DataBuffer->isReadOnly() && !isReadOnly() )
 //     setReadOnly( true );
 
-  repaintView();
+  updateView();
+  BufferCursor->gotoStart();
+  ensureCursorVisible();
+  unpauseCursor();
 }
 
 
@@ -198,10 +204,16 @@ void KHexEdit::setStartOffset( int SO )
   if( !BufferLayout->setStartOffset(SO) )
     return;
 
-  fitInLine();
-  updateWidths();
+  pauseCursor();
+  // affects:
+  // the no of lines -> width
+  adjustToLayoutNoOfLines();
 
-  repaintView();
+  updateView();
+
+  BufferCursor->updateCoord();
+  ensureCursorVisible();
+  unpauseCursor();
 }
 
 
@@ -222,10 +234,16 @@ void KHexEdit::setBufferSpacing( KPixelX ByteSpacing, int NoOfGroupedBytes, KPix
 
 void KHexEdit::setCoding( KCoding C )
 {
+  int OldCodingWidth = hexColumn().codingWidth();
+
   if( !hexColumn().setCoding((KHE::KCoding)C) )
     return;
 
-  updateViewByWidth();
+  // no change in the width?
+  if( hexColumn().codingWidth() == OldCodingWidth )
+    updateColumn( hexColumn() );
+  else
+    updateViewByWidth();
 }
 
 
@@ -281,12 +299,13 @@ void KHexEdit::setBinaryGapWidth( int/*KPixelX*/ BGW )
   updateViewByWidth();
 }
 
+
 void KHexEdit::setSubstituteChar( QChar SC )
 {
   if( !textColumn().setSubstituteChar(SC) )
     return;
   pauseCursor();
-  updateView();
+  updateColumn( textColumn() );
   unpauseCursor();
 }
 
@@ -295,22 +314,27 @@ void KHexEdit::setShowUnprintable( bool SU )
   if( !textColumn().setShowUnprintable(SU) )
     return;
   pauseCursor();
-  updateView();
+  updateColumn( textColumn() );
   unpauseCursor();
 }
 
 
-void KHexEdit::fontChange( const QFont &/*OldFont*/ )
+void KHexEdit::fontChange( const QFont &OldFont )
 {
+  QScrollView::fontChange( OldFont );
+  
   if( !InZooming )
     DefaultFontSize = font().pointSize();
 
+  // get new values
   QFontMetrics FM( fontMetrics() );
   KPixelX DigitWidth = FM.maxWidth();
   KPixelY DigitBaseLine = FM.ascent();
 
   setLineHeight( FM.height() );
-  BufferLayout->setNoOfLinesPerPage( noOfLinesPerPage() ); // needed here if content is smaller then a page
+
+  // update all dependant structures
+  BufferLayout->setNoOfLinesPerPage( noOfLinesPerPage() );
 
   offsetColumn().setMetrics( DigitWidth, DigitBaseLine );
   hexColumn().setMetrics( DigitWidth, DigitBaseLine );
@@ -324,8 +348,7 @@ void KHexEdit::updateViewByWidth()
 {
   pauseCursor();
 
-  fitToNoOfBytesPerLine();
-  updateWidths();
+  adjustToLayoutNoOfBytesPerLine();
 
   updateView();
 
@@ -374,8 +397,9 @@ void KHexEdit::unZoom()
 }
 
 
-void KHexEdit::fitInLine()
+void KHexEdit::adjustToLayoutNoOfLines()
 {
+  // check whether there is a change with the numbers of fitting bytes per line
   if( ResizeStyle != NoResize )
   {
     int FittingBytesPerLine = fittingBytesPerLine( size() );
@@ -384,18 +408,20 @@ void KHexEdit::fitInLine()
 
     // changes?
     if( BufferLayout->setNoOfBytesPerLine(FittingBytesPerLine) )
-      fitToNoOfBytesPerLine();
+      adjustToLayoutNoOfBytesPerLine();
   }
+
+  setNoOfLines( BufferLayout->noOfLines() );
 }
 
 
-void KHexEdit::fitToNoOfBytesPerLine()
+void KHexEdit::adjustToLayoutNoOfBytesPerLine()
 {
   offsetColumn().setDelta( BufferLayout->noOfBytesPerLine() );
   hexColumn().resetXBuffer();
   textColumn().resetXBuffer();
 
-  setNoOfLines( BufferLayout->noOfLines() );
+  updateWidths();
 }
 
 
@@ -415,7 +441,7 @@ QSize KHexEdit::minimumSizeHint() const
 
 void KHexEdit::resizeEvent( QResizeEvent *ResizeEvent )
 {
-  BufferLayout->setNoOfLinesPerPage( noOfLinesPerPage() );
+  BufferLayout->setNoOfLinesPerPage( noOfLinesPerPage() ); // TODO: doesn't work with the new size!!!
 
   if( ResizeStyle != NoResize )
   {
@@ -1072,6 +1098,7 @@ void KHexEdit::startCursor()
 
 void KHexEdit::unpauseCursor()
 {
+// std::cout << "unpauseCursor" <<std::endl;
   CursorPaused = false;
 
   updateCursor();
@@ -1140,7 +1167,7 @@ void KHexEdit::stopCursor()
 
 void KHexEdit::pauseCursor( bool LeaveEdit )
 {
-
+// std::cout << "pauseCursor" <<std::endl;
   if( !InEditMode || LeaveEdit )
     paintActiveCursor( false );
   paintInactiveCursor( false );
@@ -1267,6 +1294,12 @@ void KHexEdit::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
 
   if( !CursorPaused && visibleLines(KPixelYs(cy,ch,false)).includes(BufferCursor->line()) )
     updateCursor();
+}
+
+
+void KHexEdit::updateColumn( KColumn &Column )
+{
+  updateContents( Column.x(), 0, Column.width(), totalHeight() );
 }
 
 
@@ -1796,16 +1829,13 @@ void KHexEdit::repaintChanged()
   if( !isUpdatesEnabled() || !viewport()->isUpdatesEnabled() || !BufferRanges->isModified() )
     return;
 
+  // TODO: we do this only to let the scrollview handle new or removed lines. overlaps with repaintRange
   resizeContents( totalWidth(), totalHeight() );
 
   KPixelX cx = contentsX();
   KPixelY cy = contentsY();
   KPixelX cw = visibleWidth();
   KPixelY ch = visibleHeight();
-
-  QPainter Paint;
-  Paint.begin( viewport() );
-  Paint.translate( -cx, -cy );
 
   // calculate affected lines/indizes
   KSection VisibleLines = visibleLines( KPixelYs(cy,ch,false) );
@@ -1841,24 +1871,24 @@ void KHexEdit::repaintChanged()
       // only one line?
       if( ChangedRange.start().line() == ChangedRange.end().line() )
         for( KBufferColumn *C=RepaintColumns.first(); C; C=RepaintColumns.next() )
-          paintLine( &Paint, C, ChangedRange.start().line(),
+          paintLine( C, ChangedRange.start().line(),
                      KSection(ChangedRange.start().pos(),ChangedRange.end().pos()) );
       //
       else
       {
         // first line
         for( KBufferColumn *C=RepaintColumns.first(); C; C=RepaintColumns.next() )
-          paintLine( &Paint, C, ChangedRange.start().line(),
+          paintLine( C, ChangedRange.start().line(),
                      KSection(ChangedRange.start().pos(),FullPositions.end()) );
 
         // at least one full line?
         for( int l = ChangedRange.start().line()+1; l < ChangedRange.end().line(); ++l )
           for( KBufferColumn *C=RepaintColumns.first(); C; C=RepaintColumns.next() )
-            paintLine( &Paint, C, l, FullPositions );
+            paintLine( C, l, FullPositions );
 
         // last line
         for( KBufferColumn *C=RepaintColumns.first(); C; C=RepaintColumns.next() )
-          paintLine( &Paint, C, ChangedRange.end().line(),
+          paintLine( C, ChangedRange.end().line(),
                      KSection(FullPositions.start(),ChangedRange.end().pos()) );
       }
 
@@ -1869,7 +1899,6 @@ void KHexEdit::repaintChanged()
     }
   }
 
-  Paint.end();
 
   // Paint possible removed bytes at the end of the last line
   // Paint new/removed trailing lines
@@ -1882,7 +1911,7 @@ void KHexEdit::repaintChanged()
 }
 
 
-void KHexEdit::paintLine( QPainter *P, KBufferColumn *C, int Line, KSection Positions ) const
+void KHexEdit::paintLine( KBufferColumn *C, int Line, KSection Positions )
 {
   Positions.restrictTo( C->visiblePositions() );
 
@@ -1909,7 +1938,8 @@ void KHexEdit::paintLine( QPainter *P, KBufferColumn *C, int Line, KSection Posi
 
   Paint.end();
   // copy to screen
-  P->drawPixmap( XPixels.start(), cy, LineBuffer, XPixels.start(), 0, XPixels.width(), LineHeight ); // bitBlt directly impossible: lack of real coord
+  bitBlt( viewport(), XPixels.start() - contentsX(), cy - contentsY(),
+          &LineBuffer, XPixels.start(), 0, XPixels.width(), LineHeight );
 }
 
 

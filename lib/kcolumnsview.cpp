@@ -90,7 +90,10 @@ void KColumnsView::updateLineBufferSize()
 
 int KColumnsView::noOfLinesPerPage() const
 {
-  int NoOfLinesPerPage = (visibleHeight()-1) / LineHeight; // -1 ensures to get always the last visible line
+  if( !viewport() || LineHeight == 0 )
+    return 1;
+//  int NoOfLinesPerPage = (visibleHeight()-1) / LineHeight; // -1 ensures to get always the last visible line
+  int NoOfLinesPerPage = (viewport()->height()-1) / LineHeight; // -1 ensures to get always the last visible line
 
   if( NoOfLinesPerPage == 0 )
     // ensure to move down at least one line
@@ -121,7 +124,7 @@ void KColumnsView::removeColumn( KColumn *C )
 void KColumnsView::updateView()
 {
   resizeContents( totalWidth(), totalHeight() );
-  update();
+  updateContents();
 }
 
 
@@ -150,7 +153,7 @@ void KColumnsView::paintEmptyArea( QPainter *P, int cx ,int cy, int cw, int ch)
   for( int i=0; i<(int)Rectangles.count(); ++i ) 
     P->fillRect( Rectangles[i], Brush );
 }
-
+ 
 
 void KColumnsView::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
 {
@@ -192,7 +195,11 @@ void KColumnsView::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
       while( true )
       {
         Paint.end();
-        P->drawPixmap( cx, y, LineBuffer, cx, 0, cw, LineHeight ); // bitBlt directly impossible: lack of real coord
+         P->drawPixmap( cx, y, LineBuffer, cx, 0, cw, LineHeight ); // bitBlt directly impossible: lack of real coord
+
+        // copy to screen
+//        bitBlt( viewport(), cx - contentsX(), y - contentsY(),
+//                &LineBuffer, cx, 0, cw, LineHeight );
 
         ++l;
         y += LineHeight;

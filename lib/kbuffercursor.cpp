@@ -15,7 +15,7 @@
  ***************************************************************************/
 
 
-#include <iostream>
+// #include <iostream>
 
 // app specific
 #include "kbufferlayout.h"

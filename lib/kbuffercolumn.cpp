@@ -18,7 +18,7 @@
 // c specific
 #include <ctype.h>
 // c++ specififc
-#include <iostream>
+//#include <iostream>
 // qt specific
 #include <qpainter.h>
 // app specific
@@ -33,7 +33,7 @@ using namespace KHE;
 
 static const unsigned int StartsBefore = 1;
 static const unsigned int EndsLater = 2;
-static char EmptyByte = ' ';
+static const char EmptyByte = ' ';
 
 static const int DefaultCursorWidth = 2;
 static const int DefaultByteSpacingWidth = 3;

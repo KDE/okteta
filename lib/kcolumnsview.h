@@ -67,7 +67,9 @@ class KColumnsView : public QScrollView
   public: // data-wise sizes
     /** returns the number of all lines */
     int noOfLines() const;
-    /** returns number of full visible Lines, at least 1 (as needed by page down/up)*/
+    /** returns number of fully visible lines, at least 1 (as needed by page down/up)
+      * doesn't care about the total height being smaller than the display height
+      */
     int noOfLinesPerPage() const;
 
   public: // pixel-wise sizes
@@ -101,11 +103,13 @@ class KColumnsView : public QScrollView
     void removeColumn( KColumn *C );
 
 
-  protected:
+  protected: // recalculations
     /** recalculates the positions of the columns and the total width */
     void updateWidths();
     /** ensures that the line buffer has the size of the whole line */
     void updateLineBufferSize();
+
+  protected: // painting
     void updateView();
     void repaintView();
 

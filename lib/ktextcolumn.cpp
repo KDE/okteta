@@ -14,11 +14,11 @@
  *                                                                         *
  ***************************************************************************/
 
- 
+
 // c specific
 #include <ctype.h>
 // c++ specififc
-#include <iostream>
+// #include <iostream>
 // qt specific
 #include <qpainter.h>
 // app specific

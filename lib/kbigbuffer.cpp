@@ -18,7 +18,7 @@
 // c specific
 #include <stdlib.h>
 // c++ specific
-#include <iostream>
+//#include <iostream>
 // app specific
 #include "kbigbuffer.h"
 
@@ -29,7 +29,8 @@ KBigBuffer::KBigBuffer( int NP, int PS )
    NoOfFreePages( NP ),
    PageSize( PS ),
    FirstPage( -1 ),
-   LastPage( -1 )
+   LastPage( -1 ),
+   Size( 0 )
 {
   IsOpen = false;
 
@@ -59,6 +60,7 @@ const char *KBigBuffer::dataSet( KSection /*Section*/ ) const
 
 char KBigBuffer::datum( int DatumOffset ) const
 {
+//   std::cout << "reading datum " << DatumOffset << std::endl;
   int OffsetInPage = DatumOffset - OffsetOfActualPage;
   // there shouldn't be any need to check l
   if( OffsetInPage >= 0 && OffsetInPage < PageSize )
@@ -104,6 +106,8 @@ bool KBigBuffer::open( const QString& FileName )
   if( !File.open(IO_ReadOnly|IO_Raw) )
     return false;
 
+//   std::cout << "loading file " << FileName << std::endl;
+
   int FileSize = File.size();
   Size = FileSize;
 
@@ -130,6 +134,8 @@ bool KBigBuffer::close()
 
   if( File.status() == IO_UnspecifiedError )
     return false;
+
+//   std::cout << "closing file " << std::endl;
 
   // free pages
   for( KPageOfChar::iterator D=Data.begin(); D!=Data.end(); ++D )
@@ -164,7 +170,7 @@ bool KBigBuffer::ensurePageLoaded( int PageIndex ) const
       while( !freePage(LastPage--) );
   }
 
-  std::cout << "loading page " << PageIndex << std::endl;
+//   std::cout << "loading page " << PageIndex << std::endl;
   // create Page
   Data[PageIndex] = new char[PageSize];
   --NoOfFreePages;
@@ -196,7 +202,7 @@ bool KBigBuffer::freePage( int PageIndex ) const
   // check range and if is loaded at all
   if( PageIndex < 0 || (unsigned int)PageIndex >= Data.size() || !Data[PageIndex] )
     return false;
-  std::cout << "freeing page " << PageIndex << std::endl;
+//   std::cout << "freeing page " << PageIndex << std::endl;
   delete [] Data[PageIndex];
   Data[PageIndex] = 0L;
   ++NoOfFreePages;

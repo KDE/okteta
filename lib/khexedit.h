@@ -333,39 +333,55 @@ class KHexEdit : public KColumnsView
     virtual void contentsWheelEvent( QWheelEvent *e );
 //    virtual void contentsContextMenuEvent( QContextMenuEvent *e );
 
-  protected:
+  protected: // atomic ui operations
+    /** handles screen update in case of a change to any of the width sizes
+      */
+    void updateViewByWidth();
+    /** repaints all the parts that are signed as changed */
+    void repaintChanged();
+    bool handleByteEditKey( QKeyEvent *KeyEvent );
+    bool handleLetter( QKeyEvent *KeyEvent );
+
+  protected: // drawing related operations
+    /** recreates the cursor pixmaps and paints active and inactive cursors if doable */
+    void updateCursor();
+    void createCursorPixmaps();
+    void pointPainterToCursor( QPainter &Painter, const KBufferColumn &Column ) const;
+    /** draws the blinking cursor or removes it */
+    void paintActiveCursor( bool CursorOn );
+    void paintInactiveCursor( bool CursorOn );
+    void paintEditedByte( bool Edited );
+    void paintLine( KBufferColumn *C, int Line, KSection Positions );
+
+  protected: // partial operations
     KOffsetColumn& offsetColumn();
     KHexColumn& hexColumn();
     KTextColumn& textColumn();
     KBufferColumn& activeColumn();
     KBufferColumn& inactiveColumn();
 
-    /** recreates the cursor pixmaps and paints active and inactive cursors if doable */
-    void updateCursor();
-    void createCursorPixmaps();
-    void pointPainterToCursor( QPainter &Painter, const KBufferColumn &Column ) const;
-    /** repaints all the parts that are signed as changed */
-    void repaintChanged();
-    /** draws the blinking cursor or removes it */
-    void paintActiveCursor( bool CursorOn );
-    void paintInactiveCursor( bool CursorOn );
-    void paintEditedByte( bool Edited );
-
     void handleMouseMove( const QPoint& Point );
-    bool hasChanged( const KCoordRange &VisibleRange, KCoordRange *ChangedRange ) const;
-    void paintLine( QPainter *P, KBufferColumn *C, int Line, KSection Positions ) const;
     KBufferDrag *dragObject( bool F = false, QWidget *Parent = 0 ) const;
     void pasteFromSource( QMimeSource *Source );
+    /** removes the section from the databuffer and updates all affected values */
     void removeData( KSection Indizes );
-    bool handleByteEditKey( QKeyEvent *KeyEvent );
-    bool handleLetter( QKeyEvent *KeyEvent );
+    /** sets ChangedRange to the range of VisibleRange that is actually changed
+      * @return true if there was a change within the visible range
+      */
+    bool hasChanged( const KCoordRange &VisibleRange, KCoordRange *ChangedRange ) const;
+    /** copies the actual edit value to the databuffer and updates the coding string */
     void syncEditedByte();
 
   protected:
-    void fitToNoOfBytesPerLine();
-    void fitInLine();
-    void updateViewByWidth();
+    /** recalcs all dependant values with the actual NoOfBytesPerLine  */
+    void adjustToLayoutNoOfBytesPerLine();
+    /** takes new no of lines from layout and recalcs the dependant values  */
+    void adjustToLayoutNoOfLines();
+    /** */
     void updateLength();
+    /** calls updateContent for the Column */
+    void updateColumn( KColumn &Column );
+
 
   protected slots:
     /** gets called by the cursor blink timer */
