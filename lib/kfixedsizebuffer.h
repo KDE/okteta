@@ -18,7 +18,7 @@
 #ifndef KHE_KFIXEDSIZEBUFFER_H
 #define KHE_KFIXEDSIZEBUFFER_H
 
-#include <kdatabuffer.h>
+#include "kdatabuffer.h"
 
 namespace KHE
 {

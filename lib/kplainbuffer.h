@@ -18,7 +18,7 @@
 #ifndef KHE_KPLAINBUFFER_H
 #define KHE_KPLAINBUFFER_H
 
-#include <kdatabuffer.h>
+#include "kdatabuffer.h"
 
 namespace KHE
 {
