@@ -24,7 +24,7 @@
 
 using namespace KHE;
 
-static const int ByteSpacingWidth = 1;
+static const int DefaultByteSpacingWidth = 1;
 static const int GroupSpacingWidth = 3;
 
 
@@ -37,6 +37,10 @@ KBufferColTextExport::KBufferColTextExport( const KBufferColumn* BC, char *D, KC
   Pos = new int[NoOfBytesPerLine];
 
   int ByteWidth = BufferColumn->codingWidth();
+  // TODO: remove this hack and make it more general
+  int ByteSpacingWidth = BufferColumn->byteSpacingWidth();
+  if( ByteSpacingWidth > 0 )
+    ByteSpacingWidth = DefaultByteSpacingWidth;
 
   int SpacingTrigger = BufferColumn->noOfGroupedBytes()-1;
   if( SpacingTrigger < 0 )

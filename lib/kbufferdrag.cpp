@@ -49,7 +49,7 @@ KBufferDrag::KBufferDrag( const QByteArray &D, KCoordRange Range,
     if( TC )
     {
       Columns[NoOfCol++] = new KBorderColTextExport();
-      Columns[NoOfCol] = new KBufferColTextExport( TC, Data.data(), CoordRange );
+      Columns[NoOfCol++] = new KBufferColTextExport( TC, Data.data(), CoordRange );
     }
   }
 }
@@ -115,7 +115,7 @@ QByteArray KBufferDrag::encodedData( const char *Format ) const
         NeededMemory *= CoordRange.lines();
         cout << "FMEM:" << NeededMemory << endl;
         // find out needed size
-        if( !TextData.resize( NeededMemory+500 ) )
+        if( !TextData.resize( NeededMemory ) )
           cout <<"Duh"<<endl;
         cout << "A" << endl;
         // now fill
@@ -126,7 +126,7 @@ QByteArray KBufferDrag::encodedData( const char *Format ) const
           Columns[i]->printFirstLine( &D, l );
         *D++ = '\n';
         cout << "firstline done"<<endl;
-        for( ; l<=CoordRange.end().line(); ++l )
+        for( ++l; l<=CoordRange.end().line(); ++l )
         {
           for( int i=0; i<NoOfCol; ++i )
             Columns[i]->printNextLine( &D );
