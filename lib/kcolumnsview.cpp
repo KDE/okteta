@@ -98,6 +98,7 @@ int KColumnsView::noOfLinesPerPage() const
   return NoOfLinesPerPage;
 }
 
+
 void KColumnsView::addColumn( KColumn *C )
 {
 //   if( Reversed )
@@ -115,6 +116,7 @@ void KColumnsView::removeColumn( KColumn *C )
 
   updateWidths();
 }
+
 
 void KColumnsView::updateView()
 {

@@ -27,8 +27,8 @@ namespace KHE
 /** class that is able to convert codings to and from
   * hexadecimal, decimal, octal, binary and ASCII
   *
-  * the buffer will be always filled up to CodingWidth,
-  * a closing '\0' has to be added manually (done for performance reason ;)
+  * the buffer will be always filled up to CodingWidth, if not using shortCodingFunction
+  * a closing '\0' will be always added
   *
   *@author Friedrich W. H. Kossebau
   */
@@ -39,9 +39,16 @@ class KByteCodec
     /** function template for */
     typedef void (*coding)( char *Digits, unsigned char Char );
     /** function template for the decoding:
-      *
+      * will stop either when a wrong digit is accessed (including \0) or the maximum coding width has been reached
+      * returns a pointer to the char behind the last decoded
       */
     typedef const unsigned char *(*decoding)( unsigned char *Char, const unsigned char *Digits );
+    /** */
+    typedef bool (*adding)( unsigned char *Byte, unsigned char Digit );
+    /** */
+    typedef void (*removingLastDigit)( unsigned char *Byte );
+    /** */
+    typedef bool (*validingDigit)( unsigned char Digit );
     /** */
     static const int MaxCodingWidth = 8;
 
@@ -56,8 +63,15 @@ class KByteCodec
     /** */
     static coding codingFunction( KCoding C );
     /** */
+    static coding shortCodingFunction( KCoding C );
+    /** */
     static decoding decodingFunction( KCoding C );
-
+    /** */
+    static adding addingFunction( KCoding C );
+    /** */
+    static removingLastDigit removingLastDigitFunction( KCoding C );
+    /** */
+    static validingDigit validingDigitFunction( KCoding C );
 
   public: // toing functions
     /** */
@@ -76,6 +90,18 @@ class KByteCodec
     static void toDummy( char *Digits, unsigned char Char );
 
     /** */
+    static void toShortHexadecimal( char *Digits, unsigned char Char );
+    /** */
+    static void toShortHexadecimalSmall( char *Digits, unsigned char Char );
+    /** */
+    static void toShortDecimal( char *Digits, unsigned char Char );
+    /** */
+    static void toShortOctal( char *Digits, unsigned char Char );
+    /** */
+    static void toShortBinary( char *Digits, unsigned char Char );
+    /** */
+
+    /** */
     static const unsigned char *fromAscii( unsigned char *Char, const unsigned char *Digits );
     /** */
     static const unsigned char *fromHexadecimal( unsigned char *Char, const unsigned char *Digits );
@@ -89,13 +115,49 @@ class KByteCodec
     static const unsigned char *fromDummy( unsigned char *Char, const unsigned char *Digits );
 
 
+    static bool addToAscii( unsigned char *Byte, unsigned char Digit );
+    static bool addToHexadecimal( unsigned char *Byte, unsigned char Digit );
+    static bool addToDecimal( unsigned char *Byte, unsigned char Digit );
+    static bool addToOctal( unsigned char *Byte, unsigned char Digit );
+    static bool addToBinary( unsigned char *Byte, unsigned char Digit );
+    static bool addToDummy( unsigned char *Byte, unsigned char Digit );
+
+    static void removeLastAsciiDigit( unsigned char *Byte );
+    static void removeLastHexadecimalDigit( unsigned char *Byte );
+    static void removeLastDecimalDigit( unsigned char *Byte );
+    static void removeLastOctalDigit( unsigned char *Byte );
+    static void removeLastBinaryDigit( unsigned char *Byte );
+    static void removeLastDummyDigit( unsigned char */*Byte*/ );
+
+    static bool turnToAsciiValue( unsigned char *Digit );
+    static bool turnToHexadecimalValue( unsigned char *Digit );
+    static bool turnToDecimalValue( unsigned char *Digit );
+    static bool turnToOctalValue( unsigned char *Digit );
+    static bool turnToBinaryValue( unsigned char *Digit );
+    static bool turnToDummyValue( unsigned char *Digit );
+
+    static bool isValidAsciiDigit( unsigned char Digit );
+    static bool isValidHexadecimalDigit( unsigned char Digit );
+    static bool isValidDecimalDigit( unsigned char Digit );
+    static bool isValidOctalDigit( unsigned char Digit );
+    static bool isValidBinaryDigit( unsigned char Digit );
+    static bool isValidDummyDigit( unsigned char Digit );
+
   protected:
     /** */
     static const unsigned int CodingWidth[6]; //TODO: would sizeof(KCoding} work?
     /** */
     static const coding CodingFunction[6];
     /** */
+    static const coding ShortCodingFunction[6];
+    /** */
     static const decoding DecodingFunction[6];
+    /** */
+    static const adding AddingFunction[6];
+    /** */
+    static const removingLastDigit RemovingLastDigitFunction[6];
+    /** */
+    static const validingDigit ValidingDigitFunction[6];
 
 
   protected:
@@ -112,8 +174,20 @@ inline unsigned int KByteCodec::codingWidth( KCoding C )
 inline KByteCodec::coding KByteCodec::codingFunction( KCoding C )
 { return CodingFunction[C]; }
 
+inline KByteCodec::coding KByteCodec::shortCodingFunction( KCoding C )
+{ return ShortCodingFunction[C]; }
+
 inline KByteCodec::decoding KByteCodec::decodingFunction( KCoding C )
 { return DecodingFunction[C]; }
+
+inline KByteCodec::adding KByteCodec::addingFunction( KCoding C )
+{ return AddingFunction[C]; }
+
+inline KByteCodec::removingLastDigit KByteCodec::removingLastDigitFunction( KCoding C )
+{ return RemovingLastDigitFunction[C]; }
+
+inline KByteCodec::validingDigit KByteCodec::validingDigitFunction( KCoding C )
+{ return ValidingDigitFunction[C]; }
 
 }
 

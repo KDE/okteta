@@ -220,8 +220,9 @@ bool KBufferColumn::setCoding( KCoding C )
   Coding = C;
   CodingWidth = KByteCodec::codingWidth( Coding );
   CodingFunction = KByteCodec::codingFunction( Coding );
-  // set string stop to digit buffer
-  CodedByte[CodingWidth] = '\0';
+  ShortCodingFunction = KByteCodec::shortCodingFunction( Coding );
+  AddingFunction = KByteCodec::addingFunction( Coding );
+  RemovingLastDigitFunction = KByteCodec::removingLastDigitFunction( Coding );
 
   // recalculate depend sizes
   recalcByteWidth();
@@ -653,24 +654,6 @@ void KBufferColumn::paintRange( QPainter *P, const QColor &Color, KSection Posit
 }
 
 
-void KBufferColumn::drawByte( QPainter *P, const char Byte, const QColor &Color ) const
-{
-  codingFunction()( CodedByte, Byte );
-
-  P->setPen( Color );
-  if( Coding == BinaryCoding )
-  {
-    // TODO: paint a gap in the middle
-    P->drawText( 0, DigitBaseLine, QString::fromLocal8Bit(CodedByte,4) );
-    P->drawText( BinaryHalfOffset, DigitBaseLine, QString::fromLocal8Bit(&CodedByte[4],4) );
-  }
-  else
-    P->drawText( 0, DigitBaseLine, QString::fromLocal8Bit(CodedByte) );
-}
-
-
-// TODO: think about if any of the three cursor related functions needs more than to know about which byte...
-// perhaps sometimes there will be a grammar
 void KBufferColumn::paintByte( QPainter *P, int Index )
 {
   char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : ' ';
@@ -705,8 +688,9 @@ void KBufferColumn::paintByte( QPainter *P, int Index )
 }
 
 
-void KBufferColumn::paintFrame( QPainter *P, int Index )
+void KBufferColumn::paintFramedByte( QPainter *P, int Index )
 {
+  paintByte( P, Index );
   char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : ' ';
   P->setPen( colorForByte(Byte) );
   P->drawRect( 0, 0, ByteWidth, LineHeight );
@@ -718,6 +702,39 @@ void KBufferColumn::paintCursor( QPainter *P, int Index )
   char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : ' ';
   P->fillRect( 0, 0, ByteWidth, LineHeight, QBrush(colorForByte(Byte),Qt::SolidPattern) );
 }
+
+
+// perhaps sometimes there will be a grammar
+void KBufferColumn::paintEditedByte( QPainter *P, const char Byte, const char *EditBuffer )
+{
+  const QColorGroup &CG = View->colorGroup();
+
+  P->fillRect( 0,0,ByteWidth,LineHeight, QBrush(colorForByte(Byte),Qt::SolidPattern) );
+
+  drawCode( P, EditBuffer, CG.base() );
+}
+
+
+void KBufferColumn::drawByte( QPainter *P, const char Byte, const QColor &Color ) const
+{
+  codingFunction()( CodedByte, Byte );
+  drawCode( P, CodedByte, Color );
+}
+
+
+void KBufferColumn::drawCode( QPainter *P, const char *Code, const QColor &Color ) const
+{
+  P->setPen( Color );
+  if( Coding == BinaryCoding )
+  {
+    // leave a gap in the middle
+    P->drawText( 0, DigitBaseLine, QString::fromLocal8Bit(Code,4) );
+    P->drawText( BinaryHalfOffset, DigitBaseLine, QString::fromLocal8Bit(&Code[4],4) );
+  }
+  else
+    P->drawText( 0, DigitBaseLine, QString::fromLocal8Bit(Code) );
+}
+
 
 
 bool KBufferColumn::isSelected( KSection Range, KSection *Selection, unsigned int *Flag ) const

@@ -68,8 +68,8 @@ class KBufferCursor
 {
   public:
     KBufferCursor( const KBufferLayout *L );
-    KBufferCursor( const KBufferCursor &c );
-    KBufferCursor &operator=( const KBufferCursor &c );
+//     KBufferCursor( const KBufferCursor &c );
+//     KBufferCursor &operator=( const KBufferCursor &c );
     ~KBufferCursor();
 
 
@@ -78,7 +78,8 @@ class KBufferCursor
     bool operator!=( const KBufferCursor &c ) const { return !(*this == c); }
 
   public:
-    void setNewPosAllowed( bool NPA );
+    void setNewPosAllowed( bool NPA=true );
+    void setInsideByte( bool IB=true );
 
   public: // state value access
     int index() const;
@@ -99,7 +100,7 @@ class KBufferCursor
     int digitPos() const;
 
     bool isValid() const;
-    bool insideByte() const;
+    bool isInsideByte() const;
     bool newPosAllowed() const;
 
   public: // index calculation service
@@ -183,7 +184,9 @@ inline int KBufferCursor::trueIndex()      const { return Index + (Behind?1:0); 
 inline bool KBufferCursor::isValid()  const { return Index != -1; }
 
 inline int KBufferCursor::digitPos()    const { return DigitPos; }
-inline bool KBufferCursor::insideByte() const { return InsideByte; }
+inline bool KBufferCursor::isInsideByte() const { return InsideByte; }
+
+inline void KBufferCursor::setInsideByte( bool IB ) { InsideByte = IB; }
 
 }
 

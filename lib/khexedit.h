@@ -92,10 +92,14 @@ class KHexEdit : public KColumnsView
   protected:
     static const int NoOfBufferColumns = 2;
 
+
   public:
     KHexEdit( KDataBuffer *Buffer = 0, QWidget *Parent = 0, const char *Name = 0, WFlags F = 0 );
     virtual ~KHexEdit();
 
+
+  public: // KColumnsView API
+    virtual void drawContents( QPainter *p, int cx, int cy, int cw, int ch );
 
   public: // QWidget API
 //    void focusInEvent( QFocusEvent *FocusEvent ); // TODO: why don't these work?
@@ -145,7 +149,8 @@ class KHexEdit : public KColumnsView
     void moveCursor( KMoveAction Action );
     /** puts the cursor in the column at the pos of Point (in absolute coord)*/
     void placeCursor( const QPoint &Point );
-
+    /** */
+    void setCursorPosition( int Index );
 //    void repaintByte( int row, int column, bool Erase = true );
 //    void updateByte( int row, int column );
 //    void ensureByteVisible( int row, int column );
@@ -234,6 +239,15 @@ class KHexEdit : public KColumnsView
     virtual void pauseCursorBlinking();
     virtual void unpauseCursorBlinking();
 
+  // byte editing
+    /** steps inside editing the byte in the hec column */
+    bool goInsideByte();
+    /** increases the byte in the buffer TODO: what about going inside the buffer and the like? */
+    bool incByte();
+    /** increases the byte in the buffer */
+    bool decByte();
+
+
 
   signals:
     /** Index of the byte that was clicked */
@@ -285,17 +299,20 @@ class KHexEdit : public KColumnsView
     const KBufferColumn& inactiveColumn() const;
 
     void createCursorPixmaps();
+    void pointPainterToCursor( QPainter &Painter, const KBufferColumn &Column ) const;
     /** repaints all the parts that are signed as changed */
     void repaintChanged();
     /** draws the blinking cursor or removes it */
     void drawCursor( bool CursorOn );
     void drawFrameCursor( bool FrameOn );
+    void drawEditedByte( bool Edited );
     void handleMouseMove( const QPoint& Point );
     bool hasChanged( const KCoordRange &VisibleRange, KCoordRange *ChangedRange ) const;
     void paintLine( QPainter *P, KBufferColumn *C, int Line, KSection Positions ) const;
     KBufferDrag *dragObject( QWidget *Parent = 0 ) const;
     void pasteFromSource( QMimeSource *Source );
     void removeData( KSection Indizes );
+    bool handleByteEditKey( QKeyEvent *KeyEvent );
 
   protected:
     void fitToNoOfBytesPerLine();
@@ -340,13 +357,26 @@ class KHexEdit : public KColumnsView
     KBufferColumn *InactiveColumn;
 
   protected:
+    /** Timer that controls the blinking of the cursor */
     QTimer *CursorBlinkTimer;
+    /** Timer that triggers ensureCursorVisible function calls */
     QTimer *ScrollTimer;
 /*     QTimer *ChangeIntervalTimer, */
+    /** Timer to start a drag */
     QTimer *DragStartTimer;
+    /** timer to measure whether the time between a double click and the following counts for a tripleclick */
     QTimer *TrippleClickTimer;
 
+    /** object to store the blinking cursor pixmaps */
     KCursor *CursorPixmaps;
+    /** buffer with the  */
+    char *ByteBuffer;
+    /** stores the number of actual digits */
+    int LengthOfByteBuffer;
+    /** */
+    unsigned char EditValue;
+    /** stores the old byte value */
+    unsigned char OldValue;
 
   protected:
     /** */
@@ -392,6 +422,7 @@ class KHexEdit : public KColumnsView
     KHexEdit( const KHexEdit & );
     KHexEdit &operator=( const KHexEdit & );
 };
+
 
 inline const KOffsetColumn& KHexEdit::offsetColumn()   const { return *OffsetColumn; }
 inline const KBufferColumn& KHexEdit::hexColumn()      const { return *BufferColumn[0]; }

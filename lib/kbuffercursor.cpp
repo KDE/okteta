@@ -28,10 +28,11 @@ KBufferCursor::KBufferCursor( const KBufferLayout *L )
    Index( -1 ),
    Coord( 0, 0 ),
    Behind( false ),
-   NewPosAllowed( false )
+   NewPosAllowed( false ),
+   InsideByte( false )
 {
 }
-
+/*
 KBufferCursor::KBufferCursor( const KBufferCursor &C )
 {
   Layout = C.Layout;
@@ -41,12 +42,12 @@ KBufferCursor::KBufferCursor( const KBufferCursor &C )
 
   NewPosAllowed = C.NewPosAllowed;
 }
-
+*/
 
 KBufferCursor::~KBufferCursor()
 {
 }
-
+/*
 KBufferCursor &KBufferCursor::operator=( const KBufferCursor &C )
 {
   Index = C.Index;
@@ -57,7 +58,7 @@ KBufferCursor &KBufferCursor::operator=( const KBufferCursor &C )
 
   return *this;
 }
-
+*/
 
 bool KBufferCursor::operator==( const KBufferCursor &C ) const
 {
@@ -230,18 +231,6 @@ void KBufferCursor::gotoDown()
 }
 
 
-int KBufferCursor::indexAtLineStart() const
-{
-  return Layout->indexAtLineStart( Coord.line() );
-}
-
-
-int KBufferCursor::indexAtLineEnd() const
-{
-  return Layout->indexAtLineEnd( Coord.line() );
-}
-
-
 void KBufferCursor::gotoLineStart()
 {
   Index = Layout->indexAtLineStart( Coord.line() );
@@ -368,6 +357,18 @@ void KBufferCursor::gotoPageDown()
     Index = NewIndex;
     Coord.goDown( NoOfLinesPerPage );
   }
+}
+
+
+int KBufferCursor::indexAtLineStart() const
+{
+  return Layout->indexAtLineStart( Coord.line() );
+}
+
+
+int KBufferCursor::indexAtLineEnd() const
+{
+  return Layout->indexAtLineEnd( Coord.line() );
 }
 
 
