@@ -14,7 +14,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <kdebug.h>
 
 // qt specific
 #include <qcstring.h>
@@ -82,14 +81,14 @@ static QTextCodec* codecForCharset( const QCString& Desc )
 
 KBufferDrag::KBufferDrag( const QByteArray &D, KCoordRange Range,
                           const KOffsetColumn *OC, const KValueColumn *HC, const KCharColumn *TC,
-                          QChar SC, QChar UC, KEncoding E,
+                          QChar SC, QChar UC, const QString &CN,
                           QWidget *Source, const char *Name )
   :QDragObject( Source, Name ),
    CoordRange( Range ),
    NoOfCol( 0 ),
    SubstituteChar( SC ),
    UndefinedChar( UC ),
-   Encoding( E )
+   CodecName( CN )
 {
   setData( D );
 
@@ -106,14 +105,9 @@ KBufferDrag::KBufferDrag( const QByteArray &D, KCoordRange Range,
     if( TC )
     {
       if( HC ) Columns[NoOfCol++] = new KBorderColTextExport();
-      Columns[NoOfCol++] = new KCharColTextExport( TC, Data.data(), CoordRange, E );
+      Columns[NoOfCol++] = new KCharColTextExport( TC, Data.data(), CoordRange, CodecName );
     }
   }
-}
-
-KBufferDrag::KBufferDrag( QWidget *Source, const char *Name )
- : QDragObject( Source, Name )
-{
 }
 
 
@@ -162,7 +156,7 @@ QByteArray KBufferDrag::encodedData( const char *Format ) const
       if( NoOfCol == 0 )
       {
         // duplicate the data and substitute all non-printable items with a space
-        KCharCodec *CharCodec = KCharCodec::createCodec( Encoding );
+        KCharCodec *CharCodec = KCharCodec::createCodec( CodecName );
         static const QChar Tab('\t');
         static const QChar Return('\n');
         uint Size = Data.size();

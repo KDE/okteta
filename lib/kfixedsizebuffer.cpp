@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <kdebug.h>
+//#include <kdebug.h>
 // c specific
 #include <string.h>
 // lib specific

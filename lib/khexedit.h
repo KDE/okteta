@@ -180,7 +180,10 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
       * @return encoding used in the char column
       */
     KEncoding encoding() const;
-
+    /**
+     * @return name of the encoding used in the char column
+     */
+    const QString &encodingName() const;
 
   public: // logic value service
     /** calculates the number of bytes per line that fit into a widget with the given size
@@ -298,6 +301,11 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     /** sets the encoding of the char column. Default is KHE::LocalEncoding.
       * If the encoding is not available the format will not be changed. */
     void setEncoding( KEncoding C );
+    /** sets the encoding of the char column. Default is KHE::LocalEncoding.
+      * If the encoding is not available the format will not be changed.
+      * @param Encoding name of the encoding
+      */
+    void setEncoding( const QString& Encoding );
 
   // interaction
     /** de-/selects all data */

@@ -15,7 +15,7 @@
  ***************************************************************************/
 
 
-#include <kdebug.h>
+//#include <kdebug.h>
 
 // c specific
 #include <stdlib.h>
@@ -168,6 +168,7 @@ bool KHexEdit::showUnprintable()               const { return charColumn().showU
 QChar KHexEdit::substituteChar()               const { return charColumn().substituteChar(); }
 QChar KHexEdit::undefinedChar()                const { return charColumn().undefinedChar(); }
 KHexEdit::KEncoding KHexEdit::encoding()       const { return (KHexEdit::KEncoding)Encoding; }
+const QString &KHexEdit::encodingName()        const { return Codec->name(); }
 
 int KHexEdit::cursorPosition() const { return BufferCursor->index(); }
 bool KHexEdit::isCursorBehind() const { return BufferCursor->isBehind(); }
@@ -383,6 +384,27 @@ void KHexEdit::setEncoding( KEncoding C )
   delete Codec;
   Codec = NC;
   Encoding = C;
+
+  updateColumn( valueColumn() );
+  updateColumn( charColumn() );
+}
+
+
+void KHexEdit::setEncoding( const QString& EncodingName )
+{
+  if( EncodingName == Codec->name() )
+    return;
+
+  KCharCodec *NC = KCharCodec::createCodec( EncodingName );
+  if( NC == 0 )
+    return;
+
+  valueColumn().setCodec( NC );
+  charColumn().setCodec( NC );
+
+  delete Codec;
+  Codec = NC;
+  Encoding = LocalEncoding; // TODO: add encoding no to every known codec
 
   updateColumn( valueColumn() );
   updateColumn( charColumn() );
@@ -782,7 +804,7 @@ KBufferDrag *KHexEdit::dragObject( QWidget *Parent ) const
 
   return new KBufferDrag( selectedData(), Range, OC, HC, TC,
                           charColumn().substituteChar(), charColumn().undefinedChar(),
-                          (KHE::KEncoding)Encoding, Parent );
+                          Codec->name(), Parent );
 }
 
 

@@ -32,8 +32,11 @@ namespace KHE
 class KTextCharCodec : public KCharCodec
 {
   public:
-    static KTextCharCodec *create( const QString &CodeName );
-    static KTextCharCodec *createLocal();
+    static KTextCharCodec *createCodec( const QString &CodeName );
+    static KTextCharCodec *createCodec( KEncoding C );
+    static KTextCharCodec *createLocalCodec();
+
+    static const QStringList &codecNames();
 
   protected:
     KTextCharCodec( QTextCodec *C );
@@ -43,6 +46,7 @@ class KTextCharCodec : public KCharCodec
   public: // KCharCodec API
     virtual bool encode( char *D, const QChar &C ) const;
     virtual KHEChar decode( char Byte ) const;
+    virtual const QString& name() const;
 
 
   protected:
@@ -51,6 +55,10 @@ class KTextCharCodec : public KCharCodec
     QTextDecoder *Decoder;
     /** encodes the chars from unicode */
     QTextEncoder *Encoder;
+    /** */
+    mutable QString Name;
+
+    static QStringList CodecNames;
 };
 
 }

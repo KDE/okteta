@@ -14,7 +14,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <kdebug.h> 
 
 // lib specific
 #include "kbinarybytecodec.h"
@@ -41,7 +40,7 @@ KByteCodec *KByteCodec::createCodec( KCoding C )
 
 unsigned int KByteCodec::decode( unsigned char *Char, const QString &Digits, uint Pos ) const
 {
-  kdDebug() << QString("KByteCodec::decode(%1,%2)").arg(Digits).arg(Pos) << endl;
+  //kdDebug() << QString("KByteCodec::decode(%1,%2)").arg(Digits).arg(Pos) << endl;
   const uint P = Pos;
 
   // remove leading 0s

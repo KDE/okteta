@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <kdebug.h>
+//#include <kdebug.h>
 // c specific
 #include <string.h>
 #include <stdlib.h>
@@ -72,7 +72,7 @@ int KPlainBuffer::insert( int Pos, const char* D, int Length )
   // check all parameters
   if( Length == 0 )
     return 0;
-  kdDebug() << QString("before: Size: %1, RawSize: %2").arg(Size).arg(RawSize) << endl;
+  //kdDebug() << QString("before: Size: %1, RawSize: %2").arg(Size).arg(RawSize) << endl;
   // correct for appending
   if( Pos > (int)Size )
     Pos = Size;
@@ -82,7 +82,7 @@ int KPlainBuffer::insert( int Pos, const char* D, int Length )
   // copy new data to its place
   memcpy( &Data[Pos], D, Length );
 
-  kdDebug() << QString("after: Size: %1, RawSize: %2").arg(Size).arg(RawSize) << endl;
+  //kdDebug() << QString("after: Size: %1, RawSize: %2").arg(Size).arg(RawSize) << endl;
 
   Modified = true;
   return Length;

@@ -93,6 +93,8 @@ static unsigned char EBCDICChars[256] =
   0x70, 0xDD, 0xDE, 0xDB, 0xDC, 0x8D, 0x8E, 0xDF
 };
 
+static const char KEBCDIC1047CharCodecName[] = "EBCDIC 1047";
+
 
 bool KEBCDIC1047CharCodec::encode( char *D, const QChar &C ) const
 {
@@ -108,4 +110,15 @@ bool KEBCDIC1047CharCodec::encode( char *D, const QChar &C ) const
 KHEChar KEBCDIC1047CharCodec::decode( char Byte ) const
 {
   return QChar(UnicodeChars[(unsigned char)Byte]);
+}
+
+const QString& KEBCDIC1047CharCodec::name() const
+{
+  return codecName();
+}
+
+const QString& KEBCDIC1047CharCodec::codecName()
+{
+  static const QString Name( QString::fromLatin1(KEBCDIC1047CharCodecName) );
+  return Name;
 }

@@ -23,6 +23,7 @@
 //#include <kglobalsettings.h>
 // app specific
 #include "khexedit.h"
+#include "kcharcodec.h"
 #include "khepartfactory.h"
 #include "khebrowserextension.h"
 #include "khepart.h"
@@ -99,11 +100,7 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
 
   // document encoding
   EncodingAction = new KSelectAction( i18n("&Char Encoding"), 0, AC, "view_charencoding" );
-  List.clear();
-  List.append( i18n("&Local") );
-  List.append( "&ISO 8859-1" );
-  List.append( "&EBCDIC 1047" );
-  EncodingAction->setItems( List );
+  EncodingAction->setItems( KCharCodec::codecNames() );
   connect( EncodingAction, SIGNAL(activated(int)), this, SLOT(slotSetEncoding(int)) );
 
   ShowUnprintableAction = new KToggleAction( i18n("Show &Unprintable Chars (<32)"), 0, this, SLOT(slotSetShowUnprintable()), actionCollection(), "view_showunprintable" );
@@ -144,7 +141,7 @@ void KHexEditPart::fitActionSettings()
   ShowUnprintableAction->setChecked( HexEdit->showUnprintable() );
 
   CodingAction->setCurrentItem( (int)HexEdit->coding() );
-  EncodingAction->setCurrentItem( (int)HexEdit->encoding() );
+  EncodingAction->setCurrentItem( KCharCodec::codecNames().findIndex(HexEdit->encodingName()) );
 
   ResizeStyleAction->setCurrentItem( (int)HexEdit->resizeStyle() );
 
@@ -205,7 +202,7 @@ void KHexEditPart::slotSetResizeStyle( int ResizeStyle )
 
 void KHexEditPart::slotSetEncoding( int Encoding )
 {
-  HexEdit->setEncoding( (KHexEdit::KEncoding)Encoding );
+  HexEdit->setEncoding( KCharCodec::codecNames()[Encoding] );
 }
 
 void KHexEditPart::slotToggleValueCharColumns( int VisibleColumns)

@@ -18,6 +18,8 @@
 #ifndef KHE_KCHARCODEC_H
 #define KHE_KCHARCODEC_H
 
+// qt specific
+#include <qstringlist.h>
 // lib specific
 #include "khe.h"
 #include "khechar.h"
@@ -31,12 +33,19 @@ class KCharCodec
   public:
     /** */
     static KCharCodec* createCodec( KEncoding E );
+    /** */
+    static KCharCodec* createCodec( const QString &Name );
 
-    //static QStringList descriptiveCodecNames();
+    static const QStringList &codecNames();
 
   public: // API to be implemented
     virtual KHEChar decode( char Byte ) const = 0;
     virtual bool encode( char *D, const QChar &C ) const = 0;
+    virtual const QString& name() const = 0;
+
+  protected:
+    /** */
+    static QStringList CodecNames;
 };
 
 }

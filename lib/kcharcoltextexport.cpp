@@ -24,9 +24,9 @@
 using namespace KHE;
 
 
-KCharColTextExport::KCharColTextExport( const KCharColumn* TC, const char *D, KCoordRange CR, KEncoding E )
+KCharColTextExport::KCharColTextExport( const KCharColumn* TC, const char *D, KCoordRange CR, const QString &CodecName )
  : KBufferColTextExport( TC, D, CR, 1 ),
-   CharCodec( KCharCodec::createCodec(E) ),
+   CharCodec( KCharCodec::createCodec(CodecName) ),
    SubstituteChar( TC->substituteChar() ),
    UndefinedChar( TC->undefinedChar() )
 {

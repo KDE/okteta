@@ -33,10 +33,9 @@
 using namespace KHE;
 
 static const bool      DefaultShowUnprintable = false;
-static const QChar     DefaultSubstituteChar =  '.';
-static const QChar     DefaultUndefinedChar =   '?';
+static const QChar     DefaultSubstituteChar =  (char)'.';
+static const QChar     DefaultUndefinedChar =   (char)'?';
 
-static const unsigned char LowestPrintableChar = 32;
 
 KCharColumn::KCharColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R )
  : KBufferColumn( CV, B, L, R ),

@@ -33,7 +33,7 @@ class KCharCodec;
 class KCharColTextExport : public KBufferColTextExport
 {
   public:
-    KCharColTextExport( const KCharColumn* BF, const char *D, KCoordRange CR, KEncoding E );
+    KCharColTextExport( const KCharColumn* BF, const char *D, KCoordRange CR, const QString &CodecName );
     virtual ~KCharColTextExport();
 
   protected: //API

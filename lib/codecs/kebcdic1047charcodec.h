@@ -30,15 +30,16 @@ class KEBCDIC1047CharCodec : public KCharCodec
   protected:
     KEBCDIC1047CharCodec();
 
-  public:
+  public: // KCharCodec API
     virtual KHEChar decode( char Byte ) const;
-
-  public:
     virtual bool encode( char *D, const QChar &C ) const;
+    virtual const QString& name() const;
 
   public:
     static KEBCDIC1047CharCodec *create();
+    static const QString& codecName();
 };
+
 
 inline KEBCDIC1047CharCodec::KEBCDIC1047CharCodec() {}
 

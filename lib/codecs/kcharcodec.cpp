@@ -15,33 +15,60 @@
  ***************************************************************************/
 
 
-
+// lib specific
 #include "kcharcodec.h"
 #include "ktextcharcodec.h"
 #include "kebcdic1047charcodec.h"
 
 using namespace KHE;
 
-/*QStringList KCharCodec::descriptiveCodecNames()
+
+QStringList KCharCodec::CodecNames;
+
+const QStringList &KCharCodec::codecNames()
 {
+  // first call?
+  if( CodecNames.isEmpty() )
+  {
+    CodecNames = KTextCharCodec::codecNames();
+    CodecNames.append( KEBCDIC1047CharCodec::codecName() );
+  }
+
+  return CodecNames;
 }
-*/
+
+
+KCharCodec *KCharCodec::createCodec( const QString &Name )
+{
+  KCharCodec *Codec = 0;
+
+  if( KTextCharCodec::codecNames().findIndex(Name) != -1 )
+    Codec = KTextCharCodec::createCodec( Name );
+  else if( KEBCDIC1047CharCodec::codecName() == Name )
+    Codec = KEBCDIC1047CharCodec::create();
+
+  // ensure at least a codec
+  if( Codec == 0 )
+    Codec = KTextCharCodec::createLocalCodec();
+
+  return Codec;
+}
 
 
 KCharCodec *KCharCodec::createCodec( KEncoding C )
 {
   KCharCodec *Codec;
-  switch( C )
-  {
-    case ISO8859_1Encoding: Codec = KTextCharCodec::create("ISO 8859-1"); break;
-    case EBCDIC1047Encoding: Codec = KEBCDIC1047CharCodec::create(); break;
-    case LocalEncoding: // trigger default
-    default: Codec = 0;
-  }
+  if( C == EBCDIC1047Encoding )
+    Codec = KEBCDIC1047CharCodec::create();
+  else if( C == ISO8859_1Encoding )
+    Codec = KTextCharCodec::createCodec( "ISO 8859-1" );
+  // LocalEncoding
+  else
+    Codec = 0;
 
   // ensure at least a codec
   if( Codec == 0 )
-    Codec = KTextCharCodec::createLocal();
+    Codec = KTextCharCodec::createLocalCodec();
 
   return Codec;
 }

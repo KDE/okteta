@@ -45,9 +45,8 @@ class KBufferDrag : public QDragObject
     // TODO: make this call somewhat more generic
     KBufferDrag( const QByteArray &, KCoordRange Range,
                  const KOffsetColumn *OC, const KValueColumn *HC, const KCharColumn *TC,
-                 QChar SC, QChar UC, KEncoding E,
+                 QChar SC, QChar UC, const QString &CN,
                  QWidget *Source = 0, const char *Name = 0 );
-    KBufferDrag( QWidget *Source = 0, const char *Name = 0 );
     ~KBufferDrag();
 
   public: // QDragObject API
@@ -69,7 +68,7 @@ class KBufferDrag : public QDragObject
     uint NoOfCol;
     QChar SubstituteChar;
     QChar UndefinedChar;
-    KEncoding Encoding;
+    const QString &CodecName;
 };
 
 }
