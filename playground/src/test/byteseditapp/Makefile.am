@@ -3,7 +3,8 @@ noinst_HEADERS = byteseditapp.h
 bin_PROGRAMS = byteseditapp
 
 # set the include path for X, qt and KDE
-INCLUDES = $(all_includes) -I$(srcdir)/../../interface
+INCLUDES = $(all_includes) 
+#-I$(srcdir)/../../interface
 
 byteseditapp_LDFLAGS = $(KDE_RPATH) $(all_libraries)
 byteseditapp_LDADD = $(LIB_KFILE)

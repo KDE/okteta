@@ -5,10 +5,9 @@
 
 #include <kparts/componentfactory.h>
 // app
-#include "byteseditinterface.h"
-//#include "interface.h"
-#include "hexcolumninterface.h"
-#include "textcolumninterface.h"
+#include <khexedit/byteseditinterface.h>
+#include <khexedit/hexcolumninterface.h>
+#include <khexedit/textcolumninterface.h>
 
 using namespace KHE;
 
@@ -24,8 +23,7 @@ int main( int argc, char* argv[] )
   KCmdLineArgs::init( argc, argv, "Example","","" );
   KApplication app( argc, argv );
 
-  QWidget *BytesEditWidget =
-    KParts::ComponentFactory::createInstanceFromQuery<QWidget>("KHexEdit/KBytesEdit", QString::null, 0 );
+  QWidget *BytesEditWidget = createBytesEditWidget();
   // was kdeutils installed, so the widget could be found?
   if( BytesEditWidget )
   {

@@ -44,12 +44,12 @@
 #include <kstdaccel.h>
 #include <kaction.h>
 #include <kstdaction.h>
-// new kde specific // TODO: add khexeditor/
-#include <byteseditinterface.h>
-#include <hexcolumninterface.h>
-#include <textcolumninterface.h>
-#include <clipboardinterface.h>
-#include <zoominterface.h>
+// new kde specific
+#include <khexedit/byteseditinterface.h>
+#include <khexedit/hexcolumninterface.h>
+#include <khexedit/textcolumninterface.h>
+#include <khexedit/clipboardinterface.h>
+#include <khexedit/zoominterface.h>
 // app specific
 #include "byteseditapp.h"
 
