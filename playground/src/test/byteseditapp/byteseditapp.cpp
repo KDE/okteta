@@ -55,7 +55,6 @@
 
 
 static const char PathToIcon[] = "khe/pics/";
-static const int BufferSize = 893;
 static const char *CodingGroupId = "ColumnCoding";
 static const char *ResizeStyleGroupId = "ResizeStyle";
 static const char *RCFileName = "byteseditappui.rc";
@@ -63,10 +62,16 @@ static const char *RCFileName = "byteseditappui.rc";
 BytesEditApp::BytesEditApp()
     : KMainWindow( 0, "BytesEditApp" )
 {
+#if 1
+  static const int BufferSize = 893;
   Buffer = new char[BufferSize];
   memset( Buffer, '#', BufferSize );
   memcpy( &Buffer[10], "This is a test text.", 20 );
   memcpy( &Buffer[873], "This is a test text.", 20 );
+#else
+  static const int BufferSize = 0;
+  Buffer = new char[BufferSize];
+#endif
 
   BytesEditWidget = KHE::createBytesEditWidget( this, "BytesEditWidget" );
   // was kdeutils installed, so the widget could be found?
@@ -79,8 +84,9 @@ BytesEditApp::BytesEditApp()
 
     // now use the editor.
     //BytesEdit = new KHE::KBytesEdit( this );
-    BytesEdit->setData( Buffer, BufferSize, -1 );
+    BytesEdit->setData( Buffer, BufferSize, -1, false );
     BytesEdit->setMaxDataSize( BufferSize );
+    //BytesEdit->setMaxDataSize( 25 );
     BytesEdit->setReadOnly( false );
     BytesEdit->setAutoDelete( true );
 #if 0
@@ -108,6 +114,7 @@ BytesEditApp::BytesEditApp()
     {
       TextColumn->setShowUnprintable( false );
       TextColumn->setSubstituteChar( '*' );
+      TextColumn->setEncoding( KHE::TextColumnInterface::/*ISO8859_1Encoding*/LocalEncoding );
     }
     Clipboard = KHE::clipboardInterface( BytesEditWidget );
     Zoom = KHE::zoomInterface( BytesEditWidget );
