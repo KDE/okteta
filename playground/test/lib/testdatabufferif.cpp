@@ -28,13 +28,21 @@ static const char MarkChar = 'c';
 static const char PaintChar = 'b';
 static const char BlankChar = '\0';
 
+/*
+static void fillBuffer( KDataBuffer *Buffer )
+{
+  char *Data = Buffer->rawData();
+  for( char i=0; i<FixedSizeBufferSize; ++i )
+    Buffer->Data[i] = i+1;
 
+}
+*/
 
 void KDataBufferIfTest::testCopyTo()
 {
   int CopySize = 10;
   int Size = DataBuffer->size();
-  KSection Range( 0, CopySize, true );
+  KSection Range( 0, CopySize-1 );
 
   KFixedSizeBuffer Copy( Size, BlankChar );
 
@@ -59,7 +67,6 @@ void KDataBufferIfTest::testCopyTo()
   KT_ASSERT_EQUALS( "copyTo() at mid",  Copy.compare(*DataBuffer, Range, Range.start()), 0 );
   KT_ASSERT_EQUALS( "behind copyTo() at mid",  Copy.datum(Range.end()+1), BlankChar );
 }
-
 
 void KDataBufferIfTest::testFill()
 {
@@ -90,6 +97,32 @@ void KDataBufferIfTest::testFill()
   KT_ASSERT_EQUALS( "before fill() at mid", DataBuffer->datum(Range.start()-1), BlankChar );
   KT_ASSERT_EQUALS( "fill() at mid",  Copy.compare(*DataBuffer, Range, Range.start()), 0 );
   KT_ASSERT_EQUALS( "behind fill() at mid", DataBuffer->datum(Range.end()+1), BlankChar );
+}
+
+void KDataBufferIfTest::testSetGet()
+{
+  // can we alter the buffer at all?
+  if( DataBuffer->isReadOnly() )
+    // skip
+    return;
+
+  // prepare buffer
+  DataBuffer->fill( BlankChar );
+
+  // test
+  unsigned int Size = DataBuffer->size();
+  for( unsigned int i=0; i<Size; ++i )
+  {
+    DataBuffer->setDatum( i, PaintChar );
+    if( i>0 )
+      KT_ASSERT_EQUALS( "set(), before",  DataBuffer->datum(i-1), BlankChar  );
+    KT_ASSERT_EQUALS( "set()",  DataBuffer->datum(i), PaintChar );
+    if( i<Size-1 )
+      KT_ASSERT_EQUALS( "fill(), behind",  DataBuffer->datum(i+1), BlankChar );
+    // clean up
+    DataBuffer->setDatum( i, BlankChar );
+    KT_ASSERT_EQUALS( "set(), cleared",  DataBuffer->datum(i), BlankChar );
+  }
 }
 
 // as some buffers might be restricted in growing
@@ -142,8 +175,8 @@ void KDataBufferIfTest::testRemove()
                     Copy.compare( *DataBuffer,KSection(Range.start(),Size-Removed-1),Range.end()+1), 0 );
   KT_ASSERT_EQUALS( "modified by remove()", DataBuffer->isModified(), Removed > 0 );
 }
-/*
 
+/*
 
 void KDataBufferIfTest::testInsert()
 {
@@ -153,8 +186,29 @@ void KDataBufferIfTest::testInsert()
     return;
 
   // create Copy
+  int Size = DataBuffer->size();
+  KFixedSizeBuffer Copy( Size );
+  DataBuffer->copyTo( Copy.rawData(), 0, Size );
+
+  // create InsertData
   static const char InsertChar = '\0';
+  static const char InsertBeforeChar = '\0';
+  static const char InsertBehindChar = '\0';
   int InsertSize = 10;
+  KFixedSizeBuffer InsertData( InsertSize, InsertChar );
+  InsertData.rawData()[0] = InsertBeginChar;
+  InsertData.rawData()[InsertSize-1] = InsertEndChar;
+
+  //
+  DataBuffer->setModified( false );
+  KSection Range( Size-RemoveSize, Size-1 );
+  int Removed = DataBuffer->remove( Range );
+  Range.setEndByWidth( Removed );
+
+  KT_ASSERT_EQUALS( "remove() at end data before", Copy.compare(*DataBuffer,0,Range.start()-1,0), 0 );
+  KT_ASSERT_EQUALS( "modified by remove()", DataBuffer->isModified(), Removed > 0 );
+
+
   int Size = DataBuffer->size();
   KSection Range( 0, InsertSize, true );
 
