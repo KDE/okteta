@@ -2,5 +2,5 @@
 #SUBDIRS = kpart app test
 #SUBDIRS = lib interface test
 #SUBDIRS = lib dplugin
-SUBDIRS = kpart test app
+SUBDIRS = test app
 #SUBDIRS = test
