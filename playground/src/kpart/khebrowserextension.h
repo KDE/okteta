@@ -1,8 +1,8 @@
 /***************************************************************************
-                          khepartfactory.h  -  description
+                          khebrowserextension.h  -  description
                              -------------------
-    begin                : Don Jun 19 2003
-    copyright            : (C) 2003 by Friedrich W. H. Kossebau
+    begin                : Di Nov 16 2004
+    copyright            : (C) 2004 by Friedrich W. H. Kossebau
     email                : Friedrich.W.H@Kossebau.de
  ***************************************************************************/
 
@@ -15,33 +15,41 @@
  ***************************************************************************/
 
 
-#ifndef KHEPARTFACTORY_H
-#define KHEPARTFACTORY_H
+#ifndef KHEBROWSEREXTENSION_H
+#define KHEBROWSEREXTENSION_H
 
-#include <kparts/factory.h>
+// kde specific
+#include <kparts/browserextension.h>
 
-class KInstance;
-class KAboutData;
+namespace KHE
+{
 
+// forward declaration
+class KHexEdit;
+class KHexEditPart;
 
-class KHexEditPartFactory : public KParts::Factory
+/**
+ * @short Extension for better support for embedding in browsers
+ * @author Friedrich W. H. Kossebau <Friedrich.W.H@Kossebau.de>
+ */
+class KHexEditBrowserExtension : public KParts::BrowserExtension
 {
     Q_OBJECT
 
   public:
-    KHexEditPartFactory();
-    virtual ~KHexEditPartFactory();
+    KHexEditBrowserExtension( KHexEditPart *P, KHexEdit *HE );
 
-  public:
-    virtual KParts::Part* createPartObject( QWidget *parentWidget, const char *widgetName,
-                                            QObject *parent, const char *name,
-                                            const char *classname, const QStringList &args );
-    static KInstance* instance();
+  public slots:
+    /** copy text to clipboard */
+    void copy();
 
+    /** selection has changed */
+    void slotSelectionChanged();
 
-  private:
-    static KInstance* s_instance;
-    static KAboutData* s_about;
+  protected:
+    KHexEdit *HexEdit;
 };
+
+}
 
 #endif

@@ -1,5 +1,5 @@
 /***************************************************************************
-                          khepart.h  -  description
+                          khepart.cpp  -  description
                              -------------------
     begin                : Don Jun 19 2003
     copyright            : (C) 2003 by Friedrich W. H. Kossebau
@@ -14,35 +14,31 @@
  *                                                                         *
  ***************************************************************************/
 
-// c++ specific
-#include <iostream>
-// qt specific
-#include <qfile.h>
-#include <qtextstream.h>
+
 // kde specific
 #include <klocale.h>
-#include <kinstance.h>
+//#include <kinstance.h>
 #include <kaction.h>
 #include <kstdaction.h>
-#include <kfiledialog.h>
-#include <kglobalsettings.h>
+//#include <kglobalsettings.h>
 // app specific
 #include "khexedit.h"
 #include "khepartfactory.h"
+#include "khebrowserextension.h"
 #include "khepart.h"
 
 using namespace KHE;
 
 static const char RCFileName[] =    "khexedit2partui.rc";
 
-static const char CodingGroupId[] = "ColumnCoding";
+static const char CodingGroupId[] = "ValueCoding";
 static const char ResizeStyleGroupId[] = "ResizeStyle";
+static const char EncodingGroupId[] = "CharEncoding";
 
 
 KHexEditPart::KHexEditPart( QWidget *parentWidget, const char *widgetName,
                             QObject *parent, const char *name )
- : KParts::ReadWritePart( parent, name ),
-   m_Buffer( 0L )
+ : KParts::ReadOnlyPart( parent, name )
 {
   setInstance( KHexEditPartFactory::instance() );
 
@@ -56,18 +52,14 @@ KHexEditPart::KHexEditPart( QWidget *parentWidget, const char *widgetName,
 
   setupActions();
 
-  // we are read-write by default
-  setReadWrite( true );
-
-  // we are not modified since we haven't done anything yet
-  setModified( false );
-  connect( m_HexEdit, SIGNAL(copyAvailable(bool)), CutAction, SLOT(setEnabled(bool)) );
   connect( m_HexEdit, SIGNAL(copyAvailable(bool)), CopyAction,SLOT(setEnabled(bool)) );
   connect( m_HexEdit, SIGNAL(selectionChanged()),  this,      SLOT(slotSelectionChanged()) );
   connect( m_HexEdit, SIGNAL(bufferChanged()),     this,      SLOT(setModified()) );
 
-  CutAction->setEnabled( false );
   CopyAction->setEnabled( false );
+
+  // plugin to browsers
+  new KHexEditBrowserExtension( this, m_HexEdit );
 }
 
 
@@ -79,15 +71,9 @@ KHexEditPart::~KHexEditPart()
 void KHexEditPart::setupActions()
 {
   // create our actions
-  KStdAction::open(    this, SLOT(fileOpen()),   actionCollection() );
-  KStdAction::saveAs(  this, SLOT(fileSaveAs()), actionCollection() );
-  SaveAction = KStdAction::save(    this, SLOT(save()),       actionCollection() );
-
-  CutAction =  KStdAction::cut(     m_HexEdit, SLOT(cut()),        actionCollection() );
   CopyAction = KStdAction::copy(    m_HexEdit, SLOT(copy()),       actionCollection() );
-  KStdAction::paste(   m_HexEdit, SLOT(paste()),      actionCollection() );
-  KStdAction::selectAll( this, SLOT(selectAll()),     actionCollection() );
-  KStdAction::deselect(  this, SLOT(unselect()),      actionCollection() );
+  KStdAction::selectAll( this, SLOT(slotSelectAll()),     actionCollection() );
+  KStdAction::deselect(  this, SLOT(slotUnselect()),      actionCollection() );
 
   HexCodingAction = new KRadioAction( i18n("&Hexadecimal"), 0, this, SLOT(slotSetCoding()), actionCollection(), "view_hexcoding" );
   DecCodingAction = new KRadioAction( i18n("&Decimal"),     0, this, SLOT(slotSetCoding()), actionCollection(), "view_deccoding" );
@@ -99,7 +85,19 @@ void KHexEditPart::setupActions()
   OctCodingAction->setExclusiveGroup( CodingGroupId );
   BinCodingAction->setExclusiveGroup( CodingGroupId );
 
-  ShowUnprintableAction = new KToggleAction( i18n("Show unprintabe chars(<32)"), 0, this, SLOT(slotSetShowUnprintable()), actionCollection(), "view_showunprintable" );
+  HexCodingAction->setChecked(true);
+
+  // document encoding
+  LocalEncodingAction = new KRadioAction( i18n("&Local"), 0, this, SLOT(slotSetEncoding()), actionCollection(), "view_localencoding" );
+  AsciiEncodingAction = new KRadioAction( i18n("&ASCII"), 0, this, SLOT(slotSetEncoding()), actionCollection(), "view_asciiencoding" );
+
+  LocalEncodingAction->setExclusiveGroup( EncodingGroupId );
+  AsciiEncodingAction->setExclusiveGroup( EncodingGroupId );
+
+  LocalEncodingAction->setChecked(true);
+
+  ShowUnprintableAction = new KToggleAction( i18n("Show unprintabe chars (<32)"), 0, this, SLOT(slotSetShowUnprintable()), actionCollection(), "view_showunprintable" );
+  ShowUnprintableAction->setChecked( false );
 
   NoResizeAction =      new KRadioAction( i18n("&No Resize"),       0, this, SLOT(slotSetResizeStyle()), actionCollection(), "settings_noresize" );
   LockGroupsAction =    new KRadioAction( i18n("&Lock groups"),     0, this, SLOT(slotSetResizeStyle()), actionCollection(), "settings_lockgroups" );
@@ -109,6 +107,8 @@ void KHexEditPart::setupActions()
   LockGroupsAction->setExclusiveGroup( ResizeStyleGroupId );
   FullSizeUsageAction->setExclusiveGroup( ResizeStyleGroupId );
 
+  NoResizeAction->setChecked( true );
+
   KStdAction::zoomIn(  m_HexEdit, SLOT(zoomIn()),   actionCollection() );
   KStdAction::zoomOut( m_HexEdit, SLOT(zoomOut()),  actionCollection() );
 
@@ -117,129 +117,35 @@ void KHexEditPart::setupActions()
 }
 
 
-void KHexEditPart::setReadWrite( bool rw )
-{
-  // notify your internal widget of the read-write state
-//   m_HexEdit->setReadOnly( !rw );
-//
-//   if( m_HexEdit->isReadOnly() )
-//     disconnect( m_HexEdit, SIGNAL(bufferChanged()), this,     SLOT(setModified()) );
-//   else
-//     connect( m_HexEdit, SIGNAL(bufferChanged()), this,     SLOT(setModified()) );
-
-  ReadWritePart::setReadWrite( rw );
-}
-
-
-void KHexEditPart::setModified( bool Modified )
-{
-  // if so, we either enable or disable it based on the current state
-  SaveAction->setEnabled( Modified );
-
-  // in any event, we want our parent to do it's thing
-  ReadWritePart::setModified( Modified );
-}
-
-
 bool KHexEditPart::openFile()
 {
-#if 0
-  // m_file is always local so we can use QFile on it
-  QFile File( m_file );
-  if( !File.open(IO_ReadOnly|IO_Raw) )
-    return false;
-
-  delete [] m_Buffer;
-  int S = File.size() + 1;
-  m_Buffer = new char[S];
-
-  if( File.size() > 0 )
-  {
-    uint offset = 0;
-    uint remaining = File.size();
-    while( remaining > 0 )
-    {
-      uint blockSize = remaining > 100000 ? 100000 : remaining;
-      File.readBlock( &m_Buffer[offset], blockSize );
-
-      offset    += blockSize;
-      remaining -= blockSize;
-   }
-  }
-  m_Wrapping.set( m_Buffer, File.size() );
-
-#endif
   m_Wrapping.open( m_file );
   m_HexEdit->setDataBuffer( &m_Wrapping );
   m_HexEdit->moveCursor( KHexEdit::MoveHome );
 
-  // just for fun, set the status bar
-  emit setStatusBarText( m_url.prettyURL() );
-
   return true;
 }
 
-
-bool KHexEditPart::saveFile()
-{
-  // if we aren't read-write, return immediately
-  if( !isReadWrite() )
-    return false;
-
-//   // m_file is always local, so we use QFile
-//   QFile file( m_file );
-//   if( !file.open(IO_WriteOnly) )
-//     return false;
-//
-//   // use QTextStream to dump the text to the file
-//   QTextStream stream( &file );
-//   stream << m_widget->text();
-//
-//   file.close();
-
-  return true;
-}
-
-
-void KHexEditPart::fileOpen()
-{
-  // this slot is called whenever the m_file->Open menu is selected,
-  // the Open shortcut is pressed (usually CTRL+O) or the Open toolbar
-  // button is clicked
-  QString file_name = KFileDialog::getOpenFileName();
-
-  if( !file_name.isEmpty() )
-    openURL(file_name);
-}
-
-
-void KHexEditPart::fileSaveAs()
-{
-  // this slot is called whenever the m_file->Save As menu is selected,
-  QString file_name = KFileDialog::getSaveFileName();
-  if( !file_name.isEmpty() )
-    saveAs( file_name );
-}
-
-
-void KHexEditPart::selectAll()
-{
-  m_HexEdit->selectAll( true );
-}
-
-
-void KHexEditPart::unselect()
-{
-  m_HexEdit->selectAll( false );
-}
 
 
 void KHexEditPart::slotSelectionChanged()
 {
   bool State = m_HexEdit->hasSelectedData();
-  CutAction->setEnabled( State );
   CopyAction->setEnabled( State );
 }
+
+
+void KHexEditPart::slotSelectAll()
+{
+  m_HexEdit->selectAll( true );
+}
+
+
+void KHexEditPart::slotUnselect()
+{
+  m_HexEdit->selectAll( false );
+}
+
 
 void KHexEditPart::slotSetCoding()
 {
@@ -281,4 +187,21 @@ void KHexEditPart::slotSetResizeStyle()
 
   m_HexEdit->setResizeStyle( ResizeStyle );
 }
+
+void KHexEditPart::slotSetEncoding()
+{
+  // TODO: find out if there is a way to use the exclusivegroup somehow
+  KHexEdit::KEncoding Encoding;
+  if( AsciiEncodingAction->isChecked() )
+    Encoding = KHexEdit::LocalEncoding;
+  else if( LocalEncodingAction->isChecked() )
+    Encoding = KHexEdit::ISO8859_1Encoding;
+  else
+    //should not be reached;
+    Encoding = KHexEdit::LocalEncoding;
+
+  m_HexEdit->setEncoding( Encoding );
+}
+
+
 #include "khepart.moc"

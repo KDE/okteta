@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef _KHEPART_H_
-#define _KHEPART_H_
+#ifndef KHEPART_H
+#define KHEPART_H
 
 // kde specific
 #include <kparts/part.h>
@@ -24,96 +24,69 @@
 #include "kbigbuffer.h"
 
 // forward declarations
-class QWidget;
-class QPainter;
-class KURL;
-class KAction;
 class KRadioAction;
 class KToggleAction;
-namespace KHE { class KHexEdit; }
+
+namespace KHE
+{
+
+// forward declarations
+class KHexEdit;
 
 /**
  * This is a "Part".  It that does all the real work in a KPart
  * application.
  *
  * @short Main Part
- * @author Friedrich W. H.  Kossebau <Friedrich.W.H@Kossebau.de>
+ * @author Friedrich W. H. Kossebau <Friedrich.W.H@Kossebau.de>
  * @version 0.1.0
  */
-class KHexEditPart : public KParts::ReadWritePart
+class KHexEditPart : public KParts::ReadOnlyPart
 {
     Q_OBJECT
 
   public:
-    /**
-     * Default constructor
-     */
     KHexEditPart( QWidget *ParentWidget, const char *WidgetName, QObject *Parent, const char *Name );
-
-    /**
-     * Destructor
-     */
     virtual ~KHexEditPart();
 
-    /**
-     * This is a virtual function inherited from KParts::ReadWritePart.
-     * A shell will use this to inform this Part if it should act
-     * read-only
-     */
-    virtual void setReadWrite( bool rw );
 
-    /**
-     * Reimplemented to disable and enable Save action
-     */
-    virtual void setModified( bool modified );
-
-
-  protected:
-    /**
-     * This must be implemented by each part
-     */
+  protected: // KParts::ReadOnlyPart API
     virtual bool openFile();
-
-    /**
-     * This must be implemented by each read-write part
-     */
-    virtual bool saveFile();
-
 
   protected:
     void setupActions();
 
-
   protected slots:
-    void fileOpen();
-    void fileSaveAs();
+    // used to catch changes in the HexEdit widget
     void slotSelectionChanged();
-    void selectAll();
-    void unselect();
+  protected slots: // action slots
+    void slotSelectAll();
+    void slotUnselect();
     void slotSetCoding();
+    void slotSetEncoding();
     void slotSetShowUnprintable();
     void slotSetResizeStyle();
 
   private:
-    KHE::KHexEdit *m_HexEdit;
-    char* m_Buffer;
-    KHE::KBigBuffer m_Wrapping;
+    KHexEdit *m_HexEdit;
+    KBigBuffer m_Wrapping;
 
     // edit menu
-    KAction *SaveAction;
-    KAction *CutAction;
     KAction *CopyAction;
-
     // view menu
     KRadioAction *HexCodingAction;
     KRadioAction *DecCodingAction;
     KRadioAction *OctCodingAction;
     KRadioAction *BinCodingAction;
+    KRadioAction *LocalEncodingAction;
+    KRadioAction *AsciiEncodingAction;
     KToggleAction *ShowUnprintableAction;
     // settings menu
     KRadioAction *NoResizeAction;
     KRadioAction *LockGroupsAction;
     KRadioAction *FullSizeUsageAction;
 };
+
+}
 
 #endif
