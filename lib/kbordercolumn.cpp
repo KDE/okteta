@@ -17,6 +17,7 @@
 
 // qt specific
 #include <qpainter.h>
+#include <qstyle.h>
 // lib specific
 #include "kcolumnsview.h"
 #include "kbordercolumn.h"
@@ -45,7 +46,8 @@ void KBorderColumn::paintLine( QPainter *P )
   {
     KColumn::paintBlankLine( P );
 
-    P->setPen( Qt::black );
+    int GridColor = View->style().styleHint( QStyle::SH_Table_GridLineColor, View );
+    P->setPen( GridColor != -1 ? (QRgb)GridColor : View->colorGroup().mid() );
     P->drawLine( LineX, 0, LineX, LineHeight-1 ) ;
   }
 }
