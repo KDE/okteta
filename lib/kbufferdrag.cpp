@@ -101,3 +101,5 @@ bool KBufferDrag::decode( const QMimeSource* Source, QByteArray &Dest )
 
   return CanDecode;
 }
+
+#include "kbufferdrag.moc"

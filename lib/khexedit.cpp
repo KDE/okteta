@@ -1914,3 +1914,5 @@ void KBufferCursor::dumpEditState()
   Buffer->replace( ByteEdit->dump(), 1, Pos );
 }
 #endif
+
+#include "khexedit.moc"

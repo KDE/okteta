@@ -111,19 +111,19 @@ int KFixedSizeBuffer::replace( KSection Remove, const char* D, int InputLength )
 }
 
 
-inline void KFixedSizeBuffer::move( int DestPos, int SourcePos, int Length )
+void KFixedSizeBuffer::move( int DestPos, int SourcePos, int Length )
 {
   memmove( &Data[DestPos], &Data[SourcePos], Length );
 }
 
 
-inline void KFixedSizeBuffer::reset( int Pos, int Length )
+void KFixedSizeBuffer::reset( int Pos, int Length )
 {
   memset( &Data[Pos], FillUpChar, Length );
 }
 
 
-inline void KFixedSizeBuffer::copy( int DestPos, const char *Source, int SourceLength )
+void KFixedSizeBuffer::copy( int DestPos, const char *Source, int SourceLength )
 {
   memcpy( &Data[DestPos], Source, SourceLength );
 }

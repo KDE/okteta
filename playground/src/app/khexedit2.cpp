@@ -417,3 +417,5 @@ void KHexEdit2::changeCaption( const QString& text )
 //   dockLeft->setWidget( aw );
 //   dockLeft->manualDock( getMainDockWidget(), KDockWidget::DockLeft, 20 );
 // }
+
+#include "khexedit2.moc"

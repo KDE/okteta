@@ -97,3 +97,5 @@ extern "C"
     return new KHexEditPartFactory;
   }
 };
+
+#include "khepartfactory.moc"

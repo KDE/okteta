@@ -40,7 +40,7 @@ KOffsetColumn::~KOffsetColumn()
 }
 
 
-inline void KOffsetColumn::paintLine( QPainter *P, int Line )
+void KOffsetColumn::paintLine( QPainter *P, int Line )
 {
   KColumn::paintBlankLine( P );
 
@@ -93,7 +93,7 @@ void KOffsetColumn::setDigitWidth( KPixelX DW )
   recalcX();
 }
 
-inline void KOffsetColumn::recalcX()
+void KOffsetColumn::recalcX()
 {
   // recalculate depend sizes
   setWidth( CodingWidth * DigitWidth );

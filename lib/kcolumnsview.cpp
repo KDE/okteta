@@ -220,3 +220,5 @@ void KColumnsView::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
 
 // Implemented to get rid of a compiler warning
 void KColumnsView::drawContents( QPainter * ) {}
+
+#include "kcolumnsview.moc"

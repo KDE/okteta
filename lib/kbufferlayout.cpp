@@ -96,12 +96,12 @@ bool KBufferLayout::setLength( int L )
 }
 
 
-inline void KBufferLayout::calcStart()
+void KBufferLayout::calcStart()
 {
   ContentCoords.setStart( KBufferCoord(StartOffset,NoOfBytesPerLine,false) );
 }
 
-inline void KBufferLayout::calcEnd()
+void KBufferLayout::calcEnd()
 {
   if( Length > 0 )
     ContentCoords.setEnd( KBufferCoord(Length-1+StartOffset,NoOfBytesPerLine,false) );

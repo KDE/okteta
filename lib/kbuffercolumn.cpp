@@ -232,7 +232,7 @@ bool KBufferColumn::setCoding( KCoding C )
 }
 
 
-inline void KBufferColumn::recalcByteWidth()
+void KBufferColumn::recalcByteWidth()
 {
   ByteWidth =     CodingWidth * DigitWidth;
   if( Coding == BinaryCoding )
@@ -243,7 +243,7 @@ inline void KBufferColumn::recalcByteWidth()
   recalcVerticalGridX();
 }
 
-inline void KBufferColumn::recalcVerticalGridX() { VerticalGridX = ByteWidth-1 + GroupSpacingWidth/2; }
+void KBufferColumn::recalcVerticalGridX() { VerticalGridX = ByteWidth-1 + GroupSpacingWidth/2; }
 
 
 void KBufferColumn::recalcX()
@@ -633,7 +633,7 @@ void KBufferColumn::paintRange( QPainter *P, const QColor &Color, KSection Posit
 }
 
 
-inline void KBufferColumn::drawByte( QPainter *P, const char Byte, const QColor &Color ) const
+void KBufferColumn::drawByte( QPainter *P, const char Byte, const QColor &Color ) const
 {
   codingFunction()( CodedByte, Byte );
 

@@ -247,3 +247,5 @@ void KHexEditPart::slotSetCoding()
 
   m_HexEdit->setCoding( Coding );
 }
+
+#include "khepart.moc"

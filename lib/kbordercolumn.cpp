@@ -38,7 +38,7 @@ KBorderColumn::~KBorderColumn()
 }
 
 
-inline void KBorderColumn::paintLine( QPainter *P )
+void KBorderColumn::paintLine( QPainter *P )
 {
   if( LineHeight > 0 )
   {

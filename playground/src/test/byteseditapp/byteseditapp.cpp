@@ -303,3 +303,5 @@ void BytesEditApp::changeCaption(const QString& text)
     // display the text on the caption
     setCaption(text);
 }
+
+#include "byteseditapp.moc"

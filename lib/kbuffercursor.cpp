@@ -289,12 +289,12 @@ void KBufferCursor::gotoPageDown()
 }
 
 
-inline bool KBufferCursor::atStart() const
+bool KBufferCursor::atStart() const
 {
   return Index == 0;
 }
 
-inline bool KBufferCursor::atEnd() const
+bool KBufferCursor::atEnd() const
 {
   return Index == Layout->length() - 1;
 }
@@ -305,12 +305,12 @@ inline bool KBufferCursor::atEnd() const
 }
 
 
-inline bool KBufferCursor::atLineStart() const
+bool KBufferCursor::atLineStart() const
 {
   return Layout->atLineStart( Coord );
 }
 
-inline bool KBufferCursor::atLineEnd() const
+bool KBufferCursor::atLineEnd() const
 {
   return Layout->atLineEnd( Coord );
 }
