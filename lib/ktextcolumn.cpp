@@ -30,11 +30,11 @@
 
 using namespace KHE;
 
-static KEncoding DefaultEncoding =        LocalEncoding;
-static bool      DefaultShowUnprintable = false;
-static QChar     DefaultSubstituteChar =  '.';
+static const KEncoding DefaultEncoding =        LocalEncoding;
+static const bool      DefaultShowUnprintable = false;
+static const QChar     DefaultSubstituteChar =  '.';
 
-static unsigned char LowestPrintableChar = 32;
+static const unsigned char LowestPrintableChar = 32;
 
 KTextColumn::KTextColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R )
  : KBufferColumn( CV, B, L, R ),

@@ -24,7 +24,7 @@
 
 using namespace KHE;
 
-static unsigned char TELowestPrintableChar = 32;
+static const unsigned char TELowestPrintableChar = 32;
 
 
 KTextColTextExport::KTextColTextExport( const KTextColumn* TC, char *D, KCoordRange CR )

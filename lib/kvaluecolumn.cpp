@@ -29,9 +29,9 @@
 
 using namespace KHE;
 
-static const KCoding DefaultCoding = HexadecimalCoding;
-static const KCoding NotDefaultCoding = DecimalCoding;
-static const int DefaultBinaryGapWidth = 1;
+static const KCoding DefaultCoding =         HexadecimalCoding;
+static const KCoding NotDefaultCoding =      DecimalCoding;
+static const int     DefaultBinaryGapWidth = 1;
 
 
 KHexColumn::KHexColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R )
