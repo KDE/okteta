@@ -31,11 +31,10 @@ inline const KBufferCoord KRange<KBufferCoord>::null()  const { return KBufferCo
 
 typedef KRange<KBufferCoord> KBasicCoordRange;
 
-
 /** describes a range in the buffercoord
   *@author Friedrich W. H.  Kossebau
   */
-class KCoordRange : public KBasicCoordRange
+class KCoordRange : public KRange<KBufferCoord>
 {
   public:
     KCoordRange( KBufferCoord SC, KBufferCoord EC );
