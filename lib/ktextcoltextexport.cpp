@@ -56,7 +56,7 @@ void KTextColTextExport::print( char **T ) const
     // clear spacing
     memset( e, ' ', t-e );
 
-    char D = *Data;
+    unsigned char D = *Data;
     *t = D>=32 ? D : SubstituteChar;
     e = t + 1;
   }

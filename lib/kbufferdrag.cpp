@@ -102,7 +102,7 @@ QByteArray KBufferDrag::encodedData( const char *Format ) const
         TextData.duplicate( Data );
         char *D = TextData.data();
         for( unsigned int i=0; i<TextData.size(); ++i,++D )
-        { char B = *D; if( B < 32 && B != '\t' && B != '\n' ) *D = SubstituteChar; }
+        { unsigned char B = *D; if( B < 32 && B != '\t' && B != '\n' ) *D = SubstituteChar; }
       }
       else
       {
