@@ -658,7 +658,7 @@ KBufferDrag *KHexEdit::dragObject( bool F, QWidget *Parent ) const
   const KTextColumn *TC;
   KCoordRange Range;
 
-  if( ActiveColumn == &textColumn() || !F )
+  if( static_cast<KHE::KTextColumn *>( ActiveColumn ) == &textColumn() || !F )
   {
     HC = 0L;
     TC = 0L;
