@@ -51,11 +51,11 @@ class KBytesEditWidget : public QWidget, public KHE::BytesEditInterface,
     /** hands over to the editor a new byte array.
       * If there exists an old one and autodelete is set the old one gets deleted.
       * @param D pointer to memory
-      * @param S size of used memory
+      * @param DS size of used memory
       * @param RS real size of the memory
       * @param KM keep the memory on resize (RS is the maximum size)
       */
-    virtual void setData( char *D, int S, int RS = -1, bool KM = true );
+    virtual void setData( char *D, int DS, int RS = -1, bool KM = true );
 
     /** sets the maximal size of the actual byte array. If the actual array is already larger
       * it will not be modified but there can be only done non-inserting actions
@@ -113,7 +113,7 @@ class KBytesEditWidget : public QWidget, public KHE::BytesEditInterface,
     /** sets the spacing between the groups in pixels */
     virtual void setGroupSpacingWidth( int GSW );
     /** sets the spacing in the middle of a binary byte in the hex column
-      * @param BinaryGapW spacing in the middle of a binary in pixels
+      * @param BGW spacing in the middle of a binary in pixels
       */
     virtual void setBinaryGapWidth( int BGW );
 
