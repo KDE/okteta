@@ -23,7 +23,8 @@
 
 namespace KHE
 {
-  enum KCoding { ASCIICoding=0, HexadecimalCoding, DecimalCoding, OctalCoding, BinaryCoding, NoCoding };
+  enum KCoding { HexadecimalCoding=0, DecimalCoding, OctalCoding, BinaryCoding, NoCoding };
+  static const int NoOfCodings = 5; 
 }
 
 #endif

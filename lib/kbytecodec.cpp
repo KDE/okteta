@@ -22,64 +22,53 @@
 using namespace KHE;
 
 
-const KByteCodec::coding KByteCodec::CodingFunction[6] =
-{ KByteCodec::toAscii,
-  KByteCodec::toHexadecimal,
+const KByteCodec::coding KByteCodec::CodingFunction[NoOfCodings] =
+{ KByteCodec::toHexadecimal,
   KByteCodec::toDecimal,
   KByteCodec::toOctal,
   KByteCodec::toBinary,
   KByteCodec::toDummy };
 
-const KByteCodec::coding KByteCodec::ShortCodingFunction[6] =
-{ KByteCodec::toAscii,
-  KByteCodec::toShortHexadecimal,
+const KByteCodec::coding KByteCodec::ShortCodingFunction[NoOfCodings] =
+{ KByteCodec::toShortHexadecimal,
   KByteCodec::toShortDecimal,
   KByteCodec::toShortOctal,
   KByteCodec::toShortBinary,
   KByteCodec::toDummy };
 
-const KByteCodec::decoding KByteCodec::DecodingFunction[6] =
-{ KByteCodec::fromAscii,
-  KByteCodec::fromHexadecimal,
+const KByteCodec::decoding KByteCodec::DecodingFunction[NoOfCodings] =
+{ KByteCodec::fromHexadecimal,
   KByteCodec::fromDecimal,
   KByteCodec::fromOctal,
   KByteCodec::fromBinary,
   KByteCodec::fromDummy };
 
-const KByteCodec::adding KByteCodec::AddingFunction[6] =
-{ KByteCodec::addToAscii,
-  KByteCodec::addToHexadecimal,
+const KByteCodec::adding KByteCodec::AddingFunction[NoOfCodings] =
+{ KByteCodec::addToHexadecimal,
   KByteCodec::addToDecimal,
   KByteCodec::addToOctal,
   KByteCodec::addToBinary,
   KByteCodec::addToDummy };
 
-const KByteCodec::removingLastDigit KByteCodec::RemovingLastDigitFunction[6] =
-{ KByteCodec::removeLastAsciiDigit,
-  KByteCodec::removeLastHexadecimalDigit,
+const KByteCodec::removingLastDigit KByteCodec::RemovingLastDigitFunction[NoOfCodings] =
+{ KByteCodec::removeLastHexadecimalDigit,
   KByteCodec::removeLastDecimalDigit,
   KByteCodec::removeLastOctalDigit,
   KByteCodec::removeLastBinaryDigit,
   KByteCodec::removeLastDummyDigit };
 
-const KByteCodec::validingDigit KByteCodec::ValidingDigitFunction[6] =
-{ KByteCodec::isValidAsciiDigit,
-  KByteCodec::isValidHexadecimalDigit,
+const KByteCodec::validingDigit KByteCodec::ValidingDigitFunction[NoOfCodings] =
+{ KByteCodec::isValidHexadecimalDigit,
   KByteCodec::isValidDecimalDigit,
   KByteCodec::isValidOctalDigit,
   KByteCodec::isValidBinaryDigit,
   KByteCodec::isValidDummyDigit };
 
-const unsigned int KByteCodec::CodingWidth[6] = { 1, 2, 3, 3, 8, 0 };
+const unsigned int KByteCodec::CodingWidth[NoOfCodings] = { 2, 3, 3, 8, 0 };
 
-const char KByteCodec::Digit[16] =      { '0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F' };
-const char KByteCodec::SmallDigit[16] = { '0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f' };
+const char KByteCodec::Digit[MaxNoOfDigits] =      { '0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F' };
+const char KByteCodec::SmallDigit[MaxNoOfDigits] = { '0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f' };
 
-void KByteCodec::toAscii( char *Digits, unsigned char Char )
-{
-  *Digits++ = (char)Char;
-  *Digits   = '\0';
-}
 
 void KByteCodec::toHexadecimal( char *Digits, unsigned char Char )
 {
@@ -189,16 +178,6 @@ void KByteCodec::toDummy( char */*Digits*/, unsigned char /*Char*/ )
 
 
 
-
-
-const unsigned char *KByteCodec::fromAscii( unsigned char *Char, const unsigned char *Digits )
-{
-  *Char = *Digits++;
-  return Digits;
-}
-
-
-
 const unsigned char *KByteCodec::fromHexadecimal( unsigned char *Char, const unsigned char *Digits )
 {
   // remove leading 0s
@@ -294,11 +273,6 @@ const unsigned char *KByteCodec::fromDummy( unsigned char *Char, const unsigned 
 }
 
 
-bool KByteCodec::isValidAsciiDigit( unsigned char /*Digit*/ )
-{
-  return true;
-}
-
 bool KByteCodec::isValidHexadecimalDigit( unsigned char Digit )
 {
   return (Digit >= 'A' && Digit <= 'F') || (Digit >= 'a' && Digit <= 'f');
@@ -321,11 +295,6 @@ bool KByteCodec::isValidDummyDigit( unsigned char /*Digit*/ )
   return false;
 }
 
-
-bool KByteCodec::turnToAsciiValue( unsigned char */*Digit*/ )
-{
-  return true;
-}
 
 bool KByteCodec::turnToHexadecimalValue( unsigned char *Digit )
 {
@@ -372,11 +341,6 @@ bool KByteCodec::turnToBinaryValue( unsigned char *Digit )
 }
 
 bool KByteCodec::turnToDummyValue( unsigned char */*Digit*/ )
-{
-  return false;
-}
-
-bool KByteCodec::addToAscii( unsigned char */*Byte*/, unsigned char /*Digit*/ )
 {
   return false;
 }
@@ -458,10 +422,6 @@ bool KByteCodec::addToDummy( unsigned char */*Byte*/, unsigned char /*Digit*/ )
 }
 
 
-void KByteCodec::removeLastAsciiDigit( unsigned char *Byte )
-{
-  *Byte = 0;
-}
 void KByteCodec::removeLastHexadecimalDigit( unsigned char *Byte )
 {
   *Byte >>= 4;

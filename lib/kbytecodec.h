@@ -25,7 +25,7 @@ namespace KHE
 {
 
 /** class that is able to convert codings to and from
-  * hexadecimal, decimal, octal, binary and ASCII
+  * hexadecimal, decimal, octal, and binary
   *
   * the buffer will be always filled up to CodingWidth, if not using shortCodingFunction
   * a closing '\0' will be always added
@@ -51,6 +51,8 @@ class KByteCodec
     typedef bool (*validingDigit)( unsigned char Digit );
     /** */
     static const int MaxCodingWidth = 8;
+    /** */
+    static const int MaxNoOfDigits = 16;
 
   private: // hiding, as this class should never be instanciated
     KByteCodec();
@@ -74,8 +76,6 @@ class KByteCodec
     static validingDigit validingDigitFunction( KCoding C );
 
   public: // toing functions
-    /** */
-    static void toAscii( char *Digits, unsigned char Char );
     /** */
     static void toHexadecimal( char *Digits, unsigned char Char );
     /** */
@@ -102,8 +102,6 @@ class KByteCodec
     /** */
 
     /** */
-    static const unsigned char *fromAscii( unsigned char *Char, const unsigned char *Digits );
-    /** */
     static const unsigned char *fromHexadecimal( unsigned char *Char, const unsigned char *Digits );
     /** */
     static const unsigned char *fromDecimal( unsigned char *Char, const unsigned char *Digits );
@@ -115,28 +113,24 @@ class KByteCodec
     static const unsigned char *fromDummy( unsigned char *Char, const unsigned char *Digits );
 
 
-    static bool addToAscii( unsigned char *Byte, unsigned char Digit );
     static bool addToHexadecimal( unsigned char *Byte, unsigned char Digit );
     static bool addToDecimal( unsigned char *Byte, unsigned char Digit );
     static bool addToOctal( unsigned char *Byte, unsigned char Digit );
     static bool addToBinary( unsigned char *Byte, unsigned char Digit );
     static bool addToDummy( unsigned char *Byte, unsigned char Digit );
 
-    static void removeLastAsciiDigit( unsigned char *Byte );
     static void removeLastHexadecimalDigit( unsigned char *Byte );
     static void removeLastDecimalDigit( unsigned char *Byte );
     static void removeLastOctalDigit( unsigned char *Byte );
     static void removeLastBinaryDigit( unsigned char *Byte );
     static void removeLastDummyDigit( unsigned char */*Byte*/ );
 
-    static bool turnToAsciiValue( unsigned char *Digit );
     static bool turnToHexadecimalValue( unsigned char *Digit );
     static bool turnToDecimalValue( unsigned char *Digit );
     static bool turnToOctalValue( unsigned char *Digit );
     static bool turnToBinaryValue( unsigned char *Digit );
     static bool turnToDummyValue( unsigned char *Digit );
 
-    static bool isValidAsciiDigit( unsigned char Digit );
     static bool isValidHexadecimalDigit( unsigned char Digit );
     static bool isValidDecimalDigit( unsigned char Digit );
     static bool isValidOctalDigit( unsigned char Digit );
@@ -145,26 +139,26 @@ class KByteCodec
 
   protected:
     /** */
-    static const unsigned int CodingWidth[6]; //TODO: would sizeof(KCoding} work?
+    static const unsigned int CodingWidth[NoOfCodings];
     /** */
-    static const coding CodingFunction[6];
+    static const coding CodingFunction[NoOfCodings];
     /** */
-    static const coding ShortCodingFunction[6];
+    static const coding ShortCodingFunction[NoOfCodings];
     /** */
-    static const decoding DecodingFunction[6];
+    static const decoding DecodingFunction[NoOfCodings];
     /** */
-    static const adding AddingFunction[6];
+    static const adding AddingFunction[NoOfCodings];
     /** */
-    static const removingLastDigit RemovingLastDigitFunction[6];
+    static const removingLastDigit RemovingLastDigitFunction[NoOfCodings];
     /** */
-    static const validingDigit ValidingDigitFunction[6];
+    static const validingDigit ValidingDigitFunction[NoOfCodings];
 
 
   protected:
     /** buffer with paintable qdigits, should be faster than calculating chars online */
-    static const char Digit[16];
+    static const char Digit[MaxNoOfDigits];
     /** buffer with digits a-f lower */
-    static const char SmallDigit[16];
+    static const char SmallDigit[MaxNoOfDigits];
 };
 
 

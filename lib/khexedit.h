@@ -88,7 +88,7 @@ class KHexEdit : public KColumnsView
     enum KKeyboardAction { ActionDelete, ActionWordDelete, ActionBackspace, ActionWordBackspace };
 
     enum KResizeStyle { NoResize, LockGrouping, FullSizeUsage };
-    enum KCoding { ASCIICoding=0, HexadecimalCoding, DecimalCoding, OctalCoding, BinaryCoding, NoCoding };
+    enum KCoding { HexadecimalCoding=0, DecimalCoding, OctalCoding, BinaryCoding, NoCoding };
 
 
   protected:
