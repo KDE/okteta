@@ -1,0 +1,13 @@
+<!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
+<kpartgui name="byteseditapp" version="1">
+<MenuBar>
+  <Menu name="file">
+    <Separator/>
+    <Action name="file_setreadonly" />
+    <Separator/>
+  </Menu>
+</MenuBar>
+<ToolBar name="mainToolBar">
+  <Action name="file_setreadonly">
+</ToolBar>
+</kpartgui>

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Service
+Icon=khexedit
+Encoding=UTF-8
+Name=Embedded Binary Viewer
+Name[de]=Eingebetteter Binärbetrachter
+Comment=Embedded Binary Viewer
+Comment[de]=Eingebetteter Binärbetrachter
+MimeType=all/allfiles
+ServiceTypes=KParts/ReadOnlyPart,KParts/ReadWritePart
+X-KDE-Library=libkhexeditpart

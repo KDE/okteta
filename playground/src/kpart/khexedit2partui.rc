@@ -1,0 +1,154 @@
+<!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
+<kpartgui name="khexedit_part" version="1">
+<MenuBar>
+  <Menu name="file">
+    <Action name="file_open"/>
+    <Separator/>
+    <Action name="file_save"/>
+    <Action name="file_save_as"/>
+    <Separator/>
+    <Action name="file_revert"/>
+    <Menu name="permission"><text>Permissions</text>
+      <Action name="read_only"/>
+      <Action name="resize_lock"/>
+    </Menu>
+  </Menu>
+
+  <Menu name="edit">
+    <Action name="edit_undo"/>
+    <Action name="edit_redo"/>
+    <Action name="edit_cut"/>
+    <Action name="edit_copy"/>
+    <Action name="edit_paste"/>
+    <Menu name="special"><text>Spec&amp;ial</text>
+      <Action name="copy_as_text"/>
+      <Action name="paste_into_new_file"/>
+      <Action name="paste_into_new_window"/>
+    </Menu>
+    <Separator/>
+    <Action name="edit_select_all"/>
+    <Action name="edit_deselect"/>
+    <Action name="set_insert"/>
+    <Action name="edit_find"/>
+    <Action name="edit_find_next"/>
+    <Action name="edit_find_prev"/>
+    <Action name="edit_replace"/>
+    <Separator/>
+    <Action name="goto_offset"/>
+    <Action name="insert_pattern"/>
+  </Menu>
+  <Menu name="view">
+    <Menu name=""><text>&amp;Coding</text>
+      <Action name="view_asciicoding"/>
+      <Action name="view_hexcoding"/>
+      <Action name="view_deccoding"/>
+      <Action name="view_octcoding"/>
+      <Action name="view_bincoding"/>
+    </Menu>
+    <Separator/>
+    <Action name="view_zoom_in"/>
+    <Action name="view_zoom_out"/>
+    <Separator/>
+    <Action name="show_offset_column"/>
+    <Action name="show_text_field"/>
+    <Separator/>
+    <Action name="offset_as_decimal"/>
+    <Separator/>
+    <Action name="upper_case_data"/>
+    <Action name="upper_case_offset"/>
+    <Separator/>
+    <Menu name="encoding"><text>Document &amp;Encoding</text>
+      <Action name="enc_default"/>
+      <Action name="enc_ascii"/>
+      <Action name="enc_ebcdic"/>
+<!--       <Action name="enc_custom"/> //-->
+    </Menu>
+  </Menu>
+  <!--Menu name="bookmarks">
+    <Action name="replace_bookmark"/>
+    <Action name="remove_bookmark"/>
+    <Action name="remove_all_bookmarks"/>
+    <Separator/>
+    <Action name="next_bookmark"/>
+    <Action name="prev_bookmark"/>
+    <ActionList name="bookmark_list"/>
+  </Menu-->
+  <Menu name="tools"><text>&amp;Tools</text>
+    <Action name="extract_strings"/>
+<!--     <Action name="record_viewer"/> //-->
+    <Action name="binary_filter"/>
+    <Action name="char_table"/>
+    <Action name="converter"/>
+    <Separator/>
+    <Action name="statistics"/>
+  </Menu>
+  <Menu name="settings">
+    <Separator append="show_merge"/>
+    <Action name="show_full_path" append="show_merge"/>
+    <Separator append="show_merge"/>
+    <Menu name="doctab" append="show_merge"><text>&amp;Document Tabs</text>
+      <Action name="doctab_hide"/>
+      <Action name="doctab_above"/>
+      <Action name="doctab_below"/>
+    </Menu>
+    <Menu name="conversion_field" append="show_merge"><text>Conversion &amp;Field</text>
+      <Action name="conversion_field_hide"/>
+      <Action name="conversion_field_float"/>
+      <Action name="conversion_field_embed"/>
+    </Menu>
+    <Menu name="searchbar" append="show_merge"><text>Searc&amp;hbar</text>
+      <Action name="searchbar_hide"/>
+      <Action name="searchbar_above"/>
+      <Action name="searchbar_below"/>
+    </Menu>
+<!--     <Action name="favorites"/> //-->
+  </Menu>
+</MenuBar>
+
+<ToolBar name="mainToolBar" noMerge="1"><text>Main Toolbar</text>
+  <Action name="drag_document"/>
+  <Separator lineSeparator="true"/>
+  <Action name="file_open"/>
+  <Action name="file_save"/>
+  <Action name="file_revert"/>
+  <Action name="file_print"/>
+  <Separator/>
+  <Action name="edit_undo"/>
+  <Action name="edit_redo"/>
+  <Action name="edit_cut"/>
+  <Action name="edit_copy"/>
+  <Action name="edit_paste"/>
+  <Separator/>
+  <Action name="edit_find"/>
+  <Action name="edit_find_next"/>
+  <Action name="edit_find_last"/>
+  <Separator/>
+  <Action name="view_zoom_in"/>
+  <Action name="view_zoom_out"/>
+  <Separator/>
+  <Action name="cancel"/>
+  <Action name="help"/>
+</ToolBar>
+
+<!-- Editor popup menu //-->
+<Menu name="editor_popup">
+  <Action name="file_open"/>
+  <Action name="file_save"/>
+  <Action name="file_save_as"/>
+  <Separator/>
+  <Menu name="editor_bookmark_popup">
+    <text>&amp;Bookmarks</text>
+    <Action name="bookmark_add"/>
+    <ActionList name="bookmark_list"/>
+  </Menu>
+  <Separator/>
+  <Action name="view_asciicoding"/>
+  <Action name="view_hexcoding"/>
+  <Action name="view_deccoding"/>
+  <Action name="view_octcoding"/>
+  <Action name="view_bincoding"/>
+  <Separator/>
+  <Action name="read_only"/>
+  <Action name="resize_lock"/>
+</Menu>
+</kpartgui>

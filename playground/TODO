@@ -1,0 +1,30 @@
+select whole lines by clicking on the offset column
+---------------------
+when the mouse cursor is above the offset column the shape turns into a mirrored pointer.
+clicking onto an offset number selects the whole line. Clicking at one number, holding the button
+pressed and moving to other lines selects inclusively the lines between the first and the actual
+(the way it is done in some text processing apps)
+
+
+
+work out size policy and the like
+---------------------------------
+MaximumSize, Minimumsize, sizehint etc. should get usefull values
+
+paste, copy, insert, drag'n'drop using the coding
+-----------------------------
+when moving data in and out of the hex column use the coding
+
+
+
+clean up buffercolumn painting
+------------------------------
+still found no pattern :(
+
+
+
+KNOWN BUGS
+----------
+incorrect cursor shape on font change
+when setting new coding the resizestyle is not reflected
+double click borks cursor
