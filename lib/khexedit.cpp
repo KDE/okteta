@@ -1590,6 +1590,7 @@ bool KHexEdit::handleLetter( QKeyEvent *KeyEvent )
       D[0] = S.latin1()[0];
 //         clearUndoRedoInfo = false;
     insert( D );
+    ensureCursorVisible();    
   }
   else
   {
