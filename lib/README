@@ -1,0 +1,36 @@
+hex editor library
+==================
+part of the KHexEdit 2 project (kdenonbeta/khexedit2)
+Author/Maintainer: Friedrich W. H. Kossebau <Friedrich.W.H@Kossebau.de>
+
+
+description:
+-----------
+The lib is the main work of KHexEdit2. It offers
+a general usable hex edit widget "KHexEdit"
+that interacts with an abstract data buffer
+interface called "KDataBuffer". This interface can
+be subclassed to offer access to different data buffers
+like paged gigabyte big files, video memory or whatever
+you can imagine (hopefully).
+
+For those simply needing a widget for a plain array of bytes
+there is the widget subclass "KBytesEdit", which hides the
+databuffer interface and publically simply interacts with
+arrays (like "char Array[25];").
+
+
+installing:
+-----------
+As these widgets and the databuffer interface have not got
+much testing the API might not be finished. Because of that
+it won't be made public available, i.e. there will be no headers
+installed.
+
+
+usage:
+------
+This lib is by now only used by the KBytesEdit part, to be found
+in "../parts/kbytesedit".
+It is _not_ used by the current KHexEdit 1 app. This will change once
+the successor app from KHexEdit2 is done.

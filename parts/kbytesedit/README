@@ -1,0 +1,23 @@
+KBytesEdit widget modul
+=======================
+part of the KHexEdit 2 project (kdenonbeta/khexedit2)
+Author/Maintainer: Friedrich W. H. Kossebau <Friedrich.W.H@Kossebau.de>
+
+
+description:
+------------
+This module delivers a service for the service type "KHexEdit/KBytesEdit".
+It is a hex edit widget that operates on an array of chars given by
+the programmer.
+It serves right now the interfaces
+HexColumnInterface, TextColumnInterface, ZoomInterface, ClipBoardInterface.
+
+
+installing:
+-----------
+Installs the .desktop file describing the service and the module library.
+
+
+usage:
+------
+Only official known usage is by KPilot (kdepim/kpilot) for now.
