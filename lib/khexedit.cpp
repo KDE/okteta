@@ -164,7 +164,7 @@ void KHexEdit::setOverwriteMode( bool OM )
   if( ChangeCursor )
     pauseCursor();
 
-  BufferCursor->setNewPosAllowed( !OverWrite );
+  BufferCursor->setAppendPosEnabled( !OverWrite );
 
   if( ChangeCursor )
     unpauseCursor();
@@ -421,6 +421,12 @@ void KHexEdit::adjustToLayoutNoOfBytesPerLine()
   textColumn().resetXBuffer();
 
   updateWidths();
+}
+
+
+void KHexEdit::setNoOfLines( int NewNoOfLines )
+{
+  KColumnsView::setNoOfLines( NewNoOfLines>1?NewNoOfLines:1 );
 }
 
 
@@ -743,7 +749,7 @@ void KHexEdit::insert( const QByteArray &D )
     else
     {
       // replacing the normal data, at least until the end
-      KSection Section( BufferCursor->trueIndex(), D.size(), false );
+      KSection Section( BufferCursor->realIndex(), D.size(), false );
       Section.restrictEndTo( BufferLayout->length()-1 );
       if( Section.isValid() && !BufferCursor->isBehind() )
       {
@@ -784,13 +790,13 @@ void KHexEdit::insert( const QByteArray &D )
     }
     else
     {
-      bool InputAfterEnd = BufferCursor->isBehindEnd();
-      int OldIndex = BufferCursor->trueIndex();
+      bool Appending = BufferCursor->atAppendPos();
+      int OldIndex = BufferCursor->realIndex();
       int W = DataBuffer->insert( OldIndex, D.data(), D.size() );
       updateLength();
       if( W > 0 )
       {
-        if( InputAfterEnd )
+        if( Appending )
           BufferCursor->gotoEnd();
         else
           BufferCursor->gotoNextByte( W );
@@ -830,14 +836,11 @@ void KHexEdit::removeSelectedData()
 
   repaintChanged();
 
-  if( BufferCursor->isValid() )
-  {
-    BufferCursor->gotoCIndex( Selection.start() );
+  BufferCursor->gotoCIndex( Selection.start() );
 
-    ensureCursorVisible();
+  ensureCursorVisible();
 //     clearUndoRedo();
-    viewport()->setCursor( isReadOnly() ? arrowCursor : ibeamCursor );
-  }
+  viewport()->setCursor( isReadOnly() ? arrowCursor : ibeamCursor );
 
   unpauseCursor();
 
@@ -1040,10 +1043,6 @@ bool KHexEdit::eventFilter( QObject *O, QEvent *E )
   {
     if( E->type() == QEvent::FocusIn )
     {
-      //
-      if( !BufferCursor->isValid() )
-        BufferCursor->gotoIndex( 0 );
-
       startCursor();
     }
     else if( E->type() == QEvent::FocusOut )
@@ -1106,7 +1105,7 @@ void KHexEdit::unpauseCursor()
 
 void KHexEdit::updateCursor()
 {
-  if( CursorBlinkTimer->isActive() && BufferCursor->isValid() )
+  if( CursorBlinkTimer->isActive() )
   {
     createCursorPixmaps();
 
@@ -1553,7 +1552,7 @@ bool KHexEdit::handleLetter( QKeyEvent *KeyEvent )
   {
     // switching to byte edit mode
     int ValidIndex = BufferCursor->validIndex();
-    if( ValidIndex == -1 )
+    if( ValidIndex == -1 ) // TODO: hey, what about appending!!!
       return false;
 
     // check for plus/minus
@@ -1583,13 +1582,13 @@ bool KHexEdit::handleLetter( QKeyEvent *KeyEvent )
     }
     else
     {
-      int Index = BufferCursor->trueIndex();
+      int Index = BufferCursor->realIndex();
       int W = DataBuffer->insert( Index, (char*)&EditValue, 1 );
       if( W > 0 )
       {
         updateLength();
         BufferRanges->addChangedRange( KSection(Index+1,DataBuffer->size()-1) );
-        BufferCursor->gotoTrueIndex();
+        BufferCursor->gotoRealIndex();
         InEditMode = true;
         EditModeByInsert = true;
         repaintChanged();
@@ -1619,10 +1618,10 @@ void KHexEdit::moveCursor( KMoveAction Action, bool Select )
   if( Select )
   {
     if( !BufferRanges->selectionStarted() )
-      BufferRanges->setSelectionStart( BufferCursor->trueIndex() );
+      BufferRanges->setSelectionStart( BufferCursor->realIndex() );
 
     moveCursor( Action );
-    BufferRanges->setSelectionEnd( BufferCursor->trueIndex() );
+    BufferRanges->setSelectionEnd( BufferCursor->realIndex() );
 
     if( !OverWrite ) emit cutAvailable( BufferRanges->hasSelection() );
     emit copyAvailable( BufferRanges->hasSelection() );
@@ -1658,14 +1657,14 @@ void KHexEdit::moveCursor( KMoveAction Action )
   {
     case MoveBackward:     BufferCursor->gotoPreviousByte(); break;
     case MoveWordBackward: {
-                             int NewIndex = BufferCursor->trueIndex();
+                             int NewIndex = BufferCursor->realIndex();
                              NewIndex = DataBuffer->indexOfPreviousWordStart( NewIndex, KDataBuffer::Readable );
                              BufferCursor->gotoIndex( NewIndex );
                            }
                            break;
     case MoveForward:      BufferCursor->gotoNextByte();     break;
     case MoveWordForward:  {
-                             int NewIndex = BufferCursor->trueIndex();
+                             int NewIndex = BufferCursor->realIndex();
                              NewIndex = DataBuffer->indexOfNextWordStart( NewIndex, KDataBuffer::Readable );
                              BufferCursor->gotoIndex( NewIndex );
                            }
@@ -1721,7 +1720,7 @@ void KHexEdit::doKeyboardAction( KKeyboardAction Action )
 //       }
       if( !OverWrite )
       {
-        int Index = BufferCursor->trueIndex();
+        int Index = BufferCursor->realIndex();
         if( Index < BufferLayout->length() )
         {
           removeData( KSection(Index,1,false) );
@@ -1734,7 +1733,7 @@ void KHexEdit::doKeyboardAction( KKeyboardAction Action )
     case ActionWordDelete: // kills data until the start of the next word
       if( !OverWrite )
       {
-        int Index = BufferCursor->trueIndex();
+        int Index = BufferCursor->realIndex();
         if( Index < BufferLayout->length() )
         {
           int End = DataBuffer->indexOfBeforeNextWordStart( Index );
@@ -1750,7 +1749,7 @@ void KHexEdit::doKeyboardAction( KKeyboardAction Action )
         BufferCursor->gotoPreviousByte();
       else
       {
-        int DeleteIndex = BufferCursor->trueIndex() - 1;
+        int DeleteIndex = BufferCursor->realIndex() - 1;
         if( DeleteIndex >= 0 )
         {
           removeData( KSection(DeleteIndex,1,false) );
@@ -1799,7 +1798,7 @@ void KHexEdit::doKeyboardAction( KKeyboardAction Action )
 //       }
     case ActionWordBackspace:
       {
-        int LeftIndex = BufferCursor->trueIndex() - 1;
+        int LeftIndex = BufferCursor->realIndex() - 1;
         if( LeftIndex >= 0 )
         {
           int WordStart = DataBuffer->indexOfPreviousWordStart( LeftIndex );
@@ -1838,7 +1837,7 @@ void KHexEdit::repaintChanged()
 
   // calculate affected lines/indizes
   KSection VisibleLines = visibleLines( KPixelYs(cy,ch,false) );
-  KSection FullPositions( 0, BufferLayout->noOfBytesPerLine() );
+  KSection FullPositions( 0, BufferLayout->noOfBytesPerLine()-1 );
   KCoordRange VisibleRange( FullPositions, VisibleLines );
 //   std::cout << "repaintChanged->"<<FirstIndex<<":"<<FirstLine<<","<<LastIndex<<":"<<LastLine<<std::endl;
 
@@ -1986,7 +1985,7 @@ void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
     {
       BufferRanges->setSelectionStart( BufferLayout->indexAtLineStart(DoubleClickLine) );
       BufferCursor->gotoLineEnd();
-      BufferRanges->setSelectionEnd( BufferCursor->trueIndex() );
+      BufferRanges->setSelectionEnd( BufferCursor->realIndex() );
       repaintChanged();
 
       unpauseCursor();
@@ -2011,21 +2010,21 @@ void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
     if( BufferRanges->selectionStarted() )
     {
       if( e->state() & ShiftButton )
-        BufferRanges->setSelectionEnd( BufferCursor->trueIndex() );
+        BufferRanges->setSelectionEnd( BufferCursor->realIndex() );
       else
       {
         BufferRanges->removeSelection();
-        BufferRanges->setSelectionStart( BufferCursor->trueIndex() );
+        BufferRanges->setSelectionStart( BufferCursor->realIndex() );
       }
     }
     else
     {
       if( isReadOnly() || !(e->state()&ShiftButton) )
-        BufferRanges->setSelectionStart( BufferCursor->trueIndex() );
+        BufferRanges->setSelectionStart( BufferCursor->realIndex() );
       else
       {
-        BufferRanges->setSelectionStart( BufferCursor->trueIndex() );
-        BufferRanges->setSelectionEnd( BufferCursor->trueIndex() );
+        BufferRanges->setSelectionStart( BufferCursor->realIndex() );
+        BufferRanges->setSelectionEnd( BufferCursor->realIndex() );
       }
     }
 
@@ -2258,7 +2257,7 @@ void KHexEdit::handleMouseMove( const QPoint& Point ) // handles the move of the
   }
 
   if( BufferRanges->selectionStarted() )
-    BufferRanges->setSelectionEnd( BufferCursor->trueIndex() );
+    BufferRanges->setSelectionEnd( BufferCursor->realIndex() );
 
   repaintChanged();
   ensureCursorVisible();
@@ -2333,7 +2332,7 @@ void KHexEdit::contentsDropEvent( QDropEvent *e )
 
   bool IsInternalDrag = e->source() == this || e->source() == viewport();
 
-  int InsertIndex = BufferCursor->trueIndex();
+  int InsertIndex = BufferCursor->realIndex();
   if( IsInternalDrag && BufferRanges->hasSelection() )
   {
     KSection Selection = BufferRanges->selection();

@@ -24,17 +24,26 @@
 
 namespace KHE {
 
-/** the logical layout of a plain buffer view
-  * given the values for length of the buffer,
-  * number of bytes per line,
-  * a possible (relative) offset in the display,
-  * and the number of lines per page jump
+/**@short the logical layout of a plain buffer view
+  *
+  * Given the values for
+  * * length of the buffer,
+  * * number of bytes per line,
+  * * a possible (relative) offset in the display, and
+  * * the number of lines per page jump
   * the following values are calculated:
-  * starting line of display,
-  * starting position in this line,
-  * final line of display,
-  * final position in this line,
-  * and the total number of lines (is final line +1 or 0)
+  * * starting line of display,
+  * * starting position in this line,
+  * * final line of display,
+  * * final position in this line, and
+  * * the total number of lines (is final line +1 or 0)
+  *
+  * This layout sees the buffer as a continous stream of byte,
+  * thus uses each line after the start from the begin to the end.
+  *
+  * If the buffer is empty the end coord will be set to the start coord
+  * to easen the cursor handling. So, don't use the coords to calc the length.
+  *
   *
   *@author Friedrich W. H.  Kossebau
   */

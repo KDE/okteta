@@ -43,10 +43,13 @@ class KBufferCoord
     bool operator<=( const KBufferCoord &c ) const;
     bool operator>( const KBufferCoord &c ) const;
     bool operator>=( const KBufferCoord &c ) const;
+    
     bool isPriorInLineThan( const KBufferCoord &C ) const;
     bool isLaterInLineThan( const KBufferCoord &C ) const;
     bool isBelow( int L ) const;
     bool isAbove( int L ) const;
+    bool isBehindLineStart() const;
+    bool isBeforeLineEnd( int MaxPos ) const;
 
     int indexByLineWidth( int LineWidth ) const;
 
@@ -55,17 +58,20 @@ class KBufferCoord
     void set( int P, int L );
     void setPos( int P );
     void setLine( int L );
-    bool goLeft();
-    bool goRight( int MaxPos );
+    void goLeft();
+    void goLeft( unsigned int P );
+    void goCLeft( int MaxPos );
     void goRight();
+    void goRight( unsigned int P );
+    void goCRight( int MaxPos );
     void gotoEndOfPreviousLine( int LastPos );
     void gotoStartOfNextLine();
     void goLineStart( const KBufferCoord &C );
     void goLineEnd( int L, const KBufferCoord &C );
     void goUp();
     void goDown();
-    void goUp( int L );
-    void goDown( int L );
+    void goUp( unsigned int L );
+    void goDown( unsigned int L );
 
   public: // state value access
     int pos() const;
@@ -120,9 +126,25 @@ inline void KBufferCoord::set( int P, int L )
 inline void KBufferCoord::setPos( int P )  { Pos  = P; }
 inline void KBufferCoord::setLine( int L ) { Line = L; }
 
-inline bool KBufferCoord::goLeft() { if( Pos > 0 ) { --Pos; return true; } else return false; }
-inline bool KBufferCoord::goRight( int MaxPos ) { if( Pos < MaxPos ) { ++Pos; return true; } else return false; }
+inline void KBufferCoord::goCRight( int MaxPos )
+{
+  if( isBeforeLineEnd(MaxPos) )
+    goRight();
+  else
+    gotoStartOfNextLine();
+}
+inline void KBufferCoord::goCLeft( int MaxPos )
+{
+  if( isBehindLineStart() )
+    goLeft();
+  else
+    gotoEndOfPreviousLine( MaxPos );
+}
+
 inline void KBufferCoord::goRight() { ++Pos; }
+inline void KBufferCoord::goLeft()  { --Pos; }
+inline void KBufferCoord::goRight( unsigned int P ) { Pos += P; }
+inline void KBufferCoord::goLeft( unsigned int P )  { Pos -= P; }
 
 inline void KBufferCoord::gotoEndOfPreviousLine( int LastPos )
 {
@@ -149,8 +171,8 @@ inline void KBufferCoord::goLineEnd( int L, const KBufferCoord &C )
 
 inline void KBufferCoord::goUp()           { --Line; }
 inline void KBufferCoord::goDown()         { ++Line; }
-inline void KBufferCoord::goUp( int L )    { Line -= L; }
-inline void KBufferCoord::goDown( int L )  { Line += L; }
+inline void KBufferCoord::goUp( unsigned int L )    { Line -= L; }
+inline void KBufferCoord::goDown( unsigned int L )  { Line += L; }
 
 
 inline int KBufferCoord::indexByLineWidth( int LineWidth ) const
@@ -169,16 +191,11 @@ inline bool KBufferCoord::isLaterInLineThan( const KBufferCoord &C ) const
   return Line == C.Line && Pos > C.Pos;
 }
 
-inline bool KBufferCoord::isBelow( int L ) const
-{
-  return Line > L;
-}
+inline bool KBufferCoord::isBelow( int L ) const { return Line > L; }
+inline bool KBufferCoord::isAbove( int L ) const { return Line < L; }
 
-inline bool KBufferCoord::isAbove( int L ) const
-{
-  return Line < L;
-}
-
+inline bool KBufferCoord::isBehindLineStart()           const { return Pos > 0; }
+inline bool KBufferCoord::isBeforeLineEnd( int MaxPos ) const { return Pos < MaxPos; }
 
 inline KBufferCoord operator+( const KBufferCoord &C, int p )
 {

@@ -333,6 +333,9 @@ class KHexEdit : public KColumnsView
     virtual void contentsWheelEvent( QWheelEvent *e );
 //    virtual void contentsContextMenuEvent( QContextMenuEvent *e );
 
+  protected: // KColumnsView API
+    virtual void setNoOfLines( int NewNoOfLines );
+
   protected: // atomic ui operations
     /** handles screen update in case of a change to any of the width sizes
       */

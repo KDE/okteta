@@ -52,18 +52,6 @@ class KColumnsView : public QScrollView
     virtual void paintEmptyArea( QPainter *p, int cx, int cy, int cw, int ch );
     virtual void drawContents( QPainter *p, int cx, int cy, int cw, int ch );
 
-  public: //
-    /** sets height of all lines and propagates this information to all columns
-      * doesn't update the content size
-      * @param NewLineHeight height in pixels
-      */
-    void setLineHeight( KPixelY NewLineHeight );
-    /** sets the number of lines
-      * doesn't update the content size
-      * @param NewNoOfLines new number of lines to display
-      */
-    void setNoOfLines( int NewNoOfLines );
-
   public: // data-wise sizes
     /** returns the number of all lines */
     int noOfLines() const;
@@ -102,6 +90,18 @@ class KColumnsView : public QScrollView
     void addColumn( KColumn *C );
     void removeColumn( KColumn *C );
 
+
+  protected: //
+    /** sets height of all lines and propagates this information to all columns
+      * doesn't update the content size
+      * @param NewLineHeight height in pixels
+      */
+    virtual void setLineHeight( KPixelY NewLineHeight );
+    /** sets the number of lines
+      * doesn't update the content size
+      * @param NewNoOfLines new number of lines to display
+      */
+    virtual void setNoOfLines( int NewNoOfLines );
 
   protected: // recalculations
     /** recalculates the positions of the columns and the total width */
