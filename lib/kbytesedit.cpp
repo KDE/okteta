@@ -114,7 +114,7 @@ void KBytesEdit::setData( char *D, int S, int RS, bool KM )
 int KBytesEdit::dataSize() const
 {
   KPlainBuffer *Buffer = dynamic_cast<KPlainBuffer *>(DataBuffer);
-  return Buffer ? Buffer->maxSize() : -1;
+  return Buffer ? Buffer->size() : -1;
 }
 
 
