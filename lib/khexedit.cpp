@@ -109,7 +109,11 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, WFla
   ActiveColumn = &charColumn();
   InactiveColumn = &valueColumn();
 
-  setEncoding( DefaultEncoding );
+  // set encoding
+  Codec = KCharCodec::createCodec( (KHE::KEncoding)DefaultEncoding );
+  valueColumn().setCodec( Codec );
+  charColumn().setCodec( Codec );
+  Encoding = DefaultEncoding;
 
   TabController = new KTabController( this, 0 );
   Navigator = new KNavigator( this, TabController );
@@ -385,11 +389,13 @@ void KHexEdit::setEncoding( KEncoding C )
   Codec = NC;
   Encoding = C;
 
+  pauseCursor();
   updateColumn( valueColumn() );
   updateColumn( charColumn() );
+  unpauseCursor();
 }
 
-
+// TODO: join with function above!
 void KHexEdit::setEncoding( const QString& EncodingName )
 {
   if( EncodingName == Codec->name() )
@@ -406,8 +412,10 @@ void KHexEdit::setEncoding( const QString& EncodingName )
   Codec = NC;
   Encoding = LocalEncoding; // TODO: add encoding no to every known codec
 
+  pauseCursor();
   updateColumn( valueColumn() );
   updateColumn( charColumn() );
+  unpauseCursor();
 }
 
 
