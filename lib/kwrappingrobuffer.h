@@ -48,6 +48,7 @@ class KWrappingROBuffer : public KReadOnlyBuffer
     virtual int insert( int Pos, const char*, int Length );
     virtual int remove( KSection S );
     virtual int replace( KSection S, const char*, int Length );
+    virtual int fill( const char FillChar, int, int );
 
     virtual void setModified( bool M );
 
@@ -73,6 +74,7 @@ inline bool KWrappingROBuffer::prepareRange( KSection ) const     { return true;
 inline int KWrappingROBuffer::insert( int, const char*, int )        { return 0; }
 inline int KWrappingROBuffer::remove( KSection )                     { return 0; }
 inline int KWrappingROBuffer::replace( KSection, const char*, int )  { return 0; }
+inline int KWrappingROBuffer::fill( const char , int, int )          { return 0; }
 
 inline void KWrappingROBuffer::setModified( bool M )  { Modified = M; }
 }

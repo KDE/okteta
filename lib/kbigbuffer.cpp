@@ -88,6 +88,10 @@ int KBigBuffer::replace( KSection /*Section*/, const char*, int /*Length*/ )
   return 0;
 }
 
+int KBigBuffer::fill( char /*FillChar*/, int /*Length*/, unsigned int /*Pos*/ )
+{
+  return 0;
+}
 
 
 int KBigBuffer::move( int /*DestPos*/, KSection /*SourceSection*/ ) { return 0; }

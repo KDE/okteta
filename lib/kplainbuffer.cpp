@@ -50,10 +50,10 @@ KPlainBuffer::KPlainBuffer( const char *D, unsigned int S )
 {
 }
 
-KPlainBuffer::KPlainBuffer( int MS )
- : Data( 0 ),
-   Size( 0 ),
-   RawSize( 0 ),
+KPlainBuffer::KPlainBuffer( int S, int MS )
+  : Data( S?new char[S]:0 ),
+   Size( S ),
+   RawSize( S ),
    MaxSize( MS ),
    KeepsMemory( false ),
    ReadOnly( true ),
@@ -77,61 +77,11 @@ int KPlainBuffer::insert( int Pos, const char* D, int Length )
   if( Pos > (int)Size )
     Pos = Size;
 
-  unsigned int NewSize = Size + Length;
-  // check if buffer does not get to big TODO: make algo simplier and less if else
-  if( MaxSize != -1 && NewSize > (unsigned int)MaxSize)
-  {
-    if( (int)Size == MaxSize )
-      return 0;
-    Length -= NewSize - MaxSize;
-    NewSize = MaxSize;
-  }
-  else if( KeepsMemory && NewSize > RawSize )
-  {
-    if( Size == RawSize )
-      return 0;
-    Length -= NewSize - RawSize;
-    NewSize = RawSize;
-  }
-
-  int BehindInsertPos = Pos + Length;
-  // raw array not big enough?
-  if( RawSize < NewSize )
-  {
-    // get new raw size
-    unsigned int ChunkSize = MinChunkSize;
-    // find chunk size where newsize fits into
-    while( ChunkSize < NewSize )
-      ChunkSize <<= 1;
-    // limit to max size
-    if( ChunkSize > MaxChunkSize )
-      ChunkSize = MaxChunkSize;
-    // find add size
-    unsigned int NewRawSize = ChunkSize;
-    while( NewRawSize<NewSize )
-      NewRawSize += ChunkSize;
-    // create new buffer
-    char *NewData = new char[NewRawSize];
-
-    // move old data to its (new) places
-    memcpy( NewData, Data, Pos );
-    memcpy( &NewData[BehindInsertPos], &Data[Pos], Size-Pos );
-
-    // remove old
-    delete [] Data;
-    // set new values
-    Data = NewData;
-    RawSize = NewRawSize;
-  }
-  else
-    // move old data to its (new) places
-    memmove( &Data[BehindInsertPos], &Data[Pos], Size-Pos );
+  Length = addSize( Length, Pos, true );
 
   // copy new data to its place
   memcpy( &Data[Pos], D, Length );
 
-  // set new values
-  Size = NewSize;
   kdDebug() << QString("after: Size: %1, RawSize: %2").arg(Size).arg(RawSize) << endl;
 
   Modified = true;
@@ -289,6 +239,24 @@ int KPlainBuffer::move( int DestPos, KSection SourceSection )
 }
 
 
+int KPlainBuffer::fill( const char FChar, int FillLength, unsigned int Pos )
+{
+  // nothing to fill
+  if( Pos >= Size )
+    return 0;
+
+  int LengthToEnd = Size - Pos;
+
+  if( FillLength < 0 )
+    FillLength = LengthToEnd;
+  else if( FillLength > LengthToEnd )
+    FillLength = addSize( FillLength, Pos, false );
+
+  memset( &Data[Pos], FChar, FillLength );
+  return FillLength;
+}
+
+
 int KPlainBuffer::find( const char* SearchString, int Length, KSection Section ) const  
 {
   Section.restrictEndTo( Size-1 );
@@ -308,3 +276,67 @@ int KPlainBuffer::find( const char* SearchString, int Length, KSection Section )
 }
 
 int KPlainBuffer::rfind( const char*, int /*Length*/, int /*Pos*/ ) const { return 0; }
+
+
+int KPlainBuffer::addSize( int AddSize, int SplitPos, bool SaveUpperPart )
+{
+  unsigned int NewSize = Size + AddSize;
+  // check if buffer does not get too big
+  if( MaxSize != -1 && (int)NewSize > MaxSize )
+  {
+    if( (int)Size == MaxSize )
+      return 0;
+    NewSize = MaxSize;
+    AddSize = NewSize - Size;
+  }
+  else if( KeepsMemory && NewSize > RawSize )
+  {
+    if( Size == RawSize )
+      return 0;
+    NewSize = RawSize;
+    AddSize = NewSize - Size;
+  }
+
+  int BehindSplitPos = SplitPos + AddSize;
+  // raw array not big enough?
+  if( RawSize < NewSize )
+  {
+    // get new raw size
+    unsigned int ChunkSize = MinChunkSize;
+    // find chunk size where newsize fits into
+    while( ChunkSize < NewSize )
+      ChunkSize <<= 1;
+    // limit to max size
+    if( ChunkSize > MaxChunkSize )
+      ChunkSize = MaxChunkSize;
+    // find add size
+    unsigned int NewRawSize = ChunkSize;
+    while( NewRawSize<NewSize )
+      NewRawSize += ChunkSize;
+    // create new buffer
+    char *NewData = new char[NewRawSize];
+
+    // move old data to its (new) places
+    memcpy( NewData, Data, SplitPos );
+    if( SaveUpperPart )
+      memcpy( &NewData[BehindSplitPos], &Data[SplitPos], Size-SplitPos );
+
+    // remove old
+    delete [] Data;
+    // set new values
+    Data = NewData;
+    RawSize = NewRawSize;
+  }
+  // old buffer kept
+  else
+  {
+    if( SaveUpperPart )
+      // move old data to its (new) places
+      memmove( &Data[BehindSplitPos], &Data[SplitPos], Size-SplitPos );
+  }
+
+  // set new values
+  Size = NewSize;
+
+  return AddSize;
+}

@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
- 
+
 #ifndef KHE_KDATABUFFER_H
 #define KHE_KDATABUFFER_H
 
@@ -73,13 +73,13 @@ class KHEXEDIT_EXPORT KDataBuffer
   public:
     virtual ~KDataBuffer();
 
-    
+
   public: // data access API
     /** locates working range 
-      * The idea behind is to tell buffer which range will be requested in the following time, 
+      * The idea behind is to tell buffer which range will be requested in the following time,
       * so that e.g. the corresponding pages will be loaded in advance
       * TODO: do we really need this? Where will this lead to real enhancements?
-      * @param Range  
+      * @param Range
       * @return @c true if successfull, @c false otherwise
       */
     virtual bool prepareRange( KSection Range ) const = 0;
@@ -97,30 +97,30 @@ class KHEXEDIT_EXPORT KDataBuffer
     virtual const char *dataSet( KSection Section ) const = 0;
     /** convenience function, same as above */
     const char *dataSet( int Offset, int Length ) const;
-    
+
     /** requests a single byte
       * if the offset is not valid the behaviout is undefined
       * @param Offset offset of the datum requested
       */
     virtual char datum( int Offset ) const = 0;
-    
-    /** 
-      * @return the size of the data 
+
+    /**
+      * @return the size of the data
       */
     virtual int size() const = 0;
 
-    
+
   public: // state read API
-    /** 
-      * @return @c true if the buffer can only be read, @c false if writing is allowed 
+    /**
+      * @return @c true if the buffer can only be read, @c false if writing is allowed
       */
     virtual bool isReadOnly() const;
-    /**      
+    /**
       * @return @c true if the buffer has been modified, @c false otherwise
       */
     virtual bool isModified() const = 0;
 
-    
+
   public: // modification API
     /** inserts bytes copied from the given source at Position. 
       * The original data beginnung at the position is moved 
@@ -132,7 +132,7 @@ class KHEXEDIT_EXPORT KDataBuffer
       * @return length of inserted data
       */
     virtual int insert( int Pos, const char* Source, int SourceLength );
-    
+
     /** removes beginning with position as much as possible
       * @param Section 
       * @return length of removed data
@@ -140,7 +140,7 @@ class KHEXEDIT_EXPORT KDataBuffer
     virtual int remove( KSection Section );
     /** convenience function, behaves as above */
     int remove( int Pos, int Length );
-    
+
     /** replaces as much as possible
       * @param DestSection
       * @param Source 
@@ -150,7 +150,7 @@ class KHEXEDIT_EXPORT KDataBuffer
     virtual int replace( KSection DestSection, const char* Source, int SourceLength ) = 0;
     /** convenience function, behaves as above */
     int replace( int Pos, int RemoveLength, const char* Source, int SourceLength );
-    
+
     /** moves a part of the data to a new position, while floating the other data around
       * when moving to a higher place the lentzh of the block must be taken into account
       * if the new positions extend beyond the buffers end the section is moved to the end.
@@ -160,24 +160,33 @@ class KHEXEDIT_EXPORT KDataBuffer
       */
     virtual int move( int DestPos, KSection SourceSection ) = 0;
 
-    /** sets the modified flag for the buffer 
-      * @param M 
+    /**
+     * fills the buffer with the FillChar. If the buffer is to small it will be extended as much as possible.
+     * @param FillChar char to use
+     * @param Length number of chars to fill. If Length is -1, the current buffer length is used.
+     * @param Pos position where the filling starts
+     * @return number of filled characters
+     */
+    virtual int fill( const char FillChar, int Length = -1, unsigned int Pos = 0 ) = 0;
+
+    /** sets the modified flag for the buffer
+      * @param M
       */
     virtual void setModified( bool M ) = 0;
 
 
   public: // service functions
-    /** copies the data of the section into a given array Dest. If the section extends the buffers range 
+    /** copies the data of the section into a given array Dest. If the section extends the buffers range
       * the section is limited to the buffer's end. If the section is invalid the behaviour is undefined.
       * @param Dest pointer to a char array large enough to hold the copied section
       * @param Source
-      * @return number of copied bytes 
+      * @return number of copied bytes
       */
     virtual int copyTo( char* Dest, KSection Source ) const;
     /** convenience function, behaves as above */
     int copyTo( char* Dest, int Pos, int n ) const;
 
-    
+
   public: // word API
     /** searches for the start of the word including the given index.
       * if no other nonwordchar preceds this is 0;
@@ -245,15 +254,15 @@ class KHEXEDIT_EXPORT KDataBuffer
 
     /** if Index is out of range the behaviour is undefined
       * @param Index
-      * @param CharType 
+      * @param CharType
       * @return @c true if the byte at position i is a char of type CharType 
       */
     bool isWordChar( int Index, KWordCharType CharType = Readable ) const;
 
     /** returns the section with a word around index.
       * if there is no word the section is empty
-      * @param Index     
-      * @param CharType 
+      * @param Index
+      * @param CharType
       * @return the section with a word around index.
       */
     virtual KSection wordSection( int Index, KWordCharType CharType = Readable  ) const;

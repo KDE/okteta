@@ -32,46 +32,46 @@ namespace KHE
 class KFixedSizeBuffer : public KDataBuffer
 {
   public:
+    /** creates a readonly buffer around the given data */
     KFixedSizeBuffer( char *D, int S, char FUC = '\0' );
+    /** creates a writeable buffer which is deleted at the end */
+    KFixedSizeBuffer( int S, char FUC = '\0' );
     virtual ~KFixedSizeBuffer();
 
   public: // KDataBuffer API
-    /** locates working range, returns false if failed */
-    virtual bool prepareRange( KSection Range );
-    /** expects pointer to memory, should be in prepared range */
+    virtual bool prepareRange( KSection Range ) const;
     virtual const char *dataSet( KSection S ) const;
-    /** */
     virtual char datum( int Offset ) const;
-    /***/
     virtual int size() const;
-    /** is the buffer changeable ?*/
     virtual bool isReadOnly() const;
-    /** has the buffer been modified? */
     virtual bool isModified() const;
 
-    /** inserts at Position */
     virtual int insert( int Pos, const char*, int Length );
-    /** removes beginning with position as much as possible, returns length of removed */
     virtual int remove( KSection Remove );
-    /** replaces as much as possible, returns length of substituted */
     virtual int replace( KSection Remove, const char*, int InputLength );
+    virtual int move( int DestPos, KSection SourceSection );
+    virtual int fill( const char FillChar, int Length = -1, unsigned int Pos = 0 );
 
     virtual void setModified( bool M = true );
 
-    /** searches beginning with byte at Pos, returns -1 if nothing found */
-    virtual int find( const char*, int Length, int Pos = 0 ) const;
-    /** searches backward beginning with byte at Pos, returns -1 if nothing found */
+    virtual int find( const char*KeyData, int Length, KSection Section ) const;
     virtual int rfind( const char*, int Length, int Pos = -1 ) const;
 
 /*     virtual int find( const QString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */
 
   public:
     void setReadOnly( bool RO = true );
+    int compare( const KDataBuffer &Other, KSection Range, unsigned int Pos = 0 );
+    int compare( const KDataBuffer &Other, int OtherPos, int Length, unsigned int Pos = 0 );
+    int compare( const KDataBuffer &Other );
+
+  public:
+    char *rawData() const;
 
   protected:
-    void move( int DestPos, int SourcePos, int Length );
+    void fmove( int DestPos, int SourcePos, int Length );
     void reset( int Pos, int Length );
-    void copy( int DestPos, const char *Source, int SourceLength );
+    void fcopy( int DestPos, const char *Source, int SourceLength );
 
   protected:
     /** */
@@ -84,10 +84,12 @@ class KFixedSizeBuffer : public KDataBuffer
     bool ReadOnly:1;
     /** */
     bool Modified:1;
+    /** */
+    bool AutoDelete:1;
 };
 
 
-inline bool KFixedSizeBuffer::prepareRange( KSection ) { return true; }
+inline bool KFixedSizeBuffer::prepareRange( KSection ) const { return true; }
 inline const char *KFixedSizeBuffer::dataSet( KSection S ) const { return &Data[S.start()]; }
 
 inline char KFixedSizeBuffer::datum( int Offset ) const { return Data[Offset]; }
@@ -99,6 +101,14 @@ inline bool KFixedSizeBuffer::isModified()   const { return Modified; }
 
 inline void KFixedSizeBuffer::setReadOnly( bool RO )  { ReadOnly = RO; }
 inline void KFixedSizeBuffer::setModified( bool M )   { Modified = M; }
+
+inline int KFixedSizeBuffer::compare( const KDataBuffer &Other )
+{ return compare( Other, KSection(0,Other.size()-1),0 ); }
+
+inline int KFixedSizeBuffer::compare( const KDataBuffer &Other, int OtherPos, int Length, unsigned int Pos )
+{ return compare( Other, KSection(OtherPos,Length),Pos ); }
+
+inline char *KFixedSizeBuffer::rawData() const { return Data; }
 
 }
 

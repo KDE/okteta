@@ -36,11 +36,11 @@ class KPlainBufferIterator : public KDataBufferIterator
 class KPlainBuffer : public KDataBuffer
 {
   friend class KPlainBufferIterator;
-  
+
   public:
     KPlainBuffer( char *D, unsigned int S, int RS = -1, bool KM = true );
     KPlainBuffer( const char *D, unsigned int S );
-    KPlainBuffer( int MS = -1 );
+    KPlainBuffer( int S=0, int MS = -1 );
     virtual ~KPlainBuffer();
 
   public: // KDataBuffer API
@@ -56,6 +56,7 @@ class KPlainBuffer : public KDataBuffer
     virtual int remove( KSection Remove );
     virtual int replace( KSection Remove, const char*, int InputLength );
     virtual int move( int DestPos, KSection SourceSection );
+    virtual int fill( const char FillChar, int Length = -1, unsigned int Pos = 0 );
 
     virtual void setModified( bool M = true );
 
@@ -77,6 +78,15 @@ class KPlainBuffer : public KDataBuffer
     int maxSize() const;
     /** returns whether the memory of the byte array is kept */
     bool keepsMemory() const;
+
+  protected:
+    /** resizes the buffer, if possible, saving the data and splitting the data, if demanded
+     * @param AddSize additional size the buffer should grow
+     * @param SplitPos if -1 does not split
+     * @param SaveUpperPart true if upper part should be copied into new buffer
+     * @return additional size the buffer has grown
+     */
+    int addSize( int AddSize, int SplitPos = -1, bool SaveUpperPart = true );
 
   protected:
     /** */
