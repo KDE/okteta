@@ -44,33 +44,29 @@ class KRange
     bool operator==( const KRange &R ) const { return Start == R.Start && End == R.End; }
 
   public: // modification access
-    /** sets the first and the last index of the section's range */
+    /** sets the first and the last index of the range */
     void set( T S, T E ) { Start = S; End = E; }
-    /** sets the first index of the section's range */
+    /** sets the first index of the range */
     void setStart( T S )  { Start = S; }
-    /** sets the last index of the section's range */
+    /** sets the last index of the range */
     void setEnd( T E )    { End = E; }
-    /** sets the section to null */
+    /** sets the range to null */
     void unset()           { Start = End = null(); }
-    /** restricts the section to Limit. If one of both is invalid the behaviour is undefined */
+    /** restricts the range to Limit. If one of both ranges is invalid the behaviour is undefined */
     void restrictTo( const KRange &Limit )
     { if( Start < Limit.start() ) Start = Limit.start(); if( End > Limit.end() ) End = Limit.end(); }
-    /** restricts the section's start to Limit. If the section is invalid the behaviour is undefined */
+    /** restricts the start to Limit. If the range is invalid the behaviour is undefined */
     void restrictStartTo( T Limit )  { if( Start < Limit ) Start = Limit; }
-    /** restricts the section's end to Limit. If the section is invalid the behaviour is undefined */
+    /** restricts the end to Limit. If the range is invalid the behaviour is undefined */
     void restrictEndTo( T Limit )    { if( End > Limit ) End = Limit; }
-    /** extends the section to Limit. If one of both is invalid the behaviour is undefined */
+    /** extends the range to Limit. If one of both is invalid the behaviour is undefined */
     void extendTo( const KRange &Limit )
     { if( Start > Limit.start() ) Start = Limit.start(); if( End < Limit.end() ) End = Limit.end(); }
-    /** extends the section's start to Limit. If the section is invalid the behaviour is undefined */
+    /** extends the start to Limit. If the range is invalid the behaviour is undefined */
     void extendStartTo( T Limit )  { if( Start > Limit ) Start = Limit; }
-    /** extends the section's end to Limit. If the section is invalid the behaviour is undefined */
+    /** extends the end to Limit. If the range is invalid the behaviour is undefined */
     void extendEndTo( T Limit )    { if( End < Limit ) End = Limit; }
-    /** moves the section defined by a new start. If the section is invalid the behaviour is undefined */
-    void moveToStart( T S ) { End += S - Start; Start = S; }
-    /** moves the section defined by a new start. If the section is invalid the behaviour is undefined */
-    void moveToEnd( T E )   { Start += E - End; End = E; }
-    /** moves the section by D. If the section is invalid the behaviour is undefined */
+    /** moves the range by D. If the range is invalid the behaviour is undefined */
     void moveBy( T D )      { Start += D; End += D; }
 
   public: // value access
@@ -83,31 +79,31 @@ class KRange
   public: // logic access
     /** returns true if Value is covered */
     bool includes( T Value )     const { return Value <= End && Value >= Start; }
-    /** returns true if section is before index. if section is invalid the behaviour is undefined */
+    /** returns true if range is before index. if range is invalid the behaviour is undefined */
     bool endsBefore( T Value )   const { return End < Value; }
-    /** returns true if section is behind index. if section is invalid the behaviour is undefined */
+    /** returns true if range is behind index. if range is invalid the behaviour is undefined */
     bool startsBehind( T Value ) const { return Start > Value; }
-    /** returns true is the section starts before index. If the section is invalid the behaviour is undefined */
+    /** returns true is the range starts before index. If the range is invalid the behaviour is undefined */
     bool startsBefore( T Value ) const { return Start < Value; }
-    /** returns true is the section end later then index. If the section is invalid the behaviour is undefined */
+    /** returns true is the range end later then index. If the range is invalid the behaviour is undefined */
     bool endsBehind( T Value )   const { return End > Value; }
 
-    /** returns true is the section covers R. If one of both is invalid the behaviour is undefined */
+    /** returns true is the range covers R. If one of both is invalid the behaviour is undefined */
     bool includes( const KRange &R )     const { return End >= R.End && Start <= R.Start; }
-    /** returns true is the section ends before R starts. If one of both is invalid the behaviour is undefined */
+    /** returns true is the range ends before R starts. If one of both is invalid the behaviour is undefined */
     bool endsBefore( const KRange &R )   const { return End < R.Start; }
-    /** returns true is the section starts later than R ends. If one of both is invalid the behaviour is undefined */
+    /** returns true is the range starts later than R ends. If one of both is invalid the behaviour is undefined */
     bool startsBehind( const KRange &R ) const { return Start > R.End; }
-    /** returns true is the section starts prior than R. If one of both is invalid the behaviour is undefined */
+    /** returns true is the range starts prior than R. If one of both is invalid the behaviour is undefined */
     bool startsBefore( const KRange &R ) const { return Start < R.Start; }
-    /** returns true is the section ends later than R. If one of both is invalid the behaviour is undefined */
+    /** returns true is the range ends later than R. If one of both is invalid the behaviour is undefined */
     bool endsBehind( const KRange &R )   const { return End > R.End; }
-    /** returns true is the section shares at least one index with R. If one of both is invalid the behaviour is undefined */
+    /** returns true is the range shares at least one index with R. If one of both is invalid the behaviour is undefined */
     bool overlaps( const KRange &R ) const { return Start <= R.End && End >= R.Start; }
 
-    /** returns true if the section covers at least one index */
+    /** returns true if the range covers at least one index */
     bool isValid() const { return Start != null() && Start <= End; }
-    /** returns true if the section has not been set */
+    /** returns true if the range has not been set */
     bool isEmpty() const { return Start == null() && End == null(); }
 
 

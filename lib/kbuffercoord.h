@@ -35,6 +35,7 @@ namespace KHE
 class KBufferCoord
 {
   public:
+    /** creates a coord with 0,0 */
     KBufferCoord();
     KBufferCoord( int P, int L );
     KBufferCoord( int Index, int LineWidth, bool /*dummy*/ );
@@ -43,20 +44,20 @@ class KBufferCoord
     ~KBufferCoord();
 
 
-  public: // logic 
+  public: // logic
     bool operator==( const KBufferCoord &c ) const;
     bool operator!=( const KBufferCoord &c ) const;
     bool operator<( const KBufferCoord &c ) const;
     bool operator<=( const KBufferCoord &c ) const;
     bool operator>( const KBufferCoord &c ) const;
     bool operator>=( const KBufferCoord &c ) const;
-    
-    /** tests if the coord is prior in the same line than the given coord. 
+
+    /** tests if the coord is prior in the same line than the given coord.
      * If at least one of both is invalid the result is undefined.
      * @return true if the pos is left to the pos of C and both are in the same line, otherwise false.
      */
     bool isPriorInLineThan( const KBufferCoord &C ) const;
-    /** tests if the coord is later in the same line than the given coord. 
+    /** tests if the coord is later in the same line than the given coord.
      * If at least one of both is invalid the result is undefined.
      * @return true if the pos is right to the pos of C and both are in the same line, otherwise false 
      */
@@ -71,8 +72,8 @@ class KBufferCoord
     bool isBehindLineStart() const;
     /** @return true if the pos is smaller than MaxPos, otherwise false */
     bool isBeforeLineEnd( int MaxPos ) const;
-    
-    /** calculates the index the coord is at with a given line width 
+
+    /** calculates the index the coord is at with a given line width
      * If the coord is invalid the result is undefined.
      * @param LineWidth given width of line
      * @return index the coord is at 
@@ -91,7 +92,7 @@ class KBufferCoord
     void setPos( int P );
     /** sets the line */
     void setLine( int L );
-    
+
     /** moves the coord one position to the left. If the coord is invalid the result is undefined. */
     void goLeft();
     /** moves the coord a given number of positions to the left. 
@@ -107,7 +108,7 @@ class KBufferCoord
     void goCLeft( int MaxPos );
     /** moves the coord one position to the right. If the coord is invalid the result is undefined. */
     void goRight();
-    /** moves the coord a given number of positions to the right. If the coord is invalid the result is undefined. 
+    /** moves the coord a given number of positions to the right. If the coord is invalid the result is undefined.
      * @param P number of positions
      */
     void goRight( unsigned int P );
@@ -127,14 +128,14 @@ class KBufferCoord
       * if the line is the same as that of the given coord to the position of it. 
       * If one or more of the coords is invalid the behaviour is undefined.
       * @param C a possible line start coord
-      */   
+      */
     void goLineStart( const KBufferCoord &C );
     /** sets the position to the given pos or 
       * if the line is the same as that of the given coord to the position of that. 
       * If one or more of the coords is invalid the behaviour is undefined.
       * @param L last position in normal line
       * @param C a possible line end coord
-      */   
+      */
     void goLineEnd( int L, const KBufferCoord &C );
     /** moves the coord 1 lines upwards. There is no check whether the first line is overstepped. */
     void goUp();
