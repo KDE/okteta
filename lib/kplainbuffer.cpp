@@ -14,9 +14,10 @@
  *                                                                         *
  ***************************************************************************/
 
-
+//#include <kdebug.h>
 // c specific
 #include <string.h>
+#include <stdlib.h>
 // lib specific
 #include "kplainbuffer.h"
 
@@ -200,6 +201,75 @@ int KPlainBuffer::replace( KSection Remove, const char* D, int InputLength )
 
   Modified = true;
   return InputLength;
+}
+
+
+int KPlainBuffer::move( int DestPos, KSection SourceSection )
+{
+  // check all parameters
+  if( SourceSection.start() >= Size || SourceSection.width() == 0 
+      || DestPos > Size || SourceSection.start() == DestPos ) 
+    return SourceSection.start();
+
+  SourceSection.restrictEndTo( Size-1 );
+  bool ToRight = DestPos > SourceSection.start();
+  int MovedLength = SourceSection.width();
+  int DisplacedLength = ToRight ?  DestPos - SourceSection.end()-1 : SourceSection.start() - DestPos;
+
+  // find out section that is smaller
+  int SmallPartLength, LargePartLength, SmallPartStart, LargePartStart, SmallPartDest, LargePartDest;
+  // moving part is smaller?
+  if( MovedLength < DisplacedLength )
+  {
+    SmallPartStart = SourceSection.start();
+    SmallPartLength = MovedLength;
+    LargePartLength = DisplacedLength;
+    // moving part moves right?
+    if( ToRight )
+    {
+      SmallPartDest = DestPos - MovedLength;
+      LargePartStart = SourceSection.end()+1;
+      LargePartDest = SourceSection.start();
+    }
+    else
+    {
+      SmallPartDest = DestPos;
+      LargePartStart = DestPos;
+      LargePartDest = DestPos + MovedLength;
+    }
+  }
+  else
+  {
+    LargePartStart = SourceSection.start();
+    LargePartLength = MovedLength;
+    SmallPartLength = DisplacedLength;
+    // moving part moves right?
+    if( ToRight )
+    {
+      LargePartDest = DestPos - MovedLength;
+      SmallPartStart = SourceSection.end()+1;
+      SmallPartDest = SourceSection.start();
+    }
+    else
+    {
+      LargePartDest = DestPos;
+      SmallPartStart = DestPos;
+      SmallPartDest = DestPos + MovedLength;
+    }
+  }
+  
+  // copy smaller part to tempbuffer
+  char *Temp = new char[SmallPartLength];
+  memcpy( Temp, &Data[SmallPartStart], SmallPartLength );
+  
+  // move the larger part
+  memmove( &Data[LargePartDest], &Data[LargePartStart], LargePartLength );
+  
+  // copy smaller part to its new dest
+  memcpy( &Data[SmallPartDest], Temp, SmallPartLength );
+  delete [] Temp;
+  
+  return MovedLength < DisplacedLength ? SmallPartDest : LargePartDest;
 }
 
 

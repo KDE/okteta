@@ -14,6 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
+//#include <kdebug.h>
 
 // c specific
 #include <string.h>
@@ -148,7 +149,9 @@ QByteArray KBufferDrag::encodedData( const char *Format ) const
 
 bool KBufferDrag::canDecode( const QMimeSource* Source )
 {
-  return( Source->provides(OctetStream) /*|| Source->provides(PlainText)*/ );
+  bool c =( Source->provides(OctetStream) /*|| Source->provides(PlainText)*/ );
+  return c;
+//  return( Source->provides(OctetStream) /*|| Source->provides(PlainText)*/ );
 }
 
 

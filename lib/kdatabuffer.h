@@ -114,6 +114,15 @@ class KDataBuffer
     virtual int replace( KSection DestSection, const char* Source, int SourceLength ) = 0;
     /** convenience function, behaves as above */
     int replace( int Pos, int RemoveLength, const char* Source, int SourceLength );
+    
+    /** moves a part of the data to a new position, while floating the other data around
+      * when moving to a higher place the lentzh of the block must be taken into account
+      * if the new positions extend beyond the buffers end the section is moved to the end.
+      * @param DesPos position of the data where the section should be moved behind
+      * @param SourceSection data section to be moved
+      * @return new pos of moved data or old, if failed
+      */
+    virtual int move( int DestPos, KSection SourceSection ) = 0;
 
     /** sets the modified flag for the buffer 
       * @param M 

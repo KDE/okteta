@@ -38,31 +38,21 @@ class KPlainBuffer : public KDataBuffer
     virtual ~KPlainBuffer();
 
   public: // KDataBuffer API
-    /** locates working range, returns false if failed */
     virtual bool prepareRange( KSection Range ) const;
-    /** expects pointer to memory, should be in prepared range */
     virtual const char *dataSet( KSection S ) const;
-    /** */
     virtual char datum( int Offset ) const;
-    /***/
     virtual int size() const;
-    /** is the buffer changeable ?*/
     virtual bool isReadOnly() const;
-    /** has the buffer been modified? */
     virtual bool isModified() const;
 
-    /** inserts at Position */
     virtual int insert( int Pos, const char*, int Length );
-    /** removes beginning with position as much as possible, returns length of removed */
     virtual int remove( KSection Remove );
-    /** replaces as much as possible, returns length of inserted */
     virtual int replace( KSection Remove, const char*, int InputLength );
+    virtual int move( int DestPos, KSection SourceSection );
 
     virtual void setModified( bool M = true );
 
-    /** searches beginning with byte at Pos, returns -1 if nothing found */
     virtual int find( const char*, int Length, int Pos = 0 ) const;
-    /** searches backward beginning with byte at Pos, returns -1 if nothing found */
     virtual int rfind( const char*, int Length, int Pos = -1 ) const;
 
 /*     virtual int find( const QString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */

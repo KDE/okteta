@@ -404,6 +404,7 @@ class KHexEdit : public KColumnsView
     bool hasChanged( const KCoordRange &VisibleRange, KCoordRange *ChangedRange ) const;
     /** copies the actual edit value to the databuffer and updates the coding string */
     void syncEditedByte();
+    void handleInternalDrag( QDropEvent *e );
 
   protected:
     /** recalcs all dependant values with the actual NoOfBytesPerLine  */

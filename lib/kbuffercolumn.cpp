@@ -463,7 +463,7 @@ void KBufferColumn::paintPositions( QPainter *P, int Line, KSection Pos )
       paintMarking( P, PositionsPart, IndizesPart.start(), MarkingFlag );
 
     }
-    else if( Selection.includes(IndizesPart.start()) )
+    else if( Selection.includes(IndizesPart.start()) )    
     {
       if( Selection.startsBehind(IndizesPart.start()) )
         SelectionFlag |= StartsBefore;

@@ -14,6 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
+ 
 //#include <kdebug.h>
 
 // c specific
@@ -119,9 +120,11 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, WFla
   viewport()->installEventFilter( this );
   installEventFilter( this );
 
-  connect( CursorBlinkTimer, SIGNAL(timeout()), this, SLOT(blinkCursor()));
+  connect( CursorBlinkTimer, SIGNAL(timeout()), this, SLOT(blinkCursor()) );
   connect( ScrollTimer,      SIGNAL(timeout()), this, SLOT(autoScrollTimerDone()) );
   connect( DragStartTimer,   SIGNAL(timeout()), this, SLOT(startDrag()) );
+  
+  viewport()->setAcceptDrops( true );
 }
 
 
@@ -2282,28 +2285,36 @@ void KHexEdit::handleMouseMove( const QPoint& Point ) // handles the move of the
 
 void KHexEdit::startDrag()
 {
+  // reset states
   MousePressed = false;
   InDoubleClick = false;
   DragStartPossible = false;
 
+  // create data
   QDragObject *Drag = dragObject( true, viewport() );
   if( !Drag )
     return;
 
+  // will we only copy the data?
   if( isReadOnly() || OverWrite )
     Drag->dragCopy();
-  else if( Drag->drag() && QDragObject::target() != this && QDragObject::target() != viewport() )
-    removeSelectedData();
+  // or is this left to the user and he choose to move?
+  else if( Drag->drag() )
+    // Not inside this widget itself?
+    if( QDragObject::target() != this && QDragObject::target() != viewport() )
+      removeSelectedData();
 }
 
 
 void KHexEdit::contentsDragEnterEvent( QDragEnterEvent *e )
 {
+  // interesting for this widget?
   if( isReadOnly() || !KBufferDrag::canDecode(e) )
   {
     e->ignore();
     return;
   }
+  
   e->acceptAction();
   InDnD = true;
 }
@@ -2311,24 +2322,25 @@ void KHexEdit::contentsDragEnterEvent( QDragEnterEvent *e )
 
 void KHexEdit::contentsDragMoveEvent( QDragMoveEvent *e )
 {
-  // is this content for us?
+  // is this content still interesting for us? 
   if( isReadOnly() || !KBufferDrag::canDecode(e) )
   {
     e->ignore();
     return;
   }
+  
   // let text cursor follow mouse
   pauseCursor( true );
-
   placeCursor( e->pos() );
-
   unpauseCursor();
+  
   e->acceptAction();
 }
 
 
 void KHexEdit::contentsDragLeaveEvent( QDragLeaveEvent * )
 {
+  // bye... and thanks for all the cursor movement...
   InDnD = false;
 }
 
@@ -2336,44 +2348,88 @@ void KHexEdit::contentsDragLeaveEvent( QDragLeaveEvent * )
 
 void KHexEdit::contentsDropEvent( QDropEvent *e )
 {
+  // after drag enter and move check one more time
   if( isReadOnly() )
     return;
 
+  // leave state
   InDnD = false;
   e->acceptAction();
-  if( !KBufferDrag::canDecode(e) )
+  
+  if( !KBufferDrag::canDecode(e) ) //TODO: why do we acept the action still?
     return;
-
-  bool IsInternalDrag = e->source() == this || e->source() == viewport();
-
-  int InsertIndex = BufferCursor->realIndex();
-  if( IsInternalDrag && BufferRanges->hasSelection() )
-  {
-    KSection Selection = BufferRanges->selection();
-    if( Selection.includes(InsertIndex) )
-      InsertIndex = Selection.start();
-    else if( Selection.endsBefore(InsertIndex) && e->action() == QDropEvent::Move )
-      InsertIndex = InsertIndex - Selection.width() + 1;
-  }
-
-  if( IsInternalDrag && e->action() == QDropEvent::Move )
-    removeSelectedData();
+   
+  // is this an internal dnd?
+  if( e->source() == this || e->source() == viewport() )
+    handleInternalDrag( e );
   else
-    viewport()->setCursor( isReadOnly() ? arrowCursor : ibeamCursor );
-
-  BufferRanges->removeSelection();
-
-  pauseCursor();
-
-  pasteFromSource( e );
-
-  BufferCursor->gotoIndex( InsertIndex );
-
-  unpauseCursor();
-
+  {
+   //BufferRanges->removeSelection(); 
+    pasteFromSource( e ); 
+  }
+  
   // emit appropriate signals.
   emit selectionChanged();
   emit cursorPositionChanged( BufferCursor->index() );
+}
+
+
+void KHexEdit::handleInternalDrag( QDropEvent *e )
+{
+  // stop ui
+  pauseCursor();
+    
+  // get drag origin
+  KSection Selection = BufferRanges->selection();
+  int InsertIndex = BufferCursor->realIndex();
+    
+  // is this a move?    
+  if( e->action() == QDropEvent::Move )
+  {
+    // ignore the copy hold in the event but only move 
+    int NewIndex = DataBuffer->move( InsertIndex, Selection );
+    if( NewIndex != Selection.start() )
+    {
+      BufferCursor->gotoCIndex( NewIndex+Selection.width() );
+      BufferRanges->addChangedRange( KSection(QMIN(InsertIndex,Selection.start()), QMAX(InsertIndex,Selection.start())+Selection.width()) );
+    }
+  }
+  // is a copy
+  else
+  {
+    // get data  
+    QByteArray Data;
+    if( KBufferDrag::decode(e,Data) && !Data.isEmpty() )
+    {    
+      if( OverWrite )
+      {
+        KSection Section( InsertIndex, Data.size(), false );
+        Section.restrictEndTo( BufferLayout->length()-1 );
+        if( Section.isValid() && !BufferCursor->isBehind() )
+        {
+          int NoOfReplaced = DataBuffer->replace( Section, Data.data(), Section.width() );
+          BufferCursor->gotoNextByte( NoOfReplaced );
+          BufferRanges->addChangedRange( Section );
+        }
+      }
+      else
+      {
+        int NoOfInserted = DataBuffer->insert( InsertIndex, Data.data(), Data.size() );
+        updateLength();
+        if( NoOfInserted > 0 )
+        {
+          BufferCursor->gotoCIndex( InsertIndex + NoOfInserted );
+          BufferRanges->addChangedRange( KSection(InsertIndex,DataBuffer->size()-1) );
+        }
+      }    
+    }
+  }
+  BufferRanges->removeSelection();
+  repaintChanged();
+  ensureCursorVisible();
+         
+  // open ui
+  unpauseCursor();    
 }
 
 
