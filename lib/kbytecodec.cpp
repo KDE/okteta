@@ -381,7 +381,7 @@ bool KByteCodec::addToDecimal( unsigned char *Byte, unsigned char Digit )
     if( B < 26 )
     {
       B *= 10;
-      if( (255-B) > Digit )
+      if( (255-B) >= Digit )
       {
         B += Digit;
         *Byte = B;
