@@ -14,7 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
- 
+//#include <kdebug.h>
+
 // c specific
 #include <stdlib.h>
 #include <limits.h>
@@ -30,8 +31,7 @@
 #ifndef QT_ONLY
 #include <kglobalsettings.h>
 #endif
-//#include <kapplication.h>
-// app specific
+// lib specific
 #include "kdatabuffer.h"
 #include "koffsetcolumn.h"
 #include "kvaluecolumn.h"
@@ -77,6 +77,8 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, WFla
 //    Modified( false ),
    OverWriteOnly( false ),
    OverWrite( true ),
+   MousePressed( false ),
+   InDoubleClick( false ),
    InDnD( false ),
    DragStartPossible( false ),
    CursorPaused( false ),
@@ -177,7 +179,9 @@ void KHexEdit::setOverwriteMode( bool OM )
 
 void KHexEdit::setDataBuffer( KDataBuffer *B )
 {
-  pauseCursor();
+  //pauseCursor();
+  InEditMode = false;
+  CursorPaused = true;
 
   DataBuffer = B;
   valueColumn().set( DataBuffer );
@@ -1309,6 +1313,7 @@ void KHexEdit::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
 
 void KHexEdit::updateColumn( KColumn &Column )
 {
+  //kdDebug() << "updateColumn\n";
   updateContents( Column.x(), 0, Column.width(), totalHeight() );
 }
 

@@ -18,7 +18,7 @@
 #ifndef KCOORDRANGE_H
 #define KCOORDRANGE_H
 
-
+// lib specific
 #include "krange.h"
 #include "kbuffercoord.h"
 #include "ksection.h"

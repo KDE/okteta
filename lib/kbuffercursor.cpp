@@ -15,10 +15,9 @@
  ***************************************************************************/
 
 
-// #include <iostream>
-#include <kdebug.h>
+//#include <kdebug.h>
 
-// app specific
+// lib specific
 #include "kbufferlayout.h"
 #include "kbuffercursor.h"
 

@@ -15,10 +15,11 @@
  ***************************************************************************/
 
 
-// #include <iostream>
+//#include <kdebug.h>
 
+// qt specific
 #include <qpainter.h>
-
+// lib specific
 #include "kcolumn.h"
 #include "kcolumnsview.h"
 
@@ -150,13 +151,14 @@ void KColumnsView::paintEmptyArea( QPainter *P, int cx ,int cy, int cw, int ch)
   // finally draw the rectangles (transformed as needed)
   QMemArray<QRect> Rectangles = Region.rects();
   const QBrush &Brush = backgroundBrush();
-  for( int i=0; i<(int)Rectangles.count(); ++i ) 
+  for( int i=0; i<(int)Rectangles.count(); ++i )
     P->fillRect( Rectangles[i], Brush );
 }
- 
+
 
 void KColumnsView::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
 {
+  //kdDebug() << "drawContents(" << cx<<","<<cw<<"#"<<cy<<","<<ch<<")\n";
   // calculate affected lines
   int FirstLine = lineAt( cy );
 
@@ -195,7 +197,7 @@ void KColumnsView::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
       while( true )
       {
         Paint.end();
-         P->drawPixmap( cx, y, LineBuffer, cx, 0, cw, LineHeight ); // bitBlt directly impossible: lack of real coord
+        P->drawPixmap( cx, y, LineBuffer, cx, 0, cw, LineHeight ); // bitBlt directly impossible: lack of real coord
 
         // copy to screen
 //        bitBlt( viewport(), cx - contentsX(), y - contentsY(),

@@ -16,7 +16,7 @@
 
 // qt specific
 #include "qpainter.h"
-// app specific
+// lib specific
 #include "kcolumnsview.h"
 #include "koffsetcolumn.h"
 
@@ -74,7 +74,7 @@ void KOffsetColumn::setFormat( KOffsetFormat::KFormat F )
   PrintFunction = KOffsetFormat::printFunction( Format );
 
   recalcX();
-}  
+}
 
 void KOffsetColumn::setMetrics( KPixelX DW, KPixelY DBL )
 {

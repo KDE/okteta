@@ -15,8 +15,6 @@
  ***************************************************************************/
 
 
-// #include <iostream>
-
 #include "kbufferlayout.h"
 
 using namespace KHE;

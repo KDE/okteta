@@ -17,7 +17,7 @@
 
 // c specific
 #include <string.h>
-// app specific
+// lib specific
 #include "kbordercoltextexport.h"
 
 using namespace KHE;

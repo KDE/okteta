@@ -14,15 +14,16 @@
  *                                                                         *
  ***************************************************************************/
 
- 
+
 #ifndef KCOLUMNSVIEW_H
 #define KCOLUMNSVIEW_H
 
+// qt specific
 #include <qptrlist.h>
 #include <qwidget.h>
 #include <qpixmap.h>
 #include <qscrollview.h>
-
+// lib specific
 #include "kadds.h"
 #include "ksection.h" // TODO: think about moving this out of the public API
 

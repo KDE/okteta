@@ -30,7 +30,7 @@ class KOffsetColTextExport : public KColTextExport
   public:
     KOffsetColTextExport( const KOffsetColumn *OC );
 
-  public: // API
+  public: // KColTextExport API
     void printFirstLine( char **T, int Line ) const;
     void printNextLine( char **T ) const;
     /** tells how much chars per line are needed */

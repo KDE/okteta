@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
- 
+
 #ifndef KBYTESEDIT_H
 #define KBYTESEDIT_H
 
@@ -22,7 +22,7 @@
 #include "khexedit.h"
 
 
-namespace KHE 
+namespace KHE
 {
 
 class KDataBuffer;
@@ -134,8 +134,6 @@ class KBytesEdit : public KHexEdit
     /** sets whether the memory given by setData or in the constructor should be kept on resize
       */
     void setKeepsMemory( bool KM = true );
-    /** switches the array */
-    void resetData( char *D, int S, bool Repaint );
 
     /** repaint the indizes from i1 to i2 */
     void repaintRange( int i1, int i2 );

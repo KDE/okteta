@@ -14,19 +14,17 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <iostream>
-using namespace std;
+
 // c specific
 #include <string.h>
-// c++ speciofic
-#include <iostream>
-// app specific
+// lib specific
 #include "kbufferdrag.h"
 #include "kbordercoltextexport.h"
 #include "koffsetcoltextexport.h"
 #include "kvaluecoltextexport.h"
 #include "kcharcoltextexport.h"
 
+using namespace std;
 using namespace KHE;
 
 const char *KBufferDrag::OctetStream = "application/octet-stream";

@@ -33,7 +33,7 @@ template<class T>
 class KRange
 {
   public:
-    KRange( T S, T E ) { Start = S; End = E; }
+    KRange( T S, T E ) : Start( S ), End( E )  {}
     KRange() : Start( null() ), End( null() )  {}
     ~KRange() {}
 

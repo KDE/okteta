@@ -15,8 +15,6 @@
  ***************************************************************************/
 
 
-#include <iostream>
-
 #include "kcoordrangelist.h"
 
 using namespace KHE;
@@ -35,7 +33,6 @@ void KCoordRangeList::addCoordRange( KCoordRange NewCoordRange )
 {
   if( !NewCoordRange.isValid() )
     return;
-//   std::cout << "addCoordRange: ";
   // we try to insert it by ascending indizes
   // if sections are overlapping we combine them
   iterator S = begin();
@@ -44,7 +41,6 @@ void KCoordRangeList::addCoordRange( KCoordRange NewCoordRange )
     // is next CoordRange before the new CoordRange?
     if( (*S).endsBefore(NewCoordRange) )
     {
-//       std::cout << "inserting before " << (*S).start().pos()<<"/"<<(*S).start().line()<<"-"<<(*S).end().pos()<<"/"<<(*S).end().line() << std::endl;
       // put the new before it
       insert( S, NewCoordRange );
       return;
@@ -53,7 +49,6 @@ void KCoordRangeList::addCoordRange( KCoordRange NewCoordRange )
     // does the next CoordRange overlap?
     if( (*S).overlaps(NewCoordRange) )
     {
-//       std::cout << "overlapping with " << (*S).start().pos()<<"/"<<(*S).start().line()<<"-"<<(*S).end().pos()<<"/"<<(*S).end().line();
       // Start of the combined sections is the smaller one
       NewCoordRange.extendStartTo( (*S).start() );
       // next we search all the overlapping sections and keep the highest end index
@@ -63,7 +58,6 @@ void KCoordRangeList::addCoordRange( KCoordRange NewCoordRange )
       {
         if( !(*LS).overlaps(NewCoordRange) )
           break;
-//         std::cout << "overlapping with " << (*LS).start().pos()<<"/"<<(*LS).start().line()<<"-"<<(*LS).end().pos()<<"/"<<(*LS).end().line();
         End = (*LS).end();
       }
       // the higher end is the end of the combined CoordRange
@@ -72,8 +66,6 @@ void KCoordRangeList::addCoordRange( KCoordRange NewCoordRange )
       S = erase( S, LS );
       // and instead insert the combined one
       insert( S, NewCoordRange );
-//       std::cout << "inserting now " << NewCoordRange.start().pos()<<"/"<<NewCoordRange.start().line()
-//                 <<"-"<<NewCoordRange.end().pos()<<"/"<<NewCoordRange.end().line()<< std::endl;
       return;
     }
   }
@@ -82,5 +74,4 @@ void KCoordRangeList::addCoordRange( KCoordRange NewCoordRange )
   if( S == end() )
     // add it at the end
     append( NewCoordRange );
- //     std::cout << "appending"<< std::endl;
 }

@@ -14,10 +14,10 @@
  *                                                                         *
  ***************************************************************************/
 
- 
+
 // c specific
 #include <stdio.h>
-// app specific
+// lib specific
 #include "koffsetformat.h"
 
 using namespace KHE;

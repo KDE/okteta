@@ -14,10 +14,10 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <iostream>
+
 // c specific
 #include <string.h>
-// app specific
+// lib specific
 #include "kbufferlayout.h"
 #include "kvaluecolumn.h"
 #include "kvaluecoltextexport.h"

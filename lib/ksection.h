@@ -56,6 +56,7 @@ class KSection : public KRange<int>
     int width() const;
 };
 
+
 inline KSection::KSection( int SI, int EI ) : KRange<int>(SI,EI) {}
 inline KSection::KSection( int SI, int W, bool ) : KRange<int>(SI,SI+W-1) {}
 inline KSection::KSection()  {}

@@ -14,10 +14,10 @@
  *                                                                         *
  ***************************************************************************/
 
- 
+
 // c specific
 #include <string.h>
-// app specific
+// lib specific
 #include "kplainbuffer.h"
 
 using namespace KHE;

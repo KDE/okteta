@@ -14,10 +14,10 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <iostream>
+
 // c specific
 #include <string.h>
-// app specific
+// lib specific
 #include "kbuffercolumn.h"
 #include "kbufferlayout.h"
 #include "kbuffercoltextexport.h"
@@ -67,8 +67,6 @@ KBufferColTextExport::KBufferColTextExport( const KBufferColumn* BufferColumn, c
 
   NoOfCharsPerLine = N;
 }
-
-
 
 
 KBufferColTextExport::~KBufferColTextExport()

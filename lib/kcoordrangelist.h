@@ -18,8 +18,9 @@
 #ifndef KCOORDRANGELIST_H
 #define KCOORDRANGELIST_H
 
+// qt specific
 #include <qvaluelist.h>
-
+// lib specific
 #include "kcoordrange.h"
 
 namespace KHE {

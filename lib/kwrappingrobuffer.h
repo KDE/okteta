@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
- 
+
 #ifndef KWRAPPINGROBUFFER_H
 #define KWRAPPINGROBUFFER_H
 
@@ -31,7 +31,7 @@ class KWrappingROBuffer : public KReadOnlyBuffer
 {
   public:
     static const int NothingFound = -1;
-  
+
   public:
     KWrappingROBuffer();
     KWrappingROBuffer( const char* D, int L );
@@ -70,8 +70,8 @@ inline bool KWrappingROBuffer::isModified() const { return Modified; }
 
 inline bool KWrappingROBuffer::prepareRange( KSection ) const     { return true; }
 
-inline int KWrappingROBuffer::insert( int, const char*, int )      { return 0; }
-inline int KWrappingROBuffer::remove( KSection )                 { return 0; }
+inline int KWrappingROBuffer::insert( int, const char*, int )        { return 0; }
+inline int KWrappingROBuffer::remove( KSection )                     { return 0; }
 inline int KWrappingROBuffer::replace( KSection, const char*, int )  { return 0; }
 
 inline void KWrappingROBuffer::setModified( bool M )  { Modified = M; }

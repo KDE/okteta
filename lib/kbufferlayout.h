@@ -18,7 +18,7 @@
 #ifndef KBUFFERLAYOUT_H
 #define KBUFFERLAYOUT_H
 
-
+// lib specific
 #include "kcoordrange.h"
 #include "ksection.h"
 

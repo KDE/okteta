@@ -20,7 +20,7 @@
 
 // qt specific
 #include <qdragobject.h>
-// app specific
+// lib specific
 #include "kcoordrange.h"
 #include "kcoltextexport.h"
 

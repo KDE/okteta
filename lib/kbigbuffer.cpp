@@ -17,9 +17,7 @@
 
 // c specific
 #include <stdlib.h>
-// c++ specific
-//#include <iostream>
-// app specific
+// lib specific
 #include "kbigbuffer.h"
 
 using namespace KHE;

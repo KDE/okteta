@@ -15,12 +15,11 @@
  ***************************************************************************/
 
 
-// c++ specififc
-//#include <iostream>
+//#include <kdebug.h>
+
 // qt specific
 #include <qpainter.h>
-// app specific
-//#include "khexedit.h"
+// lib specific
 #include "kcolumnsview.h"
 #include "kbuffercursor.h"
 #include "kbuffercolumn.h"
@@ -61,6 +60,7 @@ KBufferColumn::KBufferColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L
 KBufferColumn::~KBufferColumn()
 {
   delete [] PosX;
+  delete [] PosRightX;
 }
 
 
@@ -384,6 +384,8 @@ void KBufferColumn::paintFirstLine( QPainter *P, KPixelX cx, KPixelX cw, int Fir
   PaintPositions = posOfRelX( PaintX, PaintW );
   PaintLine = FirstLine;
 
+//  kdDebug() << "paintFirstLine:"<<cx<<","<<cw<<"|" <<PaintX<<","<<PaintW << ")\n";
+
 //  paintPositions( P, PaintLine++, PaintPositions );
   paintLine( P, PaintLine++ );
 }
@@ -398,7 +400,7 @@ void KBufferColumn::paintNextLine( QPainter *P )
 
 void KBufferColumn::paintLine( QPainter *P, int Line ) // TODO: could be removed???
 {
-// std::cout << "paintLine line: "<<Line<<" Start: "<<PaintPositions.start()<<" End: "<<PaintPositions.end() << std::endl;
+//  kdDebug() << "paintLine line: "<<Line<<" Start: "<<PaintPositions.start()<<" End: "<<PaintPositions.end() << "\n";
   // no bytes to paint?
 //   if( !Layout->hasContent(Line) )
 //     return;
@@ -421,7 +423,6 @@ void KBufferColumn::paintPositions( QPainter *P, int Line, KSection Pos )
   KSection Positions( Layout->firstPos(KBufferCoord( Pos.start(), Line )),
                       Layout->lastPos( KBufferCoord( Pos.end(),  Line )) );
 
-// std::cout << "paintLine line: "<<Line<<" Start: "<<PaintPositions.start()<<" End: "<<PaintPositions.end() << std::endl;
   // no bytes to paint?
   if( !Layout->hasContent(Line) )
     return;
@@ -436,8 +437,6 @@ void KBufferColumn::paintPositions( QPainter *P, int Line, KSection Pos )
   bool HasMarking = Ranges->hasMarking();
   bool HasSelection = Ranges->hasSelection();
 
-//   std::cout << "paintLine "<<Line<<": Pos "<<Positions.start() << "-" << Positions.end() << ", Indizes "<<Index << "-" << LastIndex << ": ";
-
   while( Positions.isValid() )
   {
     KSection PositionsPart( Positions );  // set of positions to paint next
@@ -447,14 +446,12 @@ void KBufferColumn::paintPositions( QPainter *P, int Line, KSection Pos )
     {
       // erhebe nächste Markierung im Bereich
       HasMarking = isMarked( IndizesPart, &Marking, &MarkingFlag );
-//       if( HasMarking ) std::cout <<"found Marking: "<<Marking.start() <<"-"<<Marking.end()<<" ";
     }
     // falls Selection nicht mehr gebuffert und noch zu erwarten
     if( HasSelection && Selection.endsBefore(IndizesPart.start()) )
     {
       // erhebe nächste Selection im Bereich
       HasSelection = isSelected( IndizesPart, &Selection, &SelectionFlag );
-//       if( HasSelection ) std::cout <<"found Selection: "<<Selection.start() <<"-"<<Selection.end()<<" ";
     }
 
     if( Marking.start() == IndizesPart.start() )
@@ -464,7 +461,7 @@ void KBufferColumn::paintPositions( QPainter *P, int Line, KSection Pos )
       if( PositionsPart.end() == Layout->lastPos(Line) )   MarkingFlag &= ~EndsLater;
       if( PositionsPart.start() == Layout->firstPos(Line)) MarkingFlag &= ~StartsBefore;
       paintMarking( P, PositionsPart, IndizesPart.start(), MarkingFlag );
-//        std::cout << "marking: "<<PositionsPart.start() << "-" << PositionsPart.end() << "("<<MarkingFlag<<"), ";
+
     }
     else if( Selection.includes(IndizesPart.start()) )
     {
@@ -481,7 +478,6 @@ void KBufferColumn::paintPositions( QPainter *P, int Line, KSection Pos )
       if( PositionsPart.start() == Layout->firstPos(Line) ) SelectionFlag &= ~StartsBefore;
 
       paintSelection( P, PositionsPart, IndizesPart.start(), SelectionFlag );
-//        std::cout << "selection: "<<PositionsPart.start() << "-" << PositionsPart.end() << "("<<SelectionFlag<<"), ";
     }
     else
     {
@@ -493,13 +489,12 @@ void KBufferColumn::paintPositions( QPainter *P, int Line, KSection Pos )
 
       PositionsPart.setEndByWidth( IndizesPart.width() );
       paintPlain( P, PositionsPart, IndizesPart.start() );
-//        std::cout << "plain: "<<PositionsPart.start() << "-" << PositionsPart.end() << ", ";
     }
     Indizes.setStartBehind( IndizesPart );
     Positions.setStartBehind( PositionsPart );
   }
-//    std::cout << std::endl;
-  paintGrid( P, Positions );
+  // we don't paint grids as default, perhaps we never will though it works
+  // paintGrid( P, Positions ); // TODO: get some unmodified Positions (see three lines before)
 }
 
 

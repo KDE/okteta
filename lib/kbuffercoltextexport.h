@@ -18,6 +18,7 @@
 #ifndef KBUFFERCOLTEXTEXPORT_H
 #define KBUFFERCOLTEXTEXPORT_H
 
+// lib specific
 #include "kcoltextexport.h"
 #include "kcoordrange.h"
 

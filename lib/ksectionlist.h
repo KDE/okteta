@@ -18,8 +18,9 @@
 #ifndef KHEXEDITKSECTIONLIST_H
 #define KHEXEDITKSECTIONLIST_H
 
+// qt specific
 #include <qvaluelist.h>
-
+// lib specific
 #include "ksection.h"
 
 namespace KHE {

@@ -18,7 +18,7 @@
 #ifndef KOFFSETCOLUMN_H
 #define KOFFSETCOLUMN_H
 
-// app specific
+// lib specific
 #include "koffsetformat.h"
 #include "kcolumn.h"
 
@@ -35,7 +35,7 @@ class KOffsetColumn : public KColumn
     KOffsetColumn( KColumnsView *V, int FLO, int D, KOffsetFormat::KFormat F );
     virtual ~KOffsetColumn();
 
-  public:  // API
+  public:  // KColumn API
     virtual void paintFirstLine( QPainter *P, KPixelX cx, KPixelX cw, int FirstLine );
     virtual void paintNextLine( QPainter *P );
 

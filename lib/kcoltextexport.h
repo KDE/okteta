@@ -21,7 +21,10 @@
 
 namespace KHE
 {
-
+/**
+ * interface for the text export of columns
+ * @author Friedrich W. H. Kossebau <Friedrich.W.H@Kossebau.de>
+ */
 class KColTextExport
 {
   public: // API

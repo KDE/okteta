@@ -14,14 +14,14 @@
  *                                                                         *
  ***************************************************************************/
 
- 
+
 #ifndef KBIGBUFFER_H
 #define KBIGBUFFER_H
 
 // qt specific
 #include <qvaluevector.h>
 #include <qfile.h>
-// app specific
+// lib specific
 #include "kdatabuffer.h"
 
 namespace KHE {

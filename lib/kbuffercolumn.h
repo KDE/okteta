@@ -18,6 +18,7 @@
 #ifndef KBUFFERCOLUMN_H
 #define KBUFFERCOLUMN_H
 
+// lib specific
 #include "khe.h"
 #include "kdatabuffer.h"
 #include "kbytecodec.h"

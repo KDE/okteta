@@ -15,15 +15,14 @@
  ***************************************************************************/
 
 
-#include <iostream>
-
 #include "kbufferranges.h"
 
 
 using namespace KHE;
 
 KBufferRanges::KBufferRanges( KBufferLayout *L )
- : Layout( L )
+ : Modified( false ),
+   Layout( L )
 {
 }
 
@@ -74,7 +73,6 @@ void KBufferRanges::setSelectionStart( int StartIndex )
     addChangedRange( Selection );
 
   Selection.setStart( StartIndex );
-//   std::cout << "SS:" << StartIndex << std::endl;
 }
 
 
@@ -82,7 +80,6 @@ void KBufferRanges::setSelectionEnd( int EndIndex )
 {
   KSection OldSelection = Selection;
   Selection.setEnd( EndIndex );
-//   std::cout << "S:" << Selection.start() <<","<<Selection.end() << std::endl;
 
   // TODO: think about rather building a diff of the sections
   if( !OldSelection.isValid() )
@@ -258,11 +255,6 @@ void KBufferRanges::addChangedRange( KSection S )
 void KBufferRanges::addChangedRange( const KCoordRange &NewRange )
 {
   ChangedRanges.addCoordRange( NewRange );
-
-//   std::cout << "CRs: ";
-//   for( KCoordRangeList::iterator S=ChangedRanges.begin();S!=ChangedRanges.end(); ++S )
-//     std::cout << (*S).start().pos()<<"/"<<(*S).start().line() << "," << (*S).end().pos()<<"/"<<(*S).end().line() << "|";
-//   std::cout << std::endl;
 
   Modified = true;
 }

@@ -15,8 +15,7 @@
  ***************************************************************************/
 
 
-//#include <iostream>
-// app specific
+// lib specific
 #include "kbytecodec.h"
 
 using namespace KHE;

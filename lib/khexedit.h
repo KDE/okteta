@@ -20,7 +20,7 @@
 
 // qt specific
 #include <qclipboard.h>
-// app specific
+// lib specific
 // #include "khe.h"
 #include "kcolumnsview.h"
 

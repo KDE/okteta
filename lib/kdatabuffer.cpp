@@ -17,7 +17,7 @@
 
 // c specific
 #include <ctype.h>
-// app specific
+// lib specific
 #include "kdatabuffer.h"
 
 using namespace KHE;

@@ -15,11 +15,9 @@
  ***************************************************************************/
 
 
-// c++ specififc
-// #include <iostream>
 // qt specific
 #include <qpainter.h>
-// app specific
+// lib specific
 #include "kcolumnsview.h"
 #include "kbuffercursor.h"
 #include "kbufferlayout.h"

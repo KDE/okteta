@@ -14,10 +14,9 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <iostream>
 // c specific
 #include <string.h>
-// app specific
+// lib specific
 #include "kbufferlayout.h"
 #include "kcharcolumn.h"
 #include "kcharcoltextexport.h"

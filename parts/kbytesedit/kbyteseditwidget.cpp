@@ -21,9 +21,9 @@
 #include <klocale.h>
 #include <kgenericfactory.h>
 #include <kapplication.h>
-// app specific
-#include "kbyteseditwidget.h"
+// lib specific
 #include "kbytesedit.h"
+#include "kbyteseditwidget.h"
 
 
 KBytesEditWidget::KBytesEditWidget( QWidget *parent, const char *name, const QStringList & )
@@ -244,11 +244,6 @@ KBytesEditWidget::KEncoding KBytesEditWidget::encoding() const
 bool KBytesEditWidget::hasSelectedData() const
 {
   return BytesEdit->hasSelectedData();
-}
-
-void KBytesEditWidget::resetData( char *D, int S, bool Repaint )
-{
-  BytesEdit->resetData( D, S, Repaint );
 }
 
 

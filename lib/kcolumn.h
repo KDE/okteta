@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
- 
+
 #ifndef KCOLUMN_H
 #define KCOLUMN_H
 
@@ -36,18 +36,22 @@ class KColumnsView;
 
 class KColumn
 {
-//    friend class KColumnsView; 
+//    friend class KColumnsView;
   public:
     KColumn( KColumnsView *V );
     virtual ~KColumn() {}
 
 
-  public: // API to be reimplemented
+  public: // API to be reimplemented in the subclasses
     /** Before an update of the columns view each column that intersects with the area to be painted
       * will be called with this function. As often multiple lines of a column are affected
       * for each lines the same values (like first and last char positions) might be calculated.
       * This function enables a one-time-calculation for such data that must be stored in some
       * class members, though.
+      * @param P painter variable
+      * @param cx
+      * @param cw
+      * @param FirstLine no of the first of the range of lines to paint
       */
     virtual void paintFirstLine( QPainter *P, KPixelX cx, KPixelX cw, int FirstLine );
     /** the actual painting call for a column's line.
@@ -117,7 +121,7 @@ inline void KColumn::setVisible( bool V )       { Visible = V; }
 inline void KColumn::setLineHeight( KPixelY H ) { LineHeight = H; }
 
 inline bool KColumn::overlaps( KPixelX x1, KPixelX x2 ) const
-{ return m_X <= x2 || m_RightX >= x1; }
+{ return m_X <= x2 && m_RightX >= x1; }
 
 }
 

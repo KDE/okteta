@@ -15,8 +15,6 @@
  ***************************************************************************/
 
 
-#include <iostream>
-
 #include "ksectionlist.h"
 
 using namespace KHE;
@@ -35,7 +33,7 @@ void KSectionList::addSection( KSection NewSection )
 {
   if( !NewSection.isValid() )
     return;
-    
+
   // we try to insert it by ascending indizes
   // if sections are overlapping we combine them
   iterator S = begin();

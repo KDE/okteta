@@ -15,10 +15,11 @@
  ***************************************************************************/
 
 
-// app specific
+// lib specific
 #include "kplainbuffer.h"
 #include "kbytesedit.h"
 #include "kbufferranges.h"
+#include "kbuffercursor.h"
 
 using namespace KHE;
 
@@ -69,18 +70,6 @@ char *KBytesEdit::data() const
 {
   KPlainBuffer *Buffer = dynamic_cast<KPlainBuffer *>(DataBuffer);
   return Buffer ? Buffer->data() : 0L;
-}
-
-
-void KBytesEdit::resetData( char *D, int S, bool Repaint )
-{
-  setData( D, S );
-
-// TODO: think about a way to not reset everything
-
-
-  if( Repaint )
-    repaint();
 }
 
 
@@ -142,8 +131,16 @@ bool KBytesEdit::isAutoDelete() const { return AutoDelete; }
 
 void KBytesEdit::repaintRange( int i1, int i2 )
 {
+  bool ChangeCursor = !(CursorPaused) && KSection(i1,i2).includes( BufferCursor->index() );
+  if( ChangeCursor )
+    pauseCursor();
+
   BufferRanges->addChangedRange( i1, i2 );
+
   repaintChanged();
+
+  if( ChangeCursor )
+    unpauseCursor();
 }
 
 

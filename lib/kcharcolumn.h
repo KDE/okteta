@@ -20,7 +20,7 @@
 
 // qt specific
 #include <qstring.h>
-// app specific
+// lib specific
 #include "kbuffercolumn.h"
 
 class QPainter;

@@ -18,8 +18,9 @@
 #ifndef KBYTESEDITWIDGET_H
 #define KBYTESEDITWIDGET_H
 
+// qt specific
 #include <qwidget.h>
-// app specific
+// kde specific
 #include <khexedit/byteseditinterface.h>
 #include <khexedit/valuecolumninterface.h>
 #include <khexedit/charcolumninterface.h>
@@ -84,8 +85,6 @@ class KBytesEditWidget : public QWidget, public KHE::BytesEditInterface,
     virtual bool isOverwriteOnly() const;
     virtual bool isReadOnly() const;
     virtual bool isModified() const;
-    /** switches the array */
-    virtual void resetData( char *D, int S, bool Repaint );
     /** repaint the indizes from i1 to i2 */
     virtual void repaintRange( int i1, int i2 );
 
@@ -184,4 +183,3 @@ class KBytesEditWidget : public QWidget, public KHE::BytesEditInterface,
 };
 
 #endif
-

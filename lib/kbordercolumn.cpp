@@ -14,9 +14,10 @@
  *                                                                         *
  ***************************************************************************/
 
-  
-#include <qpainter.h>
 
+// qt specific
+#include <qpainter.h>
+// lib specific
 #include "kcolumnsview.h"
 #include "kbordercolumn.h"
 
@@ -44,6 +45,7 @@ void KBorderColumn::paintLine( QPainter *P )
   {
     KColumn::paintBlankLine( P );
 
+    P->setPen( Qt::black );
     P->drawLine( LineX, 0, LineX, LineHeight-1 ) ;
   }
 }
