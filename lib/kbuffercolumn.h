@@ -46,6 +46,8 @@ const int NoByteFound = -1;
 class KBufferColumn : public KColumn
 {
   public:
+    enum KFrameStyle { Frame, Left, Right };
+  public:
     KBufferColumn( KColumnsView/*KHexEdit*/ *HE, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R );
     virtual ~KBufferColumn();
 
@@ -70,8 +72,9 @@ class KBufferColumn : public KColumn
     void paintByte( QPainter *P, int Index );
     /** paints the byte with background and a frame around.
       * @param Index Index of the byte to paint the frame for. If -1 a space is used as char.
+      * @param Style the style of the framing
       */
-    void paintFramedByte( QPainter *P, int Index );
+    void paintFramedByte( QPainter *P, int Index, KFrameStyle Style );
 
 
   public: // modification access

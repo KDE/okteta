@@ -1232,10 +1232,9 @@ void KHexEdit::paintInactiveCursor( bool CursorOn )
   pointPainterToCursor( Painter, inactiveColumn() );
   if( CursorOn )
   {
-//     if( OverWrite || InEditMode )
-      inactiveColumn().paintFramedByte( &Painter, Index );
-//     else
-//       inactiveColumn().paintFramedByte( &Painter, Index );
+    KBufferColumn::KFrameStyle Style = BufferCursor->isBehind()?KBufferColumn::Right:
+                                       (OverWrite||InEditMode)?KBufferColumn::Frame:KBufferColumn::Left;
+    inactiveColumn().paintFramedByte( &Painter, Index, Style );
   }
   else
     inactiveColumn().paintByte( &Painter, Index );

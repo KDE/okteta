@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
- 
+
 // c specific
 #include <ctype.h>
 // c++ specififc
@@ -33,6 +33,7 @@ using namespace KHE;
 
 static const unsigned int StartsBefore = 1;
 static const unsigned int EndsLater = 2;
+static char EmptyByte = ' ';
 
 static const int DefaultCursorWidth = 2;
 static const int DefaultByteSpacingWidth = 3;
@@ -608,7 +609,7 @@ void KBufferColumn::paintRange( QPainter *P, const QColor &Color, KSection Posit
 
 void KBufferColumn::paintByte( QPainter *P, int Index )
 {
-  char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : ' ';
+  char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : EmptyByte;
 
   const QColorGroup &CG = View->colorGroup();
   QColor Color = CG.text();
@@ -640,18 +641,23 @@ void KBufferColumn::paintByte( QPainter *P, int Index )
 }
 
 
-void KBufferColumn::paintFramedByte( QPainter *P, int Index )
+void KBufferColumn::paintFramedByte( QPainter *P, int Index, KFrameStyle FrameStyle )
 {
   paintByte( P, Index );
-  char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : ' ';
+  char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : EmptyByte;
   P->setPen( colorForByte(Byte) );
-  P->drawRect( 0, 0, ByteWidth, LineHeight );
+  if( FrameStyle == Frame )
+    P->drawRect( 0, 0, ByteWidth, LineHeight );
+  else if( FrameStyle == Left )
+    P->drawLine( 0, 0, 0, LineHeight-1 );
+  else
+    P->drawLine( ByteWidth-1,0,ByteWidth-1,LineHeight-1 );
 }
 
 
 void KBufferColumn::paintCursor( QPainter *P, int Index )
 {
-  char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : ' ';
+  char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : EmptyByte;
   P->fillRect( 0, 0, ByteWidth, LineHeight, QBrush(colorForByte(Byte),Qt::SolidPattern) );
 }
 
