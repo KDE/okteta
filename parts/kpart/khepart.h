@@ -72,7 +72,7 @@ class KHexEditPart : public KParts::ReadOnlyPart
     void slotSetShowUnprintable();
     void slotSetResizeStyle( int Style );
     void slotToggleOffsetColumn();
-    void slotToggleValueCharColumns();
+    void slotToggleValueCharColumns( int VisibleColunms );
 
   private:
     KHexEdit *HexEdit;
@@ -87,9 +87,7 @@ class KHexEditPart : public KParts::ReadOnlyPart
     // settings menu
     KSelectAction *ResizeStyleAction;
     KToggleAction *ShowOffsetColumnAction;
-    KRadioAction *ShowOnlyValueAction;
-    KRadioAction *ShowOnlyCharAction;
-    KRadioAction *ShowValueCharAction;
+    KSelectAction *ToggleColumnsAction;
 };
 
 }

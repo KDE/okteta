@@ -31,12 +31,6 @@ using namespace KHE;
 
 static const char RCFileName[] = "khexedit2partui.rc";
 
-static const char CodingGroupId[] =      "ValueCoding";
-static const char ResizeStyleGroupId[] = "ResizeStyle";
-static const char EncodingGroupId[] =    "CharEncoding";
-static const char ShowColumnsGroupId[] = "ShownColumns";
-
-
 KHexEditPart::KHexEditPart( QWidget *ParentWidget, const char *WidgetName,
                             QObject *Parent, const char *Name,
                             bool BrowserViewWanted )
@@ -71,7 +65,19 @@ KHexEditPart::~KHexEditPart()
 {
 }
 
-
+/*
+void KHexEditPart::setupTools( bool BrowserViewWanted )
+{
+  if( !BrowserViewWanted ) new KClipboardTool( this );
+  
+  new KZoomToolet( this );
+  new KSelectToolet( this );
+  new KHEValueCodingToolet( this );
+  new KHECharEncodingToolet( this );
+  new KHEResizeStyleToolet( this );
+  new KHEColumnToggleToolet( this );
+}
+*/
 void KHexEditPart::setupActions( bool BrowserViewWanted )
 {
   KActionCollection *AC = actionCollection();
@@ -114,16 +120,16 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
   ResizeStyleAction->setItems( List );
   connect( ResizeStyleAction, SIGNAL(activated(int)), this, SLOT(slotSetResizeStyle(int)) );
 
-  ShowOffsetColumnAction = new KToggleAction( i18n("&Offset Column"), 0, this, SLOT(slotToggleOffsetColumn()), AC, "settings_showoffsetcolumn" );
+  ShowOffsetColumnAction = new KToggleAction( i18n("&Line Offset"), Key_F11, this, SLOT(slotToggleOffsetColumn()), AC, "view_lineoffset" );
 
   // show buffer columns
-  ShowOnlyValueAction =  new KRadioAction( i18n("&Values Column"), 0, this, SLOT(slotToggleValueCharColumns()), AC, "settings_showonlyvalue" );
-  ShowOnlyCharAction =   new KRadioAction( i18n("&Chars Column"),  0, this, SLOT(slotToggleValueCharColumns()), AC, "settings_showonlychar" );
-  ShowValueCharAction = new KRadioAction( i18n("&Both Columns"),   0, this, SLOT(slotToggleValueCharColumns()), AC, "settings_showvaluechar" );
-
-  ShowOnlyValueAction->setExclusiveGroup( ShowColumnsGroupId );
-  ShowOnlyCharAction->setExclusiveGroup( ShowColumnsGroupId );
-  ShowValueCharAction->setExclusiveGroup( ShowColumnsGroupId );
+  ToggleColumnsAction = new KSelectAction( i18n("&Columns"), 0, AC, "togglecolumns" );
+  List.clear();
+  List.append( i18n("&Values Column") );
+  List.append( i18n("&Chars Column") );
+  List.append( i18n("&Both Columns") );
+  ToggleColumnsAction->setItems( List );
+  connect( ToggleColumnsAction, SIGNAL(activated(int)), this, SLOT(slotToggleValueCharColumns(int)) );
 
   fitActionSettings();
 
@@ -142,13 +148,7 @@ void KHexEditPart::fitActionSettings()
 
   ResizeStyleAction->setCurrentItem( (int)HexEdit->resizeStyle() );
 
-  const int Columns = HexEdit->visibleBufferColumns();
-  if( Columns == KHexEdit::ValueColumnId )
-    ShowOnlyValueAction->setChecked( true );
-  else if( Columns == KHexEdit::CharColumnId )
-    ShowOnlyCharAction->setChecked( true );
-  else //if( Columns == KHexEdit::ValueColumnId | KHexEdit::CharColumnId )
-    ShowValueCharAction->setChecked( true );
+  ToggleColumnsAction->setCurrentItem( (int)HexEdit->visibleBufferColumns()-1 );
 }
 
 
@@ -156,7 +156,8 @@ bool KHexEditPart::openFile()
 {
   Wrapping.open( m_file );
   HexEdit->setDataBuffer( &Wrapping );
-  HexEdit->moveCursor( KHexEdit::MoveHome );
+  HexEdit->setCursorPosition( 0 );
+  HexEdit->selectAll( false );
 
   return true;
 }
@@ -207,17 +208,9 @@ void KHexEditPart::slotSetEncoding( int Encoding )
   HexEdit->setEncoding( (KHexEdit::KEncoding)Encoding );
 }
 
-void KHexEditPart::slotToggleValueCharColumns()
+void KHexEditPart::slotToggleValueCharColumns( int VisibleColumns)
 {
-  int VisibleColumns;
-  if( ShowOnlyValueAction->isChecked() )
-    VisibleColumns = KHexEdit::ValueColumnId;
-  else if( ShowOnlyCharAction->isChecked() )
-    VisibleColumns = KHexEdit::CharColumnId;
-  else // if( ShowValueCharAction->isChecked() )
-    VisibleColumns = KHexEdit::ValueColumnId | KHexEdit::CharColumnId;
-
-  HexEdit->showBufferColumns( VisibleColumns );
+  HexEdit->showBufferColumns( VisibleColumns+1 );
 }
 
 #include "khepart.moc"
