@@ -44,7 +44,7 @@ class KByteCodec
       */
     typedef const unsigned char *(*decoding)( unsigned char *Char, const unsigned char *Digits );
     /** */
-    typedef bool (*adding)( unsigned char *Byte, unsigned char Digit );
+    typedef bool (*appending)( unsigned char *Byte, unsigned char Digit );
     /** */
     typedef void (*removingLastDigit)( unsigned char *Byte );
     /** */
@@ -71,7 +71,7 @@ class KByteCodec
     /** */
     static decoding decodingFunction( KCoding C );
     /** */
-    static adding addingFunction( KCoding C );
+    static appending appendingFunction( KCoding C );
     /** */
     static removingLastDigit removingLastDigitFunction( KCoding C );
     /** */
@@ -115,11 +115,11 @@ class KByteCodec
     static const unsigned char *fromDummy( unsigned char *Char, const unsigned char *Digits );
 
 
-    static bool addToHexadecimal( unsigned char *Byte, unsigned char Digit );
-    static bool addToDecimal( unsigned char *Byte, unsigned char Digit );
-    static bool addToOctal( unsigned char *Byte, unsigned char Digit );
-    static bool addToBinary( unsigned char *Byte, unsigned char Digit );
-    static bool addToDummy( unsigned char *Byte, unsigned char Digit );
+    static bool appendToHexadecimal( unsigned char *Byte, unsigned char Digit );
+    static bool appendToDecimal( unsigned char *Byte, unsigned char Digit );
+    static bool appendToOctal( unsigned char *Byte, unsigned char Digit );
+    static bool appendToBinary( unsigned char *Byte, unsigned char Digit );
+    static bool appendToDummy( unsigned char *Byte, unsigned char Digit );
 
     static void removeLastHexadecimalDigit( unsigned char *Byte );
     static void removeLastDecimalDigit( unsigned char *Byte );
@@ -154,7 +154,7 @@ class KByteCodec
     /** */
     static const decoding DecodingFunction[NoOfCodings];
     /** */
-    static const adding AddingFunction[NoOfCodings];
+    static const appending AppendingFunction[NoOfCodings];
     /** */
     static const removingLastDigit RemovingLastDigitFunction[NoOfCodings];
     /** */
@@ -184,8 +184,8 @@ inline KByteCodec::coding KByteCodec::shortCodingFunction( KCoding C )
 inline KByteCodec::decoding KByteCodec::decodingFunction( KCoding C )
 { return DecodingFunction[C]; }
 
-inline KByteCodec::adding KByteCodec::addingFunction( KCoding C )
-{ return AddingFunction[C]; }
+inline KByteCodec::appending KByteCodec::appendingFunction( KCoding C )
+{ return AppendingFunction[C]; }
 
 inline KByteCodec::removingLastDigit KByteCodec::removingLastDigitFunction( KCoding C )
 { return RemovingLastDigitFunction[C]; }

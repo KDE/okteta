@@ -58,7 +58,7 @@ bool KHexColumn::setCoding( KCoding C )
   CodingWidth = KByteCodec::codingWidth( Coding );
   DigitsFilledLimit = KByteCodec::digitsFilledLimit( Coding );
   CodingFunction = KByteCodec::codingFunction( Coding );
-  AddingFunction = KByteCodec::addingFunction( Coding );
+  AppendingFunction = KByteCodec::appendingFunction( Coding );
   RemovingLastDigitFunction = KByteCodec::removingLastDigitFunction( Coding );
 
   // recalculate depend sizes

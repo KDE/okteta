@@ -43,12 +43,12 @@ const KByteCodec::decoding KByteCodec::DecodingFunction[NoOfCodings] =
   KByteCodec::fromBinary,
   KByteCodec::fromDummy };
 
-const KByteCodec::adding KByteCodec::AddingFunction[NoOfCodings] =
-{ KByteCodec::addToHexadecimal,
-  KByteCodec::addToDecimal,
-  KByteCodec::addToOctal,
-  KByteCodec::addToBinary,
-  KByteCodec::addToDummy };
+const KByteCodec::appending KByteCodec::AppendingFunction[NoOfCodings] =
+{ KByteCodec::appendToHexadecimal,
+  KByteCodec::appendToDecimal,
+  KByteCodec::appendToOctal,
+  KByteCodec::appendToBinary,
+  KByteCodec::appendToDummy };
 
 const KByteCodec::removingLastDigit KByteCodec::RemovingLastDigitFunction[NoOfCodings] =
 { KByteCodec::removeLastHexadecimalDigit,
@@ -188,7 +188,7 @@ const unsigned char *KByteCodec::fromHexadecimal( unsigned char *Char, const uns
   unsigned char d = 0;
   do
   {
-    if( !addToHexadecimal(&C,*Digits) )
+    if( !appendToHexadecimal(&C,*Digits) )
       break;
 
     ++Digits;
@@ -210,7 +210,7 @@ const unsigned char *KByteCodec::fromDecimal( unsigned char *Char, const unsigne
   unsigned char d = 0;
   do
   {
-    if( !addToDecimal(&C,*Digits) )
+    if( !appendToDecimal(&C,*Digits) )
       break;
 
     ++Digits;
@@ -232,7 +232,7 @@ const unsigned char *KByteCodec::fromOctal( unsigned char *Char, const unsigned 
   unsigned char d = 0;
   do
   {
-    if( !addToOctal(&C,*Digits) )
+    if( !appendToOctal(&C,*Digits) )
       break;
 
     ++Digits;
@@ -254,7 +254,7 @@ const unsigned char *KByteCodec::fromBinary( unsigned char *Char, const unsigned
   unsigned char d = 0;
   do
   {
-    if( !addToBinary(&C,*Digits) )
+    if( !appendToBinary(&C,*Digits) )
       break;
 
     ++Digits;
@@ -356,7 +356,7 @@ bool KByteCodec::turnToDummyValue( unsigned char */*Digit*/ )
   return false;
 }
 
-bool KByteCodec::addToHexadecimal( unsigned char *Byte, unsigned char Digit )
+bool KByteCodec::appendToHexadecimal( unsigned char *Byte, unsigned char Digit )
 {
   if( turnToHexadecimalValue(&Digit) )
   {
@@ -373,7 +373,7 @@ bool KByteCodec::addToHexadecimal( unsigned char *Byte, unsigned char Digit )
 }
 
 
-bool KByteCodec::addToDecimal( unsigned char *Byte, unsigned char Digit )
+bool KByteCodec::appendToDecimal( unsigned char *Byte, unsigned char Digit )
 {
   if( turnToDecimalValue(&Digit) )
   {
@@ -381,7 +381,7 @@ bool KByteCodec::addToDecimal( unsigned char *Byte, unsigned char Digit )
     if( B < 26 )
     {
       B *= 10;
-      if( (255-B) >= Digit )
+      if( Digit <= 255-B )
       {
         B += Digit;
         *Byte = B;
@@ -393,7 +393,7 @@ bool KByteCodec::addToDecimal( unsigned char *Byte, unsigned char Digit )
 }
 
 
-bool KByteCodec::addToOctal( unsigned char *Byte, unsigned char Digit )
+bool KByteCodec::appendToOctal( unsigned char *Byte, unsigned char Digit )
 {
   if( turnToOctalValue(&Digit) )
   {
@@ -410,7 +410,7 @@ bool KByteCodec::addToOctal( unsigned char *Byte, unsigned char Digit )
 }
 
 
-bool KByteCodec::addToBinary( unsigned char *Byte, unsigned char Digit )
+bool KByteCodec::appendToBinary( unsigned char *Byte, unsigned char Digit )
 {
   if( turnToBinaryValue(&Digit) )
   {
@@ -427,7 +427,7 @@ bool KByteCodec::addToBinary( unsigned char *Byte, unsigned char Digit )
 }
 
 
-bool KByteCodec::addToDummy( unsigned char */*Byte*/, unsigned char /*Digit*/ )
+bool KByteCodec::appendToDummy( unsigned char */*Byte*/, unsigned char /*Digit*/ )
 {
   return false;
 }

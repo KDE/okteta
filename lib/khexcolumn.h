@@ -60,8 +60,9 @@ class KHexColumn : public KBufferColumn
     KPixelX binaryGapWidth()                 const;
     KCoding coding()                         const;
     int codingWidth()                        const;
-    KByteCodec::coding codingFunction()      const;
-    KByteCodec::adding addingFunction()      const;
+
+    KByteCodec::coding codingFunction()              const;
+    KByteCodec::appending appendingFunction()        const;
     KByteCodec::removingLastDigit removingFunction() const;
 
   public: // service
@@ -87,7 +88,7 @@ class KHexColumn : public KBufferColumn
     int CodingWidth;
     unsigned char DigitsFilledLimit;
     KByteCodec::coding CodingFunction;
-    KByteCodec::adding AddingFunction;
+    KByteCodec::appending AppendingFunction;
     KByteCodec::removingLastDigit RemovingLastDigitFunction;
 
     /** */
@@ -101,9 +102,10 @@ inline KPixelX KHexColumn::binaryGapWidth()             const { return BinaryGap
 inline int KHexColumn::codingWidth()                    const { return CodingWidth; }
 inline bool KHexColumn::digitsFilled( unsigned char V ) const { return V >= DigitsFilledLimit; }
 inline KCoding KHexColumn::coding()                     const { return Coding; }
-inline KByteCodec::coding KHexColumn::codingFunction()  const { return CodingFunction; }
-inline KByteCodec::adding KHexColumn::addingFunction()  const { return AddingFunction; }
-inline KByteCodec::removingLastDigit KHexColumn::removingFunction()      const { return RemovingLastDigitFunction; }
+
+inline KByteCodec::coding KHexColumn::codingFunction()              const { return CodingFunction; }
+inline KByteCodec::appending KHexColumn::appendingFunction()        const { return AppendingFunction; }
+inline KByteCodec::removingLastDigit KHexColumn::removingFunction() const { return RemovingLastDigitFunction; }
 
 }
 

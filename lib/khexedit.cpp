@@ -1345,7 +1345,7 @@ bool KHexEdit::handleByteEditKey( QKeyEvent *KeyEvent )
       {
         QByteArray D( 1 );
         D[0] = KeyEvent->ascii();
-        if( hexColumn().addingFunction()(&EditValue,D[0]) )
+        if( hexColumn().appendingFunction()(&EditValue,D[0]) )
         {
           syncEditedByte();
           if( EditModeByInsert && hexColumn().digitsFilled(EditValue) )
@@ -1572,7 +1572,7 @@ bool KHexEdit::handleLetter( QKeyEvent *KeyEvent )
     }
 
     EditValue = 0;
-    bool KeyValid = hexColumn().addingFunction()( &EditValue, D[0] );
+    bool KeyValid = hexColumn().appendingFunction()( &EditValue, D[0] );
     if( !KeyValid )
       return false;
 
