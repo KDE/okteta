@@ -42,20 +42,12 @@ KBytesEdit::KBytesEdit( QWidget *Parent, const char *Name, WFlags F )
  : KHexEdit( 0L, Parent, Name, F ),
    AutoDelete( false )
 {
+  setDataBuffer( new KPlainBuffer() );
 }
 
 KBytesEdit::~KBytesEdit()
 {
-  if( DataBuffer )
-  {
-    if( AutoDelete )
-    {
-      char *D = data();
-      if( D )
-        delete [] D;
-    }
-    delete DataBuffer;
-  }
+  clean();
 }
 
 void KBytesEdit::setReadOnly( bool RO )
@@ -99,13 +91,7 @@ void KBytesEdit::setData( char *D, int S, int RS, bool KM )
   {
     // take the settings
     NewBuffer->setReadOnly( DataBuffer->isReadOnly() );
-    if( AutoDelete )
-    {
-      char *D = data();
-      if( D )
-        delete [] D;
-    }
-    delete DataBuffer;
+    clean();
   }
   else
     NewBuffer->setReadOnly( isReadOnly() );
@@ -159,5 +145,21 @@ void KBytesEdit::repaintRange( int i1, int i2 )
   BufferRanges->addChangedRange( i1, i2 );
   repaintChanged();
 }
+
+
+void KBytesEdit::clean()
+{
+  if( DataBuffer )
+  {
+    if( AutoDelete )
+    {
+      char *D = data();
+      if( D )
+        delete [] D;
+    }
+    delete DataBuffer;
+  }
+}
+
 
 #include "kbytesedit.moc"

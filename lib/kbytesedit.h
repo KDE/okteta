@@ -52,7 +52,7 @@ class KBytesEditPrivate;
   *
   *@author Friedrich W. H. Kossebau
   */
-
+//TODO: give the bytes edit widget an empty buffer as default
 class KBytesEdit : public KHexEdit
 {
   Q_OBJECT
@@ -141,6 +141,8 @@ class KBytesEdit : public KHexEdit
     void repaintRange( int i1, int i2 );
 
   protected:
+    /** deletes the databuffer */
+    void clean();
 
 
   protected slots:
