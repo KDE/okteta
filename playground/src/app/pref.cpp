@@ -54,4 +54,3 @@ KHexEdit2PrefPageTwo::KHexEdit2PrefPageTwo(QWidget *parent)
 
     new QLabel(i18n("Add something here"), this);
 }
-#include "pref.moc"

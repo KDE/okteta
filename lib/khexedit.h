@@ -385,6 +385,16 @@ class KHexEdit : public KColumnsView
     KHexEdit &operator=( const KHexEdit & );
 };
 
+inline const KOffsetColumn& KHexEdit::offsetColumn() const { return *OffsetColumn; }
+inline const KBufferColumn& KHexEdit::hexColumn()    const { return *BufferColumn[0]; }
+inline const KBufferColumn& KHexEdit::textColumn()   const { return *BufferColumn[1]; }
+inline const KBufferColumn& KHexEdit::activeColumn() const { return *ActiveColumn; }
+
+inline KOffsetColumn& KHexEdit::offsetColumn() { return *OffsetColumn; }
+inline KBufferColumn& KHexEdit::hexColumn()    { return *BufferColumn[0]; }
+inline KBufferColumn& KHexEdit::textColumn()   { return *BufferColumn[1]; }
+inline KBufferColumn& KHexEdit::activeColumn() { return *ActiveColumn; }
+
 }
 
 #endif
