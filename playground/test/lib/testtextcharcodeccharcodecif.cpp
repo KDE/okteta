@@ -30,7 +30,7 @@ using namespace KHE;
 KTextCharCodecCharCodecIfTest::KTextCharCodecCharCodecIfTest(const QString &Name)
   : KCharCodecIfTest( "KTextCharCodecCharCodecIfTest" )
 {
-  CharCodec = KTextCharCodec::create(Name);
+  CharCodec = KTextCharCodec::createCodec(Name);
 }
 
 

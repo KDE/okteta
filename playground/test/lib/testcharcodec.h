@@ -1,5 +1,5 @@
 /***************************************************************************
-                          testtextcharcodec.h  -  description
+                          testcharcodec.h  -  description
                             -------------------
     begin                : Sa Jan 15 2005
     copyright            : (C) 2005 by Friedrich W. H. Kossebau
@@ -19,8 +19,8 @@
 #include <kde/test/slottest.h>
 
 
-#ifndef TEST_KTEXTCHARCODEC_H
-#define TEST_KTEXTCHARCODEC_H
+#ifndef TEST_KCHARCODEC_H
+#define TEST_KCHARCODEC_H
 
 class KInstance;
 
@@ -29,19 +29,18 @@ class KInstance;
  * @author Friedrich W. H. Kossebau <Friedrich.W.H@Kossebau.de>
  * @testfor KTextCharCodec
  */
-class KTextCharCodecTest : public KDE::Test::SlotTest
+class KCharCodecTest : public KDE::Test::SlotTest
 {
   Q_OBJECT
 
     KInstance *Instance;
 
   public:
-    KTextCharCodecTest();
-    virtual ~KTextCharCodecTest();
+    KCharCodecTest();
+    virtual ~KCharCodecTest();
 
   public slots:
-    void testCreateLocalCodec();
-    void testCreateCodec();
+    void testCodecNames();
 };
 
 #endif

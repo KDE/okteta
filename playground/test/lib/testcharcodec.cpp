@@ -1,5 +1,5 @@
 /***************************************************************************
-                          testtextcharcodec.cpp  -  description
+                          testcharcodec.cpp  -  description
                             -------------------
     begin                : Sa Jan 15 2005
     copyright            : (C) 2005 by Friedrich W. H. Kossebau
@@ -20,9 +20,8 @@
 #include <kde/test/testrunner.h>
 #include <kinstance.h>
 // test specific
-#include <codecs/ktextcharcodec.h>
-#include "testtextcharcodec.h"
-#include "testtextcharcodeccharcodecif.h"
+#include <kcharcodec.h>
+#include "testcharcodec.h"
 
 // namespaces
 using namespace KDE::Test;
@@ -35,62 +34,42 @@ static const int End = 15;
 static const int Width = End - Start + 1;
 
 
-KTextCharCodecTest::KTextCharCodecTest()
-  :  SlotTest( "KTextCharCodecTest" ) // TODO: replace this by using the object->className()
+KCharCodecTest::KCharCodecTest()
+  :  SlotTest( "KCharCodecTest" ) // TODO: replace this by using the object->className()
 {
   Instance = new KInstance("KTextCharCodecTest");
 }
 
-KTextCharCodecTest::~KTextCharCodecTest()
+KCharCodecTest::~KCharCodecTest()
 {
   delete Instance;
 }
 
 //---------------------------------------------------------------------------- Tests -----
 
-void KTextCharCodecTest::testCreateLocalCodec()
+
+void KCharCodecTest::testCodecNames()
 {
-  KTextCharCodec* Codec = KTextCharCodec::createLocalCodec();
-  KT_ASSERT( "createLocal", Codec != 0 );
-  delete Codec;
-}
+  QStringList List( KCharCodec::codecNames() );
 
-
-void KTextCharCodecTest::testCreateCodec()
-{
-  KTextCharCodec* Codec = KTextCharCodec::createCodec( "ISO8859-1" );
-  KT_ASSERT( "create ISO8859-1", Codec != 0 );
-  delete Codec;
-
-  Codec = KTextCharCodec::createCodec( "KOI8-R" );
-  KT_ASSERT( "create KOI8-R", Codec != 0 );
-  delete Codec;
-
-  Codec = KTextCharCodec::createCodec( "ISO8859-15" );
-  KT_ASSERT( "create ISO8859-15", Codec != 0 );
-  delete Codec;
-
-  Codec = KTextCharCodec::createCodec( "utf8" );
-  KT_ASSERT( "create utf8", Codec == 0 );
-
-  Codec = KTextCharCodec::createCodec( "NonexistingCode" );
-  KT_ASSERT( "create Latin1", Codec == 0 );
+  for( unsigned int i=0; i<List.size(); ++i )
+  {
+    const QString Name( List[i] );
+    KCharCodec* Codec = KCharCodec::createCodec( Name );
+    KT_ASSERT_EQUALS( "name exists", Codec->name(), Name );
+    delete Codec;
+  }
 }
 
 
 int main( int, char** )
 {
-  KTextCharCodecTest TextCharCodecTest;
-  KTextCharCodecCharCodecIfTest CharCodecIfTest1("ISO8859-1");
-  KTextCharCodecCharCodecIfTest CharCodecIfTest2("KOI8-R");
-
+  KCharCodecTest TextCharCodecTest;
   TestRunner Runner;
   Runner.add( &TextCharCodecTest );
-  Runner.add( &CharCodecIfTest1 );
-  Runner.add( &CharCodecIfTest2 );
 
   return Runner.run();
 }
 
 
-#include "testtextcharcodec.moc"
+#include "testcharcodec.moc"

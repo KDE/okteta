@@ -4,7 +4,7 @@ LIB_KTEST = $(top_builddir)/kdeutil/kde/test/libkdetest.la
 METASOURCES = AUTO
 
 check_PROGRAMS = testcoord testsection testplainbuffer testfixedsizebuffer \
-                 testtextcharcodec testebcdic1047charcodec
+                 testcharcodec testtextcharcodec testebcdic1047charcodec
 #check_PROGRAMS = testcoord testsection testplainbuffer testfixedsizebuffer
 #check_PROGRAMS = testplainbuffer testfixedsizebuffer
 
@@ -21,6 +21,10 @@ testcoord_LDADD = $(LIB_KHEXEDIT) $(LIB_KTEST)
 testsection_SOURCES = testsection.cpp
 testsection_LDFLAGS = $(all_libraries)
 testsection_LDADD = $(LIB_KHEXEDIT) $(LIB_KTEST)
+
+testcharcodec_SOURCES = testcharcodec.cpp
+testcharcodec_LDFLAGS = $(all_libraries)
+testcharcodec_LDADD = $(LIB_KHEXEDIT) $(LIB_KTEST)
 
 testtextcharcodec_SOURCES = testtextcharcodeccharcodecif.cpp testtextcharcodec.cpp
 testtextcharcodec_LDFLAGS = $(all_libraries)
@@ -43,4 +47,4 @@ KDE_CXXFLAGS = $(USE_EXCEPTIONS)
 INCLUDES = -I$(top_srcdir)/../kdeutils/khexedit/lib -I$(top_srcdir)/kdeutil $(all_includes)
 
 TESTS = testsection testcoord testfixedsizebuffer testplainbuffer \
-        testtextcharcodec testebcdic1047charcodec
+        testcharcodec testtextcharcodec testebcdic1047charcodec
