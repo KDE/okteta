@@ -15,6 +15,9 @@
  ***************************************************************************/
 
 
+//#include <kdebug.h> 
+ 
+// lib specific
 #include "kbufferranges.h"
 
 
@@ -35,6 +38,7 @@ KBufferRanges::~KBufferRanges()
 void KBufferRanges::reset()
 {
   Selection.cancel();
+  FirstWordSelection.unset();
   Marking.unset();
   ChangedRanges.clear();
 }
@@ -149,7 +153,7 @@ void KBufferRanges::removeSelection( int id )
     addChangedRange( Selection );
 
   Selection.cancel();
-  return;
+  FirstWordSelection.unset();
 }
 
 
@@ -275,3 +279,29 @@ void KBufferRanges::resetChangedRanges()
   ChangedRanges.clear();
   Modified = false;
 }
+
+
+void KBufferRanges::setFirstWordSelection( KSection Section )
+{
+  FirstWordSelection = Section;
+  setSelection( FirstWordSelection );
+}
+
+ void KBufferRanges::ensureWordSelectionForward( bool Forward )
+ {
+   // in the anchor not on the right side?
+   if( Selection.isForward() != Forward )
+   {
+     if( Forward )
+     {
+       setSelectionEnd( FirstWordSelection.start() );
+       Selection.setForward();
+     }
+     else
+     {
+       setSelectionEnd( FirstWordSelection.end()+1 );
+       Selection.setBackward();
+     }
+   }
+ }
+ 

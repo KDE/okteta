@@ -43,6 +43,10 @@ class KBufferRanges
     void setSelectionStart( int StartIndex );
     void setSelectionEnd( int StartIndex );
     void setSelection( KSection S );
+    /** */
+    void setFirstWordSelection( KSection S );
+    /** */
+    void ensureWordSelectionForward( bool Forward );
 
     /** removes marking and returns true if something changed */
     void removeMarking();
@@ -65,6 +69,7 @@ class KBufferRanges
     int selectionStart() const;
     int selectionEnd() const;
     KSection selection() const;
+    KSection firstWordSelection() const;
     int selectionLength() const;
     bool isModified() const;
 
@@ -73,6 +78,7 @@ class KBufferRanges
     bool hasMarking() const;
     bool selectionStarted() const;
     bool selectionJustStarted() const;
+    bool hasFirstWordSelection() const;
     bool selectionIncludes( int Index ) const;
     bool markingIncludes( int Index ) const;
     // TODO: next three are deprecated
@@ -91,6 +97,8 @@ class KBufferRanges
 
     KSection Marking;
     KSelection Selection;
+    /** memories first selected word on wordwise selection */
+    KSection FirstWordSelection;
 
     KCoordRangeList ChangedRanges;
 
@@ -103,12 +111,14 @@ inline int KBufferRanges::noOfSelections()  const { return 1; }
 inline int KBufferRanges::selectionStart()  const { return Selection.start(); }
 inline int KBufferRanges::selectionEnd()    const { return Selection.end(); }
 inline KSection KBufferRanges::selection()  const { return Selection; }
+inline KSection KBufferRanges::firstWordSelection()  const { return FirstWordSelection; }
 inline int KBufferRanges::selectionLength() const { return Selection.width(); }
 inline bool KBufferRanges::isModified()     const { return Modified; }
 
 inline bool KBufferRanges::hasSelection()             const { return Selection.isValid(); }
 inline bool KBufferRanges::selectionStarted()         const { return Selection.started(); }
 inline bool KBufferRanges::selectionJustStarted()     const { return Selection.justStarted(); }
+inline bool KBufferRanges::hasFirstWordSelection()    const { return FirstWordSelection.isValid(); }
 inline bool KBufferRanges::hasMarking()               const { return Marking.isValid(); }
 inline bool KBufferRanges::selectionIncludes( int Index ) const { return Selection.includes( Index ); }
 inline bool KBufferRanges::markingIncludes( int Index )   const { return Marking.includes( Index ); }
