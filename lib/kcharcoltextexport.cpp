@@ -21,9 +21,9 @@
 #include "kbufferlayout.h"
 #include "ktextcolumn.h"
 #include "ktextcoltextexport.h"
-#include "helper.h"
 
 using namespace KHE;
+
 
 KTextColTextExport::KTextColTextExport( const KTextColumn* TC, char *D, KCoordRange CR )
  : KBufferColTextExport( TC, D, CR, 1 ),

@@ -23,6 +23,7 @@
 #include "khexcoltextexport.h"
 #include "helper.h"
 
+
 using namespace KHE;
 
 KHexColTextExport::KHexColTextExport( const KHexColumn* HC, char *D, KCoordRange CR )
@@ -31,8 +32,6 @@ KHexColTextExport::KHexColTextExport( const KHexColumn* HC, char *D, KCoordRange
    CodingFunction( HC->codingFunction() )
 {
 }
-
-
 
 
 KHexColTextExport::~KHexColTextExport()

@@ -15,14 +15,11 @@
  ***************************************************************************/
 
  
-// c specific
-#include <ctype.h>
 // c++ specififc
 // #include <iostream>
 // qt specific
 #include <qpainter.h>
 // app specific
-//#include "khexedit.h"
 #include "kcolumnsview.h"
 #include "kbuffercursor.h"
 #include "kbufferlayout.h"
@@ -34,6 +31,7 @@ using namespace KHE;
 
 static const KCoding DefaultCoding = HexadecimalCoding;
 static const int DefaultBinaryGapWidth = 1;
+
 
 KHexColumn::KHexColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R )
  : KBufferColumn( CV, B, L, R ),
@@ -70,6 +68,7 @@ bool KHexColumn::setCoding( KCoding C )
     recalcX();
   return true;
 }
+
 
 bool KHexColumn::setBinaryGapWidth( KPixelX BGW )
 {

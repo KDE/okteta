@@ -15,8 +15,6 @@
  ***************************************************************************/
 
 
-// c specific
-#include <ctype.h>
 // c++ specififc
 //#include <iostream>
 // qt specific
@@ -37,6 +35,7 @@ static const unsigned int EndsLater = 2;
 static const char EmptyByte = ' ';
 
 static const int DefaultCursorWidth = 2;
+static const int DefaultByteSpacingWidth = 3;
 static const int DefaultGroupSpacingWidth = 9;
 static const int DefaultNoOfGroupedBytes = 4;
 

@@ -21,9 +21,13 @@
 #include "kbuffercolumn.h"
 #include "kbufferlayout.h"
 #include "kbuffercoltextexport.h"
-#include "helper.h"
+
 
 using namespace KHE;
+
+static const int DefaultTEByteSpacingWidth = 1;
+static const int TEGroupSpacingWidth = 3;
+
 
 KBufferColTextExport::KBufferColTextExport( const KBufferColumn* BufferColumn, char *D, KCoordRange CR, int ByteWidth )
  : Data( D ),
@@ -35,7 +39,7 @@ KBufferColTextExport::KBufferColTextExport( const KBufferColumn* BufferColumn, c
   // TODO: remove this hack and make it more general
   int ByteSpacingWidth = BufferColumn->byteSpacingWidth();
   if( ByteSpacingWidth > 0 )
-    ByteSpacingWidth = DefaultByteSpacingWidth;
+    ByteSpacingWidth = DefaultTEByteSpacingWidth;
 
   int SpacingTrigger = BufferColumn->noOfGroupedBytes()-1;
   if( SpacingTrigger < 0 )
@@ -53,13 +57,13 @@ KBufferColTextExport::KBufferColTextExport( const KBufferColumn* BufferColumn, c
     // is there a space behind the actual byte (if it is not the last)?
     if( gs == SpacingTrigger )
     {
-      N += GroupSpacingWidth;
+      N += TEGroupSpacingWidth;
       gs = -1;
     }
     else
       N += ByteSpacingWidth;
   }
-  N -= (gs==0)?GroupSpacingWidth:ByteSpacingWidth;
+  N -= (gs==0)?TEGroupSpacingWidth:ByteSpacingWidth;
 
   NoOfCharsPerLine = N;
 }

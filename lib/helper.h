@@ -1,19 +1,15 @@
 #ifndef KHEXEDIT_HELPER
 #define KHEXEDIT_HELPER
 
+// c specific
+#include <ctype.h>
+// qt specific
 #include <qcolor.h>
 
-static const int DefaultByteSpacingWidth = 1;
-static const int GroupSpacingWidth = 3;
-
+// temporary solution until syntax highlighting is implemented
 static inline QColor colorForByte( const char Byte )
 {
-  if( ispunct(Byte) )
-    return Qt::red;
-  else if( isprint(Byte) )
-    return Qt::black;
-  else
-    return Qt::blue;
+  return ispunct(Byte) ? Qt::red: isprint(Byte) ? Qt::black : Qt::blue;
 }
 
 #endif
