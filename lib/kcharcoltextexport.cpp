@@ -24,6 +24,8 @@
 
 using namespace KHE;
 
+static unsigned char TELowestPrintableChar = 32;
+
 
 KTextColTextExport::KTextColTextExport( const KTextColumn* TC, char *D, KCoordRange CR )
  : KBufferColTextExport( TC, D, CR, 1 ),
@@ -57,7 +59,7 @@ void KTextColTextExport::print( char **T ) const
     memset( e, ' ', t-e );
 
     unsigned char D = *Data;
-    *t = D>=32 ? D : SubstituteChar;
+    *t = D<TELowestPrintableChar ? SubstituteChar : D;
     e = t + 1;
   }
 

@@ -22,7 +22,6 @@
 // qt specific
 #include <qpainter.h>
 // app specific
-//#include "khexedit.h"
 #include "kcolumnsview.h"
 #include "kbuffercursor.h"
 #include "kbufferlayout.h"
@@ -31,9 +30,11 @@
 
 using namespace KHE;
 
-static KEncoding DefaultEncoding = LocalEncoding;
-static bool DefaultShowUnprintable = false;
-static QChar DefaultSubstituteChar = '.';
+static KEncoding DefaultEncoding =        LocalEncoding;
+static bool      DefaultShowUnprintable = false;
+static QChar     DefaultSubstituteChar =  '.';
+
+static unsigned char LowestPrintableChar = 32;
 
 KTextColumn::KTextColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R )
  : KBufferColumn( CV, B, L, R ),
@@ -53,7 +54,7 @@ KTextColumn::~KTextColumn()
 
 void KTextColumn::drawByte( QPainter *P, char Byte, const QColor &Color ) const
 {
-  QString BS = ( (unsigned char)Byte < 32 && !ShowUnprintable ) ?
+  QString BS = ( (unsigned char)Byte < LowestPrintableChar && !ShowUnprintable ) ?
                  SubstituteChar :
                  Encoding == LocalEncoding ? QString::fromLocal8Bit(&Byte,1): QString::fromLatin1(&Byte,1);
 
