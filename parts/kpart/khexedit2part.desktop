@@ -50,7 +50,8 @@ Comment[ta]=உட்பொதிந்த இருநிலை காட்ச
 Comment[uk]=Вбудований переглядач для двійкових даних
 Comment[xx]=xxEmbedded Binary Viewerxx
 Comment[zh_CN]=嵌入式二进制查看器
-MimeType=all/allfiles
+#MimeType=all/allfiles
+MimeType=application/octet-stream
 ServiceTypes=KParts/ReadOnlyPart,Browser/View
 #,KParts/ReadWritePart
 X-KDE-Library=libkhexedit2part
