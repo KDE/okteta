@@ -489,7 +489,7 @@ class KHexEdit : public KColumnsView
     bool BlinkCursorVisible:1;
     /** flag whether the font is changed due to a zooming */
     bool InZooming:1;
-    /** flag whether we are in editing mode */
+    /** flag whether we are in byte digits editing mode */
     bool InEditMode:1;
     /** flag whether byte edit mode was reached by inserting */
     bool EditModeByInsert:1;

@@ -49,6 +49,7 @@ KPlainBuffer::KPlainBuffer( int MS )
    Size( 0 ),
    RawSize( 0 ),
    MaxSize( MS ),
+   KeepsMemory( false ),
    ReadOnly( true ),
    Modified( false )
 {

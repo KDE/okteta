@@ -81,6 +81,7 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, WFla
    DragStartPossible( false ),
    CursorPaused( false ),
    BlinkCursorVisible( false ),
+   InEditMode( false ),
    InZooming( false ),
    EditModeByInsert( false ),
    d( 0 )
