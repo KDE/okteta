@@ -38,6 +38,6 @@ class KSectionList : public KSectionBasicList
     void addSection( KSection S );
 };
 
-};
+}
 
 #endif

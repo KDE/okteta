@@ -38,6 +38,6 @@ class KCoordRangeList : public KCoordRangeBasicList
     void addCoordRange( KCoordRange S );
 };
 
-};
+}
 
 #endif

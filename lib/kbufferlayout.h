@@ -191,6 +191,6 @@ inline int KBufferLayout::finalLine()         const { return final().line(); }
 inline int KBufferLayout::noOfLinesPerPage()  const { return NoOfLinesPerPage; }
 inline int KBufferLayout::noOfLines()         const { return Length==0?0:final().line()+1; }
 
-};
+}
 
 #endif
