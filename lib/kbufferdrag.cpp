@@ -30,7 +30,7 @@ using namespace std;
 using namespace KHE;
 
 const char *KBufferDrag::OctetStream = "application/octet-stream";
-const char *KBufferDrag::PlainText = "text/plain";
+const char *KBufferDrag::PlainText =   "text/plain";
 
 KBufferDrag::KBufferDrag( const QByteArray &D, KCoordRange Range,
                           const KOffsetColumn *OC, const KHexColumn *HC, const KTextColumn *TC, char SC,
@@ -111,31 +111,31 @@ QByteArray KBufferDrag::encodedData( const char *Format ) const
         for( int i=0; i<NoOfCol; ++i )
         {
           NeededMemory += Columns[i]->charsPerLine();
-          cout << "MEM:" << NeededMemory << endl;
+//           cout << "MEM:" << NeededMemory << endl;
         }
         // scale with the number of lines
         NeededMemory *= CoordRange.lines();
-        cout << "FMEM:" << NeededMemory << endl;
+//         cout << "FMEM:" << NeededMemory << endl;
         // find out needed size
-        if( !TextData.resize( NeededMemory ) )
-          cout <<"Duh"<<endl;
-        cout << "A" << endl;
+        /*if( !*/TextData.resize( NeededMemory );// )
+//           cout <<"Duh"<<endl;
+//         cout << "A" << endl;
         // now fill
         char *D = TextData.data();
         int l = CoordRange.start().line();
-        cout << "startline: "<<l<<endl;
+//         cout << "startline: "<<l<<endl;
         for( int i=0; i<NoOfCol; ++i )
           Columns[i]->printFirstLine( &D, l );
         *D++ = '\n';
-        cout << "firstline done"<<endl;
+//         cout << "firstline done"<<endl;
         for( ++l; l<=CoordRange.end().line(); ++l )
         {
           for( int i=0; i<NoOfCol; ++i )
             Columns[i]->printNextLine( &D );
           *D++ = '\n';
-          cout << "line"<<l<<" done"<<endl;
+//           cout << "line"<<l<<" done"<<endl;
         }
-        cout << "done. should:"<<TextData.size()<< " is:"<<D-TextData.data()<<endl;
+//         cout << "done. should:"<<TextData.size()<< " is:"<<D-TextData.data()<<endl;
       }
       return( TextData );
     }
