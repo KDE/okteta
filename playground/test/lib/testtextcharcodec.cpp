@@ -22,6 +22,7 @@
 // test specific
 #include <codecs/ktextcharcodec.h>
 #include "testtextcharcodec.h"
+#include "testtextcharcodeccharcodecif.h"
 
 // namespaces
 using namespace KDE::Test;
@@ -79,8 +80,16 @@ void KTextCharCodecTest::testCreate()
 
 int main( int, char** )
 {
-  KTextCharCodecTest t;
-  return TestRunner( &t ).run();
+  KTextCharCodecTest TextCharCodecTest;
+  KTextCharCodecCharCodecIfTest CharCodecIfTest1("ISO8859-1");
+  KTextCharCodecCharCodecIfTest CharCodecIfTest2("KOI8-R");
+
+  TestRunner Runner;
+  Runner.add( &TextCharCodecTest );
+  Runner.add( &CharCodecIfTest1 );
+  Runner.add( &CharCodecIfTest2 );
+
+  return Runner.run();
 }
 
 
