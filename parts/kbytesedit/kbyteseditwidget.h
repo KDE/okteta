@@ -88,6 +88,16 @@ class KBytesEditWidget : public QWidget, public KBytesEditInterface
       * @param BinaryGapW spacing in the middle of a binary in pixels
       */
     virtual void setBinaryGapWidth( int BGW );
+    /** sets whether "unprintable" chars (>32) should be displayed in the text column
+      * with their corresponding character.
+      * @param SU
+      * returns true if there was a change
+      */
+    virtual void setShowUnprintable( bool SU = true );
+    /** sets the substitute character for "unprintable" chars
+      * returns true if there was a change
+      */
+    virtual void setSubstituteChar( QChar SC );
 
 
   public: // get methods
@@ -117,6 +127,14 @@ class KBytesEditWidget : public QWidget, public KBytesEditInterface
     virtual int noOfGroupedBytes() const;
     virtual int groupSpacingWidth() const;
     virtual int binaryGapWidth() const;
+  // text column
+    /** returns true if "unprintable" chars (>32) are displayed in the text column
+      * with their corresponding character, default is false
+      */
+    virtual bool showUnprintable() const;
+    /** returns the actually used substitute character for "unprintable" chars, default is '.' */
+    virtual QChar substituteChar() const;
+
     /** returns true if there is a selected range in the array */
     virtual bool hasSelectedData() const;
 

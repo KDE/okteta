@@ -18,6 +18,9 @@
 #ifndef KTEXTCOLUMN_H
 #define KTEXTCOLUMN_H
 
+// qt specific
+#include <qstring.h>
+// app specific
 #include "kbuffercolumn.h"
 
 class QPainter;
@@ -42,31 +45,55 @@ class KTextColumn : public KBufferColumn
 
 
   public: // modification access
-    /** sets the spacing between the bytes in the hex column
-      * @param ByteSpacingW spacing between the bytes in pixels
+    /** sets whether "unprintable" chars (>32) should be displayed in the text column
+      * with their corresponding character.
+      * @param SU
       * returns true if there was a change
       */
-    bool setShowUnprintable( bool SU );
-    void setSubstituteChar( char SC );
+    bool setShowUnprintable( bool SU = true );
+    /** sets the substitute character for "unprintable" chars
+      * returns true if there was a change
+      */
+    bool setSubstituteChar( QChar SC );
 
   public: // value access
-    bool showUnprintable()  const;
-    char substituteChar() const;
+    /** returns true if "unprintable" chars (>32) are displayed in the text column
+      * with their corresponding character, default is false
+      */
+    bool showUnprintable() const;
+    /** returns the actually used substitute character for "unprintable" chars, default is '.' */
+    QChar substituteChar() const;
 
 
   protected: // KBufferColumn API
     virtual void drawByte( QPainter *P, char Byte, const QColor &Color ) const;
 
   protected:
+    /** */
     bool ShowUnprintable;
-    char SubstituteChar;
+    /** */
+    QChar SubstituteChar;
 };
 
 
-inline bool KTextColumn::showUnprintable() const { return ShowUnprintable; }
-inline char KTextColumn::substituteChar()  const { return SubstituteChar; }
+inline bool KTextColumn::showUnprintable()  const { return ShowUnprintable; }
+inline QChar KTextColumn::substituteChar()  const { return SubstituteChar; }
 
-inline void KTextColumn::setSubstituteChar( char SC ) { if( SC >= 32 ) SubstituteChar = SC; }
+inline bool KTextColumn::setSubstituteChar( QChar SC )
+{
+  if( SubstituteChar == SC )
+    return false;
+  SubstituteChar = SC;
+  return true;
+}
+
+inline bool KTextColumn::setShowUnprintable( bool SU )
+{
+  if( ShowUnprintable == SU )
+    return false;
+  ShowUnprintable = SU;
+  return true;
+}
 
 }
 

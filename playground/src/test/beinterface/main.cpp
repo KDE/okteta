@@ -38,6 +38,8 @@ int main( int argc, char* argv[] )
     BytesEdit->setNoOfGroupedBytes( 3 );
     BytesEdit->setGroupSpacingWidth( 4 );
 //     BytesEdit->setNoOfBytesPerLine( 16 );
+    BytesEdit->setShowUnprintable( false );
+    BytesEdit->setSubstituteChar( '*' );
 
     // Finally insert the widget into the layout of its parent
     app.setTopWidget( BytesEditWidget );

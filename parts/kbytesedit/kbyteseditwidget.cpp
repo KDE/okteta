@@ -123,6 +123,16 @@ void KBytesEditWidget::setBinaryGapWidth( int BGW )
   BytesEdit->setBinaryGapWidth( BGW );
 }
 
+void KBytesEditWidget::setShowUnprintable( bool SU )
+{
+  BytesEdit->setShowUnprintable( SU );
+}
+
+void KBytesEditWidget::setSubstituteChar( QChar SC )
+{
+  BytesEdit->setSubstituteChar( SC );
+}
+
 
 char *KBytesEditWidget::data() const
 {
@@ -206,6 +216,16 @@ int KBytesEditWidget::groupSpacingWidth() const
 int KBytesEditWidget::binaryGapWidth() const
 {
   return BytesEdit->binaryGapWidth();
+}
+
+bool KBytesEditWidget::showUnprintable() const
+{
+  return BytesEdit->showUnprintable();
+}
+
+QChar KBytesEditWidget::substituteChar() const
+{
+  return BytesEdit->substituteChar();
 }
 
 

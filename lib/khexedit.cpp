@@ -142,6 +142,8 @@ bool KHexEdit::isOverwriteOnly()               const { return OverWriteOnly; }
 bool KHexEdit::isReadOnly()                    const { return ReadOnly; }
 bool KHexEdit::isModified()                    const { return DataBuffer->isModified(); }
 bool KHexEdit::tabChangesFocus()               const { return TabChangesFocus; }
+bool KHexEdit::showUnprintable()               const { return textColumn().showUnprintable(); }
+QChar KHexEdit::substituteChar()               const { return textColumn().substituteChar(); }
 
 void KHexEdit::setOverwriteOnly( bool OO )    { OverWriteOnly = OO; if( OverWriteOnly ) setOverwriteMode( true ); }
 void KHexEdit::setModified( bool M )          { DataBuffer->setModified(M); }
@@ -213,6 +215,7 @@ void KHexEdit::setBufferSpacing( KPixelX ByteSpacing, int NoOfGroupedBytes, KPix
 {
   if( !hexColumn().setSpacing(ByteSpacing,NoOfGroupedBytes,GroupSpacing) )
     return;
+
   updateViewByWidth();
 }
 
@@ -276,6 +279,24 @@ void KHexEdit::setBinaryGapWidth( int/*KPixelX*/ BGW )
   if( !hexColumn().setBinaryGapWidth(BGW) )
     return;
   updateViewByWidth();
+}
+
+void KHexEdit::setSubstituteChar( QChar SC )
+{
+  if( !textColumn().setSubstituteChar(SC) )
+    return;
+  pauseCursor();
+  updateView();
+  unpauseCursor();
+}
+
+void KHexEdit::setShowUnprintable( bool SU )
+{
+  if( !textColumn().setShowUnprintable(SU) )
+    return;
+  pauseCursor();
+  updateView();
+  unpauseCursor();
 }
 
 

@@ -61,24 +61,28 @@ class KHexEdit : public KColumnsView
   Q_OBJECT
   Q_ENUMS( KResizeStyle KCoding )
   Q_PROPERTY( KResizeStyle ResizeStyle READ resizeStyle WRITE setResizeStyle )
-  Q_PROPERTY( KCoding Coding READ coding WRITE setCoding )
   Q_PROPERTY( int NoOfBytesPerLine READ noOfBytesPerLine WRITE setNoOfBytesPerLine )
   Q_PROPERTY( bool TabChangesFocus READ tabChangesFocus WRITE setTabChangesFocus )
   Q_PROPERTY( bool OverwriteMode READ isOverwriteMode WRITE setOverwriteMode )
   Q_PROPERTY( bool OverwriteOnly READ isOverwriteOnly WRITE setOverwriteOnly )
   Q_PROPERTY( bool Modified READ isModified WRITE setModified DESIGNABLE false )
   Q_PROPERTY( bool ReadOnly READ isReadOnly WRITE setReadOnly )
-
+ 
   //Q_PROPERTY( bool hasSelectedData READ hasSelectedData )
   //Q_PROPERTY( QByteArray SelectedData READ selectedData )
   Q_PROPERTY( int StartOffset READ startOffset WRITE setStartOffset )
   Q_PROPERTY( int FirstLineOffset READ firstLineOffset WRITE setFirstLineOffset )
   //_PROPERTY( int undoDepth READ undoDepth WRITE setUndoDepth )
   //_PROPERTY( bool undoRedoEnabled READ isUndoRedoEnabled WRITE setUndoRedoEnabled )
+  // hex column
+  Q_PROPERTY( KCoding Coding READ coding WRITE setCoding )
   Q_PROPERTY( int ByteSpacingWidth READ byteSpacingWidth WRITE setByteSpacingWidth )
   Q_PROPERTY( int NoOfGroupedBytes READ noOfGroupedBytes WRITE setNoOfGroupedBytes )
   Q_PROPERTY( int GroupSpacingWidth READ groupSpacingWidth WRITE setGroupSpacingWidth )
   Q_PROPERTY( int BinaryGapWidth READ binaryGapWidth WRITE setBinaryGapWidth )
+  // text column
+  Q_PROPERTY( bool ShowUnprintable READ showUnprintable WRITE setShowUnprintable )
+  Q_PROPERTY( QChar SubstituteChar READ substituteChar WRITE setSubstituteChar )
 
   public:
     enum KMoveAction { MoveBackward, MoveWordBackward, MoveForward, MoveWordForward,
@@ -126,6 +130,13 @@ class KHexEdit : public KColumnsView
     int/*KPixelX*/ binaryGapWidth() const;
     /** returns true if there is a selected range in the array */
     bool hasSelectedData() const;
+    /** returns true if "unprintable" chars (>32) are displayed in the text column
+      * with their corresponding character, default is false
+      */
+    bool showUnprintable() const;
+    /** returns the actually used substitute character for "unprintable" chars, default is '.' */
+    QChar substituteChar() const;
+
 
   public: // logic value service
     /** returns the number of bytes per line that fit into a widget with the given size
@@ -171,15 +182,6 @@ class KHexEdit : public KColumnsView
     void ensureCursorVisible();
 
   // setting parameters
-    /** sets the spacing in the hex column
-      * @param ByteSpacingWidth spacing between the bytes in pixels
-      * @param NoOfGroupedBytes numbers of grouped bytes, 0 means no grouping
-      * @param GroupSpacingWidth spacing between the groups in pixels
-      * Default is 4 for NoOfGroupedBytes
-      */
-    void setBufferSpacing( KPixelX ByteSpacingWidth, int NoOfGroupedBytes = 0, KPixelX GroupSpacingWidth = 0 );
-    /** sets the format of the hex column. Default is KHE::HexadecimalCoding */
-    void setCoding( KCoding C );
     /** sets the resizestyle for the hex column. Default is KHE::FullSizeUsage */
     void setResizeStyle( KResizeStyle Style );
     /** sets whether the widget is readonly or not, Default is true.
@@ -195,13 +197,15 @@ class KHexEdit : public KColumnsView
     /** sets whether on a tab key there should be switched from the text column back to the hex column
       * or be switched to the next focusable widget. Default is false
       */
-    virtual void setTabChangesFocus( bool b );
+    virtual void setTabChangesFocus( bool b = true );
+  //
     /** sets the number of bytes per line, switching the resize style to KHE::NoResize */
     virtual void setNoOfBytesPerLine( int NoCpL );
     /** sets absolut offset of the data */
     void setStartOffset( int SO );
     /** sets offset of the char in the upper left corner */
     void setFirstLineOffset( int FLO );
+  // hex column parameters
     /** */
     void setByteSpacingWidth( int BSW ) ;
     /** */
@@ -213,6 +217,26 @@ class KHexEdit : public KColumnsView
       * returns true if there was a change
       */
     void setBinaryGapWidth( int BGW );
+    /** sets the spacing in the hex column
+      * @param ByteSpacingWidth spacing between the bytes in pixels
+      * @param NoOfGroupedBytes numbers of grouped bytes, 0 means no grouping
+      * @param GroupSpacingWidth spacing between the groups in pixels
+      * Default is 4 for NoOfGroupedBytes
+      */
+    void setBufferSpacing( KPixelX ByteSpacingWidth, int NoOfGroupedBytes = 0, KPixelX GroupSpacingWidth = 0 );
+    /** sets the format of the hex column. Default is KHE::HexadecimalCoding */
+    void setCoding( KCoding C );
+  // text column parameters
+    /** sets whether "unprintable" chars (>32) should be displayed in the text column
+      * with their corresponding character.
+      * @param SU
+      * returns true if there was a change
+      */
+    void setShowUnprintable( bool SU = true );
+    /** sets the substitute character for "unprintable" chars
+      * returns true if there was a change
+      */
+    void setSubstituteChar( QChar SC );
 
   // interaction
     /** de-/selects all data */

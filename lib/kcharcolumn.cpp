@@ -32,7 +32,7 @@
 using namespace KHE;
 
 static bool DefaultShowUnprintable = false;
-static char DefaultSubstituteChar = '.';
+static QChar DefaultSubstituteChar = '.';
 
 KTextColumn::KTextColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R )
  : KBufferColumn( CV, B, L, R ),
@@ -51,8 +51,10 @@ KTextColumn::~KTextColumn()
 
 void KTextColumn::drawByte( QPainter *P, char Byte, const QColor &Color ) const
 {
-  if( Byte < 32 && !ShowUnprintable )
-    Byte = SubstituteChar;
+  QString BS = ( (unsigned char)Byte < 32 && !ShowUnprintable ) ?
+                 SubstituteChar :
+                 QString::fromAscii(&Byte,1);
 
-  KBufferColumn::drawByte( P, Byte, Color );
+  P->setPen( Color );
+  P->drawText( 0, DigitBaseLine, BS );
 }

@@ -91,3 +91,8 @@ removed close to all artefacts
 cleaned up selection by mouse
 new signal inputFailed() to signal if a user's input (like key press) is not even partially inserted
 editing in the hex column basically works
+
+0.1.14 (xx.09.03 Friedrich W. H. Kossebau)
+-------
+KPixelXs and KPixelYs introduced: typedefs of KSection for pixel ranges 
+now we got closer to feature completeness: editing finally is usable

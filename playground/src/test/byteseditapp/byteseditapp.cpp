@@ -59,7 +59,7 @@ BytesEditApp::BytesEditApp()
     // then, setup our actions
     setupActions();
 
-    // and a status bar
+    // and a status bar 
     statusBar()->show();
 
     // apply the saved mainwindow settings, if any, and ask the mainwindow
