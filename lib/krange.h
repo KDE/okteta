@@ -52,10 +52,6 @@ class KRange
     void setEnd( T E )    { End = E; }
     /** sets the section to null */
     void unset()           { Start = End = null(); }
-    /** sets the first index of the section's range */
-    void setStartByWidth( T W )  { Start = End-W+1; }
-    /** sets the last index of the section's range */
-    void setEndByWidth( T W )    { End = Start+W-1; }
     ///** translate the section by offset. If the section is invalid the behaviour is undefined */
     //void translate( T Offset ) { Start += Offset; End += Offset; }
     /** restricts the section to Limit. If one of both is invalid the behaviour is undefined */

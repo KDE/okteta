@@ -58,6 +58,10 @@ class KSection : public KRange<int>
       * If one of both is invalid or the other' start is 0 the behaviour is undefined
       */
     void setEndBefore( KSection S );
+    /** sets the first index of the section's range to be width-1 before the end
+     * If the section is invalid the behaviour is undefined
+     */
+    void setStartByWidth( int Width );
     /** sets the last index of the section's range to be width-1 behind the start
       * If the section is invalid the behaviour is undefined
       */
@@ -82,6 +86,7 @@ inline KSection &KSection::operator=( const KSection &S ) { KRange<int>::operato
 
 inline int KSection::width() const { return isValid() ? end()-start()+1 : 0; }
 
+inline void KSection::setStartByWidth( int Width )    { setStart( end()-Width+1 ); }
 inline void KSection::setEndByWidth( int Width )    { setEnd( start()+Width-1 ); }
 inline void KSection::setStartBehind( KSection S )  { setStart( S.end()+1 ); }
 inline void KSection::setEndBefore( KSection S )    { setEnd( S.start()-1 ); }
