@@ -32,7 +32,7 @@ class KBufferColumn;
 class KBufferColTextExport : public KColTextExport
 {
   public:
-    KBufferColTextExport( const KBufferColumn* BF, char *D, KCoordRange CR, int BytesWidth );
+    KBufferColTextExport( const KBufferColumn* BF, const char *D, KCoordRange CR, int BytesWidth );
     virtual ~KBufferColTextExport();
 
   public: // API
@@ -47,13 +47,15 @@ class KBufferColTextExport : public KColTextExport
 
 
   protected:
-    mutable char *Data;
+    const char *Data;
     KCoordRange CoordRange;
 
     int NoOfBytesPerLine;
 
     /** Line to print */
     mutable int PrintLine;
+    /** Data to print */
+    mutable const char *PrintData;
 
     /** buffered value of how many chars a line needs */
     int NoOfCharsPerLine;

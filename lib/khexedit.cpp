@@ -688,24 +688,24 @@ QByteArray KHexEdit::selectedData() const
 }
 
 
-KBufferDrag *KHexEdit::dragObject( bool F, QWidget *Parent ) const
+KBufferDrag *KHexEdit::dragObject( QWidget *Parent ) const
 {
   if( !BufferRanges->hasSelection() )
-    return 0L;
+    return 0;
 
   const KValueColumn *HC;
   const KCharColumn *TC;
   KCoordRange Range;
 
-  if( static_cast<KHE::KCharColumn *>( ActiveColumn ) == &charColumn() || !F )
+  if( static_cast<KHE::KCharColumn *>( ActiveColumn ) == &charColumn() )
   {
-    HC = 0L;
-    TC = 0L;
+    HC = 0;
+    TC = 0;
   }
   else
   {
     HC = &valueColumn();
-    TC = charColumn().isVisible() ? &charColumn() : 0L;
+    TC = charColumn().isVisible() ? &charColumn() : 0;
     KSection S = BufferRanges->selection();
     Range.set( BufferLayout->coordOfIndex(S.start()),BufferLayout->coordOfIndex(S.end()) );
   }
@@ -2292,7 +2292,7 @@ void KHexEdit::startDrag()
   DragStartPossible = false;
 
   // create data
-  QDragObject *Drag = dragObject( true, viewport() );
+  QDragObject *Drag = dragObject( viewport() );
   if( !Drag )
     return;
 

@@ -31,7 +31,7 @@ class KValueColumn;
 class KValueColTextExport : public KBufferColTextExport
 {
   public:
-    KValueColTextExport( const KValueColumn* BF, char *D, KCoordRange CR );
+    KValueColTextExport( const KValueColumn* BF, const char *D, KCoordRange CR );
     virtual ~KValueColTextExport();
 
   protected:

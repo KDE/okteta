@@ -394,7 +394,7 @@ class KHexEdit : public KColumnsView
 
   protected: // partial operations
     void handleMouseMove( const QPoint& Point );
-    KBufferDrag *dragObject( bool F = false, QWidget *Parent = 0 ) const;
+    KBufferDrag *dragObject( QWidget *Parent = 0 ) const;
     void pasteFromSource( QMimeSource *Source );
     /** removes the section from the databuffer and updates all affected values */
     void removeData( KSection Indizes );

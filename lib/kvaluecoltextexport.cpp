@@ -26,7 +26,7 @@
 
 using namespace KHE;
 
-KValueColTextExport::KValueColTextExport( const KValueColumn* HC, char *D, KCoordRange CR )
+KValueColTextExport::KValueColTextExport( const KValueColumn* HC, const char *D, KCoordRange CR )
  : KBufferColTextExport( HC, D, CR, HC->codingWidth() ),
    CodingWidth( HC->codingWidth() ),
    CodingFunction( HC->codingFunction() )
@@ -53,13 +53,13 @@ void KValueColTextExport::print( char **T ) const
 
   // draw individual chars
   char *e = *T;
-  for( ; p<pEnd; ++p, ++Data )
+  for( ; p<pEnd; ++p, ++PrintData )
   {
     // get next position
     char *t = *T + Pos[p];
     // clear spacing
     memset( e, ' ', t-e );
-    CodingFunction( t, *Data );
+    CodingFunction( t, *PrintData );
     e = t + CodingWidth;
   }
 

@@ -29,7 +29,8 @@ static const int DefaultTEByteSpacingWidth = 1;
 static const int TEGroupSpacingWidth = 3;
 
 
-KBufferColTextExport::KBufferColTextExport( const KBufferColumn* BufferColumn, char *D, KCoordRange CR, int ByteWidth )
+KBufferColTextExport::KBufferColTextExport( const KBufferColumn* BufferColumn, const char *D,
+                                            KCoordRange CR, int ByteWidth )
  : Data( D ),
    CoordRange( CR )
 {
@@ -84,6 +85,7 @@ int KBufferColTextExport::charsPerLine() const
 void KBufferColTextExport::printFirstLine( char **T, int Line ) const
 {
   PrintLine = Line;
+  PrintData = Data;
   print( T );
 }
 

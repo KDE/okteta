@@ -26,7 +26,7 @@ using namespace KHE;
 static const unsigned char TELowestPrintableChar = 32;
 
 
-KCharColTextExport::KCharColTextExport( const KCharColumn* TC, char *D, KCoordRange CR )
+KCharColTextExport::KCharColTextExport( const KCharColumn* TC, const char *D, KCoordRange CR )
  : KBufferColTextExport( TC, D, CR, 1 ),
    SubstituteChar( TC->substituteChar() )
 {
@@ -50,14 +50,14 @@ void KCharColTextExport::print( char **T ) const
 
   // draw individual chars
   char *e = *T;
-  for( ; p<pEnd; ++p, ++Data )
+  for( ; p<pEnd; ++p, ++PrintData )
   {
     // get next position
     char *t = *T + Pos[p];
     // clear spacing
     memset( e, ' ', t-e );
 
-    unsigned char D = *Data;
+    unsigned char D = *PrintData;
     *t = D<TELowestPrintableChar ? SubstituteChar : D;
     e = t + 1;
   }

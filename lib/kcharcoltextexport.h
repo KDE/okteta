@@ -30,7 +30,7 @@ class KCharColumn;
 class KCharColTextExport : public KBufferColTextExport
 {
   public:
-    KCharColTextExport( const KCharColumn* BF, char *D, KCoordRange CR );
+    KCharColTextExport( const KCharColumn* BF, const char *D, KCoordRange CR );
     virtual ~KCharColTextExport();
 
   protected: //API

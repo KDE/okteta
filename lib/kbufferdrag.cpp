@@ -79,65 +79,60 @@ void KBufferDrag::setData( const QByteArray &D )
 
 const char *KBufferDrag::format( int i ) const
 {
-  return( i == 0 ? OctetStream : i == 1 ? PlainText : 0L );
+  return( i == 0 ? OctetStream : i == 1 ? PlainText : 0 );
 }
 
 
 QByteArray KBufferDrag::encodedData( const char *Format ) const
 {
-  if( Format != 0L )
+  if( Format != 0 )
   {
+    // octet stream wanted?
     if( strcmp(Format,OctetStream) == 0 )
-    {
-//       std::cout << "using " << OctetStream << std::endl;
       return( Data );
-    }
+
+    // plain text wanted?
     if( strcmp(Format,PlainText) == 0 )
     {
-//       std::cout << "using " << PlainText << std::endl;
       QByteArray TextData;
+      // plain copy?
       if( NoOfCol == 0 )
       {
-        // duplicate the data and subsitute all non-printable items with a space
+        // duplicate the data and substitute all non-printable items with a space
         TextData.duplicate( Data );
         char *D = TextData.data();
         for( unsigned int i=0; i<TextData.size(); ++i,++D )
-        { unsigned char B = *D; if( B < 32 && B != '\t' && B != '\n' ) *D = SubstituteChar; }
+        { 
+          unsigned char B = *D;
+          if( B < 32 && B != '\t' && B != '\n' )
+            *D = SubstituteChar;
+        }
       }
+      // formatted copy
       else
       {
-        // initialize: one for the newline \n
+        // initialize: one for the line's newline \n
         int NeededMemory = 1;
         for( int i=0; i<NoOfCol; ++i )
-        {
           NeededMemory += Columns[i]->charsPerLine();
-//           cout << "MEM:" << NeededMemory << endl;
-        }
         // scale with the number of lines
         NeededMemory *= CoordRange.lines();
-//         cout << "FMEM:" << NeededMemory << endl;
         // find out needed size
-        /*if( !*/TextData.resize( NeededMemory );// )
-//           cout <<"Duh"<<endl;
-//         cout << "A" << endl;
+        TextData.resize( NeededMemory );
         // now fill
         char *D = TextData.data();
         int l = CoordRange.start().line();
-//         cout << "startline: "<<l<<endl;
         for( int i=0; i<NoOfCol; ++i )
           Columns[i]->printFirstLine( &D, l );
         *D++ = '\n';
-//         cout << "firstline done"<<endl;
         for( ++l; l<=CoordRange.end().line(); ++l )
         {
           for( int i=0; i<NoOfCol; ++i )
             Columns[i]->printNextLine( &D );
           *D++ = '\n';
-//           cout << "line"<<l<<" done"<<endl;
         }
-//         cout << "done. should:"<<TextData.size()<< " is:"<<D-TextData.data()<<endl;
       }
-      return( TextData );
+      return TextData;
     }
   }
 

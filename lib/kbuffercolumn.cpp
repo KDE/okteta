@@ -406,7 +406,6 @@ void KBufferColumn::paintLine( QPainter *P, int Line ) // TODO: could be removed
 //     return;
 
   paintPositions( P, Line, PaintPositions );
-
 }
 
 
