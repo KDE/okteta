@@ -91,3 +91,5 @@ void KHexEditBrowserExtension::restoreState( QDataStream &stream )
 
   HexEditPart->fitActionSettings();
 }
+
+#include "khebrowserextension.moc"
