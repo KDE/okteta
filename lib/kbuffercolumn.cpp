@@ -304,8 +304,8 @@ int KBufferColumn::magPosOfX( KPixelX PX ) const
   for( int p=LastPos; p>=0; --p )
     if( PosX[p] <= PX )
     {
-      // are we closer to the right?
-      if( PosRightX[p]-PX < ByteWidth/2 ) // TODO: perhaps cache also the middle xpos's
+      // are we close to the right?
+      if( PosRightX[p]-PX < DigitWidth/2 ) // TODO: perhaps cache also the middle xpos's
         ++p;
       return p;
     }
