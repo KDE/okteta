@@ -152,6 +152,9 @@ bool KHexEdit::showUnprintable()               const { return charColumn().showU
 QChar KHexEdit::substituteChar()               const { return charColumn().substituteChar(); }
 KHexEdit::KEncoding KHexEdit::encoding()       const { return (KHexEdit::KEncoding)charColumn().encoding(); }
 
+int KHexEdit::cursorPosition() const { return BufferCursor->index(); }
+bool KHexEdit::isCursorBehind() const { return BufferCursor->isBehind(); }
+
 void KHexEdit::setOverwriteOnly( bool OO )    { OverWriteOnly = OO; if( OverWriteOnly ) setOverwriteMode( true ); }
 void KHexEdit::setModified( bool M )          { DataBuffer->setModified(M); }
 void KHexEdit::setTabChangesFocus( bool TCF ) { TabChangesFocus = TCF; }
@@ -1010,11 +1013,13 @@ void KHexEdit::clipboardChanged()
 }
 
 
-void KHexEdit::setCursorPosition( int Index )
+void KHexEdit::setCursorPosition( int Index, bool Behind )
 {
   pauseCursor( true );
 
   BufferCursor->gotoCIndex( Index );
+  if( Behind )
+    BufferCursor->stepBehind();
 
   BufferRanges->removeSelection();
   if( BufferRanges->isModified() )

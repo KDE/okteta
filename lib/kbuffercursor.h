@@ -116,6 +116,8 @@ class KBufferCursor
     void gotoPageUp();
     void gotoPageDown();
 
+    /** puts the cursor behind the actual position if it isn't already*/
+    void stepBehind();
     void updateCoord();
 
 
@@ -145,7 +147,7 @@ class KBufferCursor
     KBufferCoord Coord;
 
     /** tells whether the cursor is actually behind the actual position.
-      * This is used for selection to the end of a line or the whole buffer.
+      * This is used for selection to the end of a line or of the whole buffer.
       */
     bool Behind : 1;
 
@@ -160,6 +162,8 @@ inline int KBufferCursor::line()           const { return Coord.line(); }
 inline KBufferCoord KBufferCursor::coord() const { return Coord; }
 inline bool KBufferCursor::isBehind()      const { return Behind; }
 inline int KBufferCursor::realIndex()      const { return Behind ? Index + 1 : Index; }
+
+inline void KBufferCursor::stepBehind() { Behind = true; }
 
 //inline bool KBufferCursor::isValid()  const { return Index != -1; }
 

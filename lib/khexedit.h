@@ -124,6 +124,10 @@ class KHexEdit : public KColumnsView
   public: // value access
     /** returns true if there is a selected range in the array */
     bool hasSelectedData() const;
+    /** returns the index of the cursor position */
+    int cursorPosition() const;
+    /***/
+    bool isCursorBehind() const;
 
     bool isOverwriteMode() const;
     bool isOverwriteOnly() const;
@@ -136,14 +140,14 @@ class KHexEdit : public KColumnsView
     int noOfBytesPerLine() const;
     int startOffset() const;
     int firstLineOffset() const;
-    
+
   // value column
     KCoding coding() const;
     int/*KPixelX*/ byteSpacingWidth() const;
     int noOfGroupedBytes() const;
     int/*KPixelX*/ groupSpacingWidth() const;
     int/*KPixelX*/ binaryGapWidth() const;
-    
+
   // char column
     /** reports if "unprintable" chars (value<32) are displayed in the char column
       * with their original character. Default is false
@@ -186,7 +190,7 @@ class KHexEdit : public KColumnsView
     /** puts the cursor to the position of index, handles all drawing 
       * @param Index 
       */
-    void setCursorPosition( int Index );
+    void setCursorPosition( int Index, bool Behind=false );
     /** puts the cursor in the column at the pos of Point (in absolute coord), does not handle the drawing */
     void placeCursor( const QPoint &Point );
 //    void repaintByte( int row, int column, bool Erase = true );
@@ -359,7 +363,7 @@ class KHexEdit : public KColumnsView
   protected: // KColumnsView API
     virtual void setNoOfLines( int NewNoOfLines );
 
-  
+
   protected: // element accessor functions
     KOffsetColumn& offsetColumn();
     KValueColumn& valueColumn();
@@ -371,7 +375,7 @@ class KHexEdit : public KColumnsView
     const KCharColumn& charColumn()   const;
     const KBufferColumn& activeColumn() const;
     const KBufferColumn& inactiveColumn() const;
-  
+
   protected: // atomic ui operations
     /** handles screen update in case of a change to any of the width sizes
       */
@@ -444,7 +448,7 @@ class KHexEdit : public KColumnsView
     /** */
     KBufferRanges *BufferRanges;
 
-    
+
   protected:
     KOffsetColumn *OffsetColumn;
     KBorderColumn *FirstBorderColumn;
