@@ -16,3 +16,6 @@ partdesktopdir   = $(kde_servicesdir)
 
 partrc_DATA = khexedit2partui.rc
 partrcdir   = $(kde_datadir)/khexedit2part
+
+messages: rc.cpp
+	$(XGETTEXT) *.cpp -o $(podir)/khexedit2part.pot
