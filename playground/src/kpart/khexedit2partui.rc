@@ -2,6 +2,7 @@
 <kpartgui name="khexedit2part" version="1">
 <MenuBar>
   <Menu name="edit">
+    <Action name="edit_copy" group="edit_paste_merge" />
     <Action name="edit_select_all" group="edit_select_merge" />
     <Action name="edit_deselect" group="edit_select_merge" />
   </Menu>
@@ -36,6 +37,7 @@
 </MenuBar>
 
 <ToolBar name="mainToolBar"><text>Main Toolbar</text>
+  <Action name="edit_copy" />
   <Action name="view_zoom_in"/>
   <Action name="view_zoom_out"/>
 </ToolBar>

@@ -46,7 +46,8 @@ class KHexEditPart : public KParts::ReadOnlyPart
     Q_OBJECT
 
   public:
-    KHexEditPart( QWidget *ParentWidget, const char *WidgetName, QObject *Parent, const char *Name );
+    KHexEditPart( QWidget *ParentWidget, const char *WidgetName, QObject *Parent, const char *Name,
+                  bool BrowserViewWanted );
     virtual ~KHexEditPart();
 
 
@@ -54,7 +55,7 @@ class KHexEditPart : public KParts::ReadOnlyPart
     virtual bool openFile();
 
   protected:
-    void setupActions();
+    void setupActions( bool BrowserViewWanted );
 
   protected slots:
     // used to catch changes in the HexEdit widget

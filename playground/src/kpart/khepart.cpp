@@ -29,20 +29,21 @@
 
 using namespace KHE;
 
-static const char RCFileName[] =    "khexedit2partui.rc";
+static const char RCFileName[] = "khexedit2partui.rc";
 
-static const char CodingGroupId[] = "ValueCoding";
+static const char CodingGroupId[] =      "ValueCoding";
 static const char ResizeStyleGroupId[] = "ResizeStyle";
-static const char EncodingGroupId[] = "CharEncoding";
+static const char EncodingGroupId[] =    "CharEncoding";
 
 
-KHexEditPart::KHexEditPart( QWidget *parentWidget, const char *widgetName,
-                            QObject *parent, const char *name )
- : KParts::ReadOnlyPart( parent, name )
+KHexEditPart::KHexEditPart( QWidget *ParentWidget, const char *WidgetName,
+                            QObject *Parent, const char *Name,
+                            bool BrowserViewWanted )
+ : KParts::ReadOnlyPart( Parent, Name )
 {
   setInstance( KHexEditPartFactory::instance() );
 
-  m_HexEdit = new KHexEdit( &m_Wrapping, parentWidget, widgetName );
+  m_HexEdit = new KHexEdit( &m_Wrapping, ParentWidget, WidgetName );
   m_HexEdit->setNoOfBytesPerLine( 16 );
   m_HexEdit->setBufferSpacing( 3, 4, 10 );
   m_HexEdit->setShowUnprintable( false );
@@ -50,16 +51,18 @@ KHexEditPart::KHexEditPart( QWidget *parentWidget, const char *widgetName,
   // notify the part that this is our internal widget
   setWidget( m_HexEdit );
 
-  setupActions();
+  setupActions( BrowserViewWanted );
 
-  connect( m_HexEdit, SIGNAL(copyAvailable(bool)), CopyAction,SLOT(setEnabled(bool)) );
-  connect( m_HexEdit, SIGNAL(selectionChanged()),  this,      SLOT(slotSelectionChanged()) );
-  connect( m_HexEdit, SIGNAL(bufferChanged()),     this,      SLOT(setModified()) );
-
-  CopyAction->setEnabled( false );
+  if( CopyAction )
+  {
+    connect( m_HexEdit, SIGNAL(copyAvailable(bool)), CopyAction,SLOT(setEnabled(bool)) );
+    connect( m_HexEdit, SIGNAL(selectionChanged()),  this,      SLOT(slotSelectionChanged()) );
+    CopyAction->setEnabled( false );
+  }
 
   // plugin to browsers
-  new KHexEditBrowserExtension( this, m_HexEdit );
+  if( BrowserViewWanted )
+    new KHexEditBrowserExtension( this, m_HexEdit );
 }
 
 
@@ -68,10 +71,11 @@ KHexEditPart::~KHexEditPart()
 }
 
 
-void KHexEditPart::setupActions()
+void KHexEditPart::setupActions( bool BrowserViewWanted )
 {
   // create our actions
-  CopyAction = KStdAction::copy(    m_HexEdit, SLOT(copy()),       actionCollection() );
+  CopyAction = BrowserViewWanted ? 0 : KStdAction::copy( m_HexEdit, SLOT(copy()), actionCollection() );
+
   KStdAction::selectAll( this, SLOT(slotSelectAll()),     actionCollection() );
   KStdAction::deselect(  this, SLOT(slotUnselect()),      actionCollection() );
 
