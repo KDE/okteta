@@ -106,7 +106,7 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
   EncodingAction->setItems( List );
   connect( EncodingAction, SIGNAL(activated(int)), this, SLOT(slotSetEncoding(int)) );
 
-  ShowUnprintableAction = new KToggleAction( i18n("Show &Unprintabe Chars (<32)"), 0, this, SLOT(slotSetShowUnprintable()), actionCollection(), "view_showunprintable" );
+  ShowUnprintableAction = new KToggleAction( i18n("Show &Unprintable Chars (<32)"), 0, this, SLOT(slotSetShowUnprintable()), actionCollection(), "view_showunprintable" );
 
   KStdAction::zoomIn(  HexEdit, SLOT(zoomIn()),   actionCollection() );
   KStdAction::zoomOut( HexEdit, SLOT(zoomOut()),  actionCollection() );
