@@ -43,6 +43,7 @@ class KDataBufferIfTest : public KDE::Test::SlotTest
     virtual ~KDataBufferIfTest();
 
   public slots:
+    void testModified();
     void testCopyTo();
     void testFill();
     void testSetGet();

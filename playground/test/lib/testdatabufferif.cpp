@@ -61,11 +61,27 @@ static void list( KDataBuffer *DataBuffer, const char* Name )
   }
 }
 
+void KDataBufferIfTest::testModified()
+{
+  // can we alter the buffer at all?
+  if( DataBuffer->isReadOnly() )
+    // skip
+    return;
+
+  DataBuffer->setModified( false );
+  KT_ASSERT_EQUALS( "modified",  DataBuffer->isModified(), false );
+  DataBuffer->setModified( true );
+  KT_ASSERT_EQUALS( "modified",  DataBuffer->isModified(), true );
+}
+
 void KDataBufferIfTest::testCopyTo()
 {
   if( !DataBuffer->isReadOnly() )
+  {
     // prepare Buffer
     textureBuffer( DataBuffer );
+    DataBuffer->setModified( false );
+  }
 
   //
   static const unsigned int CopySize = 10;
@@ -81,12 +97,14 @@ void KDataBufferIfTest::testCopyTo()
   DataBuffer->copyTo( Copy.rawData(), Range );
   KT_ASSERT_EQUALS( "copyTo() at begin",  Copy.compare(*DataBuffer, Range), 0 );
   KT_ASSERT_EQUALS( "behind copyTo() at begin",  Copy.datum(Range.end()+1), BlankChar );
+  KT_ASSERT_EQUALS( "modified by copyTo() at mid",  DataBuffer->isModified(), false );
 
   Copy.fill( BlankChar );
   Range.moveToEnd( Size - 1 );
   DataBuffer->copyTo( &Copy.rawData()[Range.start()], Range );
   KT_ASSERT_EQUALS( "before copyTo() at end",  Copy.datum(Range.start()-1), BlankChar );
   KT_ASSERT_EQUALS( "copyTo() at end",  Copy.compare(*DataBuffer, Range, Range.start()), 0 );
+  KT_ASSERT_EQUALS( "modified by copyTo() at end",  DataBuffer->isModified(), false );
 
   Copy.fill( BlankChar );
   Range.moveToStart( Size/2 );
@@ -94,6 +112,7 @@ void KDataBufferIfTest::testCopyTo()
   KT_ASSERT_EQUALS( "before copyTo() at mid",  Copy.datum(Range.start()-1), BlankChar );
   KT_ASSERT_EQUALS( "copyTo() at mid",  Copy.compare(*DataBuffer, Range, Range.start()), 0 );
   KT_ASSERT_EQUALS( "behind copyTo() at mid",  Copy.datum(Range.end()+1), BlankChar );
+  KT_ASSERT_EQUALS( "modified by copyTo() at mid",  DataBuffer->isModified(), false );
 }
 
 void KDataBufferIfTest::testFill()
@@ -109,27 +128,35 @@ void KDataBufferIfTest::testFill()
 
   KFixedSizeBuffer Copy( Size, PaintChar );
 
+  DataBuffer->setModified( false );
   DataBuffer->fill( BlankChar );
   DataBuffer->fill( PaintChar );
   KT_ASSERT_EQUALS( "fill() all",  Copy.compare(*DataBuffer), 0 );
+  KT_ASSERT_EQUALS( "modified by fill() all",  DataBuffer->isModified(), true );
 
+  DataBuffer->setModified( false );
   DataBuffer->fill( BlankChar );
   DataBuffer->fill( PaintChar, Range.width(), Range.start() );
   KT_ASSERT_EQUALS( "fill() at begin",  Copy.compare(*DataBuffer, Range), 0 );
   KT_ASSERT_EQUALS( "behind fill() at begin", DataBuffer->datum(Range.end()+1), BlankChar );
+  KT_ASSERT_EQUALS( "modified by fill() at begin",  DataBuffer->isModified(), true );
 
+  DataBuffer->setModified( false );
   DataBuffer->fill( BlankChar );
   Range.moveToEnd( Size - 1 );
   DataBuffer->fill( PaintChar, Range.width(), Range.start() );
   KT_ASSERT_EQUALS( "before fill() at end", DataBuffer->datum(Range.start()-1), BlankChar );
   KT_ASSERT_EQUALS( "fill() at end",  Copy.compare(*DataBuffer, Range, Range.start()), 0 );
+  KT_ASSERT_EQUALS( "modified by fill() at end",  DataBuffer->isModified(), true );
 
+  DataBuffer->setModified( false );
   DataBuffer->fill( BlankChar );
   Range.moveToStart( Size/2 );
   DataBuffer->fill( PaintChar, Range.width(), Range.start() );
   KT_ASSERT_EQUALS( "before fill() at mid", DataBuffer->datum(Range.start()-1), BlankChar );
   KT_ASSERT_EQUALS( "fill() at mid",  Copy.compare(*DataBuffer, Range, Range.start()), 0 );
   KT_ASSERT_EQUALS( "behind fill() at mid", DataBuffer->datum(Range.end()+1), BlankChar );
+  KT_ASSERT_EQUALS( "modified by fill() at mid",  DataBuffer->isModified(), true );
 }
 
 void KDataBufferIfTest::testSetGet()
@@ -146,6 +173,7 @@ void KDataBufferIfTest::testSetGet()
   unsigned int Size = DataBuffer->size();
   for( unsigned int i=0; i<Size; ++i )
   {
+    DataBuffer->setModified( false );
     DataBuffer->setDatum( i, PaintChar );
     if( i>0 )
       KT_ASSERT_EQUALS( "set(), before",  DataBuffer->datum(i-1), BlankChar  );
@@ -155,6 +183,7 @@ void KDataBufferIfTest::testSetGet()
     // clean up
     DataBuffer->setDatum( i, BlankChar );
     KT_ASSERT_EQUALS( "set(), cleared",  DataBuffer->datum(i), BlankChar );
+    KT_ASSERT_EQUALS( "modified by setDatum()",  DataBuffer->isModified(), true );
   }
 }
 
