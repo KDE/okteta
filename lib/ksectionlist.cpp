@@ -14,7 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
-
+ 
+// lib specific
 #include "ksectionlist.h"
 
 using namespace KHE;
@@ -39,8 +40,8 @@ void KSectionList::addSection( KSection NewSection )
   iterator S = begin();
   for( ; S!=end(); ++S )
   {
-    // is next section before the new section?
-    if( (*S).endsBefore(NewSection) )
+    // is new section before the next section?
+    if( NewSection.endsBefore(*S) )
     {
       // put the new before it
       insert( S, NewSection );

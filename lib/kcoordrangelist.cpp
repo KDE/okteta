@@ -15,6 +15,7 @@
  ***************************************************************************/
 
 
+// lib specific
 #include "kcoordrangelist.h"
 
 using namespace KHE;
@@ -38,8 +39,8 @@ void KCoordRangeList::addCoordRange( KCoordRange NewCoordRange )
   iterator S = begin();
   for( ; S!=end(); ++S )
   {
-    // is next CoordRange before the new CoordRange?
-    if( (*S).endsBefore(NewCoordRange) )
+    // is next CoordRange behind the new CoordRange?
+    if( NewCoordRange.endsBefore(*S) )
     {
       // put the new before it
       insert( S, NewCoordRange );
