@@ -55,6 +55,7 @@ static const int DefaultFirstLineOffset = 0;
 static const int DefaultNoOfBytesPerLine =  16;
 static const KHexEdit::KResizeStyle DefaultResizeStyle = KHexEdit::FullSizeUsage;
 static const int DefaultScrollTimerPeriod = 100;
+static const int InsertCursorWidth = 2;
 
 
 
@@ -1209,13 +1210,13 @@ void KHexEdit::createCursorPixmaps()
   KPixelX CursorW;
   if( BufferCursor->isBehind() )
   {
-    CursorX = QMAX( 0, CursorPixmaps->onPixmap().width()-3 );
-    CursorW = 2;
+    CursorX = QMAX( 0, CursorPixmaps->onPixmap().width()-InsertCursorWidth );
+    CursorW = InsertCursorWidth;
   }
   else
   {
     CursorX = 0;
-    CursorW = OverWrite ? -1 : 2;
+    CursorW = OverWrite ? -1 : InsertCursorWidth;
   }
   CursorPixmaps->setShape( CursorX, CursorW );
 }
