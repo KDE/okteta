@@ -169,7 +169,7 @@ void KColumnsView::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
       LastLine = NoOfLines - 1;
 
     // collect affected columns
-    QList<KColumn> RedrawColumns;
+    QPtrList<KColumn> RedrawColumns;
     for( KColumn *C=Columns.first(); C; C=Columns.next() )
       if( C->isVisible() && C->overlaps(cx,cx+cw-1) )
         RedrawColumns.append( C );

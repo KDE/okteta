@@ -20,11 +20,11 @@
 
 #include <qwidget.h>
 // app specific
-#include <byteseditinterface.h>
-#include <hexcolumninterface.h>
-#include <textcolumninterface.h>
-#include <zoominterface.h>
-#include <clipboardinterface.h>
+#include <khexedit/byteseditinterface.h>
+#include <khexedit/hexcolumninterface.h>
+#include <khexedit/textcolumninterface.h>
+#include <khexedit/zoominterface.h>
+#include <khexedit/clipboardinterface.h>
 
 
 namespace KHE {
