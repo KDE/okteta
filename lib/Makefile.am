@@ -1,9 +1,7 @@
-#messages: rc.cpp
-#	$(XGETTEXT) *.cpp -o $(podir)/libkhexedit.pot
-
 INCLUDES    = $(all_includes)
 
-noinst_LTLIBRARIES =  libkhexedit.la
+# this library is used by the kbytesedit part, more parts are to come
+lib_LTLIBRARIES =  libkhexedit.la
 libkhexedit_la_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 libkhexedit_la_SOURCES = kcolumn.cpp kbordercolumn.cpp koffsetcolumn.cpp kbuffercolumn.cpp khexcolumn.cpp ktextcolumn.cpp \
                          kcolumnsview.cpp khexedit.cpp kbytesedit.cpp \
@@ -16,6 +14,7 @@ libkhexedit_la_SOURCES = kcolumn.cpp kbordercolumn.cpp koffsetcolumn.cpp kbuffer
                          kbordercoltextexport.cpp koffsetcoltextexport.cpp \
                          kbuffercoltextexport.cpp khexcoltextexport.cpp ktextcoltextexport.cpp
 
+# no public API for a direct use by now
 noinst_HEADERS = kcolumn.h kbordercolumn.h koffsetcolumn.h kbuffercolumn.h khexcolumn.h ktextcolumn.h \
                  kbytecodec.h koffsetformat.h \
                  kbuffercursor.h kbufferlayout.h kbufferranges.h \
