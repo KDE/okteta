@@ -340,7 +340,7 @@ void KHexEdit::unZoom()
 }
 
 
-inline void KHexEdit::fitInLine()
+void KHexEdit::fitInLine()
 {
   if( ResizeStyle != NoResize )
   {
