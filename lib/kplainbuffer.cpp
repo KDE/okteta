@@ -14,19 +14,24 @@
  *                                                                         *
  ***************************************************************************/
 
-//#include <kdebug.h>
+#include <kdebug.h>
 // c specific
 #include <string.h>
 #include <stdlib.h>
 // lib specific
 #include "kplainbuffer.h"
 
+
+static const unsigned int MinChunkSize = 512;
+static const unsigned int MaxChunkSize = 1024*10; // TODO: get max. memory page size
+
+// TODO: think about realloc & Co.
 using namespace KHE;
 
-KPlainBuffer::KPlainBuffer( char *D, int S, int RS, bool KM )
+KPlainBuffer::KPlainBuffer( char *D, unsigned int S, int RS, bool KM )
  : Data( D ),
    Size( S ),
-   RawSize( RS<S?S:RS ),
+   RawSize( RS<(int)S?S:RS ),
    MaxSize( -1 ),
    KeepsMemory( KM ),
    ReadOnly( true ),
@@ -34,7 +39,7 @@ KPlainBuffer::KPlainBuffer( char *D, int S, int RS, bool KM )
 {
 }
 
-KPlainBuffer::KPlainBuffer( const char *D, int S )
+KPlainBuffer::KPlainBuffer( const char *D, unsigned int S )
  : Data( (char *)D ),
    Size( S ),
    RawSize( S ),
@@ -46,7 +51,7 @@ KPlainBuffer::KPlainBuffer( const char *D, int S )
 }
 
 KPlainBuffer::KPlainBuffer( int MS )
- : Data( 0L ),
+ : Data( 0 ),
    Size( 0 ),
    RawSize( 0 ),
    MaxSize( MS ),
@@ -67,16 +72,16 @@ int KPlainBuffer::insert( int Pos, const char* D, int Length )
   // check all parameters
   if( Length == 0 )
     return 0;
-
+  kdDebug() << QString("before: Size: %1, RawSize: %2").arg(Size).arg(RawSize) << endl;
   // correct for appending
-  if( Pos > Size )
+  if( Pos > (int)Size )
     Pos = Size;
 
-  int NewSize = Size + Length;
+  unsigned int NewSize = Size + Length;
   // check if buffer does not get to big TODO: make algo simplier and less if else
-  if( MaxSize != -1 && NewSize > MaxSize)
+  if( MaxSize != -1 && NewSize > (unsigned int)MaxSize)
   {
-    if( Size == MaxSize )
+    if( (int)Size == MaxSize )
       return 0;
     Length -= NewSize - MaxSize;
     NewSize = MaxSize;
@@ -93,10 +98,20 @@ int KPlainBuffer::insert( int Pos, const char* D, int Length )
   // raw array not big enough?
   if( RawSize < NewSize )
   {
+    // get new raw size
+    unsigned int ChunkSize = MinChunkSize;
+    // find chunk size where newsize fits into
+    while( ChunkSize < NewSize )
+      ChunkSize <<= 1;
+    // limit to max size
+    if( ChunkSize > MaxChunkSize )
+      ChunkSize = MaxChunkSize;
+    // find add size
+    unsigned int NewRawSize = ChunkSize;
+    while( NewRawSize<NewSize )
+      NewRawSize += ChunkSize;
     // create new buffer
-    char *NewData = new char[NewSize];
-    if( NewData == 0 )
-      return 0;
+    char *NewData = new char[NewRawSize];
 
     // move old data to its (new) places
     memcpy( NewData, Data, Pos );
@@ -106,7 +121,7 @@ int KPlainBuffer::insert( int Pos, const char* D, int Length )
     delete [] Data;
     // set new values
     Data = NewData;
-    RawSize = NewSize;
+    RawSize = NewRawSize;
   }
   else
     // move old data to its (new) places
@@ -117,6 +132,7 @@ int KPlainBuffer::insert( int Pos, const char* D, int Length )
 
   // set new values
   Size = NewSize;
+  kdDebug() << QString("after: Size: %1, RawSize: %2").arg(Size).arg(RawSize) << endl;
 
   Modified = true;
   return Length;
@@ -130,7 +146,7 @@ int KPlainBuffer::remove( KSection Remove )
 
   Remove.restrictEndTo( Size-1 );
 
-  int BehindRemovePos = Remove.end()+1;
+  unsigned int BehindRemovePos = Remove.end()+1;
   // move right data behind the input range
   memmove( &Data[Remove.start()], &Data[BehindRemovePos], Size-BehindRemovePos );
 
@@ -145,17 +161,17 @@ int KPlainBuffer::remove( KSection Remove )
 int KPlainBuffer::replace( KSection Remove, const char* D, int InputLength )
 {
   // check all parameters
-  if( Remove.start() >= Size || (Remove.width()==0 && InputLength==0) )
+  if( Remove.start() >= (int)Size || (Remove.width()==0 && InputLength==0) )
     return 0;
 
   Remove.restrictEndTo( Size-1 );
 
-  int SizeDiff = InputLength - Remove.width();
-  int NewSize = Size + SizeDiff;
+  unsigned int SizeDiff = InputLength - Remove.width();
+  unsigned int NewSize = Size + SizeDiff;
   // check if buffer does not get to big TODO: make algo simplier and less if else
-  if( MaxSize != -1 && NewSize > MaxSize)
+  if( MaxSize != -1 && (int)NewSize > MaxSize)
   {
-    if( Size == MaxSize )
+    if( (int)Size == MaxSize )
       return 0;
     InputLength -= NewSize - MaxSize;
     NewSize = MaxSize;
@@ -207,8 +223,8 @@ int KPlainBuffer::replace( KSection Remove, const char* D, int InputLength )
 int KPlainBuffer::move( int DestPos, KSection SourceSection )
 {
   // check all parameters
-  if( SourceSection.start() >= Size || SourceSection.width() == 0 
-      || DestPos > Size || SourceSection.start() == DestPos ) 
+  if( SourceSection.start() >= (int)Size || SourceSection.width() == 0
+      || DestPos > (int)Size || SourceSection.start() == DestPos )
     return SourceSection.start();
 
   SourceSection.restrictEndTo( Size-1 );
@@ -257,38 +273,38 @@ int KPlainBuffer::move( int DestPos, KSection SourceSection )
       SmallPartDest = DestPos + MovedLength;
     }
   }
-  
+
   // copy smaller part to tempbuffer
   char *Temp = new char[SmallPartLength];
   memcpy( Temp, &Data[SmallPartStart], SmallPartLength );
-  
+
   // move the larger part
   memmove( &Data[LargePartDest], &Data[LargePartStart], LargePartLength );
-  
+
   // copy smaller part to its new dest
   memcpy( &Data[SmallPartDest], Temp, SmallPartLength );
   delete [] Temp;
-  
+
   return MovedLength < DisplacedLength ? SmallPartDest : LargePartDest;
 }
 
 
 int KPlainBuffer::find( const char* SearchString, int Length, KSection Section ) const  
-{ 
+{
   Section.restrictEndTo( Size-1 );
-  
+
   for( int i = Section.start(); i <= Section.end(); ++i )
   {
     int Result;
 //    if( IgnoreCase )
 //      result = strncasecmp( &data()[i], sc.key.data(), sc.key.size() );
 //    else
-    Result = memcmp( &Data[i], SearchString, Length );   
+    Result = memcmp( &Data[i], SearchString, Length );
     // found?
     if( Result == 0 )
       return i;
   }
-  return -1; 
+  return -1;
 }
 
 int KPlainBuffer::rfind( const char*, int /*Length*/, int /*Pos*/ ) const { return 0; }

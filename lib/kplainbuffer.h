@@ -38,8 +38,8 @@ class KPlainBuffer : public KDataBuffer
   friend class KPlainBufferIterator;
   
   public:
-    KPlainBuffer( char *D, int S, int RS = -1, bool KM = true );
-    KPlainBuffer( const char *D, int S );
+    KPlainBuffer( char *D, unsigned int S, int RS = -1, bool KM = true );
+    KPlainBuffer( const char *D, unsigned int S );
     KPlainBuffer( int MS = -1 );
     virtual ~KPlainBuffer();
 
@@ -70,7 +70,7 @@ class KPlainBuffer : public KDataBuffer
     void setMaxSize( int MS );
     /** sets whether the memory given by setData or in the constructor should be kept on resize
       */
-    void setKeepsMemory( int KM = true );
+    void setKeepsMemory( bool KM = true );
 
   public:
     char *data() const;
@@ -82,9 +82,9 @@ class KPlainBuffer : public KDataBuffer
     /** */
     char *Data;
     /** size of the data */
-    int Size;
+    unsigned int Size;
     /** Size of data array */
-    int RawSize;
+    unsigned int RawSize;
     /** maximal size of array, unlimited if -1 */
     int MaxSize;
     /** flag whether the initially given memory should be kept */
@@ -104,10 +104,10 @@ inline int KPlainBuffer::size()                        const { return Size; }
 inline bool KPlainBuffer::isReadOnly()   const { return ReadOnly; }
 inline bool KPlainBuffer::isModified()   const { return Modified; }
 
-inline void KPlainBuffer::setReadOnly( bool RO )   { ReadOnly = RO; }
-inline void KPlainBuffer::setModified( bool M )    { Modified = M; }
-inline void KPlainBuffer::setMaxSize( int MS )     { MaxSize = MS; }
-inline void KPlainBuffer::setKeepsMemory( int KM ) { KeepsMemory = KM; }
+inline void KPlainBuffer::setReadOnly( bool RO )    { ReadOnly = RO; }
+inline void KPlainBuffer::setModified( bool M )     { Modified = M; }
+inline void KPlainBuffer::setMaxSize( int MS )      { MaxSize = MS; }
+inline void KPlainBuffer::setKeepsMemory( bool KM ) { KeepsMemory = KM; }
 
 inline char *KPlainBuffer::data()       const { return Data; }
 inline int KPlainBuffer::maxSize()      const { return MaxSize; }
