@@ -39,10 +39,6 @@ int main( int argc, char* argv[] )
     BytesEdit->setGroupSpacingWidth( 4 );
 //     BytesEdit->setNoOfBytesPerLine( 16 );
 
-    std::cout << "BSW: "<<BytesEdit->byteSpacingWidth() << std::endl;
-    std::cout << "Data: "<<&BytesEdit->data()[5] << std::endl;
-//     std::cout << "BSW: "<<BytesEdit->byteSpacingWidth() << std::endl;
-
     // Finally insert the widget into the layout of its parent
     app.setTopWidget( BytesEditWidget );
     BytesEditWidget->show();

@@ -32,7 +32,7 @@
 
 using namespace KHE;
 
-static const char *RCFileName = "khexedit2partui.rc";
+static const char *RCFileName =    "khexedit2partui.rc";
 
 static const char *CodingGroupId = "ColumnCoding";
 

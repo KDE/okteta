@@ -1,1 +1,2 @@
 SUBDIRS = byteseditapp
+#SUBDIRS = beinterface

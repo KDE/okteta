@@ -24,7 +24,6 @@ dynamic selection by mouse using double/triple click
 as already started a selection following a double click selects word by word, a triple line by line
 
 
-
 undo/redo
 ---------
 This lacks the support in the databuffer subclasses
@@ -34,18 +33,57 @@ offering input behind the last char
 -----------------------------------
 if the buffer is not filled up and the actual size can be extended show the cursor bnot behind but as a full cursor
 
+Version 1:
+Simply extend the databuffer by one and cut it off before returning
+-> direct access to databuffer will be inconsistent
+Version 2:
+tell the cursor about. As he hasn't access to the buffer itself the information about the maximum size has to be put
+somewhere in cursor or layout. Perhaps it even can be handled by the hexedit giving the cursor a simple flag NewInputPos.
+Drawing the cursor isn't a problem. Only navigation.
+
 
 mark the maximum size of a buffer
 ---------------------------------
-for buffers that have been given a maximum size there should be a visual marker for the maximal size
+for buffers that have been given a maximum size there should be optionally a visual marker for the maximal size
 
+
+editing the digits in the hex column
+------------------------------------
+on a key press the actual byte is marked and the old value is overwritten
+an extra editing mode with inverted painting of the whole byte
+gets overwritten by external settings (setCursorPosition,
+when the last possible digit is inserted the cursor moves to the right
+using + and - to in-/decrease the value, switches to extra edit mode as well
+using backspace
+Update of the char in the text column immediatly or by a timer?
+allow more editing (going left/right, using delete) when clicking by mouse inside an byte edit
+Escape breaks editing and returns to previous value
+
+
+offer the possibility to edit the text in the designer
+------------------------------------------------------
+the default text is perhaps a little bit to whatever
+also there are people who would like a larger and a smaller data set
+
+
+paint not a frame but a still cursor in the inactive column in insert mode
+--------------------------------------------------------------------------
+
+punkt für alle unter 32
+strings erst ab 3-4 Zeichen als solche darstellen
+beim eingeben nach ganz ausgefülltem Zeichen gleich zum nächsten Byte weiter
+bei magPos nicht hälfte byte sondern halbes Digit zum Ende hin.
 
 KNOWN BUGS
 ==========
-incorrect cursor shape on font change
+frame cursor disappears on font change **
 when setting new coding the resizestyle is not reflected
 doing the first selection the cursor is redrawm too late (into the selection)
-
+in append mode the first char on a new line doesn't get a frame (the blinking cursor comes later, too) **
+if a new appended char leads to a new line the cursor is not made visible
+when deleting the screen is not always totally cleared
+Wortweise nach rechts springt vom Ende ganz an den Anfang.
+** maybe related
 
 SOLVED:
 Ctrl+Delete on behind the last word should delete until the end
