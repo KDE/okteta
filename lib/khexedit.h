@@ -34,6 +34,8 @@ class KCoordRange;
 
 class KDataBuffer;
 
+class KTextColumn;
+class KHexColumn;
 class KBufferColumn;
 class KOffsetColumn;
 class KBorderColumn;
@@ -289,14 +291,14 @@ class KHexEdit : public KColumnsView
 
   protected:
     KOffsetColumn& offsetColumn();
-    KBufferColumn& hexColumn();
-    KBufferColumn& textColumn();
+    KHexColumn& hexColumn();
+    KTextColumn& textColumn();
     KBufferColumn& activeColumn();
     KBufferColumn& inactiveColumn();
 
     const KOffsetColumn& offsetColumn() const;
-    const KBufferColumn& hexColumn()    const;
-    const KBufferColumn& textColumn()   const;
+    const KHexColumn& hexColumn()    const;
+    const KTextColumn& textColumn()   const;
     const KBufferColumn& activeColumn() const;
     const KBufferColumn& inactiveColumn() const;
 
@@ -351,8 +353,10 @@ class KHexEdit : public KColumnsView
 
   protected:
     KOffsetColumn *OffsetColumn;
-    KBufferColumn *BufferColumn[NoOfBufferColumns];
-    KBorderColumn *BorderColumn[NoOfBufferColumns];
+    KBorderColumn *FirstBorderColumn;
+    KHexColumn    *HexColumn;
+    KBorderColumn *SecondBorderColumn;
+    KTextColumn   *TextColumn;
 
     /** points to the column with keyboard focus */
     KBufferColumn *ActiveColumn;
@@ -428,14 +432,14 @@ class KHexEdit : public KColumnsView
 
 
 inline const KOffsetColumn& KHexEdit::offsetColumn()   const { return *OffsetColumn; }
-inline const KBufferColumn& KHexEdit::hexColumn()      const { return *BufferColumn[0]; }
-inline const KBufferColumn& KHexEdit::textColumn()     const { return *BufferColumn[1]; }
+inline const KHexColumn& KHexEdit::hexColumn()         const { return *HexColumn; }
+inline const KTextColumn& KHexEdit::textColumn()       const { return *TextColumn; }
 inline const KBufferColumn& KHexEdit::activeColumn()   const { return *ActiveColumn; }
 inline const KBufferColumn& KHexEdit::inactiveColumn() const { return *InactiveColumn; }
 
 inline KOffsetColumn& KHexEdit::offsetColumn()   { return *OffsetColumn; }
-inline KBufferColumn& KHexEdit::hexColumn()      { return *BufferColumn[0]; }
-inline KBufferColumn& KHexEdit::textColumn()     { return *BufferColumn[1]; }
+inline KHexColumn& KHexEdit::hexColumn()         { return *HexColumn; }
+inline KTextColumn& KHexEdit::textColumn()       { return *TextColumn; }
 inline KBufferColumn& KHexEdit::activeColumn()   { return *ActiveColumn; }
 inline KBufferColumn& KHexEdit::inactiveColumn() { return *InactiveColumn; }
 

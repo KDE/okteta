@@ -35,7 +35,8 @@
 // app specific
 #include "kdatabuffer.h"
 #include "koffsetcolumn.h"
-#include "kbuffercolumn.h"
+#include "khexcolumn.h"
+#include "ktextcolumn.h"
 #include "kbordercolumn.h"
 #include "kbuffercursor.h"
 #include "kbufferlayout.h"
@@ -90,13 +91,10 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, WFla
 
   // creating the columns in the needed order
   OffsetColumn = new KOffsetColumn( this, DefaultFirstLineOffset, DefaultNoOfBytesPerLine, KOffsetFormat::Hexadecimal );
-  BorderColumn[0] = new KBorderColumn( this );
-  BufferColumn[0] = new KBufferColumn( this, DataBuffer, BufferLayout, BufferRanges );
-  BorderColumn[1] = new KBorderColumn( this );
-  BufferColumn[1] = new KBufferColumn( this, DataBuffer, BufferLayout, BufferRanges );
-
-  textColumn().setCoding( KHE::ASCIICoding );
-  textColumn().setSpacing( 0,0,0 );
+  FirstBorderColumn = new KBorderColumn( this );
+  HexColumn = new KHexColumn( this, DataBuffer, BufferLayout, BufferRanges );
+  SecondBorderColumn = new KBorderColumn( this );
+  TextColumn = new KTextColumn( this, DataBuffer, BufferLayout, BufferRanges );
 
   // select the active column
   ActiveColumn = &textColumn();
@@ -384,7 +382,7 @@ QSize KHexEdit::sizeHint() const
 QSize KHexEdit::minimumSizeHint() const
 {
   // TODO: better minimal width (visibility!)
-  return QSize( offsetColumn().visibleWidth()+BorderColumn[0]->visibleWidth()+BorderColumn[1]->visibleWidth()+hexColumn().byteWidth()+textColumn().byteWidth(),
+  return QSize( offsetColumn().visibleWidth()+FirstBorderColumn->visibleWidth()+SecondBorderColumn->visibleWidth()+hexColumn().byteWidth()+textColumn().byteWidth(),
                 lineHeight() + noOfLines()>1? style().pixelMetric(QStyle::PM_ScrollBarExtent):0 );
 }
 
@@ -411,7 +409,7 @@ void KHexEdit::resizeEvent( QResizeEvent *ResizeEvent )
 
 int KHexEdit::fittingBytesPerLine( const QSize &NewSize ) const
 {
-  KPixelX ReservedWidth = OffsetColumn->visibleWidth() + BorderColumn[0]->visibleWidth() + BorderColumn[1]->visibleWidth();
+  KPixelX ReservedWidth = OffsetColumn->visibleWidth() + FirstBorderColumn->visibleWidth() + SecondBorderColumn->visibleWidth();
 
   // abstract framewidth as well as offset and border columns width
   int UsedbyFrameWidth = 2 * frameWidth();
@@ -596,8 +594,8 @@ KBufferDrag *KHexEdit::dragObject( bool F, QWidget *Parent ) const
   if( !BufferRanges->hasSelection() )
     return 0L;
 
-  const KBufferColumn *HC;
-  const KBufferColumn *TC;
+  const KHexColumn *HC;
+  const KTextColumn *TC;
   KCoordRange Range;
 
   if( ActiveColumn == &textColumn() || !F )
@@ -613,7 +611,7 @@ KBufferDrag *KHexEdit::dragObject( bool F, QWidget *Parent ) const
     Range.set( BufferLayout->coordOfIndex(S.start()),BufferLayout->coordOfIndex(S.end()) );
   }
 
-  return new KBufferDrag( selectedData(), Range, OffsetColumn,HC,TC, Parent );
+  return new KBufferDrag( selectedData(), Range, OffsetColumn,HC,TC, textColumn().substituteChar(), Parent );
 }
 
 
@@ -1151,10 +1149,10 @@ void KHexEdit::drawEditedByte( bool Edited )
   pointPainterToCursor( Painter, activeColumn() );
   if( Edited )
   {
-    activeColumn().paintEditedByte( &Painter, EditValue, ByteBuffer );
+    hexColumn().paintEditedByte( &Painter, EditValue, ByteBuffer );
     Painter.end();
-    pointPainterToCursor( Painter, inactiveColumn() );
-    inactiveColumn().paintFramedByte( &Painter, Index );
+    pointPainterToCursor( Painter, textColumn() );
+    textColumn().paintFramedByte( &Painter, Index );
   }
   else
     activeColumn().paintByte( &Painter, Index );
@@ -1696,12 +1694,20 @@ void KHexEdit::repaintChanged()
 
   // collect affected buffer columns
   QPtrList<KBufferColumn> RepaintColumns;
-  for( int i=0; i<NoOfBufferColumns; ++i )
-    if( BufferColumn[i]->isVisible() && BufferColumn[i]->overlaps(cx,cx+cw-1) )
+
+  KBufferColumn *C = HexColumn;
+  while( true )
+  {
+    if( C->isVisible() && C->overlaps(cx,cx+cw-1) )
     {
-      RepaintColumns.append( BufferColumn[i] );
-      BufferColumn[i]->preparePainting( cx, cw );
+      RepaintColumns.append( C );
+      C->preparePainting( cx, cw );
     }
+
+    if( C == TextColumn )
+      break;
+    C = TextColumn;
+  }
 
   if( RepaintColumns.count() > 0 )
   {

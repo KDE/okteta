@@ -1,7 +1,7 @@
 /***************************************************************************
-                          kbuffercoltextexport.h  -  description
+                          ktextcoltextexport.h  -  description
                              -------------------
-    begin                : Sam Aug 30 2003
+    begin                : Wed Sep 3 2003
     copyright            : (C) 2003 by Friedrich W. H. Kossebau
     email                : Friedrich.W.H@Kossebau.de
  ***************************************************************************/
@@ -15,49 +15,29 @@
  ***************************************************************************/
 
 
-#ifndef KBUFFERCOLTEXTEXPORT_H
-#define KBUFFERCOLTEXTEXPORT_H
+#ifndef KTEXTCOLTEXTEXPORT_H
+#define KTEXTCOLTEXTEXPORT_H
 
-#include "kcoltextexport.h"
-#include "kcoordrange.h"
+#include "kbuffercoltextexport.h"
 
 
 namespace KHE
 {
 
-class KBufferColumn;
+class KTextColumn;
 
 
-class KBufferColTextExport : public KColTextExport
+class KTextColTextExport : public KBufferColTextExport
 {
   public:
-    KBufferColTextExport( const KBufferColumn* BF, char *D, KCoordRange CR, int BytesWidth );
-    virtual ~KBufferColTextExport();
+    KTextColTextExport( const KTextColumn* BF, char *D, KCoordRange CR );
+    virtual ~KTextColTextExport();
 
-  public: // API
-    void printFirstLine( char **T, int Line ) const;
-    void printNextLine( char **T ) const;
-    /** tells how much chars per line are needed */
-    int charsPerLine() const;
-
-
-  protected: // API to be reimplemented
+  protected: //API
     virtual void print( char **T ) const;
 
-
   protected:
-    mutable char *Data;
-    KCoordRange CoordRange;
-
-    int NoOfBytesPerLine;
-
-    /** Line to print */
-    mutable int PrintLine;
-
-    /** buffered value of how many chars a line needs */
-    int NoOfCharsPerLine;
-    // positions where to paint the
-    int *Pos;
+    char SubstituteChar;
 };
 
 }

@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kbuffercoltextexport.h  -  description
+                          khexcoltextexport.h  -  description
                              -------------------
     begin                : Sam Aug 30 2003
     copyright            : (C) 2003 by Friedrich W. H. Kossebau
@@ -15,49 +15,33 @@
  ***************************************************************************/
 
 
-#ifndef KBUFFERCOLTEXTEXPORT_H
-#define KBUFFERCOLTEXTEXPORT_H
+#ifndef KHEXCOLTEXTEXPORT_H
+#define KHEXCOLTEXTEXPORT_H
 
-#include "kcoltextexport.h"
-#include "kcoordrange.h"
+#include "kbytecodec.h"
+#include "kbuffercoltextexport.h"
 
 
 namespace KHE
 {
 
-class KBufferColumn;
+class KHexColumn;
 
 
-class KBufferColTextExport : public KColTextExport
+class KHexColTextExport : public KBufferColTextExport
 {
   public:
-    KBufferColTextExport( const KBufferColumn* BF, char *D, KCoordRange CR, int BytesWidth );
-    virtual ~KBufferColTextExport();
+    KHexColTextExport( const KHexColumn* BF, char *D, KCoordRange CR );
+    virtual ~KHexColTextExport();
 
-  public: // API
-    void printFirstLine( char **T, int Line ) const;
-    void printNextLine( char **T ) const;
-    /** tells how much chars per line are needed */
-    int charsPerLine() const;
-
-
-  protected: // API to be reimplemented
+  protected:
     virtual void print( char **T ) const;
 
 
   protected:
-    mutable char *Data;
-    KCoordRange CoordRange;
 
-    int NoOfBytesPerLine;
-
-    /** Line to print */
-    mutable int PrintLine;
-
-    /** buffered value of how many chars a line needs */
-    int NoOfCharsPerLine;
-    // positions where to paint the
-    int *Pos;
+    int CodingWidth;
+    KByteCodec::coding CodingFunction;
 };
 
 }

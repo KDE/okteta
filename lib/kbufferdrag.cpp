@@ -24,7 +24,8 @@ using namespace std;
 #include "kbufferdrag.h"
 #include "kbordercoltextexport.h"
 #include "koffsetcoltextexport.h"
-#include "kbuffercoltextexport.h"
+#include "khexcoltextexport.h"
+#include "ktextcoltextexport.h"
 
 using namespace KHE;
 
@@ -32,10 +33,11 @@ const char *KBufferDrag::OctetStream = "application/octet-stream";
 const char *KBufferDrag::PlainText = "text/plain";
 
 KBufferDrag::KBufferDrag( const QByteArray &D, KCoordRange Range,
-                          const KOffsetColumn *OC, const KBufferColumn *HC, const KBufferColumn *TC,
+                          const KOffsetColumn *OC, const KHexColumn *HC, const KTextColumn *TC, char SC,
                           QWidget *Source, const char *Name )
   :QDragObject( Source, Name ),
-   CoordRange( Range )
+   CoordRange( Range ),
+   SubstituteChar( SC )
 {
   setData( D );
 
@@ -45,11 +47,11 @@ KBufferDrag::KBufferDrag( const QByteArray &D, KCoordRange Range,
   {
     Columns[NoOfCol++] = new KOffsetColTextExport( OC );
     Columns[NoOfCol++] = new KBorderColTextExport();
-    Columns[NoOfCol++] = new KBufferColTextExport( HC, Data.data(), CoordRange );
+    Columns[NoOfCol++] = new KHexColTextExport( HC, Data.data(), CoordRange );
     if( TC )
     {
       Columns[NoOfCol++] = new KBorderColTextExport();
-      Columns[NoOfCol++] = new KBufferColTextExport( TC, Data.data(), CoordRange );
+      Columns[NoOfCol++] = new KTextColTextExport( TC, Data.data(), CoordRange );
     }
   }
 }
@@ -100,7 +102,7 @@ QByteArray KBufferDrag::encodedData( const char *Format ) const
         TextData.duplicate( Data );
         char *D = TextData.data();
         for( unsigned int i=0; i<TextData.size(); ++i,++D )
-        { char B = *D; if( B < 32 && B != '\t' && B != '\n' ) *D = ' '; }
+        { char B = *D; if( B < 32 && B != '\t' && B != '\n' ) *D = SubstituteChar; }
       }
       else
       {

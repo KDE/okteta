@@ -72,17 +72,9 @@ class KBufferColumn : public KColumn
       * @param Index Index of the byte to paint the frame for. If -1 a space is used as char.
       */
     void paintFramedByte( QPainter *P, int Index );
-    /** paints a frame to the char.
-      * @param Index Index of the byte to paint the frame for. If -1 a space is used as char.
-      */
-    void paintEditedByte( QPainter *P, const char Byte, const char *EditBuffer );
 
 
   public: // modification access
-    /**
-      * returns true if there was a change
-      */
-    bool setCoding( KCoding C );
     /** sets the spacing in the hex column
       * @param ByteSpacingW spacing between the bytes in pixels
       * @param NewNoOfGroupedBytes numbers of grouped bytes, 0 means no grouping
@@ -109,11 +101,6 @@ class KBufferColumn : public KColumn
       * returns true if there was a change
       */
     bool setDigitWidth( KPixelX DW );
-    /** sets the spacing in the middle of a binary byte in the hex column
-      * @param BinaryGapW spacing in the middle of a binary in pixels
-      * returns true if there was a change
-      */
-    bool setBinaryGapWidth( KPixelX BGW );
     /** sets the metrics of the used font
       * @param NewDigitWidth the new width of a digit
       * @param NewDigitBaseLine the new baseline of the digits
@@ -155,14 +142,7 @@ class KBufferColumn : public KColumn
     KPixelX digitWidth()                     const;
     KPixelX groupSpacingWidth()              const;
     KPixelX byteSpacingWidth()               const;
-    KPixelX binaryGapWidth()                 const;
     int noOfGroupedBytes()                   const;
-    KCoding coding()                         const;
-    int codingWidth()                        const;
-    KByteCodec::coding codingFunction()      const;
-    KByteCodec::coding shortCodingFunction() const;
-    KByteCodec::adding addingFunction()      const;
-    KByteCodec::removingLastDigit removingFunction() const;
 
     int firstPos() const;
     int lastPos()  const;
@@ -172,13 +152,17 @@ class KBufferColumn : public KColumn
   protected:
     /** */
     void recalcX();
-    void drawByte( QPainter *P, const char Byte, const QColor &Color ) const;
-    void drawCode( QPainter *P, const char *Code, const QColor &Color ) const;
-//    void drawSelection( QPainter *P, const int Index, int FP, int LP ) const;
-//    void drawMarking( QPainter *P, const int Index, int FP, int LP ) const;
-//    bool isSelected( int FI, int LI, int *FSI, int *LSI, unsigned int *Flag ) const;
-//    bool isMarked( int FI, int LI, int *FSI, int *LSI, unsigned int *Flag ) const;
+    void recalcVerticalGridX();
 
+
+  protected: // API to be refined
+    /** default implementation simply prints the byte as ASCII */
+    virtual void drawByte( QPainter *P, char Byte, const QColor &Color ) const;
+    /** default implementation sets byte width to one digit width */
+    virtual void recalcByteWidth();
+
+
+  protected:
     void paintGrid( QPainter *P, KSection Range );
     void paintPlain( QPainter *P, KSection Positions, int Index );
     void paintSelection( QPainter *P, KSection Positions, int Index, int Flag );
@@ -188,8 +172,6 @@ class KBufferColumn : public KColumn
     bool isSelected( KSection Range, KSection *Selection, unsigned int *Flag ) const;
     bool isMarked( KSection Range, KSection *Marking, unsigned int *Flag ) const;
 
-    void recalcByteWidth();
-    void recalcVerticalGridX();
 
   protected:
     /** pointer to the buffer */
@@ -208,18 +190,7 @@ class KBufferColumn : public KColumn
     /** */
     bool VerticalGrid;
 
-    /** buffer to hold the formatted coding */
-    mutable char CodedByte[KByteCodec::MaxCodingWidth+1];
-
   protected:  // individual data
-    /***/
-    KCoding Coding;
-    /** buffers coding width */
-    int CodingWidth;
-    KByteCodec::coding CodingFunction;
-    KByteCodec::coding ShortCodingFunction;
-    KByteCodec::adding AddingFunction;
-    KByteCodec::removingLastDigit RemovingLastDigitFunction;
     /** total width of byte display in pixel */
     KPixelX ByteWidth;
     /** width of inserting cursor in pixel */
@@ -229,10 +200,6 @@ class KBufferColumn : public KColumn
     /** width of spacing in pixel */
     KPixelX GroupSpacingWidth;
 
-    /** */
-    KPixelX BinaryGapWidth;
-    /** Offset of the */
-    KPixelX BinaryHalfOffset;
     /** number of grouped bytes */
     int NoOfGroupedBytes;
 
@@ -258,16 +225,8 @@ inline KPixelX KBufferColumn::byteWidth()         const { return ByteWidth; }
 inline KPixelX KBufferColumn::digitWidth()        const { return DigitWidth; }
 inline KPixelX KBufferColumn::byteSpacingWidth()  const { return ByteSpacingWidth; }
 inline KPixelX KBufferColumn::groupSpacingWidth() const { return GroupSpacingWidth; }
-inline KPixelX KBufferColumn::binaryGapWidth()    const { return BinaryGapWidth; }
 
 inline int KBufferColumn::noOfGroupedBytes()      const { return NoOfGroupedBytes; }
-inline KCoding KBufferColumn::coding()            const { return Coding; }
-
-inline int KBufferColumn::codingWidth()                        const { return CodingWidth; }
-inline KByteCodec::coding KBufferColumn::codingFunction()      const { return CodingFunction; }
-inline KByteCodec::coding KBufferColumn::shortCodingFunction() const { return ShortCodingFunction; }
-inline KByteCodec::adding KBufferColumn::addingFunction()      const { return AddingFunction; }
-inline KByteCodec::removingLastDigit KBufferColumn::removingFunction()      const { return RemovingLastDigitFunction; }
 
 inline int KBufferColumn::firstPos() const { return PaintPositions.start(); }
 inline int KBufferColumn::lastPos()  const { return PaintPositions.end(); }

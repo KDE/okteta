@@ -35,13 +35,11 @@ static const unsigned int StartsBefore = 1;
 static const unsigned int EndsLater = 2;
 
 static const int DefaultCursorWidth = 2;
-static const KCoding DefaultCoding = HexadecimalCoding;
 static const int DefaultByteSpacingWidth = 3;
 static const int DefaultGroupSpacingWidth = 9;
-static const int DefaultBinaryGapWidth = 1;
 static const int DefaultNoOfGroupedBytes = 4;
 
-inline QColor colorForByte( const char Byte )
+static inline QColor colorForByte( const char Byte )
 {
   if( ispunct(Byte) )
     return Qt::red;
@@ -52,28 +50,22 @@ inline QColor colorForByte( const char Byte )
 }
 
 
-KBufferColumn::KBufferColumn( KColumnsView/*KHexEdit*/ *HE, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R )
- : KColumn( HE ),
+KBufferColumn::KBufferColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R )
+ : KColumn( CV ),
    Buffer( B ),
    Layout( L ),
    Ranges( R ),
    DigitWidth( 0 ),
    DigitBaseLine( 0 ),
    VerticalGrid( false ),
-   Coding( NoCoding ),
-   CodingWidth( 0 ),
-   CodingFunction( 0L ),
    ByteWidth( 0 ),
    ByteSpacingWidth( DefaultByteSpacingWidth ),
    GroupSpacingWidth( DefaultGroupSpacingWidth ),
-   BinaryGapWidth( DefaultBinaryGapWidth ),
-   BinaryHalfOffset( 0 ),
    NoOfGroupedBytes( DefaultNoOfGroupedBytes ),
    PosX( 0L ),
    PosRightX( 0L ),
    LastPos( 0 )
 {
-  setCoding( DefaultCoding );
 }
 
 
@@ -194,57 +186,17 @@ bool KBufferColumn::setGroupSpacingWidth( KPixelX GSW )
 }
 
 
-bool KBufferColumn::setBinaryGapWidth( KPixelX BGW )
-{
-  // no changes?
-  if( BinaryGapWidth == BGW )
-     return false;
-
-  BinaryGapWidth = BGW;
-
-  // recalculate depend sizes
-  recalcByteWidth();
-
-  if( PosX )
-    recalcX();
-  return true;
-}
-
-
-bool KBufferColumn::setCoding( KCoding C )
-{
-  // no changes?
-  if( Coding == C )
-    return false;
-
-  Coding = C;
-  CodingWidth = KByteCodec::codingWidth( Coding );
-  CodingFunction = KByteCodec::codingFunction( Coding );
-  ShortCodingFunction = KByteCodec::shortCodingFunction( Coding );
-  AddingFunction = KByteCodec::addingFunction( Coding );
-  RemovingLastDigitFunction = KByteCodec::removingLastDigitFunction( Coding );
-
-  // recalculate depend sizes
-  recalcByteWidth();
-
-  if( PosX )
-    recalcX();
-  return true;
-}
-
-
 void KBufferColumn::recalcByteWidth()
 {
-  ByteWidth =     CodingWidth * DigitWidth;
-  if( Coding == BinaryCoding )
-  {
-    BinaryHalfOffset = 4 * DigitWidth + BinaryGapWidth;
-    ByteWidth += BinaryGapWidth;
-  }
+  ByteWidth = DigitWidth;
   recalcVerticalGridX();
 }
 
-void KBufferColumn::recalcVerticalGridX() { VerticalGridX = ByteWidth-1 + GroupSpacingWidth/2; }
+
+void KBufferColumn::recalcVerticalGridX()
+{
+  VerticalGridX = ByteWidth-1 + GroupSpacingWidth/2;
+}
 
 
 void KBufferColumn::recalcX()
@@ -386,8 +338,8 @@ KSection KBufferColumn::posOfRelX( KPixelX PX, KPixelX PW ) const
 }
 
 
-/*inline*/ KPixelX KBufferColumn::relXOfPos( int Pos )      const { return PosX ? PosX[Pos] : 0; }
-/*inline*/ KPixelX KBufferColumn::relRightXOfPos( int Pos ) const { return PosRightX ? PosRightX[Pos] : 0; }
+KPixelX KBufferColumn::relXOfPos( int Pos )      const { return PosX ? PosX[Pos] : 0; }
+KPixelX KBufferColumn::relRightXOfPos( int Pos ) const { return PosRightX ? PosRightX[Pos] : 0; }
 
 
 KSection KBufferColumn::wideXPixelsOfPos( KSection Positions ) const
@@ -704,37 +656,11 @@ void KBufferColumn::paintCursor( QPainter *P, int Index )
 }
 
 
-// perhaps sometimes there will be a grammar
-void KBufferColumn::paintEditedByte( QPainter *P, const char Byte, const char *EditBuffer )
-{
-  const QColorGroup &CG = View->colorGroup();
-
-  P->fillRect( 0,0,ByteWidth,LineHeight, QBrush(colorForByte(Byte),Qt::SolidPattern) );
-
-  drawCode( P, EditBuffer, CG.base() );
-}
-
-
-void KBufferColumn::drawByte( QPainter *P, const char Byte, const QColor &Color ) const
-{
-  codingFunction()( CodedByte, Byte );
-  drawCode( P, CodedByte, Color );
-}
-
-
-void KBufferColumn::drawCode( QPainter *P, const char *Code, const QColor &Color ) const
+void KBufferColumn::drawByte( QPainter *P, char Byte, const QColor &Color ) const
 {
   P->setPen( Color );
-  if( Coding == BinaryCoding )
-  {
-    // leave a gap in the middle
-    P->drawText( 0, DigitBaseLine, QString::fromLocal8Bit(Code,4) );
-    P->drawText( BinaryHalfOffset, DigitBaseLine, QString::fromLocal8Bit(&Code[4],4) );
-  }
-  else
-    P->drawText( 0, DigitBaseLine, QString::fromLocal8Bit(Code) );
+  P->drawText( 0, DigitBaseLine, QString::fromAscii(&Byte,1) );
 }
-
 
 
 bool KBufferColumn::isSelected( KSection Range, KSection *Selection, unsigned int *Flag ) const
