@@ -45,12 +45,12 @@
 #include "khexedit2.h"
 
 
-static const char *UIRCFileName =   "khexedit2ui.rc";
-static const char *LibFileName =    "libkhexedit2part";
-// static const char *ConfigFileName = "khexedit2.rc";
-static const char *PartName =       "khexedit2part";
+static const char UIRCFileName[] =   "khexedit2ui.rc";
+static const char LibFileName[] =    "libkhexedit2part";
+// static const char ConfigFileName[] = "khexedit2.rc";
+static const char PartName[] =       "khexedit2part";
 
-// static const char *IdLastUrl = "lastURL";
+// static const char IdLastUrl[] = "lastURL";
 
 
 KHexEdit2::KHexEdit2()

@@ -33,10 +33,10 @@
 
 using namespace KHE;
 
-static const char *RCFileName =    "khexedit2partui.rc";
+static const char RCFileName[] =    "khexedit2partui.rc";
 
-static const char *CodingGroupId = "ColumnCoding";
-static const char *ResizeStyleGroupId = "ResizeStyle";
+static const char CodingGroupId[] = "ColumnCoding";
+static const char ResizeStyleGroupId[] = "ResizeStyle";
 
 
 KHexEditPart::KHexEditPart( QWidget *parentWidget, const char *widgetName,
@@ -113,7 +113,7 @@ void KHexEditPart::setupActions()
   KStdAction::zoomOut( m_HexEdit, SLOT(zoomOut()),  actionCollection() );
 
   // set our XML-UI resource file
-  setXMLFile( RCFileName ); 
+  setXMLFile( RCFileName );
 }
 
 

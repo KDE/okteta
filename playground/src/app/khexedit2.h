@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef _KHEXEDIT2_H_
-#define _KHEXEDIT2_H_
+#ifndef KHEXEDIT2_H_
+#define KHEXEDIT2_H_
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -110,7 +110,6 @@ class KHexEdit2 : public KParts::DockMainWindow
 //     KHexEdit2View *m_view;
 //     KDockWidget* m_SearchWidget;
 
-//     KPrinter   *m_printer;
     KToggleAction *m_toolbarAction;
     KToggleAction *m_statusbarAction;
 };

@@ -24,21 +24,21 @@
 #include "khexedit2.h"
 
 // App
-static const char *AppId =          "khexedit2";
-static const char *AppName =        I18N_NOOP("KHexEdit2");
-static const char *AppDescription = I18N_NOOP("KDE Hex editor");
-static const char *AppVersion =     "0.1.5";
-static const char *AppCopyright =   "(C) 2003 Friedrich W. H. Kossebau";
+static const char AppId[] =          "khexedit2";
+static const char AppName[] =        I18N_NOOP("KHexEdit2");
+static const char AppDescription[] = I18N_NOOP("KDE Hex editor");
+static const char AppVersion[] =     "0.1.5";
+static const char AppCopyright[] =   "(C) 2004 Friedrich W. H. Kossebau";
 // Author
-static const char *FWHKName =         "Friedrich W. H. Kossebau";
-static const char *FWHKTask =         I18N_NOOP("Reimplementer");
-static const char *FWHKEmailAddress = "Friedrich.W.H@Kossebau.de";
-// static const char *FWHKWebAddress = "http://www.kossebau.de";
+static const char FWHKName[] =         "Friedrich W. H. Kossebau";
+static const char FWHKTask[] =         I18N_NOOP("Reimplementer");
+static const char FWHKEmailAddress[] = "Friedrich.W.H@Kossebau.de";
+// static const char FWHKWebAddress[] = "http://www.kossebau.de";
 // Credit to
-static const char *ESName =         "Espen Sand";
-static const char *ESEmailAddress = "espensa@online.no";
-// static const char *ESWebAddress = "http://home.sol.no/~espensa/khexedit/";
-static const char *ESCreditText =   I18N_NOOP("wrote the first KHexEdit app (1999 until 200x)");
+static const char ESName[] =         "Espen Sand";
+static const char ESEmailAddress[] = "espensa@online.no";
+// static const char ESWebAddress[] = "http://home.sol.no/~espensa/khexedit/";
+static const char ESCreditText[] =   I18N_NOOP("wrote the first KHexEdit app (1999 until 200x)");
 
 //     "This program uses modified code and techniques from other KDE programs,\n"
 //     "specifically kwrite, kiconedit and ksysv. Credit goes to authors\n"

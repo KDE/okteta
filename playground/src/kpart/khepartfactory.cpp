@@ -24,21 +24,21 @@
 #include "khepartfactory.h"
 
 // Part
-static const char *PartId =          "khexedit2part";
-static const char *PartName =        I18N_NOOP("KHexEdit2Part");
-static const char *PartDescription = I18N_NOOP("Embedded hex editor");
-static const char *PartVersion =     "0.1.0";
-static const char *PartCopyright =   "(C) 2003 Friedrich W. H.  Kossebau";
+static const char PartId[] =          "khexedit2part";
+static const char PartName[] =        I18N_NOOP("KHexEdit2Part");
+static const char PartDescription[] = I18N_NOOP("Embedded hex editor");
+static const char PartVersion[] =     "0.1.0";
+static const char PartCopyright[] =   "(C) 2003 Friedrich W. H.  Kossebau";
 // Author
-static const char *FWHKName =         "Friedrich W. H. Kossebau";
-static const char *FWHKTask =         I18N_NOOP("Author");
-static const char *FWHKEmailAddress = "Friedrich.W.H@Kossebau.de";
-// static const char *FWHKWebAddress = "http://www.kossebau.de";
+static const char FWHKName[] =         "Friedrich W. H. Kossebau";
+static const char FWHKTask[] =         I18N_NOOP("Author");
+static const char FWHKEmailAddress[] = "Friedrich.W.H@Kossebau.de";
+// static const char FWHKWebAddress[] = "http://www.kossebau.de";
 // Credit to
-static const char *ESName =         "Espen Sand";
-static const char *ESEmailAddress = "espensa@online.no";
-// static const char *ESWebAddress = "http://home.sol.no/~espensa/khexedit/";
-static const char *ESCreditText =   I18N_NOOP( "wrote the KHexEdit app" );
+static const char ESName[] =         "Espen Sand";
+static const char ESEmailAddress[] = "espensa@online.no";
+// static const char ESWebAddress[] = "http://home.sol.no/~espensa/khexedit/";
+static const char ESCreditText[] =   I18N_NOOP( "wrote the KHexEdit app" );
 
 
 
