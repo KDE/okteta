@@ -27,11 +27,6 @@ static const char *description =
 
 static const char *version = "0.1";
 
-static KCmdLineOptions options[] =
-{
-    { "+[URL]", I18N_NOOP( "Document to open." ), 0 },
-    { 0, 0, 0 }
-};
 
 int main(int argc, char **argv)
 {
@@ -39,7 +34,6 @@ int main(int argc, char **argv)
                      KAboutData::License_GPL, "(C) 2003 Friedrich W. H.  Kossebau", 0, 0, "Friedrich.W.H@Kossebau.de");
     about.addAuthor( "Friedrich W. H.  Kossebau", 0, "Friedrich.W.H@Kossebau.de" );
     KCmdLineArgs::init(argc, argv, &about);
-    KCmdLineArgs::addCmdLineOptions(options);
     KApplication app;
 
     // register ourselves as a dcop client
@@ -53,23 +47,11 @@ int main(int argc, char **argv)
     else
     {
         // no session.. just start up normally
-        KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-        if (args->count() == 0)
-        {
-            BytesEditApp *widget = new BytesEditApp;
-            widget->show();
-        }
-        else
-        {
-            int i = 0;
-            for (; i < args->count(); i++)
-            {
-                BytesEditApp *widget = new BytesEditApp;
-                widget->show();
-                widget->load(args->url(i));
-            }
-        }
-        args->clear();
+//         KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+        BytesEditApp *widget = new BytesEditApp;
+        widget->show();
+
+//         args->clear();
     }
 
     return app.exec();

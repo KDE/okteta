@@ -1,13 +1,34 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
 <kpartgui name="byteseditapp" version="2">
-<MenuBar>
+<MenuBar> 
   <Menu name="file">
     <Separator/>
     <Action name="file_setreadonly" />
     <Separator/>
   </Menu>
+  <Menu name="edit">
+    <Separator/>
+    <Action name="edit_select_all"/>
+    <Action name="edit_deselect"/>
+  </Menu>
+  <Menu name="view">
+    <Menu name=""><text>&amp;Coding</text>
+      <Action name="view_hexcoding"/>
+      <Action name="view_deccoding"/>
+      <Action name="view_octcoding"/>
+      <Action name="view_bincoding"/>
+    </Menu>
+    <Separator/>
+    <Action name="view_showunprintable"/>
 </MenuBar>
+
 <ToolBar name="mainToolBar">
+  <Separator/>
+  <Action name="view_zoom_in"/>
+  <Action name="view_zoom_out"/>
+  <Separator/>
+  <Action name="view_showunprintable"/>
+  <Separator/>
   <Action name="file_setreadonly" />
 </ToolBar>
 </kpartgui>

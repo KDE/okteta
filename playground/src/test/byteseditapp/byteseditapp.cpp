@@ -14,14 +14,22 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "byteseditapp.h"
-#include "pref.h"
-
-#include <qdragobject.h>
-#include <kprinter.h>
+// c specific
+#include <string.h>
+// c++ specific
+#include <iostream>
+// qt specific
 #include <qpainter.h>
 #include <qpaintdevicemetrics.h>
-
+#include <qlayout.h>
+// kde specific
+#include <kurl.h>
+#include <ktrader.h>
+#include <klibloader.h>
+#include <kmessagebox.h>
+#include <krun.h>
+#include <klocale.h>
+#include <kglobalsettings.h>
 #include <kglobal.h>
 #include <klocale.h>
 #include <kiconloader.h>
@@ -29,117 +37,155 @@
 #include <kstatusbar.h>
 #include <kkeydialog.h>
 #include <kaccel.h>
-#include <kio/netaccess.h>
-#include <kfiledialog.h>
 #include <kconfig.h>
 #include <kurl.h>
-#include <kurlrequesterdlg.h>
 #include <kstandarddirs.h>
-
 #include <kedittoolbar.h>
-
 #include <kstdaccel.h>
 #include <kaction.h>
 #include <kstdaction.h>
+// new kde specific // TODO: add khexeditor/
+#include <byteseditinterface.h>
+#include <hexcolumninterface.h>
+#include <textcolumninterface.h>
+#include <clipboardinterface.h>
+#include <zoominterface.h>
+// app specific
+#include "byteseditapp.h"
 
 
 static const char PathToIcon[] = "khe/pics/";
-
+static const int BufferSize = 893;
+static const char *CodingGroupId = "ColumnCoding";
+static const char *RCFileName = "byteseditappui.rc";
 
 BytesEditApp::BytesEditApp()
-    : KMainWindow( 0, "BytesEditApp" ),
-      m_view(new BytesEditAppView(this))
+    : KMainWindow( 0, "BytesEditApp" )
 {
-    // accept dnd
-    setAcceptDrops(true);
+  Buffer = new char[BufferSize];
+  memset( Buffer, '#', BufferSize );
+  memcpy( &Buffer[10], "This is a test text.", 20 );
+  memcpy( &Buffer[873], "This is a test text.", 20 );
 
-    // tell the KMainWindow that this is indeed the main widget
-    setCentralWidget(m_view);
+  BytesEditWidget = KHE::createBytesEditWidget( this, "BytesEditWidget" );
+  // was kdeutils installed, so the widget could be found?
+  if( BytesEditWidget )
+  {
+    // fetch the editor interface
+//     KBytesEditInterface *BytesEdit = static_cast<KBytesEditInterface *>( BytesEditWidget->qt_cast( "KBytesEditInterface" ) );
+    BytesEdit = KHE::bytesEditInterface( BytesEditWidget );
+    Q_ASSERT( BytesEdit ); // This should not fail!
 
-    // then, setup our actions
-    setupActions();
+    // now use the editor.
+    //BytesEdit = new KHE::KBytesEdit( this );
+    BytesEdit->setData( Buffer, BufferSize, -1 );
+    BytesEdit->setMaxDataSize( BufferSize );
+    BytesEdit->setReadOnly( false );
+    BytesEdit->setAutoDelete( true );
+#if 0
+    KHE::HexColumnInterface *HexColumn = hexColumnInterface( BytesEditWidget );
+    if( HexColumn )
+    {
+      Layout->setResizeStyle( KBytesEditInterface::LockGrouping );
+//     BytesEdit->setNoOfBytesPerLine( 16 );
+//     BytesEdit->setResizeStyle( KHE::KBytesEdit::LockGrouping );
+    }
+#endif
+    KHE::HexColumnInterface *HexColumn = KHE::hexColumnInterface( BytesEditWidget );
+    if( HexColumn )
+    {
+      HexColumn->setResizeStyle( KHE::HexColumnInterface::LockGrouping );
+      HexColumn->setCoding( KHE::HexColumnInterface::DecimalCoding );
+//      HexColumn->setCoding( HexColumnInterface::BinaryCoding );
+      HexColumn->setByteSpacingWidth( 2 );
+      HexColumn->setNoOfGroupedBytes( 4 );
+      HexColumn->setGroupSpacingWidth( 12 );
+    }
 
-    // and a status bar 
-    statusBar()->show();
+    KHE::TextColumnInterface *TextColumn = KHE::textColumnInterface( BytesEditWidget );
+    if( TextColumn )
+    {
+      TextColumn->setShowUnprintable( false );
+      TextColumn->setSubstituteChar( '*' );
+    }
+    Clipboard = KHE::clipboardInterface( BytesEditWidget );
+    Zoom = KHE::zoomInterface( BytesEditWidget );
+  }
+  else {
+    // Don't offer the editor widget.
+  }
+  // tell the KMainWindow that this is indeed the main widget
+  setCentralWidget( BytesEditWidget );
 
-    // apply the saved mainwindow settings, if any, and ask the mainwindow
-    // to automatically save settings if changed: window size, toolbar
-    // position, icon size, etc.
-    setAutoSaveSettings();
+  // then, setup our actions
+  setupActions();
 
-    // allow the view to change the statusbar and caption
-    connect(m_view, SIGNAL(signalChangeStatusbar(const QString&)),
-            this,   SLOT(changeStatusbar(const QString&)));
-    connect(m_view, SIGNAL(signalChangeCaption(const QString&)),
-            this,   SLOT(changeCaption(const QString&)));
+  // and a status bar
+  statusBar()->show();
 
+  // apply the saved mainwindow settings, if any, and ask the mainwindow
+  // to automatically save settings if changed: window size, toolbar
+  // position, icon size, etc.
+  setAutoSaveSettings();
 }
 
 BytesEditApp::~BytesEditApp()
 {
 }
 
-void BytesEditApp::load(const KURL& url)
-{
-    QString target;
-    // the below code is what you should normally do.  in this
-    // example case, we want the url to our own.  you probably
-    // want to use this code instead for your app
-
-    #if 0
-    // download the contents
-    if (KIO::NetAccess::download(url, target))
-    {
-        // set our caption
-        setCaption(url);
-
-        // load in the file (target is always local)
-        loadFile(target);
-
-        // and remove the temp file
-        KIO::NetAccess::removeTempFile(target);
-    }
-    #endif
-
-    setCaption(url.url());
-//     m_view->openURL(url);
-}
 
 void BytesEditApp::setupActions()
 {
-  KStdAction::openNew( this, SLOT(fileNew()),    actionCollection() );
-  KStdAction::open(    this, SLOT(fileOpen()),   actionCollection() );
-  KStdAction::save(    this, SLOT(fileSave()),   actionCollection() );
-  KStdAction::saveAs(  this, SLOT(fileSaveAs()), actionCollection() );
   ReadOnlyAction =
     new KToggleAction( i18n("ReadOnly"), "edit", 0,
-                       this, SLOT(fileSetReadOnly()), actionCollection(), "file_setreadonly" );
+                       this, SLOT(setReadOnly()), actionCollection(), "file_setreadonly" );
 //   KStdAction::print(this, SLOT(filePrint()), actionCollection());
   KStdAction::quit(    kapp, SLOT(quit()),       actionCollection());
 
-  CutAction =  KStdAction::cut(     m_view, SLOT(cut()),        actionCollection() );
-  CopyAction = KStdAction::copy(    m_view, SLOT(copy()),       actionCollection() );
-  KStdAction::paste(   m_view, SLOT(paste()),    actionCollection() );
+  if( Clipboard )
+  {
+    CutAction =  KStdAction::cut(  BytesEditWidget, SLOT(cut()),  actionCollection() );
+    CopyAction = KStdAction::copy( BytesEditWidget, SLOT(copy()), actionCollection() );
+    KStdAction::paste( BytesEditWidget, SLOT(paste()), actionCollection() );
+  }
+  else
+  {
+    CutAction =  0;
+    CopyAction = 0;
+  }
+//   KStdAction::selectAll( this, SLOT(selectAll()),     actionCollection() );
+//   KStdAction::deselect(  this, SLOT(unselect()),      actionCollection() );
 
-  KStdAction::zoomIn(  m_view, SLOT(zoomIn()),   actionCollection() );
-  KStdAction::zoomOut( m_view, SLOT(zoomOut()),  actionCollection() );
+  HexCodingAction = new KRadioAction( i18n("&Hexadecimal"), 0, this, SLOT(slotSetCoding()), actionCollection(), "view_hexcoding" );
+  DecCodingAction = new KRadioAction( i18n("&Decimal"),     0, this, SLOT(slotSetCoding()), actionCollection(), "view_deccoding" );
+  OctCodingAction = new KRadioAction( i18n("&Octal"),       0, this, SLOT(slotSetCoding()), actionCollection(), "view_octcoding" );
+  BinCodingAction = new KRadioAction( i18n("&Binary"),      0, this, SLOT(slotSetCoding()), actionCollection(), "view_bincoding" );
 
-  connect( m_view, SIGNAL(cutAvailable(bool)),  CutAction, SLOT(setEnabled(bool)) );
-  connect( m_view, SIGNAL(copyAvailable(bool)), CopyAction,SLOT(setEnabled(bool)) );
+  HexCodingAction->setExclusiveGroup( CodingGroupId );
+  DecCodingAction->setExclusiveGroup( CodingGroupId );
+  OctCodingAction->setExclusiveGroup( CodingGroupId );
+  BinCodingAction->setExclusiveGroup( CodingGroupId );
+
+  ShowUnprintableAction = new KToggleAction( i18n("Show unprintabe chars(<32)"), 0, this, SLOT(slotSetShowUnprintable()), actionCollection(), "view_showunprintable" );
+
+  if( Zoom )
+  {
+    KStdAction::zoomIn(  BytesEditWidget, SLOT(zoomIn()),   actionCollection() );
+    KStdAction::zoomOut( BytesEditWidget, SLOT(zoomOut()),  actionCollection() );
+  }
+
+//   connect( m_view, SIGNAL(cutAvailable(bool)),  CutAction, SLOT(setEnabled(bool)) );
+//   connect( m_view, SIGNAL(copyAvailable(bool)), CopyAction,SLOT(setEnabled(bool)) );
 //   connect( m_view, SIGNAL(selectionChanged()),  this,      SLOT(slotSelectionChanged()));
-
-  m_toolbarAction = KStdAction::showToolbar(this, SLOT(optionsShowToolbar()), actionCollection());
-  m_statusbarAction = KStdAction::showStatusbar(this, SLOT(optionsShowStatusbar()), actionCollection());
 
   KStdAction::keyBindings(this, SLOT(optionsConfigureKeys()), actionCollection());
   KStdAction::configureToolbars(this, SLOT(optionsConfigureToolbars()), actionCollection());
-  KStdAction::preferences(this, SLOT(optionsPreferences()), actionCollection());
 
   CutAction->setEnabled( false );
   CopyAction->setEnabled( false );
   ReadOnlyAction->setEnabled( true );
 
-  createGUI();
+  createGUI( RCFileName );
 }
 
 void BytesEditApp::saveProperties(KConfig */*config*/)
@@ -165,106 +211,19 @@ void BytesEditApp::readProperties(KConfig */*config*/)
 //         m_view->openURL(KURL(url));
 }
 
-void BytesEditApp::dragEnterEvent(QDragEnterEvent *event)
-{
-    // accept uri drops only
-    event->accept(QUriDrag::canDecode(event));
-}
 
-void BytesEditApp::dropEvent(QDropEvent *event)
-{
-    // this is a very simplistic implementation of a drop event.  we
-    // will only accept a dropped URL.  the Qt dnd code can do *much*
-    // much more, so please read the docs there
-    QStrList uri;
-
-    // see if we can decode a URI.. if not, just ignore it
-    if (QUriDrag::decode(event, uri))
-    {
-        // okay, we have a URI.. process it
-        QString url, target;
-        url = uri.first();
-
-        // load in the file
-        load(KURL(url));
-    }
-}
-
-void BytesEditApp::fileNew()
-{
-    // this slot is called whenever the File->New menu is selected,
-    // the New shortcut is pressed (usually CTRL+N) or the New toolbar
-    // button is clicked
-
-    // create a new window
-    (new BytesEditApp)->show();
-}
-
-void BytesEditApp::fileOpen()
-{
-    // this slot is called whenever the File->Open menu is selected,
-    // the Open shortcut is pressed (usually CTRL+O) or the Open toolbar
-    // button is clicked
-/*
-    // this brings up the generic open dialog
-    KURL url = KURLRequesterDlg::getURL(QString::null, this, i18n("Open Location") );
-*/
-    // standard filedialog
-//     KURL url = KFileDialog::getOpenURL(QString::null, QString::null, this, i18n("Open Location"));
-//     if (!url.isEmpty())
-//         m_view->openURL(url);
-}
-
-void BytesEditApp::fileSave()
-{
-    // this slot is called whenever the File->Save menu is selected,
-    // the Save shortcut is pressed (usually CTRL+S) or the Save toolbar
-    // button is clicked
-
-    // save the current file
-}
-
-void BytesEditApp::fileSaveAs()
-{
-    // this slot is called whenever the File->Save As menu is selected,
-    KURL file_url = KFileDialog::getSaveURL();
-    if (!file_url.isEmpty() && !file_url.isMalformed())
-    {
-        // save your info, here
-    }
-}
-
-void BytesEditApp::fileSetReadOnly()
+void BytesEditApp::setReadOnly()
 {
   bool ReadOnly = ReadOnlyAction->isChecked();
-  m_view->setReadOnly( ReadOnly );
+  BytesEdit->setReadOnly( ReadOnly );
 //   ReadOnlyAction->setIconSet( MainBarIcon(ReadOnly?"lock":"edit") );
 }
 
 
-void BytesEditApp::optionsShowToolbar()
-{
-    // this is all very cut and paste code for showing/hiding the
-    // toolbar
-    if (m_toolbarAction->isChecked())
-        toolBar()->show();
-    else
-        toolBar()->hide();
-}
-
-void BytesEditApp::optionsShowStatusbar()
-{
-    // this is all very cut and paste code for showing/hiding the
-    // statusbar
-    if (m_statusbarAction->isChecked())
-        statusBar()->show();
-    else
-        statusBar()->hide();
-}
 
 void BytesEditApp::optionsConfigureKeys()
 {
-    KKeyDialog::configureKeys(actionCollection(), "byteseditappui.rc");
+    KKeyDialog::configureKeys(actionCollection(), RCFileName );
 }
 
 void BytesEditApp::optionsConfigureToolbars()
@@ -277,20 +236,11 @@ void BytesEditApp::newToolbarConfig()
 {
     // this slot is called when user clicks "Ok" or "Apply" in the toolbar editor.
     // recreate our GUI, and re-apply the settings (e.g. "text under icons", etc.)
-    createGUI();
+    createGUI( RCFileName );
 
     applyMainWindowSettings(KGlobal::config(), autoSaveGroup());
 }
 
-void BytesEditApp::optionsPreferences()
-{
-    // popup some sort of preference dialog, here
-    BytesEditAppPreferences dlg;
-    if (dlg.exec())
-    {
-        // redo your settings
-    }
-}
 
 void BytesEditApp::changeStatusbar(const QString& text)
 {
@@ -302,6 +252,30 @@ void BytesEditApp::changeCaption(const QString& text)
 {
     // display the text on the caption
     setCaption(text);
+}
+
+void BytesEditApp::slotSetCoding()
+{
+  // TODO: find out if there is a way to use the exclusivegroup somehow
+  KHE::HexColumnInterface::KCoding Coding;
+  if( HexCodingAction->isChecked() )
+    Coding = KHE::HexColumnInterface::HexadecimalCoding;
+  else if( DecCodingAction->isChecked() )
+    Coding = KHE::HexColumnInterface::DecimalCoding;
+  else if( OctCodingAction->isChecked() )
+    Coding = KHE::HexColumnInterface::OctalCoding;
+  else if( BinCodingAction->isChecked() )
+    Coding = KHE::HexColumnInterface::BinaryCoding;
+  else
+    //should not be reached;
+    Coding = KHE::HexColumnInterface::HexadecimalCoding;
+
+  KHE::hexColumnInterface(BytesEditWidget)->setCoding( Coding );
+}
+
+void BytesEditApp::slotSetShowUnprintable()
+{
+  KHE::textColumnInterface(BytesEditWidget)->setShowUnprintable( ShowUnprintableAction->isChecked() );
 }
 
 #include "byteseditapp.moc"

@@ -22,14 +22,24 @@
 #include <config.h> 
 #endif
 
+// qt specific
+#include <qwidget.h>
+// kde specific
+#include <kparts/part.h>
 #include <kapplication.h>
 #include <kmainwindow.h>
 
-#include "byteseditappview.h"
+class QPainter;
+namespace KHE {
+class BytesEditInterface;
+//class HexColumnInterface;
+//class TextColumnInterface;
+class ClipboardInterface;
+class ZoomInterface;
+};
 
-class KPrinter;
 class KToggleAction;
-class KURL;
+class KRadioAction;
 
 /**
  * This class serves as the main window for BytesEditApp.  It handles the
@@ -42,66 +52,40 @@ class KURL;
 class BytesEditApp : public KMainWindow
 {
     Q_OBJECT
-public:
-    /**
-     * Default Constructor
-     */
+  public:
     BytesEditApp();
-
-    /**
-     * Default Destructor
-     */
     virtual ~BytesEditApp();
 
-    /**
-     * Use this method to load whatever file/URL you have
-     */
-    void load(const KURL& url);
-
 protected:
-    /**
-     * Overridden virtuals for Qt drag 'n drop (XDND)
-     */
-    virtual void dragEnterEvent(QDragEnterEvent *event);
-    virtual void dropEvent(QDropEvent *event);
-
-protected:
-    /**
-     * This function is called when it is time for the app to save its
-     * properties for session management purposes.
-     */
     void saveProperties(KConfig *);
-
-    /**
-     * This function is called when this app is restored.  The KConfig
-     * object points to the session management config file that was saved
-     * with @ref saveProperties
-     */
     void readProperties(KConfig *);
 
-
 private slots:
-    void fileNew();
-    void fileOpen();
-    void fileSave();
-    void fileSaveAs();
-    void fileSetReadOnly();
-    void optionsShowToolbar();
-    void optionsShowStatusbar();
+    void setReadOnly();
+
+    void slotSetCoding();
+    void slotSetShowUnprintable();
     void optionsConfigureKeys();
     void optionsConfigureToolbars();
-    void optionsPreferences();
     void newToolbarConfig();
 
     void changeStatusbar(const QString& text);
     void changeCaption(const QString& text);
 
-private:
+  private:
     void setupAccel();
     void setupActions();
 
-private:
-    BytesEditAppView *m_view;
+  private:
+    char* Buffer;
+    QWidget* BytesEditWidget;
+    KHE::BytesEditInterface *BytesEdit;
+
+  private:
+//    KHE::HexColumnInterface *HexColumn;
+//    KHE::TextColumnInterface *TextColumn;
+    KHE::ClipboardInterface *Clipboard;
+    KHE::ZoomInterface *Zoom;
 
     KAction *CutAction;
     KAction *CopyAction;
@@ -109,6 +93,12 @@ private:
     KToggleAction *ReadOnlyAction;
     KToggleAction *m_toolbarAction;
     KToggleAction *m_statusbarAction;
+
+    KRadioAction *HexCodingAction;
+    KRadioAction *DecCodingAction;
+    KRadioAction *OctCodingAction;
+    KRadioAction *BinCodingAction;
+    KToggleAction *ShowUnprintableAction;
 };
 
 #endif // _BYTESEDITAPP_H_
