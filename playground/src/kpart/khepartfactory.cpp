@@ -92,7 +92,7 @@ KInstance* KHexEditPartFactory::instance()
 
 extern "C"
 {
-  void* init_libkhexeditpart()
+  void* init_libkhexedit2part()
   {
     return new KHexEditPartFactory;
   }

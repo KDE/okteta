@@ -17,8 +17,9 @@
  
 // c specific
 #include <stdlib.h>
+#include <limits.h>
 // c++ specific
-#include <limits>
+//#include <limits>
 #include <iostream>
 // qt specific
 #include <qstyle.h>
@@ -1740,7 +1741,7 @@ void KHexEdit::handleMouseMove( const QPoint& Point )
     // is not in the same line?
     if( BufferCursor->line() != OldLine )
       // make sure XDistanceToOrigin won't win
-      XDistanceToOrigin = std::numeric_limits<int>::max();
+      XDistanceToOrigin = INT_MAX; //std::numeric_limits<int>::max();
 
     if( XDistanceToOrigin < XDistanceToPrevWord && XDistanceToOrigin < XDistanceToNextWord )
       BufferCursor->gotoIndex( OldIndex );
