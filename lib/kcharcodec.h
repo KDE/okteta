@@ -24,11 +24,12 @@
 #include "khe.h"
 #include "khechar.h"
 
+#include <kdemacros.h>
 
 namespace KHE
 {
 
-class KCharCodec
+class KDE_EXPORT KCharCodec
 {
   public:
     /** */
