@@ -30,7 +30,7 @@ static const char PartId[] =          "khexedit2part";
 static const char PartName[] =        I18N_NOOP("KHexEdit2Part");
 static const char PartDescription[] = I18N_NOOP("Embedded hex editor");
 static const char PartVersion[] =     "0.2.0";
-static const char PartCopyright[] =   "(C) 2003-2004 Friedrich W. H.  Kossebau";
+static const char PartCopyright[] =   "(C) 2003-2004 Friedrich W. H. Kossebau";
 // Author
 static const char FWHKName[] =         "Friedrich W. H. Kossebau";
 static const char FWHKTask[] =         I18N_NOOP("Author");
@@ -85,12 +85,6 @@ KInstance* KHexEditPartFactory::instance()
 }
 
 
-extern "C"
-{
-  void* init_libkhexedit2part()
-  {
-    return new KHexEditPartFactory;
-  }
-};
+K_EXPORT_COMPONENT_FACTORY( libkhexedit2part, KHexEditPartFactory )
 
 #include "khepartfactory.moc"
