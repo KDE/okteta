@@ -471,7 +471,7 @@ void KBufferColumn::paintPositions( QPainter *P, int Line, KSection Pos )
   const QColorGroup &CG = View->colorGroup();
 
   // clear background
-  unsigned int BlankFlag = Pos.start()!=0?StartsBefore:0 & Pos.end()!=LastPos?EndsLater:0;
+  unsigned int BlankFlag = (Pos.start()!=0?StartsBefore:0) | (Pos.end()!=LastPos?EndsLater:0);
   paintRange( P, CG.base(), Pos, BlankFlag );
 
   // Go through the lines TODO: handle first and last line more effeciently
@@ -585,7 +585,7 @@ void KBufferColumn::paintSelection( QPainter *P, KSection Positions, int Index, 
   paintRange( P, CG.highlight(), Positions, Flag );
 
   const QColor &HTC = CG.highlightedText();
-  // paint all the bytes affected
+  // paint all the bytes affected:repa
   for( int p=Positions.start(); p<=Positions.end(); ++p,++Index )
   {
     KPixelX x = relXOfPos( p );

@@ -77,6 +77,7 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, WFla
    OverWriteOnly( false ),
    OverWrite( true ),
    InDnD( false ),
+   DragStartPossible( false ),
    CursorHidden( false ),
    BlinkCursorVisible( false ),
    Zooming( false ),
@@ -817,6 +818,7 @@ bool KHexEdit::eventFilter( QObject *O, QEvent *E )
   {
     if( E->type() == QEvent::FocusIn )
     {
+
       startCursorBlinking();
     }
     else if( E->type() == QEvent::FocusOut )
@@ -858,12 +860,13 @@ void KHexEdit::blinkCursor()
 void KHexEdit::startCursorBlinking()
 {
   CursorHidden = false;
-  if( BufferCursor->isValid() )
-  {
-    createCursorPixmaps();
-    drawCursor( true );
-    drawFrameCursor( true );
-  }
+  if( !BufferCursor->isValid() )
+    BufferCursor->gotoIndex( 0 );
+
+  createCursorPixmaps();
+  drawCursor( true );
+  drawFrameCursor( true );
+
   CursorBlinkTimer->start( QApplication::cursorFlashTime()/2 );
 }
 
@@ -1474,11 +1477,11 @@ void KHexEdit::drawCursor( bool CursorOn )
 void KHexEdit::drawFrameCursor( bool FrameOn )
 {
   // any reason to skip the cursor drawing?
-//   if( !isUpdatesEnabled() || !viewport()->isUpdatesEnabled()
+  if( !isUpdatesEnabled() || !viewport()->isUpdatesEnabled()
 //       || (!style().styleHint( QStyle::SH_BlinkCursorWhenTextSelected ) && !selectedText().isEmpty())
-//       || (FrameOn && !hasFocus() && !viewport()->hasFocus() && !InDnD )
-//       /*|| isReadOnly()*/ )
-//     return;
+      || (FrameOn && !hasFocus() && !viewport()->hasFocus() && !InDnD )
+       /*|| isReadOnly()*/ )
+    return;
 
   KPixelX x = inactiveColumn().xOfPos( BufferCursor->pos() ) - contentsX();
   KPixelY y = LineHeight * BufferCursor->line() - contentsY();
@@ -1513,30 +1516,34 @@ void KHexEdit::ensureCursorVisible()
 }
 
 
+
 void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
 {
   // select whole line?
   if( TrippleClickTimer->isActive()
       && (e->globalPos()-DoubleClickPoint).manhattanLength() < QApplication::startDragDistance() )
   {
+    pauseCursorBlinking();
     BufferRanges->setSelectionStart( BufferLayout->indexAtLineStart(DoubleClickLine) );
     BufferCursor->gotoLineEnd();
     BufferRanges->setSelectionEnd( BufferCursor->trueIndex() );
     repaintChanged();
+    unpauseCursorBlinking();
     return;
   }
 
 //   clearUndoRedo();
   MousePoint = e->pos();
-  DragStartPossible = false;
+  pauseCursorBlinking();
 
+  // care about a left button press?
   if( e->button() == LeftButton )
   {
     MousePressed = true;
-    pauseCursorBlinking();
     placeCursor( e->pos() );
     ensureCursorVisible();
 
+    // start of a drag perhaps?
     if( BufferRanges->selectionIncludes(indexByPoint( e->pos() )) )
     {
       DragStartPossible = true;
@@ -1553,7 +1560,7 @@ void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
       else
       {
         BufferRanges->removeSelection();
-        BufferRanges->setSelectionStart( BufferCursor->index() );
+        BufferRanges->setSelectionStart( BufferCursor->trueIndex() );
       }
     }
     else
@@ -1569,25 +1576,21 @@ void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
 
     BufferRanges->removeFurtherSelections();
 
-    if( !BufferRanges->isModified() )
-      unpauseCursorBlinking();
-    else
+    if( BufferRanges->isModified() )
     {
       repaintChanged();
       viewport()->setCursor( isReadOnly() ? arrowCursor : ibeamCursor );
     }
   }
   else if( e->button() == MidButton )
-  {
     BufferRanges->removeSelection();
-    if( !BufferRanges->isModified() )
-      unpauseCursorBlinking();
-    else
-    {
-      repaintChanged();
-      viewport()->setCursor( isReadOnly() ? arrowCursor : ibeamCursor );
-    }
+
+  if( BufferRanges->isModified() )
+  {
+    repaintChanged();
+    viewport()->setCursor( isReadOnly() ? arrowCursor : ibeamCursor );
   }
+  unpauseCursorBlinking();
 }
 
 
@@ -1605,7 +1608,7 @@ void KHexEdit::contentsMouseMoveEvent( QMouseEvent *e )
         viewport()->setCursor( ibeamCursor );
       return;
     }
-
+    // selecting
     MousePoint = e->pos();
     handleMouseMove( MousePoint );
     OldMousePoint = MousePoint;
@@ -1617,13 +1620,13 @@ void KHexEdit::contentsMouseMoveEvent( QMouseEvent *e )
     viewport()->setCursor( InSelection?arrowCursor:ibeamCursor );
   }
 
-  placeCursor( e->pos() );
+//  placeCursor( e->pos() );
 }
 
 
-void KHexEdit::contentsMouseReleaseEvent( QMouseEvent * e )
+void KHexEdit::contentsMouseReleaseEvent( QMouseEvent *e )
 {
-  // this is not the release of a doubleclick?
+  // this is not the release of a doubleclick so we need to provess it?
   if( !InDoubleClick )
   {
     int Line = lineAt( e->pos().y() );
@@ -1634,16 +1637,18 @@ void KHexEdit::contentsMouseReleaseEvent( QMouseEvent * e )
 
   int OldIndex = BufferCursor->index();
 
-  if ( ScrollTimer->isActive() )
+  if( ScrollTimer->isActive() )
     ScrollTimer->stop();
 
   if( DragStartTimer->isActive() )
     DragStartTimer->stop();
 
+  // still dreaming about a drag start?
   if( DragStartPossible )
   {
     selectAll( false );
     MousePressed = false;
+    unpauseCursorBlinking();
   }
 
   if( MousePressed )
@@ -1700,7 +1705,8 @@ void KHexEdit::contentsMouseReleaseEvent( QMouseEvent * e )
 }
 
 
-void KHexEdit::contentsMouseDoubleClickEvent( QMouseEvent * e )
+// gets called after press and release instead of a plain press event (?)
+void KHexEdit::contentsMouseDoubleClickEvent( QMouseEvent *e )
 {
   // we are only interested in LMB doubleclicks
   if( e->button() != Qt::LeftButton )
@@ -1716,18 +1722,21 @@ void KHexEdit::contentsMouseDoubleClickEvent( QMouseEvent * e )
   if( DataBuffer->isWordChar(Index) )
   {
     KSection Word = DataBuffer->wordSection( Index );
-
-    BufferRanges->setSelection( Word );
-    BufferCursor->gotoIndex( Word.end()+1 );
-
-    repaintChanged();
+    if( Word.isValid() )
+    {
+      pauseCursorBlinking();
+      BufferRanges->setSelection( Word );
+      BufferCursor->gotoIndex( Word.end()+1 );
+      repaintChanged();
+      unpauseCursorBlinking();
+    }
   }
 
   // as we already have a doubleclick maybe it is a tripple click
   TrippleClickTimer->start( qApp->doubleClickInterval(), true );
   DoubleClickPoint = e->globalPos();
 
-  InDoubleClick = true;
+  InDoubleClick = true; //
   MousePressed = true;
 
   emit doubleClicked( indexByPoint(e->pos()) );
@@ -1741,11 +1750,8 @@ void KHexEdit::autoScrollTimerDone()
 }
 
 
-void KHexEdit::handleMouseMove( const QPoint& Point )
+void KHexEdit::handleMouseMove( const QPoint& Point ) // handles the move of the mouse with pressed buttons
 {
-//   if( !MousePressed ) this should not be needed
-//     return;
-
   // no scrolltimer and outside of viewport?
   if( !ScrollTimer->isActive() && Point.y() < contentsY() || Point.y() > contentsY() + visibleHeight() )
     ScrollTimer->start( DefaultScrollTimerPeriod, false );
@@ -1762,8 +1768,10 @@ void KHexEdit::handleMouseMove( const QPoint& Point )
 
   if( InDoubleClick )
   {
-    int IndexWordStart = DataBuffer->indexOfWordStart( BufferCursor->index() );
-    int IndexWordEnd = DataBuffer->indexOfWordEnd( BufferCursor->index() );
+    // find out which is the closest: the last index, the one of the next word or the one of the previous one
+    int NewIndex = BufferCursor->index();
+    int IndexWordStart = DataBuffer->indexOfWordStart( NewIndex );
+    int IndexWordEnd = DataBuffer->indexOfWordEnd( NewIndex );
     int XDistanceToOrigin = abs( activeColumn().xOfPos(OldIndex) - MousePoint.x() );
     int XDistanceToPrevWord = abs( activeColumn().xOfPos(IndexWordStart) - MousePoint.x() );
     int XDistanceToNextWord = abs( activeColumn().xOfPos(IndexWordEnd) - MousePoint.x() );
@@ -1780,7 +1788,6 @@ void KHexEdit::handleMouseMove( const QPoint& Point )
     else
       BufferCursor->gotoIndex( IndexWordEnd );
   }
-  ensureCursorVisible();
 
   if( BufferRanges->selectionStarted() )
     BufferRanges->setSelectionEnd( BufferCursor->trueIndex() );
@@ -1788,6 +1795,7 @@ void KHexEdit::handleMouseMove( const QPoint& Point )
   if( BufferRanges->isModified() )
     repaintChanged();
 
+  ensureCursorVisible();
   unpauseCursorBlinking();
 }
 
@@ -1796,6 +1804,7 @@ void KHexEdit::startDrag()
 {
   MousePressed = false;
   InDoubleClick = false;
+  DragStartPossible = false;
 
   QDragObject *Drag = dragObject( viewport() );
   if( !Drag )

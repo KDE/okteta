@@ -1,3 +1,6 @@
+FEATURES
+========
+
 select whole lines by clicking on the offset column
 ---------------------
 when the mouse cursor is above the offset column the shape turns into a mirrored pointer.
@@ -6,25 +9,42 @@ pressed and moving to other lines selects inclusively the lines between the firs
 (the way it is done in some text processing apps)
 
 
-
 work out size policy and the like
 ---------------------------------
 MaximumSize, Minimumsize, sizehint etc. should get usefull values
+
 
 paste, copy, insert, drag'n'drop using the coding
 -----------------------------
 when moving data in and out of the hex column use the coding
 
 
+dynamic selection by mouse using double/triple click
+--------------------------------------------
+as already started a selection following a double click selects word by word, a triple line by line
 
-clean up buffercolumn painting
-------------------------------
-still found no pattern :(
 
+
+undo/redo
+---------
+This lacks the support in the databuffer subclasses
+
+
+offering input behind the last char
+-----------------------------------
+if the buffer is not filled up and the actual size can be extended show the cursor bnot behind but as a full cursor
 
 
 KNOWN BUGS
-----------
+==========
 incorrect cursor shape on font change
 when setting new coding the resizestyle is not reflected
-double click borks cursor
+entering a letter at the end of an filled buffer sets the cursor from behind to on the last char, so the next key hit will overwrite this one
+entering a letter on the last char of a filled buffer doesn't put the cursor behind the last char.
+dragging in overwrite mode cuts the dragged array
+Ctrl+Delete on behind the last word should delete until the end
+beim Tastaturselektieren abwärts in die letzte Zeile springt der Cusor auf das letzte, nicht hinter das letzte
+doing the first selection the cursor is redrawm too late (into the selection)
+doesn't get the right nooflinesperpage in the beginning
+inserting doesn't result in the right to be repainted range (no actually?)
+pos key doesn't result in a jump to the first but the last pos

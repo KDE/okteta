@@ -86,3 +86,6 @@ Okay, this will the first public release...
 
 0.1.13 (xx.08.03 Friedrich W. H. Kossebau)
 -------
+added a frame cursor for the inactive column
+removed close to all artefacts
+cleaned up selection by mouse
