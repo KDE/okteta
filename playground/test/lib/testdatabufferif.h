@@ -50,6 +50,10 @@ class KDataBufferIfTest : public KDE::Test::SlotTest
     void testRemove();
     void testInsert();
     //void testReplace();
+    void testMove();
+    void testReplaceEqual();
+    void testReplaceLess();
+    void testReplaceMore();
 };
 
 
