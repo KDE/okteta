@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Service
+Name=BytesEdit Widget
+X-KDE-Library=libkbyteseditwidget
+InitialPreference=2
+ServiceTypes=KHexEdit/KBytesEdit
+
