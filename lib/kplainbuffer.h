@@ -22,7 +22,11 @@
 
 namespace KHE
 {
-
+/*
+class KPlainBufferIterator : public KDataBufferIterator
+{
+}
+*/
 /** base class for all Data buffers that are used to display
   * TODO: think about a way to inform KHexEdit that there has been
   * a change in the buffer outside. what kind of changes are possible?
@@ -31,6 +35,8 @@ namespace KHE
 
 class KPlainBuffer : public KDataBuffer
 {
+  friend class KPlainBufferIterator;
+  
   public:
     KPlainBuffer( char *D, int S, int RS = -1, bool KM = true );
     KPlainBuffer( const char *D, int S );
@@ -39,6 +45,7 @@ class KPlainBuffer : public KDataBuffer
 
   public: // KDataBuffer API
     virtual bool prepareRange( KSection Range ) const;
+    //virtual KDataBufferIterator *iterator() const;
     virtual const char *dataSet( KSection S ) const;
     virtual char datum( int Offset ) const;
     virtual int size() const;
@@ -52,7 +59,8 @@ class KPlainBuffer : public KDataBuffer
 
     virtual void setModified( bool M = true );
 
-    virtual int find( const char*, int Length, int Pos = 0 ) const;
+    //virtual int find( const char*, int Length, int Pos = 0 ) const;
+    virtual int find( const char*KeyData, int Length, KSection Section ) const;
     virtual int rfind( const char*, int Length, int Pos = -1 ) const;
 
 /*     virtual int find( const QString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */

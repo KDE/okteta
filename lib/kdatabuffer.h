@@ -24,19 +24,52 @@
 namespace KHE
 {
 
+/** could it be useful to hide the data access behind an iterator? *
+class KDataBufferIterator
+{
+  public:
+    bool hasNext();
+    char next();
+  protected:
+
+  protected:
+    char *
+    int Length;
+}
+
+bool KDataBufferIterator::hasNext()
+{
+}
+// this function should be simple as possible
+char KDataBufferIterator::next()
+{
+  // if next span is empty
+  if(  )
+    return *NextChar++;
+}
+*/
 /** base class for all Data buffers that are used to display
   * TODO: think about a way to inform KHexEdit that there has been
   * a change in the buffer outside. what kind of changes are possible?
+  *
+  * Operations on the data:
+  *
+  * Finding: is implemented stateless. FindNext has to be done by perhaps a FindManager
+  * Replacing: not available. Implement within a ReplaceManager
+  *
   *@author Friedrich W. H. Kossebau
   */
 
 class KDataBuffer
 {
+  friend class KDataBufferIterator;
+
   public:
     enum KWordCharType { Any, Printable, Readable };
 
-  public:
+  protected:
     KDataBuffer();
+  public:
     virtual ~KDataBuffer();
 
     
@@ -51,7 +84,9 @@ class KDataBuffer
     virtual bool prepareRange( KSection Range ) const = 0;
     /** convenience function, same as above */
     bool prepareRange( int Offset, int Length ) const;
-    
+
+    /** creates an iterator to */
+    //virtual KDataBufferIterator *iterator() const = 0;
     /** expects pointer to memory, should be in prepared range
       * it is only expected to be a valid pointer until any further call
       * to this or any modifying function
@@ -230,7 +265,16 @@ class KDataBuffer
       * @param Pos the position to start the search
       * @return index of the first  or -1
       */
-    virtual int find( const char*, int Length, int Pos = 0 ) const = 0;
+    //virtual int find( const char*, int Length, int Pos = 0 ) const = 0;
+    /** searches for a given data string
+      * The section limits the data within which the key has to be found
+      * If the end of the section is lower then the start the search continues at the start???
+      * @param 
+      * @param Length length of search string
+      * @param Section section within the keydata is to be found 
+      * @return index of the first occurence or -1
+      */
+    virtual int find( const char*KeyData, int Length, KSection Section ) const = 0;
     /** searches backward beginning with byte at Pos.
       * @param 
       * @param Length length of search string

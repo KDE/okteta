@@ -91,7 +91,9 @@ int KBigBuffer::replace( KSection /*Section*/, const char*, int /*Length*/ )
 
 
 int KBigBuffer::move( int DestPos, KSection SourceSection ) { return 0; }
-int KBigBuffer::find( const char*, int /*Length*/, int /*Pos*/ ) const  { return 0; }
+//int KBigBuffer::find( const char*, int /*Length*/, int /*Pos*/ ) const  { return 0; }
+int KBigBuffer::find( const char*KeyData, int Length, KSection Section ) const { return 0; }
+
 int KBigBuffer::rfind( const char*, int /*Length*/, int /*Pos*/ ) const { return 0; }
 
 

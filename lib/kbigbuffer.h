@@ -56,7 +56,8 @@ class KBigBuffer : public KDataBuffer
 
     virtual void setModified( bool M = true );
 
-    virtual int find( const char*, int Length, int Pos = 0 ) const;
+    //virtual int find( const char*, int Length, int Pos = 0 ) const;
+    virtual int find( const char*KeyData, int Length, KSection Section ) const;
     virtual int rfind( const char*, int Length, int Pos = -1 ) const;
 
 /*     virtual int find( const QString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */

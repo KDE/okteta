@@ -273,5 +273,22 @@ int KPlainBuffer::move( int DestPos, KSection SourceSection )
 }
 
 
-int KPlainBuffer::find( const char*, int /*Length*/, int /*Pos*/ ) const  { return 0; }
+int KPlainBuffer::find( const char* SearchString, int Length, KSection Section ) const  
+{ 
+  Section.restrictEndTo( Size-1 );
+  
+  for( int i = Section.start(); i <= Section.end(); ++i )
+  {
+    int Result;
+//    if( IgnoreCase )
+//      result = strncasecmp( &data()[i], sc.key.data(), sc.key.size() );
+//    else
+    Result = memcmp( &Data[i], SearchString, Length );   
+    // found?
+    if( Result == 0 )
+      return i;
+  }
+  return -1; 
+}
+
 int KPlainBuffer::rfind( const char*, int /*Length*/, int /*Pos*/ ) const { return 0; }
