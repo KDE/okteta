@@ -22,6 +22,7 @@
 #include <qclipboard.h>
 // lib specific
 // #include "khe.h"
+#include "khexedit_export.h"
 #include "kcolumnsview.h"
 
 class QTimer;
@@ -71,7 +72,7 @@ class KHexEditPrivate;
   *@author Friedrich W. H. Kossebau
   */
 
-class KHexEdit : public KColumnsView
+class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
 {
   friend class KTabController;
   friend class KNavigator;

@@ -23,6 +23,7 @@
 #include <qfile.h>
 // lib specific
 #include "kdatabuffer.h"
+#include "khexedit_export.h"
 
 namespace KHE {
 
@@ -32,7 +33,7 @@ namespace KHE {
   *@author Friedrich W. H. Kossebau
   */
 
-class KBigBuffer : public KDataBuffer
+class KHEXEDIT_EXPORT KBigBuffer : public KDataBuffer
 {
     typedef QValueVector<char *> KPageOfChar;
 

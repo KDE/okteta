@@ -23,7 +23,7 @@ libkhexeditcommon_la_SOURCES = kcolumn.cpp kbordercolumn.cpp koffsetcolumn.cpp \
 # no public API for a direct use by now
 noinst_HEADERS = kcolumn.h kbordercolumn.h koffsetcolumn.h \
                  kbuffercolumn.h kvaluecolumn.h kcharcolumn.h \
-                 kbytecodec.h koffsetformat.h \
+                 kbytecodec.h koffsetformat.h khexedit_export.h \
                  kbuffercursor.h kbufferlayout.h kbufferranges.h \
                  kbuffercoord.h kselection.h \
                  kcursor.h kbufferdrag.h \

@@ -21,6 +21,7 @@
 
 #include "khexedit.h"
 
+#include <khexedit_export.h>
 
 namespace KHE
 {
@@ -53,7 +54,7 @@ class KBytesEditPrivate;
   *@author Friedrich W. H. Kossebau
   */
 //TODO: give the bytes edit widget an empty buffer as default
-class KBytesEdit : public KHexEdit
+class KHEXEDIT_EXPORT KBytesEdit : public KHexEdit
 {
   Q_OBJECT
   //_PROPERTY( char * Data READ data )

@@ -20,6 +20,7 @@
 
 
 #include "ksection.h"
+#include "khexedit_export.h"
 
 namespace KHE
 {
@@ -60,7 +61,7 @@ char KDataBufferIterator::next()
   *@author Friedrich W. H. Kossebau
   */
 
-class KDataBuffer
+class KHEXEDIT_EXPORT KDataBuffer
 {
   friend class KDataBufferIterator;
 
