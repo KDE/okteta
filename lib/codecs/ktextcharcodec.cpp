@@ -28,6 +28,7 @@ using namespace KHE;
 
 static const char QTextCodecWhiteSpace = 63;
 
+
 static QTextCodec *createLatin1()
 {
   return KGlobal::charsets()->codecForName( "ISO8859-1" );
@@ -35,15 +36,17 @@ static QTextCodec *createLatin1()
 
 static bool is8Bit( QTextCodec *Codec )
 {
-  for( unsigned int c=1; c<256; ++c )
+  unsigned char c=0;
+  do
   {
-    unsigned char A = (unsigned char)c;
-    QString S = Codec->toUnicode( (const char*)&A,1 );
+    ++c;
+    QString S = Codec->toUnicode( (const char*)&c,1 );
     int Length = 1;
     QCString CS = Codec->fromUnicode( S, Length );
     if( Length == 0 || (CS[0] != (char)c && CS[0] != QTextCodecWhiteSpace) )
       return false;
   }
+  while( c < 255 );
   return true;
 }
 
