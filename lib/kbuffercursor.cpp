@@ -16,6 +16,7 @@
 
 
 // #include <iostream>
+#include <kdebug.h>
 
 // app specific
 #include "kbufferlayout.h"
@@ -267,15 +268,7 @@ void KBufferCursor::gotoEnd()
   Index = Layout->length()-1;
   Coord = Layout->final();
 
-  if( NewPosAllowed && (Coord.pos() < Layout->noOfBytesPerLine()-1) )
-  {
-    ++Index;
-    Coord.goRight();
-    Behind = false;
-
-  }
-  else
-    Behind = true;
+  stepToEnd();
 }
 
 
@@ -290,16 +283,24 @@ void KBufferCursor::gotoCIndex( int i )
 void KBufferCursor::gotoCCoord( const KBufferCoord &C )
 {
   Coord = Layout->correctCoord( C );
-  Index = Layout->indexAtCCoord( Coord );
-  if(  C > Coord )
-  {
-    if( NewPosAllowed && Coord.pos() < Layout->noOfBytesPerLine()-1 )
-      ++Index;
-    else
-      Behind = true;
-  }
+  Index = Layout->indexAtCoord( Coord );
+  if( C > Coord )
+    stepToEnd();
   else
     Behind = false;
+}
+
+
+void KBufferCursor::stepToEnd()
+{
+  if( NewPosAllowed && (Coord.pos() < Layout->noOfBytesPerLine()-1) )
+  {
+    ++Index;
+    Coord.goRight();
+    Behind = false;
+  }
+  else
+    Behind = true;
 }
 
 

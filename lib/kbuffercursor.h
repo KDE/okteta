@@ -143,6 +143,11 @@ class KBufferCursor
     bool atLineEnd() const;
 
 
+  protected:
+    /** if newpos allowed steps at a coord behind the last existing
+      * or, if that is at a line end, behind the line */
+    void stepToEnd();
+
   private:
     /** layout, tells how the column is organized  */
     const KBufferLayout *Layout;
