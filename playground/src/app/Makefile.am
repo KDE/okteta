@@ -16,7 +16,7 @@ khexedit2_client_SOURCES = khexedit2_client.cpp
 METASOURCES = AUTO
 
 messages: rc.cpp
-	$(XGETTEXT) *.cpp -o $(podir)/khexedit.pot
+	$(XGETTEXT) *.cpp -o $(podir)/khexedit2.pot
 
 
 # this is where the kdelnk file will go
