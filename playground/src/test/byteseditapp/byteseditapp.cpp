@@ -57,6 +57,7 @@
 static const char PathToIcon[] = "khe/pics/";
 static const int BufferSize = 893;
 static const char *CodingGroupId = "ColumnCoding";
+static const char *ResizeStyleGroupId = "ResizeStyle";
 static const char *RCFileName = "byteseditappui.rc";
 
 BytesEditApp::BytesEditApp()
@@ -181,6 +182,15 @@ void BytesEditApp::setupActions()
   KStdAction::keyBindings(this, SLOT(optionsConfigureKeys()), actionCollection());
   KStdAction::configureToolbars(this, SLOT(optionsConfigureToolbars()), actionCollection());
 
+  NoResizeAction =      new KRadioAction( i18n("&No Resize"),       0, this, SLOT(slotSetResizeStyle()), actionCollection(), "settings_noresize" );
+  LockGroupsAction =    new KRadioAction( i18n("&Lock groups"),     0, this, SLOT(slotSetResizeStyle()), actionCollection(), "settings_lockgroups" );
+  FullSizeUsageAction = new KRadioAction( i18n("&Full size usage"), 0, this, SLOT(slotSetResizeStyle()), actionCollection(), "settings_fullsizeusage" );
+
+  NoResizeAction->setExclusiveGroup( ResizeStyleGroupId );
+  LockGroupsAction->setExclusiveGroup( ResizeStyleGroupId );
+  FullSizeUsageAction->setExclusiveGroup( ResizeStyleGroupId );
+
+  // set default values
   CutAction->setEnabled( false );
   CopyAction->setEnabled( false );
   ReadOnlyAction->setEnabled( true );
@@ -276,6 +286,23 @@ void BytesEditApp::slotSetCoding()
 void BytesEditApp::slotSetShowUnprintable()
 {
   KHE::textColumnInterface(BytesEditWidget)->setShowUnprintable( ShowUnprintableAction->isChecked() );
+}
+
+void BytesEditApp::slotSetResizeStyle()
+{
+  // TODO: find out if there is a way to use the exclusivegroup somehow
+  KHE::HexColumnInterface::KResizeStyle ResizeStyle;
+  if( NoResizeAction->isChecked() )
+    ResizeStyle = KHE::HexColumnInterface::NoResize;
+  else if( LockGroupsAction->isChecked() )
+    ResizeStyle = KHE::HexColumnInterface::LockGrouping;
+  else if( FullSizeUsageAction->isChecked() )
+    ResizeStyle = KHE::HexColumnInterface::FullSizeUsage;
+  else
+    //should not be reached;
+    ResizeStyle = KHE::HexColumnInterface::FullSizeUsage;
+
+  KHE::hexColumnInterface(BytesEditWidget)->setResizeStyle( ResizeStyle );
 }
 
 #include "byteseditapp.moc"

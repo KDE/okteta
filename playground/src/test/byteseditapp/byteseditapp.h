@@ -67,6 +67,7 @@ private slots:
     void slotSetShowUnprintable();
     void optionsConfigureKeys();
     void optionsConfigureToolbars();
+    void slotSetResizeStyle();
     void newToolbarConfig();
 
     void changeStatusbar(const QString& text);
@@ -86,19 +87,24 @@ private slots:
 //    KHE::TextColumnInterface *TextColumn;
     KHE::ClipboardInterface *Clipboard;
     KHE::ZoomInterface *Zoom;
-
+    // edit menu
     KAction *CutAction;
     KAction *CopyAction;
 
     KToggleAction *ReadOnlyAction;
     KToggleAction *m_toolbarAction;
     KToggleAction *m_statusbarAction;
-
+    // view menu
     KRadioAction *HexCodingAction;
     KRadioAction *DecCodingAction;
     KRadioAction *OctCodingAction;
     KRadioAction *BinCodingAction;
     KToggleAction *ShowUnprintableAction;
+    // settings menu
+    KRadioAction *NoResizeAction;
+    KRadioAction *LockGroupsAction;
+    KRadioAction *FullSizeUsageAction;
+
 };
 
 #endif // _BYTESEDITAPP_H_
