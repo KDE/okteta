@@ -21,12 +21,9 @@
 #include "kbuffercolumn.h"
 #include "kbufferlayout.h"
 #include "kbuffercoltextexport.h"
+#include "helper.h"
 
 using namespace KHE;
-
-static const int DefaultByteSpacingWidth = 1;
-static const int GroupSpacingWidth = 3;
-
 
 KBufferColTextExport::KBufferColTextExport( const KBufferColumn* BufferColumn, char *D, KCoordRange CR, int ByteWidth )
  : Data( D ),

@@ -21,12 +21,9 @@
 #include "kbufferlayout.h"
 #include "khexcolumn.h"
 #include "khexcoltextexport.h"
+#include "helper.h"
 
 using namespace KHE;
-
-static const int DefaultByteSpacingWidth = 1;
-static const int GroupSpacingWidth = 3;
-
 
 KHexColTextExport::KHexColTextExport( const KHexColumn* HC, char *D, KCoordRange CR )
  : KBufferColTextExport( HC, D, CR, HC->codingWidth() ),

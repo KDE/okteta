@@ -28,21 +28,12 @@
 #include "kbufferlayout.h"
 #include "kbufferranges.h"
 #include "khexcolumn.h"
+#include "helper.h"
 
 using namespace KHE;
 
 static const KCoding DefaultCoding = HexadecimalCoding;
 static const int DefaultBinaryGapWidth = 1;
-
-static inline QColor colorForByte( const char Byte )
-{
-  if( ispunct(Byte) )
-    return Qt::red;
-  else if( isprint(Byte) )
-    return Qt::black;
-  else
-    return Qt::blue;
-}
 
 KHexColumn::KHexColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R )
  : KBufferColumn( CV, B, L, R ),

@@ -28,6 +28,7 @@
 #include "kbuffercolumn.h"
 #include "kbufferlayout.h"
 #include "kbufferranges.h"
+#include "helper.h"
 
 using namespace KHE;
 
@@ -36,20 +37,8 @@ static const unsigned int EndsLater = 2;
 static const char EmptyByte = ' ';
 
 static const int DefaultCursorWidth = 2;
-static const int DefaultByteSpacingWidth = 3;
 static const int DefaultGroupSpacingWidth = 9;
 static const int DefaultNoOfGroupedBytes = 4;
-
-static inline QColor colorForByte( const char Byte )
-{
-  if( ispunct(Byte) )
-    return Qt::red;
-  else if( isprint(Byte) )
-    return Qt::black;
-  else
-    return Qt::blue;
-}
-
 
 KBufferColumn::KBufferColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R )
  : KColumn( CV ),

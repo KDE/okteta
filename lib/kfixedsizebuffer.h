@@ -15,8 +15,8 @@
  ***************************************************************************/
 
  
-#ifndef KPLAINBUFFER_H
-#define KPLAINBUFFER_H
+#ifndef KFIXEDSIZEBUFFER_H
+#define KFIXEDSIZEBUFFER_H
 
 #include <kdatabuffer.h>
 
