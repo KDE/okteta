@@ -292,6 +292,27 @@ void KBufferColumn::recalcX()
 }
 
 
+int KBufferColumn::magPosOfX( KPixelX PX ) const
+{
+  if( !PosX )
+    return NoByteFound;
+
+  // translate
+  PX -= x();
+  // search backwards for the first byte that is equalleft to x
+  for( int p=LastPos; p>=0; --p )
+    if( PosX[p] <= PX )
+    {
+      // are we closer to the right?
+      if( PosRightX[p]-PX < ByteWidth/2 ) // TODO: perhaps cache also the middle xpos's
+        ++p;
+      return p;
+    }
+
+  return 0; //NoByteFound;
+}
+
+
 KSection KBufferColumn::posOfX( KPixelX PX, KPixelX PW ) const
 {
   if( !PosX )
@@ -536,7 +557,6 @@ void KBufferColumn::paintPositions( QPainter *P, int Line, KSection Pos )
     Positions.setStartBehind( PositionsPart );
   }
 //    std::cout << std::endl;
-
   paintGrid( P, Positions );
 }
 

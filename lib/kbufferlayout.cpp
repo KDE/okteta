@@ -218,6 +218,8 @@ KBufferCoord KBufferLayout::correctCoord( const KBufferCoord &C ) const
     return ContentCoords.start();
   if( C > ContentCoords.end() )
     return ContentCoords.end();
+  if( C.pos() >= NoOfBytesPerLine )
+    return KBufferCoord( NoOfBytesPerLine-1, C.line() );
   return C;
 }
 

@@ -778,6 +778,7 @@ void KHexEdit::placeCursor( const QPoint &Point )
 {
   resetInputContext();
 
+  // switch active column if needed
   if( textColumn().isVisible() && Point.x() >= textColumn().x() )
   {
     ActiveColumn = &textColumn();
@@ -789,7 +790,8 @@ void KHexEdit::placeCursor( const QPoint &Point )
     InactiveColumn = &textColumn();
   }
 
-  KBufferCoord C( activeColumn().posOfX(Point.x()), lineAt(Point.y()) );
+  // get coord of click and whether this click was closer to the end of the pos
+  KBufferCoord C( activeColumn().magPosOfX(Point.x()), lineAt(Point.y()) );
 
   BufferCursor->gotoCCoord( C );
 }
@@ -1463,7 +1465,7 @@ void KHexEdit::drawCursor( bool CursorOn )
   Painter.drawPixmap( x+CursorPixmaps->cursorX(), y,
                       CursorOn?CursorPixmaps->onPixmap():CursorPixmaps->offPixmap(),
                       CursorPixmaps->cursorX(),0,CursorPixmaps->cursorW(),-1 );
- 
+
   // store state
   BlinkCursorVisible = CursorOn;
 }
@@ -1519,7 +1521,7 @@ void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
   {
     BufferRanges->setSelectionStart( BufferLayout->indexAtLineStart(DoubleClickLine) );
     BufferCursor->gotoLineEnd();
-    BufferRanges->setSelectionEnd( BufferCursor->index()+1 );
+    BufferRanges->setSelectionEnd( BufferCursor->trueIndex() );
     repaintChanged();
     return;
   }
@@ -1547,7 +1549,7 @@ void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
     if( BufferRanges->selectionStarted() )
     {
       if( e->state() & ShiftButton )
-        BufferRanges->setSelectionEnd( BufferCursor->index() );
+        BufferRanges->setSelectionEnd( BufferCursor->trueIndex() );
       else
       {
         BufferRanges->removeSelection();
@@ -1781,7 +1783,7 @@ void KHexEdit::handleMouseMove( const QPoint& Point )
   ensureCursorVisible();
 
   if( BufferRanges->selectionStarted() )
-    BufferRanges->setSelectionEnd( BufferCursor->index() );
+    BufferRanges->setSelectionEnd( BufferCursor->trueIndex() );
 
   if( BufferRanges->isModified() )
     repaintChanged();

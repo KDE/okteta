@@ -110,6 +110,7 @@ class KBufferCursor
     void gotoNextByte();
     void gotoPreviousByte( int D );
     void gotoNextByte( int D );
+    void gotoNextByteInLine();
     void gotoUp();
     void gotoDown();
     void gotoLineStart();

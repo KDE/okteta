@@ -129,6 +129,21 @@ void KBufferCursor::gotoNextByte( int D ) // TODO: think about consistency with 
 }
 
 
+void KBufferCursor::gotoNextByteInLine()
+{
+  if( Index == Layout->length()-1 )
+  {
+    Behind = true;
+    return;
+  }
+
+  ++Index;
+
+  if( !Coord.goRight(Layout->noOfBytesPerLine()-1) )
+    Behind = true;
+}
+
+
 void KBufferCursor::gotoUp()
 {
   // can we even go up?

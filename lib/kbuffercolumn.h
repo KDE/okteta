@@ -40,7 +40,7 @@ const int NoByteFound = -1;
   * knows how to paint the data and the editing things (focus, cursor, selection)
   * but does not offer
   *
-  *@author Friedrich W. H. Kossebau
+  *@author Friedrich W. H. Kossebauint KBufferColumn::posOfX( KPixelX PX, bool *ToTheRightFlag ) const
   */
 class KBufferColumn : public KColumn
 {
@@ -115,6 +115,8 @@ class KBufferColumn : public KColumn
     KSection posOfX( KPixelX x, KPixelX w ) const;
     /** returns byte pos at pixel with absolute x-coord x */
     int posOfX( KPixelX x ) const;
+    /** returns byte pos at pixel with absolute x-coord x, and sets the flag to true if we are closer to the right */
+    int magPosOfX( KPixelX PX ) const;
     /** returns absolute x-coord of byte at position Pos */
     KPixelX xOfPos( int Pos ) const;
     /** returns right absolute x-coord of byte at position Pos */
