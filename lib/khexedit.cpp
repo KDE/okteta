@@ -2391,7 +2391,7 @@ void KHexEdit::handleInternalDrag( QDropEvent *e )
     if( NewIndex != Selection.start() )
     {
       BufferCursor->gotoCIndex( NewIndex+Selection.width() );
-      BufferRanges->addChangedRange( KSection(QMIN(InsertIndex,Selection.start()), QMAX(InsertIndex,Selection.start())+Selection.width()) );
+      BufferRanges->addChangedRange( KSection(QMIN(InsertIndex,Selection.start()), QMAX(InsertIndex,Selection.end())) );
     }
   }
   // is a copy
