@@ -48,9 +48,7 @@
 
 using namespace KHE;
 
-//static const int NoOfColumns = 3;
-
-/** zooming is done in steps of font size points */
+// zooming is done in steps of font size points
 static const int DefaultZoomStep = 1;
 static const int DefaultStartOffset = 0;//5;
 static const int DefaultFirstLineOffset = 0;
@@ -186,7 +184,7 @@ void KHexEdit::setDataBuffer( KDataBuffer *B )
   // affected:
   // length -> no of lines -> width
   BufferLayout->setLength( DataBuffer->size() );
-  adjustToLayoutNoOfLines();
+  adjustLayoutToSize();
 
   // ensure that the widget is readonly if the buffer is TODO
 //   if( DataBuffer->isReadOnly() && !isReadOnly() )
@@ -207,7 +205,7 @@ void KHexEdit::setStartOffset( int SO )
   pauseCursor();
   // affects:
   // the no of lines -> width
-  adjustToLayoutNoOfLines();
+  adjustLayoutToSize();
 
   updateView();
 
@@ -322,7 +320,7 @@ void KHexEdit::setShowUnprintable( bool SU )
 void KHexEdit::fontChange( const QFont &OldFont )
 {
   QScrollView::fontChange( OldFont );
-  
+
   if( !InZooming )
     DefaultFontSize = font().pointSize();
 
@@ -349,6 +347,7 @@ void KHexEdit::updateViewByWidth()
   pauseCursor();
 
   adjustToLayoutNoOfBytesPerLine();
+  adjustLayoutToSize();
 
   updateView();
 
@@ -397,7 +396,7 @@ void KHexEdit::unZoom()
 }
 
 
-void KHexEdit::adjustToLayoutNoOfLines()
+void KHexEdit::adjustLayoutToSize()
 {
   // check whether there is a change with the numbers of fitting bytes per line
   if( ResizeStyle != NoResize )
@@ -441,8 +440,6 @@ QSize KHexEdit::minimumSizeHint() const
 
 void KHexEdit::resizeEvent( QResizeEvent *ResizeEvent )
 {
-  BufferLayout->setNoOfLinesPerPage( noOfLinesPerPage() ); // TODO: doesn't work with the new size!!!
-
   if( ResizeStyle != NoResize )
   {
     int FittingBytesPerLine = fittingBytesPerLine( ResizeEvent->size() );
@@ -456,6 +453,8 @@ void KHexEdit::resizeEvent( QResizeEvent *ResizeEvent )
   }
 
   QScrollView::resizeEvent( ResizeEvent );
+
+  BufferLayout->setNoOfLinesPerPage( noOfLinesPerPage() ); // TODO: doesn't work with the new size!!!
 }
 
 
@@ -2334,7 +2333,7 @@ void KHexEdit::contentsDropEvent( QDropEvent *e )
 
   bool IsInternalDrag = e->source() == this || e->source() == viewport();
 
-  int InsertIndex = BufferCursor->index();
+  int InsertIndex = BufferCursor->trueIndex();
   if( IsInternalDrag && BufferRanges->hasSelection() )
   {
     KSection Selection = BufferRanges->selection();

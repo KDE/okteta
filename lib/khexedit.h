@@ -375,8 +375,10 @@ class KHexEdit : public KColumnsView
   protected:
     /** recalcs all dependant values with the actual NoOfBytesPerLine  */
     void adjustToLayoutNoOfBytesPerLine();
-    /** takes new no of lines from layout and recalcs the dependant values  */
-    void adjustToLayoutNoOfLines();
+    /** recalcs a layout due to the resize style that fits into the view size
+      * and updates the dependant values
+      */
+    void adjustLayoutToSize();
     /** */
     void updateLength();
     /** calls updateContent for the Column */
