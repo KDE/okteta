@@ -88,8 +88,6 @@ class KByteCodec
     static void toOctal( char *Digits, unsigned char Char );
     /** */
     static void toBinary( char *Digits, unsigned char Char );
-    /** */
-    static void toDummy( char *Digits, unsigned char Char );
 
     /** */
     static void toShortHexadecimal( char *Digits, unsigned char Char );
@@ -111,27 +109,22 @@ class KByteCodec
     static const unsigned char *fromOctal( unsigned char *Char, const unsigned char *Digits );
     /** */
     static const unsigned char *fromBinary( unsigned char *Char, const unsigned char *Digits );
-    /** */
-    static const unsigned char *fromDummy( unsigned char *Char, const unsigned char *Digits );
 
 
     static bool appendToHexadecimal( unsigned char *Byte, unsigned char Digit );
     static bool appendToDecimal( unsigned char *Byte, unsigned char Digit );
     static bool appendToOctal( unsigned char *Byte, unsigned char Digit );
     static bool appendToBinary( unsigned char *Byte, unsigned char Digit );
-    static bool appendToDummy( unsigned char *Byte, unsigned char Digit );
 
     static void removeLastHexadecimalDigit( unsigned char *Byte );
     static void removeLastDecimalDigit( unsigned char *Byte );
     static void removeLastOctalDigit( unsigned char *Byte );
     static void removeLastBinaryDigit( unsigned char *Byte );
-    static void removeLastDummyDigit( unsigned char */*Byte*/ );
 
     static bool turnToHexadecimalValue( unsigned char *Digit );
     static bool turnToDecimalValue( unsigned char *Digit );
     static bool turnToOctalValue( unsigned char *Digit );
     static bool turnToBinaryValue( unsigned char *Digit );
-    static bool turnToDummyValue( unsigned char *Digit );
 
     static bool isValidBigHexadecimalDigit( unsigned char Digit );
     static bool isValidSmallHexadecimalDigit( unsigned char Digit );
@@ -140,7 +133,6 @@ class KByteCodec
     static bool isValidDecimalDigit( unsigned char Digit );
     static bool isValidOctalDigit( unsigned char Digit );
     static bool isValidBinaryDigit( unsigned char Digit );
-    static bool isValidDummyDigit( unsigned char Digit );
 
   protected:
     /** */

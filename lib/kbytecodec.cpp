@@ -26,50 +26,44 @@ const KByteCodec::coding KByteCodec::CodingFunction[NoOfCodings] =
 { KByteCodec::toHexadecimal,
   KByteCodec::toDecimal,
   KByteCodec::toOctal,
-  KByteCodec::toBinary,
-  KByteCodec::toDummy };
+  KByteCodec::toBinary };
 
 const KByteCodec::coding KByteCodec::ShortCodingFunction[NoOfCodings] =
 { KByteCodec::toShortHexadecimal,
   KByteCodec::toShortDecimal,
   KByteCodec::toShortOctal,
-  KByteCodec::toShortBinary,
-  KByteCodec::toDummy };
+  KByteCodec::toShortBinary };
 
 const KByteCodec::decoding KByteCodec::DecodingFunction[NoOfCodings] =
 { KByteCodec::fromHexadecimal,
   KByteCodec::fromDecimal,
   KByteCodec::fromOctal,
-  KByteCodec::fromBinary,
-  KByteCodec::fromDummy };
+  KByteCodec::fromBinary };
 
 const KByteCodec::appending KByteCodec::AppendingFunction[NoOfCodings] =
 { KByteCodec::appendToHexadecimal,
   KByteCodec::appendToDecimal,
   KByteCodec::appendToOctal,
-  KByteCodec::appendToBinary,
-  KByteCodec::appendToDummy };
+  KByteCodec::appendToBinary };
 
 const KByteCodec::removingLastDigit KByteCodec::RemovingLastDigitFunction[NoOfCodings] =
 { KByteCodec::removeLastHexadecimalDigit,
   KByteCodec::removeLastDecimalDigit,
   KByteCodec::removeLastOctalDigit,
-  KByteCodec::removeLastBinaryDigit,
-  KByteCodec::removeLastDummyDigit };
+  KByteCodec::removeLastBinaryDigit };
 
 const KByteCodec::validingDigit KByteCodec::ValidingDigitFunction[NoOfCodings] =
 { KByteCodec::isValidHexadecimalDigit,
   KByteCodec::isValidDecimalDigit,
   KByteCodec::isValidOctalDigit,
-  KByteCodec::isValidBinaryDigit,
-  KByteCodec::isValidDummyDigit };
+  KByteCodec::isValidBinaryDigit };
 
-const unsigned int KByteCodec::CodingWidth[NoOfCodings] = { 2, 3, 3, 8, 0 };
+const unsigned int KByteCodec::CodingWidth[NoOfCodings] = { 2, 3, 3, 8 };
 
 const char KByteCodec::Digit[MaxNoOfDigits] =      { '0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F' };
 const char KByteCodec::SmallDigit[MaxNoOfDigits] = { '0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f' };
 
-const unsigned char KByteCodec::DigitsFilledLimit[NoOfCodings] = { 16,26,64,128,0 };
+const unsigned char KByteCodec::DigitsFilledLimit[NoOfCodings] = { 16,26,64,128 };
 
 void KByteCodec::toHexadecimal( char *Digits, unsigned char Char )
 {
@@ -173,11 +167,6 @@ void KByteCodec::toShortBinary( char *Digits, unsigned char Char )
   *Digits   = '\0';
 }
 
-void KByteCodec::toDummy( char */*Digits*/, unsigned char /*Char*/ )
-{
-}
-
-
 
 const unsigned char *KByteCodec::fromHexadecimal( unsigned char *Char, const unsigned char *Digits )
 {
@@ -267,12 +256,6 @@ const unsigned char *KByteCodec::fromBinary( unsigned char *Char, const unsigned
 }
 
 
-const unsigned char *KByteCodec::fromDummy( unsigned char *Char, const unsigned char *Digits )
-{
-  *Char = 0;
-  return Digits;
-}
-
 
 bool KByteCodec::isValidHexadecimalDigit( unsigned char Digit )
 {
@@ -300,10 +283,6 @@ bool KByteCodec::isValidOctalDigit( unsigned char Digit )
 bool KByteCodec::isValidBinaryDigit( unsigned char Digit )
 {
   return Digit == '0' || Digit == '1';
-}
-bool KByteCodec::isValidDummyDigit( unsigned char /*Digit*/ )
-{
-  return false;
 }
 
 
@@ -351,10 +330,6 @@ bool KByteCodec::turnToBinaryValue( unsigned char *Digit )
   return false;
 }
 
-bool KByteCodec::turnToDummyValue( unsigned char */*Digit*/ )
-{
-  return false;
-}
 
 bool KByteCodec::appendToHexadecimal( unsigned char *Byte, unsigned char Digit )
 {
@@ -427,12 +402,6 @@ bool KByteCodec::appendToBinary( unsigned char *Byte, unsigned char Digit )
 }
 
 
-bool KByteCodec::appendToDummy( unsigned char */*Byte*/, unsigned char /*Digit*/ )
-{
-  return false;
-}
-
-
 void KByteCodec::removeLastHexadecimalDigit( unsigned char *Byte )
 {
   *Byte >>= 4;
@@ -448,7 +417,4 @@ void KByteCodec::removeLastOctalDigit( unsigned char *Byte )
 void KByteCodec::removeLastBinaryDigit( unsigned char *Byte )
 {
   *Byte >>= 1;
-}
-void KByteCodec::removeLastDummyDigit( unsigned char */*Byte*/ )
-{
 }
