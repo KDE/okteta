@@ -15,20 +15,23 @@
  ***************************************************************************/
 
 
-#include "koffsetcolumn.h"
+#include "koffsetcolumn.h" 
 #include "koffsetcoltextexport.h"
 
 using namespace KHE;
 
 
-KOffsetColTextExport::KOffsetColTextExport( const KOffsetColumn *OC )
- : OffsetColumn( OC )
+KOffsetColTextExport::KOffsetColTextExport( const KOffsetColumn *OffsetColumn )
+  : CodingWidth( OffsetColumn->codingWidth() ),
+    FirstLineOffset( OffsetColumn->firstLineOffset() ),
+    Delta( OffsetColumn->delta() ),
+    printFunction( OffsetColumn->printFunction() )
 {
 }
 
 int KOffsetColTextExport::charsPerLine() const
 {
-  return OffsetColumn->codingWidth();
+  return CodingWidth;
 }
 
 
@@ -45,7 +48,7 @@ void KOffsetColTextExport::printNextLine( char **T ) const
 
 void KOffsetColTextExport::print( char **T ) const
 {
-  OffsetColumn->printFunction()( *T, OffsetColumn->firstLineOffset()+OffsetColumn->delta()*PrintLine );
-  *T += OffsetColumn->codingWidth();
+  printFunction( *T, FirstLineOffset + Delta*PrintLine );
+  *T += CodingWidth;
   ++PrintLine;
 }

@@ -19,11 +19,10 @@
 #define KHE_KOFFSETCOLTEXTEXPORT_H
 
 #include "kcoltextexport.h"
+#include "koffsetformat.h"
 
 namespace KHE
 {
-
-class KOffsetColumn;
 
 class KOffsetColTextExport : public KColTextExport
 {
@@ -40,7 +39,12 @@ class KOffsetColTextExport : public KColTextExport
     void print( char **T ) const;
 
   protected:
-    const KOffsetColumn *OffsetColumn;
+    const int CodingWidth;
+    const int FirstLineOffset;
+    const int Delta;
+    const KOffsetFormat::print printFunction;
+
+    /** the line we are in */
     mutable int PrintLine;
 };
 
