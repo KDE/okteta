@@ -14,7 +14,6 @@
  *                                                                         *
  ***************************************************************************/
 
-
 // qt specific
 #include "qtextcodec.h"
 // kde specific
@@ -27,10 +26,34 @@
 
 using namespace KHE;
 
+static const char QTextCodecWhiteSpace = 63;
+
+static QTextCodec *createLatin1()
+{
+  return KGlobal::charsets()->codecForName( "ISO8859-1" );
+}
+
+static bool is8Bit( QTextCodec *Codec )
+{
+  for( unsigned int c=1; c<256; ++c )
+  {
+    unsigned char A = (unsigned char)c;
+    QString S = Codec->toUnicode( (const char*)&A,1 );
+    int Length = 1;
+    QCString CS = Codec->fromUnicode( S, Length );
+    if( Length == 0 || (CS[0] != (char)c && CS[0] != QTextCodecWhiteSpace) )
+      return false;
+  }
+  return true;
+}
+
 
 KTextCharCodec *KTextCharCodec::createLocal()
 {
-  return new KTextCharCodec( KGlobal::locale()->codecForEncoding() );
+  QTextCodec *Codec = KGlobal::locale()->codecForEncoding();
+  if( !is8Bit(Codec) )
+    Codec = createLatin1();
+  return new KTextCharCodec( Codec );
 }
 
 
@@ -38,6 +61,8 @@ KTextCharCodec *KTextCharCodec::create( const QString &CodeName )
 { 
   bool Ok;
   QTextCodec *Codec = KGlobal::charsets()->codecForName( CodeName, Ok );
+  if( Ok )
+    Ok = is8Bit( Codec );
   return Ok ? new KTextCharCodec( Codec ) : 0;
 }
 
