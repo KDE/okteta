@@ -1,4 +1,4 @@
-INCLUDES = -I../lib $(all_includes)
+INCLUDES = -I$(srcdir)/../lib $(all_includes)
 
 AM_CXXFLAGS = -DQT_PLUGIN
 

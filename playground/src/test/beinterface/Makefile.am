@@ -1,4 +1,4 @@
-INCLUDES = $(all_includes) -I../../interface
+INCLUDES = $(all_includes) -I$(srcdir)/../../interface
 
 bin_PROGRAMS = testbeif
 testbeif_SOURCES = main.cpp
