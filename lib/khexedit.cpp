@@ -1550,14 +1550,16 @@ bool KHexEdit::handleLetter( QKeyEvent *KeyEvent )
   }
   else
   {
-    // switching to byte edit mode
-    int ValidIndex = BufferCursor->validIndex();
-    if( ValidIndex == -1 ) // TODO: hey, what about appending!!!
+    if( BufferRanges->hasSelection() )
       return false;
 
-    // check for plus/minus
     if( OverWrite )
     {
+      int ValidIndex = BufferCursor->validIndex();
+      if( ValidIndex == -1 || BufferCursor->isBehind() )
+        return false;
+
+      // check for plus/minus
       switch( KeyEvent->key() )
       {
         case Key_Plus:
@@ -1565,12 +1567,13 @@ bool KHexEdit::handleLetter( QKeyEvent *KeyEvent )
         case Key_Minus:
           return decByte();
       }
+
+      OldValue = (unsigned char)DataBuffer->datum( ValidIndex );
     }
 
-    OldValue = (unsigned char)DataBuffer->datum( ValidIndex );
     EditValue = 0;
     bool KeyValid = hexColumn().addingFunction()( &EditValue, D[0] );
-    if( !KeyValid || BufferRanges->hasSelection() )
+    if( !KeyValid )
       return false;
 
     pauseCursor();

@@ -41,9 +41,8 @@ namespace KHE {
   * This layout sees the buffer as a continous stream of byte,
   * thus uses each line after the start from the begin to the end.
   *
-  * If the buffer is empty the end coord will be set to the start coord
-  * to easen the cursor handling. So, don't use the coords to calc the length.
-  *
+  * If the buffer is empty the end coord will be set one pos left to the start coord
+  * to easen the cursor handling.
   *
   *@author Friedrich W. H.  Kossebau
   */
