@@ -95,7 +95,7 @@ inline KSection &KSection::operator=( const KSection &S ) { KRange<int>::operato
 
 inline int KSection::width() const { return isValid() ? end()-start()+1 : 0; }
 
-inline void KSection::setByWidth( int S, int Width )  { setStart( S ); setEnd( S+Width+1 ); }
+inline void KSection::setByWidth( int S, int Width )  { setStart( S ); setEnd( S+Width-1 ); }
 inline void KSection::setStartByWidth( int Width )  { setStart( end()-Width+1 ); }
 inline void KSection::setEndByWidth( int Width )    { setEnd( start()+Width-1 ); }
 inline void KSection::setStartBehind( KSection S )  { setStart( S.end()+1 ); }
