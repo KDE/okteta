@@ -23,7 +23,7 @@
 
 namespace KHE
 {
-  enum KCoding { HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, MaxCodingId=0xFF };
+  enum KCoding { HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, MaxCodingId=0xFFFF };
   static const int NoOfCodings = 4;
   
   /** */
@@ -33,10 +33,10 @@ namespace KHE
     LocalEncoding=0,
     /** ASCII encoding, also known as Latin1 */
     ISO8859_1Encoding=1,
-    /** don't use; not implemented: the most common EBCDIC codepage */
-    CECP1047Encoding=2,
+//    /** don't use; not implemented: the most common EBCDIC codepage */
+//    CECP1047Encoding=2,
     /** this should enable extension without breaking binary compatibility */
-    MaxEncodingId=0xFF
+    MaxEncodingId=0xFFFF
   };
   static const int NoOfEncodings = 2;
 }

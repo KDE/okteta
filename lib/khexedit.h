@@ -91,8 +91,8 @@ class KHexEdit : public KColumnsView
     enum KKeyboardAction { ActionDelete, ActionWordDelete, ActionBackspace, ActionWordBackspace };
 
     enum KResizeStyle { NoResize=0, LockGrouping=1, FullSizeUsage=2, MaxResizeStyleId=0xFF };
-    enum KCoding { HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, MaxCodingId=0xFF };
-    enum KEncoding { LocalEncoding=0, ISO8859_1Encoding=1, MaxEncodingId=0xFF };
+    enum KCoding { HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, MaxCodingId=0xFFFF };
+    enum KEncoding { LocalEncoding=0, ISO8859_1Encoding=1, MaxEncodingId=0xFFFF };
 
 
   public:
