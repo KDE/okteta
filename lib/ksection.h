@@ -24,11 +24,22 @@
 namespace KHE
 {
 
+/** describes a section of indizes
+  *@author Friedrich W. H.  Kossebau
+  */
 class KSection : public KRange<int>
 {
   public:
+    /** constructs a section
+     * @param SI starting index
+     * @param EI end index
+     */
     KSection( int SI, int EI );
-    KSection( int SI, int EI, bool );
+    /** constructs a section
+     * @param SI starting index
+     * @param W width of the section
+     */
+    KSection( int SI, int W, bool );
     KSection();
     ~KSection();
 
@@ -53,6 +64,9 @@ class KSection : public KRange<int>
     void setEndByWidth( int Width );
 
   public:
+    /**
+     * @return the numbered of included indizes or 0, if the section is invalid
+     */
     int width() const;
 };
 
