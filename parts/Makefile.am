@@ -1,1 +1,1 @@
-SUBDIRS = kbytesedit
+SUBDIRS = kbytesedit kpart
