@@ -24,8 +24,8 @@
 #include "khepartfactory.h"
 
 // Part
-static const char *PartId =          "khexeditpart";
-static const char *PartName =        I18N_NOOP("KHexEditPart");
+static const char *PartId =          "khexedit2part";
+static const char *PartName =        I18N_NOOP("KHexEdit2Part");
 static const char *PartDescription = I18N_NOOP("Embedded hex editor");
 static const char *PartVersion =     "0.1.0";
 static const char *PartCopyright =   "(C) 2003 Friedrich W. H.  Kossebau";

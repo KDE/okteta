@@ -14,7 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
-
+// c++ specific
+#include <iostream>
 // qt specific
 #include <qfile.h>
 #include <qtextstream.h>
@@ -47,6 +48,7 @@ KHexEditPart::KHexEditPart( QWidget *parentWidget, const char *widgetName,
   m_HexEdit = new KHexEdit( &m_Wrapping, parentWidget, widgetName );
   m_HexEdit->setNoOfBytesPerLine( 16 );
   m_HexEdit->setBufferSpacing( 3, 4, 10 );
+  m_HexEdit->setShowUnprintable( false );
 
   // notify the part that this is our internal widget
   setWidget( m_HexEdit );
@@ -96,6 +98,7 @@ void KHexEditPart::setupActions()
   OctCodingAction->setExclusiveGroup( CodingGroupId );
   BinCodingAction->setExclusiveGroup( CodingGroupId );
 
+  ShowUnprintableAction = new KToggleAction( i18n("Show unprintabe chars(<32)"), 0, this, SLOT(slotSetShowUnprintable()), actionCollection(), "view_showunprintable" );
 
   KStdAction::zoomIn(  m_HexEdit, SLOT(zoomIn()),   actionCollection() );
   KStdAction::zoomOut( m_HexEdit, SLOT(zoomOut()),  actionCollection() );
@@ -246,6 +249,11 @@ void KHexEditPart::slotSetCoding()
     Coding = KHexEdit::HexadecimalCoding;
 
   m_HexEdit->setCoding( Coding );
+}
+
+void KHexEditPart::slotSetShowUnprintable()
+{
+  m_HexEdit->setShowUnprintable( ShowUnprintableAction->isChecked() );
 }
 
 #include "khepart.moc"

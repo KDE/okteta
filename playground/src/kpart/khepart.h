@@ -29,6 +29,7 @@ class QPainter;
 class KURL;
 class KAction;
 class KRadioAction;
+class KToggleAction;
 namespace KHE { class KHexEdit; }
 
 /**
@@ -90,7 +91,7 @@ class KHexEditPart : public KParts::ReadWritePart
     void selectAll();
     void unselect();
     void slotSetCoding();
-
+    void slotSetShowUnprintable();
 
   private:
     KHE::KHexEdit *m_HexEdit;
@@ -105,6 +106,7 @@ class KHexEditPart : public KParts::ReadWritePart
     KRadioAction *DecCodingAction;
     KRadioAction *OctCodingAction;
     KRadioAction *BinCodingAction;
+    KToggleAction *ShowUnprintableAction;
 };
 
 #endif

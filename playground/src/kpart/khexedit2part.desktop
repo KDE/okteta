@@ -3,7 +3,16 @@ Type=Service
 Icon=khexedit
 Encoding=UTF-8
 Name=Embedded Binary Viewer
+Name[es]=Visualizador Binario incrustado.
+Name[pt]=Visualizador Binário Embebido
+Name[pt_BR]=Visualizar Binário Integrado
+Name[sv]=Inbäddad binärvisning
 Comment=Embedded Binary Viewer
+Comment[es]=Visualizador Binario incrustado.
+Comment[pt]=Visualizador binário embebido
+Comment[pt_BR]=Visualizar Binário Integrado
+Comment[sv]=Inbäddad binärvisning
 MimeType=all/allfiles
-ServiceTypes=KParts/ReadOnlyPart,KParts/ReadWritePart
+ServiceTypes=KParts/ReadOnlyPart
+#,KParts/ReadWritePart
 X-KDE-Library=libkhexedit2part
