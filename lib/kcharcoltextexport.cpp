@@ -1,5 +1,5 @@
 /***************************************************************************
-                          ktextcoltextexport.cpp  -  description
+                          kcharcoltextexport.cpp  -  description
                              -------------------
     begin                : Wed Sep 03 2003
     copyright            : (C) 2003 by Friedrich W. H. Kossebau
@@ -19,27 +19,27 @@
 #include <string.h>
 // app specific
 #include "kbufferlayout.h"
-#include "ktextcolumn.h"
-#include "ktextcoltextexport.h"
+#include "kcharcolumn.h"
+#include "kcharcoltextexport.h"
 
 using namespace KHE;
 
 static const unsigned char TELowestPrintableChar = 32;
 
 
-KTextColTextExport::KTextColTextExport( const KTextColumn* TC, char *D, KCoordRange CR )
+KCharColTextExport::KCharColTextExport( const KCharColumn* TC, char *D, KCoordRange CR )
  : KBufferColTextExport( TC, D, CR, 1 ),
    SubstituteChar( TC->substituteChar() )
 {
 }
 
 
-KTextColTextExport::~KTextColTextExport()
+KCharColTextExport::~KCharColTextExport()
 {
 }
 
 
-void KTextColTextExport::print( char **T ) const
+void KCharColTextExport::print( char **T ) const
 {
   int p = 0;
   int pEnd = NoOfBytesPerLine;

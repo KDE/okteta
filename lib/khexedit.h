@@ -33,8 +33,8 @@ class KCoordRange;
 
 class KDataBuffer;
 
-class KTextColumn;
-class KHexColumn;
+class KCharColumn;
+class KValueColumn;
 class KBufferColumn;
 class KOffsetColumn;
 class KBorderColumn;
@@ -74,13 +74,13 @@ class KHexEdit : public KColumnsView
   Q_PROPERTY( int FirstLineOffset READ firstLineOffset WRITE setFirstLineOffset )
   //_PROPERTY( int undoDepth READ undoDepth WRITE setUndoDepth )
   //_PROPERTY( bool undoRedoEnabled READ isUndoRedoEnabled WRITE setUndoRedoEnabled )
-  // hex column
+  // value column
   Q_PROPERTY( KCoding Coding READ coding WRITE setCoding )
   Q_PROPERTY( int ByteSpacingWidth READ byteSpacingWidth WRITE setByteSpacingWidth )
   Q_PROPERTY( int NoOfGroupedBytes READ noOfGroupedBytes WRITE setNoOfGroupedBytes )
   Q_PROPERTY( int GroupSpacingWidth READ groupSpacingWidth WRITE setGroupSpacingWidth )
   Q_PROPERTY( int BinaryGapWidth READ binaryGapWidth WRITE setBinaryGapWidth )
-  // text column
+  // char column
   Q_PROPERTY( bool ShowUnprintable READ showUnprintable WRITE setShowUnprintable )
   Q_PROPERTY( QChar SubstituteChar READ substituteChar WRITE setSubstituteChar )
 
@@ -127,14 +127,14 @@ class KHexEdit : public KColumnsView
     int noOfBytesPerLine() const;
     int startOffset() const;
     int firstLineOffset() const;
-  // hex column
+  // value column
     KCoding coding() const;
     int/*KPixelX*/ byteSpacingWidth() const;
     int noOfGroupedBytes() const;
     int/*KPixelX*/ groupSpacingWidth() const;
     int/*KPixelX*/ binaryGapWidth() const;
-  // text column
-    /** returns true if "unprintable" chars (>32) are displayed in the text column
+  // char column
+    /** returns true if "unprintable" chars (>32) are displayed in the char column
       * with their corresponding character, default is false
       */
     bool showUnprintable() const;
@@ -161,8 +161,8 @@ class KHexEdit : public KColumnsView
 
   public:
     const KOffsetColumn& offsetColumn() const;
-    const KHexColumn& hexColumn()    const;
-    const KTextColumn& textColumn()   const;
+    const KValueColumn& valueColumn()    const;
+    const KCharColumn& charColumn()   const;
     const KBufferColumn& activeColumn() const;
     const KBufferColumn& inactiveColumn() const;
 
@@ -188,7 +188,7 @@ class KHexEdit : public KColumnsView
     void ensureCursorVisible();
 
   // setting parameters
-    /** sets the resizestyle for the hex column. Default is KHE::FullSizeUsage */
+    /** sets the resizestyle for the value column. Default is KHE::FullSizeUsage */
     void setResizeStyle( KResizeStyle Style );
     /** sets whether the widget is readonly or not, Default is true.
       * If the databuffer which is worked on can't be written the widget stays readonly
@@ -200,7 +200,7 @@ class KHexEdit : public KColumnsView
     virtual void setOverwriteMode( bool b );
     /** sets whether the data should be treated modified or not */
     virtual void setModified( bool b );
-    /** sets whether on a tab key there should be switched from the text column back to the hex column
+    /** sets whether on a tab key there should be switched from the char column back to the value column
       * or be switched to the next focusable widget. Default is false
       */
     virtual void setTabChangesFocus( bool b = true );
@@ -211,38 +211,38 @@ class KHexEdit : public KColumnsView
     void setStartOffset( int SO );
     /** sets offset of the char in the upper left corner */
     void setFirstLineOffset( int FLO );
-  // hex column parameters
-    /** sets the spacing between the bytes in the hex column
+  // value column parameters
+    /** sets the spacing between the bytes in the value column
       * @param BSW spacing between the bytes in pixels
       * default is 3
       */
     void setByteSpacingWidth( int/*KPixelX*/ BSW ) ;
-    /** sets the number of grouped bytes in the hex column
+    /** sets the number of grouped bytes in the value column
       * @param NoGB numbers of grouped bytes, 0 means no grouping
       * default is 4
       */
     void setNoOfGroupedBytes( int NoGB );
-    /** sets the spacing between the groups of bytes in the hex column
+    /** sets the spacing between the groups of bytes in the value column
       * @param GSW spacing between the groups in pixels
       * default is 9
       */
     void setGroupSpacingWidth( int/*KPixelX*/ GSW );
-    /** sets the spacing in the middle of a binary byte in the hex column
+    /** sets the spacing in the middle of a binary byte in the value column
       * @param BinaryGapW spacing in the middle of a binary in pixels
       * returns true if there was a change
       */
     void setBinaryGapWidth( int BGW );
-    /** sets the spacing in the hex column
+    /** sets the spacing in the value column
       * @param ByteSpacingWidth spacing between the bytes in pixels
       * @param NoOfGroupedBytes numbers of grouped bytes, 0 means no grouping
       * @param GroupSpacingWidth spacing between the groups in pixels
       * Default is 4 for NoOfGroupedBytes
       */
     void setBufferSpacing( KPixelX ByteSpacingWidth, int NoOfGroupedBytes = 0, KPixelX GroupSpacingWidth = 0 );
-    /** sets the format of the hex column. Default is KHE::HexadecimalCoding */
+    /** sets the format of the value column. Default is KHE::HexadecimalCoding */
     void setCoding( KCoding C );
-  // text column parameters
-    /** sets whether "unprintable" chars (>32) should be displayed in the text column
+  // char column parameters
+    /** sets whether "unprintable" chars (>32) should be displayed in the char column
       * with their corresponding character.
       * @param SU
       * returns true if there was a change
@@ -252,7 +252,7 @@ class KHexEdit : public KColumnsView
       * returns true if there was a change
       */
     void setSubstituteChar( QChar SC );
-    /** sets the encoding of the text column. Default is KHE::LocalEncoding.
+    /** sets the encoding of the char column. Default is KHE::LocalEncoding.
       * If the encoding is not available the format will not be changed. */
     void setEncoding( KEncoding C );
 
@@ -292,7 +292,7 @@ class KHexEdit : public KColumnsView
     virtual void unpauseCursor();
 
   // byte editing
-    /** steps inside editing the byte in the hec column */
+    /** steps inside editing the byte in the value column */
     bool goInsideByte();
     /** */
     void goOutsideByte( bool MoveToNext = false );
@@ -364,8 +364,8 @@ class KHexEdit : public KColumnsView
 
   protected: // partial operations
     KOffsetColumn& offsetColumn();
-    KHexColumn& hexColumn();
-    KTextColumn& textColumn();
+    KValueColumn& valueColumn();
+    KCharColumn& charColumn();
     KBufferColumn& activeColumn();
     KBufferColumn& inactiveColumn();
 
@@ -418,14 +418,14 @@ class KHexEdit : public KColumnsView
     KBufferCursor *BufferCursor;
     /** */
     KBufferRanges *BufferRanges;
-    // TODO: Timer for syncing hexediting with textColumn... no needed?
+    // TODO: Timer for syncing hexediting with charColumn... no needed?
 
   protected:
     KOffsetColumn *OffsetColumn;
     KBorderColumn *FirstBorderColumn;
-    KHexColumn    *HexColumn;
+    KValueColumn    *ValueColumn;
     KBorderColumn *SecondBorderColumn;
-    KTextColumn   *TextColumn;
+    KCharColumn   *CharColumn;
 
     /** points to the column with keyboard focus */
     KBufferColumn *ActiveColumn;
@@ -505,14 +505,14 @@ class KHexEdit : public KColumnsView
 
 
 inline const KOffsetColumn& KHexEdit::offsetColumn()   const { return *OffsetColumn; }
-inline const KHexColumn& KHexEdit::hexColumn()         const { return *HexColumn; }
-inline const KTextColumn& KHexEdit::textColumn()       const { return *TextColumn; }
+inline const KValueColumn& KHexEdit::valueColumn()     const { return *ValueColumn; }
+inline const KCharColumn& KHexEdit::charColumn()       const { return *CharColumn; }
 inline const KBufferColumn& KHexEdit::activeColumn()   const { return *ActiveColumn; }
 inline const KBufferColumn& KHexEdit::inactiveColumn() const { return *InactiveColumn; }
 
 inline KOffsetColumn& KHexEdit::offsetColumn()   { return *OffsetColumn; }
-inline KHexColumn& KHexEdit::hexColumn()         { return *HexColumn; }
-inline KTextColumn& KHexEdit::textColumn()       { return *TextColumn; }
+inline KValueColumn& KHexEdit::valueColumn()     { return *ValueColumn; }
+inline KCharColumn& KHexEdit::charColumn()       { return *CharColumn; }
 inline KBufferColumn& KHexEdit::activeColumn()   { return *ActiveColumn; }
 inline KBufferColumn& KHexEdit::inactiveColumn() { return *InactiveColumn; }
 

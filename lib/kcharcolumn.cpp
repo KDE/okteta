@@ -1,5 +1,5 @@
 /***************************************************************************
-                          ktextcolumn.cpp  -  description
+                          kcharcolumn.cpp  -  description
                              -------------------
     begin                : Mit Sep 3 2003
     copyright            : (C) 2003 by Friedrich W. H. Kossebau
@@ -26,7 +26,7 @@
 #include "kbuffercursor.h"
 #include "kbufferlayout.h"
 #include "kbufferranges.h"
-#include "ktextcolumn.h"
+#include "kcharcolumn.h"
 
 using namespace KHE;
 
@@ -36,7 +36,7 @@ static const QChar     DefaultSubstituteChar =  '.';
 
 static const unsigned char LowestPrintableChar = 32;
 
-KTextColumn::KTextColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R )
+KCharColumn::KCharColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R )
  : KBufferColumn( CV, B, L, R ),
    Encoding( DefaultEncoding ),
    ShowUnprintable( DefaultShowUnprintable ),
@@ -46,13 +46,13 @@ KTextColumn::KTextColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KB
 }
 
 
-KTextColumn::~KTextColumn()
+KCharColumn::~KCharColumn()
 {
 }
 
 
 
-void KTextColumn::drawByte( QPainter *P, char Byte, const QColor &Color ) const
+void KCharColumn::drawByte( QPainter *P, char Byte, const QColor &Color ) const
 {
   QString BS = ( (unsigned char)Byte < LowestPrintableChar && !ShowUnprintable ) ?
                  SubstituteChar :

@@ -46,8 +46,8 @@
 #include <kstdaction.h>
 // new kde specific
 #include <khexedit/byteseditinterface.h>
-#include <khexedit/hexcolumninterface.h>
-#include <khexedit/textcolumninterface.h>
+#include <khexedit/valuecolumninterface.h>
+#include <khexedit/charcolumninterface.h>
 #include <khexedit/clipboardinterface.h>
 #include <khexedit/zoominterface.h>
 // app specific
@@ -89,31 +89,31 @@ BytesEditApp::BytesEditApp()
     BytesEdit->setReadOnly( false );
     BytesEdit->setAutoDelete( true );
 #if 0
-    KHE::HexColumnInterface *HexColumn = hexColumnInterface( BytesEditWidget );
-    if( HexColumn )
+    KHE::ValueColumnInterface *ValueColumn = hexColumnInterface( BytesEditWidget );
+    if( ValueColumn )
     {
       Layout->setResizeStyle( KBytesEditInterface::LockGrouping );
 //     BytesEdit->setNoOfBytesPerLine( 16 );
 //     BytesEdit->setResizeStyle( KHE::KBytesEdit::LockGrouping );
     }
 #endif
-    KHE::HexColumnInterface *HexColumn = KHE::hexColumnInterface( BytesEditWidget );
-    if( HexColumn )
+    KHE::ValueColumnInterface *ValueColumn = KHE::valueColumnInterface( BytesEditWidget );
+    if( ValueColumn )
     {
-      HexColumn->setResizeStyle( KHE::HexColumnInterface::LockGrouping );
-      HexColumn->setCoding( KHE::HexColumnInterface::DecimalCoding );
-//      HexColumn->setCoding( HexColumnInterface::BinaryCoding );
-      HexColumn->setByteSpacingWidth( 2 );
-      HexColumn->setNoOfGroupedBytes( 4 );
-      HexColumn->setGroupSpacingWidth( 12 );
+      ValueColumn->setResizeStyle( KHE::ValueColumnInterface::LockGrouping );
+      ValueColumn->setCoding( KHE::ValueColumnInterface::DecimalCoding );
+//      ValueColumn->setCoding( ValueColumnInterface::BinaryCoding );
+      ValueColumn->setByteSpacingWidth( 2 );
+      ValueColumn->setNoOfGroupedBytes( 4 );
+      ValueColumn->setGroupSpacingWidth( 12 );
     }
 
-    KHE::TextColumnInterface *TextColumn = KHE::textColumnInterface( BytesEditWidget );
-    if( TextColumn )
+    KHE::CharColumnInterface *CharColumn = KHE::charColumnInterface( BytesEditWidget );
+    if( CharColumn )
     {
-      TextColumn->setShowUnprintable( false );
-      TextColumn->setSubstituteChar( '*' );
-      TextColumn->setEncoding( KHE::TextColumnInterface::ISO8859_1Encoding/*/LocalEncoding*/ );
+      CharColumn->setShowUnprintable( false );
+      CharColumn->setSubstituteChar( '*' );
+      CharColumn->setEncoding( KHE::CharColumnInterface::ISO8859_1Encoding/*/LocalEncoding*/ );
     }
     Clipboard = KHE::clipboardInterface( BytesEditWidget );
     Zoom = KHE::zoomInterface( BytesEditWidget );
@@ -273,42 +273,42 @@ void BytesEditApp::changeCaption(const QString& text)
 void BytesEditApp::slotSetCoding()
 {
   // TODO: find out if there is a way to use the exclusivegroup somehow
-  KHE::HexColumnInterface::KCoding Coding;
+  KHE::ValueColumnInterface::KCoding Coding;
   if( HexCodingAction->isChecked() )
-    Coding = KHE::HexColumnInterface::HexadecimalCoding;
+    Coding = KHE::ValueColumnInterface::HexadecimalCoding;
   else if( DecCodingAction->isChecked() )
-    Coding = KHE::HexColumnInterface::DecimalCoding;
+    Coding = KHE::ValueColumnInterface::DecimalCoding;
   else if( OctCodingAction->isChecked() )
-    Coding = KHE::HexColumnInterface::OctalCoding;
+    Coding = KHE::ValueColumnInterface::OctalCoding;
   else if( BinCodingAction->isChecked() )
-    Coding = KHE::HexColumnInterface::BinaryCoding;
+    Coding = KHE::ValueColumnInterface::BinaryCoding;
   else
     //should not be reached;
-    Coding = KHE::HexColumnInterface::HexadecimalCoding;
+    Coding = KHE::ValueColumnInterface::HexadecimalCoding;
 
-  KHE::hexColumnInterface(BytesEditWidget)->setCoding( Coding );
+  KHE::valueColumnInterface(BytesEditWidget)->setCoding( Coding );
 }
 
 void BytesEditApp::slotSetShowUnprintable()
 {
-  KHE::textColumnInterface(BytesEditWidget)->setShowUnprintable( ShowUnprintableAction->isChecked() );
+  KHE::charColumnInterface(BytesEditWidget)->setShowUnprintable( ShowUnprintableAction->isChecked() );
 }
 
 void BytesEditApp::slotSetResizeStyle()
 {
   // TODO: find out if there is a way to use the exclusivegroup somehow
-  KHE::HexColumnInterface::KResizeStyle ResizeStyle;
+  KHE::ValueColumnInterface::KResizeStyle ResizeStyle;
   if( NoResizeAction->isChecked() )
-    ResizeStyle = KHE::HexColumnInterface::NoResize;
+    ResizeStyle = KHE::ValueColumnInterface::NoResize;
   else if( LockGroupsAction->isChecked() )
-    ResizeStyle = KHE::HexColumnInterface::LockGrouping;
+    ResizeStyle = KHE::ValueColumnInterface::LockGrouping;
   else if( FullSizeUsageAction->isChecked() )
-    ResizeStyle = KHE::HexColumnInterface::FullSizeUsage;
+    ResizeStyle = KHE::ValueColumnInterface::FullSizeUsage;
   else
     //should not be reached;
-    ResizeStyle = KHE::HexColumnInterface::FullSizeUsage;
+    ResizeStyle = KHE::ValueColumnInterface::FullSizeUsage;
 
-  KHE::hexColumnInterface(BytesEditWidget)->setResizeStyle( ResizeStyle );
+  KHE::valueColumnInterface(BytesEditWidget)->setResizeStyle( ResizeStyle );
 }
 
 #include "byteseditapp.moc"

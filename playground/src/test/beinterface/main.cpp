@@ -6,8 +6,8 @@
 #include <kparts/componentfactory.h>
 // app
 #include <khexedit/byteseditinterface.h>
-#include <khexedit/hexcolumninterface.h>
-#include <khexedit/textcolumninterface.h>
+#include <khexedit/valuecolumninterface.h>
+#include <khexedit/charcolumninterface.h>
 
 using namespace KHE;
 
@@ -37,28 +37,28 @@ int main( int argc, char* argv[] )
     BytesEdit->setMaxDataSize( BufferSize );
     BytesEdit->setReadOnly( false );
 #if 0
-    KHE::HexColumnInterface *HexColumn = hexColumnInterface( BytesEditWidget );
-    if( HexColumn )
+    KHE::ValueColumnInterface *ValueColumn = hexColumnInterface( BytesEditWidget );
+    if( ValueColumn )
     {
       Layout->setResizeStyle( KBytesEditInterface::LockGrouping );
 //     BytesEdit->setNoOfBytesPerLine( 16 );
     }
 #endif
-    HexColumnInterface *HexColumn = hexColumnInterface( BytesEditWidget );
-    if( HexColumn )
+    ValueColumnInterface *ValueColumn = valueColumnInterface( BytesEditWidget );
+    if( ValueColumn )
     {
-//     HexColumn->setCoding( HexColumnInterface::DecimalCoding );
-      HexColumn->setCoding( HexColumnInterface::BinaryCoding );
-      HexColumn->setByteSpacingWidth( 2 );
-      HexColumn->setNoOfGroupedBytes( 3 );
-      HexColumn->setGroupSpacingWidth( 4 );
+//     ValueColumn->setCoding( ValueColumnInterface::DecimalCoding );
+      ValueColumn->setCoding( ValueColumnInterface::BinaryCoding );
+      ValueColumn->setByteSpacingWidth( 2 );
+      ValueColumn->setNoOfGroupedBytes( 3 );
+      ValueColumn->setGroupSpacingWidth( 4 );
     }
 
-    TextColumnInterface *TextColumn = textColumnInterface( BytesEditWidget );
-    if( TextColumn )
+    CharColumnInterface *CharColumn = charColumnInterface( BytesEditWidget );
+    if( CharColumn )
     {
-      TextColumn->setShowUnprintable( false );
-      TextColumn->setSubstituteChar( '*' );
+      CharColumn->setShowUnprintable( false );
+      CharColumn->setSubstituteChar( '*' );
     }
 
     // Finally insert the widget into the layout of its parent

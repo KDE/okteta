@@ -29,8 +29,8 @@ namespace KHE
 
 // class KBorderColumn;
 class KOffsetColumn;
-class KHexColumn;
-class KTextColumn;
+class KValueColumn;
+class KCharColumn;
 
 typedef KColTextExport* KColTextExportPtr;
 /**
@@ -46,7 +46,8 @@ class KBufferDrag : public QDragObject
 
   public:
     // TODO: make this call somewhat more generic
-    KBufferDrag( const QByteArray &, KCoordRange Range, const KOffsetColumn *OC, const KHexColumn *HC, const KTextColumn *TC,
+    KBufferDrag( const QByteArray &, KCoordRange Range,
+                 const KOffsetColumn *OC, const KValueColumn *HC, const KCharColumn *TC,
                  char SC,
                  QWidget *Source = 0, const char *Name = 0 );
     KBufferDrag( QWidget *Source = 0, const char *Name = 0 );

@@ -24,8 +24,8 @@ using namespace std;
 #include "kbufferdrag.h"
 #include "kbordercoltextexport.h"
 #include "koffsetcoltextexport.h"
-#include "khexcoltextexport.h"
-#include "ktextcoltextexport.h"
+#include "kvaluecoltextexport.h"
+#include "kcharcoltextexport.h"
 
 using namespace KHE;
 
@@ -33,7 +33,8 @@ const char *KBufferDrag::OctetStream = "application/octet-stream";
 const char *KBufferDrag::PlainText =   "text/plain";
 
 KBufferDrag::KBufferDrag( const QByteArray &D, KCoordRange Range,
-                          const KOffsetColumn *OC, const KHexColumn *HC, const KTextColumn *TC, char SC,
+                          const KOffsetColumn *OC, const KValueColumn *HC, const KCharColumn *TC,
+                          char SC,
                           QWidget *Source, const char *Name )
   :QDragObject( Source, Name ),
    CoordRange( Range ),
@@ -47,11 +48,11 @@ KBufferDrag::KBufferDrag( const QByteArray &D, KCoordRange Range,
   {
     Columns[NoOfCol++] = new KOffsetColTextExport( OC );
     Columns[NoOfCol++] = new KBorderColTextExport();
-    Columns[NoOfCol++] = new KHexColTextExport( HC, Data.data(), CoordRange );
+    Columns[NoOfCol++] = new KValueColTextExport( HC, Data.data(), CoordRange );
     if( TC )
     {
       Columns[NoOfCol++] = new KBorderColTextExport();
-      Columns[NoOfCol++] = new KTextColTextExport( TC, Data.data(), CoordRange );
+      Columns[NoOfCol++] = new KCharColTextExport( TC, Data.data(), CoordRange );
     }
   }
 }

@@ -1,5 +1,5 @@
 /***************************************************************************
-                          khexcoltextexport.h  -  description
+                          kvaluecoltextexport.h  -  description
                              -------------------
     begin                : Sam Aug 30 2003
     copyright            : (C) 2003 by Friedrich W. H. Kossebau
@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KHEXCOLTEXTEXPORT_H
-#define KHEXCOLTEXTEXPORT_H
+#ifndef KVALUECOLTEXTEXPORT_H
+#define KVALUECOLTEXTEXPORT_H
 
 #include "kbytecodec.h"
 #include "kbuffercoltextexport.h"
@@ -25,21 +25,20 @@
 namespace KHE
 {
 
-class KHexColumn;
+class KValueColumn;
 
 
-class KHexColTextExport : public KBufferColTextExport
+class KValueColTextExport : public KBufferColTextExport
 {
   public:
-    KHexColTextExport( const KHexColumn* BF, char *D, KCoordRange CR );
-    virtual ~KHexColTextExport();
+    KValueColTextExport( const KValueColumn* BF, char *D, KCoordRange CR );
+    virtual ~KValueColTextExport();
 
   protected:
     virtual void print( char **T ) const;
 
 
   protected:
-
     int CodingWidth;
     KByteCodec::coding CodingFunction;
 };

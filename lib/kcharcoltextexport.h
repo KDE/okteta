@@ -1,5 +1,5 @@
 /***************************************************************************
-                          ktextcoltextexport.h  -  description
+                          kcharcoltextexport.h  -  description
                              -------------------
     begin                : Wed Sep 3 2003
     copyright            : (C) 2003 by Friedrich W. H. Kossebau
@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KTEXTCOLTEXTEXPORT_H
-#define KTEXTCOLTEXTEXPORT_H
+#ifndef KCHARCOLTEXTEXPORT_H
+#define KCHARCOLTEXTEXPORT_H
 
 #include "kbuffercoltextexport.h"
 
@@ -24,14 +24,14 @@
 namespace KHE
 {
 
-class KTextColumn;
+class KCharColumn;
 
 
-class KTextColTextExport : public KBufferColTextExport
+class KCharColTextExport : public KBufferColTextExport
 {
   public:
-    KTextColTextExport( const KTextColumn* BF, char *D, KCoordRange CR );
-    virtual ~KTextColTextExport();
+    KCharColTextExport( const KCharColumn* BF, char *D, KCoordRange CR );
+    virtual ~KCharColTextExport();
 
   protected: //API
     virtual void print( char **T ) const;

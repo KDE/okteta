@@ -1,5 +1,5 @@
 /***************************************************************************
-                          khexcoltextexport.cpp  -  description
+                          kvaluecoltextexport.cpp  -  description
                              -------------------
     begin                : Wed Sep 3 2003
     copyright            : (C) 2003 by Friedrich W. H. Kossebau
@@ -19,14 +19,14 @@
 #include <string.h>
 // app specific
 #include "kbufferlayout.h"
-#include "khexcolumn.h"
-#include "khexcoltextexport.h"
+#include "kvaluecolumn.h"
+#include "kvaluecoltextexport.h"
 #include "helper.h"
 
 
 using namespace KHE;
 
-KHexColTextExport::KHexColTextExport( const KHexColumn* HC, char *D, KCoordRange CR )
+KValueColTextExport::KValueColTextExport( const KValueColumn* HC, char *D, KCoordRange CR )
  : KBufferColTextExport( HC, D, CR, HC->codingWidth() ),
    CodingWidth( HC->codingWidth() ),
    CodingFunction( HC->codingFunction() )
@@ -34,14 +34,14 @@ KHexColTextExport::KHexColTextExport( const KHexColumn* HC, char *D, KCoordRange
 }
 
 
-KHexColTextExport::~KHexColTextExport()
+KValueColTextExport::~KValueColTextExport()
 {
 }
 
 
 // Duh, hacky, hacky, is because codingFunction writes one byte (\0) behind the end
 // TODO: write the last into a buffer and copy without the \0
-void KHexColTextExport::print( char **T ) const
+void KValueColTextExport::print( char **T ) const
 {
   int p = 0;
   int pEnd = NoOfBytesPerLine;

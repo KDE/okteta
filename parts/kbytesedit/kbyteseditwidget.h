@@ -21,8 +21,8 @@
 #include <qwidget.h>
 // app specific
 #include <khexedit/byteseditinterface.h>
-#include <khexedit/hexcolumninterface.h>
-#include <khexedit/textcolumninterface.h>
+#include <khexedit/valuecolumninterface.h>
+#include <khexedit/charcolumninterface.h>
 #include <khexedit/zoominterface.h>
 #include <khexedit/clipboardinterface.h>
 
@@ -38,7 +38,7 @@ class KBytesEdit;
    @version 0.1
  **/
 class KBytesEditWidget : public QWidget, public KHE::BytesEditInterface,
-                         public KHE::HexColumnInterface, public KHE::TextColumnInterface,
+                         public KHE::ValueColumnInterface, public KHE::CharColumnInterface,
                          public KHE::ZoomInterface, public KHE::ClipboardInterface
 {
   Q_OBJECT
@@ -95,7 +95,7 @@ class KBytesEditWidget : public QWidget, public KHE::BytesEditInterface,
 //     virtual bool tabChangesFocus() const;
 
   public: // layout interface ??
-    /** sets the resizestyle for the hex column. Default is KHE::FullSizeUsage */
+    /** sets the resizestyle for the value column. Default is KHE::FullSizeUsage */
     virtual void setResizeStyle( KResizeStyle Style );
     /** sets the number of bytes per line, switching the resize style to KHE::NoResize */
     virtual void setNoOfBytesPerLine( int NoCpL );
@@ -103,8 +103,8 @@ class KBytesEditWidget : public QWidget, public KHE::BytesEditInterface,
     virtual int noOfBytesPerLine() const;
     virtual KResizeStyle resizeStyle() const;
 
-  public: // hex column
-    /** sets the format of the hex column. Default is KHE::HexadecimalCoding */
+  public: // value column
+    /** sets the format of the value column. Default is KHE::HexadecimalCoding */
     virtual void setCoding( KCoding C );
     /** sets the spacing between the bytes in pixels */
     virtual void setByteSpacingWidth( int BSW );
@@ -112,7 +112,7 @@ class KBytesEditWidget : public QWidget, public KHE::BytesEditInterface,
     virtual void setNoOfGroupedBytes( int NoGB );
     /** sets the spacing between the groups in pixels */
     virtual void setGroupSpacingWidth( int GSW );
-    /** sets the spacing in the middle of a binary byte in the hex column
+    /** sets the spacing in the middle of a binary byte in the value column
       * @param BGW spacing in the middle of a binary in pixels
       */
     virtual void setBinaryGapWidth( int BGW );
@@ -124,8 +124,8 @@ class KBytesEditWidget : public QWidget, public KHE::BytesEditInterface,
     virtual int groupSpacingWidth() const;
     virtual int binaryGapWidth() const;
 
-  public:  // text column
-    /** sets whether "unprintable" chars (>32) should be displayed in the text column
+  public:  // char column
+    /** sets whether "unprintable" chars (>32) should be displayed in the char column
       * with their corresponding character.
       * @param SU
       * returns true if there was a change
@@ -135,10 +135,10 @@ class KBytesEditWidget : public QWidget, public KHE::BytesEditInterface,
       * returns true if there was a change
       */
     virtual void setSubstituteChar( QChar SC );
-    /** sets the encoding of the text column. Default is KHE::LocalEncoding.
+    /** sets the encoding of the char column. Default is KHE::LocalEncoding.
       * If the encoding is not available the format will not be changed. */
     virtual void setEncoding( KEncoding C );
-    /** returns true if "unprintable" chars (>32) are displayed in the text column
+    /** returns true if "unprintable" chars (>32) are displayed in the char column
       * with their corresponding character, default is false
       */
     virtual bool showUnprintable() const;

@@ -34,8 +34,8 @@
 // app specific
 #include "kdatabuffer.h"
 #include "koffsetcolumn.h"
-#include "khexcolumn.h"
-#include "ktextcolumn.h"
+#include "kvaluecolumn.h"
+#include "kcharcolumn.h"
 #include "kbordercolumn.h"
 #include "kbuffercursor.h"
 #include "kbufferlayout.h"
@@ -94,13 +94,13 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, WFla
   // creating the columns in the needed order
   OffsetColumn =       new KOffsetColumn( this, DefaultFirstLineOffset, DefaultNoOfBytesPerLine, KOffsetFormat::Hexadecimal );
   FirstBorderColumn =  new KBorderColumn( this );
-  HexColumn =          new KHexColumn( this, DataBuffer, BufferLayout, BufferRanges );
+  ValueColumn =        new KValueColumn( this, DataBuffer, BufferLayout, BufferRanges );
   SecondBorderColumn = new KBorderColumn( this );
-  TextColumn =         new KTextColumn( this, DataBuffer, BufferLayout, BufferRanges );
+  CharColumn =         new KCharColumn( this, DataBuffer, BufferLayout, BufferRanges );
 
   // select the active column
-  ActiveColumn = &textColumn();
-  InactiveColumn = &hexColumn();
+  ActiveColumn = &charColumn();
+  InactiveColumn = &valueColumn();
 
 #ifdef QT_ONLY
   QFont FixedFont( "fixed", 10 );
@@ -133,19 +133,19 @@ int KHexEdit::noOfBytesPerLine()               const { return BufferLayout->noOf
 int KHexEdit::firstLineOffset()                const { return OffsetColumn->firstLineOffset(); }
 int KHexEdit::startOffset()                    const { return BufferLayout->startOffset(); }
 KHexEdit::KResizeStyle KHexEdit::resizeStyle() const { return ResizeStyle; }
-KHexEdit::KCoding KHexEdit::coding()           const { return (KHexEdit::KCoding)hexColumn().coding(); }
-KPixelX KHexEdit::byteSpacingWidth()           const { return hexColumn().byteSpacingWidth(); }
-int KHexEdit::noOfGroupedBytes()               const { return hexColumn().noOfGroupedBytes(); }
-KPixelX KHexEdit::groupSpacingWidth()          const { return hexColumn().groupSpacingWidth(); }
-KPixelX KHexEdit::binaryGapWidth()             const { return hexColumn().binaryGapWidth(); }
+KHexEdit::KCoding KHexEdit::coding()           const { return (KHexEdit::KCoding)valueColumn().coding(); }
+KPixelX KHexEdit::byteSpacingWidth()           const { return valueColumn().byteSpacingWidth(); }
+int KHexEdit::noOfGroupedBytes()               const { return valueColumn().noOfGroupedBytes(); }
+KPixelX KHexEdit::groupSpacingWidth()          const { return valueColumn().groupSpacingWidth(); }
+KPixelX KHexEdit::binaryGapWidth()             const { return valueColumn().binaryGapWidth(); }
 bool KHexEdit::isOverwriteMode()               const { return OverWrite; }
 bool KHexEdit::isOverwriteOnly()               const { return OverWriteOnly; }
 bool KHexEdit::isReadOnly()                    const { return ReadOnly; }
 bool KHexEdit::isModified()                    const { return DataBuffer->isModified(); }
 bool KHexEdit::tabChangesFocus()               const { return TabChangesFocus; }
-bool KHexEdit::showUnprintable()               const { return textColumn().showUnprintable(); }
-QChar KHexEdit::substituteChar()               const { return textColumn().substituteChar(); }
-KHexEdit::KEncoding KHexEdit::encoding()       const { return (KHexEdit::KEncoding)textColumn().encoding(); }
+bool KHexEdit::showUnprintable()               const { return charColumn().showUnprintable(); }
+QChar KHexEdit::substituteChar()               const { return charColumn().substituteChar(); }
+KHexEdit::KEncoding KHexEdit::encoding()       const { return (KHexEdit::KEncoding)charColumn().encoding(); }
 
 void KHexEdit::setOverwriteOnly( bool OO )    { OverWriteOnly = OO; if( OverWriteOnly ) setOverwriteMode( true ); }
 void KHexEdit::setModified( bool M )          { DataBuffer->setModified(M); }
@@ -180,8 +180,8 @@ void KHexEdit::setDataBuffer( KDataBuffer *B )
   pauseCursor();
 
   DataBuffer = B;
-  hexColumn().set( DataBuffer );
-  textColumn().set( DataBuffer);
+  valueColumn().set( DataBuffer );
+  charColumn().set( DataBuffer);
 
   // affected:
   // length -> no of lines -> width
@@ -226,7 +226,7 @@ void KHexEdit::setReadOnly( bool RO )
 
 void KHexEdit::setBufferSpacing( KPixelX ByteSpacing, int NoOfGroupedBytes, KPixelX GroupSpacing )
 {
-  if( !hexColumn().setSpacing(ByteSpacing,NoOfGroupedBytes,GroupSpacing) )
+  if( !valueColumn().setSpacing(ByteSpacing,NoOfGroupedBytes,GroupSpacing) )
     return;
 
   updateViewByWidth();
@@ -235,14 +235,14 @@ void KHexEdit::setBufferSpacing( KPixelX ByteSpacing, int NoOfGroupedBytes, KPix
 
 void KHexEdit::setCoding( KCoding C )
 {
-  int OldCodingWidth = hexColumn().codingWidth();
+  int OldCodingWidth = valueColumn().codingWidth();
 
-  if( !hexColumn().setCoding((KHE::KCoding)C) )
+  if( !valueColumn().setCoding((KHE::KCoding)C) )
     return;
 
   // no change in the width?
-  if( hexColumn().codingWidth() == OldCodingWidth )
-    updateColumn( hexColumn() );
+  if( valueColumn().codingWidth() == OldCodingWidth )
+    updateColumn( valueColumn() );
   else
     updateViewByWidth();
 }
@@ -272,14 +272,14 @@ void KHexEdit::setNoOfBytesPerLine( int NoBpL )
 
 void KHexEdit::setByteSpacingWidth( int/*KPixelX*/ BSW )
 {
-  if( !hexColumn().setByteSpacingWidth(BSW) )
+  if( !valueColumn().setByteSpacingWidth(BSW) )
     return;
   updateViewByWidth();
 }
 
 void KHexEdit::setNoOfGroupedBytes( int NoGB )
 {
-  if( !hexColumn().setNoOfGroupedBytes(NoGB) )
+  if( !valueColumn().setNoOfGroupedBytes(NoGB) )
     return;
   updateViewByWidth();
 }
@@ -287,7 +287,7 @@ void KHexEdit::setNoOfGroupedBytes( int NoGB )
 
 void KHexEdit::setGroupSpacingWidth( int/*KPixelX*/ GSW )
 {
-  if( !hexColumn().setGroupSpacingWidth(GSW) )
+  if( !valueColumn().setGroupSpacingWidth(GSW) )
     return;
   updateViewByWidth();
 }
@@ -295,7 +295,7 @@ void KHexEdit::setGroupSpacingWidth( int/*KPixelX*/ GSW )
 
 void KHexEdit::setBinaryGapWidth( int/*KPixelX*/ BGW )
 {
-  if( !hexColumn().setBinaryGapWidth(BGW) )
+  if( !valueColumn().setBinaryGapWidth(BGW) )
     return;
   updateViewByWidth();
 }
@@ -303,29 +303,29 @@ void KHexEdit::setBinaryGapWidth( int/*KPixelX*/ BGW )
 
 void KHexEdit::setSubstituteChar( QChar SC )
 {
-  if( !textColumn().setSubstituteChar(SC) )
+  if( !charColumn().setSubstituteChar(SC) )
     return;
   pauseCursor();
-  updateColumn( textColumn() );
+  updateColumn( charColumn() );
   unpauseCursor();
 }
 
 void KHexEdit::setShowUnprintable( bool SU )
 {
-  if( !textColumn().setShowUnprintable(SU) )
+  if( !charColumn().setShowUnprintable(SU) )
     return;
   pauseCursor();
-  updateColumn( textColumn() );
+  updateColumn( charColumn() );
   unpauseCursor();
 }
 
 
 void KHexEdit::setEncoding( KEncoding C )
 {
-  if( !textColumn().setEncoding((KHE::KEncoding)C) )
+  if( !charColumn().setEncoding((KHE::KEncoding)C) )
     return;
 
-  updateColumn( textColumn() );
+  updateColumn( charColumn() );
 }
 
 
@@ -347,8 +347,8 @@ void KHexEdit::fontChange( const QFont &OldFont )
   BufferLayout->setNoOfLinesPerPage( noOfLinesPerPage() );
 
   offsetColumn().setMetrics( DigitWidth, DigitBaseLine );
-  hexColumn().setMetrics( DigitWidth, DigitBaseLine );
-  textColumn().setMetrics( DigitWidth, DigitBaseLine );
+  valueColumn().setMetrics( DigitWidth, DigitBaseLine );
+  charColumn().setMetrics( DigitWidth, DigitBaseLine );
 
   updateViewByWidth();
 }
@@ -429,8 +429,8 @@ void KHexEdit::adjustLayoutToSize()
 void KHexEdit::adjustToLayoutNoOfBytesPerLine()
 {
   offsetColumn().setDelta( BufferLayout->noOfBytesPerLine() );
-  hexColumn().resetXBuffer();
-  textColumn().resetXBuffer();
+  valueColumn().resetXBuffer();
+  charColumn().resetXBuffer();
 
   updateWidths();
 }
@@ -451,7 +451,7 @@ QSize KHexEdit::sizeHint() const
 QSize KHexEdit::minimumSizeHint() const
 {
   // TODO: better minimal width (visibility!)
-  return QSize( offsetColumn().visibleWidth()+FirstBorderColumn->visibleWidth()+SecondBorderColumn->visibleWidth()+hexColumn().byteWidth()+textColumn().byteWidth(),
+  return QSize( offsetColumn().visibleWidth()+FirstBorderColumn->visibleWidth()+SecondBorderColumn->visibleWidth()+valueColumn().byteWidth()+charColumn().byteWidth(),
                 lineHeight() + noOfLines()>1? style().pixelMetric(QStyle::PM_ScrollBarExtent):0 );
 }
 
@@ -502,12 +502,12 @@ int KHexEdit::fittingBytesPerLine( const QSize &NewSize ) const
   KMatchTrial MatchRun = FirstRun;
 
   // prepare needed values
-  KPixelX DigitWidth = hexColumn().digitWidth();
-  KPixelX TextByteWidth = textColumn().isVisible() ? DigitWidth : 0;
-  KPixelX HexByteWidth = hexColumn().byteWidth();
-  KPixelX ByteSpacingWidth = hexColumn().byteSpacingWidth();
+  KPixelX DigitWidth = valueColumn().digitWidth();
+  KPixelX TextByteWidth = charColumn().isVisible() ? DigitWidth : 0;
+  KPixelX HexByteWidth = valueColumn().byteWidth();
+  KPixelX ByteSpacingWidth = valueColumn().byteSpacingWidth();
   KPixelX GroupSpacingWidth;
-  int NoOfGroupedBytes = hexColumn().noOfGroupedBytes();
+  int NoOfGroupedBytes = valueColumn().noOfGroupedBytes();
   // no grouping?
   if( NoOfGroupedBytes == 0 )
   {
@@ -516,7 +516,7 @@ int KHexEdit::fittingBytesPerLine( const QSize &NewSize ) const
     GroupSpacingWidth = 0;
   }
   else
-    GroupSpacingWidth = hexColumn().groupSpacingWidth();
+    GroupSpacingWidth = valueColumn().groupSpacingWidth();
 
   KPixelX HexByteGroupWidth =  NoOfGroupedBytes * HexByteWidth + (NoOfGroupedBytes-1)*ByteSpacingWidth;
   KPixelX TextByteGroupWidth = NoOfGroupedBytes * TextByteWidth;
@@ -665,24 +665,24 @@ KBufferDrag *KHexEdit::dragObject( bool F, QWidget *Parent ) const
   if( !BufferRanges->hasSelection() )
     return 0L;
 
-  const KHexColumn *HC;
-  const KTextColumn *TC;
+  const KValueColumn *HC;
+  const KCharColumn *TC;
   KCoordRange Range;
 
-  if( static_cast<KHE::KTextColumn *>( ActiveColumn ) == &textColumn() || !F )
+  if( static_cast<KHE::KCharColumn *>( ActiveColumn ) == &charColumn() || !F )
   {
     HC = 0L;
     TC = 0L;
   }
   else
   {
-    HC = &hexColumn();
-    TC = textColumn().isVisible() ? &textColumn() : 0L;
+    HC = &valueColumn();
+    TC = charColumn().isVisible() ? &charColumn() : 0L;
     KSection S = BufferRanges->selection();
     Range.set( BufferLayout->coordOfIndex(S.start()),BufferLayout->coordOfIndex(S.end()) );
   }
 
-  return new KBufferDrag( selectedData(), Range, OffsetColumn,HC,TC, textColumn().substituteChar(), Parent );
+  return new KBufferDrag( selectedData(), Range, OffsetColumn,HC,TC, charColumn().substituteChar(), Parent );
 }
 
 
@@ -909,7 +909,7 @@ bool KHexEdit::goInsideByte()
   if( ValidIndex == -1 || !OverWrite || isReadOnly() || BufferCursor->isBehind() )
     return false;
 
-  bool ColumnSwitch = (ActiveColumn == &textColumn());
+  bool ColumnSwitch = (ActiveColumn == &charColumn());
 
   //
   InEditMode = true;
@@ -917,8 +917,8 @@ bool KHexEdit::goInsideByte()
 
   if( ColumnSwitch )
   {
-    ActiveColumn = &hexColumn();
-    InactiveColumn = &textColumn();
+    ActiveColumn = &valueColumn();
+    InactiveColumn = &charColumn();
   }
 
   OldValue = EditValue = (unsigned char)DataBuffer->datum( ValidIndex );
@@ -968,7 +968,7 @@ bool KHexEdit::decByte()
 
 void KHexEdit::syncEditedByte()
 {
-  hexColumn().codingFunction()( ByteBuffer, EditValue );
+  valueColumn().codingFunction()( ByteBuffer, EditValue );
   DataBuffer->replace( BufferCursor->index(), 1, (char*)&EditValue, 1 );
 }
 
@@ -1010,15 +1010,15 @@ void KHexEdit::placeCursor( const QPoint &Point )
   resetInputContext();
 
   // switch active column if needed
-  if( textColumn().isVisible() && Point.x() >= textColumn().x() )
+  if( charColumn().isVisible() && Point.x() >= charColumn().x() )
   {
-    ActiveColumn = &textColumn();
-    InactiveColumn = &hexColumn();
+    ActiveColumn = &charColumn();
+    InactiveColumn = &valueColumn();
   }
   else
   {
-    ActiveColumn = &hexColumn();
-    InactiveColumn = &textColumn();
+    ActiveColumn = &valueColumn();
+    InactiveColumn = &charColumn();
   }
 
   // get coord of click and whether this click was closer to the end of the pos
@@ -1031,10 +1031,10 @@ void KHexEdit::placeCursor( const QPoint &Point )
 int KHexEdit::indexByPoint( const QPoint &Point ) const
 {
   const KBufferColumn *C;
-  if( textColumn().isVisible() && Point.x() >= textColumn().x() )
-    C = &textColumn();
+  if( charColumn().isVisible() && Point.x() >= charColumn().x() )
+    C = &charColumn();
   else
-    C = &hexColumn();
+    C = &valueColumn();
 
   KBufferCoord Coord( C->posOfX(Point.x()), lineAt(Point.y()) );
 
@@ -1287,11 +1287,11 @@ void KHexEdit::paintEditedByte( bool Edited )
   int Index = BufferCursor->index();
 
   QPainter Painter;
-  pointPainterToCursor( Painter, hexColumn() );
+  pointPainterToCursor( Painter, valueColumn() );
   if( Edited )
-    hexColumn().paintEditedByte( &Painter, EditValue, ByteBuffer );
+    valueColumn().paintEditedByte( &Painter, EditValue, ByteBuffer );
   else
-    hexColumn().paintByte( &Painter, Index );
+    valueColumn().paintByte( &Painter, Index );
 }
 
 
@@ -1300,7 +1300,7 @@ void KHexEdit::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
   KColumnsView::drawContents( P, cx, cy, cw, ch );
   // TODO: update non blinking cursors. Should this perhaps be done in the buffercolumn?
   // Then it needs to know about inactive, insideByte and the like... well...
-  // perhaps subclassing the buffer columns even more, to KTextColumn and KHexColumn?
+  // perhaps subclassing the buffer columns even more, to KCharColumn and KValueColumn?
 
   if( !CursorPaused && visibleLines(KPixelYs(cy,ch,false)).includes(BufferCursor->line()) )
     updateCursor();
@@ -1342,7 +1342,7 @@ bool KHexEdit::handleByteEditKey( QKeyEvent *KeyEvent )
     case Key_Backspace:
       if( EditValue > 0 )
       {
-        hexColumn().removingFunction()( &EditValue );
+        valueColumn().removingFunction()( &EditValue );
         syncEditedByte();
         updateCursor(); //paintEditedByte( true );
       }
@@ -1355,10 +1355,10 @@ bool KHexEdit::handleByteEditKey( QKeyEvent *KeyEvent )
           && ( !(KeyEvent->state()&( ControlButton | AltButton | MetaButton )) )
           && ( !KeyEvent->ascii() || KeyEvent->ascii() >= 32 ) )
       {
-        if( hexColumn().appendingFunction()(&EditValue,KeyEvent->ascii()) )
+        if( valueColumn().appendingFunction()(&EditValue,KeyEvent->ascii()) )
         {
           syncEditedByte();
-          if( EditModeByInsert && hexColumn().digitsFilled(EditValue) )
+          if( EditModeByInsert && valueColumn().digitsFilled(EditValue) )
             goOutsideByte( true );
           else
             updateCursor();
@@ -1435,7 +1435,7 @@ void KHexEdit::keyPressEvent( QKeyEvent *KeyEvent )
 //       KeyEvent->ignore();
       break;
     case Key_Tab:
-      if( ActiveColumn == &textColumn() )
+      if( ActiveColumn == &charColumn() )
       {
         // in last column we care about tab changes focus
         if( TabChangesFocus && !ShiftPressed )
@@ -1444,17 +1444,17 @@ void KHexEdit::keyPressEvent( QKeyEvent *KeyEvent )
           KeyEvent->ignore();
           break;
         }
-        if( hexColumn().isVisible() )
+        if( valueColumn().isVisible() )
         {
           pauseCursor();
-          ActiveColumn = &hexColumn();
-          InactiveColumn = &textColumn();
+          ActiveColumn = &valueColumn();
+          InactiveColumn = &charColumn();
           unpauseCursor();
         }
         break;
       }
 
-      if( textColumn().isVisible() )
+      if( charColumn().isVisible() )
       {
         // in last column we care about tab changes focus
         if( TabChangesFocus && ShiftPressed )
@@ -1464,8 +1464,8 @@ void KHexEdit::keyPressEvent( QKeyEvent *KeyEvent )
           break;
         }
         pauseCursor( true );
-        ActiveColumn = &textColumn();
-        InactiveColumn = &hexColumn();
+        ActiveColumn = &charColumn();
+        InactiveColumn = &valueColumn();
         unpauseCursor();
       }
       break;
@@ -1551,11 +1551,11 @@ void KHexEdit::keyPressEvent( QKeyEvent *KeyEvent )
 
 bool KHexEdit::handleLetter( QKeyEvent *KeyEvent )
 {
-  if( ActiveColumn == &textColumn() )
+  if( ActiveColumn == &charColumn() )
   {
     QByteArray D( 1 );
     const QString &S = KeyEvent->text();
-    if( textColumn().encoding() == KHE::LocalEncoding )
+    if( charColumn().encoding() == KHE::LocalEncoding )
       D[0] = S.local8Bit()[0];
     else
       D[0] = S.latin1()[0];
@@ -1586,7 +1586,7 @@ bool KHexEdit::handleLetter( QKeyEvent *KeyEvent )
     }
 
     EditValue = 0;
-    bool KeyValid = hexColumn().appendingFunction()( &EditValue, KeyEvent->ascii() );
+    bool KeyValid = valueColumn().appendingFunction()( &EditValue, KeyEvent->ascii() );
     if( !KeyValid )
       return false;
 
@@ -1861,7 +1861,7 @@ void KHexEdit::repaintChanged()
   // collect affected buffer columns
   QPtrList<KBufferColumn> RepaintColumns;
 
-  KBufferColumn *C = HexColumn;
+  KBufferColumn *C = ValueColumn;
   while( true )
   {
     if( C->isVisible() && C->overlaps(cx,cx+cw-1) )
@@ -1870,9 +1870,9 @@ void KHexEdit::repaintChanged()
       C->preparePainting( cx, cw );
     }
 
-    if( C == TextColumn )
+    if( C == CharColumn )
       break;
-    C = TextColumn;
+    C = CharColumn;
   }
 
   if( RepaintColumns.count() > 0 )
@@ -2177,7 +2177,7 @@ void KHexEdit::contentsMouseDoubleClickEvent( QMouseEvent *e )
 
   int Index = BufferCursor->index();
 
-  if( ActiveColumn == &textColumn() )
+  if( ActiveColumn == &charColumn() )
   {
     // for doubleclick we try to select the word that includes this index
     if( DataBuffer->isWordChar(Index) )

@@ -1,5 +1,5 @@
 /***************************************************************************
-                          khexcolumn.cpp  -  description
+                          kvaluecolumn.cpp  -  description
                              -------------------
     begin                : Mit Sep 3 2003
     copyright            : (C) 2003 by Friedrich W. H. Kossebau
@@ -24,7 +24,7 @@
 #include "kbuffercursor.h"
 #include "kbufferlayout.h"
 #include "kbufferranges.h"
-#include "khexcolumn.h"
+#include "kvaluecolumn.h"
 #include "helper.h"
 
 using namespace KHE;
@@ -34,7 +34,7 @@ static const KCoding NotDefaultCoding =      DecimalCoding;
 static const int     DefaultBinaryGapWidth = 1;
 
 
-KHexColumn::KHexColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R )
+KValueColumn::KValueColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R )
  : KBufferColumn( CV, B, L, R ),
    Coding( NotDefaultCoding ),
    BinaryGapWidth( DefaultBinaryGapWidth )
@@ -43,13 +43,13 @@ KHexColumn::KHexColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBuf
 }
 
 
-KHexColumn::~KHexColumn()
+KValueColumn::~KValueColumn()
 {
 }
 
 
 
-bool KHexColumn::setCoding( KCoding C )
+bool KValueColumn::setCoding( KCoding C )
 {
   // no changes?
   if( Coding == C )
@@ -71,7 +71,7 @@ bool KHexColumn::setCoding( KCoding C )
 }
 
 
-bool KHexColumn::setBinaryGapWidth( KPixelX BGW )
+bool KValueColumn::setBinaryGapWidth( KPixelX BGW )
 {
   // no changes?
   if( BinaryGapWidth == BGW )
@@ -88,7 +88,7 @@ bool KHexColumn::setBinaryGapWidth( KPixelX BGW )
 }
 
 
-void KHexColumn::recalcByteWidth()
+void KValueColumn::recalcByteWidth()
 {
   ByteWidth = CodingWidth * DigitWidth;
 
@@ -102,7 +102,7 @@ void KHexColumn::recalcByteWidth()
 
 
 // perhaps sometimes there will be a grammar
-void KHexColumn::paintEditedByte( QPainter *P, char Byte, const char *EditBuffer )
+void KValueColumn::paintEditedByte( QPainter *P, char Byte, const char *EditBuffer )
 {
   const QColorGroup &CG = View->colorGroup();
 
@@ -112,14 +112,14 @@ void KHexColumn::paintEditedByte( QPainter *P, char Byte, const char *EditBuffer
 }
 
 
-void KHexColumn::drawByte( QPainter *P, char Byte, const QColor &Color ) const
+void KValueColumn::drawByte( QPainter *P, char Byte, const QColor &Color ) const
 {
   codingFunction()( CodedByte, Byte );
   drawCode( P, CodedByte, Color );
 }
 
 
-void KHexColumn::drawCode( QPainter *P, const char *Code, const QColor &Color ) const
+void KValueColumn::drawCode( QPainter *P, const char *Code, const QColor &Color ) const
 {
   P->setPen( Color );
   if( Coding == BinaryCoding )

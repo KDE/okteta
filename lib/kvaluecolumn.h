@@ -1,5 +1,5 @@
 /***************************************************************************
-                          khexcolumn.h  -  description
+                          kvaluecolumn.h  -  description
                              -------------------
     begin                : Mit Sep 3 2003
     copyright            : (C) 2003 by Friedrich W. H. Kossebau
@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KHEXCOLUMN_H
-#define KHEXCOLUMN_H
+#ifndef KVALUECOLUMN_H
+#define KVALUECOLUMN_H
 
 #include "kbuffercolumn.h"
 
@@ -24,22 +24,19 @@
 namespace KHE
 {
 
-// class KHexEdit;
+// class KValueEdit;
 class KBufferRanges;
 
 
-/** base class of all buffer column displayers
-  * holds all information about the vertical layout of a buffer column
-  * knows how to paint the data and the editing things (focus, cursor, selection)
-  * but does not offer
+/** buffer column which displays the numerical values of the bytes
   *
   *@author Friedrich W. H. Kossebau
   */
-class KHexColumn : public KBufferColumn
+class KValueColumn : public KBufferColumn
 {
   public:
-    KHexColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R );
-    virtual ~KHexColumn();
+    KValueColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R );
+    virtual ~KValueColumn();
 
   public:
     void paintEditedByte( QPainter *P, char Byte, const char *EditBuffer );
@@ -49,7 +46,7 @@ class KHexColumn : public KBufferColumn
       * returns true if there was a change
       */
     bool setCoding( KCoding C );
-    /** sets the spacing in the middle of a binary byte in the hex column
+    /** sets the spacing in the middle of a binary byte in the value column
       * @param BinaryGapW spacing in the middle of a binary in pixels
       * returns true if there was a change
       */
@@ -98,14 +95,14 @@ class KHexColumn : public KBufferColumn
 };
 
 
-inline KPixelX KHexColumn::binaryGapWidth()             const { return BinaryGapWidth; }
-inline int KHexColumn::codingWidth()                    const { return CodingWidth; }
-inline bool KHexColumn::digitsFilled( unsigned char V ) const { return V >= DigitsFilledLimit; }
-inline KCoding KHexColumn::coding()                     const { return Coding; }
+inline KPixelX KValueColumn::binaryGapWidth()             const { return BinaryGapWidth; }
+inline int KValueColumn::codingWidth()                    const { return CodingWidth; }
+inline bool KValueColumn::digitsFilled( unsigned char V ) const { return V >= DigitsFilledLimit; }
+inline KCoding KValueColumn::coding()                     const { return Coding; }
 
-inline KByteCodec::coding KHexColumn::codingFunction()              const { return CodingFunction; }
-inline KByteCodec::appending KHexColumn::appendingFunction()        const { return AppendingFunction; }
-inline KByteCodec::removingLastDigit KHexColumn::removingFunction() const { return RemovingLastDigitFunction; }
+inline KByteCodec::coding KValueColumn::codingFunction()              const { return CodingFunction; }
+inline KByteCodec::appending KValueColumn::appendingFunction()        const { return AppendingFunction; }
+inline KByteCodec::removingLastDigit KValueColumn::removingFunction() const { return RemovingLastDigitFunction; }
 
 }
 
