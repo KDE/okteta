@@ -27,3 +27,8 @@ KController::KController( KHexEdit* HE, KController *P )
   : Parent( P ), HexEdit( HE )
 {
 }
+
+bool KController::handleKeyPress( QKeyEvent *KeyEvent )
+{
+  return Parent ? Parent->handleKeyPress( KeyEvent ) : false;
+}

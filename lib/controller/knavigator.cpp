@@ -77,10 +77,7 @@ bool KNavigator::handleKeyPress( QKeyEvent *KeyEvent )
       KeyUsed = false;
   }
 
-  if( !KeyUsed && Parent )
-    KeyUsed = Parent->handleKeyPress( KeyEvent );
-
-  return KeyUsed;
+  return KeyUsed ? true : KController::handleKeyPress(KeyEvent);
 }
 
 

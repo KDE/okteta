@@ -112,10 +112,7 @@ bool KEditor::handleKeyPress( QKeyEvent *KeyEvent )
 //     clearUndoRedo();
 //   changeIntervalTimer->start( 100, true );
 
-  if( !KeyUsed && Parent )
-    KeyUsed = Parent->handleKeyPress( KeyEvent );
-
-  return KeyUsed;
+  return KeyUsed ? true : KController::handleKeyPress(KeyEvent);
 }
 
 

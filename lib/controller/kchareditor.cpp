@@ -54,8 +54,5 @@ bool KCharEditor::handleKeyPress( QKeyEvent *KeyEvent )
     }
   }
 
-  if( KeyUsed )
-    return true;
-  else 
-    return KEditor::handleKeyPress( KeyEvent );
+  return KeyUsed ? true : KEditor::handleKeyPress(KeyEvent);
 }

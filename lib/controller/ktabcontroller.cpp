@@ -66,8 +66,5 @@ bool KTabController::handleKeyPress( QKeyEvent *KeyEvent )
     }
   }
 
-  if( !KeyUsed && Parent )
-    KeyUsed = Parent->handleKeyPress( KeyEvent );
-
-  return KeyUsed;
+  return KeyUsed ? true : KController::handleKeyPress(KeyEvent);
 }
