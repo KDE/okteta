@@ -1,22 +1,22 @@
 INCLUDES    = $(all_includes)
 
-# TODO: as to be read in kdelibs/NAMING:
-# change the name of the lib to something different than "lib<existing_appname>.la" before installing
+METASOURCES = AUTO
 
-# this library is used by the kbytesedit part, more parts are to come
-noinst_LTLIBRARIES =  libkhexedit.la
-libkhexedit_la_LDFLAGS = $(all_libraries) $(KDE_RPATH)
-libkhexedit_la_SOURCES = kcolumn.cpp kbordercolumn.cpp koffsetcolumn.cpp \
-                         kbuffercolumn.cpp kvaluecolumn.cpp kcharcolumn.cpp \
-                         kcolumnsview.cpp khexedit.cpp kbytesedit.cpp \
-                         kbytecodec.cpp koffsetformat.cpp \
-                         kdatabuffer.cpp kwrappingrobuffer.cpp \
-                         kplainbuffer.cpp kfixedsizebuffer.cpp kbigbuffer.cpp \
-                         kbuffercursor.cpp kbufferlayout.cpp kbufferranges.cpp \
-                         kcursor.cpp kbufferdrag.cpp \
-                         ksectionlist.cpp kcoordrangelist.cpp \
-                         kbordercoltextexport.cpp koffsetcoltextexport.cpp \
-                         kbuffercoltextexport.cpp kvaluecoltextexport.cpp kcharcoltextexport.cpp
+# this library is used by the kbytesedit part and the khepart part
+lib_LTLIBRARIES =  libkhexeditcommon.la
+libkhexeditcommon_la_LDFLAGS = $(all_libraries) -no-undefined
+libkhexeditcommon_la_LIBADD =  $(LIB_KDECORE)
+libkhexeditcommon_la_SOURCES = kcolumn.cpp kbordercolumn.cpp koffsetcolumn.cpp \
+                               kbuffercolumn.cpp kvaluecolumn.cpp kcharcolumn.cpp \
+                               kcolumnsview.cpp khexedit.cpp kbytesedit.cpp \
+                               kbytecodec.cpp koffsetformat.cpp \
+                               kdatabuffer.cpp kwrappingrobuffer.cpp \
+                               kplainbuffer.cpp kfixedsizebuffer.cpp kbigbuffer.cpp \
+                               kbuffercursor.cpp kbufferlayout.cpp kbufferranges.cpp \
+                               kcursor.cpp kbufferdrag.cpp \
+                               ksectionlist.cpp kcoordrangelist.cpp \
+                               kbordercoltextexport.cpp koffsetcoltextexport.cpp \
+                               kbuffercoltextexport.cpp kvaluecoltextexport.cpp kcharcoltextexport.cpp
 
 # no public API for a direct use by now
 noinst_HEADERS = kcolumn.h kbordercolumn.h koffsetcolumn.h \
@@ -32,5 +32,3 @@ noinst_HEADERS = kcolumn.h kbordercolumn.h koffsetcolumn.h \
                  kcolumnsview.h khexedit.h kbytesedit.h \
                  kplainbuffer.h kfixedsizebuffer.h kbigbuffer.h \
                  kdatabuffer.h kreadonlybuffer.h kwrappingrobuffer.h
-
-METASOURCES = AUTO
