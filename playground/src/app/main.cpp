@@ -60,7 +60,7 @@ static const char *ESCreditText =   I18N_NOOP("wrote the first KHexEdit app (199
 static KCmdLineOptions AppOptions[] =
 {
   { "+[URL]", I18N_NOOP( "Document to open." ), 0 },
-  { 0, 0, 0 }
+  KCmdLineLastOption
 };
 
 

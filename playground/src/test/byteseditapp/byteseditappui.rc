@@ -1,9 +1,12 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
 <kpartgui name="byteseditapp" version="2">
-<MenuBar> 
+<MenuBar>
   <Menu name="file">
     <Separator/>
-    <Action name="file_setreadonly" />
+    <Action name="file_readonly"/>
+    <Action name="file_change"/>
+    <Action name="file_reset"/>
+    <Action name="file_reset2"/>
     <Separator/>
   </Menu>
   <Menu name="edit">
@@ -37,6 +40,10 @@
   <Separator/>
   <Action name="view_showunprintable"/>
   <Separator/>
-  <Action name="file_setreadonly" />
+  <Action name="file_change"/>
+  <Action name="file_reset"/>
+  <Action name="file_reset2"/>
+  <Separator/>
+  <Action name="file_readonly" />
 </ToolBar>
 </kpartgui>

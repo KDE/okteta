@@ -44,7 +44,6 @@
 #include <kstdaccel.h>
 #include <kaction.h>
 #include <kstdaction.h>
-// new kde specific
 #include <khexedit/byteseditinterface.h>
 #include <khexedit/valuecolumninterface.h>
 #include <khexedit/charcolumninterface.h>
@@ -62,41 +61,14 @@ static const char *RCFileName = "byteseditappui.rc";
 BytesEditApp::BytesEditApp()
     : KMainWindow( 0, "BytesEditApp" )
 {
-#if 1
-  static const int BufferSize = 893;
-  Buffer = new char[BufferSize];
-  memset( Buffer, '#', BufferSize );
-  memcpy( &Buffer[10], "This is a test text.", 20 );
-  memcpy( &Buffer[873], "This is a test text.", 20 );
-#else
-  static const int BufferSize = 0;
-  Buffer = new char[BufferSize];
-#endif
-
   BytesEditWidget = KHE::createBytesEditWidget( this, "BytesEditWidget" );
   // was kdeutils installed, so the widget could be found?
   if( BytesEditWidget )
   {
     // fetch the editor interface
-//     KBytesEditInterface *BytesEdit = static_cast<KBytesEditInterface *>( BytesEditWidget->qt_cast( "KBytesEditInterface" ) );
     BytesEdit = KHE::bytesEditInterface( BytesEditWidget );
-    Q_ASSERT( BytesEdit ); // This should not fail!
 
     // now use the editor.
-//    BytesEdit->setData( Buffer, BufferSize, -1, false );
-//    BytesEdit->setMaxDataSize( BufferSize );
-    BytesEdit->setMaxDataSize( 25 );
-    BytesEdit->setReadOnly( false );
-    BytesEdit->setAutoDelete( true );
-#if 0
-    KHE::ValueColumnInterface *ValueColumn = hexColumnInterface( BytesEditWidget );
-    if( ValueColumn )
-    {
-      Layout->setResizeStyle( KBytesEditInterface::LockGrouping );
-//     BytesEdit->setNoOfBytesPerLine( 16 );
-//     BytesEdit->setResizeStyle( KHE::KBytesEdit::LockGrouping );
-    }
-#endif
     KHE::ValueColumnInterface *ValueColumn = KHE::valueColumnInterface( BytesEditWidget );
     if( ValueColumn )
     {
@@ -134,6 +106,8 @@ BytesEditApp::BytesEditApp()
   // to automatically save settings if changed: window size, toolbar
   // position, icon size, etc.
   setAutoSaveSettings();
+
+  setStartData();
 }
 
 BytesEditApp::~BytesEditApp()
@@ -145,7 +119,7 @@ void BytesEditApp::setupActions()
 {
   ReadOnlyAction =
     new KToggleAction( i18n("ReadOnly"), "edit", 0,
-                       this, SLOT(setReadOnly()), actionCollection(), "file_setreadonly" );
+                       this, SLOT(setReadOnly()), actionCollection(), "file_readonly" );
 //   KStdAction::print(this, SLOT(filePrint()), actionCollection());
   KStdAction::quit(    kapp, SLOT(quit()),       actionCollection());
 
@@ -162,6 +136,9 @@ void BytesEditApp::setupActions()
   }
 //   KStdAction::selectAll( this, SLOT(selectAll()),     actionCollection() );
 //   KStdAction::deselect(  this, SLOT(unselect()),      actionCollection() );
+  new KAction( i18n("&Reset"),  "reset",  0, this, SLOT(slotResetData()),   actionCollection(), "file_reset" );
+  new KAction( i18n("&Reset2"), "reset2", 0, this, SLOT(slotResetData2()),  actionCollection(), "file_reset2" );
+  new KAction( i18n("&Change"), "change", 0, this, SLOT(slotChangeData()),  actionCollection(), "file_change" );
 
   HexCodingAction = new KRadioAction( i18n("&Hexadecimal"), 0, this, SLOT(slotSetCoding()), actionCollection(), "view_hexcoding" );
   DecCodingAction = new KRadioAction( i18n("&Decimal"),     0, this, SLOT(slotSetCoding()), actionCollection(), "view_deccoding" );
@@ -185,9 +162,6 @@ void BytesEditApp::setupActions()
 //   connect( m_view, SIGNAL(copyAvailable(bool)), CopyAction,SLOT(setEnabled(bool)) );
 //   connect( m_view, SIGNAL(selectionChanged()),  this,      SLOT(slotSelectionChanged()));
 
-  KStdAction::keyBindings(this, SLOT(optionsConfigureKeys()), actionCollection());
-  KStdAction::configureToolbars(this, SLOT(optionsConfigureToolbars()), actionCollection());
-
   NoResizeAction =      new KRadioAction( i18n("&No Resize"),       0, this, SLOT(slotSetResizeStyle()), actionCollection(), "settings_noresize" );
   LockGroupsAction =    new KRadioAction( i18n("&Lock groups"),     0, this, SLOT(slotSetResizeStyle()), actionCollection(), "settings_lockgroups" );
   FullSizeUsageAction = new KRadioAction( i18n("&Full size usage"), 0, this, SLOT(slotSetResizeStyle()), actionCollection(), "settings_fullsizeusage" );
@@ -204,57 +178,12 @@ void BytesEditApp::setupActions()
   createGUI( RCFileName );
 }
 
-void BytesEditApp::saveProperties(KConfig */*config*/)
-{
-    // the 'config' object points to the session managed
-    // config file.  anything you write here will be available
-    // later when this app is restored
-
-//     if (!m_view->currentURL().isNull())
-//         config->writeEntry("lastURL", m_view->currentURL());
-}
-
-void BytesEditApp::readProperties(KConfig */*config*/)
-{
-    // the 'config' object points to the session managed
-    // config file.  this function is automatically called whenever
-    // the app is being restored.  read in here whatever you wrote
-    // in 'saveProperties'
-
-//     QString url = config->readEntry("lastURL");
-
-//     if (!url.isNull())
-//         m_view->openURL(KURL(url));
-}
-
 
 void BytesEditApp::setReadOnly()
 {
   bool ReadOnly = ReadOnlyAction->isChecked();
   BytesEdit->setReadOnly( ReadOnly );
 //   ReadOnlyAction->setIconSet( MainBarIcon(ReadOnly?"lock":"edit") );
-}
-
-
-
-void BytesEditApp::optionsConfigureKeys()
-{
-    KKeyDialog::configure( actionCollection() );
-}
-
-void BytesEditApp::optionsConfigureToolbars()
-{
-    // use the standard toolbar editor
-    saveMainWindowSettings(KGlobal::config(), autoSaveGroup());
-}
-
-void BytesEditApp::newToolbarConfig()
-{
-    // this slot is called when user clicks "Ok" or "Apply" in the toolbar editor.
-    // recreate our GUI, and re-apply the settings (e.g. "text under icons", etc.)
-    createGUI( RCFileName );
-
-    applyMainWindowSettings(KGlobal::config(), autoSaveGroup());
 }
 
 
@@ -309,6 +238,65 @@ void BytesEditApp::slotSetResizeStyle()
     ResizeStyle = KHE::ValueColumnInterface::FullSizeUsage;
 
   KHE::valueColumnInterface(BytesEditWidget)->setResizeStyle( ResizeStyle );
+}
+
+void BytesEditApp::slotResetData()
+{
+  static const int BufferSize = 63;
+  Buffer = new char[BufferSize];
+  memset( Buffer, '#', BufferSize );
+  memcpy( &Buffer[10], "This is a test text.", 20 );
+  //memcpy( &Buffer[873], "This is a test text.", 20 );
+  BytesEdit->setData( Buffer, BufferSize, -1, false );
+  BytesEdit->setAutoDelete( true );
+  changeStatusbar( "Data reset" );
+}
+
+
+void BytesEditApp::slotResetData2()
+{
+  static const int BufferSize = 163;
+  Buffer = new char[BufferSize];
+  memset( Buffer, '*', BufferSize );
+  memcpy( &Buffer[80], "This is a test text.", 20 );
+  //memcpy( &Buffer[873], "This is a test text.", 20 );
+  BytesEdit->setData( Buffer, BufferSize, -1, false );
+  BytesEdit->setAutoDelete( true );
+  changeStatusbar( "Data reset2" );
+}
+
+
+void BytesEditApp::slotChangeData()
+{
+  int Start = 5;
+  int End = 10;
+  if( Start > BytesEdit->dataSize() ) Start = BytesEdit->dataSize()-1;
+  if( Start < 0 )
+  {
+    changeStatusbar( QString("Size was %1").arg(BytesEdit->dataSize()) );
+    return;
+  }
+  if( End < Start ) End = Start;
+
+  memset( &BytesEdit->data()[Start], 9, End-Start+1 );
+  BytesEdit->repaintRange( Start, End );
+  changeStatusbar( "Data changed" );
+}
+
+
+void BytesEditApp::setStartData()
+{
+  static const int BufferSize = 893;
+  Buffer = new char[BufferSize];
+  memset( Buffer, '#', BufferSize );
+  memcpy( &Buffer[10], "This is a test text.", 20 );
+  memcpy( &Buffer[873], "This is a test text.", 20 );
+
+//    BytesEdit->setData( Buffer, BufferSize, -1, false );
+//    BytesEdit->setMaxDataSize( BufferSize );
+  BytesEdit->setMaxDataSize( 25 );
+  BytesEdit->setReadOnly( false );
+  BytesEdit->setAutoDelete( true );
 }
 
 #include "byteseditapp.moc"

@@ -19,7 +19,7 @@
 #define _BYTESEDITAPP_H_
 
 #ifdef HAVE_CONFIG_H
-#include <config.h> 
+#include <config.h>
 #endif
 
 // qt specific
@@ -56,26 +56,23 @@ class BytesEditApp : public KMainWindow
     BytesEditApp();
     virtual ~BytesEditApp();
 
-protected:
-    void saveProperties(KConfig *);
-    void readProperties(KConfig *);
-
 private slots:
     void setReadOnly();
 
     void slotSetCoding();
     void slotSetShowUnprintable();
-    void optionsConfigureKeys();
-    void optionsConfigureToolbars();
     void slotSetResizeStyle();
-    void newToolbarConfig();
+
+    void slotResetData();
+    void slotResetData2();
+    void slotChangeData();
 
     void changeStatusbar(const QString& text);
     void changeCaption(const QString& text);
 
   private:
-    void setupAccel();
     void setupActions();
+    void setStartData();
 
   private:
     char* Buffer;
@@ -83,17 +80,12 @@ private slots:
     KHE::BytesEditInterface *BytesEdit;
 
   private:
-//    KHE::HexColumnInterface *HexColumn;
-//    KHE::TextColumnInterface *TextColumn;
     KHE::ClipboardInterface *Clipboard;
     KHE::ZoomInterface *Zoom;
     // edit menu
     KAction *CutAction;
     KAction *CopyAction;
-
     KToggleAction *ReadOnlyAction;
-    KToggleAction *m_toolbarAction;
-    KToggleAction *m_statusbarAction;
     // view menu
     KRadioAction *HexCodingAction;
     KRadioAction *DecCodingAction;
