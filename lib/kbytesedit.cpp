@@ -60,10 +60,10 @@ KBytesEdit::~KBytesEdit()
 
 void KBytesEdit::setReadOnly( bool RO )
 {
-  KHexEdit::setReadOnly( RO );
   KPlainBuffer *Buffer = dynamic_cast<KPlainBuffer *>(DataBuffer);
   if( Buffer )
     Buffer->setReadOnly( RO );
+  KHexEdit::setReadOnly( RO );
 }
 
 
@@ -98,7 +98,7 @@ void KBytesEdit::setData( char *D, int S, int RS, bool KM )
   if( DataBuffer )
   {
     // take the settings
-    NewBuffer->setReadOnly( isReadOnly() );
+    NewBuffer->setReadOnly( DataBuffer->isReadOnly() );
     if( AutoDelete )
     {
       char *D = data();
@@ -107,6 +107,9 @@ void KBytesEdit::setData( char *D, int S, int RS, bool KM )
     }
     delete DataBuffer;
   }
+  else
+    NewBuffer->setReadOnly( isReadOnly() );
+
   setDataBuffer( NewBuffer );
 }
 

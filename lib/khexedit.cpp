@@ -73,7 +73,7 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, WFla
    ClipboardMode( QClipboard::Clipboard ),
    ResizeStyle( DefaultResizeStyle ),
    TabChangesFocus( false ),
-   ReadOnly( true ),
+   ReadOnly( false ),
 //    Modified( false ),
    OverWriteOnly( false ),
    OverWrite( true ),
@@ -186,9 +186,9 @@ void KHexEdit::setDataBuffer( KDataBuffer *B )
   BufferLayout->setLength( DataBuffer->size() );
   adjustLayoutToSize();
 
-  // ensure that the widget is readonly if the buffer is TODO
-//   if( DataBuffer->isReadOnly() && !isReadOnly() )
-//     setReadOnly( true );
+  // ensure that the widget is readonly if the buffer is
+  if( DataBuffer->isReadOnly() && !isReadOnly() )
+    setReadOnly( true );
 
   updateView();
   BufferCursor->gotoStart();
@@ -217,7 +217,8 @@ void KHexEdit::setStartOffset( int SO )
 
 void KHexEdit::setReadOnly( bool RO )
 {
-  ReadOnly = RO;
+  // don't set editor readwrite if databuffer is readonly
+  ReadOnly = (DataBuffer && DataBuffer->isReadOnly()) ? true : RO;
 }
 
 

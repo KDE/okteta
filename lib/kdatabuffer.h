@@ -63,7 +63,7 @@ class KDataBuffer
 
   public: // state read API
     /** is the buffer changeable? */
-    virtual bool isReadOnly() const = 0;
+    virtual bool isReadOnly() const;
     /** has the buffer been modified? */
     virtual bool isModified() const = 0;
 
@@ -151,6 +151,10 @@ inline int KDataBuffer::remove( int Pos, int Length )
 
 inline int KDataBuffer::replace( int Pos, int RemoveLength, const char* D, int InputLength )
 { return replace( KSection(Pos,Pos+RemoveLength-1), D, InputLength ); }
+
+inline bool KDataBuffer::isReadOnly() const
+{ return false; }
+
 
 }
 
