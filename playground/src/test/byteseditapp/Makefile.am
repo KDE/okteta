@@ -1,6 +1,6 @@
 noinst_HEADERS = byteseditapp.h
 
-bin_PROGRAMS = byteseditapp
+check_PROGRAMS = byteseditapp
 
 # set the include path for X, qt and KDE
 INCLUDES = $(all_includes) 
