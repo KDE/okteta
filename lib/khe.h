@@ -15,8 +15,8 @@
  ***************************************************************************/
 
  
-#ifndef KHE_H
-#define KHE_H
+#ifndef KHE_KHE_H
+#define KHE_KHE_H
 
 // here we collect all general data
 // let's see how much it gets ;)

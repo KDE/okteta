@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KHEXEDITKSECTIONLIST_H
-#define KHEXEDITKSECTIONLIST_H
+#ifndef KHE_KSECTIONLIST_H
+#define KHE_KSECTIONLIST_H
 
 // qt specific
 #include <qvaluelist.h>

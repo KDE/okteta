@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KVALUECOLTEXTEXPORT_H
-#define KVALUECOLTEXTEXPORT_H
+#ifndef KHE_KVALUECOLTEXTEXPORT_H
+#define KHE_KVALUECOLTEXTEXPORT_H
 
 #include "kbytecodec.h"
 #include "kbuffercoltextexport.h"

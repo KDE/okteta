@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KVALUECOLUMN_H
-#define KVALUECOLUMN_H
+#ifndef KHE_KVALUECOLUMN_H
+#define KHE_KVALUECOLUMN_H
 
 #include "kbuffercolumn.h"
 

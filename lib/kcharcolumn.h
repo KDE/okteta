@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KCHARCOLUMN_H
-#define KCHARCOLUMN_H
+#ifndef KHE_KCHARCOLUMN_H
+#define KHE_KCHARCOLUMN_H
 
 // qt specific
 #include <qstring.h>

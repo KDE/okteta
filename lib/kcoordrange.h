@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KCOORDRANGE_H
-#define KCOORDRANGE_H
+#ifndef KHE_KCOORDRANGE_H
+#define KHE_KCOORDRANGE_H
 
 // lib specific
 #include "krange.h"

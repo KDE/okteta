@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KWRAPPINGROBUFFER_H
-#define KWRAPPINGROBUFFER_H
+#ifndef KHE_KWRAPPINGROBUFFER_H
+#define KHE_KWRAPPINGROBUFFER_H
 
 #include "kreadonlybuffer.h"
 

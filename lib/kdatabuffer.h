@@ -15,8 +15,8 @@
  ***************************************************************************/
 
  
-#ifndef KDATABUFFER_H
-#define KDATABUFFER_H
+#ifndef KHE_KDATABUFFER_H
+#define KHE_KDATABUFFER_H
 
 
 #include "ksection.h"

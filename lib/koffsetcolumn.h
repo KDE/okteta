@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KOFFSETCOLUMN_H
-#define KOFFSETCOLUMN_H
+#ifndef KHE_KOFFSETCOLUMN_H
+#define KHE_KOFFSETCOLUMN_H
 
 // lib specific
 #include "koffsetformat.h"

@@ -14,6 +14,9 @@
  *                                                                         *
  ***************************************************************************/
 
+ 
+#ifndef KHE_KADDS_H
+#define KHE_KADDS_H
 
 namespace KHE
 {
@@ -29,3 +32,5 @@ typedef KSection KPixelXs;
 typedef KSection KPixelYs;
 
 }
+
+#endif

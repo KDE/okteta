@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KOFFSETCOLTEXTEXPORT_H
-#define KOFFSETCOLTEXTEXPORT_H
+#ifndef KHE_KOFFSETCOLTEXTEXPORT_H
+#define KHE_KOFFSETCOLTEXTEXPORT_H
 
 #include "kcoltextexport.h"
 

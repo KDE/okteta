@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KCOLUMNSVIEW_H
-#define KCOLUMNSVIEW_H
+#ifndef KHE_KCOLUMNSVIEW_H
+#define KHE_KCOLUMNSVIEW_H
 
 // qt specific
 #include <qptrlist.h>

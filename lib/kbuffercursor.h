@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KBUFFERCURSOR_H
-#define KBUFFERCURSOR_H
+#ifndef KHE_KBUFFERCURSOR_H
+#define KHE_KBUFFERCURSOR_H
 
 #include "kbuffercoord.h"
 

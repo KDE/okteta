@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KBORDERCOLTEXTEXPORT_H
-#define KBORDERCOLTEXTEXPORT_H
+#ifndef KHE_KBORDERCOLTEXTEXPORT_H
+#define KHE_KBORDERCOLTEXTEXPORT_H
 
 #include "kcoltextexport.h"
 

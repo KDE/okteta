@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KBUFFERCOORD_H
-#define KBUFFERCOORD_H
+#ifndef KHE_KBUFFERCOORD_H
+#define KHE_KBUFFERCOORD_H
 
 
 namespace KHE

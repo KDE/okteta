@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KBUFFERCOLUMN_H
-#define KBUFFERCOLUMN_H
+#ifndef KHE_KBUFFERCOLUMN_H
+#define KHE_KBUFFERCOLUMN_H
 
 // lib specific
 #include "khe.h"

@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KBUFFERRANGES_H
-#define KBUFFERRANGES_H
+#ifndef KHE_KBUFFERRANGES_H
+#define KHE_KBUFFERRANGES_H
 
 // lib specific
 #include "kbufferlayout.h"

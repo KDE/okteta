@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KBYTESEDIT_H
-#define KBYTESEDIT_H
+#ifndef KHE_KBYTESEDIT_H
+#define KHE_KBYTESEDIT_H
 
 
 #include "khexedit.h"

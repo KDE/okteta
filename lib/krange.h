@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KRANGE_H
-#define KRANGE_H
+#ifndef KHE_KRANGE_H
+#define KHE_KRANGE_H
 
 
 namespace KHE

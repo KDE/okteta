@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KBORDERCOLUMN_H
-#define KBORDERCOLUMN_H
+#ifndef KHE_KBORDERCOLUMN_H
+#define KHE_KBORDERCOLUMN_H
 
 #include "kcolumn.h"
 

@@ -15,8 +15,8 @@
  ***************************************************************************/
 
  
-#ifndef KCURSOR_H
-#define KCURSOR_H
+#ifndef KHE_KCURSOR_H
+#define KHE_KCURSOR_H
 
 
 #include <qpixmap.h>

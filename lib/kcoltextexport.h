@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KCOLTEXTEXPORT_H
-#define KCOLTEXTEXPORT_H
+#ifndef KHE_KCOLTEXTEXPORT_H
+#define KHE_KCOLTEXTEXPORT_H
 
 
 namespace KHE

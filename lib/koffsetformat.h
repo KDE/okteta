@@ -15,8 +15,8 @@
  ***************************************************************************/
 
  
-#ifndef KOFFSETFORMAT_H
-#define KOFFSETFORMAT_H
+#ifndef KHE_KOFFSETFORMAT_H
+#define KHE_KOFFSETFORMAT_H
 
 namespace KHE
 {

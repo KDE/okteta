@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KHEXEDIT_H
-#define KHEXEDIT_H
+#ifndef KHE_KHEXEDIT_H
+#define KHE_KHEXEDIT_H
 
 // qt specific
 #include <qclipboard.h>

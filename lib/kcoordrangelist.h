@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KCOORDRANGELIST_H
-#define KCOORDRANGELIST_H
+#ifndef KHE_KCOORDRANGELIST_H
+#define KHE_KCOORDRANGELIST_H
 
 // qt specific
 #include <qvaluelist.h>

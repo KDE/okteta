@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KCOLUMN_H
-#define KCOLUMN_H
+#ifndef KHE_KCOLUMN_H
+#define KHE_KCOLUMN_H
 
 
 #include "kadds.h"

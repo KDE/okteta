@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KBUFFERDRAG_H
-#define KBUFFERDRAG_H
+#ifndef KHE_KBUFFERDRAG_H
+#define KHE_KBUFFERDRAG_H
 
 // qt specific
 #include <qdragobject.h>

@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KBUFFERLAYOUT_H
-#define KBUFFERLAYOUT_H
+#ifndef KHE_KBUFFERLAYOUT_H
+#define KHE_KBUFFERLAYOUT_H
 
 // lib specific
 #include "kcoordrange.h"

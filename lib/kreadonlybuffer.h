@@ -15,8 +15,8 @@
  ***************************************************************************/
 
  
-#ifndef KREADONLYBUFFER_H
-#define KREADONLYBUFFER_H
+#ifndef KHE_KREADONLYBUFFER_H
+#define KHE_KREADONLYBUFFER_H
 
 #include "kdatabuffer.h"
 

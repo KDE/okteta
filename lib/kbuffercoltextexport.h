@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KBUFFERCOLTEXTEXPORT_H
-#define KBUFFERCOLTEXTEXPORT_H
+#ifndef KHE_KBUFFERCOLTEXTEXPORT_H
+#define KHE_KBUFFERCOLTEXTEXPORT_H
 
 // lib specific
 #include "kcoltextexport.h"

@@ -15,8 +15,8 @@
  ***************************************************************************/
 
  
-#ifndef KFIXEDSIZEBUFFER_H
-#define KFIXEDSIZEBUFFER_H
+#ifndef KHE_KFIXEDSIZEBUFFER_H
+#define KHE_KFIXEDSIZEBUFFER_H
 
 #include <kdatabuffer.h>
 

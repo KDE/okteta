@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KSECTION_H
-#define KSECTION_H
+#ifndef KHE_KSECTION_H
+#define KHE_KSECTION_H
 
 
 #include "krange.h"

@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KBYTECODEC_H
-#define KBYTECODEC_H
+#ifndef KHE_KBYTECODEC_H
+#define KHE_KBYTECODEC_H
 
 #include "khe.h"
 

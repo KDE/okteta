@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KBIGBUFFER_H
-#define KBIGBUFFER_H
+#ifndef KHE_KBIGBUFFER_H
+#define KHE_KBIGBUFFER_H
 
 // qt specific
 #include <qvaluevector.h>

@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KCHARCOLTEXTEXPORT_H
-#define KCHARCOLTEXTEXPORT_H
+#ifndef KHE_KCHARCOLTEXTEXPORT_H
+#define KHE_KCHARCOLTEXTEXPORT_H
 
 #include "kbuffercoltextexport.h"
 
