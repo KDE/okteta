@@ -53,7 +53,7 @@ KHexEditPartFactory::~KHexEditPartFactory()
   delete s_instance;
   delete s_about;
 
-  s_instance = 0L;
+  s_instance = 0;
 }
 
 

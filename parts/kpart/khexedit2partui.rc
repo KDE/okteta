@@ -11,28 +11,14 @@
     <Action name="view_zoom_in" />
     <Action name="view_zoom_out" />
     <Separator/>
-    <Action name="view_showunprintable"/>
+    <Action name="view_showunprintable" />
     <Separator/>
-    <Menu name="coding"><text>&amp;Value Coding</text>
-      <Action name="view_hexcoding" />
-      <Action name="view_deccoding" />
-      <Action name="view_octcoding" />
-      <Action name="view_bincoding" />
-    </Menu>
-    <Menu name="encoding"><text>Document &amp;Encoding</text>
-      <Action name="view_localencoding" />
-      <Action name="view_asciiencoding" />
-<!--      <Action name="enc_ebcdic"/>
-       <Action name="enc_custom"/> //-->
-    </Menu>
+    <Action name="view_valuecoding" />
+    <Action name="view_charencoding" />
   </Menu>
   <Menu name="settings">
     <Separator/>
-    <Menu name="resizestyle" group="show_merge"><text>&amp;Resize Style</text>
-      <Action name="settings_noresize" />
-      <Action name="settings_lockgroups" />
-      <Action name="settings_fullsizeusage" />
-    </Menu>
+    <Action name="resizestyle" group="show_merge" />
     <Menu name="columns" group="show_merge"><text>&amp;Columns</text>
       <Action name="settings_showoffsetcolumn" />
       <Separator/>

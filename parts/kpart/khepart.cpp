@@ -74,29 +74,30 @@ KHexEditPart::~KHexEditPart()
 
 void KHexEditPart::setupActions( bool BrowserViewWanted )
 {
+  KActionCollection *AC = actionCollection();
   // create our actions
-  CopyAction = BrowserViewWanted ? 0 : KStdAction::copy( HexEdit, SLOT(copy()), actionCollection() );
+  CopyAction = BrowserViewWanted ? 0 : KStdAction::copy( HexEdit, SLOT(copy()), AC );
 
-  KStdAction::selectAll( this, SLOT(slotSelectAll()),     actionCollection() );
-  KStdAction::deselect(  this, SLOT(slotUnselect()),      actionCollection() );
+  KStdAction::selectAll( this, SLOT(slotSelectAll()), AC );
+  KStdAction::deselect(  this, SLOT(slotUnselect()),  AC );
 
   // value encoding
-  HexCodingAction = new KRadioAction( i18n("&Hexadecimal"), 0, this, SLOT(slotSetCoding()), actionCollection(), "view_hexcoding" );
-  DecCodingAction = new KRadioAction( i18n("&Decimal"),     0, this, SLOT(slotSetCoding()), actionCollection(), "view_deccoding" );
-  OctCodingAction = new KRadioAction( i18n("&Octal"),       0, this, SLOT(slotSetCoding()), actionCollection(), "view_octcoding" );
-  BinCodingAction = new KRadioAction( i18n("&Binary"),      0, this, SLOT(slotSetCoding()), actionCollection(), "view_bincoding" );
-
-  HexCodingAction->setExclusiveGroup( CodingGroupId );
-  DecCodingAction->setExclusiveGroup( CodingGroupId );
-  OctCodingAction->setExclusiveGroup( CodingGroupId );
-  BinCodingAction->setExclusiveGroup( CodingGroupId );
+  CodingAction = new KSelectAction( i18n("&Value Coding"), 0, AC, "view_valuecoding" );
+  QStringList List;
+  List.append( i18n("&Hexadecimal") );
+  List.append( i18n("&Decimal")     );
+  List.append( i18n("&Octal")       );
+  List.append( i18n("&Binary")      );
+  CodingAction->setItems( List );
+  connect( CodingAction, SIGNAL(activated(int)), this, SLOT(slotSetCoding(int)) );
 
   // document encoding
-  LocalEncodingAction = new KRadioAction( i18n("&Local"), 0, this, SLOT(slotSetEncoding()), actionCollection(), "view_localencoding" );
-  AsciiEncodingAction = new KRadioAction( i18n("&ASCII"), 0, this, SLOT(slotSetEncoding()), actionCollection(), "view_asciiencoding" );
-
-  LocalEncodingAction->setExclusiveGroup( EncodingGroupId );
-  AsciiEncodingAction->setExclusiveGroup( EncodingGroupId );
+  EncodingAction = new KSelectAction( i18n("&Char Encoding"), 0, AC, "view_charencoding" );
+  List.clear();
+  List.append( i18n("&Local") );
+  List.append( i18n("&ISO8859-1") );
+  EncodingAction->setItems( List );
+  connect( EncodingAction, SIGNAL(activated(int)), this, SLOT(slotSetEncoding(int)) );
 
   ShowUnprintableAction = new KToggleAction( i18n("Show &Unprintabe Chars (<32)"), 0, this, SLOT(slotSetShowUnprintable()), actionCollection(), "view_showunprintable" );
 
@@ -104,20 +105,20 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
   KStdAction::zoomOut( HexEdit, SLOT(zoomOut()),  actionCollection() );
 
   // resize style
-  NoResizeAction =      new KRadioAction( i18n("&No Resize"),       0, this, SLOT(slotSetResizeStyle()), actionCollection(), "settings_noresize" );
-  LockGroupsAction =    new KRadioAction( i18n("&Lock Groups"),     0, this, SLOT(slotSetResizeStyle()), actionCollection(), "settings_lockgroups" );
-  FullSizeUsageAction = new KRadioAction( i18n("&Full Size Usage"), 0, this, SLOT(slotSetResizeStyle()), actionCollection(), "settings_fullsizeusage" );
+  ResizeStyleAction = new KSelectAction( i18n("&Resize Style"), 0, AC, "resizestyle" );
+  List.clear();
+  List.append( i18n("&No Resize") );
+  List.append( i18n("&Lock Groups") );
+  List.append( i18n("&Full Size Usage") );
+  ResizeStyleAction->setItems( List );
+  connect( ResizeStyleAction, SIGNAL(activated(int)), this, SLOT(slotSetResizeStyle(int)) );
 
-  NoResizeAction->setExclusiveGroup( ResizeStyleGroupId );
-  LockGroupsAction->setExclusiveGroup( ResizeStyleGroupId );
-  FullSizeUsageAction->setExclusiveGroup( ResizeStyleGroupId );
-
-  ShowOffsetColumnAction = new KToggleAction( i18n("&Offset Column"), 0, this, SLOT(slotToggleOffsetColumn()), actionCollection(), "settings_showoffsetcolumn" );
+  ShowOffsetColumnAction = new KToggleAction( i18n("&Offset Column"), 0, this, SLOT(slotToggleOffsetColumn()), AC, "settings_showoffsetcolumn" );
 
   // show buffer columns
-  ShowOnlyValueAction =  new KRadioAction( i18n("&Values Column"), 0, this, SLOT(slotToggleValueCharColumns()), actionCollection(), "settings_showonlyvalue" );
-  ShowOnlyCharAction =   new KRadioAction( i18n("&Chars Column"),  0, this, SLOT(slotToggleValueCharColumns()), actionCollection(), "settings_showonlychar" );
-  ShowValueCharAction = new KRadioAction( i18n("&Both Columns"),   0, this, SLOT(slotToggleValueCharColumns()), actionCollection(), "settings_showvaluechar" );
+  ShowOnlyValueAction =  new KRadioAction( i18n("&Values Column"), 0, this, SLOT(slotToggleValueCharColumns()), AC, "settings_showonlyvalue" );
+  ShowOnlyCharAction =   new KRadioAction( i18n("&Chars Column"),  0, this, SLOT(slotToggleValueCharColumns()), AC, "settings_showonlychar" );
+  ShowValueCharAction = new KRadioAction( i18n("&Both Columns"),   0, this, SLOT(slotToggleValueCharColumns()), AC, "settings_showvaluechar" );
 
   ShowOnlyValueAction->setExclusiveGroup( ShowColumnsGroupId );
   ShowOnlyCharAction->setExclusiveGroup( ShowColumnsGroupId );
@@ -135,29 +136,10 @@ void KHexEditPart::fitActionSettings()
   ShowOffsetColumnAction->setChecked( HexEdit->offsetColumnVisible() );
   ShowUnprintableAction->setChecked( HexEdit->showUnprintable() );
 
-  const KHexEdit::KCoding Coding = HexEdit->coding();
-  if( Coding == KHexEdit::HexadecimalCoding )
-    HexCodingAction->setChecked( true );
-  else if( Coding == KHexEdit::DecimalCoding )
-    DecCodingAction->setChecked( true );
-  else if( Coding == KHexEdit::OctalCoding )
-    OctCodingAction->setChecked( true );
-  else //if( Coding == KHexEdit::BinaryCoding )
-    BinCodingAction->setChecked( true );
+  CodingAction->setCurrentItem( (int)HexEdit->coding() );
+  EncodingAction->setCurrentItem( (int)HexEdit->encoding() );
 
-  const KHexEdit::KEncoding Encoding = HexEdit->encoding();
-  if( Encoding == KHexEdit::LocalEncoding )
-    LocalEncodingAction->setChecked( true );
-  else //if( Encoding == KHexEdit::ISO8859_1Encoding )
-    AsciiEncodingAction->setChecked( true );
-
-  const KHexEdit::KResizeStyle ResizeStyle = HexEdit->resizeStyle();
-  if( ResizeStyle == KHexEdit::NoResize )
-    NoResizeAction->setChecked( true );
-  else if( ResizeStyle == KHexEdit::LockGrouping )
-    LockGroupsAction->setChecked( true );
-  else //if( ResizeStyle == KHexEdit::FullSizeUsage )
-    FullSizeUsageAction->setChecked( true );
+  ResizeStyleAction->setCurrentItem( (int)HexEdit->resizeStyle() );
 
   const int Columns = HexEdit->visibleBufferColumns();
   if( Columns == KHexEdit::ValueColumnId )
@@ -199,23 +181,9 @@ void KHexEditPart::slotUnselect()
 }
 
 
-void KHexEditPart::slotSetCoding()
+void KHexEditPart::slotSetCoding( int Coding )
 {
-  // TODO: find out if there is a way to use the exclusivegroup somehow
-  KHexEdit::KCoding Coding;
-  if( HexCodingAction->isChecked() )
-    Coding = KHexEdit::HexadecimalCoding;
-  else if( DecCodingAction->isChecked() )
-    Coding = KHexEdit::DecimalCoding;
-  else if( OctCodingAction->isChecked() )
-    Coding = KHexEdit::OctalCoding;
-  else if( BinCodingAction->isChecked() )
-    Coding = KHexEdit::BinaryCoding;
-  else
-    //should not be reached;
-    Coding = KHexEdit::HexadecimalCoding;
-
-  HexEdit->setCoding( Coding );
+  HexEdit->setCoding( (KHexEdit::KCoding)Coding );
 }
 
 void KHexEditPart::slotSetShowUnprintable()
@@ -228,36 +196,14 @@ void KHexEditPart::slotToggleOffsetColumn()
   HexEdit->toggleOffsetColumn( ShowOffsetColumnAction->isChecked() );
 }
 
-void KHexEditPart::slotSetResizeStyle()
+void KHexEditPart::slotSetResizeStyle( int ResizeStyle )
 {
-  // TODO: find out if there is a way to use the exclusivegroup somehow
-  KHexEdit::KResizeStyle ResizeStyle;
-  if( NoResizeAction->isChecked() )
-    ResizeStyle = KHexEdit::NoResize;
-  else if( LockGroupsAction->isChecked() )
-    ResizeStyle = KHexEdit::LockGrouping;
-  else if( FullSizeUsageAction->isChecked() )
-    ResizeStyle = KHexEdit::FullSizeUsage;
-  else
-    //should not be reached;
-    ResizeStyle = KHexEdit::FullSizeUsage;
-
-  HexEdit->setResizeStyle( ResizeStyle );
+  HexEdit->setResizeStyle( (KHexEdit::KResizeStyle)ResizeStyle );
 }
 
-void KHexEditPart::slotSetEncoding()
+void KHexEditPart::slotSetEncoding( int Encoding )
 {
-  // TODO: find out if there is a way to use the exclusivegroup somehow
-  KHexEdit::KEncoding Encoding;
-  if( AsciiEncodingAction->isChecked() )
-    Encoding = KHexEdit::ISO8859_1Encoding;
-  else if( LocalEncodingAction->isChecked() )
-    Encoding = KHexEdit::LocalEncoding;
-  else
-    //should not be reached;
-    Encoding = KHexEdit::LocalEncoding;
-
-  HexEdit->setEncoding( Encoding );
+  HexEdit->setEncoding( (KHexEdit::KEncoding)Encoding );
 }
 
 void KHexEditPart::slotToggleValueCharColumns()

@@ -26,6 +26,7 @@
 // forward declarations
 class KRadioAction;
 class KToggleAction;
+class KSelectAction;
 
 namespace KHE
 {
@@ -66,10 +67,10 @@ class KHexEditPart : public KParts::ReadOnlyPart
   protected slots: // action slots
     void slotSelectAll();
     void slotUnselect();
-    void slotSetCoding();
-    void slotSetEncoding();
+    void slotSetCoding( int Coding );
+    void slotSetEncoding( int Encoding );
     void slotSetShowUnprintable();
-    void slotSetResizeStyle();
+    void slotSetResizeStyle( int Style );
     void slotToggleOffsetColumn();
     void slotToggleValueCharColumns();
 
@@ -80,17 +81,11 @@ class KHexEditPart : public KParts::ReadOnlyPart
     // edit menu
     KAction *CopyAction;
     // view menu
-    KRadioAction *HexCodingAction;
-    KRadioAction *DecCodingAction;
-    KRadioAction *OctCodingAction;
-    KRadioAction *BinCodingAction;
-    KRadioAction *LocalEncodingAction;
-    KRadioAction *AsciiEncodingAction;
+    KSelectAction *CodingAction;
+    KSelectAction *EncodingAction;
     KToggleAction *ShowUnprintableAction;
     // settings menu
-    KRadioAction *NoResizeAction;
-    KRadioAction *LockGroupsAction;
-    KRadioAction *FullSizeUsageAction;
+    KSelectAction *ResizeStyleAction;
     KToggleAction *ShowOffsetColumnAction;
     KRadioAction *ShowOnlyValueAction;
     KRadioAction *ShowOnlyCharAction;
