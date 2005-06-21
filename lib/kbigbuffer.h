@@ -19,7 +19,7 @@
 #define KHE_KBIGBUFFER_H
 
 // qt specific
-#include <qvaluevector.h>
+#include <q3valuevector.h>
 #include <qfile.h>
 // lib specific
 #include "kdatabuffer.h"
@@ -35,7 +35,7 @@ namespace KHE {
 
 class KHEXEDIT_EXPORT KBigBuffer : public KDataBuffer
 {
-    typedef QValueVector<char *> KPageOfChar;
+    typedef Q3ValueVector<char *> KPageOfChar;
 
   public:
     /** default is only 50*4k = 200k memory image */

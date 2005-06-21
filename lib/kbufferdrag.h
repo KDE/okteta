@@ -19,7 +19,7 @@
 #define KHE_KBUFFERDRAG_H
 
 // qt specific
-#include <qdragobject.h>
+#include <q3dragobject.h>
 // lib specific
 #include "khe.h"
 #include "kcoordrange.h"
@@ -37,7 +37,7 @@ typedef KColTextExport* KColTextExportPtr;
 /**
   *@author Friedrich W. H. Kossebau
   */
-class KBufferDrag : public QDragObject
+class KBufferDrag : public Q3DragObject
 {
     Q_OBJECT
 

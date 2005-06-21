@@ -20,6 +20,17 @@
 
 // qt specific
 #include <qclipboard.h>
+//Added by qt3to4:
+#include <QWheelEvent>
+#include <QDragLeaveEvent>
+#include <QKeyEvent>
+#include <QEvent>
+#include <QDragMoveEvent>
+#include <QDropEvent>
+#include <QShowEvent>
+#include <QResizeEvent>
+#include <QDragEnterEvent>
+#include <QMouseEvent>
 // lib specific
 // #include "khe.h"
 #include "khexedit_export.h"
@@ -117,7 +128,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
 
 
   public:
-    KHexEdit( KDataBuffer *Buffer = 0, QWidget *Parent = 0, const char *Name = 0, WFlags F = 0 );
+    KHexEdit( KDataBuffer *Buffer = 0, QWidget *Parent = 0, const char *Name = 0, Qt::WFlags F = 0 );
     virtual ~KHexEdit();
 
 

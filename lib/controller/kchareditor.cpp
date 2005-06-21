@@ -17,6 +17,8 @@
 
 // qt specific
 #include <qevent.h>
+//Added by qt3to4:
+#include <QKeyEvent>
 // lib specific
 #include "kcharcolumn.h"
 #include "kcharcodec.h"
@@ -39,7 +41,7 @@ bool KCharEditor::handleKeyPress( QKeyEvent *KeyEvent )
   bool KeyUsed = false;
   // some input that should be inserted?
   if( KeyEvent->text().length() > 0
-      && !(KeyEvent->state()&( Qt::ControlButton | Qt::AltButton | Qt::MetaButton )) )
+      && !(KeyEvent->state()&( Qt::ControlModifier | Qt::AltModifier | Qt::MetaModifier )) )
   {
     QChar C = KeyEvent->text()[0];
     if( C.isPrint() )

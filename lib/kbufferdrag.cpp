@@ -16,7 +16,7 @@
 
 
 // qt specific
-#include <qcstring.h>
+#include <q3cstring.h>
 #include <qtextcodec.h>
 // kde specific
 #include <kglobal.h>
@@ -43,11 +43,11 @@ static const char TextPlainLocalStub[] = "text/plain;charset=";
 // creates the name for the local text/plain
 static const char *localTextPlain()
 {
-  static QCString TextPlainLocal;
+  static Q3CString TextPlainLocal;
 
   if( TextPlainLocal.isNull() )
   {
-    TextPlainLocal = QCString(KGlobal::locale()->encoding()).lower();
+    TextPlainLocal = Q3CString(KGlobal::locale()->encoding()).lower();
     // remove the whitespaces
     int s;
     while( (s=TextPlainLocal.find(' ')) >= 0 )
@@ -60,12 +60,12 @@ static const char *localTextPlain()
 }
 
 // tries to create a codec by the given charset description
-static QTextCodec* codecForCharset( const QCString& Desc )
+static QTextCodec* codecForCharset( const Q3CString& Desc )
 {
   int i = Desc.find( "charset=" );
   if( i >= 0 )
   {
-    QCString CharSetName = Desc.mid( i+8 );
+    Q3CString CharSetName = Desc.mid( i+8 );
     // remove any further attributes
     if( (i=CharSetName.find( ';' )) >= 0 )
       CharSetName = CharSetName.left( i );
@@ -83,7 +83,7 @@ KBufferDrag::KBufferDrag( const QByteArray &D, KCoordRange Range,
                           const KOffsetColumn *OC, const KValueColumn *HC, const KCharColumn *TC,
                           QChar SC, QChar UC, const QString &CN,
                           QWidget *Source, const char *Name )
-  :QDragObject( Source, Name ),
+  :Q3DragObject( Source, Name ),
    CoordRange( Range ),
    NoOfCol( 0 ),
    SubstituteChar( SC ),
@@ -146,8 +146,8 @@ QByteArray KBufferDrag::encodedData( const char *Format ) const
     // plain text wanted?
     if( qstrncmp(Format,TextPlain,10) == 0 )
     {
-      QCString Output;
-      QTextCodec *TextCodec = codecForCharset( QCString(Format).lower() );
+      Q3CString Output;
+      QTextCodec *TextCodec = codecForCharset( Q3CString(Format).lower() );
       if( TextCodec == 0 )
         return Output;
 

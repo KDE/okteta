@@ -109,7 +109,7 @@ bool KBigBuffer::open( const QString& FileName )
     return false;
 
   File.setName( FileName );
-  if( !File.open(IO_ReadOnly|IO_Raw) )
+  if( !File.open(QIODevice::ReadOnly|IO_Raw) )
     return false;
 
 //   std::cout << "loading file " << FileName << std::endl;

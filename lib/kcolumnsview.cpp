@@ -19,6 +19,8 @@
 
 // qt specific
 #include <qpainter.h>
+//Added by qt3to4:
+#include <Q3PtrList>
 // lib specific
 #include "kcolumn.h"
 #include "kcolumnsview.h"
@@ -28,8 +30,8 @@ using namespace KHE;
 
 static bool DefaultHorizontalGrid = false;
 
-KColumnsView::KColumnsView( /*bool R,*/ QWidget *Parent, const char *Name, WFlags Flags )
- : QScrollView( Parent, Name, Flags | WRepaintNoErase /*| WStaticContents*/ ),
+KColumnsView::KColumnsView( /*bool R,*/ QWidget *Parent, const char *Name, Qt::WFlags Flags )
+ : Q3ScrollView( Parent, Name, Flags | Qt::WNoAutoErase /*| WStaticContents*/ ),
    NoOfLines( 0 ),
    LineHeight( 0 ),
    TotalWidth( 0 ),
@@ -37,8 +39,8 @@ KColumnsView::KColumnsView( /*bool R,*/ QWidget *Parent, const char *Name, WFlag
 //    Reversed( R ),
    d( 0 )
 {
-  viewport()->setBackgroundMode( PaletteBase );
-  setBackgroundMode( PaletteBackground, PaletteBase );
+  viewport()->setBackgroundMode( Qt::PaletteBase );
+  setBackgroundMode( Qt::PaletteBackground, Qt::PaletteBase );
   viewport()->setFocusProxy( this );
 
   Columns.setAutoDelete( true );
@@ -152,7 +154,7 @@ void KColumnsView::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
     KPixelYs AffectedYs( cy, ch, true );
 
     // collect affected columns
-    QPtrList<KColumn> RedrawColumns;
+    Q3PtrList<KColumn> RedrawColumns;
     for( KColumn *C=Columns.first(); C; C=Columns.next() )
       if( C->isVisible() && C->overlaps(AffectedXs) )
         RedrawColumns.append( C );
