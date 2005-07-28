@@ -18,6 +18,8 @@
 
 // qt specific
 #include <qevent.h>
+//Added by qt3to4:
+#include <QKeyEvent>
 // lib specific
 #include "kdatabuffer.h"
 #include "kbufferranges.h"
@@ -39,8 +41,8 @@ bool KNavigator::handleKeyPress( QKeyEvent *KeyEvent )
   bool KeyUsed = true;
 
   //bool clearUndoRedoInfo = true;
-  bool ShiftPressed =  KeyEvent->state() & Qt::ShiftButton;
-  bool ControlPressed = KeyEvent->state() & Qt::ControlButton;
+  bool ShiftPressed =  KeyEvent->state() & Qt::ShiftModifier;
+  bool ControlPressed = KeyEvent->state() & Qt::ControlModifier;
   //bool AltPressed = KeyEvent->state() & AltButton;
 
   // we only care for cursor keys and the like, won't hardcode any other keys
@@ -67,10 +69,10 @@ bool KNavigator::handleKeyPress( QKeyEvent *KeyEvent )
     case Qt::Key_End:
       moveCursor( ControlPressed ? MoveEnd : MoveLineEnd, ShiftPressed );
       break;
-    case Qt::Key_Prior:
+    case Qt::Key_PageUp:
       moveCursor( MovePgUp, ShiftPressed );
       break;
-    case Qt::Key_Next:
+    case Qt::Key_PageDown:
       moveCursor( MovePgDown, ShiftPressed );
       break;
 

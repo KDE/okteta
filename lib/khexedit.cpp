@@ -28,6 +28,20 @@
 #include <qtimer.h>
 #include <qcursor.h>
 #include <qapplication.h>
+//Added by qt3to4:
+#include <QWheelEvent>
+#include <QDragLeaveEvent>
+#include <Q3PtrList>
+#include <QEvent>
+#include <QKeyEvent>
+#include <QDragMoveEvent>
+#include <QDropEvent>
+#include <QShowEvent>
+#include <QResizeEvent>
+#include <QContextMenuEvent>
+#include <Q3PopupMenu>
+#include <QDragEnterEvent>
+#include <QMouseEvent>
 // kde specific
 #ifndef QT_ONLY
 #include <kglobalsettings.h>
@@ -66,7 +80,7 @@ static const int InsertCursorWidth = 2;
 
 
 
-KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, WFlags Flags )
+KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, Qt::WFlags Flags )
  : KColumnsView( Parent, Name, Flags ),
    DataBuffer( Buffer ),
    BufferLayout( new KBufferLayout(DefaultNoOfBytesPerLine,DefaultStartOffset,0) ),
@@ -133,7 +147,7 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, WFla
 
   // get the full control
   viewport()->setFocusProxy( this );
-  viewport()->setFocusPolicy( WheelFocus );
+  viewport()->setFocusPolicy( Qt::WheelFocus );
 
   viewport()->installEventFilter( this );
   installEventFilter( this );
@@ -422,7 +436,7 @@ void KHexEdit::setEncoding( const QString& EncodingName )
 
 void KHexEdit::fontChange( const QFont &OldFont )
 {
-  QScrollView::fontChange( OldFont );
+  Q3ScrollView::fontChange( OldFont );
 
   if( !InZooming )
     DefaultFontSize = font().pointSize();
@@ -575,7 +589,7 @@ void KHexEdit::resizeEvent( QResizeEvent *ResizeEvent )
     }
   }
 
-  QScrollView::resizeEvent( ResizeEvent );
+  Q3ScrollView::resizeEvent( ResizeEvent );
 
   BufferLayout->setNoOfLinesPerPage( noOfLinesPerPage() ); // TODO: doesn't work with the new size!!!
 }
@@ -765,7 +779,7 @@ void KHexEdit::selectAll( bool Select )
   if( !OverWrite ) emit cutAvailable( BufferRanges->hasSelection() );
   emit copyAvailable( BufferRanges->hasSelection() );
   emit selectionChanged();
-  viewport()->setCursor( isReadOnly() ? arrowCursor : ibeamCursor );
+  viewport()->setCursor( isReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor );
 }
 
 
@@ -967,7 +981,7 @@ void KHexEdit::removeSelectedData()
 
   ensureCursorVisible();
 //     clearUndoRedo();
-  viewport()->setCursor( isReadOnly() ? arrowCursor : ibeamCursor );
+  viewport()->setCursor( isReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor );
 
   unpauseCursor();
 
@@ -1025,7 +1039,7 @@ void KHexEdit::setCursorPosition( int Index, bool Behind )
   {
     repaintChanged();
 
-    viewport()->setCursor( isReadOnly() ? arrowCursor : ibeamCursor );
+    viewport()->setCursor( isReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor );
 
     if( !OverWrite ) emit cutAvailable( BufferRanges->hasSelection() );
     emit copyAvailable( BufferRanges->hasSelection() );
@@ -1166,7 +1180,7 @@ bool KHexEdit::eventFilter( QObject *O, QEvent *E )
 //     }
 //   }
 
-  return QScrollView::eventFilter( O, E );
+  return Q3ScrollView::eventFilter( O, E );
 }
 
 
@@ -1376,7 +1390,7 @@ void KHexEdit::repaintChanged()
   KPixelXs Xs( contentsX(), visibleWidth(), true );
 
   // collect affected buffer columns
-  QPtrList<KBufferColumn> RepaintColumns;
+  Q3PtrList<KBufferColumn> RepaintColumns;
 
   KBufferColumn *C = ValueColumn;
   while( true )
@@ -1516,7 +1530,7 @@ void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
   pauseCursor( true );
 
   // care about a left button press?
-  if( e->button() == LeftButton )
+  if( e->button() == Qt::LeftButton )
   {
     MousePressed = true;
 
@@ -1551,7 +1565,7 @@ void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
     int RealIndex = BufferCursor->realIndex();
     if( BufferRanges->selectionStarted() )
     {
-      if( e->state() & ShiftButton )
+      if( e->state() & Qt::ShiftModifier )
         BufferRanges->setSelectionEnd( RealIndex );
       else
       {
@@ -1563,19 +1577,19 @@ void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
     {
       BufferRanges->setSelectionStart( RealIndex );
 
-      if( !isReadOnly() && (e->state()&ShiftButton) ) // TODO: why only for readwrite?
+      if( !isReadOnly() && (e->state()&Qt::ShiftModifier) ) // TODO: why only for readwrite?
         BufferRanges->setSelectionEnd( RealIndex );
     }
 
     BufferRanges->removeFurtherSelections();
   }
-  else if( e->button() == MidButton )
+  else if( e->button() == Qt::MidButton )
     BufferRanges->removeSelection();
 
   if( BufferRanges->isModified() )
   {
     repaintChanged();
-    viewport()->setCursor( isReadOnly() ? arrowCursor : ibeamCursor );
+    viewport()->setCursor( isReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor );
   }
 
   unpauseCursor();
@@ -1593,7 +1607,7 @@ void KHexEdit::contentsMouseMoveEvent( QMouseEvent *e )
       if( (e->pos()-DragStartPoint).manhattanLength() > QApplication::startDragDistance() )
         startDrag();
       if( !isReadOnly() )
-        viewport()->setCursor( ibeamCursor );
+        viewport()->setCursor( Qt::IBeamCursor );
       return;
     }
     // selecting
@@ -1604,7 +1618,7 @@ void KHexEdit::contentsMouseMoveEvent( QMouseEvent *e )
   {
     // visual feedback for possible dragging
     bool InSelection = BufferRanges->hasSelection() && BufferRanges->selectionIncludes( indexByPoint(e->pos()) );
-    viewport()->setCursor( InSelection?arrowCursor:ibeamCursor );
+    viewport()->setCursor( InSelection?Qt::ArrowCursor:Qt::IBeamCursor );
   }
 }
 
@@ -1652,7 +1666,7 @@ void KHexEdit::contentsMouseReleaseEvent( QMouseEvent *e )
     }
   }
   // middle mouse button paste?
-  else if( e->button() == MidButton && !isReadOnly() )
+  else if( e->button() == Qt::MidButton && !isReadOnly() )
   {
     pauseCursor();
 
@@ -1784,7 +1798,7 @@ void KHexEdit::startDrag()
   DragStartPossible = false;
 
   // create data
-  QDragObject *Drag = dragObject( viewport() );
+  Q3DragObject *Drag = dragObject( viewport() );
   if( !Drag )
     return;
 
@@ -1794,7 +1808,7 @@ void KHexEdit::startDrag()
   // or is this left to the user and he choose to move?
   else if( Drag->drag() )
     // Not inside this widget itself?
-    if( QDragObject::target() != this && QDragObject::target() != viewport() )
+    if( Q3DragObject::target() != this && Q3DragObject::target() != viewport() )
       removeSelectedData();
 }
 
@@ -1930,7 +1944,7 @@ void KHexEdit::contentsWheelEvent( QWheelEvent *e )
 {
   if( isReadOnly() )
   {
-    if( e->state() & ControlButton )
+    if( e->state() & Qt::ControlModifier )
     {
       if( e->delta() > 0 )
         zoomOut();
@@ -1939,7 +1953,7 @@ void KHexEdit::contentsWheelEvent( QWheelEvent *e )
       return;
     }
   }
-  QScrollView::contentsWheelEvent( e );
+  Q3ScrollView::contentsWheelEvent( e );
 }
 
 
@@ -1951,7 +1965,7 @@ void KHexEdit::contentsContextMenuEvent( QContextMenuEvent *e )
 
   e->accept();
 
-  QPopupMenu *PopupMenu = createPopupMenu( e->pos() );
+  Q3PopupMenu *PopupMenu = createPopupMenu( e->pos() );
   if( !PopupMenu )
     PopupMenu = createPopupMenu();
   if( !PopupMenu )

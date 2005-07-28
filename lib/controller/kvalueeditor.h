@@ -21,6 +21,8 @@
 
 // lib specific
 #include "keditor.h"
+//Added by qt3to4:
+#include <QKeyEvent>
 
 namespace KHE
 {

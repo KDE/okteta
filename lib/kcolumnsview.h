@@ -19,10 +19,10 @@
 #define KHE_KCOLUMNSVIEW_H
 
 // qt specific
-#include <qptrlist.h>
+#include <q3ptrlist.h>
 #include <qwidget.h>
 #include <qpixmap.h>
-#include <qscrollview.h>
+#include <q3scrollview.h>
 // lib specific
 #include "kadds.h"
 #include "ksection.h" // TODO: think about moving this out of the public API
@@ -39,14 +39,14 @@ class KColumnsViewPrivate;
   *@author Friedrich W. H. Kossebau
   */
 
-class KColumnsView : public QScrollView
+class KColumnsView : public Q3ScrollView
 {
    Q_OBJECT
 
    friend class KColumn;
 
   public:
-    KColumnsView( /*bool R = false,*/ QWidget *parent=0, const char *name=0, WFlags Flags=0 );
+    KColumnsView( /*bool R = false,*/ QWidget *parent=0, const char *name=0, Qt::WFlags Flags=0 );
     virtual ~KColumnsView();
 
   public: // drawing
@@ -121,7 +121,7 @@ class KColumnsView : public QScrollView
 
   protected: // calculated
     /** collection of all the columns. All columns will be autodeleted. */
-    QPtrList<KColumn> Columns;
+    Q3PtrList<KColumn> Columns;
     /** the number of lines which the column view has */
     int NoOfLines;
     /** the height of each line in pixels */
