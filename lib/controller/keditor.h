@@ -39,6 +39,7 @@ class KEditor : public KController
     KEditor( KBufferCursor *BC, KHexEdit *HE, KController *P );
 
   public: // API
+    virtual ~KEditor(){}
     virtual bool handleKeyPress( QKeyEvent *KeyEvent );
 
   protected:

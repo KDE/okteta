@@ -31,6 +31,7 @@ class KHexEdit;
 class KController
 {
   protected:
+    virtual ~KController(){}
     KController( KHexEdit *HE, KController *P );
 
   public: // KController API

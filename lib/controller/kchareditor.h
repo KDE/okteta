@@ -31,6 +31,7 @@ class KCharColumn;
 class KCharEditor : public KEditor
 {
   public:
+    virtual ~KCharEditor(){}
     KCharEditor( KCharColumn *CC, KBufferCursor *BC, KHexEdit *HE, KController *P );
 
   public: // KEditor API
