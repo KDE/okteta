@@ -176,7 +176,7 @@ class KBytesEditWidget : public QWidget, public KHE::BytesEditInterface,
 
   signals:
   // clipboard interface
-    virtual void copyAvailable( bool Really );
+    void copyAvailable( bool Really );
 
   protected:
     KHE::KBytesEdit* BytesEdit;
