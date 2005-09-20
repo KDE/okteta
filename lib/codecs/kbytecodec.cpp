@@ -50,7 +50,7 @@ unsigned int KByteCodec::decode( unsigned char *Char, const QString &Digits, uin
   unsigned int d = encodingWidth();
   do
   {
-    if( !appendDigit(&C,Digits.at(Pos)) )
+    if( !appendDigit(&C,Digits.at(Pos).combiningClass ()) )
       break;
 
     ++Pos;

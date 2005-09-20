@@ -23,9 +23,9 @@ using namespace KHE;
 
 void KOctalByteCodec::encode( QString &Digits, unsigned int Pos, unsigned char Char ) const
 {
-  Digits.at(Pos++) = '0'+(Char>>6);
-  Digits.at(Pos++) = '0'+((Char>>3)&0x07);
-  Digits.at(Pos) = '0'+((Char)   &0x07);
+  Digits[Pos++] = '0'+(Char>>6);
+  Digits[Pos++] = '0'+((Char>>3)&0x07);
+  Digits[Pos] = '0'+((Char)   &0x07);
 }
 
 
@@ -33,10 +33,10 @@ void KOctalByteCodec::encodeShort( QString &Digits, unsigned int Pos, unsigned c
 {
   unsigned char C;
   if( (C = (Char>>6)&0x07) )
-    Digits.at(Pos++) = '0'+C;
+    Digits[Pos++] = '0'+C;
   if( (C = (Char>>3)&0x07) )
-    Digits.at(Pos++) = '0'+C;
-  Digits.at(Pos) = '0'+((Char)&0x07);
+    Digits[Pos++] = '0'+C;
+  Digits[Pos] = '0'+((Char)&0x07);
 }
 
 

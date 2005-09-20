@@ -214,7 +214,7 @@ bool KTextCharCodec::encode( char *D, const QChar &C ) const
   if( !Codec->canEncode(C) ) // TODO: do we really need the codec?
     return false;
   int dummy;
-  char T = Encoder->fromUnicode( C, dummy )[0];
+  char T = Encoder->fromUnicode( &C, dummy )[0];
 
   *D = T;
   return true;
