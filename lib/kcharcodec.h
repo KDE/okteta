@@ -32,6 +32,7 @@ namespace KHE
 class KHEXEDIT_EXPORT KCharCodec
 {
   public:
+	virtual ~KCharCodec(){}
     /** */
     static KCharCodec* createCodec( KEncoding E );
     /** */
