@@ -35,6 +35,7 @@ namespace KHE
 class KBinaryByteCodec : public KByteCodec
 {
   public: // API to be implemented
+	virtual ~KBinaryByteCodec(){}
     /** */
     virtual unsigned int encodingWidth() const { return 8; }
     /** */

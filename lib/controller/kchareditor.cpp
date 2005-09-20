@@ -47,7 +47,7 @@ bool KCharEditor::handleKeyPress( QKeyEvent *KeyEvent )
     if( C.isPrint() )
     {
       QByteArray D( 1 );
-      if( CharColumn->codec()->encode(&D[0],C) )
+      if( CharColumn->codec()->encode(&D.data()[0],C) )
       {
         //         clearUndoRedoInfo = false;
         HexEdit->insert( D );

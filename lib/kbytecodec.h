@@ -36,12 +36,13 @@ namespace KHE
 class KByteCodec
 {
   public:
+		 
     static KByteCodec *createCodec( KCoding C );
 
 
   protected: // hiding, as this class should never be instanciated
     KByteCodec() {}
-
+	virtual ~KByteCodec() {}
   public: // API to be implemented
     /** */
     virtual unsigned int encodingWidth() const = 0;

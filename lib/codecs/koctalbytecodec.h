@@ -35,6 +35,7 @@ namespace KHE
 class KOctalByteCodec : public KByteCodec
 {
   public: // API to be implemented
+	virtual ~KOctalByteCodec(){}
     /** */
     virtual unsigned int encodingWidth() const { return 3; }
     /** */

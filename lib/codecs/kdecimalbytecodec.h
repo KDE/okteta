@@ -35,6 +35,7 @@ namespace KHE
 class KDecimalByteCodec : public KByteCodec
 {
   public: // API to be implemented
+	virtual ~KDecimalByteCodec(){}
     /** */
     virtual unsigned int encodingWidth() const { return 3; }
     /** */
