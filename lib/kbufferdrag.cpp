@@ -47,7 +47,7 @@ static const char *localTextPlain()
 
   if( TextPlainLocal.isNull() )
   {
-    TextPlainLocal = Q3CString(KGlobal::locale()->encoding()).lower();
+    TextPlainLocal = Q3CString(KGlobal::locale()->encoding()).toLower();
     // remove the whitespaces
     int s;
     while( (s=TextPlainLocal.find(' ')) >= 0 )
@@ -147,7 +147,7 @@ QByteArray KBufferDrag::encodedData( const char *Format ) const
     if( qstrncmp(Format,TextPlain,10) == 0 )
     {
       Q3CString Output;
-      QTextCodec *TextCodec = codecForCharset( Q3CString(Format).lower() );
+      QTextCodec *TextCodec = codecForCharset( Q3CString(Format).toLower() );
       if( TextCodec == 0 )
         return Output;
 
