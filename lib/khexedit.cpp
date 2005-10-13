@@ -491,7 +491,7 @@ void KHexEdit::zoomOut( int PointDec )
 {
   InZooming = true;
   QFont F( font() );
-  F.setPointSize( QMAX( 1, QFontInfo(F).pointSize() - PointDec ) );
+  F.setPointSize( qMax( 1, QFontInfo(F).pointSize() - PointDec ) );
   setFont( F );
   InZooming = false;
 }
@@ -1263,7 +1263,7 @@ void KHexEdit::createCursorPixmaps()
   KPixelX CursorW;
   if( BufferCursor->isBehind() )
   {
-    CursorX = QMAX( 0, CursorPixmaps->onPixmap().width()-InsertCursorWidth );
+    CursorX = qMax( 0, CursorPixmaps->onPixmap().width()-InsertCursorWidth );
     CursorW = InsertCursorWidth;
   }
   else
@@ -1898,7 +1898,7 @@ void KHexEdit::handleInternalDrag( QDropEvent *e )
     if( NewIndex != Selection.start() )
     {
       BufferCursor->gotoCIndex( NewIndex+Selection.width() );
-      BufferRanges->addChangedRange( KSection(QMIN(InsertIndex,Selection.start()), QMAX(InsertIndex,Selection.end())) );
+      BufferRanges->addChangedRange( KSection(qMin(InsertIndex,Selection.start()), qMax(InsertIndex,Selection.end())) );
     }
   }
   // is a copy
