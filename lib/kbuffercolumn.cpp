@@ -427,13 +427,13 @@ void KBufferColumn::paintPositions( QPainter *P, int Line, KSection Pos )
     // falls Marking nicht mehr gebuffert und noch zu erwarten
     if( HasMarking && Marking.endsBefore(IndizesPart.start()) )
     {
-      // erhebe n‰chste Markierung im Bereich
+      // erhebe n√§chste Markierung im Bereich
       HasMarking = isMarked( IndizesPart, &Marking, &MarkingFlag );
     }
     // falls Selection nicht mehr gebuffert und noch zu erwarten
     if( HasSelection && Selection.endsBefore(IndizesPart.start()) )
     {
-      // erhebe n‰chste Selection im Bereich
+      // erhebe n√§chste Selection im Bereich
       HasSelection = isSelected( IndizesPart, &Selection, &SelectionFlag );
     }
 
