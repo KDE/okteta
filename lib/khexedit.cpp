@@ -571,7 +571,7 @@ QSize KHexEdit::minimumSizeHint() const
 {
   // TODO: better minimal width (visibility!)
   return QSize( OffsetColumn->visibleWidth()+FirstBorderColumn->visibleWidth()+SecondBorderColumn->visibleWidth()+valueColumn().byteWidth()+charColumn().byteWidth(),
-                lineHeight() + noOfLines()>1? style().pixelMetric(QStyle::PM_ScrollBarExtent):0 );
+                lineHeight() + noOfLines()>1? style()->pixelMetric(QStyle::PM_ScrollBarExtent):0 );
 }
 
 
@@ -611,7 +611,7 @@ int KHexEdit::fittingBytesPerLine( const QSize &NewSize ) const
 
   // check influence of dis-/appearing of the vertical scrollbar
   bool VerticalScrollbarIsVisible = verticalScrollBar()->isVisible();
-  KPixelX ScrollbarExtent = style().pixelMetric( QStyle::PM_ScrollBarExtent );//verticalScrollBar()->width();
+  KPixelX ScrollbarExtent = style()->pixelMetric( QStyle::PM_ScrollBarExtent );//verticalScrollBar()->width();
 
   KPixelX AvailableWidth = FullWidth;
   if( VerticalScrollbarIsVisible )

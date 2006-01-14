@@ -42,8 +42,8 @@ class KCursor
     void setShape( KPixelX X, KPixelX W );
 
   public: // access
-    const QPixmap &onPixmap() const;
-    const QPixmap &offPixmap() const;
+    QPixmap &onPixmap();
+    QPixmap &offPixmap();
     KPixelX cursorX() const;
     KPixelX cursorW() const;
 
@@ -57,8 +57,8 @@ class KCursor
 };
 
 
-inline const QPixmap &KCursor::onPixmap()  const { return OnPixmap; }
-inline const QPixmap &KCursor::offPixmap() const { return OffPixmap; }
+inline QPixmap &KCursor::onPixmap()  { return OnPixmap; }
+inline QPixmap &KCursor::offPixmap() { return OffPixmap; }
 
 inline KPixelX KCursor::cursorX() const { return CursorX; }
 inline KPixelX KCursor::cursorW() const { return CursorW; }

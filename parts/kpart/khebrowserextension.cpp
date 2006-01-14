@@ -26,9 +26,10 @@ using namespace KHE;
 
 
 KHexEditBrowserExtension::KHexEditBrowserExtension( KHexEditPart *P )
-  : KParts::BrowserExtension( P, "khexeditpartbrowserextension" ),
+  : KParts::BrowserExtension( P ),
   HexEditPart( P )
 {
+  setObjectName( "khexeditpartbrowserextension" );
   connect( HexEditPart->HexEdit, SIGNAL( selectionChanged() ), this, SLOT( slotSelectionChanged() ) );
 }
 

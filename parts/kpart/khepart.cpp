@@ -35,7 +35,7 @@ static const char RCFileName[] = "khexedit2partui.rc";
 KHexEditPart::KHexEditPart( QWidget *ParentWidget, const char *WidgetName,
                             QObject *Parent, const char *Name,
                             bool BrowserViewWanted )
- : KParts::ReadOnlyPart( Parent, Name )
+ : KParts::ReadOnlyPart( Parent )
 {
   setInstance( KHexEditPartFactory::instance() );
 
@@ -117,7 +117,7 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
   ResizeStyleAction->setItems( List );
   connect( ResizeStyleAction, SIGNAL(activated(int)), this, SLOT(slotSetResizeStyle(int)) );
 
-  ShowOffsetColumnAction = new KToggleAction( i18n("&Line Offset"), Key_F11, this, SLOT(slotToggleOffsetColumn()), AC, "view_lineoffset" );
+  ShowOffsetColumnAction = new KToggleAction( i18n("&Line Offset"), Qt::Key_F11, this, SLOT(slotToggleOffsetColumn()), AC, "view_lineoffset" );
 
   // show buffer columns
   ToggleColumnsAction = new KSelectAction( i18n("&Columns"), 0, AC, "togglecolumns" );

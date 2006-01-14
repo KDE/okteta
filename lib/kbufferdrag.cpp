@@ -166,7 +166,7 @@ QByteArray KBufferDrag::encodedData( const char *Format ) const
         { 
           KHEChar B = CharCodec->decode( Data[i] );
 
-          Text.at(i) = B.isUndefined() ? KHEChar(UndefinedChar) :
+          Text[i] = B.isUndefined() ? KHEChar(UndefinedChar) :
               (!B.isPrint() && B != Tab && B != Return ) ? KHEChar(SubstituteChar) : B;
         }
         // clean up
