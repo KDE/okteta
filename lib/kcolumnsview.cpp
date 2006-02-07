@@ -146,7 +146,7 @@ void KColumnsView::paintEmptyArea( QPainter *P, int cx ,int cy, int cw, int ch)
 
 void KColumnsView::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
 {
-  //kdDebug(1501) << "drawContents(" << cx<<","<<cw<<"#"<<cy<<","<<ch<<")\n";
+  //kDebug(1501) << "drawContents(" << cx<<","<<cw<<"#"<<cy<<","<<ch<<")\n";
   KPixelXs AffectedXs( cx, cw, true );
   // content to be shown?
   if( AffectedXs.startsBefore(TotalWidth) )

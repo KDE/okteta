@@ -214,7 +214,7 @@ int KFixedSizeBuffer::fill( const char FChar, int FillLength, unsigned int Pos )
 
 int KFixedSizeBuffer::compare( const KDataBuffer &Other, KSection OtherRange, unsigned int Pos )
 {
-  //kdDebug() << QString("Pos: %1, OtherRange: (%3/%4)" ).arg(Pos).arg(OtherRange.start()).arg(OtherRange.end())
+  //kDebug() << QString("Pos: %1, OtherRange: (%3/%4)" ).arg(Pos).arg(OtherRange.start()).arg(OtherRange.end())
   //    << endl;
   // test other values
   if( OtherRange.startsBehind(Other.size()-1) )
@@ -244,7 +244,7 @@ int KFixedSizeBuffer::compare( const KDataBuffer &Other, KSection OtherRange, un
     if( OtherRange.width() > Range.width() )
       ValueByLength = -1;
   }
-  //kdDebug()
+  //kDebug()
   //    << QString( "Range: (%1/%2), OtherRange: (%3/%4)" ).arg(Range.start()).arg(Range.end()).arg(OtherRange.start()).arg(OtherRange.end())
   //    << endl;
   int oi = OtherRange.start();
@@ -252,7 +252,7 @@ int KFixedSizeBuffer::compare( const KDataBuffer &Other, KSection OtherRange, un
   {
     char OD = Other.datum(oi);
     char D = Data[i];
-    //kdDebug() << QString("%1==%2").arg((int)D).arg((int)OD) << endl;
+    //kDebug() << QString("%1==%2").arg((int)D).arg((int)OD) << endl;
     if( OD == D )
       continue;
     return OD < D ? 1 : -1;
