@@ -26,6 +26,7 @@ namespace KHE
 class KBorderColTextExport : public KColTextExport
 {
   public: // API
+	virtual ~KBorderColTextExport(){}
     void printFirstLine( QString &T, int Line ) const;
     void printNextLine( QString &T) const;
     /** tells how much chars per line are needed */
