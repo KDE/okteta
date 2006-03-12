@@ -7,8 +7,27 @@ include_directories( ${KDE4_INCLUDE_DIR} ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_D
 
 
 ########### next target ###############
+set(libcontroler_SRCS 
+	${CMAKE_SOURCE_DIR}/khexedit/lib/controller/kchareditor.cpp
+	${CMAKE_SOURCE_DIR}/khexedit/lib/controller/kcontroller.cpp
+	${CMAKE_SOURCE_DIR}/khexedit/lib/controller/keditor.cpp
+	${CMAKE_SOURCE_DIR}/khexedit/lib/controller/knavigator.cpp
+	${CMAKE_SOURCE_DIR}/khexedit/lib/controller/ktabcontroller.cpp
+	${CMAKE_SOURCE_DIR}/khexedit/lib/controller/kvalueeditor.cpp
+)
 
-set(khexeditcommon_LIB_SRCS 
+set(libcodecs_SRCS
+    ${CMAKE_SOURCE_DIR}/khexedit/lib/codecs/kbinarybytecodec.cpp
+    ${CMAKE_SOURCE_DIR}/khexedit/lib/codecs/kbytecodec.cpp
+    ${CMAKE_SOURCE_DIR}/khexedit/lib/codecs/kcharcodec.cpp
+    ${CMAKE_SOURCE_DIR}/khexedit/lib/codecs/kdecimalbytecodec.cpp
+    ${CMAKE_SOURCE_DIR}/khexedit/lib/codecs/kebcdic1047charcodec.cpp
+    ${CMAKE_SOURCE_DIR}/khexedit/lib/codecs/khexadecimalbytecodec.cpp
+    ${CMAKE_SOURCE_DIR}/khexedit/lib/codecs/koctalbytecodec.cpp
+    ${CMAKE_SOURCE_DIR}/khexedit/lib/codecs/ktextcharcodec.cpp
+)
+
+set(khexeditcommon_LIB_SRCS ${libcontroler_SRCS} ${libcodecs_SRCS}
    kcolumn.cpp 
    kbordercolumn.cpp 
    koffsetcolumn.cpp 
@@ -42,7 +61,7 @@ kde4_automoc(${khexeditcommon_LIB_SRCS})
 
 kde4_add_library(khexeditcommon SHARED ${khexeditcommon_LIB_SRCS})
 
-target_link_libraries(khexeditcommon  ${QT_AND_KDECORE_LIBS} kcontroller khecodecs )
+target_link_libraries(khexeditcommon  ${LIB_KDE3SUPPORT}  )
 
 set_target_properties(khexeditcommon PROPERTIES VERSION 1.0.0 SOVERSION 1 )
 install_targets(${LIB_INSTALL_DIR} khexeditcommon )
