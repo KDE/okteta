@@ -61,7 +61,7 @@ kde4_automoc(${khexeditcommon_LIB_SRCS})
 
 kde4_add_library(khexeditcommon SHARED ${khexeditcommon_LIB_SRCS})
 
-target_link_libraries(khexeditcommon  ${LIB_KDE3SUPPORT}  )
+target_link_libraries(khexeditcommon  ${KDE4_KDE3SUPPORT_LIBRARIES}  )
 
 set_target_properties(khexeditcommon PROPERTIES VERSION 1.0.0 SOVERSION 1 )
 install_targets(${LIB_INSTALL_DIR} khexeditcommon )
