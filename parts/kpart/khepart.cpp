@@ -89,7 +89,7 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
   KStdAction::deselect(  this, SLOT(slotUnselect()),  AC );
 
   // value encoding
-  CodingAction = new KSelectAction( i18n("&Value Coding"), 0, AC, "view_valuecoding" );
+  CodingAction = new KSelectAction( i18n("&Value Coding"), AC, "view_valuecoding" );
   QStringList List;
   List.append( i18n("&Hexadecimal") );
   List.append( i18n("&Decimal")     );
@@ -99,7 +99,7 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
   connect( CodingAction, SIGNAL(activated(int)), this, SLOT(slotSetCoding(int)) );
 
   // document encoding
-  EncodingAction = new KSelectAction( i18n("&Char Encoding"), 0, AC, "view_charencoding" );
+  EncodingAction = new KSelectAction( i18n("&Char Encoding"), AC, "view_charencoding" );
   EncodingAction->setItems( KCharCodec::codecNames() );
   connect( EncodingAction, SIGNAL(activated(int)), this, SLOT(slotSetEncoding(int)) );
 
@@ -109,7 +109,7 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
   KStdAction::zoomOut( HexEdit, SLOT(zoomOut()),  actionCollection() );
 
   // resize style
-  ResizeStyleAction = new KSelectAction( i18n("&Resize Style"), 0, AC, "resizestyle" );
+  ResizeStyleAction = new KSelectAction( i18n("&Resize Style"), AC, "resizestyle" );
   List.clear();
   List.append( i18n("&No Resize") );
   List.append( i18n("&Lock Groups") );
@@ -120,7 +120,7 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
   ShowOffsetColumnAction = new KToggleAction( i18n("&Line Offset"), Qt::Key_F11, this, SLOT(slotToggleOffsetColumn()), AC, "view_lineoffset" );
 
   // show buffer columns
-  ToggleColumnsAction = new KSelectAction( i18n("&Columns"), 0, AC, "togglecolumns" );
+  ToggleColumnsAction = new KSelectAction( i18n("&Columns"), AC, "togglecolumns" );
   List.clear();
   List.append( i18n("&Values Column") );
   List.append( i18n("&Chars Column") );
