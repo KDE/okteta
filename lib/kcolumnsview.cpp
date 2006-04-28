@@ -87,7 +87,7 @@ void KColumnsView::updateLineBufferSize()
   int h = LineHeight;
 
   if( w != LineBuffer.width() || h != LineBuffer.height() )
-    LineBuffer.resize( w, h );
+    LineBuffer = QPixmap( w, h );
 }
 
 

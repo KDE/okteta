@@ -36,8 +36,8 @@ void KCursor::setSize( KPixelX Width, KPixelY Height )
 {
   if( Width != OnPixmap.width() || Height != OnPixmap.height() )
   {
-    OnPixmap.resize( Width, Height );
-    OffPixmap.resize( Width, Height );
+    OnPixmap = QPixmap( Width, Height );
+    OffPixmap = QPixmap( Width, Height );
   }
 }
 
