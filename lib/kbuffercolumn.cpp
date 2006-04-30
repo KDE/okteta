@@ -501,9 +501,9 @@ void KBufferColumn::paintSelection( QPainter *P, KSection Positions, int Index, 
 {
   const QPalette &CG = View->palette();
 
-  paintRange( P, CG.highlight(), Positions, Flag );
+  paintRange( P, CG.color(QPalette::Highlight), Positions, Flag );
 
-  const QColor &HTC = CG.highlightedText();
+  const QColor &HTC = CG.color( QPalette::HighlightedText );
   // paint all the bytes affected
   for( int p=Positions.start(); p<=Positions.end(); ++p,++Index )
   {
@@ -592,12 +592,12 @@ void KBufferColumn::paintByte( QPainter *P, int Index )
     }
     else if( Ranges->selectionIncludes(Index) )
     {
-      Brush.setColor( CG.highlight() );
-      Color = CG.highlightedText();
+      Brush.setColor( CG.color( QPalette::Highlight ) );
+      Color = CG.color( QPalette::HighlightedText );
     }
     else
     {
-      Brush.setColor( CG.base() );
+      Brush.setColor( CG.color( QPalette::Base ) );
       Color = colorForChar( B );
     }
   }

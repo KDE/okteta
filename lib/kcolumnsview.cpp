@@ -39,8 +39,8 @@ KColumnsView::KColumnsView( /*bool R,*/ QWidget *Parent, const char *Name, Qt::W
 //    Reversed( R ),
    d( 0 )
 {
-  viewport()->setBackgroundMode( Qt::PaletteBase );
-  setBackgroundMode( Qt::PaletteBackground, Qt::PaletteBase );
+  viewport()->setBackgroundRole ( QPalette::Base );
+  setBackgroundRole( QPalette::Background );
   viewport()->setFocusProxy( this );
 
   Columns.setAutoDelete( true );
@@ -140,7 +140,7 @@ void KColumnsView::repaintView()
 
 void KColumnsView::paintEmptyArea( QPainter *P, int cx ,int cy, int cw, int ch)
 {
-  P->fillRect( cx, cy, cw, ch, backgroundBrush() );
+    P->fillRect( cx, cy, cw, ch, palette().brush(backgroundRole()) );
 }
 
 

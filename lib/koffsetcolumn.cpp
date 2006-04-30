@@ -42,7 +42,7 @@ KOffsetColumn::~KOffsetColumn()
 
 void KOffsetColumn::paintLine( QPainter *P, int Line )
 {
-  const QColor &ButtonColor = View->colorGroup().button();
+    const QColor &ButtonColor = View->palette().color( QPalette::Button );
   P->fillRect( 0,0,width(),LineHeight, QBrush(ButtonColor,Qt::SolidPattern) );
 
   printFunction()( CodedOffset,FirstLineOffset+Delta*Line );
@@ -68,7 +68,7 @@ void KOffsetColumn::paintEmptyColumn( QPainter *P, KPixelXs Xs, KPixelYs Ys )
 {
   Xs.restrictTo( XSpan );
 
-  const QColor &ButtonColor = View->colorGroup().button();
+  const QColor &ButtonColor = View->palette().color( QPalette::Button );
   P->fillRect( Xs.start(), Ys.start(), Xs.width(), Ys.width(), QBrush(ButtonColor,Qt::SolidPattern) );
 }
 
