@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
- 
+
 // qt specific
 #include <qpainter.h>
 // lib specific
@@ -49,12 +49,12 @@ void KColumn::paintNextLine( QPainter *P )
 void KColumn::paintBlankLine( QPainter *P ) const
 {
   if( LineHeight > 0 )
-    P->fillRect( 0,0,width(),LineHeight, View->backgroundBrush() );
+      P->fillRect( 0,0,width(),LineHeight, View->palette().brush( View->backgroundRole() ) );
 }
 
 
 void KColumn::paintEmptyColumn( QPainter *P, KPixelXs Xs, KPixelYs Ys )
 {
   Xs.restrictTo( XSpan );
-  P->fillRect( Xs.start(), Ys.start(), Xs.width(), Ys.width(), View->backgroundBrush() );
+  P->fillRect( Xs.start(), Ys.start(), Xs.width(), Ys.width(), View->palette().brush(View->backgroundRole()) );
 }

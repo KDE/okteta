@@ -395,11 +395,9 @@ void KBufferColumn::paintLine( QPainter *P, int Line ) // TODO: could be removed
 
 void KBufferColumn::paintPositions( QPainter *P, int Line, KSection Pos )
 {
-  const QColorGroup &CG = View->colorGroup();
-
   // clear background
   unsigned int BlankFlag = (Pos.start()!=0?StartsBefore:0) | (Pos.end()!=LastPos?EndsLater:0);
-  paintRange( P, CG.base(), Pos, BlankFlag );
+  paintRange( P, View->palette().base(), Pos, BlankFlag );
 
   // Go through the lines TODO: handle first and last line more effeciently
   // check for leading and trailing spaces
@@ -446,7 +444,7 @@ void KBufferColumn::paintPositions( QPainter *P, int Line, KSection Pos )
       paintMarking( P, PositionsPart, IndizesPart.start(), MarkingFlag );
 
     }
-    else if( Selection.includes(IndizesPart.start()) )    
+    else if( Selection.includes(IndizesPart.start()) )
     {
       if( Selection.startsBehind(IndizesPart.start()) )
         SelectionFlag |= StartsBefore;
@@ -501,7 +499,7 @@ void KBufferColumn::paintPlain( QPainter *P, KSection Positions, int Index )
 
 void KBufferColumn::paintSelection( QPainter *P, KSection Positions, int Index, int Flag )
 {
-  const QColorGroup &CG = View->colorGroup();
+  const QPalette &CG = View->palette();
 
   paintRange( P, CG.highlight(), Positions, Flag );
 
@@ -524,7 +522,7 @@ void KBufferColumn::paintSelection( QPainter *P, KSection Positions, int Index, 
 
 void KBufferColumn::paintMarking( QPainter *P, KSection Positions, int Index, int Flag )
 {
-  const QColorGroup &CG = View->colorGroup();
+  const QPalette &CG = View->palette();
 
   paintRange( P, CG.text(), Positions, Flag );
 
@@ -581,7 +579,7 @@ void KBufferColumn::paintByte( QPainter *P, int Index )
   char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : EmptyByte;
   KHEChar B = Codec->decode( Byte );
 
-  const QColorGroup &CG = View->colorGroup();
+  const QPalette &CG = View->palette();
   QColor Color = CG.text();
   QBrush Brush( CG.base(), Qt::SolidPattern );
 
