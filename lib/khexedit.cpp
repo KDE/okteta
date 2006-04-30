@@ -1167,11 +1167,11 @@ bool KHexEdit::eventFilter( QObject *O, QEvent *E )
 
 //   if( O == this && E->type() == QEvent::PaletteChange )
 //   {
-//     QColor old( viewport()->colorGroup().color(QColorGroup::Text) );
+//     QColor old( viewport()->colorGroup().color(QPalette::Text) );
 //
-//     if( old != colorGroup().color(QColorGroup::Text) )
+//     if( old != colorGroup().color(QPalette::Text) )
 //     {
-//       QColor c( colorGroup().color(QColorGroup::Text) );
+//       QColor c( colorGroup().color(QPalette::Text) );
 //       doc->setMinimumWidth( -1 );
 //       doc->setDefaultFormat( doc->formatCollection()->defaultFormat()->font(), c );
 //       lastFormatted = doc->firstParagraph();
