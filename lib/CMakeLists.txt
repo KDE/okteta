@@ -1,30 +1,29 @@
 kde4_header()
 
 add_subdirectory( controller ) 
-add_subdirectory( codecs ) 
 
 include_directories( ${KDE4_INCLUDE_DIR} ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}  )
 
 
 ########### next target ###############
 set(libcontroler_SRCS 
-	${CMAKE_SOURCE_DIR}/khexedit/lib/controller/kchareditor.cpp
-	${CMAKE_SOURCE_DIR}/khexedit/lib/controller/kcontroller.cpp
-	${CMAKE_SOURCE_DIR}/khexedit/lib/controller/keditor.cpp
-	${CMAKE_SOURCE_DIR}/khexedit/lib/controller/knavigator.cpp
-	${CMAKE_SOURCE_DIR}/khexedit/lib/controller/ktabcontroller.cpp
-	${CMAKE_SOURCE_DIR}/khexedit/lib/controller/kvalueeditor.cpp
+	controller/kchareditor.cpp
+	controller/kcontroller.cpp
+	controller/keditor.cpp
+	controller/knavigator.cpp
+	controller/ktabcontroller.cpp
+	controller/kvalueeditor.cpp
 )
 
 set(libcodecs_SRCS
-    ${CMAKE_SOURCE_DIR}/khexedit/lib/codecs/kbinarybytecodec.cpp
-    ${CMAKE_SOURCE_DIR}/khexedit/lib/codecs/kbytecodec.cpp
-    ${CMAKE_SOURCE_DIR}/khexedit/lib/codecs/kcharcodec.cpp
-    ${CMAKE_SOURCE_DIR}/khexedit/lib/codecs/kdecimalbytecodec.cpp
-    ${CMAKE_SOURCE_DIR}/khexedit/lib/codecs/kebcdic1047charcodec.cpp
-    ${CMAKE_SOURCE_DIR}/khexedit/lib/codecs/khexadecimalbytecodec.cpp
-    ${CMAKE_SOURCE_DIR}/khexedit/lib/codecs/koctalbytecodec.cpp
-    ${CMAKE_SOURCE_DIR}/khexedit/lib/codecs/ktextcharcodec.cpp
+    codecs/kbinarybytecodec.cpp
+    codecs/kbytecodec.cpp
+    codecs/kcharcodec.cpp
+    codecs/kdecimalbytecodec.cpp
+    codecs/kebcdic1047charcodec.cpp
+    codecs/khexadecimalbytecodec.cpp
+    codecs/koctalbytecodec.cpp
+    codecs/ktextcharcodec.cpp
 )
 
 set(khexeditcommon_LIB_SRCS ${libcontroler_SRCS} ${libcodecs_SRCS}
