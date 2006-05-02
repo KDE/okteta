@@ -411,8 +411,8 @@ void KBufferColumn::paintPositions( QPainter *P, int Line, KSection Pos )
   // check for leading and trailing spaces
   KSection Indizes( Layout->indexAtCoord(KBufferCoord( Positions.start(), Line )), Positions.width(), false );
 
-  unsigned int SelectionFlag;
-  unsigned int MarkingFlag;
+  unsigned int SelectionFlag = 0;
+  unsigned int MarkingFlag = 0;
   KSection Selection;
   KSection Marking;
   bool HasMarking = Ranges->hasMarking();
