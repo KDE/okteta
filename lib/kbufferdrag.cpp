@@ -160,10 +160,10 @@ QByteArray KBufferDrag::encodedData( const char *Format ) const
         static const QChar Tab('\t');
         static const QChar Return('\n');
         uint Size = Data.size();
-        Text.setLength( Size );
+        Text.resize( Size );
 
         for( uint i=0; i<Size; ++i )
-        { 
+        {
           KHEChar B = CharCodec->decode( Data[i] );
 
           Text[i] = B.isUndefined() ? KHEChar(UndefinedChar) :

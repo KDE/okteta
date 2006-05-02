@@ -59,7 +59,7 @@ bool KValueColumn::setCoding( KCoding C )
 
   Coding = C;
   ByteCodec = KByteCodec::createCodec( Coding );
-  CodedByte.setLength( ByteCodec->encodingWidth() );
+  CodedByte.resize( ByteCodec->encodingWidth() );
 
   // recalculate depend sizes
   recalcByteWidth();

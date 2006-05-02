@@ -49,7 +49,7 @@ void KValueColTextExport::print( QString &T ) const
     pEnd = CoordRange.end().pos()+1;
 
   QString E;
-  E.setLength( ByteCodec->encodingWidth() );
+  E.resize( ByteCodec->encodingWidth() );
   // draw individual chars
   uint e = 0;
   for( ; p<pEnd; ++p, ++PrintData )

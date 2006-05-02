@@ -297,7 +297,7 @@ void KHexEdit::setCoding( KCoding C )
     return;
 
   uint NewCodingWidth = valueColumn().byteCodec()->encodingWidth();
-  ValueEditor->ByteBuffer.setLength( NewCodingWidth ); //hack for now
+  ValueEditor->ByteBuffer.resize( NewCodingWidth ); //hack for now
 
   // no change in the width?
   if( NewCodingWidth == OldCodingWidth )
@@ -795,7 +795,8 @@ QByteArray KHexEdit::selectedData() const
     return QByteArray();
 
   KSection Selection = BufferRanges->selection();
-  QByteArray SD( Selection.width() );
+  QByteArray SD;
+  SD.resize( Selection.width() );
   DataBuffer->copyTo( SD.data(), Selection.start(), Selection.width() );
   return SD;
 }
@@ -1754,7 +1755,7 @@ void KHexEdit::handleMouseMove( const QPoint& Point ) // handles the move of the
   ensureCursorVisible();
 
   // do wordwise selection?
-  if( InDoubleClick && BufferRanges->hasFirstWordSelection() ) 
+  if( InDoubleClick && BufferRanges->hasFirstWordSelection() )
   {
     int NewIndex = BufferCursor->realIndex();
     KSection FirstWordSelection = BufferRanges->firstWordSelection();
@@ -1829,7 +1830,7 @@ void KHexEdit::contentsDragEnterEvent( QDragEnterEvent *e )
 
 void KHexEdit::contentsDragMoveEvent( QDragMoveEvent *e )
 {
-  // is this content still interesting for us? 
+  // is this content still interesting for us?
   if( isReadOnly() || !KBufferDrag::canDecode(e) )
   {
     e->ignore();
@@ -1871,8 +1872,8 @@ void KHexEdit::contentsDropEvent( QDropEvent *e )
     handleInternalDrag( e );
   else
   {
-   //BufferRanges->removeSelection(); 
-    pasteFromSource( e ); 
+   //BufferRanges->removeSelection();
+    pasteFromSource( e );
   }
 
   // emit appropriate signals.
@@ -1893,7 +1894,7 @@ void KHexEdit::handleInternalDrag( QDropEvent *e )
   // is this a move?
   if( e->action() == QDropEvent::Move )
   {
-    // ignore the copy hold in the event but only move 
+    // ignore the copy hold in the event but only move
     int NewIndex = DataBuffer->move( InsertIndex, Selection );
     if( NewIndex != Selection.start() )
     {
@@ -1904,7 +1905,7 @@ void KHexEdit::handleInternalDrag( QDropEvent *e )
   // is a copy
   else
   {
-    // get data  
+    // get data
     QByteArray Data;
     if( KBufferDrag::decode(e,Data) && !Data.isEmpty() )
     {
