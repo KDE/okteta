@@ -1289,7 +1289,7 @@ void KHexEdit::pointPainterToCursor( QPainter &Painter, const KBufferColumn &Col
 void KHexEdit::paintActiveCursor( bool CursorOn )
 {
   // any reason to skip the cursor drawing?
-  if( !isUpdatesEnabled() || !viewport()->isUpdatesEnabled()
+  if( !updatesEnabled() || !viewport()->updatesEnabled()
       || (CursorOn && !hasFocus() && !viewport()->hasFocus() && !InDnD ) )
     return;
 
@@ -1321,8 +1321,8 @@ void KHexEdit::paintActiveCursor( bool CursorOn )
 void KHexEdit::paintInactiveCursor( bool CursorOn )
 {
   // any reason to skip the cursor drawing?
-  if( !isUpdatesEnabled()
-      || !viewport()->isUpdatesEnabled()
+  if( !updatesEnabled()
+      || !viewport()->updatesEnabled()
       || !inactiveColumn().isVisible()
       || (CursorOn && !hasFocus() && !viewport()->hasFocus() && !InDnD)  )
     return;
@@ -1382,7 +1382,7 @@ void KHexEdit::keyPressEvent( QKeyEvent *KeyEvent )
 
 void KHexEdit::repaintChanged()
 {
-  if( !isUpdatesEnabled() || !viewport()->isUpdatesEnabled() || !BufferRanges->isModified() )
+  if( !updatesEnabled() || !viewport()->updatesEnabled() || !BufferRanges->isModified() )
     return;
 
   // TODO: we do this only to let the scrollview handle new or removed lines. overlaps with repaintRange
