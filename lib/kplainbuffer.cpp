@@ -50,6 +50,7 @@ KPlainBuffer::KPlainBuffer( const char *D, unsigned int S )
 {
 }
 
+#warning this leaks!
 KPlainBuffer::KPlainBuffer( int S, int MS )
   : Data( S?new char[S]:0 ),
    Size( S ),
