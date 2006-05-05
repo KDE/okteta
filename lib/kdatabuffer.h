@@ -79,7 +79,7 @@ class KHEXEDIT_EXPORT KDataBuffer
       * so that e.g. the corresponding pages will be loaded in advance
       * TODO: do we really need this? Where will this lead to real enhancements?
       * @param Range
-      * @return @c true if successfull, @c false otherwise
+      * @return @c true if successfully, @c false otherwise
       */
     virtual bool prepareRange( KSection Range ) const = 0;
     /** convenience function, same as above */
@@ -208,7 +208,7 @@ class KHEXEDIT_EXPORT KDataBuffer
       * @param 
       * @param Length length of search string
       * @param Section section within the keydata is to be found
-      * @return index of the first occurence or -1
+      * @return index of the first occurrence or -1
       */
     virtual int find( const char*KeyData, int Length, KSection Section ) const = 0;
     /** searches backward beginning with byte at Pos.

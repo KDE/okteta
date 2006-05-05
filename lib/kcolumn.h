@@ -81,7 +81,7 @@ class KColumn
     KPixelX rightX() const;
     /** should Column be displayed? */
     bool isVisible() const;
-    /** convinience: returns width if visible else 0 */
+    /** convenience: returns width if visible else 0 */
     KPixelX visibleWidth() const;
 
   public: // functional logic

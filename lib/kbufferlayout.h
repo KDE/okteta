@@ -38,7 +38,7 @@ namespace KHE {
   * * final position in this line, and
   * * the total number of lines (is final line +1 or 0)
   *
-  * This layout sees the buffer as a continous stream of byte,
+  * This layout sees the buffer as a continuous stream of byte,
   * thus uses each line after the start from the begin to the end.
   *
   * If the buffer is empty the end coord will be set one pos left to the start coord

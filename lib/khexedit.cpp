@@ -108,7 +108,7 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, Qt::
    InZooming( false ),
    d( 0 )
 {
-  // initalize layout
+  // initialize layout
   if( DataBuffer )
     BufferLayout->setLength( DataBuffer->size() );
   BufferLayout->setNoOfLinesPerPage( noOfLinesPerPage() );
@@ -999,7 +999,7 @@ void KHexEdit::removeData( KSection Indizes )
 //     if( !undoRedoInfo.valid() )
 //     {
 //       doc->selectionStart( selNum, undoRedoInfo.id, undoRedoInfo.index );
-//       undoRedoInfo.d->text = QString::null;
+//       undoRedoInfo.d->text.clear();
 //     }
 //     readFormats( c1, c2, undoRedoInfo.d->text, TRUE );
 //   }
@@ -1509,7 +1509,7 @@ bool KHexEdit::hasChanged( const KCoordRange &VisibleRange, KCoordRange *Changed
 
 void KHexEdit::ensureCursorVisible()
 {
-//   // Not visible or the user is draging the window, so don't position to caret yet
+//   // Not visible or the user is dragging the window, so don't position to caret yet
 //   if ( !isVisible() || isHorizontalSliderPressed() || isVerticalSliderPressed() )
 //   {
 //     d->ensureCursorVisibleInShowEvent = true;

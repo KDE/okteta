@@ -196,7 +196,7 @@ QByteArray KBufferDrag::encodedData( const char *Format ) const
           Text.append('\n');
         }
       }
-      // generate the ouput
+      // generate the output
       Output = TextCodec->fromUnicode( Text );
       // fix end
       //if( TextCodec->mibEnum() != 1000 )

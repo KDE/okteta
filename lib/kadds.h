@@ -20,7 +20,7 @@
 
 namespace KHE
 {
-// some possibly usefull aditions to KDE
+// some possibly useful additions to KDE
 
 // these are to emphasize that measuring unit is pixel and which direction
 typedef int KPixelX;
