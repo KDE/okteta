@@ -16,8 +16,6 @@
 
 
 // qt specific
-#include <qevent.h>
-//Added by qt3to4:
 #include <QKeyEvent>
 // lib specific
 #include "kvaluecolumn.h"
@@ -79,9 +77,9 @@ bool KValueEditor::handleKeyPress( QKeyEvent *KeyEvent )
       default:
         // is plain char?
         if( KeyEvent->text().length() > 0
-            && ( !(KeyEvent->state()&( Qt::ControlModifier | Qt::AltModifier | Qt::MetaModifier )) ) )
+            && ( !(KeyEvent->modifiers()&( Qt::CTRL | Qt::ALT | Qt::META )) ) )
         {
-          int Input = KeyEvent->ascii();
+          int Input = KeyEvent->text()[0].toAscii();
           // no usable char?
           if( Input < 32 )
           {

@@ -16,8 +16,6 @@
 
 
 // qt specific
-#include <qevent.h>
-//Added by qt3to4:
 #include <QKeyEvent>
 // lib specific
 #include "kvaluecolumn.h"
@@ -39,7 +37,7 @@ bool KTabController::handleKeyPress( QKeyEvent *KeyEvent )
 {
   bool KeyUsed = false;
 
-  bool ShiftPressed =  KeyEvent->state() & Qt::ShiftModifier;
+  bool ShiftPressed =  KeyEvent->modifiers() & Qt::SHIFT;
 
   if( KeyEvent->key() == Qt::Key_Tab )
   {

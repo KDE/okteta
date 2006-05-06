@@ -18,10 +18,10 @@
 #ifndef KHE_KNAVIGATOR_H
 #define KHE_KNAVIGATOR_H
 
+
 // lib specific
 #include "kcontroller.h"
-//Added by qt3to4:
-#include <QKeyEvent>
+
 
 namespace KHE
 {

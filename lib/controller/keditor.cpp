@@ -15,7 +15,8 @@
  ***************************************************************************/
 
 
-
+// qt specific
+#include <QKeyEvent>
 // lib specific
 #include "kdatabuffer.h"
 #include "kbufferranges.h"
@@ -24,8 +25,6 @@
 #include "kwordbufferservice.h"
 #include "khexedit.h"
 #include "keditor.h"
-//Added by qt3to4:
-#include <QKeyEvent>
 
 
 using namespace KHE;
@@ -40,9 +39,9 @@ KEditor::KEditor( KBufferCursor *BC, KHexEdit* HE, KController *P )
 bool KEditor::handleKeyPress( QKeyEvent *KeyEvent )
 {
   bool clearUndoRedoInfo = true;
-  bool ShiftPressed =  KeyEvent->state() & Qt::ShiftModifier;
-  bool ControlPressed = KeyEvent->state() & Qt::ControlModifier;
-  bool AltPressed = KeyEvent->state() & Qt::AltModifier;
+  bool ShiftPressed =  KeyEvent->modifiers() & Qt::SHIFT;
+  bool ControlPressed = KeyEvent->modifiers() & Qt::CTRL;
+  bool AltPressed = KeyEvent->modifiers() & Qt::ALT;
 
   bool KeyUsed = true;
   // we only care for cursor keys and the like, won't hardcode any other keys

@@ -16,8 +16,6 @@
 
 
 // qt specific
-#include <qevent.h>
-//Added by qt3to4:
 #include <QKeyEvent>
 // lib specific
 #include "kcharcolumn.h"
@@ -41,13 +39,13 @@ bool KCharEditor::handleKeyPress( QKeyEvent *KeyEvent )
   bool KeyUsed = false;
   // some input that should be inserted?
   if( KeyEvent->text().length() > 0
-      && !(KeyEvent->state()&( Qt::ControlModifier | Qt::AltModifier | Qt::MetaModifier )) )
+      && !(KeyEvent->modifiers()&( Qt::CTRL | Qt::ALT | Qt::META )) )
   {
     QChar C = KeyEvent->text()[0];
     if( C.isPrint() )
     {
-      QByteArray D( 1 );
-      if( CharColumn->codec()->encode(&D.data()[0],C) )
+      QByteArray D( 1, 0 );
+      if( CharColumn->codec()->encode(D.data(),C) )
       {
         //         clearUndoRedoInfo = false;
         HexEdit->insert( D );

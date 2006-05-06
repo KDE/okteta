@@ -15,10 +15,7 @@
  ***************************************************************************/
 
 
-
 // qt specific
-#include <qevent.h>
-//Added by qt3to4:
 #include <QKeyEvent>
 // lib specific
 #include "kdatabuffer.h"
@@ -41,9 +38,9 @@ bool KNavigator::handleKeyPress( QKeyEvent *KeyEvent )
   bool KeyUsed = true;
 
   //bool clearUndoRedoInfo = true;
-  bool ShiftPressed =  KeyEvent->state() & Qt::ShiftModifier;
-  bool ControlPressed = KeyEvent->state() & Qt::ControlModifier;
-  //bool AltPressed = KeyEvent->state() & AltButton;
+  bool ShiftPressed =  KeyEvent->modifiers() & Qt::SHIFT;
+  bool ControlPressed = KeyEvent->modifiers() & Qt::CTRL;
+  //bool AltPressed = KeyEvent->modifiers() & Qt::ALT;
 
   // we only care for cursor keys and the like, won't hardcode any other keys
   // we also don't check whether the commands are allowed

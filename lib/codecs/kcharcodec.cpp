@@ -42,7 +42,7 @@ KCharCodec *KCharCodec::createCodec( const QString &Name )
 {
   KCharCodec *Codec = 0;
 
-  if( KTextCharCodec::codecNames().findIndex(Name) != -1 )
+  if( KTextCharCodec::codecNames().indexOf(Name) != -1 )
     Codec = KTextCharCodec::createCodec( Name );
   else if( KEBCDIC1047CharCodec::codecName() == Name )
     Codec = KEBCDIC1047CharCodec::create();

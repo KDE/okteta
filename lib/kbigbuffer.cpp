@@ -108,7 +108,7 @@ bool KBigBuffer::open( const QString& FileName )
   if( isOpen() && !close() ) // only occurs if close somehow fails.
     return false;
 
-  File.setName( FileName );
+  File.setFileName( FileName );
   if( !File.open(QIODevice::ReadOnly) )
     return false;
 
@@ -138,7 +138,7 @@ bool KBigBuffer::close()
 
   File.close();
 
-  if( File.status() == IO_UnspecifiedError )
+  if( File.error() != QFile::NoError )
     return false;
 
 //   std::cout << "closing file " << std::endl;
@@ -182,9 +182,9 @@ bool KBigBuffer::ensurePageLoaded( unsigned int PageIndex ) const
   --NoOfFreePages;
 
   // jump to position and read the page's data in
-  bool Success = File.at( (unsigned long)(PageIndex*PageSize) );
+  bool Success = File.seek( (unsigned long)(PageIndex*PageSize) );
   if( Success )
-    Success = File.readBlock( Data[PageIndex], PageSize ) > 0;
+    Success = File.read( Data[PageIndex], PageSize ) > 0;
 
   if( Success )
   {
@@ -206,7 +206,7 @@ bool KBigBuffer::ensurePageLoaded( unsigned int PageIndex ) const
 bool KBigBuffer::freePage( unsigned int PageIndex ) const
 {
   // check range and if is loaded at all
-  if( (unsigned int)PageIndex >= Data.size() || !Data[PageIndex] )
+  if( (int)PageIndex >= Data.size() || !Data[PageIndex] )
     return false;
 //   std::cout << "freeing page " << PageIndex << std::endl;
   delete [] Data[PageIndex];
