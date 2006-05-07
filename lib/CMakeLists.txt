@@ -1,6 +1,6 @@
 kde4_header()
 
-add_subdirectory( controller ) 
+add_subdirectory( controller )
 
 include_directories( ${KDE4_INCLUDE_DIR} ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}  )
 
@@ -48,6 +48,7 @@ set(khexeditcommon_LIB_SRCS ${libcontroler_SRCS} ${libcodecs_SRCS}
    kcursor.cpp 
    kbufferdrag.cpp 
    kwordbufferservice.cpp 
+   ksection.cpp 
    ksectionlist.cpp 
    kcoordrangelist.cpp 
    kbordercoltextexport.cpp 

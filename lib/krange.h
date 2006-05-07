@@ -41,11 +41,14 @@ class KRange
     KRange &operator=( const KRange &R ) { Start = R.Start; End = R.End; return *this; }
 
   public:
-    bool operator==( const KRange &R ) const { return Start == R.Start && End == R.End; }
+    bool operator==( const KRange &R ) const
+         { return (Start == R.Start && End == R.End) || (!isValid() && !R.isValid()); }
 
   public: // modification access
     /** sets the first and the last index of the range */
     void set( T S, T E ) { Start = S; End = E; }
+    /** sets the first and the last index of the range */
+    void set( const KRange &R ) { Start = R.Start; End = R.End; }
     /** sets the first index of the range */
     void setStart( T S )  { Start = S; }
     /** sets the last index of the range */
@@ -66,6 +69,10 @@ class KRange
     void extendStartTo( T Limit )  { if( Start > Limit ) Start = Limit; }
     /** extends the end to Limit. If the range is invalid the behaviour is undefined */
     void extendEndTo( T Limit )    { if( End < Limit ) End = Limit; }
+    /** moves the start by D. If the range is invalid the behaviour is undefined */
+    void moveStartBy( T D )  { Start += D; }
+    /** moves the end by D. If the range is invalid the behaviour is undefined */
+    void moveEndBy( T D )    { End += D; }
     /** moves the range by D. If the range is invalid the behaviour is undefined */
     void moveBy( T D )      { Start += D; End += D; }
 
@@ -78,28 +85,28 @@ class KRange
 
   public: // logic access
     /** returns true if Value is covered */
-    bool includes( T Value )     const { return Value <= End && Value >= Start; }
-    /** returns true if range is before index. if range is invalid the behaviour is undefined */
-    bool endsBefore( T Value )   const { return End < Value; }
+    bool includes( T Value )     const { return Start <= Value && Value <= End; }
     /** returns true if range is behind index. if range is invalid the behaviour is undefined */
-    bool startsBehind( T Value ) const { return Start > Value; }
+    bool startsBehind( T Value ) const { return Value < Start; }
     /** returns true is the range starts before index. If the range is invalid the behaviour is undefined */
     bool startsBefore( T Value ) const { return Start < Value; }
-    /** returns true is the range end later then index. If the range is invalid the behaviour is undefined */
-    bool endsBehind( T Value )   const { return End > Value; }
+    /** returns true if the range ends later then index. If the range is invalid the behaviour is undefined */
+    bool endsBehind( T Value )   const { return Value < End; }
+    /** returns true if range is before index. if range is invalid the behaviour is undefined */
+    bool endsBefore( T Value )   const { return End < Value; }
 
     /** returns true is the range covers R. If one of both is invalid the behaviour is undefined */
-    bool includes( const KRange &R )     const { return End >= R.End && Start <= R.Start; }
+    bool includes( const KRange &R )     const { return R.End <= End && Start <= R.Start; }
     /** returns true is the range ends before R starts. If one of both is invalid the behaviour is undefined */
     bool endsBefore( const KRange &R )   const { return End < R.Start; }
     /** returns true is the range starts later than R ends. If one of both is invalid the behaviour is undefined */
-    bool startsBehind( const KRange &R ) const { return Start > R.End; }
+    bool startsBehind( const KRange &R ) const { return R.End < Start; }
     /** returns true is the range starts prior than R. If one of both is invalid the behaviour is undefined */
     bool startsBefore( const KRange &R ) const { return Start < R.Start; }
     /** returns true is the range ends later than R. If one of both is invalid the behaviour is undefined */
-    bool endsBehind( const KRange &R )   const { return End > R.End; }
+    bool endsBehind( const KRange &R )   const { return R.End < End; }
     /** returns true is the range shares at least one index with R. If one of both is invalid the behaviour is undefined */
-    bool overlaps( const KRange &R ) const { return Start <= R.End && End >= R.Start; }
+    bool overlaps( const KRange &R ) const { return Start <= R.End && R.Start <= End; }
 
     /** returns true if the range covers at least one index */
     bool isValid() const { return Start != null() && Start <= End; }

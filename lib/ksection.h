@@ -67,14 +67,18 @@ class KSection : public KRange<int>
       * If the section is invalid the behaviour is undefined
       */
     void setEndByWidth( int Width );
+    /** restricts the end by width. If the section is invalid the behaviour is undefined */
+    void restrictEndByWidth( int Width );
     /** moves the range defined by a new start.
      * If the range is invalid the behaviour is undefined
      */
     void moveToStart( int S );
-    /** moves the range defined by a new start.
+    /** moves the range defined by a new end.
      * If the range is invalid the behaviour is undefined
      */
     void moveToEnd( int E );
+
+    void adaptToChange( int Pos, int RemovedLength, int InsertedLength );
 
   public:
     /**
@@ -100,6 +104,7 @@ inline void KSection::setStartByWidth( int Width )  { setStart( end()-Width+1 );
 inline void KSection::setEndByWidth( int Width )    { setEnd( start()+Width-1 ); }
 inline void KSection::setStartBehind( KSection S )  { setStart( S.end()+1 ); }
 inline void KSection::setEndBefore( KSection S )    { setEnd( S.start()-1 ); }
+inline void KSection::restrictEndByWidth( int Width ) { restrictEndTo( start()+Width-1 ); }
 
 inline void KSection::moveToStart( int S ) { setEnd( S+width()-1 ); setStart( S ); }
 inline void KSection::moveToEnd( int E )   { setStart( E-width()+1 ); setEnd( E ); }
