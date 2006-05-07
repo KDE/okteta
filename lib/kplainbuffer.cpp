@@ -34,6 +34,7 @@ KPlainBuffer::KPlainBuffer( char *D, unsigned int S, int RS, bool KM )
    RawSize( RS<(int)S?S:RS ),
    MaxSize( -1 ),
    KeepsMemory( KM ),
+   AutoDelete( false ),
    ReadOnly( true ),
    Modified( false )
 {
@@ -45,18 +46,19 @@ KPlainBuffer::KPlainBuffer( const char *D, unsigned int S )
    RawSize( S ),
    MaxSize( -1 ),
    KeepsMemory( true ),
+   AutoDelete( false ),
    ReadOnly( true ),
    Modified( false )
 {
 }
 
-#warning this leaks!
 KPlainBuffer::KPlainBuffer( int S, int MS )
   : Data( S?new char[S]:0 ),
    Size( S ),
    RawSize( S ),
    MaxSize( MS ),
    KeepsMemory( false ),
+   AutoDelete( true ),
    ReadOnly( true ),
    Modified( false )
 {
@@ -64,6 +66,8 @@ KPlainBuffer::KPlainBuffer( int S, int MS )
 
 KPlainBuffer::~KPlainBuffer()
 {
+  if( AutoDelete )
+    delete Data;
 }
 
 

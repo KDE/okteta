@@ -73,12 +73,14 @@ class KPlainBuffer : public KDataBuffer
     /** sets whether the memory given by setData or in the constructor should be kept on resize
       */
     void setKeepsMemory( bool KM = true );
+    void setAutoDelete( bool AD = true );
 
   public:
     char *data() const;
     int maxSize() const;
-    /** returns whether the memory of the byte array is kept */
+    /** returns whether the memory of the byte array is kept on resize */
     bool keepsMemory() const;
+    bool autoDelete() const;
 
   protected:
     /** resizes the buffer, if possible, saving the data and splitting the data, if demanded
@@ -100,6 +102,8 @@ class KPlainBuffer : public KDataBuffer
     int MaxSize;
     /** flag whether the initially given memory should be kept */
     bool KeepsMemory:1;
+    /** flag whether the  */
+    bool AutoDelete:1;
     /**  */
     bool ReadOnly:1;
     /** */
@@ -122,10 +126,12 @@ inline void KPlainBuffer::setReadOnly( bool RO )    { ReadOnly = RO; }
 inline void KPlainBuffer::setModified( bool M )     { Modified = M; }
 inline void KPlainBuffer::setMaxSize( int MS )      { MaxSize = MS; }
 inline void KPlainBuffer::setKeepsMemory( bool KM ) { KeepsMemory = KM; }
+inline void KPlainBuffer::setAutoDelete( bool AD )  { AutoDelete = AD; }
 
 inline char *KPlainBuffer::data()       const { return Data; }
 inline int KPlainBuffer::maxSize()      const { return MaxSize; }
 inline bool KPlainBuffer::keepsMemory() const { return KeepsMemory; }
+inline bool KPlainBuffer::autoDelete()  const { return AutoDelete; }
 }
 
 #endif
