@@ -18,9 +18,8 @@
 //#include <kdebug.h>
 
 // qt specific
-#include <qpainter.h>
-//Added by qt3to4:
-#include <Q3PtrList>
+#include <QListIterator>
+#include <QPainter>
 // lib specific
 #include "kcolumn.h"
 #include "kcolumnsview.h"
@@ -42,12 +41,12 @@ KColumnsView::KColumnsView( /*bool R,*/ QWidget *Parent, const char *Name, Qt::W
   viewport()->setBackgroundRole ( QPalette::Base );
   setBackgroundRole( QPalette::Background );
   viewport()->setFocusProxy( this );
-
-  Columns.setAutoDelete( true );
 }
 
 KColumnsView::~KColumnsView()
 {
+  while( !Columns.isEmpty() )
+    delete Columns.takeFirst();
 }
 
 
@@ -60,8 +59,9 @@ void KColumnsView::setNoOfLines( int NewNoOfLines )
 void KColumnsView::setLineHeight( KPixelY LH )
 {
   LineHeight = LH;
-  for( KColumn *C=Columns.first(); C; C=Columns.next() )
-    C->setLineHeight( LineHeight );
+  QListIterator<KColumn*> it( Columns );
+  while( it.hasNext() )
+    it.next()->setLineHeight( LineHeight );
   verticalScrollBar()->setSingleStep( LineHeight );
 
   updateLineBufferSize();
@@ -71,10 +71,12 @@ void KColumnsView::setLineHeight( KPixelY LH )
 void KColumnsView::updateWidths()
 {
   TotalWidth = 0;
-  for( KColumn *C=Columns.first(); C; C=Columns.next() )
+  QListIterator<KColumn*> it( Columns );
+  while( it.hasNext() )
   {
-    C->setX( TotalWidth );
-    TotalWidth += C->visibleWidth();
+    KColumn *Column = it.next();
+    Column->setX( TotalWidth );
+    TotalWidth += Column->visibleWidth();
   }
 
   updateLineBufferSize();
@@ -118,7 +120,11 @@ void KColumnsView::addColumn( KColumn *C )
 
 void KColumnsView::removeColumn( KColumn *C )
 {
-  Columns.remove( C );
+  int Pos = Columns.indexOf( C );
+  if( Pos != -1 )
+    Columns.removeAt( Pos );
+
+  delete C;
 
   updateWidths();
 }
@@ -154,10 +160,14 @@ void KColumnsView::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
     KPixelYs AffectedYs( cy, ch, true );
 
     // collect affected columns
-    Q3PtrList<KColumn> RedrawColumns;
-    for( KColumn *C=Columns.first(); C; C=Columns.next() )
-      if( C->isVisible() && C->overlaps(AffectedXs) )
-        RedrawColumns.append( C );
+    QList<KColumn*> RedrawColumns;
+    QListIterator<KColumn*> it( Columns );
+    while( it.hasNext() )
+    {
+      KColumn *Column = it.next();
+      if( Column->isVisible() && Column->overlaps(AffectedXs) )
+        RedrawColumns.append( Column );
+    }
 
     // any lines to be drawn?
     if( NoOfLines > 0 )
@@ -173,13 +183,15 @@ void KColumnsView::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
         Paint.initFrom( this );
 
         // starting painting with the first line
-        KColumn *C = RedrawColumns.first();
-        Paint.translate( C->x(), 0 );
+        QListIterator<KColumn*> it( RedrawColumns );
+        if( it.hasNext() )
+          Paint.translate( it.next()->x(), 0 );
 
-        for( ; C; C=RedrawColumns.next() )
+        while( it.hasNext() )
         {
-          C->paintFirstLine( &Paint, AffectedXs, AffectedLines.start() );
-          Paint.translate( C->width(), 0 );
+          KColumn *Column = it.next();
+          Column->paintFirstLine( &Paint, AffectedXs, AffectedLines.start() );
+          Paint.translate( Column->width(), 0 );
         }
 
         // Go through the other lines
@@ -204,13 +216,15 @@ void KColumnsView::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
           Paint.begin( &LineBuffer );
           Paint.initFrom( this );
 
-          KColumn *C = RedrawColumns.first();
-          Paint.translate( C->x(), 0 );
+          QListIterator<KColumn*> it( RedrawColumns );
+          if( it.hasNext() )
+            Paint.translate( it.next()->x(), 0 );
 
-          for( ; C; C=RedrawColumns.next() )
+          while( it.hasNext() )
           {
-            C->paintNextLine( &Paint );
-            Paint.translate( C->width(), 0 );
+            KColumn *Column = it.next();
+            Column->paintNextLine( &Paint );
+            Paint.translate( Column->width(), 0 );
           }
 
           if( HorizontalGrid && cx < TotalWidth )
@@ -223,8 +237,9 @@ void KColumnsView::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
     AffectedYs.setStart( totalHeight() );
     if( AffectedYs.isValid() )
     {
-      for( KColumn *C = RedrawColumns.first(); C; C=RedrawColumns.next() )
-        C->paintEmptyColumn( P, AffectedXs, AffectedYs );
+      QListIterator<KColumn*> it( RedrawColumns );
+      while( it.hasNext() )
+        it.next()->paintEmptyColumn( P, AffectedXs, AffectedYs );
     }
   }
 

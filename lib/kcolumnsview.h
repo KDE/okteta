@@ -19,9 +19,9 @@
 #define KHE_KCOLUMNSVIEW_H
 
 // qt specific
-#include <q3ptrlist.h>
-#include <qwidget.h>
-#include <qpixmap.h>
+#include <QList>
+#include <QWidget>
+#include <QPixmap>
 #include <q3scrollview.h>
 // lib specific
 #include "kadds.h"
@@ -121,7 +121,7 @@ class KColumnsView : public Q3ScrollView
 
   protected: // calculated
     /** collection of all the columns. All columns will be autodeleted. */
-    Q3PtrList<KColumn> Columns;
+    QList<KColumn*> Columns;
     /** the number of lines which the column view has */
     int NoOfLines;
     /** the height of each line in pixels */

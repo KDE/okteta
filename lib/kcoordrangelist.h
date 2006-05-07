@@ -19,17 +19,16 @@
 #define KHE_KCOORDRANGELIST_H
 
 // qt specific
-#include <q3valuelist.h>
+#include <QLinkedList>
 // lib specific
 #include "kcoordrange.h"
 
 namespace KHE {
 
-typedef Q3ValueList<KCoordRange> KCoordRangeBasicList;
 /**
 @author Friedrich W. H.  Kossebau
 */
-class KCoordRangeList : public KCoordRangeBasicList
+class KCoordRangeList : public QLinkedList<KCoordRange>
 {
   public:
     KCoordRangeList();

@@ -19,17 +19,16 @@
 #define KHE_KSECTIONLIST_H
 
 // qt specific
-#include <q3valuelist.h>
+#include <QLinkedList>
 // lib specific
 #include "ksection.h"
 
 namespace KHE {
 
-typedef Q3ValueList<KSection> KSectionBasicList;
 /**
 @author Friedrich W. H.  Kossebau
 */
-class KSectionList : public KSectionBasicList
+class KSectionList : public QLinkedList<KSection>
 {
   public:
     KSectionList();

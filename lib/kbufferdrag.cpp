@@ -43,11 +43,11 @@ static const char TextPlain[] =          "text/plain";
 // creates the name for the local text/plain
 static const char *localTextPlain()
 {
-  static Q3CString TextPlainLocal;
+  static QByteArray TextPlainLocal;
 
   if( TextPlainLocal.isNull() )
   {
-    TextPlainLocal = Q3CString(KGlobal::locale()->encoding()).toLower();
+    TextPlainLocal = QByteArray(KGlobal::locale()->encoding()).toLower();
     // remove the whitespaces
     int s;
     while( (s=TextPlainLocal.find(' ')) >= 0 )

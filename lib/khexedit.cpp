@@ -28,20 +28,17 @@
 #include <qtimer.h>
 #include <qcursor.h>
 #include <qapplication.h>
-//Added by qt3to4:
+#include <QListIterator>
+#include <QMouseEvent>
 #include <QWheelEvent>
-#include <QDragLeaveEvent>
-#include <Q3PtrList>
-#include <QEvent>
 #include <QKeyEvent>
+#include <QDragEnterEvent>
+//#include <QDragLeaveEvent>
 #include <QDragMoveEvent>
 #include <QDropEvent>
 #include <QShowEvent>
 #include <QResizeEvent>
 #include <QContextMenuEvent>
-#include <Q3PopupMenu>
-#include <QDragEnterEvent>
-#include <QMouseEvent>
 // kde specific
 #ifndef QT_ONLY
 #include <kglobalsettings.h>
@@ -1393,7 +1390,7 @@ void KHexEdit::repaintChanged()
   KPixelXs Xs( contentsX(), visibleWidth(), true );
 
   // collect affected buffer columns
-  Q3PtrList<KBufferColumn> RepaintColumns;
+  QList<KBufferColumn*> RepaintColumns;
 
   KBufferColumn *C = ValueColumn;
   while( true )
@@ -1410,7 +1407,7 @@ void KHexEdit::repaintChanged()
   }
 
   // any colums to paint?
-  if( RepaintColumns.count() > 0 )
+  if( RepaintColumns.size() > 0 )
   {
     KPixelYs Ys( contentsY(), visibleHeight(), true );
 
@@ -1424,27 +1421,34 @@ void KHexEdit::repaintChanged()
     {
 //       std::cout << "  changed->"<<FirstChangedIndex<<","<<LastChangedIndex<<std::endl;
 
+      QListIterator<KBufferColumn*> it( RepaintColumns );
       // only one line?
       if( ChangedRange.start().line() == ChangedRange.end().line() )
-        for( KBufferColumn *C=RepaintColumns.first(); C; C=RepaintColumns.next() )
-          paintLine( C, ChangedRange.start().line(),
+      {
+        while( it.hasNext() )
+          paintLine( it.next(), ChangedRange.start().line(),
                      KSection(ChangedRange.start().pos(),ChangedRange.end().pos()) );
+      }
       //
       else
       {
         // first line
-        for( KBufferColumn *C=RepaintColumns.first(); C; C=RepaintColumns.next() )
-          paintLine( C, ChangedRange.start().line(),
+        while( it.hasNext() )
+          paintLine( it.next(), ChangedRange.start().line(),
                      KSection(ChangedRange.start().pos(),FullPositions.end()) );
 
         // at least one full line?
         for( int l = ChangedRange.start().line()+1; l < ChangedRange.end().line(); ++l )
-          for( KBufferColumn *C=RepaintColumns.first(); C; C=RepaintColumns.next() )
-            paintLine( C, l, FullPositions );
+        {
+          it.toFront();
+          while( it.hasNext() )
+            paintLine( it.next(), l, FullPositions );
+        }
 
         // last line
-        for( KBufferColumn *C=RepaintColumns.first(); C; C=RepaintColumns.next() )
-          paintLine( C, ChangedRange.end().line(),
+        it.toFront();
+        while( it.hasNext() )
+          paintLine( it.next(), ChangedRange.end().line(),
                      KSection(FullPositions.start(),ChangedRange.end().pos()) );
       }
 
@@ -1972,7 +1976,7 @@ void KHexEdit::contentsContextMenuEvent( QContextMenuEvent *e )
 
   e->accept();
 
-  Q3PopupMenu *PopupMenu = createPopupMenu( e->pos() );
+  QPopupMenu *PopupMenu = createPopupMenu( e->pos() );
   if( !PopupMenu )
     PopupMenu = createPopupMenu();
   if( !PopupMenu )
