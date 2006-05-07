@@ -1495,8 +1495,9 @@ void KHexEdit::paintLine( KBufferColumn *C, int Line, KSection Positions )
 
   Paint.end();
   // copy to screen
-  bitBlt( viewport(), XPixels.start() - contentsX(), cy - contentsY(),
-          &LineBuffer, XPixels.start(), 0, XPixels.width(), LineHeight );
+  QPainter ScreenPainter( viewport() ); // TODO: replace linebuffer with QPainter's shadowbuffer
+  ScreenPainter.drawPixmap( XPixels.start() - contentsX(), cy - contentsY(),
+          LineBuffer, XPixels.start(), 0, XPixels.width(), LineHeight );
 }
 
 
