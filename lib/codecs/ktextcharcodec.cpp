@@ -82,7 +82,7 @@ static QTextCodec *createLatin1()
   return KGlobal::charsets()->codecForName( EncodingNames[0].Name );
 }
 
-/** heuristic seems to be doomed :(
+/* heuristic seems to be doomed :(
 static bool is8Bit( QTextCodec *Codec )
 {
   bool Result = true;

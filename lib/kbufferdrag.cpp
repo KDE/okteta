@@ -16,7 +16,6 @@
 
 
 // qt specific
-#include <q3cstring.h>
 #include <qtextcodec.h>
 // kde specific
 #include <kglobal.h>
@@ -36,10 +35,11 @@ using namespace KHE;
 static const char OctetStream[] =        "application/octet-stream";
 static const char TextPlainUTF8[] =      "text/plain;charset=UTF-8";
 static const char TextPlain[] =          "text/plain";
-static const char TextPlainLocalStub[] = "text/plain;charset=";
+//static const char TextPlainLocalStub[] = "text/plain;charset=";
 
 //static const char *BaseTypes[3] = { OctetStream, TextPlainUTF8, TextPlain };
 
+/*
 // creates the name for the local text/plain
 static const char *localTextPlain()
 {
@@ -60,15 +60,16 @@ static const char *localTextPlain()
 }
 
 // tries to create a codec by the given charset description
-static QTextCodec* codecForCharset( const Q3CString& Desc )
+static QTextCodec* codecForCharset( const QByteArray& Desc )
 {
-  int i = Desc.find( "charset=" );
+  int i = Desc.indexOf( "charset=" );
   if( i >= 0 )
   {
-    Q3CString CharSetName = Desc.mid( i+8 );
+    QByteArray CharSetName = Desc.mid( i+8 );
     // remove any further attributes
-    if( (i=CharSetName.find( ';' )) >= 0 )
-      CharSetName = CharSetName.left( i );
+    int indexOfFurther = CharSetName.indexOf( ';' );
+    if( indexOfFurther >= 0 )
+      CharSetName = CharSetName.left( indexOfFurther );
 
     // try to find codec
     return QTextCodec::codecForName( CharSetName );
@@ -76,21 +77,20 @@ static QTextCodec* codecForCharset( const Q3CString& Desc )
   // no charset=, use locale
   return KGlobal::locale()->codecForEncoding();
 }
-
+*/
 
 
 KBufferDrag::KBufferDrag( const QByteArray &D, KCoordRange Range,
                           const KOffsetColumn *OC, const KValueColumn *HC, const KCharColumn *TC,
-                          QChar SC, QChar UC, const QString &CN,
-                          QWidget *Source, const char *Name )
-  :Q3DragObject( Source, Name ),
+                          QChar SC, QChar UC, const QString &CN )
+  :BufferCopy( D ),
    CoordRange( Range ),
    NoOfCol( 0 ),
    SubstituteChar( SC ),
    UndefinedChar( UC ),
    CodecName( CN )
 {
-  setData( D );
+  //setData( "application/octet-stream", D );
 
   // print column wise?
   if( HC || TC )
@@ -101,11 +101,11 @@ KBufferDrag::KBufferDrag( const QByteArray &D, KCoordRange Range,
       Columns[NoOfCol++] = new KBorderColTextExport();
     }
     if( HC )
-      Columns[NoOfCol++] = new KValueColTextExport( HC, Data.data(), CoordRange );
+      Columns[NoOfCol++] = new KValueColTextExport( HC, BufferCopy.data(), CoordRange );
     if( TC )
     {
       if( HC ) Columns[NoOfCol++] = new KBorderColTextExport();
-      Columns[NoOfCol++] = new KCharColTextExport( TC, Data.data(), CoordRange, CodecName );
+      Columns[NoOfCol++] = new KCharColTextExport( TC, BufferCopy.data(), CoordRange, CodecName );
     }
   }
 }
@@ -118,120 +118,78 @@ KBufferDrag::~KBufferDrag()
 }
 
 
-
-void KBufferDrag::setData( const QByteArray &D )
+QStringList KBufferDrag::formats() const
 {
-  Data = D;
+  QStringList list;
+  list += QLatin1String( TextPlainUTF8 );
+  list += QLatin1String( TextPlain );
+  list += QLatin1String( OctetStream );
+  //list += QLatin1String( localTextPlain() );
+  return list;
 }
 
 
-const char *KBufferDrag::format( int i ) const
+QString KBufferDrag::createTextCopy() const
 {
-  return( i == 0 ? OctetStream :
-          i == 1 ? TextPlainUTF8 :
-          i == 2 ? TextPlain :
-          i == 3 ? localTextPlain() :
-                   0 );
-}
+  QString Result;
+  // duplicate the data and substitute all non-printable items with a space
+  KCharCodec *CharCodec = KCharCodec::createCodec( CodecName );
+  static const QChar Tab('\t');
+  static const QChar Return('\n');
+  uint Size = BufferCopy.size();
+  Result.resize( Size );
 
-
-QByteArray KBufferDrag::encodedData( const char *Format ) const
-{
-  if( Format != 0 )
+  for( uint i=0; i<Size; ++i )
   {
-    // octet stream wanted?
-    if( qstrcmp(Format,OctetStream) == 0 )
-      return( Data );
+    KHEChar B = CharCodec->decode( BufferCopy[i] );
 
-    // plain text wanted?
-    if( qstrncmp(Format,TextPlain,10) == 0 )
-    {
-      Q3CString Output;
-      QTextCodec *TextCodec = codecForCharset( Q3CString(Format).toLower() );
-      if( TextCodec == 0 )
-        return Output;
-
-      QString Text;
-      // plain copy?
-      if( NoOfCol == 0 )
-      {
-        // duplicate the data and substitute all non-printable items with a space
-        KCharCodec *CharCodec = KCharCodec::createCodec( CodecName );
-        static const QChar Tab('\t');
-        static const QChar Return('\n');
-        uint Size = Data.size();
-        Text.resize( Size );
-
-        for( uint i=0; i<Size; ++i )
-        {
-          KHEChar B = CharCodec->decode( Data[i] );
-
-          Text[i] = B.isUndefined() ? KHEChar(UndefinedChar) :
-              (!B.isPrint() && B != Tab && B != Return ) ? KHEChar(SubstituteChar) : B;
-        }
-        // clean up
-        delete CharCodec;
-      }
-      // formatted copy
-      else
-      {
-        // initialize: one for the line's newline \n
-        uint NeededChars = 1;
-        for( uint i=0; i<NoOfCol; ++i )
-          NeededChars += Columns[i]->charsPerLine();
-        // scale with the number of lines
-        NeededChars *= CoordRange.lines();
-        // find out needed size
-        Text.reserve( NeededChars );
-
-        // now fill
-        int l = CoordRange.start().line();
-        for( uint i=0; i<NoOfCol; ++i )
-          Columns[i]->printFirstLine( Text, l );
-        Text.append('\n');
-        for( ++l; l<=CoordRange.end().line(); ++l )
-        {
-          for( uint i=0; i<NoOfCol; ++i )
-            Columns[i]->printNextLine( Text );
-          Text.append('\n');
-        }
-      }
-      // generate the output
-      Output = TextCodec->fromUnicode( Text );
-      // fix end
-      //if( TextCodec->mibEnum() != 1000 )
-      //{
-        // Don't include NUL in size (QCString::resize() adds NUL)
-      //  ((QByteArray&)Output).resize( Output.length() );
-      //}
-      return Output;
-    }
+    Result[i] = B.isUndefined() ? KHEChar(UndefinedChar) :
+        (!B.isPrint() && B != Tab && B != Return ) ? KHEChar(SubstituteChar) : B;
   }
+  // clean up
+  delete CharCodec;
+
+  return Result;
+}
+
+
+QString KBufferDrag::createColumnCopy() const
+{
+  QString Result;
+  // initialize: one for the line's newline \n
+  uint NeededChars = 1;
+  for( uint i=0; i<NoOfCol; ++i )
+    NeededChars += Columns[i]->charsPerLine();
+  // scale with the number of lines
+  NeededChars *= CoordRange.lines();
+  // find out needed size
+  Result.reserve( NeededChars );
+
+  // now fill
+  int l = CoordRange.start().line();
+  for( uint i=0; i<NoOfCol; ++i )
+    Columns[i]->printFirstLine( Result, l );
+  Result.append('\n');
+  for( ++l; l<=CoordRange.end().line(); ++l )
+  {
+    for( uint i=0; i<NoOfCol; ++i )
+      Columns[i]->printNextLine( Result );
+    Result.append( '\n' );
+  }
+  return Result;
+}
+
+
+QVariant KBufferDrag::retrieveData( const QString &mimetype, QVariant::Type type ) const
+{
+  // octet stream wanted?
+  if( mimetype==QLatin1String(OctetStream) && type==QVariant::ByteArray )
+    return QVariant( BufferCopy );
+
+  // plain text wanted?
+  if( mimetype==QLatin1String(TextPlain) && type==QVariant::String )
+    return (NoOfCol==0) ? createTextCopy() : createColumnCopy();
 
   // return empty dummy
-  return QByteArray();
+  return QVariant(type);
 }
-
-
-
-bool KBufferDrag::canDecode( const QMimeSource* Source )
-{
-  bool c =( Source->provides(OctetStream) /*|| Source->provides(TextPlain)*/ );
-  return c;
-//  return( Source->provides(OctetStream) /*|| Source->provides(TextPlain)*/ );
-}
-
-
-bool KBufferDrag::decode( const QMimeSource* Source, QByteArray &Dest )
-{
-//   Dest = Source->encodedData( MediaString );
-//   return Dest.size() != 0;
-
-  bool CanDecode = Source->provides( OctetStream );
-  if( CanDecode )
-    Dest = Source->encodedData( OctetStream );
-
-  return CanDecode;
-}
-
-#include "kbufferdrag.moc"

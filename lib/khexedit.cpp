@@ -155,6 +155,8 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, Qt::
   connect( CursorBlinkTimer, SIGNAL(timeout()), this, SLOT(blinkCursor()) );
   connect( ScrollTimer,      SIGNAL(timeout()), this, SLOT(autoScrollTimerDone()) );
   connect( DragStartTimer,   SIGNAL(timeout()), this, SLOT(startDrag()) );
+  DragStartTimer->setSingleShot( true );
+  TrippleClickTimer->setSingleShot( true );
 
   viewport()->setAcceptDrops( true );
 }
@@ -802,7 +804,7 @@ QByteArray KHexEdit::selectedData() const
 }
 
 
-KBufferDrag *KHexEdit::dragObject( QWidget *Parent ) const
+KBufferDrag *KHexEdit::dragObject() const
 {
   if( !BufferRanges->hasSelection() )
     return 0;
@@ -829,7 +831,7 @@ KBufferDrag *KHexEdit::dragObject( QWidget *Parent ) const
 
   return new KBufferDrag( selectedData(), Range, OC, HC, TC,
                           charColumn().substituteChar(), charColumn().undefinedChar(),
-                          Codec->name(), Parent );
+                          Codec->name() );
 }
 
 
@@ -842,7 +844,7 @@ void KHexEdit::cut()
   if( !Drag )
     return;
 
-  QApplication::clipboard()->setData( Drag, ClipboardMode );
+  QApplication::clipboard()->setMimeData( Drag, ClipboardMode );
 
   removeSelectedData();
 }
@@ -854,7 +856,7 @@ void KHexEdit::copy()
   if( !Drag )
     return;
 
-  QApplication::clipboard()->setData( Drag, ClipboardMode );
+  QApplication::clipboard()->setMimeData( Drag, ClipboardMode );
 }
 
 
@@ -863,22 +865,20 @@ void KHexEdit::paste()
   if( isReadOnly() )
     return;
 
-  QMimeSource *Source = QApplication::clipboard()->data( ClipboardMode );
-  pasteFromSource( Source );
+  const QMimeData *Data = QApplication::clipboard()->mimeData( ClipboardMode );
+  pasteFromSource( Data );
 }
 
 
-void KHexEdit::pasteFromSource( QMimeSource *Source )
+void KHexEdit::pasteFromSource( const QMimeData *Data )
 {
-  if( !Source || !KBufferDrag::canDecode(Source) )
+  if( !Data )
     return;
 
-  QByteArray Data;
-  if( !KBufferDrag::decode(Source,Data) )
-    return;
+  QByteArray Bytes = Data->data( "application/octet-stream" );
 
-  if( !Data.isEmpty() )
-    insert( Data );
+  if( !Bytes.isEmpty() )
+    insert( Bytes );
 }
 
 
@@ -1251,11 +1251,13 @@ void KHexEdit::createCursorPixmaps()
   int Index = BufferCursor->validIndex();
 
   QPainter Paint;
-  Paint.begin( &CursorPixmaps->offPixmap(), this );
+  Paint.begin( &CursorPixmaps->offPixmap() );
+  Paint.initFrom( this );
   activeColumn().paintByte( &Paint, Index );
   Paint.end();
 
-  Paint.begin( &CursorPixmaps->onPixmap(), this );
+  Paint.begin( &CursorPixmaps->onPixmap() );
+  Paint.initFrom( this );
   activeColumn().paintCursor( &Paint, Index );
   Paint.end();
 
@@ -1481,7 +1483,8 @@ void KHexEdit::paintLine( KBufferColumn *C, int Line, KSection Positions )
 
   // to avoid flickers we first paint to the linebuffer
   QPainter Paint;
-  Paint.begin( &LineBuffer, this );
+  Paint.begin( &LineBuffer );
+  Paint.initFrom( this );
 
   Paint.translate( C->x(), 0 );
   C->paintPositions( &Paint, Line, Positions );
@@ -1556,7 +1559,7 @@ void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
     if( BufferRanges->selectionIncludes(BufferCursor->index()) )
     {
       DragStartPossible = true;
-      DragStartTimer->start( QApplication::startDragTime(), true );
+      DragStartTimer->start( QApplication::startDragTime() );
       DragStartPoint = MousePoint;
 
       unpauseCursor();
@@ -1566,7 +1569,7 @@ void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
     int RealIndex = BufferCursor->realIndex();
     if( BufferRanges->selectionStarted() )
     {
-      if( e->state() & Qt::ShiftModifier )
+      if( e->modifiers() & Qt::SHIFT )
         BufferRanges->setSelectionEnd( RealIndex );
       else
       {
@@ -1578,7 +1581,7 @@ void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
     {
       BufferRanges->setSelectionStart( RealIndex );
 
-      if( !isReadOnly() && (e->state()&Qt::ShiftModifier) ) // TODO: why only for readwrite?
+      if( !isReadOnly() && (e->modifiers()&Qt::SHIFT) ) // TODO: why only for readwrite?
         BufferRanges->setSelectionEnd( RealIndex );
     }
 
@@ -1720,7 +1723,7 @@ void KHexEdit::contentsMouseDoubleClickEvent( QMouseEvent *e )
     selectWord( Index );
 
     // as we already have a doubleclick maybe it is a tripple click
-    TrippleClickTimer->start( qApp->doubleClickInterval(), true );
+    TrippleClickTimer->start( qApp->doubleClickInterval() );
     DoubleClickPoint = e->globalPos();
   }
 //  else
@@ -1744,7 +1747,7 @@ void KHexEdit::handleMouseMove( const QPoint& Point ) // handles the move of the
 {
   // no scrolltimer and outside of viewport?
   if( !ScrollTimer->isActive() && Point.y() < contentsY() || Point.y() > contentsY() + visibleHeight() )
-    ScrollTimer->start( DefaultScrollTimerPeriod, false );
+    ScrollTimer->start( DefaultScrollTimerPeriod );
   // scrolltimer but inside of viewport?
   else if( ScrollTimer->isActive() && Point.y() >= contentsY() && Point.y() <= contentsY() + visibleHeight() )
     ScrollTimer->stop();
@@ -1799,50 +1802,54 @@ void KHexEdit::startDrag()
   DragStartPossible = false;
 
   // create data
-  Q3DragObject *Drag = dragObject( viewport() );
-  if( !Drag )
+  QMimeData *DragData = dragObject();
+  if( !DragData )
     return;
 
-  // will we only copy the data?
-  if( isReadOnly() || OverWrite )
-    Drag->dragCopy();
-  // or is this left to the user and he choose to move?
-  else if( Drag->drag() )
+  QDrag *drag = new QDrag( viewport() );
+  drag->setMimeData( DragData );
+
+  Qt::DropActions request = (isReadOnly()||OverWrite) ? Qt::CopyAction : Qt::CopyAction|Qt::MoveAction;
+  Qt::DropAction dropAction = drag->start( request );
+
+  if( dropAction == Qt::MoveAction )
     // Not inside this widget itself?
-    if( Q3DragObject::target() != this && Q3DragObject::target() != viewport() )
+    if( drag->target() != this && drag->target() != viewport() )
       removeSelectedData();
+
+  delete drag;
 }
 
 
-void KHexEdit::contentsDragEnterEvent( QDragEnterEvent *e )
+void KHexEdit::contentsDragEnterEvent( QDragEnterEvent *event )
 {
   // interesting for this widget?
-  if( isReadOnly() || !KBufferDrag::canDecode(e) )
+  if( isReadOnly() || !event->mimeData()->hasFormat("application/octet-stream") )
   {
-    e->ignore();
+    event->ignore();
     return;
   }
 
-  e->acceptAction();
+  event->accept();
   InDnD = true;
 }
 
 
-void KHexEdit::contentsDragMoveEvent( QDragMoveEvent *e )
+void KHexEdit::contentsDragMoveEvent( QDragMoveEvent *event )
 {
   // is this content still interesting for us?
-  if( isReadOnly() || !KBufferDrag::canDecode(e) )
+  if( isReadOnly() || !event->mimeData()->hasFormat("application/octet-stream") )
   {
-    e->ignore();
+    event->ignore();
     return;
   }
 
   // let text cursor follow mouse
   pauseCursor( true );
-  placeCursor( e->pos() );
+  placeCursor( event->pos() );
   unpauseCursor();
 
-  e->acceptAction();
+  event->accept();
 }
 
 
@@ -1862,10 +1869,7 @@ void KHexEdit::contentsDropEvent( QDropEvent *e )
 
   // leave state
   InDnD = false;
-  e->acceptAction();
-
-  if( !KBufferDrag::canDecode(e) ) //TODO: why do we acept the action still?
-    return;
+  e->accept();
 
   // is this an internal dnd?
   if( e->source() == this || e->source() == viewport() )
@@ -1873,7 +1877,7 @@ void KHexEdit::contentsDropEvent( QDropEvent *e )
   else
   {
    //BufferRanges->removeSelection();
-    pasteFromSource( e );
+    pasteFromSource( e->mimeData() );
   }
 
   // emit appropriate signals.
@@ -1892,7 +1896,7 @@ void KHexEdit::handleInternalDrag( QDropEvent *e )
   int InsertIndex = BufferCursor->realIndex();
 
   // is this a move?
-  if( e->action() == QDropEvent::Move )
+  if( e->proposedAction() == Qt::MoveAction )
   {
     // ignore the copy hold in the event but only move
     int NewIndex = DataBuffer->move( InsertIndex, Selection );
@@ -1906,23 +1910,24 @@ void KHexEdit::handleInternalDrag( QDropEvent *e )
   else
   {
     // get data
-    QByteArray Data;
-    if( KBufferDrag::decode(e,Data) && !Data.isEmpty() )
+    QByteArray Bytes = e->mimeData()->data( "application/octet-stream" );
+
+    if( !Bytes.isEmpty() )
     {
       if( OverWrite )
       {
-        KSection Section( InsertIndex, Data.size(), false );
+        KSection Section( InsertIndex, Bytes.size(), false );
         Section.restrictEndTo( BufferLayout->length()-1 );
         if( Section.isValid() && !BufferCursor->isBehind() )
         {
-          int NoOfReplaced = DataBuffer->replace( Section, Data.data(), Section.width() );
+          int NoOfReplaced = DataBuffer->replace( Section, Bytes.data(), Section.width() );
           BufferCursor->gotoNextByte( NoOfReplaced );
           BufferRanges->addChangedRange( Section );
         }
       }
       else
       {
-        int NoOfInserted = DataBuffer->insert( InsertIndex, Data.data(), Data.size() );
+        int NoOfInserted = DataBuffer->insert( InsertIndex, Bytes.data(), Bytes.size() );
         updateLength();
         if( NoOfInserted > 0 )
         {
@@ -1945,7 +1950,7 @@ void KHexEdit::contentsWheelEvent( QWheelEvent *e )
 {
   if( isReadOnly() )
   {
-    if( e->state() & Qt::ControlModifier )
+    if( e->modifiers() & Qt::CTRL )
     {
       if( e->delta() > 0 )
         zoomOut();

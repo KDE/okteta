@@ -46,15 +46,13 @@ void KBorderColumn::paintLine( QPainter *P )
   if( LineHeight > 0 )
   {
     KColumn::paintBlankLine( P );
-#warning "kde4: reimplement it";
-#if 0
+
     if( Middle )
     {
       int GridColor = View->style()->styleHint( QStyle::SH_Table_GridLineColor, 0, View );
-      P->setPen( GridColor != -1 ? (QRgb)GridColor : View->colorGroup().mid() );
+      P->setPen( GridColor != -1 ? (QRgb)GridColor : View->palette().mid().color() );
       P->drawLine( LineX, 0, LineX, LineHeight-1 ) ;
     }
-#endif	
   }
 }
 
@@ -75,13 +73,11 @@ void KBorderColumn::paintEmptyColumn( QPainter *P, KPixelXs Xs, KPixelYs Ys )
   KColumn::paintEmptyColumn( P,Xs,Ys );
 
   KPixelX LX = x() + LineX;
-#warning "kde4: reimplement it"  
-#if 0  
+
   if( Middle && Xs.includes(LX) )
   {
     int GridColor = View->style()->styleHint( QStyle::SH_Table_GridLineColor, 0, View );
-    P->setPen( GridColor != -1 ? (QRgb)GridColor : View->colorGroup().mid() );
+    P->setPen( GridColor != -1 ? (QRgb)GridColor : View->palette().mid().color() );
     P->drawLine( LX, Ys.start(), LX, Ys.end() ) ;
   }
-#endif  
 }

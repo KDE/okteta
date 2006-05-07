@@ -62,7 +62,7 @@ void KColumnsView::setLineHeight( KPixelY LH )
   LineHeight = LH;
   for( KColumn *C=Columns.first(); C; C=Columns.next() )
     C->setLineHeight( LineHeight );
-  verticalScrollBar()->setLineStep( LineHeight );
+  verticalScrollBar()->setSingleStep( LineHeight );
 
   updateLineBufferSize();
 }
@@ -169,7 +169,8 @@ void KColumnsView::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
       if( AffectedLines.isValid() )
       {
         QPainter Paint;
-        Paint.begin( &LineBuffer, this );
+        Paint.begin( &LineBuffer );
+        Paint.initFrom( this );
 
         // starting painting with the first line
         KColumn *C = RedrawColumns.first();
@@ -200,7 +201,8 @@ void KColumnsView::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
             break;
 
           // to avoid flickers we first paint to the linebuffer
-          Paint.begin( &LineBuffer, this );
+          Paint.begin( &LineBuffer );
+          Paint.initFrom( this );
 
           KColumn *C = RedrawColumns.first();
           Paint.translate( C->x(), 0 );

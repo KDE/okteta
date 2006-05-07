@@ -29,8 +29,8 @@ using namespace KHE;
 static const char PartId[] =          "khexedit2part";
 static const char PartName[] =        I18N_NOOP("KHexEdit2Part");
 static const char PartDescription[] = I18N_NOOP("Embedded hex editor");
-static const char PartVersion[] =     "0.2.0";
-static const char PartCopyright[] =   "(C) 2003-2004 Friedrich W. H. Kossebau";
+static const char PartVersion[] =     "0.3.0";
+static const char PartCopyright[] =   "(C) 2003-2006 Friedrich W. H. Kossebau";
 // Author
 static const char FWHKName[] =         "Friedrich W. H. Kossebau";
 static const char FWHKTask[] =         I18N_NOOP("Author");
@@ -38,8 +38,8 @@ static const char FWHKEmailAddress[] = "Friedrich.W.H@Kossebau.de";
 // static const char FWHKWebAddress[] = "http://www.kossebau.de";
 
 
-KInstance*  KHexEditPartFactory::s_instance = 0L;
-KAboutData* KHexEditPartFactory::s_about = 0L;
+KInstance*  KHexEditPartFactory::s_instance = 0;
+KAboutData* KHexEditPartFactory::s_about = 0;
 
 
 KHexEditPartFactory::KHexEditPartFactory()
@@ -66,7 +66,8 @@ KParts::Part* KHexEditPartFactory::createPartObject( QWidget *ParentWidget, cons
   //bool ReadOnlyWanted = (BrowserViewWanted || ( Classname == "KParts::ReadOnlyPart" ));
 
   // Create an instance of our Part
-  KHexEditPart* HexEditPart = new KHexEditPart( ParentWidget, WidgetName, Parent, Name, BrowserViewWanted );
+  KHexEditPart* HexEditPart = new KHexEditPart( ParentWidget, WidgetName, Parent, BrowserViewWanted );
+  HexEditPart->setObjectName( Name );
 
   return HexEditPart;
 }

@@ -28,13 +28,17 @@ namespace KHE
  */
 class KColTextExport
 {
+  public:
+    virtual ~KColTextExport();
+
   public: // API
-	virtual ~KColTextExport(){}
     virtual void printFirstLine( QString &T, int Line ) const = 0;
     virtual void printNextLine( QString &T ) const = 0;
     /** tells how much chars per line are needed */
     virtual int charsPerLine() const = 0;
 };
+
+inline KColTextExport::~KColTextExport() {}
 
 }
 

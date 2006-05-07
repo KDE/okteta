@@ -397,7 +397,7 @@ void KBufferColumn::paintPositions( QPainter *P, int Line, KSection Pos )
 {
   // clear background
   unsigned int BlankFlag = (Pos.start()!=0?StartsBefore:0) | (Pos.end()!=LastPos?EndsLater:0);
-  paintRange( P, View->palette().base(), Pos, BlankFlag );
+  paintRange( P, View->palette().base().color(), Pos, BlankFlag );
 
   // Go through the lines TODO: handle first and last line more effeciently
   // check for leading and trailing spaces
@@ -524,9 +524,9 @@ void KBufferColumn::paintMarking( QPainter *P, KSection Positions, int Index, in
 {
   const QPalette &CG = View->palette();
 
-  paintRange( P, CG.text(), Positions, Flag );
+  paintRange( P, CG.text().color(), Positions, Flag );
 
-  const QColor &BC = CG.base();
+  const QColor &BC = CG.base().color();
   // paint all the bytes affected
   for( int p=Positions.start(); p<=Positions.end(); ++p,++Index )
   {
@@ -580,15 +580,15 @@ void KBufferColumn::paintByte( QPainter *P, int Index )
   KHEChar B = Codec->decode( Byte );
 
   const QPalette &CG = View->palette();
-  QColor Color = CG.text();
-  QBrush Brush( CG.base(), Qt::SolidPattern );
+  QColor Color = CG.text().color();
+  QBrush Brush( CG.base().color(), Qt::SolidPattern );
 
   if( Index > -1 )
   {
     if( Ranges->markingIncludes(Index) )
     {
-      Brush.setColor( CG.text() );
-      Color = CG.base();
+      Brush.setColor( CG.text().color() );
+      Color = CG.base().color();
     }
     else if( Ranges->selectionIncludes(Index) )
     {
@@ -618,7 +618,7 @@ void KBufferColumn::paintFramedByte( QPainter *P, int Index, KFrameStyle FrameSt
   P->setPen( colorForChar(B) );
   if( FrameStyle == Frame )
     P->drawRect( 0, 0, ByteWidth, LineHeight );
-  else if( FrameStyle == Qt::DockLeft )
+  else if( FrameStyle == Left )
     P->drawLine( 0, 0, 0, LineHeight-1 );
   else
     P->drawLine( ByteWidth-1,0,ByteWidth-1,LineHeight-1 );

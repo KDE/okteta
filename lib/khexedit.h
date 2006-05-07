@@ -419,8 +419,8 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
 
   protected: // partial operations
     void handleMouseMove( const QPoint& Point );
-    KBufferDrag *dragObject( QWidget *Parent = 0 ) const;
-    void pasteFromSource( QMimeSource *Source );
+    KBufferDrag *dragObject() const;
+    void pasteFromSource( const QMimeData *Source );
     /** removes the section from the databuffer and updates all affected values */
     void removeData( KSection Indizes );
     /** sets ChangedRange to the range of VisibleRange that is actually changed

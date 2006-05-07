@@ -33,13 +33,14 @@ using namespace KHE;
 static const char RCFileName[] = "khexedit2partui.rc";
 
 KHexEditPart::KHexEditPart( QWidget *ParentWidget, const char *WidgetName,
-                            QObject *Parent, const char *Name,
+                            QObject *Parent,
                             bool BrowserViewWanted )
  : KParts::ReadOnlyPart( Parent )
 {
   setInstance( KHexEditPartFactory::instance() );
 
-  HexEdit = new KHexEdit( &Wrapping, ParentWidget, WidgetName );
+  HexEdit = new KHexEdit( &Wrapping, ParentWidget );
+  HexEdit->setObjectName( WidgetName );
   HexEdit->setNoOfBytesPerLine( 16 );
   HexEdit->setBufferSpacing( 3, 4, 10 );
   HexEdit->setShowUnprintable( false );
@@ -141,7 +142,7 @@ void KHexEditPart::fitActionSettings()
   ShowUnprintableAction->setChecked( HexEdit->showUnprintable() );
 
   CodingAction->setCurrentItem( (int)HexEdit->coding() );
-  EncodingAction->setCurrentItem( KCharCodec::codecNames().findIndex(HexEdit->encodingName()) );
+  EncodingAction->setCurrentItem( KCharCodec::codecNames().indexOf(HexEdit->encodingName()) );
 
   ResizeStyleAction->setCurrentItem( (int)HexEdit->resizeStyle() );
 

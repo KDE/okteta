@@ -19,7 +19,7 @@
 #define KHE_KBUFFERDRAG_H
 
 // qt specific
-#include <q3dragobject.h>
+#include <QMimeData>
 // lib specific
 #include "khe.h"
 #include "kcoordrange.h"
@@ -37,31 +37,27 @@ typedef KColTextExport* KColTextExportPtr;
 /**
   *@author Friedrich W. H. Kossebau
   */
-class KBufferDrag : public Q3DragObject
+class KBufferDrag : public QMimeData
 {
-    Q_OBJECT
-
   public:
     // TODO: make this call somewhat more generic
     KBufferDrag( const QByteArray &, KCoordRange Range,
                  const KOffsetColumn *OC, const KValueColumn *HC, const KCharColumn *TC,
-                 QChar SC, QChar UC, const QString &CN,
-                 QWidget *Source = 0, const char *Name = 0 );
+                 QChar SC, QChar UC, const QString &CN );
     ~KBufferDrag();
 
-  public: // QDragObject API
-    virtual const char *format( int i ) const;
-    virtual QByteArray encodedData( const char* ) const;
-
-  public:
-    virtual void setData( const QByteArray &);
-
-  public:
-    static bool canDecode( const QMimeSource* Source );
-    static bool decode( const QMimeSource* Source, QByteArray &Dest );
+  public: // QMimeData API
+    virtual QStringList formats() const;
+    //virtual bool hasFormat( const QString &Mimetype ) const;
+    virtual QVariant retrieveData( const QString &mimetype, QVariant::Type type ) const;
 
   protected:
-    QByteArray Data;
+    QString createTextCopy() const;
+    QString createColumnCopy() const;
+
+  protected:
+    QByteArray BufferCopy;
+
     KCoordRange CoordRange;
     /** collection of all the columns. All columns will be autodeleted. */
     KColTextExportPtr Columns[5];
