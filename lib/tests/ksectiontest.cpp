@@ -127,31 +127,31 @@ void KSectionTest::testAdaptToChange()
   KSection Section( Start, End );
   KSection OtherSection( Section );
   Section.adaptToChange( End+1, Width, Width );
-  QVERIFY( Section == OtherSection );
+  QCOMPARE( Section, OtherSection );
 
   // adaptToChange, same length, before
   Section.set( Start, End );
   OtherSection.set( Section );
   Section.adaptToChange( Start-2, 1, 1 );
-  QVERIFY( Section == OtherSection );
+  QCOMPARE( Section, OtherSection );
 
   // adaptToChange, same length, -1,-1
   Section.set( Start-1, End-1 );
   OtherSection.set( Start-1, Start-1 );
   Section.adaptToChange( Start, Width, Width );
-  QVERIFY( Section == OtherSection );
+  QCOMPARE( Section, OtherSection );
 
   // adaptToChange, same length, -1,0
   Section.set( Start-1, End );
   OtherSection.set( Section );
   Section.adaptToChange( Start, Width, Width );
-  QVERIFY( Section == OtherSection );
+  QCOMPARE( Section, OtherSection );
 
   // adaptToChange, same length, -1,+1
   Section.set( Start-1, End+1 );
   OtherSection.set( Section );
   Section.adaptToChange( Start, Width, Width );
-  QVERIFY( Section == OtherSection );
+  QCOMPARE( Section, OtherSection );
 
   // adaptToChange, same length, 0,-1
   Section.set( Start, End-1 );
@@ -163,13 +163,13 @@ void KSectionTest::testAdaptToChange()
   Section.set( Start, End );
   OtherSection.set( Section );
   Section.adaptToChange( Start, Width, Width );
-  QVERIFY( Section == OtherSection );
+  QCOMPARE( Section, OtherSection );
 
   // adaptToChange, same length, 0,+1
   Section.set( Start, End+1 );
   OtherSection.set( Section );
   Section.adaptToChange( Start, Width, Width );
-  QVERIFY( Section == OtherSection );
+  QCOMPARE( Section, OtherSection );
 
   // adaptToChange, same length, +1,-1
   Section.set( Start+1, End-1 );
@@ -185,38 +185,38 @@ void KSectionTest::testAdaptToChange()
   Section.set( Start+1, End+1 );
   OtherSection.set( End+1, End+1 );
   Section.adaptToChange( Start, Width, Width );
-  QVERIFY( Section == OtherSection );
+  QCOMPARE( Section, OtherSection );
 
 
   // adaptToChange, less length, behind
   Section.set( Start, End );
   OtherSection.set( Section );
   Section.adaptToChange( End+1, Width, Width-2 );
-  QVERIFY( Section == OtherSection );
+  QCOMPARE( Section, OtherSection );
 
   // adaptToChange, less length, before
   Section.set( Start, End );
   OtherSection.set( Start-2, End-2 );
   Section.adaptToChange( Start-Width, Width, Width-2 );
-  QVERIFY( Section == OtherSection );
+  QCOMPARE( Section, OtherSection );
 
   // adaptToChange, less length, -1,-1
   Section.set( Start-1, End-1 );
   OtherSection.set( Start-1, Start-1 );
   Section.adaptToChange( Start, Width, Width-2 );
-  QVERIFY( Section == OtherSection );
+  QCOMPARE( Section, OtherSection );
 
   // adaptToChange, less length, -1,0
   Section.set( Start-1, End );
   OtherSection.set( Start-1, End-2 );
   Section.adaptToChange( Start, Width, Width-2 );
-  QVERIFY( Section == OtherSection );
+  QCOMPARE( Section, OtherSection );
 
   // adaptToChange, less length, -1,+1
   Section.set( Start-1, End+1 );
   OtherSection.set( Start-1, End-1 );
   Section.adaptToChange( Start, Width, Width-2 );
-  QVERIFY( Section == OtherSection );
+  QCOMPARE( Section, OtherSection );
 
   // adaptToChange, less length, 0,-1
   Section.set( Start, End-1 );
@@ -227,13 +227,13 @@ void KSectionTest::testAdaptToChange()
   Section.set( Start, End );
   OtherSection.set( Start, End-2 );
   Section.adaptToChange( Start, Width, Width-2 );
-  QVERIFY( Section == OtherSection );
+  QCOMPARE( Section, OtherSection );
 
   // adaptToChange, less length, 0,+1
   Section.set( Start, End+1 );
   OtherSection.set( Start, End-1 );
   Section.adaptToChange( Start, Width, Width-2 );
-  QVERIFY( Section == OtherSection );
+  QCOMPARE( Section, OtherSection );
 
   // adaptToChange, less length, +1,-1
   Section.set( Start+1, End-1 );
@@ -249,38 +249,38 @@ void KSectionTest::testAdaptToChange()
   Section.set( Start+1, End+1 );
   OtherSection.set( End-1, End-1 );
   Section.adaptToChange( Start, Width, Width-2 );
-  QVERIFY( Section == OtherSection );
+  QCOMPARE( Section, OtherSection );
 
 
   // adaptToChange, greater length, behind
   Section.set( Start, End );
   OtherSection.set( Section );
   Section.adaptToChange( End+1, Width, Width+2 );
-  QVERIFY( Section == OtherSection );
+  QCOMPARE( Section, OtherSection );
 
   // adaptToChange, greater length, before
   Section.set( Start, End );
   OtherSection.set( Start+2, End+2 );
   Section.adaptToChange( Start-Width, Width, Width+2 );
-  QVERIFY( Section == OtherSection );
+  QCOMPARE( Section, OtherSection );
 
   // adaptToChange, greater length, -1,-1
   Section.set( Start-1, End-1 );
   OtherSection.set( Start-1, Start-1 );
   Section.adaptToChange( Start, Width, Width+2 );
-  QVERIFY( Section == OtherSection );
+  QCOMPARE( Section, OtherSection );
 
   // adaptToChange, greater length, -1,0
   Section.set( Start-1, End );
   OtherSection.set( Start-1, End+2 );
   Section.adaptToChange( Start, Width, Width+2 );
-  QVERIFY( Section == OtherSection );
+  QCOMPARE( Section, OtherSection );
 
   // adaptToChange, greater length, -1,+1
   Section.set( Start-1, End+1 );
   OtherSection.set( Start-1, End+3 );
   Section.adaptToChange( Start, Width, Width+2 );
-  QVERIFY( Section == OtherSection );
+  QCOMPARE( Section, OtherSection );
 
   // adaptToChange, greater length, 0,-1
   Section.set( Start, End-1 );
@@ -291,13 +291,13 @@ void KSectionTest::testAdaptToChange()
   Section.set( Start, End );
   OtherSection.set( Start, End+2 );
   Section.adaptToChange( Start, Width, Width+2 );
-  QVERIFY( Section == OtherSection );
+  QCOMPARE( Section, OtherSection );
 
   // adaptToChange, greater length, 0,+1
   Section.set( Start, End+1 );
   OtherSection.set( Start, End+3 );
   Section.adaptToChange( Start, Width, Width+2 );
-  QVERIFY( Section == OtherSection );
+  QCOMPARE( Section, OtherSection );
 
   // adaptToChange, greater length, +1,-1
   Section.set( Start+1, End-1 );
@@ -313,26 +313,26 @@ void KSectionTest::testAdaptToChange()
   Section.set( Start+1, End+1 );
   OtherSection.set( End+3, End+3 );
   Section.adaptToChange( Start, Width, Width+2 );
-  QVERIFY( Section == OtherSection );
+  QCOMPARE( Section, OtherSection );
 
 
   // adaptToChange, insert, behind
   Section.set( Start-1, Start-1 );
   OtherSection.set( Start-1, End );
   Section.adaptToChange( Start, 0, Width );
-  QVERIFY( Section == OtherSection );
+  QCOMPARE( Section, OtherSection );
 
   // adaptToChange, insert, middle
   Section.set( Start-1, Start );
   OtherSection.set( Start-1, End+1 );
   Section.adaptToChange( Start, 0, Width );
-  QVERIFY( Section == OtherSection );
+  QCOMPARE( Section, OtherSection );
 
   // adaptToChange, insert, before
   Section.set( Start, Start );
   OtherSection.set( End+1, End+1 );
   Section.adaptToChange( Start, 0, Width );
-  QVERIFY( Section == OtherSection );
+  QCOMPARE( Section, OtherSection );
 }
 
 QTEST_MAIN( KSectionTest )

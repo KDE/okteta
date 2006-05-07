@@ -77,7 +77,7 @@ void KBufferCoordTest::testAssign()
 
   KBufferCoord OtherCoord;
   OtherCoord = Coord;
-  QVERIFY( OtherCoord == Coord );
+  QCOMPARE( OtherCoord, Coord );
 }
 
 
@@ -124,10 +124,10 @@ void KBufferCoordTest::testGo()
   KBufferCoord OtherCoord( Coord );
   // going clockwise by one
   OtherCoord.goRight(); OtherCoord.goDown(); OtherCoord.goLeft(); OtherCoord.goUp();
-  QVERIFY( OtherCoord == Coord );
+  QCOMPARE( OtherCoord, Coord );
   // going against clockwise by one
   OtherCoord.goUp(); OtherCoord.goLeft(); OtherCoord.goDown(); OtherCoord.goRight();
-  QVERIFY( OtherCoord == Coord );
+  QCOMPARE( OtherCoord, Coord );
 }
 
 
@@ -138,11 +138,11 @@ void KBufferCoordTest::testGoN()
   // going clockwise by N
   OtherCoord.goRight( Steps ); OtherCoord.goDown( Steps );
   OtherCoord.goLeft( Steps ); OtherCoord.goUp( Steps );
-  QVERIFY( OtherCoord == Coord );
+  QCOMPARE( OtherCoord, Coord );
   // going against clockwise by N
   OtherCoord.goUp( Steps ); OtherCoord.goLeft( Steps );
   OtherCoord.goDown( Steps ); OtherCoord.goRight( Steps );
-  QVERIFY( OtherCoord == Coord );
+  QCOMPARE( OtherCoord, Coord );
 }
 
 
@@ -154,11 +154,11 @@ void KBufferCoordTest::testGotoControlled()
   // gotoStartOfNextLine(), goCRight()
   Coord.gotoStartOfNextLine();
   OtherCoord.goCRight( MaxPos );
-  QVERIFY( Coord == OtherCoord );
+  QCOMPARE( Coord, OtherCoord );
   // gotoEndOfPreviousLine(), goCLeft()
   Coord.gotoEndOfPreviousLine( MaxPos );
   OtherCoord.goCLeft( MaxPos );
-  QVERIFY( Coord == OtherCoord );
+  QCOMPARE( Coord, OtherCoord );
 }
 
 
@@ -170,7 +170,7 @@ void KBufferCoordTest::testGoLineStart()
   // goLineStart(), same line
   OtherCoord.setLine( Coord.line() );
   OtherCoord.goLineStart( Coord );
-  QVERIFY( Coord == OtherCoord );
+  QCOMPARE( OtherCoord, Coord );
   // goLineStart(), another line
   OtherCoord.goUp();
   OtherCoord.goLineStart( Coord );
@@ -185,7 +185,7 @@ void KBufferCoordTest::testGoLineEnd()
   //goLineEnd(), same line
   OtherCoord.setLine( Coord.line() );
   OtherCoord.goLineEnd( MaxPos, Coord );
-  QVERIFY( Coord == OtherCoord );
+  QCOMPARE( OtherCoord, Coord );
   // goLineEnd(), another line
   OtherCoord.goDown();
   OtherCoord.goLineEnd( MaxPos, Coord );
