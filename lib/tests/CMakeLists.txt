@@ -100,6 +100,47 @@ target_link_libraries(kcharcodectest  khexeditcommon ${KDE4_KDECORE_LIBS} ${QT_Q
 add_test(khexedit-kcharcodectest ${EXECUTABLE_OUTPUT_PATH}/kcharcodectest)
 
 
+########### next target ###############
+
+set(ktextcharcodectest_SRCS ktextcharcodectest.cpp )
+
+kde4_automoc(${ktextcharcodectest_SRCS})
+
+kde4_add_executable(ktextcharcodectest RUN_UNINSTALLED ${ktextcharcodectest_SRCS})
+
+target_link_libraries(ktextcharcodectest  khexeditcommon ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
+
+add_test(khexedit-ktextcharcodectest ${EXECUTABLE_OUTPUT_PATH}/ktextcharcodectest)
+
+
+########### next target ###############
+
+set(ktextcharcodeckcharcodeciftest_SRCS
+kcharcodeciftest.cpp ktextcharcodeckcharcodeciftest.cpp )
+
+kde4_automoc(${ktextcharcodeckcharcodeciftest_SRCS})
+
+kde4_add_executable(ktextcharcodeckcharcodeciftest RUN_UNINSTALLED ${ktextcharcodeckcharcodeciftest_SRCS})
+
+target_link_libraries(ktextcharcodeckcharcodeciftest  khexeditcommon ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
+
+add_test(khexedit-ktextcharcodeckcharcodeciftest ${EXECUTABLE_OUTPUT_PATH}/ktextcharcodeckcharcodeciftest)
+
+
+########### next target ###############
+
+set(kebcdic1047charcodeckcharcodeciftest_SRCS
+kcharcodeciftest.cpp kebcdic1047charcodeckcharcodeciftest.cpp )
+
+kde4_automoc(${kebcdic1047charcodeckcharcodeciftest_SRCS})
+
+kde4_add_executable(kebcdic1047charcodeckcharcodeciftest RUN_UNINSTALLED ${kebcdic1047charcodeckcharcodeciftest_SRCS})
+
+target_link_libraries(kebcdic1047charcodeckcharcodeciftest  khexeditcommon ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
+
+add_test(khexedit-kebcdic1047charcodeckcharcodeciftest ${EXECUTABLE_OUTPUT_PATH}/kebcdic1047charcodeckcharcodeciftest)
+
+
 ########### install files ###############
 
 endif(KDE4_BUILD_TESTS)

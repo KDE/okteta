@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kplainbufferkdatabufferiftest.h  -  description
+                          kebcdic1047charcodeckcharcodeciftest.h  -  description
                             -------------------
     begin                : Son Mai 7 2006
     copyright            : (C) 2006 by Friedrich W. H. Kossebau
@@ -16,15 +16,15 @@
 
 
 
-#ifndef KPLAINBUFFERKDATABUFFERIFTEST_H
-#define KPLAINBUFFERKDATABUFFERIFTEST_H
+#ifndef KEBCDIC1047CHARCODECKCHARCODECIFTEST_H
+#define KEBCDIC1047CHARCODECKCHARCODECIFTEST_H
 
 
 // test specific
-#include "kdatabufferiftest.h"
+#include "kcharcodeciftest.h"
 
 
-class KPlainBufferKDataBufferIfTest : public KDataBufferIfTest
+class KEBCDIC1047CharCodecKCharCodecIfTest : public KCharCodecIfTest
 {
   Q_OBJECT
 

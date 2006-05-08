@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kplainbufferkdatabufferiftest.h  -  description
+                          ktextcharcodeckcharcodeciftest.cpp  -  description
                             -------------------
     begin                : Son Mai 7 2006
     copyright            : (C) 2006 by Friedrich W. H. Kossebau
@@ -15,22 +15,29 @@
 ***************************************************************************/
 
 
-
-#ifndef KPLAINBUFFERKDATABUFFERIFTEST_H
-#define KPLAINBUFFERKDATABUFFERIFTEST_H
-
-
+// qt specific
+#include <QtTest>
+// lib specific
+#include <codecs/ktextcharcodec.h>
 // test specific
-#include "kdatabufferiftest.h"
+#include "ktextcharcodeckcharcodeciftest.h"
 
 
-class KPlainBufferKDataBufferIfTest : public KDataBufferIfTest
+using namespace KHE;
+
+
+
+void KTextCharCodecKCharCodecIfTest::init()
 {
-  Q_OBJECT
+  CharCodec = KTextCharCodec::createCodec("ISO8859-1"); // TODO: test for some more, e.g. KOI8-R
+}
 
-  public Q_SLOTS:
-    void init();
-    void cleanup();
-};
 
-#endif
+void KTextCharCodecKCharCodecIfTest::cleanup()
+{
+  delete CharCodec;
+}
+
+QTEST_MAIN( KTextCharCodecKCharCodecIfTest )
+
+#include "ktextcharcodeckcharcodeciftest.moc"

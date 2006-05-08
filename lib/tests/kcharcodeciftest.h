@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kplainbufferkdatabufferiftest.h  -  description
+                          kcharcodeciftest.h  -  description
                             -------------------
     begin                : Son Mai 7 2006
     copyright            : (C) 2006 by Friedrich W. H. Kossebau
@@ -15,22 +15,34 @@
 ***************************************************************************/
 
 
-
-#ifndef KPLAINBUFFERKDATABUFFERIFTEST_H
-#define KPLAINBUFFERKDATABUFFERIFTEST_H
-
-
-// test specific
-#include "kdatabufferiftest.h"
+#ifndef KCHARCODECIFTEST_H
+#define KCHARCODECIFTEST_H
 
 
-class KPlainBufferKDataBufferIfTest : public KDataBufferIfTest
+// qt specific
+#include <qobject.h>
+
+namespace KHE {
+class KCharCodec;
+}
+
+
+class KCharCodecIfTest : public QObject
 {
   Q_OBJECT
 
-  public Q_SLOTS:
-    void init();
-    void cleanup();
+  protected:
+    /** pointer to the buffer to test */
+    KHE::KCharCodec *CharCodec;
+
+  protected:
+    KCharCodecIfTest();
+
+  private Q_SLOTS: // test functions
+    void testEncodeDecode();
 };
+
+
+inline KCharCodecIfTest::KCharCodecIfTest() : CharCodec( 0 ) {}
 
 #endif

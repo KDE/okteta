@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kplainbufferkdatabufferiftest.h  -  description
+                          kebcdic1047charcodeckcharcodeciftest.cpp  -  description
                             -------------------
     begin                : Son Mai 7 2006
     copyright            : (C) 2006 by Friedrich W. H. Kossebau
@@ -15,22 +15,29 @@
 ***************************************************************************/
 
 
-
-#ifndef KPLAINBUFFERKDATABUFFERIFTEST_H
-#define KPLAINBUFFERKDATABUFFERIFTEST_H
-
-
+// qt specific
+#include <QtTest>
+// lib specific
+#include <codecs/kebcdic1047charcodec.h>
 // test specific
-#include "kdatabufferiftest.h"
+#include "kebcdic1047charcodeckcharcodeciftest.h"
 
 
-class KPlainBufferKDataBufferIfTest : public KDataBufferIfTest
+using namespace KHE;
+
+
+
+void KEBCDIC1047CharCodecKCharCodecIfTest::init()
 {
-  Q_OBJECT
+  CharCodec = KEBCDIC1047CharCodec::create();
+}
 
-  public Q_SLOTS:
-    void init();
-    void cleanup();
-};
 
-#endif
+void KEBCDIC1047CharCodecKCharCodecIfTest::cleanup()
+{
+  delete CharCodec;
+}
+
+QTEST_MAIN( KEBCDIC1047CharCodecKCharCodecIfTest )
+
+#include "kebcdic1047charcodeckcharcodeciftest.moc"

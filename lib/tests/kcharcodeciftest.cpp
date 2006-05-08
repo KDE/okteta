@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kplainbufferkdatabufferiftest.h  -  description
+                          kcharcodeciftest.h  -  description
                             -------------------
     begin                : Son Mai 7 2006
     copyright            : (C) 2006 by Friedrich W. H. Kossebau
@@ -15,22 +15,31 @@
 ***************************************************************************/
 
 
-
-#ifndef KPLAINBUFFERKDATABUFFERIFTEST_H
-#define KPLAINBUFFERKDATABUFFERIFTEST_H
-
-
+// qt specific
+#include <QtTest>
+// kde specific
+#include <kcharcodec.h>
 // test specific
-#include "kdatabufferiftest.h"
+#include "kcharcodeciftest.h"
+
+using namespace KHE;
+
+static const char QTextCodecWhiteSpace = 63;
 
 
-class KPlainBufferKDataBufferIfTest : public KDataBufferIfTest
+void KCharCodecIfTest::testEncodeDecode()
 {
-  Q_OBJECT
+  unsigned char c = 0;
+  do
+  {
+    ++c;
+    KHEChar UTF8 = CharCodec->decode( c );
+    char r = 0;
+    bool Success = CharCodec->encode( &r, UTF8 );
+    QCOMPARE( (unsigned char)r, c );
+    QVERIFY( Success );
+  }
+  while( c < 255 );
+}
 
-  public Q_SLOTS:
-    void init();
-    void cleanup();
-};
-
-#endif
+#include "kcharcodeciftest.moc"
