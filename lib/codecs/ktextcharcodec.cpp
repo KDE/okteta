@@ -16,7 +16,7 @@
 
 
 // qt specific
-#include "qtextcodec.h"
+#include <QTextCodec>
 // kde specific
 #include <kglobal.h>
 #include <klocale.h>
@@ -34,41 +34,42 @@ static struct KEncodingNames {
   const char *Name;
 }
 const EncodingNames[] = {
-{ ISO8859_1Encoding, "ISO 8859-1" },
-{ ISO8859_2Encoding, "ISO 8859-2" },
-{ ISO8859_3Encoding, "ISO 8859-3" },
-{ ISO8859_4Encoding, "ISO 8859-4" },
-{ ISO8859_5Encoding, "ISO 8859-5" },
-{ ISO8859_6Encoding, "ISO 8859-6" },
-{ ISO8859_7Encoding, "ISO 8859-7" },
-{ ISO8859_8Encoding, "ISO 8859-8" },
-{ ISO8859_8_IEncoding, "ISO 8859-8-I" },
-{ ISO8859_9Encoding, "ISO 8859-9" },
-{ ISO8859_11Encoding, "ISO 8859-11" },
-{ ISO8859_13Encoding, "ISO 8859-13" },
-{ ISO8859_15Encoding, "ISO 8859-15" },
-{ CP1250Encoding, "CP 1250" },
-{ CP1251Encoding, "CP 1251" },
-{ CP1252Encoding, "CP 1252" },
-{ CP1253Encoding, "CP 1253" },
-{ CP1254Encoding, "CP 1254" },
-{ CP1255Encoding, "CP 1255" },
-{ CP1256Encoding, "CP 1256" },
-{ CP1257Encoding, "CP 1257" },
-{ CP1258Encoding, "CP 1258" },
-{ IBM850Encoding, "IBM 850" },
-{ IBM866Encoding, "IBM 866" },
+{ ISO8859_1Encoding, "ISO-8859-1" },
+{ ISO8859_2Encoding, "ISO-8859-2" },
+{ ISO8859_3Encoding, "ISO-8859-3" },
+{ ISO8859_4Encoding, "ISO-8859-4" },
+{ ISO8859_5Encoding, "ISO-8859-5" },
+{ ISO8859_6Encoding, "ISO-8859-6" },
+{ ISO8859_7Encoding, "ISO-8859-7" },
+{ ISO8859_8Encoding, "ISO-8859-8" },
+{ ISO8859_8_IEncoding, "ISO-8859-8-I" },
+{ ISO8859_9Encoding, "ISO-8859-9" },
+{ ISO8859_11Encoding, "TIS-620" }, // was: ISO-8859-11
+{ ISO8859_13Encoding, "ISO-8859-13" },
+{ ISO8859_15Encoding, "ISO-8859-15" },
+{ CP1250Encoding, "windows-1250" },
+{ CP1251Encoding, "windows-1251" },
+{ CP1252Encoding, "windows-1252" },
+{ CP1253Encoding, "windows-1253" },
+{ CP1254Encoding, "windows-1254" },
+{ CP1255Encoding, "windows-1255" },
+{ CP1256Encoding, "windows-1256" },
+{ CP1257Encoding, "windows-1257" },
+{ CP1258Encoding, "windows-1258" },
+{ IBM850Encoding, "IBM850" },
+{ IBM866Encoding, "IBM866" },
 { KOI8_REncoding, "KOI8-R" },
 { KOI8_UEncoding, "KOI8-U" } };
 //TODO: WS2
-static const unsigned int NoOfEncodings = 26;
+static const unsigned int NoOfEncodings = sizeof(EncodingNames)/sizeof(struct KEncodingNames);// = 26;
 
 static bool is8Bit( QTextCodec *Codec )
 {
+  const QByteArray &Name = Codec->name();
   bool Found = false;
   for( unsigned int i=0; i<NoOfEncodings; ++i )
   {
-    if( qstrcmp(Codec->name(),EncodingNames[i].Name) == 0 )
+    if( qstrcmp(Name,EncodingNames[i].Name) == 0 )
     {
       Found = true;
       break;
@@ -169,7 +170,7 @@ KTextCharCodec *KTextCharCodec::createLocalCodec()
 
 
 KTextCharCodec *KTextCharCodec::createCodec( const QString &CodeName )
-{ 
+{
   bool Ok;
   QTextCodec *Codec = KGlobal::charsets()->codecForName( CodeName, Ok );
   if( Ok )

@@ -18,7 +18,7 @@
 #ifndef KHE_KTEXTCHARCODEC_H
 #define KHE_KTEXTCHARCODEC_H
 
-
+// lib specific
 #include "kcharcodec.h"
 
 class QTextCodec;

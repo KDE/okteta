@@ -19,7 +19,7 @@
 #define KHE_KCHARCODEC_H
 
 // qt specific
-#include <qstringlist.h>
+#include <QStringList>
 // lib specific
 #include "khe.h"
 #include "khechar.h"

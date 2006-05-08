@@ -61,7 +61,7 @@ KCharCodec *KCharCodec::createCodec( KEncoding C )
   if( C == EBCDIC1047Encoding )
     Codec = KEBCDIC1047CharCodec::create();
   else if( C == ISO8859_1Encoding )
-    Codec = KTextCharCodec::createCodec( "ISO 8859-1" );
+    Codec = KTextCharCodec::createCodec( "ISO-8859-1" );
   // LocalEncoding
   else
     Codec = 0;
