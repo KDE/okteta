@@ -87,6 +87,19 @@ target_link_libraries(kplainbufferkdatabufferiftest  khexeditcommon ${KDE4_KDECO
 add_test(khexedit-kplainbufferkdatabufferiftest ${EXECUTABLE_OUTPUT_PATH}/kplainbufferkdatabufferiftest)
 
 
+########### next target ###############
+
+set(kcharcodectest_SRCS kcharcodectest.cpp )
+
+kde4_automoc(${kcharcodectest_SRCS})
+
+kde4_add_executable(kcharcodectest RUN_UNINSTALLED ${kcharcodectest_SRCS})
+
+target_link_libraries(kcharcodectest  khexeditcommon ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
+
+add_test(khexedit-kcharcodectest ${EXECUTABLE_OUTPUT_PATH}/kcharcodectest)
+
+
 ########### install files ###############
 
 endif(KDE4_BUILD_TESTS)
