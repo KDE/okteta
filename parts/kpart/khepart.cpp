@@ -23,7 +23,7 @@
 #include <kselectaction.h>
 #include <ktoggleaction.h>
 //#include <kglobalsettings.h>
-// app specific
+// part specific
 #include "khexedit.h"
 #include "kcharcodec.h"
 #include "khepartfactory.h"
@@ -34,7 +34,7 @@ using namespace KHE;
 
 static const char RCFileName[] = "khexedit2partui.rc";
 
-KHexEditPart::KHexEditPart( QWidget *ParentWidget, 
+KHexEditPart::KHexEditPart( QWidget *ParentWidget,
                             QObject *Parent,
                             bool BrowserViewWanted )
  : KParts::ReadOnlyPart( Parent )
@@ -105,7 +105,8 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
   EncodingAction->setItems( KCharCodec::codecNames() );
   connect( EncodingAction, SIGNAL(activated(int)), this, SLOT(slotSetEncoding(int)) );
 
-  ShowUnprintableAction = new KToggleAction( i18n("Show &Unprintable Chars (<32)"), 0, this, SLOT(slotSetShowUnprintable()), actionCollection(), "view_showunprintable" );
+  ShowUnprintableAction = new KToggleAction( i18n("Show &Unprintable Chars (<32)"), actionCollection(), "view_showunprintable" );
+  connect( ShowUnprintableAction, SIGNAL(activated(int)), SLOT(slotSetShowUnprintable()) );
 
   KStdAction::zoomIn(  HexEdit, SLOT(zoomIn()),   actionCollection() );
   KStdAction::zoomOut( HexEdit, SLOT(zoomOut()),  actionCollection() );
@@ -119,7 +120,9 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
   ResizeStyleAction->setItems( List );
   connect( ResizeStyleAction, SIGNAL(activated(int)), this, SLOT(slotSetResizeStyle(int)) );
 
-  ShowOffsetColumnAction = new KToggleAction( i18n("&Line Offset"), Qt::Key_F11, this, SLOT(slotToggleOffsetColumn()), AC, "view_lineoffset" );
+  ShowOffsetColumnAction = new KToggleAction( i18n("&Line Offset"), AC, "view_lineoffset" );
+  ShowOffsetColumnAction->setShortcut( Qt::Key_F11 );
+  connect( ShowOffsetColumnAction, SIGNAL(activated(int)), SLOT(slotToggleOffsetColumn()) );
 
   // show buffer columns
   ToggleColumnsAction = new KSelectAction( i18n("&Columns"), AC, "togglecolumns" );
