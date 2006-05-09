@@ -62,7 +62,7 @@ KParts::Part* KHexEditPartFactory::createPartObject( QWidget *ParentWidget,
                                                      const char *CN, const QStringList &/*args*/ )
 {
   QByteArray Classname( CN );
-  bool BrowserViewWanted = ( CN == "Browser/View" );
+  bool BrowserViewWanted = ( Classname == "Browser/View" );
   //bool ReadOnlyWanted = (BrowserViewWanted || ( Classname == "KParts::ReadOnlyPart" ));
 
   // Create an instance of our Part
