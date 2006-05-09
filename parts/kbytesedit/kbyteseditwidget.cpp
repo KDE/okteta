@@ -26,10 +26,9 @@
 #include "kbyteseditwidget.h"
 
 
-KBytesEditWidget::KBytesEditWidget( QWidget *parent, const char *name, const QStringList & )
+KBytesEditWidget::KBytesEditWidget( QWidget *parent, const QStringList & )
   : QWidget( parent )
 {
-  setObjectName( name );
   QHBoxLayout* Layout = new QHBoxLayout( this );
   BytesEdit = new KHE::KBytesEdit( this, "BytesEdit" );
   Layout->addWidget( BytesEdit );

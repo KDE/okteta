@@ -33,8 +33,8 @@ class KHexEditPartFactory : public KParts::Factory
     virtual ~KHexEditPartFactory();
 
   public:
-    virtual KParts::Part* createPartObject( QWidget *parentWidget, const char *widgetName,
-                                            QObject *parent, const char *name,
+	virtual KParts::Part* createPartObject( QWidget *parentWidget, 
+                                            QObject *parent, 
                                             const char *classname, const QStringList &args );
     static KInstance* instance();
 

@@ -57,17 +57,16 @@ KHexEditPartFactory::~KHexEditPartFactory()
 }
 
 
-KParts::Part* KHexEditPartFactory::createPartObject( QWidget *ParentWidget, const char *WidgetName,
-                                                     QObject *Parent, const char *Name,
+KParts::Part* KHexEditPartFactory::createPartObject( QWidget *ParentWidget, 
+                                                     QObject *Parent, 
                                                      const char *CN, const QStringList &/*args*/ )
 {
   QByteArray Classname( CN );
-  bool BrowserViewWanted = ( Classname == "Browser/View" );
+  bool BrowserViewWanted = ( CN == "Browser/View" );
   //bool ReadOnlyWanted = (BrowserViewWanted || ( Classname == "KParts::ReadOnlyPart" ));
 
   // Create an instance of our Part
-  KHexEditPart* HexEditPart = new KHexEditPart( ParentWidget, WidgetName, Parent, BrowserViewWanted );
-  HexEditPart->setObjectName( Name );
+  KHexEditPart* HexEditPart = new KHexEditPart( ParentWidget, Parent, BrowserViewWanted );
 
   return HexEditPart;
 }

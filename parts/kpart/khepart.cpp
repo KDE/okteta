@@ -34,7 +34,7 @@ using namespace KHE;
 
 static const char RCFileName[] = "khexedit2partui.rc";
 
-KHexEditPart::KHexEditPart( QWidget *ParentWidget, const char *WidgetName,
+KHexEditPart::KHexEditPart( QWidget *ParentWidget, 
                             QObject *Parent,
                             bool BrowserViewWanted )
  : KParts::ReadOnlyPart( Parent )
@@ -42,7 +42,6 @@ KHexEditPart::KHexEditPart( QWidget *ParentWidget, const char *WidgetName,
   setInstance( KHexEditPartFactory::instance() );
 
   HexEdit = new KHexEdit( &Wrapping, ParentWidget );
-  HexEdit->setObjectName( WidgetName );
   HexEdit->setNoOfBytesPerLine( 16 );
   HexEdit->setBufferSpacing( 3, 4, 10 );
   HexEdit->setShowUnprintable( false );

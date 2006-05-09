@@ -49,7 +49,7 @@ class KHexEditPart : public KParts::ReadOnlyPart
     friend class KHexEditBrowserExtension;
 
   public:
-    KHexEditPart( QWidget *ParentWidget, const char *WidgetName, QObject *Parent,
+    KHexEditPart( QWidget *ParentWidget, QObject *Parent,
                   bool BrowserViewWanted );
     virtual ~KHexEditPart();
 
