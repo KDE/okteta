@@ -21,6 +21,7 @@
 #include <kaction.h>
 #include <kstdaction.h>
 #include <kselectaction.h>
+#include <ktoggleaction.h>
 //#include <kglobalsettings.h>
 // app specific
 #include "khexedit.h"
