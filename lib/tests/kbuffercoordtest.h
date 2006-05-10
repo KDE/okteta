@@ -19,7 +19,7 @@
 #define KBUFFERCOORDTEST_H
 
 // qt specific
-#include <qobject.h>
+#include <QObject>
 
 class KBufferCoordTest : public QObject
 {

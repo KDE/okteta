@@ -19,7 +19,7 @@
 #define KBYTESEDITWIDGET_H
 
 // qt specific
-#include <qwidget.h>
+#include <QWidget>
 // kde specific
 #include <khexedit/byteseditinterface.h>
 #include <khexedit/valuecolumninterface.h>

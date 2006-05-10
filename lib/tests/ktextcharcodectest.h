@@ -22,7 +22,7 @@
 class KInstance;
 
 // qt specific
-#include <qobject.h>
+#include <QObject>
 
 class KTextCharCodecTest : public QObject
 {

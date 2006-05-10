@@ -16,7 +16,7 @@
 
 
 // qt specific
-#include <qlayout.h>
+#include <QLayout>
 // kde specific
 #include <klocale.h>
 #include <kgenericfactory.h>

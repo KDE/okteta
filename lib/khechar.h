@@ -18,7 +18,7 @@
 #define KHE_KHECHAR_H
 
 // qt specific
-#include <qstring.h>
+#include <QString>
 
 namespace KHE
 {

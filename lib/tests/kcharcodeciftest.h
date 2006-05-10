@@ -20,7 +20,7 @@
 
 
 // qt specific
-#include <qobject.h>
+#include <QObject>
 
 namespace KHE {
 class KCharCodec;

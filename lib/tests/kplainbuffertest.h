@@ -20,7 +20,7 @@
 #define KPLAINBUFFERTEST_H
 
 // qt specific
-#include <qobject.h>
+#include <QObject>
 
 class KPlainBufferTest : public QObject
 {

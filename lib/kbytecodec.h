@@ -19,7 +19,7 @@
 #define KHE_KBYTECODEC_H
 
 #include "khe.h"
-#include <qstring.h>
+#include <QString>
 
 namespace KHE
 {

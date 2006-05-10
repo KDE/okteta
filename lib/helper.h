@@ -18,7 +18,7 @@
 #define KHEXEDIT_HELPER
 
 // qt specific
-#include <qcolor.h>
+#include <QColor>
 // lib specific
 #include <khechar.h>
 

@@ -20,7 +20,7 @@
 #define KFIXEDSIZEBUFFERTEST_H
 
 // qt specific
-#include <qobject.h>
+#include <QObject>
 
 class KFixedSizeBufferTest : public QObject
 {

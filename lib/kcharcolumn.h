@@ -19,7 +19,7 @@
 #define KHE_KCHARCOLUMN_H
 
 // qt specific
-#include <qstring.h>
+#include <QString>
 // lib specific
 #include "kbuffercolumn.h"
 

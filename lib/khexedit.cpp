@@ -25,7 +25,7 @@
 // qt specific
 #include <qstyle.h>
 #include <qpainter.h>
-#include <qtimer.h>
+#include <QTimer>
 #include <qcursor.h>
 #include <qapplication.h>
 #include <QListIterator>
