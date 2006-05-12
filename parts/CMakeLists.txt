@@ -1,4 +1,3 @@
-kde4_header()
 
 add_subdirectory( kbytesedit ) 
 add_subdirectory( kpart ) 
@@ -9,7 +8,6 @@ add_subdirectory( kpart )
 ########### install files ###############
 
 
-kde4_footer()
 
 
 

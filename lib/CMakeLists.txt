@@ -1,4 +1,3 @@
-kde4_header()
 
 add_subdirectory( controller )
 add_subdirectory( tests )
@@ -71,7 +70,6 @@ install_targets(${LIB_INSTALL_DIR} khexeditcommon )
 ########### install files ###############
 
 
-kde4_footer()
 
 
 

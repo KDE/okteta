@@ -1,4 +1,3 @@
-kde4_header()
 
 include_directories( ${CMAKE_SOURCE_DIR}/khexedit/lib/  )
 
@@ -23,7 +22,6 @@ install_targets(${PLUGIN_INSTALL_DIR} khexedit2part )
 install_files( ${SERVICES_INSTALL_DIR} FILES khexedit2part.desktop )
 install_files( ${DATA_INSTALL_DIR}/khexedit2part FILES khexedit2partui.rc )
 
-kde4_footer()
 
 
 
