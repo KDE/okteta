@@ -37,7 +37,7 @@ int KDataBuffer::remove( KSection Remove )
 
 int KDataBuffer::copyTo( char* Dest, int Pos, int Length ) const
 {
-  return copyTo( Dest, KSection(Pos,Length,false) );
+  return copyTo( Dest, KSection::fromWidth(Pos,Length) );
 }
 
 

@@ -40,7 +40,7 @@ void KSectionTest::testConstructorByEnd()
 
 void KSectionTest::testConstructorByWidth()
 {
-  KSection Section( Start, Width, true );
+  KSection Section = KSection::fromWidth( Start, Width );
   QCOMPARE( Section.start(), Start );
   QCOMPARE( Section.end(), End );
   QCOMPARE( Section.width(), Width );

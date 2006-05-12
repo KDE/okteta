@@ -30,16 +30,17 @@ namespace KHE
 class KSection : public KRange<int>
 {
   public:
+    /** constructs a section by width
+     * @param SI starting index
+     * @param W width of the section
+     */
+    static KSection fromWidth( int SI, int W );
+  public:
     /** constructs a section
      * @param SI starting index
      * @param EI end index
      */
     KSection( int SI, int EI );
-    /** constructs a section
-     * @param SI starting index
-     * @param W width of the section
-     */
-    KSection( int SI, int W, bool );
     KSection();
     ~KSection();
 
@@ -87,9 +88,9 @@ class KSection : public KRange<int>
     int width() const;
 };
 
+inline KSection KSection::fromWidth( int SI, int W ) { return KSection(SI,SI+W-1); }
 
 inline KSection::KSection( int SI, int EI ) : KRange<int>(SI,EI) {}
-inline KSection::KSection( int SI, int W, bool ) : KRange<int>(SI,SI+W-1) {}
 inline KSection::KSection()  {}
 inline KSection::~KSection() {}
 

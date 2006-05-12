@@ -899,7 +899,7 @@ void KHexEdit::insert( const QByteArray &D )
     else
     {
       // replacing the normal data, at least until the end
-      KSection Section( BufferCursor->realIndex(), D.size(), false );
+      KSection Section = KSection::fromWidth( BufferCursor->realIndex(), D.size() );
       Section.restrictEndTo( BufferLayout->length()-1 );
       if( Section.isValid() && !BufferCursor->isBehind() )
       {
@@ -1350,7 +1350,7 @@ void KHexEdit::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
   // Then it needs to know about inactive, insideByte and the like... well...
   // perhaps subclassing the buffer columns even more, to KCharColumn and KValueColumn?
 
-  if( !CursorPaused && visibleLines(KPixelYs(cy,ch,false)).includes(BufferCursor->line()) )
+  if( !CursorPaused && visibleLines(KPixelYs::fromWidth(cy,ch)).includes(BufferCursor->line()) )
   {
     paintActiveCursor( true );
     paintInactiveCursor( true );
@@ -1387,7 +1387,7 @@ void KHexEdit::repaintChanged()
   if( !BufferRanges->isModified() )
     return;
 
-  KPixelXs Xs( contentsX(), visibleWidth(), true );
+  KPixelXs Xs = KPixelXs::fromWidth( contentsX(), visibleWidth() );
 
   // collect affected buffer columns
   QList<KBufferColumn*> DirtyColumns;
@@ -1409,7 +1409,7 @@ void KHexEdit::repaintChanged()
   // any colums to paint?
   if( DirtyColumns.size() > 0 )
   {
-    KPixelYs Ys( contentsY(), visibleHeight(), true );
+    KPixelYs Ys = KPixelYs::fromWidth( contentsY(), visibleHeight() );
 
     // calculate affected lines/indizes
     KSection FullPositions( 0, BufferLayout->noOfBytesPerLine()-1 );
@@ -1924,7 +1924,7 @@ void KHexEdit::handleInternalDrag( QDropEvent *e )
     {
       if( OverWrite )
       {
-        KSection Section( InsertIndex, Bytes.size(), false );
+        KSection Section = KSection::fromWidth( InsertIndex, Bytes.size() );
         Section.restrictEndTo( BufferLayout->length()-1 );
         if( Section.isValid() && !BufferCursor->isBehind() )
         {

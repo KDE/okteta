@@ -28,7 +28,7 @@ KColumn::KColumn( KColumnsView *V )
  : View( V ),
    Visible( true ),  //TODO: would false be better?
    LineHeight( V->lineHeight() ),
-   XSpan( 0,0,true )
+   XSpan( KSection::fromWidth(0,0) )
 {
   V->addColumn( this );
 }

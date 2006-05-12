@@ -226,7 +226,7 @@ int KFixedSizeBuffer::compare( const KDataBuffer &Other, KSection OtherRange, un
 
   int ValueByLength = 0; // default: equal
 
-  KSection Range( Pos, OtherRange.width(), true );
+  KSection Range = KSection::fromWidth( Pos, OtherRange.width() );
   int Last = Other.size()-1;
   // 
   if( OtherRange.endsBehind(Last) )

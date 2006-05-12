@@ -125,7 +125,7 @@ void KDataBufferIfTest::testFill()
 
   static const unsigned int FillSize = 10;
   unsigned int Size = DataBuffer->size();
-  KSection Range( 0, FillSize, true );
+  KSection Range = KSection::fromWidth( 0, FillSize );
 
   KFixedSizeBuffer Copy( Size, PaintChar );
 
@@ -317,7 +317,7 @@ void KDataBufferIfTest::testMove()
 
   // prepare Copy
   static const int MoveSize = 10;
-  const KSection Origin(0, MoveSize, true );
+  const KSection Origin = KSection::fromWidth( 0, MoveSize );
   int Size = DataBuffer->size();
   KFixedSizeBuffer Copy( Size );
 
@@ -332,7 +332,7 @@ void KDataBufferIfTest::testMove()
 
   // Action: move to middle (to right)
   int DestPos = Size/2;
-  KSection Target( DestPos-Source.width(), Source.width(), true );
+  KSection Target = KSection::fromWidth( DestPos-Source.width(), Source.width() );
   int NewPos = DataBuffer->move( DestPos, Source );
 
   QCOMPARE( NewPos, Target.start() );
@@ -395,7 +395,7 @@ void KDataBufferIfTest::testReplaceEqual()
   DataBuffer->copyTo( Copy.rawData(), 0, Size );
 
   // Action: move to begin again (to left)
-  KSection Target( 0, ReplaceSize, true );
+  KSection Target = KSection::fromWidth( 0, ReplaceSize );
   unsigned int Inserted = DataBuffer->replace( Target, InsertData.rawData(), InsertSize );
 
   QCOMPARE( Inserted, InsertSize );
@@ -459,8 +459,8 @@ void KDataBufferIfTest::testReplaceLess()
   DataBuffer->copyTo( Copy.rawData(), 0, Size );
 
   // Action: replace at begin
-  KSection Source( 0, ReplaceSize, true );
-  KSection Target( 0, InsertSize, true );
+  KSection Source = KSection::fromWidth( 0, ReplaceSize );
+  KSection Target = KSection::fromWidth( 0, InsertSize );
   unsigned int Inserted = DataBuffer->replace( Source, InsertData.rawData(), InsertSize );
 
   QCOMPARE( Inserted, InsertSize );
@@ -525,8 +525,8 @@ void KDataBufferIfTest::testReplaceMore()
   DataBuffer->copyTo( Copy.rawData(), 0, Size );
 
   // Action: replace at begin
-  KSection Source( 0, ReplaceSize, true );
-  KSection Target( 0, InsertSize, true );
+  KSection Source = KSection::fromWidth( 0, ReplaceSize );
+  KSection Target = KSection::fromWidth( 0, InsertSize );
   unsigned int Inserted = DataBuffer->replace( Source, InsertData.rawData(), InsertSize );
 
   QCOMPARE( Inserted, InsertSize );

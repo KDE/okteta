@@ -107,7 +107,7 @@ inline int KFixedSizeBuffer::compare( const KDataBuffer &Other )
 { return compare( Other, KSection(0,Other.size()-1),0 ); }
 
 inline int KFixedSizeBuffer::compare( const KDataBuffer &Other, int OtherPos, int Length, unsigned int Pos )
-{ return compare( Other, KSection(OtherPos,Length,true),Pos ); }
+{ return compare( Other, KSection::fromWidth(OtherPos,Length),Pos ); }
 
 inline char *KFixedSizeBuffer::rawData() const { return Data; }
 

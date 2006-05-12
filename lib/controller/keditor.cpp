@@ -131,7 +131,7 @@ void KEditor::doEditAction( KEditAction Action )
         int Index = BufferCursor->realIndex();
         if( Index < HexEdit->BufferLayout->length() )
         {
-          HexEdit->removeData( KSection(Index,1,false) );
+          HexEdit->removeData( KSection::fromWidth(Index,1) );
           if( Index == HexEdit->BufferLayout->length() )
             BufferCursor->gotoEnd();
         }
@@ -161,7 +161,7 @@ void KEditor::doEditAction( KEditAction Action )
         int DeleteIndex = BufferCursor->realIndex() - 1;
         if( DeleteIndex >= 0 )
         {
-          HexEdit->removeData( KSection(DeleteIndex,1,false) );
+          HexEdit->removeData( KSection::fromWidth(DeleteIndex,1) );
           if( DeleteIndex == HexEdit->BufferLayout->length() )
             BufferCursor->gotoEnd();
           else

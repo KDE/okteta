@@ -139,12 +139,12 @@ void KColumnsView::paintEmptyArea( QPainter *Painter, int cx ,int cy, int cw, in
 void KColumnsView::drawContents( QPainter *Painter, int cx, int cy, int cw, int ch )
 {
   //kDebug(1501) << "drawContents(" << cx<<","<<cw<<"#"<<cy<<","<<ch<<")\n";
-  KPixelXs DirtyXs( cx, cw, true );
+  KPixelXs DirtyXs = KPixelXs::fromWidth( cx, cw );
 
   // content to be shown?
   if( DirtyXs.startsBefore(TotalWidth) )
   {
-    KPixelYs DirtyYs( cy, ch, true );
+    KPixelYs DirtyYs = KPixelYs::fromWidth( cy, ch );
 
     // collect affected columns
     QList<KColumn*> DirtyColumns;
