@@ -107,17 +107,10 @@ class KColumnsView : public Q3ScrollView
   protected: // recalculations
     /** recalculates the positions of the columns and the total width */
     void updateWidths();
-    /** ensures that the line buffer has the size of the whole line */
-    void updateLineBufferSize();
 
   protected: // painting
     void updateView();
     void repaintView();
-
-  private:
-    /** hiding it*/
-    void drawContents( QPainter* );
-
 
   protected: // calculated
     /** collection of all the columns. All columns will be autodeleted. */
@@ -134,8 +127,6 @@ class KColumnsView : public Q3ScrollView
   protected:
     // TODO: do we really want this?
     bool HorizontalGrid;
-    /** Buffer where each line is drawn to before it is copied onto the screen */
-    QPixmap  LineBuffer;
 //    bool Reversed;
 
   private:

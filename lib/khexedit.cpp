@@ -1381,23 +1381,23 @@ void KHexEdit::keyPressEvent( QKeyEvent *KeyEvent )
 
 void KHexEdit::repaintChanged()
 {
-  if( !updatesEnabled() || !viewport()->updatesEnabled() || !BufferRanges->isModified() )
-    return;
-
   // TODO: we do this only to let the scrollview handle new or removed lines. overlaps with repaintRange
   resizeContents( totalWidth(), totalHeight() );
+
+  if( !BufferRanges->isModified() )
+    return;
 
   KPixelXs Xs( contentsX(), visibleWidth(), true );
 
   // collect affected buffer columns
-  QList<KBufferColumn*> RepaintColumns;
+  QList<KBufferColumn*> DirtyColumns;
 
   KBufferColumn *C = ValueColumn;
   while( true )
   {
     if( C->isVisible() && C->overlaps(Xs) )
     {
-      RepaintColumns.append( C );
+      DirtyColumns.append( C );
       C->preparePainting( Xs );
     }
 
@@ -1407,7 +1407,7 @@ void KHexEdit::repaintChanged()
   }
 
   // any colums to paint?
-  if( RepaintColumns.size() > 0 )
+  if( DirtyColumns.size() > 0 )
   {
     KPixelYs Ys( contentsY(), visibleHeight(), true );
 
@@ -1421,35 +1421,56 @@ void KHexEdit::repaintChanged()
     {
 //       std::cout << "  changed->"<<FirstChangedIndex<<","<<LastChangedIndex<<std::endl;
 
-      QListIterator<KBufferColumn*> it( RepaintColumns );
+      KPixelY cy = ChangedRange.start().line() * LineHeight;// - contentsY();
+
+      QListIterator<KBufferColumn*> it( DirtyColumns );
       // only one line?
       if( ChangedRange.start().line() == ChangedRange.end().line() )
       {
         while( it.hasNext() )
-          paintLine( it.next(), ChangedRange.start().line(),
-                     KSection(ChangedRange.start().pos(),ChangedRange.end().pos()) );
+        {
+          KPixelXs XPixels =
+            it.next()->wideXPixelsOfPos( KSection(ChangedRange.start().pos(),ChangedRange.end().pos()) );
+
+          updateContents( XPixels.start(), cy, XPixels.width(), LineHeight );
+        }
       }
       //
       else
       {
         // first line
         while( it.hasNext() )
-          paintLine( it.next(), ChangedRange.start().line(),
-                     KSection(ChangedRange.start().pos(),FullPositions.end()) );
+        {
+          KPixelXs XPixels =
+            it.next()->wideXPixelsOfPos( KSection(ChangedRange.start().pos(),FullPositions.end()) );
+
+          updateContents( XPixels.start(), cy, XPixels.width(), LineHeight );
+        }
 
         // at least one full line?
         for( int l = ChangedRange.start().line()+1; l < ChangedRange.end().line(); ++l )
         {
+          cy += LineHeight;
           it.toFront();
           while( it.hasNext() )
-            paintLine( it.next(), l, FullPositions );
+          {
+            KPixelXs XPixels =
+              it.next()->wideXPixelsOfPos( FullPositions );
+
+            updateContents( XPixels.start(), cy, XPixels.width(), LineHeight );
+          }
         }
 
         // last line
+        cy += LineHeight;
         it.toFront();
         while( it.hasNext() )
-          paintLine( it.next(), ChangedRange.end().line(),
-                     KSection(FullPositions.start(),ChangedRange.end().pos()) );
+        {
+          KPixelXs XPixels =
+            it.next()->wideXPixelsOfPos( KSection(FullPositions.start(),ChangedRange.end().pos()) );
+
+          updateContents( XPixels.start(), cy, XPixels.width(), LineHeight );
+        }
       }
 
       // continue the search at the overnext index
@@ -1478,30 +1499,12 @@ void KHexEdit::paintLine( KBufferColumn *C, int Line, KSection Positions )
   // nothing to paint?
   if( !Positions.isValid() )
     return;
-//   std::cout << "  paintLine->"<<Line<< ":"<<FirstPos<<","<<LastPos<<std::endl;
 
-  // calculating pixel values
-  KPixelXs XPixels = C->wideXPixelsOfPos( Positions );
+  QPainter Painter( viewport() );
 
-  KPixelY cy = Line * LineHeight;
-
-  // to avoid flickers we first paint to the linebuffer
-  QPainter Paint;
-  Paint.begin( &LineBuffer );
-  Paint.initFrom( this );
-
-  Paint.translate( C->x(), 0 );
-  C->paintPositions( &Paint, Line, Positions );
-  Paint.translate( -C->x(), 0 );
-
-  if( HorizontalGrid && XPixels.start() < TotalWidth )
-    Paint.drawLine( XPixels.start(), LineHeight-1, XPixels.width(), LineHeight-1 );  // TODO: use a additional TotalHeight?
-
-  Paint.end();
-  // copy to screen
-  QPainter ScreenPainter( viewport() ); // TODO: replace linebuffer with QPainter's shadowbuffer
-  ScreenPainter.drawPixmap( XPixels.start() - contentsX(), cy - contentsY(),
-          LineBuffer, XPixels.start(), 0, XPixels.width(), LineHeight );
+  KPixelY cy = Line * LineHeight - contentsY();
+  Painter.translate( C->x(), cy );
+  C->paintPositions( &Painter, Line, Positions );
 }
 
 

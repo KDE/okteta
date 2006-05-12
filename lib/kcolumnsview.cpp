@@ -15,7 +15,7 @@
  ***************************************************************************/
 
 
-//#include <kdebug.h>
+#include <kdebug.h>
 
 // qt specific
 #include <QListIterator>
@@ -63,8 +63,6 @@ void KColumnsView::setLineHeight( KPixelY LH )
   while( it.hasNext() )
     it.next()->setLineHeight( LineHeight );
   verticalScrollBar()->setSingleStep( LineHeight );
-
-  updateLineBufferSize();
 }
 
 
@@ -78,18 +76,6 @@ void KColumnsView::updateWidths()
     Column->setX( TotalWidth );
     TotalWidth += Column->visibleWidth();
   }
-
-  updateLineBufferSize();
-}
-
-
-void KColumnsView::updateLineBufferSize()
-{
-  int w = totalWidth();
-  int h = LineHeight;
-
-  if( w != LineBuffer.width() || h != LineBuffer.height() )
-    LineBuffer = QPixmap( w, h );
 }
 
 
@@ -144,112 +130,101 @@ void KColumnsView::repaintView()
 }
 
 
-void KColumnsView::paintEmptyArea( QPainter *P, int cx ,int cy, int cw, int ch)
+void KColumnsView::paintEmptyArea( QPainter *Painter, int cx ,int cy, int cw, int ch)
 {
-    P->fillRect( cx, cy, cw, ch, palette().brush(backgroundRole()) );
+    Painter->fillRect( cx, cy, cw, ch, palette().brush(backgroundRole()) );
 }
 
 
-void KColumnsView::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
+void KColumnsView::drawContents( QPainter *Painter, int cx, int cy, int cw, int ch )
 {
   //kDebug(1501) << "drawContents(" << cx<<","<<cw<<"#"<<cy<<","<<ch<<")\n";
-  KPixelXs AffectedXs( cx, cw, true );
+  KPixelXs DirtyXs( cx, cw, true );
+
   // content to be shown?
-  if( AffectedXs.startsBefore(TotalWidth) )
+  if( DirtyXs.startsBefore(TotalWidth) )
   {
-    KPixelYs AffectedYs( cy, ch, true );
+    KPixelYs DirtyYs( cy, ch, true );
 
     // collect affected columns
-    QList<KColumn*> RedrawColumns;
+    QList<KColumn*> DirtyColumns;
     QListIterator<KColumn*> it( Columns );
     while( it.hasNext() )
     {
       KColumn *Column = it.next();
-      if( Column->isVisible() && Column->overlaps(AffectedXs) )
-        RedrawColumns.append( Column );
+      if( Column->isVisible() && Column->overlaps(DirtyXs) )
+        DirtyColumns.append( Column );
     }
 
-    // any lines to be drawn?
+    // any lines of any columns to be drawn?
     if( NoOfLines > 0 )
     {
       // calculate affected lines
-      KSection AffectedLines = visibleLines( AffectedYs );
-      AffectedLines.restrictEndTo( NoOfLines - 1 );
+      KSection DirtyLines = visibleLines( DirtyYs );
+      DirtyLines.restrictEndTo( NoOfLines - 1 );
 
-      if( AffectedLines.isValid() )
+      if( DirtyLines.isValid() )
       {
-        QPainter Paint;
-        Paint.begin( &LineBuffer );
-        Paint.initFrom( this );
+        KPixelY cy = DirtyLines.start() * LineHeight;
 
         // starting painting with the first line
-        QListIterator<KColumn*> it( RedrawColumns );
-        if( it.hasNext() )
-          Paint.translate( it.next()->x(), 0 );
+        int Line = DirtyLines.start();
+        QListIterator<KColumn*> it( DirtyColumns );
+        KColumn *Column = it.next();
+        Painter->translate( Column->x(), cy );
 
-        while( it.hasNext() )
-        {
-          KColumn *Column = it.next();
-          Column->paintFirstLine( &Paint, AffectedXs, AffectedLines.start() );
-          Paint.translate( Column->width(), 0 );
-        }
-
-        // Go through the other lines
-        KPixelY y = AffectedLines.start() * LineHeight;
-        int l = AffectedLines.start();
         while( true )
         {
-          Paint.end();
-          P->drawPixmap( cx, y, LineBuffer, cx, 0, cw, LineHeight ); // bitBlt directly impossible: lack of real coord
+          Column->paintFirstLine( Painter, DirtyXs, Line );
+          if( !it.hasNext() )
+            break;
+          Painter->translate( Column->width(), 0 );
+          Column = it.next();
+        }
+        Painter->translate( -Column->x(), 0 );
 
-          // copy to screen
-//        bitBlt( viewport(), cx - contentsX(), y - contentsY(),
-//                &LineBuffer, cx, 0, cw, LineHeight );
+        // Go through the other lines
+        while( true )
+        {
+          ++Line;
 
-          ++l;
-          y += LineHeight;
-
-          if( l > AffectedLines.end() )
+          if( Line > DirtyLines.end() )
             break;
 
-          // to avoid flickers we first paint to the linebuffer
-          Paint.begin( &LineBuffer );
-          Paint.initFrom( this );
+          QListIterator<KColumn*> it( DirtyColumns );
+          Column = it.next();
+          Painter->translate( Column->x(), LineHeight );
 
-          QListIterator<KColumn*> it( RedrawColumns );
-          if( it.hasNext() )
-            Paint.translate( it.next()->x(), 0 );
-
-          while( it.hasNext() )
+          while( true )
           {
-            KColumn *Column = it.next();
-            Column->paintNextLine( &Paint );
-            Paint.translate( Column->width(), 0 );
+            Column->paintNextLine( Painter );
+            if( !it.hasNext() )
+              break;
+            Painter->translate( Column->width(), 0 );
+            Column = it.next();
           }
-
-          if( HorizontalGrid && cx < TotalWidth )
-            Paint.drawLine( cx, LineHeight-1, TotalWidth-1, LineHeight-1 );  // TODO: use a additional TotalHeight?
+          Painter->translate( -Column->x(), 0 );
         }
+        cy = DirtyLines.end() * LineHeight;
+
+        Painter->translate( 0, -cy );
       }
     }
 
     // draw empty columns?
-    AffectedYs.setStart( totalHeight() );
-    if( AffectedYs.isValid() )
+    DirtyYs.setStart( totalHeight() );
+    if( DirtyYs.isValid() )
     {
-      QListIterator<KColumn*> it( RedrawColumns );
+      QListIterator<KColumn*> it( DirtyColumns );
       while( it.hasNext() )
-        it.next()->paintEmptyColumn( P, AffectedXs, AffectedYs );
+        it.next()->paintEmptyColumn( Painter, DirtyXs, DirtyYs );
     }
   }
 
-  // Paint empty rects
-  AffectedXs.setStart( TotalWidth );
-  if( AffectedXs.isValid() )
-    paintEmptyArea( P, AffectedXs.start(), cy, AffectedXs.width(), ch );
+  // Painter empty rects
+  DirtyXs.setStart( TotalWidth );
+  if( DirtyXs.isValid() )
+    paintEmptyArea( Painter, DirtyXs.start(), cy, DirtyXs.width(), ch );
 }
-
-// Implemented to get rid of a compiler warning
-void KColumnsView::drawContents( QPainter * ) {}
 
 #include "kcolumnsview.moc"
