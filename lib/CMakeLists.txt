@@ -1,4 +1,3 @@
-
 add_subdirectory( controller )
 add_subdirectory( tests )
 
@@ -57,14 +56,18 @@ set(khexeditcommon_LIB_SRCS ${libcontroler_SRCS} ${libcodecs_SRCS}
    kvaluecoltextexport.cpp 
    kcharcoltextexport.cpp )
 
-kde4_automoc(${khexeditcommon_LIB_SRCS})
+kde4_automoc( ${khexeditcommon_LIB_SRCS} )
 
-kde4_add_library(khexeditcommon SHARED ${khexeditcommon_LIB_SRCS})
+kde4_add_library( khexeditcommon SHARED ${khexeditcommon_LIB_SRCS} )
 
-target_link_libraries(khexeditcommon  ${KDE4_KDE3SUPPORT_LIBS}  )
+target_link_libraries( khexeditcommon  ${KDE4_KDE3SUPPORT_LIBS}  )
 
-set_target_properties(khexeditcommon PROPERTIES VERSION 1.0.0 SOVERSION 1 )
-install_targets(${LIB_INSTALL_DIR} khexeditcommon )
+set_target_properties( khexeditcommon PROPERTIES VERSION 1.0.0 SOVERSION 1 )
+install_targets( ${LIB_INSTALL_DIR} khexeditcommon )
+
+if(KDE4_BUILD_TESTS)
+add_library( testkhexeditcommon STATIC ${khexeditcommon_LIB_SRCS} )
+endif(KDE4_BUILD_TESTS)
 
 
 ########### install files ###############
