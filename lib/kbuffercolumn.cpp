@@ -618,7 +618,7 @@ void KBufferColumn::paintFramedByte( QPainter *P, int Index, KFrameStyle FrameSt
 
   P->setPen( colorForChar(B) );
   if( FrameStyle == Frame )
-    P->drawRect( 0, 0, ByteWidth, LineHeight );
+    P->drawRect( 0, 0, ByteWidth-1, LineHeight-1 );
   else if( FrameStyle == Left )
     P->drawLine( 0, 0, 0, LineHeight-1 );
   else

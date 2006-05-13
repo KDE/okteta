@@ -1189,7 +1189,8 @@ void KHexEdit::blinkCursor()
     return;
 
   // switch the cursor state
-  paintActiveCursor( !BlinkCursorVisible );
+  BlinkCursorVisible = !BlinkCursorVisible;
+  repaintCursor( activeColumn() );
 }
 
 
@@ -1216,8 +1217,9 @@ void KHexEdit::updateCursor()
 {
   createCursorPixmaps();
 
-  paintActiveCursor( true );
-  paintInactiveCursor( true );
+  BlinkCursorVisible = true;
+  repaintCursor( activeColumn() );
+  repaintCursor( inactiveColumn() );
 }
 
 
@@ -1231,14 +1233,25 @@ void KHexEdit::stopCursor()
 
 void KHexEdit::pauseCursor( bool LeaveEdit )
 {
-  paintActiveCursor( false );
-  paintInactiveCursor( false );
+  CursorPaused = true;
+
+  BlinkCursorVisible = false;
+  repaintCursor( activeColumn() );
+  repaintCursor( inactiveColumn() );
 
   if( LeaveEdit )
     ValueEditor->InEditMode = false;
-  CursorPaused = true;
 }
 
+
+void KHexEdit::repaintCursor( const KBufferColumn &Column )
+{
+  int x = Column.xOfPos( BufferCursor->pos() );
+  int y = LineHeight * BufferCursor->line();
+  int w = Column.byteWidth();
+
+  repaintContents( x,y, w,LineHeight, false );
+}
 
 void KHexEdit::createCursorPixmaps()
 {
@@ -1285,11 +1298,11 @@ void KHexEdit::pointPainterToCursor( QPainter &Painter, const KBufferColumn &Col
 }
 
 
-void KHexEdit::paintActiveCursor( bool CursorOn )
+
+void KHexEdit::drawActiveCursor()
 {
   // any reason to skip the cursor drawing?
-  if( !updatesEnabled() || !viewport()->updatesEnabled()
-      || (CursorOn && !hasFocus() && !viewport()->hasFocus() && !InDnD ) )
+  if( BlinkCursorVisible && !hasFocus() && !viewport()->hasFocus() && !InDnD )
     return;
 
   QPainter Painter;
@@ -1300,46 +1313,36 @@ void KHexEdit::paintActiveCursor( bool CursorOn )
   {
     int Index = BufferCursor->index();
 
-    if( CursorOn )
+    if( BlinkCursorVisible )
       valueColumn().paintEditedByte( &Painter, ValueEditor->EditValue, ValueEditor->ByteBuffer );
     else
       valueColumn().paintByte( &Painter, Index );
   }
   else
-  {
-
     Painter.drawPixmap( CursorPixmaps->cursorX(), 0,
-                        CursorOn?CursorPixmaps->onPixmap():CursorPixmaps->offPixmap(),
+                        BlinkCursorVisible?CursorPixmaps->onPixmap():CursorPixmaps->offPixmap(),
                         CursorPixmaps->cursorX(),0,CursorPixmaps->cursorW(),-1 );
-    // store state
-    BlinkCursorVisible = CursorOn;
-  }
 }
 
 
-void KHexEdit::paintInactiveCursor( bool CursorOn )
+void KHexEdit::drawInactiveCursor()
 {
   // any reason to skip the cursor drawing?
-  if( !updatesEnabled()
-      || !viewport()->updatesEnabled()
-      || !inactiveColumn().isVisible()
-      || (CursorOn && !hasFocus() && !viewport()->hasFocus() && !InDnD)  )
+  if( !inactiveColumn().isVisible()
+      || CursorPaused
+      || (!CursorPaused && !hasFocus() && !viewport()->hasFocus() && !InDnD)  )
     return;
 
   int Index = BufferCursor->validIndex();
 
   QPainter Painter;
   pointPainterToCursor( Painter, inactiveColumn() );
-  if( CursorOn )
-  {
-    KBufferColumn::KFrameStyle Style =
-      BufferCursor->isBehind() ? KBufferColumn::Right :
-      (OverWrite||ValueEditor->isInEditMode()) ? KBufferColumn::Frame :
-      KBufferColumn::Left;
-    inactiveColumn().paintFramedByte( &Painter, Index, Style );
-  }
-  else
-    inactiveColumn().paintByte( &Painter, Index );
+
+  KBufferColumn::KFrameStyle Style =
+    BufferCursor->isBehind() ? KBufferColumn::Right :
+    (OverWrite||ValueEditor->isInEditMode()) ? KBufferColumn::Frame :
+    KBufferColumn::Left;
+  inactiveColumn().paintFramedByte( &Painter, Index, Style );
 }
 
 
@@ -1350,10 +1353,10 @@ void KHexEdit::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
   // Then it needs to know about inactive, insideByte and the like... well...
   // perhaps subclassing the buffer columns even more, to KCharColumn and KValueColumn?
 
-  if( !CursorPaused && visibleLines(KPixelYs::fromWidth(cy,ch)).includes(BufferCursor->line()) )
+  if( visibleLines(KPixelYs::fromWidth(cy,ch)).includes(BufferCursor->line()) )
   {
-    paintActiveCursor( true );
-    paintInactiveCursor( true );
+    drawActiveCursor();
+    drawInactiveCursor();
   }
 }
 

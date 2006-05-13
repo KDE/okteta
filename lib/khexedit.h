@@ -413,8 +413,9 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     void createCursorPixmaps();
     void pointPainterToCursor( QPainter &Painter, const KBufferColumn &Column ) const;
     /** draws the blinking cursor or removes it */
-    void paintActiveCursor( bool CursorOn );
-    void paintInactiveCursor( bool CursorOn );
+    void drawActiveCursor();
+    void drawInactiveCursor();
+    void repaintCursor( const KBufferColumn &Column );
     void paintLine( KBufferColumn *C, int Line, KSection Positions );
 
   protected: // partial operations
