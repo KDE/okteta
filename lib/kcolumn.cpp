@@ -16,7 +16,7 @@
 
 
 // qt specific
-#include <qpainter.h>
+#include <QPainter>
 // lib specific
 #include "kcolumnsview.h"
 #include "kcolumn.h"
@@ -34,27 +34,34 @@ KColumn::KColumn( KColumnsView *V )
 }
 
 
-void KColumn::paintFirstLine( QPainter *P, KPixelXs, int /*FirstLine*/ )
+void KColumn::paintFirstLine( QPainter *Painter, KPixelXs, int /*FirstLine*/ )
 {
-  paintBlankLine( P );
+  paintBlankLine( Painter );
 }
 
 
-void KColumn::paintNextLine( QPainter *P )
+void KColumn::paintNextLine( QPainter *Painter )
 {
-  paintBlankLine( P );
+  paintBlankLine( Painter );
 }
 
 
-void KColumn::paintBlankLine( QPainter *P ) const
+void KColumn::paintBlankLine( QPainter *Painter ) const
 {
   if( LineHeight > 0 )
-      P->fillRect( 0,0,width(),LineHeight, View->palette().brush( View->backgroundRole() ) );
+  {
+      const QWidget *Viewport = View->viewport();
+      Painter->fillRect( 0,0, width(),LineHeight,
+                         Viewport->palette().brush(Viewport->backgroundRole()) );
+  }
 }
 
 
-void KColumn::paintEmptyColumn( QPainter *P, KPixelXs Xs, KPixelYs Ys )
+void KColumn::paintEmptyColumn( QPainter *Painter, KPixelXs Xs, KPixelYs Ys )
 {
   Xs.restrictTo( XSpan );
-  P->fillRect( Xs.start(), Ys.start(), Xs.width(), Ys.width(), View->palette().brush(View->backgroundRole()) );
+
+  const QWidget *Viewport = View->viewport();
+  Painter->fillRect( Xs.start(),Ys.start(), Xs.width(),Ys.width(),
+                     Viewport->palette().brush(Viewport->backgroundRole()) );
 }

@@ -18,7 +18,7 @@
 //#include <kdebug.h>
 
 // qt specific
-#include <qpainter.h>
+#include <QPainter>
 // lib specific
 #include "kcolumnsview.h"
 #include "kbuffercursor.h"
@@ -39,20 +39,19 @@ static const KPixelX DefaultByteSpacingWidth = 3;
 static const KPixelX DefaultGroupSpacingWidth = 9;
 static const int DefaultNoOfGroupedBytes = 4;
 
-KBufferColumn::KBufferColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R )
+KBufferColumn::KBufferColumn( KColumnsView *CV, KDataBuffer *ByteChar, KBufferLayout *L, KBufferRanges *R )
  : KColumn( CV ),
-   Buffer( B ),
+   Buffer( ByteChar ),
    Layout( L ),
    Ranges( R ),
    DigitWidth( 0 ),
    DigitBaseLine( 0 ),
-   VerticalGrid( false ),
    ByteWidth( 0 ),
    ByteSpacingWidth( DefaultByteSpacingWidth ),
    GroupSpacingWidth( DefaultGroupSpacingWidth ),
    NoOfGroupedBytes( DefaultNoOfGroupedBytes ),
-   PosX( 0L ),
-   PosRightX( 0L ),
+   PosX( 0 ),
+   PosRightX( 0 ),
    LastPos( 0 )
 {
 }
@@ -66,9 +65,9 @@ KBufferColumn::~KBufferColumn()
 
 
 
-void KBufferColumn::set( KDataBuffer *B )
+void KBufferColumn::set( KDataBuffer *ByteChar )
 {
-  Buffer= B;
+  Buffer= ByteChar;
 }
 
 
@@ -120,10 +119,9 @@ bool KBufferColumn::setSpacing( KPixelX BSW, int NoGB, KPixelX GSW )
   GroupSpacingWidth = GSW;
 
   // recalculate depend sizes
-  recalcVerticalGridX();
-
   if( PosX )
     recalcX();
+
   return true;
 }
 
@@ -137,10 +135,9 @@ bool KBufferColumn::setByteSpacingWidth( KPixelX BSW )
   ByteSpacingWidth = BSW;
 
   // recalculate depend sizes
-  recalcVerticalGridX();
-
   if( PosX )
     recalcX();
+
   return true;
 }
 
@@ -168,10 +165,9 @@ bool KBufferColumn::setGroupSpacingWidth( KPixelX GSW )
   GroupSpacingWidth = GSW;
 
   // recalculate depend sizes
-  recalcVerticalGridX();
-
   if( PosX )
     recalcX();
+
   return true;
 }
 
@@ -179,13 +175,6 @@ bool KBufferColumn::setGroupSpacingWidth( KPixelX GSW )
 void KBufferColumn::recalcByteWidth()
 {
   ByteWidth = DigitWidth;
-  recalcVerticalGridX();
-}
-
-
-void KBufferColumn::recalcVerticalGridX()
-{
-  VerticalGridX = ByteWidth-1 + GroupSpacingWidth/2;
 }
 
 
@@ -352,7 +341,6 @@ void KBufferColumn::preparePainting( KPixelXs Xs )
   // translate
   Xs.moveBy( -x() );
 
-
   // store the values
   PaintX = Xs.start();
   PaintW = Xs.width();
@@ -362,42 +350,30 @@ void KBufferColumn::preparePainting( KPixelXs Xs )
 }
 
 
-void KBufferColumn::paintFirstLine( QPainter *P, KPixelXs Xs, int FirstLine )
+void KBufferColumn::paintFirstLine( QPainter *Painter, KPixelXs Xs, int FirstLine )
 {
   preparePainting( Xs );
 
   PaintLine = FirstLine;
 
-//  kDebug(1501) << "paintFirstLine:"<<cx<<","<<cw<<"|" <<PaintX<<","<<PaintW << ")\n";
-
-//  paintPositions( P, PaintLine++, PaintPositions );
-  paintLine( P, PaintLine++ );
+  paintPositions( Painter, PaintLine++, PaintPositions );
 }
 
 
-void KBufferColumn::paintNextLine( QPainter *P )
+void KBufferColumn::paintNextLine( QPainter *Painter )
 {
-//  paintPositions( P, PaintLine++, PaintPositions );
-  paintLine( P, PaintLine++ );
+  paintPositions( Painter, PaintLine++, PaintPositions );
 }
 
 
-void KBufferColumn::paintLine( QPainter *P, int Line ) // TODO: could be removed???
-{
-//  kDebug(1501) << "paintLine line: "<<Line<<" Start: "<<PaintPositions.start()<<" End: "<<PaintPositions.end() << "\n";
-  // no bytes to paint?
-//   if( !Layout->hasContent(Line) )
-//     return;
-
-  paintPositions( P, Line, PaintPositions );
-}
-
-
-void KBufferColumn::paintPositions( QPainter *P, int Line, KSection Pos )
+void KBufferColumn::paintPositions( QPainter *Painter, int Line, KSection Pos )
 {
   // clear background
   unsigned int BlankFlag = (Pos.start()!=0?StartsBefore:0) | (Pos.end()!=LastPos?EndsLater:0);
-  paintRange( P, View->palette().base().color(), Pos, BlankFlag );
+  const QWidget *Viewport = View->viewport();
+  const QBrush &BackgroundBrush = Viewport->palette().brush( Viewport->backgroundRole() );
+
+  paintRange( Painter, BackgroundBrush, Pos, BlankFlag );
 
   // Go through the lines TODO: handle first and last line more effeciently
   // check for leading and trailing spaces
@@ -442,7 +418,7 @@ void KBufferColumn::paintPositions( QPainter *P, int Line, KSection Pos )
       PositionsPart.setEndByWidth( Marking.width() );
       if( PositionsPart.end() == Layout->lastPos(Line) )   MarkingFlag &= ~EndsLater;
       if( PositionsPart.start() == Layout->firstPos(Line)) MarkingFlag &= ~StartsBefore;
-      paintMarking( P, PositionsPart, IndizesPart.start(), MarkingFlag );
+      paintMarking( Painter, PositionsPart, IndizesPart.start(), MarkingFlag );
 
     }
     else if( Selection.includes(IndizesPart.start()) )
@@ -459,7 +435,7 @@ void KBufferColumn::paintPositions( QPainter *P, int Line, KSection Pos )
       if( PositionsPart.end() == Layout->lastPos(Line) )    SelectionFlag &= ~EndsLater;
       if( PositionsPart.start() == Layout->firstPos(Line) ) SelectionFlag &= ~StartsBefore;
 
-      paintSelection( P, PositionsPart, IndizesPart.start(), SelectionFlag );
+      paintSelection( Painter, PositionsPart, IndizesPart.start(), SelectionFlag );
     }
     else
     {
@@ -470,174 +446,154 @@ void KBufferColumn::paintPositions( QPainter *P, int Line, KSection Pos )
         IndizesPart.restrictEndTo( Selection.start()-1 );
 
       PositionsPart.setEndByWidth( IndizesPart.width() );
-      paintPlain( P, PositionsPart, IndizesPart.start() );
+      paintPlain( Painter, PositionsPart, IndizesPart.start() );
     }
     Indizes.setStartBehind( IndizesPart );
     Positions.setStartBehind( PositionsPart );
   }
-  // we don't paint grids as default, perhaps we never will though it works
-  // paintGrid( P, Positions ); // TODO: get some unmodified Positions (see three lines before)
 }
 
 
-void KBufferColumn::paintPlain( QPainter *P, KSection Positions, int Index )
+void KBufferColumn::paintPlain( QPainter *Painter, KSection Positions, int Index )
 {
+  // paint all the bytes affected
+  for( int Pos=Positions.start(); Pos<=Positions.end(); ++Pos,++Index )
+  {
+    KPixelX x = relXOfPos( Pos );
+
+    // draw the byte
+    Painter->translate( x, 0 );
+
+    char Byte = Buffer->datum( Index );
+    KHEChar ByteChar = Codec->decode( Byte );
+
+    drawByte( Painter, Byte, ByteChar, colorForChar(ByteChar) );
+
+    Painter->translate( -x, 0 );
+  }
+}
+
+
+void KBufferColumn::paintSelection( QPainter *Painter, KSection Positions, int Index, int Flag )
+{
+  const QPalette &Palette = View->viewport()->palette();
+
+  paintRange( Painter, Palette.highlight(), Positions, Flag );
+
+  const QColor &HighlightCharColor = Palette.highlightedText().color();
+  // paint all the bytes affected
+  for( int Pos=Positions.start(); Pos<=Positions.end(); ++Pos,++Index )
+  {
+    KPixelX x = relXOfPos( Pos );
+
+    // draw the byte
+    Painter->translate( x, 0 );
+
+    char Byte = Buffer->datum( Index );
+    KHEChar ByteChar = Codec->decode( Byte );
+
+    drawByte( Painter, Byte, ByteChar, HighlightCharColor );
+
+    Painter->translate( -x, 0 );
+  }
+}
+
+
+void KBufferColumn::paintMarking( QPainter *Painter, KSection Positions, int Index, int Flag )
+{
+  const QPalette &Palette = View->viewport()->palette();
+
+  paintRange( Painter, Palette.text(), Positions, Flag );
+
+  const QColor &BC = Palette.base().color();
   // paint all the bytes affected
   for( int p=Positions.start(); p<=Positions.end(); ++p,++Index )
   {
     KPixelX x = relXOfPos( p );
 
     // draw the byte
-    P->translate( x, 0 );
+    Painter->translate( x, 0 );
     char Byte = Buffer->datum( Index );
-    KHEChar B = Codec->decode( Byte );
-    drawByte( P, Byte, B, colorForChar(B) );
+    KHEChar ByteChar = Codec->decode( Byte );
+    drawByte( Painter, Byte, ByteChar, BC );
 
-    P->translate( -x, 0 );
+    Painter->translate( -x, 0 );
   }
 }
 
 
-void KBufferColumn::paintSelection( QPainter *P, KSection Positions, int Index, int Flag )
-{
-  const QPalette &CG = View->palette();
-
-  paintRange( P, CG.color(QPalette::Highlight), Positions, Flag );
-
-  const QColor &HTC = CG.color( QPalette::HighlightedText );
-  // paint all the bytes affected
-  for( int p=Positions.start(); p<=Positions.end(); ++p,++Index )
-  {
-    KPixelX x = relXOfPos( p );
-
-    // draw the byte
-    P->translate( x, 0 );
-    char Byte = Buffer->datum( Index );
-    KHEChar B = Codec->decode( Byte );
-    drawByte( P, Byte, B, HTC );
-
-    P->translate( -x, 0 );
-  }
-}
-
-
-void KBufferColumn::paintMarking( QPainter *P, KSection Positions, int Index, int Flag )
-{
-  const QPalette &CG = View->palette();
-
-  paintRange( P, CG.text().color(), Positions, Flag );
-
-  const QColor &BC = CG.base().color();
-  // paint all the bytes affected
-  for( int p=Positions.start(); p<=Positions.end(); ++p,++Index )
-  {
-    KPixelX x = relXOfPos( p );
-
-    // draw the byte
-    P->translate( x, 0 );
-    char Byte = Buffer->datum( Index );
-    KHEChar B = Codec->decode( Byte );
-    drawByte( P, Byte, B, BC );
-
-    P->translate( -x, 0 );
-  }
-}
-
-
-// TODO: smarter calculation
-void KBufferColumn::paintGrid( QPainter *P, KSection Range )
-{
-  int st = 0; // counter for spacing triggering
-  P->setPen( Qt::black );
-  // paint all the bytes affected
-  for( int p=Range.start(); p<=Range.end(); ++p,++st )
-  {
-    KPixelX x = relXOfPos( p );
-
-    // draw the byte
-    P->translate( x, 0 );
-
-    // spacing behind byte and vertical grid enabled?
-    if( st == SpacingTrigger && p != LastPos )
-      P->drawLine( VerticalGridX, 0, VerticalGridX, LineHeight-1 ) ;
-
-    P->translate( -x, 0 );
-  }
-}
-
-
-void KBufferColumn::paintRange( QPainter *P, const QColor &Color, KSection Positions, int Flag )
+void KBufferColumn::paintRange( QPainter *Painter, const QBrush &Brush, KSection Positions, int Flag )
 {
   KPixelX RangeX = Flag & StartsBefore ? relRightXOfPos( Positions.start()-1 ) + 1 : relXOfPos( Positions.start() );
   KPixelX RangeW = (Flag & EndsLater ? relXOfPos( Positions.end()+1 ): relRightXOfPos( Positions.end() ) + 1)  - RangeX;
 
-  P->fillRect( RangeX,0,RangeW,LineHeight, QBrush(Color,Qt::SolidPattern) );
+  Painter->fillRect( RangeX,0, RangeW,LineHeight, Brush );
 }
 
 
-void KBufferColumn::paintByte( QPainter *P, int Index )
+void KBufferColumn::paintByte( QPainter *Painter, int Index )
 {
   char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : EmptyByte;
-  KHEChar B = Codec->decode( Byte );
+  KHEChar ByteChar = Codec->decode( Byte );
 
-  const QPalette &CG = View->palette();
-  QColor Color = CG.text().color();
-  QBrush Brush( CG.base().color(), Qt::SolidPattern );
+  const QWidget *Viewport = View->viewport();
+  const QPalette &Palette = Viewport->palette();
+  QColor CharColor;
+  QBrush Brush = Palette.brush( Viewport->backgroundRole() );
 
   if( Index > -1 )
   {
-    if( Ranges->markingIncludes(Index) )
+    if( Ranges->selectionIncludes(Index) )
     {
-      Brush.setColor( CG.text().color() );
-      Color = CG.base().color();
+      CharColor = Palette.highlightedText().color();
+      Brush = Palette.highlight();
     }
-    else if( Ranges->selectionIncludes(Index) )
-    {
-      Brush.setColor( CG.color( QPalette::Highlight ) );
-      Color = CG.color( QPalette::HighlightedText );
-    }
+//    else if( Ranges->markingIncludes(Index) )
+//    {
+//      CharColor = Palette.base().color();
+//      Brush = Palette.text();
+//    }
     else
-    {
-      Brush.setColor( CG.color( QPalette::Base ) );
-      Color = colorForChar( B );
-    }
+      CharColor = colorForChar( ByteChar );
   }
 
-  P->fillRect( 0,0,ByteWidth,LineHeight, Brush );
+  Painter->fillRect( 0,0, ByteWidth,LineHeight, Brush );
 
   if( Index > -1 )
-    drawByte( P, Byte, B, Color );
+    drawByte( Painter, Byte, ByteChar, CharColor );
 }
 
 
-void KBufferColumn::paintFramedByte( QPainter *P, int Index, KFrameStyle FrameStyle )
+void KBufferColumn::paintFramedByte( QPainter *Painter, int Index, KFrameStyle FrameStyle )
 {
-  paintByte( P, Index );
-  char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : EmptyByte;
-  KHEChar B = Codec->decode( Byte );
+  paintByte( Painter, Index );
 
-  P->setPen( colorForChar(B) );
+  char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : EmptyByte;
+  KHEChar ByteChar = Codec->decode( Byte );
+
+  Painter->setPen( colorForChar(ByteChar) );
   if( FrameStyle == Frame )
-    P->drawRect( 0, 0, ByteWidth-1, LineHeight-1 );
+    Painter->drawRect( 0,0, ByteWidth-1,LineHeight-1 );
   else if( FrameStyle == Left )
-    P->drawLine( 0, 0, 0, LineHeight-1 );
+    Painter->drawLine( 0,0, 0,LineHeight-1 );
   else
-    P->drawLine( ByteWidth-1,0,ByteWidth-1,LineHeight-1 );
+    Painter->drawLine( ByteWidth-1,0, ByteWidth-1,LineHeight-1 );
 }
 
 
-void KBufferColumn::paintCursor( QPainter *P, int Index )
+void KBufferColumn::paintCursor( QPainter *Painter, int Index )
 {
   char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : EmptyByte;
-  KHEChar B = Codec->decode( Byte );
-  P->fillRect( 0, 0, ByteWidth, LineHeight, QBrush(colorForChar(B),Qt::SolidPattern) );
+  KHEChar ByteChar = Codec->decode( Byte );
+
+  Painter->fillRect( 0,0, ByteWidth,LineHeight, QBrush(colorForChar(ByteChar),Qt::SolidPattern) );
 }
 
 
-void KBufferColumn::drawByte( QPainter *P, char /*Byte*/, KHEChar B, const QColor &Color ) const
+void KBufferColumn::drawByte( QPainter *P, char /*Byte*/, KHEChar ByteChar, const QColor &Color ) const
 {
   P->setPen( Color );
-  P->drawText( 0, DigitBaseLine, B );
+  P->drawText( 0, DigitBaseLine, ByteChar );
 }
 
 

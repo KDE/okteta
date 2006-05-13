@@ -129,7 +129,7 @@ void KNavigator::moveCursor( KMoveAction Action, bool Select )
   if( BufferRanges->isModified() )
     HexEdit->emitSelectionSignals(); // TODO: can this be moved somewhere
 
-  HexEdit->repaintChanged();
+  HexEdit->updateChanged();
   HexEdit->ensureCursorVisible();
 
   HexEdit->unpauseCursor();

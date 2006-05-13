@@ -28,6 +28,7 @@
 
 class QPainter;
 class QColor;
+class QBrush;
 
 namespace KHE
 {
@@ -62,7 +63,7 @@ class KBufferColumn : public KColumn
     void preparePainting( KPixelXs Xs );
 
   public:
-    void paintLine( QPainter *P, int Line );
+    //void paintLine( QPainter *P, int Line );
     void paintPositions( QPainter *P, int Line, KSection Positions );
     /** paints a cursor based on the type of the byte.
       * @param Index Index of the byte to paint the cursor for. If -1 a space is used as char.
@@ -157,13 +158,8 @@ class KBufferColumn : public KColumn
     const KBufferLayout *layout() const;
     KCharCodec* codec() const;
 
-  protected:
-    /** */
-    void recalcX();
-    void recalcVerticalGridX();
 
-
-  protected: // API to be refined
+  protected: // API to be redefined
     /** default implementation simply prints the byte as ASCII */
     virtual void drawByte( QPainter *P, char Byte, KHEChar B, const QColor &Color ) const;
     /** default implementation sets byte width to one digit width */
@@ -171,11 +167,12 @@ class KBufferColumn : public KColumn
 
 
   protected:
-    void paintGrid( QPainter *P, KSection Range );
     void paintPlain( QPainter *P, KSection Positions, int Index );
     void paintSelection( QPainter *P, KSection Positions, int Index, int Flag );
     void paintMarking( QPainter *P, KSection Positions, int Index, int Flag );
-    void paintRange( QPainter *P, const QColor &Color, KSection Positions, int Flag );
+    void paintRange( QPainter *P, const QBrush &Brush, KSection Positions, int Flag );
+
+    void recalcX();
 
     bool isSelected( KSection Range, KSection *Selection, unsigned int *Flag ) const;
     bool isMarked( KSection Range, KSection *Marking, unsigned int *Flag ) const;
@@ -195,10 +192,7 @@ class KBufferColumn : public KColumn
     KPixelX DigitWidth;
     /** */
     KPixelY DigitBaseLine;
-    /** */
-    KPixelX VerticalGridX;
-    /** */
-    bool VerticalGrid;
+
 
   protected:  // individual data
     /** total width of byte display in pixel */

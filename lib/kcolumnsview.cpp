@@ -39,8 +39,9 @@ KColumnsView::KColumnsView( /*bool R,*/ QWidget *Parent, const char *Name, Qt::W
    d( 0 )
 {
   viewport()->setBackgroundRole ( QPalette::Base );
-  setBackgroundRole( QPalette::Background );
+
   viewport()->setFocusProxy( this );
+  viewport()->setFocusPolicy( Qt::WheelFocus );
 }
 
 KColumnsView::~KColumnsView()
@@ -132,7 +133,7 @@ void KColumnsView::repaintView()
 
 void KColumnsView::paintEmptyArea( QPainter *Painter, int cx ,int cy, int cw, int ch)
 {
-    Painter->fillRect( cx, cy, cw, ch, palette().brush(backgroundRole()) );
+    Painter->fillRect( cx, cy, cw, ch, viewport()->palette().brush(viewport()->backgroundRole()) );
 }
 
 

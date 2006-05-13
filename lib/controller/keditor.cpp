@@ -186,7 +186,7 @@ void KEditor::doEditAction( KEditAction Action )
     }
   }
 
-  HexEdit->repaintChanged();
+  HexEdit->updateChanged();
   HexEdit->ensureCursorVisible();
 
   HexEdit->unpauseCursor();

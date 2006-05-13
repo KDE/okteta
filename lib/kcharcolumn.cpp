@@ -18,7 +18,7 @@
 // c specific
 #include <ctype.h>
 // qt specific
-#include <qpainter.h>
+#include <QPainter>
 // kde specific
 #include <kcharsets.h>
 #include <klocale.h>
@@ -51,11 +51,14 @@ KCharColumn::~KCharColumn()
 {
 }
 
-void KCharColumn::drawByte( QPainter *P, char /*Byte*/, KHEChar B, const QColor &Color ) const
-{
-  // make a drawable String out of it
-  QString BS( B.isUndefined() ? KHEChar(UndefinedChar) : ( !(ShowUnprintable || B.isPrint()) ? KHEChar(SubstituteChar) : B ));
 
-  P->setPen( Color );
-  P->drawText( 0, DigitBaseLine, BS );
+void KCharColumn::drawByte( QPainter *Painter, char /*Byte*/, KHEChar B, const QColor &Color ) const
+{
+  // turn into a drawable String
+  QString BS( B.isUndefined() ?                   KHEChar(UndefinedChar) :
+              !(ShowUnprintable || B.isPrint()) ? KHEChar(SubstituteChar) :
+                B );
+
+  Painter->setPen( Color );
+  Painter->drawText( 0, DigitBaseLine, BS );
 }

@@ -106,7 +106,7 @@ bool KValueEditor::handleKeyPress( QKeyEvent *KeyEvent )
                   HexEdit->updateLength();
                   HexEdit->BufferRanges->addChangedRange( KSection(Index+1,HexEdit->DataBuffer->size()-1) );
                   BufferCursor->gotoRealIndex();
-                  HexEdit->repaintChanged();
+                  HexEdit->updateChanged();
                   HexEdit->ensureCursorVisible();
                   HexEdit->unpauseCursor(); // TODO: clean cursor pausing etc.!
                   doValueEditAction( ValueEdit, TestValue );
@@ -198,7 +198,7 @@ void KValueEditor::doValueEditAction( KValueEditAction Action, int Input )
     HexEdit->DataBuffer->replace( BufferCursor->index(), 1, (char*)&EditValue, 1 );
   }
 
-  HexEdit->updateCursor();
+  HexEdit->updateCursors();
 
   if( !StayInEditMode )
   {

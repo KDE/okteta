@@ -16,8 +16,8 @@
 
 
 // qt specific
-#include <qpainter.h>
-#include <qstyle.h>
+#include <QPainter>
+#include <QStyle>
 // lib specific
 #include "kcolumnsview.h"
 #include "kbordercolumn.h"
@@ -41,43 +41,47 @@ KBorderColumn::~KBorderColumn()
 }
 
 
-void KBorderColumn::paintLine( QPainter *P )
+void KBorderColumn::paintLine( QPainter *Painter )
 {
   if( LineHeight > 0 )
   {
-    KColumn::paintBlankLine( P );
+    KColumn::paintBlankLine( Painter );
 
     if( Middle )
     {
-      int GridColor = View->style()->styleHint( QStyle::SH_Table_GridLineColor, 0, View );
-      P->setPen( GridColor != -1 ? (QRgb)GridColor : View->palette().mid().color() );
-      P->drawLine( LineX, 0, LineX, LineHeight-1 ) ;
+      const QWidget *Viewport = View->viewport();
+      int GridColor = Viewport->style()->styleHint( QStyle::SH_Table_GridLineColor, 0, Viewport );
+
+      Painter->setPen( GridColor != -1 ? (QRgb)GridColor : Viewport->palette().mid().color() );
+      Painter->drawLine( LineX, 0, LineX, LineHeight-1 ) ;
     }
   }
 }
 
 
-void KBorderColumn::paintFirstLine( QPainter *P, KPixelXs , int )
+void KBorderColumn::paintFirstLine( QPainter *Painter, KPixelXs , int )
 {
-  paintLine( P );
+  paintLine( Painter );
 }
 
 
-void KBorderColumn::paintNextLine( QPainter *P )
+void KBorderColumn::paintNextLine( QPainter *Painter )
 {
-  paintLine( P );
+  paintLine( Painter );
 }
 
-void KBorderColumn::paintEmptyColumn( QPainter *P, KPixelXs Xs, KPixelYs Ys )
+void KBorderColumn::paintEmptyColumn( QPainter *Painter, KPixelXs Xs, KPixelYs Ys )
 {
-  KColumn::paintEmptyColumn( P,Xs,Ys );
+  KColumn::paintEmptyColumn( Painter, Xs,Ys );
 
   KPixelX LX = x() + LineX;
 
   if( Middle && Xs.includes(LX) )
   {
-    int GridColor = View->style()->styleHint( QStyle::SH_Table_GridLineColor, 0, View );
-    P->setPen( GridColor != -1 ? (QRgb)GridColor : View->palette().mid().color() );
-    P->drawLine( LX, Ys.start(), LX, Ys.end() ) ;
+    const QWidget *Viewport = View->viewport();
+    int GridColor = Viewport->style()->styleHint( QStyle::SH_Table_GridLineColor, 0, Viewport );
+
+    Painter->setPen( GridColor != -1 ? (QRgb)GridColor : Viewport->palette().mid().color() );
+    Painter->drawLine( LX, Ys.start(), LX, Ys.end() ) ;
   }
 }

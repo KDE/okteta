@@ -42,12 +42,14 @@ KOffsetColumn::~KOffsetColumn()
 
 void KOffsetColumn::paintLine( QPainter *P, int Line )
 {
-  const QBrush &ButtonBrush = View->palette().button();
+  const QWidget *Viewport = View->viewport();
+
+  const QBrush &ButtonBrush = Viewport->palette().button();
   P->fillRect( 0,0, width(),LineHeight, ButtonBrush );
 
   printFunction()( CodedOffset,FirstLineOffset+Delta*Line );
 
-  const QColor &ButtonColor = View->palette().buttonText().color();
+  const QColor &ButtonColor = Viewport->palette().buttonText().color();
   P->setPen( ButtonColor );
   P->drawText( 0, DigitBaseLine, QString().append(CodedOffset) );
 }
@@ -71,7 +73,7 @@ void KOffsetColumn::paintEmptyColumn( QPainter *P, KPixelXs Xs, KPixelYs Ys )
 {
   Xs.restrictTo( XSpan );
 
-  const QBrush &ButtonBrush = View->palette().button();
+  const QBrush &ButtonBrush = View->viewport()->palette().button();
   P->fillRect( Xs.start(), Ys.start(), Xs.width(), Ys.width(), ButtonBrush );
 }
 

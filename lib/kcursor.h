@@ -19,7 +19,7 @@
 #define KHE_KCURSOR_H
 
 
-#include <qpixmap.h>
+#include <QPixmap>
 
 #include "kadds.h"
 

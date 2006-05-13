@@ -137,7 +137,7 @@ void KBytesEdit::repaintRange( int i1, int i2 )
 
   BufferRanges->addChangedRange( i1, i2 );
 
-  repaintChanged();
+  updateChanged();
 
   if( ChangeCursor )
     unpauseCursor();

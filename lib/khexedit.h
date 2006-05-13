@@ -19,12 +19,10 @@
 #define KHE_KHEXEDIT_H
 
 // qt specific
-#include <qclipboard.h>
-//Added by qt3to4:
+#include <QClipboard>
 #include <QWheelEvent>
 #include <QDragLeaveEvent>
 #include <QKeyEvent>
-#include <QEvent>
 #include <QDragMoveEvent>
 #include <QDropEvent>
 #include <QShowEvent>
@@ -405,17 +403,17 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
       */
     void updateViewByWidth();
     /** repaints all the parts that are signed as changed */
-    void repaintChanged();
+    void updateChanged();
 
   protected: // drawing related operations
     /** recreates the cursor pixmaps and paints active and inactive cursors if doable */
-    void updateCursor();
+    void updateCursors();
     void createCursorPixmaps();
     void pointPainterToCursor( QPainter &Painter, const KBufferColumn &Column ) const;
     /** draws the blinking cursor or removes it */
     void drawActiveCursor();
     void drawInactiveCursor();
-    void repaintCursor( const KBufferColumn &Column );
+    void updateCursor( const KBufferColumn &Column );
     void paintLine( KBufferColumn *C, int Line, KSection Positions );
 
   protected: // partial operations

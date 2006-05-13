@@ -16,7 +16,7 @@
 
 
 // qt specific
-#include <qpainter.h>
+#include <QPainter>
 // lib specific
 #include "kcolumnsview.h"
 #include "kbuffercursor.h"
@@ -96,37 +96,36 @@ void KValueColumn::recalcByteWidth()
     BinaryHalfOffset = 4 * DigitWidth + BinaryGapWidth;
     ByteWidth += BinaryGapWidth;
   }
-  recalcVerticalGridX();
 }
 
 
 // perhaps sometimes there will be a grammar
-void KValueColumn::paintEditedByte( QPainter *P, char Byte, const QString &EditBuffer )
+void KValueColumn::paintEditedByte( QPainter *Painter, char Byte, const QString &EditBuffer )
 {
   KHEChar B = Codec->decode( Byte );
 
-  P->fillRect( 0,0,ByteWidth,LineHeight, QBrush(colorForChar(B),Qt::SolidPattern) );
+  Painter->fillRect( 0,0, ByteWidth,LineHeight, QBrush(colorForChar(B),Qt::SolidPattern) );
 
-  drawCode( P, EditBuffer, View->palette().base().color() );
+  drawCode( Painter, EditBuffer, View->viewport()->palette().base().color() );
 }
 
 
-void KValueColumn::drawByte( QPainter *P, char Byte, KHEChar /*B*/, const QColor &Color ) const
+void KValueColumn::drawByte( QPainter *Painter, char Byte, KHEChar /*B*/, const QColor &Color ) const
 {
   ByteCodec->encode( CodedByte, 0, Byte );
-  drawCode( P, CodedByte, Color );
+  drawCode( Painter, CodedByte, Color );
 }
 
 
-void KValueColumn::drawCode( QPainter *P, const QString &Code, const QColor &Color ) const
+void KValueColumn::drawCode( QPainter *Painter, const QString &Code, const QColor &Color ) const
 {
-  P->setPen( Color );
+  Painter->setPen( Color );
   if( Coding == BinaryCoding )
   {
     // leave a gap in the middle
-    P->drawText( 0, DigitBaseLine, Code.left(4) );
-    P->drawText( BinaryHalfOffset, DigitBaseLine, Code.right(4) );
+    Painter->drawText( 0, DigitBaseLine, Code.left(4) );
+    Painter->drawText( BinaryHalfOffset, DigitBaseLine, Code.right(4) );
   }
   else
-    P->drawText( 0, DigitBaseLine, Code );
+    Painter->drawText( 0, DigitBaseLine, Code );
 }

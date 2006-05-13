@@ -23,22 +23,20 @@
 // c++ specific
 //#include <limits>
 // qt specific
-#include <qstyle.h>
-#include <qpainter.h>
+#include <QStyle>
+#include <QPainter>
 #include <QTimer>
-#include <qcursor.h>
-#include <qapplication.h>
+#include <QCursor>
+#include <QApplication>
 #include <QListIterator>
 #include <QMouseEvent>
 #include <QWheelEvent>
 #include <QKeyEvent>
 #include <QDragEnterEvent>
-//#include <QDragLeaveEvent>
 #include <QDragMoveEvent>
 #include <QDropEvent>
 #include <QShowEvent>
 #include <QResizeEvent>
-#include <QContextMenuEvent>
 // kde specific
 #ifndef QT_ONLY
 #include <kglobalsettings.h>
@@ -143,9 +141,6 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, Qt::
 #endif
 
   // get the full control
-  viewport()->setFocusProxy( this );
-  viewport()->setFocusPolicy( Qt::WheelFocus );
-
   viewport()->installEventFilter( this );
   installEventFilter( this );
 
@@ -749,7 +744,7 @@ bool KHexEdit::selectWord( /*unsigned TODO:change all unneeded signed into unsig
 
       BufferRanges->setFirstWordSelection( WordSection );
       BufferCursor->gotoIndex( WordSection.end()+1 );
-      repaintChanged();
+      updateChanged();
 
       unpauseCursor();
       return true;
@@ -771,7 +766,7 @@ void KHexEdit::selectAll( bool Select )
     BufferCursor->gotoEnd();
   }
 
-  repaintChanged();
+  updateChanged();
 
   unpauseCursor();
 
@@ -948,7 +943,7 @@ void KHexEdit::insert( const QByteArray &D )
       }
     }
   }
-  repaintChanged();
+  updateChanged();
   ensureCursorVisible();
 
   unpauseCursor();
@@ -973,7 +968,7 @@ void KHexEdit::removeSelectedData()
   removeData( Selection );
   BufferRanges->removeSelection();
 
-  repaintChanged();
+  updateChanged();
 
   BufferCursor->gotoCIndex( Selection.start() );
 
@@ -1035,7 +1030,7 @@ void KHexEdit::setCursorPosition( int Index, bool Behind )
   BufferRanges->removeSelection();
   if( BufferRanges->isModified() )
   {
-    repaintChanged();
+    updateChanged();
 
     viewport()->setCursor( isReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor );
 
@@ -1174,7 +1169,7 @@ bool KHexEdit::eventFilter( QObject *O, QEvent *E )
 //       doc->setDefaultFormat( doc->formatCollection()->defaultFormat()->font(), c );
 //       lastFormatted = doc->firstParagraph();
 //       formatMore();
-//       repaintChanged();
+//       updateChanged();
 //     }
 //   }
 
@@ -1190,7 +1185,7 @@ void KHexEdit::blinkCursor()
 
   // switch the cursor state
   BlinkCursorVisible = !BlinkCursorVisible;
-  repaintCursor( activeColumn() );
+  updateCursor( activeColumn() );
 }
 
 
@@ -1198,7 +1193,7 @@ void KHexEdit::startCursor()
 {
   CursorPaused = false;
 
-  updateCursor();
+  updateCursors();
 
   CursorBlinkTimer->start( QApplication::cursorFlashTime()/2 );
 }
@@ -1209,17 +1204,17 @@ void KHexEdit::unpauseCursor()
   CursorPaused = false;
 
   if( CursorBlinkTimer->isActive() )
-    updateCursor();
+    updateCursors();
 }
 
 
-void KHexEdit::updateCursor()
+void KHexEdit::updateCursors()
 {
   createCursorPixmaps();
 
   BlinkCursorVisible = true;
-  repaintCursor( activeColumn() );
-  repaintCursor( inactiveColumn() );
+  updateCursor( activeColumn() );
+  updateCursor( inactiveColumn() );
 }
 
 
@@ -1236,21 +1231,21 @@ void KHexEdit::pauseCursor( bool LeaveEdit )
   CursorPaused = true;
 
   BlinkCursorVisible = false;
-  repaintCursor( activeColumn() );
-  repaintCursor( inactiveColumn() );
+  updateCursor( activeColumn() );
+  updateCursor( inactiveColumn() );
 
   if( LeaveEdit )
     ValueEditor->InEditMode = false;
 }
 
 
-void KHexEdit::repaintCursor( const KBufferColumn &Column )
+void KHexEdit::updateCursor( const KBufferColumn &Column )
 {
   int x = Column.xOfPos( BufferCursor->pos() );
   int y = LineHeight * BufferCursor->line();
   int w = Column.byteWidth();
 
-  repaintContents( x,y, w,LineHeight, false );
+  updateContents( x,y, w,LineHeight );
 }
 
 void KHexEdit::createCursorPixmaps()
@@ -1382,7 +1377,7 @@ void KHexEdit::keyPressEvent( QKeyEvent *KeyEvent )
 }
 
 
-void KHexEdit::repaintChanged()
+void KHexEdit::updateChanged()
 {
   // TODO: we do this only to let the scrollview handle new or removed lines. overlaps with repaintRange
   resizeContents( totalWidth(), totalHeight() );
@@ -1556,7 +1551,7 @@ void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
       BufferRanges->setSelectionStart( BufferLayout->indexAtLineStart(DoubleClickLine) );
       BufferCursor->gotoLineEnd();
       BufferRanges->setSelectionEnd( BufferCursor->realIndex() );
-      repaintChanged();
+      updateChanged();
 
       unpauseCursor();
       return;
@@ -1603,7 +1598,7 @@ void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
 
   if( BufferRanges->isModified() )
   {
-    repaintChanged();
+    updateChanged();
     viewport()->setCursor( isReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor );
   }
 
@@ -1696,7 +1691,7 @@ void KHexEdit::contentsMouseReleaseEvent( QMouseEvent *e )
     ClipboardMode = QClipboard::Clipboard;
 
     // ensure selection changes to be drawn TODO: create a insert/pasteAtCursor that leaves out drawing
-    repaintChanged();
+    updateChanged();
 
     ensureCursorVisible();
     unpauseCursor();
@@ -1799,7 +1794,7 @@ void KHexEdit::handleMouseMove( const QPoint& Point ) // handles the move of the
   if( BufferRanges->selectionStarted() )
     BufferRanges->setSelectionEnd( BufferCursor->realIndex() );
 
-  repaintChanged();
+  updateChanged();
 
   unpauseCursor();
 }
@@ -1949,7 +1944,7 @@ void KHexEdit::handleInternalDrag( QDropEvent *e )
     }
   }
   BufferRanges->removeSelection();
-  repaintChanged();
+  updateChanged();
   ensureCursorVisible();
 
   // open ui
