@@ -22,14 +22,14 @@
 #include <QLinkedList>
 // lib specific
 #include "ksection.h"
-#include "khexedit_export.h"
+
 
 namespace KHE {
 
 /**
 @author Friedrich W. H.  Kossebau
 */
-class KHEXEDIT_EXPORT KSectionList : public QLinkedList<KSection>
+class KSectionList : public QLinkedList<KSection>
 {
   public:
     KSectionList();
