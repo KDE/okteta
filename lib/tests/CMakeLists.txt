@@ -23,6 +23,19 @@ add_test(khexedit-ksectiontest ${EXECUTABLE_OUTPUT_PATH}/ksectiontest)
 
 ########### next target ###############
 
+set( ksectionlisttest_SRCS ksectionlisttest.cpp )
+
+kde4_automoc(${ksectionlisttest_SRCS})
+
+kde4_add_executable(ksectionlisttest RUN_UNINSTALLED ${ksectionlisttest_SRCS})
+
+target_link_libraries(ksectionlisttest  testkhexeditcommon ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
+
+add_test(khexedit-ksectionlisttest ${EXECUTABLE_OUTPUT_PATH}/ksectionlisttest)
+
+
+########### next target ###############
+
 set(kbuffercoordtest_SRCS kbuffercoordtest.cpp )
 
 kde4_automoc(${kbuffercoordtest_SRCS})

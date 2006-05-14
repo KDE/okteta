@@ -380,6 +380,53 @@ void KSectionTest::testStartForInclude()
 }
 
 
+void KSectionTest::testIsJoinable()
+{
+  // testStartForInclude, same length, start at start
+  const KSection Section( Start, End );
+  KSection OtherSection( Section );
+  QVERIFY( Section.isJoinable(OtherSection) );
+
+  // adaptToChange, insert, before
+  OtherSection.set( End+1, End+Width );
+  QVERIFY( Section.isJoinable(OtherSection) );
+
+  // Overlapping, right shifted
+  OtherSection.set( Start+1, End+1 );
+  QVERIFY( Section.isJoinable(OtherSection) );
+
+  // Overlapping, left shifted
+  OtherSection.set( Start-1, End-1 );
+  QVERIFY( Section.isJoinable(OtherSection) );
+
+  // Overlapping, 1 includes 2
+  OtherSection.set( Start+1, End-1 );
+  QVERIFY( Section.isJoinable(OtherSection) );
+
+  // Overlapping, 2 includes 1
+  OtherSection.set( Start-1, End+1 );
+  QVERIFY( Section.isJoinable(OtherSection) );
+
+  // Overlapping, identic
+  OtherSection.set( Section );
+  QVERIFY( Section.isJoinable(OtherSection) );
+
+  // Coupled, first, then second
+  OtherSection.set( End+1, End+Width );
+  QVERIFY( Section.isJoinable(OtherSection) );
+
+  // Coupled, second, then first
+  QVERIFY( OtherSection.isJoinable(Section) );
+
+  // NonOverlapping, first, then second
+  OtherSection.set( End+2, End+Width+1 );
+  QVERIFY( !Section.isJoinable(OtherSection) );
+
+  // NonOverlapping, second, then first
+  QVERIFY( !OtherSection.isJoinable(Section) );
+}
+
+
 QTEST_MAIN( KSectionTest )
 
 #include "ksectiontest.moc"

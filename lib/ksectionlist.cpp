@@ -41,7 +41,7 @@ void KSectionList::addSection( KSection NewSection )
   for( ; S!=end(); ++S )
   {
     // is new section before the next section?
-    if( NewSection.endsBefore(*S) )
+    if( NewSection.endsBefore((*S).start()-1) )
     {
       // put the new before it
       insert( S, NewSection );
@@ -49,7 +49,7 @@ void KSectionList::addSection( KSection NewSection )
     }
 
     // does the next section overlap?
-    if( (*S).overlaps(NewSection) )
+    if( (*S).isJoinable(NewSection) )
     {
       // Start of the combined sections is the smaller one
       NewSection.extendStartTo( (*S).start() );
@@ -58,7 +58,7 @@ void KSectionList::addSection( KSection NewSection )
       iterator LS = S;
       for( ++LS; LS!=end(); ++LS )
       {
-        if( !(*LS).overlaps(NewSection) )
+        if( NewSection.endsBefore((*LS).start()-1) )
           break;
         End = (*LS).end();
       }

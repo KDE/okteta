@@ -92,6 +92,8 @@ class KSection : public KRange<int>
      * @return the needed start so that S gets included, undefined if any is invalid
      */
     int startForInclude( const KSection &S ) const;
+    /** @returns true if both section . If one of both is invalid the behaviour is undefined */
+    bool isJoinable( const KSection &S ) const;
 
 };
 
@@ -123,6 +125,7 @@ inline int KSection::startForInclude( const KSection &S ) const
          endsBefore(S.end()) ?     S.end()-width()+1 :
          start();
 }
+inline bool KSection::isJoinable( const KSection &S ) const { return Start <= S.end()+1 && S.start()-1 <= End; }
 
 }
 

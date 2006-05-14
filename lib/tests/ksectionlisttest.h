@@ -1,7 +1,7 @@
 /***************************************************************************
-                          ksectiontest.h  -  description
+                          ksectionlisttest.h  -  description
                              -------------------
-    begin                : Son Mai 7 2006
+    begin                : Son Mai 14 2006
     copyright            : (C) 2006 by Friedrich W. H. Kossebau
     email                : Friedrich.W.H@Kossebau.de
  ***************************************************************************/
@@ -15,29 +15,21 @@
  ***************************************************************************/
 
 
-#ifndef KSECTIONTEST_H
-#define KSECTIONTEST_H
+#ifndef KSECTIONLISTTEST_H
+#define KSECTIONLISTTEST_H
 
 // qt specific
 #include <QObject>
 
-class KSectionTest : public QObject
+class KSectionListTest : public QObject
 {
   Q_OBJECT
 
   private Q_SLOTS: // test functions
-    void testConstructorByEnd();
-    void testConstructorByWidth();
     void testSimpleConstructor();
-    void testSetGetStart();
-    void testSetGetEnd();
-    void testSetGetWidth();
-    void testIsEmpty();
-    void testCompare();
-    void testIncludes();
-    void testAdaptToChange();
-    void testStartForInclude();
-    void testIsJoinable();
+    void testAddSingleSection();
+    void testAddJoinableSections();
+    void testAddNonJoinableSections();
 };
 
 #endif
