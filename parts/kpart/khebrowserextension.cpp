@@ -54,7 +54,7 @@ void KHexEditBrowserExtension::saveState( QDataStream &stream )
   stream << (int)HexEdit->offsetColumnVisible() << HexEdit->visibleBufferColumns()
       << (int)HexEdit->resizeStyle() << (int)HexEdit->coding() 
       << HexEdit->encodingName() << (int)HexEdit->showUnprintable()
-      << HexEdit->contentsX() << HexEdit->contentsY()
+      << HexEdit->xOffset() << HexEdit->yOffset()
       << HexEdit->cursorPosition() << (int)HexEdit->isCursorBehind()
       << HexEdit->cursorColumn();
 }
@@ -86,7 +86,7 @@ void KHexEditBrowserExtension::restoreState( QDataStream &stream )
   HexEdit->setCoding( (KHexEdit::KCoding)Coding );
   HexEdit->setEncoding( EncodingName );
   HexEdit->setShowUnprintable( ShowUnprintable );
-  HexEdit->setContentsPos( x, y );
+  HexEdit->setColumnsPos( x, y );
   HexEdit->setCursorPosition( Position, CursorBehind );
   HexEdit->setCursorColumn( (KHexEdit::KBufferColumnId)CursorColumn );
 
