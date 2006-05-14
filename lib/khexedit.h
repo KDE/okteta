@@ -31,7 +31,6 @@
 #include <QMouseEvent>
 // lib specific
 // #include "khe.h"
-#include "khexedit_export.h"
 #include "kcolumnsview.h"
 
 class QTimer;
@@ -126,12 +125,12 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
 
 
   public:
-    KHexEdit( KDataBuffer *Buffer = 0, QWidget *Parent = 0, const char *Name = 0, Qt::WFlags F = 0 );
+    KHexEdit( KDataBuffer *Buffer = 0, QWidget *Parent = 0 );
     virtual ~KHexEdit();
 
 
   public: // KColumnsView API
-    virtual void drawContents( QPainter *p, int cx, int cy, int cw, int ch );
+    virtual void drawColumns( QPainter *p, int cx, int cy, int cw, int ch );
 
   public: // QWidget API
 //    void focusInEvent( QFocusEvent *FocusEvent ); // TODO: why don't these work?
@@ -201,7 +200,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
       * @param TestSize Size the widget might have
       * @return number of bytes per line that fit into a widget with the given size
       */
-    int fittingBytesPerLine( const QSize &TestSize ) const;
+    int fittingBytesPerLine() const;
     /** detects the index of the byte at the given point
       * @param Point in viewport coordinate system
       * @return index of the byte that covers the point
@@ -372,17 +371,17 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     virtual void resizeEvent( QResizeEvent *ResizeEvent );
     virtual void showEvent( QShowEvent *e );
 
-  protected: // QScrollView API
-    virtual void contentsMousePressEvent( QMouseEvent *e );
-    virtual void contentsMouseReleaseEvent( QMouseEvent * e );
-    virtual void contentsMouseMoveEvent( QMouseEvent *e );
-    virtual void contentsMouseDoubleClickEvent( QMouseEvent * e );
-    virtual void contentsDragEnterEvent( QDragEnterEvent *e );
-    virtual void contentsDragMoveEvent( QDragMoveEvent *e );
-    virtual void contentsDragLeaveEvent( QDragLeaveEvent * );
-    virtual void contentsDropEvent( QDropEvent *e );
-    virtual void contentsWheelEvent( QWheelEvent *e );
-//    virtual void contentsContextMenuEvent( QContextMenuEvent *e );
+  protected: // QAbstractScrollArea API
+    virtual void mousePressEvent( QMouseEvent *e );
+    virtual void mouseReleaseEvent( QMouseEvent * e );
+    virtual void mouseMoveEvent( QMouseEvent *e );
+    virtual void mouseDoubleClickEvent( QMouseEvent * e );
+    virtual void dragEnterEvent( QDragEnterEvent *e );
+    virtual void dragMoveEvent( QDragMoveEvent *e );
+    virtual void dragLeaveEvent( QDragLeaveEvent * );
+    virtual void dropEvent( QDropEvent *e );
+    virtual void wheelEvent( QWheelEvent *e );
+//    virtual void contextMenuEvent( QContextMenuEvent *e );
 
   protected: // KColumnsView API
     virtual void setNoOfLines( int NewNoOfLines );

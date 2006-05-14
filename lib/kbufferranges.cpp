@@ -183,19 +183,13 @@ bool KBufferRanges::overlapsMarking( int FirstIndex, int LastIndex, int *SI, int
 
 const KSection *KBufferRanges::firstOverlappingSelection( KSection Range ) const
 {
-  if( Selection.overlaps(Range) )
-    return &Selection;
-
-  return 0L;
+  return Selection.overlaps(Range) ? &Selection : 0;
 }
 
 
 const KSection *KBufferRanges::overlappingMarking( KSection Range ) const
 {
-  if( Marking.overlaps(Range) )
-    return &Marking;
-
-  return 0L;
+  return Marking.overlaps(Range) ? &Marking : 0;
 }
 
 /*

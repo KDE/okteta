@@ -2,8 +2,6 @@ add_subdirectory( controller )
 add_subdirectory( tests )
 
 
-
-
 ########### next target ###############
 set(libcontroler_SRCS 
 	controller/kchareditor.cpp
@@ -60,7 +58,7 @@ kde4_automoc( ${khexeditcommon_LIB_SRCS} )
 
 kde4_add_library( khexeditcommon SHARED ${khexeditcommon_LIB_SRCS} )
 
-target_link_libraries( khexeditcommon  ${KDE4_KDE3SUPPORT_LIBS}  )
+target_link_libraries( khexeditcommon  ${KDE4_KDECORE_LIBS} )
 
 set_target_properties( khexeditcommon PROPERTIES VERSION 1.0.0 SOVERSION 1 )
 install_targets( ${LIB_INSTALL_DIR} khexeditcommon )

@@ -98,12 +98,12 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
   List.append( i18n("&Octal")       );
   List.append( i18n("&Binary")      );
   CodingAction->setItems( List );
-  connect( CodingAction, SIGNAL(activated(int)), this, SLOT(slotSetCoding(int)) );
+  connect( CodingAction, SIGNAL(triggered(int)), SLOT(slotSetCoding(int)) );
 
   // document encoding
   EncodingAction = new KSelectAction( i18n("&Char Encoding"), AC, "view_charencoding" );
   EncodingAction->setItems( KCharCodec::codecNames() );
-  connect( EncodingAction, SIGNAL(activated(int)), this, SLOT(slotSetEncoding(int)) );
+  connect( EncodingAction, SIGNAL(triggered(int)), SLOT(slotSetEncoding(int)) );
 
   ShowUnprintableAction = new KToggleAction( i18n("Show &Unprintable Chars (<32)"), actionCollection(), "view_showunprintable" );
   connect( ShowUnprintableAction, SIGNAL(activated(int)), SLOT(slotSetShowUnprintable()) );
@@ -118,11 +118,11 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
   List.append( i18n("&Lock Groups") );
   List.append( i18n("&Full Size Usage") );
   ResizeStyleAction->setItems( List );
-  connect( ResizeStyleAction, SIGNAL(activated(int)), this, SLOT(slotSetResizeStyle(int)) );
+  connect( ResizeStyleAction, SIGNAL(triggered(int)), SLOT(slotSetResizeStyle(int)) );
 
   ShowOffsetColumnAction = new KToggleAction( i18n("&Line Offset"), AC, "view_lineoffset" );
   ShowOffsetColumnAction->setShortcut( Qt::Key_F11 );
-  connect( ShowOffsetColumnAction, SIGNAL(activated(int)), SLOT(slotToggleOffsetColumn()) );
+  connect( ShowOffsetColumnAction, SIGNAL(triggered(int)), SLOT(slotToggleOffsetColumn()) );
 
   // show buffer columns
   ToggleColumnsAction = new KSelectAction( i18n("&Columns"), AC, "togglecolumns" );
@@ -131,7 +131,7 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
   List.append( i18n("&Chars Column") );
   List.append( i18n("&Both Columns") );
   ToggleColumnsAction->setItems( List );
-  connect( ToggleColumnsAction, SIGNAL(activated(int)), this, SLOT(slotToggleValueCharColumns(int)) );
+  connect( ToggleColumnsAction, SIGNAL(triggered(int)), SLOT(slotToggleValueCharColumns(int)) );
 
   fitActionSettings();
 

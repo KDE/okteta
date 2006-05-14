@@ -86,6 +86,13 @@ class KSection : public KRange<int>
      * @return the numbered of included indizes or 0, if the section is invalid
      */
     int width() const;
+
+  public:
+    /**
+     * @return the needed start so that S gets included, undefined if any is invalid
+     */
+    int startForInclude( const KSection &S ) const;
+
 };
 
 inline KSection KSection::fromWidth( int SI, int W ) { return KSection(SI,SI+W-1); }
@@ -109,6 +116,14 @@ inline void KSection::restrictEndByWidth( int Width ) { restrictEndTo( start()+W
 
 inline void KSection::moveToStart( int S ) { setEnd( S+width()-1 ); setStart( S ); }
 inline void KSection::moveToEnd( int E )   { setStart( E-width()+1 ); setEnd( E ); }
+
+inline int KSection::startForInclude( const KSection &S ) const
+{
+  return startsBehind(S.start()) ? S.start() :
+         endsBefore(S.end()) ?     S.end()-width()+1 :
+         start();
+}
+
 }
 
 #endif

@@ -15,11 +15,11 @@
  ***************************************************************************/
 
 
-#include <kdebug.h>
-
 // qt specific
 #include <QListIterator>
+#include <QPaintEvent>
 #include <QPainter>
+#include <QScrollBar>
 // lib specific
 #include "kcolumn.h"
 #include "kcolumnsview.h"
@@ -27,18 +27,20 @@
 
 using namespace KHE;
 
-static bool DefaultHorizontalGrid = false;
+static const int DefaultSingleStep = 20;
 
-KColumnsView::KColumnsView( /*bool R,*/ QWidget *Parent, const char *Name, Qt::WFlags Flags )
- : Q3ScrollView( Parent, Name, Flags | Qt::WNoAutoErase /*| WStaticContents*/ ),
+KColumnsView::KColumnsView( /*bool R,*/ QWidget *Parent )
+ : QAbstractScrollArea( Parent ),
    NoOfLines( 0 ),
    LineHeight( 0 ),
-   TotalWidth( 0 ),
-   HorizontalGrid( DefaultHorizontalGrid ),
+   ColumnsWidth( 0 ),
 //    Reversed( R ),
    d( 0 )
 {
+  viewport()->setAttribute( Qt::WA_StaticContents );
   viewport()->setBackgroundRole ( QPalette::Base );
+  horizontalScrollBar()->setSingleStep( DefaultSingleStep );
+  verticalScrollBar()->setSingleStep( DefaultSingleStep );
 
   viewport()->setFocusProxy( this );
   viewport()->setFocusPolicy( Qt::WheelFocus );
@@ -51,41 +53,98 @@ KColumnsView::~KColumnsView()
 }
 
 
+KPixelX KColumnsView::xOffset() const { return horizontalScrollBar()->value(); }
+KPixelY KColumnsView::yOffset() const { return verticalScrollBar()->value(); }
+
+
+void KColumnsView::setColumnsPos( KPixelX x, KPixelY y )
+{
+  horizontalScrollBar()->setValue( x );
+  verticalScrollBar()->setValue( y );
+}
+
+
 void KColumnsView::setNoOfLines( int NewNoOfLines )
 {
+  if( NoOfLines == NewNoOfLines )
+    return;
+
   NoOfLines = NewNoOfLines;
+
+  updateScrollBars();
 }
 
 
 void KColumnsView::setLineHeight( KPixelY LH )
 {
+  if( LH == LineHeight )
+    return;
+
   LineHeight = LH;
+
   QListIterator<KColumn*> it( Columns );
   while( it.hasNext() )
     it.next()->setLineHeight( LineHeight );
+
   verticalScrollBar()->setSingleStep( LineHeight );
+  updateScrollBars();
 }
 
 
 void KColumnsView::updateWidths()
 {
-  TotalWidth = 0;
+  ColumnsWidth = 0;
   QListIterator<KColumn*> it( Columns );
   while( it.hasNext() )
   {
     KColumn *Column = it.next();
-    Column->setX( TotalWidth );
-    TotalWidth += Column->visibleWidth();
+    Column->setX( ColumnsWidth );
+    ColumnsWidth += Column->visibleWidth();
   }
+
+  updateScrollBars();
+}
+
+
+void KColumnsView::updateScrollBars() // TODO: do one smart calculation
+{
+  //style()->pixelMetric( QStyle::PM_ScrollBarExtent );
+
+  const int VisibleHeight = visibleHeight();
+  verticalScrollBar()->setRange( 0, columnsHeight()-VisibleHeight );
+  verticalScrollBar()->setPageStep( VisibleHeight );
+
+  const int VisibleWidth = visibleWidth();
+  horizontalScrollBar()->setRange( 0, ColumnsWidth-VisibleWidth );
+  horizontalScrollBar()->setPageStep( VisibleWidth );
+/*
+  QSize MaxViewportSize = maximumViewportSize();
+
+horizontalScrollBar()->sizeHint().height()
+    QSize p = viewport()->size();
+    QSize m = maximumViewportSize();
+
+    QSize min = qSmartMinSize(widget);
+    QSize max = qSmartMaxSize(widget);
+    if ((m.expandedTo(min) == m && m.boundedTo(max) == m))
+        p = m; // no scroll bars needed
+
+    QSize v = p.expandedTo(min).boundedTo(max);
+
+    horizontalScrollBar()->setRange(0, v.width() - p.width());
+    horizontalScrollBar()->setPageStep(p.width());
+    verticalScrollBar()->setRange(0, v.height() - p.height());
+    verticalScrollBar()->setPageStep(p.height());
+*/
 }
 
 
 int KColumnsView::noOfLinesPerPage() const
 {
-  if( !viewport() || LineHeight == 0 )
+  if( LineHeight == 0 )
     return 1;
-//  int NoOfLinesPerPage = (visibleHeight()-1) / LineHeight; // -1 ensures to get always the last visible line
-  int NoOfLinesPerPage = (viewport()->height()-1) / LineHeight; // -1 ensures to get always the last visible line
+
+  int NoOfLinesPerPage = (visibleHeight()-1) / LineHeight; // -1 ensures to get always the last visible line
 
   if( NoOfLinesPerPage == 0 )
     // ensure to move down at least one line
@@ -117,33 +176,46 @@ void KColumnsView::removeColumn( KColumn *C )
 }
 
 
-void KColumnsView::updateView()
+void KColumnsView::scrollContentsBy( int dx, int dy )
 {
-  resizeContents( totalWidth(), totalHeight() );
-  updateContents();
+  viewport()->scroll( dx, dy );
+}
+
+bool KColumnsView::event( QEvent *Event )
+{
+  if( Event->type() == QEvent::StyleChange || Event->type() == QEvent::LayoutRequest )
+    updateScrollBars();
+
+  return QAbstractScrollArea::event( Event );
 }
 
 
-void KColumnsView::repaintView()
+void KColumnsView::resizeEvent( QResizeEvent */*ResizeEvent*/ )
 {
-  resizeContents( totalWidth(), totalHeight() );
-  repaintContents( false );
+  updateScrollBars();
+}
+
+void KColumnsView::paintEvent( QPaintEvent *Event )
+{
+  const int x = xOffset();
+  const int y = yOffset();
+
+  QRect DirtyRect = Event->rect();
+  DirtyRect.translate( x, y );
+
+  QPainter Painter( viewport() );
+  Painter.translate( -x, -y );
+
+  drawColumns( &Painter, DirtyRect.x(),DirtyRect.y(), DirtyRect.width(), DirtyRect.height() );
 }
 
 
-void KColumnsView::paintEmptyArea( QPainter *Painter, int cx ,int cy, int cw, int ch)
+void KColumnsView::drawColumns( QPainter *Painter, int cx, int cy, int cw, int ch )
 {
-    Painter->fillRect( cx, cy, cw, ch, viewport()->palette().brush(viewport()->backgroundRole()) );
-}
-
-
-void KColumnsView::drawContents( QPainter *Painter, int cx, int cy, int cw, int ch )
-{
-  //kDebug(1501) << "drawContents(" << cx<<","<<cw<<"#"<<cy<<","<<ch<<")\n";
   KPixelXs DirtyXs = KPixelXs::fromWidth( cx, cw );
 
   // content to be shown?
-  if( DirtyXs.startsBefore(TotalWidth) )
+  if( DirtyXs.startsBefore(ColumnsWidth) )
   {
     KPixelYs DirtyYs = KPixelYs::fromWidth( cy, ch );
 
@@ -213,7 +285,7 @@ void KColumnsView::drawContents( QPainter *Painter, int cx, int cy, int cw, int 
     }
 
     // draw empty columns?
-    DirtyYs.setStart( totalHeight() );
+    DirtyYs.setStart( columnsHeight() );
     if( DirtyYs.isValid() )
     {
       QListIterator<KColumn*> it( DirtyColumns );
@@ -223,9 +295,15 @@ void KColumnsView::drawContents( QPainter *Painter, int cx, int cy, int cw, int 
   }
 
   // Painter empty rects
-  DirtyXs.setStart( TotalWidth );
+  DirtyXs.setStart( ColumnsWidth );
   if( DirtyXs.isValid() )
-    paintEmptyArea( Painter, DirtyXs.start(), cy, DirtyXs.width(), ch );
+    drawEmptyArea( Painter, DirtyXs.start(), cy, DirtyXs.width(), ch );
+}
+
+
+void KColumnsView::drawEmptyArea( QPainter *Painter, int cx ,int cy, int cw, int ch)
+{
+    Painter->fillRect( cx,cy, cw,ch, viewport()->palette().brush(viewport()->backgroundRole()) );
 }
 
 #include "kcolumnsview.moc"

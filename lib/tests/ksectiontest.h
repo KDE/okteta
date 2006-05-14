@@ -36,6 +36,7 @@ class KSectionTest : public QObject
     void testCompare();
     void testIncludes();
     void testAdaptToChange();
+    void testStartForInclude();
 };
 
 #endif

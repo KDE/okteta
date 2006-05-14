@@ -24,23 +24,23 @@
 using namespace KHE;
 
 
-KBytesEdit::KBytesEdit( char *D, int DS, int RS, bool KM, QWidget *Parent, const char *Name, Qt::WFlags F )
- : KHexEdit( 0L, Parent, Name, F ),
+KBytesEdit::KBytesEdit( char *D, int DS, int RS, bool KM, QWidget *Parent, const char */*Name*/ )
+ : KHexEdit( 0, Parent ),
    AutoDelete( false )
 {
   setData( D, DS, RS, KM );
 }
 
-KBytesEdit::KBytesEdit( char *D, int DS, QWidget *Parent, const char *Name, Qt::WFlags F )
- : KHexEdit( 0L, Parent, Name, F ),
+KBytesEdit::KBytesEdit( char *D, int DS, QWidget *Parent, const char */*Name*/ )
+ : KHexEdit( 0, Parent ),
    AutoDelete( false )
 {
   setData( D, DS );
 }
 
 
-KBytesEdit::KBytesEdit( QWidget *Parent, const char *Name, Qt::WFlags F )
- : KHexEdit( 0L, Parent, Name, F ),
+KBytesEdit::KBytesEdit( QWidget *Parent, const char */*Name*/ )
+ : KHexEdit( 0, Parent ),
    AutoDelete( false )
 {
   setDataBuffer( new KPlainBuffer() );
@@ -69,7 +69,7 @@ void KBytesEdit::setAutoDelete( bool AD )
 char *KBytesEdit::data() const
 {
   KPlainBuffer *Buffer = dynamic_cast<KPlainBuffer *>(DataBuffer);
-  return Buffer ? Buffer->data() : 0L;
+  return Buffer ? Buffer->data() : 0;
 }
 
 

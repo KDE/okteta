@@ -12,7 +12,7 @@ kde4_add_plugin(khexedit2part WITH_PREFIX ${khexedit2part_PART_SRCS})
 
 kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} khexedit2part )
 
-target_link_libraries(khexedit2part  ${KDE4_KPARTS_LIBS} khexeditcommon  )
+target_link_libraries(khexedit2part  khexeditcommon ${KDE4_KPARTS_LIBS} )
 
 install_targets(${PLUGIN_INSTALL_DIR} khexedit2part )
 

@@ -27,7 +27,7 @@ KWrappingROBuffer::KWrappingROBuffer( const char* D, int L )
 
 KWrappingROBuffer::KWrappingROBuffer()
 {
-  Data = 0L;
+  Data = 0;
   Size = 0;
 }
 

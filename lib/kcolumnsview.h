@@ -20,12 +20,11 @@
 
 // qt specific
 #include <QList>
-#include <QWidget>
-#include <QPixmap>
-#include <q3scrollview.h>
+#include <QAbstractScrollArea>
 // lib specific
 #include "kadds.h"
 #include "ksection.h" // TODO: think about moving this out of the public API
+#include "khexedit_export.h"
 
 namespace KHE
 {
@@ -39,19 +38,15 @@ class KColumnsViewPrivate;
   *@author Friedrich W. H. Kossebau
   */
 
-class KColumnsView : public Q3ScrollView
+class KHEXEDIT_EXPORT KColumnsView : public QAbstractScrollArea
 {
    Q_OBJECT
 
    friend class KColumn;
 
   public:
-    KColumnsView( /*bool R = false,*/ QWidget *parent=0, const char *name=0, Qt::WFlags Flags=0 );
+    KColumnsView( /*bool R = false,*/ QWidget *Parent = 0 );
     virtual ~KColumnsView();
-
-  public: // drawing
-    virtual void paintEmptyArea( QPainter *p, int cx, int cy, int cw, int ch );
-    virtual void drawContents( QPainter *p, int cx, int cy, int cw, int ch );
 
   public: // data-wise sizes
     /** returns the number of all lines */
@@ -64,12 +59,10 @@ class KColumnsView : public Q3ScrollView
   public: // pixel-wise sizes
     /** returns the height of each line */
     KPixelY lineHeight() const;
-    /** returns the size of all visible columns together */
-    QSize totalViewSize() const;
     /** returns the width of all visible columns together */
-    KPixelX totalWidth() const;
+    KPixelX columnsWidth() const;
     /** returns the height of all lines together */
-    KPixelY totalHeight() const;
+    KPixelY columnsHeight() const;
 
   public: // services
     /** gives the index of the line that would include y in pixel coord.
@@ -85,12 +78,38 @@ class KColumnsView : public Q3ScrollView
       */
     KSection visibleLines( KPixelYs YPixels ) const;
 
+    /** @return visible width of the current view */
+    KPixelX visibleWidth() const;
+    /** @return visible height of the current view */
+    KPixelY visibleHeight() const;
+    /** @return x offset of the current view */
+    KPixelX xOffset() const;
+    /** @return y offset of the current view */
+    KPixelY yOffset() const;
+
+    /** translates the point to coordinates in the columns */
+    QPoint viewportToColumns( const QPoint &P ) const;
+
+  public:
+    /**  */
+    void setColumnsPos( KPixelX x, KPixelY y );
+
+  protected: // QAbstractScrollArea API
+    virtual bool event( QEvent *Event );
+    virtual void resizeEvent( QResizeEvent *ResizeEvent );
+    virtual void paintEvent( QPaintEvent *Event );
+    virtual void scrollContentsBy( int dx, int dy );
+
+  protected: // our API
+    /** draws all columns in columns coordinates */
+    virtual void drawColumns( QPainter *p, int cx, int cy, int cw, int ch );
+    /** draws area without columns in columns coordinates */
+    virtual void drawEmptyArea( QPainter *p, int cx, int cy, int cw, int ch );
 
   protected:
     /** called by KColumn */
     void addColumn( KColumn *C );
     void removeColumn( KColumn *C );
-
 
   protected: //
     /** sets height of all lines and propagates this information to all columns
@@ -107,10 +126,7 @@ class KColumnsView : public Q3ScrollView
   protected: // recalculations
     /** recalculates the positions of the columns and the total width */
     void updateWidths();
-
-  protected: // painting
-    void updateView();
-    void repaintView();
+    void updateScrollBars();
 
   protected: // calculated
     /** collection of all the columns. All columns will be autodeleted. */
@@ -120,13 +136,9 @@ class KColumnsView : public Q3ScrollView
     /** the height of each line in pixels */
     KPixelY LineHeight;
     /** the width of all visible columns together */
-    KPixelX TotalWidth;
-//    /** width that is used by columns that are not resizeable (if shown) */
-//    KPixelX ReservedWidth;
+    KPixelX ColumnsWidth;
 
   protected:
-    // TODO: do we really want this?
-    bool HorizontalGrid;
 //    bool Reversed;
 
   private:
@@ -136,23 +148,23 @@ class KColumnsView : public Q3ScrollView
 
 inline int KColumnsView::noOfLines()          const { return NoOfLines; }
 inline KPixelY KColumnsView::lineHeight()     const { return LineHeight; }
-inline uint KColumnsView::lineAt( KPixelY y ) const { return LineHeight!=0 ? y / LineHeight : 0; }
+inline uint KColumnsView::lineAt( KPixelY y ) const { return (LineHeight!=0) ? y / LineHeight : 0; }
 inline KSection KColumnsView::visibleLines() const
 {
-  KPixelY cy = contentsY();
-  KPixelY ch = visibleHeight();
-  return KSection( lineAt(cy), lineAt(cy+ch-1) );
+  KPixelYs YSpan = KPixelYs::fromWidth( yOffset(), visibleHeight() );
+  return KSection( lineAt(YSpan.start()), lineAt(YSpan.end()) );
 }
-
 inline KSection KColumnsView::visibleLines( KPixelYs YPixels ) const
-{
-  return KSection( lineAt(YPixels.start()), lineAt(YPixels.end()) );
-}
+{ return KSection( lineAt(YPixels.start()), lineAt(YPixels.end()) ); }
 
-inline KPixelY KColumnsView::totalHeight()   const { return NoOfLines*LineHeight; }
-inline KPixelX KColumnsView::totalWidth()    const { return TotalWidth; }
+inline KPixelX KColumnsView::visibleWidth()  const { return viewport()->width(); }
+inline KPixelY KColumnsView::visibleHeight() const { return viewport()->height(); }
 
-inline QSize KColumnsView::totalViewSize()   const { return QSize( totalWidth(), totalHeight() ); }
+inline KPixelY KColumnsView::columnsHeight() const { return NoOfLines*LineHeight; }
+inline KPixelX KColumnsView::columnsWidth()  const { return ColumnsWidth; }
+
+inline QPoint KColumnsView::viewportToColumns( const QPoint &P ) const
+{ return QPoint(xOffset(),yOffset()) + P; }
 
 }
 

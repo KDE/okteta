@@ -29,6 +29,7 @@
 #include <QCursor>
 #include <QApplication>
 #include <QListIterator>
+#include <QScrollBar>
 #include <QMouseEvent>
 #include <QWheelEvent>
 #include <QKeyEvent>
@@ -75,8 +76,8 @@ static const int InsertCursorWidth = 2;
 
 
 
-KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent, const char *Name, Qt::WFlags Flags )
- : KColumnsView( Parent, Name, Flags ),
+KHexEdit::KHexEdit( KDataBuffer *Buffer, QWidget *Parent )
+ : KColumnsView( Parent ),
    DataBuffer( Buffer ),
    BufferLayout( new KBufferLayout(DefaultNoOfBytesPerLine,DefaultStartOffset,0) ),
    BufferCursor( new KBufferCursor(BufferLayout) ),
@@ -239,7 +240,8 @@ void KHexEdit::setDataBuffer( KDataBuffer *B )
   if( DataBuffer->isReadOnly() )
     setReadOnly( true );
 
-  updateView();
+  viewport()->update();
+
   BufferCursor->gotoStart();
   ensureCursorVisible();
   unpauseCursor();
@@ -256,7 +258,7 @@ void KHexEdit::setStartOffset( int SO )
   // the no of lines -> width
   adjustLayoutToSize();
 
-  updateView();
+  viewport()->update();
 
   BufferCursor->updateCoord();
   ensureCursorVisible();
@@ -430,7 +432,7 @@ void KHexEdit::setEncoding( const QString& EncodingName )
 
 void KHexEdit::fontChange( const QFont &OldFont )
 {
-  Q3ScrollView::fontChange( OldFont );
+  KColumnsView::fontChange( OldFont );
 
   if( !InZooming )
     DefaultFontSize = font().pointSize();
@@ -460,7 +462,7 @@ void KHexEdit::updateViewByWidth()
   adjustToLayoutNoOfBytesPerLine();
   adjustLayoutToSize();
 
-  updateView();
+  viewport()->update();
 
   BufferCursor->updateCoord();
   ensureCursorVisible();
@@ -512,7 +514,7 @@ void KHexEdit::adjustLayoutToSize()
   // check whether there is a change with the numbers of fitting bytes per line
   if( ResizeStyle != NoResize )
   {
-    int FittingBytesPerLine = fittingBytesPerLine( size() );
+    int FittingBytesPerLine = fittingBytesPerLine();
 
 //     std::cout<<"FitBpL"<<FittingBytesPerLine<<std::endl;
 
@@ -557,7 +559,7 @@ void KHexEdit::toggleOffsetColumn( bool Visible )
 
 QSize KHexEdit::sizeHint() const
 {
-  return QSize( totalWidth(), totalHeight() );
+  return QSize( columnsWidth(), columnsHeight() );
 }
 
 
@@ -573,7 +575,7 @@ void KHexEdit::resizeEvent( QResizeEvent *ResizeEvent )
 {
   if( ResizeStyle != NoResize )
   {
-    int FittingBytesPerLine = fittingBytesPerLine( ResizeEvent->size() );
+    int FittingBytesPerLine = fittingBytesPerLine();
 
     // changes?
     if( BufferLayout->setNoOfBytesPerLine(FittingBytesPerLine) )
@@ -583,29 +585,29 @@ void KHexEdit::resizeEvent( QResizeEvent *ResizeEvent )
     }
   }
 
-  Q3ScrollView::resizeEvent( ResizeEvent );
+  KColumnsView::resizeEvent( ResizeEvent );
 
   BufferLayout->setNoOfLinesPerPage( noOfLinesPerPage() ); // TODO: doesn't work with the new size!!!
 }
 
 
-int KHexEdit::fittingBytesPerLine( const QSize &NewSize ) const
+int KHexEdit::fittingBytesPerLine() const
 {
+   const QSize &NewSize = maximumViewportSize();
   KPixelX ReservedWidth = OffsetColumn->visibleWidth() + FirstBorderColumn->visibleWidth() + SecondBorderColumn->visibleWidth();
 
-  // abstract framewidth as well as offset and border columns width
-  int UsedbyFrameWidth = 2 * frameWidth();
-  KPixelX FullWidth = NewSize.width() - UsedbyFrameWidth - ReservedWidth;
+  // abstract offset and border columns width
+  KPixelX FullWidth = NewSize.width() - ReservedWidth;
 
 //  // no width left for resizeable columns? TODO: put this in resizeEvent
 //  if( FullWidth < 0 )
 //    return;
 
-  KPixelY FullHeight = NewSize.height() - UsedbyFrameWidth;
+  KPixelY FullHeight = NewSize.height();
 
   // check influence of dis-/appearing of the vertical scrollbar
   bool VerticalScrollbarIsVisible = verticalScrollBar()->isVisible();
-  KPixelX ScrollbarExtent = style()->pixelMetric( QStyle::PM_ScrollBarExtent );//verticalScrollBar()->width();
+  KPixelX ScrollbarExtent = style()->pixelMetric( QStyle::PM_ScrollBarExtent );
 
   KPixelX AvailableWidth = FullWidth;
   if( VerticalScrollbarIsVisible )
@@ -639,12 +641,12 @@ int KHexEdit::fittingBytesPerLine( const QSize &NewSize ) const
   int WithScrollbarFittingBytesPerLine = 0;
   for(;;)
   {
-//    std::cout << "matchWidth: " << FullWidth
+//    kDebug() << "matchWidth: " << FullWidth
 //              << " (v:" << visibleWidth()
 //              << ", f:" << frameWidth()
 //              << ", A:" << AvailableWidth
 //              << ", S:" << ScrollbarExtent
-//              << ", R:" << ReservedWidth << ")" << std::endl;
+//              << ", R:" << ReservedWidth << ")" << endl;
 
     // calculate fitting groups per line
     int FittingGroupsPerLine = (AvailableWidth+GroupSpacingWidth) // fake spacing after last group
@@ -659,7 +661,7 @@ int KHexEdit::fittingBytesPerLine( const QSize &NewSize ) const
       if( FittingGroupsPerLine > 0 )
         AvailableWidth -= FittingGroupsPerLine*TotalGroupWidth; // includes additional spacing after last group
 
-//        std::cout << "Left: " << AvailableWidth << "("<<HexByteWidth<<", "<<TextByteWidth<<")" << std::endl;
+//         kDebug() << "Left: " << AvailableWidth << "("<<HexByteWidth<<", "<<TextByteWidth<<")" << endl;
 
       if( AvailableWidth > 0 )
         FittingBytesPerLine += (AvailableWidth+ByteSpacingWidth) / (HexByteWidth+ByteSpacingWidth+TextByteWidth);
@@ -681,10 +683,10 @@ int KHexEdit::fittingBytesPerLine( const QSize &NewSize ) const
       break;
     }
 
-//    std::cout << "meantime: " << FittingGroupsPerLine << " (T:" << TotalGroupWidth
+//    kDebug() << "meantime: " << FittingGroupsPerLine << " (T:" << TotalGroupWidth
 //              << ", h:" << HexByteGroupWidth
 //              << ", t:" << TextByteGroupWidth
-//              << ", s:" << GroupSpacingWidth << ") " <<FittingBytesPerLine<< std::endl;
+//              << ", s:" << GroupSpacingWidth << ") " <<FittingBytesPerLine<< endl;
 
     int NewNoOfLines = (BufferLayout->length()+BufferLayout->startOffset()+FittingBytesPerLine-1)
                        / FittingBytesPerLine;
@@ -708,7 +710,7 @@ int KHexEdit::fittingBytesPerLine( const QSize &NewSize ) const
         WithScrollbarFittingBytesPerLine = FittingBytesPerLine;
         AvailableWidth = FullWidth;
         MatchRun = TestWithoutScrollbar;
-//          std::cout << "tested without scrollbar..." << std::endl;
+//          kDebug() << "tested without scrollbar..." << endl;
         continue;
       }
     }
@@ -720,7 +722,7 @@ int KHexEdit::fittingBytesPerLine( const QSize &NewSize ) const
         // need for a scrollbar has risen... ->less width, new calculation
         AvailableWidth = FullWidth - ScrollbarExtent;
         MatchRun = RerunWithScrollbarOn;
-//          std::cout << "rerun with scrollbar on..." << std::endl;
+//          kDebug() << "rerun with scrollbar on..." << endl;
         continue;
       }
     }
@@ -1137,16 +1139,16 @@ int KHexEdit::indexByPoint( const QPoint &Point ) const
 }
 
 
-void KHexEdit::showEvent( QShowEvent *e )
+void KHexEdit::showEvent( QShowEvent *Event )
 {
-    KColumnsView::showEvent( e );
+    KColumnsView::showEvent( Event );
     BufferLayout->setNoOfLinesPerPage( noOfLinesPerPage() );
 }
 
 
-bool KHexEdit::eventFilter( QObject *O, QEvent *E )
+bool KHexEdit::eventFilter( QObject *Object, QEvent *E )
 {
-  if( O == this || O == viewport() )
+  if( Object == this || Object == viewport() )
   {
     if( E->type() == QEvent::FocusIn )
     {
@@ -1173,7 +1175,7 @@ bool KHexEdit::eventFilter( QObject *O, QEvent *E )
 //     }
 //   }
 
-  return Q3ScrollView::eventFilter( O, E );
+  return KColumnsView::eventFilter( Object, E );
 }
 
 
@@ -1241,11 +1243,11 @@ void KHexEdit::pauseCursor( bool LeaveEdit )
 
 void KHexEdit::updateCursor( const KBufferColumn &Column )
 {
-  int x = Column.xOfPos( BufferCursor->pos() );
-  int y = LineHeight * BufferCursor->line();
+  int x = Column.xOfPos( BufferCursor->pos() ) - xOffset();
+  int y = LineHeight * BufferCursor->line() - yOffset();
   int w = Column.byteWidth();
 
-  updateContents( x,y, w,LineHeight );
+  viewport()->update( x,y, w,LineHeight );
 }
 
 void KHexEdit::createCursorPixmaps()
@@ -1285,8 +1287,8 @@ void KHexEdit::createCursorPixmaps()
 
 void KHexEdit::pointPainterToCursor( QPainter &Painter, const KBufferColumn &Column ) const
 {
-  int x = Column.xOfPos( BufferCursor->pos() ) - contentsX();
-  int y = LineHeight * BufferCursor->line() - contentsY();
+  int x = Column.xOfPos( BufferCursor->pos() ) - xOffset();
+  int y = LineHeight * BufferCursor->line() - yOffset();
 
   Painter.begin( viewport() );
   Painter.translate( x, y );
@@ -1341,9 +1343,9 @@ void KHexEdit::drawInactiveCursor()
 }
 
 
-void KHexEdit::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
+void KHexEdit::drawColumns( QPainter *P, int cx, int cy, int cw, int ch )
 {
-  KColumnsView::drawContents( P, cx, cy, cw, ch );
+  KColumnsView::drawColumns( P, cx, cy, cw, ch );
   // TODO: update non blinking cursors. Should this perhaps be done in the buffercolumn?
   // Then it needs to know about inactive, insideByte and the like... well...
   // perhaps subclassing the buffer columns even more, to KCharColumn and KValueColumn?
@@ -1357,9 +1359,8 @@ void KHexEdit::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
 
 void KHexEdit::updateColumn( KColumn &Column )
 {
-  //kDebug(1501) << "updateColumn\n";
   if( Column.isVisible() )
-    updateContents( Column.x(), 0, Column.width(), totalHeight() );
+    viewport()->update( Column.x()-xOffset(), 0, Column.width(), visibleHeight() );
 }
 
 void KHexEdit::emitSelectionSignals()
@@ -1379,13 +1380,10 @@ void KHexEdit::keyPressEvent( QKeyEvent *KeyEvent )
 
 void KHexEdit::updateChanged()
 {
-  // TODO: we do this only to let the scrollview handle new or removed lines. overlaps with repaintRange
-  resizeContents( totalWidth(), totalHeight() );
-
   if( !BufferRanges->isModified() )
     return;
 
-  KPixelXs Xs = KPixelXs::fromWidth( contentsX(), visibleWidth() );
+  KPixelXs Xs = KPixelXs::fromWidth( xOffset(), visibleWidth() );
 
   // collect affected buffer columns
   QList<KBufferColumn*> DirtyColumns;
@@ -1407,7 +1405,7 @@ void KHexEdit::updateChanged()
   // any colums to paint?
   if( DirtyColumns.size() > 0 )
   {
-    KPixelYs Ys = KPixelYs::fromWidth( contentsY(), visibleHeight() );
+    KPixelYs Ys = KPixelYs::fromWidth( yOffset(), visibleHeight() );
 
     // calculate affected lines/indizes
     KSection FullPositions( 0, BufferLayout->noOfBytesPerLine()-1 );
@@ -1419,7 +1417,7 @@ void KHexEdit::updateChanged()
     {
 //       std::cout << "  changed->"<<FirstChangedIndex<<","<<LastChangedIndex<<std::endl;
 
-      KPixelY cy = ChangedRange.start().line() * LineHeight;// - contentsY();
+      KPixelY cy = ChangedRange.start().line() * LineHeight - yOffset();
 
       QListIterator<KBufferColumn*> it( DirtyColumns );
       // only one line?
@@ -1430,7 +1428,7 @@ void KHexEdit::updateChanged()
           KPixelXs XPixels =
             it.next()->wideXPixelsOfPos( KSection(ChangedRange.start().pos(),ChangedRange.end().pos()) );
 
-          updateContents( XPixels.start(), cy, XPixels.width(), LineHeight );
+          viewport()->update( XPixels.start()-xOffset(), cy, XPixels.width(), LineHeight );
         }
       }
       //
@@ -1442,7 +1440,7 @@ void KHexEdit::updateChanged()
           KPixelXs XPixels =
             it.next()->wideXPixelsOfPos( KSection(ChangedRange.start().pos(),FullPositions.end()) );
 
-          updateContents( XPixels.start(), cy, XPixels.width(), LineHeight );
+          viewport()->update( XPixels.start()-xOffset(), cy, XPixels.width(), LineHeight );
         }
 
         // at least one full line?
@@ -1455,7 +1453,7 @@ void KHexEdit::updateChanged()
             KPixelXs XPixels =
               it.next()->wideXPixelsOfPos( FullPositions );
 
-            updateContents( XPixels.start(), cy, XPixels.width(), LineHeight );
+            viewport()->update( XPixels.start()-xOffset(), cy, XPixels.width(), LineHeight );
           }
         }
 
@@ -1467,7 +1465,7 @@ void KHexEdit::updateChanged()
           KPixelXs XPixels =
             it.next()->wideXPixelsOfPos( KSection(FullPositions.start(),ChangedRange.end().pos()) );
 
-          updateContents( XPixels.start(), cy, XPixels.width(), LineHeight );
+          viewport()->update( XPixels.start()-xOffset(), cy, XPixels.width(), LineHeight );
         }
       }
 
@@ -1477,14 +1475,6 @@ void KHexEdit::updateChanged()
         break;
     }
   }
-
-
-  // Paint possible removed bytes at the end of the last line
-  // Paint new/removed trailing lines
-//   drawContents( P, cx, cy, cw, ch );
-  // Paint empty rects
-//  paintEmptyArea( P, cx, cy, cw, ch );
-//   BufferLayout->noOfLines()
 
   BufferRanges->resetChangedRanges();
 }
@@ -1500,7 +1490,7 @@ void KHexEdit::paintLine( KBufferColumn *C, int Line, KSection Positions )
 
   QPainter Painter( viewport() );
 
-  KPixelY cy = Line * LineHeight - contentsY();
+  KPixelY cy = Line * LineHeight - yOffset();
   Painter.translate( C->x(), cy );
   C->paintPositions( &Painter, Line, Positions );
 }
@@ -1524,29 +1514,35 @@ void KHexEdit::ensureCursorVisible()
 //     d->ensureCursorVisibleInShowEvent = true;
 //     return;
 //   }
+  //static const int Margin = 10;
 
-  KPixelX x = activeColumn().xOfPos( BufferCursor->pos() )+ activeColumn().byteWidth()/2;
-  KPixelY y = LineHeight * BufferCursor->line() + LineHeight/2;
-  int xMargin = activeColumn().byteWidth()/2 + 1;
-  int yMargin = LineHeight/2 + 1;
-  ensureVisible( x, y, xMargin, yMargin );
+  // TODO: add getCursorRect to BufferColumn
+  const KPixelXs cursorXs = KPixelXs::fromWidth( activeColumn().xOfPos(BufferCursor->pos()),
+                                                 activeColumn().byteWidth() );
+
+  const KPixelYs cursorYs = KPixelYs::fromWidth( LineHeight*BufferCursor->line(), LineHeight );
+
+  const KPixelXs visibleXs = KPixelXs::fromWidth( xOffset(), visibleWidth() );
+  const KPixelYs visibleYs = KPixelXs::fromWidth( yOffset(), visibleHeight() );
+
+  horizontalScrollBar()->setValue( visibleXs.startForInclude(cursorXs) );
+  verticalScrollBar()->setValue( visibleYs.startForInclude(cursorYs) );
 }
 
 
-
-void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
+void KHexEdit::mousePressEvent( QMouseEvent *Event )
 {
 //   clearUndoRedo();
   pauseCursor( true );
 
   // care about a left button press?
-  if( e->button() == Qt::LeftButton )
+  if( Event->button() == Qt::LeftButton )
   {
     MousePressed = true;
 
     // select whole line?
     if( TrippleClickTimer->isActive()
-        && (e->globalPos()-DoubleClickPoint).manhattanLength() < QApplication::startDragDistance() )
+        && (Event->globalPos()-DoubleClickPoint).manhattanLength() < QApplication::startDragDistance() )
     {
       BufferRanges->setSelectionStart( BufferLayout->indexAtLineStart(DoubleClickLine) );
       BufferCursor->gotoLineEnd();
@@ -1557,7 +1553,7 @@ void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
       return;
     }
 
-    QPoint MousePoint = e->pos();
+    const QPoint MousePoint = viewportToColumns( Event->pos() );
     placeCursor( MousePoint );
     ensureCursorVisible();
 
@@ -1575,7 +1571,7 @@ void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
     int RealIndex = BufferCursor->realIndex();
     if( BufferRanges->selectionStarted() )
     {
-      if( e->modifiers() & Qt::SHIFT )
+      if( Event->modifiers() & Qt::SHIFT )
         BufferRanges->setSelectionEnd( RealIndex );
       else
       {
@@ -1587,13 +1583,13 @@ void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
     {
       BufferRanges->setSelectionStart( RealIndex );
 
-      if( !isReadOnly() && (e->modifiers()&Qt::SHIFT) ) // TODO: why only for readwrite?
+      if( !isReadOnly() && (Event->modifiers()&Qt::SHIFT) ) // TODO: why only for readwrite?
         BufferRanges->setSelectionEnd( RealIndex );
     }
 
     BufferRanges->removeFurtherSelections();
   }
-  else if( e->button() == Qt::MidButton )
+  else if( Event->button() == Qt::MidButton )
     BufferRanges->removeSelection();
 
   if( BufferRanges->isModified() )
@@ -1606,40 +1602,43 @@ void KHexEdit::contentsMousePressEvent( QMouseEvent *e )
 }
 
 
-void KHexEdit::contentsMouseMoveEvent( QMouseEvent *e )
+void KHexEdit::mouseMoveEvent( QMouseEvent *Event )
 {
+  QPoint MovePoint = viewportToColumns( Event->pos() );
+
   if( MousePressed )
   {
     if( DragStartPossible )
     {
       DragStartTimer->stop();
       // moved enough for a drag?
-      if( (e->pos()-DragStartPoint).manhattanLength() > QApplication::startDragDistance() )
+      if( (MovePoint-DragStartPoint).manhattanLength() > QApplication::startDragDistance() )
         startDrag();
       if( !isReadOnly() )
         viewport()->setCursor( Qt::IBeamCursor );
       return;
     }
     // selecting
-    QPoint MousePoint = e->pos();
-    handleMouseMove( MousePoint );
+    handleMouseMove( MovePoint );
   }
   else if( !isReadOnly() )
   {
     // visual feedback for possible dragging
-    bool InSelection = BufferRanges->hasSelection() && BufferRanges->selectionIncludes( indexByPoint(e->pos()) );
+    bool InSelection = BufferRanges->hasSelection() && BufferRanges->selectionIncludes( indexByPoint(MovePoint) );
     viewport()->setCursor( InSelection?Qt::ArrowCursor:Qt::IBeamCursor );
   }
 }
 
 
-void KHexEdit::contentsMouseReleaseEvent( QMouseEvent *e )
+void KHexEdit::mouseReleaseEvent( QMouseEvent *Event )
 {
+  const QPoint ReleasePoint = viewportToColumns( Event->pos() );
+
   // this is not the release of a doubleclick so we need to process it?
   if( !InDoubleClick )
   {
-    int Line = lineAt( e->pos().y() );
-    int Pos = activeColumn().posOfX( e->pos().x() ); // TODO: can we be sure here about the active column?
+    int Line = lineAt( ReleasePoint.y() );
+    int Pos = activeColumn().posOfX( ReleasePoint.x() ); // TODO: can we be sure here about the active column?
     int Index = BufferLayout->indexAtCCoord( KBufferCoord(Pos,Line) ); // TODO: can this be another index than the one of the cursor???
     emit clicked( Index );
   }
@@ -1676,11 +1675,11 @@ void KHexEdit::contentsMouseReleaseEvent( QMouseEvent *e )
     }
   }
   // middle mouse button paste?
-  else if( e->button() == Qt::MidButton && !isReadOnly() )
+  else if( Event->button() == Qt::MidButton && !isReadOnly() )
   {
     pauseCursor();
 
-    placeCursor( e->pos() );
+    placeCursor( ReleasePoint );
 
     // replace no selection?
     if( BufferRanges->hasSelection() && !BufferRanges->selectionIncludes(BufferCursor->index()) )
@@ -1711,12 +1710,12 @@ void KHexEdit::contentsMouseReleaseEvent( QMouseEvent *e )
 
 
 // gets called after press and release instead of a plain press event (?)
-void KHexEdit::contentsMouseDoubleClickEvent( QMouseEvent *e )
+void KHexEdit::mouseDoubleClickEvent( QMouseEvent *Event )
 {
   // we are only interested in LMB doubleclicks
-  if( e->button() != Qt::LeftButton )
+  if( Event->button() != Qt::LeftButton )
   {
-    e->ignore();
+    Event->ignore();
     return;
   }
 
@@ -1730,7 +1729,7 @@ void KHexEdit::contentsMouseDoubleClickEvent( QMouseEvent *e )
 
     // as we already have a doubleclick maybe it is a tripple click
     TrippleClickTimer->start( qApp->doubleClickInterval() );
-    DoubleClickPoint = e->globalPos();
+    DoubleClickPoint = Event->globalPos();
   }
 //  else
 //    ValueEditor->goInsideByte(); TODO: make this possible again
@@ -1745,17 +1744,17 @@ void KHexEdit::contentsMouseDoubleClickEvent( QMouseEvent *e )
 void KHexEdit::autoScrollTimerDone()
 {
   if( MousePressed )
-    handleMouseMove( viewportToContents(viewport()->mapFromGlobal( QCursor::pos() )) );
+    handleMouseMove( viewportToColumns(viewport()->mapFromGlobal( QCursor::pos() )) );
 }
 
 
 void KHexEdit::handleMouseMove( const QPoint& Point ) // handles the move of the mouse with pressed buttons
 {
   // no scrolltimer and outside of viewport?
-  if( !ScrollTimer->isActive() && Point.y() < contentsY() || Point.y() > contentsY() + visibleHeight() )
+  if( !ScrollTimer->isActive() && Point.y() < yOffset() || Point.y() > yOffset() + visibleHeight() )
     ScrollTimer->start( DefaultScrollTimerPeriod );
   // scrolltimer but inside of viewport?
-  else if( ScrollTimer->isActive() && Point.y() >= contentsY() && Point.y() <= contentsY() + visibleHeight() )
+  else if( ScrollTimer->isActive() && Point.y() >= yOffset() && Point.y() <= yOffset() + visibleHeight() )
     ScrollTimer->stop();
 
   pauseCursor();
@@ -1827,7 +1826,7 @@ void KHexEdit::startDrag()
 }
 
 
-void KHexEdit::contentsDragEnterEvent( QDragEnterEvent *event )
+void KHexEdit::dragEnterEvent( QDragEnterEvent *event )
 {
   // interesting for this widget?
   if( isReadOnly() || !event->mimeData()->hasFormat("application/octet-stream") )
@@ -1841,7 +1840,7 @@ void KHexEdit::contentsDragEnterEvent( QDragEnterEvent *event )
 }
 
 
-void KHexEdit::contentsDragMoveEvent( QDragMoveEvent *event )
+void KHexEdit::dragMoveEvent( QDragMoveEvent *event )
 {
   // is this content still interesting for us?
   if( isReadOnly() || !event->mimeData()->hasFormat("application/octet-stream") )
@@ -1859,7 +1858,7 @@ void KHexEdit::contentsDragMoveEvent( QDragMoveEvent *event )
 }
 
 
-void KHexEdit::contentsDragLeaveEvent( QDragLeaveEvent * )
+void KHexEdit::dragLeaveEvent( QDragLeaveEvent * )
 {
   // bye... and thanks for all the cursor movement...
   InDnD = false;
@@ -1867,7 +1866,7 @@ void KHexEdit::contentsDragLeaveEvent( QDragLeaveEvent * )
 
 
 
-void KHexEdit::contentsDropEvent( QDropEvent *e )
+void KHexEdit::dropEvent( QDropEvent *Event )
 {
   // after drag enter and move check one more time
   if( isReadOnly() )
@@ -1875,15 +1874,15 @@ void KHexEdit::contentsDropEvent( QDropEvent *e )
 
   // leave state
   InDnD = false;
-  e->accept();
+  Event->accept();
 
   // is this an internal dnd?
-  if( e->source() == this || e->source() == viewport() )
-    handleInternalDrag( e );
+  if( Event->source() == this || Event->source() == viewport() )
+    handleInternalDrag( Event );
   else
   {
    //BufferRanges->removeSelection();
-    pasteFromSource( e->mimeData() );
+    pasteFromSource( Event->mimeData() );
   }
 
   // emit appropriate signals.
@@ -1892,7 +1891,7 @@ void KHexEdit::contentsDropEvent( QDropEvent *e )
 }
 
 
-void KHexEdit::handleInternalDrag( QDropEvent *e )
+void KHexEdit::handleInternalDrag( QDropEvent *Event )
 {
   // stop ui
   pauseCursor();
@@ -1902,7 +1901,7 @@ void KHexEdit::handleInternalDrag( QDropEvent *e )
   int InsertIndex = BufferCursor->realIndex();
 
   // is this a move?
-  if( e->proposedAction() == Qt::MoveAction )
+  if( Event->proposedAction() == Qt::MoveAction )
   {
     // ignore the copy hold in the event but only move
     int NewIndex = DataBuffer->move( InsertIndex, Selection );
@@ -1916,7 +1915,7 @@ void KHexEdit::handleInternalDrag( QDropEvent *e )
   else
   {
     // get data
-    QByteArray Bytes = e->mimeData()->data( "application/octet-stream" );
+    QByteArray Bytes = Event->mimeData()->data( "application/octet-stream" );
 
     if( !Bytes.isEmpty() )
     {
@@ -1952,37 +1951,37 @@ void KHexEdit::handleInternalDrag( QDropEvent *e )
 }
 
 
-void KHexEdit::contentsWheelEvent( QWheelEvent *e )
+void KHexEdit::wheelEvent( QWheelEvent *Event )
 {
   if( isReadOnly() )
   {
-    if( e->modifiers() & Qt::CTRL )
+    if( Event->modifiers() & Qt::CTRL )
     {
-      if( e->delta() > 0 )
+      if( Event->delta() > 0 )
         zoomOut();
-      else if( e->delta() < 0 )
+      else if( Event->delta() < 0 )
         zoomIn();
       return;
     }
   }
-  Q3ScrollView::contentsWheelEvent( e );
+  KColumnsView::wheelEvent( Event );
 }
 
 
 #if 0
-void KHexEdit::contentsContextMenuEvent( QContextMenuEvent *e )
+void KHexEdit::contextMenuEvent( QContextMenuEvent *Event )
 {
 //   clearUndoRedo();
   MousePressed = false;
 
-  e->accept();
+  Event->accept();
 
-  QPopupMenu *PopupMenu = createPopupMenu( e->pos() );
+  QPopupMenu *PopupMenu = createPopupMenu( Event->pos() );
   if( !PopupMenu )
     PopupMenu = createPopupMenu();
   if( !PopupMenu )
     return;
-  int r = PopupMenu->exec( e->globalPos() );
+  int r = PopupMenu->exec( Event->globalPos() );
   delete PopupMenu;
 
   if ( r == d->id[ IdClear ] )

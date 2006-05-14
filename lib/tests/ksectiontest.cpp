@@ -335,6 +335,51 @@ void KSectionTest::testAdaptToChange()
   QCOMPARE( Section, OtherSection );
 }
 
+void KSectionTest::testStartForInclude()
+{
+  // testStartForInclude, same length, start at start
+  const KSection Section( Start, End );
+  KSection OtherSection( Section );
+  QCOMPARE( Section.startForInclude(OtherSection), OtherSection.start() );
+
+  // testStartForInclude, same length, start before start
+  OtherSection.moveBy( -1 );
+  QCOMPARE( Section.startForInclude(OtherSection), OtherSection.start() );
+
+  // testStartForInclude, same length, end behind end
+  OtherSection.moveBy( 2 );
+  QCOMPARE( Section.startForInclude(OtherSection), OtherSection.start() );
+
+  // testStartForInclude, smaller length, start at start
+  OtherSection.set( Start, End-1 );
+  int Diff = Section.width() - OtherSection.width();
+  QCOMPARE( Section.startForInclude(OtherSection), OtherSection.start() );
+
+  // testStartForInclude, smaller length, start before start
+  OtherSection.moveBy( -1 );
+  QCOMPARE( Section.startForInclude(OtherSection), OtherSection.start() );
+
+  // testStartForInclude, smaller length, end behind end
+  OtherSection.moveBy( 2 );
+  QCOMPARE( Section.startForInclude(OtherSection), OtherSection.start()-Diff );
+
+/* // undefined in startForInclude
+  // testStartForInclude, greater length, start at start
+  OtherSection.set( Start, End+1 );
+  Diff = Section.width() - OtherSection.width();
+  QCOMPARE( Section.startForInclude(OtherSection), OtherSection.start() );
+
+  // testStartForInclude, smaller length, start before start
+  OtherSection.moveBy( -1 );
+  QCOMPARE( Section.startForInclude(OtherSection), OtherSection.start() );
+
+  // testStartForInclude, smaller length, end behind end
+  OtherSection.moveBy( 2 );
+  QCOMPARE( Section.startForInclude(OtherSection), OtherSection.start()-Diff );
+*/
+}
+
+
 QTEST_MAIN( KSectionTest )
 
 #include "ksectiontest.moc"
