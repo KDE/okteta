@@ -19,6 +19,7 @@
 #include <QListIterator>
 #include <QPaintEvent>
 #include <QPainter>
+#include <QStyle>
 #include <QScrollBar>
 // lib specific
 #include "kcolumn.h"
@@ -106,36 +107,23 @@ void KColumnsView::updateWidths()
 }
 
 
-void KColumnsView::updateScrollBars() // TODO: do one smart calculation
+void KColumnsView::updateScrollBars()
 {
-  //style()->pixelMetric( QStyle::PM_ScrollBarExtent );
+  const int ScrollBarWidth = style()->pixelMetric( QStyle::PM_ScrollBarExtent );
+  QSize ViewSize = maximumViewportSize();
 
-  const int VisibleHeight = visibleHeight();
-  verticalScrollBar()->setRange( 0, columnsHeight()-VisibleHeight );
-  verticalScrollBar()->setPageStep( VisibleHeight );
+  bool NeedsVerticalBar = columnsHeight() > ViewSize.height();
+  bool NeedsHorizontalBar = columnsWidth() > ViewSize.width();
 
-  const int VisibleWidth = visibleWidth();
-  horizontalScrollBar()->setRange( 0, ColumnsWidth-VisibleWidth );
-  horizontalScrollBar()->setPageStep( VisibleWidth );
-/*
-  QSize MaxViewportSize = maximumViewportSize();
+  if( NeedsVerticalBar )
+    ViewSize.rwidth() -= ScrollBarWidth;
+  if( NeedsHorizontalBar )
+    ViewSize.rheight() -= ScrollBarWidth;
 
-horizontalScrollBar()->sizeHint().height()
-    QSize p = viewport()->size();
-    QSize m = maximumViewportSize();
-
-    QSize min = qSmartMinSize(widget);
-    QSize max = qSmartMaxSize(widget);
-    if ((m.expandedTo(min) == m && m.boundedTo(max) == m))
-        p = m; // no scroll bars needed
-
-    QSize v = p.expandedTo(min).boundedTo(max);
-
-    horizontalScrollBar()->setRange(0, v.width() - p.width());
-    horizontalScrollBar()->setPageStep(p.width());
-    verticalScrollBar()->setRange(0, v.height() - p.height());
-    verticalScrollBar()->setPageStep(p.height());
-*/
+  verticalScrollBar()->setRange( 0, columnsHeight()-ViewSize.height() );
+  verticalScrollBar()->setPageStep( ViewSize.height() );
+  horizontalScrollBar()->setRange( 0, columnsWidth()-ViewSize.width() );
+  horizontalScrollBar()->setPageStep( ViewSize.width() );
 }
 
 
