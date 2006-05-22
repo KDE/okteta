@@ -27,10 +27,10 @@
 #include <khexedit/zoominterface.h>
 #include <khexedit/clipboardinterface.h>
 
-
 namespace KHE {
 class KBytesEdit;
 }
+
 
 /**
    hex editor/viewer.
@@ -43,6 +43,7 @@ class KBytesEditWidget : public QWidget, public KHE::BytesEditInterface,
                          public KHE::ZoomInterface, public KHE::ClipboardInterface
 {
   Q_OBJECT
+  Q_INTERFACES(KHE::BytesEditInterface KHE::ValueColumnInterface KHE::CharColumnInterface KHE::ZoomInterface KHE::ClipboardInterface)
 
   public:
     /** constructor API as demanded by KGenericFactory */
