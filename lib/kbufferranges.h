@@ -110,9 +110,9 @@ inline int KBufferRanges::noOfSelections()  const { return 1; }
 
 inline int KBufferRanges::selectionStart()  const { return Selection.start(); }
 inline int KBufferRanges::selectionEnd()    const { return Selection.end(); }
-inline KSection KBufferRanges::selection()  const { return Selection; }
+inline KSection KBufferRanges::selection()  const { return Selection.section(); }
 inline KSection KBufferRanges::firstWordSelection()  const { return FirstWordSelection; }
-inline int KBufferRanges::selectionLength() const { return Selection.width(); }
+inline int KBufferRanges::selectionLength() const { return Selection.section().width(); }
 inline bool KBufferRanges::isModified()     const { return Modified; }
 
 inline bool KBufferRanges::hasSelection()             const { return Selection.isValid(); }
@@ -120,7 +120,7 @@ inline bool KBufferRanges::selectionStarted()         const { return Selection.s
 inline bool KBufferRanges::selectionJustStarted()     const { return Selection.justStarted(); }
 inline bool KBufferRanges::hasFirstWordSelection()    const { return FirstWordSelection.isValid(); }
 inline bool KBufferRanges::hasMarking()               const { return Marking.isValid(); }
-inline bool KBufferRanges::selectionIncludes( int Index ) const { return Selection.includes( Index ); }
+inline bool KBufferRanges::selectionIncludes( int Index ) const { return Selection.section().includes( Index ); }
 inline bool KBufferRanges::markingIncludes( int Index )   const { return Marking.includes( Index ); }
 
 inline void KBufferRanges::setModified( bool M )           { Modified = M; }

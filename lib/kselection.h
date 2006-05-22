@@ -34,7 +34,7 @@ namespace KHE
   *
   *@author Friedrich W. H.  Kossebau
   */
-class KSelection : public KSection
+class KSelection
 {
   public:
     /** creates a selection with a given start.
@@ -50,13 +50,13 @@ class KSelection : public KSection
     KSelection &operator=( const KSection &S );
 
   public: // modification access
-    /** starts the selection. 
+    /** starts the selection.
       * For this the anchor, start and end are set to the given index,
       * so the initial selection is empty.
       * @param Index index in front of which the selection begins
       */
     void setStart( int Index );
-    /** sets the end of the current selection 
+    /** sets the end of the current selection.
       * If the end is before the start the selection will reach from the given index 
       * @param Index index in front of which the selection ends
       */
@@ -64,15 +64,12 @@ class KSelection : public KSection
     /** sets the selection to be invalid
       */
     void cancel();
-    /** sets the anchor to the start 
+    /** sets the anchor to the start or the end.
+      * @param if true to the start, otherwise to the end
       * If the selection has not started the behaviour is undefined.
       */
-    void setForward();
-    /** sets the anchor to the end
-      * If the selection has not started the behaviour is undefined.
-      */
-    void setBackward();
-    /** swaps anchor from start to end or vice versa 
+    void setForward( bool Forward = true );
+    /** swaps anchor from start to end or vice versa.
       * If the selection has not started the behaviour is undefined.
       */
     void reverse();
@@ -82,8 +79,16 @@ class KSelection : public KSection
       * @return anchor value
       */
     int anchor() const;
+    int start() const;
+    int end() const;
+    /** 
+      * @return section
+      */
+    const KSection &section() const;
+
 
   public: // logic access
+    bool isValid() const;
     /** 
       * @return @c true if the anchor has been set, otherwise @c false.
       */
@@ -98,6 +103,8 @@ class KSelection : public KSection
     bool isForward() const;
 
   protected:
+    /** Section */
+    KSection Section;
     /** cursor index where the selection starts */
     int Anchor;
 };
@@ -108,24 +115,24 @@ inline KSelection::KSelection( int Index ) : Anchor( Index )  {}
 inline KSelection::~KSelection() {}
 
 inline KSelection &KSelection::operator=( const KSelection &S )
-{ 
-  KSection::operator=(S); 
-  Anchor = S.Anchor; 
-  return *this; 
+{
+  Section = S.Section;
+  Anchor = S.Anchor;
+  return *this;
 }
 
 inline KSelection &KSelection::operator=( const KSection &S )
-{ 
-  KSection::operator=(S); 
-  Anchor = start(); 
-  return *this; 
+{
+  Section = S;
+  Anchor = S.start();
+  return *this;
 }
 
 
 inline void KSelection::setStart( int Index )
 {
   Anchor = Index;
-  unset();
+  Section.unset();
 }
 
 
@@ -133,45 +140,42 @@ inline void KSelection::setEnd( int Index )
 {
   // nothing selected?
   if( Index == Anchor )
-    unset();
+    Section.unset();
   // selecting forwards?
   else if( Index > Anchor )
   {
-    KSection::setStart( Anchor );
-    KSection::setEnd( Index-1 );
+    Section.setStart( Anchor );
+    Section.setEnd( Index-1 );
   }
   // selecting backwards
   else
   {
-    KSection::setStart( Index );
-    KSection::setEnd( Anchor-1 );
+    Section.setStart( Index );
+    Section.setEnd( Anchor-1 );
   }
 }
 
-inline void KSelection::reverse() 
+inline void KSelection::reverse()
 {
-   Anchor = isForward() ? end()+1 : start();
+   Anchor = isForward() ? Section.end()+1 : Section.start();
 }
 
-inline void KSelection::setForward() 
+inline void KSelection::setForward( bool Forward )
 {
-   Anchor = start();
+   Anchor = Forward ? Section.start() : Section.end()+1;
 }
 
-inline void KSelection::setBackward() 
-{
-   Anchor = end()+1;
-}
+inline const KSection &KSelection::section() const { return Section; }
+inline int KSelection::anchor()              const { return Anchor; }
+inline int KSelection::start()               const { return Section.start(); }
+inline int KSelection::end()                 const { return Section.end(); }
 
-inline int KSelection::anchor() const { return Anchor; }
+inline void KSelection::cancel() { Anchor = -1; Section.unset(); }
 
-inline void KSelection::cancel() { Anchor = -1; unset(); }
-
-inline bool KSelection::started() const { return Anchor != -1; }
-
-inline bool KSelection::justStarted() const { return Anchor != -1 && start() == -1; }
-
-inline bool KSelection::isForward() const { return Anchor == start(); }
+inline bool KSelection::isValid()     const { return Section.isValid(); }
+inline bool KSelection::started()     const { return Anchor != -1; }
+inline bool KSelection::justStarted() const { return Anchor != -1 && Section.start() == -1; }
+inline bool KSelection::isForward()   const { return Anchor == Section.start(); }
 
 }
 

@@ -65,16 +65,16 @@ void KBufferRanges::setSelection( KSection S )
 {
   bool Changed = Selection.isValid();
   if( Changed )
-    addChangedRange( Selection );
+    addChangedRange( Selection.section() );
   Selection = S;
-  addChangedRange( Selection );
+  addChangedRange( Selection.section() );
 }
 
 void KBufferRanges::setSelectionStart( int StartIndex )
 {
   bool Changed = Selection.isValid();
   if( Changed )
-    addChangedRange( Selection );
+    addChangedRange( Selection.section() );
 
   Selection.setStart( StartIndex );
 }
@@ -82,13 +82,13 @@ void KBufferRanges::setSelectionStart( int StartIndex )
 
 void KBufferRanges::setSelectionEnd( int EndIndex )
 {
-  KSection OldSelection = Selection;
+  KSection OldSelection = Selection.section();
   Selection.setEnd( EndIndex );
 
   // TODO: think about rather building a diff of the sections
   if( !OldSelection.isValid() )
   {
-    addChangedRange( Selection );
+    addChangedRange( Selection.section() );
     return;
   }
   if( !Selection.isValid() )
@@ -97,7 +97,7 @@ void KBufferRanges::setSelectionEnd( int EndIndex )
     return;
   }
 
-  if( OldSelection == Selection )
+  if( OldSelection == Selection.section() )
     return;
   int CS;
   int CE;
@@ -150,7 +150,7 @@ void KBufferRanges::removeSelection( int id )
 
   bool Changed = Selection.isValid();
   if( Changed )
-    addChangedRange( Selection );
+    addChangedRange( Selection.section() );
 
   Selection.cancel();
   FirstWordSelection.unset();
@@ -159,7 +159,7 @@ void KBufferRanges::removeSelection( int id )
 
 bool KBufferRanges::overlapsSelection( int FirstIndex, int LastIndex, int *SI, int *EI ) const
 {
-  if( Selection.overlaps(KSection(FirstIndex,LastIndex)) )
+  if( Selection.section().overlaps(KSection(FirstIndex,LastIndex)) )
   {
     *SI = Selection.start();
     *EI = Selection.end();
@@ -183,7 +183,7 @@ bool KBufferRanges::overlapsMarking( int FirstIndex, int LastIndex, int *SI, int
 
 const KSection *KBufferRanges::firstOverlappingSelection( KSection Range ) const
 {
-  return Selection.overlaps(Range) ? &Selection : 0;
+  return Selection.section().overlaps(Range) ? &Selection.section() : 0;
 }
 
 
@@ -286,16 +286,9 @@ void KBufferRanges::setFirstWordSelection( KSection Section )
    // in the anchor not on the right side?
    if( Selection.isForward() != Forward )
    {
-     if( Forward )
-     {
-       setSelectionEnd( FirstWordSelection.start() );
-       Selection.setForward();
-     }
-     else
-     {
-       setSelectionEnd( FirstWordSelection.end()+1 );
-       Selection.setBackward();
-     }
+     setSelectionEnd( Forward ? FirstWordSelection.start() : FirstWordSelection.end()+1 );
+
+     Selection.setForward( Forward );
    }
  }
  
