@@ -26,18 +26,16 @@
 using namespace KHE;
 
 
-
-void KEBCDIC1047CharCodecKCharCodecIfTest::init()
+KHE::KCharCodec *KEBCDIC1047CharCodecKCharCodecIfTest::createCodec()
 {
-  CharCodec = KEBCDIC1047CharCodec::create();
+  return KEBCDIC1047CharCodec::create();
 }
 
 
-void KEBCDIC1047CharCodecKCharCodecIfTest::cleanup()
+void KEBCDIC1047CharCodecKCharCodecIfTest::deleteCodec( KHE::KCharCodec *Codec )
 {
-  delete CharCodec;
+  delete Codec;
 }
+
 
 QTEST_MAIN( KEBCDIC1047CharCodecKCharCodecIfTest )
-
-#include "kebcdic1047charcodeckcharcodeciftest.moc"

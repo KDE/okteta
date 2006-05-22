@@ -62,6 +62,17 @@ static void list( KDataBuffer *DataBuffer, const char* Name )
   }
 }
 */
+
+void KDataBufferIfTest::init()
+{
+  DataBuffer = createBuffer();
+}
+
+void KDataBufferIfTest::cleanup()
+{
+  deleteBuffer( DataBuffer );
+}
+
 void KDataBufferIfTest::testModified()
 {
   // can we alter the buffer at all?

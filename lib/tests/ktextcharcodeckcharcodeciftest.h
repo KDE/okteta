@@ -26,11 +26,9 @@
 
 class KTextCharCodecKCharCodecIfTest : public KCharCodecIfTest
 {
-  Q_OBJECT
-
-  public Q_SLOTS:
-    void init();
-    void cleanup();
+  protected: // KCharCodecIfTest API
+    virtual KHE::KCharCodec *createCodec();
+    virtual void deleteCodec( KHE::KCharCodec *Codec );
 };
 
 #endif

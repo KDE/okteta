@@ -29,16 +29,15 @@ static const int FixedSizeBufferSize = 60;
 
 
 
-void KFixedSizeBufferDataBufferIfTest::init()
+KHE::KDataBuffer *KFixedSizeBufferDataBufferIfTest::createBuffer()
 {
-  DataBuffer = new KFixedSizeBuffer( FixedSizeBufferSize );
+  return new KFixedSizeBuffer( FixedSizeBufferSize );
 }
 
-void KFixedSizeBufferDataBufferIfTest::cleanup()
+void KFixedSizeBufferDataBufferIfTest::deleteBuffer( KHE::KDataBuffer *Buffer )
 {
-  delete DataBuffer;
+  delete Buffer;
 }
+
 
 QTEST_MAIN( KFixedSizeBufferDataBufferIfTest )
-
-#include "kfixedsizebufferkdatabufferiftest.moc"

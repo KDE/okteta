@@ -31,14 +31,17 @@ class KDataBufferIfTest : public QObject
 {
   Q_OBJECT
 
-  protected: // used in all tests
-    /** pointer to the buffer to test */
-    KHE::KDataBuffer *DataBuffer;
-
   protected:
     KDataBufferIfTest();
 
+  protected: // our API
+    virtual KHE::KDataBuffer *createBuffer() = 0;
+    virtual void deleteBuffer( KHE::KDataBuffer *Buffer ) = 0;
+
   private Q_SLOTS: // test functions
+    void init();
+    void cleanup();
+
     void testModified();
     void testCopyTo();
     void testFill();
@@ -51,6 +54,10 @@ class KDataBufferIfTest : public QObject
     void testReplaceEqual();
     void testReplaceLess();
     void testReplaceMore();
+
+  private: // used in all tests
+    /** pointer to the buffer to test */
+    KHE::KDataBuffer *DataBuffer;
 };
 
 inline KDataBufferIfTest::KDataBufferIfTest()  : DataBuffer( 0 ) {}

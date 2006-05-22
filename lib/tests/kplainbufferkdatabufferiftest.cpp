@@ -29,19 +29,18 @@ using namespace KHE;
 static const int PlainBufferSize = 60;
 
 
-void KPlainBufferKDataBufferIfTest::init()
+KHE::KDataBuffer *KPlainBufferKDataBufferIfTest::createBuffer()
 {
   KPlainBuffer *PlainBuffer = new KPlainBuffer( PlainBufferSize );
   PlainBuffer->setReadOnly( false );
 
-  DataBuffer = PlainBuffer;
+  return PlainBuffer;
 }
 
-void KPlainBufferKDataBufferIfTest::cleanup()
+void KPlainBufferKDataBufferIfTest::deleteBuffer( KHE::KDataBuffer *Buffer )
 {
-  delete DataBuffer;
+  delete Buffer;
 }
+
 
 QTEST_MAIN( KPlainBufferKDataBufferIfTest )
-
-#include "kplainbufferkdatabufferiftest.moc"

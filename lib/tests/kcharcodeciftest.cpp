@@ -27,6 +27,17 @@ using namespace KHE;
 static const char QTextCodecWhiteSpace = 63;
 
 
+void KCharCodecIfTest::init()
+{
+  CharCodec = createCodec();
+}
+
+void KCharCodecIfTest::cleanup()
+{
+  deleteCodec( CharCodec );
+}
+
+
 void KCharCodecIfTest::testEncodeDecode()
 {
   unsigned char c = 0;

@@ -27,17 +27,16 @@ using namespace KHE;
 
 
 
-void KTextCharCodecKCharCodecIfTest::init()
+KHE::KCharCodec *KTextCharCodecKCharCodecIfTest::createCodec()
 {
-  CharCodec = KTextCharCodec::createCodec("ISO8859-1"); // TODO: test for some more, e.g. KOI8-R
+  return KTextCharCodec::createCodec("ISO8859-1"); // TODO: test for some more, e.g. KOI8-R
 }
 
 
-void KTextCharCodecKCharCodecIfTest::cleanup()
+void KTextCharCodecKCharCodecIfTest::deleteCodec( KHE::KCharCodec *Codec )
 {
-  delete CharCodec;
+  delete Codec;
 }
+
 
 QTEST_MAIN( KTextCharCodecKCharCodecIfTest )
-
-#include "ktextcharcodeckcharcodeciftest.moc"

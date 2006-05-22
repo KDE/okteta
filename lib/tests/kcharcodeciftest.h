@@ -32,14 +32,21 @@ class KCharCodecIfTest : public QObject
   Q_OBJECT
 
   protected:
-    /** pointer to the buffer to test */
-    KHE::KCharCodec *CharCodec;
-
-  protected:
     KCharCodecIfTest();
 
+  protected: // our API
+    virtual KHE::KCharCodec *createCodec() = 0;
+    virtual void deleteCodec( KHE::KCharCodec *Codec ) = 0;
+
   private Q_SLOTS: // test functions
+    void init();
+    void cleanup();
+
     void testEncodeDecode();
+
+  private:
+    /** pointer to the buffer to test */
+    KHE::KCharCodec *CharCodec;
 };
 
 

@@ -26,11 +26,9 @@
 
 class KPlainBufferKDataBufferIfTest : public KDataBufferIfTest
 {
-  Q_OBJECT
-
-  public Q_SLOTS:
-    void init();
-    void cleanup();
+  protected: // KDataBufferIfTest API
+    KHE::KDataBuffer *createBuffer();
+    void deleteBuffer( KHE::KDataBuffer *Buffer );
 };
 
 #endif
