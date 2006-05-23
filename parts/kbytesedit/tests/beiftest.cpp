@@ -1,7 +1,24 @@
-// kde
+/***************************************************************************
+                          beiftest.cpp  -  description
+                             -------------------
+    begin                : Tue May 16 2006
+    copyright            : (C) 2006 by Friedrich W. H. Kossebau
+    email                : Friedrich.W.H@Kossebau.de
+ ***************************************************************************/
+
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+
+
+// kde specific
 #include <kapplication.h>
 #include <kcmdlineargs.h>
-#include <kparts/componentfactory.h>
 #include <khexedit/byteseditinterface.h>
 #include <khexedit/valuecolumninterface.h>
 #include <khexedit/charcolumninterface.h>
