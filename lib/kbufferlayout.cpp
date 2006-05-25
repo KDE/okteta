@@ -96,13 +96,13 @@ void KBufferLayout::setNoOfLinesPerPage( int N )
 
 void KBufferLayout::calcStart()
 {
-  ContentCoords.setStart( KBufferCoord(StartOffset,NoOfBytesPerLine,false) );
+  ContentCoords.setStart( KBufferCoord::fromIndex(StartOffset,NoOfBytesPerLine) );
 }
 
 
 void KBufferLayout::calcEnd()
 {
-  ContentCoords.setEnd( (Length>0)?KBufferCoord(Length-1+StartOffset,NoOfBytesPerLine,false):
+  ContentCoords.setEnd( (Length>0)?KBufferCoord::fromIndex(Length-1+StartOffset,NoOfBytesPerLine):
                                    KBufferCoord(-1,ContentCoords.start().line()) );
 }
 
@@ -173,7 +173,7 @@ int KBufferLayout::lineAtIndex( int Index ) const
 
 KBufferCoord KBufferLayout::coordOfIndex( int Index ) const
 {
-  return KBufferCoord( Index+StartOffset, NoOfBytesPerLine, false );
+  return KBufferCoord::fromIndex( Index+StartOffset, NoOfBytesPerLine );
 }
 
 

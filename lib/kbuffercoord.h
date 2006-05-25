@@ -35,10 +35,15 @@ namespace KHE
 class KBufferCoord
 {
   public:
+    /** constructs a section by width
+     * @param SI starting index
+     * @param W width of the section
+     */
+    static KBufferCoord fromIndex( int Index, int LineWidth );
+  public:
     /** creates a coord with 0,0 */
     KBufferCoord();
     KBufferCoord( int P, int L );
-    KBufferCoord( int Index, int LineWidth, bool /*dummy*/ );
     KBufferCoord( const KBufferCoord &C );
     KBufferCoord &operator=( const KBufferCoord &c );
     ~KBufferCoord();
@@ -168,10 +173,12 @@ class KBufferCoord
 
 inline KBufferCoord::KBufferCoord() : Pos( 0 ), Line( 0 ) {}
 inline KBufferCoord::KBufferCoord( int P, int L ) : Pos( P ), Line( L ) {}
-inline KBufferCoord::KBufferCoord( int Index, int LineWidth, bool )
+
+inline KBufferCoord KBufferCoord::fromIndex( int Index, int LineWidth )
 {
-  Line = Index / LineWidth;
-  Pos  = Index - Line*LineWidth;
+  int Line = Index / LineWidth;
+  int Pos  = Index - Line*LineWidth;
+  return KBufferCoord(Line,Pos);
 }
 
 inline KBufferCoord::KBufferCoord( const KBufferCoord &C ) : Pos( C.Pos ), Line( C.Line ) {}
