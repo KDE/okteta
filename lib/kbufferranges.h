@@ -39,12 +39,12 @@ class KBufferRanges
     ~KBufferRanges();
 
   public: // modifcation access
-    void setMarking( KSection M );
+    void setMarking( const KSection &M );
     void setSelectionStart( int StartIndex );
     void setSelectionEnd( int StartIndex );
-    void setSelection( KSection S );
+    void setSelection( const KSection &S );
     /** */
-    void setFirstWordSelection( KSection S );
+    void setFirstWordSelection( const KSection &S );
     /** */
     void ensureWordSelectionForward( bool Forward );
 
@@ -55,7 +55,7 @@ class KBufferRanges
     /** removes all but the standard selection and returns true if something changed */
     void removeFurtherSelections();
 
-    void addChangedRange( KSection S );
+    void addChangedRange( const KSection &S );
     void addChangedRange( int SI, int EI );
     void addChangedRange( const KCoordRange &NewRange );
     void resetChangedRanges();
@@ -87,8 +87,8 @@ class KBufferRanges
 //    bool overlapsChanges( int FirstIndex, int LastIndex, int *SI, int *EI ) const;
 //    bool overlapsChanges( KSection Indizes, KSection *ChangedRange ) const;
     bool overlapsChanges( const KCoordRange &Range, KCoordRange *ChangedRange ) const;
-    const KSection *firstOverlappingSelection( KSection Range ) const;
-    const KSection *overlappingMarking( KSection Range ) const;
+    const KSection *firstOverlappingSelection( const KSection &Range ) const;
+    const KSection *overlappingMarking( const KSection &Range ) const;
 
 
   protected:

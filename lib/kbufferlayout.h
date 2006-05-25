@@ -116,6 +116,8 @@ class KBufferLayout
     int lineAtIndex( int Index ) const;
     /** calculates the coord in which index is found. if index is invalid the behaviour is undefinded */
     KBufferCoord coordOfIndex( int Index ) const;
+    /** calculates the range of coords in which the indizes are found. if indizes are invalid the behaviour is undefinded */
+    KCoordRange coordRangeOfIndizes( const KSection &Indizes ) const;
 
     /** returns the used positions in line */
     KSection positions( int Line ) const;

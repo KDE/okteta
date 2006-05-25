@@ -176,6 +176,13 @@ KBufferCoord KBufferLayout::coordOfIndex( int Index ) const
   return KBufferCoord::fromIndex( Index+StartOffset, NoOfBytesPerLine );
 }
 
+KCoordRange KBufferLayout::coordRangeOfIndizes( const KSection &Indizes ) const
+{
+  return KCoordRange(
+           KBufferCoord::fromIndex(Indizes.start()+StartOffset, NoOfBytesPerLine),
+           KBufferCoord::fromIndex(Indizes.end()+StartOffset,   NoOfBytesPerLine) );
+}
+
 
 
 int KBufferLayout::correctIndex( int I ) const

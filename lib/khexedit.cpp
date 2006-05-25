@@ -819,8 +819,7 @@ KBufferDrag *KHexEdit::dragObject() const
     OC = OffsetColumn->isVisible() ? OffsetColumn : 0;
     HC = valueColumn().isVisible() ? &valueColumn() : 0;
     TC = charColumn().isVisible() ? &charColumn() : 0;
-    KSection S = BufferRanges->selection();
-    Range.set( BufferLayout->coordOfIndex(S.start()),BufferLayout->coordOfIndex(S.end()) );
+    Range.set( BufferLayout->coordRangeOfIndizes(BufferRanges->selection()) );
   }
 
   return new KBufferDrag( selectedData(), Range, OC, HC, TC,
