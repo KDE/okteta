@@ -44,7 +44,7 @@ void KBufferRanges::reset()
 }
 
 
-void KBufferRanges::setMarking( KSection M )
+void KBufferRanges::setMarking( const KSection &M )
 {
   if( Marking == M )
     return;
@@ -61,7 +61,7 @@ void KBufferRanges::removeFurtherSelections()
 }
 
 
-void KBufferRanges::setSelection( KSection S )
+void KBufferRanges::setSelection( const KSection &S )
 {
   bool Changed = Selection.isValid();
   if( Changed )
@@ -181,13 +181,13 @@ bool KBufferRanges::overlapsMarking( int FirstIndex, int LastIndex, int *SI, int
 }
 
 
-const KSection *KBufferRanges::firstOverlappingSelection( KSection Range ) const
+const KSection *KBufferRanges::firstOverlappingSelection( const KSection &Range ) const
 {
   return Selection.section().overlaps(Range) ? &Selection.section() : 0;
 }
 
 
-const KSection *KBufferRanges::overlappingMarking( KSection Range ) const
+const KSection *KBufferRanges::overlappingMarking( const KSection &Range ) const
 {
   return Marking.overlaps(Range) ? &Marking : 0;
 }
@@ -244,9 +244,9 @@ void KBufferRanges::addChangedRange( int SI, int EI )
 }
 
 
-void KBufferRanges::addChangedRange( KSection S )
+void KBufferRanges::addChangedRange( const KSection &S )
 {
-  addChangedRange( KCoordRange(Layout->coordOfIndex(S.start()),Layout->coordOfIndex(S.end())) );
+  addChangedRange( Layout->coordRangeOfIndizes(S) );
 }
 
 
@@ -275,7 +275,7 @@ void KBufferRanges::resetChangedRanges()
 }
 
 
-void KBufferRanges::setFirstWordSelection( KSection Section )
+void KBufferRanges::setFirstWordSelection( const KSection &Section )
 {
   FirstWordSelection = Section;
   setSelection( FirstWordSelection );
