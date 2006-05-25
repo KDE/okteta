@@ -76,6 +76,19 @@ add_test(khexedit-kcoordrangetest ${EXECUTABLE_OUTPUT_PATH}/kcoordrangetest)
 
 ########### next target ###############
 
+set( kcoordrangelisttest_SRCS kcoordrangelisttest.cpp )
+
+kde4_automoc(${kcoordrangelisttest_SRCS})
+
+kde4_add_executable(kcoordrangelisttest RUN_UNINSTALLED ${kcoordrangelisttest_SRCS})
+
+target_link_libraries(kcoordrangelisttest  testkhexeditcommon ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
+
+add_test(khexedit-kcoordrangelisttest ${EXECUTABLE_OUTPUT_PATH}/kcoordrangelisttest)
+
+
+########### next target ###############
+
 set(kfixedsizebuffertest_SRCS kfixedsizebuffertest.cpp )
 
 kde4_automoc(${kfixedsizebuffertest_SRCS})
