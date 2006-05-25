@@ -35,7 +35,7 @@ class KCoordRangeList : public QLinkedList<KCoordRange>
     ~KCoordRangeList();
 
   public:
-    void addCoordRange( KCoordRange S );
+    void addCoordRange( KCoordRange R );
 };
 
 }

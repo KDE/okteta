@@ -39,6 +39,7 @@ void KCoordRangeList::addCoordRange( KCoordRange NewCoordRange )
   iterator S = begin();
   for( ; S!=end(); ++S )
   {
+ // TODO: add bufferwidth to rangelist so consecutive ranges can be joined, cmp ksectionlist
     // is next CoordRange behind the new CoordRange?
     if( NewCoordRange.endsBefore(*S) )
     {
@@ -57,7 +58,7 @@ void KCoordRangeList::addCoordRange( KCoordRange NewCoordRange )
       iterator LS = S;
       for( ++LS; LS!=end(); ++LS )
       {
-        if( !(*LS).overlaps(NewCoordRange) )
+        if( NewCoordRange.endsBefore((*LS).start()) )
           break;
         End = (*LS).end();
       }
