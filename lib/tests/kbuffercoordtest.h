@@ -28,6 +28,7 @@ class KBufferCoordTest : public QObject
   private Q_SLOTS: // test functions
     void testConstructor();
     void testSetConstructor();
+    void testFromIndexConstructor();
     void testCopyConstructor();
     void testEquals();
     void testAssign();

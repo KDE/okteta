@@ -26,8 +26,8 @@ using namespace KHE;
 // local variables
 static const int Line = 3;
 static const int Pos = 15;
-static const int Index = 43;
 static const int LineWidth = 19;
+static const int Index = Line*LineWidth + Pos;
 static const int MaxPos = LineWidth-1;
 static const int Steps = 5;
 
@@ -38,6 +38,7 @@ void KBufferCoordTest::testConstructor()
 
   QCOMPARE( Coord.pos(), 0 );
   QCOMPARE( Coord.line(), 0 );
+  QVERIFY( Coord.isValid() );
 }
 
 
@@ -47,6 +48,18 @@ void KBufferCoordTest::testSetConstructor()
 
   QCOMPARE( Coord.pos(), Pos );
   QCOMPARE( Coord.line(), Line );
+  QVERIFY( Coord.isValid() );
+}
+
+
+void KBufferCoordTest::testFromIndexConstructor()
+{
+  KBufferCoord Coord = KBufferCoord::fromIndex( Index, LineWidth );
+
+  QCOMPARE( Coord.indexByLineWidth(LineWidth), Index );
+  QCOMPARE( Coord.pos(), Pos );
+  QCOMPARE( Coord.line(), Line );
+  QVERIFY( Coord.isValid() );
 }
 
 
@@ -57,6 +70,7 @@ void KBufferCoordTest::testCopyConstructor()
 
   QCOMPARE( OtherCoord.pos(), Pos );
   QCOMPARE( OtherCoord.line(), Line );
+  QVERIFY( OtherCoord.isValid() );
 }
 
 
@@ -246,8 +260,10 @@ void KBufferCoordTest::testIsBeforeLineStart()
   KBufferCoord Coord( 1, Line );
 
   QVERIFY( Coord.isBehindLineStart() );
+  QVERIFY( Coord.isValid() );
   Coord.goLeft();
   QVERIFY( !Coord.isBehindLineStart() );
+  QVERIFY( Coord.isValid() );
 }
 
 void KBufferCoordTest::testIsBeforeLineEnd()
@@ -255,8 +271,10 @@ void KBufferCoordTest::testIsBeforeLineEnd()
   KBufferCoord Coord( MaxPos-1, Line );
 
   QVERIFY( Coord.isBeforeLineEnd(MaxPos) );
+  QVERIFY( Coord.isValid() );
   Coord.goRight();
   QVERIFY( !Coord.isBeforeLineEnd(MaxPos) );
+  QVERIFY( Coord.isValid() );
 }
 
 
@@ -265,6 +283,7 @@ void KBufferCoordTest::testIndexNWidth()
   KBufferCoord Coord;
   Coord.setByIndexNWidth( Index, LineWidth );
   QCOMPARE( Coord.indexByLineWidth(LineWidth), Index );
+  QVERIFY( Coord.isValid() );
 }
 
 

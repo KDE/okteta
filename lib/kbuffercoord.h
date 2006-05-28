@@ -178,7 +178,7 @@ inline KBufferCoord KBufferCoord::fromIndex( int Index, int LineWidth )
 {
   int Line = Index / LineWidth;
   int Pos  = Index - Line*LineWidth;
-  return KBufferCoord(Line,Pos);
+  return KBufferCoord( Pos, Line );
 }
 
 inline KBufferCoord::KBufferCoord( const KBufferCoord &C ) : Pos( C.Pos ), Line( C.Line ) {}
