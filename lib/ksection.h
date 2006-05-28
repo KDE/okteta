@@ -86,6 +86,8 @@ class KSection : public KRange<int>
      * @return the numbered of included indizes or 0, if the section is invalid
      */
     int width() const;
+    int beforeStart() const;
+    int behindEnd() const;
 
   public:
     /**
@@ -107,7 +109,9 @@ inline bool KSection::operator==( const KSection &S ) const { return KRange<int>
 
 inline KSection &KSection::operator=( const KSection &S ) { KRange<int>::operator=(S); return *this; }
 
-inline int KSection::width() const { return isValid() ? end()-start()+1 : 0; }
+inline int KSection::width()       const { return isValid() ? end()-start()+1 : 0; }
+inline int KSection::beforeStart() const { return start()-1; }
+inline int KSection::behindEnd()   const { return end()+1; }
 
 inline void KSection::setByWidth( int S, int Width )  { setStart( S ); setEnd( S+Width-1 ); }
 inline void KSection::setStartByWidth( int Width )  { setStart( end()-Width+1 ); }
