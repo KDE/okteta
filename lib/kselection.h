@@ -74,6 +74,8 @@ class KSelection
       */
     void reverse();
 
+    void adaptToChange( int Pos, int RemovedLength, int InsertedLength );
+
   public: // value access
     /** 
       * @return anchor value
@@ -176,6 +178,12 @@ inline bool KSelection::isValid()     const { return Section.isValid(); }
 inline bool KSelection::started()     const { return Anchor != -1; }
 inline bool KSelection::justStarted() const { return Anchor != -1 && Section.start() == -1; }
 inline bool KSelection::isForward()   const { return Anchor == Section.start(); }
+
+inline void KSelection::adaptToChange( int Pos, int RemovedLength, int InsertedLength )
+{
+  Section.adaptToChange( Pos, RemovedLength, InsertedLength );
+  Anchor = isForward() ? Section.start() : Section.end()+1;
+}
 
 }
 
