@@ -40,8 +40,8 @@ void KSectionList::addSection( KSection NewSection )
   iterator S = begin();
   for( ; S!=end(); ++S )
   {
-    // is new section before the next section?
-    if( NewSection.endsBefore((*S).start()-1) )
+    // new section before next section?
+    if( NewSection.endsBefore((*S).beforeStart()) )
     {
       // put the new before it
       insert( S, NewSection );
@@ -58,7 +58,7 @@ void KSectionList::addSection( KSection NewSection )
       iterator LS = S;
       for( ++LS; LS!=end(); ++LS )
       {
-        if( NewSection.endsBefore((*LS).start()-1) )
+        if( NewSection.endsBefore((*LS).beforeStart()) )
           break;
         End = (*LS).end();
       }
@@ -72,7 +72,7 @@ void KSectionList::addSection( KSection NewSection )
     }
   }
 
-  // all others are before the new?
+  // all others before the new?
   if( S == end() )
     // add it at the end
     append( NewSection );
