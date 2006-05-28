@@ -19,19 +19,18 @@
 #define KHE_KBYTESEDIT_H
 
 
+// lib specific
 #include "khexedit.h"
-
-#include <khexedit_export.h>
+#include "khexedit_export.h"
 
 namespace KHE
 {
 
-class KDataBuffer;
 class KBytesEditPrivate;
 
 /** the beginner's hex edit widget ;)
   *
-  * It hides the concept of the KDataBuffer and accepts a pure pointer
+  * It hides the concept of the KAbstractByteArrayModel and accepts a pure pointer
   * to a reasonable large array of bytes
   *
   * 1. used as viewer
@@ -111,7 +110,7 @@ class KHEXEDIT_EXPORT KBytesEdit : public KHexEdit
 
   public: // modification access
 
-  public slots:
+  public Q_SLOTS:
     /** hands over to the editor a new byte array.
       * If there exists an old one and autodelete is set the old one gets deleted.
       * @param D pointer to memory
@@ -139,12 +138,17 @@ class KHEXEDIT_EXPORT KBytesEdit : public KHexEdit
     /** repaint the indizes from i1 to i2 */
     void repaintRange( int i1, int i2 );
 
+  Q_SIGNALS:
+    /** there has been a change to the buffer */
+    void contentChanged();
+
+
   protected:
     /** deletes the databuffer */
     void clean();
 
 
-  protected slots:
+  protected Q_SLOTS:
 
 
   protected:

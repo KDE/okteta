@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kplainbuffer.cpp  -  description
+                          kbytearraymodel.cpp  -  description
                              -------------------
     begin                : Mit Jun 03 2003
     copyright            : (C) 2003 by Friedrich W. H. Kossebau
@@ -14,12 +14,13 @@
  *                                                                         *
  ***************************************************************************/
 
+
 //#include <kdebug.h>
 // c specific
 #include <string.h>
 #include <stdlib.h>
 // lib specific
-#include "kplainbuffer.h"
+#include "kbytearraymodel.h"
 
 
 static const unsigned int MinChunkSize = 512;
@@ -28,7 +29,7 @@ static const unsigned int MaxChunkSize = 1024*10; // TODO: get max. memory page 
 // TODO: think about realloc & Co.
 using namespace KHE;
 
-KPlainBuffer::KPlainBuffer( char *D, unsigned int S, int RS, bool KM )
+KByteArrayModel::KByteArrayModel( char *D, unsigned int S, int RS, bool KM )
  : Data( D ),
    Size( S ),
    RawSize( RS<(int)S?S:RS ),
@@ -40,7 +41,7 @@ KPlainBuffer::KPlainBuffer( char *D, unsigned int S, int RS, bool KM )
 {
 }
 
-KPlainBuffer::KPlainBuffer( const char *D, unsigned int S )
+KByteArrayModel::KByteArrayModel( const char *D, unsigned int S )
  : Data( (char *)D ),
    Size( S ),
    RawSize( S ),
@@ -52,7 +53,7 @@ KPlainBuffer::KPlainBuffer( const char *D, unsigned int S )
 {
 }
 
-KPlainBuffer::KPlainBuffer( int S, int MS )
+KByteArrayModel::KByteArrayModel( int S, int MS )
   : Data( S?new char[S]:0 ),
    Size( S ),
    RawSize( S ),
@@ -64,15 +65,25 @@ KPlainBuffer::KPlainBuffer( int S, int MS )
 {
 }
 
-KPlainBuffer::~KPlainBuffer()
+KByteArrayModel::~KByteArrayModel()
 {
   if( AutoDelete )
     delete Data;
 }
 
 
+void KByteArrayModel::setDatum( unsigned int Offset, const char Char )
+{
+  Data[Offset] = Char;
 
-int KPlainBuffer::insert( int Pos, const char* D, int Length )
+  Modified = true;
+
+  emit contentsReplaced( Offset, 1, 1 );
+  emit contentsChanged( Offset, Offset );
+}
+
+
+int KByteArrayModel::insert( int Pos, const char* D, int Length )
 {
   // check all parameters
   if( Length == 0 )
@@ -90,30 +101,37 @@ int KPlainBuffer::insert( int Pos, const char* D, int Length )
   //kDebug() << QString("after: Size: %1, RawSize: %2").arg(Size).arg(RawSize) << endl;
 
   Modified = true;
+
+  emit contentsReplaced( Pos, 0, Length );
+  emit contentsChanged( Pos, Size-1 );
   return Length;
 }
 
 
-int KPlainBuffer::remove( KSection Remove )
+int KByteArrayModel::remove( KSection Remove )
 {
   if( Remove.startsBehind(Size-1) || Remove.width() == 0 )
     return 0;
 
   Remove.restrictEndTo( Size-1 );
 
-  unsigned int BehindRemovePos = Remove.end()+1;
+  const unsigned int BehindRemovePos = Remove.end()+1;
   // move right data behind the input range
   memmove( &Data[Remove.start()], &Data[BehindRemovePos], Size-BehindRemovePos );
 
   // set new values
+  const int OldSize = Size;
   Size -= Remove.width();
 
   Modified = true;
+
+  emit contentsReplaced( Remove.start(), Remove.width(), 0 );
+  emit contentsChanged( Remove.start(), OldSize-1 );
   return Remove.width();
 }
 
 
-unsigned int KPlainBuffer::replace( KSection Remove, const char* D, unsigned int InputLength )
+unsigned int KByteArrayModel::replace( KSection Remove, const char* D, unsigned int InputLength )
 {
   // check all parameters
   if( Remove.start() >= (int)Size || (Remove.width()==0 && InputLength==0) )
@@ -139,8 +157,8 @@ unsigned int KPlainBuffer::replace( KSection Remove, const char* D, unsigned int
     NewSize = RawSize;
   }
 
-  int BehindInsertPos = Remove.start() + InputLength;
-  int BehindRemovePos = Remove.end()+1;
+  const int BehindInsertPos = Remove.start() + InputLength;
+  const int BehindRemovePos = Remove.end()+1;
 
   // raw array not big enough?
   if( RawSize < NewSize )
@@ -168,14 +186,18 @@ unsigned int KPlainBuffer::replace( KSection Remove, const char* D, unsigned int
   memcpy( &Data[Remove.start()], D, InputLength );
 
   // set new values
+  const int OldSize = Size;
   Size = NewSize;
 
   Modified = true;
+
+  emit contentsReplaced( Remove.start(), Remove.width(), InputLength );
+  emit contentsChanged( Remove.start(), SizeDiff==0?Remove.end():((SizeDiff>0?Size:OldSize)-1) );
   return InputLength;
 }
 
 
-int KPlainBuffer::move( int DestPos, KSection SourceSection )
+int KByteArrayModel::move( int DestPos, KSection SourceSection )
 {
   // check all parameters
   if( SourceSection.start() >= (int)Size || SourceSection.width() == 0
@@ -241,11 +263,14 @@ int KPlainBuffer::move( int DestPos, KSection SourceSection )
   delete [] Temp;
 
   Modified = true;
-  return MovedLength < DisplacedLength ? SmallPartDest : LargePartDest;
+
+  emit contentsMoved( DestPos, SourceSection.start(),SourceSection.width()  );
+  emit contentsChanged( ToRight?SourceSection.start():DestPos, ToRight?DestPos:SourceSection.end() );
+  return (MovedLength<DisplacedLength) ? SmallPartDest : LargePartDest;
 }
 
 
-int KPlainBuffer::fill( const char FChar, int FillLength, unsigned int Pos )
+int KByteArrayModel::fill( const char FChar, unsigned int Pos, int FillLength )
 {
   // nothing to fill
   if( Pos >= Size )
@@ -260,11 +285,14 @@ int KPlainBuffer::fill( const char FChar, int FillLength, unsigned int Pos )
 
   memset( &Data[Pos], FChar, FillLength );
   Modified = true;
+
+  emit contentsReplaced( Pos, FillLength, FillLength );
+  emit contentsChanged( Pos, Pos+FillLength-1 );
   return FillLength;
 }
 
 
-int KPlainBuffer::find( const char* SearchString, int Length, KSection Section ) const  
+int KByteArrayModel::find( const char* SearchString, int Length, KSection Section ) const  
 {
   Section.restrictEndTo( Size-1 );
 
@@ -282,10 +310,10 @@ int KPlainBuffer::find( const char* SearchString, int Length, KSection Section )
   return -1;
 }
 
-int KPlainBuffer::rfind( const char*, int /*Length*/, int /*Pos*/ ) const { return 0; }
+int KByteArrayModel::rfind( const char*, int /*Length*/, int /*Pos*/ ) const { return 0; }
 
 
-int KPlainBuffer::addSize( int AddSize, int SplitPos, bool SaveUpperPart )
+int KByteArrayModel::addSize( int AddSize, int SplitPos, bool SaveUpperPart )
 {
   unsigned int NewSize = Size + AddSize;
   // check if buffer does not get too big

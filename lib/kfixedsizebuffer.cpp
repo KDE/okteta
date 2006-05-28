@@ -51,6 +51,17 @@ KFixedSizeBuffer::~KFixedSizeBuffer()
 
 
 
+void KFixedSizeBuffer::setDatum( unsigned int Offset, const char Char )
+{
+  Data[Offset] = Char;
+  Modified = true;
+
+  emit contentsReplaced( Offset, 1, 1 );
+  emit contentsChanged( Offset, Offset );
+}
+
+
+
 int KFixedSizeBuffer::insert( int Pos, const char* D, int InputLength )
 {
   // check all parameters
@@ -66,6 +77,10 @@ int KFixedSizeBuffer::insert( int Pos, const char* D, int InputLength )
   memcpy( &Data[Pos], D, InputLength );
 
   Modified = true;
+
+  emit contentsReplaced( Pos, 0, InputLength );
+  //emit contentsReplaced( Pos, , 0 ); TODO: how to signal the removed data?
+  emit contentsChanged( Pos, Size-1 );
   return InputLength;
 }
 
@@ -85,6 +100,10 @@ int KFixedSizeBuffer::remove( KSection Remove )
   reset( Size-RemoveLength, RemoveLength );
 
   Modified = true;
+
+  emit contentsReplaced( Remove.start(), Remove.width(), 0 );
+  //emit contentsReplaced( Pos, 0,  ); TODO: how to signal the inserted data?
+  emit contentsChanged( Remove.start(), Size-1 );
   return RemoveLength;
 }
 
@@ -121,6 +140,10 @@ unsigned int KFixedSizeBuffer::replace( KSection Remove, const char* D, unsigned
   memcpy( &Data[Remove.start()], D, InputLength );
 
   Modified = true;
+
+  emit contentsReplaced( Remove.start(), Remove.width(), InputLength );
+  //emit contentsReplaced( Pos, 0,  ); TODO: how to signal the changed data at the end?
+  emit contentsChanged( Remove.start(), SizeDiff==0?Remove.end():Size-1 );
   return InputLength;
 }
 
@@ -191,11 +214,14 @@ int KFixedSizeBuffer::move( int DestPos, KSection SourceSection )
   delete [] Temp;
 
   Modified = true;
+
+  emit contentsMoved( DestPos, SourceSection.start(),SourceSection.width()  );
+  emit contentsChanged( ToRight?SourceSection.start():DestPos, ToRight?DestPos:SourceSection.end() );
   return MovedLength < DisplacedLength ? SmallPartDest : LargePartDest;
 }
 
 
-int KFixedSizeBuffer::fill( const char FChar, int FillLength, unsigned int Pos )
+int KFixedSizeBuffer::fill( const char FChar, unsigned int Pos, int FillLength )
 {
   // nothing to fill
   if( Pos >= Size )
@@ -208,11 +234,14 @@ int KFixedSizeBuffer::fill( const char FChar, int FillLength, unsigned int Pos )
 
   memset( &Data[Pos], FChar, FillLength );
   Modified = true;
+
+  emit contentsReplaced( Pos, FillLength, FillLength );
+  emit contentsChanged( Pos, Pos+FillLength-1 );
   return FillLength;
 }
 
 
-int KFixedSizeBuffer::compare( const KDataBuffer &Other, KSection OtherRange, unsigned int Pos )
+int KFixedSizeBuffer::compare( const KAbstractByteArrayModel &Other, KSection OtherRange, unsigned int Pos )
 {
   //kDebug() << QString("Pos: %1, OtherRange: (%3/%4)" ).arg(Pos).arg(OtherRange.start()).arg(OtherRange.end())
   //    << endl;

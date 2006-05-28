@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-//#include <kdebug.h> 
- 
+#include <kdebug.h>
+
 // lib specific
 #include "kbufferranges.h"
 
@@ -143,17 +143,20 @@ void KBufferRanges::setSelectionEnd( int EndIndex )
 }
 
 
-void KBufferRanges::removeSelection( int id )
+KSection KBufferRanges::removeSelection( int id )
 {
   if( id > 0 )
-    return;
+    return KSection();
 
-  bool Changed = Selection.isValid();
+  KSection Section = Selection.section();
+  bool Changed = Section.isValid();
   if( Changed )
-    addChangedRange( Selection.section() );
+    addChangedRange( Section );
 
   Selection.cancel();
   FirstWordSelection.unset();
+
+  return Section;
 }
 
 
@@ -225,7 +228,7 @@ bool KBufferRanges::overlapsChanges( KSection Indizes, KSection *ChangedRange ) 
 bool KBufferRanges::overlapsChanges( const KCoordRange &Range, KCoordRange *ChangedRange ) const
 {
   // TODO: add a lastusedrange pointer for quicker access
-  for( KCoordRangeList::const_iterator R=ChangedRanges.begin(); R!=ChangedRanges.end(); ++R )
+  for( KCoordRangeList::ConstIterator R=ChangedRanges.begin(); R!=ChangedRanges.end(); ++R )
   {
     if( (*R).overlaps(Range) )
     {
@@ -246,6 +249,7 @@ void KBufferRanges::addChangedRange( int SI, int EI )
 
 void KBufferRanges::addChangedRange( const KSection &S )
 {
+kDebug() << "adding change section "<<S.start()<<","<<S.end()<<endl;
   addChangedRange( Layout->coordRangeOfIndizes(S) );
 }
 
@@ -253,6 +257,8 @@ void KBufferRanges::addChangedRange( const KSection &S )
 void KBufferRanges::addChangedRange( const KCoordRange &NewRange )
 {
   ChangedRanges.addCoordRange( NewRange );
+kDebug() << "as range "<<NewRange.start().pos()<<","<<NewRange.start().line()<<"-"
+<<NewRange.end().pos()<<","<<NewRange.end().line()<<endl;
 
   Modified = true;
 }
@@ -292,3 +298,8 @@ void KBufferRanges::setFirstWordSelection( const KSection &Section )
    }
  }
  
+
+void KBufferRanges::adaptSelectionToChange( int Pos, int RemovedLength, int InsertedLength )
+{
+  Selection.adaptToChange(Pos,RemovedLength,InsertedLength );
+}

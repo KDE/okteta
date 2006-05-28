@@ -16,7 +16,7 @@
 
 
 // lib specific
-#include "kdatabuffer.h"
+#include "kabstractbytearraymodel.h"
 #include "kcharcodec.h"
 #include "kwordbufferservice.h"
 

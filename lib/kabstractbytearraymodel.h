@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kdatabuffer.h  -  description
+                          kabstractbytearraymodel.h  -  description
                              -------------------
     begin                : Mit Mai 14 2003
     copyright            : (C) 2003 by Friedrich W. H. Kossebau
@@ -15,13 +15,17 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KDATABUFFER_H
-#define KHE_KDATABUFFER_H
+#ifndef KHE_KABSTRACTBYTEARRAYMODEL_H
+#define KHE_KABSTRACTBYTEARRAYMODEL_H
 
 
+// qt specific
+#include <QObject>
+#include <QByteArray>
 // lib specific
 #include "ksection.h"
 #include "khexedit_export.h"
+
 
 namespace KHE
 {
@@ -62,15 +66,16 @@ char KDataBufferIterator::next()
   *@author Friedrich W. H. Kossebau
   */
 
-class KHEXEDIT_EXPORT KDataBuffer
+class KHEXEDIT_EXPORT KAbstractByteArrayModel : public QObject
 {
-  friend class KDataBufferIterator;
+  friend class KAbstractByteArrayModelIterator;
 
+  Q_OBJECT
 
   protected:
-    KDataBuffer();
+    KAbstractByteArrayModel();
   public:
-    virtual ~KDataBuffer();
+    virtual ~KAbstractByteArrayModel();
 
 
   public: // data access API
@@ -81,9 +86,9 @@ class KHEXEDIT_EXPORT KDataBuffer
       * @param Range
       * @return @c true if successfully, @c false otherwise
       */
-    virtual bool prepareRange( KSection Range ) const = 0;
+    //virtual bool prepareRange( KSection Range ) const = 0;
     /** convenience function, same as above */
-    bool prepareRange( int Offset, int Length ) const;
+    //bool prepareRange( int Offset, int Length ) const;
 
     /** creates an iterator to */
     //virtual KDataBufferIterator *iterator() const = 0;
@@ -131,6 +136,7 @@ class KHEXEDIT_EXPORT KDataBuffer
       * @return length of inserted data
       */
     virtual int insert( int Pos, const char* Source, int SourceLength );
+    int insert( int Pos, const QByteArray &Source );
 
     /** removes beginning with position as much as possible
       * @param Section
@@ -148,6 +154,8 @@ class KHEXEDIT_EXPORT KDataBuffer
       */
     virtual unsigned int replace( KSection DestSection, const char* Source, unsigned int SourceLength ) = 0;
     /** convenience function, behaves as above */
+    unsigned int replace( KSection DestSection, const QByteArray &Source );
+    /** convenience function, behaves as above */
     unsigned int replace( unsigned int Pos, unsigned int RemoveLength,
                           const char* Source, unsigned int SourceLength );
 
@@ -163,11 +171,12 @@ class KHEXEDIT_EXPORT KDataBuffer
     /**
      * fills the buffer with the FillChar. If the buffer is to small it will be extended as much as possible.
      * @param FillChar char to use
-     * @param Length number of chars to fill. If Length is -1, the current buffer length is used.
      * @param Pos position where the filling starts
+     * @param Length number of chars to fill. If Length is -1, the buffer is filled till the end.
      * @return number of filled characters
      */
-    virtual int fill( const char FillChar, int Length = -1, unsigned int Pos = 0 ) = 0;
+    virtual int fill( const char FillChar, unsigned int Pos = 0, int Length = -1 ) = 0;
+    int fill( const char FillChar, const KSection &Section );
 
     /** sets a single byte
      * if the offset is not valid the behaviour is undefined
@@ -220,26 +229,43 @@ class KHEXEDIT_EXPORT KDataBuffer
     virtual int rfind( const char*, int Length, int Pos = -1 ) const = 0;
 
 /*     virtual int find( const QString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */
+
+  Q_SIGNALS:
+    // TODO: how to deal replacing with fixed size of buffer?
+    void contentsReplaced( int Position, int RemovedLength, int InsertedLength );
+    void contentsMoved( int Destination, int Source, int MovedLength );
+    void contentsChanged( int Start, int End );
+
+    void modificationChanged( bool IsChanged );
+    //void redoAvailable( bool IsAvailable );
+    //void undoAvailable( bool IsAvailable );
 };
 
 
-inline KDataBuffer::KDataBuffer() {}
-inline KDataBuffer::~KDataBuffer() {}
+inline KAbstractByteArrayModel::KAbstractByteArrayModel() {}
+inline KAbstractByteArrayModel::~KAbstractByteArrayModel() {}
 
-inline bool KDataBuffer::prepareRange( int Offset, int Length ) const
-{ return prepareRange( KSection(Offset,Offset+Length-1) ); }
-
-inline const char *KDataBuffer::dataSet( int Offset, int Length ) const
+inline const char *KAbstractByteArrayModel::dataSet( int Offset, int Length ) const
 { return dataSet( KSection(Offset,Offset+Length-1) ); }
 
-inline int KDataBuffer::remove( int Pos, int Length )
+inline int KAbstractByteArrayModel::insert( int Pos, const QByteArray &Source )
+{ return insert( Pos, Source.data(), Source.size() ); }
+
+inline int KAbstractByteArrayModel::remove( int Pos, int Length )
 { return remove( KSection(Pos,Pos+Length-1) ); }
 
-inline unsigned int KDataBuffer::replace( unsigned int Pos, unsigned int RemoveLength,
+inline unsigned int KAbstractByteArrayModel::replace( KSection DestSection, const QByteArray &Source )
+{ return replace( DestSection, Source.data(), Source.size() );}
+
+inline unsigned int KAbstractByteArrayModel::replace( unsigned int Pos, unsigned int RemoveLength,
                                  const char* D, unsigned int InputLength )
 { return replace( KSection(Pos,Pos+RemoveLength-1), D, InputLength ); }
 
-inline bool KDataBuffer::isReadOnly() const { return false; }
+inline int KAbstractByteArrayModel::fill( const char FillChar, const KSection &Section )
+{ return fill( FillChar, Section.start(), Section.width() ); }
+
+
+inline bool KAbstractByteArrayModel::isReadOnly() const { return false; }
 
 }
 

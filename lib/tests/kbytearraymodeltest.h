@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kplainbufferkdatabufferiftest.h  -  description
+                          kbytearraymodeltest.h  -  description
                             -------------------
     begin                : Son Mai 7 2006
     copyright            : (C) 2006 by Friedrich W. H. Kossebau
@@ -16,19 +16,18 @@
 
 
 
-#ifndef KPLAINBUFFERKDATABUFFERIFTEST_H
-#define KPLAINBUFFERKDATABUFFERIFTEST_H
+#ifndef KBYTEARRAYMODELTEST_H
+#define KBYTEARRAYMODELTEST_H
 
+// qt specific
+#include <QObject>
 
-// test specific
-#include "kdatabufferiftest.h"
-
-
-class KPlainBufferKDataBufferIfTest : public KDataBufferIfTest
+class KByteArrayModelTest : public QObject
 {
-  protected: // KDataBufferIfTest API
-    KHE::KDataBuffer *createBuffer();
-    void deleteBuffer( KHE::KDataBuffer *Buffer );
+  Q_OBJECT
+
+  private Q_SLOTS: // test functions
+    void testNothing();
 };
 
 #endif

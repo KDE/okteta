@@ -18,7 +18,7 @@
 #ifndef KHE_KFIXEDSIZEBUFFER_H
 #define KHE_KFIXEDSIZEBUFFER_H
 
-#include "kdatabuffer.h"
+#include "kabstractbytearraymodel.h"
 
 namespace KHE
 {
@@ -29,7 +29,7 @@ namespace KHE
   *@author Friedrich W. H. Kossebau
   */
 
-class KFixedSizeBuffer : public KDataBuffer
+class KFixedSizeBuffer : public KAbstractByteArrayModel
 {
   public:
     /** creates a readonly buffer around the given data */
@@ -38,7 +38,7 @@ class KFixedSizeBuffer : public KDataBuffer
     KFixedSizeBuffer( unsigned int S, char FUC = '\0' );
     virtual ~KFixedSizeBuffer();
 
-  public: // KDataBuffer API
+  public: // KAbstractByteArrayModel API
     virtual bool prepareRange( KSection Range ) const;
     virtual const char *dataSet( KSection S ) const;
     virtual char datum( unsigned int Offset ) const;
@@ -50,7 +50,7 @@ class KFixedSizeBuffer : public KDataBuffer
     virtual int remove( KSection Remove );
     virtual unsigned int replace( KSection Remove, const char*, unsigned int InputLength );
     virtual int move( int DestPos, KSection SourceSection );
-    virtual int fill( const char FillChar, int Length = -1, unsigned int Pos = 0 );
+    virtual int fill( const char FillChar, unsigned int Pos = 0, int Length = -1 );
     virtual void setDatum( unsigned int Offset, const char Char );
 
     virtual void setModified( bool M = true );
@@ -62,9 +62,9 @@ class KFixedSizeBuffer : public KDataBuffer
 
   public:
     void setReadOnly( bool RO = true );
-    int compare( const KDataBuffer &Other, KSection Range, unsigned int Pos = 0 );
-    int compare( const KDataBuffer &Other, int OtherPos, int Length, unsigned int Pos = 0 );
-    int compare( const KDataBuffer &Other );
+    int compare( const KAbstractByteArrayModel &Other, KSection Range, unsigned int Pos = 0 );
+    int compare( const KAbstractByteArrayModel &Other, int OtherPos, int Length, unsigned int Pos = 0 );
+    int compare( const KAbstractByteArrayModel &Other );
 
   public:
     char *rawData() const;
@@ -94,19 +94,16 @@ inline const char *KFixedSizeBuffer::dataSet( KSection S ) const { return &Data[
 inline char KFixedSizeBuffer::datum( unsigned int Offset ) const { return Data[Offset]; }
 inline int KFixedSizeBuffer::size() const  { return Size; }
 
-inline void KFixedSizeBuffer::setDatum( unsigned int Offset, const char Char )
-{ Data[Offset] = Char; Modified = true; }
-
 inline bool KFixedSizeBuffer::isReadOnly()   const { return ReadOnly; }
 inline bool KFixedSizeBuffer::isModified()   const { return Modified; }
 
 inline void KFixedSizeBuffer::setReadOnly( bool RO )  { ReadOnly = RO; }
 inline void KFixedSizeBuffer::setModified( bool M )   { Modified = M; }
 
-inline int KFixedSizeBuffer::compare( const KDataBuffer &Other )
+inline int KFixedSizeBuffer::compare( const KAbstractByteArrayModel &Other )
 { return compare( Other, KSection(0,Other.size()-1),0 ); }
 
-inline int KFixedSizeBuffer::compare( const KDataBuffer &Other, int OtherPos, int Length, unsigned int Pos )
+inline int KFixedSizeBuffer::compare( const KAbstractByteArrayModel &Other, int OtherPos, int Length, unsigned int Pos )
 { return compare( Other, KSection::fromWidth(OtherPos,Length),Pos ); }
 
 inline char *KFixedSizeBuffer::rawData() const { return Data; }

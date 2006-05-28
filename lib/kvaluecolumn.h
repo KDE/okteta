@@ -36,7 +36,7 @@ class KBufferRanges;
 class KValueColumn : public KBufferColumn
 {
   public:
-    KValueColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R );
+    KValueColumn( KColumnsView *CV, KAbstractByteArrayModel *B, KBufferLayout *L, KBufferRanges *R );
     virtual ~KValueColumn();
 
   public:

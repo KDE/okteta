@@ -22,7 +22,7 @@
 #include <QVector>
 #include <QFile>
 // lib specific
-#include "kdatabuffer.h"
+#include "kabstractbytearraymodel.h"
 #include "khexedit_export.h"
 
 namespace KHE {
@@ -33,7 +33,7 @@ namespace KHE {
   *@author Friedrich W. H. Kossebau
   */
 
-class KHEXEDIT_EXPORT KBigBuffer : public KDataBuffer
+class KHEXEDIT_EXPORT KBigBuffer : public KAbstractByteArrayModel
 {
     typedef QVector<char *> KPageOfChar;
 
@@ -42,8 +42,7 @@ class KHEXEDIT_EXPORT KBigBuffer : public KDataBuffer
     KBigBuffer( int NP = 50, int PS = 4096 );
     virtual ~KBigBuffer();
 
-  public: // KDataBuffer API
-    virtual bool prepareRange( KSection Range ) const;
+  public: // KAbstractByteArrayModel API
     virtual const char *dataSet( KSection S ) const;
     virtual char datum( unsigned int Offset ) const;
     virtual int size() const;
@@ -54,7 +53,7 @@ class KHEXEDIT_EXPORT KBigBuffer : public KDataBuffer
     virtual int remove( KSection S );
     virtual unsigned int replace( KSection S, const char*, unsigned int InputLength );
     virtual int move( int DestPos, KSection SourceSection );
-    virtual int fill( char FillChar, int Length = -1, unsigned int Pos = 0 );
+    virtual int fill( char FillChar, unsigned int Pos = 0, int Length = -1 );
     virtual void setDatum( unsigned int Offset, const char Char );
 
     virtual void setModified( bool M = true );

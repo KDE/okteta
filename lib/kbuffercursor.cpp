@@ -356,3 +356,14 @@ bool KBufferCursor::atAppendPos() const { return realIndex() >= Layout->length()
 
 bool KBufferCursor::atLineStart() const { return Layout->atLineStart( Coord ); }
 bool KBufferCursor::atLineEnd()   const { return Layout->atLineEnd( Coord ); }
+
+void KBufferCursor::adaptToChange( int Pos, int RemovedLength, int InsertedLength )
+{
+  // cursor affected?
+  if( Index >= Pos )
+  {
+    // step behind removed range if inside 
+    int NewIndex = ((Index>=Pos+RemovedLength)?Index-RemovedLength:Pos) + InsertedLength;
+    gotoCIndex( NewIndex );
+  }
+}

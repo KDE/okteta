@@ -20,7 +20,7 @@
 
 // lib specific
 #include "khe.h"
-#include "kdatabuffer.h"
+#include "kabstractbytearraymodel.h"
 #include "khechar.h"
 #include "kcolumn.h"
 #include "kbufferlayout.h"
@@ -51,7 +51,7 @@ class KBufferColumn : public KColumn
   public:
     enum KFrameStyle { Frame, Left, Right };
   public:
-    KBufferColumn( KColumnsView/*KHexEdit*/ *HE, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R );
+    KBufferColumn( KColumnsView/*KHexEdit*/ *HE, KAbstractByteArrayModel *B, KBufferLayout *L, KBufferRanges *R );
     virtual ~KBufferColumn();
 
 
@@ -113,7 +113,7 @@ class KBufferColumn : public KColumn
       */
     void setMetrics( KPixelX NewDigitWidth, KPixelY NewDigitBaseLine );
     /** */
-    void set( KDataBuffer *B );
+    void set( KAbstractByteArrayModel *B );
     /** creates new buffer for x-values; to be called on any change of NoOfBytesPerLine or metrics */
     void resetXBuffer();
     /** sets the codec to be used by the char column. */
@@ -180,7 +180,7 @@ class KBufferColumn : public KColumn
 
   protected:
     /** pointer to the buffer */
-    KDataBuffer *Buffer;
+    KAbstractByteArrayModel *Buffer;
     /** pointer to the layout */
     const KBufferLayout *Layout;
     /** pointer to the ranges */

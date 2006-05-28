@@ -18,7 +18,7 @@
 // qt specific
 #include <QKeyEvent>
 // lib specific
-#include "kdatabuffer.h"
+#include "kabstractbytearraymodel.h"
 #include "kbufferranges.h"
 #include "kbufferlayout.h"
 #include "kbuffercursor.h"
@@ -128,27 +128,21 @@ void KEditor::doEditAction( KEditAction Action )
     case CharDelete:
       if( !HexEdit->OverWrite )
       {
-        int Index = BufferCursor->realIndex();
+        const int Index = BufferCursor->realIndex();
         if( Index < HexEdit->BufferLayout->length() )
-        {
-          HexEdit->removeData( KSection::fromWidth(Index,1) );
-          if( Index == HexEdit->BufferLayout->length() )
-            BufferCursor->gotoEnd();
-        }
+          HexEdit->ByteArrayModel->remove( KSection::fromWidth(Index,1) );
       }
       break;
 
       case WordDelete: // kills data until the start of the next word
         if( !HexEdit->OverWrite )
         {
-          int Index = BufferCursor->realIndex();
+          const int Index = BufferCursor->realIndex();
           if( Index < HexEdit->BufferLayout->length() )
           {
-            KWordBufferService WBS( HexEdit->DataBuffer, HexEdit->Codec );
+            KWordBufferService WBS( HexEdit->ByteArrayModel, HexEdit->Codec );
             int End = WBS.indexOfBeforeNextWordStart( Index );
-            HexEdit->removeData( KSection(Index,End) );
-            if( Index == HexEdit->BufferLayout->length() )
-              BufferCursor->gotoEnd();
+            HexEdit->ByteArrayModel->remove( KSection(Index,End) );
           }
         }
         break;
@@ -160,13 +154,7 @@ void KEditor::doEditAction( KEditAction Action )
       {
         int DeleteIndex = BufferCursor->realIndex() - 1;
         if( DeleteIndex >= 0 )
-        {
-          HexEdit->removeData( KSection::fromWidth(DeleteIndex,1) );
-          if( DeleteIndex == HexEdit->BufferLayout->length() )
-            BufferCursor->gotoEnd();
-          else
-            BufferCursor->gotoPreviousByte();
-        }
+          HexEdit->ByteArrayModel->remove( KSection::fromWidth(DeleteIndex,1) );
       }
       break;
     case WordBackspace:
@@ -174,24 +162,13 @@ void KEditor::doEditAction( KEditAction Action )
       int LeftIndex = BufferCursor->realIndex() - 1;
       if( LeftIndex >= 0 )
       {
-        KWordBufferService WBS( HexEdit->DataBuffer, HexEdit->Codec );
+        KWordBufferService WBS( HexEdit->ByteArrayModel, HexEdit->Codec );
         int WordStart = WBS.indexOfPreviousWordStart( LeftIndex );
         if( !HexEdit->OverWrite )
-          HexEdit->removeData( KSection(WordStart,LeftIndex) );
-        if( WordStart == HexEdit->BufferLayout->length() )
-          BufferCursor->gotoEnd();
-        else
-          BufferCursor->gotoIndex(WordStart);
+          HexEdit->ByteArrayModel->remove( KSection(WordStart,LeftIndex) );
       }
     }
   }
 
-  HexEdit->updateChanged();
   HexEdit->ensureCursorVisible();
-
-  HexEdit->unpauseCursor();
-
-  //emit cursorPositionChanged( BufferCursor->index() );
- // emit bufferChanged();
 }
-

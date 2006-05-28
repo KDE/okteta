@@ -1,0 +1,790 @@
+/***************************************************************************
+                          kabstractbytearraymodeliftest.cpp  -  description
+                            -------------------
+    begin                : Son Mai 7 2006
+    copyright            : (C) 2006 by Friedrich W. H. Kossebau
+    email                : Friedrich.W.H@Kossebau.de
+***************************************************************************/
+
+/***************************************************************************
+*                                                                         *
+*   This library is free software; you can redistribute it and/or         *
+*   modify it under the terms of the GNU Library General Public           *
+*   License version 2 as published by the Free Software Foundation.       *
+*                                                                         *
+***************************************************************************/
+
+
+// qt specific
+#include <QtTest>
+#include <QSignalSpy>
+// kde specific
+#include <kfixedsizebuffer.h>
+// test specific
+#include "kabstractbytearraymodeliftest.h"
+
+using namespace KHE;
+
+// local variables
+static const char FirstMarkChar = 2;
+static const char SecondMarkChar = 3;
+static const char PaintChar = 1;
+static const char BlankChar = '\0';
+
+// fills the buffer with char from b to e
+static void textureByteArrayModel( KAbstractByteArrayModel *ByteArrayModel, unsigned char b = 1, unsigned char e = 255, unsigned int From = 0, int To = -1 )
+{
+  int Size = ByteArrayModel->size();
+
+  if( To == -1 || To >= Size )
+    To = Size-1;
+  unsigned char c = b;
+  for( int i=From; i<=To; ++i )
+  {
+    if( c == e )
+      c = b;
+    else
+      c++;
+    ByteArrayModel->setDatum(i, c );
+  }
+  
+}
+
+static void textureByteArrayModel( KAbstractByteArrayModel *ByteArrayModel, unsigned char b, unsigned char e, KSection S )
+{
+  textureByteArrayModel( ByteArrayModel, b, e, S.start(), S.end() );
+}
+/*
+static void list( KAbstractByteArrayModel *ByteArrayModel, const char* Name )
+{
+  unsigned int Size = ByteArrayModel->size();
+  for( unsigned int i=0; i<Size; ++i )
+  {
+    kdDebug() << Name<<":"<<i<<":"<<ByteArrayModel->datum(i) << endl;
+  }
+}
+*/
+
+// ---------------------------------------------------------------- Tests -----
+
+
+void KAbstractByteArrayModelIfTest::init()
+{
+  ByteArrayModel = createByteArrayModel();
+
+  ContentsChangedSpy =  new QSignalSpy( ByteArrayModel, SIGNAL(contentsChanged(int,int)) );
+  ContentsReplacedSpy = new QSignalSpy( ByteArrayModel, SIGNAL(contentsReplaced(int,int,int)) );
+  ContentsMovedSpy =    new QSignalSpy( ByteArrayModel, SIGNAL(contentsMoved(int,int,int)) );
+}
+
+void KAbstractByteArrayModelIfTest::cleanup()
+{
+  deleteByteArrayModel( ByteArrayModel );
+
+  delete ContentsChangedSpy;
+  delete ContentsReplacedSpy;
+  delete ContentsMovedSpy;
+}
+
+void KAbstractByteArrayModelIfTest::clearSignalSpys()
+{
+  ContentsChangedSpy->clear();
+  ContentsReplacedSpy->clear();
+  ContentsMovedSpy->clear();
+}
+
+void KAbstractByteArrayModelIfTest::checkContentsReplaced( int Position, int RemovedLength, int InsertedLength )
+{
+   QVERIFY( ContentsReplacedSpy->isValid() );
+   QCOMPARE( ContentsReplacedSpy->count(), 1 );
+   QList<QVariant> Arguments = ContentsReplacedSpy->takeFirst();
+   QCOMPARE( Arguments.at(0).toInt(), Position );
+   QCOMPARE( Arguments.at(1).toInt(), RemovedLength );
+   QCOMPARE( Arguments.at(2).toInt(), InsertedLength );
+}
+void KAbstractByteArrayModelIfTest::checkContentsReplaced( const KHE::KSection &RemoveSection, int InsertedLength )
+{ checkContentsReplaced( RemoveSection.start(), RemoveSection.width(), InsertedLength ); }
+
+void KAbstractByteArrayModelIfTest::checkContentsMoved( int Destination, int Source, int MovedLength )
+{
+   QVERIFY( ContentsMovedSpy->isValid() );
+   QCOMPARE( ContentsMovedSpy->count(), 1 );
+   QList<QVariant> Arguments = ContentsMovedSpy->takeFirst();
+   QCOMPARE( Arguments.at(0).toInt(), Destination );
+   QCOMPARE( Arguments.at(1).toInt(), Source );
+   QCOMPARE( Arguments.at(2).toInt(), MovedLength );
+}
+void KAbstractByteArrayModelIfTest::checkContentsMoved( int Destination, const KHE::KSection &SourceSection )
+{ checkContentsMoved( Destination, SourceSection.start(), SourceSection.width() ); }
+
+void KAbstractByteArrayModelIfTest::checkContentsChanged( int Start, int End )
+{
+   QVERIFY( ContentsChangedSpy->isValid() );
+   QCOMPARE( ContentsChangedSpy->count(), 1 );
+   QList<QVariant> Arguments = ContentsChangedSpy->takeFirst();
+   QCOMPARE( Arguments.at(0).toInt(), Start );
+   QCOMPARE( Arguments.at(1).toInt(), End );
+}
+void KAbstractByteArrayModelIfTest::checkContentsChanged( const KHE::KSection &Section )
+{ checkContentsChanged( Section.start(), Section.end() ); }
+
+
+// ---------------------------------------------------------------- Tests -----
+
+void KAbstractByteArrayModelIfTest::testModified()
+{
+  // can we alter the buffer at all?
+  if( ByteArrayModel->isReadOnly() )
+    // skip
+    return;
+
+  ByteArrayModel->setModified( false );
+  QVERIFY( !ByteArrayModel->isModified() );
+  ByteArrayModel->setModified( true );
+  QVERIFY( ByteArrayModel->isModified() );
+}
+
+void KAbstractByteArrayModelIfTest::testCopyTo()
+{
+  if( !ByteArrayModel->isReadOnly() )
+  {
+    // prepare ByteArrayModel
+    textureByteArrayModel( ByteArrayModel );
+    ByteArrayModel->setModified( false );
+  }
+
+  //
+  static const unsigned int CopySize = 10;
+  unsigned int Size = ByteArrayModel->size();
+  KSection CopySection( 0, CopySize-1 );
+
+  KFixedSizeBuffer Copy( Size, BlankChar );
+  // copyTo() all
+  ByteArrayModel->copyTo( Copy.rawData(), 0, Size );
+  QCOMPARE( Copy.compare(*ByteArrayModel), 0 );
+
+  // copyTo() at begin
+  Copy.fill( BlankChar );
+
+  ByteArrayModel->copyTo( Copy.rawData(), CopySection );
+
+  QCOMPARE( Copy.compare(*ByteArrayModel, CopySection), 0 );
+  QCOMPARE( Copy.datum(CopySection.behindEnd()), BlankChar );
+  QVERIFY( !ByteArrayModel->isModified() );
+
+  // copyTo() at end
+  Copy.fill( BlankChar );
+  CopySection.moveToEnd( Size - 1 );
+
+  ByteArrayModel->copyTo( &Copy.rawData()[CopySection.start()], CopySection );
+
+  QCOMPARE( Copy.datum(CopySection.beforeStart()), BlankChar );
+  QCOMPARE( Copy.compare(*ByteArrayModel, CopySection, CopySection.start()), 0 );
+  QVERIFY( !ByteArrayModel->isModified() );
+
+  // copyTo() at mid
+  Copy.fill( BlankChar );
+  CopySection.moveToStart( Size/2 );
+
+  ByteArrayModel->copyTo( &Copy.rawData()[CopySection.start()], CopySection );
+
+  QCOMPARE( Copy.datum(CopySection.beforeStart()), BlankChar );
+  QCOMPARE( Copy.compare(*ByteArrayModel, CopySection, CopySection.start()), 0 );
+  QCOMPARE( Copy.datum(CopySection.behindEnd()), BlankChar );
+  QVERIFY( !ByteArrayModel->isModified() );
+}
+
+void KAbstractByteArrayModelIfTest::testFill()
+{
+  // can we alter the buffer at all?
+  if( ByteArrayModel->isReadOnly() )
+    // skip
+    return;
+
+  static const unsigned int FillSize = 10;
+  unsigned int Size = ByteArrayModel->size();
+  KSection FillSection = KSection::fromWidth( 0, Size );
+
+  KFixedSizeBuffer Copy( Size, PaintChar );
+
+  // fill() all
+  ByteArrayModel->setModified( false );
+  ByteArrayModel->fill( BlankChar );
+  clearSignalSpys();
+
+  ByteArrayModel->fill( PaintChar );
+  QCOMPARE( Copy.compare(*ByteArrayModel), 0 );
+  QVERIFY( ByteArrayModel->isModified() );
+  checkContentsReplaced( FillSection, FillSection.width() );
+  checkContentsChanged( 0, ByteArrayModel->size()-1 );
+
+  // fill() at begin
+  FillSection.set( 0, FillSize );
+  ByteArrayModel->setModified( false );
+  ByteArrayModel->fill( BlankChar );
+  clearSignalSpys();
+
+  ByteArrayModel->fill( PaintChar, FillSection );
+  QCOMPARE( Copy.compare(*ByteArrayModel, FillSection), 0 );
+  QCOMPARE( ByteArrayModel->datum(FillSection.behindEnd()), BlankChar );
+  QVERIFY( ByteArrayModel->isModified() );
+  checkContentsReplaced( FillSection, FillSection.width() );
+  checkContentsChanged( FillSection );
+
+  // fill() at end
+  ByteArrayModel->setModified( false );
+  ByteArrayModel->fill( BlankChar );
+  FillSection.moveToEnd( Size - 1 );
+  clearSignalSpys();
+
+  ByteArrayModel->fill( PaintChar, FillSection );
+  QCOMPARE( ByteArrayModel->datum(FillSection.beforeStart()), BlankChar );
+  QCOMPARE( Copy.compare(*ByteArrayModel, FillSection, FillSection.start()), 0 );
+  QVERIFY( ByteArrayModel->isModified() );
+  checkContentsReplaced( FillSection, FillSection.width() );
+  checkContentsChanged( FillSection );
+
+  // fill() at mid
+  ByteArrayModel->setModified( false );
+  ByteArrayModel->fill( BlankChar );
+  FillSection.moveToStart( Size/2 );
+  clearSignalSpys();
+
+  ByteArrayModel->fill( PaintChar, FillSection );
+  QCOMPARE( ByteArrayModel->datum(FillSection.beforeStart()), BlankChar );
+  QCOMPARE( Copy.compare(*ByteArrayModel, FillSection, FillSection.start()), 0 );
+  QCOMPARE( ByteArrayModel->datum(FillSection.behindEnd()), BlankChar );
+  QVERIFY( ByteArrayModel->isModified() );
+  checkContentsReplaced( FillSection, FillSection.width() );
+  checkContentsChanged( FillSection );
+}
+
+void KAbstractByteArrayModelIfTest::testSetGet()
+{
+  // can we alter the buffer at all?
+  if( ByteArrayModel->isReadOnly() )
+    // skip
+    return;
+
+  // prepare buffer
+  unsigned int Size = ByteArrayModel->size();
+  ByteArrayModel->fill( BlankChar );
+
+  // test
+  for( unsigned int i=0; i<Size; ++i )
+  {
+    clearSignalSpys();
+
+    ByteArrayModel->setModified( false );
+
+    ByteArrayModel->setDatum( i, PaintChar );
+
+    if( i>0 )
+      QCOMPARE( ByteArrayModel->datum(i-1), BlankChar  );
+    QCOMPARE( ByteArrayModel->datum(i), PaintChar );
+    if( i<Size-1 )
+      QCOMPARE( ByteArrayModel->datum(i+1), BlankChar );
+    checkContentsReplaced( i, 1, 1 );
+    checkContentsChanged( i, i );
+
+    // clean up
+    ByteArrayModel->setDatum( i, BlankChar );
+    QCOMPARE( ByteArrayModel->datum(i), BlankChar );
+    QVERIFY( ByteArrayModel->isModified() );
+  }
+}
+
+// as some buffers might be restricted in growing
+// we test for the success of some operations
+void KAbstractByteArrayModelIfTest::testRemove()
+{
+  // can we alter the buffer at all?
+  if( ByteArrayModel->isReadOnly() )
+    // skip
+    return;
+
+  textureByteArrayModel( ByteArrayModel );
+  static const unsigned int RemoveSize = 10;
+  // create Copy
+  unsigned int Size = ByteArrayModel->size();
+  KFixedSizeBuffer Copy( Size );
+  ByteArrayModel->copyTo( Copy.rawData(), 0, Size );
+
+  // remove() at end
+  ByteArrayModel->setModified( false );
+  KSection RemoveSection( Size-RemoveSize, Size-1 );
+  clearSignalSpys();
+
+  unsigned int Removed = ByteArrayModel->remove( RemoveSection );
+  RemoveSection.setEndByWidth( Removed );
+
+  QCOMPARE( Copy.compare(*ByteArrayModel,0,RemoveSection.beforeStart(),0), 0 );
+  QCOMPARE( ByteArrayModel->isModified(), Removed > 0 );
+  checkContentsReplaced( RemoveSection, 0 );
+  checkContentsChanged( RemoveSection );
+
+  // remove() at mid
+  ByteArrayModel->setModified( false );
+  Size = ByteArrayModel->size();
+  ByteArrayModel->copyTo( Copy.rawData(), 0, Size );
+  RemoveSection.setByWidth( Size/2, RemoveSize );
+  clearSignalSpys();
+
+  Removed = ByteArrayModel->remove( RemoveSection );
+  RemoveSection.setEndByWidth( Removed );
+
+  QCOMPARE( Copy.compare(*ByteArrayModel,0,RemoveSection.beforeStart(),0), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(RemoveSection.start(),Size-Removed-1),RemoveSection.behindEnd()), 0 );
+  QCOMPARE( ByteArrayModel->isModified(), Removed > 0 );
+  checkContentsReplaced( RemoveSection, 0 );
+  checkContentsChanged( RemoveSection.start(), Size-1 );
+
+  // remove() at start
+  ByteArrayModel->setModified( false );
+  Size = ByteArrayModel->size();
+  ByteArrayModel->copyTo( Copy.rawData(), 0, Size );
+  RemoveSection.setByWidth( 0, RemoveSize );
+  clearSignalSpys();
+
+  Removed = ByteArrayModel->remove( RemoveSection );
+  RemoveSection.setEndByWidth( Removed );
+
+  QCOMPARE( Copy.compare( *ByteArrayModel,KSection(RemoveSection.start(),Size-Removed-1),RemoveSection.behindEnd()), 0 );
+  QCOMPARE( ByteArrayModel->isModified(), Removed > 0 );
+  checkContentsReplaced( RemoveSection, 0 );
+  checkContentsChanged( RemoveSection.start(), Size-1 );
+}
+
+
+static const int InsertSize = 10;
+
+struct KTestData {
+  KFixedSizeBuffer Copy;
+  KFixedSizeBuffer InsertData;
+
+  KTestData( int CopySize, int InsertSize ) : Copy( CopySize ), InsertData( InsertSize ) {}
+  const char *insertionData() { return InsertData.rawData(); }
+};
+
+KTestData *KAbstractByteArrayModelIfTest::prepareTestInsert()
+{
+  int Size = ByteArrayModel->size();
+
+  KTestData *TestData = new KTestData( Size+3*InsertSize, InsertSize );
+
+  // prepare InsertData
+  textureByteArrayModel( &TestData->InsertData, 10, 99 );
+
+  textureByteArrayModel( ByteArrayModel,100,255 );
+  ByteArrayModel->copyTo( TestData->Copy.rawData(), 0, Size );
+  ByteArrayModel->setModified( false );
+  return TestData;
+}
+
+void KAbstractByteArrayModelIfTest::testInsertAtBegin()
+{
+  // can we alter the buffer at all?
+  if( ByteArrayModel->isReadOnly() )
+    // skip
+    return;
+
+  // prepare
+  KTestData *Data = prepareTestInsert();
+  int Size = ByteArrayModel->size();
+  KSection InsertSection( 0, -1 );
+  clearSignalSpys();
+
+  int Inserted = ByteArrayModel->insert( InsertSection.start(), Data->InsertData.rawData(), InsertSize );
+  InsertSection.setEndByWidth( Inserted );
+
+  QCOMPARE( Data->InsertData.compare(*ByteArrayModel,InsertSection,0), 0 );
+  QCOMPARE( Data->Copy.compare(*ByteArrayModel,InsertSection.behindEnd(),Size-InsertSection.end()-1,InsertSection.start()), 0 );
+  QCOMPARE( ByteArrayModel->isModified(), Inserted > 0 );
+  checkContentsReplaced( InsertSection.start(), 0, Inserted );
+  checkContentsChanged( InsertSection.start(), ByteArrayModel->size()-1 );
+
+  delete Data;
+}
+
+void KAbstractByteArrayModelIfTest::testInsertAtMid()
+{
+  // can we alter the buffer at all?
+  if( ByteArrayModel->isReadOnly() )
+    // skip
+    return;
+
+  // prepare
+  KTestData *Data = prepareTestInsert();
+  int Size = ByteArrayModel->size();
+  KSection InsertSection( Size/2, -1 );
+  clearSignalSpys();
+
+  int Inserted = ByteArrayModel->insert( InsertSection.start(), Data->InsertData.rawData(), InsertSize );
+  InsertSection.setEndByWidth( Inserted );
+
+  QCOMPARE( Data->Copy.compare(*ByteArrayModel, 0,InsertSection.start(),0), 0 );
+  QCOMPARE( Data->InsertData.compare(*ByteArrayModel,InsertSection,0), 0 );
+  QCOMPARE( Data->Copy.compare(*ByteArrayModel,InsertSection.behindEnd(),Size-InsertSection.end()-1,InsertSection.start()), 0 );
+  QCOMPARE( ByteArrayModel->isModified(), Inserted > 0 );
+  if( Inserted > 0 )
+  {
+    checkContentsReplaced( InsertSection.start(), 0, Inserted );
+    checkContentsChanged( InsertSection.start(), ByteArrayModel->size()-1 );
+  }
+
+  delete Data;
+}
+
+void KAbstractByteArrayModelIfTest::testInsertAtEnd()
+{
+  // can we alter the buffer at all?
+  if( ByteArrayModel->isReadOnly() )
+    // skip
+    return;
+
+  // prepare
+  KTestData *Data = prepareTestInsert();
+  int Size = ByteArrayModel->size();
+  KSection InsertSection( Size, -1 );
+  clearSignalSpys();
+
+  int Inserted = ByteArrayModel->insert( InsertSection.start(), Data->InsertData.rawData(), InsertSize );
+  InsertSection.setEndByWidth( Inserted );
+
+//   list( ByteArrayModel, "ByteArrayModel" );
+//   list( &Copy, "Copy" );
+//   kdDebug() << QString("(%1-%2").arg(InsertSection.start()).arg(InsertSection.end()) << endl;
+  QCOMPARE( Data->Copy.compare(*ByteArrayModel, 0,InsertSection.start(),0), 0 );
+  if( InsertSection.isValid() )
+    QCOMPARE( Data->InsertData.compare(*ByteArrayModel,InsertSection,0), 0 );
+  QCOMPARE( ByteArrayModel->isModified(), Inserted > 0 );
+  if( Inserted > 0 )
+  {
+    checkContentsReplaced( InsertSection.start(), 0, Inserted );
+    checkContentsChanged( InsertSection.start(), ByteArrayModel->size()-1 );
+  }
+
+  delete Data;
+}
+
+
+// how the test works:
+// fills the buffer with random data, puts special data at the begin
+// copies Data
+// moves the Data to the mid, the end and to the begin again
+// tests for correct data, modified flag and size
+void KAbstractByteArrayModelIfTest::testMove()
+{
+  // can we alter the buffer at all?
+  if( ByteArrayModel->isReadOnly() )
+    // skip
+    return;
+
+  // prepare Copy
+  static const int MoveSize = 10;
+  const KSection Origin = KSection::fromWidth( 0, MoveSize );
+  int Size = ByteArrayModel->size();
+  KFixedSizeBuffer Copy( Size );
+
+  // prepare ByteArrayModel
+  textureByteArrayModel( ByteArrayModel, 100, 255, Origin.behindEnd() );
+  textureByteArrayModel( ByteArrayModel, 10, 99, Origin );
+  KSection Source = Origin;
+  ByteArrayModel->setModified( false );
+
+  // create Copy
+  ByteArrayModel->copyTo( Copy.rawData(), 0, Size );
+
+  // Action: move to middle (to right)
+  int DestPos = Size/2;
+  KSection Target = KSection::fromWidth( DestPos-Source.width(), Source.width() );
+  clearSignalSpys();
+
+  int NewPos = ByteArrayModel->move( DestPos, Source );
+
+  QCOMPARE( NewPos, Target.start() );
+  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(0,Target.beforeStart()),Origin.behindEnd()), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,Target,Origin.start()), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(Target.behindEnd(),Size-1),Target.behindEnd()), 0 );
+  QCOMPARE( ByteArrayModel->isModified(), NewPos != Source.start() );
+  QCOMPARE( ByteArrayModel->size(), Size );
+  checkContentsMoved( DestPos, Source );
+  checkContentsChanged( Source.start(), DestPos );
+
+  // clean
+  ByteArrayModel->setModified( false );
+  Source = Target;
+
+  // Action: move to end (to right)
+  DestPos = Size;
+  Target.moveToStart( DestPos-Source.width() );
+  clearSignalSpys();
+
+  NewPos = ByteArrayModel->move( DestPos, Source );
+
+  QCOMPARE( NewPos, Target.start() );
+  QCOMPARE( Copy.compare(*ByteArrayModel, KSection(0,Target.beforeStart()),Origin.behindEnd()), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,Target,Origin.start()), 0 );
+  QCOMPARE( ByteArrayModel->isModified(), NewPos != Source.start() );
+  QCOMPARE( ByteArrayModel->size(), Size );
+  checkContentsMoved( DestPos, Source );
+  checkContentsChanged( Source.start(), DestPos );
+
+  // clean
+  ByteArrayModel->setModified( false );
+  Source = Target;
+
+  // Action: move to begin again (to left)
+  DestPos = 0;
+  Target = Origin;
+  clearSignalSpys();
+
+  NewPos = ByteArrayModel->move( DestPos, Source );
+
+  QCOMPARE( NewPos, Target.start() );
+  QCOMPARE( Copy.compare(*ByteArrayModel,Target,Origin.start()), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(Target.behindEnd(),Size-1),Origin.behindEnd()), 0 );
+  QCOMPARE( ByteArrayModel->isModified(), NewPos != Source.start() );
+  QCOMPARE( ByteArrayModel->size(), Size );
+  checkContentsMoved( DestPos, Source );
+  checkContentsChanged( DestPos, Source.end() );
+}
+
+
+void KAbstractByteArrayModelIfTest::testReplaceEqual()
+{
+  // can we alter the buffer at all?
+  if( ByteArrayModel->isReadOnly() )
+    // skip
+    return;
+
+  // create InsertData
+  static const unsigned int RemoveSize = 10;
+  static const unsigned int InsertSize = RemoveSize;
+  KFixedSizeBuffer InsertData( InsertSize );
+  textureByteArrayModel( &InsertData, 10, 99 );
+
+  // prepare ByteArrayModel
+  unsigned int Size = ByteArrayModel->size();
+  textureByteArrayModel( ByteArrayModel, 100, 255 );
+  ByteArrayModel->setModified( false );
+
+  // create Copy
+  KFixedSizeBuffer Copy( Size );
+  ByteArrayModel->copyTo( Copy.rawData(), 0, Size );
+
+  // Action: move to begin again (to left)
+  KSection Target = KSection::fromWidth( 0, RemoveSize );
+  clearSignalSpys();
+
+  unsigned int Inserted = ByteArrayModel->replace( Target, InsertData.rawData(), InsertSize );
+
+  QCOMPARE( Inserted, InsertSize );
+  QCOMPARE( InsertData.compare(*ByteArrayModel,Target,0), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(Target.behindEnd(),Size-1),Target.behindEnd()), 0 );
+  QCOMPARE( ByteArrayModel->isModified(), true );
+  QCOMPARE( ByteArrayModel->size(), (int)Size );
+  checkContentsReplaced( Target, Inserted );
+  checkContentsChanged( Target );
+
+  // clean
+  textureByteArrayModel( ByteArrayModel, 100, 255 );
+  ByteArrayModel->copyTo( Copy.rawData(), 0, Size );
+  ByteArrayModel->setModified( false );
+
+  // Action: replace at middle
+  Target.moveToStart( Size/2 );
+  clearSignalSpys();
+
+  Inserted = ByteArrayModel->replace( Target, InsertData.rawData(), InsertSize );
+
+  QCOMPARE( Inserted, InsertSize );
+  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(0,Target.beforeStart()),0), 0 );
+  QCOMPARE( InsertData.compare(*ByteArrayModel,Target,0), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(Target.behindEnd(),Size-1),Target.behindEnd()), 0 );
+  QVERIFY( ByteArrayModel->isModified() );
+  QCOMPARE( ByteArrayModel->size(), (int)Size );
+  checkContentsReplaced( Target, Inserted );
+  checkContentsChanged( Target );
+
+  // clean
+  textureByteArrayModel( ByteArrayModel, 100, 255 );
+  ByteArrayModel->copyTo( Copy.rawData(), 0, Size );
+  ByteArrayModel->setModified( false );
+
+  // Action: replace at end
+  Target.moveToEnd( Size-1 );
+  clearSignalSpys();
+
+  Inserted = ByteArrayModel->replace( Target, InsertData.rawData(), InsertSize );
+
+  QCOMPARE( Inserted, InsertSize );
+  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(0,Target.beforeStart()),0), 0 );
+  QCOMPARE( InsertData.compare(*ByteArrayModel,Target,0), 0 );
+  QVERIFY( ByteArrayModel->isModified() );
+  QCOMPARE( ByteArrayModel->size(), (int)Size );
+  checkContentsReplaced( Target, Inserted );
+  checkContentsChanged( Target );
+}
+
+
+void KAbstractByteArrayModelIfTest::testReplaceLess()
+{
+  // can we alter the buffer at all?
+  if( ByteArrayModel->isReadOnly() )
+    // skip
+    return;
+
+  // create InsertData
+  static const unsigned int RemoveSize = 10;
+  static const unsigned int Diff = 4;
+  static const unsigned int InsertSize = RemoveSize-Diff;
+  KFixedSizeBuffer InsertData( InsertSize );
+  textureByteArrayModel( &InsertData, 10, 99 );
+
+  // prepare ByteArrayModel
+  int Size = ByteArrayModel->size();
+  textureByteArrayModel( ByteArrayModel, 100, 255 );
+  ByteArrayModel->setModified( false );
+
+  // create Copy
+  KFixedSizeBuffer Copy( Size );
+  ByteArrayModel->copyTo( Copy.rawData(), 0, Size );
+
+  // Action: replace at begin
+  KSection RemoveSection = KSection::fromWidth( 0, RemoveSize );
+  KSection InsertSection = KSection::fromWidth( 0, InsertSize );
+  clearSignalSpys();
+
+  unsigned int Inserted = ByteArrayModel->replace( RemoveSection, InsertData.rawData(), InsertSize );
+
+  QCOMPARE( Inserted, InsertSize );
+  QCOMPARE( InsertData.compare(*ByteArrayModel,InsertSection,0), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(InsertSection.behindEnd(),Size-1-Diff),RemoveSection.behindEnd()), 0 );
+  QVERIFY( ByteArrayModel->isModified() );
+  checkContentsReplaced( RemoveSection, Inserted );
+  checkContentsChanged( RemoveSection.start(), Size-1 );
+
+  // clean
+  Size = ByteArrayModel->size();
+  textureByteArrayModel( ByteArrayModel, 100, 255 );
+  ByteArrayModel->copyTo( Copy.rawData(), 0, Size );
+  ByteArrayModel->setModified( false );
+
+  // Action: replace at middle
+  RemoveSection.moveToStart( Size/2 );
+  InsertSection.moveToStart( RemoveSection.start() );
+  clearSignalSpys();
+
+  Inserted = ByteArrayModel->replace( RemoveSection, InsertData.rawData(), InsertSize );
+
+  QCOMPARE( Inserted, InsertSize );
+  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(0,InsertSection.beforeStart()),0), 0 );
+  QCOMPARE( InsertData.compare(*ByteArrayModel,InsertSection,0), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(InsertSection.behindEnd(),Size-1-Diff),RemoveSection.behindEnd()), 0 );
+  QVERIFY( ByteArrayModel->isModified() );
+  checkContentsReplaced( RemoveSection, Inserted );
+  checkContentsChanged( RemoveSection.start(), Size-1 );
+
+  // clean
+  Size = ByteArrayModel->size();
+  textureByteArrayModel( ByteArrayModel, 100, 255 );
+  ByteArrayModel->copyTo( Copy.rawData(), 0, Size );
+  ByteArrayModel->setModified( false );
+
+  // Action: replace at end
+  RemoveSection.moveToEnd( Size-1 );
+  InsertSection.moveToStart( RemoveSection.start() );
+  clearSignalSpys();
+
+  Inserted = ByteArrayModel->replace( RemoveSection, InsertData.rawData(), InsertSize );
+
+  QCOMPARE( Inserted, InsertSize );
+  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(0,InsertSection.beforeStart()),0), 0 );
+  QCOMPARE( InsertData.compare(*ByteArrayModel,InsertSection,0), 0 );
+  QVERIFY( ByteArrayModel->isModified() );
+  checkContentsReplaced( RemoveSection, Inserted );
+  checkContentsChanged( RemoveSection );
+}
+
+
+void KAbstractByteArrayModelIfTest::testReplaceMore()
+{
+  // can we alter the buffer at all?
+  if( ByteArrayModel->isReadOnly() )
+    // skip
+    return;
+
+  // create InsertData
+  static const unsigned int RemoveSize = 10;
+  static const unsigned int Diff = 4;
+  static const unsigned int InsertSize = RemoveSize+Diff;
+  KFixedSizeBuffer InsertData( InsertSize );
+  textureByteArrayModel( &InsertData, 10, 99 );
+
+  // prepare ByteArrayModel
+  int Size = ByteArrayModel->size();
+  textureByteArrayModel( ByteArrayModel, 100, 255 );
+  ByteArrayModel->setModified( false );
+
+  // create Copy
+  KFixedSizeBuffer Copy( Size + 2*InsertSize);
+  ByteArrayModel->copyTo( Copy.rawData(), 0, Size );
+
+  // Action: replace at begin
+  KSection RemoveSection = KSection::fromWidth( 0, RemoveSize );
+  KSection InsertSection = KSection::fromWidth( 0, InsertSize );
+  clearSignalSpys();
+
+  unsigned int Inserted = ByteArrayModel->replace( RemoveSection, InsertData.rawData(), InsertSize );
+
+  QCOMPARE( Inserted, InsertSize );
+  QCOMPARE( InsertData.compare(*ByteArrayModel,InsertSection,0), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(InsertSection.behindEnd(),Size-1),RemoveSection.behindEnd()), 0 );
+  QVERIFY( ByteArrayModel->isModified() );
+  checkContentsReplaced( RemoveSection, Inserted );
+  checkContentsChanged( RemoveSection.start(), ByteArrayModel->size()-1 );
+
+  // clean
+  Size = ByteArrayModel->size();
+  textureByteArrayModel( ByteArrayModel, 100, 255 );
+  ByteArrayModel->copyTo( Copy.rawData(), 0, Size );
+  ByteArrayModel->setModified( false );
+  // Action: replace at middle
+  RemoveSection.moveToStart( Size/2 );
+  InsertSection.moveToStart( RemoveSection.start() );
+  clearSignalSpys();
+
+  Inserted = ByteArrayModel->replace( RemoveSection, InsertData.rawData(), InsertSize );
+
+  QCOMPARE( Inserted, InsertSize );
+  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(0,InsertSection.beforeStart()),0), 0 );
+  QCOMPARE( InsertData.compare(*ByteArrayModel,InsertSection,0), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(InsertSection.behindEnd(),Size-1),RemoveSection.behindEnd()), 0 );
+  QVERIFY( ByteArrayModel->isModified() );
+  checkContentsReplaced( RemoveSection, Inserted );
+  checkContentsChanged( RemoveSection.start(), ByteArrayModel->size()-1 );
+
+  // clean
+  Size = ByteArrayModel->size();
+  textureByteArrayModel( ByteArrayModel, 100, 255 );
+  ByteArrayModel->copyTo( Copy.rawData(), 0, Size );
+  ByteArrayModel->setModified( false );
+
+  // Action: replace at end
+  RemoveSection.moveToEnd( Size-1 );
+  InsertSection.moveToStart( RemoveSection.start() );
+  clearSignalSpys();
+
+  Inserted = ByteArrayModel->replace( RemoveSection, InsertData.rawData(), InsertSize );
+
+  QCOMPARE( RemoveSize<=Inserted && Inserted<=InsertSize, true );
+  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(0,InsertSection.beforeStart()),0), 0 );
+
+  QCOMPARE( InsertData.compare(*ByteArrayModel,KSection(InsertSection.start(),ByteArrayModel->size()-1),0), 0 );
+  QVERIFY( ByteArrayModel->isModified() );
+  checkContentsReplaced( RemoveSection, Inserted );
+  checkContentsChanged( RemoveSection.start(), ByteArrayModel->size()-1 );
+}
+
+#include "kabstractbytearraymodeliftest.moc"

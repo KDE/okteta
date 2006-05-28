@@ -18,7 +18,7 @@
 // qt specific
 #include <QKeyEvent>
 // lib specific
-#include "kdatabuffer.h"
+#include "kabstractbytearraymodel.h"
 #include "kbufferranges.h"
 #include "kbuffercursor.h"
 #include "kwordbufferservice.h"
@@ -101,14 +101,14 @@ void KNavigator::moveCursor( KMoveAction Action, bool Select )
   {
     case MoveBackward:     BufferCursor->gotoPreviousByte(); break;
     case MoveWordBackward: {
-      KWordBufferService WBS( HexEdit->DataBuffer, HexEdit->Codec );
+      KWordBufferService WBS( HexEdit->ByteArrayModel, HexEdit->Codec );
       int NewIndex = WBS.indexOfPreviousWordStart( BufferCursor->realIndex() );
       BufferCursor->gotoIndex( NewIndex );
     }
     break;
     case MoveForward:      BufferCursor->gotoNextByte();     break;
     case MoveWordForward:  {
-      KWordBufferService WBS( HexEdit->DataBuffer, HexEdit->Codec );
+      KWordBufferService WBS( HexEdit->ByteArrayModel, HexEdit->Codec );
       int NewIndex = WBS.indexOfNextWordStart( BufferCursor->realIndex() );
       BufferCursor->gotoCIndex( NewIndex );
     }

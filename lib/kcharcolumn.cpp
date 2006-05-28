@@ -37,7 +37,7 @@ static const QChar     DefaultSubstituteChar =  (char)'.';
 static const QChar     DefaultUndefinedChar =   (char)'?';
 
 
-KCharColumn::KCharColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R )
+KCharColumn::KCharColumn( KColumnsView *CV, KAbstractByteArrayModel *B, KBufferLayout *L, KBufferRanges *R )
  : KBufferColumn( CV, B, L, R ),
    ShowUnprintable( DefaultShowUnprintable ),
    SubstituteChar( DefaultSubstituteChar ),

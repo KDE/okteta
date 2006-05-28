@@ -16,7 +16,7 @@
 
 
 // lib specific
-#include "kplainbuffer.h"
+#include "kbytearraymodel.h"
 #include "kbytesedit.h"
 #include "kbufferranges.h"
 #include "kbuffercursor.h"
@@ -43,7 +43,7 @@ KBytesEdit::KBytesEdit( QWidget *Parent, const char */*Name*/ )
  : KHexEdit( 0, Parent ),
    AutoDelete( false )
 {
-  setDataBuffer( new KPlainBuffer() );
+  setDataBuffer( new KByteArrayModel() );
 }
 
 KBytesEdit::~KBytesEdit()
@@ -53,7 +53,7 @@ KBytesEdit::~KBytesEdit()
 
 void KBytesEdit::setReadOnly( bool RO )
 {
-  KPlainBuffer *Buffer = dynamic_cast<KPlainBuffer *>(DataBuffer);
+  KByteArrayModel *Buffer = dynamic_cast<KByteArrayModel *>(ByteArrayModel);
   if( Buffer )
     Buffer->setReadOnly( RO );
   KHexEdit::setReadOnly( RO );
@@ -68,18 +68,18 @@ void KBytesEdit::setAutoDelete( bool AD )
 
 char *KBytesEdit::data() const
 {
-  KPlainBuffer *Buffer = dynamic_cast<KPlainBuffer *>(DataBuffer);
+  KByteArrayModel *Buffer = dynamic_cast<KByteArrayModel *>(ByteArrayModel);
   return Buffer ? Buffer->data() : 0;
 }
 
 
 void KBytesEdit::setData( char *D, int S, int RS, bool KM )
 {
-  KPlainBuffer *NewBuffer = new KPlainBuffer( D, S, RS, KM );
-  if( DataBuffer )
+  KByteArrayModel *NewBuffer = new KByteArrayModel( D, S, RS, KM );
+  if( ByteArrayModel )
   {
     // take the settings
-    NewBuffer->setReadOnly( DataBuffer->isReadOnly() );
+    NewBuffer->setReadOnly( ByteArrayModel->isReadOnly() );
     clean();
   }
   else
@@ -91,21 +91,21 @@ void KBytesEdit::setData( char *D, int S, int RS, bool KM )
 
 int KBytesEdit::dataSize() const
 {
-  KPlainBuffer *Buffer = dynamic_cast<KPlainBuffer *>(DataBuffer);
+  KByteArrayModel *Buffer = dynamic_cast<KByteArrayModel *>(ByteArrayModel);
   return Buffer ? Buffer->size() : -1;
 }
 
 
 int KBytesEdit::maxDataSize() const
 {
-  KPlainBuffer *Buffer = dynamic_cast<KPlainBuffer *>(DataBuffer);
+  KByteArrayModel *Buffer = dynamic_cast<KByteArrayModel *>(ByteArrayModel);
   return Buffer ? Buffer->maxSize() : -1;
 }
 
 
 void KBytesEdit::setMaxDataSize( int MS )
 {
-  KPlainBuffer *Buffer = dynamic_cast<KPlainBuffer *>(DataBuffer);
+  KByteArrayModel *Buffer = dynamic_cast<KByteArrayModel *>(ByteArrayModel);
   if( Buffer )
     Buffer->setMaxSize( MS );
 }
@@ -113,14 +113,14 @@ void KBytesEdit::setMaxDataSize( int MS )
 
 bool KBytesEdit::keepsMemory() const
 {
-  KPlainBuffer *Buffer = dynamic_cast<KPlainBuffer *>(DataBuffer);
+  KByteArrayModel *Buffer = dynamic_cast<KByteArrayModel *>(ByteArrayModel);
   return Buffer ? Buffer->keepsMemory() : false;
 }
 
 
 void KBytesEdit::setKeepsMemory( bool KM )
 {
-  KPlainBuffer *Buffer = dynamic_cast<KPlainBuffer *>(DataBuffer);
+  KByteArrayModel *Buffer = dynamic_cast<KByteArrayModel *>(ByteArrayModel);
   if( Buffer )
     Buffer->setKeepsMemory( KM );
 }
@@ -146,7 +146,7 @@ void KBytesEdit::repaintRange( int i1, int i2 )
 
 void KBytesEdit::clean()
 {
-  if( DataBuffer )
+  if( ByteArrayModel )
   {
     if( AutoDelete )
     {
@@ -154,7 +154,7 @@ void KBytesEdit::clean()
       if( D )
         delete [] D;
     }
-    delete DataBuffer;
+    delete ByteArrayModel;
   }
 }
 

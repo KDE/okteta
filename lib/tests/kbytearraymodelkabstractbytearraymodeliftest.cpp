@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kplainbufferkdatabufferiftest.cpp  -  description
+                          kbytearraymodelkabstractbytearraymodeliftest.cpp  -  description
                             -------------------
     begin                : Son Mai 7 2006
     copyright            : (C) 2006 by Friedrich W. H. Kossebau
@@ -18,29 +18,30 @@
 // qt specific
 #include <QtTest>
 // lib specific
-#include <kplainbuffer.h>
+#include <kbytearraymodel.h>
 // app specific
-#include "kplainbufferkdatabufferiftest.h"
+#include "kbytearraymodelkabstractbytearraymodeliftest.h"
 
 
 using namespace KHE;
 
 
-static const int PlainBufferSize = 60;
+static const int ByteArrayModelSize = 60;
 
 
-KHE::KDataBuffer *KPlainBufferKDataBufferIfTest::createBuffer()
+KHE::KAbstractByteArrayModel *KByteArrayModelKAbstractByteArrayModelIfTest::createByteArrayModel()
 {
-  KPlainBuffer *PlainBuffer = new KPlainBuffer( PlainBufferSize );
-  PlainBuffer->setReadOnly( false );
+  KByteArrayModel *ByteArrayModel = new KByteArrayModel( ByteArrayModelSize );
+  ByteArrayModel->setReadOnly( false );
 
-  return PlainBuffer;
+  return ByteArrayModel;
 }
 
-void KPlainBufferKDataBufferIfTest::deleteBuffer( KHE::KDataBuffer *Buffer )
+void KByteArrayModelKAbstractByteArrayModelIfTest::deleteByteArrayModel(
+       KHE::KAbstractByteArrayModel *ByteArrayModel )
 {
-  delete Buffer;
+  delete ByteArrayModel;
 }
 
 
-QTEST_MAIN( KPlainBufferKDataBufferIfTest )
+QTEST_MAIN( KByteArrayModelKAbstractByteArrayModelIfTest )

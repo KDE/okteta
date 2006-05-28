@@ -119,6 +119,7 @@ class KBufferCursor
     /** puts the cursor behind the actual position if it isn't already*/
     void stepBehind();
     void updateCoord();
+    void adaptToChange( int Pos, int RemovedLength, int InsertedLength );
 
 
   public: // logical state access

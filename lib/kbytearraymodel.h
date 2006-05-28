@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kplainbuffer.h  -  description
+                          kbytearraymodel.h  -  description
                              -------------------
     begin                : Mit Jun 03 2003
     copyright            : (C) 2003 by Friedrich W. H. Kossebau
@@ -15,10 +15,10 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KPLAINBUFFER_H
-#define KHE_KPLAINBUFFER_H
+#ifndef KHE_KBYTEARRAYMODEL_H
+#define KHE_KBYTEARRAYMODEL_H
 
-#include "kdatabuffer.h"
+#include "kabstractbytearraymodel.h"
 
 namespace KHE
 {
@@ -33,18 +33,17 @@ class KPlainBufferIterator : public KDataBufferIterator
   *@author Friedrich W. H. Kossebau
   */
 
-class KPlainBuffer : public KDataBuffer
+class KByteArrayModel : public KAbstractByteArrayModel
 {
   friend class KPlainBufferIterator;
 
   public:
-    KPlainBuffer( char *D, unsigned int S, int RS = -1, bool KM = true );
-    KPlainBuffer( const char *D, unsigned int S );
-    KPlainBuffer( int S=0, int MS = -1 );
-    virtual ~KPlainBuffer();
+    KByteArrayModel( char *D, unsigned int S, int RS = -1, bool KM = true );
+    KByteArrayModel( const char *D, unsigned int S );
+    KByteArrayModel( int S=0, int MS = -1 );
+    virtual ~KByteArrayModel();
 
   public: // KDataBuffer API
-    virtual bool prepareRange( KSection Range ) const;
     //virtual KDataBufferIterator *iterator() const;
     virtual const char *dataSet( KSection S ) const;
     virtual char datum( unsigned int Offset ) const;
@@ -56,7 +55,7 @@ class KPlainBuffer : public KDataBuffer
     virtual int remove( KSection Remove );
     virtual unsigned int replace( KSection Remove, const char*, unsigned int InputLength );
     virtual int move( int DestPos, KSection SourceSection );
-    virtual int fill( const char FillChar, int Length = -1, unsigned int Pos = 0 );
+    virtual int fill( const char FillChar, unsigned int Pos = 0, int Length = -1 );
     virtual void setDatum( unsigned int Offset, const char Char );
 
     virtual void setModified( bool M = true );
@@ -111,27 +110,23 @@ class KPlainBuffer : public KDataBuffer
 };
 
 
-inline bool KPlainBuffer::prepareRange( KSection )     const { return true; }
-inline const char *KPlainBuffer::dataSet( KSection S ) const { return &Data[S.start()]; }
-inline char KPlainBuffer::datum( unsigned int Offset ) const { return Data[Offset]; }
-inline int KPlainBuffer::size()                        const { return Size; }
+inline const char *KByteArrayModel::dataSet( KSection S ) const { return &Data[S.start()]; }
+inline char KByteArrayModel::datum( unsigned int Offset ) const { return Data[Offset]; }
+inline int KByteArrayModel::size()                        const { return Size; }
 
-inline bool KPlainBuffer::isReadOnly()   const { return ReadOnly; }
-inline bool KPlainBuffer::isModified()   const { return Modified; }
+inline bool KByteArrayModel::isReadOnly()   const { return ReadOnly; }
+inline bool KByteArrayModel::isModified()   const { return Modified; }
 
-inline void KPlainBuffer::setDatum( unsigned int Offset, const char Char )
-{ Data[Offset] = Char; Modified = true; }
+inline void KByteArrayModel::setReadOnly( bool RO )    { ReadOnly = RO; }
+inline void KByteArrayModel::setModified( bool M )     { Modified = M; }
+inline void KByteArrayModel::setMaxSize( int MS )      { MaxSize = MS; }
+inline void KByteArrayModel::setKeepsMemory( bool KM ) { KeepsMemory = KM; }
+inline void KByteArrayModel::setAutoDelete( bool AD )  { AutoDelete = AD; }
 
-inline void KPlainBuffer::setReadOnly( bool RO )    { ReadOnly = RO; }
-inline void KPlainBuffer::setModified( bool M )     { Modified = M; }
-inline void KPlainBuffer::setMaxSize( int MS )      { MaxSize = MS; }
-inline void KPlainBuffer::setKeepsMemory( bool KM ) { KeepsMemory = KM; }
-inline void KPlainBuffer::setAutoDelete( bool AD )  { AutoDelete = AD; }
-
-inline char *KPlainBuffer::data()       const { return Data; }
-inline int KPlainBuffer::maxSize()      const { return MaxSize; }
-inline bool KPlainBuffer::keepsMemory() const { return KeepsMemory; }
-inline bool KPlainBuffer::autoDelete()  const { return AutoDelete; }
+inline char *KByteArrayModel::data()       const { return Data; }
+inline int KByteArrayModel::maxSize()      const { return MaxSize; }
+inline bool KByteArrayModel::keepsMemory() const { return KeepsMemory; }
+inline bool KByteArrayModel::autoDelete()  const { return AutoDelete; }
 }
 
 #endif

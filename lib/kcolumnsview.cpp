@@ -197,7 +197,7 @@ void KColumnsView::paintEvent( QPaintEvent *Event )
   drawColumns( &Painter, DirtyRect.x(),DirtyRect.y(), DirtyRect.width(), DirtyRect.height() );
 }
 
-
+//#include <kdebug.h>
 void KColumnsView::drawColumns( QPainter *Painter, int cx, int cy, int cw, int ch )
 {
   KPixelXs DirtyXs = KPixelXs::fromWidth( cx, cw );
@@ -227,7 +227,7 @@ void KColumnsView::drawColumns( QPainter *Painter, int cx, int cy, int cw, int c
       if( DirtyLines.isValid() )
       {
         KPixelY cy = DirtyLines.start() * LineHeight;
-
+//kDebug()<<"Dirty lines: "<<DirtyLines.start()<<"-"<<DirtyLines.end()<<endl;
         // starting painting with the first line
         int Line = DirtyLines.start();
         QListIterator<KColumn*> it( DirtyColumns );

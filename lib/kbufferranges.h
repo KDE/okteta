@@ -50,14 +50,15 @@ class KBufferRanges
 
     /** removes marking and returns true if something changed */
     void removeMarking();
-    /** removes selection with id and returns true if something changed */
-    void removeSelection( int id = 0 );
+    /** removes selection with id and returns it */
+    KSection removeSelection( int id = 0 );
     /** removes all but the standard selection and returns true if something changed */
     void removeFurtherSelections();
 
     void addChangedRange( const KSection &S );
     void addChangedRange( int SI, int EI );
     void addChangedRange( const KCoordRange &NewRange );
+    void adaptSelectionToChange( int Pos, int RemovedLength, int InsertedLength );
     void resetChangedRanges();
 
     void setModified( bool M = true );

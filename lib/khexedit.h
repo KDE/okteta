@@ -40,7 +40,7 @@ namespace KHE
 
 class KCoordRange;
 
-class KDataBuffer;
+class KAbstractByteArrayModel;
 
 class KCharColumn;
 class KValueColumn;
@@ -125,7 +125,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
 
 
   public:
-    KHexEdit( KDataBuffer *Buffer = 0, QWidget *Parent = 0 );
+    KHexEdit( KAbstractByteArrayModel *Buffer = 0, QWidget *Parent = 0 );
     virtual ~KHexEdit();
 
 
@@ -226,9 +226,9 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
 //    void updateByte( int row, int column );
 //    void ensureByteVisible( int row, int column );
 
-  public slots:
+  public Q_SLOTS:
     /** */
-    void setDataBuffer( KDataBuffer *B );
+    void setDataBuffer( KAbstractByteArrayModel *B );
 
     /** switches the Offset column on/off */
     void toggleOffsetColumn( bool Visible );
@@ -349,7 +349,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     virtual void unpauseCursor();
 
 
-  signals:
+  Q_SIGNALS:
     /** Index of the byte that was clicked */
     void clicked( int Index );
     /** Index of the byte that was double clicked */
@@ -362,8 +362,6 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     void cutAvailable( bool Really );
     /** there is a copy available or not */
     void copyAvailable( bool Really );
-    /** there has been a change to the buffer */
-    void bufferChanged();
 
 
   protected: // QWidget API
@@ -413,14 +411,11 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     void drawActiveCursor();
     void drawInactiveCursor();
     void updateCursor( const KBufferColumn &Column );
-    void paintLine( KBufferColumn *C, int Line, KSection Positions );
 
   protected: // partial operations
     void handleMouseMove( const QPoint& Point );
     KBufferDrag *dragObject() const;
     void pasteFromSource( const QMimeData *Source );
-    /** removes the section from the databuffer and updates all affected values */
-    void removeData( KSection Indizes );
     /** sets ChangedRange to the range of VisibleRange that is actually changed
       * @return true if there was a change within the visible range
       */
@@ -434,13 +429,11 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
       * and updates the dependant values
       */
     void adjustLayoutToSize();
-    /** */
-    void updateLength();
     /** calls updateContent for the Column */
     void updateColumn( KColumn &Column );
     void emitSelectionSignals();
 
-  protected slots:
+  protected Q_SLOTS:
     /** gets called by the cursor blink timer */
     void blinkCursor();
     /** gets called by the scroll timer (for mouse selection) */
@@ -450,13 +443,18 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     /** */
     void startDrag();
 
-  protected slots: // QWidget API
+    void onContentsReplaced( int Pos, int RemovedLength, int InsertedLength );
+    void onContentsMoved( int Destination, int Source, int MovedLength );
+    void updateRange( int Start, int End );
+
+
+  protected Q_SLOTS: // QWidget API
     virtual void fontChange( const QFont &OldFont );
 
 
   protected:
     /** Buffer with the data */
-    KDataBuffer *DataBuffer;
+    KAbstractByteArrayModel *ByteArrayModel;
 
     /** holds the logical layout */
     KBufferLayout *BufferLayout;

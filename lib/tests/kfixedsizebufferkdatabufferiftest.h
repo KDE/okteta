@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kfixedsizebufferkdatabufferiftest.h  -  description
+                          kfixedsizebufferkabstractbytearraymodeliftest.h  -  description
                             -------------------
     begin                : Son Mai 7 2006
     copyright            : (C) 2006 by Friedrich W. H. Kossebau
@@ -16,18 +16,18 @@
 
 
 // test specific
-#include "kdatabufferiftest.h"
+#include "kabstractbytearraymodeliftest.h"
 
 
-#ifndef KFIXEDSIZEBUFFERKDATABUFFERIFTEST_H
-#define KFIXEDSIZEBUFFERKDATABUFFERIFTEST_H
+#ifndef KFIXEDSIZEBYTEARRAYMODELKABSTRACTBYTEARRAYMODELIFTEST_H
+#define KFIXEDSIZEBYTEARRAYMODELKABSTRACTBYTEARRAYMODELIFTEST_H
 
 
-class KFixedSizeBufferDataBufferIfTest : public KDataBufferIfTest
+class KFixedSizeByteArrayModelAbstractByteArrayModelIfTest : public KAbstractByteArrayModelIfTest
 {
-  protected: // KDataBufferIfTest API
-    KHE::KDataBuffer *createBuffer();
-    void deleteBuffer( KHE::KDataBuffer *Buffer );
+  protected: // KAbstractByteArrayModelIfTest API
+    KHE::KAbstractByteArrayModel *createByteArrayModel();
+    void deleteByteArrayModel( KHE::KAbstractByteArrayModel *ByteArrayModel );
 };
 
 #endif

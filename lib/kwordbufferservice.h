@@ -24,7 +24,7 @@
 namespace KHE
 {
 
-class KDataBuffer;
+class KAbstractByteArrayModel;
 class KCharCodec;
 
 /**
@@ -35,7 +35,7 @@ class KCharCodec;
 class KWordBufferService
 {
   public:
-    KWordBufferService( KDataBuffer *B, KCharCodec *C );
+    KWordBufferService( KAbstractByteArrayModel *B, KCharCodec *C );
     ~KWordBufferService();
 
 
@@ -120,12 +120,12 @@ class KWordBufferService
     KSection wordSection( unsigned int Index ) const;
 
   protected:
-    KDataBuffer *Buffer;
+    KAbstractByteArrayModel *Buffer;
     KCharCodec *CharCodec;
 };
 
 
-inline KWordBufferService::KWordBufferService( KDataBuffer *B, KCharCodec *C )
+inline KWordBufferService::KWordBufferService( KAbstractByteArrayModel *B, KCharCodec *C )
   : Buffer( B ), CharCodec( C ) {}
 inline KWordBufferService::~KWordBufferService() {}
 

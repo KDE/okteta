@@ -45,11 +45,6 @@ KBigBuffer::~KBigBuffer()
 
 
 
-bool KBigBuffer::prepareRange( KSection /*Range*/ ) const
-{
-  return true;
-}
-
 const char *KBigBuffer::dataSet( KSection /*Section*/ ) const
 {
   return 0;
@@ -88,7 +83,7 @@ unsigned int KBigBuffer::replace( KSection /*Section*/, const char*, unsigned in
   return 0;
 }
 
-int KBigBuffer::fill( char /*FillChar*/, int /*Length*/, unsigned int /*Pos*/ )
+int KBigBuffer::fill( char /*FillChar*/, unsigned int /*Pos*/, int /*Length*/ )
 {
   return 0;
 }

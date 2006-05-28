@@ -25,19 +25,19 @@
 
 using namespace KHE;
 
-static const int FixedSizeBufferSize = 60;
+static const int FixedSizeByteArrayModelSize = 60;
 
 
 
-KHE::KDataBuffer *KFixedSizeBufferDataBufferIfTest::createBuffer()
+KHE::KAbstractByteArrayModel *KFixedSizeByteArrayModelAbstractByteArrayModelIfTest::createByteArrayModel()
 {
-  return new KFixedSizeBuffer( FixedSizeBufferSize );
+  return new KFixedSizeBuffer( FixedSizeByteArrayModelSize );
 }
 
-void KFixedSizeBufferDataBufferIfTest::deleteBuffer( KHE::KDataBuffer *Buffer )
+void KFixedSizeByteArrayModelAbstractByteArrayModelIfTest::deleteByteArrayModel( KHE::KAbstractByteArrayModel *ByteArrayModel )
 {
-  delete Buffer;
+  delete ByteArrayModel;
 }
 
 
-QTEST_MAIN( KFixedSizeBufferDataBufferIfTest )
+QTEST_MAIN( KFixedSizeByteArrayModelAbstractByteArrayModelIfTest )

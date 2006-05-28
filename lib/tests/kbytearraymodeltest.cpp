@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kplainbuffertest.cpp  -  description
+                          kbytearraymodeltest.cpp  -  description
                             -------------------
     begin                : Son Mai 7 2006
     copyright            : (C) 2006 by Friedrich W. H. Kossebau
@@ -18,18 +18,18 @@
 // qt specific
 #include <QtTest>
 // lib specific
-#include <kplainbuffer.h>
+#include <kbytearraymodel.h>
 // test specific
-#include "kplainbuffertest.h"
+#include "kbytearraymodeltest.h"
 
 
 using namespace KHE;
 
 
-void KPlainBufferTest::testNothing()
+void KByteArrayModelTest::testNothing()
 {
 }
 
-QTEST_MAIN( KPlainBufferTest )
+QTEST_MAIN( KByteArrayModelTest )
 
-#include "kplainbuffertest.moc"
+#include "kbytearraymodeltest.moc"

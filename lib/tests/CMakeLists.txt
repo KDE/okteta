@@ -103,46 +103,46 @@ add_test(khexedit-kfixedsizebuffertest ${EXECUTABLE_OUTPUT_PATH}/kfixedsizebuffe
 
 ########### next target ###############
 
-set(kfixedsizebufferkdatabufferiftest_SRCS
-kdatabufferiftest.cpp kfixedsizebufferkdatabufferiftest.cpp )
+set(kfixedsizebufferkabstractbytearraymodeliftest_SRCS
+kabstractbytearraymodeliftest.cpp kfixedsizebufferkdatabufferiftest.cpp )
 
-kde4_automoc(${kfixedsizebufferkdatabufferiftest_SRCS})
+kde4_automoc(${kfixedsizebufferkabstractbytearraymodeliftest_SRCS})
 
-kde4_add_executable(kfixedsizebufferkdatabufferiftest RUN_UNINSTALLED ${kfixedsizebufferkdatabufferiftest_SRCS})
+kde4_add_executable(kfixedsizebufferkabstractbytearraymodeliftest RUN_UNINSTALLED ${kfixedsizebufferkabstractbytearraymodeliftest_SRCS})
 
-target_link_libraries(kfixedsizebufferkdatabufferiftest
+target_link_libraries(kfixedsizebufferkabstractbytearraymodeliftest
   testkhexeditcommon ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
-add_test(khexedit-kfixedsizebufferkdatabufferiftest ${EXECUTABLE_OUTPUT_PATH}/kfixedsizebufferkdatabufferiftest)
+add_test(khexedit-kfixedsizebufferkabstractbytearraymodeliftest ${EXECUTABLE_OUTPUT_PATH}/kfixedsizebufferkabstractbytearraymodeliftest)
 
 
 ########### next target ###############
 
-set(kplainbuffertest_SRCS kplainbuffertest.cpp )
+set(kbytearraymodeltest_SRCS kbytearraymodeltest.cpp )
 
-kde4_automoc(${kplainbuffertest_SRCS})
+kde4_automoc(${kbytearraymodeltest_SRCS})
 
-kde4_add_executable(kplainbuffertest RUN_UNINSTALLED ${kplainbuffertest_SRCS})
+kde4_add_executable(kbytearraymodeltest RUN_UNINSTALLED ${kbytearraymodeltest_SRCS})
 
-target_link_libraries(kplainbuffertest
+target_link_libraries(kbytearraymodeltest
   testkhexeditcommon ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
-add_test(khexedit-kplainbuffertest ${EXECUTABLE_OUTPUT_PATH}/kplainbuffertest)
+add_test(khexedit-kbytearraymodeltest ${EXECUTABLE_OUTPUT_PATH}/kbytearraymodeltest)
 
 
 ########### next target ###############
 
-set(kplainbufferkdatabufferiftest_SRCS
-kdatabufferiftest.cpp kplainbufferkdatabufferiftest.cpp )
+set(kbytearraymodelkabstractbytearraymodeliftest_SRCS
+kabstractbytearraymodeliftest.cpp kbytearraymodelkabstractbytearraymodeliftest.cpp )
 
-kde4_automoc(${kplainbufferkdatabufferiftest_SRCS})
+kde4_automoc(${kbytearraymodelkabstractbytearraymodeliftest_SRCS})
 
-kde4_add_executable(kplainbufferkdatabufferiftest RUN_UNINSTALLED ${kplainbufferkdatabufferiftest_SRCS})
+kde4_add_executable(kbytearraymodelkabstractbytearraymodeliftest RUN_UNINSTALLED ${kbytearraymodelkabstractbytearraymodeliftest_SRCS})
 
-target_link_libraries(kplainbufferkdatabufferiftest
+target_link_libraries(kbytearraymodelkabstractbytearraymodeliftest
   testkhexeditcommon ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
-add_test(khexedit-kplainbufferkdatabufferiftest ${EXECUTABLE_OUTPUT_PATH}/kplainbufferkdatabufferiftest)
+add_test(khexedit-kbytearraymodelkabstractbytearraymodeliftest ${EXECUTABLE_OUTPUT_PATH}/kbytearraymodelkabstractbytearraymodeliftest)
 
 
 ########### next target ###############

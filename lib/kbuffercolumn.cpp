@@ -39,7 +39,7 @@ static const KPixelX DefaultByteSpacingWidth = 3;
 static const KPixelX DefaultGroupSpacingWidth = 9;
 static const int DefaultNoOfGroupedBytes = 4;
 
-KBufferColumn::KBufferColumn( KColumnsView *CV, KDataBuffer *ByteChar, KBufferLayout *L, KBufferRanges *R )
+KBufferColumn::KBufferColumn( KColumnsView *CV, KAbstractByteArrayModel *ByteChar, KBufferLayout *L, KBufferRanges *R )
  : KColumn( CV ),
    Buffer( ByteChar ),
    Layout( L ),
@@ -65,7 +65,7 @@ KBufferColumn::~KBufferColumn()
 
 
 
-void KBufferColumn::set( KDataBuffer *ByteChar )
+void KBufferColumn::set( KAbstractByteArrayModel *ByteChar )
 {
   Buffer= ByteChar;
 }
@@ -395,6 +395,9 @@ void KBufferColumn::paintPositions( QPainter *Painter, int Line, KSection Pos )
   bool HasMarking = Ranges->hasMarking();
   bool HasSelection = Ranges->hasSelection();
 
+//kDebug() << QString("painting positions (P%1-%2L%3): ").arg(Pos.start()).arg(Pos.end()).arg(Line)
+//         <<Positions.start()<<"-"<<Positions.start()
+//         <<" for Indizes "<<Indizes.start()<<"-"<<Indizes.start()<<endl;
   while( Positions.isValid() )
   {
     KSection PositionsPart( Positions );  // set of positions to paint next

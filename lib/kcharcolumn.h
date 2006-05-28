@@ -38,7 +38,7 @@ namespace KHE
 class KCharColumn : public KBufferColumn
 {
   public:
-    KCharColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R );
+    KCharColumn( KColumnsView *CV, KAbstractByteArrayModel *B, KBufferLayout *L, KBufferRanges *R );
     virtual ~KCharColumn();
 
 
