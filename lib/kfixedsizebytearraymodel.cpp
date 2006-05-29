@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kfixedsizebuffer.cpp  -  description
+                          kfixedsizebytearraymodel.cpp  -  description
                              -------------------
     begin                : Mit Jun 03 2003
     copyright            : (C) 2003 by Friedrich W. H. Kossebau
@@ -18,11 +18,11 @@
 // c specific
 #include <string.h>
 // lib specific
-#include "kfixedsizebuffer.h"
+#include "kfixedsizebytearraymodel.h"
 
 using namespace KHE;
 
-KFixedSizeBuffer::KFixedSizeBuffer( char *D, unsigned int S, char FUC )
+KFixedSizeByteArrayModel::KFixedSizeByteArrayModel( char *D, unsigned int S, char FUC )
   : Data( D ),
    Size( S ),
    FillUpChar( FUC ),
@@ -32,7 +32,7 @@ KFixedSizeBuffer::KFixedSizeBuffer( char *D, unsigned int S, char FUC )
 {
 }
 
-KFixedSizeBuffer::KFixedSizeBuffer( unsigned int S, char FUC )
+KFixedSizeByteArrayModel::KFixedSizeByteArrayModel( unsigned int S, char FUC )
   : Data( new char[S] ),
    Size( S ),
    FillUpChar( FUC ),
@@ -43,7 +43,7 @@ KFixedSizeBuffer::KFixedSizeBuffer( unsigned int S, char FUC )
   reset( 0, S );
 }
 
-KFixedSizeBuffer::~KFixedSizeBuffer()
+KFixedSizeByteArrayModel::~KFixedSizeByteArrayModel()
 {
   if( AutoDelete )
     delete [] Data;
@@ -51,7 +51,7 @@ KFixedSizeBuffer::~KFixedSizeBuffer()
 
 
 
-void KFixedSizeBuffer::setDatum( unsigned int Offset, const char Char )
+void KFixedSizeByteArrayModel::setDatum( unsigned int Offset, const char Char )
 {
   Data[Offset] = Char;
   Modified = true;
@@ -62,7 +62,7 @@ void KFixedSizeBuffer::setDatum( unsigned int Offset, const char Char )
 
 
 
-int KFixedSizeBuffer::insert( int Pos, const char* D, int InputLength )
+int KFixedSizeByteArrayModel::insert( int Pos, const char* D, int InputLength )
 {
   // check all parameters
   if( Pos >= (int)Size || InputLength == 0 )
@@ -85,8 +85,9 @@ int KFixedSizeBuffer::insert( int Pos, const char* D, int InputLength )
 }
 
 
-int KFixedSizeBuffer::remove( KSection Remove )
+int KFixedSizeByteArrayModel::remove( const KSection &R )
 {
+  KSection Remove( R );
   if( Remove.start() >= (int)Size || Remove.width() == 0 )
     return 0;
 
@@ -108,8 +109,9 @@ int KFixedSizeBuffer::remove( KSection Remove )
 }
 
 
-unsigned int KFixedSizeBuffer::replace( KSection Remove, const char* D, unsigned int InputLength )
+unsigned int KFixedSizeByteArrayModel::replace( const KSection &R, const char* D, unsigned int InputLength )
 {
+  KSection Remove( R );
   // check all parameters
   if( Remove.startsBehind( Size-1 ) || (Remove.width()==0 && InputLength==0) )
     return 0;
@@ -148,8 +150,9 @@ unsigned int KFixedSizeBuffer::replace( KSection Remove, const char* D, unsigned
 }
 
 
-int KFixedSizeBuffer::move( int DestPos, KSection SourceSection )
+int KFixedSizeByteArrayModel::move( int DestPos, const KSection &S )
 {
+  KSection SourceSection( S );
   // check all parameters
   if( SourceSection.start() >= (int)Size || SourceSection.width() == 0
       || DestPos > (int)Size || SourceSection.start() == DestPos )
@@ -221,7 +224,7 @@ int KFixedSizeBuffer::move( int DestPos, KSection SourceSection )
 }
 
 
-int KFixedSizeBuffer::fill( const char FChar, unsigned int Pos, int FillLength )
+int KFixedSizeByteArrayModel::fill( const char FChar, unsigned int Pos, int FillLength )
 {
   // nothing to fill
   if( Pos >= Size )
@@ -241,8 +244,9 @@ int KFixedSizeBuffer::fill( const char FChar, unsigned int Pos, int FillLength )
 }
 
 
-int KFixedSizeBuffer::compare( const KAbstractByteArrayModel &Other, KSection OtherRange, unsigned int Pos )
+int KFixedSizeByteArrayModel::compare( const KAbstractByteArrayModel &Other, const KSection &OR, unsigned int Pos )
 {
+  KSection OtherRange( OR );
   //kDebug() << QString("Pos: %1, OtherRange: (%3/%4)" ).arg(Pos).arg(OtherRange.start()).arg(OtherRange.end())
   //    << endl;
   // test other values
@@ -291,11 +295,11 @@ int KFixedSizeBuffer::compare( const KAbstractByteArrayModel &Other, KSection Ot
 }
 
 
-int KFixedSizeBuffer::find(  const char*/*KeyData*/, int /*Length*/, KSection /*Section*/  ) const { return 0; }
-int KFixedSizeBuffer::rfind( const char*, int /*Length*/, int /*Pos*/ ) const { return 0; }
+int KFixedSizeByteArrayModel::find(  const char*/*KeyData*/, int /*Length*/, const KSection &/*Section*/  ) const { return 0; }
+int KFixedSizeByteArrayModel::rfind( const char*, int /*Length*/, int /*Pos*/ ) const { return 0; }
 
 
-void KFixedSizeBuffer::reset( unsigned int Pos, unsigned int Length )
+void KFixedSizeByteArrayModel::reset( unsigned int Pos, unsigned int Length )
 {
   memset( &Data[Pos], FillUpChar, Length );
 }

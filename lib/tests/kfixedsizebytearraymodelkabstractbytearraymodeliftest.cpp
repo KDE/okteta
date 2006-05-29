@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kfixedsizebufferkdatabufferiftest.cpp  -  description
+                          kfixedsizebytearraymodelkabstractbytearraymodeliftest.cpp  -  description
                             -------------------
     begin                : Son Mai 7 2006
     copyright            : (C) 2006 by Friedrich W. H. Kossebau
@@ -18,9 +18,9 @@
 // qt specific
 #include <QtTest>
 // lib specific
-#include <kfixedsizebuffer.h>
+#include <kfixedsizebytearraymodel.h>
 // test specific
-#include "kfixedsizebufferkdatabufferiftest.h"
+#include "kfixedsizebytearraymodelkabstractbytearraymodeliftest.h"
 
 
 using namespace KHE;
@@ -31,7 +31,7 @@ static const int FixedSizeByteArrayModelSize = 60;
 
 KHE::KAbstractByteArrayModel *KFixedSizeByteArrayModelAbstractByteArrayModelIfTest::createByteArrayModel()
 {
-  return new KFixedSizeBuffer( FixedSizeByteArrayModelSize );
+  return new KFixedSizeByteArrayModel( FixedSizeByteArrayModelSize );
 }
 
 void KFixedSizeByteArrayModelAbstractByteArrayModelIfTest::deleteByteArrayModel( KHE::KAbstractByteArrayModel *ByteArrayModel )

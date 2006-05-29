@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kfixedsizebuffertest.h  -  description
+                          kfixedsizebytearraymodeltest.h  -  description
                             -------------------
     begin                : Son Mai 7 2006
     copyright            : (C) 2006 by Friedrich W. H. Kossebau
@@ -22,7 +22,7 @@
 // qt specific
 #include <QObject>
 
-class KFixedSizeBufferTest : public QObject
+class KFixedSizeByteArrayModelTest : public QObject
 {
   Q_OBJECT
 

@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kfixedsizebufferkabstractbytearraymodeliftest.h  -  description
+                          kfixedsizebytearraymodelkabstractbytearraymodeliftest.h  -  description
                             -------------------
     begin                : Son Mai 7 2006
     copyright            : (C) 2006 by Friedrich W. H. Kossebau

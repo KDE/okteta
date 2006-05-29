@@ -29,7 +29,7 @@ int KAbstractByteArrayModel::insert( int Pos, const char* D, int Length )
 }
 
 
-int KAbstractByteArrayModel::remove( KSection Remove )
+int KAbstractByteArrayModel::remove( const KSection &Remove )
 {
   replace( Remove, 0, 0 );
   return Remove.width(); // TODO: check if this is true
@@ -41,8 +41,9 @@ int KAbstractByteArrayModel::copyTo( char* Dest, int Pos, int Length ) const
 }
 
 
-int KAbstractByteArrayModel::copyTo( char* Dest, KSection Source ) const
+int KAbstractByteArrayModel::copyTo( char* Dest, const KSection &S ) const
 {
+  KSection Source( S );
   Source.restrictEndTo( size()-1 );
   for( int i=Source.start(); i<=Source.end(); ++i )
     *Dest++ = datum( i );

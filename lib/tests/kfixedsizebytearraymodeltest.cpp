@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kfixedsizebuffertest.cpp  -  description
+                          kfixedsizebytearraymodeltest.cpp  -  description
                             -------------------
     begin                : Son Mai 7 2006
     copyright            : (C) 2006 by Friedrich W. H. Kossebau
@@ -18,9 +18,9 @@
 // qt specific
 #include <QtTest>
 // lib specific
-#include <kfixedsizebuffer.h>
+#include <kfixedsizebytearraymodel.h>
 // test specific
-#include "kfixedsizebuffertest.h"
+#include "kfixedsizebytearraymodeltest.h"
 
 using namespace KHE;
 
@@ -29,12 +29,12 @@ using namespace KHE;
 // test the compare function
 // uses a comparison buffer of the same size
 // changes the first, a middle, and the last char to a greater or smaller char and compares
-void KFixedSizeBufferTest::testCompare()
+void KFixedSizeByteArrayModelTest::testCompare()
 {
   int Size = 60;
   // create a working buffer
-  KFixedSizeBuffer Buffer( Size, 'b' );
-  KFixedSizeBuffer OtherBuffer( Size );
+  KFixedSizeByteArrayModel Buffer( Size, 'b' );
+  KFixedSizeByteArrayModel OtherBuffer( Size );
   OtherBuffer.fill( 'b' );
 
   int Last = Size-1;
@@ -74,8 +74,8 @@ void KDataBufferIfTest::testCopy()
   int Size = 60;
   int CopySize = 20;
   // create a working buffer
-  KFixedSizeBuffer Buffer( Size, 'b' );
-  KFixedSizeBuffer OtherBuffer( Size );
+  KFixedSizeByteArrayModel Buffer( Size, 'b' );
+  KFixedSizeByteArrayModel OtherBuffer( Size );
   OtherBuffer.fill( 'a' );
 
   int Last = Size-1;
@@ -113,6 +113,6 @@ void KDataBufferIfTest::testCopy()
 */
 
 
-QTEST_MAIN( KFixedSizeBufferTest )
+QTEST_MAIN( KFixedSizeByteArrayModelTest )
 
-#include "kfixedsizebuffertest.moc"
+#include "kfixedsizebytearraymodeltest.moc"

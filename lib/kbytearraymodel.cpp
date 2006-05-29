@@ -108,8 +108,9 @@ int KByteArrayModel::insert( int Pos, const char* D, int Length )
 }
 
 
-int KByteArrayModel::remove( KSection Remove )
+int KByteArrayModel::remove( const KSection &R )
 {
+  KSection Remove( R );
   if( Remove.startsBehind(Size-1) || Remove.width() == 0 )
     return 0;
 
@@ -131,8 +132,9 @@ int KByteArrayModel::remove( KSection Remove )
 }
 
 
-unsigned int KByteArrayModel::replace( KSection Remove, const char* D, unsigned int InputLength )
+unsigned int KByteArrayModel::replace( const KSection &R, const char* D, unsigned int InputLength )
 {
+  KSection Remove( R );
   // check all parameters
   if( Remove.start() >= (int)Size || (Remove.width()==0 && InputLength==0) )
     return 0;
@@ -197,8 +199,9 @@ unsigned int KByteArrayModel::replace( KSection Remove, const char* D, unsigned 
 }
 
 
-int KByteArrayModel::move( int DestPos, KSection SourceSection )
+int KByteArrayModel::move( int DestPos, const KSection &S )
 {
+  KSection SourceSection( S );
   // check all parameters
   if( SourceSection.start() >= (int)Size || SourceSection.width() == 0
       || DestPos > (int)Size || SourceSection.start() == DestPos )
@@ -292,8 +295,10 @@ int KByteArrayModel::fill( const char FChar, unsigned int Pos, int FillLength )
 }
 
 
-int KByteArrayModel::find( const char* SearchString, int Length, KSection Section ) const  
+int KByteArrayModel::find( const char* SearchString, int Length, const KSection &S ) const
 {
+  KSection Section( S );
+
   Section.restrictEndTo( Size-1 );
 
   for( int i = Section.start(); i <= Section.end(); ++i )

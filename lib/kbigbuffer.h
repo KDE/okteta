@@ -43,23 +43,23 @@ class KHEXEDIT_EXPORT KBigBuffer : public KAbstractByteArrayModel
     virtual ~KBigBuffer();
 
   public: // KAbstractByteArrayModel API
-    virtual const char *dataSet( KSection S ) const;
+    virtual const char *dataSet( const KSection &S ) const;
     virtual char datum( unsigned int Offset ) const;
     virtual int size() const;
     virtual bool isReadOnly() const;
     virtual bool isModified() const;
 
     virtual int insert( int Pos, const char*, int Length );
-    virtual int remove( KSection S );
-    virtual unsigned int replace( KSection S, const char*, unsigned int InputLength );
-    virtual int move( int DestPos, KSection SourceSection );
+    virtual int remove( const KSection &S );
+    virtual unsigned int replace( const KSection &S, const char*, unsigned int InputLength );
+    virtual int move( int DestPos, const KSection &SourceSection );
     virtual int fill( char FillChar, unsigned int Pos = 0, int Length = -1 );
     virtual void setDatum( unsigned int Offset, const char Char );
 
     virtual void setModified( bool M = true );
 
     //virtual int find( const char*, int Length, int Pos = 0 ) const;
-    virtual int find( const char*KeyData, int Length, KSection Section ) const;
+    virtual int find( const char*KeyData, int Length, const KSection &Section ) const;
     virtual int rfind( const char*, int Length, int Pos = -1 ) const;
 
 /*     virtual int find( const QString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */

@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kfixedsizebuffer.h  -  description
+                          kfixedsizebytearraymodel.h  -  description
                              -------------------
     begin                : Mit Jun 03 2003
     copyright            : (C) 2003 by Friedrich W. H. Kossebau
@@ -15,8 +15,8 @@
  ***************************************************************************/
 
  
-#ifndef KHE_KFIXEDSIZEBUFFER_H
-#define KHE_KFIXEDSIZEBUFFER_H
+#ifndef KHE_KFIXEDSIZEBYTEARRAYMODEL_H
+#define KHE_KFIXEDSIZEBYTEARRAYMODEL_H
 
 #include "kabstractbytearraymodel.h"
 
@@ -29,40 +29,40 @@ namespace KHE
   *@author Friedrich W. H. Kossebau
   */
 
-class KFixedSizeBuffer : public KAbstractByteArrayModel
+class KFixedSizeByteArrayModel : public KAbstractByteArrayModel
 {
   public:
     /** creates a readonly buffer around the given data */
-    KFixedSizeBuffer( char *D, unsigned int S, char FUC = '\0' );
+    KFixedSizeByteArrayModel( char *D, unsigned int S, char FUC = '\0' );
     /** creates a writeable buffer which is deleted at the end */
-    KFixedSizeBuffer( unsigned int S, char FUC = '\0' );
-    virtual ~KFixedSizeBuffer();
+    KFixedSizeByteArrayModel( unsigned int S, char FUC = '\0' );
+    virtual ~KFixedSizeByteArrayModel();
 
   public: // KAbstractByteArrayModel API
-    virtual bool prepareRange( KSection Range ) const;
-    virtual const char *dataSet( KSection S ) const;
+    virtual bool prepareRange( const KSection &Range ) const;
+    virtual const char *dataSet( const KSection &S ) const;
     virtual char datum( unsigned int Offset ) const;
     virtual int size() const;
     virtual bool isReadOnly() const;
     virtual bool isModified() const;
 
     virtual int insert( int Pos, const char*, int Length );
-    virtual int remove( KSection Remove );
-    virtual unsigned int replace( KSection Remove, const char*, unsigned int InputLength );
-    virtual int move( int DestPos, KSection SourceSection );
+    virtual int remove( const KSection &Remove );
+    virtual unsigned int replace( const KSection &Remove, const char*, unsigned int InputLength );
+    virtual int move( int DestPos, const KSection &SourceSection );
     virtual int fill( const char FillChar, unsigned int Pos = 0, int Length = -1 );
     virtual void setDatum( unsigned int Offset, const char Char );
 
     virtual void setModified( bool M = true );
 
-    virtual int find( const char*KeyData, int Length, KSection Section ) const;
+    virtual int find( const char*KeyData, int Length, const KSection &Section ) const;
     virtual int rfind( const char*, int Length, int Pos = -1 ) const;
 
 /*     virtual int find( const QString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */
 
   public:
     void setReadOnly( bool RO = true );
-    int compare( const KAbstractByteArrayModel &Other, KSection Range, unsigned int Pos = 0 );
+    int compare( const KAbstractByteArrayModel &Other, const KSection &Range, unsigned int Pos = 0 );
     int compare( const KAbstractByteArrayModel &Other, int OtherPos, int Length, unsigned int Pos = 0 );
     int compare( const KAbstractByteArrayModel &Other );
 
@@ -88,25 +88,25 @@ class KFixedSizeBuffer : public KAbstractByteArrayModel
 };
 
 
-inline bool KFixedSizeBuffer::prepareRange( KSection ) const { return true; }
-inline const char *KFixedSizeBuffer::dataSet( KSection S ) const { return &Data[S.start()]; }
+inline bool KFixedSizeByteArrayModel::prepareRange( const KSection &) const { return true; }
+inline const char *KFixedSizeByteArrayModel::dataSet( const KSection &S ) const { return &Data[S.start()]; }
 
-inline char KFixedSizeBuffer::datum( unsigned int Offset ) const { return Data[Offset]; }
-inline int KFixedSizeBuffer::size() const  { return Size; }
+inline char KFixedSizeByteArrayModel::datum( unsigned int Offset ) const { return Data[Offset]; }
+inline int KFixedSizeByteArrayModel::size() const  { return Size; }
 
-inline bool KFixedSizeBuffer::isReadOnly()   const { return ReadOnly; }
-inline bool KFixedSizeBuffer::isModified()   const { return Modified; }
+inline bool KFixedSizeByteArrayModel::isReadOnly()   const { return ReadOnly; }
+inline bool KFixedSizeByteArrayModel::isModified()   const { return Modified; }
 
-inline void KFixedSizeBuffer::setReadOnly( bool RO )  { ReadOnly = RO; }
-inline void KFixedSizeBuffer::setModified( bool M )   { Modified = M; }
+inline void KFixedSizeByteArrayModel::setReadOnly( bool RO )  { ReadOnly = RO; }
+inline void KFixedSizeByteArrayModel::setModified( bool M )   { Modified = M; }
 
-inline int KFixedSizeBuffer::compare( const KAbstractByteArrayModel &Other )
+inline int KFixedSizeByteArrayModel::compare( const KAbstractByteArrayModel &Other )
 { return compare( Other, KSection(0,Other.size()-1),0 ); }
 
-inline int KFixedSizeBuffer::compare( const KAbstractByteArrayModel &Other, int OtherPos, int Length, unsigned int Pos )
+inline int KFixedSizeByteArrayModel::compare( const KAbstractByteArrayModel &Other, int OtherPos, int Length, unsigned int Pos )
 { return compare( Other, KSection::fromWidth(OtherPos,Length),Pos ); }
 
-inline char *KFixedSizeBuffer::rawData() const { return Data; }
+inline char *KFixedSizeByteArrayModel::rawData() const { return Data; }
 
 }
 

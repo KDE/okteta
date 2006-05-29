@@ -19,7 +19,7 @@
 #include <QtTest>
 #include <QSignalSpy>
 // kde specific
-#include <kfixedsizebuffer.h>
+#include <kfixedsizebytearraymodel.h>
 // test specific
 #include "kabstractbytearraymodeliftest.h"
 
@@ -158,7 +158,7 @@ void KAbstractByteArrayModelIfTest::testCopyTo()
   unsigned int Size = ByteArrayModel->size();
   KSection CopySection( 0, CopySize-1 );
 
-  KFixedSizeBuffer Copy( Size, BlankChar );
+  KFixedSizeByteArrayModel Copy( Size, BlankChar );
   // copyTo() all
   ByteArrayModel->copyTo( Copy.rawData(), 0, Size );
   QCOMPARE( Copy.compare(*ByteArrayModel), 0 );
@@ -205,7 +205,7 @@ void KAbstractByteArrayModelIfTest::testFill()
   unsigned int Size = ByteArrayModel->size();
   KSection FillSection = KSection::fromWidth( 0, Size );
 
-  KFixedSizeBuffer Copy( Size, PaintChar );
+  KFixedSizeByteArrayModel Copy( Size, PaintChar );
 
   // fill() all
   ByteArrayModel->setModified( false );
@@ -307,7 +307,7 @@ void KAbstractByteArrayModelIfTest::testRemove()
   static const unsigned int RemoveSize = 10;
   // create Copy
   unsigned int Size = ByteArrayModel->size();
-  KFixedSizeBuffer Copy( Size );
+  KFixedSizeByteArrayModel Copy( Size );
   ByteArrayModel->copyTo( Copy.rawData(), 0, Size );
 
   // remove() at end
@@ -359,8 +359,8 @@ void KAbstractByteArrayModelIfTest::testRemove()
 static const int InsertSize = 10;
 
 struct KTestData {
-  KFixedSizeBuffer Copy;
-  KFixedSizeBuffer InsertData;
+  KFixedSizeByteArrayModel Copy;
+  KFixedSizeByteArrayModel InsertData;
 
   KTestData( int CopySize, int InsertSize ) : Copy( CopySize ), InsertData( InsertSize ) {}
   const char *insertionData() { return InsertData.rawData(); }
@@ -484,7 +484,7 @@ void KAbstractByteArrayModelIfTest::testMove()
   static const int MoveSize = 10;
   const KSection Origin = KSection::fromWidth( 0, MoveSize );
   int Size = ByteArrayModel->size();
-  KFixedSizeBuffer Copy( Size );
+  KFixedSizeByteArrayModel Copy( Size );
 
   // prepare ByteArrayModel
   textureByteArrayModel( ByteArrayModel, 100, 255, Origin.behindEnd() );
@@ -561,7 +561,7 @@ void KAbstractByteArrayModelIfTest::testReplaceEqual()
   // create InsertData
   static const unsigned int RemoveSize = 10;
   static const unsigned int InsertSize = RemoveSize;
-  KFixedSizeBuffer InsertData( InsertSize );
+  KFixedSizeByteArrayModel InsertData( InsertSize );
   textureByteArrayModel( &InsertData, 10, 99 );
 
   // prepare ByteArrayModel
@@ -570,7 +570,7 @@ void KAbstractByteArrayModelIfTest::testReplaceEqual()
   ByteArrayModel->setModified( false );
 
   // create Copy
-  KFixedSizeBuffer Copy( Size );
+  KFixedSizeByteArrayModel Copy( Size );
   ByteArrayModel->copyTo( Copy.rawData(), 0, Size );
 
   // Action: move to begin again (to left)
@@ -639,7 +639,7 @@ void KAbstractByteArrayModelIfTest::testReplaceLess()
   static const unsigned int RemoveSize = 10;
   static const unsigned int Diff = 4;
   static const unsigned int InsertSize = RemoveSize-Diff;
-  KFixedSizeBuffer InsertData( InsertSize );
+  KFixedSizeByteArrayModel InsertData( InsertSize );
   textureByteArrayModel( &InsertData, 10, 99 );
 
   // prepare ByteArrayModel
@@ -648,7 +648,7 @@ void KAbstractByteArrayModelIfTest::testReplaceLess()
   ByteArrayModel->setModified( false );
 
   // create Copy
-  KFixedSizeBuffer Copy( Size );
+  KFixedSizeByteArrayModel Copy( Size );
   ByteArrayModel->copyTo( Copy.rawData(), 0, Size );
 
   // Action: replace at begin
@@ -719,7 +719,7 @@ void KAbstractByteArrayModelIfTest::testReplaceMore()
   static const unsigned int RemoveSize = 10;
   static const unsigned int Diff = 4;
   static const unsigned int InsertSize = RemoveSize+Diff;
-  KFixedSizeBuffer InsertData( InsertSize );
+  KFixedSizeByteArrayModel InsertData( InsertSize );
   textureByteArrayModel( &InsertData, 10, 99 );
 
   // prepare ByteArrayModel
@@ -728,7 +728,7 @@ void KAbstractByteArrayModelIfTest::testReplaceMore()
   ByteArrayModel->setModified( false );
 
   // create Copy
-  KFixedSizeBuffer Copy( Size + 2*InsertSize);
+  KFixedSizeByteArrayModel Copy( Size + 2*InsertSize);
   ByteArrayModel->copyTo( Copy.rawData(), 0, Size );
 
   // Action: replace at begin

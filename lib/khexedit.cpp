@@ -971,6 +971,8 @@ void KHexEdit::onContentsReplaced( int Pos, int RemovedLength, int InsertedLengt
     updateColumn( *OffsetColumn );
   }
 
+kDebug()<< "Pos:"<<Pos<<", RemovedLength:"<<RemovedLength<<", InsertedLength:"<<InsertedLength<<endl;
+kDebug() << "Cursor:"<<BufferCursor->index()<<", "<<BufferCursor->isBehind()<<endl;
   // adapt cursor(s)
   if( Appending )
     BufferCursor->gotoEnd();

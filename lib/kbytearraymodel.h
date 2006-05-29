@@ -45,23 +45,23 @@ class KByteArrayModel : public KAbstractByteArrayModel
 
   public: // KDataBuffer API
     //virtual KDataBufferIterator *iterator() const;
-    virtual const char *dataSet( KSection S ) const;
+    virtual const char *dataSet( const KSection &S ) const;
     virtual char datum( unsigned int Offset ) const;
     virtual int size() const;
     virtual bool isReadOnly() const;
     virtual bool isModified() const;
 
     virtual int insert( int Pos, const char*, int Length );
-    virtual int remove( KSection Remove );
-    virtual unsigned int replace( KSection Remove, const char*, unsigned int InputLength );
-    virtual int move( int DestPos, KSection SourceSection );
+    virtual int remove( const KSection &Remove );
+    virtual unsigned int replace( const KSection &Remove, const char*, unsigned int InputLength );
+    virtual int move( int DestPos, const KSection &SourceSection );
     virtual int fill( const char FillChar, unsigned int Pos = 0, int Length = -1 );
     virtual void setDatum( unsigned int Offset, const char Char );
 
     virtual void setModified( bool M = true );
 
     //virtual int find( const char*, int Length, int Pos = 0 ) const;
-    virtual int find( const char*KeyData, int Length, KSection Section ) const;
+    virtual int find( const char*KeyData, int Length, const KSection &Section ) const;
     virtual int rfind( const char*, int Length, int Pos = -1 ) const;
 
 /*     virtual int find( const QString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */
@@ -110,7 +110,7 @@ class KByteArrayModel : public KAbstractByteArrayModel
 };
 
 
-inline const char *KByteArrayModel::dataSet( KSection S ) const { return &Data[S.start()]; }
+inline const char *KByteArrayModel::dataSet( const KSection &S ) const { return &Data[S.start()]; }
 inline char KByteArrayModel::datum( unsigned int Offset ) const { return Data[Offset]; }
 inline int KByteArrayModel::size()                        const { return Size; }
 

@@ -86,7 +86,7 @@ class KHEXEDIT_EXPORT KAbstractByteArrayModel : public QObject
       * @param Range
       * @return @c true if successfully, @c false otherwise
       */
-    //virtual bool prepareRange( KSection Range ) const = 0;
+    //virtual bool prepareRange( const KSection &Range ) const = 0;
     /** convenience function, same as above */
     //bool prepareRange( int Offset, int Length ) const;
 
@@ -98,7 +98,7 @@ class KHEXEDIT_EXPORT KAbstractByteArrayModel : public QObject
       * @param Section 
       * @return pointer to 
       */
-    virtual const char *dataSet( KSection Section ) const = 0;
+    virtual const char *dataSet( const KSection &Section ) const = 0;
     /** convenience function, same as above */
     const char *dataSet( int Offset, int Length ) const;
 
@@ -142,7 +142,7 @@ class KHEXEDIT_EXPORT KAbstractByteArrayModel : public QObject
       * @param Section
       * @return length of removed data
       */
-    virtual int remove( KSection Section );
+    virtual int remove( const KSection &Section );
     /** convenience function, behaves as above */
     int remove( int Pos, int Length );
 
@@ -152,9 +152,9 @@ class KHEXEDIT_EXPORT KAbstractByteArrayModel : public QObject
       * @param SourceLength
       * @return length of replacced data
       */
-    virtual unsigned int replace( KSection DestSection, const char* Source, unsigned int SourceLength ) = 0;
+    virtual unsigned int replace( const KSection &DestSection, const char* Source, unsigned int SourceLength ) = 0;
     /** convenience function, behaves as above */
-    unsigned int replace( KSection DestSection, const QByteArray &Source );
+    unsigned int replace( const KSection &DestSection, const QByteArray &Source );
     /** convenience function, behaves as above */
     unsigned int replace( unsigned int Pos, unsigned int RemoveLength,
                           const char* Source, unsigned int SourceLength );
@@ -166,7 +166,7 @@ class KHEXEDIT_EXPORT KAbstractByteArrayModel : public QObject
       * @param SourceSection data section to be moved
       * @return new pos of moved data or old, if failed
       */
-    virtual int move( int DestPos, KSection SourceSection ) = 0;
+    virtual int move( int DestPos, const KSection &SourceSection ) = 0;
 
     /**
      * fills the buffer with the FillChar. If the buffer is to small it will be extended as much as possible.
@@ -198,7 +198,7 @@ class KHEXEDIT_EXPORT KAbstractByteArrayModel : public QObject
       * @param Source
       * @return number of copied bytes
       */
-    virtual int copyTo( char* Dest, KSection Source ) const;
+    virtual int copyTo( char* Dest, const KSection &Source ) const;
     /** convenience function, behaves as above */
     int copyTo( char* Dest, int Pos, int n ) const;
 
@@ -219,7 +219,7 @@ class KHEXEDIT_EXPORT KAbstractByteArrayModel : public QObject
       * @param Section section within the keydata is to be found
       * @return index of the first occurrence or -1
       */
-    virtual int find( const char*KeyData, int Length, KSection Section ) const = 0;
+    virtual int find( const char*KeyData, int Length, const KSection &Section ) const = 0;
     /** searches backward beginning with byte at Pos.
       * @param 
       * @param Length length of search string
@@ -254,7 +254,7 @@ inline int KAbstractByteArrayModel::insert( int Pos, const QByteArray &Source )
 inline int KAbstractByteArrayModel::remove( int Pos, int Length )
 { return remove( KSection(Pos,Pos+Length-1) ); }
 
-inline unsigned int KAbstractByteArrayModel::replace( KSection DestSection, const QByteArray &Source )
+inline unsigned int KAbstractByteArrayModel::replace( const KSection &DestSection, const QByteArray &Source )
 { return replace( DestSection, Source.data(), Source.size() );}
 
 inline unsigned int KAbstractByteArrayModel::replace( unsigned int Pos, unsigned int RemoveLength,

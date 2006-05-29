@@ -89,31 +89,31 @@ add_test(khexedit-kcoordrangelisttest ${EXECUTABLE_OUTPUT_PATH}/kcoordrangelistt
 
 ########### next target ###############
 
-set(kfixedsizebuffertest_SRCS kfixedsizebuffertest.cpp )
+set(kfixedsizebytearraymodeltest_SRCS kfixedsizebytearraymodeltest.cpp )
 
-kde4_automoc(${kfixedsizebuffertest_SRCS})
+kde4_automoc(${kfixedsizebytearraymodeltest_SRCS})
 
-kde4_add_executable(kfixedsizebuffertest RUN_UNINSTALLED ${kfixedsizebuffertest_SRCS})
+kde4_add_executable(kfixedsizebytearraymodeltest RUN_UNINSTALLED ${kfixedsizebytearraymodeltest_SRCS})
 
-target_link_libraries(kfixedsizebuffertest
+target_link_libraries(kfixedsizebytearraymodeltest
   testkhexeditcommon ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
-add_test(khexedit-kfixedsizebuffertest ${EXECUTABLE_OUTPUT_PATH}/kfixedsizebuffertest)
+add_test(khexedit-kfixedsizebytearraymodeltest ${EXECUTABLE_OUTPUT_PATH}/kfixedsizebytearraymodeltest)
 
 
 ########### next target ###############
 
-set(kfixedsizebufferkabstractbytearraymodeliftest_SRCS
-kabstractbytearraymodeliftest.cpp kfixedsizebufferkdatabufferiftest.cpp )
+set(kfixedsizebytearraymodelkabstractbytearraymodeliftest_SRCS
+kabstractbytearraymodeliftest.cpp kfixedsizebytearraymodelkabstractbytearraymodeliftest.cpp )
 
-kde4_automoc(${kfixedsizebufferkabstractbytearraymodeliftest_SRCS})
+kde4_automoc(${kfixedsizebytearraymodelkabstractbytearraymodeliftest_SRCS})
 
-kde4_add_executable(kfixedsizebufferkabstractbytearraymodeliftest RUN_UNINSTALLED ${kfixedsizebufferkabstractbytearraymodeliftest_SRCS})
+kde4_add_executable(kfixedsizebytearraymodelkabstractbytearraymodeliftest RUN_UNINSTALLED ${kfixedsizebytearraymodelkabstractbytearraymodeliftest_SRCS})
 
-target_link_libraries(kfixedsizebufferkabstractbytearraymodeliftest
+target_link_libraries(kfixedsizebytearraymodelkabstractbytearraymodeliftest
   testkhexeditcommon ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
-add_test(khexedit-kfixedsizebufferkabstractbytearraymodeliftest ${EXECUTABLE_OUTPUT_PATH}/kfixedsizebufferkabstractbytearraymodeliftest)
+add_test(khexedit-kfixedsizebytearraymodelkabstractbytearraymodeliftest ${EXECUTABLE_OUTPUT_PATH}/kfixedsizebytearraymodelkabstractbytearraymodeliftest)
 
 
 ########### next target ###############
