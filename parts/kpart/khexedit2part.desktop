@@ -8,8 +8,8 @@ Name[x-test]=xxEmbedded Binary Viewerxx
 Comment=Embedded Binary Viewer
 Comment[fr]=Afficheur de binaires intégré
 Comment[x-test]=xxEmbedded Binary Viewerxx
-#MimeType=all/allfiles
-MimeType=application/octet-stream
+MimeType=all/allfiles
+#MimeType=application/octet-stream
 ServiceTypes=KParts/ReadOnlyPart,Browser/View
 #,KParts/ReadWritePart
 X-KDE-Library=libkhexedit2part

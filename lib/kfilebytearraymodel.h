@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kbigbuffer.h  -  description
+                          kfilebytearraymodel.h  -  description
                              -------------------
     begin                : Mit Jun 02 2003
     copyright            : (C) 2003 by Friedrich W. H. Kossebau
@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KBIGBUFFER_H
-#define KHE_KBIGBUFFER_H
+#ifndef KHE_KFILEBYTEARRAYMODEL_H
+#define KHE_KFILEBYTEARRAYMODEL_H
 
 // qt specific
 #include <QVector>
@@ -33,14 +33,14 @@ namespace KHE {
   *@author Friedrich W. H. Kossebau
   */
 
-class KHEXEDIT_EXPORT KBigBuffer : public KAbstractByteArrayModel
+class KHEXEDIT_EXPORT KFileByteArrayModel : public KAbstractByteArrayModel
 {
     typedef QVector<char *> KPageOfChar;
 
   public:
     /** default is only 50*4k = 200k memory image */
-    KBigBuffer( int NP = 50, int PS = 4096 );
-    virtual ~KBigBuffer();
+    KFileByteArrayModel( int NP = 50, int PS = 4096 );
+    virtual ~KFileByteArrayModel();
 
   public: // KAbstractByteArrayModel API
     virtual const char *dataSet( const KSection &S ) const;
@@ -67,7 +67,7 @@ class KHEXEDIT_EXPORT KBigBuffer : public KAbstractByteArrayModel
   public:
     void setReadOnly( bool RO = true );
     bool isOpen() const;
-    bool open (const QString& filename );
+    bool open( const QString& filename );
     bool close();
 
   protected:
@@ -103,15 +103,15 @@ class KHEXEDIT_EXPORT KBigBuffer : public KAbstractByteArrayModel
     mutable char* ActualPage;
 };
 
-inline int KBigBuffer::size()        const   { return Size; }
-inline bool KBigBuffer::isReadOnly() const   { return ReadOnly; }
-inline bool KBigBuffer::isModified() const   { return false; }
-inline void KBigBuffer::setReadOnly( bool RO ) { ReadOnly = RO; }
-inline void KBigBuffer::setModified( bool )  {}
+inline int KFileByteArrayModel::size()        const   { return Size; }
+inline bool KFileByteArrayModel::isReadOnly() const   { return ReadOnly; }
+inline bool KFileByteArrayModel::isModified() const   { return false; }
+inline void KFileByteArrayModel::setReadOnly( bool RO ) { ReadOnly = RO; }
+inline void KFileByteArrayModel::setModified( bool )  {}
 
-inline void KBigBuffer::setDatum( unsigned int, const char )  {}
+inline void KFileByteArrayModel::setDatum( unsigned int, const char )  {}
 
-inline bool KBigBuffer::isOpen() const { return File.isOpen(); }
+inline bool KFileByteArrayModel::isOpen() const { return File.isOpen(); }
 
 }
 

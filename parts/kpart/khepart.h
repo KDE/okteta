@@ -21,7 +21,7 @@
 // kde specific
 #include <kparts/part.h>
 // app specific
-#include "kbigbuffer.h"
+#include "kfilebytearraymodel.h"
 
 // forward declarations
 class KRadioAction;
@@ -76,7 +76,7 @@ class KHexEditPart : public KParts::ReadOnlyPart
 
   private:
     KHexEdit *HexEdit;
-    KBigBuffer Wrapping;
+    KFileByteArrayModel Wrapping;
 
     // edit menu
     KAction *CopyAction;

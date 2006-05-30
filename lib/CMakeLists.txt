@@ -38,7 +38,7 @@ set(khexeditcommon_LIB_SRCS ${libcontroler_SRCS} ${libcodecs_SRCS}
 #   kwrappingrobuffer.cpp 
    kbytearraymodel.cpp 
    kfixedsizebytearraymodel.cpp 
-   kbigbuffer.cpp 
+   kfilebytearraymodel.cpp 
    kbuffercursor.cpp 
    kbufferlayout.cpp 
    kbufferranges.cpp 

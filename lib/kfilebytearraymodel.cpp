@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kbigbuffer.cpp  -  description
+                          kfilebytearraymodel.cpp  -  description
                              -------------------
     begin                : Mit Jun 02 2003
     copyright            : (C) 2003 by Friedrich W. H. Kossebau
@@ -18,11 +18,11 @@
 // c specific
 #include <stdlib.h>
 // lib specific
-#include "kbigbuffer.h"
+#include "kfilebytearraymodel.h"
 
 using namespace KHE;
 
-KBigBuffer::KBigBuffer( int NP, int PS )
+KFileByteArrayModel::KFileByteArrayModel( int NP, int PS )
  : NoOfUsedPages( NP ),
    NoOfFreePages( NP ),
    PageSize( PS ),
@@ -37,7 +37,7 @@ KBigBuffer::KBigBuffer( int NP, int PS )
 }
 
 
-KBigBuffer::~KBigBuffer()
+KFileByteArrayModel::~KFileByteArrayModel()
 {
   if( File.isOpen() )
     close();
@@ -45,13 +45,13 @@ KBigBuffer::~KBigBuffer()
 
 
 
-const char *KBigBuffer::dataSet( const KSection &/*Section*/ ) const
+const char *KFileByteArrayModel::dataSet( const KSection &/*Section*/ ) const
 {
   return 0;
 }
 
 
-char KBigBuffer::datum( unsigned int DatumOffset ) const
+char KFileByteArrayModel::datum( unsigned int DatumOffset ) const
 {
 //   std::cout << "reading datum " << DatumOffset << std::endl;
   int OffsetInPage = DatumOffset - OffsetOfActualPage;
@@ -68,36 +68,36 @@ char KBigBuffer::datum( unsigned int DatumOffset ) const
 
 
 
-int KBigBuffer::insert( int /*Pos*/, const char*, int /*Length*/ )
+int KFileByteArrayModel::insert( int /*Pos*/, const char*, int /*Length*/ )
 {
   return 0;
 }
 
-int KBigBuffer::remove( const KSection &/*Section*/ )
+int KFileByteArrayModel::remove( const KSection &/*Section*/ )
 {
   return 0;
 }
 
-unsigned int KBigBuffer::replace( const KSection &/*Section*/, const char*, unsigned int /*Length*/ )
+unsigned int KFileByteArrayModel::replace( const KSection &/*Section*/, const char*, unsigned int /*Length*/ )
 {
   return 0;
 }
 
-int KBigBuffer::fill( char /*FillChar*/, unsigned int /*Pos*/, int /*Length*/ )
+int KFileByteArrayModel::fill( char /*FillChar*/, unsigned int /*Pos*/, int /*Length*/ )
 {
   return 0;
 }
 
 
-int KBigBuffer::move( int /*DestPos*/, const KSection &/*SourceSection*/ ) { return 0; }
-//int KBigBuffer::find( const char*, int /*Length*/, int /*Pos*/ ) const  { return 0; }
-int KBigBuffer::find( const char*/*KeyData*/, int /*Length*/, const KSection &/*Section*/ ) const { return 0; }
+int KFileByteArrayModel::move( int /*DestPos*/, const KSection &/*SourceSection*/ ) { return 0; }
+//int KFileByteArrayModel::find( const char*, int /*Length*/, int /*Pos*/ ) const  { return 0; }
+int KFileByteArrayModel::find( const char*/*KeyData*/, int /*Length*/, const KSection &/*Section*/ ) const { return 0; }
 
-int KBigBuffer::rfind( const char*, int /*Length*/, int /*Pos*/ ) const { return 0; }
+int KFileByteArrayModel::rfind( const char*, int /*Length*/, int /*Pos*/ ) const { return 0; }
 
 
 
-bool KBigBuffer::open( const QString& FileName )
+bool KFileByteArrayModel::open( const QString& FileName )
 {
   // clear old data
   if( isOpen() && !close() ) // only occurs if close somehow fails.
@@ -126,7 +126,7 @@ bool KBigBuffer::open( const QString& FileName )
 }
 
 
-bool KBigBuffer::close()
+bool KFileByteArrayModel::close()
 {
   if( !isOpen() )
     return false;
@@ -149,7 +149,7 @@ bool KBigBuffer::close()
 }
 
 
-bool KBigBuffer::ensurePageLoaded( unsigned int PageIndex ) const
+bool KFileByteArrayModel::ensurePageLoaded( unsigned int PageIndex ) const
 {
   if( !isOpen() )
     return false;
@@ -198,7 +198,7 @@ bool KBigBuffer::ensurePageLoaded( unsigned int PageIndex ) const
 }
 
 
-bool KBigBuffer::freePage( unsigned int PageIndex ) const
+bool KFileByteArrayModel::freePage( unsigned int PageIndex ) const
 {
   // check range and if is loaded at all
   if( (int)PageIndex >= Data.size() || !Data[PageIndex] )
