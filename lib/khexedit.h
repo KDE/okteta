@@ -82,7 +82,7 @@ class KHexEditPrivate;
   *@author Friedrich W. H. Kossebau
   */
 
-class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
+class KHEUI_EXPORT KHexEdit : public KColumnsView
 {
   friend class KTabController;
   friend class KNavigator;

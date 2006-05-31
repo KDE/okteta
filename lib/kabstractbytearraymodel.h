@@ -69,7 +69,7 @@ char KDataBufferIterator::next()
   *@author Friedrich W. H. Kossebau
   */
 
-class KHEXEDIT_EXPORT KAbstractByteArrayModel : public QObject
+class KHECORE_EXPORT KAbstractByteArrayModel : public QObject
 {
   friend class KAbstractByteArrayModelIterator;
 

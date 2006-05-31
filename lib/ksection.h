@@ -20,6 +20,7 @@
 
 // lib specific
 #include "krange.h"
+#include "khexedit_export.h"
 
 
 namespace KHE
@@ -28,7 +29,7 @@ namespace KHE
 /** describes a section of indizes
   *@author Friedrich W. H.  Kossebau
   */
-class KSection : public KRange<int>
+class KHECORE_EXPORT KSection : public KRange<int>
 {
   public:
     /** constructs a section by width

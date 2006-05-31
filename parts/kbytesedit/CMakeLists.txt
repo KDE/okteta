@@ -13,7 +13,7 @@ kde4_add_plugin(kbyteseditwidget WITH_PREFIX ${kbyteseditwidget_PART_SRCS})
 
 kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kbyteseditwidget )
 
-target_link_libraries(kbyteseditwidget  khexeditcommon ${KDE4_KPARTS_LIBS} )
+target_link_libraries(kbyteseditwidget  khexeditcore khexeditgui ${KDE4_KPARTS_LIBS} )
 
 install_targets(${PLUGIN_INSTALL_DIR} kbyteseditwidget )
 

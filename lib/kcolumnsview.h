@@ -39,7 +39,7 @@ class KColumnsViewPrivate;
   *@author Friedrich W. H. Kossebau
   */
 
-class KHEXEDIT_EXPORT KColumnsView : public QAbstractScrollArea
+class KHEUI_EXPORT KColumnsView : public QAbstractScrollArea
 {
    Q_OBJECT
 

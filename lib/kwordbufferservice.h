@@ -20,6 +20,9 @@
 
 // commonlib specific
 #include <ksection.h>
+// lib specific
+#include "khexedit_export.h"
+
 
 namespace KHECore
 {
@@ -32,7 +35,7 @@ class KCharCodec;
   *@author Friedrich W. H. Kossebau
   */
 
-class KWordBufferService
+class KHECORE_EXPORT KWordBufferService
 {
   public:
     KWordBufferService( KAbstractByteArrayModel *B, KCharCodec *C );

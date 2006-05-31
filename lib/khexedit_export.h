@@ -20,6 +20,7 @@
 
 #include <kdemacros.h>
 
-#define KHEXEDIT_EXPORT KDE_EXPORT
+#define KHECORE_EXPORT KDE_EXPORT
+#define KHEUI_EXPORT   KDE_EXPORT
 
 #endif

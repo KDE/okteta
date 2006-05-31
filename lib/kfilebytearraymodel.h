@@ -15,15 +15,15 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KFILEBYTEARRAYMODEL_H
-#define KHE_KFILEBYTEARRAYMODEL_H
+#ifndef KHE_CORE_KFILEBYTEARRAYMODEL_H
+#define KHE_CORE_KFILEBYTEARRAYMODEL_H
 
 // qt specific
 #include <QVector>
 #include <QFile>
 // lib specific
 #include "kabstractbytearraymodel.h"
-#include "khexedit_export.h"
+
 
 namespace KHECore {
 
@@ -33,7 +33,7 @@ namespace KHECore {
   *@author Friedrich W. H. Kossebau
   */
 
-class KHEXEDIT_EXPORT KFileByteArrayModel : public KAbstractByteArrayModel
+class KHECORE_EXPORT KFileByteArrayModel : public KAbstractByteArrayModel
 {
     typedef QVector<char *> KPageOfChar;
 

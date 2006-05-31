@@ -14,11 +14,13 @@
  *                                                                         *
  ***************************************************************************/
 
- 
-#ifndef KHE_KFIXEDSIZEBYTEARRAYMODEL_H
-#define KHE_KFIXEDSIZEBYTEARRAYMODEL_H
 
+#ifndef KHE_CORE_KFIXEDSIZEBYTEARRAYMODEL_H
+#define KHE_CORE_KFIXEDSIZEBYTEARRAYMODEL_H
+
+// lib specific
 #include "kabstractbytearraymodel.h"
+
 
 namespace KHECore
 {

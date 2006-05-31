@@ -15,8 +15,8 @@
  ***************************************************************************/
 
  
-#ifndef KHE_KADDS_H
-#define KHE_KADDS_H
+#ifndef KHE_UI_KADDS_H
+#define KHE_UI_KADDS_H
 
 namespace KHE {
 class KSection;

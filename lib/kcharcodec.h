@@ -29,7 +29,7 @@
 namespace KHECore
 {
 
-class KHEXEDIT_EXPORT KCharCodec
+class KHECORE_EXPORT KCharCodec
 {
   public:
     virtual ~KCharCodec() {}

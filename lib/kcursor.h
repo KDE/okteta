@@ -15,8 +15,8 @@
  ***************************************************************************/
 
  
-#ifndef KHE_KCURSOR_H
-#define KHE_KCURSOR_H
+#ifndef KHE_UI_KCURSOR_H
+#define KHE_UI_KCURSOR_H
 
 // qt specific
 #include <QPixmap>

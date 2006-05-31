@@ -22,6 +22,7 @@
 #include <QString>
 // lib specific
 #include "khe.h"
+#include "khexedit_export.h"
 
 namespace KHECore
 {
@@ -35,7 +36,7 @@ namespace KHECore
   *@author Friedrich W. H. Kossebau
   */
 
-class KByteCodec
+class KHECORE_EXPORT KByteCodec
 {
   public:
     virtual ~KByteCodec() {}

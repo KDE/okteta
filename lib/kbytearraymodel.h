@@ -15,9 +15,11 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KBYTEARRAYMODEL_H
-#define KHE_KBYTEARRAYMODEL_H
+#ifndef KHE_CORE_KBYTEARRAYMODEL_H
+#define KHE_CORE_KBYTEARRAYMODEL_H
 
+
+// lib specific
 #include "kabstractbytearraymodel.h"
 
 namespace KHECore
@@ -33,7 +35,7 @@ class KPlainBufferIterator : public KDataBufferIterator
   *@author Friedrich W. H. Kossebau
   */
 
-class KByteArrayModel : public KAbstractByteArrayModel
+class KHECORE_EXPORT KByteArrayModel : public KAbstractByteArrayModel
 {
   friend class KPlainBufferIterator;
 
