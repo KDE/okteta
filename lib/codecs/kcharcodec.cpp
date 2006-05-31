@@ -20,8 +20,8 @@
 #include "ktextcharcodec.h"
 #include "kebcdic1047charcodec.h"
 
-using namespace KHE;
 
+namespace KHECore {
 
 QStringList KCharCodec::CodecNames;
 
@@ -71,4 +71,6 @@ KCharCodec *KCharCodec::createCodec( KEncoding C )
     Codec = KTextCharCodec::createLocalCodec();
 
   return Codec;
+}
+
 }

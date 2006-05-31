@@ -21,20 +21,20 @@
 #include "kcolumnsview.h"
 #include "kcolumn.h"
 
-using namespace KHE;
 
+namespace KHEUI {
 
 KColumn::KColumn( KColumnsView *V )
  : View( V ),
    Visible( true ),  //TODO: would false be better?
    LineHeight( V->lineHeight() ),
-   XSpan( KSection::fromWidth(0,0) )
+   XSpan( KHE::KSection::fromWidth(0,0) )
 {
   V->addColumn( this );
 }
 
 
-void KColumn::paintFirstLine( QPainter *Painter, KPixelXs, int /*FirstLine*/ )
+void KColumn::paintFirstLine( QPainter *Painter, const KPixelXs &, int /*FirstLine*/ )
 {
   paintBlankLine( Painter );
 }
@@ -57,11 +57,14 @@ void KColumn::paintBlankLine( QPainter *Painter ) const
 }
 
 
-void KColumn::paintEmptyColumn( QPainter *Painter, KPixelXs Xs, KPixelYs Ys )
+void KColumn::paintEmptyColumn( QPainter *Painter, const KPixelXs &_Xs, const KPixelYs &Ys )
 {
+  KPixelXs Xs( _Xs );
   Xs.restrictTo( XSpan );
 
   const QWidget *Viewport = View->viewport();
   Painter->fillRect( Xs.start(),Ys.start(), Xs.width(),Ys.width(),
                      Viewport->palette().brush(Viewport->backgroundRole()) );
+}
+
 }

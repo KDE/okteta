@@ -23,16 +23,16 @@
 #include "kebcdic1047charcodeckcharcodeciftest.h"
 
 
-using namespace KHE;
+using namespace KHECore;
 
 
-KHE::KCharCodec *KEBCDIC1047CharCodecKCharCodecIfTest::createCodec()
+KHECore::KCharCodec *KEBCDIC1047CharCodecKCharCodecIfTest::createCodec()
 {
   return KEBCDIC1047CharCodec::create();
 }
 
 
-void KEBCDIC1047CharCodecKCharCodecIfTest::deleteCodec( KHE::KCharCodec *Codec )
+void KEBCDIC1047CharCodecKCharCodecIfTest::deleteCodec( KHECore::KCharCodec *Codec )
 {
   delete Codec;
 }

@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KCHARCOLUMN_H
-#define KHE_KCHARCOLUMN_H
+#ifndef KHE_UI_KCHARCOLUMN_H
+#define KHE_UI_KCHARCOLUMN_H
 
 // qt specific
 #include <QString>
@@ -27,9 +27,8 @@ class QPainter;
 class QColor;
 
 
-namespace KHE
+namespace KHEUI
 {
-
 
 /** buffer column that interprets the bytes as chars
   *
@@ -38,7 +37,7 @@ namespace KHE
 class KCharColumn : public KBufferColumn
 {
   public:
-    KCharColumn( KColumnsView *CV, KAbstractByteArrayModel *B, KBufferLayout *L, KBufferRanges *R );
+    KCharColumn( KColumnsView *CV, KHECore::KAbstractByteArrayModel *B, KBufferLayout *L, KBufferRanges *R );
     virtual ~KCharColumn();
 
 
@@ -71,7 +70,7 @@ class KCharColumn : public KBufferColumn
 
 
   protected: // KBufferColumn API
-    virtual void drawByte( QPainter *P, char Byte, KHEChar B, const QColor &Color ) const;
+    virtual void drawByte( QPainter *P, char Byte, KHECore::KChar B, const QColor &Color ) const;
 
   protected:
     /** */

@@ -30,7 +30,8 @@
 
 
 using namespace std;
-using namespace KHE;
+
+namespace KHEUI {
 
 static const char OctetStream[] =        "application/octet-stream";
 static const char TextPlainUTF8[] =      "text/plain;charset=UTF-8";
@@ -80,7 +81,7 @@ static QTextCodec* codecForCharset( const QByteArray& Desc )
 */
 
 
-KBufferDrag::KBufferDrag( const QByteArray &D, KCoordRange Range,
+KBufferDrag::KBufferDrag( const QByteArray &D, const KCoordRange &Range,
                           const KOffsetColumn *OC, const KValueColumn *HC, const KCharColumn *TC,
                           QChar SC, QChar UC, const QString &CN )
   :BufferCopy( D ),
@@ -133,7 +134,7 @@ QString KBufferDrag::createTextCopy() const
 {
   QString Result;
   // duplicate the data and substitute all non-printable items with a space
-  KCharCodec *CharCodec = KCharCodec::createCodec( CodecName );
+  KHECore::KCharCodec *CharCodec = KHECore::KCharCodec::createCodec( CodecName );
   static const QChar Tab('\t');
   static const QChar Return('\n');
   uint Size = BufferCopy.size();
@@ -141,10 +142,10 @@ QString KBufferDrag::createTextCopy() const
 
   for( uint i=0; i<Size; ++i )
   {
-    KHEChar B = CharCodec->decode( BufferCopy[i] );
+    KHECore::KChar B = CharCodec->decode( BufferCopy[i] );
 
-    Result[i] = B.isUndefined() ? KHEChar(UndefinedChar) :
-        (!B.isPrint() && B != Tab && B != Return ) ? KHEChar(SubstituteChar) : B;
+    Result[i] = B.isUndefined() ? KHECore::KChar(UndefinedChar) :
+        (!B.isPrint() && B != Tab && B != Return ) ? KHECore::KChar(SubstituteChar) : B;
   }
   // clean up
   delete CharCodec;
@@ -168,12 +169,12 @@ QString KBufferDrag::createColumnCopy() const
   // now fill
   int l = CoordRange.start().line();
   for( uint i=0; i<NoOfCol; ++i )
-    Columns[i]->printFirstLine( Result, l );
+    Columns[i]->printFirstLine( &Result, l );
   Result.append('\n');
   for( ++l; l<=CoordRange.end().line(); ++l )
   {
     for( uint i=0; i<NoOfCol; ++i )
-      Columns[i]->printNextLine( Result );
+      Columns[i]->printNextLine( &Result );
     Result.append( '\n' );
   }
   return Result;
@@ -192,4 +193,6 @@ QVariant KBufferDrag::retrieveData( const QString &mimetype, QVariant::Type type
 
   // return empty dummy
   return QVariant(type);
+}
+
 }

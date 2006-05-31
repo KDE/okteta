@@ -18,8 +18,9 @@
 #ifndef KHE_KSECTION_H
 #define KHE_KSECTION_H
 
-
+// lib specific
 #include "krange.h"
+
 
 namespace KHE
 {

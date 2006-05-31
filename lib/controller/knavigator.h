@@ -15,15 +15,15 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KNAVIGATOR_H
-#define KHE_KNAVIGATOR_H
+#ifndef KHE_UI_KNAVIGATOR_H
+#define KHE_UI_KNAVIGATOR_H
 
 
 // lib specific
 #include "kcontroller.h"
 
 
-namespace KHE
+namespace KHEUI
 {
 
 class KNavigator : public KController

@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KTEXTCHARCODEC_H
-#define KHE_KTEXTCHARCODEC_H
+#ifndef KHE_CORE_KTEXTCHARCODEC_H
+#define KHE_CORE_KTEXTCHARCODEC_H
 
 // lib specific
 #include "kcharcodec.h"
@@ -25,7 +25,7 @@ class QTextCodec;
 class QTextDecoder;
 class QTextEncoder;
 
-namespace KHE
+namespace KHECore
 {
 
 // used by all codecs with full char coping, i.e. there are no undefined chars
@@ -45,7 +45,7 @@ class KTextCharCodec : public KCharCodec
 
   public: // KCharCodec API
     virtual bool encode( char *D, const QChar &C ) const;
-    virtual KHEChar decode( char Byte ) const;
+    virtual KChar decode( char Byte ) const;
     virtual const QString& name() const;
 
 

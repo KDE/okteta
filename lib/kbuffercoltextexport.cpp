@@ -23,7 +23,7 @@
 #include "kbuffercoltextexport.h"
 
 
-using namespace KHE;
+namespace KHEUI {
 
 static const int DefaultTEByteSpacingWidth = 1;
 static const int TEGroupSpacingWidth = 3;
@@ -86,7 +86,7 @@ int KBufferColTextExport::charsPerLine() const
 }
 
 
-void KBufferColTextExport::printFirstLine( QString &T, int Line ) const
+void KBufferColTextExport::printFirstLine( QString *T, int Line ) const
 {
   PrintLine = Line;
   PrintData = Data;
@@ -94,15 +94,16 @@ void KBufferColTextExport::printFirstLine( QString &T, int Line ) const
 }
 
 
-void KBufferColTextExport::printNextLine( QString &T ) const
+void KBufferColTextExport::printNextLine( QString *T ) const
 {
   print( T );
 }
 
 
-void KBufferColTextExport::print( QString &T ) const
+void KBufferColTextExport::print( QString *T ) const
 {
-  T.append( whiteSpace(NoOfCharsPerLine) );
+  T->append( whiteSpace(NoOfCharsPerLine) );
   ++PrintLine;
 }
 
+}

@@ -15,15 +15,15 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KOFFSETCOLTEXTEXPORT_H
-#define KHE_KOFFSETCOLTEXTEXPORT_H
+#ifndef KHE_UI_KOFFSETCOLTEXTEXPORT_H
+#define KHE_UI_KOFFSETCOLTEXTEXPORT_H
 
 // lib specific
 #include "kcoltextexport.h"
 #include "koffsetformat.h"
 
 
-namespace KHE
+namespace KHEUI
 {
 
 class KOffsetColumn;
@@ -34,13 +34,13 @@ class KOffsetColTextExport : public KColTextExport
     KOffsetColTextExport( const KOffsetColumn *OC );
 	~KOffsetColTextExport() {}
   public: // KColTextExport API
-    void printFirstLine( QString &T, int Line ) const;
-    void printNextLine( QString &T ) const;
+    void printFirstLine( QString *T, int Line ) const;
+    void printNextLine( QString *T ) const;
     /** tells how much chars per line are needed */
     int charsPerLine() const;
 
   protected:
-    void print( QString &T ) const;
+    void print( QString *T ) const;
 
   protected:
     const int CodingWidth;

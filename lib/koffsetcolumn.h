@@ -15,14 +15,14 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KOFFSETCOLUMN_H
-#define KHE_KOFFSETCOLUMN_H
+#ifndef KHE_UI_KOFFSETCOLUMN_H
+#define KHE_UI_KOFFSETCOLUMN_H
 
 // lib specific
 #include "koffsetformat.h"
 #include "kcolumn.h"
 
-namespace KHE
+namespace KHEUI
 {
 
 /**
@@ -36,9 +36,9 @@ class KOffsetColumn : public KColumn
     virtual ~KOffsetColumn();
 
   public:  // KColumn API
-    virtual void paintFirstLine( QPainter *P, KPixelXs Xs, int FirstLine );
+    virtual void paintFirstLine( QPainter *P, const KPixelXs &Xs, int FirstLine );
     virtual void paintNextLine( QPainter *P );
-    virtual void paintEmptyColumn( QPainter *P, KPixelXs Xs, KPixelYs Ys );
+    virtual void paintEmptyColumn( QPainter *P, const KPixelXs &Xs, const KPixelYs &Ys );
 
 
   public:

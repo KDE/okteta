@@ -23,14 +23,15 @@
 #include <kselectaction.h>
 #include <ktoggleaction.h>
 //#include <kglobalsettings.h>
+// corelib specific
+#include <kcharcodec.h>
+// uilib specific
+#include <khexedit.h>
 // part specific
-#include "khexedit.h"
-#include "kcharcodec.h"
 #include "khepartfactory.h"
 #include "khebrowserextension.h"
 #include "khepart.h"
 
-using namespace KHE;
 
 static const char RCFileName[] = "khexedit2partui.rc";
 
@@ -41,7 +42,7 @@ KHexEditPart::KHexEditPart( QWidget *ParentWidget,
 {
   setInstance( KHexEditPartFactory::instance() );
 
-  HexEdit = new KHexEdit( &Wrapping, ParentWidget );
+  HexEdit = new KHEUI::KHexEdit( &Wrapping, ParentWidget );
   HexEdit->setNoOfBytesPerLine( 16 );
   HexEdit->setBufferSpacing( 3, 4, 10 );
   HexEdit->setShowUnprintable( false );
@@ -102,7 +103,7 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
 
   // document encoding
   EncodingAction = new KSelectAction( i18n("&Char Encoding"), AC, "view_charencoding" );
-  EncodingAction->setItems( KCharCodec::codecNames() );
+  EncodingAction->setItems( KHECore::KCharCodec::codecNames() );
   connect( EncodingAction, SIGNAL(triggered(int)), SLOT(slotSetEncoding(int)) );
 
   ShowUnprintableAction = new KToggleAction( i18n("Show &Unprintable Chars (<32)"), actionCollection(), "view_showunprintable" );
@@ -146,7 +147,7 @@ void KHexEditPart::fitActionSettings()
   ShowUnprintableAction->setChecked( HexEdit->showUnprintable() );
 
   CodingAction->setCurrentItem( (int)HexEdit->coding() );
-  EncodingAction->setCurrentItem( KCharCodec::codecNames().indexOf(HexEdit->encodingName()) );
+  EncodingAction->setCurrentItem( KHECore::KCharCodec::codecNames().indexOf(HexEdit->encodingName()) );
 
   ResizeStyleAction->setCurrentItem( (int)HexEdit->resizeStyle() );
 
@@ -187,7 +188,7 @@ void KHexEditPart::slotUnselect()
 
 void KHexEditPart::slotSetCoding( int Coding )
 {
-  HexEdit->setCoding( (KHexEdit::KCoding)Coding );
+  HexEdit->setCoding( (KHEUI::KHexEdit::KCoding)Coding );
 }
 
 void KHexEditPart::slotSetShowUnprintable()
@@ -202,12 +203,12 @@ void KHexEditPart::slotToggleOffsetColumn()
 
 void KHexEditPart::slotSetResizeStyle( int ResizeStyle )
 {
-  HexEdit->setResizeStyle( (KHexEdit::KResizeStyle)ResizeStyle );
+  HexEdit->setResizeStyle( (KHEUI::KHexEdit::KResizeStyle)ResizeStyle );
 }
 
 void KHexEditPart::slotSetEncoding( int Encoding )
 {
-  HexEdit->setEncoding( KCharCodec::codecNames()[Encoding] );
+  HexEdit->setEncoding( KHECore::KCharCodec::codecNames()[Encoding] );
 }
 
 void KHexEditPart::slotToggleValueCharColumns( int VisibleColumns)

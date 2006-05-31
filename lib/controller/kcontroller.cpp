@@ -21,7 +21,7 @@
 #include "kcontroller.h"
 
 
-using namespace KHE;
+namespace KHEUI {
 
 KController::KController( KHexEdit* HE, KController *P )
   : Parent( P ), HexEdit( HE )
@@ -31,4 +31,6 @@ KController::KController( KHexEdit* HE, KController *P )
 bool KController::handleKeyPress( QKeyEvent *KeyEvent )
 {
   return Parent ? Parent->handleKeyPress( KeyEvent ) : false;
+}
+
 }

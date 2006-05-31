@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KHEXEDIT_H
-#define KHE_KHEXEDIT_H
+#ifndef KHE_UI_KHEXEDIT_H
+#define KHE_UI_KHEXEDIT_H
 
 // qt specific
 #include <QClipboard>
@@ -35,12 +35,15 @@
 
 class QTimer;
 
-namespace KHE
+namespace KHECore {
+class KCharCodec;
+class KAbstractByteArrayModel;
+}
+
+namespace KHEUI
 {
 
 class KCoordRange;
-
-class KAbstractByteArrayModel;
 
 class KCharColumn;
 class KValueColumn;
@@ -61,7 +64,6 @@ class KCharEditor;
 class KBufferDrag;
 
 class KCursor;
-class KCharCodec;
 
 class KHexEditPrivate;
 
@@ -125,7 +127,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
 
 
   public:
-    KHexEdit( KAbstractByteArrayModel *Buffer = 0, QWidget *Parent = 0 );
+    KHexEdit( KHECore::KAbstractByteArrayModel *Buffer = 0, QWidget *Parent = 0 );
     virtual ~KHexEdit();
 
 
@@ -228,7 +230,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
 
   public Q_SLOTS:
     /** */
-    void setDataBuffer( KAbstractByteArrayModel *B );
+    void setDataBuffer( KHECore::KAbstractByteArrayModel *B );
 
     /** switches the Offset column on/off */
     void toggleOffsetColumn( bool Visible );
@@ -454,7 +456,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
 
   protected:
     /** Buffer with the data */
-    KAbstractByteArrayModel *ByteArrayModel;
+    KHECore::KAbstractByteArrayModel *ByteArrayModel;
 
     /** holds the logical layout */
     KBufferLayout *BufferLayout;
@@ -501,7 +503,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     /** object to store the blinking cursor pixmaps */
     KCursor *CursorPixmaps;
     /** */
-    KCharCodec *Codec;
+    KHECore::KCharCodec *Codec;
 
   protected:
     /** point at which the current double click happended (used by TrippleClick) */

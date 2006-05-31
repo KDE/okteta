@@ -21,7 +21,7 @@
 #include "kbufferlayout.h"
 #include "kbuffercursor.h"
 
-using namespace KHE;
+namespace KHEUI {
 
 KBufferCursor::KBufferCursor( const KBufferLayout *L )
  : Layout( L ),
@@ -366,4 +366,6 @@ void KBufferCursor::adaptToChange( int Pos, int RemovedLength, int InsertedLengt
     int NewIndex = ((Index>=Pos+RemovedLength)?Index-RemovedLength:Pos) + InsertedLength;
     gotoCIndex( NewIndex );
   }
+}
+
 }

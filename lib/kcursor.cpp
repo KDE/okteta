@@ -15,9 +15,11 @@
  ***************************************************************************/
 
 
+// lib specific
 #include "kcursor.h"
 
-using namespace KHE;
+
+namespace KHEUI {
 
 KCursor::KCursor()
 : CursorX( 0 ),
@@ -26,10 +28,7 @@ KCursor::KCursor()
 }
 
 
-KCursor::~KCursor()
-{
-}
-
+KCursor::~KCursor() {}
 
 
 void KCursor::setSize( KPixelX Width, KPixelY Height )
@@ -46,4 +45,6 @@ void KCursor::setShape( KPixelX X, KPixelX W )
 {
   CursorX = X;
   CursorW = W;
+}
+
 }

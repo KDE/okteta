@@ -24,6 +24,7 @@
 #include "kabstractbytearraymodeliftest.h"
 
 using namespace KHE;
+using namespace KHECore;
 
 // local variables
 static const char FirstMarkChar = 2;

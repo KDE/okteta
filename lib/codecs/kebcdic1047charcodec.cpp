@@ -19,7 +19,7 @@
 #include "kebcdic1047charcodec.h"
 
 
-using namespace KHE;
+namespace KHECore {
 
 static quint16 UnicodeChars[256] =
 {
@@ -107,7 +107,7 @@ bool KEBCDIC1047CharCodec::encode( char *D, const QChar &C ) const
   return true;
 }
 
-KHEChar KEBCDIC1047CharCodec::decode( char Byte ) const
+KChar KEBCDIC1047CharCodec::decode( char Byte ) const
 {
   return QChar(UnicodeChars[(unsigned char)Byte]);
 }
@@ -121,4 +121,6 @@ const QString& KEBCDIC1047CharCodec::codecName()
 {
   static const QString Name( QString::fromLatin1(KEBCDIC1047CharCodecName) );
   return Name;
+}
+
 }

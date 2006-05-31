@@ -23,6 +23,7 @@
 #include "kfixedsizebytearraymodeltest.h"
 
 using namespace KHE;
+using namespace KHECore;
 
 
 

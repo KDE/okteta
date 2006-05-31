@@ -19,11 +19,10 @@
 #include <kinstance.h>
 #include <kaboutdata.h>
 #include <klocale.h>
-// app specific
+// part specific
 #include "khepart.h"
 #include "khepartfactory.h"
 
-using namespace KHE;
 
 // Part
 static const char PartId[] =          "khexedit2part";

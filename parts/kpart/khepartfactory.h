@@ -18,6 +18,7 @@
 #ifndef KHEPARTFACTORY_H
 #define KHEPARTFACTORY_H
 
+// kde specific
 #include <kparts/factory.h>
 
 class KInstance;
@@ -33,8 +34,8 @@ class KHexEditPartFactory : public KParts::Factory
     virtual ~KHexEditPartFactory();
 
   public:
-	virtual KParts::Part* createPartObject( QWidget *parentWidget, 
-                                            QObject *parent, 
+    virtual KParts::Part* createPartObject( QWidget *parentWidget,
+                                            QObject *parent,
                                             const char *classname, const QStringList &args );
     static KInstance* instance();
 

@@ -17,8 +17,9 @@
 
 // qt specific
 #include <QKeyEvent>
+// corelib specific
+#include <kabstractbytearraymodel.h>
 // lib specific
-#include "kabstractbytearraymodel.h"
 #include "kvaluecolumn.h"
 #include "kbufferranges.h"
 #include "kbuffercursor.h"
@@ -26,7 +27,7 @@
 #include "kvalueeditor.h"
 
 
-using namespace KHE;
+namespace KHEUI {
 
 KValueEditor::KValueEditor( KValueColumn *VC, KBufferCursor *BC, KHexEdit* HE, KController *P )
   : KEditor( BC, HE, P ),
@@ -93,7 +94,7 @@ bool KValueEditor::handleKeyPress( QKeyEvent *KeyEvent )
           else
           {
             unsigned char InputValue = 0;
-            const KByteCodec *ByteCodec = ValueColumn->byteCodec();
+            const KHECore::KByteCodec *ByteCodec = ValueColumn->byteCodec();
             // valid digit?
             if( ByteCodec->appendDigit(&InputValue,Input) )
             {
@@ -145,7 +146,7 @@ void KValueEditor::doValueEditAction( KValueEditAction Action, int Input )
     OldValue = EditValue = (unsigned char)HexEdit->ByteArrayModel->datum(ValidIndex);
   }
 
-  const KByteCodec *ByteCodec = ValueColumn->byteCodec();
+  const KHECore::KByteCodec *ByteCodec = ValueColumn->byteCodec();
   // 
   unsigned char NewValue = EditValue;
   bool StayInEditMode = true;
@@ -210,4 +211,6 @@ void KValueEditor::doValueEditAction( KValueEditAction Action, int Input )
       BufferCursor->gotoNextByte();
     HexEdit->unpauseCursor();
   }
+}
+
 }

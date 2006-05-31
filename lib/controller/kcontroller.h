@@ -15,13 +15,13 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KCONTROLLER_H
-#define KHE_KCONTROLLER_H
+#ifndef KHE_UI_KCONTROLLER_H
+#define KHE_UI_KCONTROLLER_H
 
 
 class QKeyEvent;
 
-namespace KHE
+namespace KHEUI
 {
 
 class KHexEdit;

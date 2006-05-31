@@ -18,8 +18,8 @@
 // lib specific
 #include "kbinarybytecodec.h"
 
-using namespace KHE;
 
+namespace KHECore {
 
 void KBinaryByteCodec::encode( QString &Digits, unsigned int Pos, const unsigned char Char ) const
 {
@@ -77,4 +77,6 @@ bool KBinaryByteCodec::appendDigit( unsigned char *Byte, unsigned char Digit ) c
 void KBinaryByteCodec::removeLastDigit( unsigned char *Byte ) const
 {
   *Byte >>= 1;
+}
+
 }

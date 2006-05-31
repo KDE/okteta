@@ -15,12 +15,13 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KBORDERCOLUMN_H
-#define KHE_KBORDERCOLUMN_H
+#ifndef KHE_UI_KBORDERCOLUMN_H
+#define KHE_UI_KBORDERCOLUMN_H
 
+// lib specific
 #include "kcolumn.h"
 
-namespace KHE
+namespace KHEUI
 {
 
 /** column that does nothing but draw a vertical line in the middle of the column
@@ -35,9 +36,9 @@ class KBorderColumn : public KColumn
     ~KBorderColumn();
 
   public: // KColumn-API
-    virtual void paintFirstLine( QPainter *P, KPixelXs Xs, int FirstLine );
+    virtual void paintFirstLine( QPainter *P, const KPixelXs &Xs, int FirstLine );
     virtual void paintNextLine( QPainter *P );
-    virtual void paintEmptyColumn( QPainter *P, KPixelXs Xs, KPixelYs Ys );
+    virtual void paintEmptyColumn( QPainter *P, const KPixelXs &Xs, const KPixelYs &Ys );
 
   protected:
    virtual void paintLine( QPainter *P );

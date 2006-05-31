@@ -20,8 +20,8 @@
 // lib specific
 #include "koffsetformat.h"
 
-using namespace KHE;
 
+namespace KHEUI {
 
 const unsigned int KOffsetFormat::CodingWidth[2] = { 9, 10 };
 
@@ -45,4 +45,6 @@ void KOffsetFormat::printHexadecimalSmallOffset( char *Buffer, unsigned int Offs
 void KOffsetFormat::printDecimalOffset( char *Buffer, unsigned int Offset )
 {
   sprintf( Buffer, "%010u", Offset );
+}
+
 }

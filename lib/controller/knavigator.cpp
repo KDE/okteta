@@ -18,15 +18,15 @@
 // qt specific
 #include <QKeyEvent>
 // lib specific
-#include "kabstractbytearraymodel.h"
+#include <kwordbufferservice.h>
+// lib specific
 #include "kbufferranges.h"
 #include "kbuffercursor.h"
-#include "kwordbufferservice.h"
 #include "khexedit.h"
 #include "knavigator.h"
 
 
-using namespace KHE;
+namespace KHEUI {
 
 KNavigator::KNavigator( KHexEdit* HE, KController *P )
   : KController( HE, P )
@@ -101,14 +101,14 @@ void KNavigator::moveCursor( KMoveAction Action, bool Select )
   {
     case MoveBackward:     BufferCursor->gotoPreviousByte(); break;
     case MoveWordBackward: {
-      KWordBufferService WBS( HexEdit->ByteArrayModel, HexEdit->Codec );
+      KHECore::KWordBufferService WBS( HexEdit->ByteArrayModel, HexEdit->Codec );
       int NewIndex = WBS.indexOfPreviousWordStart( BufferCursor->realIndex() );
       BufferCursor->gotoIndex( NewIndex );
     }
     break;
     case MoveForward:      BufferCursor->gotoNextByte();     break;
     case MoveWordForward:  {
-      KWordBufferService WBS( HexEdit->ByteArrayModel, HexEdit->Codec );
+      KHECore::KWordBufferService WBS( HexEdit->ByteArrayModel, HexEdit->Codec );
       int NewIndex = WBS.indexOfNextWordStart( BufferCursor->realIndex() );
       BufferCursor->gotoCIndex( NewIndex );
     }
@@ -133,4 +133,6 @@ void KNavigator::moveCursor( KMoveAction Action, bool Select )
   HexEdit->ensureCursorVisible();
 
   HexEdit->unpauseCursor();
+}
+
 }

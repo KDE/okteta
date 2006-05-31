@@ -15,13 +15,15 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KBYTECODEC_H
-#define KHE_KBYTECODEC_H
+#ifndef KHE_CORE_KBYTECODEC_H
+#define KHE_CORE_KBYTECODEC_H
 
-#include "khe.h"
+// qt specific
 #include <QString>
+// lib specific
+#include "khe.h"
 
-namespace KHE
+namespace KHECore
 {
 
 /** class that is able to convert codings to and from
@@ -36,9 +38,10 @@ namespace KHE
 class KByteCodec
 {
   public:
-		 
+    virtual ~KByteCodec() {}
+
+  public:
     static KByteCodec *createCodec( KCoding C );
-	virtual ~KByteCodec() {}
 
   protected: // hiding, as this class should never be instanciated
     KByteCodec() {}

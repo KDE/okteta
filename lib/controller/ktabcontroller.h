@@ -15,15 +15,15 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KTABCONTROLLER_H
-#define KHE_KTABCONTROLLER_H
+#ifndef KHE_UI_KTABCONTROLLER_H
+#define KHE_UI_KTABCONTROLLER_H
 
 
 // lib specific
 #include "kcontroller.h"
 
 
-namespace KHE
+namespace KHEUI
 {
 
 class KTabController : public KController

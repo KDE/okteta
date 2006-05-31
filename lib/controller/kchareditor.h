@@ -15,15 +15,15 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KCHAREDITOR_H
-#define KHE_KCHAREDITOR_H
+#ifndef KHE_UI_KCHAREDITOR_H
+#define KHE_UI_KCHAREDITOR_H
 
 
 // lib specific
 #include "keditor.h"
 
 
-namespace KHE
+namespace KHEUI
 {
 
 class KCharColumn;

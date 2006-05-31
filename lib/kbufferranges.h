@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KBUFFERRANGES_H
-#define KHE_KBUFFERRANGES_H
+#ifndef KHE_UI_KBUFFERRANGES_H
+#define KHE_UI_KBUFFERRANGES_H
 
 // lib specific
 #include "kbufferlayout.h"
@@ -24,7 +24,7 @@
 #include "ksectionlist.h"
 #include "kcoordrangelist.h"
 
-namespace KHE
+namespace KHEUI
 {
 
 /** a class to control all the ranges like marking and selections
@@ -39,23 +39,23 @@ class KBufferRanges
     ~KBufferRanges();
 
   public: // modifcation access
-    void setMarking( const KSection &M );
+    void setMarking( const KHE::KSection &M );
     void setSelectionStart( int StartIndex );
     void setSelectionEnd( int StartIndex );
-    void setSelection( const KSection &S );
+    void setSelection( const KHE::KSection &S );
     /** */
-    void setFirstWordSelection( const KSection &S );
+    void setFirstWordSelection( const KHE::KSection &S );
     /** */
     void ensureWordSelectionForward( bool Forward );
 
     /** removes marking and returns true if something changed */
     void removeMarking();
     /** removes selection with id and returns it */
-    KSection removeSelection( int id = 0 );
+    KHE::KSection removeSelection( int id = 0 );
     /** removes all but the standard selection and returns true if something changed */
     void removeFurtherSelections();
 
-    void addChangedRange( const KSection &S );
+    void addChangedRange( const KHE::KSection &S );
     void addChangedRange( int SI, int EI );
     void addChangedRange( const KCoordRange &NewRange );
     void adaptSelectionToChange( int Pos, int RemovedLength, int InsertedLength );
@@ -69,8 +69,8 @@ class KBufferRanges
     int noOfSelections() const;
     int selectionStart() const;
     int selectionEnd() const;
-    KSection selection() const;
-    KSection firstWordSelection() const;
+    KHE::KSection selection() const;
+    KHE::KSection firstWordSelection() const;
     int selectionLength() const;
     bool isModified() const;
 
@@ -86,20 +86,20 @@ class KBufferRanges
     bool overlapsSelection( int FirstIndex, int LastIndex, int *SI, int *EI ) const;
     bool overlapsMarking( int FirstIndex, int LastIndex, int *SI, int *EI ) const;
 //    bool overlapsChanges( int FirstIndex, int LastIndex, int *SI, int *EI ) const;
-//    bool overlapsChanges( KSection Indizes, KSection *ChangedRange ) const;
+//    bool overlapsChanges( KHE::KSection Indizes, KHE::KSection *ChangedRange ) const;
     bool overlapsChanges( const KCoordRange &Range, KCoordRange *ChangedRange ) const;
-    const KSection *firstOverlappingSelection( const KSection &Range ) const;
-    const KSection *overlappingMarking( const KSection &Range ) const;
+    const KHE::KSection *firstOverlappingSelection( const KHE::KSection &Range ) const;
+    const KHE::KSection *overlappingMarking( const KHE::KSection &Range ) const;
 
 
   protected:
     /** true if something changed */
     bool Modified;
 
-    KSection Marking;
+    KHE::KSection Marking;
     KSelection Selection;
     /** memories first selected word on wordwise selection */
-    KSection FirstWordSelection;
+    KHE::KSection FirstWordSelection;
 
     KCoordRangeList ChangedRanges;
 
@@ -111,8 +111,8 @@ inline int KBufferRanges::noOfSelections()  const { return 1; }
 
 inline int KBufferRanges::selectionStart()  const { return Selection.start(); }
 inline int KBufferRanges::selectionEnd()    const { return Selection.end(); }
-inline KSection KBufferRanges::selection()  const { return Selection.section(); }
-inline KSection KBufferRanges::firstWordSelection()  const { return FirstWordSelection; }
+inline KHE::KSection KBufferRanges::selection()  const { return Selection.section(); }
+inline KHE::KSection KBufferRanges::firstWordSelection()  const { return FirstWordSelection; }
 inline int KBufferRanges::selectionLength() const { return Selection.section().width(); }
 inline bool KBufferRanges::isModified()     const { return Modified; }
 

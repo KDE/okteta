@@ -26,7 +26,7 @@
 #include "kcolumnsview.h"
 
 
-using namespace KHE;
+namespace KHEUI {
 
 static const int DefaultSingleStep = 20;
 
@@ -221,7 +221,7 @@ void KColumnsView::drawColumns( QPainter *Painter, int cx, int cy, int cw, int c
     if( NoOfLines > 0 )
     {
       // calculate affected lines
-      KSection DirtyLines = visibleLines( DirtyYs );
+      KHE::KSection DirtyLines = visibleLines( DirtyYs );
       DirtyLines.restrictEndTo( NoOfLines - 1 );
 
       if( DirtyLines.isValid() )
@@ -292,6 +292,8 @@ void KColumnsView::drawColumns( QPainter *Painter, int cx, int cy, int cw, int c
 void KColumnsView::drawEmptyArea( QPainter *Painter, int cx ,int cy, int cw, int ch)
 {
     Painter->fillRect( cx,cy, cw,ch, viewport()->palette().brush(viewport()->backgroundRole()) );
+}
+
 }
 
 #include "kcolumnsview.moc"

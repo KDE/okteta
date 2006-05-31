@@ -18,12 +18,12 @@
 #ifndef KHE_KCURSOR_H
 #define KHE_KCURSOR_H
 
-
+// qt specific
 #include <QPixmap>
-
+// lib specific
 #include "kadds.h"
 
-namespace KHE
+namespace KHEUI
 {
 
 /**

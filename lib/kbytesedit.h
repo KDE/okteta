@@ -15,15 +15,15 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KBYTESEDIT_H
-#define KHE_KBYTESEDIT_H
+#ifndef KHE_UI_KBYTESEDIT_H
+#define KHE_UI_KBYTESEDIT_H
 
 
 // lib specific
 #include "khexedit.h"
 #include "khexedit_export.h"
 
-namespace KHE
+namespace KHEUI
 {
 
 class KBytesEditPrivate;

@@ -15,11 +15,11 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KBUFFERCOORD_H
-#define KHE_KBUFFERCOORD_H
+#ifndef KHE_UI_KBUFFERCOORD_H
+#define KHE_UI_KBUFFERCOORD_H
 
 
-namespace KHE
+namespace KHEUI
 {
 
 /**

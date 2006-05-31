@@ -15,20 +15,23 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KABSTRACTBYTEARRAYMODEL_H
-#define KHE_KABSTRACTBYTEARRAYMODEL_H
+#ifndef KHE_CORE_KABSTRACTBYTEARRAYMODEL_H
+#define KHE_CORE_KABSTRACTBYTEARRAYMODEL_H
 
 
 // qt specific
 #include <QObject>
 #include <QByteArray>
+// commonlib specific
+#include <ksection.h>
 // lib specific
-#include "ksection.h"
 #include "khexedit_export.h"
 
 
-namespace KHE
+namespace KHECore
 {
+
+using namespace KHE;
 
 /** could it be useful to hide the data access behind an iterator? *
 class KDataBufferIterator

@@ -25,7 +25,7 @@
 #include "kcharcodectest.h"
 
 // namespaces
-using namespace KHE;
+using namespace KHECore;
 
 
 void KCharCodecTest::initTestCase()

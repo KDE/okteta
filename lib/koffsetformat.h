@@ -15,10 +15,11 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KOFFSETFORMAT_H
-#define KHE_KOFFSETFORMAT_H
+#ifndef KHE_UI_KOFFSETFORMAT_H
+#define KHE_UI_KOFFSETFORMAT_H
 
-namespace KHE
+
+namespace KHEUI
 {
 
 /**

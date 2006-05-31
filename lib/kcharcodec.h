@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KCHARCODEC_H
-#define KHE_KCHARCODEC_H
+#ifndef KHE_CORE_KCHARCODEC_H
+#define KHE_CORE_KCHARCODEC_H
 
 // qt specific
 #include <QStringList>
@@ -26,13 +26,15 @@
 #include "khexedit_export.h"
 
 
-namespace KHE
+namespace KHECore
 {
 
 class KHEXEDIT_EXPORT KCharCodec
 {
   public:
-	virtual ~KCharCodec(){}
+    virtual ~KCharCodec() {}
+
+  public:
     /** */
     static KCharCodec* createCodec( KEncoding E );
     /** */
@@ -41,7 +43,7 @@ class KHEXEDIT_EXPORT KCharCodec
     static const QStringList &codecNames();
 
   public: // API to be implemented
-    virtual KHEChar decode( char Byte ) const = 0;
+    virtual KChar decode( char Byte ) const = 0;
     virtual bool encode( char *D, const QChar &C ) const = 0;
     virtual const QString& name() const = 0;
 

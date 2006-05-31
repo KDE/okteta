@@ -15,13 +15,13 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KOCTALBYTECODEC_H
-#define KHE_KOCTALBYTECODEC_H
+#ifndef KHE_CORE_KOCTALBYTECODEC_H
+#define KHE_CORE_KOCTALBYTECODEC_H
 
 // lib specific
 #include "kbytecodec.h"
 
-namespace KHE
+namespace KHECore
 {
 
 /** class that is able to convert codings to and from binary

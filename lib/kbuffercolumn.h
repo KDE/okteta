@@ -15,27 +15,33 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KBUFFERCOLUMN_H
-#define KHE_KBUFFERCOLUMN_H
+#ifndef KHE_UI_KBUFFERCOLUMN_H
+#define KHE_UI_KBUFFERCOLUMN_H
 
+// commonlib specific
+#include <ksection.h>
+// corelib specific
+#include <khe.h>
+#include <kabstractbytearraymodel.h>
+#include <khechar.h>
 // lib specific
-#include "khe.h"
-#include "kabstractbytearraymodel.h"
-#include "khechar.h"
 #include "kcolumn.h"
 #include "kbufferlayout.h"
-#include "ksection.h"
+
 
 class QPainter;
 class QColor;
 class QBrush;
 
-namespace KHE
+namespace KHECore {
+class KCharCodec;
+}
+
+namespace KHEUI
 {
 
 // class KHexEdit;
 class KBufferRanges;
-class KCharCodec;
 
 const int NoByteFound = -1;
 
@@ -51,20 +57,20 @@ class KBufferColumn : public KColumn
   public:
     enum KFrameStyle { Frame, Left, Right };
   public:
-    KBufferColumn( KColumnsView/*KHexEdit*/ *HE, KAbstractByteArrayModel *B, KBufferLayout *L, KBufferRanges *R );
+    KBufferColumn( KColumnsView/*KHexEdit*/ *HE, KHECore::KAbstractByteArrayModel *B, KBufferLayout *L, KBufferRanges *R );
     virtual ~KBufferColumn();
 
 
   public: // KColumn-API
-    virtual void paintFirstLine( QPainter *P, KPixelXs Xs, int FirstLine );
+    virtual void paintFirstLine( QPainter *P, const KPixelXs &Xs, int FirstLine );
     virtual void paintNextLine( QPainter *P );
 
   public:
-    void preparePainting( KPixelXs Xs );
+    void preparePainting( const KPixelXs &Xs );
 
   public:
     //void paintLine( QPainter *P, int Line );
-    void paintPositions( QPainter *P, int Line, KSection Positions );
+    void paintPositions( QPainter *P, int Line, const KHE::KSection &Positions );
     /** paints a cursor based on the type of the byte.
       * @param Index Index of the byte to paint the cursor for. If -1 a space is used as char.
       */
@@ -113,15 +119,15 @@ class KBufferColumn : public KColumn
       */
     void setMetrics( KPixelX NewDigitWidth, KPixelY NewDigitBaseLine );
     /** */
-    void set( KAbstractByteArrayModel *B );
+    void set( KHECore::KAbstractByteArrayModel *B );
     /** creates new buffer for x-values; to be called on any change of NoOfBytesPerLine or metrics */
     void resetXBuffer();
     /** sets the codec to be used by the char column. */
-    void setCodec( KCharCodec *C );
+    void setCodec( KHECore::KCharCodec *C );
 
   public: // functional logic
     /** returns byte positions covered by pixels with absolute x-coord x */
-    KSection posOfX( KPixelX x, KPixelX w ) const;
+    KHE::KSection posOfX( KPixelX x, KPixelX w ) const;
     /** returns byte pos at pixel with absolute x-coord x */
     int posOfX( KPixelX x ) const;
     /** returns byte pos at pixel with absolute x-coord x, and sets the flag to true if we are closer to the right */
@@ -133,17 +139,17 @@ class KBufferColumn : public KColumn
     /** returns byte pos at pixel with relative x-coord x */
     int posOfRelX( KPixelX x ) const;
     /** returns byte positions covered by pixels with relative x-coord x */
-    KSection posOfRelX( KPixelX x, KPixelX w ) const;
+    KHE::KSection posOfRelX( KPixelX x, KPixelX w ) const;
     /** returns relative x-coord of byte at position Pos */
     KPixelX relXOfPos( int Pos ) const;
     /** returns right relative x-coord of byte at position Pos */
     KPixelX relRightXOfPos( int Pos ) const;
     /** returns the positions that overlap with the absolute x-coords */
-    KSection visiblePositions( KPixelX x, KPixelX w ) const;
+    KHE::KSection visiblePositions( KPixelX x, KPixelX w ) const;
     /** returns the */
-    KPixelXs wideXPixelsOfPos( KSection Positions ) const;
+    KPixelXs wideXPixelsOfPos( const KHE::KSection &Positions ) const;
     /** */
-    KPixelXs relWideXPixelsOfPos( KSection Positions ) const;
+    KPixelXs relWideXPixelsOfPos( const KHE::KSection &Positions ) const;
 
   public: // value access
     KPixelX byteWidth()                      const;
@@ -154,39 +160,39 @@ class KBufferColumn : public KColumn
 
     int firstPos() const;
     int lastPos()  const;
-    KSection visiblePositions() const;
+    KHE::KSection visiblePositions() const;
     const KBufferLayout *layout() const;
-    KCharCodec* codec() const;
+    KHECore::KCharCodec* codec() const;
 
 
   protected: // API to be redefined
     /** default implementation simply prints the byte as ASCII */
-    virtual void drawByte( QPainter *P, char Byte, KHEChar B, const QColor &Color ) const;
+    virtual void drawByte( QPainter *P, char Byte, KHECore::KChar B, const QColor &Color ) const;
     /** default implementation sets byte width to one digit width */
     virtual void recalcByteWidth();
 
 
   protected:
-    void paintPlain( QPainter *P, KSection Positions, int Index );
-    void paintSelection( QPainter *P, KSection Positions, int Index, int Flag );
-    void paintMarking( QPainter *P, KSection Positions, int Index, int Flag );
-    void paintRange( QPainter *P, const QBrush &Brush, KSection Positions, int Flag );
+    void paintPlain( QPainter *P, const KHE::KSection &Positions, int Index );
+    void paintSelection( QPainter *P, const KHE::KSection &Positions, int Index, int Flag );
+    void paintMarking( QPainter *P, const KHE::KSection &Positions, int Index, int Flag );
+    void paintRange( QPainter *P, const QBrush &Brush, const KHE::KSection &Positions, int Flag );
 
     void recalcX();
 
-    bool isSelected( KSection Range, KSection *Selection, unsigned int *Flag ) const;
-    bool isMarked( KSection Range, KSection *Marking, unsigned int *Flag ) const;
+    bool isSelected( const KHE::KSection &Range, KHE::KSection *Selection, unsigned int *Flag ) const;
+    bool isMarked( const KHE::KSection &Range, KHE::KSection *Marking, unsigned int *Flag ) const;
 
 
   protected:
     /** pointer to the buffer */
-    KAbstractByteArrayModel *Buffer;
+    KHECore::KAbstractByteArrayModel *Buffer;
     /** pointer to the layout */
     const KBufferLayout *Layout;
     /** pointer to the ranges */
     KBufferRanges *Ranges;
     /** */
-    KCharCodec *Codec;
+    KHECore::KCharCodec *Codec;
 
     /** */
     KPixelX DigitWidth;
@@ -217,7 +223,7 @@ class KBufferColumn : public KColumn
 
 
   protected: // buffering drawing data
-    KSection PaintPositions;
+    KHE::KSection PaintPositions;
     int PaintLine;
     KPixelX PaintX;
     KPixelX PaintW;
@@ -234,13 +240,12 @@ inline int KBufferColumn::noOfGroupedBytes()      const { return NoOfGroupedByte
 
 inline int KBufferColumn::firstPos() const { return PaintPositions.start(); }
 inline int KBufferColumn::lastPos()  const { return PaintPositions.end(); }
-inline KSection KBufferColumn::visiblePositions() const { return PaintPositions; }
+inline KHE::KSection KBufferColumn::visiblePositions() const { return PaintPositions; }
 
 inline const KBufferLayout *KBufferColumn::layout() const { return Layout; }
 
-
-inline void KBufferColumn::setCodec( KCharCodec *C ) { Codec = C; }
-inline KCharCodec* KBufferColumn::codec() const { return Codec; }
+inline void KBufferColumn::setCodec( KHECore::KCharCodec *C ) { Codec = C; }
+inline KHECore::KCharCodec* KBufferColumn::codec() const { return Codec; }
 
 }
 

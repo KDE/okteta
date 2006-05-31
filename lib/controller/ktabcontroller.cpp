@@ -24,7 +24,7 @@
 #include "ktabcontroller.h"
 
 
-using namespace KHE;
+namespace KHEUI {
 
 KTabController::KTabController( KHexEdit* HE, KController *P )
   : KController( HE, P ),
@@ -67,4 +67,6 @@ bool KTabController::handleKeyPress( QKeyEvent *KeyEvent )
   }
 
   return KeyUsed ? true : KController::handleKeyPress(KeyEvent);
+}
+
 }

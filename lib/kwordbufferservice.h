@@ -15,13 +15,13 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KWORDBUFFERSERVICE_H
-#define KHE_KWORDBUFFERSERVICE_H
+#ifndef KHE_CORE_KWORDBUFFERSERVICE_H
+#define KHE_CORE_KWORDBUFFERSERVICE_H
 
-// lib specific
-#include "ksection.h"
+// commonlib specific
+#include <ksection.h>
 
-namespace KHE
+namespace KHECore
 {
 
 class KAbstractByteArrayModel;
@@ -117,7 +117,7 @@ class KWordBufferService
       * @param CharType
       * @return the section with a word around index.
       */
-    KSection wordSection( unsigned int Index ) const;
+    KHE::KSection wordSection( unsigned int Index ) const;
 
   protected:
     KAbstractByteArrayModel *Buffer;
@@ -129,8 +129,8 @@ inline KWordBufferService::KWordBufferService( KAbstractByteArrayModel *B, KChar
   : Buffer( B ), CharCodec( C ) {}
 inline KWordBufferService::~KWordBufferService() {}
 
-inline KSection KWordBufferService::wordSection( unsigned int Index ) const
-{ return isWordChar(Index) ? KSection( indexOfWordStart(Index), indexOfWordEnd(Index) ) : KSection(); }
+inline KHE::KSection KWordBufferService::wordSection( unsigned int Index ) const
+{ return isWordChar(Index) ? KHE::KSection( indexOfWordStart(Index), indexOfWordEnd(Index) ) : KHE::KSection(); }
 
 }
 

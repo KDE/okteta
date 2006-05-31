@@ -26,6 +26,8 @@ class QSignalSpy;
 
 namespace KHE {
 class KSection;
+}
+namespace KHECore {
 class KAbstractByteArrayModel;
 }
 
@@ -38,8 +40,8 @@ class KAbstractByteArrayModelIfTest : public QObject
     KAbstractByteArrayModelIfTest();
 
   protected: // our API
-    virtual KHE::KAbstractByteArrayModel *createByteArrayModel() = 0;
-    virtual void deleteByteArrayModel( KHE::KAbstractByteArrayModel *ByteArrayModel ) = 0;
+    virtual KHECore::KAbstractByteArrayModel *createByteArrayModel() = 0;
+    virtual void deleteByteArrayModel( KHECore::KAbstractByteArrayModel *ByteArrayModel ) = 0;
 
   protected:
     void checkContentsReplaced( int Position, int RemovedLength, int InsertedLength );
@@ -73,7 +75,7 @@ class KAbstractByteArrayModelIfTest : public QObject
 
   private: // used in all tests
     /** pointer to the model to test */
-    KHE::KAbstractByteArrayModel *ByteArrayModel;
+    KHECore::KAbstractByteArrayModel *ByteArrayModel;
 
     QSignalSpy *ContentsChangedSpy;
     QSignalSpy *ContentsReplacedSpy;

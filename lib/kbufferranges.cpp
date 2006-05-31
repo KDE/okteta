@@ -21,7 +21,7 @@
 #include "kbufferranges.h"
 
 
-using namespace KHE;
+namespace KHEUI {
 
 KBufferRanges::KBufferRanges( KBufferLayout *L )
  : Modified( false ),
@@ -44,7 +44,7 @@ void KBufferRanges::reset()
 }
 
 
-void KBufferRanges::setMarking( const KSection &M )
+void KBufferRanges::setMarking( const KHE::KSection &M )
 {
   if( Marking == M )
     return;
@@ -61,7 +61,7 @@ void KBufferRanges::removeFurtherSelections()
 }
 
 
-void KBufferRanges::setSelection( const KSection &S )
+void KBufferRanges::setSelection( const KHE::KSection &S )
 {
   bool Changed = Selection.isValid();
   if( Changed )
@@ -82,7 +82,7 @@ void KBufferRanges::setSelectionStart( int StartIndex )
 
 void KBufferRanges::setSelectionEnd( int EndIndex )
 {
-  KSection OldSelection = Selection.section();
+  KHE::KSection OldSelection = Selection.section();
   Selection.setEnd( EndIndex );
 
   // TODO: think about rather building a diff of the sections
@@ -134,7 +134,7 @@ void KBufferRanges::setSelectionEnd( int EndIndex )
       CE = OldSelection.end();
     }
   }
-  KSection C( CS, CE );
+  KHE::KSection C( CS, CE );
 
   bool Changed = C.isValid();
   if( Changed )
@@ -143,12 +143,12 @@ void KBufferRanges::setSelectionEnd( int EndIndex )
 }
 
 
-KSection KBufferRanges::removeSelection( int id )
+KHE::KSection KBufferRanges::removeSelection( int id )
 {
   if( id > 0 )
-    return KSection();
+    return KHE::KSection();
 
-  KSection Section = Selection.section();
+  KHE::KSection Section = Selection.section();
   bool Changed = Section.isValid();
   if( Changed )
     addChangedRange( Section );
@@ -162,7 +162,7 @@ KSection KBufferRanges::removeSelection( int id )
 
 bool KBufferRanges::overlapsSelection( int FirstIndex, int LastIndex, int *SI, int *EI ) const
 {
-  if( Selection.section().overlaps(KSection(FirstIndex,LastIndex)) )
+  if( Selection.section().overlaps(KHE::KSection(FirstIndex,LastIndex)) )
   {
     *SI = Selection.start();
     *EI = Selection.end();
@@ -174,7 +174,7 @@ bool KBufferRanges::overlapsSelection( int FirstIndex, int LastIndex, int *SI, i
 
 bool KBufferRanges::overlapsMarking( int FirstIndex, int LastIndex, int *SI, int *EI ) const
 {
-  if( Marking.overlaps(KSection(FirstIndex,LastIndex)) )
+  if( Marking.overlaps(KHE::KSection(FirstIndex,LastIndex)) )
   {
     *SI = Marking.start();
     *EI = Marking.end();
@@ -184,13 +184,13 @@ bool KBufferRanges::overlapsMarking( int FirstIndex, int LastIndex, int *SI, int
 }
 
 
-const KSection *KBufferRanges::firstOverlappingSelection( const KSection &Range ) const
+const KHE::KSection *KBufferRanges::firstOverlappingSelection( const KHE::KSection &Range ) const
 {
   return Selection.section().overlaps(Range) ? &Selection.section() : 0;
 }
 
 
-const KSection *KBufferRanges::overlappingMarking( const KSection &Range ) const
+const KHE::KSection *KBufferRanges::overlappingMarking( const KHE::KSection &Range ) const
 {
   return Marking.overlaps(Range) ? &Marking : 0;
 }
@@ -211,9 +211,9 @@ bool KBufferRanges::overlapsChanges( int FirstIndex, int LastIndex, int *SI, int
   return false;
 }
 
-bool KBufferRanges::overlapsChanges( KSection Indizes, KSection *ChangedRange ) const
+bool KBufferRanges::overlapsChanges( KHE::KSection Indizes, KHE::KSection *ChangedRange ) const
 {
-  for( KSectionList::const_iterator S=ChangedRanges.begin(); S!=ChangedRanges.end(); ++S )
+  for( KHE::KSectionList::const_iterator S=ChangedRanges.begin(); S!=ChangedRanges.end(); ++S )
   {
     if( (*S).overlaps(Indizes) )
     {
@@ -243,11 +243,11 @@ bool KBufferRanges::overlapsChanges( const KCoordRange &Range, KCoordRange *Chan
 
 void KBufferRanges::addChangedRange( int SI, int EI )
 {
-  addChangedRange( KSection(SI,EI) );
+  addChangedRange( KHE::KSection(SI,EI) );
 }
 
 
-void KBufferRanges::addChangedRange( const KSection &S )
+void KBufferRanges::addChangedRange( const KHE::KSection &S )
 {
 kDebug() << "adding change section "<<S.start()<<","<<S.end()<<endl;
   addChangedRange( Layout->coordRangeOfIndizes(S) );
@@ -281,7 +281,7 @@ void KBufferRanges::resetChangedRanges()
 }
 
 
-void KBufferRanges::setFirstWordSelection( const KSection &Section )
+void KBufferRanges::setFirstWordSelection( const KHE::KSection &Section )
 {
   FirstWordSelection = Section;
   setSelection( FirstWordSelection );
@@ -302,4 +302,6 @@ void KBufferRanges::setFirstWordSelection( const KSection &Section )
 void KBufferRanges::adaptSelectionToChange( int Pos, int RemovedLength, int InsertedLength )
 {
   Selection.adaptToChange(Pos,RemovedLength,InsertedLength );
+}
+
 }

@@ -20,7 +20,7 @@
 
 #include "kabstractbytearraymodel.h"
 
-namespace KHE
+namespace KHECore
 {
 
 /** base class for all Data buffers that are used to display

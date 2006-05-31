@@ -17,14 +17,15 @@
 
 // qt specific
 #include <QKeyEvent>
+// commonlib specific
+#include <kcharcodec.h>
 // lib specific
 #include "kcharcolumn.h"
-#include "kcharcodec.h"
 #include "khexedit.h"
 #include "kchareditor.h"
 
 
-using namespace KHE;
+namespace KHEUI {
 
 
 KCharEditor::KCharEditor( KCharColumn *CC, KBufferCursor *BC, KHexEdit *HE, KController *P )
@@ -55,4 +56,6 @@ bool KCharEditor::handleKeyPress( QKeyEvent *KeyEvent )
   }
 
   return KeyUsed ? true : KEditor::handleKeyPress(KeyEvent);
+}
+
 }

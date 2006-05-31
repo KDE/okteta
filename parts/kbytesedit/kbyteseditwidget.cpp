@@ -21,8 +21,9 @@
 #include <klocale.h>
 #include <kgenericfactory.h>
 #include <kapplication.h>
-// lib specific
+// uilib specific
 #include "kbytesedit.h"
+// part specific
 #include "kbyteseditwidget.h"
 
 
@@ -30,7 +31,7 @@ KBytesEditWidget::KBytesEditWidget( QWidget *parent, const QStringList & )
   : QWidget( parent )
 {
   QHBoxLayout* Layout = new QHBoxLayout( this );
-  BytesEdit = new KHE::KBytesEdit( this, "BytesEdit" );
+  BytesEdit = new KHEUI::KBytesEdit( this, "BytesEdit" );
   Layout->addWidget( BytesEdit );
 //   connect( _editor, SIGNAL( canUndo(bool) ), this, SIGNAL( canUndo(bool) ) );
   connect( BytesEdit, SIGNAL(copyAvailable( bool )), this, SIGNAL(copyAvailable( bool )) );
@@ -73,12 +74,12 @@ void KBytesEditWidget::setCursorPosition( int Index )
 
 void KBytesEditWidget::setCoding( KCoding C )
 {
-  BytesEdit->setCoding( (KHE::KHexEdit::KCoding) C );
+  BytesEdit->setCoding( (KHEUI::KHexEdit::KCoding) C );
 }
 
 void KBytesEditWidget::setResizeStyle( KResizeStyle Style )
 {
-  BytesEdit->setResizeStyle( (KHE::KHexEdit::KResizeStyle) Style );
+  BytesEdit->setResizeStyle( (KHEUI::KHexEdit::KResizeStyle) Style );
 }
 int KBytesEditWidget::noOfBytesPerLine() const
 {
@@ -136,7 +137,7 @@ void KBytesEditWidget::setBinaryGapWidth( int BGW )
 
 void KBytesEditWidget::setEncoding( KEncoding C )
 {
-  BytesEdit->setEncoding( (KHE::KHexEdit::KEncoding)C );
+  BytesEdit->setEncoding( (KHEUI::KHexEdit::KEncoding)C );
 }
 
 void KBytesEditWidget::setShowUnprintable( bool SU )

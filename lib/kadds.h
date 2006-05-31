@@ -18,7 +18,11 @@
 #ifndef KHE_KADDS_H
 #define KHE_KADDS_H
 
-namespace KHE
+namespace KHE {
+class KSection;
+}
+
+namespace KHEUI
 {
 // some possibly useful additions to KDE
 
@@ -26,11 +30,8 @@ namespace KHE
 typedef int KPixelX;
 typedef int KPixelY;
 
-class KSection;
-
-typedef KSection KPixelXs;
-typedef KSection KPixelYs;
-
+typedef KHE::KSection KPixelXs;
+typedef KHE::KSection KPixelYs;
 }
 
 #endif

@@ -23,17 +23,14 @@
 #include "ktextcharcodeckcharcodeciftest.h"
 
 
-using namespace KHE;
 
-
-
-KHE::KCharCodec *KTextCharCodecKCharCodecIfTest::createCodec()
+KHECore::KCharCodec *KTextCharCodecKCharCodecIfTest::createCodec()
 {
-  return KTextCharCodec::createCodec("ISO8859-1"); // TODO: test for some more, e.g. KOI8-R
+  return KHECore::KTextCharCodec::createCodec("ISO8859-1"); // TODO: test for some more, e.g. KOI8-R
 }
 
 
-void KTextCharCodecKCharCodecIfTest::deleteCodec( KHE::KCharCodec *Codec )
+void KTextCharCodecKCharCodecIfTest::deleteCodec( KHECore::KCharCodec *Codec )
 {
   delete Codec;
 }

@@ -22,6 +22,7 @@
 #include "kselectiontest.h"
 
 using namespace KHE;
+using namespace KHEUI;
 
 // local variables
 static const int Start = 15;

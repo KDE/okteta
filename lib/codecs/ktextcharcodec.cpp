@@ -25,7 +25,7 @@
 #include "ktextcharcodec.h"
 
 
-using namespace KHE;
+namespace KHECore {
 
 static const char QTextCodecWhiteSpace = 63;
 
@@ -223,10 +223,10 @@ bool KTextCharCodec::encode( char *D, const QChar &C ) const
 }
 
 
-KHEChar KTextCharCodec::decode( char Byte ) const
+KChar KTextCharCodec::decode( char Byte ) const
 {
   QString S( Decoder->toUnicode(&Byte,1) );
-  return KHEChar(S.at(0));
+  return KChar(S.at(0));
 }
 
 
@@ -235,4 +235,6 @@ const QString& KTextCharCodec::name() const
   if( Name.isNull() )
     Name = QString::fromLatin1( Codec->name() );
   return Name;
+}
+
 }

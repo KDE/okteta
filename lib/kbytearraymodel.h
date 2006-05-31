@@ -20,7 +20,7 @@
 
 #include "kabstractbytearraymodel.h"
 
-namespace KHE
+namespace KHECore
 {
 /*
 class KPlainBufferIterator : public KDataBufferIterator

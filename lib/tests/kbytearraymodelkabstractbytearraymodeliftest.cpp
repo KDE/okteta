@@ -23,22 +23,19 @@
 #include "kbytearraymodelkabstractbytearraymodeliftest.h"
 
 
-using namespace KHE;
-
-
 static const int ByteArrayModelSize = 60;
 
 
-KHE::KAbstractByteArrayModel *KByteArrayModelKAbstractByteArrayModelIfTest::createByteArrayModel()
+KHECore::KAbstractByteArrayModel *KByteArrayModelKAbstractByteArrayModelIfTest::createByteArrayModel()
 {
-  KByteArrayModel *ByteArrayModel = new KByteArrayModel( ByteArrayModelSize );
+  KHECore::KByteArrayModel *ByteArrayModel = new KHECore::KByteArrayModel( ByteArrayModelSize );
   ByteArrayModel->setReadOnly( false );
 
   return ByteArrayModel;
 }
 
 void KByteArrayModelKAbstractByteArrayModelIfTest::deleteByteArrayModel(
-       KHE::KAbstractByteArrayModel *ByteArrayModel )
+       KHECore::KAbstractByteArrayModel *ByteArrayModel )
 {
   delete ByteArrayModel;
 }

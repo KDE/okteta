@@ -25,7 +25,7 @@
 #include "kabstractbytearraymodel.h"
 #include "khexedit_export.h"
 
-namespace KHE {
+namespace KHECore {
 
 /** base class for all Data buffers that are used to display
   * TODO: think about a way to inform KHexEdit that there has been

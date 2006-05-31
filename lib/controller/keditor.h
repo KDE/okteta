@@ -15,15 +15,15 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KEDITOR_H
-#define KHE_KEDITOR_H
+#ifndef KHE_UI_KEDITOR_H
+#define KHE_UI_KEDITOR_H
 
 
 // lib specific
 #include "kcontroller.h"
 
 
-namespace KHE
+namespace KHEUI
 {
 
 class KBufferCursor;

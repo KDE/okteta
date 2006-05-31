@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KBUFFERDRAG_H
-#define KHE_KBUFFERDRAG_H
+#ifndef KHE_CORE_KBUFFERDRAG_H
+#define KHE_CORE_KBUFFERDRAG_H
 
 // qt specific
 #include <QMimeData>
@@ -25,7 +25,8 @@
 #include "kcoordrange.h"
 #include "kcoltextexport.h"
 
-namespace KHE
+
+namespace KHEUI
 {
 
 // class KBorderColumn;
@@ -34,6 +35,7 @@ class KValueColumn;
 class KCharColumn;
 
 typedef KColTextExport* KColTextExportPtr;
+
 /**
   *@author Friedrich W. H. Kossebau
   */
@@ -41,7 +43,7 @@ class KBufferDrag : public QMimeData
 {
   public:
     // TODO: make this call somewhat more generic
-    KBufferDrag( const QByteArray &, KCoordRange Range,
+    KBufferDrag( const QByteArray &, const KCoordRange &Range,
                  const KOffsetColumn *OC, const KValueColumn *HC, const KCharColumn *TC,
                  QChar SC, QChar UC, const QString &CN );
     ~KBufferDrag();

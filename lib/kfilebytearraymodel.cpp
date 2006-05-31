@@ -20,7 +20,7 @@
 // lib specific
 #include "kfilebytearraymodel.h"
 
-using namespace KHE;
+using namespace KHECore;
 
 KFileByteArrayModel::KFileByteArrayModel( int NP, int PS )
  : NoOfUsedPages( NP ),

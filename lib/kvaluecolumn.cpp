@@ -17,6 +17,8 @@
 
 // qt specific
 #include <QPainter>
+// corelib specific
+#include <kcharcodec.h>
 // lib specific
 #include "kcolumnsview.h"
 #include "kbuffercursor.h"
@@ -24,16 +26,17 @@
 #include "kbufferranges.h"
 #include "kvaluecolumn.h"
 #include "helper.h"
-#include "kcharcodec.h"
-
-using namespace KHE;
-
-static const KCoding DefaultCoding =         HexadecimalCoding;
-static const KCoding NotDefaultCoding =      DecimalCoding;
-static const int     DefaultBinaryGapWidth = 1;
 
 
-KValueColumn::KValueColumn( KColumnsView *CV, KAbstractByteArrayModel *B, KBufferLayout *L, KBufferRanges *R )
+namespace KHEUI {
+
+static const KHECore::KCoding DefaultCoding =    KHECore::HexadecimalCoding;
+static const KHECore::KCoding NotDefaultCoding = KHECore::DecimalCoding;
+
+static const int DefaultBinaryGapWidth = 1;
+
+
+KValueColumn::KValueColumn( KColumnsView *CV, KHECore::KAbstractByteArrayModel *B, KBufferLayout *L, KBufferRanges *R )
  : KBufferColumn( CV, B, L, R ),
    Coding( NotDefaultCoding ),
    ByteCodec( 0 ),
@@ -49,7 +52,7 @@ KValueColumn::~KValueColumn()
 
 
 
-bool KValueColumn::setCoding( KCoding C )
+bool KValueColumn::setCoding( KHECore::KCoding C )
 {
   // no changes?
   if( Coding == C )
@@ -58,7 +61,7 @@ bool KValueColumn::setCoding( KCoding C )
   delete ByteCodec;
 
   Coding = C;
-  ByteCodec = KByteCodec::createCodec( Coding );
+  ByteCodec = KHECore::KByteCodec::createCodec( Coding );
   CodedByte.resize( ByteCodec->encodingWidth() );
 
   // recalculate depend sizes
@@ -91,7 +94,7 @@ void KValueColumn::recalcByteWidth()
 {
   ByteWidth = ByteCodec->encodingWidth() * DigitWidth;
 
-  if( Coding == BinaryCoding )
+  if( Coding == KHECore::BinaryCoding )
   {
     BinaryHalfOffset = 4 * DigitWidth + BinaryGapWidth;
     ByteWidth += BinaryGapWidth;
@@ -102,7 +105,7 @@ void KValueColumn::recalcByteWidth()
 // perhaps sometimes there will be a grammar
 void KValueColumn::paintEditedByte( QPainter *Painter, char Byte, const QString &EditBuffer )
 {
-  KHEChar B = Codec->decode( Byte );
+  KHECore::KChar B = Codec->decode( Byte );
 
   Painter->fillRect( 0,0, ByteWidth,LineHeight, QBrush(colorForChar(B),Qt::SolidPattern) );
 
@@ -110,7 +113,7 @@ void KValueColumn::paintEditedByte( QPainter *Painter, char Byte, const QString 
 }
 
 
-void KValueColumn::drawByte( QPainter *Painter, char Byte, KHEChar /*B*/, const QColor &Color ) const
+void KValueColumn::drawByte( QPainter *Painter, char Byte, KHECore::KChar /*B*/, const QColor &Color ) const
 {
   ByteCodec->encode( CodedByte, 0, Byte );
   drawCode( Painter, CodedByte, Color );
@@ -120,7 +123,7 @@ void KValueColumn::drawByte( QPainter *Painter, char Byte, KHEChar /*B*/, const 
 void KValueColumn::drawCode( QPainter *Painter, const QString &Code, const QColor &Color ) const
 {
   Painter->setPen( Color );
-  if( Coding == BinaryCoding )
+  if( Coding == KHECore::BinaryCoding )
   {
     // leave a gap in the middle
     Painter->drawText( 0, DigitBaseLine, Code.left(4) );
@@ -128,4 +131,6 @@ void KValueColumn::drawCode( QPainter *Painter, const QString &Code, const QColo
   }
   else
     Painter->drawText( 0, DigitBaseLine, Code );
+}
+
 }

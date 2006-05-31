@@ -15,12 +15,13 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KSELECTION_H
-#define KHE_KSELECTION_H
+#ifndef KHE_UI_KSELECTION_H
+#define KHE_UI_KSELECTION_H
 
+// commonlib specific
 #include "ksection.h"
 
-namespace KHE
+namespace KHEUI
 {
 
 /** This class describes a selected section of the buffer.
@@ -28,7 +29,7 @@ namespace KHE
   * mouse and keyboard commands it offers two ways to set its range:
   * - by giving the startposition (of the cursor) of an interactive selection
   *   and the subsequent end positions (until selection is finished)
-  * - direct setting (as provided by KSection)
+  * - direct setting (as provided by KHE::KSection)
   *
   * the interactive selection takes care that
   *
@@ -47,7 +48,7 @@ class KSelection
 
   public:
     KSelection &operator=( const KSelection &S );
-    KSelection &operator=( const KSection &S );
+    KSelection &operator=( const KHE::KSection &S );
 
   public: // modification access
     /** starts the selection.
@@ -86,7 +87,7 @@ class KSelection
     /** 
       * @return section
       */
-    const KSection &section() const;
+    const KHE::KSection &section() const;
 
 
   public: // logic access
@@ -106,7 +107,7 @@ class KSelection
 
   protected:
     /** Section */
-    KSection Section;
+    KHE::KSection Section;
     /** cursor index where the selection starts */
     int Anchor;
 };
@@ -123,7 +124,7 @@ inline KSelection &KSelection::operator=( const KSelection &S )
   return *this;
 }
 
-inline KSelection &KSelection::operator=( const KSection &S )
+inline KSelection &KSelection::operator=( const KHE::KSection &S )
 {
   Section = S;
   Anchor = S.start();
@@ -167,7 +168,7 @@ inline void KSelection::setForward( bool Forward )
    Anchor = Forward ? Section.start() : Section.end()+1;
 }
 
-inline const KSection &KSelection::section() const { return Section; }
+inline const KHE::KSection &KSelection::section() const { return Section; }
 inline int KSelection::anchor()              const { return Anchor; }
 inline int KSelection::start()               const { return Section.start(); }
 inline int KSelection::end()                 const { return Section.end(); }

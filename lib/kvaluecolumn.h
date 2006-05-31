@@ -15,15 +15,16 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KVALUECOLUMN_H
-#define KHE_KVALUECOLUMN_H
+#ifndef KHE_UI_KVALUECOLUMN_H
+#define KHE_UI_KVALUECOLUMN_H
 
+// corelib specific
+#include <kbytecodec.h>
 // lib specific
-#include "kbytecodec.h"
 #include "kbuffercolumn.h"
 
 
-namespace KHE
+namespace KHEUI
 {
 
 class KBufferRanges;
@@ -36,7 +37,7 @@ class KBufferRanges;
 class KValueColumn : public KBufferColumn
 {
   public:
-    KValueColumn( KColumnsView *CV, KAbstractByteArrayModel *B, KBufferLayout *L, KBufferRanges *R );
+    KValueColumn( KColumnsView *CV, KHECore::KAbstractByteArrayModel *B, KBufferLayout *L, KBufferRanges *R );
     virtual ~KValueColumn();
 
   public:
@@ -46,7 +47,7 @@ class KValueColumn : public KBufferColumn
     /**
       * returns true if there was a change
       */
-    bool setCoding( KCoding C );
+    bool setCoding( KHECore::KCoding C );
     /** sets the spacing in the middle of a binary byte in the value column
       * @param BinaryGapW spacing in the middle of a binary in pixels
       * returns true if there was a change
@@ -55,13 +56,13 @@ class KValueColumn : public KBufferColumn
 
 
   public: // value access
-    KPixelX binaryGapWidth()      const;
-    KCoding coding()              const;
-    const KByteCodec *byteCodec() const;
+    KPixelX binaryGapWidth()               const;
+    KHECore::KCoding coding()              const;
+    const KHECore::KByteCodec *byteCodec() const;
 
 
   protected: // KBufferColumn API
-    virtual void drawByte( QPainter *P, char Byte, KHEChar B, const QColor &Color ) const;
+    virtual void drawByte( QPainter *P, char Byte, KHECore::KChar B, const QColor &Color ) const;
     virtual void recalcByteWidth();
 
   protected:
@@ -69,9 +70,9 @@ class KValueColumn : public KBufferColumn
 
   protected: // set data
     /** */
-    KCoding Coding;
+    KHECore::KCoding Coding;
     /** */
-    KByteCodec *ByteCodec;
+    KHECore::KByteCodec *ByteCodec;
     /** */
     KPixelX BinaryGapWidth;
 
@@ -84,8 +85,8 @@ class KValueColumn : public KBufferColumn
 
 
 inline KPixelX KValueColumn::binaryGapWidth()        const { return BinaryGapWidth; }
-inline KCoding KValueColumn::coding()                const { return Coding; }
-inline const KByteCodec *KValueColumn::byteCodec()   const { return ByteCodec; }
+inline KHECore::KCoding KValueColumn::coding()                const { return Coding; }
+inline const KHECore::KByteCodec *KValueColumn::byteCodec()   const { return ByteCodec; }
 
 }
 

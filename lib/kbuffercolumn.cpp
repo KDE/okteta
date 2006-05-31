@@ -19,6 +19,8 @@
 
 // qt specific
 #include <QPainter>
+// corelib specific
+#include "kcharcodec.h"
 // lib specific
 #include "kcolumnsview.h"
 #include "kbuffercursor.h"
@@ -26,9 +28,9 @@
 #include "kbufferlayout.h"
 #include "kbufferranges.h"
 #include "helper.h"
-#include "kcharcodec.h"
 
-using namespace KHE;
+
+namespace KHEUI {
 
 static const unsigned int StartsBefore = 1;
 static const unsigned int EndsLater = 2;
@@ -39,7 +41,7 @@ static const KPixelX DefaultByteSpacingWidth = 3;
 static const KPixelX DefaultGroupSpacingWidth = 9;
 static const int DefaultNoOfGroupedBytes = 4;
 
-KBufferColumn::KBufferColumn( KColumnsView *CV, KAbstractByteArrayModel *ByteChar, KBufferLayout *L, KBufferRanges *R )
+KBufferColumn::KBufferColumn( KColumnsView *CV, KHECore::KAbstractByteArrayModel *ByteChar, KBufferLayout *L, KBufferRanges *R )
  : KColumn( CV ),
    Buffer( ByteChar ),
    Layout( L ),
@@ -65,7 +67,7 @@ KBufferColumn::~KBufferColumn()
 
 
 
-void KBufferColumn::set( KAbstractByteArrayModel *ByteChar )
+void KBufferColumn::set( KHECore::KAbstractByteArrayModel *ByteChar )
 {
   Buffer= ByteChar;
 }
@@ -245,16 +247,16 @@ int KBufferColumn::magPosOfX( KPixelX PX ) const
 }
 
 
-KSection KBufferColumn::posOfX( KPixelX PX, KPixelX PW ) const
+KHE::KSection KBufferColumn::posOfX( KPixelX PX, KPixelX PW ) const
 {
   if( !PosX )
-    return KSection();
+    return KHE::KSection();
 
   // translate
   PX -= x();
   int PRX = PX + PW - 1;
 
-  KSection P;
+  KHE::KSection P;
   // search backwards for the first byte that is equalleft to x
   for( int p=LastPos; p>=0; --p )
     if( PosX[p] <= PRX )
@@ -291,14 +293,14 @@ int KBufferColumn::posOfRelX( KPixelX PX ) const
 }
 
 
-KSection KBufferColumn::posOfRelX( KPixelX PX, KPixelX PW ) const
+KHE::KSection KBufferColumn::posOfRelX( KPixelX PX, KPixelX PW ) const
 {
   if( !PosX )
-    return KSection();
+    return KHE::KSection();
 
   int PRX = PX + PW - 1;
 
-  KSection P;
+  KHE::KSection P;
   // search backwards for the first byte that is equalleft to x
   for( int p=LastPos; p>=0; --p )
     if( PosX[p] <= PRX )
@@ -321,22 +323,23 @@ KPixelX KBufferColumn::relXOfPos( int Pos )      const { return PosX ? PosX[Pos]
 KPixelX KBufferColumn::relRightXOfPos( int Pos ) const { return PosRightX ? PosRightX[Pos] : 0; }
 
 
-KPixelXs KBufferColumn::wideXPixelsOfPos( KSection Positions ) const
+KPixelXs KBufferColumn::wideXPixelsOfPos( const KHE::KSection &Positions ) const
 {
   return KPixelXs( Positions.start()>0?rightXOfPos(Positions.start()-1)+1:xOfPos(Positions.start()),
                    Positions.end()<LastPos?xOfPos(Positions.end()+1)-1:rightXOfPos(Positions.end())  );
 }
 
 
-KPixelXs KBufferColumn::relWideXPixelsOfPos( KSection Positions ) const
+KPixelXs KBufferColumn::relWideXPixelsOfPos( const KHE::KSection &Positions ) const
 {
   return KPixelXs( Positions.start()>0?relRightXOfPos(Positions.start()-1)+1:relXOfPos(Positions.start()),
                    Positions.end()<LastPos?relXOfPos(Positions.end()+1)-1:relRightXOfPos(Positions.end())  );
 }
 
 
-void KBufferColumn::preparePainting( KPixelXs Xs )
+void KBufferColumn::preparePainting( const KPixelXs &_Xs )
 {
+  KPixelXs Xs( _Xs );
   Xs.restrictTo( XSpan );
   // translate
   Xs.moveBy( -x() );
@@ -350,7 +353,7 @@ void KBufferColumn::preparePainting( KPixelXs Xs )
 }
 
 
-void KBufferColumn::paintFirstLine( QPainter *Painter, KPixelXs Xs, int FirstLine )
+void KBufferColumn::paintFirstLine( QPainter *Painter, const KPixelXs &Xs, int FirstLine )
 {
   preparePainting( Xs );
 
@@ -366,7 +369,7 @@ void KBufferColumn::paintNextLine( QPainter *Painter )
 }
 
 
-void KBufferColumn::paintPositions( QPainter *Painter, int Line, KSection Pos )
+void KBufferColumn::paintPositions( QPainter *Painter, int Line, const KHE::KSection &Pos )
 {
   // clear background
   unsigned int BlankFlag = (Pos.start()!=0?StartsBefore:0) | (Pos.end()!=LastPos?EndsLater:0);
@@ -377,7 +380,7 @@ void KBufferColumn::paintPositions( QPainter *Painter, int Line, KSection Pos )
 
   // Go through the lines TODO: handle first and last line more effeciently
   // check for leading and trailing spaces
-  KSection Positions( Layout->firstPos(KBufferCoord( Pos.start(), Line )),
+  KHE::KSection Positions( Layout->firstPos(KBufferCoord( Pos.start(), Line )),
                       Layout->lastPos( KBufferCoord( Pos.end(),  Line )) );
 
   // no bytes to paint?
@@ -385,13 +388,13 @@ void KBufferColumn::paintPositions( QPainter *Painter, int Line, KSection Pos )
     return;
 
   // check for leading and trailing spaces
-  KSection Indizes =
-    KSection::fromWidth( Layout->indexAtCoord(KBufferCoord( Positions.start(), Line )), Positions.width() );
+  KHE::KSection Indizes =
+    KHE::KSection::fromWidth( Layout->indexAtCoord(KBufferCoord( Positions.start(), Line )), Positions.width() );
 
   unsigned int SelectionFlag = 0;
   unsigned int MarkingFlag = 0;
-  KSection Selection;
-  KSection Marking;
+  KHE::KSection Selection;
+  KHE::KSection Marking;
   bool HasMarking = Ranges->hasMarking();
   bool HasSelection = Ranges->hasSelection();
 
@@ -400,8 +403,8 @@ void KBufferColumn::paintPositions( QPainter *Painter, int Line, KSection Pos )
 //         <<" for Indizes "<<Indizes.start()<<"-"<<Indizes.start()<<endl;
   while( Positions.isValid() )
   {
-    KSection PositionsPart( Positions );  // set of positions to paint next
-    KSection IndizesPart( Indizes );      // set of indizes to paint next
+    KHE::KSection PositionsPart( Positions );  // set of positions to paint next
+    KHE::KSection IndizesPart( Indizes );      // set of indizes to paint next
     // falls Marking nicht mehr gebuffert und noch zu erwarten
     if( HasMarking && Marking.endsBefore(IndizesPart.start()) )
     {
@@ -457,7 +460,7 @@ void KBufferColumn::paintPositions( QPainter *Painter, int Line, KSection Pos )
 }
 
 
-void KBufferColumn::paintPlain( QPainter *Painter, KSection Positions, int Index )
+void KBufferColumn::paintPlain( QPainter *Painter, const KHE::KSection &Positions, int Index )
 {
   // paint all the bytes affected
   for( int Pos=Positions.start(); Pos<=Positions.end(); ++Pos,++Index )
@@ -468,7 +471,7 @@ void KBufferColumn::paintPlain( QPainter *Painter, KSection Positions, int Index
     Painter->translate( x, 0 );
 
     char Byte = Buffer->datum( Index );
-    KHEChar ByteChar = Codec->decode( Byte );
+    KHECore::KChar ByteChar = Codec->decode( Byte );
 
     drawByte( Painter, Byte, ByteChar, colorForChar(ByteChar) );
 
@@ -477,7 +480,7 @@ void KBufferColumn::paintPlain( QPainter *Painter, KSection Positions, int Index
 }
 
 
-void KBufferColumn::paintSelection( QPainter *Painter, KSection Positions, int Index, int Flag )
+void KBufferColumn::paintSelection( QPainter *Painter, const KHE::KSection &Positions, int Index, int Flag )
 {
   const QPalette &Palette = View->viewport()->palette();
 
@@ -493,7 +496,7 @@ void KBufferColumn::paintSelection( QPainter *Painter, KSection Positions, int I
     Painter->translate( x, 0 );
 
     char Byte = Buffer->datum( Index );
-    KHEChar ByteChar = Codec->decode( Byte );
+    KHECore::KChar ByteChar = Codec->decode( Byte );
 
     drawByte( Painter, Byte, ByteChar, HighlightCharColor );
 
@@ -502,7 +505,7 @@ void KBufferColumn::paintSelection( QPainter *Painter, KSection Positions, int I
 }
 
 
-void KBufferColumn::paintMarking( QPainter *Painter, KSection Positions, int Index, int Flag )
+void KBufferColumn::paintMarking( QPainter *Painter, const KHE::KSection &Positions, int Index, int Flag )
 {
   const QPalette &Palette = View->viewport()->palette();
 
@@ -517,7 +520,7 @@ void KBufferColumn::paintMarking( QPainter *Painter, KSection Positions, int Ind
     // draw the byte
     Painter->translate( x, 0 );
     char Byte = Buffer->datum( Index );
-    KHEChar ByteChar = Codec->decode( Byte );
+    KHECore::KChar ByteChar = Codec->decode( Byte );
     drawByte( Painter, Byte, ByteChar, BC );
 
     Painter->translate( -x, 0 );
@@ -525,7 +528,7 @@ void KBufferColumn::paintMarking( QPainter *Painter, KSection Positions, int Ind
 }
 
 
-void KBufferColumn::paintRange( QPainter *Painter, const QBrush &Brush, KSection Positions, int Flag )
+void KBufferColumn::paintRange( QPainter *Painter, const QBrush &Brush, const KHE::KSection &Positions, int Flag )
 {
   KPixelX RangeX = Flag & StartsBefore ? relRightXOfPos( Positions.start()-1 ) + 1 : relXOfPos( Positions.start() );
   KPixelX RangeW = (Flag & EndsLater ? relXOfPos( Positions.end()+1 ): relRightXOfPos( Positions.end() ) + 1)  - RangeX;
@@ -537,7 +540,7 @@ void KBufferColumn::paintRange( QPainter *Painter, const QBrush &Brush, KSection
 void KBufferColumn::paintByte( QPainter *Painter, int Index )
 {
   char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : EmptyByte;
-  KHEChar ByteChar = Codec->decode( Byte );
+  KHECore::KChar ByteChar = Codec->decode( Byte );
 
   const QWidget *Viewport = View->viewport();
   const QPalette &Palette = Viewport->palette();
@@ -572,7 +575,7 @@ void KBufferColumn::paintFramedByte( QPainter *Painter, int Index, KFrameStyle F
   paintByte( Painter, Index );
 
   char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : EmptyByte;
-  KHEChar ByteChar = Codec->decode( Byte );
+  KHECore::KChar ByteChar = Codec->decode( Byte );
 
   Painter->setPen( colorForChar(ByteChar) );
   if( FrameStyle == Frame )
@@ -587,24 +590,24 @@ void KBufferColumn::paintFramedByte( QPainter *Painter, int Index, KFrameStyle F
 void KBufferColumn::paintCursor( QPainter *Painter, int Index )
 {
   char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : EmptyByte;
-  KHEChar ByteChar = Codec->decode( Byte );
+  KHECore::KChar ByteChar = Codec->decode( Byte );
 
   Painter->fillRect( 0,0, ByteWidth,LineHeight, QBrush(colorForChar(ByteChar),Qt::SolidPattern) );
 }
 
 
-void KBufferColumn::drawByte( QPainter *P, char /*Byte*/, KHEChar ByteChar, const QColor &Color ) const
+void KBufferColumn::drawByte( QPainter *P, char /*Byte*/, KHECore::KChar ByteChar, const QColor &Color ) const
 {
   P->setPen( Color );
   P->drawText( 0, DigitBaseLine, ByteChar );
 }
 
 
-bool KBufferColumn::isSelected( KSection Range, KSection *Selection, unsigned int *Flag ) const
+bool KBufferColumn::isSelected( const KHE::KSection &Range, KHE::KSection *Selection, unsigned int *Flag ) const
 {
-  KSection S;
+  KHE::KSection S;
   unsigned int F = 0;
-  const KSection *OS = Ranges->firstOverlappingSelection( Range );
+  const KHE::KSection *OS = Ranges->firstOverlappingSelection( Range );
   if( !OS )
     return false;
   S = *OS;
@@ -629,11 +632,11 @@ bool KBufferColumn::isSelected( KSection Range, KSection *Selection, unsigned in
 }
 
 
-bool KBufferColumn::isMarked( KSection Range, KSection *Marking, unsigned int *Flag ) const
+bool KBufferColumn::isMarked( const KHE::KSection &Range, KHE::KSection *Marking, unsigned int *Flag ) const
 {
-  KSection M;
+  KHE::KSection M;
   unsigned int F = 0;
-  const KSection *OM = Ranges->overlappingMarking( Range );
+  const KHE::KSection *OM = Ranges->overlappingMarking( Range );
   if( !OM )
     return false;
   M = *OM;
@@ -655,4 +658,6 @@ bool KBufferColumn::isMarked( KSection Range, KSection *Marking, unsigned int *F
   *Marking = M;
   *Flag = F;
   return true;
+}
+
 }

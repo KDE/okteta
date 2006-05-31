@@ -27,8 +27,8 @@
 class KEBCDIC1047CharCodecKCharCodecIfTest : public KCharCodecIfTest
 {
   protected: // KCharCodecIfTest API
-    virtual KHE::KCharCodec *createCodec();
-    virtual void deleteCodec( KHE::KCharCodec *Codec );
+    virtual KHECore::KCharCodec *createCodec();
+    virtual void deleteCodec( KHECore::KCharCodec *Codec );
 };
 
 #endif

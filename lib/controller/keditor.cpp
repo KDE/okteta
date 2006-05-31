@@ -17,17 +17,18 @@
 
 // qt specific
 #include <QKeyEvent>
+// corelib specific
+#include <kabstractbytearraymodel.h>
+#include <kwordbufferservice.h>
 // lib specific
-#include "kabstractbytearraymodel.h"
 #include "kbufferranges.h"
 #include "kbufferlayout.h"
 #include "kbuffercursor.h"
-#include "kwordbufferservice.h"
 #include "khexedit.h"
 #include "keditor.h"
 
 
-using namespace KHE;
+namespace KHEUI {
 
 KEditor::KEditor( KBufferCursor *BC, KHexEdit* HE, KController *P )
   : KController( HE, P ),
@@ -130,7 +131,7 @@ void KEditor::doEditAction( KEditAction Action )
       {
         const int Index = BufferCursor->realIndex();
         if( Index < HexEdit->BufferLayout->length() )
-          HexEdit->ByteArrayModel->remove( KSection::fromWidth(Index,1) );
+          HexEdit->ByteArrayModel->remove( KHE::KSection::fromWidth(Index,1) );
       }
       break;
 
@@ -140,9 +141,9 @@ void KEditor::doEditAction( KEditAction Action )
           const int Index = BufferCursor->realIndex();
           if( Index < HexEdit->BufferLayout->length() )
           {
-            KWordBufferService WBS( HexEdit->ByteArrayModel, HexEdit->Codec );
+            KHECore::KWordBufferService WBS( HexEdit->ByteArrayModel, HexEdit->Codec );
             int End = WBS.indexOfBeforeNextWordStart( Index );
-            HexEdit->ByteArrayModel->remove( KSection(Index,End) );
+            HexEdit->ByteArrayModel->remove( KHE::KSection(Index,End) );
           }
         }
         break;
@@ -154,7 +155,7 @@ void KEditor::doEditAction( KEditAction Action )
       {
         int DeleteIndex = BufferCursor->realIndex() - 1;
         if( DeleteIndex >= 0 )
-          HexEdit->ByteArrayModel->remove( KSection::fromWidth(DeleteIndex,1) );
+          HexEdit->ByteArrayModel->remove( KHE::KSection::fromWidth(DeleteIndex,1) );
       }
       break;
     case WordBackspace:
@@ -162,13 +163,15 @@ void KEditor::doEditAction( KEditAction Action )
       int LeftIndex = BufferCursor->realIndex() - 1;
       if( LeftIndex >= 0 )
       {
-        KWordBufferService WBS( HexEdit->ByteArrayModel, HexEdit->Codec );
+        KHECore::KWordBufferService WBS( HexEdit->ByteArrayModel, HexEdit->Codec );
         int WordStart = WBS.indexOfPreviousWordStart( LeftIndex );
         if( !HexEdit->OverWrite )
-          HexEdit->ByteArrayModel->remove( KSection(WordStart,LeftIndex) );
+          HexEdit->ByteArrayModel->remove( KHE::KSection(WordStart,LeftIndex) );
       }
     }
   }
 
   HexEdit->ensureCursorVisible();
+}
+
 }

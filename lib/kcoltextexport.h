@@ -15,12 +15,12 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KCOLTEXTEXPORT_H
-#define KHE_KCOLTEXTEXPORT_H
+#ifndef KHE_UI_KCOLTEXTEXPORT_H
+#define KHE_UI_KCOLTEXTEXPORT_H
 
 class QString;
 
-namespace KHE
+namespace KHEUI
 {
 /**
  * interface for the text export of columns
@@ -32,8 +32,8 @@ class KColTextExport
     virtual ~KColTextExport();
 
   public: // API
-    virtual void printFirstLine( QString &T, int Line ) const = 0;
-    virtual void printNextLine( QString &T ) const = 0;
+    virtual void printFirstLine( QString *T, int Line ) const = 0;
+    virtual void printNextLine( QString *T ) const = 0;
     /** tells how much chars per line are needed */
     virtual int charsPerLine() const = 0;
 };

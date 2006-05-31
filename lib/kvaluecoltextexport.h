@@ -15,14 +15,16 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KVALUECOLTEXTEXPORT_H
-#define KHE_KVALUECOLTEXTEXPORT_H
+#ifndef KHE_UI_KVALUECOLTEXTEXPORT_H
+#define KHE_UI_KVALUECOLTEXTEXPORT_H
 
+// corelib specific
 #include "kbytecodec.h"
+// lib specific
 #include "kbuffercoltextexport.h"
 
 
-namespace KHE
+namespace KHEUI
 {
 
 class KValueColumn;
@@ -31,15 +33,15 @@ class KValueColumn;
 class KValueColTextExport : public KBufferColTextExport
 {
   public:
-    KValueColTextExport( const KValueColumn* BF, const char *D, KCoordRange CR );
+    KValueColTextExport( const KValueColumn* BF, const char *D, const KCoordRange &CR );
     virtual ~KValueColTextExport();
 
   protected:
-    virtual void print( QString &T ) const;
+    virtual void print( QString *T ) const;
 
 
   protected:
-    KByteCodec *ByteCodec;
+    KHECore::KByteCodec *ByteCodec;
 };
 
 }

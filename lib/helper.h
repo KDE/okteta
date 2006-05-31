@@ -23,7 +23,7 @@
 #include <khechar.h>
 
 // temporary solution until syntax highlighting is implemented
-static inline QColor colorForChar( const KHE::KHEChar Byte )
+static inline QColor colorForChar( const KHECore::KChar Byte )
 {
   return Byte.isUndefined() ? Qt::yellow : Byte.isPunct() ? Qt::red : Byte.isPrint() ? Qt::black : Qt::blue;
 }

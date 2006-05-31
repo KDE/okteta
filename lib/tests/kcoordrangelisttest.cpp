@@ -22,7 +22,7 @@
 // test specific
 #include "kcoordrangelisttest.h"
 
-using namespace KHE;
+using namespace KHEUI;
 
 // local variables
 static const int Pos1 = 15;

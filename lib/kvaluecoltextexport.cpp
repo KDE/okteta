@@ -22,11 +22,11 @@
 #include "helper.h"
 
 
-using namespace KHE;
+namespace KHEUI {
 
-KValueColTextExport::KValueColTextExport( const KValueColumn* HC, const char *D, KCoordRange CR )
+KValueColTextExport::KValueColTextExport( const KValueColumn* HC, const char *D, const KCoordRange &CR )
   : KBufferColTextExport( HC, D, CR, HC->byteCodec()->encodingWidth() ),
-   ByteCodec( KByteCodec::createCodec(HC->coding()) )
+   ByteCodec( KHECore::KByteCodec::createCodec(HC->coding()) )
 {
 }
 
@@ -38,7 +38,7 @@ KValueColTextExport::~KValueColTextExport()
 
 
 
-void KValueColTextExport::print( QString &T ) const
+void KValueColTextExport::print( QString *T ) const
 {
   int p = 0;
   int pEnd = NoOfBytesPerLine;
@@ -57,13 +57,14 @@ void KValueColTextExport::print( QString &T ) const
     // get next position
     uint t = Pos[p];
     // clear spacing
-    T.append( whiteSpace(t-e) );
+    T->append( whiteSpace(t-e) );
     ByteCodec->encode( E, 0, *PrintData );
-    T.append( E );
+    T->append( E );
     e = t + ByteCodec->encodingWidth();
   }
 
-  T.append( whiteSpace(NoOfCharsPerLine-e) );
+  T->append( whiteSpace(NoOfCharsPerLine-e) );
   ++PrintLine;
 }
 
+}

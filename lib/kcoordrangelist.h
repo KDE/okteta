@@ -15,15 +15,15 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KCOORDRANGELIST_H
-#define KHE_KCOORDRANGELIST_H
+#ifndef KHE_UI_KCOORDRANGELIST_H
+#define KHE_UI_KCOORDRANGELIST_H
 
 // qt specific
 #include <QLinkedList>
 // lib specific
 #include "kcoordrange.h"
 
-namespace KHE {
+namespace KHEUI {
 
 /**
 @author Friedrich W. H.  Kossebau

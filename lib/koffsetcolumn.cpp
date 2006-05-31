@@ -20,7 +20,8 @@
 #include "kcolumnsview.h"
 #include "koffsetcolumn.h"
 
-using namespace KHE;
+
+namespace KHEUI {
 
 KOffsetColumn::KOffsetColumn( KColumnsView *V, int FLO, int D, KOffsetFormat::KFormat F )
  : KColumn( V ),
@@ -55,7 +56,7 @@ void KOffsetColumn::paintLine( QPainter *P, int Line )
 }
 
 
-void KOffsetColumn::paintFirstLine( QPainter *P, KPixelXs, int FirstLine )
+void KOffsetColumn::paintFirstLine( QPainter *P, const KPixelXs &, int FirstLine )
 {
   PaintLine = FirstLine;
   paintLine( P, PaintLine++ );
@@ -69,8 +70,9 @@ void KOffsetColumn::paintNextLine( QPainter *P )
 
 
 
-void KOffsetColumn::paintEmptyColumn( QPainter *P, KPixelXs Xs, KPixelYs Ys )
+void KOffsetColumn::paintEmptyColumn( QPainter *P, const KPixelXs &_Xs, const KPixelYs &Ys )
 {
+  KPixelXs Xs( _Xs );
   Xs.restrictTo( XSpan );
 
   const QBrush &ButtonBrush = View->viewport()->palette().button();
@@ -112,4 +114,6 @@ void KOffsetColumn::recalcX()
 {
   // recalculate depend sizes
   setWidth( CodingWidth * DigitWidth );
+}
+
 }

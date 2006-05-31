@@ -18,8 +18,8 @@
 // lib specific
 #include "kdecimalbytecodec.h"
 
-using namespace KHE;
 
+namespace KHECore {
 
 void KDecimalByteCodec::encode( QString &Digits, unsigned int Pos, unsigned char Char ) const
 {
@@ -89,4 +89,6 @@ bool KDecimalByteCodec::appendDigit( unsigned char *Byte, unsigned char Digit ) 
 void KDecimalByteCodec::removeLastDigit( unsigned char *Byte ) const
 {
   *Byte /= 10;
+}
+
 }

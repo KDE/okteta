@@ -15,13 +15,13 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KEBCDIC1047CHARCODEC_H
-#define KHE_KEBCDIC1047CHARCODEC_H
+#ifndef KHE_CORE_KEBCDIC1047CHARCODEC_H
+#define KHE_CORE_KEBCDIC1047CHARCODEC_H
 
-
+// lib specific
 #include "kcharcodec.h"
 
-namespace KHE
+namespace KHECore
 {
 
 //
@@ -31,7 +31,7 @@ class KEBCDIC1047CharCodec : public KCharCodec
     KEBCDIC1047CharCodec();
 
   public: // KCharCodec API
-    virtual KHEChar decode( char Byte ) const;
+    virtual KChar decode( char Byte ) const;
     virtual bool encode( char *D, const QChar &C ) const;
     virtual const QString& name() const;
 

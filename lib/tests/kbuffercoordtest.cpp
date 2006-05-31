@@ -21,7 +21,7 @@
 #include <kbuffercoord.h>
 #include "kbuffercoordtest.h"
 
-using namespace KHE;
+using namespace KHEUI;
 
 // local variables
 static const int Line = 3;

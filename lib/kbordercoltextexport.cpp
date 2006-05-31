@@ -21,7 +21,7 @@
 #include "kbordercoltextexport.h"
 
 
-using namespace KHE;
+namespace KHEUI {
 
 static const uint BorderColumnTEWidth = 3;
 
@@ -31,17 +31,19 @@ int KBorderColTextExport::charsPerLine() const
   return BorderColumnTEWidth;
 }
 
-void KBorderColTextExport::printFirstLine( QString &T, int /*Line*/ ) const
+void KBorderColTextExport::printFirstLine( QString *T, int /*Line*/ ) const
 {
   print( T );
 }
 
-void KBorderColTextExport::printNextLine( QString &T ) const
+void KBorderColTextExport::printNextLine( QString *T ) const
 {
   print( T );
 }
 
-void KBorderColTextExport::print( QString &T ) const
+void KBorderColTextExport::print( QString *T ) const
 {
-  T.append( " | " );
+  T->append( " | " );
+}
+
 }

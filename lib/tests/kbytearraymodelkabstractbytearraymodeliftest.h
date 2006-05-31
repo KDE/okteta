@@ -27,8 +27,8 @@
 class KByteArrayModelKAbstractByteArrayModelIfTest : public KAbstractByteArrayModelIfTest
 {
   protected: // KAbstractByteArrayModelIfTest API
-    KHE::KAbstractByteArrayModel *createByteArrayModel();
-    void deleteByteArrayModel( KHE::KAbstractByteArrayModel *ByteArrayModel );
+    KHECore::KAbstractByteArrayModel *createByteArrayModel();
+    void deleteByteArrayModel( KHECore::KAbstractByteArrayModel *ByteArrayModel );
 };
 
 #endif

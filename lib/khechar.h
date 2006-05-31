@@ -14,20 +14,21 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KHE_KHECHAR_H
-#define KHE_KHECHAR_H
+
+#ifndef KHE_CORE_KHECHAR_H
+#define KHE_CORE_KHECHAR_H
 
 // qt specific
 #include <QString>
 
-namespace KHE
+namespace KHECore
 {
 
-class KHEChar : public QChar
+class KChar : public QChar
 {
   public:
-    KHEChar( QChar C );
-    KHEChar( QChar C, bool U );
+    KChar( QChar C );
+    KChar( QChar C, bool U );
   public:
     bool isUndefined() const;
   protected:
@@ -35,9 +36,9 @@ class KHEChar : public QChar
     bool IsUndefined:1;
 };
 
-inline KHEChar::KHEChar( QChar C ) : QChar( C ), IsUndefined( false ) {}
-inline KHEChar::KHEChar( QChar C, bool U ) : QChar( C ), IsUndefined( U ) {}
-inline bool KHEChar::isUndefined() const { return IsUndefined; }
+inline KChar::KChar( QChar C ) : QChar( C ), IsUndefined( false ) {}
+inline KChar::KChar( QChar C, bool U ) : QChar( C ), IsUndefined( U ) {}
+inline bool KChar::isUndefined() const { return IsUndefined; }
 
 }
 

@@ -25,7 +25,7 @@
 #include "ktextcharcodectest.h"
 
 
-using namespace KHE;
+using namespace KHECore;
 
 
 void KTextCharCodecTest::initTestCase()

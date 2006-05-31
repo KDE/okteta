@@ -20,12 +20,12 @@
 #include "kcharcodec.h"
 #include "kwordbufferservice.h"
 
-using namespace KHE;
+namespace KHECore {
 
 
 bool KWordBufferService::isWordChar( unsigned int Index ) const
 {
-  KHEChar C = CharCodec->decode( Buffer->datum(Index) );
+  KChar C = CharCodec->decode( Buffer->datum(Index) );
   return !C.isUndefined() && C.isLetterOrNumber();
 }
 
@@ -207,3 +207,5 @@ int KWordBufferService::indexOfBehindLeftWordEnd( unsigned int Index ) const
   return 0;
 }
 */
+
+}

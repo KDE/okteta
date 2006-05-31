@@ -15,32 +15,33 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KCHARCOLTEXTEXPORT_H
-#define KHE_KCHARCOLTEXTEXPORT_H
+#ifndef KHE_UI_KCHARCOLTEXTEXPORT_H
+#define KHE_UI_KCHARCOLTEXTEXPORT_H
 
 // lib specific
 #include "khe.h"
 #include "kbuffercoltextexport.h"
 
+namespace KHECore {
+class KCharCodec;
+}
 
-namespace KHE
+namespace KHEUI
 {
 
 class KCharColumn;
-class KCharCodec;
-
 
 class KCharColTextExport : public KBufferColTextExport
 {
   public:
-    KCharColTextExport( const KCharColumn* BF, const char *D, KCoordRange CR, const QString &CodecName );
+    KCharColTextExport( const KCharColumn* BF, const char *D, const KCoordRange &CR, const QString &CodecName );
     virtual ~KCharColTextExport();
 
   protected: //API
-    virtual void print( QString &T ) const;
+    virtual void print( QString *T ) const;
 
   protected:
-    KCharCodec *CharCodec;
+    KHECore::KCharCodec *CharCodec;
     QChar SubstituteChar;
     QChar UndefinedChar;
 };

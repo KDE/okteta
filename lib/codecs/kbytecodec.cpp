@@ -21,8 +21,8 @@
 #include "kdecimalbytecodec.h"
 #include "khexadecimalbytecodec.h"
 
-using namespace KHE;
 
+namespace KHECore {
 
 KByteCodec *KByteCodec::createCodec( KCoding C )
 {
@@ -60,4 +60,6 @@ unsigned int KByteCodec::decode( unsigned char *Char, const QString &Digits, uin
 
   *Char = C;
   return Pos - P;
+}
+
 }

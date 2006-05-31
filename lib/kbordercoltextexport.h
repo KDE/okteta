@@ -15,25 +15,26 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KBORDERCOLTEXTEXPORT_H
-#define KHE_KBORDERCOLTEXTEXPORT_H
+#ifndef KHE_UI_KBORDERCOLTEXTEXPORT_H
+#define KHE_UI_KBORDERCOLTEXTEXPORT_H
 
+// lib specific
 #include "kcoltextexport.h"
 
-namespace KHE
+namespace KHEUI
 {
 
 class KBorderColTextExport : public KColTextExport
 {
   public: // API
 	virtual ~KBorderColTextExport(){}
-    void printFirstLine( QString &T, int Line ) const;
-    void printNextLine( QString &T) const;
+    void printFirstLine( QString *T, int Line ) const;
+    void printNextLine( QString *T) const;
     /** tells how much chars per line are needed */
     int charsPerLine() const ;
 
   protected:
-    void print( QString &T ) const;
+    void print( QString *T ) const;
 };
 
 }

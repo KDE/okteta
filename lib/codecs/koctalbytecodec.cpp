@@ -18,8 +18,8 @@
 // lib specific
 #include "koctalbytecodec.h"
 
-using namespace KHE;
 
+namespace KHECore {
 
 void KOctalByteCodec::encode( QString &Digits, unsigned int Pos, unsigned char Char ) const
 {
@@ -77,4 +77,6 @@ bool KOctalByteCodec::appendDigit( unsigned char *Byte, unsigned char Digit ) co
 void KOctalByteCodec::removeLastDigit( unsigned char *Byte ) const
 {
   *Byte >>= 3;
+}
+
 }

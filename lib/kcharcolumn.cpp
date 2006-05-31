@@ -30,14 +30,15 @@
 #include "kbufferranges.h"
 #include "kcharcolumn.h"
 
-using namespace KHE;
+
+namespace KHEUI {
 
 static const bool      DefaultShowUnprintable = false;
 static const QChar     DefaultSubstituteChar =  (char)'.';
 static const QChar     DefaultUndefinedChar =   (char)'?';
 
 
-KCharColumn::KCharColumn( KColumnsView *CV, KAbstractByteArrayModel *B, KBufferLayout *L, KBufferRanges *R )
+KCharColumn::KCharColumn( KColumnsView *CV, KHECore::KAbstractByteArrayModel *B, KBufferLayout *L, KBufferRanges *R )
  : KBufferColumn( CV, B, L, R ),
    ShowUnprintable( DefaultShowUnprintable ),
    SubstituteChar( DefaultSubstituteChar ),
@@ -52,13 +53,15 @@ KCharColumn::~KCharColumn()
 }
 
 
-void KCharColumn::drawByte( QPainter *Painter, char /*Byte*/, KHEChar B, const QColor &Color ) const
+void KCharColumn::drawByte( QPainter *Painter, char /*Byte*/, KHECore::KChar B, const QColor &Color ) const
 {
   // turn into a drawable String
-  QString BS( B.isUndefined() ?                   KHEChar(UndefinedChar) :
-              !(ShowUnprintable || B.isPrint()) ? KHEChar(SubstituteChar) :
+  QString BS( B.isUndefined() ?                   KHECore::KChar(UndefinedChar) :
+              !(ShowUnprintable || B.isPrint()) ? KHECore::KChar(SubstituteChar) :
                 B );
 
   Painter->setPen( Color );
   Painter->drawText( 0, DigitBaseLine, BS );
+}
+
 }

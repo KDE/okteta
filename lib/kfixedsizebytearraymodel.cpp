@@ -20,7 +20,7 @@
 // lib specific
 #include "kfixedsizebytearraymodel.h"
 
-using namespace KHE;
+using namespace KHECore;
 
 KFixedSizeByteArrayModel::KFixedSizeByteArrayModel( char *D, unsigned int S, char FUC )
   : Data( D ),

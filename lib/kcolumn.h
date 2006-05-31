@@ -15,17 +15,18 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KCOLUMN_H
-#define KHE_KCOLUMN_H
+#ifndef KHE_UI_KCOLUMN_H
+#define KHE_UI_KCOLUMN_H
 
 
+// commonlib specific
+#include <ksection.h>
 // lib specific
 #include "kadds.h"
-#include "ksection.h"
 
 class QPainter;
 
-namespace KHE
+namespace KHEUI
 {
 
 class KColumnsView;
@@ -55,14 +56,14 @@ class KColumn
       * @param cw
       * @param FirstLine no of the first of the range of lines to paint
       */
-    virtual void paintFirstLine( QPainter *P, KPixelXs Xs, int FirstLine );
+    virtual void paintFirstLine( QPainter *P, const KPixelXs &Xs, int FirstLine );
     /** the actual painting call for a column's line.
       * The default implementation simply paints the background
       */
     virtual void paintNextLine( QPainter *P );
 
     /** */
-    virtual void paintEmptyColumn( QPainter *P, KPixelXs Xs, KPixelYs Ys );
+    virtual void paintEmptyColumn( QPainter *P, const KPixelXs &Xs, const KPixelYs &Ys );
 
   public: // modification access
     /** sets starting point of the column */
@@ -86,7 +87,7 @@ class KColumn
 
   public: // functional logic
     /** true if column overlaps with pixels between x-positions x1, x2 */
-    bool overlaps( KPixelXs Xs ) const;
+    bool overlaps( const KPixelXs &Xs ) const;
 
   protected:
     /** sets width of the column */
@@ -119,7 +120,7 @@ inline void KColumn::setWidth( KPixelX W )      { XSpan.setEndByWidth( W ); }
 inline void KColumn::setVisible( bool V )       { Visible = V; }
 inline void KColumn::setLineHeight( KPixelY H ) { LineHeight = H; }
 
-inline bool KColumn::overlaps( KPixelXs Xs ) const { return XSpan.overlaps(Xs); }
+inline bool KColumn::overlaps( const KPixelXs &Xs ) const { return XSpan.overlaps(Xs); }
 
 }
 

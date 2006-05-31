@@ -42,9 +42,13 @@
 #ifndef QT_ONLY
 #include <kglobalsettings.h>
 #endif
+// corelib specific
+#include <kabstractbytearraymodel.h>
+#include <kbytearraymodel.h>
+#include <kbytecodec.h>
+#include <kcharcodec.h>
+#include <kwordbufferservice.h>
 // lib specific
-#include "kabstractbytearraymodel.h"
-#include "kbytearraymodel.h"
 #include "koffsetcolumn.h"
 #include "kvaluecolumn.h"
 #include "kcharcolumn.h"
@@ -58,12 +62,10 @@
 #include "controller/kchareditor.h"
 #include "kbufferdrag.h"
 #include "kcursor.h"
-#include "kbytecodec.h"
-#include "kcharcodec.h"
-#include "kwordbufferservice.h"
 #include "khexedit.h"
 
-using namespace KHE;
+
+namespace KHEUI {
 
 // zooming is done in steps of font size points
 static const int DefaultZoomStep = 1;
@@ -77,7 +79,7 @@ static const int InsertCursorWidth = 2;
 
 
 
-KHexEdit::KHexEdit( KAbstractByteArrayModel *Buffer, QWidget *Parent )
+KHexEdit::KHexEdit( KHECore::KAbstractByteArrayModel *Buffer, QWidget *Parent )
  : KColumnsView( Parent ),
    ByteArrayModel( Buffer ),
    BufferLayout( new KBufferLayout(DefaultNoOfBytesPerLine,DefaultStartOffset,0) ),
@@ -107,7 +109,7 @@ KHexEdit::KHexEdit( KAbstractByteArrayModel *Buffer, QWidget *Parent )
 {
   // initialize layout
   if( !ByteArrayModel )
-    ByteArrayModel = new KByteArrayModel; // TODO: leaking, make it shared
+    ByteArrayModel = new KHECore::KByteArrayModel; // TODO: leaking, make it shared
   connect( ByteArrayModel, SIGNAL(contentsChanged(int,int)), SLOT(updateRange(int,int)) );
   connect( ByteArrayModel, SIGNAL(contentsReplaced(int,int,int)), SLOT(onContentsReplaced(int,int,int)) );
   connect( ByteArrayModel, SIGNAL(contentsMoved(int,int,int)), SLOT(onContentsMoved(int,int,int)) );
@@ -127,7 +129,7 @@ KHexEdit::KHexEdit( KAbstractByteArrayModel *Buffer, QWidget *Parent )
   InactiveColumn = &valueColumn();
 
   // set encoding
-  Codec = KCharCodec::createCodec( (KHE::KEncoding)DefaultEncoding );
+  Codec = KHECore::KCharCodec::createCodec( (KHECore::KEncoding)DefaultEncoding );
   valueColumn().setCodec( Codec );
   charColumn().setCodec( Codec );
   Encoding = DefaultEncoding;
@@ -193,7 +195,7 @@ const QString &KHexEdit::encodingName()        const { return Codec->name(); }
 int KHexEdit::cursorPosition() const { return BufferCursor->index(); }
 bool KHexEdit::isCursorBehind() const { return BufferCursor->isBehind(); }
 KHexEdit::KBufferColumnId KHexEdit::cursorColumn() const
-{ return static_cast<KHE::KValueColumn *>( ActiveColumn ) == &valueColumn()? ValueColumnId : CharColumnId; }
+{ return static_cast<KHEUI::KValueColumn *>( ActiveColumn ) == &valueColumn()? ValueColumnId : CharColumnId; }
 
 void KHexEdit::setOverwriteOnly( bool OO )    { OverWriteOnly = OO; if( OverWriteOnly ) setOverwriteMode( true ); }
 void KHexEdit::setModified( bool M )          { ByteArrayModel->setModified(M); }
@@ -227,7 +229,7 @@ void KHexEdit::setOverwriteMode( bool OM )
 }
 
 
-void KHexEdit::setDataBuffer( KAbstractByteArrayModel *B )
+void KHexEdit::setDataBuffer( KHECore::KAbstractByteArrayModel *B )
 {
   disconnect( ByteArrayModel, SIGNAL(contentsChanged(int,int)),
               this, SLOT(updateRange(int,int)) );
@@ -304,7 +306,7 @@ void KHexEdit::setCoding( KCoding C )
 {
   uint OldCodingWidth = valueColumn().byteCodec()->encodingWidth();
 
-  if( !valueColumn().setCoding((KHE::KCoding)C) )
+  if( !valueColumn().setCoding((KHECore::KCoding)C) )
     return;
 
   uint NewCodingWidth = valueColumn().byteCodec()->encodingWidth();
@@ -404,7 +406,7 @@ void KHexEdit::setEncoding( KEncoding C )
   if( Encoding == C )
     return;
 
-  KCharCodec *NC = KCharCodec::createCodec( (KHE::KEncoding)C );
+  KHECore::KCharCodec *NC = KHECore::KCharCodec::createCodec( (KHECore::KEncoding)C );
   if( NC == 0 )
     return;
 
@@ -427,7 +429,7 @@ void KHexEdit::setEncoding( const QString& EncodingName )
   if( EncodingName == Codec->name() )
     return;
 
-  KCharCodec *NC = KCharCodec::createCodec( EncodingName );
+  KHECore::KCharCodec *NC = KHECore::KCharCodec::createCodec( EncodingName );
   if( NC == 0 )
     return;
 
@@ -753,8 +755,8 @@ bool KHexEdit::selectWord( /*unsigned TODO:change all unneeded signed into unsig
 {
   if( Index >= 0 && Index < BufferLayout->length()  )
   {
-    KWordBufferService WBS( ByteArrayModel, Codec );
-    KSection WordSection = WBS.wordSection( Index );
+    KHECore::KWordBufferService WBS( ByteArrayModel, Codec );
+    KHE::KSection WordSection = WBS.wordSection( Index );
     if( WordSection.isValid() )
     {
       pauseCursor();
@@ -779,7 +781,7 @@ void KHexEdit::selectAll( bool Select )
     BufferRanges->removeSelection();
   else
   {
-    BufferRanges->setSelection( KSection(0,BufferLayout->length()-1) );
+    BufferRanges->setSelection( KHE::KSection(0,BufferLayout->length()-1) );
     BufferCursor->gotoEnd();
   }
 
@@ -805,7 +807,7 @@ QByteArray KHexEdit::selectedData() const
   if( !BufferRanges->hasSelection() )
     return QByteArray();
 
-  KSection Selection = BufferRanges->selection();
+  KHE::KSection Selection = BufferRanges->selection();
   QByteArray SD;
   SD.resize( Selection.width() );
   ByteArrayModel->copyTo( SD.data(), Selection.start(), Selection.width() );
@@ -823,7 +825,7 @@ KBufferDrag *KHexEdit::dragObject() const
   const KCharColumn *TC;
   KCoordRange Range;
 
-  if( static_cast<KHE::KCharColumn *>( ActiveColumn ) == &charColumn() )
+  if( static_cast<KHEUI::KCharColumn *>( ActiveColumn ) == &charColumn() )
   {
     OC = 0;
     HC = 0;
@@ -900,7 +902,7 @@ void KHexEdit::insert( const QByteArray &Data )
     {
       // replacing the selection:
       // we restrict the replacement to the minimum length of selection and input
-      KSection Selection = BufferRanges->removeSelection();
+      KHE::KSection Selection = BufferRanges->removeSelection();
       Selection.restrictEndByWidth( Data.size() );
       ByteArrayModel->replace( Selection, Data.data(), Selection.width() );
     }
@@ -909,7 +911,7 @@ void KHexEdit::insert( const QByteArray &Data )
       if( !BufferCursor->isBehind() )
       {
         // replacing the normal data, at least until the end
-        KSection InsertRange = KSection::fromWidth( BufferCursor->realIndex(), Data.size() );
+        KHE::KSection InsertRange = KHE::KSection::fromWidth( BufferCursor->realIndex(), Data.size() );
         InsertRange.restrictEndTo( BufferLayout->length()-1 );
         ByteArrayModel->replace( InsertRange, Data.data(), InsertRange.width() );
       }
@@ -920,7 +922,7 @@ void KHexEdit::insert( const QByteArray &Data )
     if( BufferRanges->hasSelection() )
     {
       // replacing the selection
-      KSection Selection = BufferRanges->removeSelection();
+      KHE::KSection Selection = BufferRanges->removeSelection();
       ByteArrayModel->replace( Selection, Data );
     }
     else
@@ -937,7 +939,7 @@ void KHexEdit::removeSelectedData()
   if( isReadOnly() || OverWrite || ValueEditor->isInEditMode() )
     return;
 
-  KSection Selection = BufferRanges->removeSelection();
+  KHE::KSection Selection = BufferRanges->removeSelection();
 
   ByteArrayModel->remove( Selection );
 
@@ -1382,7 +1384,7 @@ void KHexEdit::updateChanged()
     KPixelYs Ys = KPixelYs::fromWidth( yOffset(), visibleHeight() );
 
     // calculate affected lines/indizes
-    KSection FullPositions( 0, BufferLayout->noOfBytesPerLine()-1 );
+    KHE::KSection FullPositions( 0, BufferLayout->noOfBytesPerLine()-1 );
     KCoordRange VisibleRange( FullPositions, visibleLines(Ys) );
 
     KCoordRange ChangedRange;
@@ -1398,7 +1400,7 @@ void KHexEdit::updateChanged()
         while( it.hasNext() )
         {
           KPixelXs XPixels =
-            it.next()->wideXPixelsOfPos( KSection(ChangedRange.start().pos(),ChangedRange.end().pos()) );
+            it.next()->wideXPixelsOfPos( KHE::KSection(ChangedRange.start().pos(),ChangedRange.end().pos()) );
 
           viewport()->update( XPixels.start()-xOffset(), cy, XPixels.width(), LineHeight );
         }
@@ -1410,7 +1412,7 @@ void KHexEdit::updateChanged()
         while( it.hasNext() )
         {
           KPixelXs XPixels =
-            it.next()->wideXPixelsOfPos( KSection(ChangedRange.start().pos(),FullPositions.end()) );
+            it.next()->wideXPixelsOfPos( KHE::KSection(ChangedRange.start().pos(),FullPositions.end()) );
 
           viewport()->update( XPixels.start()-xOffset(), cy, XPixels.width(), LineHeight );
         }
@@ -1435,7 +1437,7 @@ void KHexEdit::updateChanged()
         while( it.hasNext() )
         {
           KPixelXs XPixels =
-            it.next()->wideXPixelsOfPos( KSection(FullPositions.start(),ChangedRange.end().pos()) );
+            it.next()->wideXPixelsOfPos( KHE::KSection(FullPositions.start(),ChangedRange.end().pos()) );
 
           viewport()->update( XPixels.start()-xOffset(), cy, XPixels.width(), LineHeight );
         }
@@ -1722,8 +1724,8 @@ void KHexEdit::handleMouseMove( const QPoint& Point ) // handles the move of the
   if( InDoubleClick && BufferRanges->hasFirstWordSelection() )
   {
     int NewIndex = BufferCursor->realIndex();
-    KSection FirstWordSelection = BufferRanges->firstWordSelection();
-    KWordBufferService WBS( ByteArrayModel, Codec );
+    KHE::KSection FirstWordSelection = BufferRanges->firstWordSelection();
+    KHECore::KWordBufferService WBS( ByteArrayModel, Codec );
     // are we before the selection?
     if( NewIndex < FirstWordSelection.start() )
     {
@@ -1846,7 +1848,7 @@ void KHexEdit::dropEvent( QDropEvent *Event )
 void KHexEdit::handleInternalDrag( QDropEvent *Event )
 {
   // get drag origin
-  KSection Selection = BufferRanges->removeSelection();
+  KHE::KSection Selection = BufferRanges->removeSelection();
   int InsertIndex = BufferCursor->realIndex();
 
   // is this a move?
@@ -1857,7 +1859,7 @@ void KHexEdit::handleInternalDrag( QDropEvent *Event )
     if( NewIndex != Selection.start() )
     {
       BufferCursor->gotoCIndex( NewIndex+Selection.width() );
-      BufferRanges->addChangedRange( KSection(qMin(InsertIndex,Selection.start()), qMax(InsertIndex,Selection.end())) );
+      BufferRanges->addChangedRange( KHE::KSection(qMin(InsertIndex,Selection.start()), qMax(InsertIndex,Selection.end())) );
     }
   }
   // is a copy
@@ -1872,7 +1874,7 @@ void KHexEdit::handleInternalDrag( QDropEvent *Event )
       {
         if( !BufferCursor->isBehind() )
         {
-          KSection OverwriteRange = KSection::fromWidth( InsertIndex, Data.size() );
+          KHE::KSection OverwriteRange = KHE::KSection::fromWidth( InsertIndex, Data.size() );
           OverwriteRange.restrictEndTo( BufferLayout->length()-1 );
           if( OverwriteRange.isValid() )
             ByteArrayModel->replace( OverwriteRange, Data.data(), OverwriteRange.width() );
@@ -1947,5 +1949,7 @@ void KHexEdit::contextMenuEvent( QContextMenuEvent *Event )
     paste();
 }
 #endif
+
+}
 
 #include "khexedit.moc"

@@ -15,15 +15,15 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KVALUEEDITOR_H
-#define KHE_KVALUEEDITOR_H
+#ifndef KHE_UI_KVALUEEDITOR_H
+#define KHE_UI_KVALUEEDITOR_H
 
 
 // lib specific
 #include "keditor.h"
 
 
-namespace KHE
+namespace KHEUI
 {
 
 class KValueColumn;

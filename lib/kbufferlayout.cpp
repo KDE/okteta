@@ -15,10 +15,10 @@
  ***************************************************************************/
 
 
+// lib specific
 #include "kbufferlayout.h"
 
-using namespace KHE;
-
+namespace KHEUI {
 
 
 KBufferLayout::KBufferLayout( int NoBpL, int SO, int L )
@@ -176,7 +176,7 @@ KBufferCoord KBufferLayout::coordOfIndex( int Index ) const
   return KBufferCoord::fromIndex( Index+StartOffset, NoOfBytesPerLine );
 }
 
-KCoordRange KBufferLayout::coordRangeOfIndizes( const KSection &Indizes ) const
+KCoordRange KBufferLayout::coordRangeOfIndizes( const KHE::KSection &Indizes ) const
 {
   return KCoordRange(
            KBufferCoord::fromIndex(Indizes.start()+StartOffset, NoOfBytesPerLine),
@@ -215,9 +215,9 @@ bool KBufferLayout::atLineEnd( const KBufferCoord &C ) const
 }
 
 
-KSection KBufferLayout::positions( int Line ) const
+KHE::KSection KBufferLayout::positions( int Line ) const
 {
-  return KSection( firstPos(Line), lastPos(Line) );
+  return KHE::KSection( firstPos(Line), lastPos(Line) );
 }
 
 
@@ -244,4 +244,6 @@ int KBufferLayout::lastPos( int Line ) const
 bool KBufferLayout::hasContent( int Line ) const
 {
   return ContentCoords.includesLine( Line );
+}
+
 }

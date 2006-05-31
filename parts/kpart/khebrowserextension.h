@@ -21,8 +21,6 @@
 // kde specific
 #include <kparts/browserextension.h>
 
-namespace KHE
-{
 
 // forward declaration
 class KHexEditPart;
@@ -52,7 +50,5 @@ class KHexEditBrowserExtension : public KParts::BrowserExtension
   protected:
     KHexEditPart *HexEditPart;
 };
-
-}
 
 #endif

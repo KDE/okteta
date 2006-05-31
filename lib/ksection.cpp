@@ -18,7 +18,7 @@
 // lib specific
 #include "ksection.h"
 
-using namespace KHE;
+namespace KHE {
 
 void KSection::adaptToChange( int Pos, int RemovedLength, int InsertedLength )
 {
@@ -58,4 +58,6 @@ void KSection::adaptToChange( int Pos, int RemovedLength, int InsertedLength )
         moveEndBy( InsertedLength-RemovedLength );
     }
   }
+}
+
 }

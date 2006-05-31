@@ -23,7 +23,7 @@
 #include "kbordercolumn.h"
 
 
-using namespace KHE;
+namespace KHEUI {
 
 static const KPixelX DefaultWidth = 9;
 static const KPixelX LineX = DefaultWidth / 2;
@@ -59,7 +59,7 @@ void KBorderColumn::paintLine( QPainter *Painter )
 }
 
 
-void KBorderColumn::paintFirstLine( QPainter *Painter, KPixelXs , int )
+void KBorderColumn::paintFirstLine( QPainter *Painter, const KPixelXs &, int )
 {
   paintLine( Painter );
 }
@@ -70,7 +70,7 @@ void KBorderColumn::paintNextLine( QPainter *Painter )
   paintLine( Painter );
 }
 
-void KBorderColumn::paintEmptyColumn( QPainter *Painter, KPixelXs Xs, KPixelYs Ys )
+void KBorderColumn::paintEmptyColumn( QPainter *Painter, const KPixelXs &Xs, const KPixelYs &Ys )
 {
   KColumn::paintEmptyColumn( Painter, Xs,Ys );
 
@@ -84,4 +84,6 @@ void KBorderColumn::paintEmptyColumn( QPainter *Painter, KPixelXs Xs, KPixelYs Y
     Painter->setPen( GridColor != -1 ? (QRgb)GridColor : Viewport->palette().mid().color() );
     Painter->drawLine( LX, Ys.start(), LX, Ys.end() ) ;
   }
+}
+
 }

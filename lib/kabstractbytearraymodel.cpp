@@ -20,7 +20,7 @@
 // lib specific
 #include "kabstractbytearraymodel.h"
 
-using namespace KHE;
+namespace KHECore {
 
 
 int KAbstractByteArrayModel::insert( int Pos, const char* D, int Length )
@@ -48,6 +48,8 @@ int KAbstractByteArrayModel::copyTo( char* Dest, const KSection &S ) const
   for( int i=Source.start(); i<=Source.end(); ++i )
     *Dest++ = datum( i );
   return Source.width();
+}
+
 }
 
 #include "kabstractbytearraymodel.moc"

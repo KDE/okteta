@@ -15,14 +15,16 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KBUFFERLAYOUT_H
-#define KHE_KBUFFERLAYOUT_H
+#ifndef KHE_UI_KBUFFERLAYOUT_H
+#define KHE_UI_KBUFFERLAYOUT_H
 
+// commonlib specific
+#include <ksection.h>
 // lib specific
 #include "kcoordrange.h"
-#include "ksection.h"
 
-namespace KHE {
+
+namespace KHEUI {
 
 /**@short the logical layout of a plain buffer view
   *
@@ -117,10 +119,10 @@ class KBufferLayout
     /** calculates the coord in which index is found. if index is invalid the behaviour is undefinded */
     KBufferCoord coordOfIndex( int Index ) const;
     /** calculates the range of coords in which the indizes are found. if indizes are invalid the behaviour is undefinded */
-    KCoordRange coordRangeOfIndizes( const KSection &Indizes ) const;
+    KCoordRange coordRangeOfIndizes( const KHE::KSection &Indizes ) const;
 
     /** returns the used positions in line */
-    KSection positions( int Line ) const;
+    KHE::KSection positions( int Line ) const;
     /** returns the first Pos in line. if line is invalid the behaviour is undefinded */
     int firstPos( int Line ) const;
     /** returns the last Pos in line. if line is invalid the behaviour is undefinded */

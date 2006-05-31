@@ -21,12 +21,12 @@
 #include "kcharcodec.h"
 #include "kcharcoltextexport.h"
 
-using namespace KHE;
 
+namespace KHEUI {
 
-KCharColTextExport::KCharColTextExport( const KCharColumn* TC, const char *D, KCoordRange CR, const QString &CodecName )
+KCharColTextExport::KCharColTextExport( const KCharColumn* TC, const char *D, const KCoordRange &CR, const QString &CodecName )
  : KBufferColTextExport( TC, D, CR, 1 ),
-   CharCodec( KCharCodec::createCodec(CodecName) ),
+   CharCodec( KHECore::KCharCodec::createCodec(CodecName) ),
    SubstituteChar( TC->substituteChar() ),
    UndefinedChar( TC->undefinedChar() )
 {
@@ -39,7 +39,7 @@ KCharColTextExport::~KCharColTextExport()
 }
 
 
-void KCharColTextExport::print( QString &T ) const
+void KCharColTextExport::print( QString *T ) const
 {
   int p = 0;
   int pEnd = NoOfBytesPerLine;
@@ -56,16 +56,18 @@ void KCharColTextExport::print( QString &T ) const
     // get next position
     uint t = Pos[p];
     // clear spacing
-    T.append( whiteSpace(t-e) );
+    T->append( whiteSpace(t-e) );
 
     // print char
-    KHEChar B = CharCodec->decode( *PrintData );
+    KHECore::KChar B = CharCodec->decode( *PrintData );
 
-    T.append( B.isUndefined() ? KHEChar(UndefinedChar) : !B.isPrint() ? KHEChar(SubstituteChar) : B );
+    T->append( B.isUndefined() ? KHECore::KChar(UndefinedChar) : !B.isPrint() ? KHECore::KChar(SubstituteChar) : B );
     e = t + 1;
   }
 
-  T.append( whiteSpace(NoOfCharsPerLine-e) );
+  T->append( whiteSpace(NoOfCharsPerLine-e) );
 
   ++PrintLine;
+}
+
 }

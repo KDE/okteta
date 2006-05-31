@@ -23,18 +23,16 @@
 #include "kfixedsizebytearraymodelkabstractbytearraymodeliftest.h"
 
 
-using namespace KHE;
-
 static const int FixedSizeByteArrayModelSize = 60;
 
 
 
-KHE::KAbstractByteArrayModel *KFixedSizeByteArrayModelAbstractByteArrayModelIfTest::createByteArrayModel()
+KHECore::KAbstractByteArrayModel *KFixedSizeByteArrayModelAbstractByteArrayModelIfTest::createByteArrayModel()
 {
-  return new KFixedSizeByteArrayModel( FixedSizeByteArrayModelSize );
+  return new KHECore::KFixedSizeByteArrayModel( FixedSizeByteArrayModelSize );
 }
 
-void KFixedSizeByteArrayModelAbstractByteArrayModelIfTest::deleteByteArrayModel( KHE::KAbstractByteArrayModel *ByteArrayModel )
+void KFixedSizeByteArrayModelAbstractByteArrayModelIfTest::deleteByteArrayModel( KHECore::KAbstractByteArrayModel *ByteArrayModel )
 {
   delete ByteArrayModel;
 }

@@ -27,7 +27,7 @@ static const unsigned int MinChunkSize = 512;
 static const unsigned int MaxChunkSize = 1024*10; // TODO: get max. memory page size
 
 // TODO: think about realloc & Co.
-using namespace KHE;
+using namespace KHECore;
 
 KByteArrayModel::KByteArrayModel( char *D, unsigned int S, int RS, bool KM )
  : Data( D ),

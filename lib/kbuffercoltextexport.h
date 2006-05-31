@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KBUFFERCOLTEXTEXPORT_H
-#define KHE_KBUFFERCOLTEXTEXPORT_H
+#ifndef KHE_UI_KBUFFERCOLTEXTEXPORT_H
+#define KHE_UI_KBUFFERCOLTEXTEXPORT_H
 
 // qt specific
 #include <QString>
@@ -25,7 +25,7 @@
 #include "kcoordrange.h"
 
 
-namespace KHE
+namespace KHEUI
 {
 
 class KBufferColumn;
@@ -38,14 +38,14 @@ class KBufferColTextExport : public KColTextExport
     virtual ~KBufferColTextExport();
 
   public: // API
-    void printFirstLine( QString &T, int Line ) const;
-    void printNextLine( QString &T ) const;
+    void printFirstLine( QString *T, int Line ) const;
+    void printNextLine( QString *T ) const;
     /** tells how much chars per line are needed */
     int charsPerLine() const;
 
 
   protected: // API to be reimplemented by subclasses
-    virtual void print( QString &T ) const;
+    virtual void print( QString *T ) const;
 
 
   protected:

@@ -22,7 +22,7 @@
 // test specific
 #include "kcharcodeciftest.h"
 
-using namespace KHE;
+using namespace KHECore;
 
 static const char QTextCodecWhiteSpace = 63;
 
@@ -44,7 +44,7 @@ void KCharCodecIfTest::testEncodeDecode()
   do
   {
     ++c;
-    KHEChar UTF8 = CharCodec->decode( c );
+    KChar UTF8 = CharCodec->decode( c );
     char r = 0;
     bool Success = CharCodec->encode( &r, UTF8 );
     QCOMPARE( (unsigned char)r, c );

@@ -15,14 +15,15 @@
  ***************************************************************************/
 
 
-// lib specific
+// corelib specific
 #include "kbytearraymodel.h"
+// lib specific
 #include "kbytesedit.h"
 #include "kbufferranges.h"
 #include "kbuffercursor.h"
 
-using namespace KHE;
 
+namespace KHEUI {
 
 KBytesEdit::KBytesEdit( char *D, int DS, int RS, bool KM, QWidget *Parent, const char */*Name*/ )
  : KHexEdit( 0, Parent ),
@@ -43,7 +44,7 @@ KBytesEdit::KBytesEdit( QWidget *Parent, const char */*Name*/ )
  : KHexEdit( 0, Parent ),
    AutoDelete( false )
 {
-  setDataBuffer( new KByteArrayModel() );
+  setDataBuffer( new KHECore::KByteArrayModel() );
 }
 
 KBytesEdit::~KBytesEdit()
@@ -53,9 +54,9 @@ KBytesEdit::~KBytesEdit()
 
 void KBytesEdit::setReadOnly( bool RO )
 {
-  KByteArrayModel *Buffer = dynamic_cast<KByteArrayModel *>(ByteArrayModel);
-  if( Buffer )
-    Buffer->setReadOnly( RO );
+  KHECore::KByteArrayModel *Array = dynamic_cast<KHECore::KByteArrayModel *>(ByteArrayModel);
+  if( Array )
+    Array->setReadOnly( RO );
   KHexEdit::setReadOnly( RO );
 }
 
@@ -68,14 +69,14 @@ void KBytesEdit::setAutoDelete( bool AD )
 
 char *KBytesEdit::data() const
 {
-  KByteArrayModel *Buffer = dynamic_cast<KByteArrayModel *>(ByteArrayModel);
-  return Buffer ? Buffer->data() : 0;
+  KHECore::KByteArrayModel *Array = dynamic_cast<KHECore::KByteArrayModel *>(ByteArrayModel);
+  return Array ? Array->data() : 0;
 }
 
 
 void KBytesEdit::setData( char *D, int S, int RS, bool KM )
 {
-  KByteArrayModel *NewBuffer = new KByteArrayModel( D, S, RS, KM );
+  KHECore::KByteArrayModel *NewBuffer = new KHECore::KByteArrayModel( D, S, RS, KM );
   if( ByteArrayModel )
   {
     // take the settings
@@ -91,38 +92,38 @@ void KBytesEdit::setData( char *D, int S, int RS, bool KM )
 
 int KBytesEdit::dataSize() const
 {
-  KByteArrayModel *Buffer = dynamic_cast<KByteArrayModel *>(ByteArrayModel);
-  return Buffer ? Buffer->size() : -1;
+  KHECore::KByteArrayModel *Array = dynamic_cast<KHECore::KByteArrayModel *>(ByteArrayModel);
+  return Array ? Array->size() : -1;
 }
 
 
 int KBytesEdit::maxDataSize() const
 {
-  KByteArrayModel *Buffer = dynamic_cast<KByteArrayModel *>(ByteArrayModel);
-  return Buffer ? Buffer->maxSize() : -1;
+  KHECore::KByteArrayModel *Array = dynamic_cast<KHECore::KByteArrayModel *>(ByteArrayModel);
+  return Array ? Array->maxSize() : -1;
 }
 
 
 void KBytesEdit::setMaxDataSize( int MS )
 {
-  KByteArrayModel *Buffer = dynamic_cast<KByteArrayModel *>(ByteArrayModel);
-  if( Buffer )
-    Buffer->setMaxSize( MS );
+  KHECore::KByteArrayModel *Array = dynamic_cast<KHECore::KByteArrayModel *>(ByteArrayModel);
+  if( Array )
+    Array->setMaxSize( MS );
 }
 
 
 bool KBytesEdit::keepsMemory() const
 {
-  KByteArrayModel *Buffer = dynamic_cast<KByteArrayModel *>(ByteArrayModel);
-  return Buffer ? Buffer->keepsMemory() : false;
+  KHECore::KByteArrayModel *Array = dynamic_cast<KHECore::KByteArrayModel *>(ByteArrayModel);
+  return Array ? Array->keepsMemory() : false;
 }
 
 
 void KBytesEdit::setKeepsMemory( bool KM )
 {
-  KByteArrayModel *Buffer = dynamic_cast<KByteArrayModel *>(ByteArrayModel);
-  if( Buffer )
-    Buffer->setKeepsMemory( KM );
+  KHECore::KByteArrayModel *Array = dynamic_cast<KHECore::KByteArrayModel *>(ByteArrayModel);
+  if( Array )
+    Array->setKeepsMemory( KM );
 }
 
 
@@ -131,7 +132,7 @@ bool KBytesEdit::isAutoDelete() const { return AutoDelete; }
 
 void KBytesEdit::repaintRange( int i1, int i2 )
 {
-  bool ChangeCursor = !(CursorPaused) && KSection(i1,i2).includes( BufferCursor->index() );
+  bool ChangeCursor = !(CursorPaused) && KHE::KSection(i1,i2).includes( BufferCursor->index() );
   if( ChangeCursor )
     pauseCursor();
 
@@ -158,5 +159,6 @@ void KBytesEdit::clean()
   }
 }
 
+}
 
 #include "kbytesedit.moc"

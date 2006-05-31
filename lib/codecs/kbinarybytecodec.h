@@ -15,13 +15,13 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KBINARYBYTECODEC_H
-#define KHE_KBINARYBYTECODEC_H
+#ifndef KHE_CORE_KBINARYBYTECODEC_H
+#define KHE_CORE_KBINARYBYTECODEC_H
 
 // lib specific
 #include "kbytecodec.h"
 
-namespace KHE
+namespace KHECore
 {
 
 /** class that is able to convert codings to and from binary
@@ -34,8 +34,10 @@ namespace KHE
 
 class KBinaryByteCodec : public KByteCodec
 {
-  public: // API to be implemented
-	virtual ~KBinaryByteCodec(){}
+  public:
+    virtual ~KBinaryByteCodec() {}
+
+  public: // KByteCodec API
     /** */
     virtual unsigned int encodingWidth() const { return 8; }
     /** */

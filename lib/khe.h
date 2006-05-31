@@ -15,13 +15,13 @@
  ***************************************************************************/
 
  
-#ifndef KHE_KHE_H
-#define KHE_KHE_H
+#ifndef KHE_CORE_KHE_H
+#define KHE_CORE_KHE_H
 
 // here we collect all general data
 // let's see how much it gets ;)
 
-namespace KHE
+namespace KHECore
 {
   enum KCoding { HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, MaxCodingId=0xFFFF };
   static const int NoOfCodings = 4;

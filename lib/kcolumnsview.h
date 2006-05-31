@@ -15,18 +15,19 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KCOLUMNSVIEW_H
-#define KHE_KCOLUMNSVIEW_H
+#ifndef KHE_UI_KCOLUMNSVIEW_H
+#define KHE_UI_KCOLUMNSVIEW_H
 
 // qt specific
 #include <QList>
 #include <QAbstractScrollArea>
+// commonlib specific
+#include <ksection.h> // TODO: think about moving this out of the public API
+#include <khexedit_export.h>
 // lib specific
 #include "kadds.h"
-#include "ksection.h" // TODO: think about moving this out of the public API
-#include "khexedit_export.h"
 
-namespace KHE
+namespace KHEUI
 {
 
 class KColumn;
@@ -72,11 +73,11 @@ class KHEXEDIT_EXPORT KColumnsView : public QAbstractScrollArea
     /** gives the index of the first and the last line that would be visible
       * these lines might not contain anything
       */
-    KSection visibleLines() const;
+    KHE::KSection visibleLines() const;
     /** gives the index of the first and the last line that would be visible in the given pixel range
       * these lines might not contain anything
       */
-    KSection visibleLines( KPixelYs YPixels ) const;
+    KHE::KSection visibleLines( const KPixelYs &YPixels ) const;
 
     /** @return visible width of the current view */
     KPixelX visibleWidth() const;
@@ -149,13 +150,13 @@ class KHEXEDIT_EXPORT KColumnsView : public QAbstractScrollArea
 inline int KColumnsView::noOfLines()          const { return NoOfLines; }
 inline KPixelY KColumnsView::lineHeight()     const { return LineHeight; }
 inline uint KColumnsView::lineAt( KPixelY y ) const { return (LineHeight!=0) ? y / LineHeight : 0; }
-inline KSection KColumnsView::visibleLines() const
+inline KHE::KSection KColumnsView::visibleLines() const
 {
   KPixelYs YSpan = KPixelYs::fromWidth( yOffset(), visibleHeight() );
-  return KSection( lineAt(YSpan.start()), lineAt(YSpan.end()) );
+  return KHE::KSection( lineAt(YSpan.start()), lineAt(YSpan.end()) );
 }
-inline KSection KColumnsView::visibleLines( KPixelYs YPixels ) const
-{ return KSection( lineAt(YPixels.start()), lineAt(YPixels.end()) ); }
+inline KHE::KSection KColumnsView::visibleLines( const KPixelYs &YPixels ) const
+{ return KHE::KSection( lineAt(YPixels.start()), lineAt(YPixels.end()) ); }
 
 inline KPixelX KColumnsView::visibleWidth()  const { return viewport()->width(); }
 inline KPixelY KColumnsView::visibleHeight() const { return viewport()->height(); }

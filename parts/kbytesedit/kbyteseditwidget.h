@@ -27,7 +27,7 @@
 #include <khexedit/zoominterface.h>
 #include <khexedit/clipboardinterface.h>
 
-namespace KHE {
+namespace KHEUI {
 class KBytesEdit;
 }
 
@@ -180,7 +180,7 @@ class KBytesEditWidget : public QWidget, public KHE::BytesEditInterface,
     void copyAvailable( bool Really );
 
   protected:
-    KHE::KBytesEdit* BytesEdit;
+    KHEUI::KBytesEdit* BytesEdit;
 };
 
 #endif

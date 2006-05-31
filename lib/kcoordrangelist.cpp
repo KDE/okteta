@@ -18,7 +18,7 @@
 // lib specific
 #include "kcoordrangelist.h"
 
-using namespace KHE;
+namespace KHEUI {
 
 KCoordRangeList::KCoordRangeList()
 {
@@ -76,4 +76,6 @@ void KCoordRangeList::addCoordRange( KCoordRange NewCoordRange )
   if( S == end() )
     // add it at the end
     append( NewCoordRange );
+}
+
 }

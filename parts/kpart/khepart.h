@@ -20,19 +20,18 @@
 
 // kde specific
 #include <kparts/part.h>
-// app specific
-#include "kfilebytearraymodel.h"
+// part specific
+#include <kfilebytearraymodel.h>
 
 // forward declarations
 class KRadioAction;
 class KToggleAction;
 class KSelectAction;
 
-namespace KHE
+namespace KHEUI
 {
-
-// forward declarations
 class KHexEdit;
+}
 
 /**
  * This is a "Part".  It that does all the real work in a KPart
@@ -75,8 +74,8 @@ class KHexEditPart : public KParts::ReadOnlyPart
     void slotToggleValueCharColumns( int VisibleColunms );
 
   private:
-    KHexEdit *HexEdit;
-    KFileByteArrayModel Wrapping;
+    KHEUI::KHexEdit *HexEdit;
+    KHECore::KFileByteArrayModel Wrapping;
 
     // edit menu
     KAction *CopyAction;
@@ -89,7 +88,5 @@ class KHexEditPart : public KParts::ReadOnlyPart
     KToggleAction *ShowOffsetColumnAction;
     KSelectAction *ToggleColumnsAction;
 };
-
-}
 
 #endif

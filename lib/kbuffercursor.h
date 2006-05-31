@@ -15,13 +15,14 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KBUFFERCURSOR_H
-#define KHE_KBUFFERCURSOR_H
+#ifndef KHE_UI_KBUFFERCURSOR_H
+#define KHE_UI_KBUFFERCURSOR_H
 
+// lib specific
 #include "kbuffercoord.h"
 
 
-namespace KHE
+namespace KHEUI
 {
 
 class KBufferLayout;
