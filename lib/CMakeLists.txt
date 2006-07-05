@@ -68,7 +68,7 @@ target_link_libraries( khexeditgui khexeditcore ${KDE4_KDECORE_LIBS} )
 set_target_properties( khexeditgui PROPERTIES VERSION 1.0.0 SOVERSION 1 )
 
 
-install_targets( ${LIB_INSTALL_DIR} khexeditcore khexeditgui )
+install(TARGETS khexeditcore khexeditgui  DESTINATION ${LIB_INSTALL_DIR})
 
 if(KDE4_BUILD_TESTS)
 add_library( testkhexeditcommon STATIC ${khexeditcore_LIB_SRCS} ${khexeditgui_LIB_SRCS} )

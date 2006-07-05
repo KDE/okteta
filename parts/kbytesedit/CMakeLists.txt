@@ -15,12 +15,12 @@ kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kbyteseditwidget )
 
 target_link_libraries(kbyteseditwidget  khexeditcore khexeditgui ${KDE4_KPARTS_LIBS} )
 
-install_targets(${PLUGIN_INSTALL_DIR} kbyteseditwidget )
+install(TARGETS kbyteseditwidget  DESTINATION ${PLUGIN_INSTALL_DIR})
 
 
 ########### install files ###############
 
-install_files( ${SERVICES_INSTALL_DIR} FILES kbyteseditwidget.desktop )
+install( FILES kbyteseditwidget.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
 
 
 

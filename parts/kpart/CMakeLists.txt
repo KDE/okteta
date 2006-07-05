@@ -14,13 +14,13 @@ kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} khexedit2part )
 
 target_link_libraries(khexedit2part  khexeditcore khexeditgui ${KDE4_KPARTS_LIBS} )
 
-install_targets(${PLUGIN_INSTALL_DIR} khexedit2part )
+install(TARGETS khexedit2part  DESTINATION ${PLUGIN_INSTALL_DIR})
 
 
 ########### install files ###############
 
-install_files( ${SERVICES_INSTALL_DIR} FILES khexedit2part.desktop )
-install_files( ${DATA_INSTALL_DIR}/khexedit2part FILES khexedit2partui.rc )
+install( FILES khexedit2part.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
+install( FILES khexedit2partui.rc  DESTINATION ${DATA_INSTALL_DIR}/khexedit2part)
 
 
 
