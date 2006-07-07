@@ -25,19 +25,24 @@
 #include "kbuffercoord.h"
 
 
-namespace KHEUI
+namespace KHE
 {
 
-typedef KHE::KRange<KBufferCoord> KBaseCoordRange;
+typedef KRange<KHEUI::KBufferCoord> KBaseCoordRange;
 
 template<>
 inline const KHEUI::KBufferCoord KBaseCoordRange::null() const 
 { return KHEUI::KBufferCoord(-1,-1); }
 
+}
+
+namespace KHEUI
+{
+
 /** describes a range in the buffercoord
   *@author Friedrich W. H.  Kossebau
   */
-class KCoordRange : public KBaseCoordRange
+class KCoordRange : public KHE::KBaseCoordRange
 {
   public:
     /** 
@@ -80,15 +85,15 @@ class KCoordRange : public KBaseCoordRange
 };
 
 
-inline KCoordRange::KCoordRange( const KBufferCoord &SC, const KBufferCoord &EC ) : KBaseCoordRange(SC,EC) {}
+inline KCoordRange::KCoordRange( const KBufferCoord &SC, const KBufferCoord &EC ) : KHE::KBaseCoordRange(SC,EC) {}
 inline KCoordRange::KCoordRange( const KHE::KSection &Pos, const KHE::KSection &Lines )
- : KBaseCoordRange( KBufferCoord(Pos.start(),Lines.start()), KBufferCoord(Pos.end(),Lines.end()) ) {}
+ : KHE::KBaseCoordRange( KBufferCoord(Pos.start(),Lines.start()), KBufferCoord(Pos.end(),Lines.end()) ) {}
 inline KCoordRange::KCoordRange()  {}
 inline KCoordRange::~KCoordRange() {}
 
-inline bool KCoordRange::operator==( const KCoordRange &R ) const { return  KBaseCoordRange::operator==(R); }
+inline bool KCoordRange::operator==( const KCoordRange &R ) const { return  KHE::KBaseCoordRange::operator==(R); }
 
-inline KCoordRange &KCoordRange::operator=( const KCoordRange &R ) {  KBaseCoordRange::operator=(R); return *this; }
+inline KCoordRange &KCoordRange::operator=( const KCoordRange &R ) {  KHE::KBaseCoordRange::operator=(R); return *this; }
 
 inline int KCoordRange::width( int LineLength )   const { return LineLength*(lines()-1) + End.pos() - Start.pos()+1; }
 inline int KCoordRange::lines()                   const { return End.line() - Start.line() + 1; }
