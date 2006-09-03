@@ -29,7 +29,7 @@ static const int Pos1 = 15;
 static const int Pos2 = 25;
 static const int Line1 = 10;
 static const int LineSize = 10;
-static const int Line2 = Line1 + LineSize - 1;;
+static const int Line2 = Line1 + LineSize - 1;
 static KBufferCoord Start( Pos1, Line1 );
 static KBufferCoord End(   Pos2, Line2 );
 
