@@ -24,7 +24,6 @@
 #include <kfilebytearraymodel.h>
 
 // forward declarations
-class KRadioAction;
 class KToggleAction;
 class KSelectAction;
 
