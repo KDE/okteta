@@ -12,7 +12,7 @@ include_directories( ${SUTDIR} )
 set(ksectiontest_SRCS ksectiontest.cpp
 ${SUTDIR}/ksection.cpp )
 
-kde4_automoc(${ksectiontest_SRCS})
+kde4_automoc(ksectiontest ${ksectiontest_SRCS})
 
 kde4_add_executable(ksectiontest RUN_UNINSTALLED ${ksectiontest_SRCS})
 
@@ -25,7 +25,7 @@ add_test(khexedit-ksectiontest ${EXECUTABLE_OUTPUT_PATH}/ksectiontest)
 
 set( ksectionlisttest_SRCS ksectionlisttest.cpp )
 
-kde4_automoc(${ksectionlisttest_SRCS})
+kde4_automoc(ksectionlisttest ${ksectionlisttest_SRCS})
 
 kde4_add_executable(ksectionlisttest RUN_UNINSTALLED ${ksectionlisttest_SRCS})
 
@@ -39,7 +39,7 @@ add_test(khexedit-ksectionlisttest ${EXECUTABLE_OUTPUT_PATH}/ksectionlisttest)
 set( kselectiontest_SRCS kselectiontest.cpp
 ${SUTDIR}/ksection.cpp )
 
-kde4_automoc(${kselectiontest_SRCS})
+kde4_automoc(kselectiontest ${kselectiontest_SRCS})
 
 kde4_add_executable(kselectiontest RUN_UNINSTALLED ${kselectiontest_SRCS})
 
@@ -52,7 +52,7 @@ add_test(khexedit-kselectiontest ${EXECUTABLE_OUTPUT_PATH}/kselectiontest)
 
 set(kbuffercoordtest_SRCS kbuffercoordtest.cpp )
 
-kde4_automoc(${kbuffercoordtest_SRCS})
+kde4_automoc(kbuffercoordtest ${kbuffercoordtest_SRCS})
 
 kde4_add_executable(kbuffercoordtest RUN_UNINSTALLED ${kbuffercoordtest_SRCS})
 
@@ -65,7 +65,7 @@ add_test(khexedit-kbuffercoordtest ${EXECUTABLE_OUTPUT_PATH}/kbuffercoordtest)
 
 set( kcoordrangetest_SRCS kcoordrangetest.cpp )
 
-kde4_automoc(${kcoordrangetest_SRCS})
+kde4_automoc(kcoordrangetest ${kcoordrangetest_SRCS})
 
 kde4_add_executable(kcoordrangetest RUN_UNINSTALLED ${kcoordrangetest_SRCS})
 
@@ -78,7 +78,7 @@ add_test(khexedit-kcoordrangetest ${EXECUTABLE_OUTPUT_PATH}/kcoordrangetest)
 
 set( kcoordrangelisttest_SRCS kcoordrangelisttest.cpp )
 
-kde4_automoc(${kcoordrangelisttest_SRCS})
+kde4_automoc(kcoordrangelisttest ${kcoordrangelisttest_SRCS})
 
 kde4_add_executable(kcoordrangelisttest RUN_UNINSTALLED ${kcoordrangelisttest_SRCS})
 
@@ -91,7 +91,7 @@ add_test(khexedit-kcoordrangelisttest ${EXECUTABLE_OUTPUT_PATH}/kcoordrangelistt
 
 set(kfixedsizebytearraymodeltest_SRCS kfixedsizebytearraymodeltest.cpp )
 
-kde4_automoc(${kfixedsizebytearraymodeltest_SRCS})
+kde4_automoc(kfixedsizebytearraymodeltest ${kfixedsizebytearraymodeltest_SRCS})
 
 kde4_add_executable(kfixedsizebytearraymodeltest RUN_UNINSTALLED ${kfixedsizebytearraymodeltest_SRCS})
 
@@ -106,7 +106,7 @@ add_test(khexedit-kfixedsizebytearraymodeltest ${EXECUTABLE_OUTPUT_PATH}/kfixeds
 set(kfixedsizebytearraymodelkabstractbytearraymodeliftest_SRCS
 kabstractbytearraymodeliftest.cpp kfixedsizebytearraymodelkabstractbytearraymodeliftest.cpp )
 
-kde4_automoc(${kfixedsizebytearraymodelkabstractbytearraymodeliftest_SRCS})
+kde4_automoc(kfixedsizebytearraymodelkabstractbytearraymodeliftest ${kfixedsizebytearraymodelkabstractbytearraymodeliftest_SRCS})
 
 kde4_add_executable(kfixedsizebytearraymodelkabstractbytearraymodeliftest RUN_UNINSTALLED ${kfixedsizebytearraymodelkabstractbytearraymodeliftest_SRCS})
 
@@ -120,7 +120,7 @@ add_test(khexedit-kfixedsizebytearraymodelkabstractbytearraymodeliftest ${EXECUT
 
 set(kbytearraymodeltest_SRCS kbytearraymodeltest.cpp )
 
-kde4_automoc(${kbytearraymodeltest_SRCS})
+kde4_automoc(kbytearraymodeltest ${kbytearraymodeltest_SRCS})
 
 kde4_add_executable(kbytearraymodeltest RUN_UNINSTALLED ${kbytearraymodeltest_SRCS})
 
@@ -135,7 +135,7 @@ add_test(khexedit-kbytearraymodeltest ${EXECUTABLE_OUTPUT_PATH}/kbytearraymodelt
 set(kbytearraymodelkabstractbytearraymodeliftest_SRCS
 kabstractbytearraymodeliftest.cpp kbytearraymodelkabstractbytearraymodeliftest.cpp )
 
-kde4_automoc(${kbytearraymodelkabstractbytearraymodeliftest_SRCS})
+kde4_automoc(kbytearraymodelkabstractbytearraymodeliftest ${kbytearraymodelkabstractbytearraymodeliftest_SRCS})
 
 kde4_add_executable(kbytearraymodelkabstractbytearraymodeliftest RUN_UNINSTALLED ${kbytearraymodelkabstractbytearraymodeliftest_SRCS})
 
@@ -149,7 +149,7 @@ add_test(khexedit-kbytearraymodelkabstractbytearraymodeliftest ${EXECUTABLE_OUTP
 
 set(kcharcodectest_SRCS kcharcodectest.cpp )
 
-kde4_automoc(${kcharcodectest_SRCS})
+kde4_automoc(kcharcodectest ${kcharcodectest_SRCS})
 
 kde4_add_executable(kcharcodectest RUN_UNINSTALLED ${kcharcodectest_SRCS})
 
@@ -163,7 +163,7 @@ add_test(khexedit-kcharcodectest ${EXECUTABLE_OUTPUT_PATH}/kcharcodectest)
 
 set(ktextcharcodectest_SRCS ktextcharcodectest.cpp )
 
-kde4_automoc(${ktextcharcodectest_SRCS})
+kde4_automoc(ktextcharcodectest ${ktextcharcodectest_SRCS})
 
 kde4_add_executable(ktextcharcodectest RUN_UNINSTALLED ${ktextcharcodectest_SRCS})
 
@@ -178,7 +178,7 @@ add_test(khexedit-ktextcharcodectest ${EXECUTABLE_OUTPUT_PATH}/ktextcharcodectes
 set(ktextcharcodeckcharcodeciftest_SRCS
 kcharcodeciftest.cpp ktextcharcodeckcharcodeciftest.cpp )
 
-kde4_automoc(${ktextcharcodeckcharcodeciftest_SRCS})
+kde4_automoc(ktextcharcodeckcharcodeciftest ${ktextcharcodeckcharcodeciftest_SRCS})
 
 kde4_add_executable(ktextcharcodeckcharcodeciftest RUN_UNINSTALLED ${ktextcharcodeckcharcodeciftest_SRCS})
 
@@ -193,7 +193,7 @@ add_test(khexedit-ktextcharcodeckcharcodeciftest ${EXECUTABLE_OUTPUT_PATH}/ktext
 set(kebcdic1047charcodeckcharcodeciftest_SRCS
 kcharcodeciftest.cpp kebcdic1047charcodeckcharcodeciftest.cpp )
 
-kde4_automoc(${kebcdic1047charcodeckcharcodeciftest_SRCS})
+kde4_automoc(kebcdic1047charcodeckcharcodeciftest ${kebcdic1047charcodeckcharcodeciftest_SRCS})
 
 kde4_add_executable(kebcdic1047charcodeckcharcodeciftest RUN_UNINSTALLED ${kebcdic1047charcodeckcharcodeciftest_SRCS})
 

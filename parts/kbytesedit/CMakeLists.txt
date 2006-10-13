@@ -7,7 +7,7 @@ include_directories(${CMAKE_SOURCE_DIR}/khexedit/lib/  )
 
 set(kbyteseditwidget_PART_SRCS kbyteseditwidget.cpp )
 
-kde4_automoc(${kbyteseditwidget_PART_SRCS})
+kde4_automoc(kbyteseditwidget ${kbyteseditwidget_PART_SRCS})
 
 kde4_add_plugin(kbyteseditwidget WITH_PREFIX ${kbyteseditwidget_PART_SRCS})
 
