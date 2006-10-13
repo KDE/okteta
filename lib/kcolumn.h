@@ -41,7 +41,7 @@ class KColumn
 {
 //    friend class KColumnsView;
   public:
-    KColumn( KColumnsView *V );
+    explicit KColumn( KColumnsView *V );
     virtual ~KColumn() {}
 
 

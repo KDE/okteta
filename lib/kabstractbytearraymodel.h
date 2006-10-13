@@ -101,9 +101,9 @@ class KHECORE_EXPORT KAbstractByteArrayModel : public QObject
       * @param Section 
       * @return pointer to 
       */
-    virtual const char *dataSet( const KSection &Section ) const = 0;
+    //virtual const char *dataSet( const KSection &Section ) const = 0;
     /** convenience function, same as above */
-    const char *dataSet( int Offset, int Length ) const;
+    //const char *dataSet( int Offset, int Length ) const;
 
     /** requests a single byte
       * if the offset is not valid the behaviout is undefined
@@ -248,8 +248,8 @@ class KHECORE_EXPORT KAbstractByteArrayModel : public QObject
 inline KAbstractByteArrayModel::KAbstractByteArrayModel() {}
 inline KAbstractByteArrayModel::~KAbstractByteArrayModel() {}
 
-inline const char *KAbstractByteArrayModel::dataSet( int Offset, int Length ) const
-{ return dataSet( KSection(Offset,Offset+Length-1) ); }
+//inline const char *KAbstractByteArrayModel::dataSet( int Offset, int Length ) const
+//{ return dataSet( KSection(Offset,Offset+Length-1) ); }
 
 inline int KAbstractByteArrayModel::insert( int Pos, const QByteArray &Source )
 { return insert( Pos, Source.data(), Source.size() ); }

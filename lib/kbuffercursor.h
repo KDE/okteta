@@ -55,7 +55,7 @@ class KBufferLayout;
 class KBufferCursor
 {
   public:
-    KBufferCursor( const KBufferLayout *L );
+    explicit KBufferCursor( const KBufferLayout *L );
     ~KBufferCursor();
 
 

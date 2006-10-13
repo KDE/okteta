@@ -34,7 +34,7 @@ class KHexEditBrowserExtension : public KParts::BrowserExtension
     Q_OBJECT
 
   public:
-    KHexEditBrowserExtension( KHexEditPart *P );
+    explicit KHexEditBrowserExtension( KHexEditPart *P );
 
   public: // KParts::BrowserExtension API
     virtual void saveState( QDataStream &stream );

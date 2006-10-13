@@ -37,7 +37,7 @@ class KFixedSizeByteArrayModel : public KAbstractByteArrayModel
     /** creates a readonly buffer around the given data */
     KFixedSizeByteArrayModel( char *D, unsigned int S, char FUC = '\0' );
     /** creates a writeable buffer which is deleted at the end */
-    KFixedSizeByteArrayModel( unsigned int S, char FUC = '\0' );
+    explicit KFixedSizeByteArrayModel( unsigned int S, char FUC = '\0' );
     virtual ~KFixedSizeByteArrayModel();
 
   public: // KAbstractByteArrayModel API

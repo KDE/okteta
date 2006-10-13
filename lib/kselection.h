@@ -41,7 +41,7 @@ class KSelection
     /** creates a selection with a given start.
       * @param Index index in front of which the selection begins
       */
-    KSelection( int Index );
+    explicit KSelection( int Index );
     /** creates an invalid selection */
     KSelection();
     ~KSelection();

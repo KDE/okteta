@@ -31,8 +31,9 @@ class KOffsetColumn;
 class KOffsetColTextExport : public KColTextExport
 {
   public:
-    KOffsetColTextExport( const KOffsetColumn *OC );
-	~KOffsetColTextExport() {}
+    explicit KOffsetColTextExport( const KOffsetColumn *OC );
+    ~KOffsetColTextExport() {}
+
   public: // KColTextExport API
     void printFirstLine( QString *T, int Line ) const;
     void printNextLine( QString *T ) const;

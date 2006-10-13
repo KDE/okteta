@@ -35,7 +35,7 @@ namespace KHEUI
 class KBufferRanges
 {
   public:
-    KBufferRanges( KBufferLayout *L );
+    explicit KBufferRanges( KBufferLayout *L );
     ~KBufferRanges();
 
   public: // modifcation access
