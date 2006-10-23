@@ -6,7 +6,7 @@ include_directories( ${CMAKE_SOURCE_DIR}/khexedit/lib/  )
 
 set(khexedit2part_PART_SRCS khepart.cpp khebrowserextension.cpp khepartfactory.cpp )
 
-kde4_automoc(khexedit2part ${khexedit2part_PART_SRCS})
+kde4_automoc(${khexedit2part_PART_SRCS})
 
 kde4_add_plugin(khexedit2part WITH_PREFIX ${khexedit2part_PART_SRCS})
 

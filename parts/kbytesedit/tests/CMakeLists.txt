@@ -7,7 +7,7 @@ include_directories( ${KDE4_INCLUDE_DIR} ${QT_INCLUDES} )
 
 set( beiftest_SRCS beiftest.cpp )
 
-kde4_automoc( beiftest ${beiftest_SRCS} )
+kde4_automoc()
 
 kde4_add_executable( beiftest RUN_UNINSTALLED ${beiftest_SRCS} )
 

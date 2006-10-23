@@ -56,7 +56,7 @@ set( khexeditgui_LIB_SRCS
   kvaluecoltextexport.cpp
   kcharcoltextexport.cpp )
 
-kde4_automoc( ${khexeditcore_LIB_SRCS} khexeditgui ${khexeditgui_LIB_SRCS} )
+kde4_automoc(${khexeditcore_LIB_SRCS} ${khexeditgui_LIB_SRCS})
 
 kde4_add_library( khexeditcore SHARED ${khexeditcore_LIB_SRCS} )
 target_link_libraries( khexeditcore  ${KDE4_KDECORE_LIBS} )
