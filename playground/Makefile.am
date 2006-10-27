@@ -1,3 +1,0 @@
-EXTRA_DIST = COPYING TODO README AUTHORS Changelog
-
-SUBDIRS = src test
