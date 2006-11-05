@@ -10,7 +10,6 @@ kde4_automoc(${khexedit2part_PART_SRCS})
 
 kde4_add_plugin(khexedit2part WITH_PREFIX ${khexedit2part_PART_SRCS})
 
-kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} khexedit2part )
 
 target_link_libraries(khexedit2part  khexeditcore khexeditgui ${KDE4_KPARTS_LIBS} )
 

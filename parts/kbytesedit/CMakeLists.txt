@@ -11,7 +11,6 @@ kde4_automoc(${kbyteseditwidget_PART_SRCS})
 
 kde4_add_plugin(kbyteseditwidget WITH_PREFIX ${kbyteseditwidget_PART_SRCS})
 
-kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kbyteseditwidget )
 
 target_link_libraries(kbyteseditwidget  khexeditcore khexeditgui ${KDE4_KPARTS_LIBS} )
 
