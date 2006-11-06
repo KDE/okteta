@@ -128,7 +128,7 @@ void KNavigator::moveCursor( KMoveAction Action, bool Select )
 
   if( BufferRanges->isModified() )
     HexEdit->emitSelectionSignals(); // TODO: can this be moved somewhere
-
+  emit HexEdit->cursorPositionChanged( BufferCursor->realIndex() );
   HexEdit->updateChanged();
   HexEdit->ensureCursorVisible();
 

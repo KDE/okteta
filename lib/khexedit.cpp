@@ -192,7 +192,7 @@ QChar KHexEdit::undefinedChar()                const { return charColumn().undef
 KHexEdit::KEncoding KHexEdit::encoding()       const { return (KHexEdit::KEncoding)Encoding; }
 const QString &KHexEdit::encodingName()        const { return Codec->name(); }
 
-int KHexEdit::cursorPosition() const { return BufferCursor->index(); }
+int KHexEdit::cursorPosition() const { return BufferCursor->realIndex(); }
 bool KHexEdit::isCursorBehind() const { return BufferCursor->isBehind(); }
 KHexEdit::KBufferColumnId KHexEdit::cursorColumn() const
 { return static_cast<KHEUI::KValueColumn *>( ActiveColumn ) == &valueColumn()? ValueColumnId : CharColumnId; }
@@ -262,6 +262,8 @@ void KHexEdit::setDataBuffer( KHECore::KAbstractByteArrayModel *B )
   BufferCursor->gotoStart();
   ensureCursorVisible();
   unpauseCursor();
+
+  emit cursorPositionChanged( BufferCursor->realIndex() );
 }
 
 
@@ -280,6 +282,7 @@ void KHexEdit::setStartOffset( int SO )
   BufferCursor->updateCoord();
   ensureCursorVisible();
   unpauseCursor();
+  emit cursorPositionChanged( BufferCursor->realIndex() );
 }
 
 
@@ -485,6 +488,7 @@ void KHexEdit::updateViewByWidth()
   ensureCursorVisible();
 
   unpauseCursor();
+  emit cursorPositionChanged( BufferCursor->realIndex() );
 }
 
 
@@ -766,6 +770,7 @@ bool KHexEdit::selectWord( /*unsigned TODO:change all unneeded signed into unsig
       updateChanged();
 
       unpauseCursor();
+      emit cursorPositionChanged( BufferCursor->realIndex() );
       return true;
     }
   }
@@ -792,6 +797,7 @@ void KHexEdit::selectAll( bool Select )
   if( !OverWrite ) emit cutAvailable( BufferRanges->hasSelection() );
   emit copyAvailable( BufferRanges->hasSelection() );
   emit selectionChanged();
+  emit cursorPositionChanged( BufferCursor->realIndex() );
   viewport()->setCursor( isReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor );
 }
 
@@ -984,6 +990,7 @@ kDebug() << "Cursor:"<<BufferCursor->index()<<", "<<BufferCursor->isBehind()<<en
   BufferRanges->adaptSelectionToChange( Pos, RemovedLength, InsertedLength );
 kDebug() << "Cursor:"<<BufferCursor->index()<<", Selection:"<<BufferRanges->selectionStart()<<"-"<<BufferRanges->selectionEnd()
          <<", BytesPerLine: "<<BufferLayout->noOfBytesPerLine()<<endl;
+  emit cursorPositionChanged( BufferCursor->realIndex() );
 }
 
 void KHexEdit::onContentsMoved( int Destination, int Source, int MovedLength )
@@ -1004,6 +1011,7 @@ void KHexEdit::setCursorPosition( int Index, bool Behind )
 {
   pauseCursor( true );
 
+  if( Behind ) --Index;
   BufferCursor->gotoCIndex( Index );
   if( Behind )
     BufferCursor->stepBehind();
@@ -1022,6 +1030,7 @@ void KHexEdit::setCursorPosition( int Index, bool Behind )
   ensureCursorVisible();
 
   unpauseCursor();
+  emit cursorPositionChanged( BufferCursor->realIndex() );
 }
 
 
@@ -1101,6 +1110,7 @@ void KHexEdit::placeCursor( const QPoint &Point )
   KBufferCoord C( activeColumn().magPosOfX(Point.x()), lineAt(Point.y()) );
 
   BufferCursor->gotoCCoord( C );
+  emit cursorPositionChanged( BufferCursor->realIndex() );
 }
 
 
@@ -1508,6 +1518,7 @@ void KHexEdit::mousePressEvent( QMouseEvent *Event )
       updateChanged();
 
       unpauseCursor();
+      emit cursorPositionChanged( BufferCursor->realIndex() );
       return;
     }
 
@@ -1654,7 +1665,7 @@ void KHexEdit::mouseReleaseEvent( QMouseEvent *Event )
     unpauseCursor();
   }
 
-  emit cursorPositionChanged( BufferCursor->index() );
+  emit cursorPositionChanged( BufferCursor->realIndex() );
 
   InDoubleClick = false;
 
@@ -1754,6 +1765,7 @@ void KHexEdit::handleMouseMove( const QPoint& Point ) // handles the move of the
   updateChanged();
 
   unpauseCursor();
+  emit cursorPositionChanged( BufferCursor->realIndex() );
 }
 
 
@@ -1860,6 +1872,7 @@ void KHexEdit::handleInternalDrag( QDropEvent *Event )
     {
       BufferCursor->gotoCIndex( NewIndex+Selection.width() );
       BufferRanges->addChangedRange( KHE::KSection(qMin(InsertIndex,Selection.start()), qMax(InsertIndex,Selection.end())) );
+      emit cursorPositionChanged( BufferCursor->realIndex() );
     }
   }
   // is a copy
