@@ -52,10 +52,10 @@ KHexEditPart::KHexEditPart( QWidget *ParentWidget,
 
   setupActions( BrowserViewWanted );
 
+  connect( HexEdit, SIGNAL(selectionChanged()), SLOT(onSelectionChanged()) );
   if( CopyAction )
   {
-    connect( HexEdit, SIGNAL(copyAvailable(bool)), CopyAction,SLOT(setEnabled(bool)) );
-    connect( HexEdit, SIGNAL(selectionChanged()),  this,      SLOT(slotSelectionChanged()) );
+    connect( HexEdit, SIGNAL(copyAvailable(bool)), CopyAction, SLOT(setEnabled(bool)) );
     CopyAction->setEnabled( false );
   }
 
@@ -65,31 +65,14 @@ KHexEditPart::KHexEditPart( QWidget *ParentWidget,
 }
 
 
-KHexEditPart::~KHexEditPart()
-{
-}
-
-/*
-void KHexEditPart::setupTools( bool BrowserViewWanted )
-{
-  if( !BrowserViewWanted ) new KClipboardTool( this );
-  
-  new KZoomToolet( this );
-  new KSelectToolet( this );
-  new KHEValueCodingToolet( this );
-  new KHECharEncodingToolet( this );
-  new KHEResizeStyleToolet( this );
-  new KHEColumnToggleToolet( this );
-}
-*/
 void KHexEditPart::setupActions( bool BrowserViewWanted )
 {
   KActionCollection *AC = actionCollection();
   // create our actions
   CopyAction = BrowserViewWanted ? 0 : KStdAction::copy( HexEdit, SLOT(copy()), AC );
 
-  KStdAction::selectAll( this, SLOT(slotSelectAll()), AC );
-  KStdAction::deselect(  this, SLOT(slotUnselect()),  AC );
+  KStdAction::selectAll( this, SLOT(onSelectAll()), AC );
+  DeselectAction = KStdAction::deselect( this, SLOT(onUnselect()), AC );
 
   // value encoding
   CodingAction = new KSelectAction( i18n("&Value Coding"), AC, "view_valuecoding" );
@@ -99,18 +82,18 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
   List.append( i18n("&Octal")       );
   List.append( i18n("&Binary")      );
   CodingAction->setItems( List );
-  connect( CodingAction, SIGNAL(triggered(int)), SLOT(slotSetCoding(int)) );
+  connect( CodingAction, SIGNAL(triggered(int)), SLOT(onSetCoding(int)) );
 
   // document encoding
   EncodingAction = new KSelectAction( i18n("&Char Encoding"), AC, "view_charencoding" );
   EncodingAction->setItems( KHECore::KCharCodec::codecNames() );
-  connect( EncodingAction, SIGNAL(triggered(int)), SLOT(slotSetEncoding(int)) );
+  connect( EncodingAction, SIGNAL(triggered(int)), SLOT(onSetEncoding(int)) );
 
-  ShowUnprintableAction = new KToggleAction( i18n("Show &Unprintable Chars (<32)"), actionCollection(), "view_showunprintable" );
-  connect( ShowUnprintableAction, SIGNAL(activated(int)), SLOT(slotSetShowUnprintable()) );
+  ShowUnprintableAction = new KToggleAction( i18n("Show &Unprintable Chars (<32)"), AC, "view_showunprintable" );
+  connect( ShowUnprintableAction, SIGNAL(activated(int)), SLOT(onSetShowUnprintable()) );
 
-  KStdAction::zoomIn(  HexEdit, SLOT(zoomIn()),   actionCollection() );
-  KStdAction::zoomOut( HexEdit, SLOT(zoomOut()),  actionCollection() );
+  KStdAction::zoomIn(  HexEdit, SLOT(zoomIn()),  AC );
+  KStdAction::zoomOut( HexEdit, SLOT(zoomOut()), AC );
 
   // resize style
   ResizeStyleAction = new KSelectAction( i18n("&Resize Style"), AC, "resizestyle" );
@@ -119,11 +102,11 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
   List.append( i18n("&Lock Groups") );
   List.append( i18n("&Full Size Usage") );
   ResizeStyleAction->setItems( List );
-  connect( ResizeStyleAction, SIGNAL(triggered(int)), SLOT(slotSetResizeStyle(int)) );
+  connect( ResizeStyleAction, SIGNAL(triggered(int)), SLOT(onSetResizeStyle(int)) );
 
   ShowOffsetColumnAction = new KToggleAction( i18n("&Line Offset"), AC, "view_lineoffset" );
   ShowOffsetColumnAction->setShortcut( Qt::Key_F11 );
-  connect( ShowOffsetColumnAction, SIGNAL(triggered(int)), SLOT(slotToggleOffsetColumn()) );
+  connect( ShowOffsetColumnAction, SIGNAL(activated(int)), SLOT(onToggleOffsetColumn()) );
 
   // show buffer columns
   ToggleColumnsAction = new KSelectAction( i18n("&Columns"), AC, "togglecolumns" );
@@ -132,7 +115,7 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
   List.append( i18n("&Chars Column") );
   List.append( i18n("&Both Columns") );
   ToggleColumnsAction->setItems( List );
-  connect( ToggleColumnsAction, SIGNAL(triggered(int)), SLOT(slotToggleValueCharColumns(int)) );
+  connect( ToggleColumnsAction, SIGNAL(triggered(int)), SLOT(onToggleValueCharColumns(int)) );
 
   fitActionSettings();
 
@@ -143,6 +126,8 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
 
 void KHexEditPart::fitActionSettings()
 {
+  DeselectAction->setEnabled( HexEdit->hasSelectedData() );
+
   ShowOffsetColumnAction->setChecked( HexEdit->offsetColumnVisible() );
   ShowUnprintableAction->setChecked( HexEdit->showUnprintable() );
 
@@ -167,53 +152,57 @@ bool KHexEditPart::openFile()
 
 
 
-void KHexEditPart::slotSelectionChanged()
+void KHexEditPart::onSelectionChanged()
 {
-  bool State = HexEdit->hasSelectedData();
-  CopyAction->setEnabled( State );
+  const bool HasSelection = HexEdit->hasSelectedData();
+  if( CopyAction ) CopyAction->setEnabled( HasSelection );
+  DeselectAction->setEnabled( HasSelection );
 }
 
 
-void KHexEditPart::slotSelectAll()
+void KHexEditPart::onSelectAll()
 {
   HexEdit->selectAll( true );
 }
 
-
-void KHexEditPart::slotUnselect()
+void KHexEditPart::onUnselect()
 {
   HexEdit->selectAll( false );
 }
 
-
-void KHexEditPart::slotSetCoding( int Coding )
+void KHexEditPart::onSetCoding( int Coding )
 {
   HexEdit->setCoding( (KHEUI::KHexEdit::KCoding)Coding );
 }
 
-void KHexEditPart::slotSetShowUnprintable()
+void KHexEditPart::onSetShowUnprintable()
 {
   HexEdit->setShowUnprintable( ShowUnprintableAction->isChecked() );
 }
 
-void KHexEditPart::slotToggleOffsetColumn()
+void KHexEditPart::onToggleOffsetColumn()
 {
   HexEdit->toggleOffsetColumn( ShowOffsetColumnAction->isChecked() );
 }
 
-void KHexEditPart::slotSetResizeStyle( int ResizeStyle )
+void KHexEditPart::onSetResizeStyle( int ResizeStyle )
 {
   HexEdit->setResizeStyle( (KHEUI::KHexEdit::KResizeStyle)ResizeStyle );
 }
 
-void KHexEditPart::slotSetEncoding( int Encoding )
+void KHexEditPart::onSetEncoding( int Encoding )
 {
   HexEdit->setEncoding( KHECore::KCharCodec::codecNames()[Encoding] );
 }
 
-void KHexEditPart::slotToggleValueCharColumns( int VisibleColumns)
+void KHexEditPart::onToggleValueCharColumns( int VisibleColumns)
 {
   HexEdit->showBufferColumns( VisibleColumns+1 );
 }
+
+KHexEditPart::~KHexEditPart()
+{
+}
+
 
 #include "khepart.moc"

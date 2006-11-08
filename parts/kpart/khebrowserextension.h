@@ -45,7 +45,7 @@ class KHexEditBrowserExtension : public KParts::BrowserExtension
     void copy();
 
     /** selection has changed */
-    void slotSelectionChanged();
+    void onSelectionChanged();
 
   protected:
     KHexEditPart *HexEditPart;

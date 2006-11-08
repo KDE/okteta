@@ -61,16 +61,16 @@ class KHexEditPart : public KParts::ReadOnlyPart
 
   protected slots:
     // used to catch changes in the HexEdit widget
-    void slotSelectionChanged();
+    void onSelectionChanged();
   protected slots: // action slots
-    void slotSelectAll();
-    void slotUnselect();
-    void slotSetCoding( int Coding );
-    void slotSetEncoding( int Encoding );
-    void slotSetShowUnprintable();
-    void slotSetResizeStyle( int Style );
-    void slotToggleOffsetColumn();
-    void slotToggleValueCharColumns( int VisibleColunms );
+    void onSelectAll();
+    void onUnselect();
+    void onSetCoding( int Coding );
+    void onSetEncoding( int Encoding );
+    void onSetShowUnprintable();
+    void onSetResizeStyle( int Style );
+    void onToggleOffsetColumn();
+    void onToggleValueCharColumns( int VisibleColunms );
 
   private:
     KHEUI::KHexEdit *HexEdit;
@@ -78,6 +78,7 @@ class KHexEditPart : public KParts::ReadOnlyPart
 
     // edit menu
     KAction *CopyAction;
+    KAction *DeselectAction;
     // view menu
     KSelectAction *CodingAction;
     KSelectAction *EncodingAction;

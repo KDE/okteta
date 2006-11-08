@@ -15,7 +15,7 @@
  ***************************************************************************/
 
 
-// qt specific
+// kde specific
 #include <kaction.h>
 // uilib specific
 #include <khexedit.h>
@@ -29,7 +29,7 @@ KHexEditBrowserExtension::KHexEditBrowserExtension( KHexEditPart *P )
   HexEditPart( P )
 {
   setObjectName( "khexeditpartbrowserextension" );
-  connect( HexEditPart->HexEdit, SIGNAL( selectionChanged() ), this, SLOT( slotSelectionChanged() ) );
+  connect( HexEditPart->HexEdit, SIGNAL( selectionChanged() ), SLOT( onSelectionChanged() ) );
 }
 
 void KHexEditBrowserExtension::copy()
@@ -38,7 +38,7 @@ void KHexEditBrowserExtension::copy()
 }
 
 
-void KHexEditBrowserExtension::slotSelectionChanged()
+void KHexEditBrowserExtension::onSelectionChanged()
 {
   emit enableAction( "copy", HexEditPart->HexEdit->hasSelectedData() );
 }
