@@ -16,7 +16,7 @@
 
 
 // qt specific
-#include <QPainter>
+#include <QtGui/QPainter>
 // corelib specific
 #include <kcharcodec.h>
 // lib specific

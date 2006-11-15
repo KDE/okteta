@@ -18,8 +18,9 @@
 #ifndef KHE_CORE_KBYTECODEC_H
 #define KHE_CORE_KBYTECODEC_H
 
+
 // qt specific
-#include <QString>
+#include <QtCore/QString>
 // lib specific
 #include "khe.h"
 #include "khexedit_export.h"

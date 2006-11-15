@@ -25,8 +25,8 @@ namespace KHECore {
 
 bool KWordBufferService::isWordChar( unsigned int Index ) const
 {
-  KChar C = CharCodec->decode( Buffer->datum(Index) );
-  return !C.isUndefined() && C.isLetterOrNumber();
+  KChar DecodedChar = CharCodec->decode( Buffer->datum(Index) );
+  return !DecodedChar.isUndefined() && DecodedChar.isLetterOrNumber();
 }
 
 

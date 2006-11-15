@@ -4,7 +4,7 @@ Type=Service
 Name=BytesEdit Widget
 Name[fr]=Composant éditeur binaire
 Name[x-test]=xxBytesEdit Widgetxx
-X-KDE-Library=libkbyteseditwidget
+X-KDE-Library=libkbytearrayedit
 InitialPreference=2
 ServiceTypes=KHexEdit/KBytesEdit
 

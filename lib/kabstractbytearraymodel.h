@@ -20,8 +20,8 @@
 
 
 // qt specific
-#include <QObject>
-#include <QByteArray>
+#include <QtCore/QObject>
+#include <QtCore/QByteArray>
 // commonlib specific
 #include <ksection.h>
 // lib specific
@@ -210,10 +210,10 @@ class KHECORE_EXPORT KAbstractByteArrayModel : public QObject
     /** searches beginning with byte at Pos.
       * @param 
       * @param Length length of search string
-      * @param Pos the position to start the search
+      * @param From the position to start the search
       * @return index of the first  or -1
       */
-    //virtual int find( const char*, int Length, int Pos = 0 ) const = 0;
+    virtual int indexOf( const char*, int Length, int From = 0 ) const;
     /** searches for a given data string
       * The section limits the data within which the key has to be found
       * If the end of the section is lower then the start the search continues at the start???
@@ -222,14 +222,14 @@ class KHECORE_EXPORT KAbstractByteArrayModel : public QObject
       * @param Section section within the keydata is to be found
       * @return index of the first occurrence or -1
       */
-    virtual int find( const char*KeyData, int Length, const KSection &Section ) const = 0;
+//     virtual int indexOf( const char*KeyData, int Length, const KSection &Section ) const { return -1; }//= 0;
     /** searches backward beginning with byte at Pos.
       * @param 
       * @param Length length of search string
       * @param Pos the position to start the search. If -1 the search starts at the end.
       * @return index of the first  or -1
       */
-    virtual int rfind( const char*, int Length, int Pos = -1 ) const = 0;
+    virtual int lastIndexOf( const char*, int Length, int From = -1 ) const;
 
 /*     virtual int find( const QString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */
 

@@ -18,8 +18,9 @@
 #ifndef KHE_UI_KCURSOR_H
 #define KHE_UI_KCURSOR_H
 
+
 // qt specific
-#include <QPixmap>
+#include <QtGui/QPixmap>
 // lib specific
 #include "kadds.h"
 

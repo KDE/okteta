@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kbyteseditwidget.h  -  description
+                          kbytearrayedit.h  -  description
                              -------------------
     begin                : Fri Aug 29 2003
     copyright            : (C) 2003 by Friedrich W. H. Kossebau
@@ -15,11 +15,11 @@
  ***************************************************************************/
 
 
-#ifndef KBYTESEDITWIDGET_H
-#define KBYTESEDITWIDGET_H
+#ifndef KBYTEARRAYEDIT_H
+#define KBYTEARRAYEDIT_H
 
 // qt specific
-#include <QWidget>
+#include <QtGui/QWidget>
 // kde specific
 #include <khexedit/byteseditinterface.h>
 #include <khexedit/valuecolumninterface.h>
@@ -27,9 +27,7 @@
 #include <khexedit/zoominterface.h>
 #include <khexedit/clipboardinterface.h>
 
-namespace KHEUI {
-class KBytesEdit;
-}
+class KByteArrayEditPrivate;
 
 
 /**
@@ -38,16 +36,20 @@ class KBytesEdit;
    @author Friedrich W. H. Kossebau <Friedrich.W.H@Kossebau.de>
    @version 0.1
  **/
-class KBytesEditWidget : public QWidget, public KHE::BytesEditInterface,
-                         public KHE::ValueColumnInterface, public KHE::CharColumnInterface,
-                         public KHE::ZoomInterface, public KHE::ClipboardInterface
+class KByteArrayEdit : public QWidget, public KHE::BytesEditInterface,
+                       public KHE::ValueColumnInterface, public KHE::CharColumnInterface,
+                       public KHE::ZoomInterface, public KHE::ClipboardInterface
 {
   Q_OBJECT
   Q_INTERFACES(KHE::BytesEditInterface KHE::ValueColumnInterface KHE::CharColumnInterface KHE::ZoomInterface KHE::ClipboardInterface)
+  //_PROPERTY( char * Data READ data )
+  Q_PROPERTY( int DataSize READ dataSize )
+  Q_PROPERTY( int MaxDataSize READ maxDataSize WRITE setMaxDataSize )
+  Q_PROPERTY( bool AutoDelete READ isAutoDelete WRITE setAutoDelete DESIGNABLE false )
 
   public:
     /** constructor API as demanded by KGenericFactory */
-    explicit KBytesEditWidget( QWidget *parent, const QStringList & = QStringList() );
+    explicit KByteArrayEdit( QWidget *parent, const QStringList & = QStringList() );
 
   public: // bytesedit interface
     /** hands over to the editor a new byte array.
@@ -155,7 +157,7 @@ class KBytesEditWidget : public QWidget, public KHE::BytesEditInterface,
     /** returns true if there is a selected range in the array */
     virtual bool hasSelectedData() const;
 
-  public slots:
+  public Q_SLOTS:
   // bytesedit interface
     virtual void setReadOnly( bool RO = true );
     virtual void setOverwriteOnly( bool b );
@@ -175,12 +177,12 @@ class KBytesEditWidget : public QWidget, public KHE::BytesEditInterface,
     virtual void zoomTo( int PointSize );
     virtual void unZoom();
 
-  signals:
+  Q_SIGNALS:
   // clipboard interface
     void copyAvailable( bool Really );
 
-  protected:
-    KHEUI::KBytesEdit* BytesEdit;
+  private:
+    KByteArrayEditPrivate *d;
 };
 
 #endif

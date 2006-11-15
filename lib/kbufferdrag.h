@@ -19,7 +19,7 @@
 #define KHE_CORE_KBUFFERDRAG_H
 
 // qt specific
-#include <QMimeData>
+#include <QtCore/QMimeData>
 // lib specific
 #include "khe.h"
 #include "kcoordrange.h"

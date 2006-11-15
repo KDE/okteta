@@ -18,8 +18,9 @@
 #ifndef KHE_UI_KCHARCOLUMN_H
 #define KHE_UI_KCHARCOLUMN_H
 
+
 // qt specific
-#include <QString>
+#include <QtCore/QString>
 // lib specific
 #include "kbuffercolumn.h"
 

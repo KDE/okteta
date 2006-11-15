@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
- 
+
 #ifndef KHE_CORE_KHE_H
 #define KHE_CORE_KHE_H
 
@@ -25,7 +25,7 @@ namespace KHECore
 {
   enum KCoding { HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, MaxCodingId=0xFFFF };
   static const int NoOfCodings = 4;
-  
+
   /** */
   enum KEncoding
   {

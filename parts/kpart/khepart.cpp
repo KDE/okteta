@@ -52,7 +52,7 @@ KHexEditPart::KHexEditPart( QWidget *ParentWidget,
 
   setupActions( BrowserViewWanted );
 
-  connect( HexEdit, SIGNAL(selectionChanged()), SLOT(onSelectionChanged()) );
+  connect( HexEdit, SIGNAL(selectionChanged( bool )), SLOT(onSelectionChanged( bool )) );
   if( CopyAction )
   {
     connect( HexEdit, SIGNAL(copyAvailable(bool)), CopyAction, SLOT(setEnabled(bool)) );
@@ -143,7 +143,7 @@ void KHexEditPart::fitActionSettings()
 bool KHexEditPart::openFile()
 {
   Wrapping.open( m_file );
-  HexEdit->setDataBuffer( &Wrapping );
+  HexEdit->setByteArrayModel( &Wrapping );
   HexEdit->setCursorPosition( 0 );
   HexEdit->selectAll( false );
 
@@ -152,9 +152,8 @@ bool KHexEditPart::openFile()
 
 
 
-void KHexEditPart::onSelectionChanged()
+void KHexEditPart::onSelectionChanged( bool HasSelection )
 {
-  const bool HasSelection = HexEdit->hasSelectedData();
   if( CopyAction ) CopyAction->setEnabled( HasSelection );
   DeselectAction->setEnabled( HasSelection );
 }

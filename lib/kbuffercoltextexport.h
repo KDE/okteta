@@ -19,7 +19,7 @@
 #define KHE_UI_KBUFFERCOLTEXTEXPORT_H
 
 // qt specific
-#include <QString>
+#include <QtCore/QString>
 // lib specific
 #include "kcoltextexport.h"
 #include "kcoordrange.h"

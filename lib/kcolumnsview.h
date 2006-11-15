@@ -18,9 +18,10 @@
 #ifndef KHE_UI_KCOLUMNSVIEW_H
 #define KHE_UI_KCOLUMNSVIEW_H
 
+
 // qt specific
-#include <QList>
-#include <QAbstractScrollArea>
+#include <QtCore/QList>
+#include <QtGui/QAbstractScrollArea>
 // commonlib specific
 #include <ksection.h> // TODO: think about moving this out of the public API
 #include <khexedit_export.h>

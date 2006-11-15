@@ -23,21 +23,22 @@
 // c++ specific
 //#include <limits>
 // qt specific
-#include <QStyle>
-#include <QPainter>
-#include <QTimer>
-#include <QCursor>
-#include <QApplication>
-#include <QListIterator>
-#include <QScrollBar>
-#include <QMouseEvent>
-#include <QWheelEvent>
-#include <QKeyEvent>
-#include <QDragEnterEvent>
-#include <QDragMoveEvent>
-#include <QDropEvent>
-#include <QShowEvent>
-#include <QResizeEvent>
+#include <QtCore/QListIterator>
+#include <QtCore/QTimer>
+#include <QtGui/QStyle>
+#include <QtGui/QPainter>
+#include <QtGui/QCursor>
+#include <QtGui/QApplication>
+#include <QtGui/QScrollBar>
+#include <QtGui/QShowEvent>
+#include <QtGui/QResizeEvent>
+#include <QtGui/QWheelEvent>
+#include <QtGui/QKeyEvent>
+#include <QtGui/QMouseEvent>
+#include <QtGui/QDragEnterEvent>
+#include <QtGui/QDragMoveEvent>
+#include <QtGui/QDragLeaveEvent>
+#include <QtGui/QDropEvent>
 // kde specific
 #ifndef QT_ONLY
 #include <kglobalsettings.h>
@@ -171,7 +172,7 @@ KHexEdit::~KHexEdit()
   delete CharEditor;
 }
 
-
+KHECore::KAbstractByteArrayModel *KHexEdit::byteArrayModel() const { return ByteArrayModel; }
 int KHexEdit::noOfBytesPerLine()               const { return BufferLayout->noOfBytesPerLine(); }
 int KHexEdit::firstLineOffset()                const { return OffsetColumn->firstLineOffset(); }
 int KHexEdit::startOffset()                    const { return BufferLayout->startOffset(); }
@@ -191,11 +192,13 @@ QChar KHexEdit::substituteChar()               const { return charColumn().subst
 QChar KHexEdit::undefinedChar()                const { return charColumn().undefinedChar(); }
 KHexEdit::KEncoding KHexEdit::encoding()       const { return (KHexEdit::KEncoding)Encoding; }
 const QString &KHexEdit::encodingName()        const { return Codec->name(); }
+double KHexEdit::zoomLevel()                    const { return (double)font().pointSize()/DefaultFontSize; }
 
 int KHexEdit::cursorPosition() const { return BufferCursor->realIndex(); }
 bool KHexEdit::isCursorBehind() const { return BufferCursor->isBehind(); }
 KHexEdit::KBufferColumnId KHexEdit::cursorColumn() const
 { return static_cast<KHEUI::KValueColumn *>( ActiveColumn ) == &valueColumn()? ValueColumnId : CharColumnId; }
+KHE::KSection KHexEdit::selection() const { return BufferRanges->selection(); }
 
 void KHexEdit::setOverwriteOnly( bool OO )    { OverWriteOnly = OO; if( OverWriteOnly ) setOverwriteMode( true ); }
 void KHexEdit::setModified( bool M )          { ByteArrayModel->setModified(M); }
@@ -229,14 +232,9 @@ void KHexEdit::setOverwriteMode( bool OM )
 }
 
 
-void KHexEdit::setDataBuffer( KHECore::KAbstractByteArrayModel *B )
+void KHexEdit::setByteArrayModel( KHECore::KAbstractByteArrayModel *B )
 {
-  disconnect( ByteArrayModel, SIGNAL(contentsChanged(int,int)),
-              this, SLOT(updateRange(int,int)) );
-  disconnect( ByteArrayModel, SIGNAL(contentsReplaced(int,int,int)),
-              this, SLOT(onContentsReplaced(int,int,int)) );
-  disconnect( ByteArrayModel, SIGNAL(contentsMoved(int,int,int)),
-              this, SLOT(onContentsMoved(int,int,int)) );
+  disconnect( ByteArrayModel );
 
   ValueEditor->reset();
   CursorPaused = true;
@@ -529,6 +527,11 @@ void KHexEdit::unZoom()
   zoomTo( DefaultFontSize );
 }
 
+void KHexEdit::setZoomLevel( double Level )
+{
+  zoomTo( (int)(Level*DefaultFontSize) );
+}
+
 
 void KHexEdit::adjustLayoutToSize()
 {
@@ -796,7 +799,7 @@ void KHexEdit::selectAll( bool Select )
 
   if( !OverWrite ) emit cutAvailable( BufferRanges->hasSelection() );
   emit copyAvailable( BufferRanges->hasSelection() );
-  emit selectionChanged();
+  emit selectionChanged( BufferRanges->hasSelection() );
   emit cursorPositionChanged( BufferCursor->realIndex() );
   viewport()->setCursor( isReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor );
 }
@@ -821,7 +824,7 @@ QByteArray KHexEdit::selectedData() const
 }
 
 
-KBufferDrag *KHexEdit::dragObject() const
+QMimeData *KHexEdit::dragObject() const
 {
   if( !BufferRanges->hasSelection() )
     return 0;
@@ -856,7 +859,7 @@ void KHexEdit::cut()
   if( isReadOnly() || OverWrite )
     return;
 
-  KBufferDrag *Drag = dragObject();
+  QMimeData *Drag = dragObject();
   if( !Drag )
     return;
 
@@ -868,7 +871,7 @@ void KHexEdit::cut()
 
 void KHexEdit::copy()
 {
-  KBufferDrag *Drag = dragObject();
+  QMimeData *Drag = dragObject();
   if( !Drag )
     return;
 
@@ -935,7 +938,7 @@ void KHexEdit::insert( const QByteArray &Data )
       ByteArrayModel->insert( BufferCursor->realIndex(), Data );
   }
 
-  emit selectionChanged();
+  emit selectionChanged( BufferRanges->hasSelection() );
 }
 
 
@@ -993,8 +996,9 @@ kDebug() << "Cursor:"<<BufferCursor->index()<<", Selection:"<<BufferRanges->sele
   emit cursorPositionChanged( BufferCursor->realIndex() );
 }
 
-void KHexEdit::onContentsMoved( int Destination, int Source, int MovedLength )
+void KHexEdit::onContentsMoved( int /*Destination*/, int /*Source*/, int /*MovedLength*/ )
 {
+  // TODO: what should happen here?
   pauseCursor();
 
 }
@@ -1002,7 +1006,7 @@ void KHexEdit::onContentsMoved( int Destination, int Source, int MovedLength )
 void KHexEdit::clipboardChanged()
 {
   // don't listen to selection changes
-  disconnect( QApplication::clipboard(), SIGNAL(selectionChanged()), this, 0 );
+  disconnect( QApplication::clipboard(), SIGNAL(selectionChanged()) );
   selectAll( false );
 }
 
@@ -1025,7 +1029,7 @@ void KHexEdit::setCursorPosition( int Index, bool Behind )
 
     if( !OverWrite ) emit cutAvailable( BufferRanges->hasSelection() );
     emit copyAvailable( BufferRanges->hasSelection() );
-    emit selectionChanged();
+    emit selectionChanged( BufferRanges->hasSelection() );
   }
   ensureCursorVisible();
 
@@ -1033,6 +1037,26 @@ void KHexEdit::setCursorPosition( int Index, bool Behind )
   emit cursorPositionChanged( BufferCursor->realIndex() );
 }
 
+void KHexEdit::setSelection( int Start, int End )
+{
+  if( Start >= 0 && End < BufferLayout->length()  )
+  {
+    KHE::KSection Selection( Start, End );
+    if( Selection.isValid() )
+    {
+      pauseCursor();
+
+      BufferRanges->setSelection( Selection );
+      BufferCursor->gotoCIndex( Selection.behindEnd() );
+      ensureVisible( activeColumn(), BufferLayout->coordOfIndex(Selection.start()) );
+      ensureCursorVisible();
+      updateChanged();
+
+      unpauseCursor();
+      emit cursorPositionChanged( BufferCursor->realIndex() );
+    }
+  }
+}
 
 void KHexEdit::showBufferColumns( int CCs )
 {
@@ -1354,9 +1378,10 @@ void KHexEdit::updateColumn( KColumn &Column )
 
 void KHexEdit::emitSelectionSignals()
 {
-  if( !OverWrite ) emit cutAvailable( BufferRanges->hasSelection() );
-  emit copyAvailable( BufferRanges->hasSelection() );
-  emit selectionChanged();
+  bool HasSelection = BufferRanges->hasSelection();
+  if( !OverWrite ) emit cutAvailable( HasSelection );
+  emit copyAvailable( HasSelection );
+  emit selectionChanged( HasSelection );
 }
 
 
@@ -1483,12 +1508,17 @@ void KHexEdit::ensureCursorVisible()
 //     return;
 //   }
   //static const int Margin = 10;
+    ensureVisible( activeColumn(), BufferCursor->coord() );
+}
+
+void KHexEdit::ensureVisible( const KBufferColumn &Column, const KBufferCoord &Coord )
+{
 
   // TODO: add getCursorRect to BufferColumn
-  const KPixelXs cursorXs = KPixelXs::fromWidth( activeColumn().xOfPos(BufferCursor->pos()),
-                                                 activeColumn().byteWidth() );
+  const KPixelXs cursorXs = KPixelXs::fromWidth( Column.xOfPos(Coord.pos()),
+                                                 Column.byteWidth() );
 
-  const KPixelYs cursorYs = KPixelYs::fromWidth( LineHeight*BufferCursor->line(), LineHeight );
+  const KPixelYs cursorYs = KPixelYs::fromWidth( LineHeight*Coord.line(), LineHeight );
 
   const KPixelXs visibleXs = KPixelXs::fromWidth( xOffset(), visibleWidth() );
   const KPixelYs visibleYs = KPixelXs::fromWidth( yOffset(), visibleHeight() );
@@ -1634,7 +1664,7 @@ void KHexEdit::mouseReleaseEvent( QMouseEvent *Event )
       if( QApplication::clipboard()->supportsSelection() )
       {
         ClipboardMode = QClipboard::Selection;
-        disconnect( QApplication::clipboard(), SIGNAL(selectionChanged()), this, 0);
+        disconnect( QApplication::clipboard(), SIGNAL(selectionChanged()) );
 
         copy();
 
@@ -1674,7 +1704,7 @@ void KHexEdit::mouseReleaseEvent( QMouseEvent *Event )
 
   if( !OverWrite ) emit cutAvailable( BufferRanges->hasSelection() );
   emit copyAvailable( BufferRanges->hasSelection() );
-  emit selectionChanged();
+  emit selectionChanged( BufferRanges->hasSelection() );
 }
 
 
@@ -1942,7 +1972,7 @@ void KHexEdit::contextMenuEvent( QContextMenuEvent *Event )
     if( QApplication::clipboard()->supportsSelection() )
     {
       ClipboardMode = QClipboard::Selection;
-      disconnect( QApplication::clipboard(), SIGNAL(selectionChanged()), this, 0);
+      disconnect( QApplication::clipboard(), SIGNAL(selectionChanged()));
 
       copy();
 

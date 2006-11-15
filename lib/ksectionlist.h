@@ -19,7 +19,7 @@
 #define KHE_KSECTIONLIST_H
 
 // qt specific
-#include <QLinkedList>
+#include <QtCore/QLinkedList>
 // lib specific
 #include "ksection.h"
 

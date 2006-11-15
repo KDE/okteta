@@ -50,6 +50,56 @@ int KAbstractByteArrayModel::copyTo( char* Dest, const KSection &S ) const
   return Source.width();
 }
 
+
+int KAbstractByteArrayModel::indexOf( const char* Data, int Length, int From ) const
+{
+    int Result = -1;
+
+    const int LastFrom = size() - Length;
+
+    for( int i=From; i<=LastFrom ; ++i )
+    {
+        int c = 0;
+        for( ; c<Length; ++c )
+            if( Data[c] != datum(i+c) )
+                break;
+        if( c == Length )
+        {
+            Result = i;
+            break;
+        }
+    }
+
+    return Result;
+}
+
+int KAbstractByteArrayModel::lastIndexOf( const char* Data, int Length, int From ) const
+{
+    int Result = -1;
+
+    const int LastFrom = size() - Length;
+
+    if( From < 0 )
+        From = LastFrom + 1 + From;
+    else if( From > LastFrom )
+        From = LastFrom;
+
+    for( int i=From; i>=0 ; --i )
+    {
+        int c = 0;
+        for( ; c<Length; ++c )
+            if( Data[c] != datum(i+c) )
+                break;
+        if( c == Length )
+        {
+            Result = i;
+            break;
+        }
+    }
+
+    return Result;
+}
+
 }
 
 #include "kabstractbytearraymodel.moc"

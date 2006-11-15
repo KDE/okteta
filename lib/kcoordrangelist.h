@@ -18,8 +18,9 @@
 #ifndef KHE_UI_KCOORDRANGELIST_H
 #define KHE_UI_KCOORDRANGELIST_H
 
+
 // qt specific
-#include <QLinkedList>
+#include <QtCore/QLinkedList>
 // lib specific
 #include "kcoordrange.h"
 

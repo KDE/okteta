@@ -42,7 +42,6 @@ set( khexeditgui_LIB_SRCS
   kcharcolumn.cpp
   kcolumnsview.cpp
   khexedit.cpp
-  kbytesedit.cpp
   koffsetformat.cpp
   kbuffercursor.cpp
   kbufferlayout.cpp

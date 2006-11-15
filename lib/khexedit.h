@@ -19,18 +19,10 @@
 #define KHE_UI_KHEXEDIT_H
 
 // qt specific
-#include <QClipboard>
-#include <QWheelEvent>
-#include <QDragLeaveEvent>
-#include <QKeyEvent>
-#include <QDragMoveEvent>
-#include <QDropEvent>
-#include <QShowEvent>
-#include <QResizeEvent>
-#include <QDragEnterEvent>
-#include <QMouseEvent>
+#include <QtGui/QClipboard>
 // lib specific
 // #include "khe.h"
+#include <ksection.h>
 #include "kcolumnsview.h"
 
 class QTimer;
@@ -51,6 +43,7 @@ class KBufferColumn;
 class KOffsetColumn;
 class KBorderColumn;
 
+class KBufferCoord;
 class KBufferCursor;
 class KBufferLayout;
 class KBufferRanges;
@@ -60,8 +53,6 @@ class KTabController;
 class KNavigator;
 class KValueEditor;
 class KCharEditor;
-
-class KBufferDrag;
 
 class KCursor;
 
@@ -127,7 +118,7 @@ class KHEUI_EXPORT KHexEdit : public KColumnsView
 
 
   public:
-    KHexEdit( KHECore::KAbstractByteArrayModel *Buffer = 0, QWidget *Parent = 0 );
+    KHexEdit( KHECore::KAbstractByteArrayModel *Model = 0, QWidget *Parent = 0 );
     virtual ~KHexEdit();
 
 
@@ -144,6 +135,7 @@ class KHEUI_EXPORT KHexEdit : public KColumnsView
 
 
   public: // value access
+    KHECore::KAbstractByteArrayModel *byteArrayModel() const;
     /** returns true if there is a selected range in the array */
     bool hasSelectedData() const;
     /** returns the index of the cursor position */
@@ -151,6 +143,7 @@ class KHEUI_EXPORT KHexEdit : public KColumnsView
     /***/
     bool isCursorBehind() const;
     KBufferColumnId cursorColumn() const;
+    KHE::KSection selection() const;
 
     bool isOverwriteMode() const;
     bool isOverwriteOnly() const;
@@ -195,6 +188,8 @@ class KHEUI_EXPORT KHexEdit : public KColumnsView
      */
     const QString &encodingName() const;
 
+    double zoomLevel() const;
+
   public: // logic value service
     /** calculates the number of bytes per line that fit into a widget with the given size
       * tests whether a vertical scroll bar is needed at all or not due to the given width
@@ -228,9 +223,14 @@ class KHEUI_EXPORT KHexEdit : public KColumnsView
 //    void updateByte( int row, int column );
 //    void ensureByteVisible( int row, int column );
 
+    void setSelection( int Start, int End );
+
+    QMimeData *dragObject() const;
+    void pasteFromSource( const QMimeData *Source );
+
   public Q_SLOTS:
     /** */
-    void setDataBuffer( KHECore::KAbstractByteArrayModel *B );
+    void setByteArrayModel( KHECore::KAbstractByteArrayModel *B );
 
     /** switches the Offset column on/off */
     void toggleOffsetColumn( bool Visible );
@@ -339,6 +339,7 @@ class KHEUI_EXPORT KHexEdit : public KColumnsView
     virtual void zoomOut();
     virtual void zoomTo( int PointSize );
     virtual void unZoom();
+    void setZoomLevel( double Level );
 
   // cursor control
     /** we have focus again, start the timer */
@@ -359,7 +360,7 @@ class KHEUI_EXPORT KHexEdit : public KColumnsView
 
     void cursorPositionChanged( int Index );
     /** selection has changed */
-    void selectionChanged();
+    void selectionChanged( bool HasSelection );
     /** there is a cut available or not */
     void cutAvailable( bool Really );
     /** there is a copy available or not */
@@ -416,8 +417,6 @@ class KHEUI_EXPORT KHexEdit : public KColumnsView
 
   protected: // partial operations
     void handleMouseMove( const QPoint& Point );
-    KBufferDrag *dragObject() const;
-    void pasteFromSource( const QMimeData *Source );
     /** sets ChangedRange to the range of VisibleRange that is actually changed
       * @return true if there was a change within the visible range
       */
@@ -433,6 +432,7 @@ class KHEUI_EXPORT KHexEdit : public KColumnsView
     void adjustLayoutToSize();
     /** calls updateContent for the Column */
     void updateColumn( KColumn &Column );
+    void ensureVisible( const KBufferColumn &Column, const KBufferCoord &Coord );
     void emitSelectionSignals();
 
   protected Q_SLOTS:

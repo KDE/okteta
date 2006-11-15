@@ -14,8 +14,9 @@
  *                                                                         *
  ***************************************************************************/
 
+
 // qt specific
-#include "qpainter.h"
+#include "QtGui/QPainter"
 // lib specific
 #include "kcolumnsview.h"
 #include "koffsetcolumn.h"

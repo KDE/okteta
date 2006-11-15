@@ -40,12 +40,13 @@ class KHexEditBrowserExtension : public KParts::BrowserExtension
     virtual void saveState( QDataStream &stream );
     virtual void restoreState( QDataStream &stream );
 
-  public slots:
+  public Q_SLOTS:
     /** copy text to clipboard */
     void copy();
 
+  private Q_SLOTS:
     /** selection has changed */
-    void onSelectionChanged();
+    void onSelectionChanged( bool );
 
   protected:
     KHexEditPart *HexEditPart;

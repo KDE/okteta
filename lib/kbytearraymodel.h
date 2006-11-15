@@ -37,17 +37,14 @@ class KPlainBufferIterator : public KDataBufferIterator
 
 class KHECORE_EXPORT KByteArrayModel : public KAbstractByteArrayModel
 {
-  friend class KPlainBufferIterator;
-
   public:
     KByteArrayModel( char *D, unsigned int S, int RS = -1, bool KM = true );
     KByteArrayModel( const char *D, unsigned int S );
     KByteArrayModel( int S=0, int MS = -1 );
     virtual ~KByteArrayModel();
 
-  public: // KDataBuffer API
+  public: // KAbstractByteArrayModel API
     //virtual KDataBufferIterator *iterator() const;
-    virtual const char *dataSet( const KSection &S ) const;
     virtual char datum( unsigned int Offset ) const;
     virtual int size() const;
     virtual bool isReadOnly() const;
@@ -62,9 +59,9 @@ class KHECORE_EXPORT KByteArrayModel : public KAbstractByteArrayModel
 
     virtual void setModified( bool M = true );
 
-    //virtual int find( const char*, int Length, int Pos = 0 ) const;
-    virtual int find( const char*KeyData, int Length, const KSection &Section ) const;
-    virtual int rfind( const char*, int Length, int Pos = -1 ) const;
+    virtual int indexOf( const char*, int Length, int From = 0 ) const;
+//     virtual int find( const char*KeyData, int Length, const KSection &Section ) const;
+    virtual int lastIndexOf( const char*, int Length, int From = -1 ) const;
 
 /*     virtual int find( const QString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */
 
@@ -75,6 +72,7 @@ class KHECORE_EXPORT KByteArrayModel : public KAbstractByteArrayModel
       */
     void setKeepsMemory( bool KM = true );
     void setAutoDelete( bool AD = true );
+    void signalContentsChanged( int i1, int i2 );
 
   public:
     char *data() const;
@@ -112,7 +110,6 @@ class KHECORE_EXPORT KByteArrayModel : public KAbstractByteArrayModel
 };
 
 
-inline const char *KByteArrayModel::dataSet( const KSection &S ) const { return &Data[S.start()]; }
 inline char KByteArrayModel::datum( unsigned int Offset ) const { return Data[Offset]; }
 inline int KByteArrayModel::size()                        const { return Size; }
 
@@ -129,6 +126,9 @@ inline char *KByteArrayModel::data()       const { return Data; }
 inline int KByteArrayModel::maxSize()      const { return MaxSize; }
 inline bool KByteArrayModel::keepsMemory() const { return KeepsMemory; }
 inline bool KByteArrayModel::autoDelete()  const { return AutoDelete; }
+
+inline void KByteArrayModel::signalContentsChanged( int i1, int i2 ) { emit contentsChanged(i1,i2); }
+
 }
 
 #endif

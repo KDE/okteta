@@ -16,7 +16,7 @@
 
 
 // qt specific
-#include <QTextCodec>
+#include <QtCore/QTextCodec>
 // kde specific
 #include <kglobal.h>
 #include <klocale.h>

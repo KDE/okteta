@@ -16,7 +16,7 @@
 
 
 // qt specific
-#include <QKeyEvent>
+#include <QtGui/QKeyEvent>
 // corelib specific
 #include <kabstractbytearraymodel.h>
 // lib specific

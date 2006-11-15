@@ -16,7 +16,7 @@
 
 
 // qt specific
-#include <QPainter>
+#include <QtGui/QPainter>
 // lib specific
 #include "kcolumnsview.h"
 #include "kcolumn.h"

@@ -18,8 +18,9 @@
 #ifndef KHE_CORE_KCHARCODEC_H
 #define KHE_CORE_KCHARCODEC_H
 
+
 // qt specific
-#include <QStringList>
+#include <QtCore/QStringList>
 // lib specific
 #include "khe.h"
 #include "khechar.h"

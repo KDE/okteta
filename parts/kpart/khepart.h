@@ -59,10 +59,7 @@ class KHexEditPart : public KParts::ReadOnlyPart
     void setupActions( bool BrowserViewWanted );
     void fitActionSettings();
 
-  protected slots:
-    // used to catch changes in the HexEdit widget
-    void onSelectionChanged();
-  protected slots: // action slots
+  protected Q_SLOTS: // action slots
     void onSelectAll();
     void onUnselect();
     void onSetCoding( int Coding );
@@ -71,6 +68,10 @@ class KHexEditPart : public KParts::ReadOnlyPart
     void onSetResizeStyle( int Style );
     void onToggleOffsetColumn();
     void onToggleValueCharColumns( int VisibleColunms );
+
+  private Q_SLOTS:
+    // used to catch changes in the HexEdit widget
+    void onSelectionChanged( bool HasSelection );
 
   private:
     KHEUI::KHexEdit *HexEdit;

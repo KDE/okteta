@@ -295,27 +295,50 @@ int KByteArrayModel::fill( const char FChar, unsigned int Pos, int FillLength )
 }
 
 
-int KByteArrayModel::find( const char* SearchString, int Length, const KSection &S ) const
+int KByteArrayModel::indexOf( const char* SearchString, int Length, int From ) const
 {
-  KSection Section( S );
+    int Result = -1;
 
-  Section.restrictEndTo( Size-1 );
+    const int LastFrom = Size - Length;
 
-  for( int i = Section.start(); i <= Section.end(); ++i )
-  {
-    int Result;
-//    if( IgnoreCase )
-//      result = strncasecmp( &data()[i], sc.key.data(), sc.key.size() );
-//    else
-    Result = memcmp( &Data[i], SearchString, Length );
-    // found?
-    if( Result == 0 )
-      return i;
-  }
-  return -1;
+    for( int i=From; i<=LastFrom ; ++i )
+    {
+        int c = memcmp( &Data[i], SearchString, Length );
+
+        if( c == 0 )
+        {
+            Result = i;
+            break;
+        }
+    }
+
+    return Result;
 }
 
-int KByteArrayModel::rfind( const char*, int /*Length*/, int /*Pos*/ ) const { return 0; }
+int KByteArrayModel::lastIndexOf( const char* SearchString, int Length, int From ) const
+{
+    int Result = -1;
+
+    const int LastFrom = size() - Length;
+
+    if( From < 0 )
+        From = LastFrom + 1 + From;
+    else if( From > LastFrom )
+        From = LastFrom;
+
+    for( int i=From; i>=0 ; --i )
+    {
+        int c = memcmp( &Data[i], SearchString, Length );
+
+        if( c == 0 )
+        {
+            Result = i;
+            break;
+        }
+    }
+
+    return Result;
+}
 
 
 int KByteArrayModel::addSize( int AddSize, int SplitPos, bool SaveUpperPart )

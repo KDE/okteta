@@ -16,7 +16,7 @@
 
 
 // qt specific
-#include <QString>
+#include <QtCore/QString>
 // lib specific
 #include "koffsetcolumn.h" 
 #include "koffsetcoltextexport.h"

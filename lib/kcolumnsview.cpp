@@ -16,11 +16,11 @@
 
 
 // qt specific
-#include <QListIterator>
-#include <QPaintEvent>
-#include <QPainter>
-#include <QStyle>
-#include <QScrollBar>
+#include <QtCore/QListIterator>
+#include <QtGui/QPaintEvent>
+#include <QtGui/QPainter>
+#include <QtGui/QStyle>
+#include <QtGui/QScrollBar>
 // lib specific
 #include "kcolumn.h"
 #include "kcolumnsview.h"

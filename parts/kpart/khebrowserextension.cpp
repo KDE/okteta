@@ -29,7 +29,7 @@ KHexEditBrowserExtension::KHexEditBrowserExtension( KHexEditPart *P )
   HexEditPart( P )
 {
   setObjectName( "khexeditpartbrowserextension" );
-  connect( HexEditPart->HexEdit, SIGNAL( selectionChanged() ), SLOT( onSelectionChanged() ) );
+  connect( HexEditPart->HexEdit, SIGNAL( selectionChanged( bool ) ), SLOT( onSelectionChanged( bool ) ) );
 }
 
 void KHexEditBrowserExtension::copy()
@@ -38,9 +38,9 @@ void KHexEditBrowserExtension::copy()
 }
 
 
-void KHexEditBrowserExtension::onSelectionChanged()
+void KHexEditBrowserExtension::onSelectionChanged( bool HasSelection )
 {
-  emit enableAction( "copy", HexEditPart->HexEdit->hasSelectedData() );
+  emit enableAction( "copy", HasSelection );
 }
 
 

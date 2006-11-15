@@ -16,7 +16,7 @@
 
 
 // qt specific
-#include <QKeyEvent>
+#include <QtGui/QKeyEvent>
 // lib specific
 #include <kwordbufferservice.h>
 // lib specific

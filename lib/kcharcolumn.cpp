@@ -18,7 +18,7 @@
 // c specific
 #include <ctype.h>
 // qt specific
-#include <QPainter>
+#include <QtGui/QPainter>
 // kde specific
 #include <kcharsets.h>
 #include <klocale.h>

@@ -16,7 +16,7 @@
 
 
 // qt specific
-#include <QKeyEvent>
+#include <QtGui/QKeyEvent>
 // commonlib specific
 #include <kcharcodec.h>
 // lib specific

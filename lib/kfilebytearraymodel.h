@@ -18,9 +18,10 @@
 #ifndef KHE_CORE_KFILEBYTEARRAYMODEL_H
 #define KHE_CORE_KFILEBYTEARRAYMODEL_H
 
+
 // qt specific
-#include <QVector>
-#include <QFile>
+#include <QtCore/QVector>
+#include <QtCore/QFile>
 // lib specific
 #include "kabstractbytearraymodel.h"
 

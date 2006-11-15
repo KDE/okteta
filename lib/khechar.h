@@ -18,8 +18,9 @@
 #ifndef KHE_CORE_KHECHAR_H
 #define KHE_CORE_KHECHAR_H
 
+
 // qt specific
-#include <QString>
+#include <QtCore/QString>
 
 namespace KHECore
 {
