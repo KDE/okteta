@@ -205,13 +205,13 @@ add_test(khexedit-kebcdic1047charcodeckcharcodeciftest ${EXECUTABLE_OUTPUT_PATH}
 
 ########### next target ###############
 
-set( mvctest_SRCS mvctest.cpp )
+#set( mvctest_SRCS mvctest.cpp )
 
-kde4_automoc( ${mvctest_SRCS} )
+#kde4_automoc( ${mvctest_SRCS} )
 
-kde4_add_executable( mvctest RUN_UNINSTALLED ${mvctest_SRCS} )
+#kde4_add_executable( mvctest RUN_UNINSTALLED ${mvctest_SRCS} )
 
-target_link_libraries( mvctest  khexeditcore khexeditgui ${KDE4_KDEUI_LIBS} )
+# target_link_libraries( mvctest  khexeditcore khexeditgui ${KDE4_KDEUI_LIBS} )
 
 ########### install files ###############
 
