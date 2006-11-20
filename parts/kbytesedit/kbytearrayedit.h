@@ -27,7 +27,12 @@
 #include <khexedit/zoominterface.h>
 #include <khexedit/clipboardinterface.h>
 
-class KByteArrayEditPrivate;
+namespace KHECore {
+class KByteArrayModel;
+}
+namespace KHEUI {
+class KHexEdit;
+}
 
 
 /**
@@ -50,6 +55,7 @@ class KByteArrayEdit : public QWidget, public KHE::BytesEditInterface,
   public:
     /** constructor API as demanded by KGenericFactory */
     explicit KByteArrayEdit( QWidget *parent, const QStringList & = QStringList() );
+    virtual ~KByteArrayEdit();
 
   public: // bytesedit interface
     /** hands over to the editor a new byte array.
@@ -182,7 +188,8 @@ class KByteArrayEdit : public QWidget, public KHE::BytesEditInterface,
     void copyAvailable( bool Really );
 
   private:
-    KByteArrayEditPrivate *d;
+    KHECore::KByteArrayModel *Model;
+    KHEUI::KHexEdit *HexEdit;
 };
 
 #endif

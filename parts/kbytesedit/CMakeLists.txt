@@ -3,7 +3,6 @@ add_subdirectory( tests )
 include_directories( ${CMAKE_SOURCE_DIR}/khexedit/lib )
 
 set( kbytearrayedit_PART_SRCS
-  kbytearrayeditprivate.cpp
   kbytearrayedit.cpp
   factory.cpp
 )
