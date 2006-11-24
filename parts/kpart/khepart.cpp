@@ -105,7 +105,7 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
   connect( ResizeStyleAction, SIGNAL(triggered(int)), SLOT(onSetResizeStyle(int)) );
 
   ShowOffsetColumnAction = new KToggleAction( i18n("&Line Offset"), AC, "view_lineoffset" );
-  ShowOffsetColumnAction->setShortcut( Qt::Key_F11 );
+  ShowOffsetColumnAction->setShortcut( QKeySequence( Qt::Key_F11 ) );
   connect( ShowOffsetColumnAction, SIGNAL(activated(int)), SLOT(onToggleOffsetColumn()) );
 
   // show buffer columns
