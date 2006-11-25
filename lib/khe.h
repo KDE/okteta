@@ -23,7 +23,8 @@
 
 namespace KHECore
 {
-  enum KCoding { HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, MaxCodingId=0xFFFF };
+  enum KCoding { HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, CharCoding=4,
+                 InvalidCoding=0xFFFE,  MaxCodingId=0xFFFF };
   static const int NoOfCodings = 4;
 
   /** */
@@ -87,6 +88,7 @@ namespace KHECore
     EBCDIC1047Encoding,
     /** Offset for own encodings which are bound in by plugins */
     StartOfOwnEncoding=0x8000,
+    InvalidEncoding=0xFFFE,
     /** this should enable extension without breaking binary compatibility */
     MaxEncodingId=0xFFFF
   };
