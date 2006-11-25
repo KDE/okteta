@@ -153,7 +153,7 @@ class KHECORE_EXPORT KAbstractByteArrayModel : public QObject
       * @param DestSection
       * @param Source
       * @param SourceLength
-      * @return length of replacced data
+      * @return length of inserted data
       */
     virtual unsigned int replace( const KSection &DestSection, const char* Source, unsigned int SourceLength ) = 0;
     /** convenience function, behaves as above */
@@ -214,6 +214,7 @@ class KHECORE_EXPORT KAbstractByteArrayModel : public QObject
       * @return index of the first  or -1
       */
     virtual int indexOf( const char*, int Length, int From = 0 ) const;
+    int indexOf( const QByteArray& Data, int From = 0 ) const;
     /** searches for a given data string
       * The section limits the data within which the key has to be found
       * If the end of the section is lower then the start the search continues at the start???
@@ -230,6 +231,7 @@ class KHECORE_EXPORT KAbstractByteArrayModel : public QObject
       * @return index of the first  or -1
       */
     virtual int lastIndexOf( const char*, int Length, int From = -1 ) const;
+    int lastIndexOf( const QByteArray& Data, int From = -1 ) const;
 
 /*     virtual int find( const QString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */
 
@@ -267,6 +269,11 @@ inline unsigned int KAbstractByteArrayModel::replace( unsigned int Pos, unsigned
 inline int KAbstractByteArrayModel::fill( const char FillChar, const KSection &Section )
 { return fill( FillChar, Section.start(), Section.width() ); }
 
+inline int KAbstractByteArrayModel::indexOf( const QByteArray& Data, int From ) const
+{ return indexOf( Data.constData(), Data.size(), From ); }
+
+inline int KAbstractByteArrayModel::lastIndexOf( const QByteArray& Data, int From ) const
+{ return lastIndexOf( Data.constData(), Data.size(), From ); }
 
 inline bool KAbstractByteArrayModel::isReadOnly() const { return false; }
 
