@@ -157,9 +157,6 @@ QString KTextCharCodec::nameOfEncoding( KEncoding C )
 }
  */
 
-
-QStringList KTextCharCodec::CodecNames;
-
 KTextCharCodec *KTextCharCodec::createLocalCodec()
 {
   QTextCodec *Codec = KGlobal::locale()->codecForEncoding();
@@ -181,8 +178,10 @@ KTextCharCodec *KTextCharCodec::createCodec( const QString &CodeName )
 
 const QStringList &KTextCharCodec::codecNames()
 {
+  static QStringList TextCodecNames;
+
   // first call?
-  if( CodecNames.isEmpty() )
+  if( TextCodecNames.isEmpty() )
   {
     for( unsigned int i=0; i<NoOfEncodings; ++i )
     {
@@ -190,11 +189,11 @@ const QStringList &KTextCharCodec::codecNames()
       QString Name = QString::fromLatin1( EncodingNames[i].Name );
       QTextCodec* Codec = KGlobal::charsets()->codecForName( Name, Found );
       if( Found )
-        CodecNames.append( QString::fromLatin1(Codec->name()) );
+        TextCodecNames.append( QString::fromLatin1(Codec->name()) );
     }
   }
 
-  return CodecNames;
+  return TextCodecNames;
 }
 
 
@@ -208,6 +207,11 @@ KTextCharCodec::~KTextCharCodec()
 {
   delete Decoder;
   delete Encoder;
+}
+
+bool KTextCharCodec::canEncode( const QChar &C ) const
+{
+  return Codec->canEncode( C );
 }
 
 bool KTextCharCodec::encode( char *D, const QChar &C ) const

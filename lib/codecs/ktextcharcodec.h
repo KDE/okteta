@@ -46,8 +46,8 @@ class KTextCharCodec : public KCharCodec
   public: // KCharCodec API
     virtual bool encode( char *D, const QChar &C ) const;
     virtual KChar decode( char Byte ) const;
+    virtual bool canEncode( const QChar &C ) const;
     virtual const QString& name() const;
-
 
   protected:
     QTextCodec *Codec;
@@ -57,8 +57,6 @@ class KTextCharCodec : public KCharCodec
     QTextEncoder *Encoder;
     /** */
     mutable QString Name;
-
-    static QStringList CodecNames;
 };
 
 }

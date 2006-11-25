@@ -33,6 +33,7 @@ class KEBCDIC1047CharCodec : public KCharCodec
   public: // KCharCodec API
     virtual KChar decode( char Byte ) const;
     virtual bool encode( char *D, const QChar &C ) const;
+    virtual bool canEncode( const QChar &C ) const;
     virtual const QString& name() const;
 
   public:

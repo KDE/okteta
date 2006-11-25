@@ -23,10 +23,10 @@
 
 namespace KHECore {
 
-QStringList KCharCodec::CodecNames;
 
 const QStringList &KCharCodec::codecNames()
 {
+  static QStringList CodecNames;
   // first call?
   if( CodecNames.isEmpty() )
   {

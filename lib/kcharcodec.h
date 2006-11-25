@@ -46,11 +46,8 @@ class KHECORE_EXPORT KCharCodec
   public: // API to be implemented
     virtual KChar decode( char Byte ) const = 0;
     virtual bool encode( char *D, const QChar &C ) const = 0;
+    virtual bool canEncode( const QChar &C ) const = 0;
     virtual const QString& name() const = 0;
-
-  protected:
-    /** */
-    static QStringList CodecNames;
 };
 
 }

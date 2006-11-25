@@ -41,16 +41,17 @@ KByteCodec *KByteCodec::createCodec( KCoding C )
 unsigned int KByteCodec::decode( unsigned char *Char, const QString &Digits, uint Pos ) const
 {
   //kDebug() << QString("KByteCodec::decode(%1,%2)").arg(Digits).arg(Pos) << endl;
-  const uint P = Pos;
+  const unsigned int OldPos = Pos;
+  const unsigned int Left = Digits.size() - Pos;
 
-  // remove leading 0s
-  while( Digits.at(Pos) == '0' ) { ++Pos; }
-
-  unsigned char C = 0;
   unsigned int d = encodingWidth();
+  if( Left < d )
+    d = Left;
+
+  unsigned char Result = 0;
   do
   {
-    if( !appendDigit(&C,Digits.at(Pos).combiningClass ()) )
+    if( !appendDigit(&Result,Digits.at(Pos).toLatin1()) )
       break;
 
     ++Pos;
@@ -58,8 +59,8 @@ unsigned int KByteCodec::decode( unsigned char *Char, const QString &Digits, uin
   }
   while( d > 0 );
 
-  *Char = C;
-  return Pos - P;
+  *Char = Result;
+  return Pos - OldPos;
 }
 
 }

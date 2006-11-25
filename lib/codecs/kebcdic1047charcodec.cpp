@@ -112,6 +112,12 @@ KChar KEBCDIC1047CharCodec::decode( char Byte ) const
   return QChar(UnicodeChars[(unsigned char)Byte]);
 }
 
+bool KEBCDIC1047CharCodec::canEncode( const QChar &C ) const
+{
+  return ( 0x00FF < C.unicode() );
+}
+
+
 const QString& KEBCDIC1047CharCodec::name() const
 {
   return codecName();

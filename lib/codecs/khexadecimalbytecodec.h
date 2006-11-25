@@ -18,19 +18,13 @@
 #ifndef KHE_CORE_KHEXADECIMALBYTECODEC_H
 #define KHE_CORE_KHEXADECIMALBYTECODEC_H
 
+
 // lib specific
-#include "kbytecodec.h"
+#include <kbytecodec.h>
+
 
 namespace KHECore
 {
-
-/** class that is able to convert codings to and from hexadecimal
-   *
-   * the buffer will be always filled up to CodingWidth, if not using shortCodingFunction
-   * a closing '\0' will be always added
-   *
-   *@author Friedrich W. H. Kossebau
- */
 
 class KHexadecimalByteCodec : public KByteCodec
 {
@@ -42,22 +36,14 @@ class KHexadecimalByteCodec : public KByteCodec
     bool smallDigits() const;
 
   public: // API to be implemented
-    /** */
     virtual unsigned int encodingWidth() const { return 2; }
-    /** */
     virtual unsigned char digitsFilledLimit() const { return 16; }
 
-    /** encodes the Char and writes the result to */
     virtual void encode( QString &Digits, unsigned  int Pos, const unsigned char Char ) const;
-    /** */
     virtual void encodeShort( QString &Digits, unsigned  int Pos, const unsigned char Char ) const;
-    /** */
     virtual bool appendDigit( unsigned char *Byte, const unsigned char Digit ) const;
-    /** */
     virtual void removeLastDigit( unsigned char *Byte ) const;
-    /** */
     virtual bool isValidDigit( const unsigned char Digit ) const;
-    /** */
     virtual bool turnToValue( unsigned char *Digit ) const;
 
   protected:

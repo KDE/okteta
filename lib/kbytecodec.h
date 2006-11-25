@@ -25,6 +25,7 @@
 #include "khe.h"
 #include "khexedit_export.h"
 
+
 namespace KHECore
 {
 
@@ -40,13 +41,14 @@ namespace KHECore
 class KHECORE_EXPORT KByteCodec
 {
   public:
-    virtual ~KByteCodec() {}
-
-  public:
     static KByteCodec *createCodec( KCoding C );
 
-  protected: // hiding, as this class should never be instanciated
+  public:
+    virtual ~KByteCodec() {}
+
+  protected:
     KByteCodec() {}
+
   public: // API to be implemented
     /** */
     virtual unsigned int encodingWidth() const = 0;
