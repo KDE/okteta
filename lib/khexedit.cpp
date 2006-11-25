@@ -94,7 +94,6 @@ KHexEdit::KHexEdit( KHECore::KAbstractByteArrayModel *Buffer, QWidget *Parent )
    Codec( 0 ),
    ClipboardMode( QClipboard::Clipboard ),
    ResizeStyle( DefaultResizeStyle ),
-   Encoding( MaxEncodingId ), // forces update
    ReadOnly( false ),
 //    Modified( false ),
    OverWriteOnly( false ),
@@ -961,7 +960,7 @@ void KHexEdit::removeSelectedData()
 void KHexEdit::updateRange( int Start, int End )
 {
   BufferRanges->addChangedRange( Start, End );
-kDebug() << "update: "<<Start<<","<<End<<endl;
+// kDebug() << "update: "<<Start<<","<<End<<endl;
 
   unpauseCursor();
   updateChanged();
@@ -982,8 +981,8 @@ void KHexEdit::onContentsReplaced( int Pos, int RemovedLength, int InsertedLengt
     updateColumn( *OffsetColumn );
   }
 
-kDebug()<< "Pos:"<<Pos<<", RemovedLength:"<<RemovedLength<<", InsertedLength:"<<InsertedLength<<endl;
-kDebug() << "Cursor:"<<BufferCursor->index()<<", "<<BufferCursor->isBehind()<<endl;
+// kDebug()<< "Pos:"<<Pos<<", RemovedLength:"<<RemovedLength<<", InsertedLength:"<<InsertedLength<<endl;
+// kDebug() << "Cursor:"<<BufferCursor->index()<<", "<<BufferCursor->isBehind()<<endl;
   // adapt cursor(s)
   if( Appending )
     BufferCursor->gotoEnd();
@@ -991,8 +990,8 @@ kDebug() << "Cursor:"<<BufferCursor->index()<<", "<<BufferCursor->isBehind()<<en
     BufferCursor->adaptToChange( Pos, RemovedLength, InsertedLength );
 
   BufferRanges->adaptSelectionToChange( Pos, RemovedLength, InsertedLength );
-kDebug() << "Cursor:"<<BufferCursor->index()<<", Selection:"<<BufferRanges->selectionStart()<<"-"<<BufferRanges->selectionEnd()
-         <<", BytesPerLine: "<<BufferLayout->noOfBytesPerLine()<<endl;
+// kDebug() << "Cursor:"<<BufferCursor->index()<<", Selection:"<<BufferRanges->selectionStart()<<"-"<<BufferRanges->selectionEnd()
+//          <<", BytesPerLine: "<<BufferLayout->noOfBytesPerLine()<<endl;
   emit cursorPositionChanged( BufferCursor->realIndex() );
 }
 
