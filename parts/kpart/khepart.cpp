@@ -19,7 +19,7 @@
 #include <klocale.h>
 //#include <kinstance.h>
 #include <kaction.h>
-#include <kstdaction.h>
+#include <kstandardaction.h>
 #include <kselectaction.h>
 #include <ktoggleaction.h>
 //#include <kglobalsettings.h>
@@ -69,10 +69,10 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
 {
   KActionCollection *AC = actionCollection();
   // create our actions
-  CopyAction = BrowserViewWanted ? 0 : KStdAction::copy( HexEdit, SLOT(copy()), AC );
+  CopyAction = BrowserViewWanted ? 0 : KStandardAction::copy( HexEdit, SLOT(copy()), AC );
 
-  KStdAction::selectAll( this, SLOT(onSelectAll()), AC );
-  DeselectAction = KStdAction::deselect( this, SLOT(onUnselect()), AC );
+  KStandardAction::selectAll( this, SLOT(onSelectAll()), AC );
+  DeselectAction = KStandardAction::deselect( this, SLOT(onUnselect()), AC );
 
   // value encoding
   CodingAction = new KSelectAction( i18n("&Value Coding"), AC, "view_valuecoding" );
@@ -92,8 +92,8 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
   ShowUnprintableAction = new KToggleAction( i18n("Show &Unprintable Chars (<32)"), AC, "view_showunprintable" );
   connect( ShowUnprintableAction, SIGNAL(activated(int)), SLOT(onSetShowUnprintable()) );
 
-  KStdAction::zoomIn(  HexEdit, SLOT(zoomIn()),  AC );
-  KStdAction::zoomOut( HexEdit, SLOT(zoomOut()), AC );
+  KStandardAction::zoomIn(  HexEdit, SLOT(zoomIn()),  AC );
+  KStandardAction::zoomOut( HexEdit, SLOT(zoomOut()), AC );
 
   // resize style
   ResizeStyleAction = new KSelectAction( i18n("&Resize Style"), AC, "resizestyle" );
