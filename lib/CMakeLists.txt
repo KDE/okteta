@@ -58,7 +58,7 @@ set( khexeditgui_LIB_SRCS
 kde4_automoc(${khexeditcore_LIB_SRCS} ${khexeditgui_LIB_SRCS})
 
 kde4_add_library( khexeditcore SHARED ${khexeditcore_LIB_SRCS} )
-target_link_libraries( khexeditcore  ${KDE4_KDECORE_LIBS} )
+target_link_libraries( khexeditcore  ${KDE4_KDEUI_LIBS} )
 set_target_properties( khexeditcore PROPERTIES VERSION 1.0.0 SOVERSION 1 )
 
 
