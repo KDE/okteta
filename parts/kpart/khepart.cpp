@@ -19,6 +19,7 @@
 #include <klocale.h>
 //#include <kinstance.h>
 #include <kaction.h>
+#include <kactioncollection.h>
 #include <kstandardaction.h>
 #include <kselectaction.h>
 #include <ktoggleaction.h>
@@ -75,7 +76,8 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
   DeselectAction = KStandardAction::deselect( this, SLOT(onUnselect()), AC );
 
   // value encoding
-  CodingAction = new KSelectAction( i18n("&Value Coding"), AC, "view_valuecoding" );
+  CodingAction = AC->add<KSelectAction>( "view_valuecoding" );
+  CodingAction->setText( i18n("&Value Coding") );
   QStringList List;
   List.append( i18n("&Hexadecimal") );
   List.append( i18n("&Decimal")     );
@@ -85,18 +87,21 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
   connect( CodingAction, SIGNAL(triggered(int)), SLOT(onSetCoding(int)) );
 
   // document encoding
-  EncodingAction = new KSelectAction( i18n("&Char Encoding"), AC, "view_charencoding" );
+  EncodingAction = AC->add<KSelectAction>( "view_charencoding" );
+  EncodingAction->setText( i18n("&Char Encoding") );
   EncodingAction->setItems( KHECore::KCharCodec::codecNames() );
   connect( EncodingAction, SIGNAL(triggered(int)), SLOT(onSetEncoding(int)) );
 
-  ShowUnprintableAction = new KToggleAction( i18n("Show &Unprintable Chars (<32)"), AC, "view_showunprintable" );
+  ShowUnprintableAction = AC->add<KToggleAction>( "view_showunprintable" );
+  ShowUnprintableAction->setText( i18n("Show &Unprintable Chars (<32)") );
   connect( ShowUnprintableAction, SIGNAL(activated(int)), SLOT(onSetShowUnprintable()) );
 
   KStandardAction::zoomIn(  HexEdit, SLOT(zoomIn()),  AC );
   KStandardAction::zoomOut( HexEdit, SLOT(zoomOut()), AC );
 
   // resize style
-  ResizeStyleAction = new KSelectAction( i18n("&Resize Style"), AC, "resizestyle" );
+  ResizeStyleAction = AC->add<KSelectAction>( "resizestyle" );
+  ResizeStyleAction->setText( i18n("&Resize Style") );
   List.clear();
   List.append( i18n("&No Resize") );
   List.append( i18n("&Lock Groups") );
@@ -104,12 +109,14 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
   ResizeStyleAction->setItems( List );
   connect( ResizeStyleAction, SIGNAL(triggered(int)), SLOT(onSetResizeStyle(int)) );
 
-  ShowOffsetColumnAction = new KToggleAction( i18n("&Line Offset"), AC, "view_lineoffset" );
+  ShowOffsetColumnAction = AC->add<KToggleAction>( "view_lineoffset" );
+  ShowOffsetColumnAction->setText( i18n("&Line Offset") );
   ShowOffsetColumnAction->setShortcut( QKeySequence( Qt::Key_F11 ) );
   connect( ShowOffsetColumnAction, SIGNAL(activated(int)), SLOT(onToggleOffsetColumn()) );
 
   // show buffer columns
-  ToggleColumnsAction = new KSelectAction( i18n("&Columns"), AC, "togglecolumns" );
+  ToggleColumnsAction = AC->add<KSelectAction>( "togglecolumns" );
+  ToggleColumnsAction->setText( i18n("&Columns") );
   List.clear();
   List.append( i18n("&Values Column") );
   List.append( i18n("&Chars Column") );
