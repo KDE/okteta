@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=BytesEdit Widget
+Name[el]=Γραφικό συστατικό BytesEdit
 Name[fr]=Composant éditeur binaire
 Name[x-test]=xxBytesEdit Widgetxx
 X-KDE-Library=libkbytearrayedit
