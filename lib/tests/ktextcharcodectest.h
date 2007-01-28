@@ -19,7 +19,7 @@
 #ifndef KTEXTCHARCODECTEST_H
 #define KTEXTCHARCODECTEST_H
 
-class KInstance;
+class KComponentData;
 
 // qt specific
 #include <QObject>
@@ -28,7 +28,7 @@ class KTextCharCodecTest : public QObject
 {
   Q_OBJECT
 
-    KInstance *Instance;
+    KComponentData *Instance;
 
   private Q_SLOTS: // test functions
     void initTestCase();

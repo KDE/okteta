@@ -16,7 +16,7 @@
 
 
 // kde specific
-#include <kinstance.h>
+#include <kcomponentdata.h>
 #include <kaboutdata.h>
 #include <klocale.h>
 // part specific
@@ -37,7 +37,7 @@ static const char FWHKEmailAddress[] = "Friedrich.W.H@Kossebau.de";
 // static const char FWHKWebAddress[] = "http://www.kossebau.de";
 
 
-KInstance*  KHexEditPartFactory::s_instance = 0;
+KComponentData *KHexEditPartFactory::s_instance = 0;
 KAboutData* KHexEditPartFactory::s_about = 0;
 
 
@@ -71,16 +71,16 @@ KParts::Part* KHexEditPartFactory::createPartObject( QWidget *ParentWidget,
 }
 
 
-KInstance* KHexEditPartFactory::instance()
+const KComponentData &KHexEditPartFactory::componentData()
 {
   if( !s_instance )
   {
     s_about = new KAboutData( PartId, PartName, PartVersion, PartDescription,
                               KAboutData::License_GPL_V2, PartCopyright, 0, 0, FWHKEmailAddress );
     s_about->addAuthor( FWHKName, FWHKTask, FWHKEmailAddress );
-    s_instance = new KInstance( s_about );
+    s_instance = new KComponentData( s_about );
   }
-  return s_instance;
+  return *s_instance;
 }
 
 
