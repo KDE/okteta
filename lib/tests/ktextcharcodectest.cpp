@@ -18,7 +18,7 @@
 // qt specific
 #include <QtTest>
 // kde specific
-#include <kinstance.h>
+#include <kcomponentdata.h>
 // lib specific
 #include <codecs/ktextcharcodec.h>
 // test specific
@@ -30,7 +30,7 @@ using namespace KHECore;
 
 void KTextCharCodecTest::initTestCase()
 {
-  Instance = new KInstance( "KTextCharCodecTest" );
+  Instance = new KComponentData( "KTextCharCodecTest" );
 }
 
 void KTextCharCodecTest::cleanupTestCase()

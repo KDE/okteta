@@ -17,7 +17,7 @@
 
 // kde specific
 #include <klocale.h>
-//#include <kinstance.h>
+//#include <kcomponentdata.h>
 #include <kaction.h>
 #include <kactioncollection.h>
 #include <kstandardaction.h>
@@ -41,7 +41,7 @@ KHexEditPart::KHexEditPart( QWidget *ParentWidget,
                             bool BrowserViewWanted )
  : KParts::ReadOnlyPart( Parent )
 {
-  setInstance( KHexEditPartFactory::instance() );
+  setComponentData( KHexEditPartFactory::componentData() );
 
   HexEdit = new KHEUI::KHexEdit( &Wrapping, ParentWidget );
   HexEdit->setNoOfBytesPerLine( 16 );
