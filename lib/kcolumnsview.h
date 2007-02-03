@@ -144,7 +144,7 @@ class KHEUI_EXPORT KColumnsView : public QAbstractScrollArea
 //    bool Reversed;
 
   private:
-    KColumnsViewPrivate *d;
+    KColumnsViewPrivate * const d;
 };
 
 

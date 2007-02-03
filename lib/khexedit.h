@@ -546,7 +546,7 @@ class KHEUI_EXPORT KHexEdit : public KColumnsView
 
   private:
     /** the binary compatibility saving helper */
-    KHexEditPrivate* d;
+    KHexEditPrivate * const d;
 
   private: // Disabling copy constructor and operator= - not useful
     KHexEdit( const KHexEdit & );
