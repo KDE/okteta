@@ -127,14 +127,6 @@ class KHECORE_EXPORT KWordBufferService
     KCharCodec *CharCodec;
 };
 
-
-inline KWordBufferService::KWordBufferService( KAbstractByteArrayModel *B, KCharCodec *C )
-  : Buffer( B ), CharCodec( C ) {}
-inline KWordBufferService::~KWordBufferService() {}
-
-inline KHE::KSection KWordBufferService::wordSection( unsigned int Index ) const
-{ return isWordChar(Index) ? KHE::KSection( indexOfWordStart(Index), indexOfWordEnd(Index) ) : KHE::KSection(); }
-
 }
 
 #endif

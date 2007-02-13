@@ -20,7 +20,19 @@
 #include "kcharcodec.h"
 #include "kwordbufferservice.h"
 
+
 namespace KHECore {
+
+
+KWordBufferService::KWordBufferService( KAbstractByteArrayModel *B, KCharCodec *C )
+ : Buffer( B ), CharCodec( C ) {}
+
+KHE::KSection KWordBufferService::wordSection( unsigned int Index ) const
+{
+  return isWordChar(Index) ?
+           KHE::KSection( indexOfWordStart(Index), indexOfWordEnd(Index) ) :
+           KHE::KSection();
+}
 
 
 bool KWordBufferService::isWordChar( unsigned int Index ) const
@@ -207,5 +219,7 @@ int KWordBufferService::indexOfBehindLeftWordEnd( unsigned int Index ) const
   return 0;
 }
 */
+
+KWordBufferService::~KWordBufferService() {}
 
 }
