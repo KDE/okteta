@@ -31,7 +31,7 @@ class KByteArrayModelPrivate
     KByteArrayModelPrivate( KByteArrayModel *parent, char *D, unsigned int S, int RS, bool KM );
     KByteArrayModelPrivate( KByteArrayModel *parent, const char *D, unsigned int S );
     KByteArrayModelPrivate( KByteArrayModel *parent, int S, int MS );
-    ~KByteArrayModelPrivate();;
+    ~KByteArrayModelPrivate();
 
   public:
     char datum( unsigned int offset ) const;
