@@ -246,13 +246,6 @@ class KHECORE_EXPORT KAbstractByteArrayModel : public QObject
     //void undoAvailable( bool IsAvailable );
 };
 
-
-inline KAbstractByteArrayModel::KAbstractByteArrayModel() {}
-inline KAbstractByteArrayModel::~KAbstractByteArrayModel() {}
-
-//inline const char *KAbstractByteArrayModel::dataSet( int Offset, int Length ) const
-//{ return dataSet( KSection(Offset,Offset+Length-1) ); }
-
 inline int KAbstractByteArrayModel::insert( int Pos, const QByteArray &Source )
 { return insert( Pos, Source.data(), Source.size() ); }
 

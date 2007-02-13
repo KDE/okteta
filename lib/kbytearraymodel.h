@@ -2,8 +2,8 @@
                           kbytearraymodel.h  -  description
                              -------------------
     begin                : Mit Jun 03 2003
-    copyright            : (C) 2003 by Friedrich W. H. Kossebau
-    email                : Friedrich.W.H@Kossebau.de
+    copyright            : (C) 2003,2007 by Friedrich W. H. Kossebau
+    email                : kossebau@kde.org
  ***************************************************************************/
 
 /***************************************************************************
@@ -24,54 +24,48 @@
 
 namespace KHECore
 {
-/*
-class KPlainBufferIterator : public KDataBufferIterator
-{
-}
-*/
-/** base class for all Data buffers that are used to display
-  * TODO: think about a way to inform KHexEdit that there has been
-  * a change in the buffer outside. what kind of changes are possible?
+
+class KByteArrayModelPrivate;
+
+/** 
   *@author Friedrich W. H. Kossebau
   */
 
 class KHECORE_EXPORT KByteArrayModel : public KAbstractByteArrayModel
 {
+    friend class KByteArrayModelPrivate;
+
   public:
-    KByteArrayModel( char *D, unsigned int S, int RS = -1, bool KM = true );
-    KByteArrayModel( const char *D, unsigned int S );
-    KByteArrayModel( int S=0, int MS = -1 );
+    KByteArrayModel( char *data, unsigned int size, int rawSize = -1, bool keepMemory = true );
+    KByteArrayModel( const char *data, unsigned int size );
+    explicit KByteArrayModel( int size=0, int maxSize = -1 );
     virtual ~KByteArrayModel();
 
   public: // KAbstractByteArrayModel API
-    //virtual KDataBufferIterator *iterator() const;
-    virtual char datum( unsigned int Offset ) const;
+    virtual char datum( unsigned int offset ) const;
     virtual int size() const;
     virtual bool isReadOnly() const;
     virtual bool isModified() const;
 
-    virtual int insert( int Pos, const char*, int Length );
-    virtual int remove( const KSection &Remove );
-    virtual unsigned int replace( const KSection &Remove, const char*, unsigned int InputLength );
-    virtual int move( int DestPos, const KSection &SourceSection );
-    virtual int fill( const char FillChar, unsigned int Pos = 0, int Length = -1 );
-    virtual void setDatum( unsigned int Offset, const char Char );
+    virtual int insert( int at, const char *data, int length );
+    virtual int remove( const KSection &section );
+    virtual unsigned int replace( const KSection &before, const char *after, unsigned int afterLength );
+    virtual int move( int to, const KSection &fromSection );
+    virtual int fill( const char fillChar, unsigned int from = 0, int length = -1 );
+    virtual void setDatum( unsigned int offset, const char datum );
 
-    virtual void setModified( bool M = true );
+    virtual void setModified( bool modified = true );
 
-    virtual int indexOf( const char*, int Length, int From = 0 ) const;
-//     virtual int find( const char*KeyData, int Length, const KSection &Section ) const;
-    virtual int lastIndexOf( const char*, int Length, int From = -1 ) const;
-
-/*     virtual int find( const QString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */
+    virtual int indexOf( const char *searchString, int length, int from  = 0 ) const;
+    virtual int lastIndexOf( const char *searchString, int length, int from = -1 ) const;
 
   public:
     void setReadOnly( bool RO = true );
     void setMaxSize( int MS );
     /** sets whether the memory given by setData or in the constructor should be kept on resize
       */
-    void setKeepsMemory( bool KM = true );
-    void setAutoDelete( bool AD = true );
+    void setKeepsMemory( bool keepMemory = true );
+    void setAutoDelete( bool autoDelete = true );
     void signalContentsChanged( int i1, int i2 );
 
   public:
@@ -82,52 +76,8 @@ class KHECORE_EXPORT KByteArrayModel : public KAbstractByteArrayModel
     bool autoDelete() const;
 
   protected:
-    /** resizes the buffer, if possible, saving the data and splitting the data, if demanded
-     * @param AddSize additional size the buffer should grow
-     * @param SplitPos if -1 does not split
-     * @param SaveUpperPart true if upper part should be copied into new buffer
-     * @return additional size the buffer has grown
-     */
-    int addSize( int AddSize, int SplitPos = -1, bool SaveUpperPart = true );
-
-  protected:
-    /** */
-    char *Data;
-    /** size of the data */
-    unsigned int Size;
-    /** Size of data array */
-    unsigned int RawSize;
-    /** maximal size of array, unlimited if -1 */
-    int MaxSize;
-    /** flag whether the initially given memory should be kept */
-    bool KeepsMemory:1;
-    /** flag whether the  */
-    bool AutoDelete:1;
-    /**  */
-    bool ReadOnly:1;
-    /** */
-    bool Modified:1;
+    KByteArrayModelPrivate * const d;
 };
-
-
-inline char KByteArrayModel::datum( unsigned int Offset ) const { return Data[Offset]; }
-inline int KByteArrayModel::size()                        const { return Size; }
-
-inline bool KByteArrayModel::isReadOnly()   const { return ReadOnly; }
-inline bool KByteArrayModel::isModified()   const { return Modified; }
-
-inline void KByteArrayModel::setReadOnly( bool RO )    { ReadOnly = RO; }
-inline void KByteArrayModel::setModified( bool M )     { Modified = M; }
-inline void KByteArrayModel::setMaxSize( int MS )      { MaxSize = MS; }
-inline void KByteArrayModel::setKeepsMemory( bool KM ) { KeepsMemory = KM; }
-inline void KByteArrayModel::setAutoDelete( bool AD )  { AutoDelete = AD; }
-
-inline char *KByteArrayModel::data()       const { return Data; }
-inline int KByteArrayModel::maxSize()      const { return MaxSize; }
-inline bool KByteArrayModel::keepsMemory() const { return KeepsMemory; }
-inline bool KByteArrayModel::autoDelete()  const { return AutoDelete; }
-
-inline void KByteArrayModel::signalContentsChanged( int i1, int i2 ) { emit contentsChanged(i1,i2); }
 
 }
 

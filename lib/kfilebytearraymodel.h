@@ -2,8 +2,8 @@
                           kfilebytearraymodel.h  -  description
                              -------------------
     begin                : Mit Jun 02 2003
-    copyright            : (C) 2003 by Friedrich W. H. Kossebau
-    email                : Friedrich.W.H@Kossebau.de
+    copyright            : (C) 2003,2007 by Friedrich W. H. Kossebau
+    email                : kossebau@kde.org
  ***************************************************************************/
 
 /***************************************************************************
@@ -19,100 +19,51 @@
 #define KHE_CORE_KFILEBYTEARRAYMODEL_H
 
 
-// qt specific
-#include <QtCore/QVector>
-#include <QtCore/QFile>
 // lib specific
 #include "kabstractbytearraymodel.h"
 
 
 namespace KHECore {
 
-/** base class for all Data buffers that are used to display
-  * TODO: think about a way to inform KHexEdit that there has been
-  * a change in the buffer outside. what kind of changes are possible?
+class KFileByteArrayModelPrivate;
+
+/**
   *@author Friedrich W. H. Kossebau
   */
 
 class KHECORE_EXPORT KFileByteArrayModel : public KAbstractByteArrayModel
 {
-    typedef QVector<char *> KPageOfChar;
+    friend class KFileByteArrayModelPrivate;
 
   public:
     /** default is only 50*4k = 200k memory image */
-    KFileByteArrayModel( int NP = 50, int PS = 4096 );
+    KFileByteArrayModel( int pageNumber = 50, int pageSize = 4096 );
     virtual ~KFileByteArrayModel();
 
   public: // KAbstractByteArrayModel API
-    virtual const char *dataSet( const KSection &S ) const;
-    virtual char datum( unsigned int Offset ) const;
+    virtual char datum( unsigned int offset ) const;
     virtual int size() const;
     virtual bool isReadOnly() const;
     virtual bool isModified() const;
 
-    virtual int insert( int Pos, const char*, int Length );
-    virtual int remove( const KSection &S );
-    virtual unsigned int replace( const KSection &S, const char*, unsigned int InputLength );
-    virtual int move( int DestPos, const KSection &SourceSection );
-    virtual int fill( char FillChar, unsigned int Pos = 0, int Length = -1 );
-    virtual void setDatum( unsigned int Offset, const char Char );
+    virtual int insert( int at, const char *data, int length );
+    virtual int remove( const KSection &section );
+    virtual unsigned int replace( const KSection &before, const char *after, unsigned int afterLength );
+    virtual int move( int to, const KSection &fromSection );
+    virtual int fill( const char fillChar, unsigned int from = 0, int length = -1 );
+    virtual void setDatum( unsigned int offset, const char datum );
 
-    virtual void setModified( bool M = true );
-
-    //virtual int find( const char*, int Length, int Pos = 0 ) const;
-    virtual int find( const char*KeyData, int Length, const KSection &Section ) const;
-    virtual int rfind( const char*, int Length, int Pos = -1 ) const;
-
-/*     virtual int find( const QString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */
+    virtual void setModified( bool modified = true );
 
   public:
-    void setReadOnly( bool RO = true );
+    void setReadOnly( bool readOnly = true );
     bool isOpen() const;
-    bool open( const QString& filename );
+    bool open( const QString &filename );
     bool close();
 
   protected:
-    bool ensurePageLoaded( unsigned int PageIndex ) const;
-    bool freePage( unsigned int PageIndex ) const;
-
-
-  protected:
-    /** */
-    mutable QFile File;
-    /**  */
-    bool ReadOnly:1;
-    bool IsOpen:1;
-    bool AtEOF:1;
-    /** maximum number of pages which could be currently loaded */
-    unsigned int NoOfUsedPages;
-    /**  number of actually not used pages (in terms of NoOfUsedPages) */
-    mutable int NoOfFreePages;
-    /** number of bytes in a page */
-    unsigned int PageSize;
-    /** first currently loaded page */
-    mutable int FirstPage;
-    /** last currently loaded page */
-    mutable int LastPage;
-    /** */
-    mutable KPageOfChar Data;
-    /** */
-    unsigned int Size;
-
-    /** current offset */
-    mutable unsigned int OffsetOfActualPage;
-    /** points to the actual page */
-    mutable char* ActualPage;
+    KFileByteArrayModelPrivate * const d;
 };
-
-inline int KFileByteArrayModel::size()        const   { return Size; }
-inline bool KFileByteArrayModel::isReadOnly() const   { return ReadOnly; }
-inline bool KFileByteArrayModel::isModified() const   { return false; }
-inline void KFileByteArrayModel::setReadOnly( bool RO ) { ReadOnly = RO; }
-inline void KFileByteArrayModel::setModified( bool )  {}
-
-inline void KFileByteArrayModel::setDatum( unsigned int, const char )  {}
-
-inline bool KFileByteArrayModel::isOpen() const { return File.isOpen(); }
 
 }
 

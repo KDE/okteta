@@ -25,8 +25,10 @@ set(libcodecs_SRCS
 set( khexeditcore_LIB_SRCS
   ${libcodecs_SRCS}
   kabstractbytearraymodel.cpp
+  kbytearraymodel_p.cpp
   kbytearraymodel.cpp
   kfixedsizebytearraymodel.cpp
+  kfilebytearraymodel_p.cpp
   kfilebytearraymodel.cpp
   kwordbufferservice.cpp
   ksection.cpp

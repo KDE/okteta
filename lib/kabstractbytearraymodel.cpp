@@ -20,8 +20,10 @@
 // lib specific
 #include "kabstractbytearraymodel.h"
 
+
 namespace KHECore {
 
+KAbstractByteArrayModel::KAbstractByteArrayModel() {}
 
 int KAbstractByteArrayModel::insert( int Pos, const char* D, int Length )
 {
@@ -99,6 +101,8 @@ int KAbstractByteArrayModel::lastIndexOf( const char* Data, int Length, int From
 
     return Result;
 }
+
+KAbstractByteArrayModel::~KAbstractByteArrayModel() {}
 
 }
 
