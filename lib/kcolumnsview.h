@@ -47,7 +47,7 @@ class KHEUI_EXPORT KColumnsView : public QAbstractScrollArea
    friend class KColumn;
 
   public:
-    KColumnsView( /*bool R = false,*/ QWidget *Parent = 0 );
+    explicit KColumnsView( /*bool R = false,*/ QWidget *Parent = 0 );
     virtual ~KColumnsView();
 
   public: // data-wise sizes

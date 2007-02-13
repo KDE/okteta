@@ -28,7 +28,7 @@ namespace KHECore
 class KChar : public QChar
 {
   public:
-    KChar( QChar C );
+    KChar( QChar C ); // krazy:exclude=explicit
     KChar( QChar C, bool U );
   public:
     bool isUndefined() const;

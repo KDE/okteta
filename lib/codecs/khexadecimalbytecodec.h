@@ -29,7 +29,7 @@ namespace KHECore
 class KHexadecimalByteCodec : public KByteCodec
 {
   public:
-    KHexadecimalByteCodec( bool S = false );
+    explicit KHexadecimalByteCodec( bool S = false );
 
   public:
     bool setSmallDigits( bool S );

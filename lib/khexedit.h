@@ -118,7 +118,7 @@ class KHEUI_EXPORT KHexEdit : public KColumnsView
 
 
   public:
-    KHexEdit( KHECore::KAbstractByteArrayModel *Model = 0, QWidget *Parent = 0 );
+    explicit KHexEdit( KHECore::KAbstractByteArrayModel *Model = 0, QWidget *Parent = 0 );
     virtual ~KHexEdit();
 
 
