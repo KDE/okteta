@@ -1,7 +1,7 @@
 add_subdirectory( tests )
 
 include_directories(
-  ${CMAKE_SOURCE_DIR}/khexedit/lib
+  ${CMAKE_SOURCE_DIR}/khexedit/core
   ${CMAKE_SOURCE_DIR}/khexedit/gui/libkcolumnsview
   ${CMAKE_SOURCE_DIR}/khexedit/gui
 )
