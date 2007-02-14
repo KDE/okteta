@@ -27,7 +27,7 @@
 // corelib specific
 #include <kcharcodec.h>
 // uilib specific
-#include <khexedit.h>
+#include <kbytearrayview.h>
 // part specific
 #include "khepartfactory.h"
 #include "khebrowserextension.h"
@@ -43,7 +43,7 @@ KHexEditPart::KHexEditPart( QWidget *ParentWidget,
 {
   setComponentData( KHexEditPartFactory::componentData() );
 
-  HexEdit = new KHEUI::KHexEdit( &Wrapping, ParentWidget );
+  HexEdit = new KHEUI::KByteArrayView( &Wrapping, ParentWidget );
   HexEdit->setNoOfBytesPerLine( 16 );
   HexEdit->setBufferSpacing( 3, 4, 10 );
   HexEdit->setShowUnprintable( false );
@@ -178,7 +178,7 @@ void KHexEditPart::onUnselect()
 
 void KHexEditPart::onSetCoding( int Coding )
 {
-  HexEdit->setCoding( (KHEUI::KHexEdit::KCoding)Coding );
+  HexEdit->setCoding( (KHEUI::KByteArrayView::KCoding)Coding );
 }
 
 void KHexEditPart::onSetShowUnprintable()
@@ -193,7 +193,7 @@ void KHexEditPart::onToggleOffsetColumn()
 
 void KHexEditPart::onSetResizeStyle( int ResizeStyle )
 {
-  HexEdit->setResizeStyle( (KHEUI::KHexEdit::KResizeStyle)ResizeStyle );
+  HexEdit->setResizeStyle( (KHEUI::KByteArrayView::KResizeStyle)ResizeStyle );
 }
 
 void KHexEditPart::onSetEncoding( int Encoding )

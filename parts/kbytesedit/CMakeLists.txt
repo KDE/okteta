@@ -1,6 +1,10 @@
 add_subdirectory( tests )
 
-include_directories( ${CMAKE_SOURCE_DIR}/khexedit/lib )
+include_directories(
+  ${CMAKE_SOURCE_DIR}/khexedit/lib
+  ${CMAKE_SOURCE_DIR}/khexedit/gui/libkcolumnsview
+  ${CMAKE_SOURCE_DIR}/khexedit/gui
+)
 
 set( kbytearrayedit_PART_SRCS
   kbytearrayedit.cpp

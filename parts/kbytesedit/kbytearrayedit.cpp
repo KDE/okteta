@@ -21,7 +21,7 @@
 // corelib specific
 #include <kbytearraymodel.h>
 // uilib specific
-#include <khexedit.h>
+#include <kbytearrayview.h>
 // part specific
 #include "kbytearrayedit.h"
 
@@ -31,7 +31,7 @@ KByteArrayEdit::KByteArrayEdit( QWidget *parent, const QStringList & )
   : QWidget( parent )
 {
     Model = new KHECore::KByteArrayModel;
-    HexEdit = new KHEUI::KHexEdit( Model, this );
+    HexEdit = new KHEUI::KByteArrayView( Model, this );
 
     QHBoxLayout* Layout = new QHBoxLayout( this );
     Layout->addWidget( HexEdit );
@@ -86,12 +86,12 @@ void KByteArrayEdit::setCursorPosition( int Index )
 
 void KByteArrayEdit::setCoding( KCoding C )
 {
-    HexEdit->setCoding( (KHEUI::KHexEdit::KCoding) C );
+    HexEdit->setCoding( (KHEUI::KByteArrayView::KCoding) C );
 }
 
 void KByteArrayEdit::setResizeStyle( KResizeStyle Style )
 {
-    HexEdit->setResizeStyle( (KHEUI::KHexEdit::KResizeStyle) Style );
+    HexEdit->setResizeStyle( (KHEUI::KByteArrayView::KResizeStyle) Style );
 }
 int KByteArrayEdit::noOfBytesPerLine() const
 {
@@ -149,7 +149,7 @@ void KByteArrayEdit::setBinaryGapWidth( int BGW )
 
 void KByteArrayEdit::setEncoding( KEncoding C )
 {
-    HexEdit->setEncoding( (KHEUI::KHexEdit::KEncoding)C );
+    HexEdit->setEncoding( (KHEUI::KByteArrayView::KEncoding)C );
 }
 
 void KByteArrayEdit::setShowUnprintable( bool SU )

@@ -29,7 +29,7 @@ class KSelectAction;
 
 namespace KHEUI
 {
-class KHexEdit;
+class KByteArrayView;
 }
 
 /**
@@ -74,7 +74,7 @@ class KHexEditPart : public KParts::ReadOnlyPart
     void onSelectionChanged( bool HasSelection );
 
   private:
-    KHEUI::KHexEdit *HexEdit;
+    KHEUI::KByteArrayView *HexEdit;
     KHECore::KFileByteArrayModel Wrapping;
 
     // edit menu

@@ -18,7 +18,7 @@
 // kde specific
 #include <kaction.h>
 // uilib specific
-#include <khexedit.h>
+#include <kbytearrayview.h>
 // part specific
 #include "khepart.h"
 #include "khebrowserextension.h"
@@ -48,7 +48,7 @@ void KHexEditBrowserExtension::saveState( QDataStream &stream )
 {
   KParts::BrowserExtension::saveState( stream );
 
-  KHEUI::KHexEdit *HexEdit = HexEditPart->HexEdit;
+  KHEUI::KByteArrayView *HexEdit = HexEditPart->HexEdit;
 
   stream << (int)HexEdit->offsetColumnVisible() << HexEdit->visibleBufferColumns()
       << (int)HexEdit->resizeStyle() << (int)HexEdit->coding() 
@@ -77,17 +77,17 @@ void KHexEditBrowserExtension::restoreState( QDataStream &stream )
   stream >> OffsetColumnVisible >> VisibleBufferColumns >> ResizeStyle >> Coding >> EncodingName >> ShowUnprintable 
          >> x >> y >> Position >> CursorBehind >> CursorColumn;
 
-  KHEUI::KHexEdit *HexEdit = HexEditPart->HexEdit;
+  KHEUI::KByteArrayView *HexEdit = HexEditPart->HexEdit;
 
   HexEdit->toggleOffsetColumn( OffsetColumnVisible );
   HexEdit->showBufferColumns( VisibleBufferColumns );
-  HexEdit->setResizeStyle( (KHEUI::KHexEdit::KResizeStyle)ResizeStyle );
-  HexEdit->setCoding( (KHEUI::KHexEdit::KCoding)Coding );
+  HexEdit->setResizeStyle( (KHEUI::KByteArrayView::KResizeStyle)ResizeStyle );
+  HexEdit->setCoding( (KHEUI::KByteArrayView::KCoding)Coding );
   HexEdit->setEncoding( EncodingName );
   HexEdit->setShowUnprintable( ShowUnprintable );
   HexEdit->setColumnsPos( x, y );
   HexEdit->setCursorPosition( Position, CursorBehind );
-  HexEdit->setCursorColumn( (KHEUI::KHexEdit::KBufferColumnId)CursorColumn );
+  HexEdit->setCursorColumn( (KHEUI::KByteArrayView::KDataColumnId)CursorColumn );
 
   HexEditPart->fitActionSettings();
 }
