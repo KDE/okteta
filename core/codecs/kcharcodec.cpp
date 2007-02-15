@@ -15,6 +15,8 @@
  ***************************************************************************/
 
 
+// Qt
+#include <QtCore/QStringList>
 // lib specific
 #include "kcharcodec.h"
 #include "ktextcharcodec.h"

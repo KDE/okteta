@@ -341,7 +341,7 @@ KPixelXs KDataColumn::relWideXPixelsOfPos( const KHE::KSection &Positions ) cons
 void KDataColumn::preparePainting( const KPixelXs &_Xs )
 {
   KPixelXs Xs( _Xs );
-  Xs.restrictTo( XSpan );
+  restrictToXSpan( &Xs );
   // translate
   Xs.moveBy( -x() );
 
@@ -374,7 +374,7 @@ void KDataColumn::paintPositions( QPainter *Painter, int Line, const KHE::KSecti
 {
   // clear background
   unsigned int BlankFlag = (Pos.start()!=0?StartsBefore:0) | (Pos.end()!=LastPos?EndsLater:0);
-  const QWidget *Viewport = View->viewport();
+  const QWidget *Viewport = columnsView()->viewport();
   const QBrush &BackgroundBrush = Viewport->palette().brush( Viewport->backgroundRole() );
 
   paintRange( Painter, BackgroundBrush, Pos, BlankFlag );
@@ -483,7 +483,7 @@ void KDataColumn::paintPlain( QPainter *Painter, const KHE::KSection &Positions,
 
 void KDataColumn::paintSelection( QPainter *Painter, const KHE::KSection &Positions, int Index, int Flag )
 {
-  const QPalette &Palette = View->viewport()->palette();
+  const QPalette &Palette = columnsView()->viewport()->palette();
 
   paintRange( Painter, Palette.highlight(), Positions, Flag );
 
@@ -508,7 +508,7 @@ void KDataColumn::paintSelection( QPainter *Painter, const KHE::KSection &Positi
 
 void KDataColumn::paintMarking( QPainter *Painter, const KHE::KSection &Positions, int Index, int Flag )
 {
-  const QPalette &Palette = View->viewport()->palette();
+  const QPalette &Palette = columnsView()->viewport()->palette();
 
   paintRange( Painter, Palette.text(), Positions, Flag );
 
@@ -534,7 +534,7 @@ void KDataColumn::paintRange( QPainter *Painter, const QBrush &Brush, const KHE:
   KPixelX RangeX = Flag & StartsBefore ? relRightXOfPos( Positions.start()-1 ) + 1 : relXOfPos( Positions.start() );
   KPixelX RangeW = (Flag & EndsLater ? relXOfPos( Positions.end()+1 ): relRightXOfPos( Positions.end() ) + 1)  - RangeX;
 
-  Painter->fillRect( RangeX,0, RangeW,LineHeight, Brush );
+  Painter->fillRect( RangeX,0, RangeW,lineHeight(), Brush );
 }
 
 
@@ -543,7 +543,7 @@ void KDataColumn::paintByte( QPainter *Painter, int Index )
   char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : EmptyByte;
   KHECore::KChar ByteChar = Codec->decode( Byte );
 
-  const QWidget *Viewport = View->viewport();
+  const QWidget *Viewport = columnsView()->viewport();
   const QPalette &Palette = Viewport->palette();
   QColor CharColor;
   QBrush Brush = Palette.brush( Viewport->backgroundRole() );
@@ -564,7 +564,7 @@ void KDataColumn::paintByte( QPainter *Painter, int Index )
       CharColor = colorForChar( ByteChar );
   }
 
-  Painter->fillRect( 0,0, ByteWidth,LineHeight, Brush );
+  Painter->fillRect( 0,0, ByteWidth,lineHeight(), Brush );
 
   if( Index > -1 )
     drawByte( Painter, Byte, ByteChar, CharColor );
@@ -580,11 +580,11 @@ void KDataColumn::paintFramedByte( QPainter *Painter, int Index, KFrameStyle Fra
 
   Painter->setPen( colorForChar(ByteChar) );
   if( FrameStyle == Frame )
-    Painter->drawRect( 0,0, ByteWidth-1,LineHeight-1 );
+    Painter->drawRect( 0,0, ByteWidth-1,lineHeight()-1 );
   else if( FrameStyle == Left )
-    Painter->drawLine( 0,0, 0,LineHeight-1 );
+    Painter->drawLine( 0,0, 0,lineHeight()-1 );
   else
-    Painter->drawLine( ByteWidth-1,0, ByteWidth-1,LineHeight-1 );
+    Painter->drawLine( ByteWidth-1,0, ByteWidth-1,lineHeight()-1 );
 }
 
 
@@ -593,7 +593,7 @@ void KDataColumn::paintCursor( QPainter *Painter, int Index )
   char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : EmptyByte;
   KHECore::KChar ByteChar = Codec->decode( Byte );
 
-  Painter->fillRect( 0,0, ByteWidth,LineHeight, QBrush(colorForChar(ByteChar),Qt::SolidPattern) );
+  Painter->fillRect( 0,0, ByteWidth,lineHeight(), QBrush(colorForChar(ByteChar),Qt::SolidPattern) );
 }
 
 

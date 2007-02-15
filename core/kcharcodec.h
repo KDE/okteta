@@ -19,16 +19,17 @@
 #define KHE_CORE_KCHARCODEC_H
 
 
-// qt specific
-#include <QtCore/QStringList>
 // lib specific
 #include "khe.h"
-#include "khechar.h"
 #include "khexedit_export.h"
 
+class QStringList;
 
 namespace KHECore
 {
+
+class KChar;
+
 
 class KHECORE_EXPORT KCharCodec
 {

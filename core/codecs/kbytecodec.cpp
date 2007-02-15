@@ -15,6 +15,8 @@
  ***************************************************************************/
 
 
+// Qt
+#include <QtCore/QString>
 // lib specific
 #include "kbinarybytecodec.h"
 #include "koctalbytecodec.h"
@@ -38,7 +40,7 @@ KByteCodec *KByteCodec::createCodec( KCoding C )
   return Codec;
 }
 
-unsigned int KByteCodec::decode( unsigned char *Char, const QString &Digits, uint Pos ) const
+unsigned int KByteCodec::decode( unsigned char *Char, const QString &Digits, unsigned int Pos ) const
 {
   //kDebug() << QString("KByteCodec::decode(%1,%2)").arg(Digits).arg(Pos) << endl;
   const unsigned int OldPos = Pos;

@@ -23,8 +23,8 @@
 #include <QtCore/QList>
 #include <QtGui/QAbstractScrollArea>
 // commonlib specific
-#include <ksection.h> // TODO: think about moving this out of the public API
 #include <khexedit_export.h>
+#include <ksection.h> // TODO: think about moving this out of the public API
 // lib specific
 #include "kadds.h"
 
@@ -130,43 +130,9 @@ class KHEUI_EXPORT KColumnsView : public QAbstractScrollArea
     void updateWidths();
     void updateScrollBars();
 
-  protected: // calculated
-    /** collection of all the columns. All columns will be autodeleted. */
-    QList<KColumn*> Columns;
-    /** the number of lines which the column view has */
-    int NoOfLines;
-    /** the height of each line in pixels */
-    KPixelY LineHeight;
-    /** the width of all visible columns together */
-    KPixelX ColumnsWidth;
-
-  protected:
-//    bool Reversed;
-
   private:
     KColumnsViewPrivate * const d;
 };
-
-
-inline int KColumnsView::noOfLines()          const { return NoOfLines; }
-inline KPixelY KColumnsView::lineHeight()     const { return LineHeight; }
-inline uint KColumnsView::lineAt( KPixelY y ) const { return (LineHeight!=0) ? y / LineHeight : 0; }
-inline KHE::KSection KColumnsView::visibleLines() const
-{
-  KPixelYs YSpan = KPixelYs::fromWidth( yOffset(), visibleHeight() );
-  return KHE::KSection( lineAt(YSpan.start()), lineAt(YSpan.end()) );
-}
-inline KHE::KSection KColumnsView::visibleLines( const KPixelYs &YPixels ) const
-{ return KHE::KSection( lineAt(YPixels.start()), lineAt(YPixels.end()) ); }
-
-inline KPixelX KColumnsView::visibleWidth()  const { return viewport()->width(); }
-inline KPixelY KColumnsView::visibleHeight() const { return viewport()->height(); }
-
-inline KPixelY KColumnsView::columnsHeight() const { return NoOfLines*LineHeight; }
-inline KPixelX KColumnsView::columnsWidth()  const { return ColumnsWidth; }
-
-inline QPoint KColumnsView::viewportToColumns( const QPoint &P ) const
-{ return QPoint(xOffset(),yOffset()) + P; }
 
 }
 

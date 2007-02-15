@@ -43,17 +43,17 @@ KBorderColumn::~KBorderColumn()
 
 void KBorderColumn::paintLine( QPainter *Painter )
 {
-  if( LineHeight > 0 )
+  if( lineHeight() > 0 )
   {
     KColumn::paintBlankLine( Painter );
 
     if( Middle )
     {
-      const QWidget *Viewport = View->viewport();
+      const QWidget *Viewport = columnsView()->viewport();
       int GridColor = Viewport->style()->styleHint( QStyle::SH_Table_GridLineColor, 0, Viewport );
 
       Painter->setPen( GridColor != -1 ? (QRgb)GridColor : Viewport->palette().mid().color() );
-      Painter->drawLine( LineX, 0, LineX, LineHeight-1 ) ;
+      Painter->drawLine( LineX, 0, LineX, lineHeight()-1 ) ;
     }
   }
 }
@@ -78,7 +78,7 @@ void KBorderColumn::paintEmptyColumn( QPainter *Painter, const KPixelXs &Xs, con
 
   if( Middle && Xs.includes(LX) )
   {
-    const QWidget *Viewport = View->viewport();
+    const QWidget *Viewport = columnsView()->viewport();
     int GridColor = Viewport->style()->styleHint( QStyle::SH_Table_GridLineColor, 0, Viewport );
 
     Painter->setPen( GridColor != -1 ? (QRgb)GridColor : Viewport->palette().mid().color() );

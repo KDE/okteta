@@ -2,7 +2,7 @@
                           kcolumn.h  -  description
                              -------------------
     begin                : Mit Mai 21 2003
-    copyright            : (C) 2003 by Friedrich W. H. Kossebau
+    copyright            : (C) 2003,2007 by Friedrich W. H. Kossebau
     email                : Friedrich.W.H@Kossebau.de
  ***************************************************************************/
 
@@ -31,6 +31,8 @@ namespace KHEUI
 
 class KColumnsView;
 
+class KColumnPrivate;
+
 /** base class for columns of the KColumnsView
   *
   *
@@ -42,8 +44,7 @@ class KColumn
 //    friend class KColumnsView;
   public:
     explicit KColumn( KColumnsView *V );
-    virtual ~KColumn() {}
-
+    virtual ~KColumn();
 
   public: // API to be reimplemented in the subclasses
     /** Before an update of the columns view each column that intersects with the area to be painted
@@ -74,6 +75,8 @@ class KColumn
     void setLineHeight( KPixelY H );
 
   public: // value access
+    /** */
+    KColumnsView *columnsView() const;
     /** left offset x in pixel */
     KPixelX x() const;
     /** total width in pixel */
@@ -84,6 +87,8 @@ class KColumn
     bool isVisible() const;
     /** convenience: returns width if visible else 0 */
     KPixelX visibleWidth() const;
+    /** */
+    KPixelY lineHeight() const;
 
   public: // functional logic
     /** true if column overlaps with pixels between x-positions x1, x2 */
@@ -93,34 +98,13 @@ class KColumn
     /** sets width of the column */
     void setWidth( KPixelX W );
     /** */
+    void restrictToXSpan( KPixelXs *Xs ) const;
+    /** */
     void paintBlankLine( QPainter *P ) const;
 
-  protected: // general column data
-    /** pointer to the view */
-    KColumnsView *View;
-    /** should Column be displayed? */
-    bool Visible;
-
-    /** buffered value */
-    KPixelY LineHeight;
-
-    /** left offset x in pixel */
-    KPixelXs XSpan;
+  private:
+     KColumnPrivate * const d;
 };
-
-
-inline KPixelX KColumn::x()            const { return XSpan.start(); }
-inline KPixelX KColumn::rightX()       const { return XSpan.end(); }
-inline KPixelX KColumn::width()        const { return XSpan.width(); }
-inline bool    KColumn::isVisible()    const { return Visible; }
-inline KPixelX KColumn::visibleWidth() const { return Visible ? XSpan.width(): 0; }
-
-inline void KColumn::setX( KPixelX NewX )       { XSpan.moveToStart( NewX ); }
-inline void KColumn::setWidth( KPixelX W )      { XSpan.setEndByWidth( W ); }
-inline void KColumn::setVisible( bool V )       { Visible = V; }
-inline void KColumn::setLineHeight( KPixelY H ) { LineHeight = H; }
-
-inline bool KColumn::overlaps( const KPixelXs &Xs ) const { return XSpan.overlaps(Xs); }
 
 }
 

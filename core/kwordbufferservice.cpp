@@ -17,6 +17,7 @@
 
 // lib specific
 #include "kabstractbytearraymodel.h"
+#include "khechar.h"
 #include "kcharcodec.h"
 #include "kwordbufferservice.h"
 

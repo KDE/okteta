@@ -15,6 +15,8 @@
  ***************************************************************************/
 
 
+// Qt
+#include <QtCore/QString>
 // lib specific
 #include "kdecimalbytecodec.h"
 

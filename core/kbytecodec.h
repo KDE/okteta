@@ -19,11 +19,11 @@
 #define KHE_CORE_KBYTECODEC_H
 
 
-// qt specific
-#include <QtCore/QString>
 // lib specific
 #include "khe.h"
 #include "khexedit_export.h"
+
+class QString;
 
 
 namespace KHECore
@@ -72,7 +72,7 @@ class KHECORE_EXPORT KByteCodec
 
   public:
     /** */
-    uint decode( unsigned char *Char, const QString &Digits, uint Pos ) const;
+    unsigned int decode( unsigned char *Char, const QString &Digits, unsigned int Pos ) const;
 };
 
 }

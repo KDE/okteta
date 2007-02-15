@@ -44,10 +44,10 @@ KOffsetColumn::~KOffsetColumn()
 
 void KOffsetColumn::paintLine( QPainter *P, int Line )
 {
-  const QWidget *Viewport = View->viewport();
+  const QWidget *Viewport = columnsView()->viewport();
 
   const QBrush &ButtonBrush = Viewport->palette().button();
-  P->fillRect( 0,0, width(),LineHeight, ButtonBrush );
+  P->fillRect( 0,0, width(),lineHeight(), ButtonBrush );
 
   printFunction()( CodedOffset,FirstLineOffset+Delta*Line );
 
@@ -74,9 +74,9 @@ void KOffsetColumn::paintNextLine( QPainter *P )
 void KOffsetColumn::paintEmptyColumn( QPainter *P, const KPixelXs &_Xs, const KPixelYs &Ys )
 {
   KPixelXs Xs( _Xs );
-  Xs.restrictTo( XSpan );
+  restrictToXSpan( &Xs );
 
-  const QBrush &ButtonBrush = View->viewport()->palette().button();
+  const QBrush &ButtonBrush = columnsView()->viewport()->palette().button();
   P->fillRect( Xs.start(), Ys.start(), Xs.width(), Ys.width(), ButtonBrush );
 }
 

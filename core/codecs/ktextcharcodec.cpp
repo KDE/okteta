@@ -22,6 +22,7 @@
 #include <klocale.h>
 #include <kcharsets.h>
 // lib specific
+#include "khechar.h"
 #include "ktextcharcodec.h"
 
 

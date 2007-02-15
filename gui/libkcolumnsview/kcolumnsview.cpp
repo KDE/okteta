@@ -30,13 +30,56 @@ namespace KHEUI {
 
 static const int DefaultSingleStep = 20;
 
+class KColumnsViewPrivate
+{
+  public:
+    KColumnsViewPrivate( /*bool R,*/ );
+    ~KColumnsViewPrivate();
+  public:
+    void updateWidths();
+  public: // calculated
+    /** collection of all the columns. All columns will be autodeleted. */
+    QList<KColumn*> Columns;
+    /** the number of lines which the column view has */
+    int NoOfLines;
+    /** the height of each line in pixels */
+    KPixelY LineHeight;
+    /** the width of all visible columns together */
+    KPixelX ColumnsWidth;
+
+  public:
+//    bool Reversed;
+};
+
+
+KColumnsViewPrivate::KColumnsViewPrivate( /*bool R,*/)
+ : NoOfLines( 0 ),
+   LineHeight( 0 ),
+   ColumnsWidth( 0 )
+//    Reversed( R )
+{}
+
+void KColumnsViewPrivate::updateWidths()
+{
+  ColumnsWidth = 0;
+  QListIterator<KColumn*> it( Columns );
+  while( it.hasNext() )
+  {
+    KColumn *Column = it.next();
+    Column->setX( ColumnsWidth );
+    ColumnsWidth += Column->visibleWidth();
+  }
+}
+
+KColumnsViewPrivate::~KColumnsViewPrivate()
+{
+    while( !Columns.isEmpty() )
+        delete Columns.takeFirst();
+}
+
 KColumnsView::KColumnsView( /*bool R,*/ QWidget *Parent )
  : QAbstractScrollArea( Parent ),
-   NoOfLines( 0 ),
-   LineHeight( 0 ),
-   ColumnsWidth( 0 ),
-//    Reversed( R ),
-   d( 0 )
+   d( new KColumnsViewPrivate() )
 {
   viewport()->setAttribute( Qt::WA_StaticContents );
   viewport()->setBackgroundRole ( QPalette::Base );
@@ -47,11 +90,26 @@ KColumnsView::KColumnsView( /*bool R,*/ QWidget *Parent )
   viewport()->setFocusPolicy( Qt::WheelFocus );
 }
 
-KColumnsView::~KColumnsView()
+
+int KColumnsView::noOfLines()          const { return d->NoOfLines; }
+KPixelY KColumnsView::lineHeight()     const { return d->LineHeight; }
+uint KColumnsView::lineAt( KPixelY y ) const { return (d->LineHeight!=0) ? y / d->LineHeight : 0; }
+KHE::KSection KColumnsView::visibleLines() const
 {
-  while( !Columns.isEmpty() )
-    delete Columns.takeFirst();
+  KPixelYs YSpan = KPixelYs::fromWidth( yOffset(), visibleHeight() );
+  return KHE::KSection( lineAt(YSpan.start()), lineAt(YSpan.end()) );
 }
+KHE::KSection KColumnsView::visibleLines( const KPixelYs &YPixels ) const
+{ return KHE::KSection( lineAt(YPixels.start()), lineAt(YPixels.end()) ); }
+
+KPixelX KColumnsView::visibleWidth()  const { return viewport()->width(); }
+KPixelY KColumnsView::visibleHeight() const { return viewport()->height(); }
+
+KPixelY KColumnsView::columnsHeight() const { return d->NoOfLines*d->LineHeight; }
+KPixelX KColumnsView::columnsWidth()  const { return d->ColumnsWidth; }
+
+QPoint KColumnsView::viewportToColumns( const QPoint &P ) const
+{ return QPoint(xOffset(),yOffset()) + P; }
 
 
 KPixelX KColumnsView::xOffset() const { return horizontalScrollBar()->value(); }
@@ -67,10 +125,10 @@ void KColumnsView::setColumnsPos( KPixelX x, KPixelY y )
 
 void KColumnsView::setNoOfLines( int NewNoOfLines )
 {
-  if( NoOfLines == NewNoOfLines )
+  if( d->NoOfLines == NewNoOfLines )
     return;
 
-  NoOfLines = NewNoOfLines;
+  d->NoOfLines = NewNoOfLines;
 
   updateScrollBars();
 }
@@ -78,30 +136,23 @@ void KColumnsView::setNoOfLines( int NewNoOfLines )
 
 void KColumnsView::setLineHeight( KPixelY LH )
 {
-  if( LH == LineHeight )
+  if( LH == d->LineHeight )
     return;
 
-  LineHeight = LH;
+  d->LineHeight = LH;
 
-  QListIterator<KColumn*> it( Columns );
+  QListIterator<KColumn*> it( d->Columns );
   while( it.hasNext() )
-    it.next()->setLineHeight( LineHeight );
+    it.next()->setLineHeight( d->LineHeight );
 
-  verticalScrollBar()->setSingleStep( LineHeight );
+  verticalScrollBar()->setSingleStep( d->LineHeight );
   updateScrollBars();
 }
 
 
 void KColumnsView::updateWidths()
 {
-  ColumnsWidth = 0;
-  QListIterator<KColumn*> it( Columns );
-  while( it.hasNext() )
-  {
-    KColumn *Column = it.next();
-    Column->setX( ColumnsWidth );
-    ColumnsWidth += Column->visibleWidth();
-  }
+  d->updateWidths();
 
   updateScrollBars();
 }
@@ -129,15 +180,15 @@ void KColumnsView::updateScrollBars()
 
 int KColumnsView::noOfLinesPerPage() const
 {
-  if( LineHeight == 0 )
-    return 1;
+    if( d->LineHeight < 1 )
+        return 1;
 
-  int NoOfLinesPerPage = (visibleHeight()-1) / LineHeight; // -1 ensures to get always the last visible line
+    int NoOfLinesPerPage = (visibleHeight()-1) / d->LineHeight; // -1 ensures to get always the last visible line
 
-  if( NoOfLinesPerPage == 0 )
-    // ensure to move down at least one line
-    NoOfLinesPerPage = 1;
-  return NoOfLinesPerPage;
+    if( NoOfLinesPerPage < 1 )
+        // ensure to move down at least one line
+        NoOfLinesPerPage = 1;
+    return NoOfLinesPerPage;
 }
 
 
@@ -146,17 +197,17 @@ void KColumnsView::addColumn( KColumn *C )
 //   if( Reversed )
 //     Columns.prepend( C );
 //   else
-    Columns.append( C );
+    d->Columns.append( C );
 
-  updateWidths();
+    updateWidths();
 }
 
 
 void KColumnsView::removeColumn( KColumn *C )
 {
-  int Pos = Columns.indexOf( C );
+  int Pos = d->Columns.indexOf( C );
   if( Pos != -1 )
-    Columns.removeAt( Pos );
+    d->Columns.removeAt( Pos );
 
   delete C;
 
@@ -203,13 +254,13 @@ void KColumnsView::drawColumns( QPainter *Painter, int cx, int cy, int cw, int c
   KPixelXs DirtyXs = KPixelXs::fromWidth( cx, cw );
 
   // content to be shown?
-  if( DirtyXs.startsBefore(ColumnsWidth) )
+  if( DirtyXs.startsBefore(d->ColumnsWidth) )
   {
     KPixelYs DirtyYs = KPixelYs::fromWidth( cy, ch );
 
     // collect affected columns
     QList<KColumn*> DirtyColumns;
-    QListIterator<KColumn*> it( Columns );
+    QListIterator<KColumn*> it( d->Columns );
     while( it.hasNext() )
     {
       KColumn *Column = it.next();
@@ -218,15 +269,15 @@ void KColumnsView::drawColumns( QPainter *Painter, int cx, int cy, int cw, int c
     }
 
     // any lines of any columns to be drawn?
-    if( NoOfLines > 0 )
+    if( d->NoOfLines > 0 )
     {
       // calculate affected lines
       KHE::KSection DirtyLines = visibleLines( DirtyYs );
-      DirtyLines.restrictEndTo( NoOfLines - 1 );
+      DirtyLines.restrictEndTo( d->NoOfLines - 1 );
 
       if( DirtyLines.isValid() )
       {
-        KPixelY cy = DirtyLines.start() * LineHeight;
+        KPixelY cy = DirtyLines.start() * d->LineHeight;
 //kDebug()<<"Dirty lines: "<<DirtyLines.start()<<"-"<<DirtyLines.end()<<endl;
         // starting painting with the first line
         int Line = DirtyLines.start();
@@ -254,7 +305,7 @@ void KColumnsView::drawColumns( QPainter *Painter, int cx, int cy, int cw, int c
 
           QListIterator<KColumn*> it( DirtyColumns );
           Column = it.next();
-          Painter->translate( Column->x(), LineHeight );
+          Painter->translate( Column->x(), d->LineHeight );
 
           while( true )
           {
@@ -266,7 +317,7 @@ void KColumnsView::drawColumns( QPainter *Painter, int cx, int cy, int cw, int c
           }
           Painter->translate( -Column->x(), 0 );
         }
-        cy = DirtyLines.end() * LineHeight;
+        cy = DirtyLines.end() * d->LineHeight;
 
         Painter->translate( 0, -cy );
       }
@@ -283,7 +334,7 @@ void KColumnsView::drawColumns( QPainter *Painter, int cx, int cy, int cw, int c
   }
 
   // Painter empty rects
-  DirtyXs.setStart( ColumnsWidth );
+  DirtyXs.setStart( d->ColumnsWidth );
   if( DirtyXs.isValid() )
     drawEmptyArea( Painter, DirtyXs.start(), cy, DirtyXs.width(), ch );
 }
@@ -292,6 +343,12 @@ void KColumnsView::drawColumns( QPainter *Painter, int cx, int cy, int cw, int c
 void KColumnsView::drawEmptyArea( QPainter *Painter, int cx ,int cy, int cw, int ch)
 {
     Painter->fillRect( cx,cy, cw,ch, viewport()->palette().brush(viewport()->backgroundRole()) );
+}
+
+
+KColumnsView::~KColumnsView()
+{
+    delete d;
 }
 
 }

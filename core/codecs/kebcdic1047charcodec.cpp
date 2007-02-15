@@ -15,7 +15,10 @@
  ***************************************************************************/
 
 
+// Qt
+#include <QtCore/QString>
 // lib specific
+#include "khechar.h"
 #include "kebcdic1047charcodec.h"
 
 

@@ -20,12 +20,14 @@
 
 
 // qt specific
-#include <QtCore/QString>
+#include <QtCore/QChar>
+// lib
+#include "khexedit_export.h"
 
 namespace KHECore
 {
 
-class KChar : public QChar
+class KHECORE_EXPORT KChar : public QChar
 {
   public:
     KChar( QChar C ); // krazy:exclude=explicit

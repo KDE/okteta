@@ -553,17 +553,6 @@ class KHEUI_EXPORT KByteArrayView : public KColumnsView
     KByteArrayView &operator=( const KByteArrayView & );
 };
 
-
-inline const KValueColumn& KByteArrayView::valueColumn()     const { return *ValueColumn; }
-inline const KCharColumn& KByteArrayView::charColumn()       const { return *CharColumn; }
-inline const KDataColumn& KByteArrayView::activeColumn()   const { return *ActiveColumn; }
-inline const KDataColumn& KByteArrayView::inactiveColumn() const { return *InactiveColumn; }
-
-inline KValueColumn& KByteArrayView::valueColumn()     { return *ValueColumn; }
-inline KCharColumn& KByteArrayView::charColumn()       { return *CharColumn; }
-inline KDataColumn& KByteArrayView::activeColumn()   { return *ActiveColumn; }
-inline KDataColumn& KByteArrayView::inactiveColumn() { return *InactiveColumn; }
-
 }
 
 #endif

@@ -171,6 +171,18 @@ KByteArrayView::~KByteArrayView()
   delete CharEditor;
 }
 
+
+
+const KValueColumn& KByteArrayView::valueColumn()     const { return *ValueColumn; }
+const KCharColumn& KByteArrayView::charColumn()       const { return *CharColumn; }
+const KDataColumn& KByteArrayView::activeColumn()   const { return *ActiveColumn; }
+const KDataColumn& KByteArrayView::inactiveColumn() const { return *InactiveColumn; }
+
+KValueColumn& KByteArrayView::valueColumn()     { return *ValueColumn; }
+KCharColumn& KByteArrayView::charColumn()       { return *CharColumn; }
+KDataColumn& KByteArrayView::activeColumn()     { return *ActiveColumn; }
+KDataColumn& KByteArrayView::inactiveColumn()   { return *InactiveColumn; }
+
 KHECore::KAbstractByteArrayModel *KByteArrayView::byteArrayModel() const { return ByteArrayModel; }
 int KByteArrayView::noOfBytesPerLine()               const { return BufferLayout->noOfBytesPerLine(); }
 int KByteArrayView::firstLineOffset()                const { return OffsetColumn->firstLineOffset(); }
@@ -713,7 +725,7 @@ int KByteArrayView::fittingBytesPerLine() const
 
     int NewNoOfLines = (BufferLayout->length()+BufferLayout->startOffset()+FittingBytesPerLine-1)
                        / FittingBytesPerLine;
-    KPixelY NewHeight =  NewNoOfLines * LineHeight;
+    KPixelY NewHeight =  NewNoOfLines * lineHeight();
 
     if( VerticalScrollbarIsVisible )
     {
@@ -1256,16 +1268,16 @@ void KByteArrayView::pauseCursor( bool LeaveEdit )
 void KByteArrayView::updateCursor( const KDataColumn &Column )
 {
   int x = Column.xOfPos( BufferCursor->pos() ) - xOffset();
-  int y = LineHeight * BufferCursor->line() - yOffset();
+  int y = lineHeight() * BufferCursor->line() - yOffset();
   int w = Column.byteWidth();
 
-  viewport()->update( x,y, w,LineHeight );
+  viewport()->update( x,y, w,lineHeight() );
 }
 
 void KByteArrayView::createCursorPixmaps()
 {
   // create CursorPixmaps
-  CursorPixmaps->setSize( activeColumn().byteWidth(), LineHeight );
+  CursorPixmaps->setSize( activeColumn().byteWidth(), lineHeight() );
 
   int Index = BufferCursor->validIndex();
 
@@ -1300,7 +1312,7 @@ void KByteArrayView::createCursorPixmaps()
 void KByteArrayView::pointPainterToCursor( QPainter &Painter, const KDataColumn &Column ) const
 {
   int x = Column.xOfPos( BufferCursor->pos() ) - xOffset();
-  int y = LineHeight * BufferCursor->line() - yOffset();
+  int y = lineHeight() * BufferCursor->line() - yOffset();
 
   Painter.begin( viewport() );
   Painter.translate( x, y );
@@ -1425,7 +1437,7 @@ void KByteArrayView::updateChanged()
     // as there might be multiple selections on this line redo until no more is changed
     while( hasChanged(VisibleRange,&ChangedRange) )
     {
-      KPixelY cy = ChangedRange.start().line() * LineHeight - yOffset();
+      KPixelY cy = ChangedRange.start().line() * lineHeight() - yOffset();
 
       QListIterator<KDataColumn*> it( DirtyColumns );
       // only one line?
@@ -1436,7 +1448,7 @@ void KByteArrayView::updateChanged()
           KPixelXs XPixels =
             it.next()->wideXPixelsOfPos( KHE::KSection(ChangedRange.start().pos(),ChangedRange.end().pos()) );
 
-          viewport()->update( XPixels.start()-xOffset(), cy, XPixels.width(), LineHeight );
+          viewport()->update( XPixels.start()-xOffset(), cy, XPixels.width(), lineHeight() );
         }
       }
       //
@@ -1448,32 +1460,32 @@ void KByteArrayView::updateChanged()
           KPixelXs XPixels =
             it.next()->wideXPixelsOfPos( KHE::KSection(ChangedRange.start().pos(),FullPositions.end()) );
 
-          viewport()->update( XPixels.start()-xOffset(), cy, XPixels.width(), LineHeight );
+          viewport()->update( XPixels.start()-xOffset(), cy, XPixels.width(), lineHeight() );
         }
 
         // at least one full line?
         for( int l = ChangedRange.start().line()+1; l < ChangedRange.end().line(); ++l )
         {
-          cy += LineHeight;
+          cy += lineHeight();
           it.toFront();
           while( it.hasNext() )
           {
             KPixelXs XPixels =
               it.next()->wideXPixelsOfPos( FullPositions );
 
-            viewport()->update( XPixels.start()-xOffset(), cy, XPixels.width(), LineHeight );
+            viewport()->update( XPixels.start()-xOffset(), cy, XPixels.width(), lineHeight() );
           }
         }
 
         // last line
-        cy += LineHeight;
+        cy += lineHeight();
         it.toFront();
         while( it.hasNext() )
         {
           KPixelXs XPixels =
             it.next()->wideXPixelsOfPos( KHE::KSection(FullPositions.start(),ChangedRange.end().pos()) );
 
-          viewport()->update( XPixels.start()-xOffset(), cy, XPixels.width(), LineHeight );
+          viewport()->update( XPixels.start()-xOffset(), cy, XPixels.width(), lineHeight() );
         }
       }
 
@@ -1517,7 +1529,7 @@ void KByteArrayView::ensureVisible( const KDataColumn &Column, const KCoord &Coo
   const KPixelXs cursorXs = KPixelXs::fromWidth( Column.xOfPos(Coord.pos()),
                                                  Column.byteWidth() );
 
-  const KPixelYs cursorYs = KPixelYs::fromWidth( LineHeight*Coord.line(), LineHeight );
+  const KPixelYs cursorYs = KPixelYs::fromWidth( lineHeight()*Coord.line(), lineHeight() );
 
   const KPixelXs visibleXs = KPixelXs::fromWidth( xOffset(), visibleWidth() );
   const KPixelYs visibleYs = KPixelXs::fromWidth( yOffset(), visibleHeight() );

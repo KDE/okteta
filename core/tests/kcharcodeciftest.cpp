@@ -18,6 +18,7 @@
 // qt specific
 #include <QtTest>
 // kde specific
+#include <khechar.h>
 #include <kcharcodec.h>
 // test specific
 #include "kcharcodeciftest.h"

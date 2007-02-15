@@ -20,7 +20,9 @@
 // kde specific
 #include <kglobal.h>
 #include <klocale.h>
-// lib specific
+// core specific
+#include <khechar.h>
+// lib
 #include "kbordercoltextexport.h"
 #include "koffsetcoltextexport.h"
 #include "kvaluecoltextexport.h"

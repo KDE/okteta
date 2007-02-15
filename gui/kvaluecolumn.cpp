@@ -107,9 +107,9 @@ void KValueColumn::paintEditedByte( QPainter *Painter, char Byte, const QString 
 {
   KHECore::KChar B = Codec->decode( Byte );
 
-  Painter->fillRect( 0,0, ByteWidth,LineHeight, QBrush(colorForChar(B),Qt::SolidPattern) );
+  Painter->fillRect( 0,0, ByteWidth,lineHeight(), QBrush(colorForChar(B),Qt::SolidPattern) );
 
-  drawCode( Painter, EditBuffer, View->viewport()->palette().base().color() );
+  drawCode( Painter, EditBuffer, columnsView()->viewport()->palette().base().color() );
 }
 
 

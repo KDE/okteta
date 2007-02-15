@@ -20,6 +20,7 @@
 // kde specific
 #include <kcomponentdata.h>
 // lib specific
+#include <khechar.h>
 #include <kcharcodec.h>
 // test specific
 #include "kcharcodectest.h"
