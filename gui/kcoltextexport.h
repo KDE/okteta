@@ -3,7 +3,7 @@
                              -------------------
     begin                : Sam Aug 30 2003
     copyright            : (C) 2003 by Friedrich W. H. Kossebau
-    email                : Friedrich.W.H@Kossebau.de
+    email                : kossebau@kde.org
  ***************************************************************************/
 
 /***************************************************************************
@@ -24,7 +24,7 @@ namespace KHEUI
 {
 /**
  * interface for the text export of columns
- * @author Friedrich W. H. Kossebau <Friedrich.W.H@Kossebau.de>
+ * @author Friedrich W. H. Kossebau <kossebau@kde.org>
  */
 class KColTextExport
 {

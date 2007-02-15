@@ -3,7 +3,7 @@
                              -------------------
     begin                : Don Jun 19 2003
     copyright            : (C) 2003 by Friedrich W. H. Kossebau
-    email                : Friedrich.W.H@Kossebau.de
+    email                : kossebau@kde.org
  ***************************************************************************/
 
 /***************************************************************************
@@ -37,7 +37,7 @@ class KByteArrayView;
  * application.
  *
  * @short Main Part
- * @author Friedrich W. H. Kossebau <Friedrich.W.H@Kossebau.de>
+ * @author Friedrich W. H. Kossebau <kossebau@kde.org>
  * @version 0.1.0
  */
 class KHexEditPart : public KParts::ReadOnlyPart

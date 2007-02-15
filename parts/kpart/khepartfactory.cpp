@@ -3,7 +3,7 @@
                              -------------------
     begin                : Don Jun 19 2003
     copyright            : (C) 2003 by Friedrich W. H. Kossebau
-    email                : Friedrich.W.H@Kossebau.de
+    email                : kossebau@kde.org
  ***************************************************************************/
 
 /***************************************************************************
@@ -33,7 +33,7 @@ static const char PartCopyright[] =   "(C) 2003-2006 Friedrich W. H. Kossebau";
 // Author
 static const char FWHKName[] =         "Friedrich W. H. Kossebau";
 static const char FWHKTask[] =         I18N_NOOP("Author");
-static const char FWHKEmailAddress[] = "Friedrich.W.H@Kossebau.de";
+static const char FWHKEmailAddress[] = "kossebau@kde.org";
 // static const char FWHKWebAddress[] = "http://www.kossebau.de";
 
 

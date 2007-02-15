@@ -3,7 +3,7 @@
                              -------------------
     begin                : Di Nov 16 2004
     copyright            : (C) 2004 by Friedrich W. H. Kossebau
-    email                : Friedrich.W.H@Kossebau.de
+    email                : kossebau@kde.org
  ***************************************************************************/
 
 /***************************************************************************
@@ -27,7 +27,7 @@ class KHexEditPart;
 
 /**
  * @short Extension for better support for embedding in browsers
- * @author Friedrich W. H. Kossebau <Friedrich.W.H@Kossebau.de>
+ * @author Friedrich W. H. Kossebau <kossebau@kde.org>
  */
 class KHexEditBrowserExtension : public KParts::BrowserExtension
 {

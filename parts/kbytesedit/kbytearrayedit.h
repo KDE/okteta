@@ -3,7 +3,7 @@
                              -------------------
     begin                : Fri Aug 29 2003
     copyright            : (C) 2003 by Friedrich W. H. Kossebau
-    email                : Friedrich.W.H@Kossebau.de
+    email                : kossebau@kde.org
  ***************************************************************************/
 
 /***************************************************************************
@@ -38,7 +38,7 @@ class KByteArrayView;
 /**
    hex editor/viewer.
 
-   @author Friedrich W. H. Kossebau <Friedrich.W.H@Kossebau.de>
+   @author Friedrich W. H. Kossebau <kossebau@kde.org>
    @version 0.1
  **/
 class KByteArrayEdit : public QWidget, public KHE::BytesEditInterface,
