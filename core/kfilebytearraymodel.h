@@ -37,7 +37,7 @@ class KHECORE_EXPORT KFileByteArrayModel : public KAbstractByteArrayModel
 
   public:
     /** default is only 50*4k = 200k memory image */
-    KFileByteArrayModel( int pageNumber = 50, int pageSize = 4096 );
+    explicit KFileByteArrayModel( int pageNumber = 50, int pageSize = 4096 );
     virtual ~KFileByteArrayModel();
 
   public: // KAbstractByteArrayModel API
