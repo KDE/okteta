@@ -149,7 +149,7 @@ void KHexEditPart::fitActionSettings()
 
 bool KHexEditPart::openFile()
 {
-  Wrapping.open( m_file );
+  Wrapping.open( localFilePath() );
   HexEdit->setByteArrayModel( &Wrapping );
   HexEdit->setCursorPosition( 0 );
   HexEdit->selectAll( false );
