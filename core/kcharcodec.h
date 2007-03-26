@@ -21,7 +21,7 @@
 
 // lib specific
 #include "khe.h"
-#include "khexedit_export.h"
+#include "khe_export.h"
 
 class QStringList;
 

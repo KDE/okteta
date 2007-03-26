@@ -23,7 +23,7 @@
 #include <QtCore/QList>
 #include <QtGui/QAbstractScrollArea>
 // commonlib specific
-#include <khexedit_export.h>
+#include "khe_export.h"
 #include <ksection.h> // TODO: think about moving this out of the public API
 // lib specific
 #include "kadds.h"

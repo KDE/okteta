@@ -1,5 +1,5 @@
 /***************************************************************************
-                          khexedit_export.h  -  description
+                          khe_export.h  -  description
                              -------------------
     begin                : 22 Nov 2004
     copyright            : (C) 2004 Dirk Mueller

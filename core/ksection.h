@@ -20,7 +20,7 @@
 
 // lib specific
 #include "krange.h"
-#include "khexedit_export.h"
+#include "khe_export.h"
 
 
 namespace KHE

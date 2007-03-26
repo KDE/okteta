@@ -22,7 +22,7 @@
 // qt specific
 #include <QtCore/QChar>
 // lib
-#include "khexedit_export.h"
+#include "khe_export.h"
 
 namespace KHECore
 {

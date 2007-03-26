@@ -21,7 +21,7 @@
 // commonlib specific
 #include <ksection.h>
 // lib specific
-#include "khexedit_export.h"
+#include "khe_export.h"
 
 
 namespace KHECore
