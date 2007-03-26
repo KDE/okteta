@@ -15,8 +15,8 @@
  ***************************************************************************/
 
  
-#ifndef KHEXEDIT_EXPORT_H
-#define KHEXEDIT_EXPORT_H
+#ifndef KHE_EXPORT_H
+#define KHE_EXPORT_H
 
 #include <kdemacros.h>
 
