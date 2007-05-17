@@ -15,16 +15,17 @@
  ***************************************************************************/
 
 
-// qt specific
-#include <QtGui/QKeyEvent>
-// corelib specific
-#include <kabstractbytearraymodel.h>
-// lib specific
+#include "kvalueeditor.h"
+
+// lib
 #include "kvaluecolumn.h"
 #include "kdataranges.h"
 #include "kdatacursor.h"
 #include "kbytearrayview.h"
-#include "kvalueeditor.h"
+// hexedit core
+#include <kabstractbytearraymodel.h>
+// Qt
+#include <QtGui/QKeyEvent>
 
 
 namespace KHEUI {

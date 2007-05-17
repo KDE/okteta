@@ -18,12 +18,12 @@
 #ifndef KHEBROWSEREXTENSION_H
 #define KHEBROWSEREXTENSION_H
 
-// kde specific
+
+// KDE
 #include <kparts/browserextension.h>
 
-
-// forward declaration
 class KHexEditPart;
+
 
 /**
  * @short Extension for better support for embedding in browsers

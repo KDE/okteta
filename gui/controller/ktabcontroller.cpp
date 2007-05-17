@@ -15,13 +15,14 @@
  ***************************************************************************/
 
 
-// qt specific
-#include <QtGui/QKeyEvent>
-// lib specific
+#include "ktabcontroller.h"
+
+// lib
 #include "kvaluecolumn.h"
 #include "kcharcolumn.h"
 #include "kbytearrayview.h"
-#include "ktabcontroller.h"
+// Qt
+#include <QtGui/QKeyEvent>
 
 
 namespace KHEUI {

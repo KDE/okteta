@@ -19,10 +19,11 @@
 #define KHE_UI_KCURSOR_H
 
 
-// qt specific
-#include <QtGui/QPixmap>
-// lib specific
+// lib
 #include "kadds.h"
+// Qt
+#include <QtGui/QPixmap>
+
 
 namespace KHEUI
 {

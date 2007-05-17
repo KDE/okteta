@@ -18,9 +18,10 @@
 #ifndef KHE_CORE_KHEXADECIMALBYTECODEC_H
 #define KHE_CORE_KHEXADECIMALBYTECODEC_H
 
-
-// lib specific
+// lib
 #include <kbytecodec.h>
+
+class QChar;
 
 
 namespace KHECore

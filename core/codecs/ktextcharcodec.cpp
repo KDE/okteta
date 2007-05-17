@@ -15,15 +15,16 @@
  ***************************************************************************/
 
 
-// qt specific
-#include <QtCore/QTextCodec>
-// kde specific
+#include "ktextcharcodec.h"
+
+// lib
+#include <khechar.h>
+// KDE
 #include <kglobal.h>
 #include <klocale.h>
 #include <kcharsets.h>
-// lib specific
-#include "khechar.h"
-#include "ktextcharcodec.h"
+// Qt
+#include <QtCore/QTextCodec>
 
 
 namespace KHECore {

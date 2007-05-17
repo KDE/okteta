@@ -18,12 +18,12 @@
 #ifndef KHE_CORE_KDATADRAG_H
 #define KHE_CORE_KDATADRAG_H
 
-// qt specific
-#include <QtCore/QMimeData>
-// lib specific
+// lib
 #include "khe.h"
 #include "kcoordrange.h"
 #include "kcoltextexport.h"
+// Qt
+#include <QtCore/QMimeData>
 
 
 namespace KHEUI

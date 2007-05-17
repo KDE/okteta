@@ -14,11 +14,12 @@
  *                                                                         *
  ***************************************************************************/
 
- 
-// lib specific
+
 #include "ksectionlist.h"
 
-using namespace KHE;
+
+namespace KHE
+{
 
 KSectionList::KSectionList()
 {
@@ -76,4 +77,6 @@ void KSectionList::addSection( KSection NewSection )
   if( S == end() )
     // add it at the end
     append( NewSection );
+}
+
 }

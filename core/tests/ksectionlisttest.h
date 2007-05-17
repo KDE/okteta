@@ -18,8 +18,8 @@
 #ifndef KSECTIONLISTTEST_H
 #define KSECTIONLISTTEST_H
 
-// qt specific
-#include <QObject>
+// Qt
+#include <QtCore/QObject>
 
 class KSectionListTest : public QObject
 {

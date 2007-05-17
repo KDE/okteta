@@ -18,7 +18,7 @@
 #define KHE_CORE_KBYTEARRAYMODEL_P_H
 
 
-// lib specific
+// lib
 #include "kbytearraymodel.h"
 
 

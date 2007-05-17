@@ -15,12 +15,12 @@
 ***************************************************************************/
 
 
-// qt specific
-#include <QtTest>
-// lib specific
-#include <kfixedsizebytearraymodel.h>
-// test specific
 #include "kfixedsizebytearraymodeltest.h"
+
+// test object
+#include <kfixedsizebytearraymodel.h>
+// Qt
+#include <QtTest/QtTest>
 
 using namespace KHE;
 using namespace KHECore;

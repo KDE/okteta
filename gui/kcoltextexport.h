@@ -20,6 +20,7 @@
 
 class QString;
 
+
 namespace KHEUI
 {
 /**

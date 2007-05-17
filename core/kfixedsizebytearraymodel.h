@@ -18,7 +18,7 @@
 #ifndef KHE_CORE_KFIXEDSIZEBYTEARRAYMODEL_H
 #define KHE_CORE_KFIXEDSIZEBYTEARRAYMODEL_H
 
-// lib specific
+// lib
 #include "kabstractbytearraymodel.h"
 
 

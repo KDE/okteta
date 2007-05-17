@@ -15,12 +15,13 @@
  ***************************************************************************/
 
 
-// c specific
-#include <string.h>
-// lib specific
+#include "kdatacoltextexport.h"
+
+// lib
 #include "kdatacolumn.h"
 #include "kdatalayout.h"
-#include "kdatacoltextexport.h"
+// C
+#include <string.h>
 
 
 namespace KHEUI {

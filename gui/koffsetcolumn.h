@@ -18,9 +18,10 @@
 #ifndef KHE_UI_KOFFSETCOLUMN_H
 #define KHE_UI_KOFFSETCOLUMN_H
 
-// lib specific
+// lib
 #include "koffsetformat.h"
 #include "kcolumn.h"
+
 
 namespace KHEUI
 {

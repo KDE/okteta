@@ -15,11 +15,12 @@
  ***************************************************************************/
 
 
-// qt specific
-#include <QtTest>
-// test specific
-#include <kselection.h>
 #include "kselectiontest.h"
+
+// test object
+#include <kselection.h>
+// Qt
+#include <QtTest/QtTest>
 
 using namespace KHE;
 using namespace KHEUI;

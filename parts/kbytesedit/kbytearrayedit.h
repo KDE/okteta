@@ -18,14 +18,14 @@
 #ifndef KBYTEARRAYEDIT_H
 #define KBYTEARRAYEDIT_H
 
-// qt specific
-#include <QtGui/QWidget>
-// kde specific
+// KDE
 #include <khexedit/byteseditinterface.h>
 #include <khexedit/valuecolumninterface.h>
 #include <khexedit/charcolumninterface.h>
 #include <khexedit/zoominterface.h>
 #include <khexedit/clipboardinterface.h>
+// Qt
+#include <QtGui/QWidget>
 
 namespace KHECore {
 class KByteArrayModel;

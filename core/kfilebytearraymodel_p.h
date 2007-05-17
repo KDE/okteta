@@ -17,8 +17,7 @@
 #ifndef KHE_CORE_KFILEBYTEARRAYMODEL_P_H
 #define KHE_CORE_KFILEBYTEARRAYMODEL_P_H
 
-
-// qt specific
+// Qt
 #include <QtCore/QVector>
 #include <QtCore/QFile>
 

@@ -18,10 +18,10 @@
 #ifndef KHE_KSECTIONLIST_H
 #define KHE_KSECTIONLIST_H
 
-// qt specific
-#include <QtCore/QLinkedList>
-// lib specific
+// lib
 #include "ksection.h"
+// Qt
+#include <QtCore/QLinkedList>
 
 
 namespace KHE {

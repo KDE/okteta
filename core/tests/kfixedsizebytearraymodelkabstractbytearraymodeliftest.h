@@ -15,13 +15,11 @@
 ***************************************************************************/
 
 
-// test specific
-#include "kabstractbytearraymodeliftest.h"
-
-
 #ifndef KFIXEDSIZEBYTEARRAYMODELKABSTRACTBYTEARRAYMODELIFTEST_H
 #define KFIXEDSIZEBYTEARRAYMODELKABSTRACTBYTEARRAYMODELIFTEST_H
 
+// test
+#include "kabstractbytearraymodeliftest.h"
 
 class KFixedSizeByteArrayModelAbstractByteArrayModelIfTest : public KAbstractByteArrayModelIfTest
 {

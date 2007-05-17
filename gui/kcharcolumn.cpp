@@ -15,20 +15,21 @@
  ***************************************************************************/
 
 
-// c specific
-#include <ctype.h>
-// qt specific
-#include <QtGui/QPainter>
-// kde specific
-#include <kcharsets.h>
-#include <klocale.h>
-#include <kglobal.h>
-// lib specific
+#include "kcharcolumn.h"
+
+// lib
 #include "kcolumnsview.h"
 #include "kdatacursor.h"
 #include "kdatalayout.h"
 #include "kdataranges.h"
-#include "kcharcolumn.h"
+// KDE
+#include <kcharsets.h>
+#include <klocale.h>
+#include <kglobal.h>
+// Qt
+#include <QtGui/QPainter>
+// C
+#include <ctype.h>
 
 
 namespace KHEUI {

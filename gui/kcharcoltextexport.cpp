@@ -15,11 +15,12 @@
  ***************************************************************************/
 
 
-// lib specific
+#include "kcharcoltextexport.h"
+
+// lib
 #include "kdatalayout.h"
 #include "kcharcolumn.h"
 #include "kcharcodec.h"
-#include "kcharcoltextexport.h"
 
 
 namespace KHEUI {

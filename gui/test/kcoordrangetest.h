@@ -18,8 +18,8 @@
 #ifndef KCOORDRANGETEST_H
 #define KCOORDRANGETEST_H
 
-// qt specific
-#include <QObject>
+// Qt
+#include <QtCore/QObject>
 
 class KCoordRangeTest : public QObject
 {

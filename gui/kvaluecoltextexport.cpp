@@ -15,10 +15,11 @@
  ***************************************************************************/
 
 
-// lib specific
+#include "kvaluecoltextexport.h"
+
+// lib
 #include "kdatalayout.h"
 #include "kvaluecolumn.h"
-#include "kvaluecoltextexport.h"
 #include "helper.h"
 
 

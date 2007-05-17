@@ -18,7 +18,7 @@
 #ifndef KHE_UI_KOFFSETCOLTEXTEXPORT_H
 #define KHE_UI_KOFFSETCOLTEXTEXPORT_H
 
-// lib specific
+// lib
 #include "kcoltextexport.h"
 #include "koffsetformat.h"
 

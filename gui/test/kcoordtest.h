@@ -18,8 +18,8 @@
 #ifndef KBUFFERCOORDTEST_H
 #define KBUFFERCOORDTEST_H
 
-// qt specific
-#include <QObject>
+// Qt
+#include <QtCore/QObject>
 
 class KCoordTest : public QObject
 {

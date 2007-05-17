@@ -15,15 +15,15 @@
  ***************************************************************************/
 
 
-// qt specific
+#include "kbytearrayedit.h"
+
+// hexedit gui
+#include <kbytearrayview.h>
+// hexedit core
+#include <kbytearraymodel.h>
+// Qt
 #include <QtGui/QLayout>
 #include <QtGui/QWidget>
-// corelib specific
-#include <kbytearraymodel.h>
-// uilib specific
-#include <kbytearrayview.h>
-// part specific
-#include "kbytearrayedit.h"
 
 
 

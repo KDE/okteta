@@ -20,7 +20,7 @@
 #define KTEXTCHARCODECKCHARCODECIFTEST_H
 
 
-// test specific
+// test
 #include "kcharcodeciftest.h"
 
 

@@ -19,7 +19,7 @@
 #define KHE_CORE_KFILEBYTEARRAYMODEL_H
 
 
-// lib specific
+// lib
 #include "kabstractbytearraymodel.h"
 
 

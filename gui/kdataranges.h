@@ -18,11 +18,12 @@
 #ifndef KHE_UI_KDATARANGES_H
 #define KHE_UI_KDATARANGES_H
 
-// lib specific
+// lib
 #include "kdatalayout.h"
 #include "kselection.h"
 #include "ksectionlist.h"
 #include "kcoordrangelist.h"
+
 
 namespace KHEUI
 {

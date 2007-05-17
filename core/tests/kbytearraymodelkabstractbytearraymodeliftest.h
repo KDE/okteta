@@ -20,7 +20,7 @@
 #define KBYTEARRAYMODELKABSTRACTBYTEARRAYMODELIFTEST_H
 
 
-// test specific
+// test
 #include "kabstractbytearraymodeliftest.h"
 
 

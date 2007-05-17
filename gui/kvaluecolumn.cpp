@@ -15,17 +15,18 @@
  ***************************************************************************/
 
 
-// qt specific
-#include <QtGui/QPainter>
-// corelib specific
-#include <kcharcodec.h>
-// lib specific
+#include "kvaluecolumn.h"
+
+// lib
 #include "kcolumnsview.h"
 #include "kdatacursor.h"
 #include "kdatalayout.h"
 #include "kdataranges.h"
-#include "kvaluecolumn.h"
 #include "helper.h"
+// hexedit core
+#include <kcharcodec.h>
+// Qt
+#include <QtGui/QPainter>
 
 
 namespace KHEUI {

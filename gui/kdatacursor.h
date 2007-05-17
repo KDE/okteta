@@ -18,7 +18,7 @@
 #ifndef KHE_UI_KDATACURSOR_H
 #define KHE_UI_KDATACURSOR_H
 
-// lib specific
+// lib
 #include "kcoord.h"
 
 

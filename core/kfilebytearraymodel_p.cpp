@@ -14,10 +14,10 @@
  ***************************************************************************/
 
 
-// c specific
-#include <stdlib.h>
-// lib specific
 #include "kfilebytearraymodel_p.h"
+
+// C
+#include <stdlib.h>
 
 
 namespace KHECore {

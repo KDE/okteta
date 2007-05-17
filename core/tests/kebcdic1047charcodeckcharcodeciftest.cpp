@@ -15,12 +15,12 @@
 ***************************************************************************/
 
 
-// qt specific
-#include <QtTest>
-// lib specific
-#include <codecs/kebcdic1047charcodec.h>
-// test specific
 #include "kebcdic1047charcodeckcharcodeciftest.h"
+
+// test object
+#include <codecs/kebcdic1047charcodec.h>
+// Qt
+#include <QtTest/QtTest>
 
 
 using namespace KHECore;

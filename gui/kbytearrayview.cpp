@@ -15,14 +15,33 @@
  ***************************************************************************/
 
 
-#include <kdebug.h>
+#include "kbytearrayview.h"
 
-// c specific
-#include <stdlib.h>
-//#include <limits.h>
-// c++ specific
-//#include <limits>
-// qt specific
+// lib
+#include "koffsetcolumn.h"
+#include "kvaluecolumn.h"
+#include "kcharcolumn.h"
+#include "kbordercolumn.h"
+#include "kdatacursor.h"
+#include "kdatalayout.h"
+#include "kdataranges.h"
+#include "controller/ktabcontroller.h"
+#include "controller/knavigator.h"
+#include "controller/kvalueeditor.h"
+#include "controller/kchareditor.h"
+#include "kbytearraydrag.h"
+#include "kcursor.h"
+// hexedit core
+#include <kabstractbytearraymodel.h>
+#include <kbytearraymodel.h>
+#include <kbytecodec.h>
+#include <kcharcodec.h>
+#include <kwordbufferservice.h>
+// KDE
+#ifndef QT_ONLY
+#include <kglobalsettings.h>
+#endif
+// Qt
 #include <QtCore/QListIterator>
 #include <QtCore/QTimer>
 #include <QtGui/QStyle>
@@ -39,31 +58,11 @@
 #include <QtGui/QDragMoveEvent>
 #include <QtGui/QDragLeaveEvent>
 #include <QtGui/QDropEvent>
-// kde specific
-#ifndef QT_ONLY
-#include <kglobalsettings.h>
-#endif
-// corelib specific
-#include <kabstractbytearraymodel.h>
-#include <kbytearraymodel.h>
-#include <kbytecodec.h>
-#include <kcharcodec.h>
-#include <kwordbufferservice.h>
-// lib specific
-#include "koffsetcolumn.h"
-#include "kvaluecolumn.h"
-#include "kcharcolumn.h"
-#include "kbordercolumn.h"
-#include "kdatacursor.h"
-#include "kdatalayout.h"
-#include "kdataranges.h"
-#include "controller/ktabcontroller.h"
-#include "controller/knavigator.h"
-#include "controller/kvalueeditor.h"
-#include "controller/kchareditor.h"
-#include "kbytearraydrag.h"
-#include "kcursor.h"
-#include "kbytearrayview.h"
+// C
+#include <stdlib.h>
+//#include <limits.h>
+// c++ specific
+//#include <limits>
 
 
 namespace KHEUI {

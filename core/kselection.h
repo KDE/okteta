@@ -18,8 +18,9 @@
 #ifndef KHE_UI_KSELECTION_H
 #define KHE_UI_KSELECTION_H
 
-// commonlib specific
-#include "ksection.h"
+// commonlib
+#include <ksection.h>
+
 
 namespace KHEUI
 {

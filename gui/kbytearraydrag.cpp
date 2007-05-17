@@ -15,20 +15,21 @@
  ***************************************************************************/
 
 
-// qt specific
-#include <QtCore/QTextCodec>
-// kde specific
-#include <kglobal.h>
-#include <klocale.h>
-// core specific
-#include <khechar.h>
+#include "kbytearraydrag.h"
+
 // lib
 #include "kbordercoltextexport.h"
 #include "koffsetcoltextexport.h"
 #include "kvaluecoltextexport.h"
 #include "kcharcoltextexport.h"
 #include "kcharcodec.h"
-#include "kbytearraydrag.h"
+// hexedit core
+#include <khechar.h>
+// KDE
+#include <kglobal.h>
+#include <klocale.h>
+// Qt
+#include <QtCore/QTextCodec>
 
 
 using namespace std;

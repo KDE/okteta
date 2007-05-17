@@ -18,13 +18,15 @@
 #ifndef KHE_UI_KCHARCOLTEXTEXPORT_H
 #define KHE_UI_KCHARCOLTEXTEXPORT_H
 
-// lib specific
+// lib
 #include "khe.h"
 #include "kdatacoltextexport.h"
+
 
 namespace KHECore {
 class KCharCodec;
 }
+
 
 namespace KHEUI
 {

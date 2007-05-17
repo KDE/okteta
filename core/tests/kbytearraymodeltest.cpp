@@ -15,12 +15,12 @@
 ***************************************************************************/
 
 
-// qt specific
-#include <QtTest>
-// lib specific
-#include <kbytearraymodel.h>
-// test specific
 #include "kbytearraymodeltest.h"
+
+// test object
+#include <kbytearraymodel.h>
+// Qt
+#include <QtTest/QtTest>
 
 
 using namespace KHE;

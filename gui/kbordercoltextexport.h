@@ -18,8 +18,10 @@
 #ifndef KHE_UI_KBORDERCOLTEXTEXPORT_H
 #define KHE_UI_KBORDERCOLTEXTEXPORT_H
 
-// lib specific
+
+// lib
 #include "kcoltextexport.h"
+
 
 namespace KHEUI
 {

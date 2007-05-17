@@ -15,11 +15,12 @@
  ***************************************************************************/
 
 
-// qt specific
-#include <QtCore/QString>
-// lib specific
-#include "koffsetcolumn.h" 
 #include "koffsetcoltextexport.h"
+
+// lib
+#include "koffsetcolumn.h"
+// Qt
+#include <QtCore/QString>
 
 
 namespace KHEUI {

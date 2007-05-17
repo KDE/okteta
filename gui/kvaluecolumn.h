@@ -18,10 +18,10 @@
 #ifndef KHE_UI_KVALUECOLUMN_H
 #define KHE_UI_KVALUECOLUMN_H
 
-// corelib specific
-#include <kbytecodec.h>
-// lib specific
+// lib
 #include "kdatacolumn.h"
+// hexedit core
+#include <kbytecodec.h>
 
 
 namespace KHEUI

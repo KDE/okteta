@@ -15,10 +15,10 @@
  ***************************************************************************/
 
 
-// c specific
-#include <stdio.h>
-// lib specific
 #include "koffsetformat.h"
+
+// C
+#include <stdio.h>
 
 
 namespace KHEUI {

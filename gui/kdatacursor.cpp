@@ -15,11 +15,11 @@
  ***************************************************************************/
 
 
-//#include <kdebug.h>
-
-// lib specific
-#include "kdatalayout.h"
 #include "kdatacursor.h"
+
+// lib
+#include "kdatalayout.h"
+
 
 namespace KHEUI {
 

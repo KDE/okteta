@@ -2,7 +2,7 @@
                           khepartfactory.h  -  description
                              -------------------
     begin                : Don Jun 19 2003
-    copyright            : (C) 2003 by Friedrich W. H. Kossebau
+    copyright            : 2003,2007 by Friedrich W. H. Kossebau
     email                : kossebau@kde.org
  ***************************************************************************/
 
@@ -15,26 +15,26 @@
  ***************************************************************************/
 
 
-// kde specific
+#include "khepartfactory.h"
+
+// part
+#include "khepart.h"
+// KDE
 #include <kcomponentdata.h>
 #include <kaboutdata.h>
 #include <klocale.h>
-// part specific
-#include "khepart.h"
-#include "khepartfactory.h"
 
 
 // Part
 static const char PartId[] =          "khexedit2part";
 static const char PartName[] =        I18N_NOOP("KHexEdit2Part");
 static const char PartDescription[] = I18N_NOOP("Embedded hex editor");
-static const char PartVersion[] =     "0.3.0";
-static const char PartCopyright[] =   "(C) 2003-2006 Friedrich W. H. Kossebau";
+static const char PartVersion[] =     "0.4.0";
+static const char PartCopyright[] =   "2003-2007 Friedrich W. H. Kossebau";
 // Author
 static const char FWHKName[] =         "Friedrich W. H. Kossebau";
 static const char FWHKTask[] =         I18N_NOOP("Author");
 static const char FWHKEmailAddress[] = "kossebau@kde.org";
-// static const char FWHKWebAddress[] = "http://www.kossebau.de";
 
 
 KComponentData *KHexEditPartFactory::s_instance = 0;

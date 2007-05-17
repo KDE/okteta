@@ -15,10 +15,10 @@
  ***************************************************************************/
 
 
+#include "kdecimalbytecodec.h"
+
 // Qt
 #include <QtCore/QString>
-// lib specific
-#include "kdecimalbytecodec.h"
 
 
 namespace KHECore {

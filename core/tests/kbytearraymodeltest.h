@@ -19,8 +19,8 @@
 #ifndef KBYTEARRAYMODELTEST_H
 #define KBYTEARRAYMODELTEST_H
 
-// qt specific
-#include <QObject>
+// Qt
+#include <QtCore/QObject>
 
 class KByteArrayModelTest : public QObject
 {

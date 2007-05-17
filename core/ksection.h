@@ -18,7 +18,7 @@
 #ifndef KHE_KSECTION_H
 #define KHE_KSECTION_H
 
-// lib specific
+// lib
 #include "krange.h"
 #include "khe_export.h"
 

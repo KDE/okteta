@@ -15,13 +15,13 @@
 ***************************************************************************/
 
 
-// qt specific
-#include <QtTest>
-#include <QSignalSpy>
-// kde specific
-#include <kfixedsizebytearraymodel.h>
-// test specific
 #include "kabstractbytearraymodeliftest.h"
+
+// test object
+#include <kfixedsizebytearraymodel.h>
+// Qt
+#include <QtTest/QtTest>
+#include <QtTest/QSignalSpy>
 
 using namespace KHE;
 using namespace KHECore;

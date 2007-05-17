@@ -18,14 +18,14 @@
 #ifndef KHEPART_H
 #define KHEPART_H
 
-// kde specific
-#include <kparts/part.h>
-// part specific
+// hexedit core
 #include <kfilebytearraymodel.h>
+// KDE
+#include <kparts/part.h>
 
-// forward declarations
 class KToggleAction;
 class KSelectAction;
+
 
 namespace KHEUI
 {

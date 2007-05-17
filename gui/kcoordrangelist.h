@@ -19,10 +19,11 @@
 #define KHE_UI_KCOORDRANGELIST_H
 
 
-// qt specific
-#include <QtCore/QLinkedList>
-// lib specific
+// lib
 #include "kcoordrange.h"
+// Qt
+#include <QtCore/QLinkedList>
+
 
 namespace KHEUI {
 

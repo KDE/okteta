@@ -19,8 +19,8 @@
 #ifndef KFIXEDSIZEBUFFERTEST_H
 #define KFIXEDSIZEBUFFERTEST_H
 
-// qt specific
-#include <QObject>
+// Qt
+#include <QtCore/QObject>
 
 class KFixedSizeByteArrayModelTest : public QObject
 {

@@ -15,10 +15,10 @@
  ***************************************************************************/
 
 
-// kde specific
-#include <kgenericfactory.h>
-// component specific
 #include "kbytearrayedit.h"
+
+// KDE
+#include <kgenericfactory.h>
 
 
 typedef K_TYPELIST_1( KByteArrayEdit ) Product;

@@ -18,16 +18,16 @@
 #ifndef KHE_UI_KDATACOLUMN_H
 #define KHE_UI_KDATACOLUMN_H
 
-// commonlib specific
+// lib
+#include "kdatalayout.h"
+// commonlib
 #include <ksection.h>
 //
 #include <kcolumn.h>
-// corelib specific
+// hexedit core
 #include <khe.h>
 #include <kabstractbytearraymodel.h>
 #include <khechar.h>
-// lib specific
-#include "kdatalayout.h"
 
 
 class QPainter;

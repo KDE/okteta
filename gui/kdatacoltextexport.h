@@ -18,11 +18,11 @@
 #ifndef KHE_UI_KDATACOLTEXTEXPORT_H
 #define KHE_UI_KDATACOLTEXTEXPORT_H
 
-// qt specific
-#include <QtCore/QString>
-// lib specific
+// lib
 #include "kcoltextexport.h"
 #include "kcoordrange.h"
+// Qt
+#include <QtCore/QString>
 
 
 namespace KHEUI

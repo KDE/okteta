@@ -19,7 +19,7 @@
 #define KHE_CORE_KBINARYBYTECODEC_H
 
 
-// lib specific
+// lib
 #include <kbytecodec.h>
 
 

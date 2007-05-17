@@ -19,10 +19,10 @@
 #define KHE_UI_KCHARCOLUMN_H
 
 
-// qt specific
-#include <QtCore/QString>
-// lib specific
+// lib
 #include "kdatacolumn.h"
+// Qt
+#include <QtCore/QString>
 
 class QPainter;
 class QColor;

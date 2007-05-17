@@ -15,12 +15,12 @@
 ***************************************************************************/
 
 
-// qt specific
-#include <QtTest>
-// lib specific
-#include <codecs/ktextcharcodec.h>
-// test specific
 #include "ktextcharcodeckcharcodeciftest.h"
+
+// lib
+#include <codecs/ktextcharcodec.h>
+// Qt
+#include <QtTest/QtTest>
 
 
 

@@ -18,11 +18,11 @@
 #ifndef KHE_UI_KCOORDRANGE_H
 #define KHE_UI_KCOORDRANGE_H
 
-// corelib specific
+// lib
+#include "kcoord.h"
+// hexedit core
 #include <krange.h>
 #include <ksection.h>
-// lib specific
-#include "kcoord.h"
 
 
 namespace KHE

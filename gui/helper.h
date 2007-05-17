@@ -14,13 +14,15 @@
  *                                                                         *
  ***************************************************************************/
 
+
 #ifndef KHEXEDIT_HELPER
 #define KHEXEDIT_HELPER
 
-// qt specific
-#include <QColor>
-// lib specific
+// lib
 #include <khechar.h>
+// Qt
+#include <QColor>
+
 
 // temporary solution until syntax highlighting is implemented
 static inline QColor colorForChar( const KHECore::KChar Byte )

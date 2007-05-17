@@ -15,9 +15,10 @@
  ***************************************************************************/
 
 
-// lib specific
-#include "kbytearraymodel_p.h"
 #include "kbytearraymodel.h"
+
+// lib
+#include "kbytearraymodel_p.h"
 
 
 namespace KHECore {

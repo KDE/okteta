@@ -15,10 +15,10 @@
  ***************************************************************************/
 
 
-
-// lib specific
-#include "kbytearrayview.h"
 #include "kcontroller.h"
+
+// lib
+#include "kbytearrayview.h"
 
 
 namespace KHEUI {

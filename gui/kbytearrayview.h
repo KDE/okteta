@@ -18,12 +18,12 @@
 #ifndef KHE_UI_KHEXEDIT_H
 #define KHE_UI_KHEXEDIT_H
 
-// qt specific
-#include <QtGui/QClipboard>
-// lib specific
+// lib
 // #include "khe.h"
 #include <ksection.h>
 #include "kcolumnsview.h"
+// Qt
+#include <QtGui/QClipboard>
 
 class QTimer;
 
@@ -31,6 +31,7 @@ namespace KHECore {
 class KCharCodec;
 class KAbstractByteArrayModel;
 }
+
 
 namespace KHEUI
 {

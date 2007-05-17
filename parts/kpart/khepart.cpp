@@ -15,7 +15,16 @@
  ***************************************************************************/
 
 
-// kde specific
+#include "khepart.h"
+
+// part
+#include "khepartfactory.h"
+#include "khebrowserextension.h"
+// hexedit gui
+#include <kbytearrayview.h>
+// hexedit core
+#include <kcharcodec.h>
+// KDE
 #include <klocale.h>
 //#include <kcomponentdata.h>
 #include <kaction.h>
@@ -24,14 +33,6 @@
 #include <kselectaction.h>
 #include <ktoggleaction.h>
 //#include <kglobalsettings.h>
-// corelib specific
-#include <kcharcodec.h>
-// uilib specific
-#include <kbytearrayview.h>
-// part specific
-#include "khepartfactory.h"
-#include "khebrowserextension.h"
-#include "khepart.h"
 
 
 static const char RCFileName[] = "khexedit2partui.rc";

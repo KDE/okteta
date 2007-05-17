@@ -15,12 +15,13 @@
  ***************************************************************************/
 
 
-// qt specific
+#include "kbordercolumn.h"
+
+// lib
+#include "kcolumnsview.h"
+// Qt
 #include <QtGui/QPainter>
 #include <QtGui/QStyle>
-// lib specific
-#include "kcolumnsview.h"
-#include "kbordercolumn.h"
 
 
 namespace KHEUI {

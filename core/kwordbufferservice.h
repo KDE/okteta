@@ -18,10 +18,10 @@
 #ifndef KHE_CORE_KWORDBUFFERSERVICE_H
 #define KHE_CORE_KWORDBUFFERSERVICE_H
 
-// commonlib specific
-#include <ksection.h>
-// lib specific
+// lib
 #include "khe_export.h"
+// commonlib
+#include <ksection.h>
 
 
 namespace KHECore

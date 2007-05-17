@@ -15,15 +15,16 @@
 ***************************************************************************/
 
 
-// qt specific
-#include <QtTest>
-// kde specific
-#include <kcomponentdata.h>
-// lib specific
-#include <khechar.h>
-#include <kcharcodec.h>
-// test specific
 #include "kcharcodectest.h"
+
+// test object
+#include <kcharcodec.h>
+// lib
+#include <khechar.h>
+// KDE
+#include <kcomponentdata.h>
+// Qt
+#include <QtTest/QtTest>
 
 // namespaces
 using namespace KHECore;

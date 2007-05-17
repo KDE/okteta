@@ -15,12 +15,12 @@
 ***************************************************************************/
 
 
-// qt specific
-#include <QtTest>
-// lib specific
-#include <kfixedsizebytearraymodel.h>
-// test specific
 #include "kfixedsizebytearraymodelkabstractbytearraymodeliftest.h"
+
+// test object
+#include <kfixedsizebytearraymodel.h>
+// Qt
+#include <QtTest/QtTest>
 
 
 static const int FixedSizeByteArrayModelSize = 60;

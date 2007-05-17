@@ -15,15 +15,16 @@
  ***************************************************************************/
 
 
-// qt specific
+#include "kcolumnsview.h"
+
+// lib
+#include "kcolumn.h"
+// Qt
 #include <QtCore/QListIterator>
 #include <QtGui/QPaintEvent>
 #include <QtGui/QPainter>
 #include <QtGui/QStyle>
 #include <QtGui/QScrollBar>
-// lib specific
-#include "kcolumn.h"
-#include "kcolumnsview.h"
 
 
 namespace KHEUI {

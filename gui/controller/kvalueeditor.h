@@ -19,8 +19,10 @@
 #define KHE_UI_KVALUEEDITOR_H
 
 
-// lib specific
+// lib
 #include "keditor.h"
+// Qt
+#include <QtCore/QString>
 
 
 namespace KHEUI

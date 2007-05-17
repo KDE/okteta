@@ -20,7 +20,7 @@
 #define KEBCDIC1047CHARCODECKCHARCODECIFTEST_H
 
 
-// test specific
+// test
 #include "kcharcodeciftest.h"
 
 

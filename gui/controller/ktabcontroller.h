@@ -19,7 +19,7 @@
 #define KHE_UI_KTABCONTROLLER_H
 
 
-// lib specific
+// lib
 #include "kcontroller.h"
 
 

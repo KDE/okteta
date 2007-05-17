@@ -19,8 +19,8 @@
 #define KABSTRACTBYTEARRAYIFTEST_H
 
 
-// qt specific
-#include <QObject>
+// Qt
+#include <QtCore/QObject>
 
 class QSignalSpy;
 

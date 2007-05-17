@@ -19,14 +19,15 @@
 #define KHE_UI_KCOLUMNSVIEW_H
 
 
-// qt specific
+// lib
+#include "kadds.h"
+// commonlib
+#include <khe_export.h>
+#include <ksection.h> // TODO: think about moving this out of the public API
+// Qt
 #include <QtCore/QList>
 #include <QtGui/QAbstractScrollArea>
-// commonlib specific
-#include "khe_export.h"
-#include <ksection.h> // TODO: think about moving this out of the public API
-// lib specific
-#include "kadds.h"
+
 
 namespace KHEUI
 {

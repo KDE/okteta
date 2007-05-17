@@ -19,12 +19,13 @@
 #define KHE_UI_KCOLUMN_H
 
 
-// commonlib specific
-#include <ksection.h>
-// lib specific
+// lib
 #include "kadds.h"
+// commonlib
+#include <ksection.h>
 
 class QPainter;
+
 
 namespace KHEUI
 {

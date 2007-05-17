@@ -18,10 +18,10 @@
 #ifndef KHE_UI_KVALUECOLTEXTEXPORT_H
 #define KHE_UI_KVALUECOLTEXTEXPORT_H
 
-// corelib specific
-#include "kbytecodec.h"
-// lib specific
+// lib
 #include "kdatacoltextexport.h"
+// hexedit core
+#include "kbytecodec.h"
 
 
 namespace KHEUI

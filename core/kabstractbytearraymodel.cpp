@@ -15,10 +15,10 @@
  ***************************************************************************/
 
 
-// c specific
-#include <ctype.h>
-// lib specific
 #include "kabstractbytearraymodel.h"
+
+// C
+#include <ctype.h>
 
 
 namespace KHECore {

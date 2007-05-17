@@ -15,11 +15,12 @@
  ***************************************************************************/
 
 
+#include "kebcdic1047charcodec.h"
+
+// lib
+#include <khechar.h>
 // Qt
 #include <QtCore/QString>
-// lib specific
-#include "khechar.h"
-#include "kebcdic1047charcodec.h"
 
 
 namespace KHECore {

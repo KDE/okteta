@@ -15,11 +15,12 @@
  ***************************************************************************/
 
 
-// qt specific
-#include <QtTest>
-// test specific
-#include <kcoordrange.h>
 #include "kcoordrangetest.h"
+
+// test object
+#include <kcoordrange.h>
+// Qt
+#include <QtTest/QtTest>
 
 using namespace KHE;
 using namespace KHEUI;
@@ -385,7 +386,7 @@ void KCoordRangeTest::testStartForInclude()
   OtherCoordRange.moveBy( 2 );
   QCOMPARE( CoordRange.startForInclude(OtherCoordRange), OtherCoordRange.start()-Diff );
 
-/* // undefined in startForInclude
+*  // undefined in startForInclude
   // testStartForInclude, greater length, start at start
   OtherCoordRange.set( Start, End+1 );
   Diff = CoordRange.width() - OtherCoordRange.width();

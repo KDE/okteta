@@ -15,14 +15,15 @@
  ***************************************************************************/
 
 
-// qt specific
-#include <QtGui/QKeyEvent>
-// commonlib specific
-#include <kcharcodec.h>
-// lib specific
+#include "kchareditor.h"
+
+// lib
 #include "kcharcolumn.h"
 #include "kbytearrayview.h"
-#include "kchareditor.h"
+// commonlib
+#include <kcharcodec.h>
+// Qt
+#include <QtGui/QKeyEvent>
 
 
 namespace KHEUI {

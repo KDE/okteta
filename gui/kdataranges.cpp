@@ -15,9 +15,6 @@
  ***************************************************************************/
 
 
-#include <kdebug.h>
-
-// lib specific
 #include "kdataranges.h"
 
 
@@ -249,7 +246,7 @@ void KDataRanges::addChangedRange( int SI, int EI )
 
 void KDataRanges::addChangedRange( const KHE::KSection &S )
 {
-kDebug() << "adding change section "<<S.start()<<","<<S.end()<<endl;
+// kDebug() << "adding change section "<<S.start()<<","<<S.end()<<endl;
   addChangedRange( Layout->coordRangeOfIndizes(S) );
 }
 
@@ -257,8 +254,8 @@ kDebug() << "adding change section "<<S.start()<<","<<S.end()<<endl;
 void KDataRanges::addChangedRange( const KCoordRange &NewRange )
 {
   ChangedRanges.addCoordRange( NewRange );
-kDebug() << "as range "<<NewRange.start().pos()<<","<<NewRange.start().line()<<"-"
-<<NewRange.end().pos()<<","<<NewRange.end().line()<<endl;
+// kDebug() << "as range "<<NewRange.start().pos()<<","<<NewRange.start().line()<<"-"
+// <<NewRange.end().pos()<<","<<NewRange.end().line()<<endl;
 
   Modified = true;
 }

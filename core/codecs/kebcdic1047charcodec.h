@@ -18,8 +18,9 @@
 #ifndef KHE_CORE_KEBCDIC1047CHARCODEC_H
 #define KHE_CORE_KEBCDIC1047CHARCODEC_H
 
-// lib specific
-#include "kcharcodec.h"
+// lib
+#include <kcharcodec.h>
+
 
 namespace KHECore
 {

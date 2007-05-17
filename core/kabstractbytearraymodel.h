@@ -19,13 +19,13 @@
 #define KHE_CORE_KABSTRACTBYTEARRAYMODEL_H
 
 
-// qt specific
+// lib
+#include "khe_export.h"
+// commonlib
+#include <ksection.h>
+// Qt
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
-// commonlib specific
-#include <ksection.h>
-// lib specific
-#include "khe_export.h"
 
 
 namespace KHECore

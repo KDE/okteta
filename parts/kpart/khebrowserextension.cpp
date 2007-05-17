@@ -15,13 +15,14 @@
  ***************************************************************************/
 
 
-// kde specific
-#include <kaction.h>
-// uilib specific
-#include <kbytearrayview.h>
-// part specific
-#include "khepart.h"
 #include "khebrowserextension.h"
+
+// part
+#include "khepart.h"
+// hexedit gui
+#include <kbytearrayview.h>
+// KDE
+#include <kaction.h>
 
 
 KHexEditBrowserExtension::KHexEditBrowserExtension( KHexEditPart *P )

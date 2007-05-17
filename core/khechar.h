@@ -18,11 +18,11 @@
 #ifndef KHE_CORE_KHECHAR_H
 #define KHE_CORE_KHECHAR_H
 
-
-// qt specific
-#include <QtCore/QChar>
 // lib
 #include "khe_export.h"
+// Qt
+#include <QtCore/QChar>
+
 
 namespace KHECore
 {

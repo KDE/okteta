@@ -16,7 +16,7 @@
  ***************************************************************************/
 
 
-// kde specific
+// KDE
 #include <kapplication.h>
 #include <kcmdlineargs.h>
 #include <khexedit/byteseditinterface.h>

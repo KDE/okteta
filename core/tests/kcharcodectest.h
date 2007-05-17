@@ -21,8 +21,8 @@
 
 class KComponentData;
 
-// qt specific
-#include <QObject>
+// Qt
+#include <QtCore/QObject>
 
 class KCharCodecTest : public QObject
 {

@@ -14,13 +14,15 @@
  *                                                                         *
  ***************************************************************************/
 
-//#include <kdebug.h>
-// c specific
-#include <string.h>
-// lib specific
+
 #include "kfixedsizebytearraymodel.h"
 
-using namespace KHECore;
+// C
+#include <string.h>
+
+
+namespace KHECore
+{
 
 KFixedSizeByteArrayModel::KFixedSizeByteArrayModel( char *D, unsigned int S, char FUC )
   : Data( D ),
@@ -302,4 +304,6 @@ int KFixedSizeByteArrayModel::rfind( const char*, int /*Length*/, int /*Pos*/ ) 
 void KFixedSizeByteArrayModel::reset( unsigned int Pos, unsigned int Length )
 {
   memset( &Data[Pos], FillUpChar, Length );
+}
+
 }

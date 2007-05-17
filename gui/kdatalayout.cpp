@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-// lib specific
 #include "kdatalayout.h"
+
 
 namespace KHEUI {
 

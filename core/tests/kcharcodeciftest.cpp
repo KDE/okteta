@@ -15,13 +15,14 @@
 ***************************************************************************/
 
 
-// qt specific
-#include <QtTest>
-// kde specific
-#include <khechar.h>
-#include <kcharcodec.h>
-// test specific
 #include "kcharcodeciftest.h"
+
+// test object
+#include <kcharcodec.h>
+// lib
+#include <khechar.h>
+// Qt
+#include <QtTest/QtTest>
 
 using namespace KHECore;
 

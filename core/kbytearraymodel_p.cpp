@@ -14,11 +14,11 @@
  ***************************************************************************/
 
 
-// c specific
+#include "kbytearraymodel_p.h"
+
+// C
 #include <string.h>
 #include <stdlib.h>
-// lib specific
-#include "kbytearraymodel_p.h"
 
 
 static const unsigned int minChunkSize = 512;

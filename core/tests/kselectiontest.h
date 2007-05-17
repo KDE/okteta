@@ -18,8 +18,8 @@
 #ifndef KSELECTIONTEST_H
 #define KSELECTIONTEST_H
 
-// qt specific
-#include <QObject>
+// Qt
+#include <QtCore/QObject>
 
 class KSelectionTest : public QObject
 {

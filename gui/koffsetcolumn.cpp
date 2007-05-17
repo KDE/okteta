@@ -15,11 +15,12 @@
  ***************************************************************************/
 
 
-// qt specific
-#include "QtGui/QPainter"
-// lib specific
-#include "kcolumnsview.h"
 #include "koffsetcolumn.h"
+
+// lib
+#include "kcolumnsview.h"
+// Qt
+#include <QtGui/QPainter>
 
 
 namespace KHEUI {

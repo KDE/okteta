@@ -19,8 +19,9 @@
 #define KHE_CORE_KBYTEARRAYMODEL_H
 
 
-// lib specific
+// lib
 #include "kabstractbytearraymodel.h"
+
 
 namespace KHECore
 {

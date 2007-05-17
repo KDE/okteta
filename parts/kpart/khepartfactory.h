@@ -18,7 +18,8 @@
 #ifndef KHEPARTFACTORY_H
 #define KHEPARTFACTORY_H
 
-// kde specific
+
+// KDE
 #include <kparts/factory.h>
 
 class KComponentData;

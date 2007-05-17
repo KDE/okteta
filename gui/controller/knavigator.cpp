@@ -15,15 +15,16 @@
  ***************************************************************************/
 
 
-// qt specific
-#include <QtGui/QKeyEvent>
-// lib specific
-#include <kwordbufferservice.h>
-// lib specific
+#include "knavigator.h"
+
+// lib
 #include "kdataranges.h"
 #include "kdatacursor.h"
 #include "kbytearrayview.h"
-#include "knavigator.h"
+// lib
+#include <kwordbufferservice.h>
+// Qt
+#include <QtGui/QKeyEvent>
 
 
 namespace KHEUI {

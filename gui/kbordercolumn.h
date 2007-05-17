@@ -18,8 +18,10 @@
 #ifndef KHE_UI_KBORDERCOLUMN_H
 #define KHE_UI_KBORDERCOLUMN_H
 
-// lib specific
+
+// lib
 #include "kcolumn.h"
+
 
 namespace KHEUI
 {

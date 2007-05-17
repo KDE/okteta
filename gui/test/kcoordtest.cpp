@@ -15,11 +15,12 @@
 ***************************************************************************/
 
 
-// qt specific
-#include <QtTest>
-// test specific
-#include <kcoord.h>
 #include "kcoordtest.h"
+
+// test object
+#include <kcoord.h>
+// Qt
+#include <QtTest/QtTest>
 
 using namespace KHEUI;
 

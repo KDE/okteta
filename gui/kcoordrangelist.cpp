@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-// lib specific
 #include "kcoordrangelist.h"
+
 
 namespace KHEUI {
 

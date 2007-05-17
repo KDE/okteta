@@ -18,10 +18,10 @@
 #ifndef KHE_UI_KDATALAYOUT_H
 #define KHE_UI_KDATALAYOUT_H
 
-// commonlib specific
-#include <ksection.h>
-// lib specific
+// lib
 #include "kcoordrange.h"
+// commonlib
+#include <ksection.h>
 
 
 namespace KHEUI {

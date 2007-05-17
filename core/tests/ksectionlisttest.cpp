@@ -15,12 +15,12 @@
  ***************************************************************************/
 
 
-// qt specific
-#include <QtTest>
-// lib specific
-#include <ksectionlist.h>
-// test specific
 #include "ksectionlisttest.h"
+
+// test object
+#include <ksectionlist.h>
+// Qt
+#include <QtTest/QtTest>
 
 using namespace KHE;
 

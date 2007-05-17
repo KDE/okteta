@@ -18,12 +18,15 @@
 #ifndef KHE_CORE_KTEXTCHARCODEC_H
 #define KHE_CORE_KTEXTCHARCODEC_H
 
-// lib specific
-#include "kcharcodec.h"
+// lib
+#include <kcharcodec.h>
+// Qt
+#include <QtCore/QString>
 
 class QTextCodec;
 class QTextDecoder;
 class QTextEncoder;
+
 
 namespace KHECore
 {

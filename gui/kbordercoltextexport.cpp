@@ -15,10 +15,10 @@
  ***************************************************************************/
 
 
-// qt specific
-#include <QtCore/QString>
-// lib specific
 #include "kbordercoltextexport.h"
+
+// Qt
+#include <QtCore/QString>
 
 
 namespace KHEUI {

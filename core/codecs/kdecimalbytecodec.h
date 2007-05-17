@@ -18,8 +18,7 @@
 #ifndef KHE_CORE_KDECIMALBYTECODEC_H
 #define KHE_CORE_KDECIMALBYTECODEC_H
 
-
-// lib specific
+// lib
 #include <kbytecodec.h>
 
 

@@ -15,12 +15,13 @@
  ***************************************************************************/
 
 
-// Qt
-#include <QtCore/QStringList>
-// lib specific
 #include "kcharcodec.h"
+
+// lib
 #include "ktextcharcodec.h"
 #include "kebcdic1047charcodec.h"
+// Qt
+#include <QtCore/QStringList>
 
 
 namespace KHECore {

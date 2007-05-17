@@ -15,11 +15,12 @@
  ***************************************************************************/
 
 
-// lib specific
+#include "kwordbufferservice.h"
+
+// lib
 #include "kabstractbytearraymodel.h"
 #include "khechar.h"
 #include "kcharcodec.h"
-#include "kwordbufferservice.h"
 
 
 namespace KHECore {

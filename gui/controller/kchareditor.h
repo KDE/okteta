@@ -19,7 +19,7 @@
 #define KHE_UI_KCHAREDITOR_H
 
 
-// lib specific
+// lib
 #include "keditor.h"
 
 
