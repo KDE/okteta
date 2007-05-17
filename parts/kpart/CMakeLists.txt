@@ -6,22 +6,16 @@ include_directories(
 )
 
 
-########### next target ###############
+set( oktetapart_SRCS part.cpp browserextension.cpp partfactory.cpp )
 
-set(khexedit2part_PART_SRCS khepart.cpp khebrowserextension.cpp khepartfactory.cpp )
+kde4_automoc( ${oktetapart_SRCS} )
 
-kde4_automoc(${khexedit2part_PART_SRCS})
-
-kde4_add_plugin(khexedit2part WITH_PREFIX ${khexedit2part_PART_SRCS})
+kde4_add_plugin( oktetapart WITH_PREFIX ${oktetapart_SRCS})
 
 
-target_link_libraries(khexedit2part  khexeditcore khexeditgui ${KDE4_KPARTS_LIBS} )
+target_link_libraries( oktetapart  khexeditcore khexeditgui ${KDE4_KPARTS_LIBS} )
 
-install(TARGETS khexedit2part  DESTINATION ${PLUGIN_INSTALL_DIR})
-
-
-########### install files ###############
-
-install( FILES khexedit2part.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
-install( FILES khexedit2partui.rc  DESTINATION ${DATA_INSTALL_DIR}/khexedit2part)
+install( TARGETS oktetapart  DESTINATION ${PLUGIN_INSTALL_DIR})
+install( FILES oktetapart.desktop  DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES oktetapartui.rc  DESTINATION ${DATA_INSTALL_DIR}/oktetapart )
 

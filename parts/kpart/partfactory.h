@@ -1,5 +1,5 @@
 /***************************************************************************
-                          khepartfactory.h  -  description
+                          partfactory.h  -  description
                              -------------------
     begin                : Don Jun 19 2003
     copyright            : (C) 2003 by Friedrich W. H. Kossebau
@@ -15,35 +15,31 @@
  ***************************************************************************/
 
 
-#ifndef KHEPARTFACTORY_H
-#define KHEPARTFACTORY_H
+#ifndef OKTETAPARTFACTORY_H
+#define OKTETAPARTFACTORY_H
 
 
 // KDE
 #include <kparts/factory.h>
 
 class KComponentData;
-class KAboutData;
 
 
-class KHexEditPartFactory : public KParts::Factory
+class OktetaPartFactory : public KParts::Factory
 {
     Q_OBJECT
 
   public:
-    KHexEditPartFactory();
-    virtual ~KHexEditPartFactory();
+    OktetaPartFactory();
+    virtual ~OktetaPartFactory();
 
   public:
     virtual KParts::Part* createPartObject( QWidget *parentWidget,
                                             QObject *parent,
                                             const char *classname, const QStringList &args );
+
+  public:
     static const KComponentData &componentData();
-
-
-  private:
-    static KComponentData *s_instance;
-    static KAboutData* s_about;
 };
 
 #endif

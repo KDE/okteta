@@ -1,7 +1,7 @@
 [Desktop Entry]
+Encoding=UTF-8
 Type=Service
 Icon=khexedit
-Encoding=UTF-8
 Name=Embedded Binary Viewer
 Name[ar]=عارض ثنائى مدمج
 Name[br]=Gweler HTML enframmus
@@ -90,4 +90,4 @@ MimeType=all/allfiles
 #MimeType=application/octet-stream
 ServiceTypes=KParts/ReadOnlyPart,Browser/View
 #,KParts/ReadWritePart
-X-KDE-Library=libkhexedit2part
+X-KDE-Library=liboktetapart

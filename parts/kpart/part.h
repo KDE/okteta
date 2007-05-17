@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KHEPART_H
-#define KHEPART_H
+#ifndef OKTETAPART_H
+#define OKTETAPART_H
 
 // hexedit core
 #include <kfilebytearraymodel.h>
@@ -32,24 +32,17 @@ namespace KHEUI
 class KByteArrayView;
 }
 
-/**
- * This is a "Part".  It that does all the real work in a KPart
- * application.
- *
- * @short Main Part
- * @author Friedrich W. H. Kossebau <kossebau@kde.org>
- * @version 0.1.0
- */
-class KHexEditPart : public KParts::ReadOnlyPart
+
+class OktetaPart : public KParts::ReadOnlyPart
 {
     Q_OBJECT
 
-    friend class KHexEditBrowserExtension;
+    friend class OktetaBrowserExtension;
 
   public:
-    KHexEditPart( QWidget *ParentWidget, QObject *Parent,
-                  bool BrowserViewWanted );
-    virtual ~KHexEditPart();
+    OktetaPart( QWidget *parentWidget, QObject *parent,
+                bool browserViewWanted );
+    virtual ~OktetaPart();
 
 
   protected: // KParts::ReadOnlyPart API
@@ -74,20 +67,20 @@ class KHexEditPart : public KParts::ReadOnlyPart
     void onSelectionChanged( bool HasSelection );
 
   private:
-    KHEUI::KByteArrayView *HexEdit;
-    KHECore::KFileByteArrayModel Wrapping;
+    KHEUI::KByteArrayView *view;
+    KHECore::KFileByteArrayModel fileByteArray;
 
     // edit menu
-    KAction *CopyAction;
-    KAction *DeselectAction;
+    KAction *copyAction;
+    KAction *deselectAction;
     // view menu
-    KSelectAction *CodingAction;
-    KSelectAction *EncodingAction;
-    KToggleAction *ShowUnprintableAction;
+    KSelectAction *codingAction;
+    KSelectAction *encodingAction;
+    KToggleAction *showUnprintableAction;
     // settings menu
-    KSelectAction *ResizeStyleAction;
-    KToggleAction *ShowOffsetColumnAction;
-    KSelectAction *ToggleColumnsAction;
+    KSelectAction *resizeStyleAction;
+    KToggleAction *showOffsetColumnAction;
+    KSelectAction *toggleColumnsAction;
 };
 
 #endif
