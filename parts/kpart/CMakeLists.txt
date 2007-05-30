@@ -13,7 +13,7 @@ kde4_automoc( ${oktetapart_SRCS} )
 kde4_add_plugin( oktetapart WITH_PREFIX ${oktetapart_SRCS})
 
 
-target_link_libraries( oktetapart  khexeditcore khexeditgui ${KDE4_KPARTS_LIBS} )
+target_link_libraries( oktetapart  oktetacore oktetagui ${KDE4_KPARTS_LIBS} )
 
 install( TARGETS oktetapart  DESTINATION ${PLUGIN_INSTALL_DIR})
 install( FILES oktetapart.desktop  DESTINATION ${SERVICES_INSTALL_DIR} )

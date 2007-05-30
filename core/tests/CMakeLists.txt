@@ -1,5 +1,3 @@
-if(KDE4_BUILD_TESTS)
-
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 
 set(SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
@@ -18,7 +16,7 @@ kde4_add_executable(ksectiontest RUN_UNINSTALLED ${ksectiontest_SRCS})
 
 target_link_libraries(ksectiontest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
-add_test(khexedit-ksectiontest ${EXECUTABLE_OUTPUT_PATH}/ksectiontest)
+add_test(okteta-ksectiontest ${EXECUTABLE_OUTPUT_PATH}/ksectiontest)
 
 
 ########### next target ###############
@@ -29,9 +27,9 @@ kde4_automoc(${ksectionlisttest_SRCS})
 
 kde4_add_executable(ksectionlisttest RUN_UNINSTALLED ${ksectionlisttest_SRCS})
 
-target_link_libraries(ksectionlisttest  testkhexeditcore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
+target_link_libraries(ksectionlisttest  testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
-add_test(khexedit-ksectionlisttest ${EXECUTABLE_OUTPUT_PATH}/ksectionlisttest)
+add_test(okteta-ksectionlisttest ${EXECUTABLE_OUTPUT_PATH}/ksectionlisttest)
 
 
 ########### next target ###############
@@ -45,7 +43,7 @@ kde4_add_executable(kselectiontest RUN_UNINSTALLED ${kselectiontest_SRCS})
 
 target_link_libraries(kselectiontest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
-add_test(khexedit-kselectiontest ${EXECUTABLE_OUTPUT_PATH}/kselectiontest)
+add_test(okteta-kselectiontest ${EXECUTABLE_OUTPUT_PATH}/kselectiontest)
 
 
 ########### next target ###############
@@ -57,9 +55,9 @@ kde4_automoc(${kfixedsizebytearraymodeltest_SRCS})
 kde4_add_executable(kfixedsizebytearraymodeltest RUN_UNINSTALLED ${kfixedsizebytearraymodeltest_SRCS})
 
 target_link_libraries(kfixedsizebytearraymodeltest
-  testkhexeditcore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
+  testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
-add_test(khexedit-kfixedsizebytearraymodeltest ${EXECUTABLE_OUTPUT_PATH}/kfixedsizebytearraymodeltest)
+add_test(okteta-kfixedsizebytearraymodeltest ${EXECUTABLE_OUTPUT_PATH}/kfixedsizebytearraymodeltest)
 
 
 ########### next target ###############
@@ -72,9 +70,9 @@ kde4_automoc(${kfixedsizebytearraymodelkabstractbytearraymodeliftest_SRCS})
 kde4_add_executable(kfixedsizebytearraymodelkabstractbytearraymodeliftest RUN_UNINSTALLED ${kfixedsizebytearraymodelkabstractbytearraymodeliftest_SRCS})
 
 target_link_libraries(kfixedsizebytearraymodelkabstractbytearraymodeliftest
-  testkhexeditcore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
+  testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
-add_test(khexedit-kfixedsizebytearraymodelkabstractbytearraymodeliftest ${EXECUTABLE_OUTPUT_PATH}/kfixedsizebytearraymodelkabstractbytearraymodeliftest)
+add_test(okteta-kfixedsizebytearraymodelkabstractbytearraymodeliftest ${EXECUTABLE_OUTPUT_PATH}/kfixedsizebytearraymodelkabstractbytearraymodeliftest)
 
 
 ########### next target ###############
@@ -86,9 +84,9 @@ kde4_automoc(${kbytearraymodeltest_SRCS})
 kde4_add_executable(kbytearraymodeltest RUN_UNINSTALLED ${kbytearraymodeltest_SRCS})
 
 target_link_libraries(kbytearraymodeltest
-  testkhexeditcore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
+  testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
-add_test(khexedit-kbytearraymodeltest ${EXECUTABLE_OUTPUT_PATH}/kbytearraymodeltest)
+add_test(okteta-kbytearraymodeltest ${EXECUTABLE_OUTPUT_PATH}/kbytearraymodeltest)
 
 
 ########### next target ###############
@@ -101,9 +99,9 @@ kde4_automoc(${kbytearraymodelkabstractbytearraymodeliftest_SRCS})
 kde4_add_executable(kbytearraymodelkabstractbytearraymodeliftest RUN_UNINSTALLED ${kbytearraymodelkabstractbytearraymodeliftest_SRCS})
 
 target_link_libraries(kbytearraymodelkabstractbytearraymodeliftest
-  testkhexeditcore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
+  testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
-add_test(khexedit-kbytearraymodelkabstractbytearraymodeliftest ${EXECUTABLE_OUTPUT_PATH}/kbytearraymodelkabstractbytearraymodeliftest)
+add_test(okteta-kbytearraymodelkabstractbytearraymodeliftest ${EXECUTABLE_OUTPUT_PATH}/kbytearraymodelkabstractbytearraymodeliftest)
 
 
 ########### next target ###############
@@ -115,9 +113,9 @@ kde4_automoc(${kcharcodectest_SRCS})
 kde4_add_executable(kcharcodectest RUN_UNINSTALLED ${kcharcodectest_SRCS})
 
 target_link_libraries(kcharcodectest
-  testkhexeditcore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
+  testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
-add_test(khexedit-kcharcodectest ${EXECUTABLE_OUTPUT_PATH}/kcharcodectest)
+add_test(okteta-kcharcodectest ${EXECUTABLE_OUTPUT_PATH}/kcharcodectest)
 
 
 ########### next target ###############
@@ -129,9 +127,9 @@ kde4_automoc(${ktextcharcodectest_SRCS})
 kde4_add_executable(ktextcharcodectest RUN_UNINSTALLED ${ktextcharcodectest_SRCS})
 
 target_link_libraries(ktextcharcodectest
-  testkhexeditcore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
+  testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
-add_test(khexedit-ktextcharcodectest ${EXECUTABLE_OUTPUT_PATH}/ktextcharcodectest)
+add_test(okteta-ktextcharcodectest ${EXECUTABLE_OUTPUT_PATH}/ktextcharcodectest)
 
 
 ########### next target ###############
@@ -144,9 +142,9 @@ kde4_automoc(${ktextcharcodeckcharcodeciftest_SRCS})
 kde4_add_executable(ktextcharcodeckcharcodeciftest RUN_UNINSTALLED ${ktextcharcodeckcharcodeciftest_SRCS})
 
 target_link_libraries(ktextcharcodeckcharcodeciftest
-  testkhexeditcore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
+  testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
-add_test(khexedit-ktextcharcodeckcharcodeciftest ${EXECUTABLE_OUTPUT_PATH}/ktextcharcodeckcharcodeciftest)
+add_test(okteta-ktextcharcodeckcharcodeciftest ${EXECUTABLE_OUTPUT_PATH}/ktextcharcodeckcharcodeciftest)
 
 
 ########### next target ###############
@@ -159,10 +157,6 @@ kde4_automoc(${kebcdic1047charcodeckcharcodeciftest_SRCS})
 kde4_add_executable(kebcdic1047charcodeckcharcodeciftest RUN_UNINSTALLED ${kebcdic1047charcodeckcharcodeciftest_SRCS})
 
 target_link_libraries(kebcdic1047charcodeckcharcodeciftest
-  testkhexeditcore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
+  testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
-add_test(khexedit-kebcdic1047charcodeckcharcodeciftest ${EXECUTABLE_OUTPUT_PATH}/kebcdic1047charcodeckcharcodeciftest)
-
-
-endif(KDE4_BUILD_TESTS)
-
+add_test(okteta-kebcdic1047charcodeckcharcodeciftest ${EXECUTABLE_OUTPUT_PATH}/kebcdic1047charcodeckcharcodeciftest)

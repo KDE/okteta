@@ -1,5 +1,3 @@
-add_subdirectory( test )
-
 include_directories(
   ${CMAKE_SOURCE_DIR}/khexedit/core
   ${CMAKE_SOURCE_DIR}/khexedit/gui/libkcolumnsview
@@ -19,7 +17,7 @@ set( libkcolumnsview_SRCS
   libkcolumnsview/kcolumnsview.cpp
 )
 
-set( khexeditgui_LIB_SRCS
+set( oktetagui_LIB_SRCS
   ${libkcolumnsview_SRCS}
   ${libcontroller_SRCS}
   kbordercolumn.cpp
@@ -41,16 +39,16 @@ set( khexeditgui_LIB_SRCS
   kvaluecoltextexport.cpp
   kcharcoltextexport.cpp )
 
-kde4_automoc(${khexeditgui_LIB_SRCS})
+kde4_automoc( ${oktetagui_LIB_SRCS} )
 
-kde4_add_library( khexeditgui SHARED ${khexeditgui_LIB_SRCS} )
-target_link_libraries( khexeditgui khexeditcore ${KDE4_KDEUI_LIBS} )
-set_target_properties( khexeditgui PROPERTIES VERSION 1.0.0 SOVERSION 1 )
+kde4_add_library( oktetagui SHARED ${oktetagui_LIB_SRCS} )
+target_link_libraries( oktetagui oktetacore ${KDE4_KDEUI_LIBS} )
+set_target_properties( oktetagui PROPERTIES VERSION 1.0.0 SOVERSION 1 )
 
+install( TARGETS oktetagui  DESTINATION ${LIB_INSTALL_DIR} )
 
-install(TARGETS khexeditgui  DESTINATION ${LIB_INSTALL_DIR})
-
-#if(KDE4_BUILD_TESTS)
-#   kde4_add_library( testkhexeditcommon STATIC ${khexeditgui_LIB_SRCS} )
-#endif(KDE4_BUILD_TESTS)
+if(KDE4_BUILD_TESTS)
+add_subdirectory( test )
+#   kde4_add_library( testoktetacore STATIC ${oktetagui_LIB_SRCS} )
+endif(KDE4_BUILD_TESTS)
 

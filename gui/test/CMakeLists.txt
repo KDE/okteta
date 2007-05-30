@@ -1,5 +1,3 @@
-if(KDE4_BUILD_TESTS)
-
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 
 set(SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
@@ -21,7 +19,7 @@ kde4_add_executable(kcoordtest RUN_UNINSTALLED ${kcoordtest_SRCS})
 
 target_link_libraries(kcoordtest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
-add_test(khexedit-kcoordtest ${EXECUTABLE_OUTPUT_PATH}/kcoordtest)
+add_test(okteta-kcoordtest ${EXECUTABLE_OUTPUT_PATH}/kcoordtest)
 
 
 ########### next target ###############
@@ -34,7 +32,7 @@ kde4_add_executable(kcoordrangetest RUN_UNINSTALLED ${kcoordrangetest_SRCS})
 
 target_link_libraries(kcoordrangetest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
-add_test(khexedit-kcoordrangetest ${EXECUTABLE_OUTPUT_PATH}/kcoordrangetest)
+add_test(okteta-kcoordrangetest ${EXECUTABLE_OUTPUT_PATH}/kcoordrangetest)
 
 
 ########### next target ###############
@@ -50,7 +48,7 @@ kde4_add_executable(kcoordrangelisttest RUN_UNINSTALLED ${kcoordrangelisttest_SR
 
 target_link_libraries(kcoordrangelisttest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
-add_test(khexedit-kcoordrangelisttest ${EXECUTABLE_OUTPUT_PATH}/kcoordrangelisttest)
+add_test(okteta-kcoordrangelisttest ${EXECUTABLE_OUTPUT_PATH}/kcoordrangelisttest)
 
 
 ########### next target ###############
@@ -61,9 +59,6 @@ add_test(khexedit-kcoordrangelisttest ${EXECUTABLE_OUTPUT_PATH}/kcoordrangelistt
 
 #kde4_add_executable( mvctest RUN_UNINSTALLED ${mvctest_SRCS} )
 
-# target_link_libraries( mvctest  khexeditcore khexeditgui ${KDE4_KDEUI_LIBS} )
+# target_link_libraries( mvctest  oktetacore oktetagui ${KDE4_KDEUI_LIBS} )
 
 ########### install files ###############
-
-endif(KDE4_BUILD_TESTS)
-

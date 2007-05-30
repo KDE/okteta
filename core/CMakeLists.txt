@@ -1,5 +1,3 @@
-add_subdirectory( tests )
-
 set( libcontroller_SRCS
   controller/kchareditor.cpp
   controller/kcontroller.cpp
@@ -20,7 +18,7 @@ set(libcodecs_SRCS
   codecs/ktextcharcodec.cpp
 )
 
-set( khexeditcore_LIB_SRCS
+set( oktetacore_LIB_SRCS
   ${libcodecs_SRCS}
   kabstractbytearraymodel.cpp
   kbytearraymodel_p.cpp
@@ -32,16 +30,17 @@ set( khexeditcore_LIB_SRCS
   ksection.cpp
   ksectionlist.cpp)
 
-kde4_automoc(${khexeditcore_LIB_SRCS})
+kde4_automoc(${oktetacore_LIB_SRCS})
 
-kde4_add_library( khexeditcore SHARED ${khexeditcore_LIB_SRCS} )
-target_link_libraries( khexeditcore  ${KDE4_KDECORE_LIBS} )
-set_target_properties( khexeditcore PROPERTIES VERSION 1.0.0 SOVERSION 1 )
+kde4_add_library( oktetacore SHARED ${oktetacore_LIB_SRCS} )
+target_link_libraries( oktetacore  ${KDE4_KDECORE_LIBS} )
+set_target_properties( oktetacore PROPERTIES VERSION 1.0.0 SOVERSION 1 )
 
 
-install(TARGETS khexeditcore  DESTINATION ${LIB_INSTALL_DIR})
+install( TARGETS oktetacore  DESTINATION ${LIB_INSTALL_DIR})
 
 if(KDE4_BUILD_TESTS)
-   kde4_add_library( testkhexeditcore STATIC ${khexeditcore_LIB_SRCS} )
+  add_subdirectory( tests )
+  kde4_add_library( testoktetacore STATIC ${oktetacore_LIB_SRCS} )
 endif(KDE4_BUILD_TESTS)
 
