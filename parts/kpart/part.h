@@ -25,7 +25,7 @@
 
 class KToggleAction;
 class KSelectAction;
-
+class KAction;
 
 namespace KHEUI
 {
