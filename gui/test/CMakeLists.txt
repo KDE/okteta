@@ -1,5 +1,3 @@
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
-
 set(SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
 include_directories(
@@ -15,11 +13,9 @@ set(kcoordtest_SRCS kcoordtest.cpp )
 
 kde4_automoc(${kcoordtest_SRCS})
 
-kde4_add_executable(kcoordtest RUN_UNINSTALLED ${kcoordtest_SRCS})
+kde4_add_unit_test(kcoordtest TESTNAME okteta-kcoordtest  ${kcoordtest_SRCS})
 
 target_link_libraries(kcoordtest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
-
-add_test(okteta-kcoordtest ${EXECUTABLE_OUTPUT_PATH}/kcoordtest)
 
 
 ########### next target ###############
@@ -28,11 +24,9 @@ set( kcoordrangetest_SRCS kcoordrangetest.cpp )
 
 kde4_automoc(${kcoordrangetest_SRCS})
 
-kde4_add_executable(kcoordrangetest RUN_UNINSTALLED ${kcoordrangetest_SRCS})
+kde4_add_unit_test(kcoordrangetest TESTNAME okteta-kcoordrangetest  ${kcoordrangetest_SRCS})
 
 target_link_libraries(kcoordrangetest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
-
-add_test(okteta-kcoordrangetest ${EXECUTABLE_OUTPUT_PATH}/kcoordrangetest)
 
 
 ########### next target ###############
@@ -44,11 +38,9 @@ set( kcoordrangelisttest_SRCS
 
 kde4_automoc(${kcoordrangelisttest_SRCS})
 
-kde4_add_executable(kcoordrangelisttest RUN_UNINSTALLED ${kcoordrangelisttest_SRCS})
+kde4_add_unit_test(kcoordrangelisttest TESTNAME okteta-kcoordrangelisttest  ${kcoordrangelisttest_SRCS})
 
 target_link_libraries(kcoordrangelisttest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
-
-add_test(okteta-kcoordrangelisttest ${EXECUTABLE_OUTPUT_PATH}/kcoordrangelisttest)
 
 
 ########### next target ###############
@@ -57,7 +49,7 @@ add_test(okteta-kcoordrangelisttest ${EXECUTABLE_OUTPUT_PATH}/kcoordrangelisttes
 
 #kde4_automoc( ${mvctest_SRCS} )
 
-#kde4_add_executable( mvctest RUN_UNINSTALLED ${mvctest_SRCS} )
+#kde4_add_unit_test(mvctest TESTNAME okteta-mvctest  ${mvctest_SRCS} )
 
 # target_link_libraries( mvctest  oktetacore oktetagui ${KDE4_KDEUI_LIBS} )
 

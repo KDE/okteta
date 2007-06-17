@@ -47,8 +47,6 @@ set_target_properties( oktetagui PROPERTIES VERSION 1.0.0 SOVERSION 1 )
 
 install( TARGETS oktetagui  DESTINATION ${LIB_INSTALL_DIR} )
 
-if(KDE4_BUILD_TESTS)
 add_subdirectory( test )
 #   kde4_add_library( testoktetacore STATIC ${oktetagui_LIB_SRCS} )
-endif(KDE4_BUILD_TESTS)
 

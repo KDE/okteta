@@ -39,8 +39,8 @@ set_target_properties( oktetacore PROPERTIES VERSION 1.0.0 SOVERSION 1 )
 
 install( TARGETS oktetacore  DESTINATION ${LIB_INSTALL_DIR})
 
+add_subdirectory( tests )
 if(KDE4_BUILD_TESTS)
-  add_subdirectory( tests )
   kde4_add_library( testoktetacore STATIC ${oktetacore_LIB_SRCS} )
 endif(KDE4_BUILD_TESTS)
 
