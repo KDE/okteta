@@ -74,9 +74,9 @@ const KComponentData &OktetaPartFactory::componentData()
 {
     if( !_componentData )
     {
-        _aboutData = new KAboutData( PartId, PartName, PartVersion, PartDescription,
-                                    KAboutData::License_GPL_V2, PartCopyright, 0, 0, FWHKEmailAddress );
-        _aboutData->addAuthor( FWHKName, FWHKTask, FWHKEmailAddress );
+        _aboutData = new KAboutData( PartId, 0, ki18n(PartName), PartVersion, ki18n(PartDescription),
+                                    KAboutData::License_GPL_V2, ki18n(PartCopyright), KLocalizedString(), 0, FWHKEmailAddress );
+        _aboutData->addAuthor( ki18n(FWHKName), ki18n(FWHKTask), FWHKEmailAddress );
         _componentData = new KComponentData( _aboutData );
     }
     return *_componentData;
