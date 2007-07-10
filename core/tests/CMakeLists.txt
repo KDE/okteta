@@ -8,8 +8,6 @@ include_directories( ${SUTDIR} )
 set(ksectiontest_SRCS ksectiontest.cpp
 ${SUTDIR}/ksection.cpp )
 
-kde4_automoc(${ksectiontest_SRCS})
-
 kde4_add_unit_test(ksectiontest TESTNAME okteta-ksectiontest  ${ksectiontest_SRCS})
 
 target_link_libraries(ksectiontest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
@@ -19,8 +17,6 @@ target_link_libraries(ksectiontest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
 set( ksectionlisttest_SRCS ksectionlisttest.cpp )
 
-kde4_automoc(${ksectionlisttest_SRCS})
-
 kde4_add_unit_test(ksectionlisttest TESTNAME okteta-ksectionlisttest  ${ksectionlisttest_SRCS})
 
 target_link_libraries(ksectionlisttest  testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
@@ -29,8 +25,6 @@ target_link_libraries(ksectionlisttest  testoktetacore ${KDE4_KDECORE_LIBS} ${QT
 
 set( kselectiontest_SRCS kselectiontest.cpp
 ${SUTDIR}/ksection.cpp )
-
-kde4_automoc(${kselectiontest_SRCS})
 
 kde4_add_unit_test(kselectiontest TESTNAME okteta-kselectiontest  ${kselectiontest_SRCS})
 
@@ -63,8 +57,6 @@ target_link_libraries(kfixedsizebytearraymodelkabstractbytearraymodeliftest
 
 set(kbytearraymodeltest_SRCS kbytearraymodeltest.cpp )
 
-kde4_automoc(${kbytearraymodeltest_SRCS})
-
 kde4_add_unit_test(kbytearraymodeltest TESTNAME okteta-kbytearraymodeltest  ${kbytearraymodeltest_SRCS})
 
 target_link_libraries(kbytearraymodeltest
@@ -76,8 +68,6 @@ target_link_libraries(kbytearraymodeltest
 set(kbytearraymodelkabstractbytearraymodeliftest_SRCS
 kabstractbytearraymodeliftest.cpp kbytearraymodelkabstractbytearraymodeliftest.cpp )
 
-kde4_automoc(${kbytearraymodelkabstractbytearraymodeliftest_SRCS})
-
 kde4_add_unit_test(kbytearraymodelkabstractbytearraymodeliftest TESTNAME okteta-kbytearraymodelkabstractbytearraymodeliftest  ${kbytearraymodelkabstractbytearraymodeliftest_SRCS})
 
 target_link_libraries(kbytearraymodelkabstractbytearraymodeliftest
@@ -87,8 +77,6 @@ target_link_libraries(kbytearraymodelkabstractbytearraymodeliftest
 
 set(kcharcodectest_SRCS kcharcodectest.cpp )
 
-kde4_automoc(${kcharcodectest_SRCS})
-
 kde4_add_unit_test(kcharcodectest TESTNAME okteta-kcharcodectest  ${kcharcodectest_SRCS})
 
 target_link_libraries(kcharcodectest
@@ -97,8 +85,6 @@ target_link_libraries(kcharcodectest
 ########### next target ###############
 
 set(ktextcharcodectest_SRCS ktextcharcodectest.cpp )
-
-kde4_automoc(${ktextcharcodectest_SRCS})
 
 kde4_add_unit_test(ktextcharcodectest TESTNAME okteta-ktextcharcodectest  ${ktextcharcodectest_SRCS})
 

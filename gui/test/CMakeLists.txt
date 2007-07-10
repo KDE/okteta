@@ -22,8 +22,6 @@ target_link_libraries(kcoordtest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
 set( kcoordrangetest_SRCS kcoordrangetest.cpp )
 
-kde4_automoc(${kcoordrangetest_SRCS})
-
 kde4_add_unit_test(kcoordrangetest TESTNAME okteta-kcoordrangetest  ${kcoordrangetest_SRCS})
 
 target_link_libraries(kcoordrangetest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
@@ -47,9 +45,7 @@ target_link_libraries(kcoordrangelisttest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBR
 
 #set( mvctest_SRCS mvctest.cpp )
 
-#kde4_automoc( ${mvctest_SRCS} )
-
-#kde4_add_unit_test(mvctest TESTNAME okteta-mvctest  ${mvctest_SRCS} )
+##kde4_add_unit_test(mvctest TESTNAME okteta-mvctest  ${mvctest_SRCS} )
 
 # target_link_libraries( mvctest  oktetacore oktetagui ${KDE4_KDEUI_LIBS} )
 

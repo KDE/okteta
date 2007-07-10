@@ -30,8 +30,6 @@ set( oktetacore_LIB_SRCS
   ksection.cpp
   ksectionlist.cpp)
 
-kde4_automoc(${oktetacore_LIB_SRCS})
-
 kde4_add_library( oktetacore SHARED ${oktetacore_LIB_SRCS} )
 target_link_libraries( oktetacore  ${KDE4_KDECORE_LIBS} )
 set_target_properties( oktetacore PROPERTIES VERSION 1.0.0 SOVERSION 1 )

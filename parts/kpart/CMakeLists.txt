@@ -8,8 +8,6 @@ include_directories(
 
 set( oktetapart_SRCS part.cpp browserextension.cpp partfactory.cpp )
 
-kde4_automoc( ${oktetapart_SRCS} )
-
 kde4_add_plugin( oktetapart WITH_PREFIX ${oktetapart_SRCS})
 
 
