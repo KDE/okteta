@@ -44,7 +44,6 @@ target_link_libraries(kfixedsizebytearraymodeltest
 set(kfixedsizebytearraymodelkabstractbytearraymodeliftest_SRCS
 kabstractbytearraymodeliftest.cpp kfixedsizebytearraymodelkabstractbytearraymodeliftest.cpp )
 
-kde4_automoc(${kfixedsizebytearraymodelkabstractbytearraymodeliftest_SRCS})
 
 kde4_add_unit_test(kfixedsizebytearraymodelkabstractbytearraymodeliftest TESTNAME okteta-kfixedsizebytearraymodelkabstractbytearraymodeliftest  ${kfixedsizebytearraymodelkabstractbytearraymodeliftest_SRCS})
 
@@ -94,7 +93,6 @@ target_link_libraries(ktextcharcodectest
 set(ktextcharcodeckcharcodeciftest_SRCS
 kcharcodeciftest.cpp ktextcharcodeckcharcodeciftest.cpp )
 
-kde4_automoc(${ktextcharcodeckcharcodeciftest_SRCS})
 
 kde4_add_unit_test(ktextcharcodeckcharcodeciftest TESTNAME okteta-ktextcharcodeckcharcodeciftest  ${ktextcharcodeckcharcodeciftest_SRCS})
 
@@ -106,7 +104,6 @@ target_link_libraries(ktextcharcodeckcharcodeciftest
 set(kebcdic1047charcodeckcharcodeciftest_SRCS
 kcharcodeciftest.cpp kebcdic1047charcodeckcharcodeciftest.cpp )
 
-kde4_automoc(${kebcdic1047charcodeckcharcodeciftest_SRCS})
 
 kde4_add_unit_test(kebcdic1047charcodeckcharcodeciftest TESTNAME okteta-kebcdic1047charcodeckcharcodeciftest  ${kebcdic1047charcodeckcharcodeciftest_SRCS})
 

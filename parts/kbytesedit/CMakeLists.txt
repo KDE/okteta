@@ -11,7 +11,6 @@ set( kbytearrayedit_PART_SRCS
   factory.cpp
 )
 
-kde4_automoc( ${kbytearrayedit_PART_SRCS} )
 
 kde4_add_plugin( kbytearrayedit WITH_PREFIX ${kbytearrayedit_PART_SRCS} )
 

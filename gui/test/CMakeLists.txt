@@ -11,7 +11,6 @@ include_directories(
 
 set(kcoordtest_SRCS kcoordtest.cpp )
 
-kde4_automoc(${kcoordtest_SRCS})
 
 kde4_add_unit_test(kcoordtest TESTNAME okteta-kcoordtest  ${kcoordtest_SRCS})
 

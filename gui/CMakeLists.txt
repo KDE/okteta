@@ -39,7 +39,6 @@ set( oktetagui_LIB_SRCS
   kvaluecoltextexport.cpp
   kcharcoltextexport.cpp )
 
-kde4_automoc( ${oktetagui_LIB_SRCS} )
 
 kde4_add_library( oktetagui SHARED ${oktetagui_LIB_SRCS} )
 target_link_libraries( oktetagui oktetacore ${KDE4_KDEUI_LIBS} )
