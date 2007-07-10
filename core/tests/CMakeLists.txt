@@ -34,8 +34,6 @@ target_link_libraries(kselectiontest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
 set(kfixedsizebytearraymodeltest_SRCS kfixedsizebytearraymodeltest.cpp )
 
-kde4_automoc(${kfixedsizebytearraymodeltest_SRCS})
-
 kde4_add_unit_test(kfixedsizebytearraymodeltest TESTNAME okteta-kfixedsizebytearraymodeltest  ${kfixedsizebytearraymodeltest_SRCS})
 
 target_link_libraries(kfixedsizebytearraymodeltest

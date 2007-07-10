@@ -34,8 +34,6 @@ set( kcoordrangelisttest_SRCS
   kcoordrangelisttest.cpp
 )
 
-kde4_automoc(${kcoordrangelisttest_SRCS})
-
 kde4_add_unit_test(kcoordrangelisttest TESTNAME okteta-kcoordrangelisttest  ${kcoordrangelisttest_SRCS})
 
 target_link_libraries(kcoordrangelisttest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
