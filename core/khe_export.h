@@ -20,7 +20,16 @@
 
 #include <kdemacros.h>
 
-#define KHECORE_EXPORT KDE_EXPORT
-#define KHEUI_EXPORT   KDE_EXPORT
+#ifdef MAKE_OKTETACORE_LIB
+# define KHECORE_EXPORT KDE_EXPORT
+#else
+# define KHECORE_EXPORT KDE_IMPORT
+#endif
+
+#ifdef MAKE_OKTETAGUI_LIB
+# define KHEUI_EXPORT KDE_EXPORT
+#else
+# define KHEUI_EXPORT KDE_IMPORT
+#endif
 
 #endif
