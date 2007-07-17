@@ -29,7 +29,6 @@
 namespace KHEUI
 {
 
-// class KBorderColumn;
 class KOffsetColumn;
 class KValueColumn;
 class KCharColumn;
