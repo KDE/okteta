@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KHE_UI_KDATACOORD_H
-#define KHE_UI_KDATACOORD_H
+#ifndef KHE_UI_KCOORD_H
+#define KHE_UI_KCOORD_H
 
 
 namespace KHEUI

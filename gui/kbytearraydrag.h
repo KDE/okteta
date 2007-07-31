@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KHE_CORE_KDATADRAG_H
-#define KHE_CORE_KDATADRAG_H
+#ifndef KHE_UI_KBYTEARRAYDRAG_H
+#define KHE_UI_KBYTEARRAYDRAG_H
 
 // lib
 #include "khe.h"

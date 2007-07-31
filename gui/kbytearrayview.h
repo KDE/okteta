@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KHE_UI_KHEXEDIT_H
-#define KHE_UI_KHEXEDIT_H
+#ifndef KHE_UI_KBYTEARRAYVIEW_H
+#define KHE_UI_KBYTEARRAYVIEW_H
 
 // lib
 // #include "khe.h"
