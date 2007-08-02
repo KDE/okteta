@@ -287,7 +287,7 @@ int KFixedSizeByteArrayModel::compare( const KAbstractByteArrayModel &Other, con
   {
     char OD = Other.datum(oi);
     char D = Data[i];
-    //kDebug() << QString("%1==%2").arg((int)D).arg((int)OD) << endl;
+    //kDebug() << QString("%1==%2").arg((int)D).arg((int)OD) ;
     if( OD == D )
       continue;
     return OD < D ? 1 : -1;

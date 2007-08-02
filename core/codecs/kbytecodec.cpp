@@ -44,7 +44,7 @@ KByteCodec *KByteCodec::createCodec( KCoding C )
 
 unsigned int KByteCodec::decode( unsigned char *Char, const QString &Digits, unsigned int Pos ) const
 {
-  //kDebug() << QString("KByteCodec::decode(%1,%2)").arg(Digits).arg(Pos) << endl;
+  //kDebug() << QString("KByteCodec::decode(%1,%2)").arg(Digits).arg(Pos) ;
   const unsigned int OldPos = Pos;
   const unsigned int Left = Digits.size() - Pos;
 

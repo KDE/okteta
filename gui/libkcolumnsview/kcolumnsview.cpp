@@ -279,7 +279,7 @@ void KColumnsView::drawColumns( QPainter *Painter, int cx, int cy, int cw, int c
       if( DirtyLines.isValid() )
       {
         KPixelY cy = DirtyLines.start() * d->LineHeight;
-//kDebug()<<"Dirty lines: "<<DirtyLines.start()<<"-"<<DirtyLines.end()<<endl;
+//kDebug()<<"Dirty lines: "<<DirtyLines.start()<<"-"<<DirtyLines.end();
         // starting painting with the first line
         int Line = DirtyLines.start();
         QListIterator<KColumn*> it( DirtyColumns );

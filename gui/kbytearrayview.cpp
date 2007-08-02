@@ -695,7 +695,7 @@ int KByteArrayView::fittingBytesPerLine() const
       if( FittingGroupsPerLine > 0 )
         AvailableWidth -= FittingGroupsPerLine*TotalGroupWidth; // includes additional spacing after last group
 
-//         kDebug() << "Left: " << AvailableWidth << "("<<HexByteWidth<<", "<<TextByteWidth<<")" << endl;
+//         kDebug() << "Left: " << AvailableWidth << "("<<HexByteWidth<<", "<<TextByteWidth<<")" ;
 
       if( AvailableWidth > 0 )
         FittingBytesPerLine += (AvailableWidth+ByteSpacingWidth) / (HexByteWidth+ByteSpacingWidth+TextByteWidth);
@@ -744,7 +744,7 @@ int KByteArrayView::fittingBytesPerLine() const
         WithScrollbarFittingBytesPerLine = FittingBytesPerLine;
         AvailableWidth = FullWidth;
         MatchRun = TestWithoutScrollbar;
-//          kDebug() << "tested without scrollbar..." << endl;
+//          kDebug() << "tested without scrollbar..." ;
         continue;
       }
     }
@@ -756,7 +756,7 @@ int KByteArrayView::fittingBytesPerLine() const
         // need for a scrollbar has risen... ->less width, new calculation
         AvailableWidth = FullWidth - ScrollbarExtent;
         MatchRun = RerunWithScrollbarOn;
-//          kDebug() << "rerun with scrollbar on..." << endl;
+//          kDebug() << "rerun with scrollbar on..." ;
         continue;
       }
     }
@@ -971,7 +971,7 @@ void KByteArrayView::removeSelectedData()
 void KByteArrayView::updateRange( int Start, int End )
 {
   BufferRanges->addChangedRange( Start, End );
-// kDebug() << "update: "<<Start<<","<<End<<endl;
+// kDebug() << "update: "<<Start<<","<<End;
 
   unpauseCursor();
   updateChanged();
@@ -992,8 +992,8 @@ void KByteArrayView::onContentsReplaced( int Pos, int RemovedLength, int Inserte
     updateColumn( *OffsetColumn );
   }
 
-// kDebug()<< "Pos:"<<Pos<<", RemovedLength:"<<RemovedLength<<", InsertedLength:"<<InsertedLength<<endl;
-// kDebug() << "Cursor:"<<BufferCursor->index()<<", "<<BufferCursor->isBehind()<<endl;
+// kDebug()<< "Pos:"<<Pos<<", RemovedLength:"<<RemovedLength<<", InsertedLength:"<<InsertedLength;
+// kDebug() << "Cursor:"<<BufferCursor->index()<<", "<<BufferCursor->isBehind();
   // adapt cursor(s)
   if( Appending )
     BufferCursor->gotoEnd();

@@ -246,7 +246,7 @@ void KDataRanges::addChangedRange( int SI, int EI )
 
 void KDataRanges::addChangedRange( const KHE::KSection &S )
 {
-// kDebug() << "adding change section "<<S.start()<<","<<S.end()<<endl;
+// kDebug() << "adding change section "<<S.start()<<","<<S.end();
   addChangedRange( Layout->coordRangeOfIndizes(S) );
 }
 
