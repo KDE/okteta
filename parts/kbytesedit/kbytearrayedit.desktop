@@ -41,6 +41,7 @@ Name[ta]= பைட்ஸ்தொகுப்பு சாளரம்
 Name[tg]=Элементи Таҳрири Додаҳои Дуӣ
 Name[uk]=Віджет побайтового редагування
 Name[x-test]=xxBytesEdit Widgetxx
+Name[zh_CN]=字节编辑部件
 Name[zh_TW]=位元編輯器元件
 X-KDE-Library=libkbytearrayedit
 InitialPreference=2
