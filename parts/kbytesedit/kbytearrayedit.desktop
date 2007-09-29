@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=BytesEdit Widget
+Name[ar]=كائن BytesEdit
 Name[ca]=Estri BytesEdit
 Name[cy]=Celfigyn GolyguBeit
 Name[de]=BytesEdit-Bedienelement
