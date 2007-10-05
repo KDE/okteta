@@ -106,7 +106,6 @@ inline bool KByteArrayModelPrivate::isReadOnly()   const { return m_readOnly; }
 inline bool KByteArrayModelPrivate::isModified()   const { return m_modified; }
 
 inline void KByteArrayModelPrivate::setReadOnly( bool RO )    { m_readOnly = RO; }
-inline void KByteArrayModelPrivate::setModified( bool modified )     { m_modified = modified; }
 inline void KByteArrayModelPrivate::setMaxSize( int MS )      { m_maxSize = MS; }
 inline void KByteArrayModelPrivate::setKeepsMemory( bool KM ) { m_keepsMemory = KM; }
 inline void KByteArrayModelPrivate::setAutoDelete( bool AD )  { m_autoDelete = AD; }
@@ -116,6 +115,12 @@ inline void KByteArrayModelPrivate::setDatum( unsigned int offset, const char da
     m_modified = true;
     emit p->contentsReplaced( offset, 1, 1 );
     emit p->contentsChanged( offset, offset );
+    emit p->modificationChanged( true );
+}
+inline void KByteArrayModelPrivate::setModified( bool modified )
+{
+    m_modified = modified;
+    emit p->modificationChanged( m_modified );
 }
 
 inline char *KByteArrayModelPrivate::data()       const { return m_data; }

@@ -60,6 +60,7 @@ void KFixedSizeByteArrayModel::setDatum( unsigned int Offset, const char Char )
 
   emit contentsReplaced( Offset, 1, 1 );
   emit contentsChanged( Offset, Offset );
+  emit modificationChanged( true );
 }
 
 
@@ -83,6 +84,7 @@ int KFixedSizeByteArrayModel::insert( int Pos, const char* D, int InputLength )
   emit contentsReplaced( Pos, 0, InputLength );
   //emit contentsReplaced( Pos, , 0 ); TODO: how to signal the removed data?
   emit contentsChanged( Pos, Size-1 );
+  emit modificationChanged( true );
   return InputLength;
 }
 
@@ -107,6 +109,7 @@ int KFixedSizeByteArrayModel::remove( const KSection &R )
   emit contentsReplaced( Remove.start(), Remove.width(), 0 );
   //emit contentsReplaced( Pos, 0,  ); TODO: how to signal the inserted data?
   emit contentsChanged( Remove.start(), Size-1 );
+  emit modificationChanged( true );
   return RemoveLength;
 }
 
@@ -148,6 +151,7 @@ unsigned int KFixedSizeByteArrayModel::replace( const KSection &R, const char* D
   emit contentsReplaced( Remove.start(), Remove.width(), InputLength );
   //emit contentsReplaced( Pos, 0,  ); TODO: how to signal the changed data at the end?
   emit contentsChanged( Remove.start(), SizeDiff==0?Remove.end():Size-1 );
+  emit modificationChanged( true );
   return InputLength;
 }
 
@@ -222,6 +226,7 @@ int KFixedSizeByteArrayModel::move( int DestPos, const KSection &S )
 
   emit contentsMoved( DestPos, SourceSection.start(),SourceSection.width()  );
   emit contentsChanged( ToRight?SourceSection.start():DestPos, ToRight?DestPos:SourceSection.end() );
+  emit modificationChanged( true );
   return MovedLength < DisplacedLength ? SmallPartDest : LargePartDest;
 }
 
@@ -242,6 +247,7 @@ int KFixedSizeByteArrayModel::fill( const char FChar, unsigned int Pos, int Fill
 
   emit contentsReplaced( Pos, FillLength, FillLength );
   emit contentsChanged( Pos, Pos+FillLength-1 );
+  emit modificationChanged( true );
   return FillLength;
 }
 

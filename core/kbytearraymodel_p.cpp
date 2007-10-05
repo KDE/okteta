@@ -91,6 +91,7 @@ int KByteArrayModelPrivate::insert( int position, const char* data, int length )
 
     emit p->contentsReplaced( position, 0, length );
     emit p->contentsChanged( position, m_size-1 );
+    emit p->modificationChanged( true );
     return length;
 }
 
@@ -115,6 +116,7 @@ int KByteArrayModelPrivate::remove( const KSection &section )
 
     emit p->contentsReplaced( removeSection.start(), removeSection.width(), 0 );
     emit p->contentsChanged( removeSection.start(), oldSize-1 );
+    emit p->modificationChanged( true );
     return removeSection.width();
 }
 
@@ -182,6 +184,7 @@ unsigned int KByteArrayModelPrivate::replace( const KSection &section, const cha
 
     emit p->contentsReplaced( removeSection.start(), removeSection.width(), inputLength );
     emit p->contentsChanged( removeSection.start(), sizeDiff==0?removeSection.end():((sizeDiff>0?m_size:oldSize)-1) );
+    emit p->modificationChanged( true );
     return inputLength;
 }
 
@@ -256,6 +259,7 @@ int KByteArrayModelPrivate::move( int destinationStart, const KSection &ss )
 
     emit p->contentsMoved( destinationStart, sourceSection.start(),sourceSection.width()  );
     emit p->contentsChanged( toRight?sourceSection.start():destinationStart, toRight?destinationStart:sourceSection.end() );
+    emit p->modificationChanged( true );
     return (movedLength<displacedLength) ? smallPartDest : largePartDest;
 }
 
@@ -278,6 +282,7 @@ int KByteArrayModelPrivate::fill( const char fillDatum, unsigned int position, i
 
     emit p->contentsReplaced( position, fillLength, fillLength );
     emit p->contentsChanged( position, position+fillLength-1 );
+    emit p->modificationChanged( true );
     return fillLength;
 }
 
