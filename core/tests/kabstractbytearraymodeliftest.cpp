@@ -19,6 +19,8 @@
 
 // test object
 #include <kfixedsizebytearraymodel.h>
+// test util
+#include <util/fill.h>
 // Qt
 #include <QtTest/QtTest>
 #include <QtTest/QSignalSpy>
@@ -26,45 +28,7 @@
 using namespace KHE;
 using namespace KHECore;
 
-// local variables
-static const char FirstMarkChar = 2;
-static const char SecondMarkChar = 3;
-static const char PaintChar = 1;
-static const char BlankChar = '\0';
 
-// fills the buffer with char from b to e
-static void textureByteArrayModel( KAbstractByteArrayModel *ByteArrayModel, unsigned char b = 1, unsigned char e = 255, unsigned int From = 0, int To = -1 )
-{
-  int Size = ByteArrayModel->size();
-
-  if( To == -1 || To >= Size )
-    To = Size-1;
-  unsigned char c = b;
-  for( int i=From; i<=To; ++i )
-  {
-    if( c == e )
-      c = b;
-    else
-      c++;
-    ByteArrayModel->setDatum(i, c );
-  }
-  
-}
-
-static void textureByteArrayModel( KAbstractByteArrayModel *ByteArrayModel, unsigned char b, unsigned char e, KSection S )
-{
-  textureByteArrayModel( ByteArrayModel, b, e, S.start(), S.end() );
-}
-/*
-static void list( KAbstractByteArrayModel *ByteArrayModel, const char* Name )
-{
-  unsigned int Size = ByteArrayModel->size();
-  for( unsigned int i=0; i<Size; ++i )
-  {
-    kdDebug() << Name<<":"<<i<<":"<<ByteArrayModel->datum(i) << endl;
-  }
-}
-*/
 
 // ---------------------------------------------------------------- Tests -----
 
