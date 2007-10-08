@@ -1,6 +1,6 @@
 include_directories(
-  ${CMAKE_SOURCE_DIR}/khexedit/core
-  ${CMAKE_SOURCE_DIR}/khexedit/gui/libkcolumnsview
+  ../core
+  ../gui/libkcolumnsview
 )
 
 set( libcontroller_SRCS

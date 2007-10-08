@@ -1,8 +1,8 @@
 
 include_directories(
-  ${CMAKE_SOURCE_DIR}/khexedit/core
-  ${CMAKE_SOURCE_DIR}/khexedit/gui/libkcolumnsview
-  ${CMAKE_SOURCE_DIR}/khexedit/gui
+  ../../core
+  ../../gui/libkcolumnsview
+  ../../gui
 )
 
 
