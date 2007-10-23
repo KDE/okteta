@@ -20,9 +20,9 @@
 // part
 #include "part.h"
 // KDE
-#include <kcomponentdata.h>
-#include <kaboutdata.h>
-#include <klocale.h>
+#include <KComponentData>
+#include <KAboutData>
+#include <KLocale>
 
 
 // Part

@@ -25,13 +25,13 @@
 // hexedit core
 #include <kcharcodec.h>
 // KDE
-#include <klocale.h>
+#include <KLocale>
 //#include <kcomponentdata.h>
-#include <kaction.h>
-#include <kactioncollection.h>
-#include <kstandardaction.h>
-#include <kselectaction.h>
-#include <ktoggleaction.h>
+#include <KAction>
+#include <KActionCollection>
+#include <KStandardAction>
+#include <KSelectAction>
+#include <KToggleAction>
 //#include <kglobalsettings.h>
 
 

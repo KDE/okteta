@@ -1,0 +1,24 @@
+libkakao
+--------
+
+libkakao is another approach to a model-view-controller oriented system
+for (set of) programs operating on "desktop" objects.
+
+It's a work in progress, there are a lot of undocumented temporary solutions
+to have the basic system work at all. Do not try to guess the planned architecture
+by the existing classes and their methods. There are a lot of unsketched ideas which
+will be tried and developed by the time.
+
+For other, currently more advanced (in code ;) systems look for
+Sublime in kdevplatform, Kate's doc/view system, or the one used by KOffice.
+Once libkakao is in a state where discussions make sense I will let the world
+know.
+
+
+AUTHOR:
+Friedrich W. H. Kossebau <kossebau@kde.org>
+
+
+ABOUT THE NAME:
+Guess what I was drinking when I thought that kmvt (t from toolet)
+or kmvc sound boring. So far it is just the project name.

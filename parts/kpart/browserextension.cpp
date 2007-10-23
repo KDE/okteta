@@ -22,7 +22,7 @@
 // hexedit gui
 #include <kbytearrayview.h>
 // KDE
-#include <kaction.h>
+#include <KAction>
 
 
 OktetaBrowserExtension::OktetaBrowserExtension( OktetaPart *p )

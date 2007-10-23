@@ -1,3 +1,5 @@
+project( oktetagui )
+
 include_directories(
   ../core
   ../gui/libkcolumnsview

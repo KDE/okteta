@@ -1,0 +1,64 @@
+Unimplemented Feature of KHexEdit:
+----------------------------------
+
+Letzte Dateien
+
+revert
+
+Speichern
+
+Bookmarks
+
+Suchleiste
+
+Dokumentenliste
+
+Einstellung Anzeige a-f/A-F
+
+Einstellung Anzeige Offset Hex/Dez
+
+    <!--Menu name="special" append="edit_paste_merge"><text>Spec&amp;ial</text>
+      <Action name="copy_as_text" />
+      <Action name="paste_into_new_file" />
+      <Action name="paste_into_new_window" />
+    </Menu-->
+
+Zugriffsrechte (Größe/Verändern)
+
+Rückgängig/Wiederherstellen
+
+Zeichenkettenextraktion
+
+Transcoder
+
+Binärfilter
+
+Einstellung Anzeige voller Pfad in Titel
+
+Exportieren
+
+Drucken
+
+
+
+Dokumentverwaltung:
+-------------------
+
+Arbeitskopie kann verwickelt mit Speicherkopie sein oder nicht.
+
+Ort/Name der Speicherkopie kann verändert werden, unter Löschen der alten oder Beibehaltung.
+SK (und AK?) können gelöscht werden.
+
+EINFACHER FALL:
+Arbeitskopie separate Kopie. Versionsverwaltung kann ausgelagert werden.
+
+Vorkommnisse:
+* SK wird extern geändert (Datumsstempel)
+  a) kein Konflikt da keine lokale Änderung
+  b) Konflikt mit lokalen Änderungen
+* SK wird extern gelöscht
+*
+
+KOMPLIZIERTER FALL:
+Arbeitskopie nur Teilkopie der Speicherkopie. Speicherkopie darf also nicht von anderen bearbeitet werden.
+

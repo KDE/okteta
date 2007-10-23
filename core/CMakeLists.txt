@@ -1,3 +1,5 @@
+project( oktetacore )
+
 set( libcontroller_SRCS
   controller/kchareditor.cpp
   controller/kcontroller.cpp

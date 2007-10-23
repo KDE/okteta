@@ -1,0 +1,108 @@
+<!DOCTYPE kpartgui>
+<kpartgui name="Okteta" version="1">
+<MenuBar>
+  <Menu name="file">
+    <Menu name="import" append="open_merge">
+      <text>Import</text>
+      <Action name="import_clipboard" />
+      <ActionList name="import_list" />
+    </Menu>
+    <Action name="export" append="save_merge" />
+    <Separator/>
+    <Action name="cancel" />
+    <!--Menu name="permission">
+      <text>Permissions</text>
+      <Action name="read_only" />
+      <Action name="resize_lock" />
+    </Menu-->
+    <Separator/>
+    <Action name="new_window"/>
+    <Action name="close_window"/>
+  </Menu>
+  <Menu name="edit">
+    <!--Menu name="special" append="edit_paste_merge">
+      <text>Special</text>
+      <Action name="copy_values" />
+      <Action name="copy_displayed" />
+      <Action name="paste_as_new_file" />
+    </Menu-->
+    <Action name="goto_offset" />
+    <Menu name="insert">
+      <text>Insert</text>
+      <Action name="insert_pattern" />
+      <Action name="insert_file" />
+    </Menu>
+  </Menu>
+  <Menu name="view">
+    <Action name="view_showunprintable" />
+    <Action name="view_lineoffset" />
+    <Separator/>
+    <Action name="view_valuecoding" />
+    <Action name="view_charencoding" />
+    <Separator/>
+    <Action name="view_fullscreen"/>
+  </Menu>
+  <!--Menu name="bookmarks">
+    <Action name="replace_bookmark" />
+    <Action name="remove_bookmark" />
+    <Action name="remove_all_bookmarks" />
+    <Separator/>
+    <Action name="next_bookmark" />
+    <Action name="prev_bookmark" />
+    <ActionList name="bookmark_list" />
+  </Menu-->
+  <Menu name="tools">
+    <Action name="extract_strings" />
+    <Action name="binary_filter" />
+    <Action name="char_table" />
+    <Action name="converter" />
+    <Separator/>
+    <Action name="statistics" />
+  </Menu>
+  <Menu name="windows"><text>&amp;Windows</text>
+    <ActionList name="windows_list"/>
+  </Menu>
+  <Menu name="settings">
+    <Separator append="show_merge" />
+    <Action name="show_full_path" append="show_merge"/>
+    <Separator append="show_merge"/>
+    <!--Menu name="conversion_field" append="show_merge"><text>Conversion &amp;Field</text>
+      <Action name="conversion_field_hide"/>
+      <Action name="conversion_field_float"/>
+      <Action name="conversion_field_embed"/>
+    </Menu-->
+    <!--Menu name="searchbar" append="show_merge"><text>Searc&amp;hbar</text>
+      <Action name="searchbar_hide"/>
+      <Action name="searchbar_above"/>
+      <Action name="searchbar_below"/>
+    </Menu-->
+    <Separator/>
+    <Action name="resizestyle" group="show_merge" />
+    <Action name="togglecolumns" group="show_merge" />
+  </Menu>
+</MenuBar>
+
+<!-- main toolbar //-->
+<ToolBar name="mainToolBar" noMerge="1"><text>Main Toolbar</text>
+  <Action name="drag_document"/>
+  <Separator lineSeparator="true"/>
+  <Action name="file_new"/>
+  <Action name="file_open"/>
+  <Action name="file_save"/>
+  <Action name="file_revert"/>
+  <Action name="file_print"/>
+  <Separator/>
+  <Action name="edit_undo"/>
+  <Action name="edit_redo"/>
+  <Action name="edit_cut"/>
+  <Action name="edit_copy"/>
+  <Action name="edit_paste"/>
+  <Separator/>
+  <Action name="edit_find"/>
+  <Action name="edit_find_next"/>
+  <Action name="edit_find_last"/>
+  <Separator/>
+  <Action name="cancel"/>
+  <Action name="help"/>
+</ToolBar>
+</kpartgui>
