@@ -18,6 +18,8 @@
 #ifndef KDE_IF_DATASELECTABLE_H
 #define KDE_IF_DATASELECTABLE_H
 
+// Qt
+#include <QtCore/QtPlugin>
 
 class QMimeData;
 

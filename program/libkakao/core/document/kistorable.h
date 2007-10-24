@@ -18,6 +18,8 @@
 #ifndef KDE_IF_STORABLE_H
 #define KDE_IF_STORABLE_H
 
+// Qt
+#include <QtCore/QtPlugin>
 
 namespace KDE
 {

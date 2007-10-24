@@ -18,6 +18,9 @@
 #ifndef KDE_IF_VIEWFOCUSABLE_H
 #define KDE_IF_VIEWFOCUSABLE_H
 
+// Qt
+#include <QtCore/QtPlugin>
+
 class KAbstractView;
 
 namespace KDE
