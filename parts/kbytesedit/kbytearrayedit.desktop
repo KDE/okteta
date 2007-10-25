@@ -2,6 +2,10 @@
 Encoding=UTF-8
 Type=Service
 Name=BytesEdit Widget
+Name[et]=BytesEditi vidin
+Name[pt]=Item do BytesEdit
+Name[pt_BR]=Item do BytesEdit
+Name[sv]=Byteredigeringskomponent
 X-KDE-Library=libkbytearrayedit
 InitialPreference=2
 ServiceTypes=KHexEdit/KBytesEdit
