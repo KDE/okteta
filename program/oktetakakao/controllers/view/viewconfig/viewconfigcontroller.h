@@ -44,9 +44,9 @@ class ViewConfigController : public KViewController
   protected Q_SLOTS: // action slots
     void setCoding( int Coding );
     void setEncoding( int Encoding );
-    void setShowUnprintable();
+    void setShowUnprintable( bool on );
     void setResizeStyle( int Style );
-    void toggleOffsetColumn();
+    void toggleOffsetColumn( bool on );
     void toggleValueCharColumns( int visibleColunms );
 
   protected:

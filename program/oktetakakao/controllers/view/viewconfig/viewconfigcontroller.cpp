@@ -55,7 +55,7 @@ ViewConfigController::ViewConfigController( KXmlGuiWindow *MW )
 
     ShowUnprintableAction = actionCollection->add<KToggleAction>( "view_showunprintable" );
     ShowUnprintableAction->setText( i18n("Show &Unprintable Chars (<32)") );
-    connect( ShowUnprintableAction, SIGNAL(activated(int)), SLOT(setShowUnprintable()) );
+    connect( ShowUnprintableAction, SIGNAL(triggered(bool)), SLOT(setShowUnprintable(bool)) );
 
     // resize style
     ResizeStyleAction = actionCollection->add<KSelectAction>( "resizestyle" );
@@ -70,7 +70,7 @@ ViewConfigController::ViewConfigController( KXmlGuiWindow *MW )
     ShowOffsetColumnAction = actionCollection->add<KToggleAction>( "view_lineoffset" );
     ShowOffsetColumnAction->setText( i18n("&Line Offset") );
     ShowOffsetColumnAction->setShortcut( Qt::Key_F11 );
-    connect( ShowOffsetColumnAction, SIGNAL(activated(int)), SLOT(toggleOffsetColumn()) );
+    connect( ShowOffsetColumnAction, SIGNAL(triggered(bool)), SLOT(toggleOffsetColumn(bool)) );
 
     // show buffer columns
     ToggleColumnsAction = actionCollection->add<KSelectAction>( "togglecolumns" );
@@ -117,14 +117,14 @@ void ViewConfigController::setCoding( int Coding )
   HexEdit->setCoding( (KHEUI::KByteArrayView::KCoding)Coding );
 }
 
-void ViewConfigController::setShowUnprintable()
+void ViewConfigController::setShowUnprintable( bool on )
 {
-  HexEdit->setShowUnprintable( ShowUnprintableAction->isChecked() );
+  HexEdit->setShowUnprintable( on );
 }
 
-void ViewConfigController::toggleOffsetColumn()
+void ViewConfigController::toggleOffsetColumn( bool on )
 {
-  HexEdit->toggleOffsetColumn( ShowOffsetColumnAction->isChecked() );
+  HexEdit->toggleOffsetColumn( on );
 }
 
 void ViewConfigController::setResizeStyle( int ResizeStyle )
