@@ -95,7 +95,7 @@ void OktetaPart::setupActions( bool browserViewWanted )
 
     showUnprintableAction = actions->add<KToggleAction>( "view_showunprintable" );
     showUnprintableAction->setText( i18n("Show &Unprintable Chars (<32)") );
-    connect( showUnprintableAction, SIGNAL(activated(int)), SLOT(onSetShowUnprintable()) );
+    connect( showUnprintableAction, SIGNAL(triggered(bool)), SLOT(onSetShowUnprintable(bool)) );
 
     KStandardAction::zoomIn(  view, SLOT(zoomIn()),  actions );
     KStandardAction::zoomOut( view, SLOT(zoomOut()), actions );
@@ -113,7 +113,7 @@ void OktetaPart::setupActions( bool browserViewWanted )
     showOffsetColumnAction = actions->add<KToggleAction>( "view_lineoffset" );
     showOffsetColumnAction->setText( i18n("&Line Offset") );
     showOffsetColumnAction->setShortcut( QKeySequence( Qt::Key_F11 ) );
-    connect( showOffsetColumnAction, SIGNAL(activated(int)), SLOT(onToggleOffsetColumn()) );
+    connect( showOffsetColumnAction, SIGNAL(triggered(bool)), SLOT(onToggleOffsetColumn(bool)) );
 
     // show buffer columns
     toggleColumnsAction = actions->add<KSelectAction>( "togglecolumns" );
@@ -181,14 +181,14 @@ void OktetaPart::onSetCoding( int Coding )
     view->setCoding( (KHEUI::KByteArrayView::KCoding)Coding );
 }
 
-void OktetaPart::onSetShowUnprintable()
+void OktetaPart::onSetShowUnprintable( bool on )
 {
-    view->setShowUnprintable( showUnprintableAction->isChecked() );
+    view->setShowUnprintable( on );
 }
 
-void OktetaPart::onToggleOffsetColumn()
+void OktetaPart::onToggleOffsetColumn( bool on )
 {
-    view->toggleOffsetColumn( showOffsetColumnAction->isChecked() );
+    view->toggleOffsetColumn( on );
 }
 
 void OktetaPart::onSetResizeStyle( int ResizeStyle )

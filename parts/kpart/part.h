@@ -57,9 +57,9 @@ class OktetaPart : public KParts::ReadOnlyPart
     void onUnselect();
     void onSetCoding( int Coding );
     void onSetEncoding( int Encoding );
-    void onSetShowUnprintable();
+    void onSetShowUnprintable( bool on );
     void onSetResizeStyle( int Style );
-    void onToggleOffsetColumn();
+    void onToggleOffsetColumn( bool on );
     void onToggleValueCharColumns( int VisibleColunms );
 
   private Q_SLOTS:
