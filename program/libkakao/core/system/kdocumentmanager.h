@@ -42,6 +42,7 @@ class KDocumentManager : public QObject
     void addDocument( KAbstractDocument *document );
     void closeDocument( KAbstractDocument* document );
 
+    // TODO: what to do for documents not added?
     bool canClose( KAbstractDocument *document );
     bool canCloseAll();
 

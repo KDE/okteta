@@ -73,7 +73,7 @@ bool KDocumentManager::canCloseAll()
     return canCloseAll;
 }
 
-KDocumentManager::~KDocumentManager() {}
+KDocumentManager::~KDocumentManager() {} //TODO: destroy all documents?
 
 
 #include "kdocumentmanager.moc"
