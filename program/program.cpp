@@ -89,14 +89,6 @@ int OktetaProgram::execute()
     //  hexEdit->addStartupFile( args->url(i).url() );
 
         arguments->clear();
-
-    mViewManager->setWindow( mainWindow );
-    mViewManager->connect( mDocumentManager, SIGNAL(added( KAbstractDocument* )),
-                          SLOT(createViewFor( KAbstractDocument* )) );
-    mainWindow->connect( mViewManager, SIGNAL(opened( KAbstractView* )),
-                         SLOT(addView( KAbstractView* )) );
-    mainWindow->connect( mViewManager, SIGNAL(closing( KAbstractView* )),
-                         SLOT(removeView( KAbstractView* )) );
     }
 
     return programCore.exec();

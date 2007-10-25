@@ -1,7 +1,7 @@
 /***************************************************************************
-                          mainwindow.h  -  description
+                          abstractgroupedviews.h  -  description
                              -------------------
-    begin                : Fri Jun 2 2006
+    begin                : Wed Oct 24 2007
     copyright            : 2006 by Friedrich W. H. Kossebau
     email                : kossebau@kde.org
  ***************************************************************************/
@@ -15,29 +15,36 @@
  ***************************************************************************/
 
 
-#ifndef OKTETAMAINWINDOW_H
-#define OKTETAMAINWINDOW_H
+#ifndef ABSTRACTGROUPEDVIEWS_H
+#define ABSTRACTGROUPEDVIEWS_H
 
 
-// kakao
-#include <shellwindow.h>
+// Qt
+#include <QtCore/QObject>
 
-class OktetaProgram;
+class KAbstractView;
+class QWidget;
 
 
-class OktetaMainWindow : public ShellWindow
+class AbstractGroupedViews : public QObject
 {
-   Q_OBJECT
-
+    Q_OBJECT
   public:
-    explicit OktetaMainWindow( OktetaProgram *program );
-    virtual ~OktetaMainWindow();
+    AbstractGroupedViews();
+    virtual ~AbstractGroupedViews();
 
-  protected:
-    void setupControllers();
+  public Q_SLOTS: // set/action API to be implemented
+    virtual void addView( KAbstractView *view ) = 0;
+    virtual void removeView( KAbstractView *view ) = 0;
 
-  protected:
-    OktetaProgram* mProgram;
+  public: // get API to be implemented
+    virtual QWidget *widget() const = 0;
+
+  Q_SIGNALS:
+    // view was created and already added to the list
+    void added( KAbstractView *view );
+    // view will be removed, already removed from list
+    void removing( KAbstractView *view );
 };
 
 #endif

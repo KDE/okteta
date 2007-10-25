@@ -1,8 +1,8 @@
 /***************************************************************************
-                          mainwindow.h  -  description
+                          abstractgroupedviews.cpp  -  description
                              -------------------
-    begin                : Fri Jun 2 2006
-    copyright            : 2006 by Friedrich W. H. Kossebau
+    begin                : Wed Oct 24 2007
+    copyright            : 2007 by Friedrich W. H. Kossebau
     email                : kossebau@kde.org
  ***************************************************************************/
 
@@ -15,29 +15,9 @@
  ***************************************************************************/
 
 
-#ifndef OKTETAMAINWINDOW_H
-#define OKTETAMAINWINDOW_H
+#include "abstractgroupedviews.h"
 
 
-// kakao
-#include <shellwindow.h>
+AbstractGroupedViews::AbstractGroupedViews() {}
 
-class OktetaProgram;
-
-
-class OktetaMainWindow : public ShellWindow
-{
-   Q_OBJECT
-
-  public:
-    explicit OktetaMainWindow( OktetaProgram *program );
-    virtual ~OktetaMainWindow();
-
-  protected:
-    void setupControllers();
-
-  protected:
-    OktetaProgram* mProgram;
-};
-
-#endif
+AbstractGroupedViews::~AbstractGroupedViews() {}

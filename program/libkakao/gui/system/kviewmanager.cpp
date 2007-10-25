@@ -31,6 +31,7 @@
 KViewManager::KViewManager( KDocumentManager *documentManager )
  : mDocumentManager( documentManager )
 {
+    connect( mDocumentManager, SIGNAL(added( KAbstractDocument* )), SLOT(createViewFor( KAbstractDocument* )) );
 }
 
 void KViewManager::setWindow( KXmlGuiWindow *window )
