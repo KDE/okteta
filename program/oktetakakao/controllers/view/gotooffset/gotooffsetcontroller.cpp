@@ -31,6 +31,7 @@
 // KDE
 #include <KXmlGuiWindow>
 #include <KLocale>
+#include <KAction>
 #include <KActionCollection>
 #include <KMessageBox>
 // Qt

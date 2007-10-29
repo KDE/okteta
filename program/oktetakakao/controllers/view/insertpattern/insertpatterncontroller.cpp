@@ -33,6 +33,7 @@
 #include <KXmlGuiWindow>
 #include <KLocale>
 #include <KMessageBox>
+#include <KAction>
 // Qt
 #include <QtGui/QAction>
 
