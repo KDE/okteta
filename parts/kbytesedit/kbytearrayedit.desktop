@@ -3,6 +3,7 @@ Encoding=UTF-8
 Type=Service
 Name=BytesEdit Widget
 Name[de]=BytesEdit-Widget
+Name[es]=Componente para edición de bytes
 Name[et]=BytesEditi vidin
 Name[pt]=Editor de Bytes
 Name[pt_BR]=Editor de Bytes
