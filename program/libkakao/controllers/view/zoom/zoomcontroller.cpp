@@ -17,9 +17,8 @@
 
 #include "zoomcontroller.h"
 
-//
-#include <kizoomable.h>
 // kakao
+#include <kizoomable.h>
 #include <kviewmanager.h>
 // KDE
 #include <KXmlGuiWindow>
