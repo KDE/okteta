@@ -30,12 +30,11 @@ KAbstractDocument *KByteArrayDocumentFactory::create()
 {
     KByteArrayDocument *document = new KByteArrayDocument();
 
-    const QString title( (newByteArrayDocumentCounter>0) ?
-             i18n( "new %1", newByteArrayDocumentCounter ) :
-             i18n( "new" ) );
-    document->setTitle( title );
-
     ++newByteArrayDocumentCounter;
+
+    document->setTitle(
+        i18ncp("numbered title for a created document without a filename",
+               "[New Byte Array]","[New Byte Array %1]",newByteArrayDocumentCounter) );
 
     return document;
 }
