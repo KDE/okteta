@@ -68,7 +68,7 @@ void ViewListMenuController::updateActions()
     {
         KAbstractView *view = views.at( v );
         const QString title = KStringHandler::rsqueeze( view->title(), MaxEntryLength );
-        QAction *action = new QAction( v<10 ? QString::fromLatin1("&%1 %2").arg(v).arg(title) : title, mWindowsActionGroup );
+        QAction *action = new QAction( v<9 ? QString::fromLatin1("&%1 %2").arg(v+1).arg(title) : title, mWindowsActionGroup );
 //         action->setCheckable( true );
 
 //         if(m_viewManager->activeView() && doc == m_viewManager->activeView()->document())
