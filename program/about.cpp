@@ -38,8 +38,7 @@ OktetaAboutData::OktetaAboutData()
               ki18n("KDE bytes editor"), // description
               KAboutData::License_GPL_V2,
               ki18n("Copyright 2007 Friedrich W. H. Kossebau"), //copyright
-              ki18n("Edit files as streams of bytes"), // comment
-              0, FWHKEmailAddress )
+              ki18n("Edit files as streams of bytes") ) // comment
 {
     setOrganizationDomain( "kde.org" );
     addAuthor( ki18n("Friedrich W. H. Kossebau"), // name
