@@ -2,7 +2,6 @@ set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 set(SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
 include_directories(
-  ${CMAKE_SOURCE_DIR}/khexedit/core
   ${SUTDIR}
 )
 
@@ -13,7 +12,7 @@ include_directories(
 set(kcoordtest_SRCS kcoordtest.cpp )
 
 
-kde4_add_unit_test(kcoordtest TESTNAME okteta-kcoordtest  ${kcoordtest_SRCS})
+kde4_add_unit_test(kcoordtest TESTNAME libokteta-gui-kcoordtest  ${kcoordtest_SRCS})
 
 target_link_libraries(kcoordtest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
@@ -22,7 +21,7 @@ target_link_libraries(kcoordtest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
 set( kcoordrangetest_SRCS kcoordrangetest.cpp )
 
-kde4_add_unit_test(kcoordrangetest TESTNAME okteta-kcoordrangetest  ${kcoordrangetest_SRCS})
+kde4_add_unit_test(kcoordrangetest TESTNAME libokteta-gui-kcoordrangetest  ${kcoordrangetest_SRCS})
 
 target_link_libraries(kcoordrangetest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
@@ -34,7 +33,7 @@ set( kcoordrangelisttest_SRCS
   kcoordrangelisttest.cpp
 )
 
-kde4_add_unit_test(kcoordrangelisttest TESTNAME okteta-kcoordrangelisttest  ${kcoordrangelisttest_SRCS})
+kde4_add_unit_test(kcoordrangelisttest TESTNAME libokteta-gui-kcoordrangelisttest  ${kcoordrangelisttest_SRCS})
 
 target_link_libraries(kcoordrangelisttest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 

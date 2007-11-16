@@ -19,7 +19,7 @@ set( ksectiontest_SRCS
   ${SUTDIR}/ksection.cpp
 )
 
-kde4_add_unit_test( ksectiontest  TESTNAME okteta-ksectiontest  ${ksectiontest_SRCS} )
+kde4_add_unit_test( ksectiontest  TESTNAME libokteta-core-ksectiontest  ${ksectiontest_SRCS} )
 target_link_libraries( ksectiontest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
 
@@ -29,7 +29,7 @@ set( ksectionlisttest_SRCS
   ksectionlisttest.cpp
 )
 
-kde4_add_unit_test( ksectionlisttest  TESTNAME okteta-ksectionlisttest  ${ksectionlisttest_SRCS} )
+kde4_add_unit_test( ksectionlisttest  TESTNAME libokteta-core-ksectionlisttest  ${ksectionlisttest_SRCS} )
 target_link_libraries( ksectionlisttest  testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
 
@@ -40,7 +40,7 @@ set( kselectiontest_SRCS
   ${SUTDIR}/ksection.cpp
 )
 
-kde4_add_unit_test( kselectiontest  TESTNAME okteta-kselectiontest  ${kselectiontest_SRCS})
+kde4_add_unit_test( kselectiontest  TESTNAME libokteta-core-kselectiontest  ${kselectiontest_SRCS})
 target_link_libraries( kselectiontest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
 
@@ -50,7 +50,7 @@ set( kfixedsizebytearraymodeltest_SRCS
   kfixedsizebytearraymodeltest.cpp
 )
 
-kde4_add_unit_test( kfixedsizebytearraymodeltest  TESTNAME okteta-kfixedsizebytearraymodeltest  ${kfixedsizebytearraymodeltest_SRCS})
+kde4_add_unit_test( kfixedsizebytearraymodeltest  TESTNAME libokteta-core-kfixedsizebytearraymodeltest  ${kfixedsizebytearraymodeltest_SRCS})
 target_link_libraries( kfixedsizebytearraymodeltest
   testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
@@ -63,7 +63,7 @@ set( kfixedsizebytearraymodelkabstractbytearraymodeliftest_SRCS
 )
 
 kde4_add_unit_test( kfixedsizebytearraymodelkabstractbytearraymodeliftest
-  TESTNAME okteta-kfixedsizebytearraymodelkabstractbytearraymodeliftest
+  TESTNAME libokteta-core-kfixedsizebytearraymodelkabstractbytearraymodeliftest
   ${kfixedsizebytearraymodelkabstractbytearraymodeliftest_SRCS}
 )
 target_link_libraries( kfixedsizebytearraymodelkabstractbytearraymodeliftest
@@ -76,7 +76,7 @@ set( kbytearraymodeltest_SRCS
   kbytearraymodeltest.cpp
 )
 
-kde4_add_unit_test( kbytearraymodeltest  TESTNAME okteta-kbytearraymodeltest  ${kbytearraymodeltest_SRCS} )
+kde4_add_unit_test( kbytearraymodeltest  TESTNAME libokteta-core-kbytearraymodeltest  ${kbytearraymodeltest_SRCS} )
 target_link_libraries( kbytearraymodeltest
   testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
@@ -89,7 +89,7 @@ set( kbytearraymodelkabstractbytearraymodeliftest_SRCS
 )
 
 kde4_add_unit_test( kbytearraymodelkabstractbytearraymodeliftest
-  TESTNAME okteta-kbytearraymodelkabstractbytearraymodeliftest
+  TESTNAME libokteta-core-kbytearraymodelkabstractbytearraymodeliftest
   ${kbytearraymodelkabstractbytearraymodeliftest_SRCS}
 )
 target_link_libraries( kbytearraymodelkabstractbytearraymodeliftest
@@ -102,7 +102,7 @@ set( kcharcodectest_SRCS
   kcharcodectest.cpp
 )
 
-kde4_add_unit_test( kcharcodectest  TESTNAME okteta-kcharcodectest  ${kcharcodectest_SRCS})
+kde4_add_unit_test( kcharcodectest  TESTNAME libokteta-core-kcharcodectest  ${kcharcodectest_SRCS})
 target_link_libraries( kcharcodectest
   testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
@@ -113,7 +113,7 @@ set( ktextcharcodectest_SRCS
   ktextcharcodectest.cpp
 )
 
-kde4_add_unit_test( ktextcharcodectest  TESTNAME okteta-ktextcharcodectest  ${ktextcharcodectest_SRCS} )
+kde4_add_unit_test( ktextcharcodectest  TESTNAME libokteta-core-ktextcharcodectest  ${ktextcharcodectest_SRCS} )
 target_link_libraries( ktextcharcodectest
   testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
@@ -125,7 +125,7 @@ set( ktextcharcodeckcharcodeciftest_SRCS
   ktextcharcodeckcharcodeciftest.cpp
 )
 
-kde4_add_unit_test( ktextcharcodeckcharcodeciftest TESTNAME okteta-ktextcharcodeckcharcodeciftest  ${ktextcharcodeckcharcodeciftest_SRCS} )
+kde4_add_unit_test( ktextcharcodeckcharcodeciftest TESTNAME libokteta-core-ktextcharcodeckcharcodeciftest  ${ktextcharcodeckcharcodeciftest_SRCS} )
 target_link_libraries( ktextcharcodeckcharcodeciftest
   testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
@@ -136,6 +136,6 @@ set( kebcdic1047charcodeckcharcodeciftest_SRCS
   kcharcodeciftest.cpp kebcdic1047charcodeckcharcodeciftest.cpp
 )
 
-kde4_add_unit_test( kebcdic1047charcodeckcharcodeciftest  TESTNAME okteta-kebcdic1047charcodeckcharcodeciftest  ${kebcdic1047charcodeckcharcodeciftest_SRCS} )
+kde4_add_unit_test( kebcdic1047charcodeckcharcodeciftest  TESTNAME libokteta-core-kebcdic1047charcodeckcharcodeciftest  ${kebcdic1047charcodeckcharcodeciftest_SRCS} )
 target_link_libraries( kebcdic1047charcodeckcharcodeciftest
   testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
