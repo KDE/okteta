@@ -22,23 +22,13 @@
 // Qt
 #include <QtCore/QObject>
 
-class TestFileSystem;
-
 class KByteArrayDocumentTest : public QObject
 {
   Q_OBJECT
 
-  private Q_SLOTS:
-    void initTestCase();
-    void cleanupTestCase();
-
   private Q_SLOTS: // test functions
     void testCreateNew();
-    void testCreateFromFile();
-    void testCreateFromNotExistingFile();
-
-  private:
-    TestFileSystem *mFileSystem;
+    void testSetTitle();
 };
 
 #endif

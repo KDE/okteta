@@ -23,11 +23,11 @@
 
 // temporary
 #include "kdocumentcreator.h"
-#include "kdocumentsynchronizer.h"
+#include "kdocumentloadermanager.h"
 
 KDocumentManager::KDocumentManager()
  : mCreator( new KDocumentCreator(this) ),
-   mSynchronizer( new KDocumentSynchronizer(this) )
+   mLoaderManager( new KDocumentLoaderManager(this) )
 {}
 
 void KDocumentManager::addDocument( KAbstractDocument *document )
@@ -54,7 +54,7 @@ void KDocumentManager::closeDocument( KAbstractDocument *document )
 
 bool KDocumentManager::canClose( KAbstractDocument *document )
 {
-    return mSynchronizer->canClose( document );
+    return mLoaderManager->canClose( document );
 }
 
 bool KDocumentManager::canCloseAll()
@@ -63,7 +63,7 @@ bool KDocumentManager::canCloseAll()
 
     foreach( KAbstractDocument *document, mList )
     {
-        if( !mSynchronizer->canClose( document ) )
+        if( !mLoaderManager->canClose(document) )
         {
             canCloseAll = false;
             break;
@@ -73,7 +73,11 @@ bool KDocumentManager::canCloseAll()
     return canCloseAll;
 }
 
-KDocumentManager::~KDocumentManager() {} //TODO: destroy all documents?
+KDocumentManager::~KDocumentManager()
+{
+    delete mCreator;
+    delete mLoaderManager;
+} //TODO: destroy all documents?
 
 
 #include "kdocumentmanager.moc"

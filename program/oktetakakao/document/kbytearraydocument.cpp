@@ -20,12 +20,10 @@
 // Okteta core
 #include <kbytearraymodel.h>
 // KDE
-#include <KUrl>
+#include <KLocale>
 // Qt
-#include <QtCore/QFile>
-#include <QtCore/QDataStream>
+#include <QtCore/QLatin1String>
 
-#include <KDebug>
 
 KByteArrayDocument::KByteArrayDocument()
 : mByteArray( new KHECore::KByteArrayModel() )
@@ -33,6 +31,12 @@ KByteArrayDocument::KByteArrayDocument()
     connect( mByteArray, SIGNAL(modificationChanged( bool )), SLOT(onModelModification( bool )) );
 }
 
+KByteArrayDocument::KByteArrayDocument( KHECore::KByteArrayModel *byteArray )
+: mByteArray( byteArray )
+{
+    connect( mByteArray, SIGNAL(modificationChanged( bool )), SLOT(onModelModification( bool )) );
+}
+#if 0
 KByteArrayDocument::KByteArrayDocument( const QString &filePath )
 : mByteArray( new KHECore::KByteArrayModel() )
 {
@@ -41,15 +45,12 @@ KByteArrayDocument::KByteArrayDocument( const QString &filePath )
         mLocalFilePath = filePath;
     }
 }
-
+#endif
 KHECore::KByteArrayModel* KByteArrayDocument::content() const { return mByteArray; }
-QString KByteArrayDocument::url() const { return mUrl; }
-QString KByteArrayDocument::localFilePath() const {  return mLocalFilePath; }
 
-QString KByteArrayDocument::title() const
-{
-    return mTitle;
-}
+QString KByteArrayDocument::title() const { return mTitle; }
+QString KByteArrayDocument::mimeType() const { return QLatin1String("KByteArrayDocument"); }
+QString KByteArrayDocument::typeName() const { return i18n( "Byte Array" ); }
 
 KAbstractDocument::SynchronizationStates KByteArrayDocument::synchronizationStates() const
 {
@@ -62,47 +63,6 @@ void KByteArrayDocument::setTitle( const QString &title )
     emit titleChanged( mTitle );
 }
 
-void KByteArrayDocument::setUrl( const QString &url )
-{
-    mUrl = url;
-    setTitle( KUrl(mUrl).fileName() );
-}
-
-bool KByteArrayDocument::load( const QString &fileName )
-{
-    QFile file( fileName );
-    file.open( QIODevice::ReadOnly );
-    int fileSize = file.size();
-
-    delete mByteArray;
-    mByteArray = new KHECore::KByteArrayModel( fileSize );
-    connect( mByteArray, SIGNAL(modificationChanged( bool )), SLOT(onModelModification( bool )) );
-
-    QDataStream inStream( &file );
-    inStream.readRawData( mByteArray->data(), fileSize );
-
-    mByteArray->setModified( false );
-
-    //registerDiskModifyTime( file ); TODO move into synchronizer
-
-    return inStream.status() == QDataStream::Ok;
-}
-
-
-bool KByteArrayDocument::save( const QString &fileName )
-{
-    QFile file( fileName );
-    file.open( QIODevice::WriteOnly );
-
-    QDataStream outStream( &file );
-    outStream.writeRawData( mByteArray->data(), mByteArray->size() );
-
-    mByteArray->setModified( false );
-
-    //registerDiskModifyTime( file );TODO move into synchronizer
-
-    return outStream.status() == QDataStream::Ok;
-}
 
 void KByteArrayDocument::onModelModification( bool newState )
 {

@@ -17,5 +17,49 @@
 
 #include "kabstractdocument.h"
 
+// lib
+#include "kabstractdocumentsynchronizer.h"
 
-#include "kabstractdocument.moc"
+
+class KAbstractDocument::Private
+{
+  public:
+      explicit Private( KAbstractDocument *parent );
+      ~Private();
+  public:
+    void setSynchronizer( KAbstractDocumentSynchronizer *synchronizer );
+    KAbstractDocumentSynchronizer *synchronizer() const;
+  protected:
+     KAbstractDocument *d;
+     KAbstractDocumentSynchronizer *mSynchronizer; // TODO: should this be here, with public setters and getters?
+};
+
+inline KAbstractDocument::Private::Private( KAbstractDocument *parent ) : d( parent ), mSynchronizer( 0 ) {}
+inline KAbstractDocumentSynchronizer *KAbstractDocument::Private::synchronizer() const { return mSynchronizer; }
+inline void KAbstractDocument::Private::setSynchronizer( KAbstractDocumentSynchronizer *synchronizer )
+{
+    // plugging the same more than once?
+    if( mSynchronizer == synchronizer )
+        return;
+
+    delete mSynchronizer;
+    mSynchronizer = synchronizer;
+    emit d->synchronizerChanged( synchronizer );
+}
+inline KAbstractDocument::Private::~Private() { delete mSynchronizer; }
+
+
+
+KAbstractDocument::KAbstractDocument()
+ : d( new Private(this) )
+{}
+
+KAbstractDocumentSynchronizer *KAbstractDocument::synchronizer() const { return d->synchronizer(); }
+void KAbstractDocument::setSynchronizer( KAbstractDocumentSynchronizer *synchronizer ) { d->setSynchronizer(synchronizer); }
+
+bool KAbstractDocument::hasLocalChanges() const { return synchronizationStates().testFlag(LocalHasChanges) ; }
+
+KAbstractDocument::~KAbstractDocument()
+{
+    delete d;
+}

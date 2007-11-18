@@ -21,10 +21,7 @@
 
 // kakao
 #include <kviewcontroller.h>
-// KDE
-#include <KUrl>
 
-class KRecentFilesAction;
 class KXmlGuiWindow;
 class KDocumentCreator;
 
@@ -40,25 +37,12 @@ class CreatorController : public KViewController
   public: // KToolet API
     virtual void setView( KAbstractView *view );
 
-  public:
-    void setWorkingUrl( const KUrl &url ); // TODO: should be the one from KDocumentCreator?
-
-  public:
-    const KUrl &workingUrl() const;
-
   public Q_SLOTS:
     void createNew();
-    void open();
-    void openRecent( const KUrl &url );
 
   protected:
     KDocumentCreator *mCreator;
     KXmlGuiWindow *mMainWindow;
-
-    KUrl mWorkingUrl; // TODO: where to store the working url? in an environment object?
-    KRecentFilesAction *mOpenRecentAction;
 };
-
-inline const KUrl &CreatorController::workingUrl() const { return mWorkingUrl; }
 
 #endif

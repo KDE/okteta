@@ -1,8 +1,5 @@
 project( oktetakakao_document_tests )
 
-
-set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
-
 set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/.. )
 
 include_directories(
@@ -10,15 +7,8 @@ include_directories(
   ${SUTDIR}/../../../core
   ${SUTDIR}/../../libkakao/core/document
   ${SUTDIR}/../../../core/tests
+  ${SUTDIR}/../../libkakao/core/tests
 )
-
-########### util ###############
-
-set( oktetakakaodocumenttestutil_LIB_SRCS
-  util/filesystem.cpp
-)
-
-kde4_add_library( oktetakakaodocumenttestutil  STATIC ${oktetakakaodocumenttestutil_LIB_SRCS} )
 
 ########### kbytearraydocumenttest ###############
 
@@ -27,13 +17,55 @@ set( kbytearraydocumenttest_SRCS
   ${SUTDIR}/kbytearraydocument.cpp
 )
 
-kde4_add_executable( kbytearraydocumenttest  RUN_UNINSTALLED ${kbytearraydocumenttest_SRCS} )
+kde4_add_unit_test( kbytearraydocumenttest
+  TESTNAME oktetakakao-document-kbytearraydocumenttest
+  ${kbytearraydocumenttest_SRCS}
+)
 target_link_libraries( kbytearraydocumenttest
-  oktetakakaodocumenttestutil
-  kakaocore oktetacoretestutil
+  kakaocore
   testoktetacore
-  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY}
+  ${KDE4_KIO_LIBS}
+  ${QT_QTTEST_LIBRARY}
 )
 
-add_test( okteta-kbytearraydocumenttest ${EXECUTABLE_OUTPUT_PATH}/kbytearraydocumenttest)
 
+########### kbytearraydocumentfactorytest ###############
+
+set( kbytearraydocumentfactorytest_SRCS
+  kbytearraydocumentfactorytest.cpp
+  ${SUTDIR}/kbytearraydocument.cpp
+  ${SUTDIR}/kbytearraydocumentfactory.cpp
+)
+
+kde4_add_unit_test( kbytearraydocumentfactorytest
+  TESTNAME oktetakakao-document-kbytearraydocumentfactorytest
+  ${kbytearraydocumentfactorytest_SRCS}
+)
+target_link_libraries( kbytearraydocumentfactorytest
+  kakaocore
+  oktetacoretestutil
+  testoktetacore
+  ${KDE4_KIO_LIBS}
+  ${QT_QTTEST_LIBRARY}
+)
+
+########### kbytearrayrawfilesynchronizertest ###############
+
+set( kbytearrayrawfilesynchronizertest_SRCS
+  kbytearrayrawfilesynchronizertest.cpp
+  ${SUTDIR}/kbytearraydocument.cpp
+  ${SUTDIR}/kbytearrayrawfilesynchronizer.cpp
+)
+
+kde4_add_unit_test( kbytearrayrawfilesynchronizertest
+  TESTNAME oktetakakao-document-kbytearrayrawfilesynchronizertest
+  ${kbytearrayrawfilesynchronizertest_SRCS}
+)
+target_link_libraries( kbytearrayrawfilesynchronizertest
+  kakaocore
+  kakaocoretestutil
+  oktetacoretestutil
+  testoktetacore
+  ${KDE4_KIO_LIBS}
+  ${QT_QTTEST_LIBRARY}
+)

@@ -24,11 +24,12 @@
 // program
 #include "kbytearraydocumentfactory.h"
 #include "kbytearraydisplayfactory.h"
+#include "kbytearrayrawfilesynchronizer.h"
 #include "mainwindow.h"
 // kakao
 #include <kdocumentmanager.h>
 #include <kdocumentcreator.h>
-#include <kdocumentsynchronizer.h>
+#include <kdocumentloadermanager.h>
 #include <kviewmanager.h>
 // KDE
 #include <KLocale>
@@ -42,7 +43,8 @@ OktetaProgram::OktetaProgram( int argc, char *argv[] )
 {
     KByteArrayDocumentFactory *factory = new KByteArrayDocumentFactory();
     mDocumentManager->creator()->setDocumentFactory( factory );
-    mDocumentManager->synchronizer()->setDocumentFactory( factory );
+    mDocumentManager->loaderManager()->setDocumentLoadingFunction( &loadByteArrayFromRawFile );
+    mDocumentManager->loaderManager()->setDocumentSynchingFunction( &synchByteArrayWithRawFile );
 
     mViewManager->setViewFactory( new KByteArrayDisplayFactory() );
 

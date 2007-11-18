@@ -25,40 +25,35 @@
 // KDE
 #include <KUrl>
 
-class KDocumentSynchronizer;
+class KAbstractDocumentSynchronizer;
+class KAbstractDocumentFileSystemSynchronizer;
 class KAction;
 class KXmlGuiWindow;
-// class KAbstractDocument;
-namespace KDE { namespace If {
-class Storable;
-} }
 
 class SynchronizeController : public KViewController
 {
   Q_OBJECT
 
   public:
-    SynchronizeController( KDocumentSynchronizer *documentSynchronizer, KXmlGuiWindow *window );
+    SynchronizeController( KXmlGuiWindow *window );
 
   public: // KToolet API
     virtual void setView( KAbstractView *view );
 
   protected Q_SLOTS:
     void save();
-    void saveAs();
     void reload();
 
   private Q_SLOTS:
+    void onSynchronizerChange( KAbstractDocumentSynchronizer *newSynchronizer );
     void onSynchronizationStateChange( KAbstractDocument::SynchronizationStates newStates );
 
   protected:
-    KDocumentSynchronizer *mDocumentSynchronizer;
     KXmlGuiWindow *mMainWindow;
     KAbstractDocument *mDocument;
-    KDE::If::Storable *mStoreControl;
+    KAbstractDocumentFileSystemSynchronizer *mSynchronizer;
 
     KAction *mSaveAction;
-    KAction *mSaveAsAction;
     KAction *mReloadAction;
 };
 

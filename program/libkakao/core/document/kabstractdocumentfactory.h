@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kdocumentabstractfactory.h  -  description
+                          kabstractdocumentfactory.h  -  description
                              -------------------
     begin                : Thu Nov 2 2006
     copyright            : 2006 by Friedrich W. H. Kossebau
@@ -24,17 +24,15 @@
 class KAbstractDocument;
 
 
-class KDocumentAbstractFactory : public QObject
+class KAbstractDocumentFactory : public QObject
 {
   Q_OBJECT
 
   public:
-    virtual ~KDocumentAbstractFactory();
+    virtual ~KAbstractDocumentFactory();
 
   public: // API to be implemented
     virtual KAbstractDocument *create() = 0;
 };
-
-inline KDocumentAbstractFactory::~KDocumentAbstractFactory() {}
 
 #endif

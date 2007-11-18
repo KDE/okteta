@@ -1,7 +1,7 @@
 /***************************************************************************
-                          kstorableinterface.h  -  description
+                          loadercontroller.h  -  description
                              -------------------
-    begin                : Thu Nov 2 2006
+    begin                : Fri Jun 2 2006
     copyright            : 2006 by Friedrich W. H. Kossebau
     email                : kossebau@kde.org
  ***************************************************************************/
@@ -15,44 +15,42 @@
  ***************************************************************************/
 
 
-#ifndef KDE_IF_STORABLE_H
-#define KDE_IF_STORABLE_H
+#ifndef LOADERCONTROLLER_H
+#define LOADERCONTROLLER_H
 
-// Qt
-#include <QtCore/QtPlugin>
 
-namespace KDE
-{
-namespace If
-{
+// kakao
+#include <kviewcontroller.h>
+// KDE
+#include <KUrl>
 
-/** Interface for storable objects
-  * 
-  * @author Friedrich W. H. Kossebau <kossebau@kde.org>
-  */
-class Storable
+class KDocumentLoaderManager;
+class KRecentFilesAction;
+class KXmlGuiWindow;
+
+
+class LoaderController : public KViewController
 {
+  Q_OBJECT
+
   public:
-    virtual ~Storable();
+    LoaderController( KDocumentLoaderManager *loaderManager, KXmlGuiWindow *window );
+    ~LoaderController();
 
-  public: // set/action
-    virtual bool load( const QString &fileName ) = 0;
-    virtual bool save( const QString &fileName ) = 0;
-    virtual void setUrl( const QString &url ) = 0;
+  public: // KViewController API
+    virtual void setView( KAbstractView *view );
 
-  public: // get
-    virtual QString url() const = 0;
-    virtual QString localFilePath() const = 0;
+  public Q_SLOTS:
+    void load();
+    void loadRecent( const KUrl &url );
 
-  public: // signal
-    virtual void urlChanged( const QString &url ) = 0;
+    void onUrlUsed( const KUrl &url );
+
+  protected:
+    KDocumentLoaderManager *mLoaderManager;
+    KXmlGuiWindow *mMainWindow;
+
+    KRecentFilesAction *mOpenRecentAction;
 };
-
-inline Storable::~Storable() {}
-
-}
-}
-
-Q_DECLARE_INTERFACE( KDE::If::Storable, "org.kde.if.storable/1.0" )
 
 #endif

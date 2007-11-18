@@ -1,7 +1,7 @@
 /***************************************************************************
-                          testdocumenttest.h  -  description
+                          kbytearraydocumentfactorytest.cpp  -  description
                             -------------------
-    begin                : Thu Oct 25 2007
+    begin                : Fri Nov 16 2007
     copyright            : 2007 by Friedrich W. H. Kossebau
     email                : kossebau@kde.org
 ***************************************************************************/
@@ -15,34 +15,29 @@
 ***************************************************************************/
 
 
+#include "kbytearraydocumentfactorytest.h"
 
-#ifndef TESTDOCUMENTTEST_H
-#define TESTDOCUMENTTEST_H
-
-// sut
-#include <kabstractdocument.h>
+// test object
+#include <kbytearraydocumentfactory.h>
+// lib
+#include <kbytearraydocument.h>
 // Qt
-#include <QtCore/QObject>
-
-class QSignalSpy;
-class QString;
+#include <QtTest/QtTest>
 
 
-class TestDocumentTest : public QObject
+void KByteArrayDocumentFactoryTest::testCreate()
 {
-  Q_OBJECT
+    KByteArrayDocumentFactory *factory = new KByteArrayDocumentFactory();
 
-  private:
-    void checkTitleChanged( QSignalSpy *titleChangedSpy, const QString &title );
-    void checkSynchronizationStatesChanged( QSignalSpy *changedSpy, KAbstractDocument::SynchronizationStates states );
+    KAbstractDocument *document = factory->create();
+    KByteArrayDocument *byteArrayDocument = qobject_cast<KByteArrayDocument *>( document );
 
-  private Q_SLOTS: // test functions
-    void testPlainConstructor();
-    void testDataConstructor();
-    void testChangeData();
-    void testSetTitle();
-    void testSetSynchronizationStates();
+    QVERIFY( document != 0 );
+    QVERIFY( byteArrayDocument != 0 );
+    QCOMPARE( document->hasLocalChanges(), false );
 
-};
+    delete document;
+    delete factory;
+}
 
-#endif
+QTEST_MAIN( KByteArrayDocumentFactoryTest )

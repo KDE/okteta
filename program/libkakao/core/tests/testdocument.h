@@ -21,6 +21,7 @@
 // lib
 #include "kabstractdocument.h"
 // Qt
+#include <QtCore/QByteArray>
 #include <QtCore/QString>
 
 
@@ -30,11 +31,18 @@ class TestDocument : public KAbstractDocument
 
   public:
     TestDocument();
+    explicit TestDocument( const QByteArray &data );
     virtual ~TestDocument();
 
   public: // API to be implemented
     virtual QString title() const;
+    virtual QString typeName() const;
+    virtual QString mimeType() const;
     virtual SynchronizationStates synchronizationStates() const;
+
+  public:
+    const QByteArray *data() const;
+    void setData( const QByteArray &data );
 
   public: // instruction functions
     void setTitle( const QString &title );
@@ -42,6 +50,7 @@ class TestDocument : public KAbstractDocument
 
   protected:
     QString mTitle;
+    QByteArray mData;
     SynchronizationStates mSynchronizationStates;
 };
 

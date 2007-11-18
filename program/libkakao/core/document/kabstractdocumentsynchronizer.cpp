@@ -1,7 +1,7 @@
 /***************************************************************************
-                          kstorableinterface.h  -  description
+                          kabstractdocumentsynchronizer.cpp  -  description
                              -------------------
-    begin                : Sun Sep 2 2007
+    begin                : Mon Nov 12 2007
     copyright            : 2007 by Friedrich W. H. Kossebau
     email                : kossebau@kde.org
  ***************************************************************************/
@@ -15,40 +15,36 @@
  ***************************************************************************/
 
 
-#ifndef KDE_IF_FILELOADER_H
-#define KDE_IF_FILELOADER_H
+#include "kabstractdocumentsynchronizer.h"
 
-// Qt
-#include <QtCore/QtPlugin>
+// KDE
+#include <KUrl>
 
-class KAbstractDocument;
-class QString;
-
-namespace KDE
-{
-namespace If
-{
-
-/** Interface for factories which load from filesystem
-  * 
-  * @author Friedrich W. H. Kossebau <kossebau@kde.org>
-  */
-class FileLoader
+class KAbstractDocumentSynchronizer::Private
 {
   public:
-    virtual ~FileLoader();
-
-  public: // load
-    virtual KAbstractDocument *load( const QString &tmpFileName, const QString &originUrl ) = 0;
-//     virtual void reload( KAbstractDocument* Document ) = 0;
-//     virtual void save( KAbstractDocument* Document ) = 0;
+    KUrl url() const;
+    void setUrl( const KUrl &url );
+  protected:
+    KUrl mUrl;
 };
 
-inline FileLoader::~FileLoader() {}
+inline KUrl KAbstractDocumentSynchronizer::Private::url() const { return mUrl; }
+inline void KAbstractDocumentSynchronizer::Private::setUrl( const KUrl &url) { mUrl = url; }
 
+
+KAbstractDocumentSynchronizer::KAbstractDocumentSynchronizer()
+: d( new Private() )
+{}
+
+KUrl KAbstractDocumentSynchronizer::url() const { return d->url(); }
+void KAbstractDocumentSynchronizer::setUrl( const KUrl &url )
+{
+    d->setUrl( url );
+    emit urlChanged( url );
 }
+
+KAbstractDocumentSynchronizer::~KAbstractDocumentSynchronizer()
+{
+    delete d;
 }
-
-Q_DECLARE_INTERFACE( KDE::If::FileLoader, "org.kde.if.fileloader/1.0" )
-
-#endif

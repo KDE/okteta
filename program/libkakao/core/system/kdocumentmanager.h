@@ -28,7 +28,7 @@ class QWidget;
 class KUrl;
 
 class KDocumentCreator; //TODO: temporary
-class KDocumentSynchronizer; //TODO: temporary
+class KDocumentLoaderManager; //TODO: temporary
 
 class KDocumentManager : public QObject
 {
@@ -48,7 +48,7 @@ class KDocumentManager : public QObject
 
   public:
     KDocumentCreator *creator();
-    KDocumentSynchronizer *synchronizer();
+    KDocumentLoaderManager *loaderManager();
 
   Q_SIGNALS:
     // document got added
@@ -68,10 +68,10 @@ class KDocumentManager : public QObject
 
     // TODO: remove into own singleton
     KDocumentCreator *mCreator;
-    KDocumentSynchronizer *mSynchronizer;
+    KDocumentLoaderManager *mLoaderManager;
 };
 
 inline KDocumentCreator *KDocumentManager::creator() { return mCreator; }
-inline KDocumentSynchronizer *KDocumentManager::synchronizer() { return mSynchronizer; }
+inline KDocumentLoaderManager *KDocumentManager::loaderManager() { return mLoaderManager; }
 
 #endif

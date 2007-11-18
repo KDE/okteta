@@ -1,7 +1,7 @@
 /***************************************************************************
-                          kdocumentabstractfactory.cpp  -  description
+                          setremotecontroller.h  -  description
                              -------------------
-    begin                : Mon May 21 2007
+    begin                : Sat Nov 17 2007
     copyright            : 2007 by Friedrich W. H. Kossebau
     email                : kossebau@kde.org
  ***************************************************************************/
@@ -15,7 +15,39 @@
  ***************************************************************************/
 
 
-#include "kdocumentabstractfactory.h"
+#ifndef SETREMOTECONTROLLER_H
+#define SETREMOTECONTROLLER_H
 
 
-#include "kdocumentabstractfactory.moc"
+// lib
+#include <kviewcontroller.h>
+// KDE
+#include <KUrl>
+
+class KAction;
+class KXmlGuiWindow;
+class KAbstractDocument;
+class KDocumentLoaderManager;
+
+class SetRemoteController : public KViewController
+{
+  Q_OBJECT
+
+  public:
+    SetRemoteController( KDocumentLoaderManager *loaderManager, KXmlGuiWindow *window );
+
+  public: // KToolet API
+    virtual void setView( KAbstractView *view );
+
+  protected Q_SLOTS:
+    void saveAs();
+
+  protected:
+    KXmlGuiWindow *mMainWindow;
+    KAction *mSaveAsAction;
+
+    KDocumentLoaderManager *mLoaderManager;
+    KAbstractDocument *mDocument;
+};
+
+#endif

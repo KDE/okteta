@@ -10,6 +10,14 @@ include_directories(
 )
 
 
+########### util ###############
+
+set( kakaocoretestutil_LIB_SRCS
+  util/filesystem.cpp
+)
+
+kde4_add_library( kakaocoretestutil  STATIC ${kakaocoretestutil_LIB_SRCS} )
+
 ########### testdocumenttest ###############
 
 set( testdocumenttest_SRCS
@@ -17,14 +25,34 @@ set( testdocumenttest_SRCS
   testdocumenttest.cpp
 )
 
-kde4_add_executable( testdocumenttest  RUN_UNINSTALLED ${testdocumenttest_SRCS} )
+kde4_add_unit_test( testdocumenttest
+  TESTNAME libkakao-core-testdocumenttest
+  ${testdocumenttest_SRCS}
+)
 target_link_libraries( testdocumenttest
   kakaocore
   ${KDE4_KIO_LIBS}
   ${QT_QTTEST_LIBRARY}
 )
 
-add_test( libkakao-testdocumenttest ${EXECUTABLE_OUTPUT_PATH}/testdocumenttest)
+########### testdocumentfilesynchronizertest ###############
+
+set( testdocumenttest_SRCS
+  testdocument.cpp
+  testdocumentfilesynchronizer.cpp
+  testdocumentfilesynchronizertest.cpp
+)
+
+kde4_add_unit_test( testdocumentfilesynchronizertest
+  TESTNAME libkakao-core-testdocumentfilesynchronizertest
+  ${testdocumenttest_SRCS}
+)
+target_link_libraries( testdocumentfilesynchronizertest
+  kakaocore
+  kakaocoretestutil
+  ${KDE4_KIO_LIBS}
+  ${QT_QTTEST_LIBRARY}
+)
 
 ########### kdocumentmanagertest ###############
 
@@ -33,12 +61,12 @@ set( kdocumentmanagertest_SRCS
   kdocumentmanagertest.cpp
 )
 
-kde4_add_executable( kdocumentmanagertest  RUN_UNINSTALLED ${kdocumentmanagertest_SRCS} )
+kde4_add_unit_test( kdocumentmanagertest
+  TESTNAME libkakao-core-kdocumentmanagertest
+  ${kdocumentmanagertest_SRCS}
+)
 target_link_libraries( kdocumentmanagertest
   kakaocore
   ${KDE4_KIO_LIBS}
   ${QT_QTTEST_LIBRARY}
 )
-
-add_test( libkakao-kdocumentmanagertest ${EXECUTABLE_OUTPUT_PATH}/kdocumentmanagertest)
-

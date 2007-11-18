@@ -30,6 +30,8 @@
 #include <viewconfig/viewconfigcontroller.h>
 // kakao controllers
 #include <documentsystem/creator/creatorcontroller.h>
+#include <documentsystem/loader/loadercontroller.h>
+#include <document/setremote/setremotecontroller.h>
 #include <document/synchronize/synchronizecontroller.h>
 #include <view/zoom/zoomcontroller.h>
 #include <view/select/selectcontroller.h>
@@ -54,9 +56,11 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram *program )
 void OktetaMainWindow::setupControllers()
 {
   mControllers.append( new CreatorController(mProgram->documentManager()->creator(),this) );
-  mControllers.append( new SynchronizeController(mProgram->documentManager()->synchronizer(),this) );
+  mControllers.append( new LoaderController(mProgram->documentManager()->loaderManager(),this) );
+  mControllers.append( new SetRemoteController(mProgram->documentManager()->loaderManager(),this) );
+  mControllers.append( new SynchronizeController(this) );
   mControllers.append( new CloseController(mProgram->viewManager(),this) );
-//   mControllers.append( new ViewListMenuController(mProgram->viewManager(),mTabbedViews,this) );
+  mControllers.append( new ViewListMenuController(mProgram->viewManager(),mTabbedViews,this) );
   mControllers.append( new FullScreenController(this) );
   mControllers.append( new QuitController(0,this) );
 

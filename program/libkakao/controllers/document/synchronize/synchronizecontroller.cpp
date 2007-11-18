@@ -18,9 +18,8 @@
 #include "synchronizecontroller.h"
 
 // kakao
-#include <kdocumentsynchronizer.h>
+#include <kabstractdocumentfilesystemsynchronizer.h>
 #include <kviewmanager.h>
-#include <kistorable.h>
 // KDE
 #include <KActionCollection>
 #include <KAction>
@@ -28,14 +27,13 @@
 #include <KXmlGuiWindow>
 
 
-SynchronizeController::SynchronizeController( KDocumentSynchronizer *documentSynchronizer, KXmlGuiWindow *window )
-: mDocumentSynchronizer( documentSynchronizer ), mMainWindow( window )
+SynchronizeController::SynchronizeController( KXmlGuiWindow *window )
+: mMainWindow( window ), mSynchronizer( 0 )
 {
     KActionCollection *actionCollection = mMainWindow->actionCollection();
 
     mSaveAction   = KStandardAction::save(   this, SLOT(save()),   actionCollection );
-    mSaveAsAction = KStandardAction::saveAs( this, SLOT(saveAs()), actionCollection );
-//     mReloadAction = KStandardAction::revert( this, SLOT(reload()), actionCollection ); TODO
+    mReloadAction = KStandardAction::revert( this, SLOT(reload()), actionCollection );
 
     setView( 0 );
 }
@@ -45,43 +43,48 @@ void SynchronizeController::setView( KAbstractView *view )
     disconnect( mDocument );
 
     mDocument = ( view != 0 ) ? view->document() : 0;
-    //TODO: reuse Factory here, it can load, so needs to know about decode, so should know about encode, too?
-    mStoreControl = mDocument ? qobject_cast<KDE::If::Storable *>( mDocument ) : 0;
-    // TODO: Storable interface should be used by Synchronizer 
-    // synchronizer should report about possible activities
-    bool inSync = true;
-    bool hasUrl = false;
-    if( mStoreControl )
-    {
-        inSync = ( mDocument->synchronizationStates() == KAbstractDocument::InSync );
-        hasUrl = !mStoreControl->url().isEmpty();
-        connect( mDocument, SIGNAL(modified( KAbstractDocument::SynchronizationStates )),
-                            SLOT(onSynchronizationStateChange( KAbstractDocument::SynchronizationStates )) );
-    }
 
-    mSaveAction->setEnabled( mStoreControl && !inSync && hasUrl );
-    mSaveAsAction->setEnabled( mStoreControl );
-//     mReloadAction->setEnabled( mStoreControl && !inSync );// TODO: only if has url
+    if( mDocument )
+    {
+        connect( mDocument, SIGNAL(synchronizerChanged( KAbstractDocumentSynchronizer * )),
+                            SLOT(onSynchronizerChange( KAbstractDocumentSynchronizer * )) );
+    }
+    onSynchronizerChange( mDocument ? mDocument->synchronizer() : 0 );
 }
 
 void SynchronizeController::save()
 {
-    mDocumentSynchronizer->save( mDocument );
-}
-
-void SynchronizeController::saveAs()
-{
-    mDocumentSynchronizer->saveAs( mDocument );
+    mSynchronizer->synchToRemote();
 }
 
 void SynchronizeController::reload()
 {
-    mDocumentSynchronizer->reload( mDocument );
+    mSynchronizer->synchFromRemote();
+}
+
+void SynchronizeController::onSynchronizerChange( KAbstractDocumentSynchronizer *newSynchronizer )
+{
+    mSynchronizer = qobject_cast<KAbstractDocumentFileSystemSynchronizer *>( newSynchronizer );
+    // TODO: Storable interface should be used by Synchronizer 
+    // synchronizer should report about possible activities
+    bool outOfSync = true;
+    bool hasUrl = false;
+    if( mSynchronizer )
+    {
+        hasUrl = !mSynchronizer->url().isEmpty();
+        outOfSync = hasUrl && ( mDocument->synchronizationStates() != KAbstractDocument::InSync );
+        connect( mDocument, SIGNAL(modified( KAbstractDocument::SynchronizationStates )),
+                            SLOT(onSynchronizationStateChange( KAbstractDocument::SynchronizationStates )) );
+    }
+
+    mSaveAction->setEnabled( mSynchronizer && outOfSync );
+    mReloadAction->setEnabled( mSynchronizer && outOfSync );
 }
 
 void SynchronizeController::onSynchronizationStateChange( KAbstractDocument::SynchronizationStates newStates )
 {
-    const bool hasUrl = !mStoreControl->url().isEmpty();
-    mSaveAction->setEnabled( newStates!=KAbstractDocument::InSync && hasUrl );
-//     mReloadAction->setEnabled( newStates!=KAbstractDocument::InSync && hasUrl ); // TODO: only if document has url
+    const bool hasUrl = !mSynchronizer->url().isEmpty();
+    const bool outOfSync = hasUrl && ( newStates != KAbstractDocument::InSync );
+    mSaveAction->setEnabled( outOfSync );
+    mReloadAction->setEnabled( outOfSync );
 }

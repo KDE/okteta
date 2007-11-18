@@ -23,6 +23,9 @@
 #include <QtTest/QtTest>
 #include <QtTest/QSignalSpy>
 
+static const char TestData[] = "TestData";
+
+
 void TestDocumentTest::checkTitleChanged( QSignalSpy *titleChangedSpy, const QString &title )
 {
    QVERIFY( titleChangedSpy->isValid() );
@@ -41,15 +44,55 @@ void TestDocumentTest::checkSynchronizationStatesChanged( QSignalSpy *changedSpy
    QCOMPARE( arguments.at(0).value<KAbstractDocument::SynchronizationStates>(), states );
 }
 
-void TestDocumentTest::testConstructor()
+
+// ------------------------------------------------------------------ tests ----
+
+void TestDocumentTest::testPlainConstructor()
 {
     TestDocument *document = new TestDocument();
 
     QVERIFY( document != 0 );
+    QCOMPARE( *document->data(), QByteArray() );
     QCOMPARE( document->title(), QString() );
     QCOMPARE( document->synchronizationStates(), TestDocument::InSync );
 
     delete document;
+}
+
+void TestDocumentTest::testDataConstructor()
+{
+    const QByteArray testData( TestData );
+    TestDocument *document = new TestDocument( testData );
+
+    QVERIFY( document != 0 );
+    QCOMPARE( *document->data(), testData );
+    QCOMPARE( document->title(), QString() );
+    QCOMPARE( document->synchronizationStates(), TestDocument::InSync );
+
+    delete document;
+}
+
+void TestDocumentTest::testChangeData()
+{
+    qRegisterMetaType<KAbstractDocument::SynchronizationStates>("KAbstractDocument::SynchronizationStates");
+    const QByteArray testData( TestData );
+
+    TestDocument *document = new TestDocument();
+
+    QSignalSpy *changedSpy = new QSignalSpy( document, SIGNAL(modified( KAbstractDocument::SynchronizationStates )) );
+
+    QCOMPARE( *document->data(), QByteArray() );
+    QCOMPARE( document->synchronizationStates(), TestDocument::InSync );
+
+    document->setData( testData );
+
+    const KAbstractDocument::SynchronizationStates states( KAbstractDocument::LocalHasChanges );
+    QCOMPARE( *document->data(), testData );
+    QCOMPARE( document->synchronizationStates(), states );
+    checkSynchronizationStatesChanged( changedSpy, states );
+
+    delete document;
+    delete changedSpy;
 }
 
 void TestDocumentTest::testSetTitle()

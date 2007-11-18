@@ -32,25 +32,10 @@ KAbstractDocument *KByteArrayDocumentFactory::create()
 
     ++newByteArrayDocumentCounter;
 
+    // TODO: use document->typeName() ?
     document->setTitle(
         i18ncp("numbered title for a created document without a filename",
                "[New Byte Array]","[New Byte Array %1]",newByteArrayDocumentCounter) );
 
-    return document;
-}
-
-
-KAbstractDocument *KByteArrayDocumentFactory::load( const QString &localFileName, const QString &OriginUrl )
-{
-    KByteArrayDocument *document = new KByteArrayDocument();
-
-    const bool success = document->load(localFileName);
-    if( success )
-        document->setUrl( OriginUrl );
-    else
-    {
-        delete document;
-        document = 0;
-    }
     return document;
 }

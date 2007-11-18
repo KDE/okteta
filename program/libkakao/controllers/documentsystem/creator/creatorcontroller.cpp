@@ -20,33 +20,16 @@
 // kakao
 #include <kdocumentcreator.h>
 // KDE
-#include <KRecentFilesAction>
 #include <KActionCollection>
 #include <KStandardAction>
 #include <KXmlGuiWindow>
-#include <KFileDialog>
-#include <KGlobal>
-
-static const char AllFileNamesFilter[] = "*";
-static const char CreatorConfigGroupId[] = "Recent Files";
 
 CreatorController::CreatorController( KDocumentCreator *creator, KXmlGuiWindow *window )
 : mCreator( creator ), mMainWindow( window )
 {
     KActionCollection *actionCollection = mMainWindow->actionCollection();
 
-    KStandardAction::openNew(    this, SLOT(createNew()), actionCollection );
-    KStandardAction::open(       this, SLOT(open()),      actionCollection );
-    mOpenRecentAction =
-        KStandardAction::openRecent( this, SLOT(openRecent( const KUrl& )), actionCollection );
-
-    KConfigGroup configGroup( KGlobal::config(), CreatorConfigGroupId );
-    mOpenRecentAction->loadEntries( configGroup );
-}
-
-void CreatorController::setWorkingUrl( const KUrl &Url )
-{
-    mWorkingUrl = Url;
+    KStandardAction::openNew( this, SLOT(createNew()), actionCollection );
 }
 
 void CreatorController::setView( KAbstractView *view )
@@ -59,26 +42,4 @@ void CreatorController::createNew()
     mCreator->createNew();
 }
 
-void CreatorController::open()
-{
-    KUrl url = KFileDialog::getOpenUrl( mWorkingUrl.url(), AllFileNamesFilter, mMainWindow );
-
-    if( !url.isEmpty() )
-    {
-        mCreator->open( url );
-        // store path
-        mWorkingUrl = url.upUrl();
-        mOpenRecentAction->addUrl( url );
-    }
-}
-
-void CreatorController::openRecent( const KUrl &url )
-{
-    mCreator->open( url );
-}
-
-CreatorController::~CreatorController()
-{
-    KConfigGroup configGroup( KGlobal::config(), CreatorConfigGroupId );
-    mOpenRecentAction->saveEntries( configGroup );
-}
+CreatorController::~CreatorController() {}

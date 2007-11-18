@@ -1,7 +1,7 @@
 /***************************************************************************
-                          testdocumenttest.h  -  description
+                          testdocumentfilesynchronizertest.h  -  description
                             -------------------
-    begin                : Thu Oct 25 2007
+    begin                : Fri Nov 16 2007
     copyright            : 2007 by Friedrich W. H. Kossebau
     email                : kossebau@kde.org
 ***************************************************************************/
@@ -16,33 +16,40 @@
 
 
 
-#ifndef TESTDOCUMENTTEST_H
-#define TESTDOCUMENTTEST_H
+#ifndef TESTDOCUMENTFILESYNCHRONIZERTEST_H
+#define TESTDOCUMENTFILESYNCHRONIZERTEST_H
 
-// sut
-#include <kabstractdocument.h>
 // Qt
 #include <QtCore/QObject>
 
-class QSignalSpy;
+class TestFileSystem;
 class QString;
+class QByteArray;
 
-
-class TestDocumentTest : public QObject
+class TestDocumentFileSynchronizerTest : public QObject
 {
   Q_OBJECT
 
   private:
-    void checkTitleChanged( QSignalSpy *titleChangedSpy, const QString &title );
-    void checkSynchronizationStatesChanged( QSignalSpy *changedSpy, KAbstractDocument::SynchronizationStates states );
+    void writeToFile( const QString &filePath, const QByteArray &data );
+
+  private Q_SLOTS:
+    void initTestCase();
+    void cleanupTestCase();
+    void init();
 
   private Q_SLOTS: // test functions
-    void testPlainConstructor();
-    void testDataConstructor();
-    void testChangeData();
-    void testSetTitle();
-    void testSetSynchronizationStates();
+    void testLoadFromFile();
+    void testLoadSaveFile();
+    void testLoadReloadFile();
+    void testConnectToFile();
+  private: // not working tests
+    // TODO: need a way besides popups to report problems
+    void testLoadFromNotExistingUrl();
+    void testLoadFromNotExistingFile();
 
+  private:
+    TestFileSystem *mFileSystem;
 };
 
 #endif

@@ -19,22 +19,16 @@
 #define KBYTEARRAYDOCUMENTFACTORY_H
 
 
-//
-#include <kifileloader.h>
 // kakao
-#include <kdocumentabstractfactory.h>
+#include <kabstractdocumentfactory.h>
 
 
-class KByteArrayDocumentFactory : public KDocumentAbstractFactory, public KDE::If::FileLoader
+class KByteArrayDocumentFactory : public KAbstractDocumentFactory
 {
     Q_OBJECT
-    Q_INTERFACES(KDE::If::FileLoader)
 
-  public: // KDocumentAbstractFactory API
+  public: // KAbstractDocumentFactory API
     virtual KAbstractDocument *create();
-
-  public: // KDE::If::FileLoader API
-    virtual KAbstractDocument *load( const QString &tmpFileName, const QString &originUrl );
 };
 
 #endif
