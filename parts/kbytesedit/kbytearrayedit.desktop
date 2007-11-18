@@ -10,5 +10,5 @@ Name[pt_BR]=Editor de Bytes
 Name[sv]=Byteredigeringskomponent
 X-KDE-Library=libkbytearrayedit
 InitialPreference=2
-ServiceTypes=KHexEdit/KBytesEdit
+X-KDE-ServiceTypes=KHexEdit/KBytesEdit
 

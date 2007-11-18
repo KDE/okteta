@@ -18,6 +18,6 @@ Comment[pt_BR]=Visualizador Binário Incorporado
 Comment[sv]=Inbäddad binärvisning
 MimeType=all/allfiles
 #MimeType=application/octet-stream
-ServiceTypes=KParts/ReadOnlyPart,Browser/View
+X-KDE-ServiceTypes=KParts/ReadOnlyPart,Browser/View
 #,KParts/ReadWritePart
 X-KDE-Library=liboktetapart
