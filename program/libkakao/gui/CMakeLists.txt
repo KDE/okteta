@@ -4,14 +4,12 @@ include_directories(
   ../core/document
   ../core/system
   view
-  tool
   system
   controller
 )
 
 set( KAKAO_GUI_SRCS
   view/kabstractview.cpp
-  tool/kabstracttool.cpp
   system/dummyview.cpp
   system/kviewmanager.cpp
   system/abstractgroupedviews.cpp
