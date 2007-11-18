@@ -41,11 +41,11 @@
 SearchController::SearchController( KXmlGuiWindow *MW )
  : MainWindow( MW ), HexEdit( 0 ), ByteArray( 0 ), SearchDialog( 0 )
 {
-    KActionCollection* ActionCollection = MainWindow->actionCollection();
+    KActionCollection *actionCollection = MainWindow->actionCollection();
 
-    FindAction     = KStandardAction::find(     this, SLOT(find()),         ActionCollection );
-    FindNextAction = KStandardAction::findNext( this, SLOT(findNext()),     ActionCollection );
-    FindPrevAction = KStandardAction::findPrev( this, SLOT(findPrevious()), ActionCollection );
+    mFindAction     = KStandardAction::find(     this, SLOT(find()),         actionCollection );
+    mFindNextAction = KStandardAction::findNext( this, SLOT(findNext()),     actionCollection );
+    mFindPrevAction = KStandardAction::findPrev( this, SLOT(findPrevious()), actionCollection );
 
     setView( 0 );
 }
@@ -62,9 +62,9 @@ void SearchController::setView( KAbstractView *View )
     {
     }
     const bool HasView = ( ByteArray != 0 );
-    FindAction->setEnabled( HasView );
-    FindNextAction->setEnabled( HasView );
-    FindPrevAction->setEnabled( HasView );
+    mFindAction->setEnabled( HasView );
+    mFindNextAction->setEnabled( HasView );
+    mFindPrevAction->setEnabled( HasView );
 }
 
 

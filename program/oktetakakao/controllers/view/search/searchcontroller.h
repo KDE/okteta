@@ -42,7 +42,7 @@ class SearchController : public KViewController
 
   public:
     SearchController( KXmlGuiWindow *window );
-    ~SearchController();
+    virtual ~SearchController();
 
   public: // KToolet API
     virtual void setView( KAbstractView *View );
@@ -64,9 +64,9 @@ class SearchController : public KViewController
     KHEUI::KByteArrayView *HexEdit;
     KHECore::KAbstractByteArrayModel *ByteArray;
 
-    KAction *FindAction;
-    KAction *FindNextAction;
-    KAction *FindPrevAction;
+    KAction *mFindAction;
+    KAction *mFindNextAction;
+    KAction *mFindPrevAction;
 
     QByteArray SearchData;
     bool PreviousFound;
