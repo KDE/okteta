@@ -20,13 +20,15 @@
 
 // kakao
 #include <kabstractdocumentsynchronizerfactory.h>
+// Qt
+#include <QtCore/QByteArray>
 
 class TestDocumentFileSynchronizerFactory : public KAbstractDocumentSynchronizerFactory
 {
   Q_OBJECT
 
   public:
-    TestDocumentFileSynchronizerFactory();
+    TestDocumentFileSynchronizerFactory( const QByteArray &header = QByteArray() );
     virtual ~TestDocumentFileSynchronizerFactory();
 
   public: // KAbstractDocumentSynchronizerFactory API
@@ -38,6 +40,9 @@ class TestDocumentFileSynchronizerFactory : public KAbstractDocumentSynchronizer
 
     virtual QString supportedWorkType() const;
     virtual QString supportedRemoteType() const;
+
+  protected:
+    QByteArray mHeader;
 };
 
 #endif

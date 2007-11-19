@@ -21,8 +21,10 @@
 
 // Qt
 #include <QtCore/QObject>
+#include <QtCore/QByteArray>
 
 class TestFileSystem;
+class KUrl;
 class QString;
 class QByteArray;
 
@@ -31,7 +33,8 @@ class TestDocumentFileSynchronizerFactoryTest : public QObject
   Q_OBJECT
 
   private:
-    void writeToFile( const QString &filePath, const QByteArray &data );
+    void writeToFile( const QString &filePath, const QByteArray &data, const QByteArray &header = QByteArray() );
+    void checkFileContent( const KUrl &fileUrl, const QByteArray &data, const QByteArray &header = QByteArray() );
 
   private Q_SLOTS:
     void initTestCase();

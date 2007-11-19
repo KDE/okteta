@@ -35,21 +35,25 @@
 
 
 static const char TestDirectory[] = "testdocumentfile1synchronizertest";
-static const char TestFileName[] = "test.data";
+static const char TestFileName1[] = "test1.data";
+static const char TestFileName2[] = "test2.data";
 static const char NotExistingFileName[] = "not.existing";
 static const char FileProtocolName[] = "file://";
 static const char NotExistingUrlName[] = "not://existing";
 static const char TestData1[] = "TestData1";
 static const char TestData2[] = "TestData2";
+static const char Header1[] = "Header1";
+static const char Header2[] = "Header2";
 
 
-void TestDocumentFileSynchronizerFactoryTest::writeToFile( const QString &filePath, const QByteArray &data )
+void TestDocumentFileSynchronizerFactoryTest::writeToFile( const QString &filePath, const QByteArray &data, const QByteArray &header  )
 {
     QFile file;
     file.setFileName( filePath );
     file.open( QIODevice::WriteOnly );
 
     QDataStream outStream( &file );
+    outStream.writeRawData( header.data(), header.size() );
     outStream.writeRawData( data.data(), data.size() );
 
     file.close();
@@ -63,7 +67,7 @@ void TestDocumentFileSynchronizerFactoryTest::initTestCase()
 void TestDocumentFileSynchronizerFactoryTest::init()
 {
     const QByteArray testData( TestData1 );
-    const QString filePath = mFileSystem->createFilePath( QLatin1String(TestFileName) );
+    const QString filePath = mFileSystem->createFilePath( QLatin1String(TestFileName1) );
 
     writeToFile( filePath, testData );
 }
@@ -73,6 +77,19 @@ void TestDocumentFileSynchronizerFactoryTest::cleanupTestCase()
     delete mFileSystem;
 }
 
+void TestDocumentFileSynchronizerFactoryTest::checkFileContent( const KUrl &fileUrl, const QByteArray &data,
+                                                                const QByteArray &header )
+{
+    TestDocumentFileSynchronizerFactory *factory = new TestDocumentFileSynchronizerFactory( header );
+
+    KAbstractDocument *document = factory->loadNewDocument( fileUrl );
+    TestDocument *testDocument = qobject_cast<TestDocument *>( document );
+    QVERIFY( testDocument != 0 );
+    QCOMPARE( *testDocument->data(), data );
+
+    delete document;
+    delete factory;
+}
 
 // ------------------------------------------------------------------ tests ----
 void TestDocumentFileSynchronizerFactoryTest::testCreate()
@@ -87,7 +104,7 @@ void TestDocumentFileSynchronizerFactoryTest::testCreate()
 void TestDocumentFileSynchronizerFactoryTest::testLoadFromFile()
 {
     const QByteArray testData( TestData1 );
-    const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( FileProtocolName );
+    const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName1) ).prepend( FileProtocolName );
 
     TestDocumentFileSynchronizerFactory *factory = new TestDocumentFileSynchronizerFactory();
     KAbstractDocument *document = factory->loadNewDocument( fileUrl );
@@ -130,7 +147,7 @@ void TestDocumentFileSynchronizerFactoryTest::testLoadFromNotExistingFile()
 void TestDocumentFileSynchronizerFactoryTest::testLoadSaveFile()
 {
     const QByteArray otherData( TestData2 );
-    const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( FileProtocolName );
+    const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName1) ).prepend( FileProtocolName );
 
     TestDocumentFileSynchronizerFactory *factory = new TestDocumentFileSynchronizerFactory();
     KAbstractDocument *document = factory->loadNewDocument( fileUrl );
@@ -143,20 +160,15 @@ void TestDocumentFileSynchronizerFactoryTest::testLoadSaveFile()
 
     // now delete document and load new
     delete document;
-
-    document = factory->loadNewDocument( fileUrl );
-    testDocument = qobject_cast<TestDocument *>( document );
-    QVERIFY( testDocument != 0 );
-    QCOMPARE( *testDocument->data(), otherData );
-
-    delete document;
     delete factory;
+
+    checkFileContent( fileUrl, otherData );
 }
 
 void TestDocumentFileSynchronizerFactoryTest::testLoadReloadFile()
 {
     const QByteArray otherData( TestData2 );
-    const QString filePath = mFileSystem->createFilePath( QLatin1String(TestFileName) );
+    const QString filePath = mFileSystem->createFilePath( QLatin1String(TestFileName1) );
     const KUrl fileUrl = QString( filePath ).prepend( FileProtocolName );
 
     TestDocumentFileSynchronizerFactory *factory = new TestDocumentFileSynchronizerFactory();
@@ -181,26 +193,29 @@ void TestDocumentFileSynchronizerFactoryTest::testLoadReloadFile()
 void TestDocumentFileSynchronizerFactoryTest::testConnectToFile()
 {
     const QByteArray otherData( TestData2 );
-    const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( FileProtocolName );
+    const KUrl fileUrl1 = mFileSystem->createFilePath( QLatin1String(TestFileName1) ).prepend( FileProtocolName );
+    const QString filePath2 = mFileSystem->createFilePath( QLatin1String(TestFileName2) );
+    const KUrl fileUrl2 = QString( filePath2 ).prepend( FileProtocolName );
 
     TestDocumentFileSynchronizerFactory *factory = new TestDocumentFileSynchronizerFactory();
     TestDocument *testDocument = new TestDocument();
     KAbstractDocument *document = testDocument;
     testDocument->setData( otherData );
 
-    bool result = factory->connectDocument( document, fileUrl, KAbstractDocumentSynchronizer::ReplaceRemote );
+    // file 1
+    bool result = factory->connectDocument( document, fileUrl1, KAbstractDocumentSynchronizer::ReplaceRemote );
+    QVERIFY( result );
+
+    // file 2
+    result = factory->connectDocument( document, fileUrl2, KAbstractDocumentSynchronizer::ReplaceRemote );
     QVERIFY( result );
 
     // now delete document and load new
     delete document;
-
-    document = factory->loadNewDocument( fileUrl );
-    testDocument = qobject_cast<TestDocument *>( document );
-    QVERIFY( testDocument != 0 );
-    QCOMPARE( *testDocument->data(), otherData );
-
-    delete document;
     delete factory;
+
+    checkFileContent( fileUrl1, otherData );
+    checkFileContent( fileUrl2, otherData );
 }
 
 

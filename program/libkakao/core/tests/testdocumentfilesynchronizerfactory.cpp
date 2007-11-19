@@ -23,7 +23,8 @@
 // Qt
 #include <QtCore/QLatin1String>
 
-TestDocumentFileSynchronizerFactory::TestDocumentFileSynchronizerFactory() {}
+TestDocumentFileSynchronizerFactory::TestDocumentFileSynchronizerFactory(const QByteArray &header)
+ : mHeader( header ) {}
 
 // could be set to base class as value, is only one object per factory at runtime
 // and settable in desktop file
@@ -34,7 +35,7 @@ QString TestDocumentFileSynchronizerFactory::supportedRemoteType() const { retur
 // or, if there is only one place which calls this, move there
 KAbstractDocument *TestDocumentFileSynchronizerFactory::loadNewDocument( const KUrl &originUrl ) const
 {
-    TestDocumentFileSynchronizer *synchronizer = new TestDocumentFileSynchronizer( originUrl );
+    TestDocumentFileSynchronizer *synchronizer = new TestDocumentFileSynchronizer( originUrl, mHeader );
     KAbstractDocument *document = synchronizer->document();
     if( !document )
         delete synchronizer;
@@ -45,7 +46,7 @@ KAbstractDocument *TestDocumentFileSynchronizerFactory::loadNewDocument( const K
 bool TestDocumentFileSynchronizerFactory::connectDocument( KAbstractDocument *document, const KUrl &originUrl,
                                   KAbstractDocumentSynchronizer::ConnectOption option ) const 
 {
-    TestDocumentFileSynchronizer *synchronizer = new TestDocumentFileSynchronizer( document, originUrl, option );
+    TestDocumentFileSynchronizer *synchronizer = new TestDocumentFileSynchronizer( document, originUrl, option, mHeader );
     // TODO: is synchronizer->document() really a good signal for success? see also below
     const bool success = ( synchronizer->document() != 0 );
     if( !success )

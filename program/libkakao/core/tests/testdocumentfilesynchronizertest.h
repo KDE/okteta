@@ -21,17 +21,19 @@
 
 // Qt
 #include <QtCore/QObject>
+#include <QtCore/QByteArray>
 
 class TestFileSystem;
 class QString;
-class QByteArray;
+class KUrl;
 
 class TestDocumentFileSynchronizerTest : public QObject
 {
   Q_OBJECT
 
   private:
-    void writeToFile( const QString &filePath, const QByteArray &data );
+    void writeToFile( const QString &filePath, const QByteArray &data, const QByteArray &header = QByteArray() );
+    void checkFileContent( const KUrl &fileUrl, const QByteArray &data, const QByteArray &header = QByteArray() );
 
   private Q_SLOTS:
     void initTestCase();
@@ -42,9 +44,11 @@ class TestDocumentFileSynchronizerTest : public QObject
     void testLoadFromFile();
     void testLoadSaveFile();
     void testLoadReloadFile();
+    void testChangeFile();
     void testConnectToFile();
   private: // not working tests
     // TODO: need a way besides popups to report problems
+    void testHeader();
     void testLoadFromNotExistingUrl();
     void testLoadFromNotExistingFile();
 
