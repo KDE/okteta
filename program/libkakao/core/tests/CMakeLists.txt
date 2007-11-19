@@ -37,7 +37,7 @@ target_link_libraries( testdocumenttest
 
 ########### testdocumentfilesynchronizertest ###############
 
-set( testdocumenttest_SRCS
+set( testdocumentfilesynchronizertest_SRCS
   testdocument.cpp
   testdocumentfilesynchronizer.cpp
   testdocumentfilesynchronizertest.cpp
@@ -45,7 +45,7 @@ set( testdocumenttest_SRCS
 
 kde4_add_unit_test( testdocumentfilesynchronizertest
   TESTNAME libkakao-core-testdocumentfilesynchronizertest
-  ${testdocumenttest_SRCS}
+  ${testdocumentfilesynchronizertest_SRCS}
 )
 target_link_libraries( testdocumentfilesynchronizertest
   kakaocore
