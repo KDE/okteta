@@ -27,7 +27,8 @@
 #include <QtCore/QFile>
 
 
-TestDocumentFileSynchronizer::TestDocumentFileSynchronizer( const KUrl &url )
+TestDocumentFileSynchronizer::TestDocumentFileSynchronizer( const KUrl &url, const QByteArray &header )
+ : mHeader( header )
 {
     KAbstractDocument *document = loadFromUrl( url );
     mDocument = document ? qobject_cast<TestDocument*>( document ) : 0;
@@ -38,7 +39,9 @@ TestDocumentFileSynchronizer::TestDocumentFileSynchronizer( const KUrl &url )
 }
 
 TestDocumentFileSynchronizer::TestDocumentFileSynchronizer( KAbstractDocument *document, const KUrl &url,
-                                                            KAbstractDocumentSynchronizer::ConnectOption option )
+                                                            KAbstractDocumentSynchronizer::ConnectOption option,
+                                                            const QByteArray &header )
+ : mHeader( header )
 {
     // TODO: is synchronizer->document() really a good signal for success? see also above
     mDocument = document ? qobject_cast<TestDocument*>( document ) : 0;
@@ -64,6 +67,13 @@ KAbstractDocument *TestDocumentFileSynchronizer::loadFromFile( const QString &lo
     QDataStream inStream( &file );
     int fileSize = file.size();
 
+    // test header
+    const int headerSize = mHeader.size();
+    QByteArray header( headerSize, ' ' );
+    const int headerResult = inStream.readRawData( header.data(), headerSize );
+    if( headerResult == -1 || header != mHeader )
+        return false;
+
     QByteArray byteArray( fileSize, ' ' );
 
     inStream.readRawData( byteArray.data(), fileSize );
@@ -87,6 +97,13 @@ bool TestDocumentFileSynchronizer::reloadFromFile( const QString &localFileName 
     file.open( QIODevice::ReadOnly );
     QDataStream inStream( &file );
     int fileSize = file.size();
+
+    // test header
+    const int headerSize = mHeader.size();
+    QByteArray header( headerSize, ' ' );
+    const int headerResult = inStream.readRawData( header.data(), headerSize );
+    if( headerResult == -1 || header != mHeader )
+        return false;
 
     // TODO: should the decoder know this?
     QByteArray newData( fileSize, ' ' );
@@ -113,6 +130,7 @@ bool TestDocumentFileSynchronizer::writeToFile( const QString &localFilePath )
     file.open( QIODevice::WriteOnly );
 
     QDataStream outStream( &file );
+    outStream.writeRawData( mHeader.data(), mHeader.size() );
     outStream.writeRawData( byteArray->data(), byteArray->size() );
 
 //     byteArray->setModified( false );

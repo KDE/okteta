@@ -20,6 +20,8 @@
 
 // kakao
 #include <kabstractdocumentfilesystemsynchronizer.h>
+// Qt
+#include <QtCore/QByteArray>
 
 class TestDocument;
 
@@ -28,9 +30,10 @@ class TestDocumentFileSynchronizer : public KAbstractDocumentFileSystemSynchroni
     Q_OBJECT
 
   public:
-    explicit TestDocumentFileSynchronizer( const KUrl &originUrl );
+    explicit TestDocumentFileSynchronizer( const KUrl &originUrl, const QByteArray &header = QByteArray() );
     TestDocumentFileSynchronizer( KAbstractDocument *document, const KUrl &url,
-                                  KAbstractDocumentSynchronizer::ConnectOption option );
+                                  KAbstractDocumentSynchronizer::ConnectOption option,
+                                  const QByteArray &header = QByteArray() );
 
   public: // KAbstractDocumentSynchronizer API
     virtual KAbstractDocument *document() const;
@@ -44,6 +47,7 @@ class TestDocumentFileSynchronizer : public KAbstractDocumentFileSystemSynchroni
 
   protected:
     TestDocument *mDocument;
+    QByteArray mHeader;
 };
 
 #endif
