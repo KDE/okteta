@@ -21,12 +21,11 @@
 
 // kakao
 #include <kviewcontroller.h>
-// KDE
-#include <KUrl>
 
-class KDocumentLoaderManager;
+class KDocumentSyncManager;
 class KRecentFilesAction;
 class KXmlGuiWindow;
+class KUrl;
 
 
 class LoaderController : public KViewController
@@ -34,7 +33,7 @@ class LoaderController : public KViewController
   Q_OBJECT
 
   public:
-    LoaderController( KDocumentLoaderManager *loaderManager, KXmlGuiWindow *window );
+    LoaderController( KDocumentSyncManager *syncManager, KXmlGuiWindow *window );
     ~LoaderController();
 
   public: // KViewController API
@@ -47,7 +46,7 @@ class LoaderController : public KViewController
     void onUrlUsed( const KUrl &url );
 
   protected:
-    KDocumentLoaderManager *mLoaderManager;
+    KDocumentSyncManager *mSyncManager;
     KXmlGuiWindow *mMainWindow;
 
     KRecentFilesAction *mOpenRecentAction;

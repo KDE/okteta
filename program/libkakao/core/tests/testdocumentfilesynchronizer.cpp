@@ -44,7 +44,7 @@ TestDocumentFileSynchronizer::TestDocumentFileSynchronizer( KAbstractDocument *d
     mDocument = document ? qobject_cast<TestDocument*>( document ) : 0;
     if( mDocument )
     {
-        if( !synchWithUrl(url,option) )
+        if( !syncWithUrl(url,option) )
             mDocument = 0;
     }
 //     if( mDocument )
@@ -122,8 +122,8 @@ bool TestDocumentFileSynchronizer::writeToFile( const QString &localFilePath )
     return outStream.status() == QDataStream::Ok;
 }
 
-bool TestDocumentFileSynchronizer::synchWithFile( const QString &localFilePath,
-                                                  KAbstractDocumentSynchronizer::ConnectOption option )
+bool TestDocumentFileSynchronizer::syncWithFile( const QString &localFilePath,
+                                                 KAbstractDocumentSynchronizer::ConnectOption option )
 {
 Q_UNUSED( option )
     return writeToFile( localFilePath );

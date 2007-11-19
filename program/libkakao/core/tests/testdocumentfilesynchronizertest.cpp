@@ -128,7 +128,7 @@ void TestDocumentFileSynchronizerTest::testLoadSaveFile()
     QVERIFY( testDocument != 0 );
     // change and save
     testDocument->setData( otherData );
-    document->synchronizer()->synchToRemote();
+    document->synchronizer()->syncToRemote();
 
     // now delete document and load new
     delete document;
@@ -158,7 +158,7 @@ void TestDocumentFileSynchronizerTest::testLoadReloadFile()
    // ? use QTest::kWaitForSignal (QObject *obj, const char *signal, int timeout=0)
 //     QCOMPARE( document->synchronizationStates(), TestDocument::RemoteHasChanges );
 
-    document->synchronizer()->synchFromRemote();
+    document->synchronizer()->syncFromRemote();
 
     QCOMPARE( *testDocument->data(), otherData );
 

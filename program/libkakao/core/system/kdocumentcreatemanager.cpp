@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kdocumentmanager.cpp  -  description
+                          kdocumentcreatemanager.cpp  -  description
                              -------------------
     begin                : Fri Jun 2 2006
     copyright            : 2006 by Friedrich W. H. Kossebau
@@ -15,35 +15,35 @@
  ***************************************************************************/
 
 
-#include "kdocumentcreator.h"
+#include "kdocumentcreatemanager.h"
 
 // lib
 #include "kabstractdocumentfactory.h"
 #include "kdocumentmanager.h"
 
 
-KDocumentCreator::KDocumentCreator( KDocumentManager *manager )
- : mManager( manager ) {}
+KDocumentCreateManager::KDocumentCreateManager( KDocumentManager *manager )
+ : mManager( manager ), mFactory( 0 ) {}
 
-void KDocumentCreator::setWidget( QWidget *widget )
+void KDocumentCreateManager::setWidget( QWidget *widget )
 {
     mWidget = widget;
 }
 
-void KDocumentCreator::setDocumentFactory( KAbstractDocumentFactory *factory )
+void KDocumentCreateManager::setDocumentFactory( KAbstractDocumentFactory *factory )
 {
     mFactory = factory;
 }
 
 
-void KDocumentCreator::createNew()
+void KDocumentCreateManager::createNew()
 {
    KAbstractDocument *document = mFactory->create();
    mManager->addDocument( document );
 }
 
 
-KDocumentCreator::~KDocumentCreator()
+KDocumentCreateManager::~KDocumentCreateManager()
 {
-//     delete mFactory;
+    delete mFactory;
 }

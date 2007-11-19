@@ -22,8 +22,6 @@
 // lib
 #include <kabstractdocument.h>
 #include <kviewcontroller.h>
-// KDE
-#include <KUrl>
 
 class KAbstractDocumentSynchronizer;
 class KAbstractDocumentFileSystemSynchronizer;

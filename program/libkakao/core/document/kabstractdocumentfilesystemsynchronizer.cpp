@@ -140,8 +140,8 @@ bool KAbstractDocumentFileSystemSynchronizer::writeToUrl()
     return result;
 }
 
-bool KAbstractDocumentFileSystemSynchronizer::synchWithUrl( const KUrl &newUrl,
-                                                            KAbstractDocumentSynchronizer::ConnectOption option )
+bool KAbstractDocumentFileSystemSynchronizer::syncWithUrl( const KUrl &newUrl,
+                                                           KAbstractDocumentSynchronizer::ConnectOption option )
 {
 // Comment: here we play tricks to reuse the temporary file
 // KIO::NetAccess::removeTempFile only removes tempfiles created by KIO::NetAccess::download
@@ -169,7 +169,7 @@ bool KAbstractDocumentFileSystemSynchronizer::synchWithUrl( const KUrl &newUrl,
 
     if( isWorkFileOk )
     {
-        if( synchWithFile(workFileName,option) )
+        if( syncWithFile(workFileName,option) )
         {
             // care for old url
             if( url().isLocalFile() )
@@ -213,20 +213,20 @@ bool KAbstractDocumentFileSystemSynchronizer::synchWithUrl( const KUrl &newUrl,
     return result;
 }
 
-bool KAbstractDocumentFileSystemSynchronizer::synchFromRemote()
+bool KAbstractDocumentFileSystemSynchronizer::syncFromRemote()
 {
     return reloadFromUrl();
 }
 
-bool KAbstractDocumentFileSystemSynchronizer::synchToRemote()
+bool KAbstractDocumentFileSystemSynchronizer::syncToRemote()
 {
     return writeToUrl();
 }
 
-bool KAbstractDocumentFileSystemSynchronizer::synchWithRemote( const KUrl &url,
-                                                               KAbstractDocumentSynchronizer::ConnectOption option )
+bool KAbstractDocumentFileSystemSynchronizer::syncWithRemote( const KUrl &url,
+                                                              KAbstractDocumentSynchronizer::ConnectOption option )
 {
-    return synchWithUrl( url, option );
+    return syncWithUrl( url, option );
 }
 
 

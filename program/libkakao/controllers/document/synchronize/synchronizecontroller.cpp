@@ -21,6 +21,7 @@
 #include <kabstractdocumentfilesystemsynchronizer.h>
 #include <kviewmanager.h>
 // KDE
+#include <KUrl>
 #include <KActionCollection>
 #include <KAction>
 #include <KStandardAction>
@@ -54,12 +55,12 @@ void SynchronizeController::setView( KAbstractView *view )
 
 void SynchronizeController::save()
 {
-    mSynchronizer->synchToRemote();
+    mSynchronizer->syncToRemote();
 }
 
 void SynchronizeController::reload()
 {
-    mSynchronizer->synchFromRemote();
+    mSynchronizer->syncFromRemote();
 }
 
 void SynchronizeController::onSynchronizerChange( KAbstractDocumentSynchronizer *newSynchronizer )

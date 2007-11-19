@@ -20,7 +20,6 @@
 // kakao
 #include <kabstractdocument.h>
 #include <kdocumentmanager.h>
-#include <kdocumentcreator.h>
 #include <kabstractview.h>
 #include <kviewmanager.h>
 #include <tabbedviews.h>

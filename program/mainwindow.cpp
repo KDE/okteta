@@ -56,9 +56,9 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram *program )
 
 void OktetaMainWindow::setupControllers()
 {
-  mControllers.append( new CreatorController(mProgram->documentManager()->creator(),this) );
-  mControllers.append( new LoaderController(mProgram->documentManager()->loaderManager(),this) );
-  mControllers.append( new SetRemoteController(mProgram->documentManager()->loaderManager(),this) );
+  mControllers.append( new CreatorController(mProgram->documentManager()->createManager(),this) );
+  mControllers.append( new LoaderController(mProgram->documentManager()->syncManager(),this) );
+  mControllers.append( new SetRemoteController(mProgram->documentManager()->syncManager(),this) );
   mControllers.append( new SynchronizeController(this) );
   mControllers.append( new CloseController(mProgram->viewManager(),this) );
   mControllers.append( new ViewListMenuController(mProgram->viewManager(),mTabbedViews,this) );

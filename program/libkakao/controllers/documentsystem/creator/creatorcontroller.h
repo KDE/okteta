@@ -23,7 +23,7 @@
 #include <kviewcontroller.h>
 
 class KXmlGuiWindow;
-class KDocumentCreator;
+class KDocumentCreateManager;
 
 
 class CreatorController : public KViewController
@@ -31,7 +31,7 @@ class CreatorController : public KViewController
   Q_OBJECT
 
   public:
-    CreatorController( KDocumentCreator *creator, KXmlGuiWindow *window );
+    CreatorController( KDocumentCreateManager *createManager, KXmlGuiWindow *window );
     ~CreatorController();
 
   public: // KToolet API
@@ -41,7 +41,7 @@ class CreatorController : public KViewController
     void createNew();
 
   protected:
-    KDocumentCreator *mCreator;
+    KDocumentCreateManager *mCreateManager;
     KXmlGuiWindow *mMainWindow;
 };
 

@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kdocumentloadermanager.cpp  -  description
+                          kdocumentsyncmanager.cpp  -  description
                              -------------------
     begin                : Wed Nov 14 2007
     copyright            : 2007 by Friedrich W. H. Kossebau
@@ -15,7 +15,7 @@
  ***************************************************************************/
 
 
-#include "kdocumentloadermanager.h"
+#include "kdocumentsyncmanager.h"
 
 // lib
 #include "kabstractdocumentfactory.h"
@@ -30,27 +30,27 @@
 
 static const char AllFileNamesFilter[] = "*";
 
-KDocumentLoaderManager::KDocumentLoaderManager( KDocumentManager *manager )
- : mManager( manager ), mWidget( 0 ), mDocumentFactory( 0 ), mSynchronizerFactory( 0 )
+KDocumentSyncManager::KDocumentSyncManager( KDocumentManager *manager )
+ : mManager( manager ), mWidget( 0 ), mSynchronizerFactory( 0 )
 {}
 
-void KDocumentLoaderManager::setWidget( QWidget *widget )
+void KDocumentSyncManager::setWidget( QWidget *widget )
 {
     mWidget = widget;
 }
 
-bool KDocumentLoaderManager::hasSynchronizerForLocal( const QString &workDocumentType )
+bool KDocumentSyncManager::hasSynchronizerForLocal( const QString &workDocumentType )
 {
     // TODO: need synchronizerfactory classes to query for this or a local datastructure
     return ( mSynchronizerFactory->supportedWorkType() == workDocumentType );
 }
 
-void KDocumentLoaderManager::setDocumentSynchronizerFactory( KAbstractDocumentSynchronizerFactory *synchronizerFactory )
+void KDocumentSyncManager::setDocumentSynchronizerFactory( KAbstractDocumentSynchronizerFactory *synchronizerFactory )
 {
     mSynchronizerFactory = synchronizerFactory;
 }
 
-void KDocumentLoaderManager::load()
+void KDocumentSyncManager::load()
 {
     KUrl url = KFileDialog::getOpenUrl( QString()/*mWorkingUrl.url()*/, AllFileNamesFilter, mWidget );
 
@@ -63,7 +63,7 @@ void KDocumentLoaderManager::load()
     }
 }
 
-void KDocumentLoaderManager::load( const KUrl &url )
+void KDocumentSyncManager::load( const KUrl &url )
 {
     KAbstractDocument *document = mSynchronizerFactory->loadNewDocument( url );
 
@@ -71,7 +71,7 @@ void KDocumentLoaderManager::load( const KUrl &url )
         mManager->addDocument( document );
 }
 
-bool KDocumentLoaderManager::setSynchronizer( KAbstractDocument *document )
+bool KDocumentSyncManager::setSynchronizer( KAbstractDocument *document )
 {
     bool storingDone = false;
 
@@ -111,7 +111,7 @@ bool KDocumentLoaderManager::setSynchronizer( KAbstractDocument *document )
                 if( oldSynchronizer && true )//TODO: same remote mimetype
                 {
                     //TODO: ioverwrite for now
-                    oldSynchronizer->synchWithRemote( newUrl, KAbstractDocumentSynchronizer::ReplaceRemote );
+                    oldSynchronizer->syncWithRemote( newUrl, KAbstractDocumentSynchronizer::ReplaceRemote );
 //                     oldSynchronizer->unpauseSynchronization(); also pause above
                     storingDone = true;
                 }
@@ -136,7 +136,7 @@ bool KDocumentLoaderManager::setSynchronizer( KAbstractDocument *document )
                 // By e.g. warning that we might be overwriting something?
                 // synchTo might be the intention, after all the user wanted a new storage
                 // 
-                document->synchronizer()->synchToRemote();
+                document->synchronizer()->syncToRemote();
         }
         else
             break;
@@ -146,7 +146,7 @@ bool KDocumentLoaderManager::setSynchronizer( KAbstractDocument *document )
    return storingDone;
 }
 
-bool KDocumentLoaderManager::canClose( KAbstractDocument *document )
+bool KDocumentSyncManager::canClose( KAbstractDocument *document )
 {
     bool canClose = true;
 
@@ -167,7 +167,7 @@ bool KDocumentLoaderManager::canClose( KAbstractDocument *document )
             if( answer == KMessageBox::Yes )
             {
                 if( synchronizer )
-                    canClose = synchronizer->synchToRemote();
+                    canClose = synchronizer->syncToRemote();
                 else
                     canClose = setSynchronizer( document );
             }
@@ -188,8 +188,7 @@ bool KDocumentLoaderManager::canClose( KAbstractDocument *document )
     return canClose;
 }
 
-KDocumentLoaderManager::~KDocumentLoaderManager()
+KDocumentSyncManager::~KDocumentSyncManager()
 {
-    delete mDocumentFactory;
     delete mSynchronizerFactory;
 }

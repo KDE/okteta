@@ -16,8 +16,8 @@ set( KAKAO_CORE_SRCS
   document/kabstractdocumentsynchronizerfactory.cpp
   document/kabstractdocumentfilesystemsynchronizer.cpp
   system/kdocumentmanager.cpp
-  system/kdocumentcreator.cpp
-  system/kdocumentloadermanager.cpp
+  system/kdocumentcreatemanager.cpp
+  system/kdocumentsyncmanager.cpp
 )
 
 kde4_add_library( kakaocore STATIC ${KAKAO_CORE_SRCS} )

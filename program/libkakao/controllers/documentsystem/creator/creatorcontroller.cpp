@@ -18,14 +18,14 @@
 #include "creatorcontroller.h"
 
 // kakao
-#include <kdocumentcreator.h>
+#include <kdocumentcreatemanager.h>
 // KDE
 #include <KActionCollection>
 #include <KStandardAction>
 #include <KXmlGuiWindow>
 
-CreatorController::CreatorController( KDocumentCreator *creator, KXmlGuiWindow *window )
-: mCreator( creator ), mMainWindow( window )
+CreatorController::CreatorController( KDocumentCreateManager *createManager, KXmlGuiWindow *window )
+: mCreateManager( createManager ), mMainWindow( window )
 {
     KActionCollection *actionCollection = mMainWindow->actionCollection();
 
@@ -39,7 +39,7 @@ Q_UNUSED( view )
 
 void CreatorController::createNew()
 {
-    mCreator->createNew();
+    mCreateManager->createNew();
 }
 
 CreatorController::~CreatorController() {}

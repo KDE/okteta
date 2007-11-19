@@ -1,8 +1,8 @@
 /***************************************************************************
-                          kdocumentmanager.h  -  description
+                          kdocumentsyncmanager.h  -  description
                              -------------------
-    begin                : Fri Jun 2 2006
-    copyright            : 2006 by Friedrich W. H. Kossebau
+    begin                : Wed Nov 14 2007
+    copyright            : 2007 by Friedrich W. H. Kossebau
     email                : kossebau@kde.org
  ***************************************************************************/
 
@@ -15,36 +15,43 @@
  ***************************************************************************/
 
 
-#ifndef KDOCUMENTCREATOR_H
-#define KDOCUMENTCREATOR_H
+#ifndef KDOCUMENTSYNCMANAGER_H
+#define KDOCUMENTSYNCMANAGER_H
 
-// lib
-#include "kabstractdocument.h"
 // Qt
 #include <QtCore/QObject>
 
+class QString;
 class QWidget;
 class KUrl;
-class KAbstractDocumentFactory;
+class KAbstractDocument;
+class KAbstractDocumentSynchronizerFactory;
 class KDocumentManager;
 
-class KDocumentCreator : public QObject
+class KDocumentSyncManager : public QObject
 {
   Q_OBJECT
 
   public:
-    explicit KDocumentCreator( KDocumentManager *manager );
-    virtual ~KDocumentCreator();
+    explicit KDocumentSyncManager( KDocumentManager *manager );
+    virtual ~KDocumentSyncManager();
 
   public:
-    void createNew();
+    void load( const KUrl &url );
+    void load();
+// TODO: better name
+    bool setSynchronizer( KAbstractDocument *document );
+    bool canClose( KAbstractDocument *document );
 
   public:
-    void setDocumentFactory( KAbstractDocumentFactory *factory );
+    bool hasSynchronizerForLocal( const QString &mimeType );
+
+  public:
+    void setDocumentSynchronizerFactory( KAbstractDocumentSynchronizerFactory *synchronizerFactory );
     void setWidget( QWidget *widget );
 
-//  protected:
-//    virtual KAbstractDocument* createDocument();
+  Q_SIGNALS:
+    void urlUsed( const KUrl &url );
 
   protected:
     // unless there is a singleton
@@ -52,8 +59,8 @@ class KDocumentCreator : public QObject
     // used for dialogs, TODO: create (or use?) global instance for this
     QWidget *mWidget;
 
-    // temporary hack: hard coded factory for byte arrays
-    KAbstractDocumentFactory *mFactory;
+    // temporary hack: hard coded factories for byte arrays
+    KAbstractDocumentSynchronizerFactory *mSynchronizerFactory;
 };
 
 #endif

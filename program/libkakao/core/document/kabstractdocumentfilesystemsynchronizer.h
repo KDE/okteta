@@ -30,27 +30,27 @@ class KAbstractDocumentFileSystemSynchronizer : public KAbstractDocumentSynchron
     virtual ~KAbstractDocumentFileSystemSynchronizer();
 
   public: // KAbstractDocumentSynchronizer API
-    virtual bool synchToRemote();
-    virtual bool synchFromRemote();
-    virtual bool synchWithRemote( const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option );
+    virtual bool syncToRemote();
+    virtual bool syncFromRemote();
+    virtual bool syncWithRemote( const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option );
 
   protected: // API to be implemented
-    virtual KAbstractDocument *loadFromFile( const QString &localFilePath ) = 0;
-    virtual bool reloadFromFile( const QString &localFilePath ) = 0;
-    virtual bool writeToFile( const QString &localFilePath ) = 0;
-    virtual bool synchWithFile( const QString &localFilePath,
-                                KAbstractDocumentSynchronizer::ConnectOption option ) = 0;
+    virtual KAbstractDocument *loadFromFile( const QString &workFilePath ) = 0;
+    virtual bool reloadFromFile( const QString &workFilePath ) = 0;
+    virtual bool writeToFile( const QString &workFilePath ) = 0;
+    virtual bool syncWithFile( const QString &workFilePath,
+                               KAbstractDocumentSynchronizer::ConnectOption option ) = 0;
 
   protected Q_SLOTS:
-    void onFileDirty( const QString &fileName );
-    void onFileCreated( const QString &fileName );
-    void onFileDeleted( const QString &fileName );
+    void onFileDirty( const QString &filePath );
+    void onFileCreated( const QString &filePath );
+    void onFileDeleted( const QString &filePath );
 
   protected: // template functions, call from constructors
     KAbstractDocument *loadFromUrl( const KUrl &url );
     bool reloadFromUrl();
     bool writeToUrl();
-    bool synchWithUrl( const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option );
+    bool syncWithUrl( const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option );
 
   protected:
     class Private;

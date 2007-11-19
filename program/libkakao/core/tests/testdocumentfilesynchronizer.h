@@ -39,8 +39,8 @@ class TestDocumentFileSynchronizer : public KAbstractDocumentFileSystemSynchroni
     virtual KAbstractDocument *loadFromFile( const QString &tmpFileName );
     virtual bool reloadFromFile( const QString &localFilePath );
     virtual bool writeToFile( const QString &localFilePath );
-    virtual bool synchWithFile( const QString &localFilePath,
-                                KAbstractDocumentSynchronizer::ConnectOption option );
+    virtual bool syncWithFile( const QString &localFilePath,
+                               KAbstractDocumentSynchronizer::ConnectOption option );
 
   protected:
     TestDocument *mDocument;

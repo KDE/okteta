@@ -28,8 +28,8 @@
 #include "mainwindow.h"
 // kakao
 #include <kdocumentmanager.h>
-#include <kdocumentcreator.h>
-#include <kdocumentloadermanager.h>
+#include <kdocumentcreatemanager.h>
+#include <kdocumentsyncmanager.h>
 #include <kviewmanager.h>
 // KDE
 #include <KLocale>
@@ -41,8 +41,8 @@ OktetaProgram::OktetaProgram( int argc, char *argv[] )
  : mDocumentManager( new KDocumentManager() ),
    mViewManager( new KViewManager(mDocumentManager) )
 {
-    mDocumentManager->creator()->setDocumentFactory( new KByteArrayDocumentFactory() );
-    mDocumentManager->loaderManager()->setDocumentSynchronizerFactory( new KByteArrayRawFileSynchronizerFactory() );
+    mDocumentManager->createManager()->setDocumentFactory( new KByteArrayDocumentFactory() );
+    mDocumentManager->syncManager()->setDocumentSynchronizerFactory( new KByteArrayRawFileSynchronizerFactory() );
 
     mViewManager->setViewFactory( new KByteArrayDisplayFactory() );
 

@@ -19,7 +19,7 @@
 
 // kakao
 #include <kviewmanager.h>
-#include <kdocumentloadermanager.h>
+#include <kdocumentsyncmanager.h>
 // KDE
 #include <KActionCollection>
 #include <KAction>
@@ -27,8 +27,8 @@
 #include <KXmlGuiWindow>
 
 
-SetRemoteController::SetRemoteController( KDocumentLoaderManager *loaderManager, KXmlGuiWindow *window )
-: mMainWindow( window ), mLoaderManager( loaderManager )
+SetRemoteController::SetRemoteController( KDocumentSyncManager *syncManager, KXmlGuiWindow *window )
+: mMainWindow( window ), mSyncManager( syncManager )
 {
     KActionCollection *actionCollection = mMainWindow->actionCollection();
 
@@ -43,7 +43,7 @@ void SetRemoteController::setView( KAbstractView *view )
 
     const bool canBeSaved = mDocument ?
                                 ( mDocument->synchronizer() != 0 ||
-                                  mLoaderManager->hasSynchronizerForLocal(mDocument->mimeType()) ) :
+                                  mSyncManager->hasSynchronizerForLocal(mDocument->mimeType()) ) :
                                 false;
 
     mSaveAsAction->setEnabled( canBeSaved );
@@ -51,5 +51,5 @@ void SetRemoteController::setView( KAbstractView *view )
 
 void SetRemoteController::saveAs()
 {
-    mLoaderManager->setSynchronizer( mDocument );
+    mSyncManager->setSynchronizer( mDocument );
 }

@@ -21,22 +21,20 @@
 
 // lib
 #include <kviewcontroller.h>
-// KDE
-#include <KUrl>
 
 class KAction;
 class KXmlGuiWindow;
 class KAbstractDocument;
-class KDocumentLoaderManager;
+class KDocumentSyncManager;
 
 class SetRemoteController : public KViewController
 {
   Q_OBJECT
 
   public:
-    SetRemoteController( KDocumentLoaderManager *loaderManager, KXmlGuiWindow *window );
+    SetRemoteController( KDocumentSyncManager *syncManager, KXmlGuiWindow *window );
 
-  public: // KToolet API
+  public: // KViewController API
     virtual void setView( KAbstractView *view );
 
   protected Q_SLOTS:
@@ -46,7 +44,7 @@ class SetRemoteController : public KViewController
     KXmlGuiWindow *mMainWindow;
     KAction *mSaveAsAction;
 
-    KDocumentLoaderManager *mLoaderManager;
+    KDocumentSyncManager *mSyncManager;
     KAbstractDocument *mDocument;
 };
 

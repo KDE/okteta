@@ -27,8 +27,8 @@
 class QWidget;
 class KUrl;
 
-class KDocumentCreator; //TODO: temporary
-class KDocumentLoaderManager; //TODO: temporary
+class KDocumentCreateManager; //TODO: temporary
+class KDocumentSyncManager; //TODO: temporary
 
 class KDocumentManager : public QObject
 {
@@ -47,8 +47,8 @@ class KDocumentManager : public QObject
     bool canCloseAll();
 
   public:
-    KDocumentCreator *creator();
-    KDocumentLoaderManager *loaderManager();
+    KDocumentCreateManager *createManager();
+    KDocumentSyncManager *syncManager();
 
   Q_SIGNALS:
     // document got added
@@ -67,11 +67,11 @@ class KDocumentManager : public QObject
     QList<KAbstractDocument*> mList;
 
     // TODO: remove into own singleton
-    KDocumentCreator *mCreator;
-    KDocumentLoaderManager *mLoaderManager;
+    KDocumentCreateManager *mCreateManager;
+    KDocumentSyncManager *mSyncManager;
 };
 
-inline KDocumentCreator *KDocumentManager::creator() { return mCreator; }
-inline KDocumentLoaderManager *KDocumentManager::loaderManager() { return mLoaderManager; }
+inline KDocumentCreateManager *KDocumentManager::createManager() { return mCreateManager; }
+inline KDocumentSyncManager *KDocumentManager::syncManager() { return mSyncManager; }
 
 #endif

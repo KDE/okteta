@@ -37,11 +37,11 @@ class KByteArrayRawFileSynchronizer : public KAbstractDocumentFileSystemSynchron
     virtual KAbstractDocument *document() const;
 
   protected: // KAbstractDocumentFileSystemSynchronizer API
-    virtual KAbstractDocument *loadFromFile( const QString &tmpFileName );
-    virtual bool reloadFromFile( const QString &localFilePath );
-    virtual bool writeToFile( const QString &localFilePath );
-    virtual bool synchWithFile( const QString &localFilePath,
-                                KAbstractDocumentSynchronizer::ConnectOption option );
+    virtual KAbstractDocument *loadFromFile( const QString &workFilePath );
+    virtual bool reloadFromFile( const QString &workFilePath );
+    virtual bool writeToFile( const QString &workFilePath );
+    virtual bool syncWithFile( const QString &workFilePath,
+                               KAbstractDocumentSynchronizer::ConnectOption option );
 
   protected Q_SLOTS:
     void onUrlChange( const KUrl &url );

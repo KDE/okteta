@@ -45,7 +45,7 @@ class KAbstractDocumentSynchronizer : public QObject
   public:
     enum ConnectOption // TODO: better names
     {
-      TrySynch = 0,
+      SyncLocalAndRemote = 0,
       ReplaceRemote = 1,
       ReplaceLocal = 2
     };
@@ -67,12 +67,12 @@ class KAbstractDocumentSynchronizer : public QObject
 //     virtual void copyTo( const KUrl &url, KAbstractDocument *document, int *success ) const = 0;
 
     /** overwrite remote with local (save) */
-    virtual bool synchToRemote() = 0;
+    virtual bool syncToRemote() = 0;
     /** overwrite local with remote (reload) */
-    virtual bool synchFromRemote() = 0;
+    virtual bool syncFromRemote() = 0;
 
     /** changes the  */ // TODO: better name for replace: overwrite?
-    virtual bool synchWithRemote( const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option ) = 0;
+    virtual bool syncWithRemote( const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option ) = 0;
 
 //     virtual bool deleteDocument();
 

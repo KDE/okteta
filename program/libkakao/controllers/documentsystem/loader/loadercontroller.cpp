@@ -18,20 +18,21 @@
 #include "loadercontroller.h"
 
 // kakao
-#include <kdocumentloadermanager.h>
+#include <kdocumentsyncmanager.h>
 // KDE
+#include <KUrl>
 #include <KRecentFilesAction>
 #include <KActionCollection>
 #include <KStandardAction>
 #include <KXmlGuiWindow>
-#include <KFileDialog>
+#include <KConfigGroup>
 #include <KGlobal>
 
 static const char AllFileNamesFilter[] = "*";
 static const char CreatorConfigGroupId[] = "Recent Files";
 
-LoaderController::LoaderController( KDocumentLoaderManager *loaderManager, KXmlGuiWindow *window )
-: mLoaderManager( loaderManager ), mMainWindow( window )
+LoaderController::LoaderController( KDocumentSyncManager *syncManager, KXmlGuiWindow *window )
+: mSyncManager( syncManager ), mMainWindow( window )
 {
     KActionCollection *actionCollection = mMainWindow->actionCollection();
 
@@ -42,7 +43,7 @@ LoaderController::LoaderController( KDocumentLoaderManager *loaderManager, KXmlG
     KConfigGroup configGroup( KGlobal::config(), CreatorConfigGroupId );
     mOpenRecentAction->loadEntries( configGroup );
 
-    connect( mLoaderManager, SIGNAL(urlUsed( const KUrl& )), SLOT(onUrlUsed( const KUrl& )) );
+    connect( mSyncManager, SIGNAL(urlUsed( const KUrl& )), SLOT(onUrlUsed( const KUrl& )) );
 }
 
 
@@ -53,23 +54,13 @@ Q_UNUSED( view )
 
 void LoaderController::load()
 {
-    mLoaderManager->load();
-
-//     KUrl url = KFileDialog::getOpenUrl( QString()/*mWorkingUrl.url()*/, AllFileNamesFilter, mMainWindow );
-
-//     if( !url.isEmpty() )
-//     {
-//         mLoaderManager->load( url );
-        // store path
-//         mWorkingUrl = url.upUrl();
-//         mOpenRecentAction->addUrl( url );
-//     }
+    mSyncManager->load();
 }
 
 void LoaderController::loadRecent( const KUrl &url )
 {
     // TODO: 
-    mLoaderManager->load( url );
+    mSyncManager->load( url );
 }
 
 void LoaderController::onUrlUsed( const KUrl &url )

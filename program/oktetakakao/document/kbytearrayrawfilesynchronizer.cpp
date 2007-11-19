@@ -45,7 +45,7 @@ KByteArrayRawFileSynchronizer::KByteArrayRawFileSynchronizer( KAbstractDocument 
     mDocument = document ? qobject_cast<KByteArrayDocument*>( document ) : 0;
     if( mDocument )
     {
-        if( !synchWithUrl(url,option) )
+        if( !syncWithUrl(url,option) )
             mDocument = 0;
     }
     if( mDocument )
@@ -55,11 +55,11 @@ KByteArrayRawFileSynchronizer::KByteArrayRawFileSynchronizer( KAbstractDocument 
 
 KAbstractDocument *KByteArrayRawFileSynchronizer::document() const { return mDocument; }
 
-KAbstractDocument *KByteArrayRawFileSynchronizer::loadFromFile( const QString &localFileName/*, int *success*/ )
+KAbstractDocument *KByteArrayRawFileSynchronizer::loadFromFile( const QString &workFilePath/*, int *success*/ )
 {
     KByteArrayDocument *document = 0;
 
-    QFile file( localFileName );
+    QFile file( workFilePath );
     file.open( QIODevice::ReadOnly );
     QDataStream inStream( &file );
     int fileSize = file.size();
@@ -85,9 +85,9 @@ KAbstractDocument *KByteArrayRawFileSynchronizer::loadFromFile( const QString &l
     return document;
 }
 
-bool KByteArrayRawFileSynchronizer::reloadFromFile( const QString &localFileName )
+bool KByteArrayRawFileSynchronizer::reloadFromFile( const QString &workFilePath )
 {
-    QFile file( localFileName );
+    QFile file( workFilePath );
     file.open( QIODevice::ReadOnly );
     QDataStream inStream( &file );
     int fileSize = file.size();
@@ -112,11 +112,11 @@ bool KByteArrayRawFileSynchronizer::reloadFromFile( const QString &localFileName
     return streamIsOk;
 }
 
-bool KByteArrayRawFileSynchronizer::writeToFile( const QString &localFilePath )
+bool KByteArrayRawFileSynchronizer::writeToFile( const QString &workFilePath )
 {
     KHECore::KByteArrayModel *byteArray = mDocument->content();
 
-    QFile file( localFilePath );
+    QFile file( workFilePath );
     file.open( QIODevice::WriteOnly );
 
     QDataStream outStream( &file );
@@ -129,11 +129,11 @@ bool KByteArrayRawFileSynchronizer::writeToFile( const QString &localFilePath )
     return outStream.status() == QDataStream::Ok;
 }
 
-bool KByteArrayRawFileSynchronizer::synchWithFile( const QString &localFilePath,
-                                                   KAbstractDocumentSynchronizer::ConnectOption option )
+bool KByteArrayRawFileSynchronizer::syncWithFile( const QString &workFilePath,
+                                                  KAbstractDocumentSynchronizer::ConnectOption option )
 {
 Q_UNUSED( option );
-    return writeToFile( localFilePath );
+    return writeToFile( workFilePath );
 }
 
 void KByteArrayRawFileSynchronizer::onUrlChange( const KUrl &url )

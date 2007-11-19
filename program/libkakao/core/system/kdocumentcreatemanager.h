@@ -1,8 +1,8 @@
 /***************************************************************************
-                          kdocumentloadermanager.h  -  description
+                          kdocumentcreatemanager.h  -  description
                              -------------------
-    begin                : Wed Nov 14 2007
-    copyright            : 2007 by Friedrich W. H. Kossebau
+    begin                : Fri Jun 2 2006
+    copyright            : 2006 by Friedrich W. H. Kossebau
     email                : kossebau@kde.org
  ***************************************************************************/
 
@@ -15,44 +15,30 @@
  ***************************************************************************/
 
 
-#ifndef KDOCUMENTLOADERMANAGER_H
-#define KDOCUMENTLOADERMANAGER_H
+#ifndef KDOCUMENTCREATOR_H
+#define KDOCUMENTCREATOR_H
 
 // Qt
 #include <QtCore/QObject>
 
-class QString;
 class QWidget;
-class KUrl;
-class KAbstractDocument;
 class KAbstractDocumentFactory;
-class KAbstractDocumentSynchronizerFactory;
 class KDocumentManager;
 
-class KDocumentLoaderManager : public QObject
+class KDocumentCreateManager : public QObject
 {
   Q_OBJECT
 
   public:
-    explicit KDocumentLoaderManager( KDocumentManager *manager );
-    virtual ~KDocumentLoaderManager();
+    explicit KDocumentCreateManager( KDocumentManager *manager );
+    virtual ~KDocumentCreateManager();
 
   public:
-    void load( const KUrl &url );
-    void load();
-// TODO: better name
-    bool setSynchronizer( KAbstractDocument *document );
-    bool canClose( KAbstractDocument *document );
+    void createNew();
 
   public:
-    bool hasSynchronizerForLocal( const QString &mimeType );
-
-  public:
-    void setDocumentSynchronizerFactory( KAbstractDocumentSynchronizerFactory *synchronizerFactory );
+    void setDocumentFactory( KAbstractDocumentFactory *factory );
     void setWidget( QWidget *widget );
-
-  Q_SIGNALS:
-    void urlUsed( const KUrl &url );
 
   protected:
     // unless there is a singleton
@@ -60,9 +46,8 @@ class KDocumentLoaderManager : public QObject
     // used for dialogs, TODO: create (or use?) global instance for this
     QWidget *mWidget;
 
-    // temporary hack: hard coded factories for byte arrays
-    KAbstractDocumentFactory *mDocumentFactory;
-    KAbstractDocumentSynchronizerFactory *mSynchronizerFactory;
+    // temporary hack: hard coded factory for byte arrays
+    KAbstractDocumentFactory *mFactory;
 };
 
 #endif
