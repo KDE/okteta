@@ -28,6 +28,9 @@ class KAbstractDocument;
 // TODO: better names? Active Translator? 
 // synchronizers are created by factory functions (like plugins)
 
+// TODO: should synchronizers set the document to readonly if remote is readonly? or who?
+// TODO: should synchronizers offer to change writeflag at remote?
+
 /**
 possible actions:
 1. synchronizer loads document and synchronizes until closing
@@ -85,11 +88,5 @@ class KAbstractDocumentSynchronizer : public QObject
     class Private;
     Private * const d;
 };
-
-
-typedef KAbstractDocument *(*DocumentLoadingFunction)( const KUrl &originUrl );
-typedef bool (*DocumentSynchingFunction)( KAbstractDocument *document, const KUrl &originUrl,
-    KAbstractDocumentSynchronizer::ConnectOption option );
-typedef bool (*DocumentDumpingFunction)( const KUrl &originUrl );
 
 #endif

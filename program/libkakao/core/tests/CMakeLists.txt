@@ -54,6 +54,26 @@ target_link_libraries( testdocumentfilesynchronizertest
   ${QT_QTTEST_LIBRARY}
 )
 
+############ testdocumentfilesynchronizerfactorytest ###############
+
+set( testdocumentfilesynchronizerfactorytest_SRCS
+  testdocument.cpp
+  testdocumentfilesynchronizer.cpp
+  testdocumentfilesynchronizerfactory.cpp
+  testdocumentfilesynchronizerfactorytest.cpp
+)
+
+kde4_add_unit_test( testdocumentfilesynchronizerfactorytest
+  TESTNAME libkakao-core-testdocumentfilesynchronizerfactorytest
+  ${testdocumentfilesynchronizerfactorytest_SRCS}
+)
+target_link_libraries( testdocumentfilesynchronizerfactorytest
+  kakaocore
+  kakaocoretestutil
+  ${KDE4_KIO_LIBS}
+  ${QT_QTTEST_LIBRARY}
+)
+
 ########### kdocumentmanagertest ###############
 
 set( kdocumentmanagertest_SRCS

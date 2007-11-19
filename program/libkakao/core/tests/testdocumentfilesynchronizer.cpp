@@ -27,27 +27,6 @@
 #include <QtCore/QFile>
 
 
-KAbstractDocument *loadTestDocumentFromFile( const KUrl &originUrl )
-{
-    TestDocumentFileSynchronizer *synchronizer = new TestDocumentFileSynchronizer( originUrl );
-    KAbstractDocument *document = synchronizer->document();
-    if( !document )
-        delete synchronizer;
-
-    return document;
-}
-bool synchDocumentWithFile( KAbstractDocument *document, const KUrl &originUrl,
-                            KAbstractDocumentSynchronizer::ConnectOption option )
-{
-    TestDocumentFileSynchronizer *synchronizer = new TestDocumentFileSynchronizer( document, originUrl, option );
-    // TODO: is synchronizer->document() really a good signal for success? see also below
-    const bool success = ( synchronizer->document() != 0 );
-    if( !success )
-        delete synchronizer;
-
-    return success;
-}
-
 TestDocumentFileSynchronizer::TestDocumentFileSynchronizer( const KUrl &url )
 {
     KAbstractDocument *document = loadFromUrl( url );

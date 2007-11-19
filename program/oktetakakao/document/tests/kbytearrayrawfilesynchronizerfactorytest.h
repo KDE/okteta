@@ -1,7 +1,7 @@
 /***************************************************************************
-                          kbytearrayrawfilesynchronizertest.h  -  description
+                          kbytearrayrawfilesynchronizerfactorytest.h  -  description
                             -------------------
-    begin                : Fri Nov 16 2007
+    begin                : Mon Nov 19 2007
     copyright            : 2007 by Friedrich W. H. Kossebau
     email                : kossebau@kde.org
 ***************************************************************************/
@@ -24,7 +24,7 @@
 
 class TestFileSystem;
 
-class KByteArrayRawFileSynchronizerTest : public QObject
+class KByteArrayRawFileSynchronizerFactoryTest : public QObject
 {
   Q_OBJECT
 
@@ -33,6 +33,7 @@ class KByteArrayRawFileSynchronizerTest : public QObject
     void cleanupTestCase();
 
   private Q_SLOTS: // test functions
+    void testCreate();
     void testLoadFromUrl();
   private: // not working tests
     void testLoadFromNotExistingUrl();

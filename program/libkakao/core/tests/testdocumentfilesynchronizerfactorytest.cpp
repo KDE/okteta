@@ -1,7 +1,7 @@
 /***************************************************************************
-                          testdocumentfilesynchronizertest.cpp  -  description
+                          testdocumentfilesynchronizerfactorytest.cpp  -  description
                             -------------------
-    begin                : Fri Nov 16 2007
+    begin                : Mon Nov 19 2007
     copyright            : 2007 by Friedrich W. H. Kossebau
     email                : kossebau@kde.org
 ***************************************************************************/
@@ -15,10 +15,10 @@
 ***************************************************************************/
 
 
-#include "testdocumentfilesynchronizertest.h"
+#include "testdocumentfilesynchronizerfactorytest.h"
 
 // test object
-#include <testdocumentfilesynchronizer.h>
+#include <testdocumentfilesynchronizerfactory.h>
 // lib
 #include <testdocument.h>
 // test utils
@@ -43,7 +43,7 @@ static const char TestData1[] = "TestData1";
 static const char TestData2[] = "TestData2";
 
 
-void TestDocumentFileSynchronizerTest::writeToFile( const QString &filePath, const QByteArray &data )
+void TestDocumentFileSynchronizerFactoryTest::writeToFile( const QString &filePath, const QByteArray &data )
 {
     QFile file;
     file.setFileName( filePath );
@@ -55,12 +55,12 @@ void TestDocumentFileSynchronizerTest::writeToFile( const QString &filePath, con
     file.close();
 }
 
-void TestDocumentFileSynchronizerTest::initTestCase()
+void TestDocumentFileSynchronizerFactoryTest::initTestCase()
 {
     mFileSystem = new TestFileSystem( QLatin1String(TestDirectory) );
 }
 
-void TestDocumentFileSynchronizerTest::init()
+void TestDocumentFileSynchronizerFactoryTest::init()
 {
     const QByteArray testData( TestData1 );
     const QString filePath = mFileSystem->createFilePath( QLatin1String(TestFileName) );
@@ -68,20 +68,29 @@ void TestDocumentFileSynchronizerTest::init()
     writeToFile( filePath, testData );
 }
 
-void TestDocumentFileSynchronizerTest::cleanupTestCase()
+void TestDocumentFileSynchronizerFactoryTest::cleanupTestCase()
 {
     delete mFileSystem;
 }
 
 
 // ------------------------------------------------------------------ tests ----
+void TestDocumentFileSynchronizerFactoryTest::testCreate()
+{
+    TestDocumentFileSynchronizerFactory *factory = new TestDocumentFileSynchronizerFactory();
 
-void TestDocumentFileSynchronizerTest::testLoadFromFile()
+    QVERIFY( factory != 0 );
+
+    delete factory;
+}
+
+void TestDocumentFileSynchronizerFactoryTest::testLoadFromFile()
 {
     const QByteArray testData( TestData1 );
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( FileProtocolName );
-    TestDocumentFileSynchronizer *synchronizer = new TestDocumentFileSynchronizer( fileUrl );
-    KAbstractDocument *document = synchronizer->document();
+
+    TestDocumentFileSynchronizerFactory *factory = new TestDocumentFileSynchronizerFactory();
+    KAbstractDocument *document = factory->loadNewDocument( fileUrl );
 
     TestDocument *testDocument = qobject_cast<TestDocument *>( document );
 
@@ -94,35 +103,37 @@ void TestDocumentFileSynchronizerTest::testLoadFromFile()
     QCOMPARE( document->synchronizer()->url(), fileUrl );
 
     delete document;
+    delete factory;
 }
 
 
-void TestDocumentFileSynchronizerTest::testLoadFromNotExistingUrl()
+void TestDocumentFileSynchronizerFactoryTest::testLoadFromNotExistingUrl()
 {
     const KUrl fileUrl( QString::fromLatin1(NotExistingUrlName) );
-    TestDocumentFileSynchronizer *synchronizer = new TestDocumentFileSynchronizer( fileUrl );
-    KAbstractDocument *document = synchronizer->document();
+    TestDocumentFileSynchronizerFactory *factory = new TestDocumentFileSynchronizerFactory();
+    KAbstractDocument *document = factory->loadNewDocument( fileUrl );
 
     QVERIFY( document == 0 );
-    delete synchronizer;
+    delete factory;
 }
 
-void TestDocumentFileSynchronizerTest::testLoadFromNotExistingFile()
+void TestDocumentFileSynchronizerFactoryTest::testLoadFromNotExistingFile()
 {
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(NotExistingFileName) ).prepend( FileProtocolName );
-    TestDocumentFileSynchronizer *synchronizer = new TestDocumentFileSynchronizer( fileUrl );
-    KAbstractDocument *document = synchronizer->document();
+    TestDocumentFileSynchronizerFactory *factory = new TestDocumentFileSynchronizerFactory();
+    KAbstractDocument *document = factory->loadNewDocument( fileUrl );
 
     QVERIFY( document == 0 );
-    delete synchronizer;
+    delete factory;
 }
 
-void TestDocumentFileSynchronizerTest::testLoadSaveFile()
+void TestDocumentFileSynchronizerFactoryTest::testLoadSaveFile()
 {
     const QByteArray otherData( TestData2 );
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( FileProtocolName );
-    TestDocumentFileSynchronizer *synchronizer = new TestDocumentFileSynchronizer( fileUrl );
-    KAbstractDocument *document = synchronizer->document();
+
+    TestDocumentFileSynchronizerFactory *factory = new TestDocumentFileSynchronizerFactory();
+    KAbstractDocument *document = factory->loadNewDocument( fileUrl );
 
     TestDocument *testDocument = qobject_cast<TestDocument *>( document );
     QVERIFY( testDocument != 0 );
@@ -133,22 +144,23 @@ void TestDocumentFileSynchronizerTest::testLoadSaveFile()
     // now delete document and load new
     delete document;
 
-    synchronizer = new TestDocumentFileSynchronizer( fileUrl );
-    document = synchronizer->document();
+    document = factory->loadNewDocument( fileUrl );
     testDocument = qobject_cast<TestDocument *>( document );
     QVERIFY( testDocument != 0 );
     QCOMPARE( *testDocument->data(), otherData );
 
     delete document;
+    delete factory;
 }
 
-void TestDocumentFileSynchronizerTest::testLoadReloadFile()
+void TestDocumentFileSynchronizerFactoryTest::testLoadReloadFile()
 {
     const QByteArray otherData( TestData2 );
     const QString filePath = mFileSystem->createFilePath( QLatin1String(TestFileName) );
     const KUrl fileUrl = QString( filePath ).prepend( FileProtocolName );
-    TestDocumentFileSynchronizer *synchronizer = new TestDocumentFileSynchronizer( fileUrl );
-    KAbstractDocument *document = synchronizer->document();
+
+    TestDocumentFileSynchronizerFactory *factory = new TestDocumentFileSynchronizerFactory();
+    KAbstractDocument *document = factory->loadNewDocument( fileUrl );
 
     TestDocument *testDocument = qobject_cast<TestDocument *>( document );
     QVERIFY( testDocument != 0 );
@@ -163,32 +175,33 @@ void TestDocumentFileSynchronizerTest::testLoadReloadFile()
     QCOMPARE( *testDocument->data(), otherData );
 
     delete document;
+    delete factory;
 }
 
-void TestDocumentFileSynchronizerTest::testConnectToFile()
+void TestDocumentFileSynchronizerFactoryTest::testConnectToFile()
 {
     const QByteArray otherData( TestData2 );
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( FileProtocolName );
 
+    TestDocumentFileSynchronizerFactory *factory = new TestDocumentFileSynchronizerFactory();
     TestDocument *testDocument = new TestDocument();
     KAbstractDocument *document = testDocument;
     testDocument->setData( otherData );
 
-    TestDocumentFileSynchronizer *synchronizer =
-        new TestDocumentFileSynchronizer( document, fileUrl, TestDocumentFileSynchronizer::ReplaceRemote );
-    QVERIFY( synchronizer->document() != 0 );
+    bool result = factory->connectDocument( document, fileUrl, KAbstractDocumentSynchronizer::ReplaceRemote );
+    QVERIFY( result );
 
     // now delete document and load new
     delete document;
 
-    synchronizer = new TestDocumentFileSynchronizer( fileUrl );
-    document = synchronizer->document();
+    document = factory->loadNewDocument( fileUrl );
     testDocument = qobject_cast<TestDocument *>( document );
     QVERIFY( testDocument != 0 );
     QCOMPARE( *testDocument->data(), otherData );
 
     delete document;
+    delete factory;
 }
 
 
-QTEST_KDEMAIN_CORE( TestDocumentFileSynchronizerTest )
+QTEST_KDEMAIN_CORE( TestDocumentFileSynchronizerFactoryTest )

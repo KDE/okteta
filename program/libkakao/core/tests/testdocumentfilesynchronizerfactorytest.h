@@ -1,7 +1,7 @@
 /***************************************************************************
-                          kbytearrayrawfilesynchronizertest.h  -  description
+                          testdocumentfilesynchronizerfactorytest.h  -  description
                             -------------------
-    begin                : Fri Nov 16 2007
+    begin                : Mon Nov 19 2007
     copyright            : 2007 by Friedrich W. H. Kossebau
     email                : kossebau@kde.org
 ***************************************************************************/
@@ -16,26 +16,38 @@
 
 
 
-#ifndef KBYTEARRAYRAWFILESYNCHRONIZERTEST_H
-#define KBYTEARRAYRAWFILESYNCHRONIZERTEST_H
+#ifndef TESTDOCUMENTFILESYNCHRONIZERFACTORYTEST_H
+#define TESTDOCUMENTFILESYNCHRONIZERFACTORYTEST_H
 
 // Qt
 #include <QtCore/QObject>
 
 class TestFileSystem;
+class QString;
+class QByteArray;
 
-class KByteArrayRawFileSynchronizerTest : public QObject
+class TestDocumentFileSynchronizerFactoryTest : public QObject
 {
   Q_OBJECT
+
+  private:
+    void writeToFile( const QString &filePath, const QByteArray &data );
 
   private Q_SLOTS:
     void initTestCase();
     void cleanupTestCase();
+    void init();
 
   private Q_SLOTS: // test functions
-    void testLoadFromUrl();
+    void testCreate();
+    void testLoadFromFile();
+    void testLoadSaveFile();
+    void testLoadReloadFile();
+    void testConnectToFile();
   private: // not working tests
+    // TODO: need a way besides popups to report problems
     void testLoadFromNotExistingUrl();
+    void testLoadFromNotExistingFile();
 
   private:
     TestFileSystem *mFileSystem;

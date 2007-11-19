@@ -69,3 +69,25 @@ target_link_libraries( kbytearrayrawfilesynchronizertest
   ${KDE4_KIO_LIBS}
   ${QT_QTTEST_LIBRARY}
 )
+
+########### kbytearrayrawfilesynchronizerfactorytest ###############
+
+set( kbytearrayrawfilesynchronizerfactorytest_SRCS
+  kbytearrayrawfilesynchronizerfactorytest.cpp
+  ${SUTDIR}/kbytearraydocument.cpp
+  ${SUTDIR}/kbytearrayrawfilesynchronizer.cpp
+  ${SUTDIR}/kbytearrayrawfilesynchronizerfactory.cpp
+)
+
+kde4_add_unit_test( kbytearrayrawfilesynchronizerfactorytest
+  TESTNAME oktetakakao-document-kbytearrayrawfilesynchronizerfactorytest
+  ${kbytearrayrawfilesynchronizerfactorytest_SRCS}
+)
+target_link_libraries( kbytearrayrawfilesynchronizerfactorytest
+  kakaocore
+  kakaocoretestutil
+  oktetacoretestutil
+  testoktetacore
+  ${KDE4_KIO_LIBS}
+  ${QT_QTTEST_LIBRARY}
+)

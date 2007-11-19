@@ -1,7 +1,7 @@
 /***************************************************************************
-                          kbytearrayrawfilesynchronizertest.cpp  -  description
+                          kbytearrayrawfilesynchronizerfactorytest.cpp  -  description
                             -------------------
-    begin                : Fri Nov 16 2007
+    begin                : Mon Nov 19 2007
     copyright            : 2007 by Friedrich W. H. Kossebau
     email                : kossebau@kde.org
 ***************************************************************************/
@@ -18,10 +18,10 @@
 ***************************************************************************/
 
 
-#include "kbytearrayrawfilesynchronizertest.h"
+#include "kbytearrayrawfilesynchronizerfactorytest.h"
 
 // test object
-#include <kbytearrayrawfilesynchronizer.h>
+#include <kbytearrayrawfilesynchronizerfactory.h>
 // lib
 #include <kbytearraydocument.h>
 // test utils
@@ -31,7 +31,6 @@
 #include <kbytearraymodel.h>
 // KDE
 #include <KUrl>
-#include <KComponentData>
 #include <qtest_kde.h>
 // Qt
 #include <QtTest/QtTest>
@@ -49,7 +48,7 @@ static const int TestDataSize = 50;
 static const char TestDataChar = 0;
 
 
-void KByteArrayRawFileSynchronizerTest::initTestCase()
+void KByteArrayRawFileSynchronizerFactoryTest::initTestCase()
 {
     QByteArray byteArray( TestDataSize, TestDataChar );
     ::textureByteArray( &byteArray );
@@ -70,13 +69,13 @@ void KByteArrayRawFileSynchronizerTest::initTestCase()
 //     QFile::copy(QString::fromLatin1(KDESRCDIR) + QLatin1String("/Paris"), mDataDir + QLatin1String("/Europe/Paris"));
 }
 
-void KByteArrayRawFileSynchronizerTest::cleanupTestCase()
+void KByteArrayRawFileSynchronizerFactoryTest::cleanupTestCase()
 {
     delete mFileSystem;
 }
 
 #if 0
-void KByteArrayRawFileSynchronizerTest::init()
+void KByteArrayRawFileSynchronizerFactoryTest::init()
 {
     ByteArrayModel = createByteArrayModel();
 
@@ -84,12 +83,20 @@ void KByteArrayRawFileSynchronizerTest::init()
 }
 #endif
 
+void KByteArrayRawFileSynchronizerFactoryTest::testCreate()
+{
+    KByteArrayRawFileSynchronizerFactory *factory = new KByteArrayRawFileSynchronizerFactory();
 
-void KByteArrayRawFileSynchronizerTest::testLoadFromUrl()
+    QVERIFY( factory != 0 );
+
+    delete factory;
+}
+
+void KByteArrayRawFileSynchronizerFactoryTest::testLoadFromUrl()
 {
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( FileProtocolName );
-    KByteArrayRawFileSynchronizer *synchronizer = new KByteArrayRawFileSynchronizer( fileUrl );
-    KAbstractDocument *document = synchronizer->document();
+    KByteArrayRawFileSynchronizerFactory *factory = new KByteArrayRawFileSynchronizerFactory();
+    KAbstractDocument *document = factory->loadNewDocument( fileUrl );
 
     KByteArrayDocument *byteArrayDocument = qobject_cast<KByteArrayDocument *>( document );
 
@@ -102,21 +109,23 @@ void KByteArrayRawFileSynchronizerTest::testLoadFromUrl()
     QCOMPARE( document->synchronizer()->url(), fileUrl );
 
     delete document;
+    delete factory;
 }
 
-void KByteArrayRawFileSynchronizerTest::testLoadFromNotExistingUrl()
+void KByteArrayRawFileSynchronizerFactoryTest::testLoadFromNotExistingUrl()
 {
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(NotExistingUrl) );
 
-    KByteArrayRawFileSynchronizer *synchronizer = new KByteArrayRawFileSynchronizer( fileUrl );
-    KAbstractDocument *document = synchronizer->document();
+    KByteArrayRawFileSynchronizerFactory *factory = new KByteArrayRawFileSynchronizerFactory();
+    KAbstractDocument *document = factory->loadNewDocument( fileUrl );
 
     QVERIFY( document == 0 );
-    delete synchronizer;
+
+    delete factory;
 }
 
 #if 0
-void KByteArrayRawFileSynchronizerTest::testSaveToFile()
+void KByteArrayRawFileSynchronizerFactoryTest::testSaveToFile()
 {
     const QString filePath = mFileSystem->createFilePath( QLatin1String(TestFileName) );
 
@@ -146,4 +155,4 @@ TODO: save mit path als Parameter? Oder separat setzen? Wie Kopie speichern?
 }
 #endif
 
-QTEST_KDEMAIN_CORE( KByteArrayRawFileSynchronizerTest )
+QTEST_KDEMAIN_CORE( KByteArrayRawFileSynchronizerFactoryTest )

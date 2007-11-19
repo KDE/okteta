@@ -10,6 +10,7 @@ endif(KDE4_BUILD_TESTS)
 set( OKTETA_KAKAO_CORE_SRCS
   kbytearraydocumentfactory.cpp
   kbytearrayrawfilesynchronizer.cpp
+  kbytearrayrawfilesynchronizerfactory.cpp
   kbytearraydocument.cpp
 )
 

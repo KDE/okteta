@@ -27,29 +27,7 @@
 #include <QtCore/QDataStream>
 #include <QtCore/QFile>
 
-// TODO: this function seems to be always the same. Make macro
-// or, if there is only one place which calls this, move there
-KAbstractDocument *loadByteArrayFromRawFile( const KUrl &originUrl )
-{
-    KByteArrayRawFileSynchronizer *synchronizer = new KByteArrayRawFileSynchronizer( originUrl );
-    KAbstractDocument *document = synchronizer->document();
-    if( !document )
-        delete synchronizer;
 
-    return document;
-}
-
-bool synchByteArrayWithRawFile( KAbstractDocument *document, const KUrl &originUrl,
-                                KAbstractDocumentSynchronizer::ConnectOption option )
-{
-    KByteArrayRawFileSynchronizer *synchronizer = new KByteArrayRawFileSynchronizer( document, originUrl, option );
-    // TODO: is synchronizer->document() really a good signal for success? see also below
-    const bool success = ( synchronizer->document() != 0 );
-    if( !success )
-        delete synchronizer;
-
-    return success;
-}
 
 KByteArrayRawFileSynchronizer::KByteArrayRawFileSynchronizer( const KUrl &url )
 {

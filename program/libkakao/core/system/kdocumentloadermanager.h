@@ -18,15 +18,15 @@
 #ifndef KDOCUMENTLOADERMANAGER_H
 #define KDOCUMENTLOADERMANAGER_H
 
-// lib
-#include <kabstractdocumentsynchronizer.h>
 // Qt
 #include <QtCore/QObject>
 
 class QString;
 class QWidget;
 class KUrl;
+class KAbstractDocument;
 class KAbstractDocumentFactory;
+class KAbstractDocumentSynchronizerFactory;
 class KDocumentManager;
 
 class KDocumentLoaderManager : public QObject
@@ -48,8 +48,7 @@ class KDocumentLoaderManager : public QObject
     bool hasSynchronizerForLocal( const QString &mimeType );
 
   public:
-    void setDocumentLoadingFunction( DocumentLoadingFunction documentLoading );
-    void setDocumentSynchingFunction( DocumentSynchingFunction documentSynching );
+    void setDocumentSynchronizerFactory( KAbstractDocumentSynchronizerFactory *synchronizerFactory );
     void setWidget( QWidget *widget );
 
   Q_SIGNALS:
@@ -62,9 +61,8 @@ class KDocumentLoaderManager : public QObject
     QWidget *mWidget;
 
     // temporary hack: hard coded factories for byte arrays
-    DocumentLoadingFunction mDocumentLoading;
-    DocumentSynchingFunction mDocumentSynching;
-    KAbstractDocumentFactory *mFactory;
+    KAbstractDocumentFactory *mDocumentFactory;
+    KAbstractDocumentSynchronizerFactory *mSynchronizerFactory;
 };
 
 #endif

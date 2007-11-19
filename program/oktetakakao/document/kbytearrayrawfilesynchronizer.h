@@ -19,18 +19,10 @@
 #define KBYTEARRAYRAWFILESYNCHRONIZER_H
 
 
-//
-// #include <kifileloader.h>
 // kakao
 #include <kabstractdocumentfilesystemsynchronizer.h>
 
 class KByteArrayDocument;
-
-
-KAbstractDocument *loadByteArrayFromRawFile( const KUrl &originUrl );
-bool synchByteArrayWithRawFile( KAbstractDocument *document, const KUrl &originUrl,
-                                KAbstractDocumentSynchronizer::ConnectOption option );
-
 
 class KByteArrayRawFileSynchronizer : public KAbstractDocumentFileSystemSynchronizer
 {

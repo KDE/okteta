@@ -23,12 +23,6 @@
 
 class TestDocument;
 
-
-KAbstractDocument *loadTestDocumentFromFile( const KUrl &originUrl );
-bool synchDocumentWithFile( KAbstractDocument *document, const KUrl &originUrl,
-                            KAbstractDocumentSynchronizer::ConnectOption option );
-
-
 class TestDocumentFileSynchronizer : public KAbstractDocumentFileSystemSynchronizer
 {
     Q_OBJECT

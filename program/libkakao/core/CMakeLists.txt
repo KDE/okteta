@@ -13,6 +13,7 @@ set( KAKAO_CORE_SRCS
   document/kabstractdocument.cpp
   document/kabstractdocumentfactory.cpp
   document/kabstractdocumentsynchronizer.cpp
+  document/kabstractdocumentsynchronizerfactory.cpp
   document/kabstractdocumentfilesystemsynchronizer.cpp
   system/kdocumentmanager.cpp
   system/kdocumentcreator.cpp

@@ -19,6 +19,7 @@
 
 // lib
 #include "kabstractdocumentfactory.h"
+#include <kabstractdocumentsynchronizerfactory.h>
 #include "kdocumentmanager.h"
 // KDE
 #include <KIO/NetAccess>
@@ -30,7 +31,7 @@
 static const char AllFileNamesFilter[] = "*";
 
 KDocumentLoaderManager::KDocumentLoaderManager( KDocumentManager *manager )
- : mManager( manager ), mWidget( 0 )
+ : mManager( manager ), mWidget( 0 ), mDocumentFactory( 0 ), mSynchronizerFactory( 0 )
 {}
 
 void KDocumentLoaderManager::setWidget( QWidget *widget )
@@ -38,19 +39,15 @@ void KDocumentLoaderManager::setWidget( QWidget *widget )
     mWidget = widget;
 }
 
-bool KDocumentLoaderManager::hasSynchronizerForLocal( const QString &mimeType )
+bool KDocumentLoaderManager::hasSynchronizerForLocal( const QString &workDocumentType )
 {
-    return true; // TODO: need synchronizerfactory classes to query for this or a local datastructure
+    // TODO: need synchronizerfactory classes to query for this or a local datastructure
+    return ( mSynchronizerFactory->supportedWorkType() == workDocumentType );
 }
 
-void KDocumentLoaderManager::setDocumentLoadingFunction( DocumentLoadingFunction documentLoading )
+void KDocumentLoaderManager::setDocumentSynchronizerFactory( KAbstractDocumentSynchronizerFactory *synchronizerFactory )
 {
-    mDocumentLoading = documentLoading;
-}
-
-void KDocumentLoaderManager::setDocumentSynchingFunction( DocumentSynchingFunction documentSynching )
-{
-    mDocumentSynching = documentSynching;
+    mSynchronizerFactory = synchronizerFactory;
 }
 
 void KDocumentLoaderManager::load()
@@ -68,7 +65,7 @@ void KDocumentLoaderManager::load()
 
 void KDocumentLoaderManager::load( const KUrl &url )
 {
-    KAbstractDocument *document = (*mDocumentLoading)( url );
+    KAbstractDocument *document = mSynchronizerFactory->loadNewDocument( url );
 
     if( document )
         mManager->addDocument( document );
@@ -121,7 +118,9 @@ bool KDocumentLoaderManager::setSynchronizer( KAbstractDocument *document )
                 else
                 {
                     //TODO: overwrite for now
-                    storingDone = (*mDocumentSynching)( document, newUrl, KAbstractDocumentSynchronizer::ReplaceRemote );
+                    storingDone =
+                        mSynchronizerFactory->connectDocument( document, newUrl,
+                                                               KAbstractDocumentSynchronizer::ReplaceRemote );
                 }
 
                 if( storingDone )
@@ -191,4 +190,6 @@ bool KDocumentLoaderManager::canClose( KAbstractDocument *document )
 
 KDocumentLoaderManager::~KDocumentLoaderManager()
 {
+    delete mDocumentFactory;
+    delete mSynchronizerFactory;
 }

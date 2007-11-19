@@ -24,7 +24,7 @@
 // program
 #include "kbytearraydocumentfactory.h"
 #include "kbytearraydisplayfactory.h"
-#include "kbytearrayrawfilesynchronizer.h"
+#include "kbytearrayrawfilesynchronizerfactory.h"
 #include "mainwindow.h"
 // kakao
 #include <kdocumentmanager.h>
@@ -41,10 +41,8 @@ OktetaProgram::OktetaProgram( int argc, char *argv[] )
  : mDocumentManager( new KDocumentManager() ),
    mViewManager( new KViewManager(mDocumentManager) )
 {
-    KByteArrayDocumentFactory *factory = new KByteArrayDocumentFactory();
-    mDocumentManager->creator()->setDocumentFactory( factory );
-    mDocumentManager->loaderManager()->setDocumentLoadingFunction( &loadByteArrayFromRawFile );
-    mDocumentManager->loaderManager()->setDocumentSynchingFunction( &synchByteArrayWithRawFile );
+    mDocumentManager->creator()->setDocumentFactory( new KByteArrayDocumentFactory() );
+    mDocumentManager->loaderManager()->setDocumentSynchronizerFactory( new KByteArrayRawFileSynchronizerFactory() );
 
     mViewManager->setViewFactory( new KByteArrayDisplayFactory() );
 
