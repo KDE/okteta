@@ -54,6 +54,9 @@ set( GOTOOFFSETCONTROLLER_SRCS
   view/gotooffset/kgotooffsetdialog.cpp
   view/gotooffset/gotooffsetcontroller.cpp
 )
+set( BOOKMARKSCONTROLLER_SRCS
+  view/bookmarks/bookmarkscontroller.cpp
+)
 set( VIEWCONFIGCONTROLLER_SRCS
   view/viewconfig/viewconfigcontroller.cpp
 )
@@ -69,6 +72,7 @@ set( OKTETA_KAKAO_CONTROLLERS_SRCS
   ${REPLACECONTROLLER_SRCS}
   ${INSERTPATTERNCONTROLLER_SRCS}
   ${GOTOOFFSETCONTROLLER_SRCS}
+  ${BOOKMARKSCONTROLLER_SRCS}
   ${VIEWCONFIGCONTROLLER_SRCS}
 )
 

@@ -42,15 +42,19 @@
     <Separator/>
     <Action name="view_fullscreen"/>
   </Menu>
-  <!--Menu name="bookmarks">
-    <Action name="replace_bookmark" />
-    <Action name="remove_bookmark" />
-    <Action name="remove_all_bookmarks" />
+  <Menu name="bookmarks">
+    <Action name="bookmark_add" />
+    <Action name="bookmark_edit" />
     <Separator/>
-    <Action name="next_bookmark" />
-    <Action name="prev_bookmark" />
+    <Action name="bookmark_replace" />
+    <Action name="bookmark_remove" />
+    <Action name="bookmark_remove_all" />
+    <Separator/>
+    <Action name="bookmark_next" />
+    <Action name="bookmark_previous" />
+    <Separator/>
     <ActionList name="bookmark_list" />
-  </Menu-->
+  </Menu>
   <Menu name="tools">
     <Action name="extract_strings" />
     <Action name="binary_filter" />

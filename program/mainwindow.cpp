@@ -27,6 +27,7 @@
 #include <gotooffset/gotooffsetcontroller.h>
 #include <search/searchcontroller.h>
 #include <replace/replacecontroller.h>
+#include <bookmarks/bookmarkscontroller.h>
 #include <viewconfig/viewconfigcontroller.h>
 // kakao controllers
 #include <documentsystem/creator/creatorcontroller.h>
@@ -75,6 +76,7 @@ void OktetaMainWindow::setupControllers()
   mControllers.append( new ReplaceController(this) );
   mControllers.append( new GotoOffsetController(this) );
   mControllers.append( new InsertPatternController(this) );
+  mControllers.append( new BookmarksController(this) );
   mControllers.append( new ViewConfigController(this) );
 }
 
