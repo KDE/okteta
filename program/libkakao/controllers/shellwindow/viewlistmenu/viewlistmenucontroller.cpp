@@ -23,12 +23,12 @@
 #include <kiviewfocusable.h>
 // KDE
 #include <KXmlGuiWindow>
-#include <kxmlguifactory.h>
+#include <KXMLGUIFactory>
 #include <KActionCollection>
 #include <KLocale>
 #include <KStringHandler>
 // Qt
-#include <QtGui/QMenu>
+#include <QtGui/QActionGroup>
 
 static const int MaxEntryLength = 150;
 static const char WindowsListActionListId[] = "windows_list";

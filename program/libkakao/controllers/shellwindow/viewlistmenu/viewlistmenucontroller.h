@@ -22,7 +22,6 @@
 // kakao
 #include <kviewcontroller.h>
 
-class QMenu;
 class QAction;
 class QActionGroup;
 class KXmlGuiWindow;
@@ -39,7 +38,7 @@ class ViewListMenuController : public KViewController
   public:
     ViewListMenuController( KViewManager *viewManager, KDE::If::ViewFocusable *focusable, KXmlGuiWindow *window );
 
-  public: // KToolet API
+  public: // KViewController API
     virtual void setView( KAbstractView *view );
 
   private Q_SLOTS:
@@ -51,7 +50,6 @@ class ViewListMenuController : public KViewController
     KDE::If::ViewFocusable *mFocusable;
     KXmlGuiWindow *mMainWindow;
 
-    QMenu *mWindowsMenu;
     QActionGroup *mWindowsActionGroup;
 };
 
