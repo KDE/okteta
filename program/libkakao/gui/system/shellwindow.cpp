@@ -91,4 +91,6 @@ ShellWindow::~ShellWindow()
     QList<KViewController*>::Iterator end = mControllers.end();
     for( it=mControllers.begin(); it != end; ++it )
         delete *it;
+
+    delete mTabbedViews;
 }
