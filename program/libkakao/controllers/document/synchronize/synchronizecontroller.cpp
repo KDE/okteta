@@ -29,7 +29,7 @@
 
 
 SynchronizeController::SynchronizeController( KXmlGuiWindow *window )
-: mMainWindow( window ), mSynchronizer( 0 )
+: mMainWindow( window ), mDocument( 0 ), mSynchronizer( 0 )
 {
     KActionCollection *actionCollection = mMainWindow->actionCollection();
 
