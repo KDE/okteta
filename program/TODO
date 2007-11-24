@@ -1,17 +1,11 @@
 Unimplemented Feature of KHexEdit:
 ----------------------------------
 
-Letzte Dateien
-
 revert
-
-Speichern
 
 Bookmarks
 
 Suchleiste
-
-Dokumentenliste
 
 Einstellung Anzeige a-f/A-F
 
@@ -38,6 +32,11 @@ Einstellung Anzeige voller Pfad in Titel
 Exportieren
 
 Drucken
+
+Erledigt:
+- Speichern
+- Dokumentenliste
+- Letzte Dateien
 
 
 

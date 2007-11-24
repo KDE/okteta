@@ -2,6 +2,7 @@ project( kakaocore )
 
 include_directories(
   document
+  io
   system
 )
 
@@ -11,13 +12,17 @@ endif(KDE4_BUILD_TESTS)
 
 set( KAKAO_CORE_SRCS
   document/kabstractdocument.cpp
+  document/kabstractdocumentselection.cpp
   document/kabstractdocumentfactory.cpp
-  document/kabstractdocumentsynchronizer.cpp
-  document/kabstractdocumentsynchronizerfactory.cpp
-  document/kabstractdocumentfilesystemsynchronizer.cpp
+  io/kabstractdocumentstreamencoder.cpp
+  io/kabstractdocumentsynchronizer.cpp
+  io/kabstractdocumentsynchronizerfactory.cpp
+  io/kabstractdocumentfilesystemsynchronizer.cpp
+  io/kabstractdocumentstreamsynchronizer.cpp
   system/kdocumentmanager.cpp
   system/kdocumentcreatemanager.cpp
   system/kdocumentsyncmanager.cpp
+  system/kdocumentcodecmanager.cpp
 )
 
 kde4_add_library( kakaocore STATIC ${KAKAO_CORE_SRCS} )

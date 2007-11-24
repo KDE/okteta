@@ -24,10 +24,12 @@
 // temporary
 #include "kdocumentcreatemanager.h"
 #include "kdocumentsyncmanager.h"
+#include "kdocumentcodecmanager.h"
 
 KDocumentManager::KDocumentManager()
  : mCreateManager( new KDocumentCreateManager(this) ),
-   mSyncManager( new KDocumentSyncManager(this) )
+   mSyncManager( new KDocumentSyncManager(this) ),
+   mCodecManager( new KDocumentCodecManager(this) )
 {}
 
 void KDocumentManager::addDocument( KAbstractDocument *document )
@@ -77,4 +79,5 @@ KDocumentManager::~KDocumentManager()
 {
     delete mCreateManager;
     delete mSyncManager;
+    delete mCodecManager;
 } //TODO: destroy all documents?

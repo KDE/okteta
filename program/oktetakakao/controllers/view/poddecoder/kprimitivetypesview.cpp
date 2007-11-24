@@ -136,7 +136,7 @@ KPrimitiveTypesView::KPrimitiveTypesView( QWidget *Parent )
     BitWidthSelection = new QComboBox( false );
     BitWidthSelection->addItem( i18n("Fixed 8 bit") );
     for( int i=1; i<=16; ++i )
-        BitWidthSelection->addItem( i18np("1 bit window","%n bits window",i) );
+        BitWidthSelection->addItem( i18np("1 bit window","%1 bits window",i) );
     BaseLayout->addWidget( BitWidthSelection, 4, 2 );
     connect( BitWidthSelection, SIGNAL(activated(int)), SLOT(onBitWidthChange(int)));
 

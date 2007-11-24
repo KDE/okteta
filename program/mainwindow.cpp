@@ -32,11 +32,12 @@
 // kakao controllers
 #include <documentsystem/creator/creatorcontroller.h>
 #include <documentsystem/loader/loadercontroller.h>
-#include <document/setremote/setremotecontroller.h>
-#include <document/synchronize/synchronizecontroller.h>
+#include <io/setremote/setremotecontroller.h>
+#include <io/synchronize/synchronizecontroller.h>
 #include <view/zoom/zoomcontroller.h>
 #include <view/select/selectcontroller.h>
 #include <view/clipboard/clipboardcontroller.h>
+#include <view/copyas/copyascontroller.h>
 #include <shellwindow/viewlistmenu/viewlistmenucontroller.h>
 #include <shellwindow/fullscreen/fullscreencontroller.h>
 #include <viewsystem/close/closecontroller.h>
@@ -68,6 +69,7 @@ void OktetaMainWindow::setupControllers()
   mControllers.append( new ZoomController(this) );
   mControllers.append( new SelectController(this) );
   mControllers.append( new ClipboardController(this) );
+  mControllers.append( new CopyAsController(mProgram->documentManager(),this) );
 
   mControllers.append( new PODDecoderController(mProgram->viewManager(),this) );
 //   mControllers.append( new CharTableController(this) );

@@ -3,18 +3,18 @@ project( oktetaprogram )
 add_subdirectory( libkakao )
 add_subdirectory( oktetakakao )
 
-# if(KDE4_BUILD_TESTS)
-#   add_subdirectory(tests)
-# endif(KDE4_BUILD_TESTS)
-
 include_directories(
+#TODO: remove this
+  ../core
   libkakao/core/document
+  libkakao/core/io
   libkakao/core/system
   libkakao/gui/view
   libkakao/gui/system
   libkakao/gui/controller
   libkakao/controllers
   oktetakakao/document
+  oktetakakao/io
   oktetakakao/view
   oktetakakao/controllers/document
   oktetakakao/controllers/view
@@ -35,7 +35,8 @@ target_link_libraries( okteta
   oktetacore
   okteta_kakaocontrollers
   okteta_kakaogui
-  okteta_kakaocore
+  okteta_kakaoio
+  okteta_kakaodocument
   kakaocontrollers
   kakaogui
   kakaocore

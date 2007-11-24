@@ -41,6 +41,8 @@ class KAbstractDocumentFileSystemSynchronizer : public KAbstractDocumentSynchron
     virtual bool syncWithFile( const QString &workFilePath,
                                KAbstractDocumentSynchronizer::ConnectOption option ) = 0;
 
+// TODO: virtual void onFileModified( FileChange );
+// enum FileChange { FileDirty, FileCreated, FileDeleted );
   protected Q_SLOTS:
     void onFileDirty( const QString &filePath );
     void onFileCreated( const QString &filePath );

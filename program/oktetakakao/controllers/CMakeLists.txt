@@ -8,6 +8,7 @@ include_directories(
   ../../libkakao/gui/system
   ../../libkakao/gui/controller
   ../document
+  ../io
   ../view
 #   liblistview
   view/libbytearraylineedit

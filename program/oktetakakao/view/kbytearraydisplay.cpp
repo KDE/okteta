@@ -25,16 +25,18 @@
 
 
 KByteArrayDisplay::KByteArrayDisplay( KByteArrayDocument *document )
- : mWidget( 0 ), mDocument( document )
+ : mWidget( 0 ), mDocument( document ), mSelection( document )
 {
     mWidget = new KHEUI::KByteArrayView( mDocument->content() );
     // propagate signals
     connect( mDocument, SIGNAL(titleChanged( QString )), SIGNAL(titleChanged( QString )) );
     connect( mDocument, SIGNAL(modified( KAbstractDocument::SynchronizationStates )),
                         SIGNAL(modified( KAbstractDocument::SynchronizationStates )) );
-    connect( mWidget, SIGNAL(selectionChanged( bool )), SIGNAL(hasSelectedDataChanged( bool )) );
+//     connect( mWidget, SIGNAL(selectionChanged( bool )), SIGNAL(hasSelectedDataChanged( bool )) );
+    connect( mWidget, SIGNAL(selectionChanged( bool )), SLOT(onSelectionChange( bool )) );
 }
 
+const KAbstractDocumentSelection *KByteArrayDisplay::selection() const { return &mSelection; }
 
 KAbstractDocument *KByteArrayDisplay::document() const { return mDocument; }
 QWidget* KByteArrayDisplay::widget()             const { return mWidget; }
@@ -81,6 +83,12 @@ QMimeData *KByteArrayDisplay::cutSelectedData()
 void KByteArrayDisplay::deleteSelectedData()
 {
     mWidget->removeSelectedData();
+}
+
+void KByteArrayDisplay::onSelectionChange( bool selected )
+{
+    mSelection.setSection( mWidget->selection() );
+    emit hasSelectedDataChanged( selected );
 }
 
 KByteArrayDisplay::~KByteArrayDisplay()

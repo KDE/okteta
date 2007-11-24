@@ -74,6 +74,8 @@ class KAbstractDocumentSynchronizer : public QObject
     /** changes the  */ // TODO: better name for replace: overwrite?
     virtual bool syncWithRemote( const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option ) = 0;
 
+//     virtual bool syncBiDirectly() = 0;
+//     virtual bool canSyncBiDirectly() const = 0;
 //     virtual bool deleteDocument();
 
     virtual KAbstractDocument *document() const = 0;

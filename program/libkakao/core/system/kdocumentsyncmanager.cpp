@@ -18,7 +18,6 @@
 #include "kdocumentsyncmanager.h"
 
 // lib
-#include "kabstractdocumentfactory.h"
 #include <kabstractdocumentsynchronizerfactory.h>
 #include "kdocumentmanager.h"
 // KDE

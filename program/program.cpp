@@ -25,22 +25,34 @@
 #include "kbytearraydocumentfactory.h"
 #include "kbytearraydisplayfactory.h"
 #include "kbytearrayrawfilesynchronizerfactory.h"
+#include "kbytearraytextstreamencoder.h"
+#include "kbytearrayvaluestreamencoder.h"
+#include "kbytearraysourcecodestreamencoder.h"
 #include "mainwindow.h"
 // kakao
 #include <kdocumentmanager.h>
 #include <kdocumentcreatemanager.h>
 #include <kdocumentsyncmanager.h>
+#include <kdocumentcodecmanager.h>
 #include <kviewmanager.h>
 // KDE
 #include <KLocale>
 #include <KCmdLineArgs>
 #include <KApplication>
+// Qt
+#include <QtCore/QList>
 
 
 OktetaProgram::OktetaProgram( int argc, char *argv[] )
  : mDocumentManager( new KDocumentManager() ),
    mViewManager( new KViewManager(mDocumentManager) )
 {
+    QList<KAbstractDocumentStreamEncoder*> encoderList;
+    encoderList << new KByteArrayValueStreamEncoder()
+                << new KByteArrayTextStreamEncoder()
+                << new KByteArraySourceCodeStreamEncoder();
+
+    mDocumentManager->codecManager()->setEncoders( encoderList );
     mDocumentManager->createManager()->setDocumentFactory( new KByteArrayDocumentFactory() );
     mDocumentManager->syncManager()->setDocumentSynchronizerFactory( new KByteArrayRawFileSynchronizerFactory() );
 

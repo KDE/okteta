@@ -2,6 +2,7 @@ project( kakaocontrollers )
 
 include_directories(
   ../core/document
+  ../core/io
   ../core/system
   ../gui/view
   ../gui/system
@@ -10,10 +11,10 @@ include_directories(
 
 
 set( SYNCHRONIZECONTROLLER_SRCS
-  document/synchronize/synchronizecontroller.cpp
+  io/synchronize/synchronizecontroller.cpp
 )
 set( SETREMOTECONTROLLER_SRCS
-  document/setremote/setremotecontroller.cpp
+  io/setremote/setremotecontroller.cpp
 )
 set( CREATORCONTROLLER_SRCS
   documentsystem/creator/creatorcontroller.cpp
@@ -29,6 +30,9 @@ set( SELECTCONTROLLER_SRCS
 )
 set( CLIPBOARDCONTROLLER_SRCS
   view/clipboard/clipboardcontroller.cpp
+)
+set( COPYASCONTROLLER_SRCS
+  view/copyas/copyascontroller.cpp
 )
 set( CLOSECONTROLLER_SRCS
   viewsystem/close/closecontroller.cpp
@@ -54,6 +58,7 @@ set( KAKAO_CONTROLLERS_SRCS
   ${SYNCHRONIZECONTROLLER_SRCS}
   ${SELECTCONTROLLER_SRCS}
   ${CLIPBOARDCONTROLLER_SRCS}
+  ${COPYASCONTROLLER_SRCS}
   ${QUITCONTROLLER_SRCS}
 )
 

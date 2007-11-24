@@ -20,6 +20,8 @@
 
 
 // lib
+#include <kbytearrayselection.h>
+// Okteta gui
 #include <kbytearrayview.h>
 // kakao
 #include <kabstractview.h>
@@ -58,6 +60,7 @@ class KByteArrayDisplay : public KAbstractView, public KDE::If::Zoomable, public
     virtual void selectAllData( bool selectAll );
     virtual bool hasSelectedData() const;
     virtual QMimeData *copySelectedData() const;
+    virtual const KAbstractDocumentSelection *selection() const;
   Q_SIGNALS:
     virtual void hasSelectedDataChanged( bool hasSelectedData );
 
@@ -66,9 +69,13 @@ class KByteArrayDisplay : public KAbstractView, public KDE::If::Zoomable, public
     virtual QMimeData *cutSelectedData();
     virtual void deleteSelectedData();
 
+  protected Q_SLOTS:
+    void onSelectionChange( bool selected );
+
   protected:
     KHEUI::KByteArrayView *mWidget;
     KByteArrayDocument *mDocument;
+    KByteArraySelection mSelection;
 //     KCursorProxy *mCursorProxy;
 };
 

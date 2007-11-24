@@ -21,6 +21,7 @@
 // Qt
 #include <QtCore/QtPlugin>
 
+class KAbstractDocumentSelection;
 class QMimeData;
 
 namespace KDE
@@ -39,7 +40,8 @@ class DataSelectable
 
   public: // get
     virtual bool hasSelectedData() const = 0;
-    virtual QMimeData *copySelectedData() const = 0;
+    virtual QMimeData *copySelectedData() const = 0; // TODO: move into KAbstractDocumentSelection
+    virtual const KAbstractDocumentSelection *selection() const = 0;
 
   public: // signal
     virtual void hasSelectedDataChanged( bool hasSelectedData ) = 0;

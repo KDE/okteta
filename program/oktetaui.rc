@@ -7,6 +7,8 @@
       <Action name="import_clipboard" />
       <ActionList name="import_list" />
     </Menu>
+    <Action name="save_copy_as" />
+    <Action name="save_as_template" />
     <Action name="export" append="save_merge" />
     <Separator/>
     <Action name="cancel" />
@@ -20,11 +22,19 @@
     <Action name="close_window"/>
   </Menu>
   <Menu name="edit">
-    <!--Menu name="special" append="edit_paste_merge">
-      <text>Special</text>
-      <Action name="copy_values" />
+    <Menu name="copy_as" append="edit_paste_merge">
+      <text>Copy as</text>
+      <ActionList name="copy_as_list" />
+      <!--Action name="copy_values" />
       <Action name="copy_displayed" />
-      <Action name="paste_as_new_file" />
+      <Action name="paste_as_new_file" /-->
+    </Menu>
+    <!--Menu name="paste_as" append="edit_paste_merge">
+"Paste as" ist wie "Insert from Clipboard as", also von Quelle
+Siehe unten "Insert", ist sowohl wiederholbar generiert als von Quelle
+Zusammenlegen?
+      <text>Paste as</text>
+      <ActionList name="paste_as_list" />
     </Menu-->
     <Action name="goto_offset" />
     <Menu name="insert">
