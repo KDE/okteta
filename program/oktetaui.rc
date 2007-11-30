@@ -4,12 +4,16 @@
   <Menu name="file">
     <Menu name="import" append="open_merge">
       <text>Import</text>
-      <Action name="import_clipboard" />
+      <!--Action name="import_clipboard" /-->
       <ActionList name="import_list" />
     </Menu>
     <Action name="save_copy_as" />
     <Action name="save_as_template" />
-    <Action name="export" append="save_merge" />
+    <!--Action name="export" append="save_merge" /-->
+    <Menu name="export" append="save_merge">
+      <text>Export</text>
+      <ActionList name="export_list" />
+    </Menu>
     <Separator/>
     <Action name="cancel" />
     <!--Menu name="permission">
@@ -44,7 +48,7 @@ Zusammenlegen?
     </Menu>
   </Menu>
   <Menu name="view">
-    <Action name="view_showunprintable" />
+    <Action name="view_showsnonprinting" />
     <Action name="view_lineoffset" />
     <Separator/>
     <Action name="view_valuecoding" />

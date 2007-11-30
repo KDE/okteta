@@ -44,7 +44,7 @@ class ViewConfigController : public KViewController
   protected Q_SLOTS: // action slots
     void setCoding( int Coding );
     void setEncoding( int Encoding );
-    void setShowUnprintable( bool on );
+    void setShowsNonprinting( bool on );
     void setResizeStyle( int Style );
     void toggleOffsetColumn( bool on );
     void toggleValueCharColumns( int visibleColunms );
@@ -56,7 +56,7 @@ class ViewConfigController : public KViewController
     // view menu
     KSelectAction *CodingAction;
     KSelectAction *EncodingAction;
-    KToggleAction *ShowUnprintableAction;
+    KToggleAction *ShowsNonprintingAction;
     // settings menu
     KSelectAction *ResizeStyleAction;
     KToggleAction *ShowOffsetColumnAction;

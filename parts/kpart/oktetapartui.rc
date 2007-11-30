@@ -11,7 +11,7 @@
     <Action name="view_zoom_in" />
     <Action name="view_zoom_out" />
     <Separator/>
-    <Action name="view_showunprintable" />
+    <Action name="view_showsnonprinting" />
     <Action name="view_lineoffset" />
     <Separator/>
     <Action name="view_valuecoding" />

@@ -17,9 +17,9 @@
 
 #include "kbytearrayedit.h"
 
-// hexedit gui
+// Okteta gui
 #include <kbytearrayview.h>
-// hexedit core
+// Okteta core
 #include <kbytearraymodel.h>
 // Qt
 #include <QtGui/QLayout>
@@ -154,7 +154,7 @@ void KByteArrayEdit::setEncoding( KEncoding C )
 
 void KByteArrayEdit::setShowUnprintable( bool SU )
 {
-    HexEdit->setShowUnprintable( SU );
+    HexEdit->setShowsNonprinting( SU );
 }
 
 void KByteArrayEdit::setSubstituteChar( QChar SC )
@@ -234,7 +234,7 @@ int KByteArrayEdit::binaryGapWidth() const
 
 bool KByteArrayEdit::showUnprintable() const
 {
-    return HexEdit->showUnprintable();
+    return HexEdit->showsNonprinting();
 }
 
 QChar KByteArrayEdit::substituteChar() const

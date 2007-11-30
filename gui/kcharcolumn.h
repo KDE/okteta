@@ -48,7 +48,7 @@ class KCharColumn : public KDataColumn
       * @param SU
       * returns true if there was a change
       */
-    bool setShowUnprintable( bool SU = true );
+    bool setShowsNonprinting( bool SN = true );
     /** sets the substitute character for "unprintable" chars
       * returns true if there was a change
       */
@@ -63,7 +63,7 @@ class KCharColumn : public KDataColumn
     /** returns true if "unprintable" chars (>32) are displayed in the char column
       * with their corresponding character, default is false
       */
-    bool showUnprintable() const;
+    bool showsNonprinting() const;
     /** returns the actually used substitute character for "unprintable" chars, default is '.' */
     QChar substituteChar() const;
     /** returns the actually used undefined character for "undefined" chars, default is '?' */
@@ -75,7 +75,7 @@ class KCharColumn : public KDataColumn
 
   protected:
     /** */
-    bool ShowUnprintable;
+    bool ShowsNonprinting;
     /** */
     QChar SubstituteChar;
     /** */
@@ -83,7 +83,7 @@ class KCharColumn : public KDataColumn
 };
 
 
-inline bool KCharColumn::showUnprintable()  const { return ShowUnprintable; }
+inline bool KCharColumn::showsNonprinting()  const { return ShowsNonprinting; }
 inline QChar KCharColumn::substituteChar()  const { return SubstituteChar; }
 inline QChar KCharColumn::undefinedChar()   const { return UndefinedChar; }
 
@@ -103,11 +103,11 @@ inline bool KCharColumn::setUndefinedChar( QChar UC )
   return true;
 }
 
-inline bool KCharColumn::setShowUnprintable( bool SU )
+inline bool KCharColumn::setShowsNonprinting( bool SN )
 {
-  if( ShowUnprintable == SU )
+  if( ShowsNonprinting == SN )
     return false;
-  ShowUnprintable = SU;
+  ShowsNonprinting = SN;
   return true;
 }
 

@@ -2,7 +2,7 @@
                           part.cpp  -  description
                              -------------------
     begin                : Don Jun 19 2003
-    copyright            : (C) 2003 by Friedrich W. H. Kossebau
+    copyright            : 2003 by Friedrich W. H. Kossebau
     email                : kossebau@kde.org
  ***************************************************************************/
 
@@ -20,9 +20,9 @@
 // part
 #include "partfactory.h"
 #include "browserextension.h"
-// hexedit gui
+// Okteta gui
 #include <kbytearrayview.h>
-// hexedit core
+// Okteta core
 #include <kcharcodec.h>
 // KDE
 #include <KLocale>
@@ -48,7 +48,7 @@ OktetaPart::OktetaPart( QWidget *parentWidget,
     view = new KHEUI::KByteArrayView( &fileByteArray, parentWidget );
     view->setNoOfBytesPerLine( 16 );
     view->setBufferSpacing( 3, 4, 10 );
-    view->setShowUnprintable( false );
+    view->setShowsNonprinting( false );
 
     setWidget( view );
 
@@ -80,10 +80,10 @@ void OktetaPart::setupActions( bool browserViewWanted )
     codingAction = actions->add<KSelectAction>( "view_valuecoding" );
     codingAction->setText( i18n("&Value Coding") );
     QStringList strings;
-    strings.append( i18n("&Hexadecimal") );
-    strings.append( i18n("&Decimal")     );
-    strings.append( i18n("&Octal")       );
-    strings.append( i18n("&Binary")      );
+    strings.append( i18nc("Encoding as value","&Hexadecimal") );
+    strings.append( i18nc("Encoding as value","&Decimal")     );
+    strings.append( i18nc("Encoding as value","&Octal")       );
+    strings.append( i18nc("Encoding as value","&Binary")      );
     codingAction->setItems( strings );
     connect( codingAction, SIGNAL(triggered(int)), SLOT(onSetCoding(int)) );
 
@@ -93,9 +93,9 @@ void OktetaPart::setupActions( bool browserViewWanted )
     encodingAction->setItems( KHECore::KCharCodec::codecNames() );
     connect( encodingAction, SIGNAL(triggered(int)), SLOT(onSetEncoding(int)) );
 
-    showUnprintableAction = actions->add<KToggleAction>( "view_showunprintable" );
-    showUnprintableAction->setText( i18n("Show &Unprintable Chars (<32)") );
-    connect( showUnprintableAction, SIGNAL(triggered(bool)), SLOT(onSetShowUnprintable(bool)) );
+    showNonprintingAction = actions->add<KToggleAction>( "view_showsnonprinting" );
+    showNonprintingAction->setText( i18n("Show &Non-printing Chars") );
+    connect( showNonprintingAction, SIGNAL(triggered(bool)), SLOT(onSetShowsNonprinting(bool)) );
 
     KStandardAction::zoomIn(  view, SLOT(zoomIn()),  actions );
     KStandardAction::zoomOut( view, SLOT(zoomOut()), actions );
@@ -136,7 +136,7 @@ void OktetaPart::fitActionSettings()
     deselectAction->setEnabled( view->hasSelectedData() );
 
     showOffsetColumnAction->setChecked( view->offsetColumnVisible() );
-    showUnprintableAction->setChecked( view->showUnprintable() );
+    showNonprintingAction->setChecked( view->showsNonprinting() );
 
     codingAction->setCurrentItem( (int)view->coding() );
     encodingAction->setCurrentItem( KHECore::KCharCodec::codecNames().indexOf(view->encodingName()) );
@@ -181,9 +181,9 @@ void OktetaPart::onSetCoding( int Coding )
     view->setCoding( (KHEUI::KByteArrayView::KCoding)Coding );
 }
 
-void OktetaPart::onSetShowUnprintable( bool on )
+void OktetaPart::onSetShowsNonprinting( bool on )
 {
-    view->setShowUnprintable( on );
+    view->setShowsNonprinting( on );
 }
 
 void OktetaPart::onToggleOffsetColumn( bool on )

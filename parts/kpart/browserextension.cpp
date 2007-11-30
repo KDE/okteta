@@ -19,7 +19,7 @@
 
 // part
 #include "part.h"
-// hexedit gui
+// Okteta gui
 #include <kbytearrayview.h>
 // KDE
 #include <KAction>
@@ -53,7 +53,7 @@ void OktetaBrowserExtension::saveState( QDataStream &stream )
 
     stream << (int)view->offsetColumnVisible() << view->visibleBufferColumns()
         << (int)view->resizeStyle() << (int)view->coding() 
-        << view->encodingName() << (int)view->showUnprintable()
+        << view->encodingName() << (int)view->showsNonprinting()
         << view->xOffset() << view->yOffset()
         << view->cursorPosition() << (int)view->isCursorBehind()
         << view->cursorColumn();
@@ -69,13 +69,13 @@ void OktetaBrowserExtension::restoreState( QDataStream &stream )
     int resizeStyle;
     int coding;
     QString encodingName;
-    int showUnprintable;
+    int showsNonprinting;
     int x, y;
     int position;
     int cursorBehind;
     int cursorColumn;
 
-    stream >> offsetColumnVisible >> visibleBufferColumns >> resizeStyle >> coding >> encodingName >> showUnprintable 
+    stream >> offsetColumnVisible >> visibleBufferColumns >> resizeStyle >> coding >> encodingName >> showsNonprinting 
            >> x >> y >> position >> cursorBehind >> cursorColumn;
 
     KHEUI::KByteArrayView *view = part->view;
@@ -85,7 +85,7 @@ void OktetaBrowserExtension::restoreState( QDataStream &stream )
     view->setResizeStyle( (KHEUI::KByteArrayView::KResizeStyle)resizeStyle );
     view->setCoding( (KHEUI::KByteArrayView::KCoding)coding );
     view->setEncoding( encodingName );
-    view->setShowUnprintable( showUnprintable );
+    view->setShowsNonprinting( showsNonprinting );
     view->setColumnsPos( x, y );
     view->setCursorPosition( position, cursorBehind );
     view->setCursorColumn( (KHEUI::KByteArrayView::KDataColumnId)cursorColumn );

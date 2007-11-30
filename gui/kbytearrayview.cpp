@@ -31,7 +31,7 @@
 #include "controller/kchareditor.h"
 #include "kbytearraydrag.h"
 #include "kcursor.h"
-// hexedit core
+// Okteta core
 #include <kabstractbytearraymodel.h>
 #include <kbytearraymodel.h>
 #include <kbytecodec.h>
@@ -197,7 +197,7 @@ bool KByteArrayView::isOverwriteOnly()               const { return OverWriteOnl
 bool KByteArrayView::isReadOnly()                    const { return ReadOnly; }
 bool KByteArrayView::isModified()                    const { return ByteArrayModel->isModified(); }
 bool KByteArrayView::tabChangesFocus()               const { return TabController->tabChangesFocus(); }
-bool KByteArrayView::showUnprintable()               const { return charColumn().showUnprintable(); }
+bool KByteArrayView::showsNonprinting()              const { return charColumn().showsNonprinting(); }
 QChar KByteArrayView::substituteChar()               const { return charColumn().substituteChar(); }
 QChar KByteArrayView::undefinedChar()                const { return charColumn().undefinedChar(); }
 KByteArrayView::KEncoding KByteArrayView::encoding()       const { return (KByteArrayView::KEncoding)Encoding; }
@@ -402,9 +402,9 @@ void KByteArrayView::setUndefinedChar( QChar UC )
   unpauseCursor();
 }
 
-void KByteArrayView::setShowUnprintable( bool SU )
+void KByteArrayView::setShowsNonprinting( bool SU )
 {
-  if( !charColumn().setShowUnprintable(SU) )
+  if( !charColumn().setShowsNonprinting(SU) )
     return;
   pauseCursor();
   updateColumn( charColumn() );

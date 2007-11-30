@@ -34,14 +34,14 @@
 
 namespace KHEUI {
 
-static const bool      DefaultShowUnprintable = false;
+static const bool      DefaultShowsNonprinting = false;
 static const QChar     DefaultSubstituteChar =  (char)'.';
 static const QChar     DefaultUndefinedChar =   (char)'?';
 
 
 KCharColumn::KCharColumn( KColumnsView *CV, KHECore::KAbstractByteArrayModel *B, KDataLayout *L, KDataRanges *R )
  : KDataColumn( CV, B, L, R ),
-   ShowUnprintable( DefaultShowUnprintable ),
+   ShowsNonprinting( DefaultShowsNonprinting ),
    SubstituteChar( DefaultSubstituteChar ),
    UndefinedChar( DefaultUndefinedChar )
 {
@@ -58,7 +58,7 @@ void KCharColumn::drawByte( QPainter *Painter, char /*Byte*/, KHECore::KChar B, 
 {
   // turn into a drawable String
   QString BS( B.isUndefined() ?                   KHECore::KChar(UndefinedChar) :
-              !(ShowUnprintable || B.isPrint()) ? KHECore::KChar(SubstituteChar) :
+              !(ShowsNonprinting || B.isPrint()) ? KHECore::KChar(SubstituteChar) :
                 B );
 
   Painter->setPen( Color );

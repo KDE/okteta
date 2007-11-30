@@ -18,7 +18,7 @@
 #ifndef OKTETAPART_H
 #define OKTETAPART_H
 
-// hexedit core
+// Okteta core
 #include <kfilebytearraymodel.h>
 // KDE
 #include <kparts/part.h>
@@ -57,13 +57,13 @@ class OktetaPart : public KParts::ReadOnlyPart
     void onUnselect();
     void onSetCoding( int Coding );
     void onSetEncoding( int Encoding );
-    void onSetShowUnprintable( bool on );
+    void onSetShowsNonprinting( bool on );
     void onSetResizeStyle( int Style );
     void onToggleOffsetColumn( bool on );
     void onToggleValueCharColumns( int VisibleColunms );
 
   private Q_SLOTS:
-    // used to catch changes in the HexEdit widget
+    // used to catch changes in the bytearray widget
     void onSelectionChanged( bool HasSelection );
 
   private:
@@ -76,7 +76,7 @@ class OktetaPart : public KParts::ReadOnlyPart
     // view menu
     KSelectAction *codingAction;
     KSelectAction *encodingAction;
-    KToggleAction *showUnprintableAction;
+    KToggleAction *showNonprintingAction;
     // settings menu
     KSelectAction *resizeStyleAction;
     KToggleAction *showOffsetColumnAction;

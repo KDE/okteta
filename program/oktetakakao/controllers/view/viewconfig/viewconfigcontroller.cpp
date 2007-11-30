@@ -40,10 +40,10 @@ ViewConfigController::ViewConfigController( KXmlGuiWindow *MW )
     CodingAction = actionCollection->add<KSelectAction>( "view_valuecoding" );
     CodingAction->setText( i18n("&Value Coding") );
     QStringList List;
-    List.append( i18n("&Hexadecimal") );
-    List.append( i18n("&Decimal")     );
-    List.append( i18n("&Octal")       );
-    List.append( i18n("&Binary")      );
+    List.append( i18nc("Encoding as value","&Hexadecimal") );
+    List.append( i18nc("Encoding as value","&Decimal")     );
+    List.append( i18nc("Encoding as value","&Octal")       );
+    List.append( i18nc("Encoding as value","&Binary")      );
     CodingAction->setItems( List );
     connect( CodingAction, SIGNAL(triggered(int)), SLOT(setCoding(int)) );
 
@@ -53,9 +53,9 @@ ViewConfigController::ViewConfigController( KXmlGuiWindow *MW )
     EncodingAction->setItems( KHECore::KCharCodec::codecNames() );
     connect( EncodingAction, SIGNAL(triggered(int)), SLOT(setEncoding(int)) );
 
-    ShowUnprintableAction = actionCollection->add<KToggleAction>( "view_showunprintable" );
-    ShowUnprintableAction->setText( i18n("Show &Unprintable Chars (<32)") );
-    connect( ShowUnprintableAction, SIGNAL(triggered(bool)), SLOT(setShowUnprintable(bool)) );
+    ShowsNonprintingAction = actionCollection->add<KToggleAction>( "view_showsnonprinting" );
+    ShowsNonprintingAction->setText( i18n("Show &Non-printing Chars") );
+    connect( ShowsNonprintingAction, SIGNAL(triggered(bool)), SLOT(setShowsNonprinting(bool)) );
 
     // resize style
     ResizeStyleAction = actionCollection->add<KSelectAction>( "resizestyle" );
@@ -93,7 +93,7 @@ void ViewConfigController::setView( KAbstractView *View )
     if( HexEdit )
     {
         ShowOffsetColumnAction->setChecked( HexEdit->offsetColumnVisible() );
-        ShowUnprintableAction->setChecked( HexEdit->showUnprintable() );
+        ShowsNonprintingAction->setChecked( HexEdit->showsNonprinting() );
 
         CodingAction->setCurrentItem( (int)HexEdit->coding() );
         EncodingAction->setCurrentItem( KHECore::KCharCodec::codecNames().indexOf(HexEdit->encodingName()) );
@@ -105,7 +105,7 @@ void ViewConfigController::setView( KAbstractView *View )
     const bool HasView = ( HexEdit != 0 );
     CodingAction->setEnabled( HasView );
     EncodingAction->setEnabled( HasView );
-    ShowUnprintableAction->setEnabled( HasView );
+    ShowsNonprintingAction->setEnabled( HasView );
     ResizeStyleAction->setEnabled( HasView );
     ShowOffsetColumnAction->setEnabled( HasView );
     ToggleColumnsAction->setEnabled( HasView );
@@ -117,9 +117,9 @@ void ViewConfigController::setCoding( int Coding )
   HexEdit->setCoding( (KHEUI::KByteArrayView::KCoding)Coding );
 }
 
-void ViewConfigController::setShowUnprintable( bool on )
+void ViewConfigController::setShowsNonprinting( bool on )
 {
-  HexEdit->setShowUnprintable( on );
+  HexEdit->setShowsNonprinting( on );
 }
 
 void ViewConfigController::toggleOffsetColumn( bool on )

@@ -106,7 +106,7 @@ class KHEUI_EXPORT KByteArrayView : public KColumnsView
   Q_PROPERTY( int GroupSpacingWidth READ groupSpacingWidth WRITE setGroupSpacingWidth )
   Q_PROPERTY( int BinaryGapWidth READ binaryGapWidth WRITE setBinaryGapWidth )
   // char column
-  Q_PROPERTY( bool ShowUnprintable READ showUnprintable WRITE setShowUnprintable )
+  Q_PROPERTY( bool ShowNonprinting READ showsNonprinting WRITE setShowsNonprinting )
   Q_PROPERTY( QChar SubstituteChar READ substituteChar WRITE setSubstituteChar )
 
   public:
@@ -169,11 +169,11 @@ class KHEUI_EXPORT KByteArrayView : public KColumnsView
     int/*KPixelX*/ binaryGapWidth() const;
 
   // char column
-    /** reports if "unprintable" chars (value<32) are displayed in the char column
+    /** reports if "non-printing" chars are displayed in the char column
       * with their original character. Default is false
       * @return @c true if original chars are displayed, otherwise @c false 
       */
-    bool showUnprintable() const;
+    bool showsNonprinting() const;
     /** gives the used substitute character for "unprintable" chars, default is '.'
       * @return substitute character 
       */
@@ -295,13 +295,14 @@ class KHEUI_EXPORT KByteArrayView : public KColumnsView
     /** sets the format of the value column. Default is KHE::HexadecimalCoding */
     void setCoding( KCoding C );
   // char column parameters
-    /** sets whether "unprintable" chars (>32) should be displayed in the char column
-      * with their corresponding character.
+    /** sets whether control chars or "non-printing" chars should be displayed in the char column
+      * with their corresponding character. Currently this simply means all chars with value <32,
+      * as known from the ASCII.
       * @param SU
       * returns true if there was a change
       */
-    void setShowUnprintable( bool SU = true );
-    /** sets the substitute character for "unprintable" chars
+    void setShowsNonprinting( bool SU = true );
+    /** sets the substitute character for "non-printing" chars
       * returns true if there was a change
       */
     void setSubstituteChar( QChar SC );
