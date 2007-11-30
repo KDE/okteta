@@ -48,6 +48,9 @@ void KByteArrayModel::setMaxSize( int maxSize )          { d->setMaxSize( maxSiz
 void KByteArrayModel::setKeepsMemory( bool keepsMemory ) { d->setKeepsMemory( keepsMemory ); }
 void KByteArrayModel::setAutoDelete( bool autoDelete )   { d->setAutoDelete( autoDelete ); }
 
+void KByteArrayModel::setData( char *data, unsigned int size, int rawSize, bool keepMemory )
+{ d->setData( data, size, rawSize, keepMemory ); }
+
 char *KByteArrayModel::data()       const { return d->data(); }
 int KByteArrayModel::maxSize()      const { return d->maxSize(); }
 bool KByteArrayModel::keepsMemory() const { return d->keepsMemory(); }

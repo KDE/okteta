@@ -67,6 +67,7 @@ class KHECORE_EXPORT KByteArrayModel : public KAbstractByteArrayModel
       */
     void setKeepsMemory( bool keepMemory = true );
     void setAutoDelete( bool autoDelete = true );
+    void setData( char *data, unsigned int size, int rawSize = -1, bool keepMemory = true );
     void signalContentsChanged( int i1, int i2 );
 
   public:
