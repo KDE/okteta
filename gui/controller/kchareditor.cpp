@@ -29,8 +29,8 @@
 namespace KHEUI {
 
 
-KCharEditor::KCharEditor( KCharColumn *CC, KDataCursor *BC, KByteArrayView *HE, KController *P )
-  : KEditor( BC, HE, P ),
+KCharEditor::KCharEditor( KCharColumn *CC, KDataCursor *BC, KByteArrayView *view, KController *parent )
+  : KEditor( BC, view, parent ),
   CharColumn( CC )
 {
 }
@@ -50,7 +50,7 @@ bool KCharEditor::handleKeyPress( QKeyEvent *KeyEvent )
       if( CharColumn->codec()->encode(D.data(),C) )
       {
         //         clearUndoRedoInfo = false;
-        HexEdit->insert( D );
+        View->insert( D );
         KeyUsed = true;
       }
     }

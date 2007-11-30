@@ -24,7 +24,7 @@
 #include <ksection.h>
 //
 #include <kcolumn.h>
-// hexedit core
+// Okteta core
 #include <khe.h>
 #include <kabstractbytearraymodel.h>
 #include <khechar.h>

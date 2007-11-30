@@ -32,7 +32,7 @@ class KCharEditor : public KEditor
 {
   public:
     virtual ~KCharEditor(){}
-    KCharEditor( KCharColumn *CC, KDataCursor *BC, KByteArrayView *HE, KController *P );
+    KCharEditor( KCharColumn *CC, KDataCursor *BC, KByteArrayView *view, KController *parent );
 
   public: // KEditor API
     virtual bool handleKeyPress( QKeyEvent *KeyEvent );

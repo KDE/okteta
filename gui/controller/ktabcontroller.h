@@ -29,7 +29,7 @@ namespace KHEUI
 class KTabController : public KController
 {
   public:
-    KTabController( KByteArrayView *HE, KController *P );
+    KTabController( KByteArrayView *view, KController *parent );
 
   public: // API
     virtual bool handleKeyPress( QKeyEvent *KeyEvent );

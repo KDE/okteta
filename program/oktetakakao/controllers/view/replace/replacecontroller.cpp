@@ -40,7 +40,7 @@
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
 ReplaceController::ReplaceController( KXmlGuiWindow *MW )
- : MainWindow( MW ), HexEdit( 0 ), ByteArray( 0 ), ReplaceDialog( 0 ), ReplacePrompt( 0 )
+ : MainWindow( MW ), ViewWidget( 0 ), ByteArray( 0 ), ReplaceDialog( 0 ), ReplacePrompt( 0 )
 {
     KActionCollection* ActionCollection = MainWindow->actionCollection();
 
@@ -49,12 +49,12 @@ ReplaceController::ReplaceController( KXmlGuiWindow *MW )
     setView( 0 );
 }
 
-void ReplaceController::setView( KAbstractView *View )
+void ReplaceController::setView( KAbstractView *view )
 {
-    disconnect( HexEdit );
+    disconnect( ViewWidget );
 
-    HexEdit = View ? static_cast<KHEUI::KByteArrayView *>( View->widget() ) : 0;
-    KByteArrayDocument *Document = View ? static_cast<KByteArrayDocument*>( View->document() ) : 0;
+    ViewWidget = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
+    KByteArrayDocument *Document = view ? static_cast<KByteArrayDocument*>( view->document() ) : 0;
     ByteArray = Document ? Document->content() : 0;
 
     if( ByteArray )
@@ -74,8 +74,8 @@ void ReplaceController::replace()
         connect( ReplaceDialog, SIGNAL(okClicked()), SLOT(onDialogOkClicked()) );
     }
 
-    ReplaceDialog->setInSelection( HexEdit->hasSelectedData() );
-    ReplaceDialog->setCharCode( HexEdit->encodingName() );
+    ReplaceDialog->setInSelection( ViewWidget->hasSelectedData() );
+    ReplaceDialog->setCharCode( ViewWidget->encodingName() );
 
     ReplaceDialog->show();
 }
@@ -96,7 +96,7 @@ void ReplaceController::onDialogOkClicked()
     if( ReplaceDialog->inSelection() )
     {
         Direction = FindForward;
-        const KHE::KSection Selection = HexEdit->selection();
+        const KHE::KSection Selection = ViewWidget->selection();
         ReplaceFirstIndex = Selection.start();
         ReplaceLastIndex =  Selection.end();
         CurrentIndex = Selection.start();
@@ -105,7 +105,7 @@ void ReplaceController::onDialogOkClicked()
     else
     {
         Direction = ReplaceDialog->direction();
-        const int CursorPosition = HexEdit->cursorPosition();
+        const int CursorPosition = ViewWidget->cursorPosition();
         if( ReplaceDialog->fromCursor() && (CursorPosition!=0) )
         {
             ReplaceFirstIndex = CursorPosition;
@@ -138,7 +138,7 @@ void ReplaceController::findNext()
             CurrentIndex = Pos;
             if( Prompt )
             {
-                HexEdit->setSelection( Pos, Pos+SearchData.size()-1 );
+                ViewWidget->setSelection( Pos, Pos+SearchData.size()-1 );
                 if( !ReplacePrompt )
                 {
                     ReplacePrompt = new KReplacePrompt( MainWindow );
@@ -159,7 +159,7 @@ void ReplaceController::findNext()
 
         if( ReplacePrompt )
             ReplacePrompt->hide();
-        HexEdit->selectAll( false );
+        ViewWidget->selectAll( false );
 
         const QString ReplacementReport = (NoOfReplacements==0) ?
             i18n( "No replacements done.") :

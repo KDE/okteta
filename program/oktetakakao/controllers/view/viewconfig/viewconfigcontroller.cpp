@@ -32,7 +32,7 @@
 
 
 ViewConfigController::ViewConfigController( KXmlGuiWindow *MW )
- : MainWindow( MW ), HexEdit( 0 )
+ : MainWindow( MW ), ViewWidget( 0 )
 {
     KActionCollection *actionCollection = MainWindow->actionCollection();
 
@@ -86,23 +86,23 @@ ViewConfigController::ViewConfigController( KXmlGuiWindow *MW )
 
 void ViewConfigController::setView( KAbstractView *View )
 {
-    disconnect( HexEdit );
+    disconnect( ViewWidget );
 
-    HexEdit = View ? static_cast<KHEUI::KByteArrayView *>( View->widget() ) : 0;
+    ViewWidget = View ? static_cast<KHEUI::KByteArrayView *>( View->widget() ) : 0;
 
-    if( HexEdit )
+    if( ViewWidget )
     {
-        ShowOffsetColumnAction->setChecked( HexEdit->offsetColumnVisible() );
-        ShowsNonprintingAction->setChecked( HexEdit->showsNonprinting() );
+        ShowOffsetColumnAction->setChecked( ViewWidget->offsetColumnVisible() );
+        ShowsNonprintingAction->setChecked( ViewWidget->showsNonprinting() );
 
-        CodingAction->setCurrentItem( (int)HexEdit->coding() );
-        EncodingAction->setCurrentItem( KHECore::KCharCodec::codecNames().indexOf(HexEdit->encodingName()) );
+        CodingAction->setCurrentItem( (int)ViewWidget->coding() );
+        EncodingAction->setCurrentItem( KHECore::KCharCodec::codecNames().indexOf(ViewWidget->encodingName()) );
 
-        ResizeStyleAction->setCurrentItem( (int)HexEdit->resizeStyle() );
+        ResizeStyleAction->setCurrentItem( (int)ViewWidget->resizeStyle() );
 
-        ToggleColumnsAction->setCurrentItem( (int)HexEdit->visibleBufferColumns()-1 );
+        ToggleColumnsAction->setCurrentItem( (int)ViewWidget->visibleBufferColumns()-1 );
     }
-    const bool HasView = ( HexEdit != 0 );
+    const bool HasView = ( ViewWidget != 0 );
     CodingAction->setEnabled( HasView );
     EncodingAction->setEnabled( HasView );
     ShowsNonprintingAction->setEnabled( HasView );
@@ -114,30 +114,30 @@ void ViewConfigController::setView( KAbstractView *View )
 
 void ViewConfigController::setCoding( int Coding )
 {
-  HexEdit->setCoding( (KHEUI::KByteArrayView::KCoding)Coding );
+  ViewWidget->setCoding( (KHEUI::KByteArrayView::KCoding)Coding );
 }
 
 void ViewConfigController::setShowsNonprinting( bool on )
 {
-  HexEdit->setShowsNonprinting( on );
+  ViewWidget->setShowsNonprinting( on );
 }
 
 void ViewConfigController::toggleOffsetColumn( bool on )
 {
-  HexEdit->toggleOffsetColumn( on );
+  ViewWidget->toggleOffsetColumn( on );
 }
 
 void ViewConfigController::setResizeStyle( int ResizeStyle )
 {
-  HexEdit->setResizeStyle( (KHEUI::KByteArrayView::KResizeStyle)ResizeStyle );
+  ViewWidget->setResizeStyle( (KHEUI::KByteArrayView::KResizeStyle)ResizeStyle );
 }
 
 void ViewConfigController::setEncoding( int Encoding )
 {
-  HexEdit->setEncoding( KHECore::KCharCodec::codecNames()[Encoding] );
+  ViewWidget->setEncoding( KHECore::KCharCodec::codecNames()[Encoding] );
 }
 
 void ViewConfigController::toggleValueCharColumns( int VisibleColumns)
 {
-  HexEdit->showBufferColumns( VisibleColumns+1 );
+  ViewWidget->showBufferColumns( VisibleColumns+1 );
 }

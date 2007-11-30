@@ -29,8 +29,8 @@
 
 namespace KHEUI {
 
-KNavigator::KNavigator( KByteArrayView* HE, KController *P )
-  : KController( HE, P )
+KNavigator::KNavigator( KByteArrayView* view, KController *parent )
+  : KController( view, parent )
 {
 }
 
@@ -84,10 +84,10 @@ bool KNavigator::handleKeyPress( QKeyEvent *KeyEvent )
 
 void KNavigator::moveCursor( KMoveAction Action, bool Select )
 {
-  HexEdit->pauseCursor( true );
+  View->pauseCursor( true );
 
-  KDataCursor *BufferCursor = HexEdit->BufferCursor;
-  KDataRanges *BufferRanges = HexEdit->BufferRanges;
+  KDataCursor *BufferCursor = View->BufferCursor;
+  KDataRanges *BufferRanges = View->BufferRanges;
 
   if( Select )
   {
@@ -97,19 +97,19 @@ void KNavigator::moveCursor( KMoveAction Action, bool Select )
   else
     BufferRanges->removeSelection();
 
-  HexEdit->resetInputContext();
+  View->resetInputContext();
   switch( Action )
   {
     case MoveBackward:     BufferCursor->gotoPreviousByte(); break;
     case MoveWordBackward: {
-      KHECore::KWordBufferService WBS( HexEdit->ByteArrayModel, HexEdit->Codec );
+      KHECore::KWordBufferService WBS( View->ByteArrayModel, View->Codec );
       int NewIndex = WBS.indexOfPreviousWordStart( BufferCursor->realIndex() );
       BufferCursor->gotoIndex( NewIndex );
     }
     break;
     case MoveForward:      BufferCursor->gotoNextByte();     break;
     case MoveWordForward:  {
-      KHECore::KWordBufferService WBS( HexEdit->ByteArrayModel, HexEdit->Codec );
+      KHECore::KWordBufferService WBS( View->ByteArrayModel, View->Codec );
       int NewIndex = WBS.indexOfNextWordStart( BufferCursor->realIndex() );
       BufferCursor->gotoCIndex( NewIndex );
     }
@@ -128,12 +128,12 @@ void KNavigator::moveCursor( KMoveAction Action, bool Select )
     BufferRanges->setSelectionEnd( BufferCursor->realIndex() );
 
   if( BufferRanges->isModified() )
-    HexEdit->emitSelectionSignals(); // TODO: can this be moved somewhere
-  emit HexEdit->cursorPositionChanged( BufferCursor->realIndex() );
-  HexEdit->updateChanged();
-  HexEdit->ensureCursorVisible();
+    View->emitSelectionSignals(); // TODO: can this be moved somewhere
+  emit View->cursorPositionChanged( BufferCursor->realIndex() );
+  View->updateChanged();
+  View->ensureCursorVisible();
 
-  HexEdit->unpauseCursor();
+  View->unpauseCursor();
 }
 
 }

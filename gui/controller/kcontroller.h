@@ -30,14 +30,14 @@ class KController
 {
   protected:
     virtual ~KController(){}
-    KController( KByteArrayView *HE, KController *P );
+    KController( KByteArrayView *view, KController *parent );
 
   public: // KController API
     virtual bool handleKeyPress( QKeyEvent *KeyEvent );
 
   protected:
     KController *Parent;
-    KByteArrayView *HexEdit;
+    KByteArrayView *View;
 };
 
 }

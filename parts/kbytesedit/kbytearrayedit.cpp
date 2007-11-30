@@ -31,12 +31,12 @@ KByteArrayEdit::KByteArrayEdit( QWidget *parent, const QStringList & )
   : QWidget( parent )
 {
     Model = new KHECore::KByteArrayModel;
-    HexEdit = new KHEUI::KByteArrayView( Model, this );
+    View = new KHEUI::KByteArrayView( Model, this );
 
     QHBoxLayout* Layout = new QHBoxLayout( this );
-    Layout->addWidget( HexEdit );
+    Layout->addWidget( View );
 
-    connect( HexEdit, SIGNAL(copyAvailable( bool )), SIGNAL(copyAvailable( bool )) );
+    connect( View, SIGNAL(copyAvailable( bool )), SIGNAL(copyAvailable( bool )) );
 }
 
 
@@ -50,7 +50,7 @@ void KByteArrayEdit::setData( char *D, int S, int RS, bool KM )
     Model->setReadOnly( OldModel->isReadOnly() );
     Model->setAutoDelete( OldModel->autoDelete() );
 
-    HexEdit->setByteArrayModel( Model );
+    View->setByteArrayModel( Model );
 
     delete OldModel;
 }
@@ -59,7 +59,7 @@ void KByteArrayEdit::setData( char *D, int S, int RS, bool KM )
 void KByteArrayEdit::setReadOnly( bool RO )
 {
     Model->setReadOnly( RO );
-    HexEdit->setReadOnly( RO );
+    View->setReadOnly( RO );
 }
 
 void KByteArrayEdit::setMaxDataSize( int MS )
@@ -81,85 +81,85 @@ void KByteArrayEdit::setKeepsMemory( bool KM )
 
 void KByteArrayEdit::setCursorPosition( int Index )
 {
-    HexEdit->setCursorPosition( Index );
+    View->setCursorPosition( Index );
 }
 
 void KByteArrayEdit::setCoding( KCoding C )
 {
-    HexEdit->setCoding( (KHEUI::KByteArrayView::KCoding) C );
+    View->setCoding( (KHEUI::KByteArrayView::KCoding) C );
 }
 
 void KByteArrayEdit::setResizeStyle( KResizeStyle Style )
 {
-    HexEdit->setResizeStyle( (KHEUI::KByteArrayView::KResizeStyle) Style );
+    View->setResizeStyle( (KHEUI::KByteArrayView::KResizeStyle) Style );
 }
 int KByteArrayEdit::noOfBytesPerLine() const
 {
-    return HexEdit->noOfBytesPerLine();
+    return View->noOfBytesPerLine();
 }
 
 KByteArrayEdit::KResizeStyle KByteArrayEdit::resizeStyle() const
 {
-    return (KResizeStyle)HexEdit->resizeStyle();
+    return (KResizeStyle)View->resizeStyle();
 }
 void KByteArrayEdit::setNoOfBytesPerLine( int NoCpL )
 {
-    HexEdit->setNoOfBytesPerLine( NoCpL );
+    View->setNoOfBytesPerLine( NoCpL );
 }
 
 
 
 void KByteArrayEdit::setOverwriteOnly( bool b )
 {
-    HexEdit->setOverwriteOnly( b );
+    View->setOverwriteOnly( b );
 }
 
 
 void KByteArrayEdit::setOverwriteMode( bool b )
 {
-    HexEdit->setOverwriteMode( b );
+    View->setOverwriteMode( b );
 }
 
 
 void KByteArrayEdit::setModified( bool b )
 {
-    HexEdit->setModified( b );
+    View->setModified( b );
 }
 
 
 void KByteArrayEdit::setByteSpacingWidth( int BSW )
 {
-    HexEdit->setByteSpacingWidth( BSW );
+    View->setByteSpacingWidth( BSW );
 }
 
 void KByteArrayEdit::setNoOfGroupedBytes( int NoGB )
 {
-    HexEdit->setNoOfGroupedBytes( NoGB );
+    View->setNoOfGroupedBytes( NoGB );
 }
 
 void KByteArrayEdit::setGroupSpacingWidth( int GSW )
 {
-    HexEdit->setGroupSpacingWidth( GSW );
+    View->setGroupSpacingWidth( GSW );
 }
 
 void KByteArrayEdit::setBinaryGapWidth( int BGW )
 {
-    HexEdit->setBinaryGapWidth( BGW );
+    View->setBinaryGapWidth( BGW );
 }
 
 void KByteArrayEdit::setEncoding( KEncoding C )
 {
-    HexEdit->setEncoding( (KHEUI::KByteArrayView::KEncoding)C );
+    View->setEncoding( (KHEUI::KByteArrayView::KEncoding)C );
 }
 
 void KByteArrayEdit::setShowUnprintable( bool SU )
 {
-    HexEdit->setShowsNonprinting( SU );
+    View->setShowsNonprinting( SU );
 }
 
 void KByteArrayEdit::setSubstituteChar( QChar SC )
 {
-    HexEdit->setSubstituteChar( SC );
+    View->setSubstituteChar( SC );
 }
 
 
@@ -188,69 +188,69 @@ bool KByteArrayEdit::keepsMemory() const
 
 bool KByteArrayEdit::isOverwriteMode() const
 {
-    return HexEdit->isOverwriteMode();
+    return View->isOverwriteMode();
 }
 
 bool KByteArrayEdit::isOverwriteOnly() const
 {
-    return HexEdit->isOverwriteOnly();
+    return View->isOverwriteOnly();
 }
 
 bool KByteArrayEdit::isModified() const
 {
-    return HexEdit->isModified();
+    return View->isModified();
 }
 
 bool KByteArrayEdit::isReadOnly() const
 {
-    return HexEdit->isReadOnly();
+    return View->isReadOnly();
 }
 
 
 KByteArrayEdit::KCoding KByteArrayEdit::coding() const
 {
-    return (KCoding)HexEdit->coding();
+    return (KCoding)View->coding();
 }
 
 int KByteArrayEdit::byteSpacingWidth() const
 {
-    return HexEdit->byteSpacingWidth();
+    return View->byteSpacingWidth();
 }
 
 int KByteArrayEdit::noOfGroupedBytes() const
 {
-    return HexEdit->noOfGroupedBytes();
+    return View->noOfGroupedBytes();
 }
 
 int KByteArrayEdit::groupSpacingWidth() const
 {
-    return HexEdit->groupSpacingWidth();
+    return View->groupSpacingWidth();
 }
 
 int KByteArrayEdit::binaryGapWidth() const
 {
-    return HexEdit->binaryGapWidth();
+    return View->binaryGapWidth();
 }
 
 bool KByteArrayEdit::showUnprintable() const
 {
-    return HexEdit->showsNonprinting();
+    return View->showsNonprinting();
 }
 
 QChar KByteArrayEdit::substituteChar() const
 {
-    return HexEdit->substituteChar();
+    return View->substituteChar();
 }
 
 KByteArrayEdit::KEncoding KByteArrayEdit::encoding() const
 {
-    return (KEncoding)HexEdit->encoding();
+    return (KEncoding)View->encoding();
 }
 
 
 bool KByteArrayEdit::hasSelectedData() const
 {
-    return HexEdit->hasSelectedData();
+    return View->hasSelectedData();
 }
 
 
@@ -262,60 +262,60 @@ void KByteArrayEdit::repaintRange( int i1, int i2 )
 
 void KByteArrayEdit::insert( const QByteArray &D )
 {
-    HexEdit->insert( D );
+    View->insert( D );
 }
 
 
 void KByteArrayEdit::selectAll( bool Select )
 {
-    HexEdit->selectAll( Select );
+    View->selectAll( Select );
 }
 
   // clipboard interface
 void KByteArrayEdit::copy()
 {
-    HexEdit->copy();
+    View->copy();
 }
 
 void KByteArrayEdit::cut()
 {
-    HexEdit->cut();
+    View->cut();
 }
 
 void KByteArrayEdit::paste()
 {
-    HexEdit->paste();
+    View->paste();
 }
 
 // zooming interface
 void KByteArrayEdit::zoomIn( int PointInc )
 {
-    HexEdit->zoomIn( PointInc );
+    View->zoomIn( PointInc );
 }
 
 void KByteArrayEdit::zoomIn()
 {
-    HexEdit->zoomIn();
+    View->zoomIn();
 }
 
 void KByteArrayEdit::zoomOut( int PointDec )
 {
-    HexEdit->zoomOut( PointDec );
+    View->zoomOut( PointDec );
 }
 
 void KByteArrayEdit::zoomOut()
 {
-    HexEdit->zoomOut();
+    View->zoomOut();
 }
 
 void KByteArrayEdit::zoomTo( int PointSize )
 {
-    HexEdit->zoomTo( PointSize );
+    View->zoomTo( PointSize );
 }
 
 void KByteArrayEdit::unZoom()
 {
-    HexEdit->unZoom();
+    View->unZoom();
 }
 
 KByteArrayEdit::~KByteArrayEdit()

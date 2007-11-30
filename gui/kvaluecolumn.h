@@ -20,7 +20,7 @@
 
 // lib
 #include "kdatacolumn.h"
-// hexedit core
+// Okteta core
 #include <kbytecodec.h>
 
 

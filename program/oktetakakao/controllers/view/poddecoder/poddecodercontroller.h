@@ -55,7 +55,7 @@ class PODDecoderController : public KViewController
   protected:
 //     KProgram *Program;
     KXmlGuiWindow *MainWindow;
-    KHEUI::KByteArrayView *HexEdit;
+    KHEUI::KByteArrayView *ViewWidget;
     KHECore::KAbstractByteArrayModel *ByteArray;
     int CursorIndex;
 

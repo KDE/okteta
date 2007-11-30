@@ -53,7 +53,7 @@ class InsertPatternController : public KViewController
 
   protected:
     KXmlGuiWindow *mMainWindow;
-    KHEUI::KByteArrayView *mHexEdit;
+    KHEUI::KByteArrayView *mViewWidget;
     KHECore::KAbstractByteArrayModel *mByteArray;
 
     QAction *mInsertPatternAction;

@@ -189,7 +189,7 @@ class KByteArrayEdit : public QWidget, public KHE::BytesEditInterface,
 
   private:
     KHECore::KByteArrayModel *Model;
-    KHEUI::KByteArrayView *HexEdit;
+    KHEUI::KByteArrayView *View;
 };
 
 #endif

@@ -23,7 +23,7 @@
 #include "kdatalayout.h"
 #include "kdataranges.h"
 #include "helper.h"
-// hexedit core
+// Okteta core
 #include <kcharcodec.h>
 // Qt
 #include <QtGui/QPainter>

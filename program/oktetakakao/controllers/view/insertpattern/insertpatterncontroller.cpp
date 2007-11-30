@@ -40,7 +40,7 @@
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
 InsertPatternController::InsertPatternController( KXmlGuiWindow *window )
- : mMainWindow( window ), mHexEdit( 0 ), mByteArray( 0 ), mInsertPatternDialog( 0 )
+ : mMainWindow( window ), mViewWidget( 0 ), mByteArray( 0 ), mInsertPatternDialog( 0 )
 {
     KActionCollection *actionCollection = mMainWindow->actionCollection();
 
@@ -54,15 +54,15 @@ InsertPatternController::InsertPatternController( KXmlGuiWindow *window )
 
 void InsertPatternController::setView( KAbstractView *view )
 {
-    disconnect( mHexEdit );
+    disconnect( mViewWidget );
 
-    mHexEdit = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
+    mViewWidget = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
     KByteArrayDocument *document = view ? static_cast<KByteArrayDocument*>( view->document() ) : 0;
     mByteArray = document ? document->content() : 0;
 
     if( mByteArray )
     {
-//         connect( mHexEdit, SIGNAL( selectionChanged( bool )), SLOT( onSelectionChanged( bool )) );
+//         connect( mViewWidget, SIGNAL( selectionChanged( bool )), SLOT( onSelectionChanged( bool )) );
     }
     const bool hasView = ( mByteArray != 0 );
     mInsertPatternAction->setEnabled( hasView );
@@ -77,7 +77,7 @@ void InsertPatternController::insertPattern()
         mInsertPatternDialog = new KInsertPatternDialog( mMainWindow );
         connect( mInsertPatternDialog, SIGNAL(okClicked()), SLOT(onOkClicked()) );
     }
-    mInsertPatternDialog->setCharCode( mHexEdit->encodingName() );
+    mInsertPatternDialog->setCharCode( mViewWidget->encodingName() );
 
     mInsertPatternDialog->show();
 }
@@ -97,7 +97,7 @@ void InsertPatternController::onOkClicked()
         memcpy( &insertData.data()[i], pattern.constData(), patternSize );
 
     //TODO: support insert to selection
-    mHexEdit->insert( insertData );
+    mViewWidget->insert( insertData );
 }
 
 InsertPatternController::~InsertPatternController() {}

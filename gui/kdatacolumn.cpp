@@ -22,7 +22,7 @@
 #include "kdatalayout.h"
 #include "kdataranges.h"
 #include "helper.h"
-// hexedit core
+// Okteta core
 #include <kcharcodec.h>
 // columnsview
 #include <kcolumnsview.h>

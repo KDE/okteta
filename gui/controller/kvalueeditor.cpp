@@ -22,7 +22,7 @@
 #include "kdataranges.h"
 #include "kdatacursor.h"
 #include "kbytearrayview.h"
-// hexedit core
+// Okteta core
 #include <kabstractbytearraymodel.h>
 // Qt
 #include <QtGui/QKeyEvent>
@@ -30,8 +30,8 @@
 
 namespace KHEUI {
 
-KValueEditor::KValueEditor( KValueColumn *VC, KDataCursor *BC, KByteArrayView* HE, KController *P )
-  : KEditor( BC, HE, P ),
+KValueEditor::KValueEditor( KValueColumn *VC, KDataCursor *BC, KByteArrayView* view, KController *parent )
+  : KEditor( BC, view, parent ),
   ValueColumn( VC ),
   InEditMode( false ),
   EditModeByInsert( false )
@@ -44,7 +44,7 @@ bool KValueEditor::handleKeyPress( QKeyEvent *KeyEvent )
   bool KeyUsed = true;
 
   // TODO: for now we don't touch it if there are selections
-  if( !HexEdit->BufferRanges->hasSelection() )
+  if( !View->BufferRanges->hasSelection() )
   {
     //
     switch( KeyEvent->key() )
@@ -99,12 +99,12 @@ bool KValueEditor::handleKeyPress( QKeyEvent *KeyEvent )
             // valid digit?
             if( ByteCodec->appendDigit(&InputValue,Input) )
             {
-              if( HexEdit->OverWrite )
+              if( View->OverWrite )
                 doValueEditAction( ValueEdit, InputValue );
               else
               {
                 int Index = BufferCursor->realIndex();
-                if( HexEdit->ByteArrayModel->insert(Index,(char*)&InputValue,1) > 0 )
+                if( View->ByteArrayModel->insert(Index,(char*)&InputValue,1) > 0 )
                 {
                   InEditMode = true;
                   EditModeByInsert = true;
@@ -112,8 +112,8 @@ bool KValueEditor::handleKeyPress( QKeyEvent *KeyEvent )
                   ByteCodec->encode( ByteBuffer, 0, EditValue );
 
                   BufferCursor->gotoRealIndex();
-                  HexEdit->ensureCursorVisible();
-                  HexEdit->updateCursors();
+                  View->ensureCursorVisible();
+                  View->updateCursors();
                 }
               }
             }
@@ -137,14 +137,14 @@ void KValueEditor::doValueEditAction( KValueEditAction Action, int Input )
   {
     int ValidIndex = BufferCursor->validIndex();
     // no valid cursor position?
-    if( ValidIndex == -1 || (!HexEdit->OverWrite && Input == -1) || BufferCursor->isBehind() )
+    if( ValidIndex == -1 || (!View->OverWrite && Input == -1) || BufferCursor->isBehind() )
       return;
 
     InEditMode = true;
     EditModeByInsert = false; // default, to be overwritten if so
 
     // save old value
-    OldValue = EditValue = (unsigned char)HexEdit->ByteArrayModel->datum(ValidIndex);
+    OldValue = EditValue = (unsigned char)View->ByteArrayModel->datum(ValidIndex);
   }
 
   const KHECore::KByteCodec *ByteCodec = ValueColumn->byteCodec();
@@ -199,18 +199,18 @@ void KValueEditor::doValueEditAction( KValueEditAction Action, int Input )
     // sync value
     EditValue = NewValue;
     ByteCodec->encode( ByteBuffer, 0, EditValue );
-    HexEdit->ByteArrayModel->replace( BufferCursor->index(), 1, (char*)&EditValue, 1 );
+    View->ByteArrayModel->replace( BufferCursor->index(), 1, (char*)&EditValue, 1 );
   }
 
-  HexEdit->updateCursors();
+  View->updateCursors();
 
   if( !StayInEditMode )
   {
-    HexEdit->pauseCursor();
+    View->pauseCursor();
     InEditMode = false;
     if( MoveToNext )
       BufferCursor->gotoNextByte();
-    HexEdit->unpauseCursor();
+    View->unpauseCursor();
   }
 }
 

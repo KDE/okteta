@@ -23,8 +23,8 @@
 
 namespace KHEUI {
 
-KController::KController( KByteArrayView* HE, KController *P )
-  : Parent( P ), HexEdit( HE )
+KController::KController( KByteArrayView* view, KController *parent )
+  : Parent( parent ), View( view )
 {
 }
 

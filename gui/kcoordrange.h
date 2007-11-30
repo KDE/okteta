@@ -20,7 +20,7 @@
 
 // lib
 #include "kcoord.h"
-// hexedit core
+// Okteta core
 #include <krange.h>
 #include <ksection.h>
 

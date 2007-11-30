@@ -51,7 +51,7 @@ class ViewConfigController : public KViewController
 
   protected:
     KXmlGuiWindow *MainWindow;
-    KHEUI::KByteArrayView *HexEdit;
+    KHEUI::KByteArrayView *ViewWidget;
 
     // view menu
     KSelectAction *CodingAction;

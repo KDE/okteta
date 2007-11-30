@@ -23,7 +23,7 @@
 #include "kvaluecoltextexport.h"
 #include "kcharcoltextexport.h"
 #include "kcharcodec.h"
-// hexedit core
+// Okteta core
 #include <khechar.h>
 // KDE
 #include <kglobal.h>

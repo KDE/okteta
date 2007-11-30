@@ -34,7 +34,7 @@ class KEditor : public KController
     enum KEditAction { CharDelete, WordDelete, CharBackspace, WordBackspace };
 
   protected:
-    KEditor( KDataCursor *BC, KByteArrayView *HE, KController *P );
+    KEditor( KDataCursor *BC, KByteArrayView *view, KController *parent );
 
   public: // API
     virtual ~KEditor(){}

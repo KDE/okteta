@@ -22,7 +22,7 @@
 #include "kdatalayout.h"
 #include "kdatacursor.h"
 #include "kbytearrayview.h"
-// hexedit core
+// Okteta core
 #include <kabstractbytearraymodel.h>
 #include <kwordbufferservice.h>
 // Qt
@@ -31,8 +31,8 @@
 
 namespace KHEUI {
 
-KEditor::KEditor( KDataCursor *BC, KByteArrayView* HE, KController *P )
-  : KController( HE, P ),
+KEditor::KEditor( KDataCursor *BC, KByteArrayView* view, KController *parent )
+  : KController( view, parent ),
   BufferCursor( BC )
 {
 }
@@ -54,9 +54,9 @@ bool KEditor::handleKeyPress( QKeyEvent *KeyEvent )
   {
     case Qt::Key_Delete:
       if( ShiftPressed )
-        HexEdit->cut();
-      else if( HexEdit->BufferRanges->hasSelection() )
-        HexEdit->removeSelectedData();
+        View->cut();
+      else if( View->BufferRanges->hasSelection() )
+        View->removeSelectedData();
       else
       {
         doEditAction( ControlPressed ? WordDelete : CharDelete );
@@ -66,11 +66,11 @@ bool KEditor::handleKeyPress( QKeyEvent *KeyEvent )
 
     case Qt::Key_Insert:
       if( ShiftPressed )
-        HexEdit->paste();
+        View->paste();
       else if( ControlPressed )
-        HexEdit->copy();
+        View->copy();
       else
-        HexEdit->setOverwriteMode( !HexEdit->OverWrite );
+        View->setOverwriteMode( !View->OverWrite );
       break;
 
     case Qt::Key_Backspace:
@@ -80,18 +80,18 @@ bool KEditor::handleKeyPress( QKeyEvent *KeyEvent )
           break;
         else if( ShiftPressed )
         {
-//           HexEdit->redo();
+//           View->redo();
           break;
         }
         else
         {
-//           HexEdit->undo();
+//           View->undo();
           break;
         }
       }
-      else if( HexEdit->BufferRanges->hasSelection() )
+      else if( View->BufferRanges->hasSelection() )
       {
-        HexEdit->removeSelectedData();
+        View->removeSelectedData();
         break;
       }
 
@@ -99,13 +99,13 @@ bool KEditor::handleKeyPress( QKeyEvent *KeyEvent )
       clearUndoRedoInfo = false;
       break;
     case Qt::Key_F16: // "Copy" key on Sun keyboards
-      HexEdit->copy();
+      View->copy();
       break;
     case Qt::Key_F18: // "Paste" key on Sun keyboards
-      HexEdit->paste();
+      View->paste();
       break;
     case Qt::Key_F20: // "Cut" key on Sun keyboards
-      HexEdit->cut();
+      View->cut();
       break;
 
     default:
@@ -123,40 +123,40 @@ bool KEditor::handleKeyPress( QKeyEvent *KeyEvent )
 
 void KEditor::doEditAction( KEditAction Action )
 {
-  HexEdit->pauseCursor( true );
+  View->pauseCursor( true );
 
   switch( Action )
   {
     case CharDelete:
-      if( !HexEdit->OverWrite )
+      if( !View->OverWrite )
       {
         const int Index = BufferCursor->realIndex();
-        if( Index < HexEdit->BufferLayout->length() )
-          HexEdit->ByteArrayModel->remove( KHE::KSection::fromWidth(Index,1) );
+        if( Index < View->BufferLayout->length() )
+          View->ByteArrayModel->remove( KHE::KSection::fromWidth(Index,1) );
       }
       break;
 
       case WordDelete: // kills data until the start of the next word
-        if( !HexEdit->OverWrite )
+        if( !View->OverWrite )
         {
           const int Index = BufferCursor->realIndex();
-          if( Index < HexEdit->BufferLayout->length() )
+          if( Index < View->BufferLayout->length() )
           {
-            KHECore::KWordBufferService WBS( HexEdit->ByteArrayModel, HexEdit->Codec );
+            KHECore::KWordBufferService WBS( View->ByteArrayModel, View->Codec );
             int End = WBS.indexOfBeforeNextWordStart( Index );
-            HexEdit->ByteArrayModel->remove( KHE::KSection(Index,End) );
+            View->ByteArrayModel->remove( KHE::KSection(Index,End) );
           }
         }
         break;
 
     case CharBackspace:
-      if( HexEdit->OverWrite )
+      if( View->OverWrite )
         BufferCursor->gotoPreviousByte();
       else
       {
         int DeleteIndex = BufferCursor->realIndex() - 1;
         if( DeleteIndex >= 0 )
-          HexEdit->ByteArrayModel->remove( KHE::KSection::fromWidth(DeleteIndex,1) );
+          View->ByteArrayModel->remove( KHE::KSection::fromWidth(DeleteIndex,1) );
       }
       break;
     case WordBackspace:
@@ -164,15 +164,15 @@ void KEditor::doEditAction( KEditAction Action )
       int LeftIndex = BufferCursor->realIndex() - 1;
       if( LeftIndex >= 0 )
       {
-        KHECore::KWordBufferService WBS( HexEdit->ByteArrayModel, HexEdit->Codec );
+        KHECore::KWordBufferService WBS( View->ByteArrayModel, View->Codec );
         int WordStart = WBS.indexOfPreviousWordStart( LeftIndex );
-        if( !HexEdit->OverWrite )
-          HexEdit->ByteArrayModel->remove( KHE::KSection(WordStart,LeftIndex) );
+        if( !View->OverWrite )
+          View->ByteArrayModel->remove( KHE::KSection(WordStart,LeftIndex) );
       }
     }
   }
 
-  HexEdit->ensureCursorVisible();
+  View->ensureCursorVisible();
 }
 
 }

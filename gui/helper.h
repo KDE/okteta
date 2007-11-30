@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KHEXEDIT_HELPER
-#define KHEXEDIT_HELPER
+#ifndef OKTETA_HELPER
+#define OKTETA_HELPER
 
 // lib
 #include <khechar.h>

@@ -61,7 +61,7 @@ class SearchController : public KViewController
 
   protected:
     KXmlGuiWindow *MainWindow;
-    KHEUI::KByteArrayView *HexEdit;
+    KHEUI::KByteArrayView *ViewWidget;
     KHECore::KAbstractByteArrayModel *ByteArray;
 
     KAction *mFindAction;

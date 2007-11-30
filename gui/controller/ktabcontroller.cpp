@@ -27,8 +27,8 @@
 
 namespace KHEUI {
 
-KTabController::KTabController( KByteArrayView* HE, KController *P )
-  : KController( HE, P ),
+KTabController::KTabController( KByteArrayView* view, KController *parent )
+  : KController( view, parent ),
     TabChangesFocus( false )
 {
 }
@@ -43,24 +43,24 @@ bool KTabController::handleKeyPress( QKeyEvent *KeyEvent )
   if( KeyEvent->key() == Qt::Key_Tab )
   {
     // are we in the char column?
-    if( HexEdit->cursorColumn() == KByteArrayView::CharColumnId )
+    if( View->cursorColumn() == KByteArrayView::CharColumnId )
     {
         // in last column we care about tab changes focus
-      if( HexEdit->ValueColumn->isVisible() && (!TabChangesFocus || ShiftPressed) )
+      if( View->ValueColumn->isVisible() && (!TabChangesFocus || ShiftPressed) )
       {
-        HexEdit->setCursorColumn( KByteArrayView::ValueColumnId );
+        View->setCursorColumn( KByteArrayView::ValueColumnId );
         KeyUsed = true;
       }
     }
     // value column then
     else
     {
-      if( HexEdit->CharColumn->isVisible() )
+      if( View->CharColumn->isVisible() )
       {
           // in last column we care about tab changes focus
-        if( HexEdit->CharColumn->isVisible() && (!TabChangesFocus || !ShiftPressed) )
+        if( View->CharColumn->isVisible() && (!TabChangesFocus || !ShiftPressed) )
         {
-          HexEdit->setCursorColumn( KByteArrayView::CharColumnId );
+          View->setCursorColumn( KByteArrayView::CharColumnId );
           KeyUsed = true;
         }
       }

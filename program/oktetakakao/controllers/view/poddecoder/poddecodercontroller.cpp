@@ -34,7 +34,7 @@
 
 
 PODDecoderController::PODDecoderController( KViewManager */*ViewManager*/, KXmlGuiWindow *MW )
- : MainWindow( MW ), HexEdit( 0 ), ByteArray( 0 ), CursorIndex( 0 )
+ : MainWindow( MW ), ViewWidget( 0 ), ByteArray( 0 ), CursorIndex( 0 )
 {
     QDockWidget *DW = new QDockWidget( MainWindow );
     PrimitiveTypesView = new KPrimitiveTypesView( DW );
@@ -48,20 +48,20 @@ PODDecoderController::PODDecoderController( KViewManager */*ViewManager*/, KXmlG
 
 void PODDecoderController::setView( KAbstractView *View )
 {
-    disconnect( HexEdit );
+    disconnect( ViewWidget );
     disconnect( ByteArray );
 
-    HexEdit = View ? static_cast<KHEUI::KByteArrayView *>( View->widget() ) : 0;
+    ViewWidget = View ? static_cast<KHEUI::KByteArrayView *>( View->widget() ) : 0;
     KByteArrayDocument *Document = View ? static_cast<KByteArrayDocument*>( View->document() ) : 0;
     ByteArray = Document ? Document->content() : 0;
 
-    if( ByteArray && HexEdit )
+    if( ByteArray && ViewWidget )
     {
-        CursorIndex = HexEdit->cursorPosition();
-        connect( HexEdit, SIGNAL(cursorPositionChanged( int )), SLOT(onCursorPositionChange( int )) );
+        CursorIndex = ViewWidget->cursorPosition();
+        connect( ViewWidget, SIGNAL(cursorPositionChanged( int )), SLOT(onCursorPositionChange( int )) );
         connect( ByteArray, SIGNAL(contentsChanged( int, int )), SLOT(onContentsChange( int, int )) );
-        PrimitiveTypesView->setCharCode( HexEdit->encodingName() );
-        PrimitiveTypesView->setUndefinedChar( HexEdit->undefinedChar() ); // TODO: track config changes in HexEdit
+        PrimitiveTypesView->setCharCode( ViewWidget->encodingName() );
+        PrimitiveTypesView->setUndefinedChar( ViewWidget->undefinedChar() ); // TODO: track config changes in ViewWidget
     }
     // force painting
     update();

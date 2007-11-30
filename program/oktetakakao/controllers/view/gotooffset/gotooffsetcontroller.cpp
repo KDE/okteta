@@ -40,7 +40,7 @@
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
 GotoOffsetController::GotoOffsetController( KXmlGuiWindow *MW )
- : MainWindow( MW ), HexEdit( 0 ), ByteArray( 0 ), GotoOffsetDialog( 0 )
+ : MainWindow( MW ), ViewWidget( 0 ), ByteArray( 0 ), GotoOffsetDialog( 0 )
 {
     KActionCollection* ActionCollection = MainWindow->actionCollection();
 
@@ -54,15 +54,15 @@ GotoOffsetController::GotoOffsetController( KXmlGuiWindow *MW )
 
 void GotoOffsetController::setView( KAbstractView *View )
 {
-    disconnect( HexEdit );
+    disconnect( ViewWidget );
 
-    HexEdit = View ? static_cast<KHEUI::KByteArrayView *>( View->widget() ) : 0;
+    ViewWidget = View ? static_cast<KHEUI::KByteArrayView *>( View->widget() ) : 0;
     KByteArrayDocument *Document = View ? static_cast<KByteArrayDocument*>( View->document() ) : 0;
     ByteArray = Document ? Document->content() : 0;
 
     if( ByteArray )
     {
-//         connect( HexEdit, SIGNAL( selectionChanged( bool )), SLOT( onSelectionChanged( bool )) );
+//         connect( ViewWidget, SIGNAL( selectionChanged( bool )), SLOT( onSelectionChanged( bool )) );
     }
     const bool HasView = ( ByteArray != 0 );
     GotoOffsetAction->setEnabled( HasView );
@@ -75,7 +75,7 @@ void GotoOffsetController::gotoOffset()
     if( !GotoOffsetDialog )
     {
         GotoOffsetDialog = new KGotoOffsetDialog( MainWindow );
-        const int StartOffset = HexEdit->startOffset();
+        const int StartOffset = ViewWidget->startOffset();
         GotoOffsetDialog->setRange( StartOffset, StartOffset+ByteArray->size()-1 );
         connect( GotoOffsetDialog, SIGNAL(okClicked()), SLOT(onOkClicked()) );
     }
@@ -91,9 +91,9 @@ void GotoOffsetController::onOkClicked()
     const bool IsRelative = GotoOffsetDialog->isRelative();
     const int Offset = GotoOffsetDialog->offset();
 
-    int NewPosition = IsRelative ?  HexEdit->cursorPosition()+Offset :
+    int NewPosition = IsRelative ?  ViewWidget->cursorPosition()+Offset :
                       Offset < 0 ? ByteArray->size()+Offset : Offset;
-    HexEdit->setCursorPosition( NewPosition );
+    ViewWidget->setCursorPosition( NewPosition );
 }
 
 GotoOffsetController::~GotoOffsetController()

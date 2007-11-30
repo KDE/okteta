@@ -38,7 +38,7 @@ class KValueEditor: public KEditor
     { EnterValue, IncValue, DecValue, ValueAppend, ValueEdit, LeaveValue, CancelValue, ValueBackspace };
 
   public:
-    KValueEditor( KValueColumn *VC, KDataCursor *BC, KByteArrayView *HE, KController *P );
+    KValueEditor( KValueColumn *VC, KDataCursor *BC, KByteArrayView *view, KController *parent );
     virtual ~KValueEditor();
 
   public: // KEditor API
