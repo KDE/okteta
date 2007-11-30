@@ -33,10 +33,10 @@ const QStringList &KByteArrayValidator::codingNames()
     static QStringList list;
     if( list.isEmpty() )
     {
-        list.append( i18n("Hexadecimal") );
-        list.append( i18n("Decimal") );
-        list.append( i18n("Octal") );
-        list.append( i18n("Binary") );
+        list.append( i18nc("Encoding as value","Hexadecimal") );
+        list.append( i18nc("Encoding as value","Decimal") );
+        list.append( i18nc("Encoding as value","Octal") );
+        list.append( i18nc("Encoding as value","Binary") );
         list.append( i18n("Regular Text") );
     }
     return list;

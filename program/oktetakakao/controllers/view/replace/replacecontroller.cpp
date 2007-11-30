@@ -163,7 +163,7 @@ void ReplaceController::findNext()
 
         const QString ReplacementReport = (NoOfReplacements==0) ?
             i18n( "No replacements done.") :
-            i18np( "1 replacement done.", "%n replacements done.", NoOfReplacements );
+            i18np( "1 replacement done.", "%1 replacements done.", NoOfReplacements );
         // reached end and
         if( DoWrap )
         {

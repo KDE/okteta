@@ -39,8 +39,8 @@ static const QStringList &formatStrings()
   static QStringList list;
   if( list.isEmpty() )
   {
-    list.append( i18n( "Hexadecimal" ) );
-    list.append( i18n( "Decimal" ) );
+    list.append( i18nc( "coding of offset", "Hexadecimal" ) );
+    list.append( i18nc( "coding of offset", "Decimal" ) );
   }
   return list;
 }
@@ -50,7 +50,7 @@ KGotoOffsetDialog::KGotoOffsetDialog( QWidget *parent )
 {
     setCaption( i18n("Go to Offset") );
     setButtons( Ok | Cancel );
-    setButtonGuiItem( Ok, KGuiItem(i18n("&Go"), "go",
+    setButtonGuiItem( Ok, KGuiItem(i18n("&Go"), "go-jump",
                       i18n("Go to the Offset"),
                       i18n("<qt>If you press the <b>Go</b> button, the cursor will be moved "
                            "in the document to or, on your option, by the offset you entered above.</qt>")));
