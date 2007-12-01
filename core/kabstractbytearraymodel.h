@@ -170,6 +170,7 @@ class KHECORE_EXPORT KAbstractByteArrayModel : public QObject
       * @return new pos of moved data or old, if failed
       */
     virtual int move( int DestPos, const KSection &SourceSection ) = 0;
+    // TODO: enforce destPos to be lower then source.start, it will be always the same calculation
 
     /**
      * fills the buffer with the FillChar. If the buffer is to small it will be extended as much as possible.
