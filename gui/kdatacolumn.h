@@ -20,20 +20,23 @@
 
 // lib
 #include "kdatalayout.h"
-// commonlib
-#include <ksection.h>
-//
+// KColumnsView
 #include <kcolumn.h>
 // Okteta core
 #include <khe.h>
 #include <kabstractbytearraymodel.h>
 #include <khechar.h>
+// commonlib
+#include <ksection.h>
 
 
 class QPainter;
 class QColor;
 class QBrush;
 
+namespace KDE { namespace If {
+class Bookmarks;
+} }
 namespace KHECore {
 class KCharCodec;
 }
@@ -178,6 +181,7 @@ class KDataColumn : public KColumn
     void paintSelection( QPainter *P, const KHE::KSection &Positions, int Index, int Flag );
     void paintMarking( QPainter *P, const KHE::KSection &Positions, int Index, int Flag );
     void paintRange( QPainter *P, const QBrush &Brush, const KHE::KSection &Positions, int Flag );
+    void paintBookmark( QPainter *Painter );
 
     void recalcX();
 
@@ -192,6 +196,8 @@ class KDataColumn : public KColumn
     const KDataLayout *Layout;
     /** pointer to the ranges */
     KDataRanges *Ranges;
+    /** */
+    KDE::If::Bookmarks *Bookmarks;
     /** */
     KHECore::KCharCodec *Codec;
 

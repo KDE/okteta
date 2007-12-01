@@ -113,6 +113,15 @@ KByteArrayView::KByteArrayView( KHECore::KAbstractByteArrayModel *Buffer, QWidge
   connect( ByteArrayModel, SIGNAL(contentsReplaced(int,int,int)), SLOT(onContentsReplaced(int,int,int)) );
   connect( ByteArrayModel, SIGNAL(contentsMoved(int,int,int)), SLOT(onContentsMoved(int,int,int)) );
 
+  KDE::If::Bookmarks *bookmarks = qobject_cast<KDE::If::Bookmarks*>( ByteArrayModel );
+  if( bookmarks )
+  {
+      connect( ByteArrayModel, SIGNAL(bookmarksAdded( const QList<KHECore::KBookmark>& )),
+               SLOT(onBookmarksChange(const QList<KHECore::KBookmark>&)) );
+      connect( ByteArrayModel, SIGNAL(bookmarksRemoved( const QList<KHECore::KBookmark>& )),
+               SLOT(onBookmarksChange(const QList<KHECore::KBookmark>&)) );
+  }
+
   BufferLayout->setLength( ByteArrayModel->size() );
   BufferLayout->setNoOfLinesPerPage( noOfLinesPerPage() );
 
@@ -1012,6 +1021,18 @@ void KByteArrayView::onContentsMoved( int /*Destination*/, int /*Source*/, int /
   pauseCursor();
 
 }
+void KByteArrayView::onBookmarksChange( const QList<KHECore::KBookmark> &bookmarks )
+{
+
+  foreach( KHECore::KBookmark bookmark, bookmarks )
+  {
+      const int position = bookmark.offset();
+      BufferRanges->addChangedRange( position, position );
+  }
+
+  unpauseCursor();
+  updateChanged();
+}
 
 void KByteArrayView::clipboardChanged()
 {
@@ -1489,7 +1510,7 @@ void KByteArrayView::updateChanged()
       }
 
       // continue the search at the overnext index
-      VisibleRange.setStart( ChangedRange.end()+2 );
+      VisibleRange.setStart( ChangedRange.end()+1 ); //+2 ); TODO: currently bounding ranges are not merged
       if( !VisibleRange.isValid() )
         break;
     }

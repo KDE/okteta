@@ -22,10 +22,11 @@
 #include "kdatalayout.h"
 #include "kdataranges.h"
 #include "helper.h"
-// Okteta core
-#include <kcharcodec.h>
-// columnsview
+// KColumnsView
 #include <kcolumnsview.h>
+// Okteta core
+#include <kibookmarks.h>
+#include <kcharcodec.h>
 // Qt
 #include <QtGui/QPainter>
 
@@ -41,11 +42,12 @@ static const KPixelX DefaultByteSpacingWidth = 3;
 static const KPixelX DefaultGroupSpacingWidth = 9;
 static const int DefaultNoOfGroupedBytes = 4;
 
-KDataColumn::KDataColumn( KColumnsView *CV, KHECore::KAbstractByteArrayModel *ByteChar, KDataLayout *L, KDataRanges *R )
+KDataColumn::KDataColumn( KColumnsView *CV, KHECore::KAbstractByteArrayModel *ByteArray, KDataLayout *L, KDataRanges *R )
  : KColumn( CV ),
-   Buffer( ByteChar ),
+   Buffer( ByteArray ),
    Layout( L ),
    Ranges( R ),
+   Bookmarks( qobject_cast<KDE::If::Bookmarks*>(ByteArray) ),
    DigitWidth( 0 ),
    DigitBaseLine( 0 ),
    ByteWidth( 0 ),
@@ -70,6 +72,7 @@ KDataColumn::~KDataColumn()
 void KDataColumn::set( KHECore::KAbstractByteArrayModel *B )
 {
   Buffer = B;
+  Bookmarks = qobject_cast<KDE::If::Bookmarks*>(Buffer );
 }
 
 
@@ -462,6 +465,16 @@ void KDataColumn::paintPositions( QPainter *Painter, int Line, const KHE::KSecti
 
 void KDataColumn::paintPlain( QPainter *Painter, const KHE::KSection &Positions, int Index )
 {
+  bool hasBookmarks = ( Bookmarks != 0 );
+  KHECore::KBookmarkList bookmarkList;
+  KHECore::KBookmarkList::ConstIterator bit;
+  if( hasBookmarks )
+  {
+    bookmarkList = Bookmarks->bookmarkList();
+    bit = bookmarkList.nextFrom(Index);
+    hasBookmarks = ( bit != bookmarkList.constEnd() );
+  }
+
   // paint all the bytes affected
   for( int Pos=Positions.start(); Pos<=Positions.end(); ++Pos,++Index )
   {
@@ -469,6 +482,13 @@ void KDataColumn::paintPlain( QPainter *Painter, const KHE::KSection &Positions,
 
     // draw the byte
     Painter->translate( x, 0 );
+
+    if( hasBookmarks && (Index == bit->offset()) )
+    {
+      paintBookmark( Painter );
+      ++bit;
+      hasBookmarks = (bit != bookmarkList.constEnd());//TODO )&& ( bit->offset() <= LastIndex );
+    }
 
     char Byte = Buffer->datum( Index );
     KHECore::KChar ByteChar = Codec->decode( Byte );
@@ -482,6 +502,16 @@ void KDataColumn::paintPlain( QPainter *Painter, const KHE::KSection &Positions,
 
 void KDataColumn::paintSelection( QPainter *Painter, const KHE::KSection &Positions, int Index, int Flag )
 {
+  bool hasBookmarks = ( Bookmarks != 0 );
+  KHECore::KBookmarkList bookmarkList;
+  KHECore::KBookmarkList::ConstIterator bit;
+  if( hasBookmarks )
+  {
+    bookmarkList = Bookmarks->bookmarkList();
+    bit = bookmarkList.nextFrom(Index);
+    hasBookmarks = ( bit != bookmarkList.constEnd() );
+  }
+
   const QPalette &Palette = columnsView()->viewport()->palette();
 
   paintRange( Painter, Palette.highlight(), Positions, Flag );
@@ -494,6 +524,13 @@ void KDataColumn::paintSelection( QPainter *Painter, const KHE::KSection &Positi
 
     // draw the byte
     Painter->translate( x, 0 );
+
+    if( hasBookmarks && (Index == bit->offset()) )
+    {
+      paintBookmark( Painter );
+      ++bit;
+      hasBookmarks = (bit != bookmarkList.constEnd());//TODO )&& ( bit->offset() <= LastIndex );
+    }
 
     char Byte = Buffer->datum( Index );
     KHECore::KChar ByteChar = Codec->decode( Byte );
@@ -525,6 +562,14 @@ void KDataColumn::paintMarking( QPainter *Painter, const KHE::KSection &Position
 
     Painter->translate( -x, 0 );
   }
+}
+
+
+void KDataColumn::paintBookmark( QPainter *Painter )
+{
+  const QPalette &Palette = columnsView()->viewport()->palette();
+  // TODO: alternateBase is just a placeholder
+  Painter->fillRect( 1,1, ByteWidth-2,lineHeight()-2, Palette.alternateBase() );
 }
 
 
@@ -564,6 +609,9 @@ void KDataColumn::paintByte( QPainter *Painter, int Index )
   }
 
   Painter->fillRect( 0,0, ByteWidth,lineHeight(), Brush );
+
+  if( Bookmarks && Bookmarks->bookmarkList().includes(Index) )
+    paintBookmark( Painter );
 
   if( Index > -1 )
     drawByte( Painter, Byte, ByteChar, CharColor );

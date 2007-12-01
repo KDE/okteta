@@ -19,15 +19,18 @@
 #define KHE_UI_KBYTEARRAYVIEW_H
 
 // lib
+#include "kcolumnsview.h"
+// Okteta core
 // #include "khe.h"
 #include <ksection.h>
-#include "kcolumnsview.h"
 // Qt
+#include <QtCore/QList>
 #include <QtGui/QClipboard>
 
 class QTimer;
 
 namespace KHECore {
+class KBookmark;
 class KCharCodec;
 class KAbstractByteArrayModel;
 }
@@ -450,7 +453,7 @@ class KHEUI_EXPORT KByteArrayView : public KColumnsView
     void onContentsReplaced( int Pos, int RemovedLength, int InsertedLength );
     void onContentsMoved( int Destination, int Source, int MovedLength );
     void updateRange( int Start, int End );
-
+    void onBookmarksChange( const QList<KHECore::KBookmark> &bookmarks );
 
   protected Q_SLOTS: // QWidget API
     virtual void fontChange( const QFont &OldFont );
