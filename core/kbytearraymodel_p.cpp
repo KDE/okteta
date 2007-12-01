@@ -87,10 +87,12 @@ int KByteArrayModelPrivate::insert( int position, const char* data, int length )
     // copy new data to its place
     memcpy( &m_data[position], data, length );
 
+    const bool bookmarksModified = m_bookmarks.adjustToReplaced( position, 0, length );
     m_modified = true;
 
     emit p->contentsReplaced( position, 0, length );
     emit p->contentsChanged( position, m_size-1 );
+    if( bookmarksModified ) emit p->bookmarksModified( true );
     emit p->modificationChanged( true );
     return length;
 }
@@ -112,10 +114,12 @@ int KByteArrayModelPrivate::remove( const KSection &section )
     const int oldSize = m_size;
     m_size -= removeSection.width();
 
+    const bool bookmarksModified = m_bookmarks.adjustToReplaced( removeSection.start(), removeSection.width(), 0 );
     m_modified = true;
 
     emit p->contentsReplaced( removeSection.start(), removeSection.width(), 0 );
     emit p->contentsChanged( removeSection.start(), oldSize-1 );
+    if( bookmarksModified ) emit p->bookmarksModified( true );
     emit p->modificationChanged( true );
     return removeSection.width();
 }
@@ -180,10 +184,12 @@ unsigned int KByteArrayModelPrivate::replace( const KSection &section, const cha
     const int oldSize = m_size;
     m_size = newSize;
 
+    const bool bookmarksModified = m_bookmarks.adjustToReplaced( removeSection.start(), removeSection.width(), inputLength );
     m_modified = true;
 
     emit p->contentsReplaced( removeSection.start(), removeSection.width(), inputLength );
     emit p->contentsChanged( removeSection.start(), sizeDiff==0?removeSection.end():((sizeDiff>0?m_size:oldSize)-1) );
+    if( bookmarksModified ) emit p->bookmarksModified( true );
     emit p->modificationChanged( true );
     return inputLength;
 }
@@ -255,10 +261,14 @@ int KByteArrayModelPrivate::move( int destinationStart, const KSection &ss )
     memcpy( &m_data[smallPartDest], temp, smallPartLength );
     delete [] temp;
 
+    const bool bookmarksModified = toRight ?
+        m_bookmarks.adjustToMoved( sourceSection.start(), sourceSection.end()+1, destinationStart-sourceSection.end()-1 ) :
+        m_bookmarks.adjustToMoved( destinationStart, sourceSection.start(),sourceSection.width() );
     m_modified = true;
 
     emit p->contentsMoved( destinationStart, sourceSection.start(),sourceSection.width()  );
     emit p->contentsChanged( toRight?sourceSection.start():destinationStart, toRight?destinationStart:sourceSection.end() );
+    if( bookmarksModified ) emit p->bookmarksModified( true );
     emit p->modificationChanged( true );
     return (movedLength<displacedLength) ? smallPartDest : largePartDest;
 }

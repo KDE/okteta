@@ -29,8 +29,10 @@ set( oktetacore_LIB_SRCS
   kfilebytearraymodel_p.cpp
   kfilebytearraymodel.cpp
   kwordbufferservice.cpp
+  kbookmarklist.cpp
   ksection.cpp
-  ksectionlist.cpp)
+  ksectionlist.cpp
+)
 
 kde4_add_library( oktetacore SHARED ${oktetacore_LIB_SRCS} )
 target_link_libraries( oktetacore  ${KDE4_KDECORE_LIBS} )

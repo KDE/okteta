@@ -21,6 +21,7 @@
 
 // lib
 #include "kabstractbytearraymodel.h"
+#include "kibookmarks.h"
 
 
 namespace KHECore
@@ -32,8 +33,11 @@ class KByteArrayModelPrivate;
   *@author Friedrich W. H. Kossebau
   */
 
-class KHECORE_EXPORT KByteArrayModel : public KAbstractByteArrayModel
+class KHECORE_EXPORT KByteArrayModel : public KAbstractByteArrayModel, public KDE::If::Bookmarks
 {
+    Q_OBJECT
+    Q_INTERFACES( KDE::If::Bookmarks )
+
     friend class KByteArrayModelPrivate;
 
   public:
@@ -59,6 +63,18 @@ class KHECORE_EXPORT KByteArrayModel : public KAbstractByteArrayModel
 
     virtual int indexOf( const char *searchString, int length, int from  = 0 ) const;
     virtual int lastIndexOf( const char *searchString, int length, int from = -1 ) const;
+
+  public: // KDE::If::Bookmarks API
+    virtual void addBookmarks( const QList<KHECore::KBookmark> &bookmarks );
+    virtual void removeBookmarks( const QList<KHECore::KBookmark> &bookmarks );
+    virtual void removeAllBookmarks();
+
+    virtual KHECore::KBookmarkList bookmarkList() const;
+
+  Q_SIGNALS: // KDE::If::Bookmarks API
+    virtual void bookmarksAdded( const QList<KHECore::KBookmark> &bookmarks );
+    virtual void bookmarksRemoved( const QList<KHECore::KBookmark> &bookmarks );
+    virtual void bookmarksModified( bool modified );
 
   public:
     void setReadOnly( bool RO = true );

@@ -99,6 +99,26 @@ int KByteArrayModel::lastIndexOf( const char *searchString, int length, int from
     return d->lastIndexOf( searchString, length, from );
 }
 
+void KByteArrayModel::addBookmarks( const QList<KHECore::KBookmark> &bookmarks )
+{
+    d->addBookmarks( bookmarks );
+}
+
+void KByteArrayModel::removeBookmarks( const QList<KHECore::KBookmark> &bookmarks )
+{
+    d->removeBookmarks( bookmarks );
+}
+
+void KByteArrayModel::removeAllBookmarks()
+{
+    d->removeAllBookmarks();
+}
+
+KHECore::KBookmarkList KByteArrayModel::bookmarkList() const
+{
+    return d->bookmarkList();
+}
+
 KByteArrayModel::~KByteArrayModel()
 {
     delete d;

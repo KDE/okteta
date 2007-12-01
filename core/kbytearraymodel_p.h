@@ -68,6 +68,13 @@ class KByteArrayModelPrivate
     bool keepsMemory() const;
     bool autoDelete() const;
 
+  public:
+    void addBookmarks( const QList<KHECore::KBookmark> &bookmarks );
+    void removeBookmarks( const QList<KHECore::KBookmark> &bookmarks );
+    void removeAllBookmarks();
+
+    KHECore::KBookmarkList bookmarkList() const;
+
   protected:
     /** resizes the buffer, if possible, saving the data and splitting the data, if demanded
      * @param AddSize additional size the buffer should grow
@@ -95,6 +102,8 @@ class KByteArrayModelPrivate
     bool m_readOnly:1;
     /** */
     bool m_modified:1;
+    /** */
+    KBookmarkList m_bookmarks;
 };
 
 
@@ -148,6 +157,26 @@ inline char *KByteArrayModelPrivate::data()       const { return m_data; }
 inline int KByteArrayModelPrivate::maxSize()      const { return m_maxSize; }
 inline bool KByteArrayModelPrivate::keepsMemory() const { return m_keepsMemory; }
 inline bool KByteArrayModelPrivate::autoDelete()  const { return m_autoDelete; }
+
+inline void KByteArrayModelPrivate::addBookmarks( const QList<KHECore::KBookmark> &bookmarks )
+{
+    m_bookmarks.addBookmarks( bookmarks );
+    emit p->bookmarksAdded( bookmarks );
+}
+inline void KByteArrayModelPrivate::removeBookmarks( const QList<KHECore::KBookmark> &bookmarks )
+{
+    m_bookmarks.removeBookmarks( bookmarks );
+    emit p->bookmarksRemoved( bookmarks );
+}
+
+inline void KByteArrayModelPrivate::removeAllBookmarks()
+{
+    QList<KHECore::KBookmark> bookmarks = m_bookmarks.list();
+    m_bookmarks.clear();
+    emit p->bookmarksRemoved( bookmarks );
+}
+
+inline KHECore::KBookmarkList KByteArrayModelPrivate::bookmarkList() const { return m_bookmarks; }
 
 }
 
