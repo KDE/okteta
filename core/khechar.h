@@ -1,5 +1,5 @@
 /***************************************************************************
-                          helper.h  -  description
+                          khechar.h  -  description
                              -------------------
     begin                : Do Nov 25 2004
     copyright            : (C) 2004 by Friedrich W. H. Kossebau
