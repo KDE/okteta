@@ -28,6 +28,9 @@ class QAction;
 class QActionGroup;
 class KXmlGuiWindow;
 class KViewManager;
+namespace KDE { namespace If {
+class Bookmarks;
+} }
 namespace KHEUI {
 class KByteArrayView;
 }
@@ -48,9 +51,6 @@ class BookmarksController : public KViewController
   public: // KViewController API
     virtual void setView( KAbstractView *view );
 
-  protected:
-    void updateBookmarks();
-
   protected Q_SLOTS: // action slots
     void createBookmark();
     void deleteBookmark();
@@ -58,17 +58,19 @@ class BookmarksController : public KViewController
     void gotoNextBookmark();
     void gotoPreviousBookmark();
 
+    void updateBookmarks();
     void onBookmarkTriggered( QAction* );
 
   private Q_SLOTS:
-    void onBookmarksAdded( const QList<KHECore::KBookmark*> &bookmarks );
-    void onBookmarksRemoved( const QList<KHECore::KBookmark*> &bookmarks );
+    void onBookmarksAdded( const QList<KHECore::KBookmark> &bookmarks );
+    void onBookmarksRemoved( const QList<KHECore::KBookmark> &bookmarks );
     void onCursorPositionChanged( int newPosition );
 
   protected:
     KXmlGuiWindow *mWindow;
     KHEUI::KByteArrayView *mByteArrayView;
     KHECore::KAbstractByteArrayModel *mByteArray;
+    KDE::If::Bookmarks *mBookmarks;
 
     QAction *mCreateAction;
     QAction *mDeleteAction;
