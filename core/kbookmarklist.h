@@ -46,7 +46,8 @@ class KHECORE_EXPORT KBookmarkList : public QLinkedList<KBookmark>
     bool adjustToMoved( int firstPartStart, int secondPartStart, int secondPartLength );
 
   public:
-    bool includes( int offset ) const;
+    bool contains( int offset ) const;
+    using QLinkedList<KBookmark>::contains;
     const_iterator previousFrom( int offset ) const;
     const_iterator nextFrom( int offset ) const;
 //     const_iterator begin( int offset ) const;

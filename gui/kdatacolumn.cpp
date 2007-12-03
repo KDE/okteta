@@ -610,7 +610,7 @@ void KDataColumn::paintByte( QPainter *Painter, int Index )
 
   Painter->fillRect( 0,0, ByteWidth,lineHeight(), Brush );
 
-  if( Bookmarks && Bookmarks->bookmarkList().includes(Index) )
+  if( Bookmarks && Bookmarks->bookmarkList().contains(Index) )
     paintBookmark( Painter );
 
   if( Index > -1 )

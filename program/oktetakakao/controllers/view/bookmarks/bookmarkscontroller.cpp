@@ -129,9 +129,11 @@ void BookmarksController::updateBookmarks()
     {
         KHECore::KBookmark bookmark = *bit;
         printFunction( codedOffset, startOffset+bookmark.offset() );
-        const QString title = i18n( "Offset: %1", QLatin1String(codedOffset) );
-            // = KStringHandler::rsqueeze( view->title(), MaxEntryLength );
-        QAction *action = new QAction( b<10 ? QString::fromLatin1("&%1 %2").arg(b).arg(title) : title, mBookmarksActionGroup );
+        QString title = i18n( "Offset: %1", QLatin1String(codedOffset) );
+        if( b < 10 )
+            title = QString::fromLatin1("&%1 %2").arg( b ).arg( title );
+        // = KStringHandler::rsqueeze( view->title(), MaxEntryLength );
+        QAction *action = new QAction( title, mBookmarksActionGroup );
 
         action->setData( bookmark.offset() );
         mBookmarksActionGroup->addAction( action );
@@ -143,7 +145,7 @@ void BookmarksController::onBookmarksAdded( const QList<KHECore::KBookmark> &boo
 {
 Q_UNUSED( bookmarks )
     const int cursorPosition = mByteArrayView->cursorPosition();
-    const bool hasBookmark = mBookmarks->bookmarkList().includes( cursorPosition );
+    const bool hasBookmark = mBookmarks->bookmarkList().contains( cursorPosition );
     mDeleteAction->setEnabled( hasBookmark );
 
     const int bookmarksCount = mBookmarks->bookmarkList().size();
@@ -159,7 +161,7 @@ void BookmarksController::onBookmarksRemoved( const QList<KHECore::KBookmark> &b
 {
 Q_UNUSED( bookmarks )
     const int cursorPosition = mByteArrayView->cursorPosition();
-    const bool hasBookmark = mBookmarks->bookmarkList().includes( cursorPosition );
+    const bool hasBookmark = mBookmarks->bookmarkList().contains( cursorPosition );
     mDeleteAction->setEnabled( hasBookmark );
 
     const int bookmarksCount = mBookmarks->bookmarkList().size();
@@ -173,7 +175,7 @@ Q_UNUSED( bookmarks )
 
 void BookmarksController::onCursorPositionChanged( int newPosition )
 {
-    const bool hasBookmark = mBookmarks->bookmarkList().includes( newPosition );
+    const bool hasBookmark = mBookmarks->bookmarkList().contains( newPosition );
     mDeleteAction->setEnabled( hasBookmark );
 }
 

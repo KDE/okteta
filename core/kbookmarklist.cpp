@@ -147,7 +147,7 @@ QList<KHECore::KBookmark> KBookmarkList::list() const
     return result;
 }
 
-bool KBookmarkList::includes( int offset ) const
+bool KBookmarkList::contains( int offset ) const
 {
     bool result = false;
     const_iterator B = begin();
