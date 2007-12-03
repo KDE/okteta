@@ -139,3 +139,26 @@ set( kebcdic1047charcodeckcharcodeciftest_SRCS
 kde4_add_unit_test( kebcdic1047charcodeckcharcodeciftest  TESTNAME libokteta-core-kebcdic1047charcodeckcharcodeciftest  ${kebcdic1047charcodeckcharcodeciftest_SRCS} )
 target_link_libraries( kebcdic1047charcodeckcharcodeciftest
   testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+
+
+########### kbookmarktest ###############
+
+set( kbookmarktest_SRCS
+  kbookmarktest.cpp
+)
+
+kde4_add_unit_test( kbookmarktest  TESTNAME libokteta-core-kbookmarktest  ${kbookmarktest_SRCS} )
+target_link_libraries( kbookmarktest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+
+
+########### kbookmarklisttest ###############
+
+set( kbookmarklisttest_SRCS
+  kbookmarklisttest.cpp
+  ${SUTDIR}/kbookmarklist.cpp
+)
+
+kde4_add_unit_test( kbookmarklisttest  TESTNAME libokteta-core-kbookmarklisttest  ${kbookmarklisttest_SRCS} )
+target_link_libraries( kbookmarklisttest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+
+
