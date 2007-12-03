@@ -35,6 +35,8 @@ class KHECORE_EXPORT KBookmark
     KBookmark( int offset ); // krazy:exclude=explicit
     KBookmark();
   public:
+    bool operator==( const KBookmark &other ) const;
+  public:
     int offset() const;
     bool isValid() const;
   public:
@@ -45,6 +47,7 @@ class KHECORE_EXPORT KBookmark
 
 inline KBookmark::KBookmark( int offset ) : mOffset( offset ) {}
 inline KBookmark::KBookmark() : mOffset( InvalidOffset ) {}
+inline bool KBookmark::operator==( const KBookmark &other ) const { return mOffset == other.mOffset; }
 inline bool KBookmark::isValid() const { return mOffset != InvalidOffset; }
 inline int KBookmark::offset() const { return mOffset; }
 inline void KBookmark::move( int offset ) { mOffset += offset; }
