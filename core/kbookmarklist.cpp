@@ -85,10 +85,10 @@ bool KBookmarkList::adjustToReplaced( int offset, int removedLength, int inserte
 {
     bool result = false;
     iterator bit = begin();
-    for( ; bit!=end() && bit->offset() < offset; ++bit )
-        ;
+    while( bit!=end() && bit->offset() < offset )
+        ++bit;
     // remove bookmarks in removed section
-    for( ; bit!=end() && bit->offset() < offset+removedLength; ++bit )
+    while( bit!=end() && bit->offset() < offset+removedLength )
     {
         bit = erase( bit );
         result = true;
@@ -106,15 +106,16 @@ bool KBookmarkList::adjustToReplaced( int offset, int removedLength, int inserte
 
 bool KBookmarkList::adjustToMoved( int firstPartStart, int secondPartStart, int secondPartLength )
 {
-    bool result;
+    bool result = false;
     iterator bit = begin();
-    for( ; bit!=end() && bit->offset() < firstPartStart; ++bit )
-        ;
-    // move bookmarks from first to second
-    for( ; bit!=end() && bit->offset() < secondPartStart; ++bit )
+    while( bit!=end() && bit->offset() < firstPartStart )
+        ++bit;
+    QList<KHECore::KBookmark> bookmarksInFirstPart;
+    // take bookmarks from first part
+    while( bit!=end() && bit->offset() < secondPartStart )
     {
-        (*bit).move( secondPartLength );
-        result = true;
+        bookmarksInFirstPart.append( *bit );
+        bit = erase( bit );
     }
     // move bookmarks from second to first
     const int diff = firstPartStart - secondPartStart;
@@ -122,6 +123,16 @@ bool KBookmarkList::adjustToMoved( int firstPartStart, int secondPartStart, int 
     for( ; bit!=end() && bit->offset() < behindLast; ++bit )
     {
         (*bit).move( diff );
+        result = true;
+    }
+    // append bookmarks from first part as second
+    if( !bookmarksInFirstPart.isEmpty() )
+    {
+        foreach( KBookmark bookmark, bookmarksInFirstPart )
+        {
+            bookmark.move( secondPartLength );
+            insert( bit, bookmark );
+        }
         result = true;
     }
 
