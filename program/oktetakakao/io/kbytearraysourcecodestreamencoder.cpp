@@ -108,7 +108,7 @@ void KByteArraySourceCodeStreamEncoder::printFormatted( char *buffer, const char
     case SourceCodeStreamEncoderSettings::CharType:
     {
     char e = 0;
-    memcpy( &e, data, qMin(sizeof(e),dataSize) );
+    memcpy( &e, data, qMin<size_t>(sizeof(e),dataSize) );
     sprintf( buffer, "%d", e );
     break;
     }
