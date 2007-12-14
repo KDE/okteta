@@ -49,6 +49,7 @@ KValueColumn::KValueColumn( KColumnsView *CV, KHECore::KAbstractByteArrayModel *
 
 KValueColumn::~KValueColumn()
 {
+  delete ByteCodec;
 }
 
 

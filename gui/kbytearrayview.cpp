@@ -177,6 +177,13 @@ KByteArrayView::~KByteArrayView()
   delete Navigator;
   delete ValueEditor;
   delete CharEditor;
+
+  delete BufferCursor;
+  delete BufferRanges;
+  delete BufferLayout;
+
+  delete Codec;
+  delete CursorPixmaps;
 }
 
 
