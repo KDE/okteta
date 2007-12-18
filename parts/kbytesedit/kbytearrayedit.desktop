@@ -8,6 +8,7 @@ Name[et]=BytesEditi vidin
 Name[pt]=Editor de Bytes
 Name[pt_BR]=Editor de Bytes
 Name[sv]=Byteredigeringskomponent
+Name[xx]=xxBytesEdit Widgetxx
 X-KDE-Library=libkbytearrayedit
 InitialPreference=2
 X-KDE-ServiceTypes=KHexEdit/KBytesEdit
