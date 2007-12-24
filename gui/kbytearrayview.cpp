@@ -1706,7 +1706,9 @@ void KByteArrayView::mouseReleaseEvent( QMouseEvent *Event )
 
         copy();
 
-        connect( QApplication::clipboard(), SIGNAL(selectionChanged()), this, SLOT(clipboardChanged()) );
+        //TODO: why did we do this? And why does the disconnect above not work?
+        // got connected multiple times after a few selections by mouse
+//         connect( QApplication::clipboard(), SIGNAL(selectionChanged()), SLOT(clipboardChanged()) );
         ClipboardMode = QClipboard::Clipboard;
       }
     }
