@@ -20,6 +20,7 @@
 
 // lib
 #include "kcoordrange.h"
+#include <khe_export.h>
 // commonlib
 #include <ksection.h>
 
@@ -48,7 +49,7 @@ namespace KHEUI {
   *
   *@author Friedrich W. H.  Kossebau
   */
-class KDataLayout
+class KHEUI_EXPORT KDataLayout
 {
   public:
     KDataLayout( int NoBpL, int SO, int L );
