@@ -13,6 +13,7 @@ include_directories(
 #   liblistview
   view/libbytearraylineedit
   view/libfinddialog
+  view/libframesprint
 #   chartable
 )
 
@@ -58,6 +59,23 @@ set( GOTOOFFSETCONTROLLER_SRCS
 set( BOOKMARKSCONTROLLER_SRCS
   view/bookmarks/bookmarkscontroller.cpp
 )
+set( LIBFRAMESPRINT_SRCS
+  view/libframesprint/abstractframerenderer.cpp
+  view/libframesprint/framestopaperprinter.cpp
+  view/libframesprint/headerfooterframerenderer.cpp
+)
+set( PRINTCONTROLLER_SRCS
+  view/print/printcontroller.cpp
+  view/print/printtool.cpp
+  view/print/abstractcolumnrenderer.cpp
+  view/print/abstractcolumnframerenderer.cpp
+  view/print/offsetcolumnrenderer.cpp
+  view/print/bordercolumnrenderer.cpp
+  view/print/bytecolumnrenderer.cpp
+  view/print/valuecolumnrenderer.cpp
+  view/print/charcolumnrenderer.cpp
+  view/print/bytearrayframerenderer.cpp
+)
 set( VIEWCONFIGCONTROLLER_SRCS
   view/viewconfig/viewconfigcontroller.cpp
 )
@@ -73,6 +91,8 @@ set( OKTETA_KAKAO_CONTROLLERS_SRCS
   ${REPLACECONTROLLER_SRCS}
   ${INSERTPATTERNCONTROLLER_SRCS}
   ${GOTOOFFSETCONTROLLER_SRCS}
+  ${LIBFRAMESPRINT_SRCS}
+  ${PRINTCONTROLLER_SRCS}
   ${BOOKMARKSCONTROLLER_SRCS}
   ${VIEWCONFIGCONTROLLER_SRCS}
 )
