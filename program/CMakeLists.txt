@@ -31,8 +31,6 @@ set( okteta_SRCS
 kde4_add_executable( okteta  ${okteta_SRCS} )
 
 target_link_libraries( okteta
-  oktetagui
-  oktetacore
   okteta_kakaocontrollers
   okteta_kakaogui
   okteta_kakaoio
@@ -40,6 +38,8 @@ target_link_libraries( okteta
   kakaocontrollers
   kakaogui
   kakaocore
+  oktetagui
+  oktetacore
   ${KDE4_KIO_LIBS}
 )
 
