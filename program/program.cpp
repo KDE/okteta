@@ -78,6 +78,7 @@ int OktetaProgram::execute()
     {
         // no session.. just start up normally
         OktetaMainWindow *mainWindow = new OktetaMainWindow( this );
+        mainWindow->setObjectName( QLatin1String("Shell") );
         mainWindow->show();
 
         KCmdLineArgs *arguments = KCmdLineArgs::parsedArgs();
@@ -115,6 +116,6 @@ void OktetaProgram::quit()
 
 OktetaProgram::~OktetaProgram()
 {
-//     delete mDocumentManager;
-//     delete mViewManager;
+    delete mDocumentManager;
+    delete mViewManager;
 }
