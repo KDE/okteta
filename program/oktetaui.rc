@@ -3,7 +3,7 @@
 <MenuBar>
   <Menu name="file">
     <Menu name="import" append="open_merge">
-      <text>Import</text>
+      <text context="@title:menu">Import</text>
       <!--Action name="import_clipboard" /-->
       <ActionList name="import_list" />
     </Menu>
@@ -11,7 +11,7 @@
     <Action name="save_as_template" />
     <!--Action name="export" append="save_merge" /-->
     <Menu name="export" append="save_merge">
-      <text>Export</text>
+      <text context="@title:menu">Export</text>
       <ActionList name="export_list" />
     </Menu>
     <Separator/>
@@ -27,7 +27,7 @@
   </Menu>
   <Menu name="edit">
     <Menu name="copy_as" append="edit_paste_merge">
-      <text>Copy as</text>
+      <text context="@title:menu">Copy as</text>
       <ActionList name="copy_as_list" />
       <!--Action name="copy_values" />
       <Action name="copy_displayed" />
@@ -42,7 +42,7 @@ Zusammenlegen?
     </Menu-->
     <Action name="goto_offset" />
     <Menu name="insert">
-      <text>Insert</text>
+      <text context="@title:menu">Insert</text>
       <Action name="insert_pattern" />
       <Action name="insert_file" />
     </Menu>
@@ -53,6 +53,10 @@ Zusammenlegen?
     <Separator/>
     <Action name="view_valuecoding" />
     <Action name="view_charencoding" />
+    <Menu name="panels">
+      <text context="@title:menu">Panels</text>
+      <Action name="show_pod_decoder" />
+    </Menu>
     <Separator/>
     <Action name="view_fullscreen"/>
   </Menu>
@@ -74,6 +78,7 @@ Zusammenlegen?
     <Action name="binary_filter" />
     <Action name="char_table" />
     <Action name="converter" />
+    <Action name="pod_decoder" />
     <Separator/>
     <Action name="statistics" />
   </Menu>

@@ -22,19 +22,29 @@
 #include "poddecodertool.h"
 // KDE
 #include <KXmlGuiWindow>
+#include <KActionCollection>
+#include <KLocale>
 // Qt
 #include <QtGui/QDockWidget>
+#include <QtGui/QAction>
 
 
 PODDecoderController::PODDecoderController( KXmlGuiWindow *window )
  : mWindow( window ), mTool( new PODDecoderTool() )
 
 {
+    KActionCollection *actionCollection = mWindow->actionCollection();
+
     QDockWidget *dockWidget = new QDockWidget( mWindow );
     mPrimitiveTypesView = new KPrimitiveTypesView( mTool, dockWidget );
     dockWidget->setWidget( mPrimitiveTypesView );
     mWindow->addDockWidget( Qt::BottomDockWidgetArea, dockWidget );
     //Window->addToolWidget( mPrimitiveTypesView );
+
+    QAction *action = dockWidget->toggleViewAction();
+    action->setText( i18nc("@title:window", "Decoding table") ); //TODO: better name needed!
+//     action->setShortcut( Qt::Key_F7 );
+    actionCollection->addAction( "show_pod_decoder", action );
 
     mPrimitiveTypesView->onDataChange();
 }
