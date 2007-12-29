@@ -90,14 +90,15 @@ void HeaderFooterFrameRenderer::prepare()
     tagReplacements['y'] = KGlobal::locale()->formatDate( dateTime.date(), KLocale::ShortDate );
     tagReplacements['Y'] = KGlobal::locale()->formatDate( dateTime.date(), KLocale::LongDate );
     tagReplacements['u'] = user.loginName();
+    tagReplacements['U'] = user.fullName();
 //     tagReplacements['f'] = isSelection ? i18n("(Selection of) %1", url.fileName()) : url.fileName();
     tagReplacements['f'] = url.fileName();
-    tagReplacements['U'] = url.prettyUrl();
+    tagReplacements['F'] = url.prettyUrl();
     tagReplacements['P'] = QString::number( mInfo->noOfPages() );
 
     // create text with globally replaced tags
     const int sizeOfTag = 2;
-    QRegExp tagsPattern( "%([dDhyYufUP])" );
+    QRegExp tagsPattern( "%([dDhyYuUfFP])" );
 
     mGloballyReplacedTextList.clear();
 
