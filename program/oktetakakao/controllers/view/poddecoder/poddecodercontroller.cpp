@@ -19,82 +19,32 @@
 
 // controller
 #include "kprimitivetypesview.h"
-//
-#include <kbytearraydocument.h>
-// Okteta gui
-#include <kbytearrayview.h>
-// Okteta core
-#include <kbytearraymodel.h>
-// kakao
-#include <kviewmanager.h>
+#include "poddecodertool.h"
 // KDE
 #include <KXmlGuiWindow>
 // Qt
 #include <QtGui/QDockWidget>
 
 
-PODDecoderController::PODDecoderController( KViewManager */*ViewManager*/, KXmlGuiWindow *MW )
- : MainWindow( MW ), ViewWidget( 0 ), ByteArray( 0 ), CursorIndex( 0 )
-{
-    QDockWidget *DW = new QDockWidget( MainWindow );
-    PrimitiveTypesView = new KPrimitiveTypesView( DW );
-    DW->setWidget( PrimitiveTypesView );
-    MainWindow->addDockWidget( Qt::BottomDockWidgetArea, DW );
-    //Window->addToolWidget( PrimitiveTypesView );
+PODDecoderController::PODDecoderController( KXmlGuiWindow *window )
+ : mWindow( window ), mTool( new PODDecoderTool() )
 
-    // force unset
-    update();
+{
+    QDockWidget *dockWidget = new QDockWidget( mWindow );
+    mPrimitiveTypesView = new KPrimitiveTypesView( mTool, dockWidget );
+    dockWidget->setWidget( mPrimitiveTypesView );
+    mWindow->addDockWidget( Qt::BottomDockWidgetArea, dockWidget );
+    //Window->addToolWidget( mPrimitiveTypesView );
+
+    mPrimitiveTypesView->onDataChange();
 }
 
-void PODDecoderController::setView( KAbstractView *View )
+void PODDecoderController::setView( KAbstractView *view )
 {
-    disconnect( ViewWidget );
-    disconnect( ByteArray );
-
-    ViewWidget = View ? static_cast<KHEUI::KByteArrayView *>( View->widget() ) : 0;
-    KByteArrayDocument *Document = View ? static_cast<KByteArrayDocument*>( View->document() ) : 0;
-    ByteArray = Document ? Document->content() : 0;
-
-    if( ByteArray && ViewWidget )
-    {
-        CursorIndex = ViewWidget->cursorPosition();
-        connect( ViewWidget, SIGNAL(cursorPositionChanged( int )), SLOT(onCursorPositionChange( int )) );
-        connect( ByteArray, SIGNAL(contentsChanged( int, int )), SLOT(onContentsChange( int, int )) );
-        PrimitiveTypesView->setCharCode( ViewWidget->encodingName() );
-        PrimitiveTypesView->setUndefinedChar( ViewWidget->undefinedChar() ); // TODO: track config changes in ViewWidget
-    }
-    // force painting
-    update();
-}
-#include <kdebug.h>
-
-void PODDecoderController::onCursorPositionChange( int Pos )
-{
-// kDebug() << "onCursorPositionChange "<< Pos << endl;
-    CursorIndex = Pos;
-    update();
+    mTool->setView( view );
 }
 
-void PODDecoderController::onContentsChange( int Start, int End )
+PODDecoderController::~PODDecoderController()
 {
-// kDebug() << "onContentsChange "<< Start <<" " <<End<< endl;
-    if( Start-DecodeDataSize < CursorIndex && CursorIndex <= End )
-        update();
-}
-
-// TODO: support display of chunks shorter than 4
-void PODDecoderController::update()
-{
-    unsigned char *CurrentData;
-
-    // interpreted range out of bounds?
-    if( !ByteArray || CursorIndex+DecodeDataSize > ByteArray->size() )
-        CurrentData = 0;
-    else
-    {
-        ByteArray->copyTo( (char*)Data, CursorIndex, DecodeDataSize );
-        CurrentData = Data;
-    }
-
-    PrimitiveTypesView->onByteArrayChange( CurrentData );
+    delete mTool;
 }

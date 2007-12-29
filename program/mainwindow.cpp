@@ -72,7 +72,7 @@ void OktetaMainWindow::setupControllers()
   mControllers.append( new ClipboardController(this) );
   mControllers.append( new CopyAsController(mProgram->documentManager(),this) );
 
-  mControllers.append( new PODDecoderController(mProgram->viewManager(),this) );
+  mControllers.append( new PODDecoderController(this) );
 //   mControllers.append( new CharTableController(this) );
 //   mControllers.append( new StatisticController(this) );
   mControllers.append( new SearchController(this) );

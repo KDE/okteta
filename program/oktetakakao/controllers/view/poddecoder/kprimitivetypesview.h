@@ -25,29 +25,28 @@
 // Qt
 #include <QtGui/QWidget>
 
-class QComboBox;
-class QLineEdit;
-class QCheckBox;
+class PODDecoderTool;
 namespace KHECore {
 class KCharCodec;
 }
+class QComboBox;
+class QLineEdit;
+class QCheckBox;
 
 class KPrimitiveTypesView : public QWidget
 {
   Q_OBJECT
 
   public:
-    KPrimitiveTypesView( QWidget *Parent = 0 );
+    KPrimitiveTypesView( PODDecoderTool *tool, QWidget *parent = 0 );
     ~KPrimitiveTypesView();
 
-  public: // QWidget API
-//     virtual void setFont(
   public:
-    void setUndefinedChar( const QChar &Char );
-    void setCharCode( const QString &CodeName );
+    void setUndefinedChar( const QChar &undefinedChar );
+    void setCharCode( const QString &codeName );
 
   public Q_SLOTS:
-    void onByteArrayChange( const unsigned char *ByteArray );
+    void onDataChange();
 
     void fontChanged();
     void onEndianActivation( int );
@@ -55,17 +54,20 @@ class KPrimitiveTypesView : public QWidget
     void onBitWidthChange( int );
 
   protected:
-    const unsigned char *ByteArray;
+    static const int NoOfRows = 4;
 
-    QLineEdit *Int8Int16Display[4];
-    QLineEdit *Int32FloatDisplay[4];
-    QLineEdit *ByteCodeDisplay[4];
-    QComboBox *EndianSelection;
-    QCheckBox *UnsignedAsHexCheck;
-    QComboBox *BitWidthSelection;
+  protected:
+    PODDecoderTool *mTool;
 
-    KHECore::KCharCodec *CharCodec;
-    QChar UndefinedChar;
+    QLineEdit *mInt8Int16Display[NoOfRows];
+    QLineEdit *mInt32FloatDisplay[NoOfRows];
+    QLineEdit *mByteCodeDisplay[NoOfRows];
+    QComboBox *mEndianSelection;
+    QCheckBox *mUnsignedAsHexCheck;
+    QComboBox *mBitWidthSelection;
+
+    KHECore::KCharCodec *mCharCodec;
+    QChar mUndefinedChar;
 };
 
 #endif

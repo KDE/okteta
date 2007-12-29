@@ -32,6 +32,8 @@ set( FINDDIALOG_LIB_SRCS
   view/libfinddialog/kabstractfinddialog.cpp
 )
 set( PODDECODERCONTROLLER_SRCS
+  view/poddecoder/poddata.cpp
+  view/poddecoder/poddecodertool.cpp
   view/poddecoder/kprimitivetypesview.cpp
   view/poddecoder/poddecodercontroller.cpp
 )

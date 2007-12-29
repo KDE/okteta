@@ -22,45 +22,24 @@
 // kakao
 #include <kviewcontroller.h>
 
+class PODDecoderTool;
 class KXmlGuiWindow;
-class KViewManager;
 class KPrimitiveTypesView;
-namespace KHECore {
-class KAbstractByteArrayModel;
-}
-namespace KHEUI {
-class KByteArrayView;
-}
-
 
 class PODDecoderController : public KViewController
 {
-  Q_OBJECT
-
   public:
-    PODDecoderController( KViewManager *ViewManager, KXmlGuiWindow *MW );
+    PODDecoderController( KXmlGuiWindow *window );
+    virtual ~PODDecoderController();
 
-  public: // KToolet API
+  public: // KViewController API
     virtual void setView( KAbstractView *View );
 
   protected:
-    void update();
-  protected Q_SLOTS:
-    void onCursorPositionChange( int Pos );
-    void onContentsChange( int Start, int End );
+    KXmlGuiWindow *mWindow;
 
-  protected:
-    static const int DecodeDataSize = 8;
-
-  protected:
-//     KProgram *Program;
-    KXmlGuiWindow *MainWindow;
-    KHEUI::KByteArrayView *ViewWidget;
-    KHECore::KAbstractByteArrayModel *ByteArray;
-    int CursorIndex;
-
-    KPrimitiveTypesView *PrimitiveTypesView;
-    unsigned char Data[DecodeDataSize];
+    PODDecoderTool *mTool;
+    KPrimitiveTypesView *mPrimitiveTypesView;
 };
 
 #endif
