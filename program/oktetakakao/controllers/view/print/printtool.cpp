@@ -86,9 +86,9 @@ void PrintTool::print( KByteArrayDocument *document )
         headerFrameRenderer->setPos( pageRect.topLeft() );
 
         HeaderFooterFrameRenderer *footerFrameRenderer = new HeaderFooterFrameRenderer( &info );
-        footerFrameRenderer->setTexts( QString("Printed by: %u"),
+        footerFrameRenderer->setTexts( QString("Printed by: %U"),
                                        QString("Okteta, built on KDE4"),
-                                       QString("%U") );
+                                       QString("%F") );
         footerFrameRenderer->setWidth( width );
         const int footerTop = pageRect.bottom() - footerFrameRenderer->height();
         footerFrameRenderer->setPos( left, footerTop );
