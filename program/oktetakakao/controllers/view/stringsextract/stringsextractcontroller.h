@@ -45,6 +45,7 @@ class StringsExtractController : public KViewController
 
   protected Q_SLOTS:
     void showTool();
+    void onCharCodecChange( const QString &codeName );
 
   protected:
     KXmlGuiWindow *mWindow;

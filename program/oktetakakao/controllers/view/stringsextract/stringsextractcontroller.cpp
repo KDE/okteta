@@ -55,6 +55,8 @@ StringsExtractController::StringsExtractController( KXmlGuiWindow *window )
 // TODO: tools should get the setView, and the controller should get informed
 void StringsExtractController::setView( KAbstractView *view )
 {
+    disconnect( mViewWidget );
+
     mViewWidget = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
     mDocument = view ? static_cast<KByteArrayDocument*>( view->document() ) : 0;
 
@@ -65,6 +67,7 @@ void StringsExtractController::setView( KAbstractView *view )
     {
         mStringsExtractTool->setDocument( mDocument );
         mStringsExtractTool->setCharCodec( mViewWidget->encodingName() );
+        connect( mViewWidget, SIGNAL(charCodecChanged( const QString & )), SLOT(onCharCodecChange( const QString &)) );
     }
 }
 
@@ -81,8 +84,14 @@ void StringsExtractController::showTool()
         mStringsExtractDialog = new StringsExtractDialog( mStringsExtractTool, mWindow );
 
         mStringsExtractTool->extract();
+        connect( mViewWidget, SIGNAL(charCodecChanged( const QString & )), SLOT(onCharCodecChange( const QString &)) );
     }
     mStringsExtractDialog->show();
+}
+
+void StringsExtractController::onCharCodecChange( const QString &codeName )
+{
+    mStringsExtractTool->setCharCodec( codeName );
 }
 
 StringsExtractController::~StringsExtractController()
