@@ -23,6 +23,7 @@
 #include <poddecoder/poddecodercontroller.h>
 // #include <chartable/chartablecontroller.h>
 // #include <statistic/statisticcontroller.h>
+#include <stringsextract/stringsextractcontroller.h>
 #include <insertpattern/insertpatterncontroller.h>
 #include <gotooffset/gotooffsetcontroller.h>
 #include <search/searchcontroller.h>
@@ -75,6 +76,7 @@ void OktetaMainWindow::setupControllers()
   mControllers.append( new PODDecoderController(this) );
 //   mControllers.append( new CharTableController(this) );
 //   mControllers.append( new StatisticController(this) );
+  mControllers.append( new StringsExtractController(this) );
   mControllers.append( new SearchController(this) );
   mControllers.append( new ReplaceController(this) );
   mControllers.append( new GotoOffsetController(this) );
