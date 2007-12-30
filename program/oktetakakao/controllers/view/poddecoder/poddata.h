@@ -19,7 +19,7 @@
 #define PODDATA_H
 
 // Qt
-#include <Qt>
+#include <QtCore/Qt>
 
 class PODData
 {
