@@ -344,6 +344,8 @@ void KByteArrayView::setCoding( KCoding C )
     updateColumn( valueColumn() );
   else
     updateViewByWidth();
+
+  emit valueCodingChanged( C );
 }
 
 
@@ -448,6 +450,8 @@ void KByteArrayView::setEncoding( KEncoding C )
   updateColumn( valueColumn() );
   updateColumn( charColumn() );
   unpauseCursor();
+
+  emit charCodecChanged( NC->name() );
 }
 
 // TODO: join with function above!
@@ -471,6 +475,8 @@ void KByteArrayView::setEncoding( const QString& EncodingName )
   updateColumn( valueColumn() );
   updateColumn( charColumn() );
   unpauseCursor();
+
+  emit charCodecChanged( NC->name() );
 }
 
 

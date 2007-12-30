@@ -370,6 +370,10 @@ class KHEUI_EXPORT KByteArrayView : public KColumnsView
     void cutAvailable( bool Really );
     /** there is a copy available or not */
     void copyAvailable( bool Really );
+    /** */
+    void charCodecChanged( const QString &codecName );
+    /** */
+    void valueCodingChanged( KCoding coding );
 
 
   protected: // QWidget API
