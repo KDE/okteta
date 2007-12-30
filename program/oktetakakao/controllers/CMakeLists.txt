@@ -24,6 +24,11 @@ set( STATISTICCONTROLLER_SRCS
   document/statistic/fileinfodialog.cpp
   document/statistic/statisticcontroller.cpp
 )
+set( STRINGSEXTRACTCONTROLLER_SRCS
+  view/stringsextract/stringsextracttool.cpp
+  view/stringsextract/stringsextractdialog.cpp
+  view/stringsextract/stringsextractcontroller.cpp
+)
 set( BYTEARRAYLINEEDIT_LIB_SRCS
   view/libbytearraylineedit/kbytearrayvalidator.cpp
   view/libbytearraylineedit/kbytearraylineedit.cpp
@@ -86,6 +91,7 @@ set( OKTETA_KAKAO_CONTROLLERS_SRCS
 #   ${LIBLISTVIEW_SRCS}
   ${BYTEARRAYLINEEDIT_LIB_SRCS}
   ${PODDECODERCONTROLLER_SRCS}
+ ${STRINGSEXTRACTCONTROLLER_SRCS}
 #   ${CHARTABLECONTROLLER_SRCS}
 #   ${STATISTICCONTROLLER_SRCS}
   ${FINDDIALOG_LIB_SRCS}
