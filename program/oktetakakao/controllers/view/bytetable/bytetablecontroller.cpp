@@ -20,14 +20,6 @@
 // controller
 #include "bytetableview.h"
 #include "bytetabletool.h"
-//
-#include <kbytearraydocument.h>
-// kakao
-#include <kabstractview.h>
-// Okteta gui
-#include <kbytearrayview.h>
-// Okteta core
-#include <kbytearraymodel.h>
 // KDE
 #include <KLocale>
 #include <KXmlGuiWindow>
