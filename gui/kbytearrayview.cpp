@@ -260,7 +260,7 @@ void KByteArrayView::setOverwriteMode( bool OM )
 
 void KByteArrayView::setByteArrayModel( KHECore::KAbstractByteArrayModel *B )
 {
-  disconnect( ByteArrayModel );
+  ByteArrayModel->disconnect( this );
 
   ValueEditor->reset();
   CursorPaused = true;
