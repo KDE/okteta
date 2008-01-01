@@ -43,7 +43,7 @@ KPrimitiveTypesView::KPrimitiveTypesView( PODDecoderTool *tool, QWidget *parent 
 
     // values
     QGridLayout *baseLayout = new QGridLayout( this );
-    baseLayout->setMargin( KDialog::marginHint() );
+    baseLayout->setMargin( 0 );//KDialog::marginHint() );
     baseLayout->setSpacing( KDialog::spacingHint() );
     baseLayout->setColumnStretch( 3, 10 );
 
@@ -262,8 +262,8 @@ void KPrimitiveTypesView::onDataChange()
             mByteCodeDisplay[2]->setText( SimpleMask.arg(bits,numBits,DualBase,ZeroChar) );
         }
 
-        const KHECore::KChar undefinedChar = mCharCodec->decode( *(unsigned char*)P8Bit );
-        mByteCodeDisplay[3]->setText( QString(undefinedChar.isUndefined()?mUndefinedChar:(QChar)undefinedChar) );
+        const KHECore::KChar decodedChar = mCharCodec->decode( *(unsigned char*)P8Bit );
+        mByteCodeDisplay[3]->setText( QString(decodedChar.isUndefined()?mUndefinedChar:(QChar)decodedChar) );
     }
     else
         for( int i=0; i<NoOfRows; ++i )
