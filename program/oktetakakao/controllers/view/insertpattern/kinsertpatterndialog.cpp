@@ -37,7 +37,7 @@ KInsertPatternDialog::KInsertPatternDialog( QWidget *parent )
 {
     setCaption( i18n("Insert Pattern") );
     setButtons( Ok | Cancel );
-    setButtonGuiItem( Ok, KGuiItem(i18n("&Insert"), "insert",
+    setButtonGuiItem( Ok, KGuiItem(i18n("&Insert"), 0,//"insert",
                       i18n("Insert the pattern"),
                       i18n("<qt>If you press the <b>Insert</b> button, the pattern you entered "
                            "above are inserted in the document at the cursor position.</qt>")));

@@ -37,7 +37,7 @@ KReplaceDialog::KReplaceDialog( QWidget *parent )
  : KAbstractFindDialog( parent )
 {
     setCaption( i18n("Replace Bytes") );
-    setButtonGuiItem( Ok, KGuiItem( i18n("&Replace"), "replace",
+    setButtonGuiItem( Ok, KGuiItem( i18n("&Replace"), "edit-find-replace",
                       i18n("Start replace"),
                       i18n("<qt>If you press the <b>Replace</b> button, the bytes you entered "
                            "above are searched for within the document and any occurrence is "

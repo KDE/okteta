@@ -26,7 +26,7 @@ KSearchDialog::KSearchDialog( QWidget *parent )
  : KAbstractFindDialog( parent )
 {
     setCaption( i18n("Find Bytes") );
-    setButtonGuiItem( Ok, KGuiItem( i18n("&Find"), "find",
+    setButtonGuiItem( Ok, KGuiItem( i18n("&Find"), "edit-find",
                       i18n("Start searching"),
                       i18n("<qt>If you press the <b>Find</b> button, the bytes you entered "
                            "above are searched for within the document.</qt>")));
