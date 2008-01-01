@@ -10,11 +10,9 @@ include_directories(
   ../document
   ../io
   ../view
-#   liblistview
   view/libbytearraylineedit
   view/libfinddialog
   view/libframesprint
-#   chartable
 )
 
 set( LIBLISTVIEW_SRCS
@@ -42,9 +40,11 @@ set( PODDECODERCONTROLLER_SRCS
   view/poddecoder/kprimitivetypesview.cpp
   view/poddecoder/poddecodercontroller.cpp
 )
-set( CHARTABLECONTROLLER_SRCS
-  view/chartable/chartabledialog.cpp
-  view/chartable/chartablecontroller.cpp
+set( BYTETABLECONTROLLER_SRCS
+  view/bytetable/bytetablemodel.cpp
+  view/bytetable/bytetabletool.cpp
+  view/bytetable/bytetableview.cpp
+  view/bytetable/bytetablecontroller.cpp
 )
 set( SEARCHCONTROLLER_SRCS
   view/search/ksearchdialog.cpp
@@ -88,11 +88,10 @@ set( VIEWCONFIGCONTROLLER_SRCS
 )
 
 set( OKTETA_KAKAO_CONTROLLERS_SRCS
-#   ${LIBLISTVIEW_SRCS}
   ${BYTEARRAYLINEEDIT_LIB_SRCS}
   ${PODDECODERCONTROLLER_SRCS}
- ${STRINGSEXTRACTCONTROLLER_SRCS}
-#   ${CHARTABLECONTROLLER_SRCS}
+  ${STRINGSEXTRACTCONTROLLER_SRCS}
+  ${BYTETABLECONTROLLER_SRCS}
 #   ${STATISTICCONTROLLER_SRCS}
   ${FINDDIALOG_LIB_SRCS}
   ${SEARCHCONTROLLER_SRCS}
