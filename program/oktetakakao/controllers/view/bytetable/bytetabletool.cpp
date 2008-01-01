@@ -38,6 +38,8 @@ ByteTableTool::ByteTableTool()
 }
 
 ByteTableModel *ByteTableTool::byteTableModel() const { return mByteTableModel; }
+bool ByteTableTool::hasByteArrayView() const { return ( mByteArrayView != 0 ); }
+
 
 void ByteTableTool::setView( KAbstractView *view )
 {
@@ -54,7 +56,7 @@ void ByteTableTool::setView( KAbstractView *view )
         connect( mByteArrayView,  SIGNAL(charCodecChanged( const QString & )),
                  mByteTableModel, SLOT(setCharCodec( const QString &)) );
     }
-    emit modelChanged( mByteArrayModel != 0 );
+    emit byteArrayViewChanged( mByteArrayView != 0 );
 }
 
 void ByteTableTool::insert( unsigned char byte, int count )

@@ -50,9 +50,10 @@ class ByteTableTool : public QObject
 
   public:
     ByteTableModel *byteTableModel() const;
+    bool hasByteArrayView() const;
 
   Q_SIGNALS:
-    void modelChanged( bool hasModel );
+    void byteArrayViewChanged( bool hasByteArrayView );
 
   protected:
     ByteTableModel *mByteTableModel;

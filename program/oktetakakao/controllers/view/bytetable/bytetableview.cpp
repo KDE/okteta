@@ -44,6 +44,7 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget *parent )
     mByteTableView = new QTreeView( this );
     mByteTableView->setObjectName( "ByteTable" );
     mByteTableView->setRootIsDecorated( false );
+    mByteTableView->setItemsExpandable( false );
     mByteTableView->setUniformRowHeights( true );
     mByteTableView->setAllColumnsShowFocus( true );
     mByteTableView->setSortingEnabled( false );
@@ -69,8 +70,8 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget *parent )
     mInsertCountSpinBox->setValue( 1 );
     insertLayout->addWidget( mInsertCountSpinBox );
     mInsertButton = new KPushButton( KStandardGuiItem::insert(), this );
-    mInsertButton->setEnabled( mTool->byteTableModel() != 0 );
-    connect( mTool, SIGNAL(modelChanged(bool)), mInsertButton, SLOT( setEnabled(bool )) );
+    mInsertButton->setEnabled( mTool->hasByteArrayView() );
+    connect( mTool, SIGNAL(byteArrayViewChanged(bool)), mInsertButton, SLOT( setEnabled(bool )) );
     connect( mInsertButton, SIGNAL(clicked(bool)), SLOT(onInsertClicked()) ); 
     insertLayout->addWidget( mInsertButton );
 
@@ -80,7 +81,7 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget *parent )
 
 void ByteTableView::onDoubleClicked( const QModelIndex &index )
 {
-    if( mTool->byteTableModel() == 0 )
+    if( !mTool->hasByteArrayView() )
         return;
 
     const unsigned char byte = index.row();
@@ -89,7 +90,8 @@ void ByteTableView::onDoubleClicked( const QModelIndex &index )
 
 void ByteTableView::onInsertClicked()
 {
-    mTool->insert( mByteTableView->currentIndex().row(), mInsertCountSpinBox->value() );
+    const unsigned char byte = mByteTableView->currentIndex().row();
+    mTool->insert( byte, mInsertCountSpinBox->value() );
 }
 
 ByteTableView::~ByteTableView() {}
