@@ -55,7 +55,7 @@ StringsExtractController::StringsExtractController( KXmlGuiWindow *window )
 // TODO: tools should get the setView, and the controller should get informed
 void StringsExtractController::setView( KAbstractView *view )
 {
-    disconnect( mViewWidget );
+    mViewWidget->disconnect( this );
 
     mViewWidget = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
     mDocument = view ? static_cast<KByteArrayDocument*>( view->document() ) : 0;

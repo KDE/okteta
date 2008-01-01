@@ -174,7 +174,7 @@ bool KAbstractDocumentFileSystemSynchronizer::syncWithUrl( const KUrl &newUrl,
             // care for old url
             if( url().isLocalFile() )
             {
-                disconnect( KDirWatch::self() );
+                KDirWatch::self()->disconnect( this );
                 KDirWatch::self()->removeFile( url().path() );
             }
 

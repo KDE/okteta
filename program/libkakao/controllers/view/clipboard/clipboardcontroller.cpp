@@ -47,7 +47,7 @@ ClipboardController::ClipboardController( KXmlGuiWindow *window )
 
 void ClipboardController::setView( KAbstractView *view )
 {
-    disconnect( mView );
+    mView->disconnect( this );
 
     mView = view;
     mSelectionControl = view ? qobject_cast<KDE::If::DataSelectable *>( view ) : 0;

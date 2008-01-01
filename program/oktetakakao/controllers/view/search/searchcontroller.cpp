@@ -52,7 +52,7 @@ SearchController::SearchController( KXmlGuiWindow *MW )
 
 void SearchController::setView( KAbstractView *View )
 {
-    disconnect( ViewWidget );
+    ViewWidget->disconnect( this );
 
     ViewWidget = View ? static_cast<KHEUI::KByteArrayView *>( View->widget() ) : 0;
     KByteArrayDocument *Document = View ? static_cast<KByteArrayDocument*>( View->document() ) : 0;

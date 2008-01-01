@@ -54,7 +54,7 @@ InsertPatternController::InsertPatternController( KXmlGuiWindow *window )
 
 void InsertPatternController::setView( KAbstractView *view )
 {
-    disconnect( mViewWidget );
+    mViewWidget->disconnect( this );
 
     mViewWidget = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
     KByteArrayDocument *document = view ? static_cast<KByteArrayDocument*>( view->document() ) : 0;
