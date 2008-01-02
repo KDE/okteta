@@ -60,10 +60,7 @@ class ByteTableModel : public QAbstractTableModel
     void setCharCodec( const QString &codecName );
 
   protected:
-    KHECore::KByteCodec *mDecimalCodec;
-    KHECore::KByteCodec *mHexadecimalCodec;
-    KHECore::KByteCodec *mOctalCodec;
-    KHECore::KByteCodec *mBinaryCodec;
+    KHECore::KByteCodec *mValueCodec[4];
     KHECore::KCharCodec *mCharCodec;
     QChar mUndefinedChar;
 };

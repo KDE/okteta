@@ -29,13 +29,13 @@ static const unsigned char DefaultUndefinedChar = '?';
 
 ByteTableModel::ByteTableModel( QObject *parent )
  : QAbstractTableModel( parent ),
-   mDecimalCodec( KHECore::KByteCodec::createCodec(KHECore::DecimalCoding) ),
-   mHexadecimalCodec( KHECore::KByteCodec::createCodec(KHECore::HexadecimalCoding) ),
-   mOctalCodec( KHECore::KByteCodec::createCodec(KHECore::OctalCoding) ),
-   mBinaryCodec( KHECore::KByteCodec::createCodec(KHECore::BinaryCoding) ),
    mCharCodec( KHECore::KCharCodec::createCodec(KHECore::LocalEncoding) ),
    mUndefinedChar( DefaultUndefinedChar )
 {
+   mValueCodec[DecimalId] = KHECore::KByteCodec::createCodec( KHECore::DecimalCoding );
+   mValueCodec[HexadecimalId] = KHECore::KByteCodec::createCodec( KHECore::HexadecimalCoding );
+   mValueCodec[OctalId] = KHECore::KByteCodec::createCodec( KHECore::OctalCoding );
+   mValueCodec[BinaryId] = KHECore::KByteCodec::createCodec( KHECore::BinaryCoding );
 }
 
 void ByteTableModel::setUndefinedChar( const QChar &undefinedChar )
@@ -76,31 +76,17 @@ QVariant ByteTableModel::data( const QModelIndex &index, int role ) const
         QString content;
 
         const unsigned char byte = index.row();
-        switch( index.column() )
-        {
-        case DecimalId:
-            mDecimalCodec->encode( content, 0, byte );
-            break;
-        case HexadecimalId:
-            mHexadecimalCodec->encode( content, 0, byte );
-            break;
-        case OctalId:
-            mOctalCodec->encode( content, 0, byte );
-            break;
-        case BinaryId:
-            mBinaryCodec->encode( content, 0, byte );
-            break;
-        case CharacterId:
+        const int column = index.column();
+        if( column == CharacterId )
         {
             const KHECore::KChar decodedChar = mCharCodec->decode( byte );
             content = decodedChar.isUndefined() ?
                 i18nc( "character is not defined", "undef." ) :
                 QString( (QChar)decodedChar );
-            break;
         }
-        default:
-            ;
-        }
+        else if( column < CharacterId )
+            mValueCodec[column]->encode( content, 0, byte );
+
         result = content;
     }
     else if( role == Qt::TextAlignmentRole )
@@ -111,11 +97,21 @@ QVariant ByteTableModel::data( const QModelIndex &index, int role ) const
 
 QVariant ByteTableModel::headerData( int section, Qt::Orientation orientation, int role ) const
 {
-Q_UNUSED( orientation );
-
     QVariant result;
 
     if( role == Qt::DisplayRole )
+    {
+        QString titel =
+            section == DecimalId ?     i18nc("short for Decimal",    "Dec") :
+            section == HexadecimalId ? i18nc("short for Hexadecimal","Hex") :
+            section == OctalId ?       i18nc("short for Octal",      "Oct") :
+            section == BinaryId ?      i18nc("short for Binary",     "Bin") :
+            section == CharacterId ?   i18nc("short for Character",  "Char") :
+            QString();
+        result = titel;
+        return result;
+    }
+    else if( role == Qt::ToolTipRole )
     {
         QString titel =
             section == DecimalId ?     i18n("Decimal") :
@@ -133,9 +129,7 @@ Q_UNUSED( orientation );
 
 ByteTableModel::~ByteTableModel()
 {
-    delete mDecimalCodec;
-    delete mHexadecimalCodec;
-    delete mOctalCodec;
-    delete mBinaryCodec;
+    for( int i=0; i<4; ++i )
+        delete mValueCodec[i];
     delete mCharCodec;
 }
