@@ -32,10 +32,15 @@ ByteTableModel::ByteTableModel( QObject *parent )
    mCharCodec( KHECore::KCharCodec::createCodec(KHECore::LocalEncoding) ),
    mUndefinedChar( DefaultUndefinedChar )
 {
-   mValueCodec[DecimalId] = KHECore::KByteCodec::createCodec( KHECore::DecimalCoding );
-   mValueCodec[HexadecimalId] = KHECore::KByteCodec::createCodec( KHECore::HexadecimalCoding );
-   mValueCodec[OctalId] = KHECore::KByteCodec::createCodec( KHECore::OctalCoding );
-   mValueCodec[BinaryId] = KHECore::KByteCodec::createCodec( KHECore::BinaryCoding );
+    static const KHECore::KCoding CodingIds[NofOfValueCodings] =
+    {
+        KHECore::DecimalCoding,
+        KHECore::HexadecimalCoding,
+        KHECore::OctalCoding,
+        KHECore::BinaryCoding
+    };
+    for( int i=0; i<NofOfValueCodings; ++i )
+        mValueCodec[i] = KHECore::KByteCodec::createCodec( CodingIds[i] );
 }
 
 void ByteTableModel::setUndefinedChar( const QChar &undefinedChar )
@@ -129,7 +134,7 @@ QVariant ByteTableModel::headerData( int section, Qt::Orientation orientation, i
 
 ByteTableModel::~ByteTableModel()
 {
-    for( int i=0; i<4; ++i )
+    for( int i=0; i<NofOfValueCodings; ++i )
         delete mValueCodec[i];
     delete mCharCodec;
 }
