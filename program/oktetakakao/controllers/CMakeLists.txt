@@ -18,9 +18,11 @@ include_directories(
 set( LIBLISTVIEW_SRCS
   liblistview/listview.cpp
 )
-set( STATISTICCONTROLLER_SRCS
-  document/statistic/fileinfodialog.cpp
-  document/statistic/statisticcontroller.cpp
+set( INFOCONTROLLER_SRCS
+  view/info/statistictablemodel.cpp
+  view/info/infotool.cpp
+  view/info/infoview.cpp
+  view/info/infocontroller.cpp
 )
 set( STRINGSEXTRACTCONTROLLER_SRCS
   view/stringsextract/stringsextracttool.cpp
@@ -92,7 +94,7 @@ set( OKTETA_KAKAO_CONTROLLERS_SRCS
   ${PODDECODERCONTROLLER_SRCS}
   ${STRINGSEXTRACTCONTROLLER_SRCS}
   ${BYTETABLECONTROLLER_SRCS}
-#   ${STATISTICCONTROLLER_SRCS}
+  ${INFOCONTROLLER_SRCS}
   ${FINDDIALOG_LIB_SRCS}
   ${SEARCHCONTROLLER_SRCS}
   ${REPLACECONTROLLER_SRCS}
