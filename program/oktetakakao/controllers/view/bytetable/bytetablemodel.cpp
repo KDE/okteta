@@ -26,6 +26,7 @@
 
 
 static const unsigned char DefaultUndefinedChar = '?';
+static const int ByteSetSize = 256;
 
 ByteTableModel::ByteTableModel( QObject *parent )
  : QAbstractTableModel( parent ),
@@ -47,7 +48,7 @@ void ByteTableModel::setUndefinedChar( const QChar &undefinedChar )
 {
     mUndefinedChar = undefinedChar;
 
-    emit dataChanged( index(0,CharacterId), index(255,CharacterId) );
+    emit dataChanged( index(0,CharacterId), index(ByteSetSize-1,CharacterId) );
 }
 
 void ByteTableModel::setCharCodec( const QString &codeName )
@@ -58,19 +59,19 @@ void ByteTableModel::setCharCodec( const QString &codeName )
     delete mCharCodec;
     mCharCodec = KHECore::KCharCodec::createCodec( codeName );
 
-    emit dataChanged( index(0,CharacterId), index(255,CharacterId) );
+    emit dataChanged( index(0,CharacterId), index(ByteSetSize-1,CharacterId) );
 }
 
 int ByteTableModel::rowCount( const QModelIndex &parent ) const
 {
 Q_UNUSED( parent )
-    return 256;
+    return ByteSetSize;
 }
 
 int ByteTableModel::columnCount( const QModelIndex &parent ) const
 {
 Q_UNUSED( parent )
-    return 5;
+    return NoOfIds;
 }
 
 QVariant ByteTableModel::data( const QModelIndex &index, int role ) const
@@ -106,7 +107,7 @@ QVariant ByteTableModel::headerData( int section, Qt::Orientation orientation, i
 
     if( role == Qt::DisplayRole )
     {
-        QString titel =
+        const QString titel =
             section == DecimalId ?     i18nc("short for Decimal",    "Dec") :
             section == HexadecimalId ? i18nc("short for Hexadecimal","Hex") :
             section == OctalId ?       i18nc("short for Octal",      "Oct") :
@@ -114,11 +115,10 @@ QVariant ByteTableModel::headerData( int section, Qt::Orientation orientation, i
             section == CharacterId ?   i18nc("short for Character",  "Char") :
             QString();
         result = titel;
-        return result;
     }
     else if( role == Qt::ToolTipRole )
     {
-        QString titel =
+        const QString titel =
             section == DecimalId ?     i18n("Decimal") :
             section == HexadecimalId ? i18n("Hexadecimal") :
             section == OctalId ?       i18n("Octal") :
@@ -126,10 +126,11 @@ QVariant ByteTableModel::headerData( int section, Qt::Orientation orientation, i
             section == CharacterId ?   i18n("Character") :
             QString();
         result = titel;
-        return result;
     }
     else
-        return QAbstractTableModel::headerData( section, orientation, role );
+        result = QAbstractTableModel::headerData( section, orientation, role );
+
+    return result;
 }
 
 ByteTableModel::~ByteTableModel()
