@@ -57,6 +57,7 @@ Zusammenlegen?
       <text context="@title:menu">Panels</text>
       <Action name="show_pod_decoder" />
       <Action name="show_byte_table" />
+      <Action name="show_info" />
     </Menu>
     <Separator/>
     <Action name="view_fullscreen"/>
