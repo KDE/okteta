@@ -373,7 +373,7 @@ class KHEUI_EXPORT KByteArrayView : public KColumnsView
     /** */
     void charCodecChanged( const QString &codecName );
     /** */
-    void valueCodingChanged( KCoding coding );
+    void valueCodingChanged( int coding );
 
 
   protected: // QWidget API
