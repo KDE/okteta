@@ -27,7 +27,13 @@
 KByteArrayDisplay::KByteArrayDisplay( KByteArrayDocument *document )
  : mWidget( 0 ), mDocument( document ), mSelection( document )
 {
-    mWidget = new KHEUI::KByteArrayView( mDocument->content() );
+    KHECore::KByteArrayModel *content = mDocument->content();
+    mWidget = new KHEUI::KByteArrayView( content );
+
+    const bool useOverwriteAsDefault = ( content->size() > 0 );
+
+    mWidget->setOverwriteMode( useOverwriteAsDefault );
+
     // propagate signals
     connect( mDocument, SIGNAL(titleChanged( QString )), SIGNAL(titleChanged( QString )) );
     connect( mDocument, SIGNAL(modified( KAbstractDocument::SynchronizationStates )),
