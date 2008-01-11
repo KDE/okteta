@@ -20,18 +20,18 @@
 // 
 #include <kbytearrayvalidator.h>
 // KDE
+#include <KComboBox>
+#include <KLineEdit>
 #include <KDialog>
 // Qt
-#include <QtGui/QComboBox>
-#include <QtGui/QLineEdit>
 #include <QtGui/QLayout>
 
 
 class KByteArrayLineEditPrivate
 {
   public:
-    QComboBox *FormatComboBox;
-    QLineEdit *DataEdit;
+    KComboBox *FormatComboBox;
+    KLineEdit *DataEdit;
 
     QString    Data[5];
     KByteArrayValidator *Validator;
@@ -48,11 +48,11 @@ void KByteArrayLineEditPrivate::setup( KByteArrayLineEdit *Widget )
     BaseLayout->setSpacing( KDialog::spacingHint() );
     BaseLayout->setMargin( 0 );
 
-    FormatComboBox = new QComboBox( Widget );
+    FormatComboBox = new KComboBox( Widget );
     FormatComboBox->addItems( KByteArrayValidator::codingNames() );
     Widget->connect( FormatComboBox, SIGNAL(activated(int)), SLOT(onFormatChanged(int)) );
 
-    DataEdit = new QLineEdit( Widget );
+    DataEdit = new KLineEdit( Widget );
     Widget->connect( DataEdit, SIGNAL(textChanged(const QString&)), SLOT(onDataChanged(const QString&)) );
     Validator = new KByteArrayValidator( DataEdit, KHECore::CharCoding );
     DataEdit->setValidator( Validator );

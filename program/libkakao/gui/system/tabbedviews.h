@@ -23,7 +23,7 @@
 #include "abstractgroupedviews.h"
 #include "kiviewfocusable.h"
 
-class QTabWidget;
+class KTabWidget;
 class KViewManager;
 
 
@@ -57,7 +57,7 @@ class TabbedViews : public AbstractGroupedViews, public KDE::If::ViewFocusable
 
   protected:
    KViewManager *mViewManager;
-   QTabWidget *mTabWidget;
+   KTabWidget *mTabWidget;
 };
 
 #endif

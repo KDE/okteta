@@ -23,15 +23,15 @@
 #include <khechar.h>
 #include <kcharcodec.h>
 // KDE
+#include <KLineEdit>
+#include <KComboBox>
 #include <KDialog>
 #include <KLocale>
 #include <KGlobalSettings>
 // Qt
 #include <QtGui/QLabel>
 #include <QtGui/QLayout>
-#include <QtGui/QLineEdit>
 #include <QtGui/QCheckBox>
-#include <QtGui/QComboBox>
 
 
 static const unsigned char DefaultUndefinedChar = '?';
@@ -77,7 +77,7 @@ KPrimitiveTypesView::KPrimitiveTypesView( PODDecoderTool *tool, QWidget *parent 
         label->setAlignment( Qt::AlignRight|Qt::AlignVCenter );
         valuesLayout->addWidget( label, i, 0 );
 
-        mInt8Int16Display[i] = new QLineEdit();
+        mInt8Int16Display[i] = new KLineEdit();
         mInt8Int16Display[i]->setReadOnly( true );
         mInt8Int16Display[i]->setAlignment( Qt::AlignRight );
         valuesLayout->addWidget( mInt8Int16Display[i], i, 1 );
@@ -87,7 +87,7 @@ KPrimitiveTypesView::KPrimitiveTypesView( PODDecoderTool *tool, QWidget *parent 
         label->setAlignment( Qt::AlignRight|Qt::AlignVCenter );
         valuesLayout->addWidget( label, i, 2 );
 
-        mInt32FloatDisplay[i] = new QLineEdit();
+        mInt32FloatDisplay[i] = new KLineEdit();
         mInt32FloatDisplay[i]->setReadOnly( true );
         mInt32FloatDisplay[i]->setAlignment( Qt::AlignRight );
         valuesLayout->addWidget( mInt32FloatDisplay[i], i, 3 );
@@ -97,7 +97,7 @@ KPrimitiveTypesView::KPrimitiveTypesView( PODDecoderTool *tool, QWidget *parent 
         label->setAlignment( Qt::AlignRight|Qt::AlignVCenter );
         baseLayout->addWidget( label, i, 1 );
 
-        mByteCodeDisplay[i] = new QLineEdit();
+        mByteCodeDisplay[i] = new KLineEdit();
         mByteCodeDisplay[i]->setReadOnly( true );
         mByteCodeDisplay[i]->setAlignment( Qt::AlignRight );
         baseLayout->addWidget( mByteCodeDisplay[i], i, 2 );
@@ -108,7 +108,7 @@ KPrimitiveTypesView::KPrimitiveTypesView( PODDecoderTool *tool, QWidget *parent 
     settingsLayout->setSpacing( KDialog::spacingHint() );
     settingsLayout->setMargin( 0 );
 
-    mEndianSelection = new QComboBox();
+    mEndianSelection = new KComboBox();
     mEndianSelection->addItem( i18n("Little endian") ); // add first for index
     mEndianSelection->addItem( i18n("Big endian") );    // add second for index
     mEndianSelection->setCurrentIndex( mTool->podData().byteOrder() );
@@ -124,7 +124,7 @@ KPrimitiveTypesView::KPrimitiveTypesView( PODDecoderTool *tool, QWidget *parent 
     label->setAlignment( Qt::AlignRight|Qt::AlignVCenter );
     baseLayout->addWidget( label, 4, 1 );
 
-    mBitWidthSelection = new QComboBox( false );
+    mBitWidthSelection = new KComboBox( false );
     mBitWidthSelection->addItem( i18n("Fixed 8 bit") );
     for( int i=1; i<=16; ++i )
         mBitWidthSelection->addItem( i18np("1 bit window","%1 bits window",i) );

@@ -21,14 +21,14 @@
 #include <kabstractdocument.h>
 #include <kabstractview.h>
 #include <kviewmanager.h>
-// Qt
-#include <QtGui/QTabWidget>
+// KDE
+#include <KTabWidget>
 
 
 TabbedViews::TabbedViews( KViewManager *viewManager )
  : mViewManager( viewManager )
 {
-    mTabWidget = new QTabWidget();
+    mTabWidget = new KTabWidget();
 
     connect( mTabWidget, SIGNAL(currentChanged( int )), SLOT(onCurrentChanged( int )) );
 }

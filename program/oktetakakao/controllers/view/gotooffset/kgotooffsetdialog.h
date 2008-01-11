@@ -26,7 +26,7 @@
 
 class QSpinBox;
 class QCheckBox;
-class QComboBox;
+class KComboBox;
 class KByteArrayValidator;
 
 
@@ -53,8 +53,8 @@ class KGotoOffsetDialog : public KDialog
     void onOffsetChanged( const QString &text );
 
   private:
-    QComboBox *mSelector;
-    QComboBox *OffsetEdit;
+    KComboBox *mSelector;
+    KComboBox *OffsetEdit;
     QCheckBox *AtCursorCheckBox;
     QCheckBox *BackwardsCheckBox;
 

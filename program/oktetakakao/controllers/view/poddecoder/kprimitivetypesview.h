@@ -29,8 +29,8 @@ class PODDecoderTool;
 namespace KHECore {
 class KCharCodec;
 }
-class QComboBox;
-class QLineEdit;
+class KComboBox;
+class KLineEdit;
 class QCheckBox;
 
 class KPrimitiveTypesView : public QWidget
@@ -59,12 +59,12 @@ class KPrimitiveTypesView : public QWidget
   protected:
     PODDecoderTool *mTool;
 
-    QLineEdit *mInt8Int16Display[NoOfRows];
-    QLineEdit *mInt32FloatDisplay[NoOfRows];
-    QLineEdit *mByteCodeDisplay[NoOfRows];
-    QComboBox *mEndianSelection;
+    KLineEdit *mInt8Int16Display[NoOfRows];
+    KLineEdit *mInt32FloatDisplay[NoOfRows];
+    KLineEdit *mByteCodeDisplay[NoOfRows];
+    KComboBox *mEndianSelection;
     QCheckBox *mUnsignedAsHexCheck;
-    QComboBox *mBitWidthSelection;
+    KComboBox *mBitWidthSelection;
 
     KHECore::KCharCodec *mCharCodec;
     QChar mUndefinedChar;

@@ -20,13 +20,13 @@
 // 
 #include <kbytearrayvalidator.h>
 // KDE
+#include <KComboBox>
 #include <KGlobal>
 #include <KLocale>
 #include <KMessageBox>
 // #include <kstdguiitem.h>
 // Qt
 #include <QtGui/QCheckBox>
-#include <QtGui/QComboBox>
 #include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
 #include <QtGui/QGroupBox>
@@ -72,7 +72,7 @@ KGotoOffsetDialog::KGotoOffsetDialog( QWidget *parent )
     GotoBoxLayout->setSpacing( spacingHint() );
 
     QLabel *label = new QLabel( i18n("Fo&rmat:"), OffsetBox );
-    mSelector = new QComboBox( OffsetBox );
+    mSelector = new KComboBox( OffsetBox );
     mSelector->addItems( formatStrings() );
     connect( mSelector, SIGNAL(activated(int)), SLOT(onSelectorChanged(int)) );
     label->setBuddy( mSelector );
@@ -81,10 +81,10 @@ KGotoOffsetDialog::KGotoOffsetDialog( QWidget *parent )
     GotoBoxLayout->addWidget( mSelector );
 
     label = new QLabel( i18n("O&ffset:"), OffsetBox );
-    OffsetEdit = new QComboBox( OffsetBox );
+    OffsetEdit = new KComboBox( OffsetBox );
     OffsetEdit->setEditable( true );
     OffsetEdit->setMaxCount( 10 );
-    OffsetEdit->setInsertPolicy( QComboBox::InsertAtTop );
+    OffsetEdit->setInsertPolicy( KComboBox::InsertAtTop );
     connect( OffsetEdit, SIGNAL(textChanged(const QString&)), SLOT(onOffsetChanged(const QString&)) );
     mOffsetValidator = new KByteArrayValidator( OffsetEdit, KHECore::HexadecimalCoding );
     OffsetEdit->setValidator( mOffsetValidator );
