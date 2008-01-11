@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KSEARCHDIALOG_H
-#define KSEARCHDIALOG_H
+#ifndef KGOTOOFFSETDIALOG_H
+#define KGOTOOFFSETDIALOG_H
 
 // KDE
 #include <KDialog>

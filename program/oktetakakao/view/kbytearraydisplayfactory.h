@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KBYTEARRAYVIEWFACTORY_H
-#define KBYTEARRAYVIEWFACTORY_H
+#ifndef KBYTEARRAYDISPLAYFACTORY_H
+#define KBYTEARRAYDISPLAYFACTORY_H
 
 
 // kakao 

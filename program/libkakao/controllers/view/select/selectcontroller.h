@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KSELECTTOOLET_H
-#define KSELECTTOOLET_H
+#ifndef SELECTCONTROLLER_H
+#define SELECTCONTROLLER_H
 
 
 // kakao
@@ -35,7 +35,7 @@ class SelectController : public KViewController
   Q_OBJECT
 
   public:
-    SelectController( KXmlGuiWindow *window );
+    explicit SelectController( KXmlGuiWindow *window );
 
   public: // KViewController API
     virtual void setView( KAbstractView *view );

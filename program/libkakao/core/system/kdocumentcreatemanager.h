@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KDOCUMENTCREATOR_H
-#define KDOCUMENTCREATOR_H
+#ifndef KDOCUMENTCREATEMANAGER_H
+#define KDOCUMENTCREATEMANAGER_H
 
 // Qt
 #include <QtCore/QObject>

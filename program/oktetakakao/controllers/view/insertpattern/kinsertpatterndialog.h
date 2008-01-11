@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KSEARCHDIALOG_H
-#define KSEARCHDIALOG_H
+#ifndef KINSERTPATTERNDIALOG_H
+#define KINSERTPATTERNDIALOG_H
 
 
 // KDE

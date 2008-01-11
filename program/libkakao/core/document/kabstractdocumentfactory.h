@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KDOCUMENTABSTRACTFACTORY_H
-#define KDOCUMENTABSTRACTFACTORY_H
+#ifndef KABSTRACTDOCUMENTFACTORY_H
+#define KABSTRACTDOCUMENTFACTORY_H
 
 // Qt
 #include <QtCore/QObject>

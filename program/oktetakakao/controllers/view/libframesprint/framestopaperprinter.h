@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef FRAMESTOPAGESPRINTER_H
-#define FRAMESTOPAGESPRINTER_H
+#ifndef FRAMESTOPAPERPRINTER_H
+#define FRAMESTOPAPERPRINTER_H
 
 
 // Qt

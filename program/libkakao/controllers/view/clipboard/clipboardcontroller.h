@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KCLIPBOARDTOOLET_H
-#define KCLIPBOARDTOOLET_H
+#ifndef CLIPBOARDCONTROLLER_H
+#define CLIPBOARDCONTROLLER_H
 
 
 // kakao
@@ -36,7 +36,7 @@ class ClipboardController : public KViewController
   Q_OBJECT
 
   public:
-    ClipboardController( KXmlGuiWindow *window );
+    explicit ClipboardController( KXmlGuiWindow *window );
 
   public: // KViewController API
     virtual void setView( KAbstractView *view );

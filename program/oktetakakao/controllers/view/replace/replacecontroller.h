@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KREPLACETOOLET_H
-#define KREPLACETOOLET_H
+#ifndef REPLACECONTROLLER_H
+#define REPLACECONTROLLER_H
 
 
 // lib
@@ -42,8 +42,8 @@ class ReplaceController : public KViewController
   Q_OBJECT
 
   public:
-    ReplaceController( KXmlGuiWindow *MW );
-    ~ReplaceController();
+    explicit ReplaceController( KXmlGuiWindow *MW );
+    virtual ~ReplaceController();
 
   public: // KViewController API
     virtual void setView( KAbstractView *View );

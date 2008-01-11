@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KDOCUMENTSYNCHRONIZERTOOLET_H
-#define KDOCUMENTSYNCHRONIZERTOOLET_H
+#ifndef SYNCHRONIZECONTROLLER_H
+#define SYNCHRONIZECONTROLLER_H
 
 
 // lib
@@ -33,9 +33,9 @@ class SynchronizeController : public KViewController
   Q_OBJECT
 
   public:
-    SynchronizeController( KXmlGuiWindow *window );
+    explicit SynchronizeController( KXmlGuiWindow *window );
 
-  public: // KToolet API
+  public: // KViewController API
     virtual void setView( KAbstractView *view );
 
   protected Q_SLOTS:

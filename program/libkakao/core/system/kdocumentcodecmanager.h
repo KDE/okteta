@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KDOCUMENTEXPORTMANAGER_H
-#define KDOCUMENTEXPORTMANAGER_H
+#ifndef KDOCUMENTCODECMANAGER_H
+#define KDOCUMENTCODECMANAGER_H
 
 // Qt
 #include <QtCore/QObject>

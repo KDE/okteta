@@ -27,6 +27,7 @@
 #include <KGlobal>
 #include <KGlobalSettings>
 // Qt
+#include <QtGui/QSortFilterProxyModel>
 #include <QtGui/QLabel>
 #include <QtGui/QLayout>
 #include <QtGui/QHeaderView>
@@ -56,10 +57,13 @@ InfoView::InfoView( InfoTool *tool, QWidget *parent )
     mStatisticTableView->setItemsExpandable( false );
     mStatisticTableView->setUniformRowHeights( true );
     mStatisticTableView->setAllColumnsShowFocus( true );
-    mStatisticTableView->setSortingEnabled( false );
+    mStatisticTableView->setSortingEnabled( true );
     mStatisticTableView->setFont( KGlobalSettings::fixedFont() );
     mStatisticTableView->header()->setFont( font() );
-    mStatisticTableView->setModel( mTool->statisticTableModel() );
+    // TODO: write subclass to filter count and percent by num, not string
+    QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel( this );
+    proxyModel->setSourceModel( mTool->statisticTableModel() );
+    mStatisticTableView->setModel( proxyModel );
     for( int c = 0; c<StatisticTableModel::NoOfIds; ++c )
         mStatisticTableView->resizeColumnToContents( c );
     connect( mTool->statisticTableModel(), SIGNAL(headerChanged()), SLOT(updateHeader()) );

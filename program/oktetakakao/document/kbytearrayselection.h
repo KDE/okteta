@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KBYTEAARRAYSELECTION_H
-#define KBYTEAARRAYSELECTION_H
+#ifndef KBYTEARRAYSELECTION_H
+#define KBYTEARRAYSELECTION_H
 
 // kakao
 #include <kabstractdocumentselection.h>
