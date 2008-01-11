@@ -38,8 +38,8 @@ class KPrimitiveTypesView : public QWidget
   Q_OBJECT
 
   public:
-    KPrimitiveTypesView( PODDecoderTool *tool, QWidget *parent = 0 );
-    ~KPrimitiveTypesView();
+    explicit KPrimitiveTypesView( PODDecoderTool *tool, QWidget *parent = 0 );
+    virtual ~KPrimitiveTypesView();
 
   public:
     void setUndefinedChar( const QChar &undefinedChar );
