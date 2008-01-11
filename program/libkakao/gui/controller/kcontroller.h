@@ -37,6 +37,8 @@ Controllers can plug into the
 */
 class KController : public QObject
 {
+  Q_OBJECT
+
   public:
 //    void plug( KXMLGuiWindow *window );
 };
