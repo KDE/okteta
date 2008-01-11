@@ -200,7 +200,7 @@ bool KAbstractDocumentFileSystemSynchronizer::syncWithUrl( const KUrl &newUrl,
             setUrl( newUrl );
             // TODO; in path of both constructor by url and synchWithRemote
             // only needed for the first, so constructor writers can forget about this
-            // for now we just check in setSynchronizer that new != old before deleteing old
+            // for now we just check in setSynchronizer that new != old before deleting old
             document()->setSynchronizer( this );
         }
         else

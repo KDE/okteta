@@ -35,7 +35,7 @@ class AbstractColumnFrameRendererPrivate;
 
 /** class to render columns with the same lineheight for all lines
   *
-  * lines are only completly rendered, so contentHeight <= framesCount*height
+  * lines are only completely rendered, so contentHeight <= framesCount*height
   *@author Friedrich W. H. Kossebau
   */
 
