@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kinsertpatterndialog.h  -  description
+                          insertpatterndialog.h  -  description
                              -------------------
     begin                : Thu Nov 23 2006
     copyright            : 2006 by Friedrich W. H. Kossebau
@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KINSERTPATTERNDIALOG_H
-#define KINSERTPATTERNDIALOG_H
+#ifndef INSERTPATTERNDIALOG_H
+#define INSERTPATTERNDIALOG_H
 
 
 // KDE
@@ -29,30 +29,30 @@ class QSpinBox;
 class KByteArrayLineEdit;
 
 
-class KInsertPatternDialog : public KDialog
+class InsertPatternDialog : public KDialog
 {
   Q_OBJECT
 
   public:
-    explicit KInsertPatternDialog( QWidget *parent = 0 );
-    virtual ~KInsertPatternDialog();
+    explicit InsertPatternDialog( QWidget *parent = 0 );
+    virtual ~InsertPatternDialog();
 
   public: // set
-    void setCharCode( const QString &CodeName );
+    void setCharCode( const QString &codeName );
 
   public: // get 
     QByteArray pattern() const;
     int number() const;
 
   protected:
-    virtual void showEvent( QShowEvent *e );
+    virtual void showEvent( QShowEvent *event );
 
   private Q_SLOTS:
-    void onInputChanged( const QByteArray &Data );
+    void onInputChanged( const QByteArray &data );
 
   private:
-    QSpinBox *NumberSpinBox;
-    KByteArrayLineEdit *PatternEdit;
+    QSpinBox *mNumberSpinBox;
+    KByteArrayLineEdit *mPatternEdit;
 };
 
 #endif

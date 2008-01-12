@@ -1,8 +1,8 @@
 /***************************************************************************
-                          insertpatterntoolet.h  -  description
+                          insertpatterntool.h  -  description
                              -------------------
-    begin                : Thu Nov 23 2006
-    copyright            : 2006 by Friedrich W. H. Kossebau
+    begin                : Fri Jan 11 2008
+    copyright            : 2008 by Friedrich W. H. Kossebau
     email                : kossebau@kde.org
  ***************************************************************************/
 
@@ -15,50 +15,47 @@
  ***************************************************************************/
 
 
-#ifndef INSERTPATTERNTOOLET_H
-#define INSERTPATTERNTOOLET_H
+#ifndef INSERTPATTERNTOOL_H
+#define INSERTPATTERNTOOL_H
 
 
-// kakao
-#include <kviewcontroller.h>
+// Qt
+#include <QtCore/QObject>
 
-class QAction;
-class KXmlGuiWindow;
-class KViewManager;
+class KAbstractView;
 namespace KHEUI {
 class KByteArrayView;
 }
 namespace KHECore {
 class KAbstractByteArrayModel;
 }
-class KInsertPatternDialog;
+class QString;
+class QByteArray;
 
 
-class InsertPatternController : public KViewController
+class InsertPatternTool : public QObject
 {
   Q_OBJECT
 
   public:
-    explicit InsertPatternController( KXmlGuiWindow *MW );
-    virtual ~InsertPatternController();
+    InsertPatternTool();
+    virtual ~InsertPatternTool();
 
-  public: // KToolet API
-    virtual void setView( KAbstractView *View );
+  public:
+    void setView( KAbstractView *view );
 
-  protected Q_SLOTS: // action slots
-    void insertPattern();
+  public:
+    void insertPattern( const QByteArray &pattern, int count );
 
-  private Q_SLOTS:
-    void onOkClicked();
+  public:
+    QString charCodecName() const;
+
+  Q_SIGNALS:
+    void viewChanged( bool hasView );
 
   protected:
-    KXmlGuiWindow *MainWindow;
-    KHEUI::KByteArrayView *HexEdit;
-    KHECore::KAbstractByteArrayModel *ByteArray;
-
-    QAction *InsertPatternAction;
-
-    KInsertPatternDialog *InsertPatternDialog;
+    KHEUI::KByteArrayView *mByteArrayView;
+    KHECore::KAbstractByteArrayModel *mByteArrayModel;
 };
 
 #endif

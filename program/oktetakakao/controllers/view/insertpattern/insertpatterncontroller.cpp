@@ -18,16 +18,8 @@
 #include "insertpatterncontroller.h"
 
 // controller
-#include "kinsertpatterndialog.h"
-//
-#include <kbytearraydocument.h>
-// kakao
-#include <kviewmanager.h>
-// Okteta gui
-#include <kbytearrayview.h>
-// Okteta core
-#include <kcharcodec.h>
-#include <kbytearraymodel.h>
+#include "insertpatterndialog.h"
+#include "insertpatterntool.h"
 // KDE
 #include <KActionCollection>
 #include <KXmlGuiWindow>
@@ -40,13 +32,16 @@
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
 InsertPatternController::InsertPatternController( KXmlGuiWindow *window )
- : mMainWindow( window ), mViewWidget( 0 ), mByteArray( 0 ), mInsertPatternDialog( 0 )
+ : mWindow( window ),
+   mInsertPatternTool( new InsertPatternTool() ), mInsertPatternDialog( 0 )
 {
-    KActionCollection *actionCollection = mMainWindow->actionCollection();
+    connect( mInsertPatternTool, SIGNAL(viewChanged( bool )), SLOT(onViewChanged( bool )) );
+
+    KActionCollection *actionCollection = mWindow->actionCollection();
 
     mInsertPatternAction = actionCollection->addAction( "insert_pattern" );
     mInsertPatternAction->setText( i18n("&Insert pattern...") );
-    connect( mInsertPatternAction, SIGNAL(triggered(bool) ), SLOT(insertPattern()));
+    connect( mInsertPatternAction, SIGNAL(triggered(bool) ), SLOT(onActionTriggered()));
     mInsertPatternAction->setShortcut( Qt::CTRL + Qt::Key_Insert );
 
     setView( 0 );
@@ -54,30 +49,27 @@ InsertPatternController::InsertPatternController( KXmlGuiWindow *window )
 
 void InsertPatternController::setView( KAbstractView *view )
 {
-    mViewWidget->disconnect( this );
+    mInsertPatternTool->setView( view );
+}
 
-    mViewWidget = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
-    KByteArrayDocument *document = view ? static_cast<KByteArrayDocument*>( view->document() ) : 0;
-    mByteArray = document ? document->content() : 0;
+void InsertPatternController::onViewChanged( bool hasView )
+{
+    if( !hasView && mInsertPatternDialog )
+        mInsertPatternDialog->hide();
 
-    if( mByteArray )
-    {
-//         connect( mViewWidget, SIGNAL( selectionChanged( bool )), SLOT( onSelectionChanged( bool )) );
-    }
-    const bool hasView = ( mByteArray != 0 );
     mInsertPatternAction->setEnabled( hasView );
 }
 
 
-void InsertPatternController::insertPattern()
+void InsertPatternController::onActionTriggered()
 {
     // ensure dialog
     if( !mInsertPatternDialog )
     {
-        mInsertPatternDialog = new KInsertPatternDialog( mMainWindow );
+        mInsertPatternDialog = new InsertPatternDialog( mWindow );
         connect( mInsertPatternDialog, SIGNAL(okClicked()), SLOT(onOkClicked()) );
     }
-    mInsertPatternDialog->setCharCode( mViewWidget->encodingName() );
+    mInsertPatternDialog->setCharCode( mInsertPatternTool->charCodecName() );
 
     mInsertPatternDialog->show();
 }
@@ -88,16 +80,12 @@ void InsertPatternController::onOkClicked()
 
     const QByteArray pattern = mInsertPatternDialog->pattern();
     const int patternNumber = mInsertPatternDialog->number();
-    const int patternSize = pattern.size();
 
-    const int insertDataSize = patternNumber * patternSize;
-    QByteArray insertData( insertDataSize, '\0' );
-
-    for( int i=0; i < insertDataSize; i+= patternSize )
-        memcpy( &insertData.data()[i], pattern.constData(), patternSize );
-
-    //TODO: support insert to selection
-    mViewWidget->insert( insertData );
+    mInsertPatternTool->insertPattern( pattern, patternNumber );
 }
 
-InsertPatternController::~InsertPatternController() {}
+InsertPatternController::~InsertPatternController()
+{
+    delete mInsertPatternDialog;
+    delete mInsertPatternTool;
+}

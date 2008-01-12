@@ -22,16 +22,10 @@
 // kakao
 #include <kviewcontroller.h>
 
-class QAction;
 class KXmlGuiWindow;
-class KViewManager;
-namespace KHEUI {
-class KByteArrayView;
-}
-namespace KHECore {
-class KAbstractByteArrayModel;
-}
-class KInsertPatternDialog;
+class InsertPatternTool;
+class InsertPatternDialog;
+class QAction;
 
 
 class InsertPatternController : public KViewController
@@ -45,20 +39,20 @@ class InsertPatternController : public KViewController
   public: // KViewController API
     virtual void setView( KAbstractView *view );
 
-  protected Q_SLOTS: // action slots
-    void insertPattern();
+  protected Q_SLOTS:
+    void onActionTriggered();
+    void onViewChanged( bool hasView );
 
   private Q_SLOTS:
     void onOkClicked();
 
   protected:
-    KXmlGuiWindow *mMainWindow;
-    KHEUI::KByteArrayView *mViewWidget;
-    KHECore::KAbstractByteArrayModel *mByteArray;
+    KXmlGuiWindow *mWindow;
 
     QAction *mInsertPatternAction;
 
-    KInsertPatternDialog *mInsertPatternDialog;
+    InsertPatternTool *mInsertPatternTool;
+    InsertPatternDialog *mInsertPatternDialog;
 };
 
 #endif

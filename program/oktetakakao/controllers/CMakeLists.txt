@@ -58,7 +58,8 @@ set( REPLACECONTROLLER_SRCS
   view/replace/replacecontroller.cpp
 )
 set( INSERTPATTERNCONTROLLER_SRCS
-  view/insertpattern/kinsertpatterndialog.cpp
+  view/insertpattern/insertpatterntool.cpp
+  view/insertpattern/insertpatterndialog.cpp
   view/insertpattern/insertpatterncontroller.cpp
 )
 set( GOTOOFFSETCONTROLLER_SRCS
