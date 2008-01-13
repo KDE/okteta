@@ -1,42 +1,29 @@
 Unimplemented Feature of KHexEdit:
 ----------------------------------
 
-revert
++ <Action name="paste_into_new_file" />
++ Zugriffsrechte (Größe/Verändern)
++ Rückgängig/Wiederherstellen
++ Transcoder
++ Exportieren
 
-Bookmarks
-
-Suchleiste
-
-Einstellung Anzeige a-f/A-F
-
-Einstellung Anzeige Offset Hex/Dez
-
-    <!--Menu name="special" append="edit_paste_merge"><text>Spec&amp;ial</text>
-      <Action name="copy_as_text" />
-      <Action name="paste_into_new_file" />
-      <Action name="paste_into_new_window" />
-    </Menu-->
-
-Zugriffsrechte (Größe/Verändern)
-
-Rückgängig/Wiederherstellen
-
-Zeichenkettenextraktion
-
-Transcoder
-
-Binärfilter
-
-Einstellung Anzeige voller Pfad in Titel
-
-Exportieren
-
-Drucken
+Nicht so wichtig:
+* Einstellung Anzeige voller Pfad in Titel
+* Einstellung Anzeige a-f/A-F
+* Einstellung Anzeige Offset Hex/Dez
+* Suchleiste
+* <Action name="paste_into_new_window" />
+* <Action name="copy_as_text" />
 
 Erledigt:
 - Speichern
+- revert
 - Dokumentenliste
 - Letzte Dateien
+- Bookmarks
+- Drucken
+- Binärfilter
+- Zeichenkettenextraktion
 
 
 

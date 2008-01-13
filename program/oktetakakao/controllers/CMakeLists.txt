@@ -11,6 +11,7 @@ include_directories(
   ../io
   ../view
   view/libbytearraylineedit
+  view/libbytearrayfilter
   view/libfinddialog
   view/libframesprint
 )
@@ -62,6 +63,31 @@ set( INSERTPATTERNCONTROLLER_SRCS
   view/insertpattern/insertpatterndialog.cpp
   view/insertpattern/insertpatterncontroller.cpp
 )
+set( LIBFILTER_SRCS
+  view/libbytearrayfilter/abstractbytearrayfilter.cpp
+  view/libbytearrayfilter/abstractbytearrayfilterparameterset.cpp
+  view/libbytearrayfilter/abstractbytearrayfilterparametersetedit.cpp
+  view/libbytearrayfilter/filter/nobytearrayfilterparameterset.cpp
+  view/libbytearrayfilter/filter/operandbytearrayfilterparameterset.cpp
+  view/libbytearrayfilter/filter/reversebytearrayfilterparameterset.cpp
+  view/libbytearrayfilter/filter/rotatebytearrayfilterparameterset.cpp
+  view/libbytearrayfilter/filter/andbytearrayfilter.cpp
+  view/libbytearrayfilter/filter/orbytearrayfilter.cpp
+  view/libbytearrayfilter/filter/xorbytearrayfilter.cpp
+  view/libbytearrayfilter/filter/invertbytearrayfilter.cpp
+  view/libbytearrayfilter/filter/reversebytearrayfilter.cpp
+  view/libbytearrayfilter/filter/rotatebytearrayfilter.cpp
+  view/libbytearrayfilter/filter/shiftbytearrayfilter.cpp
+  view/libbytearrayfilter/filter/nobytearrayfilterparametersetedit.cpp
+  view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp
+  view/libbytearrayfilter/filter/reversebytearrayfilterparametersetedit.cpp
+  view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp
+)
+set( FILTERCONTROLLER_SRCS
+  view/filter/filtertool.cpp
+  view/filter/filterview.cpp
+  view/filter/filtercontroller.cpp
+)
 set( GOTOOFFSETCONTROLLER_SRCS
   view/gotooffset/kgotooffsetdialog.cpp
   view/gotooffset/gotooffsetcontroller.cpp
@@ -99,6 +125,8 @@ set( OKTETA_KAKAO_CONTROLLERS_SRCS
   ${FINDDIALOG_LIB_SRCS}
   ${SEARCHCONTROLLER_SRCS}
   ${REPLACECONTROLLER_SRCS}
+  ${LIBFILTER_SRCS}
+  ${FILTERCONTROLLER_SRCS}
   ${INSERTPATTERNCONTROLLER_SRCS}
   ${GOTOOFFSETCONTROLLER_SRCS}
   ${LIBFRAMESPRINT_SRCS}

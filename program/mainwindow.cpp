@@ -24,6 +24,7 @@
 #include <bytetable/bytetablecontroller.h>
 #include <info/infocontroller.h>
 #include <stringsextract/stringsextractcontroller.h>
+#include <filter/filtercontroller.h>
 #include <insertpattern/insertpatterncontroller.h>
 #include <gotooffset/gotooffsetcontroller.h>
 #include <search/searchcontroller.h>
@@ -80,6 +81,7 @@ void OktetaMainWindow::setupControllers()
   mControllers.append( new SearchController(this) );
   mControllers.append( new ReplaceController(this) );
   mControllers.append( new GotoOffsetController(this) );
+  mControllers.append( new FilterController(this) );
   mControllers.append( new InsertPatternController(this) );
   mControllers.append( new BookmarksController(this) );
   mControllers.append( new PrintController(this) );
