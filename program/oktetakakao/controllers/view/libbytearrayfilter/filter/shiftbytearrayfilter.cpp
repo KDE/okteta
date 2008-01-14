@@ -22,6 +22,8 @@
 // KDE
 #include <KLocale>
 
+#include <stdlib.h>
+
 static const int BitsPerByte = 8;
 
 ShiftByteArrayFilter::ShiftByteArrayFilter()
