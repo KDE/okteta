@@ -41,7 +41,7 @@ SynchronizeController::SynchronizeController( KXmlGuiWindow *window )
 
 void SynchronizeController::setView( KAbstractView *view )
 {
-    mDocument->disconnect( this );
+    if( mDocument ) mDocument->disconnect( this );
 
     mDocument = ( view != 0 ) ? view->document() : 0;
 

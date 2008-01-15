@@ -42,7 +42,7 @@ SelectController::SelectController( KXmlGuiWindow *window )
 
 void SelectController::setView( KAbstractView *view )
 {
-    mView->disconnect( this );
+    if( mView ) mView->disconnect( this );
 
     mView = view;
     mSelectControl = view ? qobject_cast<KDE::If::DataSelectable *>( view ) : 0;

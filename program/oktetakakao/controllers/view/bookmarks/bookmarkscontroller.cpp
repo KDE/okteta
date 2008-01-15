@@ -77,8 +77,8 @@ BookmarksController::BookmarksController( KXmlGuiWindow *window )
 
 void BookmarksController::setView( KAbstractView *view )
 {
-    mByteArrayView->disconnect( this );
-    mByteArray->disconnect( this );
+    if( mByteArrayView ) mByteArrayView->disconnect( this );
+    if( mByteArray ) mByteArray->disconnect( this );
 
     mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
     KByteArrayDocument *document = view ? static_cast<KByteArrayDocument*>( view->document() ) : 0;

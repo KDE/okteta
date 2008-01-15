@@ -41,7 +41,7 @@ QString InsertPatternTool::charCodecName() const
 
 void InsertPatternTool::setView( KAbstractView *view )
 {
-//     mByteArrayView->disconnect( this );
+//     if( mByteArrayView ) mByteArrayView->disconnect( this );
 
     mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
 

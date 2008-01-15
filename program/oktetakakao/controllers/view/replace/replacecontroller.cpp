@@ -51,7 +51,7 @@ ReplaceController::ReplaceController( KXmlGuiWindow *MW )
 
 void ReplaceController::setView( KAbstractView *view )
 {
-    ViewWidget->disconnect( this );
+    if( ViewWidget ) ViewWidget->disconnect( this );
 
     ViewWidget = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
     KByteArrayDocument *Document = view ? static_cast<KByteArrayDocument*>( view->document() ) : 0;

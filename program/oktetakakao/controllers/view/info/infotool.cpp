@@ -44,8 +44,8 @@ int InfoTool::size() const { return (mByteArrayModel!=0) ? mByteArrayModel->size
 
 void InfoTool::setView( KAbstractView *view )
 {
-    mByteArrayView->disconnect( mStatisticTableModel );
-    mByteArrayModel->disconnect( this );
+    if( mByteArrayView ) mByteArrayView->disconnect( mStatisticTableModel );
+    if( mByteArrayModel ) mByteArrayModel->disconnect( this );
 
     mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
 

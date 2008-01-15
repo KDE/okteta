@@ -68,7 +68,7 @@ ZoomController::ZoomController( KXmlGuiWindow *MW )
 
 void ZoomController::setView( KAbstractView *View )
 {
-    ZoomObject->disconnect( this );
+    if( ZoomObject ) ZoomObject->disconnect( this );
 
     ZoomControl = View ? qobject_cast<KDE::If::Zoomable *>( View ) : 0;
     ZoomObject = ZoomControl ? View : 0;

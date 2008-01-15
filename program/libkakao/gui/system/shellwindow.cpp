@@ -71,7 +71,7 @@ Q_UNUSED( newStates )
 
 void ShellWindow::onViewFocusChanged( KAbstractView *view )
 {
-    mCurrentView->disconnect( this );
+    if( mCurrentView ) mCurrentView->disconnect( this );
 
     mCurrentView = view;
 

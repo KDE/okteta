@@ -120,7 +120,7 @@ void FilterView::onFilterClicked()
 void FilterView::onOperationChange( int index )
 {
     QWidget *oldWidget = mParameterSetEditStack->currentWidget();
-    if( oldWidget ) 
+    if( oldWidget )
         oldWidget->disconnect( this );
 
     mParameterSetEditStack->setCurrentIndex( index );

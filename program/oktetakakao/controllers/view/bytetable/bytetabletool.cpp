@@ -43,7 +43,7 @@ bool ByteTableTool::hasByteArrayView() const { return ( mByteArrayView != 0 ); }
 
 void ByteTableTool::setView( KAbstractView *view )
 {
-    mByteArrayView->disconnect( mByteTableModel );
+    if( mByteArrayView ) mByteArrayView->disconnect( mByteTableModel );
 
     mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
 

@@ -86,7 +86,7 @@ ViewConfigController::ViewConfigController( KXmlGuiWindow *MW )
 
 void ViewConfigController::setView( KAbstractView *View )
 {
-    ViewWidget->disconnect( this );
+    if( ViewWidget ) ViewWidget->disconnect( this );
 
     ViewWidget = View ? static_cast<KHEUI::KByteArrayView *>( View->widget() ) : 0;
 

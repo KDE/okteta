@@ -38,8 +38,8 @@ PODData &PODDecoderTool::podData() { return mPODData; }
 
 void PODDecoderTool::setView( KAbstractView *view )
 {
-    mByteArrayView->disconnect( this );
-    mByteArrayModel->disconnect( this );
+    if( mByteArrayView ) mByteArrayView->disconnect( this );
+    if( mByteArrayModel ) mByteArrayModel->disconnect( this );
 
     mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
     KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->document() ) : 0;
