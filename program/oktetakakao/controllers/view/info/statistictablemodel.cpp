@@ -24,7 +24,7 @@
 // KDE
 #include <KLocale>
 // Qt
-#include <QtCore/QLatin1String>
+#include <QtCore/QLatin1Char>
 
 
 static const unsigned char DefaultUndefinedChar = '?';
@@ -101,8 +101,6 @@ QVariant StatisticTableModel::data( const QModelIndex &index, int role ) const
     QVariant result;
     if( role == Qt::DisplayRole )
     {
-        QString content;
-
         const unsigned char byte = index.row();
         const int column = index.column();
         switch( column )
@@ -110,27 +108,31 @@ QVariant StatisticTableModel::data( const QModelIndex &index, int role ) const
             case CharacterId:
             {
                 const KHECore::KChar decodedChar = mCharCodec->decode( byte );
-                content = decodedChar.isUndefined() ?
+                result = decodedChar.isUndefined() ?
                     i18nc( "character is not defined", "undef." ) :
                     QString( (QChar)decodedChar );
                 break;
             }
             case ValueId:
-                mValueCodec->encode( content, 0, byte );
+            {
+                QString value;
+                mValueCodec->encode( value, 0, byte );
+                result = value;
                 break;
+            }
             case CountId:
-                content = QString::number( mByteCount[byte] );
+                result = mByteCount[byte];
                 break;
             case PercentId:
-                content = ( mSize > 0 ) ?
-                          QString::number( 100.0*(double)mByteCount[byte]/mSize, 'f', 6 ) :
-                          QLatin1String( "-" );
+                result = ( mSize > 0 ) ?
+                          // TODO: before we printed only a string (which killed sorting) with QString::number( x, 'f', 6 )
+                          // Qt now cuts trailing 0s, results in unaligned numbers, not so beautiful.
+                          QVariant( 100.0*(double)mByteCount[byte]/mSize ) :
+                          QVariant( QLatin1Char('-') );
                 break;
             default:
                 ;
         }
-
-        result = content;
     }
     else if( role == Qt::TextAlignmentRole )
         result = Qt::AlignRight;
