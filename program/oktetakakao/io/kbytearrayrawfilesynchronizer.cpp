@@ -107,7 +107,7 @@ bool KByteArrayRawFileSynchronizer::reloadFromFile( const QString &workFilePath 
         byteArray->setData( newData, fileSize, fileSize, false );
     }
     else
-        delete newData;
+        delete [] newData;
 
     return streamIsOk;
 }
