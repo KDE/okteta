@@ -109,6 +109,21 @@ void KAbstractByteArrayModelIfTest::testModified()
   QVERIFY( ByteArrayModel->isModified() );
 }
 
+// TODO: test all edit operations to be blocked, but in their tests
+void KAbstractByteArrayModelIfTest::testSetReadOnly()
+{
+  // can we alter the buffer at all?
+  if( ByteArrayModel->isReadOnly() )
+    // skip
+    return;
+
+  ByteArrayModel->setReadOnly( true );
+  QVERIFY( ByteArrayModel->isReadOnly() );
+
+  ByteArrayModel->setReadOnly( false );
+  QVERIFY( !ByteArrayModel->isReadOnly() );
+}
+
 void KAbstractByteArrayModelIfTest::testCopyTo()
 {
   if( !ByteArrayModel->isReadOnly() )

@@ -59,6 +59,7 @@ class KAbstractByteArrayModelIfTest : public QObject
     void cleanup();
 
     void testModified();
+    void testSetReadOnly();
     void testCopyTo();
     void testFill();
     void testSetGet();
