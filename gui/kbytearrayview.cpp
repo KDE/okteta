@@ -109,6 +109,7 @@ KByteArrayView::KByteArrayView( KHECore::KAbstractByteArrayModel *Buffer, QWidge
   // initialize layout
   if( !ByteArrayModel )
     ByteArrayModel = new KHECore::KByteArrayModel; // TODO: leaking, make it shared
+  connect( ByteArrayModel, SIGNAL(readOnlyChanged( bool )), SLOT(adaptController()) );
   connect( ByteArrayModel, SIGNAL(contentsChanged(int,int)), SLOT(updateRange(int,int)) );
   connect( ByteArrayModel, SIGNAL(contentsReplaced(int,int,int)), SLOT(onContentsReplaced(int,int,int)) );
   connect( ByteArrayModel, SIGNAL(contentsMoved(int,int,int)), SLOT(onContentsMoved(int,int,int)) );
@@ -210,7 +211,7 @@ KPixelX KByteArrayView::groupSpacingWidth()          const { return valueColumn(
 KPixelX KByteArrayView::binaryGapWidth()             const { return valueColumn().binaryGapWidth(); }
 bool KByteArrayView::isOverwriteMode()               const { return OverWrite; }
 bool KByteArrayView::isOverwriteOnly()               const { return OverWriteOnly; }
-bool KByteArrayView::isReadOnly()                    const { return ReadOnly; }
+bool KByteArrayView::isReadOnly()                    const { return ReadOnly || ByteArrayModel->isReadOnly(); }
 bool KByteArrayView::isModified()                    const { return ByteArrayModel->isModified(); }
 bool KByteArrayView::tabChangesFocus()               const { return TabController->tabChangesFocus(); }
 bool KByteArrayView::showsNonprinting()              const { return charColumn().showsNonprinting(); }
@@ -274,9 +275,10 @@ void KByteArrayView::setByteArrayModel( KHECore::KAbstractByteArrayModel *B )
   BufferLayout->setLength( ByteArrayModel->size() );
   adjustLayoutToSize();
 
-  // ensure that the widget is readonly if the buffer is
+  // if the model is readonly make the view too, per default
   if( ByteArrayModel->isReadOnly() )
     setReadOnly( true );
+  connect( ByteArrayModel, SIGNAL(readOnlyChanged( bool )), SLOT(adaptController()) );
 
   viewport()->update();
   connect( ByteArrayModel, SIGNAL(contentsChanged(int,int)), SLOT(updateRange(int,int)) );
@@ -312,11 +314,20 @@ void KByteArrayView::setStartOffset( int SO )
 
 void KByteArrayView::setReadOnly( bool RO )
 {
-  // don't set editor readwrite if databuffer is readonly
-  ReadOnly = (ByteArrayModel && ByteArrayModel->isReadOnly()) ? true : RO;
+    if( ReadOnly == RO )
+        return;
 
-  Controller = ReadOnly ? (KController*)Navigator :
-      cursorColumn() == CharColumnId ? (KController*)CharEditor : (KController*)ValueEditor;
+    ReadOnly = RO;
+
+    adaptController();
+}
+
+void KByteArrayView::adaptController()
+{
+    const bool isEffectiveReadOnly = ByteArrayModel->isReadOnly() || ReadOnly;
+
+    Controller = isEffectiveReadOnly ?            (KController*)Navigator :
+                 cursorColumn() == CharColumnId ? (KController*)CharEditor : (KController*)ValueEditor;
 }
 
 
@@ -999,6 +1010,7 @@ void KByteArrayView::updateRange( int Start, int End )
   updateChanged();
 }
 
+
 void KByteArrayView::onContentsReplaced( int Pos, int RemovedLength, int InsertedLength )
 {
   pauseCursor();
@@ -1120,8 +1132,7 @@ void KByteArrayView::showBufferColumns( int CCs )
     KDataColumn *H = ActiveColumn;
     ActiveColumn = InactiveColumn;
     InactiveColumn = H;
-    Controller = ReadOnly ? (KController*)Navigator :
-      cursorColumn() == CharColumnId ? (KController*)CharEditor : (KController*)ValueEditor;
+    adaptController();
   }
 
   updateViewByWidth();
@@ -1148,8 +1159,7 @@ void KByteArrayView::setCursorColumn( KDataColumnId CC )
     ActiveColumn = &charColumn();
     InactiveColumn = &valueColumn();
   }
-  Controller = ReadOnly ? (KController*)Navigator :
-    cursorColumn() == CharColumnId ? (KController*)CharEditor : (KController*)ValueEditor;
+  adaptController();
 
   ensureCursorVisible();
   unpauseCursor();
@@ -1171,8 +1181,7 @@ void KByteArrayView::placeCursor( const QPoint &Point )
     ActiveColumn = &valueColumn();
     InactiveColumn = &charColumn();
   }
-  Controller = ReadOnly ? (KController*)Navigator :
-      cursorColumn() == CharColumnId ? (KController*)CharEditor : (KController*)ValueEditor;
+  adaptController();
 
   // get coord of click and whether this click was closer to the end of the pos
   KCoord C( activeColumn().magPosOfX(Point.x()), lineAt(Point.y()) );

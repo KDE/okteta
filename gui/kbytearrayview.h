@@ -454,6 +454,7 @@ class KHEUI_EXPORT KByteArrayView : public KColumnsView
     /** */
     void startDrag();
 
+    void adaptController();
     void onContentsReplaced( int Pos, int RemovedLength, int InsertedLength );
     void onContentsMoved( int Destination, int Source, int MovedLength );
     void updateRange( int Start, int End );
