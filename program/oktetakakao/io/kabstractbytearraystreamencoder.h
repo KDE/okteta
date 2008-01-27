@@ -21,6 +21,13 @@
 // kakao
 #include <kabstractdocumentstreamencoder.h>
 
+namespace KHECore {
+class KAbstractByteArrayModel;
+}
+namespace KHE {
+class KSection;
+}
+
 class KAbstractByteArrayStreamEncoder : public KAbstractDocumentStreamEncoder
 {
     Q_OBJECT
@@ -34,7 +41,9 @@ class KAbstractByteArrayStreamEncoder : public KAbstractDocumentStreamEncoder
     virtual bool encodeToStream( QIODevice *device, const KAbstractDocumentSelection *selection );
 
   protected: // API to be implemented
-    virtual bool encodeDataToStream( QIODevice *device, const char *data, int size ) = 0;
+    virtual bool encodeDataToStream( QIODevice *device,
+                                     const KHECore::KAbstractByteArrayModel *byteArrayModel,
+                                     const KHE::KSection &section ) = 0;
 };
 
 #endif

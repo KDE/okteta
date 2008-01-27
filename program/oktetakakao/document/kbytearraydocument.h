@@ -27,6 +27,7 @@
 #include <QtCore/QString>
 
 namespace KHECore {
+class KAbstractByteArrayModel;
 class KByteArrayModel;
 }
 
@@ -48,7 +49,7 @@ class KByteArrayDocument : public KAbstractDocument//, public KDE::If::ByteArray
     virtual SynchronizationStates synchronizationStates() const;
 
   public: // KDE::If::ByteArray
-    virtual KHECore::KByteArrayModel *content() const;
+    virtual KHECore::KAbstractByteArrayModel *content() const;
 
   public:
     void setTitle( const QString &title );

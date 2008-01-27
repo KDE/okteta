@@ -27,7 +27,7 @@
 KByteArrayDisplay::KByteArrayDisplay( KByteArrayDocument *document )
  : mWidget( 0 ), mDocument( document ), mSelection( document )
 {
-    KHECore::KByteArrayModel *content = mDocument->content();
+    KHECore::KAbstractByteArrayModel *content = mDocument->content();
     mWidget = new KHEUI::KByteArrayView( content );
 
     const bool useOverwriteAsDefault = ( content->size() > 0 );

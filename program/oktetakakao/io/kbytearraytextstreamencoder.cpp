@@ -21,6 +21,7 @@
 #include "kbytearraydocument.h"
 #include "kbytearrayselection.h"
 // Okteta core
+#include <kabstractbytearraymodel.h>
 #include <khechar.h>
 #include <kcharcodec.h>
 // KDE
@@ -39,7 +40,8 @@ KByteArrayTextStreamEncoder::KByteArrayTextStreamEncoder()
 
 
 bool KByteArrayTextStreamEncoder::encodeDataToStream( QIODevice *device,
-                                                      const char *data, int size )
+                                                      const KHECore::KAbstractByteArrayModel *byteArrayModel,
+                                                      const KHE::KSection &section )
 {
     bool success = true;
 
@@ -49,9 +51,9 @@ bool KByteArrayTextStreamEncoder::encodeDataToStream( QIODevice *device,
     static const QChar tabChar( '\t' );
     static const QChar returnChar( '\n' );
 
-    for( int i=0; i<size; ++i )
+    for( int i=section.start(); i<=section.end(); ++i )
     {
-        KHECore::KChar byteChar = charCodec->decode( data[i] );
+        KHECore::KChar byteChar = charCodec->decode( byteArrayModel->datum(i) );
 
         const QChar streamChar = byteChar.isUndefined() ?      KHECore::KChar(mSettings.undefinedChar) :
                                  (!byteChar.isPrint()

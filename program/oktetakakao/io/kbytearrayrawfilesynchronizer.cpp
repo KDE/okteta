@@ -103,7 +103,7 @@ bool KByteArrayRawFileSynchronizer::reloadFromFile( const QString &workFilePath 
 //         *success = streamIsOk ? 0 : 1;
     if( streamIsOk )
     {
-        KHECore::KByteArrayModel *byteArray = mDocument->content();
+        KHECore::KByteArrayModel *byteArray = qobject_cast<KHECore::KByteArrayModel*>( mDocument->content() );
         byteArray->setData( newData, fileSize, fileSize, false );
     }
     else
@@ -114,7 +114,7 @@ bool KByteArrayRawFileSynchronizer::reloadFromFile( const QString &workFilePath 
 
 bool KByteArrayRawFileSynchronizer::writeToFile( const QString &workFilePath )
 {
-    KHECore::KByteArrayModel *byteArray = mDocument->content();
+    KHECore::KByteArrayModel *byteArray = qobject_cast<KHECore::KByteArrayModel*>( mDocument->content() );
 
     QFile file( workFilePath );
     file.open( QIODevice::WriteOnly );

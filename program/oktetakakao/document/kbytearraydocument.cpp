@@ -46,7 +46,7 @@ KByteArrayDocument::KByteArrayDocument( const QString &filePath )
     }
 }
 #endif
-KHECore::KByteArrayModel* KByteArrayDocument::content() const { return mByteArray; }
+KHECore::KAbstractByteArrayModel* KByteArrayDocument::content() const { return mByteArray; }
 
 QString KByteArrayDocument::title() const { return mTitle; }
 QString KByteArrayDocument::mimeType() const { return QLatin1String("KByteArrayDocument"); }

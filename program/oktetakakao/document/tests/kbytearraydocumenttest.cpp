@@ -40,7 +40,7 @@ void KByteArrayDocumentTest::testCreateNew()
     QVERIFY( document != 0 );
     QVERIFY( !document->hasLocalChanges() );
 
-    KHECore::KByteArrayModel *byteArray = document->content();
+    KHECore::KByteArrayModel *byteArray = qobject_cast<KHECore::KByteArrayModel*>( document->content() );
     QVERIFY( byteArray != 0 );
     QCOMPARE( byteArray->size(), 0 );
     QVERIFY( !byteArray->isModified() );

@@ -20,6 +20,8 @@
 // lib
 #include "kbytearraydocument.h"
 #include "kbytearrayselection.h"
+// Okteta core
+#include <kabstractbytearraymodel.h>
 // KDE
 #include <KLocale>
 // Qt
@@ -67,12 +69,14 @@ KByteArraySourceCodeStreamEncoder::KByteArraySourceCodeStreamEncoder()
 
 
 bool KByteArraySourceCodeStreamEncoder::encodeDataToStream( QIODevice *device,
-                                                            const char *data, int size )
+                                                            const KHECore::KAbstractByteArrayModel *byteArrayModel,
+                                                            const KHE::KSection &section )
 {
     bool success = true;
 
     QTextStream textStream( device );
 
+    const int size = section.width();
     const int dataTypeSize = SizeOfPrimitiveDataType[mSettings.dataType];
     const int sizeOfArray = (size+dataTypeSize-1) / dataTypeSize;
 
@@ -83,7 +87,7 @@ bool KByteArraySourceCodeStreamEncoder::encodeDataToStream( QIODevice *device,
     for( int i=0; i<size; i+=dataTypeSize )
     {
         static char buffer[12];
-        printFormatted( buffer, &data[i], size-i );
+        printFormatted( buffer, byteArrayModel, i, size-i );
         textStream << buffer;
         if( i + dataTypeSize < size )
             textStream << ",";
@@ -101,91 +105,93 @@ bool KByteArraySourceCodeStreamEncoder::encodeDataToStream( QIODevice *device,
 }
 
 
-void KByteArraySourceCodeStreamEncoder::printFormatted( char *buffer, const char *data, unsigned int dataSize ) const
+void KByteArraySourceCodeStreamEncoder::printFormatted( char *buffer,
+                                                        const KHECore::KAbstractByteArrayModel *byteArrayModel, int pos,
+                                                        unsigned int dataSize ) const
 {
     switch( mSettings.dataType )
     {
     case SourceCodeStreamEncoderSettings::CharType:
     {
-    char e = 0;
-    memcpy( &e, data, qMin<size_t>(sizeof(e),dataSize) );
-    sprintf( buffer, "%d", e );
-    break;
+        char e = 0;
+        byteArrayModel->copyTo( &e, pos, qMin<size_t>(sizeof(e),dataSize) );
+        sprintf( buffer, "%d", e );
+        break;
     }
     case SourceCodeStreamEncoderSettings::UnsignedCharType:
     {
-    unsigned char e = 0;
-    memcpy( &e, data, qMin(uint(sizeof(e)),dataSize) );
-    if( mSettings.unsignedAsHexadecimal )
-    {
-      sprintf( buffer, "0x%02x", e );
-    }
-    else
-    {
-      sprintf( buffer, "%u", e );
-    }
-    break;
+        unsigned char e = 0;
+        byteArrayModel->copyTo( (char*)&e, pos, qMin(uint(sizeof(e)),dataSize) );
+        if( mSettings.unsignedAsHexadecimal )
+        {
+        sprintf( buffer, "0x%02x", e );
+        }
+        else
+        {
+        sprintf( buffer, "%u", e );
+        }
+        break;
     }
     case SourceCodeStreamEncoderSettings::ShortType:
     {
-    short e = 0;
-    memcpy( &e, data, qMin(uint(sizeof(e)),dataSize) );
-    sprintf( buffer, "%d", e );
-    break;
+        short e = 0;
+        byteArrayModel->copyTo( (char*)&e, pos, qMin(uint(sizeof(e)),dataSize) );
+        sprintf( buffer, "%d", e );
+        break;
     }
     case SourceCodeStreamEncoderSettings::UnsignedShortType:
     {
-    unsigned short e = 0;
-    memcpy( &e, data, qMin(uint(sizeof(e)),dataSize) );
-    if( mSettings.unsignedAsHexadecimal )
-    {
-      sprintf( buffer, "0x%04x", e );
-    }
-    else
-    {
-      sprintf( buffer, "%u", e );
-    }
-    break;
+        unsigned short e = 0;
+        byteArrayModel->copyTo( (char*)&e, pos, qMin(uint(sizeof(e)),dataSize) );
+        if( mSettings.unsignedAsHexadecimal )
+        {
+        sprintf( buffer, "0x%04x", e );
+        }
+        else
+        {
+        sprintf( buffer, "%u", e );
+        }
+        break;
     }
     case SourceCodeStreamEncoderSettings::IntegerType:
     {
-    int e = 0;
-    memcpy( &e, data, qMin(uint(sizeof(e)),dataSize) );
-    sprintf( buffer, "%u", e );
-    break;
+        int e = 0;
+        byteArrayModel->copyTo( (char*)&e, pos, qMin(uint(sizeof(e)),dataSize) );
+        sprintf( buffer, "%u", e );
+        break;
     }
     case SourceCodeStreamEncoderSettings::UnsignedIntegerType:
     {
-    unsigned int e = 0;
-    memcpy( &e, data, qMin(uint(sizeof(e)),dataSize) );
-    if( mSettings.unsignedAsHexadecimal )
-    {
-      sprintf( buffer, "0x%08x", e );
-    }
-    else
-    {
-      sprintf( buffer, "%u", e );
-    }
-    break;
+        unsigned int e = 0;
+        byteArrayModel->copyTo( (char*)&e, pos, qMin(uint(sizeof(e)),dataSize) );
+        if( mSettings.unsignedAsHexadecimal )
+        {
+        sprintf( buffer, "0x%08x", e );
+        }
+        else
+        {
+        sprintf( buffer, "%u", e );
+        }
+        break;
     }
     case SourceCodeStreamEncoderSettings::FloatType:
     {
-    float e = 0;
-    memcpy( &e, data, qMin(uint(sizeof(e)),dataSize) );
-    sprintf( buffer, "%f", e );
-    break;
+        float e = 0;
+        byteArrayModel->copyTo( (char*)&e, pos, qMin(uint(sizeof(e)),dataSize) );
+        sprintf( buffer, "%f", e );
+        break;
     }
     case SourceCodeStreamEncoderSettings::DoubleType:
     {
-    double e = 0;
-    memcpy( &e, data, qMin(uint(sizeof(e)),dataSize) );
-    sprintf( buffer, "%f", e );
-    break;
-  }
-  default:
-  {
-    buffer[0] = 0;
-  }
+        double e = 0;
+        byteArrayModel->copyTo( (char*)&e, pos, qMin(uint(sizeof(e)),dataSize) );
+        sprintf( buffer, "%f", e );
+        break;
+    }
+    default:
+    {
+        buffer[0] = 0;
+    }
   }
 }
 

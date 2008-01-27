@@ -46,7 +46,9 @@ class KByteArrayValueStreamEncoder : public KAbstractByteArrayStreamEncoder
     virtual ~KByteArrayValueStreamEncoder();
 
   protected: // KAbstractByteArrayStreamEncoder API
-    virtual bool encodeDataToStream( QIODevice *device, const char *data, int size );
+    virtual bool encodeDataToStream( QIODevice *device,
+                                     const KHECore::KAbstractByteArrayModel *byteArrayModel,
+                                     const KHE::KSection &section );
 
   protected:
     ValueStreamEncoderSettings mSettings;

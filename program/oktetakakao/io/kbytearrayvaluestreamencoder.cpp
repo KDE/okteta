@@ -21,6 +21,7 @@
 #include "kbytearraydocument.h"
 #include "kbytearrayselection.h"
 // Okteta core
+#include <kabstractbytearraymodel.h>
 #include <kbytecodec.h>
 // KDE
 #include <KLocale>
@@ -38,7 +39,8 @@ KByteArrayValueStreamEncoder::KByteArrayValueStreamEncoder()
 
 
 bool KByteArrayValueStreamEncoder::encodeDataToStream( QIODevice *device,
-                                                      const char *data, int size )
+                                                       const KHECore::KAbstractByteArrayModel *byteArrayModel,
+                                                       const KHE::KSection &section )
 {
     bool success = true;
 
@@ -50,12 +52,12 @@ bool KByteArrayValueStreamEncoder::encodeDataToStream( QIODevice *device,
     QString valueString;
     valueString.resize( byteCodec->encodingWidth() );
 
-    for( int i=0; i<size; ++i )
+    for( int i=section.start(); i<=section.end(); ++i )
     {
         if( i > 0 )
             textStream << mSettings.separation;
 
-        byteCodec->encode( valueString, 0, data[i] );
+        byteCodec->encode( valueString, 0, byteArrayModel->datum(i) );
 
         textStream << valueString;
     }

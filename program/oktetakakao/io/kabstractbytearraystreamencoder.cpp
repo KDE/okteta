@@ -21,7 +21,7 @@
 #include "kbytearraydocument.h"
 #include "kbytearrayselection.h"
 // Okteta core
-#include <kbytearraymodel.h>
+#include <kabstractbytearraymodel.h>
 
 
 KAbstractByteArrayStreamEncoder::KAbstractByteArrayStreamEncoder( const QString &remoteTypeName,
@@ -30,37 +30,35 @@ KAbstractByteArrayStreamEncoder::KAbstractByteArrayStreamEncoder( const QString 
 {}
 
 bool KAbstractByteArrayStreamEncoder::encodeToStream( QIODevice *device,
-                                                        const KAbstractDocument *document )
+                                                      const KAbstractDocument *document )
 {
     bool success = false;
 
     const KByteArrayDocument *byteArrayDocument = qobject_cast<const KByteArrayDocument*>( document );
     if( byteArrayDocument )
     {
-        KHECore::KByteArrayModel *byteArray = byteArrayDocument->content();
-        const char *data = byteArray->data();
+        KHECore::KAbstractByteArrayModel *byteArray = byteArrayDocument->content();
         const int size = byteArray->size();
 
-        success = encodeDataToStream( device, data, size );
+        success = encodeDataToStream( device, byteArray, KHE::KSection::fromWidth(0,size) );
     }
 
     return success;
 }
 
 bool KAbstractByteArrayStreamEncoder::encodeToStream( QIODevice *device,
-                                                        const KAbstractDocumentSelection *selection )
+                                                      const KAbstractDocumentSelection *selection )
 {
     bool success = false;
     const KByteArraySelection *byteArraySelection = qobject_cast<const KByteArraySelection*>( selection );
     const KByteArrayDocument *byteArrayDocument = qobject_cast<const KByteArrayDocument*>( selection->document() );
     if( byteArrayDocument && byteArraySelection )
     {
-        KHECore::KByteArrayModel *byteArray = byteArrayDocument->content();
-        const KHE::KSection section = byteArraySelection->isValid() ? byteArraySelection->section() : KHE::KSection( 0, byteArray->size() );
-        const char *data = byteArray->data() + section.start();
-        const int size = section.width();
+        KHECore::KAbstractByteArrayModel *byteArray = byteArrayDocument->content();
+        const KHE::KSection section = byteArraySelection->isValid() ? byteArraySelection->section() :
+                                      KHE::KSection::fromWidth( 0, byteArray->size() );
 
-        success = encodeDataToStream( device, data, size );
+        success = encodeDataToStream( device, byteArray, section );
     }
     return success;
 }
