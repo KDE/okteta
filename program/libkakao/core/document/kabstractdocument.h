@@ -62,13 +62,17 @@ class KAbstractDocument : public QObject
     virtual QString typeName() const = 0;
     virtual QString mimeType() const = 0;
 
-//     virtual bool isReadOnly() const = 0;
+    /** default returns false */
+    virtual bool isModifiable() const;
+    /** default returns true */
+    virtual bool isReadOnly() const;
+    /** default does nothing */
+    virtual void setReadOnly( bool isReadOnly );
 
     virtual SynchronizationStates synchronizationStates() const = 0;
 // virtual QVariant data ( const QModelIndex & index, int role = Qt::DisplayRole ) const = 0
 
   public:
-//     void setReadOnly( bool ); TODO: property of base document?
     void setSynchronizer( KAbstractDocumentSynchronizer *synchronizer );
 
   public: // helper or basic?
@@ -77,7 +81,11 @@ class KAbstractDocument : public QObject
 
   Q_SIGNALS:
     // TODO: should be signal the diff? how to say then remote is in synch again?
+    // could be done by pairs of flags instead of notset = isnot
     void modified( KAbstractDocument::SynchronizationStates newStates );
+    // TODO: readonly and modifiable should be turned into flags, also get/set methods
+    void readOnlyChanged( bool isReadOnly );
+    void modifiableChanged( bool isModifiable );
     void titleChanged( const QString &newTitel );
     void synchronizerChanged( KAbstractDocumentSynchronizer *newSynchronizer );
 
