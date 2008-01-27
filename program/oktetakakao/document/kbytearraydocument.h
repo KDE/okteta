@@ -47,6 +47,9 @@ class KByteArrayDocument : public KAbstractDocument//, public KDE::If::ByteArray
     virtual QString typeName() const;
     virtual QString mimeType() const;
     virtual SynchronizationStates synchronizationStates() const;
+    virtual bool isModifiable() const;
+    virtual bool isReadOnly() const;
+    virtual void setReadOnly( bool isReadOnly );
 
   public: // KDE::If::ByteArray
     virtual KHECore::KAbstractByteArrayModel *content() const;

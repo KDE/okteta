@@ -29,12 +29,14 @@ KByteArrayDocument::KByteArrayDocument()
 : mByteArray( new KHECore::KByteArrayModel() )
 {
     connect( mByteArray, SIGNAL(modificationChanged( bool )), SLOT(onModelModification( bool )) );
+    connect( mByteArray, SIGNAL(readOnlyChanged( bool )), SIGNAL(readOnlyChanged( bool )) );
 }
 
 KByteArrayDocument::KByteArrayDocument( KHECore::KByteArrayModel *byteArray )
 : mByteArray( byteArray )
 {
     connect( mByteArray, SIGNAL(modificationChanged( bool )), SLOT(onModelModification( bool )) );
+    connect( mByteArray, SIGNAL(readOnlyChanged( bool )), SIGNAL(readOnlyChanged( bool )) );
 }
 #if 0
 KByteArrayDocument::KByteArrayDocument( const QString &filePath )
@@ -51,6 +53,10 @@ KHECore::KAbstractByteArrayModel* KByteArrayDocument::content() const { return m
 QString KByteArrayDocument::title() const { return mTitle; }
 QString KByteArrayDocument::mimeType() const { return QLatin1String("KByteArrayDocument"); }
 QString KByteArrayDocument::typeName() const { return i18n( "Byte Array" ); }
+
+bool KByteArrayDocument::isModifiable() const { return true; }
+bool KByteArrayDocument::isReadOnly()   const { return mByteArray->isReadOnly(); }
+void KByteArrayDocument::setReadOnly( bool isReadOnly ) { mByteArray->setReadOnly( isReadOnly ); }
 
 KAbstractDocument::SynchronizationStates KByteArrayDocument::synchronizationStates() const
 {
@@ -73,5 +79,3 @@ KByteArrayDocument::~KByteArrayDocument()
 {
     delete mByteArray;
 }
-
-#include "kbytearraydocument.moc"
