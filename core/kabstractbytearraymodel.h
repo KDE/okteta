@@ -119,6 +119,7 @@ class KHECORE_EXPORT KAbstractByteArrayModel : public QObject
 
   public: // state read API
     /**
+      * Default returns @c true.
       * @return @c true if the buffer can only be read, @c false if writing is allowed
       */
     virtual bool isReadOnly() const;
@@ -194,6 +195,12 @@ class KHECORE_EXPORT KAbstractByteArrayModel : public QObject
       */
     virtual void setModified( bool M ) = 0;
 
+    /** sets the readonly flag for the byte array if this is possible.
+      * Default implementation does not do anything.
+      * @param isReadOnly new state
+      */
+    virtual void setReadOnly( bool isReadOnly );
+
 
   public: // service functions
     /** copies the data of the section into a given array Dest. If the section extends the buffers range
@@ -242,6 +249,7 @@ class KHECORE_EXPORT KAbstractByteArrayModel : public QObject
     void contentsMoved( int Destination, int Source, int MovedLength );
     void contentsChanged( int Start, int End );
 
+    void readOnlyChanged( bool isReadOnly );
     void modificationChanged( bool IsChanged );
     //void redoAvailable( bool IsAvailable );
     //void undoAvailable( bool IsAvailable );

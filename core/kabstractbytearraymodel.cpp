@@ -25,6 +25,11 @@ namespace KHECore {
 
 KAbstractByteArrayModel::KAbstractByteArrayModel() {}
 
+void KAbstractByteArrayModel::setReadOnly( bool isReadOnly )
+{
+    Q_UNUSED( isReadOnly )
+}
+
 int KAbstractByteArrayModel::insert( int Pos, const char* D, int Length )
 {
   return replace( Pos,0,D,Length );

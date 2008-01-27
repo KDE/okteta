@@ -66,7 +66,7 @@ KByteArrayModelPrivate::KByteArrayModelPrivate( KByteArrayModel *parent,
    m_maxSize( maxSize ),
    m_keepsMemory( false ),
    m_autoDelete( true ),
-   m_readOnly( true ),
+   m_readOnly( false ),
    m_modified( false )
 {
 }
@@ -74,6 +74,8 @@ KByteArrayModelPrivate::KByteArrayModelPrivate( KByteArrayModel *parent,
 
 int KByteArrayModelPrivate::insert( int position, const char* data, int length )
 {
+    if( m_readOnly )
+        return 0;
     // check all parameters
     if( length == 0 )
       return 0;
@@ -100,6 +102,9 @@ int KByteArrayModelPrivate::insert( int position, const char* data, int length )
 
 int KByteArrayModelPrivate::remove( const KSection &section )
 {
+    if( m_readOnly )
+        return 0;
+
     KSection removeSection( section );
     if( removeSection.startsBehind(m_size-1) || removeSection.width() == 0 )
         return 0;
@@ -127,6 +132,9 @@ int KByteArrayModelPrivate::remove( const KSection &section )
 
 unsigned int KByteArrayModelPrivate::replace( const KSection &section, const char* data, unsigned int inputLength )
 {
+    if( m_readOnly )
+        return 0;
+
     KSection removeSection( section );
     // check all parameters
     if( removeSection.start() >= (int)m_size || (removeSection.width()==0 && inputLength==0) )
@@ -197,6 +205,9 @@ unsigned int KByteArrayModelPrivate::replace( const KSection &section, const cha
 
 int KByteArrayModelPrivate::move( int destinationStart, const KSection &ss )
 {
+    if( m_readOnly )
+        return 0;
+
     KSection sourceSection( ss );
     // check all parameters
     if( sourceSection.start() >= (int)m_size || sourceSection.width() == 0
@@ -276,6 +287,9 @@ int KByteArrayModelPrivate::move( int destinationStart, const KSection &ss )
 
 int KByteArrayModelPrivate::fill( const char fillDatum, unsigned int position, int fillLength )
 {
+    if( m_readOnly )
+        return 0;
+
     // nothing to fill
     if( position >= m_size )
         return 0;
@@ -345,6 +359,9 @@ int KByteArrayModelPrivate::lastIndexOf( const char *searchString, int length, i
 
 int KByteArrayModelPrivate::addSize( int addSize, int splitPosition, bool saveUpperPart )
 {
+    if( m_readOnly )
+        return 0;
+
     unsigned int newSize = m_size + addSize;
     // check if buffer does not get too big
     if( m_maxSize != -1 && (int)newSize > m_maxSize )

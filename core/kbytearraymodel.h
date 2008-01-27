@@ -60,6 +60,7 @@ class KHECORE_EXPORT KByteArrayModel : public KAbstractByteArrayModel, public KD
     virtual void setDatum( unsigned int offset, const char datum );
 
     virtual void setModified( bool modified = true );
+    virtual void setReadOnly( bool isReadOnly = true );
 
     virtual int indexOf( const char *searchString, int length, int from  = 0 ) const;
     virtual int lastIndexOf( const char *searchString, int length, int from = -1 ) const;
@@ -77,7 +78,6 @@ class KHECORE_EXPORT KByteArrayModel : public KAbstractByteArrayModel, public KD
     virtual void bookmarksModified( bool modified );
 
   public:
-    void setReadOnly( bool RO = true );
     void setMaxSize( int MS );
     /** sets whether the memory given by setData or in the constructor should be kept on resize
       */
