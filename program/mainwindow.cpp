@@ -20,6 +20,7 @@
 // program
 #include "program.h"
 // controllers
+#include <overwriteonly/overwriteonlycontroller.h>
 #include <poddecoder/poddecodercontroller.h>
 #include <bytetable/bytetablecontroller.h>
 #include <info/infocontroller.h>
@@ -76,6 +77,7 @@ void OktetaMainWindow::setupControllers()
   mControllers.append( new ClipboardController(this) );
   mControllers.append( new CopyAsController(mProgram->documentManager(),this) );
 
+  mControllers.append( new OverwriteOnlyController(this) );
   mControllers.append( new PODDecoderController(this) );
   mControllers.append( new ByteTableController(this) );
   mControllers.append( new InfoController(this) );

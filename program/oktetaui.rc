@@ -19,7 +19,7 @@
     <Menu name="permission">
       <text context="@title:menu">Permissions</text>
       <Action name="isreadonly" />
-      <Action name="resize_lock" />
+      <Action name="isoverwriteonly" />
     </Menu>
     <Separator/>
     <Action name="new_window"/>

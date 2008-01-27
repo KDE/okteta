@@ -16,8 +16,8 @@ include_directories(
   view/libframesprint
 )
 
-set( LIBLISTVIEW_SRCS
-  liblistview/listview.cpp
+set( OVERWRITEONLYCONTROLLER_SRCS
+  document/overwriteonly/overwriteonlycontroller.cpp
 )
 set( INFOCONTROLLER_SRCS
   view/info/statistictablemodel.cpp
@@ -117,6 +117,7 @@ set( VIEWCONFIGCONTROLLER_SRCS
 )
 
 set( OKTETA_KAKAO_CONTROLLERS_SRCS
+  ${OVERWRITEONLYCONTROLLER_SRCS}
   ${BYTEARRAYLINEEDIT_LIB_SRCS}
   ${PODDECODERCONTROLLER_SRCS}
   ${STRINGSEXTRACTCONTROLLER_SRCS}
