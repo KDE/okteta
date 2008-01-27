@@ -16,11 +16,11 @@
     </Menu>
     <Separator/>
     <Action name="cancel" />
-    <!--Menu name="permission">
-      <text>Permissions</text>
-      <Action name="read_only" />
+    <Menu name="permission">
+      <text context="@title:menu">Permissions</text>
+      <Action name="isreadonly" />
       <Action name="resize_lock" />
-    </Menu-->
+    </Menu>
     <Separator/>
     <Action name="new_window"/>
     <Action name="close_window"/>
