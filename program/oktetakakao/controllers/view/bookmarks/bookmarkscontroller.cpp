@@ -80,8 +80,8 @@ void BookmarksController::setView( KAbstractView *view )
     if( mByteArrayView ) mByteArrayView->disconnect( this );
     if( mByteArray ) mByteArray->disconnect( this );
 
-    mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
-    KByteArrayDocument *document = view ? static_cast<KByteArrayDocument*>( view->document() ) : 0;
+    mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
+    KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->document() ) : 0;
     mByteArray = document ? document->content() : 0;
     mBookmarks = mByteArray ? qobject_cast<KDE::If::Bookmarks*>( mByteArray ) : 0;
 
@@ -114,7 +114,7 @@ void BookmarksController::updateBookmarks()
 
     qDeleteAll( mBookmarksActionGroup->actions() );
 
-    if( mByteArray == 0 )
+    if( mBookmarks == 0 )
         return;
 
     const KHECore::KBookmarkList bookmarks = mBookmarks->bookmarkList();
