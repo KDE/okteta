@@ -97,9 +97,9 @@ void BookmarksController::setView( KAbstractView *view )
                  SLOT(updateBookmarks()) );
         connect( mByteArrayView, SIGNAL( cursorPositionChanged( int )), SLOT( onCursorPositionChanged( int )) );
     }
-    const bool hasView = ( mByteArray != 0 );
-    const bool hasBookmarks = hasView && ( bookmarksCount != 0 );
-    mCreateAction->setEnabled( hasView );
+    const bool hasViewWithBookmarks = ( mBookmarks != 0 );
+    const bool hasBookmarks = hasViewWithBookmarks && ( bookmarksCount != 0 );
+    mCreateAction->setEnabled( hasViewWithBookmarks );
     mDeleteAction->setEnabled( hasBookmarks ); //TODO: current is bookmark?
     mDeleteAllAction->setEnabled( hasBookmarks );
     mGotoNextBookmarkAction->setEnabled( hasBookmarks );
