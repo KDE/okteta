@@ -46,8 +46,8 @@ class KAbstractByteArrayModelIfTest : public QObject
   protected:
     void checkContentsReplaced( int Position, int RemovedLength, int InsertedLength );
     void checkContentsReplaced( const KHE::KSection &RemoveSection, int InsertedLength );
-    void checkContentsMoved( int Destination, int Source, int MovedLength );
-    void checkContentsMoved( int Destination, const KHE::KSection &SourceSection );
+    void checkContentsSwapped( int firstStart, int secondStart, int secondLength );
+    void checkContentsSwapped( int firstStart, const KHE::KSection &secondSection );
     void checkContentsChanged( const KHE::KSection &Section );
     void checkContentsChanged( int Start, int End );
     void clearSignalSpys();
@@ -69,7 +69,7 @@ class KAbstractByteArrayModelIfTest : public QObject
     void testInsertAtMid();
     void testInsertAtEnd();
     //void testReplace();
-    void testMove();
+    void testSwap();
     void testReplaceEqual();
     void testReplaceLess();
     void testReplaceMore();
@@ -80,7 +80,7 @@ class KAbstractByteArrayModelIfTest : public QObject
 
     QSignalSpy *ContentsChangedSpy;
     QSignalSpy *ContentsReplacedSpy;
-    QSignalSpy *ContentsMovedSpy;
+    QSignalSpy *ContentsSwappedSpy;
 };
 
 inline KAbstractByteArrayModelIfTest::KAbstractByteArrayModelIfTest()  : ByteArrayModel( 0 ) {}

@@ -79,9 +79,9 @@ unsigned int KByteArrayModel::replace( const KSection &before, const char *after
     return d->replace( before, after, afterLength );
 }
 
-int KByteArrayModel::move( int to, const KSection &fromSection )
+bool KByteArrayModel::swap( int firstStart, const KSection &secondSection )
 {
-    return d->move( to, fromSection );
+    return d->swap( firstStart, secondSection );
 }
 
 int KByteArrayModel::fill( const char fillChar, unsigned int from, int length )

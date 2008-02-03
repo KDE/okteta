@@ -203,21 +203,21 @@ unsigned int KByteArrayModelPrivate::replace( const KSection &section, const cha
 }
 
 
-int KByteArrayModelPrivate::move( int destinationStart, const KSection &ss )
+bool KByteArrayModelPrivate::swap( int firstStart, const KSection &secondSection )
 {
     if( m_readOnly )
-        return 0;
+        return false;
 
-    KSection sourceSection( ss );
+    KSection sourceSection( secondSection );
     // check all parameters
     if( sourceSection.start() >= (int)m_size || sourceSection.width() == 0
-        || destinationStart > (int)m_size || sourceSection.start() == destinationStart )
-        return sourceSection.start();
+        || firstStart > (int)m_size || sourceSection.start() == firstStart )
+        return false;
 
     sourceSection.restrictEndTo( m_size-1 );
-    const bool toRight = destinationStart > sourceSection.start();
+    const bool toRight = firstStart > sourceSection.start();
     const int movedLength = sourceSection.width();
-    const int displacedLength = toRight ?  destinationStart - sourceSection.end()-1 : sourceSection.start() - destinationStart;
+    const int displacedLength = toRight ?  firstStart - sourceSection.end()-1 : sourceSection.start() - firstStart;
 
     // find out section that is smaller
     int smallPartLength, largePartLength, smallPartStart, largePartStart, smallPartDest, largePartDest;
@@ -230,15 +230,15 @@ int KByteArrayModelPrivate::move( int destinationStart, const KSection &ss )
         // moving part moves right?
         if( toRight )
         {
-            smallPartDest = destinationStart - movedLength;
+            smallPartDest = firstStart - movedLength;
             largePartStart = sourceSection.end()+1;
             largePartDest = sourceSection.start();
         }
         else
         {
-            smallPartDest = destinationStart;
-            largePartStart = destinationStart;
-            largePartDest = destinationStart + movedLength;
+            smallPartDest = firstStart;
+            largePartStart = firstStart;
+            largePartDest = firstStart + movedLength;
         }
     }
     else
@@ -249,15 +249,15 @@ int KByteArrayModelPrivate::move( int destinationStart, const KSection &ss )
         // moving part moves right?
         if( toRight )
         {
-            largePartDest = destinationStart - movedLength;
+            largePartDest = firstStart - movedLength;
             smallPartStart = sourceSection.end()+1;
             smallPartDest = sourceSection.start();
         }
         else
         {
-            largePartDest = destinationStart;
-            smallPartStart = destinationStart;
-            smallPartDest = destinationStart + movedLength;
+            largePartDest = firstStart;
+            smallPartStart = firstStart;
+            smallPartDest = firstStart + movedLength;
         }
     }
 
@@ -273,15 +273,15 @@ int KByteArrayModelPrivate::move( int destinationStart, const KSection &ss )
     delete [] temp;
 
     const bool bookmarksModified = toRight ?
-        m_bookmarks.adjustToMoved( sourceSection.start(), sourceSection.end()+1, destinationStart-sourceSection.end()-1 ) :
-        m_bookmarks.adjustToMoved( destinationStart, sourceSection.start(),sourceSection.width() );
+        m_bookmarks.adjustToMoved( sourceSection.start(), sourceSection.end()+1, firstStart-sourceSection.end()-1 ) :
+        m_bookmarks.adjustToMoved( firstStart, sourceSection.start(),sourceSection.width() );
     m_modified = true;
 
-    emit p->contentsMoved( destinationStart, sourceSection.start(),sourceSection.width()  );
-    emit p->contentsChanged( toRight?sourceSection.start():destinationStart, toRight?destinationStart:sourceSection.end() );
+    emit p->contentsSwapped( firstStart, sourceSection.start(),sourceSection.width()  );
+    emit p->contentsChanged( toRight?sourceSection.start():firstStart, toRight?firstStart:sourceSection.end() );
     if( bookmarksModified ) emit p->bookmarksModified( true );
     emit p->modificationChanged( true );
-    return (movedLength<displacedLength) ? smallPartDest : largePartDest;
+    return true;
 }
 
 

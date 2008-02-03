@@ -112,7 +112,7 @@ KByteArrayView::KByteArrayView( KHECore::KAbstractByteArrayModel *Buffer, QWidge
   connect( ByteArrayModel, SIGNAL(readOnlyChanged( bool )), SLOT(adaptController()) );
   connect( ByteArrayModel, SIGNAL(contentsChanged(int,int)), SLOT(updateRange(int,int)) );
   connect( ByteArrayModel, SIGNAL(contentsReplaced(int,int,int)), SLOT(onContentsReplaced(int,int,int)) );
-  connect( ByteArrayModel, SIGNAL(contentsMoved(int,int,int)), SLOT(onContentsMoved(int,int,int)) );
+  connect( ByteArrayModel, SIGNAL(contentsSwapped(int,int,int)), SLOT(onContentsSwapped(int,int,int)) );
 
   KDE::If::Bookmarks *bookmarks = qobject_cast<KDE::If::Bookmarks*>( ByteArrayModel );
   if( bookmarks )
@@ -283,7 +283,7 @@ void KByteArrayView::setByteArrayModel( KHECore::KAbstractByteArrayModel *B )
   viewport()->update();
   connect( ByteArrayModel, SIGNAL(contentsChanged(int,int)), SLOT(updateRange(int,int)) );
   connect( ByteArrayModel, SIGNAL(contentsReplaced(int,int,int)), SLOT(onContentsReplaced(int,int,int)) );
-  connect( ByteArrayModel, SIGNAL(contentsMoved(int,int,int)), SLOT(onContentsMoved(int,int,int)) );
+  connect( ByteArrayModel, SIGNAL(contentsSwapped(int,int,int)), SLOT(onContentsSwapped(int,int,int)) );
 
   BufferCursor->gotoStart();
   ensureCursorVisible();
@@ -1040,8 +1040,11 @@ void KByteArrayView::onContentsReplaced( int Pos, int RemovedLength, int Inserte
   emit cursorPositionChanged( BufferCursor->realIndex() );
 }
 
-void KByteArrayView::onContentsMoved( int /*Destination*/, int /*Source*/, int /*MovedLength*/ )
+void KByteArrayView::onContentsSwapped( int firstStart, int secondStart, int secondLength )
 {
+Q_UNUSED( firstStart )
+Q_UNUSED( secondStart )
+Q_UNUSED( secondLength )
   // TODO: what should happen here?
   pauseCursor();
 
@@ -1964,7 +1967,7 @@ void KByteArrayView::handleInternalDrag( QDropEvent *Event )
     else
       newCursorIndex = InsertIndex + Selection.width();
 
-    const bool success = ByteArrayModel->move( InsertIndex, Selection );
+    const bool success = ByteArrayModel->swap( InsertIndex, Selection );
     if( success )
     {
       BufferCursor->gotoCIndex( newCursorIndex );

@@ -29,7 +29,7 @@ using namespace KHE;
 using namespace KHECore;
 
 
-
+#include <KDebug>
 // ---------------------------------------------------------------- Tests -----
 
 
@@ -39,7 +39,7 @@ void KAbstractByteArrayModelIfTest::init()
 
   ContentsChangedSpy =  new QSignalSpy( ByteArrayModel, SIGNAL(contentsChanged(int,int)) );
   ContentsReplacedSpy = new QSignalSpy( ByteArrayModel, SIGNAL(contentsReplaced(int,int,int)) );
-  ContentsMovedSpy =    new QSignalSpy( ByteArrayModel, SIGNAL(contentsMoved(int,int,int)) );
+  ContentsSwappedSpy =    new QSignalSpy( ByteArrayModel, SIGNAL(contentsSwapped(int,int,int)) );
 }
 
 void KAbstractByteArrayModelIfTest::cleanup()
@@ -48,14 +48,14 @@ void KAbstractByteArrayModelIfTest::cleanup()
 
   delete ContentsChangedSpy;
   delete ContentsReplacedSpy;
-  delete ContentsMovedSpy;
+  delete ContentsSwappedSpy;
 }
 
 void KAbstractByteArrayModelIfTest::clearSignalSpys()
 {
   ContentsChangedSpy->clear();
   ContentsReplacedSpy->clear();
-  ContentsMovedSpy->clear();
+  ContentsSwappedSpy->clear();
 }
 
 void KAbstractByteArrayModelIfTest::checkContentsReplaced( int Position, int RemovedLength, int InsertedLength )
@@ -70,17 +70,17 @@ void KAbstractByteArrayModelIfTest::checkContentsReplaced( int Position, int Rem
 void KAbstractByteArrayModelIfTest::checkContentsReplaced( const KHE::KSection &RemoveSection, int InsertedLength )
 { checkContentsReplaced( RemoveSection.start(), RemoveSection.width(), InsertedLength ); }
 
-void KAbstractByteArrayModelIfTest::checkContentsMoved( int Destination, int Source, int MovedLength )
+void KAbstractByteArrayModelIfTest::checkContentsSwapped( int firstStart, int secondStart, int secondLength )
 {
-   QVERIFY( ContentsMovedSpy->isValid() );
-   QCOMPARE( ContentsMovedSpy->count(), 1 );
-   QList<QVariant> Arguments = ContentsMovedSpy->takeFirst();
-   QCOMPARE( Arguments.at(0).toInt(), Destination );
-   QCOMPARE( Arguments.at(1).toInt(), Source );
-   QCOMPARE( Arguments.at(2).toInt(), MovedLength );
+   QVERIFY( ContentsSwappedSpy->isValid() );
+   QCOMPARE( ContentsSwappedSpy->count(), 1 );
+   QList<QVariant> Arguments = ContentsSwappedSpy->takeFirst();
+   QCOMPARE( Arguments.at(0).toInt(), firstStart );
+   QCOMPARE( Arguments.at(1).toInt(), secondStart );
+   QCOMPARE( Arguments.at(2).toInt(), secondLength );
 }
-void KAbstractByteArrayModelIfTest::checkContentsMoved( int Destination, const KHE::KSection &SourceSection )
-{ checkContentsMoved( Destination, SourceSection.start(), SourceSection.width() ); }
+void KAbstractByteArrayModelIfTest::checkContentsSwapped( int firstStart, const KHE::KSection &secondSection )
+{ checkContentsSwapped( firstStart, secondSection.start(), secondSection.width() ); }
 
 void KAbstractByteArrayModelIfTest::checkContentsChanged( int Start, int End )
 {
@@ -451,9 +451,9 @@ void KAbstractByteArrayModelIfTest::testInsertAtEnd()
 // how the test works:
 // fills the buffer with random data, puts special data at the begin
 // copies Data
-// moves the Data to the mid, the end and to the begin again
+// moves the Data to the mid, then the start.
 // tests for correct data, modified flag and size
-void KAbstractByteArrayModelIfTest::testMove()
+void KAbstractByteArrayModelIfTest::testSwap()
 {
   // can we alter the buffer at all?
   if( ByteArrayModel->isReadOnly() )
@@ -462,12 +462,12 @@ void KAbstractByteArrayModelIfTest::testMove()
 
   // prepare Copy
   static const int MoveSize = 10;
-  const KSection Origin = KSection::fromWidth( 0, MoveSize );
   int Size = ByteArrayModel->size();
+  const KSection Origin = KSection::fromWidth( Size-MoveSize, MoveSize );
   KFixedSizeByteArrayModel Copy( Size );
 
   // prepare ByteArrayModel
-  textureByteArrayModel( ByteArrayModel, 100, 255, Origin.behindEnd() );
+  textureByteArrayModel( ByteArrayModel, 100, 255, 0, Origin.beforeStart() );
   textureByteArrayModel( ByteArrayModel, 10, 99, Origin );
   KSection Source = Origin;
   ByteArrayModel->setModified( false );
@@ -475,41 +475,62 @@ void KAbstractByteArrayModelIfTest::testMove()
   // create Copy
   ByteArrayModel->copyTo( Copy.rawData(), 0, Size );
 
-  // Action: move to middle (to right)
+  // Action: move to middle (to left)
   int DestPos = Size/2;
-  KSection Target = KSection::fromWidth( DestPos-Source.width(), Source.width() );
+  KSection Target = KSection::fromWidth( DestPos, Source.width() );
   clearSignalSpys();
 
-  int NewPos = ByteArrayModel->move( DestPos, Source );
+  bool success = ByteArrayModel->swap( DestPos, Source );
 
-  QCOMPARE( NewPos, Target.start() );
-  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(0,Target.beforeStart()),Origin.behindEnd()), 0 );
+  QVERIFY( success );
+  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(0,Target.beforeStart()),0), 0 );
   QCOMPARE( Copy.compare(*ByteArrayModel,Target,Origin.start()), 0 );
-  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(Target.behindEnd(),Size-1),Target.behindEnd()), 0 );
-  QCOMPARE( ByteArrayModel->isModified(), NewPos != Source.start() );
+  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(Target.behindEnd(),Size-1),Target.start()), 0 );
+  QCOMPARE( ByteArrayModel->isModified(), success );
   QCOMPARE( ByteArrayModel->size(), Size );
-  checkContentsMoved( DestPos, Source );
-  checkContentsChanged( Source.start(), DestPos );
+  checkContentsSwapped( DestPos, Source );
+  checkContentsChanged( DestPos, Source.end() );
 
   // clean
   ByteArrayModel->setModified( false );
   Source = Target;
 
-  // Action: move to end (to right)
-  DestPos = Size;
-  Target.moveToStart( DestPos-Source.width() );
+  // Action: move one in middle (to left)
+  --DestPos;
+  Target.moveToStart( DestPos );
   clearSignalSpys();
 
-  NewPos = ByteArrayModel->move( DestPos, Source );
+  success = ByteArrayModel->swap( DestPos, Source );
 
-  QCOMPARE( NewPos, Target.start() );
-  QCOMPARE( Copy.compare(*ByteArrayModel, KSection(0,Target.beforeStart()),Origin.behindEnd()), 0 );
+  QVERIFY( success );
+  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(0,Target.beforeStart()),0), 0 );
   QCOMPARE( Copy.compare(*ByteArrayModel,Target,Origin.start()), 0 );
-  QCOMPARE( ByteArrayModel->isModified(), NewPos != Source.start() );
+  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(Target.behindEnd(),Size-1),Target.start()), 0 );
+  QCOMPARE( ByteArrayModel->isModified(), success );
   QCOMPARE( ByteArrayModel->size(), Size );
-  checkContentsMoved( DestPos, Source );
-  checkContentsChanged( Source.start(), DestPos );
+  checkContentsSwapped( DestPos, Source );
+  checkContentsChanged( DestPos, Source.end() );
 
+  // clean
+  ByteArrayModel->setModified( false );
+  Source = Target;
+
+  // Action: move to start (to left)
+  DestPos = 0;
+  Target.moveToStart( DestPos );
+  clearSignalSpys();
+
+  success = ByteArrayModel->swap( DestPos, Source );
+
+  QVERIFY( success );
+  QCOMPARE( Copy.compare(*ByteArrayModel,Target,Origin.start()), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(Target.behindEnd(),Size-1),Target.start()), 0 );
+  QCOMPARE( ByteArrayModel->isModified(), success );
+  QCOMPARE( ByteArrayModel->size(), Size );
+  checkContentsSwapped( DestPos, Source );
+  checkContentsChanged( DestPos, Source.end() );
+
+#if 0
   // clean
   ByteArrayModel->setModified( false );
   Source = Target;
@@ -526,8 +547,9 @@ void KAbstractByteArrayModelIfTest::testMove()
   QCOMPARE( Copy.compare(*ByteArrayModel,KSection(Target.behindEnd(),Size-1),Origin.behindEnd()), 0 );
   QCOMPARE( ByteArrayModel->isModified(), NewPos != Source.start() );
   QCOMPARE( ByteArrayModel->size(), Size );
-  checkContentsMoved( DestPos, Source );
+  checkContentsSwapped( DestPos, Source );
   checkContentsChanged( DestPos, Source.end() );
+#endif
 }
 
 

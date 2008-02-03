@@ -456,7 +456,7 @@ class KHEUI_EXPORT KByteArrayView : public KColumnsView
 
     void adaptController();
     void onContentsReplaced( int Pos, int RemovedLength, int InsertedLength );
-    void onContentsMoved( int Destination, int Source, int MovedLength );
+    void onContentsSwapped( int firstStart, int secondStart, int secondLength );
     void updateRange( int Start, int End );
     void onBookmarksChange( const QList<KHECore::KBookmark> &bookmarks );
 

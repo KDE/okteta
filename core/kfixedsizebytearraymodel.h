@@ -51,7 +51,7 @@ class KFixedSizeByteArrayModel : public KAbstractByteArrayModel
     virtual int insert( int Pos, const char*, int Length );
     virtual int remove( const KSection &Remove );
     virtual unsigned int replace( const KSection &Remove, const char*, unsigned int InputLength );
-    virtual int move( int DestPos, const KSection &SourceSection );
+    virtual bool swap( int firstStart, const KSection &secondSection );
     virtual int fill( const char FillChar, unsigned int Pos = 0, int Length = -1 );
     virtual void setDatum( unsigned int Offset, const char Char );
 

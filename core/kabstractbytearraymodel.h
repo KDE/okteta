@@ -163,15 +163,14 @@ class KHECORE_EXPORT KAbstractByteArrayModel : public QObject
     unsigned int replace( unsigned int Pos, unsigned int RemoveLength,
                           const char* Source, unsigned int SourceLength );
 
-    /** moves a part of the data to a new position, while floating the other data around
-      * when moving to a higher place the length of the block must be taken into account
-      * if the new positions extend beyond the buffers end the section is moved to the end.
-      * @param DesPos position of the data where the section should be moved behind
-      * @param SourceSection data section to be moved
-      * @return new pos of moved data or old, if failed
+    // todo use parameters grouped differrently?
+    /** moves the second section before the start of the first
+      * which is the same as moving the first behind the second.
+      * @param firstStart position of the data where the section should be moved behind
+      * @param secondSection data section to be moved
+      * @return @true if operation was successfull, @false otherwise
       */
-    virtual int move( int DestPos, const KSection &SourceSection ) = 0;
-    // TODO: enforce destPos to be lower then source.start, it will be always the same calculation
+    virtual bool swap( int firstStart, const KSection &secondSection ) = 0;
 
     /**
      * fills the buffer with the FillChar. If the buffer is to small it will be extended as much as possible.
@@ -246,7 +245,7 @@ class KHECORE_EXPORT KAbstractByteArrayModel : public QObject
   Q_SIGNALS:
     // TODO: how to deal replacing with fixed size of buffer?
     void contentsReplaced( int Position, int RemovedLength, int InsertedLength );
-    void contentsMoved( int Destination, int Source, int MovedLength );
+    void contentsSwapped( int firstStart, int secondStart, int secondLength );
     void contentsChanged( int Start, int End );
 
     void readOnlyChanged( bool isReadOnly );

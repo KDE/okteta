@@ -156,18 +156,18 @@ unsigned int KFixedSizeByteArrayModel::replace( const KSection &R, const char* D
 }
 
 
-int KFixedSizeByteArrayModel::move( int DestPos, const KSection &S )
+bool KFixedSizeByteArrayModel::swap( int firstStart, const KSection &secondSection )
 {
-  KSection SourceSection( S );
+  KSection SourceSection( secondSection );
   // check all parameters
   if( SourceSection.start() >= (int)Size || SourceSection.width() == 0
-      || DestPos > (int)Size || SourceSection.start() == DestPos )
-    return SourceSection.start();
+      || firstStart > (int)Size || SourceSection.start() == firstStart )
+    return false;
 
   SourceSection.restrictEndTo( Size-1 );
-  bool ToRight = DestPos > SourceSection.start();
+  bool ToRight = firstStart > SourceSection.start();
   int MovedLength = SourceSection.width();
-  int DisplacedLength = ToRight ?  DestPos - SourceSection.end()-1 : SourceSection.start() - DestPos;
+  int DisplacedLength = ToRight ?  firstStart - SourceSection.end()-1 : SourceSection.start() - firstStart;
 
   // find out section that is smaller
   int SmallPartLength, LargePartLength, SmallPartStart, LargePartStart, SmallPartDest, LargePartDest;
@@ -180,15 +180,15 @@ int KFixedSizeByteArrayModel::move( int DestPos, const KSection &S )
     // moving part moves right?
     if( ToRight )
     {
-      SmallPartDest = DestPos - MovedLength;
+      SmallPartDest = firstStart - MovedLength;
       LargePartStart = SourceSection.end()+1;
       LargePartDest = SourceSection.start();
     }
     else
     {
-      SmallPartDest = DestPos;
-      LargePartStart = DestPos;
-      LargePartDest = DestPos + MovedLength;
+      SmallPartDest = firstStart;
+      LargePartStart = firstStart;
+      LargePartDest = firstStart + MovedLength;
     }
   }
   else
@@ -199,15 +199,15 @@ int KFixedSizeByteArrayModel::move( int DestPos, const KSection &S )
     // moving part moves right?
     if( ToRight )
     {
-      LargePartDest = DestPos - MovedLength;
+      LargePartDest = firstStart - MovedLength;
       SmallPartStart = SourceSection.end()+1;
       SmallPartDest = SourceSection.start();
     }
     else
     {
-      LargePartDest = DestPos;
-      SmallPartStart = DestPos;
-      SmallPartDest = DestPos + MovedLength;
+      LargePartDest = firstStart;
+      SmallPartStart = firstStart;
+      SmallPartDest = firstStart + MovedLength;
     }
   }
 
@@ -224,10 +224,10 @@ int KFixedSizeByteArrayModel::move( int DestPos, const KSection &S )
 
   Modified = true;
 
-  emit contentsMoved( DestPos, SourceSection.start(),SourceSection.width()  );
-  emit contentsChanged( ToRight?SourceSection.start():DestPos, ToRight?DestPos:SourceSection.end() );
+  emit contentsSwapped( firstStart, SourceSection.start(),SourceSection.width()  );
+  emit contentsChanged( ToRight?SourceSection.start():firstStart, ToRight?firstStart:SourceSection.end() );
   emit modificationChanged( true );
-  return MovedLength < DisplacedLength ? SmallPartDest : LargePartDest;
+  return true;
 }
 
 

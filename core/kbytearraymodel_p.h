@@ -42,7 +42,7 @@ class KByteArrayModelPrivate
     int insert( int at, const char *data, int length );
     int remove( const KSection &section );
     unsigned int replace( const KSection &before, const char *after, unsigned int afterLength );
-    int move( int to, const KSection &fromSection );
+    bool swap( int firstStart, const KSection &secondSection );
     int fill( const char fillChar, unsigned int from = 0, int length = -1 );
     void setDatum( unsigned int offset, const char datum );
 
