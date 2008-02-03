@@ -1952,11 +1952,23 @@ void KByteArrayView::handleInternalDrag( QDropEvent *Event )
   if( Event->proposedAction() == Qt::MoveAction )
   {
     // ignore the copy hold in the event but only move
-    int NewIndex = ByteArrayModel->move( InsertIndex, Selection );
-    if( NewIndex != Selection.start() )
+    int newCursorIndex;
+    // need to swap?
+    if( Selection.end() < InsertIndex )
     {
-      BufferCursor->gotoCIndex( NewIndex+Selection.width() );
-      BufferRanges->addChangedRange( KHE::KSection(qMin(InsertIndex,Selection.start()), qMax(InsertIndex,Selection.end())) );
+      newCursorIndex = InsertIndex;
+      const int firstIndex = Selection.start();
+      Selection.set( Selection.behindEnd(), InsertIndex-1 );
+      InsertIndex = firstIndex;
+    }
+    else
+      newCursorIndex = InsertIndex + Selection.width();
+
+    const bool success = ByteArrayModel->move( InsertIndex, Selection );
+    if( success )
+    {
+      BufferCursor->gotoCIndex( newCursorIndex );
+      BufferRanges->addChangedRange( KHE::KSection(InsertIndex,Selection.end()) );
       emit cursorPositionChanged( BufferCursor->realIndex() );
     }
   }
