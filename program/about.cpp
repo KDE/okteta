@@ -27,7 +27,7 @@
 
 // Program
 static const char ProgramId[] =          "okteta";
-static const char ProgramVersion[] =     "0.0.1";
+static const char ProgramVersion[] =     "0.0.1 - Alpha";
 // Author
 static const char FWHKEmailAddress[] =   "kossebau@kde.org";
 
@@ -37,7 +37,7 @@ OktetaAboutData::OktetaAboutData()
               ki18n("Okteta"), ProgramVersion, // name
               ki18n("KDE bytes editor"), // description
               KAboutData::License_GPL_V2,
-              ki18n("Copyright 2007 Friedrich W. H. Kossebau"), //copyright
+              ki18n("Copyright 2007-2008 Friedrich W. H. Kossebau"), //copyright
               ki18n("Edit files as streams of bytes") ) // comment
 {
     setOrganizationDomain( "kde.org" );
