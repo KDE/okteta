@@ -1,5 +1,8 @@
 project( okteta )
 
+find_package( KDE4 REQUIRED )
+include( KDE4Defaults )
+
 include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
 # include_directories (${QDBUS_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES})
 
