@@ -19,6 +19,9 @@ include_directories(
 set( OVERWRITEONLYCONTROLLER_SRCS
   document/overwriteonly/overwriteonlycontroller.cpp
 )
+set( OVERWRITEMODECONTROLLER_SRCS
+  view/overwritemode/overwritemodecontroller.cpp
+)
 set( INFOCONTROLLER_SRCS
   view/info/statistictablemodel.cpp
   view/info/infotool.cpp
@@ -118,6 +121,7 @@ set( VIEWCONFIGCONTROLLER_SRCS
 
 set( OKTETA_KAKAO_CONTROLLERS_SRCS
   ${OVERWRITEONLYCONTROLLER_SRCS}
+  ${OVERWRITEMODECONTROLLER_SRCS}
   ${BYTEARRAYLINEEDIT_LIB_SRCS}
   ${PODDECODERCONTROLLER_SRCS}
   ${STRINGSEXTRACTCONTROLLER_SRCS}
