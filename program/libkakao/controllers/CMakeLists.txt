@@ -25,6 +25,14 @@ set( LOADERCONTROLLER_SRCS
 set( READONLYCONTROLLER_SRCS
   document/readonly/readonlycontroller.cpp
 )
+set( VERSIONCONTROLLER_SRCS
+  document/version/versioncontroller.cpp
+)
+set( VERSIONVIEWCONTROLLER_SRCS
+  document/versionview/versiontablemodel.cpp
+  document/versionview/versionview.cpp
+  document/versionview/versionviewcontroller.cpp
+)
 set( ZOOMCONTROLLER_SRCS
   view/zoom/zoomcontroller.cpp
 )
@@ -53,6 +61,8 @@ set( QUITCONTROLLER_SRCS
 set( KAKAO_CONTROLLERS_SRCS
   ${SETREMOTECONTROLLER_SRCS}
   ${CLOSECONTROLLER_SRCS}
+  ${VERSIONCONTROLLER_SRCS}
+  ${VERSIONVIEWCONTROLLER_SRCS}
   ${READONLYCONTROLLER_SRCS}
   ${VIEWLISTMENUCONTROLLER_SRCS}
   ${FULLSCREENCONTROLLER_SRCS}
