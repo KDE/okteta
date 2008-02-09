@@ -35,6 +35,8 @@
 #include <print/printcontroller.h>
 #include <viewconfig/viewconfigcontroller.h>
 // kakao controllers
+#include <document/version/versioncontroller.h>
+#include <document/versionview/versionviewcontroller.h>
 #include <document/readonly/readonlycontroller.h>
 #include <documentsystem/creator/creatorcontroller.h>
 #include <documentsystem/loader/loadercontroller.h>
@@ -68,6 +70,8 @@ void OktetaMainWindow::setupControllers()
   mControllers.append( new SetRemoteController(mProgram->documentManager()->syncManager(),this) );
   mControllers.append( new SynchronizeController(this) );
   mControllers.append( new CloseController(mProgram->viewManager(),this) );
+  mControllers.append( new VersionController(this) );
+  mControllers.append( new VersionViewController(this) );
   mControllers.append( new ReadOnlyController(this) );
   mControllers.append( new ViewListMenuController(mProgram->viewManager(),mTabbedViews,this) );
   mControllers.append( new FullScreenController(this) );

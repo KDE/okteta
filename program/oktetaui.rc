@@ -40,7 +40,9 @@ Zusammenlegen?
       <text>Paste as</text>
       <ActionList name="paste_as_list" />
     </Menu-->
-    <Separator group="edit_select_merge" />
+    <Action name="edit_undo" group="edit_undo_merge" />
+    <Action name="edit_redo" group="edit_undo_merge" />
+    <Separator group="edit_undo_merge" />
     <Action name="set_overwrite" group="edit_select_merge" />
     <Separator group="edit_select_merge" />
     <Action name="goto_offset" />
@@ -62,6 +64,7 @@ Zusammenlegen?
       <Action name="show_byte_table" />
       <Action name="show_binary_filter" />
       <Action name="show_info" />
+      <Action name="show_versions" />
     </Menu>
     <Separator/>
     <Action name="view_fullscreen"/>
