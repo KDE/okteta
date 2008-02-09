@@ -14,6 +14,7 @@ set( KAKAO_CORE_SRCS
   document/kabstractdocument.cpp
   document/kabstractdocumentselection.cpp
   document/kabstractdocumentfactory.cpp
+  document/kdocumentversiondata.cpp
   io/kabstractdocumentstreamencoder.cpp
   io/kabstractdocumentsynchronizer.cpp
   io/kabstractdocumentsynchronizerfactory.cpp
