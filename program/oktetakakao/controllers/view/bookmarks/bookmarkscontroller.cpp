@@ -25,7 +25,7 @@
 #include <koffsetformat.h>
 #include <kbytearrayview.h>
 // Okteta core
-#include <kibookmarks.h>
+#include <kbookmarkable.h>
 #include <kbytearraymodel.h>
 // KDE
 #include <KXmlGuiWindow>
@@ -83,7 +83,7 @@ void BookmarksController::setView( KAbstractView *view )
     mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
     KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->document() ) : 0;
     mByteArray = document ? document->content() : 0;
-    mBookmarks = mByteArray ? qobject_cast<KDE::If::Bookmarks*>( mByteArray ) : 0;
+    mBookmarks = mByteArray ? qobject_cast<KHECore::Bookmarkable*>( mByteArray ) : 0;
 
     int bookmarksCount = 0;
     if( mBookmarks )

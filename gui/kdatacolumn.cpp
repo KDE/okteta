@@ -25,7 +25,7 @@
 // KColumnsView
 #include <kcolumnsview.h>
 // Okteta core
-#include <kibookmarks.h>
+#include <kbookmarkable.h>
 #include <kcharcodec.h>
 // Qt
 #include <QtGui/QPainter>
@@ -47,7 +47,7 @@ KDataColumn::KDataColumn( KColumnsView *CV, KHECore::KAbstractByteArrayModel *By
    Buffer( ByteArray ),
    Layout( L ),
    Ranges( R ),
-   Bookmarks( qobject_cast<KDE::If::Bookmarks*>(ByteArray) ),
+   Bookmarks( qobject_cast<KHECore::Bookmarkable*>(ByteArray) ),
    DigitWidth( 0 ),
    DigitBaseLine( 0 ),
    ByteWidth( 0 ),
@@ -72,7 +72,7 @@ KDataColumn::~KDataColumn()
 void KDataColumn::set( KHECore::KAbstractByteArrayModel *B )
 {
   Buffer = B;
-  Bookmarks = qobject_cast<KDE::If::Bookmarks*>(Buffer );
+  Bookmarks = qobject_cast<KHECore::Bookmarkable*>(Buffer );
 }
 
 

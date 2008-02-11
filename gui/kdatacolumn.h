@@ -34,10 +34,8 @@ class QPainter;
 class QColor;
 class QBrush;
 
-namespace KDE { namespace If {
-class Bookmarks;
-} }
 namespace KHECore {
+class Bookmarkable;
 class KCharCodec;
 }
 
@@ -197,7 +195,7 @@ class KDataColumn : public KColumn
     /** pointer to the ranges */
     KDataRanges *Ranges;
     /** */
-    KDE::If::Bookmarks *Bookmarks;
+    KHECore::Bookmarkable *Bookmarks;
     /** */
     KHECore::KCharCodec *Codec;
 

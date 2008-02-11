@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kibookmarks.h  -  description
+                          kbookmarkable.h  -  description
                              -------------------
     begin                : Fri Nov 30 2007
     copyright            : 2007 by Friedrich W. H. Kossebau
@@ -14,8 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KDE_IF_BOOKMARKS_H
-#define KDE_IF_BOOKMARKS_H
+#ifndef KHE_CORE_BOOKMARKABLE_H
+#define KHE_CORE_BOOKMARKABLE_H
 
 // lib
 #include "kbookmarklist.h"
@@ -23,15 +23,13 @@
 #include <QtCore/QtPlugin>
 #include <QtCore/QList>
 
-namespace KDE
-{
-namespace If
+namespace KHECore
 {
 // TODO: add and remove with lists, not only single items
-class Bookmarks
+class Bookmarkable
 {
   public:
-    virtual ~Bookmarks();
+    virtual ~Bookmarkable();
 
   public: // set/action
     virtual void addBookmarks( const QList<KHECore::KBookmark> &bookmarks ) = 0;
@@ -48,11 +46,10 @@ class Bookmarks
     virtual void bookmarksModified( bool modified ) = 0;
 };
 
-inline Bookmarks::~Bookmarks() {}
+inline Bookmarkable::~Bookmarkable() {}
 
 }
-}
 
-Q_DECLARE_INTERFACE( KDE::If::Bookmarks, "org.kde.if.bookmarks/1.0" )
+Q_DECLARE_INTERFACE( KHECore::Bookmarkable, "org.kde.khecore.bookmarkable/1.0" )
 
 #endif

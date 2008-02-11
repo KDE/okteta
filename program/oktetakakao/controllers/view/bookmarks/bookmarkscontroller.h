@@ -28,13 +28,11 @@ class QAction;
 class QActionGroup;
 class KXmlGuiWindow;
 class KViewManager;
-namespace KDE { namespace If {
-class Bookmarks;
-} }
 namespace KHEUI {
 class KByteArrayView;
 }
 namespace KHECore {
+class Bookmarkable;
 class KBookmark;
 class KAbstractByteArrayModel;
 }
@@ -70,7 +68,7 @@ class BookmarksController : public KViewController
     KXmlGuiWindow *mWindow;
     KHEUI::KByteArrayView *mByteArrayView;
     KHECore::KAbstractByteArrayModel *mByteArray;
-    KDE::If::Bookmarks *mBookmarks;
+    KHECore::Bookmarkable *mBookmarks;
 
     QAction *mCreateAction;
     QAction *mDeleteAction;

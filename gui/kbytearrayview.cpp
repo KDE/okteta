@@ -114,7 +114,7 @@ KByteArrayView::KByteArrayView( KHECore::KAbstractByteArrayModel *Buffer, QWidge
   connect( ByteArrayModel, SIGNAL(contentsReplaced(int,int,int)), SLOT(onContentsReplaced(int,int,int)) );
   connect( ByteArrayModel, SIGNAL(contentsSwapped(int,int,int)), SLOT(onContentsSwapped(int,int,int)) );
 
-  KDE::If::Bookmarks *bookmarks = qobject_cast<KDE::If::Bookmarks*>( ByteArrayModel );
+  KHECore::Bookmarkable *bookmarks = qobject_cast<KHECore::Bookmarkable*>( ByteArrayModel );
   if( bookmarks )
   {
       connect( ByteArrayModel, SIGNAL(bookmarksAdded( const QList<KHECore::KBookmark>& )),
