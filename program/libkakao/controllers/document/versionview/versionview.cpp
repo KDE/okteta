@@ -26,7 +26,6 @@
 #include <KDialog>
 #include <KLocale>
 // Qt
-#include <QtGui/QSortFilterProxyModel>
 #include <QtGui/QLayout>
 #include <QtGui/QTreeView>
 
@@ -46,11 +45,7 @@ VersionView::VersionView( QWidget *parent )
     mVersionTableView->setItemsExpandable( false );
     mVersionTableView->setUniformRowHeights( true );
     mVersionTableView->setAllColumnsShowFocus( true );
-    mVersionTableView->setSortingEnabled( true );
-    QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel( this );
-    proxyModel->setSourceModel( mVersionTableModel );
-    mVersionTableView->setModel( proxyModel );
-    mVersionTableView->sortByColumn( VersionTableModel::IdColumnId, Qt::AscendingOrder );
+    mVersionTableView->setModel( mVersionTableModel );
 
     baseLayout->addWidget( mVersionTableView, 10 );
 }
