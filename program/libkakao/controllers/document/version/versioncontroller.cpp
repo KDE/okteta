@@ -31,6 +31,8 @@
 #include <QtGui/QMenu>
 
 
+static const int MaxMenuEntries = 10;
+
 VersionController::VersionController( KXmlGuiWindow *window )
  : mDocument( 0 )
 {
@@ -114,7 +116,10 @@ void VersionController::onOlderVersionMenuAboutToShow()
     QMenu *menu = mSetToOlderVersionAction->menu();
     menu->clear();
 
-    for( int versionIndex = mVersionControl->versionIndex(); versionIndex > 0; --versionIndex )
+    int menuEntries = 0;
+    for( int versionIndex = mVersionControl->versionIndex();
+         versionIndex > 0 && menuEntries < MaxMenuEntries;
+         --versionIndex, ++menuEntries )
     {
         KDocumentVersionData versionData = mVersionControl->versionData( versionIndex );
 
@@ -132,7 +137,10 @@ void VersionController::onNewerVersionMenuAboutToShow()
     QMenu *menu = mSetToNewerVersionAction->menu();
     menu->clear();
 
-    for( int versionIndex = mVersionControl->versionIndex()+1; versionIndex < mVersionControl->versionCount(); ++versionIndex )
+    int menuEntries = 0;
+    for( int versionIndex = mVersionControl->versionIndex()+1;
+         versionIndex < mVersionControl->versionCount() && menuEntries < MaxMenuEntries;
+         ++versionIndex, ++menuEntries )
     {
         KDocumentVersionData versionData = mVersionControl->versionData( versionIndex );
 
