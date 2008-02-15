@@ -7,6 +7,17 @@ include_directories(
 
 
 
+########### kselectiontest ###############
+
+set( kselectiontest_SRCS
+  kselectiontest.cpp
+  ${SUTDIR}/../core/ksection.cpp
+)
+
+kde4_add_unit_test( kselectiontest  TESTNAME libokteta-gui-kselectiontest  ${kselectiontest_SRCS})
+target_link_libraries( kselectiontest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+
+
 ########### next target ###############
 
 set(kcoordtest_SRCS kcoordtest.cpp )

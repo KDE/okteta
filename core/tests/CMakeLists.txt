@@ -33,17 +33,6 @@ kde4_add_unit_test( ksectionlisttest  TESTNAME libokteta-core-ksectionlisttest  
 target_link_libraries( ksectionlisttest  testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
 
-########### kselectiontest ###############
-
-set( kselectiontest_SRCS
-  kselectiontest.cpp
-  ${SUTDIR}/ksection.cpp
-)
-
-kde4_add_unit_test( kselectiontest  TESTNAME libokteta-core-kselectiontest  ${kselectiontest_SRCS})
-target_link_libraries( kselectiontest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
-
-
 ########### kfixedsizebytearraymodeltest ###############
 
 set( kfixedsizebytearraymodeltest_SRCS
