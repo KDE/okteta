@@ -20,9 +20,10 @@
 // lib
 #include "kbytearraydocument.h"
 // Okteta core
-#include <kbytearraymodel.h>
+#include <kpiecetablebytearraymodel.h>
 // KDE
 #include <KUrl>
+#include <KLocale>
 // Qt
 #include <QtCore/QDataStream>
 #include <QtCore/QFile>
@@ -66,9 +67,10 @@ KAbstractDocument *KByteArrayRawFileSynchronizer::loadFromFile( const QString &w
 
     // TODO: should the decoder know this?
     // it is in the api now (constructor)
-    KHECore::KByteArrayModel *byteArray = new KHECore::KByteArrayModel( fileSize );
 
-    inStream.readRawData( byteArray->data(), fileSize );
+    char *data = new char[fileSize];
+    inStream.readRawData( data, fileSize );
+    KHECore::KPieceTableByteArrayModel *byteArray = new KHECore::KPieceTableByteArrayModel( data, fileSize );
 
     byteArray->setModified( false );
 
@@ -78,7 +80,7 @@ KAbstractDocument *KByteArrayRawFileSynchronizer::loadFromFile( const QString &w
 //     if( success )
 //         *success = streamIsOk ? 0 : 1;
     if( streamIsOk )
-        document = new KByteArrayDocument( byteArray );
+        document = new KByteArrayDocument( byteArray, i18nc("destination of the byte array", "Loaded from file.") );
     else
         delete byteArray;
 
@@ -103,8 +105,8 @@ bool KByteArrayRawFileSynchronizer::reloadFromFile( const QString &workFilePath 
 //         *success = streamIsOk ? 0 : 1;
     if( streamIsOk )
     {
-        KHECore::KByteArrayModel *byteArray = qobject_cast<KHECore::KByteArrayModel*>( mDocument->content() );
-        byteArray->setData( newData, fileSize, fileSize, false );
+        KHECore::KPieceTableByteArrayModel *byteArray = qobject_cast<KHECore::KPieceTableByteArrayModel*>( mDocument->content() );
+        byteArray->setData( newData, fileSize, false );
     }
     else
         delete [] newData;
@@ -114,13 +116,22 @@ bool KByteArrayRawFileSynchronizer::reloadFromFile( const QString &workFilePath 
 
 bool KByteArrayRawFileSynchronizer::writeToFile( const QString &workFilePath )
 {
-    KHECore::KByteArrayModel *byteArray = qobject_cast<KHECore::KByteArrayModel*>( mDocument->content() );
+    KHECore::KPieceTableByteArrayModel *byteArray = qobject_cast<KHECore::KPieceTableByteArrayModel*>( mDocument->content() );
 
     QFile file( workFilePath );
     file.open( QIODevice::WriteOnly );
 
     QDataStream outStream( &file );
-    outStream.writeRawData( byteArray->data(), byteArray->size() );
+
+    //TODO: this was
+//     outStream.writeRawData( byteArray->data(), byteArray->size() );
+    // make it quicker again by writing spans -> spaniterator
+
+    for( int i = 0; i<byteArray->size(); ++i )
+    {
+        const char datum = byteArray->datum(i);
+        outStream.writeRawData( &datum, 1 );
+    }
 
     byteArray->setModified( false );
 

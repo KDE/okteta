@@ -5,10 +5,7 @@
     copyright            : 2007 by Friedrich W. H. Kossebau
     email                : kossebau@kde.org
 ***************************************************************************/
-/*
-    Part creating temporary data file is
-    Copyright 2005,2006 David Jarvie <software@astrojar.org.uk>
-*/
+
 /***************************************************************************
 *                                                                         *
 *   This library is free software; you can redistribute it and/or         *
@@ -23,7 +20,7 @@
 // test object
 #include <kbytearraydocument.h>
 // Okteta core
-#include <kbytearraymodel.h>
+#include <kpiecetablebytearraymodel.h>
 // Qt
 #include <QtTest/QtTest>
 #include <QtTest/QSignalSpy>
@@ -35,12 +32,12 @@ static const char Title[] = "title";
 
 void KByteArrayDocumentTest::testCreateNew()
 {
-    KByteArrayDocument *document = new KByteArrayDocument();
+    KByteArrayDocument *document = new KByteArrayDocument("New created for test.");
 
     QVERIFY( document != 0 );
     QVERIFY( !document->hasLocalChanges() );
 
-    KHECore::KByteArrayModel *byteArray = qobject_cast<KHECore::KByteArrayModel*>( document->content() );
+    KHECore::KPieceTableByteArrayModel *byteArray = qobject_cast<KHECore::KPieceTableByteArrayModel*>( document->content() );
     QVERIFY( byteArray != 0 );
     QCOMPARE( byteArray->size(), 0 );
     QVERIFY( !byteArray->isModified() );
@@ -50,7 +47,7 @@ void KByteArrayDocumentTest::testCreateNew()
 
 void KByteArrayDocumentTest::testSetTitle()
 {
-    KByteArrayDocument *document = new KByteArrayDocument();
+    KByteArrayDocument *document = new KByteArrayDocument("New created for test.");
     QSignalSpy *titleChangeSpy =  new QSignalSpy( document, SIGNAL(titleChanged( const QString& )) );
 
     const QLatin1String title( Title );

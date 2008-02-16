@@ -28,7 +28,7 @@ static int newByteArrayDocumentCounter = 0;
 
 KAbstractDocument *KByteArrayDocumentFactory::create()
 {
-    KByteArrayDocument *document = new KByteArrayDocument();
+    KByteArrayDocument *document = new KByteArrayDocument( i18nc("The byte array was new created.","New created.") );
 
     ++newByteArrayDocumentCounter;
 
