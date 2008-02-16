@@ -20,14 +20,30 @@ set(libcodecs_SRCS
   codecs/ktextcharcodec.cpp
 )
 
+set( libpiecetable_SRCS
+  piecetable/piecelist.cpp
+  piecetable/piecetable.cpp
+  piecetable/abstractpiecetablechange.cpp
+#   piecetable/fillpiecetablechange.cpp
+  piecetable/insertpiecetablechange.cpp
+  piecetable/removepiecetablechange.cpp
+  piecetable/replacepiecetablechange.cpp
+  piecetable/swaprangespiecetablechange.cpp
+  piecetable/piecetablechangehistory.cpp
+  piecetable/revertablepiecetable.cpp
+)
+
 set( oktetacore_LIB_SRCS
   ${libcodecs_SRCS}
+  ${libpiecetable_SRCS}
   kabstractbytearraymodel.cpp
   kbytearraymodel_p.cpp
   kbytearraymodel.cpp
   kfixedsizebytearraymodel.cpp
   kfilebytearraymodel_p.cpp
   kfilebytearraymodel.cpp
+  kpiecetablebytearraymodel_p.cpp
+  kpiecetablebytearraymodel.cpp
   kwordbufferservice.cpp
   kbookmarklist.cpp
   ksection.cpp
@@ -41,6 +57,7 @@ set_target_properties( oktetacore_b PROPERTIES VERSION ${GENERIC_LIB_VERSION} SO
 
 install( TARGETS oktetacore_b  DESTINATION ${LIB_INSTALL_DIR})
 
+add_subdirectory( piecetable/tests )
 add_subdirectory( tests )
 if(KDE4_BUILD_TESTS)
   kde4_add_library( testoktetacore STATIC ${oktetacore_LIB_SRCS} )

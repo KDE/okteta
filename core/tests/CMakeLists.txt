@@ -85,6 +85,21 @@ target_link_libraries( kbytearraymodelkabstractbytearraymodeliftest
   oktetacoretestutil testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
 
+########### kpiecetablebytearraymodelkabstractbytearraymodeliftest ###############
+
+set( kpiecetablebytearraymodelkabstractbytearraymodeliftest_SRCS
+  kabstractbytearraymodeliftest.cpp
+  kpiecetablebytearraymodelkabstractbytearraymodeliftest.cpp
+)
+
+kde4_add_unit_test( kpiecetablebytearraymodelkabstractbytearraymodeliftest
+  TESTNAME libokteta-core-kpiecetablebytearraymodelkabstractbytearraymodeliftest
+  ${kpiecetablebytearraymodelkabstractbytearraymodeliftest_SRCS}
+)
+target_link_libraries( kpiecetablebytearraymodelkabstractbytearraymodeliftest
+  oktetacoretestutil testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+
+
 ########### kcharcodectest ###############
 
 set( kcharcodectest_SRCS
