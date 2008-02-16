@@ -33,55 +33,67 @@ class KHECORE_EXPORT KSection : public KRange<int>
 {
   public:
     /** constructs a section by width
-     * @param SI starting index
-     * @param W width of the section
+     * @param startIndex starting index
+     * @param width width of the section
      */
-    static KSection fromWidth( int SI, int W );
+    static KSection fromWidth( int startIndex, int width );
+    static KSection fromWidth( int width );
   public:
     /** constructs a section
-     * @param SI starting index
-     * @param EI end index
+     * @param startIndex starting index
+     * @param endIndex end index
      */
-    KSection( int SI, int EI );
+    KSection( int startIndex, int endIndex );
+    KSection( const KSection &other );
     KSection();
     ~KSection();
 
   public:
-    KSection &operator=( const KSection &S );
+    KSection &operator=( const KSection &other );
 
   public:
-    bool operator==( const KSection &S ) const;
+    bool operator==( const KSection &other ) const;
 
   public:
-    void setByWidth( int S, int Width );
+    void setByWidth( int other, int width );
+    // TODO: the following functions do not match the ones from KRange exactly
+    // better use RightBefore/Behind or ExactlyBefore/Behind or else 
+    // alignAfter, alignBefore keep width, alignStartBehind, alignEndBefore perhaps
     /** sets the first index of the section's range one behind the other's end
       * If one of both is invalid the behaviour is undefined
       */
-    void setStartBehind( KSection S );
+    void setStartBehind( const KSection &other );
+    void setStartBehind( int index );
     /** sets the first index of the section's range one behind the other's end
       * If one of both is invalid or the other' start is 0 the behaviour is undefined
       */
-    void setEndBefore( KSection S );
+    void setEndBefore( const KSection &other );
+    void setEndBefore( int index );
     /** sets the first index of the section's range to be width-1 before the end
      * If the section is invalid the behaviour is undefined
      */
-    void setStartByWidth( int Width );
+    void setStartByWidth( int width );
     /** sets the last index of the section's range to be width-1 behind the start
       * If the section is invalid the behaviour is undefined
       */
-    void setEndByWidth( int Width );
+    void setEndByWidth( int width );
     /** restricts the end by width. If the section is invalid the behaviour is undefined */
-    void restrictEndByWidth( int Width );
+    void restrictEndByWidth( int width );
     /** moves the range defined by a new start.
      * If the range is invalid the behaviour is undefined
      */
-    void moveToStart( int S );
+    void moveToStart( int other );
     /** moves the range defined by a new end.
      * If the range is invalid the behaviour is undefined
      */
-    void moveToEnd( int E );
+    void moveToEnd( int end );
 
-    void adaptToChange( int Pos, int RemovedLength, int InsertedLength );
+    void adaptToChange( int Pos, int removedLength, int insertedLength );
+
+    KSection splitAt( int index );
+    KSection splitAtLocal( int index );
+    KSection remove( const KSection &removeSection );
+    KSection removeLocal( const KSection &removeSection );
 
   public:
     /**
@@ -92,46 +104,85 @@ class KHECORE_EXPORT KSection : public KRange<int>
     int behindEnd() const;
 
   public:
+    /** @return index relative to the start */
+    int localIndex( int index ) const;
+    KSection localSection( const KSection &other ) const;
+    /** @return section given by local  */
+    KSection subSection( const KSection &localSection ) const;
     /**
-     * @return the needed start so that S gets included, undefined if any is invalid
+     * @return the needed start so that other gets included, undefined if any is invalid
      */
-    int startForInclude( const KSection &S ) const;
+    int startForInclude( const KSection &other ) const;
     /** @returns true if both section . If one of both is invalid the behaviour is undefined */
-    bool isJoinable( const KSection &S ) const;
-
+    bool isJoinable( const KSection &other ) const;
 };
 
-inline KSection KSection::fromWidth( int SI, int W ) { return KSection(SI,SI+W-1); }
+inline KSection KSection::fromWidth( int startIndex, int width ) { return KSection(startIndex,startIndex+width-1); }
+inline KSection KSection::fromWidth( int width ) { return KSection(0,width-1); }
 
-inline KSection::KSection( int SI, int EI ) : KRange<int>(SI,EI) {}
+inline KSection::KSection( int startIndex, int endIndex ) : KRange<int>(startIndex,endIndex) {}
+inline KSection::KSection( const KSection &other ) : KRange<int>(other.start(),other.end()) {}
 inline KSection::KSection()  {}
 inline KSection::~KSection() {}
 
-inline bool KSection::operator==( const KSection &S ) const { return KRange<int>::operator==(S); }
+inline bool KSection::operator==( const KSection &other ) const { return KRange<int>::operator==(other); }
 
-inline KSection &KSection::operator=( const KSection &S ) { KRange<int>::operator=(S); return *this; }
+inline KSection &KSection::operator=( const KSection &other ) { KRange<int>::operator=(other); return *this; }
 
 inline int KSection::width()       const { return isValid() ? end()-start()+1 : 0; }
 inline int KSection::beforeStart() const { return start()-1; }
 inline int KSection::behindEnd()   const { return end()+1; }
 
-inline void KSection::setByWidth( int S, int Width )  { setStart( S ); setEnd( S+Width-1 ); }
-inline void KSection::setStartByWidth( int Width )  { setStart( end()-Width+1 ); }
-inline void KSection::setEndByWidth( int Width )    { setEnd( start()+Width-1 ); }
-inline void KSection::setStartBehind( KSection S )  { setStart( S.end()+1 ); }
-inline void KSection::setEndBefore( KSection S )    { setEnd( S.start()-1 ); }
-inline void KSection::restrictEndByWidth( int Width ) { restrictEndTo( start()+Width-1 ); }
+inline void KSection::setByWidth( int other, int width )  { setStart( other ); setEnd( other+width-1 ); }
+inline void KSection::setStartByWidth( int width )  { setStart( end()-width+1 ); }
+inline void KSection::setEndByWidth( int width )    { setEnd( start()+width-1 ); }
+inline void KSection::setStartBehind( const KSection &other )  { setStart( other.end()+1 ); }
+inline void KSection::setStartBehind( int index )  { setStart( index+1 ); }
+inline void KSection::setEndBefore( const KSection &other )    { setEnd( other.start()-1 ); }
+inline void KSection::setEndBefore( int index )    { setEnd( index-1 ); }
+inline void KSection::restrictEndByWidth( int width ) { restrictEndTo( start()+width-1 ); }
 
-inline void KSection::moveToStart( int S ) { setEnd( S+width()-1 ); setStart( S ); }
-inline void KSection::moveToEnd( int E )   { setStart( E-width()+1 ); setEnd( E ); }
+inline void KSection::moveToStart( int other ) { setEnd( other+width()-1 ); setStart( other ); }
+inline void KSection::moveToEnd( int end )   { setStart( end-width()+1 ); setEnd( end ); }
 
-inline int KSection::startForInclude( const KSection &S ) const
+inline KSection KSection::splitAt( int index )
 {
-  return startsBehind(S.start()) ? S.start() :
-         endsBefore(S.end()) ?     S.end()-width()+1 :
+    const int secondEnd = end();
+    setEndBefore( index );
+    return KSection( index, secondEnd );
+}
+inline KSection KSection::splitAtLocal( int index )
+{
+    const int secondEnd = end();
+    setEndByWidth( index );
+    return KSection( behindEnd(), secondEnd );
+}
+inline KSection KSection::remove( const KSection &removeSection )
+{
+    const int secondEnd = end();
+    setEndBefore( removeSection );
+    return KSection( removeSection.behindEnd(), secondEnd );
+}
+inline KSection KSection::removeLocal( const KSection &removeSection )
+{
+    const int secondEnd = end();
+    setEndByWidth( removeSection.start() );
+    return KSection( start()+removeSection.behindEnd(), secondEnd );
+}
+
+inline int KSection::localIndex( int index ) const { return index - start(); }
+inline KSection KSection::localSection( const KSection &other ) const
+{ return KSection( other.start()-start(), other.end()-start() ); }
+inline KSection KSection::subSection( const KSection &localSection ) const
+{ return KSection( localSection.start()+start(), localSection.end()+start() ); }
+
+inline int KSection::startForInclude( const KSection &other ) const
+{
+  return startsBehind(other.start()) ? other.start() :
+         endsBefore(other.end()) ?     other.end()-width()+1 :
          start();
 }
-inline bool KSection::isJoinable( const KSection &S ) const { return Start <= S.end()+1 && S.start()-1 <= End; }
+inline bool KSection::isJoinable( const KSection &other ) const { return Start <= other.end()+1 && other.start()-1 <= End; }
 
 }
 
