@@ -86,6 +86,8 @@ class KRange
   public: // logic access
     /** returns true if Value is covered */
     bool includes( T Value )     const { return Start <= Value && Value <= End; }
+    /** returns true if Value is covered and not at a side */
+    bool includesInside( T Value )     const { return Start < Value && Value < End; }
     /** returns true if range is behind index. if range is invalid the behaviour is undefined */
     bool startsBehind( T Value ) const { return Value < Start; }
     /** returns true is the range starts before index. If the range is invalid the behaviour is undefined */
@@ -97,6 +99,8 @@ class KRange
 
     /** returns true is the range covers R. If one of both is invalid the behaviour is undefined */
     bool includes( const KRange &R )     const { return R.End <= End && Start <= R.Start; }
+    /** returns true is the range covers R. If one of both is invalid the behaviour is undefined */
+    bool includesInside( const KRange &R ) const { return R.End < End && Start < R.Start; }
     /** returns true is the range ends before R starts. If one of both is invalid the behaviour is undefined */
     bool endsBefore( const KRange &R )   const { return End < R.Start; }
     /** returns true is the range starts later than R ends. If one of both is invalid the behaviour is undefined */
