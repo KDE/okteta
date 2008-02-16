@@ -17,6 +17,9 @@
 
 #include "kdataranges.h"
 
+// Okteta core
+#include <kreplacementscope.h>
+
 
 namespace KHEUI {
 
@@ -299,6 +302,16 @@ void KDataRanges::setFirstWordSelection( const KHE::KSection &Section )
 void KDataRanges::adaptSelectionToChange( int Pos, int RemovedLength, int InsertedLength )
 {
   Selection.adaptToChange(Pos,RemovedLength,InsertedLength );
+}
+
+void KDataRanges::adaptSelectionToChange( const QList<KHE::ReplacementScope> &replacementList )
+{
+    for( int i=0; i<replacementList.size(); ++i )
+    {
+        const KHE::ReplacementScope &replacement = replacementList[i];
+        //TODO: change parameters to ReplacementScope
+        Selection.adaptToChange( replacement.offset(), replacement.removeLength(), replacement.insertLength() );
+    }
 }
 
 }

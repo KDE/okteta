@@ -20,7 +20,12 @@
 
 // lib
 #include "kcoord.h"
+// Qt
+#include <QtCore/QList>
 
+namespace KHE {
+class ReplacementScope;
+}
 
 namespace KHEUI
 {
@@ -121,6 +126,7 @@ class KDataCursor
     void stepBehind();
     void updateCoord();
     void adaptToChange( int Pos, int RemovedLength, int InsertedLength );
+    void adaptToChange( const QList<KHE::ReplacementScope> &replacementList, int oldLength );
 
 
   public: // logical state access

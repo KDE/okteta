@@ -21,8 +21,15 @@
 // lib
 #include "kdatalayout.h"
 #include "kselection.h"
-#include "ksectionlist.h"
 #include "kcoordrangelist.h"
+// Okteta core
+#include <ksectionlist.h>
+// Qt
+#include <QtCore/QList>
+
+namespace KHE {
+class ReplacementScope;
+}
 
 
 namespace KHEUI
@@ -60,6 +67,7 @@ class KDataRanges
     void addChangedRange( int SI, int EI );
     void addChangedRange( const KCoordRange &NewRange );
     void adaptSelectionToChange( int Pos, int RemovedLength, int InsertedLength );
+    void adaptSelectionToChange( const QList<KHE::ReplacementScope> &replacementList );
     void resetChangedRanges();
 
     void setModified( bool M = true );

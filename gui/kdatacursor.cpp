@@ -19,6 +19,8 @@
 
 // lib
 #include "kdatalayout.h"
+// Okteta core
+#include <kreplacementscope.h>
 
 
 namespace KHEUI {
@@ -357,15 +359,49 @@ bool KDataCursor::atAppendPos() const { return realIndex() >= Layout->length(); 
 bool KDataCursor::atLineStart() const { return Layout->atLineStart( Coord ); }
 bool KDataCursor::atLineEnd()   const { return Layout->atLineEnd( Coord ); }
 
-void KDataCursor::adaptToChange( int Pos, int RemovedLength, int InsertedLength )
+void KDataCursor::adaptToChange( int pos, int removedLength, int insertedLength )
 {
-  // cursor affected?
-  if( Index >= Pos )
-  {
-    // step behind removed range if inside 
-    int NewIndex = ((Index>=Pos+RemovedLength)?Index-RemovedLength:Pos) + InsertedLength;
-    gotoCIndex( NewIndex );
-  }
+    // cursor affected?
+    if( Index >= pos )
+    {
+        // step behind removed range if inside 
+        const int newIndexBase = ( Index >= pos+removedLength ) ? Index-removedLength : pos;
+        const int newIndex = newIndexBase + insertedLength;
+        gotoCIndex( newIndex );
+    }
+}
+
+// TODO: oldLength is a hack, as DataLayout is already updated and used by e.g. gotoCIndex
+void KDataCursor::adaptToChange( const QList<KHE::ReplacementScope> &replacementList, int oldLength )
+{
+    for( int i=0; i<replacementList.size(); ++i )
+    {
+        const KHE::ReplacementScope &replacement = replacementList[i];
+        // cursor affected?
+        if( Index >= replacement.offset() )
+        {
+            oldLength += replacement.lengthChange();
+            if( oldLength > 0 )
+            {
+                // step behind removed range if inside 
+                const int newIndexBase = ( Index >= replacement.offset()+replacement.removeLength() ) ?
+                                        Index - replacement.removeLength() :
+                                        replacement.offset();
+                const int newIndex = newIndexBase + replacement.insertLength();
+                if( newIndex < 0 )
+                    Index = 0;
+                else if( newIndex >= oldLength )
+                    Index = oldLength - 1;
+                if( !Behind )
+                    Behind = ( newIndex > Index );
+            }
+            else
+            {
+                Index = 0;
+                Behind = false; // TODO: not true? s.a. gotoCIndex
+            }
+        }
+    }
 }
 
 }
