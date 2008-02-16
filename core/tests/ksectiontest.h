@@ -29,6 +29,7 @@ class KSectionTest : public QObject
     void testConstructorByEnd();
     void testConstructorByWidth();
     void testSimpleConstructor();
+    void testCopyConstructor();
     void testSetGetStart();
     void testSetGetEnd();
     void testSetGetWidth();
@@ -36,6 +37,10 @@ class KSectionTest : public QObject
     void testCompare();
     void testIncludes();
     void testAdaptToChange();
+    void testSplitAt();
+    void testSplitAtLocal();
+    void testRemove();
+    void testRemoveLocal();
     void testStartForInclude();
     void testIsJoinable();
 };

@@ -53,6 +53,17 @@ void KSectionTest::testSimpleConstructor()
   QVERIFY( Section.isEmpty() );
 }
 
+void KSectionTest::testCopyConstructor()
+{
+  const KSection OtherSection( Start, End );
+
+  KSection Section( OtherSection );
+  QCOMPARE( Section.start(), Start );
+  QCOMPARE( Section.end(),   End );
+  QCOMPARE( Section.width(), Width );
+  QVERIFY( !Section.isEmpty() );
+}
+
 
 void KSectionTest::testSetGetStart()
 {
@@ -334,6 +345,263 @@ void KSectionTest::testAdaptToChange()
   OtherSection.set( End+1, End+1 );
   Section.adaptToChange( Start, 0, Width );
   QCOMPARE( Section, OtherSection );
+}
+
+
+void KSectionTest::testSplitAt()
+{
+  KSection Section( Start, End );
+
+  // split at start
+  KSection SplitSection = Section.splitAt( Start );
+  QVERIFY( !Section.isValid() );
+  QCOMPARE( SplitSection.start(), Start );
+  QCOMPARE( SplitSection.end(),   End );
+
+  // split at one after start
+  Section.set( Start, End );
+  SplitSection = Section.splitAt( Start+1 );
+  QCOMPARE( Section.start(), Start );
+  QCOMPARE( Section.end(), Start );
+  QCOMPARE( SplitSection.start(), Start+1 );
+  QCOMPARE( SplitSection.end(),   End );
+
+  // split at mid
+  const int Mid = (Start+End)/2;
+  Section.set( Start, End );
+  SplitSection = Section.splitAt( Mid );
+  QCOMPARE( Section.start(), Start );
+  QCOMPARE( Section.end(), Mid-1 );
+  QCOMPARE( SplitSection.start(), Mid );
+  QCOMPARE( SplitSection.end(),   End );
+
+  // split at one before end
+  Section.set( Start, End );
+  SplitSection = Section.splitAt( End );
+  QCOMPARE( Section.start(), Start );
+  QCOMPARE( Section.end(), End-1 );
+  QCOMPARE( SplitSection.start(), End );
+  QCOMPARE( SplitSection.end(),   End );
+
+  // split at start so the split is the full
+  Section.set( Start, End );
+  SplitSection = Section.splitAt( End+1 );
+  QCOMPARE( Section.start(), Start );
+  QCOMPARE( Section.end(), End );
+  QVERIFY( !SplitSection.isValid() );
+}
+
+void KSectionTest::testSplitAtLocal()
+{
+  KSection Section( Start, End );
+
+  // split at start
+  KSection SplitSection = Section.splitAtLocal( 0 );
+  QVERIFY( !Section.isValid() );
+  QCOMPARE( SplitSection.start(), Start );
+  QCOMPARE( SplitSection.end(),   End );
+
+  // split at one after start
+  Section.set( Start, End );
+  SplitSection = Section.splitAtLocal( 1 );
+  QCOMPARE( Section.start(), Start );
+  QCOMPARE( Section.end(), Start );
+  QCOMPARE( SplitSection.start(), Start+1 );
+  QCOMPARE( SplitSection.end(),   End );
+
+  // split at mid
+  const int Mid = Width/2;
+  Section.set( Start, End );
+  SplitSection = Section.splitAtLocal( Mid );
+  QCOMPARE( Section.start(), Start );
+  QCOMPARE( Section.end(), Start+Mid-1 );
+  QCOMPARE( SplitSection.start(), Start+Mid );
+  QCOMPARE( SplitSection.end(),   End );
+
+  // split at one before end
+  Section.set( Start, End );
+  SplitSection = Section.splitAtLocal( Width-1 );
+  QCOMPARE( Section.start(), Start );
+  QCOMPARE( Section.end(), End-1 );
+  QCOMPARE( SplitSection.start(), End );
+  QCOMPARE( SplitSection.end(),   End );
+
+  // split at start so the split is the full
+  Section.set( Start, End );
+  SplitSection = Section.splitAtLocal( Width );
+  QCOMPARE( Section.start(), Start );
+  QCOMPARE( Section.end(), End );
+  QVERIFY( !SplitSection.isValid() );
+}
+
+void KSectionTest::testRemove()
+{
+  const int Mid = (Start+End)/2;
+  KSection Section( Start, End );
+
+  // remove none at start
+  KSection RemoveSection( Start, Start-1  );
+  KSection SplitSection = Section.remove( RemoveSection );
+  QVERIFY( !Section.isValid() );
+  QCOMPARE( SplitSection.start(), Start );
+  QCOMPARE( SplitSection.end(),   End );
+
+  // remove one at start
+  Section.set( Start, End );
+  RemoveSection.set( Start, Start );
+  SplitSection = Section.remove( RemoveSection );
+  QVERIFY( !Section.isValid() );
+  QCOMPARE( SplitSection.start(), Start+1 );
+  QCOMPARE( SplitSection.end(),   End );
+
+  // remove many at start
+  Section.set( Start, End );
+  RemoveSection.set( Start, Mid );
+  SplitSection = Section.remove( RemoveSection );
+  QVERIFY( !Section.isValid() );
+  QCOMPARE( SplitSection.start(), Mid+1 );
+  QCOMPARE( SplitSection.end(),   End );
+
+  // remove all except last
+  Section.set( Start, End );
+  RemoveSection.set( Start, End-1 );
+  SplitSection = Section.remove( RemoveSection );
+  QVERIFY( !Section.isValid() );
+  QCOMPARE( SplitSection.start(), End );
+  QCOMPARE( SplitSection.end(),   End );
+
+  // remove at mid
+  Section.set( Start, End );
+  RemoveSection.set( Mid-1, Mid+1 );
+  SplitSection = Section.remove( RemoveSection );
+  QCOMPARE( Section.start(), Start );
+  QCOMPARE( Section.end(), Mid-2 );
+  QCOMPARE( SplitSection.start(), Mid+2 );
+  QCOMPARE( SplitSection.end(),   End );
+
+  // remove none at end
+  Section.set( Start, End );
+  RemoveSection.set( End+1, End );
+  SplitSection = Section.remove( RemoveSection );
+  QCOMPARE( Section.start(), Start );
+  QCOMPARE( Section.end(),   End );
+  QVERIFY( !SplitSection.isValid() );
+
+  // remove one at end
+  Section.set( Start, End );
+  RemoveSection.set( End, End );
+  SplitSection = Section.remove( RemoveSection );
+  QCOMPARE( Section.start(), Start );
+  QCOMPARE( Section.end(),   End-1 );
+  QVERIFY( !SplitSection.isValid() );
+
+  // remove many at end
+  Section.set( Start, End );
+  RemoveSection.set( Mid, End );
+  SplitSection = Section.remove( RemoveSection );
+  QCOMPARE( Section.start(), Start );
+  QCOMPARE( Section.end(),   Mid-1 );
+  QVERIFY( !SplitSection.isValid() );
+
+  // remove all except first
+  Section.set( Start, End );
+  RemoveSection.set( Start+1, End );
+  SplitSection = Section.remove( RemoveSection );
+  QCOMPARE( Section.start(), Start );
+  QCOMPARE( Section.end(),   Start );
+  QVERIFY( !SplitSection.isValid() );
+
+  // remove all
+  Section.set( Start, End );
+  RemoveSection.set( Start, End );
+  SplitSection = Section.remove( RemoveSection );
+  QVERIFY( !Section.isValid() );
+  QVERIFY( !SplitSection.isValid() );
+}
+
+void KSectionTest::testRemoveLocal()
+{
+  const int Mid = Width/2;
+  KSection Section( Start, End );
+
+  // remove none at start
+  KSection RemoveSection( 0, 0-1  );
+  KSection SplitSection = Section.removeLocal( RemoveSection );
+  QVERIFY( !Section.isValid() );
+  QCOMPARE( SplitSection.start(), Start );
+  QCOMPARE( SplitSection.end(),   End );
+
+  // remove one at start
+  Section.set( Start, End );
+  RemoveSection.set( 0, 0 );
+  SplitSection = Section.removeLocal( RemoveSection );
+  QVERIFY( !Section.isValid() );
+  QCOMPARE( SplitSection.start(), Start+1 );
+  QCOMPARE( SplitSection.end(),   End );
+
+  // remove many at start
+  Section.set( Start, End );
+  RemoveSection.set( 0, Mid );
+  SplitSection = Section.removeLocal( RemoveSection );
+  QVERIFY( !Section.isValid() );
+  QCOMPARE( SplitSection.start(), Start+Mid+1 );
+  QCOMPARE( SplitSection.end(),   End );
+
+  // remove all except last
+  Section.set( Start, End );
+  RemoveSection.set( 0, Width-2 );
+  SplitSection = Section.removeLocal( RemoveSection );
+  QVERIFY( !Section.isValid() );
+  QCOMPARE( SplitSection.start(), End );
+  QCOMPARE( SplitSection.end(),   End );
+
+  // remove at mid
+  Section.set( Start, End );
+  RemoveSection.set( Mid-1, Mid+1 );
+  SplitSection = Section.removeLocal( RemoveSection );
+  QCOMPARE( Section.start(), Start );
+  QCOMPARE( Section.end(), Start+Mid-2 );
+  QCOMPARE( SplitSection.start(), Start+Mid+2 );
+  QCOMPARE( SplitSection.end(),   End );
+
+  // remove none at end
+  Section.set( Start, End );
+  RemoveSection.set( Width, Width-1 );
+  SplitSection = Section.removeLocal( RemoveSection );
+  QCOMPARE( Section.start(), Start );
+  QCOMPARE( Section.end(),   End );
+  QVERIFY( !SplitSection.isValid() );
+
+  // remove one at end
+  Section.set( Start, End );
+  RemoveSection.set( Width-1, Width-1 );
+  SplitSection = Section.removeLocal( RemoveSection );
+  QCOMPARE( Section.start(), Start );
+  QCOMPARE( Section.end(),   End-1 );
+  QVERIFY( !SplitSection.isValid() );
+
+  // remove many at end
+  Section.set( Start, End );
+  RemoveSection.set( Mid, Width-1 );
+  SplitSection = Section.removeLocal( RemoveSection );
+  QCOMPARE( Section.start(), Start );
+  QCOMPARE( Section.end(),   Start+Mid-1 );
+  QVERIFY( !SplitSection.isValid() );
+
+  // remove all except first
+  Section.set( Start, End );
+  RemoveSection.set( 1, Width-1 );
+  SplitSection = Section.removeLocal( RemoveSection );
+  QCOMPARE( Section.start(), Start );
+  QCOMPARE( Section.end(),   Start );
+  QVERIFY( !SplitSection.isValid() );
+
+  // remove all
+  Section.set( Start, End );
+  RemoveSection.set( 0, Width-1 );
+  SplitSection = Section.removeLocal( RemoveSection );
+  QVERIFY( !Section.isValid() );
+  QVERIFY( !SplitSection.isValid() );
 }
 
 void KSectionTest::testStartForInclude()
