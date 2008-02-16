@@ -2,7 +2,7 @@
                           kabstractbytearraymodel.h  -  description
                              -------------------
     begin                : Mit Mai 14 2003
-    copyright            : (C) 2003 by Friedrich W. H. Kossebau
+    copyright            : 2003,2008 by Friedrich W. H. Kossebau
     email                : kossebau@kde.org
  ***************************************************************************/
 
@@ -21,11 +21,14 @@
 
 // lib
 #include "khe_export.h"
+#include "kreplacementscope.h"
 // commonlib
 #include <ksection.h>
+#include <ksectionlist.h>
 // Qt
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
+#include <QtCore/QList>
 
 
 namespace KHECore
@@ -245,8 +248,10 @@ class KHECORE_EXPORT KAbstractByteArrayModel : public QObject
   Q_SIGNALS:
     // TODO: how to deal replacing with fixed size of buffer?
     void contentsReplaced( int Position, int RemovedLength, int InsertedLength );
+    void contentsReplaced( const QList<KHE::ReplacementScope> &replacementList );
     void contentsSwapped( int firstStart, int secondStart, int secondLength );
     void contentsChanged( int Start, int End );
+    void contentsChanged( const KHE::KSectionList &changedSectionList );
 
     void readOnlyChanged( bool isReadOnly );
     void modificationChanged( bool IsChanged );
