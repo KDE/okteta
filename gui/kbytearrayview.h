@@ -23,6 +23,7 @@
 // Okteta core
 // #include "khe.h"
 #include <ksection.h>
+#include <ksectionlist.h>
 // Qt
 #include <QtCore/QList>
 #include <QtGui/QClipboard>
@@ -34,7 +35,9 @@ class KBookmark;
 class KCharCodec;
 class KAbstractByteArrayModel;
 }
-
+namespace KHE {
+class ReplacementScope;
+}
 
 namespace KHEUI
 {
@@ -456,8 +459,10 @@ class KHEUI_EXPORT KByteArrayView : public KColumnsView
 
     void adaptController();
     void onContentsReplaced( int Pos, int RemovedLength, int InsertedLength );
+    void onContentsReplaced( const QList<KHE::ReplacementScope> &list );
     void onContentsSwapped( int firstStart, int secondStart, int secondLength );
     void updateRange( int Start, int End );
+    void updateRange( const KHE::KSectionList &list );
     void onBookmarksChange( const QList<KHECore::KBookmark> &bookmarks );
 
   protected Q_SLOTS: // QWidget API
