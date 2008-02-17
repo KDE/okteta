@@ -11,7 +11,7 @@ set( libcontroller_SRCS
 
 set(libcodecs_SRCS
   codecs/kbinarybytecodec.cpp
-  codecs/kbytecodec.cpp
+  codecs/valuecodec.cpp
   codecs/kcharcodec.cpp
   codecs/kdecimalbytecodec.cpp
   codecs/kebcdic1047charcodec.cpp

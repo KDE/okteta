@@ -22,7 +22,7 @@
 #include "kbytearrayselection.h"
 // Okteta core
 #include <kabstractbytearraymodel.h>
-#include <kbytecodec.h>
+#include <valuecodec.h>
 // KDE
 #include <KLocale>
 // Qt
@@ -46,7 +46,7 @@ bool KByteArrayValueStreamEncoder::encodeDataToStream( QIODevice *device,
 
     QTextStream textStream( device );
 
-    KHECore::KByteCodec *byteCodec = KHECore::KByteCodec::createCodec( mSettings.coding );
+    KHECore::ValueCodec *byteCodec = KHECore::ValueCodec::createCodec( mSettings.coding );
 
     // prepare 
     QString valueString;

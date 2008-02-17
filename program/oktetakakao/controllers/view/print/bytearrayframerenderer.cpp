@@ -25,7 +25,7 @@
 #include <kdatalayout.h>
 // Okteta core
 #include <kabstractbytearraymodel.h>
-#include <kbytecodec.h>
+#include <valuecodec.h>
 #include <kcharcodec.h>
 // KDE
 #include <KGlobalSettings>

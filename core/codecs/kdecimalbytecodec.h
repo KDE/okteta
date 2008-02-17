@@ -19,18 +19,18 @@
 #define KHE_CORE_KDECIMALBYTECODEC_H
 
 // lib
-#include <kbytecodec.h>
+#include <valuecodec.h>
 
 
 namespace KHECore
 {
 
-class KDecimalByteCodec : public KByteCodec
+class KDecimalByteCodec : public ValueCodec
 {
   public:
     virtual ~KDecimalByteCodec() {}
 
-  public: // KByteCodec API
+  public: // ValueCodec API
     virtual unsigned int encodingWidth() const { return 3; }
     virtual unsigned char digitsFilledLimit() const { return 26; }
 

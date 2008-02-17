@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kbytecodec.cpp  -  description
+                          valuecodec.cpp  -  description
                              -------------------
     begin                : Mo Nov 29 2004
     copyright            : (C) 2004 by Friedrich W. H. Kossebau
@@ -15,7 +15,7 @@
  ***************************************************************************/
 
 
-#include "kbytecodec.h"
+#include "valuecodec.h"
 
 // lib
 #include "kbinarybytecodec.h"
@@ -28,43 +28,44 @@
 
 namespace KHECore {
 
-KByteCodec *KByteCodec::createCodec( KCoding C )
+ValueCodec *ValueCodec::createCodec( KCoding coding )
 {
-  KByteCodec *Codec;
-  switch( C )
-  {
-    case DecimalCoding: Codec = new KDecimalByteCodec(); break;
-    case OctalCoding: Codec = new KOctalByteCodec(); break;
-    case BinaryCoding: Codec = new KBinaryByteCodec(); break;
-    case HexadecimalCoding:
-    default:  Codec = new KHexadecimalByteCodec();
-  }
-  return Codec;
+    ValueCodec *result;
+    switch( coding )
+    {
+        case DecimalCoding: result = new KDecimalByteCodec(); break;
+        case OctalCoding:   result = new KOctalByteCodec();   break;
+        case BinaryCoding:  result = new KBinaryByteCodec();  break;
+        case HexadecimalCoding:
+        default:            result = new KHexadecimalByteCodec();
+    }
+    return result;
 }
 
-unsigned int KByteCodec::decode( unsigned char *Char, const QString &Digits, unsigned int Pos ) const
+unsigned int ValueCodec::decode( unsigned char *byte, const QString &digits, unsigned int pos ) const
 {
-  //kDebug() << QString("KByteCodec::decode(%1,%2)").arg(Digits).arg(Pos) ;
-  const unsigned int OldPos = Pos;
-  const unsigned int Left = Digits.size() - Pos;
+    const unsigned int oldPos = pos;
+    const unsigned int left = digits.size() - pos;
 
-  unsigned int d = encodingWidth();
-  if( Left < d )
-    d = Left;
+    unsigned int d = encodingWidth();
+    if( left < d )
+        d = left;
 
-  unsigned char Result = 0;
-  do
-  {
-    if( !appendDigit(&Result,Digits.at(Pos).toLatin1()) )
-      break;
+    unsigned char result = 0;
+    do
+    {
+        if( !appendDigit(&result,digits.at(pos).toLatin1()) )
+            break;
 
-    ++Pos;
-    --d;
-  }
-  while( d > 0 );
+        ++pos;
+        --d;
+    }
+    while( d > 0 );
 
-  *Char = Result;
-  return Pos - OldPos;
+    *byte = result;
+    return pos - oldPos;
 }
+
+ValueCodec::~ValueCodec() {}
 
 }

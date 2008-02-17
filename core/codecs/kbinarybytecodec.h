@@ -20,19 +20,19 @@
 
 
 // lib
-#include <kbytecodec.h>
+#include <valuecodec.h>
 
 
 namespace KHECore
 {
 
 
-class KBinaryByteCodec : public KByteCodec
+class KBinaryByteCodec : public ValueCodec
 {
   public:
     virtual ~KBinaryByteCodec() {}
 
-  public: // KByteCodec API
+  public: // ValueCodec API
     virtual unsigned int encodingWidth() const { return 8; }
     virtual unsigned char digitsFilledLimit() const { return 128; }
 

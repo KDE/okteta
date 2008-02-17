@@ -24,7 +24,7 @@
 
 namespace KHECore {
 class KCharCodec;
-class KByteCodec; // TODO: rename to KValueCodec
+class ValueCodec; // TODO: rename to KValueCodec
 }
 
 
@@ -63,7 +63,7 @@ class ByteTableModel : public QAbstractTableModel
     static const int NofOfValueCodings = 4;
 
   protected:
-    KHECore::KByteCodec *mValueCodec[NofOfValueCodings];
+    KHECore::ValueCodec *mValueCodec[NofOfValueCodings];
     KHECore::KCharCodec *mCharCodec;
     QChar mUndefinedChar;
 };

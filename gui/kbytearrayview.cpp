@@ -34,7 +34,7 @@
 // Okteta core
 #include <kabstractbytearraymodel.h>
 #include <kbytearraymodel.h>
-#include <kbytecodec.h>
+#include <valuecodec.h>
 #include <kcharcodec.h>
 #include <kwordbufferservice.h>
 // KDE
@@ -1414,7 +1414,7 @@ void KByteArrayView::drawActiveCursor( QPainter *painter )
   if( BlinkCursorVisible && !hasFocus() && !viewport()->hasFocus() && !InDnD )
     return;
 
-  const int x = activeColumn().xOfPos( BufferCursor->pos() );// - xOffset();
+  const int x = activeColumn().xOfPos( BufferCursor->pos() );
   const int y = lineHeight() * BufferCursor->line();
 
   painter->translate( x, y );

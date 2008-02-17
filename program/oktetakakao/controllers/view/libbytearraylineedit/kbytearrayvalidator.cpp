@@ -18,7 +18,7 @@
 #include "kbytearrayvalidator.h"
 
 // Okteta core
-#include <kbytecodec.h>
+#include <valuecodec.h>
 #include <khechar.h>
 #include <kcharcodec.h>
 // KDE
@@ -71,7 +71,7 @@ void KByteArrayValidator::setCoding( int C )
     if( Coding != KHECore::CharCoding )
     {
         delete ValueCodec;
-        ValueCodec = KHECore::KByteCodec::createCodec( Coding );
+        ValueCodec = KHECore::ValueCodec::createCodec( Coding );
     }
 }
 

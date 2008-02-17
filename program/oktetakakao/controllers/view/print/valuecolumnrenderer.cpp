@@ -55,7 +55,7 @@ bool ValueColumnRenderer::setCoding( KHECore::KCoding coding )
     delete mByteCodec;
 
     mCoding = coding;
-    mByteCodec = KHECore::KByteCodec::createCodec( mCoding );
+    mByteCodec = KHECore::ValueCodec::createCodec( mCoding );
     mCodedByte.resize( mByteCodec->encodingWidth() );
 
     // recalculate depend sizes

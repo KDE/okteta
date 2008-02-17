@@ -95,7 +95,7 @@ bool KValueEditor::handleKeyPress( QKeyEvent *KeyEvent )
           else
           {
             unsigned char InputValue = 0;
-            const KHECore::KByteCodec *ByteCodec = ValueColumn->byteCodec();
+            const KHECore::ValueCodec *ByteCodec = ValueColumn->byteCodec();
             // valid digit?
             if( ByteCodec->appendDigit(&InputValue,Input) )
             {
@@ -147,7 +147,7 @@ void KValueEditor::doValueEditAction( KValueEditAction Action, int Input )
     OldValue = EditValue = (unsigned char)View->ByteArrayModel->datum(ValidIndex);
   }
 
-  const KHECore::KByteCodec *ByteCodec = ValueColumn->byteCodec();
+  const KHECore::ValueCodec *ByteCodec = ValueColumn->byteCodec();
   // 
   unsigned char NewValue = EditValue;
   bool StayInEditMode = true;

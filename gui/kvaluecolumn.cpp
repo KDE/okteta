@@ -63,7 +63,7 @@ bool KValueColumn::setCoding( KHECore::KCoding C )
   delete ByteCodec;
 
   Coding = C;
-  ByteCodec = KHECore::KByteCodec::createCodec( Coding );
+  ByteCodec = KHECore::ValueCodec::createCodec( Coding );
   CodedByte.resize( ByteCodec->encodingWidth() );
 
   // recalculate depend sizes

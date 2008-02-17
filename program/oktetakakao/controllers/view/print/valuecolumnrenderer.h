@@ -21,7 +21,7 @@
 // lib
 #include "bytecolumnrenderer.h"
 // Okteta core
-#include <kbytecodec.h>
+#include <valuecodec.h>
 
 
 /** buffer column which displays the numerical values of the bytes
@@ -51,7 +51,7 @@ class ValueColumnRenderer : public ByteColumnRenderer
   public: // value access
     KPixelX binaryGapWidth()               const;
     KHECore::KCoding coding()              const;
-    const KHECore::KByteCodec *byteCodec() const;
+    const KHECore::ValueCodec *byteCodec() const;
 
 
   protected: // ByteColumnRenderer API
@@ -65,7 +65,7 @@ class ValueColumnRenderer : public ByteColumnRenderer
     /** */
     KHECore::KCoding mCoding;
     /** */
-    KHECore::KByteCodec *mByteCodec;
+    KHECore::ValueCodec *mByteCodec;
     /** */
     KPixelX mBinaryGapWidth;
 
@@ -79,6 +79,6 @@ class ValueColumnRenderer : public ByteColumnRenderer
 
 inline KPixelX ValueColumnRenderer::binaryGapWidth()        const { return mBinaryGapWidth; }
 inline KHECore::KCoding ValueColumnRenderer::coding()                const { return mCoding; }
-inline const KHECore::KByteCodec *ValueColumnRenderer::byteCodec()   const { return mByteCodec; }
+inline const KHECore::ValueCodec *ValueColumnRenderer::byteCodec()   const { return mByteCodec; }
 
 #endif

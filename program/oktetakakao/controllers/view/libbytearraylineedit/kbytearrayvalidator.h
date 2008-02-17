@@ -25,7 +25,7 @@
 #include <QtGui/QValidator>
 
 namespace KHECore {
-class KByteCodec;
+class ValueCodec;
 class KCharCodec;
 }
 
@@ -62,7 +62,7 @@ class KByteArrayValidator : public QValidator
 //     QString zeroExtend( const QString &src, int destLen ) const;
 
     KHECore::KCoding Coding;
-    KHECore::KByteCodec *ValueCodec;
+    KHECore::ValueCodec *ValueCodec;
     KHECore::KCharCodec *CharCodec;
 };
 

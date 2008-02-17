@@ -21,7 +21,7 @@
 // lib
 #include "kdatacolumn.h"
 // Okteta core
-#include <kbytecodec.h>
+#include <valuecodec.h>
 
 
 namespace KHEUI
@@ -58,7 +58,7 @@ class KValueColumn : public KDataColumn
   public: // value access
     KPixelX binaryGapWidth()               const;
     KHECore::KCoding coding()              const;
-    const KHECore::KByteCodec *byteCodec() const;
+    const KHECore::ValueCodec *byteCodec() const;
 
 
   protected: // KDataColumn API
@@ -72,7 +72,7 @@ class KValueColumn : public KDataColumn
     /** */
     KHECore::KCoding Coding;
     /** */
-    KHECore::KByteCodec *ByteCodec;
+    KHECore::ValueCodec *ByteCodec;
     /** */
     KPixelX BinaryGapWidth;
 
@@ -86,7 +86,7 @@ class KValueColumn : public KDataColumn
 
 inline KPixelX KValueColumn::binaryGapWidth()        const { return BinaryGapWidth; }
 inline KHECore::KCoding KValueColumn::coding()                const { return Coding; }
-inline const KHECore::KByteCodec *KValueColumn::byteCodec()   const { return ByteCodec; }
+inline const KHECore::ValueCodec *KValueColumn::byteCodec()   const { return ByteCodec; }
 
 }
 

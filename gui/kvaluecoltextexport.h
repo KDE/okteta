@@ -21,7 +21,7 @@
 // lib
 #include "kdatacoltextexport.h"
 // Okteta core
-#include "kbytecodec.h"
+#include "valuecodec.h"
 
 
 namespace KHEUI
@@ -41,7 +41,7 @@ class KValueColTextExport : public KDataColTextExport
 
 
   protected:
-    KHECore::KByteCodec *ByteCodec;
+    KHECore::ValueCodec *ByteCodec;
 };
 
 }

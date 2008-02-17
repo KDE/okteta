@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kbytecodec.h  -  description
+                          valuecodec.h  -  description
                              -------------------
     begin                : Sam Mai 17 2003
     copyright            : (C) 2003 by Friedrich W. H. Kossebau
@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KHE_CORE_KBYTECODEC_H
-#define KHE_CORE_KBYTECODEC_H
+#ifndef KHE_CORE_VALUECODEC_H
+#define KHE_CORE_VALUECODEC_H
 
 
 // lib
@@ -38,16 +38,16 @@ namespace KHECore
   *@author Friedrich W. H. Kossebau
   */
 
-class KHECORE_EXPORT KByteCodec
+class KHECORE_EXPORT ValueCodec
 {
   public:
-    static KByteCodec *createCodec( KCoding C );
+    static ValueCodec *createCodec( KCoding coding );
 
   public:
-    virtual ~KByteCodec() {}
+    virtual ~ValueCodec();
 
   protected:
-    KByteCodec() {}
+    ValueCodec();
 
   public: // API to be implemented
     /** */
@@ -55,25 +55,27 @@ class KHECORE_EXPORT KByteCodec
     /** */
     virtual unsigned char digitsFilledLimit() const = 0;
 
-    /** encodes the Char and writes the result to */
-    virtual void encode( QString &Digits, unsigned  int Pos, const unsigned char Char ) const = 0;
+    /** encodes the byte and writes the result to */
+    virtual void encode( QString &digits, unsigned int pos, const unsigned char byte ) const = 0;
     /** */
-    virtual void encodeShort( QString &Digits, unsigned  int Pos, const unsigned char Char ) const = 0;
+    virtual void encodeShort( QString &digits, unsigned int pos, const unsigned char byte ) const = 0;
 
     /** */
-    virtual bool appendDigit( unsigned char *Byte, const unsigned char Digit ) const = 0;
+    virtual bool appendDigit( unsigned char *byte, const unsigned char digit ) const = 0;
     /** */
-    virtual void removeLastDigit( unsigned char *Byte ) const = 0;
+    virtual void removeLastDigit( unsigned char *byte ) const = 0;
     /** */
-    virtual bool isValidDigit( const unsigned char Digit ) const = 0;
+    virtual bool isValidDigit( const unsigned char digit ) const = 0;
     /** */
-    virtual bool turnToValue( unsigned char *Digit ) const = 0;
+    virtual bool turnToValue( unsigned char *digit ) const = 0;
 
 
   public:
     /** */
-    unsigned int decode( unsigned char *Char, const QString &Digits, unsigned int Pos ) const;
+    unsigned int decode( unsigned char *byte, const QString &digits, unsigned int pos ) const;
 };
+
+inline ValueCodec::ValueCodec() {}
 
 }
 

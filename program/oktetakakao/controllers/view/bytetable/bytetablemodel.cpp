@@ -20,7 +20,7 @@
 // Okteta core
 #include <khechar.h>
 #include <kcharcodec.h>
-#include <kbytecodec.h>
+#include <valuecodec.h>
 // KDE
 #include <KLocale>
 
@@ -41,7 +41,7 @@ ByteTableModel::ByteTableModel( QObject *parent )
         KHECore::BinaryCoding
     };
     for( int i=0; i<NofOfValueCodings; ++i )
-        mValueCodec[i] = KHECore::KByteCodec::createCodec( CodingIds[i] );
+        mValueCodec[i] = KHECore::ValueCodec::createCodec( CodingIds[i] );
 }
 
 void ByteTableModel::setUndefinedChar( const QChar &undefinedChar )

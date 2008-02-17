@@ -26,7 +26,7 @@
 
 namespace KHECore {
 class KCharCodec;
-class KByteCodec; // TODO: rename to KValueCodec
+class ValueCodec; // TODO: rename to KValueCodec
 }
 
 
@@ -71,7 +71,7 @@ class StatisticTableModel : public QAbstractTableModel
     int *mByteCount;
 
     KHECore::KCoding mValueCoding;
-    KHECore::KByteCodec *mValueCodec;
+    KHECore::ValueCodec *mValueCodec;
     KHECore::KCharCodec *mCharCodec;
     QChar mUndefinedChar;
 };

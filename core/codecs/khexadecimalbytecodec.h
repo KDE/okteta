@@ -19,7 +19,7 @@
 #define KHE_CORE_KHEXADECIMALBYTECODEC_H
 
 // lib
-#include <kbytecodec.h>
+#include <valuecodec.h>
 
 class QChar;
 
@@ -27,7 +27,7 @@ class QChar;
 namespace KHECore
 {
 
-class KHexadecimalByteCodec : public KByteCodec
+class KHexadecimalByteCodec : public ValueCodec
 {
   public:
     explicit KHexadecimalByteCodec( bool S = false );

@@ -20,7 +20,7 @@
 // Okteta core
 #include <khechar.h>
 #include <kcharcodec.h>
-#include <kbytecodec.h>
+#include <valuecodec.h>
 // KDE
 #include <KLocale>
 // Qt
@@ -36,7 +36,7 @@ StatisticTableModel::StatisticTableModel( int *byteCount, QObject *parent )
  : QAbstractTableModel( parent ),
    mByteCount( byteCount ),
    mValueCoding( DefaultValueCoding ),
-   mValueCodec( KHECore::KByteCodec::createCodec(DefaultValueCoding) ),
+   mValueCodec( KHECore::ValueCodec::createCodec(DefaultValueCoding) ),
    mCharCodec( KHECore::KCharCodec::createCodec(KHECore::LocalEncoding) ),
    mUndefinedChar( DefaultUndefinedChar )
 {
@@ -65,7 +65,7 @@ void StatisticTableModel::setValueCoding( int coding )
     delete mValueCodec;
 
     mValueCoding = (KHECore::KCoding)coding;
-    mValueCodec = KHECore::KByteCodec::createCodec( mValueCoding );
+    mValueCodec = KHECore::ValueCodec::createCodec( mValueCoding );
 //     CodedByte.resize( ByteCodec->encodingWidth() );
 
     emit dataChanged( index(0,ValueId), index(ByteSetSize-1,ValueId) );

@@ -27,7 +27,7 @@ namespace KHEUI {
 
 KValueColTextExport::KValueColTextExport( const KValueColumn* HC, const char *D, const KCoordRange &CR )
   : KDataColTextExport( HC, D, CR, HC->byteCodec()->encodingWidth() ),
-   ByteCodec( KHECore::KByteCodec::createCodec(HC->coding()) )
+   ByteCodec( KHECore::ValueCodec::createCodec(HC->coding()) )
 {
 }
 
