@@ -25,7 +25,7 @@ namespace KHE
 {
 class KSection;
 class ReplacementScope;
-};
+}
 
 namespace KPieceTable
 {
