@@ -80,7 +80,8 @@ bool PieceTableChangeHistory::revertBeforeChange( PieceTable *pieceTable, int ch
             const KHE::KSection changedSection =
                 change->apply( pieceTable );
             changedRanges->addSection( changedSection );
-            replacementList->append( change->replacement() );
+            const KHE::ReplacementScope replacement = change->replacement();
+            replacementList->append( replacement );
         }
     }
     else
@@ -91,7 +92,9 @@ bool PieceTableChangeHistory::revertBeforeChange( PieceTable *pieceTable, int ch
             const KHE::KSection changedSection =
                 change->revert( pieceTable );
             changedRanges->addSection( changedSection );
-            replacementList->append( change->replacement() );
+            KHE::ReplacementScope replacement = change->replacement();
+            replacement.revert();
+            replacementList->append( replacement );
         }
     }
     mAppliedChangesCount = changeId;
