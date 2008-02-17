@@ -39,6 +39,9 @@ class KHECORE_EXPORT ReplacementScope
     bool operator==( const ReplacementScope &other ) const;
 
   public:
+    void revert();
+
+  public:
     int offset() const;
     int removeLength() const;
     int insertLength() const;
@@ -57,6 +60,9 @@ inline ReplacementScope::ReplacementScope( int offset, int removeLength, int ins
 inline ReplacementScope::ReplacementScope() : mOffset( InvalidOffset ), mRemoveLength( 0 ), mInsertLength( 0 ) {}
 inline bool ReplacementScope::operator==( const ReplacementScope &other ) const
 { return mOffset == other.mOffset && mRemoveLength == other.mRemoveLength && mInsertLength == other.mInsertLength; }
+inline void ReplacementScope::revert()
+{ const int helper = mInsertLength; mInsertLength = mRemoveLength; mRemoveLength = helper; }
+
 inline bool ReplacementScope::isValid() const { return mOffset != InvalidOffset; }
 inline int ReplacementScope::offset() const { return mOffset; }
 inline int ReplacementScope::removeLength() const { return mRemoveLength; }
