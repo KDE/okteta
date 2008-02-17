@@ -421,10 +421,9 @@ class KHEUI_EXPORT KByteArrayView : public KColumnsView
     /** recreates the cursor pixmaps and paints active and inactive cursors if doable */
     void updateCursors();
     void createCursorPixmaps();
-    void pointPainterToCursor( QPainter &Painter, const KDataColumn &Column ) const;
     /** draws the blinking cursor or removes it */
-    void drawActiveCursor();
-    void drawInactiveCursor();
+    void drawActiveCursor( QPainter *painter );
+    void drawInactiveCursor( QPainter *painter );
     void updateCursor( const KDataColumn &Column );
 
   protected: // partial operations

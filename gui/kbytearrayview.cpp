@@ -1408,25 +1408,16 @@ void KByteArrayView::createCursorPixmaps()
 }
 
 
-void KByteArrayView::pointPainterToCursor( QPainter &Painter, const KDataColumn &Column ) const
-{
-  int x = Column.xOfPos( BufferCursor->pos() ) - xOffset();
-  int y = lineHeight() * BufferCursor->line() - yOffset();
-
-  Painter.begin( viewport() );
-  Painter.translate( x, y );
-}
-
-
-
-void KByteArrayView::drawActiveCursor()
+void KByteArrayView::drawActiveCursor( QPainter *painter )
 {
   // any reason to skip the cursor drawing?
   if( BlinkCursorVisible && !hasFocus() && !viewport()->hasFocus() && !InDnD )
     return;
 
-  QPainter Painter;
-  pointPainterToCursor( Painter, activeColumn() );
+  const int x = activeColumn().xOfPos( BufferCursor->pos() );// - xOffset();
+  const int y = lineHeight() * BufferCursor->line();
+
+  painter->translate( x, y );
 
   // paint edited byte?
   if( ValueEditor->isInEditMode() )
@@ -1434,18 +1425,20 @@ void KByteArrayView::drawActiveCursor()
     int Index = BufferCursor->index();
 
     if( BlinkCursorVisible )
-      valueColumn().paintEditedByte( &Painter, ValueEditor->EditValue, ValueEditor->ByteBuffer );
+      valueColumn().paintEditedByte( painter, ValueEditor->EditValue, ValueEditor->ByteBuffer );
     else
-      valueColumn().paintByte( &Painter, Index );
+      valueColumn().paintByte( painter, Index );
   }
   else
-    Painter.drawPixmap( CursorPixmaps->cursorX(), 0,
-                        BlinkCursorVisible?CursorPixmaps->onPixmap():CursorPixmaps->offPixmap(),
-                        CursorPixmaps->cursorX(),0,CursorPixmaps->cursorW(),-1 );
+    painter->drawPixmap( CursorPixmaps->cursorX(), 0,
+                         BlinkCursorVisible?CursorPixmaps->onPixmap():CursorPixmaps->offPixmap(),
+                         CursorPixmaps->cursorX(),0,CursorPixmaps->cursorW(),-1 );
+
+  painter->translate( -x, -y );
 }
 
 
-void KByteArrayView::drawInactiveCursor()
+void KByteArrayView::drawInactiveCursor( QPainter *painter )
 {
   // any reason to skip the cursor drawing?
   if( !inactiveColumn().isVisible()
@@ -1455,28 +1448,32 @@ void KByteArrayView::drawInactiveCursor()
 
   int Index = BufferCursor->validIndex();
 
-  QPainter Painter;
-  pointPainterToCursor( Painter, inactiveColumn() );
+  const int x = inactiveColumn().xOfPos( BufferCursor->pos() );
+  const int y = lineHeight() * BufferCursor->line();
+
+  painter->translate( x, y );
 
   KDataColumn::KFrameStyle Style =
     BufferCursor->isBehind() ? KDataColumn::Right :
     (OverWrite||ValueEditor->isInEditMode()) ? KDataColumn::Frame :
     KDataColumn::Left;
-  inactiveColumn().paintFramedByte( &Painter, Index, Style );
+  inactiveColumn().paintFramedByte( painter, Index, Style );
+
+  painter->translate( -x, -y );
 }
 
 
-void KByteArrayView::drawColumns( QPainter *P, int cx, int cy, int cw, int ch )
+void KByteArrayView::drawColumns( QPainter *painter, int cx, int cy, int cw, int ch )
 {
-  KColumnsView::drawColumns( P, cx, cy, cw, ch );
+  KColumnsView::drawColumns( painter, cx, cy, cw, ch );
   // TODO: update non blinking cursors. Should this perhaps be done in the buffercolumn?
   // Then it needs to know about inactive, insideByte and the like... well...
   // perhaps subclassing the buffer columns even more, to KCharColumn and KValueColumn?
 
   if( visibleLines(KPixelYs::fromWidth(cy,ch)).includes(BufferCursor->line()) )
   {
-    drawActiveCursor();
-    drawInactiveCursor();
+    drawActiveCursor( painter );
+    drawInactiveCursor( painter );
   }
 }
 
