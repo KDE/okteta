@@ -36,6 +36,9 @@ class KSectionTest : public QObject
     void testIsEmpty();
     void testCompare();
     void testIncludes();
+    void testLocalIndex();
+    void testLocalSection();
+    void testSubSection();
     void testAdaptToChange();
     void testSplitAt();
     void testSplitAtLocal();

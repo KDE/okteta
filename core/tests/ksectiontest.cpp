@@ -140,6 +140,63 @@ void KSectionTest::testIncludes()
   QVERIFY( !Section.includes(i) );
 }
 
+
+void KSectionTest::testLocalIndex()
+{
+    KSection section( Start, End );
+
+    int localIndex = section.localIndex( Start );
+    QCOMPARE( localIndex, 0 );
+
+    localIndex = section.localIndex( End );
+    QCOMPARE( localIndex, Width-1 );
+}
+
+
+void KSectionTest::testLocalSection()
+{
+    KSection section( Start, End );
+
+    KSection localSection = section.localSection( KSection(Start,End) );
+    QCOMPARE( localSection.start(), 0 );
+    QCOMPARE( localSection.end(), Width-1 );
+
+    localSection = section.localSection( KSection(Start+1,End) );
+    QCOMPARE( localSection.start(), 1 );
+    QCOMPARE( localSection.end(), Width-1 );
+
+    localSection = section.localSection( KSection(Start,End-1) );
+    QCOMPARE( localSection.start(), 0 );
+    QCOMPARE( localSection.end(), Width-2 );
+
+    localSection = section.localSection( KSection(Start+1,End-1) );
+    QCOMPARE( localSection.start(), 1 );
+    QCOMPARE( localSection.end(), Width-2 );
+}
+
+
+void KSectionTest::testSubSection()
+{
+    KSection section( Start, End );
+
+    KSection subSection = section.subSection( KSection::fromWidth(Width) );
+    QCOMPARE( subSection.start(), Start );
+    QCOMPARE( subSection.end(), End );
+
+    subSection = section.subSection( KSection(1,Width-1) );
+    QCOMPARE( subSection.start(), Start+1 );
+    QCOMPARE( subSection.end(), End );
+
+    subSection = section.subSection( KSection(0,Width-2) );
+    QCOMPARE( subSection.start(), Start );
+    QCOMPARE( subSection.end(), End-1 );
+
+    subSection = section.subSection( KSection(1,Width-2) );
+    QCOMPARE( subSection.start(), Start+1 );
+    QCOMPARE( subSection.end(), End-1 );
+}
+
+
 void KSectionTest::testAdaptToChange()
 {
   // adaptToChange, same length, behind
