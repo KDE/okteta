@@ -384,24 +384,29 @@ void KDataCursor::adaptToChange( const QList<KHE::ReplacementScope> &replacement
             if( oldLength > 0 )
             {
                 // step behind removed range if inside 
-                const int newIndexBase = ( Index >= replacement.offset()+replacement.removeLength() ) ?
-                                        Index - replacement.removeLength() :
-                                        replacement.offset();
-                const int newIndex = newIndexBase + replacement.insertLength();
-                if( newIndex < 0 )
-                    Index = 0;
-                else if( newIndex >= oldLength )
-                    Index = oldLength - 1;
-                if( !Behind )
-                    Behind = ( newIndex > Index );
+                const int newIndexAfterRemove = ( Index >= replacement.offset()+replacement.removeLength() ) ?
+                                                Index - replacement.removeLength() :
+                                                replacement.offset();
+                const int newIndex = newIndexAfterRemove + replacement.insertLength();
+                // if the cursor gets behind, it will never get inside again.
+                if( newIndex >= oldLength )
+                {
+                    gotoEnd();
+                    return;
+                }
+                Index = newIndex;
             }
             else
-            {
                 Index = 0;
-                Behind = false; // TODO: not true? s.a. gotoCIndex
-            }
         }
     }
+
+    const bool wasBehind = ( Index >= oldLength );
+    if( wasBehind )
+        Index = oldLength - 1;
+    updateCoord();
+    if( wasBehind )
+        stepToEnd();
 }
 
 }
