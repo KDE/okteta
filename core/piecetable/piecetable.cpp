@@ -175,10 +175,11 @@ PieceList PieceTable::remove( const KHE::KSection &removeSection )
                     {
                         const int leftWidth = removeSection.start() - firstDataSectionStart;
                         (*firstRemoved).setEndByWidth( leftWidth );
-                        ++firstRemoved;
 
                         const Piece removedPiece( removeSection.start(), firstDataSectionEnd, (*firstRemoved).storageId() );
                         removedPieceList.append( removedPiece );
+
+                        ++firstRemoved;
 // kDebug() << "end of first removed"<<piece->start()<<piece->end();
 // --sections;
                     }
@@ -186,10 +187,11 @@ PieceList PieceTable::remove( const KHE::KSection &removeSection )
                     if( removeSection.end() < dataSection.end() )
                     {
                         piece->moveStartBy( dataSection.localIndex(removeSection.end())+1 );
-                        --lastRemoved;
 
                         const Piece removedPiece( dataSection.start(), removeSection.end(), piece->storageId() );
                         removedPieceList.append( removedPiece );
+
+                        --lastRemoved;
 // kDebug() << "start of last removed"<<piece->start()<<piece->end();
 // --sections;
                     }
