@@ -59,7 +59,7 @@ inline Piece::Piece( int storageOffset, int size, int storageId )
 : KHE::KSection( KHE::KSection::fromWidth(storageOffset,size) ), mStorageId( storageId ) {}
 inline Piece::Piece( const KHE::KSection &storageSection, int storageId )
 : KHE::KSection( storageSection ), mStorageId( storageId ) {}
-inline Piece::Piece() {}
+inline Piece::Piece() : mStorageId(OriginalStorage) {}
 inline int Piece::storageId() const { return mStorageId; }
 
 inline void Piece::setStorageId( int storageId ) { mStorageId = storageId; }
