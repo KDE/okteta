@@ -49,6 +49,9 @@ class Piece : public KHE::KSection
     Piece removeLocal( const KHE::KSection &localRemoveStorageSection );
     Piece removeStartBeforeLocal( int storageOffset );
     Piece removeEndBehindLocal( int storageOffset );
+    bool prepend( const Piece &other );
+    bool append( const Piece &other );
+
 
   public:
     Piece subPiece( const KSection &local ) const;
@@ -98,6 +101,17 @@ inline Piece Piece::removeEndBehindLocal( int storageOffset )
 inline Piece Piece::subPiece( const KSection &local ) const
 {
     return Piece( KHE::KSection::subSection(local), mStorageId );
+}
+
+inline bool Piece::prepend( const Piece &other )
+{
+    const bool result = ( mStorageId == other.mStorageId && KHE::KSection::prepend(other) );
+    return result;
+}
+inline bool Piece::append( const Piece &other )
+{
+    const bool result = ( mStorageId == other.mStorageId && KHE::KSection::append(other) );
+    return result;
 }
 
 }
