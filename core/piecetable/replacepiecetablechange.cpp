@@ -43,7 +43,7 @@ bool ReplacePieceTableChange::merge( const AbstractPieceTableChange *other )
         // other replaced after?
         if( mRemoveSection.start()+mInsertLength == otherReplaceChange->mRemoveSection.start() )
         {
-            mRemoveSection.setEnd( otherReplaceChange->mRemoveSection.end() );
+            mRemoveSection.moveEndBy( otherReplaceChange->mRemoveSection.width() );
             mInsertLength += otherReplaceChange->mInsertLength;
             mRemovedPieces.append( otherReplaceChange->mRemovedPieces );
             result = true;
