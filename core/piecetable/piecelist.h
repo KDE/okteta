@@ -36,6 +36,7 @@ class PieceList
 
   public:
     int size() const;
+    bool isEmpty() const;
     int totalLength() const;
     const Piece &at( int i ) const;
 
@@ -57,6 +58,7 @@ inline PieceList::PieceList( const Piece &piece )
 }
 
 inline int PieceList::size()               const { return mList.size(); }
+inline bool PieceList::isEmpty()           const { return mList.isEmpty(); }
 inline int PieceList::totalLength()        const { return mTotalLength; }
 inline const Piece &PieceList::at( int i ) const { return mList.at( i ); }
 
