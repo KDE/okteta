@@ -47,6 +47,8 @@ class Piece : public KHE::KSection
     Piece splitAtLocal( int localStorageOffset );
     Piece remove( const KHE::KSection &removeStorageSection );
     Piece removeLocal( const KHE::KSection &localRemoveStorageSection );
+    Piece removeStartBeforeLocal( int storageOffset );
+    Piece removeEndBehindLocal( int storageOffset );
 
   public:
     Piece subPiece( const KSection &local ) const;
@@ -79,6 +81,18 @@ inline Piece Piece::remove( const KHE::KSection &removeStorageSection )
 inline Piece Piece::removeLocal( const KHE::KSection &localRemoveStorageSection )
 {
     return Piece( KHE::KSection::removeLocal(localRemoveStorageSection), mStorageId );
+}
+inline Piece Piece::removeStartBeforeLocal( int storageOffset )
+{
+    const int oldStart = start();
+    moveStartBy( storageOffset );
+    return Piece( KHE::KSection(oldStart,beforeStart()), mStorageId );
+}
+inline Piece Piece::removeEndBehindLocal( int storageOffset )
+{
+    const int oldEnd = end();
+    setEndByWidth( storageOffset-1 );
+    return Piece( KHE::KSection(behindEnd(),oldEnd), mStorageId );
 }
 
 inline Piece Piece::subPiece( const KSection &local ) const
