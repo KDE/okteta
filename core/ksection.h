@@ -95,6 +95,9 @@ class KHECORE_EXPORT KSection : public KRange<int>
     KSection remove( const KSection &removeSection );
     KSection removeLocal( const KSection &removeSection );
 
+    bool prepend( const KSection &other );
+    bool append( const KSection &other );
+
   public:
     /**
      * @return the numbered of included indizes or 0, if the section is invalid
@@ -183,6 +186,11 @@ inline int KSection::startForInclude( const KSection &other ) const
          start();
 }
 inline bool KSection::isJoinable( const KSection &other ) const { return Start <= other.end()+1 && other.start()-1 <= End; }
+
+inline bool KSection::prepend( const KSection &other )
+{ const bool mergeable = ( other.end()+1 == start() ); if( mergeable ) setStart( other.start() ); return mergeable; }
+inline bool KSection::append( const KSection &other )
+{ const bool mergeable = ( end()+1 == other.start() ); if( mergeable ) setEnd( other.end() ); return mergeable; }
 
 }
 
