@@ -150,7 +150,6 @@ PieceList PieceTable::remove( const KHE::KSection &removeSection )
         {
             QLinkedList<Piece>::Iterator firstRemoved = it;
             const int firstDataSectionStart = dataSection.start();
-            const int firstDataSectionEnd = dataSection.end();
 // int sections = 1;
 
             if( dataSection.includesInside(removeSection) )
@@ -173,26 +172,23 @@ PieceList PieceTable::remove( const KHE::KSection &removeSection )
                     // cut from first section if not all
                     if( firstDataSectionStart < removeSection.start() )
                     {
-                        const int leftWidth = removeSection.start() - firstDataSectionStart;
-                        (*firstRemoved).setEndByWidth( leftWidth );
-
-                        const Piece removedPiece( removeSection.start(), firstDataSectionEnd, (*firstRemoved).storageId() );
+                        const int newLocalEnd = removeSection.start() - firstDataSectionStart - 1;
+                        const Piece removedPiece = (*firstRemoved).removeEndBehindLocal( newLocalEnd );
                         removedPieceList.append( removedPiece );
 
                         ++firstRemoved;
-// kDebug() << "end of first removed"<<piece->start()<<piece->end();
+// kDebug() << "end of first removed"<<piece->start()<<piece->end()<<"->"<<removedPiece.start()<<removedPiece.end();
 // --sections;
                     }
                     // cut from last section if not all
                     if( removeSection.end() < dataSection.end() )
                     {
-                        piece->moveStartBy( dataSection.localIndex(removeSection.end())+1 );
-
-                        const Piece removedPiece( dataSection.start(), removeSection.end(), piece->storageId() );
+                        const int newLocalStart =  dataSection.localIndex( removeSection.end() ) + 1;
+                        const Piece removedPiece = piece->removeStartBeforeLocal( newLocalStart );
                         removedPieceList.append( removedPiece );
 
                         --lastRemoved;
-// kDebug() << "start of last removed"<<piece->start()<<piece->end();
+// kDebug() << "start of last removed"<<piece->start()<<piece->end()<<"->"<<removedPiece.start()<<removedPiece.end();
 // --sections;
                     }
                     ++lastRemoved;
