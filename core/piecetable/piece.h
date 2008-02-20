@@ -91,7 +91,7 @@ inline Piece Piece::removeStartBeforeLocal( int storageOffset )
 inline Piece Piece::removeEndBehindLocal( int storageOffset )
 {
     const int oldEnd = end();
-    setEndByWidth( storageOffset-1 );
+    setEndByWidth( storageOffset+1 );
     return Piece( KHE::KSection(behindEnd(),oldEnd), mStorageId );
 }
 
