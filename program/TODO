@@ -2,8 +2,7 @@ Unimplemented Feature of KHexEdit:
 ----------------------------------
 
 + <Action name="paste_into_new_file" />
-+ Zugriffsrechte (Größe/Verändern)
-+ Rückgängig/Wiederherstellen
++ Zugriffsrechte (Größe)
 + Transcoder
 + Exportieren
 
@@ -16,6 +15,8 @@ Nicht so wichtig:
 * <Action name="copy_as_text" />
 
 Erledigt:
++ Zugriffsrechte (Verändern)
+- Rückgängig/Wiederherstellen
 - Speichern
 - revert
 - Dokumentenliste
@@ -25,26 +26,27 @@ Erledigt:
 - Binärfilter
 - Zeichenkettenextraktion
 
+Before adding to review:
+------------------------
+* reset changebuffer if history gets cut
+* make tools work on selection
+* user documentation in docbook format
+* complete i18n (@-stuff)
 
+After passing review:
+For KDE 4.1:
+----------------------------------
+* ask artists for own icon
+* add support for memory mapped files (includes enabling overwrite controller again)
+* add export functionality
+* enable extract strings tool and add copy
 
-Dokumentverwaltung:
--------------------
-
-Arbeitskopie kann verwickelt mit Speicherkopie sein oder nicht.
-
-Ort/Name der Speicherkopie kann verändert werden, unter Löschen der alten oder Beibehaltung.
-SK (und AK?) können gelöscht werden.
-
-EINFACHER FALL:
-Arbeitskopie separate Kopie. Versionsverwaltung kann ausgelagert werden.
-
-Vorkommnisse:
-* SK wird extern geändert (Datumsstempel)
-  a) kein Konflikt da keine lokale Änderung
-  b) Konflikt mit lokalen Änderungen
-* SK wird extern gelöscht
-*
-
-KOMPLIZIERTER FALL:
-Arbeitskopie nur Teilkopie der Speicherkopie. Speicherkopie darf also nicht von anderen bearbeitet werden.
-
+Later on:
+---------
+* add support for more commandline options
+* port bytearrayview to bytearrayrenderer
+* complete work on input controllers for the bytearray view
+* rename AbstractDocument into AbstractObjectModel
+* add AbstractTool, ToolManager and ToolManagerControl
+* Prepare libframesprint for inclusion into kdelibs
+* find good name for libkakao
