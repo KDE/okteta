@@ -78,15 +78,14 @@ int OktetaProgram::execute()
     KApplication programCore;
 
     // started by session management?
-//     if( programCore.isSessionRestored() )
-//     {
-//       RESTORE( OktetaMainWindow );
-//     }
-//     else
+    if( programCore.isSessionRestored() )
+    {
+        RESTORE( OktetaMainWindow(this) );
+    }
+    else
     {
         // no session.. just start up normally
         OktetaMainWindow *mainWindow = new OktetaMainWindow( this );
-        mainWindow->setObjectName( QLatin1String("Shell") );
 
         KCmdLineArgs *arguments = KCmdLineArgs::parsedArgs();
 
