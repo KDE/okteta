@@ -66,6 +66,8 @@ void ClipboardController::setView( KAbstractView *view )
 //         mCopyAction->setEnabled( false );
         }
     }
+    else
+        mMimeDataControl = 0;
 
     const bool hasSelectedData = ( mSelectionControl != 0 ) ? mSelectionControl->hasSelectedData() : false;
     const bool isWriteable = ( mMimeDataControl != 0 );
