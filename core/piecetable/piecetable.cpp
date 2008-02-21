@@ -66,6 +66,8 @@ void PieceTable::insert( int insertDataOffset, int insertLength, int storageOffs
 {
     QMutableLinkedListIterator<Piece> it( mList );
 
+    const Piece insertPiece( storageOffset, insertLength, storageId );
+
     // TODO: use width or offset from current and next?
     KHE::KSection dataSection( 0, -1 );
     while( it.hasNext() )
@@ -76,14 +78,19 @@ void PieceTable::insert( int insertDataOffset, int insertLength, int storageOffs
         // piece starts at offset?
         if( dataSection.start() == insertDataOffset )
         {
-            it.insert( Piece(storageOffset,insertLength,storageId) );
+            it.insert( insertPiece );
             break;
+        }
+        if( dataSection.behindEnd() == insertDataOffset )
+        {
+            if( piece.append(insertPiece) )
+                break;
         }
         it.next();
         if( dataSection.includes(insertDataOffset) )
         {
             const Piece secondPiece = piece.splitAtLocal( dataSection.localIndex(insertDataOffset) );
-            it.insert( Piece(storageOffset,insertLength,storageId) );
+            it.insert( insertPiece );
             it.insert( secondPiece );
             break;
         }
@@ -91,13 +98,17 @@ void PieceTable::insert( int insertDataOffset, int insertLength, int storageOffs
         dataSection.setStart( dataSection.behindEnd() );
     }
     if( !it.hasNext() && (dataSection.start() == insertDataOffset) )
-        it.insert( Piece(storageOffset,insertLength,storageId) );
+        it.insert( insertPiece );
 
     mSize += insertLength;
 }
 
 void PieceTable::insert( int insertDataOffset, const PieceList &insertPieceList )
 {
+    if( insertPieceList.isEmpty() )
+        return;
+
+    bool isInserted = false;
     QMutableLinkedListIterator<Piece> it( mList );
 
     // TODO: use width or offset from current and next?
@@ -110,8 +121,33 @@ void PieceTable::insert( int insertDataOffset, const PieceList &insertPieceList 
         // piece starts at offset?
         if( dataSection.start() == insertDataOffset )
         {
-            for( int i=0; i<insertPieceList.size(); ++i )
+            int i = 0;
+            if( it.hasPrevious() )
+            {
+                Piece &previousPiece = it.peekPrevious();
+                if( previousPiece.append(insertPieceList.at(0)) )
+                {
+                    if( insertPieceList.size() == 1 )
+                    {
+                        if( previousPiece.append(piece) )
+                        {
+                            it.next();
+                            it.remove();
+                            isInserted = true;
+                            break;
+                        }
+                    }
+                    ++i;
+                }
+            }
+
+            const int lastIndex = insertPieceList.size()-1;
+            for( ; i<lastIndex; ++i )
                 it.insert( insertPieceList.at(i) );
+            const Piece &lastInsertPiece = insertPieceList.at( lastIndex );
+            if( !piece.prepend(lastInsertPiece) )
+                it.insert( lastInsertPiece );
+            isInserted = true;
             break;
         }
         it.next();
@@ -121,14 +157,24 @@ void PieceTable::insert( int insertDataOffset, const PieceList &insertPieceList 
             for( int i=0; i<insertPieceList.size(); ++i )
                 it.insert( insertPieceList.at(i) );
             it.insert( secondPiece );
+            isInserted = true;
             break;
         }
 
         dataSection.setStart( dataSection.behindEnd() );
     }
-    if( !it.hasNext() && (dataSection.start() == insertDataOffset) )
-        for( int i=0; i<insertPieceList.size(); ++i )
+    if( !isInserted && (dataSection.start() == insertDataOffset) )
+    {
+        int i = 0;
+        if( it.hasPrevious() )
+        {
+            Piece &previousPiece = it.peekPrevious();
+            if( previousPiece.append(insertPieceList.at(0)) )
+                ++i;
+        }
+        for( ; i<insertPieceList.size(); ++i )
             it.insert( insertPieceList.at(i) );
+    }
 
     mSize += insertPieceList.totalLength();
 }
@@ -170,6 +216,7 @@ PieceList PieceTable::remove( const KHE::KSection &removeSection )
                     QLinkedList<Piece>::Iterator lastRemoved = it;
 // kDebug() << removeSection.start() << removeSection.end() << firstDataSectionStart << dataSection.end();
                     // cut from first section if not all
+                    bool onlyCompletePiecesRemoved = true;
                     if( firstDataSectionStart < removeSection.start() )
                     {
                         const int newLocalEnd = removeSection.start() - firstDataSectionStart - 1;
@@ -177,6 +224,7 @@ PieceList PieceTable::remove( const KHE::KSection &removeSection )
                         removedPieceList.append( removedPiece );
 
                         ++firstRemoved;
+                        onlyCompletePiecesRemoved = false;
 // kDebug() << "end of first removed"<<piece->start()<<piece->end()<<"->"<<removedPiece.start()<<removedPiece.end();
 // --sections;
                     }
@@ -188,13 +236,24 @@ PieceList PieceTable::remove( const KHE::KSection &removeSection )
                         removedPieceList.append( removedPiece );
 
                         --lastRemoved;
+                        onlyCompletePiecesRemoved = false;
 // kDebug() << "start of last removed"<<piece->start()<<piece->end()<<"->"<<removedPiece.start()<<removedPiece.end();
 // --sections;
                     }
                     ++lastRemoved;
+                    if( onlyCompletePiecesRemoved )
+                    {
+                        if( firstRemoved != mList.begin() && lastRemoved != mList.end() )
+                        {
+                            QLinkedList<Piece>::Iterator beforeFirstRemoved = firstRemoved - 1;
+                            if( (*beforeFirstRemoved).append(*lastRemoved) )
+                                ++lastRemoved;
+                        }
+                    }
+
                     for( QLinkedList<Piece>::Iterator it = firstRemoved; it!=lastRemoved; ++it )
                         removedPieceList.append( *it );
-                    mList.erase( firstRemoved, lastRemoved );
+                    QLinkedList<Piece>::Iterator nextAfterRemoved = mList.erase( firstRemoved, lastRemoved );
 // kDebug() << "removed "<<sections;
                     break;
                 }
@@ -217,6 +276,7 @@ PieceList PieceTable::remove( const KHE::KSection &removeSection )
 
     mSize -= removeSection.width();
 
+// kDebug()<<"end:"<<asStringList(mList);
     return removedPieceList;
 }
 
