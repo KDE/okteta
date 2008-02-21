@@ -253,7 +253,7 @@ PieceList PieceTable::remove( const KHE::KSection &removeSection )
 
                     for( QLinkedList<Piece>::Iterator it = firstRemoved; it!=lastRemoved; ++it )
                         removedPieceList.append( *it );
-                    QLinkedList<Piece>::Iterator nextAfterRemoved = mList.erase( firstRemoved, lastRemoved );
+                    mList.erase( firstRemoved, lastRemoved );
 // kDebug() << "removed "<<sections;
                     break;
                 }
