@@ -25,7 +25,7 @@
 #include <QtCore/QObject>
 
 class QWidget;
-class KUrl;
+class QStringList;
 
 class KDocumentCreateManager; //TODO: temporary
 class KDocumentSyncManager; //TODO: temporary
@@ -46,6 +46,9 @@ class KDocumentManager : public QObject
     // TODO: what to do for documents not added?
     bool canClose( KAbstractDocument *document );
     bool canCloseAll();
+
+  public: //TODO: see is this can be removed out of this api, hack for now to MainWindow::saveProperties
+    QStringList urls() const;
 
   public:
     KDocumentCreateManager *createManager();

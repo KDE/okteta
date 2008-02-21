@@ -44,7 +44,8 @@ class KDocumentSyncManager : public QObject
     bool canClose( KAbstractDocument *document );
 
   public:
-    bool hasSynchronizerForLocal( const QString &mimeType );
+    bool hasSynchronizerForLocal( const QString &mimeType ) const;
+    KUrl urlOf( KAbstractDocument *document ) const;
 
   public:
     void setDocumentSynchronizerFactory( KAbstractDocumentSynchronizerFactory *synchronizerFactory );

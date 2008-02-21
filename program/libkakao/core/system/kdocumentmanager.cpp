@@ -17,9 +17,11 @@
 
 #include "kdocumentmanager.h"
 
+// KDE
+#include <KUrl>
 // Qt
 #include <QtCore/QMutableListIterator>
-
+#include <QtCore/QStringList>
 
 // temporary
 #include "kdocumentcreatemanager.h"
@@ -31,6 +33,16 @@ KDocumentManager::KDocumentManager()
    mSyncManager( new KDocumentSyncManager(this) ),
    mCodecManager( new KDocumentCodecManager(this) )
 {}
+
+QStringList KDocumentManager::urls() const
+{
+    QStringList result;
+
+    foreach( KAbstractDocument *document, mList )
+        result.append( mSyncManager->urlOf(document).url() );
+
+    return result;
+}
 
 void KDocumentManager::addDocument( KAbstractDocument *document )
 {

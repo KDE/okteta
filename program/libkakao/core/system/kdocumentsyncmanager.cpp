@@ -38,10 +38,17 @@ void KDocumentSyncManager::setWidget( QWidget *widget )
     mWidget = widget;
 }
 
-bool KDocumentSyncManager::hasSynchronizerForLocal( const QString &workDocumentType )
+bool KDocumentSyncManager::hasSynchronizerForLocal( const QString &workDocumentType ) const
 {
     // TODO: need synchronizerfactory classes to query for this or a local datastructure
     return ( mSynchronizerFactory->supportedWorkType() == workDocumentType );
+}
+
+KUrl KDocumentSyncManager::urlOf( KAbstractDocument *document ) const
+{
+    KAbstractDocumentSynchronizer *synchronizer = document->synchronizer();
+
+    return synchronizer ? synchronizer->url() : KUrl();
 }
 
 void KDocumentSyncManager::setDocumentSynchronizerFactory( KAbstractDocumentSynchronizerFactory *synchronizerFactory )
