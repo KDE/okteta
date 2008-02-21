@@ -64,20 +64,47 @@ inline const Piece &PieceList::at( int i ) const { return mList.at( i ); }
 
 inline void PieceList::append( const Piece &piece )
 {
-    mList.append( piece );
+    bool isMerged = false;
+    if( !mList.isEmpty() )
+        isMerged = mList.last().append( piece );
+    if( !isMerged )
+        mList.append( piece );
     mTotalLength += piece.width();
 }
 inline void PieceList::append( const PieceList &other )
 {
-//     QList<Piece>::operator+=( other );// TODO: middle pieces are not joined
-    mList += other.mList;
+    QList<Piece>::ConstIterator it = other.mList.begin();
+
+    // see if the ones at the border can be merged
+    bool isMerged = false;
+    if( !mList.isEmpty() && !other.mList.isEmpty() )
+        isMerged = mList.last().append( other.mList.first() );
+    if( isMerged )
+        ++it;
+
+    for( ; it != other.mList.end(); ++it )
+        mList.append( *it );
+//was:     mList += other.mList;
+
     mTotalLength += other.mTotalLength;
 }
 inline void PieceList::prepend( const PieceList &other )
 {
-// TODO: middle pieces are not joined
-//     QList<Piece>::operator=( other.QList<Piece>::operator+( *this ) );
-    mList = other.mList + mList;
+    QList<Piece> otherCopy = other.mList;
+    QList<Piece>::Iterator it = mList.begin();
+
+    // see if the ones at the border can be merged
+    bool isMerged = false;
+    if( !otherCopy.isEmpty() && !mList.isEmpty() )
+        isMerged = otherCopy.last().append( mList.first() );
+    if( isMerged )
+        ++it;
+
+    for( ; it != mList.end(); ++it )
+        otherCopy.append( *it );
+    mList = otherCopy;
+//was:     mList = other.mList + mList;
+
     mTotalLength += other.mTotalLength;
 }
 
