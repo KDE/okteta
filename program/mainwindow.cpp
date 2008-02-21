@@ -51,14 +51,21 @@
 #include <viewsystem/close/closecontroller.h>
 #include <program/quit/quitcontroller.h>
 // kakao
+#include <kdocumentcreatemanager.h>
+#include <kdocumentsyncmanager.h>
 #include <kdocumentmanager.h>
 #include <kviewmanager.h>
 #include <tabbedviews.h>
+// KDE
+#include <KConfigGroup>
 
+static const char LoadedUrlsKey[] = "LoadedUrls";
 
 OktetaMainWindow::OktetaMainWindow( OktetaProgram *program )
  : ShellWindow( program->documentManager(), program->viewManager() ), mProgram( program )
 {
+    setObjectName( QLatin1String("Shell") );
+
     setupControllers();
     setupGUI();
 }
@@ -98,9 +105,28 @@ void OktetaMainWindow::setupControllers()
   mControllers.append( new ViewConfigController(this) );
 }
 
-
-OktetaMainWindow::~OktetaMainWindow()
+void OktetaMainWindow::saveProperties( KConfigGroup &configGroup )
 {
+    const QStringList urls = mDocumentManager->urls();
+    configGroup.writePathEntry( LoadedUrlsKey, urls );
 }
 
-#include "mainwindow.moc"
+void OktetaMainWindow::readProperties( const KConfigGroup &configGroup )
+{
+    const QStringList urls = configGroup.readPathEntry( LoadedUrlsKey, QStringList() );
+
+    KDocumentSyncManager *syncManager = mDocumentManager->syncManager();
+    KDocumentCreateManager *createManager = mDocumentManager->createManager();
+    for( int i=0; i<urls.count(); ++i )
+    {
+        if( urls[i].isEmpty() )
+            createManager->createNew();
+        else
+            syncManager->load( urls[i] );
+        // TODO: set view to offset
+        // if( offset != -1 )
+    }
+}
+
+
+OktetaMainWindow::~OktetaMainWindow() {}

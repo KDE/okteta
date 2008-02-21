@@ -33,6 +33,10 @@ class OktetaMainWindow : public ShellWindow
     explicit OktetaMainWindow( OktetaProgram *program );
     virtual ~OktetaMainWindow();
 
+  protected: // KMainWindow API
+    virtual void saveProperties( KConfigGroup &configGroup );
+    virtual void readProperties( const KConfigGroup &configGroup );
+
   protected:
     void setupControllers();
 
