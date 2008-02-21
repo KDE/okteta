@@ -241,6 +241,10 @@ PieceList PieceTable::remove( const KHE::KSection &removeSection )
 // --sections;
                     }
                     ++lastRemoved;
+
+                    for( QLinkedList<Piece>::Iterator it = firstRemoved; it!=lastRemoved; ++it )
+                        removedPieceList.append( *it );
+
                     if( onlyCompletePiecesRemoved )
                     {
                         if( firstRemoved != mList.begin() && lastRemoved != mList.end() )
@@ -251,8 +255,6 @@ PieceList PieceTable::remove( const KHE::KSection &removeSection )
                         }
                     }
 
-                    for( QLinkedList<Piece>::Iterator it = firstRemoved; it!=lastRemoved; ++it )
-                        removedPieceList.append( *it );
                     mList.erase( firstRemoved, lastRemoved );
 // kDebug() << "removed "<<sections;
                     break;
