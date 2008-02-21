@@ -37,10 +37,15 @@
 #include <kviewmanager.h>
 // KDE
 #include <KLocale>
+#include <KUrl>
 #include <KCmdLineArgs>
 #include <KApplication>
 // Qt
 #include <QtCore/QList>
+
+
+static const char OffsetOptionId[] = "offset";
+static const char OffsetOptionShortId[] = "o";
 
 
 OktetaProgram::OktetaProgram( int argc, char *argv[] )
@@ -59,7 +64,9 @@ OktetaProgram::OktetaProgram( int argc, char *argv[] )
     mViewManager->setViewFactory( new KByteArrayDisplayFactory() );
 
     KCmdLineOptions programOptions;
-    programOptions.add( "+[URL(s)]", ki18n("File(s) to open"), 0 );
+//     programOptions.add( OffsetOptionShortId );
+//     programOptions.add( OffsetOptionId, ki18n("Offset to set the cursor to"), 0 );
+    programOptions.add( "+[URL(s)]", ki18n("File(s) to load"), 0 );
 
     KCmdLineArgs::init( argc, argv, &mAboutData );
     KCmdLineArgs::addCmdLineOptions( programOptions );
@@ -69,8 +76,9 @@ OktetaProgram::OktetaProgram( int argc, char *argv[] )
 int OktetaProgram::execute()
 {
     KApplication programCore;
+
     // started by session management?
-//     if( isSessionRestored() )
+//     if( programCore.isSessionRestored() )
 //     {
 //       RESTORE( OktetaMainWindow );
 //     }
@@ -79,27 +87,29 @@ int OktetaProgram::execute()
         // no session.. just start up normally
         OktetaMainWindow *mainWindow = new OktetaMainWindow( this );
         mainWindow->setObjectName( QLatin1String("Shell") );
-        mainWindow->show();
 
         KCmdLineArgs *arguments = KCmdLineArgs::parsedArgs();
-#if 0
-    // take arguments
-    KCmdLineArgs *arguments = KCmdLineArgs::parsedArgs();
-    if( Args->count() > 0 )
-    {
-        for( int i=0; i<Args->count(); ++i )
-        ;
-    }
-#endif
-//    if( arguments->isSet("offset") )
-//    {
-//        Q3CString offsetStr = args->getOption( "offset" );
-//        uint _offset = parseDecimalOrHexadecimal(offsetStr.data() );
-//        hexEdit->setStartupOffset( _offset );
-//   }
 
-    //for( int i = 0; i < args->count(); ++i )
-    //  hexEdit->addStartupFile( args->url(i).url() );
+        // take arguments
+        if( arguments->count() > 0 )
+        {
+//             int offset = -1;
+//             if( arguments->isSet(OffsetOptionId) )
+//             {
+//                 const QString offsetOptionArgument = arguments->getOption( OffsetOptionId );
+//                 offset = readOut( offsetOptionArgument );
+//             }
+
+            KDocumentSyncManager *syncManager = mDocumentManager->syncManager();
+            for( int i=0; i<arguments->count(); ++i )
+            {
+                syncManager->load( arguments->url(i) );
+                // TODO: set view to offset
+                // if( offset != -1 )
+            }
+        }
+
+        mainWindow->show();
 
         arguments->clear();
     }
