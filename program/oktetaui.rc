@@ -2,18 +2,18 @@
 <kpartgui name="Okteta" version="1">
 <MenuBar>
   <Menu name="file">
-    <Menu name="import" append="open_merge">
+    <!--Menu name="import" append="open_merge">
       <text context="@title:menu">Import</text>
-      <!--Action name="import_clipboard" /-->
+      <!- -Action name="import_clipboard" /- ->
       <ActionList name="import_list" />
-    </Menu>
+    </Menu-->
     <Action name="save_copy_as" />
     <Action name="save_as_template" />
     <!--Action name="export" append="save_merge" /-->
-    <Menu name="export" append="save_merge">
+    <!--Menu name="export" append="save_merge">
       <text context="@title:menu">Export</text>
       <ActionList name="export_list" />
-    </Menu>
+    </Menu-->
     <Separator/>
     <Action name="cancel" />
     <Menu name="permission">
@@ -58,14 +58,9 @@ Zusammenlegen?
     <Separator/>
     <Action name="view_valuecoding" />
     <Action name="view_charencoding" />
-    <Menu name="panels">
-      <text context="@title:menu">Panels</text>
-      <Action name="show_pod_decoder" />
-      <Action name="show_byte_table" />
-      <Action name="show_binary_filter" />
-      <Action name="show_info" />
-      <Action name="show_versions" />
-    </Menu>
+    <Separator/>
+    <Action name="resizestyle" />
+    <Action name="togglecolumns" />
     <Separator/>
     <Action name="view_fullscreen"/>
   </Menu>
@@ -85,6 +80,12 @@ Zusammenlegen?
   <Menu name="tools">
     <Action name="extract_strings" />
     <Action name="converter" />
+    <Separator/>
+    <Action name="show_pod_decoder" />
+    <Action name="show_byte_table" />
+    <Action name="show_binary_filter" />
+    <Action name="show_info" />
+    <Action name="show_versions" />
   </Menu>
   <Menu name="windows"><text>&amp;Windows</text>
     <ActionList name="windows_list"/>
@@ -103,9 +104,6 @@ Zusammenlegen?
       <Action name="searchbar_above"/>
       <Action name="searchbar_below"/>
     </Menu-->
-    <Separator/>
-    <Action name="resizestyle" group="show_merge" />
-    <Action name="togglecolumns" group="show_merge" />
   </Menu>
 </MenuBar>
 
