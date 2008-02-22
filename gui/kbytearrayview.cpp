@@ -151,7 +151,7 @@ KByteArrayView::KByteArrayView( KHECore::KAbstractByteArrayModel *Buffer, QWidge
   ValueEditor = new KValueEditor( ValueColumn, BufferCursor, this, Navigator );
   CharEditor = new KCharEditor( CharColumn, BufferCursor, this, Navigator );
 
-  Controller = Navigator;
+  adaptController();
 
 #ifdef QT_ONLY
   QFont FixedFont( "fixed", 10 );
