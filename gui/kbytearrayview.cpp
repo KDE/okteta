@@ -38,9 +38,7 @@
 #include <kcharcodec.h>
 #include <kwordbufferservice.h>
 // KDE
-#ifndef QT_ONLY
 #include <kglobalsettings.h>
-#endif
 // Qt
 #include <QtCore/QListIterator>
 #include <QtCore/QTimer>
@@ -153,13 +151,7 @@ KByteArrayView::KByteArrayView( KHECore::KAbstractByteArrayModel *Buffer, QWidge
 
   adaptController();
 
-#ifdef QT_ONLY
-  QFont FixedFont( "fixed", 10 );
-  FixedFont.setFixedPitch( true );
-  setFont( FixedFont );
-#else
   setFont( KGlobalSettings::fixedFont() );
-#endif
 
   // get the full control
   viewport()->installEventFilter( this );
