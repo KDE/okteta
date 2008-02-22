@@ -171,7 +171,7 @@ class KHECORE_EXPORT KAbstractByteArrayModel : public QObject
       * which is the same as moving the first behind the second.
       * @param firstStart position of the data where the section should be moved behind
       * @param secondSection data section to be moved
-      * @return @true if operation was successfull, @false otherwise
+      * @return @true if operation was successful, @false otherwise
       */
     virtual bool swap( int firstStart, const KSection &secondSection ) = 0;
 
