@@ -1,6 +1,15 @@
 [Desktop Entry]
 Name=Okteta
+Name[xx]=xxOktetaxx
 GenericName=Binary Editor
+GenericName[de]=Binär-Editor
+GenericName[el]=Επεξεργαστής δυαδικών αρχείων
+GenericName[es]=Editor binario
+GenericName[et]=Binaarfailide redaktor
+GenericName[pt]=Editor Binário
+GenericName[pt_BR]=Editor Binário
+GenericName[sv]=Binäreditor
+GenericName[xx]=xxBinary Editorxx
 Icon=khexedit
 Exec=okteta -caption "%c" %U
 Type=Application
