@@ -1916,7 +1916,7 @@ void KByteArrayView::startDrag()
   drag->setMimeData( DragData );
 
   Qt::DropActions request = (isReadOnly()||OverWrite) ? Qt::CopyAction : Qt::CopyAction|Qt::MoveAction;
-  Qt::DropAction dropAction = drag->start( request );
+  Qt::DropAction dropAction = drag->exec( request );
 
   if( dropAction == Qt::MoveAction )
     // Not inside this widget itself?
