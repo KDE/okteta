@@ -70,6 +70,13 @@ class KPieceTableByteArrayModel::Private
     void revertToVersionByIndex( int versionIndex );
 
   public:
+    void addBookmarks( const QList<KHECore::KBookmark> &bookmarks );
+    void removeBookmarks( const QList<KHECore::KBookmark> &bookmarks );
+    void removeAllBookmarks();
+
+    KHECore::KBookmarkList bookmarkList() const;
+
+  public:
     void setData( const char *data, unsigned int size, bool careForMemory = true );
 
   protected:
@@ -84,6 +91,8 @@ class KPieceTableByteArrayModel::Private
     const char *mData;
     KPieceTable::RevertablePieceTable mPieceTable;
     QByteArray mChangeByteArray;
+    /** */
+    KBookmarkList mBookmarks;
 };
 
 
@@ -115,6 +124,26 @@ inline int KPieceTableByteArrayModel::Private::versionIndex() const { return mPi
 inline int KPieceTableByteArrayModel::Private::versionCount() const { return mPieceTable.changesCount()+1; }
 inline QString KPieceTableByteArrayModel::Private::versionDescription( int versionIndex ) const
 { return mPieceTable.changeDescription( versionIndex-1 ); }
+
+inline void KPieceTableByteArrayModel::Private::addBookmarks( const QList<KHECore::KBookmark> &bookmarks )
+{
+    mBookmarks.addBookmarks( bookmarks );
+    emit p->bookmarksAdded( bookmarks );
+}
+inline void KPieceTableByteArrayModel::Private::removeBookmarks( const QList<KHECore::KBookmark> &bookmarks )
+{
+    mBookmarks.removeBookmarks( bookmarks );
+    emit p->bookmarksRemoved( bookmarks );
+}
+
+inline void KPieceTableByteArrayModel::Private::removeAllBookmarks()
+{
+    const QList<KHECore::KBookmark> bookmarks = mBookmarks.list();
+    mBookmarks.clear();
+    emit p->bookmarksRemoved( bookmarks );
+}
+
+inline KHECore::KBookmarkList KPieceTableByteArrayModel::Private::bookmarkList() const { return mBookmarks; }
 
 }
 

@@ -108,6 +108,26 @@ QString KPieceTableByteArrayModel::versionDescription( int versionIndex ) const 
 void KPieceTableByteArrayModel::revertToVersionByIndex( int versionIndex )
 { d->revertToVersionByIndex( versionIndex ); }
 
+void KPieceTableByteArrayModel::addBookmarks( const QList<KHECore::KBookmark> &bookmarks )
+{
+    d->addBookmarks( bookmarks );
+}
+
+void KPieceTableByteArrayModel::removeBookmarks( const QList<KHECore::KBookmark> &bookmarks )
+{
+    d->removeBookmarks( bookmarks );
+}
+
+void KPieceTableByteArrayModel::removeAllBookmarks()
+{
+    d->removeAllBookmarks();
+}
+
+KHECore::KBookmarkList KPieceTableByteArrayModel::bookmarkList() const
+{
+    return d->bookmarkList();
+}
+
 KPieceTableByteArrayModel::~KPieceTableByteArrayModel()
 {
     delete d;

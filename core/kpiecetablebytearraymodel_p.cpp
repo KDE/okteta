@@ -73,6 +73,7 @@ void KPieceTableByteArrayModel::Private::setData( const char *data, unsigned int
         delete mData;
     const int oldSize = mPieceTable.size();
     const bool wasModifiedBefore = isModified();
+    const QList<KHECore::KBookmark> bookmarks = mBookmarks.list();
 
     if( data == 0 )
         size = 0;
@@ -87,10 +88,12 @@ void KPieceTableByteArrayModel::Private::setData( const char *data, unsigned int
     }
     mPieceTable.init( size );
     mChangeByteArray.clear();
+    mBookmarks.clear();
 
     emit p->contentsReplaced( 0, oldSize, size );
     emit p->contentsChanged( 0, oldSize-1 );
     if( wasModifiedBefore ) emit p->modificationChanged( false );
+    if( !bookmarks.empty() ) emit p->bookmarksRemoved( bookmarks );
 }
 
 void KPieceTableByteArrayModel::Private::setDatum( unsigned int offset, const char byte )
@@ -134,8 +137,11 @@ int KPieceTableByteArrayModel::Private::insert( int offset, const char *insertDa
     const bool newChange = mPieceTable.insert( offset, insertLength, mChangeByteArray.size() );
     appendToByteArray( &mChangeByteArray, insertData, insertLength );
 
+    const bool bookmarksModified = mBookmarks.adjustToReplaced( offset, 0, insertLength );
+
     emit p->contentsReplaced( offset, 0, insertLength );
     emit p->contentsChanged( offset, mPieceTable.size()-1 );
+    if( bookmarksModified ) emit p->bookmarksModified( true );
     if( !wasModifiedBefore ) emit p->modificationChanged( true );
     if( newChange )
         emit p->headVersionChanged( mPieceTable.changesCount() );
@@ -159,9 +165,12 @@ int KPieceTableByteArrayModel::Private::remove( const KSection &r )
 
     const bool newChange = mPieceTable.remove( removeSection );
 
+    const bool bookmarksModified = mBookmarks.adjustToReplaced( removeSection.start(), removeSection.width(), 0 );
+
     emit p->contentsReplaced( removeSection.start(), removeSection.width(), 0 );
     //emit p->contentsReplaced( offset, 0,  ); TODO: how to signal the inserted data?
     emit p->contentsChanged( removeSection.start(), oldSize-1 );
+    if( bookmarksModified ) emit p->bookmarksModified( true );
     if( !wasModifiedBefore ) emit p->modificationChanged( true );
     if( newChange )
         emit p->headVersionChanged( mPieceTable.changesCount() );
@@ -186,6 +195,8 @@ unsigned int KPieceTableByteArrayModel::Private::replace( const KSection &r, con
     mPieceTable.replace( removeSection, insertLength, mChangeByteArray.size() );
     appendToByteArray( &mChangeByteArray, insertData, insertLength );
 
+    const bool bookmarksModified = mBookmarks.adjustToReplaced( removeSection.start(), removeSection.width(), insertLength );
+
     const int sizeDiff = insertLength - removeSection.width();
     const int lastChanged = ( sizeDiff == 0 ) ? removeSection.end() :
                             ( sizeDiff > 0 ) ?  mPieceTable.size() - 1 :
@@ -194,6 +205,7 @@ unsigned int KPieceTableByteArrayModel::Private::replace( const KSection &r, con
     emit p->contentsReplaced( removeSection.start(), removeSection.width(), insertLength );
     //emit p->contentsReplaced( offset, 0,  ); TODO: how to signal the changed data at the end?
     emit p->contentsChanged( removeSection.start(), lastChanged );
+    if( bookmarksModified ) emit p->bookmarksModified( true );
     if( !wasModifiedBefore ) emit p->modificationChanged( true );
     emit p->headVersionChanged( mPieceTable.changesCount() );
     return insertLength;
@@ -215,8 +227,11 @@ return false;
 
     mPieceTable.swap( firstStart, secondSection );
 
+    const bool bookmarksModified = mBookmarks.adjustToMoved( firstStart, secondSection.start(),secondSection.width() );
+
     emit p->contentsSwapped( firstStart, secondSection.start(),secondSection.width()  );
     emit p->contentsChanged( firstStart, secondSection.end() );
+    if( bookmarksModified ) emit p->bookmarksModified( true );
     if( !wasModifiedBefore ) emit p->modificationChanged( true );
     emit p->headVersionChanged( mPieceTable.changesCount() );
     return true;

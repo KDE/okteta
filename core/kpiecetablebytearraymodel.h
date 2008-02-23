@@ -22,6 +22,7 @@
 // lib
 #include "kabstractbytearraymodel.h"
 #include "kversionable.h"
+#include "kbookmarkable.h"
 
 
 namespace KHECore
@@ -31,10 +32,10 @@ namespace KHECore
   *@author Friedrich W. H. Kossebau
   */
 
-class KHECORE_EXPORT KPieceTableByteArrayModel : public KAbstractByteArrayModel, public Versionable
+class KHECORE_EXPORT KPieceTableByteArrayModel : public KAbstractByteArrayModel, public Versionable, public Bookmarkable
 {
     Q_OBJECT
-    Q_INTERFACES( KHECore::Versionable )
+    Q_INTERFACES( KHECore::Versionable KHECore::Bookmarkable )
 
     class Private;
     friend class Private;
@@ -80,6 +81,13 @@ class KHECORE_EXPORT KPieceTableByteArrayModel : public KAbstractByteArrayModel,
   public: // set/action
     virtual void revertToVersionByIndex( int versionIndex );
 
+  public: // Bookmarkable API
+    virtual void addBookmarks( const QList<KHECore::KBookmark> &bookmarks );
+    virtual void removeBookmarks( const QList<KHECore::KBookmark> &bookmarks );
+    virtual void removeAllBookmarks();
+
+    virtual KHECore::KBookmarkList bookmarkList() const;
+
   public:
 //     void setMaxSize( int MS );
     /** sets whether the memory given by setData or in the constructor should be kept on resize
@@ -100,6 +108,11 @@ class KHECORE_EXPORT KPieceTableByteArrayModel : public KAbstractByteArrayModel,
     virtual void revertedToVersionIndex( int versionIndex );
     virtual void headVersionDescriptionChanged( const QString &versionDescription );
     virtual void headVersionChanged( int newHeadVersionIndex );
+
+  Q_SIGNALS: // Bookmarkable signals
+    virtual void bookmarksAdded( const QList<KHECore::KBookmark> &bookmarks );
+    virtual void bookmarksRemoved( const QList<KHECore::KBookmark> &bookmarks );
+    virtual void bookmarksModified( bool modified );
 
   protected:
     class Private * const d;
