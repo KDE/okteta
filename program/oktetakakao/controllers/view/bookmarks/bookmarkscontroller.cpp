@@ -124,13 +124,15 @@ void BookmarksController::updateBookmarks()
 
     char codedOffset[KHEUI::KOffsetFormat::MaxFormatWidth+1];
     KHECore::KBookmarkList::ConstIterator bit = bookmarks.begin();
-    int b = 0;
+    static const int firstWithNumericShortCut = 1;
+    static const int lastWithNumericShortCut = 9;
+    int b = firstWithNumericShortCut;
     for( ; bit != bookmarks.end(); ++b,++bit )
     {
         KHECore::KBookmark bookmark = *bit;
         printFunction( codedOffset, startOffset+bookmark.offset() );
         QString title = i18n( "Offset: %1", QLatin1String(codedOffset) );
-        if( b < 10 )
+        if( b <= lastWithNumericShortCut )
             title = QString::fromLatin1("&%1 %2").arg( b ).arg( title );
         // = KStringHandler::rsqueeze( view->title(), MaxEntryLength );
         QAction *action = new QAction( title, mBookmarksActionGroup );
