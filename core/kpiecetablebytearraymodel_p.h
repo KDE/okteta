@@ -77,7 +77,7 @@ class KPieceTableByteArrayModel::Private
     /**  */
     bool mReadOnly:1;
     /** */
-    bool mModified:1;
+//     bool mModified:1;
     /** */
     bool mAutoDelete:1;
 
@@ -90,7 +90,7 @@ class KPieceTableByteArrayModel::Private
 inline int KPieceTableByteArrayModel::Private::size() const  { return mPieceTable.size(); }
 
 inline bool KPieceTableByteArrayModel::Private::isReadOnly()   const { return mReadOnly; }
-inline bool KPieceTableByteArrayModel::Private::isModified()   const { return mModified; }
+inline bool KPieceTableByteArrayModel::Private::isModified()   const { return !mPieceTable.isAtBase(); }
 
 inline void KPieceTableByteArrayModel::Private::setReadOnly( bool readOnly )
 {
@@ -102,9 +102,11 @@ inline void KPieceTableByteArrayModel::Private::setReadOnly( bool readOnly )
 }
 inline void KPieceTableByteArrayModel::Private::setModified( bool modified )
 {
-    if( mModified != modified )
+    if( isModified() != modified )
     {
-        mModified = modified;
+        mPieceTable.setBeforeCurrentChangeAsBase(modified);
+        // TODO: is the call setModified of any use?
+        // shouldn't there be only a setUnmodified(void) or else call?
         emit p->modificationChanged( modified );
     }
 }
