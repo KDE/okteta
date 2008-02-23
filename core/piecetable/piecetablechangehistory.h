@@ -56,11 +56,14 @@ class PieceTableChangeHistory
     // 
     void finishChange();
 
+    void setBeforeCurrentChangeAsBase( bool hide );
+
   public:
     int count() const;
     int appliedChangesCount() const;
     QString changeDescription( int changeId ) const;
     QString headChangeDescription() const;
+    bool isAtBase() const;
 
   protected:
     /// if 0, no change group is open
@@ -71,15 +74,19 @@ class PieceTableChangeHistory
     ///
     int mAppliedChangesCount;
     ///
+    int mBaseBeforeChangeIndex;
+    ///
     QStack<AbstractPieceTableChange*> mChangeStack;
 };
 
 
 inline PieceTableChangeHistory::PieceTableChangeHistory()
- : mChangeGroupOpened( 0 ), mMergeChanges( false ), mAppliedChangesCount( 0 ) {}
+ : mChangeGroupOpened( 0 ), mMergeChanges( false ), mAppliedChangesCount( 0 ), mBaseBeforeChangeIndex( 0 ) {}
 inline int PieceTableChangeHistory::count()                     const { return mChangeStack.count(); }
 inline int PieceTableChangeHistory::appliedChangesCount()       const { return mAppliedChangesCount; }
 inline QString PieceTableChangeHistory::headChangeDescription() const { return changeDescription( count()-1 ); }
+inline bool PieceTableChangeHistory::isAtBase()                 const
+{ return ( mBaseBeforeChangeIndex == mAppliedChangesCount ); }
 
 inline void PieceTableChangeHistory::openGroupedChange()  { ++mChangeGroupOpened; }
 inline void PieceTableChangeHistory::closeGroupedChange() { if( mChangeGroupOpened > 0 ) --mChangeGroupOpened; }

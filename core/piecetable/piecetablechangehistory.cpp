@@ -33,16 +33,30 @@ void PieceTableChangeHistory::clear()
     mMergeChanges = false;
     mChangeGroupOpened = 0;
     mAppliedChangesCount = 0;
+    mBaseBeforeChangeIndex = 0;
+}
+
+void PieceTableChangeHistory::setBeforeCurrentChangeAsBase(bool hide)
+{
+    mBaseBeforeChangeIndex = hide ? -1 : mAppliedChangesCount;
+    mMergeChanges = false;
 }
 
 bool PieceTableChangeHistory::appendChange( AbstractPieceTableChange *change )
 {
     // chop unapplied changes
-    while( mAppliedChangesCount < mChangeStack.count() )
+    if( mAppliedChangesCount < mChangeStack.count() )
     {
-        AbstractPieceTableChange *droppedChange = mChangeStack.pop();
-        // TODO: get freed change storage   droppedChange->storageOffset
-        delete droppedChange;
+        // hide baseindex if needed
+        if( mBaseBeforeChangeIndex > mAppliedChangesCount )
+            mBaseBeforeChangeIndex = -1;
+        do
+        {
+            AbstractPieceTableChange *droppedChange = mChangeStack.pop();
+            // TODO: get freed change storage   droppedChange->storageOffset
+            delete droppedChange;
+        }
+        while( mAppliedChangesCount < mChangeStack.count() );
     }
 
     bool isNotMerged = true;
@@ -98,6 +112,7 @@ bool PieceTableChangeHistory::revertBeforeChange( PieceTable *pieceTable, int ch
         }
     }
     mAppliedChangesCount = changeId;
+    mMergeChanges = false;
 
     return true;
 }
