@@ -144,9 +144,7 @@ void BookmarksController::updateBookmarks()
 void BookmarksController::onBookmarksAdded( const QList<KHECore::KBookmark> &bookmarks )
 {
 Q_UNUSED( bookmarks )
-    const int cursorPosition = mByteArrayView->cursorPosition();
-    const bool hasBookmark = mBookmarks->bookmarkList().contains( cursorPosition );
-    mDeleteAction->setEnabled( hasBookmark );
+    onCursorPositionChanged( mByteArrayView->cursorPosition() );
 
     const int bookmarksCount = mBookmarks->bookmarkList().size();
     const bool hasBookmarks = ( bookmarksCount != 0 );
@@ -160,9 +158,7 @@ Q_UNUSED( bookmarks )
 void BookmarksController::onBookmarksRemoved( const QList<KHECore::KBookmark> &bookmarks )
 {
 Q_UNUSED( bookmarks )
-    const int cursorPosition = mByteArrayView->cursorPosition();
-    const bool hasBookmark = mBookmarks->bookmarkList().contains( cursorPosition );
-    mDeleteAction->setEnabled( hasBookmark );
+    onCursorPositionChanged( mByteArrayView->cursorPosition() );
 
     const int bookmarksCount = mBookmarks->bookmarkList().size();
     const bool hasBookmarks = ( bookmarksCount != 0 );
@@ -176,6 +172,7 @@ Q_UNUSED( bookmarks )
 void BookmarksController::onCursorPositionChanged( int newPosition )
 {
     const bool hasBookmark = mBookmarks->bookmarkList().contains( newPosition );
+    mCreateAction->setEnabled( !hasBookmark );
     mDeleteAction->setEnabled( hasBookmark );
 }
 
