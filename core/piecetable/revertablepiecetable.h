@@ -53,6 +53,8 @@ class RevertablePieceTable
     bool revertBeforeChange( int changeId,
                              KHE::KSectionList *changedRanges, QList<KHE::ReplacementScope> *replacementList );
 
+    void setBeforeCurrentChangeAsBase( bool hide );
+
   public:
     bool getStorageData( int *storageId, int *storageOffset, int dataOffset ) const;
     int size() const;
@@ -62,6 +64,7 @@ class RevertablePieceTable
     int appliedChangesCount() const;
     QString changeDescription( int change ) const;
     QString headChangeDescription() const;
+    bool isAtBase() const;
 
   protected:
     PieceTable mPieceTable;
@@ -70,6 +73,8 @@ class RevertablePieceTable
 
 inline bool RevertablePieceTable::getStorageData( int *storageId, int *storageOffset, int dataOffset ) const
 { return mPieceTable.getStorageData( storageId, storageOffset, dataOffset ); }
+inline void RevertablePieceTable::setBeforeCurrentChangeAsBase( bool hide )
+{ mChangeHistory.setBeforeCurrentChangeAsBase( hide ); }
 
 inline int RevertablePieceTable::size()                const { return mPieceTable.size(); }
 inline int RevertablePieceTable::changesCount()        const { return mChangeHistory.count(); }
@@ -81,6 +86,8 @@ inline void RevertablePieceTable::finishChange() { mChangeHistory.finishChange()
 
 inline QString RevertablePieceTable::changeDescription( int change ) const { return mChangeHistory.changeDescription( change ); }
 inline QString RevertablePieceTable::headChangeDescription()         const { return mChangeHistory.headChangeDescription(); }
+inline bool RevertablePieceTable::isAtBase() const { return mChangeHistory.isAtBase(); }
+
 }
 
 #endif
