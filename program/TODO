@@ -26,12 +26,21 @@ Erledigt:
 - Binärfilter
 - Zeichenkettenextraktion
 
+Added before review:
+------------------------
+* add bookmarkable to kpiecetablebytearray
+
 Before adding to review:
 ------------------------
 * reset changebuffer if history gets cut
+* fix cursor problems
+* complete change notifications
+* make drag'n'drop work properly again
 * make tools work on selection
 * user documentation in docbook format
 * complete i18n (@-stuff)
+* see why documents don't get removed on close of view
+* test handling of readonly files
 
 After passing review:
 For KDE 4.1:
@@ -40,6 +49,8 @@ For KDE 4.1:
 * add support for memory mapped files (includes enabling overwrite controller again)
 * add export functionality
 * enable extract strings tool and add copy
+* session support: full storing and restoring of view/model state
+* think about turning insert pattern & Co. into a tool
 
 Later on:
 ---------
