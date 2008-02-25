@@ -120,16 +120,16 @@ KPrimitiveTypesView::KPrimitiveTypesView( PODDecoderTool *tool, QWidget *parent 
     connect( mUnsignedAsHexCheck, SIGNAL(clicked()), this, SLOT(onUnsignedAsHex()) );
 
     // Variable bitwidth
-    QLabel *label = new QLabel( i18n("Stream length:") );
-    label->setAlignment( Qt::AlignRight|Qt::AlignVCenter );
-    baseLayout->addWidget( label, 4, 1 );
+//     QLabel *label = new QLabel( i18n("Stream length:") );
+//     label->setAlignment( Qt::AlignRight|Qt::AlignVCenter );
+//     baseLayout->addWidget( label, 4, 1 );
 
-    mBitWidthSelection = new KComboBox( false );
-    mBitWidthSelection->addItem( i18n("Fixed 8 bit") );
-    for( int i=1; i<=16; ++i )
-        mBitWidthSelection->addItem( i18np("1 bit window","%1 bits window",i) );
-    baseLayout->addWidget( mBitWidthSelection, 4, 2 );
-    connect( mBitWidthSelection, SIGNAL(activated(int)), SLOT(onBitWidthChange(int)));
+//     mBitWidthSelection = new KComboBox( false );
+//     mBitWidthSelection->addItem( i18n("Fixed 8 bit") );
+//     for( int i=1; i<=16; ++i )
+//         mBitWidthSelection->addItem( i18np("1 bit window","%1 bits window",i) );
+//     baseLayout->addWidget( mBitWidthSelection, 4, 2 );
+//     connect( mBitWidthSelection, SIGNAL(activated(int)), SLOT(onBitWidthChange(int)));
 
     // load font metrics
     fontChanged();
@@ -225,7 +225,7 @@ void KPrimitiveTypesView::onDataChange()
                                                 QString::number(*(double*)P64Bit,'e');
     mInt32FloatDisplay[3]->setText( double64Bit );
 
-    const int numBits = mBitWidthSelection->currentIndex();
+    const int numBits = 0;//mBitWidthSelection->currentIndex();
     const bool hasEnoughBits = ( (numBits>8 ? P16Bit : P8Bit) != 0 );
     if( hasEnoughBits )
     {
