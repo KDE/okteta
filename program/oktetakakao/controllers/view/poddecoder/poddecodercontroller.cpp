@@ -37,7 +37,7 @@ PODDecoderController::PODDecoderController( KXmlGuiWindow *window )
 
     mPrimitiveTypesView = new KPrimitiveTypesView( mTool );
 
-    QDockWidget *dockWidget = new QDockWidget( i18nc("@title:window", "Decoding table"), mWindow );
+    QDockWidget *dockWidget = new QDockWidget( i18nc("@title:window", "Decoding Table"), mWindow );
     dockWidget->setObjectName( "PODDecoder" );
     dockWidget->setWidget( mPrimitiveTypesView );
     mWindow->addDockWidget( Qt::BottomDockWidgetArea, dockWidget );
@@ -45,7 +45,7 @@ PODDecoderController::PODDecoderController( KXmlGuiWindow *window )
     //mContainer->addToolWidget( mPrimitiveTypesView );
 
     QAction *action = dockWidget->toggleViewAction();
-    action->setText( i18nc("@title:window", "Decoding table") ); //TODO: better name needed!
+    action->setText( i18nc("@title:window", "Decoding Table") ); //TODO: better name needed!
 //     action->setShortcut( Qt::Key_F7 );
     actionCollection->addAction( "show_pod_decoder", action );
 
