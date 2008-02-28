@@ -1,5 +1,4 @@
 [Desktop Entry]
-Encoding=UTF-8
 Type=Service
 Icon=khexedit
 Name=Embedded Binary Viewer
@@ -20,7 +19,7 @@ Comment[pt]=Visualizador Binário Incorporado
 Comment[pt_BR]=Visualizador Binário Incorporado
 Comment[sv]=Inbäddad binärvisning
 Comment[xx]=xxEmbedded Binary Viewerxx
-MimeType=all/allfiles
+MimeType=all/allfiles;
 #MimeType=application/octet-stream
 X-KDE-ServiceTypes=KParts/ReadOnlyPart,Browser/View
 #,KParts/ReadWritePart
