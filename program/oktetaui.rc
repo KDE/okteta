@@ -40,9 +40,6 @@ Zusammenlegen?
       <text>Paste as</text>
       <ActionList name="paste_as_list" />
     </Menu-->
-    <Action name="edit_undo" group="edit_undo_merge" />
-    <Action name="edit_redo" group="edit_undo_merge" />
-    <Separator group="edit_undo_merge" />
     <Action name="set_overwrite" group="edit_select_merge" />
     <Separator group="edit_select_merge" />
     <Action name="goto_offset" />
