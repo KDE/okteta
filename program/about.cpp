@@ -41,6 +41,7 @@ OktetaAboutData::OktetaAboutData()
               ki18n("Copyright 2006-2008 Friedrich W. H. Kossebau"), //copyright
               ki18n("Edit files as streams of bytes") ) // comment
 {
+    addLicense(KAboutData::License_GPL_V3);
     setOrganizationDomain( "kde.org" );
     addAuthor( ki18n("Friedrich W. H. Kossebau"), // name
                ki18n("Author"), // task
