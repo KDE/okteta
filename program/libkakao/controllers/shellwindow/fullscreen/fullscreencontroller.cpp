@@ -47,8 +47,5 @@ Q_UNUSED( view )
 
 void FullScreenController::switchFullScreen( bool toFullScreen )
 {
-    if( toFullScreen )
-        mMainWindow->showFullScreen();
-    else
-        mMainWindow->showNormal();
+    KToggleFullScreenAction::setFullScreen( mMainWindow, toFullScreen );
 }
