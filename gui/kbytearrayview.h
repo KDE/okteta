@@ -138,10 +138,6 @@ class KHEUI_EXPORT KByteArrayView : public KColumnsView
     virtual void drawColumns( QPainter *p, int cx, int cy, int cw, int ch );
 
   public: // QWidget API
-//    void focusInEvent( QFocusEvent *FocusEvent ); // TODO: why don't these work?
-//    void focusOutEvent( QFocusEvent *FocusEvent );
-    virtual bool eventFilter( QObject *O, QEvent *E );
-
     virtual QSize sizeHint() const;
     virtual QSize minimumSizeHint() const;
 
@@ -385,9 +381,11 @@ class KHEUI_EXPORT KByteArrayView : public KColumnsView
 
 
   protected: // QWidget API
-    virtual void keyPressEvent( QKeyEvent *KeyEvent );
-    virtual void resizeEvent( QResizeEvent *ResizeEvent );
-    virtual void showEvent( QShowEvent *e );
+    virtual void keyPressEvent( QKeyEvent *keyEvent );
+    virtual void resizeEvent( QResizeEvent *resizeEvent );
+    virtual void showEvent( QShowEvent *showEvent );
+    virtual void focusInEvent( QFocusEvent *focusEvent );
+    virtual void focusOutEvent( QFocusEvent *focusEvent );
 
   protected: // QAbstractScrollArea API
     virtual void mousePressEvent( QMouseEvent *e );

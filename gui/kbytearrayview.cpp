@@ -158,10 +158,6 @@ KByteArrayView::KByteArrayView( KHECore::KAbstractByteArrayModel *Buffer, QWidge
 
   setFont( KGlobalSettings::fixedFont() );
 
-  // get the full control
-  viewport()->installEventFilter( this );
-  installEventFilter( this );
-
   connect( CursorBlinkTimer, SIGNAL(timeout()), this, SLOT(blinkCursor()) );
   connect( ScrollTimer,      SIGNAL(timeout()), this, SLOT(autoScrollTimerDone()) );
   connect( DragStartTimer,   SIGNAL(timeout()), this, SLOT(startDrag()) );
@@ -1266,36 +1262,16 @@ void KByteArrayView::showEvent( QShowEvent *Event )
 }
 
 
-bool KByteArrayView::eventFilter( QObject *Object, QEvent *E )
+void KByteArrayView::focusInEvent( QFocusEvent *focusEvent )
 {
-  if( Object == this || Object == viewport() )
-  {
-    if( E->type() == QEvent::FocusIn )
-    {
-      startCursor();
-    }
-    else if( E->type() == QEvent::FocusOut )
-    {
-      stopCursor();
-    }
-  }
+    KColumnsView::focusInEvent( focusEvent );
+    startCursor();
+}
 
-//   if( O == this && E->type() == QEvent::PaletteChange )
-//   {
-//     QColor old( viewport()->colorGroup().color(QPalette::Text) );
-//
-//     if( old != colorGroup().color(QPalette::Text) )
-//     {
-//       QColor c( colorGroup().color(QPalette::Text) );
-//       doc->setMinimumWidth( -1 );
-//       doc->setDefaultFormat( doc->formatCollection()->defaultFormat()->font(), c );
-//       lastFormatted = doc->firstParagraph();
-//       formatMore();
-//       updateChanged();
-//     }
-//   }
-
-  return KColumnsView::eventFilter( Object, E );
+void KByteArrayView::focusOutEvent( QFocusEvent *focusEvent )
+{
+    stopCursor();
+    KColumnsView::focusOutEvent( focusEvent );
 }
 
 
