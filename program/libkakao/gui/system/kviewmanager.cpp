@@ -37,6 +37,7 @@ KViewManager::KViewManager( KDocumentManager *documentManager )
  : mDocumentManager( documentManager )
 {
     connect( mDocumentManager, SIGNAL(added( KAbstractDocument* )), SLOT(createViewFor( KAbstractDocument* )) );
+    connect( mDocumentManager, SIGNAL(closing( KAbstractDocument* )), SLOT(removeViewsFor( KAbstractDocument* )) );
 }
 
 void KViewManager::setWindow( KXmlGuiWindow *window )
@@ -86,31 +87,15 @@ void KViewManager::createViewFor( KAbstractDocument *document )
 }
 
 
-void KViewManager::closeView( KAbstractView* view )
+void KViewManager::removeViewsFor( KAbstractDocument *document )
 {
-    QMutableListIterator<KAbstractView*> searchIterator( mViewList );
-    if( searchIterator.findNext(view) )
+    QMutableListIterator<KAbstractView*> it( mViewList );
+    while( it.hasNext() )
     {
-        // only view to document?
-        // TODO: loop could be integrated in previous loop searchIterator.findNext
-        KAbstractDocument *document = view->document();
-
-        bool documentHasOtherView = false;
-        QListIterator<KAbstractView*> it( mViewList );
-        while( it.hasNext() )
+        KAbstractView *view = it.next();
+        if( view->document() == document )
         {
-            const KAbstractView *otherView = it.next();
-            if( otherView->document() == document && otherView != view )
-            {
-                documentHasOtherView = true;
-                break;
-            }
-        }
-
-        if( documentHasOtherView || mDocumentManager->canClose(document) )
-        {
-
-            searchIterator.remove();
+            it.remove();
             emit closing( view );
             delete view;
         }

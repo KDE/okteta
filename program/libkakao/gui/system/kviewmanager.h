@@ -50,19 +50,20 @@ class KViewManager : public QObject
     QList<KAbstractView*> views() const;
     KAbstractView *viewByWidget( QWidget *widget ) const;
 
-  public Q_SLOTS:
-    void createViewFor( KAbstractDocument *document );
-    /**
-    * asks the manager to close and delete the view
-    * may fail if the process if cancelled due to user input
-    */
-    void closeView( KAbstractView *view );
-
   Q_SIGNALS:
     // view was created and already added to the list
     void opened( KAbstractView *view );
     // view will be closed, already removed from list
     void closing( KAbstractView *view );
+
+  protected Q_SLOTS:
+    void createViewFor( KAbstractDocument *document );
+    void removeViewsFor( KAbstractDocument *document );
+    /**
+    * asks the manager to close and delete the view
+    * may fail if the process if cancelled due to user input
+    */
+//     void closeView( KAbstractView *view );
 
   protected:
     QList<KAbstractView*> mViewList;
