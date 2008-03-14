@@ -22,6 +22,9 @@ set( CREATORCONTROLLER_SRCS
 set( LOADERCONTROLLER_SRCS
   documentsystem/loader/loadercontroller.cpp
 )
+set( CLOSECONTROLLER_SRCS
+  documentsystem/close/closecontroller.cpp
+)
 set( READONLYCONTROLLER_SRCS
   document/readonly/readonlycontroller.cpp
 )
@@ -45,9 +48,9 @@ set( CLIPBOARDCONTROLLER_SRCS
 set( COPYASCONTROLLER_SRCS
   view/copyas/copyascontroller.cpp
 )
-set( CLOSECONTROLLER_SRCS
-  viewsystem/close/closecontroller.cpp
-)
+# set( CLOSECONTROLLER_SRCS
+#   viewsystem/close/closecontroller.cpp
+# )
 set( VIEWLISTMENUCONTROLLER_SRCS
   shellwindow/viewlistmenu/viewlistmenucontroller.cpp
 )

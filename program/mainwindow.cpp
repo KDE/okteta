@@ -45,6 +45,7 @@
 #include <document/readonly/readonlycontroller.h>
 #include <documentsystem/creator/creatorcontroller.h>
 #include <documentsystem/loader/loadercontroller.h>
+#include <documentsystem/close/closecontroller.h>
 #include <io/setremote/setremotecontroller.h>
 #include <io/synchronize/synchronizecontroller.h>
 #include <view/zoom/zoomcontroller.h>
@@ -53,7 +54,7 @@
 #include <view/copyas/copyascontroller.h>
 #include <shellwindow/viewlistmenu/viewlistmenucontroller.h>
 #include <shellwindow/fullscreen/fullscreencontroller.h>
-#include <viewsystem/close/closecontroller.h>
+/*#include <viewsystem/close/closecontroller.h>*/
 #include <program/quit/quitcontroller.h>
 // Kakao gui
 #include <kviewmanager.h>
@@ -82,7 +83,7 @@ void OktetaMainWindow::setupControllers()
   mControllers.append( new LoaderController(mProgram->documentManager()->syncManager(),this) );
   mControllers.append( new SetRemoteController(mProgram->documentManager()->syncManager(),this) );
   mControllers.append( new SynchronizeController(this) );
-  mControllers.append( new CloseController(mProgram->viewManager(),this) );
+  mControllers.append( new CloseController(mProgram->documentManager(),this) );
   mControllers.append( new VersionController(this) );
   mControllers.append( new VersionViewController(this) );
   mControllers.append( new ReadOnlyController(this) );
