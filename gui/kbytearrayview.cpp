@@ -43,7 +43,7 @@
 #include <kcharcodec.h>
 #include <kwordbufferservice.h>
 // KDE
-#include <kglobalsettings.h>
+#include <KGlobalSettings>
 // Qt
 #include <QtCore/QListIterator>
 #include <QtCore/QTimer>
