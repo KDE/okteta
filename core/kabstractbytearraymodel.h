@@ -286,8 +286,6 @@ inline int KAbstractByteArrayModel::indexOf( const QByteArray& Data, int From ) 
 inline int KAbstractByteArrayModel::lastIndexOf( const QByteArray& Data, int From ) const
 { return lastIndexOf( Data.constData(), Data.size(), From ); }
 
-inline bool KAbstractByteArrayModel::isReadOnly() const { return false; }
-
 }
 
 #endif

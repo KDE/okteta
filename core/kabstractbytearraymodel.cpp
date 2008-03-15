@@ -30,6 +30,8 @@ namespace KHECore {
 
 KAbstractByteArrayModel::KAbstractByteArrayModel() {}
 
+bool KAbstractByteArrayModel::isReadOnly() const { return false; }
+
 void KAbstractByteArrayModel::setReadOnly( bool isReadOnly )
 {
     Q_UNUSED( isReadOnly )
