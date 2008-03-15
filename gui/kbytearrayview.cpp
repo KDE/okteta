@@ -1875,7 +1875,7 @@ void KByteArrayView::startDrag()
     if( !dragData )
         return;
 
-    QDrag *drag = new QDrag( viewport() );
+    QDrag *drag = new QDrag( this );
     drag->setMimeData( dragData );
 
     Qt::DropActions request = (isReadOnly()||mOverWrite) ? Qt::CopyAction : Qt::CopyAction|Qt::MoveAction;
@@ -1883,10 +1883,8 @@ void KByteArrayView::startDrag()
 
     if( dropAction == Qt::MoveAction )
         // Not inside this widget itself?
-        if( drag->target() != this && drag->target() != viewport() )
-        removeSelectedData();
-
-    delete drag;
+        if( drag->target() != this )
+            removeSelectedData();
 }
 
 
@@ -1933,14 +1931,17 @@ void KByteArrayView::dropEvent( QDropEvent *dropEvent )
 {
     // after drag enter and move check one more time
     if( isReadOnly() )
+    {
+        dropEvent->ignore();
         return;
+    }
 
     // leave state
     mInDnD = false;
     dropEvent->accept();
 
     // is this an internal dnd?
-    if( dropEvent->source() == this || dropEvent->source() == viewport() )
+    if( dropEvent->source() == this )
         handleInternalDrag( dropEvent );
     else
     {
