@@ -1614,11 +1614,9 @@ void KByteArrayView::mousePressEvent( QMouseEvent *mouseEvent )
         }
 
         const QPoint mousePoint = viewportToColumns( mouseEvent->pos() );
-        placeCursor( mousePoint );
-        ensureCursorVisible();
 
         // start of a drag perhaps?
-        if( mDataRanges->selectionIncludes(mDataCursor->index()) )
+        if( mDataRanges->selectionIncludes(indexByPoint( mousePoint )) )
         {
             mDragStartPossible = true;
             mDragStartTimer->start( QApplication::startDragTime() );
@@ -1627,6 +1625,9 @@ void KByteArrayView::mousePressEvent( QMouseEvent *mouseEvent )
             unpauseCursor();
             return;
         }
+
+        placeCursor( mousePoint );
+        ensureCursorVisible();
 
         const int realIndex = mDataCursor->realIndex();
         if( mDataRanges->selectionStarted() )
@@ -1899,6 +1900,9 @@ void KByteArrayView::dragEnterEvent( QDragEnterEvent *event )
 
     event->accept();
     mInDnD = true;
+    mBeforeDragCursorPos = mDataCursor->index();
+    mBeforeDragCursorIsBehind = mDataCursor->isBehind();
+    mCursorIsMovedByDrag = false;
 }
 
 
@@ -1914,16 +1918,26 @@ void KByteArrayView::dragMoveEvent( QDragMoveEvent *event )
     // let text cursor follow mouse
     pauseCursor( true );
     placeCursor( event->pos() );
+    mCursorIsMovedByDrag = true;
     unpauseCursor();
 
     event->accept();
 }
 
 
-void KByteArrayView::dragLeaveEvent( QDragLeaveEvent * )
+void KByteArrayView::dragLeaveEvent( QDragLeaveEvent *event )
 {
     // bye... and thanks for all the cursor movement...
     mInDnD = false;
+    if( mCursorIsMovedByDrag )
+    {
+        pauseCursor();
+        mDataCursor->gotoIndex( mBeforeDragCursorPos );
+        if( mBeforeDragCursorIsBehind ) mDataCursor->stepBehind();
+        unpauseCursor();
+    }
+    event->accept();
+
 }
 
 
