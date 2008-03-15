@@ -115,9 +115,9 @@ class KHECORE_EXPORT KAbstractByteArrayModel : public QObject
 
     /** requests a single byte
       * if the offset is not valid the behaviout is undefined
-      * @param Offset offset of the datum requested
+      * @param offset offset of the datum requested
       */
-    virtual char datum( unsigned int Offset ) const = 0;
+    virtual char datum( unsigned int offset ) const = 0;
 
     /**
       * @return the size of the data
@@ -142,34 +142,34 @@ class KHECORE_EXPORT KAbstractByteArrayModel : public QObject
       * The original data beginnung at the position is moved
       * with the buffer enlarged as needed
       * If the buffer is readOnly this is a noop and returns 0.
-      * @param Pos
-      * @param Source data source
-      * @param SourceLength number of bytes to copy
+      * @param offset
+      * @param insertData data source
+      * @param insertLength number of bytes to copy
       * @return length of inserted data
       */
-    virtual int insert( int Pos, const char* Source, int SourceLength );
-    int insert( int Pos, const QByteArray &Source );
+    virtual int insert( int offset, const char *insertData, int insertLength );
+    int insert( int offset, const QByteArray &insertData );
 
     /** removes beginning with position as much as possible
-      * @param Section
+      * @param removeSection
       * @return length of removed data
       */
-    virtual int remove( const KSection &Section );
+    virtual int remove( const KSection &removeSection );
     /** convenience function, behaves as above */
-    int remove( int Pos, int Length );
+    int remove( int offset, int removeLength );
 
     /** replaces as much as possible
-      * @param DestSection
-      * @param Source
-      * @param SourceLength
+      * @param removeSection
+      * @param insertData
+      * @param insertLength
       * @return length of inserted data
       */
-    virtual unsigned int replace( const KSection &DestSection, const char* Source, unsigned int SourceLength ) = 0;
+    virtual unsigned int replace( const KSection &removeSection, const char *insertData, unsigned int insertLength ) = 0;
     /** convenience function, behaves as above */
-    unsigned int replace( const KSection &DestSection, const QByteArray &Source );
+    unsigned int replace( const KSection &removeSection, const QByteArray &insertData );
     /** convenience function, behaves as above */
-    unsigned int replace( unsigned int Pos, unsigned int RemoveLength,
-                          const char* Source, unsigned int SourceLength );
+    unsigned int replace( unsigned int offset, unsigned int removeLength,
+                          const char *insertData, unsigned int insertLength );
 
     // todo use parameters grouped differrently?
     /** moves the second section before the start of the first
@@ -182,25 +182,25 @@ class KHECORE_EXPORT KAbstractByteArrayModel : public QObject
 
     /**
      * fills the buffer with the FillChar. If the buffer is to small it will be extended as much as possible.
-     * @param FillChar char to use
-     * @param Pos position where the filling starts
-     * @param Length number of chars to fill. If Length is -1, the buffer is filled till the end.
+     * @param fillChar char to use
+     * @param offset position where the filling starts
+     * @param fillLength number of chars to fill. If Length is -1, the buffer is filled till the end.
      * @return number of filled characters
      */
-    virtual int fill( const char FillChar, unsigned int Pos = 0, int Length = -1 ) = 0;
-    int fill( const char FillChar, const KSection &Section );
+    virtual int fill( const char fillChar, unsigned int offset = 0, int fillLength = -1 ) = 0;
+    int fill( const char fillChar, const KSection &fillSection );
 
     /** sets a single byte
      * if the offset is not valid the behaviour is undefined
-     * @param Offset offset of the datum requested
-     * @param Char new byte value
+     * @param offset offset of the datum requested
+     * @param value new byte value
      */
-    virtual void setDatum( unsigned int Offset, const char Char ) = 0;
+    virtual void setDatum( unsigned int offset, const char value ) = 0;
 
     /** sets the modified flag for the buffer
-      * @param M
+      * @param modified
       */
-    virtual void setModified( bool M ) = 0;
+    virtual void setModified( bool modified ) = 0;
 
     /** sets the readonly flag for the byte array if this is possible.
       * Default implementation does not do anything.
@@ -212,24 +212,24 @@ class KHECORE_EXPORT KAbstractByteArrayModel : public QObject
   public: // service functions
     /** copies the data of the section into a given array Dest. If the section extends the buffers range
       * the section is limited to the buffer's end. If the section is invalid the behaviour is undefined.
-      * @param Dest pointer to a char array large enough to hold the copied section
-      * @param Source
+      * @param dest pointer to a char array large enough to hold the copied section
+      * @param copySection
       * @return number of copied bytes
       */
-    virtual int copyTo( char* Dest, const KSection &Source ) const;
+    virtual int copyTo( char *dest, const KSection &copySection ) const;
     /** convenience function, behaves as above */
-    int copyTo( char* Dest, int Pos, int n ) const;
+    int copyTo( char *dest, int offset, unsigned int copyLength ) const;
 
 
   public: // finding API
     /** searches beginning with byte at Pos.
-      * @param 
-      * @param Length length of search string
-      * @param From the position to start the search
+      * @param pattern
+      * @param patternLength length of search string
+      * @param fromOffset the position to start the search
       * @return index of the first  or -1
       */
-    virtual int indexOf( const char*, int Length, int From = 0 ) const;
-    int indexOf( const QByteArray& Data, int From = 0 ) const;
+    virtual int indexOf( const char *pattern, int patternLength, int fromOffset = 0 ) const;
+    int indexOf( const QByteArray &pattern, int fromOffset = 0 ) const;
     /** searches for a given data string
       * The section limits the data within which the key has to be found
       * If the end of the section is lower then the start the search continues at the start???
@@ -241,12 +241,12 @@ class KHECORE_EXPORT KAbstractByteArrayModel : public QObject
 //     virtual int indexOf( const char*KeyData, int Length, const KSection &Section ) const { return -1; }//= 0;
     /** searches backward beginning with byte at Pos.
       * @param 
-      * @param Length length of search string
-      * @param Pos the position to start the search. If -1 the search starts at the end.
+      * @param patternLength length of search string
+      * @param fromOffset the position to start the search. If -1 the search starts at the end.
       * @return index of the first  or -1
       */
-    virtual int lastIndexOf( const char*, int Length, int From = -1 ) const;
-    int lastIndexOf( const QByteArray& Data, int From = -1 ) const;
+    virtual int lastIndexOf( const char *pattern, int patternLength, int fromOffset = -1 ) const;
+    int lastIndexOf( const QByteArray &pattern, int fromOffset = -1 ) const;
 
 /*     virtual int find( const QString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */
 
@@ -279,6 +279,9 @@ inline unsigned int KAbstractByteArrayModel::replace( unsigned int Pos, unsigned
 
 inline int KAbstractByteArrayModel::fill( const char FillChar, const KSection &Section )
 { return fill( FillChar, Section.start(), Section.width() ); }
+
+inline int KAbstractByteArrayModel::copyTo( char *dest, int offset, unsigned int copyLength ) const
+{ return copyTo( dest, KSection::fromWidth(offset,copyLength) ); }
 
 inline int KAbstractByteArrayModel::indexOf( const QByteArray& Data, int From ) const
 { return indexOf( Data.constData(), Data.size(), From ); }

@@ -37,81 +37,78 @@ void KAbstractByteArrayModel::setReadOnly( bool isReadOnly )
     Q_UNUSED( isReadOnly )
 }
 
-int KAbstractByteArrayModel::insert( int Pos, const char* D, int Length )
+int KAbstractByteArrayModel::insert( int offset, const char *insertData, int insertLength )
 {
-  return replace( Pos,0,D,Length );
+    return replace( offset, 0, insertData, insertLength );
 }
 
 
-int KAbstractByteArrayModel::remove( const KSection &Remove )
+int KAbstractByteArrayModel::remove( const KSection &removeSection )
 {
-  replace( Remove, 0, 0 );
-  return Remove.width(); // TODO: check if this is true
-}
-
-int KAbstractByteArrayModel::copyTo( char* Dest, int Pos, int Length ) const
-{
-  return copyTo( Dest, KSection::fromWidth(Pos,Length) );
+    replace( removeSection, 0, 0 );
+    return removeSection.width(); // TODO: check if this is true
 }
 
 
-int KAbstractByteArrayModel::copyTo( char* Dest, const KSection &S ) const
+int KAbstractByteArrayModel::copyTo( char *dest, const KSection &cS ) const
 {
-  KSection Source( S );
-  Source.restrictEndTo( size()-1 );
-  for( int i=Source.start(); i<=Source.end(); ++i )
-    *Dest++ = datum( i );
-  return Source.width();
+    KSection copySection( cS );
+    copySection.restrictEndTo( size()-1 );
+
+    for( int i=copySection.start(); i<=copySection.end(); ++i )
+        *dest++ = datum( i );
+
+    return copySection.width();
 }
 
 
-int KAbstractByteArrayModel::indexOf( const char* Data, int Length, int From ) const
+int KAbstractByteArrayModel::indexOf( const char *pattern, int patternLength, int fromOffset  ) const
 {
-    int Result = -1;
+    int result = -1;
 
-    const int LastFrom = size() - Length;
+    const int lastFrom = size() - patternLength;
 
-    for( int i=From; i<=LastFrom ; ++i )
+    for( int i=fromOffset; i<=lastFrom ; ++i )
     {
         int c = 0;
-        for( ; c<Length; ++c )
-            if( Data[c] != datum(i+c) )
+        for( ; c<patternLength; ++c )
+            if( pattern[c] != datum(i+c) )
                 break;
-        if( c == Length )
+        if( c == patternLength )
         {
-            Result = i;
+            result = i;
             break;
         }
     }
 
-    return Result;
+    return result;
 }
 
-int KAbstractByteArrayModel::lastIndexOf( const char* Data, int Length, int From ) const
+int KAbstractByteArrayModel::lastIndexOf( const char *pattern, int patternLength, int fromOffset ) const
 {
-    int Result = -1;
+    int result = -1;
 
-    const int LastFrom = size() - Length;
+    const int lastFrom = size() - patternLength;
 
-    if( From < 0 )
-        From = LastFrom + 1 + From;
-    else if( From > LastFrom )
-        From = LastFrom;
+    if( fromOffset < 0 )
+        fromOffset = lastFrom + 1 + fromOffset;
+    else if( fromOffset > lastFrom )
+        fromOffset = lastFrom;
 
-    for( int i=From; i>=0 ; --i )
+    for( int i=fromOffset; i>=0 ; --i )
     {
         int c = 0;
-        for( ; c<Length; ++c )
-            if( Data[c] != datum(i+c) )
+        for( ; c<patternLength; ++c )
+            if( pattern[c] != datum(i+c) )
                 break;
-        if( c == Length )
+        if( c == patternLength )
         {
-            Result = i;
+            result = i;
             break;
         }
     }
 
-    return Result;
+    return result;
 }
 
 KAbstractByteArrayModel::~KAbstractByteArrayModel() {}
