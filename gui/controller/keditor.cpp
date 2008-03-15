@@ -36,148 +36,123 @@
 
 namespace KHEUI {
 
-KEditor::KEditor( KDataCursor *BC, KByteArrayView* view, KController *parent )
+KEditor::KEditor( KDataCursor *dataCursor, KByteArrayView* view, KController *parent )
   : KController( view, parent ),
-  BufferCursor( BC )
+  mDataCursor( dataCursor )
 {
 }
 
 
-bool KEditor::handleKeyPress( QKeyEvent *KeyEvent )
+bool KEditor::handleKeyPress( QKeyEvent *keyEvent )
 {
-  bool clearUndoRedoInfo = true;
-  bool ShiftPressed =  KeyEvent->modifiers() & Qt::SHIFT;
-  bool ControlPressed = KeyEvent->modifiers() & Qt::CTRL;
-  bool AltPressed = KeyEvent->modifiers() & Qt::ALT;
+    const bool shiftPressed =   keyEvent->modifiers() & Qt::SHIFT;
+    const bool controlPressed = keyEvent->modifiers() & Qt::CTRL;
+    const bool altPressed =     keyEvent->modifiers() & Qt::ALT;
 
-  bool KeyUsed = true;
-  // we only care for cursor keys and the like, won't hardcode any other keys
-  // we also don't check whether the commands are allowed
-  // as the commands are also available as API so the check has to be done
-  // in each command anyway
-  switch( KeyEvent->key() )
-  {
+    bool keyUsed = true;
+    // we only care for cursor keys and the like, won't hardcode any other keys
+    // we also don't check whether the commands are allowed
+    // as the commands are also available as API so the check has to be done
+    // in each command anyway
+    switch( keyEvent->key() )
+    {
     case Qt::Key_Delete:
-      if( ShiftPressed )
-        View->cut();
-      else if( View->BufferRanges->hasSelection() )
-        View->removeSelectedData();
-      else
-      {
-        doEditAction( ControlPressed ? WordDelete : CharDelete );
-        clearUndoRedoInfo = false;
-      }
-      break;
-
+        if( shiftPressed )
+            mView->cut();
+        else if( mView->mDataRanges->hasSelection() )
+            mView->removeSelectedData();
+        else
+            doEditAction( controlPressed ? WordDelete : CharDelete );
+        break;
     case Qt::Key_Insert:
-      if( ShiftPressed )
-        View->paste();
-      else if( ControlPressed )
-        View->copy();
-      else
-        View->setOverwriteMode( !View->OverWrite );
-      break;
-
+        if( shiftPressed )
+            mView->paste();
+        else if( controlPressed )
+            mView->copy();
+        else
+            mView->setOverwriteMode( !mView->isOverwriteMode() );
+        break;
     case Qt::Key_Backspace:
-      if( AltPressed )
-      {
-        if( ControlPressed )
-          break;
-        else if( ShiftPressed )
+        if( altPressed )
+            break;
+        else if( mView->mDataRanges->hasSelection() )
         {
-//           View->redo();
-          break;
+            mView->removeSelectedData();
+            break;
         }
+
+        doEditAction( controlPressed ? WordBackspace : CharBackspace );
+        break;
+    case Qt::Key_F16: // "Copy" key on Sun keyboards
+        mView->copy();
+        break;
+    case Qt::Key_F18: // "Paste" key on Sun keyboards
+        mView->paste();
+        break;
+    case Qt::Key_F20: // "Cut" key on Sun keyboards
+        mView->cut();
+        break;
+    default:
+        keyUsed = false;
+  }
+
+    return keyUsed ? true : KController::handleKeyPress(keyEvent);
+}
+
+
+
+void KEditor::doEditAction( KEditAction action )
+{
+    mView->pauseCursor( true );
+
+    switch( action )
+    {
+    case CharDelete:
+        if( !mView->isOverwriteMode() )
+        {
+            const int index = mDataCursor->realIndex();
+            if( index < mView->mDataLayout->length() )
+                mView->mByteArrayModel->remove( KHE::KSection::fromWidth(index,1) );
+        }
+        break;
+    case WordDelete: // kills data until the start of the next word
+        if( !mView->isOverwriteMode() )
+        {
+            const int index = mDataCursor->realIndex();
+            if( index < mView->mDataLayout->length() )
+            {
+                const KHECore::KWordBufferService WBS( mView->mByteArrayModel, mView->mCharCodec );
+                const int end = WBS.indexOfBeforeNextWordStart( index );
+                mView->mByteArrayModel->remove( KHE::KSection(index,end) );
+            }
+        }
+        break;
+    case CharBackspace:
+        if( mView->isOverwriteMode() )
+            mDataCursor->gotoPreviousByte();
         else
         {
-//           View->undo();
-          break;
-        }
-      }
-      else if( View->BufferRanges->hasSelection() )
-      {
-        View->removeSelectedData();
-        break;
-      }
-
-      doEditAction( ControlPressed ? WordBackspace : CharBackspace );
-      clearUndoRedoInfo = false;
-      break;
-    case Qt::Key_F16: // "Copy" key on Sun keyboards
-      View->copy();
-      break;
-    case Qt::Key_F18: // "Paste" key on Sun keyboards
-      View->paste();
-      break;
-    case Qt::Key_F20: // "Cut" key on Sun keyboards
-      View->cut();
-      break;
-
-    default:
-        KeyUsed = false;
-  }
-
-//   if( clearUndoRedoInfo )
-//     clearUndoRedo();
-//   startTimer->start( 100, true );
-
-  return KeyUsed ? true : KController::handleKeyPress(KeyEvent);
-}
-
-
-
-void KEditor::doEditAction( KEditAction Action )
-{
-  View->pauseCursor( true );
-
-  switch( Action )
-  {
-    case CharDelete:
-      if( !View->OverWrite )
-      {
-        const int Index = BufferCursor->realIndex();
-        if( Index < View->BufferLayout->length() )
-          View->ByteArrayModel->remove( KHE::KSection::fromWidth(Index,1) );
-      }
-      break;
-
-      case WordDelete: // kills data until the start of the next word
-        if( !View->OverWrite )
-        {
-          const int Index = BufferCursor->realIndex();
-          if( Index < View->BufferLayout->length() )
-          {
-            KHECore::KWordBufferService WBS( View->ByteArrayModel, View->Codec );
-            int End = WBS.indexOfBeforeNextWordStart( Index );
-            View->ByteArrayModel->remove( KHE::KSection(Index,End) );
-          }
+            const int deleteIndex = mDataCursor->realIndex() - 1;
+            if( deleteIndex >= 0 )
+                mView->mByteArrayModel->remove( KHE::KSection::fromWidth(deleteIndex,1) );
         }
         break;
-
-    case CharBackspace:
-      if( View->OverWrite )
-        BufferCursor->gotoPreviousByte();
-      else
-      {
-        int DeleteIndex = BufferCursor->realIndex() - 1;
-        if( DeleteIndex >= 0 )
-          View->ByteArrayModel->remove( KHE::KSection::fromWidth(DeleteIndex,1) );
-      }
-      break;
     case WordBackspace:
-    {
-      int LeftIndex = BufferCursor->realIndex() - 1;
-      if( LeftIndex >= 0 )
-      {
-        KHECore::KWordBufferService WBS( View->ByteArrayModel, View->Codec );
-        int WordStart = WBS.indexOfPreviousWordStart( LeftIndex );
-        if( !View->OverWrite )
-          View->ByteArrayModel->remove( KHE::KSection(WordStart,LeftIndex) );
-      }
+        {
+            const int leftIndex = mDataCursor->realIndex() - 1;
+            if( leftIndex >= 0 )
+            {
+                const KHECore::KWordBufferService WBS( mView->mByteArrayModel, mView->mCharCodec );
+                const int wordStart = WBS.indexOfPreviousWordStart( leftIndex );
+                if( !mView->isOverwriteMode() )
+                    mView->mByteArrayModel->remove( KHE::KSection(wordStart,leftIndex) );
+            }
+        }
     }
-  }
 
-  View->ensureCursorVisible();
+    mView->ensureCursorVisible();
 }
+
+KEditor::~KEditor() {}
 
 }

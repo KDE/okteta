@@ -39,106 +39,103 @@ KNavigator::KNavigator( KByteArrayView* view, KController *parent )
 {
 }
 
-bool KNavigator::handleKeyPress( QKeyEvent *KeyEvent )
+bool KNavigator::handleKeyPress( QKeyEvent *keyEvent )
 {
-  bool KeyUsed = true;
+    bool keyUsed = true;
 
-  //bool clearUndoRedoInfo = true;
-  bool ShiftPressed =  KeyEvent->modifiers() & Qt::SHIFT;
-  bool ControlPressed = KeyEvent->modifiers() & Qt::CTRL;
-  //bool AltPressed = KeyEvent->modifiers() & Qt::ALT;
+    const bool shiftPressed =  keyEvent->modifiers() & Qt::SHIFT;
+    const bool controlPressed = keyEvent->modifiers() & Qt::CTRL;
+    //bool AltPressed = keyEvent->modifiers() & Qt::ALT;
 
-  // we only care for cursor keys and the like, won't hardcode any other keys
-  // we also don't check whether the commands are allowed
-  // as the commands are also available as API so the check has to be done
-  // in each command anyway
-  switch( KeyEvent->key() )
-  {
+    // we only care for cursor keys and the like, won't hardcode any other keys
+    // we also don't check whether the commands are allowed
+    // as the commands are also available as API so the check has to be done
+    // in each command anyway
+    switch( keyEvent->key() )
+    {
     case Qt::Key_Left:
-      moveCursor( ControlPressed ? MoveWordBackward : MoveBackward, ShiftPressed );
-      break;
+        moveCursor( controlPressed ? MoveWordBackward : MoveBackward, shiftPressed );
+        break;
     case Qt::Key_Right:
-      moveCursor( ControlPressed ? MoveWordForward : MoveForward, ShiftPressed );
-      break;
+        moveCursor( controlPressed ? MoveWordForward : MoveForward, shiftPressed );
+        break;
     case Qt::Key_Up:
-      moveCursor( ControlPressed ? MovePgUp : MoveUp, ShiftPressed );
-      break;
+        moveCursor( controlPressed ? MovePgUp : MoveUp, shiftPressed );
+        break;
     case Qt::Key_Down:
-      moveCursor( ControlPressed ? MovePgDown : MoveDown, ShiftPressed );
-      break;
+        moveCursor( controlPressed ? MovePgDown : MoveDown, shiftPressed );
+        break;
     case Qt::Key_Home:
-      moveCursor( ControlPressed ? MoveHome : MoveLineStart, ShiftPressed );
-      break;
+        moveCursor( controlPressed ? MoveHome : MoveLineStart, shiftPressed );
+        break;
     case Qt::Key_End:
-      moveCursor( ControlPressed ? MoveEnd : MoveLineEnd, ShiftPressed );
-      break;
+        moveCursor( controlPressed ? MoveEnd : MoveLineEnd, shiftPressed );
+        break;
     case Qt::Key_PageUp:
-      moveCursor( MovePgUp, ShiftPressed );
-      break;
+        moveCursor( MovePgUp, shiftPressed );
+        break;
     case Qt::Key_PageDown:
-      moveCursor( MovePgDown, ShiftPressed );
-      break;
-
+        moveCursor( MovePgDown, shiftPressed );
+        break;
     default:
-      KeyUsed = false;
-  }
+        keyUsed = false;
+    }
 
-  return KeyUsed ? true : KController::handleKeyPress(KeyEvent);
+    return keyUsed ? true : KController::handleKeyPress(keyEvent);
 }
 
 
-void KNavigator::moveCursor( KMoveAction Action, bool Select )
+void KNavigator::moveCursor( KMoveAction action, bool select )
 {
-  View->pauseCursor( true );
+    mView->pauseCursor( true );
 
-  KDataCursor *BufferCursor = View->BufferCursor;
-  KDataRanges *BufferRanges = View->BufferRanges;
+    KDataCursor *dataCursor = mView->mDataCursor;
+    KDataRanges *dataRanges = mView->mDataRanges;
 
-  if( Select )
-  {
-    if( !BufferRanges->selectionStarted() )
-      BufferRanges->setSelectionStart( BufferCursor->realIndex() );
-  }
-  else
-    BufferRanges->removeSelection();
+    if( select )
+    {
+        if( !dataRanges->selectionStarted() )
+            dataRanges->setSelectionStart( dataCursor->realIndex() );
+    }
+    else
+        dataRanges->removeSelection();
 
-  View->resetInputContext();
-  switch( Action )
-  {
-    case MoveBackward:     BufferCursor->gotoPreviousByte(); break;
+    switch( action )
+    {
+    case MoveBackward:     dataCursor->gotoPreviousByte(); break;
     case MoveWordBackward: {
-      KHECore::KWordBufferService WBS( View->ByteArrayModel, View->Codec );
-      int NewIndex = WBS.indexOfPreviousWordStart( BufferCursor->realIndex() );
-      BufferCursor->gotoIndex( NewIndex );
-    }
-    break;
-    case MoveForward:      BufferCursor->gotoNextByte();     break;
+            const KHECore::KWordBufferService WBS( mView->mByteArrayModel, mView->mCharCodec );
+            const int newIndex = WBS.indexOfPreviousWordStart( dataCursor->realIndex() );
+            dataCursor->gotoIndex( newIndex );
+        }
+        break;
+    case MoveForward:      dataCursor->gotoNextByte();     break;
     case MoveWordForward:  {
-      KHECore::KWordBufferService WBS( View->ByteArrayModel, View->Codec );
-      int NewIndex = WBS.indexOfNextWordStart( BufferCursor->realIndex() );
-      BufferCursor->gotoCIndex( NewIndex );
+            const KHECore::KWordBufferService WBS( mView->mByteArrayModel, mView->mCharCodec );
+            const int newIndex = WBS.indexOfNextWordStart( dataCursor->realIndex() );
+            dataCursor->gotoCIndex( newIndex );
+        }
+        break;
+    case MoveUp:           dataCursor->gotoUp();             break;
+    case MovePgUp:         dataCursor->gotoPageUp();         break;
+    case MoveDown:         dataCursor->gotoDown();           break;
+    case MovePgDown:       dataCursor->gotoPageDown();       break;
+    case MoveLineStart:    dataCursor->gotoLineStart();      break;
+    case MoveHome:         dataCursor->gotoStart();          break;
+    case MoveLineEnd:      dataCursor->gotoLineEnd();        break;
+    case MoveEnd:          dataCursor->gotoEnd();            break;
     }
-    break;
-    case MoveUp:           BufferCursor->gotoUp();             break;
-    case MovePgUp:         BufferCursor->gotoPageUp();         break;
-    case MoveDown:         BufferCursor->gotoDown();           break;
-    case MovePgDown:       BufferCursor->gotoPageDown();       break;
-    case MoveLineStart:    BufferCursor->gotoLineStart();      break;
-    case MoveHome:         BufferCursor->gotoStart();          break;
-    case MoveLineEnd:      BufferCursor->gotoLineEnd();        break;
-    case MoveEnd:          BufferCursor->gotoEnd();            break;
-  }
 
-  if( Select )
-    BufferRanges->setSelectionEnd( BufferCursor->realIndex() );
+    if( select )
+        dataRanges->setSelectionEnd( dataCursor->realIndex() );
 
-  if( BufferRanges->isModified() )
-    View->emitSelectionSignals(); // TODO: can this be moved somewhere
-  emit View->cursorPositionChanged( BufferCursor->realIndex() );
-  View->updateChanged();
-  View->ensureCursorVisible();
+    if( dataRanges->isModified() )
+        mView->emitSelectionSignals(); // TODO: can this be moved somewhere
+    emit mView->cursorPositionChanged( dataCursor->realIndex() );
+    mView->updateChanged();
+    mView->ensureCursorVisible();
 
-  View->unpauseCursor();
+    mView->unpauseCursor();
 }
 
 }

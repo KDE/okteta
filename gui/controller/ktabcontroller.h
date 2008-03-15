@@ -36,21 +36,21 @@ class KTabController : public KController
   public:
     KTabController( KByteArrayView *view, KController *parent );
 
-  public: // API
-    virtual bool handleKeyPress( QKeyEvent *KeyEvent );
+  public: // KController API
+    virtual bool handleKeyPress( QKeyEvent *keyEvent );
 
   public:
     bool tabChangesFocus() const;
-    void setTabChangesFocus( bool TCF );
+    void setTabChangesFocus( bool tabChangesFocus );
 
   protected:
     /** flag if tab key should be ignored */
-    bool TabChangesFocus:1;
+    bool mTabChangesFocus:1;
 };
 
 
-inline bool KTabController::tabChangesFocus()    const { return TabChangesFocus; }
-inline void KTabController::setTabChangesFocus( bool TCF ) { TabChangesFocus = TCF; }
+inline bool KTabController::tabChangesFocus()    const { return mTabChangesFocus; }
+inline void KTabController::setTabChangesFocus( bool tabChangesFocus ) { mTabChangesFocus = tabChangesFocus; }
 
 }
 

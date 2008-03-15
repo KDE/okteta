@@ -63,9 +63,6 @@
 #include <QtGui/QDropEvent>
 // C
 #include <stdlib.h>
-//#include <limits.h>
-// c++ specific
-//#include <limits>
 
 
 namespace KHEUI {
@@ -80,929 +77,920 @@ static const KByteArrayView::KEncoding DefaultEncoding = KByteArrayView::LocalEn
 static const int DefaultScrollTimerPeriod = 100;
 static const int InsertCursorWidth = 2;
 
+static const char DataFormatName[] = "application/octet-stream";
 
-
-KByteArrayView::KByteArrayView( KHECore::KAbstractByteArrayModel *Buffer, QWidget *Parent )
- : KColumnsView( Parent ),
-   ByteArrayModel( Buffer ),
-   BufferLayout( new KDataLayout(DefaultNoOfBytesPerLine,DefaultStartOffset,0) ),
-   BufferCursor( new KDataCursor(BufferLayout) ),
-   BufferRanges( new KDataRanges(BufferLayout) ),
-   CursorBlinkTimer( new QTimer(this) ),
-   ScrollTimer( new QTimer(this) ),
-   DragStartTimer( new QTimer(this) ),
-   TrippleClickTimer( new QTimer(this) ),
-   CursorPixmaps( new KCursor() ),
-   Codec( 0 ),
-   ClipboardMode( QClipboard::Clipboard ),
-   ResizeStyle( DefaultResizeStyle ),
-   ReadOnly( false ),
-//    Modified( false ),
-   OverWriteOnly( false ),
-   OverWrite( true ),
-   MousePressed( false ),
-   InDoubleClick( false ),
-   InDnD( false ),
-   DragStartPossible( false ),
-   CursorPaused( false ),
-   BlinkCursorVisible( false ),
-   InZooming( false ),
-   d( 0 )
+class KByteArrayView::Private
 {
-  // initialize layout
-  if( !ByteArrayModel )
-    ByteArrayModel = new KHECore::KByteArrayModel; // TODO: leaking, make it shared
-  connect( ByteArrayModel, SIGNAL(readOnlyChanged( bool )), SLOT(adaptController()) );
-  connect( ByteArrayModel, SIGNAL(contentsChanged(int,int)), SLOT(updateRange(int,int)) );
-  connect( ByteArrayModel, SIGNAL(contentsChanged(const KHE::KSectionList&)), SLOT(updateRange(const KHE::KSectionList&)) );
-  connect( ByteArrayModel, SIGNAL(contentsReplaced(int,int,int)), SLOT(onContentsReplaced(int,int,int)) );
-  connect( ByteArrayModel, SIGNAL(contentsReplaced( const QList<KHE::ReplacementScope> & )),
-           SLOT(onContentsReplaced( const QList<KHE::ReplacementScope> & )) );
-  connect( ByteArrayModel, SIGNAL(contentsSwapped(int,int,int)), SLOT(onContentsSwapped(int,int,int)) );
+};
 
-  KHECore::Bookmarkable *bookmarks = qobject_cast<KHECore::Bookmarkable*>( ByteArrayModel );
-  if( bookmarks )
-  {
-      connect( ByteArrayModel, SIGNAL(bookmarksAdded( const QList<KHECore::KBookmark>& )),
-               SLOT(onBookmarksChange(const QList<KHECore::KBookmark>&)) );
-      connect( ByteArrayModel, SIGNAL(bookmarksRemoved( const QList<KHECore::KBookmark>& )),
-               SLOT(onBookmarksChange(const QList<KHECore::KBookmark>&)) );
-  }
+KByteArrayView::KByteArrayView( KHECore::KAbstractByteArrayModel *byteArrayModel, QWidget *parent )
+ : KColumnsView( parent ),
+   mByteArrayModel( byteArrayModel ),
+   mDataLayout( new KDataLayout(DefaultNoOfBytesPerLine,DefaultStartOffset,0) ),
+   mDataCursor( new KDataCursor(mDataLayout) ),
+   mDataRanges( new KDataRanges(mDataLayout) ),
+   mCursorBlinkTimer( new QTimer(this) ),
+   mScrollTimer( new QTimer(this) ),
+   mDragStartTimer( new QTimer(this) ),
+   mTrippleClickTimer( new QTimer(this) ),
+   mCursorPixmaps( new KCursor() ),
+   mCharCodec( 0 ),
+   mClipboardMode( QClipboard::Clipboard ),
+   mResizeStyle( DefaultResizeStyle ),
+   mReadOnly( false ),
+   mOverWriteOnly( false ),
+   mOverWrite( true ),
+   mMousePressed( false ),
+   mInDoubleClick( false ),
+   mInDnD( false ),
+   mDragStartPossible( false ),
+   mCursorPaused( false ),
+   mBlinkCursorVisible( false ),
+   mInZooming( false ),
+   d( new Private() )
+{
+    // initialize layout
+    if( !mByteArrayModel )
+        mByteArrayModel = new KHECore::KByteArrayModel; // TODO: leaking, make it shared
+    connect( mByteArrayModel, SIGNAL(readOnlyChanged( bool )), SLOT(adaptController()) );
+    connect( mByteArrayModel, SIGNAL(contentsChanged(int,int)), SLOT(updateRange(int,int)) );
+    connect( mByteArrayModel, SIGNAL(contentsChanged(const KHE::KSectionList&)), SLOT(updateRange(const KHE::KSectionList&)) );
+    connect( mByteArrayModel, SIGNAL(contentsReplaced(int,int,int)), SLOT(onContentsReplaced(int,int,int)) );
+    connect( mByteArrayModel, SIGNAL(contentsReplaced( const QList<KHE::ReplacementScope> & )),
+            SLOT(onContentsReplaced( const QList<KHE::ReplacementScope> & )) );
+    connect( mByteArrayModel, SIGNAL(contentsSwapped(int,int,int)), SLOT(onContentsSwapped(int,int,int)) );
 
-  BufferLayout->setLength( ByteArrayModel->size() );
-  BufferLayout->setNoOfLinesPerPage( noOfLinesPerPage() );
+    KHECore::Bookmarkable *bookmarks = qobject_cast<KHECore::Bookmarkable*>( mByteArrayModel );
+    if( bookmarks )
+    {
+        connect( mByteArrayModel, SIGNAL(bookmarksAdded( const QList<KHECore::KBookmark>& )),
+                 SLOT(onBookmarksChange(const QList<KHECore::KBookmark>&)) );
+        connect( mByteArrayModel, SIGNAL(bookmarksRemoved( const QList<KHECore::KBookmark>& )),
+                 SLOT(onBookmarksChange(const QList<KHECore::KBookmark>&)) );
+    }
 
-  // creating the columns in the needed order
-  OffsetColumn =       new KOffsetColumn( this, DefaultFirstLineOffset, DefaultNoOfBytesPerLine, KOffsetFormat::Hexadecimal );
-  FirstBorderColumn =  new KBorderColumn( this, false );
-  ValueColumn =        new KValueColumn( this, ByteArrayModel, BufferLayout, BufferRanges );
-  SecondBorderColumn = new KBorderColumn( this, true );
-  CharColumn =         new KCharColumn( this, ByteArrayModel, BufferLayout, BufferRanges );
+    mDataLayout->setLength( mByteArrayModel->size() );
+    mDataLayout->setNoOfLinesPerPage( noOfLinesPerPage() );
 
-  // select the active column
-  ActiveColumn = &charColumn();
-  InactiveColumn = &valueColumn();
+    // creating the columns in the needed order
+    mOffsetColumn =       new KOffsetColumn( this, DefaultFirstLineOffset, DefaultNoOfBytesPerLine, KOffsetFormat::Hexadecimal );
+    mFirstBorderColumn =  new KBorderColumn( this, false );
+    mValueColumn =        new KValueColumn( this, mByteArrayModel, mDataLayout, mDataRanges );
+    mSecondBorderColumn = new KBorderColumn( this, true );
+    mCharColumn =         new KCharColumn( this, mByteArrayModel, mDataLayout, mDataRanges );
 
-  // set encoding
-  Codec = KHECore::KCharCodec::createCodec( (KHECore::KEncoding)DefaultEncoding );
-  valueColumn().setCodec( Codec );
-  charColumn().setCodec( Codec );
-  Encoding = DefaultEncoding;
+    // select the active column
+    mActiveColumn = &charColumn();
+    mInactiveColumn = &valueColumn();
 
-  TabController = new KTabController( this, 0 );
-  Navigator = new KNavigator( this, TabController );
-  ValueEditor = new KValueEditor( ValueColumn, BufferCursor, this, Navigator );
-  CharEditor = new KCharEditor( CharColumn, BufferCursor, this, Navigator );
+    // set char encoding
+    mCharCodec = KHECore::KCharCodec::createCodec( (KHECore::KEncoding)DefaultEncoding );
+    valueColumn().setCodec( mCharCodec );
+    charColumn().setCodec( mCharCodec );
+    mCharEncoding = DefaultEncoding;
 
-  adaptController();
+    mTabController = new KTabController( this, 0 );
+    mNavigator = new KNavigator( this, mTabController );
+    mValueEditor = new KValueEditor( mValueColumn, mDataCursor, this, mNavigator );
+    mCharEditor = new KCharEditor( mCharColumn, mDataCursor, this, mNavigator );
 
-  setFont( KGlobalSettings::fixedFont() );
+    adaptController();
 
-  connect( CursorBlinkTimer, SIGNAL(timeout()), this, SLOT(blinkCursor()) );
-  connect( ScrollTimer,      SIGNAL(timeout()), this, SLOT(autoScrollTimerDone()) );
-  connect( DragStartTimer,   SIGNAL(timeout()), this, SLOT(startDrag()) );
-  DragStartTimer->setSingleShot( true );
-  TrippleClickTimer->setSingleShot( true );
+    setFont( KGlobalSettings::fixedFont() );
 
-  viewport()->setAcceptDrops( true );
+    connect( mCursorBlinkTimer, SIGNAL(timeout()), this, SLOT(blinkCursor()) );
+    connect( mScrollTimer,      SIGNAL(timeout()), this, SLOT(autoScrollTimerDone()) );
+    connect( mDragStartTimer,   SIGNAL(timeout()), this, SLOT(startDrag()) );
+    mDragStartTimer->setSingleShot( true );
+    mTrippleClickTimer->setSingleShot( true );
+
+    setAcceptDrops( true );
 }
 
+const KValueColumn& KByteArrayView::valueColumn()     const { return *mValueColumn; }
+const KCharColumn& KByteArrayView::charColumn()       const { return *mCharColumn; }
+const KDataColumn& KByteArrayView::activeColumn()   const { return *mActiveColumn; }
+const KDataColumn& KByteArrayView::inactiveColumn() const { return *mInactiveColumn; }
 
-KByteArrayView::~KByteArrayView()
-{
-  delete TabController;
-  delete Navigator;
-  delete ValueEditor;
-  delete CharEditor;
+KValueColumn& KByteArrayView::valueColumn()     { return *mValueColumn; }
+KCharColumn& KByteArrayView::charColumn()       { return *mCharColumn; }
+KDataColumn& KByteArrayView::activeColumn()     { return *mActiveColumn; }
+KDataColumn& KByteArrayView::inactiveColumn()   { return *mInactiveColumn; }
 
-  delete BufferCursor;
-  delete BufferRanges;
-  delete BufferLayout;
-
-  delete Codec;
-  delete CursorPixmaps;
-}
-
-
-
-const KValueColumn& KByteArrayView::valueColumn()     const { return *ValueColumn; }
-const KCharColumn& KByteArrayView::charColumn()       const { return *CharColumn; }
-const KDataColumn& KByteArrayView::activeColumn()   const { return *ActiveColumn; }
-const KDataColumn& KByteArrayView::inactiveColumn() const { return *InactiveColumn; }
-
-KValueColumn& KByteArrayView::valueColumn()     { return *ValueColumn; }
-KCharColumn& KByteArrayView::charColumn()       { return *CharColumn; }
-KDataColumn& KByteArrayView::activeColumn()     { return *ActiveColumn; }
-KDataColumn& KByteArrayView::inactiveColumn()   { return *InactiveColumn; }
-
-KHECore::KAbstractByteArrayModel *KByteArrayView::byteArrayModel() const { return ByteArrayModel; }
-int KByteArrayView::noOfBytesPerLine()               const { return BufferLayout->noOfBytesPerLine(); }
-int KByteArrayView::firstLineOffset()                const { return OffsetColumn->firstLineOffset(); }
-int KByteArrayView::startOffset()                    const { return BufferLayout->startOffset(); }
-KByteArrayView::KResizeStyle KByteArrayView::resizeStyle() const { return ResizeStyle; }
+KHECore::KAbstractByteArrayModel *KByteArrayView::byteArrayModel() const { return mByteArrayModel; }
+int KByteArrayView::noOfBytesPerLine()               const { return mDataLayout->noOfBytesPerLine(); }
+int KByteArrayView::firstLineOffset()                const { return mOffsetColumn->firstLineOffset(); }
+int KByteArrayView::startOffset()                    const { return mDataLayout->startOffset(); }
+KByteArrayView::KResizeStyle KByteArrayView::resizeStyle() const { return mResizeStyle; }
 KByteArrayView::KCoding KByteArrayView::coding()           const { return (KByteArrayView::KCoding)valueColumn().coding(); }
 KPixelX KByteArrayView::byteSpacingWidth()           const { return valueColumn().byteSpacingWidth(); }
 int KByteArrayView::noOfGroupedBytes()               const { return valueColumn().noOfGroupedBytes(); }
 KPixelX KByteArrayView::groupSpacingWidth()          const { return valueColumn().groupSpacingWidth(); }
 KPixelX KByteArrayView::binaryGapWidth()             const { return valueColumn().binaryGapWidth(); }
-bool KByteArrayView::isOverwriteMode()               const { return OverWrite; }
-bool KByteArrayView::isOverwriteOnly()               const { return OverWriteOnly; }
-bool KByteArrayView::isReadOnly()                    const { return ReadOnly || ByteArrayModel->isReadOnly(); }
-bool KByteArrayView::isModified()                    const { return ByteArrayModel->isModified(); }
-bool KByteArrayView::tabChangesFocus()               const { return TabController->tabChangesFocus(); }
+bool KByteArrayView::isOverwriteMode()               const { return mOverWrite; }
+bool KByteArrayView::isOverwriteOnly()               const { return mOverWriteOnly; }
+bool KByteArrayView::isReadOnly()                    const { return mReadOnly || mByteArrayModel->isReadOnly(); }
+bool KByteArrayView::isModified()                    const { return mByteArrayModel->isModified(); }
+bool KByteArrayView::tabChangesFocus()               const { return mTabController->tabChangesFocus(); }
 bool KByteArrayView::showsNonprinting()              const { return charColumn().showsNonprinting(); }
 QChar KByteArrayView::substituteChar()               const { return charColumn().substituteChar(); }
 QChar KByteArrayView::undefinedChar()                const { return charColumn().undefinedChar(); }
-KByteArrayView::KEncoding KByteArrayView::encoding()       const { return (KByteArrayView::KEncoding)Encoding; }
-const QString &KByteArrayView::encodingName()        const { return Codec->name(); }
-double KByteArrayView::zoomLevel()                    const { return (double)font().pointSize()/DefaultFontSize; }
+KByteArrayView::KEncoding KByteArrayView::encoding()       const { return (KByteArrayView::KEncoding)mCharEncoding; }
+const QString &KByteArrayView::encodingName()        const { return mCharCodec->name(); }
+double KByteArrayView::zoomLevel()                    const { return (double)font().pointSize()/mDefaultFontSize; }
 
-int KByteArrayView::cursorPosition() const { return BufferCursor->realIndex(); }
-bool KByteArrayView::isCursorBehind() const { return BufferCursor->isBehind(); }
+int KByteArrayView::cursorPosition() const { return mDataCursor->realIndex(); }
+bool KByteArrayView::isCursorBehind() const { return mDataCursor->isBehind(); }
 KByteArrayView::KDataColumnId KByteArrayView::cursorColumn() const
-{ return static_cast<KHEUI::KValueColumn *>( ActiveColumn ) == &valueColumn()? ValueColumnId : CharColumnId; }
-KHE::KSection KByteArrayView::selection() const { return BufferRanges->selection(); }
+{ return static_cast<KHEUI::KValueColumn *>( mActiveColumn ) == &valueColumn()? ValueColumnId : CharColumnId; }
+KHE::KSection KByteArrayView::selection() const { return mDataRanges->selection(); }
 
-void KByteArrayView::setOverwriteOnly( bool OO )    { OverWriteOnly = OO; if( OverWriteOnly ) setOverwriteMode( true ); }
-void KByteArrayView::setModified( bool M )          { ByteArrayModel->setModified(M); }
-void KByteArrayView::setTabChangesFocus( bool TCF ) { TabController->setTabChangesFocus(TCF); }
-void KByteArrayView::setFirstLineOffset( int FLO )  { OffsetColumn->setFirstLineOffset( FLO ); }
+void KByteArrayView::setOverwriteOnly( bool OO )    { mOverWriteOnly = OO; if( mOverWriteOnly ) setOverwriteMode( true ); }
+void KByteArrayView::setModified( bool M )          { mByteArrayModel->setModified(M); }
+void KByteArrayView::setTabChangesFocus( bool TCF ) { mTabController->setTabChangesFocus(TCF); }
+void KByteArrayView::setFirstLineOffset( int FLO )  { mOffsetColumn->setFirstLineOffset( FLO ); }
 
-bool KByteArrayView::offsetColumnVisible() const { return OffsetColumn->isVisible(); }
+bool KByteArrayView::offsetColumnVisible() const { return mOffsetColumn->isVisible(); }
 int KByteArrayView::visibleBufferColumns() const
 { return (valueColumn().isVisible() ? ValueColumnId : 0) | (charColumn().isVisible() ? CharColumnId : 0); }
 
 
-void KByteArrayView::setOverwriteMode( bool OM )
+void KByteArrayView::setOverwriteMode( bool overwriteMode )
 {
-  if( (OverWriteOnly && !OM) || (OverWrite == OM) )
-    return;
-
-  OverWrite = OM;
-
-  // affected:
-  // cursor shape
-  bool ChangeCursor = !( CursorPaused || ValueEditor->isInEditMode() );
-  if( ChangeCursor )
-    pauseCursor();
-
-  BufferCursor->setAppendPosEnabled( !OverWrite );
-
-  if( ChangeCursor )
-    unpauseCursor();
-
-  emit cutAvailable( !OverWrite && BufferRanges->hasSelection() );
-}
-
-
-void KByteArrayView::setByteArrayModel( KHECore::KAbstractByteArrayModel *B )
-{
-  ByteArrayModel->disconnect( this );
-
-  ValueEditor->reset();
-  CursorPaused = true;
-
-  ByteArrayModel = B;
-  valueColumn().set( ByteArrayModel );
-  charColumn().set( ByteArrayModel);
-
-  // affected:
-  // length -> no of lines -> width
-  BufferLayout->setLength( ByteArrayModel->size() );
-  adjustLayoutToSize();
-
-  // if the model is readonly make the view too, per default
-  if( ByteArrayModel->isReadOnly() )
-    setReadOnly( true );
-
-  connect( ByteArrayModel, SIGNAL(readOnlyChanged( bool )), SLOT(adaptController()) );
-  connect( ByteArrayModel, SIGNAL(contentsChanged(int,int)), SLOT(updateRange(int,int)) );
-  connect( ByteArrayModel, SIGNAL(contentsChanged(const KHE::KSectionList&)), SLOT(updateRange(const KHE::KSectionList&)) );
-  connect( ByteArrayModel, SIGNAL(contentsReplaced(int,int,int)), SLOT(onContentsReplaced(int,int,int)) );
-  connect( ByteArrayModel, SIGNAL(contentsReplaced( const QList<KHE::ReplacementScope> & )),
-           SLOT(onContentsReplaced( const QList<KHE::ReplacementScope> & )) );
-  connect( ByteArrayModel, SIGNAL(contentsSwapped(int,int,int)), SLOT(onContentsSwapped(int,int,int)) );
-
-  KHECore::Bookmarkable *bookmarks = qobject_cast<KHECore::Bookmarkable*>( ByteArrayModel );
-  if( bookmarks )
-  {
-      connect( ByteArrayModel, SIGNAL(bookmarksAdded( const QList<KHECore::KBookmark>& )),
-               SLOT(onBookmarksChange(const QList<KHECore::KBookmark>&)) );
-      connect( ByteArrayModel, SIGNAL(bookmarksRemoved( const QList<KHECore::KBookmark>& )),
-               SLOT(onBookmarksChange(const QList<KHECore::KBookmark>&)) );
-  }
-
-  viewport()->update();
-
-  BufferCursor->gotoStart();
-  ensureCursorVisible();
-  unpauseCursor();
-
-  emit cursorPositionChanged( BufferCursor->realIndex() );
-}
-
-
-void KByteArrayView::setStartOffset( int SO )
-{
-  if( !BufferLayout->setStartOffset(SO) )
-    return;
-
-  pauseCursor();
-  // affects:
-  // the no of lines -> width
-  adjustLayoutToSize();
-
-  viewport()->update();
-
-  BufferCursor->updateCoord();
-  ensureCursorVisible();
-  unpauseCursor();
-  emit cursorPositionChanged( BufferCursor->realIndex() );
-}
-
-
-void KByteArrayView::setReadOnly( bool RO )
-{
-    if( ReadOnly == RO )
+    if( (mOverWriteOnly && !overwriteMode) || (mOverWrite == overwriteMode) )
         return;
 
-    ReadOnly = RO;
+    mOverWrite = overwriteMode;
+
+    // affected:
+    // cursor shape
+    const bool ChangeCursor = !( mCursorPaused || mValueEditor->isInEditMode() );
+    if( ChangeCursor )
+        pauseCursor();
+
+    mDataCursor->setAppendPosEnabled( !mOverWrite );
+
+    if( ChangeCursor )
+        unpauseCursor();
+
+    emit cutAvailable( !mOverWrite && mDataRanges->hasSelection() );
+}
+
+
+void KByteArrayView::setByteArrayModel( KHECore::KAbstractByteArrayModel *byteArrayModel )
+{
+    mByteArrayModel->disconnect( this );
+
+    mValueEditor->reset();
+    mCursorPaused = true;
+
+    mByteArrayModel = byteArrayModel;
+    valueColumn().set( mByteArrayModel );
+    charColumn().set( mByteArrayModel);
+
+    // affected:
+    // length -> no of lines -> width
+    mDataLayout->setLength( mByteArrayModel->size() );
+    adjustLayoutToSize();
+
+    // if the model is readonly make the view too, per default
+    if( mByteArrayModel->isReadOnly() )
+        setReadOnly( true );
+
+    connect( mByteArrayModel, SIGNAL(readOnlyChanged( bool )), SLOT(adaptController()) );
+    connect( mByteArrayModel, SIGNAL(contentsChanged(int,int)), SLOT(updateRange(int,int)) );
+    connect( mByteArrayModel, SIGNAL(contentsChanged(const KHE::KSectionList&)), SLOT(updateRange(const KHE::KSectionList&)) );
+    connect( mByteArrayModel, SIGNAL(contentsReplaced(int,int,int)), SLOT(onContentsReplaced(int,int,int)) );
+    connect( mByteArrayModel, SIGNAL(contentsReplaced( const QList<KHE::ReplacementScope> & )),
+            SLOT(onContentsReplaced( const QList<KHE::ReplacementScope> & )) );
+    connect( mByteArrayModel, SIGNAL(contentsSwapped(int,int,int)), SLOT(onContentsSwapped(int,int,int)) );
+
+    KHECore::Bookmarkable *bookmarks = qobject_cast<KHECore::Bookmarkable*>( mByteArrayModel );
+    if( bookmarks )
+    {
+        connect( mByteArrayModel, SIGNAL(bookmarksAdded( const QList<KHECore::KBookmark>& )),
+                SLOT(onBookmarksChange(const QList<KHECore::KBookmark>&)) );
+        connect( mByteArrayModel, SIGNAL(bookmarksRemoved( const QList<KHECore::KBookmark>& )),
+                SLOT(onBookmarksChange(const QList<KHECore::KBookmark>&)) );
+    }
+
+    viewport()->update();
+
+    mDataCursor->gotoStart();
+    ensureCursorVisible();
+    unpauseCursor();
+
+    emit cursorPositionChanged( mDataCursor->realIndex() );
+}
+
+
+void KByteArrayView::setStartOffset( int startOffset )
+{
+    if( !mDataLayout->setStartOffset(startOffset) )
+        return;
+
+    pauseCursor();
+    // affects:
+    // the no of lines -> width
+    adjustLayoutToSize();
+
+    viewport()->update();
+
+    mDataCursor->updateCoord();
+    ensureCursorVisible();
+    unpauseCursor();
+    emit cursorPositionChanged( mDataCursor->realIndex() );
+}
+
+
+void KByteArrayView::setReadOnly( bool readOnly )
+{
+    if( mReadOnly == readOnly )
+        return;
+
+    mReadOnly = readOnly;
 
     adaptController();
 }
 
 void KByteArrayView::adaptController()
 {
-    const bool isEffectiveReadOnly = ByteArrayModel->isReadOnly() || ReadOnly;
+    const bool isEffectiveReadOnly = mByteArrayModel->isReadOnly() || mReadOnly;
 
-    Controller = isEffectiveReadOnly ?            (KController*)Navigator :
-                 cursorColumn() == CharColumnId ? (KController*)CharEditor : (KController*)ValueEditor;
+    mController = isEffectiveReadOnly ?            (KController*)mNavigator :
+                  cursorColumn() == CharColumnId ? (KController*)mCharEditor : (KController*)mValueEditor;
 }
 
 
-void KByteArrayView::setBufferSpacing( KPixelX ByteSpacing, int NoOfGroupedBytes, KPixelX GroupSpacing )
+void KByteArrayView::setBufferSpacing( KPixelX ByteSpacing, int noOfGroupedBytes, KPixelX GroupSpacing )
 {
-  if( !valueColumn().setSpacing(ByteSpacing,NoOfGroupedBytes,GroupSpacing) )
-    return;
+    if( !valueColumn().setSpacing(ByteSpacing,noOfGroupedBytes,GroupSpacing) )
+        return;
 
-  updateViewByWidth();
-}
-
-
-void KByteArrayView::setCoding( KCoding C )
-{
-  uint OldCodingWidth = valueColumn().byteCodec()->encodingWidth();
-
-  if( !valueColumn().setCoding((KHECore::KCoding)C) )
-    return;
-
-  uint NewCodingWidth = valueColumn().byteCodec()->encodingWidth();
-  ValueEditor->ByteBuffer.resize( NewCodingWidth ); //hack for now
-
-  // no change in the width?
-  if( NewCodingWidth == OldCodingWidth )
-    updateColumn( valueColumn() );
-  else
     updateViewByWidth();
-
-  emit valueCodingChanged( C );
 }
 
 
-void KByteArrayView::setResizeStyle( KResizeStyle NewStyle )
+void KByteArrayView::setCoding( KCoding coding )
 {
-  if( ResizeStyle == NewStyle )
-    return;
+    const uint oldCodingWidth = valueColumn().byteCodec()->encodingWidth();
 
-  ResizeStyle = NewStyle;
+    if( !valueColumn().setCoding((KHECore::KCoding)coding) )
+        return;
 
-  updateViewByWidth();
+    const uint newCodingWidth = valueColumn().byteCodec()->encodingWidth();
+    mValueEditor->mByteBuffer.resize( newCodingWidth ); //hack for now
+
+    // no change in the width?
+    if( newCodingWidth == oldCodingWidth )
+        updateColumn( valueColumn() );
+    else
+        updateViewByWidth();
+
+    emit valueCodingChanged( coding );
+}
+
+
+void KByteArrayView::setResizeStyle( KResizeStyle resizeStyle )
+{
+    if( mResizeStyle == resizeStyle )
+        return;
+
+    mResizeStyle = resizeStyle;
+
+    updateViewByWidth();
 }
 
 
 void KByteArrayView::setNoOfBytesPerLine( int NoBpL )
 {
-  // if the number is explicitly set we expect a wish for no automatic resize
-  ResizeStyle = NoResize;
+    // if the number is explicitly set we expect a wish for no automatic resize
+    mResizeStyle = NoResize;
 
-  if( !BufferLayout->setNoOfBytesPerLine(NoBpL) )
-    return;
-  updateViewByWidth();
+    if( !mDataLayout->setNoOfBytesPerLine(NoBpL) )
+        return;
+    updateViewByWidth();
 }
 
 
-void KByteArrayView::setByteSpacingWidth( int/*KPixelX*/ BSW )
+void KByteArrayView::setByteSpacingWidth( int/*KPixelX*/ byteSpacingWidth )
 {
-  if( !valueColumn().setByteSpacingWidth(BSW) )
-    return;
-  updateViewByWidth();
+    if( !valueColumn().setByteSpacingWidth(byteSpacingWidth) )
+        return;
+    updateViewByWidth();
 }
 
-void KByteArrayView::setNoOfGroupedBytes( int NoGB )
+void KByteArrayView::setNoOfGroupedBytes( int noOfGroupedBytes )
 {
-  if( !valueColumn().setNoOfGroupedBytes(NoGB) )
-    return;
-  updateViewByWidth();
-}
-
-
-void KByteArrayView::setGroupSpacingWidth( int/*KPixelX*/ GSW )
-{
-  if( !valueColumn().setGroupSpacingWidth(GSW) )
-    return;
-  updateViewByWidth();
+    if( !valueColumn().setNoOfGroupedBytes(noOfGroupedBytes) )
+        return;
+    updateViewByWidth();
 }
 
 
-void KByteArrayView::setBinaryGapWidth( int/*KPixelX*/ BGW )
+void KByteArrayView::setGroupSpacingWidth( int/*KPixelX*/ groupSpacingWidth )
 {
-  if( !valueColumn().setBinaryGapWidth(BGW) )
-    return;
-  updateViewByWidth();
+    if( !valueColumn().setGroupSpacingWidth(groupSpacingWidth) )
+        return;
+    updateViewByWidth();
 }
 
 
-void KByteArrayView::setSubstituteChar( QChar SC )
+void KByteArrayView::setBinaryGapWidth( int/*KPixelX*/ binaryGapWidth )
 {
-  if( !charColumn().setSubstituteChar(SC) )
-    return;
-  pauseCursor();
-  updateColumn( charColumn() );
-  unpauseCursor();
-}
-
-void KByteArrayView::setUndefinedChar( QChar UC )
-{
-  if( !charColumn().setUndefinedChar(UC) )
-    return;
-  pauseCursor();
-  updateColumn( charColumn() );
-  unpauseCursor();
-}
-
-void KByteArrayView::setShowsNonprinting( bool SU )
-{
-  if( !charColumn().setShowsNonprinting(SU) )
-    return;
-  pauseCursor();
-  updateColumn( charColumn() );
-  unpauseCursor();
+    if( !valueColumn().setBinaryGapWidth(binaryGapWidth) )
+        return;
+    updateViewByWidth();
 }
 
 
-void KByteArrayView::setEncoding( KEncoding C )
+void KByteArrayView::setSubstituteChar( QChar substituteChar )
 {
-  if( Encoding == C )
-    return;
+    if( !charColumn().setSubstituteChar(substituteChar) )
+        return;
+    pauseCursor();
+    updateColumn( charColumn() );
+    unpauseCursor();
+}
 
-  KHECore::KCharCodec *NC = KHECore::KCharCodec::createCodec( (KHECore::KEncoding)C );
-  if( NC == 0 )
-    return;
+void KByteArrayView::setUndefinedChar( QChar undefinedChar )
+{
+    if( !charColumn().setUndefinedChar(undefinedChar) )
+        return;
+    pauseCursor();
+    updateColumn( charColumn() );
+    unpauseCursor();
+}
 
-  valueColumn().setCodec( NC );
-  charColumn().setCodec( NC );
+void KByteArrayView::setShowsNonprinting( bool showsNonprinting )
+{
+    if( !charColumn().setShowsNonprinting(showsNonprinting) )
+        return;
+    pauseCursor();
+    updateColumn( charColumn() );
+    unpauseCursor();
+}
 
-  delete Codec;
-  Codec = NC;
-  Encoding = C;
 
-  pauseCursor();
-  updateColumn( valueColumn() );
-  updateColumn( charColumn() );
-  unpauseCursor();
+void KByteArrayView::setEncoding( KEncoding charEncoding )
+{
+    if( mCharEncoding == charEncoding )
+        return;
 
-  emit charCodecChanged( NC->name() );
+    KHECore::KCharCodec *newCharCodec
+        = KHECore::KCharCodec::createCodec( (KHECore::KEncoding)charEncoding );
+    if( newCharCodec == 0 )
+        return;
+
+    valueColumn().setCodec( newCharCodec );
+    charColumn().setCodec( newCharCodec );
+
+    delete mCharCodec;
+    mCharCodec = newCharCodec;
+    mCharEncoding = charEncoding;
+
+    pauseCursor();
+    updateColumn( valueColumn() );
+    updateColumn( charColumn() );
+    unpauseCursor();
+
+    emit charCodecChanged( newCharCodec->name() );
 }
 
 // TODO: join with function above!
-void KByteArrayView::setEncoding( const QString& EncodingName )
+void KByteArrayView::setEncoding( const QString &encodingName )
 {
-  if( EncodingName == Codec->name() )
-    return;
+    if( encodingName == mCharCodec->name() )
+        return;
 
-  KHECore::KCharCodec *NC = KHECore::KCharCodec::createCodec( EncodingName );
-  if( NC == 0 )
-    return;
+    KHECore::KCharCodec *newCharCodec =
+        KHECore::KCharCodec::createCodec( encodingName );
+    if( newCharCodec == 0 )
+        return;
 
-  valueColumn().setCodec( NC );
-  charColumn().setCodec( NC );
+    valueColumn().setCodec( newCharCodec );
+    charColumn().setCodec( newCharCodec );
 
-  delete Codec;
-  Codec = NC;
-  Encoding = LocalEncoding; // TODO: add encoding no to every known codec
+    delete mCharCodec;
+    mCharCodec = newCharCodec;
+    mCharEncoding = LocalEncoding; // TODO: add encoding no to every known codec
 
-  pauseCursor();
-  updateColumn( valueColumn() );
-  updateColumn( charColumn() );
-  unpauseCursor();
+    pauseCursor();
+    updateColumn( valueColumn() );
+    updateColumn( charColumn() );
+    unpauseCursor();
 
-  emit charCodecChanged( NC->name() );
+    emit charCodecChanged( newCharCodec->name() );
 }
 
 
-void KByteArrayView::fontChange( const QFont &OldFont )
+void KByteArrayView::fontChange( const QFont &oldFont )
 {
-  KColumnsView::fontChange( OldFont );
+    KColumnsView::fontChange( oldFont );
 
-  if( !InZooming )
-    DefaultFontSize = font().pointSize();
+    if( !mInZooming )
+        mDefaultFontSize = font().pointSize();
 
-  // get new values
-  QFontMetrics FM( fontMetrics() );
-  KPixelX DigitWidth = FM.maxWidth();
-  KPixelY DigitBaseLine = FM.ascent();
+    // get new values
+    const QFontMetrics newFontMetrics = fontMetrics();
+    KPixelX digitWidth = newFontMetrics.maxWidth();
+    KPixelY digitBaseLine = newFontMetrics.ascent();
 
-  setLineHeight( FM.height() );
+    setLineHeight( newFontMetrics.height() );
 
-  // update all dependant structures
-  BufferLayout->setNoOfLinesPerPage( noOfLinesPerPage() );
+    // update all dependant structures
+    mDataLayout->setNoOfLinesPerPage( noOfLinesPerPage() );
 
-  OffsetColumn->setMetrics( DigitWidth, DigitBaseLine );
-  valueColumn().setMetrics( DigitWidth, DigitBaseLine );
-  charColumn().setMetrics( DigitWidth, DigitBaseLine );
+    mOffsetColumn->setMetrics( digitWidth, digitBaseLine );
+    valueColumn().setMetrics( digitWidth, digitBaseLine );
+    charColumn().setMetrics( digitWidth, digitBaseLine );
 
-  updateViewByWidth();
+    updateViewByWidth();
 }
 
 
 void KByteArrayView::updateViewByWidth()
 {
-  pauseCursor();
+    pauseCursor();
 
-  adjustToLayoutNoOfBytesPerLine();
-  adjustLayoutToSize();
+    adjustToLayoutNoOfBytesPerLine();
+    adjustLayoutToSize();
 
-  viewport()->update();
+    viewport()->update();
 
-  BufferCursor->updateCoord();
-  ensureCursorVisible();
+    mDataCursor->updateCoord();
+    ensureCursorVisible();
 
-  unpauseCursor();
-  emit cursorPositionChanged( BufferCursor->realIndex() );
+    unpauseCursor();
+    emit cursorPositionChanged( mDataCursor->realIndex() );
 }
 
 
 void KByteArrayView::zoomIn()         { zoomIn( DefaultZoomStep ); }
 void KByteArrayView::zoomOut()        { zoomOut( DefaultZoomStep ); }
 
-void KByteArrayView::zoomIn( int PointInc )
+void KByteArrayView::zoomIn( int pointIncrement )
 {
-  InZooming = true;
-  QFont F( font() );
-  F.setPointSize( QFontInfo(F).pointSize() + PointInc );
-  setFont( F );
-  InZooming = false;
+    mInZooming = true;
+    QFont newFont( font() );
+    newFont.setPointSize( QFontInfo(newFont).pointSize() + pointIncrement );
+    setFont( newFont );
+    mInZooming = false;
 }
 
-void KByteArrayView::zoomOut( int PointDec )
+void KByteArrayView::zoomOut( int pointDecrement )
 {
-  InZooming = true;
-  QFont F( font() );
-  F.setPointSize( qMax( 1, QFontInfo(F).pointSize() - PointDec ) );
-  setFont( F );
-  InZooming = false;
+    mInZooming = true;
+    QFont newFont( font() );
+    newFont.setPointSize( qMax( 1, QFontInfo(newFont).pointSize() - pointDecrement ) );
+    setFont( newFont );
+    mInZooming = false;
 }
 
 
 void KByteArrayView::zoomTo( int PointSize )
 {
-  InZooming = true;
-  QFont F( font() );
-  F.setPointSize( PointSize );
-  setFont( F );
-  InZooming = false;
+    mInZooming = true;
+    QFont newFont( font() );
+    newFont.setPointSize( PointSize );
+    setFont( newFont );
+    mInZooming = false;
 }
 
 
 void KByteArrayView::unZoom()
 {
-  zoomTo( DefaultFontSize );
+    zoomTo( mDefaultFontSize );
 }
 
-void KByteArrayView::setZoomLevel( double Level )
+void KByteArrayView::setZoomLevel( double zoomLevel )
 {
-  zoomTo( (int)(Level*DefaultFontSize) );
+    zoomTo( (int)(zoomLevel*mDefaultFontSize) );
 }
 
 
 void KByteArrayView::adjustLayoutToSize()
 {
-  // check whether there is a change with the numbers of fitting bytes per line
-  if( ResizeStyle != NoResize )
-  {
-    int FittingBytesPerLine = fittingBytesPerLine();
+    // check whether there is a change with the numbers of fitting bytes per line
+    if( mResizeStyle != NoResize )
+    {
+        // changes?
+        if( mDataLayout->setNoOfBytesPerLine(fittingBytesPerLine()) )
+            adjustToLayoutNoOfBytesPerLine();
+    }
 
-//     std::cout<<"FitBpL"<<FittingBytesPerLine<<std::endl;
-
-    // changes?
-    if( BufferLayout->setNoOfBytesPerLine(FittingBytesPerLine) )
-      adjustToLayoutNoOfBytesPerLine();
-  }
-
-  setNoOfLines( BufferLayout->noOfLines() );
+    setNoOfLines( mDataLayout->noOfLines() );
 }
 
 
 void KByteArrayView::adjustToLayoutNoOfBytesPerLine()
 {
-  OffsetColumn->setDelta( BufferLayout->noOfBytesPerLine() );
-  valueColumn().resetXBuffer();
-  charColumn().resetXBuffer();
+    mOffsetColumn->setDelta( mDataLayout->noOfBytesPerLine() );
+    valueColumn().resetXBuffer();
+    charColumn().resetXBuffer();
 
-  updateWidths();
+    updateWidths();
 }
 
 
-void KByteArrayView::setNoOfLines( int NewNoOfLines )
+void KByteArrayView::setNoOfLines( int newNoOfLines )
 {
-  KColumnsView::setNoOfLines( NewNoOfLines>1?NewNoOfLines:1 );
+    KColumnsView::setNoOfLines( newNoOfLines>1?newNoOfLines:1 );
 }
 
 
-void KByteArrayView::toggleOffsetColumn( bool Visible )
+void KByteArrayView::toggleOffsetColumn( bool showOffsetColumn )
 {
-  bool OCVisible = OffsetColumn->isVisible();
-  // no change?
-  if( OCVisible == Visible )
-    return;
+    const bool isVisible = mOffsetColumn->isVisible();
+    // no change?
+    if( isVisible == showOffsetColumn )
+        return;
 
-  OffsetColumn->setVisible( Visible );
-  FirstBorderColumn->setVisible( Visible );
+    mOffsetColumn->setVisible( showOffsetColumn );
+    mFirstBorderColumn->setVisible( showOffsetColumn );
 
-  updateViewByWidth();
+    updateViewByWidth();
 }
 
 
 QSize KByteArrayView::sizeHint() const
 {
-  return QSize( columnsWidth(), columnsHeight() );
+    return QSize( columnsWidth(), columnsHeight() );
 }
 
 
 QSize KByteArrayView::minimumSizeHint() const
 {
-  // TODO: better minimal width (visibility!)
-  return QSize( OffsetColumn->visibleWidth()+FirstBorderColumn->visibleWidth()+SecondBorderColumn->visibleWidth()+valueColumn().byteWidth()+charColumn().byteWidth(),
-                lineHeight() + noOfLines()>1? style()->pixelMetric(QStyle::PM_ScrollBarExtent):0 );
+    // TODO: better minimal width (visibility!)
+    return QSize(
+        mOffsetColumn->visibleWidth()
+        + mFirstBorderColumn->visibleWidth()
+        + mSecondBorderColumn->visibleWidth()
+        + valueColumn().byteWidth()
+        + charColumn().byteWidth(),
+        lineHeight()
+        + noOfLines()>1? style()->pixelMetric(QStyle::PM_ScrollBarExtent):0 );
 }
 
 
-void KByteArrayView::resizeEvent( QResizeEvent *ResizeEvent )
+void KByteArrayView::resizeEvent( QResizeEvent *resizeEvent )
 {
-  if( ResizeStyle != NoResize )
-  {
-    int FittingBytesPerLine = fittingBytesPerLine();
-
-    // changes?
-    if( BufferLayout->setNoOfBytesPerLine(FittingBytesPerLine) )
+    if( mResizeStyle != NoResize )
     {
-      setNoOfLines( BufferLayout->noOfLines() );
-      updateViewByWidth();
+        // changes?
+        if( mDataLayout->setNoOfBytesPerLine(fittingBytesPerLine()) )
+        {
+            setNoOfLines( mDataLayout->noOfLines() );
+            updateViewByWidth();
+        }
     }
-  }
 
-  KColumnsView::resizeEvent( ResizeEvent );
+    KColumnsView::resizeEvent( resizeEvent );
 
-  BufferLayout->setNoOfLinesPerPage( noOfLinesPerPage() ); // TODO: doesn't work with the new size!!!
+    mDataLayout->setNoOfLinesPerPage( noOfLinesPerPage() ); // TODO: doesn't work with the new size!!!
 }
 
 
 int KByteArrayView::fittingBytesPerLine() const
 {
-   const QSize &NewSize = maximumViewportSize();
-  KPixelX ReservedWidth = OffsetColumn->visibleWidth() + FirstBorderColumn->visibleWidth() + SecondBorderColumn->visibleWidth();
+    const QSize newSize = maximumViewportSize();
+    const KPixelX reservedWidth =
+        mOffsetColumn->visibleWidth()
+        + mFirstBorderColumn->visibleWidth()
+        + mSecondBorderColumn->visibleWidth();
 
-  // abstract offset and border columns width
-  KPixelX FullWidth = NewSize.width() - ReservedWidth;
+    // abstract offset and border columns width
+    const KPixelX fullWidth = newSize.width() - reservedWidth;
 
-//  // no width left for resizeable columns? TODO: put this in resizeEvent
-//  if( FullWidth < 0 )
-//    return;
+    //  // no width left for resizeable columns? TODO: put this in resizeEvent
+    //  if( fullWidth < 0 )
+    //    return;
 
-  KPixelY FullHeight = NewSize.height();
+    const KPixelY fullHeight = newSize.height();
 
-  // check influence of dis-/appearing of the vertical scrollbar
-  bool VerticalScrollbarIsVisible = verticalScrollBar()->isVisible();
-  KPixelX ScrollbarExtent = style()->pixelMetric( QStyle::PM_ScrollBarExtent );
+    // check influence of dis-/appearing of the vertical scrollbar
+    const bool verticalScrollbarIsVisible = verticalScrollBar()->isVisible();
+    const KPixelX scrollbarExtent = style()->pixelMetric( QStyle::PM_ScrollBarExtent );
 
-  KPixelX AvailableWidth = FullWidth;
-  if( VerticalScrollbarIsVisible )
-    AvailableWidth -= ScrollbarExtent;
+    KPixelX availableWidth = fullWidth;
+    if( verticalScrollbarIsVisible )
+        availableWidth -= scrollbarExtent;
 
-  enum KMatchTrial { FirstRun, RerunWithScrollbarOn, TestWithoutScrollbar };
-  KMatchTrial MatchRun = FirstRun;
+    enum KMatchTrial { FirstRun, RerunWithScrollbarOn, TestWithoutScrollbar };
+    KMatchTrial matchRun = FirstRun;
 
-  // prepare needed values
-  KPixelX DigitWidth = valueColumn().digitWidth();
-  KPixelX TextByteWidth = charColumn().isVisible() ? DigitWidth : 0;
-  KPixelX HexByteWidth = valueColumn().isVisible() ? valueColumn().byteWidth() : 0;
-  KPixelX ByteSpacingWidth = valueColumn().isVisible() ? valueColumn().byteSpacingWidth() : 0;
-  KPixelX GroupSpacingWidth;
-  int NoOfGroupedBytes = valueColumn().noOfGroupedBytes();
-  // no grouping?
-  if( NoOfGroupedBytes == 0 )
-  {
-    // faking grouping by 1
-    NoOfGroupedBytes = 1;
-    GroupSpacingWidth = 0;
-  }
-  else
-    GroupSpacingWidth = valueColumn().isVisible() ? valueColumn().groupSpacingWidth() : 0;
-
-  KPixelX HexByteGroupWidth =  NoOfGroupedBytes * HexByteWidth + (NoOfGroupedBytes-1)*ByteSpacingWidth;
-  KPixelX TextByteGroupWidth = NoOfGroupedBytes * TextByteWidth;
-  KPixelX TotalGroupWidth = HexByteGroupWidth + GroupSpacingWidth + TextByteGroupWidth;
-
-  int FittingBytesPerLine;
-  int WithScrollbarFittingBytesPerLine = 0;
-  for(;;)
-  {
-//    kDebug() << "matchWidth: " << FullWidth
-//              << " (v:" << visibleWidth()
-//              << ", f:" << frameWidth()
-//              << ", A:" << AvailableWidth
-//              << ", S:" << ScrollbarExtent
-//              << ", R:" << ReservedWidth << ")" << endl;
-
-    // calculate fitting groups per line
-    int FittingGroupsPerLine = (AvailableWidth+GroupSpacingWidth) // fake spacing after last group
-                               / TotalGroupWidth;
-
-    // calculate the fitting bytes per line by groups
-    FittingBytesPerLine = NoOfGroupedBytes * FittingGroupsPerLine;
-
-    // not only full groups?
-    if( ResizeStyle == FullSizeUsage && NoOfGroupedBytes > 1 )
+    // prepare needed values
+    const KPixelX digitWidth = valueColumn().digitWidth();
+    const KPixelX charByteWidth = charColumn().isVisible() ? digitWidth : 0;
+    const KPixelX valueByteWidth = valueColumn().isVisible() ? valueColumn().byteWidth() : 0;
+    const KPixelX byteSpacingWidth = valueColumn().isVisible() ? valueColumn().byteSpacingWidth() : 0;
+    KPixelX groupSpacingWidth;
+    int noOfGroupedBytes = valueColumn().noOfGroupedBytes();
+    // no grouping?
+    if( noOfGroupedBytes == 0 )
     {
-      if( FittingGroupsPerLine > 0 )
-        AvailableWidth -= FittingGroupsPerLine*TotalGroupWidth; // includes additional spacing after last group
-
-//         kDebug() << "Left: " << AvailableWidth << "("<<HexByteWidth<<", "<<TextByteWidth<<")" ;
-
-      if( AvailableWidth > 0 )
-        FittingBytesPerLine += (AvailableWidth+ByteSpacingWidth) / (HexByteWidth+ByteSpacingWidth+TextByteWidth);
-
-      // is there not even the space for a single byte?
-      if( FittingBytesPerLine == 0 )
-      {
-        // ensure at least one byte per line
-        FittingBytesPerLine = 1;
-        // and
-        break;
-      }
-    }
-    // is there not the space for a single group?
-    else if( FittingBytesPerLine == 0 )
-    {
-      // ensures at least one group
-      FittingBytesPerLine = NoOfGroupedBytes;
-      break;
-    }
-
-//    kDebug() << "meantime: " << FittingGroupsPerLine << " (T:" << TotalGroupWidth
-//              << ", h:" << HexByteGroupWidth
-//              << ", t:" << TextByteGroupWidth
-//              << ", s:" << GroupSpacingWidth << ") " <<FittingBytesPerLine<< endl;
-
-    int NewNoOfLines = (BufferLayout->length()+BufferLayout->startOffset()+FittingBytesPerLine-1)
-                       / FittingBytesPerLine;
-    KPixelY NewHeight =  NewNoOfLines * lineHeight();
-
-    if( VerticalScrollbarIsVisible )
-    {
-      if( MatchRun == TestWithoutScrollbar )
-      {
-        // did the test without the scrollbar fail, don't the data fit into the view?
-        if( NewHeight>FullHeight )
-          // reset to old calculated value
-          FittingBytesPerLine =  WithScrollbarFittingBytesPerLine;
-        break;
-      }
-
-      // a chance for to perhaps fit in height?
-      if( FittingBytesPerLine <= BufferLayout->noOfBytesPerLine() )
-      {
-        // remember this trial's result and calc number of bytes with vertical scrollbar on
-        WithScrollbarFittingBytesPerLine = FittingBytesPerLine;
-        AvailableWidth = FullWidth;
-        MatchRun = TestWithoutScrollbar;
-//          kDebug() << "tested without scrollbar..." ;
-        continue;
-      }
+        // faking grouping by 1
+        noOfGroupedBytes = 1;
+        groupSpacingWidth = 0;
     }
     else
+        groupSpacingWidth = valueColumn().isVisible() ? valueColumn().groupSpacingWidth() : 0;
+
+    const KPixelX valueByteGroupWidth =  noOfGroupedBytes * valueByteWidth + (noOfGroupedBytes-1)*byteSpacingWidth;
+    const KPixelX charByteGroupWidth = noOfGroupedBytes * charByteWidth;
+    const KPixelX totalGroupWidth = valueByteGroupWidth + groupSpacingWidth + charByteGroupWidth;
+
+    int fittingBytesPerLine;
+    int fittingBytesPerLineWithScrollbar = 0;
+    for(;;)
     {
-      // doesn't it fit into the height anymore?
-      if( NewHeight>FullHeight && MatchRun==FirstRun )
-      {
-        // need for a scrollbar has risen... ->less width, new calculation
-        AvailableWidth = FullWidth - ScrollbarExtent;
-        MatchRun = RerunWithScrollbarOn;
-//          kDebug() << "rerun with scrollbar on..." ;
-        continue;
-      }
+    //    kDebug() << "matchWidth: " << fullWidth
+    //              << " (v:" << visibleWidth()
+    //              << ", f:" << frameWidth()
+    //              << ", A:" << availableWidth
+    //              << ", S:" << scrollbarExtent
+    //              << ", R:" << reservedWidth << ")" << endl;
+
+        // calculate fitting groups per line
+        const int fittingGroupsPerLine = (availableWidth+groupSpacingWidth) // fake spacing after last group
+                                          / totalGroupWidth;
+
+        // calculate the fitting bytes per line by groups
+        fittingBytesPerLine = noOfGroupedBytes * fittingGroupsPerLine;
+
+        // not only full groups?
+        if( mResizeStyle == FullSizeUsage && noOfGroupedBytes > 1 )
+        {
+            if( fittingGroupsPerLine > 0 )
+                availableWidth -= fittingGroupsPerLine*totalGroupWidth; // includes additional spacing after last group
+
+//         kDebug() << "Left: " << availableWidth << "("<<valueByteWidth<<", "<<charByteWidth<<")" ;
+
+            if( availableWidth > 0 )
+                fittingBytesPerLine += (availableWidth+byteSpacingWidth) / (valueByteWidth+byteSpacingWidth+charByteWidth);
+
+            // is there not even the space for a single byte?
+            if( fittingBytesPerLine == 0 )
+            {
+                // ensure at least one byte per line
+                fittingBytesPerLine = 1;
+                // and
+                break;
+            }
+        }
+        // is there not the space for a single group?
+        else if( fittingBytesPerLine == 0 )
+        {
+            // ensures at least one group
+            fittingBytesPerLine = noOfGroupedBytes;
+            break;
+        }
+
+//    kDebug() << "meantime: " << fittingGroupsPerLine << " (T:" << totalGroupWidth
+//              << ", h:" << valueByteGroupWidth
+//              << ", t:" << charByteGroupWidth
+//              << ", s:" << groupSpacingWidth << ") " <<fittingBytesPerLine<< endl;
+
+        const int newNoOfLines = (mDataLayout->length()+mDataLayout->startOffset()+fittingBytesPerLine-1)
+                                 / fittingBytesPerLine;
+        const KPixelY newHeight =  newNoOfLines * lineHeight();
+
+        if( verticalScrollbarIsVisible )
+        {
+            if( matchRun == TestWithoutScrollbar )
+            {
+                // did the test without the scrollbar fail, don't the data fit into the view?
+                if( newHeight>fullHeight )
+                    // reset to old calculated value
+                    fittingBytesPerLine =  fittingBytesPerLineWithScrollbar;
+                break;
+            }
+
+            // a chance for to perhaps fit in height?
+            if( fittingBytesPerLine <= mDataLayout->noOfBytesPerLine() )
+            {
+                // remember this trial's result and calc number of bytes with vertical scrollbar on
+                fittingBytesPerLineWithScrollbar = fittingBytesPerLine;
+                availableWidth = fullWidth;
+                matchRun = TestWithoutScrollbar;
+        //          kDebug() << "tested without scrollbar..." ;
+                continue;
+            }
+        }
+        else
+        {
+            // doesn't it fit into the height anymore?
+            if( newHeight>fullHeight && matchRun==FirstRun )
+            {
+                // need for a scrollbar has risen... ->less width, new calculation
+                availableWidth = fullWidth - scrollbarExtent;
+                matchRun = RerunWithScrollbarOn;
+        //          kDebug() << "rerun with scrollbar on..." ;
+                continue;
+            }
+        }
+
+        break;
     }
 
-    break;
-  }
-
-  return FittingBytesPerLine;
+    return fittingBytesPerLine;
 }
 
 
-bool KByteArrayView::selectWord( /*unsigned TODO:change all unneeded signed into unsigned!*/ int Index )
+bool KByteArrayView::selectWord( /*unsigned TODO:change all unneeded signed into unsigned!*/ int index )
 {
-  if( Index >= 0 && Index < BufferLayout->length()  )
-  {
-    KHECore::KWordBufferService WBS( ByteArrayModel, Codec );
-    KHE::KSection WordSection = WBS.wordSection( Index );
-    if( WordSection.isValid() )
+    bool result = false;
+    if( index >= 0 && index < mDataLayout->length()  )
     {
-      pauseCursor();
+        const KHECore::KWordBufferService WBS( mByteArrayModel, mCharCodec );
+        const KHE::KSection wordSection = WBS.wordSection( index );
+        if( wordSection.isValid() )
+        {
+            pauseCursor();
 
-      BufferRanges->setFirstWordSelection( WordSection );
-      BufferCursor->gotoIndex( WordSection.behindEnd() );
-      updateChanged();
+            mDataRanges->setFirstWordSelection( wordSection );
+            mDataCursor->gotoIndex( wordSection.behindEnd() );
+            updateChanged();
 
-      unpauseCursor();
-      emit cursorPositionChanged( BufferCursor->realIndex() );
-      return true;
+            unpauseCursor();
+            emit cursorPositionChanged( mDataCursor->realIndex() );
+            result = true;
+        }
     }
-  }
-  return false;
+    return result;
 }
 
 
-void KByteArrayView::selectAll( bool Select )
+void KByteArrayView::selectAll( bool select )
 {
-  pauseCursor( true );
+    pauseCursor( true );
 
-  if( !Select )
-    BufferRanges->removeSelection();
-  else
-  {
-    BufferRanges->setSelection( KHE::KSection(0,BufferLayout->length()-1) );
-    BufferCursor->gotoEnd();
-  }
+    if( select )
+    {
+        mDataRanges->setSelection( KHE::KSection(0,mDataLayout->length()-1) );
+        mDataCursor->gotoEnd();
+    }
+    else
+        mDataRanges->removeSelection();
 
-  updateChanged();
+    updateChanged();
 
-  unpauseCursor();
+    unpauseCursor();
 
-  if( !OverWrite ) emit cutAvailable( BufferRanges->hasSelection() );
-  emit copyAvailable( BufferRanges->hasSelection() );
-  emit selectionChanged( BufferRanges->hasSelection() );
-  emit cursorPositionChanged( BufferCursor->realIndex() );
-  viewport()->setCursor( isReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor );
+    if( !mOverWrite ) emit cutAvailable( mDataRanges->hasSelection() );
+    emit copyAvailable( mDataRanges->hasSelection() );
+    emit selectionChanged( mDataRanges->hasSelection() );
+    emit cursorPositionChanged( mDataCursor->realIndex() );
+    viewport()->setCursor( isReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor );
 }
 
 
 bool KByteArrayView::hasSelectedData() const
 {
-  return BufferRanges->hasSelection();
+    return mDataRanges->hasSelection();
 }
 
 
 QByteArray KByteArrayView::selectedData() const
 {
-  if( !BufferRanges->hasSelection() )
-    return QByteArray();
+    if( !mDataRanges->hasSelection() )
+        return QByteArray();
 
-  KHE::KSection Selection = BufferRanges->selection();
-  QByteArray SD;
-  SD.resize( Selection.width() );
-  ByteArrayModel->copyTo( SD.data(), Selection.start(), Selection.width() );
-  return SD;
+    const KHE::KSection selection = mDataRanges->selection();
+    QByteArray data;
+    data.resize( selection.width() );
+    mByteArrayModel->copyTo( data.data(), selection.start(), selection.width() );
+    return data;
 }
 
 
 QMimeData *KByteArrayView::dragObject() const
 {
-  if( !BufferRanges->hasSelection() )
-    return 0;
+    if( !mDataRanges->hasSelection() )
+        return 0;
 
-  const KOffsetColumn *OC;
-  const KValueColumn *HC;
-  const KCharColumn *TC;
-  KCoordRange Range;
+    const KOffsetColumn *OC;
+    const KValueColumn *HC;
+    const KCharColumn *TC;
+    KCoordRange Range;
 
-  if( static_cast<KHEUI::KCharColumn *>( ActiveColumn ) == &charColumn() )
-  {
-    OC = 0;
-    HC = 0;
-    TC = 0;
-  }
-  else
-  {
-    OC = OffsetColumn->isVisible() ? OffsetColumn : 0;
-    HC = valueColumn().isVisible() ? &valueColumn() : 0;
-    TC = charColumn().isVisible() ? &charColumn() : 0;
-    Range.set( BufferLayout->coordRangeOfIndizes(BufferRanges->selection()) );
-  }
+    if( static_cast<KHEUI::KCharColumn *>( mActiveColumn ) == &charColumn() )
+    {
+        OC = 0;
+        HC = 0;
+        TC = 0;
+    }
+    else
+    {
+        OC = mOffsetColumn->isVisible() ? mOffsetColumn : 0;
+        HC = valueColumn().isVisible() ? &valueColumn() : 0;
+        TC = charColumn().isVisible() ? &charColumn() : 0;
+        Range.set( mDataLayout->coordRangeOfIndizes(mDataRanges->selection()) );
+    }
 
-  return new KByteArrayDrag( selectedData(), Range, OC, HC, TC,
-                          charColumn().substituteChar(), charColumn().undefinedChar(),
-                          Codec->name() );
+    return new KByteArrayDrag( selectedData(), Range, OC, HC, TC,
+                            charColumn().substituteChar(), charColumn().undefinedChar(),
+                            mCharCodec->name() );
 }
 
 
 void KByteArrayView::cut()
 {
-  if( isReadOnly() || OverWrite )
-    return;
+    if( isReadOnly() || mOverWrite )
+        return;
 
-  QMimeData *Drag = dragObject();
-  if( !Drag )
-    return;
+    QMimeData *cutData = dragObject();
+    if( !cutData )
+        return;
 
-  QApplication::clipboard()->setMimeData( Drag, ClipboardMode );
+    QApplication::clipboard()->setMimeData( cutData, mClipboardMode );
 
-  removeSelectedData();
+    removeSelectedData();
 }
 
 
 void KByteArrayView::copy()
 {
-  QMimeData *Drag = dragObject();
-  if( !Drag )
-    return;
+    QMimeData *cutData = dragObject();
+    if( !cutData )
+        return;
 
-  QApplication::clipboard()->setMimeData( Drag, ClipboardMode );
+    QApplication::clipboard()->setMimeData( cutData, mClipboardMode );
 }
 
 
 void KByteArrayView::paste()
 {
-  if( isReadOnly() )
-    return;
+    if( isReadOnly() )
+        return;
 
-  const QMimeData *Data = QApplication::clipboard()->mimeData( ClipboardMode );
-  pasteFromSource( Data );
+    const QMimeData *data = QApplication::clipboard()->mimeData( mClipboardMode );
+    pasteFromSource( data );
 }
 
 
-void KByteArrayView::pasteFromSource( const QMimeData *Data )
+void KByteArrayView::pasteFromSource( const QMimeData *data )
 {
-  if( !Data )
-    return;
+    if( !data )
+        return;
 
-  QByteArray Bytes = Data->data( "application/octet-stream" );
+    const QByteArray bytes = data->data( "application/octet-stream" );
 
-  if( !Bytes.isEmpty() )
-    insert( Bytes );
+    if( !bytes.isEmpty() )
+        insert( bytes );
 }
 
 
-void KByteArrayView::insert( const QByteArray &Data )
+void KByteArrayView::insert( const QByteArray &data )
 {
-  pauseCursor( true );
+    pauseCursor( true );
 
-  if( OverWrite )
-  {
-    if( BufferRanges->hasSelection() )
+    if( mOverWrite )
     {
-      // replacing the selection:
-      // we restrict the replacement to the minimum length of selection and input
-      KHE::KSection Selection = BufferRanges->removeSelection();
-      Selection.restrictEndByWidth( Data.size() );
-      ByteArrayModel->replace( Selection, Data.data(), Selection.width() );
+        if( mDataRanges->hasSelection() )
+        {
+            // replacing the selection:
+            // we restrict the replacement to the minimum length of selection and input
+            KHE::KSection selection = mDataRanges->removeSelection();
+            selection.restrictEndByWidth( data.size() );
+            mByteArrayModel->replace( selection, data.data(), selection.width() );
+        }
+        else
+        {
+            if( !mDataCursor->isBehind() )
+            {
+                // replacing the normal data, at least until the end
+                KHE::KSection insertRange = KHE::KSection::fromWidth( mDataCursor->realIndex(), data.size() );
+                insertRange.restrictEndTo( mDataLayout->length()-1 );
+                mByteArrayModel->replace( insertRange, data.data(), insertRange.width() );
+            }
+        }
     }
     else
     {
-      if( !BufferCursor->isBehind() )
-      {
-        // replacing the normal data, at least until the end
-        KHE::KSection InsertRange = KHE::KSection::fromWidth( BufferCursor->realIndex(), Data.size() );
-        InsertRange.restrictEndTo( BufferLayout->length()-1 );
-        ByteArrayModel->replace( InsertRange, Data.data(), InsertRange.width() );
-      }
+        if( mDataRanges->hasSelection() )
+        {
+            // replacing the selection
+            const KHE::KSection selection = mDataRanges->removeSelection();
+            mByteArrayModel->replace( selection, data );
+        }
+        else
+        mByteArrayModel->insert( mDataCursor->realIndex(), data );
     }
-  }
-  else
-  {
-    if( BufferRanges->hasSelection() )
-    {
-      // replacing the selection
-      KHE::KSection Selection = BufferRanges->removeSelection();
-      ByteArrayModel->replace( Selection, Data );
-    }
-    else
-      ByteArrayModel->insert( BufferCursor->realIndex(), Data );
-  }
 
-  emit selectionChanged( BufferRanges->hasSelection() );
+    emit selectionChanged( mDataRanges->hasSelection() );
 }
 
 
 void KByteArrayView::removeSelectedData()
 {
-  // Can't we do this?
-  if( isReadOnly() || OverWrite || ValueEditor->isInEditMode() )
-    return;
+    // Can't we do this?
+    if( isReadOnly() || mOverWrite || mValueEditor->isInEditMode() )
+        return;
 
-  KHE::KSection Selection = BufferRanges->removeSelection();
+    const KHE::KSection selection = mDataRanges->removeSelection();
 
-  ByteArrayModel->remove( Selection );
+    mByteArrayModel->remove( selection );
 
 //     clearUndoRedo();
 
@@ -1010,81 +998,81 @@ void KByteArrayView::removeSelectedData()
 }
 
 
-void KByteArrayView::updateRange( int Start, int End )
+void KByteArrayView::updateRange( int start, int end )
 {
-  BufferRanges->addChangedRange( Start, End );
-// kDebug() << "update: "<<Start<<","<<End;
-
-  unpauseCursor();
-  updateChanged();
-}
-
-
-void KByteArrayView::updateRange( const KHE::KSectionList &list )
-{
-    for( KHE::KSectionList::ConstIterator it=list.begin(); it!=list.end(); ++it )
-        BufferRanges->addChangedRange( *it );
+    mDataRanges->addChangedRange( start, end );
+// kDebug() << "update: "<<start<<","<<end;
 
     unpauseCursor();
     updateChanged();
 }
 
 
-void KByteArrayView::onContentsReplaced( int Pos, int RemovedLength, int InsertedLength )
+void KByteArrayView::updateRange( const KHE::KSectionList &list )
 {
-  pauseCursor();
+    for( KHE::KSectionList::ConstIterator it=list.begin(); it!=list.end(); ++it )
+        mDataRanges->addChangedRange( *it );
 
-  bool Appending = BufferCursor->atAppendPos();
-  // update lengths
-  int OldNoOfLines = noOfLines();
-  BufferLayout->setLength( ByteArrayModel->size() );
-  int NewNoOfLines = BufferLayout->noOfLines();
-  if( OldNoOfLines != NewNoOfLines )
-  {
-    setNoOfLines( NewNoOfLines );
-    updateColumn( *OffsetColumn );
-  }
+    unpauseCursor();
+    updateChanged();
+}
 
-// kDebug()<< "Pos:"<<Pos<<", RemovedLength:"<<RemovedLength<<", InsertedLength:"<<InsertedLength;
-// kDebug() << "Cursor:"<<BufferCursor->index()<<", "<<BufferCursor->isBehind();
+
+void KByteArrayView::onContentsReplaced( int pos, int removedLength, int insertedLength )
+{
+    pauseCursor();
+
+    const bool appending = mDataCursor->atAppendPos();
+    // update lengths
+    const int oldNoOfLines = noOfLines();
+    mDataLayout->setLength( mByteArrayModel->size() );
+    const int newNoOfLines = mDataLayout->noOfLines();
+    if( oldNoOfLines != newNoOfLines )
+    {
+        setNoOfLines( newNoOfLines );
+        updateColumn( *mOffsetColumn );
+    }
+
+// kDebug()<< "pos:"<<pos<<", RemovedLength:"<<RemovedLength<<", InsertedLength:"<<InsertedLength;
+// kDebug() << "Cursor:"<<mDataCursor->index()<<", "<<mDataCursor->isBehind();
   // adapt cursor(s)
-  if( Appending )
-    BufferCursor->gotoEnd();
-  else
-    BufferCursor->adaptToChange( Pos, RemovedLength, InsertedLength );
+    if( appending )
+        mDataCursor->gotoEnd();
+    else
+        mDataCursor->adaptToChange( pos, removedLength, insertedLength );
 
-  BufferRanges->adaptSelectionToChange( Pos, RemovedLength, InsertedLength );
-// kDebug() << "Cursor:"<<BufferCursor->index()<<", Selection:"<<BufferRanges->selectionStart()<<"-"<<BufferRanges->selectionEnd()
-//          <<", BytesPerLine: "<<BufferLayout->noOfBytesPerLine()<<endl;
-  emit cursorPositionChanged( BufferCursor->realIndex() );
+    mDataRanges->adaptSelectionToChange( pos, removedLength, insertedLength );
+// kDebug() << "Cursor:"<<mDataCursor->index()<<", selection:"<<mDataRanges->selectionStart()<<"-"<<mDataRanges->selectionEnd()
+//          <<", BytesPerLine: "<<mDataLayout->noOfBytesPerLine()<<endl;
+    emit cursorPositionChanged( mDataCursor->realIndex() );
 }
 
 void KByteArrayView::onContentsReplaced( const QList<KHE::ReplacementScope> &replacementList )
 {
     pauseCursor();
 
-    const bool Appending = BufferCursor->atAppendPos();
-    const int oldLength = BufferLayout->length(); // TODO: hack for BufferCursor->adaptSelectionToChange
+    const bool appending = mDataCursor->atAppendPos();
+    const int oldLength = mDataLayout->length(); // TODO: hack for mDataCursor->adaptSelectionToChange
     // update lengths
-    int OldNoOfLines = noOfLines();
-    BufferLayout->setLength( ByteArrayModel->size() );
-    int NewNoOfLines = BufferLayout->noOfLines();
-    if( OldNoOfLines != NewNoOfLines )
+    int oldNoOfLines = noOfLines();
+    mDataLayout->setLength( mByteArrayModel->size() );
+    int newNoOfLines = mDataLayout->noOfLines();
+    if( oldNoOfLines != newNoOfLines )
     {
-        setNoOfLines( NewNoOfLines );
-        updateColumn( *OffsetColumn );
+        setNoOfLines( newNoOfLines );
+        updateColumn( *mOffsetColumn );
     }
 
     // adapt cursor(s)
-    if( Appending )
-        BufferCursor->gotoEnd();
+    if( appending )
+        mDataCursor->gotoEnd();
     else
-        BufferCursor->adaptToChange( replacementList, oldLength );
+        mDataCursor->adaptToChange( replacementList, oldLength );
 
-    BufferRanges->adaptSelectionToChange( replacementList );
-    // kDebug() << "Cursor:"<<BufferCursor->index()<<", Selection:"<<BufferRanges->selectionStart()<<"-"<<BufferRanges->selectionEnd()
-    //          <<", BytesPerLine: "<<BufferLayout->noOfBytesPerLine()<<endl;
-    emit cursorPositionChanged( BufferCursor->realIndex() );
+    mDataRanges->adaptSelectionToChange( replacementList );
+    // kDebug() << "Cursor:"<<mDataCursor->index()<<", selection:"<<mDataRanges->selectionStart()<<"-"<<mDataRanges->selectionEnd()
+    //          <<", BytesPerLine: "<<mDataLayout->noOfBytesPerLine()<<endl;
+    emit cursorPositionChanged( mDataCursor->realIndex() );
 }
 
 void KByteArrayView::onContentsSwapped( int firstStart, int secondStart, int secondLength )
@@ -1092,173 +1080,169 @@ void KByteArrayView::onContentsSwapped( int firstStart, int secondStart, int sec
 Q_UNUSED( firstStart )
 Q_UNUSED( secondStart )
 Q_UNUSED( secondLength )
-  // TODO: what should happen here? Well, relocate the cursor perhaps?
-  pauseCursor();
+    // TODO: what should happen here? Well, relocate the cursor perhaps?
+    pauseCursor();
 
 }
 void KByteArrayView::onBookmarksChange( const QList<KHECore::KBookmark> &bookmarks )
 {
 
-  foreach( KHECore::KBookmark bookmark, bookmarks )
-  {
-      const int position = bookmark.offset();
-      BufferRanges->addChangedRange( position, position );
-  }
+    foreach( KHECore::KBookmark bookmark, bookmarks )
+    {
+        const int position = bookmark.offset();
+        mDataRanges->addChangedRange( position, position );
+    }
 
-  unpauseCursor();
-  updateChanged();
+    unpauseCursor();
+    updateChanged();
 }
 
 void KByteArrayView::clipboardChanged()
 {
-  // don't listen to selection changes
-  disconnect( QApplication::clipboard(), SIGNAL(selectionChanged()) );
-  selectAll( false );
+    // don't listen to selection changes
+    disconnect( QApplication::clipboard(), SIGNAL(selectionChanged()) );
+    selectAll( false );
 }
 
 
-void KByteArrayView::setCursorPosition( int Index, bool Behind )
+void KByteArrayView::setCursorPosition( int index, bool behind )
 {
-  pauseCursor( true );
+    pauseCursor( true );
 
-  if( Behind ) --Index;
-  BufferCursor->gotoCIndex( Index );
-  if( Behind )
-    BufferCursor->stepBehind();
+    if( behind ) --index;
+    mDataCursor->gotoCIndex( index );
+    if( behind )
+        mDataCursor->stepBehind();
 
-  BufferRanges->removeSelection();
-  if( BufferRanges->isModified() )
-  {
-    updateChanged();
-
-    viewport()->setCursor( isReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor );
-
-    if( !OverWrite ) emit cutAvailable( BufferRanges->hasSelection() );
-    emit copyAvailable( BufferRanges->hasSelection() );
-    emit selectionChanged( BufferRanges->hasSelection() );
-  }
-  ensureCursorVisible();
-
-  unpauseCursor();
-  emit cursorPositionChanged( BufferCursor->realIndex() );
-}
-
-void KByteArrayView::setSelection( int Start, int End )
-{
-  if( Start >= 0 && End < BufferLayout->length()  )
-  {
-    KHE::KSection Selection( Start, End );
-    if( Selection.isValid() )
+    mDataRanges->removeSelection();
+    if( mDataRanges->isModified() )
     {
-      pauseCursor();
+        updateChanged();
 
-      BufferRanges->setSelection( Selection );
-      BufferCursor->gotoCIndex( Selection.behindEnd() );
-      ensureVisible( activeColumn(), BufferLayout->coordOfIndex(Selection.start()) );
-      ensureCursorVisible();
-      updateChanged();
+        viewport()->setCursor( isReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor );
 
-      unpauseCursor();
-      emit cursorPositionChanged( BufferCursor->realIndex() );
+        if( !mOverWrite ) emit cutAvailable( mDataRanges->hasSelection() );
+        emit copyAvailable( mDataRanges->hasSelection() );
+        emit selectionChanged( mDataRanges->hasSelection() );
     }
-  }
+    ensureCursorVisible();
+
+    unpauseCursor();
+    emit cursorPositionChanged( mDataCursor->realIndex() );
 }
 
-void KByteArrayView::showBufferColumns( int CCs )
+void KByteArrayView::setSelection( int start, int end )
 {
-  int Columns = visibleBufferColumns();
+    if( start >= 0 && end < mDataLayout->length()  )
+    {
+        const KHE::KSection selection( start, end );
+        if( selection.isValid() )
+        {
+            pauseCursor();
 
-  // no changes or no column selected?
-  if( CCs == Columns || !(CCs&( ValueColumnId | CharColumnId )) )
-    return;
+            mDataRanges->setSelection( selection );
+            mDataCursor->gotoCIndex( selection.behindEnd() );
+            ensureVisible( activeColumn(), mDataLayout->coordOfIndex(selection.start()) );
+            ensureCursorVisible();
+            updateChanged();
 
-  valueColumn().setVisible( ValueColumnId & CCs );
-  charColumn().setVisible( CharColumnId & CCs );
-  SecondBorderColumn->setVisible( CCs == (ValueColumnId|CharColumnId) );
+            unpauseCursor();
+            emit cursorPositionChanged( mDataCursor->realIndex() );
+        }
+    }
+}
 
-  // active column not visible anymore?
-  if( !activeColumn().isVisible() )
-  {
-    KDataColumn *H = ActiveColumn;
-    ActiveColumn = InactiveColumn;
-    InactiveColumn = H;
+void KByteArrayView::showBufferColumns( int newColumns )
+{
+    const int oldColumns = visibleBufferColumns();
+
+    // no changes or no column selected?
+    if( newColumns == oldColumns || !(newColumns&( ValueColumnId | CharColumnId )) )
+        return;
+
+    valueColumn().setVisible( ValueColumnId & newColumns );
+    charColumn().setVisible( CharColumnId & newColumns );
+    mSecondBorderColumn->setVisible( newColumns == (ValueColumnId|CharColumnId) );
+
+    // active column not visible anymore?
+    if( !activeColumn().isVisible() )
+    {
+        KDataColumn *h = mActiveColumn;
+        mActiveColumn = mInactiveColumn;
+        mInactiveColumn = h;
+        adaptController();
+    }
+
+    updateViewByWidth();
+}
+
+
+void KByteArrayView::setCursorColumn( KDataColumnId columnId )
+{
+    // no changes or not visible?
+    if( columnId == cursorColumn()
+        || (columnId == ValueColumnId && !valueColumn().isVisible())
+        || (columnId == CharColumnId && !charColumn().isVisible()) )
+        return;
+
+    pauseCursor( true );
+
+    if( columnId == ValueColumnId )
+    {
+        mActiveColumn = &valueColumn();
+        mInactiveColumn = &charColumn();
+    }
+    else
+    {
+        mActiveColumn = &charColumn();
+        mInactiveColumn = &valueColumn();
+    }
     adaptController();
-  }
 
-  updateViewByWidth();
+    ensureCursorVisible();
+    unpauseCursor();
 }
 
 
-void KByteArrayView::setCursorColumn( KDataColumnId CC )
+void KByteArrayView::placeCursor( const QPoint &point )
 {
-  // no changes or not visible?
-  if( CC == cursorColumn()
-      || (CC == ValueColumnId && !valueColumn().isVisible())
-      || (CC == CharColumnId && !charColumn().isVisible()) )
-    return;
+    // switch active column if needed
+    if( charColumn().isVisible() && point.x() >= charColumn().x() )
+    {
+        mActiveColumn = &charColumn();
+        mInactiveColumn = &valueColumn();
+    }
+    else
+    {
+        mActiveColumn = &valueColumn();
+        mInactiveColumn = &charColumn();
+    }
+    adaptController();
 
-  pauseCursor( true );
+    // get coord of click and whether this click was closer to the end of the pos
+    const KCoord coord( activeColumn().magPosOfX(point.x()), lineAt(point.y()) );
 
-  if( CC == ValueColumnId )
-  {
-    ActiveColumn = &valueColumn();
-    InactiveColumn = &charColumn();
-  }
-  else
-  {
-    ActiveColumn = &charColumn();
-    InactiveColumn = &valueColumn();
-  }
-  adaptController();
-
-  ensureCursorVisible();
-  unpauseCursor();
+    mDataCursor->gotoCCoord( coord );
+    emit cursorPositionChanged( mDataCursor->realIndex() );
 }
 
 
-void KByteArrayView::placeCursor( const QPoint &Point )
+int KByteArrayView::indexByPoint( const QPoint &point ) const
 {
-  resetInputContext();
+    const KDataColumn *column =
+         ( charColumn().isVisible() && point.x() >= charColumn().x() ) ?
+         (KDataColumn *)&charColumn() : (KDataColumn *)&valueColumn();
 
-  // switch active column if needed
-  if( charColumn().isVisible() && Point.x() >= charColumn().x() )
-  {
-    ActiveColumn = &charColumn();
-    InactiveColumn = &valueColumn();
-  }
-  else
-  {
-    ActiveColumn = &valueColumn();
-    InactiveColumn = &charColumn();
-  }
-  adaptController();
+    const KCoord coord( column->posOfX(point.x()), lineAt(point.y()) );
 
-  // get coord of click and whether this click was closer to the end of the pos
-  KCoord C( activeColumn().magPosOfX(Point.x()), lineAt(Point.y()) );
-
-  BufferCursor->gotoCCoord( C );
-  emit cursorPositionChanged( BufferCursor->realIndex() );
-}
-
-
-int KByteArrayView::indexByPoint( const QPoint &Point ) const
-{
-  const KDataColumn *C;
-  if( charColumn().isVisible() && Point.x() >= charColumn().x() )
-    C = &charColumn();
-  else
-    C = &valueColumn();
-
-  KCoord Coord( C->posOfX(Point.x()), lineAt(Point.y()) );
-
-  return BufferLayout->indexAtCCoord( Coord );
+    return mDataLayout->indexAtCCoord( coord );
 }
 
 
 void KByteArrayView::showEvent( QShowEvent *Event )
 {
     KColumnsView::showEvent( Event );
-    BufferLayout->setNoOfLinesPerPage( noOfLinesPerPage() );
+    mDataLayout->setNoOfLinesPerPage( noOfLinesPerPage() );
 }
 
 
@@ -1277,305 +1261,303 @@ void KByteArrayView::focusOutEvent( QFocusEvent *focusEvent )
 
 void KByteArrayView::blinkCursor()
 {
-  // skip the cursor drawing?
-  if( CursorPaused || ValueEditor->isInEditMode() )
-    return;
+    // skip the cursor drawing?
+    if( mCursorPaused || mValueEditor->isInEditMode() )
+        return;
 
-  // switch the cursor state
-  BlinkCursorVisible = !BlinkCursorVisible;
-  updateCursor( activeColumn() );
+    // switch the cursor state
+    mBlinkCursorVisible = !mBlinkCursorVisible;
+    updateCursor( activeColumn() );
 }
 
 
 void KByteArrayView::startCursor()
 {
-  CursorPaused = false;
+    mCursorPaused = false;
 
-  updateCursors();
+    updateCursors();
 
-  CursorBlinkTimer->start( QApplication::cursorFlashTime()/2 );
+    mCursorBlinkTimer->start( QApplication::cursorFlashTime()/2 );
 }
 
 
 void KByteArrayView::unpauseCursor()
 {
-  CursorPaused = false;
+    mCursorPaused = false;
 
-  if( CursorBlinkTimer->isActive() )
-    updateCursors();
+    if( mCursorBlinkTimer->isActive() )
+        updateCursors();
 }
 
 
 void KByteArrayView::updateCursors()
 {
-  createCursorPixmaps();
+    createCursorPixmaps();
 
-  BlinkCursorVisible = true;
-  updateCursor( activeColumn() );
-  updateCursor( inactiveColumn() );
+    mBlinkCursorVisible = true;
+    updateCursor( activeColumn() );
+    updateCursor( inactiveColumn() );
 }
 
 
 void KByteArrayView::stopCursor()
 {
-  CursorBlinkTimer->stop();
+    mCursorBlinkTimer->stop();
 
-  pauseCursor();
+    pauseCursor();
 }
 
 
-void KByteArrayView::pauseCursor( bool LeaveEdit )
+void KByteArrayView::pauseCursor( bool leaveEdit )
 {
-  CursorPaused = true;
+    mCursorPaused = true;
 
-  BlinkCursorVisible = false;
-  updateCursor( activeColumn() );
-  updateCursor( inactiveColumn() );
+    mBlinkCursorVisible = false;
+    updateCursor( activeColumn() );
+    updateCursor( inactiveColumn() );
 
-  if( LeaveEdit )
-    ValueEditor->InEditMode = false;
+    if( leaveEdit )
+        mValueEditor->mInEditMode = false;
 }
 
 
-void KByteArrayView::updateCursor( const KDataColumn &Column )
+void KByteArrayView::updateCursor( const KDataColumn &column )
 {
-  int x = Column.xOfPos( BufferCursor->pos() ) - xOffset();
-  int y = lineHeight() * BufferCursor->line() - yOffset();
-  int w = Column.byteWidth();
+    const int x = column.xOfPos( mDataCursor->pos() ) - xOffset();
+    const int y = lineHeight() * mDataCursor->line() - yOffset();
+    const int w = column.byteWidth();
 
-  viewport()->update( x,y, w,lineHeight() );
+    viewport()->update( x,y, w,lineHeight() );
 }
 
 void KByteArrayView::createCursorPixmaps()
 {
-  // create CursorPixmaps
-  CursorPixmaps->setSize( activeColumn().byteWidth(), lineHeight() );
+    // create mCursorPixmaps
+    mCursorPixmaps->setSize( activeColumn().byteWidth(), lineHeight() );
 
-  int Index = BufferCursor->validIndex();
+    const int index = mDataCursor->validIndex();
 
-  QPainter Paint;
-  Paint.begin( &CursorPixmaps->offPixmap() );
-  Paint.initFrom( this );
-  activeColumn().paintByte( &Paint, Index );
-  Paint.end();
+    QPainter painter;
+    painter.begin( &mCursorPixmaps->offPixmap() );
+    painter.initFrom( this );
+    activeColumn().paintByte( &painter, index );
+    painter.end();
 
-  Paint.begin( &CursorPixmaps->onPixmap() );
-  Paint.initFrom( this );
-  activeColumn().paintCursor( &Paint, Index );
-  Paint.end();
+    painter.begin( &mCursorPixmaps->onPixmap() );
+    painter.initFrom( this );
+    activeColumn().paintCursor( &painter, index );
+    painter.end();
 
-  // calculat the shape
-  KPixelX CursorX;
-  KPixelX CursorW;
-  if( BufferCursor->isBehind() )
-  {
-    CursorX = qMax( 0, CursorPixmaps->onPixmap().width()-InsertCursorWidth );
-    CursorW = InsertCursorWidth;
-  }
-  else
-  {
-    CursorX = 0;
-    CursorW = OverWrite ? -1 : InsertCursorWidth;
-  }
-  CursorPixmaps->setShape( CursorX, CursorW );
+    // calculat the shape
+    KPixelX cursorX;
+    KPixelX cursorW;
+    if( mDataCursor->isBehind() )
+    {
+        cursorX = qMax( 0, mCursorPixmaps->onPixmap().width()-InsertCursorWidth );
+        cursorW = InsertCursorWidth;
+    }
+    else
+    {
+        cursorX = 0;
+        cursorW = mOverWrite ? -1 : InsertCursorWidth;
+    }
+    mCursorPixmaps->setShape( cursorX, cursorW );
 }
 
 
 void KByteArrayView::drawActiveCursor( QPainter *painter )
 {
-  // any reason to skip the cursor drawing?
-  if( BlinkCursorVisible && !hasFocus() && !viewport()->hasFocus() && !InDnD )
-    return;
+    // any reason to skip the cursor drawing?
+    if( mBlinkCursorVisible && !hasFocus() && !viewport()->hasFocus() && !mInDnD )
+        return;
 
-  const int x = activeColumn().xOfPos( BufferCursor->pos() );
-  const int y = lineHeight() * BufferCursor->line();
+    const int x = activeColumn().xOfPos( mDataCursor->pos() );
+    const int y = lineHeight() * mDataCursor->line();
 
-  painter->translate( x, y );
+    painter->translate( x, y );
 
-  // paint edited byte?
-  if( ValueEditor->isInEditMode() )
-  {
-    int Index = BufferCursor->index();
+    // paint edited byte?
+    if( mValueEditor->isInEditMode() )
+    {
+        const int index = mDataCursor->index();
 
-    if( BlinkCursorVisible )
-      valueColumn().paintEditedByte( painter, ValueEditor->EditValue, ValueEditor->ByteBuffer );
+        if( mBlinkCursorVisible )
+            valueColumn().paintEditedByte( painter, mValueEditor->mEditValue, mValueEditor->mByteBuffer );
+        else
+            valueColumn().paintByte( painter, index );
+    }
     else
-      valueColumn().paintByte( painter, Index );
-  }
-  else
-    painter->drawPixmap( CursorPixmaps->cursorX(), 0,
-                         BlinkCursorVisible?CursorPixmaps->onPixmap():CursorPixmaps->offPixmap(),
-                         CursorPixmaps->cursorX(),0,CursorPixmaps->cursorW(),-1 );
+        painter->drawPixmap( mCursorPixmaps->cursorX(), 0,
+                            mBlinkCursorVisible?mCursorPixmaps->onPixmap():mCursorPixmaps->offPixmap(),
+                            mCursorPixmaps->cursorX(),0,mCursorPixmaps->cursorW(),-1 );
 
-  painter->translate( -x, -y );
+    painter->translate( -x, -y );
 }
 
 
 void KByteArrayView::drawInactiveCursor( QPainter *painter )
 {
-  // any reason to skip the cursor drawing?
-  if( !inactiveColumn().isVisible()
-      || CursorPaused
-      || (!CursorPaused && !hasFocus() && !viewport()->hasFocus() && !InDnD)  )
-    return;
+    // any reason to skip the cursor drawing?
+    if( !inactiveColumn().isVisible()
+        || mCursorPaused
+        || (!mCursorPaused && !hasFocus() && !viewport()->hasFocus() && !mInDnD)  )
+        return;
 
-  int Index = BufferCursor->validIndex();
+    const int index = mDataCursor->validIndex();
 
-  const int x = inactiveColumn().xOfPos( BufferCursor->pos() );
-  const int y = lineHeight() * BufferCursor->line();
+    const int x = inactiveColumn().xOfPos( mDataCursor->pos() );
+    const int y = lineHeight() * mDataCursor->line();
 
-  painter->translate( x, y );
+    painter->translate( x, y );
 
-  KDataColumn::KFrameStyle Style =
-    BufferCursor->isBehind() ? KDataColumn::Right :
-    (OverWrite||ValueEditor->isInEditMode()) ? KDataColumn::Frame :
-    KDataColumn::Left;
-  inactiveColumn().paintFramedByte( painter, Index, Style );
+    const KDataColumn::KFrameStyle Style =
+        mDataCursor->isBehind() ?                    KDataColumn::Right :
+        (mOverWrite||mValueEditor->isInEditMode()) ? KDataColumn::Frame :
+                                                     KDataColumn::Left;
+    inactiveColumn().paintFramedByte( painter, index, Style );
 
-  painter->translate( -x, -y );
+    painter->translate( -x, -y );
 }
 
 
 void KByteArrayView::drawColumns( QPainter *painter, int cx, int cy, int cw, int ch )
 {
-  KColumnsView::drawColumns( painter, cx, cy, cw, ch );
-  // TODO: update non blinking cursors. Should this perhaps be done in the buffercolumn?
-  // Then it needs to know about inactive, insideByte and the like... well...
-  // perhaps subclassing the buffer columns even more, to KCharColumn and KValueColumn?
+    KColumnsView::drawColumns( painter, cx, cy, cw, ch );
+    // TODO: update non blinking cursors. Should this perhaps be done in the buffercolumn?
+    // Then it needs to know about inactive, insideByte and the like... well...
+    // perhaps subclassing the buffer columns even more, to KCharColumn and KValueColumn?
 
-  if( visibleLines(KPixelYs::fromWidth(cy,ch)).includes(BufferCursor->line()) )
-  {
-    drawActiveCursor( painter );
-    drawInactiveCursor( painter );
-  }
+    if( visibleLines(KPixelYs::fromWidth(cy,ch)).includes(mDataCursor->line()) )
+    {
+        drawActiveCursor( painter );
+        drawInactiveCursor( painter );
+    }
 }
 
-void KByteArrayView::updateColumn( KColumn &Column )
+void KByteArrayView::updateColumn( KColumn &column )
 {
-  if( Column.isVisible() )
-    viewport()->update( Column.x()-xOffset(), 0, Column.width(), visibleHeight() );
+    if( column.isVisible() )
+        viewport()->update( column.x()-xOffset(), 0, column.width(), visibleHeight() );
 }
 
 void KByteArrayView::emitSelectionSignals()
 {
-  bool HasSelection = BufferRanges->hasSelection();
-  if( !OverWrite ) emit cutAvailable( HasSelection );
-  emit copyAvailable( HasSelection );
-  emit selectionChanged( HasSelection );
+    const bool hasSelection = mDataRanges->hasSelection();
+    if( !mOverWrite ) emit cutAvailable( hasSelection );
+    emit copyAvailable( hasSelection );
+    emit selectionChanged( hasSelection );
 }
 
 
-void KByteArrayView::keyPressEvent( QKeyEvent *KeyEvent )
+void KByteArrayView::keyPressEvent( QKeyEvent *keyEvent )
 {
-  if( !Controller->handleKeyPress( KeyEvent ) )
-    KeyEvent->ignore();
+    if( !mController->handleKeyPress( keyEvent ) )
+        keyEvent->ignore();
 }
 
 
 void KByteArrayView::updateChanged()
 {
-  KPixelXs Xs = KPixelXs::fromWidth( xOffset(), visibleWidth() );
+    const KPixelXs Xs = KPixelXs::fromWidth( xOffset(), visibleWidth() );
 
-  // collect affected buffer columns
-  QList<KDataColumn*> DirtyColumns;
+    // collect affected buffer columns
+    QList<KDataColumn*> dirtyColumns;
 
-  KDataColumn *C = ValueColumn;
-  while( true )
-  {
-    if( C->isVisible() && C->overlaps(Xs) )
+    KDataColumn *column = mValueColumn;
+    while( true )
     {
-      DirtyColumns.append( C );
-      C->preparePainting( Xs );
+        if( column->isVisible() && column->overlaps(Xs) )
+        {
+            dirtyColumns.append( column );
+            column->preparePainting( Xs );
+        }
+
+        if( column == mCharColumn )
+            break;
+        column = mCharColumn;
     }
 
-    if( C == CharColumn )
-      break;
-    C = CharColumn;
-  }
-
-  // any colums to paint?
-  if( DirtyColumns.size() > 0 )
-  {
-    KPixelYs Ys = KPixelYs::fromWidth( yOffset(), visibleHeight() );
-
-    // calculate affected lines/indizes
-    KHE::KSection FullPositions( 0, BufferLayout->noOfBytesPerLine()-1 );
-    KCoordRange VisibleRange( FullPositions, visibleLines(Ys) );
-
-    KCoordRange ChangedRange;
-    // as there might be multiple selections on this line redo until no more is changed
-    while( hasChanged(VisibleRange,&ChangedRange) )
+    // any colums to paint?
+    if( dirtyColumns.size() > 0 )
     {
-      KPixelY cy = ChangedRange.start().line() * lineHeight() - yOffset();
+        KPixelYs Ys = KPixelYs::fromWidth( yOffset(), visibleHeight() );
 
-      QListIterator<KDataColumn*> it( DirtyColumns );
-      // only one line?
-      if( ChangedRange.start().line() == ChangedRange.end().line() )
-      {
-        while( it.hasNext() )
+        // calculate affected lines/indizes
+        const KHE::KSection fullPositions( 0, mDataLayout->noOfBytesPerLine()-1 );
+        KCoordRange visibleRange( fullPositions, visibleLines(Ys) );
+
+        KCoordRange changedRange;
+        // as there might be multiple selections on this line redo until no more is changed
+        while( hasChanged(visibleRange,&changedRange) )
         {
-          KPixelXs XPixels =
-            it.next()->wideXPixelsOfPos( KHE::KSection(ChangedRange.start().pos(),ChangedRange.end().pos()) );
+            KPixelY cy = changedRange.start().line() * lineHeight() - yOffset();
 
-          viewport()->update( XPixels.start()-xOffset(), cy, XPixels.width(), lineHeight() );
+            QListIterator<KDataColumn*> columnIt( dirtyColumns );
+            // only one line?
+            if( changedRange.start().line() == changedRange.end().line() )
+            {
+                const KHE::KSection changedPositions( changedRange.start().pos(), changedRange.end().pos() );
+                while( columnIt.hasNext() )
+                {
+                    const KPixelXs xPixels = columnIt.next()->wideXPixelsOfPos( changedPositions );
+
+                    viewport()->update( xPixels.start()-xOffset(), cy, xPixels.width(), lineHeight() );
+                }
+            }
+            //
+            else
+            {
+                // first line
+                const KHE::KSection firstChangedPositions( changedRange.start().pos(), fullPositions.end() );
+                while( columnIt.hasNext() )
+                {
+                    const KPixelXs XPixels = columnIt.next()->wideXPixelsOfPos( firstChangedPositions );
+
+                    viewport()->update( XPixels.start()-xOffset(), cy, XPixels.width(), lineHeight() );
+                }
+
+                // at least one full line?
+                for( int l = changedRange.start().line()+1; l < changedRange.end().line(); ++l )
+                {
+                    cy += lineHeight();
+                    columnIt.toFront();
+                    while( columnIt.hasNext() )
+                    {
+                        const KPixelXs XPixels = columnIt.next()->wideXPixelsOfPos( fullPositions );
+
+                        viewport()->update( XPixels.start()-xOffset(), cy, XPixels.width(), lineHeight() );
+                    }
+                }
+                // last line
+                cy += lineHeight();
+                columnIt.toFront();
+                const KHE::KSection lastChangedPositions( fullPositions.start(), changedRange.end().pos() );
+                while( columnIt.hasNext() )
+                {
+                    const KPixelXs XPixels = columnIt.next()->wideXPixelsOfPos( lastChangedPositions );
+
+                    viewport()->update( XPixels.start()-xOffset(), cy, XPixels.width(), lineHeight() );
+                }
+            }
+
+            // continue the search at the overnext index
+            visibleRange.setStart( changedRange.end()+1 ); //+2 ); TODO: currently bounding ranges are not merged
+            if( !visibleRange.isValid() )
+                break;
         }
-      }
-      //
-      else
-      {
-        // first line
-        while( it.hasNext() )
-        {
-          KPixelXs XPixels =
-            it.next()->wideXPixelsOfPos( KHE::KSection(ChangedRange.start().pos(),FullPositions.end()) );
-
-          viewport()->update( XPixels.start()-xOffset(), cy, XPixels.width(), lineHeight() );
-        }
-
-        // at least one full line?
-        for( int l = ChangedRange.start().line()+1; l < ChangedRange.end().line(); ++l )
-        {
-          cy += lineHeight();
-          it.toFront();
-          while( it.hasNext() )
-          {
-            KPixelXs XPixels =
-              it.next()->wideXPixelsOfPos( FullPositions );
-
-            viewport()->update( XPixels.start()-xOffset(), cy, XPixels.width(), lineHeight() );
-          }
-        }
-
-        // last line
-        cy += lineHeight();
-        it.toFront();
-        while( it.hasNext() )
-        {
-          KPixelXs XPixels =
-            it.next()->wideXPixelsOfPos( KHE::KSection(FullPositions.start(),ChangedRange.end().pos()) );
-
-          viewport()->update( XPixels.start()-xOffset(), cy, XPixels.width(), lineHeight() );
-        }
-      }
-
-      // continue the search at the overnext index
-      VisibleRange.setStart( ChangedRange.end()+1 ); //+2 ); TODO: currently bounding ranges are not merged
-      if( !VisibleRange.isValid() )
-        break;
     }
-  }
 
-  BufferRanges->resetChangedRanges();
+    mDataRanges->resetChangedRanges();
 }
 
 
-bool KByteArrayView::hasChanged( const KCoordRange &VisibleRange, KCoordRange *ChangedRange ) const
+bool KByteArrayView::hasChanged( const KCoordRange &visibleRange, KCoordRange *changedRange ) const
 {
-  if( !BufferRanges->overlapsChanges(VisibleRange,ChangedRange) )
-    return false;
+    if( !mDataRanges->overlapsChanges(visibleRange,changedRange) )
+        return false;
 
-  ChangedRange->restrictTo( VisibleRange );
-  return true;
+    changedRange->restrictTo( visibleRange );
+    return true;
 }
 
 
@@ -1588,503 +1570,475 @@ void KByteArrayView::ensureCursorVisible()
 //     return;
 //   }
   //static const int Margin = 10;
-    ensureVisible( activeColumn(), BufferCursor->coord() );
+    ensureVisible( activeColumn(), mDataCursor->coord() );
 }
 
 void KByteArrayView::ensureVisible( const KDataColumn &Column, const KCoord &Coord )
 {
 
-  // TODO: add getCursorRect to BufferColumn
-  const KPixelXs cursorXs = KPixelXs::fromWidth( Column.xOfPos(Coord.pos()),
-                                                 Column.byteWidth() );
+    // TODO: add getCursorRect to BufferColumn
+    const KPixelXs cursorXs = KPixelXs::fromWidth( Column.xOfPos(Coord.pos()),
+                                                    Column.byteWidth() );
 
-  const KPixelYs cursorYs = KPixelYs::fromWidth( lineHeight()*Coord.line(), lineHeight() );
+    const KPixelYs cursorYs = KPixelYs::fromWidth( lineHeight()*Coord.line(), lineHeight() );
 
-  const KPixelXs visibleXs = KPixelXs::fromWidth( xOffset(), visibleWidth() );
-  const KPixelYs visibleYs = KPixelXs::fromWidth( yOffset(), visibleHeight() );
+    const KPixelXs visibleXs = KPixelXs::fromWidth( xOffset(), visibleWidth() );
+    const KPixelYs visibleYs = KPixelXs::fromWidth( yOffset(), visibleHeight() );
 
-  horizontalScrollBar()->setValue( visibleXs.startForInclude(cursorXs) );
-  verticalScrollBar()->setValue( visibleYs.startForInclude(cursorYs) );
+    horizontalScrollBar()->setValue( visibleXs.startForInclude(cursorXs) );
+    verticalScrollBar()->setValue( visibleYs.startForInclude(cursorYs) );
 }
 
 
-void KByteArrayView::mousePressEvent( QMouseEvent *Event )
+void KByteArrayView::mousePressEvent( QMouseEvent *mouseEvent )
 {
-//   clearUndoRedo();
-  pauseCursor( true );
+    pauseCursor( true );
 
-  // care about a left button press?
-  if( Event->button() == Qt::LeftButton )
-  {
-    MousePressed = true;
-
-    // select whole line?
-    if( TrippleClickTimer->isActive()
-        && (Event->globalPos()-DoubleClickPoint).manhattanLength() < QApplication::startDragDistance() )
+    // care about a left button press?
+    if( mouseEvent->button() == Qt::LeftButton )
     {
-      BufferRanges->setSelectionStart( BufferLayout->indexAtLineStart(DoubleClickLine) );
-      BufferCursor->gotoLineEnd();
-      BufferRanges->setSelectionEnd( BufferCursor->realIndex() );
-      updateChanged();
+        mMousePressed = true;
 
-      unpauseCursor();
-      emit cursorPositionChanged( BufferCursor->realIndex() );
-      return;
+        // select whole line?
+        if( mTrippleClickTimer->isActive()
+            && (mouseEvent->globalPos()-mDoubleClickPoint).manhattanLength() < QApplication::startDragDistance() )
+        {
+            mDataRanges->setSelectionStart( mDataLayout->indexAtLineStart(mDoubleClickLine) );
+            mDataCursor->gotoLineEnd();
+            mDataRanges->setSelectionEnd( mDataCursor->realIndex() );
+            updateChanged();
+
+            unpauseCursor();
+            emit cursorPositionChanged( mDataCursor->realIndex() );
+            return;
+        }
+
+        const QPoint mousePoint = viewportToColumns( mouseEvent->pos() );
+        placeCursor( mousePoint );
+        ensureCursorVisible();
+
+        // start of a drag perhaps?
+        if( mDataRanges->selectionIncludes(mDataCursor->index()) )
+        {
+            mDragStartPossible = true;
+            mDragStartTimer->start( QApplication::startDragTime() );
+            mDragStartPoint = mousePoint;
+
+            unpauseCursor();
+            return;
+        }
+
+        const int realIndex = mDataCursor->realIndex();
+        if( mDataRanges->selectionStarted() )
+        {
+            if( mouseEvent->modifiers() & Qt::SHIFT )
+                mDataRanges->setSelectionEnd( realIndex );
+            else
+            {
+                mDataRanges->removeSelection();
+                mDataRanges->setSelectionStart( realIndex );
+            }
+        }
+        else // start of a new selection possible
+        {
+            mDataRanges->setSelectionStart( realIndex );
+
+            if( !isReadOnly() && (mouseEvent->modifiers()&Qt::SHIFT) ) // TODO: why only for readwrite?
+                mDataRanges->setSelectionEnd( realIndex );
+        }
+
+        mDataRanges->removeFurtherSelections();
+    }
+    else if( mouseEvent->button() == Qt::MidButton )
+        mDataRanges->removeSelection();
+
+    if( mDataRanges->isModified() )
+    {
+        updateChanged();
+        viewport()->setCursor( isReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor );
     }
 
-    const QPoint MousePoint = viewportToColumns( Event->pos() );
-    placeCursor( MousePoint );
-    ensureCursorVisible();
-
-    // start of a drag perhaps?
-    if( BufferRanges->selectionIncludes(BufferCursor->index()) )
-    {
-      DragStartPossible = true;
-      DragStartTimer->start( QApplication::startDragTime() );
-      DragStartPoint = MousePoint;
-
-      unpauseCursor();
-      return;
-    }
-
-    int RealIndex = BufferCursor->realIndex();
-    if( BufferRanges->selectionStarted() )
-    {
-      if( Event->modifiers() & Qt::SHIFT )
-        BufferRanges->setSelectionEnd( RealIndex );
-      else
-      {
-        BufferRanges->removeSelection();
-        BufferRanges->setSelectionStart( RealIndex );
-      }
-    }
-    else // start of a new selection possible
-    {
-      BufferRanges->setSelectionStart( RealIndex );
-
-      if( !isReadOnly() && (Event->modifiers()&Qt::SHIFT) ) // TODO: why only for readwrite?
-        BufferRanges->setSelectionEnd( RealIndex );
-    }
-
-    BufferRanges->removeFurtherSelections();
-  }
-  else if( Event->button() == Qt::MidButton )
-    BufferRanges->removeSelection();
-
-  if( BufferRanges->isModified() )
-  {
-    updateChanged();
-    viewport()->setCursor( isReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor );
-  }
-
-  unpauseCursor();
-}
-
-
-void KByteArrayView::mouseMoveEvent( QMouseEvent *Event )
-{
-  QPoint MovePoint = viewportToColumns( Event->pos() );
-
-  if( MousePressed )
-  {
-    if( DragStartPossible )
-    {
-      DragStartTimer->stop();
-      // moved enough for a drag?
-      if( (MovePoint-DragStartPoint).manhattanLength() > QApplication::startDragDistance() )
-        startDrag();
-      if( !isReadOnly() )
-        viewport()->setCursor( Qt::IBeamCursor );
-      return;
-    }
-    // selecting
-    handleMouseMove( MovePoint );
-  }
-  else if( !isReadOnly() )
-  {
-    // visual feedback for possible dragging
-    bool InSelection = BufferRanges->hasSelection() && BufferRanges->selectionIncludes( indexByPoint(MovePoint) );
-    viewport()->setCursor( InSelection?Qt::ArrowCursor:Qt::IBeamCursor );
-  }
-}
-
-
-void KByteArrayView::mouseReleaseEvent( QMouseEvent *Event )
-{
-  const QPoint ReleasePoint = viewportToColumns( Event->pos() );
-
-  // this is not the release of a doubleclick so we need to process it?
-  if( !InDoubleClick )
-  {
-    int Line = lineAt( ReleasePoint.y() );
-    int Pos = activeColumn().posOfX( ReleasePoint.x() ); // TODO: can we be sure here about the active column?
-    int Index = BufferLayout->indexAtCCoord( KCoord(Pos,Line) ); // TODO: can this be another index than the one of the cursor???
-    emit clicked( Index );
-  }
-
-  if( MousePressed )
-  {
-    MousePressed = false;
-
-    if( ScrollTimer->isActive() )
-      ScrollTimer->stop();
-
-    // was only click inside selection, nothing dragged?
-    if( DragStartPossible )
-    {
-      selectAll( false );
-      DragStartTimer->stop();
-      DragStartPossible = false;
-
-      unpauseCursor();
-    }
-    // was end of selection operation?
-    else if( BufferRanges->hasSelection() )
-    {
-      if( QApplication::clipboard()->supportsSelection() )
-      {
-        ClipboardMode = QClipboard::Selection;
-        disconnect( QApplication::clipboard(), SIGNAL(selectionChanged()) );
-
-        copy();
-
-        //TODO: why did we do this? And why does the disconnect above not work?
-        // got connected multiple times after a few selections by mouse
-//         connect( QApplication::clipboard(), SIGNAL(selectionChanged()), SLOT(clipboardChanged()) );
-        ClipboardMode = QClipboard::Clipboard;
-      }
-    }
-  }
-  // middle mouse button paste?
-  else if( Event->button() == Qt::MidButton && !isReadOnly() )
-  {
-    pauseCursor();
-
-    placeCursor( ReleasePoint );
-
-    // replace no selection?
-    if( BufferRanges->hasSelection() && !BufferRanges->selectionIncludes(BufferCursor->index()) )
-      BufferRanges->removeSelection();
-
-    ClipboardMode = QClipboard::Selection;
-    paste();
-    ClipboardMode = QClipboard::Clipboard;
-
-    // ensure selection changes to be drawn TODO: create a insert/pasteAtCursor that leaves out drawing
-    updateChanged();
-
-    ensureCursorVisible();
     unpauseCursor();
-  }
+}
 
-  emit cursorPositionChanged( BufferCursor->realIndex() );
 
-  InDoubleClick = false;
+void KByteArrayView::mouseMoveEvent( QMouseEvent *mouseEvent )
+{
+    const QPoint movePoint = viewportToColumns( mouseEvent->pos() );
 
-  if( BufferRanges->selectionJustStarted() )
-    BufferRanges->removeSelection();
+    if( mMousePressed )
+    {
+        if( mDragStartPossible )
+        {
+            mDragStartTimer->stop();
+            // moved enough for a drag?
+            if( (movePoint-mDragStartPoint).manhattanLength() > QApplication::startDragDistance() )
+                startDrag();
+            if( !isReadOnly() )
+                viewport()->setCursor( Qt::IBeamCursor );
+            return;
+        }
+        // selecting
+        handleMouseMove( movePoint );
+    }
+    else if( !isReadOnly() )
+    {
+        // visual feedback for possible dragging
+        const bool InSelection =
+            mDataRanges->hasSelection() && mDataRanges->selectionIncludes( indexByPoint(movePoint) );
+        viewport()->setCursor( InSelection?Qt::ArrowCursor:Qt::IBeamCursor );
+    }
+}
 
-  if( !OverWrite ) emit cutAvailable( BufferRanges->hasSelection() );
-  emit copyAvailable( BufferRanges->hasSelection() );
-  emit selectionChanged( BufferRanges->hasSelection() );
+
+void KByteArrayView::mouseReleaseEvent( QMouseEvent *mouseEvent )
+{
+    const QPoint releasePoint = viewportToColumns( mouseEvent->pos() );
+
+    // this is not the release of a doubleclick so we need to process it?
+    if( !mInDoubleClick )
+    {
+        const int line = lineAt( releasePoint.y() );
+        const int pos = activeColumn().posOfX( releasePoint.x() ); // TODO: can we be sure here about the active column?
+        const int index = mDataLayout->indexAtCCoord( KCoord(pos,line) ); // TODO: can this be another index than the one of the cursor???
+        emit clicked( index );
+    }
+
+    if( mMousePressed )
+    {
+        mMousePressed = false;
+
+        if( mScrollTimer->isActive() )
+            mScrollTimer->stop();
+
+        // was only click inside selection, nothing dragged?
+        if( mDragStartPossible )
+        {
+            selectAll( false );
+            mDragStartTimer->stop();
+            mDragStartPossible = false;
+
+            unpauseCursor();
+        }
+        // was end of selection operation?
+        else if( mDataRanges->hasSelection() )
+        {
+            if( QApplication::clipboard()->supportsSelection() )
+            {
+                mClipboardMode = QClipboard::Selection;
+                disconnect( QApplication::clipboard(), SIGNAL(selectionChanged()) );
+
+                copy();
+
+                //TODO: why did we do this? And why does the disconnect above not work?
+                // got connected multiple times after a few selections by mouse
+        //         connect( QApplication::clipboard(), SIGNAL(selectionChanged()), SLOT(clipboardChanged()) );
+                mClipboardMode = QClipboard::Clipboard;
+            }
+        }
+    }
+    // middle mouse button paste?
+    else if( mouseEvent->button() == Qt::MidButton && !isReadOnly() )
+    {
+        pauseCursor();
+
+        placeCursor( releasePoint );
+
+        // replace no selection?
+        if( mDataRanges->hasSelection() && !mDataRanges->selectionIncludes(mDataCursor->index()) )
+            mDataRanges->removeSelection();
+
+        mClipboardMode = QClipboard::Selection;
+        paste();
+        mClipboardMode = QClipboard::Clipboard;
+
+        // ensure selection changes to be drawn TODO: create a insert/pasteAtCursor that leaves out drawing
+        updateChanged();
+
+        ensureCursorVisible();
+        unpauseCursor();
+    }
+
+    emit cursorPositionChanged( mDataCursor->realIndex() );
+
+    mInDoubleClick = false;
+
+    if( mDataRanges->selectionJustStarted() )
+        mDataRanges->removeSelection();
+
+    if( !mOverWrite ) emit cutAvailable( mDataRanges->hasSelection() );
+    emit copyAvailable( mDataRanges->hasSelection() );
+    emit selectionChanged( mDataRanges->hasSelection() );
 }
 
 
 // gets called after press and release instead of a plain press event (?)
-void KByteArrayView::mouseDoubleClickEvent( QMouseEvent *Event )
+void KByteArrayView::mouseDoubleClickEvent( QMouseEvent *mouseEvent )
 {
-  // we are only interested in LMB doubleclicks
-  if( Event->button() != Qt::LeftButton )
-  {
-    Event->ignore();
-    return;
-  }
+    // we are only interested in LMB doubleclicks
+    if( mouseEvent->button() != Qt::LeftButton )
+    {
+        mouseEvent->ignore();
+        return;
+    }
 
-  DoubleClickLine = BufferCursor->line();
+    mDoubleClickLine = mDataCursor->line();
 
-  int Index = BufferCursor->validIndex();
+    const int index = mDataCursor->validIndex();
 
-  if( ActiveColumn == &charColumn() )
-  {
-    selectWord( Index );
+    if( mActiveColumn == &charColumn() )
+    {
+        selectWord( index );
 
-    // as we already have a doubleclick maybe it is a tripple click
-    TrippleClickTimer->start( qApp->doubleClickInterval() );
-    DoubleClickPoint = Event->globalPos();
-  }
-//  else
-//    ValueEditor->goInsideByte(); TODO: make this possible again
+        // as we already have a doubleclick maybe it is a tripple click
+        mTrippleClickTimer->start( qApp->doubleClickInterval() );
+        mDoubleClickPoint = mouseEvent->globalPos();
+    }
+    //  else
+    //    mValueEditor->goInsideByte(); TODO: make this possible again
 
-  InDoubleClick = true; //
-  MousePressed = true;
+    mInDoubleClick = true; //
+    mMousePressed = true;
 
-  emit doubleClicked( Index );
+    emit doubleClicked( index );
 }
 
 
 void KByteArrayView::autoScrollTimerDone()
 {
-  if( MousePressed )
-    handleMouseMove( viewportToColumns(viewport()->mapFromGlobal( QCursor::pos() )) );
+    if( mMousePressed )
+        handleMouseMove( viewportToColumns(viewport()->mapFromGlobal( QCursor::pos() )) );
 }
 
 
-void KByteArrayView::handleMouseMove( const QPoint& Point ) // handles the move of the mouse with pressed buttons
+void KByteArrayView::handleMouseMove( const QPoint &point ) // handles the move of the mouse with pressed buttons
 {
-  // no scrolltimer and outside of viewport?
-  if( !ScrollTimer->isActive() && Point.y() < yOffset() || Point.y() > yOffset() + visibleHeight() )
-    ScrollTimer->start( DefaultScrollTimerPeriod );
-  // scrolltimer but inside of viewport?
-  else if( ScrollTimer->isActive() && Point.y() >= yOffset() && Point.y() <= yOffset() + visibleHeight() )
-    ScrollTimer->stop();
+    // no scrolltimer and outside of viewport?
+    if( !mScrollTimer->isActive() && point.y() < yOffset() || point.y() > yOffset() + visibleHeight() )
+        mScrollTimer->start( DefaultScrollTimerPeriod );
+    // scrolltimer but inside of viewport?
+    else if( mScrollTimer->isActive() && point.y() >= yOffset() && point.y() <= yOffset() + visibleHeight() )
+        mScrollTimer->stop();
 
-  pauseCursor();
+    pauseCursor();
 
-  placeCursor( Point );
-  ensureCursorVisible();
+    placeCursor( point );
+    ensureCursorVisible();
 
-  // do wordwise selection?
-  if( InDoubleClick && BufferRanges->hasFirstWordSelection() )
-  {
-    int NewIndex = BufferCursor->realIndex();
-    KHE::KSection FirstWordSelection = BufferRanges->firstWordSelection();
-    KHECore::KWordBufferService WBS( ByteArrayModel, Codec );
-    // are we before the selection?
-    if( NewIndex < FirstWordSelection.start() )
+    // do wordwise selection?
+    if( mInDoubleClick && mDataRanges->hasFirstWordSelection() )
     {
-      BufferRanges->ensureWordSelectionForward( false );
-      NewIndex = WBS.indexOfLeftWordSelect( NewIndex );
+        int newIndex = mDataCursor->realIndex();
+        const KHE::KSection firstWordSelection = mDataRanges->firstWordSelection();
+        const KHECore::KWordBufferService WBS( mByteArrayModel, mCharCodec );
+        // are we before the selection?
+        if( newIndex < firstWordSelection.start() )
+        {
+            mDataRanges->ensureWordSelectionForward( false );
+            newIndex = WBS.indexOfLeftWordSelect( newIndex );
+        }
+        // or behind?
+        else if( newIndex > firstWordSelection.end() )
+        {
+            mDataRanges->ensureWordSelectionForward( true );
+            newIndex = WBS.indexOfRightWordSelect( newIndex );
+        }
+        // or inside?
+        else
+        {
+            mDataRanges->ensureWordSelectionForward( true );
+            newIndex = firstWordSelection.behindEnd();
+        }
+
+        mDataCursor->gotoIndex( newIndex );
     }
-    // or behind?
-    else if( NewIndex > FirstWordSelection.end() )
-    {
-      BufferRanges->ensureWordSelectionForward( true );
-      NewIndex = WBS.indexOfRightWordSelect( NewIndex );
-    }
-    // or inside?
-    else
-    {
-      BufferRanges->ensureWordSelectionForward( true );
-      NewIndex = FirstWordSelection.behindEnd();
-    }
 
-    BufferCursor->gotoIndex( NewIndex );
-  }
+    if( mDataRanges->selectionStarted() )
+        mDataRanges->setSelectionEnd( mDataCursor->realIndex() );
 
-  if( BufferRanges->selectionStarted() )
-    BufferRanges->setSelectionEnd( BufferCursor->realIndex() );
+    updateChanged();
 
-  updateChanged();
-
-  unpauseCursor();
-  emit cursorPositionChanged( BufferCursor->realIndex() );
+    unpauseCursor();
+    emit cursorPositionChanged( mDataCursor->realIndex() );
 }
 
 
 void KByteArrayView::startDrag()
 {
-  // reset states
-  MousePressed = false;
-  InDoubleClick = false;
-  DragStartPossible = false;
+    // reset states
+    mMousePressed = false;
+    mInDoubleClick = false;
+    mDragStartPossible = false;
 
-  // create data
-  QMimeData *DragData = dragObject();
-  if( !DragData )
-    return;
+    // create data
+    QMimeData *dragData = dragObject();
+    if( !dragData )
+        return;
 
-  QDrag *drag = new QDrag( viewport() );
-  drag->setMimeData( DragData );
+    QDrag *drag = new QDrag( viewport() );
+    drag->setMimeData( dragData );
 
-  Qt::DropActions request = (isReadOnly()||OverWrite) ? Qt::CopyAction : Qt::CopyAction|Qt::MoveAction;
-  Qt::DropAction dropAction = drag->exec( request );
+    Qt::DropActions request = (isReadOnly()||mOverWrite) ? Qt::CopyAction : Qt::CopyAction|Qt::MoveAction;
+    Qt::DropAction dropAction = drag->exec( request );
 
-  if( dropAction == Qt::MoveAction )
-    // Not inside this widget itself?
-    if( drag->target() != this && drag->target() != viewport() )
-      removeSelectedData();
+    if( dropAction == Qt::MoveAction )
+        // Not inside this widget itself?
+        if( drag->target() != this && drag->target() != viewport() )
+        removeSelectedData();
 
-  delete drag;
+    delete drag;
 }
 
 
 void KByteArrayView::dragEnterEvent( QDragEnterEvent *event )
 {
-  // interesting for this widget?
-  if( isReadOnly() || !event->mimeData()->hasFormat("application/octet-stream") )
-  {
-    event->ignore();
-    return;
-  }
+    // interesting for this widget?
+    if( isReadOnly() || !event->mimeData()->hasFormat(DataFormatName) )
+    {
+        event->ignore();
+        return;
+    }
 
-  event->accept();
-  InDnD = true;
+    event->accept();
+    mInDnD = true;
 }
 
 
 void KByteArrayView::dragMoveEvent( QDragMoveEvent *event )
 {
-  // is this content still interesting for us?
-  if( isReadOnly() || !event->mimeData()->hasFormat("application/octet-stream") )
-  {
-    event->ignore();
-    return;
-  }
+    // is this content still interesting for us?
+    if( isReadOnly() || !event->mimeData()->hasFormat(DataFormatName) )
+    {
+        event->ignore();
+        return;
+    }
 
-  // let text cursor follow mouse
-  pauseCursor( true );
-  placeCursor( event->pos() );
-  unpauseCursor();
+    // let text cursor follow mouse
+    pauseCursor( true );
+    placeCursor( event->pos() );
+    unpauseCursor();
 
-  event->accept();
+    event->accept();
 }
 
 
 void KByteArrayView::dragLeaveEvent( QDragLeaveEvent * )
 {
-  // bye... and thanks for all the cursor movement...
-  InDnD = false;
+    // bye... and thanks for all the cursor movement...
+    mInDnD = false;
 }
 
 
-
-void KByteArrayView::dropEvent( QDropEvent *Event )
+void KByteArrayView::dropEvent( QDropEvent *dropEvent )
 {
-  // after drag enter and move check one more time
-  if( isReadOnly() )
-    return;
+    // after drag enter and move check one more time
+    if( isReadOnly() )
+        return;
 
-  // leave state
-  InDnD = false;
-  Event->accept();
+    // leave state
+    mInDnD = false;
+    dropEvent->accept();
 
-  // is this an internal dnd?
-  if( Event->source() == this || Event->source() == viewport() )
-    handleInternalDrag( Event );
-  else
-  {
-   //BufferRanges->removeSelection();
-    pasteFromSource( Event->mimeData() );
-  }
-}
-
-
-void KByteArrayView::handleInternalDrag( QDropEvent *Event )
-{
-  // get drag origin
-  KHE::KSection Selection = BufferRanges->removeSelection();
-  int InsertIndex = BufferCursor->realIndex();
-
-  // is this a move?
-  if( Event->proposedAction() == Qt::MoveAction )
-  {
-    // ignore the copy hold in the event but only move
-    int newCursorIndex;
-    // need to swap?
-    if( Selection.end() < InsertIndex )
-    {
-      newCursorIndex = InsertIndex;
-      const int firstIndex = Selection.start();
-      Selection.set( Selection.behindEnd(), InsertIndex-1 );
-      InsertIndex = firstIndex;
-    }
+    // is this an internal dnd?
+    if( dropEvent->source() == this || dropEvent->source() == viewport() )
+        handleInternalDrag( dropEvent );
     else
-      newCursorIndex = InsertIndex + Selection.width();
-
-    const bool success = ByteArrayModel->swap( InsertIndex, Selection );
-    if( success )
     {
-      BufferCursor->gotoCIndex( newCursorIndex );
-      BufferRanges->addChangedRange( KHE::KSection(InsertIndex,Selection.end()) );
-      emit cursorPositionChanged( BufferCursor->realIndex() );
+    //mDataRanges->removeSelection();
+        pasteFromSource( dropEvent->mimeData() );
     }
-  }
-  // is a copy
-  else
-  {
-    // get data
-    QByteArray Data = Event->mimeData()->data( "application/octet-stream" );
+}
 
-    if( !Data.isEmpty() )
+
+void KByteArrayView::handleInternalDrag( QDropEvent *dropEvent )
+{
+    // get drag origin
+    KHE::KSection selection = mDataRanges->removeSelection();
+    int insertIndex = mDataCursor->realIndex();
+
+    // is this a move?
+    if( dropEvent->proposedAction() == Qt::MoveAction )
     {
-      if( OverWrite )
-      {
-        if( !BufferCursor->isBehind() )
+        // ignore the copy hold in the event but only move
+        int newCursorIndex;
+        // need to swap?
+        if( selection.end() < insertIndex )
         {
-          KHE::KSection OverwriteRange = KHE::KSection::fromWidth( InsertIndex, Data.size() );
-          OverwriteRange.restrictEndTo( BufferLayout->length()-1 );
-          if( OverwriteRange.isValid() )
-            ByteArrayModel->replace( OverwriteRange, Data.data(), OverwriteRange.width() );
+            newCursorIndex = insertIndex;
+            const int firstIndex = selection.start();
+            selection.set( selection.behindEnd(), insertIndex-1 );
+            insertIndex = firstIndex;
         }
-      }
-      else
-        ByteArrayModel->insert( InsertIndex, Data.data(), Data.size() );
+        else
+            newCursorIndex = insertIndex + selection.width();
+
+        const bool success = mByteArrayModel->swap( insertIndex, selection );
+        if( success )
+        {
+            mDataCursor->gotoCIndex( newCursorIndex );
+            mDataRanges->addChangedRange( KHE::KSection(insertIndex,selection.end()) );
+            emit cursorPositionChanged( mDataCursor->realIndex() );
+        }
     }
-  }
-}
-
-
-void KByteArrayView::wheelEvent( QWheelEvent *Event )
-{
-  if( isReadOnly() )
-  {
-    if( Event->modifiers() & Qt::CTRL )
+    // is a copy
+    else
     {
-      if( Event->delta() > 0 )
-        zoomOut();
-      else if( Event->delta() < 0 )
-        zoomIn();
-      return;
+        // get data
+        QByteArray data = dropEvent->mimeData()->data( DataFormatName );
+
+        if( !data.isEmpty() )
+        {
+            if( mOverWrite )
+            {
+                if( !mDataCursor->isBehind() )
+                {
+                    KHE::KSection overwriteRange = KHE::KSection::fromWidth( insertIndex, data.size() );
+                    overwriteRange.restrictEndTo( mDataLayout->length()-1 );
+                    if( overwriteRange.isValid() )
+                        mByteArrayModel->replace( overwriteRange, data.data(), overwriteRange.width() );
+                }
+            }
+            else
+                mByteArrayModel->insert( insertIndex, data.data(), data.size() );
+        }
     }
-  }
-  KColumnsView::wheelEvent( Event );
 }
 
 
-#if 0
-void KByteArrayView::contextMenuEvent( QContextMenuEvent *Event )
+void KByteArrayView::wheelEvent( QWheelEvent *mouseWheelEvent )
 {
-//   clearUndoRedo();
-  MousePressed = false;
 
-  Event->accept();
-
-  QPopupMenu *PopupMenu = createPopupMenu( Event->pos() );
-  if( !PopupMenu )
-    PopupMenu = createPopupMenu();
-  if( !PopupMenu )
-    return;
-  int r = PopupMenu->exec( Event->globalPos() );
-  delete PopupMenu;
-
-  if ( r == d->id[ IdClear ] )
-    clear();
-  else if ( r == d->id[ IdSelectAll ] )
-  {
-    selectAll();
-    // if the clipboard support selections, put the newly selected text into the clipboard
-    if( QApplication::clipboard()->supportsSelection() )
+    if( mouseWheelEvent->modifiers() & Qt::CTRL )
     {
-      ClipboardMode = QClipboard::Selection;
-      disconnect( QApplication::clipboard(), SIGNAL(selectionChanged()));
+        const int delta = mouseWheelEvent->delta();
+        if( delta > 0 )
+            zoomOut();
+        else if( delta < 0 )
+            zoomIn();
 
-      copy();
-
-      connect( QApplication::clipboard(), SIGNAL(selectionChanged()), this, SLOT(clipboardChanged()) );
-      ClipboardMode = QClipboard::Clipboard;
+        mouseWheelEvent->accept();
+        return;
     }
-  }
-  else if( r == d->id[IdUndo] )
-    undo();
-  else if( r == d->id[IdRedo] )
-    redo();
-  else if( r == d->id[IdCut] )
-    cut();
-  else if( r == d->id[IdCopy] )
-    copy();
-  else if( r == d->id[IdPaste] )
-    paste();
+
+    KColumnsView::wheelEvent( mouseWheelEvent );
 }
-#endif
+
+
+KByteArrayView::~KByteArrayView()
+{
+    delete mTabController;
+    delete mNavigator;
+    delete mValueEditor;
+    delete mCharEditor;
+
+    delete mDataCursor;
+    delete mDataRanges;
+    delete mDataLayout;
+
+    delete mCharCodec;
+    delete mCursorPixmaps;
+
+    delete d;
+}
 
 }

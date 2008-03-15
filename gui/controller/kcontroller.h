@@ -34,15 +34,16 @@ class KByteArrayView;
 class KController
 {
   protected:
-    virtual ~KController(){}
     KController( KByteArrayView *view, KController *parent );
+  public:
+    virtual ~KController();
 
-  public: // KController API
-    virtual bool handleKeyPress( QKeyEvent *KeyEvent );
+  public: // API to be implemented
+    virtual bool handleKeyPress( QKeyEvent *keyEvent );
 
   protected:
-    KController *Parent;
-    KByteArrayView *View;
+    KController *mParent;
+    KByteArrayView *mView;
 };
 
 }

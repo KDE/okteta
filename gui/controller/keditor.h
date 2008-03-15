@@ -39,18 +39,19 @@ class KEditor : public KController
     enum KEditAction { CharDelete, WordDelete, CharBackspace, WordBackspace };
 
   protected:
-    KEditor( KDataCursor *BC, KByteArrayView *view, KController *parent );
+    KEditor( KDataCursor *dataCursor, KByteArrayView *view, KController *parent );
+  public:
+    virtual ~KEditor();
 
-  public: // API
-    virtual ~KEditor(){}
-    virtual bool handleKeyPress( QKeyEvent *KeyEvent );
+  public: // KController API
+    virtual bool handleKeyPress( QKeyEvent *keyEvent );
 
   protected:
     /** executes keyboard Action \a Action. This is normally called by a key event handler. */
     void doEditAction( KEditAction Action );
 
   protected:
-    KDataCursor *BufferCursor;
+    KDataCursor *mDataCursor;
 };
 
 }

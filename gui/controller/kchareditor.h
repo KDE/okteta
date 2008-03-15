@@ -36,14 +36,14 @@ class KCharColumn;
 class KCharEditor : public KEditor
 {
   public:
-    virtual ~KCharEditor(){}
-    KCharEditor( KCharColumn *CC, KDataCursor *BC, KByteArrayView *view, KController *parent );
+    KCharEditor( KCharColumn *charColumn, KDataCursor *dataCursor, KByteArrayView *view, KController *parent );
+    virtual ~KCharEditor();
 
-  public: // KEditor API
-    virtual bool handleKeyPress( QKeyEvent *KeyEvent );
+  public: // KController API
+    virtual bool handleKeyPress( QKeyEvent *keyEvent );
 
   protected:
-    KCharColumn *CharColumn;
+    KCharColumn *mCharColumn;
 };
 
 }

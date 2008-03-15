@@ -35,188 +35,190 @@
 
 namespace KHEUI {
 
-KValueEditor::KValueEditor( KValueColumn *VC, KDataCursor *BC, KByteArrayView* view, KController *parent )
-  : KEditor( BC, view, parent ),
-  ValueColumn( VC ),
-  InEditMode( false ),
-  EditModeByInsert( false )
+KValueEditor::KValueEditor( KValueColumn *valueColumn, KDataCursor *dataCursor, KByteArrayView* view, KController *parent )
+  : KEditor( dataCursor, view, parent ),
+  mValueColumn( valueColumn ),
+  mInEditMode( false ),
+  mEditModeByInsert( false )
 {
 }
 
 
-bool KValueEditor::handleKeyPress( QKeyEvent *KeyEvent )
+bool KValueEditor::handleKeyPress( QKeyEvent *keyEvent )
 {
-  bool KeyUsed = true;
+    bool keyUsed = true;
 
-  // TODO: for now we don't touch it if there are selections
-  if( !View->BufferRanges->hasSelection() )
-  {
-    //
-    switch( KeyEvent->key() )
+    // TODO: for now we don't touch it if there are selections
+    if( !mView->mDataRanges->hasSelection() )
     {
-      case Qt::Key_Plus:
-        doValueEditAction( IncValue );
-        break;
-      case Qt::Key_Minus:
-        doValueEditAction( DecValue );
-        break;
-      case Qt::Key_Space:
-        if( !InEditMode )
+        //
+        switch( keyEvent->key() )
         {
-          KeyUsed = false;
-          break;
-        }
-      case Qt::Key_Enter:
-      case Qt::Key_Return:
-        doValueEditAction( InEditMode?LeaveValue:EnterValue );
-        break;
-      case Qt::Key_Escape:
-        if( InEditMode )
-          doValueEditAction( CancelValue );
-        else
-          KeyUsed = false;
-        break;
-      case Qt::Key_Backspace:
-        if( InEditMode )
-          doValueEditAction( ValueBackspace );
-        else
-          KeyUsed = false;
-        break;
-      default:
-        // is plain char?
-        if( KeyEvent->text().length() > 0
-            && ( !(KeyEvent->modifiers()&( Qt::CTRL | Qt::ALT | Qt::META )) ) )
-        {
-          int Input = KeyEvent->text()[0].toAscii();
-          // no usable char?
-          if( Input < 32 )
-          {
-            KeyUsed = false;
+        case Qt::Key_Plus:
+            doValueEditAction( IncValue );
             break;
-          }
-
-          if( InEditMode )
-            doValueEditAction( ValueAppend, Input );
-          else
-          {
-            unsigned char InputValue = 0;
-            const KHECore::ValueCodec *ByteCodec = ValueColumn->byteCodec();
-            // valid digit?
-            if( ByteCodec->appendDigit(&InputValue,Input) )
+        case Qt::Key_Minus:
+            doValueEditAction( DecValue );
+            break;
+        case Qt::Key_Space:
+            if( !mInEditMode )
             {
-              if( View->OverWrite )
-                doValueEditAction( ValueEdit, InputValue );
-              else
-              {
-                int Index = BufferCursor->realIndex();
-                if( View->ByteArrayModel->insert(Index,(char*)&InputValue,1) > 0 )
-                {
-                  InEditMode = true;
-                  EditModeByInsert = true;
-                  OldValue = EditValue = InputValue;
-                  ByteCodec->encode( ByteBuffer, 0, EditValue );
-
-                  BufferCursor->gotoRealIndex();
-                  View->ensureCursorVisible();
-                  View->updateCursors();
-                }
-              }
+                keyUsed = false;
+                break;
             }
-          }
+        case Qt::Key_Enter:
+        case Qt::Key_Return:
+            doValueEditAction( mInEditMode?LeaveValue:EnterValue );
+            break;
+        case Qt::Key_Escape:
+            if( mInEditMode )
+                doValueEditAction( CancelValue );
+            else
+                keyUsed = false;
+            break;
+        case Qt::Key_Backspace:
+            if( mInEditMode )
+                doValueEditAction( ValueBackspace );
+            else
+                keyUsed = false;
+            break;
+        default:
+            // is plain char?
+            if( keyEvent->text().length() > 0
+                && ( !(keyEvent->modifiers()&( Qt::CTRL | Qt::ALT | Qt::META )) ) )
+            {
+                const int input = keyEvent->text()[0].toAscii();
+                // no usable char?
+                if( input < 32 )
+                {
+                    keyUsed = false;
+                    break;
+                }
+
+                if( mInEditMode )
+                    doValueEditAction( ValueAppend, input );
+                else
+                {
+                    unsigned char InputValue = 0;
+                    const KHECore::ValueCodec *byteCodec = mValueColumn->byteCodec();
+                    // valid digit?
+                    if( byteCodec->appendDigit(&InputValue,input) )
+                    {
+                        if( mView->isOverwriteMode() )
+                            doValueEditAction( ValueEdit, InputValue );
+                        else
+                        {
+                            const int index = mDataCursor->realIndex();
+                            if( mView->mByteArrayModel->insert(index,(char*)&InputValue,1) > 0 )
+                            {
+                                mInEditMode = true;
+                                mEditModeByInsert = true;
+                                mOldValue = mEditValue = InputValue;
+                                byteCodec->encode( mByteBuffer, 0, mEditValue );
+
+                                mDataCursor->gotoRealIndex();
+                                mView->ensureCursorVisible();
+                                mView->updateCursors();
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            keyUsed = false;
         }
-        else
-          KeyUsed = false;
     }
-  }
-  else
-    KeyUsed = false;
+    else
+        keyUsed = false;
 
-  return KeyUsed ? true : KEditor::handleKeyPress(KeyEvent);
+    return keyUsed ? true : KEditor::handleKeyPress(keyEvent);
 }
 
 
-void KValueEditor::doValueEditAction( KValueEditAction Action, int Input )
+void KValueEditor::doValueEditAction( KValueEditAction Action, int input )
 {
-  // we are not yet in edit mode?
-  if( !InEditMode )
-  {
-    int ValidIndex = BufferCursor->validIndex();
-    // no valid cursor position?
-    if( ValidIndex == -1 || (!View->OverWrite && Input == -1) || BufferCursor->isBehind() )
-      return;
+    // we are not yet in edit mode?
+    if( !mInEditMode )
+    {
+        const int validIndex = mDataCursor->validIndex();
+        // no valid cursor position?
+        if( validIndex == -1 || (!mView->isOverwriteMode() && input == -1) || mDataCursor->isBehind() )
+            return;
 
-    InEditMode = true;
-    EditModeByInsert = false; // default, to be overwritten if so
+        mInEditMode = true;
+        mEditModeByInsert = false; // default, to be overwritten if so
 
-    // save old value
-    OldValue = EditValue = (unsigned char)View->ByteArrayModel->datum(ValidIndex);
-  }
+        // save old value
+        mOldValue = mEditValue = (unsigned char)mView->mByteArrayModel->datum( validIndex );
+    }
 
-  const KHECore::ValueCodec *ByteCodec = ValueColumn->byteCodec();
-  // 
-  unsigned char NewValue = EditValue;
-  bool StayInEditMode = true;
-  bool MoveToNext = false;
+    const KHECore::ValueCodec *byteCodec = mValueColumn->byteCodec();
+    // 
+    unsigned char newValue = mEditValue;
+    bool stayInEditMode = true;
+    bool moveToNext = false;
 
-  switch( Action )
-  {
+    switch( Action )
+    {
     case ValueEdit:
-      NewValue = Input;
-      EditValue = NewValue^255; // force update
-      EditModeByInsert = true;
-      break;
+        newValue = input;
+        mEditValue = newValue^255; // force update
+        mEditModeByInsert = true;
+        break;
     case ValueBackspace:
-      if( NewValue > 0 )
-        ByteCodec->removeLastDigit( &NewValue );
-      break;
+        if( newValue > 0 )
+            byteCodec->removeLastDigit( &newValue );
+        break;
     case EnterValue:
-      EditValue ^= 255; // force update
-      break;
+        mEditValue ^= 255; // force update
+        break;
     case IncValue:
-      if( NewValue < 255 )
-        ++NewValue;
-      break;
+        if( newValue < 255 )
+            ++newValue;
+        break;
     case DecValue:
-      if( NewValue > 0 )
-        --NewValue;
-      break;
+        if( newValue > 0 )
+            --newValue;
+        break;
     case ValueAppend:
-      if( ByteCodec->appendDigit(&NewValue,Input) )
-        if( EditModeByInsert && NewValue >= ByteCodec->digitsFilledLimit() )
-        {
-          StayInEditMode = false;
-          MoveToNext = true;
-        }
-      break;
+        if( byteCodec->appendDigit(&newValue,input) )
+            if( mEditModeByInsert && newValue >= byteCodec->digitsFilledLimit() )
+            {
+                stayInEditMode = false;
+                moveToNext = true;
+            }
+        break;
     case LeaveValue:
-      StayInEditMode = false;
-      MoveToNext = EditModeByInsert;
-      break;
+        stayInEditMode = false;
+        moveToNext = mEditModeByInsert;
+        break;
     case CancelValue:
-      NewValue = OldValue;
-      StayInEditMode = false;
-      break;
-  }
+        newValue = mOldValue;
+        stayInEditMode = false;
+        break;
+    }
 
-  // change happened?
-  if( NewValue != EditValue )
-  {
-    // sync value
-    EditValue = NewValue;
-    ByteCodec->encode( ByteBuffer, 0, EditValue );
-    View->ByteArrayModel->replace( BufferCursor->index(), 1, (char*)&EditValue, 1 );
-  }
+    // change happened?
+    if( newValue != mEditValue )
+    {
+        // sync value
+        mEditValue = newValue;
+        byteCodec->encode( mByteBuffer, 0, mEditValue );
+        mView->mByteArrayModel->replace( mDataCursor->index(), 1, (char*)&mEditValue, 1 );
+    }
 
-  View->updateCursors();
+    mView->updateCursors();
 
-  if( !StayInEditMode )
-  {
-    View->pauseCursor();
-    InEditMode = false;
-    if( MoveToNext )
-      BufferCursor->gotoNextByte();
-    View->unpauseCursor();
-  }
+    if( !stayInEditMode )
+    {
+        mView->pauseCursor();
+        mInEditMode = false;
+        if( moveToNext )
+            mDataCursor->gotoNextByte();
+        mView->unpauseCursor();
+    }
 }
+
+KValueEditor::~KValueEditor() {}
 
 }

@@ -34,34 +34,35 @@
 namespace KHEUI {
 
 
-KCharEditor::KCharEditor( KCharColumn *CC, KDataCursor *BC, KByteArrayView *view, KController *parent )
-  : KEditor( BC, view, parent ),
-  CharColumn( CC )
+KCharEditor::KCharEditor( KCharColumn *charColumn, KDataCursor *dataCursor, KByteArrayView *view, KController *parent )
+  : KEditor( dataCursor, view, parent ),
+  mCharColumn( charColumn )
 {
 }
 
 
-bool KCharEditor::handleKeyPress( QKeyEvent *KeyEvent )
+bool KCharEditor::handleKeyPress( QKeyEvent *keyEvent )
 {
-  bool KeyUsed = false;
-  // some input that should be inserted?
-  if( KeyEvent->text().length() > 0
-      && !(KeyEvent->modifiers()&( Qt::CTRL | Qt::ALT | Qt::META )) )
-  {
-    QChar C = KeyEvent->text()[0];
-    if( C.isPrint() )
+    bool keyUsed = false;
+    // some input that should be inserted?
+    if( keyEvent->text().length() > 0
+        && !(keyEvent->modifiers()&( Qt::CTRL | Qt::ALT | Qt::META )) )
     {
-      QByteArray D( 1, 0 );
-      if( CharColumn->codec()->encode(D.data(),C) )
-      {
-        //         clearUndoRedoInfo = false;
-        View->insert( D );
-        KeyUsed = true;
-      }
+        const QChar enteredChar = keyEvent->text()[0];
+        if( enteredChar.isPrint() )
+        {
+            QByteArray data( 1, 0 );
+            if( mCharColumn->codec()->encode(data.data(),enteredChar) )
+            {
+                mView->insert( data );
+                keyUsed = true;
+            }
+        }
     }
-  }
 
-  return KeyUsed ? true : KEditor::handleKeyPress(KeyEvent);
+    return keyUsed ? true : KEditor::handleKeyPress(keyEvent);
 }
+
+KCharEditor::~KCharEditor() {}
 
 }

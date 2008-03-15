@@ -22,20 +22,20 @@
 
 #include "kcontroller.h"
 
-// lib
-#include "kbytearrayview.h"
 
-
-namespace KHEUI {
+namespace KHEUI
+{
 
 KController::KController( KByteArrayView* view, KController *parent )
-  : Parent( parent ), View( view )
+  : mParent( parent ), mView( view )
 {
 }
 
-bool KController::handleKeyPress( QKeyEvent *KeyEvent )
+bool KController::handleKeyPress( QKeyEvent *keyEvent )
 {
-  return Parent ? Parent->handleKeyPress( KeyEvent ) : false;
+    return mParent ? mParent->handleKeyPress( keyEvent ) : false;
 }
+
+KController::~KController() {}
 
 }

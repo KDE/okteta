@@ -30,49 +30,50 @@
 #include <QtGui/QKeyEvent>
 
 
-namespace KHEUI {
+namespace KHEUI
+{
 
 KTabController::KTabController( KByteArrayView* view, KController *parent )
   : KController( view, parent ),
-    TabChangesFocus( false )
+    mTabChangesFocus( false )
 {
 }
 
 
-bool KTabController::handleKeyPress( QKeyEvent *KeyEvent )
+bool KTabController::handleKeyPress( QKeyEvent *keyEvent )
 {
-  bool KeyUsed = false;
+    bool keyUsed = false;
 
-  bool ShiftPressed =  KeyEvent->modifiers() & Qt::SHIFT;
+    const bool shiftPressed =  keyEvent->modifiers() & Qt::SHIFT;
 
-  if( KeyEvent->key() == Qt::Key_Tab )
-  {
-    // are we in the char column?
-    if( View->cursorColumn() == KByteArrayView::CharColumnId )
+    if( keyEvent->key() == Qt::Key_Tab )
     {
-        // in last column we care about tab changes focus
-      if( View->ValueColumn->isVisible() && (!TabChangesFocus || ShiftPressed) )
-      {
-        View->setCursorColumn( KByteArrayView::ValueColumnId );
-        KeyUsed = true;
-      }
-    }
-    // value column then
-    else
-    {
-      if( View->CharColumn->isVisible() )
-      {
-          // in last column we care about tab changes focus
-        if( View->CharColumn->isVisible() && (!TabChangesFocus || !ShiftPressed) )
+        // are we in the char column?
+        if( mView->cursorColumn() == KByteArrayView::CharColumnId )
         {
-          View->setCursorColumn( KByteArrayView::CharColumnId );
-          KeyUsed = true;
+            // in last column we care about tab changes focus
+            if( mView->mValueColumn->isVisible() && (!mTabChangesFocus || shiftPressed) )
+            {
+                mView->setCursorColumn( KByteArrayView::ValueColumnId );
+                keyUsed = true;
+            }
         }
-      }
+        // value column then
+        else
+        {
+            if( mView->mCharColumn->isVisible() )
+            {
+                // in last column we care about tab changes focus
+                if( mView->mCharColumn->isVisible() && (!mTabChangesFocus || !shiftPressed) )
+                {
+                    mView->setCursorColumn( KByteArrayView::CharColumnId );
+                    keyUsed = true;
+                }
+            }
+        }
     }
-  }
 
-  return KeyUsed ? true : KController::handleKeyPress(KeyEvent);
+    return keyUsed ? true : KController::handleKeyPress(keyEvent);
 }
 
 }

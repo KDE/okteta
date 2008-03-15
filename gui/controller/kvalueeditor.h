@@ -43,11 +43,11 @@ class KValueEditor: public KEditor
     { EnterValue, IncValue, DecValue, ValueAppend, ValueEdit, LeaveValue, CancelValue, ValueBackspace };
 
   public:
-    KValueEditor( KValueColumn *VC, KDataCursor *BC, KByteArrayView *view, KController *parent );
+    KValueEditor( KValueColumn *valueColumne, KDataCursor *dataCursor, KByteArrayView *view, KController *parent );
     virtual ~KValueEditor();
 
-  public: // KEditor API
-    virtual bool handleKeyPress( QKeyEvent *KeyEvent );
+  public: // KController API
+    virtual bool handleKeyPress( QKeyEvent *keyEvent );
 
   public:
     void reset();
@@ -60,23 +60,21 @@ class KValueEditor: public KEditor
     void doValueEditAction( KValueEditAction Action, int Input = -1 );
 
   public://protected:
-    KValueColumn *ValueColumn;
+    KValueColumn *mValueColumn;
     /** flag whether we are in editing mode */
-    bool InEditMode:1;
+    bool mInEditMode:1;
     /** flag whether byte edit mode was reached by inserting */
-    bool EditModeByInsert:1;
+    bool mEditModeByInsert:1;
     /** */
-    unsigned char EditValue;
+    unsigned char mEditValue;
     /** stores the old byte value */
-    unsigned char OldValue;
+    unsigned char mOldValue;
     /** buffer with the  */
-    QString ByteBuffer;
+    QString mByteBuffer;
 };
 
-inline KValueEditor::~KValueEditor() {}
-
-inline bool KValueEditor::isInEditMode() const { return InEditMode; }
-inline void KValueEditor::reset() { InEditMode = false; }
+inline bool KValueEditor::isInEditMode() const { return mInEditMode; }
+inline void KValueEditor::reset() { mInEditMode = false; }
 
 }
 

@@ -68,8 +68,6 @@ class KCharEditor;
 
 class KCursor;
 
-class KByteArrayViewPrivate;
-
 
 /** the main widget
   * 
@@ -108,8 +106,6 @@ class KHEUI_EXPORT KByteArrayView : public KColumnsView
   Q_PROPERTY( KResizeStyle ResizeStyle READ resizeStyle WRITE setResizeStyle )
   Q_PROPERTY( int StartOffset READ startOffset WRITE setStartOffset )
   Q_PROPERTY( int FirstLineOffset READ firstLineOffset WRITE setFirstLineOffset )
-  //_PROPERTY( int undoDepth READ undoDepth WRITE setUndoDepth )
-  //_PROPERTY( bool undoRedoEnabled READ isUndoRedoEnabled WRITE setUndoRedoEnabled )
   // value column
   Q_PROPERTY( KCoding Coding READ coding WRITE setCoding )
   Q_PROPERTY( int ByteSpacingWidth READ byteSpacingWidth WRITE setByteSpacingWidth )
@@ -473,97 +469,97 @@ class KHEUI_EXPORT KByteArrayView : public KColumnsView
 
   protected:
     /** Buffer with the data */
-    KHECore::KAbstractByteArrayModel *ByteArrayModel;
+    KHECore::KAbstractByteArrayModel *mByteArrayModel;
 
     /** holds the logical layout */
-    KDataLayout *BufferLayout;
+    KDataLayout *mDataLayout;
     /** */
-    KDataCursor *BufferCursor;
+    KDataCursor *mDataCursor;
     /** */
-    KDataRanges *BufferRanges;
+    KDataRanges *mDataRanges;
 
 
   protected:
-    KOffsetColumn *OffsetColumn;
-    KBorderColumn *FirstBorderColumn;
-    KValueColumn  *ValueColumn;
-    KBorderColumn *SecondBorderColumn;
-    KCharColumn   *CharColumn;
+    KOffsetColumn *mOffsetColumn;
+    KBorderColumn *mFirstBorderColumn;
+    KValueColumn  *mValueColumn;
+    KBorderColumn *mSecondBorderColumn;
+    KCharColumn   *mCharColumn;
 
     /** points to the column with keyboard focus */
-    KDataColumn *ActiveColumn;
+    KDataColumn *mActiveColumn;
     /** points to the column without keyboard focus (if there is) */
-    KDataColumn *InactiveColumn;
+    KDataColumn *mInactiveColumn;
 
     /** the actual input controller */
-    KController *Controller;
+    KController *mController;
     /** */
-    KTabController *TabController;
+    KTabController *mTabController;
     /** */
-    KNavigator *Navigator;
+    KNavigator *mNavigator;
     /** */
-    KValueEditor *ValueEditor;
+    KValueEditor *mValueEditor;
     /** */
-    KCharEditor *CharEditor;
+    KCharEditor *mCharEditor;
 
   protected:
     /** Timer that controls the blinking of the cursor */
-    QTimer *CursorBlinkTimer;
+    QTimer *mCursorBlinkTimer;
     /** Timer that triggers ensureCursorVisible function calls */
-    QTimer *ScrollTimer;
+    QTimer *mScrollTimer;
 /*     QTimer *ChangeIntervalTimer, */
     /** Timer to start a drag */
-    QTimer *DragStartTimer;
+    QTimer *mDragStartTimer;
     /** timer to measure whether the time between a double click and the following counts for a tripleclick */
-    QTimer *TrippleClickTimer;
+    QTimer *mTrippleClickTimer;
 
     /** object to store the blinking cursor pixmaps */
-    KCursor *CursorPixmaps;
+    KCursor *mCursorPixmaps;
     /** */
-    KHECore::KCharCodec *Codec;
+    KHECore::KCharCodec *mCharCodec;
 
   protected:
     /** point at which the current double click happended (used by TrippleClick) */
-    QPoint DoubleClickPoint;
+    QPoint mDoubleClickPoint;
     /** line in which the current double click happended (used by TrippleClick) */
-    int DoubleClickLine;
+    int mDoubleClickLine;
     /** point at which the current dragging started */
-    QPoint DragStartPoint;
+    QPoint mDragStartPoint;
     /** */
-    QClipboard::Mode ClipboardMode;
+    QClipboard::Mode mClipboardMode;
     /** font size as set by user (used for zooming) */
-    int DefaultFontSize;
+    int mDefaultFontSize;
 
   protected: // parameters
     /** style of resizing */
-    KResizeStyle ResizeStyle;
+    KResizeStyle mResizeStyle;
     /** */
-    KEncoding Encoding;
+    KEncoding mCharEncoding;
 
     /** flag whether the widget is set to readonly. Cannot override the databuffer's setting, of course. */
-    bool ReadOnly:1;
+    bool mReadOnly:1;
     /** flag if only overwrite is allowed */
-    bool OverWriteOnly:1;
+    bool mOverWriteOnly:1;
     /** flag if overwrite mode is active */
-    bool OverWrite:1;
+    bool mOverWrite:1;
     /** flag if a mouse button is pressed */
-    bool MousePressed:1;
+    bool mMousePressed:1;
     /** flag if a double click is happening */
-    bool InDoubleClick:1;
+    bool mInDoubleClick:1;
     /** flag if a Drag'n'Drop is happening */
-    bool InDnD:1;
+    bool mInDnD:1;
     /** flag if a drag might have started */
-    bool DragStartPossible:1;
+    bool mDragStartPossible:1;
     /** flag if the cursor should be invisible */
-    bool CursorPaused:1;
+    bool mCursorPaused:1;
     /** flag if the cursor is visible */
-    bool BlinkCursorVisible:1;
+    bool mBlinkCursorVisible:1;
     /** flag whether the font is changed due to a zooming */
-    bool InZooming:1;
+    bool mInZooming:1;
 
   private:
-    /** the binary compatibility saving helper */
-    KByteArrayViewPrivate * const d;
+    class Private;
+    Private * const d;
 
   private: // Disabling copy constructor and operator= - not useful
     KByteArrayView( const KByteArrayView & );
