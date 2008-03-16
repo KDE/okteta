@@ -39,12 +39,12 @@ class PieceTable
 
   public:
     void init( int size );
-    void insert( int insertDataOffset, int insertLength, int storageOffset, int storageId = Piece::ChangeStorage );
+    void insert( int insertDataOffset, int insertLength, int storageOffset );
     /// for use to reapply
     void insert( int insertDataOffset, const PieceList &insertPieceList );
     PieceList remove( const KHE::KSection &removeSection );
     PieceList replace( const KHE::KSection &removeSection,
-                       int insertLength, int storageOffset, int storageId = Piece::ChangeStorage );
+                       int insertLength, int storageOffset );
     /// for use to reapply
     void replace( const KHE::KSection &removeSection, const PieceList &insertPieceList );
     void swap( int firstStart, const KHE::KSection &secondSection );

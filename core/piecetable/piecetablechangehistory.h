@@ -30,8 +30,6 @@
 #include <QtCore/QStack>
 #include <QtCore/QString>
 
-class QString;
-
 namespace KHE {
 class KSectionList;
 class ArrayChangeMetricsList;
@@ -68,6 +66,7 @@ class PieceTableChangeHistory
     QString changeDescription( int changeId ) const;
     QString headChangeDescription() const;
     bool isAtBase() const;
+    int appliedChangesDataSize() const;
 
   protected:
     /// if 0, no change group is open
@@ -81,11 +80,14 @@ class PieceTableChangeHistory
     int mBaseBeforeChangeIndex;
     ///
     QStack<AbstractPieceTableChange*> mChangeStack;
+    ///
+    int mAppliedChangesDataSize;
 };
 
 
 inline PieceTableChangeHistory::PieceTableChangeHistory()
- : mChangeGroupOpened( 0 ), mMergeChanges( false ), mAppliedChangesCount( 0 ), mBaseBeforeChangeIndex( 0 )
+ : mChangeGroupOpened( 0 ), mMergeChanges( false ),
+   mAppliedChangesCount( 0 ), mBaseBeforeChangeIndex( 0 ), mAppliedChangesDataSize( 0 )
 {}
 
 inline int PieceTableChangeHistory::count()                     const { return mChangeStack.count(); }
@@ -95,6 +97,7 @@ inline bool PieceTableChangeHistory::isAtBase()                 const
 {
     return ( mBaseBeforeChangeIndex == mAppliedChangesCount );
 }
+inline int PieceTableChangeHistory::appliedChangesDataSize()    const { return mAppliedChangesDataSize; }
 
 inline void PieceTableChangeHistory::openGroupedChange()  { ++mChangeGroupOpened; }
 inline void PieceTableChangeHistory::closeGroupedChange() { if( mChangeGroupOpened > 0 ) --mChangeGroupOpened; }

@@ -41,12 +41,14 @@ void RevertablePieceTable::init( int size )
     mChangeHistory.clear();
 }
 
-bool RevertablePieceTable::insert( int dataOffset, int length, int storageOffset )
+bool RevertablePieceTable::insert( int dataOffset, int length, int *storageOffset )
 {
-    mPieceTable.insert( dataOffset, length, storageOffset );
+    *storageOffset = mChangeHistory.appliedChangesDataSize();
+
+    mPieceTable.insert( dataOffset, length, *storageOffset );
 
     InsertPieceTableChange *change =
-        new InsertPieceTableChange( dataOffset, length, storageOffset );
+        new InsertPieceTableChange( dataOffset, length, *storageOffset );
 
     return mChangeHistory.appendChange( change );
 }
@@ -61,21 +63,18 @@ bool RevertablePieceTable::remove( const KHE::KSection &removeSection )
     return mChangeHistory.appendChange( change );
 }
 
-bool RevertablePieceTable::remove( int start, int length ) { return remove( KHE::KSection::fromWidth(start,length) );}
-
-bool RevertablePieceTable::replace( const KHE::KSection &removeSection, int insertLength, int storageOffset )
+bool RevertablePieceTable::replace( const KHE::KSection &removeSection, int insertLength, int *storageOffset )
 {
+    *storageOffset = mChangeHistory.appliedChangesDataSize();
+
     const PieceList replacedPieces = mPieceTable.remove( removeSection );
-    mPieceTable.insert( removeSection.start(), insertLength, storageOffset );
+    mPieceTable.insert( removeSection.start(), insertLength, *storageOffset );
 
     ReplacePieceTableChange *change =
-        new ReplacePieceTableChange( removeSection, insertLength, storageOffset, replacedPieces );
+        new ReplacePieceTableChange( removeSection, insertLength, *storageOffset, replacedPieces );
 
     return mChangeHistory.appendChange( change );
 }
-bool RevertablePieceTable::replace( int removeStart, int removeLength, int insertLength, int storageOffset )
-{ return replace( KHE::KSection::fromWidth(removeStart,removeLength), insertLength, storageOffset ); }
-
 
 bool RevertablePieceTable::swap( int firstStart, const KHE::KSection &secondSection )
 {
@@ -87,16 +86,15 @@ bool RevertablePieceTable::swap( int firstStart, const KHE::KSection &secondSect
     return mChangeHistory.appendChange( change );
 }
 
-bool RevertablePieceTable::swap( int firstStart, int secondStart, int secondLength )
-{ return swap( firstStart, KHE::KSection::fromWidth(secondStart,secondLength) ); }
-
-bool RevertablePieceTable::replaceOne( int dataOffset, int storageOffset )
+bool RevertablePieceTable::replaceOne( int dataOffset, int *storageOffset )
 {
-    const Piece replacedPiece = mPieceTable.replaceOne( dataOffset, storageOffset );
+    *storageOffset = mChangeHistory.appliedChangesDataSize();
+
+    const Piece replacedPiece = mPieceTable.replaceOne( dataOffset, *storageOffset );
     const PieceList replacedPieces( replacedPiece );
 
     ReplacePieceTableChange *change =
-        new ReplacePieceTableChange( KHE::KSection::fromWidth(dataOffset,1), 1, storageOffset, replacedPieces );
+        new ReplacePieceTableChange( KHE::KSection::fromWidth(dataOffset,1), 1, *storageOffset, replacedPieces );
 
     return mChangeHistory.appendChange( change );
 }

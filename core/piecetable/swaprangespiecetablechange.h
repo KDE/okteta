@@ -45,8 +45,8 @@ class SwapRangesPieceTableChange : public AbstractPieceTableChange
   public: // AbstractPieceTableChange API
     virtual int type() const;
     virtual QString description() const;
-    virtual KHE::KSection apply( PieceTable *pieceTable );
-    virtual KHE::KSection revert( PieceTable *pieceTable );
+    virtual KHE::KSection apply( PieceTable *pieceTable ) const;
+    virtual KHE::KSection revert( PieceTable *pieceTable ) const;
     virtual KHE::ArrayChangeMetrics metrics() const;
 
   protected:

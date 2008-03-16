@@ -65,7 +65,7 @@ bool RemovePieceTableChange::merge( const AbstractPieceTableChange *other )
     return result;
 }
 
-KHE::KSection RemovePieceTableChange::apply( PieceTable *pieceTable )
+KHE::KSection RemovePieceTableChange::apply( PieceTable *pieceTable ) const
 {
     const int oldLast = pieceTable->size() - 1;
 
@@ -74,7 +74,7 @@ KHE::KSection RemovePieceTableChange::apply( PieceTable *pieceTable )
     return KHE::KSection( mRemoveSection.start(), oldLast );
 }
 
-KHE::KSection RemovePieceTableChange::revert( PieceTable *pieceTable )
+KHE::KSection RemovePieceTableChange::revert( PieceTable *pieceTable ) const
 {
     pieceTable->insert( mRemoveSection.start(), mRemovedPieces );
 

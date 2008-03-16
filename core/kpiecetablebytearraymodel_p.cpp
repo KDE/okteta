@@ -111,23 +111,26 @@ void KPieceTableByteArrayModel::Private::setDatum( unsigned int offset, const ch
 
     const bool wasModifiedBefore = isModified();
 
-    mPieceTable.replaceOne( offset, mChangeByteArray.size() );
+    int storageOffset;
+    const bool newChange = mPieceTable.replaceOne( offset, &storageOffset );
+    mChangeByteArray.resize( storageOffset );
     mChangeByteArray.append( byte );
 
     emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(offset,1,1) );
     emit p->contentsChanged( offset, offset );
     if( !wasModifiedBefore ) emit p->modificationChanged( true );
-    emit p->headVersionChanged( mPieceTable.changesCount() );
-
+    if( newChange )
+        emit p->headVersionChanged( mPieceTable.changesCount() );
+    else
+        emit p->headVersionDescriptionChanged( mPieceTable.headChangeDescription() );
 }
 
 
-static void appendToByteArray( QByteArray *byteArray, const char *data, int dataLength )
+static inline void appendToByteArray( QByteArray *byteArray, int oldSize, const char *data, int dataLength )
 {
-    const int oldByteArraySize = byteArray->size();
-    byteArray->resize( oldByteArraySize + dataLength );
+    byteArray->resize( oldSize + dataLength );
 
-    memcpy( byteArray->data()+oldByteArraySize, data, dataLength );
+    memcpy( byteArray->data()+oldSize, data, dataLength );
 }
 
 int KPieceTableByteArrayModel::Private::insert( int offset, const char *insertData, int insertLength )
@@ -142,8 +145,9 @@ int KPieceTableByteArrayModel::Private::insert( int offset, const char *insertDa
 
     const bool wasModifiedBefore = isModified();
 
-    const bool newChange = mPieceTable.insert( offset, insertLength, mChangeByteArray.size() );
-    appendToByteArray( &mChangeByteArray, insertData, insertLength );
+    int storageOffset;
+    const bool newChange = mPieceTable.insert( offset, insertLength, &storageOffset );
+    appendToByteArray( &mChangeByteArray, storageOffset, insertData, insertLength );
 
     const bool bookmarksModified = mBookmarks.adjustToReplaced( offset, 0, insertLength );
 
@@ -160,9 +164,9 @@ int KPieceTableByteArrayModel::Private::insert( int offset, const char *insertDa
 
 
 //TODO: is anyone interested in the removed data? so we need a signal beforeRemoving(section)?
-int KPieceTableByteArrayModel::Private::remove( const KSection &r )
+int KPieceTableByteArrayModel::Private::remove( const KSection &_removeSection )
 {
-    KSection removeSection( r );
+    KSection removeSection( _removeSection );
     // correct parameters
     const int oldSize = mPieceTable.size();
     removeSection.restrictEndTo( oldSize-1 );
@@ -200,8 +204,9 @@ unsigned int KPieceTableByteArrayModel::Private::replace( const KSection &r, con
 
     const bool wasModifiedBefore = isModified();
 
-    mPieceTable.replace( removeSection, insertLength, mChangeByteArray.size() );
-    appendToByteArray( &mChangeByteArray, insertData, insertLength );
+    int storageOffset;
+    mPieceTable.replace( removeSection, insertLength, &storageOffset );
+    appendToByteArray( &mChangeByteArray, storageOffset, insertData, insertLength );
 
     const bool bookmarksModified = mBookmarks.adjustToReplaced( removeSection.start(), removeSection.width(), insertLength );
 
@@ -260,8 +265,8 @@ int KPieceTableByteArrayModel::Private::fill( const char fillByte, unsigned int 
     const bool wasModifiedBefore = isModified();
 
     const int filledLength = ( lengthToEnd > fillLength ) ? fillLength : lengthToEnd;
-    const int oldChangeByteArraySize = mChangeByteArray.size();
-    mPieceTable.replace( offset, filledLength, fillLength, oldChangeByteArraySize );
+    int oldChangeByteArraySize;
+    mPieceTable.replace( offset, filledLength, fillLength, &oldChangeByteArraySize );
 
     mChangeByteArray.resize( oldChangeByteArraySize + fillLength );
     memset( mChangeByteArray.data()+oldChangeByteArraySize, fillByte, fillLength );

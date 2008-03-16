@@ -29,7 +29,6 @@
 namespace KPieceTable
 {
 
-
 void PieceTableChangeHistory::clear()
 {
     while( !mChangeStack.isEmpty() )
@@ -39,6 +38,7 @@ void PieceTableChangeHistory::clear()
     mChangeGroupOpened = 0;
     mAppliedChangesCount = 0;
     mBaseBeforeChangeIndex = 0;
+    mAppliedChangesDataSize = 0;
 }
 
 void PieceTableChangeHistory::setBeforeCurrentChangeAsBase(bool hide)
@@ -58,11 +58,12 @@ bool PieceTableChangeHistory::appendChange( AbstractPieceTableChange *change )
         do
         {
             AbstractPieceTableChange *droppedChange = mChangeStack.pop();
-            // TODO: get freed change storage   droppedChange->storageOffset
             delete droppedChange;
         }
         while( mAppliedChangesCount < mChangeStack.count() );
     }
+
+    mAppliedChangesDataSize += change->dataSize();
 
     bool isNotMerged = true;
     if( mMergeChanges && mAppliedChangesCount>0 )
@@ -95,25 +96,31 @@ bool PieceTableChangeHistory::revertBeforeChange( PieceTable *pieceTable, int ch
     {
         for( ; currentChangeId<changeId  ; ++currentChangeId )
         {
-            AbstractPieceTableChange *change = mChangeStack[currentChangeId];
-            const KHE::KSection changedSection =
-                change->apply( pieceTable );
+            const AbstractPieceTableChange *change = mChangeStack[currentChangeId];
+
+            const KHE::KSection changedSection = change->apply( pieceTable );
             changedRanges->addSection( changedSection );
+
             const KHE::ArrayChangeMetrics changeMetrics = change->metrics();
             changeList->append( changeMetrics );
+
+            mAppliedChangesDataSize += change->dataSize();
         }
     }
     else
     {
         for( --currentChangeId; changeId<=currentChangeId ; --currentChangeId )
         {
-            AbstractPieceTableChange *change = mChangeStack[currentChangeId];
-            const KHE::KSection changedSection =
-                change->revert( pieceTable );
+            const AbstractPieceTableChange *change = mChangeStack[currentChangeId];
+
+            const KHE::KSection changedSection = change->revert( pieceTable );
             changedRanges->addSection( changedSection );
+
             KHE::ArrayChangeMetrics changeMetrics = change->metrics();
             changeMetrics.revert();
             changeList->append( changeMetrics );
+
+            mAppliedChangesDataSize += change->dataSize();
         }
     }
     mAppliedChangesCount = changeId;

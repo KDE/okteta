@@ -67,8 +67,9 @@ bool PieceTable::getStorageData( int *storageId, int *storageOffset, int dataOff
 
 // TODO: optimise search from behind if dataOffset is large (perhaps by counting total size
 // TODO: combine sucsequenting inserts, also on other changes if possible link neighbors
-void PieceTable::insert( int insertDataOffset, int insertLength, int storageOffset, int storageId )
+void PieceTable::insert( int insertDataOffset, int insertLength, int storageOffset )
 {
+    const int storageId = Piece::ChangeStorage;
     QMutableLinkedListIterator<Piece> it( mList );
 
     const Piece insertPiece( storageOffset, insertLength, storageId );
@@ -287,10 +288,10 @@ PieceList PieceTable::remove( const KHE::KSection &removeSection )
     return removedPieceList;
 }
 
-PieceList PieceTable::replace( const KHE::KSection &removeSection, int insertLength, int storageOffset, int storageId )
+PieceList PieceTable::replace( const KHE::KSection &removeSection, int insertLength, int storageOffset )
 {
     PieceList removedPieceList = remove( removeSection );
-    insert( removeSection.start(), insertLength, storageOffset, storageId );
+    insert( removeSection.start(), insertLength, storageOffset );
     return removedPieceList;
 }
 void PieceTable::replace( const KHE::KSection &removeSection, const PieceList &insertPieceList )

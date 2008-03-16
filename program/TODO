@@ -33,10 +33,10 @@ Done before review:
 * see why documents don't get removed on close of view -> close for views, not document
 * make drag'n'drop work properly again
 * complete change notifications
+* reset changebuffer if history gets cut
 
 Before adding to review:
 ------------------------
-* reset changebuffer if history gets cut
 * fix cursor problems
 * make tools work on selection
 * user documentation in docbook format

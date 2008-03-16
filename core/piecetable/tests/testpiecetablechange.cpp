@@ -52,14 +52,14 @@ bool TestPieceTableChange::merge( const AbstractPieceTableChange *other )
     return result;
 }
 
-KHE::KSection TestPieceTableChange::apply( PieceTable *pieceTable )
+KHE::KSection TestPieceTableChange::apply( PieceTable *pieceTable ) const
 {
     pieceTable->replaceOne( mPosition, mStoragePosition, mStorageId );
 
     return KHE::KSection( mPosition, mPosition );
 }
 
-KHE::KSection TestPieceTableChange::revert( PieceTable *pieceTable )
+KHE::KSection TestPieceTableChange::revert( PieceTable *pieceTable ) const
 {
     const Piece replaced = pieceTable->replaceOne( mPosition, mReplacedStoragePosition, mReplacedStorageId );
 
@@ -71,6 +71,7 @@ KHE::ArrayChangeMetrics TestPieceTableChange::metrics() const
     return KHE::ArrayChangeMetrics::asReplacement( mPosition, 1, 1 );
 }
 
+int TestPieceTableChange::dataSize() const { return 1; }
 
 TestPieceTableChange::~TestPieceTableChange() {}
 

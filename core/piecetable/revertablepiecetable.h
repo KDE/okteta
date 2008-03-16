@@ -39,14 +39,14 @@ class RevertablePieceTable
   public:
     void init( int size );
 
-    bool insert( int pos, int length, int storageOffset );
+    bool insert( int pos, int length, int *storageSize );
     bool remove( const KHE::KSection &removeSection );
     bool remove( int start, int end );
-    bool replace( const KHE::KSection &removeSection, int insertLength, int storageOffset );
-    bool replace( int removeStart, int removeLength, int insertLength, int storageOffset );
+    bool replace( const KHE::KSection &removeSection, int insertLength, int *storageSize );
+    bool replace( int removeStart, int removeLength, int insertLength, int *storageSize );
+    bool replaceOne( int dataOffset, int *storageSize );
     bool swap( int firstStart, const KHE::KSection &secondSection );
     bool swap( int firstStart, int secondStart, int secondLength );
-    bool replaceOne( int dataOffset, int storageOffset );
 //     int fill( const char FillChar, unsigned int Pos = 0, int Length = -1 ); TODO: filter change, calculated
 
   public:
@@ -98,6 +98,20 @@ inline QString RevertablePieceTable::headChangeDescription() const
 {
     return mChangeHistory.headChangeDescription();
 }
+
+inline bool RevertablePieceTable::remove( int start, int length )
+{
+    return remove( KHE::KSection::fromWidth(start,length) );
+}
+inline bool RevertablePieceTable::replace( int removeStart, int removeLength, int insertLength, int *storageSize )
+{
+    return replace( KHE::KSection::fromWidth(removeStart,removeLength), insertLength, storageSize );
+}
+inline bool RevertablePieceTable::swap( int firstStart, int secondStart, int secondLength )
+{
+    return swap( firstStart, KHE::KSection::fromWidth(secondStart,secondLength) );
+}
+
 
 inline void RevertablePieceTable::openGroupedChange()  { mChangeHistory.openGroupedChange(); }
 inline void RevertablePieceTable::closeGroupedChange() { mChangeHistory.closeGroupedChange(); }

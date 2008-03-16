@@ -40,14 +40,14 @@ QString SwapRangesPieceTableChange::description() const
     return i18n( "Swap Ranges" );
 }
 
-KHE::KSection SwapRangesPieceTableChange::apply( PieceTable *pieceTable )
+KHE::KSection SwapRangesPieceTableChange::apply( PieceTable *pieceTable ) const
 {
     pieceTable->swap( mFirstStart, mSecondSection );
 
     return KHE::KSection( mFirstStart, mSecondSection.end() );
 }
 
-KHE::KSection SwapRangesPieceTableChange::revert( PieceTable *pieceTable )
+KHE::KSection SwapRangesPieceTableChange::revert( PieceTable *pieceTable ) const
 {
     pieceTable->swap( mFirstStart, KHE::KSection(mFirstStart+mSecondSection.width(),mSecondSection.end()) );
 

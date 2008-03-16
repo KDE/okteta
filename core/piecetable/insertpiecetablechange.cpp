@@ -25,6 +25,7 @@
 
 // lib
 #include "piecetable.h"
+//
 #include <ksection.h>
 #include <arraychangemetrics.h>
 // KDE
@@ -57,14 +58,14 @@ bool InsertPieceTableChange::merge( const AbstractPieceTableChange *other )
     return result;
 }
 
-KHE::KSection InsertPieceTableChange::apply( PieceTable *pieceTable )
+KHE::KSection InsertPieceTableChange::apply( PieceTable *pieceTable ) const
 {
     pieceTable->insert( mInsertOffset, mInsertLength, mStorageOffset );
 
     return KHE::KSection( mInsertOffset, pieceTable->size()-1 );
 }
 
-KHE::KSection InsertPieceTableChange::revert( PieceTable *pieceTable )
+KHE::KSection InsertPieceTableChange::revert( PieceTable *pieceTable ) const
 {
     const int oldLast = pieceTable->size() - 1;
     pieceTable->remove( KHE::KSection::fromWidth(mInsertOffset,mInsertLength) );
@@ -75,6 +76,8 @@ KHE::ArrayChangeMetrics InsertPieceTableChange::metrics() const
 {
     return KHE::ArrayChangeMetrics::asReplacement( mInsertOffset, 0, mInsertLength );
 }
+
+int InsertPieceTableChange::dataSize() const { return mInsertLength; }
 
 InsertPieceTableChange::~InsertPieceTableChange() {}
 

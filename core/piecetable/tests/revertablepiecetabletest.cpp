@@ -36,7 +36,7 @@ static const int Size = 2 * HalfSize;
 
 static const int Width = End - Start + 1;
 
-static const int ChangeStart = 8;
+static const int ChangeStart = 0;
 static const int ChangeEnd = ChangeStart + Width - 1;
 
 namespace KPieceTable
@@ -89,9 +89,10 @@ void RevertablePieceTableTest::testInit()
 
 static void fillWithSize( RevertablePieceTable *pieceTable, int count )
 {
+    int dummy;
     pieceTable->init( 0 );
-    for( int i=0; i<count; ++i ) pieceTable->insert( 0, Size, Size*i );
-
+    for( int i=0; i<count; ++i )
+        pieceTable->insert( 0, Size, &dummy );
 }
 
 void RevertablePieceTableTest::testInsert()
@@ -102,14 +103,14 @@ void RevertablePieceTableTest::testInsert()
     int storageOffset;
     bool result;
 
-
     //inserting to empty
     pieceTable.init( 0 );
-    pieceTable.insert( 0, Width, ChangeStart );
+    pieceTable.insert( 0, Width, &storageOffset );
 
         QCOMPARE( pieceTable.size(), Width );
         QCOMPARE( pieceTable.changesCount(), 1 );
         QCOMPARE( pieceTable.appliedChangesCount(), 1 );
+        QCOMPARE( storageOffset, ChangeStart );
 
         result = pieceTable.getStorageData( &storageId, &storageOffset, 0 );
         QVERIFY( result );
@@ -126,11 +127,12 @@ void RevertablePieceTableTest::testInsert()
 
     // inserting one at the begin
     pieceTable.init( Size );
-    pieceTable.insert( 0, Width, ChangeStart );
+    pieceTable.insert( 0, Width, &storageOffset );
 
         QCOMPARE( pieceTable.size(), Size+Width );
         QCOMPARE( pieceTable.changesCount(), 1 );
         QCOMPARE( pieceTable.appliedChangesCount(), 1 );
+        QCOMPARE( storageOffset, ChangeStart );
 
         result = pieceTable.getStorageData( &storageId, &storageOffset, 0 );
         QVERIFY( result );
@@ -157,11 +159,12 @@ void RevertablePieceTableTest::testInsert()
 
     // inserting one in the middle
     pieceTable.init( Size );
-    pieceTable.insert( Start, Width, ChangeStart );
+    pieceTable.insert( Start, Width, &storageOffset );
 
         QCOMPARE( pieceTable.size(), Size+Width );
         QCOMPARE( pieceTable.changesCount(), 1 );
         QCOMPARE( pieceTable.appliedChangesCount(), 1 );
+        QCOMPARE( storageOffset, ChangeStart );
 
         result = pieceTable.getStorageData( &storageId, &storageOffset, Start-1 );
         QVERIFY( result );
@@ -193,11 +196,12 @@ void RevertablePieceTableTest::testInsert()
 
     // inserting one at the end
     pieceTable.init( Size );
-    pieceTable.insert( Size, Width, ChangeStart );
+    pieceTable.insert( Size, Width, &storageOffset );
 
         QCOMPARE( pieceTable.size(), Size+Width );
         QCOMPARE( pieceTable.changesCount(), 1 );
         QCOMPARE( pieceTable.appliedChangesCount(), 1 );
+        QCOMPARE( storageOffset, ChangeStart );
 
         result = pieceTable.getStorageData( &storageId, &storageOffset, Size-1 );
         QVERIFY( result );
@@ -229,49 +233,38 @@ void RevertablePieceTableTest::testInsert()
     pieceTable.init( Size ); // 0
     const int Mid = Size/2;
     int changeStarts[13];
-    int changeStart = 0;
-    changeStarts[1] = changeStart;
-    pieceTable.insert( Size, Size, changeStart ); // 1
-    changeStart += Size;
-    changeStarts[2] = changeStart;
-    pieceTable.insert( Size+Size, Size, changeStart ); // 2
-    changeStart += Size;
-    changeStarts[3] = changeStart;
-    pieceTable.insert( Size+Mid, Size, changeStart ); // 3
-    changeStart += Size;
-    changeStarts[4] = changeStart;
-    pieceTable.insert( Size, Size, changeStart ); // 4
+    pieceTable.insert( Size, Size, &storageOffset ); // 1
+    changeStarts[1] = storageOffset;
+    pieceTable.insert( Size+Size, Size, &storageOffset ); // 2
+    changeStarts[2] = storageOffset;
+    pieceTable.insert( Size+Mid, Size, &storageOffset ); // 3
+    changeStarts[3] = storageOffset;
+    pieceTable.insert( Size, Size, &storageOffset ); // 4
+    changeStarts[4] = storageOffset;
 
-    changeStart += Size;
-    changeStarts[5] = changeStart;
-    pieceTable.insert( Mid, Size, changeStart ); // 5
-    changeStart += Size;
-    changeStarts[6] = changeStart;
-    pieceTable.insert( Mid+Size, Size, changeStart ); // 6
-    changeStart += Size;
-    changeStarts[7] = changeStart;
-    pieceTable.insert( Mid+Mid, Size, changeStart ); // 7
-    changeStart += Size;
-    changeStarts[8] = changeStart;
-    pieceTable.insert( Mid, Size, changeStart ); // 8
+    pieceTable.insert( Mid, Size, &storageOffset ); // 5
+    changeStarts[5] = storageOffset;
+    pieceTable.insert( Mid+Size, Size, &storageOffset ); // 6
+    changeStarts[6] = storageOffset;
+    pieceTable.insert( Mid+Mid, Size, &storageOffset ); // 7
+    changeStarts[7] = storageOffset;
+    pieceTable.insert( Mid, Size, &storageOffset ); // 8
+    changeStarts[8] = storageOffset;
 
-    changeStart += Size;
-    changeStarts[9] = changeStart;
-    pieceTable.insert( 0, Size, changeStart ); // 9
-    changeStart += Size;
-    changeStarts[10] = changeStart;
-    pieceTable.insert( Size, Size, changeStart ); // 10
-    changeStart += Size;
-    changeStarts[11] = changeStart;
-    pieceTable.insert( Mid, Size, changeStart ); // 11
-    changeStart += Size;
-    changeStarts[12] = changeStart;
-    pieceTable.insert( 0, Size, changeStart ); // 12
+    pieceTable.insert( 0, Size, &storageOffset ); // 9
+    changeStarts[9] = storageOffset;
+    pieceTable.insert( Size, Size, &storageOffset ); // 10
+    changeStarts[10] = storageOffset;
+    pieceTable.insert( Mid, Size, &storageOffset ); // 11
+    changeStarts[11] = storageOffset;
+    pieceTable.insert( 0, Size, &storageOffset ); // 12
+    changeStarts[12] = storageOffset;
 
     // test
     QCOMPARE( pieceTable.size(), Size+12*Size );
     QCOMPARE( pieceTable.changesCount(), 9 ); // 9+10, 5+6, 1+2 are merged
     QCOMPARE( pieceTable.appliedChangesCount(), 9 );
+    QCOMPARE( storageOffset, 11*Size );
 
     // all borders
     // 12: begin
