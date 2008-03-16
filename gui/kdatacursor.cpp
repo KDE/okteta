@@ -365,7 +365,7 @@ bool KDataCursor::atLineStart() const { return Layout->atLineStart( Coord ); }
 bool KDataCursor::atLineEnd()   const { return Layout->atLineEnd( Coord ); }
 
 // TODO: oldLength is a hack, as DataLayout is already updated and used by e.g. gotoCIndex
-void KDataCursor::adaptToChange( const KHE::ArrayChangeMetricsList &changeList, int oldLength )
+void KDataCursor::adaptToChanges( const KHE::ArrayChangeMetricsList &changeList, int oldLength )
 {
     for( int i=0; i<changeList.size(); ++i )
     {

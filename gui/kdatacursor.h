@@ -128,7 +128,7 @@ class KDataCursor
     /** puts the cursor behind the actual position if it isn't already*/
     void stepBehind();
     void updateCoord();
-    void adaptToChange( const KHE::ArrayChangeMetricsList &changeList, int oldLength );
+    void adaptToChanges( const KHE::ArrayChangeMetricsList &changeList, int oldLength );
 
   public: // logical state access
     bool atStart() const;

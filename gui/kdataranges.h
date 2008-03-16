@@ -69,7 +69,7 @@ class KDataRanges
     void addChangedRange( const KHE::KSection &S );
     void addChangedRange( int SI, int EI );
     void addChangedRange( const KCoordRange &NewRange );
-    void adaptSelectionToChange( const KHE::ArrayChangeMetricsList &changeList );
+    void adaptSelectionToChanges( const KHE::ArrayChangeMetricsList &changeList );
     void resetChangedRanges();
 
     void setModified( bool M = true );

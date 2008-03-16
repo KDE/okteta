@@ -1035,9 +1035,9 @@ void KByteArrayView::onContentsChanged( const KHE::ArrayChangeMetricsList &chang
     if( appending )
         mDataCursor->gotoEnd();
     else
-        mDataCursor->adaptToChange( changeList, oldLength );
+        mDataCursor->adaptToChanges( changeList, oldLength );
 
-    mDataRanges->adaptSelectionToChange( changeList );
+    mDataRanges->adaptSelectionToChanges( changeList );
     // kDebug() << "Cursor:"<<mDataCursor->index()<<", selection:"<<mDataRanges->selectionStart()<<"-"<<mDataRanges->selectionEnd()
     //          <<", BytesPerLine: "<<mDataLayout->noOfBytesPerLine()<<endl;
     emit cursorPositionChanged( mDataCursor->realIndex() );

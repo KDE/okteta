@@ -304,7 +304,7 @@ void KDataRanges::setFirstWordSelection( const KHE::KSection &Section )
  }
 
 
-void KDataRanges::adaptSelectionToChange( const KHE::ArrayChangeMetricsList &changeList )
+void KDataRanges::adaptSelectionToChanges( const KHE::ArrayChangeMetricsList &changeList )
 {
     if( !Selection.isValid() )
         return;
