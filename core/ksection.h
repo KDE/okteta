@@ -93,7 +93,7 @@ class KHECORE_EXPORT KSection : public KRange<int>
      */
     void moveToEnd( int end );
 
-    void adaptToChange( int Pos, int removedLength, int insertedLength );
+    void adaptToReplacement( int Pos, int removedLength, int insertedLength );
 
     KSection splitAt( int index );
     KSection splitAtLocal( int index );

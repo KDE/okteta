@@ -44,7 +44,7 @@ class KSectionTest : public QObject
     void testLocalIndex();
     void testLocalSection();
     void testSubSection();
-    void testAdaptToChange();
+    void testAdaptToReplacement();
     void testSplitAt();
     void testSplitAtLocal();
     void testRemove();

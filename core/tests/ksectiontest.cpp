@@ -202,217 +202,217 @@ void KSectionTest::testSubSection()
 }
 
 
-void KSectionTest::testAdaptToChange()
+void KSectionTest::testAdaptToReplacement()
 {
-  // adaptToChange, same length, behind
+  // adaptToReplacement, same length, behind
   KSection Section( Start, End );
   KSection OtherSection( Section );
-  Section.adaptToChange( End+1, Width, Width );
+  Section.adaptToReplacement( End+1, Width, Width );
   QCOMPARE( Section, OtherSection );
 
-  // adaptToChange, same length, before
+  // adaptToReplacement, same length, before
   Section.set( Start, End );
   OtherSection.set( Section );
-  Section.adaptToChange( Start-2, 1, 1 );
+  Section.adaptToReplacement( Start-2, 1, 1 );
   QCOMPARE( Section, OtherSection );
 
-  // adaptToChange, same length, -1,-1
+  // adaptToReplacement, same length, -1,-1
   Section.set( Start-1, End-1 );
   OtherSection.set( Start-1, Start-1 );
-  Section.adaptToChange( Start, Width, Width );
+  Section.adaptToReplacement( Start, Width, Width );
   QCOMPARE( Section, OtherSection );
 
-  // adaptToChange, same length, -1,0
+  // adaptToReplacement, same length, -1,0
   Section.set( Start-1, End );
   OtherSection.set( Section );
-  Section.adaptToChange( Start, Width, Width );
+  Section.adaptToReplacement( Start, Width, Width );
   QCOMPARE( Section, OtherSection );
 
-  // adaptToChange, same length, -1,+1
+  // adaptToReplacement, same length, -1,+1
   Section.set( Start-1, End+1 );
   OtherSection.set( Section );
-  Section.adaptToChange( Start, Width, Width );
+  Section.adaptToReplacement( Start, Width, Width );
   QCOMPARE( Section, OtherSection );
 
-  // adaptToChange, same length, 0,-1
+  // adaptToReplacement, same length, 0,-1
   Section.set( Start, End-1 );
   OtherSection.set( Section );
-  Section.adaptToChange( Start, Width, Width );
+  Section.adaptToReplacement( Start, Width, Width );
   QVERIFY( !Section.isValid() );
 
-  // adaptToChange, same length, 0,0
+  // adaptToReplacement, same length, 0,0
   Section.set( Start, End );
   OtherSection.set( Section );
-  Section.adaptToChange( Start, Width, Width );
+  Section.adaptToReplacement( Start, Width, Width );
   QCOMPARE( Section, OtherSection );
 
-  // adaptToChange, same length, 0,+1
+  // adaptToReplacement, same length, 0,+1
   Section.set( Start, End+1 );
   OtherSection.set( Section );
-  Section.adaptToChange( Start, Width, Width );
+  Section.adaptToReplacement( Start, Width, Width );
   QCOMPARE( Section, OtherSection );
 
-  // adaptToChange, same length, +1,-1
+  // adaptToReplacement, same length, +1,-1
   Section.set( Start+1, End-1 );
-  Section.adaptToChange( Start, Width, Width );
+  Section.adaptToReplacement( Start, Width, Width );
   QVERIFY( !Section.isValid() );
 
-  // adaptToChange, same length, +1,0
+  // adaptToReplacement, same length, +1,0
   Section.set( Start+1, End );
-  Section.adaptToChange( Start, Width, Width );
+  Section.adaptToReplacement( Start, Width, Width );
   QVERIFY( !Section.isValid() );
 
-  // adaptToChange, same length, +1,+1
+  // adaptToReplacement, same length, +1,+1
   Section.set( Start+1, End+1 );
   OtherSection.set( End+1, End+1 );
-  Section.adaptToChange( Start, Width, Width );
+  Section.adaptToReplacement( Start, Width, Width );
   QCOMPARE( Section, OtherSection );
 
 
-  // adaptToChange, less length, behind
+  // adaptToReplacement, less length, behind
   Section.set( Start, End );
   OtherSection.set( Section );
-  Section.adaptToChange( End+1, Width, Width-2 );
+  Section.adaptToReplacement( End+1, Width, Width-2 );
   QCOMPARE( Section, OtherSection );
 
-  // adaptToChange, less length, before
+  // adaptToReplacement, less length, before
   Section.set( Start, End );
   OtherSection.set( Start-2, End-2 );
-  Section.adaptToChange( Start-Width, Width, Width-2 );
+  Section.adaptToReplacement( Start-Width, Width, Width-2 );
   QCOMPARE( Section, OtherSection );
 
-  // adaptToChange, less length, -1,-1
+  // adaptToReplacement, less length, -1,-1
   Section.set( Start-1, End-1 );
   OtherSection.set( Start-1, Start-1 );
-  Section.adaptToChange( Start, Width, Width-2 );
+  Section.adaptToReplacement( Start, Width, Width-2 );
   QCOMPARE( Section, OtherSection );
 
-  // adaptToChange, less length, -1,0
+  // adaptToReplacement, less length, -1,0
   Section.set( Start-1, End );
   OtherSection.set( Start-1, End-2 );
-  Section.adaptToChange( Start, Width, Width-2 );
+  Section.adaptToReplacement( Start, Width, Width-2 );
   QCOMPARE( Section, OtherSection );
 
-  // adaptToChange, less length, -1,+1
+  // adaptToReplacement, less length, -1,+1
   Section.set( Start-1, End+1 );
   OtherSection.set( Start-1, End-1 );
-  Section.adaptToChange( Start, Width, Width-2 );
+  Section.adaptToReplacement( Start, Width, Width-2 );
   QCOMPARE( Section, OtherSection );
 
-  // adaptToChange, less length, 0,-1
+  // adaptToReplacement, less length, 0,-1
   Section.set( Start, End-1 );
-  Section.adaptToChange( Start, Width, Width-2 );
+  Section.adaptToReplacement( Start, Width, Width-2 );
   QVERIFY( !Section.isValid() );
 
-  // adaptToChange, less length, 0,0
+  // adaptToReplacement, less length, 0,0
   Section.set( Start, End );
   OtherSection.set( Start, End-2 );
-  Section.adaptToChange( Start, Width, Width-2 );
+  Section.adaptToReplacement( Start, Width, Width-2 );
   QCOMPARE( Section, OtherSection );
 
-  // adaptToChange, less length, 0,+1
+  // adaptToReplacement, less length, 0,+1
   Section.set( Start, End+1 );
   OtherSection.set( Start, End-1 );
-  Section.adaptToChange( Start, Width, Width-2 );
+  Section.adaptToReplacement( Start, Width, Width-2 );
   QCOMPARE( Section, OtherSection );
 
-  // adaptToChange, less length, +1,-1
+  // adaptToReplacement, less length, +1,-1
   Section.set( Start+1, End-1 );
-  Section.adaptToChange( Start, Width, Width-2 );
+  Section.adaptToReplacement( Start, Width, Width-2 );
   QVERIFY( !Section.isValid() );
 
-  // adaptToChange, less length, +1,0
+  // adaptToReplacement, less length, +1,0
   Section.set( Start+1, End );
-  Section.adaptToChange( Start, Width, Width-2 );
+  Section.adaptToReplacement( Start, Width, Width-2 );
   QVERIFY( !Section.isValid() );
 
-  // adaptToChange, less length, +1,+1
+  // adaptToReplacement, less length, +1,+1
   Section.set( Start+1, End+1 );
   OtherSection.set( End-1, End-1 );
-  Section.adaptToChange( Start, Width, Width-2 );
+  Section.adaptToReplacement( Start, Width, Width-2 );
   QCOMPARE( Section, OtherSection );
 
 
-  // adaptToChange, greater length, behind
+  // adaptToReplacement, greater length, behind
   Section.set( Start, End );
   OtherSection.set( Section );
-  Section.adaptToChange( End+1, Width, Width+2 );
+  Section.adaptToReplacement( End+1, Width, Width+2 );
   QCOMPARE( Section, OtherSection );
 
-  // adaptToChange, greater length, before
+  // adaptToReplacement, greater length, before
   Section.set( Start, End );
   OtherSection.set( Start+2, End+2 );
-  Section.adaptToChange( Start-Width, Width, Width+2 );
+  Section.adaptToReplacement( Start-Width, Width, Width+2 );
   QCOMPARE( Section, OtherSection );
 
-  // adaptToChange, greater length, -1,-1
+  // adaptToReplacement, greater length, -1,-1
   Section.set( Start-1, End-1 );
   OtherSection.set( Start-1, Start-1 );
-  Section.adaptToChange( Start, Width, Width+2 );
+  Section.adaptToReplacement( Start, Width, Width+2 );
   QCOMPARE( Section, OtherSection );
 
-  // adaptToChange, greater length, -1,0
+  // adaptToReplacement, greater length, -1,0
   Section.set( Start-1, End );
   OtherSection.set( Start-1, End+2 );
-  Section.adaptToChange( Start, Width, Width+2 );
+  Section.adaptToReplacement( Start, Width, Width+2 );
   QCOMPARE( Section, OtherSection );
 
-  // adaptToChange, greater length, -1,+1
+  // adaptToReplacement, greater length, -1,+1
   Section.set( Start-1, End+1 );
   OtherSection.set( Start-1, End+3 );
-  Section.adaptToChange( Start, Width, Width+2 );
+  Section.adaptToReplacement( Start, Width, Width+2 );
   QCOMPARE( Section, OtherSection );
 
-  // adaptToChange, greater length, 0,-1
+  // adaptToReplacement, greater length, 0,-1
   Section.set( Start, End-1 );
-  Section.adaptToChange( Start, Width, Width+2 );
+  Section.adaptToReplacement( Start, Width, Width+2 );
   QVERIFY( !Section.isValid() );
 
-  // adaptToChange, greater length, 0,0
+  // adaptToReplacement, greater length, 0,0
   Section.set( Start, End );
   OtherSection.set( Start, End+2 );
-  Section.adaptToChange( Start, Width, Width+2 );
+  Section.adaptToReplacement( Start, Width, Width+2 );
   QCOMPARE( Section, OtherSection );
 
-  // adaptToChange, greater length, 0,+1
+  // adaptToReplacement, greater length, 0,+1
   Section.set( Start, End+1 );
   OtherSection.set( Start, End+3 );
-  Section.adaptToChange( Start, Width, Width+2 );
+  Section.adaptToReplacement( Start, Width, Width+2 );
   QCOMPARE( Section, OtherSection );
 
-  // adaptToChange, greater length, +1,-1
+  // adaptToReplacement, greater length, +1,-1
   Section.set( Start+1, End-1 );
-  Section.adaptToChange( Start, Width, Width+2 );
+  Section.adaptToReplacement( Start, Width, Width+2 );
   QVERIFY( !Section.isValid() );
 
-  // adaptToChange, greater length, +1,0
+  // adaptToReplacement, greater length, +1,0
   Section.set( Start+1, End );
-  Section.adaptToChange( Start, Width, Width+2 );
+  Section.adaptToReplacement( Start, Width, Width+2 );
   QVERIFY( !Section.isValid() );
 
-  // adaptToChange, greater length, +1,+1
+  // adaptToReplacement, greater length, +1,+1
   Section.set( Start+1, End+1 );
   OtherSection.set( End+3, End+3 );
-  Section.adaptToChange( Start, Width, Width+2 );
+  Section.adaptToReplacement( Start, Width, Width+2 );
   QCOMPARE( Section, OtherSection );
 
 
-  // adaptToChange, insert, behind
+  // adaptToReplacement, insert, behind
   Section.set( Start-1, Start-1 );
   OtherSection.set( Start-1, End );
-  Section.adaptToChange( Start, 0, Width );
+  Section.adaptToReplacement( Start, 0, Width );
   QCOMPARE( Section, OtherSection );
 
-  // adaptToChange, insert, middle
+  // adaptToReplacement, insert, middle
   Section.set( Start-1, Start );
   OtherSection.set( Start-1, End+1 );
-  Section.adaptToChange( Start, 0, Width );
+  Section.adaptToReplacement( Start, 0, Width );
   QCOMPARE( Section, OtherSection );
 
-  // adaptToChange, insert, before
+  // adaptToReplacement, insert, before
   Section.set( Start, Start );
   OtherSection.set( End+1, End+1 );
-  Section.adaptToChange( Start, 0, Width );
+  Section.adaptToReplacement( Start, 0, Width );
   QCOMPARE( Section, OtherSection );
 }
 
@@ -725,7 +725,7 @@ void KSectionTest::testIsJoinable()
   KSection OtherSection( Section );
   QVERIFY( Section.isJoinable(OtherSection) );
 
-  // adaptToChange, insert, before
+  // adaptToReplacement, insert, before
   OtherSection.set( End+1, End+Width );
   QVERIFY( Section.isJoinable(OtherSection) );
 

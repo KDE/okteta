@@ -25,7 +25,7 @@
 
 namespace KHE {
 
-void KSection::adaptToChange( int Pos, int RemovedLength, int InsertedLength )
+void KSection::adaptToReplacement( int Pos, int RemovedLength, int InsertedLength )
 {
   // nothing to adapt or not affected at all??
   if( !isValid() || endsBefore(Pos-1) )

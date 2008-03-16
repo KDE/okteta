@@ -81,7 +81,7 @@ class KSelection
       */
     void reverse();
 
-    void adaptToChange( int Pos, int RemovedLength, int InsertedLength );
+    void adaptToReplacement( int Pos, int RemovedLength, int InsertedLength );
     void adaptToSwap( int firstOffset, int secondOffset, int secondLength );
 
   public: // value access
@@ -187,9 +187,9 @@ inline bool KSelection::started()     const { return Anchor != -1; }
 inline bool KSelection::justStarted() const { return Anchor != -1 && Section.start() == -1; }
 inline bool KSelection::isForward()   const { return Anchor == Section.start(); }
 
-inline void KSelection::adaptToChange( int Pos, int RemovedLength, int InsertedLength )
+inline void KSelection::adaptToReplacement( int Pos, int RemovedLength, int InsertedLength )
 {
-  Section.adaptToChange( Pos, RemovedLength, InsertedLength );
+  Section.adaptToReplacement( Pos, RemovedLength, InsertedLength );
   Anchor = isForward() ? Section.start() : Section.end()+1;
 }
 

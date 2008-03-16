@@ -303,12 +303,10 @@ void KDataRanges::setFirstWordSelection( const KHE::KSection &Section )
    }
  }
  
-
 void KDataRanges::adaptSelectionToChange( int Pos, int RemovedLength, int InsertedLength )
 {
-  Selection.adaptToChange(Pos,RemovedLength,InsertedLength );
+  Selection.adaptToReplacement(Pos,RemovedLength,InsertedLength );
 }
-
 
 void KDataRanges::adaptSelectionToChange( const KHE::ArrayChangeMetricsList &changeList )
 {
@@ -320,7 +318,7 @@ void KDataRanges::adaptSelectionToChange( const KHE::ArrayChangeMetricsList &cha
         const KHE::ArrayChangeMetrics &change = changeList[i];
         //TODO: change parameters to ArrayChangeMetrics
         if( change.type() == KHE::ArrayChangeMetrics::Replacement )
-            Selection.adaptToChange( change.offset(), change.removeLength(), change.insertLength() );
+            Selection.adaptToReplacement( change.offset(), change.removeLength(), change.insertLength() );
         else if( change.type() == KHE::ArrayChangeMetrics::Swapping )
             Selection.adaptToSwap( change.offset(), change.secondStart(), change.secondLength() );
     }
