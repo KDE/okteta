@@ -48,7 +48,7 @@ class KHECORE_EXPORT KBookmarkList : public QLinkedList<KBookmark>
     void removeBookmarks( const QList<KHECore::KBookmark> &bookmarks );
 
     bool adjustToReplaced( int offset, int removedLength, int insertedLength );
-    bool adjustToMoved( int firstPartStart, int secondPartStart, int secondPartLength );
+    bool adjustToSwapped( int firstPartStart, int secondPartStart, int secondPartLength );
 
   public:
     bool contains( int offset ) const;

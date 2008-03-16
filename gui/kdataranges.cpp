@@ -23,7 +23,7 @@
 #include "kdataranges.h"
 
 // Okteta core
-#include <kreplacementscope.h>
+#include <arraychangemetrics.h>
 
 
 namespace KHEUI {
@@ -309,13 +309,20 @@ void KDataRanges::adaptSelectionToChange( int Pos, int RemovedLength, int Insert
   Selection.adaptToChange(Pos,RemovedLength,InsertedLength );
 }
 
-void KDataRanges::adaptSelectionToChange( const QList<KHE::ReplacementScope> &replacementList )
+
+void KDataRanges::adaptSelectionToChange( const QList<KHE::ArrayChangeMetrics> &changeList )
 {
-    for( int i=0; i<replacementList.size(); ++i )
+    if( !Selection.isValid() )
+        return;
+
+    for( int i=0; i<changeList.size(); ++i )
     {
-        const KHE::ReplacementScope &replacement = replacementList[i];
-        //TODO: change parameters to ReplacementScope
-        Selection.adaptToChange( replacement.offset(), replacement.removeLength(), replacement.insertLength() );
+        const KHE::ArrayChangeMetrics &change = changeList[i];
+        //TODO: change parameters to ArrayChangeMetrics
+        if( change.type() == KHE::ArrayChangeMetrics::Replacement )
+            Selection.adaptToChange( change.offset(), change.removeLength(), change.insertLength() );
+        else if( change.type() == KHE::ArrayChangeMetrics::Swapping )
+            Selection.adaptToSwap( change.offset(), change.secondStart(), change.secondLength() );
     }
 }
 

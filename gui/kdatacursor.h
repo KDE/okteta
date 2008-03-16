@@ -29,7 +29,7 @@
 #include <QtCore/QList>
 
 namespace KHE {
-class ReplacementScope;
+class ArrayChangeMetrics;
 }
 
 namespace KHEUI
@@ -131,8 +131,7 @@ class KDataCursor
     void stepBehind();
     void updateCoord();
     void adaptToChange( int Pos, int RemovedLength, int InsertedLength );
-    void adaptToChange( const QList<KHE::ReplacementScope> &replacementList, int oldLength );
-
+    void adaptToChange( const QList<KHE::ArrayChangeMetrics> &changeList, int oldLength );
 
   public: // logical state access
     bool atStart() const;

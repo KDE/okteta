@@ -89,8 +89,6 @@ class KPieceTableByteArrayModel::Private
     /**  */
     bool mReadOnly:1;
     /** */
-//     bool mModified:1;
-    /** */
     bool mAutoDelete:1;
 
     const char *mData;

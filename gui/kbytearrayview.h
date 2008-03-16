@@ -30,8 +30,8 @@
 #include <ksection.h>
 #include <ksectionlist.h>
 // Qt
-#include <QtCore/QList>
 #include <QtGui/QClipboard>
+#include <QtCore/QList>
 
 class QTimer;
 
@@ -41,7 +41,7 @@ class KCharCodec;
 class KAbstractByteArrayModel;
 }
 namespace KHE {
-class ReplacementScope;
+class ArrayChangeMetrics;
 }
 
 namespace KHEUI
@@ -456,8 +456,8 @@ class KHEUI_EXPORT KByteArrayView : public KColumnsView
     void startDrag();
 
     void adaptController();
+    void onContentsChanged( const QList<KHE::ArrayChangeMetrics> &changeList );
     void onContentsReplaced( int Pos, int RemovedLength, int InsertedLength );
-    void onContentsReplaced( const QList<KHE::ReplacementScope> &list );
     void onContentsSwapped( int firstStart, int secondStart, int secondLength );
     void updateRange( int Start, int End );
     void updateRange( const KHE::KSectionList &list );

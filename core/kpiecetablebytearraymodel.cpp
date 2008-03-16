@@ -21,13 +21,11 @@
 */
 
 #include "kpiecetablebytearraymodel.h"
-
-// lib
 #include "kpiecetablebytearraymodel_p.h"
 
 
-namespace KHECore {
-
+namespace KHECore
+{
 
 KPieceTableByteArrayModel::KPieceTableByteArrayModel( const char *data, unsigned int size,
                                                       bool careForMemory )

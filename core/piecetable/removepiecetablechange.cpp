@@ -25,7 +25,7 @@
 // lib
 #include "piecetable.h"
 #include <ksection.h>
-#include <kreplacementscope.h>
+#include <arraychangemetrics.h>
 // KDE
 #include <KLocale>
 
@@ -81,8 +81,10 @@ KHE::KSection RemovePieceTableChange::revert( PieceTable *pieceTable )
     return KHE::KSection( mRemoveSection.start(), pieceTable->size()-1 );
 }
 
-KHE::ReplacementScope RemovePieceTableChange::replacement() const
-{ return KHE::ReplacementScope(mRemoveSection.start(),mRemoveSection.width(),0); }
+KHE::ArrayChangeMetrics RemovePieceTableChange::metrics() const
+{
+    return KHE::ArrayChangeMetrics::asReplacement( mRemoveSection.start(), mRemoveSection.width(), 0 );
+}
 
 RemovePieceTableChange::~RemovePieceTableChange() {}
 

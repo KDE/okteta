@@ -56,7 +56,7 @@ class RevertablePieceTable
     // 
     void finishChange();
     bool revertBeforeChange( int changeId,
-                             KHE::KSectionList *changedRanges, QList<KHE::ReplacementScope> *replacementList );
+                             KHE::KSectionList *changedRanges, QList<KHE::ArrayChangeMetrics> *changeList );
 
     void setBeforeCurrentChangeAsBase( bool hide );
 
@@ -76,22 +76,40 @@ class RevertablePieceTable
     PieceTableChangeHistory mChangeHistory;
 };
 
+
 inline bool RevertablePieceTable::getStorageData( int *storageId, int *storageOffset, int dataOffset ) const
-{ return mPieceTable.getStorageData( storageId, storageOffset, dataOffset ); }
+{
+    return mPieceTable.getStorageData( storageId, storageOffset, dataOffset );
+}
 inline void RevertablePieceTable::setBeforeCurrentChangeAsBase( bool hide )
-{ mChangeHistory.setBeforeCurrentChangeAsBase( hide ); }
+{
+    mChangeHistory.setBeforeCurrentChangeAsBase( hide );
+}
 
 inline int RevertablePieceTable::size()                const { return mPieceTable.size(); }
 inline int RevertablePieceTable::changesCount()        const { return mChangeHistory.count(); }
 inline int RevertablePieceTable::appliedChangesCount() const { return mChangeHistory.appliedChangesCount(); }
+inline bool RevertablePieceTable::isAtBase()           const { return mChangeHistory.isAtBase(); }
+inline QString RevertablePieceTable::changeDescription( int change ) const
+{
+    return mChangeHistory.changeDescription( change );
+}
+inline QString RevertablePieceTable::headChangeDescription() const
+{
+    return mChangeHistory.headChangeDescription();
+}
 
-inline void RevertablePieceTable::openGroupedChange() { mChangeHistory.openGroupedChange(); }
+inline void RevertablePieceTable::openGroupedChange()  { mChangeHistory.openGroupedChange(); }
 inline void RevertablePieceTable::closeGroupedChange() { mChangeHistory.closeGroupedChange(); }
-inline void RevertablePieceTable::finishChange() { mChangeHistory.finishChange(); }
+inline void RevertablePieceTable::finishChange()       { mChangeHistory.finishChange(); }
 
-inline QString RevertablePieceTable::changeDescription( int change ) const { return mChangeHistory.changeDescription( change ); }
-inline QString RevertablePieceTable::headChangeDescription()         const { return mChangeHistory.headChangeDescription(); }
-inline bool RevertablePieceTable::isAtBase() const { return mChangeHistory.isAtBase(); }
+inline bool RevertablePieceTable::revertBeforeChange( int changeId,
+                                                      KHE::KSectionList *changedRanges,
+                                                      QList<KHE::ArrayChangeMetrics> *changeList )
+{
+    return mChangeHistory.revertBeforeChange( &mPieceTable, changeId, changedRanges, changeList );
+}
+
 
 }
 

@@ -23,6 +23,9 @@
 #include "kpiecetablebytearraymodel_p.h"
 #include "kpiecetablebytearraymodel.h"
 
+// lib
+#include "arraychangemetrics.h"
+
 #include <KDebug>
 
 namespace KHECore
@@ -219,7 +222,6 @@ unsigned int KPieceTableByteArrayModel::Private::replace( const KSection &r, con
 
 bool KPieceTableByteArrayModel::Private::swap( int firstStart, const KSection &second )
 {
-return false;
     KSection secondSection( second );
     // correct parameters
     secondSection.restrictEndTo( mPieceTable.size()-1 );
@@ -232,7 +234,7 @@ return false;
 
     mPieceTable.swap( firstStart, secondSection );
 
-    const bool bookmarksModified = mBookmarks.adjustToMoved( firstStart, secondSection.start(),secondSection.width() );
+    const bool bookmarksModified = mBookmarks.adjustToSwapped( firstStart, secondSection.start(),secondSection.width() );
 
     emit p->contentsSwapped( firstStart, secondSection.start(),secondSection.width()  );
     emit p->contentsChanged( firstStart, secondSection.end() );
@@ -272,13 +274,13 @@ int KPieceTableByteArrayModel::Private::fill( const char fillByte, unsigned int 
 
 void KPieceTableByteArrayModel::Private::revertToVersionByIndex( int versionIndex )
 {
-    QList<KHE::ReplacementScope> replacementList;
+    QList<KHE::ArrayChangeMetrics> changeList;
     KHE::KSectionList changedRanges;
 
     const bool oldModified = isModified();
 
     const bool anyChanges =
-        mPieceTable.revertBeforeChange( versionIndex, &changedRanges, &replacementList );
+        mPieceTable.revertBeforeChange( versionIndex, &changedRanges, &changeList );
 
     if( !anyChanges )
         return;
@@ -286,7 +288,10 @@ void KPieceTableByteArrayModel::Private::revertToVersionByIndex( int versionInde
     const bool newModified = isModified();
     const bool isModificationChanged = ( oldModified != newModified );
 
-    emit p->contentsReplaced( replacementList );
+//TODO: what about the bookmarks? They need version support, too.
+// Modell of the bookmarks. But shouldn't they be independent?
+
+    emit p->contentsChanged( changeList );
     emit p->contentsChanged( changedRanges );
     if( isModificationChanged ) emit p->modificationChanged( newModified );
     emit p->revertedToVersionIndex( versionIndex );

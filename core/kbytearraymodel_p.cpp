@@ -279,8 +279,8 @@ bool KByteArrayModelPrivate::swap( int firstStart, const KSection &secondSection
     delete [] temp;
 
     const bool bookmarksModified = toRight ?
-        m_bookmarks.adjustToMoved( sourceSection.start(), sourceSection.end()+1, firstStart-sourceSection.end()-1 ) :
-        m_bookmarks.adjustToMoved( firstStart, sourceSection.start(),sourceSection.width() );
+        m_bookmarks.adjustToSwapped( sourceSection.start(), sourceSection.end()+1, firstStart-sourceSection.end()-1 ) :
+        m_bookmarks.adjustToSwapped( firstStart, sourceSection.start(),sourceSection.width() );
     m_modified = true;
 
     emit p->contentsSwapped( firstStart, sourceSection.start(),sourceSection.width()  );

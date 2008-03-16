@@ -28,8 +28,8 @@
 #include "testpiecetablechange.h"
 #include <piecetable/piecetable.h>
 //
+#include <arraychangemetrics.h>
 #include <ksectionlist.h>
-#include <kreplacementscope.h>
 // Qt
 #include <QtTest/QtTest>
 
@@ -137,6 +137,14 @@ void PieceTableChangeHistoryTest::testRevertBeforeChange()
     TestPieceTableChange *change2 = new TestPieceTableChange( type2Id, description2, 2 );
     TestPieceTableChange *change3 = new TestPieceTableChange( type3Id, description3, 3 );
     TestPieceTableChange *change4 = new TestPieceTableChange( type4Id, description4, 4 );
+    KHE::ArrayChangeMetrics changeMetrics1 = change1->metrics();
+    KHE::ArrayChangeMetrics changeMetrics2 = change2->metrics();
+    KHE::ArrayChangeMetrics changeMetrics3 = change3->metrics();
+    KHE::ArrayChangeMetrics changeMetrics4 = change4->metrics();
+    KHE::ArrayChangeMetrics revertedChangeMetrics1 = change1->metrics(); revertedChangeMetrics1.revert();
+    KHE::ArrayChangeMetrics revertedChangeMetrics2 = change2->metrics(); revertedChangeMetrics2.revert();
+    KHE::ArrayChangeMetrics revertedChangeMetrics3 = change3->metrics(); revertedChangeMetrics3.revert();
+    KHE::ArrayChangeMetrics revertedChangeMetrics4 = change4->metrics(); revertedChangeMetrics4.revert();
 
     bool result = pieceTableChangeHistory.appendChange( change1 );
     result = pieceTableChangeHistory.appendChange( change2 );
@@ -145,9 +153,9 @@ void PieceTableChangeHistoryTest::testRevertBeforeChange()
 
     // revert before first change
     KSectionList changedSectionList;
-    QList<ReplacementScope> replacementList;
+    QList<ArrayChangeMetrics> changeList;
     result =
-        pieceTableChangeHistory.revertBeforeChange( &pieceTable, 0, &changedSectionList, &replacementList );
+        pieceTableChangeHistory.revertBeforeChange( &pieceTable, 0, &changedSectionList, &changeList );
 
     QVERIFY( result );
     QCOMPARE( pieceTableChangeHistory.count(), 4 );
@@ -155,12 +163,17 @@ void PieceTableChangeHistoryTest::testRevertBeforeChange()
     QCOMPARE( pieceTableChangeHistory.headChangeDescription(), description4 );
     QCOMPARE( changedSectionList.count(), 1 );
     QCOMPARE( changedSectionList.first(), KSection(1,4) );
+    QCOMPARE( changeList.count(), 4 );
+    QCOMPARE( changeList[0], revertedChangeMetrics4 );
+    QCOMPARE( changeList[1], revertedChangeMetrics3 );
+    QCOMPARE( changeList[2], revertedChangeMetrics2 );
+    QCOMPARE( changeList[3], revertedChangeMetrics1 );
 
     // revert before last change
     changedSectionList.clear();
-    replacementList.clear();
+    changeList.clear();
     result =
-        pieceTableChangeHistory.revertBeforeChange( &pieceTable, 3, &changedSectionList, &replacementList );
+        pieceTableChangeHistory.revertBeforeChange( &pieceTable, 3, &changedSectionList, &changeList );
 
     QVERIFY( result );
     QCOMPARE( pieceTableChangeHistory.count(), 4 );
@@ -168,12 +181,16 @@ void PieceTableChangeHistoryTest::testRevertBeforeChange()
     QCOMPARE( pieceTableChangeHistory.headChangeDescription(), description4 );
     QCOMPARE( changedSectionList.count(), 1 );
     QCOMPARE( changedSectionList.first(), KSection(1,3) );
+    QCOMPARE( changeList.count(), 3 );
+    QCOMPARE( changeList[0], changeMetrics1 );
+    QCOMPARE( changeList[1], changeMetrics2 );
+    QCOMPARE( changeList[2], changeMetrics3 );
 
     // revert after first change
     changedSectionList.clear();
-    replacementList.clear();
+    changeList.clear();
     result =
-        pieceTableChangeHistory.revertBeforeChange( &pieceTable, 1, &changedSectionList, &replacementList );
+        pieceTableChangeHistory.revertBeforeChange( &pieceTable, 1, &changedSectionList, &changeList );
 
     QVERIFY( result );
     QCOMPARE( pieceTableChangeHistory.count(), 4 );
@@ -181,12 +198,15 @@ void PieceTableChangeHistoryTest::testRevertBeforeChange()
     QCOMPARE( pieceTableChangeHistory.headChangeDescription(), description4 );
     QCOMPARE( changedSectionList.count(), 1 );
     QCOMPARE( changedSectionList.first(), KSection(2,3) );
+    QCOMPARE( changeList.count(), 2 );
+    QCOMPARE( changeList[0], revertedChangeMetrics3 );
+    QCOMPARE( changeList[1], revertedChangeMetrics2 );
 
     // revert after last change
     changedSectionList.clear();
-    replacementList.clear();
+    changeList.clear();
     result =
-        pieceTableChangeHistory.revertBeforeChange( &pieceTable, 4, &changedSectionList, &replacementList );
+        pieceTableChangeHistory.revertBeforeChange( &pieceTable, 4, &changedSectionList, &changeList );
 
     QVERIFY( result );
     QCOMPARE( pieceTableChangeHistory.count(), 4 );
@@ -194,6 +214,10 @@ void PieceTableChangeHistoryTest::testRevertBeforeChange()
     QCOMPARE( pieceTableChangeHistory.headChangeDescription(), description4 );
     QCOMPARE( changedSectionList.count(), 1 );
     QCOMPARE( changedSectionList.first(), KSection(2,4) );
+    QCOMPARE( changeList.count(), 3 );
+    QCOMPARE( changeList[0], changeMetrics2 );
+    QCOMPARE( changeList[1], changeMetrics3 );
+    QCOMPARE( changeList[2], changeMetrics4 );
 }
 
 }

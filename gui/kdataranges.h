@@ -33,7 +33,7 @@
 #include <QtCore/QList>
 
 namespace KHE {
-class ReplacementScope;
+class ArrayChangeMetrics;
 }
 
 
@@ -72,7 +72,7 @@ class KDataRanges
     void addChangedRange( int SI, int EI );
     void addChangedRange( const KCoordRange &NewRange );
     void adaptSelectionToChange( int Pos, int RemovedLength, int InsertedLength );
-    void adaptSelectionToChange( const QList<KHE::ReplacementScope> &replacementList );
+    void adaptSelectionToChange( const QList<KHE::ArrayChangeMetrics> &changeList );
     void resetChangedRanges();
 
     void setModified( bool M = true );

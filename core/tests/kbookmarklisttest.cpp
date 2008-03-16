@@ -210,7 +210,7 @@ void KBookmarkListTest::testAdjustToReplaced()
     QVERIFY( !bookmarkList.isEmpty() );
 }
 
-void KBookmarkListTest::testAdjustToMove()
+void KBookmarkListTest::testAdjustToSwapped()
 {
     const KBookmark bookmark1( Offset1 );
     const KBookmark bookmark2( Offset2 );
@@ -229,7 +229,7 @@ void KBookmarkListTest::testAdjustToMove()
     bookmarkList.addBookmark( bookmark3_1 );
     bookmarkList.addBookmark( bookmark3 );
     bookmarkList.addBookmark( bookmark4 );
-    bool adjusted = bookmarkList.adjustToMoved( behindOffset1, Offset3, secondLength );
+    bool adjusted = bookmarkList.adjustToSwapped( behindOffset1, Offset3, secondLength );
 
     QList<int> newOffsets;
     newOffsets << bookmark1.offset() << bookmark3.offset()-firstLength << bookmark2.offset()+secondLength

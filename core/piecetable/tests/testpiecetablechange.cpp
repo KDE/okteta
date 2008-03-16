@@ -24,6 +24,7 @@
 
 // lib
 #include <piecetable/piecetable.h>
+#include <arraychangemetrics.h>
 #include <ksection.h>
 // Qt
 #include <QtCore/QString>
@@ -64,6 +65,12 @@ KHE::KSection TestPieceTableChange::revert( PieceTable *pieceTable )
 
     return KHE::KSection( mPosition, mPosition );
 }
+
+KHE::ArrayChangeMetrics TestPieceTableChange::metrics() const
+{
+    return KHE::ArrayChangeMetrics::asReplacement( mPosition, 1, 1 );
+}
+
 
 TestPieceTableChange::~TestPieceTableChange() {}
 

@@ -36,7 +36,7 @@ class KBookmarkListTest : public QObject
     void testContains();
     void testPreviousFrom();
     void testNextFrom();
-    void testAdjustToMove();
+    void testAdjustToSwapped();
     void testAdjustToReplaced();
 };
 

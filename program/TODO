@@ -26,20 +26,21 @@ Erledigt:
 - Binärfilter
 - Zeichenkettenextraktion
 
-Added before review:
+Done before review:
 ------------------------
 * add bookmarkable to kpiecetablebytearray
+* switch licensing
+* see why documents don't get removed on close of view -> close for views, not document
+* make drag'n'drop work properly again
+* complete change notifications
 
 Before adding to review:
 ------------------------
 * reset changebuffer if history gets cut
 * fix cursor problems
-* complete change notifications
-* make drag'n'drop work properly again
 * make tools work on selection
 * user documentation in docbook format
 * complete i18n (@-stuff)
-* see why documents don't get removed on close of view
 * test handling of readonly files
 
 After passing review:

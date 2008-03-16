@@ -47,7 +47,7 @@ class RemovePieceTableChange : public AbstractPieceTableChange
     virtual bool merge( const AbstractPieceTableChange *other );
     virtual KHE::KSection apply( PieceTable *pieceTable );
     virtual KHE::KSection revert( PieceTable *pieceTable );
-    virtual KHE::ReplacementScope replacement() const;
+    virtual KHE::ArrayChangeMetrics metrics() const;
 
   protected:
     KHE::KSection mRemoveSection;

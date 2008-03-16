@@ -82,6 +82,7 @@ class KSelection
     void reverse();
 
     void adaptToChange( int Pos, int RemovedLength, int InsertedLength );
+    void adaptToSwap( int firstOffset, int secondOffset, int secondLength );
 
   public: // value access
     /** 
@@ -190,6 +191,25 @@ inline void KSelection::adaptToChange( int Pos, int RemovedLength, int InsertedL
 {
   Section.adaptToChange( Pos, RemovedLength, InsertedLength );
   Anchor = isForward() ? Section.start() : Section.end()+1;
+}
+
+inline void KSelection::adaptToSwap( int firstOffset, int secondOffset, int secondLength )
+{
+    // no intersection?
+    if( Section.end() < firstOffset || Section.start() > secondOffset+secondLength-1 )
+        return;
+
+    const KHE::KSection firstSection( firstOffset, secondOffset-1 );
+    if( firstSection.includes(Section) )
+        Section.moveBy( secondLength );
+    else
+    {
+        const KHE::KSection secondSection = KHE::KSection::fromWidth( secondOffset, secondLength );
+        if( secondSection.includes(Section) )
+            Section.moveBy( -firstSection.width() );
+        else
+            Section.unset();
+    }
 }
 
 }

@@ -20,43 +20,24 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KPIECETABLE_SWAPRANGESPIECETABLECHANGE_H
-#define KPIECETABLE_SWAPRANGESPIECETABLECHANGE_H
+#ifndef ARRAYCHANGEMETRICSTEST_H
+#define ARRAYCHANGEMETRICSTEST_H
 
+// Qt
+#include <QtCore/QObject>
 
-// lib
-#include "abstractpiecetablechange.h"
-// common
-#include <ksection.h>
-
-namespace KPieceTable
+namespace KHE
 {
 
-/** class
-  *@author Friedrich W. H. Kossebau
-  */
-
-class SwapRangesPieceTableChange : public AbstractPieceTableChange
+class ArrayChangeMetricsTest : public QObject
 {
-  public:
-    SwapRangesPieceTableChange( int firstStart, const KHE::KSection &secondSection );
-    virtual ~SwapRangesPieceTableChange();
+  Q_OBJECT
 
-  public: // AbstractPieceTableChange API
-    virtual int type() const;
-    virtual QString description() const;
-    virtual KHE::KSection apply( PieceTable *pieceTable );
-    virtual KHE::KSection revert( PieceTable *pieceTable );
-    virtual KHE::ArrayChangeMetrics metrics() const;
-
-  protected:
-    int mFirstStart;
-    KHE::KSection mSecondSection;
+  private Q_SLOTS: // test functions
+    void testConstructorAsReplacement();
+    void testConstructorAsSwapping();
+    void testRevert();
 };
-
-inline SwapRangesPieceTableChange::SwapRangesPieceTableChange( int firstStart, const KHE::KSection &secondSection )
- : mFirstStart( firstStart ), mSecondSection( secondSection )
-{}
 
 }
 

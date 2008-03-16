@@ -24,7 +24,7 @@
 
 // lib
 #include <ksectionlist.h>
-#include <kreplacementscope.h>
+#include <arraychangemetrics.h>
 
 namespace KPieceTable
 {
@@ -84,7 +84,7 @@ bool PieceTableChangeHistory::appendChange( AbstractPieceTableChange *change )
 
 bool PieceTableChangeHistory::revertBeforeChange( PieceTable *pieceTable, int changeId,
                                                   KHE::KSectionList *changedRanges,
-                                                  QList<KHE::ReplacementScope> *replacementList )
+                                                  QList<KHE::ArrayChangeMetrics> *changeList )
 {
     int currentChangeId = mAppliedChangesCount;
 
@@ -99,8 +99,8 @@ bool PieceTableChangeHistory::revertBeforeChange( PieceTable *pieceTable, int ch
             const KHE::KSection changedSection =
                 change->apply( pieceTable );
             changedRanges->addSection( changedSection );
-            const KHE::ReplacementScope replacement = change->replacement();
-            replacementList->append( replacement );
+            const KHE::ArrayChangeMetrics changeMetrics = change->metrics();
+            changeList->append( changeMetrics );
         }
     }
     else
@@ -111,9 +111,9 @@ bool PieceTableChangeHistory::revertBeforeChange( PieceTable *pieceTable, int ch
             const KHE::KSection changedSection =
                 change->revert( pieceTable );
             changedRanges->addSection( changedSection );
-            KHE::ReplacementScope replacement = change->replacement();
-            replacement.revert();
-            replacementList->append( replacement );
+            KHE::ArrayChangeMetrics changeMetrics = change->metrics();
+            changeMetrics.revert();
+            changeList->append( changeMetrics );
         }
     }
     mAppliedChangesCount = changeId;

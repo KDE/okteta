@@ -35,7 +35,7 @@ class QString;
 
 namespace KHE {
 class KSectionList;
-class ReplacementScope;
+class ArrayChangeMetrics;
 }
 
 namespace KPieceTable
@@ -53,7 +53,7 @@ class PieceTableChangeHistory
     bool appendChange( AbstractPieceTableChange *change );
 
     bool revertBeforeChange( PieceTable *pieceTable, int changeId,
-                             KHE::KSectionList *changedRanges, QList<KHE::ReplacementScope> *replacementList );
+                             KHE::KSectionList *changedRanges, QList<KHE::ArrayChangeMetrics> *changeList );
 
     // 
     void openGroupedChange(); // TODO: hand over description? user change id?
@@ -86,12 +86,16 @@ class PieceTableChangeHistory
 
 
 inline PieceTableChangeHistory::PieceTableChangeHistory()
- : mChangeGroupOpened( 0 ), mMergeChanges( false ), mAppliedChangesCount( 0 ), mBaseBeforeChangeIndex( 0 ) {}
+ : mChangeGroupOpened( 0 ), mMergeChanges( false ), mAppliedChangesCount( 0 ), mBaseBeforeChangeIndex( 0 )
+{}
+
 inline int PieceTableChangeHistory::count()                     const { return mChangeStack.count(); }
 inline int PieceTableChangeHistory::appliedChangesCount()       const { return mAppliedChangesCount; }
 inline QString PieceTableChangeHistory::headChangeDescription() const { return changeDescription( count()-1 ); }
 inline bool PieceTableChangeHistory::isAtBase()                 const
-{ return ( mBaseBeforeChangeIndex == mAppliedChangesCount ); }
+{
+    return ( mBaseBeforeChangeIndex == mAppliedChangesCount );
+}
 
 inline void PieceTableChangeHistory::openGroupedChange()  { ++mChangeGroupOpened; }
 inline void PieceTableChangeHistory::closeGroupedChange() { if( mChangeGroupOpened > 0 ) --mChangeGroupOpened; }

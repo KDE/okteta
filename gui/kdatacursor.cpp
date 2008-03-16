@@ -25,7 +25,7 @@
 // lib
 #include "kdatalayout.h"
 // Okteta core
-#include <kreplacementscope.h>
+#include <arraychangemetrics.h>
 
 
 namespace KHEUI {
@@ -377,32 +377,47 @@ void KDataCursor::adaptToChange( int pos, int removedLength, int insertedLength 
 }
 
 // TODO: oldLength is a hack, as DataLayout is already updated and used by e.g. gotoCIndex
-void KDataCursor::adaptToChange( const QList<KHE::ReplacementScope> &replacementList, int oldLength )
+void KDataCursor::adaptToChange( const QList<KHE::ArrayChangeMetrics> &changeList, int oldLength )
 {
-    for( int i=0; i<replacementList.size(); ++i )
+    for( int i=0; i<changeList.size(); ++i )
     {
-        const KHE::ReplacementScope &replacement = replacementList[i];
+        const KHE::ArrayChangeMetrics &change = changeList[i];
         // cursor affected?
-        if( Index >= replacement.offset() )
+        if( Index >= change.offset() )
         {
-            oldLength += replacement.lengthChange();
-            if( oldLength > 0 )
+            switch( change.type() )
             {
-                // step behind removed range if inside 
-                const int newIndexAfterRemove = ( Index >= replacement.offset()+replacement.removeLength() ) ?
-                                                Index - replacement.removeLength() :
-                                                replacement.offset();
-                const int newIndex = newIndexAfterRemove + replacement.insertLength();
-                // if the cursor gets behind, it will never get inside again.
-                if( newIndex >= oldLength )
+            case KHE::ArrayChangeMetrics::Replacement:
+                oldLength += change.lengthChange();
+                if( oldLength > 0 )
                 {
-                    gotoEnd();
-                    return;
+                    // step behind removed range if inside 
+                    const int newIndexAfterRemove = ( Index >= change.offset()+change.removeLength() ) ?
+                                                    Index - change.removeLength() :
+                                                    change.offset();
+                    const int newIndex = newIndexAfterRemove + change.insertLength();
+                    // if the cursor gets behind, it will never get inside again.
+                    if( newIndex >= oldLength )
+                    {
+                        gotoEnd();
+                        return;
+                    }
+                    Index = newIndex;
                 }
-                Index = newIndex;
+                else
+                    Index = 0;
+            case KHE::ArrayChangeMetrics::Swapping:
+                if( Index < change.secondStart() )
+                {
+                    Index += change.secondLength();
+                }
+                else if( Index <= change.secondEnd() )
+                {
+                    Index -= change.firstLength();
+                }
+            default:
+                ;
             }
-            else
-                Index = 0;
         }
     }
 

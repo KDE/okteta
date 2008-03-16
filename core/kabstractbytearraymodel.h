@@ -26,7 +26,6 @@
 
 // lib
 #include "khe_export.h"
-#include "kreplacementscope.h"
 // commonlib
 #include <ksection.h>
 #include <ksectionlist.h>
@@ -35,6 +34,10 @@
 #include <QtCore/QByteArray>
 #include <QtCore/QList>
 
+
+namespace KHE {
+class ArrayChangeMetrics;
+}
 
 namespace KHECore
 {
@@ -252,16 +255,14 @@ class KHECORE_EXPORT KAbstractByteArrayModel : public QObject
 
   Q_SIGNALS:
     // TODO: how to deal replacing with fixed size of buffer?
-    void contentsReplaced( int Position, int RemovedLength, int InsertedLength );
-    void contentsReplaced( const QList<KHE::ReplacementScope> &replacementList );
+    void contentsReplaced( int offset, int removedLength, int insertedLength );
     void contentsSwapped( int firstStart, int secondStart, int secondLength );
-    void contentsChanged( int Start, int End );
+    void contentsChanged( int startOffset, int endOffset );
     void contentsChanged( const KHE::KSectionList &changedSectionList );
+    void contentsChanged( const QList<KHE::ArrayChangeMetrics> &changeList );
 
     void readOnlyChanged( bool isReadOnly );
-    void modificationChanged( bool IsChanged );
-    //void redoAvailable( bool IsAvailable );
-    //void undoAvailable( bool IsAvailable );
+    void modificationChanged( bool isModified );
 };
 
 inline int KAbstractByteArrayModel::insert( int Pos, const QByteArray &Source )

@@ -101,10 +101,4 @@ bool RevertablePieceTable::replaceOne( int dataOffset, int storageOffset )
     return mChangeHistory.appendChange( change );
 }
 
-bool RevertablePieceTable::revertBeforeChange( int changeId,
-                             KHE::KSectionList *changedRanges, QList<KHE::ReplacementScope> *replacementList )
-{
-    return mChangeHistory.revertBeforeChange( &mPieceTable, changeId, changedRanges, replacementList );
-}
-
 }

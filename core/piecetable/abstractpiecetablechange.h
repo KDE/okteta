@@ -29,7 +29,7 @@ class QString;
 namespace KHE
 {
 class KSection;
-class ReplacementScope;
+class ArrayChangeMetrics;
 }
 
 namespace KPieceTable
@@ -68,7 +68,7 @@ class AbstractPieceTableChange
     virtual KHE::KSection apply( PieceTable *pieceTable ) = 0;
     virtual KHE::KSection revert( PieceTable *pieceTable ) = 0;
 
-    virtual KHE::ReplacementScope replacement() const; // TODO: this should be any changes, like swap and co.
+    virtual KHE::ArrayChangeMetrics metrics() const = 0;
 };
 
 inline AbstractPieceTableChange::~AbstractPieceTableChange() {}

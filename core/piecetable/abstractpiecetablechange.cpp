@@ -22,8 +22,6 @@
 
 #include "abstractpiecetablechange.h"
 
-//
-#include <kreplacementscope.h>
 // Qt
 #include <QtCore/Qt>
 
@@ -35,7 +33,5 @@ bool AbstractPieceTableChange::merge( const AbstractPieceTableChange *other )
 Q_UNUSED( other )
     return false;
 }
-
-KHE::ReplacementScope AbstractPieceTableChange::replacement() const { return KHE::ReplacementScope(); }
 
 }

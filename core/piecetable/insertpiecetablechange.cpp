@@ -26,7 +26,7 @@
 // lib
 #include "piecetable.h"
 #include <ksection.h>
-#include <kreplacementscope.h>
+#include <arraychangemetrics.h>
 // KDE
 #include <KLocale>
 
@@ -71,8 +71,10 @@ KHE::KSection InsertPieceTableChange::revert( PieceTable *pieceTable )
     return KHE::KSection( mInsertOffset, oldLast );
 }
 
-KHE::ReplacementScope InsertPieceTableChange::replacement() const
-{ return KHE::ReplacementScope(mInsertOffset,0,mInsertLength); }
+KHE::ArrayChangeMetrics InsertPieceTableChange::metrics() const
+{
+    return KHE::ArrayChangeMetrics::asReplacement( mInsertOffset, 0, mInsertLength );
+}
 
 InsertPieceTableChange::~InsertPieceTableChange() {}
 

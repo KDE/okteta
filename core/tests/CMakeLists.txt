@@ -12,6 +12,17 @@ set( oktetacoretestutil_LIB_SRCS
 kde4_add_library( oktetacoretestutil  STATIC ${oktetacoretestutil_LIB_SRCS} )
 
 
+########### arraychangemetricstest ###############
+
+set( arraychangemetricstest_SRCS
+  arraychangemetricstest.cpp
+#   ${SUTDIR}/arraychangemetrics.cpp
+)
+
+kde4_add_unit_test( arraychangemetricstest  TESTNAME libokteta-core-arraychangemetricstest  ${arraychangemetricstest_SRCS} )
+target_link_libraries( arraychangemetricstest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+
+
 ########### ksectiontest ###############
 
 set( ksectiontest_SRCS

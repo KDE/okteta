@@ -25,6 +25,7 @@
 // lib
 #include "piecetable.h"
 #include <ksection.h>
+#include <arraychangemetrics.h>
 // KDE
 #include <KLocale>
 
@@ -51,6 +52,11 @@ KHE::KSection SwapRangesPieceTableChange::revert( PieceTable *pieceTable )
     pieceTable->swap( mFirstStart, KHE::KSection(mFirstStart+mSecondSection.width(),mSecondSection.end()) );
 
     return KHE::KSection( mFirstStart, mSecondSection.end() );
+}
+
+KHE::ArrayChangeMetrics SwapRangesPieceTableChange::metrics() const
+{
+    return KHE::ArrayChangeMetrics::asSwapping( mFirstStart, mSecondSection.start(), mSecondSection.width() );
 }
 
 SwapRangesPieceTableChange::~SwapRangesPieceTableChange() {}
