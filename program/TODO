@@ -34,11 +34,13 @@ Done before review:
 * make drag'n'drop work properly again
 * complete change notifications
 * reset changebuffer if history gets cut
+* make filter work on selection
 
 Before adding to review:
 ------------------------
 * fix cursor problems
-* make tools work on selection
+* fix replace problem
+* make printing support only selection
 * user documentation in docbook format
 * complete i18n (@-stuff)
 * test handling of readonly files
@@ -52,6 +54,8 @@ For KDE 4.1:
 * enable extract strings tool and add copy
 * session support: full storing and restoring of view/model state
 * think about turning insert pattern & Co. into a tool
+* more explicit titels for undo/redo actions (range, data)
+* operations like filter should be able to set an own description of their action (undo/redo)
 
 Later on:
 ---------
@@ -62,3 +66,5 @@ Later on:
 * add AbstractTool, ToolManager and ToolManagerControl
 * Prepare libframesprint for inclusion into kdelibs
 * find good name for libkakao
+* add profiles with loaded tools and their positions (environments)
+* add splitting of views
