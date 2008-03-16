@@ -46,7 +46,7 @@ QString FilterTool::charCodecName() const
     return mByteArrayView ? mByteArrayView->encodingName() : QString();
 }
 
-bool FilterTool::hasView() const { return ( mByteArrayView != 0 ); }
+bool FilterTool::dataSelected() const { return ( mByteArrayView != 0 ); }
 
 AbstractByteArrayFilterParameterSet *FilterTool::parameterSet( int filterId )
 {
@@ -57,15 +57,22 @@ AbstractByteArrayFilterParameterSet *FilterTool::parameterSet( int filterId )
 
 void FilterTool::setView( KAbstractView *view )
 {
-//     if( mByteArrayView ) mByteArrayView->disconnect( this );
+    if( mByteArrayView ) mByteArrayView->disconnect( this );
 
-    mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
+    mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
 
-    KByteArrayDocument *document = view ? static_cast<KByteArrayDocument*>( view->document() ) : 0;
+    KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->document() ) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
-    const bool hasView = ( mByteArrayView != 0 );
-    emit viewChanged( hasView );
+    const bool hasByteArray = ( mByteArrayModel != 0 );
+    if( hasByteArray )
+    {
+        connect( mByteArrayView, SIGNAL(selectionChanged( bool )), SIGNAL(dataSelectionChanged( bool )) );
+    }
+
+    const bool dataSelected = hasByteArray && mByteArrayView->hasSelectedData();
+
+    emit dataSelectionChanged( dataSelected );
 }
 
 void FilterTool::addFilter( AbstractByteArrayFilter *filter )
@@ -80,8 +87,7 @@ void FilterTool::filter( int filterId ) const
 
     if( byteArrayFilter )
     {
-        //TODO: support filter of selection
-        const KHE::KSection filteredSection = KHE::KSection::fromWidth( 0, mByteArrayModel->size() );
+        const KHE::KSection filteredSection = mByteArrayView->selection();
 
         QByteArray filterResult;
         filterResult.resize( filteredSection.width() );
@@ -92,6 +98,5 @@ void FilterTool::filter( int filterId ) const
             mByteArrayModel->replace( filteredSection, filterResult );
     }
 }
-
 
 FilterTool::~FilterTool() {}

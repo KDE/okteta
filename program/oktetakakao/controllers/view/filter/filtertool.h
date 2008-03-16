@@ -56,14 +56,14 @@ class FilterTool : public QObject
 
   public:
     void filter( int filterId ) const;
-    bool hasView() const;
+    bool dataSelected() const;
 
   public:
     QString charCodecName() const;
     AbstractByteArrayFilterParameterSet *parameterSet( int filterId );
 
   Q_SIGNALS:
-    void viewChanged( bool hasView );
+    void dataSelectionChanged( bool dataSelected );
 
   protected:
     KHEUI::KByteArrayView *mByteArrayView;

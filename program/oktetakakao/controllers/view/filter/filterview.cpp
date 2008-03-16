@@ -83,8 +83,8 @@ FilterView::FilterView( FilterTool *tool, QWidget *parent )
                       i18n("Executes the filter"),
                       i18n("<qt>If you press the <b>Filter</b> button, the operation you selected "
                            "above is executed on the document with the given options.</qt>")), this );
-    mFilterButton->setEnabled( mTool->hasView() );
-    connect( mTool, SIGNAL(viewChanged( bool )), SLOT(onViewChanged( bool )) );
+    mFilterButton->setEnabled( mTool->dataSelected() );
+    connect( mTool, SIGNAL(dataSelectionChanged( bool )), SLOT(onDataSelectionChanged( bool )) );
     connect( mFilterButton, SIGNAL(clicked( bool )), SLOT(onFilterClicked()) );
     buttonLayout->addWidget( mFilterButton );
     baseLayout->addLayout( buttonLayout );
@@ -113,7 +113,7 @@ void FilterView::getParameterSet( AbstractByteArrayFilterParameterSet *parameter
 
 void FilterView::onFilterClicked()
 {
-    int filterId = mOperationComboBox->currentIndex();
+    const int filterId = mOperationComboBox->currentIndex();
 
     AbstractByteArrayFilterParameterSet *parameterSet = mTool->parameterSet( filterId );
     if( parameterSet )
@@ -141,18 +141,18 @@ void FilterView::onOperationChange( int index )
     }
 }
 
-void FilterView::onViewChanged( bool hasView )
+void FilterView::onDataSelectionChanged( bool dataSelected )
 {
     AbstractByteArrayFilterParameterSetEdit *parametersetEdit =
         qobject_cast<AbstractByteArrayFilterParameterSetEdit *>( mParameterSetEditStack->currentWidget() );
     const bool isValid = ( parametersetEdit ? parametersetEdit->isValid() : false );
 
-    mFilterButton->setEnabled( hasView && isValid );
+    mFilterButton->setEnabled( dataSelected && isValid );
 }
 
 void FilterView::onValidityChanged( bool isValid )
 {
-    mFilterButton->setEnabled( mTool->hasView() && isValid );
+    mFilterButton->setEnabled( mTool->dataSelected() && isValid );
 }
 
 FilterView::~FilterView() {}

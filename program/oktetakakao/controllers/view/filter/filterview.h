@@ -52,7 +52,7 @@ class FilterView : public QWidget
   private Q_SLOTS:
     void onFilterClicked();
     void onOperationChange( int index );
-    void onViewChanged( bool hasView );
+    void onDataSelectionChanged( bool dataSelected );
     void onValidityChanged( bool isValid );
 
   private:
