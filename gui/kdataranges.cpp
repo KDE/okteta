@@ -302,11 +302,7 @@ void KDataRanges::setFirstWordSelection( const KHE::KSection &Section )
      Selection.setForward( Forward );
    }
  }
- 
-void KDataRanges::adaptSelectionToChange( int Pos, int RemovedLength, int InsertedLength )
-{
-  Selection.adaptToReplacement(Pos,RemovedLength,InsertedLength );
-}
+
 
 void KDataRanges::adaptSelectionToChange( const KHE::ArrayChangeMetricsList &changeList )
 {
