@@ -22,6 +22,8 @@
 
 #include "kfixedsizebytearraymodel.h"
 
+// lib
+#include <arraychangemetricslist.h>
 // C
 #include <string.h>
 
@@ -63,7 +65,7 @@ void KFixedSizeByteArrayModel::setDatum( unsigned int Offset, const char Char )
   Data[Offset] = Char;
   Modified = true;
 
-  emit contentsReplaced( Offset, 1, 1 );
+  emit contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(Offset, 1, 1) );
   emit contentsChanged( Offset, Offset );
   emit modificationChanged( true );
 }
@@ -86,7 +88,7 @@ int KFixedSizeByteArrayModel::insert( int Pos, const char* D, int InputLength )
 
   Modified = true;
 
-  emit contentsReplaced( Pos, 0, InputLength );
+  emit contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(Pos, 0, InputLength) );
   //emit contentsReplaced( Pos, , 0 ); TODO: how to signal the removed data?
   emit contentsChanged( Pos, Size-1 );
   emit modificationChanged( true );
@@ -111,7 +113,7 @@ int KFixedSizeByteArrayModel::remove( const KSection &R )
 
   Modified = true;
 
-  emit contentsReplaced( Remove.start(), Remove.width(), 0 );
+  emit contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(Remove.start(), Remove.width(), 0) );
   //emit contentsReplaced( Pos, 0,  ); TODO: how to signal the inserted data?
   emit contentsChanged( Remove.start(), Size-1 );
   emit modificationChanged( true );
@@ -153,7 +155,7 @@ unsigned int KFixedSizeByteArrayModel::replace( const KSection &R, const char* D
 
   Modified = true;
 
-  emit contentsReplaced( Remove.start(), Remove.width(), InputLength );
+  emit contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(Remove.start(), Remove.width(), InputLength) );
   //emit contentsReplaced( Pos, 0,  ); TODO: how to signal the changed data at the end?
   emit contentsChanged( Remove.start(), SizeDiff==0?Remove.end():Size-1 );
   emit modificationChanged( true );
@@ -229,7 +231,7 @@ bool KFixedSizeByteArrayModel::swap( int firstStart, const KSection &secondSecti
 
   Modified = true;
 
-  emit contentsSwapped( firstStart, SourceSection.start(),SourceSection.width()  );
+  emit contentsChanged( KHE::ArrayChangeMetricsList::oneSwapping(firstStart, SourceSection.start(),SourceSection.width()) );
   emit contentsChanged( ToRight?SourceSection.start():firstStart, ToRight?firstStart:SourceSection.end() );
   emit modificationChanged( true );
   return true;
@@ -250,7 +252,7 @@ int KFixedSizeByteArrayModel::fill( const char FChar, unsigned int Pos, int Fill
   memset( &Data[Pos], FChar, FillLength );
   Modified = true;
 
-  emit contentsReplaced( Pos, FillLength, FillLength );
+  emit contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(Pos, FillLength, FillLength) );
   emit contentsChanged( Pos, Pos+FillLength-1 );
   emit modificationChanged( true );
   return FillLength;
@@ -306,10 +308,6 @@ int KFixedSizeByteArrayModel::compare( const KAbstractByteArrayModel &Other, con
 
   return ValueByLength;
 }
-
-
-int KFixedSizeByteArrayModel::find(  const char*/*KeyData*/, int /*Length*/, const KSection &/*Section*/  ) const { return 0; }
-int KFixedSizeByteArrayModel::rfind( const char*, int /*Length*/, int /*Pos*/ ) const { return 0; }
 
 
 void KFixedSizeByteArrayModel::reset( unsigned int Pos, unsigned int Length )

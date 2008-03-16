@@ -41,7 +41,7 @@ class KCharCodec;
 class KAbstractByteArrayModel;
 }
 namespace KHE {
-class ArrayChangeMetrics;
+class ArrayChangeMetricsList;
 }
 
 namespace KHEUI
@@ -456,9 +456,7 @@ class KHEUI_EXPORT KByteArrayView : public KColumnsView
     void startDrag();
 
     void adaptController();
-    void onContentsChanged( const QList<KHE::ArrayChangeMetrics> &changeList );
-    void onContentsReplaced( int Pos, int RemovedLength, int InsertedLength );
-    void onContentsSwapped( int firstStart, int secondStart, int secondLength );
+    void onContentsChanged( const KHE::ArrayChangeMetricsList &changeList );
     void updateRange( int Start, int End );
     void updateRange( const KHE::KSectionList &list );
     void onBookmarksChange( const QList<KHECore::KBookmark> &bookmarks );

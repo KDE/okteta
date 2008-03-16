@@ -25,7 +25,7 @@
 // lib
 #include "kdatalayout.h"
 // Okteta core
-#include <arraychangemetrics.h>
+#include <arraychangemetricslist.h>
 
 
 namespace KHEUI {
@@ -377,7 +377,7 @@ void KDataCursor::adaptToChange( int pos, int removedLength, int insertedLength 
 }
 
 // TODO: oldLength is a hack, as DataLayout is already updated and used by e.g. gotoCIndex
-void KDataCursor::adaptToChange( const QList<KHE::ArrayChangeMetrics> &changeList, int oldLength )
+void KDataCursor::adaptToChange( const KHE::ArrayChangeMetricsList &changeList, int oldLength )
 {
     for( int i=0; i<changeList.size(); ++i )
     {

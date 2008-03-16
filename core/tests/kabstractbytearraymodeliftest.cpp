@@ -26,6 +26,8 @@
 #include <kfixedsizebytearraymodel.h>
 // test util
 #include <util/fill.h>
+// lib
+#include <arraychangemetricslist.h>
 // Qt
 #include <QtTest/QtTest>
 #include <QtTest/QSignalSpy>
@@ -34,17 +36,17 @@ using namespace KHE;
 using namespace KHECore;
 
 
-#include <KDebug>
 // ---------------------------------------------------------------- Tests -----
 
+ Q_DECLARE_METATYPE(KHE::ArrayChangeMetricsList)
 
 void KAbstractByteArrayModelIfTest::init()
 {
   ByteArrayModel = createByteArrayModel();
 
+  qRegisterMetaType<KHE::ArrayChangeMetricsList>( "KHE::ArrayChangeMetricsList" );
   ContentsChangedSpy =  new QSignalSpy( ByteArrayModel, SIGNAL(contentsChanged(int,int)) );
-  ContentsReplacedSpy = new QSignalSpy( ByteArrayModel, SIGNAL(contentsReplaced(int,int,int)) );
-  ContentsSwappedSpy =    new QSignalSpy( ByteArrayModel, SIGNAL(contentsSwapped(int,int,int)) );
+  ContentsChangeListSpy = new QSignalSpy( ByteArrayModel, SIGNAL(contentsChanged(const KHE::ArrayChangeMetricsList&)) );
 }
 
 void KAbstractByteArrayModelIfTest::cleanup()
@@ -52,37 +54,37 @@ void KAbstractByteArrayModelIfTest::cleanup()
   deleteByteArrayModel( ByteArrayModel );
 
   delete ContentsChangedSpy;
-  delete ContentsReplacedSpy;
-  delete ContentsSwappedSpy;
+  delete ContentsChangeListSpy;
 }
 
 void KAbstractByteArrayModelIfTest::clearSignalSpys()
 {
   ContentsChangedSpy->clear();
-  ContentsReplacedSpy->clear();
-  ContentsSwappedSpy->clear();
+  ContentsChangeListSpy->clear();
 }
 
 void KAbstractByteArrayModelIfTest::checkContentsReplaced( int Position, int RemovedLength, int InsertedLength )
 {
-   QVERIFY( ContentsReplacedSpy->isValid() );
-   QCOMPARE( ContentsReplacedSpy->count(), 1 );
-   QList<QVariant> Arguments = ContentsReplacedSpy->takeFirst();
-   QCOMPARE( Arguments.at(0).toInt(), Position );
-   QCOMPARE( Arguments.at(1).toInt(), RemovedLength );
-   QCOMPARE( Arguments.at(2).toInt(), InsertedLength );
+   QVERIFY( ContentsChangeListSpy->isValid() );
+   QCOMPARE( ContentsChangeListSpy->count(), 1 );
+   const QList<QVariant> Arguments = ContentsChangeListSpy->takeFirst();
+   const KHE::ArrayChangeMetrics changeMetrics = (qvariant_cast<KHE::ArrayChangeMetricsList>(Arguments.at(0))).at(0);
+   QCOMPARE( changeMetrics.offset(), Position );
+   QCOMPARE( changeMetrics.removeLength(), RemovedLength );
+   QCOMPARE( changeMetrics.insertLength(), InsertedLength );
 }
 void KAbstractByteArrayModelIfTest::checkContentsReplaced( const KHE::KSection &RemoveSection, int InsertedLength )
 { checkContentsReplaced( RemoveSection.start(), RemoveSection.width(), InsertedLength ); }
 
 void KAbstractByteArrayModelIfTest::checkContentsSwapped( int firstStart, int secondStart, int secondLength )
 {
-   QVERIFY( ContentsSwappedSpy->isValid() );
-   QCOMPARE( ContentsSwappedSpy->count(), 1 );
-   QList<QVariant> Arguments = ContentsSwappedSpy->takeFirst();
-   QCOMPARE( Arguments.at(0).toInt(), firstStart );
-   QCOMPARE( Arguments.at(1).toInt(), secondStart );
-   QCOMPARE( Arguments.at(2).toInt(), secondLength );
+   QVERIFY( ContentsChangeListSpy->isValid() );
+   QCOMPARE( ContentsChangeListSpy->count(), 1 );
+   const QList<QVariant> Arguments = ContentsChangeListSpy->takeFirst();
+   const KHE::ArrayChangeMetrics changeMetrics = (qvariant_cast<KHE::ArrayChangeMetricsList>(Arguments.at(0))).at(0);
+   QCOMPARE( changeMetrics.offset(), firstStart );
+   QCOMPARE( changeMetrics.secondStart(), secondStart );
+   QCOMPARE( changeMetrics.secondLength(), secondLength );
 }
 void KAbstractByteArrayModelIfTest::checkContentsSwapped( int firstStart, const KHE::KSection &secondSection )
 { checkContentsSwapped( firstStart, secondSection.start(), secondSection.width() ); }

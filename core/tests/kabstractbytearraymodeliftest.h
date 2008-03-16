@@ -84,8 +84,7 @@ class KAbstractByteArrayModelIfTest : public QObject
     KHECore::KAbstractByteArrayModel *ByteArrayModel;
 
     QSignalSpy *ContentsChangedSpy;
-    QSignalSpy *ContentsReplacedSpy;
-    QSignalSpy *ContentsSwappedSpy;
+    QSignalSpy *ContentsChangeListSpy;
 };
 
 inline KAbstractByteArrayModelIfTest::KAbstractByteArrayModelIfTest()  : ByteArrayModel( 0 ) {}

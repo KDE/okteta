@@ -25,11 +25,9 @@
 
 // lib
 #include "kcoord.h"
-// Qt
-#include <QtCore/QList>
 
 namespace KHE {
-class ArrayChangeMetrics;
+class ArrayChangeMetricsList;
 }
 
 namespace KHEUI
@@ -131,7 +129,7 @@ class KDataCursor
     void stepBehind();
     void updateCoord();
     void adaptToChange( int Pos, int RemovedLength, int InsertedLength );
-    void adaptToChange( const QList<KHE::ArrayChangeMetrics> &changeList, int oldLength );
+    void adaptToChange( const KHE::ArrayChangeMetricsList &changeList, int oldLength );
 
   public: // logical state access
     bool atStart() const;

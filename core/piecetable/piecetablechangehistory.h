@@ -29,13 +29,12 @@
 // Qt
 #include <QtCore/QStack>
 #include <QtCore/QString>
-#include <QtCore/QList>
 
 class QString;
 
 namespace KHE {
 class KSectionList;
-class ArrayChangeMetrics;
+class ArrayChangeMetricsList;
 }
 
 namespace KPieceTable
@@ -53,7 +52,7 @@ class PieceTableChangeHistory
     bool appendChange( AbstractPieceTableChange *change );
 
     bool revertBeforeChange( PieceTable *pieceTable, int changeId,
-                             KHE::KSectionList *changedRanges, QList<KHE::ArrayChangeMetrics> *changeList );
+                             KHE::KSectionList *changedRanges, KHE::ArrayChangeMetricsList *changeList );
 
     // 
     void openGroupedChange(); // TODO: hand over description? user change id?

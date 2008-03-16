@@ -26,6 +26,8 @@
 
 // lib
 #include "kbytearraymodel.h"
+// 
+#include <arraychangemetricslist.h>
 
 
 namespace KHECore
@@ -136,7 +138,7 @@ inline void KByteArrayModelPrivate::setDatum( unsigned int offset, const char da
 {
     m_data[offset] = datum;
     m_modified = true;
-    emit p->contentsReplaced( offset, 1, 1 );
+    emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(offset,1,1) );
     emit p->contentsChanged( offset, offset );
     emit p->modificationChanged( true );
 }
@@ -144,24 +146,6 @@ inline void KByteArrayModelPrivate::setModified( bool modified )
 {
     m_modified = modified;
     emit p->modificationChanged( m_modified );
-}
-inline void KByteArrayModelPrivate::setData( char *data, unsigned int size, int rawSize, bool keepMemory )
-{
-    if( m_autoDelete )
-        delete m_data;
-    const int oldSize = m_size;
-
-    m_data = data;
-    m_size = size;
-    m_rawSize = (rawSize<(int)size) ? size : rawSize;
-    if( m_maxSize != -1 && m_maxSize < (int)size )
-        m_maxSize = size;
-    m_keepsMemory = keepMemory;
-
-    m_modified = false;
-    emit p->contentsReplaced( 0, oldSize, size );
-    emit p->contentsChanged( 0, oldSize-1 );
-    emit p->modificationChanged( false );
 }
 
 

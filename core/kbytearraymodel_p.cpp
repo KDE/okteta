@@ -77,6 +77,25 @@ KByteArrayModelPrivate::KByteArrayModelPrivate( KByteArrayModel *parent,
 {
 }
 
+void KByteArrayModelPrivate::setData( char *data, unsigned int size, int rawSize, bool keepMemory )
+{
+    if( m_autoDelete )
+        delete m_data;
+    const int oldSize = m_size;
+
+    m_data = data;
+    m_size = size;
+    m_rawSize = (rawSize<(int)size) ? size : rawSize;
+    if( m_maxSize != -1 && m_maxSize < (int)size )
+        m_maxSize = size;
+    m_keepsMemory = keepMemory;
+
+    m_modified = false;
+    emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(0, oldSize, size) );
+    emit p->contentsChanged( 0, oldSize-1 );
+    emit p->modificationChanged( false );
+}
+
 
 int KByteArrayModelPrivate::insert( int position, const char* data, int length )
 {
@@ -98,7 +117,7 @@ int KByteArrayModelPrivate::insert( int position, const char* data, int length )
     const bool bookmarksModified = m_bookmarks.adjustToReplaced( position, 0, length );
     m_modified = true;
 
-    emit p->contentsReplaced( position, 0, length );
+    emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(position, 0, length) );
     emit p->contentsChanged( position, m_size-1 );
     if( bookmarksModified ) emit p->bookmarksModified( true );
     emit p->modificationChanged( true );
@@ -128,7 +147,7 @@ int KByteArrayModelPrivate::remove( const KSection &section )
     const bool bookmarksModified = m_bookmarks.adjustToReplaced( removeSection.start(), removeSection.width(), 0 );
     m_modified = true;
 
-    emit p->contentsReplaced( removeSection.start(), removeSection.width(), 0 );
+    emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(removeSection.start(), removeSection.width(), 0) );
     emit p->contentsChanged( removeSection.start(), oldSize-1 );
     if( bookmarksModified ) emit p->bookmarksModified( true );
     emit p->modificationChanged( true );
@@ -201,7 +220,8 @@ unsigned int KByteArrayModelPrivate::replace( const KSection &section, const cha
     const bool bookmarksModified = m_bookmarks.adjustToReplaced( removeSection.start(), removeSection.width(), inputLength );
     m_modified = true;
 
-    emit p->contentsReplaced( removeSection.start(), removeSection.width(), inputLength );
+    emit p->contentsChanged(
+        KHE::ArrayChangeMetricsList::oneReplacement(removeSection.start(), removeSection.width(), inputLength) );
     emit p->contentsChanged( removeSection.start(), sizeDiff==0?removeSection.end():((sizeDiff>0?m_size:oldSize)-1) );
     if( bookmarksModified ) emit p->bookmarksModified( true );
     emit p->modificationChanged( true );
@@ -283,7 +303,8 @@ bool KByteArrayModelPrivate::swap( int firstStart, const KSection &secondSection
         m_bookmarks.adjustToSwapped( firstStart, sourceSection.start(),sourceSection.width() );
     m_modified = true;
 
-    emit p->contentsSwapped( firstStart, sourceSection.start(),sourceSection.width()  );
+    emit p->contentsChanged(
+        KHE::ArrayChangeMetricsList::oneSwapping(firstStart,sourceSection.start(),sourceSection.width()) );
     emit p->contentsChanged( toRight?sourceSection.start():firstStart, toRight?firstStart:sourceSection.end() );
     if( bookmarksModified ) emit p->bookmarksModified( true );
     emit p->modificationChanged( true );
@@ -310,7 +331,7 @@ int KByteArrayModelPrivate::fill( const char fillDatum, unsigned int position, i
     memset( &m_data[position], fillDatum, fillLength );
     m_modified = true;
 
-    emit p->contentsReplaced( position, fillLength, fillLength );
+    emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(position,fillLength,fillLength) );
     emit p->contentsChanged( position, position+fillLength-1 );
     emit p->modificationChanged( true );
     return fillLength;

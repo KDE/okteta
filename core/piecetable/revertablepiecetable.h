@@ -56,7 +56,7 @@ class RevertablePieceTable
     // 
     void finishChange();
     bool revertBeforeChange( int changeId,
-                             KHE::KSectionList *changedRanges, QList<KHE::ArrayChangeMetrics> *changeList );
+                             KHE::KSectionList *changedRanges, KHE::ArrayChangeMetricsList *changeList );
 
     void setBeforeCurrentChangeAsBase( bool hide );
 
@@ -105,7 +105,7 @@ inline void RevertablePieceTable::finishChange()       { mChangeHistory.finishCh
 
 inline bool RevertablePieceTable::revertBeforeChange( int changeId,
                                                       KHE::KSectionList *changedRanges,
-                                                      QList<KHE::ArrayChangeMetrics> *changeList )
+                                                      KHE::ArrayChangeMetricsList *changeList )
 {
     return mChangeHistory.revertBeforeChange( &mPieceTable, changeId, changedRanges, changeList );
 }

@@ -32,11 +32,10 @@
 // Qt
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
-#include <QtCore/QList>
 
 
 namespace KHE {
-class ArrayChangeMetrics;
+class ArrayChangeMetricsList;
 }
 
 namespace KHECore
@@ -255,11 +254,9 @@ class KHECORE_EXPORT KAbstractByteArrayModel : public QObject
 
   Q_SIGNALS:
     // TODO: how to deal replacing with fixed size of buffer?
-    void contentsReplaced( int offset, int removedLength, int insertedLength );
-    void contentsSwapped( int firstStart, int secondStart, int secondLength );
+    void contentsChanged( const KHE::ArrayChangeMetricsList &changeList );
     void contentsChanged( int startOffset, int endOffset );
     void contentsChanged( const KHE::KSectionList &changedSectionList );
-    void contentsChanged( const QList<KHE::ArrayChangeMetrics> &changeList );
 
     void readOnlyChanged( bool isReadOnly );
     void modificationChanged( bool isModified );

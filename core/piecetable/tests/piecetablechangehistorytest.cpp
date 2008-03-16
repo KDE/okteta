@@ -28,7 +28,7 @@
 #include "testpiecetablechange.h"
 #include <piecetable/piecetable.h>
 //
-#include <arraychangemetrics.h>
+#include <arraychangemetricslist.h>
 #include <ksectionlist.h>
 // Qt
 #include <QtTest/QtTest>
@@ -153,7 +153,7 @@ void PieceTableChangeHistoryTest::testRevertBeforeChange()
 
     // revert before first change
     KSectionList changedSectionList;
-    QList<ArrayChangeMetrics> changeList;
+    ArrayChangeMetricsList changeList;
     result =
         pieceTableChangeHistory.revertBeforeChange( &pieceTable, 0, &changedSectionList, &changeList );
 

@@ -116,10 +116,8 @@ KByteArrayView::KByteArrayView( KHECore::KAbstractByteArrayModel *byteArrayModel
     connect( mByteArrayModel, SIGNAL(readOnlyChanged( bool )), SLOT(adaptController()) );
     connect( mByteArrayModel, SIGNAL(contentsChanged(int,int)), SLOT(updateRange(int,int)) );
     connect( mByteArrayModel, SIGNAL(contentsChanged(const KHE::KSectionList&)), SLOT(updateRange(const KHE::KSectionList&)) );
-    connect( mByteArrayModel, SIGNAL(contentsReplaced(int,int,int)), SLOT(onContentsReplaced(int,int,int)) );
-    connect( mByteArrayModel, SIGNAL(contentsSwapped(int,int,int)), SLOT(onContentsSwapped(int,int,int)) );
-    connect( mByteArrayModel, SIGNAL(contentsChanged( const QList<KHE::ArrayChangeMetrics> & )),
-             SLOT(onContentsChanged( const QList<KHE::ArrayChangeMetrics> & )) );
+    connect( mByteArrayModel, SIGNAL(contentsChanged( const KHE::ArrayChangeMetricsList & )),
+             SLOT(onContentsChanged( const KHE::ArrayChangeMetricsList & )) );
 
     KHECore::Bookmarkable *bookmarks = qobject_cast<KHECore::Bookmarkable*>( mByteArrayModel );
     if( bookmarks )
@@ -261,10 +259,8 @@ void KByteArrayView::setByteArrayModel( KHECore::KAbstractByteArrayModel *byteAr
     connect( mByteArrayModel, SIGNAL(readOnlyChanged( bool )), SLOT(adaptController()) );
     connect( mByteArrayModel, SIGNAL(contentsChanged(int,int)), SLOT(updateRange(int,int)) );
     connect( mByteArrayModel, SIGNAL(contentsChanged(const KHE::KSectionList&)), SLOT(updateRange(const KHE::KSectionList&)) );
-    connect( mByteArrayModel, SIGNAL(contentsReplaced(int,int,int)), SLOT(onContentsReplaced(int,int,int)) );
-    connect( mByteArrayModel, SIGNAL(contentsChanged( const QList<KHE::ArrayChangeMetrics> & )),
-             SLOT(onContentsChanged( const QList<KHE::ArrayChangeMetrics> & )) );
-    connect( mByteArrayModel, SIGNAL(contentsSwapped(int,int,int)), SLOT(onContentsSwapped(int,int,int)) );
+    connect( mByteArrayModel, SIGNAL(contentsChanged( const KHE::ArrayChangeMetricsList & )),
+             SLOT(onContentsChanged( const KHE::ArrayChangeMetricsList & )) );
 
     KHECore::Bookmarkable *bookmarks = qobject_cast<KHECore::Bookmarkable*>( mByteArrayModel );
     if( bookmarks )
@@ -1019,47 +1015,7 @@ void KByteArrayView::updateRange( const KHE::KSectionList &list )
 }
 
 
-void KByteArrayView::onContentsReplaced( int pos, int removedLength, int insertedLength )
-{
-    pauseCursor();
-
-    const bool appending = mDataCursor->atAppendPos();
-    // update lengths
-    const int oldNoOfLines = noOfLines();
-    mDataLayout->setLength( mByteArrayModel->size() );
-    const int newNoOfLines = mDataLayout->noOfLines();
-    if( oldNoOfLines != newNoOfLines )
-    {
-        setNoOfLines( newNoOfLines );
-        updateColumn( *mOffsetColumn );
-    }
-
-// kDebug()<< "pos:"<<pos<<", RemovedLength:"<<RemovedLength<<", InsertedLength:"<<InsertedLength;
-// kDebug() << "Cursor:"<<mDataCursor->index()<<", "<<mDataCursor->isBehind();
-  // adapt cursor(s)
-    if( appending )
-        mDataCursor->gotoEnd();
-    else
-        mDataCursor->adaptToChange( pos, removedLength, insertedLength );
-
-    mDataRanges->adaptSelectionToChange( pos, removedLength, insertedLength );
-// kDebug() << "Cursor:"<<mDataCursor->index()<<", selection:"<<mDataRanges->selectionStart()<<"-"<<mDataRanges->selectionEnd()
-//          <<", BytesPerLine: "<<mDataLayout->noOfBytesPerLine()<<endl;
-    emit cursorPositionChanged( mDataCursor->realIndex() );
-}
-
-
-void KByteArrayView::onContentsSwapped( int firstStart, int secondStart, int secondLength )
-{
-Q_UNUSED( firstStart )
-Q_UNUSED( secondStart )
-Q_UNUSED( secondLength )
-    // TODO: what should happen here? Well, relocate the cursor perhaps?
-    pauseCursor();
-
-}
-
-void KByteArrayView::onContentsChanged( const QList<KHE::ArrayChangeMetrics> &changeList )
+void KByteArrayView::onContentsChanged( const KHE::ArrayChangeMetricsList &changeList )
 {
     pauseCursor();
 

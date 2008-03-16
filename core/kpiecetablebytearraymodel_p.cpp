@@ -24,7 +24,7 @@
 #include "kpiecetablebytearraymodel.h"
 
 // lib
-#include "arraychangemetrics.h"
+#include <arraychangemetricslist.h>
 
 #include <KDebug>
 
@@ -98,7 +98,7 @@ void KPieceTableByteArrayModel::Private::setData( const char *data, unsigned int
     mChangeByteArray.clear();
     mBookmarks.clear();
 
-    emit p->contentsReplaced( 0, oldSize, size );
+    emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(0,oldSize,size) );
     emit p->contentsChanged( 0, oldSize-1 );
     if( wasModifiedBefore ) emit p->modificationChanged( false );
     if( !bookmarks.empty() ) emit p->bookmarksRemoved( bookmarks );
@@ -114,7 +114,7 @@ void KPieceTableByteArrayModel::Private::setDatum( unsigned int offset, const ch
     mPieceTable.replaceOne( offset, mChangeByteArray.size() );
     mChangeByteArray.append( byte );
 
-    emit p->contentsReplaced( offset, 1, 1 );
+    emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(offset,1,1) );
     emit p->contentsChanged( offset, offset );
     if( !wasModifiedBefore ) emit p->modificationChanged( true );
     emit p->headVersionChanged( mPieceTable.changesCount() );
@@ -147,7 +147,7 @@ int KPieceTableByteArrayModel::Private::insert( int offset, const char *insertDa
 
     const bool bookmarksModified = mBookmarks.adjustToReplaced( offset, 0, insertLength );
 
-    emit p->contentsReplaced( offset, 0, insertLength );
+    emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(offset,0,insertLength) );
     emit p->contentsChanged( offset, mPieceTable.size()-1 );
     if( bookmarksModified ) emit p->bookmarksModified( true );
     if( !wasModifiedBefore ) emit p->modificationChanged( true );
@@ -159,6 +159,7 @@ int KPieceTableByteArrayModel::Private::insert( int offset, const char *insertDa
 }
 
 
+//TODO: is anyone interested in the removed data? so we need a signal beforeRemoving(section)?
 int KPieceTableByteArrayModel::Private::remove( const KSection &r )
 {
     KSection removeSection( r );
@@ -175,8 +176,7 @@ int KPieceTableByteArrayModel::Private::remove( const KSection &r )
 
     const bool bookmarksModified = mBookmarks.adjustToReplaced( removeSection.start(), removeSection.width(), 0 );
 
-    emit p->contentsReplaced( removeSection.start(), removeSection.width(), 0 );
-    //emit p->contentsReplaced( offset, 0,  ); TODO: how to signal the inserted data?
+    emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(removeSection.start(),removeSection.width(),0) );
     emit p->contentsChanged( removeSection.start(), oldSize-1 );
     if( bookmarksModified ) emit p->bookmarksModified( true );
     if( !wasModifiedBefore ) emit p->modificationChanged( true );
@@ -210,8 +210,8 @@ unsigned int KPieceTableByteArrayModel::Private::replace( const KSection &r, con
                             ( sizeDiff > 0 ) ?  mPieceTable.size() - 1 :
                                                 oldSize - 1;
 
-    emit p->contentsReplaced( removeSection.start(), removeSection.width(), insertLength );
-    //emit p->contentsReplaced( offset, 0,  ); TODO: how to signal the changed data at the end?
+    emit p->contentsChanged(
+        KHE::ArrayChangeMetricsList::oneReplacement(removeSection.start(),removeSection.width(),insertLength) );
     emit p->contentsChanged( removeSection.start(), lastChanged );
     if( bookmarksModified ) emit p->bookmarksModified( true );
     if( !wasModifiedBefore ) emit p->modificationChanged( true );
@@ -236,7 +236,8 @@ bool KPieceTableByteArrayModel::Private::swap( int firstStart, const KSection &s
 
     const bool bookmarksModified = mBookmarks.adjustToSwapped( firstStart, secondSection.start(),secondSection.width() );
 
-    emit p->contentsSwapped( firstStart, secondSection.start(),secondSection.width()  );
+    emit p->contentsChanged(
+        KHE::ArrayChangeMetricsList::oneSwapping(firstStart,secondSection.start(),secondSection.width()) );
     emit p->contentsChanged( firstStart, secondSection.end() );
     if( bookmarksModified ) emit p->bookmarksModified( true );
     if( !wasModifiedBefore ) emit p->modificationChanged( true );
@@ -265,7 +266,7 @@ int KPieceTableByteArrayModel::Private::fill( const char fillByte, unsigned int 
     mChangeByteArray.resize( oldChangeByteArraySize + fillLength );
     memset( mChangeByteArray.data()+oldChangeByteArraySize, fillByte, fillLength );
 
-    emit p->contentsReplaced( offset, fillLength, fillLength );
+    emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(offset,fillLength,fillLength) );
     emit p->contentsChanged( offset, offset+fillLength-1 );
     if( !wasModifiedBefore ) emit p->modificationChanged( true );
     emit p->headVersionChanged( mPieceTable.changesCount() );
@@ -274,7 +275,7 @@ int KPieceTableByteArrayModel::Private::fill( const char fillByte, unsigned int 
 
 void KPieceTableByteArrayModel::Private::revertToVersionByIndex( int versionIndex )
 {
-    QList<KHE::ArrayChangeMetrics> changeList;
+    KHE::ArrayChangeMetricsList changeList;
     KHE::KSectionList changedRanges;
 
     const bool oldModified = isModified();

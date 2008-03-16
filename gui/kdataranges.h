@@ -29,11 +29,9 @@
 #include "kcoordrangelist.h"
 // Okteta core
 #include <ksectionlist.h>
-// Qt
-#include <QtCore/QList>
 
 namespace KHE {
-class ArrayChangeMetrics;
+class ArrayChangeMetricsList;
 }
 
 
@@ -72,7 +70,7 @@ class KDataRanges
     void addChangedRange( int SI, int EI );
     void addChangedRange( const KCoordRange &NewRange );
     void adaptSelectionToChange( int Pos, int RemovedLength, int InsertedLength );
-    void adaptSelectionToChange( const QList<KHE::ArrayChangeMetrics> &changeList );
+    void adaptSelectionToChange( const KHE::ArrayChangeMetricsList &changeList );
     void resetChangedRanges();
 
     void setModified( bool M = true );

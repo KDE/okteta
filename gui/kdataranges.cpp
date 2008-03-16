@@ -23,7 +23,7 @@
 #include "kdataranges.h"
 
 // Okteta core
-#include <arraychangemetrics.h>
+#include <arraychangemetricslist.h>
 
 
 namespace KHEUI {
@@ -310,7 +310,7 @@ void KDataRanges::adaptSelectionToChange( int Pos, int RemovedLength, int Insert
 }
 
 
-void KDataRanges::adaptSelectionToChange( const QList<KHE::ArrayChangeMetrics> &changeList )
+void KDataRanges::adaptSelectionToChange( const KHE::ArrayChangeMetricsList &changeList )
 {
     if( !Selection.isValid() )
         return;

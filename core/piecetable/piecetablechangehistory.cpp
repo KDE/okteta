@@ -24,7 +24,7 @@
 
 // lib
 #include <ksectionlist.h>
-#include <arraychangemetrics.h>
+#include <arraychangemetricslist.h>
 
 namespace KPieceTable
 {
@@ -84,7 +84,7 @@ bool PieceTableChangeHistory::appendChange( AbstractPieceTableChange *change )
 
 bool PieceTableChangeHistory::revertBeforeChange( PieceTable *pieceTable, int changeId,
                                                   KHE::KSectionList *changedRanges,
-                                                  QList<KHE::ArrayChangeMetrics> *changeList )
+                                                  KHE::ArrayChangeMetricsList *changeList )
 {
     int currentChangeId = mAppliedChangesCount;
 

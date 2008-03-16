@@ -63,11 +63,6 @@ class KFixedSizeByteArrayModel : public KAbstractByteArrayModel
     virtual void setModified( bool M = true );
     virtual void setReadOnly( bool RO = true );
 
-    virtual int find( const char*KeyData, int Length, const KSection &Section ) const;
-    virtual int rfind( const char*, int Length, int Pos = -1 ) const;
-
-/*     virtual int find( const QString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */
-
   public:
     int compare( const KAbstractByteArrayModel &Other, const KSection &Range, unsigned int Pos = 0 );
     int compare( const KAbstractByteArrayModel &Other, int OtherPos, int Length, unsigned int Pos = 0 );
