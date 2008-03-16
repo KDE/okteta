@@ -46,7 +46,7 @@ QString FilterTool::charCodecName() const
     return mByteArrayView ? mByteArrayView->encodingName() : QString();
 }
 
-bool FilterTool::dataSelected() const { return ( mByteArrayView != 0 ); }
+bool FilterTool::dataSelected() const { return ( (mByteArrayView!=0) && mByteArrayView->hasSelectedData() ); }
 
 AbstractByteArrayFilterParameterSet *FilterTool::parameterSet( int filterId )
 {
