@@ -29,13 +29,12 @@
 // Qt
 #include <QtGui/QKeyEvent>
 
-
 namespace KHEUI
 {
 
 KTabController::KTabController( KByteArrayView* view, KController *parent )
   : KController( view, parent ),
-    mTabChangesFocus( false )
+    mTabChangesFocus( true )
 {
 }
 
@@ -44,15 +43,16 @@ bool KTabController::handleKeyPress( QKeyEvent *keyEvent )
 {
     bool keyUsed = false;
 
-    const bool shiftPressed =  keyEvent->modifiers() & Qt::SHIFT;
+    const bool tabPressed = ( keyEvent->key() == Qt::Key_Tab );
+    const bool backTabPressed = ( keyEvent->key() == Qt::Key_Backtab );
 
-    if( keyEvent->key() == Qt::Key_Tab )
+    if( tabPressed || backTabPressed )
     {
         // are we in the char column?
         if( mView->cursorColumn() == KByteArrayView::CharColumnId )
         {
             // in last column we care about tab changes focus
-            if( mView->mValueColumn->isVisible() && (!mTabChangesFocus || shiftPressed) )
+            if( mView->mValueColumn->isVisible() && (!mTabChangesFocus || backTabPressed) )
             {
                 mView->setCursorColumn( KByteArrayView::ValueColumnId );
                 keyUsed = true;
@@ -64,7 +64,7 @@ bool KTabController::handleKeyPress( QKeyEvent *keyEvent )
             if( mView->mCharColumn->isVisible() )
             {
                 // in last column we care about tab changes focus
-                if( mView->mCharColumn->isVisible() && (!mTabChangesFocus || !shiftPressed) )
+                if( mView->mCharColumn->isVisible() && (!mTabChangesFocus || tabPressed) )
                 {
                     mView->setCursorColumn( KByteArrayView::CharColumnId );
                     keyUsed = true;

@@ -41,6 +41,7 @@ class KTabController : public KController
 
   public:
     bool tabChangesFocus() const;
+    /// default is true
     void setTabChangesFocus( bool tabChangesFocus );
 
   protected:

@@ -382,6 +382,8 @@ class KHEUI_EXPORT KByteArrayView : public KColumnsView
     virtual void showEvent( QShowEvent *showEvent );
     virtual void focusInEvent( QFocusEvent *focusEvent );
     virtual void focusOutEvent( QFocusEvent *focusEvent );
+    /// reimplemented to catch Tab and BackTab keys, which otherwise gets stolen
+    virtual bool event( QEvent *event );
 
   protected: // QAbstractScrollArea API
     virtual void mousePressEvent( QMouseEvent *e );

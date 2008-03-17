@@ -1415,6 +1415,22 @@ void KByteArrayView::keyPressEvent( QKeyEvent *keyEvent )
         keyEvent->ignore();
 }
 
+bool KByteArrayView::event( QEvent *event )
+{
+    if( event->type() == QEvent::KeyPress )
+    {
+        QKeyEvent *keyEvent = (QKeyEvent *)event;
+        if( keyEvent->key() == Qt::Key_Tab || keyEvent->key() == Qt::Key_Backtab )
+        {
+            keyPressEvent( keyEvent );
+            if( keyEvent->isAccepted() )
+                return true;
+        }
+    }
+
+    return KColumnsView::event( event );
+}
+
 
 void KByteArrayView::updateChanged()
 {
