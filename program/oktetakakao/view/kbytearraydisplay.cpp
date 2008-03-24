@@ -97,6 +97,11 @@ void KByteArrayDisplay::deleteSelectedData()
     mWidget->removeSelectedData();
 }
 
+bool KByteArrayDisplay::canReadData( const QMimeData *data ) const
+{
+    return mWidget->canReadData( data );
+}
+
 void KByteArrayDisplay::onSelectionChange( bool selected )
 {
     mSelection.setSection( mWidget->selection() );

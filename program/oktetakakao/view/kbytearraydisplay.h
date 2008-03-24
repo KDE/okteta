@@ -72,6 +72,7 @@ class KByteArrayDisplay : public KAbstractView, public KDE::If::Zoomable, public
     virtual void insertData( const QMimeData *data );
     virtual QMimeData *cutSelectedData();
     virtual void deleteSelectedData();
+    virtual bool canReadData( const QMimeData *data ) const;
 
   protected Q_SLOTS:
     void onSelectionChange( bool selected );

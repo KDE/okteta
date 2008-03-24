@@ -48,6 +48,9 @@ class SelectedDataWriteable
     virtual void insertData( const QMimeData *data ) = 0;
     virtual QMimeData *cutSelectedData() = 0;
     virtual void deleteSelectedData() = 0;
+
+  public: // 
+    virtual bool canReadData( const QMimeData *data ) const = 0;
 };
 
 inline SelectedDataWriteable::~SelectedDataWriteable() {}
