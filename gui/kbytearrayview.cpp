@@ -931,10 +931,15 @@ void KByteArrayView::pasteFromSource( const QMimeData *data )
     if( !data )
         return;
 
-    const QByteArray bytes = data->data( "application/octet-stream" );
+    const QByteArray bytes = data->data( DataFormatName );
 
     if( !bytes.isEmpty() )
         insert( bytes );
+}
+
+bool KByteArrayView::canReadData( const QMimeData *data )
+{
+    return data->hasFormat( DataFormatName );
 }
 
 
@@ -1868,7 +1873,7 @@ void KByteArrayView::startDrag()
 void KByteArrayView::dragEnterEvent( QDragEnterEvent *event )
 {
     // interesting for this widget?
-    if( isReadOnly() || !event->mimeData()->hasFormat(DataFormatName) )
+    if( isReadOnly() || !canReadData(event->mimeData()) )
     {
         event->ignore();
         return;
@@ -1885,7 +1890,7 @@ void KByteArrayView::dragEnterEvent( QDragEnterEvent *event )
 void KByteArrayView::dragMoveEvent( QDragMoveEvent *event )
 {
     // is this content still interesting for us?
-    if( isReadOnly() || !event->mimeData()->hasFormat(DataFormatName) )
+    if( isReadOnly() || !canReadData(event->mimeData()) )
     {
         event->ignore();
         return;
@@ -1920,7 +1925,7 @@ void KByteArrayView::dragLeaveEvent( QDragLeaveEvent *event )
 void KByteArrayView::dropEvent( QDropEvent *dropEvent )
 {
     // after drag enter and move check one more time
-    if( isReadOnly() )
+    if( isReadOnly() || !canReadData(dropEvent->mimeData()) )
     {
         dropEvent->ignore();
         return;

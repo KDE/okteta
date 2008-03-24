@@ -230,7 +230,10 @@ class KHEUI_EXPORT KByteArrayView : public KColumnsView
     void setSelection( int Start, int End );
 
     QMimeData *dragObject() const;
-    void pasteFromSource( const QMimeData *Source );
+    void pasteFromSource( const QMimeData *data );
+
+  public:
+    bool canReadData( const QMimeData *data );
 
   public Q_SLOTS:
     /** */
