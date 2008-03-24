@@ -43,8 +43,15 @@ RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit( QW
     mGroupSizeSpinBox = new QSpinBox( this );
     mGroupSizeSpinBox->setRange( 1, INT_MAX );
 
-    QLabel *label = new QLabel( i18n("&Group size [bytes]"), this );
+    QLabel *label = new QLabel( i18nc("@label:spinbox number of bytes the rotation is done within",
+                                      "&Group size [bytes]"),
+                                this );
     label->setBuddy( mGroupSizeSpinBox );
+    const QString groupSizeWhatsThis =
+        i18nc( "@info:whatsthis",
+               "Control the number of the bytes each rotation is done within." );
+    label->setWhatsThis( groupSizeWhatsThis );
+    mGroupSizeSpinBox->setWhatsThis( groupSizeWhatsThis );
 
     baseLayout->addWidget( label );
     baseLayout->addWidget( mGroupSizeSpinBox );
@@ -53,8 +60,13 @@ RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit( QW
     mMoveBitWidthSpinBox->setRange( INT_MIN, INT_MAX );
     connect( mMoveBitWidthSpinBox, SIGNAL(valueChanged( int )), SLOT(onValueChanged( int )) );
 
-    label = new QLabel( i18n("S&hift size [bits]"), this );
+    label = new QLabel( i18nc("@label:spinbox","S&hift width [bits]"), this );
     label->setBuddy( mMoveBitWidthSpinBox );
+    const QString moveBitWidthWhatsThis =
+        i18nc( "@info:whatsthis",
+               "Control the width of the shift. Positive numbers move the bits to the right, negative to the left." );
+    label->setWhatsThis( moveBitWidthWhatsThis );
+    mMoveBitWidthSpinBox->setWhatsThis( moveBitWidthWhatsThis );
 
     baseLayout->addWidget( label );
     baseLayout->addWidget( mMoveBitWidthSpinBox );

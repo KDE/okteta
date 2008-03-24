@@ -114,7 +114,7 @@ QVariant StatisticTableModel::data( const QModelIndex &index, int role ) const
             {
                 const KHECore::KChar decodedChar = mCharCodec->decode( byte );
                 result = decodedChar.isUndefined() ?
-                    i18nc( "character is not defined", "undef." ) :
+                    i18nc( "@item:intable character is not defined", "undef." ) :
                     QString( (QChar)decodedChar );
                 break;
             }
@@ -153,14 +153,14 @@ QVariant StatisticTableModel::headerData( int section, Qt::Orientation orientati
     {
         const QString titel =
             section == ValueId ? (
-                mValueCoding == KHECore::HexadecimalCoding ? i18nc("short for Hexadecimal","Hex") :
-                mValueCoding == KHECore::DecimalCoding ?     i18nc("short for Decimal",    "Dec") :
-                mValueCoding == KHECore::OctalCoding ?       i18nc("short for Octal",      "Oct") :
-                mValueCoding == KHECore::BinaryCoding ?      i18nc("short for Binary",     "Bin") :
+                mValueCoding == KHECore::HexadecimalCoding ? i18nc("@title:column short for Hexadecimal","Hex") :
+                mValueCoding == KHECore::DecimalCoding ?     i18nc("@title:column short for Decimal",    "Dec") :
+                mValueCoding == KHECore::OctalCoding ?       i18nc("@title:column short for Octal",      "Oct") :
+                mValueCoding == KHECore::BinaryCoding ?      i18nc("@title:column short for Binary",     "Bin") :
                                                 QString() ) :
-            section == CharacterId ?   i18nc("short for Character",      "Char") :
-            section == CountId ?       i18nc("count of characters",      "Count") :
-            section == PercentId ?     i18nc("Percent of byte in total", "Percent") :
+            section == CharacterId ?   i18nc("@title:column short for Character",      "Char") :
+            section == CountId ?       i18nc("@title:column count of characters",      "Count") :
+            section == PercentId ?     i18nc("@title:column Percent of byte in total", "Percent") :
             QString();
         result = titel;
     }
@@ -168,14 +168,14 @@ QVariant StatisticTableModel::headerData( int section, Qt::Orientation orientati
     {
         const QString titel =
             section == ValueId ? (
-                mValueCoding == KHECore::HexadecimalCoding ? i18n("Hexadecimal") :
-                mValueCoding == KHECore::DecimalCoding ?     i18n("Decimal") :
-                mValueCoding == KHECore::OctalCoding ?       i18n("Octal") :
-                mValueCoding == KHECore::BinaryCoding ?      i18n("Binary") :
+                mValueCoding == KHECore::HexadecimalCoding ? i18nc("@info:tooltip","Hexadecimal") :
+                mValueCoding == KHECore::DecimalCoding ?     i18nc("@info:tooltip","Decimal") :
+                mValueCoding == KHECore::OctalCoding ?       i18nc("@info:tooltip","Octal") :
+                mValueCoding == KHECore::BinaryCoding ?      i18nc("@info:tooltip","Binary") :
                                                 QString() ) :
-            section == CharacterId ?   i18n("Character") :
-//             section == CountId ?       i18nc("count of characters",      "Count") :
-//             section == PercentId ?     i18nc("Percent of byte in total", "Percent") :
+            section == CharacterId ?   i18nc("@info:tooltip","Character") :
+//             section == CountId ?       i18nc("@info:tooltip count of characters",      "Count") :
+//             section == PercentId ?     i18nc("@info:tooltip Percent of byte in total", "Percent") :
             QString();
         result = titel;
     }

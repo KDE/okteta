@@ -27,7 +27,6 @@
 // KDE
 #include <KGlobal>
 #include <KLocale>
-// #include <kstdguiitem.h>
 // Qt
 #include <QtGui/QCheckBox>
 #include <QtGui/QComboBox>
@@ -41,25 +40,27 @@
 KReplaceDialog::KReplaceDialog( QWidget *parent )
  : KAbstractFindDialog( parent )
 {
-    setCaption( i18n("Replace Bytes") );
-    setButtonGuiItem( Ok, KGuiItem( i18n("&Replace"), "edit-find-replace",
-                      i18n("Start replace"),
-                      i18n("<qt>If you press the <b>Replace</b> button, the bytes you entered "
-                           "above are searched for within the document and any occurrence is "
-                           "replaced with the replacement bytes.</qt>")));
+    setCaption( i18nc("@title:window","Replace Bytes") );
+    setButtonGuiItem( Ok, KGuiItem( i18nc("@action;button", "&Replace"), "edit-find-replace",
+                      i18nc("@info:tooltip","Start replace"),
+                      i18nc("@info:whatsthis",
+                            "If you press the <interface>Replace</interface> button, "
+                            "the bytes you entered above are searched for within "
+                            "the byte array and any occurrence is replaced with "
+                            "the replacement bytes.")) );
     setModal( true );
 
     // replace term
-    QGroupBox *ReplaceBox = new QGroupBox( i18n("Replace by"), mainWidget() );
+    QGroupBox *ReplaceBox = new QGroupBox( i18nc("@title:group","Replace by"), mainWidget() );
 
     QVBoxLayout *ReplaceBoxLayout = new QVBoxLayout;
     ReplaceBoxLayout->setSpacing( spacingHint() );
 
-    QLabel *EditLabel = new QLabel( i18n("Replacing bytes:"), ReplaceBox );
+    QLabel *EditLabel = new QLabel( i18nc("@label:textbox","Replacing bytes:"), ReplaceBox );
     ReplaceDataEdit = new KByteArrayLineEdit( ReplaceBox );
     EditLabel->setBuddy( ReplaceDataEdit );
     const QString ReplaceDataEditWhatsThis =
-        i18n("Enter a pattern to replace with, or select a previous pattern from the list.");
+        i18nc("@info:whatsthis","Enter a pattern to replace with, or select a previous pattern from the list.");
     EditLabel->setWhatsThis( ReplaceDataEditWhatsThis );
     ReplaceDataEdit->setWhatsThis( ReplaceDataEditWhatsThis );
 
@@ -74,8 +75,8 @@ KReplaceDialog::KReplaceDialog( QWidget *parent )
     setOperationBox( ReplaceBox );
 
     //
-    PromptCheckBox = new QCheckBox( i18n("&Prompt on replace") );
-    PromptCheckBox->setWhatsThis( i18n("Ask before replacing each match found.") );
+    PromptCheckBox = new QCheckBox( i18nc("@option:check","&Prompt on replace") );
+    PromptCheckBox->setWhatsThis( i18nc("@info:whatsthis","Ask before replacing each match found.") );
     setExtraOption( PromptCheckBox );
 }
 

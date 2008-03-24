@@ -49,14 +49,14 @@ FilterView::FilterView( FilterTool *tool, QWidget *parent )
 
     // filter
     QHBoxLayout *operationLayout = new QHBoxLayout();
-    QLabel *label = new QLabel( i18n("Operation:"), this );
+    QLabel *label = new QLabel( i18nc("@label:listbox operation to use by the filter","Operation:"), this );
     mOperationComboBox = new KComboBox( this );
     connect( mOperationComboBox, SIGNAL(activated(int)),
              SLOT(onOperationChange(int)) );
 
     label->setBuddy( mOperationComboBox );
     const QString numberWhatsThis =
-        i18n("Select the operation to use for the filter.");
+        i18nc("@info:whatsthis","Select the operation to use for the filter.");
     label->setWhatsThis( numberWhatsThis );
     mOperationComboBox->setWhatsThis( numberWhatsThis );
 
@@ -64,7 +64,7 @@ FilterView::FilterView( FilterTool *tool, QWidget *parent )
     operationLayout->addWidget( mOperationComboBox, 10 );
     baseLayout->addLayout( operationLayout );
 
-    QGroupBox *parameterSetBox = new QGroupBox( i18n("Parameters"), this );
+    QGroupBox *parameterSetBox = new QGroupBox( i18nc("@title:group","Parameters"), this );
     baseLayout->addWidget( parameterSetBox );
 
     QVBoxLayout *parameterSetLayout = new QVBoxLayout;
@@ -79,10 +79,11 @@ FilterView::FilterView( FilterTool *tool, QWidget *parent )
     // filter button
     QHBoxLayout *buttonLayout = new QHBoxLayout();
     buttonLayout->addStretch( 10 );
-    mFilterButton = new KPushButton( KGuiItem(i18n("&Filter"), QString(),
-                      i18n("Executes the filter"),
-                      i18n("<qt>If you press the <b>Filter</b> button, the operation you selected "
-                           "above is executed on the document with the given options.</qt>")), this );
+    mFilterButton = new KPushButton( KGuiItem(i18nc("@action:button","&Filter"), QString(),
+                      i18nc("@info:tooltip","Executes the filter"),
+                      i18nc("@info:whatsthis",
+                            "If you press the <interface>Filter</interface> button, the operation you selected "
+                            "above is executed on the document with the given options.")), this );
     mFilterButton->setEnabled( mTool->dataSelected() );
     connect( mTool, SIGNAL(dataSelectionChanged( bool )), SLOT(onDataSelectionChanged( bool )) );
     connect( mFilterButton, SIGNAL(clicked( bool )), SLOT(onFilterClicked()) );

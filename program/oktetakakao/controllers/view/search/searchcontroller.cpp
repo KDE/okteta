@@ -168,13 +168,14 @@ void SearchController::searchData( KFindDirection Direction, int StartIndex )
             break;
         }
 
+        const QString messageBoxTitle = i18nc( "@title:window", "Find" );
         if( DoWrap )
         {
             const QString Question = ( Direction == FindForward ) ?
-                i18n( "End of document reached.\nContinue from the beginning?" ) :
-                i18n( "Beginning of document reached.\nContinue from the end?" );
+                i18nc( "@info", "End of byte array reached.<nl/>Continue from the beginning?" ) :
+                i18nc( "@info", "Beginning of byte array reached.<nl/>Continue from the end?" );
 
-            int Result = KMessageBox::questionYesNo( MainWindow, Question, i18n("Find"),
+            int Result = KMessageBox::questionYesNo( MainWindow, Question, messageBoxTitle,
                                                      KStandardGuiItem::cont(), KStandardGuiItem::cancel() );
             if( Result == KMessageBox::No )
                 break;
@@ -184,7 +185,7 @@ void SearchController::searchData( KFindDirection Direction, int StartIndex )
         else
         {
             if( !PreviousFound )
-                KMessageBox::sorry( MainWindow, i18n("Search key not found in document."), i18n("Find") );
+                KMessageBox::sorry( MainWindow, i18nc("@info","Search key not found in byte array."), messageBoxTitle );
             break;
         }
     }

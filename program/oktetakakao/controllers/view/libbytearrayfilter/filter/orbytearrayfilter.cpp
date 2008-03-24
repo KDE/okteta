@@ -29,7 +29,7 @@
 
 
 OrByteArrayFilter::OrByteArrayFilter()
- : AbstractByteArrayFilter( i18n("operand OR data") )
+ : AbstractByteArrayFilter( i18nc("name of the filter","operand OR data") )
 {}
 
 AbstractByteArrayFilterParameterSet *OrByteArrayFilter::parameterSet() { return &mParameterSet; }

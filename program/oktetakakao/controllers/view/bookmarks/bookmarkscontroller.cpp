@@ -54,22 +54,22 @@ BookmarksController::BookmarksController( KXmlGuiWindow *window )
     mCreateAction = KStandardAction::addBookmark( this, SLOT(createBookmark()), actionCollection );
 
     mDeleteAction = actionCollection->addAction( "bookmark_remove" );
-    mDeleteAction->setText( i18n("Remove Bookmark") );
+    mDeleteAction->setText( i18nc("@action:inmenu","Remove Bookmark") );
     connect( mDeleteAction, SIGNAL(triggered(bool) ), SLOT(deleteBookmark()) );
     mDeleteAction->setShortcut( Qt::CTRL + Qt::SHIFT + Qt::Key_B );
 
     mDeleteAllAction = actionCollection->addAction( "bookmark_remove_all" );
-    mDeleteAllAction->setText( i18n("Remove All Bookmarks") );
+    mDeleteAllAction->setText( i18nc("@action:inmenu","Remove All Bookmarks") );
     connect( mDeleteAllAction, SIGNAL(triggered(bool) ), SLOT(deleteAllBookmarks()) );
 //     mDeleteAllAction->setShortcut( Qt::CTRL + Qt::Key_G );
 
     mGotoNextBookmarkAction = actionCollection->addAction( "bookmark_next" );
-    mGotoNextBookmarkAction->setText( i18n("Goto Next Bookmark") );
+    mGotoNextBookmarkAction->setText( i18nc("@action:inmenu","Goto Next Bookmark") );
     connect( mGotoNextBookmarkAction, SIGNAL(triggered(bool) ), SLOT(gotoNextBookmark()) );
     mGotoNextBookmarkAction->setShortcut( Qt::ALT + Qt::Key_Down );
 
     mGotoPreviousBookmarkAction = actionCollection->addAction( "bookmark_previous" );
-    mGotoPreviousBookmarkAction->setText( i18n("Goto Previous Bookmark") );
+    mGotoPreviousBookmarkAction->setText( i18nc("@action:inmenu","Goto Previous Bookmark") );
     connect( mGotoPreviousBookmarkAction, SIGNAL(triggered(bool) ), SLOT(gotoPreviousBookmark()) );
     mGotoPreviousBookmarkAction->setShortcut( Qt::ALT + Qt::Key_Up );
 
@@ -136,7 +136,7 @@ void BookmarksController::updateBookmarks()
     {
         KHECore::KBookmark bookmark = *bit;
         printFunction( codedOffset, startOffset+bookmark.offset() );
-        QString title = i18n( "Offset: %1", QLatin1String(codedOffset) );
+        QString title = i18nc( "description of bookmark", "Offset: %1", QLatin1String(codedOffset) );
         if( b <= lastWithNumericShortCut )
             title = QString::fromLatin1("&%1 %2").arg( b ).arg( title );
         // = KStringHandler::rsqueeze( view->title(), MaxEntryLength );

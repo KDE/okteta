@@ -40,7 +40,7 @@ TextStreamEncoderSettings::TextStreamEncoderSettings()
 {}
 
 KByteArrayTextStreamEncoder::KByteArrayTextStreamEncoder()
- : KAbstractByteArrayStreamEncoder( i18n("Plain Text"), QLatin1String("text/plain") )
+ : KAbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Plain Text"), QLatin1String("text/plain") )
 {}
 
 

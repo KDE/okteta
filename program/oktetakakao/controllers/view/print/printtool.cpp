@@ -53,7 +53,7 @@ PrintTool::PrintTool( KXmlGuiWindow *window )
 
 void PrintTool::print( KByteArrayDocument *document )
 {
-    const QString processTitle = i18n( "Print Byte Array %1", document->title() );
+    const QString processTitle = i18nc( "@title:window", "Print Byte Array %1", document->title() );
 
     QPrinter printer;
 
@@ -120,7 +120,7 @@ void PrintTool::print( KByteArrayDocument *document )
 
         if( !success )
         {
-            QString message = i18n( "Could not print data." );
+            const QString message = i18n( "Could not print." );
 
             KMessageBox::sorry( mWindow, message, processTitle );
         }

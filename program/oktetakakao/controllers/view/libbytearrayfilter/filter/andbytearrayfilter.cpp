@@ -29,7 +29,7 @@
 
 
 AndByteArrayFilter::AndByteArrayFilter()
- : AbstractByteArrayFilter( i18n("operand AND data") )
+ : AbstractByteArrayFilter( i18nc("name of the filter","operand AND data") )
 {}
 
 AbstractByteArrayFilterParameterSet *AndByteArrayFilter::parameterSet() { return &mParameterSet; }

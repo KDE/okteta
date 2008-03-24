@@ -50,7 +50,7 @@ GotoOffsetController::GotoOffsetController( KXmlGuiWindow *MW )
     KActionCollection* ActionCollection = MainWindow->actionCollection();
 
     GotoOffsetAction = ActionCollection->addAction( "goto_offset" );
-    GotoOffsetAction->setText( i18n("&Goto Offset...") );
+    GotoOffsetAction->setText( i18nc("@action:inmenu","&Goto Offset...") );
     connect( GotoOffsetAction, SIGNAL(triggered(bool) ), SLOT(gotoOffset()) );
     GotoOffsetAction->setShortcut( Qt::CTRL + Qt::Key_G );
 

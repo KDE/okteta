@@ -59,20 +59,26 @@ KPrimitiveTypesView::KPrimitiveTypesView( PODDecoderTool *tool, QWidget *parent 
 
     const QString Int8Int16Label[NoOfRows] =
     {
-        i18n("Signed 8 bit:"), i18n("Unsigned 8 bit:"),
-        i18n("Signed 16 bit:"), i18n("Unsigned 16 bit:")
+        i18nc("@label:textbox","Signed 8 bit:"),
+        i18nc("@label:textbox","Unsigned 8 bit:"),
+        i18nc("@label:textbox","Signed 16 bit:"),
+        i18nc("@label:textbox","Unsigned 16 bit:")
     };
 
     const QString Int32FloatLabel[NoOfRows] =
     {
-        i18n("Signed 32 bit:"), i18n("Unsigned 32 bit:"),
-        i18n("32 bit float:"), i18n("64 bit float:")
+        i18nc("@label:textbox","Signed 32 bit:"),
+        i18nc("@label:textbox","Unsigned 32 bit:"),
+        i18nc("@label:textbox","32 bit float:"),
+        i18nc("@label:textbox","64 bit float:")
     };
 
     const QString ByteCodeLabel[NoOfRows] =
     {
-        i18n("Hexadecimal:"), i18n("Octal:"),
-        i18n("Binary:"), i18n("Text:")
+        i18nc("@label:textbox","Hexadecimal:"),
+        i18nc("@label:textbox","Octal:"),
+        i18nc("@label:textbox","Binary:"),
+        i18nc("@label:textbox","Text:")
     };
 
     for( int i=0; i<NoOfRows; ++i )
@@ -114,13 +120,13 @@ KPrimitiveTypesView::KPrimitiveTypesView( PODDecoderTool *tool, QWidget *parent 
     settingsLayout->setMargin( 0 );
 
     mEndianSelection = new KComboBox();
-    mEndianSelection->addItem( i18n("Little endian") ); // add first for index
-    mEndianSelection->addItem( i18n("Big endian") );    // add second for index
+    mEndianSelection->addItem( i18nc("@item:inlistbox","Little endian") ); // add first for index
+    mEndianSelection->addItem( i18nc("@item:inlistbox","Big endian") );    // add second for index
     mEndianSelection->setCurrentIndex( mTool->podData().byteOrder() );
     settingsLayout->addWidget( mEndianSelection, 0, Qt::AlignVCenter );
     connect( mEndianSelection, SIGNAL(activated(int)), SLOT(onEndianActivation(int)));
 
-    mUnsignedAsHexCheck = new QCheckBox( i18n("Show unsigned as hexadecimal") );
+    mUnsignedAsHexCheck = new QCheckBox( i18nc("@option:check","Show unsigned as hexadecimal") );
     settingsLayout->addWidget( mUnsignedAsHexCheck, 0, Qt::AlignVCenter );
     connect( mUnsignedAsHexCheck, SIGNAL(clicked()), this, SLOT(onUnsignedAsHex()) );
 

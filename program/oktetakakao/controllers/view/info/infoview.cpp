@@ -48,7 +48,7 @@ InfoView::InfoView( InfoTool *tool, QWidget *parent )
 
     QHBoxLayout *sizeLayout = new QHBoxLayout();
 
-    QLabel *label = new QLabel( i18n("Size [bytes]: "), this );
+    QLabel *label = new QLabel( i18nc("@label","Size [bytes]: "), this );
     sizeLayout->addWidget( label );
 
     mSizeLabel = new QLabel( this );
@@ -84,7 +84,7 @@ InfoView::InfoView( InfoTool *tool, QWidget *parent )
     connect( mTool, SIGNAL(statisticDirty( bool )), SLOT(setDirty( bool )) );
     updateLayout->addStretch();
 
-    mUpdateButton = new KPushButton( i18n("Update"), this );
+    mUpdateButton = new KPushButton( i18nc("@action:button","Update"), this );
     mUpdateButton->setEnabled( mTool->hasByteArrayView() );
     connect( mTool, SIGNAL(byteArrayViewChanged(bool)), mUpdateButton, SLOT( setEnabled(bool )) );
     connect( mUpdateButton, SIGNAL(clicked(bool)), mTool, SLOT(updateStatistic()) ); 
@@ -108,8 +108,8 @@ void InfoView::setByteArraySize( int size )
 
 void InfoView::setDirty( bool dirty )
 {
-    mDirtyLabel->setText( dirty ? i18nc("the statistic is not uptodate","Warning: not uptodate") : QString() );
-    mDirtyLabel->setToolTip( dirty ? i18n("Warning: Byte Array has been modified since last update.") : QString() );
+    mDirtyLabel->setText( dirty ? i18nc("@info:status the statistic is not uptodate","Warning: not uptodate") : QString() );
+    mDirtyLabel->setToolTip( dirty ? i18n("@info:tooltip Warning: Byte Array has been modified since last update.") : QString() );
 }
 
 InfoView::~InfoView() {}

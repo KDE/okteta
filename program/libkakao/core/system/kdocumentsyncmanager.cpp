@@ -107,10 +107,14 @@ bool KDocumentSyncManager::setSynchronizer( KAbstractDocument *document )
                 {
                     // TODO: care for case that file from url is already loaded by (only?) this program
 //                     const bool otherFileLoaded = mManager->documentByUrl( newUrl );
-                    const QString title = i18nc( "Save %typename As...", "Save %1 As...", document->typeName() );
+                    const QString title =
+                        i18nc( "@title:window Save %typename As...", "Save %1 As...", document->typeName() );
                     // TODO: replace "file" with synchronizer->storageTypeName() or such
                     // TODO: offer "Synchronize" as alternative, if supported, see below
-                    const QString message = i18n( "There is already a file at \n\"%1\".\n Overwrite?", newUrl.url() );
+                    const QString message =
+                        i18nc( "@info",
+                               "There is already a file at <nl/><filename>%1</filename>.<nl/>"
+                               "Overwrite?", newUrl.url() );
                     int answer = KMessageBox::warningYesNoCancel( mWidget, message, title, KStandardGuiItem::overwrite(), KStandardGuiItem::back() );
                     if( answer == KMessageBox::Cancel )
                         break;
@@ -166,12 +170,12 @@ bool KDocumentSyncManager::canClose( KAbstractDocument *document )
         KAbstractDocumentSynchronizer *synchronizer = document->synchronizer();
         const bool couldSynchronize = hasSynchronizerForLocal( document->mimeType() );
 
-        const QString title = i18nc( "Close %typename", "Close %1", document->typeName() );
+        const QString title = i18nc( "@title:window Close %typename", "Close %1", document->typeName() );
 
         if( synchronizer || couldSynchronize )
         {
-            const QString message = i18nc( "The %typename \"%title\" has been modified.",
-                "The %1 \"%2\" has been modified.\n"
+            const QString message = i18nc( "@info The %typename \"%title\" has been modified.",
+                "The %1 <emphasis>%2</emphasis> has been modified.<nl/>"
                 "Do you want to save your changes or discard them?", document->typeName(), document->title() );
             const int answer = KMessageBox::warningYesNoCancel( mWidget, message, title,
                                                                 KStandardGuiItem::save(), KStandardGuiItem::discard() );
@@ -188,7 +192,7 @@ bool KDocumentSyncManager::canClose( KAbstractDocument *document )
         else
         {
             const QString message = i18nc( "The %typename \"%title\" has been modified.",
-                "The %1 \"%2\" has been modified.\n"
+                "The %1 <emphasis>%2</emphasis> has been modified.<nl/>"
                 "Do you want to discard your changes?", document->typeName(), document->title() );
             const int answer = KMessageBox::warningContinueCancel( mWidget, message, title,
                                                                    KStandardGuiItem::discard() );

@@ -39,9 +39,10 @@ OverwriteModeController::OverwriteModeController( KXmlGuiWindow *window )
     KActionCollection *actionCollection = window->actionCollection();
 
     mSetOverWriteAction = actionCollection->add<KToggleAction>( "set_overwrite" );
-    mSetOverWriteAction->setText( i18n("Overwrite Mode") );
+    mSetOverWriteAction->setText( i18nc("@option:check","Overwrite Mode") );
     mSetOverWriteAction->setWhatsThis(
-        i18n("Choose whether you want the input to be inserted or to overwrite existing data.") );
+        i18nc("@info:whatsthis",
+              "Choose whether you want the input to be inserted or to overwrite existing data.") );
     // TODO: or should we catch the signal from the view (needs to be added)
     mSetOverWriteAction->setShortcut( QKeySequence(Qt::Key_Insert) );
     connect( mSetOverWriteAction, SIGNAL(triggered(bool)), SLOT(setOverWrite(bool)) );

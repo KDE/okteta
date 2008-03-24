@@ -39,10 +39,10 @@ ReverseByteArrayFilterParameterSetEdit::ReverseByteArrayFilterParameterSetEdit( 
     baseLayout->setSpacing( KDialog::spacingHint() );
     baseLayout->setMargin( 0 );
 
-    mInvertsBitsCheckBox = new QCheckBox( i18n("Reverse also Bits"), this );
+    mInvertsBitsCheckBox = new QCheckBox( i18nc("@option:check","Reverse also Bits"), this );
     mInvertsBitsCheckBox->setChecked( false );
     const QString alignWhatsThis =
-        i18n("If set, also the bits are ordered reverse.");
+        i18nc( "@info:whatsthis", "If set, also the bits are ordered reverse." );
     mInvertsBitsCheckBox->setWhatsThis( alignWhatsThis );
 
     baseLayout->addWidget( mInvertsBitsCheckBox );

@@ -42,11 +42,11 @@
 StringsExtractDialog::StringsExtractDialog( StringsExtractTool *tool, QWidget *parent )
  : KDialog( parent ), mTool( tool )
 {
-    setCaption( i18n("Extract Strings") );
+    setCaption( i18nc("@title:window","Extract Strings") );
     setModal( false );
 
     setButtons( User1 | Cancel );
-    setButtonText( User1, i18n("Update") );
+    setButtonText( User1, i18nc("@action:button","Update") );
     setDefaultButton( User1 );
 
     QWidget *page = new QWidget( this );

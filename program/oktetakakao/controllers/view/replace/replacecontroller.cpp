@@ -167,16 +167,17 @@ void ReplaceController::findNext()
         ViewWidget->selectAll( false );
 
         const QString ReplacementReport = (NoOfReplacements==0) ?
-            i18n( "No replacements done.") :
-            i18np( "1 replacement done.", "%1 replacements done.", NoOfReplacements );
+            i18nc( "@info", "No replacements done.") :
+            i18ncp( "@info", "1 replacement done.", "%1 replacements done.", NoOfReplacements );
+        const QString messageBoxTitle = i18nc( "@title:window", "Replace" );
         // reached end and
         if( DoWrap )
         {
             const QString Question = ((Direction==FindForward) ?
-                i18n( "\nEnd of document reached.\nContinue from the beginning?" ) :
-                i18n( "\nBeginning of document reached.\nContinue from the end?" ));
+                i18nc( "@info", "<nl/>End of byte array reached.<nl/>Continue from the beginning?" ) :
+                i18nc( "@info", "<nl/>Beginning of byte array reached.<nl/>Continue from the end?" ));
 
-            int Result = KMessageBox::questionYesNo( MainWindow, ReplacementReport+Question, i18n("Replace"),
+            int Result = KMessageBox::questionYesNo( MainWindow, ReplacementReport+Question, messageBoxTitle,
                                                      KStandardGuiItem::cont(), KStandardGuiItem::cancel() );
             if( Result == KMessageBox::No )
                 break;
@@ -187,9 +188,9 @@ void ReplaceController::findNext()
         else
         {
             if( !PreviousFound )
-                KMessageBox::sorry( MainWindow, i18n("Replace pattern not found in document."), i18n("Replace") );
+                KMessageBox::sorry( MainWindow, i18nc("@info","Replace pattern not found in byte array."), messageBoxTitle );
             else
-                KMessageBox::information( MainWindow, ReplacementReport, i18n("Replace") );
+                KMessageBox::information( MainWindow, ReplacementReport, messageBoxTitle );
             break;
         }
     }

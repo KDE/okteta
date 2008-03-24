@@ -43,47 +43,47 @@ ViewConfigController::ViewConfigController( KXmlGuiWindow *MW )
 
     // value encoding
     CodingAction = actionCollection->add<KSelectAction>( "view_valuecoding" );
-    CodingAction->setText( i18n("&Value Coding") );
+    CodingAction->setText( i18nc("@title:menu","&Value Coding") );
     QStringList List;
-    List.append( i18nc("Encoding as value","&Hexadecimal") );
-    List.append( i18nc("Encoding as value","&Decimal")     );
-    List.append( i18nc("Encoding as value","&Octal")       );
-    List.append( i18nc("Encoding as value","&Binary")      );
+    List.append( i18nc("@item:inmenu Encoding as value","&Hexadecimal") );
+    List.append( i18nc("@item:inmenu Encoding as value","&Decimal")     );
+    List.append( i18nc("@item:inmenu Encoding as value","&Octal")       );
+    List.append( i18nc("@item:inmenu Encoding as value","&Binary")      );
     CodingAction->setItems( List );
     connect( CodingAction, SIGNAL(triggered(int)), SLOT(setCoding(int)) );
 
     // document encoding
     EncodingAction = actionCollection->add<KSelectAction>( "view_charencoding" );
-    EncodingAction->setText( i18n("&Char Encoding") );
+    EncodingAction->setText( i18nc("@title:menu","&Char Encoding") );
     EncodingAction->setItems( KHECore::KCharCodec::codecNames() );
     connect( EncodingAction, SIGNAL(triggered(int)), SLOT(setEncoding(int)) );
 
     ShowsNonprintingAction = actionCollection->add<KToggleAction>( "view_showsnonprinting" );
-    ShowsNonprintingAction->setText( i18n("Show &Non-printing Chars") );
+    ShowsNonprintingAction->setText( i18nc("@option:check","Show &Non-printing Chars") );
     connect( ShowsNonprintingAction, SIGNAL(triggered(bool)), SLOT(setShowsNonprinting(bool)) );
 
     // resize style
     ResizeStyleAction = actionCollection->add<KSelectAction>( "resizestyle" );
-    ResizeStyleAction->setText( i18n("&Resize Style") );
+    ResizeStyleAction->setText( i18nc("@title:menu","&Resize Style") );
     List.clear();
-    List.append( i18n("&No Resize") );
-    List.append( i18n("&Lock Groups") );
-    List.append( i18n("&Full Size Usage") );
+    List.append( i18nc("@item:inmenu","&No Resize") );
+    List.append( i18nc("@item:inmenu","&Lock Groups") );
+    List.append( i18nc("@item:inmenu","&Full Size Usage") );
     ResizeStyleAction->setItems( List );
     connect( ResizeStyleAction, SIGNAL(triggered(int)), SLOT(setResizeStyle(int)) );
 
     ShowOffsetColumnAction = actionCollection->add<KToggleAction>( "view_lineoffset" );
-    ShowOffsetColumnAction->setText( i18n("&Line Offset") );
+    ShowOffsetColumnAction->setText( i18nc("@option:check","Show &Line Offset") );
     ShowOffsetColumnAction->setShortcut( Qt::Key_F11 );
     connect( ShowOffsetColumnAction, SIGNAL(triggered(bool)), SLOT(toggleOffsetColumn(bool)) );
 
     // show buffer columns
     ToggleColumnsAction = actionCollection->add<KSelectAction>( "togglecolumns" );
-    ToggleColumnsAction->setText( i18n("&Columns") );
+    ToggleColumnsAction->setText( i18nc("@title:menu","&Columns") );
     List.clear();
-    List.append( i18n("&Values Column") );
-    List.append( i18n("&Chars Column") );
-    List.append( i18n("&Both Columns") );
+    List.append( i18nc("@item:inmenu","&Values Column") );
+    List.append( i18nc("@item:inmenu","&Chars Column") );
+    List.append( i18nc("@item:inmenu","&Both Columns") );
     ToggleColumnsAction->setItems( List );
     connect( ToggleColumnsAction, SIGNAL(triggered(int)), SLOT(toggleValueCharColumns(int)) );
     setView( 0 );

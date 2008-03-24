@@ -65,7 +65,7 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget *parent )
 
     QHBoxLayout *insertLayout = new QHBoxLayout();
 
-    QLabel *label = new QLabel( i18n("Number of bytes:"), this );
+    QLabel *label = new QLabel( i18nc("@label:spinbox","Number of bytes:"), this );
     label->setFixedWidth( label->sizeHint().width() );
     insertLayout->addWidget( label );
 

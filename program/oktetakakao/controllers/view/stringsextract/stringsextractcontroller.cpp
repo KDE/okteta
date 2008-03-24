@@ -51,7 +51,7 @@ StringsExtractController::StringsExtractController( KXmlGuiWindow *window )
     KActionCollection *actionCollection = mWindow->actionCollection();
 
     mStringsExtractAction = actionCollection->addAction( "extract_strings" );
-    mStringsExtractAction->setText( i18n("&Extract strings...") );
+    mStringsExtractAction->setText( i18nc("@action:inmenu","&Extract strings...") );
     connect( mStringsExtractAction, SIGNAL(triggered(bool) ), SLOT(showTool()));
 
     setView( 0 );

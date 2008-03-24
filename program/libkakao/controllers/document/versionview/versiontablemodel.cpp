@@ -119,16 +119,16 @@ QVariant VersionTableModel::headerData( int section, Qt::Orientation orientation
     if( role == Qt::DisplayRole )
     {
         const QString titel =
-            section == IdColumnId ?                i18nc("@title Id of the version",         "Id") :
-            section == ChangeDescriptionColumnId ? i18nc("@title description of the change", "Changes") :
+            section == IdColumnId ?                i18nc("@title:column Id of the version",         "Id") :
+            section == ChangeDescriptionColumnId ? i18nc("@title:column description of the change", "Changes") :
             QString();
         result = titel;
     }
     else if( role == Qt::ToolTipRole )
     {
         const QString titel =
-            section == IdColumnId ?                i18n("Id of the version") :
-            section == ChangeDescriptionColumnId ? i18n("Description of what changed") :
+            section == IdColumnId ?                i18nc("@info:tooltip","Id of the version") :
+            section == ChangeDescriptionColumnId ? i18nc("@info:tooltip","Description of what changed") :
             QString();
         result = titel;
     }

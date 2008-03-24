@@ -29,7 +29,7 @@
 
 
 XOrByteArrayFilter::XOrByteArrayFilter()
- : AbstractByteArrayFilter( i18n("operand XOR data") )
+ : AbstractByteArrayFilter( i18nc("name of the filter","operand XOR data") )
 {}
 
 AbstractByteArrayFilterParameterSet *XOrByteArrayFilter::parameterSet() { return &mParameterSet; }

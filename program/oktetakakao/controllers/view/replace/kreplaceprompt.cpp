@@ -31,13 +31,13 @@ KReplacePrompt::KReplacePrompt( QWidget *parent )
  : KDialog( parent )
 {
     setModal( true );
-    setCaption( i18n("Replace") );
+    setCaption( i18nc("@window:title","Replace") );
 
     setButtons( User3 | User2 | User1 | Close );
 
-    setButtonGuiItem( User1, KGuiItem(i18n("Replace &All")) );
-    setButtonGuiItem( User2, KGuiItem(i18n("&Skip")) );
-    setButtonGuiItem( User3, KGuiItem(i18n("Replace")) );
+    setButtonGuiItem( User1, KGuiItem(i18nc("@action:button","Replace &All")) );
+    setButtonGuiItem( User2, KGuiItem(i18nc("@action:button","&Skip")) );
+    setButtonGuiItem( User3, KGuiItem(i18nc("@action:button","Replace")) );
 
     setDefaultButton( User3 );
     showButtonSeparator( false );

@@ -38,7 +38,7 @@ int ReplacePieceTableChange::type() const { return ReplaceId; }
 
 QString ReplacePieceTableChange::description() const
 {
-    return i18n( "Replace" );
+    return i18nc( "name of the change", "Replace" );
 }
 
 bool ReplacePieceTableChange::merge( const AbstractPieceTableChange *other )

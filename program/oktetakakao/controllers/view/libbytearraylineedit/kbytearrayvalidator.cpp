@@ -38,11 +38,11 @@ const QStringList &KByteArrayValidator::codingNames()
     static QStringList list;
     if( list.isEmpty() )
     {
-        list.append( i18nc("Encoding as value","Hexadecimal") );
-        list.append( i18nc("Encoding as value","Decimal") );
-        list.append( i18nc("Encoding as value","Octal") );
-        list.append( i18nc("Encoding as value","Binary") );
-        list.append( i18n("Regular Text") );
+        list.append( i18nc("@item:inlistbox Encoding as value","Hexadecimal") );
+        list.append( i18nc("@item:inlistbox Encoding as value","Decimal") );
+        list.append( i18nc("@item:inlistbox Encoding as value","Octal") );
+        list.append( i18nc("@item:inlistbox Encoding as value","Binary") );
+        list.append( i18nc("@item:inlistbox","Regular Text") );
     }
     return list;
 }

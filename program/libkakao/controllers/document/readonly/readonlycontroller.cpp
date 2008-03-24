@@ -37,7 +37,7 @@ ReadOnlyController::ReadOnlyController( KXmlGuiWindow *window )
     KActionCollection *actionCollection = window->actionCollection();
 
     mSetReadOnlyAction = actionCollection->add<KToggleAction>( "isreadonly" );
-    mSetReadOnlyAction->setText( i18n("Read only") );
+    mSetReadOnlyAction->setText( i18nc("@option:check","Read only") );
 //     mSetReadOnlyAction->setIcon( KIcon("emblem-readonly") );
     connect( mSetReadOnlyAction, SIGNAL(triggered(bool)), SLOT(setReadOnly(bool)) );
 

@@ -69,7 +69,7 @@ SourceCodeStreamEncoderSettings::SourceCodeStreamEncoderSettings()
 {}
 
 KByteArraySourceCodeStreamEncoder::KByteArraySourceCodeStreamEncoder()
- : KAbstractByteArrayStreamEncoder( i18n("C array"), QLatin1String("text/x-csrc") )
+ : KAbstractByteArrayStreamEncoder( i18nc("name of the encoding target","C array"), QLatin1String("text/x-csrc") )
 {}
 
 

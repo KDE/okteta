@@ -35,14 +35,14 @@ Done before review:
 * complete change notifications
 * reset changebuffer if history gets cut
 * make filter work on selection
+* user documentation in docbook format
+* complete i18n (@-stuff)
 
 Before adding to review:
 ------------------------
 * fix cursor problems
 * fix replace problem
 * make printing support only selection
-* user documentation in docbook format
-* complete i18n (@-stuff)
 * test handling of readonly files
 
 After passing review:

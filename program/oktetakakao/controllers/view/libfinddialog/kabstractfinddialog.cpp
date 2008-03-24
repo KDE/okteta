@@ -30,7 +30,6 @@
 #include <KGlobal>
 #include <KLocale>
 #include <KMessageBox>
-// #include <kstandardguiitem.h>
 // Qt
 #include <QtGui/QCheckBox>
 #include <QtGui/QLabel>
@@ -46,59 +45,59 @@ KAbstractFindDialog::KAbstractFindDialog( QWidget *parent )
     setDefaultButton( Ok );
     enableButtonOk( false );
 
-    QWidget *Page = new QWidget( this );
-    setMainWidget( Page );
+    QWidget *page = new QWidget( this );
+    setMainWidget( page );
 
-    QVBoxLayout *PageLayout = new QVBoxLayout( Page );
-    PageLayout->setSpacing( spacingHint() );
-    PageLayout->setMargin( 0 );
+    QVBoxLayout *pageLayout = new QVBoxLayout( page );
+    pageLayout->setSpacing( spacingHint() );
+    pageLayout->setMargin( 0 );
 
     // find term
-    QGroupBox *FindBox = new QGroupBox( i18n("Find"), Page );
-    PageLayout->addWidget( FindBox );
+    QGroupBox *findBox = new QGroupBox( i18nc("@title:window","Find"), page );
+    pageLayout->addWidget( findBox );
 
-    QVBoxLayout *FindBoxLayout = new QVBoxLayout;
-    FindBoxLayout->setSpacing( spacingHint() );
+    QVBoxLayout *findBoxLayout = new QVBoxLayout;
+    findBoxLayout->setSpacing( spacingHint() );
 
-    QLabel *BytesLabel = new QLabel( i18n("Bytes to F&ind:"), FindBox );
-    SearchDataEdit = new KByteArrayLineEdit( FindBox );
+    QLabel *bytesLabel = new QLabel( i18nc("@label:textbox","Byte String to F&ind:"), findBox );
+    SearchDataEdit = new KByteArrayLineEdit( findBox );
     connect( SearchDataEdit, SIGNAL(dataChanged(const QByteArray&)), SLOT(onSearchDataChanged(const QByteArray&)) );
     connect( SearchDataEdit, SIGNAL(formatChanged(int)), SLOT(onSearchDataFormatChanged(int)) );
-    BytesLabel->setBuddy( SearchDataEdit );
-    const QString InputWhatsThis =
-        i18n("Enter a pattern to search for, or select a previous pattern from the list.");
-    BytesLabel->setWhatsThis( InputWhatsThis );
-    SearchDataEdit->setWhatsThis( InputWhatsThis );
+    bytesLabel->setBuddy( SearchDataEdit );
+    const QString inputWhatsThis =
+        i18nc("@info:whatsthis","Enter a pattern to search for, or select a previous pattern from the list.");
+    bytesLabel->setWhatsThis( inputWhatsThis );
+    SearchDataEdit->setWhatsThis( inputWhatsThis );
 
-    FindBoxLayout->addWidget( BytesLabel );
-    FindBoxLayout->addWidget( SearchDataEdit );
-    FindBox->setLayout( FindBoxLayout );
+    findBoxLayout->addWidget( bytesLabel );
+    findBoxLayout->addWidget( SearchDataEdit );
+    findBox->setLayout( findBoxLayout );
 
     // options
-    QGroupBox *OptionsBox = new QGroupBox( i18n("Options"), Page );
-    PageLayout->addWidget( OptionsBox );
+    QGroupBox *optionsBox = new QGroupBox( i18nc("@title:group","Options"), page );
+    pageLayout->addWidget( optionsBox );
 
-    QGridLayout *OptionsBoxLayout = new QGridLayout( OptionsBox );
-    OptionsBoxLayout->setSpacing( spacingHint() );
+    QGridLayout *optionsBoxLayout = new QGridLayout( optionsBox );
+    optionsBoxLayout->setSpacing( spacingHint() );
 
-    CaseSensitiveCheckBox = new QCheckBox( i18n("C&ase sensitive"),OptionsBox);
-    CaseSensitiveCheckBox->setWhatsThis( i18n("Perform a case sensitive search: "
+    CaseSensitiveCheckBox = new QCheckBox( i18nc("@option:check","C&ase sensitive"),optionsBox);
+    CaseSensitiveCheckBox->setWhatsThis( i18nc("@info:whatsthis","Perform a case sensitive search: "
             "entering the pattern 'Joe' will not match 'joe' or 'JOE', only 'Joe'.") );
-    WholeWordsCheckBox = new QCheckBox( i18n("&Whole words only"),OptionsBox );
-    WholeWordsCheckBox->setWhatsThis( i18n("Require word boundaries in both ends of a match to succeed.") );
-    AtCursorCheckBox = new QCheckBox( i18n("From c&ursor"), OptionsBox );
-    AtCursorCheckBox->setWhatsThis( i18n("Start searching at the current cursor location rather than at the top.") );
+    WholeWordsCheckBox = new QCheckBox( i18nc("@option:check","&Whole words only"),optionsBox );
+    WholeWordsCheckBox->setWhatsThis( i18nc("@info:whatsthis","Require word boundaries in both ends of a match to succeed.") );
+    AtCursorCheckBox = new QCheckBox( i18nc("@option:check","From c&ursor"), optionsBox );
+    AtCursorCheckBox->setWhatsThis( i18nc("@info:whatsthis","Start searching at the current cursor location rather than at the top.") );
 
-    BackwardsCheckBox = new QCheckBox( i18n("&Backwards"), OptionsBox );
-    BackwardsCheckBox->setWhatsThis(i18n("Replace backwards.") );
-    SelectedCheckBox = new QCheckBox( i18n("&Selected bytes"), OptionsBox );
-    SelectedCheckBox->setWhatsThis( i18n("Only search within the current selection.") );
+    BackwardsCheckBox = new QCheckBox( i18nc("@option:check","&Backwards"), optionsBox );
+    BackwardsCheckBox->setWhatsThis(i18nc("@info:whatsthis","Replace backwards.") );
+    SelectedCheckBox = new QCheckBox( i18nc("@option:check","&Selected bytes"), optionsBox );
+    SelectedCheckBox->setWhatsThis( i18nc("@info:whatsthis","Only search within the current selection.") );
 
-    OptionsBoxLayout->addWidget( CaseSensitiveCheckBox, 0, 0 );
-    OptionsBoxLayout->addWidget( WholeWordsCheckBox, 1, 0 );
-    OptionsBoxLayout->addWidget( AtCursorCheckBox, 2, 0 );
-    OptionsBoxLayout->addWidget( BackwardsCheckBox, 0, 1 );
-    OptionsBoxLayout->addWidget( SelectedCheckBox, 1, 1 );
+    optionsBoxLayout->addWidget( CaseSensitiveCheckBox, 0, 0 );
+    optionsBoxLayout->addWidget( WholeWordsCheckBox, 1, 0 );
+    optionsBoxLayout->addWidget( AtCursorCheckBox, 2, 0 );
+    optionsBoxLayout->addWidget( BackwardsCheckBox, 0, 1 );
+    optionsBoxLayout->addWidget( SelectedCheckBox, 1, 1 );
 
 //     setTabOrder( SearchDataFormatComboBox, SearchDataEdit );
 
@@ -111,19 +110,19 @@ KAbstractFindDialog::KAbstractFindDialog( QWidget *parent )
     onSearchDataFormatChanged( SearchDataEdit->format() );
 }
 
-void KAbstractFindDialog::setOperationBox( QGroupBox *OperationBox )
+void KAbstractFindDialog::setOperationBox( QGroupBox *operationBox )
 {
-    QVBoxLayout *PageLayout = static_cast<QVBoxLayout *>( mainWidget()->layout() );
-    PageLayout->insertWidget( 1, OperationBox );
+    QVBoxLayout *pageLayout = static_cast<QVBoxLayout *>( mainWidget()->layout() );
+    pageLayout->insertWidget( 1, operationBox );
 }
 
-void KAbstractFindDialog::setExtraOption( QCheckBox* OptionCheckBox )
+void KAbstractFindDialog::setExtraOption( QCheckBox *optionCheckBox )
 {
-    if( OptionCheckBox )
+    if( optionCheckBox )
     {
-        QGridLayout *OptionsBoxLayout = static_cast<QGridLayout *>( BackwardsCheckBox->parentWidget()->layout() );
-        OptionsBoxLayout->addWidget( OptionCheckBox, 2, 1 );
-        setTabOrder( SelectedCheckBox, OptionCheckBox );
+        QGridLayout *optionsBoxLayout = static_cast<QGridLayout *>( BackwardsCheckBox->parentWidget()->layout() );
+        optionsBoxLayout->addWidget( optionCheckBox, 2, 1 );
+        setTabOrder( SelectedCheckBox, optionCheckBox );
     }
 }
 
@@ -159,15 +158,15 @@ void KAbstractFindDialog::onSearchDataFormatChanged( int index )
     WholeWordsCheckBox->setEnabled( index == KHECore::CharCoding );
 }
 
-void KAbstractFindDialog::onSearchDataChanged( const QByteArray &Data )
+void KAbstractFindDialog::onSearchDataChanged( const QByteArray &data )
 {
-    enableButtonOk( !Data.isEmpty() );
+    enableButtonOk( !data.isEmpty() );
 }
 
 
-void KAbstractFindDialog::showEvent( QShowEvent *e )
+void KAbstractFindDialog::showEvent( QShowEvent *showEvent )
 {
-  KDialog::showEvent(e);
+  KDialog::showEvent(showEvent);
   SearchDataEdit->setFocus();
 }
 

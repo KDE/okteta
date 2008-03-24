@@ -44,7 +44,7 @@ VersionController::VersionController( KXmlGuiWindow *window )
 {
     KActionCollection *actionCollection = window->actionCollection();
 
-    mSetToOlderVersionAction = new KToolBarPopupAction( KIcon("edit-undo"), i18n("Undo"), this );
+    mSetToOlderVersionAction = new KToolBarPopupAction( KIcon("edit-undo"), i18nc("@action:inmenu","Undo"), this );
     actionCollection->addAction( "edit_undo", mSetToOlderVersionAction );
     mSetToOlderVersionAction->setShortcuts( KStandardShortcut::undo() );
 
@@ -55,7 +55,7 @@ VersionController::VersionController( KXmlGuiWindow *window )
     connect( mSetToOlderVersionAction->menu(), SIGNAL(triggered( QAction* )),
              SLOT(onOlderVersionMenuTriggered( QAction* )) );
 
-    mSetToNewerVersionAction = new KToolBarPopupAction( KIcon("edit-redo"), i18n("Redo"), this );
+    mSetToNewerVersionAction = new KToolBarPopupAction( KIcon("edit-redo"), i18nc("@action:inmenu","Redo"), this );
     actionCollection->addAction( "edit_redo", mSetToNewerVersionAction );
     mSetToNewerVersionAction->setShortcuts( KStandardShortcut::redo() );
 

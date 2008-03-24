@@ -37,7 +37,7 @@ int RemovePieceTableChange::type() const { return RemoveId; }
 
 QString RemovePieceTableChange::description() const
 {
-    return i18n( "Remove" );
+    return i18nc( "name of the change", "Remove" );
 }
 
 bool RemovePieceTableChange::merge( const AbstractPieceTableChange *other )

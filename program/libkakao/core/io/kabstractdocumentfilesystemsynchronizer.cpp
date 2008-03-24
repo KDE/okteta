@@ -76,7 +76,7 @@ KAbstractDocument *KAbstractDocumentFileSystemSynchronizer::loadFromUrl( const K
         }
         else
             // TODO: these reports should go to a notification system, for log or popup
-            KMessageBox::error( d->widget(), i18n("Problem when loading from local filesystem.") );
+            KMessageBox::error( d->widget(), i18nc("@info","Problem when loading from local filesystem.") );
 
         KIO::NetAccess::removeTempFile( workFileName );
     }
@@ -97,7 +97,7 @@ bool KAbstractDocumentFileSystemSynchronizer::reloadFromUrl()
     {
         result = reloadFromFile( workFileName );
         if( !result )
-            KMessageBox::error( d->widget(), i18n("Problem when loading from local filesystem.") );
+            KMessageBox::error( d->widget(), i18nc("@info","Problem when loading from local filesystem.") );
 
         KIO::NetAccess::removeTempFile( workFileName );
     }
@@ -139,7 +139,7 @@ bool KAbstractDocumentFileSystemSynchronizer::writeToUrl()
     else
     {
         result = false;
-        KMessageBox::error( d->widget(), i18n("Problem when saving to local filesystem.") );
+        KMessageBox::error( d->widget(), i18nc("@info","Problem when saving to local filesystem.") );
     }
 
     return result;
@@ -209,7 +209,7 @@ bool KAbstractDocumentFileSystemSynchronizer::syncWithUrl( const KUrl &newUrl,
             document()->setSynchronizer( this );
         }
         else
-            KMessageBox::error( d->widget(), i18n("Problem when synching with local filesystem.") );
+            KMessageBox::error( d->widget(), i18nc("@info","Problem when synching with local filesystem.") );
         KIO::NetAccess::removeTempFile( workFileName );
     }
     else

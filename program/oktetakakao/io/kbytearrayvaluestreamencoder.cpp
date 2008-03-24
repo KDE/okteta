@@ -39,7 +39,7 @@ ValueStreamEncoderSettings::ValueStreamEncoderSettings()
 {}
 
 KByteArrayValueStreamEncoder::KByteArrayValueStreamEncoder()
- : KAbstractByteArrayStreamEncoder( i18n("Values"), QLatin1String("text/plain") )
+ : KAbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Values"), QLatin1String("text/plain") )
 {}
 
 

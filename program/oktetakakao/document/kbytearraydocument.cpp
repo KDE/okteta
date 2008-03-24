@@ -67,7 +67,7 @@ KHECore::KAbstractByteArrayModel* KByteArrayDocument::content() const { return m
 
 QString KByteArrayDocument::title() const { return mTitle; }
 QString KByteArrayDocument::mimeType() const { return QLatin1String("KByteArrayDocument"); }
-QString KByteArrayDocument::typeName() const { return i18n( "Byte Array" ); }
+QString KByteArrayDocument::typeName() const { return i18nc( "name of the data type", "Byte Array" ); }
 
 bool KByteArrayDocument::isModifiable() const { return true; }
 bool KByteArrayDocument::isReadOnly()   const { return mByteArray->isReadOnly(); }

@@ -29,7 +29,7 @@
 
 
 InvertByteArrayFilter::InvertByteArrayFilter()
- : AbstractByteArrayFilter( i18n("INVERT data") )
+ : AbstractByteArrayFilter( i18nc("name of the filter","INVERT data") )
 {}
 
 AbstractByteArrayFilterParameterSet *InvertByteArrayFilter::parameterSet() { return &mNoParameterSet; }

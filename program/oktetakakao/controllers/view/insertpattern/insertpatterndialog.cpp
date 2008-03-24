@@ -37,12 +37,14 @@
 InsertPatternDialog::InsertPatternDialog( QWidget *parent )
   : KDialog( parent )
 {
-    setCaption( i18n("Insert Pattern") );
+    setCaption( i18nc("@title:window","Insert Pattern") );
     setButtons( Ok | Cancel );
-    setButtonGuiItem( Ok, KGuiItem(i18n("&Insert"), 0,//"insert",
-                      i18n("Insert the pattern"),
-                      i18n("<qt>If you press the <b>Insert</b> button, the pattern you entered "
-                           "above are inserted in the document at the cursor position.</qt>")));
+    setButtonGuiItem( Ok, KGuiItem(i18nc("@action:button","&Insert"), 0,//"insert",
+                      i18nc("@info:tooltip","Insert the pattern"),
+                      i18nc("@info:whatsthis",
+                            "If you press the <interface>Insert</interface> button, "
+                            "the pattern you entered above are inserted in the "
+                            "byte array at the cursor position.")) );
     setDefaultButton( Ok );
     setModal( false );
 
@@ -54,31 +56,31 @@ InsertPatternDialog::InsertPatternDialog( QWidget *parent )
     baseLayout->setMargin( 0 );
 
     // search term
-    QGroupBox *insertBox = new QGroupBox( i18n("Insert"), page );
+    QGroupBox *insertBox = new QGroupBox( i18nc("@title:group","Insert"), page );
     baseLayout->addWidget( insertBox );
 
     QVBoxLayout *patternLayout = new QVBoxLayout;
     patternLayout->setSpacing( spacingHint() );
 
-    QLabel *label = new QLabel( i18n("Pattern:"), insertBox );
+    QLabel *label = new QLabel( i18nc("@label:textbox","Pattern:"), insertBox );
     mPatternEdit = new KByteArrayLineEdit( insertBox );
     connect( mPatternEdit, SIGNAL(dataChanged(const QByteArray&)), SLOT(onInputChanged(const QByteArray&)) );
     label->setBuddy( mPatternEdit );
     const QString inputWhatsThis =
-        i18n("Enter a pattern to search for, or select a previous pattern from the list.");
+        i18nc( "@info:whatsthis", "Enter a pattern to search for, or select a previous pattern from the list." );
     label->setWhatsThis( inputWhatsThis );
     mPatternEdit->setWhatsThis( inputWhatsThis );
     patternLayout->addWidget( label );
     patternLayout->addWidget( mPatternEdit );
     insertBox->setLayout( patternLayout );
 
-    label = new QLabel( i18n("&Number:"), insertBox );
+    label = new QLabel( i18nc("@label:spinbox number of times to insert the pattern","&Number:"), insertBox );
     mNumberSpinBox = new QSpinBox( insertBox );
     mNumberSpinBox->setRange( 1, INT_MAX );
     mNumberSpinBox->setValue( 1 );
     label->setBuddy( mNumberSpinBox );
     const QString numberWhatsThis =
-        i18n("Enter the number for how often the pattern should be inserted.");
+        i18nc( "@info:whatsthis", "Enter the number for how often the pattern should be inserted." );
     label->setWhatsThis( numberWhatsThis );
     mNumberSpinBox->setWhatsThis( numberWhatsThis );
 

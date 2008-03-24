@@ -39,7 +39,7 @@ int InsertPieceTableChange::type() const { return InsertId; }
 
 QString InsertPieceTableChange::description() const
 {
-    return i18n( "Insert" );
+    return i18nc( "name of the change", "Insert" );
 }
 
 bool InsertPieceTableChange::merge( const AbstractPieceTableChange *other )

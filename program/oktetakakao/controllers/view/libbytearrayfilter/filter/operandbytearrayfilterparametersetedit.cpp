@@ -42,22 +42,24 @@ OperandByteArrayFilterParameterSetEdit::OperandByteArrayFilterParameterSetEdit( 
     baseLayout->setSpacing( KDialog::spacingHint() );
     baseLayout->setMargin( 0 );
 
-    QLabel *label = new QLabel( i18n("Operand:"), this );
+    QLabel *label = new QLabel( i18nc("@label:textbox operand to the arithmetic filter function","Operand:"), this );
     mOperandEdit = new KByteArrayLineEdit( this );
     connect( mOperandEdit, SIGNAL(dataChanged(const QByteArray&)), SLOT(onInputChanged(const QByteArray&)) );
     label->setBuddy( mOperandEdit );
     const QString operandWhatsThis =
-        i18n("Enter an operand, or select a previous operand from the list.");
+        i18nc( "@info:whatsthis",
+               "Enter an operand, or select a previous operand from the list." );
     label->setWhatsThis( operandWhatsThis );
     mOperandEdit->setWhatsThis( operandWhatsThis );
 
     baseLayout->addWidget( label );
     baseLayout->addWidget( mOperandEdit );
 
-    mAlignAtEndCheckBox = new QCheckBox( i18n("Align at end"), this );
+    mAlignAtEndCheckBox = new QCheckBox( i18nc("@option:check","Align at end"), this );
     mAlignAtEndCheckBox->setChecked( false );
     const QString alignWhatsThis =
-        i18n("If set, the last operand will be aligned to the end of the data.");
+        i18nc( "@info:whatsthis",
+               "If set, the last operand will be aligned to the end of the data." );
     mAlignAtEndCheckBox->setWhatsThis( alignWhatsThis );
 
     baseLayout->addWidget( mAlignAtEndCheckBox );

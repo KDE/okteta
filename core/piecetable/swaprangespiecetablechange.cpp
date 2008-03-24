@@ -37,7 +37,7 @@ int SwapRangesPieceTableChange::type() const { return SwapRangesId; }
 
 QString SwapRangesPieceTableChange::description() const
 {
-    return i18n( "Swap Ranges" );
+    return i18nc( "name of the change", "Swap Ranges" );
 }
 
 KHE::KSection SwapRangesPieceTableChange::apply( PieceTable *pieceTable ) const

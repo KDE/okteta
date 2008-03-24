@@ -45,7 +45,7 @@ InsertPatternController::InsertPatternController( KXmlGuiWindow *window )
     KActionCollection *actionCollection = mWindow->actionCollection();
 
     mInsertPatternAction = actionCollection->addAction( "insert_pattern" );
-    mInsertPatternAction->setText( i18n("&Insert pattern...") );
+    mInsertPatternAction->setText( i18nc("@action:inmenu","&Insert pattern...") );
     connect( mInsertPatternAction, SIGNAL(triggered(bool) ), SLOT(onActionTriggered()));
     mInsertPatternAction->setShortcut( Qt::CTRL + Qt::Key_Insert );
 

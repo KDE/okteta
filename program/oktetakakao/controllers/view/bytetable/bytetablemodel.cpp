@@ -92,7 +92,7 @@ QVariant ByteTableModel::data( const QModelIndex &index, int role ) const
         {
             const KHECore::KChar decodedChar = mCharCodec->decode( byte );
             content = decodedChar.isUndefined() ?
-                i18nc( "character is not defined", "undef." ) :
+                i18nc( "@item:intable character is not defined", "undef." ) :
                 QString( (QChar)decodedChar );
         }
         else if( column < CharacterId )
@@ -113,22 +113,22 @@ QVariant ByteTableModel::headerData( int section, Qt::Orientation orientation, i
     if( role == Qt::DisplayRole )
     {
         const QString titel =
-            section == DecimalId ?     i18nc("short for Decimal",    "Dec") :
-            section == HexadecimalId ? i18nc("short for Hexadecimal","Hex") :
-            section == OctalId ?       i18nc("short for Octal",      "Oct") :
-            section == BinaryId ?      i18nc("short for Binary",     "Bin") :
-            section == CharacterId ?   i18nc("short for Character",  "Char") :
+            section == DecimalId ?     i18nc("@title:column short for Decimal",    "Dec") :
+            section == HexadecimalId ? i18nc("@title:column short for Hexadecimal","Hex") :
+            section == OctalId ?       i18nc("@title:column short for Octal",      "Oct") :
+            section == BinaryId ?      i18nc("@title:column short for Binary",     "Bin") :
+            section == CharacterId ?   i18nc("@title:column short for Character",  "Char") :
             QString();
         result = titel;
     }
     else if( role == Qt::ToolTipRole )
     {
         const QString titel =
-            section == DecimalId ?     i18n("Decimal") :
-            section == HexadecimalId ? i18n("Hexadecimal") :
-            section == OctalId ?       i18n("Octal") :
-            section == BinaryId ?      i18n("Binary") :
-            section == CharacterId ?   i18n("Character") :
+            section == DecimalId ?     i18nc("@info:tooltip","Decimal") :
+            section == HexadecimalId ? i18nc("@info:tooltip","Hexadecimal") :
+            section == OctalId ?       i18nc("@info:tooltip","Octal") :
+            section == BinaryId ?      i18nc("@info:tooltip","Binary") :
+            section == CharacterId ?   i18nc("@info:tooltip","Character") :
             QString();
         result = titel;
     }
