@@ -31,6 +31,9 @@ class QAction;
 class QActionGroup;
 class KXmlGuiWindow;
 class KDocumentManager;
+namespace KDE { namespace If {
+class DataSelectable;
+} }
 
 
 class CopyAsController : public KViewController
@@ -40,17 +43,21 @@ class CopyAsController : public KViewController
   public:
     CopyAsController( KDocumentManager *documentManager, KXmlGuiWindow *window );
 
-  public: // KToolet API
+  public: // KViewController API
     virtual void setView( KAbstractView *view );
 
-  private Q_SLOTS:
+  private:
     void updateActions();
+
+  private Q_SLOTS:
     void onActionTriggered( QAction *action );
 
   protected:
     KDocumentManager *mDocumentManager;
-    KXmlGuiWindow *mMainWindow;
+    KXmlGuiWindow *mWindow;
+
     KAbstractView *mView;
+    KDE::If::DataSelectable *mSelectionControl;
 
     QActionGroup *mCopyAsActionGroup;
 };

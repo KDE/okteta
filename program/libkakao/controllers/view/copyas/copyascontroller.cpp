@@ -44,31 +44,39 @@
 
 static const char CopyAsActionListId[] = "copy_as_list";
 
-CopyAsController::CopyAsController( KDocumentManager *documentManager, KXmlGuiWindow *mainWindow )
- : mDocumentManager( documentManager ), mMainWindow( mainWindow )
+CopyAsController::CopyAsController( KDocumentManager *documentManager, KXmlGuiWindow *window )
+ : mDocumentManager( documentManager ), mWindow( window ), mView( 0 )
 {
     mCopyAsActionGroup = new QActionGroup( this ); // TODO: do we use this only for the signal mapping?
-//     mCopyAsActionGroup->setExclusive( true );
     connect( mCopyAsActionGroup, SIGNAL(triggered( QAction* )), SLOT(onActionTriggered( QAction* )) );
-
-//     connect( mViewManager, SIGNAL(opened( KAbstractView* )),  SLOT(updateActions()) );
-//     connect( mViewManager, SIGNAL(closing( KAbstractView* )), SLOT(updateActions()) );
 
     setView( 0 );
 }
 
 void CopyAsController::setView( KAbstractView *view )
 {
-Q_UNUSED(view)
+    if( mView ) mView->disconnect( mCopyAsActionGroup );
+
     mView = view;
+    mSelectionControl = view ? qobject_cast<KDE::If::DataSelectable *>( view ) : 0;
+
+    if( mSelectionControl )
+    {
+        connect( mView, SIGNAL(hasSelectedDataChanged( bool )),
+                 mCopyAsActionGroup, SLOT(setEnabled( bool )) );
+    }
+
     updateActions();
+
+    const bool hasSelectedData = ( mSelectionControl != 0 ) ? mSelectionControl->hasSelectedData() : false;
+    mCopyAsActionGroup->setEnabled( hasSelectedData );
 }
 
- Q_DECLARE_METATYPE(KAbstractDocumentStreamEncoder*)
+Q_DECLARE_METATYPE(KAbstractDocumentStreamEncoder*)
 
 void CopyAsController::updateActions()
 {
-    mMainWindow->unplugActionList( CopyAsActionListId );
+    mWindow->unplugActionList( CopyAsActionListId );
 
     qDeleteAll( mCopyAsActionGroup->actions() );
 
@@ -79,20 +87,18 @@ void CopyAsController::updateActions()
         KAbstractDocumentStreamEncoder *encoder = encoderList.at( c );
         const QString title = encoder->remoteTypeName();
         QAction *action = new QAction( title, mCopyAsActionGroup );
-//         action->setCheckable( true );
 
         action->setData( QVariant::fromValue(encoder) );
         mCopyAsActionGroup->addAction( action );
     }
-    mMainWindow->plugActionList( CopyAsActionListId, mCopyAsActionGroup->actions() );
+    mWindow->plugActionList( CopyAsActionListId, mCopyAsActionGroup->actions() );
 }
 
 void CopyAsController::onActionTriggered( QAction *action )
 {
     KAbstractDocumentStreamEncoder *encoder = action->data().value<KAbstractDocumentStreamEncoder *>();
 
-    KDE::If::DataSelectable *selectionControl = qobject_cast<KDE::If::DataSelectable *>( mView );
-    const KAbstractDocumentSelection *selection = ( selectionControl ) ? selectionControl->selection() : 0;
+    const KAbstractDocumentSelection *selection = mSelectionControl->selection();
 
     QByteArray exportData;
     QBuffer exportDataBuffer( &exportData );
