@@ -82,7 +82,7 @@ QMimeData *KByteArrayDisplay::copySelectedData() const
 
 void KByteArrayDisplay::insertData( const QMimeData *data )
 {
-    mWidget->pasteFromSource( data );
+    mWidget->pasteData( data );
 }
 
 QMimeData *KByteArrayDisplay::cutSelectedData()

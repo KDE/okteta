@@ -922,11 +922,11 @@ void KByteArrayView::paste()
         return;
 
     const QMimeData *data = QApplication::clipboard()->mimeData( mClipboardMode );
-    pasteFromSource( data );
+    pasteData( data );
 }
 
 
-void KByteArrayView::pasteFromSource( const QMimeData *data )
+void KByteArrayView::pasteData( const QMimeData *data )
 {
     if( !data )
         return;
@@ -1941,7 +1941,7 @@ void KByteArrayView::dropEvent( QDropEvent *dropEvent )
     else
     {
     //mDataRanges->removeSelection();
-        pasteFromSource( dropEvent->mimeData() );
+        pasteData( dropEvent->mimeData() );
     }
 }
 
