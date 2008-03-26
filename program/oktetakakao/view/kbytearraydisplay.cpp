@@ -45,6 +45,7 @@ KByteArrayDisplay::KByteArrayDisplay( KByteArrayDocument *document )
     connect( mDocument, SIGNAL(modified( KAbstractDocument::SynchronizationStates )),
                         SIGNAL(modified( KAbstractDocument::SynchronizationStates )) );
 //     connect( mWidget, SIGNAL(selectionChanged( bool )), SIGNAL(hasSelectedDataChanged( bool )) );
+    connect( mWidget, SIGNAL(readOnlyChanged( bool )), SIGNAL(readOnlyChanged( bool )) );
     connect( mWidget, SIGNAL(selectionChanged( bool )), SLOT(onSelectionChange( bool )) );
 }
 
@@ -53,6 +54,9 @@ const KAbstractDocumentSelection *KByteArrayDisplay::selection() const { return 
 KAbstractDocument *KByteArrayDisplay::document() const { return mDocument; }
 QWidget* KByteArrayDisplay::widget()             const { return mWidget; }
 QString KByteArrayDisplay::title()               const { return mDocument->title(); }
+bool KByteArrayDisplay::isModifiable()           const { return true; }
+bool KByteArrayDisplay::isReadOnly()             const { return mWidget->isReadOnly(); }
+void KByteArrayDisplay::setReadOnly( bool isReadOnly ) { mWidget->setReadOnly( isReadOnly ); }
 
 void KByteArrayDisplay::setZoomLevel( double Level )
 {

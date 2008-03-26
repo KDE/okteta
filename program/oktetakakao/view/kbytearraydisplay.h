@@ -49,10 +49,15 @@ class KByteArrayDisplay : public KAbstractView, public KDE::If::Zoomable, public
   public:
 //     KCursorObject *cursor() const;
 
+  public: // AbstractModel API
+    virtual QString title() const;
+    virtual bool isModifiable() const;
+    virtual bool isReadOnly() const;
+    virtual void setReadOnly( bool isReadOnly );
+
   public: // KAbstractView API
     virtual QWidget *widget() const;
     virtual KAbstractDocument *document() const;
-    virtual QString title() const;
 
   public: // KDE::If::Zoomable API TODO: make all such methods slots?
     virtual void setZoomLevel( double Level );
