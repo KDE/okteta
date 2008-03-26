@@ -367,6 +367,7 @@ class KHEUI_EXPORT KByteArrayView : public KColumnsView
     void doubleClicked( int Index );
 
     void cursorPositionChanged( int Index );
+    void readOnlyChanged( bool isReadOnly );
     /** selection has changed */
     void selectionChanged( bool HasSelection );
     /** there is a cut available or not */
@@ -449,6 +450,7 @@ class KHEUI_EXPORT KByteArrayView : public KColumnsView
     void updateColumn( KColumn &Column );
     void ensureVisible( const KDataColumn &Column, const KCoord &Coord );
     void emitSelectionSignals();
+    void adaptController();
 
   protected Q_SLOTS:
     /** gets called by the cursor blink timer */
@@ -460,7 +462,7 @@ class KHEUI_EXPORT KByteArrayView : public KColumnsView
     /** */
     void startDrag();
 
-    void adaptController();
+    void onByteArrayReadOnlyChange( bool isByteArrayReadOnly );
     void onContentsChanged( const KHE::ArrayChangeMetricsList &changeList );
     void updateRange( int Start, int End );
     void updateRange( const KHE::KSectionList &list );

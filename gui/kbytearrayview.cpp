@@ -113,7 +113,7 @@ KByteArrayView::KByteArrayView( KHECore::KAbstractByteArrayModel *byteArrayModel
     // initialize layout
     if( !mByteArrayModel )
         mByteArrayModel = new KHECore::KByteArrayModel; // TODO: leaking, make it shared
-    connect( mByteArrayModel, SIGNAL(readOnlyChanged( bool )), SLOT(adaptController()) );
+    connect( mByteArrayModel, SIGNAL(readOnlyChanged( bool )), SLOT(onByteArrayReadOnlyChange( bool )) );
     connect( mByteArrayModel, SIGNAL(contentsChanged(int,int)), SLOT(updateRange(int,int)) );
     connect( mByteArrayModel, SIGNAL(contentsChanged(const KHE::KSectionList&)), SLOT(updateRange(const KHE::KSectionList&)) );
     connect( mByteArrayModel, SIGNAL(contentsChanged( const KHE::ArrayChangeMetricsList & )),
@@ -308,6 +308,9 @@ void KByteArrayView::setReadOnly( bool readOnly )
     mReadOnly = readOnly;
 
     adaptController();
+
+    if( !mByteArrayModel->isReadOnly() )
+        emit readOnlyChanged( mReadOnly );
 }
 
 void KByteArrayView::adaptController()
@@ -318,6 +321,13 @@ void KByteArrayView::adaptController()
                   cursorColumn() == CharColumnId ? (KController*)mCharEditor : (KController*)mValueEditor;
 }
 
+void KByteArrayView::onByteArrayReadOnlyChange( bool isByteArrayReadOnly )
+{
+    adaptController();
+
+    if( !mReadOnly )
+        emit readOnlyChanged( isByteArrayReadOnly );
+}
 
 void KByteArrayView::setBufferSpacing( KPixelX ByteSpacing, int noOfGroupedBytes, KPixelX GroupSpacing )
 {
