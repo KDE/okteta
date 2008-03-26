@@ -11,6 +11,7 @@ if(KDE4_BUILD_TESTS)
 endif(KDE4_BUILD_TESTS)
 
 set( KAKAO_CORE_SRCS
+  document/abstractmodel.cpp
   document/kabstractdocument.cpp
   document/kabstractdocumentselection.cpp
   document/kabstractdocumentfactory.cpp
