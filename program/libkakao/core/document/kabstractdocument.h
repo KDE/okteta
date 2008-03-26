@@ -24,17 +24,16 @@
 #define KABSTRACTDOCUMENT_H
 
 
-// Qt
-#include <QtCore/QObject>
+// lib
+#include "abstractmodel.h"
 
-class QString;
 class KAbstractDocumentSynchronizer;
 
 // TODO: store creation time? And time of last modification or access?
 // last both might be too much overhead, unless modification and access are grained enough
 // in multiuser environment also author/creator and group/identity
 // we would end with a in-memory file/document system, why not?
-class KAbstractDocument : public QObject
+class KAbstractDocument : public AbstractModel
 {
     Q_OBJECT
     Q_PROPERTY( SynchronizationStates synchronizationStates READ synchronizationStates )
@@ -62,17 +61,9 @@ class KAbstractDocument : public QObject
     virtual ~KAbstractDocument();
 
   public: // API to be implemented
-    virtual QString title() const = 0;
     // TODO: what about plurals?
     virtual QString typeName() const = 0;
     virtual QString mimeType() const = 0;
-
-    /** default returns false */
-    virtual bool isModifiable() const;
-    /** default returns true */
-    virtual bool isReadOnly() const;
-    /** default does nothing */
-    virtual void setReadOnly( bool isReadOnly );
 
     virtual SynchronizationStates synchronizationStates() const = 0;
 // virtual QVariant data ( const QModelIndex & index, int role = Qt::DisplayRole ) const = 0
@@ -88,10 +79,6 @@ class KAbstractDocument : public QObject
     // TODO: should be signal the diff? how to say then remote is in synch again?
     // could be done by pairs of flags instead of notset = isnot
     void modified( KAbstractDocument::SynchronizationStates newStates );
-    // TODO: readonly and modifiable should be turned into flags, also get/set methods
-    void readOnlyChanged( bool isReadOnly );
-    void modifiableChanged( bool isModifiable );
-    void titleChanged( const QString &newTitel );
     void synchronizerChanged( KAbstractDocumentSynchronizer *newSynchronizer );
 
   protected:

@@ -62,10 +62,6 @@ KAbstractDocument::KAbstractDocument()
 KAbstractDocumentSynchronizer *KAbstractDocument::synchronizer() const { return d->synchronizer(); }
 void KAbstractDocument::setSynchronizer( KAbstractDocumentSynchronizer *synchronizer ) { d->setSynchronizer(synchronizer); }
 
-bool KAbstractDocument::isModifiable() const { return false; }
-bool KAbstractDocument::isReadOnly()   const { return true; }
-void KAbstractDocument::setReadOnly( bool isReadOnly ) {}
-
 bool KAbstractDocument::hasLocalChanges() const { return synchronizationStates().testFlag(LocalHasChanges) ; }
 
 KAbstractDocument::~KAbstractDocument()

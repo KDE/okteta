@@ -26,14 +26,11 @@
 
 // lib
 #include <kabstractdocument.h>
-// Qt
-#include <QtCore/QObject>
 
-class QString;
 class QWidget;
 
 // TODO: is there a common base for view and document?
-class KAbstractView : public QObject
+class KAbstractView : public AbstractModel
 {
     Q_OBJECT
   public:
@@ -43,21 +40,17 @@ class KAbstractView : public QObject
     virtual QWidget *widget() const = 0;
     virtual KAbstractDocument *document() const = 0;
 
-    virtual QString title() const = 0;
-
   public:
 //     virtual bool setDocument( KAbstractDocument *document ) = 0;
     bool hasLocalChanges() const;
 
   Q_SIGNALS:
     // TODO: should be signal the diff? how to say then remote is in synch again?
-    void titleChanged( const QString &newTitel );
     void modified( KAbstractDocument::SynchronizationStates newStates );
 };
 
 // TODO: hack!!!! remove me!
 inline bool KAbstractView::hasLocalChanges() const { return document()->hasLocalChanges(); }
-
 
 inline KAbstractView::~KAbstractView() {}
 
