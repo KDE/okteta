@@ -62,41 +62,22 @@ void ClipboardController::setView( KAbstractView *view )
     {
         connect( mView, SIGNAL(hasSelectedDataChanged( bool )), SLOT(onHasSelectedDataChanged( bool )) );
 
-        mMimeDataControl = view ? qobject_cast<KDE::If::SelectedDataWriteable*>( view ) : 0;
+        mMimeDataControl = qobject_cast<KDE::If::SelectedDataWriteable*>( mView );
         if( mMimeDataControl )
-        {
-           // TODO: catch 
-//         if( !isReadOnly() && isOverWrite() )
-//         connect( mView, SIGNAL(hasSelectedDataChanged( bool )), SLOT(onHasSelectedDataChanged( bool )) );
-//         connect( HexEdit, SIGNAL(copyAvailable(bool)), mCopyAction,SLOT(setEnabled(bool)) );
-//         mCopyAction->setEnabled( false );
-        }
+            connect( mView, SIGNAL(readOnlyChanged( bool )), SLOT(onReadOnlyChanged( bool )) );
     }
     else
         mMimeDataControl = 0;
 
     const bool hasSelectedData = ( mSelectionControl != 0 ) ? mSelectionControl->hasSelectedData() : false;
-    const bool isWriteable = ( mMimeDataControl != 0 );
+    const bool isWriteable = ( mMimeDataControl != 0 && !mView->isReadOnly() );
+    const bool isPastable = isWriteable ?
+        mMimeDataControl->canReadData( QApplication::clipboard()->mimeData() ) :
+        false;
 
     mCopyAction->setEnabled( hasSelectedData );
-    mCutAction->setEnabled( hasSelectedData && isWriteable );//&& (!isReadOnly() && !isOverWrite()) );
-    onClipboardDataChanged();
-}
-
-
-void ClipboardController::onHasSelectedDataChanged( bool hasSelectedData )
-{
-    const bool isWriteable = ( mMimeDataControl != 0 );
-
-    mCopyAction->setEnabled( hasSelectedData );
-    mCutAction->setEnabled( hasSelectedData && isWriteable );//&& (!isReadOnly() && !isOverWrite()) );
-}
-
-void ClipboardController::onClipboardDataChanged()
-{
-    const bool isWriteable = ( mMimeDataControl != 0 ) ?
-        mMimeDataControl->canReadData(QApplication::clipboard()->mimeData()) : false;
-    mPasteAction->setEnabled( isWriteable );//&& !isReadOnly() );
+    mCutAction->setEnabled( hasSelectedData && isWriteable );
+    mPasteAction->setEnabled( isPastable );
 }
 
 void ClipboardController::cut()
@@ -123,4 +104,34 @@ void ClipboardController::paste()
 {
     const QMimeData *data = QApplication::clipboard()->mimeData( QClipboard::Clipboard );
     mMimeDataControl->insertData( data );
+}
+
+void ClipboardController::onReadOnlyChanged( bool isReadOnly )
+{
+    const bool hasSelectedData = ( mSelectionControl != 0 ) ? mSelectionControl->hasSelectedData() : false;
+    const bool isWriteable = !isReadOnly;
+    const bool isPastable = isWriteable ?
+        mMimeDataControl->canReadData( QApplication::clipboard()->mimeData() ) :
+        false;
+
+    mCutAction->setEnabled( hasSelectedData && isWriteable );
+    mPasteAction->setEnabled( isPastable );
+}
+
+void ClipboardController::onHasSelectedDataChanged( bool hasSelectedData )
+{
+    const bool isWriteable = ( mMimeDataControl != 0 && !mView->isReadOnly() );
+
+    mCopyAction->setEnabled( hasSelectedData );
+    mCutAction->setEnabled( hasSelectedData && isWriteable );
+}
+
+void ClipboardController::onClipboardDataChanged()
+{
+    const bool isWriteable = ( mMimeDataControl != 0 && !mView->isReadOnly() );
+    const bool isPastable = isWriteable ?
+        mMimeDataControl->canReadData( QApplication::clipboard()->mimeData() ) :
+        false;
+
+    mPasteAction->setEnabled( isPastable );
 }

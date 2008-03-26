@@ -53,6 +53,7 @@ class ClipboardController : public KViewController
 
   private Q_SLOTS:
     void onHasSelectedDataChanged( bool hasSelectedData );
+    void onReadOnlyChanged( bool isReadOnly );
     void onClipboardDataChanged();
 
   protected:
