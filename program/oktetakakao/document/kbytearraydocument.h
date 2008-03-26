@@ -48,14 +48,16 @@ class KByteArrayDocument : public KAbstractDocument, public KDE::If::Versionable
     KByteArrayDocument( KHECore::KPieceTableByteArrayModel *byteArray, const QString &initDescription );
     virtual ~KByteArrayDocument();
 
-  public: // KAbstractDocument API
+  public: // AbstractModel API
     virtual QString title() const;
-    virtual QString typeName() const;
-    virtual QString mimeType() const;
-    virtual SynchronizationStates synchronizationStates() const;
     virtual bool isModifiable() const;
     virtual bool isReadOnly() const;
     virtual void setReadOnly( bool isReadOnly );
+
+  public: // KAbstractDocument API
+    virtual QString typeName() const;
+    virtual QString mimeType() const;
+    virtual SynchronizationStates synchronizationStates() const;
 
   public: // KDE::If::Versionable
     virtual int versionIndex() const;
