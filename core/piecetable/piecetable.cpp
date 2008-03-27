@@ -397,8 +397,8 @@ void PieceTable::swap( int firstStart, const KHE::KSection &secondSection )
 
 Piece PieceTable::replaceOne( int dataOffset, int storageOffset, int storageId )
 {
-    int replacedStorageId;
-    int replacedStorageOffset;
+    int replacedStorageId = Piece::OriginalStorage;
+    int replacedStorageOffset = -1;
 
     QMutableLinkedListIterator<Piece> it( mList );
 
