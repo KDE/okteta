@@ -20,6 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
+
+#ifndef ABSTRACTMODEL_P_H
+#define ABSTRACTMODEL_P_H
+
 #include "abstractmodel.h"
 
 
@@ -35,3 +39,4 @@ class AbstractModel::Private
 inline AbstractModel::Private::Private( AbstractModel *parent ) : d( parent ) {}
 inline AbstractModel::Private::~Private() {}
 
+#endif
