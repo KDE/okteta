@@ -30,7 +30,7 @@ AbstractModel::AbstractModel()
 
 bool AbstractModel::isModifiable() const { return false; }
 bool AbstractModel::isReadOnly()   const { return true; }
-void AbstractModel::setReadOnly( bool isReadOnly ) {}
+void AbstractModel::setReadOnly( bool isReadOnly ) { Q_UNUSED(isReadOnly) }
 
 AbstractModel::~AbstractModel()
 {
