@@ -1,35 +1,21 @@
-hex editor library
-==================
-part of the Okteta project (trunk/playground/utils/okteta)
+Okteta Core library
+===================
+part of the Okteta project, a part of the KDE project.
+
+Copyright: 2003-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+
 Author/Maintainer: Friedrich W. H. Kossebau <kossebau@kde.org>
 
 
 description:
 -----------
-The lib is the main work of Okteta. It offers
-a general usable hex edit widget "KByteArrayView"
-that interacts with an abstract data buffer
-interface called "KAbstractByteArray". This interface can
-be subclassed to offer access to different byte arrays
+The lib offers an abstract byte array interface called "KAbstractByteArray".
+This interface can be subclassed to offer access to different byte arrays
 like paged gigabyte big files, video memory or whatever
-you can imagine (hopefully).
-
-For those simply needing a widget for a plain array of bytes
-there is the widget subclass "KBytesEdit", which hides the
-bytearray interface and publically simply interacts with
-arrays (like "char Array[25];").
+you can imagine (hopefully). Some example byte array models are included.
 
 
 installing:
 -----------
-As these widgets and the bytearray interface have not got
-much testing the API might not be finished. Because of that
-it won't be made public available, i.e. there will be no headers
-installed.
-
-
-usage:
-------
-This lib is by now only used by the KBytesEdit part, to be found
-in "../parts/kbytesedit".
-It is _not_ used by the current KHexEdit app.
+As the bytearray interface is still in active development the API is not yet finished.
+Because of that no headers are installed.

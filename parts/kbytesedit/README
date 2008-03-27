@@ -1,6 +1,9 @@
 KBytesEdit widget modul
 =======================
-part of the Okteta project (trunk/playground/utils/okteta)
+part of the Okteta project, a part of the KDE project.
+
+Copyright: 2003-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+
 Author/Maintainer: Friedrich W. H. Kossebau <kossebau@kde.org>
 
 

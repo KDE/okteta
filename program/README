@@ -1,0 +1,14 @@
+Okteta program
+===================
+part of the Okteta project, a part of the KDE project.
+
+Copyright: 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+
+Author/Maintainer: Friedrich W. H. Kossebau <kossebau@kde.org>
+
+
+description:
+-----------
+The program Okteta is another implementation of a standalone, plain old-fashioned 
+hex editor. It is based on the libkakao framework, with plugins using the basic
+Okteta core and gui libraries.

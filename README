@@ -1,0 +1,40 @@
+Okteta project
+===================
+part of the KDE project.
+
+Copyright: 2003-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+
+Author/Maintainer: Friedrich W. H. Kossebau <kossebau@kde.org>
+
+
+Overview
+--------
+This directory holds the files of the Okteta project. This project is about
+viewing and editing of data on the byte level.
+
+
+What to find in which subdirectory:
+--------------------------------
+core:
+  sources of the basic core library of Okteta
+
+gui:
+  sources of the basic gui library of Okteta
+
+parts:
+  collection of modules based on the Okteta libraries
+
+parts/kbytesedit:
+  sources of the implementation for the service type KHexEdit/KBytesEdit
+
+parts/kpart:
+  sources of the implementation of a KReadOnlyPart
+
+program:
+  a standalone hex editor program, based on libkakao and the Okteta libraries
+
+program/libkakao:
+  sources of the libkakao framework, a model-view-controller based concept
+
+program/oktetakakao:
+  sources of the Okteta plugins for the libkakao framework
