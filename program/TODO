@@ -37,28 +37,30 @@ Done before review:
 * make filter work on selection
 * user documentation in docbook format
 * complete i18n (@-stuff)
+* fix paste controller and readonly modes
 
 Before adding to review:
 ------------------------
 * fix cursor problems
 * fix replace problem
-* make printing support only selection
-* test handling of readonly files
 
 After passing review:
 For KDE 4.1:
 ----------------------------------
+* make printing support only selection
 * ask artists for own icon
 * add support for memory mapped files (includes enabling overwrite controller again)
 * add export functionality
 * enable extract strings tool and add copy
-* session support: full storing and restoring of view/model state
 * think about turning insert pattern & Co. into a tool
 * more explicit titels for undo/redo actions (range, data)
 * operations like filter should be able to set an own description of their action (undo/redo)
+* test handling of readonly files
 
 Later on:
 ---------
+* session support: full storing and restoring of view/model state
+* port KPart to libkakao
 * add support for more commandline options
 * port bytearrayview to bytearrayrenderer
 * complete work on input controllers for the bytearray view
@@ -68,3 +70,10 @@ Later on:
 * find good name for libkakao
 * add profiles with loaded tools and their positions (environments)
 * add splitting of views
+* templates
+* syntax highlighting
+
+Future plans:
+-------------
+* a binary diff editor widget in the Okteta libs
+* binary diff editor widget based parts
