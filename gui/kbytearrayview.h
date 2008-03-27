@@ -228,7 +228,7 @@ class KHEUI_EXPORT KByteArrayView : public KColumnsView
     void pasteData( const QMimeData *data );
 
   public:
-    bool canReadData( const QMimeData *data );
+    bool canReadData( const QMimeData *data ) const;
     /** 
       * @return deep copy of the selected data 
       */

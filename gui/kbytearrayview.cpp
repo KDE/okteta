@@ -959,7 +959,7 @@ void KByteArrayView::pasteData( const QMimeData *data )
         insert( byteArray );
 }
 
-bool KByteArrayView::canReadData( const QMimeData *data )
+bool KByteArrayView::canReadData( const QMimeData *data ) const
 {
 Q_UNUSED( data )
     // taking all for now, see comment in pasteData above
