@@ -81,7 +81,7 @@ bool KByteArrayDisplay::hasSelectedData() const
 
 QMimeData *KByteArrayDisplay::copySelectedData() const
 {
-    return mWidget->dragObject();
+    return mWidget->selectionAsMimeData();
 }
 
 void KByteArrayDisplay::insertData( const QMimeData *data )
@@ -91,7 +91,7 @@ void KByteArrayDisplay::insertData( const QMimeData *data )
 
 QMimeData *KByteArrayDisplay::cutSelectedData()
 {
-    QMimeData *result = mWidget->dragObject();
+    QMimeData *result = mWidget->selectionAsMimeData();
     mWidget->removeSelectedData();
     return result;
 }

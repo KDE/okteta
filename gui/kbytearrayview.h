@@ -209,10 +209,6 @@ class KHEUI_EXPORT KByteArrayView : public KColumnsView
     int indexByPoint(const QPoint &Point ) const;
 
   public:
-    /** 
-      * @return deep copy of the selected data 
-      */
-    QByteArray selectedData() const;
 
   public: // modification access
     /** puts the cursor to the position of index, handles all drawing 
@@ -229,11 +225,15 @@ class KHEUI_EXPORT KByteArrayView : public KColumnsView
 
     void setSelection( int Start, int End );
 
-    QMimeData *dragObject() const;
     void pasteData( const QMimeData *data );
 
   public:
     bool canReadData( const QMimeData *data );
+    /** 
+      * @return deep copy of the selected data 
+      */
+    QByteArray selectedData() const;
+    QMimeData *selectionAsMimeData() const;
 
   public Q_SLOTS:
     /** */

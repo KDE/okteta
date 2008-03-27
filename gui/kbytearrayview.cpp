@@ -871,7 +871,7 @@ QByteArray KByteArrayView::selectedData() const
 }
 
 
-QMimeData *KByteArrayView::dragObject() const
+QMimeData *KByteArrayView::selectionAsMimeData() const
 {
     if( !mDataRanges->hasSelection() )
         return 0;
@@ -908,7 +908,7 @@ void KByteArrayView::cut()
     if( isReadOnly() || mOverWrite )
         return;
 
-    QMimeData *cutData = dragObject();
+    QMimeData *cutData = selectionAsMimeData();
     if( !cutData )
         return;
 
@@ -920,7 +920,7 @@ void KByteArrayView::cut()
 
 void KByteArrayView::copy()
 {
-    QMimeData *cutData = dragObject();
+    QMimeData *cutData = selectionAsMimeData();
     if( !cutData )
         return;
 
@@ -1877,7 +1877,7 @@ void KByteArrayView::startDrag()
     mDragStartPossible = false;
 
     // create data
-    QMimeData *dragData = dragObject();
+    QMimeData *dragData = selectionAsMimeData();
     if( !dragData )
         return;
 
