@@ -100,6 +100,7 @@ void FilterView::addParameterEdit( const QString &name, QWidget *parameterEdit )
 
 void FilterView::setCharCode( const QString &codeName )
 {
+Q_UNUSED( codeName )
 //     mOperandEdit->setCharCode( codeName ); // TODO: simply tell all editors a view change?
 }
 
