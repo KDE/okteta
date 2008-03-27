@@ -78,7 +78,7 @@ static const KByteArrayView::KEncoding DefaultEncoding = KByteArrayView::LocalEn
 static const int DefaultScrollTimerPeriod = 100;
 static const int InsertCursorWidth = 2;
 
-static const char DataFormatName[] = "application/octet-stream";
+static const char OctetStreamFormatName[] = "application/octet-stream";
 
 class KByteArrayView::Private
 {
@@ -895,6 +895,8 @@ QMimeData *KByteArrayView::dragObject() const
         Range.set( mDataLayout->coordRangeOfIndizes(mDataRanges->selection()) );
     }
 
+ // TODO: depending on the column, also chars or values should be added to the drag
+
     return new KByteArrayDrag( selectedData(), Range, OC, HC, TC,
                             charColumn().substituteChar(), charColumn().undefinedChar(),
                             mCharCodec->name() );
@@ -941,15 +943,27 @@ void KByteArrayView::pasteData( const QMimeData *data )
     if( !data )
         return;
 
-    const QByteArray bytes = data->data( DataFormatName );
+    // if there is a octet stream, use it, otherwise take the dump of the format
+    // with the highest priority
+    // TODO: this may not be, what is expected, think about it, if we just
+    // take byte array descriptions, like encodings in chars or values
+    // would need the movement of the encodings into the core library
+    const QLatin1String octetStreamFormatName( OctetStreamFormatName );
+    const QString dataFormatName = ( data->hasFormat(octetStreamFormatName) ) ?
+        QString( octetStreamFormatName ) :
+        data->formats()[0];
 
-    if( !bytes.isEmpty() )
-        insert( bytes );
+    const QByteArray byteArray = data->data( dataFormatName );;
+
+    if( !byteArray.isEmpty() )
+        insert( byteArray );
 }
 
 bool KByteArrayView::canReadData( const QMimeData *data )
 {
-    return data->hasFormat( DataFormatName );
+Q_UNUSED( data )
+    // taking all for now, see comment in pasteData above
+    return true;//data->hasFormat( OctetStreamFormatName );
 }
 
 
@@ -1990,7 +2004,7 @@ void KByteArrayView::handleInternalDrag( QDropEvent *dropEvent )
     else
     {
         // get data
-        QByteArray data = dropEvent->mimeData()->data( DataFormatName );
+        QByteArray data = dropEvent->mimeData()->data( OctetStreamFormatName );
 
         if( !data.isEmpty() )
         {
