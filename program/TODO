@@ -43,6 +43,7 @@ Before adding to review:
 ------------------------
 * fix cursor problems
 * fix replace problem
+* fix filter char coding adaption
 
 After passing review:
 For KDE 4.1:
@@ -72,6 +73,10 @@ Later on:
 * add splitting of views
 * templates
 * syntax highlighting
+* support for formated bytearray formats, load/save as well as import/export
+* shellwindow:
+  * hovering of drag about tab changes to tab
+  * dropping next to tab creates new data object by the drop data
 
 Future plans:
 -------------
