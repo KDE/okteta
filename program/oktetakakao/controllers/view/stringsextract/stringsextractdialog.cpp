@@ -46,7 +46,7 @@ StringsExtractDialog::StringsExtractDialog( StringsExtractTool *tool, QWidget *p
     setModal( false );
 
     setButtons( User1 | Cancel );
-    setButtonText( User1, i18nc("@action:button","Update") );
+    setButtonText( User1, i18nc("@action:button Update the list of strings extracted","Update") );
     setDefaultButton( User1 );
 
     QWidget *page = new QWidget( this );

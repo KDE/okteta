@@ -85,10 +85,10 @@ void OktetaPart::setupActions( bool browserViewWanted )
     codingAction = actions->add<KSelectAction>( "view_valuecoding" );
     codingAction->setText( i18nc("@title:menu","&Value Coding") );
     QStringList strings;
-    strings.append( i18nc("@item:inmenu Encoding as value","&Hexadecimal") );
-    strings.append( i18nc("@item:inmenu Encoding as value","&Decimal")     );
-    strings.append( i18nc("@item:inmenu Encoding as value","&Octal")       );
-    strings.append( i18nc("@item:inmenu Encoding as value","&Binary")      );
+    strings.append( i18nc("@item:inmenu encoding of the bytes as values in the hexadecimal format","&Hexadecimal") );
+    strings.append( i18nc("@item:inmenu encoding of the bytes as values in the decimal format",    "&Decimal")     );
+    strings.append( i18nc("@item:inmenu encoding of the bytes as values in the octal format",      "&Octal")       );
+    strings.append( i18nc("@item:inmenu encoding of the bytes as values in the binary format",     "&Binary")      );
     codingAction->setItems( strings );
     connect( codingAction, SIGNAL(triggered(int)), SLOT(onSetCoding(int)) );
 

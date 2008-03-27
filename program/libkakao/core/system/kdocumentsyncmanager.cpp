@@ -191,7 +191,7 @@ bool KDocumentSyncManager::canClose( KAbstractDocument *document )
         }
         else
         {
-            const QString message = i18nc( "The %typename \"%title\" has been modified.",
+            const QString message = i18nc( "@info The %typename \"%title\" has been modified.",
                 "The %1 <emphasis>%2</emphasis> has been modified.<nl/>"
                 "Do you want to discard your changes?", document->typeName(), document->title() );
             const int answer = KMessageBox::warningContinueCancel( mWidget, message, title,

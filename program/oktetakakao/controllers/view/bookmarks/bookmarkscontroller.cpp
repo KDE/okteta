@@ -136,7 +136,7 @@ void BookmarksController::updateBookmarks()
     {
         KHECore::KBookmark bookmark = *bit;
         printFunction( codedOffset, startOffset+bookmark.offset() );
-        QString title = i18nc( "description of bookmark", "Offset: %1", QLatin1String(codedOffset) );
+        QString title = i18nc( "@item description of bookmark", "Offset: %1", QLatin1String(codedOffset) );
         if( b <= lastWithNumericShortCut )
             title = QString::fromLatin1("&%1 %2").arg( b ).arg( title );
         // = KStringHandler::rsqueeze( view->title(), MaxEntryLength );

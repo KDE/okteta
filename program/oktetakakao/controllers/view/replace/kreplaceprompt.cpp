@@ -24,14 +24,13 @@
 
 // KDE
 #include <KLocale>
-// #include <kstdguiitem.h>
 
 
 KReplacePrompt::KReplacePrompt( QWidget *parent )
  : KDialog( parent )
 {
     setModal( true );
-    setCaption( i18nc("@window:title","Replace") );
+    setCaption( i18nc("@title:window prompt for iterative replacement","Replace") );
 
     setButtons( User3 | User2 | User1 | Close );
 

@@ -168,12 +168,18 @@ QVariant StatisticTableModel::headerData( int section, Qt::Orientation orientati
     {
         const QString titel =
             section == ValueId ? (
-                mValueCoding == KHECore::HexadecimalCoding ? i18nc("@info:tooltip","Hexadecimal") :
-                mValueCoding == KHECore::DecimalCoding ?     i18nc("@info:tooltip","Decimal") :
-                mValueCoding == KHECore::OctalCoding ?       i18nc("@info:tooltip","Octal") :
-                mValueCoding == KHECore::BinaryCoding ?      i18nc("@info:tooltip","Binary") :
-                                                QString() ) :
-            section == CharacterId ?   i18nc("@info:tooltip","Character") :
+                mValueCoding == KHECore::HexadecimalCoding ?
+                    i18nc("@info:tooltip column contains the value in hexadecimal format","Hexadecimal") :
+                mValueCoding == KHECore::DecimalCoding ?
+                    i18nc("@info:tooltip column contains the value in decimal format",    "Decimal") :
+                mValueCoding == KHECore::OctalCoding ?
+                    i18nc("@info:tooltip column contains the value in octal format",      "Octal") :
+                mValueCoding == KHECore::BinaryCoding ?
+                    i18nc("@info:tooltip column contains the value in binary format",     "Binary") :
+                // else
+                    QString() ) :
+            section == CharacterId ?
+                    i18nc("@info:tooltip column contains the character with the value",   "Character") :
 //             section == CountId ?       i18nc("@info:tooltip count of characters",      "Count") :
 //             section == PercentId ?     i18nc("@info:tooltip Percent of byte in total", "Percent") :
             QString();

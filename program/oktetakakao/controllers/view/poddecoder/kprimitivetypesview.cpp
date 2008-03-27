@@ -75,10 +75,10 @@ KPrimitiveTypesView::KPrimitiveTypesView( PODDecoderTool *tool, QWidget *parent 
 
     const QString ByteCodeLabel[NoOfRows] =
     {
-        i18nc("@label:textbox","Hexadecimal:"),
-        i18nc("@label:textbox","Octal:"),
-        i18nc("@label:textbox","Binary:"),
-        i18nc("@label:textbox","Text:")
+        i18nc("@label:textbox encoding of the bytes as value in the hexadecimal format","Hexadecimal:"),
+        i18nc("@label:textbox encoding of the bytes as value in the octal format",      "Octal:"),
+        i18nc("@label:textbox encoding of the bytes as value in the binary format",     "Binary:"),
+        i18nc("@label:textbox encoding of the bytes as character",                      "Character:")
     };
 
     for( int i=0; i<NoOfRows; ++i )

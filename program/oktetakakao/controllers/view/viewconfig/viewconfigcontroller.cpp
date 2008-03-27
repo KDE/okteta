@@ -45,10 +45,10 @@ ViewConfigController::ViewConfigController( KXmlGuiWindow *MW )
     CodingAction = actionCollection->add<KSelectAction>( "view_valuecoding" );
     CodingAction->setText( i18nc("@title:menu","&Value Coding") );
     QStringList List;
-    List.append( i18nc("@item:inmenu Encoding as value","&Hexadecimal") );
-    List.append( i18nc("@item:inmenu Encoding as value","&Decimal")     );
-    List.append( i18nc("@item:inmenu Encoding as value","&Octal")       );
-    List.append( i18nc("@item:inmenu Encoding as value","&Binary")      );
+    List.append( i18nc("@item:inmenu encoding of the bytes as values in the hexadecimal format","&Hexadecimal") );
+    List.append( i18nc("@item:inmenu encoding of the bytes as values in the decimal format",    "&Decimal")     );
+    List.append( i18nc("@item:inmenu encoding of the bytes as values in the octal format",      "&Octal")       );
+    List.append( i18nc("@item:inmenu encoding of the bytes as values in the binary format",     "&Binary")      );
     CodingAction->setItems( List );
     connect( CodingAction, SIGNAL(triggered(int)), SLOT(setCoding(int)) );
 

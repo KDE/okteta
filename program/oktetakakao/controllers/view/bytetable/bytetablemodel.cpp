@@ -124,11 +124,16 @@ QVariant ByteTableModel::headerData( int section, Qt::Orientation orientation, i
     else if( role == Qt::ToolTipRole )
     {
         const QString titel =
-            section == DecimalId ?     i18nc("@info:tooltip","Decimal") :
-            section == HexadecimalId ? i18nc("@info:tooltip","Hexadecimal") :
-            section == OctalId ?       i18nc("@info:tooltip","Octal") :
-            section == BinaryId ?      i18nc("@info:tooltip","Binary") :
-            section == CharacterId ?   i18nc("@info:tooltip","Character") :
+            section == DecimalId ?
+                i18nc("@info:tooltip column contains the value in decimal format",    "Decimal") :
+            section == HexadecimalId ?
+                i18nc("@info:tooltip column contains the value in hexadecimal format","Hexadecimal") :
+            section == OctalId ?
+                i18nc("@info:tooltip column contains the value in octal format",      "Octal") :
+            section == BinaryId ?
+                i18nc("@info:tooltip column contains the value in binary format",     "Binary") :
+            section == CharacterId ?
+                i18nc("@info:tooltip column contains the character with the value",   "Character") :
             QString();
         result = titel;
     }

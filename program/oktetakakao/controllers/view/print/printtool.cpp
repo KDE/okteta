@@ -120,7 +120,7 @@ void PrintTool::print( KByteArrayDocument *document )
 
         if( !success )
         {
-            const QString message = i18n( "Could not print." );
+            const QString message = i18nc( "@info","Could not print." );
 
             KMessageBox::sorry( mWindow, message, processTitle );
         }

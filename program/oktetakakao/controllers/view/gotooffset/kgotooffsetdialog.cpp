@@ -42,8 +42,8 @@ static const QStringList &formatStrings()
   static QStringList list;
   if( list.isEmpty() )
   {
-    list.append( i18nc( "@item:inlistbox coding of offset", "Hexadecimal" ) );
-    list.append( i18nc( "@item:inlistbox coding of offset", "Decimal" ) );
+    list.append( i18nc( "@item:inlistbox coding of offset in the hexadecimal format", "Hexadecimal" ) );
+    list.append( i18nc( "@item:inlistbox coding of offset in the decimal format",     "Decimal" )     );
   }
   return list;
 }
