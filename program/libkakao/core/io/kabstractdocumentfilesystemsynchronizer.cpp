@@ -237,8 +237,9 @@ bool KAbstractDocumentFileSystemSynchronizer::syncWithRemote( const KUrl &url,
 
 void KAbstractDocumentFileSystemSynchronizer::onFileDirty( const QString &fileName )
 {
-    if( url().url() == fileName )
-        ;//document()->setRemoteHasChanges(); TODO: needs a control interface? 
+  Q_UNUSED( fileName )
+//     if( url().url() == fileName )
+//         document()->setRemoteHasChanges(); TODO: needs a control interface? 
 }
 void KAbstractDocumentFileSystemSynchronizer::onFileCreated( const QString &fileName )
 {
@@ -247,8 +248,9 @@ void KAbstractDocumentFileSystemSynchronizer::onFileCreated( const QString &file
 }
 void KAbstractDocumentFileSystemSynchronizer::onFileDeleted( const QString &fileName )
 {
-    if( url().url() == fileName )
-        ;//document()->setRemoteHasChanges(); TODO: needs a control interface? 
+  Q_UNUSED( fileName )
+//     if( url().url() == fileName )
+//         document()->setRemoteHasChanges(); TODO: needs a control interface? 
 }
 
 KAbstractDocumentFileSystemSynchronizer::~KAbstractDocumentFileSystemSynchronizer()
