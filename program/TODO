@@ -54,9 +54,10 @@ For KDE 4.1:
 * add export functionality
 * enable extract strings tool and add copy
 * think about turning insert pattern & Co. into a tool
-* more explicit titels for undo/redo actions (range, data)
+* more explicit titels for undo/redo actions (range, data), also paste, drag, and cut
 * operations like filter should be able to set an own description of their action (undo/redo)
 * test handling of readonly files
+* add support for blocking processes like printing, string search or filter
 
 Later on:
 ---------
