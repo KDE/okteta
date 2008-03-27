@@ -46,7 +46,7 @@ kde4_add_library( oktetagui_b  SHARED ${oktetagui_LIB_SRCS} )
 target_link_libraries( oktetagui_b  oktetacore_b ${KDE4_KDEUI_LIBS} )
 set_target_properties( oktetagui_b  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 
-install( TARGETS oktetagui_b  DESTINATION ${LIB_INSTALL_DIR} )
+install( TARGETS oktetagui_b  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 add_subdirectory( test )
 #   kde4_add_library( testoktetacore STATIC ${oktetagui_LIB_SRCS} )

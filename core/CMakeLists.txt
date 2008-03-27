@@ -55,7 +55,7 @@ target_link_libraries( oktetacore_b  ${KDE4_KDECORE_LIBS} )
 set_target_properties( oktetacore_b PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 
 
-install( TARGETS oktetacore_b  DESTINATION ${LIB_INSTALL_DIR})
+install( TARGETS oktetacore_b  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 add_subdirectory( piecetable/tests )
 add_subdirectory( tests )
