@@ -96,7 +96,7 @@ void HeaderFooterFrameRenderer::prepare()
     tagReplacements['y'] = KGlobal::locale()->formatDate( dateTime.date(), KLocale::ShortDate );
     tagReplacements['Y'] = KGlobal::locale()->formatDate( dateTime.date(), KLocale::LongDate );
     tagReplacements['u'] = user.loginName();
-    tagReplacements['U'] = user.fullName();
+    tagReplacements['U'] = user.property( KUser::FullName ).toString();
 //     tagReplacements['f'] = isSelection ? i18n("(Selection of) %1", url.fileName()) : url.fileName();
     tagReplacements['f'] = url.fileName();
     tagReplacements['F'] = url.prettyUrl();
