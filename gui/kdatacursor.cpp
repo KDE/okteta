@@ -394,6 +394,7 @@ void KDataCursor::adaptToChanges( const KHE::ArrayChangeMetricsList &changeList,
                 }
                 else
                     Index = 0;
+                break;
             case KHE::ArrayChangeMetrics::Swapping:
                 if( Index < change.secondStart() )
                 {
@@ -403,6 +404,7 @@ void KDataCursor::adaptToChanges( const KHE::ArrayChangeMetricsList &changeList,
                 {
                     Index -= change.firstLength();
                 }
+                break;
             default:
                 ;
             }
