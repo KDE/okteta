@@ -1029,8 +1029,8 @@ void KByteArrayView::updateRange( int start, int end )
     mDataRanges->addChangedRange( start, end );
 // kDebug() << "update: "<<start<<","<<end;
 
-    unpauseCursor();
     updateChanged();
+    unpauseCursor();
 }
 
 
@@ -1039,8 +1039,8 @@ void KByteArrayView::updateRange( const KHE::KSectionList &list )
     for( KHE::KSectionList::ConstIterator it=list.begin(); it!=list.end(); ++it )
         mDataRanges->addChangedRange( *it );
 
-    unpauseCursor();
     updateChanged();
+    unpauseCursor();
 }
 
 
@@ -1069,6 +1069,10 @@ void KByteArrayView::onContentsChanged( const KHE::ArrayChangeMetricsList &chang
     mDataRanges->adaptSelectionToChanges( changeList );
     // kDebug() << "Cursor:"<<mDataCursor->index()<<", selection:"<<mDataRanges->selectionStart()<<"-"<<mDataRanges->selectionEnd()
     //          <<", BytesPerLine: "<<mDataLayout->noOfBytesPerLine()<<endl;
+
+    updateChanged();
+    unpauseCursor();
+
     emit cursorPositionChanged( mDataCursor->realIndex() );
 }
 
