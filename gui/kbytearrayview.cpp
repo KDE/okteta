@@ -969,8 +969,6 @@ Q_UNUSED( data )
 
 void KByteArrayView::insert( const QByteArray &data )
 {
-    pauseCursor( true );
-
     if( mOverWrite )
     {
         if( mDataRanges->hasSelection() )
@@ -983,11 +981,12 @@ void KByteArrayView::insert( const QByteArray &data )
         }
         else
         {
-            if( !mDataCursor->isBehind() )
+            const int length = mDataLayout->length();
+            if( !mDataCursor->isBehind() && length > 0 )
             {
                 // replacing the normal data, at least until the end
                 KHE::KSection insertRange = KHE::KSection::fromWidth( mDataCursor->realIndex(), data.size() );
-                insertRange.restrictEndTo( mDataLayout->length()-1 );
+                insertRange.restrictEndTo( length-1 );
                 mByteArrayModel->replace( insertRange, data.data(), insertRange.width() );
             }
         }
@@ -1070,6 +1069,7 @@ void KByteArrayView::onContentsChanged( const KHE::ArrayChangeMetricsList &chang
     // kDebug() << "Cursor:"<<mDataCursor->index()<<", selection:"<<mDataRanges->selectionStart()<<"-"<<mDataRanges->selectionEnd()
     //          <<", BytesPerLine: "<<mDataLayout->noOfBytesPerLine()<<endl;
 
+    ensureCursorVisible();
     updateChanged();
     unpauseCursor();
 
@@ -2014,10 +2014,11 @@ void KByteArrayView::handleInternalDrag( QDropEvent *dropEvent )
         {
             if( mOverWrite )
             {
-                if( !mDataCursor->isBehind() )
+                const int length = mDataLayout->length();
+                if( !mDataCursor->isBehind() && length > 0 )
                 {
                     KHE::KSection overwriteRange = KHE::KSection::fromWidth( insertIndex, data.size() );
-                    overwriteRange.restrictEndTo( mDataLayout->length()-1 );
+                    overwriteRange.restrictEndTo( length-1 );
                     if( overwriteRange.isValid() )
                         mByteArrayModel->replace( overwriteRange, data.data(), overwriteRange.width() );
                 }
