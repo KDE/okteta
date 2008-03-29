@@ -44,7 +44,7 @@ class KDataLayout;
   *
   * To enable the cursor to be placed behind the last position in a line
   * (e.g, to mark all data in the line without placing the cursor to the
-  * beginning of the next line) there is a flag Behind that should be read
+  * beginning of the next line) there is a flag mBehind that should be read
   * as that the real index the cursor is at is the current one + 1
   * (as returned by realIndex())
   *
@@ -56,23 +56,23 @@ class KDataLayout;
   * Check for atAppendPos() to see whether cursor is at this position.
   *
   * If the buffer is empty there is no navigation possible, of course.
-  * The cursor will be placed to coord 0/0 with index 1, Behind=false.
+  * The cursor will be placed to coord 0/0 with index 1, mBehind=false.
   *
   *@author Friedrich W. H. Kossebau
   */
 class KDataCursor
 {
   public:
-    explicit KDataCursor( const KDataLayout *L );
+    explicit KDataCursor( const KDataLayout *layout );
     ~KDataCursor();
 
 
   public:
-    bool operator==( const KDataCursor &c ) const;
-    bool operator!=( const KDataCursor &c ) const { return !(*this == c); }
+    bool operator==( const KDataCursor &other ) const;
+    bool operator!=( const KDataCursor &other ) const { return !(*this == other); }
 
   public: // modificator
-    void setAppendPosEnabled( bool APE=true );
+    void setAppendPosEnabled( bool appendPosEnabled = true );
 
   public: // state value access
     /** the index that is drawn at the actual coord */
@@ -148,33 +148,33 @@ class KDataCursor
 
   private:
     /** layout, tells how the column is organized  */
-    const KDataLayout *Layout;
+    const KDataLayout *mLayout;
 
     /** Position in buffer */
-    int Index;
+    int mIndex;
     /** Position and Line */
-    KCoord Coord;
+    KCoord mCoord;
 
     /** tells whether the cursor is actually behind the actual position.
       * This is used for selection to the end of a line or of the whole buffer.
       */
-    bool Behind : 1;
+    bool mBehind : 1;
 
     /** tells whether there could be a position behind the end of the layout */
-    bool AppendPosEnabled : 1;
+    bool mAppendPosEnabled : 1;
 };
 
 
-inline int KDataCursor::index()          const { return Index; }
-inline int KDataCursor::pos()            const { return Coord.pos(); }
-inline int KDataCursor::line()           const { return Coord.line(); }
-inline KCoord KDataCursor::coord() const { return Coord; }
-inline bool KDataCursor::isBehind()      const { return Behind; }
-inline int KDataCursor::realIndex()      const { return Behind ? Index + 1 : Index; }
+inline int KDataCursor::index()          const { return mIndex; }
+inline int KDataCursor::pos()            const { return mCoord.pos(); }
+inline int KDataCursor::line()           const { return mCoord.line(); }
+inline KCoord KDataCursor::coord()       const { return mCoord; }
+inline bool KDataCursor::isBehind()      const { return mBehind; }
+inline int KDataCursor::realIndex()      const { return mBehind ? mIndex + 1 : mIndex; }
 
-inline void KDataCursor::stepBehind() { Behind = true; }
+inline void KDataCursor::stepBehind() { mBehind = true; }
 
-//inline bool KDataCursor::isValid()  const { return Index != -1; }
+//inline bool KDataCursor::isValid()  const { return mIndex != -1; }
 
 }
 

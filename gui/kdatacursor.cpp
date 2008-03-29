@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2003 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -28,341 +28,338 @@
 #include <arraychangemetricslist.h>
 
 
-namespace KHEUI {
+namespace KHEUI
+{
 
-KDataCursor::KDataCursor( const KDataLayout *L )
- : Layout( L ),
-   Index( 0 ),
-   Coord( 0, 0 ),
-   Behind( false ),
-   AppendPosEnabled( false )
+KDataCursor::KDataCursor( const KDataLayout *layout )
+ : mLayout( layout ),
+   mIndex( 0 ),
+   mCoord( 0, 0 ),
+   mBehind( false ),
+   mAppendPosEnabled( false )
 {
 }
 
-KDataCursor::~KDataCursor()
+
+bool KDataCursor::operator==( const KDataCursor &other ) const
 {
+    return ( mIndex == other.mIndex && mBehind == other.mBehind );
 }
 
 
-bool KDataCursor::operator==( const KDataCursor &C ) const
+void KDataCursor::setAppendPosEnabled( bool appendPosEnabled )
 {
-  return Index == C.Index && Behind == C.Behind ;
-}
+    if( mAppendPosEnabled == appendPosEnabled )
+        return;
 
-
-void KDataCursor::setAppendPosEnabled( bool APE )
-{
-  AppendPosEnabled = APE;
-  // reposition Cursor
-  int Length = Layout->length();
-  if( realIndex() >= Length && Coord.pos() < Layout->noOfBytesPerLine()-1 && Length > 0 )
-  {
-    if( AppendPosEnabled )
+    mAppendPosEnabled = appendPosEnabled;
+    // reposition Cursor
+    const int length = mLayout->length();
+    if( realIndex() >= length && mCoord.pos() < mLayout->noOfBytesPerLine()-1 && length > 0 )
     {
-      ++Index;
-      Coord.goRight();
-      Behind = false;
+        if( mAppendPosEnabled )
+        {
+            ++mIndex;
+            mCoord.goRight();
+            mBehind = false;
+        }
+        else
+        {
+            --mIndex;
+            mCoord.goLeft();
+            mBehind = true;
+        }
     }
-    else
-    {
-      --Index;
-      Coord.goLeft();
-      Behind = true;
-    }
-  }
 }
 
 
 void KDataCursor::gotoPreviousByte()
 {
-  if( Behind )
-    Behind = false;
-  else if( Index > 0 )
-  {
-    --Index;
-    Coord.goCLeft( Layout->noOfBytesPerLine()-1 );
-  }
+    if( mBehind )
+        mBehind = false;
+    else if( mIndex > 0 )
+    {
+        --mIndex;
+        mCoord.goCLeft( mLayout->noOfBytesPerLine()-1 );
+    }
 }
 
 
-void KDataCursor::gotoPreviousByte( int D )
+void KDataCursor::gotoPreviousByte( int indexSteps )
 {
-  if( Behind )
-  {
-    --D;
-    Behind = false;
-  }
-  if( D > Index )
-  {
-    if( Index == 0 )
-      return;
-    gotoStart();
-  }
-  gotoIndex( Index - D );
+    if( mBehind )
+    {
+        --indexSteps;
+        mBehind = false;
+    }
+    const int newIndex = mIndex - indexSteps;
+    // would step before first position?
+    if( newIndex < 0 )
+    {
+        if( mIndex > 0 )
+            gotoStart();
+    }
+    else
+        gotoIndex( newIndex );
 }
 
 
 void KDataCursor::gotoNextByte()
 {
-  int Length = Layout->length();
+    const int lastIndex = mLayout->length() -1 ;
 
-  if( Index < Length )
-  {
-    if( Index == Length-1 )
-      stepToEnd();
-    else
+    if( mIndex < lastIndex )
     {
-      ++Index;
-      Coord.goCRight( Layout->noOfBytesPerLine()-1 );
-      Behind = false;
+        ++mIndex;
+        mCoord.goCRight( mLayout->noOfBytesPerLine()-1 );
+        mBehind = false;
     }
-  }
+    else if( mIndex == lastIndex )
+        stepToEnd();
 }
 
 
-void KDataCursor::gotoNextByte( int D ) // TODO: think about consistency with gotoNextByte!!!
+void KDataCursor::gotoNextByte( int indexSteps ) // TODO: think about consistency with gotoNextByte!!!
 {
-  if( Behind )
-  {
-    ++D;
-    Behind = false;
-  }
-  // would we end behind the end?
-  if( Index+D >= Layout->length() )
-    gotoEnd();
-  else
-    gotoIndex( Index + D );
+    if( mBehind )
+    {
+        ++indexSteps;
+        mBehind = false;
+    }
+    const int newIndex = mIndex + indexSteps;
+    // would step behind the end?
+    if( newIndex >= mLayout->length() )
+        gotoEnd();
+    else
+        gotoIndex( newIndex );
 }
 
 
 void KDataCursor::gotoNextByteInLine()
 {
-  int Length = Layout->length();
+    const int lastIndex = mLayout->length()-1;
 
-  if( Index < Length )
-  {
-    if( Index == Length-1 )
-      stepToEnd();
-    else
+    if( mIndex < lastIndex )
     {
-      ++Index;
+        ++mIndex;
 
-      if( Coord.pos() < Layout->noOfBytesPerLine()-1 )
-        Coord.goRight();
-      else
-        Behind = true;
+        if( mCoord.pos() < mLayout->noOfBytesPerLine()-1 )
+            mCoord.goRight();
+        else
+            mBehind = true;
     }
-  }
+    else if( mIndex == lastIndex )
+        stepToEnd();
 }
 
 
 void KDataCursor::gotoUp()
 {
-  // can we even go up?
-  if( Coord.isBelow(Layout->startLine()) )
-  {
-    Coord.goUp();
-    if( Coord.isPriorInLineThan(Layout->start()) )
+    // can we even go up?
+    if( mCoord.isBelow(mLayout->startLine()) )
     {
-      Index = 0;
-      Coord.setPos( Layout->startPos() );
-      Behind = false;
+        mCoord.goUp();
+        if( mCoord.isPriorInLineThan(mLayout->start()) )
+        {
+            mIndex = 0;
+            mCoord.setPos( mLayout->startPos() );
+            mBehind = false;
+        }
+        else
+        {
+            mIndex -= mLayout->noOfBytesPerLine();
+            if( mBehind && !atLineEnd() )
+            {
+                ++mIndex;
+                mCoord.goRight();
+                mBehind = false;
+            }
+        }
     }
-    else
-    {
-      Index -= Layout->noOfBytesPerLine();
-      if( Behind && !atLineEnd() )
-      {
-        ++Index;
-        Coord.goRight();
-        Behind = false;
-      }
-    }
-  }
 }
 
 
 void KDataCursor::gotoDown()
 {
-  if( Coord.isAbove(Layout->finalLine()) )
-  {
-    Coord.goDown();
-    // behind End?
-    if( Coord.isLaterInLineThan(Layout->final()) )
-      gotoEnd();
-    else
-      Index += Layout->noOfBytesPerLine();
-  }
+    if( mCoord.isAbove(mLayout->finalLine()) )
+    {
+        mCoord.goDown();
+        // behind End?
+        if( mCoord.isLaterInLineThan(mLayout->final()) )
+            gotoEnd();
+        else
+            mIndex += mLayout->noOfBytesPerLine();
+    }
 }
 
 
 void KDataCursor::gotoLineStart()
 {
-  int OldIndex = Index;
-  Index = Layout->indexAtLineStart( Coord.line() );
-  Coord.goLeft( OldIndex-Index );
-  Behind = false;
+    const int oldIndex = mIndex;
+    mIndex = mLayout->indexAtLineStart( mCoord.line() );
+    mCoord.goLeft( oldIndex-mIndex );
+    mBehind = false;
 }
 
 
 void KDataCursor::gotoLineEnd()
 {
-  if( Index < Layout->length() )
-  {
-    int OldIndex = Index;
-    Index = Layout->indexAtLineEnd( Coord.line() );
-    Coord.goRight( Index-OldIndex );
+    if( mIndex < mLayout->length() )
+    {
+        const int oldIndex = mIndex;
+        mIndex = mLayout->indexAtLineEnd( mCoord.line() );
+        mCoord.goRight( mIndex-oldIndex );
 
-    stepToEnd();
-  }
+        stepToEnd();
+    }
 }
 
 
 void KDataCursor::gotoStart()
 {
-  Index = 0;
-  Coord = Layout->start();
-  Behind = false;
+    mIndex = 0;
+    mCoord = mLayout->start();
+    mBehind = false;
 }
 
 
 void KDataCursor::gotoEnd()
 {
-  int Length = Layout->length();
-  if( Length > 0 )
-  {
-    Index = Length-1;
-    Coord = Layout->final();
+    const int lastIndex = mLayout->length()-1;
+    if( lastIndex >= 0 )
+    {
+        mIndex = lastIndex;
+        mCoord = mLayout->final();
 
-    stepToEnd();
-  }
-  else
-    gotoStart();
-}
-
-
-void KDataCursor::gotoCIndex( int i )
-{
-  if( Layout->length() > 0 )
-  {
-    Index = Layout->correctIndex( i );
-    Coord = Layout->coordOfIndex( Index );
-    Behind = i > Index;
-  }
-  else
-    gotoStart();
-}
-
-
-void KDataCursor::gotoCCoord( const KCoord &C )
-{
-  if( Layout->length() > 0 )
-  {
-    Coord = Layout->correctCoord( C );
-    Index = Layout->indexAtCoord( Coord );
-    if( C > Coord )
-      stepToEnd();
+        stepToEnd();
+    }
     else
-      Behind = false;
-  }
-  else
-    gotoStart();
+        gotoStart();
+}
+
+
+void KDataCursor::gotoCIndex( int index )
+{
+    if( mLayout->length() > 0 )
+    {
+        mIndex = mLayout->correctIndex( index );
+        mCoord = mLayout->coordOfIndex( mIndex );
+        mBehind = ( index > mIndex );
+    }
+    else
+        gotoStart();
+}
+
+
+void KDataCursor::gotoCCoord( const KCoord &coord )
+{
+    if( mLayout->length() > 0 )
+    {
+        mCoord = mLayout->correctCoord( coord );
+        mIndex = mLayout->indexAtCoord( mCoord );
+        if( coord > mCoord )
+            stepToEnd();
+        else
+            mBehind = false;
+    }
+    else
+        gotoStart();
 }
 
 
 void KDataCursor::stepToEnd()
 {
-  if( AppendPosEnabled && (Coord.pos() < Layout->noOfBytesPerLine()-1) )
-  {
-    ++Index;
-    Coord.goRight();
-    Behind = false;
-  }
-  else
-    Behind = true;
+    if( mAppendPosEnabled && (mCoord.pos() < mLayout->noOfBytesPerLine()-1) )
+    {
+        ++mIndex;
+        mCoord.goRight();
+        mBehind = false;
+    }
+    else
+        mBehind = true;
 }
 
 
-void KDataCursor::gotoIndex( int i )
+void KDataCursor::gotoIndex( int index )
 {
-  Index = i;
-  Coord = Layout->coordOfIndex( Index );
-  Behind = false;
+    mIndex = index;
+    mCoord = mLayout->coordOfIndex( mIndex );
+    mBehind = false;
 }
 
 
 void KDataCursor::gotoRealIndex()
 {
-  if( Behind )
-  {
-    ++Index;
-    Coord = Layout->coordOfIndex( Index );
-    Behind = false;
-  }
+    if( mBehind )
+    {
+        ++mIndex;
+        mCoord = mLayout->coordOfIndex( mIndex );
+        mBehind = false;
+    }
 }
 
 
-void KDataCursor::gotoCoord( const KCoord &C )
+void KDataCursor::gotoCoord( const KCoord &coord )
 {
-  Index = Layout->indexAtCoord( C );
-  Coord = C;
-  Behind = false;
+    mIndex = mLayout->indexAtCoord( coord );
+    mCoord = coord;
+    mBehind = false;
 }
 
 
 void KDataCursor::updateCoord()
 {
-  Coord = Layout->coordOfIndex( Index );
+    mCoord = mLayout->coordOfIndex( mIndex );
 }
 
 // page down should be: one page minus one line
 // -> if in the very first line page down will put the cursor on the same page into the last line
 void KDataCursor::gotoPageUp()
 {
-  int NoOfLinesPerPage = Layout->noOfLinesPerPage();
-  int NewIndex = Index - NoOfLinesPerPage * Layout->noOfBytesPerLine();
-  if( NewIndex < 0 )
-    gotoStart();
-  else
-  {
-    Index = NewIndex;
-    Coord.goUp( NoOfLinesPerPage );
-    if( Behind && !atLineEnd() )
+    const int noOfLinesPerPage = mLayout->noOfLinesPerPage();
+    const int newIndex = mIndex - noOfLinesPerPage * mLayout->noOfBytesPerLine();
+    if( newIndex >= 0 )
     {
-      ++Index;
-      Coord.goRight();
-      Behind = false;
+        mIndex = newIndex;
+        mCoord.goUp( noOfLinesPerPage );
+        if( mBehind && !atLineEnd() )
+        {
+            ++mIndex;
+            mCoord.goRight();
+            mBehind = false;
+        }
     }
-  }
+    else
+        gotoStart();
 }
 
 
 void KDataCursor::gotoPageDown()
 {
-  int NoOfLinesPerPage = Layout->noOfLinesPerPage();
-  int NewIndex = Index + NoOfLinesPerPage * Layout->noOfBytesPerLine();
-  if( NewIndex >= Layout->length() )
-    gotoEnd();
-  else
-  {
-    Index = NewIndex;
-    Coord.goDown( NoOfLinesPerPage );
-  }
+    const int noOfLinesPerPage = mLayout->noOfLinesPerPage();
+    const int newIndex = mIndex + noOfLinesPerPage * mLayout->noOfBytesPerLine();
+    if( newIndex < mLayout->length() )
+    {
+        mIndex = newIndex;
+        mCoord.goDown( noOfLinesPerPage );
+    }
+    else
+        gotoEnd();
 }
 
 
-int KDataCursor::validIndex()       const { return Index < Layout->length() ? Index : -1; }
-int KDataCursor::indexAtLineStart() const { return Layout->indexAtLineStart( Coord.line() ); }
-int KDataCursor::indexAtLineEnd()   const { return Layout->indexAtLineEnd( Coord.line() ); }
+int KDataCursor::validIndex()       const { return mIndex < mLayout->length() ? mIndex : -1; }
+int KDataCursor::indexAtLineStart() const { return mLayout->indexAtLineStart( mCoord.line() ); }
+int KDataCursor::indexAtLineEnd()   const { return mLayout->indexAtLineEnd( mCoord.line() ); }
 
 
-bool KDataCursor::atStart()     const { return Index == 0; }
-bool KDataCursor::atEnd()       const { return Index == Layout->length() - 1; }
-bool KDataCursor::atAppendPos() const { return realIndex() >= Layout->length(); }
+bool KDataCursor::atStart()     const { return mIndex == 0; }
+bool KDataCursor::atEnd()       const { return mIndex == mLayout->length() - 1; }
+bool KDataCursor::atAppendPos() const { return realIndex() >= mLayout->length(); }
 
 
-bool KDataCursor::atLineStart() const { return Layout->atLineStart( Coord ); }
-bool KDataCursor::atLineEnd()   const { return Layout->atLineEnd( Coord ); }
+bool KDataCursor::atLineStart() const { return mLayout->atLineStart( mCoord ); }
+bool KDataCursor::atLineEnd()   const { return mLayout->atLineEnd( mCoord ); }
 
 // TODO: oldLength is a hack, as DataLayout is already updated and used by e.g. gotoCIndex
 void KDataCursor::adaptToChanges( const KHE::ArrayChangeMetricsList &changeList, int oldLength )
@@ -371,7 +368,7 @@ void KDataCursor::adaptToChanges( const KHE::ArrayChangeMetricsList &changeList,
     {
         const KHE::ArrayChangeMetrics &change = changeList[i];
         // cursor affected?
-        if( Index >= change.offset() )
+        if( mIndex >= change.offset() )
         {
             switch( change.type() )
             {
@@ -380,8 +377,8 @@ void KDataCursor::adaptToChanges( const KHE::ArrayChangeMetricsList &changeList,
                 if( oldLength > 0 )
                 {
                     // step behind removed range if inside 
-                    const int newIndexAfterRemove = ( Index >= change.offset()+change.removeLength() ) ?
-                                                    Index - change.removeLength() :
+                    const int newIndexAfterRemove = ( mIndex >= change.offset()+change.removeLength() ) ?
+                                                    mIndex - change.removeLength() :
                                                     change.offset();
                     const int newIndex = newIndexAfterRemove + change.insertLength();
                     // if the cursor gets behind, it will never get inside again.
@@ -390,7 +387,7 @@ void KDataCursor::adaptToChanges( const KHE::ArrayChangeMetricsList &changeList,
                         gotoEnd();
                         return;
                     }
-                    Index = newIndex;
+                    mIndex = newIndex;
                 }
                 // if the cursor gets at the start, it will stay there
                 else
@@ -400,13 +397,13 @@ void KDataCursor::adaptToChanges( const KHE::ArrayChangeMetricsList &changeList,
                 }
                 break;
             case KHE::ArrayChangeMetrics::Swapping:
-                if( Index < change.secondStart() )
+                if( mIndex < change.secondStart() )
                 {
-                    Index += change.secondLength();
+                    mIndex += change.secondLength();
                 }
-                else if( Index <= change.secondEnd() )
+                else if( mIndex <= change.secondEnd() )
                 {
-                    Index -= change.firstLength();
+                    mIndex -= change.firstLength();
                 }
                 break;
             default:
@@ -415,12 +412,14 @@ void KDataCursor::adaptToChanges( const KHE::ArrayChangeMetricsList &changeList,
         }
     }
 
-    const bool wasBehind = ( Index >= oldLength );
+    const bool wasBehind = ( mIndex >= oldLength );
     if( wasBehind )
-        Index = oldLength - 1;
+        mIndex = oldLength - 1;
     updateCoord();
     if( wasBehind )
         stepToEnd();
 }
+
+KDataCursor::~KDataCursor() {}
 
 }
