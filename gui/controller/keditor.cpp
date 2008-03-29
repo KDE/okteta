@@ -103,8 +103,6 @@ bool KEditor::handleKeyPress( QKeyEvent *keyEvent )
 
 void KEditor::doEditAction( KEditAction action )
 {
-    mView->pauseCursor( true );
-
     switch( action )
     {
     case CharDelete:
@@ -129,7 +127,12 @@ void KEditor::doEditAction( KEditAction action )
         break;
     case CharBackspace:
         if( mView->isOverwriteMode() )
+        {
+            mView->pauseCursor();
             mDataCursor->gotoPreviousByte();
+            mView->ensureCursorVisible();
+            mView->unpauseCursor();
+        }
         else
         {
             const int deleteIndex = mDataCursor->realIndex() - 1;
@@ -149,8 +152,6 @@ void KEditor::doEditAction( KEditAction action )
             }
         }
     }
-
-    mView->ensureCursorVisible();
 }
 
 KEditor::~KEditor() {}
