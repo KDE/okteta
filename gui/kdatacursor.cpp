@@ -392,8 +392,12 @@ void KDataCursor::adaptToChanges( const KHE::ArrayChangeMetricsList &changeList,
                     }
                     Index = newIndex;
                 }
+                // if the cursor gets at the start, it will stay there
                 else
-                    Index = 0;
+                {
+                    gotoStart();
+                    return;
+                }
                 break;
             case KHE::ArrayChangeMetrics::Swapping:
                 if( Index < change.secondStart() )
