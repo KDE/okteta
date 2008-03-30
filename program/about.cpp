@@ -28,7 +28,7 @@
 
 // Program
 static const char ProgramId[] =          "okteta";
-static const char ProgramVersion[] =     "0.1.0 - Beta 1";
+static const char ProgramVersion[] =     "0.1.0 - Beta 2";
 // Author
 static const char FWHKEmailAddress[] =   "kossebau@kde.org";
 

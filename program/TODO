@@ -39,6 +39,10 @@ Done before review:
 * complete i18n (@-stuff)
 * fix paste controller and readonly modes
 
+Fixed after 0.1 Beta 1:
+-----------------------
+
+
 Before adding to review:
 ------------------------
 * fix cursor problems
