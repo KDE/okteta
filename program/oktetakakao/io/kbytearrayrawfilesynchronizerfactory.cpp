@@ -25,10 +25,10 @@
 // lib
 #include "kbytearraydocument.h"
 #include "kbytearrayrawfilesynchronizer.h"
+// KDE
+#include <KUrl>
 // Qt
 #include <QtCore/QLatin1String>
-// kde
-#include <kurl.h>
 
 KByteArrayRawFileSynchronizerFactory::KByteArrayRawFileSynchronizerFactory() {}
 
