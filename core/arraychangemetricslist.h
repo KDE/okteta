@@ -32,7 +32,7 @@ namespace KHE
 {
 
 // TODO: do we need the invalid status?
-class KHECORE_EXPORT ArrayChangeMetricsList : public QList<ArrayChangeMetrics>
+class ArrayChangeMetricsList : public QList<ArrayChangeMetrics>
 {
   public:
     static ArrayChangeMetricsList oneReplacement( int offset, int removeLength, int insertLength );

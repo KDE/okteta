@@ -27,6 +27,8 @@
 #include "kbytearrayrawfilesynchronizer.h"
 // Qt
 #include <QtCore/QLatin1String>
+// kde
+#include <kurl.h>
 
 KByteArrayRawFileSynchronizerFactory::KByteArrayRawFileSynchronizerFactory() {}
 

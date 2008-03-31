@@ -24,7 +24,7 @@
 #include <kdemacros.h>
 
 #ifndef KHECORE_EXPORT
-# if defined(MAKE_OKTETACORE_LIB)
+# if defined(MAKE_OKTETACORE_B_LIB)
    /* We are building this library */ 
 #  define KHECORE_EXPORT KDE_EXPORT
 # else
@@ -38,7 +38,7 @@
 # endif
 
 #ifndef KHEUI_EXPORT
-# if defined(MAKE_OKTETAGUI_LIB)
+# if defined(MAKE_OKTETAGUI_B_LIB)
    /* We are building this library */
 #  define KHEUI_EXPORT KDE_EXPORT
 # else
