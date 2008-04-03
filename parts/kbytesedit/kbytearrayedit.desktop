@@ -1,6 +1,8 @@
 [Desktop Entry]
 Type=Service
 Name=BytesEdit Widget
+Name[pt]=Item de BytesEdit
+Name[pt_BR]=Item de BytesEdit
 X-KDE-Library=libkbytearrayedit
 X-KDE-ServiceTypes=KHexEdit/KBytesEdit
 

@@ -1,6 +1,9 @@
 [Desktop Entry]
 Name=Okteta
 GenericName=Binary Editor
+GenericName[ga]=Eagarthóir Dénártha
+GenericName[pt]=Editor Binário
+GenericName[pt_BR]=Editor Binário
 Icon=okteta
 Exec=okteta -caption "%c" %U
 Type=Application
