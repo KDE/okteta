@@ -24,7 +24,7 @@
 #define KHE_CORE_KWORDBUFFERSERVICE_H
 
 // lib
-#include "khe_export.h"
+#include "oktetacore_export.h"
 // commonlib
 #include <ksection.h>
 
@@ -40,7 +40,7 @@ class KCharCodec;
   *@author Friedrich W. H. Kossebau
   */
 
-class KHECORE_EXPORT KWordBufferService
+class OKTETACORE_EXPORT KWordBufferService
 {
   public:
     KWordBufferService( KAbstractByteArrayModel *B, KCharCodec *C );

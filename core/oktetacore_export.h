@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Core library, part of the KDE project.
 
-    Copyright 2004 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,34 +20,25 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_KHECHAR_H
-#define KHE_CORE_KHECHAR_H
+#ifndef OKTETACORE_EXPORT_H
+#define OKTETACORE_EXPORT_H
 
-// lib
-#include "oktetacore_export.h"
-// Qt
-#include <QtCore/QChar>
+// KDE
+#include <kdemacros.h>
 
 
-namespace KHECore
-{
+#ifndef OKTETACORE_EXPORT
+  // building the library?
+# if defined(MAKE_OKTETACORE_B_LIB)
+#  define OKTETACORE_EXPORT KDE_EXPORT
+  // using the library
+# else
+#  define OKTETACORE_EXPORT KDE_IMPORT
+# endif
+#endif
 
-class OKTETACORE_EXPORT KChar : public QChar
-{
-  public:
-    KChar( QChar C ); // krazy:exclude=explicit
-    KChar( QChar C, bool U );
-  public:
-    bool isUndefined() const;
-  protected:
-    // the byte is not defined
-    bool IsUndefined:1;
-};
-
-inline KChar::KChar( QChar C ) : QChar( C ), IsUndefined( false ) {}
-inline KChar::KChar( QChar C, bool U ) : QChar( C ), IsUndefined( U ) {}
-inline bool KChar::isUndefined() const { return IsUndefined; }
-
-}
+# ifndef OKTETACORE_EXPORT_DEPRECATED
+#  define OKTETACORE_EXPORT_DEPRECATED KDE_DEPRECATED KHECORE_EXPORT
+# endif
 
 #endif

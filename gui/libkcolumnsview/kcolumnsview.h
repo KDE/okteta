@@ -26,8 +26,8 @@
 
 // lib
 #include "kadds.h"
+#include "oktetagui_export.h"
 // commonlib
-#include <khe_export.h>
 #include <ksection.h> // TODO: think about moving this out of the public API
 // Qt
 #include <QtCore/QList>
@@ -46,7 +46,7 @@ class KColumnsViewPrivate;
   *@author Friedrich W. H. Kossebau
   */
 
-class KHEUI_EXPORT KColumnsView : public QAbstractScrollArea
+class OKTETAGUI_EXPORT KColumnsView : public QAbstractScrollArea
 {
    Q_OBJECT
 

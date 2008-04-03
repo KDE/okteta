@@ -24,14 +24,14 @@
 #define KHE_CORE_KBOOKMARK_H
 
 // lib
-#include "khe_export.h"
+#include "oktetacore_export.h"
 
 
 namespace KHECore
 {
 
 // TODO: do we need the invalid status?
-class KHECORE_EXPORT KBookmark
+class OKTETACORE_EXPORT KBookmark
 {
   private:
     static const int InvalidOffset = -1;

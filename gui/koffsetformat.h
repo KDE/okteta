@@ -24,7 +24,8 @@
 #define KHE_UI_KOFFSETFORMAT_H
 
 
-#include <khe_export.h>
+// lib
+#include "oktetagui_export.h"
 
 namespace KHEUI
 {
@@ -33,7 +34,7 @@ namespace KHEUI
   *@author Friedrich W. H. Kossebau
   */
 
-class KHEUI_EXPORT KOffsetFormat
+class OKTETAGUI_EXPORT KOffsetFormat
 {
   public:
     /** */

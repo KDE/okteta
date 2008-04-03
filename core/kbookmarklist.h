@@ -35,7 +35,7 @@ namespace KHECore {
 /**
 @author Friedrich W. H.  Kossebau
 */
-class KHECORE_EXPORT KBookmarkList : public QLinkedList<KBookmark>
+class OKTETACORE_EXPORT KBookmarkList : public QLinkedList<KBookmark>
 {
   public:
     KBookmarkList();

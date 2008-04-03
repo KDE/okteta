@@ -36,7 +36,7 @@ class KFileByteArrayModelPrivate;
   *@author Friedrich W. H. Kossebau
   */
 
-class KHECORE_EXPORT KFileByteArrayModel : public KAbstractByteArrayModel
+class OKTETACORE_EXPORT KFileByteArrayModel : public KAbstractByteArrayModel
 {
     friend class KFileByteArrayModelPrivate;
 

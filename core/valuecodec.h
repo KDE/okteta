@@ -26,7 +26,7 @@
 
 // lib
 #include "khe.h"
-#include "khe_export.h"
+#include "oktetacore_export.h"
 
 class QString;
 
@@ -43,7 +43,7 @@ namespace KHECore
   *@author Friedrich W. H. Kossebau
   */
 
-class KHECORE_EXPORT ValueCodec
+class OKTETACORE_EXPORT ValueCodec
 {
   public:
     static ValueCodec *createCodec( KCoding coding );

@@ -24,13 +24,13 @@
 #define KHE_CORE_ARRAYCHANGEMETRICS_H
 
 // lib
-#include "khe_export.h"
+#include "oktetacore_export.h"
 
 namespace KHE
 {
 
 // TODO: do we need the invalid status?
-class KHECORE_EXPORT ArrayChangeMetrics
+class OKTETACORE_EXPORT ArrayChangeMetrics
 {
   private:
     static const int InvalidOffset = -1;

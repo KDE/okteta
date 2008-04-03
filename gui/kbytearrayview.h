@@ -83,7 +83,7 @@ class KCursor;
   *@author Friedrich W. H. Kossebau
   */
 
-class KHEUI_EXPORT KByteArrayView : public KColumnsView
+class OKTETAGUI_EXPORT KByteArrayView : public KColumnsView
 {
   friend class KTabController;
   friend class KNavigator;

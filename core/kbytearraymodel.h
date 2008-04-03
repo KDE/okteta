@@ -38,7 +38,7 @@ class KByteArrayModelPrivate;
   *@author Friedrich W. H. Kossebau
   */
 
-class KHECORE_EXPORT KByteArrayModel : public KAbstractByteArrayModel, public Bookmarkable
+class OKTETACORE_EXPORT KByteArrayModel : public KAbstractByteArrayModel, public Bookmarkable
 {
     Q_OBJECT
     Q_INTERFACES( KHECore::Bookmarkable )

@@ -37,7 +37,7 @@ namespace KHECore
   *@author Friedrich W. H. Kossebau
   */
 
-class KHECORE_EXPORT KPieceTableByteArrayModel : public KAbstractByteArrayModel, public Versionable, public Bookmarkable
+class OKTETACORE_EXPORT KPieceTableByteArrayModel : public KAbstractByteArrayModel, public Versionable, public Bookmarkable
 {
     Q_OBJECT
     Q_INTERFACES( KHECore::Versionable KHECore::Bookmarkable )

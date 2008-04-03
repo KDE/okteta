@@ -25,7 +25,7 @@
 
 // lib
 #include "kcoordrange.h"
-#include <khe_export.h>
+#include "oktetagui_export.h"
 // commonlib
 #include <ksection.h>
 
@@ -54,7 +54,7 @@ namespace KHEUI {
   *
   *@author Friedrich W. H.  Kossebau
   */
-class KHEUI_EXPORT KDataLayout
+class OKTETAGUI_EXPORT KDataLayout
 {
   public:
     KDataLayout( int NoBpL, int SO, int L );

@@ -26,7 +26,7 @@
 
 // lib
 #include "khe.h"
-#include "khe_export.h"
+#include "oktetacore_export.h"
 
 class QStringList;
 class QChar;
@@ -38,7 +38,7 @@ namespace KHECore
 class KChar;
 
 
-class KHECORE_EXPORT KCharCodec
+class OKTETACORE_EXPORT KCharCodec
 {
   public:
     virtual ~KCharCodec() {}

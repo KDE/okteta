@@ -25,7 +25,7 @@
 
 
 // lib
-#include "khe_export.h"
+#include "oktetacore_export.h"
 // commonlib
 #include <ksection.h>
 #include <ksectionlist.h>
@@ -79,7 +79,7 @@ char KDataBufferIterator::next()
   *@author Friedrich W. H. Kossebau
   */
 
-class KHECORE_EXPORT KAbstractByteArrayModel : public QObject
+class OKTETACORE_EXPORT KAbstractByteArrayModel : public QObject
 {
   friend class KAbstractByteArrayModelIterator;
 

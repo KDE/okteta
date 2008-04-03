@@ -25,7 +25,7 @@
 
 // lib
 #include "krange.h"
-#include "khe_export.h"
+#include "oktetacore_export.h"
 
 
 namespace KHE
@@ -34,7 +34,7 @@ namespace KHE
 /** describes a section of indizes
   *@author Friedrich W. H.  Kossebau
   */
-class KHECORE_EXPORT KSection : public KRange<int>
+class OKTETACORE_EXPORT KSection : public KRange<int>
 {
   public:
     /** constructs a section by width
