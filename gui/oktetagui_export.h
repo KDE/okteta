@@ -1,5 +1,5 @@
 /*
-    This file is part of the Okteta Core library, part of the KDE project.
+    This file is part of the Okteta Gui library, part of the KDE project.
 
     Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
@@ -38,7 +38,7 @@
 #endif
 
 # ifndef OKTETAGUI_EXPORT_DEPRECATED
-#  define OKTETAGUI_EXPORT_DEPRECATED KDE_DEPRECATED KHECORE_EXPORT
+#  define OKTETAGUI_EXPORT_DEPRECATED KDE_DEPRECATED OKTETAGUI_EXPORT
 # endif
 
 #endif
