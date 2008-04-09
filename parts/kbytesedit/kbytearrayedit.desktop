@@ -1,8 +1,9 @@
 [Desktop Entry]
 Type=Service
 Name=BytesEdit Widget
-Name[et]=Binaarfailide redaktori vidin
-Name[sv]=Grafisk komponent för byte-redigering
+Name[pt]=Editor de Bytes
+Name[pt_BR]=Editor de Bytes
+Name[uk]=Віджет для редагування байтів
 X-KDE-Library=libkbytearrayedit
 X-KDE-ServiceTypes=KHexEdit/KBytesEdit
 

@@ -2,11 +2,13 @@
 Type=Service
 Icon=khexedit
 Name=Embedded Binary Viewer
-Name[et]=Põimitud binaarfailide näitaja
-Name[sv]=Inbäddad binärvisning
+Name[pt]=Visualizador Binário Incorporado
+Name[pt_BR]=Visualizador Binário Incorporado
+Name[uk]=Вбудований двійковий переглядач
 Comment=Embedded Binary Viewer
-Comment[et]=Põimitud binaarfailide näitaja
-Comment[sv]=Inbäddad binärvisning
+Comment[pt]=Visualizador Binário Incorporado
+Comment[pt_BR]=Visualizador Binário Incorporado
+Comment[uk]=Вбудований двійковий переглядач
 MimeType=all/allfiles;
 #MimeType=application/octet-stream
 X-KDE-ServiceTypes=KParts/ReadOnlyPart,Browser/View
