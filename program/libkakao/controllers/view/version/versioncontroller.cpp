@@ -40,7 +40,7 @@
 static const int MaxMenuEntries = 10;
 
 VersionController::VersionController( KXmlGuiWindow *window )
- : mDocument( 0 )
+ : mView( 0 )
 {
     KActionCollection *actionCollection = window->actionCollection();
 
@@ -71,19 +71,29 @@ VersionController::VersionController( KXmlGuiWindow *window )
 
 void VersionController::setView( KAbstractView *view )
 {
-    if( mDocument ) mDocument->disconnect( this );
-
-    mDocument = view ? view->document() : 0;
-    mVersionControl = mDocument ? qobject_cast<KDE::If::Versionable*>( mDocument ) : 0;
-
-    // TODO: what about readonly? Rely on the model or adhere ourself?
-    if( mVersionControl )
+    if( mView )
     {
-        connect( mDocument, SIGNAL(revertedToVersionIndex( int )), SLOT(onVersionIndexChanged( int )) );
-        connect( mDocument, SIGNAL(headVersionChanged( int )), SLOT(onVersionIndexChanged( int )) );
+        mView->disconnect( this );
+        KAbstractDocument *document = mView->document();
+        if( document ) document->disconnect( this );
     }
 
+    mView = view;
+    KAbstractDocument *document = mView ? mView->document() : 0;
+    mVersionControl = document ? qobject_cast<KDE::If::Versionable*>( document ) : 0;
+
     if( mVersionControl )
+    {
+        connect( document, SIGNAL(revertedToVersionIndex( int )), SLOT(onVersionIndexChanged( int )) );
+        connect( document, SIGNAL(headVersionChanged( int )),     SLOT(onVersionIndexChanged( int )) );
+        connect( mView, SIGNAL(readOnlyChanged( bool )), SLOT(onReadOnlyChanged( bool )) );
+    }
+    else
+        mView = 0;
+
+    const bool isVersionable = ( mVersionControl != 0 && !mView->isReadOnly() );
+
+    if( isVersionable )
         onVersionIndexChanged( mVersionControl->versionIndex() );
     else
     {
@@ -169,4 +179,15 @@ void VersionController::onNewerVersionMenuTriggered( QAction *action )
 {
     const int versionIndex = action->data().toInt();
     mVersionControl->revertToVersionByIndex( versionIndex );
+}
+
+void VersionController::onReadOnlyChanged( bool isReadOnly )
+{
+    if( isReadOnly )
+    {
+        mSetToOlderVersionAction->setEnabled( false );
+        mSetToNewerVersionAction->setEnabled( false );
+    }
+    else
+        onVersionIndexChanged( mVersionControl->versionIndex() );
 }

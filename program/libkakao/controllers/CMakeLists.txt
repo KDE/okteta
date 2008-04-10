@@ -28,13 +28,13 @@ set( CLOSECONTROLLER_SRCS
 set( READONLYCONTROLLER_SRCS
   document/readonly/readonlycontroller.cpp
 )
-set( VERSIONCONTROLLER_SRCS
-  document/version/versioncontroller.cpp
-)
 set( VERSIONVIEWCONTROLLER_SRCS
   document/versionview/versiontablemodel.cpp
   document/versionview/versionview.cpp
   document/versionview/versionviewcontroller.cpp
+)
+set( VERSIONCONTROLLER_SRCS
+  view/version/versioncontroller.cpp
 )
 set( ZOOMCONTROLLER_SRCS
   view/zoom/zoomcontroller.cpp

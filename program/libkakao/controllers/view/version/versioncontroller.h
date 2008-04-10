@@ -30,7 +30,6 @@
 namespace KDE { namespace If {
 class Versionable;
 }}
-class KAbstractDocument;
 class KXmlGuiWindow;
 class KToolBarPopupAction;
 class QAction;
@@ -54,10 +53,11 @@ class VersionController : public KViewController
     void onNewerVersionMenuTriggered( QAction *action );
 
     void onVersionIndexChanged( int versionIndex );
+    void onReadOnlyChanged( bool isReadOnly );
 
   protected:
-    KAbstractDocument *mDocument;
     KDE::If::Versionable *mVersionControl;
+    KAbstractView *mView;
 
     KToolBarPopupAction *mSetToOlderVersionAction;
     KToolBarPopupAction *mSetToNewerVersionAction;

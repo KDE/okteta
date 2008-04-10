@@ -40,7 +40,6 @@
 #include <print/printcontroller.h>
 #include <viewconfig/viewconfigcontroller.h>
 // Kakao controllers
-#include <document/version/versioncontroller.h>
 #include <document/versionview/versionviewcontroller.h>
 #include <document/readonly/readonlycontroller.h>
 #include <documentsystem/creator/creatorcontroller.h>
@@ -48,6 +47,7 @@
 #include <documentsystem/close/closecontroller.h>
 #include <io/setremote/setremotecontroller.h>
 #include <io/synchronize/synchronizecontroller.h>
+#include <view/version/versioncontroller.h>
 #include <view/zoom/zoomcontroller.h>
 #include <view/select/selectcontroller.h>
 #include <view/clipboard/clipboardcontroller.h>
