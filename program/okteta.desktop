@@ -1,8 +1,13 @@
 [Desktop Entry]
 Name=Okteta
 GenericName=Binary Editor
-GenericName[et]=Binaarfailide redaktor
-GenericName[sv]=Binäreditor
+GenericName[es]=Editor binario
+GenericName[fr]=Éditeur de fichiers binaires
+GenericName[ga]=Eagarthóir Dénártha
+GenericName[ja]=バイナリエディタ
+GenericName[pt]=Editor Binário
+GenericName[pt_BR]=Editor Binário
+GenericName[uk]=Двійковий редактор
 Icon=okteta
 Exec=okteta -caption "%c" %U
 Type=Application
