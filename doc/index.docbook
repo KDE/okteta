@@ -1,0 +1,119 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
+  <!ENTITY okteta "<application>Okteta</application>">
+  <!ENTITY kappname "&okteta;" >
+  <!ENTITY introduction SYSTEM "introduction.docbook">
+  <!ENTITY basics SYSTEM "basics.docbook">
+  <!ENTITY nutshell SYSTEM "nutshell.docbook">
+  <!ENTITY menu SYSTEM "menu.docbook">
+  <!ENTITY tools SYSTEM "tools.docbook">
+  <!ENTITY Friedrich.Kossebau
+"<personname><firstname>Friedrich W. H.</firstname><surname>Kossebau</surname></personname>">
+  <!ENTITY Friedrich.Kossebau.email "<email>kossebau@kde.org</email>">
+  <!ENTITY package "kdeutils">
+  <!ENTITY % English "INCLUDE">
+  <!ENTITY % addindex "IGNORE">
+]>
+
+<book lang="&language;">
+
+<bookinfo>
+<title>The &kappname; Handbook</title>
+
+<authorgroup>
+    <author>
+    <firstname>Friedrich W. H.</firstname>
+    <surname>Kossebau</surname>
+    <affiliation>
+    <address>&Friedrich.Kossebau.email;</address>
+    </affiliation>
+    </author>
+<!-- TRANS:ROLES_OF_TRANSLATORS -->
+</authorgroup>
+
+<copyright>
+<year>2008</year>
+<holder>&Friedrich.Kossebau;</holder>
+</copyright>
+
+<legalnotice>&FDLNotice;</legalnotice>
+
+<date>2008-24-02</date>
+<releaseinfo>0.00.01</releaseinfo>
+
+<abstract><para>&kappname; is a hex editor for the &kde;
+environment.</para></abstract>
+
+<keywordset>
+<keyword>KDE</keyword>
+<keyword>Okteta</keyword>
+<keyword>edit</keyword>
+<keyword>bytes</keyword>
+<keyword>binary</keyword>
+<keyword>octal</keyword>
+<keyword>hexadecimal</keyword>
+<keyword>hex editor</keyword>
+</keywordset>
+</bookinfo>
+
+&introduction;
+&basics;
+&tools;
+&menu;
+
+<chapter id="credits">
+    <title>Credits and License</title>
+
+    <para>
+    &kappname;
+    </para>
+
+    <!--List all the copyright holders here-->
+    <para>Program Copyright 2007-2008 &Friedrich.Kossebau;
+    &Friedrich.Kossebau.email;</para>
+
+    <para>Documentation Copyright 2008 &Friedrich.Kossebau;
+    &Friedrich.Kossebau.email;</para>
+
+    <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
+
+    &underFDL;
+    &underGPL;
+
+</chapter>
+
+<!-- !!!do not change ANYTHING after this line!!!! -->
+
+<appendix id="installation">
+    <title>Installation</title>
+
+    <sect1 id="getting-kapp">
+        <title>How to obtain &kappname;</title>
+        &install.intro.documentation;
+    </sect1>
+
+    <sect1 id="Compilation">
+        <title>Compilation and Installation</title>
+        &install.compile.documentation;
+    </sect1>
+</appendix>
+
+&documentation.index;
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-omittag:t
+sgml-shorttag:t
+sgml-namecase-general:t
+sgml-always-quote-attributes:t
+sgml-indent-step:0
+sgml-indent-data:nil
+sgml-parent-document:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+-->

@@ -29,7 +29,7 @@
 
 #ifndef OKTETACORE_EXPORT
   // building the library?
-# if defined(MAKE_OKTETACORE_B_LIB)
+# if defined(MAKE_OKTETACORE_LIB)
 #  define OKTETACORE_EXPORT KDE_EXPORT
   // using the library
 # else

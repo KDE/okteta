@@ -1,0 +1,53 @@
+<chapter id="basics">
+<title>Basics</title>
+
+<sect1 id="starting-basics">
+<title>Starting &kappname;</title>
+
+    <para>Type <userinput><command>okteta</command></userinput> at a command
+    prompt or select <guimenuitem>Binary Editor</guimenuitem> from the
+    <guisubmenu>Utilities</guisubmenu> group in the <guimenu>KDE start
+    menu</guimenu>.</para>
+
+    <para>The standard &Qt; and &kde; command line
+    options are available, and can be listed by entering
+    <userinput><command>okteta</command> <option>--help</option></userinput>.</para>
+
+    <para>Command line options specific to &kappname; are:</para>
+
+    <para><option><replaceable>&lt;URL(s)&gt;</replaceable></option> - open
+    file(s) from the specified URL(s)</para> 
+
+<!--<para><option>- -offset</option>
+<replaceable>&lt;offset&gt;</replaceable> jump to position
+<replaceable>&lt;offset&gt;</replaceable> in the opened file.</para>-->
+</sect1>
+
+<sect1 id="usage-basics">
+<title>Usage</title>
+
+    <para>The main &kappname; window has the following components:
+    menu bar, toolbar, data view, sidebar with tools and
+    status bar. </para>
+
+    <para>When a file is opened or a new byte array is created, the bytes are
+    displayed in the traditional view with two columns: one with the numeric
+    values and one with the assigned characters. On the left side the offset of
+    the lines are shown.</para>
+
+    <para>The data can be edited, cut, copied, pasted, dragged
+    and dropped much as text can be in a text editor. A cursor marks
+    the current position. Pressing the <keycap>Insert</keycap> key toggles between
+    overwrite and insert modes. All operations can be done both in the
+    value column and the character column.</para>
+
+    <para>The search dialog allows the user to search for a specific string of,
+    bytes, definable as hexadecimal, decimal, octal, binary, or text.</para>
+
+    <para>Multiple byte arrays can be open at the same time but only one can be
+    active. Use the <guimenu>Windows</guimenu> menu to select which byte array will
+    be active.</para>
+</sect1>
+
+
+</chapter>

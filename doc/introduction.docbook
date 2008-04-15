@@ -1,0 +1,14 @@
+<chapter id="introduction">
+<title>Introduction</title>
+
+<para>&kappname; is a simple editor for the raw data of files. The data is
+displayed in the traditional view with two columns: one with the numeric values
+and one with the assigned characters.
+Editing can be done both in the value column and the character column.
+Besides the usual editing capabilities &kappname; also brings a small set of
+tools, like a table listing decodings into common simple data types,
+a table listing all possible bytes with its' character and value equivalents,
+a info view with a statistic and a filter tool.
+All modifications to the data loaded can be endlessly undone or redone.</para>
+
+</chapter>

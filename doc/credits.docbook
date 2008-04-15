@@ -1,0 +1,20 @@
+<chapter id="credits">
+<title>Credits and License</title>
+
+<para>
+&kappname;
+</para>
+
+<!--List all the copyright holders here-->
+<para>Program copyright 2007-2008 &Friedrich.Kossebau;
+&Friedrich.Kossebau.email;</para>
+
+<para>Documentation copyright 2000 &Friedrich.Kossebau;
+&Friedrich.Kossebau.email;</para>
+
+<!-- TRANS:CREDIT_FOR_TRANSLATORS -->
+
+&underFDL;
+&underGPL;
+
+</chapter>

@@ -29,7 +29,7 @@
 
 #ifndef OKTETAGUI_EXPORT
   // building the library?
-# if defined(MAKE_OKTETAGUI_B_LIB)
+# if defined(MAKE_OKTETAGUI_LIB)
 #  define OKTETAGUI_EXPORT KDE_EXPORT
   // using the library
 # else

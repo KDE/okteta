@@ -1,0 +1,651 @@
+<chapter id="menu-commands">
+<title>Menu Entries</title>
+
+<para>Note that most menu commands also have a keyboard shortcut.</para>
+
+<sect1 id="file-menu">
+<title><guimenu>File</guimenu> Menu</title>
+
+<variablelist>
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Ctrl;<keycap>N</keycap></keycombo>
+    </shortcut>
+    <guimenu>File</guimenu>
+    <guimenuitem>New</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Creates a new byte array.</action></para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Ctrl;<keycap>O</keycap></keycombo>
+    </shortcut>
+    <guimenu>File</guimenu>
+    <guimenuitem>Open...</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Open an existing file.</action></para></listitem>
+    </varlistentry>
+
+    <!--<varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Ctrl;<keycap>I</keycap></keycombo>
+    </shortcut>
+    <guimenu>File</guimenu>
+    <guimenuitem>Insert...</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Insert an exiting file in the current
+    document.</action></para></listitem>
+    </varlistentry>-->
+
+    <varlistentry>
+    <term><menuchoice>
+    <guimenu>File</guimenu>
+    <guisubmenu>Open Recent</guisubmenu>
+    </menuchoice></term>
+    <listitem><para><action>Choose from a list of the last opened
+    files.</action></para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Ctrl;<keycap>S</keycap></keycombo>
+    </shortcut>
+    <guimenu>File</guimenu>
+    <guimenuitem>Save</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Save byte array.</action></para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <guimenu>File</guimenu>
+    <guimenuitem>Save As...</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Save byte array to another file with a new name.</action></para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <guimenu>File</guimenu>
+    <guimenuitem>Revert</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Reset the edited byte array to the content of the
+    file.</action></para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Ctrl;<keycap>P</keycap></keycombo>
+    </shortcut>
+    <guimenu>File</guimenu>
+    <guimenuitem>Print...</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Print the current byte array.</action></para></listitem>
+    </varlistentry>
+
+<!--    <varlistentry>
+    <term><menuchoice>
+    <guimenu>File</guimenu>
+    <guimenuitem>Export...</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Export the selected document or a portion of
+    it.</action></para><para>Opens a dialog box with these options:</para>
+    <variablelist>
+    <varlistentry>
+    <term><guilabel>Format</guilabel></term>
+    <listitem><para>Plain text, &HTML; table, rich text
+    format, C array.  Use the <guilabel>Options</guilabel> tab to select
+    details for a C array or an &HTML; table.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+    <term><guilabel>Destination</guilabel></term>
+    <listitem><para>The file to which the data will be
+    exported</para></listitem>
+    </varlistentry>
+    <varlistentry>
+    <term><guilabel>Export Range</guilabel></term>
+    <listitem><para>Selects which data will be exported - - the entire document, the
+    selected portion or the range between two specified
+    offsets.</para></listitem>
+    </varlistentry>
+    </variablelist>
+    </listitem></varlistentry>-->
+
+    <!--<varlistentry>
+    <term><menuchoice>
+    <guimenu>File</guimenu>
+    <guimenuitem>Cancel Operation</guimenuitem>
+    </menuchoice></term>
+    <listitem><para>Stop the current operation</para></listitem>
+    </varlistentry>-->
+
+    <varlistentry>
+    <term><menuchoice>
+    <guimenu>File</guimenu>
+    <guimenuitem>Permissions</guimenuitem>
+    </menuchoice></term>
+    <listitem><para>Set modification privileges:</para>
+    <variablelist>
+
+    <varlistentry>
+    <term><guilabel>Read only</guilabel></term>
+    <listitem><para>When set, changes may not be made to the loaded
+    byte array.</para></listitem>
+    </varlistentry>
+    <!--<varlistentry>
+    <term><guilabel>Allow Resize</guilabel></term>
+    <listitem><para>When off, individual bytes may be edited but the total number of
+    bytes may not be changed.</para></listitem>
+    </varlistentry>-->
+    </variablelist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Ctrl;<keycap>W</keycap></keycombo>
+    </shortcut>
+    <guimenu>File</guimenu>
+    <guimenuitem>Close</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Close the current byte array.</action></para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <guimenu>File</guimenu>
+    <guimenuitem>Quit</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Close the</action> &kappname;
+    window.</para></listitem>
+    </varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="edit-menu">
+<title><guimenu>Edit</guimenu> Menu</title>
+
+<variablelist>
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Ctrl;<keycap>Z</keycap></keycombo>
+    </shortcut>
+    <guimenu>Edit</guimenu>
+    <guimenuitem>Undo</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Undo the last action.</action></para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Ctrl;&Shift;<keycap>Z</keycap></keycombo>
+    </shortcut>
+    <guimenu>Edit</guimenu>
+    <guimenuitem>Redo</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Redo the last undone action.</action></para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Ctrl;<keycap>X</keycap></keycombo>
+    </shortcut>
+    <guimenu>Edit</guimenu>
+    <guimenuitem>Cut</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Delete the selected bytes and copy them to the
+    clipboard.</action></para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Ctrl;<keycap>C</keycap></keycombo>
+    </shortcut>
+    <guimenu>Edit</guimenu>
+    <guimenuitem>Copy</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Copy the selected bytes to the
+    clipboard.</action></para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Ctrl;<keycap>V</keycap></keycombo>
+    </shortcut>
+    <guimenu>Edit</guimenu>
+    <guimenuitem>Paste</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Insert the cut or copied bytes in the
+    clipboard.</action></para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <guimenu>Edit</guimenu>
+    <guisubmenu>Copy as</guisubmenu>
+    </menuchoice></term>
+    <listitem><para>Copy the selected bytes...</para>
+    <itemizedlist>
+    <listitem><para><guimenuitem>Values</guimenuitem>: ... encoded as values.</para>
+    </listitem>
+    <listitem><para><guimenuitem>Plain Text</guimenuitem>: ... encoded as characters.
+    </para></listitem>
+    <listitem><para><guimenuitem>C Array</guimenuitem>: ... defined as
+    an array in the programming language C.</para></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Ctrl;<keycap>A</keycap></keycombo>
+    </shortcut>
+    <guimenu>Edit</guimenu>
+    <guimenuitem>Select All</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Select entire byte array.</action></para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <guimenu>Edit</guimenu>
+    <guimenuitem>Deselect</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Deselect current selection.</action></para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Ctrl;<keycap>F</keycap></keycombo>
+    </shortcut>
+    <guimenu>Edit</guimenu>
+    <guimenuitem>Find...</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Find a specified pattern in the document.</action>
+    Hexadecimal, decimal, octal, binary or text patterns can be searched for.</para>
+    <para>Options in the dialog box allow you to specify the starting point,
+    direction and range of the search.</para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul"><keycap>F3</keycap></keycombo>
+    </shortcut>
+    <guimenu>Edit</guimenu>
+    <guimenuitem>Find Next</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Find the next instance</action> of the
+    <guimenuitem>Find</guimenuitem> pattern.</para>
+    <para>If there isn't a pattern specified, the dialog box will be shown.</para>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Shift;<keycap>F3</keycap></keycombo>
+    </shortcut>
+    <guimenu>Edit</guimenu>
+    <guimenuitem>Find Previous</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Find the previous instance</action> of the
+    <guimenuitem>Find</guimenuitem> pattern.</para>
+    <para>If there isn't a pattern specified, the dialog box will be shown.</para>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Ctrl;<keycap>R</keycap></keycombo>
+    </shortcut>
+    <guimenu>Edit</guimenu>
+    <guimenuitem>Replace...</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Replace</action> the find pattern with a different
+    pattern.</para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul"><keycap>Ins</keycap></keycombo>
+    </shortcut>
+    <guimenu>Edit</guimenu>
+    <guimenuitem>Overwrite Mode</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Switch between Insert mode and Overwrite mode</action>.
+    </para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Ctrl;<keycap>G</keycap></keycombo>
+    </shortcut>
+    <guimenu>Edit</guimenu>
+    <guimenuitem>Goto Offset...</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Move the cursor to a specified
+    offset.</action></para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <guimenu>Edit</guimenu>
+    <guisubmenu>Insert</guisubmenu>
+    </menuchoice></term>
+    <listitem>
+    <variablelist>
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Ctrl;<keycap>Ins</keycap></keycombo>
+    </shortcut>
+    <guimenuitem>Insert Pattern...</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Insert a specified string of bytes.</action></para>
+    <para>Options in the dialog box allow you to specify the length of the pattern,
+    it's format (hexadecimal, decimal, octal, binary or text) and the insertion
+    point.</para>
+    <para>If <guilabel>Repeat pattern</guilabel> is checked, the specified pattern
+    will be inserted repeatedly to reach the length set in
+    <guilabel>Size</guilabel>.</para></listitem>
+    </varlistentry>
+    </variablelist>
+    </listitem>
+    </varlistentry>
+
+</variablelist>
+</sect1>
+
+<sect1 id="view-menu">
+<title><guimenu>View</guimenu> Menu</title>
+
+<variablelist>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Ctrl;<keycap>+</keycap></keycombo>
+    </shortcut>
+    <guimenu>View</guimenu>
+    <guimenuitem>Zoom In</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Increase the size of the font.</action></para>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Ctrl;<keycap>-</keycap></keycombo>
+    </shortcut>
+    <guimenu>View</guimenu>
+    <guimenuitem>Zoom Out</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Decrease the size of the font.</action></para>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <guimenu>View</guimenu>
+    <guimenuitem>Show Non-printing Chars</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Toggle display of non-printing chars on and
+    off.</action> If the display is turned off, at the corresponding places in
+    the character column a substitute char is shown instead.</para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <guimenu>View</guimenu>
+    <guimenuitem>Show Line Offset</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Toggle display of the line offset on a pane to the left
+    on and off.</action></para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <guimenu>View</guimenu>
+    <guisubmenu>Value Coding</guisubmenu>
+    </menuchoice></term>
+    <listitem><para><action>Select the coding in the value column</action> from:</para>
+    <itemizedlist>
+    <listitem><para><guimenuitem>Hexadecimal</guimenuitem></para></listitem>
+    <listitem><para><guimenuitem>Decimal</guimenuitem></para></listitem>
+    <listitem><para><guimenuitem>Octal</guimenuitem></para></listitem>
+    <listitem><para><guimenuitem>Binary</guimenuitem></para></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <guimenu>View</guimenu>
+    <guisubmenu>Char Encoding</guisubmenu>
+    </menuchoice></term>
+    <listitem><para><action>Select the encoding in the character column</action>
+    from the submenu.
+    </para>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <guimenu>View</guimenu>
+    <guisubmenu>Resize Style</guisubmenu><!-- TODO: better terms and phrasing! -->
+    </menuchoice></term>
+    <listitem><para><action>Set the rules for the layout of the data display.</action>
+    This defines how many bytes are displayed per line, depending on the width of the
+    view. Possible rules are:</para>
+    <itemizedlist>
+    <listitem><para><guimenuitem>No Resize</guimenuitem>: The layout is fixed to the
+    current and not adapted on the change of the view size.</para>
+    </listitem>
+    <listitem><para><guimenuitem>Lock Groups</guimenuitem>: Puts as many bytes
+    per line as possible, as long as groups of bytes are complete.
+    </para></listitem>
+    <listitem><para><guimenuitem>Full Size Usage</guimenuitem>: Same as previous,
+    but allows also uncomplete groups of bytes.</para></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <guimenu>View</guimenu>
+    <guisubmenu>Columns</guisubmenu>
+    </menuchoice></term>
+    <listitem><para><action>Select which columns are shown.</action>
+    Possible are:</para>
+    <itemizedlist>
+    <listitem><para><guimenuitem>Values Column</guimenuitem></para>
+    </listitem>
+    <listitem><para><guimenuitem>Chars Column</guimenuitem></para></listitem>
+    <listitem><para><guimenuitem>Both Columns</guimenuitem></para></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <guimenu>View</guimenu>
+    <guimenuitem>Full Screen Mode</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Toggle full screen mode on and off.</action></para></listitem>
+    </varlistentry>
+
+</variablelist>
+</sect1>
+
+<sect1 id="windows-menu">
+<title><guimenu>Windows</guimenu> Menu</title>
+
+    <para>Provides a list of the current views. Select the active window.</para>
+
+</sect1>
+
+<sect1 id="bookmarks-menu">
+<title><guimenu>Bookmarks</guimenu> Menu</title>
+
+    <para>Multiple bookmarks can be set for a single byte array. Each byte array
+    has its own set of bookmarks, and the appropriate set is displayed at the
+    bottom of the <guimenu>Bookmarks</guimenu> menu. Choose a bookmark
+    from the menu to move the cursor and the view to it.</para>
+
+<variablelist>
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Ctrl;<keycap>B</keycap></keycombo>
+    </shortcut>
+    <guimenu>Bookmarks</guimenu>
+    <guimenuitem>Add Bookmark</guimenuitem>
+    </menuchoice></term>
+    <listitem><para>Bookmark a location within the byte array.</para></listitem> 
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Ctrl;<keycap>U</keycap></keycombo>
+    </shortcut>
+    <guimenu>Bookmarks</guimenu>
+    <guimenuitem>Remove Bookmark</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Remove the current bookmark.</action> This command
+    is only available if the cursor is at a bookmarked location.</para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <guimenu>Bookmarks</guimenu>
+    <guimenuitem>Remove All Bookmarks</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Clear the bookmark list.</action></para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Alt;<keycap>Down</keycap></keycombo>
+    </shortcut>
+    <guimenu>Bookmarks</guimenu>
+    <guimenuitem>Goto Next Bookmark</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Move the cursor to the next
+    bookmark.</action></para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Alt;<keycap>Up</keycap></keycombo>
+    </shortcut>
+    <guimenu>Bookmarks</guimenu>
+    <guimenuitem>Goto Previous Bookmark</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Move the cursor to the previous
+    bookmark.</action></para></listitem>
+    </varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="tools-menu">
+<title><guimenu>Tools</guimenu> Menu</title>
+
+    <para>Provides a list of installed tools. Toggle the display of each tools
+    on or off.</para>
+</sect1>
+
+<sect1 id="settings-menu">
+<title><guimenu>Settings</guimenu> Menu</title>
+
+<variablelist>
+    <varlistentry>
+    <term><menuchoice>
+    <guimenu>Settings</guimenu>
+    <guimenuitem>Show Toolbar</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Toggle display of the toolbar below the
+    menu bar.</action></para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <guimenu>Settings</guimenu>
+    <guimenuitem>Show Statusbar</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Toggle display of the status bar,</action></para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <guimenu>Settings</guimenu>
+    <guimenuitem>Configure Shortcuts...</guimenuitem>
+    </menuchoice></term>
+    <listitem><para>Change program action shortcuts.</para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <guimenu>Settings</guimenu>
+    <guimenuitem>Configure Toolbars...</guimenuitem>
+    </menuchoice></term>
+    <listitem><para>Control the content of the toolbar.</para></listitem>
+    </varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="help-menu">
+<title><guimenu>Help</guimenu> Menu</title>
+
+    &help.menu.documentation;
+
+</sect1>
+
+
+
+<sect1 id="toolbar"><title>Toolbar</title>
+    <para>The toolbar contains icons for the following commands:</para>
+
+    <note><para>(All behave identically to the menu command.)</para></note>
+
+    <itemizedlist>
+    <listitem><para><guiicon>New</guiicon></para></listitem>
+    <listitem><para><guiicon>Open</guiicon></para></listitem>
+    <listitem><para><guiicon>Save</guiicon></para></listitem>
+    <listitem><para><guiicon>Revert</guiicon></para></listitem>
+    <listitem><para><guiicon>Print</guiicon></para></listitem>
+    <listitem><para><guiicon>Undo</guiicon></para></listitem>
+    <listitem><para><guiicon>Redo</guiicon></para></listitem>
+    <listitem><para><guiicon>Cut</guiicon></para></listitem>
+    <listitem><para><guiicon>Copy</guiicon></para></listitem>
+    <listitem><para><guiicon>Paste</guiicon></para></listitem>
+    <listitem><para><guiicon>Find</guiicon></para></listitem>
+    <listitem><para><guiicon>Find Next</guiicon></para></listitem>
+    </itemizedlist>
+
+</sect1>
+
+</chapter>

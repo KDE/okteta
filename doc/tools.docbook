@@ -1,0 +1,58 @@
+<chapter id="tools">
+<title>Tools</title>
+
+<!--<para>There are several.</para>-->
+
+<!--<sect1 id="tools-find">
+<title>Find</title>
+<para>blabla</para>
+</sect1>-->
+
+<sect1 id="tools-decodingtable">
+<title>Decoding Table</title>
+
+    <para>The table displays the value of the byte or the bytes starting
+    at the cursor, interpreted as common simple data types like Integer or Float.</para>
+</sect1>
+
+
+<sect1 id="tools-bytetable">
+<title>Byte Table</title>
+
+    <para>The table lists all possible byte values, both as character and
+    numerical value.</para>
+    <para>The selected value can be inserted at the cursor position for a
+    defined number of times. This can be achieved by using the <action>Insert</action>
+    button or double-clicking the line in the table.</para>
+</sect1>
+
+
+<sect1 id="tools-filter">
+<title>Filter</title>
+    <para>The filter performs binary operations on the selected bytes.
+    After choosing the operation (AND, OR, ROTATE..) the parameters,
+    if any, can be set in the box below. The filter is executed on the use
+    of the button <action>Filter</action></para>
+</sect1>
+
+<sect1 id="tools-info">
+<title>Info View</title>
+    <para>The view displays some information about the byte array.
+    Besides the size this is a statistic about the frequency of the occurrence
+    of each byte value in the byte array.
+    All the information can be brought uptodate by using the <action>Update</action>
+    button.</para>
+</sect1>
+
+<!--<sect1 id="tools-strings">
+<title>Strings</title>
+<para>Locate text strings in the data. Minimum string length, case sensitivity
+and a pattern to match can be specified.</para>
+</sect1>-->
+
+<!--<sect1 id="tools-versions">
+<title>Versions</title>
+<para>blabla</para>
+</sect1>-->
+
+</chapter>

@@ -38,8 +38,8 @@ target_link_libraries( okteta
   kakaocontrollers
   kakaogui
   kakaocore
-  oktetagui_b
-  oktetacore_b
+  oktetagui
+  oktetacore
   ${KDE4_KIO_LIBS}
 )
 

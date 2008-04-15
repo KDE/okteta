@@ -50,16 +50,14 @@ set( oktetacore_LIB_SRCS
   ksectionlist.cpp
 )
 
-kde4_add_library( oktetacore_b SHARED ${oktetacore_LIB_SRCS} )
-target_link_libraries( oktetacore_b  ${KDE4_KDECORE_LIBS} )
-set_target_properties( oktetacore_b PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+kde4_add_library( oktetacore SHARED ${oktetacore_LIB_SRCS} )
+target_link_libraries( oktetacore  ${KDE4_KDECORE_LIBS} )
+set_target_properties( oktetacore  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 
-
-install( TARGETS oktetacore_b  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS oktetacore  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 add_subdirectory( piecetable/tests )
 add_subdirectory( tests )
 if(KDE4_BUILD_TESTS)
   kde4_add_library( testoktetacore STATIC ${oktetacore_LIB_SRCS} )
 endif(KDE4_BUILD_TESTS)
-
