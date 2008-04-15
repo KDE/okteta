@@ -41,11 +41,14 @@ Done before review:
 
 Fixed after 0.1 Beta 1:
 -----------------------
+* cursor problems
 
+Fixed after 0.1 Beta 2:
+-----------------------
+* version control ignored readonly status
 
-Before adding to review:
+In review:
 ------------------------
-* fix cursor problems
 * fix replace problem
 * fix filter char coding adaption
 
