@@ -86,6 +86,7 @@ FilterView::FilterView( FilterTool *tool, QWidget *parent )
                             "above is executed on the document with the given options.")), this );
     mFilterButton->setEnabled( mTool->dataSelected() );
     connect( mTool, SIGNAL(dataSelectionChanged( bool )), SLOT(onDataSelectionChanged( bool )) );
+    connect( mTool, SIGNAL(charCodecChanged( const QString & )), SLOT(onCharCodecChanged( const QString & )) );
     connect( mFilterButton, SIGNAL(clicked( bool )), SLOT(onFilterClicked()) );
     buttonLayout->addWidget( mFilterButton );
     baseLayout->addLayout( buttonLayout );
@@ -96,12 +97,6 @@ void FilterView::addParameterEdit( const QString &name, QWidget *parameterEdit )
 {
     mOperationComboBox->addItem( name );
     mParameterSetEditStack->addWidget( parameterEdit );
-}
-
-void FilterView::setCharCode( const QString &codeName )
-{
-Q_UNUSED( codeName )
-//     mOperandEdit->setCharCode( codeName ); // TODO: simply tell all editors a view change?
 }
 
 int FilterView::filterId() const { return mOperationComboBox->currentIndex(); }
@@ -150,6 +145,14 @@ void FilterView::onDataSelectionChanged( bool dataSelected )
     const bool isValid = ( parametersetEdit ? parametersetEdit->isValid() : false );
 
     mFilterButton->setEnabled( dataSelected && isValid );
+}
+
+void FilterView::onCharCodecChanged( const QString &charCodecName )
+{
+    AbstractByteArrayFilterParameterSetEdit *parametersetEdit =
+        qobject_cast<AbstractByteArrayFilterParameterSetEdit *>( mParameterSetEditStack->currentWidget() );
+    if( parametersetEdit )
+        parametersetEdit->setCharCodec( charCodecName );
 }
 
 void FilterView::onValidityChanged( bool isValid )

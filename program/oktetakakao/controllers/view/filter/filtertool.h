@@ -63,6 +63,7 @@ class FilterTool : public QObject
 
   Q_SIGNALS:
     void dataSelectionChanged( bool dataSelected );
+    void charCodecChanged( const QString &charCodecName );
 
   protected:
     KHEUI::KByteArrayView *mByteArrayView;

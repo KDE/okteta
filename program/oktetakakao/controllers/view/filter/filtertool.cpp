@@ -65,13 +65,19 @@ void FilterTool::setView( KAbstractView *view )
     mByteArrayModel = document ? document->content() : 0;
 
     const bool hasByteArray = ( mByteArrayModel != 0 );
+    QString newCharCodecName;
     if( hasByteArray )
     {
+        newCharCodecName = mByteArrayView->encodingName();
         connect( mByteArrayView, SIGNAL(selectionChanged( bool )), SIGNAL(dataSelectionChanged( bool )) );
+
+        connect( mByteArrayView,  SIGNAL(charCodecChanged( const QString & )),
+                 SIGNAL(charCodecChanged( const QString & )) );
     }
 
     const bool dataSelected = hasByteArray && mByteArrayView->hasSelectedData();
 
+    emit charCodecChanged( newCharCodecName );
     emit dataSelectionChanged( dataSelected );
 }
 

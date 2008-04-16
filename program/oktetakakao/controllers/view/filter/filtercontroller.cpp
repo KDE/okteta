@@ -50,7 +50,6 @@
 FilterController::FilterController( KXmlGuiWindow *window )
  : mTool( new FilterTool() )
 {
-//     connect( mTool, SIGNAL(viewChanged( bool )), SLOT(onViewChanged( bool )) );
 // move to view
     KActionCollection *actionCollection = window->actionCollection();
 

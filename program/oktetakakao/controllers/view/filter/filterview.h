@@ -42,7 +42,6 @@ class FilterView : public QWidget
     virtual ~FilterView();
 
   public: // set
-    void setCharCode( const QString &codeName );
     void addParameterEdit( const QString &name, QWidget *parameterEdit );
 
   public: // get 
@@ -53,6 +52,7 @@ class FilterView : public QWidget
     void onFilterClicked();
     void onOperationChange( int index );
     void onDataSelectionChanged( bool dataSelected );
+    void onCharCodecChanged( const QString &charCodecName );
     void onValidityChanged( bool isValid );
 
   private:
