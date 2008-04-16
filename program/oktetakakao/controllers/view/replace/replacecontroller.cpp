@@ -80,7 +80,7 @@ void ReplaceController::replace()
     }
 
     ReplaceDialog->setInSelection( ViewWidget->hasSelectedData() );
-    ReplaceDialog->setCharCode( ViewWidget->encodingName() );
+    ReplaceDialog->setCharCodec( ViewWidget->encodingName() );
 
     ReplaceDialog->show();
 }

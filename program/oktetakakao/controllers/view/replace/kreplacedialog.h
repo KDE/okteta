@@ -37,7 +37,7 @@ class KReplaceDialog : public KAbstractFindDialog
 
   public: // set
 //     void setDirection( KReplaceDirection Direction );
-    void setCharCode( const QString &CodeName );
+    void setCharCodec( const QString &codecName );
 
   public: // get 
     QByteArray replaceData() const;

@@ -42,7 +42,7 @@ class InsertPatternDialog : public KDialog
     virtual ~InsertPatternDialog();
 
   public: // set
-    void setCharCode( const QString &codeName );
+    void setCharCodec( const QString &codecName );
 
   public: // get 
     QByteArray pattern() const;

@@ -52,7 +52,7 @@ class KByteArrayValidator : public QValidator
 
   public:
     /// sets one of the value codecs or any char codec
-    void setCoding( int codecId );
+    void setCodec( int codecId );
     /// sets the char codec to use
     void setCharCodec( const QString &charCodecName );
 

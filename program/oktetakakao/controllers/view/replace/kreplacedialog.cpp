@@ -91,10 +91,10 @@ bool KReplaceDialog::prompt() const
     return PromptCheckBox->isChecked();
 }
 
-void KReplaceDialog::setCharCode( const QString &CodeName )
+void KReplaceDialog::setCharCodec( const QString &codecName )
 {
-    ReplaceDataEdit->setCharCode( CodeName );
-    KAbstractFindDialog::setCharCode( CodeName );
+    ReplaceDataEdit->setCharCodec( codecName );
+    KAbstractFindDialog::setCharCodec( codecName );
 }
 
 

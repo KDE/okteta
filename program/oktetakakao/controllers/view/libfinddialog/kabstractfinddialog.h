@@ -48,7 +48,7 @@ class KAbstractFindDialog : public KDialog
   public: // set
     void setDirection( KFindDirection Direction );
     void setInSelection( bool InSelection );
-    void setCharCode( const QString &CodeName );
+    void setCharCodec( const QString &codecName );
 
   public: // get 
     QByteArray data() const;

@@ -99,9 +99,9 @@ InsertPatternDialog::InsertPatternDialog( QWidget *parent )
     enableButtonOk( false );
 }
 
-void InsertPatternDialog::setCharCode( const QString &codeName )
+void InsertPatternDialog::setCharCodec( const QString &codecName )
 {
-    mPatternEdit->setCharCode( codeName );
+    mPatternEdit->setCharCodec( codecName );
 }
 
 int InsertPatternDialog::number() const { return mNumberSpinBox->value(); }

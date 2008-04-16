@@ -147,9 +147,9 @@ void KAbstractFindDialog::setInSelection( bool InSelection )
     SelectedCheckBox->setChecked( InSelection );
 }
 
-void KAbstractFindDialog::setCharCode( const QString &CodeName )
+void KAbstractFindDialog::setCharCodec( const QString &codecName )
 {
-    SearchDataEdit->setCharCode( CodeName );
+    SearchDataEdit->setCharCodec( codecName );
 }
 
 void KAbstractFindDialog::onSearchDataFormatChanged( int index )

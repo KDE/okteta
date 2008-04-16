@@ -43,7 +43,7 @@ class KByteArrayLineEdit : public QWidget
     virtual ~KByteArrayLineEdit();
 
   public: // set
-    void setCharCode( const QString &charCodecName );
+    void setCharCodec( const QString &charCodecName );
 
   public: // get 
     QByteArray data() const;

@@ -79,7 +79,7 @@ void OperandByteArrayFilterParameterSetEdit::setValues( const AbstractByteArrayF
 
 void OperandByteArrayFilterParameterSetEdit::setCharCodec( const QString &charCodecName )
 {
-    mOperandEdit->setCharCode( charCodecName );
+    mOperandEdit->setCharCodec( charCodecName );
 }
 
 void OperandByteArrayFilterParameterSetEdit::getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const

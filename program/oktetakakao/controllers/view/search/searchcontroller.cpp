@@ -108,7 +108,7 @@ void SearchController::showDialog( KFindDirection Direction )
 
     SearchDialog->setDirection( Direction );
     SearchDialog->setInSelection( ViewWidget->hasSelectedData() );
-    SearchDialog->setCharCode( ViewWidget->encodingName() );
+    SearchDialog->setCharCodec( ViewWidget->encodingName() );
 
     SearchDialog->show();
 }

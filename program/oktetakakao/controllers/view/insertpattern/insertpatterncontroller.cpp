@@ -74,7 +74,7 @@ void InsertPatternController::onActionTriggered()
         mInsertPatternDialog = new InsertPatternDialog( mWindow );
         connect( mInsertPatternDialog, SIGNAL(okClicked()), SLOT(onOkClicked()) );
     }
-    mInsertPatternDialog->setCharCode( mInsertPatternTool->charCodecName() );
+    mInsertPatternDialog->setCharCodec( mInsertPatternTool->charCodecName() );
 
     mInsertPatternDialog->show();
 }

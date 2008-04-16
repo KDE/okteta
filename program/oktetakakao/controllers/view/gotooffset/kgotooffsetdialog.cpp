@@ -142,7 +142,7 @@ bool KGotoOffsetDialog::isRelative() const { return AtCursorCheckBox->isChecked(
 
 void KGotoOffsetDialog::onSelectorChanged( int index )
 {
-    mOffsetValidator->setCoding( index );
+    mOffsetValidator->setCodec( index );
     OffsetEdit->lineEdit()->setText( mOffsetString[ index ] );
 }
 

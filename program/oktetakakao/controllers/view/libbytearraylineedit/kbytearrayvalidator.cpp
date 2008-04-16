@@ -53,7 +53,7 @@ KByteArrayValidator::KByteArrayValidator( QObject *parent, int codecId, int char
    mValueCodec( 0 ), mCharCodec( KHECore::KCharCodec::createCodec(KHECore::LocalEncoding) )
 {
 Q_UNUSED(charCodecId)
-    setCoding( codecId );
+    setCodec( codecId );
 }
 
 
@@ -66,7 +66,7 @@ void KByteArrayValidator::setCharCodec( const QString &charCodecName )
     mCharCodec = KHECore::KCharCodec::createCodec( charCodecName );
 }
 
-void KByteArrayValidator::setCoding( int codecId )
+void KByteArrayValidator::setCodec( int codecId )
 {
     if( codecId == mCodecId )
         return;

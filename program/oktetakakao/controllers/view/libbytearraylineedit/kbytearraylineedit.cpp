@@ -75,7 +75,7 @@ inline QByteArray KByteArrayLineEditPrivate::data() const
 }
 inline void KByteArrayLineEditPrivate::onFormatChanged( int index )
 {
-    mValidator->setCoding( index );
+    mValidator->setCodec( index );
     mDataEdit->setText( mData[index] );
 }
 inline void KByteArrayLineEditPrivate::onDataChanged( const QString &D )
@@ -90,7 +90,7 @@ KByteArrayLineEdit::KByteArrayLineEdit( QWidget *parent )
     d->setup( this );
 }
 
-void KByteArrayLineEdit::setCharCode( const QString &charCodecName )
+void KByteArrayLineEdit::setCharCodec( const QString &charCodecName )
 {
     //TODO: if char is current codec update the string
     d->mValidator->setCharCodec( charCodecName );
