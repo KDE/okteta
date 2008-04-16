@@ -35,52 +35,52 @@
 class KByteArrayLineEditPrivate
 {
   public:
-    KComboBox *FormatComboBox;
-    KLineEdit *DataEdit;
+    KComboBox *mFormatComboBox;
+    KLineEdit *mDataEdit;
 
-    QString    Data[5];
-    KByteArrayValidator *Validator;
+    QString    mData[KByteArrayValidator::CodecNumber];
+    KByteArrayValidator *mValidator;
   public:
     void setup( KByteArrayLineEdit *parent );
     QByteArray data() const;
-    void onFormatChanged( int Index );
-    void onDataChanged( const QString &Data );
+    void onFormatChanged( int index );
+    void onDataChanged( const QString &data );
 };
 
-void KByteArrayLineEditPrivate::setup( KByteArrayLineEdit *Widget )
+void KByteArrayLineEditPrivate::setup( KByteArrayLineEdit *widget )
 {
-    QVBoxLayout *BaseLayout = new QVBoxLayout( Widget );
-    BaseLayout->setSpacing( KDialog::spacingHint() );
-    BaseLayout->setMargin( 0 );
+    QVBoxLayout *baseLayout = new QVBoxLayout( widget );
+    baseLayout->setSpacing( KDialog::spacingHint() );
+    baseLayout->setMargin( 0 );
 
-    FormatComboBox = new KComboBox( Widget );
-    FormatComboBox->addItems( KByteArrayValidator::codingNames() );
-    Widget->connect( FormatComboBox, SIGNAL(activated(int)), SLOT(onFormatChanged(int)) );
+    mFormatComboBox = new KComboBox( widget );
+    mFormatComboBox->addItems( KByteArrayValidator::codecNames() );
+    widget->connect( mFormatComboBox, SIGNAL(activated(int)), SLOT(onFormatChanged(int)) );
 
-    DataEdit = new KLineEdit( Widget );
-    Widget->connect( DataEdit, SIGNAL(textChanged(const QString&)), SLOT(onDataChanged(const QString&)) );
-    Validator = new KByteArrayValidator( DataEdit, KHECore::CharCoding );
-    DataEdit->setValidator( Validator );
+    mDataEdit = new KLineEdit( widget );
+    widget->connect( mDataEdit, SIGNAL(textChanged(const QString&)), SLOT(onDataChanged(const QString&)) );
+    mValidator = new KByteArrayValidator( mDataEdit, KHECore::CharCoding );
+    mDataEdit->setValidator( mValidator );
 
-    BaseLayout->addWidget( FormatComboBox );
-    BaseLayout->addWidget( DataEdit );
-    Widget->setTabOrder( FormatComboBox, DataEdit );
+    baseLayout->addWidget( mFormatComboBox );
+    baseLayout->addWidget( mDataEdit );
+    widget->setTabOrder( mFormatComboBox, mDataEdit );
 
-    Widget->onFormatChanged( FormatComboBox->currentIndex() );
+    widget->onFormatChanged( mFormatComboBox->currentIndex() );
 }
 
 inline QByteArray KByteArrayLineEditPrivate::data() const
 {
-    return Validator->toByteArray( Data[FormatComboBox->currentIndex()] );
+    return mValidator->toByteArray( mData[mFormatComboBox->currentIndex()] );
 }
-inline void KByteArrayLineEditPrivate::onFormatChanged( int Index )
+inline void KByteArrayLineEditPrivate::onFormatChanged( int index )
 {
-    Validator->setCoding( Index );
-    DataEdit->setText( Data[Index] );
+    mValidator->setCoding( index );
+    mDataEdit->setText( mData[index] );
 }
 inline void KByteArrayLineEditPrivate::onDataChanged( const QString &D )
 {
-    Data[FormatComboBox->currentIndex()] = D;
+    mData[mFormatComboBox->currentIndex()] = D;
 }
 
 
@@ -90,9 +90,10 @@ KByteArrayLineEdit::KByteArrayLineEdit( QWidget *parent )
     d->setup( this );
 }
 
-void KByteArrayLineEdit::setCharCode( const QString &CodeName )
+void KByteArrayLineEdit::setCharCode( const QString &charCodecName )
 {
-    d->Validator->setCharCode( CodeName );
+    //TODO: if char is current codec update the string
+    d->mValidator->setCharCodec( charCodecName );
 }
 
 
@@ -103,20 +104,20 @@ QByteArray KByteArrayLineEdit::data() const
 
 int KByteArrayLineEdit::format() const
 {
-    return d->FormatComboBox->currentIndex();
+    return d->mFormatComboBox->currentIndex();
 }
 
 
-void KByteArrayLineEdit::onFormatChanged( int Index )
+void KByteArrayLineEdit::onFormatChanged( int index )
 {
-    d->onFormatChanged( Index );
-    emit formatChanged( Index );
+    d->onFormatChanged( index );
+    emit formatChanged( index );
 }
 
-void KByteArrayLineEdit::onDataChanged( const QString &Data )
+void KByteArrayLineEdit::onDataChanged( const QString &data )
 {
-    d->onDataChanged( Data );
-    emit dataChanged( d->Validator->toByteArray(Data) );
+    d->onDataChanged( data );
+    emit dataChanged( d->mValidator->toByteArray(data) );
 }
 
 KByteArrayLineEdit::~KByteArrayLineEdit() { delete d; }

@@ -33,7 +33,7 @@
 #include <QtCore/QStringList>
 
 
-const QStringList &KByteArrayValidator::codingNames()
+const QStringList &KByteArrayValidator::codecNames()
 {
     static QStringList list;
     if( list.isEmpty() )
@@ -48,49 +48,49 @@ const QStringList &KByteArrayValidator::codingNames()
 }
 
 
-KByteArrayValidator::KByteArrayValidator( QObject *parent, int C, int CC )
- : QValidator( parent ), Coding( KHECore::InvalidCoding ),
-   ValueCodec( 0 ), CharCodec( KHECore::KCharCodec::createCodec(KHECore::LocalEncoding) )
+KByteArrayValidator::KByteArrayValidator( QObject *parent, int codecId, int charCodecId )
+ : QValidator( parent ), mCodecId( KHECore::InvalidCoding ),
+   mValueCodec( 0 ), mCharCodec( KHECore::KCharCodec::createCodec(KHECore::LocalEncoding) )
 {
-Q_UNUSED(CC)
-    setCoding( C );
+Q_UNUSED(charCodecId)
+    setCoding( codecId );
 }
 
 
-void KByteArrayValidator::setCharCode( const QString &CodeName )
+void KByteArrayValidator::setCharCodec( const QString &charCodecName )
 {
-    if( CodeName == CharCodec->name() )
+    if( charCodecName == mCharCodec->name() )
         return;
 
-    delete CharCodec;
-    CharCodec = KHECore::KCharCodec::createCodec( CodeName );
+    delete mCharCodec;
+    mCharCodec = KHECore::KCharCodec::createCodec( charCodecName );
 }
 
-void KByteArrayValidator::setCoding( int C )
+void KByteArrayValidator::setCoding( int codecId )
 {
-    if( C == Coding )
+    if( codecId == mCodecId )
         return;
 
-    Coding = (KHECore::KCoding)C;
+    mCodecId = (KHECore::KCoding)codecId;
 
-    if( Coding != KHECore::CharCoding )
+    if( mCodecId != KHECore::CharCoding )
     {
-        delete ValueCodec;
-        ValueCodec = KHECore::ValueCodec::createCodec( Coding );
+        delete mValueCodec;
+        mValueCodec = KHECore::ValueCodec::createCodec( mCodecId );
     }
 }
 
-QValidator::State KByteArrayValidator::validate( QString &String, int &/*pos*/ ) const
+QValidator::State KByteArrayValidator::validate( QString &string, int &/*pos*/ ) const
 {
     State result = QValidator::Acceptable;
 
-    const int StringLength = String.length();
-    if( Coding == KHECore::CharCoding )
+    const int stringLength = string.length();
+    if( mCodecId == KHECore::CharCoding )
     {
-        for( int i=0; i<StringLength; ++i )
+        for( int i=0; i<stringLength; ++i )
         {
-            const QChar Char = String.at( i );
-            if( !CharCodec->canEncode(Char) && !Char.isSpace() )
+            const QChar c = string.at( i );
+            if( !mCharCodec->canEncode(c) && !c.isSpace() )
             {
                 result = QValidator::Invalid;
                 break;
@@ -99,10 +99,10 @@ QValidator::State KByteArrayValidator::validate( QString &String, int &/*pos*/ )
     }
     else
     {
-        for( int i=0; i<StringLength; ++i )
+        for( int i=0; i<stringLength; ++i )
         {
-            const QChar Char = String.at( i );
-            if( !ValueCodec->isValidDigit(Char.toLatin1()) && !Char.isSpace() )
+            const QChar c = string.at( i );
+            if( !mValueCodec->isValidDigit(c.toLatin1()) && !c.isSpace() )
             {
                 result = QValidator::Invalid;
                 break;
@@ -114,35 +114,35 @@ QValidator::State KByteArrayValidator::validate( QString &String, int &/*pos*/ )
 }
 
 
-QByteArray KByteArrayValidator::toByteArray( const QString &String ) const
+QByteArray KByteArrayValidator::toByteArray( const QString &string ) const
 {
     QByteArray result;
 
-    const int StringSize = String.size();
-    if( Coding == KHECore::CharCoding )
+    const int stringLength = string.length();
+    if( mCodecId == KHECore::CharCoding )
     {
-        result.resize( StringSize );
-        for( int i=0; i<StringSize; ++i )
+        result.resize( stringLength );
+        for( int i=0; i<stringLength; ++i )
         {
-            char Byte;
-            const bool Success = CharCodec->encode( &Byte, String[i] );
-            result[i] = Success ? Byte : '?'; // TODO: define unknown symbol
+            char byte;
+            const bool success = mCharCodec->encode( &byte, string[i] );
+            result[i] = success ? byte : '?'; // TODO: define unknown symbol
         }
     }
     else
     {
         int i = 0;
-        while( i < StringSize )
+        while( i < stringLength )
         {
-            unsigned char Byte;
-            const int Read = ValueCodec->decode( &Byte, String, i );
-            if( Read > 0 )
+            unsigned char byte;
+            const int readChars = mValueCodec->decode( &byte, string, i );
+            if( readChars > 0 )
             {
-                i += Read;
-                result.append( Byte );
+                i += readChars;
+                result.append( byte );
             }
             else
-                while( i < StringSize && !ValueCodec->isValidDigit(String[i].toLatin1()) )
+                while( i < stringLength && !mValueCodec->isValidDigit(string[i].toLatin1()) )
                     ++i;
         }
     }
@@ -151,27 +151,27 @@ QByteArray KByteArrayValidator::toByteArray( const QString &String ) const
 
 
 
-QString KByteArrayValidator::toString( const QByteArray &ByteArray ) const
+QString KByteArrayValidator::toString( const QByteArray &byteArray ) const
 {
     QString result;
 
-    const int ByteArraySize = ByteArray.size();
-    if( Coding == KHECore::CharCoding )
+    const int byteArraySize = byteArray.size();
+    if( mCodecId == KHECore::CharCoding )
     {
-        result.resize( ByteArraySize );
-        for( int i=0; i<ByteArraySize; ++i )
+        result.resize( byteArraySize );
+        for( int i=0; i<byteArraySize; ++i )
         {
-            KHECore::KChar Char = CharCodec->decode( ByteArray[i] );
-            result[i] = Char.isUndefined() ? QChar('?') : Char; // TODO: define unknown symbol
+            KHECore::KChar c = mCharCodec->decode( byteArray[i] );
+            result[i] = c.isUndefined() ? QChar('?') : c; // TODO: define unknown symbol
         }
     }
     else
     {
-        const int EncodingWidth = ValueCodec->encodingWidth();
-        result.resize( ByteArraySize * EncodingWidth );
+        const int encodingWidth = mValueCodec->encodingWidth();
+        result.resize( byteArraySize * encodingWidth );
         int r = 0;
-        for( int i=0; i<ByteArraySize; ++i,r+=EncodingWidth )
-            ValueCodec->encode( result, r, ByteArray[i] );
+        for( int i=0; i<byteArraySize; ++i,r+=encodingWidth )
+            mValueCodec->encode( result, r, byteArray[i] );
     }
     return result;
 }
@@ -179,6 +179,6 @@ QString KByteArrayValidator::toString( const QByteArray &ByteArray ) const
 
 KByteArrayValidator::~KByteArrayValidator()
 {
-    delete ValueCodec;
-    delete CharCodec;
+    delete mValueCodec;
+    delete mCharCodec;
 }

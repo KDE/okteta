@@ -43,19 +43,19 @@ class KByteArrayLineEdit : public QWidget
     virtual ~KByteArrayLineEdit();
 
   public: // set
-    void setCharCode( const QString &CodeName );
+    void setCharCode( const QString &charCodecName );
 
   public: // get 
     QByteArray data() const;
     int format() const;
 
   Q_SIGNALS:
-    void dataChanged( const QByteArray& );
-    void formatChanged( int );
+    void dataChanged( const QByteArray &data );
+    void formatChanged( int index );
 
   private Q_SLOTS:
-    void onFormatChanged( int Index );
-    void onDataChanged( const QString &Data );
+    void onFormatChanged( int index );
+    void onDataChanged( const QString &data );
 
   private:
     KByteArrayLineEditPrivate * const d;
