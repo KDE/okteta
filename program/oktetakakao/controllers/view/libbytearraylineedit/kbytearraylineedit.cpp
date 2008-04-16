@@ -42,6 +42,7 @@ class KByteArrayLineEditPrivate
     KByteArrayValidator *mValidator;
   public:
     void setup( KByteArrayLineEdit *parent );
+    void setCharCodec( const QString &charCodecName );
     QByteArray data() const;
     void onFormatChanged( int index );
     void onDataChanged( const QString &data );
@@ -69,6 +70,22 @@ void KByteArrayLineEditPrivate::setup( KByteArrayLineEdit *widget )
     widget->onFormatChanged( mFormatComboBox->currentIndex() );
 }
 
+void KByteArrayLineEditPrivate::setCharCodec( const QString &charCodecName )
+{
+    // update the char string
+    const QByteArray currentData = mValidator->toByteArray( mData[KHECore::CharCoding] );
+
+    mValidator->setCharCodec( charCodecName );
+
+    const QString dataString = mValidator->toString( currentData );
+    mData[KHECore::CharCoding] = dataString;
+
+    const bool isCharVisible = ( mFormatComboBox->currentIndex() == KHECore::CharCoding );
+
+    if( isCharVisible )
+        mDataEdit->setText( dataString );
+}
+
 inline QByteArray KByteArrayLineEditPrivate::data() const
 {
     return mValidator->toByteArray( mData[mFormatComboBox->currentIndex()] );
@@ -78,9 +95,9 @@ inline void KByteArrayLineEditPrivate::onFormatChanged( int index )
     mValidator->setCodec( index );
     mDataEdit->setText( mData[index] );
 }
-inline void KByteArrayLineEditPrivate::onDataChanged( const QString &D )
+inline void KByteArrayLineEditPrivate::onDataChanged( const QString &data )
 {
-    mData[mFormatComboBox->currentIndex()] = D;
+    mData[mFormatComboBox->currentIndex()] = data;
 }
 
 
@@ -92,10 +109,8 @@ KByteArrayLineEdit::KByteArrayLineEdit( QWidget *parent )
 
 void KByteArrayLineEdit::setCharCodec( const QString &charCodecName )
 {
-    //TODO: if char is current codec update the string
-    d->mValidator->setCharCodec( charCodecName );
+    d->setCharCodec( charCodecName );
 }
-
 
 QByteArray KByteArrayLineEdit::data() const
 {
