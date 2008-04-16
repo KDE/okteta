@@ -31,7 +31,6 @@
 
 class KXmlGuiWindow;
 class KAction;
-class KViewManager;
 namespace KHEUI {
 class KByteArrayView;
 }

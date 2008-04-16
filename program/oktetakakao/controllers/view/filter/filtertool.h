@@ -37,7 +37,6 @@ namespace KHECore {
 class KAbstractByteArrayModel;
 }
 class QString;
-class QByteArray;
 
 
 class FilterTool : public QObject

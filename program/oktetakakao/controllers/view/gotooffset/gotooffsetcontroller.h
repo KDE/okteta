@@ -29,7 +29,6 @@
 
 class QAction;
 class KXmlGuiWindow;
-class KViewManager;
 namespace KHEUI {
 class KByteArrayView;
 }

@@ -30,7 +30,6 @@
 class KXmlGuiWindow;
 class FilterTool;
 class FilterView;
-class QAction;
 
 
 class FilterController : public KViewController

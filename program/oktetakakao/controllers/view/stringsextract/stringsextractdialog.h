@@ -27,7 +27,6 @@
 #include <KDialog>
 
 class StringsExtractTool;
-class KByteArrayDocument;
 class QListWidget;
 
 class StringsExtractDialog : public KDialog

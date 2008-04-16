@@ -29,7 +29,6 @@
 #include <QtCore/QByteArray>
 #include <QtCore/QString>
 
-class QSpinBox;
 class QCheckBox;
 class KComboBox;
 class KByteArrayValidator;

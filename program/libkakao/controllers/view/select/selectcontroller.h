@@ -29,7 +29,6 @@
 
 class KXmlGuiWindow;
 class KAction;
-class KViewManager;
 namespace KDE { namespace If {
 class DataSelectable;
 } }

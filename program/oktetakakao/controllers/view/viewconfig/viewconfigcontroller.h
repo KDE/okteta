@@ -29,7 +29,6 @@
 class KXmlGuiWindow;
 class KSelectAction;
 class KToggleAction;
-class KViewManager;
 namespace KHEUI {
 class KByteArrayView;
 }

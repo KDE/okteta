@@ -27,9 +27,6 @@
 // Qt
 #include <QtCore/QObject>
 
-namespace KHE {
-class KSection;
-}
 
 namespace KPieceTable
 {
