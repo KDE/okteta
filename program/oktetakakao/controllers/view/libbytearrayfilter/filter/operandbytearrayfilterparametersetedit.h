@@ -40,6 +40,7 @@ class OperandByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterPar
 
   public: // AbstractByteArrayFilterParameterSetEdit API
     virtual void setValues( const AbstractByteArrayFilterParameterSet *parameterSet );
+    virtual void setCharCodec( const QString &charCodecName );
     virtual void getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const;
     virtual bool isValid() const;
 

@@ -77,6 +77,11 @@ void OperandByteArrayFilterParameterSetEdit::setValues( const AbstractByteArrayF
     mAlignAtEndCheckBox->setChecked( operandParameterSet->alignAtEnd() );
 }
 
+void OperandByteArrayFilterParameterSetEdit::setCharCodec( const QString &charCodecName )
+{
+    mOperandEdit->setCharCode( charCodecName );
+}
+
 void OperandByteArrayFilterParameterSetEdit::getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const
 {
     OperandByteArrayFilterParameterSet *operandParameterSet =

@@ -31,6 +31,7 @@ AbstractByteArrayFilterParameterSetEdit::AbstractByteArrayFilterParameterSetEdit
  : QWidget( parent ), d( new Private() )
 {}
 
+void AbstractByteArrayFilterParameterSetEdit::setCharCodec( const QString &charCodecName ) { Q_UNUSED(charCodecName) }
 bool AbstractByteArrayFilterParameterSetEdit::isValid() const { return true; }
 
 AbstractByteArrayFilterParameterSetEdit::~AbstractByteArrayFilterParameterSetEdit()

@@ -40,7 +40,10 @@ class AbstractByteArrayFilterParameterSetEdit : public QWidget
 
   public: // API to be implemented
     virtual void setValues( const AbstractByteArrayFilterParameterSet *parameterSet ) = 0;
+    /// default does nothing
+    virtual void setCharCodec( const QString &charCodecName );
     virtual void getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const = 0;
+    /// default returns true
     virtual bool isValid() const;
 
   Q_SIGNALS:
