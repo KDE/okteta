@@ -80,6 +80,8 @@ int OktetaProgram::execute()
 {
     KApplication programCore;
 
+    KGlobal::locale()->insertCatalog( "liboktetacore" );
+
     // started by session management?
     if( programCore.isSessionRestored() )
     {
