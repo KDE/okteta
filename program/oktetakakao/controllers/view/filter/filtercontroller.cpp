@@ -98,8 +98,6 @@ void FilterController::loadFilter()
     filter = new ShiftByteArrayFilter();
     mTool->addFilter( filter );
     mView->addParameterEdit( filter->name(), new RotateByteArrayFilterParameterSetEdit() );
-
-//     mView->setCharCode( mTool->charCodecName() );
 }
 
 
