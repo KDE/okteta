@@ -122,7 +122,7 @@ bool KFileByteArrayModelPrivate::ensurePageLoaded( unsigned int pageIndex ) cons
     if( m_noOfFreePages < 1 )
     {
         // free the page which is the furthest away from the page we are loading
-        if( abs(m_firstPage-pageIndex) > abs(m_lastPage-pageIndex) )
+        if( abs(m_firstPage-(long)pageIndex) > abs(m_lastPage-(long)pageIndex) )
             while( !freePage(m_firstPage++) );
         else
             while( !freePage(m_lastPage--) );
