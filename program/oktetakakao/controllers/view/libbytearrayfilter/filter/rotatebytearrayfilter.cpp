@@ -31,7 +31,9 @@
 static const int BitsPerByte = 8;
 
 RotateByteArrayFilter::RotateByteArrayFilter()
- : AbstractByteArrayFilter( i18nc("name of the filter","ROTATE data") )
+ : AbstractByteArrayFilter(
+     i18nc("name of the filter; it moves the bits and pushes the ones over the end to the begin again",
+           "ROTATE data") )
 {}
 
 AbstractByteArrayFilterParameterSet *RotateByteArrayFilter::parameterSet() { return &mParameterSet; }

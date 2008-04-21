@@ -29,7 +29,9 @@
 
 
 XOrByteArrayFilter::XOrByteArrayFilter()
- : AbstractByteArrayFilter( i18nc("name of the filter","operand XOR data") )
+ : AbstractByteArrayFilter(
+     i18nc("name of the filter; it does a logic XOR operation",
+           "operand XOR data") )
 {}
 
 AbstractByteArrayFilterParameterSet *XOrByteArrayFilter::parameterSet() { return &mParameterSet; }

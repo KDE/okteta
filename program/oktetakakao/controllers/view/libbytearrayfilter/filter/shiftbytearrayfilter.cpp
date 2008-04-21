@@ -32,7 +32,9 @@
 static const int BitsPerByte = 8;
 
 ShiftByteArrayFilter::ShiftByteArrayFilter()
- : AbstractByteArrayFilter( i18nc("name of the filter","SHIFT data") )
+ : AbstractByteArrayFilter(
+     i18nc("name of the filter; it moves the bits, setting freed ones to zero",
+           "SHIFT data") )
 {}
 
 AbstractByteArrayFilterParameterSet *ShiftByteArrayFilter::parameterSet() { return &mParameterSet; }

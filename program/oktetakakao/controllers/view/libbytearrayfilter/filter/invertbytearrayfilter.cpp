@@ -29,7 +29,9 @@
 
 
 InvertByteArrayFilter::InvertByteArrayFilter()
- : AbstractByteArrayFilter( i18nc("name of the filter","INVERT data") )
+ : AbstractByteArrayFilter(
+     i18nc("name of the filter; it switches all bits from 0 to 1 and 1 to 0 respectivly",
+           "INVERT data") )
 {}
 
 AbstractByteArrayFilterParameterSet *InvertByteArrayFilter::parameterSet() { return &mNoParameterSet; }
