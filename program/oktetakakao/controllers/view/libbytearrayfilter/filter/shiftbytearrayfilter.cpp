@@ -26,8 +26,8 @@
 #include <kabstractbytearraymodel.h>
 // KDE
 #include <KLocale>
-
-#include <stdlib.h>
+// Qt
+#include <QtCore/QtGlobal>
 
 static const int BitsPerByte = 8;
 
@@ -44,7 +44,7 @@ bool ShiftByteArrayFilter::filter( char *result,
 {
     const int groupSize = mParameterSet.groupSize();
     const int groupBitCount = (groupSize * BitsPerByte );
-    const int groupShiftBitWidth = abs( mParameterSet.moveBitWidth() ) % groupBitCount;
+    const int groupShiftBitWidth = qAbs( mParameterSet.moveBitWidth() ) % groupBitCount;
 
     const int shiftByteWidth = groupShiftBitWidth / BitsPerByte;
     const int shiftBitWidth = groupShiftBitWidth - shiftByteWidth * BitsPerByte;
