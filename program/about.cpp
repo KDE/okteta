@@ -25,6 +25,8 @@
 // KDE
 #include <KLocale>
 
+#include <kdeversion.h>
+
 
 // Program
 static const char ProgramId[] =          "okteta";
@@ -41,7 +43,9 @@ OktetaAboutData::OktetaAboutData()
               ki18n("Copyright 2006-2008 Friedrich W. H. Kossebau"), //copyright
               ki18n("Edit files as an array of bytes") ) // comment
 {
+#if KDE_IS_VERSION(4,0,70)
     addLicense(KAboutData::License_GPL_V3);
+#endif
     setOrganizationDomain( "kde.org" );
     addAuthor( ki18n("Friedrich W. H. Kossebau"), // name
                ki18n("Author"), // task
