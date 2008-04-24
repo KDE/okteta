@@ -48,7 +48,7 @@ bool PieceTable::getStorageData( int *storageId, int *storageOffset, int dataOff
     bool result = false;
     // TODO: use width or offset from current and next?
     KHE::KSection dataSection( 0, -1 );
-    foreach( Piece piece, mList )
+    foreach( const Piece &piece, mList )
     {
         dataSection.setEndByWidth( piece.width() );
 

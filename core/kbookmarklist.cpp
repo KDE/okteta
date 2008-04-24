@@ -60,7 +60,7 @@ void KBookmarkList::addBookmark( const KBookmark &bookmark )
 
 void KBookmarkList::addBookmarks( const QList<KHECore::KBookmark> &bookmarks )
 {
-    foreach( KBookmark bookmark, bookmarks )
+    foreach( const KBookmark &bookmark, bookmarks )
         addBookmark( bookmark );
 }
 
@@ -82,7 +82,7 @@ void KBookmarkList::removeBookmark( const KBookmark &bookmark )
 
 void KBookmarkList::removeBookmarks( const QList<KHECore::KBookmark> &bookmarks )
 {
-    foreach( KBookmark bookmark, bookmarks )
+    foreach( const KBookmark &bookmark, bookmarks )
         removeBookmark( bookmark );
 }
 
@@ -147,7 +147,7 @@ bool KBookmarkList::adjustToSwapped( int firstPartStart, int secondPartStart, in
 QList<KHECore::KBookmark> KBookmarkList::list() const
 {
     QList<KHECore::KBookmark> result;
-    foreach( KBookmark bookmark, *this )
+    foreach( const KBookmark &bookmark, *this )
         result.append( bookmark );
     return result;
 }

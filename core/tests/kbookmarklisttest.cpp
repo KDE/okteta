@@ -239,7 +239,7 @@ void KBookmarkListTest::testAdjustToSwapped()
     QVERIFY( !bookmarkList.isEmpty() );
     QCOMPARE( bookmarkList.count(), 5 );
     QList<int>::ConstIterator oit = newOffsets.begin();
-    foreach( KBookmark bookmark, bookmarkList )
+    foreach( const KBookmark &bookmark, bookmarkList )
         QCOMPARE( bookmark.offset(), *oit++ );
 }
 

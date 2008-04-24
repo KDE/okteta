@@ -1080,7 +1080,7 @@ void KByteArrayView::onContentsChanged( const KHE::ArrayChangeMetricsList &chang
 void KByteArrayView::onBookmarksChange( const QList<KHECore::KBookmark> &bookmarks )
 {
 
-    foreach( KHECore::KBookmark bookmark, bookmarks )
+    foreach( const KHECore::KBookmark &bookmark, bookmarks )
     {
         const int position = bookmark.offset();
         mDataRanges->addChangedRange( position, position );

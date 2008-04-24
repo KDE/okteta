@@ -73,7 +73,7 @@ void StringsExtractDialog::onStringsChanged()
 {
     mListView->clear();
 
-    foreach( ContainedString string, mTool->containedStringList() )
+    foreach( const ContainedString &string, mTool->containedStringList() )
         mListView->addItem( string.string() );
 }
 
