@@ -48,13 +48,9 @@ Fixed after 0.1 Beta 2:
 * version control ignored readonly status
 * adaption of filter parameter edit to char coding changes
 
-In review:
-------------------------
-* fix replace problem
-
-After passing review:
 For KDE 4.1:
 ----------------------------------
+* fix replace problem
 * make printing support only selection
 * ask artists for own icon
 * add support for memory mapped files (includes enabling overwrite controller again)
