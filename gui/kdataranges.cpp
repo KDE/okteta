@@ -42,7 +42,7 @@ KDataRanges::~KDataRanges()
 
 void KDataRanges::reset()
 {
-  Selection.cancel();
+  mSelection.cancel();
   FirstWordSelection.unset();
   Marking.unset();
   ChangedRanges.clear();
@@ -68,63 +68,63 @@ void KDataRanges::removeFurtherSelections()
 
 void KDataRanges::setSelection( const KHE::KSection &S )
 {
-  bool Changed = Selection.isValid();
+  bool Changed = mSelection.isValid();
   if( Changed )
-    addChangedRange( Selection.section() );
-  Selection = S;
-  addChangedRange( Selection.section() );
+    addChangedRange( mSelection.section() );
+  mSelection = S;
+  addChangedRange( mSelection.section() );
 }
 
 void KDataRanges::setSelectionStart( int StartIndex )
 {
-  bool Changed = Selection.isValid();
+  bool Changed = mSelection.isValid();
   if( Changed )
-    addChangedRange( Selection.section() );
+    addChangedRange( mSelection.section() );
 
-  Selection.setStart( StartIndex );
+  mSelection.setStart( StartIndex );
 }
 
 
 void KDataRanges::setSelectionEnd( int EndIndex )
 {
-  KHE::KSection OldSelection = Selection.section();
-  Selection.setEnd( EndIndex );
+  KHE::KSection OldSelection = mSelection.section();
+  mSelection.setEnd( EndIndex );
 
   // TODO: think about rather building a diff of the sections
   if( !OldSelection.isValid() )
   {
-    addChangedRange( Selection.section() );
+    addChangedRange( mSelection.section() );
     return;
   }
-  if( !Selection.isValid() )
+  if( !mSelection.isValid() )
   {
     addChangedRange( OldSelection );
     return;
   }
 
-  if( OldSelection == Selection.section() )
+  if( OldSelection == mSelection.section() )
     return;
   int CS;
   int CE;
   // changes at the end?
-  if( Selection.start() == OldSelection.start() )
+  if( mSelection.start() == OldSelection.start() )
   {
     CS = OldSelection.end()+1;
-    CE = Selection.end();
+    CE = mSelection.end();
     if( CE < CS )
     {
-      CS = Selection.end()+1;
+      CS = mSelection.end()+1;
       CE = OldSelection.end();
     }
   }
   // changes at the start?
-  else if( Selection.end() == OldSelection.end() )
+  else if( mSelection.end() == OldSelection.end() )
   {
     CS = OldSelection.start();
-    CE = Selection.start()-1;
+    CE = mSelection.start()-1;
     if( CE < CS )
     {
-      CS = Selection.start();
+      CS = mSelection.start();
       CE = OldSelection.start()-1;
     }
   }
@@ -132,10 +132,10 @@ void KDataRanges::setSelectionEnd( int EndIndex )
   else
   {
     CS = OldSelection.start();
-    CE = Selection.end();
+    CE = mSelection.end();
     if( CE < CS )
     {
-      CS = Selection.start();
+      CS = mSelection.start();
       CE = OldSelection.end();
     }
   }
@@ -153,12 +153,12 @@ KHE::KSection KDataRanges::removeSelection( int id )
   if( id > 0 )
     return KHE::KSection();
 
-  KHE::KSection Section = Selection.section();
+  KHE::KSection Section = mSelection.section();
   bool Changed = Section.isValid();
   if( Changed )
     addChangedRange( Section );
 
-  Selection.cancel();
+  mSelection.cancel();
   FirstWordSelection.unset();
 
   return Section;
@@ -167,10 +167,10 @@ KHE::KSection KDataRanges::removeSelection( int id )
 
 bool KDataRanges::overlapsSelection( int FirstIndex, int LastIndex, int *SI, int *EI ) const
 {
-  if( Selection.section().overlaps(KHE::KSection(FirstIndex,LastIndex)) )
+  if( mSelection.section().overlaps(KHE::KSection(FirstIndex,LastIndex)) )
   {
-    *SI = Selection.start();
-    *EI = Selection.end();
+    *SI = mSelection.start();
+    *EI = mSelection.end();
     return true;
   }
   return false;
@@ -191,7 +191,7 @@ bool KDataRanges::overlapsMarking( int FirstIndex, int LastIndex, int *SI, int *
 
 const KHE::KSection *KDataRanges::firstOverlappingSelection( const KHE::KSection &Range ) const
 {
-  return Selection.section().overlaps(Range) ? &Selection.section() : 0;
+  return mSelection.section().overlaps(Range) ? &mSelection.section() : 0;
 }
 
 
@@ -295,18 +295,18 @@ void KDataRanges::setFirstWordSelection( const KHE::KSection &Section )
  void KDataRanges::ensureWordSelectionForward( bool Forward )
  {
    // in the anchor not on the right side?
-   if( Selection.isForward() != Forward )
+   if( mSelection.isForward() != Forward )
    {
      setSelectionEnd( Forward ? FirstWordSelection.start() : FirstWordSelection.end()+1 );
 
-     Selection.setForward( Forward );
+     mSelection.setForward( Forward );
    }
  }
 
 
 void KDataRanges::adaptSelectionToChanges( const KHE::ArrayChangeMetricsList &changeList )
 {
-    if( !Selection.isValid() )
+    if( !mSelection.isValid() )
         return;
 
     for( int i=0; i<changeList.size(); ++i )
@@ -314,9 +314,9 @@ void KDataRanges::adaptSelectionToChanges( const KHE::ArrayChangeMetricsList &ch
         const KHE::ArrayChangeMetrics &change = changeList[i];
         //TODO: change parameters to ArrayChangeMetrics
         if( change.type() == KHE::ArrayChangeMetrics::Replacement )
-            Selection.adaptToReplacement( change.offset(), change.removeLength(), change.insertLength() );
+            mSelection.adaptToReplacement( change.offset(), change.removeLength(), change.insertLength() );
         else if( change.type() == KHE::ArrayChangeMetrics::Swapping )
-            Selection.adaptToSwap( change.offset(), change.secondStart(), change.secondLength() );
+            mSelection.adaptToSwap( change.offset(), change.secondStart(), change.secondLength() );
     }
 }
 

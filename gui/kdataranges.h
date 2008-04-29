@@ -25,7 +25,7 @@
 
 // lib
 #include "kdatalayout.h"
-#include "kselection.h"
+#include "selection.h"
 #include "coordrangelist.h"
 // Okteta core
 #include <ksectionlist.h>
@@ -108,7 +108,7 @@ class KDataRanges
     bool Modified;
 
     KHE::KSection Marking;
-    KSelection Selection;
+    Selection mSelection;
     /** memories first selected word on wordwise selection */
     KHE::KSection FirstWordSelection;
 
@@ -120,19 +120,19 @@ class KDataRanges
 
 inline int KDataRanges::noOfSelections()  const { return 1; }
 
-inline int KDataRanges::selectionStart()  const { return Selection.start(); }
-inline int KDataRanges::selectionEnd()    const { return Selection.end(); }
-inline KHE::KSection KDataRanges::selection()  const { return Selection.section(); }
+inline int KDataRanges::selectionStart()  const { return mSelection.start(); }
+inline int KDataRanges::selectionEnd()    const { return mSelection.end(); }
+inline KHE::KSection KDataRanges::selection()  const { return mSelection.section(); }
 inline KHE::KSection KDataRanges::firstWordSelection()  const { return FirstWordSelection; }
-inline int KDataRanges::selectionLength() const { return Selection.section().width(); }
+inline int KDataRanges::selectionLength() const { return mSelection.section().width(); }
 inline bool KDataRanges::isModified()     const { return Modified; }
 
-inline bool KDataRanges::hasSelection()             const { return Selection.isValid(); }
-inline bool KDataRanges::selectionStarted()         const { return Selection.started(); }
-inline bool KDataRanges::selectionJustStarted()     const { return Selection.justStarted(); }
+inline bool KDataRanges::hasSelection()             const { return mSelection.isValid(); }
+inline bool KDataRanges::selectionStarted()         const { return mSelection.started(); }
+inline bool KDataRanges::selectionJustStarted()     const { return mSelection.justStarted(); }
 inline bool KDataRanges::hasFirstWordSelection()    const { return FirstWordSelection.isValid(); }
 inline bool KDataRanges::hasMarking()               const { return Marking.isValid(); }
-inline bool KDataRanges::selectionIncludes( int Index ) const { return Selection.section().includes( Index ); }
+inline bool KDataRanges::selectionIncludes( int Index ) const { return mSelection.section().includes( Index ); }
 inline bool KDataRanges::markingIncludes( int Index )   const { return Marking.includes( Index ); }
 
 inline void KDataRanges::setModified( bool M )           { Modified = M; }

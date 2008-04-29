@@ -20,13 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KSELECTIONTEST_H
-#define KSELECTIONTEST_H
+#ifndef SELECTIONTEST_H
+#define SELECTIONTEST_H
 
 // Qt
 #include <QtCore/QObject>
 
-class KSelectionTest : public QObject
+class SelectionTest : public QObject
 {
   Q_OBJECT
 

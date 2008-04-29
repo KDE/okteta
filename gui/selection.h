@@ -9,7 +9,7 @@
     version 2.1 of the License, or (at your option) version 3, or any
     later version accepted by the membership of KDE e.V. (or its
     successor approved by the membership of KDE e.V.), which shall
-    act as a proxy defined in Section 6 of version 3 of the license.
+    act as a proxy defined in mSection 6 of version 3 of the license.
 
     This library is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_KSELECTION_H
-#define KHE_UI_KSELECTION_H
+#ifndef KHE_UI_SELECTION_H
+#define KHE_UI_SELECTION_H
 
 // commonlib
 #include <ksection.h>
@@ -41,33 +41,33 @@ namespace KHEUI
   *
   *@author Friedrich W. H.  Kossebau
   */
-class KSelection
+class Selection
 {
   public:
     /** creates a selection with a given start.
-      * @param Index index in front of which the selection begins
+      * @param index index in front of which the selection begins
       */
-    explicit KSelection( int Index );
+    explicit Selection( int index );
     /** creates an invalid selection */
-    KSelection();
-    ~KSelection();
+    Selection();
+    ~Selection();
 
   public:
-    KSelection &operator=( const KSelection &S );
-    KSelection &operator=( const KHE::KSection &S );
+    Selection &operator=( const Selection &other );
+    Selection &operator=( const KHE::KSection &section );
 
   public: // modification access
     /** starts the selection.
       * For this the anchor, start and end are set to the given index,
       * so the initial selection is empty.
-      * @param Index index in front of which the selection begins
+      * @param index index in front of which the selection begins
       */
-    void setStart( int Index );
+    void setStart( int index );
     /** sets the end of the current selection.
       * If the end is before the start the selection will reach from the given index 
-      * @param Index index in front of which the selection ends
+      * @param index index in front of which the selection ends
       */
-    void setEnd( int Index );
+    void setEnd( int index );
     /** sets the selection to be invalid
       */
     void cancel();
@@ -75,13 +75,13 @@ class KSelection
       * @param if true to the start, otherwise to the end
       * If the selection has not started the behaviour is undefined.
       */
-    void setForward( bool Forward = true );
+    void setForward( bool forward = true );
     /** swaps anchor from start to end or vice versa.
       * If the selection has not started the behaviour is undefined.
       */
     void reverse();
 
-    void adaptToReplacement( int Pos, int RemovedLength, int InsertedLength );
+    void adaptToReplacement( int pos, int removedLength, int insertedLength );
     void adaptToSwap( int firstOffset, int secondOffset, int secondLength );
 
   public: // value access
@@ -113,102 +113,102 @@ class KSelection
     bool isForward() const;
 
   protected:
-    /** Section */
-    KHE::KSection Section;
+    /** mSection */
+    KHE::KSection mSection;
     /** cursor index where the selection starts */
-    int Anchor;
+    int mAnchor;
 };
 
 
-inline KSelection::KSelection() : Anchor( -1 ) {}
-inline KSelection::KSelection( int Index ) : Anchor( Index )  {}
-inline KSelection::~KSelection() {}
+inline Selection::Selection() : mAnchor( -1 ) {}
+inline Selection::Selection( int index ) : mAnchor( index )  {}
+inline Selection::~Selection() {}
 
-inline KSelection &KSelection::operator=( const KSelection &S )
+inline Selection &Selection::operator=( const Selection &other )
 {
-  Section = S.Section;
-  Anchor = S.Anchor;
-  return *this;
+    mSection = other.mSection;
+    mAnchor = other.mAnchor;
+    return *this;
 }
 
-inline KSelection &KSelection::operator=( const KHE::KSection &S )
+inline Selection &Selection::operator=( const KHE::KSection &section )
 {
-  Section = S;
-  Anchor = S.start();
-  return *this;
-}
-
-
-inline void KSelection::setStart( int Index )
-{
-  Anchor = Index;
-  Section.unset();
+    mSection = section;
+    mAnchor = section.start();
+    return *this;
 }
 
 
-inline void KSelection::setEnd( int Index )
+inline void Selection::setStart( int index )
 {
-  // nothing selected?
-  if( Index == Anchor )
-    Section.unset();
-  // selecting forwards?
-  else if( Index > Anchor )
-  {
-    Section.setStart( Anchor );
-    Section.setEnd( Index-1 );
-  }
-  // selecting backwards
-  else
-  {
-    Section.setStart( Index );
-    Section.setEnd( Anchor-1 );
-  }
+    mAnchor = index;
+    mSection.unset();
 }
 
-inline void KSelection::reverse()
+
+inline void Selection::setEnd( int index )
 {
-   Anchor = isForward() ? Section.end()+1 : Section.start();
+    // nothing selected?
+    if( index == mAnchor )
+        mSection.unset();
+    // selecting forwards?
+    else if( index > mAnchor )
+    {
+        mSection.setStart( mAnchor );
+        mSection.setEnd( index-1 );
+    }
+    // selecting backwards
+    else
+    {
+        mSection.setStart( index );
+        mSection.setEnd( mAnchor-1 );
+    }
 }
 
-inline void KSelection::setForward( bool Forward )
+inline void Selection::reverse()
 {
-   Anchor = Forward ? Section.start() : Section.end()+1;
+    mAnchor = isForward() ? mSection.end()+1 : mSection.start();
 }
 
-inline const KHE::KSection &KSelection::section() const { return Section; }
-inline int KSelection::anchor()              const { return Anchor; }
-inline int KSelection::start()               const { return Section.start(); }
-inline int KSelection::end()                 const { return Section.end(); }
-
-inline void KSelection::cancel() { Anchor = -1; Section.unset(); }
-
-inline bool KSelection::isValid()     const { return Section.isValid(); }
-inline bool KSelection::started()     const { return Anchor != -1; }
-inline bool KSelection::justStarted() const { return Anchor != -1 && Section.start() == -1; }
-inline bool KSelection::isForward()   const { return Anchor == Section.start(); }
-
-inline void KSelection::adaptToReplacement( int Pos, int RemovedLength, int InsertedLength )
+inline void Selection::setForward( bool Forward )
 {
-  Section.adaptToReplacement( Pos, RemovedLength, InsertedLength );
-  Anchor = isForward() ? Section.start() : Section.end()+1;
+    mAnchor = Forward ? mSection.start() : mSection.end()+1;
 }
 
-inline void KSelection::adaptToSwap( int firstOffset, int secondOffset, int secondLength )
+inline const KHE::KSection &Selection::section() const { return mSection; }
+inline int Selection::anchor()              const { return mAnchor; }
+inline int Selection::start()               const { return mSection.start(); }
+inline int Selection::end()                 const { return mSection.end(); }
+
+inline void Selection::cancel() { mAnchor = -1; mSection.unset(); }
+
+inline bool Selection::isValid()     const { return mSection.isValid(); }
+inline bool Selection::started()     const { return mAnchor != -1; }
+inline bool Selection::justStarted() const { return mAnchor != -1 && mSection.start() == -1; }
+inline bool Selection::isForward()   const { return mAnchor == mSection.start(); }
+
+inline void Selection::adaptToReplacement( int pos, int removedLength, int insertedLength )
+{
+    mSection.adaptToReplacement( pos, removedLength, insertedLength );
+    mAnchor = isForward() ? mSection.start() : mSection.end()+1;
+}
+
+inline void Selection::adaptToSwap( int firstOffset, int secondOffset, int secondLength )
 {
     // no intersection?
-    if( Section.end() < firstOffset || Section.start() > secondOffset+secondLength-1 )
+    if( mSection.end() < firstOffset || mSection.start() > secondOffset+secondLength-1 )
         return;
 
     const KHE::KSection firstSection( firstOffset, secondOffset-1 );
-    if( firstSection.includes(Section) )
-        Section.moveBy( secondLength );
+    if( firstSection.includes(mSection) )
+        mSection.moveBy( secondLength );
     else
     {
         const KHE::KSection secondSection = KHE::KSection::fromWidth( secondOffset, secondLength );
-        if( secondSection.includes(Section) )
-            Section.moveBy( -firstSection.width() );
+        if( secondSection.includes(mSection) )
+            mSection.moveBy( -firstSection.width() );
         else
-            Section.unset();
+            mSection.unset();
     }
 }
 
