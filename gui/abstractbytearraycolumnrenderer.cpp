@@ -393,8 +393,8 @@ void AbstractByteArrayColumnRenderer::renderLinePositions( QPainter *painter, in
 
     // Go through the lines TODO: handle first and last line more effeciently
     // check for leading and trailing spaces
-    KHE::KSection linePositions( mLayout->firstPos(KCoord( _linePositions.start(), lineIndex )),
-                                 mLayout->lastPos( KCoord( _linePositions.end(),   lineIndex )) );
+    KHE::KSection linePositions( mLayout->firstPos(Coord( _linePositions.start(), lineIndex )),
+                                 mLayout->lastPos( Coord( _linePositions.end(),   lineIndex )) );
 
     // no bytes to paint?
     if( !mLayout->hasContent(lineIndex) )
@@ -402,7 +402,7 @@ void AbstractByteArrayColumnRenderer::renderLinePositions( QPainter *painter, in
 
     // check for leading and trailing spaces
     KHE::KSection byteIndizes =
-        KHE::KSection::fromWidth( mLayout->indexAtCoord(KCoord( linePositions.start(), lineIndex )), linePositions.width() );
+        KHE::KSection::fromWidth( mLayout->indexAtCoord(Coord( linePositions.start(), lineIndex )), linePositions.width() );
 
     unsigned int SelectionFlag = 0;
     unsigned int MarkingFlag = 0;

@@ -41,7 +41,7 @@ class CharByteArrayColumnRenderer;
 class KCharColTextExport : public KDataColTextExport
 {
   public:
-    KCharColTextExport( const CharByteArrayColumnRenderer* BF, const char *D, const KCoordRange &CR, const QString &CodecName );
+    KCharColTextExport( const CharByteArrayColumnRenderer* BF, const char *D, const CoordRange &CR, const QString &CodecName );
     virtual ~KCharColTextExport();
 
   protected: //API

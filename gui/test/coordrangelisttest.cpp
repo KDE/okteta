@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kcoordrangelisttest.h"
+#include "coordrangelisttest.h"
 
 // test object
-#include <kcoordrangelist.h>
+#include <coordrangelist.h>
 // Qt
 #include <QtTest/QtTest>
 
@@ -39,47 +39,47 @@ static const int LineDistance = 5;
 static const int Line3 = Line2 + LineDistance;
 static const int Line4 = Line3 + LineSize - 1;
 
-static KCoord Start1( Pos1, Line1 );
-static KCoord End1(   Pos2, Line2 );
-static KCoord Start2( Pos1, Line3 );
-static KCoord End2(   Pos2, Line4 );
+static Coord Start1( Pos1, Line1 );
+static Coord End1(   Pos2, Line2 );
+static Coord Start2( Pos1, Line3 );
+static Coord End2(   Pos2, Line4 );
 
 static const int BufferWidth = Pos2 + 5;
 
 
-void KCoordRangeListTest::testSimpleConstructor()
+void CoordRangeListTest::testSimpleConstructor()
 {
-  KCoordRangeList CoordRangeList;
+  CoordRangeList CoordRangeList;
   QVERIFY( CoordRangeList.isEmpty() );
 }
 
-void KCoordRangeListTest::testAddSingleSection()
+void CoordRangeListTest::testAddSingleSection()
 {
-  KCoordRangeList CoordRangeList;
+  CoordRangeList CoordRangeList;
 
-  KCoordRange CoordRange( Start1, End1 );
+  CoordRange CoordRange( Start1, End1 );
   CoordRangeList.addCoordRange( CoordRange );
   QCOMPARE( CoordRangeList.size(), 1 );
   QCOMPARE( CoordRangeList.first(), CoordRange );
 }
 
-void KCoordRangeListTest::testAddJoinableSections()
+void CoordRangeListTest::testAddJoinableSections()
 {
-  KCoordRangeList CoordRangeList;
+  CoordRangeList CoordRangeList;
 
-  KCoordRange CoordRange1( Start1, End1 );
-  KCoordRange CoordRange2( Start2, End2 );
+  CoordRange CoordRange1( Start1, End1 );
+  CoordRange CoordRange2( Start2, End2 );
   // in front
-  KCoord OtherStart( 0, 0 );
-  KCoord OtherEnd = Start1;
+  Coord OtherStart( 0, 0 );
+  Coord OtherEnd = Start1;
   OtherEnd.goLeft(0);
-  KCoordRange OtherCoordRange( OtherStart, OtherEnd );
+  CoordRange OtherCoordRange( OtherStart, OtherEnd );
   CoordRangeList.addCoordRange( CoordRange1 );
   CoordRangeList.addCoordRange( CoordRange2 );
   CoordRangeList.addCoordRange( OtherCoordRange );
 
   QCOMPARE( CoordRangeList.size(), 2 );
-  QCOMPARE( CoordRangeList.first(), KCoordRange(OtherCoordRange.start(),CoordRange1.end()) );
+  QCOMPARE( CoordRangeList.first(), CoordRange(OtherCoordRange.start(),CoordRange1.end()) );
   QCOMPARE( CoordRangeList.last(), CoordRange2 );
 
   // in the middle, with first
@@ -94,7 +94,7 @@ void KCoordRangeListTest::testAddJoinableSections()
   CoordRangeList.addCoordRange( OtherCoordRange );
 
   QCOMPARE( CoordRangeList.size(), 2 );
-  QCOMPARE( CoordRangeList.first(), KCoordRange(CoordRange1.start(),OtherCoordRange.end()) );
+  QCOMPARE( CoordRangeList.first(), CoordRange(CoordRange1.start(),OtherCoordRange.end()) );
   QCOMPARE( CoordRangeList.last(), CoordRange2 );
 
   // in the middle, with both
@@ -106,7 +106,7 @@ void KCoordRangeListTest::testAddJoinableSections()
   CoordRangeList.addCoordRange( OtherCoordRange );
 
   QCOMPARE( CoordRangeList.size(), 1 );
-  QCOMPARE( CoordRangeList.first(), KCoordRange(CoordRange1.start(),CoordRange2.end()) );
+  QCOMPARE( CoordRangeList.first(), CoordRange(CoordRange1.start(),CoordRange2.end()) );
 
   // in the middle, with last
   CoordRangeList.clear();
@@ -118,7 +118,7 @@ void KCoordRangeListTest::testAddJoinableSections()
 
   QCOMPARE( CoordRangeList.size(), 2 );
   QCOMPARE( CoordRangeList.first(), CoordRange1 );
-  QCOMPARE( CoordRangeList.last(), KCoordRange(OtherCoordRange.start(),CoordRange2.end()) );
+  QCOMPARE( CoordRangeList.last(), CoordRange(OtherCoordRange.start(),CoordRange2.end()) );
 
   // behind
   CoordRangeList.clear();
@@ -133,20 +133,20 @@ void KCoordRangeListTest::testAddJoinableSections()
 
   QCOMPARE( CoordRangeList.size(), 2 );
   QCOMPARE( CoordRangeList.first(), CoordRange1 );
-  QCOMPARE( CoordRangeList.last(), KCoordRange(CoordRange2.start(),OtherCoordRange.end()) );
+  QCOMPARE( CoordRangeList.last(), CoordRange(CoordRange2.start(),OtherCoordRange.end()) );
 }
 
-void KCoordRangeListTest::testAddNonJoinableSections()
+void CoordRangeListTest::testAddNonJoinableSections()
 {
-  KCoordRangeList CoordRangeList;
+  CoordRangeList CoordRangeList;
 
-  KCoordRange CoordRange1( Start1, End1 );
-  KCoordRange CoordRange2( Start2, End2 );
+  CoordRange CoordRange1( Start1, End1 );
+  CoordRange CoordRange2( Start2, End2 );
   // in front
-  KCoord OtherStart( 0, 0 );
-  KCoord OtherEnd = Start1;
+  Coord OtherStart( 0, 0 );
+  Coord OtherEnd = Start1;
   OtherEnd.goLeft(2);
-  KCoordRange OtherCoordRange( OtherStart, OtherEnd );
+  CoordRange OtherCoordRange( OtherStart, OtherEnd );
   CoordRangeList.addCoordRange( CoordRange1 );
   CoordRangeList.addCoordRange( CoordRange2 );
   CoordRangeList.addCoordRange( OtherCoordRange );
@@ -187,4 +187,4 @@ void KCoordRangeListTest::testAddNonJoinableSections()
 }
 
 
-QTEST_MAIN( KCoordRangeListTest )
+QTEST_MAIN( CoordRangeListTest )

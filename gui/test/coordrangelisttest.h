@@ -20,27 +20,21 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KCOORDRANGETEST_H
-#define KCOORDRANGETEST_H
+#ifndef KSECTIONLISTTEST_H
+#define KSECTIONLISTTEST_H
 
 // Qt
 #include <QtCore/QObject>
 
-class KCoordRangeTest : public QObject
+class CoordRangeListTest : public QObject
 {
   Q_OBJECT
 
   private Q_SLOTS: // test functions
-    void testConstructorByCoords();
-    void testConstructorByPosLines();
     void testSimpleConstructor();
-    void testSetGetStart();
-    void testSetGetEnd();
-    void testIsEmpty();
-    void testCompare();
-    void testIncludes();
-    void testIncludesLine();
-    void testWidth();
+    void testAddSingleSection();
+    void testAddJoinableSections();
+    void testAddNonJoinableSections();
 };
 
 #endif

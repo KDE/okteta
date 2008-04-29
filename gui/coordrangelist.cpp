@@ -20,22 +20,22 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kcoordrangelist.h"
+#include "coordrangelist.h"
 
 
 namespace KHEUI {
 
-KCoordRangeList::KCoordRangeList()
+CoordRangeList::CoordRangeList()
 {
 }
 
 
-KCoordRangeList::~KCoordRangeList()
+CoordRangeList::~CoordRangeList()
 {
 }
 
 
-void KCoordRangeList::addCoordRange( KCoordRange NewCoordRange )
+void CoordRangeList::addCoordRange( CoordRange NewCoordRange )
 {
   if( !NewCoordRange.isValid() )
     return;
@@ -59,7 +59,7 @@ void KCoordRangeList::addCoordRange( KCoordRange NewCoordRange )
       // Start of the combined sections is the smaller one
       NewCoordRange.extendStartTo( (*S).start() );
       // next we search all the overlapping sections and keep the highest end index
-      KCoord End((*S).end());
+      Coord End((*S).end());
       iterator LS = S;
       for( ++LS; LS!=end(); ++LS )
       {

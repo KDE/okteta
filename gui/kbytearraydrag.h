@@ -25,7 +25,7 @@
 
 // lib
 #include "khe.h"
-#include "kcoordrange.h"
+#include "coordrange.h"
 #include "kcoltextexport.h"
 // Qt
 #include <QtCore/QMimeData>
@@ -47,7 +47,7 @@ class KByteArrayDrag : public QMimeData
 {
   public:
     // TODO: make this call somewhat more generic
-    KByteArrayDrag( const QByteArray &, const KCoordRange &Range,
+    KByteArrayDrag( const QByteArray &, const CoordRange &Range,
                  const OffsetColumnRenderer *OC, const ValueByteArrayColumnRenderer *HC, const CharByteArrayColumnRenderer *TC,
                  QChar SC, QChar UC, const QString &CN );
     virtual ~KByteArrayDrag();
@@ -64,7 +64,7 @@ class KByteArrayDrag : public QMimeData
   protected:
     QByteArray BufferCopy;
 
-    KCoordRange CoordRange;
+    CoordRange mCoordRange;
     /** collection of all the columns. All columns will be autodeleted. */
     KColTextExportPtr Columns[5];
     uint NoOfCol;

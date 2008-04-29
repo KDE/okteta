@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2003 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,31 +20,38 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_KCOORDRANGELIST_H
-#define KHE_UI_KCOORDRANGELIST_H
+#ifndef KBUFFERCOORDTEST_H
+#define KBUFFERCOORDTEST_H
 
-
-// lib
-#include "kcoordrange.h"
 // Qt
-#include <QtCore/QLinkedList>
+#include <QtCore/QObject>
 
-
-namespace KHEUI {
-
-/**
-@author Friedrich W. H.  Kossebau
-*/
-class KCoordRangeList : public QLinkedList<KCoordRange>
+class CoordTest : public QObject
 {
-  public:
-    KCoordRangeList();
-    ~KCoordRangeList();
+  Q_OBJECT
 
-  public:
-    void addCoordRange( KCoordRange R );
+  private Q_SLOTS: // test functions
+    void testConstructor();
+    void testSetConstructor();
+    void testFromIndexConstructor();
+    void testCopyConstructor();
+    void testEquals();
+    void testAssign();
+    void testSetPosLine();
+    void testSet();
+    void testIsAtStart();
+    void testGotoStart();
+    void testGo();
+    void testGoN();
+    void testGotoControlled();
+    void testGoLineStart();
+    void testGoLineEnd();
+    void testCompareOperator();
+    void testIsBelowIsAbove();
+    void testIsLaterPriorInLineThan();
+    void testIsBeforeLineStart();
+    void testIsBeforeLineEnd();
+    void testIndexNWidth();
 };
-
-}
 
 #endif

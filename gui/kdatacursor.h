@@ -24,7 +24,7 @@
 #define KHE_UI_KDATACURSOR_H
 
 // lib
-#include "kcoord.h"
+#include "coord.h"
 
 namespace KHE {
 class ArrayChangeMetricsList;
@@ -82,7 +82,7 @@ class KDataCursor
     /** the line of the actual coord */
     int line() const;
     /** the actual coord */
-    KCoord coord() const;
+    Coord coord() const;
     /** true if the cursor is located to the right of the actual coord but still shown at the coord */
     bool isBehind() const;
     /** returns the real index. That is if the cursor is tagged as "behind" the current index
@@ -106,9 +106,9 @@ class KDataCursor
 
   public: // navigation commands
     void gotoIndex( int I );
-    void gotoCoord( const KCoord &C );
+    void gotoCoord( const Coord &C );
     void gotoCIndex( int I );
-    void gotoCCoord( const KCoord &C );
+    void gotoCCoord( const Coord &C );
     void gotoRealIndex();
 
     void gotoPreviousByte();
@@ -153,7 +153,7 @@ class KDataCursor
     /** Position in buffer */
     int mIndex;
     /** Position and Line */
-    KCoord mCoord;
+    Coord mCoord;
 
     /** tells whether the cursor is actually behind the actual position.
       * This is used for selection to the end of a line or of the whole buffer.
@@ -168,7 +168,7 @@ class KDataCursor
 inline int KDataCursor::index()          const { return mIndex; }
 inline int KDataCursor::pos()            const { return mCoord.pos(); }
 inline int KDataCursor::line()           const { return mCoord.line(); }
-inline KCoord KDataCursor::coord()       const { return mCoord; }
+inline Coord KDataCursor::coord()       const { return mCoord; }
 inline bool KDataCursor::isBehind()      const { return mBehind; }
 inline int KDataCursor::realIndex()      const { return mBehind ? mIndex + 1 : mIndex; }
 

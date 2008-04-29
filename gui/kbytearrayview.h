@@ -47,7 +47,7 @@ class ArrayChangeMetricsList;
 namespace KHEUI
 {
 
-class KCoordRange;
+class CoordRange;
 
 class CharByteArrayColumnRenderer;
 class ValueByteArrayColumnRenderer;
@@ -55,7 +55,7 @@ class AbstractByteArrayColumnRenderer;
 class OffsetColumnRenderer;
 class BorderColumnRenderer;
 
-class KCoord;
+class Coord;
 class KDataCursor;
 class KDataLayout;
 class KDataRanges;
@@ -436,7 +436,7 @@ class OKTETAGUI_EXPORT KByteArrayView : public ColumnsView
     /** sets ChangedRange to the range of VisibleRange that is actually changed
       * @return true if there was a change within the visible range
       */
-    bool hasChanged( const KCoordRange &VisibleRange, KCoordRange *ChangedRange ) const;
+    bool hasChanged( const CoordRange &VisibleRange, CoordRange *ChangedRange ) const;
     void handleInternalDrag( QDropEvent *e );
 
   protected:
@@ -448,7 +448,7 @@ class OKTETAGUI_EXPORT KByteArrayView : public ColumnsView
     void adjustLayoutToSize();
     /** calls updateContent for the Column */
     void updateColumn( ColumnRenderer &Column );
-    void ensureVisible( const AbstractByteArrayColumnRenderer &Column, const KCoord &Coord );
+    void ensureVisible( const AbstractByteArrayColumnRenderer &Column, const Coord &Coord );
     void emitSelectionSignals();
     void adaptController();
 

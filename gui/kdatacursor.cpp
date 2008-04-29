@@ -251,7 +251,7 @@ void KDataCursor::gotoCIndex( int index )
 }
 
 
-void KDataCursor::gotoCCoord( const KCoord &coord )
+void KDataCursor::gotoCCoord( const Coord &coord )
 {
     if( mLayout->length() > 0 )
     {
@@ -299,7 +299,7 @@ void KDataCursor::gotoRealIndex()
 }
 
 
-void KDataCursor::gotoCoord( const KCoord &coord )
+void KDataCursor::gotoCoord( const Coord &coord )
 {
     mIndex = mLayout->indexAtCoord( coord );
     mCoord = coord;

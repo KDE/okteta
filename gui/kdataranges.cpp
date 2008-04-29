@@ -203,7 +203,7 @@ const KHE::KSection *KDataRanges::overlappingMarking( const KHE::KSection &Range
 /*
 bool KDataRanges::overlapsChanges( int FirstIndex, int LastIndex, int *SI, int *EI ) const
 {
-  for( KCoordRangeList::const_iterator S=ChangedRanges.begin(); S!=ChangedRanges.end(); ++S )
+  for( CoordRangeList::const_iterator S=ChangedRanges.begin(); S!=ChangedRanges.end(); ++S )
   {
     if( (*S).overlaps(KBuff(FirstIndex,LastIndex)) )
     {
@@ -230,10 +230,10 @@ bool KDataRanges::overlapsChanges( KHE::KSection Indizes, KHE::KSection *Changed
   return false;
 }
 */
-bool KDataRanges::overlapsChanges( const KCoordRange &Range, KCoordRange *ChangedRange ) const
+bool KDataRanges::overlapsChanges( const CoordRange &Range, CoordRange *ChangedRange ) const
 {
   // TODO: add a lastusedrange pointer for quicker access
-  for( KCoordRangeList::ConstIterator R=ChangedRanges.begin(); R!=ChangedRanges.end(); ++R )
+  for( CoordRangeList::ConstIterator R=ChangedRanges.begin(); R!=ChangedRanges.end(); ++R )
   {
     if( (*R).overlaps(Range) )
     {
@@ -259,7 +259,7 @@ void KDataRanges::addChangedRange( const KHE::KSection &S )
 }
 
 
-void KDataRanges::addChangedRange( const KCoordRange &NewRange )
+void KDataRanges::addChangedRange( const CoordRange &NewRange )
 {
   ChangedRanges.addCoordRange( NewRange );
 // kDebug() << "as range "<<NewRange.start().pos()<<","<<NewRange.start().line()<<"-"

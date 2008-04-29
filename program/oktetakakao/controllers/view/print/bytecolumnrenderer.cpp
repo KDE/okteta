@@ -381,8 +381,8 @@ void ByteColumnRenderer::renderLinePositions( QPainter *painter, int Line, const
 
     // Go through the lines TODO: handle first and last line more effeciently
     // check for leading and trailing spaces
-    KHE::KSection positions( mLayout->firstPos(KCoord( posInLine.start(), Line )),
-                             mLayout->lastPos( KCoord( posInLine.end(),  Line )) );
+    KHE::KSection positions( mLayout->firstPos(Coord( posInLine.start(), Line )),
+                             mLayout->lastPos( Coord( posInLine.end(),  Line )) );
 
     // no bytes to paint?
     if( !mLayout->hasContent(Line) )
@@ -390,7 +390,7 @@ void ByteColumnRenderer::renderLinePositions( QPainter *painter, int Line, const
 
     // check for leading and trailing spaces
     KHE::KSection indices =
-        KHE::KSection::fromWidth( mLayout->indexAtCoord(KCoord( positions.start(), Line )), positions.width() );
+        KHE::KSection::fromWidth( mLayout->indexAtCoord(Coord( positions.start(), Line )), positions.width() );
 
     positions.setEndByWidth( indices.width() );
     renderPlain( painter, positions, indices.start() );

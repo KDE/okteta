@@ -30,7 +30,7 @@
 
 namespace KHEUI {
 
-KValueColTextExport::KValueColTextExport( const ValueByteArrayColumnRenderer* HC, const char *D, const KCoordRange &CR )
+KValueColTextExport::KValueColTextExport( const ValueByteArrayColumnRenderer* HC, const char *D, const CoordRange &CR )
   : KDataColTextExport( HC, D, CR, HC->valueCodec()->encodingWidth() ),
    ByteCodec( KHECore::ValueCodec::createCodec(HC->valueCoding()) )
 {
@@ -49,10 +49,10 @@ void KValueColTextExport::print( QString *T ) const
   int p = 0;
   int pEnd = NoOfBytesPerLine;
   // correct boundaries
-  if( PrintLine == CoordRange.start().line() )
-    p = CoordRange.start().pos();
-  if( PrintLine == CoordRange.end().line() )
-    pEnd = CoordRange.end().pos()+1;
+  if( PrintLine == mCoordRange.start().line() )
+    p = mCoordRange.start().pos();
+  if( PrintLine == mCoordRange.end().line() )
+    pEnd = mCoordRange.end().pos()+1;
 
   QString E;
   E.resize( ByteCodec->encodingWidth() );

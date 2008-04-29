@@ -20,33 +20,33 @@ target_link_libraries( kselectiontest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY}
 
 ########### next target ###############
 
-set(kcoordtest_SRCS kcoordtest.cpp )
+set(coordtest_SRCS coordtest.cpp )
 
 
-kde4_add_unit_test(kcoordtest TESTNAME libokteta-gui-kcoordtest  ${kcoordtest_SRCS})
+kde4_add_unit_test(coordtest TESTNAME libokteta-gui-coordtest  ${coordtest_SRCS})
 
-target_link_libraries(kcoordtest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
-
-
-########### next target ###############
-
-set( kcoordrangetest_SRCS kcoordrangetest.cpp )
-
-kde4_add_unit_test(kcoordrangetest TESTNAME libokteta-gui-kcoordrangetest  ${kcoordrangetest_SRCS})
-
-target_link_libraries(kcoordrangetest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
+target_link_libraries(coordtest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
 
 ########### next target ###############
 
-set( kcoordrangelisttest_SRCS
-  ${SUTDIR}/kcoordrangelist.cpp
-  kcoordrangelisttest.cpp
+set( coordrangetest_SRCS coordrangetest.cpp )
+
+kde4_add_unit_test(coordrangetest TESTNAME libokteta-gui-coordrangetest  ${coordrangetest_SRCS})
+
+target_link_libraries(coordrangetest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
+
+
+########### next target ###############
+
+set( coordrangelisttest_SRCS
+  ${SUTDIR}/coordrangelist.cpp
+  coordrangelisttest.cpp
 )
 
-kde4_add_unit_test(kcoordrangelisttest TESTNAME libokteta-gui-kcoordrangelisttest  ${kcoordrangelisttest_SRCS})
+kde4_add_unit_test(coordrangelisttest TESTNAME libokteta-gui-coordrangelisttest  ${coordrangelisttest_SRCS})
 
-target_link_libraries(kcoordrangelisttest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
+target_link_libraries(coordrangelisttest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
 
 ########### next target ###############

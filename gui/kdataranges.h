@@ -26,7 +26,7 @@
 // lib
 #include "kdatalayout.h"
 #include "kselection.h"
-#include "kcoordrangelist.h"
+#include "coordrangelist.h"
 // Okteta core
 #include <ksectionlist.h>
 
@@ -68,7 +68,7 @@ class KDataRanges
 
     void addChangedRange( const KHE::KSection &S );
     void addChangedRange( int SI, int EI );
-    void addChangedRange( const KCoordRange &NewRange );
+    void addChangedRange( const CoordRange &NewRange );
     void adaptSelectionToChanges( const KHE::ArrayChangeMetricsList &changeList );
     void resetChangedRanges();
 
@@ -98,7 +98,7 @@ class KDataRanges
     bool overlapsMarking( int FirstIndex, int LastIndex, int *SI, int *EI ) const;
 //    bool overlapsChanges( int FirstIndex, int LastIndex, int *SI, int *EI ) const;
 //    bool overlapsChanges( KHE::KSection Indizes, KHE::KSection *ChangedRange ) const;
-    bool overlapsChanges( const KCoordRange &Range, KCoordRange *ChangedRange ) const;
+    bool overlapsChanges( const CoordRange &Range, CoordRange *ChangedRange ) const;
     const KHE::KSection *firstOverlappingSelection( const KHE::KSection &Range ) const;
     const KHE::KSection *overlappingMarking( const KHE::KSection &Range ) const;
 
@@ -112,7 +112,7 @@ class KDataRanges
     /** memories first selected word on wordwise selection */
     KHE::KSection FirstWordSelection;
 
-    KCoordRangeList ChangedRanges;
+    CoordRangeList ChangedRanges;
 
     KDataLayout *Layout;
 };

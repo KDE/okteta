@@ -89,11 +89,11 @@ static QTextCodec* codecForCharset( const QByteArray& Desc )
 */
 
 
-KByteArrayDrag::KByteArrayDrag( const QByteArray &D, const KCoordRange &Range,
+KByteArrayDrag::KByteArrayDrag( const QByteArray &D, const CoordRange &Range,
                           const OffsetColumnRenderer *OC, const ValueByteArrayColumnRenderer *HC, const CharByteArrayColumnRenderer *TC,
                           QChar SC, QChar UC, const QString &CN )
   :BufferCopy( D ),
-   CoordRange( Range ),
+   mCoordRange( Range ),
    NoOfCol( 0 ),
    SubstituteChar( SC ),
    UndefinedChar( UC ),
@@ -110,11 +110,11 @@ KByteArrayDrag::KByteArrayDrag( const QByteArray &D, const KCoordRange &Range,
       Columns[NoOfCol++] = new KBorderColTextExport();
     }
     if( HC )
-      Columns[NoOfCol++] = new KValueColTextExport( HC, BufferCopy.data(), CoordRange );
+      Columns[NoOfCol++] = new KValueColTextExport( HC, BufferCopy.data(), mCoordRange );
     if( TC )
     {
       if( HC ) Columns[NoOfCol++] = new KBorderColTextExport();
-      Columns[NoOfCol++] = new KCharColTextExport( TC, BufferCopy.data(), CoordRange, CodecName );
+      Columns[NoOfCol++] = new KCharColTextExport( TC, BufferCopy.data(), mCoordRange, CodecName );
     }
   }
 }
@@ -170,16 +170,16 @@ QString KByteArrayDrag::createColumnCopy() const
   for( uint i=0; i<NoOfCol; ++i )
     NeededChars += Columns[i]->charsPerLine();
   // scale with the number of lines
-  NeededChars *= CoordRange.lines();
+  NeededChars *= mCoordRange.lines();
   // find out needed size
   Result.reserve( NeededChars );
 
   // now fill
-  int l = CoordRange.start().line();
+  int l = mCoordRange.start().line();
   for( uint i=0; i<NoOfCol; ++i )
     Columns[i]->printFirstLine( &Result, l );
   Result.append('\n');
-  for( ++l; l<=CoordRange.end().line(); ++l )
+  for( ++l; l<=mCoordRange.end().line(); ++l )
   {
     for( uint i=0; i<NoOfCol; ++i )
       Columns[i]->printNextLine( &Result );

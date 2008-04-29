@@ -25,7 +25,7 @@
 
 // lib
 #include "kcoltextexport.h"
-#include "kcoordrange.h"
+#include "coordrange.h"
 // Qt
 #include <QtCore/QString>
 
@@ -39,7 +39,7 @@ class AbstractByteArrayColumnRenderer;
 class KDataColTextExport : public KColTextExport
 {
   public:
-    KDataColTextExport( const AbstractByteArrayColumnRenderer* BF, const char *D, KCoordRange CR, int BytesWidth );
+    KDataColTextExport( const AbstractByteArrayColumnRenderer* BF, const char *D, CoordRange CR, int BytesWidth );
     virtual ~KDataColTextExport();
 
   public: // API
@@ -58,7 +58,7 @@ class KDataColTextExport : public KColTextExport
 
   protected:
     const char *Data;
-    KCoordRange CoordRange;
+    CoordRange mCoordRange;
 
     int NoOfBytesPerLine;
 

@@ -40,9 +40,9 @@ QString KDataColTextExport::whiteSpace( uint s )
 }
 
 KDataColTextExport::KDataColTextExport( const AbstractByteArrayColumnRenderer* BufferColumn, const char *D,
-                                            KCoordRange CR, int ByteWidth )
+                                            CoordRange CR, int ByteWidth )
  : Data( D ),
-   CoordRange( CR )
+   mCoordRange( CR )
 {
   NoOfBytesPerLine = BufferColumn->layout()->noOfBytesPerLine();
   Pos = new int[NoOfBytesPerLine];

@@ -38,7 +38,7 @@ class ValueByteArrayColumnRenderer;
 class KValueColTextExport : public KDataColTextExport
 {
   public:
-    KValueColTextExport( const ValueByteArrayColumnRenderer* BF, const char *D, const KCoordRange &CR );
+    KValueColTextExport( const ValueByteArrayColumnRenderer* BF, const char *D, const CoordRange &CR );
     virtual ~KValueColTextExport();
 
   protected:

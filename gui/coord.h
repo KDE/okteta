@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_KCOORD_H
-#define KHE_UI_KCOORD_H
+#ifndef KHE_UI_COORD_H
+#define KHE_UI_COORD_H
 
 
 namespace KHEUI
@@ -37,41 +37,41 @@ namespace KHEUI
   * 
   * @author Friedrich W. H. Kossebau
   */
-class KCoord
+class Coord
 {
   public:
     /** constructs a section by width
      * @param SI starting index
      * @param W width of the section
      */
-    static KCoord fromIndex( int Index, int LineWidth );
+    static Coord fromIndex( int Index, int LineWidth );
   public:
     /** creates a coord with 0,0 */
-    KCoord();
-    KCoord( int P, int L );
-    KCoord( const KCoord &C );
-    KCoord &operator=( const KCoord &c );
-    ~KCoord();
+    Coord();
+    Coord( int P, int L );
+    Coord( const Coord &C );
+    Coord &operator=( const Coord &c );
+    ~Coord();
 
 
   public: // logic
-    bool operator==( const KCoord &c ) const;
-    bool operator!=( const KCoord &c ) const;
-    bool operator<( const KCoord &c ) const;
-    bool operator<=( const KCoord &c ) const;
-    bool operator>( const KCoord &c ) const;
-    bool operator>=( const KCoord &c ) const;
+    bool operator==( const Coord &c ) const;
+    bool operator!=( const Coord &c ) const;
+    bool operator<( const Coord &c ) const;
+    bool operator<=( const Coord &c ) const;
+    bool operator>( const Coord &c ) const;
+    bool operator>=( const Coord &c ) const;
 
     /** tests if the coord is prior in the same line than the given coord.
      * If at least one of both is invalid the result is undefined.
      * @return true if the pos is left to the pos of C and both are in the same line, otherwise false.
      */
-    bool isPriorInLineThan( const KCoord &C ) const;
+    bool isPriorInLineThan( const Coord &C ) const;
     /** tests if the coord is later in the same line than the given coord.
      * If at least one of both is invalid the result is undefined.
      * @return true if the pos is right to the pos of C and both are in the same line, otherwise false 
      */
-    bool isLaterInLineThan( const KCoord &C ) const;
+    bool isLaterInLineThan( const Coord &C ) const;
     /** @return true if the line is below L, otherwise false */
     bool isBelow( int L ) const;
     /** @return true if the line is above L, otherwise false */
@@ -139,14 +139,14 @@ class KCoord
       * If one or more of the coords is invalid the behaviour is undefined.
       * @param C a possible line start coord
       */
-    void goLineStart( const KCoord &C );
+    void goLineStart( const Coord &C );
     /** sets the position to the given pos or 
       * if the line is the same as that of the given coord to the position of that. 
       * If one or more of the coords is invalid the behaviour is undefined.
       * @param L last position in normal line
       * @param C a possible line end coord
       */
-    void goLineEnd( int L, const KCoord &C );
+    void goLineEnd( int L, const Coord &C );
     /** moves the coord 1 lines upwards. There is no check whether the first line is overstepped. */
     void goUp();
     /** moves the coord L lines downwards. */
@@ -176,58 +176,58 @@ class KCoord
 };
 
 
-inline KCoord::KCoord() : Pos( 0 ), Line( 0 ) {}
-inline KCoord::KCoord( int P, int L ) : Pos( P ), Line( L ) {}
+inline Coord::Coord() : Pos( 0 ), Line( 0 ) {}
+inline Coord::Coord( int P, int L ) : Pos( P ), Line( L ) {}
 
-inline KCoord KCoord::fromIndex( int Index, int LineWidth )
+inline Coord Coord::fromIndex( int Index, int LineWidth )
 {
   int Line = Index / LineWidth;
   int Pos  = Index - Line*LineWidth;
-  return KCoord( Pos, Line );
+  return Coord( Pos, Line );
 }
 
-inline KCoord::KCoord( const KCoord &C ) : Pos( C.Pos ), Line( C.Line ) {}
-inline KCoord &KCoord::operator=( const KCoord &C ) { Pos = C.Pos; Line = C.Line; return *this; }
-inline KCoord::~KCoord() {}
+inline Coord::Coord( const Coord &C ) : Pos( C.Pos ), Line( C.Line ) {}
+inline Coord &Coord::operator=( const Coord &C ) { Pos = C.Pos; Line = C.Line; return *this; }
+inline Coord::~Coord() {}
 
-inline bool KCoord::operator==( const KCoord &C ) const { return Pos == C.Pos && Line == C.Line; }
-inline bool KCoord::operator!=( const KCoord &C ) const { return !(*this == C); }
+inline bool Coord::operator==( const Coord &C ) const { return Pos == C.Pos && Line == C.Line; }
+inline bool Coord::operator!=( const Coord &C ) const { return !(*this == C); }
 
-inline bool KCoord::operator<( const KCoord &C ) const
+inline bool Coord::operator<( const Coord &C ) const
 { return Line < C.Line || (Line == C.Line && Pos<C.Pos); }
-inline bool KCoord::operator<=( const KCoord &C ) const
+inline bool Coord::operator<=( const Coord &C ) const
 { return Line < C.Line || (Line == C.Line && Pos<=C.Pos); }
-inline bool KCoord::operator>( const KCoord &C ) const
+inline bool Coord::operator>( const Coord &C ) const
 { return Line > C.Line || (Line == C.Line && Pos>C.Pos); }
-inline bool KCoord::operator>=( const KCoord &C ) const
+inline bool Coord::operator>=( const Coord &C ) const
 { return Line > C.Line || (Line == C.Line && Pos>=C.Pos); }
 
-inline int  KCoord::pos()         const { return Pos; }
-inline int  KCoord::line()        const { return Line; }
-inline bool KCoord::isValid()     const { return Line >= 0 && Pos >= 0; }
+inline int  Coord::pos()         const { return Pos; }
+inline int  Coord::line()        const { return Line; }
+inline bool Coord::isValid()     const { return Line >= 0 && Pos >= 0; }
 
-inline void KCoord::setByIndexNWidth( int Index, int LineWidth )
+inline void Coord::setByIndexNWidth( int Index, int LineWidth )
 {
   Line = Index / LineWidth;
   Pos  = Index - Line*LineWidth;
 }
 
-inline void KCoord::set( int P, int L )
+inline void Coord::set( int P, int L )
 {
   Pos  = P;
   Line = L;
 }
-inline void KCoord::setPos( int P )  { Pos  = P; }
-inline void KCoord::setLine( int L ) { Line = L; }
+inline void Coord::setPos( int P )  { Pos  = P; }
+inline void Coord::setLine( int L ) { Line = L; }
 
-inline void KCoord::goCRight( int MaxPos )
+inline void Coord::goCRight( int MaxPos )
 {
   if( isBeforeLineEnd(MaxPos) )
     goRight();
   else
     gotoStartOfNextLine();
 }
-inline void KCoord::goCLeft( int MaxPos )
+inline void Coord::goCLeft( int MaxPos )
 {
   if( isBehindLineStart() )
     goLeft();
@@ -235,69 +235,69 @@ inline void KCoord::goCLeft( int MaxPos )
     gotoEndOfPreviousLine( MaxPos );
 }
 
-inline void KCoord::goRight() { ++Pos; }
-inline void KCoord::goLeft()  { --Pos; }
-inline void KCoord::goRight( unsigned int P ) { Pos += P; }
-inline void KCoord::goLeft( unsigned int P )  { Pos -= P; }
+inline void Coord::goRight() { ++Pos; }
+inline void Coord::goLeft()  { --Pos; }
+inline void Coord::goRight( unsigned int P ) { Pos += P; }
+inline void Coord::goLeft( unsigned int P )  { Pos -= P; }
 
-inline void KCoord::gotoStart() { Pos = Line = 0; }
+inline void Coord::gotoStart() { Pos = Line = 0; }
 
-inline void KCoord::gotoEndOfPreviousLine( int LastPos )
+inline void Coord::gotoEndOfPreviousLine( int LastPos )
 {
   --Line;
   Pos = LastPos;
 }
 
-inline void KCoord::gotoStartOfNextLine()
+inline void Coord::gotoStartOfNextLine()
 {
   ++Line;
   Pos = 0;
 }
 
 
-inline void KCoord::goLineStart( const KCoord &C )
+inline void Coord::goLineStart( const Coord &C )
 {
   Pos = ( Line == C.Line ) ? C.Pos : 0;
 }
 
-inline void KCoord::goLineEnd( int L, const KCoord &C )
+inline void Coord::goLineEnd( int L, const Coord &C )
 {
   Pos = ( Line == C.Line ) ? C.Pos : L;
 }
 
-inline void KCoord::goUp()           { --Line; }
-inline void KCoord::goDown()         { ++Line; }
-inline void KCoord::goUp( unsigned int L )    { Line -= L; }
-inline void KCoord::goDown( unsigned int L )  { Line += L; }
+inline void Coord::goUp()           { --Line; }
+inline void Coord::goDown()         { ++Line; }
+inline void Coord::goUp( unsigned int L )    { Line -= L; }
+inline void Coord::goDown( unsigned int L )  { Line += L; }
 
 
-inline int KCoord::indexByLineWidth( int LineWidth ) const
+inline int Coord::indexByLineWidth( int LineWidth ) const
 {
   return Line * LineWidth + Pos;
 }
 
 
-inline bool KCoord::isPriorInLineThan( const KCoord &C ) const
+inline bool Coord::isPriorInLineThan( const Coord &C ) const
 {
   return Line == C.Line && Pos < C.Pos;
 }
 
-inline bool KCoord::isLaterInLineThan( const KCoord &C ) const
+inline bool Coord::isLaterInLineThan( const Coord &C ) const
 {
   return Line == C.Line && Pos > C.Pos;
 }
 
-inline bool KCoord::isBelow( int L ) const { return Line > L; }
-inline bool KCoord::isAbove( int L ) const { return Line < L; }
+inline bool Coord::isBelow( int L ) const { return Line > L; }
+inline bool Coord::isAbove( int L ) const { return Line < L; }
 
-inline bool KCoord::isBehindLineStart()           const { return Pos > 0; }
-inline bool KCoord::isBeforeLineEnd( int MaxPos ) const { return Pos < MaxPos; }
+inline bool Coord::isBehindLineStart()           const { return Pos > 0; }
+inline bool Coord::isBeforeLineEnd( int MaxPos ) const { return Pos < MaxPos; }
 
-inline bool KCoord::isAtStart()                   const { return Pos == 0 && Line == 0; }
+inline bool Coord::isAtStart()                   const { return Pos == 0 && Line == 0; }
 
-inline KCoord operator+( const KCoord &C, int p )
+inline Coord operator+( const Coord &C, int p )
 {
-  return KCoord( C.pos()+p, C.line() );
+  return Coord( C.pos()+p, C.line() );
 }
 
 }

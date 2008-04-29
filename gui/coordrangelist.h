@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2006 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,21 +20,31 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KSECTIONLISTTEST_H
-#define KSECTIONLISTTEST_H
+#ifndef KHE_UI_COORDRANGELIST_H
+#define KHE_UI_COORDRANGELIST_H
 
+
+// lib
+#include "coordrange.h"
 // Qt
-#include <QtCore/QObject>
+#include <QtCore/QLinkedList>
 
-class KCoordRangeListTest : public QObject
+
+namespace KHEUI {
+
+/**
+@author Friedrich W. H.  Kossebau
+*/
+class CoordRangeList : public QLinkedList<CoordRange>
 {
-  Q_OBJECT
+  public:
+    CoordRangeList();
+    ~CoordRangeList();
 
-  private Q_SLOTS: // test functions
-    void testSimpleConstructor();
-    void testAddSingleSection();
-    void testAddJoinableSections();
-    void testAddNonJoinableSections();
+  public:
+    void addCoordRange( CoordRange R );
 };
+
+}
 
 #endif

@@ -20,38 +20,27 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KBUFFERCOORDTEST_H
-#define KBUFFERCOORDTEST_H
+#ifndef COORDRANGETEST_H
+#define COORDRANGETEST_H
 
 // Qt
 #include <QtCore/QObject>
 
-class KCoordTest : public QObject
+class CoordRangeTest : public QObject
 {
   Q_OBJECT
 
   private Q_SLOTS: // test functions
-    void testConstructor();
-    void testSetConstructor();
-    void testFromIndexConstructor();
-    void testCopyConstructor();
-    void testEquals();
-    void testAssign();
-    void testSetPosLine();
-    void testSet();
-    void testIsAtStart();
-    void testGotoStart();
-    void testGo();
-    void testGoN();
-    void testGotoControlled();
-    void testGoLineStart();
-    void testGoLineEnd();
-    void testCompareOperator();
-    void testIsBelowIsAbove();
-    void testIsLaterPriorInLineThan();
-    void testIsBeforeLineStart();
-    void testIsBeforeLineEnd();
-    void testIndexNWidth();
+    void testConstructorByCoords();
+    void testConstructorByPosLines();
+    void testSimpleConstructor();
+    void testSetGetStart();
+    void testSetGetEnd();
+    void testIsEmpty();
+    void testCompare();
+    void testIncludes();
+    void testIncludesLine();
+    void testWidth();
 };
 
 #endif

@@ -24,7 +24,7 @@
 #define KHE_UI_KDATALAYOUT_H
 
 // lib
-#include "kcoordrange.h"
+#include "coordrange.h"
 #include "oktetagui_export.h"
 // commonlib
 #include <ksection.h>
@@ -76,12 +76,12 @@ class OKTETAGUI_EXPORT KDataLayout
     int startLine() const;
     int startPos() const;
     /** returns the coord of the start */
-    KCoord start() const;
+    Coord start() const;
 
     int finalLine() const;
     int finalPos() const;
     /** returns the coord of the end */
-    KCoord final() const;
+    Coord final() const;
 
     /** tells how much lines this layout needs (incl. blank leading lines due to StartOffset) */
     int noOfLines() const;
@@ -92,7 +92,7 @@ class OKTETAGUI_EXPORT KDataLayout
       * If the coord is before the first coord the first index is returned,
       * if the coord is behind the last coord the last index is returned
       */
-    int indexAtCCoord( const KCoord &C ) const;
+    int indexAtCCoord( const Coord &C ) const;
     /** calculates the index of the first pos in line.
       * If the line is below the first line the first index is returned,
       * if the line is above the last line the last index is returned
@@ -112,10 +112,10 @@ class OKTETAGUI_EXPORT KDataLayout
       * If the index is below the first index the first coord is returned,
       * if the index is above the last index the last coord is returned
       */
-    KCoord coordOfCIndex( int Index ) const;
+    Coord coordOfCIndex( int Index ) const;
 
     /** calculates the index of coord. if coord is invalid the behaviour is undefinded */
-    int indexAtCoord( const KCoord &C ) const;
+    int indexAtCoord( const Coord &C ) const;
     /** calculates the index of the first pos in line. if line is invalid the behaviour is undefinded */
     int indexAtLineStart( int L ) const;
     /** calculates the index of last pos in line. if line is invalid the behaviour is undefinded */
@@ -123,9 +123,9 @@ class OKTETAGUI_EXPORT KDataLayout
     /** calculates the line in which index is found. if index is invalid the behaviour is undefinded */
     int lineAtIndex( int Index ) const;
     /** calculates the coord in which index is found. if index is invalid the behaviour is undefinded */
-    KCoord coordOfIndex( int Index ) const;
+    Coord coordOfIndex( int Index ) const;
     /** calculates the range of coords in which the indizes are found. if indizes are invalid the behaviour is undefinded */
-    KCoordRange coordRangeOfIndizes( const KHE::KSection &Indizes ) const;
+    CoordRange coordRangeOfIndizes( const KHE::KSection &Indizes ) const;
 
     /** returns the used positions in line */
     KHE::KSection positions( int Line ) const;
@@ -134,20 +134,20 @@ class OKTETAGUI_EXPORT KDataLayout
     /** returns the last Pos in line. if line is invalid the behaviour is undefinded */
     int lastPos( int Line ) const;
     /** returns the valid Pos or the first Pos in line. if coord is invalid the behaviour is undefinded */
-    int firstPos( const KCoord &C ) const;
+    int firstPos( const Coord &C ) const;
     /** returns the valid Pos or the last Pos in line. if coord is invalid the behaviour is undefinded */
-    int lastPos( const KCoord &C ) const;
+    int lastPos( const Coord &C ) const;
     /** returns true if the line has content */
     bool hasContent( int Line ) const;
     /** returns true if the coord is the first in it's line. if coord is invalid the behaviour is undefinded */
-    bool atLineStart( const KCoord &C ) const;
+    bool atLineStart( const Coord &C ) const;
     /** returns true if the coord is the last in it's line. if coord is invalid the behaviour is undefinded */
-    bool atLineEnd( const KCoord &C ) const;
+    bool atLineEnd( const Coord &C ) const;
 
     /** returns the index if valid or the nearest valid index */
     int correctIndex( int I ) const;
     /** returns the coord if valid or the nearest valid coord */
-    KCoord correctCoord( const KCoord &C ) const;
+    Coord correctCoord( const Coord &C ) const;
 
 
   public: // modification access; return true if changes
@@ -180,11 +180,11 @@ class OKTETAGUI_EXPORT KDataLayout
 
   protected: // calculated values, buffered
     /** coord in which the start offset is (starting with 0) */
-//    KCoord Start;
+//    Coord Start;
     /** coord in which the last byte is (starting with 0) */
-//    KCoord Final;
+//    Coord Final;
     /** */
-    KCoordRange ContentCoords;
+    CoordRange ContentCoords;
 };
 
 
@@ -192,8 +192,8 @@ inline int KDataLayout::startOffset()       const { return StartOffset; }
 inline int KDataLayout::noOfBytesPerLine()  const { return NoOfBytesPerLine; }
 inline int KDataLayout::length()            const { return Length; }
 
-inline KCoord KDataLayout::final()    const { return ContentCoords.end(); }
-inline KCoord KDataLayout::start()    const { return ContentCoords.start(); }
+inline Coord KDataLayout::final()    const { return ContentCoords.end(); }
+inline Coord KDataLayout::start()    const { return ContentCoords.start(); }
 inline int KDataLayout::startPos()          const { return start().pos(); }
 inline int KDataLayout::finalPos()          const { return final().pos(); }
 inline int KDataLayout::startLine()         const { return start().line(); }

@@ -880,7 +880,7 @@ QMimeData *KByteArrayView::selectionAsMimeData() const
     const OffsetColumnRenderer *OC;
     const ValueByteArrayColumnRenderer *HC;
     const CharByteArrayColumnRenderer *TC;
-    KCoordRange Range;
+    CoordRange Range;
 
     if( static_cast<KHEUI::CharByteArrayColumnRenderer *>( mActiveColumn ) == &charColumn() )
     {
@@ -1214,7 +1214,7 @@ void KByteArrayView::placeCursor( const QPoint &point )
     adaptController();
 
     // get coord of click and whether this click was closer to the end of the pos
-    const KCoord coord( activeColumn().magneticLinePositionOfX(point.x()), lineAt(point.y()) );
+    const Coord coord( activeColumn().magneticLinePositionOfX(point.x()), lineAt(point.y()) );
 
     mDataCursor->gotoCCoord( coord );
     emit cursorPositionChanged( mDataCursor->realIndex() );
@@ -1227,7 +1227,7 @@ int KByteArrayView::indexByPoint( const QPoint &point ) const
          ( charColumn().isVisible() && point.x() >= charColumn().x() ) ?
          (AbstractByteArrayColumnRenderer *)&charColumn() : (AbstractByteArrayColumnRenderer *)&valueColumn();
 
-    const KCoord coord( column->linePositionOfX(point.x()), lineAt(point.y()) );
+    const Coord coord( column->linePositionOfX(point.x()), lineAt(point.y()) );
 
     return mDataLayout->indexAtCCoord( coord );
 }
@@ -1494,9 +1494,9 @@ void KByteArrayView::updateChanged()
 
         // calculate affected lines/indizes
         const KHE::KSection fullPositions( 0, mDataLayout->noOfBytesPerLine()-1 );
-        KCoordRange visibleRange( fullPositions, visibleLines(Ys) );
+        CoordRange visibleRange( fullPositions, visibleLines(Ys) );
 
-        KCoordRange changedRange;
+        CoordRange changedRange;
         // as there might be multiple selections on this line redo until no more is changed
         while( hasChanged(visibleRange,&changedRange) )
         {
@@ -1561,7 +1561,7 @@ void KByteArrayView::updateChanged()
 }
 
 
-bool KByteArrayView::hasChanged( const KCoordRange &visibleRange, KCoordRange *changedRange ) const
+bool KByteArrayView::hasChanged( const CoordRange &visibleRange, CoordRange *changedRange ) const
 {
     if( !mDataRanges->overlapsChanges(visibleRange,changedRange) )
         return false;
@@ -1583,7 +1583,7 @@ void KByteArrayView::ensureCursorVisible()
     ensureVisible( activeColumn(), mDataCursor->coord() );
 }
 
-void KByteArrayView::ensureVisible( const AbstractByteArrayColumnRenderer &column, const KCoord &coord )
+void KByteArrayView::ensureVisible( const AbstractByteArrayColumnRenderer &column, const Coord &coord )
 {
 
     // TODO: add getCursorRect to BufferColumn
@@ -1711,7 +1711,7 @@ void KByteArrayView::mouseReleaseEvent( QMouseEvent *mouseEvent )
     {
         const int line = lineAt( releasePoint.y() );
         const int pos = activeColumn().linePositionOfX( releasePoint.x() ); // TODO: can we be sure here about the active column?
-        const int index = mDataLayout->indexAtCCoord( KCoord(pos,line) ); // TODO: can this be another index than the one of the cursor???
+        const int index = mDataLayout->indexAtCCoord( Coord(pos,line) ); // TODO: can this be another index than the one of the cursor???
         emit clicked( index );
     }
 

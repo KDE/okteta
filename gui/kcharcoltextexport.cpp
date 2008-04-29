@@ -30,7 +30,7 @@
 
 namespace KHEUI {
 
-KCharColTextExport::KCharColTextExport( const CharByteArrayColumnRenderer* TC, const char *D, const KCoordRange &CR, const QString &CodecName )
+KCharColTextExport::KCharColTextExport( const CharByteArrayColumnRenderer* TC, const char *D, const CoordRange &CR, const QString &CodecName )
  : KDataColTextExport( TC, D, CR, 1 ),
    CharCodec( KHECore::KCharCodec::createCodec(CodecName) ),
    SubstituteChar( TC->substituteChar() ),
@@ -50,10 +50,10 @@ void KCharColTextExport::print( QString *T ) const
   int p = 0;
   int pEnd = NoOfBytesPerLine;
   // correct boundaries
-  if( PrintLine == CoordRange.start().line() )
-    p = CoordRange.start().pos();
-  if( PrintLine == CoordRange.end().line() )
-    pEnd = CoordRange.end().pos()+1;
+  if( PrintLine == mCoordRange.start().line() )
+    p = mCoordRange.start().pos();
+  if( PrintLine == mCoordRange.end().line() )
+    pEnd = mCoordRange.end().pos()+1;
 
   // draw individual chars
   uint e = 0;

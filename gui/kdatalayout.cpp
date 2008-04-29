@@ -101,14 +101,14 @@ void KDataLayout::setNoOfLinesPerPage( int N )
 
 void KDataLayout::calcStart()
 {
-  ContentCoords.setStart( KCoord::fromIndex(StartOffset,NoOfBytesPerLine) );
+  ContentCoords.setStart( Coord::fromIndex(StartOffset,NoOfBytesPerLine) );
 }
 
 
 void KDataLayout::calcEnd()
 {
-  ContentCoords.setEnd( (Length>0)?KCoord::fromIndex(Length-1+StartOffset,NoOfBytesPerLine):
-                                   KCoord(-1,ContentCoords.start().line()) );
+  ContentCoords.setEnd( (Length>0)?Coord::fromIndex(Length-1+StartOffset,NoOfBytesPerLine):
+                                   Coord(-1,ContentCoords.start().line()) );
 }
 
 
@@ -128,7 +128,7 @@ int KDataLayout::indexAtCLineEnd( int L ) const
 }
 
 
-int KDataLayout::indexAtCCoord( const KCoord &C ) const
+int KDataLayout::indexAtCCoord( const Coord &C ) const
 {
   int Index = indexAtCoord( C );
 
@@ -146,7 +146,7 @@ int KDataLayout::lineAtCIndex( int Index ) const
 }
 
 
-KCoord KDataLayout::coordOfCIndex( int Index ) const
+Coord KDataLayout::coordOfCIndex( int Index ) const
 {
   return ( Index <= 0 ) ?      ContentCoords.start():
          ( Index >= Length ) ? ContentCoords.end():
@@ -166,7 +166,7 @@ int KDataLayout::indexAtLineEnd( int L ) const
 }
 
 
-int KDataLayout::indexAtCoord( const KCoord &C ) const
+int KDataLayout::indexAtCoord( const Coord &C ) const
 {
   return C.indexByLineWidth( NoOfBytesPerLine ) - StartOffset;
 }
@@ -176,16 +176,16 @@ int KDataLayout::lineAtIndex( int Index ) const
   return (Index+StartOffset)/NoOfBytesPerLine;
 }
 
-KCoord KDataLayout::coordOfIndex( int Index ) const
+Coord KDataLayout::coordOfIndex( int Index ) const
 {
-  return KCoord::fromIndex( Index+StartOffset, NoOfBytesPerLine );
+  return Coord::fromIndex( Index+StartOffset, NoOfBytesPerLine );
 }
 
-KCoordRange KDataLayout::coordRangeOfIndizes( const KHE::KSection &Indizes ) const
+CoordRange KDataLayout::coordRangeOfIndizes( const KHE::KSection &Indizes ) const
 {
-  return KCoordRange(
-           KCoord::fromIndex(Indizes.start()+StartOffset, NoOfBytesPerLine),
-           KCoord::fromIndex(Indizes.end()+StartOffset,   NoOfBytesPerLine) );
+  return CoordRange(
+           Coord::fromIndex(Indizes.start()+StartOffset, NoOfBytesPerLine),
+           Coord::fromIndex(Indizes.end()+StartOffset,   NoOfBytesPerLine) );
 }
 
 
@@ -198,22 +198,22 @@ int KDataLayout::correctIndex( int I ) const
 }
 
 
-KCoord KDataLayout::correctCoord( const KCoord &C ) const
+Coord KDataLayout::correctCoord( const Coord &C ) const
 {
   return ( C <= ContentCoords.start() ) ?  ContentCoords.start():
          ( C >= ContentCoords.end() ) ?    ContentCoords.end():
-         ( C.pos() >= NoOfBytesPerLine ) ? KCoord( NoOfBytesPerLine-1, C.line() ):
+         ( C.pos() >= NoOfBytesPerLine ) ? Coord( NoOfBytesPerLine-1, C.line() ):
                                            C;
 }
 
 
-bool KDataLayout::atLineStart( const KCoord &C ) const
+bool KDataLayout::atLineStart( const Coord &C ) const
 {
   return ( C.line() == ContentCoords.start().line() ) ? C.pos() == ContentCoords.start().pos():
                                                         C.pos() == 0;
 }
 
-bool KDataLayout::atLineEnd( const KCoord &C ) const
+bool KDataLayout::atLineEnd( const Coord &C ) const
 {
   return ( C.line() == ContentCoords.end().line() ) ? C.pos() == ContentCoords.end().pos():
                                                       C.pos() == NoOfBytesPerLine-1;
@@ -226,12 +226,12 @@ KHE::KSection KDataLayout::positions( int Line ) const
 }
 
 
-int KDataLayout::firstPos( const KCoord &C ) const
+int KDataLayout::firstPos( const Coord &C ) const
 {
   return ( ContentCoords.start().isLaterInLineThan(C) ) ? ContentCoords.start().pos() : C.pos();
 }
 
-int KDataLayout::lastPos( const KCoord &C ) const
+int KDataLayout::lastPos( const Coord &C ) const
 {
   return ( ContentCoords.end().isPriorInLineThan(C) ) ? ContentCoords.end().pos() : C.pos();
 }
