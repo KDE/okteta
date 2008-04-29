@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_KCOLUMNSVIEW_H
-#define KHE_UI_KCOLUMNSVIEW_H
+#ifndef KHE_UI_COLUMNSVIEW_H
+#define KHE_UI_COLUMNSVIEW_H
 
 
 // lib
