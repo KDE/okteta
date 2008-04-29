@@ -24,15 +24,15 @@
 
 // lib
 #include "kdatalayout.h"
-#include "kvaluecolumn.h"
+#include "valuebytearraycolumnrenderer.h"
 #include "helper.h"
 
 
 namespace KHEUI {
 
-KValueColTextExport::KValueColTextExport( const KValueColumn* HC, const char *D, const KCoordRange &CR )
-  : KDataColTextExport( HC, D, CR, HC->byteCodec()->encodingWidth() ),
-   ByteCodec( KHECore::ValueCodec::createCodec(HC->coding()) )
+KValueColTextExport::KValueColTextExport( const ValueByteArrayColumnRenderer* HC, const char *D, const KCoordRange &CR )
+  : KDataColTextExport( HC, D, CR, HC->valueCodec()->encodingWidth() ),
+   ByteCodec( KHECore::ValueCodec::createCodec(HC->valueCoding()) )
 {
 }
 

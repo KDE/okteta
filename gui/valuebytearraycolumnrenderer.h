@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2003 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_KVALUECOLUMN_H
-#define KHE_UI_KVALUECOLUMN_H
+#ifndef KHE_UI_VALUEBYTEARRAYCOLUMNRENDERER_H
+#define KHE_UI_VALUEBYTEARRAYCOLUMNRENDERER_H
 
 // lib
-#include "kdatacolumn.h"
+#include "abstractbytearraycolumnrenderer.h"
 // Okteta core
 #include <valuecodec.h>
 
@@ -39,59 +39,60 @@ class KDataRanges;
   *
   *@author Friedrich W. H. Kossebau
   */
-class KValueColumn : public KDataColumn
+class ValueByteArrayColumnRenderer : public AbstractByteArrayColumnRenderer
 {
   public:
-    KValueColumn( KColumnsView *CV, KHECore::KAbstractByteArrayModel *B, KDataLayout *L, KDataRanges *R );
-    virtual ~KValueColumn();
+    ValueByteArrayColumnRenderer( ColumnsView *columnsView,
+        KHECore::KAbstractByteArrayModel *byteArrayModel, KDataLayout *layout, KDataRanges *ranges );
+    virtual ~ValueByteArrayColumnRenderer();
 
   public:
-    void paintEditedByte( QPainter *P, char Byte, const QString &EditBuffer );
+    void renderEditedByte( QPainter *painter, char byte, const QString &editBuffer );
 
   public: // modification access
     /**
       * returns true if there was a change
       */
-    bool setCoding( KHECore::KCoding C );
+    bool setValueCoding( KHECore::KCoding valueCoding );
     /** sets the spacing in the middle of a binary byte in the value column
       * @param BinaryGapW spacing in the middle of a binary in pixels
       * returns true if there was a change
       */
-    bool setBinaryGapWidth( KPixelX BGW );
+    bool setBinaryGapWidth( KPixelX binaryGapWidth );
 
 
   public: // value access
-    KPixelX binaryGapWidth()               const;
-    KHECore::KCoding coding()              const;
-    const KHECore::ValueCodec *byteCodec() const;
+    KPixelX binaryGapWidth() const;
+    KHECore::KCoding valueCoding() const;
+    const KHECore::ValueCodec *valueCodec() const;
 
 
-  protected: // KDataColumn API
-    virtual void drawByte( QPainter *P, char Byte, KHECore::KChar B, const QColor &Color ) const;
+  protected: // AbstractByteArrayColumnRenderer API
+    virtual void renderByteText( QPainter *painter, char Byte, KHECore::KChar byteChar, const QColor &color ) const;
     virtual void recalcByteWidth();
 
   protected:
-    void drawCode( QPainter *P, const QString &Code, const QColor &Color ) const;
+    void renderCode( QPainter *P, const QString &code, const QColor &color ) const;
 
-  protected: // set data
+  protected: // settings
     /** */
-    KHECore::KCoding Coding;
+    KHECore::KCoding mValueCoding;
     /** */
-    KHECore::ValueCodec *ByteCodec;
+    KHECore::ValueCodec *mValueCodec;
     /** */
-    KPixelX BinaryGapWidth;
+    KPixelX mBinaryGapWidth;
 
   protected: // buffered data
-    /** buffer to hold the formatted coding */
-    mutable QString CodedByte;
+    /** buffer to hold the formatted valueCoding */
+    mutable QString mDecodedByteText;
     /** calculated: Offset in pixels of the second half of the binary */
-    KPixelX BinaryHalfOffset;
+    KPixelX mBinaryHalfOffset;
 };
 
 
-inline KPixelX KValueColumn::binaryGapWidth()        const { return BinaryGapWidth; }
-inline KHECore::KCoding KValueColumn::coding()                const { return Coding; }
-inline const KHECore::ValueCodec *KValueColumn::byteCodec()   const { return ByteCodec; }
+inline KPixelX ValueByteArrayColumnRenderer::binaryGapWidth()                 const { return mBinaryGapWidth; }
+inline KHECore::KCoding ValueByteArrayColumnRenderer::valueCoding()           const { return mValueCoding; }
+inline const KHECore::ValueCodec *ValueByteArrayColumnRenderer::valueCodec()  const { return mValueCodec; }
 
 }
 

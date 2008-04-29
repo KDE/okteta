@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2003,2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2007,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -37,8 +37,8 @@
 namespace KHEUI
 {
 
-class KColumn;
-class KColumnsViewPrivate;
+class ColumnRenderer;
+class ColumnsViewPrivate;
 
 /** general class for widgets with columns that display different aspects of the same data
   * with the same lineheight for all lines
@@ -46,15 +46,15 @@ class KColumnsViewPrivate;
   *@author Friedrich W. H. Kossebau
   */
 
-class OKTETAGUI_EXPORT KColumnsView : public QAbstractScrollArea
+class OKTETAGUI_EXPORT ColumnsView : public QAbstractScrollArea
 {
    Q_OBJECT
 
-   friend class KColumn;
+   friend class ColumnRenderer;
 
   public:
-    explicit KColumnsView( /*bool R = false,*/ QWidget *Parent = 0 );
-    virtual ~KColumnsView();
+    explicit ColumnsView( /*bool R = false,*/ QWidget *parent = 0 );
+    virtual ~ColumnsView();
 
   public: // data-wise sizes
     /** returns the number of all lines */
@@ -96,40 +96,40 @@ class OKTETAGUI_EXPORT KColumnsView : public QAbstractScrollArea
     KPixelY yOffset() const;
 
     /** translates the point to coordinates in the columns */
-    QPoint viewportToColumns( const QPoint &P ) const;
+    QPoint viewportToColumns( const QPoint &point ) const;
 
   public:
     /**  */
     void setColumnsPos( KPixelX x, KPixelY y );
 
   protected: // QAbstractScrollArea API
-    virtual bool event( QEvent *Event );
-    virtual void resizeEvent( QResizeEvent *ResizeEvent );
-    virtual void paintEvent( QPaintEvent *Event );
+    virtual bool event( QEvent *event );
+    virtual void resizeEvent( QResizeEvent *event );
+    virtual void paintEvent( QPaintEvent *paintEvent );
     virtual void scrollContentsBy( int dx, int dy );
 
   protected: // our API
     /** draws all columns in columns coordinates */
-    virtual void drawColumns( QPainter *p, int cx, int cy, int cw, int ch );
+    virtual void renderColumns( QPainter *painter, int cx, int cy, int cw, int ch );
     /** draws area without columns in columns coordinates */
-    virtual void drawEmptyArea( QPainter *p, int cx, int cy, int cw, int ch );
+    virtual void renderEmptyArea( QPainter *painter, int cx, int cy, int cw, int ch );
 
   protected:
-    /** called by KColumn */
-    void addColumn( KColumn *C );
-    void removeColumn( KColumn *C );
+    /** called by ColumnRenderer */
+    void addColumn( ColumnRenderer *columnRenderer );
+    void removeColumn( ColumnRenderer *columnRenderer );
 
   protected: //
     /** sets height of all lines and propagates this information to all columns
       * doesn't update the content size
       * @param NewLineHeight height in pixels
       */
-    virtual void setLineHeight( KPixelY NewLineHeight );
+    virtual void setLineHeight( KPixelY lineHeight );
     /** sets the number of lines
       * doesn't update the content size
       * @param NewNoOfLines new number of lines to display
       */
-    virtual void setNoOfLines( int NewNoOfLines );
+    virtual void setNoOfLines( int noOfLines );
 
   protected: // recalculations
     /** recalculates the positions of the columns and the total width */
@@ -137,7 +137,7 @@ class OKTETAGUI_EXPORT KColumnsView : public QAbstractScrollArea
     void updateScrollBars();
 
   private:
-    KColumnsViewPrivate * const d;
+    ColumnsViewPrivate * const d;
 };
 
 }

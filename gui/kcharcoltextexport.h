@@ -36,12 +36,12 @@ class KCharCodec;
 namespace KHEUI
 {
 
-class KCharColumn;
+class CharByteArrayColumnRenderer;
 
 class KCharColTextExport : public KDataColTextExport
 {
   public:
-    KCharColTextExport( const KCharColumn* BF, const char *D, const KCoordRange &CR, const QString &CodecName );
+    KCharColTextExport( const CharByteArrayColumnRenderer* BF, const char *D, const KCoordRange &CR, const QString &CodecName );
     virtual ~KCharColTextExport();
 
   protected: //API

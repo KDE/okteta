@@ -34,9 +34,9 @@
 namespace KHEUI
 {
 
-class KOffsetColumn;
-class KValueColumn;
-class KCharColumn;
+class OffsetColumnRenderer;
+class ValueByteArrayColumnRenderer;
+class CharByteArrayColumnRenderer;
 
 typedef KColTextExport* KColTextExportPtr;
 
@@ -48,7 +48,7 @@ class KByteArrayDrag : public QMimeData
   public:
     // TODO: make this call somewhat more generic
     KByteArrayDrag( const QByteArray &, const KCoordRange &Range,
-                 const KOffsetColumn *OC, const KValueColumn *HC, const KCharColumn *TC,
+                 const OffsetColumnRenderer *OC, const ValueByteArrayColumnRenderer *HC, const CharByteArrayColumnRenderer *TC,
                  QChar SC, QChar UC, const QString &CN );
     virtual ~KByteArrayDrag();
 

@@ -93,7 +93,7 @@ void OktetaBrowserExtension::restoreState( QDataStream &stream )
     view->setShowsNonprinting( showsNonprinting );
     view->setColumnsPos( x, y );
     view->setCursorPosition( position, cursorBehind );
-    view->setCursorColumn( (KHEUI::KByteArrayView::KDataColumnId)cursorColumn );
+    view->setCursorColumn( (KHEUI::KByteArrayView::ByteArrayColumnId)cursorColumn );
 
     part->fitActionSettings();
 }

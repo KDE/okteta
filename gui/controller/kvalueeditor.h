@@ -33,7 +33,7 @@
 namespace KHEUI
 {
 
-class KValueColumn;
+class ValueByteArrayColumnRenderer;
 
 
 class KValueEditor: public KEditor
@@ -43,7 +43,7 @@ class KValueEditor: public KEditor
     { EnterValue, IncValue, DecValue, ValueAppend, ValueEdit, LeaveValue, CancelValue, ValueBackspace };
 
   public:
-    KValueEditor( KValueColumn *valueColumne, KDataCursor *dataCursor, KByteArrayView *view, KController *parent );
+    KValueEditor( ValueByteArrayColumnRenderer *valueColumne, KDataCursor *dataCursor, KByteArrayView *view, KController *parent );
     virtual ~KValueEditor();
 
   public: // KController API
@@ -60,7 +60,7 @@ class KValueEditor: public KEditor
     void doValueEditAction( KValueEditAction Action, int Input = -1 );
 
   public://protected:
-    KValueColumn *mValueColumn;
+    ValueByteArrayColumnRenderer *mValueColumn;
     /** flag whether we are in editing mode */
     bool mInEditMode:1;
     /** flag whether byte edit mode was reached by inserting */

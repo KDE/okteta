@@ -23,10 +23,10 @@
 #include "kbytearrayview.h"
 
 // lib
-#include "koffsetcolumn.h"
-#include "kvaluecolumn.h"
-#include "kcharcolumn.h"
-#include "kbordercolumn.h"
+#include "offsetcolumnrenderer.h"
+#include "valuebytearraycolumnrenderer.h"
+#include "charbytearraycolumnrenderer.h"
+#include "bordercolumnrenderer.h"
 #include "kdatacursor.h"
 #include "kdatalayout.h"
 #include "kdataranges.h"
@@ -85,7 +85,7 @@ class KByteArrayView::Private
 };
 
 KByteArrayView::KByteArrayView( KHECore::KAbstractByteArrayModel *byteArrayModel, QWidget *parent )
- : KColumnsView( parent ),
+ : ColumnsView( parent ),
    mByteArrayModel( byteArrayModel ),
    mDataLayout( new KDataLayout(DefaultNoOfBytesPerLine,DefaultStartOffset,0) ),
    mDataCursor( new KDataCursor(mDataLayout) ),
@@ -132,11 +132,11 @@ KByteArrayView::KByteArrayView( KHECore::KAbstractByteArrayModel *byteArrayModel
     mDataLayout->setNoOfLinesPerPage( noOfLinesPerPage() );
 
     // creating the columns in the needed order
-    mOffsetColumn =       new KOffsetColumn( this, DefaultFirstLineOffset, DefaultNoOfBytesPerLine, KOffsetFormat::Hexadecimal );
-    mFirstBorderColumn =  new KBorderColumn( this, false );
-    mValueColumn =        new KValueColumn( this, mByteArrayModel, mDataLayout, mDataRanges );
-    mSecondBorderColumn = new KBorderColumn( this, true );
-    mCharColumn =         new KCharColumn( this, mByteArrayModel, mDataLayout, mDataRanges );
+    mOffsetColumn =       new OffsetColumnRenderer( this, DefaultFirstLineOffset, DefaultNoOfBytesPerLine, KOffsetFormat::Hexadecimal );
+    mFirstBorderColumn =  new BorderColumnRenderer( this, false );
+    mValueColumn =        new ValueByteArrayColumnRenderer( this, mByteArrayModel, mDataLayout, mDataRanges );
+    mSecondBorderColumn = new BorderColumnRenderer( this, true );
+    mCharColumn =         new CharByteArrayColumnRenderer( this, mByteArrayModel, mDataLayout, mDataRanges );
 
     // select the active column
     mActiveColumn = &charColumn();
@@ -144,8 +144,8 @@ KByteArrayView::KByteArrayView( KHECore::KAbstractByteArrayModel *byteArrayModel
 
     // set char encoding
     mCharCodec = KHECore::KCharCodec::createCodec( (KHECore::KEncoding)DefaultEncoding );
-    valueColumn().setCodec( mCharCodec );
-    charColumn().setCodec( mCharCodec );
+    valueColumn().setCharCodec( mCharCodec );
+    charColumn().setCharCodec( mCharCodec );
     mCharEncoding = DefaultEncoding;
 
     mTabController = new KTabController( this, 0 );
@@ -166,22 +166,23 @@ KByteArrayView::KByteArrayView( KHECore::KAbstractByteArrayModel *byteArrayModel
     setAcceptDrops( true );
 }
 
-const KValueColumn& KByteArrayView::valueColumn()     const { return *mValueColumn; }
-const KCharColumn& KByteArrayView::charColumn()       const { return *mCharColumn; }
-const KDataColumn& KByteArrayView::activeColumn()   const { return *mActiveColumn; }
-const KDataColumn& KByteArrayView::inactiveColumn() const { return *mInactiveColumn; }
+const ValueByteArrayColumnRenderer& KByteArrayView::valueColumn()     const { return *mValueColumn; }
+const CharByteArrayColumnRenderer& KByteArrayView::charColumn()       const { return *mCharColumn; }
+const AbstractByteArrayColumnRenderer& KByteArrayView::activeColumn()   const { return *mActiveColumn; }
+const AbstractByteArrayColumnRenderer& KByteArrayView::inactiveColumn() const { return *mInactiveColumn; }
 
-KValueColumn& KByteArrayView::valueColumn()     { return *mValueColumn; }
-KCharColumn& KByteArrayView::charColumn()       { return *mCharColumn; }
-KDataColumn& KByteArrayView::activeColumn()     { return *mActiveColumn; }
-KDataColumn& KByteArrayView::inactiveColumn()   { return *mInactiveColumn; }
+ValueByteArrayColumnRenderer& KByteArrayView::valueColumn()     { return *mValueColumn; }
+CharByteArrayColumnRenderer& KByteArrayView::charColumn()       { return *mCharColumn; }
+AbstractByteArrayColumnRenderer& KByteArrayView::activeColumn()     { return *mActiveColumn; }
+AbstractByteArrayColumnRenderer& KByteArrayView::inactiveColumn()   { return *mInactiveColumn; }
 
 KHECore::KAbstractByteArrayModel *KByteArrayView::byteArrayModel() const { return mByteArrayModel; }
 int KByteArrayView::noOfBytesPerLine()               const { return mDataLayout->noOfBytesPerLine(); }
 int KByteArrayView::firstLineOffset()                const { return mOffsetColumn->firstLineOffset(); }
 int KByteArrayView::startOffset()                    const { return mDataLayout->startOffset(); }
 KByteArrayView::KResizeStyle KByteArrayView::resizeStyle() const { return mResizeStyle; }
-KByteArrayView::KCoding KByteArrayView::coding()           const { return (KByteArrayView::KCoding)valueColumn().coding(); }
+KByteArrayView::KCoding KByteArrayView::coding() const
+{ return (KByteArrayView::KCoding)valueColumn().valueCoding(); }
 KPixelX KByteArrayView::byteSpacingWidth()           const { return valueColumn().byteSpacingWidth(); }
 int KByteArrayView::noOfGroupedBytes()               const { return valueColumn().noOfGroupedBytes(); }
 KPixelX KByteArrayView::groupSpacingWidth()          const { return valueColumn().groupSpacingWidth(); }
@@ -191,7 +192,7 @@ bool KByteArrayView::isOverwriteOnly()               const { return mOverWriteOn
 bool KByteArrayView::isReadOnly()                    const { return mReadOnly || mByteArrayModel->isReadOnly(); }
 bool KByteArrayView::isModified()                    const { return mByteArrayModel->isModified(); }
 bool KByteArrayView::tabChangesFocus()               const { return mTabController->tabChangesFocus(); }
-bool KByteArrayView::showsNonprinting()              const { return charColumn().showsNonprinting(); }
+bool KByteArrayView::showsNonprinting()              const { return charColumn().isShowingNonprinting(); }
 QChar KByteArrayView::substituteChar()               const { return charColumn().substituteChar(); }
 QChar KByteArrayView::undefinedChar()                const { return charColumn().undefinedChar(); }
 KByteArrayView::KEncoding KByteArrayView::encoding()       const { return (KByteArrayView::KEncoding)mCharEncoding; }
@@ -200,8 +201,8 @@ double KByteArrayView::zoomLevel()                    const { return (double)fon
 
 int KByteArrayView::cursorPosition() const { return mDataCursor->realIndex(); }
 bool KByteArrayView::isCursorBehind() const { return mDataCursor->isBehind(); }
-KByteArrayView::KDataColumnId KByteArrayView::cursorColumn() const
-{ return static_cast<KHEUI::KValueColumn *>( mActiveColumn ) == &valueColumn()? ValueColumnId : CharColumnId; }
+KByteArrayView::ByteArrayColumnId KByteArrayView::cursorColumn() const
+{ return static_cast<KHEUI::ValueByteArrayColumnRenderer *>( mActiveColumn ) == &valueColumn()? ValueColumnId : CharColumnId; }
 KHE::KSection KByteArrayView::selection() const { return mDataRanges->selection(); }
 
 void KByteArrayView::setOverwriteOnly( bool OO )    { mOverWriteOnly = OO; if( mOverWriteOnly ) setOverwriteMode( true ); }
@@ -340,12 +341,12 @@ void KByteArrayView::setBufferSpacing( KPixelX ByteSpacing, int noOfGroupedBytes
 
 void KByteArrayView::setCoding( KCoding coding )
 {
-    const uint oldCodingWidth = valueColumn().byteCodec()->encodingWidth();
+    const uint oldCodingWidth = valueColumn().valueCodec()->encodingWidth();
 
-    if( !valueColumn().setCoding((KHECore::KCoding)coding) )
+    if( !valueColumn().setValueCoding((KHECore::KCoding)coding) )
         return;
 
-    const uint newCodingWidth = valueColumn().byteCodec()->encodingWidth();
+    const uint newCodingWidth = valueColumn().valueCodec()->encodingWidth();
     mValueEditor->mByteBuffer.resize( newCodingWidth ); //hack for now
 
     // no change in the width?
@@ -429,9 +430,9 @@ void KByteArrayView::setUndefinedChar( QChar undefinedChar )
     unpauseCursor();
 }
 
-void KByteArrayView::setShowsNonprinting( bool showsNonprinting )
+void KByteArrayView::setShowsNonprinting( bool showingNonprinting )
 {
-    if( !charColumn().setShowsNonprinting(showsNonprinting) )
+    if( !charColumn().setShowingNonprinting(showingNonprinting) )
         return;
     pauseCursor();
     updateColumn( charColumn() );
@@ -449,8 +450,8 @@ void KByteArrayView::setEncoding( KEncoding charEncoding )
     if( newCharCodec == 0 )
         return;
 
-    valueColumn().setCodec( newCharCodec );
-    charColumn().setCodec( newCharCodec );
+    valueColumn().setCharCodec( newCharCodec );
+    charColumn().setCharCodec( newCharCodec );
 
     delete mCharCodec;
     mCharCodec = newCharCodec;
@@ -475,8 +476,8 @@ void KByteArrayView::setEncoding( const QString &encodingName )
     if( newCharCodec == 0 )
         return;
 
-    valueColumn().setCodec( newCharCodec );
-    charColumn().setCodec( newCharCodec );
+    valueColumn().setCharCodec( newCharCodec );
+    charColumn().setCharCodec( newCharCodec );
 
     delete mCharCodec;
     mCharCodec = newCharCodec;
@@ -493,7 +494,7 @@ void KByteArrayView::setEncoding( const QString &encodingName )
 
 void KByteArrayView::fontChange( const QFont &oldFont )
 {
-    KColumnsView::fontChange( oldFont );
+    ColumnsView::fontChange( oldFont );
 
     if( !mInZooming )
         mDefaultFontSize = font().pointSize();
@@ -602,7 +603,7 @@ void KByteArrayView::adjustToLayoutNoOfBytesPerLine()
 
 void KByteArrayView::setNoOfLines( int newNoOfLines )
 {
-    KColumnsView::setNoOfLines( newNoOfLines>1?newNoOfLines:1 );
+    ColumnsView::setNoOfLines( newNoOfLines>1?newNoOfLines:1 );
 }
 
 
@@ -652,7 +653,7 @@ void KByteArrayView::resizeEvent( QResizeEvent *resizeEvent )
         }
     }
 
-    KColumnsView::resizeEvent( resizeEvent );
+    ColumnsView::resizeEvent( resizeEvent );
 
     mDataLayout->setNoOfLinesPerPage( noOfLinesPerPage() ); // TODO: doesn't work with the new size!!!
 }
@@ -876,12 +877,12 @@ QMimeData *KByteArrayView::selectionAsMimeData() const
     if( !mDataRanges->hasSelection() )
         return 0;
 
-    const KOffsetColumn *OC;
-    const KValueColumn *HC;
-    const KCharColumn *TC;
+    const OffsetColumnRenderer *OC;
+    const ValueByteArrayColumnRenderer *HC;
+    const CharByteArrayColumnRenderer *TC;
     KCoordRange Range;
 
-    if( static_cast<KHEUI::KCharColumn *>( mActiveColumn ) == &charColumn() )
+    if( static_cast<KHEUI::CharByteArrayColumnRenderer *>( mActiveColumn ) == &charColumn() )
     {
         OC = 0;
         HC = 0;
@@ -1160,7 +1161,7 @@ void KByteArrayView::showBufferColumns( int newColumns )
     // active column not visible anymore?
     if( !activeColumn().isVisible() )
     {
-        KDataColumn *h = mActiveColumn;
+        AbstractByteArrayColumnRenderer *h = mActiveColumn;
         mActiveColumn = mInactiveColumn;
         mInactiveColumn = h;
         adaptController();
@@ -1170,7 +1171,7 @@ void KByteArrayView::showBufferColumns( int newColumns )
 }
 
 
-void KByteArrayView::setCursorColumn( KDataColumnId columnId )
+void KByteArrayView::setCursorColumn( ByteArrayColumnId columnId )
 {
     // no changes or not visible?
     if( columnId == cursorColumn()
@@ -1213,7 +1214,7 @@ void KByteArrayView::placeCursor( const QPoint &point )
     adaptController();
 
     // get coord of click and whether this click was closer to the end of the pos
-    const KCoord coord( activeColumn().magPosOfX(point.x()), lineAt(point.y()) );
+    const KCoord coord( activeColumn().magneticLinePositionOfX(point.x()), lineAt(point.y()) );
 
     mDataCursor->gotoCCoord( coord );
     emit cursorPositionChanged( mDataCursor->realIndex() );
@@ -1222,11 +1223,11 @@ void KByteArrayView::placeCursor( const QPoint &point )
 
 int KByteArrayView::indexByPoint( const QPoint &point ) const
 {
-    const KDataColumn *column =
+    const AbstractByteArrayColumnRenderer *column =
          ( charColumn().isVisible() && point.x() >= charColumn().x() ) ?
-         (KDataColumn *)&charColumn() : (KDataColumn *)&valueColumn();
+         (AbstractByteArrayColumnRenderer *)&charColumn() : (AbstractByteArrayColumnRenderer *)&valueColumn();
 
-    const KCoord coord( column->posOfX(point.x()), lineAt(point.y()) );
+    const KCoord coord( column->linePositionOfX(point.x()), lineAt(point.y()) );
 
     return mDataLayout->indexAtCCoord( coord );
 }
@@ -1234,21 +1235,21 @@ int KByteArrayView::indexByPoint( const QPoint &point ) const
 
 void KByteArrayView::showEvent( QShowEvent *Event )
 {
-    KColumnsView::showEvent( Event );
+    ColumnsView::showEvent( Event );
     mDataLayout->setNoOfLinesPerPage( noOfLinesPerPage() );
 }
 
 
 void KByteArrayView::focusInEvent( QFocusEvent *focusEvent )
 {
-    KColumnsView::focusInEvent( focusEvent );
+    ColumnsView::focusInEvent( focusEvent );
     startCursor();
 }
 
 void KByteArrayView::focusOutEvent( QFocusEvent *focusEvent )
 {
     stopCursor();
-    KColumnsView::focusOutEvent( focusEvent );
+    ColumnsView::focusOutEvent( focusEvent );
 }
 
 
@@ -1314,9 +1315,9 @@ void KByteArrayView::pauseCursor( bool leaveEdit )
 }
 
 
-void KByteArrayView::updateCursor( const KDataColumn &column )
+void KByteArrayView::updateCursor( const AbstractByteArrayColumnRenderer &column )
 {
-    const int x = column.xOfPos( mDataCursor->pos() ) - xOffset();
+    const int x = column.xOfLinePosition( mDataCursor->pos() ) - xOffset();
     const int y = lineHeight() * mDataCursor->line() - yOffset();
     const int w = column.byteWidth();
 
@@ -1333,12 +1334,12 @@ void KByteArrayView::createCursorPixmaps()
     QPainter painter;
     painter.begin( &mCursorPixmaps->offPixmap() );
     painter.initFrom( this );
-    activeColumn().paintByte( &painter, index );
+    activeColumn().renderByte( &painter, index );
     painter.end();
 
     painter.begin( &mCursorPixmaps->onPixmap() );
     painter.initFrom( this );
-    activeColumn().paintCursor( &painter, index );
+    activeColumn().renderCursor( &painter, index );
     painter.end();
 
     // calculat the shape
@@ -1364,7 +1365,7 @@ void KByteArrayView::drawActiveCursor( QPainter *painter )
     if( mBlinkCursorVisible && !hasFocus() && !viewport()->hasFocus() && !mInDnD )
         return;
 
-    const int x = activeColumn().xOfPos( mDataCursor->pos() );
+    const int x = activeColumn().xOfLinePosition( mDataCursor->pos() );
     const int y = lineHeight() * mDataCursor->line();
 
     painter->translate( x, y );
@@ -1375,9 +1376,9 @@ void KByteArrayView::drawActiveCursor( QPainter *painter )
         const int index = mDataCursor->index();
 
         if( mBlinkCursorVisible )
-            valueColumn().paintEditedByte( painter, mValueEditor->mEditValue, mValueEditor->mByteBuffer );
+            valueColumn().renderEditedByte( painter, mValueEditor->mEditValue, mValueEditor->mByteBuffer );
         else
-            valueColumn().paintByte( painter, index );
+            valueColumn().renderByte( painter, index );
     }
     else
         painter->drawPixmap( mCursorPixmaps->cursorX(), 0,
@@ -1398,27 +1399,27 @@ void KByteArrayView::drawInactiveCursor( QPainter *painter )
 
     const int index = mDataCursor->validIndex();
 
-    const int x = inactiveColumn().xOfPos( mDataCursor->pos() );
+    const int x = inactiveColumn().xOfLinePosition( mDataCursor->pos() );
     const int y = lineHeight() * mDataCursor->line();
 
     painter->translate( x, y );
 
-    const KDataColumn::KFrameStyle Style =
-        mDataCursor->isBehind() ?                    KDataColumn::Right :
-        (mOverWrite||mValueEditor->isInEditMode()) ? KDataColumn::Frame :
-                                                     KDataColumn::Left;
-    inactiveColumn().paintFramedByte( painter, index, Style );
+    const AbstractByteArrayColumnRenderer::FrameStyle frameStyle =
+        mDataCursor->isBehind() ?                    AbstractByteArrayColumnRenderer::Right :
+        (mOverWrite||mValueEditor->isInEditMode()) ? AbstractByteArrayColumnRenderer::Frame :
+                                                     AbstractByteArrayColumnRenderer::Left;
+    inactiveColumn().renderFramedByte( painter, index, frameStyle );
 
     painter->translate( -x, -y );
 }
 
 
-void KByteArrayView::drawColumns( QPainter *painter, int cx, int cy, int cw, int ch )
+void KByteArrayView::renderColumns( QPainter *painter, int cx, int cy, int cw, int ch )
 {
-    KColumnsView::drawColumns( painter, cx, cy, cw, ch );
+    ColumnsView::renderColumns( painter, cx, cy, cw, ch );
     // TODO: update non blinking cursors. Should this perhaps be done in the buffercolumn?
     // Then it needs to know about inactive, insideByte and the like... well...
-    // perhaps subclassing the buffer columns even more, to KCharColumn and KValueColumn?
+    // perhaps subclassing the buffer columns even more, to CharByteArrayColumnRenderer and ValueByteArrayColumnRenderer?
 
     if( visibleLines(KPixelYs::fromWidth(cy,ch)).includes(mDataCursor->line()) )
     {
@@ -1427,7 +1428,7 @@ void KByteArrayView::drawColumns( QPainter *painter, int cx, int cy, int cw, int
     }
 }
 
-void KByteArrayView::updateColumn( KColumn &column )
+void KByteArrayView::updateColumn( ColumnRenderer &column )
 {
     if( column.isVisible() )
         viewport()->update( column.x()-xOffset(), 0, column.width(), visibleHeight() );
@@ -1461,7 +1462,7 @@ bool KByteArrayView::event( QEvent *event )
         }
     }
 
-    return KColumnsView::event( event );
+    return ColumnsView::event( event );
 }
 
 
@@ -1470,15 +1471,15 @@ void KByteArrayView::updateChanged()
     const KPixelXs Xs = KPixelXs::fromWidth( xOffset(), visibleWidth() );
 
     // collect affected buffer columns
-    QList<KDataColumn*> dirtyColumns;
+    QList<AbstractByteArrayColumnRenderer*> dirtyColumns;
 
-    KDataColumn *column = mValueColumn;
+    AbstractByteArrayColumnRenderer *column = mValueColumn;
     while( true )
     {
         if( column->isVisible() && column->overlaps(Xs) )
         {
             dirtyColumns.append( column );
-            column->preparePainting( Xs );
+            column->prepareRendering( Xs );
         }
 
         if( column == mCharColumn )
@@ -1501,14 +1502,14 @@ void KByteArrayView::updateChanged()
         {
             KPixelY cy = changedRange.start().line() * lineHeight() - yOffset();
 
-            QListIterator<KDataColumn*> columnIt( dirtyColumns );
+            QListIterator<AbstractByteArrayColumnRenderer*> columnIt( dirtyColumns );
             // only one line?
             if( changedRange.start().line() == changedRange.end().line() )
             {
                 const KHE::KSection changedPositions( changedRange.start().pos(), changedRange.end().pos() );
                 while( columnIt.hasNext() )
                 {
-                    const KPixelXs xPixels = columnIt.next()->wideXPixelsOfPos( changedPositions );
+                    const KPixelXs xPixels = columnIt.next()->xsOfLinePositionsInclSpaces( changedPositions );
 
                     viewport()->update( xPixels.start()-xOffset(), cy, xPixels.width(), lineHeight() );
                 }
@@ -1520,7 +1521,7 @@ void KByteArrayView::updateChanged()
                 const KHE::KSection firstChangedPositions( changedRange.start().pos(), fullPositions.end() );
                 while( columnIt.hasNext() )
                 {
-                    const KPixelXs XPixels = columnIt.next()->wideXPixelsOfPos( firstChangedPositions );
+                    const KPixelXs XPixels = columnIt.next()->xsOfLinePositionsInclSpaces( firstChangedPositions );
 
                     viewport()->update( XPixels.start()-xOffset(), cy, XPixels.width(), lineHeight() );
                 }
@@ -1532,7 +1533,7 @@ void KByteArrayView::updateChanged()
                     columnIt.toFront();
                     while( columnIt.hasNext() )
                     {
-                        const KPixelXs XPixels = columnIt.next()->wideXPixelsOfPos( fullPositions );
+                        const KPixelXs XPixels = columnIt.next()->xsOfLinePositionsInclSpaces( fullPositions );
 
                         viewport()->update( XPixels.start()-xOffset(), cy, XPixels.width(), lineHeight() );
                     }
@@ -1543,7 +1544,7 @@ void KByteArrayView::updateChanged()
                 const KHE::KSection lastChangedPositions( fullPositions.start(), changedRange.end().pos() );
                 while( columnIt.hasNext() )
                 {
-                    const KPixelXs XPixels = columnIt.next()->wideXPixelsOfPos( lastChangedPositions );
+                    const KPixelXs XPixels = columnIt.next()->xsOfLinePositionsInclSpaces( lastChangedPositions );
 
                     viewport()->update( XPixels.start()-xOffset(), cy, XPixels.width(), lineHeight() );
                 }
@@ -1582,14 +1583,14 @@ void KByteArrayView::ensureCursorVisible()
     ensureVisible( activeColumn(), mDataCursor->coord() );
 }
 
-void KByteArrayView::ensureVisible( const KDataColumn &Column, const KCoord &Coord )
+void KByteArrayView::ensureVisible( const AbstractByteArrayColumnRenderer &column, const KCoord &coord )
 {
 
     // TODO: add getCursorRect to BufferColumn
-    const KPixelXs cursorXs = KPixelXs::fromWidth( Column.xOfPos(Coord.pos()),
-                                                    Column.byteWidth() );
+    const KPixelXs cursorXs = KPixelXs::fromWidth( column.xOfLinePosition(coord.pos()),
+                                                   column.byteWidth() );
 
-    const KPixelYs cursorYs = KPixelYs::fromWidth( lineHeight()*Coord.line(), lineHeight() );
+    const KPixelYs cursorYs = KPixelYs::fromWidth( lineHeight()*coord.line(), lineHeight() );
 
     const KPixelXs visibleXs = KPixelXs::fromWidth( xOffset(), visibleWidth() );
     const KPixelYs visibleYs = KPixelXs::fromWidth( yOffset(), visibleHeight() );
@@ -1709,7 +1710,7 @@ void KByteArrayView::mouseReleaseEvent( QMouseEvent *mouseEvent )
     if( !mInDoubleClick )
     {
         const int line = lineAt( releasePoint.y() );
-        const int pos = activeColumn().posOfX( releasePoint.x() ); // TODO: can we be sure here about the active column?
+        const int pos = activeColumn().linePositionOfX( releasePoint.x() ); // TODO: can we be sure here about the active column?
         const int index = mDataLayout->indexAtCCoord( KCoord(pos,line) ); // TODO: can this be another index than the one of the cursor???
         emit clicked( index );
     }
@@ -2045,7 +2046,7 @@ void KByteArrayView::wheelEvent( QWheelEvent *mouseWheelEvent )
         return;
     }
 
-    KColumnsView::wheelEvent( mouseWheelEvent );
+    ColumnsView::wheelEvent( mouseWheelEvent );
 }
 
 

@@ -23,7 +23,7 @@
 #include "kchareditor.h"
 
 // lib
-#include "kcharcolumn.h"
+#include "charbytearraycolumnrenderer.h"
 #include "kbytearrayview.h"
 // commonlib
 #include <kcharcodec.h>
@@ -34,7 +34,7 @@
 namespace KHEUI {
 
 
-KCharEditor::KCharEditor( KCharColumn *charColumn, KDataCursor *dataCursor, KByteArrayView *view, KController *parent )
+KCharEditor::KCharEditor( CharByteArrayColumnRenderer *charColumn, KDataCursor *dataCursor, KByteArrayView *view, KController *parent )
   : KEditor( dataCursor, view, parent ),
   mCharColumn( charColumn )
 {
@@ -52,7 +52,7 @@ bool KCharEditor::handleKeyPress( QKeyEvent *keyEvent )
         if( enteredChar.isPrint() )
         {
             QByteArray data( 1, 0 );
-            if( mCharColumn->codec()->encode(data.data(),enteredChar) )
+            if( mCharColumn->charCodec()->encode(data.data(),enteredChar) )
             {
                 mView->insert( data );
                 keyUsed = true;

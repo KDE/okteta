@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2003 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_KBORDERCOLUMN_H
-#define KHE_UI_KBORDERCOLUMN_H
+#ifndef KHE_UI_BORDERCOLUMNRENDERER_H
+#define KHE_UI_BORDERCOLUMNRENDERER_H
 
 
 // lib
-#include "kcolumn.h"
+#include "columnrenderer.h"
 
 
 namespace KHEUI
@@ -36,23 +36,23 @@ namespace KHEUI
   *@author Friedrich W. H. Kossebau
   */
 
-class KBorderColumn : public KColumn
+class BorderColumnRenderer : public ColumnRenderer
 {
   public:
-    KBorderColumn( KColumnsView *V, bool M );
-    ~KBorderColumn();
+    BorderColumnRenderer( ColumnsView *columnsView, bool lineDrawn );
+    virtual ~BorderColumnRenderer();
 
-  public: // KColumn-API
-    virtual void paintFirstLine( QPainter *P, const KPixelXs &Xs, int FirstLine );
-    virtual void paintNextLine( QPainter *P );
-    virtual void paintEmptyColumn( QPainter *P, const KPixelXs &Xs, const KPixelYs &Ys );
+  public: // ColumnRenderer-API
+    virtual void renderFirstLine( QPainter *painter, const KPixelXs &Xs, int firstLineIndex );
+    virtual void renderNextLine( QPainter *painter );
+    virtual void renderEmptyColumn( QPainter *painter, const KPixelXs &Xs, const KPixelYs &Ys );
 
   protected:
-   virtual void paintLine( QPainter *P );
+   virtual void renderLine( QPainter *painter );
 
   protected:
     /** true if we are between two columns and should show a line */
-    bool Middle;
+    bool mLineDrawn;
 };
 
 }

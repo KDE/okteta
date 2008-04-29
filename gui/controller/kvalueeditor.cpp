@@ -23,7 +23,7 @@
 #include "kvalueeditor.h"
 
 // lib
-#include "kvaluecolumn.h"
+#include "valuebytearraycolumnrenderer.h"
 #include "kdataranges.h"
 #include "kdatacursor.h"
 #include "kbytearrayview.h"
@@ -35,7 +35,7 @@
 
 namespace KHEUI {
 
-KValueEditor::KValueEditor( KValueColumn *valueColumn, KDataCursor *dataCursor, KByteArrayView* view, KController *parent )
+KValueEditor::KValueEditor( ValueByteArrayColumnRenderer *valueColumn, KDataCursor *dataCursor, KByteArrayView* view, KController *parent )
   : KEditor( dataCursor, view, parent ),
   mValueColumn( valueColumn ),
   mInEditMode( false ),
@@ -100,9 +100,9 @@ bool KValueEditor::handleKeyPress( QKeyEvent *keyEvent )
                 else
                 {
                     unsigned char InputValue = 0;
-                    const KHECore::ValueCodec *byteCodec = mValueColumn->byteCodec();
+                    const KHECore::ValueCodec *valueCodec = mValueColumn->valueCodec();
                     // valid digit?
-                    if( byteCodec->appendDigit(&InputValue,input) )
+                    if( valueCodec->appendDigit(&InputValue,input) )
                     {
                         if( mView->isOverwriteMode() )
                             doValueEditAction( ValueEdit, InputValue );
@@ -114,7 +114,7 @@ bool KValueEditor::handleKeyPress( QKeyEvent *keyEvent )
                                 mInEditMode = true;
                                 mEditModeByInsert = true;
                                 mOldValue = mEditValue = InputValue;
-                                byteCodec->encode( mByteBuffer, 0, mEditValue );
+                                valueCodec->encode( mByteBuffer, 0, mEditValue );
 
                                 mDataCursor->gotoRealIndex();
                                 mView->ensureCursorVisible();
@@ -152,7 +152,7 @@ void KValueEditor::doValueEditAction( KValueEditAction Action, int input )
         mOldValue = mEditValue = (unsigned char)mView->mByteArrayModel->datum( validIndex );
     }
 
-    const KHECore::ValueCodec *byteCodec = mValueColumn->byteCodec();
+    const KHECore::ValueCodec *valueCodec = mValueColumn->valueCodec();
     // 
     unsigned char newValue = mEditValue;
     bool stayInEditMode = true;
@@ -167,7 +167,7 @@ void KValueEditor::doValueEditAction( KValueEditAction Action, int input )
         break;
     case ValueBackspace:
         if( newValue > 0 )
-            byteCodec->removeLastDigit( &newValue );
+            valueCodec->removeLastDigit( &newValue );
         break;
     case EnterValue:
         mEditValue ^= 255; // force update
@@ -181,8 +181,8 @@ void KValueEditor::doValueEditAction( KValueEditAction Action, int input )
             --newValue;
         break;
     case ValueAppend:
-        if( byteCodec->appendDigit(&newValue,input) )
-            if( mEditModeByInsert && newValue >= byteCodec->digitsFilledLimit() )
+        if( valueCodec->appendDigit(&newValue,input) )
+            if( mEditModeByInsert && newValue >= valueCodec->digitsFilledLimit() )
             {
                 stayInEditMode = false;
                 moveToNext = true;
@@ -203,7 +203,7 @@ void KValueEditor::doValueEditAction( KValueEditAction Action, int input )
     {
         // sync value
         mEditValue = newValue;
-        byteCodec->encode( mByteBuffer, 0, mEditValue );
+        valueCodec->encode( mByteBuffer, 0, mEditValue );
         mView->mByteArrayModel->replace( mDataCursor->index(), 1, (char*)&mEditValue, 1 );
     }
 

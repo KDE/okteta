@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2003 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_KCHARCOLUMN_H
-#define KHE_UI_KCHARCOLUMN_H
+#ifndef KHE_UI_CHARBYTEARRAYCOLUMNRENDERER_H
+#define KHE_UI_CHARBYTEARRAYCOLUMNRENDERER_H
 
 
 // lib
-#include "kdatacolumn.h"
+#include "abstractbytearraycolumnrenderer.h"
 // Qt
 #include <QtCore/QString>
 
@@ -40,80 +40,84 @@ namespace KHEUI
   *
   *@author Friedrich W. H. Kossebau
   */
-class KCharColumn : public KDataColumn
+class CharByteArrayColumnRenderer : public AbstractByteArrayColumnRenderer
 {
   public:
-    KCharColumn( KColumnsView *CV, KHECore::KAbstractByteArrayModel *B, KDataLayout *L, KDataRanges *R );
-    virtual ~KCharColumn();
+    CharByteArrayColumnRenderer( ColumnsView *columnsView,
+        KHECore::KAbstractByteArrayModel *byteArrayModel, KDataLayout *layout, KDataRanges *ranges );
+    virtual ~CharByteArrayColumnRenderer();
 
 
   public: // modification access
     /** sets whether "unprintable" chars (>32) should be displayed in the char column
       * with their corresponding character.
-      * @param SU
+      * @param showingNonprinting
       * returns true if there was a change
       */
-    bool setShowsNonprinting( bool SN = true );
+    bool setShowingNonprinting( bool showingNonprinting = true );
     /** sets the substitute character for "unprintable" chars
       * returns true if there was a change
       */
-    bool setSubstituteChar( QChar SC );
+    bool setSubstituteChar( QChar substituteChar );
     /** sets the undefined character for "undefined" chars
       * returns true if there was a change
       */
-    bool setUndefinedChar( QChar UC );
+    bool setUndefinedChar( QChar undefinedChar );
 
 
   public: // value access
     /** returns true if "unprintable" chars (>32) are displayed in the char column
       * with their corresponding character, default is false
       */
-    bool showsNonprinting() const;
+    bool isShowingNonprinting() const;
     /** returns the actually used substitute character for "unprintable" chars, default is '.' */
     QChar substituteChar() const;
     /** returns the actually used undefined character for "undefined" chars, default is '?' */
     QChar undefinedChar() const;
 
 
-  protected: // KDataColumn API
-    virtual void drawByte( QPainter *P, char Byte, KHECore::KChar B, const QColor &Color ) const;
+  protected: // AbstractByteArrayColumnRenderer API
+    virtual void renderByteText( QPainter *P, char Byte, KHECore::KChar B, const QColor &Color ) const;
 
   protected:
     /** */
-    bool ShowsNonprinting;
+    bool mShowingNonprinting;
     /** */
-    QChar SubstituteChar;
+    QChar mSubstituteChar;
     /** */
-    QChar UndefinedChar;
+    QChar mUndefinedChar;
 };
 
 
-inline bool KCharColumn::showsNonprinting()  const { return ShowsNonprinting; }
-inline QChar KCharColumn::substituteChar()  const { return SubstituteChar; }
-inline QChar KCharColumn::undefinedChar()   const { return UndefinedChar; }
+inline bool CharByteArrayColumnRenderer::isShowingNonprinting()  const { return mShowingNonprinting; }
+inline QChar CharByteArrayColumnRenderer::substituteChar()       const { return mSubstituteChar; }
+inline QChar CharByteArrayColumnRenderer::undefinedChar()        const { return mUndefinedChar; }
 
-inline bool KCharColumn::setSubstituteChar( QChar SC )
+inline bool CharByteArrayColumnRenderer::setSubstituteChar( QChar substituteChar )
 {
-  if( SubstituteChar == SC )
-    return false;
-  SubstituteChar = SC;
-  return true;
+    if( mSubstituteChar == substituteChar )
+        return false;
+
+    mSubstituteChar = substituteChar;
+    return true;
 }
 
-inline bool KCharColumn::setUndefinedChar( QChar UC )
+inline bool CharByteArrayColumnRenderer::setUndefinedChar( QChar undefinedChar )
 {
-  if( UndefinedChar == UC )
-    return false;
-  UndefinedChar = UC;
-  return true;
+    if( mUndefinedChar == undefinedChar )
+        return false;
+
+    mUndefinedChar = undefinedChar;
+    return true;
 }
 
-inline bool KCharColumn::setShowsNonprinting( bool SN )
+inline bool CharByteArrayColumnRenderer::setShowingNonprinting( bool showingNonprinting )
 {
-  if( ShowsNonprinting == SN )
-    return false;
-  ShowsNonprinting = SN;
-  return true;
+    if( mShowingNonprinting == showingNonprinting )
+        return false;
+
+    mShowingNonprinting = showingNonprinting;
+    return true;
 }
 
 }

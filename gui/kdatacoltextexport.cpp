@@ -23,7 +23,7 @@
 #include "kdatacoltextexport.h"
 
 // lib
-#include "kdatacolumn.h"
+#include "abstractbytearraycolumnrenderer.h"
 #include "kdatalayout.h"
 // C
 #include <string.h>
@@ -39,7 +39,7 @@ QString KDataColTextExport::whiteSpace( uint s )
   return QString().fill( ' ', s );
 }
 
-KDataColTextExport::KDataColTextExport( const KDataColumn* BufferColumn, const char *D,
+KDataColTextExport::KDataColTextExport( const AbstractByteArrayColumnRenderer* BufferColumn, const char *D,
                                             KCoordRange CR, int ByteWidth )
  : Data( D ),
    CoordRange( CR )

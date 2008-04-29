@@ -33,13 +33,13 @@
 namespace KHEUI
 {
 
-class KDataColumn;
+class AbstractByteArrayColumnRenderer;
 
 
 class KDataColTextExport : public KColTextExport
 {
   public:
-    KDataColTextExport( const KDataColumn* BF, const char *D, KCoordRange CR, int BytesWidth );
+    KDataColTextExport( const AbstractByteArrayColumnRenderer* BF, const char *D, KCoordRange CR, int BytesWidth );
     virtual ~KDataColTextExport();
 
   public: // API

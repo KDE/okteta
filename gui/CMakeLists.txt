@@ -2,7 +2,7 @@ project( oktetagui )
 
 include_directories(
   ../core
-  ../gui/libkcolumnsview
+  ../gui/libcolumnsview
 )
 
 set( libcontroller_SRCS
@@ -14,19 +14,19 @@ set( libcontroller_SRCS
   controller/kvalueeditor.cpp
 )
 
-set( libkcolumnsview_SRCS
-  libkcolumnsview/kcolumn.cpp
-  libkcolumnsview/kcolumnsview.cpp
+set( libcolumnsview_SRCS
+  libcolumnsview/columnrenderer.cpp
+  libcolumnsview/columnsview.cpp
 )
 
 set( oktetagui_LIB_SRCS
-  ${libkcolumnsview_SRCS}
+  ${libcolumnsview_SRCS}
   ${libcontroller_SRCS}
-  kbordercolumn.cpp
-  koffsetcolumn.cpp
-  kdatacolumn.cpp
-  kvaluecolumn.cpp
-  kcharcolumn.cpp
+  bordercolumnrenderer.cpp
+  offsetcolumnrenderer.cpp
+  abstractbytearraycolumnrenderer.cpp
+  valuebytearraycolumnrenderer.cpp
+  charbytearraycolumnrenderer.cpp
   kbytearrayview.cpp
   koffsetformat.cpp
   kdatacursor.cpp

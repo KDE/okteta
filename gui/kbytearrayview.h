@@ -24,7 +24,7 @@
 #define KHE_UI_KBYTEARRAYVIEW_H
 
 // lib
-#include "kcolumnsview.h"
+#include "columnsview.h"
 // Okteta core
 // #include "khe.h"
 #include <ksection.h>
@@ -49,11 +49,11 @@ namespace KHEUI
 
 class KCoordRange;
 
-class KCharColumn;
-class KValueColumn;
-class KDataColumn;
-class KOffsetColumn;
-class KBorderColumn;
+class CharByteArrayColumnRenderer;
+class ValueByteArrayColumnRenderer;
+class AbstractByteArrayColumnRenderer;
+class OffsetColumnRenderer;
+class BorderColumnRenderer;
 
 class KCoord;
 class KDataCursor;
@@ -83,7 +83,7 @@ class KCursor;
   *@author Friedrich W. H. Kossebau
   */
 
-class OKTETAGUI_EXPORT KByteArrayView : public KColumnsView
+class OKTETAGUI_EXPORT KByteArrayView : public ColumnsView
 {
   friend class KTabController;
   friend class KNavigator;
@@ -122,7 +122,7 @@ class OKTETAGUI_EXPORT KByteArrayView : public KColumnsView
     enum KEncoding { LocalEncoding=0, ISO8859_1Encoding=1, EBCDIC1047Encoding=2,
                      StartOfOwnEncoding=0x8000, MaxEncodingId=0xFFFF };
 
-    enum KDataColumnId { ValueColumnId=1, CharColumnId=2 };
+    enum ByteArrayColumnId { ValueColumnId=1, CharColumnId=2 };
 
 
   public:
@@ -130,8 +130,8 @@ class OKTETAGUI_EXPORT KByteArrayView : public KColumnsView
     virtual ~KByteArrayView();
 
 
-  public: // KColumnsView API
-    virtual void drawColumns( QPainter *p, int cx, int cy, int cw, int ch );
+  public: // ColumnsView API
+    virtual void renderColumns( QPainter *p, int cx, int cy, int cw, int ch );
 
   public: // QWidget API
     virtual QSize sizeHint() const;
@@ -146,7 +146,7 @@ class OKTETAGUI_EXPORT KByteArrayView : public KColumnsView
     int cursorPosition() const;
     /***/
     bool isCursorBehind() const;
-    KDataColumnId cursorColumn() const;
+    ByteArrayColumnId cursorColumn() const;
     KHE::KSection selection() const;
 
     bool isOverwriteMode() const;
@@ -218,7 +218,7 @@ class OKTETAGUI_EXPORT KByteArrayView : public KColumnsView
     /** puts the cursor in the column at the pos of Point (in absolute coord), does not handle the drawing */
     void placeCursor( const QPoint &Point );
     /***/
-    void setCursorColumn( KDataColumnId );
+    void setCursorColumn( ByteArrayColumnId );
 //    void repaintByte( int row, int column, bool Erase = true );
 //    void updateByte( int row, int column );
 //    void ensureByteVisible( int row, int column );
@@ -401,19 +401,19 @@ class OKTETAGUI_EXPORT KByteArrayView : public KColumnsView
     virtual void wheelEvent( QWheelEvent *e );
 //    virtual void contextMenuEvent( QContextMenuEvent *e );
 
-  protected: // KColumnsView API
+  protected: // ColumnsView API
     virtual void setNoOfLines( int NewNoOfLines );
 
 
   protected: // element accessor functions
-    KValueColumn& valueColumn();
-    KCharColumn& charColumn();
-    KDataColumn& activeColumn();
-    KDataColumn& inactiveColumn();
-    const KValueColumn& valueColumn()    const;
-    const KCharColumn& charColumn()   const;
-    const KDataColumn& activeColumn() const;
-    const KDataColumn& inactiveColumn() const;
+    ValueByteArrayColumnRenderer& valueColumn();
+    CharByteArrayColumnRenderer& charColumn();
+    AbstractByteArrayColumnRenderer& activeColumn();
+    AbstractByteArrayColumnRenderer& inactiveColumn();
+    const ValueByteArrayColumnRenderer& valueColumn()    const;
+    const CharByteArrayColumnRenderer& charColumn()   const;
+    const AbstractByteArrayColumnRenderer& activeColumn() const;
+    const AbstractByteArrayColumnRenderer& inactiveColumn() const;
 
   protected: // atomic ui operations
     /** handles screen update in case of a change to any of the width sizes
@@ -429,7 +429,7 @@ class OKTETAGUI_EXPORT KByteArrayView : public KColumnsView
     /** draws the blinking cursor or removes it */
     void drawActiveCursor( QPainter *painter );
     void drawInactiveCursor( QPainter *painter );
-    void updateCursor( const KDataColumn &Column );
+    void updateCursor( const AbstractByteArrayColumnRenderer &Column );
 
   protected: // partial operations
     void handleMouseMove( const QPoint& Point );
@@ -447,8 +447,8 @@ class OKTETAGUI_EXPORT KByteArrayView : public KColumnsView
       */
     void adjustLayoutToSize();
     /** calls updateContent for the Column */
-    void updateColumn( KColumn &Column );
-    void ensureVisible( const KDataColumn &Column, const KCoord &Coord );
+    void updateColumn( ColumnRenderer &Column );
+    void ensureVisible( const AbstractByteArrayColumnRenderer &Column, const KCoord &Coord );
     void emitSelectionSignals();
     void adaptController();
 
@@ -485,16 +485,16 @@ class OKTETAGUI_EXPORT KByteArrayView : public KColumnsView
 
 
   protected:
-    KOffsetColumn *mOffsetColumn;
-    KBorderColumn *mFirstBorderColumn;
-    KValueColumn  *mValueColumn;
-    KBorderColumn *mSecondBorderColumn;
-    KCharColumn   *mCharColumn;
+    OffsetColumnRenderer *mOffsetColumn;
+    BorderColumnRenderer *mFirstBorderColumn;
+    ValueByteArrayColumnRenderer  *mValueColumn;
+    BorderColumnRenderer *mSecondBorderColumn;
+    CharByteArrayColumnRenderer   *mCharColumn;
 
     /** points to the column with keyboard focus */
-    KDataColumn *mActiveColumn;
+    AbstractByteArrayColumnRenderer *mActiveColumn;
     /** points to the column without keyboard focus (if there is) */
-    KDataColumn *mInactiveColumn;
+    AbstractByteArrayColumnRenderer *mInactiveColumn;
 
     /** the actual input controller */
     KController *mController;

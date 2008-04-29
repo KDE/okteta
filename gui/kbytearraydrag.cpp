@@ -90,7 +90,7 @@ static QTextCodec* codecForCharset( const QByteArray& Desc )
 
 
 KByteArrayDrag::KByteArrayDrag( const QByteArray &D, const KCoordRange &Range,
-                          const KOffsetColumn *OC, const KValueColumn *HC, const KCharColumn *TC,
+                          const OffsetColumnRenderer *OC, const ValueByteArrayColumnRenderer *HC, const CharByteArrayColumnRenderer *TC,
                           QChar SC, QChar UC, const QString &CN )
   :BufferCopy( D ),
    CoordRange( Range ),

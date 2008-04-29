@@ -1,7 +1,7 @@
 
 include_directories(
   ../../core
-  ../../gui/libkcolumnsview
+  ../../gui/libcolumnsview
   ../../gui
 )
 

@@ -1,7 +1,7 @@
 include_directories(
   ../../../core
   ../../../gui
-  ../../../gui/libkcolumnsview
+  ../../../gui/libcolumnsview
   ../../libkakao/core/document
   ../../libkakao/core/system
   ../../libkakao/gui/view

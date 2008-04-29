@@ -74,7 +74,7 @@ class ByteColumnRenderer : public AbstractColumnRenderer
     void prepareRendering( const KPixelXs &Xs );
 
   public:
-    void renderPositions( QPainter *painter, int Line, const KHE::KSection &Positions );
+    void renderLinePositions( QPainter *painter, int Line, const KHE::KSection &Positions );
 
   public: // modification access
     /** sets the spacing in the hex column
@@ -117,29 +117,29 @@ class ByteColumnRenderer : public AbstractColumnRenderer
 
   public: // functional logic
     /** returns byte positions covered by pixels with absolute x-coord x */
-    KHE::KSection posOfX( KPixelX x, KPixelX w ) const;
+    KHE::KSection linePositionsOfX( KPixelX x, KPixelX width ) const;
     /** returns byte pos at pixel with absolute x-coord x */
-    int posOfX( KPixelX x ) const;
+    int linePositionOfX( KPixelX x ) const;
     /** returns byte pos at pixel with absolute x-coord x, and sets the flag to true if we are closer to the right */
-    int magPosOfX( KPixelX PX ) const;
-    /** returns absolute x-coord of byte at position Pos */
-    KPixelX xOfPos( int Pos ) const;
-    /** returns right absolute x-coord of byte at position Pos */
-    KPixelX rightXOfPos( int Pos ) const;
+    int magneticLinePositionOfX( KPixelX PX ) const;
+    /** returns absolute x-coord of byte at position posInLine */
+    KPixelX xOfLinePosition( int posInLine ) const;
+    /** returns right absolute x-coord of byte at position posInLine */
+    KPixelX rightXOfLinePosition( int posInLine ) const;
     /** returns byte pos at pixel with relative x-coord x */
-    int posOfRelX( KPixelX x ) const;
+    int linePositionOfColumnX( KPixelX x ) const;
     /** returns byte positions covered by pixels with relative x-coord x */
-    KHE::KSection posOfRelX( KPixelX x, KPixelX w ) const;
-    /** returns relative x-coord of byte at position Pos */
-    KPixelX relXOfPos( int Pos ) const;
-    /** returns right relative x-coord of byte at position Pos */
-    KPixelX relRightXOfPos( int Pos ) const;
+    KHE::KSection linePositionsOfColumnXs( KPixelX x, KPixelX width ) const;
+    /** returns relative x-coord of byte at position posInLine */
+    KPixelX columnXOfLinePosition( int posInLine ) const;
+    /** returns right relative x-coord of byte at position posInLine */
+    KPixelX columnRightXOfLinePosition( int posInLine ) const;
     /** returns the positions that overlap with the absolute x-coords */
-    KHE::KSection visiblePositions( KPixelX x, KPixelX w ) const;
+    KHE::KSection visibleLinePositions( KPixelX x, KPixelX width ) const;
     /** returns the */
-    KPixelXs wideXPixelsOfPos( const KHE::KSection &Positions ) const;
+    KPixelXs xsOfLinePositionsInclSpaces( const KHE::KSection &Positions ) const;
     /** */
-    KPixelXs relWideXPixelsOfPos( const KHE::KSection &Positions ) const;
+    KPixelXs columnXsOfLinePositionsInclSpaces( const KHE::KSection &Positions ) const;
 
   public: // value access
     KPixelX byteWidth()                      const;

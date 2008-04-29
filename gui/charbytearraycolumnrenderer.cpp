@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2003 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kcharcolumn.h"
+#include "charbytearraycolumnrenderer.h"
 
 // lib
-#include "kcolumnsview.h"
+#include "columnsview.h"
 #include "kdatacursor.h"
 #include "kdatalayout.h"
 #include "kdataranges.h"
@@ -39,35 +39,35 @@
 
 namespace KHEUI {
 
-static const bool      DefaultShowsNonprinting = false;
+static const bool      DefaultShowingNonprinting = false;
 static const QChar     DefaultSubstituteChar =  (char)'.';
 static const QChar     DefaultUndefinedChar =   (char)'?';
 
 
-KCharColumn::KCharColumn( KColumnsView *CV, KHECore::KAbstractByteArrayModel *B, KDataLayout *L, KDataRanges *R )
- : KDataColumn( CV, B, L, R ),
-   ShowsNonprinting( DefaultShowsNonprinting ),
-   SubstituteChar( DefaultSubstituteChar ),
-   UndefinedChar( DefaultUndefinedChar )
+CharByteArrayColumnRenderer::CharByteArrayColumnRenderer( ColumnsView *columnsView,
+        KHECore::KAbstractByteArrayModel *byteArrayModel, KDataLayout *layout, KDataRanges *ranges )
+ : AbstractByteArrayColumnRenderer( columnsView, byteArrayModel, layout, ranges ),
+   mShowingNonprinting( DefaultShowingNonprinting ),
+   mSubstituteChar( DefaultSubstituteChar ),
+   mUndefinedChar( DefaultUndefinedChar )
 {
-  setSpacing( 0, 0, 0 );
+    setSpacing( 0, 0, 0 );
 }
 
 
-KCharColumn::~KCharColumn()
+void CharByteArrayColumnRenderer::renderByteText( QPainter *painter, char byte, KHECore::KChar byteChar, const QColor &color ) const
 {
+Q_UNUSED( byte )
+
+    // turn into a drawable String
+    const QString text( byteChar.isUndefined() ?                   KHECore::KChar(mUndefinedChar) :
+                       !(mShowingNonprinting || byteChar.isPrint()) ? KHECore::KChar(mSubstituteChar) :
+                                                                   byteChar );
+
+    painter->setPen( color );
+    painter->drawText( 0, mDigitBaseLine, text );
 }
 
-
-void KCharColumn::drawByte( QPainter *Painter, char /*Byte*/, KHECore::KChar B, const QColor &Color ) const
-{
-  // turn into a drawable String
-  QString BS( B.isUndefined() ?                   KHECore::KChar(UndefinedChar) :
-              !(ShowsNonprinting || B.isPrint()) ? KHECore::KChar(SubstituteChar) :
-                B );
-
-  Painter->setPen( Color );
-  Painter->drawText( 0, DigitBaseLine, BS );
-}
+CharByteArrayColumnRenderer::~CharByteArrayColumnRenderer() {}
 
 }

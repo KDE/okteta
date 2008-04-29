@@ -23,14 +23,14 @@
 #include "koffsetcoltextexport.h"
 
 // lib
-#include "koffsetcolumn.h"
+#include "offsetcolumnrenderer.h"
 // Qt
 #include <QtCore/QString>
 
 
 namespace KHEUI {
 
-KOffsetColTextExport::KOffsetColTextExport( const KOffsetColumn *OffsetColumn )
+KOffsetColTextExport::KOffsetColTextExport( const OffsetColumnRenderer *OffsetColumn )
   : CodingWidth( OffsetColumn->codingWidth() ),
     FirstLineOffset( OffsetColumn->firstLineOffset() ),
     Delta( OffsetColumn->delta() ),

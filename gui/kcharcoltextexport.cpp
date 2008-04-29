@@ -24,13 +24,13 @@
 
 // lib
 #include "kdatalayout.h"
-#include "kcharcolumn.h"
+#include "charbytearraycolumnrenderer.h"
 #include "kcharcodec.h"
 
 
 namespace KHEUI {
 
-KCharColTextExport::KCharColTextExport( const KCharColumn* TC, const char *D, const KCoordRange &CR, const QString &CodecName )
+KCharColTextExport::KCharColTextExport( const CharByteArrayColumnRenderer* TC, const char *D, const KCoordRange &CR, const QString &CodecName )
  : KDataColTextExport( TC, D, CR, 1 ),
    CharCodec( KHECore::KCharCodec::createCodec(CodecName) ),
    SubstituteChar( TC->substituteChar() ),

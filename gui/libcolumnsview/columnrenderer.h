@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2003,2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2007,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -35,22 +35,22 @@ class QPainter;
 namespace KHEUI
 {
 
-class KColumnsView;
+class ColumnsView;
 
-class KColumnPrivate;
+class ColumnRendererPrivate;
 
-/** base class for columns of the KColumnsView
+/** base class for columns of the ColumnsView
   *
   *
   *@author Friedrich W. H. Kossebau
   */
 
-class KColumn
+class ColumnRenderer
 {
-//    friend class KColumnsView;
+//    friend class ColumnsView;
   public:
-    explicit KColumn( KColumnsView *V );
-    virtual ~KColumn();
+    explicit ColumnRenderer( ColumnsView *columnsView );
+    virtual ~ColumnRenderer();
 
   public: // API to be reimplemented in the subclasses
     /** Before an update of the columns view each column that intersects with the area to be painted
@@ -58,31 +58,31 @@ class KColumn
       * for each lines the same values (like first and last char positions) might be calculated.
       * This function enables a one-time-calculation for such data that must be stored in some
       * class members, though.
-      * @param P painter variable
+      * @param painter painter variable
       * @param cx
       * @param cw
-      * @param FirstLine no of the first of the range of lines to paint
+      * @param firstLineIndex no of the first of the range of lines to paint
       */
-    virtual void paintFirstLine( QPainter *P, const KPixelXs &Xs, int FirstLine );
+    virtual void renderFirstLine( QPainter *painter, const KPixelXs &Xs, int firstLineIndex );
     /** the actual painting call for a column's line.
       * The default implementation simply paints the background
       */
-    virtual void paintNextLine( QPainter *P );
+    virtual void renderNextLine( QPainter *painter );
 
     /** */
-    virtual void paintEmptyColumn( QPainter *P, const KPixelXs &Xs, const KPixelYs &Ys );
+    virtual void renderEmptyColumn( QPainter *painter, const KPixelXs &Xs, const KPixelYs &Ys );
 
   public: // modification access
     /** sets starting point of the column */
-    void setX( KPixelX NewX );
+    void setX( KPixelX newX );
     /** sets visibily */
-    void setVisible( bool V );
+    void setVisible( bool visible );
     /** buffer actual line height in column */
-    void setLineHeight( KPixelY H );
+    void setLineHeight( KPixelY lineHeight );
 
   public: // value access
     /** */
-    KColumnsView *columnsView() const;
+    ColumnsView *columnsView() const;
     /** left offset x in pixel */
     KPixelX x() const;
     /** total width in pixel */
@@ -102,14 +102,14 @@ class KColumn
 
   protected:
     /** sets width of the column */
-    void setWidth( KPixelX W );
+    void setWidth( KPixelX width );
     /** */
     void restrictToXSpan( KPixelXs *Xs ) const;
     /** */
-    void paintBlankLine( QPainter *P ) const;
+    void renderBlankLine( QPainter *painter ) const;
 
   private:
-     KColumnPrivate * const d;
+     ColumnRendererPrivate * const d;
 };
 
 }

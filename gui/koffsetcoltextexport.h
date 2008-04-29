@@ -31,12 +31,12 @@
 namespace KHEUI
 {
 
-class KOffsetColumn;
+class OffsetColumnRenderer;
 
 class KOffsetColTextExport : public KColTextExport
 {
   public:
-    explicit KOffsetColTextExport( const KOffsetColumn *OC );
+    explicit KOffsetColTextExport( const OffsetColumnRenderer *OC );
     ~KOffsetColTextExport() {}
 
   public: // KColTextExport API

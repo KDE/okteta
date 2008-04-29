@@ -23,8 +23,8 @@
 #include "ktabcontroller.h"
 
 // lib
-#include "kvaluecolumn.h"
-#include "kcharcolumn.h"
+#include "valuebytearraycolumnrenderer.h"
+#include "charbytearraycolumnrenderer.h"
 #include "kbytearrayview.h"
 // Qt
 #include <QtGui/QKeyEvent>
