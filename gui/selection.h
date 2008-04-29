@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2003 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -167,12 +167,12 @@ inline void Selection::setEnd( int index )
 
 inline void Selection::reverse()
 {
-    mAnchor = isForward() ? mSection.end()+1 : mSection.start();
+    mAnchor = isForward() ? mSection.behindEnd() : mSection.start();
 }
 
 inline void Selection::setForward( bool Forward )
 {
-    mAnchor = Forward ? mSection.start() : mSection.end()+1;
+    mAnchor = Forward ? mSection.start() : mSection.behindEnd();
 }
 
 inline const KHE::KSection &Selection::section() const { return mSection; }
@@ -190,7 +190,7 @@ inline bool Selection::isForward()   const { return mAnchor == mSection.start();
 inline void Selection::adaptToReplacement( int pos, int removedLength, int insertedLength )
 {
     mSection.adaptToReplacement( pos, removedLength, insertedLength );
-    mAnchor = isForward() ? mSection.start() : mSection.end()+1;
+    mAnchor = isForward() ? mSection.start() : mSection.behindEnd();
 }
 
 inline void Selection::adaptToSwap( int firstOffset, int secondOffset, int secondLength )
