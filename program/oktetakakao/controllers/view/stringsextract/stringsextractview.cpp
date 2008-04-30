@@ -48,6 +48,27 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget *paren
     baseLayout->setMargin( 0 );
     baseLayout->setSpacing( KDialog::spacingHint() );
 
+    QHBoxLayout *updateLayout = new QHBoxLayout();
+
+    updateLayout->addStretch();
+    QLabel *label = new QLabel( i18nc("@label:spinbox minimum length consecutive chars make a string","Minimum length:"), this );
+    label->setFixedWidth( label->sizeHint().width() );
+    updateLayout->addWidget( label );
+
+    mMinLengthSpinBox = new QSpinBox( this );
+    mMinLengthSpinBox->setValue( mTool->minLength() );
+    mMinLengthSpinBox->setMinimum( MinimumStringLength );
+    connect( mMinLengthSpinBox, SIGNAL(valueChanged( int )), mTool, SLOT(setMinLength( int )) );
+    updateLayout->addWidget( mMinLengthSpinBox );
+
+    mUpdateButton = new KPushButton( i18nc("@action:button update the list of strings extracted","Update"), this );
+    mUpdateButton->setEnabled( mTool->isApplyable() );
+    connect( mTool, SIGNAL(isApplyableChanged( bool )), mUpdateButton, SLOT( setEnabled(bool )) );
+    connect( mUpdateButton, SIGNAL(clicked(bool)), SLOT(onExtractButtonClicked()) );
+    updateLayout->addWidget( mUpdateButton );
+
+    baseLayout->addLayout( updateLayout );
+
     mContainedStringTableModel = new ContainedStringTableModel( mTool->containedStringList(), this );
     connect( mTool, SIGNAL(stringsUpdated()), mContainedStringTableModel, SLOT(update()) );
 
@@ -70,26 +91,6 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget *paren
              SLOT(onStringClicked( const QModelIndex& )) );
 
     baseLayout->addWidget( containedStringTableView, 10 );
-
-    QHBoxLayout *updateLayout = new QHBoxLayout();
-
-    QLabel *label = new QLabel( i18nc("@label:spinbox minimum length consecutive chars make a string","Minimum length:"), this );
-    label->setFixedWidth( label->sizeHint().width() );
-    updateLayout->addWidget( label );
-
-    mMinLengthSpinBox = new QSpinBox( this );
-    mMinLengthSpinBox->setValue( mTool->minLength() );
-    mMinLengthSpinBox->setMinimum( MinimumStringLength );
-    connect( mMinLengthSpinBox, SIGNAL(valueChanged( int )), mTool, SLOT(setMinLength( int )) );
-    updateLayout->addWidget( mMinLengthSpinBox );
-
-    mUpdateButton = new KPushButton( i18nc("@action:button update the list of strings extracted","Update"), this );
-    mUpdateButton->setEnabled( mTool->isApplyable() );
-    connect( mTool, SIGNAL(isApplyableChanged( bool )), mUpdateButton, SLOT( setEnabled(bool )) );
-    connect( mUpdateButton, SIGNAL(clicked(bool)), SLOT(onExtractButtonClicked()) );
-    updateLayout->addWidget( mUpdateButton );
-
-    baseLayout->addLayout( updateLayout );
 }
 
 #if 0

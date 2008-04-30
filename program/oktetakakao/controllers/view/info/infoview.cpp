@@ -46,6 +46,21 @@ InfoView::InfoView( InfoTool *tool, QWidget *parent )
     baseLayout->setMargin( 0 );
     baseLayout->setSpacing( KDialog::spacingHint() );
 
+    QHBoxLayout *updateLayout = new QHBoxLayout();
+
+    mDirtyLabel = new QLabel( this );
+    updateLayout->addWidget( mDirtyLabel );
+    connect( mTool, SIGNAL(statisticDirty( bool )), SLOT(setDirty( bool )) );
+    updateLayout->addStretch();
+
+    mUpdateButton = new KPushButton( i18nc("@action:button update the statistic of the byte frequency","Update"), this );
+    mUpdateButton->setEnabled( mTool->hasByteArrayView() );
+    connect( mTool, SIGNAL(byteArrayViewChanged(bool)), mUpdateButton, SLOT( setEnabled(bool )) );
+    connect( mUpdateButton, SIGNAL(clicked(bool)), mTool, SLOT(updateStatistic()) ); 
+    updateLayout->addWidget( mUpdateButton );
+
+    baseLayout->addLayout( updateLayout );
+
     QHBoxLayout *sizeLayout = new QHBoxLayout();
 
     QLabel *label = new QLabel( i18nc("@label","Size [bytes]: "), this );
@@ -76,21 +91,6 @@ InfoView::InfoView( InfoTool *tool, QWidget *parent )
     connect( mTool->statisticTableModel(), SIGNAL(headerChanged()), SLOT(updateHeader()) );
 
     baseLayout->addWidget( mStatisticTableView, 10 );
-
-    QHBoxLayout *updateLayout = new QHBoxLayout();
-
-    mDirtyLabel = new QLabel( this );
-    updateLayout->addWidget( mDirtyLabel );
-    connect( mTool, SIGNAL(statisticDirty( bool )), SLOT(setDirty( bool )) );
-    updateLayout->addStretch();
-
-    mUpdateButton = new KPushButton( i18nc("@action:button update the statistic of the byte frequency","Update"), this );
-    mUpdateButton->setEnabled( mTool->hasByteArrayView() );
-    connect( mTool, SIGNAL(byteArrayViewChanged(bool)), mUpdateButton, SLOT( setEnabled(bool )) );
-    connect( mUpdateButton, SIGNAL(clicked(bool)), mTool, SLOT(updateStatistic()) ); 
-    updateLayout->addWidget( mUpdateButton );
-
-    baseLayout->addLayout( updateLayout );
 }
 
 void InfoView::updateHeader()
