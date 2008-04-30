@@ -24,6 +24,10 @@
 
 // lib
 #include <kbytearraydocument.h>
+// Kakao gui
+#include <kabstractview.h>
+// Okteta gui
+#include <kbytearrayview.h>
 // Okteta core
 #include <khechar.h>
 #include <kcharcodec.h>
@@ -32,26 +36,52 @@
 
 static const int DefaultMinLength = 3;
 
-ContainedString::ContainedString( const QString &string, int offset )
- : mString( string ), mOffset( offset )
-{}
-
-void ContainedString::move( int offset )
-{
-    mOffset += offset;
-}
-
-
 StringsExtractTool::StringsExtractTool()
- : mDocument( 0 ), mCharCodec( KHECore::KCharCodec::createCodec(KHECore::LocalEncoding) ), mMinLength( DefaultMinLength )
+ : mCharCodec( KHECore::KCharCodec::createCodec(KHECore::LocalEncoding) ), mMinLength( DefaultMinLength ),
+   mByteArrayView( 0 ), mByteArrayModel( 0 )
 {
 }
 
-QList<ContainedString> StringsExtractTool::containedStringList() const { return mContainedStringList; }
-
-void StringsExtractTool::setDocument( KByteArrayDocument *document )
+bool StringsExtractTool::isApplyable() const
 {
-    mDocument = document;
+    return ( mByteArrayModel != 0 && mByteArrayView->hasSelectedData() );
+}
+
+// TODO: add model with offset and string
+// doubleclick moves cursor to offset
+// filter für Suche, inkl. Regulärausdrücke
+// groß/kleinschreibung
+// voll strings, auch mit Leerzeichen
+void StringsExtractTool::setView( KAbstractView *view )
+{
+    if( mByteArrayView ) mByteArrayView->disconnect( this );
+    if( mByteArrayModel ) mByteArrayModel->disconnect( this );
+
+    mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
+
+    KByteArrayDocument *document = view ? static_cast<KByteArrayDocument*>( view->document() ) : 0;
+    mByteArrayModel = document ? document->content() : 0;
+
+    if( mByteArrayView )
+    {
+        connect( mByteArrayView,  SIGNAL(charCodecChanged( const QString & )),
+                 SLOT(setCharCodec( const QString &)) );
+        connect( mByteArrayView,  SIGNAL(selectionChanged( bool )),
+                 SIGNAL(isApplyableChanged( bool )) );
+        connect( mByteArrayModel,  SIGNAL(modificationChanged( bool )),
+                 SIGNAL(isApplyableChanged( bool )) );
+
+        setCharCodec( mByteArrayView->encodingName() );
+    }
+
+    // TODO: if there is no view, there is nothing to extract.
+    // or this could be the view where we got the strings from and it did not change
+    emit isApplyableChanged( isApplyable() );
+}
+
+void StringsExtractTool::setMinLength( int minLength )
+{
+    mMinLength = minLength;
 }
 
 void StringsExtractTool::setCharCodec( const QString &codecName )
@@ -63,57 +93,66 @@ void StringsExtractTool::setCharCodec( const QString &codecName )
     mCharCodec = KHECore::KCharCodec::createCodec( codecName );
 }
 
+void StringsExtractTool::selectString( int stringId )
+{
+    const ContainedString &containedString = mContainedStringList.at(stringId);
+    const int offset = containedString.offset();
+    const int length = containedString.string().length();
+    mByteArrayView->setSelection( offset, offset+length-1 );
+    mByteArrayView->setFocus();
+}
 
-// TODO: extract only from section
 // TODO: use KWordBufferService
-void StringsExtractTool::extract()
+void StringsExtractTool::extractStrings()
 {
     mContainedStringList.clear();
-    if( !mDocument )
+    if( !mByteArrayModel )
         return;
 
-    KHECore::KAbstractByteArrayModel *byteArrayModel = mDocument->content();
-    int start = 0; 
-    int end = byteArrayModel->size();
+    const KHE::KSection selection = mByteArrayView->selection();
+    if( !selection.isValid() )
+        return;
 
-    bool wordStarted = false;
-    int wordStart = start;
-    QString word;
+    bool stringStarted = false;
+    int stringStart = selection.start();
+    QString string;
     int i;
-    for( i = start; i<end; ++i )
+    for( i = selection.start(); i<=selection.end(); ++i )
     {
-        const KHECore::KChar decodedChar = mCharCodec->decode( byteArrayModel->datum(i) );
-        const bool isWordChar = ( !decodedChar.isUndefined() && decodedChar.isLetterOrNumber() );
+        const KHECore::KChar decodedChar = mCharCodec->decode( mByteArrayModel->datum(i) );
+        // TODO: Zeilenumbrüche ausnehmen
+        const bool isStringChar = ( !decodedChar.isUndefined() &&
+                                    (decodedChar.isLetterOrNumber() || decodedChar.isSpace() || decodedChar.isPunct()) );
 
-        if( isWordChar )
+        if( isStringChar )
         {
-            if( !wordStarted )
+            if( !stringStarted )
             {
-                wordStart = i;
-                wordStarted = true;
-                word.clear();
+                stringStart = i;
+                stringStarted = true;
+                string.clear();
             }
-            word.append( decodedChar );
+            string.append( decodedChar );
         }
         else
         {
-            if( wordStarted )
+            if( stringStarted )
             {
-                if( i-wordStart >= mMinLength )
-                    mContainedStringList.append( ContainedString(word,wordStart) );
-                wordStarted = false;
+                if( i-stringStart >= mMinLength )
+                    mContainedStringList.append( ContainedString(string,stringStart) );
+                stringStarted = false;
             }
         }
     }
-    // last word not ended?
-    if( wordStarted )
+    // last string not ended?
+    if( stringStarted )
     {
-        if( i-wordStart >= mMinLength )
-            mContainedStringList.append( ContainedString(word,wordStart) );
-        wordStarted = false;
+        if( i-stringStart >= mMinLength )
+            mContainedStringList.append( ContainedString(string,stringStart) );
+        stringStarted = false;
     }
 
-    emit stringsChanged();
+    emit stringsUpdated();
 }
 
 

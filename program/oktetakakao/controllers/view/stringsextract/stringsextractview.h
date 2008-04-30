@@ -20,42 +20,42 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef STRINGSEXTRACTCONTROLLER_H
-#define STRINGSEXTRACTCONTROLLER_H
+#ifndef STRINGSEXTRACTVIEW_H
+#define STRINGSEXTRACTVIEW_H
 
-// Kakao gui
-#include <kviewcontroller.h>
+// Qt
+#include <QtGui/QWidget>
 
-class StringsExtractView;
+class ContainedStringTableModel;
 class StringsExtractTool;
+class KPushButton;
+class QSortFilterProxyModel;
+class QModelIndex;
+class QSpinBox;
+class QLabel;
 
-class KXmlGuiWindow;
-// class KByteArrayDocument;
 
-// namespace KHEUI {
-// class KByteArrayView;
-// }
-
-class StringsExtractController : public KViewController
+class StringsExtractView : public QWidget
 {
   Q_OBJECT
 
   public:
-    explicit StringsExtractController( KXmlGuiWindow *window );
-    virtual ~StringsExtractController();
+    explicit StringsExtractView( StringsExtractTool *tool, QWidget *parent = 0 );
+    virtual ~StringsExtractView();
 
-  public: // KViewController API
-    virtual void setView( KAbstractView *view );
+  public Q_SLOTS:
+//     void setDirty( bool dirty );
+    void onExtractButtonClicked();
+    void onStringClicked( const QModelIndex &index );
 
-//   protected Q_SLOTS:
-//     void onCharCodecChange( const QString &codeName );
-
-  protected:
-//     KHEUI::KByteArrayView *mViewWidget;
-//     KByteArrayDocument *mDocument;
-
+  private:
     StringsExtractTool *mTool;
-    StringsExtractView *mView;
+    ContainedStringTableModel *mContainedStringTableModel;
+    QSortFilterProxyModel *mSortProxyModel;
+
+    QLabel *mDirtyLabel;
+    QSpinBox *mMinLengthSpinBox;
+    KPushButton *mUpdateButton;
 };
 
 #endif

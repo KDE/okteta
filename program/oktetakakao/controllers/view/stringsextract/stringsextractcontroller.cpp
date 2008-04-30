@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,85 +23,42 @@
 #include "stringsextractcontroller.h"
 
 // controller
-#include "stringsextractdialog.h"
+#include "stringsextractview.h"
 #include "stringsextracttool.h"
-// lib
-#include <kbytearraydocument.h>
-// Kakao gui
-#include <kabstractview.h>
-// Okteta gui
-#include <kbytearrayview.h>
-// Okteta core
-#include <kcharcodec.h>
-#include <kbytearraymodel.h>
 // KDE
 #include <KXmlGuiWindow>
 #include <KActionCollection>
 #include <KLocale>
-#include <KAction>
 // Qt
 #include <QtGui/QAction>
+#include <QtGui/QDockWidget>
 
 
 StringsExtractController::StringsExtractController( KXmlGuiWindow *window )
- : mWindow( window ),
-   mViewWidget( 0 ), mDocument( 0 ),
-   mStringsExtractTool( 0 ), mStringsExtractDialog( 0 )
+ : mTool( new StringsExtractTool() )
 {
-    KActionCollection *actionCollection = mWindow->actionCollection();
+    KActionCollection *actionCollection = window->actionCollection();
 
-    mStringsExtractAction = actionCollection->addAction( "extract_strings" );
-    mStringsExtractAction->setText( i18nc("@action:inmenu","&Extract strings...") );
-    connect( mStringsExtractAction, SIGNAL(triggered(bool) ), SLOT(showTool()));
+    mView = new StringsExtractView( mTool );
+
+    QDockWidget *dockWidget = new QDockWidget( i18nc("@title:window of the tool to extract strings", "Strings"), window );
+    dockWidget->setObjectName( "Strings" );
+    dockWidget->setWidget( mView );
+    window->addDockWidget( Qt::RightDockWidgetArea, dockWidget );
+
+    QAction *action = dockWidget->toggleViewAction();
+    action->setText( i18nc("@title:window of the tool to extract strings", "Strings") ); //TODO: better name needed!
+    actionCollection->addAction( "show_strings_extractor", action );
 
     setView( 0 );
 }
 
-// TODO: tools should get the setView, and the controller should get informed
 void StringsExtractController::setView( KAbstractView *view )
 {
-    if( mViewWidget ) mViewWidget->disconnect( this );
-
-    mViewWidget = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
-    mDocument = view ? static_cast<KByteArrayDocument*>( view->document() ) : 0;
-
-    const bool isDocument = ( mDocument != 0 );
-    mStringsExtractAction->setEnabled( isDocument );
-
-    if( mStringsExtractTool )
-    {
-        mStringsExtractTool->setDocument( mDocument );
-        mStringsExtractTool->setCharCodec( mViewWidget->encodingName() );
-        connect( mViewWidget, SIGNAL(charCodecChanged( const QString & )), SLOT(onCharCodecChange( const QString &)) );
-    }
-}
-
-void StringsExtractController::showTool()
-{
-    // ensure tool
-    if( !mStringsExtractTool )
-    {
-        mStringsExtractTool = new StringsExtractTool();
-
-        mStringsExtractTool->setDocument( mDocument );
-        mStringsExtractTool->setCharCodec( mViewWidget->encodingName() );
-
-        mStringsExtractDialog = new StringsExtractDialog( mStringsExtractTool, mWindow );
-
-        mStringsExtractTool->extract();
-        connect( mViewWidget, SIGNAL(charCodecChanged( const QString & )), SLOT(onCharCodecChange( const QString &)) );
-    }
-    mStringsExtractDialog->show();
-}
-
-void StringsExtractController::onCharCodecChange( const QString &codeName )
-{
-    mStringsExtractTool->setCharCodec( codeName );
+    mTool->setView( view );
 }
 
 StringsExtractController::~StringsExtractController()
 {
-    delete mStringsExtractDialog;
-    delete mStringsExtractTool;
+    delete mTool;
 }
-

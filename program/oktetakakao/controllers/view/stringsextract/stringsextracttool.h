@@ -23,36 +23,21 @@
 #ifndef STRINGSEXTRACTTOOL_H
 #define STRINGSEXTRACTTOOL_H
 
-
+// tool
+#include "containedstring.h"
 // Qt
 #include <QtCore/QObject>
 #include <QtCore/QList>
 #include <QtCore/QString>
 
-class KByteArrayDocument;
+class KAbstractView;
+namespace KHEUI {
+class KByteArrayView;
+}
 namespace KHECore {
+class KAbstractByteArrayModel;
 class KCharCodec;
 }
-
-class ContainedString
-{
-  public:
-    ContainedString( const QString &string, int offset );
-
-  public:
-    void move( int offset );
-
-  public:
-    QString string() const;
-    int offset() const;
-
-  protected:
-    QString mString;
-    int mOffset;
-};
-inline QString ContainedString::string() const { return mString; }
-inline int ContainedString::offset() const { return mOffset; }
-
 
 /**
 */
@@ -62,25 +47,40 @@ class StringsExtractTool : public QObject
 
   public:
     StringsExtractTool();
-    ~StringsExtractTool();
+    virtual ~StringsExtractTool();
 
   public:
-    void setDocument( KByteArrayDocument *document );
+    void setView( KAbstractView *view );
+
+  public:
+    const QList<ContainedString> *containedStringList() const;
+    int minLength() const;
+    bool isApplyable() const; // candidate for AbstractTool API
+
+  public Q_SLOTS:
+    void extractStrings();
+
     void setCharCodec( const QString &codecName );
-
-    void extract();
-
-  public:
-    QList<ContainedString> containedStringList() const;
+    void setMinLength( int minLength );
+    void selectString( int stringId );
 
   Q_SIGNALS:
-    void stringsChanged();
+    void stringsUpdated();
+    void isApplyableChanged( bool isApplyable );  // candidate for AbstractTool API
 
-  protected:
-    KByteArrayDocument *mDocument;
-    KHECore::KCharCodec *mCharCodec;
-
+  protected: // created data
     QList<ContainedString> mContainedStringList;
+
+  protected: // settings
+    KHECore::KCharCodec *mCharCodec;
     int mMinLength;
+
+  protected: // sources
+    KHEUI::KByteArrayView *mByteArrayView;
+    KHECore::KAbstractByteArrayModel *mByteArrayModel;
 };
+
+inline const QList<ContainedString> *StringsExtractTool::containedStringList() const { return &mContainedStringList; }
+inline int StringsExtractTool::minLength()     const { return mMinLength; }
+
 #endif

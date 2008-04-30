@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,33 +20,37 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef STRINGSEXTRACTDIALOG_H
-#define STRINGSEXTRACTDIALOG_H
+#ifndef CONTAINEDSTRING_H
+#define CONTAINEDSTRING_H
 
-// KDE
-#include <KDialog>
+// Qt
+#include <QtCore/QString>
 
-class StringsExtractTool;
-class QListWidget;
-
-class StringsExtractDialog : public KDialog
+class ContainedString
 {
-  Q_OBJECT
+  public:
+    ContainedString( const QString &string, int offset );
 
   public:
-    explicit StringsExtractDialog( StringsExtractTool *tool, QWidget *parent = 0 );
-    virtual ~StringsExtractDialog();
+    void move( int offset );
 
   public:
-
-  public Q_SLOTS:
-    void onUpdateClicked();
-    void onStringsChanged();
+    const QString &string() const;
+    int offset() const;
 
   protected:
-    StringsExtractTool *mTool;
-
-    QListWidget *mListView;
+    QString mString;
+    int mOffset;
 };
+
+
+inline ContainedString::ContainedString( const QString &string, int offset )
+ : mString( string ), mOffset( offset )
+{}
+
+inline void ContainedString::move( int offset ) { mOffset += offset; }
+
+inline const QString &ContainedString::string() const { return mString; }
+inline int ContainedString::offset() const { return mOffset; }
 
 #endif

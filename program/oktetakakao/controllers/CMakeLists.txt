@@ -30,7 +30,8 @@ set( INFOCONTROLLER_SRCS
 )
 set( STRINGSEXTRACTCONTROLLER_SRCS
   view/stringsextract/stringsextracttool.cpp
-  view/stringsextract/stringsextractdialog.cpp
+  view/stringsextract/containedstringtablemodel.cpp
+  view/stringsextract/stringsextractview.cpp
   view/stringsextract/stringsextractcontroller.cpp
 )
 set( BYTEARRAYLINEEDIT_LIB_SRCS
@@ -124,7 +125,7 @@ set( OKTETA_KAKAO_CONTROLLERS_SRCS
   ${OVERWRITEMODECONTROLLER_SRCS}
   ${BYTEARRAYLINEEDIT_LIB_SRCS}
   ${PODDECODERCONTROLLER_SRCS}
-#   ${STRINGSEXTRACTCONTROLLER_SRCS}
+  ${STRINGSEXTRACTCONTROLLER_SRCS}
   ${BYTETABLECONTROLLER_SRCS}
   ${INFOCONTROLLER_SRCS}
   ${FINDDIALOG_LIB_SRCS}
