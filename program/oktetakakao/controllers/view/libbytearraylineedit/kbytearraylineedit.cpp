@@ -59,6 +59,7 @@ void KByteArrayLineEditPrivate::setup( KByteArrayLineEdit *widget )
     widget->connect( mFormatComboBox, SIGNAL(activated(int)), SLOT(onFormatChanged(int)) );
 
     mDataEdit = new KLineEdit( widget );
+    widget->setFocusProxy( mDataEdit );
     widget->connect( mDataEdit, SIGNAL(textChanged(const QString&)), SLOT(onDataChanged(const QString&)) );
     mValidator = new KByteArrayValidator( mDataEdit, KHECore::CharCoding );
     mDataEdit->setValidator( mValidator );
