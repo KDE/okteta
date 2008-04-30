@@ -30,9 +30,7 @@
 class InfoTool;
 class InfoView;
 
-class QAction;
 class KXmlGuiWindow;
-class KAbstractView;
 
 
 class InfoController : public KViewController
@@ -49,7 +47,6 @@ class InfoController : public KViewController
   protected:
     InfoTool *mTool;
     InfoView *mView;
-    QAction *mAction;
 };
 
 #endif
