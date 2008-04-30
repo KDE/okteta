@@ -71,7 +71,7 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget *parent )
 
     mInsertCountSpinBox = new QSpinBox( this );
 //     mInsertCountSpinBox->setMinimumWidth( mInsertCountSpinBox->fontMetrics().maxWidth()*4 );
-//     mInsertCountSpinBox->setRange( 1, INT_MAX );
+    mInsertCountSpinBox->setRange( 1, INT_MAX );
     mInsertCountSpinBox->setValue( 1 );
     insertLayout->addWidget( mInsertCountSpinBox );
     mInsertButton = new KPushButton( KStandardGuiItem::insert(), this );
