@@ -44,7 +44,10 @@ KAbstractFindDialog::KAbstractFindDialog( QWidget *parent )
     setButtons( Ok | Cancel );
     setDefaultButton( Ok );
     enableButtonOk( false );
+}
 
+void KAbstractFindDialog::setupFindBox()
+{
     QWidget *page = new QWidget( this );
     setMainWidget( page );
 
@@ -72,6 +75,21 @@ KAbstractFindDialog::KAbstractFindDialog( QWidget *parent )
     findBoxLayout->addWidget( bytesLabel );
     findBoxLayout->addWidget( SearchDataEdit );
     findBox->setLayout( findBoxLayout );
+}
+
+void KAbstractFindDialog::setupOperationBox( QGroupBox *operationBox )
+{
+    QVBoxLayout *pageLayout = static_cast<QVBoxLayout *>( mainWidget()->layout() );
+
+    // operation box
+    if( operationBox )
+        pageLayout->addWidget( operationBox );
+}
+
+void KAbstractFindDialog::setupCheckBoxes( QCheckBox *optionCheckBox )
+{
+    QWidget *page = mainWidget();
+    QVBoxLayout *pageLayout = static_cast<QVBoxLayout *>( mainWidget()->layout() );
 
     // options
     QGroupBox *optionsBox = new QGroupBox( i18nc("@title:group","Options"), page );
@@ -98,34 +116,18 @@ KAbstractFindDialog::KAbstractFindDialog( QWidget *parent )
     optionsBoxLayout->addWidget( AtCursorCheckBox, 2, 0 );
     optionsBoxLayout->addWidget( BackwardsCheckBox, 0, 1 );
     optionsBoxLayout->addWidget( SelectedCheckBox, 1, 1 );
+    if( optionCheckBox )
+        optionsBoxLayout->addWidget( optionCheckBox, 2, 1 );
 
-//     setTabOrder( SearchDataFormatComboBox, SearchDataEdit );
-
-//     setTabOrder( LastTabWidget, CaseSensitiveCheckBox );
     setTabOrder( CaseSensitiveCheckBox, WholeWordsCheckBox );
     setTabOrder( WholeWordsCheckBox, AtCursorCheckBox );
     setTabOrder( AtCursorCheckBox, BackwardsCheckBox );
     setTabOrder( BackwardsCheckBox, SelectedCheckBox );
+//     if( optionCheckBox )
+//         setTabOrder( SelectedCheckBox, optionCheckBox );
 
     onSearchDataFormatChanged( SearchDataEdit->format() );
 }
-
-void KAbstractFindDialog::setOperationBox( QGroupBox *operationBox )
-{
-    QVBoxLayout *pageLayout = static_cast<QVBoxLayout *>( mainWidget()->layout() );
-    pageLayout->insertWidget( 1, operationBox );
-}
-
-void KAbstractFindDialog::setExtraOption( QCheckBox *optionCheckBox )
-{
-    if( optionCheckBox )
-    {
-        QGridLayout *optionsBoxLayout = static_cast<QGridLayout *>( BackwardsCheckBox->parentWidget()->layout() );
-        optionsBoxLayout->addWidget( optionCheckBox, 2, 1 );
-        setTabOrder( SelectedCheckBox, optionCheckBox );
-    }
-}
-
 
 bool KAbstractFindDialog::fromCursor()            const { return AtCursorCheckBox->isChecked(); }
 bool KAbstractFindDialog::inSelection()           const { return SelectedCheckBox->isChecked(); }

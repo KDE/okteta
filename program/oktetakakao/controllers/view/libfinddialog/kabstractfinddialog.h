@@ -61,11 +61,12 @@ class KAbstractFindDialog : public KDialog
     virtual void showEvent( QShowEvent *e );
 
   protected:
-    void setOperationBox( QGroupBox *OperationBox );
-    void setExtraOption( QCheckBox* OptionCheckBox );
+    void setupFindBox();
+    void setupOperationBox( QGroupBox *operationBox = 0 );
+    void setupCheckBoxes( QCheckBox *optionCheckBox = 0 );
 
   private Q_SLOTS:
-    void onSearchDataChanged( const QByteArray &Data );
+    void onSearchDataChanged( const QByteArray &ata );
     void onSearchDataFormatChanged( int Format );
 
   private:

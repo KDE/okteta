@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -37,6 +37,11 @@ KSearchDialog::KSearchDialog( QWidget *parent )
                             "If you press the <interface>Find</interface> button, "
                             "the bytes you entered above are searched for within "
                             "the byte array.")) );
+
+    setupFindBox();
+    setupOperationBox();
+    setupCheckBoxes();
+
     setModal( false );
 }
 
