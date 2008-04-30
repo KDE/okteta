@@ -44,7 +44,7 @@ InfoController::InfoController( KXmlGuiWindow *window )
     QDockWidget *dockWidget = new QDockWidget( i18nc("@title:window", "Info"), window );
     dockWidget->setObjectName( "Info" );
     dockWidget->setWidget( mView );
-    window->addDockWidget( Qt::BottomDockWidgetArea, dockWidget );
+    window->addDockWidget( Qt::RightDockWidgetArea, dockWidget );
 
     QAction *action = dockWidget->toggleViewAction();
     action->setText( i18nc("@title:window", "Info") ); //TODO: better name needed!
