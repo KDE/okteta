@@ -27,6 +27,7 @@
 #include "stringsextracttool.h"
 // KDE
 #include <KPushButton>
+#include <KLineEdit>
 #include <KDialog>
 #include <KLocale>
 #include <KGlobalSettings>
@@ -48,6 +49,7 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget *paren
     baseLayout->setMargin( 0 );
     baseLayout->setSpacing( KDialog::spacingHint() );
 
+    // update
     QHBoxLayout *updateLayout = new QHBoxLayout();
 
     updateLayout->addStretch();
@@ -69,12 +71,31 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget *paren
 
     baseLayout->addLayout( updateLayout );
 
+    // filter 
+    QHBoxLayout *filterLayout = new QHBoxLayout();
+
+    label = new QLabel( i18nc("@label:lineedit filter term for displayed strings","Filter:"), this );
+    filterLayout->addWidget( label );
+
+    KLineEdit *mFilterEdit = new KLineEdit( this );
+    mFilterEdit->setClearButtonShown( true );
+    mFilterEdit->setClickMessage( i18n("Enter a filter term here.") );
+    label->setBuddy( mFilterEdit );
+    filterLayout->addWidget( mFilterEdit, 10 );
+
+    baseLayout->addLayout( filterLayout );
+
+    // strings
     mContainedStringTableModel = new ContainedStringTableModel( mTool->containedStringList(), this );
     connect( mTool, SIGNAL(stringsUpdated()), mContainedStringTableModel, SLOT(update()) );
 
-    mSortProxyModel = new QSortFilterProxyModel( this );
-    mSortProxyModel->setDynamicSortFilter( true );
-    mSortProxyModel->setSourceModel( mContainedStringTableModel );
+    mSortFilterProxyModel = new QSortFilterProxyModel( this );
+    mSortFilterProxyModel->setDynamicSortFilter( true );
+    mSortFilterProxyModel->setSourceModel( mContainedStringTableModel );
+    mSortFilterProxyModel->setFilterKeyColumn( ContainedStringTableModel::StringId );
+    mSortFilterProxyModel->setFilterCaseSensitivity( Qt::CaseInsensitive );
+    connect( mFilterEdit, SIGNAL(textChanged( const QString & )),
+             mSortFilterProxyModel, SLOT(setFilterFixedString( const QString & )) );
 
     QTreeView *containedStringTableView = new QTreeView( this );
     containedStringTableView->setObjectName( "ContainedStringTable" );
@@ -85,7 +106,7 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget *paren
     containedStringTableView->setSortingEnabled( true );
     containedStringTableView->setFont( KGlobalSettings::fixedFont() );
     containedStringTableView->header()->setFont( font() );
-    containedStringTableView->setModel( mSortProxyModel );
+    containedStringTableView->setModel( mSortFilterProxyModel );
     containedStringTableView->sortByColumn( ContainedStringTableModel::OffsetId, Qt::AscendingOrder );
     connect( containedStringTableView, SIGNAL(clicked( const QModelIndex& )),
              SLOT(onStringClicked( const QModelIndex& )) );
@@ -108,7 +129,7 @@ void StringsExtractView::onExtractButtonClicked()
 void StringsExtractView::onStringClicked( const QModelIndex &index )
 {
 // TODO: this works only if the view is the same and no changes happened
-//     mTool->selectString( mSortProxyModel->mapToSource(index).row() );
+//     mTool->selectString( mSortFilterProxyModel->mapToSource(index).row() );
 }
 
 

@@ -51,7 +51,7 @@ class StringsExtractView : public QWidget
   private:
     StringsExtractTool *mTool;
     ContainedStringTableModel *mContainedStringTableModel;
-    QSortFilterProxyModel *mSortProxyModel;
+    QSortFilterProxyModel *mSortFilterProxyModel;
 
     QLabel *mDirtyLabel;
     QSpinBox *mMinLengthSpinBox;
