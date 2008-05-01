@@ -47,7 +47,7 @@ Q_UNUSED( parent )
 int ContainedStringTableModel::columnCount( const QModelIndex &parent ) const
 {
 Q_UNUSED( parent )
-    return NoOfIds;
+    return NoOfColumnIds;
 }
 
 QVariant ContainedStringTableModel::data( const QModelIndex &index, int role ) const
@@ -64,14 +64,14 @@ QVariant ContainedStringTableModel::data( const QModelIndex &index, int role ) c
             const int column = index.column();
             switch( column )
             {
-                case OffsetId:
+                case OffsetColumnId:
                 {
                     mPrintFunction( mCodedOffset, string.offset() );
 
                     result = QString().append( mCodedOffset );
                     break;
                 }
-                case StringId:
+                case StringColumnId:
                 {
                     result = string.string();
                     break;
@@ -92,8 +92,8 @@ QVariant ContainedStringTableModel::headerData( int section, Qt::Orientation ori
     if( role == Qt::DisplayRole )
     {
         const QString titel =
-            section == OffsetId ?   i18nc("@title:column offset of the extracted string",       "Offset") :
-            section == StringId ?   i18nc("@title:column string extracted from the byte array", "String") :
+            section == OffsetColumnId ?   i18nc("@title:column offset of the extracted string",       "Offset") :
+            section == StringColumnId ?   i18nc("@title:column string extracted from the byte array", "String") :
             QString();
         result = titel;
     }

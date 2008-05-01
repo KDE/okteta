@@ -92,7 +92,7 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget *paren
     mSortFilterProxyModel = new QSortFilterProxyModel( this );
     mSortFilterProxyModel->setDynamicSortFilter( true );
     mSortFilterProxyModel->setSourceModel( mContainedStringTableModel );
-    mSortFilterProxyModel->setFilterKeyColumn( ContainedStringTableModel::StringId );
+    mSortFilterProxyModel->setFilterKeyColumn( ContainedStringTableModel::StringColumnId );
     mSortFilterProxyModel->setFilterCaseSensitivity( Qt::CaseInsensitive );
     connect( mFilterEdit, SIGNAL(textChanged( const QString & )),
              mSortFilterProxyModel, SLOT(setFilterFixedString( const QString & )) );
@@ -107,7 +107,7 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget *paren
     containedStringTableView->setFont( KGlobalSettings::fixedFont() );
     containedStringTableView->header()->setFont( font() );
     containedStringTableView->setModel( mSortFilterProxyModel );
-    containedStringTableView->sortByColumn( ContainedStringTableModel::OffsetId, Qt::AscendingOrder );
+    containedStringTableView->sortByColumn( ContainedStringTableModel::OffsetColumnId, Qt::AscendingOrder );
     connect( containedStringTableView, SIGNAL(clicked( const QModelIndex& )),
              SLOT(onStringClicked( const QModelIndex& )) );
 

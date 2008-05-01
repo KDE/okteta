@@ -39,9 +39,9 @@ class ContainedStringTableModel : public QAbstractTableModel
   public:
     enum ColumnIds
     {
-        OffsetId = 0,
-        StringId = 1,
-        NoOfIds = 2 // TODO: what pattern is usually used to mark number of ids?
+        OffsetColumnId = 0,
+        StringColumnId = 1,
+        NoOfColumnIds = 2 // TODO: what pattern is usually used to mark number of ids?
     };
 
   public:
