@@ -1,0 +1,11 @@
+/**
+
+\mainpage Okteta, a binary/hex editor
+
+\authors Friedrich W. H. Kossebau <kossebau@kde.org>
+
+\licenses \lgpl
+
+*/
+
+// DOXYGEN_SET_PROJECT_NAME = okteta
