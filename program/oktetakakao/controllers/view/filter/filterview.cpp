@@ -79,8 +79,8 @@ FilterView::FilterView( FilterTool *tool, QWidget *parent )
     // filter button
     QHBoxLayout *buttonLayout = new QHBoxLayout();
     buttonLayout->addStretch( 10 );
-    mFilterButton = new KPushButton( KGuiItem(i18nc("@action:button","&Filter"), QString(),
-                      i18nc("@info:tooltip","Executes the filter"),
+    mFilterButton = new KPushButton( KGuiItem(i18nc("@action:button","&Filter"), "system-run",
+                      i18nc("@info:tooltip","Executes the filter."),
                       i18nc("@info:whatsthis",
                             "If you press the <interface>Filter</interface> button, the operation you selected "
                             "above is executed on the document with the given options.")), this );
