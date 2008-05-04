@@ -28,6 +28,7 @@
 // KDE
 #include <KPushButton>
 #include <KDialog>
+#include <KGuiItem>
 #include <KLocale>
 #include <KGlobal>
 #include <KGlobalSettings>
@@ -53,7 +54,13 @@ InfoView::InfoView( InfoTool *tool, QWidget *parent )
     connect( mTool, SIGNAL(statisticDirty( bool )), SLOT(setDirty( bool )) );
     updateLayout->addStretch();
 
-    mUpdateButton = new KPushButton( i18nc("@action:button update the statistic of the byte frequency","Update"), this );
+    const KGuiItem updateGuiItem(
+        i18nc("@action:button update the statistic of the byte frequency","&Update"),
+        "view-refresh",
+        i18nc("@info:tooltip","Updates the statistic of the byte frequency."),
+        i18nc("@info:whatsthis",
+              "If you press the <interface>Update</interface> button, the statistic of the byte frequency is updated.") );
+    mUpdateButton = new KPushButton( updateGuiItem, this );
     mUpdateButton->setEnabled( mTool->hasByteArrayView() );
     connect( mTool, SIGNAL(byteArrayViewChanged(bool)), mUpdateButton, SLOT( setEnabled(bool )) );
     connect( mUpdateButton, SIGNAL(clicked(bool)), mTool, SLOT(updateStatistic()) ); 
