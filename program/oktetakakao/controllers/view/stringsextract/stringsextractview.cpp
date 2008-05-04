@@ -29,6 +29,7 @@
 #include <KPushButton>
 #include <KLineEdit>
 #include <KDialog>
+#include <KGuiItem>
 #include <KLocale>
 #include <KGlobalSettings>
 // Qt
@@ -38,7 +39,8 @@
 #include <QtGui/QSortFilterProxyModel>
 #include <QtGui/QHeaderView>
 #include <QtGui/QTreeView>
-
+#include <QtGui/QClipboard>
+#include <QtGui/QApplication>
 
 static const int MinimumStringLength = 1;
 
@@ -53,20 +55,25 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget *paren
     QHBoxLayout *updateLayout = new QHBoxLayout();
 
     updateLayout->addStretch();
-    QLabel *label = new QLabel( i18nc("@label:spinbox minimum length consecutive chars make a string","Minimum length:"), this );
-    label->setFixedWidth( label->sizeHint().width() );
+    QLabel *label = new QLabel( i18nc("@label:spinbox minimum length for consecutive chars to be seen as a string",
+                                      "Minimum length:"), this );
     updateLayout->addWidget( label );
 
     mMinLengthSpinBox = new QSpinBox( this );
     mMinLengthSpinBox->setValue( mTool->minLength() );
     mMinLengthSpinBox->setMinimum( MinimumStringLength );
     connect( mMinLengthSpinBox, SIGNAL(valueChanged( int )), mTool, SLOT(setMinLength( int )) );
+    label->setBuddy( mMinLengthSpinBox );
     updateLayout->addWidget( mMinLengthSpinBox );
 
-    mUpdateButton = new KPushButton( i18nc("@action:button update the list of strings extracted","Update"), this );
+    const KGuiItem updateGuiItem( i18nc("@action:button update the list of strings extracted","&Update"), "view-refresh",
+                      i18nc("@info:tooltip","Update the list of strings contained in the selected range."),
+                      i18nc("@info:whatsthis",
+                            "If you press the <interface>Update</interface> button, the list will be updated "
+                            "to all strings which are contained in the selected range and have the set minimum length.") );
+    mUpdateButton = new KPushButton( updateGuiItem, this );
     mUpdateButton->setEnabled( mTool->isApplyable() );
-    connect( mTool, SIGNAL(isApplyableChanged( bool )), mUpdateButton, SLOT( setEnabled(bool )) );
-    connect( mUpdateButton, SIGNAL(clicked(bool)), SLOT(onExtractButtonClicked()) );
+    connect( mUpdateButton, SIGNAL(clicked(bool)), mTool, SLOT(extractStrings()) );
     updateLayout->addWidget( mUpdateButton );
 
     baseLayout->addLayout( updateLayout );
@@ -87,7 +94,6 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget *paren
 
     // strings
     mContainedStringTableModel = new ContainedStringTableModel( mTool->containedStringList(), this );
-    connect( mTool, SIGNAL(stringsUpdated()), mContainedStringTableModel, SLOT(update()) );
 
     mSortFilterProxyModel = new QSortFilterProxyModel( this );
     mSortFilterProxyModel->setDynamicSortFilter( true );
@@ -97,21 +103,56 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget *paren
     connect( mFilterEdit, SIGNAL(textChanged( const QString & )),
              mSortFilterProxyModel, SLOT(setFilterFixedString( const QString & )) );
 
-    QTreeView *containedStringTableView = new QTreeView( this );
-    containedStringTableView->setObjectName( "ContainedStringTable" );
-    containedStringTableView->setRootIsDecorated( false );
-    containedStringTableView->setItemsExpandable( false );
-    containedStringTableView->setUniformRowHeights( true );
-    containedStringTableView->setAllColumnsShowFocus( true );
-    containedStringTableView->setSortingEnabled( true );
-    containedStringTableView->setFont( KGlobalSettings::fixedFont() );
-    containedStringTableView->header()->setFont( font() );
-    containedStringTableView->setModel( mSortFilterProxyModel );
-    containedStringTableView->sortByColumn( ContainedStringTableModel::OffsetColumnId, Qt::AscendingOrder );
-    connect( containedStringTableView, SIGNAL(clicked( const QModelIndex& )),
-             SLOT(onStringClicked( const QModelIndex& )) );
+    mContainedStringTableView = new QTreeView( this );
+    mContainedStringTableView->setObjectName( "ContainedStringTable" );
+    mContainedStringTableView->setRootIsDecorated( false );
+    mContainedStringTableView->setItemsExpandable( false );
+    mContainedStringTableView->setUniformRowHeights( true );
+    mContainedStringTableView->setAllColumnsShowFocus( true );
+    mContainedStringTableView->setSelectionMode( QAbstractItemView::ExtendedSelection );
+    mContainedStringTableView->setSortingEnabled( true );
+    mContainedStringTableView->setFont( KGlobalSettings::fixedFont() );
+    mContainedStringTableView->header()->setFont( font() );
+    mContainedStringTableView->setModel( mSortFilterProxyModel );
+    mContainedStringTableView->sortByColumn( ContainedStringTableModel::OffsetColumnId, Qt::AscendingOrder );
+    connect( mContainedStringTableView, SIGNAL(doubleClicked( const QModelIndex& )),
+             SLOT(onStringDoubleClicked( const QModelIndex& )) );
+    connect( mContainedStringTableView->selectionModel(),
+             SIGNAL(selectionChanged( const QItemSelection &, const QItemSelection & )),
+             SLOT(onStringSelectionChanged()) );
 
-    baseLayout->addWidget( containedStringTableView, 10 );
+    baseLayout->addWidget( mContainedStringTableView, 10 );
+
+    // actions
+    QHBoxLayout *actionsLayout = new QHBoxLayout();
+
+    const KGuiItem copyGuiItem( i18n("C&opy"), "edit-copy",
+                      i18nc("@info:tooltip","Copies the selected strings to the clipboard."),
+                      i18nc("@info:whatsthis",
+                            "If you press the <interface>Copy</interface> button, all strings you selected "
+                            "in the list are copied to the clipboard.") );
+    mCopyButton = new KPushButton( copyGuiItem, this );
+    connect( mCopyButton, SIGNAL(clicked(bool)), SLOT(onCopyButtonClicked()) );
+    actionsLayout->addWidget( mCopyButton );
+
+    actionsLayout->addStretch();
+
+    const KGuiItem gotoGuiItem( i18n("&Go to"), "go-jump",
+                      i18nc("@info:tooltip","Shows the selected string in the view."),
+                      i18nc("@info:whatsthis",
+                            "If you press the <interface>Go to</interface> button, the string which was last "
+                            "selected is marked and shown in the view.") );
+    mGotoButton = new KPushButton( gotoGuiItem, this );
+    connect( mGotoButton, SIGNAL(clicked(bool)), SLOT(onGotoButtonClicked()) );
+    actionsLayout->addWidget( mGotoButton );
+
+    baseLayout->addLayout( actionsLayout );
+
+    connect( mTool, SIGNAL(uptodateChanged( bool )), SLOT(onStringsUptodateChanged( bool )) );
+    connect( mTool, SIGNAL(isApplyableChanged( bool )), SLOT( onApplyableChanged( bool )) );
+    connect( mTool, SIGNAL(isSelectableChanged( bool )), SLOT(onIsSelectableChanged( bool )) );
+
+    onStringSelectionChanged();
 }
 
 #if 0
@@ -120,18 +161,65 @@ void StringsExtractView::setDirty( bool dirty )
     mUpdateButton->setToolTip( dirty ? i18nc("@info:tooltip","Warning: Byte Array has been modified since last update.") : QString() );
 }
 #endif
-void StringsExtractView::onExtractButtonClicked()
+
+void StringsExtractView::onStringsUptodateChanged( bool stringsUptodate )
 {
-    mUpdateButton->setEnabled( false );
-    mTool->extractStrings();
+    if( stringsUptodate )
+        mContainedStringTableModel->update();
+
+    mUpdateButton->setEnabled( !stringsUptodate && mTool->isApplyable() );
 }
 
-void StringsExtractView::onStringClicked( const QModelIndex &index )
+void StringsExtractView::onApplyableChanged( bool isApplyable )
 {
-// TODO: this works only if the view is the same and no changes happened
-//     mTool->selectString( mSortFilterProxyModel->mapToSource(index).row() );
+    mUpdateButton->setEnabled( isApplyable );
+}
+
+void StringsExtractView::onIsSelectableChanged( bool isSelectable )
+{
+    const bool hasCurrent = mContainedStringTableView->selectionModel()->currentIndex().isValid();
+    mGotoButton->setEnabled( isSelectable && hasCurrent );
 }
 
 
+
+void StringsExtractView::onGotoButtonClicked()
+{
+    const QModelIndex index = mContainedStringTableView->selectionModel()->currentIndex();
+    if( index.isValid() )
+        onStringDoubleClicked( index );
+}
+
+void StringsExtractView::onCopyButtonClicked()
+{
+    const QModelIndexList selectedIndexes = mContainedStringTableView->selectionModel()->selectedIndexes();
+    const QList<ContainedString> *containedStringList = mTool->containedStringList();
+
+    QString strings;
+    foreach( const QModelIndex &index, selectedIndexes )
+    {
+        const int i = mSortFilterProxyModel->mapToSource(index).row();
+        strings += ( containedStringList->at( i ).string() + '\n' ); //TODO: specific linefeed for platforms
+    }
+    QApplication::clipboard()->setText( strings );
+}
+
+void StringsExtractView::onStringSelectionChanged()
+{
+    const QItemSelectionModel *selectionModel = mContainedStringTableView->selectionModel();
+
+    const bool hasSelection = selectionModel->hasSelection();
+    mCopyButton->setEnabled( hasSelection );
+
+    const bool hasCurrent = selectionModel->currentIndex().isValid();
+    const bool isSelectable = mTool->isSelectable();
+    mGotoButton->setEnabled( isSelectable && hasCurrent );
+}
+
+void StringsExtractView::onStringDoubleClicked( const QModelIndex &index )
+{
+    if( mTool->isSelectable() )
+        mTool->selectString( mSortFilterProxyModel->mapToSource(index).row() );
+}
 
 StringsExtractView::~StringsExtractView() {}

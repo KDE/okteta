@@ -29,6 +29,7 @@
 class ContainedStringTableModel;
 class StringsExtractTool;
 class KPushButton;
+class QTreeView;
 class QSortFilterProxyModel;
 class QModelIndex;
 class QSpinBox;
@@ -43,19 +44,30 @@ class StringsExtractView : public QWidget
     explicit StringsExtractView( StringsExtractTool *tool, QWidget *parent = 0 );
     virtual ~StringsExtractView();
 
-  public Q_SLOTS:
+  public Q_SLOTS: // gui
 //     void setDirty( bool dirty );
-    void onExtractButtonClicked();
-    void onStringClicked( const QModelIndex &index );
+    void onStringDoubleClicked( const QModelIndex &index );
+    void onStringSelectionChanged();
+    void onGotoButtonClicked();
+    void onCopyButtonClicked();
+
+  public Q_SLOTS: // tool
+    void onStringsUptodateChanged( bool stringUptodate );
+    void onApplyableChanged( bool isApplyable );
+    void onIsSelectableChanged( bool isSelectable );
 
   private:
     StringsExtractTool *mTool;
+
     ContainedStringTableModel *mContainedStringTableModel;
     QSortFilterProxyModel *mSortFilterProxyModel;
 
+    QTreeView *mContainedStringTableView;
     QLabel *mDirtyLabel;
     QSpinBox *mMinLengthSpinBox;
     KPushButton *mUpdateButton;
+    KPushButton *mCopyButton;
+    KPushButton *mGotoButton;
 };
 
 #endif

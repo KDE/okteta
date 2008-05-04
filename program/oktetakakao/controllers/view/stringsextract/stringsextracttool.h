@@ -25,6 +25,8 @@
 
 // tool
 #include "containedstring.h"
+// Okteta core
+#include <ksection.h>
 // Qt
 #include <QtCore/QObject>
 #include <QtCore/QList>
@@ -52,24 +54,32 @@ class StringsExtractTool : public QObject
   public:
     void setView( KAbstractView *view );
 
-  public:
+  public: // status
     const QList<ContainedString> *containedStringList() const;
     int minLength() const;
     bool isApplyable() const; // candidate for AbstractTool API
+    bool isUptodate() const;
+    bool isSelectable() const;
 
-  public Q_SLOTS:
-    void extractStrings();
-
+  public Q_SLOTS: // settings
     void setCharCodec( const QString &codecName );
     void setMinLength( int minLength );
     void selectString( int stringId );
 
+  public Q_SLOTS: // actions
+    void extractStrings();
+
+  public Q_SLOTS: // actions
+    void onSourceModified();
+
   Q_SIGNALS:
-    void stringsUpdated();
+    void uptodateChanged( bool isUptodate );
     void isApplyableChanged( bool isApplyable );  // candidate for AbstractTool API
+    void isSelectableChanged( bool isSelectable );
 
   protected: // created data
     QList<ContainedString> mContainedStringList;
+    bool mUptodate;
 
   protected: // settings
     KHECore::KCharCodec *mCharCodec;
@@ -77,10 +87,17 @@ class StringsExtractTool : public QObject
 
   protected: // sources
     KHEUI::KByteArrayView *mByteArrayView;
+    // current
     KHECore::KAbstractByteArrayModel *mByteArrayModel;
+
+    // selection source
+    KHE::KSection mSourceSelection;
+    // source of strings
+    KHECore::KAbstractByteArrayModel *mSourceByteArrayModel;
 };
 
 inline const QList<ContainedString> *StringsExtractTool::containedStringList() const { return &mContainedStringList; }
 inline int StringsExtractTool::minLength()     const { return mMinLength; }
+inline bool StringsExtractTool::isUptodate()   const { return mUptodate; }
 
 #endif
