@@ -43,10 +43,10 @@ set( SELECTCONTROLLER_SRCS
   view/select/selectcontroller.cpp
 )
 set( CLIPBOARDCONTROLLER_SRCS
-  view/clipboard/clipboardcontroller.cpp
+  io/clipboard/clipboardcontroller.cpp
 )
 set( COPYASCONTROLLER_SRCS
-  view/copyas/copyascontroller.cpp
+  io/copyas/copyascontroller.cpp
 )
 # set( CLOSECONTROLLER_SRCS
 #   viewsystem/close/closecontroller.cpp

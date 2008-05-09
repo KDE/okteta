@@ -47,11 +47,11 @@
 #include <documentsystem/close/closecontroller.h>
 #include <io/setremote/setremotecontroller.h>
 #include <io/synchronize/synchronizecontroller.h>
+#include <io/clipboard/clipboardcontroller.h>
+#include <io/copyas/copyascontroller.h>
 #include <view/version/versioncontroller.h>
 #include <view/zoom/zoomcontroller.h>
 #include <view/select/selectcontroller.h>
-#include <view/clipboard/clipboardcontroller.h>
-#include <view/copyas/copyascontroller.h>
 #include <shellwindow/viewlistmenu/viewlistmenucontroller.h>
 #include <shellwindow/fullscreen/fullscreencontroller.h>
 /*#include <viewsystem/close/closecontroller.h>*/
