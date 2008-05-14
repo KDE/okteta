@@ -25,6 +25,8 @@
 // lib
 #include "testdocument.h"
 #include "testdocumentfilesynchronizer.h"
+// KDE
+#include <KUrl>
 // Qt
 #include <QtCore/QLatin1String>
 
