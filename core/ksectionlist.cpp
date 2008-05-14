@@ -26,62 +26,58 @@
 namespace KHE
 {
 
-KSectionList::KSectionList()
+KSectionList::KSectionList() {}
+
+
+void KSectionList::addSection( const KSection &newSection )
 {
-}
+    if( !newSection.isValid() )
+        return;
 
-
-KSectionList::~KSectionList()
-{
-}
-
-
-void KSectionList::addSection( KSection NewSection )
-{
-  if( !NewSection.isValid() )
-    return;
-
-  // we try to insert it by ascending indizes
-  // if sections are overlapping we combine them
-  iterator S = begin();
-  for( ; S!=end(); ++S )
-  {
-    // new section before next section?
-    if( NewSection.endsBefore((*S).beforeStart()) )
+    // we try to insert it by ascending indizes
+    // if sections are overlapping we combine them
+    Iterator firstOverlappingIt = begin();
+    for( ; firstOverlappingIt!=end(); ++firstOverlappingIt )
     {
-      // put the new before it
-      insert( S, NewSection );
-      return;
+        // new section before next section?
+        if( newSection.endsBefore((*firstOverlappingIt).beforeStart()) )
+        {
+            // put the new before it
+            insert( firstOverlappingIt, newSection );
+            return;
+        }
+
+        // does the next section overlap?
+        if( (*firstOverlappingIt).isJoinable(newSection) )
+        {
+            KSection joinedSection( newSection );
+            // Start of the joined sections is the smaller one
+            joinedSection.extendStartTo( (*firstOverlappingIt).start() );
+            // next we search all the overlapping sections and keep the highest end index
+            int joinedEnd = (*firstOverlappingIt).end();
+            Iterator lastOverlappingIt = firstOverlappingIt;
+            for( ++lastOverlappingIt; lastOverlappingIt!=end(); ++lastOverlappingIt )
+            {
+                if( joinedSection.endsBefore((*lastOverlappingIt).beforeStart()) )
+                    break;
+                joinedEnd = (*lastOverlappingIt).end();
+            }
+            // the higher end is the end of the joined section
+            joinedSection.extendEndTo( joinedEnd );
+            // remove all overlapping sections
+            firstOverlappingIt = erase( firstOverlappingIt, lastOverlappingIt );
+            // and instead insert the joined one
+            insert( firstOverlappingIt, joinedSection );
+            return;
+        }
     }
 
-    // does the next section overlap?
-    if( (*S).isJoinable(NewSection) )
-    {
-      // Start of the combined sections is the smaller one
-      NewSection.extendStartTo( (*S).start() );
-      // next we search all the overlapping sections and keep the highest end index
-      int End = (*S).end();
-      iterator LS = S;
-      for( ++LS; LS!=end(); ++LS )
-      {
-        if( NewSection.endsBefore((*LS).beforeStart()) )
-          break;
-        End = (*LS).end();
-      }
-      // the higher end is the end of the combined section
-      NewSection.extendEndTo( End );
-      // remove all overlapping sections
-      S = erase( S, LS );
-      // and instead insert the combined one
-      insert( S, NewSection );
-      return;
-    }
-  }
-
-  // all others before the new?
-  if( S == end() )
-    // add it at the end
-    append( NewSection );
+    // all others before the new?
+    if( firstOverlappingIt == end() )
+        // add it at the end
+        append( newSection );
 }
+
+KSectionList::~KSectionList() {}
 
 }
