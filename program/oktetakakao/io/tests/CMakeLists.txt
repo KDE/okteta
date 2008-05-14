@@ -1,6 +1,9 @@
 project( oktetakakao_document_tests )
-
 set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/.. )
+
+# make sure to not use KDE_EXPORT or KDE_IMPORT because we link statically
+# against a small part of the libs
+add_definitions(-DOKTETACORE_EXPORT=)
 
 include_directories(
   ${SUTDIR}

@@ -3,6 +3,9 @@ set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/.. )
 
 include_directories( ${SUTDIR} )
 
+# make sure to not use KDE_EXPORT or KDE_IMPORT because we link statically
+# against a small part of the libs
+add_definitions(-DOKTETACORE_EXPORT=)
 
 # helper
 set( oktetacoretestutil_LIB_SRCS
