@@ -38,10 +38,10 @@ namespace KHE {
 class ArrayChangeMetricsList;
 }
 
+using namespace KHE; // TODO: remove me
+
 namespace KHECore
 {
-
-using namespace KHE;
 
 /** could it be useful to hide the data access behind an iterator? *
 class KDataBufferIterator
