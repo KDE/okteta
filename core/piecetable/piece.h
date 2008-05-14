@@ -94,13 +94,13 @@ inline Piece Piece::removeStartBeforeLocal( int storageOffset )
 {
     const int oldStart = start();
     moveStartBy( storageOffset );
-    return Piece( KHE::KSection(oldStart,beforeStart()), mStorageId );
+    return Piece( KHE::KSection(oldStart,nextBeforeStart()), mStorageId );
 }
 inline Piece Piece::removeEndBehindLocal( int storageOffset )
 {
     const int oldEnd = end();
     setEndByWidth( storageOffset+1 );
-    return Piece( KHE::KSection(behindEnd(),oldEnd), mStorageId );
+    return Piece( KHE::KSection(nextBehindEnd(),oldEnd), mStorageId );
 }
 
 inline Piece Piece::subPiece( const KSection &local ) const

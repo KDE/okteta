@@ -817,7 +817,7 @@ bool KByteArrayView::selectWord( /*unsigned TODO:change all unneeded signed into
             pauseCursor();
 
             mDataRanges->setFirstWordSelection( wordSection );
-            mDataCursor->gotoIndex( wordSection.behindEnd() );
+            mDataCursor->gotoIndex( wordSection.nextBehindEnd() );
             updateChanged();
 
             unpauseCursor();
@@ -1135,7 +1135,7 @@ void KByteArrayView::setSelection( int start, int end )
             pauseCursor();
 
             mDataRanges->setSelection( selection );
-            mDataCursor->gotoCIndex( selection.behindEnd() );
+            mDataCursor->gotoCIndex( selection.nextBehindEnd() );
             ensureVisible( activeColumn(), mDataLayout->coordOfIndex(selection.start()) );
             ensureCursorVisible();
             updateChanged();
@@ -1858,7 +1858,7 @@ void KByteArrayView::handleMouseMove( const QPoint &point ) // handles the move 
         else
         {
             mDataRanges->ensureWordSelectionForward( true );
-            newIndex = firstWordSelection.behindEnd();
+            newIndex = firstWordSelection.nextBehindEnd();
         }
 
         mDataCursor->gotoIndex( newIndex );
@@ -1991,7 +1991,7 @@ void KByteArrayView::handleInternalDrag( QDropEvent *dropEvent )
         {
             newCursorIndex = insertIndex;
             const int firstIndex = selection.start();
-            selection.set( selection.behindEnd(), insertIndex-1 );
+            selection.set( selection.nextBehindEnd(), insertIndex-1 );
             insertIndex = firstIndex;
         }
         else

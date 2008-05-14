@@ -331,9 +331,9 @@ KPixelX AbstractByteArrayColumnRenderer::columnRightXOfLinePosition( int linePos
 
 KPixelXs AbstractByteArrayColumnRenderer::xsOfLinePositionsInclSpaces( const KHE::KSection &linePositions ) const
 {
-    const int x = (linePositions.start()>0) ? rightXOfLinePosition( linePositions.beforeStart() ) + 1 :
+    const int x = (linePositions.start()>0) ? rightXOfLinePosition( linePositions.nextBeforeStart() ) + 1 :
                                               xOfLinePosition( linePositions.start() );
-    const int rightX = (linePositions.end()<mLastLinePos) ? xOfLinePosition( linePositions.behindEnd() ) - 1 :
+    const int rightX = (linePositions.end()<mLastLinePos) ? xOfLinePosition( linePositions.nextBehindEnd() ) - 1 :
                                                             rightXOfLinePosition( linePositions.end() );
     return KPixelXs( x, rightX );
 }
@@ -341,9 +341,9 @@ KPixelXs AbstractByteArrayColumnRenderer::xsOfLinePositionsInclSpaces( const KHE
 
 KPixelXs AbstractByteArrayColumnRenderer::columnXsOfLinePositionsInclSpaces( const KHE::KSection &linePositions ) const
 {
-    const int x = (linePositions.start()>0) ? columnRightXOfLinePosition( linePositions.beforeStart() ) + 1 :
+    const int x = (linePositions.start()>0) ? columnRightXOfLinePosition( linePositions.nextBeforeStart() ) + 1 :
                                               columnXOfLinePosition( linePositions.start() );
-    const int rightX = (linePositions.end()<mLastLinePos) ? columnXOfLinePosition( linePositions.behindEnd() ) - 1 :
+    const int rightX = (linePositions.end()<mLastLinePos) ? columnXOfLinePosition( linePositions.nextBehindEnd() ) - 1 :
                                                             columnRightXOfLinePosition( linePositions.end() );
     return KPixelXs( x, rightX  );
 }
@@ -445,7 +445,7 @@ void AbstractByteArrayColumnRenderer::renderLinePositions( QPainter *painter, in
                 SelectionFlag |= StartsBefore;
             bool MarkingBeforeEnd = HasMarking && Marking.start() <= Selection.end();
 
-            byteIndizesPart.setEnd( MarkingBeforeEnd ? Marking.start()-1 : Selection.end() );
+            byteIndizesPart.setEnd( MarkingBeforeEnd ? Marking.nextBeforeStart() : Selection.end() );
             PositionsPart.setEndByWidth( byteIndizesPart.width() );
 
             if( MarkingBeforeEnd )
@@ -459,15 +459,15 @@ void AbstractByteArrayColumnRenderer::renderLinePositions( QPainter *painter, in
         {
             // calc end of plain text
             if( HasMarking )
-                byteIndizesPart.setEnd( Marking.start()-1 );
+                byteIndizesPart.setEnd( Marking.nextBeforeStart() );
             if( HasSelection )
-                byteIndizesPart.restrictEndTo( Selection.start()-1 );
+                byteIndizesPart.restrictEndTo( Selection.nextBeforeStart() );
 
             PositionsPart.setEndByWidth( byteIndizesPart.width() );
             renderPlain( painter, PositionsPart, byteIndizesPart.start() );
         }
-        byteIndizes.setStartBehind( byteIndizesPart );
-        linePositions.setStartBehind( PositionsPart );
+        byteIndizes.setStartNextBehind( byteIndizesPart );
+        linePositions.setStartNextBehind( PositionsPart );
     }
 }
 
@@ -584,8 +584,8 @@ void AbstractByteArrayColumnRenderer::renderBookmark( QPainter *painter )
 
 void AbstractByteArrayColumnRenderer::renderRange( QPainter *painter, const QBrush &Brush, const KHE::KSection &linePositions, int flag )
 {
-    KPixelX RangeX = flag & StartsBefore ? columnRightXOfLinePosition( linePositions.start()-1 ) + 1 : columnXOfLinePosition( linePositions.start() );
-    KPixelX RangeW = (flag & EndsLater ? columnXOfLinePosition( linePositions.end()+1 ): columnRightXOfLinePosition( linePositions.end() ) + 1)  - RangeX;
+    KPixelX RangeX = flag & StartsBefore ? columnRightXOfLinePosition( linePositions.nextBeforeStart() ) + 1 : columnXOfLinePosition( linePositions.start() );
+    KPixelX RangeW = (flag & EndsLater ? columnXOfLinePosition( linePositions.nextBehindEnd() ): columnRightXOfLinePosition( linePositions.end() ) + 1)  - RangeX;
 
     painter->fillRect( RangeX,0, RangeW,lineHeight(), Brush );
 }

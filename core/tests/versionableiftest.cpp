@@ -141,7 +141,7 @@ weiter an anfang
 
   mVersionable->fill( PaintChar, FillSection );
   QCOMPARE( Copy.compare(*mVersionable, FillSection), 0 );
-  QCOMPARE( mVersionable->datum(FillSection.behindEnd()), BlankChar );
+  QCOMPARE( mVersionable->datum(FillSection.nextBehindEnd()), BlankChar );
   QVERIFY( mVersionable->isModified() );
   checkContentsReplaced( FillSection, FillSection.width() );
   checkContentsChanged( FillSection );
@@ -153,7 +153,7 @@ weiter an anfang
   clearSignalSpys();
 
   mVersionable->fill( PaintChar, FillSection );
-  QCOMPARE( mVersionable->datum(FillSection.beforeStart()), BlankChar );
+  QCOMPARE( mVersionable->datum(FillSection.nextBeforeStart()), BlankChar );
   QCOMPARE( Copy.compare(*mVersionable, FillSection, FillSection.start()), 0 );
   QVERIFY( mVersionable->isModified() );
   checkContentsReplaced( FillSection, FillSection.width() );
@@ -166,9 +166,9 @@ weiter an anfang
   clearSignalSpys();
 
   mVersionable->fill( PaintChar, FillSection );
-  QCOMPARE( mVersionable->datum(FillSection.beforeStart()), BlankChar );
+  QCOMPARE( mVersionable->datum(FillSection.nextBeforeStart()), BlankChar );
   QCOMPARE( Copy.compare(*mVersionable, FillSection, FillSection.start()), 0 );
-  QCOMPARE( mVersionable->datum(FillSection.behindEnd()), BlankChar );
+  QCOMPARE( mVersionable->datum(FillSection.nextBehindEnd()), BlankChar );
   QVERIFY( mVersionable->isModified() );
   checkContentsReplaced( FillSection, FillSection.width() );
   checkContentsChanged( FillSection );

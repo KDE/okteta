@@ -45,7 +45,7 @@ bool XOrByteArrayFilter::filter( char *result,
     if( mParameterSet.alignAtEnd() )
     {
         int r = section.width();
-        int m = section.end() + 1;
+        int m = section.nextBehindEnd();
 
         while( m > 0 )
         {

@@ -54,7 +54,7 @@ bool RemovePieceTableChange::merge( const AbstractPieceTableChange *other )
             result = true;
         }
         // other removed before?
-        else if( otherRemoveChange->mRemoveSection.end()+1 == mRemoveSection.start() )
+        else if( otherRemoveChange->mRemoveSection.nextBehindEnd() == mRemoveSection.start() )
         {
             mRemoveSection.setStart( otherRemoveChange->mRemoveSection.start() );
             mRemovedPieces.prepend( otherRemoveChange->mRemovedPieces );

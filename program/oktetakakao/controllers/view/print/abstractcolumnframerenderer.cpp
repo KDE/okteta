@@ -227,7 +227,7 @@ void AbstractColumnFrameRenderer::renderFrame( QPainter *painter, int frameIndex
         }
 
         // draw empty columns?
-       renderedYs.set( renderedYs.behindEnd(), height()-1 );
+       renderedYs.set( renderedYs.nextBehindEnd(), height()-1 );
         if( renderedYs.isValid() )
         {
             QListIterator<AbstractColumnRenderer*> it( columnRenderers );

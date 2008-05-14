@@ -61,19 +61,16 @@ class OKTETACORE_EXPORT KSection : public KRange<int>
 
   public:
     void setByWidth( int other, int width );
-    // TODO: the following functions do not match the ones from KRange exactly
-    // better use RightBefore/Behind or ExactlyBefore/Behind or else 
-    // alignAfter, alignBefore keep width, alignStartBehind, alignEndBefore perhaps
     /** sets the first index of the section's range one behind the other's end
       * If one of both is invalid the behaviour is undefined
       */
-    void setStartBehind( const KSection &other );
-    void setStartBehind( int index );
+    void setStartNextBehind( const KSection &other );
+    void setStartNextBehind( int index );
     /** sets the first index of the section's range one behind the other's end
       * If one of both is invalid or the other' start is 0 the behaviour is undefined
       */
-    void setEndBefore( const KSection &other );
-    void setEndBefore( int index );
+    void setEndNextBefore( const KSection &other );
+    void setEndNextBefore( int index );
     /** sets the first index of the section's range to be width-1 before the end
      * If the section is invalid the behaviour is undefined
      */
@@ -108,8 +105,8 @@ class OKTETACORE_EXPORT KSection : public KRange<int>
      * @return the numbered of included indizes or 0, if the section is invalid
      */
     int width() const;
-    int beforeStart() const;
-    int behindEnd() const;
+    int nextBeforeStart() const;
+    int nextBehindEnd() const;
 
   public:
     /** @return index relative to the start */
@@ -138,16 +135,16 @@ inline bool KSection::operator==( const KSection &other ) const { return KRange<
 inline KSection &KSection::operator=( const KSection &other ) { KRange<int>::operator=(other); return *this; }
 
 inline int KSection::width()       const { return isValid() ? end()-start()+1 : 0; }
-inline int KSection::beforeStart() const { return start()-1; }
-inline int KSection::behindEnd()   const { return end()+1; }
+inline int KSection::nextBeforeStart() const { return start()-1; }
+inline int KSection::nextBehindEnd()   const { return end()+1; }
 
 inline void KSection::setByWidth( int other, int width )  { setStart( other ); setEnd( other+width-1 ); }
 inline void KSection::setStartByWidth( int width )  { setStart( end()-width+1 ); }
 inline void KSection::setEndByWidth( int width )    { setEnd( start()+width-1 ); }
-inline void KSection::setStartBehind( const KSection &other )  { setStart( other.end()+1 ); }
-inline void KSection::setStartBehind( int index )  { setStart( index+1 ); }
-inline void KSection::setEndBefore( const KSection &other )    { setEnd( other.start()-1 ); }
-inline void KSection::setEndBefore( int index )    { setEnd( index-1 ); }
+inline void KSection::setStartNextBehind( const KSection &other )  { setStart( other.nextBehindEnd() ); }
+inline void KSection::setStartNextBehind( int index )  { setStart( index+1 ); }
+inline void KSection::setEndNextBefore( const KSection &other )    { setEnd( other.nextBeforeStart() ); }
+inline void KSection::setEndNextBefore( int index )    { setEnd( index-1 ); }
 inline void KSection::restrictEndByWidth( int width ) { restrictEndTo( start()+width-1 ); }
 
 inline void KSection::moveToStart( int other ) { setEnd( other+width()-1 ); setStart( other ); }
@@ -156,26 +153,26 @@ inline void KSection::moveToEnd( int end )   { setStart( end-width()+1 ); setEnd
 inline KSection KSection::splitAt( int index )
 {
     const int secondEnd = end();
-    setEndBefore( index );
+    setEndNextBefore( index );
     return KSection( index, secondEnd );
 }
 inline KSection KSection::splitAtLocal( int index )
 {
     const int secondEnd = end();
     setEndByWidth( index );
-    return KSection( behindEnd(), secondEnd );
+    return KSection( nextBehindEnd(), secondEnd );
 }
 inline KSection KSection::remove( const KSection &removeSection )
 {
     const int secondEnd = end();
-    setEndBefore( removeSection );
-    return KSection( removeSection.behindEnd(), secondEnd );
+    setEndNextBefore( removeSection );
+    return KSection( removeSection.nextBehindEnd(), secondEnd );
 }
 inline KSection KSection::removeLocal( const KSection &removeSection )
 {
     const int secondEnd = end();
     setEndByWidth( removeSection.start() );
-    return KSection( start()+removeSection.behindEnd(), secondEnd );
+    return KSection( start()+removeSection.nextBehindEnd(), secondEnd );
 }
 
 inline int KSection::localIndex( int index ) const { return index - start(); }
@@ -190,12 +187,13 @@ inline int KSection::startForInclude( const KSection &other ) const
          endsBefore(other.end()) ?     other.end()-width()+1 :
          start();
 }
-inline bool KSection::isJoinable( const KSection &other ) const { return Start <= other.end()+1 && other.start()-1 <= End; }
+inline bool KSection::isJoinable( const KSection &other ) const
+{ return Start <= other.nextBehindEnd() && other.nextBeforeStart() <= End; }
 
 inline bool KSection::prepend( const KSection &other )
-{ const bool mergeable = ( other.end()+1 == start() ); if( mergeable ) setStart( other.start() ); return mergeable; }
+{ const bool mergeable = ( other.nextBehindEnd() == start() ); if( mergeable ) setStart( other.start() ); return mergeable; }
 inline bool KSection::append( const KSection &other )
-{ const bool mergeable = ( end()+1 == other.start() ); if( mergeable ) setEnd( other.end() ); return mergeable; }
+{ const bool mergeable = ( nextBehindEnd() == other.start() ); if( mergeable ) setEnd( other.end() ); return mergeable; }
 
 }
 

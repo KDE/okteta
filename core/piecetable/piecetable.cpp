@@ -60,7 +60,7 @@ bool PieceTable::getStorageData( int *storageId, int *storageOffset, int dataOff
             result = true;
             break;
         }
-        dataSection.setStart( dataSection.behindEnd() );
+        dataSection.setStart( dataSection.nextBehindEnd() );
     }
     return result;
 }
@@ -87,7 +87,7 @@ void PieceTable::insert( int insertDataOffset, int insertLength, int storageOffs
             it.insert( insertPiece );
             break;
         }
-        if( dataSection.behindEnd() == insertDataOffset )
+        if( dataSection.nextBehindEnd() == insertDataOffset )
         {
             if( piece.append(insertPiece) )
                 break;
@@ -101,7 +101,7 @@ void PieceTable::insert( int insertDataOffset, int insertLength, int storageOffs
             break;
         }
 
-        dataSection.setStart( dataSection.behindEnd() );
+        dataSection.setStart( dataSection.nextBehindEnd() );
     }
     if( !it.hasNext() && (dataSection.start() == insertDataOffset) )
         it.insert( insertPiece );
@@ -167,7 +167,7 @@ void PieceTable::insert( int insertDataOffset, const PieceList &insertPieceList 
             break;
         }
 
-        dataSection.setStart( dataSection.behindEnd() );
+        dataSection.setStart( dataSection.nextBehindEnd() );
     }
     if( !isInserted && (dataSection.start() == insertDataOffset) )
     {
@@ -265,7 +265,7 @@ PieceList PieceTable::remove( const KHE::KSection &removeSection )
 // kDebug() << "removed "<<sections;
                     break;
                 }
-                dataSection.setStart( dataSection.behindEnd() );
+                dataSection.setStart( dataSection.nextBehindEnd() );
                 ++it;
 // ++sections;
                 // removeSection is longer than content TODO: just quit or at least remove till the end?
@@ -278,7 +278,7 @@ PieceList PieceTable::remove( const KHE::KSection &removeSection )
             break;
         }
 
-        dataSection.setStart( dataSection.behindEnd() );
+        dataSection.setStart( dataSection.nextBehindEnd() );
         ++it;
     }
 
@@ -346,7 +346,7 @@ void PieceTable::swap( int firstStart, const KHE::KSection &secondSection )
                             if( secondSection.end() < dataSection.end() )
                             {
                                 // well, split and insert second piece, even if we move it later, just make it work for now
-                                const Piece secondPiece = piece->splitAtLocal( dataSection.localIndex(secondSection.end()+1) );
+                                const Piece secondPiece = piece->splitAtLocal( dataSection.localIndex(secondSection.nextBehindEnd()) );
                                 it = mList.insert( ++it, secondPiece );
                             }
                             else
@@ -363,7 +363,7 @@ void PieceTable::swap( int firstStart, const KHE::KSection &secondSection )
                             it = mList.end();
                             break;
                         }
-                        dataSection.setStart( dataSection.behindEnd() );
+                        dataSection.setStart( dataSection.nextBehindEnd() );
                         ++it;
 
                         // removeSection is longer than content TODO: just quit or at least remove till the end?
@@ -376,7 +376,7 @@ void PieceTable::swap( int firstStart, const KHE::KSection &secondSection )
                 }
                 else
                 {
-                    dataSection.setStart( dataSection.behindEnd() );
+                    dataSection.setStart( dataSection.nextBehindEnd() );
                     ++it;
 
                     // removeSection is longer than content TODO: just quit or at least remove till the end?
@@ -390,7 +390,7 @@ void PieceTable::swap( int firstStart, const KHE::KSection &secondSection )
             break;
         }
 
-        dataSection.setStart( dataSection.behindEnd() );
+        dataSection.setStart( dataSection.nextBehindEnd() );
         ++it;
     }
 }
@@ -447,7 +447,7 @@ Piece PieceTable::replaceOne( int dataOffset, int storageOffset, int storageId )
             break;
         }
         it.next();
-        dataSection.setStart( dataSection.behindEnd() );
+        dataSection.setStart( dataSection.nextBehindEnd() );
     }
     return Piece( replacedStorageOffset, 1, replacedStorageId );
 }

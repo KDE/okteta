@@ -322,9 +322,9 @@ KPixelX ByteColumnRenderer::columnRightXOfLinePosition( int posInLine ) const { 
 
 KPixelXs ByteColumnRenderer::xsOfLinePositionsInclSpaces( const KHE::KSection &positions ) const
 {
-    const int firstX = positions.startsBehind( 0 ) ? rightXOfLinePosition( positions.beforeStart() ) + 1 :
+    const int firstX = positions.startsBehind( 0 ) ? rightXOfLinePosition( positions.nextBeforeStart() ) + 1 :
                                                      xOfLinePosition( positions.start() );
-    const int lastX = positions.endsBefore( mLastPos ) ? xOfLinePosition( positions.behindEnd() ) - 1 :
+    const int lastX = positions.endsBefore( mLastPos ) ? xOfLinePosition( positions.nextBehindEnd() ) - 1 :
                                                          rightXOfLinePosition( positions.end() );
     return KPixelXs( firstX, lastX  );
 }
@@ -332,9 +332,9 @@ KPixelXs ByteColumnRenderer::xsOfLinePositionsInclSpaces( const KHE::KSection &p
 
 KPixelXs ByteColumnRenderer::columnXsOfLinePositionsInclSpaces( const KHE::KSection &positions ) const
 {
-    const int firstX = positions.startsBehind( 0 ) ? columnRightXOfLinePosition( positions.beforeStart() ) + 1 :
+    const int firstX = positions.startsBehind( 0 ) ? columnRightXOfLinePosition( positions.nextBeforeStart() ) + 1 :
                                                      columnXOfLinePosition( positions.start() );
-    const int lastX = positions.endsBefore( mLastPos ) ? columnXOfLinePosition( positions.behindEnd() ) - 1 :
+    const int lastX = positions.endsBefore( mLastPos ) ? columnXOfLinePosition( positions.nextBehindEnd() ) - 1 :
                                                          columnRightXOfLinePosition( positions.end() );
     return KPixelXs( firstX, lastX  );
 }
@@ -439,8 +439,8 @@ void ByteColumnRenderer::renderPlain( QPainter *painter, const KHE::KSection &po
 
 void ByteColumnRenderer::renderRange( QPainter *painter, const QBrush &Brush, const KHE::KSection &positions, int Flag )
 {
-    KPixelX RangeX = Flag & StartsBefore ? columnRightXOfLinePosition( positions.start()-1 ) + 1 : columnXOfLinePosition( positions.start() );
-    KPixelX RangeW = (Flag & EndsLater ? columnXOfLinePosition( positions.end()+1 ): columnRightXOfLinePosition( positions.end() ) + 1)  - RangeX;
+    KPixelX RangeX = Flag & StartsBefore ? columnRightXOfLinePosition( positions.nextBeforeStart() ) + 1 : columnXOfLinePosition( positions.start() );
+    KPixelX RangeW = (Flag & EndsLater ? columnXOfLinePosition( positions.nextBehindEnd() ): columnRightXOfLinePosition( positions.end() ) + 1)  - RangeX;
 
     painter->fillRect( RangeX,0, RangeW,lineHeight(), Brush );
 }

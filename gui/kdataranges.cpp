@@ -109,11 +109,11 @@ void KDataRanges::setSelectionEnd( int EndIndex )
   // changes at the end?
   if( mSelection.start() == OldSelection.start() )
   {
-    CS = OldSelection.end()+1;
+    CS = OldSelection.nextBehindEnd();
     CE = mSelection.end();
     if( CE < CS )
     {
-      CS = mSelection.end()+1;
+      CS = mSelection.nextBehindEnd();
       CE = OldSelection.end();
     }
   }
@@ -121,11 +121,11 @@ void KDataRanges::setSelectionEnd( int EndIndex )
   else if( mSelection.end() == OldSelection.end() )
   {
     CS = OldSelection.start();
-    CE = mSelection.start()-1;
+    CE = mSelection.nextBeforeStart();
     if( CE < CS )
     {
       CS = mSelection.start();
-      CE = OldSelection.start()-1;
+      CE = OldSelection.nextBeforeStart();
     }
   }
   // change over the anchor
@@ -297,7 +297,7 @@ void KDataRanges::setFirstWordSelection( const KHE::KSection &Section )
    // in the anchor not on the right side?
    if( mSelection.isForward() != Forward )
    {
-     setSelectionEnd( Forward ? FirstWordSelection.start() : FirstWordSelection.end()+1 );
+     setSelectionEnd( Forward ? FirstWordSelection.start() : FirstWordSelection.nextBehindEnd() );
 
      mSelection.setForward( Forward );
    }

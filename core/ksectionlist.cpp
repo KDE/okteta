@@ -40,7 +40,7 @@ void KSectionList::addSection( const KSection &newSection )
     for( ; firstOverlappingIt!=end(); ++firstOverlappingIt )
     {
         // new section before next section?
-        if( newSection.endsBefore((*firstOverlappingIt).beforeStart()) )
+        if( newSection.endsBefore((*firstOverlappingIt).nextBeforeStart()) )
         {
             // put the new before it
             insert( firstOverlappingIt, newSection );
@@ -58,7 +58,7 @@ void KSectionList::addSection( const KSection &newSection )
             Iterator lastOverlappingIt = firstOverlappingIt;
             for( ++lastOverlappingIt; lastOverlappingIt!=end(); ++lastOverlappingIt )
             {
-                if( joinedSection.endsBefore((*lastOverlappingIt).beforeStart()) )
+                if( joinedSection.endsBefore((*lastOverlappingIt).nextBeforeStart()) )
                     break;
                 joinedEnd = (*lastOverlappingIt).end();
             }

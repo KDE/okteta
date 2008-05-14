@@ -136,7 +136,7 @@ int KByteArrayModelPrivate::remove( const KSection &section )
 
     removeSection.restrictEndTo( m_size-1 );
 
-    const unsigned int behindRemovePos = removeSection.end() + 1;
+    const unsigned int behindRemovePos = removeSection.nextBehindEnd();
     // move right data behind the input range
     memmove( &m_data[removeSection.start()], &m_data[behindRemovePos], m_size-behindRemovePos );
 
@@ -186,7 +186,7 @@ unsigned int KByteArrayModelPrivate::replace( const KSection &section, const cha
     }
 
     const int behindInsertPos = removeSection.start() + inputLength;
-    const int behindRemovePos = removeSection.end()+1;
+    const int behindRemovePos = removeSection.nextBehindEnd();
 
     // raw array not big enough?
     if( m_rawSize < newSize )
@@ -257,7 +257,7 @@ bool KByteArrayModelPrivate::swap( int firstStart, const KSection &secondSection
         if( toRight )
         {
             smallPartDest = firstStart - movedLength;
-            largePartStart = sourceSection.end()+1;
+            largePartStart = sourceSection.nextBehindEnd();
             largePartDest = sourceSection.start();
         }
         else
@@ -276,7 +276,7 @@ bool KByteArrayModelPrivate::swap( int firstStart, const KSection &secondSection
         if( toRight )
         {
             largePartDest = firstStart - movedLength;
-            smallPartStart = sourceSection.end()+1;
+            smallPartStart = sourceSection.nextBehindEnd();
             smallPartDest = sourceSection.start();
         }
         else
@@ -299,7 +299,7 @@ bool KByteArrayModelPrivate::swap( int firstStart, const KSection &secondSection
     delete [] temp;
 
     const bool bookmarksModified = toRight ?
-        m_bookmarks.adjustToSwapped( sourceSection.start(), sourceSection.end()+1, firstStart-sourceSection.end()-1 ) :
+        m_bookmarks.adjustToSwapped( sourceSection.start(), sourceSection.nextBehindEnd(), firstStart-sourceSection.end()-1 ) :
         m_bookmarks.adjustToSwapped( firstStart, sourceSection.start(),sourceSection.width() );
     m_modified = true;
 

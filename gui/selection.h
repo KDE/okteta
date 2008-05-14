@@ -91,6 +91,8 @@ class Selection
     int anchor() const;
     int start() const;
     int end() const;
+    int nextBeforeStart() const;
+    int nextBehindEnd() const;
     /** 
       * @return section
       */
@@ -167,18 +169,20 @@ inline void Selection::setEnd( int index )
 
 inline void Selection::reverse()
 {
-    mAnchor = isForward() ? mSection.behindEnd() : mSection.start();
+    mAnchor = isForward() ? mSection.nextBehindEnd() : mSection.start();
 }
 
 inline void Selection::setForward( bool Forward )
 {
-    mAnchor = Forward ? mSection.start() : mSection.behindEnd();
+    mAnchor = Forward ? mSection.start() : mSection.nextBehindEnd();
 }
 
 inline const KHE::KSection &Selection::section() const { return mSection; }
 inline int Selection::anchor()              const { return mAnchor; }
 inline int Selection::start()               const { return mSection.start(); }
 inline int Selection::end()                 const { return mSection.end(); }
+inline int Selection::nextBeforeStart()     const { return mSection.nextBeforeStart(); }
+inline int Selection::nextBehindEnd()       const { return mSection.nextBehindEnd(); }
 
 inline void Selection::cancel() { mAnchor = -1; mSection.unset(); }
 
@@ -190,7 +194,7 @@ inline bool Selection::isForward()   const { return mAnchor == mSection.start();
 inline void Selection::adaptToReplacement( int pos, int removedLength, int insertedLength )
 {
     mSection.adaptToReplacement( pos, removedLength, insertedLength );
-    mAnchor = isForward() ? mSection.start() : mSection.behindEnd();
+    mAnchor = isForward() ? mSection.start() : mSection.nextBehindEnd();
 }
 
 inline void Selection::adaptToSwap( int firstOffset, int secondOffset, int secondLength )

@@ -105,7 +105,7 @@ int KFixedSizeByteArrayModel::remove( const KSection &R )
   Remove.restrictEndTo( Size-1 );
 
   int RemoveLength = Remove.width();
-  int BehindRemovePos = Remove.end()+1;;
+  int BehindRemovePos = Remove.nextBehindEnd();
   // fmove right data behind the input range
   memmove( &Data[Remove.start()], &Data[BehindRemovePos], Size-BehindRemovePos );
   // clear freed space
@@ -139,12 +139,12 @@ unsigned int KFixedSizeByteArrayModel::replace( const KSection &R, const char* D
   {
     unsigned int BehindInsertPos = Remove.start() + InputLength;
     // fmove right data behind the input range
-    memmove( &Data[BehindInsertPos], &Data[Remove.end()+1], Size-BehindInsertPos );
+    memmove( &Data[BehindInsertPos], &Data[Remove.nextBehindEnd()], Size-BehindInsertPos );
   }
   // is input smaller than removed?
   else if( SizeDiff < 0 )
   {
-    unsigned int BehindRemovePos = Remove.end()+1;
+    unsigned int BehindRemovePos = Remove.nextBehindEnd();
     // fmove right data behind the input range
     memmove( &Data[Remove.start()+InputLength], &Data[BehindRemovePos], Size-BehindRemovePos );
    // clear freed space
@@ -188,7 +188,7 @@ bool KFixedSizeByteArrayModel::swap( int firstStart, const KSection &secondSecti
     if( ToRight )
     {
       SmallPartDest = firstStart - MovedLength;
-      LargePartStart = SourceSection.end()+1;
+      LargePartStart = SourceSection.nextBehindEnd();
       LargePartDest = SourceSection.start();
     }
     else
@@ -207,7 +207,7 @@ bool KFixedSizeByteArrayModel::swap( int firstStart, const KSection &secondSecti
     if( ToRight )
     {
       LargePartDest = firstStart - MovedLength;
-      SmallPartStart = SourceSection.end()+1;
+      SmallPartStart = SourceSection.nextBehindEnd();
       SmallPartDest = SourceSection.start();
     }
     else
