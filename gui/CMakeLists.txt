@@ -33,7 +33,6 @@ set( oktetagui_LIB_SRCS
   kdatalayout.cpp
   kdataranges.cpp
   kcursor.cpp
-  kbytearraydrag.cpp
   coordrangelist.cpp
   kbordercoltextexport.cpp
   koffsetcoltextexport.cpp

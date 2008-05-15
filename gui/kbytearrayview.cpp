@@ -34,7 +34,6 @@
 #include "controller/knavigator.h"
 #include "controller/kvalueeditor.h"
 #include "controller/kchareditor.h"
-#include "kbytearraydrag.h"
 #include "kcursor.h"
 // Okteta core
 #include <kabstractbytearraymodel.h>
@@ -877,30 +876,9 @@ QMimeData *KByteArrayView::selectionAsMimeData() const
     if( !mDataRanges->hasSelection() )
         return 0;
 
-    const OffsetColumnRenderer *OC;
-    const ValueByteArrayColumnRenderer *HC;
-    const CharByteArrayColumnRenderer *TC;
-    CoordRange Range;
-
-    if( static_cast<KHEUI::CharByteArrayColumnRenderer *>( mActiveColumn ) == &charColumn() )
-    {
-        OC = 0;
-        HC = 0;
-        TC = 0;
-    }
-    else
-    {
-        OC = mOffsetColumn->isVisible() ? mOffsetColumn : 0;
-        HC = valueColumn().isVisible() ? &valueColumn() : 0;
-        TC = charColumn().isVisible() ? &charColumn() : 0;
-        Range.set( mDataLayout->coordRangeOfIndizes(mDataRanges->selection()) );
-    }
-
- // TODO: depending on the column, also chars or values should be added to the drag
-
-    return new KByteArrayDrag( selectedData(), Range, OC, HC, TC,
-                            charColumn().substituteChar(), charColumn().undefinedChar(),
-                            mCharCodec->name() );
+    QMimeData *mimeData = new QMimeData;
+    mimeData->setData( OctetStreamFormatName, selectedData() );
+    return mimeData;
 }
 
 
@@ -948,7 +926,7 @@ void KByteArrayView::pasteData( const QMimeData *data )
     // with the highest priority
     // TODO: this may not be, what is expected, think about it, if we just
     // take byte array descriptions, like encodings in chars or values
-    // would need the movement of the encodings into the core library
+    // would need the movement of the encoders into the core library
     const QLatin1String octetStreamFormatName( OctetStreamFormatName );
     const QString dataFormatName = ( data->hasFormat(octetStreamFormatName) ) ?
         QString( octetStreamFormatName ) :
