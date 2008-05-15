@@ -90,9 +90,11 @@ bool KDocumentSyncManager::setSynchronizer( KAbstractDocument *document )
     // TODO: warn if there were updates in the second before saveAs was activated
 //     if( oldSynchronizer )
 //         oldSynchronizer->pauseSynchronization(); also unpause below
+    const QString processTitle =
+        i18nc( "@title:window Save %typename As...", "Save %1 As...", document->typeName() );
     do
     {
-        KUrl newUrl = KFileDialog::getSaveUrl( /*mWorkingUrl.url()*/QString(), QString(), mWidget );
+        KUrl newUrl = KFileDialog::getSaveUrl( /*mWorkingUrl.url()*/QString(), QString(), mWidget, processTitle );
 
         if( !newUrl.isEmpty() )
         {
@@ -107,15 +109,13 @@ bool KDocumentSyncManager::setSynchronizer( KAbstractDocument *document )
                 {
                     // TODO: care for case that file from url is already loaded by (only?) this program
 //                     const bool otherFileLoaded = mManager->documentByUrl( newUrl );
-                    const QString title =
-                        i18nc( "@title:window Save %typename As...", "Save %1 As...", document->typeName() );
                     // TODO: replace "file" with synchronizer->storageTypeName() or such
                     // TODO: offer "Synchronize" as alternative, if supported, see below
                     const QString message =
                         i18nc( "@info",
                                "There is already a file at <nl/><filename>%1</filename>.<nl/>"
                                "Overwrite?", newUrl.url() );
-                    int answer = KMessageBox::warningYesNoCancel( mWidget, message, title, KStandardGuiItem::overwrite(), KStandardGuiItem::back() );
+                    int answer = KMessageBox::warningYesNoCancel( mWidget, message, processTitle, KStandardGuiItem::overwrite(), KStandardGuiItem::back() );
                     if( answer == KMessageBox::Cancel )
                         break;
                     if( answer == KMessageBox::No )
@@ -170,14 +170,14 @@ bool KDocumentSyncManager::canClose( KAbstractDocument *document )
         KAbstractDocumentSynchronizer *synchronizer = document->synchronizer();
         const bool couldSynchronize = hasSynchronizerForLocal( document->mimeType() );
 
-        const QString title = i18nc( "@title:window Close %typename", "Close %1", document->typeName() );
+        const QString processTitle = i18nc( "@title:window Close %typename", "Close %1", document->typeName() );
 
         if( synchronizer || couldSynchronize )
         {
             const QString message = i18nc( "@info The %typename \"%title\" has been modified.",
                 "The %1 <emphasis>%2</emphasis> has been modified.<nl/>"
                 "Do you want to save your changes or discard them?", document->typeName(), document->title() );
-            const int answer = KMessageBox::warningYesNoCancel( mWidget, message, title,
+            const int answer = KMessageBox::warningYesNoCancel( mWidget, message, processTitle,
                                                                 KStandardGuiItem::save(), KStandardGuiItem::discard() );
             if( answer == KMessageBox::Yes )
             {
@@ -194,7 +194,7 @@ bool KDocumentSyncManager::canClose( KAbstractDocument *document )
             const QString message = i18nc( "@info The %typename \"%title\" has been modified.",
                 "The %1 <emphasis>%2</emphasis> has been modified.<nl/>"
                 "Do you want to discard your changes?", document->typeName(), document->title() );
-            const int answer = KMessageBox::warningContinueCancel( mWidget, message, title,
+            const int answer = KMessageBox::warningContinueCancel( mWidget, message, processTitle,
                                                                    KStandardGuiItem::discard() );
             canClose = ( answer == KMessageBox::Continue );
         }
