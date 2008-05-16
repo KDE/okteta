@@ -48,10 +48,12 @@ class OKTETACORE_EXPORT KSection : public KRange<int>
      * @param startIndex starting index
      * @param endIndex end index
      */
-    KSection( int startIndex, int endIndex );
-    KSection( const KSection &other );
-    KSection();
-    ~KSection();
+    // FIXME: gcc 3.4.5 on windows gives an internal_compiler_error if ctor/dtor are defined with the keyword inline
+    // thus put the function bodies here
+    KSection( int startIndex, int endIndex ) : KRange<int>(startIndex,endIndex) {}
+    KSection( const KSection &other ) : KRange<int>(other.start(),other.end()) {}
+    KSection() {}
+    ~KSection() {}
 
   public:
     KSection &operator=( const KSection &other );
@@ -124,11 +126,6 @@ class OKTETACORE_EXPORT KSection : public KRange<int>
 
 inline KSection KSection::fromWidth( int startIndex, int width ) { return KSection(startIndex,startIndex+width-1); }
 inline KSection KSection::fromWidth( int width ) { return KSection(0,width-1); }
-
-inline KSection::KSection( int startIndex, int endIndex ) : KRange<int>(startIndex,endIndex) {}
-inline KSection::KSection( const KSection &other ) : KRange<int>(other.start(),other.end()) {}
-inline KSection::KSection()  {}
-inline KSection::~KSection() {}
 
 inline bool KSection::operator==( const KSection &other ) const { return KRange<int>::operator==(other); }
 
