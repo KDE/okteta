@@ -33,7 +33,7 @@ class QStringList;
 
 class KDocumentCreateManager; //TODO: temporary
 class KDocumentSyncManager; //TODO: temporary
-class KDocumentCodecManager; //TODO: temporary
+class ModelCodecManager; //TODO: temporary
 
 class KDocumentManager : public QObject
 {
@@ -57,7 +57,7 @@ class KDocumentManager : public QObject
   public:
     KDocumentCreateManager *createManager();
     KDocumentSyncManager *syncManager();
-    KDocumentCodecManager *codecManager();
+    ModelCodecManager *codecManager();
 
   Q_SIGNALS:
     // document got added
@@ -78,11 +78,11 @@ class KDocumentManager : public QObject
     // TODO: remove into own singleton
     KDocumentCreateManager *mCreateManager;
     KDocumentSyncManager *mSyncManager;
-    KDocumentCodecManager *mCodecManager;
+    ModelCodecManager *mCodecManager;
 };
 
 inline KDocumentCreateManager *KDocumentManager::createManager() { return mCreateManager; }
 inline KDocumentSyncManager *KDocumentManager::syncManager() { return mSyncManager; }
-inline KDocumentCodecManager *KDocumentManager::codecManager() { return mCodecManager; }
+inline ModelCodecManager *KDocumentManager::codecManager() { return mCodecManager; }
 
 #endif

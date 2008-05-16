@@ -23,48 +23,54 @@
 #include "kabstractbytearraystreamencoder.h"
 
 // lib
+#include "kbytearraydisplay.h"
 #include "kbytearraydocument.h"
 #include "kbytearrayselection.h"
+// Okteta gui
+#include <kbytearrayview.h>
 // Okteta core
 #include <kabstractbytearraymodel.h>
 
 
 KAbstractByteArrayStreamEncoder::KAbstractByteArrayStreamEncoder( const QString &remoteTypeName,
                                                                   const QString &remoteMimeType )
- : KAbstractDocumentStreamEncoder( remoteTypeName, remoteMimeType )
+ : AbstractModelStreamEncoder( remoteTypeName, remoteMimeType )
 {}
 
-bool KAbstractByteArrayStreamEncoder::encodeToStream( QIODevice *device,
-                                                      const KAbstractDocument *document )
+QString KAbstractByteArrayStreamEncoder::modelTypeName( AbstractModel *model, const AbstractModelSelection *selection ) const
 {
-    bool success = false;
+Q_UNUSED( selection )
 
-    const KByteArrayDocument *byteArrayDocument = qobject_cast<const KByteArrayDocument*>( document );
-    if( byteArrayDocument )
-    {
-        KHECore::KAbstractByteArrayModel *byteArray = byteArrayDocument->content();
-        const int size = byteArray->size();
+    const KByteArrayDisplay *byteArrayDisplay = qobject_cast<const KByteArrayDisplay*>( model );
+    const KByteArrayDocument *byteArrayDocument =
+        byteArrayDisplay ? qobject_cast<const KByteArrayDocument*>( byteArrayDisplay->document() ) : 0;
 
-        success = encodeDataToStream( device, byteArray, KHE::KSection::fromWidth(0,size) );
-    }
-
-    return success;
+    return ( byteArrayDocument == 0 ) ? QString() : byteArrayDocument->typeName();
 }
 
-bool KAbstractByteArrayStreamEncoder::encodeToStream( QIODevice *device,
-                                                      const KAbstractDocumentSelection *selection )
-{
-    bool success = false;
-    const KByteArraySelection *byteArraySelection = qobject_cast<const KByteArraySelection*>( selection );
-    const KByteArrayDocument *byteArrayDocument = qobject_cast<const KByteArrayDocument*>( selection->document() );
-    if( byteArrayDocument && byteArraySelection )
-    {
-        KHECore::KAbstractByteArrayModel *byteArray = byteArrayDocument->content();
-        const KHE::KSection section = byteArraySelection->isValid() ? byteArraySelection->section() :
-                                      KHE::KSection::fromWidth( 0, byteArray->size() );
 
-        success = encodeDataToStream( device, byteArray, section );
-    }
+bool KAbstractByteArrayStreamEncoder::encodeToStream( QIODevice *device,
+                                                      AbstractModel *model, const AbstractModelSelection *selection )
+{
+    const KByteArrayDisplay *byteArrayDisplay = qobject_cast<const KByteArrayDisplay*>( model );
+    const KHEUI::KByteArrayView *view =
+        byteArrayDisplay ? qobject_cast<KHEUI::KByteArrayView *>( byteArrayDisplay->widget() ) : 0;
+
+    const KByteArrayDocument *byteArrayDocument =
+        byteArrayDisplay ? qobject_cast<const KByteArrayDocument*>( byteArrayDisplay->document() ) : 0;
+    if( byteArrayDocument == 0 )
+        return false;
+
+    const KHECore::KAbstractByteArrayModel *byteArray = byteArrayDocument->content();
+
+    const KByteArraySelection *byteArraySelection =
+        selection ? static_cast<const KByteArraySelection*>( selection ) : 0;
+
+    const KHE::KSection section = byteArraySelection && byteArraySelection->isValid() ? byteArraySelection->section() :
+                                   KHE::KSection::fromWidth( 0, byteArray->size() );
+
+    const bool success = encodeDataToStream( device, view, byteArray, section );
+
     return success;
 }
 

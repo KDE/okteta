@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,38 +20,47 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KDOCUMENTCODECMANAGER_H
-#define KDOCUMENTCODECMANAGER_H
+#ifndef MODELCODECMANAGER_H
+#define MODELCODECMANAGER_H
 
 // Qt
 #include <QtCore/QObject>
 #include <QtCore/QList>
 
-class QWidget;
-class KAbstractDocumentSelection;
-class KAbstractDocumentStreamEncoder;
-class KAbstractDocumentStreamDecoder;
+class AbstractModel;
+class AbstractModelSelection;
+class AbstractModelStreamEncoder;
+class AbstractModelStreamDecoder;
+class AbstractModelExporter;
 class KDocumentManager;
+class QWidget;
+class QString;
 
-class KDocumentCodecManager : public QObject
+class ModelCodecManager : public QObject
 {
   Q_OBJECT
 
   public:
-    explicit KDocumentCodecManager( KDocumentManager *manager );
-    virtual ~KDocumentCodecManager();
+    explicit ModelCodecManager( KDocumentManager *manager );
+    virtual ~ModelCodecManager();
 
   public:
     // or use the viewmodel here? on what should the export be based?
-    void encodeToStream( KAbstractDocumentStreamEncoder *encoder, const KAbstractDocumentSelection *selection );
+    void encodeToStream( AbstractModelStreamEncoder *encoder,
+                         AbstractModel *model, const AbstractModelSelection *selection );
+
+    void exportDocument( AbstractModelExporter *exporter,
+                         AbstractModel *model, const AbstractModelSelection *selection );
 
   public:
-    QList<KAbstractDocumentStreamEncoder*> encoderList() const;
-    QList<KAbstractDocumentStreamDecoder*> decoderList() const;
+    QList<AbstractModelStreamEncoder*> encoderList( AbstractModel *model, const AbstractModelSelection *selection ) const;
+    QList<AbstractModelStreamDecoder*> decoderList() const;
+
+    QList<AbstractModelExporter*> exporterList( AbstractModel *model, const AbstractModelSelection *selection ) const;
 
   public:
-    void setEncoders( QList<KAbstractDocumentStreamEncoder*> &encoderList );
-    void setDecoders( QList<KAbstractDocumentStreamDecoder*> &decoderList );
+    void setEncoders( QList<AbstractModelStreamEncoder*> &encoderList );
+    void setDecoders( QList<AbstractModelStreamDecoder*> &decoderList );
     void setWidget( QWidget *widget );
 
   protected:
@@ -61,8 +70,9 @@ class KDocumentCodecManager : public QObject
     QWidget *mWidget;
 
     // temporary hack: hard coded codecs for byte arrays
-    QList<KAbstractDocumentStreamEncoder*> mEncoderList;
-    QList<KAbstractDocumentStreamDecoder*> mDecoderList;
+    QList<AbstractModelStreamEncoder*> mEncoderList;
+    QList<AbstractModelStreamDecoder*> mDecoderList;
+    QList<AbstractModelExporter*> mExporterList;
 };
 
 #endif

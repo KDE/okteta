@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,15 +20,32 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kbytearrayselection.h"
+#ifndef CHARBYTEARRAYCOLUMNTEXTRENDERER_H
+#define CHARBYTEARRAYCOLUMNTEXTRENDERER_H
 
+// lib
+#include "abstractbytearraycolumntextrenderer.h"
 
-KByteArraySelection::KByteArraySelection()
-{}
+namespace KHECore {
+class KCharCodec;
+}
 
-bool KByteArraySelection::isValid() const { return mSection.isValid(); }
-KHE::KSection KByteArraySelection::section() const { return mSection; }
+class CharByteArrayColumnTextRenderer : public AbstractByteArrayColumnTextRenderer
+{
+  public:
+    CharByteArrayColumnTextRenderer( const KHECore::KAbstractByteArrayModel *byteArrayModel, int offset,
+        const KHEUI::CoordRange &coordRange,
+        int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
+        const QString &charCodecName, QChar substituteChar, QChar undefinedChar );
+    virtual ~CharByteArrayColumnTextRenderer();
 
-void KByteArraySelection::setSection( const KHE::KSection &section ) { mSection = section; }
+  protected: // AbstractByteArrayColumnTextRenderer API
+    virtual void renderLine( QTextStream *stream ) const;
 
-KByteArraySelection::~KByteArraySelection() {}
+  protected:
+    const KHECore::KCharCodec *mCharCodec;
+    const QChar mSubstituteChar;
+    const QChar mUndefinedChar;
+};
+
+#endif

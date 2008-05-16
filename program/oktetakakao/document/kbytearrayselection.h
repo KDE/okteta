@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -24,22 +24,16 @@
 #define KBYTEARRAYSELECTION_H
 
 // Kakao core
-#include <kabstractdocumentselection.h>
+#include <abstractmodelselection.h>
 // Okteta core
 #include <ksection.h>
 
-class KByteArrayDocument;
 
-class KByteArraySelection : public KAbstractDocumentSelection
+class KByteArraySelection : public AbstractModelSelection
 {
-    Q_OBJECT
-
   public:
-    explicit KByteArraySelection( KByteArrayDocument *document );
+    KByteArraySelection();
     virtual ~KByteArraySelection();
-
-  public: // KAbstractDocumentSelection API
-    virtual KAbstractDocument *document() const;
 
   public:
     void setSection( const KHE::KSection &section );
@@ -49,7 +43,6 @@ class KByteArraySelection : public KAbstractDocumentSelection
     bool isValid() const;
 
   protected:
-    KByteArrayDocument *mDocument;
     KHE::KSection mSection;
 };
 

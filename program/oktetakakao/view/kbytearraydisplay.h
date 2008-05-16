@@ -69,7 +69,7 @@ class KByteArrayDisplay : public KAbstractView, public KDE::If::Zoomable, public
     virtual void selectAllData( bool selectAll );
     virtual bool hasSelectedData() const;
     virtual QMimeData *copySelectedData() const;
-    virtual const KAbstractDocumentSelection *selection() const;
+    virtual const AbstractModelSelection *selection() const;
   Q_SIGNALS:
     virtual void hasSelectedDataChanged( bool hasSelectedData );
 

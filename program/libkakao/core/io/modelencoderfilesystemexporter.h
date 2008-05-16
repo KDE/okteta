@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,43 +20,31 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KDE_IF_DATASELECTABLE_H
-#define KDE_IF_DATASELECTABLE_H
+#ifndef MODELENCODERFILESYSTEMEXPORTER_H
+#define MODELENCODERFILESYSTEMEXPORTER_H
 
-// Qt
-#include <QtCore/QtPlugin>
+// lib
+#include "abstractmodelfilesystemexporter.h"
 
-class AbstractModelSelection;
-class QMimeData;
+class AbstractModelStreamEncoder;
 
-namespace KDE
+
+class ModelEncoderFileSystemExporter : public AbstractModelFileSystemExporter
 {
-namespace If
-{
+  Q_OBJECT
 
-// TODO: this interface is strongly related to the selecteddatawriteable interface
-class DataSelectable
-{
   public:
-    virtual ~DataSelectable();
+    explicit ModelEncoderFileSystemExporter( AbstractModelStreamEncoder *encoder );
+    virtual ~ModelEncoderFileSystemExporter();
 
-  public: // set
-    virtual void selectAllData( bool selectAll ) = 0;
+  public: // AbstractModelExporter API
+    virtual QString modelTypeName( AbstractModel *model, const AbstractModelSelection *selection ) const;
 
-  public: // get
-    virtual bool hasSelectedData() const = 0;
-    virtual QMimeData *copySelectedData() const = 0; // TODO: move into AbstractModelSelection
-    virtual const AbstractModelSelection *selection() const = 0;
+  public: // AbstractModelFileSystemExporter API
+    virtual bool writeToFile( AbstractModel *model, const AbstractModelSelection *selection, const QString &workFilePath );
 
-  public: // signal
-    virtual void hasSelectedDataChanged( bool hasSelectedData ) = 0;
+  protected:
+    AbstractModelStreamEncoder * const mEncoder;
 };
-
-inline DataSelectable::~DataSelectable() {}
-
-}
-}
-
-Q_DECLARE_INTERFACE( KDE::If::DataSelectable, "org.kde.if.dataselectable/1.0" )
 
 #endif

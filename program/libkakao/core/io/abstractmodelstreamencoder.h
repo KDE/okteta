@@ -20,30 +20,44 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KABSTRACTDOCUMENTSELECTION_H
-#define KABSTRACTDOCUMENTSELECTION_H
+#ifndef ABSTRACTMODELSTREAMENCODER_H
+#define ABSTRACTMODELSTREAMENCODER_H
 
 // Qt
 #include <QtCore/QObject>
+#include <QtCore/QString>
 
-class KAbstractDocument;
+class AbstractModel;
+class AbstractModelSelection;
+class QIODevice;
 
-class KAbstractDocumentSelection : public QObject
+// TODO: General synchronizer would load matching encoder and decoder
+// manually defined by desktopfile
+
+// TODO: perhaps just create one instance per encode process,
+// giving AbstractModel *model, AbstractModelSelection *selection in the constructor?
+// so all precalculated values like used model (type) can be cached
+class AbstractModelStreamEncoder : public QObject
 {
     Q_OBJECT
 
   protected:
-    KAbstractDocumentSelection();
+    AbstractModelStreamEncoder( const QString &remoteTypeName, const QString &remoteMimeType );
   public:
-    virtual ~KAbstractDocumentSelection();
+    virtual ~AbstractModelStreamEncoder();
 
   public: // API to be implemented
-//     virtual bool isValid() const = 0;
-    virtual KAbstractDocument *document() const = 0;
+    virtual bool encodeToStream( QIODevice *device, AbstractModel *model, const AbstractModelSelection *selection ) = 0;
+    virtual QString modelTypeName( AbstractModel *model, const AbstractModelSelection *selection ) const
+ { Q_UNUSED(model); Q_UNUSED(selection); return QString(); }//= 0;
+
+  public:
+    QString remoteTypeName() const;
+    QString remoteMimeType() const;
 
   protected:
-    class Private;
-    Private * const d;
+    const QString mRemoteTypeName;
+    const QString mRemoteMimeType;
 };
 
 #endif

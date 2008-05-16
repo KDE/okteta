@@ -1,7 +1,7 @@
 /*
-    This file is part of the Okteta Gui library, part of the KDE project.
+    This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2003 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,32 +20,25 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_KCOLTEXTEXPORT_H
-#define KHE_UI_KCOLTEXTEXPORT_H
+#ifndef ABSTRACTMODELSELECTION_H
+#define ABSTRACTMODELSELECTION_H
 
-class QString;
+// Qt
+#include <QtCore/QObject>
 
-
-namespace KHEUI
+class AbstractModelSelection
 {
-/**
- * interface for the text export of columns
- * @author Friedrich W. H. Kossebau <kossebau@kde.org>
- */
-class KColTextExport
-{
+  protected:
+    AbstractModelSelection();
   public:
-    virtual ~KColTextExport();
+    virtual ~AbstractModelSelection();
 
-  public: // API
-    virtual void printFirstLine( QString *T, int Line ) const = 0;
-    virtual void printNextLine( QString *T ) const = 0;
-    /** tells how much chars per line are needed */
-    virtual int charsPerLine() const = 0;
+  public: // API to be implemented
+//     virtual bool isValid() const = 0;
+
+  protected:
+    class Private;
+    Private * const d;
 };
-
-inline KColTextExport::~KColTextExport() {}
-
-}
 
 #endif

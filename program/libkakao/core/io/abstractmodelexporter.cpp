@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,39 +20,36 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KABSTRACTDOCUMENTSTREAMENCODER_H
-#define KABSTRACTDOCUMENTSTREAMENCODER_H
+#include "abstractmodelexporter.h"
 
-// Qt
-#include <QtCore/QObject>
-#include <QtCore/QString>
 
-class KAbstractDocument;
-class KAbstractDocumentSelection;
-class QIODevice;
-
-// TODO: General synchronizer would load matching encoder and decoder
-// manually defined by desktopfile
-class KAbstractDocumentStreamEncoder : public QObject
+class AbstractModelExporter::Private
 {
-    Q_OBJECT
-
-  protected:
-    KAbstractDocumentStreamEncoder( const QString &remoteTypeName, const QString &remoteMimeType );
   public:
-    virtual ~KAbstractDocumentStreamEncoder();
-
-  public: // API to be implemented
-    virtual bool encodeToStream( QIODevice *device, const KAbstractDocument *document ) = 0;
-    virtual bool encodeToStream( QIODevice *device, const KAbstractDocumentSelection *selection ) = 0;
-
+    Private( const QString &remoteTypeName, const QString &remoteMimeType );
   public:
     QString remoteTypeName() const;
     QString remoteMimeType() const;
-
   protected:
     const QString mRemoteTypeName;
     const QString mRemoteMimeType;
 };
 
-#endif
+inline AbstractModelExporter::Private::Private( const QString &remoteTypeName, const QString &remoteMimeType )
+: mRemoteTypeName( remoteTypeName ), mRemoteMimeType( remoteMimeType )
+{}
+
+inline QString AbstractModelExporter::Private::remoteTypeName() const { return mRemoteTypeName; }
+inline QString AbstractModelExporter::Private::remoteMimeType() const { return mRemoteMimeType; }
+
+AbstractModelExporter::AbstractModelExporter( const QString &remoteTypeName, const QString &remoteMimeType )
+: d( new Private(remoteTypeName,remoteMimeType) )
+{}
+
+QString AbstractModelExporter::remoteTypeName() const { return d->remoteTypeName(); }
+QString AbstractModelExporter::remoteMimeType() const { return d->remoteMimeType(); }
+
+AbstractModelExporter::~AbstractModelExporter()
+{
+    delete d;
+}

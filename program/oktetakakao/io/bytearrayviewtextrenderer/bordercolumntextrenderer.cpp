@@ -1,7 +1,7 @@
 /*
-    This file is part of the Okteta Gui library, part of the KDE project.
+    This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2003 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,35 +20,24 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kbordercoltextexport.h"
+#include "bordercolumntextrenderer.h"
 
 // Qt
-#include <QtCore/QString>
+#include <QtCore/QTextStream>
 
 
-namespace KHEUI {
-
-static const uint BorderColumnTEWidth = 3;
-
-
-int KBorderColTextExport::charsPerLine() const
+void BorderColumnTextRenderer::renderFirstLine( QTextStream *stream, int lineIndex ) const
 {
-  return BorderColumnTEWidth;
+Q_UNUSED( lineIndex )
+    render( stream );
 }
 
-void KBorderColTextExport::printFirstLine( QString *T, int /*Line*/ ) const
+void BorderColumnTextRenderer::renderNextLine( QTextStream *stream ) const
 {
-  print( T );
+    render( stream );
 }
 
-void KBorderColTextExport::printNextLine( QString *T ) const
+void BorderColumnTextRenderer::render( QTextStream *stream ) const
 {
-  print( T );
-}
-
-void KBorderColTextExport::print( QString *T ) const
-{
-  T->append( " | " );
-}
-
+    *stream << " | ";
 }

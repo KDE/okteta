@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,18 +20,18 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kabstractdocumentselection.h"
+#include "abstractmodelselection.h"
 
 
-class KAbstractDocumentSelection::Private
+class AbstractModelSelection::Private
 {
 };
 
-KAbstractDocumentSelection::KAbstractDocumentSelection()
+AbstractModelSelection::AbstractModelSelection()
  : d( new Private() )
 {}
 
-KAbstractDocumentSelection::~KAbstractDocumentSelection()
+AbstractModelSelection::~AbstractModelSelection()
 {
     delete d;
 }

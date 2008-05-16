@@ -31,13 +31,14 @@
 #include <kbytearraytextstreamencoder.h>
 #include <kbytearrayvaluestreamencoder.h>
 #include <kbytearraysourcecodestreamencoder.h>
+#include <bytearrayviewtextstreamencoder.h>
 // Kakao gui
 #include <kviewmanager.h>
 // Kakao core
 #include <kdocumentmanager.h>
 #include <kdocumentcreatemanager.h>
 #include <kdocumentsyncmanager.h>
-#include <kdocumentcodecmanager.h>
+#include <modelcodecmanager.h>
 // KDE
 #include <KLocale>
 #include <KUrl>
@@ -55,10 +56,11 @@ OktetaProgram::OktetaProgram( int argc, char *argv[] )
  : mDocumentManager( new KDocumentManager() ),
    mViewManager( new KViewManager(mDocumentManager) )
 {
-    QList<KAbstractDocumentStreamEncoder*> encoderList;
+    QList<AbstractModelStreamEncoder*> encoderList;
     encoderList << new KByteArrayValueStreamEncoder()
                 << new KByteArrayTextStreamEncoder()
-                << new KByteArraySourceCodeStreamEncoder();
+                << new KByteArraySourceCodeStreamEncoder()
+                << new ByteArrayViewTextStreamEncoder();
 
     mDocumentManager->codecManager()->setEncoders( encoderList );
     mDocumentManager->createManager()->setDocumentFactory( new KByteArrayDocumentFactory() );

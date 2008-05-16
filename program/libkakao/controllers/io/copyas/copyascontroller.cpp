@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -26,10 +26,10 @@
 #include <kidataselectable.h>
 #include <kabstractview.h>
 // Kakao core
-#include <kdocumentcodecmanager.h>
+#include <modelcodecmanager.h>
 #include <kdocumentmanager.h>
-#include <kabstractdocumentstreamencoder.h>
-#include <kabstractdocument.h>
+#include <abstractmodelstreamencoder.h>
+#include <abstractmodel.h>
 // KDE
 #include <KXmlGuiWindow>
 #include <KXMLGUIFactory>
@@ -72,7 +72,7 @@ void CopyAsController::setView( KAbstractView *view )
     mCopyAsActionGroup->setEnabled( hasSelectedData );
 }
 
-Q_DECLARE_METATYPE(KAbstractDocumentStreamEncoder*)
+Q_DECLARE_METATYPE(AbstractModelStreamEncoder*)
 
 void CopyAsController::updateActions()
 {
@@ -80,34 +80,45 @@ void CopyAsController::updateActions()
 
     qDeleteAll( mCopyAsActionGroup->actions() );
 
-    const QList<KAbstractDocumentStreamEncoder*> encoderList =  mDocumentManager->codecManager()->encoderList();
+    const AbstractModelSelection *selection = ( mSelectionControl != 0 ) ? mSelectionControl->selection() : 0;
 
-    for( int c = 0; c < encoderList.size(); ++c )
+    const QList<AbstractModelStreamEncoder*> encoderList =
+        mDocumentManager->codecManager()->encoderList( mView, selection );
+    const bool hasEncoders = ( encoderList.size() > 0 );
+
+    if( hasEncoders )
     {
-        KAbstractDocumentStreamEncoder *encoder = encoderList.at( c );
-        const QString title = encoder->remoteTypeName();
-        QAction *action = new QAction( title, mCopyAsActionGroup );
+        for( int c = 0; c < encoderList.size(); ++c )
+        {
+            AbstractModelStreamEncoder *encoder = encoderList.at( c );
+            const QString title = encoder->remoteTypeName();
+            QAction *action = new QAction( title, mCopyAsActionGroup );
 
-        action->setData( QVariant::fromValue(encoder) );
-        mCopyAsActionGroup->addAction( action );
+            action->setData( QVariant::fromValue(encoder) );
+            mCopyAsActionGroup->addAction( action );
+        }
     }
+    else
+    {
+        QAction *noneAction = new QAction( i18nc("@item There are no encoders.","Not available."), mCopyAsActionGroup );
+        mCopyAsActionGroup->addAction( noneAction );
+    }
+    mCopyAsActionGroup->setEnabled( hasEncoders );
+
     mWindow->plugActionList( CopyAsActionListId, mCopyAsActionGroup->actions() );
 }
 
 void CopyAsController::onActionTriggered( QAction *action )
 {
-    KAbstractDocumentStreamEncoder *encoder = action->data().value<KAbstractDocumentStreamEncoder *>();
+    AbstractModelStreamEncoder *encoder = action->data().value<AbstractModelStreamEncoder *>();
 
-    const KAbstractDocumentSelection *selection = mSelectionControl->selection();
+    const AbstractModelSelection *selection = mSelectionControl->selection();
 
     QByteArray exportData;
     QBuffer exportDataBuffer( &exportData );
     exportDataBuffer.open( QIODevice::WriteOnly );
 
-    if( selection )
-        encoder->encodeToStream( &exportDataBuffer, selection );
-    else
-        encoder->encodeToStream( &exportDataBuffer, mView->document() );
+    encoder->encodeToStream( &exportDataBuffer, mView, selection );
     exportDataBuffer.close();
 
     QMimeData *mimeData = new QMimeData;

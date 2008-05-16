@@ -22,9 +22,8 @@
 
 #include "kbytearrayvaluestreamencoder.h"
 
-// lib
-#include "kbytearraydocument.h"
-#include "kbytearrayselection.h"
+// Okteta gui
+#include <kbytearrayview.h>
 // Okteta core
 #include <kabstractbytearraymodel.h>
 #include <valuecodec.h>
@@ -44,30 +43,37 @@ KByteArrayValueStreamEncoder::KByteArrayValueStreamEncoder()
 
 
 bool KByteArrayValueStreamEncoder::encodeDataToStream( QIODevice *device,
+                                                       const KHEUI::KByteArrayView *byteArrayView,
                                                        const KHECore::KAbstractByteArrayModel *byteArrayModel,
                                                        const KHE::KSection &section )
 {
     bool success = true;
 
+    // settings
+    mSettings.undefinedChar = byteArrayView->undefinedChar();
+    mSettings.substituteChar = byteArrayView->substituteChar();
+    mSettings.coding = (KHECore::KCoding)byteArrayView->coding();
+
+    // encode
     QTextStream textStream( device );
 
-    KHECore::ValueCodec *byteCodec = KHECore::ValueCodec::createCodec( mSettings.coding );
+    KHECore::ValueCodec *valueCodec = KHECore::ValueCodec::createCodec( mSettings.coding );
 
     // prepare 
     QString valueString;
-    valueString.resize( byteCodec->encodingWidth() );
+    valueString.resize( valueCodec->encodingWidth() );
 
     for( int i=section.start(); i<=section.end(); ++i )
     {
         if( i > 0 )
             textStream << mSettings.separation;
 
-        byteCodec->encode( valueString, 0, byteArrayModel->datum(i) );
+        valueCodec->encode( valueString, 0, byteArrayModel->datum(i) );
 
         textStream << valueString;
     }
     // clean up
-    delete byteCodec;
+    delete valueCodec;
 
     return success;
 }

@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,15 +20,38 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kabstractdocumentstreamencoder.h"
+#ifndef ABSTRACTMODELEXPORTER_H
+#define ABSTRACTMODELEXPORTER_H
 
+// Qt
+#include <QtCore/QObject>
+#include <QtCore/QString>
 
-KAbstractDocumentStreamEncoder::KAbstractDocumentStreamEncoder( const QString &remoteTypeName,
-                                                                    const QString &remoteMimeType )
-: mRemoteTypeName( remoteTypeName ), mRemoteMimeType( remoteMimeType )
-{}
+class AbstractModel;
+class AbstractModelSelection;
+class KUrl;
 
-QString KAbstractDocumentStreamEncoder::remoteTypeName() const { return mRemoteTypeName; }
-QString KAbstractDocumentStreamEncoder::remoteMimeType() const { return mRemoteMimeType; }
+class AbstractModelExporter : public QObject
+{
+  Q_OBJECT
 
-KAbstractDocumentStreamEncoder::~KAbstractDocumentStreamEncoder() {}
+  protected:
+    AbstractModelExporter( const QString &remoteTypeName, const QString &remoteMimeType );
+  public:
+    virtual ~AbstractModelExporter();
+
+  public: // API to be implemented
+    virtual bool doExport( AbstractModel *model, const AbstractModelSelection *selection, const KUrl &url ) = 0;
+    virtual QString modelTypeName( AbstractModel *model, const AbstractModelSelection *selection ) const
+ { Q_UNUSED(model); Q_UNUSED(selection); return QString(); }//= 0;
+
+  public:
+    QString remoteTypeName() const;
+    QString remoteMimeType() const;
+
+  protected:
+    class Private;
+    Private * const d;
+};
+
+#endif

@@ -34,11 +34,6 @@ set( oktetagui_LIB_SRCS
   kdataranges.cpp
   kcursor.cpp
   coordrangelist.cpp
-  kbordercoltextexport.cpp
-  koffsetcoltextexport.cpp
-  kdatacoltextexport.cpp
-  kvaluecoltextexport.cpp
-  kcharcoltextexport.cpp
 )
 
 kde4_add_library( oktetagui  SHARED ${oktetagui_LIB_SRCS} )

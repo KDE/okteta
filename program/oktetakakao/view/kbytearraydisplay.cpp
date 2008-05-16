@@ -31,7 +31,7 @@
 
 
 KByteArrayDisplay::KByteArrayDisplay( KByteArrayDocument *document )
- : mWidget( 0 ), mDocument( document ), mSelection( document )
+ : mWidget( 0 ), mDocument( document )
 {
     KHECore::KAbstractByteArrayModel *content = mDocument->content();
     mWidget = new KHEUI::KByteArrayView( content );
@@ -49,7 +49,7 @@ KByteArrayDisplay::KByteArrayDisplay( KByteArrayDocument *document )
     connect( mWidget, SIGNAL(selectionChanged( bool )), SLOT(onSelectionChange( bool )) );
 }
 
-const KAbstractDocumentSelection *KByteArrayDisplay::selection() const { return &mSelection; }
+const AbstractModelSelection *KByteArrayDisplay::selection() const { return &mSelection; }
 
 KAbstractDocument *KByteArrayDisplay::document() const { return mDocument; }
 QWidget* KByteArrayDisplay::widget()             const { return mWidget; }

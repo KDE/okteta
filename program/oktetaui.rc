@@ -10,10 +10,10 @@
     <Action name="save_copy_as" />
     <Action name="save_as_template" />
     <!--Action name="export" append="save_merge" /-->
-    <!--Menu name="export" append="save_merge">
+    <Menu name="export" append="save_merge">
       <text context="@title:menu">Export</text>
       <ActionList name="export_list" />
-    </Menu-->
+    </Menu>
     <Separator/>
     <Action name="cancel" />
     <Menu name="permission">

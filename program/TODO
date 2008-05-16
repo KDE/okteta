@@ -49,6 +49,9 @@ Fixed after 0.1 Beta 2:
 * adaption of filter parameter edit to char coding changes
 * operation box in replace dialog last in tab order
 * enable extract strings tool and add copy
+* encoders now takes abtractmodel, so a view can be given
+* encoders now use current view settings
+* add export functionality to libkakao (simple modelencoderfilesystemexporter use encoder)
 
 For KDE 4.1:
 ----------------------------------
@@ -57,7 +60,6 @@ For KDE 4.1:
 * make printing support only selection
 * ask artists for own icon
 * add support for memory mapped files (includes enabling overwrite controller again)
-* add export functionality
 * think about turning insert pattern & Co. into a tool
 * more explicit titels for undo/redo actions (range, data), also paste, drag, and cut
 * operations like filter should be able to set an own description of their action (undo/redo)

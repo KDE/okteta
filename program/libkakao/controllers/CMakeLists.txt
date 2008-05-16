@@ -48,6 +48,9 @@ set( CLIPBOARDCONTROLLER_SRCS
 set( COPYASCONTROLLER_SRCS
   io/copyas/copyascontroller.cpp
 )
+set( EXPORTCONTROLLER_SRCS
+  io/export/exportcontroller.cpp
+)
 # set( CLOSECONTROLLER_SRCS
 #   viewsystem/close/closecontroller.cpp
 # )
@@ -76,6 +79,7 @@ set( KAKAO_CONTROLLERS_SRCS
   ${SELECTCONTROLLER_SRCS}
   ${CLIPBOARDCONTROLLER_SRCS}
   ${COPYASCONTROLLER_SRCS}
+  ${EXPORTCONTROLLER_SRCS}
   ${QUITCONTROLLER_SRCS}
 )
 

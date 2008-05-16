@@ -22,9 +22,8 @@
 
 #include "kbytearraytextstreamencoder.h"
 
-// lib
-#include "kbytearraydocument.h"
-#include "kbytearrayselection.h"
+// Okteta gui
+#include <kbytearrayview.h>
 // Okteta core
 #include <kabstractbytearraymodel.h>
 #include <khechar.h>
@@ -45,26 +44,33 @@ KByteArrayTextStreamEncoder::KByteArrayTextStreamEncoder()
 
 
 bool KByteArrayTextStreamEncoder::encodeDataToStream( QIODevice *device,
+                                                      const KHEUI::KByteArrayView *byteArrayView,
                                                       const KHECore::KAbstractByteArrayModel *byteArrayModel,
                                                       const KHE::KSection &section )
 {
     bool success = true;
 
+    // settings
+    mSettings.codecName = byteArrayView->encodingName();
+    mSettings.undefinedChar = byteArrayView->undefinedChar();
+    mSettings.substituteChar = byteArrayView->substituteChar();
+
+    // encode
     QTextStream textStream( device );
 
     KHECore::KCharCodec *charCodec = KHECore::KCharCodec::createCodec( mSettings.codecName );
-    static const QChar tabChar( '\t' );
-    static const QChar returnChar( '\n' );
+    const QChar tabChar( '\t' );
+    const QChar returnChar( '\n' );
 
     for( int i=section.start(); i<=section.end(); ++i )
     {
-        KHECore::KChar byteChar = charCodec->decode( byteArrayModel->datum(i) );
+        const KHECore::KChar byteChar = charCodec->decode( byteArrayModel->datum(i) );
 
-        const QChar streamChar = byteChar.isUndefined() ?      KHECore::KChar(mSettings.undefinedChar) :
+        const QChar streamChar = byteChar.isUndefined() ?      mSettings.undefinedChar :
                                  (!byteChar.isPrint()
-                                  && byteChar != tabChar
-                                  && byteChar != returnChar) ? KHECore::KChar(mSettings.substituteChar) :
-                                                               byteChar;
+                                  || byteChar == tabChar
+                                  || byteChar == returnChar) ? mSettings.substituteChar :
+                                                               (QChar)byteChar;
         textStream << streamChar;
     }
     // clean up

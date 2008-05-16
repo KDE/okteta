@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,15 +20,36 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kbytearrayselection.h"
+#ifndef OFFSETCOLUMNTEXTRENDERER_H
+#define OFFSETCOLUMNTEXTRENDERER_H
+
+// lib
+#include "abstractcolumntextrenderer.h"
+// Okteta gui
+#include <koffsetformat.h>
 
 
-KByteArraySelection::KByteArraySelection()
-{}
+class OffsetColumnTextRenderer : public AbstractColumnTextRenderer
+{
+  public:
+    OffsetColumnTextRenderer( int offsetFormat, int firstLineOffset, int delta );
+    virtual ~OffsetColumnTextRenderer();
 
-bool KByteArraySelection::isValid() const { return mSection.isValid(); }
-KHE::KSection KByteArraySelection::section() const { return mSection; }
+  public: // AbstractColumnTextRenderer API
+    virtual void renderFirstLine( QTextStream *stream, int lineIndex ) const;
+    virtual void renderNextLine( QTextStream *stream ) const;
 
-void KByteArraySelection::setSection( const KHE::KSection &section ) { mSection = section; }
+  protected:
+    void renderLine( QTextStream *stream ) const;
 
-KByteArraySelection::~KByteArraySelection() {}
+  protected:
+    const int mFirstLineOffset;
+    const int mDelta;
+    const KHEUI::KOffsetFormat::print printFunction;
+
+    /** the line we are in */
+    mutable int mRenderLine;
+    mutable char *mEncodedOffsetBuffer;
+};
+
+#endif

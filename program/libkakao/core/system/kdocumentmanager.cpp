@@ -31,12 +31,12 @@
 // temporary
 #include "kdocumentcreatemanager.h"
 #include "kdocumentsyncmanager.h"
-#include "kdocumentcodecmanager.h"
+#include "modelcodecmanager.h"
 
 KDocumentManager::KDocumentManager()
  : mCreateManager( new KDocumentCreateManager(this) ),
    mSyncManager( new KDocumentSyncManager(this) ),
-   mCodecManager( new KDocumentCodecManager(this) )
+   mCodecManager( new ModelCodecManager(this) )
 {}
 
 QStringList KDocumentManager::urls() const

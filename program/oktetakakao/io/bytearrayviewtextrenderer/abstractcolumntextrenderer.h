@@ -1,7 +1,7 @@
 /*
-    This file is part of the Okteta Gui library, part of the KDE project.
+    This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2003 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,39 +20,23 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_KCHARCOLTEXTEXPORT_H
-#define KHE_UI_KCHARCOLTEXTEXPORT_H
+#ifndef ABSTRACTCOLUMNTEXTRENDERER_H
+#define ABSTRACTCOLUMNTEXTRENDERER_H
 
-// lib
-#include "khe.h"
-#include "kdatacoltextexport.h"
+class QTextStream;
 
-
-namespace KHECore {
-class KCharCodec;
-}
-
-
-namespace KHEUI
-{
-
-class CharByteArrayColumnRenderer;
-
-class KCharColTextExport : public KDataColTextExport
+/**
+ * interface for the text export of columns
+ * @author Friedrich W. H. Kossebau <kossebau@kde.org>
+ */
+class AbstractColumnTextRenderer
 {
   public:
-    KCharColTextExport( const CharByteArrayColumnRenderer* BF, const char *D, const CoordRange &CR, const QString &CodecName );
-    virtual ~KCharColTextExport();
+    virtual ~AbstractColumnTextRenderer() {}
 
-  protected: //API
-    virtual void print( QString *T ) const;
-
-  protected:
-    KHECore::KCharCodec *CharCodec;
-    QChar SubstituteChar;
-    QChar UndefinedChar;
+  public: // API to be implemented
+    virtual void renderFirstLine( QTextStream *stream, int lineIndex ) const = 0;
+    virtual void renderNextLine( QTextStream *stream ) const = 0;
 };
-
-}
 
 #endif

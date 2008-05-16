@@ -1,7 +1,7 @@
 /*
-    This file is part of the Okteta Gui library, part of the KDE project.
+    This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2003 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,44 +20,25 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_KOFFSETCOLTEXTEXPORT_H
-#define KHE_UI_KOFFSETCOLTEXTEXPORT_H
+#ifndef BORDERCOLUMNREXTRENDERER_H
+#define BORDERCOLUMNREXTRENDERER_H
+
 
 // lib
-#include "kcoltextexport.h"
-#include "koffsetformat.h"
+#include "abstractcolumntextrenderer.h"
 
 
-namespace KHEUI
-{
-
-class OffsetColumnRenderer;
-
-class KOffsetColTextExport : public KColTextExport
+class BorderColumnTextRenderer : public AbstractColumnTextRenderer
 {
   public:
-    explicit KOffsetColTextExport( const OffsetColumnRenderer *OC );
-    ~KOffsetColTextExport() {}
+    virtual ~BorderColumnTextRenderer() {}
 
-  public: // KColTextExport API
-    void printFirstLine( QString *T, int Line ) const;
-    void printNextLine( QString *T ) const;
-    /** tells how much chars per line are needed */
-    int charsPerLine() const;
+  public: // AbstractColumnTextRenderer API
+    virtual void renderFirstLine( QTextStream *stream, int lineIndex ) const;
+    virtual void renderNextLine( QTextStream *stream ) const;
 
   protected:
-    void print( QString *T ) const;
-
-  protected:
-    const int CodingWidth;
-    const int FirstLineOffset;
-    const int Delta;
-    const KOffsetFormat::print printFunction;
-
-    /** the line we are in */
-    mutable int PrintLine;
+    void render( QTextStream *stream ) const;
 };
-
-}
 
 #endif

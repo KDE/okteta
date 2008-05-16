@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,39 +20,54 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KABSTRACTBYTEARRAYSTREAMENCODER_H
-#define KABSTRACTBYTEARRAYSTREAMENCODER_H
+#ifndef BYTEARRAYVIEWTEXTSTREAMENCODER_H
+#define BYTEARRAYVIEWTEXTSTREAMENCODER_H
 
-// Kakao core
-#include <abstractmodelstreamencoder.h>
+// lib
+#include "kabstractbytearraystreamencoder.h"
+// Okteta gui
+// #include <koffsetformat.h>
+// Okteta core
+#include <khe.h>
+// Qt
+#include <QtCore/QString>
 
-namespace KHEUI {
-class KByteArrayView;
-}
-namespace KHECore {
-class KAbstractByteArrayModel;
-}
-namespace KHE {
-class KSection;
-}
+class ByteArrayViewTextStreamEncoderSettings
+{
+  public:
+    ByteArrayViewTextStreamEncoderSettings();
+  public:
+//     KHEUI::KOffsetFormat::KFormat offsetFormat;
+    int codingWidth;
+    int firstLineOffset;
+    int startOffset;
+    int delta;
+    KHECore::KCoding coding;
+    QString codecName;
+    QChar undefinedChar;
+    QChar substituteChar;
+    QString separation;
+//     KHECore::KCharCodec *CharCodec;
+//     KHEUI::KOffsetFormat::print printFunction;
+};
 
-class KAbstractByteArrayStreamEncoder : public AbstractModelStreamEncoder
+// TODO: this could rather be one of the default cop
+class ByteArrayViewTextStreamEncoder : public KAbstractByteArrayStreamEncoder
 {
     Q_OBJECT
 
   public:
-    KAbstractByteArrayStreamEncoder( const QString &remoteTypeName, const QString &remoteMimeType );
-    virtual ~KAbstractByteArrayStreamEncoder();
+    ByteArrayViewTextStreamEncoder();
+    virtual ~ByteArrayViewTextStreamEncoder();
 
-  public: // AbstractModelStreamEncoder API
-    virtual bool encodeToStream( QIODevice *device, AbstractModel *model, const AbstractModelSelection *selection );
-    virtual QString modelTypeName( AbstractModel *model, const AbstractModelSelection *selection ) const;
-
-  protected: // API to be implemented
+  protected: // KAbstractByteArrayStreamEncoder API
     virtual bool encodeDataToStream( QIODevice *device,
                                      const KHEUI::KByteArrayView *byteArrayView,
                                      const KHECore::KAbstractByteArrayModel *byteArrayModel,
-                                     const KHE::KSection &section ) = 0;
+                                     const KHE::KSection &section );
+
+  protected:
+    ByteArrayViewTextStreamEncoderSettings mSettings;
 };
 
 #endif

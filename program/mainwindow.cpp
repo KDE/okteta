@@ -49,6 +49,7 @@
 #include <io/synchronize/synchronizecontroller.h>
 #include <io/clipboard/clipboardcontroller.h>
 #include <io/copyas/copyascontroller.h>
+#include <io/export/exportcontroller.h>
 #include <view/version/versioncontroller.h>
 #include <view/zoom/zoomcontroller.h>
 #include <view/select/selectcontroller.h>
@@ -95,6 +96,7 @@ void OktetaMainWindow::setupControllers()
   mControllers.append( new SelectController(this) );
   mControllers.append( new ClipboardController(this) );
   mControllers.append( new CopyAsController(mProgram->documentManager(),this) );
+  mControllers.append( new ExportController(mProgram->documentManager(),this) );
 
 //   mControllers.append( new OverwriteOnlyController(this) );
   mControllers.append( new OverwriteModeController(this) );

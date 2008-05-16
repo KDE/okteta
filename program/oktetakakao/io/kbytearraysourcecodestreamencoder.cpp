@@ -74,11 +74,17 @@ KByteArraySourceCodeStreamEncoder::KByteArraySourceCodeStreamEncoder()
 
 
 bool KByteArraySourceCodeStreamEncoder::encodeDataToStream( QIODevice *device,
+                                                            const KHEUI::KByteArrayView *byteArrayView,
                                                             const KHECore::KAbstractByteArrayModel *byteArrayModel,
                                                             const KHE::KSection &section )
 {
+Q_UNUSED( byteArrayView )
+
     bool success = true;
 
+    // settings
+
+    // encode
     QTextStream textStream( device );
 
     const int size = section.width();

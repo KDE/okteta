@@ -1,7 +1,7 @@
 /*
-    This file is part of the Okteta Gui library, part of the KDE project.
+    This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2003 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,35 +20,31 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_KVALUECOLTEXTEXPORT_H
-#define KHE_UI_KVALUECOLTEXTEXPORT_H
+#ifndef ABSTRACTMODELFILESYSTEMEXPORTER_H
+#define ABSTRACTMODELFILESYSTEMEXPORTER_H
 
 // lib
-#include "kdatacoltextexport.h"
-// Okteta core
-#include "valuecodec.h"
+#include "abstractmodelexporter.h"
 
 
-namespace KHEUI
+class AbstractModelFileSystemExporter : public AbstractModelExporter
 {
+  Q_OBJECT
 
-class ValueByteArrayColumnRenderer;
-
-
-class KValueColTextExport : public KDataColTextExport
-{
+  protected:
+    AbstractModelFileSystemExporter( const QString &remoteTypeName, const QString &remoteMimeType );
   public:
-    KValueColTextExport( const ValueByteArrayColumnRenderer* BF, const char *D, const CoordRange &CR );
-    virtual ~KValueColTextExport();
+    virtual ~AbstractModelFileSystemExporter();
+
+  public: // AbstractModelExporter API
+    virtual bool doExport( AbstractModel *model, const AbstractModelSelection *selection, const KUrl &url );
+
+  protected: // API to be implemented
+    virtual bool writeToFile( AbstractModel *model, const AbstractModelSelection *selection, const QString &workFilePath ) = 0;
 
   protected:
-    virtual void print( QString *T ) const;
-
-
-  protected:
-    KHECore::ValueCodec *ByteCodec;
+    class Private;
+    Private * const d;
 };
-
-}
 
 #endif

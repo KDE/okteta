@@ -1,7 +1,7 @@
 /*
-    This file is part of the Okteta Gui library, part of the KDE project.
+    This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2003 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,30 +20,32 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_KBORDERCOLTEXTEXPORT_H
-#define KHE_UI_KBORDERCOLTEXTEXPORT_H
-
+#ifndef VALUEBYTEARRAYCOLUMNTEXTRENDERER_H
+#define VALUEBYTEARRAYCOLUMNTEXTRENDERER_H
 
 // lib
-#include "kcoltextexport.h"
+#include "abstractbytearraycolumntextrenderer.h"
+// Okteta core
+#include <khe.h>
 
+namespace KHECore {
+class ValueCodec;
+}
 
-namespace KHEUI
+class ValueByteArrayColumnTextRenderer : public AbstractByteArrayColumnTextRenderer
 {
+  public:
+    ValueByteArrayColumnTextRenderer( const KHECore::KAbstractByteArrayModel *byteArrayModel, int offset,
+        const KHEUI::CoordRange &coordRange,
+        int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
+        KHECore::KCoding coding );
+    virtual ~ValueByteArrayColumnTextRenderer();
 
-class KBorderColTextExport : public KColTextExport
-{
-  public: // API
-	virtual ~KBorderColTextExport(){}
-    void printFirstLine( QString *T, int Line ) const;
-    void printNextLine( QString *T) const;
-    /** tells how much chars per line are needed */
-    int charsPerLine() const ;
+  protected: // AbstractByteArrayColumnTextRenderer API
+    virtual void renderLine( QTextStream *stream ) const;
 
   protected:
-    void print( QString *T ) const;
+    const KHECore::ValueCodec *mValueCodec;
 };
-
-}
 
 #endif
