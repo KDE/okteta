@@ -40,8 +40,9 @@ static const int DefaultBinaryGapWidth = 1;
 
 ValueColumnRenderer::ValueColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer,
                                           const KHECore::KAbstractByteArrayModel *byteArrayModel,
+                                          const KHE::KSection &renderIndizes,
                                           const KHEUI::ByteArrayTableLayout *layout )
- : ByteColumnRenderer( columnFrameRenderer, byteArrayModel, layout ),
+ : ByteColumnRenderer( columnFrameRenderer, byteArrayModel, renderIndizes, layout ),
    mCoding( NotDefaultCoding ),
    mByteCodec( 0 ),
    mBinaryGapWidth( DefaultBinaryGapWidth )

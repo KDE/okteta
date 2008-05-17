@@ -63,6 +63,7 @@ class ByteColumnRenderer : public AbstractColumnRenderer
   public:
     ByteColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer,
                         const KHECore::KAbstractByteArrayModel *byteArray,
+                        const KHE::KSection &renderIndizes,
                         const KHEUI::ByteArrayTableLayout *layout );
     virtual ~ByteColumnRenderer();
 
@@ -110,7 +111,7 @@ class ByteColumnRenderer : public AbstractColumnRenderer
       */
     void setMetrics( KPixelX NewDigitWidth, KPixelY NewDigitBaseLine );
     /** */
-    void setByteArrayModel( const KHECore::KAbstractByteArrayModel *byteArrayModel );
+    void setByteArrayModel( const KHECore::KAbstractByteArrayModel *byteArrayModel, const KHE::KSection &renderIndizes );
     /** creates new buffer for x-values; to be called on any change of NoOfBytesPerLine or metrics */
     void resetXBuffer();
     /** sets the codec to be used by the char column. */
@@ -172,6 +173,8 @@ class ByteColumnRenderer : public AbstractColumnRenderer
   protected:
     /** pointer to the buffer */
     const KHECore::KAbstractByteArrayModel *mByteArrayModel;
+    /** */
+    KHE::KSection mRenderIndizes; // TODO: could also be done by a filter KAbstractByteArrayModel?
     /** pointer to the layout */
     const KHEUI::ByteArrayTableLayout *mLayout;
     /** */

@@ -124,9 +124,14 @@ void PrintTool::print()
         byteArrayFrameRenderer->setByteArrayModel( mByteArrayModel, section.start(), section.width() );
 
         // TODO: use noOfBytesPerLine of view, scale resolution down if it does not fit the page
+        const int noOfBytesPerLine = mByteArrayView->noOfBytesPerLine();
 //         byteArrayFrameRenderer->setNoOfBytesPerLine( mByteArrayView->noOfBytesPerLine() );
-        byteArrayFrameRenderer->setFirstLineOffset( mByteArrayView->firstLineOffset() );
-        byteArrayFrameRenderer->setStartOffset( mByteArrayView->startOffset() );
+
+        const int startOffset = mByteArrayView->startOffset() + section.start();
+        const int line = startOffset / noOfBytesPerLine;
+        const int firstLineOffset = mByteArrayView->firstLineOffset() + line*noOfBytesPerLine;
+        byteArrayFrameRenderer->setFirstLineOffset( firstLineOffset );
+        byteArrayFrameRenderer->setStartOffset( startOffset );
 
         byteArrayFrameRenderer->setEncoding( mByteArrayView->encodingName() );
         byteArrayFrameRenderer->setBufferSpacing( mByteArrayView->byteSpacingWidth(),

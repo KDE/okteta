@@ -44,9 +44,11 @@ static const int DefaultNoOfGroupedBytes = 4;
 
 ByteColumnRenderer::ByteColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer,
                                         const KHECore::KAbstractByteArrayModel *byteArray,
+                                        const KHE::KSection &renderIndizes,
                                         const KHEUI::ByteArrayTableLayout *layout )
  : AbstractColumnRenderer( columnFrameRenderer ),
    mByteArrayModel( byteArray ),
+   mRenderIndizes( renderIndizes ),
    mLayout( layout ),
 //    Bookmarks( qobject_cast<KDE::If::Bookmarks*>(ByteArray) ),
    mDigitWidth( 0 ),
@@ -62,9 +64,11 @@ ByteColumnRenderer::ByteColumnRenderer( AbstractColumnFrameRenderer *columnFrame
 }
 
 
-void ByteColumnRenderer::setByteArrayModel( const KHECore::KAbstractByteArrayModel *byteArrayModel )
+void ByteColumnRenderer::setByteArrayModel( const KHECore::KAbstractByteArrayModel *byteArrayModel,
+                                            const KHE::KSection &renderIndizes )
 {
     mByteArrayModel = byteArrayModel;
+    mRenderIndizes = renderIndizes;
 //     Bookmarks = qobject_cast<KDE::If::Bookmarks*>(mByteArrayModel );
 }
 
@@ -273,8 +277,8 @@ KHE::KSection ByteColumnRenderer::linePositionsOfX( KPixelX PX, KPixelX PW ) con
 }
 
 
-KPixelX ByteColumnRenderer::xOfLinePosition( int posInLine )      const { return x() + (mPosX?mPosX[posInLine]:0); }
-KPixelX ByteColumnRenderer::rightXOfLinePosition( int posInLine ) const { return x() + (mPosRightX?mPosRightX[posInLine]:0); }
+KPixelX ByteColumnRenderer::xOfLinePosition( int linePositions )      const { return x() + (mPosX?mPosX[linePositions]:0); }
+KPixelX ByteColumnRenderer::rightXOfLinePosition( int linePositions ) const { return x() + (mPosRightX?mPosRightX[linePositions]:0); }
 
 
 int ByteColumnRenderer::linePositionOfColumnX( KPixelX PX ) const
@@ -317,8 +321,8 @@ KHE::KSection ByteColumnRenderer::linePositionsOfColumnXs( KPixelX PX, KPixelX P
 }
 
 
-KPixelX ByteColumnRenderer::columnXOfLinePosition( int posInLine )      const { return mPosX ? mPosX[posInLine] : 0; }
-KPixelX ByteColumnRenderer::columnRightXOfLinePosition( int posInLine ) const { return mPosRightX ? mPosRightX[posInLine] : 0; }
+KPixelX ByteColumnRenderer::columnXOfLinePosition( int linePositions )      const { return mPosX ? mPosX[linePositions] : 0; }
+KPixelX ByteColumnRenderer::columnRightXOfLinePosition( int linePositions ) const { return mPosRightX ? mPosRightX[linePositions] : 0; }
 
 
 KPixelXs ByteColumnRenderer::xsOfLinePositionsInclSpaces( const KHE::KSection &positions ) const
@@ -373,17 +377,17 @@ void ByteColumnRenderer::renderNextLine( QPainter *painter )
 }
 
 
-void ByteColumnRenderer::renderLinePositions( QPainter *painter, int Line, const KHE::KSection &posInLine )
+void ByteColumnRenderer::renderLinePositions( QPainter *painter, int Line, const KHE::KSection &linePositions )
 {
     // clear background
-//     const unsigned int isBlank = (posInLine.start()!=0?StartsBefore:0) | (posInLine.end()!=mLastPos?EndsLater:0);
+//     const unsigned int isBlank = (linePositions.start()!=0?StartsBefore:0) | (linePositions.end()!=mLastPos?EndsLater:0);
 
-//     renderRange( painter, Qt::white, posInLine, isBlank );
+//     renderRange( painter, Qt::white, linePositions, isBlank );
 
     // Go through the lines TODO: handle first and last line more effeciently
     // check for leading and trailing spaces
-    KHE::KSection positions( mLayout->firstLinePosition(Coord( posInLine.start(), Line )),
-                             mLayout->lastLinePosition( Coord( posInLine.end(),  Line )) );
+    KHE::KSection positions( mLayout->firstLinePosition(Coord( linePositions.start(), Line )),
+                             mLayout->lastLinePosition( Coord( linePositions.end(),  Line )) );
 
     // no bytes to paint?
     if( !mLayout->hasContent(Line) )
@@ -412,9 +416,9 @@ void ByteColumnRenderer::renderPlain( QPainter *painter, const KHE::KSection &po
   }
 #endif
     // paint all the bytes affected
-    for( int posInLine=positions.start(); posInLine<=positions.end(); ++posInLine,++index )
+    for( int linePositions=positions.start(); linePositions<=positions.end(); ++linePositions,++index )
     {
-        KPixelX x = columnXOfLinePosition( posInLine );
+        KPixelX x = columnXOfLinePosition( linePositions );
 
         // draw the byte
         painter->translate( x, 0 );
@@ -428,7 +432,7 @@ void ByteColumnRenderer::renderPlain( QPainter *painter, const KHE::KSection &po
     }
 #endif
 
-        char byte = mByteArrayModel->datum( index );
+        char byte = mByteArrayModel->datum( mRenderIndizes.start()+index );
         KHECore::KChar byteChar = mCodec->decode( byte );
 
         drawByte( painter, byte, byteChar, colorForChar(byteChar) );

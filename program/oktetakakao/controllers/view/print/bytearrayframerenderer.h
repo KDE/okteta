@@ -137,12 +137,10 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
     QFont mFont;
 
     const KHECore::KAbstractByteArrayModel *mByteArrayModel;
-    int mOffset;
-    int mLength;
 
   protected:
     /** holds the logical layout */
-    KHEUI::ByteArrayTableLayout *mDataLayout;
+    KHEUI::ByteArrayTableLayout *mLayout;
 
   protected:
     OffsetColumnRenderer *mOffsetColumnRenderer;

@@ -57,26 +57,25 @@ ByteArrayFrameRenderer::ByteArrayFrameRenderer()
  : mHeight( BAFInitialHeight ),
    mWidth( BAFInitialWidth ),
    mByteArrayModel( 0 ),
-   mOffset( 0 ),
-   mLength( 0 ),
    mCodec( 0 ),
    mResizeStyle( DefaultResizeStyle )
 {
-    mDataLayout = new KHEUI::ByteArrayTableLayout( DefaultNoOfBytesPerLine, DefaultStartOffset, 0 );
-    mDataLayout->setLength( 0 );//mByteArrayModel->size() );
-    mDataLayout->setNoOfLinesPerPage( noOfLinesPerFrame() );
+    mLayout = new KHEUI::ByteArrayTableLayout( DefaultNoOfBytesPerLine, DefaultFirstLineOffset, DefaultStartOffset, 0 );
+    mLayout->setLength( 0 );//mByteArrayModel->size() );
+    mLayout->setNoOfLinesPerPage( noOfLinesPerFrame() );
 
+    const KHE::KSection emptySection;
     // creating the columns in the needed order
     mOffsetColumnRenderer =
         new OffsetColumnRenderer( this, DefaultFirstLineOffset, DefaultNoOfBytesPerLine, KOffsetFormat::Hexadecimal );
     mFirstBorderColumnRenderer =
         new BorderColumnRenderer( this, true );//false );
     mValueColumnRenderer =
-        new ValueColumnRenderer( this, mByteArrayModel, mDataLayout );
+        new ValueColumnRenderer( this, mByteArrayModel, emptySection, mLayout );
     mSecondBorderColumnRenderer =
         new BorderColumnRenderer( this, true );
     mCharColumnRenderer =
-        new CharColumnRenderer( this, mByteArrayModel, mDataLayout );
+        new CharColumnRenderer( this, mByteArrayModel, emptySection, mLayout );
 
     // set encoding
     mCodec = KHECore::KCharCodec::createCodec( (KHECore::KEncoding)DefaultEncoding );
@@ -88,12 +87,12 @@ ByteArrayFrameRenderer::ByteArrayFrameRenderer()
 }
 
 const KHECore::KAbstractByteArrayModel *ByteArrayFrameRenderer::byteArrayModel() const { return mByteArrayModel; }
-int ByteArrayFrameRenderer::offset()                                             const { return mOffset; }
-int ByteArrayFrameRenderer::length()                                             const { return mLength; }
+int ByteArrayFrameRenderer::offset()                                             const { return mLayout->startOffset(); }
+int ByteArrayFrameRenderer::length()                                             const { return mLayout->length(); }
 
-int ByteArrayFrameRenderer::noOfBytesPerLine()               const { return mDataLayout->noOfBytesPerLine(); }
+int ByteArrayFrameRenderer::noOfBytesPerLine()               const { return mLayout->noOfBytesPerLine(); }
 int ByteArrayFrameRenderer::firstLineOffset()                const { return mOffsetColumnRenderer->firstLineOffset(); }
-int ByteArrayFrameRenderer::startOffset()                    const { return mDataLayout->startOffset(); }
+int ByteArrayFrameRenderer::startOffset()                    const { return mLayout->startOffset(); }
 KResizeStyle ByteArrayFrameRenderer::resizeStyle()           const { return mResizeStyle; }
 KHECore::KCoding ByteArrayFrameRenderer::coding()            const { return mValueColumnRenderer->coding(); }
 KPixelX ByteArrayFrameRenderer::byteSpacingWidth()           const { return mValueColumnRenderer->byteSpacingWidth(); }
@@ -115,11 +114,12 @@ int ByteArrayFrameRenderer::width() const { return mWidth; }
 
 int ByteArrayFrameRenderer::framesCount() const
 {
-    const int charsPerFrame = mDataLayout->noOfBytesPerLine() * noOfLinesPerFrame();
+    const int charsPerFrame = mLayout->noOfBytesPerLine() * noOfLinesPerFrame();
 
     // clever calculation works: at least one page for the rest
     // hard to describe, think yourself
-    const int frames = ( (mLength-1) / charsPerFrame ) + 1;
+    // TODO: needs to include the offset in the first line
+    const int frames = ( (mLayout->length()-1) / charsPerFrame ) + 1;
 
     return frames;
 }
@@ -128,18 +128,19 @@ void ByteArrayFrameRenderer::setByteArrayModel( const KHECore::KAbstractByteArra
                                                 int offset, int length )
 {
     mByteArrayModel = byteArrayModel;
-    mOffset = offset;
-    mLength = ( byteArrayModel == 0 ) ?                      0 :
-              ( length == -1 ) ?                             byteArrayModel->size()-mOffset :
-              ( length <= byteArrayModel->size()-mOffset ) ? length :
-                                                             byteArrayModel->size()-mOffset;
+    length = ( byteArrayModel == 0 ) ?                      0 :
+             ( length == -1 ) ?                             byteArrayModel->size()-offset :
+             ( length <= byteArrayModel->size()-offset ) ? length :
+                                                             byteArrayModel->size()-offset;
 
-    mValueColumnRenderer->setByteArrayModel( byteArrayModel );
-    mCharColumnRenderer->setByteArrayModel( byteArrayModel );
+    const KHE::KSection renderIndizes = KHE::KSection::fromWidth(offset,length);
+    mValueColumnRenderer->setByteArrayModel( byteArrayModel, renderIndizes );
+    mCharColumnRenderer->setByteArrayModel( byteArrayModel, renderIndizes );
 
     // affected:
     // length -> no of lines -> width
-    mDataLayout->setLength( mLength );
+    mLayout->setLength( length );
+
     adjustLayoutToSize();
 }
 
@@ -156,12 +157,18 @@ void ByteArrayFrameRenderer::setWidth( int width )
 
 void ByteArrayFrameRenderer::setFirstLineOffset( int firstLineOffset )
 {
+    if( !mLayout->setFirstLineOffset(firstLineOffset) )
+        return;
+
     mOffsetColumnRenderer->setFirstLineOffset( firstLineOffset );
+    // affects:
+    // the no of lines -> width
+    adjustLayoutToSize();
 }
 
 void ByteArrayFrameRenderer::setStartOffset( int startOffset )
 {
-    if( !mDataLayout->setStartOffset(startOffset) )
+    if( !mLayout->setStartOffset(startOffset) )
         return;
 
     // affects:
@@ -210,7 +217,7 @@ void ByteArrayFrameRenderer::setNoOfBytesPerLine( int noOfBytesPerLine )
     // if the number is explicitly set we expect a wish for no automatic resize
     mResizeStyle = NoResize;
 
-    if( !mDataLayout->setNoOfBytesPerLine(noOfBytesPerLine) )
+    if( !mLayout->setNoOfBytesPerLine(noOfBytesPerLine) )
         return;
     adjustToWidth();
 }
@@ -311,7 +318,7 @@ void ByteArrayFrameRenderer::setFont( const QFont &font )
     setLineHeight( fontMetrics.height() );
 
     // update all dependant structures
-    mDataLayout->setNoOfLinesPerPage( noOfLinesPerFrame() );
+    mLayout->setNoOfLinesPerPage( noOfLinesPerFrame() );
 
     mOffsetColumnRenderer->setMetrics( digitWidth, digitBaseLine );
     mValueColumnRenderer->setMetrics( digitWidth, digitBaseLine );
@@ -344,17 +351,17 @@ void ByteArrayFrameRenderer::adjustLayoutToSize()
         const int bytesPerLine = fittingBytesPerLine();
 
         // changes?
-        if( mDataLayout->setNoOfBytesPerLine(bytesPerLine) )
+        if( mLayout->setNoOfBytesPerLine(bytesPerLine) )
             adjustToLayoutNoOfBytesPerLine();
     }
 
-    setNoOfLines( mDataLayout->noOfLines() );
+    setNoOfLines( mLayout->noOfLines() );
 }
 
 
 void ByteArrayFrameRenderer::adjustToLayoutNoOfBytesPerLine()
 {
-    mOffsetColumnRenderer->setDelta( mDataLayout->noOfBytesPerLine() );
+    mOffsetColumnRenderer->setDelta( mLayout->noOfBytesPerLine() );
     mValueColumnRenderer->resetXBuffer();
     mCharColumnRenderer->resetXBuffer();
 
@@ -487,6 +494,6 @@ void ByteArrayFrameRenderer::showByteArrayColumns( int newColumns )
 
 ByteArrayFrameRenderer::~ByteArrayFrameRenderer()
 {
-    delete mDataLayout;
+    delete mLayout;
     delete mCodec;
 }

@@ -38,6 +38,7 @@ class ValueColumnRenderer : public ByteColumnRenderer
   public:
     ValueColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer,
                          const KHECore::KAbstractByteArrayModel *byteArrayModel,
+                         const KHE::KSection &renderIndizes,
                          const KHEUI::ByteArrayTableLayout *layout );
     virtual ~ValueColumnRenderer();
 

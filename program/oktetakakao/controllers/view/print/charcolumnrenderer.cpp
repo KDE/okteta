@@ -35,8 +35,9 @@ static const char     DefaultUndefinedChar =    (char)'?';
 
 CharColumnRenderer::CharColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer,
                                         const KHECore::KAbstractByteArrayModel *byteArrayModel,
+                                        const KHE::KSection &renderIndizes,
                                         const KHEUI::ByteArrayTableLayout *layout )
- : ByteColumnRenderer( columnFrameRenderer, byteArrayModel, layout ),
+ : ByteColumnRenderer( columnFrameRenderer, byteArrayModel, renderIndizes, layout ),
    mShowsNonprinting( DefaultShowsNonprinting ),
    mSubstituteChar( DefaultSubstituteChar ),
    mUndefinedChar( DefaultUndefinedChar )
