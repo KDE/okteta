@@ -22,13 +22,15 @@
 
 #include "kdataranges.h"
 
+// lib
+#include "bytearraytablelayout.h"
 // Okteta core
 #include <arraychangemetricslist.h>
 
 
 namespace KHEUI {
 
-KDataRanges::KDataRanges( KDataLayout *L )
+KDataRanges::KDataRanges( ByteArrayTableLayout *L )
  : Modified( false ),
    Layout( L )
 {

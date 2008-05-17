@@ -23,7 +23,7 @@
 #include "kdatacursor.h"
 
 // lib
-#include "kdatalayout.h"
+#include "bytearraytablelayout.h"
 // Okteta core
 #include <arraychangemetricslist.h>
 
@@ -31,7 +31,7 @@
 namespace KHEUI
 {
 
-KDataCursor::KDataCursor( const KDataLayout *layout )
+KDataCursor::KDataCursor( const ByteArrayTableLayout *layout )
  : mLayout( layout ),
    mIndex( 0 ),
    mCoord( 0, 0 ),
@@ -159,10 +159,10 @@ void KDataCursor::gotoUp()
     if( mCoord.isBelow(mLayout->startLine()) )
     {
         mCoord.goUp();
-        if( mCoord.isPriorInLineThan(mLayout->start()) )
+        if( mCoord.isPriorInLineThan(mLayout->startCoord()) )
         {
             mIndex = 0;
-            mCoord.setPos( mLayout->startPos() );
+            mCoord.setPos( mLayout->startLinePosition() );
             mBehind = false;
         }
         else
@@ -185,7 +185,7 @@ void KDataCursor::gotoDown()
     {
         mCoord.goDown();
         // behind End?
-        if( mCoord.isLaterInLineThan(mLayout->final()) )
+        if( mCoord.isLaterInLineThan(mLayout->finalCoord()) )
             gotoEnd();
         else
             mIndex += mLayout->noOfBytesPerLine();
@@ -196,7 +196,7 @@ void KDataCursor::gotoDown()
 void KDataCursor::gotoLineStart()
 {
     const int oldIndex = mIndex;
-    mIndex = mLayout->indexAtLineStart( mCoord.line() );
+    mIndex = mLayout->indexAtFirstLinePosition( mCoord.line() );
     mCoord.goLeft( oldIndex-mIndex );
     mBehind = false;
 }
@@ -207,7 +207,7 @@ void KDataCursor::gotoLineEnd()
     if( mIndex < mLayout->length() )
     {
         const int oldIndex = mIndex;
-        mIndex = mLayout->indexAtLineEnd( mCoord.line() );
+        mIndex = mLayout->indexAtLastLinePosition( mCoord.line() );
         mCoord.goRight( mIndex-oldIndex );
 
         stepToEnd();
@@ -218,7 +218,7 @@ void KDataCursor::gotoLineEnd()
 void KDataCursor::gotoStart()
 {
     mIndex = 0;
-    mCoord = mLayout->start();
+    mCoord = mLayout->startCoord();
     mBehind = false;
 }
 
@@ -229,7 +229,7 @@ void KDataCursor::gotoEnd()
     if( lastIndex >= 0 )
     {
         mIndex = lastIndex;
-        mCoord = mLayout->final();
+        mCoord = mLayout->finalCoord();
 
         stepToEnd();
     }
@@ -349,8 +349,8 @@ void KDataCursor::gotoPageDown()
 
 
 int KDataCursor::validIndex()       const { return mIndex < mLayout->length() ? mIndex : -1; }
-int KDataCursor::indexAtLineStart() const { return mLayout->indexAtLineStart( mCoord.line() ); }
-int KDataCursor::indexAtLineEnd()   const { return mLayout->indexAtLineEnd( mCoord.line() ); }
+int KDataCursor::indexAtLineStart() const { return mLayout->indexAtFirstLinePosition( mCoord.line() ); }
+int KDataCursor::indexAtLineEnd()   const { return mLayout->indexAtLastLinePosition( mCoord.line() ); }
 
 
 bool KDataCursor::atStart()     const { return mIndex == 0; }
@@ -358,8 +358,8 @@ bool KDataCursor::atEnd()       const { return mIndex == mLayout->length() - 1; 
 bool KDataCursor::atAppendPos() const { return realIndex() >= mLayout->length(); }
 
 
-bool KDataCursor::atLineStart() const { return mLayout->atLineStart( mCoord ); }
-bool KDataCursor::atLineEnd()   const { return mLayout->atLineEnd( mCoord ); }
+bool KDataCursor::atLineStart() const { return mLayout->atFirstLinePosition( mCoord ); }
+bool KDataCursor::atLineEnd()   const { return mLayout->atLastLinePosition( mCoord ); }
 
 // TODO: oldLength is a hack, as DataLayout is already updated and used by e.g. gotoCIndex
 void KDataCursor::adaptToChanges( const KHE::ArrayChangeMetricsList &changeList, int oldLength )

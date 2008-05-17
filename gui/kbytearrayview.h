@@ -57,7 +57,7 @@ class BorderColumnRenderer;
 
 class Coord;
 class KDataCursor;
-class KDataLayout;
+class ByteArrayTableLayout;
 class KDataRanges;
 
 class KController;
@@ -477,7 +477,7 @@ class OKTETAGUI_EXPORT KByteArrayView : public ColumnsView
     KHECore::KAbstractByteArrayModel *mByteArrayModel;
 
     /** holds the logical layout */
-    KDataLayout *mDataLayout;
+    ByteArrayTableLayout *mDataLayout;
     /** */
     KDataCursor *mDataCursor;
     /** */

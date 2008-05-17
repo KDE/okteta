@@ -33,7 +33,7 @@ class ArrayChangeMetricsList;
 namespace KHEUI
 {
 
-class KDataLayout;
+class ByteArrayTableLayout;
 
 
 /**@short navigates through the buffer in an abstract way, based on the layout
@@ -63,7 +63,7 @@ class KDataLayout;
 class KDataCursor
 {
   public:
-    explicit KDataCursor( const KDataLayout *layout );
+    explicit KDataCursor( const ByteArrayTableLayout *layout );
     ~KDataCursor();
 
 
@@ -148,7 +148,7 @@ class KDataCursor
 
   private:
     /** layout, tells how the column is organized  */
-    const KDataLayout *mLayout;
+    const ByteArrayTableLayout *mLayout;
 
     /** Position in buffer */
     int mIndex;

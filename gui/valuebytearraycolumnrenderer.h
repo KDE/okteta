@@ -43,7 +43,7 @@ class ValueByteArrayColumnRenderer : public AbstractByteArrayColumnRenderer
 {
   public:
     ValueByteArrayColumnRenderer( ColumnsView *columnsView,
-        KHECore::KAbstractByteArrayModel *byteArrayModel, KDataLayout *layout, KDataRanges *ranges );
+        KHECore::KAbstractByteArrayModel *byteArrayModel, ByteArrayTableLayout *layout, KDataRanges *ranges );
     virtual ~ValueByteArrayColumnRenderer();
 
   public:

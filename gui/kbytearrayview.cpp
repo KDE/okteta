@@ -28,7 +28,7 @@
 #include "charbytearraycolumnrenderer.h"
 #include "bordercolumnrenderer.h"
 #include "kdatacursor.h"
-#include "kdatalayout.h"
+#include "bytearraytablelayout.h"
 #include "kdataranges.h"
 #include "controller/ktabcontroller.h"
 #include "controller/knavigator.h"
@@ -86,7 +86,7 @@ class KByteArrayView::Private
 KByteArrayView::KByteArrayView( KHECore::KAbstractByteArrayModel *byteArrayModel, QWidget *parent )
  : ColumnsView( parent ),
    mByteArrayModel( byteArrayModel ),
-   mDataLayout( new KDataLayout(DefaultNoOfBytesPerLine,DefaultStartOffset,0) ),
+   mDataLayout( new ByteArrayTableLayout(DefaultNoOfBytesPerLine,DefaultStartOffset,0) ),
    mDataCursor( new KDataCursor(mDataLayout) ),
    mDataRanges( new KDataRanges(mDataLayout) ),
    mCursorBlinkTimer( new QTimer(this) ),
@@ -1591,7 +1591,7 @@ void KByteArrayView::mousePressEvent( QMouseEvent *mouseEvent )
         if( mTrippleClickTimer->isActive()
             && (mouseEvent->globalPos()-mDoubleClickPoint).manhattanLength() < QApplication::startDragDistance() )
         {
-            mDataRanges->setSelectionStart( mDataLayout->indexAtLineStart(mDoubleClickLine) );
+            mDataRanges->setSelectionStart( mDataLayout->indexAtFirstLinePosition(mDoubleClickLine) );
             mDataCursor->gotoLineEnd();
             mDataRanges->setSelectionEnd( mDataCursor->realIndex() );
             updateChanged();

@@ -25,7 +25,7 @@
 // lib
 #include "columnsview.h"
 #include "kdatacursor.h"
-#include "kdatalayout.h"
+#include "bytearraytablelayout.h"
 #include "kdataranges.h"
 #include "helper.h"
 // Okteta core
@@ -44,7 +44,7 @@ static const int DefaultBinaryGapWidth = 1;
 
 
 ValueByteArrayColumnRenderer::ValueByteArrayColumnRenderer( ColumnsView *columnsView,
-    KHECore::KAbstractByteArrayModel *byteArrayModel, KDataLayout *layout, KDataRanges *ranges )
+    KHECore::KAbstractByteArrayModel *byteArrayModel, ByteArrayTableLayout *layout, KDataRanges *ranges )
  : AbstractByteArrayColumnRenderer( columnsView, byteArrayModel, layout, ranges ),
    mValueCoding( NotDefaultCoding ),
    mValueCodec( 0 ),

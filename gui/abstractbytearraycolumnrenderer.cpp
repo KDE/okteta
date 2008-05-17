@@ -24,7 +24,7 @@
 
 // lib
 #include "kdatacursor.h"
-#include "kdatalayout.h"
+#include "bytearraytablelayout.h"
 #include "kdataranges.h"
 #include "helper.h"
 // ColumnsView
@@ -48,7 +48,7 @@ static const KPixelX DefaultGroupSpacingWidth = 9;
 static const int DefaultNoOfGroupedBytes = 4;
 
 AbstractByteArrayColumnRenderer::AbstractByteArrayColumnRenderer( ColumnsView *columnsView,
-    KHECore::KAbstractByteArrayModel *byteArrayModel, KDataLayout *layout, KDataRanges *ranges )
+    KHECore::KAbstractByteArrayModel *byteArrayModel, ByteArrayTableLayout *layout, KDataRanges *ranges )
  : ColumnRenderer( columnsView ),
    mByteArrayModel( byteArrayModel ),
    mLayout( layout ),
@@ -393,8 +393,8 @@ void AbstractByteArrayColumnRenderer::renderLinePositions( QPainter *painter, in
 
     // Go through the lines TODO: handle first and last line more effeciently
     // check for leading and trailing spaces
-    KHE::KSection linePositions( mLayout->firstPos(Coord( _linePositions.start(), lineIndex )),
-                                 mLayout->lastPos( Coord( _linePositions.end(),   lineIndex )) );
+    KHE::KSection linePositions( mLayout->firstLinePosition(Coord( _linePositions.start(), lineIndex )),
+                                 mLayout->lastLinePosition( Coord( _linePositions.end(),   lineIndex )) );
 
     // no bytes to paint?
     if( !mLayout->hasContent(lineIndex) )
@@ -435,8 +435,8 @@ void AbstractByteArrayColumnRenderer::renderLinePositions( QPainter *painter, in
         {
             byteIndizesPart.setEnd( Marking.end() );
             PositionsPart.setEndByWidth( Marking.width() );
-            if( PositionsPart.end() == mLayout->lastPos(lineIndex) )   MarkingFlag &= ~EndsLater;
-            if( PositionsPart.start() == mLayout->firstPos(lineIndex)) MarkingFlag &= ~StartsBefore;
+            if( PositionsPart.end() == mLayout->lastLinePosition(lineIndex) )   MarkingFlag &= ~EndsLater;
+            if( PositionsPart.start() == mLayout->firstLinePosition(lineIndex)) MarkingFlag &= ~StartsBefore;
             renderMarking( painter, PositionsPart, byteIndizesPart.start(), MarkingFlag );
         }
         else if( Selection.includes(byteIndizesPart.start()) )
@@ -450,8 +450,8 @@ void AbstractByteArrayColumnRenderer::renderLinePositions( QPainter *painter, in
 
             if( MarkingBeforeEnd )
                 SelectionFlag |= EndsLater;
-            if( PositionsPart.end() == mLayout->lastPos(lineIndex) )    SelectionFlag &= ~EndsLater;
-            if( PositionsPart.start() == mLayout->firstPos(lineIndex) ) SelectionFlag &= ~StartsBefore;
+            if( PositionsPart.end() == mLayout->lastLinePosition(lineIndex) )    SelectionFlag &= ~EndsLater;
+            if( PositionsPart.start() == mLayout->firstLinePosition(lineIndex) ) SelectionFlag &= ~StartsBefore;
 
             renderSelection( painter, PositionsPart, byteIndizesPart.start(), SelectionFlag );
         }

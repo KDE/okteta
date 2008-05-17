@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2003 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_KDATALAYOUT_H
-#define KHE_UI_KDATALAYOUT_H
+#ifndef KHE_UI_BYTEARRAYTABLELAYOUT_H
+#define KHE_UI_BYTEARRAYTABLELAYOUT_H
 
 // lib
 #include "coordrange.h"
@@ -30,9 +30,10 @@
 #include <ksection.h>
 
 
-namespace KHEUI {
+namespace KHEUI
+{
 
-/**@short the logical layout of a plain buffer view
+/**@short the logical layout of a byte array table for a view
   *
   * Given the values for
   * * length of the buffer,
@@ -54,12 +55,12 @@ namespace KHEUI {
   *
   *@author Friedrich W. H.  Kossebau
   */
-class OKTETAGUI_EXPORT KDataLayout
+class OKTETAGUI_EXPORT ByteArrayTableLayout
 {
   public:
-    KDataLayout( int NoBpL, int SO, int L );
-    //KDataLayout();
-    ~KDataLayout();
+    ByteArrayTableLayout( int noOfBytesPerLine, int startOffset, int length );
+    //ByteArrayTableLayout();
+    ~ByteArrayTableLayout();
 
 
   public: // given values
@@ -67,23 +68,23 @@ class OKTETAGUI_EXPORT KDataLayout
     int startOffset() const;
     /** returns number of bytes per line */
     int noOfBytesPerLine() const;
-    /** returns the length of the displayed data (equals Buffer->size()) */
+    /** returns the length of the displayed byte array section */
     int length() const;
     /** returns number of lines per visual page */
     int noOfLinesPerPage() const;
 
   public: // calculated values
     int startLine() const;
-    int startPos() const;
+    int startLinePosition() const;
     /** returns the coord of the start */
-    Coord start() const;
+    Coord startCoord() const;
 
     int finalLine() const;
-    int finalPos() const;
+    int finalLinePosition() const;
     /** returns the coord of the end */
-    Coord final() const;
+    Coord finalCoord() const;
 
-    /** tells how much lines this layout needs (incl. blank leading lines due to StartOffset) */
+    /** tells how much lines this layout needs (incl. blank leading lines due to mStartOffset) */
     int noOfLines() const;
 
 
@@ -92,73 +93,73 @@ class OKTETAGUI_EXPORT KDataLayout
       * If the coord is before the first coord the first index is returned,
       * if the coord is behind the last coord the last index is returned
       */
-    int indexAtCCoord( const Coord &C ) const;
+    int indexAtCCoord( const Coord &coord ) const;
     /** calculates the index of the first pos in line.
       * If the line is below the first line the first index is returned,
       * if the line is above the last line the last index is returned
       */
-    int indexAtCLineStart( int L ) const;
+    int indexAtCFirstLinePosition( int line ) const;
     /** calculates the index of last pos in line
       * If the line is below the first line the first index is returned,
       * if the line is above the last line the last index is returned
       */
-    int indexAtCLineEnd( int L ) const;
+    int indexAtCLastLinePosition( int line ) const;
     /** calculates the line in which index is found
       * If the index is below the first index the first line is returned,
       * if the index is above the last index the last line is returned
       */
-    int lineAtCIndex( int Index ) const;
+    int lineAtCIndex( int index ) const;
     /** calculates the coord in which index is found
       * If the index is below the first index the first coord is returned,
       * if the index is above the last index the last coord is returned
       */
-    Coord coordOfCIndex( int Index ) const;
+    Coord coordOfCIndex( int index ) const;
 
     /** calculates the index of coord. if coord is invalid the behaviour is undefinded */
-    int indexAtCoord( const Coord &C ) const;
+    int indexAtCoord( const Coord &coord ) const;
     /** calculates the index of the first pos in line. if line is invalid the behaviour is undefinded */
-    int indexAtLineStart( int L ) const;
+    int indexAtFirstLinePosition( int line ) const;
     /** calculates the index of last pos in line. if line is invalid the behaviour is undefinded */
-    int indexAtLineEnd( int L ) const;
+    int indexAtLastLinePosition( int line ) const;
     /** calculates the line in which index is found. if index is invalid the behaviour is undefinded */
-    int lineAtIndex( int Index ) const;
+    int lineAtIndex( int index ) const;
     /** calculates the coord in which index is found. if index is invalid the behaviour is undefinded */
-    Coord coordOfIndex( int Index ) const;
+    Coord coordOfIndex( int index ) const;
     /** calculates the range of coords in which the indizes are found. if indizes are invalid the behaviour is undefinded */
     CoordRange coordRangeOfIndizes( const KHE::KSection &Indizes ) const;
 
     /** returns the used positions in line */
-    KHE::KSection positions( int Line ) const;
+    KHE::KSection linePositions( int line ) const;
     /** returns the first Pos in line. if line is invalid the behaviour is undefinded */
-    int firstPos( int Line ) const;
+    int firstLinePosition( int line ) const;
     /** returns the last Pos in line. if line is invalid the behaviour is undefinded */
-    int lastPos( int Line ) const;
+    int lastLinePosition( int line ) const;
     /** returns the valid Pos or the first Pos in line. if coord is invalid the behaviour is undefinded */
-    int firstPos( const Coord &C ) const;
+    int firstLinePosition( const Coord &coord ) const;
     /** returns the valid Pos or the last Pos in line. if coord is invalid the behaviour is undefinded */
-    int lastPos( const Coord &C ) const;
+    int lastLinePosition( const Coord &coord ) const;
     /** returns true if the line has content */
-    bool hasContent( int Line ) const;
+    bool hasContent( int line ) const;
     /** returns true if the coord is the first in it's line. if coord is invalid the behaviour is undefinded */
-    bool atLineStart( const Coord &C ) const;
+    bool atFirstLinePosition( const Coord &coord ) const;
     /** returns true if the coord is the last in it's line. if coord is invalid the behaviour is undefinded */
-    bool atLineEnd( const Coord &C ) const;
+    bool atLastLinePosition( const Coord &coord ) const;
 
     /** returns the index if valid or the nearest valid index */
     int correctIndex( int I ) const;
     /** returns the coord if valid or the nearest valid coord */
-    Coord correctCoord( const Coord &C ) const;
+    Coord correctCoord( const Coord &coord ) const;
 
 
   public: // modification access; return true if changes
-     /** sets StartOffset, returns true if changed */
-    bool setStartOffset( int SO );
+     /** sets mStartOffset, returns true if changed */
+    bool setStartOffset( int startOffset );
     /** sets number of bytes per line, returns true if changed */
-    bool setNoOfBytesPerLine( int N );
+    bool setNoOfBytesPerLine( int noOfBytesPerLine );
     /** sets number of lines per page */
-    void setNoOfLinesPerPage( int N );
+    void setNoOfLinesPerPage( int noOfLinesPerPage );
     /** sets length of data to display, returns true if changed */
-    bool setLength( int L );
+    bool setLength( int length );
 
 
   protected:
@@ -170,36 +171,32 @@ class OKTETAGUI_EXPORT KDataLayout
 
  protected:
     /** how many chars per line */
-    int NoOfBytesPerLine;
+    int mNoOfBytesPerLine;
     /** starting offset of the displayed data */
-    int StartOffset;
+    int mStartOffset;
     /** length of the displayed buffer */
-    int Length;
+    int mLength;
     /** number of lines that are moved by page up/down */
-    int NoOfLinesPerPage;
+    int mNoOfLinesPerPage;
 
   protected: // calculated values, buffered
-    /** coord in which the start offset is (starting with 0) */
-//    Coord Start;
-    /** coord in which the last byte is (starting with 0) */
-//    Coord Final;
     /** */
-    CoordRange ContentCoords;
+    CoordRange mCoordRange;
 };
 
 
-inline int KDataLayout::startOffset()       const { return StartOffset; }
-inline int KDataLayout::noOfBytesPerLine()  const { return NoOfBytesPerLine; }
-inline int KDataLayout::length()            const { return Length; }
+inline int ByteArrayTableLayout::startOffset()       const { return mStartOffset; }
+inline int ByteArrayTableLayout::noOfBytesPerLine()  const { return mNoOfBytesPerLine; }
+inline int ByteArrayTableLayout::length()            const { return mLength; }
 
-inline Coord KDataLayout::final()    const { return ContentCoords.end(); }
-inline Coord KDataLayout::start()    const { return ContentCoords.start(); }
-inline int KDataLayout::startPos()          const { return start().pos(); }
-inline int KDataLayout::finalPos()          const { return final().pos(); }
-inline int KDataLayout::startLine()         const { return start().line(); }
-inline int KDataLayout::finalLine()         const { return final().line(); }
-inline int KDataLayout::noOfLinesPerPage()  const { return NoOfLinesPerPage; }
-inline int KDataLayout::noOfLines()         const { return Length==0?0:final().line()+1; }
+inline Coord ByteArrayTableLayout::finalCoord()      const { return mCoordRange.end(); }
+inline Coord ByteArrayTableLayout::startCoord()      const { return mCoordRange.start(); }
+inline int ByteArrayTableLayout::startLinePosition() const { return startCoord().pos(); }
+inline int ByteArrayTableLayout::finalLinePosition() const { return finalCoord().pos(); }
+inline int ByteArrayTableLayout::startLine()         const { return startCoord().line(); }
+inline int ByteArrayTableLayout::finalLine()         const { return finalCoord().line(); }
+inline int ByteArrayTableLayout::noOfLinesPerPage()  const { return mNoOfLinesPerPage; }
+inline int ByteArrayTableLayout::noOfLines()         const { return mLength==0?0:finalLine()+1; }
 
 }
 

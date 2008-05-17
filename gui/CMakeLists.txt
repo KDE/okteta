@@ -30,7 +30,7 @@ set( oktetagui_LIB_SRCS
   kbytearrayview.cpp
   koffsetformat.cpp
   kdatacursor.cpp
-  kdatalayout.cpp
+  bytearraytablelayout.cpp
   kdataranges.cpp
   kcursor.cpp
   coordrangelist.cpp

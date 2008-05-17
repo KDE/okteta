@@ -24,7 +24,7 @@
 
 // lib
 #include "kdataranges.h"
-#include "kdatalayout.h"
+#include "bytearraytablelayout.h"
 #include "kdatacursor.h"
 #include "kbytearrayview.h"
 // Okteta core

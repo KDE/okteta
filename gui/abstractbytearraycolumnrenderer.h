@@ -23,8 +23,6 @@
 #ifndef KHE_UI_ABSTRACTBYTEARRAYCOLUMNRENDERER_H
 #define KHE_UI_ABSTRACTBYTEARRAYCOLUMNRENDERER_H
 
-// lib
-#include "kdatalayout.h"
 // ColumnsView
 #include <columnrenderer.h>
 // Okteta core
@@ -49,6 +47,7 @@ namespace KHEUI
 
 // class KByteArrayView;
 class KDataRanges;
+class ByteArrayTableLayout;
 
 const int NoByteFound = -1;
 
@@ -65,7 +64,7 @@ class AbstractByteArrayColumnRenderer : public ColumnRenderer
     enum FrameStyle { Frame, Left, Right };
   public:
     AbstractByteArrayColumnRenderer( ColumnsView/*KByteArrayView*/ *columnsView,
-        KHECore::KAbstractByteArrayModel *byteArrayModel, KDataLayout *layout, KDataRanges *ranges );
+        KHECore::KAbstractByteArrayModel *byteArrayModel, ByteArrayTableLayout *layout, KDataRanges *ranges );
     virtual ~AbstractByteArrayColumnRenderer();
 
 
@@ -169,7 +168,7 @@ class AbstractByteArrayColumnRenderer : public ColumnRenderer
     int firstLinePos() const;
     int lastLinePos()  const;
     KHE::KSection visibleLinePositions() const;
-    const KDataLayout *layout() const;
+    const ByteArrayTableLayout *layout() const;
     KHECore::KCharCodec *charCodec() const;
 
 
@@ -199,7 +198,7 @@ class AbstractByteArrayColumnRenderer : public ColumnRenderer
     /** pointer to the buffer */
     KHECore::KAbstractByteArrayModel *mByteArrayModel;
     /** pointer to the layout */
-    const KDataLayout *mLayout;
+    const ByteArrayTableLayout *mLayout;
     /** pointer to the ranges */
     KDataRanges *mRanges;
     /** */
@@ -255,7 +254,7 @@ inline int AbstractByteArrayColumnRenderer::firstLinePos() const { return mRende
 inline int AbstractByteArrayColumnRenderer::lastLinePos()  const { return mRenderLinePositions.end(); }
 inline KHE::KSection AbstractByteArrayColumnRenderer::visibleLinePositions() const { return mRenderLinePositions; }
 
-inline const KDataLayout *AbstractByteArrayColumnRenderer::layout() const { return mLayout; }
+inline const ByteArrayTableLayout *AbstractByteArrayColumnRenderer::layout() const { return mLayout; }
 
 inline void AbstractByteArrayColumnRenderer::setCharCodec( KHECore::KCharCodec *charCodec ) { mCharCodec = charCodec; }
 inline KHECore::KCharCodec* AbstractByteArrayColumnRenderer::charCodec() const { return mCharCodec; }

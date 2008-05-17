@@ -24,7 +24,6 @@
 #define KHE_UI_KDATARANGES_H
 
 // lib
-#include "kdatalayout.h"
 #include "selection.h"
 #include "coordrangelist.h"
 // Okteta core
@@ -38,6 +37,8 @@ class ArrayChangeMetricsList;
 namespace KHEUI
 {
 
+class ByteArrayTableLayout;
+
 /** a class to control all the ranges like marking and selections
   * holds also all modified ranges and merges them so a repaint can take its info from here
   *
@@ -46,7 +47,7 @@ namespace KHEUI
 class KDataRanges
 {
   public:
-    explicit KDataRanges( KDataLayout *L );
+    explicit KDataRanges( ByteArrayTableLayout *L );
     ~KDataRanges();
 
   public: // modifcation access
@@ -114,7 +115,7 @@ class KDataRanges
 
     CoordRangeList ChangedRanges;
 
-    KDataLayout *Layout;
+    ByteArrayTableLayout *Layout;
 };
 
 

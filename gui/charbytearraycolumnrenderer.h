@@ -44,7 +44,7 @@ class CharByteArrayColumnRenderer : public AbstractByteArrayColumnRenderer
 {
   public:
     CharByteArrayColumnRenderer( ColumnsView *columnsView,
-        KHECore::KAbstractByteArrayModel *byteArrayModel, KDataLayout *layout, KDataRanges *ranges );
+        KHECore::KAbstractByteArrayModel *byteArrayModel, ByteArrayTableLayout *layout, KDataRanges *ranges );
     virtual ~CharByteArrayColumnRenderer();
 
 
