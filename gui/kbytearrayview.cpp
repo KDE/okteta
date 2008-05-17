@@ -86,7 +86,7 @@ class KByteArrayView::Private
 KByteArrayView::KByteArrayView( KHECore::KAbstractByteArrayModel *byteArrayModel, QWidget *parent )
  : ColumnsView( parent ),
    mByteArrayModel( byteArrayModel ),
-   mDataLayout( new ByteArrayTableLayout(DefaultNoOfBytesPerLine,DefaultStartOffset,0) ),
+   mDataLayout( new ByteArrayTableLayout(DefaultNoOfBytesPerLine,DefaultFirstLineOffset,DefaultStartOffset,0) ),
    mDataCursor( new KDataCursor(mDataLayout) ),
    mDataRanges( new KDataRanges(mDataLayout) ),
    mCursorBlinkTimer( new QTimer(this) ),
@@ -207,7 +207,6 @@ KHE::KSection KByteArrayView::selection() const { return mDataRanges->selection(
 void KByteArrayView::setOverwriteOnly( bool OO )    { mOverWriteOnly = OO; if( mOverWriteOnly ) setOverwriteMode( true ); }
 void KByteArrayView::setModified( bool M )          { mByteArrayModel->setModified(M); }
 void KByteArrayView::setTabChangesFocus( bool TCF ) { mTabController->setTabChangesFocus(TCF); }
-void KByteArrayView::setFirstLineOffset( int FLO )  { mOffsetColumn->setFirstLineOffset( FLO ); }
 
 bool KByteArrayView::offsetColumnVisible() const { return mOffsetColumn->isVisible(); }
 int KByteArrayView::visibleBufferColumns() const
@@ -299,6 +298,24 @@ void KByteArrayView::setStartOffset( int startOffset )
     emit cursorPositionChanged( mDataCursor->realIndex() );
 }
 
+void KByteArrayView::setFirstLineOffset( int firstLineOffset )
+{
+    if( !mDataLayout->setFirstLineOffset(firstLineOffset) )
+        return;
+    mOffsetColumn->setFirstLineOffset( firstLineOffset ); // TODO: offset renderer should use layout, too
+
+    pauseCursor();
+    // affects:
+    // the no of lines -> width
+    adjustLayoutToSize();
+
+    viewport()->update();
+
+    mDataCursor->updateCoord();
+    ensureCursorVisible();
+    unpauseCursor();
+    emit cursorPositionChanged( mDataCursor->realIndex() );
+}
 
 void KByteArrayView::setReadOnly( bool readOnly )
 {

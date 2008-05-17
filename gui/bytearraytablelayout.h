@@ -36,9 +36,10 @@ namespace KHEUI
 /**@short the logical layout of a byte array table for a view
   *
   * Given the values for
-  * * length of the buffer,
   * * number of bytes per line,
-  * * a possible (relative) offset in the display, and
+  * * a possible offset of the first line displayed,
+  * * a possible offset of the displayed bytearray, and
+  * * length of the byte array
   * * the number of lines per page jump
   * the following values are calculated:
   * * starting line of display,
@@ -58,7 +59,7 @@ namespace KHEUI
 class OKTETAGUI_EXPORT ByteArrayTableLayout
 {
   public:
-    ByteArrayTableLayout( int noOfBytesPerLine, int startOffset, int length );
+    ByteArrayTableLayout( int noOfBytesPerLine, int firstLineOffset, int startOffset, int length );
     //ByteArrayTableLayout();
     ~ByteArrayTableLayout();
 
@@ -66,6 +67,8 @@ class OKTETAGUI_EXPORT ByteArrayTableLayout
   public: // given values
     /** */
     int startOffset() const;
+    /** */
+    int firstLineOffset() const;
     /** returns number of bytes per line */
     int noOfBytesPerLine() const;
     /** returns the length of the displayed byte array section */
@@ -84,7 +87,7 @@ class OKTETAGUI_EXPORT ByteArrayTableLayout
     /** returns the coord of the end */
     Coord finalCoord() const;
 
-    /** tells how much lines this layout needs (incl. blank leading lines due to mStartOffset) */
+    /** tells how much lines this layout needs (incl. blank leading lines due to mStartOffset and mFirstLineOffset) */
     int noOfLines() const;
 
 
@@ -126,7 +129,7 @@ class OKTETAGUI_EXPORT ByteArrayTableLayout
     /** calculates the coord in which index is found. if index is invalid the behaviour is undefinded */
     Coord coordOfIndex( int index ) const;
     /** calculates the range of coords in which the indizes are found. if indizes are invalid the behaviour is undefinded */
-    CoordRange coordRangeOfIndizes( const KHE::KSection &Indizes ) const;
+    CoordRange coordRangeOfIndizes( const KHE::KSection &indizes ) const;
 
     /** returns the used positions in line */
     KHE::KSection linePositions( int line ) const;
@@ -146,7 +149,7 @@ class OKTETAGUI_EXPORT ByteArrayTableLayout
     bool atLastLinePosition( const Coord &coord ) const;
 
     /** returns the index if valid or the nearest valid index */
-    int correctIndex( int I ) const;
+    int correctIndex( int index ) const;
     /** returns the coord if valid or the nearest valid coord */
     Coord correctCoord( const Coord &coord ) const;
 
@@ -154,12 +157,14 @@ class OKTETAGUI_EXPORT ByteArrayTableLayout
   public: // modification access; return true if changes
      /** sets mStartOffset, returns true if changed */
     bool setStartOffset( int startOffset );
+     /** sets mStartOffset, returns true if changed */
+    bool setFirstLineOffset( int firstLineOffset );
     /** sets number of bytes per line, returns true if changed */
     bool setNoOfBytesPerLine( int noOfBytesPerLine );
-    /** sets number of lines per page */
-    void setNoOfLinesPerPage( int noOfLinesPerPage );
     /** sets length of data to display, returns true if changed */
     bool setLength( int length );
+    /** sets number of lines per page, 1 as default */
+    void setNoOfLinesPerPage( int noOfLinesPerPage );
 
 
   protected:
@@ -172,9 +177,13 @@ class OKTETAGUI_EXPORT ByteArrayTableLayout
  protected:
     /** how many chars per line */
     int mNoOfBytesPerLine;
-    /** starting offset of the displayed data */
+    /** starting offset of the first displayed line */
+    int mFirstLineOffset;
+    /** starting offset of the displayed bytearray */
     int mStartOffset;
-    /** length of the displayed buffer */
+    /** */
+    int mRelativeStartOffset;
+    /** length of the displayed bytearray */
     int mLength;
     /** number of lines that are moved by page up/down */
     int mNoOfLinesPerPage;
@@ -186,6 +195,7 @@ class OKTETAGUI_EXPORT ByteArrayTableLayout
 
 
 inline int ByteArrayTableLayout::startOffset()       const { return mStartOffset; }
+inline int ByteArrayTableLayout::firstLineOffset()   const { return mFirstLineOffset; }
 inline int ByteArrayTableLayout::noOfBytesPerLine()  const { return mNoOfBytesPerLine; }
 inline int ByteArrayTableLayout::length()            const { return mLength; }
 

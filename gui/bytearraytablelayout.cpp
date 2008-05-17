@@ -26,10 +26,15 @@
 namespace KHEUI
 {
 
-ByteArrayTableLayout::ByteArrayTableLayout( int noOfBytesPerLine, int startOffset, int length )
+static const int DefaultNoOfLinesPerPage = 1;
+
+ByteArrayTableLayout::ByteArrayTableLayout( int noOfBytesPerLine, int firstLineOffset, int startOffset, int length )
  : mNoOfBytesPerLine( noOfBytesPerLine ),
+   mFirstLineOffset( firstLineOffset ),
    mStartOffset( startOffset ),
-   mLength( length )
+   mRelativeStartOffset( startOffset-firstLineOffset ),
+   mLength( length ),
+   mNoOfLinesPerPage( DefaultNoOfLinesPerPage )
 {
     calcStart();
     calcEnd();
@@ -46,6 +51,24 @@ bool ByteArrayTableLayout::setStartOffset( int startOffset )
         return false;
 
     mStartOffset = startOffset;
+    mRelativeStartOffset = mStartOffset - mFirstLineOffset;
+
+    calcStart();
+    calcEnd();
+    return true;
+}
+
+bool ByteArrayTableLayout::setFirstLineOffset( int firstLineOffset )
+{
+    // rejecting <0
+    if( firstLineOffset < 0 )
+        firstLineOffset = 0;
+
+    if( mFirstLineOffset == firstLineOffset )
+        return false;
+
+    mFirstLineOffset = firstLineOffset;
+    mRelativeStartOffset = mStartOffset - mFirstLineOffset;
 
     calcStart();
     calcEnd();
@@ -96,13 +119,13 @@ void ByteArrayTableLayout::setNoOfLinesPerPage( int noOfLinesPerPage )
 
 void ByteArrayTableLayout::calcStart()
 {
-    mCoordRange.setStart( Coord::fromIndex(mStartOffset,mNoOfBytesPerLine) );
+    mCoordRange.setStart( Coord::fromIndex(mRelativeStartOffset,mNoOfBytesPerLine) );
 }
 
 
 void ByteArrayTableLayout::calcEnd()
 {
-    mCoordRange.setEnd( (mLength>0)?Coord::fromIndex(mLength-1+mStartOffset,mNoOfBytesPerLine):
+    mCoordRange.setEnd( (mLength>0)?Coord::fromIndex(mLength-1+mRelativeStartOffset,mNoOfBytesPerLine):
                                     Coord(-1,mCoordRange.start().line()) );
 }
 
@@ -111,7 +134,7 @@ int ByteArrayTableLayout::indexAtCFirstLinePosition( int line ) const
 {
     return ( line <= mCoordRange.start().line() ) ? 0:
            ( line > mCoordRange.end().line() ) ?    mLength-1:
-                                                    line * mNoOfBytesPerLine - mStartOffset;
+                                                    line * mNoOfBytesPerLine - mRelativeStartOffset;
 }
 
 
@@ -119,7 +142,7 @@ int ByteArrayTableLayout::indexAtCLastLinePosition( int line ) const
 {
     return ( line < mCoordRange.start().line() ) ? 0:
            ( line >= mCoordRange.end().line() ) ?  mLength-1:
-                                                   (line+1)*mNoOfBytesPerLine-mStartOffset-1;
+                                                   (line+1)*mNoOfBytesPerLine-mRelativeStartOffset-1;
 }
 
 
@@ -151,36 +174,36 @@ Coord ByteArrayTableLayout::coordOfCIndex( int index ) const
 
 int ByteArrayTableLayout::indexAtFirstLinePosition( int line ) const
 {
-    return ( line == mCoordRange.start().line() ) ? 0 : line*mNoOfBytesPerLine-mStartOffset;
+    return ( line == mCoordRange.start().line() ) ? 0 : line*mNoOfBytesPerLine-mRelativeStartOffset;
 }
 
 
 int ByteArrayTableLayout::indexAtLastLinePosition( int line ) const
 {
-    return ( line == mCoordRange.end().line() ) ? mLength-1 : (line+1)*mNoOfBytesPerLine-mStartOffset-1;
+    return ( line == mCoordRange.end().line() ) ? mLength-1 : (line+1)*mNoOfBytesPerLine-mRelativeStartOffset-1;
 }
 
 
 int ByteArrayTableLayout::indexAtCoord( const Coord &coord ) const
 {
-    return coord.indexByLineWidth( mNoOfBytesPerLine ) - mStartOffset;
+    return coord.indexByLineWidth( mNoOfBytesPerLine ) - mRelativeStartOffset;
 }
 
 int ByteArrayTableLayout::lineAtIndex( int index ) const
 {
-    return (index+mStartOffset)/mNoOfBytesPerLine;
+    return (index+mRelativeStartOffset)/mNoOfBytesPerLine;
 }
 
 Coord ByteArrayTableLayout::coordOfIndex( int index ) const
 {
-    return Coord::fromIndex( index+mStartOffset, mNoOfBytesPerLine );
+    return Coord::fromIndex( index+mRelativeStartOffset, mNoOfBytesPerLine );
 }
 
 CoordRange ByteArrayTableLayout::coordRangeOfIndizes( const KHE::KSection &indizes ) const
 {
     return CoordRange(
-             Coord::fromIndex(indizes.start()+mStartOffset, mNoOfBytesPerLine),
-             Coord::fromIndex(indizes.end()+mStartOffset,   mNoOfBytesPerLine) );
+             Coord::fromIndex(indizes.start()+mRelativeStartOffset, mNoOfBytesPerLine),
+             Coord::fromIndex(indizes.end()+mRelativeStartOffset,   mNoOfBytesPerLine) );
 }
 
 
