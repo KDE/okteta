@@ -29,7 +29,7 @@
 #include "bytearrayviewtextrenderer/charbytearraycolumntextrenderer.h"
 // Okteta gui
 #include <kbytearrayview.h>
-#include <kdatalayout.h>
+#include <bytearraytablelayout.h>
 // Okteta core
 #include <kabstractbytearraymodel.h>
 #include <khechar.h>
@@ -68,10 +68,10 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream( QIODevice *device,
     mSettings.delta = byteArrayView->noOfBytesPerLine();
 
     // setup
-    KHEUI::KDataLayout dataLayout( byteArrayView->noOfBytesPerLine(), mSettings.startOffset, byteArrayModel->size() );
+    KHEUI::ByteArrayTableLayout layout( byteArrayView->noOfBytesPerLine(), mSettings.startOffset, byteArrayModel->size() );
 
     KHEUI::CoordRange coordRange;
-    coordRange.set( dataLayout.coordRangeOfIndizes(section) );
+    coordRange.set( layout.coordRangeOfIndizes(section) );
 
     const int noOfBytesPerLine = byteArrayView->noOfBytesPerLine();
     const int byteSpacingWidth = byteArrayView->byteSpacingWidth();

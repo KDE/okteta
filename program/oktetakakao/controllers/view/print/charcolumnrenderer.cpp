@@ -24,8 +24,6 @@
 
 // lib
 #include "abstractcolumnframerenderer.h"
-// Okteta ui
-#include <kdatalayout.h>
 // Qt
 #include <QtGui/QPainter>
 
@@ -37,7 +35,7 @@ static const char     DefaultUndefinedChar =    (char)'?';
 
 CharColumnRenderer::CharColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer,
                                         const KHECore::KAbstractByteArrayModel *byteArrayModel,
-                                        const KHEUI::KDataLayout *layout )
+                                        const KHEUI::ByteArrayTableLayout *layout )
  : ByteColumnRenderer( columnFrameRenderer, byteArrayModel, layout ),
    mShowsNonprinting( DefaultShowsNonprinting ),
    mSubstituteChar( DefaultSubstituteChar ),

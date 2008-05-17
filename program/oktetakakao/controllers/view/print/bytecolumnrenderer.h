@@ -25,8 +25,6 @@
 
 // lib
 #include "abstractcolumnrenderer.h"
-// Okteta gui
-#include <kdatalayout.h>
 // Okteta core
 #include <khe.h>
 #include <kabstractbytearraymodel.h>
@@ -43,6 +41,9 @@ class AbstractColumnFrameRenderer;
 namespace KDE { namespace If {
 class Bookmarks;
 } }
+namespace KHEUI {
+class ByteArrayTableLayout;
+}
 namespace KHECore {
 class KCharCodec;
 }
@@ -62,7 +63,7 @@ class ByteColumnRenderer : public AbstractColumnRenderer
   public:
     ByteColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer,
                         const KHECore::KAbstractByteArrayModel *byteArray,
-                        const KHEUI::KDataLayout *layout );
+                        const KHEUI::ByteArrayTableLayout *layout );
     virtual ~ByteColumnRenderer();
 
 
@@ -151,7 +152,7 @@ class ByteColumnRenderer : public AbstractColumnRenderer
     int firstPos() const;
     int lastPos()  const;
     KHE::KSection visiblePositions() const;
-    const KHEUI::KDataLayout *layout() const;
+    const KHEUI::ByteArrayTableLayout *layout() const;
     KHECore::KCharCodec* codec() const;
 
 
@@ -172,7 +173,7 @@ class ByteColumnRenderer : public AbstractColumnRenderer
     /** pointer to the buffer */
     const KHECore::KAbstractByteArrayModel *mByteArrayModel;
     /** pointer to the layout */
-    const KHEUI::KDataLayout *mLayout;
+    const KHEUI::ByteArrayTableLayout *mLayout;
     /** */
 //     KDE::If::Bookmarks *Bookmarks;
     /** */
@@ -224,7 +225,7 @@ inline int ByteColumnRenderer::firstPos() const { return mRenderPositions.start(
 inline int ByteColumnRenderer::lastPos()  const { return mRenderPositions.end(); }
 inline KHE::KSection ByteColumnRenderer::visiblePositions() const { return mRenderPositions; }
 
-inline const KHEUI::KDataLayout *ByteColumnRenderer::layout() const { return mLayout; }
+inline const KHEUI::ByteArrayTableLayout *ByteColumnRenderer::layout() const { return mLayout; }
 
 inline void ByteColumnRenderer::setCodec( KHECore::KCharCodec *C ) { mCodec = C; }
 inline KHECore::KCharCodec* ByteColumnRenderer::codec() const { return mCodec; }

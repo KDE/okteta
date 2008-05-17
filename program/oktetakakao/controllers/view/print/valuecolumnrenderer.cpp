@@ -24,8 +24,7 @@
 
 // lib
 #include "abstractcolumnframerenderer.h"
-// Okteta ui
-#include <kdatalayout.h>
+// Okteta gui
 #include <helper.h>
 // Okteta core
 #include <kcharcodec.h>
@@ -41,7 +40,7 @@ static const int DefaultBinaryGapWidth = 1;
 
 ValueColumnRenderer::ValueColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer,
                                           const KHECore::KAbstractByteArrayModel *byteArrayModel,
-                                          const KHEUI::KDataLayout *layout )
+                                          const KHEUI::ByteArrayTableLayout *layout )
  : ByteColumnRenderer( columnFrameRenderer, byteArrayModel, layout ),
    mCoding( NotDefaultCoding ),
    mByteCodec( 0 ),

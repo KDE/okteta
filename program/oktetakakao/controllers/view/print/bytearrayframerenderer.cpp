@@ -28,7 +28,7 @@
 #include "charcolumnrenderer.h"
 #include "bordercolumnrenderer.h"
 // Okteta gui
-#include <kdatalayout.h>
+#include <bytearraytablelayout.h>
 // Okteta core
 #include <kabstractbytearraymodel.h>
 #include <valuecodec.h>
@@ -62,7 +62,7 @@ ByteArrayFrameRenderer::ByteArrayFrameRenderer()
    mCodec( 0 ),
    mResizeStyle( DefaultResizeStyle )
 {
-    mDataLayout = new KHEUI::KDataLayout( DefaultNoOfBytesPerLine, DefaultStartOffset, 0 );
+    mDataLayout = new KHEUI::ByteArrayTableLayout( DefaultNoOfBytesPerLine, DefaultStartOffset, 0 );
     mDataLayout->setLength( 0 );//mByteArrayModel->size() );
     mDataLayout->setNoOfLinesPerPage( noOfLinesPerFrame() );
 
@@ -129,10 +129,10 @@ void ByteArrayFrameRenderer::setByteArrayModel( const KHECore::KAbstractByteArra
 {
     mByteArrayModel = byteArrayModel;
     mOffset = offset;
-    mLength = ( byteArrayModel == 0 ) ?              0 :
-              ( length == -1 ) ?                     byteArrayModel->size() :
-              ( length <= byteArrayModel->size() ) ? length :
-              byteArrayModel->size();
+    mLength = ( byteArrayModel == 0 ) ?                      0 :
+              ( length == -1 ) ?                             byteArrayModel->size()-mOffset :
+              ( length <= byteArrayModel->size()-mOffset ) ? length :
+                                                             byteArrayModel->size()-mOffset;
 
     mValueColumnRenderer->setByteArrayModel( byteArrayModel );
     mCharColumnRenderer->setByteArrayModel( byteArrayModel );

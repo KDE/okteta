@@ -41,7 +41,7 @@ class CharColumnRenderer : public ByteColumnRenderer
   public:
     CharColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer,
                         const  KHECore::KAbstractByteArrayModel *byteArrayModel,
-                        const KHEUI::KDataLayout *layout );
+                        const KHEUI::ByteArrayTableLayout *layout );
     virtual ~CharColumnRenderer();
 
 

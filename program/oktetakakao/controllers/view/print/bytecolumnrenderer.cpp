@@ -23,8 +23,9 @@
 #include "bytecolumnrenderer.h"
 
 // lib
-#include "kdatalayout.h"
 #include "helper.h"
+// Okteta gui
+#include <bytearraytablelayout.h>
 // Okteta core
 // #include <kibookmarks.h>
 #include <kcharcodec.h>
@@ -43,7 +44,7 @@ static const int DefaultNoOfGroupedBytes = 4;
 
 ByteColumnRenderer::ByteColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer,
                                         const KHECore::KAbstractByteArrayModel *byteArray,
-                                        const KHEUI::KDataLayout *layout )
+                                        const KHEUI::ByteArrayTableLayout *layout )
  : AbstractColumnRenderer( columnFrameRenderer ),
    mByteArrayModel( byteArray ),
    mLayout( layout ),
@@ -381,8 +382,8 @@ void ByteColumnRenderer::renderLinePositions( QPainter *painter, int Line, const
 
     // Go through the lines TODO: handle first and last line more effeciently
     // check for leading and trailing spaces
-    KHE::KSection positions( mLayout->firstPos(Coord( posInLine.start(), Line )),
-                             mLayout->lastPos( Coord( posInLine.end(),  Line )) );
+    KHE::KSection positions( mLayout->firstLinePosition(Coord( posInLine.start(), Line )),
+                             mLayout->lastLinePosition( Coord( posInLine.end(),  Line )) );
 
     // no bytes to paint?
     if( !mLayout->hasContent(Line) )

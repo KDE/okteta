@@ -37,7 +37,7 @@ class ValueColumnRenderer;
 class CharColumnRenderer;
 
 namespace KHEUI {
-class KDataLayout;
+class ByteArrayTableLayout;
 }
 namespace KHECore {
 class KAbstractByteArrayModel;
@@ -142,7 +142,7 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
 
   protected:
     /** holds the logical layout */
-    KHEUI::KDataLayout *mDataLayout;
+    KHEUI::ByteArrayTableLayout *mDataLayout;
 
   protected:
     OffsetColumnRenderer *mOffsetColumnRenderer;
