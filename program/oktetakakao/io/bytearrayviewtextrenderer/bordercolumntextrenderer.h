@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BORDERCOLUMNREXTRENDERER_H
-#define BORDERCOLUMNREXTRENDERER_H
+#ifndef BORDERCOLUMNTEXTRENDERER_H
+#define BORDERCOLUMNTEXTRENDERER_H
 
 
 // lib
