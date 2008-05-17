@@ -29,7 +29,7 @@
 
 
 static const int DefaultTRByteSpacingWidth = 1;
-static const int TRGroupSpacingWidth = 3;
+static const int TRGroupSpacingWidth = 2;
 
 QString AbstractByteArrayColumnTextRenderer::whiteSpace( uint s )
 {
