@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -28,9 +28,6 @@
 
 class KAction;
 class KXmlGuiWindow;
-class KByteArrayDocument;
-
-
 class PrintTool;
 
 
@@ -45,13 +42,7 @@ class PrintController : public KViewController
   public: // KViewController API
     virtual void setView( KAbstractView *view );
 
-  protected Q_SLOTS: // action slots
-    void print();
-
   protected:
-    KXmlGuiWindow *mWindow;
-    KByteArrayDocument *mDocument;
-
     KAction *mPrintAction;
 
     PrintTool *mPrintTool;

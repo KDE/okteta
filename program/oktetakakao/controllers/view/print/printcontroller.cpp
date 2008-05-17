@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -24,17 +24,6 @@
 
 // controller
 #include "printtool.h"
-// lib
-#include <kbytearraydocument.h>
-// Kakao gui
-#include <kabstractview.h>
-// Kakao core
-#include <kabstractdocument.h>
-// Okteta gui
-#include <kbytearrayview.h>
-// Okteta core
-#include <kcharcodec.h>
-#include <kbytearraymodel.h>
 // KDE
 #include <KXmlGuiWindow>
 #include <KActionCollection>
@@ -43,34 +32,24 @@
 
 
 PrintController::PrintController( KXmlGuiWindow *window )
- : mWindow( window ), mDocument( 0 ), mPrintTool( 0 )
+ : mPrintTool( new PrintTool() )
 {
-    KActionCollection *actionCollection = mWindow->actionCollection();
+    KActionCollection *actionCollection = window->actionCollection();
 
-    mPrintAction = KStandardAction::print( this, SLOT(print()), actionCollection );
+    mPrintAction = KStandardAction::print( mPrintTool, SLOT(print()), actionCollection );
+    connect( mPrintTool, SIGNAL(viewChanged( bool )),
+             mPrintAction, SLOT(setEnabled( bool )) );
 
     setView( 0 );
 }
 
-void PrintController::setView( KAbstractView *View )
+void PrintController::setView( KAbstractView *view )
 {
-    mDocument = View ? static_cast<KByteArrayDocument*>( View->document() ) : 0;
-
-    const bool isDocument = ( mDocument != 0 );
-    mPrintAction->setEnabled( isDocument );
+    mPrintTool->setView( view );
 }
 
-void PrintController::print()
-{
-    // ensure tool
-    if( !mPrintTool )
-        mPrintTool = new PrintTool( mWindow );
-
-    mPrintTool->print( mDocument );
-}
 
 PrintController::~PrintController()
 {
     delete mPrintTool;
 }
-

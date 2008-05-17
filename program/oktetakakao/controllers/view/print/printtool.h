@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,8 +23,17 @@
 #ifndef PRINTTOOL_H
 #define PRINTTOOL_H
 
+// Qt
+#include <QtCore/QObject>
+
 class KByteArrayDocument;
-class KXmlGuiWindow;
+class KAbstractView;
+namespace KHEUI {
+class KByteArrayView;
+}
+namespace KHECore {
+class KAbstractByteArrayModel;
+}
 
 /**
 This tool cares for the printing of the byte array to a series of papers.
@@ -45,16 +54,28 @@ a header frame, the content frame and the footer frame on each page.
 -> 
 
 */
-class PrintTool
+class PrintTool : public QObject
 {
-  public:
-    explicit PrintTool( KXmlGuiWindow *window );
-    ~PrintTool();
+  Q_OBJECT
 
   public:
-    void print( KByteArrayDocument *document );
+    PrintTool();
+    virtual ~PrintTool();
+
+  public:
+    void setView( KAbstractView *view );
+
+  public Q_SLOTS:
+    void print();
+
+  Q_SIGNALS:
+    void viewChanged( bool hasView );
 
   protected:
-    KXmlGuiWindow *mWindow;
+    KByteArrayDocument *mDocument;
+
+    KHEUI::KByteArrayView *mByteArrayView;
+    KHECore::KAbstractByteArrayModel *mByteArrayModel;
 };
+
 #endif

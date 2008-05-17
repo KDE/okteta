@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -28,14 +28,14 @@
 #include "bytearrayframerenderer.h"
 // lib
 #include <kbytearraydocument.h>
+// Kakao gui
+#include <kabstractview.h>
 // Okteta gui
 #include <kbytearrayview.h>
 // Okteta core
-#include <kcharcodec.h>
 #include <kbytearraymodel.h>
 // KDE
 #include <KLocale>
-#include <KXmlGuiWindow>
 #include <KMessageBox>
 #include <kdeprintdialog.h>
 #include <kdeversion.h>
@@ -46,14 +46,27 @@
 #include <QtGui/QFontMetrics>
 
 
-PrintTool::PrintTool( KXmlGuiWindow *window )
- : mWindow( window )
+PrintTool::PrintTool()
+ : mDocument( 0 ), mByteArrayView( 0 ), mByteArrayModel( 0 )
 {
 }
 
-void PrintTool::print( KByteArrayDocument *document )
+void PrintTool::setView( KAbstractView *view )
 {
-    const QString processTitle = i18nc( "@title:window", "Print Byte Array %1", document->title() );
+//     if( mByteArrayView ) mByteArrayView->disconnect( this );
+
+    mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
+
+    mDocument = view ? static_cast<KByteArrayDocument*>( view->document() ) : 0;
+    mByteArrayModel = mDocument ? mDocument->content() : 0;
+
+    const bool hasView = ( mByteArrayModel != 0 );
+    emit viewChanged( hasView );
+}
+
+void PrintTool::print()
+{
+    const QString processTitle = i18nc( "@title:window", "Print Byte Array %1", mDocument->title() );
 
     QPrinter printer;
 
@@ -63,7 +76,7 @@ void PrintTool::print( KByteArrayDocument *document )
 //     LayoutDialogPage* layoutPage = new LayoutDialogPage();
     QList<QWidget*> customDialogPages;
 //     customDialogPages << layoutPage;
-    QPrintDialog *printDialog = KdePrint::createPrintDialog( &printer, customDialogPages, mWindow );
+    QPrintDialog *printDialog = KdePrint::createPrintDialog( &printer, customDialogPages, 0 );
 
     printDialog->setWindowTitle( processTitle );
     if( printDialog->exec() )
@@ -104,7 +117,27 @@ void PrintTool::print( KByteArrayDocument *document )
         byteArrayFrameRenderer->setPos( left, contentTop );
         byteArrayFrameRenderer->setWidth( width );
         byteArrayFrameRenderer->setHeight( contentHeight );
-        byteArrayFrameRenderer->setByteArrayModel( document->content() );
+
+        KHE::KSection section = mByteArrayView->selection();
+        if( !section.isValid() )
+            section.setByWidth( 0, mByteArrayModel->size() );
+        byteArrayFrameRenderer->setByteArrayModel( mByteArrayModel, section.start(), section.width() );
+
+        // TODO: use noOfBytesPerLine of view, scale resolution down if it does not fit the page
+//         byteArrayFrameRenderer->setNoOfBytesPerLine( mByteArrayView->noOfBytesPerLine() );
+        byteArrayFrameRenderer->setFirstLineOffset( mByteArrayView->firstLineOffset() );
+        byteArrayFrameRenderer->setStartOffset( mByteArrayView->startOffset() );
+
+        byteArrayFrameRenderer->setEncoding( mByteArrayView->encodingName() );
+        byteArrayFrameRenderer->setBufferSpacing( mByteArrayView->byteSpacingWidth(),
+                                                  mByteArrayView->noOfGroupedBytes(),
+                                                  mByteArrayView->groupSpacingWidth() );
+        byteArrayFrameRenderer->setBinaryGapWidth( mByteArrayView->binaryGapWidth() );
+
+        byteArrayFrameRenderer->setCoding( (KHECore::KCoding)mByteArrayView->coding() );
+        byteArrayFrameRenderer->setShowsNonprinting( mByteArrayView->showsNonprinting() );
+        byteArrayFrameRenderer->setSubstituteChar( mByteArrayView->substituteChar() );
+        byteArrayFrameRenderer->setUndefinedChar( mByteArrayView->undefinedChar() );
 
 //     if( !confirmPrintPageNumber( byteArrayFrameRenderer->framesCount()) )
 //         return;
@@ -114,7 +147,7 @@ void PrintTool::print( KByteArrayDocument *document )
         framesPrinter.addFrameRenderer( footerFrameRenderer );
 
         info.setNoOfPages( byteArrayFrameRenderer->framesCount() );
-        info.setUrl( document->title() ); //TODO: get the url from synchronizer!!!
+        info.setUrl( mDocument->title() ); //TODO: get the url from synchronizer!!!
 
         const bool success = framesPrinter.print( &printer, 0, byteArrayFrameRenderer->framesCount()-1 );
 
@@ -122,7 +155,7 @@ void PrintTool::print( KByteArrayDocument *document )
         {
             const QString message = i18nc( "@info","Could not print." );
 
-            KMessageBox::sorry( mWindow, message, processTitle );
+            KMessageBox::sorry( 0, message, processTitle );
         }
     }
 }
