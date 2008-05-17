@@ -97,7 +97,7 @@ void PrintTool::print()
         const int width = pageRect.width();
 
         HeaderFooterFrameRenderer *headerFrameRenderer = new HeaderFooterFrameRenderer( &info );
-        headerFrameRenderer->setTexts( QString("%y"),
+        headerFrameRenderer->setTexts( QString("%d"),
                                        QString("%f"),
                                        QString("Page %p of %P") );
         headerFrameRenderer->setWidth( width );
