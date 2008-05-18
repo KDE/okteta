@@ -86,7 +86,9 @@ void OktetaMainWindow::setupControllers()
   mControllers.append( new SynchronizeController(this) );
   mControllers.append( new CloseController(mProgram->documentManager(),this) );
   mControllers.append( new VersionController(this) );
+#ifndef NDEBUG
   mControllers.append( new VersionViewController(this) );
+#endif
   mControllers.append( new ReadOnlyController(this) );
   mControllers.append( new ViewListMenuController(mProgram->viewManager(),mTabbedViews,this) );
   mControllers.append( new FullScreenController(this) );
