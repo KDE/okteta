@@ -31,7 +31,8 @@
 // Okteta gui
 #include <kbytearrayview.h>
 // Okteta core
-#include <kbytearraymodel.h>
+#include <kabstractbytearraymodel.h>
+#include <changesdescribable.h>
 // Qt
 #include <QtCore/QByteArray>
 
@@ -101,7 +102,16 @@ void FilterTool::filter( int filterId ) const
         const bool success = byteArrayFilter->filter( filterResult.data(), mByteArrayModel, filteredSection );
 
         if( success )
+        {
+            KHECore::ChangesDescribable *changesDescribable =
+                qobject_cast<KHECore::ChangesDescribable*>( mByteArrayModel );
+
+            if( changesDescribable )
+                changesDescribable->openGroupedChange( byteArrayFilter->name() );
             mByteArrayModel->replace( filteredSection, filterResult );
+            if( changesDescribable )
+                changesDescribable->closeGroupedChange();
+        }
     }
 }
 
