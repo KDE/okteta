@@ -47,7 +47,7 @@ ByteArrayViewTextStreamEncoderSettings::ByteArrayViewTextStreamEncoderSettings()
 {}
 
 ByteArrayViewTextStreamEncoder::ByteArrayViewTextStreamEncoder()
- : KAbstractByteArrayStreamEncoder( i18nc("name of the encoding target","View rendered to Plain Text"), QLatin1String("text/plain") )
+ : KAbstractByteArrayStreamEncoder( i18nc("name of the encoding target","View in Plain Text"), QLatin1String("text/plain") )
 {}
 
 
