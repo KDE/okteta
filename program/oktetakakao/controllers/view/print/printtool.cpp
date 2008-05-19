@@ -99,13 +99,14 @@ void PrintTool::print()
         HeaderFooterFrameRenderer *headerFrameRenderer = new HeaderFooterFrameRenderer( &info );
         headerFrameRenderer->setTexts( QString("%d"),
                                        QString("%f"),
-                                       QString("Page %p of %P") );
+                                       i18nc("in the header of the printed page, e.g. Page 2 of 20","Page %p of %P") );
         headerFrameRenderer->setWidth( width );
         headerFrameRenderer->setPos( pageRect.topLeft() );
 
         HeaderFooterFrameRenderer *footerFrameRenderer = new HeaderFooterFrameRenderer( &info );
-        footerFrameRenderer->setTexts( QString("Printed by: %U"),
-                                       QString("Okteta, built on KDE4"),
+        footerFrameRenderer->setTexts( i18nc("in the footer of the printed page, e.g. Printed by: Joe User",
+                                             "Printed by: %U"),
+                                       i18nc("advertizer in the footer of the printed page","Okteta, built on KDE4"),
                                        QString("%F") );
         footerFrameRenderer->setWidth( width );
         const int footerTop = pageRect.bottom() - footerFrameRenderer->height();
