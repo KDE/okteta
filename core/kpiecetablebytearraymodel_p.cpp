@@ -303,6 +303,15 @@ void KPieceTableByteArrayModel::Private::revertToVersionByIndex( int versionInde
     emit p->revertedToVersionIndex( versionIndex );
 }
 
+void KPieceTableByteArrayModel::Private::openGroupedChange( const QString &description )
+{
+    mPieceTable.openGroupedChange( description );
+}
+
+void KPieceTableByteArrayModel::Private::closeGroupedChange( const QString &description )
+{
+    mPieceTable.closeGroupedChange( description );
+}
 
 KPieceTableByteArrayModel::Private::~Private()
 {

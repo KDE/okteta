@@ -131,6 +131,16 @@ KHECore::KBookmarkList KPieceTableByteArrayModel::bookmarkList() const
     return d->bookmarkList();
 }
 
+void KPieceTableByteArrayModel::openGroupedChange( const QString &description )
+{
+    d->openGroupedChange( description );
+}
+
+void KPieceTableByteArrayModel::closeGroupedChange( const QString &description )
+{
+    d->closeGroupedChange( description );
+}
+
 KPieceTableByteArrayModel::~KPieceTableByteArrayModel()
 {
     delete d;

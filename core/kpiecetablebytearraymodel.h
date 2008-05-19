@@ -28,7 +28,7 @@
 #include "kabstractbytearraymodel.h"
 #include "kversionable.h"
 #include "kbookmarkable.h"
-
+#include "changesdescribable.h"
 
 namespace KHECore
 {
@@ -37,10 +37,10 @@ namespace KHECore
   *@author Friedrich W. H. Kossebau
   */
 
-class OKTETACORE_EXPORT KPieceTableByteArrayModel : public KAbstractByteArrayModel, public Versionable, public Bookmarkable
+class OKTETACORE_EXPORT KPieceTableByteArrayModel : public KAbstractByteArrayModel, public Versionable, public Bookmarkable, public ChangesDescribable
 {
     Q_OBJECT
-    Q_INTERFACES( KHECore::Versionable KHECore::Bookmarkable )
+    Q_INTERFACES( KHECore::Versionable KHECore::Bookmarkable KHECore::ChangesDescribable )
 
     class Private;
     friend class Private;
@@ -92,6 +92,10 @@ class OKTETACORE_EXPORT KPieceTableByteArrayModel : public KAbstractByteArrayMod
     virtual void removeAllBookmarks();
 
     virtual KHECore::KBookmarkList bookmarkList() const;
+
+  public: // ChangesDescribable API
+    virtual void openGroupedChange( const QString &description );
+    virtual void closeGroupedChange( const QString &description );
 
   public:
 //     void setMaxSize( int MS );

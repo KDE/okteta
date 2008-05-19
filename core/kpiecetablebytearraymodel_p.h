@@ -81,6 +81,10 @@ class KPieceTableByteArrayModel::Private
 
     KHECore::KBookmarkList bookmarkList() const;
 
+  public: // ChangesDescribable API
+    void openGroupedChange( const QString &description );
+    void closeGroupedChange( const QString &description );
+
   public:
     void setData( const char *data, unsigned int size, bool careForMemory = true );
 
