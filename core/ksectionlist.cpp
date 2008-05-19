@@ -78,6 +78,14 @@ void KSectionList::addSection( const KSection &newSection )
         append( newSection );
 }
 
+void KSectionList::addSectionList( const KSectionList& sectionList )
+{
+    // TODO: optimize with two parallel iterators
+    foreach( const KSection &section, sectionList )
+        addSection( section );
+}
+
+
 KSectionList::~KSectionList() {}
 
 }

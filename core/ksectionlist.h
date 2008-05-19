@@ -42,6 +42,7 @@ class KSectionList : public QLinkedList<KSection>
 
   public:
     void addSection( const KSection& section );
+    void addSectionList( const KSectionList& sectionList );
 };
 
 }
