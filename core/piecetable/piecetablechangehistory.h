@@ -53,8 +53,8 @@ class PieceTableChangeHistory
                              KHE::KSectionList *changedRanges, KHE::ArrayChangeMetricsList *changeList );
 
     // 
-    void openGroupedChange(); // TODO: hand over description? user change id?
-    void closeGroupedChange();
+    void openGroupedChange( const QString &description ); // TODO: hand over description? user change id?
+    void closeGroupedChange( const QString &description );
     // 
     void finishChange();
 
@@ -99,8 +99,6 @@ inline bool PieceTableChangeHistory::isAtBase()                 const
 }
 inline int PieceTableChangeHistory::appliedChangesDataSize()    const { return mAppliedChangesDataSize; }
 
-inline void PieceTableChangeHistory::openGroupedChange()  { ++mChangeGroupOpened; }
-inline void PieceTableChangeHistory::closeGroupedChange() { if( mChangeGroupOpened > 0 ) --mChangeGroupOpened; }
 inline void PieceTableChangeHistory::finishChange()       { mMergeChanges = false; }
 
 inline QString PieceTableChangeHistory::changeDescription( int changeId ) const

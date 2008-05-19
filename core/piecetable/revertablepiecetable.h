@@ -51,8 +51,8 @@ class RevertablePieceTable
 
   public:
     // 
-    void openGroupedChange(); // TODO: hand over description? user change id?
-    void closeGroupedChange();
+    void openGroupedChange( const QString &description ); // TODO: hand over description? user change id?
+    void closeGroupedChange( const QString &description );
     // 
     void finishChange();
     bool revertBeforeChange( int changeId,
@@ -113,8 +113,10 @@ inline bool RevertablePieceTable::swap( int firstStart, int secondStart, int sec
 }
 
 
-inline void RevertablePieceTable::openGroupedChange()  { mChangeHistory.openGroupedChange(); }
-inline void RevertablePieceTable::closeGroupedChange() { mChangeHistory.closeGroupedChange(); }
+inline void RevertablePieceTable::openGroupedChange( const QString &description )
+{ mChangeHistory.openGroupedChange(description); }
+inline void RevertablePieceTable::closeGroupedChange( const QString &description )
+{ mChangeHistory.closeGroupedChange(description); }
 inline void RevertablePieceTable::finishChange()       { mChangeHistory.finishChange(); }
 
 inline bool RevertablePieceTable::revertBeforeChange( int changeId,

@@ -51,7 +51,8 @@ class AbstractPieceTableChange
         ReplaceId,
         SwapRangesId,
         FillId,
-        ReplaceOneId
+        ReplaceOneId,
+        GroupId
     };
 
   public:

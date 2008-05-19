@@ -29,6 +29,7 @@ set( libpiecetable_SRCS
   piecetable/removepiecetablechange.cpp
   piecetable/replacepiecetablechange.cpp
   piecetable/swaprangespiecetablechange.cpp
+  piecetable/grouppiecetablechange.cpp
   piecetable/piecetablechangehistory.cpp
   piecetable/revertablepiecetable.cpp
 )
