@@ -152,6 +152,7 @@ set( piecetablechangehistorytest_SRCS
   ${SUTDIR}/piecetable/replacepiecetablechange.cpp
   ${SUTDIR}/piecetable/swaprangespiecetablechange.cpp
   ${SUTDIR}/piecetable/piecetablechangehistory.cpp
+  ${SUTDIR}/piecetable/grouppiecetablechange.cpp
 )
 
 kde4_add_unit_test( piecetablechangehistorytest
@@ -175,6 +176,7 @@ set( revertablepiecetabletest_SRCS
   ${SUTDIR}/piecetable/swaprangespiecetablechange.cpp
   ${SUTDIR}/piecetable/piecetablechangehistory.cpp
   ${SUTDIR}/piecetable/revertablepiecetable.cpp
+  ${SUTDIR}/piecetable/grouppiecetablechange.cpp
 )
 
 kde4_add_unit_test( revertablepiecetabletest
