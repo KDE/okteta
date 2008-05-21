@@ -335,7 +335,9 @@ void KByteArrayView::adaptController()
     const bool isEffectiveReadOnly = mByteArrayModel->isReadOnly() || mReadOnly;
 
     mController = isEffectiveReadOnly ?            (KController*)mNavigator :
-                  cursorColumn() == CharColumnId ? (KController*)mCharEditor : (KController*)mValueEditor;
+                  cursorColumn() == CharColumnId ? (KController*)mCharEditor :
+                                                   // TODO: reenable editor after it got fixed
+                                                   (KController*)mNavigator/*mValueEditor*/;
 }
 
 void KByteArrayView::onByteArrayReadOnlyChange( bool isByteArrayReadOnly )
