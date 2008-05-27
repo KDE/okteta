@@ -43,7 +43,7 @@ target_link_libraries( okteta
   ${KDE4_KIO_LIBS}
 )
 
-install( TARGETS okteta  DESTINATION ${BIN_INSTALL_DIR} )
+install( TARGETS okteta  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 
 install( FILES okteta.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR} )
