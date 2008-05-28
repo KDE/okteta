@@ -44,7 +44,7 @@ ByteTableController::ByteTableController( KXmlGuiWindow *window )
     QDockWidget *dockWidget = new QDockWidget( i18nc("@title:window", "Byte Table"), window );
     dockWidget->setObjectName( "ByteTable" );
     dockWidget->setWidget( mView );
-    window->addDockWidget( Qt::BottomDockWidgetArea, dockWidget );
+    window->addDockWidget( Qt::RightDockWidgetArea, dockWidget );
 
     QAction *action = dockWidget->toggleViewAction();
     action->setText( i18nc("@title:window", "Byte Table") ); //TODO: better name needed!
