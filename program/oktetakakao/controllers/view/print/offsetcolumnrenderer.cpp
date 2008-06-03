@@ -26,7 +26,7 @@
 #include <QtGui/QPainter>
 
 
-OffsetColumnRenderer::OffsetColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer,
+::OffsetColumnRenderer::OffsetColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer,
                                             int firstLineOffset, int delta, KOffsetFormat::KFormat format )
  : AbstractColumnRenderer( columnFrameRenderer ),
    mFirstLineOffset( firstLineOffset ),
@@ -40,7 +40,7 @@ OffsetColumnRenderer::OffsetColumnRenderer( AbstractColumnFrameRenderer *columnF
 }
 
 
-void OffsetColumnRenderer::renderLine( QPainter *painter, int line )
+void ::OffsetColumnRenderer::renderLine( QPainter *painter, int line )
 {
     printFunction()( mCodedOffset, mFirstLineOffset+mDeltaPerLine*line );
 
@@ -49,20 +49,20 @@ void OffsetColumnRenderer::renderLine( QPainter *painter, int line )
 }
 
 
-void OffsetColumnRenderer::renderFirstLine( QPainter *painter, const KPixelXs &, int firstLine )
+void ::OffsetColumnRenderer::renderFirstLine( QPainter *painter, const KPixelXs &, int firstLine )
 {
     mRenderLine = firstLine;
     renderLine( painter, mRenderLine++ );
 }
 
 
-void OffsetColumnRenderer::renderNextLine( QPainter *painter )
+void ::OffsetColumnRenderer::renderNextLine( QPainter *painter )
 {
     renderLine( painter, mRenderLine++ );
 }
 
 
-void OffsetColumnRenderer::renderEmptyColumn( QPainter *painter, const KPixelXs &_Xs, const KPixelYs &Ys )
+void ::OffsetColumnRenderer::renderEmptyColumn( QPainter *painter, const KPixelXs &_Xs, const KPixelYs &Ys )
 {
     KPixelXs Xs( _Xs );
     restrictToXSpan( &Xs );
@@ -70,7 +70,7 @@ void OffsetColumnRenderer::renderEmptyColumn( QPainter *painter, const KPixelXs 
     painter->fillRect( Xs.start(), Ys.start(), Xs.width(), Ys.width(), Qt::white );
 }
 
-void OffsetColumnRenderer::setFormat( KOffsetFormat::KFormat format )
+void ::OffsetColumnRenderer::setFormat( KOffsetFormat::KFormat format )
 {
     // no changes?
     if( mFormat == format )
@@ -84,13 +84,13 @@ void OffsetColumnRenderer::setFormat( KOffsetFormat::KFormat format )
     recalcX();
 }
 
-void OffsetColumnRenderer::setMetrics( KPixelX digitWidth, KPixelY digitBaseLine )
+void ::OffsetColumnRenderer::setMetrics( KPixelX digitWidth, KPixelY digitBaseLine )
 {
     mDigitBaseLine = digitBaseLine;
     setDigitWidth( digitWidth );
 }
 
-void OffsetColumnRenderer::setDigitWidth( KPixelX digitWidth )
+void ::OffsetColumnRenderer::setDigitWidth( KPixelX digitWidth )
 {
     // no changes?
     if( mDigitWidth == digitWidth )
@@ -101,11 +101,11 @@ void OffsetColumnRenderer::setDigitWidth( KPixelX digitWidth )
     recalcX();
 }
 
-void OffsetColumnRenderer::recalcX()
+void ::OffsetColumnRenderer::recalcX()
 {
     // recalculate depend sizes
     setWidth( mCodingWidth * mDigitWidth );
 }
 
 
-OffsetColumnRenderer::~OffsetColumnRenderer() {}
+::OffsetColumnRenderer::~OffsetColumnRenderer() {}

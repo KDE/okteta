@@ -67,13 +67,13 @@ ByteArrayFrameRenderer::ByteArrayFrameRenderer()
     const KHE::KSection emptySection;
     // creating the columns in the needed order
     mOffsetColumnRenderer =
-        new OffsetColumnRenderer( this, DefaultFirstLineOffset, DefaultNoOfBytesPerLine, KOffsetFormat::Hexadecimal );
+        new ::OffsetColumnRenderer( this, DefaultFirstLineOffset, DefaultNoOfBytesPerLine, KOffsetFormat::Hexadecimal );
     mFirstBorderColumnRenderer =
-        new BorderColumnRenderer( this, true );//false );
+        new ::BorderColumnRenderer( this, true );//false );
     mValueColumnRenderer =
         new ValueColumnRenderer( this, mByteArrayModel, emptySection, mLayout );
     mSecondBorderColumnRenderer =
-        new BorderColumnRenderer( this, true );
+        new ::BorderColumnRenderer( this, true );
     mCharColumnRenderer =
         new CharColumnRenderer( this, mByteArrayModel, emptySection, mLayout );
 

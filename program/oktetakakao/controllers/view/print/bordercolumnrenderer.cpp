@@ -32,14 +32,14 @@ static const KPixelX DefaultWidth = 9;
 static const KPixelX LineX = DefaultWidth / 2;
 
 
-BorderColumnRenderer::BorderColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer, bool middle, bool inEmpty )
+::BorderColumnRenderer::BorderColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer, bool middle, bool inEmpty )
  : AbstractColumnRenderer( columnFrameRenderer ),
    mMiddle( middle ), mInEmpty( inEmpty )
 {
     setWidth( middle ? DefaultWidth : LineX-1 );
 }
 
-void BorderColumnRenderer::renderColumn( QPainter *painter, const KPixelXs &Xs, const KPixelYs &Ys )
+void ::BorderColumnRenderer::renderColumn( QPainter *painter, const KPixelXs &Xs, const KPixelYs &Ys )
 {
     AbstractColumnRenderer::renderColumn( painter, Xs,Ys );
 
@@ -52,7 +52,7 @@ void BorderColumnRenderer::renderColumn( QPainter *painter, const KPixelXs &Xs, 
     }
 }
 
-void BorderColumnRenderer::renderEmptyColumn( QPainter *painter, const KPixelXs &Xs, const KPixelYs &Ys )
+void ::BorderColumnRenderer::renderEmptyColumn( QPainter *painter, const KPixelXs &Xs, const KPixelYs &Ys )
 {
     AbstractColumnRenderer::renderEmptyColumn( painter, Xs,Ys );
 
@@ -68,4 +68,4 @@ void BorderColumnRenderer::renderEmptyColumn( QPainter *painter, const KPixelXs 
     }
 }
 
-BorderColumnRenderer::~BorderColumnRenderer() {}
+::BorderColumnRenderer::~BorderColumnRenderer() {}

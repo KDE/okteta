@@ -29,7 +29,7 @@
 // Qt
 #include <QtCore/QtGlobal>
 
-static const int BitsPerByte = 8;
+static const int RotateBitsPerByte = 8;
 
 RotateByteArrayFilter::RotateByteArrayFilter()
  : AbstractByteArrayFilter(
@@ -43,12 +43,12 @@ bool RotateByteArrayFilter::filter( char *result,
                                     KHECore::KAbstractByteArrayModel *model, const KHE::KSection &section ) const
 {
     const int groupSize = mParameterSet.groupSize();
-    const int groupBitCount = (groupSize * BitsPerByte );
+    const int groupBitCount = (groupSize * RotateBitsPerByte );
     const int groupShiftBitWidth = qAbs( mParameterSet.moveBitWidth() ) % groupBitCount;
 
-    const int shiftByteWidth = groupShiftBitWidth / BitsPerByte;
-    const int shiftBitWidth = groupShiftBitWidth - shiftByteWidth * BitsPerByte;
-    const int otherShiftBitWidth = BitsPerByte - shiftBitWidth;
+    const int shiftByteWidth = groupShiftBitWidth / RotateBitsPerByte;
+    const int shiftBitWidth = groupShiftBitWidth - shiftByteWidth * RotateBitsPerByte;
+    const int otherShiftBitWidth = RotateBitsPerByte - shiftBitWidth;
 
     const bool toRight = ( mParameterSet.moveBitWidth() > 0 );
     if( toRight )

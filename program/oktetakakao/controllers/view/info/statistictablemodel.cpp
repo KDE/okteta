@@ -32,9 +32,9 @@
 #include <QtCore/QLatin1Char>
 
 
-static const unsigned char DefaultUndefinedChar = '?';
+static const unsigned char StatisticsDefaultUndefinedChar = '?';
 static const KHECore::KCoding DefaultValueCoding =  KHECore::HexadecimalCoding;
-static const int ByteSetSize = 256;
+static const int StatisticsByteSetSize = 256;
 
 
 StatisticTableModel::StatisticTableModel( int *byteCount, QObject *parent )
@@ -43,14 +43,14 @@ StatisticTableModel::StatisticTableModel( int *byteCount, QObject *parent )
    mValueCoding( DefaultValueCoding ),
    mValueCodec( KHECore::ValueCodec::createCodec(DefaultValueCoding) ),
    mCharCodec( KHECore::KCharCodec::createCodec(KHECore::LocalEncoding) ),
-   mUndefinedChar( DefaultUndefinedChar )
+   mUndefinedChar( StatisticsDefaultUndefinedChar )
 {
 }
 
 void StatisticTableModel::update( int size )
 {
     mSize = size;
-    emit dataChanged( index(0,CountId), index(ByteSetSize-1,PercentId) );
+    emit dataChanged( index(0,CountId), index(StatisticsByteSetSize-1,PercentId) );
     emit sizeChanged( mSize );
 }
 
@@ -58,7 +58,7 @@ void StatisticTableModel::setUndefinedChar( const QChar &undefinedChar )
 {
     mUndefinedChar = undefinedChar;
 
-    emit dataChanged( index(0,CharacterId), index(ByteSetSize-1,CharacterId) );
+    emit dataChanged( index(0,CharacterId), index(StatisticsByteSetSize-1,CharacterId) );
 }
 
 void StatisticTableModel::setValueCoding( int coding )
@@ -73,7 +73,7 @@ void StatisticTableModel::setValueCoding( int coding )
     mValueCodec = KHECore::ValueCodec::createCodec( mValueCoding );
 //     CodedByte.resize( ByteCodec->encodingWidth() );
 
-    emit dataChanged( index(0,ValueId), index(ByteSetSize-1,ValueId) );
+    emit dataChanged( index(0,ValueId), index(StatisticsByteSetSize-1,ValueId) );
     emit headerChanged();
 }
 
@@ -85,14 +85,14 @@ void StatisticTableModel::setCharCodec( const QString &codeName )
     delete mCharCodec;
     mCharCodec = KHECore::KCharCodec::createCodec( codeName );
 
-    emit dataChanged( index(0,CharacterId), index(ByteSetSize-1,CharacterId) );
+    emit dataChanged( index(0,CharacterId), index(StatisticsByteSetSize-1,CharacterId) );
 }
 
 
 int StatisticTableModel::rowCount( const QModelIndex &parent ) const
 {
 Q_UNUSED( parent )
-    return ByteSetSize;
+    return StatisticsByteSetSize;
 }
 
 int StatisticTableModel::columnCount( const QModelIndex &parent ) const

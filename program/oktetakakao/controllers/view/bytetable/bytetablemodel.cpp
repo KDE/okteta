@@ -30,13 +30,13 @@
 #include <KLocale>
 
 
-static const unsigned char DefaultUndefinedChar = '?';
+static const unsigned char ByteTableDefaultUndefinedChar = '?';
 static const int ByteSetSize = 256;
 
 ByteTableModel::ByteTableModel( QObject *parent )
  : QAbstractTableModel( parent ),
    mCharCodec( KHECore::KCharCodec::createCodec(KHECore::LocalEncoding) ),
-   mUndefinedChar( DefaultUndefinedChar )
+   mUndefinedChar( ByteTableDefaultUndefinedChar )
 {
     static const KHECore::KCoding CodingIds[NofOfValueCodings] =
     {

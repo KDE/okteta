@@ -39,10 +39,10 @@
 #include <QtGui/QCheckBox>
 
 
-static const unsigned char DefaultUndefinedChar = '?';
+static const unsigned char PrimitivesDefaultUndefinedChar = '?';
 
 KPrimitiveTypesView::KPrimitiveTypesView( PODDecoderTool *tool, QWidget *parent )
- : QWidget( parent ), mTool( tool ), mCharCodec( 0 ), mUndefinedChar( DefaultUndefinedChar )
+ : QWidget( parent ), mTool( tool ), mCharCodec( 0 ), mUndefinedChar( PrimitivesDefaultUndefinedChar )
 {
     mCharCodec = KHECore::KCharCodec::createCodec( KHECore::LocalEncoding );
 

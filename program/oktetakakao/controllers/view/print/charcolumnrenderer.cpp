@@ -30,7 +30,7 @@
 
 static const bool     DefaultShowsNonprinting = false;
 static const char     DefaultSubstituteChar =   (char)'.';
-static const char     DefaultUndefinedChar =    (char)'?';
+static const char     CharColumnDefaultUndefinedChar =    (char)'?';
 
 
 CharColumnRenderer::CharColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer,
@@ -40,7 +40,7 @@ CharColumnRenderer::CharColumnRenderer( AbstractColumnFrameRenderer *columnFrame
  : ByteColumnRenderer( columnFrameRenderer, byteArrayModel, renderIndizes, layout ),
    mShowsNonprinting( DefaultShowsNonprinting ),
    mSubstituteChar( DefaultSubstituteChar ),
-   mUndefinedChar( DefaultUndefinedChar )
+   mUndefinedChar( CharColumnDefaultUndefinedChar )
 {
     setSpacing( 0, 0, 0 );
 }

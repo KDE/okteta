@@ -143,10 +143,10 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
     KHEUI::ByteArrayTableLayout *mLayout;
 
   protected:
-    OffsetColumnRenderer *mOffsetColumnRenderer;
-    BorderColumnRenderer *mFirstBorderColumnRenderer;
+    ::OffsetColumnRenderer *mOffsetColumnRenderer;
+    ::BorderColumnRenderer *mFirstBorderColumnRenderer;
     ValueColumnRenderer  *mValueColumnRenderer;
-    BorderColumnRenderer *mSecondBorderColumnRenderer;
+    ::BorderColumnRenderer *mSecondBorderColumnRenderer;
     CharColumnRenderer   *mCharColumnRenderer;
 
   protected:
