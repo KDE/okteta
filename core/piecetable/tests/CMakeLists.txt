@@ -138,6 +138,49 @@ target_link_libraries( swaprangespiecetablechangeabstractpiecetablechangeiftest
   oktetacoretestutil ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
 
+########### grouppiecetablechangeabstractpiecetablechangeiftest ###############
+
+set( grouppiecetablechangeabstractpiecetablechangeiftest_SRCS
+  grouppiecetablechangeabstractpiecetablechangeiftest.cpp
+  ${abstractpiecetablechangeiftest_SRCS}
+  ${SUTDIR}/ksectionlist.cpp
+  ${SUTDIR}/piecetable/replacepiecetablechange.cpp
+  ${SUTDIR}/piecetable/insertpiecetablechange.cpp
+  ${SUTDIR}/piecetable/removepiecetablechange.cpp
+  ${SUTDIR}/piecetable/grouppiecetablechange.cpp
+)
+
+kde4_add_unit_test( grouppiecetablechangeabstractpiecetablechangeiftest
+  TESTNAME libpiecetable-grouppiecetablechangeabstractpiecetablechangeiftest
+  ${grouppiecetablechangeabstractpiecetablechangeiftest_SRCS}
+)
+target_link_libraries( grouppiecetablechangeabstractpiecetablechangeiftest
+  oktetacoretestutil ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+
+
+########### grouppiecetablechangetest ###############
+
+set( grouppiecetablechangetest_SRCS
+  grouppiecetablechangetest.cpp
+  testpiecetablechange.cpp
+  ${SUTDIR}/ksection.cpp
+  ${SUTDIR}/ksectionlist.cpp
+  ${SUTDIR}/piecetable/piecetable.cpp
+  ${SUTDIR}/piecetable/abstractpiecetablechange.cpp
+  ${SUTDIR}/piecetable/insertpiecetablechange.cpp
+  ${SUTDIR}/piecetable/removepiecetablechange.cpp
+  ${SUTDIR}/piecetable/replacepiecetablechange.cpp
+  ${SUTDIR}/piecetable/swaprangespiecetablechange.cpp
+  ${SUTDIR}/piecetable/grouppiecetablechange.cpp
+)
+
+kde4_add_unit_test( grouppiecetablechangetest
+  TESTNAME libpiecetable-grouppiecetablechangetest
+  ${grouppiecetablechangetest_SRCS}
+)
+target_link_libraries( grouppiecetablechangetest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+
+
 ########### piecetablechangehistorytest ###############
 
 set( piecetablechangehistorytest_SRCS
