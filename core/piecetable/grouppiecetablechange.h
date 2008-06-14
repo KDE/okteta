@@ -27,7 +27,7 @@
 // lib
 #include "abstractpiecetablechange.h"
 // Qt
-#include <QtCore/QList>
+#include <QtCore/QStack>
 #include <QtCore/QString>
 
 namespace KHE
@@ -46,35 +46,78 @@ namespace KPieceTable
 class GroupPieceTableChange : public AbstractPieceTableChange
 {
   public:
-    GroupPieceTableChange( const QString &description );
+    GroupPieceTableChange( GroupPieceTableChange *parent, const QString &description );
     virtual ~GroupPieceTableChange();
 
   public: // AbstractPieceTableChange API
     virtual int type() const;
     virtual QString description() const;
     virtual bool merge( const AbstractPieceTableChange *other );
-//     virtual KHE::KSection apply( PieceTable *pieceTable ) const;
-//     virtual KHE::KSection revert( PieceTable *pieceTable ) const;
-//     virtual KHE::ArrayChangeMetrics metrics() const;
+    virtual KHE::KSection apply( PieceTable *pieceTable ) const;
+    virtual KHE::KSection revert( PieceTable *pieceTable ) const;
+    virtual KHE::ArrayChangeMetrics metrics() const;
     virtual int dataSize() const;
 
   public:
     void setDescription( const QString &description );
 
+// TODO: think about a function to compress a group, that is not going to be handled in detail anymore
+// e.g. several replaces of the same byte or an insert and replace of the inserted data
+
+
+  public:
     KHE::KSectionList applyGroup( PieceTable *pieceTable ) const;
     KHE::KSectionList revertGroup( PieceTable *pieceTable ) const;
     KHE::ArrayChangeMetricsList groupMetrics() const;
+    GroupPieceTableChange *parent() const;
+
+  public: // TODO: this interface part is shared with PieceTableChangeHistory, try to use this fact
+    bool appendChange( AbstractPieceTableChange *change );
+    void finishChange();
+  public:
+    /// @return number of changes in the history
+    int count() const;
+    /// @return number of changes currently applied
+    int appliedChangesCount() const;
+    /// @return description of the change with the id changeId
+    QString changeDescription( int changeId ) const;
+    /// @return description of the change at the head, empty if there is none
+    QString headChangeDescription() const;
+    /// @return true if the current change is the base
+//     bool isAtBase() const;
+    /// @return size of the data used by the applied changes
+    int appliedChangesDataSize() const;
 
   protected:
-    QList<AbstractPieceTableChange*> mChangeList;
+    QStack<AbstractPieceTableChange*> mChangeStack;
+    GroupPieceTableChange *mParent;
+
     QString mDescription;
+    ///
+    int mAppliedChangesCount;
+    ///
+    int mAppliedChangesDataSize;
+    /// if true, try to merge changes
+    bool mTryToMergeAppendedChange;
 };
 
-inline GroupPieceTableChange::GroupPieceTableChange( const QString &description )
- : mDescription( description )
+inline GroupPieceTableChange::GroupPieceTableChange( GroupPieceTableChange *parent, const QString &description )
+ : mParent( parent ), mDescription( description ),
+   mAppliedChangesCount( 0 ), mAppliedChangesDataSize( 0 ), mTryToMergeAppendedChange( true )
 {}
 
 inline void GroupPieceTableChange::setDescription( const QString &description ) { mDescription = description; }
+inline GroupPieceTableChange *GroupPieceTableChange::parent() const { return mParent; }
+inline void GroupPieceTableChange::finishChange() { mTryToMergeAppendedChange = false; }
+inline int GroupPieceTableChange::count()                     const { return mChangeStack.count(); }
+inline int GroupPieceTableChange::appliedChangesCount()       const { return mAppliedChangesCount; }
+inline QString GroupPieceTableChange::headChangeDescription() const { return changeDescription( count()-1 ); }
+inline QString GroupPieceTableChange::changeDescription( int changeId ) const
+{
+    const AbstractPieceTableChange *change = mChangeStack.value( changeId );
+
+    return change ? change->description() : QString();
+}
 
 }
 

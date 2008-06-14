@@ -36,8 +36,7 @@ void PieceTableChangeHistory::clear()
     while( !mChangeStack.isEmpty() )
          delete mChangeStack.pop();
 
-    mMergeChanges = false;
-    mChangeGroupOpened = 0;
+    mTryToMergeAppendedChange = false;
     mAppliedChangesCount = 0;
     mBaseBeforeChangeIndex = 0;
     mAppliedChangesDataSize = 0;
@@ -46,17 +45,33 @@ void PieceTableChangeHistory::clear()
 void PieceTableChangeHistory::setBeforeCurrentChangeAsBase(bool hide)
 {
     mBaseBeforeChangeIndex = hide ? -1 : mAppliedChangesCount;
-    mMergeChanges = false;
+    mTryToMergeAppendedChange = false;
 }
 
 void PieceTableChangeHistory::openGroupedChange(const QString &description)
 {
-    ++mChangeGroupOpened;
+    GroupPieceTableChange *groupChange = new GroupPieceTableChange( mActiveGroupChange, description );
+
+    appendChange( groupChange );
+    mActiveGroupChange = groupChange;
 }
 
 void PieceTableChangeHistory::closeGroupedChange(const QString &description)
 {
-    if( mChangeGroupOpened > 0 ) --mChangeGroupOpened;
+    if( mActiveGroupChange != 0 )
+    {
+        if( !description.isEmpty() )
+            mActiveGroupChange->setDescription( description );
+        mActiveGroupChange = mActiveGroupChange->parent();
+    }
+}
+
+void PieceTableChangeHistory::finishChange()
+{
+    if( mActiveGroupChange != 0 )
+        mActiveGroupChange->finishChange();
+    else
+        mTryToMergeAppendedChange = false;
 }
 
 bool PieceTableChangeHistory::appendChange( AbstractPieceTableChange *change )
@@ -78,18 +93,26 @@ bool PieceTableChangeHistory::appendChange( AbstractPieceTableChange *change )
     mAppliedChangesDataSize += change->dataSize();
 
     bool isNotMerged = true;
-    if( mMergeChanges && mAppliedChangesCount>0 )
-        isNotMerged = !mChangeStack.top()->merge( change );
-    else
-        mMergeChanges = true;
-
-    if( isNotMerged )
+    if( mActiveGroupChange != 0 )
     {
-        mChangeStack.push( change );
-        ++mAppliedChangesCount;
+        mActiveGroupChange->appendChange( change );
+        isNotMerged = false; // TODO: hack for as long as subgroups are not undoable
     }
     else
-        delete change;
+    {
+        if( mTryToMergeAppendedChange && mAppliedChangesCount>0 )
+            isNotMerged = !mChangeStack.top()->merge( change );
+        else
+            mTryToMergeAppendedChange = true;
+
+        if( isNotMerged )
+        {
+            mChangeStack.push( change );
+            ++mAppliedChangesCount;
+        }
+        else
+            delete change;
+    }
 
     return isNotMerged;
 }
@@ -103,6 +126,11 @@ bool PieceTableChangeHistory::revertBeforeChange( PieceTable *pieceTable, int ch
 
     if( currentChangeId == changeId )
         return false;
+
+    // close any grouped changes
+    while( mActiveGroupChange != 0 )
+        mActiveGroupChange = mActiveGroupChange->parent();
+
 
     if( currentChangeId < changeId )
     {
@@ -159,7 +187,7 @@ bool PieceTableChangeHistory::revertBeforeChange( PieceTable *pieceTable, int ch
         }
     }
     mAppliedChangesCount = changeId;
-    mMergeChanges = false;
+    mTryToMergeAppendedChange = false;
 
     return true;
 }

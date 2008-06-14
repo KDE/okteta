@@ -38,6 +38,9 @@ class ArrayChangeMetricsList;
 namespace KPieceTable
 {
 
+class GroupPieceTableChange;
+
+
 class PieceTableChangeHistory
 {
   public:
@@ -49,31 +52,41 @@ class PieceTableChangeHistory
     /// returns true, if a new change is appended, false if merged
     bool appendChange( AbstractPieceTableChange *change );
 
+    /**
+     * @param pieceTable
+     * @param changeId
+     * @param changedRanges
+     * @param changeList
+     * @return true if there were changes to revert, false otherwise
+     */
     bool revertBeforeChange( PieceTable *pieceTable, int changeId,
                              KHE::KSectionList *changedRanges, KHE::ArrayChangeMetricsList *changeList );
 
-    // 
+    /// 
     void openGroupedChange( const QString &description ); // TODO: hand over description? user change id?
     void closeGroupedChange( const QString &description );
-    // 
+    /// closes the current change, so any following operation will not be tried to merge
     void finishChange();
 
     void setBeforeCurrentChangeAsBase( bool hide );
 
   public:
+    /// @return number of changes in the history
     int count() const;
+    /// @return number of changes currently applied
     int appliedChangesCount() const;
+    /// @return description of the change with the id changeId
     QString changeDescription( int changeId ) const;
+    /// @return description of the change at the head, empty if there is none
     QString headChangeDescription() const;
+    /// @return true if the current change is the base
     bool isAtBase() const;
+    /// @return size of the data used by the applied changes
     int appliedChangesDataSize() const;
 
   protected:
-    /// if 0, no change group is open
-    int mChangeGroupOpened;
-
     /// if true, try to merge changes
-    bool mMergeChanges;
+    bool mTryToMergeAppendedChange;
     ///
     int mAppliedChangesCount;
     ///
@@ -82,12 +95,16 @@ class PieceTableChangeHistory
     QStack<AbstractPieceTableChange*> mChangeStack;
     ///
     int mAppliedChangesDataSize;
+
+    /// if 0, there is no
+    GroupPieceTableChange *mActiveGroupChange;
 };
 
 
 inline PieceTableChangeHistory::PieceTableChangeHistory()
- : mChangeGroupOpened( 0 ), mMergeChanges( false ),
-   mAppliedChangesCount( 0 ), mBaseBeforeChangeIndex( 0 ), mAppliedChangesDataSize( 0 )
+ : mTryToMergeAppendedChange( false ),
+   mAppliedChangesCount( 0 ), mBaseBeforeChangeIndex( 0 ), mAppliedChangesDataSize( 0 ),
+   mActiveGroupChange( 0 )
 {}
 
 inline int PieceTableChangeHistory::count()                     const { return mChangeStack.count(); }
@@ -98,8 +115,6 @@ inline bool PieceTableChangeHistory::isAtBase()                 const
     return ( mBaseBeforeChangeIndex == mAppliedChangesCount );
 }
 inline int PieceTableChangeHistory::appliedChangesDataSize()    const { return mAppliedChangesDataSize; }
-
-inline void PieceTableChangeHistory::finishChange()       { mMergeChanges = false; }
 
 inline QString PieceTableChangeHistory::changeDescription( int changeId ) const
 {

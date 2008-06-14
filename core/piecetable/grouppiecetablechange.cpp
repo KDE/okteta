@@ -46,21 +46,23 @@ bool GroupPieceTableChange::merge( const AbstractPieceTableChange *other )
 {
     bool result = false;
 
-    if( !mChangeList.isEmpty() )
-        result = mChangeList.last()->merge( other );
+    if( !mChangeStack.isEmpty() )
+        result = mChangeStack.last()->merge( other );
 
     return result;
 }
-#if 0
+
 KHE::KSection GroupPieceTableChange::apply( PieceTable *pieceTable ) const
 {
-    pieceTable->insert( mInsertOffset, mInsertLength, mStorageOffset );
+Q_UNUSED( pieceTable )
+//     pieceTable->insert( mInsertOffset, mInsertLength, mStorageOffset );
 
-    return KHE::KSection( mInsertOffset, pieceTable->size()-1 );
+    return KHE::KSection();//( mInsertOffset, pieceTable->size()-1 );
 }
 
 KHE::KSection GroupPieceTableChange::revert( PieceTable *pieceTable ) const
 {
+Q_UNUSED( pieceTable )
 //     const int oldLast = pieceTable->size() - 1;
 //     pieceTable->remove( KHE::KSection::fromWidth(mInsertOffset,mInsertLength) );
     return KHE::KSection();//( mInsertOffset, oldLast );
@@ -68,13 +70,50 @@ KHE::KSection GroupPieceTableChange::revert( PieceTable *pieceTable ) const
 
 KHE::ArrayChangeMetrics GroupPieceTableChange::metrics() const
 {
-    return KHE::ArrayChangeMetrics;//::asReplacement( mInsertOffset, 0, mInsertLength );
+    return KHE::ArrayChangeMetrics::asReplacement( 0, 0, 0);
 }
+
+bool GroupPieceTableChange::appendChange( AbstractPieceTableChange *change )
+{
+#if 0
+    // chop unapplied changes
+    if( mAppliedChangesCount < mChangeStack.count() )
+    {
+        // hide baseindex if needed
+        if( mBaseBeforeChangeIndex > mAppliedChangesCount )
+            mBaseBeforeChangeIndex = -1;
+        do
+        {
+            AbstractPieceTableChange *droppedChange = mChangeStack.pop();
+            delete droppedChange;
+        }
+        while( mAppliedChangesCount < mChangeStack.count() );
+    }
 #endif
+    mAppliedChangesDataSize += change->dataSize();
+
+    bool isNotMerged = true;
+    if( mTryToMergeAppendedChange && mAppliedChangesCount>0 )
+        isNotMerged = !mChangeStack.top()->merge( change );
+    else
+        mTryToMergeAppendedChange = true;
+
+    if( isNotMerged )
+    {
+        mChangeStack.push( change );
+        ++mAppliedChangesCount;
+    }
+    else
+        delete change;
+
+    return isNotMerged;
+}
+
+
 KHE::KSectionList GroupPieceTableChange::applyGroup( PieceTable *pieceTable ) const
 {
     KHE::KSectionList result;
-    foreach( AbstractPieceTableChange *change, mChangeList )
+    foreach( AbstractPieceTableChange *change, mChangeStack )
     {
         if( change->type() == AbstractPieceTableChange::GroupId )
         {
@@ -92,8 +131,12 @@ KHE::KSectionList GroupPieceTableChange::applyGroup( PieceTable *pieceTable ) co
 KHE::KSectionList GroupPieceTableChange::revertGroup( PieceTable *pieceTable ) const
 {
     KHE::KSectionList result;
-    foreach( AbstractPieceTableChange *change, mChangeList )
+
+    QStack<AbstractPieceTableChange*>::ConstIterator it = mChangeStack.end();
+    while( it != mChangeStack.begin() )
     {
+        --it;
+        AbstractPieceTableChange *change = *it;
         if( change->type() == AbstractPieceTableChange::GroupId )
         {
             const GroupPieceTableChange *groupChange = static_cast<const GroupPieceTableChange *>(change);
@@ -110,7 +153,7 @@ KHE::KSectionList GroupPieceTableChange::revertGroup( PieceTable *pieceTable ) c
 KHE::ArrayChangeMetricsList GroupPieceTableChange::groupMetrics() const
 {
     KHE::ArrayChangeMetricsList result;
-    foreach( AbstractPieceTableChange *change, mChangeList )
+    foreach( AbstractPieceTableChange *change, mChangeStack )
     {
         if( change->type() == AbstractPieceTableChange::GroupId )
         {
@@ -128,12 +171,13 @@ KHE::ArrayChangeMetricsList GroupPieceTableChange::groupMetrics() const
 
 int GroupPieceTableChange::dataSize() const
 {
-    int result = 0;
-    foreach( AbstractPieceTableChange *change, mChangeList )
-        result += change->dataSize();
-    return result;
- }
+    return mAppliedChangesDataSize;
+}
 
-GroupPieceTableChange::~GroupPieceTableChange() {}
+GroupPieceTableChange::~GroupPieceTableChange()
+{
+    while( !mChangeStack.isEmpty() )
+         delete mChangeStack.pop();
+}
 
 }
