@@ -52,22 +52,23 @@ Fixed after 0.1 Beta 2:
 * encoders now takes abtractmodel, so a view can be given
 * encoders now use current view settings
 * add export functionality to libkakao (simple modelencoderfilesystemexporter use encoder)
+* make printing support only selection
+* value column editing mess, with cursor jumping away on partial edit and ungrouped changes
+* operations like filter can set an own description of their action (undo/redo)
 
 For KDE 4.1:
 ----------------------------------
-* fix value column editing mess!
+* entering 00 in value column does not finish the editing
 * fix replace problem
-* make printing support only selection
 * ask artists for own icon
-* add support for memory mapped files (includes enabling overwrite controller again)
-* think about turning insert pattern & Co. into a tool
-* more explicit titels for undo/redo actions (range, data), also paste, drag, and cut
-* operations like filter should be able to set an own description of their action (undo/redo)
-* test handling of readonly files
 * add support for blocking processes like printing, string search or filter
 
 Later on:
 ---------
+* test handling of readonly files
+* more explicit titels for undo/redo actions (range, data), also paste, drag, and cut
+* add support for memory mapped files (includes enabling overwrite controller again)
+* think about turning insert pattern & Co. into a tool
 * session support: full storing and restoring of view/model state
 * port KPart to libkakao
 * add support for more commandline options
