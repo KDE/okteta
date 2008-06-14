@@ -83,6 +83,7 @@ class KPieceTableByteArrayModel::Private
 
   public: // ChangesDescribable API
     void openGroupedChange( const QString &description );
+    void cancelGroupedChange();
     void closeGroupedChange( const QString &description );
 
   public:
@@ -100,6 +101,8 @@ class KPieceTableByteArrayModel::Private
     QByteArray mChangeByteArray;
     /** */
     KBookmarkList mBookmarks;
+    /** temporary workaround for cancelling groups. If -1 no group is opened. */
+    int mBeforeGroupedChangeVersionIndex;
 };
 
 

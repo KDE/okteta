@@ -31,11 +31,14 @@
 namespace KHECore
 {
 
+static const int InvalidVersionIndex = -1;
+
 KPieceTableByteArrayModel::Private::Private( KPieceTableByteArrayModel *parent, const char *data, unsigned int size,
                                              bool careForMemory )
   : p( parent ),
    mReadOnly( false ),
-   mAutoDelete( true )
+   mAutoDelete( true ),
+   mBeforeGroupedChangeVersionIndex( InvalidVersionIndex )
 {
     if( data == 0 )
         size = 0;
@@ -205,7 +208,7 @@ unsigned int KPieceTableByteArrayModel::Private::replace( const KSection &r, con
     const bool wasModifiedBefore = isModified();
 
     int storageOffset;
-    mPieceTable.replace( removeSection, insertLength, &storageOffset );
+    const bool newChange = mPieceTable.replace( removeSection, insertLength, &storageOffset );
     appendToByteArray( &mChangeByteArray, storageOffset, insertData, insertLength );
 
     const bool bookmarksModified = mBookmarks.adjustToReplaced( removeSection.start(), removeSection.width(), insertLength );
@@ -220,7 +223,10 @@ unsigned int KPieceTableByteArrayModel::Private::replace( const KSection &r, con
     emit p->contentsChanged( removeSection.start(), lastChanged );
     if( bookmarksModified ) emit p->bookmarksModified( true );
     if( !wasModifiedBefore ) emit p->modificationChanged( true );
-    emit p->headVersionChanged( mPieceTable.changesCount() );
+    if( newChange )
+        emit p->headVersionChanged( mPieceTable.changesCount() );
+    else
+        emit p->headVersionDescriptionChanged( mPieceTable.headChangeDescription() );
     return insertLength;
 }
 
@@ -305,12 +311,24 @@ void KPieceTableByteArrayModel::Private::revertToVersionByIndex( int versionInde
 
 void KPieceTableByteArrayModel::Private::openGroupedChange( const QString &description )
 {
+    mBeforeGroupedChangeVersionIndex = mPieceTable.appliedChangesCount();
     mPieceTable.openGroupedChange( description );
+
+    emit p->headVersionChanged( mPieceTable.changesCount() );
+}
+
+void KPieceTableByteArrayModel::Private::cancelGroupedChange()
+{
+    if( mBeforeGroupedChangeVersionIndex != InvalidVersionIndex )
+        revertToVersionByIndex( mBeforeGroupedChangeVersionIndex );
 }
 
 void KPieceTableByteArrayModel::Private::closeGroupedChange( const QString &description )
 {
     mPieceTable.closeGroupedChange( description );
+    mBeforeGroupedChangeVersionIndex = InvalidVersionIndex;
+
+    emit p->headVersionDescriptionChanged( mPieceTable.headChangeDescription() );
 }
 
 KPieceTableByteArrayModel::Private::~Private()
