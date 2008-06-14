@@ -164,7 +164,7 @@ bool KValueEditor::handleKeyPress( QKeyEvent *keyEvent )
                         {
                             const int index = mDataCursor->realIndex();
 
-                            startEdit( QString() );
+                            startEdit( i18nc( "name of the change", "Insert" ) );
                             if( mView->mByteArrayModel->insert(index,(char*)&inputValue,1) > 0 )
                             {
                                 mEditModeByInsert = true;
@@ -203,7 +203,7 @@ void KValueEditor::doValueEditAction( KValueEditAction Action, int input )
         if( validIndex == -1 || (!mView->isOverwriteMode() && input == -1) || mDataCursor->isBehind() )
             return;
 
-        startEdit(QString());
+        startEdit( i18nc( "name of the change", "Replace" ) );
         mEditModeByInsert = false; // default, to be overwritten if so
 
         // save old value
