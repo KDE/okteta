@@ -336,8 +336,7 @@ void KByteArrayView::adaptController()
 
     mController = isEffectiveReadOnly ?            (KController*)mNavigator :
                   cursorColumn() == CharColumnId ? (KController*)mCharEditor :
-                                                   // TODO: reenable editor after it got fixed
-                                                   (KController*)mNavigator/*mValueEditor*/;
+                                                   (KController*)mValueEditor;
 }
 
 void KByteArrayView::onByteArrayReadOnlyChange( bool isByteArrayReadOnly )
@@ -364,8 +363,9 @@ void KByteArrayView::setCoding( KCoding coding )
     if( !valueColumn().setValueCoding((KHECore::KCoding)coding) )
         return;
 
+    mValueEditor->adaptToValueCodecChange();
+
     const uint newCodingWidth = valueColumn().valueCodec()->encodingWidth();
-    mValueEditor->mByteBuffer.resize( newCodingWidth ); //hack for now
 
     // no change in the width?
     if( newCodingWidth == oldCodingWidth )
@@ -832,7 +832,7 @@ bool KByteArrayView::selectWord( /*unsigned TODO:change all unneeded signed into
         const KHE::KSection wordSection = WBS.wordSection( index );
         if( wordSection.isValid() )
         {
-            pauseCursor();
+            pauseCursor( true );
 
             mDataRanges->setFirstWordSelection( wordSection );
             mDataCursor->gotoIndex( wordSection.nextBehindEnd() );
@@ -1129,7 +1129,7 @@ void KByteArrayView::setSelection( int start, int end )
         const KHE::KSection selection( start, end );
         if( selection.isValid() )
         {
-            pauseCursor();
+            pauseCursor( true );
 
             mDataRanges->setSelection( selection );
             mDataCursor->gotoCIndex( selection.nextBehindEnd() );
@@ -1308,7 +1308,7 @@ void KByteArrayView::pauseCursor( bool leaveEdit )
     updateCursor( inactiveColumn() );
 
     if( leaveEdit )
-        mValueEditor->mInEditMode = false;
+        mValueEditor->finishEdit();
 }
 
 
@@ -1373,7 +1373,7 @@ void KByteArrayView::drawActiveCursor( QPainter *painter )
         const int index = mDataCursor->index();
 
         if( mBlinkCursorVisible )
-            valueColumn().renderEditedByte( painter, mValueEditor->mEditValue, mValueEditor->mByteBuffer );
+            valueColumn().renderEditedByte( painter, mValueEditor->value(), mValueEditor->valueAsString() );
         else
             valueColumn().renderByte( painter, index );
     }
@@ -1748,7 +1748,7 @@ void KByteArrayView::mouseReleaseEvent( QMouseEvent *mouseEvent )
     // middle mouse button paste?
     else if( mouseEvent->button() == Qt::MidButton && !isReadOnly() )
     {
-        pauseCursor();
+        pauseCursor( true );
 
         placeCursor( releasePoint );
 
@@ -1907,6 +1907,7 @@ void KByteArrayView::dragEnterEvent( QDragEnterEvent *event )
 
     event->accept();
     mInDnD = true;
+    // TODO: store value edit data
     mBeforeDragCursorPos = mDataCursor->index();
     mBeforeDragCursorIsBehind = mDataCursor->isBehind();
     mCursorIsMovedByDrag = false;
@@ -1923,7 +1924,7 @@ void KByteArrayView::dragMoveEvent( QDragMoveEvent *event )
     }
 
     // let text cursor follow mouse
-    pauseCursor( true );
+    pauseCursor( true ); //TODO: just for following skip the value edit, remember we are and get back
     placeCursor( event->pos() );
     mCursorIsMovedByDrag = true;
     unpauseCursor();
@@ -1939,6 +1940,7 @@ void KByteArrayView::dragLeaveEvent( QDragLeaveEvent *event )
     if( mCursorIsMovedByDrag )
     {
         pauseCursor();
+        // TODO: get back to value edit mode if we were in
         mDataCursor->gotoIndex( mBeforeDragCursorPos );
         if( mBeforeDragCursorIsBehind ) mDataCursor->stepBehind();
         unpauseCursor();

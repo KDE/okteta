@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2004 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2004,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -40,10 +40,10 @@ class KValueEditor: public KEditor
 {
   protected:
     enum KValueEditAction
-    { EnterValue, IncValue, DecValue, ValueAppend, ValueEdit, LeaveValue, CancelValue, ValueBackspace };
+    { EnterValue, IncValue, DecValue, ValueAppend, ValueEdit, LeaveValue, ValueBackspace };
 
   public:
-    KValueEditor( ValueByteArrayColumnRenderer *valueColumne, KDataCursor *dataCursor, KByteArrayView *view, KController *parent );
+    KValueEditor( ValueByteArrayColumnRenderer *valueColumn, KDataCursor *dataCursor, KByteArrayView *view, KController *parent );
     virtual ~KValueEditor();
 
   public: // KController API
@@ -52,14 +52,21 @@ class KValueEditor: public KEditor
   public:
     void reset();
 
+    void adaptToValueCodecChange();
+    void finishEdit();
+
   public:
     bool isInEditMode() const;
+    unsigned char value() const;
+    QString valueAsString() const;
 
   protected:
+    void startEdit( const QString &description );
+    void cancelEdit();
     /** executes keyboard Action \a Action. This is normally called by a key event handler. */
     void doValueEditAction( KValueEditAction Action, int Input = -1 );
 
-  public://protected:
+  protected:
     ValueByteArrayColumnRenderer *mValueColumn;
     /** flag whether we are in editing mode */
     bool mInEditMode:1;
@@ -68,13 +75,15 @@ class KValueEditor: public KEditor
     /** */
     unsigned char mEditValue;
     /** stores the old byte value */
-    unsigned char mOldValue;
+    unsigned char mOldValue; // TODO: this or rely on undo?
     /** buffer with the  */
-    QString mByteBuffer;
+    QString mValueString;
 };
 
 inline bool KValueEditor::isInEditMode() const { return mInEditMode; }
 inline void KValueEditor::reset() { mInEditMode = false; }
+inline unsigned char KValueEditor::value() const { return mEditValue; }
+inline QString KValueEditor::valueAsString() const { return mValueString; }
 
 }
 

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2004 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2004,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -29,11 +29,16 @@
 #include "kbytearrayview.h"
 // Okteta core
 #include <kabstractbytearraymodel.h>
+#include <changesdescribable.h>
+#include <valuecodec.h>
+// KDE
+#include <KLocale>
 // Qt
 #include <QtGui/QKeyEvent>
 
 
-namespace KHEUI {
+namespace KHEUI
+{
 
 KValueEditor::KValueEditor( ValueByteArrayColumnRenderer *valueColumn, KDataCursor *dataCursor, KByteArrayView* view, KController *parent )
   : KEditor( dataCursor, view, parent ),
@@ -41,6 +46,55 @@ KValueEditor::KValueEditor( ValueByteArrayColumnRenderer *valueColumn, KDataCurs
   mInEditMode( false ),
   mEditModeByInsert( false )
 {
+}
+
+void KValueEditor::adaptToValueCodecChange()
+{
+    const uint newCodingWidth = mValueColumn->valueCodec()->encodingWidth();
+    mValueString.resize( newCodingWidth );
+}
+
+void KValueEditor::startEdit( const QString &description )
+{
+    Q_ASSERT( !mInEditMode );
+
+    KHECore::KAbstractByteArrayModel *byteArrayModel = mView->mByteArrayModel;
+    KHECore::ChangesDescribable *changesDescribable =
+        qobject_cast<KHECore::ChangesDescribable*>( byteArrayModel );
+
+    if( changesDescribable )
+        changesDescribable->openGroupedChange( description );
+
+    mInEditMode = true;
+}
+
+void KValueEditor::cancelEdit()
+{
+    Q_ASSERT( mInEditMode );
+
+    KHECore::KAbstractByteArrayModel *byteArrayModel = mView->mByteArrayModel;
+    KHECore::ChangesDescribable *changesDescribable =
+        qobject_cast<KHECore::ChangesDescribable*>( byteArrayModel );
+
+    if( changesDescribable )
+        changesDescribable->cancelGroupedChange();
+
+    mInEditMode = false;
+}
+
+void KValueEditor::finishEdit()
+{
+    if( !mInEditMode )
+        return;
+
+    KHECore::KAbstractByteArrayModel *byteArrayModel = mView->mByteArrayModel;
+    KHECore::ChangesDescribable *changesDescribable =
+        qobject_cast<KHECore::ChangesDescribable*>( byteArrayModel );
+
+    if( changesDescribable )
+        changesDescribable->closeGroupedChange();
+
+    mInEditMode = false;
 }
 
 
@@ -72,7 +126,7 @@ bool KValueEditor::handleKeyPress( QKeyEvent *keyEvent )
             break;
         case Qt::Key_Escape:
             if( mInEditMode )
-                doValueEditAction( CancelValue );
+                cancelEdit();
             else
                 keyUsed = false;
             break;
@@ -99,33 +153,37 @@ bool KValueEditor::handleKeyPress( QKeyEvent *keyEvent )
                     doValueEditAction( ValueAppend, input );
                 else
                 {
-                    unsigned char InputValue = 0;
+                    unsigned char inputValue = 0;
                     const KHECore::ValueCodec *valueCodec = mValueColumn->valueCodec();
                     // valid digit?
-                    if( valueCodec->appendDigit(&InputValue,input) )
+                    if( valueCodec->appendDigit(&inputValue,input) )
                     {
                         if( mView->isOverwriteMode() )
-                            doValueEditAction( ValueEdit, InputValue );
+                            doValueEditAction( ValueEdit, inputValue );
                         else
                         {
                             const int index = mDataCursor->realIndex();
-                            if( mView->mByteArrayModel->insert(index,(char*)&InputValue,1) > 0 )
-                            {
-                                mInEditMode = true;
-                                mEditModeByInsert = true;
-                                mOldValue = mEditValue = InputValue;
-                                valueCodec->encode( mByteBuffer, 0, mEditValue );
 
-                                mDataCursor->gotoRealIndex();
+                            startEdit( QString() );
+                            if( mView->mByteArrayModel->insert(index,(char*)&inputValue,1) > 0 )
+                            {
+                                mEditModeByInsert = true;
+                                mOldValue = mEditValue = inputValue;
+                                valueCodec->encode( mValueString, 0, mEditValue );
+
+                                mDataCursor->gotoIndex(index);
                                 mView->ensureCursorVisible();
                                 mView->updateCursors();
+                                emit mView->cursorPositionChanged( mDataCursor->realIndex() );
                             }
+                            else
+                                cancelEdit();
                         }
                     }
                 }
             }
             else
-            keyUsed = false;
+                keyUsed = false;
         }
     }
     else
@@ -145,7 +203,7 @@ void KValueEditor::doValueEditAction( KValueEditAction Action, int input )
         if( validIndex == -1 || (!mView->isOverwriteMode() && input == -1) || mDataCursor->isBehind() )
             return;
 
-        mInEditMode = true;
+        startEdit(QString());
         mEditModeByInsert = false; // default, to be overwritten if so
 
         // save old value
@@ -192,10 +250,6 @@ void KValueEditor::doValueEditAction( KValueEditAction Action, int input )
         stayInEditMode = false;
         moveToNext = mEditModeByInsert;
         break;
-    case CancelValue:
-        newValue = mOldValue;
-        stayInEditMode = false;
-        break;
     }
 
     // change happened?
@@ -203,7 +257,7 @@ void KValueEditor::doValueEditAction( KValueEditAction Action, int input )
     {
         // sync value
         mEditValue = newValue;
-        valueCodec->encode( mByteBuffer, 0, mEditValue );
+        valueCodec->encode( mValueString, 0, mEditValue );
         mView->mByteArrayModel->replace( mDataCursor->index(), 1, (char*)&mEditValue, 1 );
     }
 
@@ -211,11 +265,13 @@ void KValueEditor::doValueEditAction( KValueEditAction Action, int input )
 
     if( !stayInEditMode )
     {
-        mView->pauseCursor();
-        mInEditMode = false;
+        mView->pauseCursor( true );
+//         finishEdit();
+
         if( moveToNext )
             mDataCursor->gotoNextByte();
         mView->unpauseCursor();
+        emit mView->cursorPositionChanged( mDataCursor->realIndex() );
     }
 }
 
