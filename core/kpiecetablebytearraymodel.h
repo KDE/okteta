@@ -95,6 +95,7 @@ class OKTETACORE_EXPORT KPieceTableByteArrayModel : public KAbstractByteArrayMod
 
   public: // ChangesDescribable API
     virtual void openGroupedChange( const QString &description );
+    virtual void cancelGroupedChange();
     virtual void closeGroupedChange( const QString &description );
 
   public:

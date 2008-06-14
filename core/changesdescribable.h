@@ -37,6 +37,7 @@ class ChangesDescribable
 
   public: // set/action
     virtual void openGroupedChange( const QString &description = QString() ) = 0;
+    virtual void cancelGroupedChange() = 0;
     virtual void closeGroupedChange( const QString &description = QString() ) = 0;
 
   public: // get

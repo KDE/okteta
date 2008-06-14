@@ -136,6 +136,11 @@ void KPieceTableByteArrayModel::openGroupedChange( const QString &description )
     d->openGroupedChange( description );
 }
 
+void KPieceTableByteArrayModel::cancelGroupedChange()
+{
+    d->cancelGroupedChange();
+}
+
 void KPieceTableByteArrayModel::closeGroupedChange( const QString &description )
 {
     d->closeGroupedChange( description );
