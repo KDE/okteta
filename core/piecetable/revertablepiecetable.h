@@ -39,6 +39,7 @@ class RevertablePieceTable
   public:
     void init( int size );
 
+  public: // operations return true if it results in a new change and is not merged to the current
     bool insert( int pos, int length, int *storageSize );
     bool remove( const KHE::KSection &removeSection );
     bool remove( int start, int end );
@@ -50,14 +51,35 @@ class RevertablePieceTable
 //     int fill( const char FillChar, unsigned int Pos = 0, int Length = -1 ); TODO: filter change, calculated
 
   public:
-    // 
+    /**
+     * opens a group of changes
+     * @param description sets the description of the group
+     */
     void openGroupedChange( const QString &description ); // TODO: hand over description? user change id?
+    /**
+     * closes the current group and sets the parent group as current if there is one
+     * @param description sets a new description for the group if not empty
+     */
     void closeGroupedChange( const QString &description );
-    // 
+
+  public:
+    /**
+     * closes the current change, so any following operation will not be tried to merge
+     */
     void finishChange();
+    /**
+     * closes the current change, so any following operation will not be tried to merge
+     * currently it also closes any opened groups
+     * @param 
+     * @param changedRanges 
+     * @param changeList
+     */
     bool revertBeforeChange( int changeId,
                              KHE::KSectionList *changedRanges, KHE::ArrayChangeMetricsList *changeList );
-
+    //TODO: hide should be a flag with or just an own function unsetBase();
+    /**
+     * @param hide  if true sets the base to none.
+     */
     void setBeforeCurrentChangeAsBase( bool hide );
 
   public:
@@ -112,11 +134,15 @@ inline bool RevertablePieceTable::swap( int firstStart, int secondStart, int sec
     return swap( firstStart, KHE::KSection::fromWidth(secondStart,secondLength) );
 }
 
-
 inline void RevertablePieceTable::openGroupedChange( const QString &description )
-{ mChangeHistory.openGroupedChange(description); }
+{
+    mChangeHistory.openGroupedChange(description);
+}
+
 inline void RevertablePieceTable::closeGroupedChange( const QString &description )
-{ mChangeHistory.closeGroupedChange(description); }
+{
+    mChangeHistory.closeGroupedChange(description);
+}
 inline void RevertablePieceTable::finishChange()       { mChangeHistory.finishChange(); }
 
 inline bool RevertablePieceTable::revertBeforeChange( int changeId,
