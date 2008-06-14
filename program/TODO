@@ -4,7 +4,7 @@ Unimplemented Feature of KHexEdit:
 + <Action name="paste_into_new_file" />
 + Zugriffsrechte (Größe)
 + Transcoder
-+ Exportieren
++ bitstream (navigating on bit-level)
 
 Nicht so wichtig:
 * Einstellung Anzeige voller Pfad in Titel
@@ -12,10 +12,9 @@ Nicht so wichtig:
 * Einstellung Anzeige Offset Hex/Dez
 * Suchleiste
 * <Action name="paste_into_new_window" />
-* <Action name="copy_as_text" />
 
 Erledigt:
-+ Zugriffsrechte (Verändern)
+- Zugriffsrechte (Verändern)
 - Rückgängig/Wiederherstellen
 - Speichern
 - revert
@@ -25,6 +24,8 @@ Erledigt:
 - Drucken
 - Binärfilter
 - Zeichenkettenextraktion
+- Exportieren
+- copy_as_text
 
 Done before review:
 ------------------------
@@ -59,6 +60,7 @@ Fixed after 0.1 Beta 2:
 For KDE 4.1:
 ----------------------------------
 * entering 00 in value column does not finish the editing
+* clicking in the empty value column area does not place the cursor where expected
 * fix replace problem
 * ask artists for own icon
 * add support for blocking processes like printing, string search or filter
@@ -72,7 +74,7 @@ Later on:
 * session support: full storing and restoring of view/model state
 * port KPart to libkakao
 * add support for more commandline options
-* port bytearrayview to bytearrayrenderer
+* port bytearrayview to bytearrayrenderer (esp. non-line-centric paiting)
 * complete work on input controllers for the bytearray view
 * rename AbstractDocument into AbstractObjectModel
 * add AbstractTool, ToolManager and ToolManagerControl
@@ -81,6 +83,8 @@ Later on:
 * add profiles with loaded tools and their positions (environments)
 * add splitting of views
 * templates
+* + and - operates on whole selections
+* better selection by mouse using the offset column 
 * syntax highlighting
 * support for formated bytearray formats, load/save as well as import/export
 * shellwindow:
