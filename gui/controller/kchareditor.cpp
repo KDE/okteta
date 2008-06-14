@@ -25,6 +25,7 @@
 // lib
 #include "charbytearraycolumnrenderer.h"
 #include "kbytearrayview.h"
+#include "kdatacursor.h"
 // commonlib
 #include <kcharcodec.h>
 // Qt
@@ -55,6 +56,15 @@ bool KCharEditor::handleKeyPress( QKeyEvent *keyEvent )
             if( mCharColumn->charCodec()->encode(data.data(),enteredChar) )
             {
                 mView->insert( data );
+
+                if( mView->isOverwriteMode() )
+                {
+                    mView->pauseCursor();
+                    mView->mDataCursor->gotoNextByte();
+                    mView->unpauseCursor();
+                    emit mView->cursorPositionChanged( mDataCursor->realIndex() );
+                }
+
                 keyUsed = true;
             }
         }
