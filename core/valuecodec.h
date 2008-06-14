@@ -55,23 +55,55 @@ class OKTETACORE_EXPORT ValueCodec
     ValueCodec();
 
   public: // API to be implemented
-    /** */
+    /**
+     * @return number of digits the greatest byte gets decoded into
+     */
     virtual unsigned int encodingWidth() const = 0;
-    /** */
+    /**
+     * @return largest value which could get another digit appended and stay below 256.
+     */
     virtual unsigned char digitsFilledLimit() const = 0;
 
-    /** encodes the byte and writes the result to */
+    /**
+     * encodes the byte using full coding width, prefixing with 0s if needed,
+     * and writes the result to digits
+     * @param digits 
+     * @param pos offset in digits where to write the code to
+     * @param byte data to encode
+     */
     virtual void encode( QString &digits, unsigned int pos, const unsigned char byte ) const = 0;
-    /** */
+    /**
+     * encodes the byte and writes the result to digits, no leading 0s
+     * @param digits
+     * @param pos offset in digits where to write the code to
+     * @param byte data to encode
+     */
     virtual void encodeShort( QString &digits, unsigned int pos, const unsigned char byte ) const = 0;
 
-    /** */
+    /**
+     * encodes the byte and writes the result to digits, no leading 0s
+     * @param digits
+     * @param pos offset in digits where to write the code to
+     * @return true if successfull, false otherwise
+     */
     virtual bool appendDigit( unsigned char *byte, const unsigned char digit ) const = 0;
-    /** */
+    /**
+     * tries to remove the last (least significant) digit from byte
+     * @param byte value to remove the last digit from
+     * @return true if successfull, false otherwise
+     */
     virtual void removeLastDigit( unsigned char *byte ) const = 0;
-    /** */
+    /**
+     * checks if the given digit is used in the encoding
+     * @param digit value to check
+     * @return true if digit is valid, false otherwise
+     */
     virtual bool isValidDigit( const unsigned char digit ) const = 0;
-    /** */
+    /**
+     * turns the digit into a byte with the value of the digit
+     * @param digit digit to turn into the value
+     * @return true if successfull, false otherwise
+     */
     virtual bool turnToValue( unsigned char *digit ) const = 0;
 
 
