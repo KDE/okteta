@@ -28,6 +28,8 @@
 
 class QString;
 
+// TODO: reasons not to name it AbtractObjectModel, but just as it is
+// 
 class AbstractModel : public QObject
 {
     Q_OBJECT
