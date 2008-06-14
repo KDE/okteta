@@ -1610,7 +1610,9 @@ void KByteArrayView::mousePressEvent( QMouseEvent *mouseEvent )
         if( mTrippleClickTimer->isActive()
             && (mouseEvent->globalPos()-mDoubleClickPoint).manhattanLength() < QApplication::startDragDistance() )
         {
-            mDataRanges->setSelectionStart( mDataLayout->indexAtFirstLinePosition(mDoubleClickLine) );
+            const int indexAtFirstDoubleClickLinePosition = mDataLayout->indexAtFirstLinePosition( mDoubleClickLine );
+            mDataRanges->setSelectionStart( indexAtFirstDoubleClickLinePosition );
+            mDataCursor->gotoIndex( indexAtFirstDoubleClickLinePosition );
             mDataCursor->gotoLineEnd();
             mDataRanges->setSelectionEnd( mDataCursor->realIndex() );
             updateChanged();
