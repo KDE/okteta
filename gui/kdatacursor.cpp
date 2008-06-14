@@ -376,11 +376,14 @@ void KDataCursor::adaptToChanges( const KHE::ArrayChangeMetricsList &changeList,
                 oldLength += change.lengthChange();
                 if( oldLength > 0 )
                 {
-                    // step behind removed range if inside 
-                    const int newIndexAfterRemove = ( mIndex >= change.offset()+change.removeLength() ) ?
-                                                    mIndex - change.removeLength() :
-                                                    change.offset();
-                    const int newIndex = newIndexAfterRemove + change.insertLength();
+                    const int newIndex =
+                        // cursor behind the removed section?
+                        ( mIndex >= change.offset()+change.removeLength() ) ? mIndex + change.lengthChange() :
+                        // cursor at substituted section?
+                        ( mIndex < change.offset()+change.insertLength() ) ?  mIndex :
+                        // cursor at unsubstituted section
+                                                                              change.offset() + change.insertLength();
+
                     // if the cursor gets behind, it will never get inside again.
                     if( newIndex >= oldLength )
                     {
