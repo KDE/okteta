@@ -149,12 +149,15 @@ bool KValueEditor::handleKeyPress( QKeyEvent *keyEvent )
                     break;
                 }
 
+                const KHECore::ValueCodec *valueCodec = mValueColumn->valueCodec();
                 if( mInEditMode )
-                    doValueEditAction( ValueAppend, input );
+                {
+                    if( mInsertedDigitsCount < valueCodec->encodingWidth() )
+                        doValueEditAction( ValueAppend, input );
+                }
                 else
                 {
                     unsigned char inputValue = 0;
-                    const KHECore::ValueCodec *valueCodec = mValueColumn->valueCodec();
                     // valid digit?
                     if( valueCodec->appendDigit(&inputValue,input) )
                     {
@@ -169,6 +172,7 @@ bool KValueEditor::handleKeyPress( QKeyEvent *keyEvent )
                             {
                                 mEditModeByInsert = true;
                                 mOldValue = mEditValue = inputValue;
+                                mInsertedDigitsCount = 1;
                                 valueCodec->encode( mValueString, 0, mEditValue );
 
                                 mDataCursor->gotoIndex(index);
@@ -195,6 +199,8 @@ bool KValueEditor::handleKeyPress( QKeyEvent *keyEvent )
 
 void KValueEditor::doValueEditAction( KValueEditAction Action, int input )
 {
+    const KHECore::ValueCodec *valueCodec = mValueColumn->valueCodec();
+
     // we are not yet in edit mode?
     if( !mInEditMode )
     {
@@ -208,9 +214,9 @@ void KValueEditor::doValueEditAction( KValueEditAction Action, int input )
 
         // save old value
         mOldValue = mEditValue = (unsigned char)mView->mByteArrayModel->datum( validIndex );
+        mInsertedDigitsCount = valueCodec->encodingWidth();
     }
 
-    const KHECore::ValueCodec *valueCodec = mValueColumn->valueCodec();
     // 
     unsigned char newValue = mEditValue;
     bool stayInEditMode = true;
@@ -224,27 +230,41 @@ void KValueEditor::doValueEditAction( KValueEditAction Action, int input )
         mEditModeByInsert = true;
         break;
     case ValueBackspace:
-        if( newValue > 0 )
-            valueCodec->removeLastDigit( &newValue );
+        if( mInsertedDigitsCount > 0 )
+        {
+            if( newValue > 0 )
+                valueCodec->removeLastDigit( &newValue );
+            --mInsertedDigitsCount;
+        }
         break;
     case EnterValue:
         mEditValue ^= 255; // force update
         break;
     case IncValue:
         if( newValue < 255 )
+        {
             ++newValue;
+            mInsertedDigitsCount = valueCodec->encodingWidth();
+        }
         break;
     case DecValue:
         if( newValue > 0 )
+        {
             --newValue;
+            mInsertedDigitsCount = valueCodec->encodingWidth();
+        }
         break;
     case ValueAppend:
         if( valueCodec->appendDigit(&newValue,input) )
-            if( mEditModeByInsert && newValue >= valueCodec->digitsFilledLimit() )
+        {
+            ++mInsertedDigitsCount;
+            if( mEditModeByInsert &&
+                (newValue >= valueCodec->digitsFilledLimit() || mInsertedDigitsCount == valueCodec->encodingWidth()) )
             {
                 stayInEditMode = false;
                 moveToNext = true;
             }
+        }
         break;
     case LeaveValue:
         stayInEditMode = false;

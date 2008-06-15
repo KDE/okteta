@@ -63,8 +63,12 @@ class KValueEditor: public KEditor
   protected:
     void startEdit( const QString &description );
     void cancelEdit();
-    /** executes keyboard Action \a Action. This is normally called by a key event handler. */
-    void doValueEditAction( KValueEditAction Action, int Input = -1 );
+    /**
+     * executes keyboard Action \a Action. This is normally called by a key event handler.
+     * @param action action to be done
+     * @param input data to be used for the action
+     */
+    void doValueEditAction( KValueEditAction action, int input = -1 );
 
   protected:
     ValueByteArrayColumnRenderer *mValueColumn;
@@ -76,6 +80,8 @@ class KValueEditor: public KEditor
     unsigned char mEditValue;
     /** stores the old byte value */
     unsigned char mOldValue; // TODO: this or rely on undo?
+    /** */
+    unsigned int mInsertedDigitsCount;
     /** buffer with the  */
     QString mValueString;
 };
