@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Core library, part of the KDE project.
 
-    Copyright 2005 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2005,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -28,199 +28,200 @@
 #include "kcharcodec.h"
 
 
-namespace KHECore {
-
-
-KWordBufferService::KWordBufferService( KAbstractByteArrayModel *B, KCharCodec *C )
- : Buffer( B ), CharCodec( C ) {}
-
-KHE::KSection KWordBufferService::wordSection( unsigned int Index ) const
+namespace KHECore
 {
-  return isWordChar(Index) ?
-           KHE::KSection( indexOfWordStart(Index), indexOfWordEnd(Index) ) :
-           KHE::KSection();
+
+KWordBufferService::KWordBufferService( KAbstractByteArrayModel *byteArrayModel, KCharCodec *charCodec )
+ : mByteArrayModel( byteArrayModel ), mCharCodec( charCodec )
+{}
+
+KHE::KSection KWordBufferService::wordSection( unsigned int index ) const
+{
+    return isWordChar(index) ?
+            KHE::KSection( indexOfWordStart(index), indexOfWordEnd(index) ) :
+            KHE::KSection();
 }
 
 
-bool KWordBufferService::isWordChar( unsigned int Index ) const
+bool KWordBufferService::isWordChar( unsigned int index ) const
 {
-  KChar DecodedChar = CharCodec->decode( Buffer->datum(Index) );
-  return !DecodedChar.isUndefined() && DecodedChar.isLetterOrNumber();
+    const KChar decodedChar = mCharCodec->decode( mByteArrayModel->datum(index) );
+    return !decodedChar.isUndefined() && decodedChar.isLetterOrNumber();
 }
 
 
-int KWordBufferService::indexOfPreviousWordStart( unsigned int Index ) const
+int KWordBufferService::indexOfPreviousWordStart( unsigned int index ) const
 {
-  unsigned int Size = Buffer->size();
-  // already at the start or can the result only be 0?
-  if( Index == 0 || Size < 3 )
+    const unsigned int size = mByteArrayModel->size();
+    // already at the start or can the result only be 0?
+    if( index == 0 || size < 3 )
+        return 0;
+
+    // search in two rounds: first for the next char, than for the next nonchar
+    // after that return the index of the one before
+    bool lookingForFirstWordChar = false;
+    for( ; index>0; --index )
+    {
+        if( !isWordChar(index-1) )
+        {
+            if( !lookingForFirstWordChar )
+                continue;
+            return( index );
+        }
+        else if( !lookingForFirstWordChar )
+            lookingForFirstWordChar = true;
+    }
     return 0;
+}
 
-  // search in two rounds: first for the next char, than for the next nonchar
-  // after that return the index of the one before
-  bool LookingForFirstWordChar = false;
-  for( ; Index>0; --Index )
-  {
-    if( !isWordChar(Index-1) )
+
+int KWordBufferService::indexOfNextWordStart( unsigned int index ) const
+{
+    const unsigned int size = mByteArrayModel->size();
+    bool lookingForFirstWordChar = false;
+    for( ; index<size; ++index )
     {
-      if( !LookingForFirstWordChar )
-        continue;
-      return( Index );
+        if( isWordChar(index) )
+        {
+            if( !lookingForFirstWordChar )
+                continue;
+            return index;
+        }
+        else if( !lookingForFirstWordChar )
+            lookingForFirstWordChar = true;
     }
-    else if( !LookingForFirstWordChar )
-      LookingForFirstWordChar = true;
-  }
-  return 0;
+    // if no more word found, go to the end
+    return size;
 }
 
 
-int KWordBufferService::indexOfNextWordStart( unsigned int Index ) const
+int KWordBufferService::indexOfBeforeNextWordStart( unsigned int index ) const
 {
-  unsigned int Size = Buffer->size();
-  bool LookingForFirstWordChar = false;
-  for( ; Index<Size; ++Index )
-  {
-    if( isWordChar(Index) )
+    const unsigned int size = mByteArrayModel->size();
+    bool lookingForFirstWordChar = false;
+    for( ; index<size; ++index )
     {
-      if( !LookingForFirstWordChar )
-        continue;
-      return Index;
+        if( isWordChar(index) )
+        {
+            if( !lookingForFirstWordChar )
+                continue;
+            return index-1;
+        }
+        else if( !lookingForFirstWordChar )
+            lookingForFirstWordChar = true;
     }
-    else if( !LookingForFirstWordChar )
-      LookingForFirstWordChar = true;
-  }
-  // if no more word found, go to the end
-  return Size;
+    // if no more word found, go to the end
+    return size-1;
 }
 
 
-int KWordBufferService::indexOfBeforeNextWordStart( unsigned int Index ) const
+int KWordBufferService::indexOfWordStart( unsigned int index ) const
 {
-  unsigned int Size = Buffer->size();
-  bool LookingForFirstWordChar = false;
-  for( ; Index<Size; ++Index )
-  {
-    if( isWordChar(Index) )
+    for( ; index > 0; --index )
     {
-      if( !LookingForFirstWordChar )
-        continue;
-      return Index-1;
+        if( !isWordChar(index-1) )
+            return( index );
     }
-    else if( !LookingForFirstWordChar )
-      LookingForFirstWordChar = true;
-  }
-  // if no more word found, go to the end
-  return Size-1;
-}
-
-
-int KWordBufferService::indexOfWordStart( unsigned int Index ) const
-{
-  for( ; Index > 0; --Index )
-  {
-    if( !isWordChar(Index-1) )
-      return( Index );
-  }
-  return 0;
-}
-
-
-int KWordBufferService::indexOfWordEnd( unsigned int Index ) const
-{
-  unsigned int Size = Buffer->size();
-  for( ++Index; Index<Size; ++Index )
-  {
-    if( !isWordChar(Index) )
-      return Index-1;
-  }
-  // word reaches the end
-  return Size-1;
-}
-
-
-int KWordBufferService::indexOfLeftWordSelect( unsigned int Index ) const
-{
-  // word at Index?
-  if( isWordChar(Index) )
-  {
-    // search for word start to the left
-    for( ; Index>0; --Index )
-    {
-      if( !isWordChar(Index-1) )
-        return Index;
-    }
-    // reached start, so return it
     return 0;
-  }
-  else
-  {
-    unsigned int Size = Buffer->size();
-    // search for word start to the right
-    for( ++Index; Index<Size; ++Index )
-    {
-      if( isWordChar(Index) )
-        return Index;
-    }
-    // word reaches the end, so step behind
-    return Size;
-  }
 }
 
 
-int KWordBufferService::indexOfRightWordSelect( unsigned int Index ) const
+int KWordBufferService::indexOfWordEnd( unsigned int index ) const
 {
-  // no word at Index?
-  if( !isWordChar(Index) )
-  {
-    // search for word end to the left
-    for( ; Index>0; --Index )
+    const unsigned int size = mByteArrayModel->size();
+    for( ++index; index<size; ++index )
     {
-      if( isWordChar(Index-1) )
-        return Index;
+        if( !isWordChar(index) )
+            return index-1;
     }
-    // reached start, so return it
-    return 0;
-  }
-  else
-  {
-    unsigned int Size = Buffer->size();
-    for( ++Index; Index<Size; ++Index )
+    // word reaches the end
+    return size-1;
+}
+
+
+int KWordBufferService::indexOfLeftWordSelect( unsigned int index ) const
+{
+    // word at index?
+    if( isWordChar(index) )
     {
-      // search for word end to the right
-      if( !isWordChar(Index) )
-        return Index;
+        // search for word start to the left
+        for( ; index>0; --index )
+        {
+            if( !isWordChar(index-1) )
+                return index;
+        }
+        // reached start, so return it
+        return 0;
     }
-    // word reaches the end, so step behind
-    return Size;
-  }
+    else
+    {
+        const unsigned int size = mByteArrayModel->size();
+        // search for word start to the right
+        for( ++index; index<size; ++index )
+        {
+            if( isWordChar(index) )
+                return index;
+        }
+        // word reaches the end, so step behind
+        return size;
+    }
+}
+
+
+int KWordBufferService::indexOfRightWordSelect( unsigned int index ) const
+{
+    // no word at index?
+    if( !isWordChar(index) )
+    {
+        // search for word end to the left
+        for( ; index>0; --index )
+        {
+            if( isWordChar(index-1) )
+                return index;
+        }
+        // reached start, so return it
+        return 0;
+    }
+    else
+    {
+        const unsigned int size = mByteArrayModel->size();
+        for( ++index; index<size; ++index )
+        {
+            // search for word end to the right
+            if( !isWordChar(index) )
+                return index;
+        }
+        // word reaches the end, so step behind
+        return size;
+    }
 }
 
 /*
-int KWordBufferService::indexOfBehindWordEnd( unsigned int Index ) const
+int KWordBufferService::indexOfBehindWordEnd( unsigned int index ) const
 {
-  // no word at Index?
-  return !::isWordChar(datum(Index)) ? indexOfBehindLeftWordEnd(Index) : indexOfBehindRightWordEnd(Index+1)
+  // no word at index?
+  return !::isWordChar(datum(index)) ? indexOfBehindLeftWordEnd(index) : indexOfBehindRightWordEnd(index+1)
 }
 
 
-int KWordBufferService::indexOfBehindRightWordEnd( unsigned int Index ) const
+int KWordBufferService::indexOfBehindRightWordEnd( unsigned int index ) const
 {
-  for( ; Index<size(); ++Index )
+  for( ; index<size(); ++index )
 {
-    if( !::isWordChar(datum(Index)) )
-      return Index;
+    if( !::isWordChar(datum(index)) )
+      return index;
 }
   // word reaches the end, so step behind
   return size();
 }
 
 
-int KWordBufferService::indexOfBehindLeftWordEnd( unsigned int Index ) const
+int KWordBufferService::indexOfBehindLeftWordEnd( unsigned int index ) const
 {
-  for( --Index; Index>=0; --Index )
+  for( --index; index>=0; --index )
 {
-    if( ::isWordChar(datum(Index)) )
-      return Index+1;
+    if( ::isWordChar(datum(index)) )
+      return index+1;
 }
   // word reaches the end, so step behind
   return 0;
