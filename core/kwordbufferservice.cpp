@@ -170,8 +170,19 @@ int KWordBufferService::indexOfLeftWordSelect( unsigned int index ) const
 
 int KWordBufferService::indexOfRightWordSelect( unsigned int index ) const
 {
+    // TODO: should this check be here or with the caller?
+    // the later would need another function to search the previous word end
+    const unsigned int size = mByteArrayModel->size();
+    bool searchToLeft;
+    if( index >= size )
+    {
+        index = size;
+        searchToLeft = true;
+    }
+    else
+        searchToLeft = !isWordChar(index);
     // no word at index?
-    if( !isWordChar(index) )
+    if(  searchToLeft )
     {
         // search for word end to the left
         for( ; index>0; --index )
@@ -184,7 +195,6 @@ int KWordBufferService::indexOfRightWordSelect( unsigned int index ) const
     }
     else
     {
-        const unsigned int size = mByteArrayModel->size();
         for( ++index; index<size; ++index )
         {
             // search for word end to the right
