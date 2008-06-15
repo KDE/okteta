@@ -1728,6 +1728,9 @@ void KByteArrayView::mouseReleaseEvent( QMouseEvent *mouseEvent )
             mDragStartTimer->stop();
             mDragStartPossible = false;
 
+            placeCursor( mDragStartPoint );
+            ensureCursorVisible();
+
             unpauseCursor();
         }
         // was end of selection operation?
