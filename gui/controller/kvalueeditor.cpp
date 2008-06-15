@@ -72,14 +72,14 @@ void KValueEditor::cancelEdit()
 {
     Q_ASSERT( mInEditMode );
 
+    mInEditMode = false;
+
     KHECore::KAbstractByteArrayModel *byteArrayModel = mView->mByteArrayModel;
     KHECore::ChangesDescribable *changesDescribable =
         qobject_cast<KHECore::ChangesDescribable*>( byteArrayModel );
 
     if( changesDescribable )
         changesDescribable->cancelGroupedChange();
-
-    mInEditMode = false;
 }
 
 void KValueEditor::finishEdit()
@@ -87,14 +87,14 @@ void KValueEditor::finishEdit()
     if( !mInEditMode )
         return;
 
+    mInEditMode = false;
+
     KHECore::KAbstractByteArrayModel *byteArrayModel = mView->mByteArrayModel;
     KHECore::ChangesDescribable *changesDescribable =
         qobject_cast<KHECore::ChangesDescribable*>( byteArrayModel );
 
     if( changesDescribable )
         changesDescribable->closeGroupedChange();
-
-    mInEditMode = false;
 }
 
 
@@ -285,13 +285,15 @@ void KValueEditor::doValueEditAction( KValueEditAction Action, int input )
 
     if( !stayInEditMode )
     {
-        mView->pauseCursor( true );
-//         finishEdit();
+        mView->pauseCursor();
+        finishEdit();
 
         if( moveToNext )
             mDataCursor->gotoNextByte();
+
         mView->unpauseCursor();
-        emit mView->cursorPositionChanged( mDataCursor->realIndex() );
+        if( moveToNext )
+            emit mView->cursorPositionChanged( mDataCursor->realIndex() );
     }
 }
 
