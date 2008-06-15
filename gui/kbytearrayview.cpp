@@ -1626,7 +1626,7 @@ void KByteArrayView::mousePressEvent( QMouseEvent *mouseEvent )
         const QPoint mousePoint = viewportToColumns( mouseEvent->pos() );
 
         // start of a drag perhaps?
-        if( mDataRanges->selectionIncludes(indexByPoint( mousePoint )) )
+        if( mDataRanges->hasSelection() && mDataRanges->selectionIncludes(indexByPoint( mousePoint )) )
         {
             mDragStartPossible = true;
             mDragStartTimer->start( QApplication::startDragTime() );
