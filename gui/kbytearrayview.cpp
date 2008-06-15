@@ -1845,13 +1845,13 @@ void KByteArrayView::handleMouseMove( const QPoint &point ) // handles the move 
         const KHE::KSection firstWordSelection = mDataRanges->firstWordSelection();
         const KHECore::KWordBufferService WBS( mByteArrayModel, mCharCodec );
         // are we before the selection?
-        if( newIndex < firstWordSelection.start() )
+        if( firstWordSelection.startsBehind(newIndex) )
         {
             mDataRanges->ensureWordSelectionForward( false );
             newIndex = WBS.indexOfLeftWordSelect( newIndex );
         }
         // or behind?
-        else if( newIndex > firstWordSelection.end() )
+        else if( firstWordSelection.endsBefore(newIndex) )
         {
             mDataRanges->ensureWordSelectionForward( true );
             newIndex = WBS.indexOfRightWordSelect( newIndex );
