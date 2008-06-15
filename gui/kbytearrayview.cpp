@@ -1631,34 +1631,33 @@ void KByteArrayView::mousePressEvent( QMouseEvent *mouseEvent )
             mDragStartPossible = true;
             mDragStartTimer->start( QApplication::startDragTime() );
             mDragStartPoint = mousePoint;
-
-            unpauseCursor();
-            return;
         }
-
-        placeCursor( mousePoint );
-        ensureCursorVisible();
-
-        const int realIndex = mDataCursor->realIndex();
-        if( mDataRanges->selectionStarted() )
+        else
         {
-            if( mouseEvent->modifiers() & Qt::SHIFT )
-                mDataRanges->setSelectionEnd( realIndex );
-            else
+            placeCursor( mousePoint );
+            ensureCursorVisible();
+
+            const int realIndex = mDataCursor->realIndex();
+            if( mDataRanges->selectionStarted() )
             {
-                mDataRanges->removeSelection();
-                mDataRanges->setSelectionStart( realIndex );
+                if( mouseEvent->modifiers() & Qt::SHIFT )
+                    mDataRanges->setSelectionEnd( realIndex );
+                else
+                {
+                    mDataRanges->removeSelection();
+                    mDataRanges->setSelectionStart( realIndex );
+                }
             }
-        }
-        else // start of a new selection possible
-        {
-            mDataRanges->setSelectionStart( realIndex );
+            else // start of a new selection possible
+            {
+                mDataRanges->setSelectionStart( realIndex );
 
-            if( !isReadOnly() && (mouseEvent->modifiers()&Qt::SHIFT) ) // TODO: why only for readwrite?
-                mDataRanges->setSelectionEnd( realIndex );
-        }
+                if( !isReadOnly() && (mouseEvent->modifiers()&Qt::SHIFT) ) // TODO: why only for readwrite?
+                    mDataRanges->setSelectionEnd( realIndex );
+            }
 
-        mDataRanges->removeFurtherSelections();
+            mDataRanges->removeFurtherSelections();
+        }
     }
     else if( mouseEvent->button() == Qt::MidButton )
         mDataRanges->removeSelection();
