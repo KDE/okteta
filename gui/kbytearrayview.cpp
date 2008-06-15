@@ -832,7 +832,8 @@ bool KByteArrayView::selectWord( /*unsigned TODO:change all unneeded signed into
         const KHE::KSection wordSection = WBS.wordSection( index );
         if( wordSection.isValid() )
         {
-            pauseCursor( true );
+            pauseCursor();
+            mValueEditor->finishEdit();
 
             mDataRanges->setFirstWordSelection( wordSection );
             mDataCursor->gotoIndex( wordSection.nextBehindEnd() );
@@ -849,7 +850,8 @@ bool KByteArrayView::selectWord( /*unsigned TODO:change all unneeded signed into
 
 void KByteArrayView::selectAll( bool select )
 {
-    pauseCursor( true );
+    pauseCursor();
+    mValueEditor->finishEdit();
 
     if( select )
     {
@@ -1098,7 +1100,8 @@ void KByteArrayView::clipboardChanged()
 
 void KByteArrayView::setCursorPosition( int index, bool behind )
 {
-    pauseCursor( true );
+    pauseCursor();
+    mValueEditor->finishEdit();
 
     if( behind ) --index;
     mDataCursor->gotoCIndex( index );
@@ -1129,7 +1132,8 @@ void KByteArrayView::setSelection( int start, int end )
         const KHE::KSection selection( start, end );
         if( selection.isValid() )
         {
-            pauseCursor( true );
+            pauseCursor();
+            mValueEditor->finishEdit();
 
             mDataRanges->setSelection( selection );
             mDataCursor->gotoCIndex( selection.nextBehindEnd() );
@@ -1176,7 +1180,8 @@ void KByteArrayView::setCursorColumn( ByteArrayColumnId columnId )
         || (columnId == CharColumnId && !charColumn().isVisible()) )
         return;
 
-    pauseCursor( true );
+    pauseCursor();
+    mValueEditor->finishEdit();
 
     if( columnId == ValueColumnId )
     {
@@ -1299,16 +1304,13 @@ void KByteArrayView::stopCursor()
 }
 
 
-void KByteArrayView::pauseCursor( bool leaveEdit )
+void KByteArrayView::pauseCursor()
 {
     mCursorPaused = true;
 
     mBlinkCursorVisible = false;
     updateCursor( activeColumn() );
     updateCursor( inactiveColumn() );
-
-    if( leaveEdit )
-        mValueEditor->finishEdit();
 }
 
 
@@ -1599,7 +1601,8 @@ void KByteArrayView::ensureVisible( const AbstractByteArrayColumnRenderer &colum
 
 void KByteArrayView::mousePressEvent( QMouseEvent *mouseEvent )
 {
-    pauseCursor( true );
+    pauseCursor();
+    mValueEditor->finishEdit();
 
     // care about a left button press?
     if( mouseEvent->button() == Qt::LeftButton )
@@ -1753,7 +1756,8 @@ void KByteArrayView::mouseReleaseEvent( QMouseEvent *mouseEvent )
     // middle mouse button paste?
     else if( mouseEvent->button() == Qt::MidButton && !isReadOnly() )
     {
-        pauseCursor( true );
+        pauseCursor();
+        mValueEditor->finishEdit();
 
         placeCursor( releasePoint );
 
@@ -1929,7 +1933,8 @@ void KByteArrayView::dragMoveEvent( QDragMoveEvent *event )
     }
 
     // let text cursor follow mouse
-    pauseCursor( true ); //TODO: just for following skip the value edit, remember we are and get back
+    pauseCursor(); //TODO: just for following skip the value edit, remember we are and get back
+    mValueEditor->finishEdit();
     placeCursor( event->pos() );
     mCursorIsMovedByDrag = true;
     unpauseCursor();

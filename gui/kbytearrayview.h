@@ -355,7 +355,7 @@ class OKTETAGUI_EXPORT KByteArrayView : public ColumnsView
     /** we lost focus, stop the timer */
     virtual void stopCursor();
     /** simply pauses any blinking, i.e. ignores any calls to blinkCursor */
-    virtual void pauseCursor( bool LeaveEdit = false );
+    virtual void pauseCursor();
     /** undoes pauseCursor */
     virtual void unpauseCursor();
 

@@ -26,6 +26,7 @@
 #include "kdataranges.h"
 #include "kdatacursor.h"
 #include "kbytearrayview.h"
+#include "kvalueeditor.h"
 // lib
 #include <kwordbufferservice.h>
 // Qt
@@ -87,7 +88,8 @@ bool KNavigator::handleKeyPress( QKeyEvent *keyEvent )
 
 void KNavigator::moveCursor( KMoveAction action, bool select )
 {
-    mView->pauseCursor( true );
+    mView->pauseCursor();
+    mView->mValueEditor->finishEdit();
 
     KDataCursor *dataCursor = mView->mDataCursor;
     KDataRanges *dataRanges = mView->mDataRanges;
