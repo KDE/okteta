@@ -84,13 +84,13 @@ class OKTETACORE_EXPORT ValueCodec
      * encodes the byte and writes the result to digits, no leading 0s
      * @param digits
      * @param pos offset in digits where to write the code to
-     * @return true if successfull, false otherwise
+     * @return true if successful, false otherwise
      */
     virtual bool appendDigit( unsigned char *byte, const unsigned char digit ) const = 0;
     /**
      * tries to remove the last (least significant) digit from byte
      * @param byte value to remove the last digit from
-     * @return true if successfull, false otherwise
+     * @return true if successful, false otherwise
      */
     virtual void removeLastDigit( unsigned char *byte ) const = 0;
     /**
@@ -102,7 +102,7 @@ class OKTETACORE_EXPORT ValueCodec
     /**
      * turns the digit into a byte with the value of the digit
      * @param digit digit to turn into the value
-     * @return true if successfull, false otherwise
+     * @return true if successful, false otherwise
      */
     virtual bool turnToValue( unsigned char *digit ) const = 0;
 
