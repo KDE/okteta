@@ -29,6 +29,9 @@
 #include <koffsetformat.h>
 
 
+namespace KHEPrint
+{
+
 /**
   *@author Friedrich W. H. Kossebau
   */
@@ -101,12 +104,14 @@ class OffsetColumnRenderer : public AbstractColumnRenderer
 };
 
 
-inline int ::OffsetColumnRenderer::firstLineOffset()                 const { return mFirstLineOffset; }
-inline int ::OffsetColumnRenderer::delta()                           const { return mDeltaPerLine; }
-inline int ::OffsetColumnRenderer::codingWidth()                     const { return mCodingWidth; }
-inline KOffsetFormat::print ::OffsetColumnRenderer::printFunction()  const { return mPrintFunction; }
+inline int OffsetColumnRenderer::firstLineOffset()                 const { return mFirstLineOffset; }
+inline int OffsetColumnRenderer::delta()                           const { return mDeltaPerLine; }
+inline int OffsetColumnRenderer::codingWidth()                     const { return mCodingWidth; }
+inline KOffsetFormat::print OffsetColumnRenderer::printFunction()  const { return mPrintFunction; }
 
-inline void ::OffsetColumnRenderer::setFirstLineOffset( int firstLineOffset ) { mFirstLineOffset = firstLineOffset; }
-inline void ::OffsetColumnRenderer::setDelta( int delta )                     { mDeltaPerLine = delta; }
+inline void OffsetColumnRenderer::setFirstLineOffset( int firstLineOffset ) { mFirstLineOffset = firstLineOffset; }
+inline void OffsetColumnRenderer::setDelta( int delta )                     { mDeltaPerLine = delta; }
+
+}
 
 #endif

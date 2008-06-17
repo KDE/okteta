@@ -28,6 +28,9 @@
 #include <QtGui/QPainter>
 
 
+namespace KHEPrint
+{
+
 static const bool     DefaultShowsNonprinting = false;
 static const char     DefaultSubstituteChar =   (char)'.';
 static const char     CharColumnDefaultUndefinedChar =    (char)'?';
@@ -60,3 +63,5 @@ void CharColumnRenderer::drawByte( QPainter *painter, char /*byte*/, KHECore::KC
 
 
 CharColumnRenderer::~CharColumnRenderer() {}
+
+}

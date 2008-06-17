@@ -31,8 +31,10 @@
 class QPainter;
 using namespace KHEUI;
 
-
 class AbstractColumnFrameRenderer;
+
+namespace KHEPrint
+{
 
 class AbstractColumnRendererPrivate;
 
@@ -109,5 +111,7 @@ class AbstractColumnRenderer
   private:
      AbstractColumnRendererPrivate * const d;
 };
+
+}
 
 #endif

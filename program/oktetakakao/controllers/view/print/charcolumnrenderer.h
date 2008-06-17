@@ -32,6 +32,9 @@
 class QColor;
 
 
+namespace KHEPrint
+{
+
 /** buffer column that interprets the bytes as chars
   *
   *@author Friedrich W. H. Kossebau
@@ -113,6 +116,8 @@ inline bool CharColumnRenderer::setShowsNonprinting( bool showsNonprinting )
         return false;
     mShowsNonprinting = showsNonprinting;
     return true;
+}
+
 }
 
 #endif

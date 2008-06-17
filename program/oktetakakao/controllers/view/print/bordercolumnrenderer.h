@@ -27,6 +27,9 @@
 // lib
 #include "abstractcolumnrenderer.h"
 
+namespace KHEPrint
+{
+
 /** column that does nothing but draw a vertical line in the middle of the column
   *
   *@author Friedrich W. H. Kossebau
@@ -53,5 +56,7 @@ class BorderColumnRenderer : public AbstractColumnRenderer
     /** true if the line is also drawn in empty space */
     bool mInEmpty;
 };
+
+}
 
 #endif

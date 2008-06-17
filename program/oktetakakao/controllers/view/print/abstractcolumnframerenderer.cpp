@@ -40,7 +40,7 @@ class AbstractColumnFrameRendererPrivate
     void updateWidths();
   public: // calculated
     /** collection of all the columns. All columns will be autodeleted. */
-    QList<AbstractColumnRenderer*> mColumns;
+    QList<KHEPrint::AbstractColumnRenderer*> mColumns;
     /** the number of lines which the columnRenderer view has */
     int mNoOfLines;
     /** the height of each line in pixels */
@@ -59,10 +59,10 @@ AbstractColumnFrameRendererPrivate::AbstractColumnFrameRendererPrivate()
 void AbstractColumnFrameRendererPrivate::updateWidths()
 {
     mColumnsWidth = 0;
-    QListIterator<AbstractColumnRenderer*> it( mColumns );
+    QListIterator<KHEPrint::AbstractColumnRenderer*> it( mColumns );
     while( it.hasNext() )
     {
-        AbstractColumnRenderer *columnRenderer = it.next();
+        KHEPrint::AbstractColumnRenderer *columnRenderer = it.next();
         columnRenderer->setX( mColumnsWidth );
         mColumnsWidth += columnRenderer->visibleWidth();
     }
@@ -103,7 +103,7 @@ void AbstractColumnFrameRenderer::setLineHeight( KPixelY newLineHeight )
         newLineHeight = 1;
     d->mLineHeight = newLineHeight;
 
-    QListIterator<AbstractColumnRenderer*> it( d->mColumns );
+    QListIterator<KHEPrint::AbstractColumnRenderer*> it( d->mColumns );
     while( it.hasNext() )
         it.next()->setLineHeight( d->mLineHeight );
 }
@@ -130,7 +130,7 @@ int AbstractColumnFrameRenderer::noOfLinesPerFrame() const
 }
 
 
-void AbstractColumnFrameRenderer::addColumn( AbstractColumnRenderer *columnRenderer )
+void AbstractColumnFrameRenderer::addColumn( KHEPrint::AbstractColumnRenderer *columnRenderer )
 {
     d->mColumns.append( columnRenderer );
 
@@ -138,7 +138,7 @@ void AbstractColumnFrameRenderer::addColumn( AbstractColumnRenderer *columnRende
 }
 
 
-void AbstractColumnFrameRenderer::removeColumn( AbstractColumnRenderer *columnRenderer )
+void AbstractColumnFrameRenderer::removeColumn( KHEPrint::AbstractColumnRenderer *columnRenderer )
 {
     const int columnPos = d->mColumns.indexOf( columnRenderer );
     if( columnPos != -1 )
@@ -158,11 +158,11 @@ void AbstractColumnFrameRenderer::renderFrame( QPainter *painter, int frameIndex
     if( renderedXs.startsBefore(d->mColumnsWidth) )
     {
         // collect affected columns
-        QList<AbstractColumnRenderer*> columnRenderers;
-        QListIterator<AbstractColumnRenderer*> it( d->mColumns );
+        QList<KHEPrint::AbstractColumnRenderer*> columnRenderers;
+        QListIterator<KHEPrint::AbstractColumnRenderer*> it( d->mColumns );
         while( it.hasNext() )
         {
-            AbstractColumnRenderer *columnRenderer = it.next();
+            KHEPrint::AbstractColumnRenderer *columnRenderer = it.next();
             if( columnRenderer->isVisible() && columnRenderer->overlaps(renderedXs) )
                 columnRenderers.append( columnRenderer );
         }
@@ -178,15 +178,15 @@ void AbstractColumnFrameRenderer::renderFrame( QPainter *painter, int frameIndex
         if( renderedLines.isValid() )
         {
             // paint full columns
-            QListIterator<AbstractColumnRenderer*> fit( columnRenderers ); // TODO: reuse later, see some lines below
+            QListIterator<KHEPrint::AbstractColumnRenderer*> fit( columnRenderers ); // TODO: reuse later, see some lines below
             while( fit.hasNext() )
                 fit.next()->renderColumn( painter, renderedXs, renderedYs );
 
             KPixelY cy = 0;
             // starting painting with the first line
             int line = renderedLines.start();
-            QListIterator<AbstractColumnRenderer*> it( columnRenderers );
-            AbstractColumnRenderer *columnRenderer = it.next();
+            QListIterator<KHEPrint::AbstractColumnRenderer*> it( columnRenderers );
+            KHEPrint::AbstractColumnRenderer *columnRenderer = it.next();
             painter->translate( columnRenderer->x(), cy );
 
             while( true )
@@ -207,7 +207,7 @@ void AbstractColumnFrameRenderer::renderFrame( QPainter *painter, int frameIndex
                 if( line > renderedLines.end() )
                     break;
 
-                QListIterator<AbstractColumnRenderer*> it( columnRenderers );
+                QListIterator<KHEPrint::AbstractColumnRenderer*> it( columnRenderers );
                 columnRenderer = it.next();
                 painter->translate( columnRenderer->x(), d->mLineHeight );
 
@@ -230,7 +230,7 @@ void AbstractColumnFrameRenderer::renderFrame( QPainter *painter, int frameIndex
        renderedYs.set( renderedYs.nextBehindEnd(), height()-1 );
         if( renderedYs.isValid() )
         {
-            QListIterator<AbstractColumnRenderer*> it( columnRenderers );
+            QListIterator<KHEPrint::AbstractColumnRenderer*> it( columnRenderers );
             while( it.hasNext() )
                 it.next()->renderEmptyColumn( painter, renderedXs, renderedYs );
         }

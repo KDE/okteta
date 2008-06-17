@@ -32,6 +32,9 @@
 #include <QtGui/QPainter>
 
 
+namespace KHEPrint
+{
+
 static const KHECore::KCoding DefaultCoding =    KHECore::HexadecimalCoding;
 static const KHECore::KCoding NotDefaultCoding = KHECore::DecimalCoding;
 
@@ -124,4 +127,6 @@ void ValueColumnRenderer::drawCode( QPainter *painter, const QString &code, cons
 ValueColumnRenderer::~ValueColumnRenderer()
 {
     delete mByteCodec;
+}
+
 }

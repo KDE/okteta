@@ -33,6 +33,9 @@
 #include <QtGui/QPainter>
 
 
+namespace KHEPrint
+{
+
 static const unsigned int StartsBefore = 1;
 static const unsigned int EndsLater = 2;
 static const char EmptyByte = ' ';
@@ -462,4 +465,6 @@ ByteColumnRenderer::~ByteColumnRenderer()
 {
     delete [] mPosX;
     delete [] mPosRightX;
+}
+
 }

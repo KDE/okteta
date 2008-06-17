@@ -29,6 +29,9 @@
 #include <valuecodec.h>
 
 
+namespace KHEPrint
+{
+
 /** buffer column which displays the numerical values of the bytes
   *
   *@author Friedrich W. H. Kossebau
@@ -86,5 +89,7 @@ class ValueColumnRenderer : public ByteColumnRenderer
 inline KPixelX ValueColumnRenderer::binaryGapWidth()        const { return mBinaryGapWidth; }
 inline KHECore::KCoding ValueColumnRenderer::coding()                const { return mCoding; }
 inline const KHECore::ValueCodec *ValueColumnRenderer::byteCodec()   const { return mByteCodec; }
+
+}
 
 #endif

@@ -35,7 +35,10 @@
 
 using namespace KHEUI;
 
+namespace KHEPrint {
 class AbstractColumnRenderer;
+}
+
 class AbstractColumnFrameRendererPrivate;
 
 /** class to render columns with the same lineheight for all lines
@@ -46,7 +49,7 @@ class AbstractColumnFrameRendererPrivate;
 
 class AbstractColumnFrameRenderer : public AbstractFrameRenderer
 {
-   friend class AbstractColumnRenderer;
+   friend class KHEPrint::AbstractColumnRenderer;
 
   public:
     AbstractColumnFrameRenderer();
@@ -83,8 +86,8 @@ class AbstractColumnFrameRenderer : public AbstractFrameRenderer
 
   protected:
     /** called by AbstractColumnRenderer */
-    void addColumn( AbstractColumnRenderer *column );
-    void removeColumn( AbstractColumnRenderer *column );
+    void addColumn( KHEPrint::AbstractColumnRenderer *column );
+    void removeColumn( KHEPrint::AbstractColumnRenderer *column );
 
   protected: //
     /** sets height of all lines and propagates this information to all columns

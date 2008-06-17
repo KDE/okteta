@@ -67,15 +67,15 @@ ByteArrayFrameRenderer::ByteArrayFrameRenderer()
     const KHE::KSection emptySection;
     // creating the columns in the needed order
     mOffsetColumnRenderer =
-        new ::OffsetColumnRenderer( this, DefaultFirstLineOffset, DefaultNoOfBytesPerLine, KOffsetFormat::Hexadecimal );
+        new KHEPrint::OffsetColumnRenderer( this, DefaultFirstLineOffset, DefaultNoOfBytesPerLine, KOffsetFormat::Hexadecimal );
     mFirstBorderColumnRenderer =
-        new ::BorderColumnRenderer( this, true );//false );
+        new KHEPrint::BorderColumnRenderer( this, true );//false );
     mValueColumnRenderer =
-        new ValueColumnRenderer( this, mByteArrayModel, emptySection, mLayout );
+        new KHEPrint::ValueColumnRenderer( this, mByteArrayModel, emptySection, mLayout );
     mSecondBorderColumnRenderer =
-        new ::BorderColumnRenderer( this, true );
+        new KHEPrint::BorderColumnRenderer( this, true );
     mCharColumnRenderer =
-        new CharColumnRenderer( this, mByteArrayModel, emptySection, mLayout );
+        new KHEPrint::CharColumnRenderer( this, mByteArrayModel, emptySection, mLayout );
 
     // set encoding
     mCodec = KHECore::KCharCodec::createCodec( (KHECore::KEncoding)DefaultEncoding );

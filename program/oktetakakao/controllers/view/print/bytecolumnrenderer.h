@@ -47,6 +47,10 @@ class ByteArrayTableLayout;
 namespace KHECore {
 class KCharCodec;
 }
+
+namespace KHEPrint
+{
+
 const int NoByteFound = -1;
 
 /** base class of all buffer column displayers
@@ -232,5 +236,7 @@ inline const KHEUI::ByteArrayTableLayout *ByteColumnRenderer::layout() const { r
 
 inline void ByteColumnRenderer::setCodec( KHECore::KCharCodec *C ) { mCodec = C; }
 inline KHECore::KCharCodec* ByteColumnRenderer::codec() const { return mCodec; }
+
+}
 
 #endif

@@ -31,11 +31,12 @@
 #include <QtGui/QFont>
 
 
+namespace KHEPrint {
 class OffsetColumnRenderer;
 class BorderColumnRenderer;
 class ValueColumnRenderer;
 class CharColumnRenderer;
-
+}
 namespace KHEUI {
 class ByteArrayTableLayout;
 }
@@ -143,11 +144,11 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
     KHEUI::ByteArrayTableLayout *mLayout;
 
   protected:
-    ::OffsetColumnRenderer *mOffsetColumnRenderer;
-    ::BorderColumnRenderer *mFirstBorderColumnRenderer;
-    ValueColumnRenderer  *mValueColumnRenderer;
-    ::BorderColumnRenderer *mSecondBorderColumnRenderer;
-    CharColumnRenderer   *mCharColumnRenderer;
+    KHEPrint::OffsetColumnRenderer *mOffsetColumnRenderer;
+    KHEPrint::BorderColumnRenderer *mFirstBorderColumnRenderer;
+    KHEPrint::ValueColumnRenderer  *mValueColumnRenderer;
+    KHEPrint::BorderColumnRenderer *mSecondBorderColumnRenderer;
+    KHEPrint::CharColumnRenderer   *mCharColumnRenderer;
 
   protected:
     /** */

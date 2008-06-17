@@ -27,6 +27,8 @@
 // Qt
 #include <QtGui/QPainter>
 
+namespace KHEPrint
+{
 
 class AbstractColumnRendererPrivate
 {
@@ -134,3 +136,6 @@ AbstractColumnRenderer::~AbstractColumnRenderer()
 {
     delete d;
 }
+
+}
+
