@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -62,6 +62,7 @@ bool FramesToPaperPrinter::print( QPrinter *printer, int firstPageIndex, int las
             frameRenderer->renderFrame( &painter, pageIndex );
             painter.translate( -x, -y );
         }
+        emit printedPage( pageIndex );
         if( pageIndex < lastPageIndex )
         {
             printer->newPage();

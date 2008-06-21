@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -24,14 +24,17 @@
 #define FRAMESTOPAPERPRINTER_H
 
 // Qt
+#include <QtCore/QObject>
 #include <QtCore/QList>
 #include <QtCore/QRect>
 
 class QPrinter;
 class AbstractFrameRenderer;
 
-class FramesToPaperPrinter
+class FramesToPaperPrinter : public QObject
 {
+  Q_OBJECT
+
   public:
     FramesToPaperPrinter();
     ~FramesToPaperPrinter();
@@ -46,6 +49,9 @@ class FramesToPaperPrinter
 
   public:
     QRect pageRect() const;
+
+  Q_SIGNALS:
+    void printedPage( int pageIndex );
 
   protected:
     QList<AbstractFrameRenderer*> mFrameRendererList;
