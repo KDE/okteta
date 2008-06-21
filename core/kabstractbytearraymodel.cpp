@@ -22,9 +22,6 @@
 
 #include "kabstractbytearraymodel.h"
 
-// C
-#include <ctype.h>
-
 
 namespace KHECore
 {
