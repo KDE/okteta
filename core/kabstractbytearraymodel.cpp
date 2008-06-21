@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Core library, part of the KDE project.
 
-    Copyright 2003 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -26,7 +26,10 @@
 #include <ctype.h>
 
 
-namespace KHECore {
+namespace KHECore
+{
+
+static const int SearchedByteCountSignalLimit = 10000;
 
 KAbstractByteArrayModel::KAbstractByteArrayModel() {}
 
@@ -67,13 +70,22 @@ int KAbstractByteArrayModel::indexOf( const char *pattern, int patternLength, in
     int result = -1;
 
     const int lastFrom = size() - patternLength;
+    int searchedBytesCount = 0;
 
     for( int i=fromOffset; i<=lastFrom ; ++i )
     {
+        ++searchedBytesCount;
         int c = 0;
         for( ; c<patternLength; ++c )
             if( pattern[c] != datum(i+c) )
                 break;
+
+        if( searchedBytesCount >= SearchedByteCountSignalLimit )
+        {
+            searchedBytesCount = 0;
+            emit searchedBytes( i-fromOffset+1 );
+        }
+
         if( c == patternLength )
         {
             result = i;
@@ -89,6 +101,7 @@ int KAbstractByteArrayModel::lastIndexOf( const char *pattern, int patternLength
     int result = -1;
 
     const int lastFrom = size() - patternLength;
+    int searchedBytesCount = 0;
 
     if( fromOffset < 0 )
         fromOffset = lastFrom + 1 + fromOffset;
@@ -97,10 +110,18 @@ int KAbstractByteArrayModel::lastIndexOf( const char *pattern, int patternLength
 
     for( int i=fromOffset; i>=0 ; --i )
     {
+        ++searchedBytesCount;
         int c = 0;
         for( ; c<patternLength; ++c )
             if( pattern[c] != datum(i+c) )
                 break;
+
+        if( searchedBytesCount >= SearchedByteCountSignalLimit )
+        {
+            searchedBytesCount = 0;
+            emit searchedBytes( i-fromOffset+1 );
+        }
+
         if( c == patternLength )
         {
             result = i;

@@ -260,6 +260,8 @@ class OKTETACORE_EXPORT KAbstractByteArrayModel : public QObject
 
     void readOnlyChanged( bool isReadOnly );
     void modificationChanged( bool isModified );
+
+    void searchedBytes( int bytes ) const;
 };
 
 inline int KAbstractByteArrayModel::insert( int Pos, const QByteArray &Source )
