@@ -107,6 +107,7 @@ set( LIBFRAMESPRINT_SRCS
 set( PRINTCONTROLLER_SRCS
   view/print/printcontroller.cpp
   view/print/printtool.cpp
+  view/print/printjob.cpp
   view/print/abstractcolumnrenderer.cpp
   view/print/abstractcolumnframerenderer.cpp
   view/print/offsetcolumnrenderer.cpp
