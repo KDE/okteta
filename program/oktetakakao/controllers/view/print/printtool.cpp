@@ -23,6 +23,7 @@
 #include "printtool.h"
 
 // controller
+#include "printjob.h"
 #include "framestopaperprinter.h"
 #include "headerfooterframerenderer.h"
 #include "bytearrayframerenderer.h"
@@ -40,6 +41,7 @@
 #include <kdeprintdialog.h>
 #include <kdeversion.h>
 // Qt
+#include <QtGui/QApplication>
 #include <QtGui/QPrintDialog>
 #include <QtGui/QPrinter>
 #include <QtGui/QFont>
@@ -155,7 +157,12 @@ void PrintTool::print()
         info.setNoOfPages( byteArrayFrameRenderer->framesCount() );
         info.setUrl( mDocument->title() ); //TODO: get the url from synchronizer!!!
 
-        const bool success = framesPrinter.print( &printer, 0, byteArrayFrameRenderer->framesCount()-1 );
+        QApplication::setOverrideCursor( Qt::WaitCursor );
+
+        PrintJob *printJob = new PrintJob( &framesPrinter, 0, byteArrayFrameRenderer->framesCount()-1, &printer );
+        const bool success = printJob->exec();
+
+        QApplication::restoreOverrideCursor();
 
         if( !success )
         {
