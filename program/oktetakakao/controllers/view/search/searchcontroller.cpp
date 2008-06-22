@@ -24,6 +24,7 @@
 
 // controller
 #include "ksearchdialog.h"
+#include "searchjob.h"
 // lib
 #include <kbytearraydocument.h>
 // Kakao gui
@@ -40,6 +41,8 @@
 #include <KActionCollection>
 #include <KStandardAction>
 #include <KMessageBox>
+// Qt
+#include <QtGui/QApplication>
 
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
@@ -157,10 +160,14 @@ void SearchController::searchData( KFindDirection Direction, int StartIndex )
 
     while( true )
     {
-        // TODO: support ignorecase
-        int Pos = ( Direction == FindForward ) ?
-            ByteArray->indexOf( SearchData, StartIndex ) :
-            ByteArray->lastIndexOf( SearchData, StartIndex-SearchData.size()+1 );
+
+        QApplication::setOverrideCursor( Qt::WaitCursor );
+
+        SearchJob *searchJob = new SearchJob( ByteArray, SearchData, StartIndex, (Direction==FindForward) );
+        const int Pos = searchJob->exec();
+
+        QApplication::restoreOverrideCursor();
+
         if( Pos != -1 )
         {
             PreviousFound = true;
