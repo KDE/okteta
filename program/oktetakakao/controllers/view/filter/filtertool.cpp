@@ -22,6 +22,8 @@
 
 #include "filtertool.h"
 
+// tool
+#include "filterjob.h"
 // filter
 #include <abstractbytearrayfilter.h>
 // lib
@@ -34,6 +36,7 @@
 #include <kabstractbytearraymodel.h>
 #include <changesdescribable.h>
 // Qt
+#include <QtGui/QApplication>
 #include <QtCore/QByteArray>
 
 
@@ -99,7 +102,12 @@ void FilterTool::filter( int filterId ) const
         QByteArray filterResult;
         filterResult.resize( filteredSection.width() );
 
-        const bool success = byteArrayFilter->filter( filterResult.data(), mByteArrayModel, filteredSection );
+        QApplication::setOverrideCursor( Qt::WaitCursor );
+
+        FilterJob *filterJob = new FilterJob( byteArrayFilter, filterResult.data(), mByteArrayModel, filteredSection );
+        const bool success = filterJob->exec();
+
+        QApplication::restoreOverrideCursor();
 
         if( success )
         {
