@@ -23,6 +23,9 @@
 #ifndef ABSTRACTBYTEARRAYFILTER_H
 #define ABSTRACTBYTEARRAYFILTER_H
 
+// Qt
+#include <QtCore/QObject>
+
 class AbstractByteArrayFilterParameterSet;
 namespace KHECore {
 class KAbstractByteArrayModel;
@@ -33,8 +36,12 @@ class KSection;
 class QString;
 
 
-class AbstractByteArrayFilter
+class AbstractByteArrayFilter : public QObject
 {
+    Q_OBJECT
+
+  protected:
+    static const int FilteredByteCountSignalLimit = 10000;
   protected:
     explicit AbstractByteArrayFilter( const QString &name );
   public:
@@ -47,6 +54,9 @@ class AbstractByteArrayFilter
 
   public:
     QString name() const;
+
+  Q_SIGNALS: // TODO: add check for signal to tests
+    void filteredBytes( int bytes ) const;
 
   protected:
     class Private;

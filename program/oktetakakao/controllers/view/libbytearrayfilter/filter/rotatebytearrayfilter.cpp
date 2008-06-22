@@ -49,6 +49,7 @@ bool RotateByteArrayFilter::filter( char *result,
     const int shiftByteWidth = groupShiftBitWidth / RotateBitsPerByte;
     const int shiftBitWidth = groupShiftBitWidth - shiftByteWidth * RotateBitsPerByte;
     const int otherShiftBitWidth = RotateBitsPerByte - shiftBitWidth;
+    int filteredBytesCount = 0;
 
     const bool toRight = ( mParameterSet.moveBitWidth() > 0 );
     if( toRight )
@@ -81,6 +82,13 @@ bool RotateByteArrayFilter::filter( char *result,
                 else if( g == groupSize )
                     result[r-b] |= last<<otherShiftBitWidth;
             }
+
+            filteredBytesCount += g;
+            if( filteredBytesCount >= FilteredByteCountSignalLimit )
+            {
+                filteredBytesCount = 0;
+                emit filteredBytes( m-section.start() );
+            }
         }
     }
     else
@@ -112,6 +120,13 @@ bool RotateByteArrayFilter::filter( char *result,
                     result[r-b] |= (unsigned char)result[r-b+1] >> otherShiftBitWidth;
                 else if( g == groupSize )
                     result[r-b] |= first >> otherShiftBitWidth;
+            }
+
+            filteredBytesCount += g;
+            if( filteredBytesCount >= FilteredByteCountSignalLimit )
+            {
+                filteredBytesCount = 0;
+                emit filteredBytes( m-section.start() );
             }
         }
     }

@@ -41,6 +41,7 @@ bool ReverseByteArrayFilter::filter( char *result,
 {
     int r = section.width()-1;
     int m = section.start();
+    int filteredBytesCount = 0;
     while( m <= section.end() )
     {
         unsigned char byte = (unsigned char)model->datum( m++ );
@@ -57,6 +58,13 @@ bool ReverseByteArrayFilter::filter( char *result,
         else
             reverseByte = byte;
         result[r--] = reverseByte;
+
+        ++filteredBytesCount;
+        if( filteredBytesCount >= FilteredByteCountSignalLimit )
+        {
+            filteredBytesCount = 0;
+            emit filteredBytes( m-section.start() );
+        }
     }
 
     return true;

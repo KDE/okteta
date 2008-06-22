@@ -41,6 +41,7 @@ bool XOrByteArrayFilter::filter( char *result,
 {
     const QByteArray operand = mParameterSet.operand();
     const int operandSize = operand.size();
+    int filteredBytesCount = 0;
 
     if( mParameterSet.alignAtEnd() )
     {
@@ -52,6 +53,13 @@ bool XOrByteArrayFilter::filter( char *result,
             int o = operandSize;
             while( m > 0 && o > 0 )
                 result[(r--)-1] = model->datum( (m--)-1 ) ^ operand[(o--)-1];
+
+            filteredBytesCount += (operandSize-o);
+            if( filteredBytesCount >= FilteredByteCountSignalLimit )
+            {
+                filteredBytesCount = 0;
+                emit filteredBytes( section.end()-m );
+            }
         }
     }
     else
@@ -64,6 +72,13 @@ bool XOrByteArrayFilter::filter( char *result,
             int o = 0;
             while( m <= section.end() && o < operandSize )
                 result[r++] = model->datum( m++ ) ^ operand[o++];
+
+            filteredBytesCount += o;
+            if( filteredBytesCount >= FilteredByteCountSignalLimit )
+            {
+                filteredBytesCount = 0;
+                emit filteredBytes( m-section.start() );
+            }
         }
     }
 

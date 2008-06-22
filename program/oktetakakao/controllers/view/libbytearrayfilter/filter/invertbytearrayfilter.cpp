@@ -41,9 +41,17 @@ bool InvertByteArrayFilter::filter( char *result,
 {
     int r = 0;
     int m = section.start();
+    int filteredBytesCount = 0;
     while( m <= section.end() )
+    {
         result[r++] = ~model->datum( m++ );
-
+        ++filteredBytesCount;
+        if( filteredBytesCount >= FilteredByteCountSignalLimit )
+        {
+            filteredBytesCount = 0;
+            emit filteredBytes( m-section.start() );
+        }
+    }
     return true;
 }
 
