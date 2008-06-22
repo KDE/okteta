@@ -89,6 +89,7 @@ set( LIBFILTER_SRCS
   view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp
 )
 set( FILTERCONTROLLER_SRCS
+  view/filter/filterjob.cpp
   view/filter/filtertool.cpp
   view/filter/filterview.cpp
   view/filter/filtercontroller.cpp
