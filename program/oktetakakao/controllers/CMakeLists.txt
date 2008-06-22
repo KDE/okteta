@@ -55,6 +55,7 @@ set( BYTETABLECONTROLLER_SRCS
 )
 set( SEARCHCONTROLLER_SRCS
   view/search/ksearchdialog.cpp
+  view/search/searchjob.cpp
   view/search/searchcontroller.cpp
 )
 set( REPLACECONTROLLER_SRCS
