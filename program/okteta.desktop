@@ -3,6 +3,7 @@ Name=Okteta
 Name[x-test]=xxOktetaxx
 GenericName=Hex Editor
 GenericName[ca]=Editor hexadecimal
+GenericName[cs]=Binární editor
 GenericName[da]=Hex-editor
 GenericName[es]=Editor hexadecimal
 GenericName[et]=Binaarfailide redaktor
