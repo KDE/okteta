@@ -23,6 +23,7 @@ set( KAKAO_CORE_SRCS
   io/kabstractdocumentsynchronizer.cpp
   io/kabstractdocumentsynchronizerfactory.cpp
   io/kabstractdocumentfilesystemsynchronizer.cpp
+  system/jobmanager.cpp
   system/kdocumentmanager.cpp
   system/kdocumentcreatemanager.cpp
   system/kdocumentsyncmanager.cpp
