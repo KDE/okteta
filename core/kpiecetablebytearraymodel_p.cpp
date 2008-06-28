@@ -82,7 +82,7 @@ void KPieceTableByteArrayModel::Private::setData( const char *data, unsigned int
 {
     if( mAutoDelete )
         delete mData;
-    const int oldSize = mPieceTable.size();
+    const unsigned int oldSize = mPieceTable.size();
     const bool wasModifiedBefore = isModified();
     const QList<KHECore::KBookmark> bookmarks = mBookmarks.list();
 
@@ -102,9 +102,10 @@ void KPieceTableByteArrayModel::Private::setData( const char *data, unsigned int
     mBookmarks.clear();
 
     emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(0,oldSize,size) );
-    emit p->contentsChanged( 0, oldSize-1 );
+    emit p->contentsChanged( 0, (size>oldSize?size:oldSize)-1 );
     if( wasModifiedBefore ) emit p->modificationChanged( false );
     if( !bookmarks.empty() ) emit p->bookmarksRemoved( bookmarks );
+    emit p->headVersionChanged( mPieceTable.changesCount() );
 }
 
 void KPieceTableByteArrayModel::Private::setDatum( unsigned int offset, const char byte )
