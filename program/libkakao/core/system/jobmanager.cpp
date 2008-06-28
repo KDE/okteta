@@ -34,7 +34,7 @@ bool JobManager::executeJob( KJob *job, QWidget *widget )
     QApplication::setOverrideCursor( Qt::WaitCursor );
 
     job->exec();
-    const bool success = ( job->error() != KJob::NoError );
+    const bool success = ( job->error() == KJob::NoError );
     if( success )
         KMessageBox::error( widget, job->errorText() );
 
