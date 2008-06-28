@@ -35,10 +35,11 @@ bool JobManager::executeJob( KJob *job, QWidget *widget )
 
     job->exec();
     const bool success = ( job->error() == KJob::NoError );
-    if( success )
-        KMessageBox::error( widget, job->errorText() );
 
     QApplication::restoreOverrideCursor();
+
+    if( !success )
+        KMessageBox::error( widget, job->errorText() );
 
     return success;
 }
