@@ -56,17 +56,31 @@ Fixed after 0.1 Beta 2:
 * make printing support only selection
 * value column editing mess, with cursor jumping away on partial edit and ungrouped changes
 * operations like filter can set an own description of their action (undo/redo)
+* entering 00 in value column does not finish the editing
+* tripple click should only select the current line
+* clicking in a column if the bytearray is empty does not place the cursor where expected
+* after tripple click double click uses wrong index
+* word select mode crashes if the mouse gets behind the end
+* ensure screen refreshed during blocking processes like printing, string search, loading or filter
 
 For KDE 4.1:
 ----------------------------------
-* entering 00 in value column does not finish the editing
-* clicking in the empty value column area does not place the cursor where expected
+* add processes for: statistic collection, replacing, copy as
+* fix hardcoded colors
+* catch revert signal to get out of valueeditor if in
+* escaping an insert value editing at the end leaves the cursor one place too right
+* on tripple click turn into selecting just whole lines if button kept pressed
 * fix replace problem
 * ask artists for own icon
-* add support for blocking processes like printing, string search or filter
+* see how the cursor and the value editor could be turned into tool+view
+* fix info and string docker (all with update function) to just work on update, react to change of data origin
+* initial state for statistic table
 
 Later on:
 ---------
+* add proper support for blocking processes like printing, string search, loading or filter:
+  show progress, allow cancelling, block only related model
+* input of offset or data should detect type by prefixes like 0x or such, by new variant Auto.
 * test handling of readonly files
 * more explicit titels for undo/redo actions (range, data), also paste, drag, and cut
 * add support for memory mapped files (includes enabling overwrite controller again)
@@ -90,6 +104,7 @@ Later on:
 * shellwindow:
   * hovering of drag about tab changes to tab
   * dropping next to tab creates new data object by the drop data
+* copy also for all tables, e.g. statistic
 
 Future plans:
 -------------
