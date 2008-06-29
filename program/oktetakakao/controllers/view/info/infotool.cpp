@@ -68,7 +68,8 @@ void InfoTool::setView( KAbstractView *view )
         connect( mByteArrayModel,  SIGNAL(modificationChanged( bool )),
                  SIGNAL(statisticDirty( bool )) );
     }
-    updateStatistic();
+    emit statisticDirty( true );
+//     updateStatistic();
     emit byteArrayViewChanged( mByteArrayView != 0 );
 }
 
