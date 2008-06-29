@@ -59,6 +59,9 @@ class KDocumentSyncManager : public QObject
   Q_SIGNALS:
     void urlUsed( const KUrl &url );
 
+  protected Q_SLOTS:
+    void onDocumentLoaded( KAbstractDocument *document );
+
   protected:
     // unless there is a singleton
     KDocumentManager *mManager;

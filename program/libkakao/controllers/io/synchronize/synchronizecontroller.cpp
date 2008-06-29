@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,7 +25,10 @@
 // lib
 #include <kabstractview.h>
 // Kakao core
+#include <abstractsynctoremotejob.h>
+#include <abstractsyncfromremotejob.h>
 #include <kabstractdocumentfilesystemsynchronizer.h>
+#include <jobmanager.h>
 // KDE
 #include <KUrl>
 #include <KActionCollection>
@@ -61,12 +64,14 @@ void SynchronizeController::setView( KAbstractView *view )
 
 void SynchronizeController::save()
 {
-    mSynchronizer->syncToRemote();
+    AbstractSyncToRemoteJob *syncJob = mDocument->synchronizer()->startSyncToRemote();
+    JobManager::executeJob( syncJob, mMainWindow );
 }
 
 void SynchronizeController::reload()
 {
-    mSynchronizer->syncFromRemote();
+    AbstractSyncFromRemoteJob *syncJob = mDocument->synchronizer()->startSyncFromRemote();
+    JobManager::executeJob( syncJob, mMainWindow );
 }
 
 void SynchronizeController::onSynchronizerChange( KAbstractDocumentSynchronizer *newSynchronizer )

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,8 +23,8 @@
 #include "kbytearrayrawfilesynchronizerfactory.h"
 
 // lib
-#include "kbytearraydocument.h"
 #include "kbytearrayrawfilesynchronizer.h"
+#include "kbytearraydocument.h"
 // KDE
 #include <KUrl>
 // Qt
@@ -37,35 +37,10 @@ KByteArrayRawFileSynchronizerFactory::KByteArrayRawFileSynchronizerFactory() {}
 QString KByteArrayRawFileSynchronizerFactory::supportedWorkType() const { return QLatin1String("KByteArrayDocument");}
 QString KByteArrayRawFileSynchronizerFactory::supportedRemoteType() const { return QLatin1String("application/octet-stream");}
 
-// TODO: these function seems to be always the same. Make macro or template function
-// or, if there is only one place which calls this, move there
-KAbstractDocument *KByteArrayRawFileSynchronizerFactory::loadNewDocument( const KUrl &originUrl ) const
+
+KAbstractDocumentSynchronizer *KByteArrayRawFileSynchronizerFactory::createSynchronizer() const
 {
-    KByteArrayRawFileSynchronizer *synchronizer = new KByteArrayRawFileSynchronizer( originUrl );
-    KAbstractDocument *document = synchronizer->document();
-    if( !document )
-        delete synchronizer;
-
-    return document;
-}
-
-bool KByteArrayRawFileSynchronizerFactory::connectDocument( KAbstractDocument *document, const KUrl &originUrl,
-                                  KAbstractDocumentSynchronizer::ConnectOption option ) const 
-{
-    KByteArrayRawFileSynchronizer *synchronizer = new KByteArrayRawFileSynchronizer( document, originUrl, option );
-    // TODO: is synchronizer->document() really a good signal for success? see also below
-    const bool success = ( synchronizer->document() != 0 );
-    if( !success )
-        delete synchronizer;
-
-    return success;
-}
-
-bool KByteArrayRawFileSynchronizerFactory::exportDocument( KAbstractDocument *document, const KUrl &originUrl ) const
-{
-Q_UNUSED( document )
-Q_UNUSED( originUrl )
-    return false;
+    return new KByteArrayRawFileSynchronizer();
 }
 
 KByteArrayRawFileSynchronizerFactory::~KByteArrayRawFileSynchronizerFactory() {}

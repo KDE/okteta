@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,12 +25,10 @@
 // lib
 #include "testdocument.h"
 #include "testdocumentfilesynchronizer.h"
-// KDE
-#include <KUrl>
 // Qt
 #include <QtCore/QLatin1String>
 
-TestDocumentFileSynchronizerFactory::TestDocumentFileSynchronizerFactory(const QByteArray &header)
+TestDocumentFileSynchronizerFactory::TestDocumentFileSynchronizerFactory( const QByteArray &header )
  : mHeader( header ) {}
 
 // could be set to base class as value, is only one object per factory at runtime
@@ -40,33 +38,9 @@ QString TestDocumentFileSynchronizerFactory::supportedRemoteType() const { retur
 
 // TODO: these function seems to be always the same. Make macro or template function
 // or, if there is only one place which calls this, move there
-KAbstractDocument *TestDocumentFileSynchronizerFactory::loadNewDocument( const KUrl &originUrl ) const
+KAbstractDocumentSynchronizer *TestDocumentFileSynchronizerFactory::createSynchronizer() const
 {
-    TestDocumentFileSynchronizer *synchronizer = new TestDocumentFileSynchronizer( originUrl, mHeader );
-    KAbstractDocument *document = synchronizer->document();
-    if( !document )
-        delete synchronizer;
-
-    return document;
-}
-
-bool TestDocumentFileSynchronizerFactory::connectDocument( KAbstractDocument *document, const KUrl &originUrl,
-                                  KAbstractDocumentSynchronizer::ConnectOption option ) const 
-{
-    TestDocumentFileSynchronizer *synchronizer = new TestDocumentFileSynchronizer( document, originUrl, option, mHeader );
-    // TODO: is synchronizer->document() really a good signal for success? see also below
-    const bool success = ( synchronizer->document() != 0 );
-    if( !success )
-        delete synchronizer;
-
-    return success;
-}
-
-bool TestDocumentFileSynchronizerFactory::exportDocument( KAbstractDocument *document, const KUrl &originUrl ) const
-{
-Q_UNUSED( document )
-Q_UNUSED( originUrl )
-    return false;
+    return new TestDocumentFileSynchronizer( mHeader );
 }
 
 TestDocumentFileSynchronizerFactory::~TestDocumentFileSynchronizerFactory() {}

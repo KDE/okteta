@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,6 +23,11 @@
 #include "testdocumentfilesynchronizer.h"
 
 // lib
+#include "testdocumentfileloadjob.h"
+#include "testdocumentfileconnectjob.h"
+#include "testdocumentfilewritejob.h"
+#include "testdocumentfilereloadjob.h"
+#include "testdocumentfilewritetojob.h"
 #include "testdocument.h"
 // KDE
 #include <KUrl>
@@ -32,122 +37,38 @@
 #include <QtCore/QFile>
 
 
-TestDocumentFileSynchronizer::TestDocumentFileSynchronizer( const KUrl &url, const QByteArray &header )
+TestDocumentFileSynchronizer::TestDocumentFileSynchronizer( const QByteArray &header )
  : mHeader( header )
 {
-    KAbstractDocument *document = loadFromUrl( url );
-    mDocument = document ? qobject_cast<TestDocument*>( document ) : 0;
-    if( mDocument )
-    {
-        mDocument->setTitle( url.fileName() );
-    }
-}
-
-TestDocumentFileSynchronizer::TestDocumentFileSynchronizer( KAbstractDocument *document, const KUrl &url,
-                                                            KAbstractDocumentSynchronizer::ConnectOption option,
-                                                            const QByteArray &header )
- : mHeader( header )
-{
-    // TODO: is synchronizer->document() really a good signal for success? see also above
-    mDocument = document ? qobject_cast<TestDocument*>( document ) : 0;
-    if( mDocument )
-    {
-        if( !syncWithUrl(url,option) )
-            mDocument = 0;
-    }
-//     if( mDocument )
-//         onUrlChange( url );
-//     connect( this, SIGNAL(urlChanged(const KUrl&)), SLOT(onUrlChange( const KUrl & )) );
+    // TODO: where to catch this? who decides about this?
+//     mDocument->setTitle( url.fileName() );
 }
 
 KAbstractDocument *TestDocumentFileSynchronizer::document() const { return mDocument; }
 
 
-KAbstractDocument *TestDocumentFileSynchronizer::loadFromFile( const QString &localFileName )
+AbstractLoadJob *TestDocumentFileSynchronizer::startLoad( const KUrl &url )
 {
-    TestDocument *document = 0;
-
-    QFile file( localFileName );
-    file.open( QIODevice::ReadOnly );
-    QDataStream inStream( &file );
-    int fileSize = file.size();
-
-    // test header
-    const int headerSize = mHeader.size();
-    QByteArray header( headerSize, ' ' );
-    const int headerResult = inStream.readRawData( header.data(), headerSize );
-    if( headerResult == -1 || header != mHeader )
-        return false;
-
-    QByteArray byteArray( fileSize, ' ' );
-
-    inStream.readRawData( byteArray.data(), fileSize );
-
-//     byteArray->setModified( false );
-
-    //registerDiskModifyTime( file ); TODO move into synchronizer
-
-    const bool streamIsOk = ( inStream.status() == QDataStream::Ok );
-//     if( success )
-//         *success = streamIsOk ? 0 : 1;
-    if( streamIsOk )
-        document = new TestDocument( byteArray );
-
-    return document;
+    return new TestDocumentFileLoadJob( this, url );
 }
 
-bool TestDocumentFileSynchronizer::reloadFromFile( const QString &localFileName )
+AbstractSyncToRemoteJob *TestDocumentFileSynchronizer::startSyncToRemote()
 {
-    QFile file( localFileName );
-    file.open( QIODevice::ReadOnly );
-    QDataStream inStream( &file );
-    int fileSize = file.size();
-
-    // test header
-    const int headerSize = mHeader.size();
-    QByteArray header( headerSize, ' ' );
-    const int headerResult = inStream.readRawData( header.data(), headerSize );
-    if( headerResult == -1 || header != mHeader )
-        return false;
-
-    // TODO: should the decoder know this?
-    QByteArray newData( fileSize, ' ' );
-    inStream.readRawData( newData.data(), fileSize );
-
-    //registerDiskModifyTime( file ); TODO move into synchronizer
-
-    const bool streamIsOk = ( inStream.status() == QDataStream::Ok );
-//     if( success )
-//         *success = streamIsOk ? 0 : 1;
-    if( streamIsOk )
-    {
-        mDocument->setData( newData );
-    }
-
-    return streamIsOk;
+    return new TestDocumentFileWriteJob( this );
 }
 
-bool TestDocumentFileSynchronizer::writeToFile( const QString &localFilePath )
+AbstractSyncFromRemoteJob *TestDocumentFileSynchronizer::startSyncFromRemote()
 {
-    const QByteArray *byteArray = mDocument->data();
-
-    QFile file( localFilePath );
-    file.open( QIODevice::WriteOnly );
-
-    QDataStream outStream( &file );
-    outStream.writeRawData( mHeader.data(), mHeader.size() );
-    outStream.writeRawData( byteArray->data(), byteArray->size() );
-
-//     byteArray->setModified( false );
-
-    //registerDiskModifyTime( file );TODO move into synchronizer
-
-    return outStream.status() == QDataStream::Ok;
+    return new TestDocumentFileReloadJob( this );
 }
 
-bool TestDocumentFileSynchronizer::syncWithFile( const QString &localFilePath,
-                                                 KAbstractDocumentSynchronizer::ConnectOption option )
+AbstractSyncWithRemoteJob *TestDocumentFileSynchronizer::startSyncWithRemote( const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option  )
 {
-Q_UNUSED( option )
-    return writeToFile( localFilePath );
+    return new TestDocumentFileWriteToJob( this, url, option );
+}
+
+AbstractConnectJob *TestDocumentFileSynchronizer::startConnect( KAbstractDocument *document,
+                                              const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option )
+{
+    return new TestDocumentFileConnectJob( this, document, url, option );
 }

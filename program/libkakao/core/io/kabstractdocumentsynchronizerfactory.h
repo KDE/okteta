@@ -28,12 +28,13 @@
 // Qt
 #include <QtCore/QObject>
 
-class KUrl;
-
 // not really a classic factory, functions do some more, instead it is what?
 // TODO: improve the whole vodoo, especially linking document and synchronizer
 // make it foolproof
 // make a simple tutorial with an example program
+// TODO: should the load/connect/export jobs be created here or from the synchronizer?
+// putting jobs to synchronizer keeps factory simple, but forces synchronizer to be
+// in invalid states, like with simple constructor
 class KAbstractDocumentSynchronizerFactory : public QObject
 {
   Q_OBJECT
@@ -42,11 +43,19 @@ class KAbstractDocumentSynchronizerFactory : public QObject
     virtual ~KAbstractDocumentSynchronizerFactory();
 
   public: // API to be implemented
-    virtual KAbstractDocument *loadNewDocument( const KUrl &originUrl ) const = 0;
+    virtual KAbstractDocumentSynchronizer *createSynchronizer() const = 0;
+
+//     virtual KAbstractDocument *loadNewDocument( const KUrl &originUrl ) const = 0;
+//     virtual AbstractLoadJob *startLoad( const KUrl &url ) = 0;
     // TODO: better name than connect: bind?
-    virtual bool connectDocument( KAbstractDocument *document, const KUrl &originUrl,
-                                  KAbstractDocumentSynchronizer::ConnectOption option ) const = 0;
-    virtual bool exportDocument( KAbstractDocument *document, const KUrl &originUrl ) const = 0;
+
+//     virtual bool connectDocument( KAbstractDocument *document, const KUrl &originUrl,
+//                                   KAbstractDocumentSynchronizer::ConnectOption option ) const = 0;
+//     virtual AbstractConnectJob *startConnect( KAbstractDocument *document,
+//                                               const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option ) = 0;
+
+//     virtual bool exportDocument( KAbstractDocument *document, const KUrl &originUrl ) const = 0;
+//     virtual AbstractExportJob *startExport( KAbstractDocument *document, const KUrl &originUrl ) const = 0;
 
     /** returns the id of the work model type */
     // TODO: is QByteArray enough?

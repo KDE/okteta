@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -26,9 +26,13 @@
 // Qt
 #include <QtCore/QObject>
 
-class KUrl;
+class AbstractLoadJob;
+class AbstractConnectJob;
+class AbstractSyncToRemoteJob;
+class AbstractSyncFromRemoteJob;
+class AbstractSyncWithRemoteJob;
 class KAbstractDocument;
-
+class KUrl;
 
 // TODO: better names? Active Translator? 
 // synchronizers are created by factory functions (like plugins)
@@ -63,6 +67,9 @@ class KAbstractDocumentSynchronizer : public QObject
     KUrl url() const;
 
   public: // API to be implemented
+    // TODO: once the synchronizer is attached to a document, this function should not be called
+    // is there a way to ensure this?
+    virtual AbstractLoadJob *startLoad( const KUrl &url ) = 0;
     /** */
     // TODO: not in constructor? cannot be called twice, each synchronizer is attached to its document
 //     virtual KAbstractDocument *createWorkingCopy( const KUrl &originUrl, int *success ) const = 0;
@@ -72,13 +79,15 @@ class KAbstractDocumentSynchronizer : public QObject
 //     virtual void copyTo( const KUrl &url, KAbstractDocument *document, int *success ) const = 0;
 
     /** overwrite remote with local (save) */
-    virtual bool syncToRemote() = 0;
+    virtual AbstractSyncToRemoteJob *startSyncToRemote() = 0;
     /** overwrite local with remote (reload) */
-    virtual bool syncFromRemote() = 0;
+    virtual AbstractSyncFromRemoteJob *startSyncFromRemote() = 0;
 
     /** changes the  */ // TODO: better name for replace: overwrite?
-    virtual bool syncWithRemote( const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option ) = 0;
+    virtual AbstractSyncWithRemoteJob *startSyncWithRemote( const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option ) = 0;
 
+    virtual AbstractConnectJob *startConnect( KAbstractDocument *document,
+                                              const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option ) = 0;
 //     virtual bool syncBiDirectly() = 0;
 //     virtual bool canSyncBiDirectly() const = 0;
 //     virtual bool deleteDocument();
@@ -87,6 +96,8 @@ class KAbstractDocumentSynchronizer : public QObject
 
   Q_SIGNALS:
     void urlChanged( const KUrl &url );
+    void dataPulled( int ) const;
+    void dataPushed( int ) const;
 
   protected: // get
     void setUrl( const KUrl &url );

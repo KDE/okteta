@@ -43,8 +43,9 @@ void KDocumentCreateManager::setDocumentFactory( KAbstractDocumentFactory *facto
 
 void KDocumentCreateManager::createNew()
 {
-   KAbstractDocument *document = mFactory->create();
-   mManager->addDocument( document );
+    KAbstractDocument *document = mFactory->create();
+    if( document )
+        mManager->addDocument( document );
 }
 
 

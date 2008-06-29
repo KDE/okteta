@@ -2,7 +2,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -30,6 +30,11 @@
 // test utils
 #include <util/filesystem.h>
 #include <util/fill.h>
+// Kakao core
+#include <abstractloadjob.h>
+#include <abstractconnectjob.h>
+#include <abstractsynctoremotejob.h>
+#include <abstractsyncwithremotejob.h>
 // Okteta core
 #include <kbytearraymodel.h>
 // KDE
@@ -91,7 +96,8 @@ void KByteArrayRawFileSynchronizerTest::init()
 void KByteArrayRawFileSynchronizerTest::testLoadFromUrl()
 {
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( FileProtocolName );
-    KByteArrayRawFileSynchronizer *synchronizer = new KByteArrayRawFileSynchronizer( fileUrl );
+    KByteArrayRawFileSynchronizer *synchronizer = new KByteArrayRawFileSynchronizer();
+    synchronizer->startLoad( fileUrl )->exec();
     KAbstractDocument *document = synchronizer->document();
 
     KByteArrayDocument *byteArrayDocument = qobject_cast<KByteArrayDocument *>( document );
@@ -111,7 +117,8 @@ void KByteArrayRawFileSynchronizerTest::testLoadFromNotExistingUrl()
 {
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(NotExistingUrl) );
 
-    KByteArrayRawFileSynchronizer *synchronizer = new KByteArrayRawFileSynchronizer( fileUrl );
+    KByteArrayRawFileSynchronizer *synchronizer = new KByteArrayRawFileSynchronizer();
+    synchronizer->startLoad( fileUrl )->exec();
     KAbstractDocument *document = synchronizer->document();
 
     QVERIFY( document == 0 );

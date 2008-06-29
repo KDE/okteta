@@ -16,6 +16,16 @@ set( KAKAO_CORE_SRCS
   document/kabstractdocument.cpp
   document/kabstractdocumentfactory.cpp
   document/kdocumentversiondata.cpp
+  io/abstractloadjob.cpp
+  io/abstractconnectjob.cpp
+  io/abstractsynctoremotejob.cpp
+  io/abstractsyncfromremotejob.cpp
+  io/abstractsyncwithremotejob.cpp
+  io/abstractfilesystemloadjob.cpp
+  io/abstractfilesystemsynctoremotejob.cpp
+  io/abstractfilesystemsyncfromremotejob.cpp
+  io/abstractfilesystemsyncwithremotejob.cpp
+  io/abstractfilesystemconnectjob.cpp
   io/abstractmodelstreamencoder.cpp
   io/abstractmodelexporter.cpp
   io/abstractmodelfilesystemexporter.cpp

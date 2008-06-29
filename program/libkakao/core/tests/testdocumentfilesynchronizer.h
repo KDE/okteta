@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -34,25 +34,34 @@ class TestDocumentFileSynchronizer : public KAbstractDocumentFileSystemSynchroni
 {
     Q_OBJECT
 
+  friend class TestDocumentFileLoadJob;
+  friend class TestDocumentFileConnectJob;
+
   public:
-    explicit TestDocumentFileSynchronizer( const KUrl &originUrl, const QByteArray &header = QByteArray() );
-    TestDocumentFileSynchronizer( KAbstractDocument *document, const KUrl &url,
-                                  KAbstractDocumentSynchronizer::ConnectOption option,
-                                  const QByteArray &header = QByteArray() );
+    explicit TestDocumentFileSynchronizer( const QByteArray &header = QByteArray() );
 
   public: // KAbstractDocumentSynchronizer API
+    virtual AbstractLoadJob *startLoad( const KUrl &url );
+    virtual AbstractSyncToRemoteJob *startSyncToRemote();
+    virtual AbstractSyncFromRemoteJob *startSyncFromRemote();
+    virtual AbstractSyncWithRemoteJob *startSyncWithRemote( const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option );
+    virtual AbstractConnectJob *startConnect( KAbstractDocument *document,
+                                              const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option );
+
     virtual KAbstractDocument *document() const;
 
-  protected: // KAbstractDocumentFileSystemSynchronizer API
-    virtual KAbstractDocument *loadFromFile( const QString &tmpFileName );
-    virtual bool reloadFromFile( const QString &localFilePath );
-    virtual bool writeToFile( const QString &localFilePath );
-    virtual bool syncWithFile( const QString &localFilePath,
-                               KAbstractDocumentSynchronizer::ConnectOption option );
+  public:
+    const QByteArray &header() const;
+
+  protected:
+    void setDocument( TestDocument *document );
 
   protected:
     TestDocument *mDocument;
-    QByteArray mHeader;
+    const QByteArray mHeader;
 };
+
+inline  const QByteArray &TestDocumentFileSynchronizer::header() const { return mHeader; }
+inline void TestDocumentFileSynchronizer::setDocument( TestDocument *document ) { mDocument = document; }
 
 #endif

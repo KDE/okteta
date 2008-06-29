@@ -9,7 +9,6 @@ include_directories(
   ${SUTDIR}
 )
 
-
 ########### util ###############
 
 set( kakaocoretestutil_LIB_SRCS
@@ -17,6 +16,21 @@ set( kakaocoretestutil_LIB_SRCS
 )
 
 kde4_add_library( kakaocoretestutil  STATIC ${kakaocoretestutil_LIB_SRCS} )
+
+########### io ###############
+
+set( kakaocoretestio_LIB_SRCS
+  testdocumentfileloadthread.cpp
+  testdocumentfilereloadthread.cpp
+  testdocumentfilewritethread.cpp
+  testdocumentfileloadjob.cpp
+  testdocumentfileconnectjob.cpp
+  testdocumentfilewritejob.cpp
+  testdocumentfilereloadjob.cpp
+  testdocumentfilewritetojob.cpp
+)
+
+kde4_add_library( kakaocoretestio  STATIC ${kakaocoretestio_LIB_SRCS} )
 
 ########### testdocumenttest ###############
 
@@ -48,6 +62,7 @@ kde4_add_unit_test( testdocumentfilesynchronizertest
   ${testdocumentfilesynchronizertest_SRCS}
 )
 target_link_libraries( testdocumentfilesynchronizertest
+  kakaocoretestio
   kakaocore
   kakaocoretestutil
   ${KDE4_KIO_LIBS}
@@ -68,6 +83,7 @@ kde4_add_unit_test( testdocumentfilesynchronizerfactorytest
   ${testdocumentfilesynchronizerfactorytest_SRCS}
 )
 target_link_libraries( testdocumentfilesynchronizerfactorytest
+  kakaocoretestio
   kakaocore
   kakaocoretestutil
   ${KDE4_KIO_LIBS}

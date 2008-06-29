@@ -30,21 +30,13 @@ class KAbstractDocumentFileSystemSynchronizer : public KAbstractDocumentSynchron
 {
   Q_OBJECT
 
+  friend class AbstractFileSystemLoadJob;
+  friend class AbstractFileSystemConnectJob;
+  friend class AbstractFileSystemSyncWithRemoteJob;
+
   public:
     KAbstractDocumentFileSystemSynchronizer();
     virtual ~KAbstractDocumentFileSystemSynchronizer();
-
-  public: // KAbstractDocumentSynchronizer API
-    virtual bool syncToRemote();
-    virtual bool syncFromRemote();
-    virtual bool syncWithRemote( const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option );
-
-  protected: // API to be implemented
-    virtual KAbstractDocument *loadFromFile( const QString &workFilePath ) = 0;
-    virtual bool reloadFromFile( const QString &workFilePath ) = 0;
-    virtual bool writeToFile( const QString &workFilePath ) = 0;
-    virtual bool syncWithFile( const QString &workFilePath,
-                               KAbstractDocumentSynchronizer::ConnectOption option ) = 0;
 
 // TODO: virtual void onFileModified( FileChange );
 // enum FileChange { FileDirty, FileCreated, FileDeleted );
@@ -52,12 +44,6 @@ class KAbstractDocumentFileSystemSynchronizer : public KAbstractDocumentSynchron
     void onFileDirty( const QString &filePath );
     void onFileCreated( const QString &filePath );
     void onFileDeleted( const QString &filePath );
-
-  protected: // template functions, call from constructors
-    KAbstractDocument *loadFromUrl( const KUrl &url );
-    bool reloadFromUrl();
-    bool writeToUrl();
-    bool syncWithUrl( const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option );
 
   protected:
     class Private;

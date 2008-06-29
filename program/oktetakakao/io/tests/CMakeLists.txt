@@ -1,4 +1,4 @@
-project( oktetakakao_document_tests )
+project( oktetakakao_io_tests )
 
 set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/.. )
 
@@ -18,6 +18,22 @@ include_directories(
   ${SUTDIR}/../../libkakao/core/tests
 )
 
+########### io ###############
+
+set( oktetakakaoio_LIB_SRCS
+  ${SUTDIR}/bytearrayrawfileloadthread.cpp
+  ${SUTDIR}/bytearrayrawfilereloadthread.cpp
+  ${SUTDIR}/bytearrayrawfilewritethread.cpp
+  ${SUTDIR}/bytearrayrawfileloadjob.cpp
+  ${SUTDIR}/bytearrayrawfileconnectjob.cpp
+  ${SUTDIR}/bytearrayrawfilewritejob.cpp
+  ${SUTDIR}/bytearrayrawfilereloadjob.cpp
+  ${SUTDIR}/bytearrayrawfilewritetojob.cpp
+)
+
+kde4_add_library( oktetakakaoio  STATIC ${oktetakakaoio_LIB_SRCS} )
+
+
 ########### kbytearrayrawfilesynchronizertest ###############
 
 set( kbytearrayrawfilesynchronizertest_SRCS
@@ -31,6 +47,7 @@ kde4_add_unit_test( kbytearrayrawfilesynchronizertest
   ${kbytearrayrawfilesynchronizertest_SRCS}
 )
 target_link_libraries( kbytearrayrawfilesynchronizertest
+  oktetakakaoio
   kakaocore
   kakaocoretestutil
   oktetacoretestutil
@@ -53,6 +70,7 @@ kde4_add_unit_test( kbytearrayrawfilesynchronizerfactorytest
   ${kbytearrayrawfilesynchronizerfactorytest_SRCS}
 )
 target_link_libraries( kbytearrayrawfilesynchronizerfactorytest
+  oktetakakaoio
   kakaocore
   kakaocoretestutil
   oktetacoretestutil

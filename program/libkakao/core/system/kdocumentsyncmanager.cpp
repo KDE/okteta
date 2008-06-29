@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,13 +23,20 @@
 #include "kdocumentsyncmanager.h"
 
 // lib
-#include <kabstractdocumentsynchronizerfactory.h>
+#include "jobmanager.h"
 #include "kdocumentmanager.h"
+#include <abstractloadjob.h>
+#include <abstractconnectjob.h>
+#include <abstractsynctoremotejob.h>
+#include <abstractsyncwithremotejob.h>
+#include <kabstractdocumentsynchronizerfactory.h>
 // KDE
 #include <KIO/NetAccess>
 #include <KFileDialog>
 #include <KMessageBox>
 #include <KLocale>
+// Qt
+#include <QtGui/QApplication>
 
 
 static const char AllFileNamesFilter[] = "*";
@@ -76,8 +83,15 @@ void KDocumentSyncManager::load()
 
 void KDocumentSyncManager::load( const KUrl &url )
 {
-    KAbstractDocument *document = mSynchronizerFactory->loadNewDocument( url );
+    KAbstractDocumentSynchronizer *synchronizer = mSynchronizerFactory->createSynchronizer();
+    AbstractLoadJob *loadJob = synchronizer->startLoad( url );
+    connect( loadJob, SIGNAL(documentLoaded( KAbstractDocument * )), SLOT(onDocumentLoaded( KAbstractDocument * )) );
 
+    JobManager::executeJob( loadJob, mWidget );
+}
+
+void KDocumentSyncManager::onDocumentLoaded( KAbstractDocument *document )
+{
     if( document )
         mManager->addDocument( document );
 }
@@ -86,10 +100,10 @@ bool KDocumentSyncManager::setSynchronizer( KAbstractDocument *document )
 {
     bool storingDone = false;
 
-    KAbstractDocumentSynchronizer *oldSynchronizer = document->synchronizer();
+    KAbstractDocumentSynchronizer *currentSynchronizer = document->synchronizer();
     // TODO: warn if there were updates in the second before saveAs was activated
-//     if( oldSynchronizer )
-//         oldSynchronizer->pauseSynchronization(); also unpause below
+//     if( currentSynchronizer )
+//         currentSynchronizer->pauseSynchronization(); also unpause below
     const QString processTitle =
         i18nc( "@title:window Save %typename As...", "Save %1 As...", document->typeName() );
     do
@@ -98,8 +112,8 @@ bool KDocumentSyncManager::setSynchronizer( KAbstractDocument *document )
 
         if( !newUrl.isEmpty() )
         {
-            const bool isNewUrl = ( oldSynchronizer == 0 )
-                                  || ( newUrl != oldSynchronizer->url() );
+            const bool isNewUrl = ( currentSynchronizer == 0 )
+                                  || ( newUrl != currentSynchronizer->url() );
 
             if( isNewUrl )
             {
@@ -111,6 +125,7 @@ bool KDocumentSyncManager::setSynchronizer( KAbstractDocument *document )
 //                     const bool otherFileLoaded = mManager->documentByUrl( newUrl );
                     // TODO: replace "file" with synchronizer->storageTypeName() or such
                     // TODO: offer "Synchronize" as alternative, if supported, see below
+                    // ask synchronizer for capabilities, as some can only overwrite
                     const QString message =
                         i18nc( "@info",
                                "There is already a file at <nl/><filename>%1</filename>.<nl/>"
@@ -123,19 +138,24 @@ bool KDocumentSyncManager::setSynchronizer( KAbstractDocument *document )
                 }
 
                 // switch url and synchronizer
-                if( oldSynchronizer && true )//TODO: same remote mimetype
+                if( currentSynchronizer && true )//TODO: same remote mimetype
                 {
-                    //TODO: ioverwrite for now
-                    oldSynchronizer->syncWithRemote( newUrl, KAbstractDocumentSynchronizer::ReplaceRemote );
-//                     oldSynchronizer->unpauseSynchronization(); also pause above
-                    storingDone = true;
+                    //TODO: overwrite for now
+                    AbstractSyncWithRemoteJob *syncJob = currentSynchronizer->startSyncWithRemote( newUrl,
+                                                               KAbstractDocumentSynchronizer::ReplaceRemote );
+                    const bool syncSucceeded = JobManager::executeJob( syncJob, mWidget );
+//                     currentSynchronizer->unpauseSynchronization(); also pause above
+                    storingDone = syncSucceeded;
                 }
                 else
                 {
-                    //TODO: overwrite for now
-                    storingDone =
-                        mSynchronizerFactory->connectDocument( document, newUrl,
+                    //TODO: is overwrite for now, is this useful?
+                    KAbstractDocumentSynchronizer *synchronizer = mSynchronizerFactory->createSynchronizer();
+                    AbstractConnectJob *connectJob = synchronizer->startConnect( document, newUrl,
                                                                KAbstractDocumentSynchronizer::ReplaceRemote );
+                    const bool connectSucceeded = JobManager::executeJob( connectJob, mWidget );
+
+                    storingDone = connectSucceeded;
                 }
 
                 if( storingDone )
@@ -147,11 +167,16 @@ bool KDocumentSyncManager::setSynchronizer( KAbstractDocument *document )
             }
             // same url
             else
+            {
                 // TODO: what to do? synchTo? synchWith? synchFrom? Or does the synchronizer care for this?
                 // By e.g. warning that we might be overwriting something?
                 // synchTo might be the intention, after all the user wanted a new storage
                 // 
-                document->synchronizer()->syncToRemote();
+                AbstractSyncToRemoteJob *syncJob = document->synchronizer()->startSyncToRemote();
+                const bool syncFailed = JobManager::executeJob( syncJob, mWidget );
+
+                storingDone = !syncFailed;
+            }
         }
         else
             break;
@@ -182,7 +207,12 @@ bool KDocumentSyncManager::canClose( KAbstractDocument *document )
             if( answer == KMessageBox::Yes )
             {
                 if( synchronizer )
-                    canClose = synchronizer->syncToRemote();
+                {
+                    AbstractSyncToRemoteJob *syncJob = synchronizer->startSyncToRemote();
+                    const bool syncFailed = JobManager::executeJob( syncJob, mWidget );
+
+                    canClose = !syncFailed;
+                }
                 else
                     canClose = setSynchronizer( document );
             }

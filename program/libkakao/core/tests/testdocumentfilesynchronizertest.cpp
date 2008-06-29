@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -24,10 +24,15 @@
 
 // test object
 #include <testdocumentfilesynchronizer.h>
-// lib
-#include <testdocument.h>
 // test utils
 #include <util/filesystem.h>
+#include <testdocument.h>
+// lib
+#include <abstractloadjob.h>
+#include <abstractconnectjob.h>
+#include <abstractsynctoremotejob.h>
+#include <abstractsyncfromremotejob.h>
+#include <abstractsyncwithremotejob.h>
 // KDE
 #include <qtest_kde.h>
 #include <KUrl>
@@ -85,7 +90,9 @@ void TestDocumentFileSynchronizerTest::cleanupTestCase()
 void TestDocumentFileSynchronizerTest::checkFileContent( const KUrl &fileUrl, const QByteArray &data,
                                                          const QByteArray &header )
 {
-    TestDocumentFileSynchronizer *synchronizer = new TestDocumentFileSynchronizer( fileUrl, header );
+
+    TestDocumentFileSynchronizer *synchronizer = new TestDocumentFileSynchronizer( header );
+    synchronizer->startLoad( fileUrl )->exec();
     KAbstractDocument *document = synchronizer->document();
 
     TestDocument *testDocument = qobject_cast<TestDocument *>( document );
@@ -102,7 +109,9 @@ void TestDocumentFileSynchronizerTest::testLoadFromFile()
 {
     const QByteArray testData( TestData1 );
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName1) ).prepend( FileProtocolName );
-    TestDocumentFileSynchronizer *synchronizer = new TestDocumentFileSynchronizer( fileUrl );
+
+    TestDocumentFileSynchronizer *synchronizer = new TestDocumentFileSynchronizer();
+    synchronizer->startLoad( fileUrl )->exec();
     KAbstractDocument *document = synchronizer->document();
 
     TestDocument *testDocument = qobject_cast<TestDocument *>( document );
@@ -122,7 +131,9 @@ void TestDocumentFileSynchronizerTest::testLoadFromFile()
 void TestDocumentFileSynchronizerTest::testLoadFromNotExistingUrl()
 {
     const KUrl fileUrl( QString::fromLatin1(NotExistingUrlName) );
-    TestDocumentFileSynchronizer *synchronizer = new TestDocumentFileSynchronizer( fileUrl );
+    TestDocumentFileSynchronizer *synchronizer = new TestDocumentFileSynchronizer();
+    AbstractLoadJob *loadJob = synchronizer->startLoad( fileUrl );
+    loadJob->exec();
     KAbstractDocument *document = synchronizer->document();
 
     QVERIFY( document == 0 );
@@ -132,7 +143,8 @@ void TestDocumentFileSynchronizerTest::testLoadFromNotExistingUrl()
 void TestDocumentFileSynchronizerTest::testLoadFromNotExistingFile()
 {
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(NotExistingFileName) ).prepend( FileProtocolName );
-    TestDocumentFileSynchronizer *synchronizer = new TestDocumentFileSynchronizer( fileUrl );
+    TestDocumentFileSynchronizer *synchronizer = new TestDocumentFileSynchronizer();
+    synchronizer->startLoad( fileUrl )->exec();
     KAbstractDocument *document = synchronizer->document();
 
     QVERIFY( document == 0 );
@@ -143,14 +155,15 @@ void TestDocumentFileSynchronizerTest::testLoadSaveFile()
 {
     const QByteArray otherData( TestData2 );
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName1) ).prepend( FileProtocolName );
-    TestDocumentFileSynchronizer *synchronizer = new TestDocumentFileSynchronizer( fileUrl );
+    TestDocumentFileSynchronizer *synchronizer = new TestDocumentFileSynchronizer();
+    synchronizer->startLoad( fileUrl )->exec();
     KAbstractDocument *document = synchronizer->document();
 
     TestDocument *testDocument = qobject_cast<TestDocument *>( document );
     QVERIFY( testDocument != 0 );
     // change and save
     testDocument->setData( otherData );
-    document->synchronizer()->syncToRemote();
+    document->synchronizer()->startSyncToRemote()->exec();
 
     // now delete document and load new
     delete document;
@@ -164,7 +177,8 @@ void TestDocumentFileSynchronizerTest::testLoadReloadFile()
     const QString filePath = mFileSystem->createFilePath( QLatin1String(TestFileName1) );
     const KUrl fileUrl = QString( filePath ).prepend( FileProtocolName );
 
-    TestDocumentFileSynchronizer *synchronizer = new TestDocumentFileSynchronizer( fileUrl );
+    TestDocumentFileSynchronizer *synchronizer = new TestDocumentFileSynchronizer();
+    synchronizer->startLoad( fileUrl )->exec();
     KAbstractDocument *document = synchronizer->document();
 
     TestDocument *testDocument = qobject_cast<TestDocument *>( document );
@@ -175,7 +189,7 @@ void TestDocumentFileSynchronizerTest::testLoadReloadFile()
    // ? use QTest::kWaitForSignal (QObject *obj, const char *signal, int timeout=0)
 //     QCOMPARE( document->synchronizationStates(), TestDocument::RemoteHasChanges );
 
-    document->synchronizer()->syncFromRemote();
+    document->synchronizer()->startSyncFromRemote()->exec();
 
     QCOMPARE( *testDocument->data(), otherData );
 
@@ -191,12 +205,13 @@ void TestDocumentFileSynchronizerTest::testChangeFile()
     const KUrl fileUrl2 = QString( filePath2 ).prepend( FileProtocolName );
 
     // load from 1
-    TestDocumentFileSynchronizer *synchronizer = new TestDocumentFileSynchronizer( fileUrl1 );
+    TestDocumentFileSynchronizer *synchronizer = new TestDocumentFileSynchronizer();
+    synchronizer->startLoad( fileUrl1 )->exec();
     KAbstractDocument *document = synchronizer->document();
 
     // prepare 2 and overwrite
     writeToFile( filePath2, otherData );
-    synchronizer->syncWithRemote( fileUrl2, KAbstractDocumentSynchronizer::ReplaceRemote );
+    synchronizer->startSyncWithRemote( fileUrl2, KAbstractDocumentSynchronizer::ReplaceRemote )->exec();
 
     // now delete document and load new
     delete document;
@@ -217,12 +232,14 @@ void TestDocumentFileSynchronizerTest::testConnectToFile()
 
     // file 1
     TestDocumentFileSynchronizer *synchronizer =
-        new TestDocumentFileSynchronizer( document, fileUrl1, TestDocumentFileSynchronizer::ReplaceRemote );
+        new TestDocumentFileSynchronizer();
+    synchronizer->startConnect( document, fileUrl1, TestDocumentFileSynchronizer::ReplaceRemote )->exec();
     QCOMPARE( synchronizer->document(), document );
 
     // file 2
     synchronizer =
-        new TestDocumentFileSynchronizer( document, fileUrl2, TestDocumentFileSynchronizer::ReplaceRemote );
+        new TestDocumentFileSynchronizer();
+    synchronizer->startConnect( document, fileUrl2, TestDocumentFileSynchronizer::ReplaceRemote )->exec();
     QCOMPARE( synchronizer->document(), document );
 
     // now delete document and load new

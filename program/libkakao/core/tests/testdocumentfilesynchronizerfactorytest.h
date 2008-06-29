@@ -47,6 +47,7 @@ class TestDocumentFileSynchronizerFactoryTest : public QObject
 
   private Q_SLOTS: // test functions
     void testCreate();
+#if 0
     void testLoadFromFile();
     void testLoadSaveFile();
     void testLoadReloadFile();
@@ -55,7 +56,7 @@ class TestDocumentFileSynchronizerFactoryTest : public QObject
     // TODO: need a way besides popups to report problems
     void testLoadFromNotExistingUrl();
     void testLoadFromNotExistingFile();
-
+#endif
   private:
     TestFileSystem *mFileSystem;
 };

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -93,7 +93,7 @@ void KByteArrayRawFileSynchronizerFactoryTest::testCreate()
 
     delete factory;
 }
-
+#if 0
 void KByteArrayRawFileSynchronizerFactoryTest::testLoadFromUrl()
 {
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( FileProtocolName );
@@ -125,7 +125,7 @@ void KByteArrayRawFileSynchronizerFactoryTest::testLoadFromNotExistingUrl()
 
     delete factory;
 }
-
+#endif
 #if 0
 void KByteArrayRawFileSynchronizerFactoryTest::testSaveToFile()
 {

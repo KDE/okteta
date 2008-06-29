@@ -33,20 +33,24 @@ class KByteArrayRawFileSynchronizer : public KAbstractDocumentFileSystemSynchron
 {
     Q_OBJECT
 
+  friend class ByteArrayRawFileLoadJob;
+  friend class ByteArrayRawFileConnectJob;
+
   public:
-    KByteArrayRawFileSynchronizer( KAbstractDocument *document, const KUrl &url,
-                                   KAbstractDocumentSynchronizer::ConnectOption option );
-    explicit KByteArrayRawFileSynchronizer( const KUrl &originUrl );
+    KByteArrayRawFileSynchronizer();
 
   public: // KAbstractDocumentSynchronizer API
+    virtual AbstractLoadJob *startLoad( const KUrl &url );
+    virtual AbstractSyncToRemoteJob *startSyncToRemote();
+    virtual AbstractSyncFromRemoteJob *startSyncFromRemote();
+    virtual AbstractSyncWithRemoteJob *startSyncWithRemote( const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option );
+    virtual AbstractConnectJob *startConnect( KAbstractDocument *document,
+                                              const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option );
+
     virtual KAbstractDocument *document() const;
 
-  protected: // KAbstractDocumentFileSystemSynchronizer API
-    virtual KAbstractDocument *loadFromFile( const QString &workFilePath );
-    virtual bool reloadFromFile( const QString &workFilePath );
-    virtual bool writeToFile( const QString &workFilePath );
-    virtual bool syncWithFile( const QString &workFilePath,
-                               KAbstractDocumentSynchronizer::ConnectOption option );
+  protected:
+    void setDocument( KByteArrayDocument *document );
 
   protected Q_SLOTS:
     void onUrlChange( const KUrl &url );
@@ -54,5 +58,7 @@ class KByteArrayRawFileSynchronizer : public KAbstractDocumentFileSystemSynchron
   protected:
     KByteArrayDocument *mDocument;
 };
+
+inline void KByteArrayRawFileSynchronizer::setDocument( KByteArrayDocument *document ) { mDocument = document; }
 
 #endif

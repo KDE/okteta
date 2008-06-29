@@ -28,6 +28,14 @@ set( OKTETA_KAKAO_IO_SRCS
   kbytearraytextstreamencoder.cpp
   ${OKTETA_TEXTRENDERER_SRCS}
   bytearrayviewtextstreamencoder.cpp
+  bytearrayrawfileloadthread.cpp
+  bytearrayrawfilereloadthread.cpp
+  bytearrayrawfilewritethread.cpp
+  bytearrayrawfileloadjob.cpp
+  bytearrayrawfileconnectjob.cpp
+  bytearrayrawfilewritejob.cpp
+  bytearrayrawfilereloadjob.cpp
+  bytearrayrawfilewritetojob.cpp
   kbytearrayrawfilesynchronizer.cpp
   kbytearrayrawfilesynchronizerfactory.cpp
 )

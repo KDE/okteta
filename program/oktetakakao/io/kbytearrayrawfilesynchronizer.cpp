@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,6 +23,11 @@
 #include "kbytearrayrawfilesynchronizer.h"
 
 // lib
+#include "bytearrayrawfileloadjob.h"
+#include "bytearrayrawfileconnectjob.h"
+#include "bytearrayrawfilewritejob.h"
+#include "bytearrayrawfilereloadjob.h"
+#include "bytearrayrawfilewritetojob.h"
 #include "kbytearraydocument.h"
 // Okteta core
 #include <kpiecetablebytearraymodel.h>
@@ -30,127 +35,47 @@
 #include <KUrl>
 #include <KLocale>
 // Qt
+#include <QtGui/QApplication>
 #include <QtCore/QDataStream>
 #include <QtCore/QFile>
 
 
 
-KByteArrayRawFileSynchronizer::KByteArrayRawFileSynchronizer( const KUrl &url )
+KByteArrayRawFileSynchronizer::KByteArrayRawFileSynchronizer()
+ : mDocument( 0 )
 {
-    KAbstractDocument *document = loadFromUrl( url );
-    mDocument = document ? qobject_cast<KByteArrayDocument*>( document ) : 0;
-    if( mDocument )
-        onUrlChange( url );
-    connect( this, SIGNAL(urlChanged(const KUrl&)), SLOT(onUrlChange( const KUrl & )) );
-}
-
-KByteArrayRawFileSynchronizer::KByteArrayRawFileSynchronizer( KAbstractDocument *document, const KUrl &url,
-                                                              KAbstractDocumentSynchronizer::ConnectOption option )
-{
-    // TODO: is synchronizer->document() really a good signal for success? see also above
-    mDocument = document ? qobject_cast<KByteArrayDocument*>( document ) : 0;
-    if( mDocument )
-    {
-        if( !syncWithUrl(url,option) )
-            mDocument = 0;
-    }
-    if( mDocument )
-        onUrlChange( url );
     connect( this, SIGNAL(urlChanged(const KUrl&)), SLOT(onUrlChange( const KUrl & )) );
 }
 
 KAbstractDocument *KByteArrayRawFileSynchronizer::document() const { return mDocument; }
 
-KAbstractDocument *KByteArrayRawFileSynchronizer::loadFromFile( const QString &workFilePath/*, int *success*/ )
+
+AbstractLoadJob *KByteArrayRawFileSynchronizer::startLoad( const KUrl &url )
 {
-    KByteArrayDocument *document = 0;
-
-    QFile file( workFilePath );
-    file.open( QIODevice::ReadOnly );
-    QDataStream inStream( &file );
-    int fileSize = file.size();
-
-    // TODO: should the decoder know this?
-    // it is in the api now (constructor)
-
-    char *data = new char[fileSize];
-    inStream.readRawData( data, fileSize );
-    KHECore::KPieceTableByteArrayModel *byteArray = new KHECore::KPieceTableByteArrayModel( data, fileSize );
-
-    byteArray->setModified( false );
-
-    //registerDiskModifyTime( file ); TODO move into synchronizer
-
-    const bool streamIsOk = ( inStream.status() == QDataStream::Ok );
-//     if( success )
-//         *success = streamIsOk ? 0 : 1;
-    if( streamIsOk )
-        document = new KByteArrayDocument( byteArray, i18nc("destination of the byte array", "Loaded from file.") );
-    else
-        delete byteArray;
-
-    return document;
+    return new ByteArrayRawFileLoadJob( this, url );
 }
 
-bool KByteArrayRawFileSynchronizer::reloadFromFile( const QString &workFilePath )
+AbstractSyncToRemoteJob *KByteArrayRawFileSynchronizer::startSyncToRemote()
 {
-    QFile file( workFilePath );
-    file.open( QIODevice::ReadOnly );
-    QDataStream inStream( &file );
-    int fileSize = file.size();
-
-    // TODO: should the decoder know this?
-    char *newData = new char[fileSize];
-    inStream.readRawData( newData, fileSize );
-
-    //registerDiskModifyTime( file ); TODO move into synchronizer
-
-    const bool streamIsOk = ( inStream.status() == QDataStream::Ok );
-//     if( success )
-//         *success = streamIsOk ? 0 : 1;
-    if( streamIsOk )
-    {
-        KHECore::KPieceTableByteArrayModel *byteArray = qobject_cast<KHECore::KPieceTableByteArrayModel*>( mDocument->content() );
-        byteArray->setData( newData, fileSize, false );
-    }
-    else
-        delete [] newData;
-
-    return streamIsOk;
+    return new ByteArrayRawFileWriteJob( this );
 }
 
-bool KByteArrayRawFileSynchronizer::writeToFile( const QString &workFilePath )
+AbstractSyncFromRemoteJob *KByteArrayRawFileSynchronizer::startSyncFromRemote()
 {
-    KHECore::KPieceTableByteArrayModel *byteArray = qobject_cast<KHECore::KPieceTableByteArrayModel*>( mDocument->content() );
-
-    QFile file( workFilePath );
-    file.open( QIODevice::WriteOnly );
-
-    QDataStream outStream( &file );
-
-    //TODO: this was
-//     outStream.writeRawData( byteArray->data(), byteArray->size() );
-    // make it quicker again by writing spans -> spaniterator
-
-    for( int i = 0; i<byteArray->size(); ++i )
-    {
-        const char datum = byteArray->datum(i);
-        outStream.writeRawData( &datum, 1 );
-    }
-
-    byteArray->setModified( false );
-
-    //registerDiskModifyTime( file );TODO move into synchronizer
-
-    return outStream.status() == QDataStream::Ok;
+    return new ByteArrayRawFileReloadJob( this );
 }
 
-bool KByteArrayRawFileSynchronizer::syncWithFile( const QString &workFilePath,
-                                                  KAbstractDocumentSynchronizer::ConnectOption option )
+AbstractSyncWithRemoteJob *KByteArrayRawFileSynchronizer::startSyncWithRemote( const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option  )
 {
-Q_UNUSED( option );
-    return writeToFile( workFilePath );
+    return new ByteArrayRawFileWriteToJob( this, url, option );
 }
+
+AbstractConnectJob *KByteArrayRawFileSynchronizer::startConnect( KAbstractDocument *document,
+                                              const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option )
+{
+    return new ByteArrayRawFileConnectJob( this, document, url, option );
+}
+
 
 void KByteArrayRawFileSynchronizer::onUrlChange( const KUrl &url )
 {
