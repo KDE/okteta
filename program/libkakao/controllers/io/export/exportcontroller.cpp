@@ -23,13 +23,14 @@
 
 #include "exportcontroller.h"
 
-// kakao
+// lib
+#include <kabstractview.h>
+#include <kidataselectable.h>
+// Kakao core
 #include <kdocumentmanager.h>
 #include <modelcodecmanager.h>
 #include <kabstractdocument.h>
 #include <abstractmodelexporter.h>
-#include <kabstractview.h>
-#include <kidataselectable.h>
 // KDE
 #include <KXmlGuiWindow>
 #include <KXMLGUIFactory>
