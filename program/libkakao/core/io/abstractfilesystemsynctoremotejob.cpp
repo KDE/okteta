@@ -40,7 +40,8 @@ class AbstractFileSystemSyncToRemoteJob::Private
     Private( KAbstractDocumentFileSystemSynchronizer *synchronizer );
 
   public:
-    void setWorkFilePath( const QString &workFilePath );
+    void prepareWorkFile();
+    void removeWorkFile();
 
   public:
     KUrl url() const;
@@ -50,6 +51,7 @@ class AbstractFileSystemSyncToRemoteJob::Private
 
   protected:
     KAbstractDocumentFileSystemSynchronizer *mSynchronizer;
+    KTemporaryFile *mTemporaryFile;
     QString mWorkFilePath;
 };
 
@@ -66,11 +68,21 @@ inline KAbstractDocumentFileSystemSynchronizer *AbstractFileSystemSyncToRemoteJo
     return mSynchronizer;
 }
 
-inline void AbstractFileSystemSyncToRemoteJob::Private::setWorkFilePath( const QString &workFilePath )
+inline void AbstractFileSystemSyncToRemoteJob::Private::prepareWorkFile()
 {
-    mWorkFilePath = workFilePath;
+    if( url().isLocalFile() )
+        mWorkFilePath = url().path();
+    else
+    {
+        mTemporaryFile = new KTemporaryFile;
+        mTemporaryFile->open();
+        mWorkFilePath = mTemporaryFile->fileName();
+    }
 }
-
+inline void AbstractFileSystemSyncToRemoteJob::Private::removeWorkFile()
+{
+    delete mTemporaryFile;
+}
 
 
 AbstractFileSystemSyncToRemoteJob::AbstractFileSystemSyncToRemoteJob( KAbstractDocumentFileSystemSynchronizer *synchronizer )
@@ -91,15 +103,8 @@ void AbstractFileSystemSyncToRemoteJob::start()
 
 void AbstractFileSystemSyncToRemoteJob::syncToRemote()
 {
-    KTemporaryFile temporaryFile;
+    d->prepareWorkFile();
 
-    if( d->url().isLocalFile() )
-        d->setWorkFilePath( d->url().path() );
-    else
-    {
-        temporaryFile.open();
-        d->setWorkFilePath( temporaryFile.fileName() );
-    }
     startWriteToFile();
 }
 
@@ -122,6 +127,8 @@ void AbstractFileSystemSyncToRemoteJob::completeWrite( bool success )
         setError( KilledJobError );
         setErrorText( i18nc("@info","Problem when saving to local filesystem.") );
     }
+
+    d->removeWorkFile();
 
     emitResult();
 }
