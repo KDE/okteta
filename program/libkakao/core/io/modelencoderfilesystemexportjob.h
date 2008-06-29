@@ -1,5 +1,5 @@
 /*
-    This file is part of the Kakao Framework, part of the KDE project.
+    This file is part of the Okteta Kakao module, part of the KDE project.
 
     Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
@@ -20,27 +20,25 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTMODELFILESYSTEMEXPORTER_H
-#define ABSTRACTMODELFILESYSTEMEXPORTER_H
+#ifndef MODELENCODERFILESYSTEMEXPORTJOB_H
+#define MODELENCODERFILESYSTEMEXPORTJOB_H
 
 // lib
-#include "abstractmodelexporter.h"
+#include "abstractfilesystemexportjob.h"
 
+class AbstractModelStreamEncoder;
 
-class AbstractModelFileSystemExporter : public AbstractModelExporter
+class ModelEncoderFileSystemExportJob : public AbstractFileSystemExportJob
 {
   Q_OBJECT
 
-  protected:
-    AbstractModelFileSystemExporter( const QString &remoteTypeName, const QString &remoteMimeType );
   public:
-    virtual ~AbstractModelFileSystemExporter();
+    ModelEncoderFileSystemExportJob( AbstractModel *model, const AbstractModelSelection *selection,
+                                     const KUrl &url, AbstractModelStreamEncoder *encoder );
+    virtual ~ModelEncoderFileSystemExportJob();
 
-  public: // AbstractModelExporter API
-    virtual bool doExport( AbstractModel *model, const AbstractModelSelection *selection, const KUrl &url );
-
-  protected: // API to be implemented
-    virtual bool writeToFile( AbstractModel *model, const AbstractModelSelection *selection, const QString &workFilePath ) = 0;
+  protected: // AbstractFileSystemExportJob API
+    virtual void startExportToFile();
 
   protected:
     class Private;

@@ -1,7 +1,7 @@
 /*
-    This file is part of the Kakao Framework, part of the KDE project.
+    This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,35 +20,32 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTMODELEXPORTER_H
-#define ABSTRACTMODELEXPORTER_H
+#ifndef ABSTRACTEXPORTJOB_H
+#define ABSTRACTEXPORTJOB_H
 
-// Qt
-#include <QtCore/QObject>
-#include <QtCore/QString>
+// KDE
+#include <KJob>
 
-class AbstractModel;
-class AbstractModelSelection;
-class AbstractExportJob;
-class KUrl;
+class KAbstractDocument;
 
-class AbstractModelExporter : public QObject
+class AbstractExportJob : public KJob
 {
   Q_OBJECT
 
+  public:
+    AbstractExportJob();
+    virtual ~AbstractExportJob();
+
+  public:
+    KAbstractDocument *document() const;
+
+  Q_SIGNALS:
+    void documentLoaded( KAbstractDocument *document );
+
   protected:
-    AbstractModelExporter( const QString &remoteTypeName, const QString &remoteMimeType );
-  public:
-    virtual ~AbstractModelExporter();
-
-  public: // API to be implemented
-    virtual AbstractExportJob *startExport( AbstractModel *model, const AbstractModelSelection *selection,
-                                            const KUrl &url ) = 0;
-    virtual QString modelTypeName( AbstractModel *model, const AbstractModelSelection *selection ) const = 0;
-
-  public:
-    QString remoteTypeName() const;
-    QString remoteMimeType() const;
+    // emits documentLoaded()
+    // TODO: or better name property LoadedDocument?
+    virtual void setDocument( KAbstractDocument *document );
 
   protected:
     class Private;

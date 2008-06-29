@@ -26,7 +26,9 @@
 #include "modelencoderfilesystemexporter.h"
 #include "abstractmodelstreamencoder.h"
 // #include "abstractmodelstreamdecoder.h"
+#include "jobmanager.h"
 #include "kdocumentmanager.h"
+#include "abstractexportjob.h"
 // KDE
 #include <KIO/NetAccess>
 #include <KFileDialog>
@@ -121,8 +123,8 @@ void ModelCodecManager::exportDocument( AbstractModelExporter *exporter,
                     continue;
             }
 
-            //TODO: overwrite for now
-            exportDone = exporter->doExport( model, selection, exportUrl );
+            AbstractExportJob *exportJob = exporter->startExport( model, selection, exportUrl );
+            exportDone = JobManager::executeJob( exportJob, mWidget );
 
 //                 if( exportDone )
 //                     emit urlUsed( exportUrl );

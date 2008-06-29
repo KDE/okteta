@@ -48,8 +48,7 @@ class AbstractModelStreamEncoder : public QObject
 
   public: // API to be implemented
     virtual bool encodeToStream( QIODevice *device, AbstractModel *model, const AbstractModelSelection *selection ) = 0;
-    virtual QString modelTypeName( AbstractModel *model, const AbstractModelSelection *selection ) const
- { Q_UNUSED(model); Q_UNUSED(selection); return QString(); }//= 0;
+    virtual QString modelTypeName( AbstractModel *model, const AbstractModelSelection *selection ) const = 0;
 
   public:
     QString remoteTypeName() const;

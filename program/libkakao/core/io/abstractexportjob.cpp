@@ -1,5 +1,5 @@
 /*
-    This file is part of the Kakao Framework, part of the KDE project.
+    This file is part of the Okteta Kakao module, part of the KDE project.
 
     Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
@@ -20,30 +20,44 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MODELENCODERFILESYSTEMEXPORTER_H
-#define MODELENCODERFILESYSTEMEXPORTER_H
+#include "abstractexportjob.h"
 
-// lib
-#include "abstractmodelexporter.h"
-
-class AbstractModelStreamEncoder;
-
-
-class ModelEncoderFileSystemExporter : public AbstractModelExporter
+class AbstractExportJob::Private
 {
-  Q_OBJECT
+  public:
+    Private();
 
   public:
-    explicit ModelEncoderFileSystemExporter( AbstractModelStreamEncoder *encoder );
-    virtual ~ModelEncoderFileSystemExporter();
-
-  public: // AbstractModelExporter API
-    virtual AbstractExportJob *startExport( AbstractModel *model, const AbstractModelSelection *selection,
-                                            const KUrl &url );
-    virtual QString modelTypeName( AbstractModel *model, const AbstractModelSelection *selection ) const;
+    KAbstractDocument *document() const;
+    void setDocument( KAbstractDocument *document );
 
   protected:
-    AbstractModelStreamEncoder * const mEncoder;
+    KAbstractDocument *mDocument;
 };
 
-#endif
+AbstractExportJob::Private::Private()
+ : mDocument( 0 )
+{}
+
+
+inline KAbstractDocument *AbstractExportJob::Private::document() const { return mDocument; }
+inline void AbstractExportJob::Private::setDocument( KAbstractDocument *document ) { mDocument = document; }
+
+
+AbstractExportJob::AbstractExportJob()
+ : d( new Private() )
+{}
+
+KAbstractDocument *AbstractExportJob::document() const { return d->document(); }
+
+void AbstractExportJob::setDocument( KAbstractDocument *document )
+{
+    d->setDocument( document );
+    emit documentLoaded( document );
+    emitResult();
+}
+
+AbstractExportJob::~AbstractExportJob()
+{
+    delete d;
+}

@@ -1,5 +1,5 @@
 /*
-    This file is part of the Kakao Framework, part of the KDE project.
+    This file is part of the Okteta Kakao module, part of the KDE project.
 
     Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
@@ -20,27 +20,24 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "modelencoderfilesystemexporter.h"
+#include "modelencoderfilesystemexportthread.h"
 
 // lib
-#include "modelencoderfilesystemexportjob.h"
 #include "abstractmodelstreamencoder.h"
+// Qt
+#include <QtCore/QDataStream>
+#include <QtCore/QFile>
+#include <QtCore/QString>
 
 
-ModelEncoderFileSystemExporter::ModelEncoderFileSystemExporter( AbstractModelStreamEncoder *encoder )
-: AbstractModelExporter(encoder->remoteTypeName(),encoder->remoteMimeType()), mEncoder( encoder )
-{}
-
-AbstractExportJob *ModelEncoderFileSystemExporter::startExport( AbstractModel *model,
-                                                                const AbstractModelSelection *selection,
-                                                                const KUrl &url )
+void ModelEncoderFileSystemExportThread::run()
 {
-    return new ModelEncoderFileSystemExportJob( model, selection, url, mEncoder );
+    QFile file( mFilePath );
+    file.open( QIODevice::WriteOnly );
+
+    mSuccess = mEncoder->encodeToStream( &file, mModel, mSelection );
+
+    emit modelExported( mSuccess );
 }
 
-QString ModelEncoderFileSystemExporter::modelTypeName( AbstractModel *model, const AbstractModelSelection *selection ) const
-{
-    return mEncoder->modelTypeName( model, selection );
-}
-
-ModelEncoderFileSystemExporter::~ModelEncoderFileSystemExporter() {}
+ModelEncoderFileSystemExportThread::~ModelEncoderFileSystemExportThread() {}

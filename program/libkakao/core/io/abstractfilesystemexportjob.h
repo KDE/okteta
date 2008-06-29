@@ -20,27 +20,47 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "modelencoderfilesystemexporter.h"
+#ifndef ABSTRACTFILESYSTEMEXPORTJOB_H
+#define ABSTRACTFILESYSTEMEXPORTJOB_H
 
 // lib
-#include "modelencoderfilesystemexportjob.h"
-#include "abstractmodelstreamencoder.h"
+#include "abstractexportjob.h"
 
+class AbstractModel;
+class AbstractModelSelection;
+class KUrl;
 
-ModelEncoderFileSystemExporter::ModelEncoderFileSystemExporter( AbstractModelStreamEncoder *encoder )
-: AbstractModelExporter(encoder->remoteTypeName(),encoder->remoteMimeType()), mEncoder( encoder )
-{}
-
-AbstractExportJob *ModelEncoderFileSystemExporter::startExport( AbstractModel *model,
-                                                                const AbstractModelSelection *selection,
-                                                                const KUrl &url )
+class AbstractFileSystemExportJob : public AbstractExportJob
 {
-    return new ModelEncoderFileSystemExportJob( model, selection, url, mEncoder );
-}
+  Q_OBJECT
 
-QString ModelEncoderFileSystemExporter::modelTypeName( AbstractModel *model, const AbstractModelSelection *selection ) const
-{
-    return mEncoder->modelTypeName( model, selection );
-}
+  protected:
+    AbstractFileSystemExportJob( AbstractModel *model, const AbstractModelSelection *selection,
+                                 const KUrl &url );
+  public:
+    virtual ~AbstractFileSystemExportJob();
 
-ModelEncoderFileSystemExporter::~ModelEncoderFileSystemExporter() {}
+  public: // KJob API
+    virtual void start();
+
+  protected: // API to be implemented
+    virtual void startExportToFile() = 0;
+
+  protected:
+    void completeExport( bool success );
+
+  protected:
+    AbstractModel *model() const;
+    const AbstractModelSelection *selection() const;
+    QString workFilePath() const;
+    QWidget *widget() const;
+
+  protected Q_SLOTS:
+    void exportToFile();
+
+  protected:
+    class Private;
+    Private * const d;
+};
+
+#endif
