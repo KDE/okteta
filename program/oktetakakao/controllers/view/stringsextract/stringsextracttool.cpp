@@ -89,6 +89,8 @@ void StringsExtractTool::setView( KAbstractView *view )
 void StringsExtractTool::setMinLength( int minLength )
 {
     mMinLength = minLength;
+    mUptodate = false;
+    emit uptodateChanged( false );
 }
 
 void StringsExtractTool::setCharCodec( const QString &codecName )
