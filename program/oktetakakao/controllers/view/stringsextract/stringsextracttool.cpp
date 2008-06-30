@@ -39,20 +39,21 @@
 static const int DefaultMinLength = 3;
 
 StringsExtractTool::StringsExtractTool()
- : mCharCodec( KHECore::KCharCodec::createCodec(KHECore::LocalEncoding) ), mMinLength( DefaultMinLength ),
-   mByteArrayView( 0 ), mByteArrayModel( 0 ), mSourceByteArrayModel( 0 )
+ : mExtractedStringsUptodate( false ), mSourceByteArrayModelUptodate( false ),
+   mCharCodec( KHECore::KCharCodec::createCodec(KHECore::LocalEncoding) ), mMinLength( DefaultMinLength ),
+   mByteArrayView( 0 ), mByteArrayModel( 0 ), mSourceByteArrayModel( 0 ), mSourceMinLength( 0 )
 {
 }
 
 bool StringsExtractTool::isApplyable() const
 {
-    return ( mByteArrayModel != 0 && mByteArrayView->hasSelectedData() );
+    return ( mByteArrayModel != 0 && mByteArrayView->hasSelectedData() && mMinLength > 0 );
 }
 
-bool StringsExtractTool::isSelectable() const
+bool StringsExtractTool::canHighlightString() const
 {
     return ( mSourceByteArrayModel == mByteArrayModel
-             && mByteArrayView && mByteArrayView->selection() == mSourceSelection );
+             && mByteArrayView && mSourceByteArrayModelUptodate );
 }
 
 // TODO: add model with offset and string
@@ -63,7 +64,6 @@ bool StringsExtractTool::isSelectable() const
 void StringsExtractTool::setView( KAbstractView *view )
 {
     if( mByteArrayView ) mByteArrayView->disconnect( this );
-    if( mByteArrayModel ) mByteArrayModel->disconnect( this );
 
     mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
 
@@ -75,22 +75,24 @@ void StringsExtractTool::setView( KAbstractView *view )
         connect( mByteArrayView,  SIGNAL(charCodecChanged( const QString & )),
                  SLOT(setCharCodec( const QString &)) );
         connect( mByteArrayView,  SIGNAL(selectionChanged( bool )),
-                 SIGNAL(isApplyableChanged( bool )) );
+                 SLOT(onSelectionChanged( bool )) );
 
         setCharCodec( mByteArrayView->encodingName() );
     }
 
     // TODO: if there is no view, there is nothing to extract.
     // or this could be the view where we got the strings from and it did not change
+    checkUptoDate();
+    emit uptodateChanged( mExtractedStringsUptodate );
     emit isApplyableChanged( isApplyable() );
-    emit isSelectableChanged( isSelectable() );
+    emit canHighlightStringChanged( canHighlightString() );
 }
 
 void StringsExtractTool::setMinLength( int minLength )
 {
     mMinLength = minLength;
-    mUptodate = false;
-    emit uptodateChanged( false );
+    checkUptoDate();
+    emit uptodateChanged( mExtractedStringsUptodate );
 }
 
 void StringsExtractTool::setCharCodec( const QString &codecName )
@@ -102,6 +104,15 @@ void StringsExtractTool::setCharCodec( const QString &codecName )
     mCharCodec = KHECore::KCharCodec::createCodec( codecName );
 }
 
+void StringsExtractTool::checkUptoDate()
+{
+    mExtractedStringsUptodate =
+        ( mSourceByteArrayModel == mByteArrayModel
+          && mByteArrayView && mSourceSelection == mByteArrayView->selection()
+          && mSourceMinLength == mMinLength
+          && mSourceByteArrayModelUptodate );
+}
+
 void StringsExtractTool::selectString( int stringId )
 {
     const ContainedString &containedString = mContainedStringList.at(stringId);
@@ -111,11 +122,21 @@ void StringsExtractTool::selectString( int stringId )
     mByteArrayView->setFocus();
 }
 
-void StringsExtractTool::onSourceModified()
+void StringsExtractTool::onSelectionChanged( bool hasSelection )
 {
-    mUptodate = false;
+// TODO: could be quicker
+Q_UNUSED( hasSelection )
+    checkUptoDate();
+    emit uptodateChanged( mExtractedStringsUptodate );
+    emit isApplyableChanged( isApplyable() );
+}
+
+void StringsExtractTool::onSourceChanged()
+{
+    mExtractedStringsUptodate = false;
+    mSourceByteArrayModelUptodate = false;
     emit uptodateChanged( false );
-    emit isSelectableChanged( false );
+    emit canHighlightStringChanged( false );
 }
 
 
@@ -137,14 +158,14 @@ void StringsExtractTool::extractStrings()
     // remember new string source
     mSourceByteArrayModel = mByteArrayModel;
     mSourceSelection = mByteArrayView->selection();
-    connect( mSourceByteArrayModel,  SIGNAL(modificationChanged( bool )),
-             SLOT(onSourceModified()) );
-    connect( mByteArrayView,  SIGNAL(selectionChanged( bool )),
-             SLOT(onSourceModified()) );
+    mSourceMinLength = mMinLength;
+    connect( mSourceByteArrayModel,  SIGNAL(contentsChanged( const KHE::ArrayChangeMetricsList & )),
+             SLOT(onSourceChanged()) );
 
-    mUptodate = true;
+    mExtractedStringsUptodate = true;
+    mSourceByteArrayModelUptodate = true;
     emit uptodateChanged( true );
-    emit isSelectableChanged( true );
+    emit canHighlightStringChanged( true );
 }
 
 

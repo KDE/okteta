@@ -59,7 +59,7 @@ class StringsExtractTool : public QObject
     int minLength() const;
     bool isApplyable() const; // candidate for AbstractTool API
     bool isUptodate() const;
-    bool isSelectable() const;
+    bool canHighlightString() const;
 
   public Q_SLOTS: // settings
     void setCharCodec( const QString &codecName );
@@ -70,16 +70,21 @@ class StringsExtractTool : public QObject
     void extractStrings();
 
   public Q_SLOTS: // actions
-    void onSourceModified();
+    void onSelectionChanged( bool hasSelection );
+    void onSourceChanged();
 
   Q_SIGNALS:
     void uptodateChanged( bool isUptodate );
     void isApplyableChanged( bool isApplyable );  // candidate for AbstractTool API
-    void isSelectableChanged( bool isSelectable );
+    void canHighlightStringChanged( bool canHighlightString );
+
+  protected:
+    void checkUptoDate();
 
   protected: // created data
     QList<ContainedString> mContainedStringList;
-    bool mUptodate;
+    bool mExtractedStringsUptodate:1;
+    bool mSourceByteArrayModelUptodate:1;
 
   protected: // settings
     KHECore::KCharCodec *mCharCodec;
@@ -94,10 +99,12 @@ class StringsExtractTool : public QObject
     KHE::KSection mSourceSelection;
     // source of strings
     KHECore::KAbstractByteArrayModel *mSourceByteArrayModel;
+    // minLength source
+    int mSourceMinLength;
 };
 
 inline const QList<ContainedString> *StringsExtractTool::containedStringList() const { return &mContainedStringList; }
 inline int StringsExtractTool::minLength()     const { return mMinLength; }
-inline bool StringsExtractTool::isUptodate()   const { return mUptodate; }
+inline bool StringsExtractTool::isUptodate()   const { return mExtractedStringsUptodate; }
 
 #endif

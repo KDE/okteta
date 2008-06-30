@@ -42,6 +42,7 @@
 #include <QtGui/QClipboard>
 #include <QtGui/QApplication>
 
+
 static const int MinimumStringLength = 1;
 
 StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget *parent )
@@ -150,7 +151,7 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget *paren
 
     connect( mTool, SIGNAL(uptodateChanged( bool )), SLOT(onStringsUptodateChanged( bool )) );
     connect( mTool, SIGNAL(isApplyableChanged( bool )), SLOT( onApplyableChanged( bool )) );
-    connect( mTool, SIGNAL(isSelectableChanged( bool )), SLOT(onIsSelectableChanged( bool )) );
+    connect( mTool, SIGNAL(canHighlightStringChanged( bool )), SLOT(onCanHighlightStringChanged( bool )) );
 
     onStringSelectionChanged();
 }
@@ -167,20 +168,20 @@ void StringsExtractView::onStringsUptodateChanged( bool stringsUptodate )
     if( stringsUptodate )
         mContainedStringTableModel->update();
 
-    mUpdateButton->setEnabled( !stringsUptodate && mTool->isApplyable() );
+    const bool isApplyable = mTool->isApplyable();
+    mUpdateButton->setEnabled( !stringsUptodate && isApplyable );
 }
 
 void StringsExtractView::onApplyableChanged( bool isApplyable )
 {
-    mUpdateButton->setEnabled( isApplyable );
+    mUpdateButton->setEnabled( !mTool->isUptodate() && isApplyable );
 }
 
-void StringsExtractView::onIsSelectableChanged( bool isSelectable )
+void StringsExtractView::onCanHighlightStringChanged( bool canHighlightString )
 {
-    const bool hasCurrent = mContainedStringTableView->selectionModel()->currentIndex().isValid();
-    mGotoButton->setEnabled( isSelectable && hasCurrent );
+    const bool stringSelected = mContainedStringTableView->selectionModel()->currentIndex().isValid();
+    mGotoButton->setEnabled( canHighlightString && stringSelected );
 }
-
 
 
 void StringsExtractView::onGotoButtonClicked()
@@ -192,11 +193,11 @@ void StringsExtractView::onGotoButtonClicked()
 
 void StringsExtractView::onCopyButtonClicked()
 {
-    const QModelIndexList selectedIndexes = mContainedStringTableView->selectionModel()->selectedRows();
+    const QModelIndexList selectedRows = mContainedStringTableView->selectionModel()->selectedRows();
     const QList<ContainedString> *containedStringList = mTool->containedStringList();
 
     QString strings;
-    foreach( const QModelIndex &index, selectedIndexes )
+    foreach( const QModelIndex &index, selectedRows )
     {
         const int i = mSortFilterProxyModel->mapToSource(index).row();
         strings += ( containedStringList->at( i ).string() + '\n' ); //TODO: specific linefeed for platforms
@@ -211,14 +212,14 @@ void StringsExtractView::onStringSelectionChanged()
     const bool hasSelection = selectionModel->hasSelection();
     mCopyButton->setEnabled( hasSelection );
 
-    const bool hasCurrent = selectionModel->currentIndex().isValid();
-    const bool isSelectable = mTool->isSelectable();
-    mGotoButton->setEnabled( isSelectable && hasCurrent );
+    const bool stringSelected = selectionModel->isSelected( selectionModel->currentIndex() );
+    const bool canHighlightString = mTool->canHighlightString();
+    mGotoButton->setEnabled( canHighlightString && stringSelected );
 }
 
 void StringsExtractView::onStringDoubleClicked( const QModelIndex &index )
 {
-    if( mTool->isSelectable() )
+    if( mTool->canHighlightString() )
         mTool->selectString( mSortFilterProxyModel->mapToSource(index).row() );
 }
 

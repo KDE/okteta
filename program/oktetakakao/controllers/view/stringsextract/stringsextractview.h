@@ -54,7 +54,7 @@ class StringsExtractView : public QWidget
   public Q_SLOTS: // tool
     void onStringsUptodateChanged( bool stringUptodate );
     void onApplyableChanged( bool isApplyable );
-    void onIsSelectableChanged( bool isSelectable );
+    void onCanHighlightStringChanged( bool isSelectable );
 
   private:
     StringsExtractTool *mTool;
