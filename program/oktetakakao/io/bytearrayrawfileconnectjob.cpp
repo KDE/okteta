@@ -25,7 +25,7 @@
 
 // lib
 #include "kbytearrayrawfilesynchronizer.h"
-#include "bytearrayrawfileconnectthread.h"
+#include "bytearrayrawfilewritethread.h"
 #include "kbytearraydocument.h"
 // Qt
 #include <QtGui/QApplication>
