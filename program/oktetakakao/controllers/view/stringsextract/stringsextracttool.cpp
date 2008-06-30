@@ -23,15 +23,17 @@
 #include "stringsextracttool.h"
 
 // lib
+#include "extractstringsjob.h"
 #include <kbytearraydocument.h>
 // Kakao gui
 #include <kabstractview.h>
 // Okteta gui
 #include <kbytearrayview.h>
 // Okteta core
-#include <khechar.h>
 #include <kcharcodec.h>
 #include <kbytearraymodel.h>
+// Qt
+#include <QtGui/QApplication>
 
 
 static const int DefaultMinLength = 3;
@@ -114,64 +116,29 @@ void StringsExtractTool::onSourceModified()
     emit isSelectableChanged( false );
 }
 
+
 // TODO: use KWordBufferService
 void StringsExtractTool::extractStrings()
 {
-    mContainedStringList.clear();
-    if( !mByteArrayModel )
-        return;
-
-    // remember selection
+    // forget old string source
     if( mSourceByteArrayModel ) mSourceByteArrayModel->disconnect( this );
+
+    QApplication::setOverrideCursor( Qt::WaitCursor );
+
+    ExtractStringsJob *extractStringsJob =
+        new ExtractStringsJob( mByteArrayModel, mByteArrayView->selection(), mCharCodec, mMinLength,
+                               &mContainedStringList );
+    extractStringsJob->exec();
+
+    QApplication::restoreOverrideCursor();
+
+    // remember new string source
     mSourceByteArrayModel = mByteArrayModel;
     mSourceSelection = mByteArrayView->selection();
     connect( mSourceByteArrayModel,  SIGNAL(modificationChanged( bool )),
              SLOT(onSourceModified()) );
     connect( mByteArrayView,  SIGNAL(selectionChanged( bool )),
              SLOT(onSourceModified()) );
-
-    const KHE::KSection selection = mByteArrayView->selection();
-    if( !selection.isValid() )
-        return;
-
-    bool stringStarted = false;
-    int stringStart = selection.start();
-    QString string;
-    int i;
-    for( i = selection.start(); i<=selection.end(); ++i )
-    {
-        const KHECore::KChar decodedChar = mCharCodec->decode( mByteArrayModel->datum(i) );
-        // TODO: Zeilenumbrüche ausnehmen
-        const bool isStringChar = ( !decodedChar.isUndefined() &&
-                                    (decodedChar.isLetterOrNumber() || decodedChar.isSpace() || decodedChar.isPunct()) );
-
-        if( isStringChar )
-        {
-            if( !stringStarted )
-            {
-                stringStart = i;
-                stringStarted = true;
-                string.clear();
-            }
-            string.append( decodedChar );
-        }
-        else
-        {
-            if( stringStarted )
-            {
-                if( i-stringStart >= mMinLength )
-                    mContainedStringList.append( ContainedString(string,stringStart) );
-                stringStarted = false;
-            }
-        }
-    }
-    // last string not ended?
-    if( stringStarted )
-    {
-        if( i-stringStart >= mMinLength )
-            mContainedStringList.append( ContainedString(string,stringStart) );
-        stringStarted = false;
-    }
 
     mUptodate = true;
     emit uptodateChanged( true );

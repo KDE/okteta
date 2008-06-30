@@ -30,6 +30,7 @@ set( INFOCONTROLLER_SRCS
   view/info/infocontroller.cpp
 )
 set( STRINGSEXTRACTCONTROLLER_SRCS
+  view/stringsextract/extractstringsjob.cpp
   view/stringsextract/stringsextracttool.cpp
   view/stringsextract/containedstringtablemodel.cpp
   view/stringsextract/stringsextractview.cpp
