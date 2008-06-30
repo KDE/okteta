@@ -24,6 +24,7 @@
 
 // controller
 #include "statistictablemodel.h"
+#include "createstatisticjob.h"
 // lib
 #include <kbytearraydocument.h>
 // Kakao gui
@@ -34,12 +35,15 @@
 #include <khechar.h>
 #include <kcharcodec.h>
 #include <kbytearraymodel.h>
+// Qt
+#include <QtGui/QApplication>
 
 
 InfoTool::InfoTool()
  : mStatisticTableModel( new StatisticTableModel(mByteCount,this) ),
    mByteArrayView( 0 ), mByteArrayModel( 0 )
 {
+    updateStatistic();
 }
 
 StatisticTableModel *InfoTool::statisticTableModel() const { return mStatisticTableModel; }
@@ -76,13 +80,12 @@ void InfoTool::setView( KAbstractView *view )
 
 void InfoTool::updateStatistic()
 {
-    // reset
-    memset( mByteCount, 0, sizeof(mByteCount) );
+    QApplication::setOverrideCursor( Qt::WaitCursor );
 
-    const int size = mByteArrayModel ? mByteArrayModel->size() : 0;
+    CreateStatisticJob *createStatisticJob = new CreateStatisticJob( mByteArrayModel, mByteCount );
+    const int size = createStatisticJob->exec();
 
-    for( int i=0; i<size; ++i )
-        ++mByteCount[(unsigned char)mByteArrayModel->datum(i)];
+    QApplication::restoreOverrideCursor();
 
     mStatisticTableModel->update( size );
     emit statisticDirty( false );

@@ -23,6 +23,7 @@ set( OVERWRITEMODECONTROLLER_SRCS
   view/overwritemode/overwritemodecontroller.cpp
 )
 set( INFOCONTROLLER_SRCS
+  view/info/createstatisticjob.cpp
   view/info/statistictablemodel.cpp
   view/info/infotool.cpp
   view/info/infoview.cpp
