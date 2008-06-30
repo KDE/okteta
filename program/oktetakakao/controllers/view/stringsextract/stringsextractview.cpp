@@ -192,7 +192,7 @@ void StringsExtractView::onGotoButtonClicked()
 
 void StringsExtractView::onCopyButtonClicked()
 {
-    const QModelIndexList selectedIndexes = mContainedStringTableView->selectionModel()->selectedIndexes();
+    const QModelIndexList selectedIndexes = mContainedStringTableView->selectionModel()->selectedRows();
     const QList<ContainedString> *containedStringList = mTool->containedStringList();
 
     QString strings;
