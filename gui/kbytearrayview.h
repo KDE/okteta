@@ -106,6 +106,7 @@ class OKTETAGUI_EXPORT KByteArrayView : public ColumnsView
   Q_PROPERTY( KResizeStyle ResizeStyle READ resizeStyle WRITE setResizeStyle )
   Q_PROPERTY( int StartOffset READ startOffset WRITE setStartOffset )
   Q_PROPERTY( int FirstLineOffset READ firstLineOffset WRITE setFirstLineOffset )
+  Q_PROPERTY( int VisibleBufferColumns READ visibleBufferColumns WRITE showBufferColumns )
   // value column
   Q_PROPERTY( KCoding Coding READ coding WRITE setCoding )
   Q_PROPERTY( int ByteSpacingWidth READ byteSpacingWidth WRITE setByteSpacingWidth )
