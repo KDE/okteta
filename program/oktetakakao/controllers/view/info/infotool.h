@@ -23,6 +23,8 @@
 #ifndef INFOTOOL_H
 #define INFOTOOL_H
 
+// Okteta core
+#include <ksection.h>
 // Qt
 #include <QtCore/QObject>
 
@@ -52,13 +54,16 @@ class InfoTool : public QObject
   public:
     StatisticTableModel *statisticTableModel() const;
     int size() const;
-    bool hasByteArrayView() const;
+    bool isApplyable() const;
+    bool isStatisticUptodate() const;
 
   public Q_SLOTS:
     void updateStatistic();
+    void onSelectionChanged( bool hasSelection );
+    void onSourceChanged();
 
   Q_SIGNALS:
-    void byteArrayViewChanged( bool hasByteArrayView );
+    void isApplyableChanged( bool isApplyable );
     void statisticDirty( bool dirty );
 
   protected:
@@ -68,6 +73,13 @@ class InfoTool : public QObject
 
     KHEUI::KByteArrayView *mByteArrayView;
     KHECore::KAbstractByteArrayModel *mByteArrayModel;
+
+    //
+    bool mSourceByteArrayModelUptodate;
+    // selection source
+    KHE::KSection mSourceSelection;
+    // source of strings
+    KHECore::KAbstractByteArrayModel *mSourceByteArrayModel;
 };
 
 #endif

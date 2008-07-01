@@ -61,8 +61,8 @@ InfoView::InfoView( InfoTool *tool, QWidget *parent )
         i18nc("@info:whatsthis",
               "If you press the <interface>Update</interface> button, the statistic of the byte frequency is updated.") );
     mUpdateButton = new KPushButton( updateGuiItem, this );
-    mUpdateButton->setEnabled( mTool->hasByteArrayView() );
-    connect( mTool, SIGNAL(byteArrayViewChanged(bool)), mUpdateButton, SLOT( setEnabled(bool )) );
+    mUpdateButton->setEnabled( mTool->isApplyable() );
+    connect( mTool, SIGNAL(isApplyableChanged(bool)), mUpdateButton, SLOT( setEnabled(bool )) );
     connect( mUpdateButton, SIGNAL(clicked(bool)), mTool, SLOT(updateStatistic()) ); 
     updateLayout->addWidget( mUpdateButton );
 
