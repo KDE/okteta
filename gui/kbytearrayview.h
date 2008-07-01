@@ -467,6 +467,7 @@ class OKTETAGUI_EXPORT KByteArrayView : public ColumnsView
     void updateRange( int Start, int End );
     void updateRange( const KHE::KSectionList &list );
     void onBookmarksChange( const QList<KHECore::KBookmark> &bookmarks );
+    void onRevertedToVersionIndex( int versionIndex );
 
   protected Q_SLOTS: // QWidget API
     virtual void fontChange( const QFont &OldFont );

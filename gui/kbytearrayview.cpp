@@ -36,11 +36,14 @@
 #include "controller/kchareditor.h"
 #include "kcursor.h"
 // Okteta core
+#include <kbytearraymodel.h> // TODO: used as dummy view, make own real dummyZzz
 #include <kabstractbytearraymodel.h>
-#include <kbytearraymodel.h>
+#include <kversionable.h>
+#include <kbookmarkable.h>
 #include <valuecodec.h>
 #include <kcharcodec.h>
 #include <kwordbufferservice.h>
+#include <arraychangemetricslist.h>
 // #include <arraychange.h>
 // KDE
 #include <KGlobalSettings>
@@ -125,6 +128,12 @@ KByteArrayView::KByteArrayView( KHECore::KAbstractByteArrayModel *byteArrayModel
                  SLOT(onBookmarksChange(const QList<KHECore::KBookmark>&)) );
         connect( mByteArrayModel, SIGNAL(bookmarksRemoved( const QList<KHECore::KBookmark>& )),
                  SLOT(onBookmarksChange(const QList<KHECore::KBookmark>&)) );
+    }
+    KHECore::Versionable *versionControl = qobject_cast<KHECore::Versionable*>( mByteArrayModel );
+    if( versionControl )
+    {
+        connect( mByteArrayModel, SIGNAL(revertedToVersionIndex( int )),
+                 SLOT(onRevertedToVersionIndex( int )) );
     }
 
     mDataLayout->setLength( mByteArrayModel->size() );
@@ -268,6 +277,12 @@ void KByteArrayView::setByteArrayModel( KHECore::KAbstractByteArrayModel *byteAr
                 SLOT(onBookmarksChange(const QList<KHECore::KBookmark>&)) );
         connect( mByteArrayModel, SIGNAL(bookmarksRemoved( const QList<KHECore::KBookmark>& )),
                 SLOT(onBookmarksChange(const QList<KHECore::KBookmark>&)) );
+    }
+    KHECore::Versionable *versionControl = qobject_cast<KHECore::Versionable*>( mByteArrayModel );
+    if( versionControl )
+    {
+        connect( mByteArrayModel, SIGNAL(revertedToVersionIndex( int )),
+                 SLOT(onRevertedToVersionIndex( int )) );
     }
 
     viewport()->update();
@@ -1089,6 +1104,13 @@ void KByteArrayView::onBookmarksChange( const QList<KHECore::KBookmark> &bookmar
     unpauseCursor();
     updateChanged();
 }
+
+
+void KByteArrayView::onRevertedToVersionIndex( int versionIndex )
+{
+    mValueEditor->finishEdit();
+}
+
 
 void KByteArrayView::clipboardChanged()
 {
