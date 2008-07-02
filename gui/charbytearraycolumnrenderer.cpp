@@ -37,7 +37,8 @@
 #include <ctype.h>
 
 
-namespace KHEUI {
+namespace KHEUI
+{
 
 static const bool      DefaultShowingNonprinting = false;
 static const QChar     DefaultSubstituteChar =  (char)'.';
@@ -60,9 +61,9 @@ void CharByteArrayColumnRenderer::renderByteText( QPainter *painter, char byte, 
 Q_UNUSED( byte )
 
     // turn into a drawable String
-    const QString text( byteChar.isUndefined() ?                   KHECore::KChar(mUndefinedChar) :
+    const QString text( byteChar.isUndefined() ?                      KHECore::KChar(mUndefinedChar) :
                        !(mShowingNonprinting || byteChar.isPrint()) ? KHECore::KChar(mSubstituteChar) :
-                                                                   byteChar );
+                                                                      byteChar );
 
     painter->setPen( color );
     painter->drawText( 0, mDigitBaseLine, text );

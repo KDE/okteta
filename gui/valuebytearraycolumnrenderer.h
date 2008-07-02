@@ -72,7 +72,7 @@ class ValueByteArrayColumnRenderer : public AbstractByteArrayColumnRenderer
     virtual void recalcByteWidth();
 
   protected:
-    void renderCode( QPainter *P, const QString &code, const QColor &color ) const;
+    void renderCode( QPainter *painter, const QString &code, const QColor &color ) const;
 
   protected: // settings
     /** */
