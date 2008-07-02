@@ -501,7 +501,7 @@ void AbstractByteArrayColumnRenderer::renderPlain( QPainter *painter, const KHE:
 
         if( hasBookmarks && (byteIndex == bit->offset()) )
         {
-            renderBookmark( painter );
+            renderBookmark( painter, colorScheme.background(KColorScheme::LinkBackground) );
             ++bit;
             hasBookmarks = (bit != bookmarkList.constEnd());//TODO )&& ( bit->offset() <= LastIndex );
         }
@@ -547,7 +547,7 @@ void AbstractByteArrayColumnRenderer::renderSelection( QPainter *painter, const 
 
         if( hasBookmarks && (byteIndex == bit->offset()) )
         {
-            renderBookmark( painter );
+            renderBookmark( painter, colorScheme.background(KColorScheme::LinkBackground) );
             ++bit;
             hasBookmarks = (bit != bookmarkList.constEnd());//TODO )&& ( bit->offset() <= LastIndex );
         }
@@ -589,11 +589,10 @@ void AbstractByteArrayColumnRenderer::renderMarking( QPainter *painter, const KH
 }
 
 
-void AbstractByteArrayColumnRenderer::renderBookmark( QPainter *painter )// TODO: use colorscheme
+void AbstractByteArrayColumnRenderer::renderBookmark( QPainter *painter, const QBrush &brush )
 {
-    const QPalette &palette = columnsView()->viewport()->palette();
-    // TODO: alternateBase is just a placeholder
-    painter->fillRect( 1,1, mByteWidth-2,lineHeight()-2, palette.alternateBase() );
+    // TODO: think about how bookmarks should really be rendered
+    painter->fillRect( 1,1, mByteWidth-2,lineHeight()-2, brush );
 }
 
 
@@ -636,7 +635,7 @@ void AbstractByteArrayColumnRenderer::renderByte( QPainter *painter, int byteInd
     painter->fillRect( 0,0, mByteWidth,lineHeight(), backgroundBrush );
 
     if( mBookmarks && mBookmarks->bookmarkList().contains(byteIndex) )
-        renderBookmark( painter );
+        renderBookmark( painter, colorScheme.background(KColorScheme::LinkBackground) );
 
     if( byteIndex > -1 )
     {

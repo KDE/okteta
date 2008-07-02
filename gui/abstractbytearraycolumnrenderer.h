@@ -187,7 +187,7 @@ class AbstractByteArrayColumnRenderer : public ColumnRenderer
     void renderSelection( QPainter *painter, const KHE::KSection &linePositions, int byteIndex, int flag );
     void renderMarking( QPainter *painter, const KHE::KSection &linePositions, int byteIndex, int flag );
     void renderRange( QPainter *painter, const QBrush &brush, const KHE::KSection &linePositions, int flag );
-    void renderBookmark( QPainter *painter );
+    void renderBookmark( QPainter *painter, const QBrush &brush );
 
     void recalcX();
 
