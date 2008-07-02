@@ -23,7 +23,6 @@
 #include "charbytearraycolumnrenderer.h"
 
 // lib
-#include "columnsview.h"
 #include "kdatacursor.h"
 #include "bytearraytablelayout.h"
 #include "kdataranges.h"

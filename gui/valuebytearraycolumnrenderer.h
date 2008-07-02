@@ -68,7 +68,7 @@ class ValueByteArrayColumnRenderer : public AbstractByteArrayColumnRenderer
 
 
   protected: // AbstractByteArrayColumnRenderer API
-    virtual void renderByteText( QPainter *painter, char Byte, KHECore::KChar byteChar, const QColor &color ) const;
+    virtual void renderByteText( QPainter *painter, char byte, KHECore::KChar byteChar, const QColor &color ) const;
     virtual void recalcByteWidth();
 
   protected:

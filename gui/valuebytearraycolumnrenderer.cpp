@@ -30,6 +30,8 @@
 #include "helper.h"
 // Okteta core
 #include <kcharcodec.h>
+// KDE
+#include <KColorScheme>
 // Qt
 #include <QtGui/QPainter>
 
@@ -110,9 +112,16 @@ void ValueByteArrayColumnRenderer::renderEditedByte( QPainter *painter, char byt
 {
     const KHECore::KChar byteChar = mCharCodec->decode( byte );
 
-    painter->fillRect( 0,0, byteWidth(),lineHeight(), QBrush(colorForChar(byteChar),Qt::SolidPattern) );
+    const QPalette &palette = columnsView()->viewport()->palette();
+    KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::View );
+    const KColorScheme::ForegroundRole foregroundRole =
+        mByteTypeColored ? foregroundRoleForChar(byteChar): KColorScheme::NormalText;
+    const QBrush brush = colorScheme.foreground( foregroundRole );
+    painter->fillRect( 0,0, byteWidth(),lineHeight(), brush );
 
-    renderCode( painter, EditBuffer, columnsView()->viewport()->palette().base().color() );
+    const QBrush backgroundBrush = colorScheme.background();
+    const QColor &charColor = backgroundBrush.color();
+    renderCode( painter, EditBuffer, charColor );
 }
 
 

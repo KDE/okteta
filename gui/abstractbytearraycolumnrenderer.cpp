@@ -32,6 +32,8 @@
 // Okteta core
 #include <kbookmarkable.h>
 #include <kcharcodec.h>
+// KDE
+#include <KColorScheme>
 // Qt
 #include <QtGui/QPainter>
 
@@ -63,7 +65,8 @@ AbstractByteArrayColumnRenderer::AbstractByteArrayColumnRenderer( ColumnsView *c
    mNoOfGroupedBytes( DefaultNoOfGroupedBytes ),
    mLinePosLeftPixelX( 0 ),
    mLinePosRightPixelX( 0 ),
-   mLastLinePos( 0 )
+   mLastLinePos( 0 ),
+   mByteTypeColored( true )
 {
 }
 
@@ -388,9 +391,9 @@ void AbstractByteArrayColumnRenderer::renderLinePositions( QPainter *painter, in
     const unsigned int blankFlag =
         (_linePositions.start()!=0?StartsBefore:0) | (_linePositions.end()!=mLastLinePos?EndsLater:0);
     const QWidget *viewport = columnsView()->viewport();
-    const QBrush &BackgroundBrush = viewport->palette().brush( viewport->backgroundRole() );
+    const QBrush &backgroundBrush = viewport->palette().brush( viewport->backgroundRole() );
 
-    renderRange( painter, BackgroundBrush, _linePositions, blankFlag );
+    renderRange( painter, backgroundBrush, _linePositions, blankFlag );
 
     // Go through the lines TODO: handle first and last line more effeciently
     // check for leading and trailing spaces
@@ -405,70 +408,70 @@ void AbstractByteArrayColumnRenderer::renderLinePositions( QPainter *painter, in
     KHE::KSection byteIndizes =
         KHE::KSection::fromWidth( mLayout->indexAtCoord(Coord( linePositions.start(), lineIndex )), linePositions.width() );
 
-    unsigned int SelectionFlag = 0;
-    unsigned int MarkingFlag = 0;
+    unsigned int selectionFlag = 0;
+    unsigned int markingFlag = 0;
     KHE::KSection selection;
     KHE::KSection markedSection;
-    bool HasMarking = mRanges->hasMarking();
-    bool HasSelection = mRanges->hasSelection();
+    bool hasMarking = mRanges->hasMarking();
+    bool hasSelection = mRanges->hasSelection();
 
 //kDebug() << QString("painting linePositions (painter%1-%2L%3): ").arg(linePositions.start()).arg(linePositions.end()).arg(lineIndex)
 //         <<linePositions.start()<<"-"<<linePositions.start()
 //         <<" for byteIndizes "<<byteIndizes.start()<<"-"<<byteIndizes.start()<<endl;
     while( linePositions.isValid() )
     {
-        KHE::KSection PositionsPart( linePositions );  // set of linePositions to paint next
+        KHE::KSection positionsPart( linePositions );  // set of linePositions to paint next
         KHE::KSection byteIndizesPart( byteIndizes );      // set of indizes to paint next
         // falls markedSection nicht mehr gebuffert und noch zu erwarten
-        if( HasMarking && markedSection.endsBefore(byteIndizesPart.start()) )
+        if( hasMarking && markedSection.endsBefore(byteIndizesPart.start()) )
         {
             // erhebe nächste Markierung im Bereich
-            HasMarking = isMarked( byteIndizesPart, &markedSection, &MarkingFlag );
+            hasMarking = isMarked( byteIndizesPart, &markedSection, &markingFlag );
         }
         // falls selection nicht mehr gebuffert und noch zu erwarten
-        if( HasSelection && selection.endsBefore(byteIndizesPart.start()) )
+        if( hasSelection && selection.endsBefore(byteIndizesPart.start()) )
         {
             // erhebe nächste selection im Bereich
-            HasSelection = isSelected( byteIndizesPart, &selection, &SelectionFlag );
+            hasSelection = isSelected( byteIndizesPart, &selection, &selectionFlag );
         }
 
         if( markedSection.start() == byteIndizesPart.start() )
         {
             byteIndizesPart.setEnd( markedSection.end() );
-            PositionsPart.setEndByWidth( markedSection.width() );
-            if( PositionsPart.end() == mLayout->lastLinePosition(lineIndex) )   MarkingFlag &= ~EndsLater;
-            if( PositionsPart.start() == mLayout->firstLinePosition(lineIndex)) MarkingFlag &= ~StartsBefore;
-            renderMarking( painter, PositionsPart, byteIndizesPart.start(), MarkingFlag );
+            positionsPart.setEndByWidth( markedSection.width() );
+            if( positionsPart.end() == mLayout->lastLinePosition(lineIndex) )   markingFlag &= ~EndsLater;
+            if( positionsPart.start() == mLayout->firstLinePosition(lineIndex)) markingFlag &= ~StartsBefore;
+            renderMarking( painter, positionsPart, byteIndizesPart.start(), markingFlag );
         }
         else if( selection.includes(byteIndizesPart.start()) )
         {
             if( selection.startsBehind(byteIndizesPart.start()) )
-                SelectionFlag |= StartsBefore;
-            bool MarkingBeforeEnd = HasMarking && markedSection.start() <= selection.end();
+                selectionFlag |= StartsBefore;
+            bool MarkingBeforeEnd = hasMarking && markedSection.start() <= selection.end();
 
             byteIndizesPart.setEnd( MarkingBeforeEnd ? markedSection.nextBeforeStart() : selection.end() );
-            PositionsPart.setEndByWidth( byteIndizesPart.width() );
+            positionsPart.setEndByWidth( byteIndizesPart.width() );
 
             if( MarkingBeforeEnd )
-                SelectionFlag |= EndsLater;
-            if( PositionsPart.end() == mLayout->lastLinePosition(lineIndex) )    SelectionFlag &= ~EndsLater;
-            if( PositionsPart.start() == mLayout->firstLinePosition(lineIndex) ) SelectionFlag &= ~StartsBefore;
+                selectionFlag |= EndsLater;
+            if( positionsPart.end() == mLayout->lastLinePosition(lineIndex) )    selectionFlag &= ~EndsLater;
+            if( positionsPart.start() == mLayout->firstLinePosition(lineIndex) ) selectionFlag &= ~StartsBefore;
 
-            renderSelection( painter, PositionsPart, byteIndizesPart.start(), SelectionFlag );
+            renderSelection( painter, positionsPart, byteIndizesPart.start(), selectionFlag );
         }
         else
         {
             // calc end of plain text
-            if( HasMarking )
+            if( hasMarking )
                 byteIndizesPart.setEnd( markedSection.nextBeforeStart() );
-            if( HasSelection )
+            if( hasSelection )
                 byteIndizesPart.restrictEndTo( selection.nextBeforeStart() );
 
-            PositionsPart.setEndByWidth( byteIndizesPart.width() );
-            renderPlain( painter, PositionsPart, byteIndizesPart.start() );
+            positionsPart.setEndByWidth( byteIndizesPart.width() );
+            renderPlain( painter, positionsPart, byteIndizesPart.start() );
         }
         byteIndizes.setStartNextBehind( byteIndizesPart );
-        linePositions.setStartNextBehind( PositionsPart );
+        linePositions.setStartNextBehind( positionsPart );
     }
 }
 
@@ -484,6 +487,9 @@ void AbstractByteArrayColumnRenderer::renderPlain( QPainter *painter, const KHE:
         bit = bookmarkList.nextFrom(byteIndex);
         hasBookmarks = ( bit != bookmarkList.constEnd() );
     }
+
+    const QPalette &palette = columnsView()->viewport()->palette();
+    KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::View );
 
     // paint all the bytes affected
     for( int linePosition=linePositions.start(); linePosition<=linePositions.end(); ++linePosition,++byteIndex )
@@ -503,7 +509,11 @@ void AbstractByteArrayColumnRenderer::renderPlain( QPainter *painter, const KHE:
         const char byte = mByteArrayModel->datum( byteIndex );
         const KHECore::KChar byteChar = mCharCodec->decode( byte );
 
-        renderByteText( painter, byte, byteChar, colorForChar(byteChar) );
+        const KColorScheme::ForegroundRole foregroundRole =
+            mByteTypeColored ? foregroundRoleForChar(byteChar): KColorScheme::NormalText;
+        const QBrush brush = colorScheme.foreground( foregroundRole );
+        const QColor &charColor = brush.color();// palette.text().color();//colorForChar(byteChar)
+        renderByteText( painter, byte, byteChar, charColor );
 
         painter->translate( -x, 0 );
     }
@@ -523,10 +533,10 @@ void AbstractByteArrayColumnRenderer::renderSelection( QPainter *painter, const 
     }
 
     const QPalette &palette = columnsView()->viewport()->palette();
+    KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::Selection );
 
-    renderRange( painter, palette.highlight(), linePositions, flag );
+    renderRange( painter, colorScheme.background(), linePositions, flag );
 
-    const QColor &highlightCharColor = palette.highlightedText().color();
     // paint all the bytes affected
     for( int linePosition=linePositions.start(); linePosition<=linePositions.end(); ++linePosition,++byteIndex )
     {
@@ -545,7 +555,11 @@ void AbstractByteArrayColumnRenderer::renderSelection( QPainter *painter, const 
         const char byte = mByteArrayModel->datum( byteIndex );
         const KHECore::KChar byteChar = mCharCodec->decode( byte );
 
-        renderByteText( painter, byte, byteChar, highlightCharColor );
+        const KColorScheme::ForegroundRole foregroundRole =
+            mByteTypeColored ? foregroundRoleForChar(byteChar): KColorScheme::NormalText;
+        const QBrush brush = colorScheme.foreground( foregroundRole );
+        const QColor &charColor = brush.color();
+        renderByteText( painter, byte, byteChar, charColor );
 
         painter->translate( -x, 0 );
     }
@@ -558,7 +572,7 @@ void AbstractByteArrayColumnRenderer::renderMarking( QPainter *painter, const KH
 
     renderRange( painter, palette.text(), linePositions, flag );
 
-    const QColor &BC = palette.base().color();
+    const QColor &baseColor = palette.base().color();
     // paint all the bytes affected
     for( int p=linePositions.start(); p<=linePositions.end(); ++p,++byteIndex )
     {
@@ -568,14 +582,14 @@ void AbstractByteArrayColumnRenderer::renderMarking( QPainter *painter, const KH
         painter->translate( x, 0 );
         const char byte = mByteArrayModel->datum( byteIndex );
         const KHECore::KChar byteChar = mCharCodec->decode( byte );
-        renderByteText( painter, byte, byteChar, BC );
+        renderByteText( painter, byte, byteChar, baseColor );
 
         painter->translate( -x, 0 );
     }
 }
 
 
-void AbstractByteArrayColumnRenderer::renderBookmark( QPainter *painter )
+void AbstractByteArrayColumnRenderer::renderBookmark( QPainter *painter )// TODO: use colorscheme
 {
     const QPalette &palette = columnsView()->viewport()->palette();
     // TODO: alternateBase is just a placeholder
@@ -583,7 +597,7 @@ void AbstractByteArrayColumnRenderer::renderBookmark( QPainter *painter )
 }
 
 
-void AbstractByteArrayColumnRenderer::renderRange( QPainter *painter, const QBrush &Brush, const KHE::KSection &linePositions, int flag )
+void AbstractByteArrayColumnRenderer::renderRange( QPainter *painter, const QBrush &brush, const KHE::KSection &linePositions, int flag )
 {
     const KPixelX rangeX =
         ( flag & StartsBefore ) ? columnRightXOfLinePosition( linePositions.nextBeforeStart() ) + 1 :
@@ -593,7 +607,7 @@ void AbstractByteArrayColumnRenderer::renderRange( QPainter *painter, const QBru
                                columnRightXOfLinePosition( linePositions.end() ) + 1  )
         - rangeX;
 
-    painter->fillRect( rangeX,0, rangeW,lineHeight(), Brush );
+    painter->fillRect( rangeX,0, rangeW,lineHeight(), brush );
 }
 
 
@@ -604,35 +618,38 @@ void AbstractByteArrayColumnRenderer::renderByte( QPainter *painter, int byteInd
 
     const QWidget *viewport = columnsView()->viewport();
     const QPalette &palette = viewport->palette();
-    QColor CharColor;
-    QBrush Brush = palette.brush( viewport->backgroundRole() );
 
+    KColorScheme::ColorSet colorSet = KColorScheme::View;
     if( byteIndex > -1 )
     {
         if( mRanges->selectionIncludes(byteIndex) )
-        {
-            CharColor = palette.highlightedText().color();
-            Brush = palette.highlight();
-        }
+            colorSet = KColorScheme::Selection;
 //    else if( mRanges->markingIncludes(byteIndex) )
 //    {
-//      CharColor = palette.base().color();
-//      Brush = palette.text();
+//      charColor = palette.base().color();
+//      brush = palette.text();
 //    }
-        else
-            CharColor = colorForChar( byteChar );
     }
+    KColorScheme colorScheme( palette.currentColorGroup(), colorSet );
 
-    painter->fillRect( 0,0, mByteWidth,lineHeight(), Brush );
+    const QBrush backgroundBrush = colorScheme.background();
+    painter->fillRect( 0,0, mByteWidth,lineHeight(), backgroundBrush );
 
     if( mBookmarks && mBookmarks->bookmarkList().contains(byteIndex) )
         renderBookmark( painter );
 
     if( byteIndex > -1 )
-        renderByteText( painter, byte, byteChar, CharColor );
+    {
+        const KColorScheme::ForegroundRole foregroundRole =
+            mByteTypeColored ? foregroundRoleForChar(byteChar): KColorScheme::NormalText;
+        const QBrush brush = colorScheme.foreground( foregroundRole );
+        const QColor &charColor = brush.color();
+
+        renderByteText( painter, byte, byteChar, charColor );
+    }
 }
 
-
+// TODO: think about making framestyle a enum of a class ByteArrayColumnCursor
 void AbstractByteArrayColumnRenderer::renderFramedByte( QPainter *painter, int byteIndex, FrameStyle frameStyle )
 {
     renderByte( painter, byteIndex );
@@ -640,7 +657,13 @@ void AbstractByteArrayColumnRenderer::renderFramedByte( QPainter *painter, int b
     const char byte = ( byteIndex > -1 ) ? mByteArrayModel->datum( byteIndex ) : EmptyByte;
     const KHECore::KChar byteChar = mCharCodec->decode( byte );
 
-    painter->setPen( colorForChar(byteChar) );
+    const QPalette &palette = columnsView()->viewport()->palette();
+    KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::View );
+    const KColorScheme::ForegroundRole foregroundRole =
+        mByteTypeColored ? foregroundRoleForChar(byteChar): KColorScheme::NormalText;
+    const QBrush brush = colorScheme.foreground( foregroundRole );
+    const QColor &charColor = brush.color();
+    painter->setPen( charColor );
     if( frameStyle == Frame )
         painter->drawRect( 0,0, mByteWidth-1,lineHeight()-1 );
     else if( frameStyle == Left )
@@ -655,16 +678,12 @@ void AbstractByteArrayColumnRenderer::renderCursor( QPainter *painter, int byteI
     const char byte = ( byteIndex > -1 ) ? mByteArrayModel->datum( byteIndex ) : EmptyByte;
     const KHECore::KChar byteChar = mCharCodec->decode( byte );
 
-    painter->fillRect( 0,0, mByteWidth,lineHeight(), QBrush(colorForChar(byteChar),Qt::SolidPattern) );
-}
-
-
-void AbstractByteArrayColumnRenderer::renderByteText( QPainter *painter, char byte, KHECore::KChar byteChar, const QColor &color ) const
-{
-    Q_UNUSED( byte )
-
-    painter->setPen( color );
-    painter->drawText( 0, mDigitBaseLine, byteChar );
+    const QPalette &palette = columnsView()->viewport()->palette();
+    KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::View );
+    const KColorScheme::ForegroundRole foregroundRole =
+        mByteTypeColored ? foregroundRoleForChar(byteChar): KColorScheme::NormalText;
+    const QBrush brush = colorScheme.foreground( foregroundRole );
+    painter->fillRect( 0,0, mByteWidth,lineHeight(), brush );
 }
 
 

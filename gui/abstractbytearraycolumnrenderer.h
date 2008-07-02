@@ -132,6 +132,9 @@ class AbstractByteArrayColumnRenderer : public ColumnRenderer
     /** sets the codec to be used by the char column. */
     void setCharCodec( KHECore::KCharCodec *charCodec );
 
+    void setByteTypeColored( bool byteTypeColored );
+
+
   public: // functional logic
     /** returns byte linePositions covered by pixels with absolute x-coord x */
     KHE::KSection linePositionsOfX( KPixelX x, KPixelX width ) const;
@@ -170,11 +173,11 @@ class AbstractByteArrayColumnRenderer : public ColumnRenderer
     KHE::KSection visibleLinePositions() const;
     const ByteArrayTableLayout *layout() const;
     KHECore::KCharCodec *charCodec() const;
+    bool isByteTypeColored() const;
 
 
   protected: // API to be redefined
-    /** default implementation simply prints the byte as ASCII */
-    virtual void renderByteText( QPainter *painter, char byte, KHECore::KChar charByte, const QColor &color ) const;
+    virtual void renderByteText( QPainter *painter, char byte, KHECore::KChar charByte, const QColor &color ) const = 0;
     /** default implementation sets byte width to one digit width */
     virtual void recalcByteWidth();
 
@@ -233,6 +236,9 @@ class AbstractByteArrayColumnRenderer : public ColumnRenderer
     /** index of right position */
     int mLastLinePos;
 
+    /** */
+    bool mByteTypeColored;
+
 
   protected: // buffering rendering data
     KHE::KSection mRenderLinePositions;
@@ -258,6 +264,12 @@ inline const ByteArrayTableLayout *AbstractByteArrayColumnRenderer::layout() con
 
 inline void AbstractByteArrayColumnRenderer::setCharCodec( KHECore::KCharCodec *charCodec ) { mCharCodec = charCodec; }
 inline KHECore::KCharCodec* AbstractByteArrayColumnRenderer::charCodec() const { return mCharCodec; }
+
+inline void AbstractByteArrayColumnRenderer::setByteTypeColored( bool byteTypeColored )
+{
+    mByteTypeColored = byteTypeColored;
+}
+inline bool AbstractByteArrayColumnRenderer::isByteTypeColored() const { return mByteTypeColored; }
 
 inline void AbstractByteArrayColumnRenderer::setByteWidth( int byteWidth ) { mByteWidth = byteWidth; }
 

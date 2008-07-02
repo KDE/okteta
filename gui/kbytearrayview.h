@@ -107,6 +107,7 @@ class OKTETAGUI_EXPORT KByteArrayView : public ColumnsView
   Q_PROPERTY( int StartOffset READ startOffset WRITE setStartOffset )
   Q_PROPERTY( int FirstLineOffset READ firstLineOffset WRITE setFirstLineOffset )
   Q_PROPERTY( int VisibleBufferColumns READ visibleBufferColumns WRITE showBufferColumns )
+  Q_PROPERTY( bool ByteTypeColored READ isByteTypeColored WRITE setByteTypeColored )
   // value column
   Q_PROPERTY( KCoding Coding READ coding WRITE setCoding )
   Q_PROPERTY( int ByteSpacingWidth READ byteSpacingWidth WRITE setByteSpacingWidth )
@@ -192,6 +193,8 @@ class OKTETAGUI_EXPORT KByteArrayView : public ColumnsView
      * @return name of the encoding used in the char column
      */
     const QString &encodingName() const;
+
+    bool isByteTypeColored() const;
 
     double zoomLevel() const;
 
@@ -325,6 +328,7 @@ class OKTETAGUI_EXPORT KByteArrayView : public ColumnsView
       * @param Encoding name of the encoding
       */
     void setEncoding( const QString& Encoding );
+    void setByteTypeColored( bool isColored );
 
   // interaction
     /** de-/selects all data */

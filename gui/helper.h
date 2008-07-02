@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2003 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,6 +25,8 @@
 
 // lib
 #include <khechar.h>
+// KDE
+#include <KColorScheme>
 // Qt
 #include <QColor>
 
@@ -33,6 +35,15 @@
 static inline QColor colorForChar( const KHECore::KChar Byte )
 {
   return Byte.isUndefined() ? Qt::yellow : Byte.isPunct() ? Qt::red : Byte.isPrint() ? Qt::black : Qt::blue;
+}
+
+
+static inline KColorScheme::ForegroundRole foregroundRoleForChar( const KHECore::KChar byteChar )
+{
+  return byteChar.isUndefined() ? KColorScheme::NegativeText :
+         byteChar.isPunct() ?     KColorScheme::LinkText :
+         byteChar.isPrint() ?     KColorScheme::NormalText :
+                                  KColorScheme::ActiveText;
 }
 
 #endif

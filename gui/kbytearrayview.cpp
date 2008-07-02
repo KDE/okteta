@@ -205,6 +205,8 @@ QChar KByteArrayView::substituteChar()               const { return charColumn()
 QChar KByteArrayView::undefinedChar()                const { return charColumn().undefinedChar(); }
 KByteArrayView::KEncoding KByteArrayView::encoding()       const { return (KByteArrayView::KEncoding)mCharEncoding; }
 const QString &KByteArrayView::encodingName()        const { return mCharCodec->name(); }
+bool KByteArrayView::isByteTypeColored()             const { return valueColumn().isByteTypeColored(); }
+
 double KByteArrayView::zoomLevel()                    const { return (double)font().pointSize()/mDefaultFontSize; }
 
 int KByteArrayView::cursorPosition() const { return mDataCursor->realIndex(); }
@@ -522,6 +524,20 @@ void KByteArrayView::setEncoding( const QString &encodingName )
     unpauseCursor();
 
     emit charCodecChanged( newCharCodec->name() );
+}
+
+void KByteArrayView::setByteTypeColored( bool isColored )
+{
+    if( isColored == valueColumn().isByteTypeColored() )
+        return;
+
+    valueColumn().setByteTypeColored( isColored );
+    charColumn().setByteTypeColored( isColored );
+
+    pauseCursor();
+    updateColumn( valueColumn() );
+    updateColumn( charColumn() );
+    unpauseCursor();
 }
 
 
