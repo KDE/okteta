@@ -26,6 +26,7 @@
 #include <kidataselectable.h>
 #include <kabstractview.h>
 // Kakao core
+#include <modelstreamencodethread.h>
 #include <modelcodecmanager.h>
 #include <kdocumentmanager.h>
 #include <abstractmodelstreamencoder.h>
@@ -41,6 +42,7 @@
 #include <QtGui/QActionGroup>
 #include <QtGui/QClipboard>
 #include <QtGui/QApplication>
+
 
 static const char CopyAsActionListId[] = "copy_as_list";
 
@@ -110,6 +112,8 @@ void CopyAsController::updateActions()
 
 void CopyAsController::onActionTriggered( QAction *action )
 {
+    QApplication::setOverrideCursor( Qt::WaitCursor );
+
     AbstractModelStreamEncoder *encoder = action->data().value<AbstractModelStreamEncoder *>();
 
     const AbstractModelSelection *selection = mSelectionControl->selection();
@@ -118,10 +122,19 @@ void CopyAsController::onActionTriggered( QAction *action )
     QBuffer exportDataBuffer( &exportData );
     exportDataBuffer.open( QIODevice::WriteOnly );
 
-    encoder->encodeToStream( &exportDataBuffer, mView, selection );
+    ModelStreamEncodeThread *encodeThread =
+        new ModelStreamEncodeThread( this, &exportDataBuffer, mView, selection, encoder );
+    encodeThread->start();
+    while( !encodeThread->wait(100) )
+        QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
+
+    delete encodeThread;
+
     exportDataBuffer.close();
 
     QMimeData *mimeData = new QMimeData;
     mimeData->setData( encoder->remoteMimeType(), exportData );
     QApplication::clipboard()->setMimeData( mimeData, QClipboard::Clipboard );
+
+    QApplication::restoreOverrideCursor();
 }
