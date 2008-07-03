@@ -106,7 +106,7 @@ class OKTETAGUI_EXPORT KByteArrayView : public ColumnsView
   Q_PROPERTY( KResizeStyle ResizeStyle READ resizeStyle WRITE setResizeStyle )
   Q_PROPERTY( int StartOffset READ startOffset WRITE setStartOffset )
   Q_PROPERTY( int FirstLineOffset READ firstLineOffset WRITE setFirstLineOffset )
-  Q_PROPERTY( int VisibleBufferColumns READ visibleBufferColumns WRITE showBufferColumns )
+  Q_PROPERTY( int VisibleBufferColumns READ visibleBufferColumns WRITE setVisibleByteArrayColumns )
   Q_PROPERTY( bool ByteTypeColored READ isByteTypeColored WRITE setByteTypeColored )
   // value column
   Q_PROPERTY( KCoding Coding READ coding WRITE setCoding )
@@ -246,7 +246,7 @@ class OKTETAGUI_EXPORT KByteArrayView : public ColumnsView
     /** switches the Offset column on/off */
     void toggleOffsetColumn( bool Visible );
     /** */
-    void showBufferColumns( int Columns );
+    void setVisibleByteArrayColumns( int Columns );
     /** scrolls the view as much as needed to have the cursor fully visible */
     void ensureCursorVisible();
 

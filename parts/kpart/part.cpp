@@ -208,7 +208,7 @@ void OktetaPart::onSetEncoding( int Encoding )
 
 void OktetaPart::onToggleValueCharColumns( int VisibleColumns)
 {
-    view->showBufferColumns( VisibleColumns+1 );
+    view->setVisibleByteArrayColumns( VisibleColumns+1 );
 }
 
 OktetaPart::~OktetaPart() {}

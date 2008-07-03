@@ -86,7 +86,7 @@ void OktetaBrowserExtension::restoreState( QDataStream &stream )
     KHEUI::KByteArrayView *view = part->view;
 
     view->toggleOffsetColumn( offsetColumnVisible );
-    view->showBufferColumns( visibleBufferColumns );
+    view->setVisibleByteArrayColumns( visibleBufferColumns );
     view->setResizeStyle( (KHEUI::KByteArrayView::KResizeStyle)resizeStyle );
     view->setCoding( (KHEUI::KByteArrayView::KCoding)coding );
     view->setEncoding( encodingName );

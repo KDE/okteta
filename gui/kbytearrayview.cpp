@@ -1185,7 +1185,7 @@ void KByteArrayView::setSelection( int start, int end )
     }
 }
 
-void KByteArrayView::showBufferColumns( int newColumns )
+void KByteArrayView::setVisibleByteArrayColumns( int newColumns )
 {
     const int oldColumns = visibleBufferColumns();
 
