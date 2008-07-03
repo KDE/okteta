@@ -144,5 +144,5 @@ void ViewConfigController::setEncoding( int Encoding )
 
 void ViewConfigController::toggleValueCharColumns( int VisibleColumns)
 {
-  ViewWidget->showBufferColumns( VisibleColumns+1 );
+  ViewWidget->setVisibleByteArrayColumns( VisibleColumns+1 );
 }
