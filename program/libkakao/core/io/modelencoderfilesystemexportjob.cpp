@@ -60,7 +60,11 @@ ModelEncoderFileSystemExportJob::ModelEncoderFileSystemExportJob( AbstractModel 
 void ModelEncoderFileSystemExportJob::startExportToFile()
 {
     QFile file( workFilePath() );
-    file.open( QIODevice::WriteOnly );
+    if( !file.open(QIODevice::WriteOnly) )
+    {
+        completeExport( false );
+        return;
+    }
 
     ModelStreamEncodeThread *exportThread =
         new ModelStreamEncodeThread( this, &file, model(), selection(), d->encoder() );
