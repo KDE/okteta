@@ -96,7 +96,12 @@ FilterView::FilterView( FilterTool *tool, QWidget *parent )
 void FilterView::addParameterEdit( const QString &name, QWidget *parameterEdit )
 {
     mOperationComboBox->addItem( name );
+    const int index =
     mParameterSetEditStack->addWidget( parameterEdit );
+
+    // TODO: this is just a hack to have the first parameter edit widget wired up 
+    if( index == 0 )
+        onOperationChange( index );
 }
 
 void FilterView::getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const
