@@ -99,7 +99,6 @@ void FilterView::addParameterEdit( const QString &name, QWidget *parameterEdit )
     mParameterSetEditStack->addWidget( parameterEdit );
 }
 
-int FilterView::filterId() const { return mOperationComboBox->currentIndex(); }
 void FilterView::getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const
 {
     AbstractByteArrayFilterParameterSetEdit *parametersetEdit =

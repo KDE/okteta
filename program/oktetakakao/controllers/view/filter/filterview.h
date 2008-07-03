@@ -44,8 +44,7 @@ class FilterView : public QWidget
   public: // set
     void addParameterEdit( const QString &name, QWidget *parameterEdit );
 
-  public: // get 
-    int filterId() const;
+  protected: // get 
     void getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const;
 
   private Q_SLOTS:
