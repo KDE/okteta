@@ -30,7 +30,7 @@ set( KAKAO_CORE_SRCS
   io/abstractexportjob.cpp
   io/abstractfilesystemexportjob.cpp
   io/abstractmodelexporter.cpp
-  io/modelencoderfilesystemexportthread.cpp
+  io/modelstreamencodethread.cpp
   io/modelencoderfilesystemexportjob.cpp
   io/modelencoderfilesystemexporter.cpp
   io/kabstractdocumentsynchronizer.cpp

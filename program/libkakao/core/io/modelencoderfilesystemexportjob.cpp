@@ -23,9 +23,10 @@
 #include "modelencoderfilesystemexportjob.h"
 
 // lib
-#include "modelencoderfilesystemexportthread.h"
+#include "modelstreamencodethread.h"
 // Qt
 #include <QtGui/QApplication>
+#include <QtCore/QFile>
 
 
 class ModelEncoderFileSystemExportJob::Private
@@ -58,8 +59,11 @@ ModelEncoderFileSystemExportJob::ModelEncoderFileSystemExportJob( AbstractModel 
 
 void ModelEncoderFileSystemExportJob::startExportToFile()
 {
-    ModelEncoderFileSystemExportThread *exportThread =
-        new ModelEncoderFileSystemExportThread( this, model(), selection(), workFilePath(), d->encoder() );
+    QFile file( workFilePath() );
+    file.open( QIODevice::WriteOnly );
+
+    ModelStreamEncodeThread *exportThread =
+        new ModelStreamEncodeThread( this, &file, model(), selection(), d->encoder() );
     exportThread->start();
     while( !exportThread->wait(100) )
         QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );

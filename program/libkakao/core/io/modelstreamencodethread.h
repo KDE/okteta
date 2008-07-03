@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MODELENCODERFILESYSTEMEXPORTTHREAD_H
-#define MODELENCODERFILESYSTEMEXPORTTHREAD_H
+#ifndef MODELSTREAMENCODETHREAD_U
+#define MODELSTREAMENCODETHREAD_U
 
 // Qt
 #include <QtCore/QThread>
@@ -29,17 +29,18 @@
 class AbstractModelStreamEncoder;
 class AbstractModel;
 class AbstractModelSelection;
-class QString;
+class QIODevice;
 
 // TODO: instead of doubling all data just read them from the job?
-class ModelEncoderFileSystemExportThread : public QThread
+class ModelStreamEncodeThread : public QThread
 {
   Q_OBJECT
   public:
-    ModelEncoderFileSystemExportThread( QObject *parent,
+    ModelStreamEncodeThread( QObject *parent,
+                                        QIODevice *ioDevice,
                                         AbstractModel *model, const AbstractModelSelection *selection,
-                                        const QString &filePath, AbstractModelStreamEncoder *encoder );
-    virtual ~ModelEncoderFileSystemExportThread();
+                                        AbstractModelStreamEncoder *encoder );
+    virtual ~ModelStreamEncodeThread();
 
   public: // QThread API
     virtual void run();
@@ -51,22 +52,23 @@ class ModelEncoderFileSystemExportThread : public QThread
     void modelExported( bool success );
 
   protected:
+    QIODevice *mIODevice;
     AbstractModel *mModel;
     const AbstractModelSelection *mSelection;
-    const QString mFilePath;
     AbstractModelStreamEncoder *mEncoder;
 
     bool mSuccess;
 };
 
-inline ModelEncoderFileSystemExportThread::ModelEncoderFileSystemExportThread( QObject *parent,
+inline ModelStreamEncodeThread::ModelStreamEncodeThread( QObject *parent,
+    QIODevice *ioDevice,
     AbstractModel *model, const AbstractModelSelection *selection,
-    const QString &filePath, AbstractModelStreamEncoder *encoder )
+    AbstractModelStreamEncoder *encoder )
  : QThread( parent ),
-   mModel( model ), mSelection( selection ), mFilePath( filePath ), mEncoder( encoder ),
+   mIODevice( ioDevice ), mModel( model ), mSelection( selection ), mEncoder( encoder ),
    mSuccess( false )
 {}
 
-inline bool ModelEncoderFileSystemExportThread::success() const { return mSuccess; }
+inline bool ModelStreamEncodeThread::success() const { return mSuccess; }
 
 #endif

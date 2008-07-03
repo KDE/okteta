@@ -20,24 +20,17 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "modelencoderfilesystemexportthread.h"
+#include "modelstreamencodethread.h"
 
 // lib
 #include "abstractmodelstreamencoder.h"
-// Qt
-#include <QtCore/QDataStream>
-#include <QtCore/QFile>
-#include <QtCore/QString>
 
 
-void ModelEncoderFileSystemExportThread::run()
+void ModelStreamEncodeThread::run()
 {
-    QFile file( mFilePath );
-    file.open( QIODevice::WriteOnly );
-
-    mSuccess = mEncoder->encodeToStream( &file, mModel, mSelection );
+    mSuccess = mEncoder->encodeToStream( mIODevice, mModel, mSelection );
 
     emit modelExported( mSuccess );
 }
 
-ModelEncoderFileSystemExportThread::~ModelEncoderFileSystemExportThread() {}
+ModelStreamEncodeThread::~ModelStreamEncodeThread() {}
