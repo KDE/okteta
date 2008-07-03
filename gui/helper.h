@@ -41,7 +41,7 @@ static inline QColor colorForChar( const KHECore::KChar Byte )
 static inline KColorScheme::ForegroundRole foregroundRoleForChar( const KHECore::KChar byteChar )
 {
   return byteChar.isUndefined() ? KColorScheme::NegativeText :
-         byteChar.isPunct() ?     KColorScheme::LinkText :
+         byteChar.isPunct() ?     KColorScheme::InactiveText :
          byteChar.isPrint() ?     KColorScheme::NormalText :
                                   KColorScheme::ActiveText;
 }
