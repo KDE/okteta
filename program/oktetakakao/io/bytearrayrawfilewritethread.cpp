@@ -41,25 +41,28 @@ void ByteArrayRawFileWriteThread::run()
     KHECore::KPieceTableByteArrayModel *byteArray = qobject_cast<KHECore::KPieceTableByteArrayModel*>( mDocument->content() );
 
     QFile file( mFilePath );
-    file.open( QIODevice::WriteOnly );
-
-    QDataStream outStream( &file );
+    if( file.open(QIODevice::WriteOnly) )
+    {
+        QDataStream outStream( &file );
 
     //TODO: this was
 //     outStream.writeRawData( byteArray->data(), byteArray->size() );
     // make it quicker again by writing spans -> spaniterator
 
-    for( int i = 0; i<byteArray->size(); ++i )
-    {
-        const char datum = byteArray->datum(i);
-        outStream.writeRawData( &datum, 1 );
+        for( int i = 0; i<byteArray->size(); ++i )
+        {
+            const char datum = byteArray->datum(i);
+            outStream.writeRawData( &datum, 1 );
+        }
+
+        byteArray->setModified( false );
+
+        //registerDiskModifyTime( file );TODO move into synchronizer
+
+        mSuccess = ( outStream.status() == QDataStream::Ok );
     }
-
-    byteArray->setModified( false );
-
-    //registerDiskModifyTime( file );TODO move into synchronizer
-
-    mSuccess = ( outStream.status() == QDataStream::Ok );
+    else
+        mSuccess = false;
 
     emit documentWritten( mSuccess );
 }
