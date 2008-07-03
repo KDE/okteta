@@ -25,6 +25,8 @@
 // controller
 #include "kreplacedialog.h"
 #include "kreplaceprompt.h"
+// search controller
+#include "../search/searchjob.h"
 // lib
 #include <kbytearraydocument.h>
 // Okteta gui
@@ -41,6 +43,8 @@
 #include <KActionCollection>
 #include <KStandardAction>
 #include <KMessageBox>
+// Qt
+#include <QtGui/QApplication>
 
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
@@ -130,12 +134,14 @@ void ReplaceController::onDialogOkClicked()
 
 void ReplaceController::findNext()
 {
+    QApplication::setOverrideCursor( Qt::WaitCursor );
+
     while( true )
     {
         // TODO: support ignorecase
-        const int pos = ( mDirection == FindForward ) ?
-            mByteArrayModel->indexOf( mSearchData, mCurrentIndex ) :
-            mByteArrayModel->lastIndexOf( mSearchData, mCurrentIndex-mSearchData.size()+1 );
+        SearchJob *searchJob = new SearchJob( mByteArrayModel, mSearchData, mCurrentIndex, (mDirection==FindForward) );
+        const int pos = searchJob->exec();
+
         if( pos != -1 )
         {
             mPreviousFound = true;
@@ -143,6 +149,8 @@ void ReplaceController::findNext()
             mCurrentIndex = pos;
             if( mDoPrompt )
             {
+                QApplication::restoreOverrideCursor();
+
                 mByteArrayView->setSelection( pos, pos+mSearchData.size()-1 );
                 if( !mReplacePrompt )
                 {
@@ -173,6 +181,8 @@ void ReplaceController::findNext()
         // reached end and
         if( mDoWrap )
         {
+            QApplication::restoreOverrideCursor();
+
             const QString Question = ((mDirection==FindForward) ?
                 i18nc( "@info", "<nl/>End of byte array reached.<nl/>Continue from the beginning?" ) :
                 i18nc( "@info", "<nl/>Beginning of byte array reached.<nl/>Continue from the end?" ));
@@ -184,9 +194,13 @@ void ReplaceController::findNext()
             mCurrentIndex = (mDirection==FindForward) ? 0 : mByteArrayModel->size()-1;
             mDoWrap = false;
             mNoOfReplacements = 0;
+
+            QApplication::setOverrideCursor( Qt::WaitCursor );
         }
         else
         {
+            QApplication::restoreOverrideCursor();
+
             if( !mPreviousFound )
                 KMessageBox::sorry( mWindow, i18nc("@info","Replace pattern not found in byte array."), messageBoxTitle );
             else
