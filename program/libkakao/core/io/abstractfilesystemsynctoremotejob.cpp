@@ -56,7 +56,7 @@ class AbstractFileSystemSyncToRemoteJob::Private
 };
 
 AbstractFileSystemSyncToRemoteJob::Private::Private( KAbstractDocumentFileSystemSynchronizer *synchronizer )
- : mSynchronizer( synchronizer )
+ : mSynchronizer( synchronizer ), mTemporaryFile( 0 )
 {}
 
 inline KUrl AbstractFileSystemSyncToRemoteJob::Private::url()             const { return mSynchronizer->url(); }
