@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -46,11 +46,11 @@ class ReplaceController : public KViewController
   Q_OBJECT
 
   public:
-    explicit ReplaceController( KXmlGuiWindow *MW );
+    explicit ReplaceController( KXmlGuiWindow *window );
     virtual ~ReplaceController();
 
   public: // KViewController API
-    virtual void setView( KAbstractView *View );
+    virtual void setView( KAbstractView *view );
 
   protected:
     void findNext();
@@ -66,26 +66,26 @@ class ReplaceController : public KViewController
     void onPromptReplaceClicked();
 
   protected:
-    KXmlGuiWindow *MainWindow;
-    KHEUI::KByteArrayView *ViewWidget;
-    KHECore::KAbstractByteArrayModel *ByteArray;
+    KXmlGuiWindow *mWindow;
+    KHEUI::KByteArrayView *mByteArrayView;
+    KHECore::KAbstractByteArrayModel *mByteArrayModel;
 
-    KAction *ReplaceAction;
+    KAction *mReplaceAction;
 
-    QByteArray SearchData;
-    QByteArray ReplaceData;
-    bool PreviousFound:1;
-    bool DoWrap:1;
-    bool IgnoreCase:1;
-    bool Prompt:1;
-    KFindDirection Direction;
-    int ReplaceFirstIndex;
-    int ReplaceLastIndex;
-    int CurrentIndex;
-    int NoOfReplacements;
+    QByteArray mSearchData;
+    QByteArray mReplaceData;
+    bool mPreviousFound:1;
+    bool mDoWrap:1;
+    bool mIgnoreCase:1;
+    bool mDoPrompt:1;
+    KFindDirection mDirection;
+    int mReplaceFirstIndex;
+    int mReplaceLastIndex;
+    int mCurrentIndex;
+    int mNoOfReplacements;
 
-    KReplaceDialog *ReplaceDialog;
-    KReplacePrompt *ReplacePrompt;
+    KReplaceDialog *mReplaceDialog;
+    KReplacePrompt *mReplacePrompt;
 };
 
 #endif

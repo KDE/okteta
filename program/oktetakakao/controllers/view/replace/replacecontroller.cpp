@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -44,85 +44,85 @@
 
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
-ReplaceController::ReplaceController( KXmlGuiWindow *MW )
- : MainWindow( MW ), ViewWidget( 0 ), ByteArray( 0 ), ReplaceDialog( 0 ), ReplacePrompt( 0 )
+ReplaceController::ReplaceController( KXmlGuiWindow *window )
+ : mWindow( window ), mByteArrayView( 0 ), mByteArrayModel( 0 ), mReplaceDialog( 0 ), mReplacePrompt( 0 )
 {
-    KActionCollection* ActionCollection = MainWindow->actionCollection();
+    KActionCollection* ActionCollection = mWindow->actionCollection();
 
-    ReplaceAction = KStandardAction::replace( this, SLOT(replace()), ActionCollection );
+    mReplaceAction = KStandardAction::replace( this, SLOT(replace()), ActionCollection );
 
     setView( 0 );
 }
 
 void ReplaceController::setView( KAbstractView *view )
 {
-    if( ViewWidget ) ViewWidget->disconnect( this );
+    if( mByteArrayView ) mByteArrayView->disconnect( this );
 
-    ViewWidget = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
+    mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
     KByteArrayDocument *Document = view ? static_cast<KByteArrayDocument*>( view->document() ) : 0;
-    ByteArray = Document ? Document->content() : 0;
+    mByteArrayModel = Document ? Document->content() : 0;
 
-    if( ByteArray )
+    if( mByteArrayModel )
     {
     }
-    const bool HasView = ( ByteArray != 0 );
-    ReplaceAction->setEnabled( HasView );
+    const bool hasView = ( mByteArrayModel != 0 );
+    mReplaceAction->setEnabled( hasView );
 }
 
 
 void ReplaceController::replace()
 {
     // ensure dialog
-    if( !ReplaceDialog )
+    if( !mReplaceDialog )
     {
-        ReplaceDialog = new KReplaceDialog( MainWindow );
-        connect( ReplaceDialog, SIGNAL(okClicked()), SLOT(onDialogOkClicked()) );
+        mReplaceDialog = new KReplaceDialog( mWindow );
+        connect( mReplaceDialog, SIGNAL(okClicked()), SLOT(onDialogOkClicked()) );
     }
 
-    ReplaceDialog->setInSelection( ViewWidget->hasSelectedData() );
-    ReplaceDialog->setCharCodec( ViewWidget->encodingName() );
+    mReplaceDialog->setInSelection( mByteArrayView->hasSelectedData() );
+    mReplaceDialog->setCharCodec( mByteArrayView->encodingName() );
 
-    ReplaceDialog->show();
+    mReplaceDialog->show();
 }
 
 void ReplaceController::onDialogOkClicked()
 {
-    PreviousFound = false;
-    NoOfReplacements = 0;
+    mPreviousFound = false;
+    mNoOfReplacements = 0;
 
-    ReplaceDialog->hide();
+    mReplaceDialog->hide();
 
     // prepare settings
-    SearchData = ReplaceDialog->data();
-    ReplaceData = ReplaceDialog->replaceData();
-    IgnoreCase = ReplaceDialog->ignoreCase();
-    Prompt = ReplaceDialog->prompt();
+    mSearchData = mReplaceDialog->data();
+    mReplaceData = mReplaceDialog->replaceData();
+    mIgnoreCase = mReplaceDialog->ignoreCase();
+    mDoPrompt = mReplaceDialog->prompt();
 
-    if( ReplaceDialog->inSelection() )
+    if( mReplaceDialog->inSelection() )
     {
-        Direction = FindForward;
-        const KHE::KSection Selection = ViewWidget->selection();
-        ReplaceFirstIndex = Selection.start();
-        ReplaceLastIndex =  Selection.end();
-        CurrentIndex = Selection.start();
-        DoWrap = true;
+        mDirection = FindForward;
+        const KHE::KSection selection = mByteArrayView->selection();
+        mReplaceFirstIndex = selection.start();
+        mReplaceLastIndex =  selection.end();
+        mCurrentIndex = selection.start();
+        mDoWrap = true;
     }
     else
     {
-        Direction = ReplaceDialog->direction();
-        const int CursorPosition = ViewWidget->cursorPosition();
-        if( ReplaceDialog->fromCursor() && (CursorPosition!=0) )
+        mDirection = mReplaceDialog->direction();
+        const int cursorPosition = mByteArrayView->cursorPosition();
+        if( mReplaceDialog->fromCursor() && (cursorPosition!=0) )
         {
-            ReplaceFirstIndex = CursorPosition;
-            ReplaceLastIndex =  CursorPosition-1;
+            mReplaceFirstIndex = cursorPosition;
+            mReplaceLastIndex =  cursorPosition-1;
         }
         else
         {
-            ReplaceFirstIndex = 0;
-            ReplaceLastIndex =  ByteArray->size()-1;
+            mReplaceFirstIndex = 0;
+            mReplaceLastIndex =  mByteArrayModel->size()-1;
         }
-        CurrentIndex = (Direction==FindForward) ? ReplaceFirstIndex : ReplaceLastIndex;
-        DoWrap = (Direction==FindForward) ? (ReplaceLastIndex<CurrentIndex) : (CurrentIndex<ReplaceFirstIndex);
+        mCurrentIndex = (mDirection==FindForward) ? mReplaceFirstIndex : mReplaceLastIndex;
+        mDoWrap = (mDirection==FindForward) ? (mReplaceLastIndex<mCurrentIndex) : (mCurrentIndex<mReplaceFirstIndex);
     }
 
     findNext();
@@ -133,26 +133,26 @@ void ReplaceController::findNext()
     while( true )
     {
         // TODO: support ignorecase
-        int Pos = ( Direction == FindForward ) ?
-            ByteArray->indexOf( SearchData, CurrentIndex ) :
-            ByteArray->lastIndexOf( SearchData, CurrentIndex-SearchData.size()+1 );
-        if( Pos != -1 )
+        const int pos = ( mDirection == FindForward ) ?
+            mByteArrayModel->indexOf( mSearchData, mCurrentIndex ) :
+            mByteArrayModel->lastIndexOf( mSearchData, mCurrentIndex-mSearchData.size()+1 );
+        if( pos != -1 )
         {
-            PreviousFound = true;
+            mPreviousFound = true;
 
-            CurrentIndex = Pos;
-            if( Prompt )
+            mCurrentIndex = pos;
+            if( mDoPrompt )
             {
-                ViewWidget->setSelection( Pos, Pos+SearchData.size()-1 );
-                if( !ReplacePrompt )
+                mByteArrayView->setSelection( pos, pos+mSearchData.size()-1 );
+                if( !mReplacePrompt )
                 {
-                    ReplacePrompt = new KReplacePrompt( MainWindow );
-                    connect( ReplacePrompt, SIGNAL(user1Clicked()), SLOT(onPromptAllClicked()) );
-                    connect( ReplacePrompt, SIGNAL(user2Clicked()), SLOT(onPromptSkipClicked()) );
-                    connect( ReplacePrompt, SIGNAL(user3Clicked()), SLOT(onPromptReplaceClicked()) );
+                    mReplacePrompt = new KReplacePrompt( mWindow );
+                    connect( mReplacePrompt, SIGNAL(user1Clicked()), SLOT(onPromptAllClicked()) );
+                    connect( mReplacePrompt, SIGNAL(user2Clicked()), SLOT(onPromptSkipClicked()) );
+                    connect( mReplacePrompt, SIGNAL(user3Clicked()), SLOT(onPromptReplaceClicked()) );
                 }
-                if( ReplacePrompt->isHidden() )
-                    ReplacePrompt->show();
+                if( mReplacePrompt->isHidden() )
+                    mReplacePrompt->show();
              break;
            }
            else
@@ -162,35 +162,35 @@ void ReplaceController::findNext()
            }
         }
 
-        if( ReplacePrompt )
-            ReplacePrompt->hide();
-        ViewWidget->selectAll( false );
+        if( mReplacePrompt )
+            mReplacePrompt->hide();
+        mByteArrayView->selectAll( false );
 
-        const QString ReplacementReport = (NoOfReplacements==0) ?
+        const QString replacementReport = (mNoOfReplacements==0) ?
             i18nc( "@info", "No replacements done.") :
-            i18ncp( "@info", "1 replacement done.", "%1 replacements done.", NoOfReplacements );
+            i18ncp( "@info", "1 replacement done.", "%1 replacements done.", mNoOfReplacements );
         const QString messageBoxTitle = i18nc( "@title:window", "Replace" );
         // reached end and
-        if( DoWrap )
+        if( mDoWrap )
         {
-            const QString Question = ((Direction==FindForward) ?
+            const QString Question = ((mDirection==FindForward) ?
                 i18nc( "@info", "<nl/>End of byte array reached.<nl/>Continue from the beginning?" ) :
                 i18nc( "@info", "<nl/>Beginning of byte array reached.<nl/>Continue from the end?" ));
 
-            int Result = KMessageBox::questionYesNo( MainWindow, ReplacementReport+Question, messageBoxTitle,
-                                                     KStandardGuiItem::cont(), KStandardGuiItem::cancel() );
-            if( Result == KMessageBox::No )
+            const int answer = KMessageBox::questionYesNo( mWindow, replacementReport+Question, messageBoxTitle,
+                                                           KStandardGuiItem::cont(), KStandardGuiItem::cancel() );
+            if( answer == KMessageBox::No )
                 break;
-            CurrentIndex = (Direction==FindForward) ? 0 : ByteArray->size()-1;
-            DoWrap = false;
-            NoOfReplacements = 0;
+            mCurrentIndex = (mDirection==FindForward) ? 0 : mByteArrayModel->size()-1;
+            mDoWrap = false;
+            mNoOfReplacements = 0;
         }
         else
         {
-            if( !PreviousFound )
-                KMessageBox::sorry( MainWindow, i18nc("@info","Replace pattern not found in byte array."), messageBoxTitle );
+            if( !mPreviousFound )
+                KMessageBox::sorry( mWindow, i18nc("@info","Replace pattern not found in byte array."), messageBoxTitle );
             else
-                KMessageBox::information( MainWindow, ReplacementReport, messageBoxTitle );
+                KMessageBox::information( mWindow, replacementReport, messageBoxTitle );
             break;
         }
     }
@@ -198,23 +198,23 @@ void ReplaceController::findNext()
 
 void ReplaceController::replaceCurrent()
 {
-    ++NoOfReplacements;
-    const int Inserted = ByteArray->replace( CurrentIndex, SearchData.size(),
-                                             ReplaceData.constData(), ReplaceData.size() );
-    if( Direction == FindForward )
-        CurrentIndex += Inserted;
+    ++mNoOfReplacements;
+    const int inserted = mByteArrayModel->replace( mCurrentIndex, mSearchData.size(),
+                                             mReplaceData.constData(), mReplaceData.size() );
+    if( mDirection == FindForward )
+        mCurrentIndex += inserted;
     else
-        --CurrentIndex;
+        --mCurrentIndex;
 }
 
 void ReplaceController::onPromptSkipClicked()
 {
     // skip current
     {
-        if( Direction == FindForward )
-            CurrentIndex += ReplaceData.size();
+        if( mDirection == FindForward )
+            mCurrentIndex += mReplaceData.size();
         else
-            --CurrentIndex;
+            --mCurrentIndex;
     }
     findNext();
 }
@@ -227,13 +227,11 @@ void ReplaceController::onPromptReplaceClicked()
 
 void ReplaceController::onPromptAllClicked()
 {
-    Prompt = false;
-    ReplacePrompt->hide();
+    mDoPrompt = false;
+    mReplacePrompt->hide();
 
     replaceCurrent();
     findNext();
 }
 
-ReplaceController::~ReplaceController()
-{
-}
+ReplaceController::~ReplaceController() {}
