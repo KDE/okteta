@@ -65,6 +65,9 @@ kde4_add_unit_test( bytearraytablelayouttest
   ${bytearraytablelayouttest_SRCS}
 )
 target_link_libraries( bytearraytablelayouttest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+# FIXME:
+# this is a rather stupid workaround - you should link to liboktetagui instead
+set_target_properties( bytearraytablelayouttest PROPERTIES COMPILE_FLAGS "-DMAKE_OKTETAGUI_LIB" )
 
 
 ########### mvctest ###############
