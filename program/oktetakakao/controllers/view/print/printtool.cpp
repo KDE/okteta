@@ -171,6 +171,7 @@ void PrintTool::print()
             KMessageBox::sorry( 0, message, processTitle );
         }
     }
+    delete printDialog;
 }
 
 PrintTool::~PrintTool() {}
