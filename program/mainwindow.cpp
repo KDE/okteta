@@ -65,6 +65,7 @@
 #include <kdocumentsyncmanager.h>
 #include <kdocumentmanager.h>
 // KDE
+#include <KGlobal>
 #include <KConfigGroup>
 
 static const char LoadedUrlsKey[] = "LoadedUrls";
@@ -73,6 +74,18 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram *program )
  : ShellWindow( program->documentManager(), program->viewManager() ), mProgram( program )
 {
     setObjectName( QLatin1String("Shell") );
+
+    // XXX: Workaround for Qt 4.4's lacking of proper handling of the initial layout of dock widgets
+    //      This state is taken from an oktetarc where the docker constellation was configured by hand.
+    //      Setting this state if none is present seems to work, but there's
+    //      still the versioning problem to be accounted for.
+    //      Hack borrowed from trunk/koffice/krita/ui/kis_view2.cpp:
+    const QString mainWindowState = "AAAA/wAAAAD9AAAAAgAAAAEAAAFMAAABe/wCAAAAAvsAAAAQAFYAZQByAHMAaQBvAG4AcwEAAABNAAAAVgAAAAAAAAAA/AAAAE0AAAF7AAABOAEAACL6AAAAAAEAAAAE+wAAABgAQgBpAG4AYQByAHkARgBpAGwAdABlAHIBAAAAAP////8AAAD0AP////sAAAAOAFMAdAByAGkAbgBnAHMBAAAAAP////8AAAExAP////sAAAASAEIAeQB0AGUAVABhAGIAbABlAQAAAAD/////AAABTAD////7AAAACABJAG4AZgBvAQAAAZEAAAFMAAABEAD///8AAAADAAAC3QAAANb8AQAAAAH7AAAAFABQAE8ARABEAGUAYwBvAGQAZQByAQAAAAAAAALdAAAC3QD///8AAAGLAAABewAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAABAAAAFgBtAGEAaQBuAFQAbwBvAGwAQgBhAHIBAAAAAAAAAt0AAAAAAAAAAA==";
+
+    const char mainWindowStateKey[] = "State";
+    KConfigGroup group( KGlobal::config(), "MainWindow" );
+    if( !group.hasKey(mainWindowStateKey) )
+        group.writeEntry( mainWindowStateKey, mainWindowState );
 
     setupControllers();
     setupGUI();
