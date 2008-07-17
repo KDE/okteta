@@ -67,8 +67,8 @@
 // C
 #include <stdlib.h>
 
-
-namespace KHEUI {
+namespace KHEUI
+{
 
 // zooming is done in steps of font size points
 static const int DefaultZoomStep = 1;
@@ -101,6 +101,7 @@ KByteArrayView::KByteArrayView( KHECore::KAbstractByteArrayModel *byteArrayModel
    mCursorPixmaps( new KCursor() ),
    mCharCodec( 0 ),
    mClipboardMode( QClipboard::Clipboard ),
+   mZoomLevel( 1.0 ),
    mResizeStyle( DefaultResizeStyle ),
    mReadOnly( false ),
    mOverWriteOnly( false ),
@@ -209,7 +210,7 @@ KByteArrayView::KEncoding KByteArrayView::encoding()       const { return (KByte
 const QString &KByteArrayView::encodingName()        const { return mCharCodec->name(); }
 bool KByteArrayView::isByteTypeColored()             const { return valueColumn().isByteTypeColored(); }
 
-double KByteArrayView::zoomLevel()                    const { return (double)font().pointSize()/mDefaultFontSize; }
+double KByteArrayView::zoomLevel()                   const { return mZoomLevel; }
 
 int KByteArrayView::cursorPosition() const { return mDataCursor->realIndex(); }
 bool KByteArrayView::isCursorBehind() const { return mDataCursor->isBehind(); }
@@ -548,7 +549,10 @@ void KByteArrayView::fontChange( const QFont &oldFont )
     ColumnsView::fontChange( oldFont );
 
     if( !mInZooming )
+    {
         mDefaultFontSize = font().pointSize();
+        mZoomLevel = 1.0;
+    }
 
     // get new values
     const QFontMetrics newFontMetrics = fontMetrics();
@@ -595,6 +599,7 @@ void KByteArrayView::zoomIn( int pointIncrement )
     if( newPointSize > MaxFontPointSize )
         newPointSize = MaxFontPointSize;
 
+    mZoomLevel = (double)newPointSize/mDefaultFontSize;
     newFont.setPointSize( newPointSize );
 
     mInZooming = true;
@@ -609,6 +614,7 @@ void KByteArrayView::zoomOut( int pointDecrement )
     if( newPointSize < MinFontPointSize )
         newPointSize = MinFontPointSize;
 
+    mZoomLevel = (double)newPointSize/mDefaultFontSize;
     newFont.setPointSize( newPointSize );
 
     mInZooming = true;
@@ -625,7 +631,11 @@ void KByteArrayView::zoomTo( int newPointSize )
         newPointSize = MaxFontPointSize;
 
     QFont newFont( font() );
+    if( QFontInfo(newFont).pointSize() == newPointSize )
+        return;
+
     newFont.setPointSize( newPointSize );
+    mZoomLevel = (double)newPointSize/mDefaultFontSize;
 
     mInZooming = true;
     setFont( newFont );
@@ -640,7 +650,19 @@ void KByteArrayView::unZoom()
 
 void KByteArrayView::setZoomLevel( double zoomLevel )
 {
-    zoomTo( (int)(zoomLevel*mDefaultFontSize) );
+    const int newPointSize = (int)(zoomLevel*mDefaultFontSize);
+    const int currentPointSize = QFontInfo(font()).pointSize();
+
+    // TODO: here we catch any new zoomlevels which are out of bounds and the zoom already at that bound
+    if( (currentPointSize <= MinFontPointSize && zoomLevel < (double)MinFontPointSize/mDefaultFontSize)
+        || (MaxFontPointSize <= currentPointSize && (double)MaxFontPointSize/mDefaultFontSize < zoomLevel) )
+        return;
+
+    zoomTo( newPointSize );
+    // TODO: this hack overwrites the new zoomlevel calculated from the integers in zoomTo,
+    // to avoid getting trapped inside a small integer value, if the zoom tool operates relatively
+    // think about, if this is the right approach
+    mZoomLevel = zoomLevel;
 }
 
 
