@@ -540,6 +540,7 @@ class OKTETAGUI_EXPORT KByteArrayView : public ColumnsView
     QClipboard::Mode mClipboardMode;
     /** font size as set by user (used for zooming) */
     int mDefaultFontSize;
+    double mZoomLevel;
     /** stores the cursor before it follows a drag*/
     int mBeforeDragCursorPos;
     bool mBeforeDragCursorIsBehind:1;
