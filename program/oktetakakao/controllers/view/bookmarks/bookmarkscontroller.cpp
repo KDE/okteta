@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -102,15 +102,21 @@ void BookmarksController::setView( KAbstractView *view )
                  SLOT(updateBookmarks()) );
         connect( mByteArrayView, SIGNAL( cursorPositionChanged( int )), SLOT( onCursorPositionChanged( int )) );
     }
+
+    updateBookmarks();
+
     const bool hasViewWithBookmarks = ( mBookmarks != 0 );
     const bool hasBookmarks = hasViewWithBookmarks && ( bookmarksCount != 0 );
-    mCreateAction->setEnabled( hasViewWithBookmarks );
-    mDeleteAction->setEnabled( hasBookmarks ); //TODO: current is bookmark?
+    if( hasViewWithBookmarks )
+        onCursorPositionChanged( mByteArrayView->cursorPosition() );
+    else
+    {
+        mCreateAction->setEnabled( false );
+        mDeleteAction->setEnabled( false );
+    }
     mDeleteAllAction->setEnabled( hasBookmarks );
     mGotoNextBookmarkAction->setEnabled( hasBookmarks );
     mGotoPreviousBookmarkAction->setEnabled( hasBookmarks );
-
-    updateBookmarks();
 }
 
 void BookmarksController::updateBookmarks()
@@ -178,8 +184,9 @@ Q_UNUSED( bookmarks )
 
 void BookmarksController::onCursorPositionChanged( int newPosition )
 {
+    const bool isInsideByteArray = ( newPosition < mByteArray->size() );
     const bool hasBookmark = mBookmarks->bookmarkList().contains( newPosition );
-    mCreateAction->setEnabled( !hasBookmark );
+    mCreateAction->setEnabled( !hasBookmark && isInsideByteArray );
     mDeleteAction->setEnabled( hasBookmark );
 }
 
@@ -235,6 +242,4 @@ void BookmarksController::onBookmarkTriggered( QAction* action )
 }
 
 
-BookmarksController::~BookmarksController()
-{
-}
+BookmarksController::~BookmarksController() {}
