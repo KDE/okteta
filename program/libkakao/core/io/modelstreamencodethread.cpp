@@ -34,3 +34,5 @@ void ModelStreamEncodeThread::run()
 }
 
 ModelStreamEncodeThread::~ModelStreamEncodeThread() {}
+
+#include "modelstreamencodethread.moc"

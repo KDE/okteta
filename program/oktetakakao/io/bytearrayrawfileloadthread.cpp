@@ -74,3 +74,5 @@ void ByteArrayRawFileLoadThread::run()
 }
 
 ByteArrayRawFileLoadThread::~ByteArrayRawFileLoadThread() {}
+
+#include "bytearrayrawfileloadthread.moc"

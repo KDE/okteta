@@ -68,3 +68,5 @@ void ByteArrayRawFileWriteThread::run()
 }
 
 ByteArrayRawFileWriteThread::~ByteArrayRawFileWriteThread() {}
+
+#include "bytearrayrawfilewritethread.moc"

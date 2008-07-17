@@ -54,3 +54,5 @@ int CreateStatisticJob::exec()
 
     return ( mByteArrayModel ? mSelection.width() : 0 );
 }
+
+#include "createstatisticjob.moc"

@@ -75,3 +75,5 @@ bool KAbstractByteArrayStreamEncoder::encodeToStream( QIODevice *device,
 }
 
 KAbstractByteArrayStreamEncoder::~KAbstractByteArrayStreamEncoder() {}
+
+#include "kabstractbytearraystreamencoder.moc"

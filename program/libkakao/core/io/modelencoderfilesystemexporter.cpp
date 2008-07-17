@@ -44,3 +44,5 @@ QString ModelEncoderFileSystemExporter::modelTypeName( AbstractModel *model, con
 }
 
 ModelEncoderFileSystemExporter::~ModelEncoderFileSystemExporter() {}
+
+#include "modelencoderfilesystemexporter.moc"

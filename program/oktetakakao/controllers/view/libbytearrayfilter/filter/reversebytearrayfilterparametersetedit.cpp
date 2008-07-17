@@ -66,3 +66,5 @@ void ReverseByteArrayFilterParameterSetEdit::getParameterSet( AbstractByteArrayF
 }
 
 ReverseByteArrayFilterParameterSetEdit::~ReverseByteArrayFilterParameterSetEdit() {}
+
+#include "reversebytearrayfilterparametersetedit.moc"

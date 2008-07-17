@@ -71,3 +71,5 @@ void OverwriteOnlyController::setOverwriteOnly( bool isOverwriteOnly )
 Q_UNUSED( isOverwriteOnly )
 //     mByteArrayModel->setOverwriteOnly( isOverwriteOnly );
 }
+
+#include "overwriteonlycontroller.moc"

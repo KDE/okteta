@@ -57,3 +57,5 @@ void ByteArrayRawFileConnectJob::startConnectWithFile()
 }
 
 ByteArrayRawFileConnectJob::~ByteArrayRawFileConnectJob() {}
+
+#include "bytearrayrawfileconnectjob.moc"

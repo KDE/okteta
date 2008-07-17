@@ -53,3 +53,5 @@ void ByteArrayRawFileLoadJob::startLoadFromFile()
 }
 
 ByteArrayRawFileLoadJob::~ByteArrayRawFileLoadJob() {}
+
+#include "bytearrayrawfileloadjob.moc"

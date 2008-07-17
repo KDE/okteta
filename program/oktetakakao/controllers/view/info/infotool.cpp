@@ -129,3 +129,5 @@ void InfoTool::updateStatistic()
 }
 
 InfoTool::~InfoTool() {}
+
+#include "infotool.moc"

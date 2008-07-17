@@ -104,3 +104,5 @@ QVariant ContainedStringTableModel::headerData( int section, Qt::Orientation ori
 }
 
 ContainedStringTableModel::~ContainedStringTableModel() {}
+
+#include "containedstringtablemodel.moc"

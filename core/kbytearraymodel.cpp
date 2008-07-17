@@ -130,3 +130,5 @@ KByteArrayModel::~KByteArrayModel()
 }
 
 }
+
+#include "kbytearraymodel.moc"

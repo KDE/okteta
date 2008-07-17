@@ -105,3 +105,5 @@ FilterController::~FilterController()
 {
     delete mTool;
 }
+
+#include "filtercontroller.moc"

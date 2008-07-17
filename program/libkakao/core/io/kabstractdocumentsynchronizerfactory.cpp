@@ -24,3 +24,5 @@
 
 
 KAbstractDocumentSynchronizerFactory::~KAbstractDocumentSynchronizerFactory() {}
+
+#include "kabstractdocumentsynchronizerfactory.moc"

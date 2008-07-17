@@ -2115,3 +2115,5 @@ KByteArrayView::~KByteArrayView()
 }
 
 }
+
+#include "kbytearrayview.moc"

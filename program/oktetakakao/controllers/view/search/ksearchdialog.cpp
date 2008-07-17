@@ -46,3 +46,5 @@ KSearchDialog::KSearchDialog( QWidget *parent )
 }
 
 KSearchDialog::~KSearchDialog() {}
+
+#include "ksearchdialog.moc"

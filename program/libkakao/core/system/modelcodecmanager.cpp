@@ -141,3 +141,5 @@ ModelCodecManager::~ModelCodecManager()
     qDeleteAll( mEncoderList );
 //     qDeleteAll( mDecoderList );
 }
+
+#include "modelcodecmanager.moc"

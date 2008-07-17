@@ -175,3 +175,5 @@ void PrintTool::print()
 }
 
 PrintTool::~PrintTool() {}
+
+#include "printtool.moc"

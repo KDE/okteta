@@ -60,3 +60,5 @@ void ByteArrayRawFileReloadJob::startReadFromFile()
 }
 
 ByteArrayRawFileReloadJob::~ByteArrayRawFileReloadJob() {}
+
+#include "bytearrayrawfilereloadjob.moc"

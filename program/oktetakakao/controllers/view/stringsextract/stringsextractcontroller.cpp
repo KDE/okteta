@@ -62,3 +62,5 @@ StringsExtractController::~StringsExtractController()
 {
     delete mTool;
 }
+
+#include "stringsextractcontroller.moc"

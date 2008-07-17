@@ -196,3 +196,5 @@ StatisticTableModel::~StatisticTableModel()
     delete mValueCodec;
     delete mCharCodec;
 }
+
+#include "statistictablemodel.moc"

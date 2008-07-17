@@ -62,3 +62,5 @@ InfoController::~InfoController()
 {
     delete mTool;
 }
+
+#include "infocontroller.moc"

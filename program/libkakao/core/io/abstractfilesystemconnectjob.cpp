@@ -214,3 +214,5 @@ AbstractFileSystemConnectJob::~AbstractFileSystemConnectJob()
 {
     delete d;
 }
+
+#include "abstractfilesystemconnectjob.moc"

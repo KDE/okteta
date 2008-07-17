@@ -165,3 +165,5 @@ void VersionTableModel::onHeadVersionDataChanged( const KDocumentVersionData &ve
 }
 
 VersionTableModel::~VersionTableModel() {}
+
+#include "versiontablemodel.moc"

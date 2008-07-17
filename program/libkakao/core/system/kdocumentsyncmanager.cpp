@@ -237,3 +237,5 @@ KDocumentSyncManager::~KDocumentSyncManager()
 {
     delete mSynchronizerFactory;
 }
+
+#include "kdocumentsyncmanager.moc"

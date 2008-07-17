@@ -207,3 +207,5 @@ void KByteArraySourceCodeStreamEncoder::printFormatted( char *buffer,
 }
 
 KByteArraySourceCodeStreamEncoder::~KByteArraySourceCodeStreamEncoder() {}
+
+#include "kbytearraysourcecodestreamencoder.moc"

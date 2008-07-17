@@ -202,3 +202,5 @@ AbstractFileSystemSyncWithRemoteJob::~AbstractFileSystemSyncWithRemoteJob()
 {
     delete d;
 }
+
+#include "abstractfilesystemsyncwithremotejob.moc"

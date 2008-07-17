@@ -44,3 +44,5 @@ KAbstractDocumentSynchronizer *KByteArrayRawFileSynchronizerFactory::createSynch
 }
 
 KByteArrayRawFileSynchronizerFactory::~KByteArrayRawFileSynchronizerFactory() {}
+
+#include "kbytearrayrawfilesynchronizerfactory.moc"

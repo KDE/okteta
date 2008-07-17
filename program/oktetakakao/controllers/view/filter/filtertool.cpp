@@ -124,3 +124,5 @@ void FilterTool::filter( int filterId ) const
 }
 
 FilterTool::~FilterTool() {}
+
+#include "filtertool.moc"

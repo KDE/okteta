@@ -249,3 +249,5 @@ void ReplaceController::onPromptAllClicked()
 }
 
 ReplaceController::~ReplaceController() {}
+
+#include "replacecontroller.moc"

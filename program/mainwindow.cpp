@@ -141,3 +141,5 @@ void OktetaMainWindow::readProperties( const KConfigGroup &configGroup )
 
 
 OktetaMainWindow::~OktetaMainWindow() {}
+
+#include "mainwindow.moc"

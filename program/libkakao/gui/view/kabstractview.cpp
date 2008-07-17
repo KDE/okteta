@@ -21,3 +21,5 @@
 */
 
 #include "kabstractview.h"
+
+#include "kabstractview.moc"

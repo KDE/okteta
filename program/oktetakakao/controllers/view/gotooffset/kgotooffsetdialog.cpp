@@ -161,3 +161,5 @@ void KGotoOffsetDialog::showEvent( QShowEvent *showEvent )
 
 
 KGotoOffsetDialog::~KGotoOffsetDialog() {}
+
+#include "kgotooffsetdialog.moc"

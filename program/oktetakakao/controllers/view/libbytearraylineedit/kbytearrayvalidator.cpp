@@ -182,3 +182,5 @@ KByteArrayValidator::~KByteArrayValidator()
     delete mValueCodec;
     delete mCharCodec;
 }
+
+#include "kbytearrayvalidator.moc"

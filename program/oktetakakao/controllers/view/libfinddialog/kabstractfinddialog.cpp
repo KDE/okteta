@@ -176,3 +176,5 @@ void KAbstractFindDialog::showEvent( QShowEvent *showEvent )
 KAbstractFindDialog::~KAbstractFindDialog()
 {
 }
+
+#include "kabstractfinddialog.moc"

@@ -132,3 +132,5 @@ int KAbstractByteArrayModel::lastIndexOf( const char *pattern, int patternLength
 KAbstractByteArrayModel::~KAbstractByteArrayModel() {}
 
 }
+
+#include "kabstractbytearraymodel.moc"

@@ -50,3 +50,5 @@ void SearchJob::onBytesSearched()
 {
     QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, MaxEventProcessTimeInMS );
 }
+
+#include "searchjob.moc"

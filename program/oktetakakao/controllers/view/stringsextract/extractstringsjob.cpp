@@ -99,3 +99,5 @@ void ExtractStringsJob::exec()
 
     deleteLater(); // TODO: could be reused on next operation
 }
+
+#include "extractstringsjob.moc"

@@ -98,3 +98,5 @@ void KReplaceDialog::setCharCodec( const QString &codecName )
 
 
 KReplaceDialog::~KReplaceDialog() {}
+
+#include "kreplacedialog.moc"

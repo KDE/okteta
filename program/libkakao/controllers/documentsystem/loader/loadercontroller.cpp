@@ -78,3 +78,5 @@ LoaderController::~LoaderController()
     KConfigGroup configGroup( KGlobal::config(), CreatorConfigGroupId );
     mOpenRecentAction->saveEntries( configGroup );
 }
+
+#include "loadercontroller.moc"

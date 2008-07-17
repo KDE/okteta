@@ -81,3 +81,5 @@ void KByteArrayRawFileSynchronizer::onUrlChange( const KUrl &url )
 {
     mDocument->setTitle( url.fileName() );
 }
+
+#include "kbytearrayrawfilesynchronizer.moc"

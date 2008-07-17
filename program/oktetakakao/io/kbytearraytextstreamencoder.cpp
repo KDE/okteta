@@ -79,3 +79,5 @@ bool KByteArrayTextStreamEncoder::encodeDataToStream( QIODevice *device,
 }
 
 KByteArrayTextStreamEncoder::~KByteArrayTextStreamEncoder() {}
+
+#include "kbytearraytextstreamencoder.moc"

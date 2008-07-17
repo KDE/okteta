@@ -53,3 +53,5 @@ AbstractByteArrayFilter::~AbstractByteArrayFilter()
 {
     delete d;
 }
+
+#include "abstractbytearrayfilter.moc"

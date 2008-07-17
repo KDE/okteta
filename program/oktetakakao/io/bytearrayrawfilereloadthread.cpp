@@ -73,3 +73,5 @@ void ByteArrayRawFileReloadThread::run()
 }
 
 ByteArrayRawFileReloadThread::~ByteArrayRawFileReloadThread() {}
+
+#include "bytearrayrawfilereloadthread.moc"

@@ -79,3 +79,5 @@ bool KByteArrayValueStreamEncoder::encodeDataToStream( QIODevice *device,
 }
 
 KByteArrayValueStreamEncoder::~KByteArrayValueStreamEncoder() {}
+
+#include "kbytearrayvaluestreamencoder.moc"

@@ -212,3 +212,5 @@ void OktetaPart::onToggleValueCharColumns( int VisibleColumns)
 }
 
 OktetaPart::~OktetaPart() {}
+
+#include "part.moc"

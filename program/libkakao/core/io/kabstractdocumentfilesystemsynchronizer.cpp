@@ -76,3 +76,5 @@ KAbstractDocumentFileSystemSynchronizer::~KAbstractDocumentFileSystemSynchronize
 
     delete d;
 }
+
+#include "kabstractdocumentfilesystemsynchronizer.moc"

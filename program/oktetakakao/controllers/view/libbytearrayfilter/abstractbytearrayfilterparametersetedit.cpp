@@ -38,3 +38,5 @@ AbstractByteArrayFilterParameterSetEdit::~AbstractByteArrayFilterParameterSetEdi
 {
     delete d;
 }
+
+#include "abstractbytearrayfilterparametersetedit.moc"

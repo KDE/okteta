@@ -45,3 +45,5 @@ void FilterJob::onFilteredBytes()
 {
     QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, MaxEventProcessTimeInMS );
 }
+
+#include "filterjob.moc"

@@ -105,3 +105,5 @@ void PODDecoderTool::updateData()
        emit dataChanged( mPODData.data() );
     }
 }
+
+#include "poddecodertool.moc"

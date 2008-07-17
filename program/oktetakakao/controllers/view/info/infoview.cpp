@@ -120,3 +120,5 @@ void InfoView::setDirty( bool dirty )
 }
 
 InfoView::~InfoView() {}
+
+#include "infoview.moc"

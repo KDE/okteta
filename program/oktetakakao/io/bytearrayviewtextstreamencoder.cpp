@@ -124,3 +124,5 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream( QIODevice *device,
 }
 
 ByteArrayViewTextStreamEncoder::~ByteArrayViewTextStreamEncoder() {}
+
+#include "bytearrayviewtextstreamencoder.moc"

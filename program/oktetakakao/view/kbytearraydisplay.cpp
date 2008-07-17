@@ -116,3 +116,5 @@ KByteArrayDisplay::~KByteArrayDisplay()
 {
     delete mWidget;
 }
+
+#include "kbytearraydisplay.moc"

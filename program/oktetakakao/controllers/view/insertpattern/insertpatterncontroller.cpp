@@ -94,3 +94,5 @@ InsertPatternController::~InsertPatternController()
     delete mInsertPatternDialog;
     delete mInsertPatternTool;
 }
+
+#include "insertpatterncontroller.moc"

@@ -72,3 +72,5 @@ void InsertPatternTool::insertPattern( const QByteArray &pattern, int count )
 }
 
 InsertPatternTool::~InsertPatternTool() {}
+
+#include "insertpatterntool.moc"

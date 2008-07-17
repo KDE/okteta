@@ -138,3 +138,5 @@ AbstractFileSystemSyncToRemoteJob::~AbstractFileSystemSyncToRemoteJob()
 {
     delete d;
 }
+
+#include "abstractfilesystemsynctoremotejob.moc"

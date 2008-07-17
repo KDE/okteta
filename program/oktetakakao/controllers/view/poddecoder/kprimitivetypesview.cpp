@@ -320,3 +320,5 @@ KPrimitiveTypesView::~KPrimitiveTypesView()
 {
     delete mCharCodec;
 }
+
+#include "kprimitivetypesview.moc"

@@ -137,3 +137,5 @@ void KByteArrayLineEdit::onDataChanged( const QString &data )
 }
 
 KByteArrayLineEdit::~KByteArrayLineEdit() { delete d; }
+
+#include "kbytearraylineedit.moc"

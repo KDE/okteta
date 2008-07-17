@@ -149,3 +149,5 @@ ByteTableModel::~ByteTableModel()
         delete mValueCodec[i];
     delete mCharCodec;
 }
+
+#include "bytetablemodel.moc"

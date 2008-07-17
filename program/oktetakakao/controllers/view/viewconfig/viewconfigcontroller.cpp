@@ -146,3 +146,5 @@ void ViewConfigController::toggleValueCharColumns( int VisibleColumns)
 {
   ViewWidget->setVisibleByteArrayColumns( VisibleColumns+1 );
 }
+
+#include "viewconfigcontroller.moc"

@@ -102,3 +102,5 @@ void GotoOffsetController::onOkClicked()
 }
 
 GotoOffsetController::~GotoOffsetController() {}
+
+#include "gotooffsetcontroller.moc"

@@ -61,3 +61,5 @@ void VersionViewController::setView( KAbstractView *view )
 }
 
 VersionViewController::~VersionViewController() {}
+
+#include "versionviewcontroller.moc"

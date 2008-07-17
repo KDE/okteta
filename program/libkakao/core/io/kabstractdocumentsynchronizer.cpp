@@ -53,3 +53,5 @@ KAbstractDocumentSynchronizer::~KAbstractDocumentSynchronizer()
 {
     delete d;
 }
+
+#include "kabstractdocumentsynchronizer.moc"

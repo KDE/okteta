@@ -126,3 +126,5 @@ void InsertPatternDialog::showEvent( QShowEvent *event )
 
 
 InsertPatternDialog::~InsertPatternDialog() {}
+
+#include "insertpatterndialog.moc"

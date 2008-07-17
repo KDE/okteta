@@ -68,3 +68,4 @@ void PrintJob::onFinished()
     emitResult();
 }
 #endif
+#include "printjob.moc"

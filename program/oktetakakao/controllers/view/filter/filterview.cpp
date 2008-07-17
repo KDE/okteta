@@ -165,3 +165,5 @@ void FilterView::onValidityChanged( bool isValid )
 }
 
 FilterView::~FilterView() {}
+
+#include "filterview.moc"

@@ -101,3 +101,5 @@ void RotateByteArrayFilterParameterSetEdit::onValueChanged( int value )
 
 RotateByteArrayFilterParameterSetEdit::~RotateByteArrayFilterParameterSetEdit()
 {}
+
+#include "rotatebytearrayfilterparametersetedit.moc"

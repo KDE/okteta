@@ -100,3 +100,5 @@ void ByteTableView::onInsertClicked()
 }
 
 ByteTableView::~ByteTableView() {}
+
+#include "bytetableview.moc"

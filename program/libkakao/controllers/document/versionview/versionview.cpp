@@ -67,3 +67,5 @@ void VersionView::setDocument( KAbstractDocument *document )
 
 
 VersionView::~VersionView() {}
+
+#include "versionview.moc"

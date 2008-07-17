@@ -74,3 +74,5 @@ void OverwriteModeController::setOverWrite( bool isOverWrite )
 {
     mByteArrayView->setOverwriteMode( isOverWrite );
 }
+
+#include "overwritemodecontroller.moc"

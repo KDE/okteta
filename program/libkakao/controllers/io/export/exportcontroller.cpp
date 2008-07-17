@@ -111,3 +111,5 @@ void ExportController::onActionTriggered( QAction *action )
 
     mDocumentManager->codecManager()->exportDocument( exporter, mView, selection );
 }
+
+#include "exportcontroller.moc"

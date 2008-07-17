@@ -80,3 +80,5 @@ FramesToPaperPrinter::~FramesToPaperPrinter()
 {
     qDeleteAll( mFrameRendererList );
 }
+
+#include "framestopaperprinter.moc"

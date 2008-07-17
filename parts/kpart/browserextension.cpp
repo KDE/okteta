@@ -97,3 +97,5 @@ void OktetaBrowserExtension::restoreState( QDataStream &stream )
 
     part->fitActionSettings();
 }
+
+#include "browserextension.moc"

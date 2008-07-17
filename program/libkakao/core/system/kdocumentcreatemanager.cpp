@@ -53,3 +53,5 @@ KDocumentCreateManager::~KDocumentCreateManager()
 {
     delete mFactory;
 }
+
+#include "kdocumentcreatemanager.moc"

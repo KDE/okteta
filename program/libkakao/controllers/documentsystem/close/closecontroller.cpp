@@ -56,3 +56,5 @@ void CloseController::close()
     if( mDocumentManager->canClose(mDocument) )
         mDocumentManager->closeDocument( mDocument );
 }
+
+#include "closecontroller.moc"

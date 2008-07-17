@@ -150,3 +150,5 @@ AbstractFileSystemLoadJob::~AbstractFileSystemLoadJob()
 {
     delete d;
 }
+
+#include "abstractfilesystemloadjob.moc"

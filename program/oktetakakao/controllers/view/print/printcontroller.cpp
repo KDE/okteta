@@ -53,3 +53,5 @@ PrintController::~PrintController()
 {
     delete mPrintTool;
 }
+
+#include "printcontroller.moc"

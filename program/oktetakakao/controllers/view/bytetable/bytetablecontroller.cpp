@@ -62,3 +62,5 @@ ByteTableController::~ByteTableController()
 {
     delete mTool;
 }
+
+#include "bytetablecontroller.moc"

@@ -77,3 +77,5 @@ void SelectController::unselect()
 {
     mSelectControl->selectAllData( false );
 }
+
+#include "selectcontroller.moc"

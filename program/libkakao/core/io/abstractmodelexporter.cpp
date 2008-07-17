@@ -53,3 +53,5 @@ AbstractModelExporter::~AbstractModelExporter()
 {
     delete d;
 }
+
+#include "abstractmodelexporter.moc"

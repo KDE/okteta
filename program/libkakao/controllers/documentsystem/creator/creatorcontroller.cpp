@@ -48,3 +48,5 @@ void CreatorController::createNew()
 }
 
 CreatorController::~CreatorController() {}
+
+#include "creatorcontroller.moc"

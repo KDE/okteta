@@ -52,3 +52,5 @@ void ByteArrayRawFileWriteJob::startWriteToFile()
 }
 
 ByteArrayRawFileWriteJob::~ByteArrayRawFileWriteJob() {}
+
+#include "bytearrayrawfilewritejob.moc"

@@ -199,3 +199,5 @@ void SearchController::searchData( KFindDirection Direction, int StartIndex )
 }
 
 SearchController::~SearchController() {}
+
+#include "searchcontroller.moc"

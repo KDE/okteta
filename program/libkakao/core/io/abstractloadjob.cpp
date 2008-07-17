@@ -61,3 +61,5 @@ AbstractLoadJob::~AbstractLoadJob()
 {
     delete d;
 }
+
+#include "abstractloadjob.moc"

@@ -78,3 +78,5 @@ void ByteTableTool::insert( unsigned char byte, int count )
 
 
 ByteTableTool::~ByteTableTool() {}
+
+#include "bytetabletool.moc"

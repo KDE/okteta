@@ -98,3 +98,5 @@ KDocumentManager::~KDocumentManager()
     delete mSyncManager;
     delete mCodecManager;
 } //TODO: destroy all documents?
+
+#include "kdocumentmanager.moc"

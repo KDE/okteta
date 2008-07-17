@@ -44,3 +44,5 @@ AbstractConnectJob::~AbstractConnectJob()
 {
     delete d;
 }
+
+#include "abstractconnectjob.moc"

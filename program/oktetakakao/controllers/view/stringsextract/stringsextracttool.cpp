@@ -173,3 +173,5 @@ StringsExtractTool::~StringsExtractTool()
 {
     delete mCharCodec;
 }
+
+#include "stringsextracttool.moc"

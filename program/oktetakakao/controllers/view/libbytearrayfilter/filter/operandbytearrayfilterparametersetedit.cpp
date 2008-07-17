@@ -99,3 +99,5 @@ void OperandByteArrayFilterParameterSetEdit::onInputChanged( const QByteArray &d
 
 OperandByteArrayFilterParameterSetEdit::~OperandByteArrayFilterParameterSetEdit()
 {}
+
+#include "operandbytearrayfilterparametersetedit.moc"

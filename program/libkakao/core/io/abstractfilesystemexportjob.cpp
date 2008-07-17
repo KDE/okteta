@@ -133,3 +133,5 @@ AbstractFileSystemExportJob::~AbstractFileSystemExportJob()
 {
     delete d;
 }
+
+#include "abstractfilesystemexportjob.moc"

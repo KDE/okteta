@@ -110,3 +110,5 @@ KByteArrayDocument::~KByteArrayDocument()
 {
     delete mByteArray;
 }
+
+#include "kbytearraydocument.moc"

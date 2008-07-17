@@ -32,3 +32,5 @@ QString AbstractModelStreamEncoder::remoteTypeName() const { return mRemoteTypeN
 QString AbstractModelStreamEncoder::remoteMimeType() const { return mRemoteMimeType; }
 
 AbstractModelStreamEncoder::~AbstractModelStreamEncoder() {}
+
+#include "abstractmodelstreamencoder.moc"

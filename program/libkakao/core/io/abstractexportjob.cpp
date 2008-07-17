@@ -61,3 +61,5 @@ AbstractExportJob::~AbstractExportJob()
 {
     delete d;
 }
+
+#include "abstractexportjob.moc"

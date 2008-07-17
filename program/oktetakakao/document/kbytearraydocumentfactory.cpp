@@ -44,3 +44,5 @@ KAbstractDocument *KByteArrayDocumentFactory::create()
 
     return document;
 }
+
+#include "kbytearraydocumentfactory.moc"

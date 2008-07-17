@@ -45,3 +45,5 @@ AbstractSyncWithRemoteJob::~AbstractSyncWithRemoteJob()
 {
     delete d;
 }
+
+#include "abstractsyncwithremotejob.moc"

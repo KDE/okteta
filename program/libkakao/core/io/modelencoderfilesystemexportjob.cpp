@@ -82,3 +82,5 @@ ModelEncoderFileSystemExportJob::~ModelEncoderFileSystemExportJob()
 {
     delete d;
 }
+
+#include "modelencoderfilesystemexportjob.moc"

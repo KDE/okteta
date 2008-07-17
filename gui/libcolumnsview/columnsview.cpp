@@ -362,3 +362,5 @@ ColumnsView::~ColumnsView()
 }
 
 }
+
+#include "columnsview.moc"
