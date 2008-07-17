@@ -72,6 +72,8 @@ namespace KHEUI {
 
 // zooming is done in steps of font size points
 static const int DefaultZoomStep = 1;
+static const int MinFontPointSize = 4;
+static const int MaxFontPointSize = 128;
 static const int DefaultStartOffset = 0;//5;
 static const int DefaultFirstLineOffset = 0;
 static const int DefaultNoOfBytesPerLine =  16;
@@ -588,28 +590,44 @@ void KByteArrayView::zoomOut()        { zoomOut( DefaultZoomStep ); }
 
 void KByteArrayView::zoomIn( int pointIncrement )
 {
-    mInZooming = true;
     QFont newFont( font() );
-    newFont.setPointSize( QFontInfo(newFont).pointSize() + pointIncrement );
+    int newPointSize = QFontInfo(newFont).pointSize() + pointIncrement;
+    if( newPointSize > MaxFontPointSize )
+        newPointSize = MaxFontPointSize;
+
+    newFont.setPointSize( newPointSize );
+
+    mInZooming = true;
     setFont( newFont );
     mInZooming = false;
 }
 
 void KByteArrayView::zoomOut( int pointDecrement )
 {
-    mInZooming = true;
     QFont newFont( font() );
-    newFont.setPointSize( qMax( 1, QFontInfo(newFont).pointSize() - pointDecrement ) );
+    int newPointSize = QFontInfo(newFont).pointSize() - pointDecrement;
+    if( newPointSize < MinFontPointSize )
+        newPointSize = MinFontPointSize;
+
+    newFont.setPointSize( newPointSize );
+
+    mInZooming = true;
     setFont( newFont );
     mInZooming = false;
 }
 
 
-void KByteArrayView::zoomTo( int PointSize )
+void KByteArrayView::zoomTo( int newPointSize )
 {
-    mInZooming = true;
+    if( newPointSize < MinFontPointSize )
+        newPointSize = MinFontPointSize;
+    else if( newPointSize > MaxFontPointSize )
+        newPointSize = MaxFontPointSize;
+
     QFont newFont( font() );
-    newFont.setPointSize( PointSize );
+    newFont.setPointSize( newPointSize );
+
+    mInZooming = true;
     setFont( newFont );
     mInZooming = false;
 }
