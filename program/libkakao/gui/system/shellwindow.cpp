@@ -86,9 +86,12 @@ void ShellWindow::onViewFocusChanged( KAbstractView *view )
     const bool changes = view ? view->document()->hasLocalChanges() : false;
     setCaption( title, changes );
 
-    connect( view, SIGNAL(titleChanged( QString )), SLOT(onTitleChanged( QString )) );
-    connect( view, SIGNAL(modified( KAbstractDocument::SynchronizationStates )),
-                   SLOT(onModifiedChanged( KAbstractDocument::SynchronizationStates )) );
+    if( view )
+    {
+        connect( view, SIGNAL(titleChanged( QString )), SLOT(onTitleChanged( QString )) );
+        connect( view, SIGNAL(modified( KAbstractDocument::SynchronizationStates )),
+                       SLOT(onModifiedChanged( KAbstractDocument::SynchronizationStates )) );
+    }
 }
 
 ShellWindow::~ShellWindow()
