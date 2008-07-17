@@ -58,6 +58,8 @@ void TabbedViews::addView( KAbstractView *view )
 
 void TabbedViews::removeView( KAbstractView *view )
 {
+    view->disconnect( this );
+
     const int index = mTabWidget->indexOf( view->widget() );
     if( index != -1 )
         mTabWidget->removeTab( index );
