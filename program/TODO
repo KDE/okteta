@@ -62,27 +62,37 @@ Fixed after 0.1 Beta 2:
 * after tripple click double click uses wrong index
 * word select mode crashes if the mouse gets behind the end
 * ensure screen refreshed during blocking processes:
-  printing, string search, loading, filter, statistic collection
+  printing, string search, loading, filter, statistic collection, replacing, copy as
 * fix doubled strings in clipboard on copy of extracted strings
 * have tools remember for which view they were used and are uptodate
 * initial state for statistic table
 * fix hardcoded colors
+* export (and save/saveas?) did not check if file could be and was successfully written
+* filter button does not get activated if first selection and then parameter inserted
+* limit zoom range to prevent crash on too large font sizes
+* workaround QDockViews non-existing control of the initial layout
+* removed bookmark possible behind end, fixed initially enabled bookmark actions
+* translation of encoder names working now
+* fix crash on align at end
 
 For KDE 4.1:
 ----------------------------------
-* add processes for: replacing, copy as
-* cursor does not get redone on color change
-* ren showBufferColumns to setVisibleByteArrayColumns
+Important:
 * catch revert signal to get out of valueeditor if in
 * escaping an insert value editing at the end leaves the cursor one place too right
-* on tripple click turn into selecting just whole lines if button kept pressed
 * fix replace problem
+Less important:
+* cursor does not get redone on color change
+* on tripple click turn into selecting just whole lines if button kept pressed
 * ask artists for own icon
 * see how the cursor and the value editor could be turned into tool+view
 * fix info and string docker (all with update function) to just work on update, react to change of data origin
 
 Later on:
 ---------
+* Better handling of file errors:
+  exact problem descriptions,
+  options to solve problem (e.g. make file readable)
 * add proper support for blocking processes like printing, string search, loading or filter:
   show progress, allow cancelling, block only related model
 * input of offset or data should detect type by prefixes like 0x or such, by new variant Auto.
