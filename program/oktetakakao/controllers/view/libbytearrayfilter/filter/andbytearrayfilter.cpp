@@ -48,10 +48,10 @@ bool AndByteArrayFilter::filter( char *result,
         int r = section.width();
         int m = section.nextBehindEnd();
 
-        while( m > 0 )
+        while( m > section.start() )
         {
             int o = operandSize;
-            while( m > 0 && o > 0 )
+            while( m > section.start() && o > 0 )
                 result[(r--)-1] = model->datum( (m--)-1 ) & operand[(o--)-1];
 
             filteredBytesCount += (operandSize-o);
