@@ -56,18 +56,6 @@ OktetaProgram::OktetaProgram( int argc, char *argv[] )
  : mDocumentManager( new KDocumentManager() ),
    mViewManager( new KViewManager(mDocumentManager) )
 {
-    QList<AbstractModelStreamEncoder*> encoderList;
-    encoderList << new KByteArrayValueStreamEncoder()
-                << new KByteArrayTextStreamEncoder()
-                << new KByteArraySourceCodeStreamEncoder()
-                << new ByteArrayViewTextStreamEncoder();
-
-    mDocumentManager->codecManager()->setEncoders( encoderList );
-    mDocumentManager->createManager()->setDocumentFactory( new KByteArrayDocumentFactory() );
-    mDocumentManager->syncManager()->setDocumentSynchronizerFactory( new KByteArrayRawFileSynchronizerFactory() );
-
-    mViewManager->setViewFactory( new KByteArrayDisplayFactory() );
-
     KCmdLineOptions programOptions;
 //     programOptions.add( OffsetOptionShortId );
 //     programOptions.add( OffsetOptionId, ki18n("Offset to set the cursor to"), 0 );
@@ -83,6 +71,18 @@ int OktetaProgram::execute()
     KApplication programCore;
 
     KGlobal::locale()->insertCatalog( "liboktetacore" );
+
+    QList<AbstractModelStreamEncoder*> encoderList;
+    encoderList << new KByteArrayValueStreamEncoder()
+                << new KByteArrayTextStreamEncoder()
+                << new KByteArraySourceCodeStreamEncoder()
+                << new ByteArrayViewTextStreamEncoder();
+
+    mDocumentManager->codecManager()->setEncoders( encoderList );
+    mDocumentManager->createManager()->setDocumentFactory( new KByteArrayDocumentFactory() );
+    mDocumentManager->syncManager()->setDocumentSynchronizerFactory( new KByteArrayRawFileSynchronizerFactory() );
+
+    mViewManager->setViewFactory( new KByteArrayDisplayFactory() );
 
     // started by session management?
     if( programCore.isSessionRestored() )
