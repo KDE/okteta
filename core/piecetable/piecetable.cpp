@@ -234,6 +234,10 @@ PieceList PieceTable::remove( const KHE::KSection &removeSection )
 // kDebug() << "end of first removed"<<piece->start()<<piece->end()<<"->"<<removedPiece.start()<<removedPiece.end();
 // --sections;
                     }
+
+                    for( QLinkedList<Piece>::Iterator it = firstRemoved; it!=lastRemoved; ++it )
+                        removedPieceList.append( *it );
+
                     // cut from last section if not all
                     if( removeSection.end() < dataSection.end() )
                     {
@@ -241,15 +245,15 @@ PieceList PieceTable::remove( const KHE::KSection &removeSection )
                         const Piece removedPiece = piece->removeStartBeforeLocal( newLocalStart );
                         removedPieceList.append( removedPiece );
 
-                        --lastRemoved;
                         onlyCompletePiecesRemoved = false;
 // kDebug() << "start of last removed"<<piece->start()<<piece->end()<<"->"<<removedPiece.start()<<removedPiece.end();
 // --sections;
                     }
-                    ++lastRemoved;
-
-                    for( QLinkedList<Piece>::Iterator it = firstRemoved; it!=lastRemoved; ++it )
-                        removedPieceList.append( *it );
+                    else
+                    {
+                        removedPieceList.append( *lastRemoved );
+                        ++lastRemoved;
+                    }
 
                     if( onlyCompletePiecesRemoved )
                     {
