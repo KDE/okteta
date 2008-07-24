@@ -594,7 +594,7 @@
     <guimenu>Settings</guimenu>
     <guimenuitem>Show Statusbar</guimenuitem>
     </menuchoice></term>
-    <listitem><para><action>Toggle display of the status bar,</action></para></listitem>
+    <listitem><para><action>Toggle display of the status bar.</action></para></listitem>
     </varlistentry>
 
     <varlistentry>
