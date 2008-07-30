@@ -1024,7 +1024,7 @@ void KByteArrayView::pasteData( const QMimeData *data )
         QString( octetStreamFormatName ) :
         data->formats()[0];
 
-    const QByteArray byteArray = data->data( dataFormatName );;
+    const QByteArray byteArray = data->data( dataFormatName );
 
     if( !byteArray.isEmpty() )
         insert( byteArray );
@@ -1042,13 +1042,14 @@ void KByteArrayView::insert( const QByteArray &data )
 {
     if( mOverWrite )
     {
+        int lengthOfInserted;
         if( mDataRanges->hasSelection() )
         {
             // replacing the selection:
             // we restrict the replacement to the minimum length of selection and input
             KHE::KSection selection = mDataRanges->removeSelection();
             selection.restrictEndByWidth( data.size() );
-            mByteArrayModel->replace( selection, data.data(), selection.width() );
+            lengthOfInserted = mByteArrayModel->replace( selection, data.data(), selection.width() );
         }
         else
         {
@@ -1058,8 +1059,18 @@ void KByteArrayView::insert( const QByteArray &data )
                 // replacing the normal data, at least until the end
                 KHE::KSection insertRange = KHE::KSection::fromWidth( mDataCursor->realIndex(), data.size() );
                 insertRange.restrictEndTo( length-1 );
-                mByteArrayModel->replace( insertRange, data.data(), insertRange.width() );
+                lengthOfInserted = mByteArrayModel->replace( insertRange, data.data(), insertRange.width() );
             }
+            else
+                lengthOfInserted = 0;
+        }
+        // if inserting ourself we want to place the cursor at the end of the inserted data
+        if( lengthOfInserted > 0 )
+        {
+            pauseCursor();
+            mDataCursor->gotoNextByte(lengthOfInserted);
+            unpauseCursor();
+            emit cursorPositionChanged( mDataCursor->realIndex() );
         }
     }
     else
