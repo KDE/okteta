@@ -38,6 +38,7 @@ class KByteArrayRawFileSynchronizerTest : public QObject
 
   private Q_SLOTS: // test functions
     void testLoadFromUrl();
+    void testNewSaveAsToUrl();
   private: // not working tests
     void testLoadFromNotExistingUrl();
 

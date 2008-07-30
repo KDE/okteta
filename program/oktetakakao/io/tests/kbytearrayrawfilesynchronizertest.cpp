@@ -36,7 +36,7 @@
 #include <abstractsynctoremotejob.h>
 #include <abstractsyncwithremotejob.h>
 // Okteta core
-#include <kbytearraymodel.h>
+#include <kpiecetablebytearraymodel.h>
 // KDE
 #include <KUrl>
 #include <KComponentData>
@@ -125,35 +125,35 @@ void KByteArrayRawFileSynchronizerTest::testLoadFromNotExistingUrl()
     delete synchronizer;
 }
 
-#if 0
-void KByteArrayRawFileSynchronizerTest::testSaveToFile()
+void KByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
 {
-    const QString filePath = mFileSystem->createFilePath( QLatin1String(TestFileName) );
+    const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( FileProtocolName );
 
-
-    KByteArrayDocument *document = new KByteArrayDocument();
-    KHECore::KByteArrayModel *byteArray = document->content();
+    KByteArrayDocument *document = new KByteArrayDocument("New created for test.");
+    KHECore::KPieceTableByteArrayModel *byteArray =
+        qobject_cast<KHECore::KPieceTableByteArrayModel *>( document->content() );
 
     // fill array
-    byteArray->
+    QByteArray testData( TestDataSize, TestDataChar );
+    ::textureByteArray( &testData );
+    byteArray->setData( testData.constData(), testData.size(), false );
 
     // save
-    document->setLocalFilePath( filePath );
-    document->save();
-TODO: save mit path als Parameter? Oder separat setzen? Wie Kopie speichern?
+    KByteArrayRawFileSynchronizer *synchronizer = new KByteArrayRawFileSynchronizer();
+    synchronizer->startConnect( document, fileUrl, KAbstractDocumentSynchronizer::ReplaceRemote )->exec();
+    QCOMPARE( synchronizer->document(), document );
 
-    // load into other and...
-    KByteArrayDocument *otherDocument = new KByteArrayDocument( filePath );
+//     // load into other and...
+//     KByteArrayDocument *otherDocument = new KByteArrayDocument( filePath );
 
-    QVERIFY( document != 0 );
+//     QVERIFY( document != 0 );
 
-    // compare with old
-    KHECore::KByteArrayModel *otherByteArray = document->content();
-    QCOMPARE( byteArray->size(), otherByteArray->size() );
-    QVERIFY( qstrncmp(byteArray->data(),otherByteArray->data(),byteArray->size()) == 0 );
+//     // compare with old
+//     KHECore::KByteArrayModel *otherByteArray = document->content();
+//     QCOMPARE( byteArray->size(), otherByteArray->size() );
+//     QVERIFY( qstrncmp(byteArray->data(),otherByteArray->data(),byteArray->size()) == 0 );
 
     delete document;
 }
-#endif
 
 QTEST_KDEMAIN_CORE( KByteArrayRawFileSynchronizerTest )
