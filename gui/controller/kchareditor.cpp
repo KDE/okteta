@@ -57,14 +57,6 @@ bool KCharEditor::handleKeyPress( QKeyEvent *keyEvent )
             {
                 mView->insert( data );
 
-                if( mView->isOverwriteMode() )
-                {
-                    mView->pauseCursor();
-                    mView->mDataCursor->gotoNextByte();
-                    mView->unpauseCursor();
-                    emit mView->cursorPositionChanged( mDataCursor->realIndex() );
-                }
-
                 keyUsed = true;
             }
         }
