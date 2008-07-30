@@ -74,14 +74,21 @@ Fixed after 0.1 Beta 2:
 * removed bookmark possible behind end, fixed initially enabled bookmark actions
 * translation of encoder names working now
 * fix crash on align at end
+* fix replace problem (undo replace puts the last removed piece as first one)
 
-For KDE 4.1:
+Fixed after 0.1.0:
+------------------
+* all inserts, like from clipboard or tools, in overwrite mode did not place the cursor at the end of the inserted
+
+Next to work on:
 ----------------------------------
 Important:
+* fix new replace undo problem
 * catch revert signal to get out of valueeditor if in
 * escaping an insert value editing at the end leaves the cursor one place too right
-* fix replace problem
 Less important:
+* do not show Paste from clipboard if not possible (overwrite at end)
+* at paste go behind pasted
 * cursor does not get redone on color change
 * on tripple click turn into selecting just whole lines if button kept pressed
 * ask artists for own icon
@@ -120,6 +127,7 @@ Later on:
   * hovering of drag about tab changes to tab
   * dropping next to tab creates new data object by the drop data
 * copy also for all tables, e.g. statistic
+* mouse shadow cursor, shows where cursor would be positioned, also useful for drops
 
 Future plans:
 -------------
