@@ -183,7 +183,7 @@ bool PieceTableChangeHistory::revertBeforeChange( PieceTable *pieceTable, int ch
                 changeMetrics.revert();
                 changeList->append( changeMetrics );
             }
-            mAppliedChangesDataSize += change->dataSize();
+            mAppliedChangesDataSize -= change->dataSize();
         }
     }
     mAppliedChangesCount = changeId;
