@@ -228,6 +228,7 @@ void KValueEditor::doValueEditAction( KValueEditAction Action, int input )
         newValue = input;
         mEditValue = newValue^255; // force update
         mEditModeByInsert = true;
+        mInsertedDigitsCount = 1;
         break;
     case ValueBackspace:
         if( mInsertedDigitsCount > 0 )
