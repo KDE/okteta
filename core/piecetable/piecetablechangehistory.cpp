@@ -171,7 +171,7 @@ bool PieceTableChangeHistory::revertBeforeChange( PieceTable *pieceTable, int ch
                 const KHE::KSectionList changedSectionList = groupChange->revertGroup( pieceTable );
                 changedRanges->addSectionList( changedSectionList );
 
-                const QList<KHE::ArrayChangeMetrics> changeMetricsList = groupChange->groupMetrics();
+                const QList<KHE::ArrayChangeMetrics> changeMetricsList = groupChange->groupMetrics( true );
                 *changeList += changeMetricsList;
             }
             else
