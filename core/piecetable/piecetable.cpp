@@ -139,9 +139,9 @@ void PieceTable::insert( int insertDataOffset, const PieceList &insertPieceList 
                         {
                             it.next();
                             it.remove();
-                            isInserted = true;
-                            break;
                         }
+                        isInserted = true;
+                        break;
                     }
                     ++i;
                 }
