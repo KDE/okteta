@@ -68,7 +68,7 @@ class GroupPieceTableChange : public AbstractPieceTableChange
   public:
     KHE::KSectionList applyGroup( PieceTable *pieceTable ) const;
     KHE::KSectionList revertGroup( PieceTable *pieceTable ) const;
-    KHE::ArrayChangeMetricsList groupMetrics() const;
+    KHE::ArrayChangeMetricsList groupMetrics( bool reverted = false ) const;
     GroupPieceTableChange *parent() const;
 
   public: // TODO: this interface part is shared with PieceTableChangeHistory, try to use this fact

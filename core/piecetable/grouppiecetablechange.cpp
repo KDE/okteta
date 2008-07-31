@@ -150,7 +150,7 @@ KHE::KSectionList GroupPieceTableChange::revertGroup( PieceTable *pieceTable ) c
     return result;
 }
 
-KHE::ArrayChangeMetricsList GroupPieceTableChange::groupMetrics() const
+KHE::ArrayChangeMetricsList GroupPieceTableChange::groupMetrics( bool reverted ) const
 {
     KHE::ArrayChangeMetricsList result;
     foreach( AbstractPieceTableChange *change, mChangeStack )
@@ -158,11 +158,16 @@ KHE::ArrayChangeMetricsList GroupPieceTableChange::groupMetrics() const
         if( change->type() == AbstractPieceTableChange::GroupId )
         {
             const GroupPieceTableChange *groupChange = static_cast<const GroupPieceTableChange *>(change);
-            const KHE::ArrayChangeMetricsList metricsList = groupChange->groupMetrics();
+            const KHE::ArrayChangeMetricsList metricsList = groupChange->groupMetrics( reverted );
             result += metricsList;
         }
         else
-            result.append( change->metrics() );
+        {
+            KHE::ArrayChangeMetrics changeMetrics = change->metrics();
+            if( reverted )
+                changeMetrics.revert();
+            result.append( changeMetrics );
+        }
     }
 
     return result;
