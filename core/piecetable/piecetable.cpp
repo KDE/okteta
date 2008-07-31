@@ -185,7 +185,7 @@ void PieceTable::insert( int insertDataOffset, const PieceList &insertPieceList 
     mSize += insertPieceList.totalLength();
 }
 
-
+// TODO: make algorithm simpler
 PieceList PieceTable::remove( const KHE::KSection &removeSection )
 {
     PieceList removedPieceList;
@@ -235,25 +235,26 @@ PieceList PieceTable::remove( const KHE::KSection &removeSection )
 // --sections;
                     }
 
-                    for( QLinkedList<Piece>::Iterator it = firstRemoved; it!=lastRemoved; ++it )
-                        removedPieceList.append( *it );
-
+                    Piece removedPartialPieceFromLast;
                     // cut from last section if not all
                     if( removeSection.end() < dataSection.end() )
                     {
                         const int newLocalStart =  dataSection.localIndex( removeSection.end() ) + 1;
-                        const Piece removedPiece = piece->removeStartBeforeLocal( newLocalStart );
-                        removedPieceList.append( removedPiece );
+                        removedPartialPieceFromLast = piece->removeStartBeforeLocal( newLocalStart );
 
                         onlyCompletePiecesRemoved = false;
-// kDebug() << "start of last removed"<<piece->start()<<piece->end()<<"->"<<removedPiece.start()<<removedPiece.end();
+// kDebug() << "start of last removed"<<piece->start()<<piece->end()<<"->"<<removedPartialPieceFromLast.start()<<removedPartialPieceFromLast.end();
 // --sections;
                     }
                     else
                     {
-                        removedPieceList.append( *lastRemoved );
                         ++lastRemoved;
                     }
+
+                    for( QLinkedList<Piece>::Iterator it = firstRemoved; it!=lastRemoved; ++it )
+                        removedPieceList.append( *it );
+                    if( removedPartialPieceFromLast.isValid() )
+                        removedPieceList.append( removedPartialPieceFromLast );
 
                     if( onlyCompletePiecesRemoved )
                     {
