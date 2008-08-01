@@ -93,40 +93,40 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram *program )
 
 void OktetaMainWindow::setupControllers()
 {
-  mControllers.append( new CreatorController(mProgram->documentManager()->createManager(),this) );
-  mControllers.append( new LoaderController(mProgram->documentManager()->syncManager(),this) );
-  mControllers.append( new SetRemoteController(mProgram->documentManager()->syncManager(),this) );
-  mControllers.append( new SynchronizeController(this) );
-  mControllers.append( new CloseController(mProgram->documentManager(),this) );
-  mControllers.append( new VersionController(this) );
+    mControllers.append( new CreatorController(mProgram->documentManager()->createManager(),this) );
+    mControllers.append( new LoaderController(mProgram->documentManager()->syncManager(),this) );
+    mControllers.append( new SetRemoteController(mProgram->documentManager()->syncManager(),this) );
+    mControllers.append( new SynchronizeController(this) );
+    mControllers.append( new CloseController(mProgram->documentManager(),this) );
+    mControllers.append( new VersionController(this) );
 #ifndef NDEBUG
-  mControllers.append( new VersionViewController(this) );
+    mControllers.append( new VersionViewController(this) );
 #endif
-  mControllers.append( new ReadOnlyController(this) );
-  mControllers.append( new ViewListMenuController(mProgram->viewManager(),mTabbedViews,this) );
-  mControllers.append( new FullScreenController(this) );
-  mControllers.append( new QuitController(0,this) );
+    mControllers.append( new ReadOnlyController(this) );
+    mControllers.append( new ViewListMenuController(mProgram->viewManager(),mTabbedViews,this) );
+    mControllers.append( new FullScreenController(this) );
+    mControllers.append( new QuitController(0,this) );
 
-  mControllers.append( new ZoomController(this) );
-  mControllers.append( new SelectController(this) );
-  mControllers.append( new ClipboardController(this) );
-  mControllers.append( new CopyAsController(mProgram->documentManager(),this) );
-  mControllers.append( new ExportController(mProgram->documentManager(),this) );
+    mControllers.append( new ZoomController(this) );
+    mControllers.append( new SelectController(this) );
+    mControllers.append( new ClipboardController(this) );
+    mControllers.append( new CopyAsController(mProgram->documentManager(),this) );
+    mControllers.append( new ExportController(mProgram->documentManager(),this) );
 
-//   mControllers.append( new OverwriteOnlyController(this) );
-  mControllers.append( new OverwriteModeController(this) );
-  mControllers.append( new PODDecoderController(this) );
-  mControllers.append( new ByteTableController(this) );
-  mControllers.append( new InfoController(this) );
-  mControllers.append( new StringsExtractController(this) );
-  mControllers.append( new SearchController(this) );
-  mControllers.append( new ReplaceController(this) );
-  mControllers.append( new GotoOffsetController(this) );
-  mControllers.append( new FilterController(this) );
-  mControllers.append( new InsertPatternController(this) );
-  mControllers.append( new BookmarksController(this) );
-  mControllers.append( new PrintController(this) );
-  mControllers.append( new ViewConfigController(this) );
+//     mControllers.append( new OverwriteOnlyController(this) );
+    mControllers.append( new OverwriteModeController(this) );
+    mControllers.append( new PODDecoderController(this) );
+    mControllers.append( new ByteTableController(this) );
+    mControllers.append( new InfoController(this) );
+    mControllers.append( new StringsExtractController(this) );
+    mControllers.append( new SearchController(this) );
+    mControllers.append( new ReplaceController(this) );
+    mControllers.append( new GotoOffsetController(this) );
+    mControllers.append( new FilterController(this) );
+    mControllers.append( new InsertPatternController(this) );
+    mControllers.append( new BookmarksController(this) );
+    mControllers.append( new PrintController(this) );
+    mControllers.append( new ViewConfigController(this) );
 }
 
 void OktetaMainWindow::saveProperties( KConfigGroup &configGroup )
