@@ -48,10 +48,8 @@ ShellWindow::ShellWindow( KDocumentManager *documentManager, KViewManager *viewM
 
 void ShellWindow::updateControllers( KAbstractView* view )
 {
-    QList<KViewController*>::Iterator it;
-    QList<KViewController*>::Iterator end = mControllers.end();
-    for( it=mControllers.begin(); it != end; ++it )
-        (*it)->setView( view );
+    foreach( KViewController* controller, mControllers )
+        controller->setView( view );
 }
 
 bool ShellWindow::queryClose()
@@ -96,10 +94,8 @@ void ShellWindow::onViewFocusChanged( KAbstractView *view )
 
 ShellWindow::~ShellWindow()
 {
-    QList<KViewController*>::Iterator it;
-    QList<KViewController*>::Iterator end = mControllers.end();
-    for( it=mControllers.begin(); it != end; ++it )
-        delete *it;
+    foreach( KViewController* controller, mControllers )
+        delete controller;
 
     delete mTabbedViews;
 }
