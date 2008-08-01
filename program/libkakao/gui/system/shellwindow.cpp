@@ -94,8 +94,7 @@ void ShellWindow::onViewFocusChanged( KAbstractView *view )
 
 ShellWindow::~ShellWindow()
 {
-    foreach( KViewController* controller, mControllers )
-        delete controller;
+    qDeleteAll( mControllers );
 
     delete mTabbedViews;
 }
