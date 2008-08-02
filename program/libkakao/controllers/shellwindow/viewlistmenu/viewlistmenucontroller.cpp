@@ -52,6 +52,7 @@ ViewListMenuController::ViewListMenuController( KViewManager *viewManager, KDE::
     connect( mViewManager, SIGNAL(closing( KAbstractView* )), SLOT(updateActions()) );
 
     setView( 0 );
+    updateActions();
 }
 
 void ViewListMenuController::setView( KAbstractView *View )
@@ -68,20 +69,31 @@ void ViewListMenuController::updateActions()
     qDeleteAll( mWindowsActionGroup->actions() );
 
     const QList<KAbstractView*> views = mViewManager->views();
+    const bool hasViews = ( views.size() > 0 );
 
-    //TODO: sortieren nach namen und erste 10 mit Zahl, siehe unten
-    for( int v = 0; v < views.size(); ++v )
+    if( hasViews )
     {
-        KAbstractView *view = views.at( v );
-        const QString title = KStringHandler::rsqueeze( view->title(), MaxEntryLength );
-        QAction *action = new QAction( v<9 ? QString::fromLatin1("&%1 %2").arg(v+1).arg(title) : title, mWindowsActionGroup );
-//         action->setCheckable( true );
+        //TODO: sortieren nach namen und erste 10 mit Zahl, siehe unten
+        for( int v = 0; v < views.size(); ++v )
+        {
+            KAbstractView *view = views.at( v );
+            const QString title = KStringHandler::rsqueeze( view->title(), MaxEntryLength );
+            QAction *action = new QAction( v<9 ? QString::fromLatin1("&%1 %2").arg(v+1).arg(title) : title, mWindowsActionGroup );
+    //         action->setCheckable( true );
 
-//         if(m_viewManager->activeView() && doc == m_viewManager->activeView()->document())
-//             action->setChecked(true);
-        action->setData( QVariant::fromValue(view) );
-        mWindowsActionGroup->addAction( action );
+    //         if(m_viewManager->activeView() && doc == m_viewManager->activeView()->document())
+    //             action->setChecked(true);
+            action->setData( QVariant::fromValue(view) );
+            mWindowsActionGroup->addAction( action );
+        }
     }
+    else
+    {
+        QAction *noneAction = new QAction( i18nc("@item There are no windows.","None."), mWindowsActionGroup );
+        mWindowsActionGroup->addAction( noneAction );
+    }
+    mWindowsActionGroup->setEnabled( hasViews );
+
     mMainWindow->plugActionList( WindowsListActionListId, mWindowsActionGroup->actions() );
 }
 
