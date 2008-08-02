@@ -27,7 +27,7 @@
 // Kakao gui
 #include <kviewcontroller.h>
 
-class KXmlGuiWindow;
+class KXMLGUIClient;
 class KAction;
 namespace KDE { namespace If {
 class DataSelectable;
@@ -40,7 +40,7 @@ class ClipboardController : public KViewController
   Q_OBJECT
 
   public:
-    explicit ClipboardController( KXmlGuiWindow *window );
+    explicit ClipboardController( KXMLGUIClient* guiClient );
 
   public: // KViewController API
     virtual void setView( KAbstractView *view );
@@ -56,7 +56,6 @@ class ClipboardController : public KViewController
     void onClipboardDataChanged();
 
   protected:
-    KXmlGuiWindow *mMainWindow;
     KAbstractView *mView;
     KDE::If::DataSelectable *mSelectionControl;
     KDE::If::SelectedDataWriteable *mMimeDataControl;

@@ -25,7 +25,7 @@
 // lib
 #include <iwidgetsdockable.h>
 // KDE
-#include <KXmlGuiWindow>
+#include <KXMLGUIClient>
 #include <KXMLGUIFactory>
 // Qt
 #include <QtGui/QDockWidget>
@@ -34,9 +34,9 @@
 
 static const char ToolListActionListId[] = "tools_list";
 
-ToolListMenuController::ToolListMenuController( KDE::If::WidgetsDockable *widgetsDockable,
-                                      KXmlGuiWindow *window )
- : mWidgetsDockable( widgetsDockable ), mWindow( window )
+ToolListMenuController::ToolListMenuController( KDE::If::WidgetsDockable* widgetsDockable,
+                                                KXMLGUIClient* guiClient )
+ : mWidgetsDockable( widgetsDockable ), mGuiClient( guiClient )
 {
     // TODO: for now this is only called on start, so first create all tools/views before this controller
     updateActions();
@@ -49,7 +49,7 @@ Q_UNUSED(view)
 
 void ToolListMenuController::updateActions()
 {
-    mWindow->unplugActionList( ToolListActionListId );
+    mGuiClient->unplugActionList( ToolListActionListId );
 
     qDeleteAll( mToolActionList );
     mToolActionList.clear();
@@ -63,5 +63,5 @@ void ToolListMenuController::updateActions()
 //         action->setText( mToolView->title() );
         mToolActionList.append( action );
     }
-    mWindow->plugActionList( ToolListActionListId, mToolActionList );
+    mGuiClient->plugActionList( ToolListActionListId, mToolActionList );
 }

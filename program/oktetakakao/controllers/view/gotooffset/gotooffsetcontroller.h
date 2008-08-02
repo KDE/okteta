@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -28,7 +28,7 @@
 #include <kviewcontroller.h>
 
 class QAction;
-class KXmlGuiWindow;
+class KXMLGUIClient;
 namespace KHEUI {
 class KByteArrayView;
 }
@@ -43,11 +43,11 @@ class GotoOffsetController : public KViewController
   Q_OBJECT
 
   public:
-    explicit GotoOffsetController( KXmlGuiWindow *MW );
+    explicit GotoOffsetController( KXMLGUIClient* guiClient );
     virtual ~GotoOffsetController();
 
-  public: // KToolet API
-    virtual void setView( KAbstractView *View );
+  public: // KViewController API
+    virtual void setView( KAbstractView* view );
 
   protected Q_SLOTS: // action slots
     void gotoOffset();
@@ -56,13 +56,12 @@ class GotoOffsetController : public KViewController
     void onOkClicked();
 
   protected:
-    KXmlGuiWindow *MainWindow;
-    KHEUI::KByteArrayView *ViewWidget;
-    KHECore::KAbstractByteArrayModel *ByteArray;
+    KHEUI::KByteArrayView* mByteArrayView;
+    KHECore::KAbstractByteArrayModel* mByteArray;
 
-    QAction *GotoOffsetAction;
+    QAction* mGotoOffsetAction;
 
-    KGotoOffsetDialog *GotoOffsetDialog;
+    KGotoOffsetDialog* mGotoOffsetDialog;
 };
 
 #endif

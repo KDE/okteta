@@ -28,7 +28,7 @@
 // Kakao core
 #include <kabstractdocument.h>
 // KDE
-#include <KXmlGuiWindow>
+#include <KXMLGUIClient>
 #include <KXMLGUIFactory>
 #include <KActionCollection>
 #include <KLocale>
@@ -40,9 +40,9 @@ static const int MaxEntryLength = 150;
 static const char WindowsListActionListId[] = "windows_list";
 
 
-ViewListMenuController::ViewListMenuController( KViewManager *viewManager, KDE::If::ViewFocusable *focusable,
-                                      KXmlGuiWindow *mainWindow )
- : mViewManager( viewManager ), mFocusable( focusable ), mMainWindow( mainWindow )
+ViewListMenuController::ViewListMenuController( KViewManager* viewManager, KDE::If::ViewFocusable* focusable,
+                                                KXMLGUIClient* guiClient )
+ : mViewManager( viewManager ), mFocusable( focusable ), mGuiClient( guiClient )
 {
     mWindowsActionGroup = new QActionGroup( this ); // TODO: do we use this only for the signal mapping?
 //     mWindowsActionGroup->setExclusive( true );
@@ -64,7 +64,7 @@ Q_UNUSED(View)
 
 void ViewListMenuController::updateActions()
 {
-    mMainWindow->unplugActionList( WindowsListActionListId );
+    mGuiClient->unplugActionList( WindowsListActionListId );
 
     qDeleteAll( mWindowsActionGroup->actions() );
 
@@ -94,7 +94,7 @@ void ViewListMenuController::updateActions()
     }
     mWindowsActionGroup->setEnabled( hasViews );
 
-    mMainWindow->plugActionList( WindowsListActionListId, mWindowsActionGroup->actions() );
+    mGuiClient->plugActionList( WindowsListActionListId, mWindowsActionGroup->actions() );
 }
 
 

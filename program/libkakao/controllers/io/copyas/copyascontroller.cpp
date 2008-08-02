@@ -32,7 +32,7 @@
 #include <abstractmodelstreamencoder.h>
 #include <abstractmodel.h>
 // KDE
-#include <KXmlGuiWindow>
+#include <KXMLGUIClient>
 #include <KXMLGUIFactory>
 #include <KActionCollection>
 #include <KLocale>
@@ -46,8 +46,8 @@
 
 static const char CopyAsActionListId[] = "copy_as_list";
 
-CopyAsController::CopyAsController( KDocumentManager *documentManager, KXmlGuiWindow *window )
- : mDocumentManager( documentManager ), mWindow( window ), mView( 0 )
+CopyAsController::CopyAsController( KDocumentManager* documentManager, KXMLGUIClient* guiClient )
+ : mDocumentManager( documentManager ), mGuiClient( guiClient ), mView( 0 )
 {
     mCopyAsActionGroup = new QActionGroup( this ); // TODO: do we use this only for the signal mapping?
     connect( mCopyAsActionGroup, SIGNAL(triggered( QAction* )), SLOT(onActionTriggered( QAction* )) );
@@ -78,7 +78,7 @@ Q_DECLARE_METATYPE(AbstractModelStreamEncoder*)
 
 void CopyAsController::updateActions()
 {
-    mWindow->unplugActionList( CopyAsActionListId );
+    mGuiClient->unplugActionList( CopyAsActionListId );
 
     qDeleteAll( mCopyAsActionGroup->actions() );
 
@@ -107,7 +107,7 @@ void CopyAsController::updateActions()
     }
     mCopyAsActionGroup->setEnabled( hasEncoders );
 
-    mWindow->plugActionList( CopyAsActionListId, mCopyAsActionGroup->actions() );
+    mGuiClient->plugActionList( CopyAsActionListId, mCopyAsActionGroup->actions() );
 }
 
 void CopyAsController::onActionTriggered( QAction *action )

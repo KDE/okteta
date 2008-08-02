@@ -27,16 +27,16 @@
 // Okteta core
 #include <kabstractbytearraymodel.h>
 // KDE
-#include <KXmlGuiWindow>
+#include <KXMLGUIClient>
 #include <KLocale>
 #include <KActionCollection>
 #include <KToggleAction>
 
 
-OverwriteOnlyController::OverwriteOnlyController( KXmlGuiWindow *window )
+OverwriteOnlyController::OverwriteOnlyController( KXMLGUIClient* guiClient )
  : mByteArrayModel( 0 )
 {
-    KActionCollection *actionCollection = window->actionCollection();
+    KActionCollection *actionCollection = guiClient->actionCollection();
 
     mSetOverwriteOnlyAction = actionCollection->add<KToggleAction>( "isoverwriteonly" );
     mSetOverwriteOnlyAction->setText( i18nc("@action:inmenu","Overwrite only") );
@@ -71,5 +71,3 @@ void OverwriteOnlyController::setOverwriteOnly( bool isOverwriteOnly )
 Q_UNUSED( isOverwriteOnly )
 //     mByteArrayModel->setOverwriteOnly( isOverwriteOnly );
 }
-
-#include "overwriteonlycontroller.moc"

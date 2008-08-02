@@ -28,7 +28,7 @@
 #include <kviewcontroller.h>
 
 class KAbstractDocument;
-class KXmlGuiWindow;
+class KXMLGUIClient;
 class KToggleAction;
 
 class ReadOnlyController : public KViewController
@@ -36,7 +36,7 @@ class ReadOnlyController : public KViewController
   Q_OBJECT
 
   public:
-    ReadOnlyController( KXmlGuiWindow *window );
+    ReadOnlyController( KXMLGUIClient* guiClient );
 
   public: // KViewController API
     virtual void setView( KAbstractView *view );

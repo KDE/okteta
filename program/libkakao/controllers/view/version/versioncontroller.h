@@ -30,7 +30,7 @@
 namespace KDE { namespace If {
 class Versionable;
 }}
-class KXmlGuiWindow;
+class KXMLGUIClient;
 class KToolBarPopupAction;
 class QAction;
 
@@ -39,7 +39,7 @@ class VersionController : public KViewController
   Q_OBJECT
 
   public:
-    VersionController( KXmlGuiWindow *window );
+    VersionController( KXMLGUIClient* guiClient );
 
   public: // KViewController API
     virtual void setView( KAbstractView *view );

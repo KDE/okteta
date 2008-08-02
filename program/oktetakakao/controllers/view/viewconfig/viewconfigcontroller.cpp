@@ -29,122 +29,120 @@
 // Okteta core
 #include <kcharcodec.h>
 // KDE
-#include <KXmlGuiWindow>
+#include <KXMLGUIClient>
 #include <KLocale>
 #include <KActionCollection>
 #include <KSelectAction>
 #include <KToggleAction>
 
 
-ViewConfigController::ViewConfigController( KXmlGuiWindow *MW )
- : MainWindow( MW ), ViewWidget( 0 )
+ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
+ : mByteArrayView( 0 )
 {
-    KActionCollection *actionCollection = MainWindow->actionCollection();
+    KActionCollection* actionCollection = guiClient->actionCollection();
 
     // value encoding
-    CodingAction = actionCollection->add<KSelectAction>( "view_valuecoding" );
-    CodingAction->setText( i18nc("@title:menu","&Value Coding") );
-    QStringList List;
-    List.append( i18nc("@item:inmenu encoding of the bytes as values in the hexadecimal format","&Hexadecimal") );
-    List.append( i18nc("@item:inmenu encoding of the bytes as values in the decimal format",    "&Decimal")     );
-    List.append( i18nc("@item:inmenu encoding of the bytes as values in the octal format",      "&Octal")       );
-    List.append( i18nc("@item:inmenu encoding of the bytes as values in the binary format",     "&Binary")      );
-    CodingAction->setItems( List );
-    connect( CodingAction, SIGNAL(triggered(int)), SLOT(setCoding(int)) );
+    mCodingAction = actionCollection->add<KSelectAction>( "view_valuecoding" );
+    mCodingAction->setText( i18nc("@title:menu","&Value Coding") );
+    QStringList list;
+    list.append( i18nc("@item:inmenu encoding of the bytes as values in the hexadecimal format","&Hexadecimal") );
+    list.append( i18nc("@item:inmenu encoding of the bytes as values in the decimal format",    "&Decimal")     );
+    list.append( i18nc("@item:inmenu encoding of the bytes as values in the octal format",      "&Octal")       );
+    list.append( i18nc("@item:inmenu encoding of the bytes as values in the binary format",     "&Binary")      );
+    mCodingAction->setItems( list );
+    connect( mCodingAction, SIGNAL(triggered(int)), SLOT(setCoding(int)) );
 
     // document encoding
-    EncodingAction = actionCollection->add<KSelectAction>( "view_charencoding" );
-    EncodingAction->setText( i18nc("@title:menu","&Char Encoding") );
-    EncodingAction->setItems( KHECore::KCharCodec::codecNames() );
-    connect( EncodingAction, SIGNAL(triggered(int)), SLOT(setEncoding(int)) );
+    mEncodingAction = actionCollection->add<KSelectAction>( "view_charencoding" );
+    mEncodingAction->setText( i18nc("@title:menu","&Char Encoding") );
+    mEncodingAction->setItems( KHECore::KCharCodec::codecNames() );
+    connect( mEncodingAction, SIGNAL(triggered(int)), SLOT(setEncoding(int)) );
 
-    ShowsNonprintingAction = actionCollection->add<KToggleAction>( "view_showsnonprinting" );
-    ShowsNonprintingAction->setText( i18nc("@option:check","Show &Non-printing Chars") );
-    connect( ShowsNonprintingAction, SIGNAL(triggered(bool)), SLOT(setShowsNonprinting(bool)) );
+    mShowsNonprintingAction = actionCollection->add<KToggleAction>( "view_showsnonprinting" );
+    mShowsNonprintingAction->setText( i18nc("@option:check","Show &Non-printing Chars") );
+    connect( mShowsNonprintingAction, SIGNAL(triggered(bool)), SLOT(setShowsNonprinting(bool)) );
 
     // resize style
-    ResizeStyleAction = actionCollection->add<KSelectAction>( "resizestyle" );
-    ResizeStyleAction->setText( i18nc("@title:menu","&Resize Style") );
-    List.clear();
-    List.append( i18nc("@item:inmenu","&No Resize") );
-    List.append( i18nc("@item:inmenu","&Lock Groups") );
-    List.append( i18nc("@item:inmenu","&Full Size Usage") );
-    ResizeStyleAction->setItems( List );
-    connect( ResizeStyleAction, SIGNAL(triggered(int)), SLOT(setResizeStyle(int)) );
+    mResizeStyleAction = actionCollection->add<KSelectAction>( "resizestyle" );
+    mResizeStyleAction->setText( i18nc("@title:menu","&Resize Style") );
+    list.clear();
+    list.append( i18nc("@item:inmenu","&No Resize") );
+    list.append( i18nc("@item:inmenu","&Lock Groups") );
+    list.append( i18nc("@item:inmenu","&Full Size Usage") );
+    mResizeStyleAction->setItems( list );
+    connect( mResizeStyleAction, SIGNAL(triggered(int)), SLOT(setResizeStyle(int)) );
 
-    ShowOffsetColumnAction = actionCollection->add<KToggleAction>( "view_lineoffset" );
-    ShowOffsetColumnAction->setText( i18nc("@option:check","Show &Line Offset") );
-    ShowOffsetColumnAction->setShortcut( Qt::Key_F11 );
-    connect( ShowOffsetColumnAction, SIGNAL(triggered(bool)), SLOT(toggleOffsetColumn(bool)) );
+    mShowOffsetColumnAction = actionCollection->add<KToggleAction>( "view_lineoffset" );
+    mShowOffsetColumnAction->setText( i18nc("@option:check","Show &Line Offset") );
+    mShowOffsetColumnAction->setShortcut( Qt::Key_F11 );
+    connect( mShowOffsetColumnAction, SIGNAL(triggered(bool)), SLOT(toggleOffsetColumn(bool)) );
 
     // show buffer columns
-    ToggleColumnsAction = actionCollection->add<KSelectAction>( "togglecolumns" );
-    ToggleColumnsAction->setText( i18nc("@title:menu","&Columns") );
-    List.clear();
-    List.append( i18nc("@item:inmenu","&Values Column") );
-    List.append( i18nc("@item:inmenu","&Chars Column") );
-    List.append( i18nc("@item:inmenu","&Both Columns") );
-    ToggleColumnsAction->setItems( List );
-    connect( ToggleColumnsAction, SIGNAL(triggered(int)), SLOT(toggleValueCharColumns(int)) );
+    mToggleColumnsAction = actionCollection->add<KSelectAction>( "togglecolumns" );
+    mToggleColumnsAction->setText( i18nc("@title:menu","&Columns") );
+    list.clear();
+    list.append( i18nc("@item:inmenu","&Values Column") );
+    list.append( i18nc("@item:inmenu","&Chars Column") );
+    list.append( i18nc("@item:inmenu","&Both Columns") );
+    mToggleColumnsAction->setItems( list );
+    connect( mToggleColumnsAction, SIGNAL(triggered(int)), SLOT(toggleValueCharColumns(int)) );
     setView( 0 );
 }
 
-void ViewConfigController::setView( KAbstractView *View )
+void ViewConfigController::setView( KAbstractView* view )
 {
-    if( ViewWidget ) ViewWidget->disconnect( this );
+    if( mByteArrayView ) mByteArrayView->disconnect( this );
 
-    ViewWidget = View ? static_cast<KHEUI::KByteArrayView *>( View->widget() ) : 0;
+    mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
 
-    if( ViewWidget )
+    if( mByteArrayView )
     {
-        ShowOffsetColumnAction->setChecked( ViewWidget->offsetColumnVisible() );
-        ShowsNonprintingAction->setChecked( ViewWidget->showsNonprinting() );
+        mShowOffsetColumnAction->setChecked( mByteArrayView->offsetColumnVisible() );
+        mShowsNonprintingAction->setChecked( mByteArrayView->showsNonprinting() );
 
-        CodingAction->setCurrentItem( (int)ViewWidget->coding() );
-        EncodingAction->setCurrentItem( KHECore::KCharCodec::codecNames().indexOf(ViewWidget->encodingName()) );
+        mCodingAction->setCurrentItem( (int)mByteArrayView->coding() );
+        mEncodingAction->setCurrentItem( KHECore::KCharCodec::codecNames().indexOf(mByteArrayView->encodingName()) );
 
-        ResizeStyleAction->setCurrentItem( (int)ViewWidget->resizeStyle() );
+        mResizeStyleAction->setCurrentItem( (int)mByteArrayView->resizeStyle() );
 
-        ToggleColumnsAction->setCurrentItem( (int)ViewWidget->visibleBufferColumns()-1 );
+        mToggleColumnsAction->setCurrentItem( (int)mByteArrayView->visibleBufferColumns()-1 );
     }
-    const bool HasView = ( ViewWidget != 0 );
-    CodingAction->setEnabled( HasView );
-    EncodingAction->setEnabled( HasView );
-    ShowsNonprintingAction->setEnabled( HasView );
-    ResizeStyleAction->setEnabled( HasView );
-    ShowOffsetColumnAction->setEnabled( HasView );
-    ToggleColumnsAction->setEnabled( HasView );
+    const bool hasView = ( mByteArrayView != 0 );
+    mCodingAction->setEnabled( hasView );
+    mEncodingAction->setEnabled( hasView );
+    mShowsNonprintingAction->setEnabled( hasView );
+    mResizeStyleAction->setEnabled( hasView );
+    mShowOffsetColumnAction->setEnabled( hasView );
+    mToggleColumnsAction->setEnabled( hasView );
 }
 
 
-void ViewConfigController::setCoding( int Coding )
+void ViewConfigController::setCoding( int coding )
 {
-  ViewWidget->setCoding( (KHEUI::KByteArrayView::KCoding)Coding );
+    mByteArrayView->setCoding( (KHEUI::KByteArrayView::KCoding)coding );
 }
 
 void ViewConfigController::setShowsNonprinting( bool on )
 {
-  ViewWidget->setShowsNonprinting( on );
+    mByteArrayView->setShowsNonprinting( on );
 }
 
 void ViewConfigController::toggleOffsetColumn( bool on )
 {
-  ViewWidget->toggleOffsetColumn( on );
+    mByteArrayView->toggleOffsetColumn( on );
 }
 
-void ViewConfigController::setResizeStyle( int ResizeStyle )
+void ViewConfigController::setResizeStyle( int resizeStyle )
 {
-  ViewWidget->setResizeStyle( (KHEUI::KByteArrayView::KResizeStyle)ResizeStyle );
+    mByteArrayView->setResizeStyle( (KHEUI::KByteArrayView::KResizeStyle)resizeStyle );
 }
 
-void ViewConfigController::setEncoding( int Encoding )
+void ViewConfigController::setEncoding( int encoding )
 {
-  ViewWidget->setEncoding( KHECore::KCharCodec::codecNames()[Encoding] );
+    mByteArrayView->setEncoding( KHECore::KCharCodec::codecNames()[encoding] );
 }
 
-void ViewConfigController::toggleValueCharColumns( int VisibleColumns)
+void ViewConfigController::toggleValueCharColumns( int visibleColumns )
 {
-  ViewWidget->setVisibleByteArrayColumns( VisibleColumns+1 );
+    mByteArrayView->setVisibleByteArrayColumns( visibleColumns+1 );
 }
-
-#include "viewconfigcontroller.moc"

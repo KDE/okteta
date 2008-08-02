@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -31,7 +31,7 @@
 
 class QAction;
 class QActionGroup;
-class KXmlGuiWindow;
+class KXMLGUIClient;
 namespace KHEUI {
 class KByteArrayView;
 }
@@ -47,7 +47,7 @@ class BookmarksController : public KViewController
   Q_OBJECT
 
   public:
-    explicit BookmarksController( KXmlGuiWindow *window );
+    explicit BookmarksController( KXMLGUIClient* guiClient );
     virtual ~BookmarksController();
 
   public: // KViewController API
@@ -69,7 +69,7 @@ class BookmarksController : public KViewController
     void onCursorPositionChanged( int newPosition );
 
   protected:
-    KXmlGuiWindow *mWindow;
+    KXMLGUIClient* mGuiClient;
     KHEUI::KByteArrayView *mByteArrayView;
     KHECore::KAbstractByteArrayModel *mByteArray;
     KHECore::Bookmarkable *mBookmarks;

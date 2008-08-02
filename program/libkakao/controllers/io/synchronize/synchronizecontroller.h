@@ -32,14 +32,14 @@
 class KAbstractDocumentSynchronizer;
 class KAbstractDocumentFileSystemSynchronizer;
 class KAction;
-class KXmlGuiWindow;
+class KXMLGUIClient;
 
 class SynchronizeController : public KViewController
 {
   Q_OBJECT
 
   public:
-    explicit SynchronizeController( KXmlGuiWindow *window );
+    explicit SynchronizeController( KXMLGUIClient* guiClient );
 
   public: // KViewController API
     virtual void setView( KAbstractView *view );
@@ -53,7 +53,6 @@ class SynchronizeController : public KViewController
     void onSynchronizationStateChange( KAbstractDocument::SynchronizationStates newStates );
 
   protected:
-    KXmlGuiWindow *mMainWindow;
     KAbstractDocument *mDocument;
     KAbstractDocumentFileSystemSynchronizer *mSynchronizer;
 

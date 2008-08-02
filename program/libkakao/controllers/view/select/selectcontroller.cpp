@@ -26,17 +26,17 @@
 #include <kidataselectable.h>
 #include <kabstractview.h>
 // KDE
-#include <KXmlGuiWindow>
+#include <KXMLGUIClient>
 #include <KLocale>
 #include <KAction>
 #include <KActionCollection>
 #include <KStandardAction>
 
 
-SelectController::SelectController( KXmlGuiWindow *window )
- : mMainWindow( window ), mView( 0 ), mSelectControl( 0 )
+SelectController::SelectController( KXMLGUIClient* guiClient )
+ : mView( 0 ), mSelectControl( 0 )
 {
-    KActionCollection *actionCollection = mMainWindow->actionCollection();
+    KActionCollection* actionCollection = guiClient->actionCollection();
 
     mSelectAllAction = KStandardAction::selectAll( this, SLOT(selectAll()), actionCollection );
     mDeselectAction =  KStandardAction::deselect(  this, SLOT(unselect()),  actionCollection );
@@ -77,5 +77,3 @@ void SelectController::unselect()
 {
     mSelectControl->selectAllData( false );
 }
-
-#include "selectcontroller.moc"

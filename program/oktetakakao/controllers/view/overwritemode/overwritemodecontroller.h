@@ -30,7 +30,7 @@
 namespace KHEUI {
 class KByteArrayView;
 }
-class KXmlGuiWindow;
+class KXMLGUIClient;
 class KToggleAction;
 
 class OverwriteModeController : public KViewController
@@ -38,7 +38,7 @@ class OverwriteModeController : public KViewController
   Q_OBJECT
 
   public:
-    OverwriteModeController( KXmlGuiWindow *window );
+    OverwriteModeController( KXMLGUIClient* guiClient );
 
   public: // KViewController API
     virtual void setView( KAbstractView *view );

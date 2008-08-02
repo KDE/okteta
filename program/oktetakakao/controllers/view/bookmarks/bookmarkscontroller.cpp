@@ -33,7 +33,7 @@
 #include <kbookmarkable.h>
 #include <kbytearraymodel.h>
 // KDE
-#include <KXmlGuiWindow>
+#include <KXMLGUIClient>
 #include <KLocale>
 #include <KAction>
 #include <KActionCollection>
@@ -46,10 +46,10 @@ static const char BookmarkListActionListId[] = "bookmark_list";
 
 // TODO: Sortieren nach Offset oder Zeit
 
-BookmarksController::BookmarksController( KXmlGuiWindow *window )
- : mWindow( window ), mByteArrayView( 0 ), mByteArray( 0 ), mBookmarks( 0 )
+BookmarksController::BookmarksController( KXMLGUIClient* guiClient )
+ : mGuiClient( guiClient ), mByteArrayView( 0 ), mByteArray( 0 ), mBookmarks( 0 )
 {
-    KActionCollection *actionCollection = mWindow->actionCollection();
+    KActionCollection* actionCollection = mGuiClient->actionCollection();
 
     mCreateAction = KStandardAction::addBookmark( this, SLOT(createBookmark()), actionCollection );
 
@@ -121,7 +121,7 @@ void BookmarksController::setView( KAbstractView *view )
 
 void BookmarksController::updateBookmarks()
 {
-    mWindow->unplugActionList( BookmarkListActionListId );
+    mGuiClient->unplugActionList( BookmarkListActionListId );
 
     qDeleteAll( mBookmarksActionGroup->actions() );
 
@@ -151,7 +151,7 @@ void BookmarksController::updateBookmarks()
         action->setData( bookmark.offset() );
         mBookmarksActionGroup->addAction( action );
     }
-    mWindow->plugActionList( BookmarkListActionListId, mBookmarksActionGroup->actions() );
+    mGuiClient->plugActionList( BookmarkListActionListId, mBookmarksActionGroup->actions() );
 }
 
 void BookmarksController::onBookmarksAdded( const QList<KHECore::KBookmark> &bookmarks )

@@ -27,7 +27,7 @@
 #include <kiselecteddatawriteable.h>
 #include <kabstractview.h>
 // KDE
-#include <KXmlGuiWindow>
+#include <KXMLGUIClient>
 #include <KLocale>
 #include <KAction>
 #include <KActionCollection>
@@ -37,10 +37,10 @@
 #include <QtGui/QApplication>
 
 
-ClipboardController::ClipboardController( KXmlGuiWindow *window )
- : mMainWindow( window ), mView( 0 ), mSelectionControl( 0 ), mMimeDataControl( 0 )
+ClipboardController::ClipboardController( KXMLGUIClient* guiClient )
+ : mView( 0 ), mSelectionControl( 0 ), mMimeDataControl( 0 )
 {
-    KActionCollection *actionCollection = mMainWindow->actionCollection();
+    KActionCollection* actionCollection = guiClient->actionCollection();
 
     mCutAction =   KStandardAction::cut(   this, SLOT(cut()),   actionCollection );
     mCopyAction =  KStandardAction::copy(  this, SLOT(copy()),  actionCollection );

@@ -27,7 +27,7 @@
 // Kakao gui
 #include <kviewcontroller.h>
 
-class KXmlGuiWindow;
+class KXMLGUIClient;
 class InsertPatternTool;
 class InsertPatternDialog;
 class QAction;
@@ -38,7 +38,7 @@ class InsertPatternController : public KViewController
   Q_OBJECT
 
   public:
-    explicit InsertPatternController( KXmlGuiWindow *window );
+    explicit InsertPatternController( KXMLGUIClient* guiClient );
     virtual ~InsertPatternController();
 
   public: // KViewController API
@@ -52,8 +52,6 @@ class InsertPatternController : public KViewController
     void onOkClicked();
 
   protected:
-    KXmlGuiWindow *mWindow;
-
     QAction *mInsertPatternAction;
 
     InsertPatternTool *mInsertPatternTool;

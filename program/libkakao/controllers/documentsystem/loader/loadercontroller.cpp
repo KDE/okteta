@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -29,17 +29,17 @@
 #include <KRecentFilesAction>
 #include <KActionCollection>
 #include <KStandardAction>
-#include <KXmlGuiWindow>
+#include <KXMLGUIClient>
 #include <KConfigGroup>
 #include <KGlobal>
 
 static const char AllFileNamesFilter[] = "*";
 static const char CreatorConfigGroupId[] = "Recent Files";
 
-LoaderController::LoaderController( KDocumentSyncManager *syncManager, KXmlGuiWindow *window )
-: mSyncManager( syncManager ), mMainWindow( window )
+LoaderController::LoaderController( KDocumentSyncManager* syncManager, KXMLGUIClient* guiClient )
+: mSyncManager( syncManager )
 {
-    KActionCollection *actionCollection = mMainWindow->actionCollection();
+    KActionCollection* actionCollection = guiClient->actionCollection();
 
     KStandardAction::open(       this, SLOT(load()),      actionCollection );
     mOpenRecentAction =
@@ -78,5 +78,3 @@ LoaderController::~LoaderController()
     KConfigGroup configGroup( KGlobal::config(), CreatorConfigGroupId );
     mOpenRecentAction->saveEntries( configGroup );
 }
-
-#include "loadercontroller.moc"

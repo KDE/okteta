@@ -31,7 +31,7 @@
 
 class KViewManager;
 class KAction;
-class KXmlGuiWindow;
+class KXMLGUIClient;
 
 
 class CloseController : public KViewController
@@ -39,7 +39,7 @@ class CloseController : public KViewController
   Q_OBJECT
 
   public:
-    CloseController( KViewManager *viewManager, KXmlGuiWindow *window );
+    CloseController( KViewManager* viewManager, KXMLGUIClient* guiClient );
 
   public: // KViewController API
     virtual void setView( KAbstractView *view );
@@ -49,7 +49,6 @@ class CloseController : public KViewController
 
   protected:
     KViewManager *mViewManager;
-    KXmlGuiWindow *mMainWindow;
 
     KAbstractView *mView;
     KAction *mCloseAction;

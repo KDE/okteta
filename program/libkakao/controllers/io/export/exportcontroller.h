@@ -29,7 +29,7 @@
 
 class QAction;
 class QActionGroup;
-class KXmlGuiWindow;
+class KXMLGUIClient;
 class KDocumentManager;
 namespace KDE { namespace If {
 class DataSelectable;
@@ -41,7 +41,7 @@ class ExportController : public KViewController
   Q_OBJECT
 
   public:
-    ExportController( KDocumentManager *documentManager, KXmlGuiWindow *window );
+    ExportController( KDocumentManager* documentManager, KXMLGUIClient* guiClient );
 
   public: // KViewController API
     virtual void setView( KAbstractView *view );
@@ -52,7 +52,7 @@ class ExportController : public KViewController
 
   protected:
     KDocumentManager *mDocumentManager;
-    KXmlGuiWindow *mWindow;
+    KXMLGUIClient *mGuiClient;
 
     KAbstractView *mView;
     KDE::If::DataSelectable *mSelectionControl;

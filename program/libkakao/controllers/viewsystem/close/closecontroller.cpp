@@ -28,13 +28,13 @@
 #include <KActionCollection>
 #include <KAction>
 #include <KStandardAction>
-#include <KXmlGuiWindow>
+#include <KXMLGUIClient>
 
 
-CloseController::CloseController( KViewManager *viewManager, KXmlGuiWindow *window )
-: mViewManager( viewManager ), mMainWindow( window )
+CloseController::CloseController( KViewManager* viewManager, KXMLGUIClient* guiClient )
+: mViewManager( viewManager )
 {
-    KActionCollection* actionCollection = window->actionCollection();
+    KActionCollection* actionCollection = guiClient->actionCollection();
 
     mCloseAction  = KStandardAction::close(  this, SLOT(close()),  actionCollection );
     setView( 0 );

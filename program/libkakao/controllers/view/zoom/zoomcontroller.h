@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -27,7 +27,7 @@
 // lib
 #include <kviewcontroller.h>
 
-class KXmlGuiWindow;
+class KXMLGUIClient;
 class KAction;
 namespace KDE { namespace If {
 class Zoomable;
@@ -39,27 +39,26 @@ class ZoomController : public KViewController
   Q_OBJECT
 
   public:
-    ZoomController( KXmlGuiWindow *MW );
+    ZoomController( KXMLGUIClient* guiClient );
 
-  public: // KToolet API
-    virtual void setView( KAbstractView *View );
+  public: // KViewController API
+    virtual void setView( KAbstractView* view );
 
   protected Q_SLOTS: // action slots
     void zoomIn();
     void zoomOut();
 
   private Q_SLOTS:
-    void onZoomLevelChange( double Level );
+    void onZoomLevelChange( double level );
 
   protected:
-    KXmlGuiWindow *MainWindow;
-    QObject *ZoomObject;
-    KDE::If::Zoomable *ZoomControl;
+    QObject *mZoomObject;
+    KDE::If::Zoomable *mZoomControl;
 
-    double ZoomLevel;
+    double mZoomLevel;
 
-    KAction *ZoomInAction;
-    KAction *ZoomOutAction;
+    KAction *mZoomInAction;
+    KAction *mZoomOutAction;
 };
 
 #endif

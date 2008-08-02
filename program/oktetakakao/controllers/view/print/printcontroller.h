@@ -27,7 +27,7 @@
 #include <kviewcontroller.h>
 
 class KAction;
-class KXmlGuiWindow;
+class KXMLGUIClient;
 class PrintTool;
 
 
@@ -36,7 +36,7 @@ class PrintController : public KViewController
   Q_OBJECT
 
   public:
-    explicit PrintController( KXmlGuiWindow *window );
+    explicit PrintController( KXMLGUIClient* guiClient );
     virtual ~PrintController();
 
   public: // KViewController API
@@ -47,4 +47,5 @@ class PrintController : public KViewController
 
     PrintTool *mPrintTool;
 };
+
 #endif

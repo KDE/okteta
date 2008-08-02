@@ -41,8 +41,8 @@
 
 static const char ExportActionListId[] = "export_list";
 
-ExportController::ExportController( KDocumentManager *documentManager, KXmlGuiWindow *window )
- : mDocumentManager( documentManager ), mWindow( window ), mView( 0 )
+ExportController::ExportController( KDocumentManager* documentManager, KXMLGUIClient* guiClient )
+ : mDocumentManager( documentManager ), mGuiClient( guiClient ), mView( 0 )
 {
     mExportActionGroup = new QActionGroup( this ); // TODO: do we use this only for the signal mapping?
     connect( mExportActionGroup, SIGNAL(triggered( QAction* )), SLOT(onActionTriggered( QAction* )) );
@@ -71,7 +71,7 @@ Q_DECLARE_METATYPE( AbstractModelExporter* )
 
 void ExportController::updateActions()
 {
-    mWindow->unplugActionList( ExportActionListId );
+    mGuiClient->unplugActionList( ExportActionListId );
 
     qDeleteAll( mExportActionGroup->actions() );
 
@@ -100,7 +100,7 @@ void ExportController::updateActions()
     }
     mExportActionGroup->setEnabled( hasExporters );
 
-    mWindow->plugActionList( ExportActionListId, mExportActionGroup->actions() );
+    mGuiClient->plugActionList( ExportActionListId, mExportActionGroup->actions() );
 }
 
 void ExportController::onActionTriggered( QAction *action )
@@ -111,5 +111,3 @@ void ExportController::onActionTriggered( QAction *action )
 
     mDocumentManager->codecManager()->exportDocument( exporter, mView, selection );
 }
-
-#include "exportcontroller.moc"

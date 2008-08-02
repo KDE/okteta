@@ -26,7 +26,7 @@
 // Kakao gui
 #include <kviewcontroller.h>
 
-class KXmlGuiWindow;
+class KXMLGUIClient;
 class KSelectAction;
 class KToggleAction;
 namespace KHEUI {
@@ -39,31 +39,30 @@ class ViewConfigController : public KViewController
   Q_OBJECT
 
   public:
-    ViewConfigController( KXmlGuiWindow *window );
+    explicit ViewConfigController( KXMLGUIClient* guiClient );
 
-  public: // KToolet API
-    virtual void setView( KAbstractView *view );
+  public: // KViewController API
+    virtual void setView( KAbstractView* view );
 
   protected Q_SLOTS: // action slots
-    void setCoding( int Coding );
-    void setEncoding( int Encoding );
+    void setCoding( int coding );
+    void setEncoding( int encoding );
     void setShowsNonprinting( bool on );
-    void setResizeStyle( int Style );
+    void setResizeStyle( int resizeStyle );
     void toggleOffsetColumn( bool on );
     void toggleValueCharColumns( int visibleColunms );
 
   protected:
-    KXmlGuiWindow *MainWindow;
-    KHEUI::KByteArrayView *ViewWidget;
+    KHEUI::KByteArrayView* mByteArrayView;
 
     // view menu
-    KSelectAction *CodingAction;
-    KSelectAction *EncodingAction;
-    KToggleAction *ShowsNonprintingAction;
+    KSelectAction* mCodingAction;
+    KSelectAction* mEncodingAction;
+    KToggleAction* mShowsNonprintingAction;
     // settings menu
-    KSelectAction *ResizeStyleAction;
-    KToggleAction *ShowOffsetColumnAction;
-    KSelectAction *ToggleColumnsAction;
+    KSelectAction* mResizeStyleAction;
+    KToggleAction* mShowOffsetColumnAction;
+    KSelectAction* mToggleColumnsAction;
 };
 
 #endif

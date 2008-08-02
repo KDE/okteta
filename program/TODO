@@ -85,6 +85,10 @@ Fixed after 0.1.0:
 * overwriting in the value column blocked after first digit entered
 * fixed: changemetrics of groups were not reverted if needed, so e.g. cursor could move into wrong direction
 
+Done for 0.2:
+-------------
+* turned into AbstractTool: bytetable, info, stringsextract, filter, poddecoder, versionview
+
 Next to work on:
 ----------------------------------
 Important:

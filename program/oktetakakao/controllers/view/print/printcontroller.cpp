@@ -25,16 +25,16 @@
 // controller
 #include "printtool.h"
 // KDE
-#include <KXmlGuiWindow>
+#include <KXMLGUIClient>
 #include <KActionCollection>
 #include <KStandardAction>
 #include <KAction>
 
 
-PrintController::PrintController( KXmlGuiWindow *window )
+PrintController::PrintController( KXMLGUIClient* guiClient )
  : mPrintTool( new PrintTool() )
 {
-    KActionCollection *actionCollection = window->actionCollection();
+    KActionCollection* actionCollection = guiClient->actionCollection();
 
     mPrintAction = KStandardAction::print( mPrintTool, SLOT(print()), actionCollection );
     connect( mPrintTool, SIGNAL(viewChanged( bool )),
@@ -53,5 +53,3 @@ PrintController::~PrintController()
 {
     delete mPrintTool;
 }
-
-#include "printcontroller.moc"

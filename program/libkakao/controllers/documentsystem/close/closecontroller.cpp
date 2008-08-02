@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -30,13 +30,13 @@
 #include <KActionCollection>
 #include <KAction>
 #include <KStandardAction>
-#include <KXmlGuiWindow>
+#include <KXMLGUIClient>
 
 
-CloseController::CloseController( KDocumentManager *documentManager, KXmlGuiWindow *window )
+CloseController::CloseController( KDocumentManager* documentManager, KXMLGUIClient* guiClient )
 : mDocumentManager( documentManager )
 {
-    KActionCollection* actionCollection = window->actionCollection();
+    KActionCollection* actionCollection = guiClient->actionCollection();
 
     mCloseAction  = KStandardAction::close(  this, SLOT(close()),  actionCollection );
     setView( 0 );

@@ -25,16 +25,16 @@
 // Kakao gui
 #include <kabstractview.h>
 // KDE
-#include <KXmlGuiWindow>
+#include <KXMLGUIClient>
 #include <KLocale>
 #include <KActionCollection>
 #include <KToggleAction>
 
 
-ReadOnlyController::ReadOnlyController( KXmlGuiWindow *window )
+ReadOnlyController::ReadOnlyController( KXMLGUIClient* guiClient )
  : mDocument( 0 )
 {
-    KActionCollection *actionCollection = window->actionCollection();
+    KActionCollection* actionCollection = guiClient->actionCollection();
 
     mSetReadOnlyAction = actionCollection->add<KToggleAction>( "isreadonly" );
     mSetReadOnlyAction->setText( i18nc("@option:check the document is read-only","Read only") );

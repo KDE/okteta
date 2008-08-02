@@ -29,7 +29,7 @@
 
 class QAction;
 class QActionGroup;
-class KXmlGuiWindow;
+class KXMLGUIClient;
 class KViewManager;
 
 namespace KDE { namespace If {
@@ -41,7 +41,7 @@ class ViewListMenuController : public KViewController
   Q_OBJECT
 
   public:
-    ViewListMenuController( KViewManager *viewManager, KDE::If::ViewFocusable *focusable, KXmlGuiWindow *window );
+    ViewListMenuController( KViewManager* viewManager, KDE::If::ViewFocusable* focusable, KXMLGUIClient* guiClient );
 
   public: // KViewController API
     virtual void setView( KAbstractView *view );
@@ -53,7 +53,7 @@ class ViewListMenuController : public KViewController
   protected:
     KViewManager *mViewManager;
     KDE::If::ViewFocusable *mFocusable;
-    KXmlGuiWindow *mMainWindow;
+    KXMLGUIClient* mGuiClient;
 
     QActionGroup *mWindowsActionGroup;
 };

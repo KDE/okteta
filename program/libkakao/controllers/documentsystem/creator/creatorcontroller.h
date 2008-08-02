@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -27,7 +27,7 @@
 // lib
 #include <kviewcontroller.h>
 
-class KXmlGuiWindow;
+class KXMLGUIClient;
 class KDocumentCreateManager;
 
 
@@ -36,10 +36,10 @@ class CreatorController : public KViewController
   Q_OBJECT
 
   public:
-    CreatorController( KDocumentCreateManager *createManager, KXmlGuiWindow *window );
+    CreatorController( KDocumentCreateManager* createManager, KXMLGUIClient* guiClient );
     ~CreatorController();
 
-  public: // KToolet API
+  public: // KViewController API
     virtual void setView( KAbstractView *view );
 
   public Q_SLOTS:
@@ -47,7 +47,6 @@ class CreatorController : public KViewController
 
   protected:
     KDocumentCreateManager *mCreateManager;
-    KXmlGuiWindow *mMainWindow;
 };
 
 #endif

@@ -30,7 +30,7 @@
 #include <QtCore/QList>
 
 class QAction;
-class KXmlGuiWindow;
+class KXMLGUIClient;
 class KViewManager;
 
 namespace KDE { namespace If {
@@ -42,7 +42,7 @@ class ToolListMenuController : public KViewController
   Q_OBJECT
 
   public:
-    ToolListMenuController( KDE::If::WidgetsDockable *widgetsDockable, KXmlGuiWindow *window );
+    ToolListMenuController( KDE::If::WidgetsDockable* widgetsDockable, KXMLGUIClient* guiClient );
 
   public: // KViewController API
     virtual void setView( KAbstractView *view );
@@ -52,7 +52,7 @@ class ToolListMenuController : public KViewController
 
   protected:
     KDE::If::WidgetsDockable *mWidgetsDockable;
-    KXmlGuiWindow *mWindow;
+    KXMLGUIClient* mGuiClient;
 
     QList<QAction*> mToolActionList;
 };

@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -26,20 +26,20 @@
 #include <kizoomable.h>
 #include <kabstractview.h>
 // KDE
-#include <KXmlGuiWindow>
+#include <KXMLGUIClient>
 #include <KLocale>
 #include <KAction>
 #include <KActionCollection>
 #include <KStandardAction>
 
 
-ZoomController::ZoomController( KXmlGuiWindow *MW )
- : MainWindow( MW ), ZoomObject( 0 ), ZoomControl( 0 )
+ZoomController::ZoomController( KXMLGUIClient* guiClient )
+ : mZoomObject( 0 ), mZoomControl( 0 )
 {
-    KActionCollection* ActionCollection = MainWindow->actionCollection();
+    KActionCollection* actionCollection = guiClient->actionCollection();
 
-    ZoomInAction = KStandardAction::zoomIn(   this, SLOT(zoomIn()),  ActionCollection );
-    ZoomOutAction = KStandardAction::zoomOut( this, SLOT(zoomOut()), ActionCollection );
+    mZoomInAction = KStandardAction::zoomIn(   this, SLOT(zoomIn()),  actionCollection );
+    mZoomOutAction = KStandardAction::zoomOut( this, SLOT(zoomOut()), actionCollection );
 
 #if 0
     ZoomToAction = new KSelectAction( i18n("Zoom"), "viewmag", 0, ActionCollection, "zoomTo" );
@@ -71,33 +71,33 @@ ZoomController::ZoomController( KXmlGuiWindow *MW )
     setView( 0 );
 }
 
-void ZoomController::setView( KAbstractView *View )
+void ZoomController::setView( KAbstractView* view )
 {
-    if( ZoomObject ) ZoomObject->disconnect( this );
+    if( mZoomObject ) mZoomObject->disconnect( this );
 
-    ZoomControl = View ? qobject_cast<KDE::If::Zoomable *>( View ) : 0;
-    ZoomObject = ZoomControl ? View : 0;
+    mZoomControl = view ? qobject_cast<KDE::If::Zoomable *>( view ) : 0;
+    mZoomObject = mZoomControl ? view : 0;
 
-    if( ZoomControl )
+    if( mZoomControl )
     {
-        ZoomLevel = ZoomControl->zoomLevel();
-        connect( ZoomObject, SIGNAL(zoomLevelChanged( double )), SLOT(onZoomLevelChange( double )) );
+        mZoomLevel = mZoomControl->zoomLevel();
+        connect( mZoomObject, SIGNAL(zoomLevelChanged( double )), SLOT(onmZoomLevelChange( double )) );
     }
 
-    const bool HasView = ( ZoomControl != 0 );
-    ZoomInAction->setEnabled( HasView );
-    ZoomOutAction->setEnabled( HasView );
+    const bool hasView = ( mZoomControl != 0 );
+    mZoomInAction->setEnabled( hasView );
+    mZoomOutAction->setEnabled( hasView );
 }
 
 
 void ZoomController::zoomIn()
 {
-    ZoomControl->setZoomLevel( ZoomLevel * 1.10 );
+    mZoomControl->setZoomLevel( mZoomLevel * 1.10 );
 }
 
 void ZoomController::zoomOut()
 {
-    ZoomControl->setZoomLevel( ZoomLevel / 1.10 );
+    mZoomControl->setZoomLevel( mZoomLevel / 1.10 );
 }
 #if 0
 void ZoomController::zoomTo( const QString& nz )
@@ -132,7 +132,7 @@ void ZoomController::fitToSize()
     updateZoomActions();
 }
 #endif
-void ZoomController::onZoomLevelChange( double Level )
+void ZoomController::onZoomLevelChange( double level )
 {
-    ZoomLevel = Level;
+    mZoomLevel = level;
 }

@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -28,7 +28,7 @@
 #include <kviewcontroller.h>
 
 class KAction;
-class KXmlGuiWindow;
+class KXMLGUIClient;
 class KAbstractDocument;
 class KDocumentSyncManager;
 
@@ -37,7 +37,7 @@ class SetRemoteController : public KViewController
   Q_OBJECT
 
   public:
-    SetRemoteController( KDocumentSyncManager *syncManager, KXmlGuiWindow *window );
+    SetRemoteController( KDocumentSyncManager* syncManager, KXMLGUIClient* guiClient );
 
   public: // KViewController API
     virtual void setView( KAbstractView *view );
@@ -46,7 +46,6 @@ class SetRemoteController : public KViewController
     void saveAs();
 
   protected:
-    KXmlGuiWindow *mMainWindow;
     KAction *mSaveAsAction;
 
     KDocumentSyncManager *mSyncManager;

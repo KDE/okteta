@@ -27,7 +27,7 @@
 #include "insertpatterntool.h"
 // KDE
 #include <KActionCollection>
-#include <KXmlGuiWindow>
+#include <KXMLGUIClient>
 #include <KLocale>
 #include <KMessageBox>
 #include <KAction>
@@ -36,13 +36,12 @@
 
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
-InsertPatternController::InsertPatternController( KXmlGuiWindow *window )
- : mWindow( window ),
-   mInsertPatternTool( new InsertPatternTool() ), mInsertPatternDialog( 0 )
+InsertPatternController::InsertPatternController( KXMLGUIClient* guiClient )
+ : mInsertPatternTool( new InsertPatternTool() ), mInsertPatternDialog( 0 )
 {
     connect( mInsertPatternTool, SIGNAL(viewChanged( bool )), SLOT(onViewChanged( bool )) );
 
-    KActionCollection *actionCollection = mWindow->actionCollection();
+    KActionCollection *actionCollection = guiClient->actionCollection();
 
     mInsertPatternAction = actionCollection->addAction( "insert_pattern" );
     mInsertPatternAction->setText( i18nc("@action:inmenu","&Insert pattern...") );
@@ -71,7 +70,7 @@ void InsertPatternController::onActionTriggered()
     // ensure dialog
     if( !mInsertPatternDialog )
     {
-        mInsertPatternDialog = new InsertPatternDialog( mWindow );
+        mInsertPatternDialog = new InsertPatternDialog( 0 );
         connect( mInsertPatternDialog, SIGNAL(okClicked()), SLOT(onOkClicked()) );
     }
     mInsertPatternDialog->setCharCodec( mInsertPatternTool->charCodecName() );
@@ -94,5 +93,3 @@ InsertPatternController::~InsertPatternController()
     delete mInsertPatternDialog;
     delete mInsertPatternTool;
 }
-
-#include "insertpatterncontroller.moc"

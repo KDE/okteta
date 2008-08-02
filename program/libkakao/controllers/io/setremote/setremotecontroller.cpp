@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -30,13 +30,13 @@
 #include <KActionCollection>
 #include <KAction>
 #include <KStandardAction>
-#include <KXmlGuiWindow>
+#include <KXMLGUIClient>
 
 
-SetRemoteController::SetRemoteController( KDocumentSyncManager *syncManager, KXmlGuiWindow *window )
-: mMainWindow( window ), mSyncManager( syncManager )
+SetRemoteController::SetRemoteController( KDocumentSyncManager* syncManager, KXMLGUIClient* guiClient )
+: mSyncManager( syncManager )
 {
-    KActionCollection *actionCollection = mMainWindow->actionCollection();
+    KActionCollection* actionCollection = guiClient->actionCollection();
 
     mSaveAsAction = KStandardAction::saveAs( this, SLOT(saveAs()), actionCollection );
 

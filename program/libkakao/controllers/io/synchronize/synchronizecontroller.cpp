@@ -34,13 +34,13 @@
 #include <KActionCollection>
 #include <KAction>
 #include <KStandardAction>
-#include <KXmlGuiWindow>
+#include <KXMLGUIClient>
 
 
-SynchronizeController::SynchronizeController( KXmlGuiWindow *window )
-: mMainWindow( window ), mDocument( 0 ), mSynchronizer( 0 )
+SynchronizeController::SynchronizeController( KXMLGUIClient* guiClient )
+: mDocument( 0 ), mSynchronizer( 0 )
 {
-    KActionCollection *actionCollection = mMainWindow->actionCollection();
+    KActionCollection* actionCollection = guiClient->actionCollection();
 
     mSaveAction   = KStandardAction::save(   this, SLOT(save()),   actionCollection );
     mReloadAction = KStandardAction::revert( this, SLOT(reload()), actionCollection );
@@ -65,13 +65,13 @@ void SynchronizeController::setView( KAbstractView *view )
 void SynchronizeController::save()
 {
     AbstractSyncToRemoteJob *syncJob = mDocument->synchronizer()->startSyncToRemote();
-    JobManager::executeJob( syncJob, mMainWindow );
+    JobManager::executeJob( syncJob );
 }
 
 void SynchronizeController::reload()
 {
     AbstractSyncFromRemoteJob *syncJob = mDocument->synchronizer()->startSyncFromRemote();
-    JobManager::executeJob( syncJob, mMainWindow );
+    JobManager::executeJob( syncJob );
 }
 
 void SynchronizeController::onSynchronizerChange( KAbstractDocumentSynchronizer *newSynchronizer )

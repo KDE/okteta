@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -29,7 +29,7 @@
 
 class KDocumentSyncManager;
 class KRecentFilesAction;
-class KXmlGuiWindow;
+class KXMLGUIClient;
 class KUrl;
 
 
@@ -38,7 +38,7 @@ class LoaderController : public KViewController
   Q_OBJECT
 
   public:
-    LoaderController( KDocumentSyncManager *syncManager, KXmlGuiWindow *window );
+    LoaderController( KDocumentSyncManager* syncManager, KXMLGUIClient* guiClient );
     ~LoaderController();
 
   public: // KViewController API
@@ -52,7 +52,6 @@ class LoaderController : public KViewController
 
   protected:
     KDocumentSyncManager *mSyncManager;
-    KXmlGuiWindow *mMainWindow;
 
     KRecentFilesAction *mOpenRecentAction;
 };

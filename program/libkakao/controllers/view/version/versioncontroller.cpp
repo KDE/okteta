@@ -28,7 +28,7 @@
 #include <kdocumentversiondata.h>
 #include <kiversionable.h>
 // KDE
-#include <KXmlGuiWindow>
+#include <KXMLGUIClient>
 #include <KLocale>
 #include <KActionCollection>
 #include <KToolBarPopupAction>
@@ -39,10 +39,10 @@
 
 static const int MaxMenuEntries = 10;
 
-VersionController::VersionController( KXmlGuiWindow *window )
+VersionController::VersionController( KXMLGUIClient* guiClient )
  : mView( 0 )
 {
-    KActionCollection *actionCollection = window->actionCollection();
+    KActionCollection* actionCollection = guiClient->actionCollection();
 
     mSetToOlderVersionAction = new KToolBarPopupAction( KIcon("edit-undo"), i18nc("@action:inmenu","Undo"), this );
     actionCollection->addAction( "edit_undo", mSetToOlderVersionAction );

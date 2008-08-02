@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -27,12 +27,12 @@
 // KDE
 #include <KActionCollection>
 #include <KStandardAction>
-#include <KXmlGuiWindow>
+#include <KXMLGUIClient>
 
-CreatorController::CreatorController( KDocumentCreateManager *createManager, KXmlGuiWindow *window )
-: mCreateManager( createManager ), mMainWindow( window )
+CreatorController::CreatorController( KDocumentCreateManager* createManager, KXMLGUIClient* guiClient )
+: mCreateManager( createManager )
 {
-    KActionCollection *actionCollection = mMainWindow->actionCollection();
+    KActionCollection* actionCollection = guiClient->actionCollection();
 
     KStandardAction::openNew( this, SLOT(createNew()), actionCollection );
 }
@@ -48,5 +48,3 @@ void CreatorController::createNew()
 }
 
 CreatorController::~CreatorController() {}
-
-#include "creatorcontroller.moc"

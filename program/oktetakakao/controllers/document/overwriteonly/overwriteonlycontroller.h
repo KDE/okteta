@@ -30,7 +30,7 @@
 namespace KHECore {
 class KAbstractByteArrayModel;
 }
-class KXmlGuiWindow;
+class KXMLGUIClient;
 class KToggleAction;
 
 class OverwriteOnlyController : public KViewController
@@ -38,7 +38,7 @@ class OverwriteOnlyController : public KViewController
   Q_OBJECT
 
   public:
-    OverwriteOnlyController( KXmlGuiWindow *window );
+    OverwriteOnlyController( KXMLGUIClient* guiClient );
 
   public: // KViewController API
     virtual void setView( KAbstractView *view );

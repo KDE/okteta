@@ -27,7 +27,7 @@
 // Kakao gui
 #include <kviewcontroller.h>
 
-class KXmlGuiWindow;
+class KXMLGUIClient;
 class KAction;
 namespace KDE { namespace If {
 class DataSelectable;
@@ -39,7 +39,7 @@ class SelectController : public KViewController
   Q_OBJECT
 
   public:
-    explicit SelectController( KXmlGuiWindow *window );
+    explicit SelectController( KXMLGUIClient* guiClient );
 
   public: // KViewController API
     virtual void setView( KAbstractView *view );
@@ -52,7 +52,6 @@ class SelectController : public KViewController
     void onHasSelectedDataChanged( bool hasSelectedData );
 
   protected:
-    KXmlGuiWindow *mMainWindow;
     KAbstractView *mView;
     KDE::If::DataSelectable *mSelectControl;
 

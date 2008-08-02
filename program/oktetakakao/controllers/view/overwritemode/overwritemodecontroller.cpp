@@ -33,10 +33,10 @@
 #include <KToggleAction>
 
 
-OverwriteModeController::OverwriteModeController( KXmlGuiWindow *window )
+OverwriteModeController::OverwriteModeController( KXMLGUIClient* guiClient )
  : mByteArrayView( 0 )
 {
-    KActionCollection *actionCollection = window->actionCollection();
+    KActionCollection* actionCollection = guiClient->actionCollection();
 
     mSetOverWriteAction = actionCollection->add<KToggleAction>( "set_overwrite" );
     mSetOverWriteAction->setText( i18nc("@option:check","Overwrite Mode") );
@@ -74,5 +74,3 @@ void OverwriteModeController::setOverWrite( bool isOverWrite )
 {
     mByteArrayView->setOverwriteMode( isOverWrite );
 }
-
-#include "overwritemodecontroller.moc"
