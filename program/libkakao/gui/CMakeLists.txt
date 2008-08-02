@@ -10,6 +10,7 @@ include_directories(
 
 set( KAKAO_GUI_SRCS
   view/kabstractview.cpp
+  view/abstracttoolview.cpp
   system/dummyview.cpp
   system/kviewmanager.cpp
   system/abstractgroupedviews.cpp
