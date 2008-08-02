@@ -25,6 +25,7 @@
 
 
 // Kakao gui
+#include "iwidgetsdockable.h"
 #include <kviewcontroller.h>
 // Kakao core
 #include <kabstractdocument.h>
@@ -37,11 +38,13 @@ class KDocumentManager;
 class KAbstractView;
 class KViewManager;
 class TabbedViews;
+class AbstractToolView;
+class AbstractTool;
 
-
-class ShellWindow : public KXmlGuiWindow
+class ShellWindow : public KXmlGuiWindow, public KDE::If::WidgetsDockable
 {
    Q_OBJECT
+   Q_INTERFACES( KDE::If::WidgetsDockable )
 
   public:
     ShellWindow( KDocumentManager *documentManager, KViewManager *viewManager );
@@ -49,6 +52,10 @@ class ShellWindow : public KXmlGuiWindow
 
   public:
     void updateControllers( KAbstractView *view );
+    void addTool( AbstractToolView* toolView );
+
+  public: // KDE::If::WidgetsDockable API
+    virtual QList<QDockWidget*> dockWidgets() const;
 
   protected: // KMainWindow API
     virtual bool queryClose();
@@ -67,6 +74,10 @@ class ShellWindow : public KXmlGuiWindow
     KDocumentManager *mDocumentManager;
     KViewManager *mViewManager;
     QList<KViewController*> mControllers;
+
+    QList<QDockWidget*> mDockWidgets;
+    QList<AbstractToolView*> mToolViews;
+    QList<AbstractTool*> mTools;
 };
 
 #endif

@@ -26,9 +26,13 @@
 #include <tabbedviews.h>
 #include <kviewmanager.h>
 #include <kabstractview.h>
+#include <abstracttoolview.h>
+#include <abstracttool.h>
 // Kakao core
 #include <kdocumentmanager.h>
 #include <kabstractdocument.h>
+// Qt
+#include <QtGui/QDockWidget>
 
 
 ShellWindow::ShellWindow( KDocumentManager *documentManager, KViewManager *viewManager )
@@ -46,10 +50,28 @@ ShellWindow::ShellWindow( KDocumentManager *documentManager, KViewManager *viewM
     connect( mTabbedViews, SIGNAL(viewFocusChanged( KAbstractView* )), SLOT(onViewFocusChanged( KAbstractView* )) );
 }
 
+QList<QDockWidget*> ShellWindow::dockWidgets() const { return mDockWidgets; }
+
+void ShellWindow::addTool( AbstractToolView* toolView )
+{
+    QDockWidget *dockWidget = new QDockWidget( toolView->title(), this );
+    dockWidget->setWidget( toolView->widget() );
+    dockWidget->setObjectName( toolView->tool()->objectName() );
+    // TODO: where to set the initial area?
+    addDockWidget( Qt::RightDockWidgetArea, dockWidget );
+
+    mTools.append( toolView->tool() );
+    mToolViews.append( toolView );
+    mDockWidgets.append( dockWidget );
+}
+
 void ShellWindow::updateControllers( KAbstractView* view )
 {
     foreach( KViewController* controller, mControllers )
         controller->setView( view );
+
+    foreach( AbstractTool* tool, mTools )
+        tool->setTargetModel( view );
 }
 
 bool ShellWindow::queryClose()
@@ -95,6 +117,8 @@ void ShellWindow::onViewFocusChanged( KAbstractView *view )
 ShellWindow::~ShellWindow()
 {
     qDeleteAll( mControllers );
+    qDeleteAll( mToolViews );
+    qDeleteAll( mTools );
 
     delete mTabbedViews;
 }
