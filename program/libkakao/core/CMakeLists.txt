@@ -13,6 +13,7 @@ endif(KDE4_BUILD_TESTS)
 set( KAKAO_CORE_SRCS
   document/abstractmodel.cpp
   document/abstractmodelselection.cpp
+  document/abstracttool.cpp
   document/kabstractdocument.cpp
   document/kabstractdocumentfactory.cpp
   document/kdocumentversiondata.cpp
