@@ -1,5 +1,5 @@
 /*
-    This file is part of the Okteta Kakao module, part of the KDE project.
+    This file is part of the Kakao Framework, part of the KDE project.
 
     Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
@@ -20,43 +20,19 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INFOVIEW_H
-#define INFOVIEW_H
+#include "versionviewtoolview.h"
 
-// Qt
-#include <QtGui/QWidget>
+// tool
+#include "versionview.h"
+#include "versionviewtool.h"
 
-class InfoTool;
-class KPushButton;
-class QLabel;
-class QTreeView;
-
-
-class InfoView : public QWidget
+VersionViewToolView::VersionViewToolView( VersionViewTool *tool )
+ : mWidget( new VersionView(tool) )
 {
-  Q_OBJECT
+}
 
-  public:
-    explicit InfoView( InfoTool *tool, QWidget *parent = 0 );
-    virtual ~InfoView();
+QWidget *VersionViewToolView::widget()    const { return mWidget; }
+QString VersionViewToolView::title()      const { return mWidget->tool()->title(); }
+AbstractTool *VersionViewToolView::tool() const { return mWidget->tool(); }
 
-  public:
-    InfoTool* tool() const;
-
-  public Q_SLOTS:
-    void updateHeader();
-    void setDirty( bool dirty );
-    void setByteArraySize( int size );
-
-  private:
-    InfoTool *mTool;
-
-    QLabel *mDirtyLabel;
-    QLabel *mSizeLabel;
-    QTreeView *mStatisticTableView;
-    KPushButton *mUpdateButton;
-};
-
-inline InfoTool* InfoView::tool() const { return mTool; }
-
-#endif
+VersionViewToolView::~VersionViewToolView() {}

@@ -20,43 +20,28 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INFOVIEW_H
-#define INFOVIEW_H
+#ifndef STRINGSEXTRACTTOOLVIEW_H
+#define STRINGSEXTRACTTOOLVIEW_H
 
-// Qt
-#include <QtGui/QWidget>
+// Kakao gui
+#include <abstracttoolview.h>
 
-class InfoTool;
-class KPushButton;
-class QLabel;
-class QTreeView;
+class StringsExtractView;
+class StringsExtractTool;
 
-
-class InfoView : public QWidget
+class StringsExtractToolView : public AbstractToolView
 {
-  Q_OBJECT
-
   public:
-    explicit InfoView( InfoTool *tool, QWidget *parent = 0 );
-    virtual ~InfoView();
+    explicit StringsExtractToolView( StringsExtractTool *tool );
+    virtual ~StringsExtractToolView();
 
-  public:
-    InfoTool* tool() const;
+  public: // AbstractToolView API
+    virtual QWidget *widget() const;
+    virtual QString title() const;
+    virtual AbstractTool *tool() const;
 
-  public Q_SLOTS:
-    void updateHeader();
-    void setDirty( bool dirty );
-    void setByteArraySize( int size );
-
-  private:
-    InfoTool *mTool;
-
-    QLabel *mDirtyLabel;
-    QLabel *mSizeLabel;
-    QTreeView *mStatisticTableView;
-    KPushButton *mUpdateButton;
+  protected:
+    StringsExtractView *mWidget;
 };
-
-inline InfoTool* InfoView::tool() const { return mTool; }
 
 #endif

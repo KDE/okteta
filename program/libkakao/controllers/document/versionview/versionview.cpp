@@ -24,19 +24,19 @@
 
 // tool
 #include "versiontablemodel.h"
+#include "versionviewtool.h"
 // Kakao core
 #include <kiversionable.h>
-#include <kabstractdocument.h>
+#include <abstractmodel.h>
 // KDE
 #include <KDialog>
-#include <KLocale>
 // Qt
 #include <QtGui/QLayout>
 #include <QtGui/QTreeView>
 
 
-VersionView::VersionView( QWidget *parent )
- : QWidget( parent )
+VersionView::VersionView( VersionViewTool* tool, QWidget* parent )
+ : QWidget( parent ), mTool( tool )
 {
     mVersionTableModel = new VersionTableModel( 0, 0, this );
 
@@ -53,19 +53,21 @@ VersionView::VersionView( QWidget *parent )
     mVersionTableView->setModel( mVersionTableModel );
 
     baseLayout->addWidget( mVersionTableView, 10 );
+
+    connect( mTool, SIGNAL(modelChanged( AbstractModel* )),
+             SLOT(setModel( AbstractModel* )) );
+
+    setModel( mTool->model() );
 }
 
-void VersionView::setDocument( KAbstractDocument *document )
+void VersionView::setModel( AbstractModel* model )
 {
-    KDE::If::Versionable *versionControl = document ? qobject_cast<KDE::If::Versionable*>( document ) : 0;
+    KDE::If::Versionable* versionControl = model ? qobject_cast<KDE::If::Versionable*>( model ) : 0;
 
-    mVersionTableModel->setDocument( document, versionControl );
+    mVersionTableModel->setModel( model, versionControl );
 
     for( int c = 0; c<VersionTableModel::NoOfColumnIds; ++c )
         mVersionTableView->resizeColumnToContents( c );
 }
 
-
 VersionView::~VersionView() {}
-
-#include "versionview.moc"

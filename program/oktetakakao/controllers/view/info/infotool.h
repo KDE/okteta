@@ -23,10 +23,10 @@
 #ifndef INFOTOOL_H
 #define INFOTOOL_H
 
+// Kakao core
+#include <abstracttool.h>
 // Okteta core
 #include <ksection.h>
-// Qt
-#include <QtCore/QObject>
 
 class StatisticTableModel;
 
@@ -40,7 +40,7 @@ class KAbstractByteArrayModel;
 
 /**
 */
-class InfoTool : public QObject
+class InfoTool : public AbstractTool
 {
   Q_OBJECT
 
@@ -49,13 +49,16 @@ class InfoTool : public QObject
     virtual ~InfoTool();
 
   public:
-    void setView( KAbstractView *view );
-
-  public:
     StatisticTableModel *statisticTableModel() const;
     int size() const;
     bool isApplyable() const;
     bool isStatisticUptodate() const;
+
+  public: // AbstractTool API
+//     virtual AbstractModel* targetModel() const;
+    virtual QString title() const;
+
+    virtual void setTargetModel( AbstractModel* model );
 
   public Q_SLOTS:
     void updateStatistic();

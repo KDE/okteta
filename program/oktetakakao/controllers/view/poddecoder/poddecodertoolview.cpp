@@ -20,43 +20,19 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INFOVIEW_H
-#define INFOVIEW_H
+#include "poddecodertoolview.h"
 
-// Qt
-#include <QtGui/QWidget>
+// tool
+#include "kprimitivetypesview.h"
+#include "poddecodertool.h"
 
-class InfoTool;
-class KPushButton;
-class QLabel;
-class QTreeView;
-
-
-class InfoView : public QWidget
+PODDecoderToolView::PODDecoderToolView( PODDecoderTool *tool )
+ : mWidget( new KPrimitiveTypesView(tool) )
 {
-  Q_OBJECT
+}
 
-  public:
-    explicit InfoView( InfoTool *tool, QWidget *parent = 0 );
-    virtual ~InfoView();
+QWidget *PODDecoderToolView::widget()    const { return mWidget; }
+QString PODDecoderToolView::title()      const { return mWidget->tool()->title(); }
+AbstractTool *PODDecoderToolView::tool() const { return mWidget->tool(); }
 
-  public:
-    InfoTool* tool() const;
-
-  public Q_SLOTS:
-    void updateHeader();
-    void setDirty( bool dirty );
-    void setByteArraySize( int size );
-
-  private:
-    InfoTool *mTool;
-
-    QLabel *mDirtyLabel;
-    QLabel *mSizeLabel;
-    QTreeView *mStatisticTableView;
-    KPushButton *mUpdateButton;
-};
-
-inline InfoTool* InfoView::tool() const { return mTool; }
-
-#endif
+PODDecoderToolView::~PODDecoderToolView() {}

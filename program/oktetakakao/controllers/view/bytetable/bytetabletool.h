@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,8 +23,8 @@
 #ifndef BYTETABLETOOL_H
 #define BYTETABLETOOL_H
 
-// Qt
-#include <QtCore/QObject>
+// Kakao core
+#include <abstracttool.h>
 
 class ByteTableModel;
 
@@ -38,7 +38,7 @@ class KAbstractByteArrayModel;
 
 /**
 */
-class ByteTableTool : public QObject
+class ByteTableTool : public AbstractTool
 {
   Q_OBJECT
 
@@ -46,8 +46,11 @@ class ByteTableTool : public QObject
     ByteTableTool();
     virtual ~ByteTableTool();
 
-  public:
-    void setView( KAbstractView *view );
+  public: // AbstractTool API
+//     virtual AbstractModel* targetModel() const;
+    virtual QString title() const;
+
+    virtual void setTargetModel( AbstractModel* model );
 
   public:
     void insert( unsigned char byte, int count );

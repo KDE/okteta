@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,35 +20,28 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTETABLECONTROLLER_H
-#define BYTETABLECONTROLLER_H
+#ifndef FILTERTOOLVIEW_H
+#define FILTERTOOLVIEW_H
 
 // Kakao gui
-#include <kviewcontroller.h>
+#include <abstracttoolview.h>
 
-class ByteTableTool;
-class ByteTableView;
+class FilterView;
+class FilterTool;
 
-class QAction;
-class KXmlGuiWindow;
-class KAbstractView;
-
-
-class ByteTableController : public KViewController
+class FilterToolView : public AbstractToolView
 {
-  Q_OBJECT
-
   public:
-    ByteTableController( KXmlGuiWindow *window );
-    virtual ~ByteTableController();
+    explicit FilterToolView( FilterTool* tool );
+    virtual ~FilterToolView();
 
-  public: // KViewController API
-    virtual void setView( KAbstractView *view );
+  public: // AbstractToolView API
+    virtual QWidget* widget() const;
+    virtual QString title() const;
+    virtual AbstractTool* tool() const;
 
   protected:
-    ByteTableTool *mTool;
-    ByteTableView *mView;
-    QAction *mAction;
+    FilterView* mWidget;
 };
 
 #endif

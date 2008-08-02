@@ -24,38 +24,38 @@
 
 // Kakao core
 #include <kiversionable.h>
-#include <kabstractdocument.h>
+#include <abstractmodel.h>
 // KDE
 #include <KLocale>
 #include <KIcon>
 
-VersionTableModel::VersionTableModel( KAbstractDocument *document, KDE::If::Versionable *versionControl, QObject *parent )
+VersionTableModel::VersionTableModel( AbstractModel* model, KDE::If::Versionable* versionControl, QObject* parent )
  : QAbstractTableModel( parent ),
-   mDocument( document ),
+   mModel( model ),
    mVersionControl( versionControl ),
    mVersionIndex( versionControl ? versionControl->versionIndex() : 0 )
 {
-    if( mDocument )
+    if( mModel )
     {
-        connect( mDocument, SIGNAL(revertedToVersionIndex( int )), SLOT(onRevertedToVersionIndex( int )) );
-        connect( mDocument, SIGNAL(headVersionChanged( int )), SLOT(onHeadVersionChanged( int )) );
-        connect( mDocument, SIGNAL(headVersionDataChanged( const KDocumentVersionData & )),
+        connect( mModel, SIGNAL(revertedToVersionIndex( int )), SLOT(onRevertedToVersionIndex( int )) );
+        connect( mModel, SIGNAL(headVersionChanged( int )), SLOT(onHeadVersionChanged( int )) );
+        connect( mModel, SIGNAL(headVersionDataChanged( const KDocumentVersionData & )),
                  SLOT(onHeadVersionDataChanged( const KDocumentVersionData & )) );
     }
 }
 
-void VersionTableModel::setDocument( KAbstractDocument *document, KDE::If::Versionable *versionControl )
+void VersionTableModel::setModel( AbstractModel* model, KDE::If::Versionable* versionControl )
 {
-    if( mDocument ) mDocument->disconnect( this );
+    if( mModel ) mModel->disconnect( this );
 
-    mDocument = document;
+    mModel = model;
     mVersionControl = versionControl;
 
-    if( mDocument )
+    if( mModel )
     {
-        connect( mDocument, SIGNAL(revertedToVersionIndex( int )), SLOT(onRevertedToVersionIndex( int )) );
-        connect( mDocument, SIGNAL(headVersionChanged( int )), SLOT(onHeadVersionChanged( int )) );
-        connect( mDocument, SIGNAL(headVersionDataChanged( const KDocumentVersionData & )),
+        connect( mModel, SIGNAL(revertedToVersionIndex( int )), SLOT(onRevertedToVersionIndex( int )) );
+        connect( mModel, SIGNAL(headVersionChanged( int )), SLOT(onHeadVersionChanged( int )) );
+        connect( mModel, SIGNAL(headVersionDataChanged( const KDocumentVersionData & )),
                  SLOT(onHeadVersionDataChanged( const KDocumentVersionData & )) );
     }
     mVersionIndex = versionControl ? versionControl->versionIndex() : 0;
@@ -165,5 +165,3 @@ void VersionTableModel::onHeadVersionDataChanged( const KDocumentVersionData &ve
 }
 
 VersionTableModel::~VersionTableModel() {}
-
-#include "versiontablemodel.moc"

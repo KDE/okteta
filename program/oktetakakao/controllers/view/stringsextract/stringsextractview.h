@@ -44,6 +44,9 @@ class StringsExtractView : public QWidget
     explicit StringsExtractView( StringsExtractTool *tool, QWidget *parent = 0 );
     virtual ~StringsExtractView();
 
+  public:
+    StringsExtractTool *tool() const;
+
   public Q_SLOTS: // gui
 //     void setDirty( bool dirty );
     void onStringDoubleClicked( const QModelIndex &index );
@@ -69,5 +72,7 @@ class StringsExtractView : public QWidget
     KPushButton *mCopyButton;
     KPushButton *mGotoButton;
 };
+
+inline StringsExtractTool *StringsExtractView::tool() const { return mTool; }
 
 #endif

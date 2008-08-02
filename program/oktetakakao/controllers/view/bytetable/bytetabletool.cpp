@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -34,22 +34,27 @@
 #include <khechar.h>
 #include <kcharcodec.h>
 #include <kbytearraymodel.h>
+// KDE
+#include <KLocale>
 
 
 ByteTableTool::ByteTableTool()
  : mByteTableModel( new ByteTableModel(this) ),
    mByteArrayView( 0 ), mByteArrayModel( 0 )
 {
+    setObjectName( "ByteTable" );
 }
 
+QString ByteTableTool::title() const { return i18nc("@title:window", "Byte Table"); }
 ByteTableModel *ByteTableTool::byteTableModel() const { return mByteTableModel; }
 bool ByteTableTool::hasByteArrayView() const { return ( mByteArrayView != 0 ); }
 
 
-void ByteTableTool::setView( KAbstractView *view )
+void ByteTableTool::setTargetModel( AbstractModel* model )
 {
     if( mByteArrayView ) mByteArrayView->disconnect( mByteTableModel );
 
+    KAbstractView* view = model ? qobject_cast<KAbstractView*>( model ) : 0;
     mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
 
     KByteArrayDocument *document = view ? static_cast<KByteArrayDocument*>( view->document() ) : 0;
@@ -78,5 +83,3 @@ void ByteTableTool::insert( unsigned char byte, int count )
 
 
 ByteTableTool::~ByteTableTool() {}
-
-#include "bytetabletool.moc"

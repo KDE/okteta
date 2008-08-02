@@ -45,6 +45,9 @@ class KPrimitiveTypesView : public QWidget
     virtual ~KPrimitiveTypesView();
 
   public:
+    PODDecoderTool* tool() const;
+
+  public:
     void setUndefinedChar( const QChar &undefinedChar );
     void setCharCode( const QString &codeName );
 
@@ -72,5 +75,7 @@ class KPrimitiveTypesView : public QWidget
     KHECore::KCharCodec *mCharCodec;
     QChar mUndefinedChar;
 };
+
+inline PODDecoderTool* KPrimitiveTypesView::tool() const { return mTool; }
 
 #endif

@@ -32,6 +32,8 @@
 // Okteta core
 #include <kcharcodec.h>
 #include <kbytearraymodel.h>
+// KDE
+#include <KLocale>
 // Qt
 #include <QtGui/QApplication>
 
@@ -43,6 +45,7 @@ StringsExtractTool::StringsExtractTool()
    mCharCodec( KHECore::KCharCodec::createCodec(KHECore::LocalEncoding) ), mMinLength( DefaultMinLength ),
    mByteArrayView( 0 ), mByteArrayModel( 0 ), mSourceByteArrayModel( 0 ), mSourceMinLength( 0 )
 {
+    setObjectName( "Strings" );
 }
 
 bool StringsExtractTool::isApplyable() const
@@ -56,18 +59,21 @@ bool StringsExtractTool::canHighlightString() const
              && mByteArrayView && mSourceByteArrayModelUptodate );
 }
 
+QString StringsExtractTool::title() const { return i18nc("@title:window of the tool to extract strings", "Strings"); }
+
 // TODO: add model with offset and string
 // doubleclick moves cursor to offset
 // filter für Suche, inkl. Regulärausdrücke
 // groß/kleinschreibung
 // voll strings, auch mit Leerzeichen
-void StringsExtractTool::setView( KAbstractView *view )
+void StringsExtractTool::setTargetModel( AbstractModel* model )
 {
     if( mByteArrayView ) mByteArrayView->disconnect( this );
 
-    mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
+    KAbstractView* view = model ? qobject_cast<KAbstractView*>( model ) : 0;
+    mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
 
-    KByteArrayDocument *document = view ? static_cast<KByteArrayDocument*>( view->document() ) : 0;
+    KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->document() ) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
     if( mByteArrayView )

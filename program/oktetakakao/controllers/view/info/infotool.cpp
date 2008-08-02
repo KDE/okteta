@@ -33,6 +33,8 @@
 #include <kbytearrayview.h>
 // Okteta core
 #include <kbytearraymodel.h>
+// KDE
+#include <KLocale>
 // Qt
 #include <QtGui/QApplication>
 
@@ -41,9 +43,11 @@ InfoTool::InfoTool()
  : mStatisticTableModel( new StatisticTableModel(mByteCount,this) ),
    mByteArrayView( 0 ), mByteArrayModel( 0 ), mSourceByteArrayModelUptodate( false ), mSourceByteArrayModel( 0 )
 {
+    setObjectName( "Info" );
     updateStatistic();
 }
 
+QString InfoTool::title() const { return i18nc("@title:window", "Info"); }
 StatisticTableModel *InfoTool::statisticTableModel() const { return mStatisticTableModel; }
 int InfoTool::size() const { return (mByteArrayModel!=0) ? mByteArrayModel->size() : 0; }
 bool InfoTool::isApplyable() const
@@ -58,11 +62,12 @@ bool InfoTool::isStatisticUptodate() const
 }
 
 
-void InfoTool::setView( KAbstractView *view )
+void InfoTool::setTargetModel( AbstractModel* model )
 {
     if( mByteArrayView ) mByteArrayView->disconnect( mStatisticTableModel );
     if( mByteArrayView ) mByteArrayView->disconnect( this );
 
+    KAbstractView* view = model ? qobject_cast<KAbstractView*>( model ) : 0;
     mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
 
     KByteArrayDocument *document = view ? static_cast<KByteArrayDocument*>( view->document() ) : 0;
@@ -129,5 +134,3 @@ void InfoTool::updateStatistic()
 }
 
 InfoTool::~InfoTool() {}
-
-#include "infotool.moc"

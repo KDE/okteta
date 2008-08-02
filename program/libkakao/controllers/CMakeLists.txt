@@ -34,7 +34,8 @@ else(CMAKE_BUILD_TYPE_TOLOWER MATCHES release)
 set( VERSIONVIEWCONTROLLER_SRCS
   document/versionview/versiontablemodel.cpp
   document/versionview/versionview.cpp
-  document/versionview/versionviewcontroller.cpp
+  document/versionview/versionviewtool.cpp
+  document/versionview/versionviewtoolview.cpp
 )
 endif(CMAKE_BUILD_TYPE_TOLOWER MATCHES release)
 set( VERSIONCONTROLLER_SRCS

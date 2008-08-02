@@ -35,6 +35,8 @@
 // Okteta core
 #include <kabstractbytearraymodel.h>
 #include <changesdescribable.h>
+// KDE
+#include <KLocale>
 // Qt
 #include <QtGui/QApplication>
 #include <QtCore/QByteArray>
@@ -43,8 +45,10 @@
 FilterTool::FilterTool()
  : mByteArrayView( 0 ), mByteArrayModel( 0 )
 {
+    setObjectName( "BinaryFilter" );
 }
 
+QString FilterTool::title() const { return i18nc("@title:window", "Binary Filter"); }
 QString FilterTool::charCodecName() const
 {
     return mByteArrayView ? mByteArrayView->encodingName() : QString();
@@ -59,10 +63,11 @@ AbstractByteArrayFilterParameterSet *FilterTool::parameterSet( int filterId )
     return byteArrayFilter ? byteArrayFilter->parameterSet() : 0;
 }
 
-void FilterTool::setView( KAbstractView *view )
+void FilterTool::setTargetModel( AbstractModel* model )
 {
     if( mByteArrayView ) mByteArrayView->disconnect( this );
 
+    KAbstractView* view = model ? qobject_cast<KAbstractView*>( model ) : 0;
     mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
 
     KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->document() ) : 0;

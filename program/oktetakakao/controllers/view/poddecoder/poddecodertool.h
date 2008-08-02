@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,8 +25,8 @@
 
 // tool
 #include "poddata.h"
-// Qt
-#include <QtCore/QObject>
+// Kakao core
+#include <abstracttool.h>
 
 class KAbstractView;
 namespace KHEUI {
@@ -39,7 +39,7 @@ class KAbstractByteArrayModel;
 //TODO: remove if signal works again
 class KPrimitiveTypesView;
 
-class PODDecoderTool : public QObject
+class PODDecoderTool : public AbstractTool
 {
   Q_OBJECT
 
@@ -58,8 +58,13 @@ class PODDecoderTool : public QObject
   public:
     PODDecoderTool();
 
+  public: // AbstractTool API
+//     virtual AbstractModel* targetModel() const;
+    virtual QString title() const;
+
+    virtual void setTargetModel( AbstractModel* model );
+
   public:
-    void setView( KAbstractView *view );
     //TODO: remove if signal works again
     void setPODView( KPrimitiveTypesView *view );
 

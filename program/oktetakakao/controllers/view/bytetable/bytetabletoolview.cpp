@@ -1,5 +1,5 @@
 /*
-    This file is part of the Kakao Framework, part of the KDE project.
+    This file is part of the Okteta Kakao module, part of the KDE project.
 
     Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
@@ -20,31 +20,19 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VERSIONVIEWCONTROLLER_H
-#define VERSIONVIEWCONTROLLER_H
+#include "bytetabletoolview.h"
 
+// tool
+#include "bytetableview.h"
+#include "bytetabletool.h"
 
-// lib
-#include <kviewcontroller.h>
-
-class VersionView;
-class KXmlGuiWindow;
-class QAction;
-
-class VersionViewController : public KViewController
+ByteTableToolView::ByteTableToolView( ByteTableTool* tool )
+ : mWidget( new ByteTableView(tool) )
 {
-  Q_OBJECT
+}
 
-  public:
-    explicit VersionViewController( KXmlGuiWindow *window );
-    virtual ~VersionViewController();
+QWidget* ByteTableToolView::widget()    const { return mWidget; }
+QString ByteTableToolView::title()      const { return mWidget->tool()->title(); }
+AbstractTool* ByteTableToolView::tool() const { return mWidget->tool(); }
 
-  public: // KViewController API
-    virtual void setView( KAbstractView *view );
-
-  protected:
-    VersionView *mView;
-    QAction *mAction;
-};
-
-#endif
+ByteTableToolView::~ByteTableToolView() {}

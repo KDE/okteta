@@ -77,12 +77,7 @@ Zusammenlegen?
   <Menu name="tools">
     <Action name="converter" />
     <Separator/>
-    <Action name="show_pod_decoder" />
-    <Action name="show_byte_table" />
-    <Action name="show_binary_filter" />
-    <Action name="show_strings_extractor" />
-    <Action name="show_info" />
-    <Action name="show_versions" />
+    <ActionList name="tools_list" />
   </Menu>
   <Menu name="windows"><text>&amp;Windows</text>
     <ActionList name="windows_list"/>

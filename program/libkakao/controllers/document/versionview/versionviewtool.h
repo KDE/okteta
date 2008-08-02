@@ -1,7 +1,7 @@
 /*
-    This file is part of the Okteta Kakao module, part of the KDE project.
+    This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,31 +20,38 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODDECODERCONTROLLER_H
-#define PODDECODERCONTROLLER_H
+#ifndef VERSIONVIEWTOOL_H
+#define VERSIONVIEWTOOL_H
 
+// Kakao core
+#include <abstracttool.h>
 
-// Kakao gui
-#include <kviewcontroller.h>
-
-class PODDecoderTool;
-class KXmlGuiWindow;
-class KPrimitiveTypesView;
-
-class PODDecoderController : public KViewController
+/**
+*/
+class VersionViewTool : public AbstractTool
 {
+  Q_OBJECT
+
   public:
-    PODDecoderController( KXmlGuiWindow *window );
-    virtual ~PODDecoderController();
+    VersionViewTool();
+    virtual ~VersionViewTool();
 
-  public: // KViewController API
-    virtual void setView( KAbstractView *View );
+  public:
+    AbstractModel *model() const;
 
-  protected:
-    KXmlGuiWindow *mWindow;
+  public: // AbstractTool API
+//     virtual AbstractModel* targetModel() const;
+    virtual QString title() const;
 
-    PODDecoderTool *mTool;
-    KPrimitiveTypesView *mPrimitiveTypesView;
+    virtual void setTargetModel( AbstractModel* model );
+
+  Q_SIGNALS:
+    void modelChanged( AbstractModel* model );
+
+  protected: // sources
+    AbstractModel *mModel;
 };
+
+inline AbstractModel *VersionViewTool::model() const { return mModel; }
 
 #endif

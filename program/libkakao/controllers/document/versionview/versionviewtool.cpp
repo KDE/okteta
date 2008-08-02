@@ -20,46 +20,31 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "versionviewcontroller.h"
+#include "versionviewtool.h"
 
-// controller
-#include "versionview.h"
 // Kakao gui
 #include <kabstractview.h>
+// Kakao core
+#include <kabstractdocument.h>
 // KDE
 #include <KLocale>
-#include <KActionCollection>
-#include <KXmlGuiWindow>
-// Qt
-#include <QtGui/QAction>
-#include <QtGui/QDockWidget>
 
 
-VersionViewController::VersionViewController( KXmlGuiWindow *window )
+VersionViewTool::VersionViewTool()
+ : mModel( 0 )
 {
-    KActionCollection *actionCollection = window->actionCollection();
-
-    mView = new VersionView();
-
-    QDockWidget *dockWidget = new QDockWidget( i18nc("@title:window", "Versions"), window );
-    dockWidget->setObjectName( "Versions" );
-    dockWidget->setWidget( mView );
-    window->addDockWidget( Qt::RightDockWidgetArea, dockWidget );
-
-    QAction *action = dockWidget->toggleViewAction();
-    action->setText( i18nc("@title:window", "Versions") );
-    actionCollection->addAction( "show_versions", action );
-
-    setView( 0 );
+    setObjectName( "Versions" );
 }
 
-void VersionViewController::setView( KAbstractView *view )
-{
-    KAbstractDocument *document = view ? view->document() : 0;
 
-    mView->setDocument( document );
+QString VersionViewTool::title() const { return i18nc("@title:window", "Versions"); }
+
+void VersionViewTool::setTargetModel( AbstractModel* model )
+{
+    KAbstractView* view = model ? qobject_cast<KAbstractView*>( model ) : 0;
+    mModel = view ? view->document() : 0;
+    emit modelChanged( mModel );
 }
 
-VersionViewController::~VersionViewController() {}
 
-#include "versionviewcontroller.moc"
+VersionViewTool::~VersionViewTool() {}

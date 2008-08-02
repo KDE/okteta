@@ -23,8 +23,9 @@
 #ifndef FILTERTOOL_H
 #define FILTERTOOL_H
 
+// Kakao core
+#include <abstracttool.h>
 // Qt
-#include <QtCore/QObject>
 #include <QtCore/QList>
 
 class AbstractByteArrayFilterParameterSet;
@@ -39,7 +40,7 @@ class KAbstractByteArrayModel;
 class QString;
 
 
-class FilterTool : public QObject
+class FilterTool : public AbstractTool
 {
   Q_OBJECT
 
@@ -47,8 +48,12 @@ class FilterTool : public QObject
     FilterTool();
     virtual ~FilterTool();
 
-  public:
-    void setView( KAbstractView *view );
+  public: // AbstractTool API
+//     virtual AbstractModel* targetModel() const;
+    virtual QString title() const;
+
+    virtual void setTargetModel( AbstractModel* model );
+
 
   public:
     void addFilter( AbstractByteArrayFilter *filter );

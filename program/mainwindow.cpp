@@ -24,14 +24,23 @@
 
 // program
 #include "program.h"
+// tools
+#include <stringsextract/stringsextracttoolview.h>
+#include <stringsextract/stringsextracttool.h>
+// Kakao tools
+#include <document/versionview/versionviewtoolview.h>
+#include <document/versionview/versionviewtool.h>
 // controllers
 #include <overwriteonly/overwriteonlycontroller.h>
 #include <overwritemode/overwritemodecontroller.h>
-#include <poddecoder/poddecodercontroller.h>
-#include <bytetable/bytetablecontroller.h>
-#include <info/infocontroller.h>
-#include <stringsextract/stringsextractcontroller.h>
-#include <filter/filtercontroller.h>
+#include <poddecoder/poddecodertool.h>
+#include <poddecoder/poddecodertoolview.h>
+#include <bytetable/bytetabletool.h>
+#include <bytetable/bytetabletoolview.h>
+#include <info/infotool.h>
+#include <info/infotoolview.h>
+#include <filter/filtertool.h>
+#include <filter/filtertoolview.h>
 #include <insertpattern/insertpatterncontroller.h>
 #include <gotooffset/gotooffsetcontroller.h>
 #include <search/searchcontroller.h>
@@ -40,7 +49,6 @@
 #include <print/printcontroller.h>
 #include <viewconfig/viewconfigcontroller.h>
 // Kakao controllers
-#include <document/versionview/versionviewcontroller.h>
 #include <document/readonly/readonlycontroller.h>
 #include <documentsystem/creator/creatorcontroller.h>
 #include <documentsystem/loader/loadercontroller.h>
@@ -54,6 +62,7 @@
 #include <view/zoom/zoomcontroller.h>
 #include <view/select/selectcontroller.h>
 #include <shellwindow/viewlistmenu/viewlistmenucontroller.h>
+#include <shellwindow/toollistmenu/toollistmenucontroller.h>
 #include <shellwindow/fullscreen/fullscreencontroller.h>
 /*#include <viewsystem/close/closecontroller.h>*/
 #include <program/quit/quitcontroller.h>
@@ -89,6 +98,13 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram *program )
 
     setupControllers();
     setupGUI();
+
+    // all controllers which use plugActionList have to do so after(!) setupGUI() or their entrys will be removed
+    // TODO: why is this so?
+    mControllers.append( new CopyAsController(mProgram->documentManager(),this) );
+    mControllers.append( new ExportController(mProgram->documentManager(),this) );
+    mControllers.append( new ToolListMenuController(this,this) );
+    mControllers.append( new ViewListMenuController(mProgram->viewManager(),mTabbedViews,this) );
 }
 
 void OktetaMainWindow::setupControllers()
@@ -99,34 +115,32 @@ void OktetaMainWindow::setupControllers()
     mControllers.append( new SynchronizeController(this) );
     mControllers.append( new CloseController(mProgram->documentManager(),this) );
     mControllers.append( new VersionController(this) );
-#ifndef NDEBUG
-    mControllers.append( new VersionViewController(this) );
-#endif
     mControllers.append( new ReadOnlyController(this) );
-    mControllers.append( new ViewListMenuController(mProgram->viewManager(),mTabbedViews,this) );
     mControllers.append( new FullScreenController(this) );
     mControllers.append( new QuitController(0,this) );
 
     mControllers.append( new ZoomController(this) );
     mControllers.append( new SelectController(this) );
     mControllers.append( new ClipboardController(this) );
-    mControllers.append( new CopyAsController(mProgram->documentManager(),this) );
-    mControllers.append( new ExportController(mProgram->documentManager(),this) );
 
 //     mControllers.append( new OverwriteOnlyController(this) );
     mControllers.append( new OverwriteModeController(this) );
-    mControllers.append( new PODDecoderController(this) );
-    mControllers.append( new ByteTableController(this) );
-    mControllers.append( new InfoController(this) );
-    mControllers.append( new StringsExtractController(this) );
     mControllers.append( new SearchController(this) );
     mControllers.append( new ReplaceController(this) );
     mControllers.append( new GotoOffsetController(this) );
-    mControllers.append( new FilterController(this) );
     mControllers.append( new InsertPatternController(this) );
     mControllers.append( new BookmarksController(this) );
     mControllers.append( new PrintController(this) );
     mControllers.append( new ViewConfigController(this) );
+
+    addTool( new FilterToolView(new FilterTool()) );
+    addTool( new StringsExtractToolView(new StringsExtractTool()) );
+    addTool( new ByteTableToolView(new ByteTableTool()) );
+    addTool( new InfoToolView(new InfoTool()) );
+    addTool( new PODDecoderToolView(new PODDecoderTool()) );
+#ifndef NDEBUG
+    addTool( new VersionViewToolView(new VersionViewTool()) );
+#endif
 }
 
 void OktetaMainWindow::saveProperties( KConfigGroup &configGroup )
@@ -154,5 +168,3 @@ void OktetaMainWindow::readProperties( const KConfigGroup &configGroup )
 
 
 OktetaMainWindow::~OktetaMainWindow() {}
-
-#include "mainwindow.moc"

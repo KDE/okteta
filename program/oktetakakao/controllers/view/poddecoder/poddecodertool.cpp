@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -32,20 +32,26 @@
 #include <kbytearrayview.h>
 // Okteta core
 #include <kbytearraymodel.h>
+// KDE
+#include <KLocale>
+
 
 PODDecoderTool::PODDecoderTool()
  : mByteArrayView( 0 ), mByteArrayModel( 0 ), mCursorIndex( 0 ),
    mPODView( 0 )
 {
+    setObjectName( "PODDecoder" );
 }
 
+QString PODDecoderTool::title() const { return i18nc("@title:window", "Decoding Table"); }
 PODData &PODDecoderTool::podData() { return mPODData; }
 
-void PODDecoderTool::setView( KAbstractView *view )
+void PODDecoderTool::setTargetModel( AbstractModel* model )
 {
     if( mByteArrayView ) mByteArrayView->disconnect( this );
     if( mByteArrayModel ) mByteArrayModel->disconnect( this );
 
+    KAbstractView* view = model ? qobject_cast<KAbstractView*>( model ) : 0;
     mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
     KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->document() ) : 0;
     mByteArrayModel = document ? document->content() : 0;

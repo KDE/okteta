@@ -20,35 +20,28 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FILTERCONTROLLER_H
-#define FILTERCONTROLLER_H
-
+#ifndef PODDECODERTOOLVIEW_H
+#define PODDECODERTOOLVIEW_H
 
 // Kakao gui
-#include <kviewcontroller.h>
+#include <abstracttoolview.h>
 
-class KXmlGuiWindow;
-class FilterTool;
-class FilterView;
+class KPrimitiveTypesView;
+class PODDecoderTool;
 
-
-class FilterController : public KViewController
+class PODDecoderToolView : public AbstractToolView
 {
-  Q_OBJECT
-
   public:
-    explicit FilterController( KXmlGuiWindow *window );
-    virtual ~FilterController();
+    explicit PODDecoderToolView( PODDecoderTool *tool );
+    virtual ~PODDecoderToolView();
 
-  public: // KViewController API
-    virtual void setView( KAbstractView *view );
+  public: // AbstractToolView API
+    virtual QWidget* widget() const;
+    virtual QString title() const;
+    virtual AbstractTool* tool() const;
 
   protected:
-    void loadFilter();
-
-  protected:
-    FilterTool *mTool;
-    FilterView *mView;
+    KPrimitiveTypesView* mWidget;
 };
 
 #endif

@@ -28,7 +28,8 @@
 #include <QtGui/QWidget>
 
 class VersionTableModel;
-class KAbstractDocument;
+class VersionViewTool;
+class AbstractModel;
 class QTreeView;
 
 
@@ -37,16 +38,23 @@ class VersionView : public QWidget
   Q_OBJECT
 
   public:
-    explicit VersionView( QWidget *parent = 0 );
+    explicit VersionView( VersionViewTool* tool, QWidget* parent = 0 );
     virtual ~VersionView();
 
   public:
-    void setDocument( KAbstractDocument *document );
+    VersionViewTool* tool() const;
+
+  public Q_SLOTS:
+    void setModel( AbstractModel* model );
 
   private:
-    VersionTableModel *mVersionTableModel;
+    VersionViewTool* mTool;
 
-    QTreeView *mVersionTableView;
+    VersionTableModel* mVersionTableModel;
+
+    QTreeView* mVersionTableView;
 };
+
+inline VersionViewTool* VersionView::tool() const { return mTool; }
 
 #endif

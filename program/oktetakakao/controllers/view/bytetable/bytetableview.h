@@ -41,6 +41,9 @@ class ByteTableView : public QWidget
     explicit ByteTableView( ByteTableTool *tool, QWidget *parent = 0 );
     virtual ~ByteTableView();
 
+  public:
+    ByteTableTool* tool() const;
+
   public Q_SLOTS:
     void onInsertClicked();
     void onDoubleClicked( const QModelIndex &index );
@@ -51,5 +54,7 @@ class ByteTableView : public QWidget
     QTreeView *mByteTableView;
     KPushButton *mInsertButton;
 };
+
+inline ByteTableTool* ByteTableView::tool() const { return mTool; }
 
 #endif

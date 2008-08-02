@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,42 +20,19 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef STRINGSEXTRACTCONTROLLER_H
-#define STRINGSEXTRACTCONTROLLER_H
+#include "stringsextracttoolview.h"
 
-// Kakao gui
-#include <kviewcontroller.h>
+// tool
+#include "stringsextractview.h"
+#include "stringsextracttool.h"
 
-class StringsExtractView;
-class StringsExtractTool;
-
-class KXmlGuiWindow;
-// class KByteArrayDocument;
-
-// namespace KHEUI {
-// class KByteArrayView;
-// }
-
-class StringsExtractController : public KViewController
+StringsExtractToolView::StringsExtractToolView( StringsExtractTool *tool )
+ : mWidget( new StringsExtractView(tool) )
 {
-  Q_OBJECT
+}
 
-  public:
-    explicit StringsExtractController( KXmlGuiWindow *window );
-    virtual ~StringsExtractController();
+QWidget *StringsExtractToolView::widget()    const { return mWidget; }
+QString StringsExtractToolView::title()      const { return mWidget->tool()->title(); }
+AbstractTool *StringsExtractToolView::tool() const { return mWidget->tool(); }
 
-  public: // KViewController API
-    virtual void setView( KAbstractView *view );
-
-//   protected Q_SLOTS:
-//     void onCharCodecChange( const QString &codeName );
-
-  protected:
-//     KHEUI::KByteArrayView *mViewWidget;
-//     KByteArrayDocument *mDocument;
-
-    StringsExtractTool *mTool;
-    StringsExtractView *mView;
-};
-
-#endif
+StringsExtractToolView::~StringsExtractToolView() {}

@@ -27,14 +27,14 @@ set( INFOCONTROLLER_SRCS
   view/info/statistictablemodel.cpp
   view/info/infotool.cpp
   view/info/infoview.cpp
-  view/info/infocontroller.cpp
+  view/info/infotoolview.cpp
 )
 set( STRINGSEXTRACTCONTROLLER_SRCS
   view/stringsextract/extractstringsjob.cpp
   view/stringsextract/stringsextracttool.cpp
   view/stringsextract/containedstringtablemodel.cpp
   view/stringsextract/stringsextractview.cpp
-  view/stringsextract/stringsextractcontroller.cpp
+  view/stringsextract/stringsextracttoolview.cpp
 )
 set( BYTEARRAYLINEEDIT_LIB_SRCS
   view/libbytearraylineedit/kbytearrayvalidator.cpp
@@ -47,13 +47,13 @@ set( PODDECODERCONTROLLER_SRCS
   view/poddecoder/poddata.cpp
   view/poddecoder/poddecodertool.cpp
   view/poddecoder/kprimitivetypesview.cpp
-  view/poddecoder/poddecodercontroller.cpp
+  view/poddecoder/poddecodertoolview.cpp
 )
 set( BYTETABLECONTROLLER_SRCS
   view/bytetable/bytetablemodel.cpp
   view/bytetable/bytetabletool.cpp
   view/bytetable/bytetableview.cpp
-  view/bytetable/bytetablecontroller.cpp
+  view/bytetable/bytetabletoolview.cpp
 )
 set( SEARCHCONTROLLER_SRCS
   view/search/ksearchdialog.cpp
@@ -94,7 +94,7 @@ set( FILTERCONTROLLER_SRCS
   view/filter/filterjob.cpp
   view/filter/filtertool.cpp
   view/filter/filterview.cpp
-  view/filter/filtercontroller.cpp
+  view/filter/filtertoolview.cpp
 )
 set( GOTOOFFSETCONTROLLER_SRCS
   view/gotooffset/kgotooffsetdialog.cpp

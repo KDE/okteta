@@ -41,6 +41,9 @@ class FilterView : public QWidget
     explicit FilterView( FilterTool *tool, QWidget *parent = 0 );
     virtual ~FilterView();
 
+  public:
+    FilterTool* tool() const;
+
   public: // set
     void addParameterEdit( const QString &name, QWidget *parameterEdit );
 
@@ -60,5 +63,7 @@ class FilterView : public QWidget
     QStackedWidget *mParameterSetEditStack;
     KPushButton *mFilterButton;
 };
+
+inline FilterTool* FilterView::tool() const { return mTool; }
 
 #endif

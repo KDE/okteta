@@ -25,12 +25,12 @@
 
 // tool
 #include "containedstring.h"
+// Kakao core
+#include <abstracttool.h>
 // Okteta core
 #include <ksection.h>
 // Qt
-#include <QtCore/QObject>
 #include <QtCore/QList>
-#include <QtCore/QString>
 
 class KAbstractView;
 namespace KHEUI {
@@ -41,9 +41,10 @@ class KAbstractByteArrayModel;
 class KCharCodec;
 }
 
+
 /**
 */
-class StringsExtractTool : public QObject
+class StringsExtractTool : public AbstractTool
 {
   Q_OBJECT
 
@@ -51,8 +52,11 @@ class StringsExtractTool : public QObject
     StringsExtractTool();
     virtual ~StringsExtractTool();
 
-  public:
-    void setView( KAbstractView *view );
+  public: // AbstractTool API
+//     virtual AbstractModel* targetModel() const;
+    virtual QString title() const;
+
+    virtual void setTargetModel( AbstractModel* model );
 
   public: // status
     const QList<ContainedString> *containedStringList() const;

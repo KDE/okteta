@@ -20,43 +20,19 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INFOVIEW_H
-#define INFOVIEW_H
+#include "filtertoolview.h"
 
-// Qt
-#include <QtGui/QWidget>
+// tool
+#include "filterview.h"
+#include "filtertool.h"
 
-class InfoTool;
-class KPushButton;
-class QLabel;
-class QTreeView;
-
-
-class InfoView : public QWidget
+FilterToolView::FilterToolView( FilterTool* tool )
+ : mWidget( new FilterView(tool) )
 {
-  Q_OBJECT
+}
 
-  public:
-    explicit InfoView( InfoTool *tool, QWidget *parent = 0 );
-    virtual ~InfoView();
+QWidget* FilterToolView::widget()    const { return mWidget; }
+QString FilterToolView::title()      const { return mWidget->tool()->title(); }
+AbstractTool* FilterToolView::tool() const { return mWidget->tool(); }
 
-  public:
-    InfoTool* tool() const;
-
-  public Q_SLOTS:
-    void updateHeader();
-    void setDirty( bool dirty );
-    void setByteArraySize( int size );
-
-  private:
-    InfoTool *mTool;
-
-    QLabel *mDirtyLabel;
-    QLabel *mSizeLabel;
-    QTreeView *mStatisticTableView;
-    KPushButton *mUpdateButton;
-};
-
-inline InfoTool* InfoView::tool() const { return mTool; }
-
-#endif
+FilterToolView::~FilterToolView() {}

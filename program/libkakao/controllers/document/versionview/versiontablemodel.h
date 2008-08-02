@@ -31,7 +31,7 @@ class KDocumentVersionData;
 namespace KDE { namespace If {
 class Versionable;
 }}
-class KAbstractDocument;
+class AbstractModel;
 
 
 class VersionTableModel : public QAbstractTableModel
@@ -48,7 +48,7 @@ class VersionTableModel : public QAbstractTableModel
     };
 
   public:
-    VersionTableModel( KAbstractDocument *document, KDE::If::Versionable *versionControl, QObject *parent = 0 );
+    VersionTableModel( AbstractModel* model, KDE::If::Versionable* versionControl, QObject* parent = 0 );
     virtual ~VersionTableModel();
 
   public: // QAbstractTableModel API
@@ -58,7 +58,7 @@ class VersionTableModel : public QAbstractTableModel
     virtual QVariant headerData( int section, Qt::Orientation orientation, int role ) const;
 
   public:
-    void setDocument( KAbstractDocument *document, KDE::If::Versionable *versionControl );
+    void setModel( AbstractModel* model, KDE::If::Versionable* versionControl );
 
   protected Q_SLOTS:
     void onRevertedToVersionIndex( int versionIndex );
@@ -66,7 +66,7 @@ class VersionTableModel : public QAbstractTableModel
     void onHeadVersionDataChanged( const KDocumentVersionData &newVersionData );
 
   protected:
-    KAbstractDocument *mDocument;
+    AbstractModel *mModel;
     KDE::If::Versionable *mVersionControl;
     /// holds the current version index
     int mVersionIndex;
