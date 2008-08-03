@@ -42,7 +42,7 @@ QString VersionViewTool::title() const { return i18nc("@title:window", "Versions
 void VersionViewTool::setTargetModel( AbstractModel* model )
 {
     KAbstractView* view = model ? qobject_cast<KAbstractView*>( model ) : 0;
-    mModel = view ? view->document() : 0;
+    mModel = view ? qobject_cast<KAbstractDocument*>(view->baseModel()) : 0;
     emit modelChanged( mModel );
 }
 

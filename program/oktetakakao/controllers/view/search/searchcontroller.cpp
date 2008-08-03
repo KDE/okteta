@@ -63,7 +63,7 @@ void SearchController::setView( KAbstractView *View )
     if( ViewWidget ) ViewWidget->disconnect( this );
 
     ViewWidget = View ? static_cast<KHEUI::KByteArrayView *>( View->widget() ) : 0;
-    KByteArrayDocument *Document = View ? static_cast<KByteArrayDocument*>( View->document() ) : 0;
+    KByteArrayDocument* Document = View ? static_cast<KByteArrayDocument*>( View->baseModel() ) : 0;
     ByteArray = Document ? Document->content() : 0;
 
     if( ByteArray )

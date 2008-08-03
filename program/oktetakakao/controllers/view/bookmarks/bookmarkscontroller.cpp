@@ -86,7 +86,7 @@ void BookmarksController::setView( KAbstractView *view )
     if( mByteArray ) mByteArray->disconnect( this );
 
     mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
-    KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->document() ) : 0;
+    KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
     mByteArray = document ? document->content() : 0;
     mBookmarks = mByteArray ? qobject_cast<KHECore::Bookmarkable*>( mByteArray ) : 0;
 

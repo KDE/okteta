@@ -52,7 +52,7 @@ void SynchronizeController::setView( KAbstractView *view )
 {
     if( mDocument ) mDocument->disconnect( this );
 
-    mDocument = ( view != 0 ) ? view->document() : 0;
+    mDocument = ( view != 0 ) ? qobject_cast<KAbstractDocument*>(view->baseModel()) : 0;
 
     if( mDocument )
     {

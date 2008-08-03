@@ -59,7 +59,7 @@ void PrintTool::setView( KAbstractView *view )
 
     mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
 
-    mDocument = view ? static_cast<KByteArrayDocument*>( view->document() ) : 0;
+    mDocument = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
     mByteArrayModel = mDocument ? mDocument->content() : 0;
 
     const bool hasView = ( mByteArrayModel != 0 );

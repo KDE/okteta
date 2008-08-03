@@ -62,7 +62,7 @@ void GotoOffsetController::setView( KAbstractView* view )
     if( mByteArrayView ) mByteArrayView->disconnect( this );
 
     mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
-    KByteArrayDocument *document = view ? static_cast<KByteArrayDocument*>( view->document() ) : 0;
+    KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
     mByteArray = document ? document->content() : 0;
 
     if( mByteArray )

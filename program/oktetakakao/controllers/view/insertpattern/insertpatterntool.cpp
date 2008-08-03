@@ -50,7 +50,7 @@ void InsertPatternTool::setView( KAbstractView *view )
 
     mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
 
-    KByteArrayDocument *document = view ? static_cast<KByteArrayDocument*>( view->document() ) : 0;
+    KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
     const bool hasView = ( mByteArrayView != 0 );

@@ -70,7 +70,7 @@ void FilterTool::setTargetModel( AbstractModel* model )
     KAbstractView* view = model ? qobject_cast<KAbstractView*>( model ) : 0;
     mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
 
-    KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->document() ) : 0;
+    KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
     const bool hasByteArray = ( mByteArrayModel != 0 );

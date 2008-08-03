@@ -50,7 +50,7 @@ void OverwriteOnlyController::setView( KAbstractView *view )
 Q_UNUSED( view )
 //     if( mByteArrayModel ) mByteArrayModel->disconnect( mSetOverwriteOnlyAction );
 
-    mByteArrayModel = 0; //view ? view->document() : 0;
+    mByteArrayModel = 0; //view ? view->baseModel() : 0;
 
     if( mByteArrayModel )
     {

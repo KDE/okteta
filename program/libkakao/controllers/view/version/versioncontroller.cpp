@@ -74,12 +74,12 @@ void VersionController::setView( KAbstractView *view )
     if( mView )
     {
         mView->disconnect( this );
-        KAbstractDocument *document = mView->document();
+        KAbstractDocument* document = qobject_cast<KAbstractDocument*>(mView->baseModel());
         if( document ) document->disconnect( this );
     }
 
     mView = view;
-    KAbstractDocument *document = mView ? mView->document() : 0;
+    KAbstractDocument* document = mView ? qobject_cast<KAbstractDocument*>(mView->baseModel()) : 0;
     mVersionControl = document ? qobject_cast<KDE::If::Versionable*>( document ) : 0;
 
     if( mVersionControl )

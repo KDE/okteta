@@ -48,7 +48,7 @@ void ReadOnlyController::setView( KAbstractView *view )
 {
     if( mDocument ) mDocument->disconnect( mSetReadOnlyAction );
 
-    mDocument = view ? view->document() : 0;
+    mDocument = view ? qobject_cast<KAbstractDocument*>(view->baseModel()) : 0;
 
     if( mDocument )
     {

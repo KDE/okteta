@@ -63,7 +63,7 @@ void ReplaceController::setView( KAbstractView *view )
     if( mByteArrayView ) mByteArrayView->disconnect( this );
 
     mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
-    KByteArrayDocument *Document = view ? static_cast<KByteArrayDocument*>( view->document() ) : 0;
+    KByteArrayDocument* Document = view ? static_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
     mByteArrayModel = Document ? Document->content() : 0;
 
     if( mByteArrayModel )

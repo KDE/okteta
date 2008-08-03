@@ -41,9 +41,9 @@ QString KAbstractByteArrayStreamEncoder::modelTypeName( AbstractModel *model, co
 {
 Q_UNUSED( selection )
 
-    const KByteArrayDisplay *byteArrayDisplay = qobject_cast<const KByteArrayDisplay*>( model );
-    const KByteArrayDocument *byteArrayDocument =
-        byteArrayDisplay ? qobject_cast<const KByteArrayDocument*>( byteArrayDisplay->document() ) : 0;
+    const KByteArrayDisplay* byteArrayDisplay = qobject_cast<const KByteArrayDisplay*>( model );
+    const KByteArrayDocument* byteArrayDocument =
+        byteArrayDisplay ? qobject_cast<const KByteArrayDocument*>( byteArrayDisplay->baseModel() ) : 0;
 
     return ( byteArrayDocument == 0 ) ? QString() : byteArrayDocument->typeName();
 }
@@ -52,18 +52,18 @@ Q_UNUSED( selection )
 bool KAbstractByteArrayStreamEncoder::encodeToStream( QIODevice *device,
                                                       AbstractModel *model, const AbstractModelSelection *selection )
 {
-    const KByteArrayDisplay *byteArrayDisplay = qobject_cast<const KByteArrayDisplay*>( model );
-    const KHEUI::KByteArrayView *view =
+    const KByteArrayDisplay* byteArrayDisplay = qobject_cast<const KByteArrayDisplay*>( model );
+    const KHEUI::KByteArrayView* view =
         byteArrayDisplay ? qobject_cast<KHEUI::KByteArrayView *>( byteArrayDisplay->widget() ) : 0;
 
-    const KByteArrayDocument *byteArrayDocument =
-        byteArrayDisplay ? qobject_cast<const KByteArrayDocument*>( byteArrayDisplay->document() ) : 0;
+    const KByteArrayDocument* byteArrayDocument =
+        byteArrayDisplay ? qobject_cast<const KByteArrayDocument*>( byteArrayDisplay->baseModel() ) : 0;
     if( byteArrayDocument == 0 )
         return false;
 
-    const KHECore::KAbstractByteArrayModel *byteArray = byteArrayDocument->content();
+    const KHECore::KAbstractByteArrayModel* byteArray = byteArrayDocument->content();
 
-    const KByteArraySelection *byteArraySelection =
+    const KByteArraySelection* byteArraySelection =
         selection ? static_cast<const KByteArraySelection*>( selection ) : 0;
 
     const KHE::KSection section = byteArraySelection && byteArraySelection->isValid() ? byteArraySelection->section() :

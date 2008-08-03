@@ -45,7 +45,7 @@ SetRemoteController::SetRemoteController( KDocumentSyncManager* syncManager, KXM
 
 void SetRemoteController::setView( KAbstractView *view )
 {
-    mDocument = ( view != 0 ) ? view->document() : 0;
+    mDocument = ( view != 0 ) ? qobject_cast<KAbstractDocument*>(view->baseModel()) : 0;
 
     const bool canBeSaved = mDocument ?
                                 ( mDocument->synchronizer() != 0 ||

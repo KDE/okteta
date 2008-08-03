@@ -44,7 +44,7 @@ CloseController::CloseController( KDocumentManager* documentManager, KXMLGUIClie
 
 void CloseController::setView( KAbstractView *view )
 {
-    mDocument = view ? view->document() : 0;
+    mDocument = view ? qobject_cast<KAbstractDocument*>(view->baseModel()) : 0;
     const bool hasDocument = ( mDocument != 0 );
 
     mCloseAction->setEnabled( hasDocument );
