@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,13 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KABSTRACTDOCUMENTFILESYSTEMSYNCHRONIZER_H
-#define KABSTRACTDOCUMENTFILESYSTEMSYNCHRONIZER_H
+#ifndef ABSTRACTMODELFILESYSTEMSYNCHRONIZER_H
+#define ABSTRACTMODELFILESYSTEMSYNCHRONIZER_H
 
 // lib
-#include "kabstractdocumentsynchronizer.h"
+#include "abstractmodelsynchronizer.h"
 
-class KAbstractDocumentFileSystemSynchronizer : public KAbstractDocumentSynchronizer
+class AbstractModelFileSystemSynchronizer : public AbstractModelSynchronizer
 {
   Q_OBJECT
 
@@ -35,8 +35,8 @@ class KAbstractDocumentFileSystemSynchronizer : public KAbstractDocumentSynchron
   friend class AbstractFileSystemSyncWithRemoteJob;
 
   public:
-    KAbstractDocumentFileSystemSynchronizer();
-    virtual ~KAbstractDocumentFileSystemSynchronizer();
+    AbstractModelFileSystemSynchronizer();
+    virtual ~AbstractModelFileSystemSynchronizer();
 
 // TODO: virtual void onFileModified( FileChange );
 // enum FileChange { FileDirty, FileCreated, FileDeleted );

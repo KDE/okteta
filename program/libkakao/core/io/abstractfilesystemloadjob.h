@@ -26,7 +26,7 @@
 // library
 #include "abstractloadjob.h"
 
-class KAbstractDocumentFileSystemSynchronizer;
+class AbstractModelFileSystemSynchronizer;
 class KUrl;
 class QWidget;
 
@@ -36,7 +36,7 @@ class AbstractFileSystemLoadJob : public AbstractLoadJob
   Q_OBJECT
 
   public:
-    AbstractFileSystemLoadJob( KAbstractDocumentFileSystemSynchronizer *synchronizer, const KUrl &url );
+    AbstractFileSystemLoadJob( AbstractModelFileSystemSynchronizer* synchronizer, const KUrl &url );
     virtual ~AbstractFileSystemLoadJob();
 
   public: // KJob API
@@ -52,7 +52,7 @@ class AbstractFileSystemLoadJob : public AbstractLoadJob
     void load();
 
   protected:
-    KAbstractDocumentFileSystemSynchronizer *synchronizer() const;
+    AbstractModelFileSystemSynchronizer* synchronizer() const;
     QString workFilePath() const;
     QWidget *widget() const;
 

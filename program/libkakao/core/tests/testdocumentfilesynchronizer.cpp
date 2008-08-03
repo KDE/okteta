@@ -62,13 +62,13 @@ AbstractSyncFromRemoteJob *TestDocumentFileSynchronizer::startSyncFromRemote()
     return new TestDocumentFileReloadJob( this );
 }
 
-AbstractSyncWithRemoteJob *TestDocumentFileSynchronizer::startSyncWithRemote( const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option  )
+AbstractSyncWithRemoteJob *TestDocumentFileSynchronizer::startSyncWithRemote( const KUrl &url, AbstractModelSynchronizer::ConnectOption option  )
 {
     return new TestDocumentFileWriteToJob( this, url, option );
 }
 
 AbstractConnectJob *TestDocumentFileSynchronizer::startConnect( KAbstractDocument *document,
-                                              const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option )
+                                              const KUrl &url, AbstractModelSynchronizer::ConnectOption option )
 {
     return new TestDocumentFileConnectJob( this, document, url, option );
 }

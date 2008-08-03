@@ -34,7 +34,7 @@
 
 
 ByteArrayRawFileWriteToJob::ByteArrayRawFileWriteToJob( KByteArrayRawFileSynchronizer *synchronizer,
-                                         const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option )
+                                         const KUrl& url, AbstractModelSynchronizer::ConnectOption option )
  : AbstractFileSystemSyncWithRemoteJob( synchronizer, url, option )
 {}
 
@@ -53,5 +53,3 @@ void ByteArrayRawFileWriteToJob::startSyncWithRemote()
 }
 
 ByteArrayRawFileWriteToJob::~ByteArrayRawFileWriteToJob() {}
-
-#include "bytearrayrawfilewritetojob.moc"

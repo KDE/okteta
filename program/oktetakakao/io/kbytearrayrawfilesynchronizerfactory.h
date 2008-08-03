@@ -24,9 +24,9 @@
 #define KBYTEARRAYRAWFILESYNCHRONIZERFACTORY_H
 
 // Kakao core
-#include <kabstractdocumentsynchronizerfactory.h>
+#include <abstractmodelsynchronizerfactory.h>
 
-class KByteArrayRawFileSynchronizerFactory : public KAbstractDocumentSynchronizerFactory
+class KByteArrayRawFileSynchronizerFactory : public AbstractModelSynchronizerFactory
 {
   Q_OBJECT
 
@@ -34,8 +34,8 @@ class KByteArrayRawFileSynchronizerFactory : public KAbstractDocumentSynchronize
     KByteArrayRawFileSynchronizerFactory();
     virtual ~KByteArrayRawFileSynchronizerFactory();
 
-  public: // KAbstractDocumentSynchronizerFactory API
-    virtual KAbstractDocumentSynchronizer *createSynchronizer() const;
+  public: // AbstractModelSynchronizerFactory API
+    virtual AbstractModelSynchronizer *createSynchronizer() const;
 
     virtual QString supportedWorkType() const;
     virtual QString supportedRemoteType() const;

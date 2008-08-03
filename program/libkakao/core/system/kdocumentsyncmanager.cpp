@@ -29,7 +29,7 @@
 #include <abstractconnectjob.h>
 #include <abstractsynctoremotejob.h>
 #include <abstractsyncwithremotejob.h>
-#include <kabstractdocumentsynchronizerfactory.h>
+#include <abstractmodelsynchronizerfactory.h>
 // KDE
 #include <KIO/NetAccess>
 #include <KFileDialog>
@@ -58,12 +58,12 @@ bool KDocumentSyncManager::hasSynchronizerForLocal( const QString &workDocumentT
 
 KUrl KDocumentSyncManager::urlOf( KAbstractDocument *document ) const
 {
-    KAbstractDocumentSynchronizer *synchronizer = document->synchronizer();
+    AbstractModelSynchronizer* synchronizer = document->synchronizer();
 
     return synchronizer ? synchronizer->url() : KUrl();
 }
 
-void KDocumentSyncManager::setDocumentSynchronizerFactory( KAbstractDocumentSynchronizerFactory *synchronizerFactory )
+void KDocumentSyncManager::setDocumentSynchronizerFactory( AbstractModelSynchronizerFactory* synchronizerFactory )
 {
     mSynchronizerFactory = synchronizerFactory;
 }
@@ -83,7 +83,7 @@ void KDocumentSyncManager::load()
 
 void KDocumentSyncManager::load( const KUrl &url )
 {
-    KAbstractDocumentSynchronizer *synchronizer = mSynchronizerFactory->createSynchronizer();
+    AbstractModelSynchronizer* synchronizer = mSynchronizerFactory->createSynchronizer();
     AbstractLoadJob *loadJob = synchronizer->startLoad( url );
     connect( loadJob, SIGNAL(documentLoaded( KAbstractDocument * )), SLOT(onDocumentLoaded( KAbstractDocument * )) );
 
@@ -100,7 +100,7 @@ bool KDocumentSyncManager::setSynchronizer( KAbstractDocument *document )
 {
     bool storingDone = false;
 
-    KAbstractDocumentSynchronizer *currentSynchronizer = document->synchronizer();
+    AbstractModelSynchronizer* currentSynchronizer = document->synchronizer();
     // TODO: warn if there were updates in the second before saveAs was activated
 //     if( currentSynchronizer )
 //         currentSynchronizer->pauseSynchronization(); also unpause below
@@ -142,7 +142,7 @@ bool KDocumentSyncManager::setSynchronizer( KAbstractDocument *document )
                 {
                     //TODO: overwrite for now
                     AbstractSyncWithRemoteJob *syncJob = currentSynchronizer->startSyncWithRemote( newUrl,
-                                                               KAbstractDocumentSynchronizer::ReplaceRemote );
+                                                               AbstractModelSynchronizer::ReplaceRemote );
                     const bool syncSucceeded = JobManager::executeJob( syncJob, mWidget );
 //                     currentSynchronizer->unpauseSynchronization(); also pause above
                     storingDone = syncSucceeded;
@@ -150,9 +150,9 @@ bool KDocumentSyncManager::setSynchronizer( KAbstractDocument *document )
                 else
                 {
                     //TODO: is overwrite for now, is this useful?
-                    KAbstractDocumentSynchronizer *synchronizer = mSynchronizerFactory->createSynchronizer();
+                    AbstractModelSynchronizer* synchronizer = mSynchronizerFactory->createSynchronizer();
                     AbstractConnectJob *connectJob = synchronizer->startConnect( document, newUrl,
-                                                               KAbstractDocumentSynchronizer::ReplaceRemote );
+                                                               AbstractModelSynchronizer::ReplaceRemote );
                     const bool connectSucceeded = JobManager::executeJob( connectJob, mWidget );
 
                     storingDone = connectSucceeded;
@@ -192,7 +192,7 @@ bool KDocumentSyncManager::canClose( KAbstractDocument *document )
 
     if( document->hasLocalChanges() )
     {
-        KAbstractDocumentSynchronizer *synchronizer = document->synchronizer();
+        AbstractModelSynchronizer* synchronizer = document->synchronizer();
         const bool couldSynchronize = hasSynchronizerForLocal( document->mimeType() );
 
         const QString processTitle = i18nc( "@title:window Close %typename", "Close %1", document->typeName() );
@@ -237,5 +237,3 @@ KDocumentSyncManager::~KDocumentSyncManager()
 {
     delete mSynchronizerFactory;
 }
-
-#include "kdocumentsyncmanager.moc"

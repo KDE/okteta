@@ -88,6 +88,8 @@ Fixed after 0.1.0:
 Done for 0.2:
 -------------
 * turned into AbstractTool: bytetable, info, stringsextract, filter, poddecoder, versionview
+* use KXMLGUIClient, not KXmlGuiWindow, if possible, so we can plug controller to any client
+* renamed KAbstractDocument*Synchronizer* to AbstractModel*Synchronizer*
 
 Next to work on:
 ----------------------------------

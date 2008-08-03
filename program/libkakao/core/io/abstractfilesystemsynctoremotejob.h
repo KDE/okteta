@@ -26,7 +26,7 @@
 // library
 #include "abstractsynctoremotejob.h"
 
-class KAbstractDocumentFileSystemSynchronizer;
+class AbstractModelFileSystemSynchronizer;
 class QWidget;
 
 
@@ -35,7 +35,7 @@ class AbstractFileSystemSyncToRemoteJob : public AbstractSyncToRemoteJob
   Q_OBJECT
 
   public:
-    AbstractFileSystemSyncToRemoteJob( KAbstractDocumentFileSystemSynchronizer *synchronizer );
+    AbstractFileSystemSyncToRemoteJob( AbstractModelFileSystemSynchronizer* synchronizer );
     virtual ~AbstractFileSystemSyncToRemoteJob();
 
   public: // KJob API
@@ -45,7 +45,7 @@ class AbstractFileSystemSyncToRemoteJob : public AbstractSyncToRemoteJob
     virtual void startWriteToFile() = 0;
 
   protected:
-    KAbstractDocumentFileSystemSynchronizer *synchronizer() const;
+    AbstractModelFileSystemSynchronizer* synchronizer() const;
     QString workFilePath() const;
     QWidget *widget() const;
 

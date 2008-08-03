@@ -34,9 +34,9 @@ set( KAKAO_CORE_SRCS
   io/modelstreamencodethread.cpp
   io/modelencoderfilesystemexportjob.cpp
   io/modelencoderfilesystemexporter.cpp
-  io/kabstractdocumentsynchronizer.cpp
-  io/kabstractdocumentsynchronizerfactory.cpp
-  io/kabstractdocumentfilesystemsynchronizer.cpp
+  io/abstractmodelsynchronizer.cpp
+  io/abstractmodelsynchronizerfactory.cpp
+  io/abstractmodelfilesystemsynchronizer.cpp
   system/jobmanager.cpp
   system/kdocumentmanager.cpp
   system/kdocumentcreatemanager.cpp

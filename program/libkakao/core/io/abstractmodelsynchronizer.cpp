@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kabstractdocumentsynchronizer.h"
+#include "abstractmodelsynchronizer.h"
 
 // KDE
 #include <KUrl>
 
-class KAbstractDocumentSynchronizer::Private
+class AbstractModelSynchronizer::Private
 {
   public:
     KUrl url() const;
@@ -34,24 +34,22 @@ class KAbstractDocumentSynchronizer::Private
     KUrl mUrl;
 };
 
-inline KUrl KAbstractDocumentSynchronizer::Private::url() const { return mUrl; }
-inline void KAbstractDocumentSynchronizer::Private::setUrl( const KUrl &url) { mUrl = url; }
+inline KUrl AbstractModelSynchronizer::Private::url() const { return mUrl; }
+inline void AbstractModelSynchronizer::Private::setUrl( const KUrl &url) { mUrl = url; }
 
 
-KAbstractDocumentSynchronizer::KAbstractDocumentSynchronizer()
+AbstractModelSynchronizer::AbstractModelSynchronizer()
 : d( new Private() )
 {}
 
-KUrl KAbstractDocumentSynchronizer::url() const { return d->url(); }
-void KAbstractDocumentSynchronizer::setUrl( const KUrl &url )
+KUrl AbstractModelSynchronizer::url() const { return d->url(); }
+void AbstractModelSynchronizer::setUrl( const KUrl &url )
 {
     d->setUrl( url );
     emit urlChanged( url );
 }
 
-KAbstractDocumentSynchronizer::~KAbstractDocumentSynchronizer()
+AbstractModelSynchronizer::~AbstractModelSynchronizer()
 {
     delete d;
 }
-
-#include "kabstractdocumentsynchronizer.moc"

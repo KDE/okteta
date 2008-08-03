@@ -27,7 +27,7 @@
 // Kakao core
 #include <abstractsynctoremotejob.h>
 #include <abstractsyncfromremotejob.h>
-#include <kabstractdocumentfilesystemsynchronizer.h>
+#include <abstractmodelfilesystemsynchronizer.h>
 #include <jobmanager.h>
 // KDE
 #include <KUrl>
@@ -56,8 +56,8 @@ void SynchronizeController::setView( KAbstractView *view )
 
     if( mDocument )
     {
-        connect( mDocument, SIGNAL(synchronizerChanged( KAbstractDocumentSynchronizer * )),
-                            SLOT(onSynchronizerChange( KAbstractDocumentSynchronizer * )) );
+        connect( mDocument, SIGNAL(synchronizerChanged( AbstractModelSynchronizer* )),
+                            SLOT(onSynchronizerChange( AbstractModelSynchronizer* )) );
     }
     onSynchronizerChange( mDocument ? mDocument->synchronizer() : 0 );
 }
@@ -74,9 +74,9 @@ void SynchronizeController::reload()
     JobManager::executeJob( syncJob );
 }
 
-void SynchronizeController::onSynchronizerChange( KAbstractDocumentSynchronizer *newSynchronizer )
+void SynchronizeController::onSynchronizerChange( AbstractModelSynchronizer* newSynchronizer )
 {
-    mSynchronizer = qobject_cast<KAbstractDocumentFileSystemSynchronizer *>( newSynchronizer );
+    mSynchronizer = qobject_cast<AbstractModelFileSystemSynchronizer*>( newSynchronizer );
     // TODO: Storable interface should be used by Synchronizer 
     // synchronizer should report about possible activities
     bool outOfSync = true;

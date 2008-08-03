@@ -29,8 +29,8 @@
 // Kakao core
 #include <kabstractdocument.h>
 
-class KAbstractDocumentSynchronizer;
-class KAbstractDocumentFileSystemSynchronizer;
+class AbstractModelSynchronizer;
+class AbstractModelFileSystemSynchronizer;
 class KAction;
 class KXMLGUIClient;
 
@@ -49,12 +49,12 @@ class SynchronizeController : public KViewController
     void reload();
 
   private Q_SLOTS:
-    void onSynchronizerChange( KAbstractDocumentSynchronizer *newSynchronizer );
+    void onSynchronizerChange( AbstractModelSynchronizer* newSynchronizer );
     void onSynchronizationStateChange( KAbstractDocument::SynchronizationStates newStates );
 
   protected:
     KAbstractDocument *mDocument;
-    KAbstractDocumentFileSystemSynchronizer *mSynchronizer;
+    AbstractModelFileSystemSynchronizer* mSynchronizer;
 
     KAction *mSaveAction;
     KAction *mReloadAction;

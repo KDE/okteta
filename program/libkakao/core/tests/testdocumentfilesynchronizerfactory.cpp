@@ -38,7 +38,7 @@ QString TestDocumentFileSynchronizerFactory::supportedRemoteType() const { retur
 
 // TODO: these function seems to be always the same. Make macro or template function
 // or, if there is only one place which calls this, move there
-KAbstractDocumentSynchronizer *TestDocumentFileSynchronizerFactory::createSynchronizer() const
+AbstractModelSynchronizer *TestDocumentFileSynchronizerFactory::createSynchronizer() const
 {
     return new TestDocumentFileSynchronizer( mHeader );
 }

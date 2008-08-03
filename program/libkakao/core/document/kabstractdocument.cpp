@@ -23,7 +23,7 @@
 #include "kabstractdocument.h"
 
 // lib
-#include "kabstractdocumentsynchronizer.h"
+#include "abstractmodelsynchronizer.h"
 
 
 class KAbstractDocument::Private
@@ -32,16 +32,16 @@ class KAbstractDocument::Private
       explicit Private( KAbstractDocument *parent );
       ~Private();
   public:
-    void setSynchronizer( KAbstractDocumentSynchronizer *synchronizer );
-    KAbstractDocumentSynchronizer *synchronizer() const;
+    void setSynchronizer( AbstractModelSynchronizer *synchronizer );
+    AbstractModelSynchronizer *synchronizer() const;
   protected:
      KAbstractDocument *d;
-     KAbstractDocumentSynchronizer *mSynchronizer; // TODO: should this be here, with public setters and getters?
+     AbstractModelSynchronizer *mSynchronizer; // TODO: should this be here, with public setters and getters?
 };
 
 inline KAbstractDocument::Private::Private( KAbstractDocument *parent ) : d( parent ), mSynchronizer( 0 ) {}
-inline KAbstractDocumentSynchronizer *KAbstractDocument::Private::synchronizer() const { return mSynchronizer; }
-inline void KAbstractDocument::Private::setSynchronizer( KAbstractDocumentSynchronizer *synchronizer )
+inline AbstractModelSynchronizer *KAbstractDocument::Private::synchronizer() const { return mSynchronizer; }
+inline void KAbstractDocument::Private::setSynchronizer( AbstractModelSynchronizer *synchronizer )
 {
     // plugging the same more than once?
     if( mSynchronizer == synchronizer )
@@ -59,8 +59,8 @@ KAbstractDocument::KAbstractDocument()
  : d( new Private(this) )
 {}
 
-KAbstractDocumentSynchronizer *KAbstractDocument::synchronizer() const { return d->synchronizer(); }
-void KAbstractDocument::setSynchronizer( KAbstractDocumentSynchronizer *synchronizer ) { d->setSynchronizer(synchronizer); }
+AbstractModelSynchronizer *KAbstractDocument::synchronizer() const { return d->synchronizer(); }
+void KAbstractDocument::setSynchronizer( AbstractModelSynchronizer *synchronizer ) { d->setSynchronizer(synchronizer); }
 
 bool KAbstractDocument::hasLocalChanges() const { return synchronizationStates().testFlag(LocalHasChanges) ; }
 

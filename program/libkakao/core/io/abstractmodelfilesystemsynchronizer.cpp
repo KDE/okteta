@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kabstractdocumentfilesystemsynchronizer.h"
+#include "abstractmodelfilesystemsynchronizer.h"
 
 // lib
 #include <kabstractdocument.h>
@@ -31,50 +31,48 @@
 #include <KMessageBox>
 #include <KDirWatch>
 
-class KAbstractDocumentFileSystemSynchronizer::Private
+class AbstractModelFileSystemSynchronizer::Private
 {
   public:
     Private();
   public:
-    QWidget *widget() const;
-    void setWidget( QWidget *widget );
+    QWidget* widget() const;
+    void setWidget( QWidget* widget );
   protected:
-    QWidget *mWidget;
+    QWidget* mWidget;
 };
-inline KAbstractDocumentFileSystemSynchronizer::Private::Private() : mWidget( 0 ) {}
-inline QWidget *KAbstractDocumentFileSystemSynchronizer::Private::widget() const { return mWidget; }
-inline void KAbstractDocumentFileSystemSynchronizer::Private::setWidget( QWidget *widget) { mWidget = widget; }
+inline AbstractModelFileSystemSynchronizer::Private::Private() : mWidget( 0 ) {}
+inline QWidget* AbstractModelFileSystemSynchronizer::Private::widget() const { return mWidget; }
+inline void AbstractModelFileSystemSynchronizer::Private::setWidget( QWidget* widget) { mWidget = widget; }
 
 
-KAbstractDocumentFileSystemSynchronizer::KAbstractDocumentFileSystemSynchronizer()
+AbstractModelFileSystemSynchronizer::AbstractModelFileSystemSynchronizer()
  : d( new Private() )
 {}
 
 
-void KAbstractDocumentFileSystemSynchronizer::onFileDirty( const QString &fileName )
+void AbstractModelFileSystemSynchronizer::onFileDirty( const QString& fileName )
 {
   Q_UNUSED( fileName )
 //     if( url().url() == fileName )
 //         document()->setRemoteHasChanges(); TODO: needs a control interface? 
 }
-void KAbstractDocumentFileSystemSynchronizer::onFileCreated( const QString &fileName )
+void AbstractModelFileSystemSynchronizer::onFileCreated( const QString& fileName )
 {
   Q_UNUSED( fileName )
   //TODO: could happen after a delete, what to do?
 }
-void KAbstractDocumentFileSystemSynchronizer::onFileDeleted( const QString &fileName )
+void AbstractModelFileSystemSynchronizer::onFileDeleted( const QString& fileName )
 {
   Q_UNUSED( fileName )
 //     if( url().url() == fileName )
 //         document()->setRemoteHasChanges(); TODO: needs a control interface? 
 }
 
-KAbstractDocumentFileSystemSynchronizer::~KAbstractDocumentFileSystemSynchronizer()
+AbstractModelFileSystemSynchronizer::~AbstractModelFileSystemSynchronizer()
 {
     if( url().isLocalFile() )
         KDirWatch::self()->removeFile( url().path() );
 
     delete d;
 }
-
-#include "kabstractdocumentfilesystemsynchronizer.moc"

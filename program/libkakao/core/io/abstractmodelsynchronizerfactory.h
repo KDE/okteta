@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KABSTRACTDOCUMENTSYNCHRONIZERFACTORY_H
-#define KABSTRACTDOCUMENTSYNCHRONIZERFACTORY_H
+#ifndef ABSTRACTMODELSYNCHRONIZERFACTORY_H
+#define ABSTRACTMODELSYNCHRONIZERFACTORY_H
 
 // lib
-#include "kabstractdocumentsynchronizer.h"
+#include "abstractmodelsynchronizer.h"
 // Qt
 #include <QtCore/QObject>
 
@@ -35,15 +35,15 @@
 // TODO: should the load/connect/export jobs be created here or from the synchronizer?
 // putting jobs to synchronizer keeps factory simple, but forces synchronizer to be
 // in invalid states, like with simple constructor
-class KAbstractDocumentSynchronizerFactory : public QObject
+class AbstractModelSynchronizerFactory : public QObject
 {
   Q_OBJECT
 
   public:
-    virtual ~KAbstractDocumentSynchronizerFactory();
+    virtual ~AbstractModelSynchronizerFactory();
 
   public: // API to be implemented
-    virtual KAbstractDocumentSynchronizer *createSynchronizer() const = 0;
+    virtual AbstractModelSynchronizer* createSynchronizer() const = 0;
 
 //     virtual KAbstractDocument *loadNewDocument( const KUrl &originUrl ) const = 0;
 //     virtual AbstractLoadJob *startLoad( const KUrl &url ) = 0;

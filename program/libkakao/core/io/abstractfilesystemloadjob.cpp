@@ -23,7 +23,7 @@
 #include "abstractfilesystemloadjob.h"
 
 // library
-#include "kabstractdocumentfilesystemsynchronizer.h"
+#include "abstractmodelfilesystemsynchronizer.h"
 #include <kabstractdocument.h>
 // KDE
 #include <KIO/NetAccess>
@@ -37,7 +37,7 @@
 class AbstractFileSystemLoadJob::Private
 {
   public:
-    Private( KAbstractDocumentFileSystemSynchronizer *synchronizer, const KUrl &url );
+    Private( AbstractModelFileSystemSynchronizer* synchronizer, const KUrl& url );
 
   public:
     void setWorkFilePath( const QString &workFilePath );
@@ -46,19 +46,19 @@ class AbstractFileSystemLoadJob::Private
     const KUrl &url() const;
     QString workFilePath() const;
     QWidget *widget() const;
-    KAbstractDocumentFileSystemSynchronizer *synchronizer() const;
+    AbstractModelFileSystemSynchronizer* synchronizer() const;
 
   protected:
-    KAbstractDocumentFileSystemSynchronizer *mSynchronizer;
+    AbstractModelFileSystemSynchronizer* mSynchronizer;
     const KUrl mUrl;
     QString mWorkFilePath;
 };
 
-AbstractFileSystemLoadJob::Private::Private( KAbstractDocumentFileSystemSynchronizer *synchronizer, const KUrl &url )
+AbstractFileSystemLoadJob::Private::Private( AbstractModelFileSystemSynchronizer* synchronizer, const KUrl &url )
  : mSynchronizer( synchronizer ), mUrl( url )
 {}
 
-inline KAbstractDocumentFileSystemSynchronizer *AbstractFileSystemLoadJob::Private::synchronizer() const
+inline AbstractModelFileSystemSynchronizer* AbstractFileSystemLoadJob::Private::synchronizer() const
 {
     return mSynchronizer;
 }
@@ -74,12 +74,12 @@ inline void AbstractFileSystemLoadJob::Private::setWorkFilePath( const QString &
 
 
 
-AbstractFileSystemLoadJob::AbstractFileSystemLoadJob( KAbstractDocumentFileSystemSynchronizer *synchronizer,
+AbstractFileSystemLoadJob::AbstractFileSystemLoadJob( AbstractModelFileSystemSynchronizer* synchronizer,
                                                       const KUrl &url )
  : d( new Private(synchronizer,url) )
 {}
 
-KAbstractDocumentFileSystemSynchronizer *AbstractFileSystemLoadJob::synchronizer() const
+AbstractModelFileSystemSynchronizer* AbstractFileSystemLoadJob::synchronizer() const
 {
     return d->synchronizer();
 }
@@ -112,7 +112,7 @@ void AbstractFileSystemLoadJob::load()
 
 void AbstractFileSystemLoadJob::setDocument( KAbstractDocument *document )
 {
-    KAbstractDocumentFileSystemSynchronizer *synchronizer = d->synchronizer();
+    AbstractModelFileSystemSynchronizer* synchronizer = d->synchronizer();
 
     if( document )
     {

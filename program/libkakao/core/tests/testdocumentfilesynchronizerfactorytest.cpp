@@ -211,11 +211,11 @@ void TestDocumentFileSynchronizerFactoryTest::testConnectToFile()
     testDocument->setData( otherData );
 
     // file 1
-    bool result = factory->connectDocument( document, fileUrl1, KAbstractDocumentSynchronizer::ReplaceRemote );
+    bool result = factory->connectDocument( document, fileUrl1, AbstractModelSynchronizer::ReplaceRemote );
     QVERIFY( result );
 
     // file 2
-    result = factory->connectDocument( document, fileUrl2, KAbstractDocumentSynchronizer::ReplaceRemote );
+    result = factory->connectDocument( document, fileUrl2, AbstractModelSynchronizer::ReplaceRemote );
     QVERIFY( result );
 
     // now delete document and load new

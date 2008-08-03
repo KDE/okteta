@@ -211,7 +211,7 @@ void TestDocumentFileSynchronizerTest::testChangeFile()
 
     // prepare 2 and overwrite
     writeToFile( filePath2, otherData );
-    synchronizer->startSyncWithRemote( fileUrl2, KAbstractDocumentSynchronizer::ReplaceRemote )->exec();
+    synchronizer->startSyncWithRemote( fileUrl2, AbstractModelSynchronizer::ReplaceRemote )->exec();
 
     // now delete document and load new
     delete document;

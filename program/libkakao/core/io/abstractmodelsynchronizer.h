@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KABSTRACTDOCUMENTSYNCHRONIZER_H
-#define KABSTRACTDOCUMENTSYNCHRONIZER_H
+#ifndef ABSTRACTMODELSYNCHRONIZER_H
+#define ABSTRACTMODELSYNCHRONIZER_H
 
 // Qt
 #include <QtCore/QObject>
@@ -47,7 +47,7 @@ possible actions:
 2. synchronizer gets attached to a document new created or with other synchronizer
 3. synchronizer used to export a model
 */
-class KAbstractDocumentSynchronizer : public QObject
+class AbstractModelSynchronizer : public QObject
 {
   Q_OBJECT
 
@@ -59,9 +59,9 @@ class KAbstractDocumentSynchronizer : public QObject
       ReplaceLocal = 2
     };
   protected:
-    KAbstractDocumentSynchronizer();
+    AbstractModelSynchronizer();
   public:
-    virtual ~KAbstractDocumentSynchronizer();
+    virtual ~AbstractModelSynchronizer();
 
   public:
     KUrl url() const;
@@ -84,10 +84,10 @@ class KAbstractDocumentSynchronizer : public QObject
     virtual AbstractSyncFromRemoteJob *startSyncFromRemote() = 0;
 
     /** changes the  */ // TODO: better name for replace: overwrite?
-    virtual AbstractSyncWithRemoteJob *startSyncWithRemote( const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option ) = 0;
+    virtual AbstractSyncWithRemoteJob *startSyncWithRemote( const KUrl &url, AbstractModelSynchronizer::ConnectOption option ) = 0;
 
     virtual AbstractConnectJob *startConnect( KAbstractDocument *document,
-                                              const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option ) = 0;
+                                              const KUrl &url, AbstractModelSynchronizer::ConnectOption option ) = 0;
 //     virtual bool syncBiDirectly() = 0;
 //     virtual bool canSyncBiDirectly() const = 0;
 //     virtual bool deleteDocument();

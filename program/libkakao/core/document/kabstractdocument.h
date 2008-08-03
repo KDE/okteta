@@ -27,7 +27,7 @@
 // lib
 #include "abstractmodel.h"
 
-class KAbstractDocumentSynchronizer;
+class AbstractModelSynchronizer;
 
 // TODO: store creation time? And time of last modification or access?
 // last both might be too much overhead, unless modification and access are grained enough
@@ -39,7 +39,7 @@ class KAbstractDocument : public AbstractModel
     Q_PROPERTY( SynchronizationStates synchronizationStates READ synchronizationStates )
     Q_FLAGS( SynchronizationStates SynchronizationState )
 
-  friend class KAbstractDocumentSynchronizer;
+  friend class AbstractModelSynchronizer;
 
   public:
     //TODO: some things are a tristate, is it the right thing to embed them here?
@@ -69,17 +69,17 @@ class KAbstractDocument : public AbstractModel
 // virtual QVariant data ( const QModelIndex & index, int role = Qt::DisplayRole ) const = 0
 
   public:
-    void setSynchronizer( KAbstractDocumentSynchronizer *synchronizer );
+    void setSynchronizer( AbstractModelSynchronizer *synchronizer );
 
   public: // helper or basic?
     bool hasLocalChanges() const;
-    KAbstractDocumentSynchronizer *synchronizer() const;
+    AbstractModelSynchronizer *synchronizer() const;
 
   Q_SIGNALS:
     // TODO: should be signal the diff? how to say then remote is in synch again?
     // could be done by pairs of flags instead of notset = isnot
     void modified( KAbstractDocument::SynchronizationStates newStates );
-    void synchronizerChanged( KAbstractDocumentSynchronizer *newSynchronizer );
+    void synchronizerChanged( AbstractModelSynchronizer *newSynchronizer );
 
   protected:
     class Private;

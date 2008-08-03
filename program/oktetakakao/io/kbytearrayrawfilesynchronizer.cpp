@@ -65,13 +65,13 @@ AbstractSyncFromRemoteJob *KByteArrayRawFileSynchronizer::startSyncFromRemote()
     return new ByteArrayRawFileReloadJob( this );
 }
 
-AbstractSyncWithRemoteJob *KByteArrayRawFileSynchronizer::startSyncWithRemote( const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option  )
+AbstractSyncWithRemoteJob *KByteArrayRawFileSynchronizer::startSyncWithRemote( const KUrl &url, AbstractModelSynchronizer::ConnectOption option  )
 {
     return new ByteArrayRawFileWriteToJob( this, url, option );
 }
 
 AbstractConnectJob *KByteArrayRawFileSynchronizer::startConnect( KAbstractDocument *document,
-                                              const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option )
+                                              const KUrl& url, AbstractModelSynchronizer::ConnectOption option )
 {
     return new ByteArrayRawFileConnectJob( this, document, url, option );
 }
@@ -81,5 +81,3 @@ void KByteArrayRawFileSynchronizer::onUrlChange( const KUrl &url )
 {
     mDocument->setTitle( url.fileName() );
 }
-
-#include "kbytearrayrawfilesynchronizer.moc"

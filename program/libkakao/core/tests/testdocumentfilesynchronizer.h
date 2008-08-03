@@ -40,13 +40,13 @@ class TestDocumentFileSynchronizer : public KAbstractDocumentFileSystemSynchroni
   public:
     explicit TestDocumentFileSynchronizer( const QByteArray &header = QByteArray() );
 
-  public: // KAbstractDocumentSynchronizer API
+  public: // AbstractModelSynchronizer API
     virtual AbstractLoadJob *startLoad( const KUrl &url );
     virtual AbstractSyncToRemoteJob *startSyncToRemote();
     virtual AbstractSyncFromRemoteJob *startSyncFromRemote();
-    virtual AbstractSyncWithRemoteJob *startSyncWithRemote( const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option );
+    virtual AbstractSyncWithRemoteJob *startSyncWithRemote( const KUrl &url, AbstractModelSynchronizer::ConnectOption option );
     virtual AbstractConnectJob *startConnect( KAbstractDocument *document,
-                                              const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option );
+                                              const KUrl &url, AbstractModelSynchronizer::ConnectOption option );
 
     virtual KAbstractDocument *document() const;
 

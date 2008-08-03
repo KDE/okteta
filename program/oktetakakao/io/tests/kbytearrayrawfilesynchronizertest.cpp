@@ -140,7 +140,7 @@ void KByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
 
     // save
     KByteArrayRawFileSynchronizer *synchronizer = new KByteArrayRawFileSynchronizer();
-    synchronizer->startConnect( document, fileUrl, KAbstractDocumentSynchronizer::ReplaceRemote )->exec();
+    synchronizer->startConnect( document, fileUrl, AbstractModelSynchronizer::ReplaceRemote )->exec();
     QCOMPARE( synchronizer->document(), document );
 
 //     // load into other and...

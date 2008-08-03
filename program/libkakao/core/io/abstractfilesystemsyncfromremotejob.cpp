@@ -23,7 +23,7 @@
 #include "abstractfilesystemsyncfromremotejob.h"
 
 // library
-#include "kabstractdocumentfilesystemsynchronizer.h"
+#include "abstractmodelfilesystemsynchronizer.h"
 #include <kabstractdocument.h>
 // KDE
 #include <KIO/NetAccess>
@@ -38,7 +38,7 @@
 class AbstractFileSystemSyncFromRemoteJob::Private
 {
   public:
-    Private( KAbstractDocumentFileSystemSynchronizer *synchronizer );
+    Private( AbstractModelFileSystemSynchronizer* synchronizer );
 
   public:
     void setWorkFilePath( const QString &workFilePath );
@@ -47,14 +47,14 @@ class AbstractFileSystemSyncFromRemoteJob::Private
     KUrl url() const;
     QString workFilePath() const;
     QWidget *widget() const;
-    KAbstractDocumentFileSystemSynchronizer *synchronizer() const;
+    AbstractModelFileSystemSynchronizer* synchronizer() const;
 
   protected:
-    KAbstractDocumentFileSystemSynchronizer *mSynchronizer;
+    AbstractModelFileSystemSynchronizer* mSynchronizer;
     QString mWorkFilePath;
 };
 
-AbstractFileSystemSyncFromRemoteJob::Private::Private( KAbstractDocumentFileSystemSynchronizer *synchronizer )
+AbstractFileSystemSyncFromRemoteJob::Private::Private( AbstractModelFileSystemSynchronizer* synchronizer )
  : mSynchronizer( synchronizer )
 {}
 
@@ -62,7 +62,7 @@ inline KUrl AbstractFileSystemSyncFromRemoteJob::Private::url()      const { ret
 inline QString AbstractFileSystemSyncFromRemoteJob::Private::workFilePath() const { return mWorkFilePath; }
 // TODO: setup a notification system
 inline QWidget *AbstractFileSystemSyncFromRemoteJob::Private::widget()      const { return 0; }
-inline KAbstractDocumentFileSystemSynchronizer *AbstractFileSystemSyncFromRemoteJob::Private::synchronizer() const
+inline AbstractModelFileSystemSynchronizer* AbstractFileSystemSyncFromRemoteJob::Private::synchronizer() const
 {
     return mSynchronizer;
 }
@@ -74,11 +74,11 @@ inline void AbstractFileSystemSyncFromRemoteJob::Private::setWorkFilePath( const
 
 
 
-AbstractFileSystemSyncFromRemoteJob::AbstractFileSystemSyncFromRemoteJob( KAbstractDocumentFileSystemSynchronizer *synchronizer )
+AbstractFileSystemSyncFromRemoteJob::AbstractFileSystemSyncFromRemoteJob( AbstractModelFileSystemSynchronizer* synchronizer )
  : d( new Private(synchronizer) )
 {}
 
-KAbstractDocumentFileSystemSynchronizer *AbstractFileSystemSyncFromRemoteJob::synchronizer() const
+AbstractModelFileSystemSynchronizer* AbstractFileSystemSyncFromRemoteJob::synchronizer() const
 {
     return d->synchronizer();
 }

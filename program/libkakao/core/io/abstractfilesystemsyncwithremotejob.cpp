@@ -23,7 +23,7 @@
 #include "abstractfilesystemsyncwithremotejob.h"
 
 // library
-#include "kabstractdocumentfilesystemsynchronizer.h"
+#include "abstractmodelfilesystemsynchronizer.h"
 #include <kabstractdocument.h>
 // KDE
 #include <KIO/NetAccess>
@@ -37,8 +37,8 @@
 class AbstractFileSystemSyncWithRemoteJob::Private
 {
   public:
-    Private( KAbstractDocumentFileSystemSynchronizer *synchronizer,
-             const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option );
+    Private( AbstractModelFileSystemSynchronizer* synchronizer,
+             const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
 
   public:
     void setTemporaryFile( KTemporaryFile *temporaryFile );
@@ -46,22 +46,22 @@ class AbstractFileSystemSyncWithRemoteJob::Private
 
   public:
     KUrl url() const;
-    KAbstractDocumentSynchronizer::ConnectOption option() const;
+    AbstractModelSynchronizer::ConnectOption option() const;
     KTemporaryFile *temporaryFile() const;
     QString workFilePath() const;
     QWidget *widget() const;
-    KAbstractDocumentFileSystemSynchronizer *synchronizer() const;
+    AbstractModelFileSystemSynchronizer* synchronizer() const;
 
   protected:
-    KAbstractDocumentFileSystemSynchronizer *mSynchronizer;
+    AbstractModelFileSystemSynchronizer* mSynchronizer;
     const KUrl mUrl;
-    const KAbstractDocumentSynchronizer::ConnectOption mOption;
+    const AbstractModelSynchronizer::ConnectOption mOption;
     KTemporaryFile *mTemporaryFile;
     QString mWorkFilePath;
 };
 
-AbstractFileSystemSyncWithRemoteJob::Private::Private( KAbstractDocumentFileSystemSynchronizer *synchronizer,
-                                         const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option )
+AbstractFileSystemSyncWithRemoteJob::Private::Private( AbstractModelFileSystemSynchronizer* synchronizer,
+                                         const KUrl &url, AbstractModelSynchronizer::ConnectOption option )
  : mSynchronizer( synchronizer ), mUrl( url ), mOption( option ), mTemporaryFile( 0 )
 {}
 
@@ -70,11 +70,11 @@ inline KTemporaryFile *AbstractFileSystemSyncWithRemoteJob::Private::temporaryFi
 inline QString AbstractFileSystemSyncWithRemoteJob::Private::workFilePath() const { return mWorkFilePath; }
 // TODO: setup a notification system
 inline QWidget *AbstractFileSystemSyncWithRemoteJob::Private::widget()      const { return 0; }
-inline KAbstractDocumentFileSystemSynchronizer *AbstractFileSystemSyncWithRemoteJob::Private::synchronizer() const
+inline AbstractModelFileSystemSynchronizer* AbstractFileSystemSyncWithRemoteJob::Private::synchronizer() const
 {
     return mSynchronizer;
 }
-inline KAbstractDocumentSynchronizer::ConnectOption AbstractFileSystemSyncWithRemoteJob::Private::option() const
+inline AbstractModelSynchronizer::ConnectOption AbstractFileSystemSyncWithRemoteJob::Private::option() const
 {
     return mOption;
 }
@@ -90,12 +90,12 @@ inline void AbstractFileSystemSyncWithRemoteJob::Private::setWorkFilePath( const
 
 
 
-AbstractFileSystemSyncWithRemoteJob::AbstractFileSystemSyncWithRemoteJob( KAbstractDocumentFileSystemSynchronizer *synchronizer,
-                                         const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option )
+AbstractFileSystemSyncWithRemoteJob::AbstractFileSystemSyncWithRemoteJob( AbstractModelFileSystemSynchronizer* synchronizer,
+                                         const KUrl &url, AbstractModelSynchronizer::ConnectOption option )
  : d( new Private(synchronizer,url,option) )
 {}
 
-KAbstractDocumentFileSystemSynchronizer *AbstractFileSystemSyncWithRemoteJob::synchronizer() const
+AbstractModelFileSystemSynchronizer* AbstractFileSystemSyncWithRemoteJob::synchronizer() const
 {
     return d->synchronizer();
 }
@@ -117,7 +117,7 @@ void AbstractFileSystemSyncWithRemoteJob::syncWithRemote()
 
     const KUrl newUrl = d->url();
     bool isWorkFileOk;
-    if( d->option() == KAbstractDocumentSynchronizer::ReplaceRemote )
+    if( d->option() == AbstractModelSynchronizer::ReplaceRemote )
     {
         if( newUrl.isLocalFile() )
             workFilePath = newUrl.path();
@@ -150,7 +150,7 @@ void AbstractFileSystemSyncWithRemoteJob::syncWithRemote()
 
 void AbstractFileSystemSyncWithRemoteJob::completeSync( bool success )
 {
-    KAbstractDocumentFileSystemSynchronizer *synchronizer = d->synchronizer();
+    AbstractModelFileSystemSynchronizer* synchronizer = d->synchronizer();
     if( success )
     {
         KDirWatch *dirWatch = KDirWatch::self();
@@ -202,5 +202,3 @@ AbstractFileSystemSyncWithRemoteJob::~AbstractFileSystemSyncWithRemoteJob()
 {
     delete d;
 }
-
-#include "abstractfilesystemsyncwithremotejob.moc"

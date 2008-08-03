@@ -30,7 +30,7 @@ class QString;
 class QWidget;
 class KUrl;
 class KAbstractDocument;
-class KAbstractDocumentSynchronizerFactory;
+class AbstractModelSynchronizerFactory;
 class KDocumentManager;
 
 class KDocumentSyncManager : public QObject
@@ -53,7 +53,7 @@ class KDocumentSyncManager : public QObject
     KUrl urlOf( KAbstractDocument *document ) const;
 
   public:
-    void setDocumentSynchronizerFactory( KAbstractDocumentSynchronizerFactory *synchronizerFactory );
+    void setDocumentSynchronizerFactory( AbstractModelSynchronizerFactory* synchronizerFactory );
     void setWidget( QWidget *widget );
 
   Q_SIGNALS:
@@ -69,7 +69,7 @@ class KDocumentSyncManager : public QObject
     QWidget *mWidget;
 
     // temporary hack: hard coded factories for byte arrays
-    KAbstractDocumentSynchronizerFactory *mSynchronizerFactory;
+    AbstractModelSynchronizerFactory* mSynchronizerFactory;
 };
 
 #endif

@@ -25,9 +25,9 @@
 
 // library
 #include "abstractsyncwithremotejob.h"
-#include "kabstractdocumentsynchronizer.h"
+#include "abstractmodelsynchronizer.h"
 
-class KAbstractDocumentFileSystemSynchronizer;
+class AbstractModelFileSystemSynchronizer;
 class KUrl;
 class QWidget;
 
@@ -37,8 +37,8 @@ class AbstractFileSystemSyncWithRemoteJob : public AbstractSyncWithRemoteJob
   Q_OBJECT
 
   public:
-    AbstractFileSystemSyncWithRemoteJob( KAbstractDocumentFileSystemSynchronizer *synchronizer,
-                                         const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option );
+    AbstractFileSystemSyncWithRemoteJob( AbstractModelFileSystemSynchronizer* synchronizer,
+                                         const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
     virtual ~AbstractFileSystemSyncWithRemoteJob();
 
   public: // KJob API
@@ -48,7 +48,7 @@ class AbstractFileSystemSyncWithRemoteJob : public AbstractSyncWithRemoteJob
     virtual void startSyncWithRemote() = 0;
 
   protected:
-    KAbstractDocumentFileSystemSynchronizer *synchronizer() const;
+    AbstractModelFileSystemSynchronizer* synchronizer() const;
     QString workFilePath() const;
     QWidget *widget() const;
 

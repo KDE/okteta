@@ -25,11 +25,11 @@
 
 
 // Kakao core
-#include <kabstractdocumentfilesystemsynchronizer.h>
+#include <abstractmodelfilesystemsynchronizer.h>
 
 class KByteArrayDocument;
 
-class KByteArrayRawFileSynchronizer : public KAbstractDocumentFileSystemSynchronizer
+class KByteArrayRawFileSynchronizer : public AbstractModelFileSystemSynchronizer
 {
     Q_OBJECT
 
@@ -39,13 +39,13 @@ class KByteArrayRawFileSynchronizer : public KAbstractDocumentFileSystemSynchron
   public:
     KByteArrayRawFileSynchronizer();
 
-  public: // KAbstractDocumentSynchronizer API
+  public: // AbstractModelSynchronizer API
     virtual AbstractLoadJob *startLoad( const KUrl &url );
     virtual AbstractSyncToRemoteJob *startSyncToRemote();
     virtual AbstractSyncFromRemoteJob *startSyncFromRemote();
-    virtual AbstractSyncWithRemoteJob *startSyncWithRemote( const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option );
+    virtual AbstractSyncWithRemoteJob *startSyncWithRemote( const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
     virtual AbstractConnectJob *startConnect( KAbstractDocument *document,
-                                              const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option );
+                                              const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
 
     virtual KAbstractDocument *document() const;
 

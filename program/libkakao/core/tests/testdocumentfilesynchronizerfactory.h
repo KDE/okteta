@@ -37,7 +37,7 @@ class TestDocumentFileSynchronizerFactory : public KAbstractDocumentSynchronizer
     virtual ~TestDocumentFileSynchronizerFactory();
 
   public: // KAbstractDocumentSynchronizerFactory API
-    virtual KAbstractDocumentSynchronizer *createSynchronizer() const;
+    virtual AbstractModelSynchronizer *createSynchronizer() const;
 
     virtual QString supportedWorkType() const;
     virtual QString supportedRemoteType() const;
