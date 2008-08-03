@@ -30,13 +30,24 @@
 class AbstractModel::Private
 {
   public:
-      explicit Private( AbstractModel *parent );
+      explicit Private( AbstractModel* parent, AbstractModel* baseModel );
       ~Private();
+  public:
+    AbstractModel* baseModel() const;
+  public:
+    void setBaseModel( AbstractModel* baseModel );
+
   protected:
-     AbstractModel *d;
+     AbstractModel* d;
+     AbstractModel* mBaseModel;
 };
 
-inline AbstractModel::Private::Private( AbstractModel *parent ) : d( parent ) {}
+inline AbstractModel::Private::Private( AbstractModel* parent, AbstractModel* baseModel )
+ : d( parent ), mBaseModel( baseModel ) {}
+
+inline AbstractModel* AbstractModel::Private::baseModel() const { return mBaseModel; }
+inline void AbstractModel::Private::setBaseModel( AbstractModel* baseModel ) { mBaseModel = baseModel; }
+
 inline AbstractModel::Private::~Private() {}
 
 #endif

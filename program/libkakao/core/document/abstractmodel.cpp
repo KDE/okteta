@@ -24,12 +24,15 @@
 #include "abstractmodel_p.h"
 
 
-AbstractModel::AbstractModel()
- : d( new Private(this) )
+AbstractModel::AbstractModel( AbstractModel* baseModel )
+ : d( new Private(this,baseModel) )
 {}
 
-bool AbstractModel::isModifiable() const { return false; }
-bool AbstractModel::isReadOnly()   const { return true; }
+bool AbstractModel::isModifiable()        const { return false; }
+bool AbstractModel::isReadOnly()          const { return true; }
+AbstractModel* AbstractModel::baseModel() const { return d->baseModel(); }
+
+void AbstractModel::setBaseModel( AbstractModel* baseModel ) { d->setBaseModel( baseModel ); }
 void AbstractModel::setReadOnly( bool isReadOnly ) { Q_UNUSED(isReadOnly) }
 
 AbstractModel::~AbstractModel()

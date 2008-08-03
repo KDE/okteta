@@ -28,16 +28,19 @@
 
 class QString;
 
-// TODO: reasons not to name it AbtractObjectModel, but just as it is
-// 
+// TODO: reasons not to name it AbstractObjectModel, but just as it is
 class AbstractModel : public QObject
 {
     Q_OBJECT
 
   protected:
-    AbstractModel();
+    AbstractModel( AbstractModel* baseModel = 0 );
   public:
     virtual ~AbstractModel();
+
+  public:
+// TODO: just one baseModel, or can there be multiple? Better name?
+    AbstractModel* baseModel() const;
 
   public: // API to be implemented
     virtual QString title() const = 0;
@@ -54,6 +57,9 @@ class AbstractModel : public QObject
     void readOnlyChanged( bool isReadOnly );
     void modifiableChanged( bool isModifiable );
     void titleChanged( const QString &newTitel );
+
+  protected:
+    void setBaseModel( AbstractModel* baseModel );
 
   protected:
     class Private;
