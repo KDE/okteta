@@ -33,6 +33,8 @@
 KByteArrayDisplay::KByteArrayDisplay( KByteArrayDocument *document )
  : mWidget( 0 ), mDocument( document )
 {
+    setBaseModel( mDocument );
+
     KHECore::KAbstractByteArrayModel *content = mDocument->content();
     mWidget = new KHEUI::KByteArrayView( content );
 
@@ -116,5 +118,3 @@ KByteArrayDisplay::~KByteArrayDisplay()
 {
     delete mWidget;
 }
-
-#include "kbytearraydisplay.moc"
