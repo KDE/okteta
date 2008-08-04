@@ -6,11 +6,9 @@ include_directories(
   system
 )
 
-if(FALSE)
 if(KDE4_BUILD_TESTS)
   add_subdirectory( tests )
 endif(KDE4_BUILD_TESTS)
-endif(FALSE)
 
 set( KAKAO_CORE_SRCS
   document/abstractmodel.cpp
