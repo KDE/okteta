@@ -44,11 +44,11 @@ class FilterView : public QWidget
   public:
     FilterTool* tool() const;
 
-  public: // set
-    void addParameterEdit( const QString &name, QWidget *parameterEdit );
-
   protected: // get 
     void getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const;
+
+  protected: // separation
+    void addFilters();
 
   private Q_SLOTS:
     void onFilterClicked();

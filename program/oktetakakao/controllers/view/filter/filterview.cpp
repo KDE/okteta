@@ -25,7 +25,12 @@
 // 
 #include "filtertool.h"
 // filter
-#include <abstractbytearrayfilterparametersetedit.h>
+#include <filter/nobytearrayfilterparametersetedit.h>
+#include <filter/operandbytearrayfilterparametersetedit.h>
+#include <filter/reversebytearrayfilterparametersetedit.h>
+#include <filter/rotatebytearrayfilterparametersetedit.h>
+#include <abstractbytearrayfilterparameterset.h>
+#include <abstractbytearrayfilter.h>
 // KDE
 #include <KPushButton>
 #include <KDialog>
@@ -91,17 +96,32 @@ FilterView::FilterView( FilterTool *tool, QWidget *parent )
     buttonLayout->addWidget( mFilterButton );
     baseLayout->addLayout( buttonLayout );
     baseLayout->addStretch( 10 );
+
+    addFilters();
 }
 
-void FilterView::addParameterEdit( const QString &name, QWidget *parameterEdit )
+void FilterView::addFilters()
 {
-    mOperationComboBox->addItem( name );
-    const int index =
-    mParameterSetEditStack->addWidget( parameterEdit );
+    // 
+    const QList<AbstractByteArrayFilter*> filterList = mTool->filterList();
+    foreach( AbstractByteArrayFilter* filter, filterList )
+    {
+        mOperationComboBox->addItem( filter->name() );
 
-    // TODO: this is just a hack to have the first parameter edit widget wired up 
-    if( index == 0 )
-        onOperationChange( index );
+        AbstractByteArrayFilterParameterSetEdit* parameterEdit;
+        const QString parameterSetId = filter->parameterSet()->id();
+        if( parameterSetId == "Operand" )
+            parameterEdit = new OperandByteArrayFilterParameterSetEdit();
+        else if( parameterSetId == "Reverse" )
+            parameterEdit = new ReverseByteArrayFilterParameterSetEdit();
+        else if( parameterSetId == "Rotate" )
+            parameterEdit = new RotateByteArrayFilterParameterSetEdit();
+        else //if( parameterSetId == "None" ) TODO: default should be a message "Not found"
+            parameterEdit = new NoByteArrayFilterParameterSetEdit();
+        mParameterSetEditStack->addWidget( parameterEdit );
+    }
+
+    onOperationChange( 0 );
 }
 
 void FilterView::getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const
@@ -165,5 +185,3 @@ void FilterView::onValidityChanged( bool isValid )
 }
 
 FilterView::~FilterView() {}
-
-#include "filterview.moc"

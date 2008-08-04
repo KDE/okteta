@@ -54,13 +54,10 @@ class FilterTool : public AbstractTool
 
     virtual void setTargetModel( AbstractModel* model );
 
-
-  public:
-    void addFilter( AbstractByteArrayFilter *filter );
-
   public:
     void filter( int filterId ) const;
     bool dataSelected() const;
+    QList<AbstractByteArrayFilter*> filterList() const;
 
   public:
     QString charCodecName() const;

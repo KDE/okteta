@@ -25,6 +25,13 @@
 // tool
 #include "filterjob.h"
 // filter
+#include <filter/andbytearrayfilter.h>
+#include <filter/orbytearrayfilter.h>
+#include <filter/xorbytearrayfilter.h>
+#include <filter/invertbytearrayfilter.h>
+#include <filter/reversebytearrayfilter.h>
+#include <filter/rotatebytearrayfilter.h>
+#include <filter/shiftbytearrayfilter.h>
 #include <abstractbytearrayfilter.h>
 // lib
 #include <kbytearraydocument.h>
@@ -46,9 +53,19 @@ FilterTool::FilterTool()
  : mByteArrayView( 0 ), mByteArrayModel( 0 )
 {
     setObjectName( "BinaryFilter" );
+
+    mFilterList
+        << new AndByteArrayFilter()
+        << new OrByteArrayFilter()
+        << new XOrByteArrayFilter()
+        << new InvertByteArrayFilter()
+        << new ReverseByteArrayFilter()
+        << new RotateByteArrayFilter()
+        << new ShiftByteArrayFilter();
 }
 
 QString FilterTool::title() const { return i18nc("@title:window", "Binary Filter"); }
+QList<AbstractByteArrayFilter*> FilterTool::filterList() const { return mFilterList; }
 QString FilterTool::charCodecName() const
 {
     return mByteArrayView ? mByteArrayView->encodingName() : QString();
@@ -90,11 +107,6 @@ void FilterTool::setTargetModel( AbstractModel* model )
     emit dataSelectionChanged( dataSelected );
 }
 
-void FilterTool::addFilter( AbstractByteArrayFilter *filter )
-{
-    mFilterList.append( filter );
-}
-
 
 void FilterTool::filter( int filterId ) const
 {
@@ -129,5 +141,3 @@ void FilterTool::filter( int filterId ) const
 }
 
 FilterTool::~FilterTool() {}
-
-#include "filtertool.moc"
