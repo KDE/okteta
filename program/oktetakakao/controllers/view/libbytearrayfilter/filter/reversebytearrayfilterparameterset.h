@@ -33,6 +33,9 @@ class ReverseByteArrayFilterParameterSet : public AbstractByteArrayFilterParamet
     ReverseByteArrayFilterParameterSet();
     virtual ~ReverseByteArrayFilterParameterSet();
 
+  public: // AbstractByteArrayFilterParameterSet API
+    virtual QString id() const;
+
   public:
     void setInvertsBits( bool invertsBits );
 

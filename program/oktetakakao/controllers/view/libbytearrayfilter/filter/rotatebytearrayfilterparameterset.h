@@ -32,6 +32,9 @@ class RotateByteArrayFilterParameterSet : public AbstractByteArrayFilterParamete
     RotateByteArrayFilterParameterSet();
     virtual ~RotateByteArrayFilterParameterSet();
 
+  public: // AbstractByteArrayFilterParameterSet API
+    virtual QString id() const;
+
   public:
     void setGroupSize( int groupSize );
     void setMoveBitWidth( int moveBitWidth );

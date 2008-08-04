@@ -22,9 +22,14 @@
 
 #include "nobytearrayfilterparameterset.h"
 
+// Qt
+#include <QtCore/QString>
+
 
 NoByteArrayFilterParameterSet::NoByteArrayFilterParameterSet()
 {}
+
+QString NoByteArrayFilterParameterSet::id() const { return "None"; }
 
 NoByteArrayFilterParameterSet::~NoByteArrayFilterParameterSet()
 {

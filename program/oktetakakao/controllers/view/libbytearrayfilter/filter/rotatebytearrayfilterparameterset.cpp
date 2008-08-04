@@ -22,9 +22,13 @@
 
 #include "rotatebytearrayfilterparameterset.h"
 
+// Qt
+#include <QtCore/QString>
 
 RotateByteArrayFilterParameterSet::RotateByteArrayFilterParameterSet()
 {}
+
+QString RotateByteArrayFilterParameterSet::id() const { return "Rotate"; }
 
 int RotateByteArrayFilterParameterSet::groupSize() const { return mGroupSize; }
 int RotateByteArrayFilterParameterSet::moveBitWidth() const { return mMoveBitWidth; }

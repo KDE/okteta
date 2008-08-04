@@ -22,10 +22,14 @@
 
 #include "operandbytearrayfilterparameterset.h"
 
+// Qt
+#include <QtCore/QString>
+
 
 OperandByteArrayFilterParameterSet::OperandByteArrayFilterParameterSet()
 {}
 
+QString OperandByteArrayFilterParameterSet::id() const { return "Operand"; }
 
 QByteArray OperandByteArrayFilterParameterSet::operand() const { return mOperand; }
 int OperandByteArrayFilterParameterSet::operandFormat() const { return mOperandFormat; }

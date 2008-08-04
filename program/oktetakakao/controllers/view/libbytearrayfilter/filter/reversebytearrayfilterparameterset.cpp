@@ -22,8 +22,13 @@
 
 #include "reversebytearrayfilterparameterset.h"
 
+// Qt
+#include <QtCore/QString>
+
 
 ReverseByteArrayFilterParameterSet::ReverseByteArrayFilterParameterSet() {}
+
+QString ReverseByteArrayFilterParameterSet::id() const { return "Reverse"; }
 
 bool ReverseByteArrayFilterParameterSet::invertsBits() const { return mInvertsBits; }
 
