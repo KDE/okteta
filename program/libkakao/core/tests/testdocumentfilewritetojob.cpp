@@ -34,7 +34,7 @@
 
 
 TestDocumentFileWriteToJob::TestDocumentFileWriteToJob( TestDocumentFileSynchronizer *synchronizer,
-                                         const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option )
+                                         const KUrl& url, AbstractModelSynchronizer::ConnectOption option )
  : AbstractFileSystemSyncWithRemoteJob( synchronizer, url, option )
 {}
 

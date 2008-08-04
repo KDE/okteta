@@ -24,13 +24,13 @@
 #define TESTDOCUMENTFILESYNCHRONIZER_H
 
 // Kakao
-#include <kabstractdocumentfilesystemsynchronizer.h>
+#include <abstractmodelfilesystemsynchronizer.h>
 // Qt
 #include <QtCore/QByteArray>
 
 class TestDocument;
 
-class TestDocumentFileSynchronizer : public KAbstractDocumentFileSystemSynchronizer
+class TestDocumentFileSynchronizer : public AbstractModelFileSystemSynchronizer
 {
     Q_OBJECT
 

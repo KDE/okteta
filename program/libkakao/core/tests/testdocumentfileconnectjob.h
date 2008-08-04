@@ -36,7 +36,7 @@ class TestDocumentFileConnectJob : public AbstractFileSystemConnectJob
 
   public:
     TestDocumentFileConnectJob( TestDocumentFileSynchronizer *synchronizer, KAbstractDocument *document,
-                                const KUrl &url, KAbstractDocumentSynchronizer::ConnectOption option );
+                                const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
     virtual ~TestDocumentFileConnectJob();
 
   protected: // AbstractFileSystemLoadJob API

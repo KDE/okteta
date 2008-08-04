@@ -36,7 +36,7 @@
 TestDocumentFileConnectJob::TestDocumentFileConnectJob( TestDocumentFileSynchronizer *synchronizer,
                                                         KAbstractDocument *document,
                                                         const KUrl &url,
-                                                        KAbstractDocumentSynchronizer::ConnectOption option )
+                                                        AbstractModelSynchronizer::ConnectOption option )
  : AbstractFileSystemConnectJob( synchronizer, document, url, option )
 {
 }

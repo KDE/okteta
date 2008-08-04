@@ -24,11 +24,11 @@
 #define TESTDOCUMENTFILESYNCHRONIZERFACTORY_H
 
 // Kakao
-#include <kabstractdocumentsynchronizerfactory.h>
+#include <abstractmodelsynchronizerfactory.h>
 // Qt
 #include <QtCore/QByteArray>
 
-class TestDocumentFileSynchronizerFactory : public KAbstractDocumentSynchronizerFactory
+class TestDocumentFileSynchronizerFactory : public AbstractModelSynchronizerFactory
 {
   Q_OBJECT
 
@@ -36,7 +36,7 @@ class TestDocumentFileSynchronizerFactory : public KAbstractDocumentSynchronizer
     TestDocumentFileSynchronizerFactory( const QByteArray &header = QByteArray() );
     virtual ~TestDocumentFileSynchronizerFactory();
 
-  public: // KAbstractDocumentSynchronizerFactory API
+  public: // AbstractModelSynchronizerFactory API
     virtual AbstractModelSynchronizer *createSynchronizer() const;
 
     virtual QString supportedWorkType() const;
