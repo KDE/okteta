@@ -52,8 +52,6 @@ ExportController::ExportController( KDocumentManager *documentManager, KXmlGuiWi
 
 void ExportController::setView( KAbstractView *view )
 {
-    mView = view;
-
     if( mView ) mView->disconnect( mExportActionGroup );
 
     mView = view;
