@@ -27,7 +27,7 @@
 #include <QtCore/QObject>
 
 class KByteArrayDocument;
-class KAbstractView;
+class AbstractModel;
 namespace KHEUI {
 class KByteArrayView;
 }
@@ -63,7 +63,7 @@ class PrintTool : public QObject
     virtual ~PrintTool();
 
   public:
-    void setView( KAbstractView *view );
+    void setTargetModel( AbstractModel* model );
 
   public Q_SLOTS:
     void print();

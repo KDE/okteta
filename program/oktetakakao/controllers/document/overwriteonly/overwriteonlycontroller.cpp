@@ -22,8 +22,6 @@
 
 #include "overwriteonlycontroller.h"
 
-// Kakao gui
-#include <kabstractview.h>
 // Okteta core
 #include <kabstractbytearraymodel.h>
 // KDE
@@ -42,12 +40,12 @@ OverwriteOnlyController::OverwriteOnlyController( KXMLGUIClient* guiClient )
     mSetOverwriteOnlyAction->setText( i18nc("@action:inmenu","Overwrite only") );
     connect( mSetOverwriteOnlyAction, SIGNAL(triggered(bool)), SLOT(setOverwriteOnly(bool)) );
 
-    setView( 0 );
+    setTargetModel( 0 );
 }
 
-void OverwriteOnlyController::setView( KAbstractView *view )
+void OverwriteOnlyController::setTargetModel( AbstractModel* model )
 {
-Q_UNUSED( view )
+Q_UNUSED( model )
 //     if( mByteArrayModel ) mByteArrayModel->disconnect( mSetOverwriteOnlyAction );
 
     mByteArrayModel = 0; //view ? view->baseModel() : 0;

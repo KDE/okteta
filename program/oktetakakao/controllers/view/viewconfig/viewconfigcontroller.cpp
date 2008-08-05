@@ -22,8 +22,8 @@
 
 #include "viewconfigcontroller.h"
 
-// Kakao gui
-#include <kabstractview.h>
+// lib
+#include <kbytearraydisplay.h>
 // Okteta gui
 #include <kbytearrayview.h>
 // Okteta core
@@ -86,13 +86,14 @@ ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
     list.append( i18nc("@item:inmenu","&Both Columns") );
     mToggleColumnsAction->setItems( list );
     connect( mToggleColumnsAction, SIGNAL(triggered(int)), SLOT(toggleValueCharColumns(int)) );
-    setView( 0 );
+    setTargetModel( 0 );
 }
 
-void ViewConfigController::setView( KAbstractView* view )
+void ViewConfigController::setTargetModel( AbstractModel* model )
 {
     if( mByteArrayView ) mByteArrayView->disconnect( this );
 
+    KByteArrayDisplay* view = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
     mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
 
     if( mByteArrayView )

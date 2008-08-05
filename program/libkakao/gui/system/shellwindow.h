@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -26,7 +26,6 @@
 
 // Kakao gui
 #include "iwidgetsdockable.h"
-#include <kviewcontroller.h>
 // Kakao core
 #include <kabstractdocument.h>
 // KDE
@@ -38,6 +37,7 @@ class KDocumentManager;
 class KAbstractView;
 class KViewManager;
 class TabbedViews;
+class AbstractXmlGuiController;
 class AbstractToolView;
 class AbstractTool;
 
@@ -52,6 +52,7 @@ class ShellWindow : public KXmlGuiWindow, public KDE::If::WidgetsDockable
 
   public:
     void updateControllers( KAbstractView *view );
+    void addXmlGuiController( AbstractXmlGuiController* controller );
     void addTool( AbstractToolView* toolView );
 
   public: // KDE::If::WidgetsDockable API
@@ -73,7 +74,7 @@ class ShellWindow : public KXmlGuiWindow, public KDE::If::WidgetsDockable
 
     KDocumentManager *mDocumentManager;
     KViewManager *mViewManager;
-    QList<KViewController*> mControllers;
+    QList<AbstractXmlGuiController*> mControllers;
 
     QList<QDockWidget*> mDockWidgets;
     QList<AbstractToolView*> mToolViews;

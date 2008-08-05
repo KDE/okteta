@@ -25,22 +25,22 @@
 
 
 // lib
-#include <kviewcontroller.h>
+#include <abstractxmlguicontroller.h>
 
 class KAction;
 class KXMLGUIClient;
 class KAbstractDocument;
 class KDocumentSyncManager;
 
-class SetRemoteController : public KViewController
+class SetRemoteController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
   public:
     SetRemoteController( KDocumentSyncManager* syncManager, KXMLGUIClient* guiClient );
 
-  public: // KViewController API
-    virtual void setView( KAbstractView *view );
+  public: // AbstractXmlGuiController API
+    virtual void setTargetModel( AbstractModel* model );
 
   protected Q_SLOTS:
     void saveAs();

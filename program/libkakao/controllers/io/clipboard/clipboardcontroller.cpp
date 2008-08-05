@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,7 +25,8 @@
 // Kakao gui
 #include <kidataselectable.h>
 #include <kiselecteddatawriteable.h>
-#include <kabstractview.h>
+// Kakao core
+#include <abstractmodel.h>
 // KDE
 #include <KXMLGUIClient>
 #include <KLocale>
@@ -38,7 +39,7 @@
 
 
 ClipboardController::ClipboardController( KXMLGUIClient* guiClient )
- : mView( 0 ), mSelectionControl( 0 ), mMimeDataControl( 0 )
+ : mModel( 0 ), mSelectionControl( 0 ), mMimeDataControl( 0 )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -48,29 +49,29 @@ ClipboardController::ClipboardController( KXMLGUIClient* guiClient )
 
     connect( QApplication::clipboard(), SIGNAL(dataChanged()), SLOT(onClipboardDataChanged()) );
 
-    setView( 0 );
+    setTargetModel( 0 );
 }
 
-void ClipboardController::setView( KAbstractView *view )
+void ClipboardController::setTargetModel( AbstractModel* model )
 {
-    if( mView ) mView->disconnect( this );
+    if( mModel ) mModel->disconnect( this );
 
-    mView = view;
-    mSelectionControl = view ? qobject_cast<KDE::If::DataSelectable *>( view ) : 0;
+    mModel = model ? model->findBaseModelWithInterface<KDE::If::DataSelectable*>() : 0;
+    mSelectionControl = mModel ? qobject_cast<KDE::If::DataSelectable *>( mModel ) : 0;
 
     if( mSelectionControl )
     {
-        connect( mView, SIGNAL(hasSelectedDataChanged( bool )), SLOT(onHasSelectedDataChanged( bool )) );
+        connect( mModel, SIGNAL(hasSelectedDataChanged( bool )), SLOT(onHasSelectedDataChanged( bool )) );
 
-        mMimeDataControl = qobject_cast<KDE::If::SelectedDataWriteable*>( mView );
+        mMimeDataControl = qobject_cast<KDE::If::SelectedDataWriteable*>( mModel );
         if( mMimeDataControl )
-            connect( mView, SIGNAL(readOnlyChanged( bool )), SLOT(onReadOnlyChanged( bool )) );
+            connect( mModel, SIGNAL(readOnlyChanged( bool )), SLOT(onReadOnlyChanged( bool )) );
     }
     else
         mMimeDataControl = 0;
 
     const bool hasSelectedData = ( mSelectionControl != 0 ) ? mSelectionControl->hasSelectedData() : false;
-    const bool isWriteable = ( mMimeDataControl != 0 && !mView->isReadOnly() );
+    const bool isWriteable = ( mMimeDataControl != 0 && !mModel->isReadOnly() );
     const bool isPastable = isWriteable ?
         mMimeDataControl->canReadData( QApplication::clipboard()->mimeData() ) :
         false;
@@ -120,7 +121,7 @@ void ClipboardController::onReadOnlyChanged( bool isReadOnly )
 
 void ClipboardController::onHasSelectedDataChanged( bool hasSelectedData )
 {
-    const bool isWriteable = ( mMimeDataControl != 0 && !mView->isReadOnly() );
+    const bool isWriteable = ( mMimeDataControl != 0 && !mModel->isReadOnly() );
 
     mCopyAction->setEnabled( hasSelectedData );
     mCutAction->setEnabled( hasSelectedData && isWriteable );
@@ -128,7 +129,7 @@ void ClipboardController::onHasSelectedDataChanged( bool hasSelectedData )
 
 void ClipboardController::onClipboardDataChanged()
 {
-    const bool isWriteable = ( mMimeDataControl != 0 && !mView->isReadOnly() );
+    const bool isWriteable = ( mMimeDataControl != 0 && !mModel->isReadOnly() );
     const bool isPastable = isWriteable ?
         mMimeDataControl->canReadData( QApplication::clipboard()->mimeData() ) :
         false;

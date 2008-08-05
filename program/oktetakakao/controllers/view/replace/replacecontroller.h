@@ -27,7 +27,7 @@
 // lib
 #include <kfinddirection.h>
 // Kakao gui
-#include <kviewcontroller.h>
+#include <abstractxmlguicontroller.h>
 
 class KXmlGuiWindow;
 class KAction;
@@ -41,7 +41,7 @@ class KReplaceDialog;
 class KReplacePrompt;
 
 
-class ReplaceController : public KViewController
+class ReplaceController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
@@ -49,8 +49,8 @@ class ReplaceController : public KViewController
     explicit ReplaceController( KXmlGuiWindow *window );
     virtual ~ReplaceController();
 
-  public: // KViewController API
-    virtual void setView( KAbstractView *view );
+  public: // AbstractXmlGuiController API
+    virtual void setTargetModel( AbstractModel* model );
 
   protected:
     void findNext();

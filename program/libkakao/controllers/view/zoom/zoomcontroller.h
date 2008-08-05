@@ -25,7 +25,7 @@
 
 
 // lib
-#include <kviewcontroller.h>
+#include <abstractxmlguicontroller.h>
 
 class KXMLGUIClient;
 class KAction;
@@ -34,15 +34,15 @@ class Zoomable;
 } }
 
 
-class ZoomController : public KViewController
+class ZoomController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
   public:
     ZoomController( KXMLGUIClient* guiClient );
 
-  public: // KViewController API
-    virtual void setView( KAbstractView* view );
+  public: // AbstractXmlGuiController API
+    virtual void setTargetModel( AbstractModel* model );
 
   protected Q_SLOTS: // action slots
     void zoomIn();
@@ -52,7 +52,7 @@ class ZoomController : public KViewController
     void onZoomLevelChange( double level );
 
   protected:
-    QObject *mZoomObject;
+    AbstractModel* mModel;
     KDE::If::Zoomable *mZoomControl;
 
     double mZoomLevel;

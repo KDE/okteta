@@ -51,13 +51,12 @@ ViewListMenuController::ViewListMenuController( KViewManager* viewManager, KDE::
     connect( mViewManager, SIGNAL(opened( KAbstractView* )),  SLOT(updateActions()) );
     connect( mViewManager, SIGNAL(closing( KAbstractView* )), SLOT(updateActions()) );
 
-    setView( 0 );
     updateActions();
 }
 
-void ViewListMenuController::setView( KAbstractView *View )
+void ViewListMenuController::setTargetModel( AbstractModel* model )
 {
-Q_UNUSED(View)
+Q_UNUSED(model)
 }
 
  Q_DECLARE_METATYPE(KAbstractView*)

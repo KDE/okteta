@@ -52,9 +52,9 @@ LoaderController::LoaderController( KDocumentSyncManager* syncManager, KXMLGUICl
 }
 
 
-void LoaderController::setView( KAbstractView *view )
+void LoaderController::setTargetModel( AbstractModel* model )
 {
-Q_UNUSED( view )
+Q_UNUSED( model )
 }
 
 void LoaderController::load()

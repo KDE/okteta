@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,7 +25,7 @@
 
 
 // Kakao gui
-#include <kviewcontroller.h>
+#include <abstractxmlguicontroller.h>
 
 class KXMLGUIClient;
 class KAction;
@@ -34,15 +34,15 @@ class DataSelectable;
 } }
 
 
-class SelectController : public KViewController
+class SelectController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
   public:
     explicit SelectController( KXMLGUIClient* guiClient );
 
-  public: // KViewController API
-    virtual void setView( KAbstractView *view );
+  public: // AbstractXmlGuiController API
+    virtual void setTargetModel( AbstractModel* model );
 
   protected Q_SLOTS: // action slots
     void selectAll();
@@ -52,7 +52,7 @@ class SelectController : public KViewController
     void onHasSelectedDataChanged( bool hasSelectedData );
 
   protected:
-    KAbstractView *mView;
+    AbstractModel* mModel;
     KDE::If::DataSelectable *mSelectControl;
 
     KAction *mSelectAllAction;

@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2006 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,5 +20,33 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kcontroller.h"
+#ifndef ABSTRACTXMLGUICONTROLLER_H
+#define ABSTRACTXMLGUICONTROLLER_H
 
+// Qt
+#include <QtCore/QObject>
+
+class AbstractModel;
+class KXMLGUIClient;
+
+/* there are controllers for 
+* (focused) documents
+* document collections (projects)
+  * static (related (or dependant) data)
+  * dynamic (session)
+* views
+* view collections, like tabbed view or mdi
+* program
+* ...
+Controllers can plug into the 
+*/
+class AbstractXmlGuiController : public QObject
+{
+  Q_OBJECT
+
+  public: // API to be implemented
+    virtual void setTargetModel( AbstractModel* model ) {Q_UNUSED(model)}//= 0;
+//    void plug( KXMLGUIClient* guiClient );
+};
+
+#endif

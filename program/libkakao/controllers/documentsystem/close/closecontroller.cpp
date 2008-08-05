@@ -22,8 +22,6 @@
 
 #include "closecontroller.h"
 
-// Kakao gui
-#include <kabstractview.h>
 // Kakao core
 #include <kdocumentmanager.h>
 // KDE
@@ -39,12 +37,12 @@ CloseController::CloseController( KDocumentManager* documentManager, KXMLGUIClie
     KActionCollection* actionCollection = guiClient->actionCollection();
 
     mCloseAction  = KStandardAction::close(  this, SLOT(close()),  actionCollection );
-    setView( 0 );
+    setTargetModel( 0 );
 }
 
-void CloseController::setView( KAbstractView *view )
+void CloseController::setTargetModel( AbstractModel* model )
 {
-    mDocument = view ? qobject_cast<KAbstractDocument*>(view->baseModel()) : 0;
+    mDocument = model ? model->findBaseModel<KAbstractDocument*>() : 0;
     const bool hasDocument = ( mDocument != 0 );
 
     mCloseAction->setEnabled( hasDocument );
@@ -56,5 +54,3 @@ void CloseController::close()
     if( mDocumentManager->canClose(mDocument) )
         mDocumentManager->closeDocument( mDocument );
 }
-
-#include "closecontroller.moc"

@@ -25,7 +25,7 @@
 
 
 // Kakao gui
-#include <kviewcontroller.h>
+#include <abstractxmlguicontroller.h>
 
 class QAction;
 class KXMLGUIClient;
@@ -38,7 +38,7 @@ class KAbstractByteArrayModel;
 class KGotoOffsetDialog;
 
 
-class GotoOffsetController : public KViewController
+class GotoOffsetController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
@@ -46,8 +46,8 @@ class GotoOffsetController : public KViewController
     explicit GotoOffsetController( KXMLGUIClient* guiClient );
     virtual ~GotoOffsetController();
 
-  public: // KViewController API
-    virtual void setView( KAbstractView* view );
+  public: // AbstractXmlGuiController API
+    virtual void setTargetModel( AbstractModel* model );
 
   protected Q_SLOTS: // action slots
     void gotoOffset();

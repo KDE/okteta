@@ -27,7 +27,7 @@
 // Qt
 #include <QtCore/QObject>
 
-class KAbstractView;
+class AbstractModel;
 namespace KHEUI {
 class KByteArrayView;
 }
@@ -47,7 +47,7 @@ class InsertPatternTool : public QObject
     virtual ~InsertPatternTool();
 
   public:
-    void setView( KAbstractView *view );
+    void setTargetModel( AbstractModel* model );
 
   public:
     void insertPattern( const QByteArray &pattern, int count );

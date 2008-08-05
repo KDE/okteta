@@ -22,10 +22,9 @@
 
 #include "setremotecontroller.h"
 
-// lib
-#include <kabstractview.h>
 // Kakao core
 #include <kdocumentsyncmanager.h>
+#include <kabstractdocument.h>
 // KDE
 #include <KActionCollection>
 #include <KAction>
@@ -40,12 +39,12 @@ SetRemoteController::SetRemoteController( KDocumentSyncManager* syncManager, KXM
 
     mSaveAsAction = KStandardAction::saveAs( this, SLOT(saveAs()), actionCollection );
 
-    setView( 0 );
+    setTargetModel( 0 );
 }
 
-void SetRemoteController::setView( KAbstractView *view )
+void SetRemoteController::setTargetModel( AbstractModel* model )
 {
-    mDocument = ( view != 0 ) ? qobject_cast<KAbstractDocument*>(view->baseModel()) : 0;
+    mDocument = model ? model->findBaseModel<KAbstractDocument*>() : 0;
 
     const bool canBeSaved = mDocument ?
                                 ( mDocument->synchronizer() != 0 ||

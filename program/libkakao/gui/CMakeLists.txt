@@ -16,7 +16,7 @@ set( KAKAO_GUI_SRCS
   system/abstractgroupedviews.cpp
   system/tabbedviews.cpp
   system/shellwindow.cpp
-  controller/kcontroller.cpp
+  controller/abstractxmlguicontroller.cpp
 )
 
 kde4_add_library( kakaogui STATIC ${KAKAO_GUI_SRCS} )

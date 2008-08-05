@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,24 +25,22 @@
 
 
 // lib
-#include <kviewcontroller.h>
-// KDE
-#include <KUrl>
+#include <abstractxmlguicontroller.h>
 
 class KViewManager;
 class KAction;
 class KXMLGUIClient;
 
 
-class CloseController : public KViewController
+class CloseController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
   public:
     CloseController( KViewManager* viewManager, KXMLGUIClient* guiClient );
 
-  public: // KViewController API
-    virtual void setView( KAbstractView *view );
+  public: // AbstractXmlGuiController API
+    virtual void setTargetModel( AbstractModel* model );
 
   protected Q_SLOTS:
     void close();

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -26,9 +26,8 @@
 #include "ksearchdialog.h"
 #include "searchjob.h"
 // lib
+#include <kbytearraydisplay.h>
 #include <kbytearraydocument.h>
-// Kakao gui
-#include <kabstractview.h>
 // Okteta gui
 #include <kbytearrayview.h>
 // Okteta core
@@ -55,13 +54,14 @@ SearchController::SearchController( KXmlGuiWindow *MW )
     mFindNextAction = KStandardAction::findNext( this, SLOT(findNext()),     actionCollection );
     mFindPrevAction = KStandardAction::findPrev( this, SLOT(findPrevious()), actionCollection );
 
-    setView( 0 );
+    setTargetModel( 0 );
 }
 
-void SearchController::setView( KAbstractView *View )
+void SearchController::setTargetModel( AbstractModel* model )
 {
     if( ViewWidget ) ViewWidget->disconnect( this );
 
+    KByteArrayDisplay* View = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
     ViewWidget = View ? static_cast<KHEUI::KByteArrayView *>( View->widget() ) : 0;
     KByteArrayDocument* Document = View ? static_cast<KByteArrayDocument*>( View->baseModel() ) : 0;
     ByteArray = Document ? Document->content() : 0;

@@ -42,9 +42,9 @@ ToolListMenuController::ToolListMenuController( KDE::If::WidgetsDockable* widget
     updateActions();
 }
 
-void ToolListMenuController::setView( KAbstractView *view )
+void ToolListMenuController::setTargetModel( AbstractModel* model )
 {
-Q_UNUSED(view)
+Q_UNUSED(model)
 }
 
 void ToolListMenuController::updateActions()

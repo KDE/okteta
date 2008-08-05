@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -40,9 +40,9 @@ FullScreenController::FullScreenController( KXmlGuiWindow *window )
     connect( fullScreenAction , SIGNAL(toggled(bool)) , SLOT(switchFullScreen(bool)) ); 
 }
 
-void FullScreenController::setView( KAbstractView *view )
+void FullScreenController::setTargetModel( AbstractModel* model )
 {
-Q_UNUSED( view )
+Q_UNUSED( model )
 }
 
 void FullScreenController::switchFullScreen( bool toFullScreen )

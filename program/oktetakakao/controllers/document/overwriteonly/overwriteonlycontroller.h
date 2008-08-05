@@ -25,7 +25,7 @@
 
 
 // Kakao gui
-#include <kviewcontroller.h>
+#include <abstractxmlguicontroller.h>
 
 namespace KHECore {
 class KAbstractByteArrayModel;
@@ -33,15 +33,15 @@ class KAbstractByteArrayModel;
 class KXMLGUIClient;
 class KToggleAction;
 
-class OverwriteOnlyController : public KViewController
+class OverwriteOnlyController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
   public:
     OverwriteOnlyController( KXMLGUIClient* guiClient );
 
-  public: // KViewController API
-    virtual void setView( KAbstractView *view );
+  public: // AbstractXmlGuiController API
+    virtual void setTargetModel( AbstractModel* model );
 
   protected Q_SLOTS: // action slots
     void setOverwriteOnly( bool isOverwriteOnly );

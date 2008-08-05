@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,7 +25,7 @@
 
 
 // lib
-#include <kviewcontroller.h>
+#include <abstractxmlguicontroller.h>
 
 class QAction;
 class QActionGroup;
@@ -36,15 +36,15 @@ namespace KDE { namespace If {
 class ViewFocusable;
 }}
 
-class ViewListMenuController : public KViewController
+class ViewListMenuController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
   public:
     ViewListMenuController( KViewManager* viewManager, KDE::If::ViewFocusable* focusable, KXMLGUIClient* guiClient );
 
-  public: // KViewController API
-    virtual void setView( KAbstractView *view );
+  public: // AbstractXmlGuiController API
+    virtual void setTargetModel( AbstractModel* model );
 
   private Q_SLOTS:
     void updateActions();

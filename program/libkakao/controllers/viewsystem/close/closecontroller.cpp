@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -37,12 +37,13 @@ CloseController::CloseController( KViewManager* viewManager, KXMLGUIClient* guiC
     KActionCollection* actionCollection = guiClient->actionCollection();
 
     mCloseAction  = KStandardAction::close(  this, SLOT(close()),  actionCollection );
-    setView( 0 );
+    setTargetModel( 0 );
 }
 
-void CloseController::setView( KAbstractView *view )
+void CloseController::setTargetModel( AbstractModel* model )
 {
-    mView = view;
+    mView = model ? model->findBaseModel<KAbstractView*>() : 0;
+
     const bool hasView = ( mView != 0 );
 
     mCloseAction->setEnabled( hasView );

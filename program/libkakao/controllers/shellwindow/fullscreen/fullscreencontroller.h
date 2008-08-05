@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,20 +25,20 @@
 
 
 // lib
-#include <kviewcontroller.h>
+#include <abstractxmlguicontroller.h>
 
 class KXmlGuiWindow;
 
 
-class FullScreenController : public KViewController
+class FullScreenController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
   public:
     FullScreenController( KXmlGuiWindow *window );
 
-  public: // KToolet API
-    virtual void setView( KAbstractView *view );
+  public: // AbstractXmlGuiController API
+    virtual void setTargetModel( AbstractModel* model );
 
   public Q_SLOTS:
     void switchFullScreen( bool toFullScreen );

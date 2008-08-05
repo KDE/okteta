@@ -24,7 +24,6 @@
 
 // Kakao gui
 #include <kidataselectable.h>
-#include <kabstractview.h>
 // Kakao core
 #include <modelstreamencodethread.h>
 #include <modelcodecmanager.h>
@@ -47,24 +46,24 @@
 static const char CopyAsActionListId[] = "copy_as_list";
 
 CopyAsController::CopyAsController( KDocumentManager* documentManager, KXMLGUIClient* guiClient )
- : mDocumentManager( documentManager ), mGuiClient( guiClient ), mView( 0 )
+ : mDocumentManager( documentManager ), mGuiClient( guiClient ), mModel( 0 )
 {
     mCopyAsActionGroup = new QActionGroup( this ); // TODO: do we use this only for the signal mapping?
     connect( mCopyAsActionGroup, SIGNAL(triggered( QAction* )), SLOT(onActionTriggered( QAction* )) );
 
-    setView( 0 );
+    setTargetModel( 0 );
 }
 
-void CopyAsController::setView( KAbstractView *view )
+void CopyAsController::setTargetModel( AbstractModel* model )
 {
-    if( mView ) mView->disconnect( mCopyAsActionGroup );
+    if( mModel ) mModel->disconnect( mCopyAsActionGroup );
 
-    mView = view;
-    mSelectionControl = view ? qobject_cast<KDE::If::DataSelectable *>( view ) : 0;
+    mModel = model ? model->findBaseModelWithInterface<KDE::If::DataSelectable*>() : 0;
+    mSelectionControl = mModel ? qobject_cast<KDE::If::DataSelectable*>( mModel ) : 0;
 
     if( mSelectionControl )
     {
-        connect( mView, SIGNAL(hasSelectedDataChanged( bool )),
+        connect( mModel, SIGNAL(hasSelectedDataChanged( bool )),
                  mCopyAsActionGroup, SLOT(setEnabled( bool )) );
     }
 
@@ -85,7 +84,7 @@ void CopyAsController::updateActions()
     const AbstractModelSelection *selection = ( mSelectionControl != 0 ) ? mSelectionControl->selection() : 0;
 
     const QList<AbstractModelStreamEncoder*> encoderList =
-        mDocumentManager->codecManager()->encoderList( mView, selection );
+        mDocumentManager->codecManager()->encoderList( mModel, selection );
     const bool hasEncoders = ( encoderList.size() > 0 );
 
     if( hasEncoders )
@@ -123,7 +122,7 @@ void CopyAsController::onActionTriggered( QAction *action )
     exportDataBuffer.open( QIODevice::WriteOnly );
 
     ModelStreamEncodeThread *encodeThread =
-        new ModelStreamEncodeThread( this, &exportDataBuffer, mView, selection, encoder );
+        new ModelStreamEncodeThread( this, &exportDataBuffer, mModel, selection, encoder );
     encodeThread->start();
     while( !encodeThread->wait(100) )
         QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );

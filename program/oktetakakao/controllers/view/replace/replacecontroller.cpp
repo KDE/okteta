@@ -28,6 +28,7 @@
 // search controller
 #include "../search/searchjob.h"
 // lib
+#include <kbytearraydisplay.h>
 #include <kbytearraydocument.h>
 // Okteta gui
 #include <kbytearrayview.h>
@@ -55,13 +56,14 @@ ReplaceController::ReplaceController( KXmlGuiWindow *window )
 
     mReplaceAction = KStandardAction::replace( this, SLOT(replace()), ActionCollection );
 
-    setView( 0 );
+    setTargetModel( 0 );
 }
 
-void ReplaceController::setView( KAbstractView *view )
+void ReplaceController::setTargetModel( AbstractModel* model )
 {
     if( mByteArrayView ) mByteArrayView->disconnect( this );
 
+    KByteArrayDisplay* view = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
     mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
     KByteArrayDocument* Document = view ? static_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
     mByteArrayModel = Document ? Document->content() : 0;

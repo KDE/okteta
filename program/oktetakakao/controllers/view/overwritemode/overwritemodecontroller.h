@@ -25,7 +25,7 @@
 
 
 // Kakao gui
-#include <kviewcontroller.h>
+#include <abstractxmlguicontroller.h>
 
 namespace KHEUI {
 class KByteArrayView;
@@ -33,15 +33,15 @@ class KByteArrayView;
 class KXMLGUIClient;
 class KToggleAction;
 
-class OverwriteModeController : public KViewController
+class OverwriteModeController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
   public:
-    OverwriteModeController( KXMLGUIClient* guiClient );
+    explicit OverwriteModeController( KXMLGUIClient* guiClient );
 
-  public: // KViewController API
-    virtual void setView( KAbstractView *view );
+  public: // AbstractXmlGuiController API
+    virtual void setTargetModel( AbstractModel* model );
 
   protected Q_SLOTS: // action slots
     void setOverWrite( bool isOverWrite );

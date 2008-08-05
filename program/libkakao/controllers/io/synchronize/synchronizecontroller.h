@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,7 +25,7 @@
 
 
 // Kakao gui
-#include <kviewcontroller.h>
+#include <abstractxmlguicontroller.h>
 // Kakao core
 #include <kabstractdocument.h>
 
@@ -34,15 +34,15 @@ class AbstractModelFileSystemSynchronizer;
 class KAction;
 class KXMLGUIClient;
 
-class SynchronizeController : public KViewController
+class SynchronizeController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
   public:
     explicit SynchronizeController( KXMLGUIClient* guiClient );
 
-  public: // KViewController API
-    virtual void setView( KAbstractView *view );
+  public: // AbstractXmlGuiController API
+    virtual void setTargetModel( AbstractModel* model );
 
   protected Q_SLOTS:
     void save();

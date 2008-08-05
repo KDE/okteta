@@ -25,21 +25,21 @@
 
 
 // lib
-#include <kviewcontroller.h>
+#include <abstractxmlguicontroller.h>
 
 class KAbstractDocument;
 class KXMLGUIClient;
 class KToggleAction;
 
-class ReadOnlyController : public KViewController
+class ReadOnlyController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
   public:
-    ReadOnlyController( KXMLGUIClient* guiClient );
+    explicit ReadOnlyController( KXMLGUIClient* guiClient );
 
-  public: // KViewController API
-    virtual void setView( KAbstractView *view );
+  public: // AbstractXmlGuiController API
+    virtual void setTargetModel( AbstractModel* model );
 
   protected Q_SLOTS: // action slots
     void setReadOnly( bool isReadOnly );

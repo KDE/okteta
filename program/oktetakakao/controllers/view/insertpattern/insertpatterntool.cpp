@@ -23,9 +23,10 @@
 #include "insertpatterntool.h"
 
 // lib
+#include <kbytearraydisplay.h>
 #include <kbytearraydocument.h>
-// Kakao gui
-#include <kabstractview.h>
+// Kakao core
+#include <abstractmodel.h>
 // Okteta gui
 #include <kbytearrayview.h>
 // Okteta core
@@ -44,10 +45,11 @@ QString InsertPatternTool::charCodecName() const
     return mByteArrayView ? mByteArrayView->encodingName() : QString();
 }
 
-void InsertPatternTool::setView( KAbstractView *view )
+void InsertPatternTool::setTargetModel( AbstractModel* model )
 {
 //     if( mByteArrayView ) mByteArrayView->disconnect( this );
 
+    KByteArrayDisplay* view = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
     mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
 
     KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;

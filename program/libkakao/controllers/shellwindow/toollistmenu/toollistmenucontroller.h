@@ -25,7 +25,7 @@
 
 
 // lib
-#include <kviewcontroller.h>
+#include <abstractxmlguicontroller.h>
 // Qt
 #include <QtCore/QList>
 
@@ -37,15 +37,15 @@ namespace KDE { namespace If {
 class WidgetsDockable;
 }}
 
-class ToolListMenuController : public KViewController
+class ToolListMenuController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
   public:
     ToolListMenuController( KDE::If::WidgetsDockable* widgetsDockable, KXMLGUIClient* guiClient );
 
-  public: // KViewController API
-    virtual void setView( KAbstractView *view );
+  public: // AbstractXmlGuiController API
+    virtual void setTargetModel( AbstractModel* model );
 
   private:
     void updateActions();

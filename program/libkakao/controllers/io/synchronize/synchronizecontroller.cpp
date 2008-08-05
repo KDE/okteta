@@ -22,8 +22,6 @@
 
 #include "synchronizecontroller.h"
 
-// lib
-#include <kabstractview.h>
 // Kakao core
 #include <abstractsynctoremotejob.h>
 #include <abstractsyncfromremotejob.h>
@@ -45,14 +43,14 @@ SynchronizeController::SynchronizeController( KXMLGUIClient* guiClient )
     mSaveAction   = KStandardAction::save(   this, SLOT(save()),   actionCollection );
     mReloadAction = KStandardAction::revert( this, SLOT(reload()), actionCollection );
 
-    setView( 0 );
+    setTargetModel( 0 );
 }
 
-void SynchronizeController::setView( KAbstractView *view )
+void SynchronizeController::setTargetModel( AbstractModel* model )
 {
     if( mDocument ) mDocument->disconnect( this );
 
-    mDocument = ( view != 0 ) ? qobject_cast<KAbstractDocument*>(view->baseModel()) : 0;
+    mDocument = model ? model->findBaseModel<KAbstractDocument*>() : 0;
 
     if( mDocument )
     {

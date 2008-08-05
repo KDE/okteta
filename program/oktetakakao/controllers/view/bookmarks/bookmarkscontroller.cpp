@@ -23,9 +23,10 @@
 #include "bookmarkscontroller.h"
 
 // lib
+#include <kbytearraydisplay.h>
 #include <kbytearraydocument.h>
-// Kakao gui
-#include <kabstractview.h>
+// Kakao core
+#include <abstractmodel.h>
 // Okteta gui
 #include <koffsetformat.h>
 #include <kbytearrayview.h>
@@ -77,15 +78,17 @@ BookmarksController::BookmarksController( KXMLGUIClient* guiClient )
 //     mBookmarksActionGroup->setExclusive( true );
     connect( mBookmarksActionGroup, SIGNAL(triggered( QAction* )), SLOT(onBookmarkTriggered( QAction* )) );
 
-    setView( 0 );
+    setTargetModel( 0 );
 }
 
-void BookmarksController::setView( KAbstractView *view )
+void BookmarksController::setTargetModel( AbstractModel* model )
 {
     if( mByteArrayView ) mByteArrayView->disconnect( this );
     if( mByteArray ) mByteArray->disconnect( this );
 
+    KByteArrayDisplay* view = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
     mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
+
     KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
     mByteArray = document ? document->content() : 0;
     mBookmarks = mByteArray ? qobject_cast<KHECore::Bookmarkable*>( mByteArray ) : 0;
@@ -243,5 +246,3 @@ void BookmarksController::onBookmarkTriggered( QAction* action )
 
 
 BookmarksController::~BookmarksController() {}
-
-#include "bookmarkscontroller.moc"

@@ -101,37 +101,37 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram *program )
 
     // all controllers which use plugActionList have to do so after(!) setupGUI() or their entrys will be removed
     // TODO: why is this so?
-    mControllers.append( new CopyAsController(mProgram->documentManager(),this) );
-    mControllers.append( new ExportController(mProgram->documentManager(),this) );
-    mControllers.append( new ToolListMenuController(this,this) );
-    mControllers.append( new ViewListMenuController(mProgram->viewManager(),mTabbedViews,this) );
+    addXmlGuiController( new CopyAsController(mProgram->documentManager(),this) );
+    addXmlGuiController( new ExportController(mProgram->documentManager(),this) );
+    addXmlGuiController( new ToolListMenuController(this,this) );
+    addXmlGuiController( new ViewListMenuController(mProgram->viewManager(),mTabbedViews,this) );
 }
 
 void OktetaMainWindow::setupControllers()
 {
-    mControllers.append( new CreatorController(mProgram->documentManager()->createManager(),this) );
-    mControllers.append( new LoaderController(mProgram->documentManager()->syncManager(),this) );
-    mControllers.append( new SetRemoteController(mProgram->documentManager()->syncManager(),this) );
-    mControllers.append( new SynchronizeController(this) );
-    mControllers.append( new CloseController(mProgram->documentManager(),this) );
-    mControllers.append( new VersionController(this) );
-    mControllers.append( new ReadOnlyController(this) );
-    mControllers.append( new FullScreenController(this) );
-    mControllers.append( new QuitController(0,this) );
+    addXmlGuiController( new CreatorController(mProgram->documentManager()->createManager(),this) );
+    addXmlGuiController( new LoaderController(mProgram->documentManager()->syncManager(),this) );
+    addXmlGuiController( new SetRemoteController(mProgram->documentManager()->syncManager(),this) );
+    addXmlGuiController( new SynchronizeController(this) );
+    addXmlGuiController( new CloseController(mProgram->documentManager(),this) );
+    addXmlGuiController( new VersionController(this) );
+    addXmlGuiController( new ReadOnlyController(this) );
+    addXmlGuiController( new FullScreenController(this) );
+    addXmlGuiController( new QuitController(0,this) );
 
-    mControllers.append( new ZoomController(this) );
-    mControllers.append( new SelectController(this) );
-    mControllers.append( new ClipboardController(this) );
+    addXmlGuiController( new ZoomController(this) );
+    addXmlGuiController( new SelectController(this) );
+    addXmlGuiController( new ClipboardController(this) );
 
-//     mControllers.append( new OverwriteOnlyController(this) );
-    mControllers.append( new OverwriteModeController(this) );
-    mControllers.append( new SearchController(this) );
-    mControllers.append( new ReplaceController(this) );
-    mControllers.append( new GotoOffsetController(this) );
-    mControllers.append( new InsertPatternController(this) );
-    mControllers.append( new BookmarksController(this) );
-    mControllers.append( new PrintController(this) );
-    mControllers.append( new ViewConfigController(this) );
+//     addXmlGuiController( new OverwriteOnlyController(this) );
+    addXmlGuiController( new OverwriteModeController(this) );
+    addXmlGuiController( new SearchController(this) );
+    addXmlGuiController( new ReplaceController(this) );
+    addXmlGuiController( new GotoOffsetController(this) );
+    addXmlGuiController( new InsertPatternController(this) );
+    addXmlGuiController( new BookmarksController(this) );
+    addXmlGuiController( new PrintController(this) );
+    addXmlGuiController( new ViewConfigController(this) );
 
     addTool( new FilterToolView(new FilterTool()) );
     addTool( new StringsExtractToolView(new StringsExtractTool()) );

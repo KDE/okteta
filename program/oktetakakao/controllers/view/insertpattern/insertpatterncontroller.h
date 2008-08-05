@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,7 +25,7 @@
 
 
 // Kakao gui
-#include <kviewcontroller.h>
+#include <abstractxmlguicontroller.h>
 
 class KXMLGUIClient;
 class InsertPatternTool;
@@ -33,7 +33,7 @@ class InsertPatternDialog;
 class QAction;
 
 
-class InsertPatternController : public KViewController
+class InsertPatternController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
@@ -41,8 +41,8 @@ class InsertPatternController : public KViewController
     explicit InsertPatternController( KXMLGUIClient* guiClient );
     virtual ~InsertPatternController();
 
-  public: // KViewController API
-    virtual void setView( KAbstractView *view );
+  public: // AbstractXmlGuiController API
+    virtual void setTargetModel( AbstractModel* model );
 
   protected Q_SLOTS:
     void onActionTriggered();

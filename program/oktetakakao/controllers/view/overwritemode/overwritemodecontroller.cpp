@@ -22,8 +22,10 @@
 
 #include "overwritemodecontroller.h"
 
+// lib
+#include <kbytearraydisplay.h>
 // Kakao gui
-#include <kabstractview.h>
+#include <abstractmodel.h>
 // Okteta gui
 #include <kbytearrayview.h>
 // KDE
@@ -47,13 +49,14 @@ OverwriteModeController::OverwriteModeController( KXMLGUIClient* guiClient )
     mSetOverWriteAction->setShortcut( QKeySequence(Qt::Key_Insert) );
     connect( mSetOverWriteAction, SIGNAL(triggered(bool)), SLOT(setOverWrite(bool)) );
 
-    setView( 0 );
+    setTargetModel( 0 );
 }
 
-void OverwriteModeController::setView( KAbstractView *view )
+void OverwriteModeController::setTargetModel( AbstractModel* model )
 {
 //     if( mByteArrayView ) mByteArrayView->disconnect( mSetOverWriteAction );
 
+    KByteArrayDisplay* view = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
     mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
 
     if( mByteArrayView )

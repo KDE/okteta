@@ -25,7 +25,7 @@
 
 
 // lib
-#include <kviewcontroller.h>
+#include <abstractxmlguicontroller.h>
 
 namespace KDE { namespace If {
 class Versionable;
@@ -34,15 +34,15 @@ class KXMLGUIClient;
 class KToolBarPopupAction;
 class QAction;
 
-class VersionController : public KViewController
+class VersionController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
   public:
     VersionController( KXMLGUIClient* guiClient );
 
-  public: // KViewController API
-    virtual void setView( KAbstractView *view );
+  public: // AbstractXmlGuiController API
+    virtual void setTargetModel( AbstractModel* model );
 
   protected Q_SLOTS: // action slots
     void onSetToOlderVersionTriggered();
@@ -56,8 +56,8 @@ class VersionController : public KViewController
     void onReadOnlyChanged( bool isReadOnly );
 
   protected:
+    AbstractModel* mModel;
     KDE::If::Versionable *mVersionControl;
-    KAbstractView *mView;
 
     KToolBarPopupAction *mSetToOlderVersionAction;
     KToolBarPopupAction *mSetToNewerVersionAction;

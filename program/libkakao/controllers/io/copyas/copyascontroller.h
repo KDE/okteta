@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,7 +25,7 @@
 
 
 // Kakao gui
-#include <kviewcontroller.h>
+#include <abstractxmlguicontroller.h>
 
 class QAction;
 class QActionGroup;
@@ -36,15 +36,15 @@ class DataSelectable;
 } }
 
 
-class CopyAsController : public KViewController
+class CopyAsController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
   public:
     CopyAsController( KDocumentManager* documentManager, KXMLGUIClient* guiClient );
 
-  public: // KViewController API
-    virtual void setView( KAbstractView *view );
+  public: // AbstractXmlGuiController API
+    virtual void setTargetModel( AbstractModel* model );
 
   private:
     void updateActions();
@@ -56,7 +56,7 @@ class CopyAsController : public KViewController
     KDocumentManager *mDocumentManager;
     KXMLGUIClient *mGuiClient;
 
-    KAbstractView *mView;
+    AbstractModel* mModel;
     KDE::If::DataSelectable *mSelectionControl;
 
     QActionGroup *mCopyAsActionGroup;

@@ -40,12 +40,12 @@ PrintController::PrintController( KXMLGUIClient* guiClient )
     connect( mPrintTool, SIGNAL(viewChanged( bool )),
              mPrintAction, SLOT(setEnabled( bool )) );
 
-    setView( 0 );
+    setTargetModel( 0 );
 }
 
-void PrintController::setView( KAbstractView *view )
+void PrintController::setTargetModel( AbstractModel* model )
 {
-    mPrintTool->setView( view );
+    mPrintTool->setTargetModel( model );
 }
 
 

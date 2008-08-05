@@ -24,14 +24,14 @@
 #define PRINTCONTROLLER_H
 
 // Kakao gui
-#include <kviewcontroller.h>
+#include <abstractxmlguicontroller.h>
 
 class KAction;
 class KXMLGUIClient;
 class PrintTool;
 
 
-class PrintController : public KViewController
+class PrintController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
@@ -39,8 +39,8 @@ class PrintController : public KViewController
     explicit PrintController( KXMLGUIClient* guiClient );
     virtual ~PrintController();
 
-  public: // KViewController API
-    virtual void setView( KAbstractView *view );
+  public: // AbstractXmlGuiController API
+    virtual void setTargetModel( AbstractModel* model );
 
   protected:
     KAction *mPrintAction;

@@ -25,7 +25,7 @@
 
 
 // kakao
-#include <kviewcontroller.h>
+#include <abstractxmlguicontroller.h>
 
 class QAction;
 class QActionGroup;
@@ -36,15 +36,15 @@ class DataSelectable;
 } }
 
 
-class ExportController : public KViewController
+class ExportController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
   public:
     ExportController( KDocumentManager* documentManager, KXMLGUIClient* guiClient );
 
-  public: // KViewController API
-    virtual void setView( KAbstractView *view );
+  public: // AbstractXmlGuiController API
+    virtual void setTargetModel( AbstractModel* model );
 
   private Q_SLOTS:
     void updateActions();
@@ -54,7 +54,7 @@ class ExportController : public KViewController
     KDocumentManager *mDocumentManager;
     KXMLGUIClient *mGuiClient;
 
-    KAbstractView *mView;
+    AbstractModel* mModel;
     KDE::If::DataSelectable *mSelectionControl;
 
     QActionGroup *mExportActionGroup;

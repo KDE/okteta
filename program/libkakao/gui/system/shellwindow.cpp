@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,7 @@
 #include <kabstractview.h>
 #include <abstracttoolview.h>
 #include <abstracttool.h>
+#include <abstractxmlguicontroller.h>
 // Kakao core
 #include <kdocumentmanager.h>
 #include <kabstractdocument.h>
@@ -52,6 +53,11 @@ ShellWindow::ShellWindow( KDocumentManager *documentManager, KViewManager *viewM
 
 QList<QDockWidget*> ShellWindow::dockWidgets() const { return mDockWidgets; }
 
+void ShellWindow::addXmlGuiController( AbstractXmlGuiController* controller )
+{
+    mControllers.append( controller );
+}
+
 void ShellWindow::addTool( AbstractToolView* toolView )
 {
     QDockWidget *dockWidget = new QDockWidget( toolView->title(), this );
@@ -67,8 +73,8 @@ void ShellWindow::addTool( AbstractToolView* toolView )
 
 void ShellWindow::updateControllers( KAbstractView* view )
 {
-    foreach( KViewController* controller, mControllers )
-        controller->setView( view );
+    foreach( AbstractXmlGuiController* controller, mControllers )
+        controller->setTargetModel( view );
 
     foreach( AbstractTool* tool, mTools )
         tool->setTargetModel( view );

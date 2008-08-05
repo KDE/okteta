@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -34,26 +34,26 @@
 
 
 SelectController::SelectController( KXMLGUIClient* guiClient )
- : mView( 0 ), mSelectControl( 0 )
+ : mModel( 0 ), mSelectControl( 0 )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
     mSelectAllAction = KStandardAction::selectAll( this, SLOT(selectAll()), actionCollection );
     mDeselectAction =  KStandardAction::deselect(  this, SLOT(unselect()),  actionCollection );
 
-    setView( 0 );
+    setTargetModel( 0 );
 }
 
-void SelectController::setView( KAbstractView *view )
+void SelectController::setTargetModel( AbstractModel* model )
 {
-    if( mView ) mView->disconnect( this );
+    if( mModel ) mModel->disconnect( this );
 
-    mView = view;
-    mSelectControl = view ? qobject_cast<KDE::If::DataSelectable *>( view ) : 0;
+    mModel = model ? model->findBaseModelWithInterface<KDE::If::DataSelectable*>() : 0;
+    mSelectControl = mModel ? qobject_cast<KDE::If::DataSelectable *>( mModel ) : 0;
 
     if( mSelectControl )
     {
-        connect( mView, SIGNAL(hasSelectedDataChanged( bool )), SLOT(onHasSelectedDataChanged( bool )) );
+        connect( mModel, SIGNAL(hasSelectedDataChanged( bool )), SLOT(onHasSelectedDataChanged( bool )) );
     }
 
     const bool hasSelectionControl = ( mSelectControl != 0 );

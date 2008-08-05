@@ -25,7 +25,7 @@
 
 
 // lib
-#include <kviewcontroller.h>
+#include <abstractxmlguicontroller.h>
 
 class KDocumentSyncManager;
 class KRecentFilesAction;
@@ -33,7 +33,7 @@ class KXMLGUIClient;
 class KUrl;
 
 
-class LoaderController : public KViewController
+class LoaderController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
@@ -41,8 +41,8 @@ class LoaderController : public KViewController
     LoaderController( KDocumentSyncManager* syncManager, KXMLGUIClient* guiClient );
     ~LoaderController();
 
-  public: // KViewController API
-    virtual void setView( KAbstractView *view );
+  public: // AbstractXmlGuiController API
+    virtual void setTargetModel( AbstractModel* model );
 
   public Q_SLOTS:
     void load();

@@ -25,7 +25,7 @@
 
 
 // Kakao gui
-#include <kviewcontroller.h>
+#include <abstractxmlguicontroller.h>
 // Qt
 #include <QtCore/QList>
 
@@ -42,7 +42,7 @@ class KAbstractByteArrayModel;
 }
 
 
-class BookmarksController : public KViewController
+class BookmarksController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
@@ -50,8 +50,8 @@ class BookmarksController : public KViewController
     explicit BookmarksController( KXMLGUIClient* guiClient );
     virtual ~BookmarksController();
 
-  public: // KViewController API
-    virtual void setView( KAbstractView *view );
+  public: // AbstractXmlGuiController API
+    virtual void setTargetModel( AbstractModel* model );
 
   protected Q_SLOTS: // action slots
     void createBookmark();

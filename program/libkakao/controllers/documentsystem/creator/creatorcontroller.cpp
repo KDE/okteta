@@ -37,9 +37,9 @@ CreatorController::CreatorController( KDocumentCreateManager* createManager, KXM
     KStandardAction::openNew( this, SLOT(createNew()), actionCollection );
 }
 
-void CreatorController::setView( KAbstractView *view )
+void CreatorController::setTargetModel( AbstractModel* model )
 {
-Q_UNUSED( view )
+Q_UNUSED( model )
 }
 
 void CreatorController::createNew()

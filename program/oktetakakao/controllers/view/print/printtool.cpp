@@ -28,6 +28,7 @@
 #include "headerfooterframerenderer.h"
 #include "bytearrayframerenderer.h"
 // lib
+#include <kbytearraydisplay.h>
 #include <kbytearraydocument.h>
 // Kakao gui
 #include <kabstractview.h>
@@ -53,10 +54,11 @@ PrintTool::PrintTool()
 {
 }
 
-void PrintTool::setView( KAbstractView *view )
+void PrintTool::setTargetModel( AbstractModel* model )
 {
 //     if( mByteArrayView ) mByteArrayView->disconnect( this );
 
+    KByteArrayDisplay* view = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
     mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
 
     mDocument = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;

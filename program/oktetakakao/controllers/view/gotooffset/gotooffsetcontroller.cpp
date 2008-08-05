@@ -25,6 +25,7 @@
 // controller
 #include "kgotooffsetdialog.h"
 // lib
+#include <kbytearraydisplay.h>
 #include <kbytearraydocument.h>
 // Kakao gui
 #include <kabstractview.h>
@@ -54,13 +55,14 @@ GotoOffsetController::GotoOffsetController( KXMLGUIClient* guiClient )
     connect( mGotoOffsetAction, SIGNAL(triggered(bool) ), SLOT(gotoOffset()) );
     mGotoOffsetAction->setShortcut( Qt::CTRL + Qt::Key_G );
 
-    setView( 0 );
+    setTargetModel( 0 );
 }
 
-void GotoOffsetController::setView( KAbstractView* view )
+void GotoOffsetController::setTargetModel( AbstractModel* model )
 {
     if( mByteArrayView ) mByteArrayView->disconnect( this );
 
+    KByteArrayDisplay* view = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
     mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
     KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
     mByteArray = document ? document->content() : 0;

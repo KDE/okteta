@@ -22,8 +22,8 @@
 
 #include "readonlycontroller.h"
 
-// Kakao gui
-#include <kabstractview.h>
+// Kakao core
+#include <kabstractdocument.h>
 // KDE
 #include <KXMLGUIClient>
 #include <KLocale>
@@ -41,14 +41,14 @@ ReadOnlyController::ReadOnlyController( KXMLGUIClient* guiClient )
 //     mSetReadOnlyAction->setIcon( KIcon("emblem-readonly") );
     connect( mSetReadOnlyAction, SIGNAL(triggered(bool)), SLOT(setReadOnly(bool)) );
 
-    setView( 0 );
+    setTargetModel( 0 );
 }
 
-void ReadOnlyController::setView( KAbstractView *view )
+void ReadOnlyController::setTargetModel( AbstractModel* model )
 {
     if( mDocument ) mDocument->disconnect( mSetReadOnlyAction );
 
-    mDocument = view ? qobject_cast<KAbstractDocument*>(view->baseModel()) : 0;
+    mDocument = model ? model->findBaseModel<KAbstractDocument*>() : 0;
 
     if( mDocument )
     {

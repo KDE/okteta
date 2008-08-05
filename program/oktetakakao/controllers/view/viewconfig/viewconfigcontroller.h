@@ -24,7 +24,7 @@
 #define VIEWCONFIGCONTROLLER_H
 
 // Kakao gui
-#include <kviewcontroller.h>
+#include <abstractxmlguicontroller.h>
 
 class KXMLGUIClient;
 class KSelectAction;
@@ -34,15 +34,15 @@ class KByteArrayView;
 }
 
 
-class ViewConfigController : public KViewController
+class ViewConfigController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
   public:
     explicit ViewConfigController( KXMLGUIClient* guiClient );
 
-  public: // KViewController API
-    virtual void setView( KAbstractView* view );
+  public: // AbstractXmlGuiController API
+    virtual void setTargetModel( AbstractModel* model );
 
   protected Q_SLOTS: // action slots
     void setCoding( int coding );

@@ -22,11 +22,10 @@
 
 #include "versioncontroller.h"
 
-// Kakao gui
-#include <kabstractview.h>
 // Kakao core
 #include <kdocumentversiondata.h>
 #include <kiversionable.h>
+#include <abstractmodel.h>
 // KDE
 #include <KXMLGUIClient>
 #include <KLocale>
@@ -40,7 +39,7 @@
 static const int MaxMenuEntries = 10;
 
 VersionController::VersionController( KXMLGUIClient* guiClient )
- : mView( 0 )
+ : mModel( 0 )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -66,32 +65,32 @@ VersionController::VersionController( KXMLGUIClient* guiClient )
     connect( mSetToNewerVersionAction->menu(), SIGNAL(triggered( QAction* )),
              SLOT(onNewerVersionMenuTriggered( QAction* )) );
 
-    setView( 0 );
+    setTargetModel( 0 );
 }
 
-void VersionController::setView( KAbstractView *view )
+void VersionController::setTargetModel( AbstractModel* model )
 {
-    if( mView )
+    if( mModel )
     {
-        mView->disconnect( this );
-        KAbstractDocument* document = qobject_cast<KAbstractDocument*>(mView->baseModel());
-        if( document ) document->disconnect( this );
+        mModel->disconnect( this );
+        AbstractModel* versionedModel = mModel->findBaseModelWithInterface<KDE::If::Versionable*>();
+        if( versionedModel ) versionedModel->disconnect( this );
     }
 
-    mView = view;
-    KAbstractDocument* document = mView ? qobject_cast<KAbstractDocument*>(mView->baseModel()) : 0;
-    mVersionControl = document ? qobject_cast<KDE::If::Versionable*>( document ) : 0;
+    mModel = model;
+    AbstractModel* versionedModel = mModel ? mModel->findBaseModelWithInterface<KDE::If::Versionable*>() : 0;
+    mVersionControl = versionedModel ? qobject_cast<KDE::If::Versionable*>( versionedModel ) : 0;
 
     if( mVersionControl )
     {
-        connect( document, SIGNAL(revertedToVersionIndex( int )), SLOT(onVersionIndexChanged( int )) );
-        connect( document, SIGNAL(headVersionChanged( int )),     SLOT(onVersionIndexChanged( int )) );
-        connect( mView, SIGNAL(readOnlyChanged( bool )), SLOT(onReadOnlyChanged( bool )) );
+        connect( versionedModel, SIGNAL(revertedToVersionIndex( int )), SLOT(onVersionIndexChanged( int )) );
+        connect( versionedModel, SIGNAL(headVersionChanged( int )),     SLOT(onVersionIndexChanged( int )) );
+        connect( mModel, SIGNAL(readOnlyChanged( bool )), SLOT(onReadOnlyChanged( bool )) );
     }
     else
-        mView = 0;
+        mModel = 0;
 
-    const bool isVersionable = ( mVersionControl != 0 && !mView->isReadOnly() );
+    const bool isVersionable = ( mVersionControl != 0 && !mModel->isReadOnly() );
 
     if( isVersionable )
         onVersionIndexChanged( mVersionControl->versionIndex() );

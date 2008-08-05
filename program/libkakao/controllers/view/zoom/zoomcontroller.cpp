@@ -24,7 +24,8 @@
 
 // Kakao gui
 #include <kizoomable.h>
-#include <kabstractview.h>
+// Kakao core
+#include <abstractmodel.h>
 // KDE
 #include <KXMLGUIClient>
 #include <KLocale>
@@ -34,7 +35,7 @@
 
 
 ZoomController::ZoomController( KXMLGUIClient* guiClient )
- : mZoomObject( 0 ), mZoomControl( 0 )
+ : mModel( 0 ), mZoomControl( 0 )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -68,20 +69,20 @@ ZoomController::ZoomController( KXMLGUIClient* guiClient )
     FitToSizeAction = new KAction( i18n( "&Fit to Size" ), ActionCollection, "fit_to_size" );
     connect( FitToSizeAction, SIGNAL(triggered(bool) ), SLOT( fitToSize() ));
 #endif
-    setView( 0 );
+    setTargetModel( 0 );
 }
 
-void ZoomController::setView( KAbstractView* view )
+void ZoomController::setTargetModel( AbstractModel* model )
 {
-    if( mZoomObject ) mZoomObject->disconnect( this );
+    if( mModel ) mModel->disconnect( this );
 
-    mZoomControl = view ? qobject_cast<KDE::If::Zoomable *>( view ) : 0;
-    mZoomObject = mZoomControl ? view : 0;
+    mModel = model ? model->findBaseModelWithInterface<KDE::If::Zoomable*>() : 0;
+    mZoomControl = mModel ? qobject_cast<KDE::If::Zoomable *>( mModel ) : 0;
 
     if( mZoomControl )
     {
         mZoomLevel = mZoomControl->zoomLevel();
-        connect( mZoomObject, SIGNAL(zoomLevelChanged( double )), SLOT(onmZoomLevelChange( double )) );
+        connect( mModel, SIGNAL(zoomLevelChanged( double )), SLOT(onmZoomLevelChange( double )) );
     }
 
     const bool hasView = ( mZoomControl != 0 );

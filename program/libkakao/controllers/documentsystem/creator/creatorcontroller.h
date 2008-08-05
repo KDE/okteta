@@ -25,13 +25,13 @@
 
 
 // lib
-#include <kviewcontroller.h>
+#include <abstractxmlguicontroller.h>
 
 class KXMLGUIClient;
 class KDocumentCreateManager;
 
 
-class CreatorController : public KViewController
+class CreatorController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
@@ -39,8 +39,8 @@ class CreatorController : public KViewController
     CreatorController( KDocumentCreateManager* createManager, KXMLGUIClient* guiClient );
     ~CreatorController();
 
-  public: // KViewController API
-    virtual void setView( KAbstractView *view );
+  public: // AbstractXmlGuiController API
+    virtual void setTargetModel( AbstractModel* model );
 
   public Q_SLOTS:
     void createNew();

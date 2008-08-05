@@ -25,9 +25,7 @@
 
 
 // lib
-#include <kviewcontroller.h>
-// KDE
-#include <KUrl>
+#include <abstractxmlguicontroller.h>
 
 class KDocumentManager;
 class KAbstractDocument;
@@ -35,15 +33,15 @@ class KAction;
 class KXMLGUIClient;
 
 
-class CloseController : public KViewController
+class CloseController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
   public:
     CloseController( KDocumentManager* documentManager, KXMLGUIClient* guiClient );
 
-  public: // KViewController API
-    virtual void setView( KAbstractView *view );
+  public: // AbstractXmlGuiController API
+    virtual void setTargetModel( AbstractModel* model );
 
   protected Q_SLOTS:
     void close();

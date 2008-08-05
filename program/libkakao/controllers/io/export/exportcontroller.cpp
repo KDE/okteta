@@ -24,7 +24,6 @@
 #include "exportcontroller.h"
 
 // lib
-#include <kabstractview.h>
 #include <kidataselectable.h>
 // Kakao core
 #include <kdocumentmanager.h>
@@ -42,26 +41,24 @@
 static const char ExportActionListId[] = "export_list";
 
 ExportController::ExportController( KDocumentManager* documentManager, KXMLGUIClient* guiClient )
- : mDocumentManager( documentManager ), mGuiClient( guiClient ), mView( 0 )
+ : mDocumentManager( documentManager ), mGuiClient( guiClient ), mModel( 0 )
 {
     mExportActionGroup = new QActionGroup( this ); // TODO: do we use this only for the signal mapping?
     connect( mExportActionGroup, SIGNAL(triggered( QAction* )), SLOT(onActionTriggered( QAction* )) );
 
-    setView( 0 );
+    setTargetModel( 0 );
 }
 
-void ExportController::setView( KAbstractView *view )
+void ExportController::setTargetModel( AbstractModel* model )
 {
-    mView = view;
+    if( mModel ) mModel->disconnect( mExportActionGroup );
 
-    if( mView ) mView->disconnect( mExportActionGroup );
-
-    mView = view;
-    mSelectionControl = view ? qobject_cast<KDE::If::DataSelectable *>( view ) : 0;
+    mModel = model ? model->findBaseModelWithInterface<KDE::If::DataSelectable*>() : 0;
+    mSelectionControl = mModel ? qobject_cast<KDE::If::DataSelectable *>( mModel ) : 0;
 
     if( mSelectionControl )
     {
-        connect( mView, SIGNAL(hasSelectedDataChanged( bool )), SLOT(updateActions()) );
+        connect( mModel, SIGNAL(hasSelectedDataChanged( bool )), SLOT(updateActions()) );
     }
 
     updateActions();
@@ -78,7 +75,7 @@ void ExportController::updateActions()
     const AbstractModelSelection *selection = ( mSelectionControl != 0 ) ? mSelectionControl->selection() : 0;
 
     const QList<AbstractModelExporter*> exporterList =
-        mDocumentManager->codecManager()->exporterList( mView, selection );
+        mDocumentManager->codecManager()->exporterList( mModel, selection );
     const bool hasExporters = ( exporterList.size() > 0 );
 
     if( hasExporters )
@@ -109,5 +106,5 @@ void ExportController::onActionTriggered( QAction *action )
 
     const AbstractModelSelection *selection = ( mSelectionControl != 0 ) ? mSelectionControl->selection() : 0;
 
-    mDocumentManager->codecManager()->exportDocument( exporter, mView, selection );
+    mDocumentManager->codecManager()->exportDocument( exporter, mModel, selection );
 }
