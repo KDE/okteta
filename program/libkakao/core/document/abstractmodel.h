@@ -41,6 +41,18 @@ class AbstractModel : public QObject
   public:
 // TODO: just one baseModel, or can there be multiple? Better name?
     AbstractModel* baseModel() const;
+    /**
+     * returns the first baseModel which is of type T, or null if none is found.
+     * The search is started with the model itself
+     */
+    template <typename T>
+    T findBaseModel() const;
+    /**
+     * returns the first baseModel which is of type T, or null if none is found.
+     * The search is started with the model itself
+     */
+    template <typename T>
+    AbstractModel* findBaseModelWithInterface() const;
 
   public: // API to be implemented
     virtual QString title() const = 0;
@@ -65,5 +77,38 @@ class AbstractModel : public QObject
     class Private;
     Private * const d;
 };
+
+
+template <typename T>
+T AbstractModel::findBaseModel() const
+{
+    AbstractModel* model = const_cast<AbstractModel*>( this );
+    do
+    {
+        T castedModel = qobject_cast<T>(model);
+        if( castedModel )
+            return castedModel;
+        model = model->baseModel();
+    }
+    while( model );
+
+    return 0;
+}
+
+template <typename T>
+AbstractModel* AbstractModel::findBaseModelWithInterface() const
+{
+    AbstractModel* model = const_cast<AbstractModel*>( this );
+    do
+    {
+        T interface = qobject_cast<T>(model);
+        if( interface )
+            return model;
+        model = model->baseModel();
+    }
+    while( model );
+
+    return 0;
+}
 
 #endif
