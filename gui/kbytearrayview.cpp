@@ -1921,10 +1921,10 @@ void KByteArrayView::autoScrollTimerDone()
 void KByteArrayView::handleMouseMove( const QPoint &point ) // handles the move of the mouse with pressed buttons
 {
     // no scrolltimer and outside of viewport?
-    if( !mScrollTimer->isActive() && point.y() < yOffset() || point.y() > yOffset() + visibleHeight() )
+    if( !mScrollTimer->isActive() && (point.y()<yOffset() || yOffset()+visibleHeight()<=point.y()) )
         mScrollTimer->start( DefaultScrollTimerPeriod );
     // scrolltimer but inside of viewport?
-    else if( mScrollTimer->isActive() && point.y() >= yOffset() && point.y() <= yOffset() + visibleHeight() )
+    else if( mScrollTimer->isActive() && (yOffset() <= point.y() && point.y() < yOffset()+visibleHeight()) )
         mScrollTimer->stop();
 
     pauseCursor();
