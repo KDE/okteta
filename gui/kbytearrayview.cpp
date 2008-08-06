@@ -1175,6 +1175,7 @@ void KByteArrayView::onBookmarksChange( const QList<KHECore::KBookmark> &bookmar
 
 void KByteArrayView::onRevertedToVersionIndex( int versionIndex )
 {
+Q_UNUSED( versionIndex )
     mValueEditor->finishEdit();
 }
 
