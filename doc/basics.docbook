@@ -5,9 +5,8 @@
 <title>Starting &kappname;</title>
 
     <para>Type <userinput><command>okteta</command></userinput> at a command
-    prompt or select <guimenuitem>Binary Editor</guimenuitem> from the
-    <guisubmenu>Utilities</guisubmenu> group in the <guimenu>KDE start
-    menu</guimenu>.</para>
+    prompt or select <guimenuitem>Hex Editor</guimenuitem> from the
+    <menuchoice><guisubmenu>Applications</guisubmenu><guisubmenu>Utilities</guisubmenu></menuchoice> group in the &kmenu;.</para>
 
     <para>The standard &Qt; and &kde; command line
     options are available, and can be listed by entering
@@ -15,8 +14,8 @@
 
     <para>Command line options specific to &kappname; are:</para>
 
-    <para><option><replaceable>&lt;URL(s)&gt;</replaceable></option> - open
-    file(s) from the specified URL(s)</para> 
+    <para><option><replaceable>&lt;&URL;(s)&gt;</replaceable></option> - open
+    file(s) from the specified &URL;(s)</para> 
 
 <!--<para><option>- -offset</option>
 <replaceable>&lt;offset&gt;</replaceable> jump to position
@@ -27,8 +26,7 @@
 <title>Usage</title>
 
     <para>The main &kappname; window has the following components:
-    menu bar, toolbar, data view, sidebar with tools and
-    status bar. </para>
+    a menu bar, a toolbar, a data view and a sidebar with tools.</para>
 
     <para>When a file is opened or a new byte array is created, the bytes are
     displayed in the traditional view with two columns: one with the numeric
@@ -40,6 +38,10 @@
     the current position. Pressing the <keycap>Insert</keycap> key toggles between
     overwrite and insert modes. All operations can be done both in the
     value column and the character column.</para>
+
+    <note><para>&okteta; displays two linked cursors in the byte column and in the character column.
+    Depending on the active column, indicated by a blinking cursor, you can enter
+    only characters in the character column and byte values in the byte column.</para></note>
 
     <para>The search dialog allows the user to search for a specific string of,
     bytes, definable as hexadecimal, decimal, octal, binary, or text.</para>
