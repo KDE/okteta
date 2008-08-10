@@ -82,7 +82,7 @@ void ZoomController::setTargetModel( AbstractModel* model )
     if( mZoomControl )
     {
         mZoomLevel = mZoomControl->zoomLevel();
-        connect( mModel, SIGNAL(zoomLevelChanged( double )), SLOT(onmZoomLevelChange( double )) );
+        connect( mModel, SIGNAL(zoomLevelChanged( double )), SLOT(onZoomLevelChange( double )) );
     }
 
     const bool hasView = ( mZoomControl != 0 );
