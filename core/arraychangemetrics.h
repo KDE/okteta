@@ -42,6 +42,9 @@ class OKTETACORE_EXPORT ArrayChangeMetrics
     static ArrayChangeMetrics asReplacement( int offset, int removeLength, int insertLength );
     static ArrayChangeMetrics asSwapping( int firstOffset, int secondOffset, int secondLength );
 
+  public:
+    ArrayChangeMetrics();
+
   protected:
     ArrayChangeMetrics( Type type, int offset, int secondArgument, int thirdArgument );
 
@@ -98,7 +101,7 @@ inline ArrayChangeMetrics ArrayChangeMetrics::asSwapping( int firstOffset, int s
 inline ArrayChangeMetrics::ArrayChangeMetrics( Type type, int offset, int secondArgument, int thirdArgument )
  : mType( type ), mOffset( offset ), mSecondArgument( secondArgument ), mThirdArgument( thirdArgument )
 {}
-// inline ArrayChangeMetrics::ArrayChangeMetrics() : mOffset( InvalidOffset ), mRemoveLength( 0 ), mInsertLength( 0 ) {}
+inline ArrayChangeMetrics::ArrayChangeMetrics() : mOffset( InvalidOffset ), mRemoveLength( 0 ), mInsertLength( 0 ) {}
 inline bool ArrayChangeMetrics::operator==( const ArrayChangeMetrics &other ) const
 { return mType == other.mType
          && mOffset == other.mOffset
