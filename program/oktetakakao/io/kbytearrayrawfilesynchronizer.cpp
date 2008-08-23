@@ -49,6 +49,7 @@ KByteArrayRawFileSynchronizer::KByteArrayRawFileSynchronizer()
 
 KAbstractDocument *KByteArrayRawFileSynchronizer::document() const { return mDocument; }
 
+void KByteArrayRawFileSynchronizer::startOffering( KAbstractDocument* document ) { Q_UNUSED(document) }
 
 AbstractLoadJob *KByteArrayRawFileSynchronizer::startLoad( const KUrl &url )
 {
