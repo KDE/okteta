@@ -1,0 +1,17 @@
+libprocessdocuments
+===================
+part of the KDE project.
+
+Copyright: 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+
+Author/Maintainer: Friedrich W. H. Kossebau <kossebau@kde.org>
+
+
+description:
+-----------
+libprocessdocuments is an enviroment to manage document(adaptor)s to which other
+documents can load from or connect to resp. synchronize with. All documents live
+in the same process.
+
+This lib is currently used to test the model-connection concept of libkakao without
+the added problems of IPC.
