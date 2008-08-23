@@ -34,6 +34,8 @@ Q_UNUSED( other )
     return false;
 }
 
+int AbstractPieceTableChange::storageOffset() const { return -1; }
+
 int AbstractPieceTableChange::dataSize() const { return 0; }
 
 }

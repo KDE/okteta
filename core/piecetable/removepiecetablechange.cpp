@@ -42,6 +42,8 @@ QString RemovePieceTableChange::description() const
 
 bool RemovePieceTableChange::merge( const AbstractPieceTableChange *other )
 {
+// TODO: remove me again after synching solved
+return false;
     bool result = false;
     if( other->type() == RemoveId )
     {

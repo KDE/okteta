@@ -63,6 +63,9 @@ class AbstractPieceTableChange
 
     virtual QString description() const = 0;
 
+    /// returns the storageOffset. Default returns -1.
+    virtual int storageOffset() const;
+
     /// returns true if successful, false otherwise. Default returns false.
     virtual bool merge( const AbstractPieceTableChange *other );
 
