@@ -5,6 +5,7 @@ include_directories(
   ../../libkakao/core/document
   ../../libkakao/core/io
   ../../libkakao/gui/view
+  ../../libprocessdocuments
   ../document
   ../view
 )
@@ -19,6 +20,14 @@ set( OKTETA_TEXTRENDERER_SRCS
   bytearrayviewtextrenderer/abstractbytearraycolumntextrenderer.cpp
   bytearrayviewtextrenderer/valuebytearraycolumntextrenderer.cpp
   bytearrayviewtextrenderer/charbytearraycolumntextrenderer.cpp
+)
+
+set( OKTETA_PROCESS_IO_SRCS
+  process/processbytearrayadaptor.cpp
+#   process/bytearrayprocessconnectjob.cpp
+  process/bytearrayprocessloadjob.cpp
+  process/bytearrayprocessbytearraysynchronizer.cpp
+  process/bytearrayprocessbytearraysynchronizerfactory.cpp
 )
 
 set( OKTETA_KAKAO_IO_SRCS
@@ -38,6 +47,7 @@ set( OKTETA_KAKAO_IO_SRCS
   bytearrayrawfilewritetojob.cpp
   kbytearrayrawfilesynchronizer.cpp
   kbytearrayrawfilesynchronizerfactory.cpp
+  ${OKTETA_PROCESS_IO_SRCS}
 )
 
 kde4_add_library( okteta_kakaoio STATIC ${OKTETA_KAKAO_IO_SRCS} )
