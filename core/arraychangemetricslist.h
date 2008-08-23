@@ -40,23 +40,24 @@ class ArrayChangeMetricsList : public QList<ArrayChangeMetrics>
 
   public:
     ArrayChangeMetricsList();
+    explicit ArrayChangeMetricsList( const ArrayChangeMetrics& metrics );
 };
 
 inline ArrayChangeMetricsList ArrayChangeMetricsList::oneReplacement( int offset, int removeLength, int insertLength )
 {
-    ArrayChangeMetricsList list;
-    list.append( ArrayChangeMetrics::asReplacement(offset,removeLength,insertLength) );
-    return list;
+    return ArrayChangeMetricsList( ArrayChangeMetrics::asReplacement(offset,removeLength,insertLength) );
 }
 
 inline ArrayChangeMetricsList ArrayChangeMetricsList::oneSwapping( int firstOffset, int secondOffset, int secondLength )
 {
-    ArrayChangeMetricsList list;
-    list.append( ArrayChangeMetrics::asSwapping(firstOffset,secondOffset,secondLength) );
-    return list;
+    return ArrayChangeMetricsList( ArrayChangeMetrics::asSwapping(firstOffset,secondOffset,secondLength) );
 }
 
 inline ArrayChangeMetricsList::ArrayChangeMetricsList() {}
+inline ArrayChangeMetricsList::ArrayChangeMetricsList( const ArrayChangeMetrics& metrics )
+{
+    append( metrics );
+}
 
 }
 
