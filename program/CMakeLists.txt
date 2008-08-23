@@ -1,5 +1,6 @@
 project( oktetaprogram )
 
+add_subdirectory( libprocessdocuments )
 add_subdirectory( libkakao )
 add_subdirectory( oktetakakao )
 
@@ -40,6 +41,7 @@ target_link_libraries( okteta
   kakaocore
   oktetagui
   oktetacore
+  processdocuments
   ${KDE4_KIO_LIBS}
 )
 
