@@ -52,7 +52,9 @@
 #include <document/readonly/readonlycontroller.h>
 #include <documentsystem/creator/creatorcontroller.h>
 #include <documentsystem/loader/loadercontroller.h>
+#include <documentsystem/connector/connectorcontroller.h>
 #include <documentsystem/close/closecontroller.h>
+#include <io/offer/offercontroller.h>
 #include <io/setremote/setremotecontroller.h>
 #include <io/synchronize/synchronizecontroller.h>
 #include <io/clipboard/clipboardcontroller.h>
@@ -112,9 +114,11 @@ void OktetaMainWindow::setupControllers()
 {
     addXmlGuiController( new CreatorController(mProgram->documentManager()->createManager(),this) );
     addXmlGuiController( new LoaderController(mProgram->documentManager()->syncManager(),this) );
+    addXmlGuiController( new ConnectorController(mProgram->documentManager()->syncManager(),this) );
     addXmlGuiController( new SetRemoteController(mProgram->documentManager()->syncManager(),this) );
     addXmlGuiController( new SynchronizeController(this) );
     addXmlGuiController( new CloseController(mProgram->documentManager(),this) );
+    addXmlGuiController( new OfferController(mProgram->documentManager()->syncManager(),this) );
     addXmlGuiController( new VersionController(this) );
     addXmlGuiController( new ReadOnlyController(this) );
     addXmlGuiController( new FullScreenController(this) );
