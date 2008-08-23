@@ -25,6 +25,9 @@ set( CREATORCONTROLLER_SRCS
 set( LOADERCONTROLLER_SRCS
   documentsystem/loader/loadercontroller.cpp
 )
+set( CONNECTORCONTROLLER_SRCS
+  documentsystem/connector/connectorcontroller.cpp
+)
 set( CLOSECONTROLLER_SRCS
   documentsystem/close/closecontroller.cpp
 )
@@ -88,6 +91,7 @@ set( KAKAO_CONTROLLERS_SRCS
   ${OFFERCONTROLLER_SRCS}
   ${CREATORCONTROLLER_SRCS}
   ${LOADERCONTROLLER_SRCS}
+  ${CONNECTORCONTROLLER_SRCS}
   ${SYNCHRONIZECONTROLLER_SRCS}
   ${SELECTCONTROLLER_SRCS}
   ${CLIPBOARDCONTROLLER_SRCS}
