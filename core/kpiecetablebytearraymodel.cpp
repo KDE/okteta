@@ -146,11 +146,26 @@ void KPieceTableByteArrayModel::closeGroupedChange( const QString &description )
     d->closeGroupedChange( description );
 }
 
+QList<ByteArrayChange> KPieceTableByteArrayModel::changes( int firstVersionIndex, int lastVersionIndex ) const
+{
+    return d->changes( firstVersionIndex, lastVersionIndex );
+}
+
+QByteArray KPieceTableByteArrayModel::initialData() const
+{
+    return d->initialData();
+}
+
+void KPieceTableByteArrayModel::doChanges( const QList<KHECore::ByteArrayChange>& changes,
+                                           int oldVersionIndex, int newVersionIndex )
+{
+    return d->doChanges( changes, oldVersionIndex, newVersionIndex );
+}
+
+
 KPieceTableByteArrayModel::~KPieceTableByteArrayModel()
 {
     delete d;
 }
 
 }
-
-#include "kpiecetablebytearraymodel.moc"

@@ -25,16 +25,15 @@
 
 // lib
 #include "kpiecetablebytearraymodel.h"
+#include "changesdatastorage.h"
 // piecetable
 #include "piecetable/revertablepiecetable.h"
-// Qt
-#include <QtCore/QByteArray>
 
 
 namespace KHECore
 {
 
-/** base class for all mData buffers that are used to display
+/** base class for all mInitialData buffers that are used to display
   * TODO: think about a way to inform KHexEdit that there has been
   * a change in the buffer outside. what kind of changes are possible?
   *@author Friedrich W. H. Kossebau
@@ -86,6 +85,12 @@ class KPieceTableByteArrayModel::Private
     void cancelGroupedChange();
     void closeGroupedChange( const QString &description );
 
+  public: // ChangeHistory API
+    QList<ByteArrayChange> changes( int firstVersionIndex, int lastVersionIndex ) const;
+    QByteArray initialData() const;
+    void doChanges( const QList<KHECore::ByteArrayChange>& changes,
+                    int oldVersionIndex, int newVersionIndex );
+
   public:
     void setData( const char *data, unsigned int size, bool careForMemory = true );
 
@@ -96,9 +101,10 @@ class KPieceTableByteArrayModel::Private
     /** */
     bool mAutoDelete:1;
 
-    const char *mData;
+    const char *mInitialData;
+    int mInitialSize;
     KPieceTable::RevertablePieceTable mPieceTable;
-    QByteArray mChangeByteArray;
+    ChangesDataStorage mChangesDataStorage;
     /** */
     KBookmarkList mBookmarks;
     /** temporary workaround for cancelling groups. If -1 no group is opened. */
