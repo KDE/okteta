@@ -4,6 +4,8 @@ include_directories(
   document
   io
   system
+  # TODO: hack, remove me!
+  ../../libprocessdocuments
 )
 
 if(KDE4_BUILD_TESTS)

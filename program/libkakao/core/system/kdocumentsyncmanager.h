@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -44,9 +44,12 @@ class KDocumentSyncManager : public QObject
   public:
     void load( const KUrl &url );
     void load();
+    void connectTo();
 // TODO: better name
     bool setSynchronizer( KAbstractDocument *document );
     bool canClose( KAbstractDocument *document );
+    void startOffering( KAbstractDocument* document );
+    void finishOffering( KAbstractDocument* document );
 
   public:
     bool hasSynchronizerForLocal( const QString &mimeType ) const;
@@ -54,6 +57,7 @@ class KDocumentSyncManager : public QObject
 
   public:
     void setDocumentSynchronizerFactory( AbstractModelSynchronizerFactory* synchronizerFactory );
+    void setDocumentLiveSynchronizerFactory( AbstractModelSynchronizerFactory* synchronizerFactory );
     void setWidget( QWidget *widget );
 
   Q_SIGNALS:
@@ -70,6 +74,7 @@ class KDocumentSyncManager : public QObject
 
     // temporary hack: hard coded factories for byte arrays
     AbstractModelSynchronizerFactory* mSynchronizerFactory;
+    AbstractModelSynchronizerFactory* mLiveSynchronizerFactory;
 };
 
 #endif

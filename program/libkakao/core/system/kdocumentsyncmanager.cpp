@@ -30,6 +30,8 @@
 #include <abstractsynctoremotejob.h>
 #include <abstractsyncwithremotejob.h>
 #include <abstractmodelsynchronizerfactory.h>
+// documentaccess
+#include <processdocumentconnectdialog.h>
 // KDE
 #include <KIO/NetAccess>
 #include <KFileDialog>
@@ -66,6 +68,11 @@ KUrl KDocumentSyncManager::urlOf( KAbstractDocument *document ) const
 void KDocumentSyncManager::setDocumentSynchronizerFactory( AbstractModelSynchronizerFactory* synchronizerFactory )
 {
     mSynchronizerFactory = synchronizerFactory;
+}
+
+void KDocumentSyncManager::setDocumentLiveSynchronizerFactory( AbstractModelSynchronizerFactory* synchronizerFactory )
+{
+    mLiveSynchronizerFactory = synchronizerFactory;
 }
 
 void KDocumentSyncManager::load()
@@ -231,6 +238,39 @@ bool KDocumentSyncManager::canClose( KAbstractDocument *document )
     }
 
     return canClose;
+}
+
+void KDocumentSyncManager::startOffering( KAbstractDocument* document )
+{
+    AbstractModelSynchronizer* synchronizer = mLiveSynchronizerFactory->createSynchronizer();
+
+    synchronizer->startOffering( document );
+    //TODO: turn this into a job
+}
+
+void KDocumentSyncManager::finishOffering( KAbstractDocument* document )
+{
+    document->setLiveSynchronizer( 0 );
+}
+
+void KDocumentSyncManager::connectTo()
+{
+    ProcessDocumentConnectDialog* dialog = new ProcessDocumentConnectDialog( mWidget );
+
+    if( dialog->exec() )
+    {
+        const KUrl url = dialog->getUrl();
+        AbstractModelSynchronizer* synchronizer = mLiveSynchronizerFactory->createSynchronizer();
+        AbstractLoadJob* loadJob = synchronizer->startLoad( url );
+        connect( loadJob, SIGNAL(documentLoaded( KAbstractDocument * )), SLOT(onDocumentLoaded( KAbstractDocument * )) );
+        JobManager::executeJob( loadJob, mWidget );
+
+//         load( url );
+        // store path
+//         mWorkingUrl = url.upUrl();
+//         emit urlUsed( url );
+    }
+    delete dialog;
 }
 
 KDocumentSyncManager::~KDocumentSyncManager()

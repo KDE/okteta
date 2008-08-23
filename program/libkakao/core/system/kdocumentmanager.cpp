@@ -33,6 +33,9 @@
 #include "kdocumentsyncmanager.h"
 #include "modelcodecmanager.h"
 
+static int lastDocumentId = 0;
+
+
 KDocumentManager::KDocumentManager()
  : mCreateManager( new KDocumentCreateManager(this) ),
    mSyncManager( new KDocumentSyncManager(this) ),
@@ -52,6 +55,7 @@ QStringList KDocumentManager::urls() const
 void KDocumentManager::addDocument( KAbstractDocument *document )
 {
     // TODO: check for double insert
+    document->setId( QString::number(++lastDocumentId) );
     mList.append( document );
     // TODO: only emit if document was not included before
     emit added( document );
