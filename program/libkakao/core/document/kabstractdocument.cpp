@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -32,14 +32,24 @@ class KAbstractDocument::Private
       explicit Private( KAbstractDocument *parent );
       ~Private();
   public:
+    void setId( const QString& id );
+    QString id() const;
     void setSynchronizer( AbstractModelSynchronizer *synchronizer );
+    void setLiveSynchronizer( AbstractModelSynchronizer* synchronizer );
     AbstractModelSynchronizer *synchronizer() const;
+    AbstractModelSynchronizer* liveSynchronizer() const;
   protected:
-     KAbstractDocument *d;
-     AbstractModelSynchronizer *mSynchronizer; // TODO: should this be here, with public setters and getters?
+    KAbstractDocument *d;
+    QString mId;
+    AbstractModelSynchronizer *mSynchronizer; // TODO: should this be here, with public setters and getters?
+    AbstractModelSynchronizer* mLiveSynchronizer; // TODO: should this be here, with public setters and getters?
 };
 
-inline KAbstractDocument::Private::Private( KAbstractDocument *parent ) : d( parent ), mSynchronizer( 0 ) {}
+inline KAbstractDocument::Private::Private( KAbstractDocument *parent )
+: d( parent ), mSynchronizer( 0 ), mLiveSynchronizer( 0 ) {}
+inline QString KAbstractDocument::Private::id() const { return mId; }
+inline void KAbstractDocument::Private::setId( const QString& id ) { mId = id; }
+
 inline AbstractModelSynchronizer *KAbstractDocument::Private::synchronizer() const { return mSynchronizer; }
 inline void KAbstractDocument::Private::setSynchronizer( AbstractModelSynchronizer *synchronizer )
 {
@@ -51,7 +61,22 @@ inline void KAbstractDocument::Private::setSynchronizer( AbstractModelSynchroniz
     mSynchronizer = synchronizer;
     emit d->synchronizerChanged( synchronizer );
 }
-inline KAbstractDocument::Private::~Private() { delete mSynchronizer; }
+inline AbstractModelSynchronizer* KAbstractDocument::Private::liveSynchronizer() const { return mLiveSynchronizer; }
+inline void KAbstractDocument::Private::setLiveSynchronizer( AbstractModelSynchronizer* synchronizer )
+{
+    // plugging the same more than once?
+    if( mLiveSynchronizer == synchronizer )
+        return;
+
+    delete mLiveSynchronizer;
+    mLiveSynchronizer = synchronizer;
+    emit d->liveSynchronizerChanged( synchronizer );
+}
+inline KAbstractDocument::Private::~Private()
+{
+    delete mSynchronizer;
+    delete mLiveSynchronizer;
+}
 
 
 
@@ -59,8 +84,13 @@ KAbstractDocument::KAbstractDocument()
  : d( new Private(this) )
 {}
 
+QString KAbstractDocument::id() const { return d->id(); }
 AbstractModelSynchronizer *KAbstractDocument::synchronizer() const { return d->synchronizer(); }
+AbstractModelSynchronizer* KAbstractDocument::liveSynchronizer() const { return d->liveSynchronizer(); }
+
+void KAbstractDocument::setId( const QString& id ) { d->setId(id); }
 void KAbstractDocument::setSynchronizer( AbstractModelSynchronizer *synchronizer ) { d->setSynchronizer(synchronizer); }
+void KAbstractDocument::setLiveSynchronizer( AbstractModelSynchronizer* synchronizer ) { d->setLiveSynchronizer(synchronizer); }
 
 bool KAbstractDocument::hasLocalChanges() const { return synchronizationStates().testFlag(LocalHasChanges) ; }
 

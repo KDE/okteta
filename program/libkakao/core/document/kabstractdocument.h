@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -40,6 +40,7 @@ class KAbstractDocument : public AbstractModel
     Q_FLAGS( SynchronizationStates SynchronizationState )
 
   friend class AbstractModelSynchronizer;
+  friend class KDocumentManager;
 
   public:
     //TODO: some things are a tristate, is it the right thing to embed them here?
@@ -70,16 +71,23 @@ class KAbstractDocument : public AbstractModel
 
   public:
     void setSynchronizer( AbstractModelSynchronizer *synchronizer );
+    void setLiveSynchronizer( AbstractModelSynchronizer* synchronizer );
 
   public: // helper or basic?
     bool hasLocalChanges() const;
     AbstractModelSynchronizer *synchronizer() const;
+    AbstractModelSynchronizer* liveSynchronizer() const;
+    QString id() const;
 
   Q_SIGNALS:
     // TODO: should be signal the diff? how to say then remote is in synch again?
     // could be done by pairs of flags instead of notset = isnot
     void modified( KAbstractDocument::SynchronizationStates newStates );
     void synchronizerChanged( AbstractModelSynchronizer *newSynchronizer );
+    void liveSynchronizerChanged( AbstractModelSynchronizer* newSynchronizer );
+
+  protected:
+    void setId( const QString& id );
 
   protected:
     class Private;
