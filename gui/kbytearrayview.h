@@ -469,8 +469,6 @@ class OKTETAGUI_EXPORT KByteArrayView : public ColumnsView
 
     void onByteArrayReadOnlyChange( bool isByteArrayReadOnly );
     void onContentsChanged( const KHE::ArrayChangeMetricsList &changeList );
-    void updateRange( int Start, int End );
-    void updateRange( const KHE::KSectionList &list );
     void onBookmarksChange( const QList<KHECore::KBookmark> &bookmarks );
     void onRevertedToVersionIndex( int versionIndex );
 

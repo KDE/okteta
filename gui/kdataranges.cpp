@@ -306,19 +306,31 @@ void KDataRanges::setFirstWordSelection( const KHE::KSection &Section )
  }
 
 
-void KDataRanges::adaptSelectionToChanges( const KHE::ArrayChangeMetricsList &changeList )
+void KDataRanges::adaptToChanges( const KHE::ArrayChangeMetricsList& changeList )
 {
-    if( !mSelection.isValid() )
-        return;
-
-    for( int i=0; i<changeList.size(); ++i )
+    foreach( const KHE::ArrayChangeMetrics& change, changeList )
     {
-        const KHE::ArrayChangeMetrics &change = changeList[i];
         //TODO: change parameters to ArrayChangeMetrics
-        if( change.type() == KHE::ArrayChangeMetrics::Replacement )
-            mSelection.adaptToReplacement( change.offset(), change.removeLength(), change.insertLength() );
-        else if( change.type() == KHE::ArrayChangeMetrics::Swapping )
-            mSelection.adaptToSwap( change.offset(), change.secondStart(), change.secondLength() );
+        switch( change.type() )
+        {
+        case KHE::ArrayChangeMetrics::Replacement:
+        {
+            const int diff = change.lengthChange();
+            const int last = (diff == 0) ? change.insertLength() : Layout->length() + qAbs(diff);
+            addChangedRange( change.offset(), last );
+
+            if( mSelection.isValid() )
+                mSelection.adaptToReplacement( change.offset(), change.removeLength(), change.insertLength() );
+            break;
+        }
+        case KHE::ArrayChangeMetrics::Swapping:
+            addChangedRange( change.offset(), change.secondEnd() );
+
+            if( mSelection.isValid() )
+                mSelection.adaptToSwap( change.offset(), change.secondStart(), change.secondLength() );
+        default:
+            ;
+        }
     }
 }
 
