@@ -367,7 +367,7 @@ void KPieceTableByteArrayModel::Private::beginChanges()
 void KPieceTableByteArrayModel::Private::endChanges()
 {
     const int currentVersionIndex = versionIndex();
-    const bool newChange = ( mBeforeChangesVersionIndex == currentVersionIndex );
+    const bool newChange = ( mBeforeChangesVersionIndex != currentVersionIndex );
     const bool currentIsModified = isModified();
     const bool modificationChanged = ( mBeforeChangesModified == currentIsModified );
 
