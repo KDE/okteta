@@ -90,7 +90,7 @@ int KByteArrayDocument::versionCount() const { return mByteArray->versionCount()
 KDocumentVersionData KByteArrayDocument::versionData( int versionIndex ) const
 {
     const QString changeComment = ( versionIndex == 0 ) ? mInitDescription : mByteArray->versionDescription(versionIndex);
-    return KDocumentVersionData( 0, changeComment );
+    return KDocumentVersionData( versionIndex, changeComment );
 }
 
 void KByteArrayDocument::revertToVersionByIndex( int versionIndex ) { mByteArray->revertToVersionByIndex( versionIndex ); }
@@ -102,7 +102,7 @@ void KByteArrayDocument::onModelModification( bool newState )
 
 void KByteArrayDocument::onHeadVersionDescriptionChanged( const QString &newDescription )
 {
-    const KDocumentVersionData data( 0, newDescription );
+    const KDocumentVersionData data( mByteArray->versionIndex(), newDescription );
     emit headVersionDataChanged( data );
 }
 
@@ -110,5 +110,3 @@ KByteArrayDocument::~KByteArrayDocument()
 {
     delete mByteArray;
 }
-
-#include "kbytearraydocument.moc"
