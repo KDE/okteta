@@ -49,17 +49,27 @@ class ProcessByteArrayAdaptor : public AbstractProcessDocument
 
   public:
     QByteArray baseData() const;
+    int versionCount() const;
 
   public:
     QList<KHECore::ByteArrayChange> changes( int firstVersionIndex, int lastVersionIndex ) const;
 
+  public: // set/action
+    void revertToVersionByIndex( int versionIndex );
+
   public Q_SLOTS:
     void onChangesDone( const QList<KHECore::ByteArrayChange>& changes,
                         int oldVersionIndex, int newVersionIndex );
+    void onRevertedToVersionIndex( int versionIndex );
+//     void onHeadVersionDescriptionChanged( const QString& versionDescription );
+//     void onHeadVersionChanged( int newHeadVersionIndex );
 
   Q_SIGNALS:
     void changesDone( const QList<KHECore::ByteArrayChange>& changes,
                       int oldVersionIndex, int newVersionIndex );
+    void revertedToVersionIndex( int versionIndex );
+//     void headVersionDescriptionChanged( const QString& versionDescription );
+//     void headVersionChanged( int newHeadVersionIndex );
 
   protected:
     KByteArrayDocument* mByteArrayDocument;

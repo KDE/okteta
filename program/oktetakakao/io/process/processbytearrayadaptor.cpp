@@ -26,6 +26,7 @@
 #include <kbytearraydocument.h>
 // Okteta core
 #include <changehistory.h>
+#include <kversionable.h>
 #include <kabstractbytearraymodel.h>
 // Qt
 #include <QtCore/QByteArray>
@@ -34,13 +35,20 @@
 ProcessByteArrayAdaptor::ProcessByteArrayAdaptor( KByteArrayDocument* byteArrayDocument )
  : mByteArrayDocument( byteArrayDocument )
 {
-    connect( mByteArrayDocument->content(), SIGNAL(changesDone( const QList<KHECore::ByteArrayChange>&, int, int )),
-             SIGNAL(changesDone( const QList<KHECore::ByteArrayChange>&, int, int )) );
+    KHECore::KAbstractByteArrayModel* byteArrayModel = mByteArrayDocument ? mByteArrayDocument->content() : 0;
+    if( byteArrayModel )
+    {
+        connect( byteArrayModel, SIGNAL(changesDone( const QList<KHECore::ByteArrayChange>&, int, int )),
+                 SIGNAL(changesDone( const QList<KHECore::ByteArrayChange>&, int, int )) );
+        connect( byteArrayModel, SIGNAL(revertedToVersionIndex( int )),
+                 SIGNAL(revertedToVersionIndex( int )) );
+    }
 }
 
 QString ProcessByteArrayAdaptor::title() const { return mByteArrayDocument->title(); }
 QString ProcessByteArrayAdaptor::id()    const { return mByteArrayDocument->id(); }
 int ProcessByteArrayAdaptor::versionIndex() const { return mByteArrayDocument->versionIndex(); }
+int ProcessByteArrayAdaptor::versionCount() const { return mByteArrayDocument->versionCount(); }
 
 QList<KHECore::ByteArrayChange> ProcessByteArrayAdaptor::changes( int firstVersionIndex, int lastVersionIndex ) const
 {
@@ -61,6 +69,14 @@ void ProcessByteArrayAdaptor::onChangesDone( const QList<KHECore::ByteArrayChang
         changeHistory->doChanges( changes, oldVersionIndex, newVersionIndex );
 }
 
+void ProcessByteArrayAdaptor::onRevertedToVersionIndex( int versionIndex )
+{
+    KHECore::KAbstractByteArrayModel* byteArrayModel = mByteArrayDocument ? mByteArrayDocument->content() : 0;
+    KHECore::Versionable* versionable =
+        byteArrayModel ? qobject_cast<KHECore::Versionable*>( byteArrayModel ) : 0;
+    if( versionable )
+        versionable->revertToVersionByIndex( versionIndex );
+}
 
 QByteArray ProcessByteArrayAdaptor::baseData() const
 {

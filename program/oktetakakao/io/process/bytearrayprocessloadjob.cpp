@@ -59,16 +59,18 @@ void ByteArrayProcessLoadJob::loadProcessByteArrayObject()
 
     if( remoteAdaptor )
     {
-        const int versionIndex = remoteAdaptor->versionIndex();
+        const int currentVersionIndex = remoteAdaptor->versionIndex();
+        const int lastVersionIndex = remoteAdaptor->versionCount() - 1;
         const QByteArray data = remoteAdaptor->baseData();
         KHECore::KPieceTableByteArrayModel* byteArrayModel =
             new KHECore::KPieceTableByteArrayModel( data.constData(), data.size(), false );
 
         const QList<KHECore::ByteArrayChange> changes =
-            remoteAdaptor->changes( 0, versionIndex );
-        byteArrayModel->doChanges( changes, 0, versionIndex );
+            remoteAdaptor->changes( 0, lastVersionIndex ); // TODO: 0, -1 as default values, -1 means till end
+        byteArrayModel->doChanges( changes, 0, lastVersionIndex );
+        byteArrayModel->revertToVersionByIndex( currentVersionIndex );
 
-        byteArrayModel->setModified( false );
+        byteArrayModel->setModified( false ); // TODO: set to modified state or remote
 
         document = new KByteArrayDocument( byteArrayModel, i18nc("destination of the byte array", "Connected to.") );
         // TODO: make KPieceTableByteArrayModel a child by constructor argument parent
@@ -78,8 +80,12 @@ void ByteArrayProcessLoadJob::loadProcessByteArrayObject()
         adaptor = new ProcessByteArrayAdaptor( document );
         connect( remoteAdaptor, SIGNAL(changesDone( const QList<KHECore::ByteArrayChange>&, int, int )),
                  adaptor, SLOT(onChangesDone( const QList<KHECore::ByteArrayChange>&, int, int )) );
+        connect( remoteAdaptor, SIGNAL(revertedToVersionIndex( int )),
+                 adaptor, SLOT(onRevertedToVersionIndex( int )) );
         connect( adaptor, SIGNAL(changesDone( const QList<KHECore::ByteArrayChange>&, int, int )),
                  remoteAdaptor, SLOT(onChangesDone( const QList<KHECore::ByteArrayChange>&, int, int )) );
+        connect( adaptor, SIGNAL(revertedToVersionIndex( int )),
+                 remoteAdaptor, SLOT(onRevertedToVersionIndex( int )) );
     }
     else
     {
