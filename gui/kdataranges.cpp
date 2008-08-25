@@ -315,12 +315,13 @@ void KDataRanges::adaptToChanges( const KHE::ArrayChangeMetricsList& changeList 
         {
         case KHE::ArrayChangeMetrics::Replacement:
         {
+            const int offset = change.offset();
             const int diff = change.lengthChange();
-            const int last = (diff == 0) ? change.insertLength() : Layout->length() + qAbs(diff);
-            addChangedRange( change.offset(), last );
+            const int last = (diff == 0) ? offset+change.insertLength() : Layout->length()+qAbs(diff);
+            addChangedRange( offset, last );
 
             if( mSelection.isValid() )
-                mSelection.adaptToReplacement( change.offset(), change.removeLength(), change.insertLength() );
+                mSelection.adaptToReplacement( offset, change.removeLength(), change.insertLength() );
             break;
         }
         case KHE::ArrayChangeMetrics::Swapping:
