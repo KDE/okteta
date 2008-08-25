@@ -61,8 +61,6 @@ void KPieceTableByteArrayModel::setData( const char *data, unsigned int size, bo
 // bool KPieceTableByteArrayModel::keepsMemory() const { return d->keepsMemory(); }
 // bool KPieceTableByteArrayModel::autoDelete()  const { return d->autoDelete(); }
 
-// void KPieceTableByteArrayModel::signalContentsChanged( int i1, int i2 ) { emit contentsChanged(i1,i2); }
-
 
 void KPieceTableByteArrayModel::setDatum( unsigned int offset, const char datum )
 {

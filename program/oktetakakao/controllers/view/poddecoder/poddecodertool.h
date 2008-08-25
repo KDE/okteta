@@ -79,7 +79,7 @@ class PODDecoderTool : public AbstractTool
 
   protected Q_SLOTS:
     void onCursorPositionChange( int pos );
-    void onContentsChange( int start, int end );
+    void onContentsChange();
 
   protected:
     KHEUI::KByteArrayView *mByteArrayView;

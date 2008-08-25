@@ -60,7 +60,8 @@ void PODDecoderTool::setTargetModel( AbstractModel* model )
     {
         mCursorIndex = mByteArrayView->cursorPosition();
         connect( mByteArrayView, SIGNAL(cursorPositionChanged( int )), SLOT(onCursorPositionChange( int )) );
-        connect( mByteArrayModel, SIGNAL(contentsChanged( int, int )), SLOT(onContentsChange( int, int )) );
+        connect( mByteArrayModel, SIGNAL(contentsChanged( const KHE::ArrayChangeMetricsList& )),
+                 SLOT(onContentsChange()) );
     }
 
     updateData();
@@ -77,10 +78,10 @@ void PODDecoderTool::onCursorPositionChange( int pos )
     updateData();
 }
 
-void PODDecoderTool::onContentsChange( int start, int end )
+void PODDecoderTool::onContentsChange()
 {
-    if( start-mPODData.Size < mCursorIndex && mCursorIndex <= end )
-        updateData();
+    // TODO: only update if affected
+    updateData();
 }
 
 
@@ -111,5 +112,3 @@ void PODDecoderTool::updateData()
        emit dataChanged( mPODData.data() );
     }
 }
-
-#include "poddecodertool.moc"

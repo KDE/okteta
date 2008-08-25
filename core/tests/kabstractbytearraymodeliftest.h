@@ -53,8 +53,6 @@ class KAbstractByteArrayModelIfTest : public QObject
     void checkContentsReplaced( const KHE::KSection &RemoveSection, int InsertedLength );
     void checkContentsSwapped( int firstStart, int secondStart, int secondLength );
     void checkContentsSwapped( int firstStart, const KHE::KSection &secondSection );
-    void checkContentsChanged( const KHE::KSection &Section );
-    void checkContentsChanged( int Start, int End );
     void clearSignalSpys();
 
     struct KTestData *prepareTestInsert();
@@ -83,7 +81,6 @@ class KAbstractByteArrayModelIfTest : public QObject
     /** pointer to the model to test */
     KHECore::KAbstractByteArrayModel *ByteArrayModel;
 
-    QSignalSpy *ContentsChangedSpy;
     QSignalSpy *ContentsChangeListSpy;
 };
 

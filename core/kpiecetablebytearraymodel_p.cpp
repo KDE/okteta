@@ -103,7 +103,6 @@ void KPieceTableByteArrayModel::Private::setData( const char *data, unsigned int
 
     // TODO: how to tell this to the synchronizer?
     emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(0,oldSize,size) );
-    emit p->contentsChanged( 0, (size>oldSize?size:oldSize)-1 );
     if( wasModifiedBefore ) emit p->modificationChanged( false );
     if( !bookmarks.empty() ) emit p->bookmarksRemoved( bookmarks );
     emit p->headVersionChanged( mPieceTable.changesCount() );
@@ -128,7 +127,6 @@ void KPieceTableByteArrayModel::Private::setDatum( unsigned int offset, const ch
     modificationsList.append( modification );
 
     emit p->contentsChanged( KHE::ArrayChangeMetricsList(metrics) );
-    emit p->contentsChanged( offset, offset );
     emit p->changesDone( modificationsList, oldVersionIndex, versionIndex() );
     if( !wasModifiedBefore ) emit p->modificationChanged( true );
     if( newChange )
@@ -259,7 +257,6 @@ void KPieceTableByteArrayModel::Private::revertToVersionByIndex( int versionInde
 // Modell of the bookmarks. But shouldn't they be independent?
 
     emit p->contentsChanged( changeList );
-    emit p->contentsChanged( changedRanges );
     if( isModificationChanged ) emit p->modificationChanged( newModified );
     emit p->revertedToVersionIndex( versionIndex );
 }

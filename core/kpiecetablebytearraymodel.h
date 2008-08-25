@@ -112,7 +112,6 @@ class OKTETACORE_EXPORT KPieceTableByteArrayModel : public KAbstractByteArrayMod
 //     void setKeepsMemory( bool keepMemory = true );
 //     void setAutoDelete( bool autoDelete = true );
     void setData( const char *data, unsigned int size, bool careForMemory = true );
-//     void signalContentsChanged( int i1, int i2 );
 
   public:
 //     char *data() const;
