@@ -26,6 +26,7 @@
 // lib
 #include "kpiecetablebytearraymodel.h"
 #include "changesdatastorage.h"
+#include "arraychangemetricslist.h"
 // piecetable
 #include "piecetable/revertablepiecetable.h"
 
@@ -95,6 +96,17 @@ class KPieceTableByteArrayModel::Private
     void setData( const char *data, unsigned int size, bool careForMemory = true );
 
   protected:
+    void doInsertChange( unsigned int offset, const char* insertData, unsigned int insertLength );
+    void doRemoveChange( const KSection& removeSection );
+    void doReplaceChange( const KSection& removeSection, const char* insertData, unsigned int insertLength );
+    void doSwapChange( int firstStart, const KSection& secondSection );
+    void doFillChange( unsigned int offset, unsigned int filledLength,
+                       const char fillByte, unsigned int fillLength );
+
+    void beginChanges();
+    void endChanges();
+
+  protected: // data
     KPieceTableByteArrayModel *p;
     /**  */
     bool mReadOnly:1;
@@ -109,6 +121,12 @@ class KPieceTableByteArrayModel::Private
     KBookmarkList mBookmarks;
     /** temporary workaround for cancelling groups. If -1 no group is opened. */
     int mBeforeGroupedChangeVersionIndex;
+
+    int mBeforeChangesVersionIndex;
+    KHE::ArrayChangeMetricsList mChangeMetrics;
+    QList<ByteArrayChange> mChanges;
+    bool mBeforeChangesModified:1;
+    bool mBookmarksModified:1;
 };
 
 
