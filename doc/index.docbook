@@ -38,8 +38,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2008-24-02</date>
-<releaseinfo>0.00.01</releaseinfo>
+<date>2008-08-02</date>
+<releaseinfo>0.20</releaseinfo>
 
 <abstract><para>&kappname; is a hex editor for the &kde;
 environment.</para></abstract>
