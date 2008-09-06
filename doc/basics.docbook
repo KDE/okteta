@@ -43,7 +43,7 @@
     Depending on the active column, indicated by a blinking cursor, you can enter
     only characters in the character column and byte values in the byte column.</para></note>
 
-    <para>The search dialog allows the user to search for a specific string of,
+    <para>The search dialog allows the user to search for a specific string of
     bytes, definable as hexadecimal, decimal, octal, binary, or text.</para>
 
     <para>Multiple byte arrays can be open at the same time but only one can be
