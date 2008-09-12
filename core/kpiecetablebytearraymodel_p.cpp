@@ -245,7 +245,7 @@ void KPieceTableByteArrayModel::Private::revertToVersionByIndex( int versionInde
     const bool oldModified = isModified();
 
     const bool anyChanges =
-        mPieceTable.revertBeforeChange( versionIndex, &changedRanges, &changeList );
+        mPieceTable.revertBeforeChange( versionIndex, &changedRanges, &changeList ); // TODO: changedRanges no longer used
 
     if( !anyChanges )
         return;
@@ -310,7 +310,7 @@ QByteArray KPieceTableByteArrayModel::Private::initialData() const
 void KPieceTableByteArrayModel::Private::doChanges( const QList<KHECore::ByteArrayChange>& changes,
                                                     int oldVersionIndex, int newVersionIndex )
 {
-kDebug() << this<<" is at "<<versionIndex()<<", should from "<<oldVersionIndex<<" to "<<newVersionIndex;
+// kDebug() << this<<" is at "<<versionIndex()<<", should from "<<oldVersionIndex<<" to "<<newVersionIndex;
     // changes already done? TODO: should this check be here?
     if( newVersionIndex == versionIndex() )
         return;
@@ -353,7 +353,7 @@ kDebug() << this<<" is at "<<versionIndex()<<", should from "<<oldVersionIndex<<
     // not the same versioning? TODO: where and how to define the version id?
 //     if( newVersionIndex != versionIndex() )
 //         return;
-kDebug()<<this<<" is now at "<<versionIndex();
+// kDebug()<<this<<" is now at "<<versionIndex();
 
     endChanges();
 }
