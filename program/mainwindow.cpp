@@ -60,6 +60,8 @@
 #include <io/clipboard/clipboardcontroller.h>
 #include <io/copyas/copyascontroller.h>
 #include <io/export/exportcontroller.h>
+#include <document/users/userscontroltool.h>
+#include <document/users/userscontroltoolview.h>
 #include <view/version/versioncontroller.h>
 #include <view/zoom/zoomcontroller.h>
 #include <view/select/selectcontroller.h>
@@ -146,6 +148,7 @@ void OktetaMainWindow::setupControllers()
 #ifndef NDEBUG
     addTool( new VersionViewToolView(new VersionViewTool()) );
 #endif
+    addTool( new UsersControlToolView(new UsersControlTool()) );
 }
 
 void OktetaMainWindow::saveProperties( KConfigGroup &configGroup )
