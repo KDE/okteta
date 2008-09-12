@@ -1,6 +1,7 @@
 project( kakaocore )
 
 include_directories(
+  entity
   document
   io
   system
@@ -13,6 +14,9 @@ if(KDE4_BUILD_TESTS)
 endif(KDE4_BUILD_TESTS)
 
 set( KAKAO_CORE_SRCS
+#   entity/group.cpp
+  entity/person.cpp
+#   entity/abstractentity.cpp
   document/abstractmodel.cpp
   document/abstractmodelselection.cpp
   document/abstracttool.cpp
