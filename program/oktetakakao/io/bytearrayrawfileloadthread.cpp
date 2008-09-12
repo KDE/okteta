@@ -24,6 +24,8 @@
 
 // lib
 #include "kbytearraydocument.h"
+// Kakao core
+#include <person.h>
 // Okteta core
 #include <kpiecetablebytearraymodel.h>
 // KDE
@@ -60,6 +62,7 @@ void ByteArrayRawFileLoadThread::run()
     if( streamIsOk )
     {
         mDocument = new KByteArrayDocument( byteArray, i18nc("destination of the byte array", "Loaded from file.") );
+        mDocument->setOwner( Person::createEgo() );
         // TODO: make KPieceTableByteArrayModel a child by constructor argument parent
         byteArray->moveToThread( QApplication::instance()->thread() );
         mDocument->moveToThread( QApplication::instance()->thread() );
