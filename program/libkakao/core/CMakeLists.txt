@@ -14,16 +14,22 @@ if(KDE4_BUILD_TESTS)
   add_subdirectory( tests )
 endif(KDE4_BUILD_TESTS)
 
-set( KAKAO_CORE_SRCS
+set( KAKAO_CORE_ENTITY_SRCS
 #   entity/group.cpp
   entity/person.cpp
 #   entity/abstractentity.cpp
+)
+
+set( KAKAO_CORE_DOCUMENT_SRCS
   document/abstractmodel.cpp
   document/abstractmodelselection.cpp
   document/abstracttool.cpp
   document/kabstractdocument.cpp
   document/kabstractdocumentfactory.cpp
   document/kdocumentversiondata.cpp
+)
+
+set( KAKAO_CORE_IO_SRCS
   io/abstractloadjob.cpp
   io/abstractconnectjob.cpp
   io/abstractsynctoremotejob.cpp
@@ -35,6 +41,9 @@ set( KAKAO_CORE_SRCS
   io/modelstreamencodethread.cpp
   io/abstractmodelsynchronizer.cpp
   io/abstractmodelsynchronizerfactory.cpp
+)
+
+set( KAKAO_CORE_IO_FILESYSTEM_SRCS
   io/filesystem/abstractfilesystemloadjob.cpp
   io/filesystem/abstractfilesystemsynctoremotejob.cpp
   io/filesystem/abstractfilesystemsyncfromremotejob.cpp
@@ -44,11 +53,22 @@ set( KAKAO_CORE_SRCS
   io/filesystem/modelencoderfilesystemexportjob.cpp
   io/filesystem/modelencoderfilesystemexporter.cpp
   io/filesystem/abstractmodelfilesystemsynchronizer.cpp
+)
+
+set( KAKAO_CORE_SYSTEM_SRCS
   system/jobmanager.cpp
   system/kdocumentmanager.cpp
   system/kdocumentcreatemanager.cpp
   system/kdocumentsyncmanager.cpp
   system/modelcodecmanager.cpp
+)
+
+set( KAKAO_CORE_SRCS
+  ${KAKAO_CORE_ENTITY_SRCS}
+  ${KAKAO_CORE_DOCUMENT_SRCS}
+  ${KAKAO_CORE_IO_SRCS}
+  ${KAKAO_CORE_IO_FILESYSTEM_SRCS}
+  ${KAKAO_CORE_SYSTEM_SRCS}
 )
 
 kde4_add_library( kakaocore STATIC ${KAKAO_CORE_SRCS} )
