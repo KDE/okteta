@@ -5,6 +5,7 @@ include_directories(
   ../../libkakao/core/entity
   ../../libkakao/core/document
   ../../libkakao/core/io
+  ../../libkakao/core/io/filesystem
   ../../libkakao/gui/view
   ../../libprocessdocuments
   ../document
@@ -32,6 +33,19 @@ set( OKTETA_PROCESS_IO_SRCS
   process/bytearrayprocessbytearraysynchronizerfactory.cpp
 )
 
+set( OKTETA_FILESYSTEM_IO_SRCS
+  filesystem/bytearrayrawfileloadthread.cpp
+  filesystem/bytearrayrawfilereloadthread.cpp
+  filesystem/bytearrayrawfilewritethread.cpp
+  filesystem/bytearrayrawfileloadjob.cpp
+  filesystem/bytearrayrawfileconnectjob.cpp
+  filesystem/bytearrayrawfilewritejob.cpp
+  filesystem/bytearrayrawfilereloadjob.cpp
+  filesystem/bytearrayrawfilewritetojob.cpp
+  filesystem/kbytearrayrawfilesynchronizer.cpp
+  filesystem/kbytearrayrawfilesynchronizerfactory.cpp
+)
+
 set( OKTETA_KAKAO_IO_SRCS
   kabstractbytearraystreamencoder.cpp
   kbytearraysourcecodestreamencoder.cpp
@@ -39,16 +53,7 @@ set( OKTETA_KAKAO_IO_SRCS
   kbytearraytextstreamencoder.cpp
   ${OKTETA_TEXTRENDERER_SRCS}
   bytearrayviewtextstreamencoder.cpp
-  bytearrayrawfileloadthread.cpp
-  bytearrayrawfilereloadthread.cpp
-  bytearrayrawfilewritethread.cpp
-  bytearrayrawfileloadjob.cpp
-  bytearrayrawfileconnectjob.cpp
-  bytearrayrawfilewritejob.cpp
-  bytearrayrawfilereloadjob.cpp
-  bytearrayrawfilewritetojob.cpp
-  kbytearrayrawfilesynchronizer.cpp
-  kbytearrayrawfilesynchronizerfactory.cpp
+  ${OKTETA_FILESYSTEM_IO_SRCS}
   ${OKTETA_PROCESS_IO_SRCS}
 )
 

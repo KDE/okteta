@@ -4,6 +4,7 @@ include_directories(
   entity
   document
   io
+  io/filesystem
   system
   # TODO: hack, remove me!
   ../../libprocessdocuments
@@ -28,21 +29,21 @@ set( KAKAO_CORE_SRCS
   io/abstractsynctoremotejob.cpp
   io/abstractsyncfromremotejob.cpp
   io/abstractsyncwithremotejob.cpp
-  io/abstractfilesystemloadjob.cpp
-  io/abstractfilesystemsynctoremotejob.cpp
-  io/abstractfilesystemsyncfromremotejob.cpp
-  io/abstractfilesystemsyncwithremotejob.cpp
-  io/abstractfilesystemconnectjob.cpp
   io/abstractmodelstreamencoder.cpp
   io/abstractexportjob.cpp
-  io/abstractfilesystemexportjob.cpp
   io/abstractmodelexporter.cpp
   io/modelstreamencodethread.cpp
-  io/modelencoderfilesystemexportjob.cpp
-  io/modelencoderfilesystemexporter.cpp
   io/abstractmodelsynchronizer.cpp
   io/abstractmodelsynchronizerfactory.cpp
-  io/abstractmodelfilesystemsynchronizer.cpp
+  io/filesystem/abstractfilesystemloadjob.cpp
+  io/filesystem/abstractfilesystemsynctoremotejob.cpp
+  io/filesystem/abstractfilesystemsyncfromremotejob.cpp
+  io/filesystem/abstractfilesystemsyncwithremotejob.cpp
+  io/filesystem/abstractfilesystemconnectjob.cpp
+  io/filesystem/abstractfilesystemexportjob.cpp
+  io/filesystem/modelencoderfilesystemexportjob.cpp
+  io/filesystem/modelencoderfilesystemexporter.cpp
+  io/filesystem/abstractmodelfilesystemsynchronizer.cpp
   system/jobmanager.cpp
   system/kdocumentmanager.cpp
   system/kdocumentcreatemanager.cpp

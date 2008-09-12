@@ -4,6 +4,7 @@ include_directories(
   ../core/entity
   ../core/document
   ../core/io
+  ../core/io/filesystem
   ../core/system
   ../gui/view
   ../gui/system

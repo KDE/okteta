@@ -16,6 +16,7 @@ include_directories(
   libkakao/controllers
   oktetakakao/document
   oktetakakao/io
+  oktetakakao/io/filesystem
   oktetakakao/view
   oktetakakao/controllers/document
   oktetakakao/controllers/view
