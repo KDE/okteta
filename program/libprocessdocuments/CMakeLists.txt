@@ -1,6 +1,8 @@
 project( processdocuments )
 
 set( PROCESSDOCUMENTS_SRCS
+  processdocumentperson.cpp
+  abstractprocessdocumentconnector.cpp
   abstractprocessdocument.cpp
   processdocumentmanager.cpp
   processdocumenttablemodel.cpp

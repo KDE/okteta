@@ -23,8 +23,9 @@
 #include "bytearrayprocessbytearraysynchronizer.h"
 
 // lib
+#include "bytearrayprocessbytearrayconnector.h"
 #include "bytearrayprocessloadjob.h"
-#include "processbytearrayadaptor.h"
+#include "bytearrayprocessdocument.h"
 #include "kbytearraydocument.h"
 // DocumentAccess
 #include <processdocumentmanager.h>
@@ -37,17 +38,21 @@
 #include <QtGui/QApplication>
 
 
-#include <KDebug>
-
 ByteArrayProcessByteArraySynchronizer::ByteArrayProcessByteArraySynchronizer()
- : mDocument( 0 ), mAdaptor( 0 )
+ : mDocument( 0 ), mProcessDocument( 0 ), mConnector( 0 )
 {
 }
 
-void ByteArrayProcessByteArraySynchronizer::set( KByteArrayDocument* document, ProcessByteArrayAdaptor* adaptor )
+void ByteArrayProcessByteArraySynchronizer::set( KByteArrayDocument* document, ByteArrayProcessDocument* processDocument )
 {
     mDocument = document;
-    mAdaptor = adaptor;
+    mProcessDocument = processDocument;
+}
+
+void ByteArrayProcessByteArraySynchronizer::set( KByteArrayDocument* document, ByteArrayProcessByteArrayConnector* connector )
+{
+    mDocument = document;
+    mConnector = connector;
 }
 
 
@@ -56,8 +61,8 @@ KAbstractDocument* ByteArrayProcessByteArraySynchronizer::document() const { ret
 void ByteArrayProcessByteArraySynchronizer::startOffering( KAbstractDocument* document )
 {
     mDocument = qobject_cast<KByteArrayDocument*>( document );
-    mAdaptor = new ProcessByteArrayAdaptor( mDocument );
-    ProcessDocumentManager::self()->addProcessDocument( mAdaptor );
+    mProcessDocument = new ByteArrayProcessDocument( mDocument );
+    ProcessDocumentManager::self()->addProcessDocument( mProcessDocument );
     mDocument->setLiveSynchronizer( this );
 }
 
@@ -92,8 +97,12 @@ AbstractConnectJob* ByteArrayProcessByteArraySynchronizer::startConnect( KAbstra
     return 0; //new ByteArrayRawFileConnectJob( this, document, url, option );
 }
 
+
 ByteArrayProcessByteArraySynchronizer::~ByteArrayProcessByteArraySynchronizer()
 {
-    if( mAdaptor )
-        ProcessDocumentManager::self()->closeProcessDocument( mAdaptor );
+    if( mProcessDocument )
+        ProcessDocumentManager::self()->closeProcessDocument( mProcessDocument );
+
+    if( mConnector )
+        delete mConnector;
 }

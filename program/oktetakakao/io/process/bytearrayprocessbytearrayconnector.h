@@ -20,59 +20,57 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PROCESSBYTEARRAYADAPTOR_H
-#define PROCESSBYTEARRAYADAPTOR_H
+#ifndef BYTEARRAYPROCESSBYTEARRAYCONNECTOR_H
+#define BYTEARRAYPROCESSBYTEARRAYCONNECTOR_H
 
-// lib
-#include <bytearraychange.h>
+
 // Kakao core
-#include <abstractprocessdocument.h>
-// Qt
-#include <QtCore/QObject>
-#include <QtCore/QList>
+#include <abstractprocessdocumentconnector.h>
 
 class KByteArrayDocument;
+class Person;
+namespace KHECore {
+class ByteArrayChange;
+}
+template <class T> class QList;
 
-// Q_DECLARE_METATYPE(KHECore::ByteArrayChange)
-
-class ProcessByteArrayAdaptor : public AbstractProcessDocument
+class ByteArrayProcessByteArrayConnector : public AbstractProcessDocumentConnector
 {
   Q_OBJECT
+  public:
+    explicit ByteArrayProcessByteArrayConnector( KByteArrayDocument* byteArrayDocument );
+    virtual ~ByteArrayProcessByteArrayConnector();
 
   public:
-    explicit ProcessByteArrayAdaptor( KByteArrayDocument* byteArrayDocument );
-
-  public: // AbstractProcessDocument API
-    virtual QString title() const;
-    virtual QString id() const;
-    virtual int versionIndex() const;
-
-  public:
+    QString title() const;
+    int versionIndex() const;
+    QList<Person> userList() const;
     QByteArray baseData() const;
     int versionCount() const;
-
-  public:
     QList<KHECore::ByteArrayChange> changes( int firstVersionIndex, int lastVersionIndex ) const;
 
   public: // set/action
     void revertToVersionByIndex( int versionIndex );
+    void doChanges( const QList<KHECore::ByteArrayChange>& changes,
+                    int oldVersionIndex, int newVersionIndex );
+    void addUsers( const QList<Person>& users );
+    void removeUsers( const QList<Person>& users );
 
-  public Q_SLOTS:
+  public: //
+    void connectTo( ByteArrayProcessByteArrayConnector* otherConnector );
+    void disconnectFrom();
+
+  protected Q_SLOTS:
     void onChangesDone( const QList<KHECore::ByteArrayChange>& changes,
-                        int oldVersionIndex, int newVersionIndex );
+                             int oldVersionIndex, int newVersionIndex );
     void onRevertedToVersionIndex( int versionIndex );
-//     void onHeadVersionDescriptionChanged( const QString& versionDescription );
-//     void onHeadVersionChanged( int newHeadVersionIndex );
-
-  Q_SIGNALS:
-    void changesDone( const QList<KHECore::ByteArrayChange>& changes,
-                      int oldVersionIndex, int newVersionIndex );
-    void revertedToVersionIndex( int versionIndex );
-//     void headVersionDescriptionChanged( const QString& versionDescription );
-//     void headVersionChanged( int newHeadVersionIndex );
+    void onUsersAdded( const QList<Person>& newUserList );
+    void onUsersRemoved( const QList<Person>& newUserList );
 
   protected:
     KByteArrayDocument* mByteArrayDocument;
+    ByteArrayProcessByteArrayConnector* mOtherConnector;
+    bool mChangingUsers : 1;
 };
 
 #endif

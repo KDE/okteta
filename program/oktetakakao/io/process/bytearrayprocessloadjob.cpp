@@ -24,14 +24,19 @@
 
 // lib
 #include "bytearrayprocessbytearraysynchronizer.h"
-#include "processbytearrayadaptor.h"
+#include "bytearrayprocessbytearrayconnector.h"
+#include "bytearrayprocessdocument.h"
 #include "kbytearraydocument.h"
 //
 #include <processdocumentmanager.h>
+#include <processdocumentperson.h>
+// Kakao core
+#include <person.h>
 // Okteta core
 #include <kpiecetablebytearraymodel.h>
 // KDE
 #include <KLocale>
+#include <KIcon>
 // Qt
 #include <QtGui/QApplication>
 #include <QtCore/QTimer>
@@ -50,23 +55,31 @@ void ByteArrayProcessLoadJob::start()
 void ByteArrayProcessLoadJob::loadProcessByteArrayObject()
 {
     KByteArrayDocument* document;
-    ProcessByteArrayAdaptor* adaptor;
+    ByteArrayProcessByteArrayConnector* connector;
+
+    const QString id = mUrl.fileName();
 
     ProcessDocumentManager* documentAccessManager = ProcessDocumentManager::self();
-    const QString id = mUrl.fileName();
-    AbstractProcessDocument* processDocumentById = documentAccessManager->processDocumentById( id );
-    ProcessByteArrayAdaptor* remoteAdaptor = qobject_cast<ProcessByteArrayAdaptor*>( processDocumentById );
+    AbstractProcessDocument* remoteProcessDocument = documentAccessManager->processDocumentById( id );
 
-    if( remoteAdaptor )
+    const Person ego = Person::createEgo();
+    const ProcessDocumentPerson processEgo( ego.name(), ego.faceIcon() );
+
+    AbstractProcessDocumentConnector* abstractRemoteConnector = remoteProcessDocument->createConnector( processEgo );
+
+    if( abstractRemoteConnector )
     {
-        const int currentVersionIndex = remoteAdaptor->versionIndex();
-        const int lastVersionIndex = remoteAdaptor->versionCount() - 1;
-        const QByteArray data = remoteAdaptor->baseData();
+        ByteArrayProcessByteArrayConnector* remoteConnector =
+            qobject_cast<ByteArrayProcessByteArrayConnector*>( abstractRemoteConnector );
+
+        const int currentVersionIndex = remoteConnector->versionIndex();
+        const int lastVersionIndex = remoteConnector->versionCount() - 1;
+        const QByteArray data = remoteConnector->baseData();
         KHECore::KPieceTableByteArrayModel* byteArrayModel =
             new KHECore::KPieceTableByteArrayModel( data.constData(), data.size(), false );
 
         const QList<KHECore::ByteArrayChange> changes =
-            remoteAdaptor->changes( 0, lastVersionIndex ); // TODO: 0, -1 as default values, -1 means till end
+            remoteConnector->changes( 0, lastVersionIndex ); // TODO: 0, -1 as default values, -1 means till end
         byteArrayModel->doChanges( changes, 0, lastVersionIndex );
         byteArrayModel->revertToVersionByIndex( currentVersionIndex );
 
@@ -75,24 +88,23 @@ void ByteArrayProcessLoadJob::loadProcessByteArrayObject()
         document = new KByteArrayDocument( byteArrayModel, i18nc("destination of the byte array", "Connected to.") );
         // TODO: make KPieceTableByteArrayModel a child by constructor argument parent
 
-        document->setTitle( i18n("Remote: %1",remoteAdaptor->title()) );
+        document->setTitle( i18n("Remote: %1",remoteConnector->title()) );
+        document->addUsers( remoteConnector->userList() );
 
-        adaptor = new ProcessByteArrayAdaptor( document );
-        connect( remoteAdaptor, SIGNAL(changesDone( const QList<KHECore::ByteArrayChange>&, int, int )),
-                 adaptor, SLOT(onChangesDone( const QList<KHECore::ByteArrayChange>&, int, int )) );
-        connect( remoteAdaptor, SIGNAL(revertedToVersionIndex( int )),
-                 adaptor, SLOT(onRevertedToVersionIndex( int )) );
-        connect( adaptor, SIGNAL(changesDone( const QList<KHECore::ByteArrayChange>&, int, int )),
-                 remoteAdaptor, SLOT(onChangesDone( const QList<KHECore::ByteArrayChange>&, int, int )) );
-        connect( adaptor, SIGNAL(revertedToVersionIndex( int )),
-                 remoteAdaptor, SLOT(onRevertedToVersionIndex( int )) );
+        connector = new ByteArrayProcessByteArrayConnector( document );
+        connector->connectTo( remoteConnector );
+
+        // TODO: should be done by the connector to the remote document
+        QList<Person> egos;
+        egos.append( ego );
+        document->addUsers( egos );
     }
     else
     {
         document = 0;
     }
 
-    mSynchronizer->set( document, adaptor );
+    mSynchronizer->set( document, connector );
     setDocument( document );
 }
 

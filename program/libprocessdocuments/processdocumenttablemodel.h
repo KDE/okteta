@@ -39,7 +39,8 @@ class ProcressDocumentTableModel : public QAbstractTableModel
     {
         IdColumnId = 0,
         TitleColumnId = 1,
-        NoOfColumnIds = 2 // TODO: what pattern is usually used to mark number of ids?
+        PersonColumnId = 2,
+        NoOfColumnIds = 3 // TODO: what pattern is usually used to mark number of ids?
     };
 
   public:

@@ -25,6 +25,7 @@
 // lib
 #include "processdocumentmanager.h"
 #include "abstractprocessdocument.h"
+#include "processdocumentperson.h"
 // KDE
 #include <KLocale>
 #include <KIcon>
@@ -78,16 +79,29 @@ QVariant ProcressDocumentTableModel::data( const QModelIndex& index, int role ) 
             case TitleColumnId:
                 result = processDocument->title();
                 break;
+            case PersonColumnId:
+                result = processDocument->person().name();
+                break;
             default:
                 ;
         }
     }
     else if( role == Qt::DecorationRole )
     {
+        const int documentIndex = index.row();
+        AbstractProcessDocument* processDocument = accessableDocumentManager->processDocumentList().at( documentIndex );
+
         const int tableColumn = index.column();
-        if( tableColumn == TitleColumnId )
+        switch( tableColumn )
         {
+            case TitleColumnId:
             result = KIcon( "document" );
+            break;
+        case PersonColumnId:
+            result = processDocument->person().faceIcon();
+            break;
+        default:
+            ;
         }
     }
 

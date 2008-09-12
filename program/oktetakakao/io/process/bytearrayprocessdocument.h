@@ -1,5 +1,5 @@
 /*
-    This file is part of the Kakao Framework, part of the KDE project.
+    This file is part of the Okteta Kakao module, part of the KDE project.
 
     Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
@@ -20,29 +20,40 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTPROCESSDOCUMENT_H
-#define ABSTRACTPROCESSDOCUMENT_H
+#ifndef BYTEARRAYPROCESSDOCUMENT_H
+#define BYTEARRAYPROCESSDOCUMENT_H
 
+// lib
+#include <bytearraychange.h>
+// processdocuments
+#include <abstractprocessdocument.h>
 // Qt
 #include <QtCore/QObject>
+#include <QtCore/QList>
 
-class AbstractProcessDocumentConnector;
-class ProcessDocumentPerson;
-class QString;
+class ByteArrayProcessByteArrayConnector;
+class KByteArrayDocument;
 
-class AbstractProcessDocument : public QObject
+// Q_DECLARE_METATYPE(KHECore::ByteArrayChange)
+
+class ByteArrayProcessDocument : public AbstractProcessDocument
 {
   Q_OBJECT
 
-  protected:
-    AbstractProcessDocument();
+  public:
+    explicit ByteArrayProcessDocument( KByteArrayDocument* byteArrayDocument );
+    virtual ~ByteArrayProcessDocument();
 
-  public: // API to be implemented
-    virtual QString title() const = 0;
-    virtual QString id() const = 0;
-    virtual int versionIndex() const = 0;
-    virtual ProcessDocumentPerson person() const = 0;
-    virtual AbstractProcessDocumentConnector* createConnector( const ProcessDocumentPerson& requester ) = 0;
+  public: // AbstractProcessDocument API
+    virtual QString title() const;
+    virtual QString id() const;
+    virtual int versionIndex() const;
+    virtual ProcessDocumentPerson person() const;
+    virtual AbstractProcessDocumentConnector* createConnector( const ProcessDocumentPerson& requester );
+
+  protected:
+    KByteArrayDocument* mByteArrayDocument;
+    QList<ByteArrayProcessByteArrayConnector*> mConnectorList;
 };
 
 #endif

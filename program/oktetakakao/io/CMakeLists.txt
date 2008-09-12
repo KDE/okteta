@@ -2,6 +2,7 @@ include_directories(
   ../../../core
   ../../../gui
   ../../../gui/libcolumnsview
+  ../../libkakao/core/entity
   ../../libkakao/core/document
   ../../libkakao/core/io
   ../../libkakao/gui/view
@@ -23,7 +24,8 @@ set( OKTETA_TEXTRENDERER_SRCS
 )
 
 set( OKTETA_PROCESS_IO_SRCS
-  process/processbytearrayadaptor.cpp
+  process/bytearrayprocessbytearrayconnector.cpp
+  process/bytearrayprocessdocument.cpp
 #   process/bytearrayprocessconnectjob.cpp
   process/bytearrayprocessloadjob.cpp
   process/bytearrayprocessbytearraysynchronizer.cpp

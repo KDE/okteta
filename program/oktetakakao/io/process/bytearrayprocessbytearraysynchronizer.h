@@ -27,7 +27,8 @@
 // Kakao core
 #include <abstractmodelfilesystemsynchronizer.h>
 
-class ProcessByteArrayAdaptor;
+class ByteArrayProcessByteArrayConnector;
+class ByteArrayProcessDocument;
 class KByteArrayDocument;
 
 class ByteArrayProcessByteArraySynchronizer : public AbstractModelFileSystemSynchronizer
@@ -52,11 +53,13 @@ class ByteArrayProcessByteArraySynchronizer : public AbstractModelFileSystemSync
     virtual KAbstractDocument* document() const;
 
   protected:
-    void set( KByteArrayDocument* document, ProcessByteArrayAdaptor* adaptor );
+    void set( KByteArrayDocument* document, ByteArrayProcessDocument* processDocument );
+    void set( KByteArrayDocument* document, ByteArrayProcessByteArrayConnector* connector );
 
   protected:
     KByteArrayDocument* mDocument;
-    ProcessByteArrayAdaptor* mAdaptor;
+    ByteArrayProcessDocument* mProcessDocument;
+    ByteArrayProcessByteArrayConnector* mConnector;
 };
 
 #endif
