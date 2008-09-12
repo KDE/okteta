@@ -22,10 +22,13 @@
 
 #include "kbytearraydocument.h"
 
+//
+#include <person.h>
 // Okteta core
 #include <kpiecetablebytearraymodel.h>
 // KDE
 #include <KLocale>
+#include <KIcon>
 // Qt
 #include <QtCore/QLatin1String>
 
@@ -104,6 +107,37 @@ void KByteArrayDocument::onHeadVersionDescriptionChanged( const QString &newDesc
 {
     const KDocumentVersionData data( mByteArray->versionIndex(), newDescription );
     emit headVersionDataChanged( data );
+}
+
+Person KByteArrayDocument::owner() const
+{
+    return mUserList.size()>0 ? mUserList.at( 0 ) : Person();
+}
+
+QList<Person> KByteArrayDocument::userList() const
+{
+    return mUserList;
+}
+
+void KByteArrayDocument::setOwner( const Person& owner )
+{
+    mUserList.append( owner );
+}
+
+void KByteArrayDocument::addUsers( const QList<Person>& users )
+{
+    foreach( const Person& user, users )
+        mUserList.append( user );
+
+    emit usersAdded( users );
+}
+
+void KByteArrayDocument::removeUsers( const QList<Person>& users )
+{
+    foreach( const Person& user, users )
+        mUserList.removeOne( user );
+
+    emit usersRemoved( users );
 }
 
 KByteArrayDocument::~KByteArrayDocument()

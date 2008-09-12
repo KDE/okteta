@@ -1,5 +1,6 @@
 include_directories(
   ../../../core
+  ../../libkakao/core/entity
   ../../libkakao/core/document
 )
 
