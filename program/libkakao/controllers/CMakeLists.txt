@@ -1,6 +1,7 @@
 project( kakaocontrollers )
 
 include_directories(
+  ../core/entity
   ../core/document
   ../core/io
   ../core/system
@@ -62,6 +63,13 @@ set( COPYASCONTROLLER_SRCS
 set( EXPORTCONTROLLER_SRCS
   io/export/exportcontroller.cpp
 )
+set( USERSTOOL_SRCS
+  document/users/userlisttablemodel.cpp
+  document/users/useritemdelegate.cpp
+  document/users/userlistview.cpp
+  document/users/userscontroltool.cpp
+  document/users/userscontroltoolview.cpp
+)
 # set( CLOSECONTROLLER_SRCS
 #   viewsystem/close/closecontroller.cpp
 # )
@@ -93,6 +101,7 @@ set( KAKAO_CONTROLLERS_SRCS
   ${LOADERCONTROLLER_SRCS}
   ${CONNECTORCONTROLLER_SRCS}
   ${SYNCHRONIZECONTROLLER_SRCS}
+  ${USERSTOOL_SRCS}
   ${SELECTCONTROLLER_SRCS}
   ${CLIPBOARDCONTROLLER_SRCS}
   ${COPYASCONTROLLER_SRCS}
