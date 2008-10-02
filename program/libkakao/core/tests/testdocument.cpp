@@ -65,3 +65,5 @@ void TestDocument::setSynchronizationStates( SynchronizationStates synchronizati
 TestDocument::~TestDocument()
 {
 }
+
+#include "testdocument.moc"
