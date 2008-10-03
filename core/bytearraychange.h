@@ -37,9 +37,12 @@ namespace KHECore
 // TODO: use change names from original? Only if local are not available
 class OKTETACORE_EXPORT ByteArrayChange
 {
+    friend QDataStream& operator<<( QDataStream& outStream, const ByteArrayChange& change );
+    friend QDataStream& operator>>( QDataStream& inStream, ByteArrayChange& change );
+
   public:
     ByteArrayChange();
-    ByteArrayChange( const KHE::ArrayChangeMetrics& metrics, const QByteArray& data = QByteArray() );
+    explicit ByteArrayChange( const KHE::ArrayChangeMetrics& metrics, const QByteArray& data = QByteArray() );
 
   public:
     const KHE::ArrayChangeMetrics& metrics() const;
@@ -60,6 +63,22 @@ inline ByteArrayChange::ByteArrayChange( const KHE::ArrayChangeMetrics& metrics,
 
 inline const KHE::ArrayChangeMetrics& ByteArrayChange::metrics() const { return mMetrics; }
 inline const QByteArray& ByteArrayChange::data()                 const { return mData; }
+
+
+QDataStream& operator<<( QDataStream& outStream, const ByteArrayChange& change );
+QDataStream& operator>>( QDataStream& inStream, ByteArrayChange& change );
+
+inline QDataStream& operator<<( QDataStream& outStream, const ByteArrayChange& change )
+{
+    outStream << change.mMetrics << change.mData;
+    return outStream;
+}
+
+inline QDataStream& operator>>( QDataStream& inStream, ByteArrayChange& change )
+{
+    inStream >> change.mMetrics >> change.mData;
+    return inStream;
+}
 
 }
 
