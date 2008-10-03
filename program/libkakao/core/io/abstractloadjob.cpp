@@ -52,8 +52,12 @@ KAbstractDocument *AbstractLoadJob::document() const { return d->document(); }
 
 void AbstractLoadJob::setDocument( KAbstractDocument *document )
 {
-    d->setDocument( document );
-    emit documentLoaded( document );
+    if( document )
+    {
+        d->setDocument( document );
+        emit documentLoaded( document );
+    }
+
     emitResult();
 }
 
@@ -61,5 +65,3 @@ AbstractLoadJob::~AbstractLoadJob()
 {
     delete d;
 }
-
-#include "abstractloadjob.moc"
