@@ -23,7 +23,7 @@
 #include "shellwindow.h"
 
 // lib
-#include <parallelviews/parallelviews.h>
+#include <tabbedviews.h>
 #include <kviewmanager.h>
 #include <kabstractview.h>
 #include <abstracttoolview.h>
@@ -37,7 +37,7 @@
 
 
 ShellWindow::ShellWindow( KDocumentManager *documentManager, KViewManager *viewManager )
- : mGroupedViews( new ParallelViews(viewManager) ), mCurrentView( 0 ),
+ : mGroupedViews( new TabbedViews(viewManager) ), mCurrentView( 0 ),
    mDocumentManager( documentManager ), mViewManager( viewManager )
 {
     setCentralWidget( mGroupedViews->widget() );

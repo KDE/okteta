@@ -36,7 +36,7 @@
 class KDocumentManager;
 class KAbstractView;
 class KViewManager;
-class ParallelViews;
+class TabbedViews;
 class AbstractXmlGuiController;
 class AbstractToolView;
 class AbstractTool;
@@ -67,7 +67,7 @@ class ShellWindow : public KXmlGuiWindow, public KDE::If::WidgetsDockable
     void onViewFocusChanged( KAbstractView *view );
 
   protected:
-    ParallelViews* mGroupedViews;
+    TabbedViews* mGroupedViews;
     // hack:
     // used to store a pointer to the current, so we can disconnect to its signals... well, not perfect
     KAbstractView *mCurrentView;
