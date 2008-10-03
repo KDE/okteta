@@ -34,11 +34,13 @@ class AbstractModelNetworkServerConnection : public QObject
     Q_OBJECT
 
   public:
-    explicit AbstractModelNetworkServerConnection( NetworkServerConnection* serverConnection, QObject* parent = 0 );
+    AbstractModelNetworkServerConnection( NetworkServerConnection* serverConnection, int remoteModelHandle,
+                                          QObject* parent = 0 );
     virtual ~AbstractModelNetworkServerConnection();
 
   protected:
     NetworkServerConnection* serverConnection() const;
+    int remoteModelHandle() const;
 
   protected:
     class Private;

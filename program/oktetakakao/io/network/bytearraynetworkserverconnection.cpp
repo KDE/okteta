@@ -32,8 +32,8 @@
 
 #include <KDebug>
 
-ByteArrayNetworkServerConnection::ByteArrayNetworkServerConnection( NetworkServerConnection* serverConnection, QObject* parent )
- : AbstractModelNetworkServerConnection( serverConnection, parent )
+ByteArrayNetworkServerConnection::ByteArrayNetworkServerConnection( NetworkServerConnection* serverConnection, int remoteModelHandle, QObject* parent )
+ : AbstractModelNetworkServerConnection( serverConnection, remoteModelHandle, parent )
 {
 }
 #if 0

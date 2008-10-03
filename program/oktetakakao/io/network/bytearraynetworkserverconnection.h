@@ -38,7 +38,8 @@ class ByteArrayNetworkServerConnection : public AbstractModelNetworkServerConnec
   Q_OBJECT
 
   public:
-    ByteArrayNetworkServerConnection( NetworkServerConnection* serverConnection, QObject* parent = 0 );
+    ByteArrayNetworkServerConnection( NetworkServerConnection* serverConnection, int remoteModelHandle,
+                                      QObject* parent = 0 );
     virtual ~ByteArrayNetworkServerConnection();
 
   public: //TODO: used to fetch start data, but perhaps the document construction should be done internal?

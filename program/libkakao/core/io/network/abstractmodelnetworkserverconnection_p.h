@@ -31,20 +31,25 @@
 class AbstractModelNetworkServerConnection::Private
 {
   public:
-    Private( NetworkServerConnection* serverConnection, AbstractModelNetworkServerConnection* parent );
+    Private( NetworkServerConnection* serverConnection, int remoteModelHandle,
+             AbstractModelNetworkServerConnection* parent );
     ~Private();
 
   public:
     NetworkServerConnection* serverConnection() const;
+    int remoteModelHandle() const;
 
   protected:
     NetworkServerConnection* mServerConnection;
+    int mRemoteModelHandle;
     AbstractModelNetworkServerConnection* const p;
 
 };
 
-inline AbstractModelNetworkServerConnection::Private::Private( NetworkServerConnection* serverConnection, AbstractModelNetworkServerConnection* parent )
- : mServerConnection( serverConnection ), p( parent )
+inline AbstractModelNetworkServerConnection::Private::Private( NetworkServerConnection* serverConnection,
+                                                               int remoteModelHandle,
+                                                               AbstractModelNetworkServerConnection* parent )
+ : mServerConnection( serverConnection ), mRemoteModelHandle( remoteModelHandle ), p( parent )
 {
     mServerConnection->addModelConnection( p );
 }
@@ -52,6 +57,10 @@ inline AbstractModelNetworkServerConnection::Private::Private( NetworkServerConn
 inline NetworkServerConnection* AbstractModelNetworkServerConnection::Private::serverConnection() const
 {
     return mServerConnection;
+}
+inline int AbstractModelNetworkServerConnection::Private::remoteModelHandle() const
+{
+    return mRemoteModelHandle;
 }
 
 inline AbstractModelNetworkServerConnection::Private::~Private()

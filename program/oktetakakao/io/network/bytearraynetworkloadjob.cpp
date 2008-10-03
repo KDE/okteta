@@ -65,7 +65,7 @@ kDebug();
 
 void ByteArrayNetworkLoadJob::onConnectionCreated( NetworkServerConnection* serverConnection )
 {
-kDebug() << serverConnection;
+    const int remoteModelHandle = 0;
 
     KByteArrayDocument* document = 0;
 
@@ -77,7 +77,7 @@ kDebug() << serverConnection;
     }
     else
     {
-        mConnector = new ByteArrayNetworkServerConnection( serverConnection, mSynchronizer );
+        mConnector = new ByteArrayNetworkServerConnection( serverConnection, remoteModelHandle, mSynchronizer );
 
 //         connect( mConnector, SIGNAL(connected()), SLOT(onConnectedToServer()) );
 //         connect( mConnector, SIGNAL(error(int)), SLOT(onError()) );

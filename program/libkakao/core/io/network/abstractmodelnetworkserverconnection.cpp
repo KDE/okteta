@@ -26,14 +26,17 @@
 #include "abstractmodelnetworkserverconnection.moc" // due to Q_PRIVATE_SLOT
 
 
-AbstractModelNetworkServerConnection::AbstractModelNetworkServerConnection( NetworkServerConnection* serverConnection, QObject* parent )
- : QObject( parent ), d( new Private(serverConnection,this) )
+AbstractModelNetworkServerConnection::AbstractModelNetworkServerConnection( NetworkServerConnection* serverConnection, int remoteModelHandle, QObject* parent )
+ : QObject( parent ),
+   d( new Private(serverConnection,remoteModelHandle,this) )
 {}
 
 NetworkServerConnection* AbstractModelNetworkServerConnection::serverConnection() const
 {
     return d->serverConnection();
 }
+
+int AbstractModelNetworkServerConnection::remoteModelHandle() const { return d->remoteModelHandle(); }
 
 AbstractModelNetworkServerConnection::~AbstractModelNetworkServerConnection()
 {
