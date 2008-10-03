@@ -168,7 +168,7 @@ void NetworkClientConnection::Private::onSocketError( QAbstractSocket::SocketErr
 void NetworkClientConnection::Private::onSocketDisconnected()
 {
     // TODO: the documentserver should control the connections, how to signal him? By QObject::isDeletedSignal?
-    qDeleteAll(mModelClientConnectionList);
+    qDeleteAll( mModelClientConnectionList );
     mModelClientConnectionList.clear();
 //     foreach( AbstractModelNetworkClientConnection* modelClientConnection, mModelClientConnectionList )
 //         
@@ -178,6 +178,6 @@ void NetworkClientConnection::Private::onSocketDisconnected()
 NetworkClientConnection::Private::~Private()
 {
     // TODO: see above
-    qDeleteAll(mModelClientConnectionList);
+    qDeleteAll( mModelClientConnectionList );
     delete mCurrentStreamReader;
 }
