@@ -8,6 +8,12 @@ include_directories(
   controller
 )
 
+set( KAKAO_GUI_PARALLELVIEWS_SRCS
+  system/parallelviews/parallelviews.cpp
+  system/parallelviews/parallelwidget.cpp
+  system/parallelviews/titledwidget.cpp
+)
+
 set( KAKAO_GUI_SRCS
   view/kabstractview.cpp
   view/abstracttoolview.cpp
@@ -16,9 +22,6 @@ set( KAKAO_GUI_SRCS
   system/abstractgroupedviews.cpp
   system/tabbedviews.cpp
   system/shellwindow.cpp
-  system/parallelviews/parallelviews.cpp
-  system/parallelviews/parallelwidget.cpp
-  system/parallelviews/titledwidget.cpp
   controller/abstractxmlguicontroller.cpp
 )
 
