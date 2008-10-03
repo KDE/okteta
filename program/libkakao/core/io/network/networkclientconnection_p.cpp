@@ -169,6 +169,7 @@ void NetworkClientConnection::Private::onSocketDisconnected()
 {
     // TODO: the documentserver should control the connections, how to signal him? By QObject::isDeletedSignal?
     qDeleteAll(mModelClientConnectionList);
+    mModelClientConnectionList.clear();
 //     foreach( AbstractModelNetworkClientConnection* modelClientConnection, mModelClientConnectionList )
 //         
     emit p->disconnected();
