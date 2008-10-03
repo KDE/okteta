@@ -5,14 +5,18 @@ include_directories(
   document
   io
   io/filesystem
+  io/network
+  io/network/impulsivestreamio
   system
-  # TODO: hack, remove me!
-  ../../libprocessdocuments
 )
 
 if(KDE4_BUILD_TESTS)
   add_subdirectory( tests )
 endif(KDE4_BUILD_TESTS)
+
+# set( LIB_IMPULSIVESTREAMIO_SRCS
+#   libimpulsivestreamio/abstractimpulsivestreamreader.cpp
+# )
 
 set( KAKAO_CORE_ENTITY_SRCS
 #   entity/group.cpp
@@ -55,6 +59,36 @@ set( KAKAO_CORE_IO_FILESYSTEM_SRCS
   io/filesystem/abstractmodelfilesystemsynchronizer.cpp
 )
 
+set( KAKAO_CORE_IO_NETWORK_SRCS
+  io/network/modelservermanager_p.cpp
+  io/network/modelservermanager.cpp
+#   io/network/abstractnetworkconnection_p.cpp
+#   io/network/abstractnetworkconnection.cpp
+  io/network/networkclientconnection_p.cpp
+  io/network/networkclientconnection.cpp
+  io/network/networkserverconnection_p.cpp
+  io/network/networkserverconnection.cpp
+  io/network/networkserverconnectionmanager_p.cpp
+  io/network/networkserverconnectionmanager.cpp
+  io/network/abstractimpulsivestreamreader.cpp
+  io/network/abstractmodelnetworkclientconnection_p.cpp
+  io/network/abstractmodelnetworkclientconnection.cpp
+  io/network/abstractmodelnetworkserver.cpp
+  io/network/abstractmodelnetworkserverconnection_p.cpp
+  io/network/abstractmodelnetworkserverconnection.cpp
+  io/network/abstractmodelnetworksynchronizer.cpp
+  io/network/impulsivestreamio/int32impulsivestreamreader.cpp
+  io/network/impulsivestreamio/int32impulsivestreamwriter.cpp
+  io/network/impulsivestreamio/qbytearrayimpulsivestreamreader.cpp
+  io/network/impulsivestreamio/qbytearrayimpulsivestreamwriter.cpp
+  io/network/impulsivestreamio/qstringimpulsivestreamreader.cpp
+  io/network/impulsivestreamio/qstringimpulsivestreamwriter.cpp
+  io/network/impulsivestreamio/qimageimpulsivestreamreader.cpp
+  io/network/impulsivestreamio/qimageimpulsivestreamwriter.cpp
+  io/network/impulsivestreamio/personimpulsivestreamreader.cpp
+  io/network/impulsivestreamio/personimpulsivestreamwriter.cpp
+)
+
 set( KAKAO_CORE_SYSTEM_SRCS
   system/jobmanager.cpp
   system/kdocumentmanager.cpp
@@ -68,6 +102,7 @@ set( KAKAO_CORE_SRCS
   ${KAKAO_CORE_DOCUMENT_SRCS}
   ${KAKAO_CORE_IO_SRCS}
   ${KAKAO_CORE_IO_FILESYSTEM_SRCS}
+  ${KAKAO_CORE_IO_NETWORK_SRCS}
   ${KAKAO_CORE_SYSTEM_SRCS}
 )
 

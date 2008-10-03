@@ -1,6 +1,5 @@
 project( oktetaprogram )
 
-add_subdirectory( libprocessdocuments )
 add_subdirectory( libkakao )
 add_subdirectory( oktetakakao )
 
@@ -16,7 +15,6 @@ include_directories(
   libkakao/controllers
   oktetakakao/document
   oktetakakao/io
-  oktetakakao/io/filesystem
   oktetakakao/view
   oktetakakao/controllers/document
   oktetakakao/controllers/view
@@ -42,8 +40,8 @@ target_link_libraries( okteta
   kakaocore
   oktetagui
   oktetacore
-  processdocuments
   ${KDE4_KIO_LIBS}
+  ${KDE4_KDNSSD_LIBS}
 )
 
 install( TARGETS okteta  ${INSTALL_TARGETS_DEFAULT_ARGS} )

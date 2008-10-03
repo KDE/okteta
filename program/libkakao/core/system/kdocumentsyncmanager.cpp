@@ -30,8 +30,8 @@
 #include <abstractsynctoremotejob.h>
 #include <abstractsyncwithremotejob.h>
 #include <abstractmodelsynchronizerfactory.h>
-// documentaccess
-#include <processdocumentconnectdialog.h>
+// util
+// #include <documentserverdialog.h>
 // KDE
 #include <KIO/NetAccess>
 #include <KFileDialog>
@@ -40,6 +40,7 @@
 // Qt
 #include <QtGui/QApplication>
 
+#include <KDebug>
 
 static const char AllFileNamesFilter[] = "*";
 
@@ -255,11 +256,12 @@ void KDocumentSyncManager::finishOffering( KAbstractDocument* document )
 
 void KDocumentSyncManager::connectTo()
 {
-    ProcessDocumentConnectDialog* dialog = new ProcessDocumentConnectDialog( mWidget );
+//     DocumentServerDialog* dialog = new DocumentServerDialog( mWidget );
 
-    if( dialog->exec() )
+//     if( dialog->exec() )
     {
-        const KUrl url = dialog->getUrl();
+        const KUrl url( "kakaosync://localhost:32100/" );// = dialog->getUrl();
+kDebug()<<url.url();
         AbstractModelSynchronizer* synchronizer = mLiveSynchronizerFactory->createSynchronizer();
         AbstractLoadJob* loadJob = synchronizer->startLoad( url );
         connect( loadJob, SIGNAL(documentLoaded( KAbstractDocument * )), SLOT(onDocumentLoaded( KAbstractDocument * )) );
@@ -270,7 +272,7 @@ void KDocumentSyncManager::connectTo()
 //         mWorkingUrl = url.upUrl();
 //         emit urlUsed( url );
     }
-    delete dialog;
+//     delete dialog;
 }
 
 KDocumentSyncManager::~KDocumentSyncManager()

@@ -27,9 +27,10 @@
 // Okteta Kakao
 #include <kbytearraydocumentfactory.h>
 #include <kbytearraydisplayfactory.h>
-#include <kbytearrayrawfilesynchronizerfactory.h>
+#include <filesystem/kbytearrayrawfilesynchronizerfactory.h>
 // #include <dbus/bytearraydbusbytearraysynchronizerfactory.h>
-#include <process/bytearrayprocessbytearraysynchronizerfactory.h>
+// #include <process/bytearrayprocessbytearraysynchronizerfactory.h>
+#include <network/bytearraynetworksynchronizerfactory.h>
 #include <kbytearraytextstreamencoder.h>
 #include <kbytearrayvaluestreamencoder.h>
 #include <kbytearraysourcecodestreamencoder.h>
@@ -83,7 +84,7 @@ int OktetaProgram::execute()
     mDocumentManager->codecManager()->setEncoders( encoderList );
     mDocumentManager->createManager()->setDocumentFactory( new KByteArrayDocumentFactory() );
     mDocumentManager->syncManager()->setDocumentSynchronizerFactory( new KByteArrayRawFileSynchronizerFactory() );
-    mDocumentManager->syncManager()->setDocumentLiveSynchronizerFactory( new ByteArrayProcessByteArraySynchronizerFactory() );
+    mDocumentManager->syncManager()->setDocumentLiveSynchronizerFactory( new ByteArrayNetworkSynchronizerFactory() );
 
     mViewManager->setViewFactory( new KByteArrayDisplayFactory() );
 
