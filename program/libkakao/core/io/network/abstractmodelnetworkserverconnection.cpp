@@ -26,28 +26,13 @@
 #include "abstractmodelnetworkserverconnection.moc" // due to Q_PRIVATE_SLOT
 
 
-AbstractModelNetworkServerConnection::AbstractModelNetworkServerConnection( QObject* parent )
- : QObject( parent ), d( new Private(this) )
+AbstractModelNetworkServerConnection::AbstractModelNetworkServerConnection( NetworkServerConnection* serverConnection, QObject* parent )
+ : QObject( parent ), d( new Private(serverConnection,this) )
 {}
 
-
-int AbstractModelNetworkServerConnection::error()           const { return d->error(); }
-QString AbstractModelNetworkServerConnection::errorString() const { return d->errorString(); }
-
-
-void AbstractModelNetworkServerConnection::startConnectToServer( const KUrl& url, const Person& person )
+NetworkServerConnection* AbstractModelNetworkServerConnection::serverConnection() const
 {
-    d->startConnectToServer( url, person );
-}
-
-void AbstractModelNetworkServerConnection::startDisconnectFromServer()
-{
-    d->startDisconnectFromServer();
-}
-
-void AbstractModelNetworkServerConnection::setErrorString( const QString& errorString )
-{
-    d->setErrorString( errorString );
+    return d->serverConnection();
 }
 
 AbstractModelNetworkServerConnection::~AbstractModelNetworkServerConnection()

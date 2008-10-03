@@ -26,9 +26,7 @@
 // Qt
 #include <QtCore/QObject>
 
-class Person;
-class KUrl;
-class QByteArray;
+class NetworkServerConnection;
 
 
 class AbstractModelNetworkServerConnection : public QObject
@@ -36,30 +34,11 @@ class AbstractModelNetworkServerConnection : public QObject
     Q_OBJECT
 
   public:
-    explicit AbstractModelNetworkServerConnection( QObject* parent = 0 );
+    explicit AbstractModelNetworkServerConnection( NetworkServerConnection* serverConnection, QObject* parent = 0 );
     virtual ~AbstractModelNetworkServerConnection();
 
-  public: //
-    void startConnectToServer( const KUrl& url, const Person& person );
-    void startDisconnectFromServer();
-
-  public:
-    int error() const;
-    QString errorString() const;
-
-  Q_SIGNALS:
-    void connected();
-    void disconnected();
-    void error( int errorCode );
-
   protected:
-    void setErrorString( const QString& errorString );
-
-  private:
-    Q_PRIVATE_SLOT( d, void onSocketConnected() )
-    Q_PRIVATE_SLOT( d, void onSocketReadyRead() )
-    Q_PRIVATE_SLOT( d, void onSocketError(QAbstractSocket::SocketError socketError) )
-    Q_PRIVATE_SLOT( d, void onSocketDisconnected() )
+    NetworkServerConnection* serverConnection() const;
 
   protected:
     class Private;

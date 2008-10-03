@@ -25,64 +25,30 @@
 
 #include "abstractmodelnetworkserverconnection.h"
 
-// lib
-#include <person.h>
-// Qt
-#include <QtNetwork/QAbstractSocket>
-
-class QTcpSocket;
-
 
 class AbstractModelNetworkServerConnection::Private
 {
   public:
-    enum State { Unconnected, WaitingForHandshake, HandshakeReceived };
-
-  public:
-    Private( AbstractModelNetworkServerConnection* parent );
+    Private( NetworkServerConnection* serverConnection, AbstractModelNetworkServerConnection* parent );
     ~Private();
 
   public:
-    void startConnectToServer( const KUrl& url, const Person& person );
-    void startDisconnectFromServer();
-    void setErrorString( const QString& errorString );
-
-  public:
-    int error() const;
-    QString errorString() const;
-
-  public: // Q_SLOTS
-    void onSocketConnected();
-    void onSocketReadyRead();
-    void onSocketError( QAbstractSocket::SocketError socketError );
-    void onSocketDisconnected();
+    NetworkServerConnection* serverConnection() const;
 
   protected:
-    void sendHandshake();
-    void tryReceiveHandshake();
-
-    void sendUserDetails();
-
-  protected:
+    NetworkServerConnection* mServerConnection;
     AbstractModelNetworkServerConnection* const p;
 
-    QTcpSocket* mSocket;
-    State mState;
-
-    Person mPerson;
-    QString mLastErrorString;
 };
 
-inline AbstractModelNetworkServerConnection::Private::Private( AbstractModelNetworkServerConnection* parent )
- : p( parent ), mSocket( 0 ), mState( Unconnected )
+inline AbstractModelNetworkServerConnection::Private::Private( NetworkServerConnection* serverConnection, AbstractModelNetworkServerConnection* parent )
+ : mServerConnection( serverConnection ), p( parent )
 {
 }
 
-inline int AbstractModelNetworkServerConnection::Private::error() const { return 0; }
-inline QString AbstractModelNetworkServerConnection::Private::errorString() const { return mLastErrorString; }
-inline void AbstractModelNetworkServerConnection::Private::setErrorString( const QString& errorString )
+inline NetworkServerConnection* AbstractModelNetworkServerConnection::Private::serverConnection() const
 {
-    mLastErrorString = errorString;
+    return mServerConnection;
 }
 
 inline AbstractModelNetworkServerConnection::Private::~Private() {}

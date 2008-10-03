@@ -77,12 +77,10 @@ kDebug() << serverConnection;
     }
     else
     {
-        mConnector = new ByteArrayNetworkServerConnection( mSynchronizer );
+        mConnector = new ByteArrayNetworkServerConnection( serverConnection, mSynchronizer );
 
 //         connect( mConnector, SIGNAL(connected()), SLOT(onConnectedToServer()) );
 //         connect( mConnector, SIGNAL(error(int)), SLOT(onError()) );
-
-//     mConnector->startConnectToServer( mUrl, ego );
 
         const int currentVersionIndex = 0;//remoteConnector->versionIndex();
         const int lastVersionIndex = 0;//remoteConnector->versionCount() - 1;
