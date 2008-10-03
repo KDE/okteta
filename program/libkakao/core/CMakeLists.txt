@@ -1,5 +1,7 @@
 project( kakaocore )
 
+add_definitions( -DKDE_DEFAULT_DEBUG_AREA=1803 )
+
 include_directories(
   entity
   document
