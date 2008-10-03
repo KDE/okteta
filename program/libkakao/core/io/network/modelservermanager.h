@@ -56,6 +56,7 @@ class ModelServerManager : public QObject
   private:
     Q_PRIVATE_SLOT( d, void onNewConnection() )
     Q_PRIVATE_SLOT( d, void onConnected() )
+    Q_PRIVATE_SLOT( d, void onError( int errorCode ) )
     Q_PRIVATE_SLOT( d, void onDisconnected() )
     Q_PRIVATE_SLOT( d, void onPublished( bool ) )
 

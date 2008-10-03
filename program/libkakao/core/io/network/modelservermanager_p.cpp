@@ -125,6 +125,7 @@ void ModelServerManager::Private::onNewConnection()
     QTcpSocket* tcpSocket = mTcpServer->nextPendingConnection();
     NetworkClientConnection* clientConnection = new NetworkClientConnection();
     p->connect( clientConnection, SIGNAL(connected()), SLOT(onConnected()) );
+    p->connect( clientConnection, SIGNAL(error( int )), SLOT(onError( int )) );
     p->connect( clientConnection, SIGNAL(disconnected()), SLOT(onDisconnected()) );
     clientConnection->startConnectToClient( tcpSocket );
     mClientConnectionList.append( clientConnection );
@@ -132,6 +133,11 @@ void ModelServerManager::Private::onNewConnection()
 
 void ModelServerManager::Private::onConnected()
 {
+}
+
+void ModelServerManager::Private::onError( int errorCode )
+{
+Q_UNUSED( errorCode )
 }
 
 void ModelServerManager::Private::onDisconnected()

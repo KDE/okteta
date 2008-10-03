@@ -55,6 +55,7 @@ class ModelServerManager::Private
   public: // slots
     void onNewConnection();
     void onConnected();
+    void onError( int errorCode );
     void onDisconnected();
     void onPublished( bool successful );
 
