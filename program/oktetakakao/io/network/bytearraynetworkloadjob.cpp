@@ -105,6 +105,7 @@ kDebug() << serverConnection;
 //         QList<Person> egos;
 //         egos.append( ego );
 //         document->addUsers( egos );
+        document->setSynchronizer( mSynchronizer );
     }
 
     mSynchronizer->set( document, mConnector );
