@@ -51,6 +51,16 @@ void NetworkServerConnection::startDisconnectFromServer()
     d->startDisconnectFromServer();
 }
 
+void NetworkServerConnection::addModelConnection( AbstractModelNetworkServerConnection* modelConnection )
+{
+    d->addModelConnection( modelConnection );
+}
+
+void NetworkServerConnection::removeModelConnection( AbstractModelNetworkServerConnection* modelConnection )
+{
+    d->removeModelConnection( modelConnection );
+}
+
 void NetworkServerConnection::setErrorString( const QString& errorString )
 {
     d->setErrorString( errorString );

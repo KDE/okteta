@@ -24,6 +24,8 @@
 #define ABSTRACTMODELNETWORKSERVERCONNECTION_P_H
 
 #include "abstractmodelnetworkserverconnection.h"
+// lib
+#include "networkserverconnection.h"
 
 
 class AbstractModelNetworkServerConnection::Private
@@ -44,6 +46,7 @@ class AbstractModelNetworkServerConnection::Private
 inline AbstractModelNetworkServerConnection::Private::Private( NetworkServerConnection* serverConnection, AbstractModelNetworkServerConnection* parent )
  : mServerConnection( serverConnection ), p( parent )
 {
+    mServerConnection->addModelConnection( p );
 }
 
 inline NetworkServerConnection* AbstractModelNetworkServerConnection::Private::serverConnection() const
@@ -51,6 +54,9 @@ inline NetworkServerConnection* AbstractModelNetworkServerConnection::Private::s
     return mServerConnection;
 }
 
-inline AbstractModelNetworkServerConnection::Private::~Private() {}
+inline AbstractModelNetworkServerConnection::Private::~Private()
+{
+    mServerConnection->removeModelConnection( p );
+}
 
 #endif

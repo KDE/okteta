@@ -29,6 +29,7 @@
 #include <person.h>
 // Qt
 #include <QtNetwork/QTcpSocket>
+#include <QtCore/QList>
 
 
 class NetworkServerConnection::Private
@@ -43,6 +44,10 @@ class NetworkServerConnection::Private
   public:
     void startConnectToServer( const KUrl& url, const Person& person );
     void startDisconnectFromServer();
+
+    void addModelConnection( AbstractModelNetworkServerConnection* modelConnection );
+    void removeModelConnection( AbstractModelNetworkServerConnection* modelConnection );
+
     void setErrorString( const QString& errorString );
 
   public:
@@ -71,6 +76,8 @@ class NetworkServerConnection::Private
 
     Person mPerson;
     QString mLastErrorString;
+
+    QList<AbstractModelNetworkServerConnection*> mModelConnectionList;
 };
 
 inline NetworkServerConnection::Private::Private( NetworkServerConnection* parent )

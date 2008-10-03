@@ -26,6 +26,7 @@
 // Qt
 #include <QtCore/QObject>
 
+class AbstractModelNetworkServerConnection;
 class Person;
 class KUrl;
 class QIODevice;
@@ -42,6 +43,9 @@ class NetworkServerConnection : public QObject
   public: //
     void startConnectToServer( const KUrl& url, const Person& person );
     void startDisconnectFromServer();
+
+    void addModelConnection( AbstractModelNetworkServerConnection* modelConnection );
+    void removeModelConnection( AbstractModelNetworkServerConnection* modelConnection );
 
   public:
     QIODevice* ioDevice() const;

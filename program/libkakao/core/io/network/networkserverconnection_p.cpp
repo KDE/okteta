@@ -71,6 +71,19 @@ void NetworkServerConnection::Private::startDisconnectFromServer()
     mSocket->disconnectFromHost();
 }
 
+void NetworkServerConnection::Private::addModelConnection( AbstractModelNetworkServerConnection* modelConnection )
+{
+    mModelConnectionList.append( modelConnection );
+}
+
+void NetworkServerConnection::Private::removeModelConnection( AbstractModelNetworkServerConnection* modelConnection )
+{
+    mModelConnectionList.removeOne( modelConnection );
+
+    // TODO: make close-on-last-removed configurable
+    if( mModelConnectionList.count() == 0 )
+        startDisconnectFromServer();
+}
 
 void NetworkServerConnection::Private::sendHandshake()
 {
