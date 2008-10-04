@@ -43,6 +43,7 @@ class ByteArrayNetworkServer : public AbstractModelNetworkServer
   public: // AbstractModelNetworkServer API
     virtual AbstractModelNetworkClientConnection*
         createModelClientConnection( NetworkClientConnection* clientConnection );
+    virtual QList<Person> users() const;
 
   protected:
     KByteArrayDocument* mDocument;

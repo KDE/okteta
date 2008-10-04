@@ -25,6 +25,9 @@
 
 // lib
 #include "bytearraynetworkclientconnection.h"
+#include "kbytearraydocument.h"
+// Kakao core
+#include <person.h>
 
 
 ByteArrayNetworkServer::ByteArrayNetworkServer( KByteArrayDocument* document, QObject* parent )
@@ -40,6 +43,9 @@ ByteArrayNetworkServer::createModelClientConnection( NetworkClientConnection* cl
 
     return connection;
 }
+
+QList<Person> ByteArrayNetworkServer::users() const { return mDocument->userList(); }
+
 
 ByteArrayNetworkServer::~ByteArrayNetworkServer()
 {

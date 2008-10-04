@@ -28,7 +28,9 @@
 
 class NetworkClientConnection;
 class AbstractModelNetworkClientConnection;
+class Person;
 
+template<class T> class QList;
 
 class AbstractModelNetworkServer : public QObject
 {
@@ -40,7 +42,9 @@ class AbstractModelNetworkServer : public QObject
 
   public: // API to be implemented
     virtual AbstractModelNetworkClientConnection*
-        createModelClientConnection( NetworkClientConnection* clientConnection ) { Q_UNUSED(clientConnection) return 0; }//= 0;
+        createModelClientConnection( NetworkClientConnection* clientConnection ) = 0;
+    // TODO: remove me again, list of users should be handled by ModelServerManager
+    virtual QList<Person> users() const = 0;
 };
 
 #endif
