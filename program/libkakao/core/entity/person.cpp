@@ -38,10 +38,18 @@ Person Person::createEgo()
 {
     const EgoDataStruct* currentEgoData = &EgoData[currentEgoDataIndex];
     const Person result( currentEgoData->name, KIcon(currentEgoData->faceIconName) );
-    if( currentEgoDataIndex < lastEgoDataIndex )
-        ++currentEgoDataIndex;
+//     if( currentEgoDataIndex < lastEgoDataIndex )
+//         ++currentEgoDataIndex;
     return result;
 }
+
+void Person::setEgoId( int egoId )
+{
+    if( lastEgoDataIndex < egoId )
+        egoId = lastEgoDataIndex;
+    currentEgoDataIndex = egoId;
+}
+
 
 Person::Person( const QString& name, const KIcon& faceIcon )
  : d( new Private(name,faceIcon) )

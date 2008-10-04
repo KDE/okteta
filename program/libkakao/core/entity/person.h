@@ -33,6 +33,7 @@ class Person
 {
   public: // TODO: remove me again, hack!
     static Person createEgo();
+    static void setEgoId( int egoId );
 
   public:
     Person( const QString& name, const KIcon& faceIcon );
