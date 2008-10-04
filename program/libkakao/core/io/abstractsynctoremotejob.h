@@ -1,5 +1,5 @@
 /*
-    This file is part of the Okteta Kakao module, part of the KDE project.
+    This file is part of the Kakao Framework, part of the KDE project.
 
     Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
