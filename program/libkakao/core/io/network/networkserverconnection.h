@@ -30,6 +30,7 @@ class AbstractModelNetworkServerConnection;
 class Person;
 class KUrl;
 class QIODevice;
+template<class T> class QList;
 
 
 class NetworkServerConnection : public QObject
@@ -52,6 +53,7 @@ class NetworkServerConnection : public QObject
     bool matchesServer( const KUrl& url ) const;
     int error() const;
     QString errorString() const;
+    QList<Person> userList() const;
 
   Q_SIGNALS:
     void connected();

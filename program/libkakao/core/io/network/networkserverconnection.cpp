@@ -39,6 +39,7 @@ bool NetworkServerConnection::matchesServer( const KUrl& url ) const
 
 int NetworkServerConnection::error()           const { return d->error(); }
 QString NetworkServerConnection::errorString() const { return d->errorString(); }
+QList<Person> NetworkServerConnection::userList() const { return d->userList(); }
 
 
 void NetworkServerConnection::startConnectToServer( const KUrl& url, const Person& person )

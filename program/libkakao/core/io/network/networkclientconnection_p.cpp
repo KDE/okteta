@@ -26,6 +26,7 @@
 #include "modelservermanager.h"
 #include "abstractmodelnetworkserver.h"
 #include "abstractmodelnetworkclientconnection.h"
+#include <userlistimpulsivestreamwriter.h>
 #include <personimpulsivestreamreader.h>
 // KDE
 #include <KUrl>
@@ -119,6 +120,9 @@ void NetworkClientConnection::Private::onSocketReadyRead()
                     modelServer->createModelClientConnection( p );
 
                 mModelClientConnectionList[modelId] = modelClientConnection;
+
+                UserListImpulsiveStreamWriter userListWriter( modelServer->users() );
+                userListWriter.writeTo( mSocket );
 
                 emit p->connected();
                 break;

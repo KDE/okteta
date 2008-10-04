@@ -24,7 +24,8 @@
 #include "networkserverconnection_p.h"
 
 // lib
-#include "personimpulsivestreamwriter.h"
+#include <personimpulsivestreamwriter.h>
+#include <userlistimpulsivestreamreader.h>
 // KDE
 #include <KUrl>
 #include <KLocale>
@@ -117,9 +118,9 @@ void NetworkServerConnection::Private::tryReceiveHandshake()
     }
     else
     {
-        mState = HandshakeReceived;
         sendUserDetails();
-        emit p->connected();
+        mState = WaitingForUserList;
+        mCurrentStreamReader = new UserListImpulsiveStreamReader();
     }
 }
 
@@ -134,6 +135,29 @@ void NetworkServerConnection::Private::onSocketReadyRead()
 {
     if( mState == WaitingForHandshake )
         tryReceiveHandshake();
+    else
+    while( mCurrentStreamReader && mCurrentStreamReader->nextBytesNeeded() <= mSocket->bytesAvailable() )
+    {
+        mCurrentStreamReader->readFrom( mSocket );
+        if( mCurrentStreamReader->isDone() )
+        {
+            switch( mState )
+            {
+            case WaitingForUserList:
+            {
+                UserListImpulsiveStreamReader* userListReader =
+                    (UserListImpulsiveStreamReader*)mCurrentStreamReader;
+                mServerUserList = userListReader->userList();
+
+                emit p->connected();
+                break;
+            }
+            }
+            delete mCurrentStreamReader;
+            mCurrentStreamReader = 0;
+            break;
+        }
+    }
 }
 
 void NetworkServerConnection::Private::onSocketError( QAbstractSocket::SocketError socketError )
@@ -163,4 +187,9 @@ void NetworkServerConnection::Private::onSocketDisconnected()
 {
     mState = Unconnected;
     emit p->disconnected();
+}
+
+NetworkServerConnection::Private::~Private()
+{
+    delete mCurrentStreamReader;
 }
