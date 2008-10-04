@@ -50,6 +50,8 @@
 // Qt
 #include <QtCore/QList>
 
+// ego control temp
+#include <libkakao/core/entity/person.h>
 
 static const char OffsetOptionId[] = "offset";
 static const char OffsetOptionShortId[] = "o";
@@ -62,6 +64,8 @@ OktetaProgram::OktetaProgram( int argc, char *argv[] )
     KCmdLineOptions programOptions;
 //     programOptions.add( OffsetOptionShortId );
 //     programOptions.add( OffsetOptionId, ki18n("Offset to set the cursor to"), 0 );
+    // ego control temp
+    programOptions.add( "e <egoId>", ki18n("Sets the version of the user"), "0");
     programOptions.add( "+[URL(s)]", ki18n("File(s) to load"), 0 );
 
     KCmdLineArgs::init( argc, argv, &mAboutData );
@@ -99,6 +103,10 @@ int OktetaProgram::execute()
         OktetaMainWindow *mainWindow = new OktetaMainWindow( this );
 
         KCmdLineArgs *arguments = KCmdLineArgs::parsedArgs();
+
+        // ego control temp
+        const int egoId = arguments->getOption("e").toInt();
+        Person::setEgoId( egoId );
 
         // take arguments
         if( arguments->count() > 0 )
