@@ -29,6 +29,7 @@
 // Kakao core
 #include <person.h>
 #include <networkserverconnectionmanager.h>
+#include <networkserverconnection.h>
 // Okteta core
 #include <kpiecetablebytearraymodel.h>
 // KDE
@@ -99,7 +100,7 @@ void ByteArrayNetworkLoadJob::onConnectionCreated( NetworkServerConnection* serv
         // TODO: make KPieceTableByteArrayModel a child by constructor argument parent
 
         document->setTitle( "Remotedocument");//i18n("Remote: %1",remoteConnector->title()) );
-        document->addUsers( QList<Person>() );// remoteConnector->userList() );
+        document->addUsers( serverConnection->userList() );
 
         // TODO: should be done by the connector to the remote document
 //         QList<Person> egos;
