@@ -26,15 +26,6 @@ set( OKTETA_TEXTRENDERER_SRCS
   bytearrayviewtextrenderer/charbytearraycolumntextrenderer.cpp
 )
 
-set( OKTETA_KAKAO_IO_PROCESS_SRCS
-  process/bytearrayprocessbytearrayconnector.cpp
-  process/bytearrayprocessdocument.cpp
-#   process/bytearrayprocessconnectjob.cpp
-  process/bytearrayprocessloadjob.cpp
-  process/bytearrayprocessbytearraysynchronizer.cpp
-  process/bytearrayprocessbytearraysynchronizerfactory.cpp
-)
-
 set( OKTETA_KAKAO_IO_FILESYSTEM_SRCS
   filesystem/bytearrayrawfileloadthread.cpp
   filesystem/bytearrayrawfilereloadthread.cpp
@@ -73,7 +64,6 @@ set( OKTETA_KAKAO_IO_SRCS
   bytearrayviewtextstreamencoder.cpp
   ${OKTETA_KAKAO_IO_FILESYSTEM_SRCS}
   ${OKTETA_KAKAO_IO_NETWORK_SRCS}
-#   ${OKTETA_KAKAO_IO_PROCESS_SRCS}
 )
 
 kde4_add_library( okteta_kakaoio STATIC ${OKTETA_KAKAO_IO_SRCS} )
