@@ -68,8 +68,6 @@ class NetworkServerConnection::Private
 
   protected:
     void sendHandshake();
-    void tryReceiveHandshake();
-
     void sendUserDetails();
 
   protected:
