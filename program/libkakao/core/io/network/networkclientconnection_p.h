@@ -62,7 +62,6 @@ class NetworkClientConnection::Private
 
   protected:
     void sendHandshake();
-    void tryReceiveHandshake();
 
   protected:
     NetworkClientConnection* const p;

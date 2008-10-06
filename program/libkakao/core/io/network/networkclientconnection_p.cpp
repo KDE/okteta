@@ -26,6 +26,8 @@
 #include "modelservermanager.h"
 #include "abstractmodelnetworkserver.h"
 #include "abstractmodelnetworkclientconnection.h"
+#include <setuprequestimpulsivestreamreader.h>
+#include <setupreplyimpulsivestreamwriter.h>
 #include <userlistimpulsivestreamwriter.h>
 #include <personimpulsivestreamreader.h>
 // KDE
@@ -38,8 +40,6 @@
 static const char MessageId = 'M';
 static const int HeaderSize = sizeof(quint8) + sizeof( quint32 );
 static const int PendingRequestTimeout = 60 * 1000;
-static const char ProtocolId[] = "KAKAOSYNC/0.1";
-static const char ProtocolIdSize = sizeof( ProtocolId );
 
 
 void NetworkClientConnection::Private::startConnectToClient( QTcpSocket* tcpSocket )
@@ -57,6 +57,7 @@ kDebug()<<mSocket->peerName()<<mSocket->peerPort()<<mSocket->state();
              p, SLOT(onSocketDisconnected()) );
 
     mState = WaitingForHandshake;
+    mCurrentStreamReader = new SetupRequestImpulsiveStreamReader();
 }
 
 void NetworkClientConnection::Private::startDisconnectFromClient()
@@ -67,45 +68,38 @@ void NetworkClientConnection::Private::startDisconnectFromClient()
 
 void NetworkClientConnection::Private::sendHandshake()
 {
-//     mSocket->write( &ProtocolIdSize, 1 );
-    mSocket->write( ProtocolId, ProtocolIdSize );
-//     mSocket->write( QByteArray(8, '\0'));
-//     mSocket->write( infoHash);
-//     mSocket->write( peerIdString);
-//     mSocket->flush();
-}
-
-void NetworkClientConnection::Private::tryReceiveHandshake()
-{
-    if( mSocket->bytesAvailable() < ProtocolIdSize )
-        return;
-
-    // Sanity check the protocol ID
-    QByteArray protocolId = mSocket->read( ProtocolIdSize );
-    if( !protocolId.startsWith(ProtocolId) )
-    {
-        mSocket->abort();
-        return;
-    }
-    sendHandshake();
-
-    mState = WaitingForUserDetails;
-    mCurrentStreamReader = new PersonImpulsiveStreamReader();
+    SetupReplyImpulsiveStreamWriter setupReplyWriter;
+    setupReplyWriter.writeTo( mSocket );
 }
 
 
 void NetworkClientConnection::Private::onSocketReadyRead()
 {
-    if( mState == WaitingForHandshake )
-        tryReceiveHandshake();
-    else
     while( mCurrentStreamReader && mCurrentStreamReader->nextBytesNeeded() <= mSocket->bytesAvailable() )
     {
         mCurrentStreamReader->readFrom( mSocket );
         if( mCurrentStreamReader->isDone() )
         {
+            AbstractImpulsiveStreamReader* nextReader = 0;
             switch( mState )
             {
+            case WaitingForHandshake:
+            {
+                SetupRequestImpulsiveStreamReader* setupRequestReader =
+                    (SetupRequestImpulsiveStreamReader*)mCurrentStreamReader;
+
+                if( setupRequestReader->requestOkay() )
+                {
+                    sendHandshake();
+
+                    mState = WaitingForUserDetails;
+                    nextReader = new PersonImpulsiveStreamReader();
+                }
+                else
+                    mSocket->abort();
+
+                break;
+            }
             case WaitingForUserDetails:
             {
                 PersonImpulsiveStreamReader* personReader = (PersonImpulsiveStreamReader*)mCurrentStreamReader;
@@ -129,7 +123,7 @@ void NetworkClientConnection::Private::onSocketReadyRead()
             }
             }
             delete mCurrentStreamReader;
-            mCurrentStreamReader = 0;
+            mCurrentStreamReader = nextReader;
             break;
         }
 #if 0

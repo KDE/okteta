@@ -89,6 +89,10 @@ set( KAKAO_CORE_IO_NETWORK_SRCS
   io/network/impulsivestreamio/qimageimpulsivestreamwriter.cpp
   io/network/impulsivestreamio/personimpulsivestreamreader.cpp
   io/network/impulsivestreamio/personimpulsivestreamwriter.cpp
+  io/network/impulsivestreamio/setuprequestimpulsivestreamreader.cpp
+  io/network/impulsivestreamio/setuprequestimpulsivestreamwriter.cpp
+  io/network/impulsivestreamio/setupreplyimpulsivestreamreader.cpp
+  io/network/impulsivestreamio/setupreplyimpulsivestreamwriter.cpp
   io/network/impulsivestreamio/userlistimpulsivestreamreader.cpp
   io/network/impulsivestreamio/userlistimpulsivestreamwriter.cpp
 )

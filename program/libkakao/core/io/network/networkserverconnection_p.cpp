@@ -24,6 +24,8 @@
 #include "networkserverconnection_p.h"
 
 // lib
+#include <setuprequestimpulsivestreamwriter.h>
+#include <setupreplyimpulsivestreamreader.h>
 #include <personimpulsivestreamwriter.h>
 #include <userlistimpulsivestreamreader.h>
 // KDE
@@ -32,8 +34,6 @@
 
 static const char MessageId = 'M';
 static const char QuitMessageText[] = "QUIT";
-static const char ProtocolId[] = "KAKAOSYNC/0.1";
-static const char ProtocolIdSize = sizeof( ProtocolId );
 
 
 bool NetworkServerConnection::Private::matchesServer( const KUrl& url ) const
@@ -88,12 +88,8 @@ void NetworkServerConnection::Private::removeModelConnection( AbstractModelNetwo
 
 void NetworkServerConnection::Private::sendHandshake()
 {
-//     mSocket->write( &ProtocolIdSize, 1 );
-    mSocket->write( ProtocolId, ProtocolIdSize );
-//     mSocket->write( QByteArray(8, '\0'));
-//     mSocket->write( infoHash);
-//     mSocket->write( peerIdString);
-//     mSocket->flush();
+    SetupRequestImpulsiveStreamWriter setupRequestWriter;
+    setupRequestWriter.writeTo( mSocket );
 }
 
 
@@ -103,46 +99,42 @@ void NetworkServerConnection::Private::sendUserDetails()
     personWriter.writeTo( mSocket );
 }
 
-
-void NetworkServerConnection::Private::tryReceiveHandshake()
-{
-    if( mSocket->bytesAvailable() < ProtocolIdSize ) // TODO: what if sent handshake is smaller? Timeout?
-        return;
-
-    // Sanity check the protocol ID
-    QByteArray protocolId = mSocket->read( ProtocolIdSize );
-    if( !protocolId.startsWith(ProtocolId) )
-    {
-        setErrorString( i18n("Server does not understand the KakaoSync protocol.") );
-        mSocket->abort();
-    }
-    else
-    {
-        sendUserDetails();
-        mState = WaitingForUserList;
-        mCurrentStreamReader = new UserListImpulsiveStreamReader();
-    }
-}
-
-
 void NetworkServerConnection::Private::onSocketConnected()
 {
     sendHandshake();
     mState = WaitingForHandshake;
+    mCurrentStreamReader = new SetupReplyImpulsiveStreamReader();
 }
 
 void NetworkServerConnection::Private::onSocketReadyRead()
 {
-    if( mState == WaitingForHandshake )
-        tryReceiveHandshake();
-    else
     while( mCurrentStreamReader && mCurrentStreamReader->nextBytesNeeded() <= mSocket->bytesAvailable() )
     {
         mCurrentStreamReader->readFrom( mSocket );
         if( mCurrentStreamReader->isDone() )
         {
+            AbstractImpulsiveStreamReader* nextReader = 0;
             switch( mState )
             {
+            case WaitingForHandshake:
+            {
+                SetupReplyImpulsiveStreamReader* setupReplyReader =
+                    (SetupReplyImpulsiveStreamReader*)mCurrentStreamReader;
+
+                if( setupReplyReader->replyOkay() )
+                {
+                    sendUserDetails();
+
+                    mState = WaitingForUserList;
+                    nextReader = new UserListImpulsiveStreamReader();
+                }
+                else
+                {
+                    setErrorString( i18n("Server does not understand the KakaoSync protocol.") );
+                    mSocket->abort();
+                }
+                break;
+            }
             case WaitingForUserList:
             {
                 UserListImpulsiveStreamReader* userListReader =
@@ -154,7 +146,7 @@ void NetworkServerConnection::Private::onSocketReadyRead()
             }
             }
             delete mCurrentStreamReader;
-            mCurrentStreamReader = 0;
+            mCurrentStreamReader = nextReader;
             break;
         }
     }
