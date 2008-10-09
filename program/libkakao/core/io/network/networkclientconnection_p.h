@@ -63,6 +63,9 @@ class NetworkClientConnection::Private
   protected:
     void sendHandshake();
 
+    void handleSetupReply();
+    void handleUserDetails();
+
   protected:
     NetworkClientConnection* const p;
 

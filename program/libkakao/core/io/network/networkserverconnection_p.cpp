@@ -92,11 +92,45 @@ void NetworkServerConnection::Private::sendHandshake()
     setupRequestWriter.writeTo( mSocket );
 }
 
-
 void NetworkServerConnection::Private::sendUserDetails()
 {
     PersonImpulsiveStreamWriter personWriter( mPerson );
     personWriter.writeTo( mSocket );
+}
+
+void NetworkServerConnection::Private::handleSetupReply()
+{
+    SetupReplyImpulsiveStreamReader* setupReplyReader =
+        (SetupReplyImpulsiveStreamReader*)mCurrentStreamReader;
+
+    AbstractImpulsiveStreamReader* nextReader = 0;
+    if( setupReplyReader->replyOkay() )
+    {
+        sendUserDetails();
+
+        mState = WaitingForUserList;
+        nextReader = new UserListImpulsiveStreamReader();
+    }
+    else
+    {
+        setErrorString( i18n("Server does not understand the KakaoSync protocol.") );
+        mSocket->abort();
+    }
+
+    delete mCurrentStreamReader;
+    mCurrentStreamReader = nextReader;
+}
+
+void NetworkServerConnection::Private::handleUserListMessage()
+{
+    UserListImpulsiveStreamReader* userListReader =
+        (UserListImpulsiveStreamReader*)mCurrentStreamReader;
+    mServerUserList = userListReader->userList();
+
+    emit p->connected();
+
+    delete mCurrentStreamReader;
+    mCurrentStreamReader = 0;
 }
 
 void NetworkServerConnection::Private::onSocketConnected()
@@ -113,40 +147,15 @@ void NetworkServerConnection::Private::onSocketReadyRead()
         mCurrentStreamReader->readFrom( mSocket );
         if( mCurrentStreamReader->isDone() )
         {
-            AbstractImpulsiveStreamReader* nextReader = 0;
             switch( mState )
             {
             case WaitingForHandshake:
-            {
-                SetupReplyImpulsiveStreamReader* setupReplyReader =
-                    (SetupReplyImpulsiveStreamReader*)mCurrentStreamReader;
-
-                if( setupReplyReader->replyOkay() )
-                {
-                    sendUserDetails();
-
-                    mState = WaitingForUserList;
-                    nextReader = new UserListImpulsiveStreamReader();
-                }
-                else
-                {
-                    setErrorString( i18n("Server does not understand the KakaoSync protocol.") );
-                    mSocket->abort();
-                }
+                handleSetupReply();
                 break;
-            }
             case WaitingForUserList:
-            {
-                UserListImpulsiveStreamReader* userListReader =
-                    (UserListImpulsiveStreamReader*)mCurrentStreamReader;
-                mServerUserList = userListReader->userList();
-
-                emit p->connected();
+                handleUserListMessage();
                 break;
             }
-            }
-            delete mCurrentStreamReader;
-            mCurrentStreamReader = nextReader;
             break;
         }
     }

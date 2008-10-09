@@ -73,6 +73,53 @@ void NetworkClientConnection::Private::sendHandshake()
 }
 
 
+void NetworkClientConnection::Private::handleSetupReply()
+{
+    AbstractImpulsiveStreamReader* nextReader = 0;
+
+    SetupRequestImpulsiveStreamReader* setupRequestReader =
+        (SetupRequestImpulsiveStreamReader*)mCurrentStreamReader;
+
+    if( setupRequestReader->requestOkay() )
+    {
+        sendHandshake();
+
+        mState = WaitingForUserDetails;
+        nextReader = new PersonImpulsiveStreamReader();
+    }
+    else
+        mSocket->abort();
+
+    delete mCurrentStreamReader;
+    mCurrentStreamReader = nextReader;
+}
+
+
+void NetworkClientConnection::Private::handleUserDetails()
+{
+    PersonImpulsiveStreamReader* personReader = (PersonImpulsiveStreamReader*)mCurrentStreamReader;
+    mPerson = personReader->person();
+
+    const int modelId = 0;
+
+    QList<AbstractModelNetworkServer*> modelServerList = ModelServerManager::self()->serverList();
+    AbstractModelNetworkServer* modelServer = modelServerList.at( modelId );
+
+    AbstractModelNetworkClientConnection* modelClientConnection =
+        modelServer->createModelClientConnection( p );
+
+    mModelClientConnectionList[modelId] = modelClientConnection;
+
+    UserListImpulsiveStreamWriter userListWriter( modelServer->users() );
+    userListWriter.writeTo( mSocket );
+
+    delete mCurrentStreamReader;
+    mCurrentStreamReader = 0;
+
+    emit p->connected();
+}
+
+
 void NetworkClientConnection::Private::onSocketReadyRead()
 {
     while( mCurrentStreamReader && mCurrentStreamReader->nextBytesNeeded() <= mSocket->bytesAvailable() )
@@ -80,50 +127,15 @@ void NetworkClientConnection::Private::onSocketReadyRead()
         mCurrentStreamReader->readFrom( mSocket );
         if( mCurrentStreamReader->isDone() )
         {
-            AbstractImpulsiveStreamReader* nextReader = 0;
             switch( mState )
             {
             case WaitingForHandshake:
-            {
-                SetupRequestImpulsiveStreamReader* setupRequestReader =
-                    (SetupRequestImpulsiveStreamReader*)mCurrentStreamReader;
-
-                if( setupRequestReader->requestOkay() )
-                {
-                    sendHandshake();
-
-                    mState = WaitingForUserDetails;
-                    nextReader = new PersonImpulsiveStreamReader();
-                }
-                else
-                    mSocket->abort();
-
+                handleSetupReply();
                 break;
-            }
             case WaitingForUserDetails:
-            {
-                PersonImpulsiveStreamReader* personReader = (PersonImpulsiveStreamReader*)mCurrentStreamReader;
-                mPerson = personReader->person();
-
-                const int modelId = 0;
-
-                QList<AbstractModelNetworkServer*> modelServerList = ModelServerManager::self()->serverList();
-                AbstractModelNetworkServer* modelServer = modelServerList.at( modelId );
-
-                AbstractModelNetworkClientConnection* modelClientConnection =
-                    modelServer->createModelClientConnection( p );
-
-                mModelClientConnectionList[modelId] = modelClientConnection;
-
-                UserListImpulsiveStreamWriter userListWriter( modelServer->users() );
-                userListWriter.writeTo( mSocket );
-
-                emit p->connected();
+                handleUserDetails();
                 break;
             }
-            }
-            delete mCurrentStreamReader;
-            mCurrentStreamReader = nextReader;
             break;
         }
 #if 0

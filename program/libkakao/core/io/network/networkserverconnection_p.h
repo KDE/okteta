@@ -70,6 +70,9 @@ class NetworkServerConnection::Private
     void sendHandshake();
     void sendUserDetails();
 
+    void handleSetupReply();
+    void handleUserListMessage();
+
   protected:
     NetworkServerConnection* const p;
 
