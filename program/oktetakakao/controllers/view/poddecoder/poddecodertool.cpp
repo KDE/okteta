@@ -270,7 +270,7 @@ void PODDecoderTool::updateData()
 
     // unsigned int 64 bit
     const QString unsigned64Bit = (P64Bit == 0) ?  EmptyNote :
-                                  mUnsignedAsHex ? hexMask.arg(*(unsigned int*)P64Bit,8,HexBase,ZeroChar) :
+                                  mUnsignedAsHex ? hexMask.arg(*(quint64*)P64Bit,8,HexBase,ZeroChar) :
                                                    QString::number(*(quint64*)P64Bit);
     mDecoderValueList[Unsigned64BitId] = unsigned64Bit;
 
