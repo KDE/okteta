@@ -27,14 +27,20 @@
 #include "poddata.h"
 // Kakao core
 #include <abstracttool.h>
+// Okteta core
+#include <khe.h>
+// Qt
+#include <QtCore/QVector>
 
 class KAbstractView;
 namespace KHEUI {
 class KByteArrayView;
 }
 namespace KHECore {
+class KCharCodec;
 class KAbstractByteArrayModel;
 }
+
 
 //TODO: remove if signal works again
 class KPrimitiveTypesView;
@@ -57,6 +63,7 @@ class PODDecoderTool : public AbstractTool
 
   public:
     PODDecoderTool();
+    ~PODDecoderTool();
 
   public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
@@ -65,31 +72,49 @@ class PODDecoderTool : public AbstractTool
     virtual void setTargetModel( AbstractModel* model );
 
   public:
-    //TODO: remove if signal works again
-    void setPODView( KPrimitiveTypesView *view );
+    QString valueAsString( int podId ) const;
+    QString nameOfPOD( int podId ) const;
+    int podCount() const;
 
-  public:
-    PODData &podData();
+    bool isUnsignedAsHex() const;
+    int byteOrder() const;
 
-  Q_SIGNALS:
-    void dataChanged( const unsigned char *data );
+  public Q_SLOTS:
+    void setUnsignedAsHex( bool unsignedAsHex );
+    void setByteOrder( int byteOrder );
+
+  Q_SIGNALS: // changtes to the setting currently not signalled, because only controlled by view
+    void dataChanged();
 
   protected:
     void updateData();
+    void setupDecoder();
 
   protected Q_SLOTS:
     void onCursorPositionChange( int pos );
     void onContentsChange( int start, int end );
 
-  protected:
-    KHEUI::KByteArrayView *mByteArrayView;
-    KHECore::KAbstractByteArrayModel *mByteArrayModel;
+    void onCharCodecChange( const QString& codecName );
+//     void onUndefinedCharChanged( const QChar& undefinedChar );
+
+  protected: // source
+    KHEUI::KByteArrayView* mByteArrayView;
+    KHECore::KAbstractByteArrayModel* mByteArrayModel;
     int mCursorIndex;
+    KHECore::KCharCodec* mCharCodec;
+    QChar mUndefinedChar;
 
-    //TODO: remove if signal works again
-    KPrimitiveTypesView *mPODView;
+  protected: // settings
+    bool mUnsignedAsHex;
 
+  protected: // decoded data
     PODData mPODData;
+    QVector<QString> mDecoderNameList;
+    QVector<QString> mDecoderValueList;
 };
+
+
+inline bool PODDecoderTool::isUnsignedAsHex() const { return mUnsignedAsHex; }
+inline int PODDecoderTool::byteOrder()        const { return mPODData.byteOrder(); }
 
 #endif

@@ -20,28 +20,43 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODDECODERTOOLVIEW_H
-#define PODDECODERTOOLVIEW_H
+#ifndef PODTABLEMODEL_H
+#define PODTABLEMODEL_H
 
-// Kakao gui
-#include <abstracttoolview.h>
+// Qt
+#include <QtCore/QAbstractTableModel>
 
-class PODTableView;
 class PODDecoderTool;
 
-class PODDecoderToolView : public AbstractToolView
-{
-  public:
-    explicit PODDecoderToolView( PODDecoderTool *tool );
-    virtual ~PODDecoderToolView();
 
-  public: // AbstractToolView API
-    virtual QWidget* widget() const;
-    virtual QString title() const;
-    virtual AbstractTool* tool() const;
+class PODTableModel : public QAbstractTableModel
+{
+  Q_OBJECT
+
+  public:
+    enum ColumnIds
+    {
+        NameId = 0,
+        ValueId = 1,
+        //UsedBytes = x,  TODO: add hint how many bytes a datatype uses
+        NoOfColumnIds = 2 // TODO: what pattern is usually used to mark number of ids?
+    };
+
+  public:
+    explicit PODTableModel( PODDecoderTool* tool, QObject* parent = 0 );
+    virtual ~PODTableModel();
+
+  public: // QAbstractTableModel API
+    virtual int rowCount( const QModelIndex& parent ) const;
+    virtual int columnCount( const QModelIndex& parent ) const;
+    virtual QVariant data( const QModelIndex& index, int role ) const;
+    virtual QVariant headerData( int section, Qt::Orientation orientation, int role ) const;
+
+  public Q_SLOTS:
+    void onDataChanged();
 
   protected:
-    PODTableView* mWidget;
+    PODDecoderTool* mTool;
 };
 
 #endif

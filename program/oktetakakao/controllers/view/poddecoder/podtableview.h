@@ -20,62 +20,42 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KPRIMITIVETYPESVIEW_H
-#define KPRIMITIVETYPESVIEW_H
+#ifndef PODTABLEVIEW_H
+#define PODTABLEVIEW_H
 
-// Okteta core
-#include <khe.h>
 // Qt
 #include <QtGui/QWidget>
 
+class PODTableModel;
 class PODDecoderTool;
-namespace KHECore {
-class KCharCodec;
-}
+
 class KComboBox;
-class KLineEdit;
+class QTreeView;
 class QCheckBox;
 
-class KPrimitiveTypesView : public QWidget
+
+class PODTableView : public QWidget
 {
   Q_OBJECT
 
   public:
-    explicit KPrimitiveTypesView( PODDecoderTool *tool, QWidget *parent = 0 );
-    virtual ~KPrimitiveTypesView();
+    explicit PODTableView( PODDecoderTool* tool, QWidget* parent = 0 );
+    virtual ~PODTableView();
 
   public:
     PODDecoderTool* tool() const;
 
-  public:
-    void setUndefinedChar( const QChar &undefinedChar );
-    void setCharCode( const QString &codeName );
-
-  public Q_SLOTS:
-    void onDataChange();
-
-    void fontChanged();
-    void onEndianActivation( int );
-    void onUnsignedAsHex();
-    void onBitWidthChange( int );
-
   protected:
-    static const int NoOfRows = 4;
+    PODDecoderTool* mTool;
 
-  protected:
-    PODDecoderTool *mTool;
+    PODTableModel* mPODTableModel;
 
-    KLineEdit *mInt8Int16Display[NoOfRows];
-    KLineEdit *mInt32FloatDisplay[NoOfRows];
-    KLineEdit *mByteCodeDisplay[NoOfRows];
-    KComboBox *mEndianSelection;
-    QCheckBox *mUnsignedAsHexCheck;
-    KComboBox *mBitWidthSelection;
-
-    KHECore::KCharCodec *mCharCodec;
-    QChar mUndefinedChar;
+    QTreeView* mPODTableView;
+    KComboBox* mEndianSelection;
+    QCheckBox* mUnsignedAsHexCheck;
 };
 
-inline PODDecoderTool* KPrimitiveTypesView::tool() const { return mTool; }
+
+inline PODDecoderTool* PODTableView::tool() const { return mTool; }
 
 #endif

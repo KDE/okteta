@@ -46,7 +46,8 @@ set( FINDDIALOG_LIB_SRCS
 set( PODDECODERCONTROLLER_SRCS
   view/poddecoder/poddata.cpp
   view/poddecoder/poddecodertool.cpp
-  view/poddecoder/kprimitivetypesview.cpp
+  view/poddecoder/podtablemodel.cpp
+  view/poddecoder/podtableview.cpp
   view/poddecoder/poddecodertoolview.cpp
 )
 set( BYTETABLECONTROLLER_SRCS

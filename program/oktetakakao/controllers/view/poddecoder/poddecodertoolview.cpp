@@ -23,11 +23,11 @@
 #include "poddecodertoolview.h"
 
 // tool
-#include "kprimitivetypesview.h"
+#include "podtableview.h"
 #include "poddecodertool.h"
 
 PODDecoderToolView::PODDecoderToolView( PODDecoderTool *tool )
- : mWidget( new KPrimitiveTypesView(tool) )
+ : mWidget( new PODTableView(tool) )
 {
 }
 
