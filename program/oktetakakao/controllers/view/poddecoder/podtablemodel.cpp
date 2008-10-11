@@ -109,6 +109,23 @@ Qt::ItemFlags PODTableModel::flags( const QModelIndex& index ) const
     return result;
 }
 
+QModelIndex PODTableModel::buddy( const QModelIndex& index ) const
+{
+    QModelIndex result;
+
+    const int column = index.column();
+    if( column == NameId )
+    {
+        const int row = index.row();
+        result = createIndex( row, ValueId );
+    }
+    else
+        result = index;
+
+    return result;
+}
+
+
 QVariant PODTableModel::headerData( int section, Qt::Orientation orientation, int role ) const
 {
     QVariant result;
