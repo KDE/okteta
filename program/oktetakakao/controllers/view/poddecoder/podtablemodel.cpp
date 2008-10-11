@@ -55,7 +55,9 @@ Q_UNUSED( parent )
 QVariant PODTableModel::data( const QModelIndex& index, int role ) const
 {
     QVariant result;
-    if( role == Qt::DisplayRole )
+    switch( role )
+    {
+    case Qt::DisplayRole:
     {
         const int podId = index.row();
         const int column = index.column();
@@ -74,12 +76,35 @@ QVariant PODTableModel::data( const QModelIndex& index, int role ) const
             default:
                 ;
         }
+        break;
     }
-    else if( role == Qt::TextAlignmentRole )
+    case Qt::EditRole:
+    {
+        const int podId = index.row();
+        const int column = index.column();
+        if( column == ValueId )
+            result = mTool->valueAsString( podId );
+        break;
+    }
+    case Qt::TextAlignmentRole:
     {
         const int column = index.column();
         result = ( column==NameId ) ? Qt::AlignRight: Qt::AlignLeft;
+        break;
     }
+    default:
+        break;
+    }
+
+    return result;
+}
+
+Qt::ItemFlags PODTableModel::flags( const QModelIndex& index ) const
+{
+    Qt::ItemFlags result = QAbstractTableModel::flags( index );
+    const int column = index.column();
+    if( column == ValueId )
+        result |= Qt::ItemIsEditable;
 
     return result;
 }
