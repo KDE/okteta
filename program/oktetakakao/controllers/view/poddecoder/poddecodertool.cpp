@@ -122,6 +122,11 @@ void PODDecoderTool::setupDecoder()
         i18nc("@label:textbox","32 bit float:");
     mDecoderNameList[Float64BitId] =
         i18nc("@label:textbox","64 bit float:");
+
+    const QString EmptyNote( '-' );
+    for( int i=BinaryId; i<=Float64BitId; ++i )
+        mDecoderValueList[i] = EmptyNote;
+
 }
 
 void PODDecoderTool::setUnsignedAsHex( bool unsignedAsHex )
