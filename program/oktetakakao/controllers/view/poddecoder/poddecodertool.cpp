@@ -49,9 +49,11 @@ enum PODTypes
     Unsigned16BitId = 7,
     Signed32BitId = 8,
     Unsigned32BitId = 9,
-    Float32BitId = 10,
-    Float64BitId = 11,
-    PODTypeCount = 12
+    Signed64BitId = 10,
+    Unsigned64BitId = 11,
+    Float32BitId = 12,
+    Float64BitId = 13,
+    PODTypeCount = 14
 };
 
 
@@ -118,6 +120,10 @@ void PODDecoderTool::setupDecoder()
         i18nc("@label:textbox","Signed 32 bit:");
     mDecoderNameList[Unsigned32BitId] =
         i18nc("@label:textbox","Unsigned 32 bit:");
+    mDecoderNameList[Signed64BitId] =
+        i18nc("@label:textbox","Signed 64 bit:");
+    mDecoderNameList[Unsigned64BitId] =
+        i18nc("@label:textbox","Unsigned 64 bit:");
     mDecoderNameList[Float32BitId] =
         i18nc("@label:textbox","32 bit float:");
     mDecoderNameList[Float64BitId] =
@@ -261,6 +267,17 @@ void PODDecoderTool::updateData()
     const QString signed32Bit = (P32Bit == 0) ? EmptyNote :
                                                 QString::number(*(signed int*)P32Bit);
     mDecoderValueList[Signed32BitId] = signed32Bit;
+
+    // unsigned int 64 bit
+    const QString unsigned64Bit = (P64Bit == 0) ?  EmptyNote :
+                                  mUnsignedAsHex ? hexMask.arg(*(unsigned int*)P64Bit,8,HexBase,ZeroChar) :
+                                                   QString::number(*(quint64*)P64Bit);
+    mDecoderValueList[Unsigned64BitId] = unsigned64Bit;
+
+    // signed int 64 bit
+    const QString signed64Bit = (P64Bit == 0) ? EmptyNote :
+                                                QString::number(*(qint64*)P64Bit);
+    mDecoderValueList[Signed64BitId] = signed64Bit;
 
     // float 32 bit
     const QString float32Bit = (P32Bit == 0) ? EmptyNote :
