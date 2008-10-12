@@ -53,7 +53,9 @@ enum PODTypes
     Unsigned64BitId = 11,
     Float32BitId = 12,
     Float64BitId = 13,
-    PODTypeCount = 14
+    UTF8Id = 14,
+    UTF16Id = 15,
+    PODTypeCount = 16
 };
 
 
@@ -128,9 +130,13 @@ void PODDecoderTool::setupDecoder()
         i18nc("@label:textbox","32 bit float:");
     mDecoderNameList[Float64BitId] =
         i18nc("@label:textbox","64 bit float:");
+    mDecoderNameList[UTF8Id] =
+        i18nc("@label:textbox","UTF-8:");
+    mDecoderNameList[UTF16Id] =
+        i18nc("@label:textbox","UTF-16:");
 
     const QString EmptyNote( '-' );
-    for( int i=BinaryId; i<=Float64BitId; ++i )
+    for( int i=0; i<PODTypeCount; ++i )
         mDecoderValueList[i] = EmptyNote;
 
 }
@@ -332,6 +338,19 @@ void PODDecoderTool::updateData()
     else
         for( int i=BinaryId; i<=CharacterId; ++i )
             mDecoderValueList[i] = EmptyNote;
+
+    // UTF-8
+    const void* PXBit;
+    mPODData.pointer( &PXBit );
+    const int maxUtf8DataSize = mPODData.size();
+
+    const QString utf8 = QString::fromUtf8( (char*)PXBit, maxUtf8DataSize ).left( 1 );
+    mDecoderValueList[UTF8Id] = utf8.isEmpty() ? EmptyNote : utf8;
+
+    // UTF-16
+    const int maxUtf16DataSize = mPODData.size() / 2;
+    const QString utf16 = QString::fromUtf16( (ushort*)PXBit, maxUtf16DataSize ).left( 1 );
+    mDecoderValueList[UTF16Id] = utf16.isEmpty() ? EmptyNote : utf16;
 
     // TODO: only emit for those strings that changed
     emit dataChanged();
