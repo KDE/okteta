@@ -146,10 +146,13 @@ void PODData::pointers( const void **P8Bit, const void **P16Bit, const void **P3
     *P64Bit = (mCurrentSize>=8) ? data + offsets[3] : 0;
 }
 
-void PODData::pointer( const void **P ) const
+void PODData::pointer( const void** P, int byteCount ) const
 {
-    const int offset = ( mByteOrder == ThisMachineEndianOrder ) ? 0 : 8-mCurrentSize;
+    if( byteCount > mCurrentSize )
+        byteCount = 0;
+
+    const int offset = ( mByteOrder == ThisMachineEndianOrder ) ? 0 : 8-byteCount;
     const unsigned char *data = mAligned64Bit.Data;
 
-    *P = (mCurrentSize>=1) ? data + offset : 0;
+    *P = (byteCount>0) ? data + offset : 0;
 }

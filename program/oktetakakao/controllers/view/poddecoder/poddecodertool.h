@@ -40,10 +40,8 @@ namespace KHECore {
 class KCharCodec;
 class KAbstractByteArrayModel;
 }
+class QTextCodec;
 
-
-//TODO: remove if signal works again
-class KPrimitiveTypesView;
 
 class PODDecoderTool : public AbstractTool
 {
@@ -111,6 +109,7 @@ class PODDecoderTool : public AbstractTool
     PODData mPODData;
     QVector<QString> mDecoderNameList;
     QVector<QString> mDecoderValueList;
+    QTextCodec* mUtf8Codec;
 };
 
 

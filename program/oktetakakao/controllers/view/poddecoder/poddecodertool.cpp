@@ -34,6 +34,9 @@
 #include <kbytearraymodel.h>
 // KDE
 #include <KLocale>
+// Qt
+#include <QtCore/QTextCodec>
+
 
 static const unsigned char PrimitivesDefaultUndefinedChar = '?';
 
@@ -54,8 +57,8 @@ enum PODTypes
     Float32BitId = 12,
     Float64BitId = 13,
     UTF8Id = 14,
-    UTF16Id = 15,
-    PODTypeCount = 16
+//     UTF16Id = 15,
+    PODTypeCount = 15
 };
 
 
@@ -67,8 +70,10 @@ PODDecoderTool::PODDecoderTool()
    mUnsignedAsHex( true )
 {
     setObjectName( "PODDecoder" );
+
+    mUtf8Codec = QTextCodec::codecForName( "UTF-8" );
+
     setupDecoder();
-    updateData();
 }
 
 QString PODDecoderTool::title() const { return i18nc("@title:window", "Decoding Table"); }
@@ -132,8 +137,10 @@ void PODDecoderTool::setupDecoder()
         i18nc("@label:textbox","64 bit float:");
     mDecoderNameList[UTF8Id] =
         i18nc("@label:textbox","UTF-8:");
+#if 0
     mDecoderNameList[UTF16Id] =
         i18nc("@label:textbox","UTF-16:");
+#endif
 
     const QString EmptyNote( '-' );
     for( int i=0; i<PODTypeCount; ++i )
@@ -340,17 +347,30 @@ void PODDecoderTool::updateData()
             mDecoderValueList[i] = EmptyNote;
 
     // UTF-8
+    const QChar replacementChar( QChar::ReplacementCharacter );
     const void* PXBit;
-    mPODData.pointer( &PXBit );
     const int maxUtf8DataSize = mPODData.size();
 
-    const QString utf8 = QString::fromUtf8( (char*)PXBit, maxUtf8DataSize ).left( 1 );
-    mDecoderValueList[UTF8Id] = utf8.isEmpty() ? EmptyNote : utf8;
+    QString utf8;
+    bool isUtf8 = false;
+    for( int i=1; i<=maxUtf8DataSize; ++i )
+    {
+        mPODData.pointer( &PXBit, i );
+        utf8 = mUtf8Codec->toUnicode( (char*)PXBit, i );
+        if( utf8.size() == 1 && utf8[0] != replacementChar )
+        {
+            isUtf8 = true;
+            break;
+        }
+    }
+    mDecoderValueList[UTF8Id] = isUtf8 ? utf8 : EmptyNote;
 
+#if 0
     // UTF-16
     const int maxUtf16DataSize = mPODData.size() / 2;
     const QString utf16 = QString::fromUtf16( (ushort*)PXBit, maxUtf16DataSize ).left( 1 );
     mDecoderValueList[UTF16Id] = utf16.isEmpty() ? EmptyNote : utf16;
+#endif
 
     // TODO: only emit for those strings that changed
     emit dataChanged();
@@ -360,4 +380,3 @@ PODDecoderTool::~PODDecoderTool()
 {
     delete mCharCodec;
 }
-
