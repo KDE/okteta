@@ -56,6 +56,8 @@ class PODData
     int byteOrder() const;
     unsigned long bitValue( int noOfBitsToRead ) const;
     void pointers( const void **P8Bit, const void **P16Bit, const void **P32Bit, const void **P64Bit ) const;
+    void pointer( const void **P ) const;
+    int size() const;
 
   protected:
     // ensure strict alignment for double as needed on some architectures (e.g. PA-RISC)

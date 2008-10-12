@@ -44,6 +44,8 @@ PODData::PODData()
 
 const unsigned char *PODData::data() const { return mCurrentData; }
 int PODData::byteOrder()             const { return mByteOrder; }
+int PODData::size()                  const { return mCurrentSize; }
+
 
 unsigned char *PODData::rawData()    { return mAligned64Bit.Data; }
 
@@ -142,4 +144,12 @@ void PODData::pointers( const void **P8Bit, const void **P16Bit, const void **P3
     *P16Bit = (mCurrentSize>=2) ? data + offsets[1] : 0;
     *P32Bit = (mCurrentSize>=4) ? data + offsets[2] : 0;
     *P64Bit = (mCurrentSize>=8) ? data + offsets[3] : 0;
+}
+
+void PODData::pointer( const void **P ) const
+{
+    const int offset = ( mByteOrder == ThisMachineEndianOrder ) ? 0 : 8-mCurrentSize;
+    const unsigned char *data = mAligned64Bit.Data;
+
+    *P = (mCurrentSize>=1) ? data + offset : 0;
 }
