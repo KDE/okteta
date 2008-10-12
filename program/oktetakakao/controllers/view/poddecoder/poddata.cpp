@@ -23,31 +23,28 @@
 #include "poddata.h"
 
 
-static inline void swapDataOrder( unsigned char *data, const int length )
+static inline void copyInvertedBytes( unsigned char *data, const unsigned char *sourceData, const int length )
 {
     const int last = length-1;
-    const int mid = length / 2;
-    for( int i=0,j=last; i<mid; ++i,--j )
-    {
-        unsigned char helper = data[i];
-        data[i] = data[j];
-        data[j] = helper;
-    }
+    for( int i=0,j=last; i<length; ++i,--j )
+        data[i] = sourceData[j];
 }
 
 PODData::PODData()
- : mCurrentData( 0 ),
+ : mCurrentOriginalData( 0 ),
+   mCurrentEndiannessSetData( 0 ),
    mCurrentSize( 0 ),
    mByteOrder( ThisMachineEndianOrder )
 {
 }
 
-const unsigned char *PODData::data() const { return mCurrentData; }
+const unsigned char* PODData::originalData()     const { return mCurrentOriginalData; }
+const unsigned char* PODData::endianessSetData() const { return mCurrentEndiannessSetData; }
 int PODData::byteOrder()             const { return mByteOrder; }
 int PODData::size()                  const { return mCurrentSize; }
 
 
-unsigned char *PODData::rawData()    { return mAligned64Bit.Data; }
+unsigned char* PODData::rawData()    { return mOriginalAligned64Bit.Data; }
 
 void PODData::setByteOrder( int byteOrder )
 {
@@ -57,8 +54,10 @@ void PODData::setByteOrder( int byteOrder )
     mByteOrder = byteOrder;
 
     // swap data
-    if( mCurrentData )
-        swapDataOrder( mAligned64Bit.Data, Size );
+    if( mCurrentOriginalData )
+        copyInvertedBytes( mEndiannessSetAligned64Bit.Data, mOriginalAligned64Bit.Data, Size );
+    else
+        mEndiannessSetAligned64Bit = mOriginalAligned64Bit;
 }
 
 unsigned long PODData::bitValue( int noOfBitsToRead ) const
@@ -78,7 +77,7 @@ unsigned long PODData::bitValue( int noOfBitsToRead ) const
     int noOfUsedBits = 0;//7 - state.cell;
 
     const bool isReverse = ( mByteOrder != ThisMachineEndianOrder );
-    const unsigned char *data = mAligned64Bit.Data;
+    const unsigned char *data = mEndiannessSetAligned64Bit.Data;
     if( isReverse )
         data += 7;
 
@@ -114,22 +113,26 @@ unsigned long PODData::bitValue( int noOfBitsToRead ) const
 
 bool PODData::updateRawData( int size )
 {
-    const unsigned char *oldCurrentData = mCurrentData;
+    const unsigned char* oldCurrentOriginalData = mCurrentOriginalData;
 
-    if( size>0 )
+    if( size > 0 )
     {
         if( mByteOrder != ThisMachineEndianOrder )
-            swapDataOrder( mAligned64Bit.Data, Size );
+            copyInvertedBytes( mEndiannessSetAligned64Bit.Data, mOriginalAligned64Bit.Data, Size );
+        else
+            mEndiannessSetAligned64Bit = mOriginalAligned64Bit;
 
-        mCurrentData = mAligned64Bit.Data;
+        mCurrentOriginalData = mOriginalAligned64Bit.Data;
+        mCurrentEndiannessSetData = mEndiannessSetAligned64Bit.Data;
         mCurrentSize = size;
     }
     else
     {
-        mCurrentData = 0;
+        mCurrentOriginalData = 0;
+        mCurrentEndiannessSetData = 0;
         mCurrentSize = 0;
     }
-    return ( mCurrentData || oldCurrentData );
+    return ( mCurrentOriginalData || oldCurrentOriginalData );
 }
 
 void PODData::pointers( const void **P8Bit, const void **P16Bit, const void **P32Bit, const void **P64Bit ) const
@@ -138,7 +141,7 @@ void PODData::pointers( const void **P8Bit, const void **P16Bit, const void **P3
     static const int ReversedOffsets[4] = { 7, 6, 4, 0 };
 
     const int *offsets = ( mByteOrder == ThisMachineEndianOrder ) ? MachineOffsets : ReversedOffsets;
-    const unsigned char *data = mAligned64Bit.Data;
+    const unsigned char *data = mEndiannessSetAligned64Bit.Data;
 
     *P8Bit =  (mCurrentSize>=1) ? data + offsets[0] : 0;
     *P16Bit = (mCurrentSize>=2) ? data + offsets[1] : 0;
@@ -152,7 +155,7 @@ void PODData::pointer( const void** P, int byteCount ) const
         byteCount = 0;
 
     const int offset = ( mByteOrder == ThisMachineEndianOrder ) ? 0 : 8-byteCount;
-    const unsigned char *data = mAligned64Bit.Data;
+    const unsigned char *data = mEndiannessSetAligned64Bit.Data;
 
     *P = (byteCount>0) ? data + offset : 0;
 }

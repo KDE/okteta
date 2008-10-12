@@ -49,11 +49,13 @@ class PODData
   public:
     void setByteOrder( int byteOrder );
     bool updateRawData( int size );
-    unsigned char *rawData();
+    unsigned char* rawData();
 
   public:
-    const unsigned char *data() const;
+    const unsigned char* originalData() const;
+    const unsigned char* endianessSetData() const;
     int byteOrder() const;
+
     unsigned long bitValue( int noOfBitsToRead ) const;
     void pointers( const void **P8Bit, const void **P16Bit, const void **P32Bit, const void **P64Bit ) const;
     void pointer( const void** P, int byteCount ) const;
@@ -64,8 +66,10 @@ class PODData
     typedef union { unsigned char Data[Size]; double Dummy; } Aligned64Bit;
 
   protected:
-    unsigned char *mCurrentData;
-    Aligned64Bit mAligned64Bit;
+    unsigned char* mCurrentOriginalData;
+    unsigned char* mCurrentEndiannessSetData;
+    Aligned64Bit mOriginalAligned64Bit;
+    Aligned64Bit mEndiannessSetAligned64Bit;
     int mCurrentSize;
     int mByteOrder;
 };

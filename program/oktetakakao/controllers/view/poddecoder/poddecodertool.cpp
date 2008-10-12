@@ -347,16 +347,17 @@ void PODDecoderTool::updateData()
             mDecoderValueList[i] = EmptyNote;
 
     // UTF-8
+    // interpreted as a sequence of bytes, there is no endian problem
+    // source: http://unicode.org/faq/utf_bom.html#3
     const QChar replacementChar( QChar::ReplacementCharacter );
-    const void* PXBit;
+    const char* data = (const char*)mPODData.originalData();
     const int maxUtf8DataSize = mPODData.size();
 
     QString utf8;
     bool isUtf8 = false;
     for( int i=1; i<=maxUtf8DataSize; ++i )
     {
-        mPODData.pointer( &PXBit, i );
-        utf8 = mUtf8Codec->toUnicode( (char*)PXBit, i );
+        utf8 = mUtf8Codec->toUnicode( data, i );
         if( utf8.size() == 1 && utf8[0] != replacementChar )
         {
             isUtf8 = true;
