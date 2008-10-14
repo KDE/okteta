@@ -142,11 +142,6 @@ void PODDecoderTool::setupDecoder()
     mDecoderNameList[UTF16Id] =
         i18nc("@label:textbox","UTF-16:");
 #endif
-
-    const QString EmptyNote( '-' );
-    for( int i=0; i<PODTypeCount; ++i )
-        mDecoderValueList[i] = EmptyNote;
-
 }
 
 void PODDecoderTool::setUnsignedAsHex( bool unsignedAsHex )
@@ -242,7 +237,7 @@ void PODDecoderTool::updateData()
     static const int OctBase = 8;
     static const int DualBase = 2;
     const QLatin1Char ZeroChar('0');
-    const QString EmptyNote( '-' );
+    const QString EmptyString;
     const QString hexMask = QString::fromLatin1( "0x%1" );
 
     const void *P8Bit, *P16Bit, *P32Bit, *P64Bit;
@@ -250,56 +245,56 @@ void PODDecoderTool::updateData()
     mPODData.pointers( &P8Bit, &P16Bit, &P32Bit, &P64Bit );
 
     // unsigned 8 bit
-    const QString unsigned8Bit = (P8Bit == 0) ?   EmptyNote :
+    const QString unsigned8Bit = (P8Bit == 0) ?   EmptyString :
                                  mUnsignedAsHex ? hexMask.arg(*(unsigned char*)P8Bit,2,HexBase,ZeroChar) :
                                                   QString::number(*(unsigned char*)P8Bit);
     mDecoderValueList[Unsigned8BitId] = unsigned8Bit;
 
     // signed int 8 bit
-    const QString signed8Bit = (P8Bit == 0) ? EmptyNote :
+    const QString signed8Bit = (P8Bit == 0) ? EmptyString :
                                               QString::number(*(signed char*)P8Bit);
     mDecoderValueList[Signed8BitId] = signed8Bit;
 
     // unsigned int 16 bit
-    const QString unsigned16Bit = (P16Bit == 0) ?  EmptyNote :
+    const QString unsigned16Bit = (P16Bit == 0) ?  EmptyString :
                                   mUnsignedAsHex ? hexMask.arg(*(unsigned short*)P16Bit,4,HexBase,ZeroChar) :
                                                    QString::number(*(unsigned short*)P16Bit);
     mDecoderValueList[Unsigned16BitId] = unsigned16Bit;
 
     // signed int 16 bit
-    const QString signed16Bit = (P16Bit == 0) ? EmptyNote :
+    const QString signed16Bit = (P16Bit == 0) ? EmptyString :
                                                 QString::number(*(signed short*)P16Bit);
     mDecoderValueList[Signed16BitId] = signed16Bit;
 
     // unsigned int 32 bit
-    const QString unsigned32Bit = (P32Bit == 0) ?  EmptyNote :
+    const QString unsigned32Bit = (P32Bit == 0) ?  EmptyString :
                                   mUnsignedAsHex ? hexMask.arg(*(unsigned int*)P32Bit,8,HexBase,ZeroChar) :
                                                    QString::number(*(unsigned int*)P32Bit);
     mDecoderValueList[Unsigned32BitId] = unsigned32Bit;
 
     // signed int 32 bit
-    const QString signed32Bit = (P32Bit == 0) ? EmptyNote :
+    const QString signed32Bit = (P32Bit == 0) ? EmptyString :
                                                 QString::number(*(signed int*)P32Bit);
     mDecoderValueList[Signed32BitId] = signed32Bit;
 
     // unsigned int 64 bit
-    const QString unsigned64Bit = (P64Bit == 0) ?  EmptyNote :
+    const QString unsigned64Bit = (P64Bit == 0) ?  EmptyString :
                                   mUnsignedAsHex ? hexMask.arg(*(quint64*)P64Bit,8,HexBase,ZeroChar) :
                                                    QString::number(*(quint64*)P64Bit);
     mDecoderValueList[Unsigned64BitId] = unsigned64Bit;
 
     // signed int 64 bit
-    const QString signed64Bit = (P64Bit == 0) ? EmptyNote :
+    const QString signed64Bit = (P64Bit == 0) ? EmptyString :
                                                 QString::number(*(qint64*)P64Bit);
     mDecoderValueList[Signed64BitId] = signed64Bit;
 
     // float 32 bit
-    const QString float32Bit = (P32Bit == 0) ? EmptyNote :
+    const QString float32Bit = (P32Bit == 0) ? EmptyString :
                                                QString::number(*(float*)P32Bit,'e');
     mDecoderValueList[Float32BitId] = float32Bit;
 
     // float 64 bit
-    const QString double64Bit = (P64Bit == 0) ? EmptyNote :
+    const QString double64Bit = (P64Bit == 0) ? EmptyString :
                                                 QString::number(*(double*)P64Bit,'e');
     mDecoderValueList[Float64BitId] = double64Bit;
 
@@ -345,7 +340,7 @@ void PODDecoderTool::updateData()
     }
     else
         for( int i=BinaryId; i<=CharacterId; ++i )
-            mDecoderValueList[i] = EmptyNote;
+            mDecoderValueList[i] = EmptyString;
 
     // UTF-8
     // interpreted as a sequence of bytes, there is no endian problem
@@ -365,13 +360,13 @@ void PODDecoderTool::updateData()
             break;
         }
     }
-    mDecoderValueList[UTF8Id] = isUtf8 ? utf8 : EmptyNote;
+    mDecoderValueList[UTF8Id] = isUtf8 ? utf8 : EmptyString;
 
 #if 0
     // UTF-16
     const int maxUtf16DataSize = mPODData.size() / 2;
     const QString utf16 = QString::fromUtf16( (ushort*)PXBit, maxUtf16DataSize ).left( 1 );
-    mDecoderValueList[UTF16Id] = utf16.isEmpty() ? EmptyNote : utf16;
+    mDecoderValueList[UTF16Id] = utf16.isEmpty() ? EmptyString : utf16;
 #endif
 
     // TODO: only emit for those strings that changed
