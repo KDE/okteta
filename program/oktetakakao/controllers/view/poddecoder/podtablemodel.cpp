@@ -26,11 +26,14 @@
 #include "poddecodertool.h"
 // KDE
 #include <KLocale>
+#include <KApplication>
+#include <KColorScheme>
 
 
 PODTableModel::PODTableModel( PODDecoderTool* tool, QObject *parent )
  : QAbstractTableModel( parent ),
-   mTool( tool )
+   mTool( tool ),
+   mEmptyNote( '-' )
 {
     connect( mTool, SIGNAL(dataChanged()), SLOT(onDataChanged()) );
 }
@@ -70,7 +73,10 @@ QVariant PODTableModel::data( const QModelIndex& index, int role ) const
             }
             case ValueId:
             {
-                result = mTool->valueAsString( podId );
+                QString valueString = mTool->valueAsString( podId );
+                if( valueString.isEmpty() )
+                    valueString = mEmptyNote;
+                result = valueString;
                 break;
             }
             default:
@@ -91,6 +97,21 @@ QVariant PODTableModel::data( const QModelIndex& index, int role ) const
         const int column = index.column();
         result = ( column==NameId ) ? Qt::AlignRight: Qt::AlignLeft;
         break;
+    }
+    case Qt::ForegroundRole:
+    {
+        const int podId = index.row();
+        const int column = index.column();
+        if( column == ValueId )
+        {
+            QString valueString = mTool->valueAsString( podId );
+            if( valueString.isEmpty() )
+            {
+                const QPalette &palette = KApplication::kApplication()->palette();
+                const KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::View );
+                result = colorScheme.foreground( KColorScheme::InactiveText );
+            }
+        }
     }
     default:
         break;

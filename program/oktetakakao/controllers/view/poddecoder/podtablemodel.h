@@ -59,6 +59,7 @@ class PODTableModel : public QAbstractTableModel
 
   protected:
     PODDecoderTool* mTool;
+    const QString mEmptyNote;
 };
 
 #endif
