@@ -43,22 +43,22 @@ static const unsigned char PrimitivesDefaultUndefinedChar = '?';
 enum PODTypes
 {
     BinaryId = 0,
-    OctalId = 1,
-    HexadecimalId = 2,
-    CharacterId = 3,
-    Signed8BitId = 4,
-    Unsigned8BitId = 5,
-    Signed16BitId = 6,
-    Unsigned16BitId = 7,
-    Signed32BitId = 8,
-    Unsigned32BitId = 9,
-    Signed64BitId = 10,
-    Unsigned64BitId = 11,
-    Float32BitId = 12,
-    Float64BitId = 13,
-    UTF8Id = 14,
-//     UTF16Id = 15,
-    PODTypeCount = 15
+    OctalId,
+    HexadecimalId,
+    Signed8BitId,
+    Unsigned8BitId,
+    Signed16BitId,
+    Unsigned16BitId,
+    Signed32BitId,
+    Unsigned32BitId,
+    Signed64BitId,
+    Unsigned64BitId,
+    Float32BitId,
+    Float64BitId,
+    Char8BitId,
+    UTF8Id,
+//     UTF16Id,
+    PODTypeCount
 };
 
 
@@ -109,13 +109,11 @@ void PODDecoderTool::setupDecoder()
     mDecoderValueList.resize( PODTypeCount );
 
     mDecoderNameList[BinaryId] =
-        i18nc("@label:textbox encoding of the bytes as value in the binary format",     "Binary:");
+        i18nc("@label:textbox encoding of one byte as value in the binary format",     "Binary 8 bit:");
     mDecoderNameList[OctalId] =
-        i18nc("@label:textbox encoding of the bytes as value in the octal format",      "Octal:");
+        i18nc("@label:textbox encoding of one byte as value in the octal format",      "Octal 8 bit:");
     mDecoderNameList[HexadecimalId] =
-        i18nc("@label:textbox encoding of the bytes as value in the hexadecimal format","Hexadecimal:");
-    mDecoderNameList[CharacterId] =
-        i18nc("@label:textbox encoding of the bytes as character",                      "Character:");
+        i18nc("@label:textbox encoding of one byte as value in the hexadecimal format","Hexadecimal 8 bit:");
     mDecoderNameList[Signed8BitId] =
         i18nc("@label:textbox","Signed 8 bit:");
     mDecoderNameList[Unsigned8BitId] =
@@ -136,6 +134,8 @@ void PODDecoderTool::setupDecoder()
         i18nc("@label:textbox","32 bit float:");
     mDecoderNameList[Float64BitId] =
         i18nc("@label:textbox","64 bit float:");
+    mDecoderNameList[Char8BitId] =
+        i18nc("@label:textbox encoding of one byte as character", "Character 8 bit:");
     mDecoderNameList[UTF8Id] =
         i18nc("@label:textbox","UTF-8:");
 #if 0
@@ -336,12 +336,14 @@ void PODDecoderTool::updateData()
         }
 
         const KHECore::KChar decodedChar = mCharCodec->decode( *(unsigned char*)P8Bit );
-        mDecoderValueList[CharacterId] = QString(decodedChar.isUndefined()?mUndefinedChar:(QChar)decodedChar );
+        mDecoderValueList[Char8BitId] = QString(decodedChar.isUndefined()?mUndefinedChar:(QChar)decodedChar );
     }
     else
-        for( int i=BinaryId; i<=CharacterId; ++i )
+    {
+        for( int i=BinaryId; i<=HexadecimalId; ++i )
             mDecoderValueList[i] = EmptyString;
-
+        mDecoderValueList[Char8BitId] = EmptyString;
+    }
     // UTF-8
     // interpreted as a sequence of bytes, there is no endian problem
     // source: http://unicode.org/faq/utf_bom.html#3
