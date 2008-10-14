@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Core library, part of the KDE project.
 
-    Copyright 2003,2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -24,9 +24,11 @@
 
 // lib
 #include "kbytearraymodel_p.h"
+#include "arraychangemetricslist.h"
 
 
-namespace KHECore {
+namespace KHECore
+{
 
 KByteArrayModel::KByteArrayModel( char *data, unsigned int size, int rawSize, bool keepMemory )
  : d( new KByteArrayModelPrivate(this,data,size,rawSize,keepMemory) )
@@ -61,7 +63,11 @@ int KByteArrayModel::maxSize()      const { return d->maxSize(); }
 bool KByteArrayModel::keepsMemory() const { return d->keepsMemory(); }
 bool KByteArrayModel::autoDelete()  const { return d->autoDelete(); }
 
-void KByteArrayModel::signalContentsChanged( int i1, int i2 ) { emit contentsChanged(i1,i2); }
+void KByteArrayModel::signalContentsChanged( int start, int end )
+{
+    const int length = end - start + 1;
+    emit contentsChanged( ArrayChangeMetricsList::oneReplacement(start,length,length) );
+}
 
 
 void KByteArrayModel::setDatum( unsigned int offset, const char datum )
@@ -130,5 +136,3 @@ KByteArrayModel::~KByteArrayModel()
 }
 
 }
-
-#include "kbytearraymodel.moc"

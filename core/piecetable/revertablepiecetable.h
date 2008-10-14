@@ -85,6 +85,7 @@ class RevertablePieceTable
   public:
     bool getStorageData( int *storageId, int *storageOffset, int dataOffset ) const;
     int size() const;
+    void getChangeData( KHE::ArrayChangeMetrics* metrics, int *storageOffset, int versionIndex ) const;
 
   public:
     int changesCount() const;
@@ -103,6 +104,7 @@ inline bool RevertablePieceTable::getStorageData( int *storageId, int *storageOf
 {
     return mPieceTable.getStorageData( storageId, storageOffset, dataOffset );
 }
+
 inline void RevertablePieceTable::setBeforeCurrentChangeAsBase( bool hide )
 {
     mChangeHistory.setBeforeCurrentChangeAsBase( hide );

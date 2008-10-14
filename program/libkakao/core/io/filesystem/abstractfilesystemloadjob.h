@@ -20,32 +20,41 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTEXPORTJOB_H
-#define ABSTRACTEXPORTJOB_H
+#ifndef ABSTRACTFILESYSTEMLOADJOB_H
+#define ABSTRACTFILESYSTEMLOADJOB_H
 
-// KDE
-#include <KJob>
+// library
+#include "abstractloadjob.h"
 
-class KAbstractDocument;
+class AbstractModelFileSystemSynchronizer;
+class KUrl;
+class QWidget;
 
-class AbstractExportJob : public KJob
+
+class AbstractFileSystemLoadJob : public AbstractLoadJob
 {
   Q_OBJECT
 
   public:
-    AbstractExportJob();
-    virtual ~AbstractExportJob();
+    AbstractFileSystemLoadJob( AbstractModelFileSystemSynchronizer* synchronizer, const KUrl &url );
+    virtual ~AbstractFileSystemLoadJob();
 
-  public:
-    KAbstractDocument *document() const;
+  public: // KJob API
+    virtual void start();
 
-  Q_SIGNALS:
-    void documentLoaded( KAbstractDocument *document );
+  protected: // AbstractLoadJob API
+    virtual void setDocument( KAbstractDocument *document );
+
+  protected: // API to be implemented
+    virtual void startLoadFromFile() = 0;
+
+  protected Q_SLOTS:
+    void load();
 
   protected:
-    // emits documentLoaded()
-    // TODO: or better name property LoadedDocument?
-    virtual void setDocument( KAbstractDocument *document );
+    AbstractModelFileSystemSynchronizer* synchronizer() const;
+    QString workFilePath() const;
+    QWidget *widget() const;
 
   protected:
     class Private;

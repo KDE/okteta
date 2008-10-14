@@ -20,22 +20,44 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractpiecetablechange.h"
+#ifndef KHE_CORE_CHANGEHISTORY_H
+#define KHE_CORE_CHANGEHISTORY_H
 
+
+// lib
+#include "bytearraychange.h"
 // Qt
-#include <QtCore/Qt>
+#include <QtCore/QList>
+#include <QtCore/QtPlugin>
 
-namespace KPieceTable
+class QByteArray;
+
+namespace KHECore
 {
 
-bool AbstractPieceTableChange::merge( const AbstractPieceTableChange *other )
+// TODO: split readonly part into own interface
+class ChangeHistory
 {
-Q_UNUSED( other )
-    return false;
+  public:
+    virtual ~ChangeHistory();
+
+  public: // get
+    virtual QList<ByteArrayChange> changes( int firstVersionIndex, int lastVersionIndex ) const = 0;
+    virtual QByteArray initialData() const = 0;
+
+  public: // set
+    virtual void doChanges( const QList<KHECore::ByteArrayChange>& changes,
+                                  int oldVersionIndex, int newVersionIndex ) = 0;
+
+  public: // signal
+    virtual void changesDone( const QList<KHECore::ByteArrayChange>& changes,
+                                    int oldVersionIndex, int newVersionIndex ) = 0;
+};
+
+inline ChangeHistory::~ChangeHistory() {}
+
 }
 
-int AbstractPieceTableChange::storageOffset() const { return -1; }
+Q_DECLARE_INTERFACE( KHECore::ChangeHistory, "org.kde.khecore.changehistory/1.0" )
 
-int AbstractPieceTableChange::dataSize() const { return 0; }
-
-}
+#endif

@@ -24,6 +24,8 @@
 
 // lib
 #include "kbytearraydocument.h"
+// Kakao core
+#include <person.h>
 // KDE
 #include <KLocale>
 
@@ -41,6 +43,8 @@ KAbstractDocument *KByteArrayDocumentFactory::create()
     document->setTitle(
         i18ncp("numbered title for a created document without a filename",
                "[New Byte Array]","[New Byte Array %1]",newByteArrayDocumentCounter) );
+
+    document->setOwner( Person::createEgo() );
 
     return document;
 }

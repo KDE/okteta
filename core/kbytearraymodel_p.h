@@ -139,7 +139,6 @@ inline void KByteArrayModelPrivate::setDatum( unsigned int offset, const char da
     m_data[offset] = datum;
     m_modified = true;
     emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(offset,1,1) );
-    emit p->contentsChanged( offset, offset );
     emit p->modificationChanged( true );
 }
 inline void KByteArrayModelPrivate::setModified( bool modified )

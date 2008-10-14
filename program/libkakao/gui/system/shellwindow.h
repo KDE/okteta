@@ -67,7 +67,7 @@ class ShellWindow : public KXmlGuiWindow, public KDE::If::WidgetsDockable
     void onViewFocusChanged( KAbstractView *view );
 
   protected:
-    TabbedViews *mTabbedViews;
+    TabbedViews* mGroupedViews;
     // hack:
     // used to store a pointer to the current, so we can disconnect to its signals... well, not perfect
     KAbstractView *mCurrentView;

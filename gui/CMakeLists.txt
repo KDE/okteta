@@ -1,5 +1,7 @@
 project( oktetagui )
 
+add_definitions( -DKDE_DEFAULT_DEBUG_AREA=1802 )
+
 include_directories(
   ../core
   ../gui/libcolumnsview

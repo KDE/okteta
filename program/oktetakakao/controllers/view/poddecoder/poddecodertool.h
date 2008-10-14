@@ -90,7 +90,7 @@ class PODDecoderTool : public AbstractTool
 
   protected Q_SLOTS:
     void onCursorPositionChange( int pos );
-    void onContentsChange( int start, int end );
+    void onContentsChange();
 
     void onCharCodecChange( const QString& codecName );
 //     void onUndefinedCharChanged( const QChar& undefinedChar );

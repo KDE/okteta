@@ -26,6 +26,7 @@
 // lib
 // #include "kbytearrayinterface.h"
 // Kakao core
+#include <userlistable.h>
 #include <kiversionable.h>
 #include <kabstractdocument.h>
 // Qt
@@ -37,10 +38,10 @@ class KPieceTableByteArrayModel;
 }
 
 
-class KByteArrayDocument : public KAbstractDocument, public KDE::If::Versionable//, public KDE::If::ByteArray
+class KByteArrayDocument : public KAbstractDocument, public KDE::If::Versionable, public KDE::If::UserListable//, public KDE::If::ByteArray
 {
     Q_OBJECT
-    Q_INTERFACES(KDE::If::Versionable)
+    Q_INTERFACES(KDE::If::Versionable KDE::If::UserListable)
 //     Q_INTERFACES(KDE::If::ByteArray)
 
   public:
@@ -65,16 +66,27 @@ class KByteArrayDocument : public KAbstractDocument, public KDE::If::Versionable
     virtual int versionCount() const;
     virtual void revertToVersionByIndex( int versionIndex );
 
+  public: // KDE::If::UserListable
+    virtual Person owner() const;
+    virtual QList<Person> userList() const;
+
   public: // KDE::If::ByteArray
     virtual KHECore::KAbstractByteArrayModel *content() const;
 
   public:
     void setTitle( const QString &title );
 
+    void setOwner( const Person& owner );
+    void addUsers( const QList<Person>& users );
+    void removeUsers( const QList<Person>& users );
+
   Q_SIGNALS: // KDE::If::Versionable
     virtual void revertedToVersionIndex( int versionIndex );
     virtual void headVersionDataChanged( const KDocumentVersionData &versionData );
     virtual void headVersionChanged( int newHeadVersionIndex );
+  Q_SIGNALS: // KDE::If::UserListable
+    virtual void usersAdded( const QList<Person>& newUserList );
+    virtual void usersRemoved( const QList<Person>& newUserList );
 
   protected Q_SLOTS:
     void onModelModification( bool newState );
@@ -86,6 +98,8 @@ class KByteArrayDocument : public KAbstractDocument, public KDE::If::Versionable
     mutable QString mTitle;
 
     const QString mInitDescription;
+
+    QList<Person> mUserList;
 };
 
 #endif

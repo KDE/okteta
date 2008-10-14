@@ -28,6 +28,8 @@
 #include "replacepiecetablechange.h"
 #include "swaprangespiecetablechange.h"
 //
+#include <arraychangemetricslist.h>
+//
 #include <ksectionlist.h>
 
 namespace KPieceTable
@@ -39,6 +41,11 @@ void RevertablePieceTable::init( int size )
 {
     mPieceTable.init( size );
     mChangeHistory.clear();
+}
+
+void RevertablePieceTable::getChangeData( KHE::ArrayChangeMetrics* metrics, int *storageOffset, int versionIndex ) const
+{
+    mChangeHistory.getChangeData( metrics, storageOffset, versionIndex );
 }
 
 bool RevertablePieceTable::insert( int dataOffset, int length, int *storageOffset )

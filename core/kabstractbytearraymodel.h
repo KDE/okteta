@@ -255,8 +255,6 @@ class OKTETACORE_EXPORT KAbstractByteArrayModel : public QObject
   Q_SIGNALS:
     // TODO: how to deal replacing with fixed size of buffer?
     void contentsChanged( const KHE::ArrayChangeMetricsList &changeList );
-    void contentsChanged( int startOffset, int endOffset );
-    void contentsChanged( const KHE::KSectionList &changedSectionList );
 
     void readOnlyChanged( bool isReadOnly );
     void modificationChanged( bool isModified );

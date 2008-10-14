@@ -1,8 +1,12 @@
 project( kakaocontrollers )
 
+add_definitions( -DKDE_DEFAULT_DEBUG_AREA=1805 )
+
 include_directories(
+  ../core/entity
   ../core/document
   ../core/io
+  ../core/io/filesystem
   ../core/system
   ../gui/view
   ../gui/system
@@ -12,9 +16,6 @@ include_directories(
 
 set( SYNCHRONIZECONTROLLER_SRCS
   io/synchronize/synchronizecontroller.cpp
-)
-set( SETREMOTECONTROLLER_SRCS
-  io/setremote/setremotecontroller.cpp
 )
 set( CREATORCONTROLLER_SRCS
   documentsystem/creator/creatorcontroller.cpp
@@ -73,7 +74,6 @@ set( QUITCONTROLLER_SRCS
 )
 
 set( KAKAO_CONTROLLERS_SRCS
-  ${SETREMOTECONTROLLER_SRCS}
   ${CLOSECONTROLLER_SRCS}
   ${VERSIONCONTROLLER_SRCS}
   ${VERSIONVIEWCONTROLLER_SRCS}

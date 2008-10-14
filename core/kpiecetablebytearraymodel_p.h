@@ -25,16 +25,16 @@
 
 // lib
 #include "kpiecetablebytearraymodel.h"
+#include "changesdatastorage.h"
+#include "arraychangemetricslist.h"
 // piecetable
 #include "piecetable/revertablepiecetable.h"
-// Qt
-#include <QtCore/QByteArray>
 
 
 namespace KHECore
 {
 
-/** base class for all mData buffers that are used to display
+/** base class for all mInitialData buffers that are used to display
   * TODO: think about a way to inform KHexEdit that there has been
   * a change in the buffer outside. what kind of changes are possible?
   *@author Friedrich W. H. Kossebau
@@ -86,23 +86,47 @@ class KPieceTableByteArrayModel::Private
     void cancelGroupedChange();
     void closeGroupedChange( const QString &description );
 
+  public: // ChangeHistory API
+    QList<ByteArrayChange> changes( int firstVersionIndex, int lastVersionIndex ) const;
+    QByteArray initialData() const;
+    void doChanges( const QList<KHECore::ByteArrayChange>& changes,
+                    int oldVersionIndex, int newVersionIndex );
+
   public:
     void setData( const char *data, unsigned int size, bool careForMemory = true );
 
   protected:
+    void doInsertChange( unsigned int offset, const char* insertData, unsigned int insertLength );
+    void doRemoveChange( const KSection& removeSection );
+    void doReplaceChange( const KSection& removeSection, const char* insertData, unsigned int insertLength );
+    void doSwapChange( int firstStart, const KSection& secondSection );
+    void doFillChange( unsigned int offset, unsigned int filledLength,
+                       const char fillByte, unsigned int fillLength );
+
+    void beginChanges();
+    void endChanges();
+
+  protected: // data
     KPieceTableByteArrayModel *p;
     /**  */
     bool mReadOnly:1;
     /** */
     bool mAutoDelete:1;
 
-    const char *mData;
+    const char *mInitialData;
+    int mInitialSize;
     KPieceTable::RevertablePieceTable mPieceTable;
-    QByteArray mChangeByteArray;
+    ChangesDataStorage mChangesDataStorage;
     /** */
     KBookmarkList mBookmarks;
     /** temporary workaround for cancelling groups. If -1 no group is opened. */
     int mBeforeGroupedChangeVersionIndex;
+
+    int mBeforeChangesVersionIndex;
+    KHE::ArrayChangeMetricsList mChangeMetrics;
+    QList<ByteArrayChange> mChanges;
+    bool mBeforeChangesModified:1;
+    bool mBookmarksModified:1;
 };
 
 

@@ -42,6 +42,15 @@ void PieceTableChangeHistory::clear()
     mAppliedChangesDataSize = 0;
 }
 
+void PieceTableChangeHistory::getChangeData( KHE::ArrayChangeMetrics* metrics, int *storageOffset,
+                                             int versionIndex ) const
+{
+    AbstractPieceTableChange *change = mChangeStack.at( versionIndex );
+    *metrics = change->metrics();
+    *storageOffset = change->storageOffset();
+}
+
+
 void PieceTableChangeHistory::setBeforeCurrentChangeAsBase(bool hide)
 {
     mBaseBeforeChangeIndex = hide ? -1 : mAppliedChangesCount;

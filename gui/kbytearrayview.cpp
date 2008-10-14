@@ -119,8 +119,6 @@ KByteArrayView::KByteArrayView( KHECore::KAbstractByteArrayModel *byteArrayModel
     if( !mByteArrayModel )
         mByteArrayModel = new KHECore::KByteArrayModel; // TODO: leaking, make it shared
     connect( mByteArrayModel, SIGNAL(readOnlyChanged( bool )), SLOT(onByteArrayReadOnlyChange( bool )) );
-    connect( mByteArrayModel, SIGNAL(contentsChanged(int,int)), SLOT(updateRange(int,int)) );
-    connect( mByteArrayModel, SIGNAL(contentsChanged(const KHE::KSectionList&)), SLOT(updateRange(const KHE::KSectionList&)) );
     connect( mByteArrayModel, SIGNAL(contentsChanged( const KHE::ArrayChangeMetricsList & )),
              SLOT(onContentsChanged( const KHE::ArrayChangeMetricsList & )) );
 
@@ -270,8 +268,6 @@ void KByteArrayView::setByteArrayModel( KHECore::KAbstractByteArrayModel *byteAr
         setReadOnly( true );
 
     connect( mByteArrayModel, SIGNAL(readOnlyChanged( bool )), SLOT(adaptController()) );
-    connect( mByteArrayModel, SIGNAL(contentsChanged(int,int)), SLOT(updateRange(int,int)) );
-    connect( mByteArrayModel, SIGNAL(contentsChanged(const KHE::KSectionList&)), SLOT(updateRange(const KHE::KSectionList&)) );
     connect( mByteArrayModel, SIGNAL(contentsChanged( const KHE::ArrayChangeMetricsList & )),
              SLOT(onContentsChanged( const KHE::ArrayChangeMetricsList & )) );
 
@@ -1105,26 +1101,6 @@ void KByteArrayView::removeSelectedData()
 }
 
 
-void KByteArrayView::updateRange( int start, int end )
-{
-    mDataRanges->addChangedRange( start, end );
-// kDebug() << "update: "<<start<<","<<end;
-
-    updateChanged();
-    unpauseCursor();
-}
-
-
-void KByteArrayView::updateRange( const KHE::KSectionList &list )
-{
-    for( KHE::KSectionList::ConstIterator it=list.begin(); it!=list.end(); ++it )
-        mDataRanges->addChangedRange( *it );
-
-    updateChanged();
-    unpauseCursor();
-}
-
-
 void KByteArrayView::onContentsChanged( const KHE::ArrayChangeMetricsList &changeList )
 {
     pauseCursor();
@@ -1147,7 +1123,7 @@ void KByteArrayView::onContentsChanged( const KHE::ArrayChangeMetricsList &chang
     else
         mDataCursor->adaptToChanges( changeList, oldLength );
 
-    mDataRanges->adaptSelectionToChanges( changeList );
+    mDataRanges->adaptToChanges( changeList );
     // kDebug() << "Cursor:"<<mDataCursor->index()<<", selection:"<<mDataRanges->selectionStart()<<"-"<<mDataRanges->selectionEnd()
     //          <<", BytesPerLine: "<<mDataLayout->noOfBytesPerLine()<<endl;
 

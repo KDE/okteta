@@ -2,6 +2,7 @@
 <kpartgui name="Okteta" version="1">
 <MenuBar>
   <Menu name="file">
+    <Action name="connect_to" append="open_merge" />
     <!--Menu name="import" append="open_merge">
       <text context="@title:menu">Import</text>
       <!- -Action name="import_clipboard" /- ->
@@ -14,6 +15,8 @@
       <text context="@title:menu">Export</text>
       <ActionList name="export_list" />
     </Menu>
+    <Separator/>
+    <Action name="set_offering" />
     <Separator/>
     <Action name="cancel" />
     <Menu name="permission">

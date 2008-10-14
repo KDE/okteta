@@ -1,5 +1,5 @@
 /*
-    This file is part of the Okteta Kakao module, part of the KDE project.
+    This file is part of the Kakao Framework, part of the KDE project.
 
     Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
@@ -20,25 +20,44 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MODELENCODERFILESYSTEMEXPORTJOB_H
-#define MODELENCODERFILESYSTEMEXPORTJOB_H
+#ifndef ABSTRACTFILESYSTEMCONNECTJOB_H
+#define ABSTRACTFILESYSTEMCONNECTJOB_H
 
-// lib
-#include "abstractfilesystemexportjob.h"
+// library
+#include "abstractconnectjob.h"
+#include "abstractmodelsynchronizer.h"
 
-class AbstractModelStreamEncoder;
+class AbstractModelFileSystemSynchronizer;
+class KUrl;
+class QWidget;
 
-class ModelEncoderFileSystemExportJob : public AbstractFileSystemExportJob
+
+class AbstractFileSystemConnectJob : public AbstractConnectJob
 {
   Q_OBJECT
 
   public:
-    ModelEncoderFileSystemExportJob( AbstractModel *model, const AbstractModelSelection *selection,
-                                     const KUrl &url, AbstractModelStreamEncoder *encoder );
-    virtual ~ModelEncoderFileSystemExportJob();
+    AbstractFileSystemConnectJob( AbstractModelFileSystemSynchronizer* synchronizer, KAbstractDocument* document,
+                                  const KUrl &url, AbstractModelSynchronizer::ConnectOption option );
+    virtual ~AbstractFileSystemConnectJob();
 
-  protected: // AbstractFileSystemExportJob API
-    virtual void startExportToFile();
+  public: // KJob API
+    virtual void start();
+
+  protected: // API to be implemented
+    virtual void startConnectWithFile() = 0;
+
+  protected:
+    void complete( bool success );
+
+  protected:
+    AbstractModelFileSystemSynchronizer* synchronizer() const;
+    KAbstractDocument *document() const;
+    QString workFilePath() const;
+    QWidget *widget() const;
+
+  protected Q_SLOTS:
+    void connectWithFile();
 
   protected:
     class Private;

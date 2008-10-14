@@ -22,10 +22,13 @@
 
 #include "kbytearraydocument.h"
 
+//
+#include <person.h>
 // Okteta core
 #include <kpiecetablebytearraymodel.h>
 // KDE
 #include <KLocale>
+#include <KIcon>
 // Qt
 #include <QtCore/QLatin1String>
 
@@ -90,7 +93,7 @@ int KByteArrayDocument::versionCount() const { return mByteArray->versionCount()
 KDocumentVersionData KByteArrayDocument::versionData( int versionIndex ) const
 {
     const QString changeComment = ( versionIndex == 0 ) ? mInitDescription : mByteArray->versionDescription(versionIndex);
-    return KDocumentVersionData( 0, changeComment );
+    return KDocumentVersionData( versionIndex, changeComment );
 }
 
 void KByteArrayDocument::revertToVersionByIndex( int versionIndex ) { mByteArray->revertToVersionByIndex( versionIndex ); }
@@ -102,13 +105,42 @@ void KByteArrayDocument::onModelModification( bool newState )
 
 void KByteArrayDocument::onHeadVersionDescriptionChanged( const QString &newDescription )
 {
-    const KDocumentVersionData data( 0, newDescription );
+    const KDocumentVersionData data( mByteArray->versionIndex(), newDescription );
     emit headVersionDataChanged( data );
+}
+
+Person KByteArrayDocument::owner() const
+{
+    return mUserList.size()>0 ? mUserList.at( 0 ) : Person();
+}
+
+QList<Person> KByteArrayDocument::userList() const
+{
+    return mUserList;
+}
+
+void KByteArrayDocument::setOwner( const Person& owner )
+{
+    mUserList.append( owner );
+}
+
+void KByteArrayDocument::addUsers( const QList<Person>& users )
+{
+    foreach( const Person& user, users )
+        mUserList.append( user );
+
+    emit usersAdded( users );
+}
+
+void KByteArrayDocument::removeUsers( const QList<Person>& users )
+{
+    foreach( const Person& user, users )
+        mUserList.removeOne( user );
+
+    emit usersRemoved( users );
 }
 
 KByteArrayDocument::~KByteArrayDocument()
 {
     delete mByteArray;
 }
-
-#include "kbytearraydocument.moc"

@@ -37,18 +37,18 @@
 
 
 ShellWindow::ShellWindow( KDocumentManager *documentManager, KViewManager *viewManager )
- : mTabbedViews( new TabbedViews(viewManager) ), mCurrentView( 0 ),
+ : mGroupedViews( new TabbedViews(viewManager) ), mCurrentView( 0 ),
    mDocumentManager( documentManager ), mViewManager( viewManager )
 {
-    setCentralWidget( mTabbedViews->widget() );
+    setCentralWidget( mGroupedViews->widget() );
 
     mViewManager->setWindow( this );
     connect( mViewManager, SIGNAL(opened( KAbstractView* )),
-             mTabbedViews, SLOT(addView( KAbstractView* )) );
+             mGroupedViews, SLOT(addView( KAbstractView* )) );
     connect( mViewManager, SIGNAL(closing( KAbstractView* )),
-             mTabbedViews, SLOT(removeView( KAbstractView* )) );
+             mGroupedViews, SLOT(removeView( KAbstractView* )) );
 
-    connect( mTabbedViews, SIGNAL(viewFocusChanged( KAbstractView* )), SLOT(onViewFocusChanged( KAbstractView* )) );
+    connect( mGroupedViews, SIGNAL(viewFocusChanged( KAbstractView* )), SLOT(onViewFocusChanged( KAbstractView* )) );
 }
 
 QList<QDockWidget*> ShellWindow::dockWidgets() const { return mDockWidgets; }
@@ -126,5 +126,5 @@ ShellWindow::~ShellWindow()
     qDeleteAll( mToolViews );
     qDeleteAll( mTools );
 
-    delete mTabbedViews;
+    delete mGroupedViews;
 }

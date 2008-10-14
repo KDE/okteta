@@ -53,7 +53,6 @@
 #include <documentsystem/creator/creatorcontroller.h>
 #include <documentsystem/loader/loadercontroller.h>
 #include <documentsystem/close/closecontroller.h>
-#include <io/setremote/setremotecontroller.h>
 #include <io/synchronize/synchronizecontroller.h>
 #include <io/clipboard/clipboardcontroller.h>
 #include <io/copyas/copyascontroller.h>
@@ -69,6 +68,7 @@
 // Kakao gui
 #include <kviewmanager.h>
 #include <tabbedviews.h>
+#include <parallelviews/parallelviews.h>
 // Kakao core
 #include <kdocumentcreatemanager.h>
 #include <kdocumentsyncmanager.h>
@@ -105,14 +105,13 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram *program )
     addXmlGuiController( new CopyAsController(mProgram->documentManager(),this) );
     addXmlGuiController( new ExportController(mProgram->documentManager(),this) );
     addXmlGuiController( new ToolListMenuController(this,this) );
-    addXmlGuiController( new ViewListMenuController(mProgram->viewManager(),mTabbedViews,this) );
+    addXmlGuiController( new ViewListMenuController(mProgram->viewManager(),mGroupedViews,this) );
 }
 
 void OktetaMainWindow::setupControllers()
 {
     addXmlGuiController( new CreatorController(mProgram->documentManager()->createManager(),this) );
     addXmlGuiController( new LoaderController(mProgram->documentManager()->syncManager(),this) );
-    addXmlGuiController( new SetRemoteController(mProgram->documentManager()->syncManager(),this) );
     addXmlGuiController( new SynchronizeController(this) );
     addXmlGuiController( new CloseController(mProgram->documentManager(),this) );
     addXmlGuiController( new VersionController(this) );

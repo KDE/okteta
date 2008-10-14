@@ -1,5 +1,5 @@
 /*
-    This file is part of the Okteta Kakao module, part of the KDE project.
+    This file is part of the Kakao Framework, part of the KDE project.
 
     Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
@@ -20,45 +20,39 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTFILESYSTEMLOADJOB_H
-#define ABSTRACTFILESYSTEMLOADJOB_H
 
-// library
-#include "abstractloadjob.h"
+#ifndef PERSON_P_H
+#define PERSON_P_H
 
-class AbstractModelFileSystemSynchronizer;
-class KUrl;
-class QWidget;
+#include "person.h"
+
+//KDE
+#include <KIcon>
+//Qt
+#include <QtCore/QString>
 
 
-class AbstractFileSystemLoadJob : public AbstractLoadJob
+class Person::Private : public KShared
 {
-  Q_OBJECT
+  public:
+    Private( const QString& name, const KIcon& faceIcon );
+    ~Private();
 
   public:
-    AbstractFileSystemLoadJob( AbstractModelFileSystemSynchronizer* synchronizer, const KUrl &url );
-    virtual ~AbstractFileSystemLoadJob();
-
-  public: // KJob API
-    virtual void start();
-
-  protected: // AbstractLoadJob API
-    virtual void setDocument( KAbstractDocument *document );
-
-  protected: // API to be implemented
-    virtual void startLoadFromFile() = 0;
-
-  protected Q_SLOTS:
-    void load();
+    QString name() const;
+    KIcon faceIcon() const;
 
   protected:
-    AbstractModelFileSystemSynchronizer* synchronizer() const;
-    QString workFilePath() const;
-    QWidget *widget() const;
-
-  protected:
-    class Private;
-    Private * const d;
+    QString mName;
+    KIcon mFaceIcon;
 };
+
+inline Person::Private::Private( const QString& name, const KIcon& faceIcon )
+ : mName( name ), mFaceIcon( faceIcon ) {}
+
+inline QString Person::Private::name()   const { return mName; }
+inline KIcon Person::Private::faceIcon() const { return mFaceIcon; }
+
+inline Person::Private::~Private() {}
 
 #endif

@@ -27,7 +27,7 @@
 // Okteta Kakao
 #include <kbytearraydocumentfactory.h>
 #include <kbytearraydisplayfactory.h>
-#include <kbytearrayrawfilesynchronizerfactory.h>
+#include <filesystem/kbytearrayrawfilesynchronizerfactory.h>
 #include <kbytearraytextstreamencoder.h>
 #include <kbytearrayvaluestreamencoder.h>
 #include <kbytearraysourcecodestreamencoder.h>

@@ -20,32 +20,25 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTEXPORTJOB_H
-#define ABSTRACTEXPORTJOB_H
+#ifndef MODELENCODERFILESYSTEMEXPORTJOB_H
+#define MODELENCODERFILESYSTEMEXPORTJOB_H
 
-// KDE
-#include <KJob>
+// lib
+#include "abstractfilesystemexportjob.h"
 
-class KAbstractDocument;
+class AbstractModelStreamEncoder;
 
-class AbstractExportJob : public KJob
+class ModelEncoderFileSystemExportJob : public AbstractFileSystemExportJob
 {
   Q_OBJECT
 
   public:
-    AbstractExportJob();
-    virtual ~AbstractExportJob();
+    ModelEncoderFileSystemExportJob( AbstractModel *model, const AbstractModelSelection *selection,
+                                     const KUrl &url, AbstractModelStreamEncoder *encoder );
+    virtual ~ModelEncoderFileSystemExportJob();
 
-  public:
-    KAbstractDocument *document() const;
-
-  Q_SIGNALS:
-    void documentLoaded( KAbstractDocument *document );
-
-  protected:
-    // emits documentLoaded()
-    // TODO: or better name property LoadedDocument?
-    virtual void setDocument( KAbstractDocument *document );
+  protected: // AbstractFileSystemExportJob API
+    virtual void startExportToFile();
 
   protected:
     class Private;

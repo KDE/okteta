@@ -23,9 +23,6 @@
 #include "kpiecetablebytearraymodel_p.h"
 #include "kpiecetablebytearraymodel.h"
 
-// lib
-#include <arraychangemetricslist.h>
-
 #include <KDebug>
 
 namespace KHECore
@@ -38,18 +35,20 @@ KPieceTableByteArrayModel::Private::Private( KPieceTableByteArrayModel *parent, 
   : p( parent ),
    mReadOnly( false ),
    mAutoDelete( true ),
-   mBeforeGroupedChangeVersionIndex( InvalidVersionIndex )
+   mBeforeGroupedChangeVersionIndex( InvalidVersionIndex ),
+   mBookmarksModified( false )
 {
     if( data == 0 )
         size = 0;
     if( careForMemory )
-        mData = data;
+        mInitialData = data;
     else
     {
         char *dataCopy = new char[size];
         memcpy( dataCopy, data, size );
-        mData = dataCopy;
+        mInitialData = dataCopy;
     }
+    mInitialSize = size;
     mPieceTable.init( size );
 }
 
@@ -60,7 +59,8 @@ KPieceTableByteArrayModel::Private::Private( KPieceTableByteArrayModel *parent, 
 {
     char *data = new char[size];
     memset( data, fillByte, size );
-    mData = data;
+    mInitialData = data;
+    mInitialSize = size;
     mPieceTable.init( size );
 }
 
@@ -73,15 +73,15 @@ char KPieceTableByteArrayModel::Private::datum( unsigned int offset ) const
     mPieceTable.getStorageData( &storageId, &storageOffset, offset );
 
     const char result = ( storageId == KPieceTable::Piece::OriginalStorage ) ?
-                        mData[storageOffset] :
-                        mChangeByteArray[storageOffset];
+                        mInitialData[storageOffset] :
+                        mChangesDataStorage[storageOffset];
     return result;
 }
 
 void KPieceTableByteArrayModel::Private::setData( const char *data, unsigned int size, bool careForMemory )
 {
     if( mAutoDelete )
-        delete mData;
+        delete mInitialData;
     const unsigned int oldSize = mPieceTable.size();
     const bool wasModifiedBefore = isModified();
     const QList<KHECore::KBookmark> bookmarks = mBookmarks.list();
@@ -90,19 +90,19 @@ void KPieceTableByteArrayModel::Private::setData( const char *data, unsigned int
         size = 0;
 
     if( careForMemory )
-        mData = data;
+        mInitialData = data;
     else
     {
         char *dataCopy = new char[size];
         memcpy( dataCopy, data, size );
-        mData = dataCopy;
+        mInitialData = dataCopy;
     }
     mPieceTable.init( size );
-    mChangeByteArray.clear();
+    mChangesDataStorage.clear();
     mBookmarks.clear();
 
+    // TODO: how to tell this to the synchronizer?
     emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(0,oldSize,size) );
-    emit p->contentsChanged( 0, (size>oldSize?size:oldSize)-1 );
     if( wasModifiedBefore ) emit p->modificationChanged( false );
     if( !bookmarks.empty() ) emit p->bookmarksRemoved( bookmarks );
     emit p->headVersionChanged( mPieceTable.changesCount() );
@@ -114,14 +114,20 @@ void KPieceTableByteArrayModel::Private::setDatum( unsigned int offset, const ch
         return;
 
     const bool wasModifiedBefore = isModified();
+    const bool oldVersionIndex = versionIndex();
 
     int storageOffset;
     const bool newChange = mPieceTable.replaceOne( offset, &storageOffset );
-    mChangeByteArray.resize( storageOffset );
-    mChangeByteArray.append( byte );
+    mChangesDataStorage.append( storageOffset, byte );
 
-    emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(offset,1,1) );
-    emit p->contentsChanged( offset, offset );
+    const KHE::ArrayChangeMetrics metrics =
+        ArrayChangeMetrics::asReplacement( offset, 1, 1 );
+    const ByteArrayChange modification( metrics, mChangesDataStorage.data(storageOffset,1) );
+    QList<KHECore::ByteArrayChange> modificationsList;
+    modificationsList.append( modification );
+
+    emit p->contentsChanged( KHE::ArrayChangeMetricsList(metrics) );
+    emit p->changesDone( modificationsList, oldVersionIndex, versionIndex() );
     if( !wasModifiedBefore ) emit p->modificationChanged( true );
     if( newChange )
         emit p->headVersionChanged( mPieceTable.changesCount() );
@@ -129,13 +135,6 @@ void KPieceTableByteArrayModel::Private::setDatum( unsigned int offset, const ch
         emit p->headVersionDescriptionChanged( mPieceTable.headChangeDescription() );
 }
 
-
-static inline void appendToByteArray( QByteArray *byteArray, int oldSize, const char *data, int dataLength )
-{
-    byteArray->resize( oldSize + dataLength );
-
-    memcpy( byteArray->data()+oldSize, data, dataLength );
-}
 
 int KPieceTableByteArrayModel::Private::insert( int offset, const char *insertData, int insertLength )
 {
@@ -147,22 +146,12 @@ int KPieceTableByteArrayModel::Private::insert( int offset, const char *insertDa
     if( mReadOnly || insertLength == 0 )
         return 0;
 
-    const bool wasModifiedBefore = isModified();
+    beginChanges();
 
-    int storageOffset;
-    const bool newChange = mPieceTable.insert( offset, insertLength, &storageOffset );
-    appendToByteArray( &mChangeByteArray, storageOffset, insertData, insertLength );
+    doInsertChange( offset, insertData, insertLength );
 
-    const bool bookmarksModified = mBookmarks.adjustToReplaced( offset, 0, insertLength );
+    endChanges();
 
-    emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(offset,0,insertLength) );
-    emit p->contentsChanged( offset, mPieceTable.size()-1 );
-    if( bookmarksModified ) emit p->bookmarksModified( true );
-    if( !wasModifiedBefore ) emit p->modificationChanged( true );
-    if( newChange )
-        emit p->headVersionChanged( mPieceTable.changesCount() );
-    else
-        emit p->headVersionDescriptionChanged( mPieceTable.headChangeDescription() );
     return insertLength;
 }
 
@@ -178,23 +167,14 @@ int KPieceTableByteArrayModel::Private::remove( const KSection &_removeSection )
     if( removeSection.start() >= oldSize || removeSection.width() == 0 )
         return 0;
 
-    const bool wasModifiedBefore = isModified();
+    beginChanges();
 
-    const bool newChange = mPieceTable.remove( removeSection );
+    doRemoveChange( removeSection );
 
-    const bool bookmarksModified = mBookmarks.adjustToReplaced( removeSection.start(), removeSection.width(), 0 );
+    endChanges();
 
-    emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(removeSection.start(),removeSection.width(),0) );
-    emit p->contentsChanged( removeSection.start(), oldSize-1 );
-    if( bookmarksModified ) emit p->bookmarksModified( true );
-    if( !wasModifiedBefore ) emit p->modificationChanged( true );
-    if( newChange )
-        emit p->headVersionChanged( mPieceTable.changesCount() );
-    else
-        emit p->headVersionDescriptionChanged( mPieceTable.headChangeDescription() );
     return removeSection.width();
 }
-
 
 unsigned int KPieceTableByteArrayModel::Private::replace( const KSection &r, const char *insertData, unsigned int insertLength )
 {
@@ -203,31 +183,16 @@ unsigned int KPieceTableByteArrayModel::Private::replace( const KSection &r, con
     const int oldSize = mPieceTable.size();
     removeSection.restrictEndTo( oldSize-1 );
     // check parameters
-    if( removeSection.startsBehind( oldSize-1 ) || (removeSection.width()==0 && insertLength==0) )
+    if( (removeSection.startsBehind( oldSize-1 ) && removeSection.width()>0)
+        || (removeSection.width()==0 && insertLength==0) )
         return 0;
 
-    const bool wasModifiedBefore = isModified();
+    beginChanges();
 
-    int storageOffset;
-    const bool newChange = mPieceTable.replace( removeSection, insertLength, &storageOffset );
-    appendToByteArray( &mChangeByteArray, storageOffset, insertData, insertLength );
+    doReplaceChange( removeSection, insertData, insertLength );
 
-    const bool bookmarksModified = mBookmarks.adjustToReplaced( removeSection.start(), removeSection.width(), insertLength );
+    endChanges();
 
-    const int sizeDiff = insertLength - removeSection.width();
-    const int lastChanged = ( sizeDiff == 0 ) ? removeSection.end() :
-                            ( sizeDiff > 0 ) ?  mPieceTable.size() - 1 :
-                                                oldSize - 1;
-
-    emit p->contentsChanged(
-        KHE::ArrayChangeMetricsList::oneReplacement(removeSection.start(),removeSection.width(),insertLength) );
-    emit p->contentsChanged( removeSection.start(), lastChanged );
-    if( bookmarksModified ) emit p->bookmarksModified( true );
-    if( !wasModifiedBefore ) emit p->modificationChanged( true );
-    if( newChange )
-        emit p->headVersionChanged( mPieceTable.changesCount() );
-    else
-        emit p->headVersionDescriptionChanged( mPieceTable.headChangeDescription() );
     return insertLength;
 }
 
@@ -242,21 +207,14 @@ bool KPieceTableByteArrayModel::Private::swap( int firstStart, const KSection &s
         || firstStart > mPieceTable.size() || secondSection.start() == firstStart )
         return false;
 
-    const bool wasModifiedBefore = isModified();
+    beginChanges();
 
-    mPieceTable.swap( firstStart, secondSection );
+    doSwapChange( firstStart, secondSection );
 
-    const bool bookmarksModified = mBookmarks.adjustToSwapped( firstStart, secondSection.start(),secondSection.width() );
+    endChanges();
 
-    emit p->contentsChanged(
-        KHE::ArrayChangeMetricsList::oneSwapping(firstStart,secondSection.start(),secondSection.width()) );
-    emit p->contentsChanged( firstStart, secondSection.end() );
-    if( bookmarksModified ) emit p->bookmarksModified( true );
-    if( !wasModifiedBefore ) emit p->modificationChanged( true );
-    emit p->headVersionChanged( mPieceTable.changesCount() );
     return true;
 }
-
 
 int KPieceTableByteArrayModel::Private::fill( const char fillByte, unsigned int offset, int fillLength )
 {
@@ -264,24 +222,18 @@ int KPieceTableByteArrayModel::Private::fill( const char fillByte, unsigned int 
     const int lengthToEnd = mPieceTable.size() - offset;
     if( fillLength < 0 )
         fillLength = lengthToEnd;
+    const int filledLength = ( fillLength < lengthToEnd ) ? fillLength : lengthToEnd;
     // check parameters
     const bool nothingToFill = ( (int)offset >= mPieceTable.size() );
     if( nothingToFill )
         return 0;
 
-    const bool wasModifiedBefore = isModified();
+    beginChanges();
 
-    const int filledLength = ( lengthToEnd > fillLength ) ? fillLength : lengthToEnd;
-    int oldChangeByteArraySize;
-    mPieceTable.replace( offset, filledLength, fillLength, &oldChangeByteArraySize );
+    doFillChange( offset, filledLength, fillByte, fillLength );
 
-    mChangeByteArray.resize( oldChangeByteArraySize + fillLength );
-    memset( mChangeByteArray.data()+oldChangeByteArraySize, fillByte, fillLength );
+    endChanges();
 
-    emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(offset,fillLength,fillLength) );
-    emit p->contentsChanged( offset, offset+fillLength-1 );
-    if( !wasModifiedBefore ) emit p->modificationChanged( true );
-    emit p->headVersionChanged( mPieceTable.changesCount() );
     return fillLength;
 }
 
@@ -293,7 +245,7 @@ void KPieceTableByteArrayModel::Private::revertToVersionByIndex( int versionInde
     const bool oldModified = isModified();
 
     const bool anyChanges =
-        mPieceTable.revertBeforeChange( versionIndex, &changedRanges, &changeList );
+        mPieceTable.revertBeforeChange( versionIndex, &changedRanges, &changeList ); // TODO: changedRanges no longer used
 
     if( !anyChanges )
         return;
@@ -305,7 +257,6 @@ void KPieceTableByteArrayModel::Private::revertToVersionByIndex( int versionInde
 // Modell of the bookmarks. But shouldn't they be independent?
 
     emit p->contentsChanged( changeList );
-    emit p->contentsChanged( changedRanges );
     if( isModificationChanged ) emit p->modificationChanged( newModified );
     emit p->revertedToVersionIndex( versionIndex );
 }
@@ -332,10 +283,191 @@ void KPieceTableByteArrayModel::Private::closeGroupedChange( const QString &desc
     emit p->headVersionDescriptionChanged( mPieceTable.headChangeDescription() );
 }
 
+QList<ByteArrayChange> KPieceTableByteArrayModel::Private::changes( int firstVersionIndex, int lastVersionIndex ) const
+{
+    QList<ByteArrayChange> result;
+
+    for( int i=firstVersionIndex; i<lastVersionIndex; ++i )
+    {
+        ArrayChangeMetrics metrics;
+        int storageOffset;
+        mPieceTable.getChangeData( &metrics, &storageOffset, i );
+
+        QByteArray data;
+        if( metrics.type() == ArrayChangeMetrics::Replacement )
+            data = mChangesDataStorage.data( storageOffset, metrics.insertLength() );
+        result.append( ByteArrayChange(metrics,data) );
+    }
+
+    return result;
+}
+
+QByteArray KPieceTableByteArrayModel::Private::initialData() const
+{
+    return QByteArray( mInitialData, mInitialSize );
+}
+
+void KPieceTableByteArrayModel::Private::doChanges( const QList<KHECore::ByteArrayChange>& changes,
+                                                    int oldVersionIndex, int newVersionIndex )
+{
+// kDebug() << this<<" is at "<<versionIndex()<<", should from "<<oldVersionIndex<<" to "<<newVersionIndex;
+    // changes already done? TODO: should this check be here?
+    if( newVersionIndex == versionIndex() )
+        return;
+
+    // collision! TODO: what to do?
+    if( oldVersionIndex != versionIndex() )
+        return;
+
+    beginChanges();
+
+    foreach( const ByteArrayChange& change, changes )
+    {
+        const KHE::ArrayChangeMetrics& metrics = change.metrics();
+        switch( metrics.type() )
+        {
+        case ArrayChangeMetrics::Replacement:
+        {
+            const int oldSize = mPieceTable.size();
+            const KSection removeSection = KSection::fromWidth( metrics.offset(), metrics.removeLength() );
+            // check parameters
+            if( removeSection.startsBehind(oldSize-1) && (removeSection.width()>0) )
+                // something is not matching
+                ; // TODO: set flag to undo all changes
+
+            const QByteArray& insertData = change.data();
+            doReplaceChange( removeSection, insertData.data(), insertData.size() );
+            break;
+        }
+        case ArrayChangeMetrics::Swapping:
+        {
+            const KSection secondSection( metrics.secondStart(), metrics.secondEnd() );
+            doSwapChange( metrics.offset(), secondSection );
+            break;
+        }
+        default:
+            ;
+        }
+    }
+
+    // not the same versioning? TODO: where and how to define the version id?
+//     if( newVersionIndex != versionIndex() )
+//         return;
+// kDebug()<<this<<" is now at "<<versionIndex();
+
+    endChanges();
+}
+
+void KPieceTableByteArrayModel::Private::beginChanges()
+{
+    mBeforeChangesVersionIndex = versionIndex();
+    mBeforeChangesModified = isModified();
+}
+
+void KPieceTableByteArrayModel::Private::endChanges()
+{
+    const int currentVersionIndex = versionIndex();
+    const bool newChange = ( mBeforeChangesVersionIndex != currentVersionIndex );
+    const bool currentIsModified = isModified();
+    const bool modificationChanged = ( mBeforeChangesModified == currentIsModified );
+
+    emit p->contentsChanged( mChangeMetrics );
+    emit p->changesDone( mChanges, mBeforeChangesVersionIndex, currentVersionIndex );
+    if( mBookmarksModified ) emit p->bookmarksModified( true );
+    if( modificationChanged ) emit p->modificationChanged( currentIsModified );
+    if( newChange )
+        emit p->headVersionChanged( mPieceTable.changesCount() );
+    else
+        emit p->headVersionDescriptionChanged( mPieceTable.headChangeDescription() );
+
+    // clean
+    mChangeMetrics.clear();
+    mChanges.clear();
+    mBookmarksModified = false;
+}
+
+void KPieceTableByteArrayModel::Private::doInsertChange( unsigned int offset,
+                                                         const char* insertData, unsigned int insertLength )
+{
+    int storageOffset;
+    mPieceTable.insert( offset, insertLength, &storageOffset );
+    mChangesDataStorage.append( storageOffset, insertData, insertLength );
+
+    mBookmarksModified |= mBookmarks.adjustToReplaced( offset, 0, insertLength );
+
+    const KHE::ArrayChangeMetrics metrics = ArrayChangeMetrics::asReplacement( offset, 0, insertLength );
+    const ByteArrayChange change( metrics, mChangesDataStorage.data(storageOffset,insertLength) );
+
+    mChangeMetrics.append( metrics );
+    mChanges.append( change );
+}
+
+void KPieceTableByteArrayModel::Private::doRemoveChange( const KSection& removeSection )
+{
+    mPieceTable.remove( removeSection );
+
+    mBookmarksModified |= mBookmarks.adjustToReplaced( removeSection.start(), removeSection.width(), 0 );
+
+    const KHE::ArrayChangeMetrics metrics =
+        ArrayChangeMetrics::asReplacement( removeSection.start(), removeSection.width(), 0 );
+    const ByteArrayChange change( metrics );
+
+    mChangeMetrics.append( metrics );
+    mChanges.append( change );
+}
+
+void KPieceTableByteArrayModel::Private::doReplaceChange( const KSection& removeSection,
+                                                          const char* insertData, unsigned int insertLength )
+{
+    int storageOffset;
+    mPieceTable.replace( removeSection, insertLength, &storageOffset );
+    mChangesDataStorage.append( storageOffset, insertData, insertLength );
+
+    mBookmarksModified |= mBookmarks.adjustToReplaced( removeSection.start(), removeSection.width(), insertLength );
+
+    const KHE::ArrayChangeMetrics metrics =
+        ArrayChangeMetrics::asReplacement( removeSection.start(), removeSection.width(), insertLength );
+    const ByteArrayChange change( metrics, mChangesDataStorage.data(storageOffset,insertLength) );
+
+    mChangeMetrics.append( metrics );
+    mChanges.append( change );
+}
+
+void KPieceTableByteArrayModel::Private::doSwapChange( int firstStart, const KSection& secondSection )
+{
+    mPieceTable.swap( firstStart, secondSection );
+
+    mBookmarksModified |= mBookmarks.adjustToSwapped( firstStart, secondSection.start(),secondSection.width() );
+
+    const KHE::ArrayChangeMetrics metrics =
+        ArrayChangeMetrics::asSwapping( firstStart, secondSection.start(), secondSection.width() );
+    const ByteArrayChange change( metrics );
+
+    mChangeMetrics.append( metrics );
+    mChanges.append( change );
+}
+
+void KPieceTableByteArrayModel::Private::doFillChange( unsigned int offset, unsigned int filledLength,
+                                                       const char fillByte, unsigned int fillLength )
+{
+    int storageOffset;
+    mPieceTable.replace( offset, filledLength, fillLength, &storageOffset );
+
+    mChangesDataStorage.appendFill( storageOffset, fillByte, fillLength );
+
+    const KHE::ArrayChangeMetrics metrics =
+        ArrayChangeMetrics::asReplacement( offset, fillLength, fillLength );
+    const ByteArrayChange change( metrics );
+
+    mChangeMetrics.append( metrics );
+    mChanges.append( change );
+}
+
+
 KPieceTableByteArrayModel::Private::~Private()
 {
     if( mAutoDelete )
-        delete [] mData;
+        delete [] mInitialData;
 }
 
 }

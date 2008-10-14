@@ -20,36 +20,45 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTEXPORTJOB_H
-#define ABSTRACTEXPORTJOB_H
+#ifndef KDE_IF_USERLISTABLE_H
+#define KDE_IF_USERLISTABLE_H
 
-// KDE
-#include <KJob>
+// Qt
+#include <QtCore/QtPlugin>
 
-class KAbstractDocument;
+template <class T> class QList;
+class Person;
 
-class AbstractExportJob : public KJob
+namespace KDE
 {
-  Q_OBJECT
+namespace If
+{
 
+// TODO: can owner change? Later perhaps, if storage will be movable
+class UserListable
+{
   public:
-    AbstractExportJob();
-    virtual ~AbstractExportJob();
+    virtual ~UserListable();
 
-  public:
-    KAbstractDocument *document() const;
+  public: // get
+    virtual Person owner() const = 0;
+    virtual QList<Person> userList() const = 0;
 
-  Q_SIGNALS:
-    void documentLoaded( KAbstractDocument *document );
+  public: // set/action
+//     virtual void setVersion( KDocumentVersionId id ) = 0;
+//     virtual void revertToVersionByIndex( int versionIndex ) = 0;
 
-  protected:
-    // emits documentLoaded()
-    // TODO: or better name property LoadedDocument?
-    virtual void setDocument( KAbstractDocument *document );
-
-  protected:
-    class Private;
-    Private * const d;
+  public: // signal
+//     virtual void ownerChange( const Person& newOwner ) = 0;
+    virtual void usersAdded( const QList<Person>& newUserList ) = 0;
+    virtual void usersRemoved( const QList<Person>& newUserList ) = 0;
 };
+
+inline UserListable::~UserListable() {}
+
+}
+}
+
+Q_DECLARE_INTERFACE( KDE::If::UserListable, "org.kde.if.userlistable/1.0" )
 
 #endif

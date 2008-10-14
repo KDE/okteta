@@ -1,5 +1,5 @@
 /*
-    This file is part of the Okteta Kakao module, part of the KDE project.
+    This file is part of the Kakao Framework, part of the KDE project.
 
     Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractfilesystemsyncwithremotejob.h"
+#include "abstractfilesystemconnectjob.h"
 
 // library
 #include "abstractmodelfilesystemsynchronizer.h"
@@ -34,17 +34,18 @@
 #include <QtCore/QTimer>
 
 
-class AbstractFileSystemSyncWithRemoteJob::Private
+class AbstractFileSystemConnectJob::Private
 {
   public:
-    Private( AbstractModelFileSystemSynchronizer* synchronizer,
-             const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
+    Private( AbstractModelFileSystemSynchronizer* synchronizer, KAbstractDocument* document,
+             const KUrl &url, AbstractModelSynchronizer::ConnectOption option );
 
   public:
     void setTemporaryFile( KTemporaryFile *temporaryFile );
     void setWorkFilePath( const QString &workFilePath );
 
   public:
+    KAbstractDocument *document() const;
     KUrl url() const;
     AbstractModelSynchronizer::ConnectOption option() const;
     KTemporaryFile *temporaryFile() const;
@@ -54,60 +55,65 @@ class AbstractFileSystemSyncWithRemoteJob::Private
 
   protected:
     AbstractModelFileSystemSynchronizer* mSynchronizer;
+    KAbstractDocument *mDocument;
     const KUrl mUrl;
     const AbstractModelSynchronizer::ConnectOption mOption;
     KTemporaryFile *mTemporaryFile;
     QString mWorkFilePath;
 };
 
-AbstractFileSystemSyncWithRemoteJob::Private::Private( AbstractModelFileSystemSynchronizer* synchronizer,
-                                         const KUrl &url, AbstractModelSynchronizer::ConnectOption option )
- : mSynchronizer( synchronizer ), mUrl( url ), mOption( option ), mTemporaryFile( 0 )
+AbstractFileSystemConnectJob::Private::Private( AbstractModelFileSystemSynchronizer* synchronizer,
+                                                KAbstractDocument *document,
+                                                const KUrl &url, AbstractModelSynchronizer::ConnectOption option )
+ : mSynchronizer( synchronizer ), mDocument( document ), mUrl( url ), mOption( option ), mTemporaryFile( 0 )
 {}
 
-inline KUrl AbstractFileSystemSyncWithRemoteJob::Private::url()             const { return mUrl; }
-inline KTemporaryFile *AbstractFileSystemSyncWithRemoteJob::Private::temporaryFile() const { return mTemporaryFile; }
-inline QString AbstractFileSystemSyncWithRemoteJob::Private::workFilePath() const { return mWorkFilePath; }
-// TODO: setup a notification system
-inline QWidget *AbstractFileSystemSyncWithRemoteJob::Private::widget()      const { return 0; }
-inline AbstractModelFileSystemSynchronizer* AbstractFileSystemSyncWithRemoteJob::Private::synchronizer() const
+AbstractModelFileSystemSynchronizer* AbstractFileSystemConnectJob::Private::synchronizer() const
 {
     return mSynchronizer;
 }
-inline AbstractModelSynchronizer::ConnectOption AbstractFileSystemSyncWithRemoteJob::Private::option() const
+inline KAbstractDocument *AbstractFileSystemConnectJob::Private::document()   const { return mDocument; }
+inline KUrl AbstractFileSystemConnectJob::Private::url()               const { return mUrl; }
+inline KTemporaryFile *AbstractFileSystemConnectJob::Private::temporaryFile() const { return mTemporaryFile; }
+inline QString AbstractFileSystemConnectJob::Private::workFilePath()          const { return mWorkFilePath; }
+// TODO: setup a notification system
+inline QWidget *AbstractFileSystemConnectJob::Private::widget()               const { return 0; }
+inline AbstractModelSynchronizer::ConnectOption AbstractFileSystemConnectJob::Private::option() const
 {
     return mOption;
 }
 
-inline void AbstractFileSystemSyncWithRemoteJob::Private::setTemporaryFile( KTemporaryFile *temporaryFile )
+inline void AbstractFileSystemConnectJob::Private::setTemporaryFile( KTemporaryFile *temporaryFile )
 {
     mTemporaryFile = temporaryFile;
 }
-inline void AbstractFileSystemSyncWithRemoteJob::Private::setWorkFilePath( const QString &workFilePath )
+
+inline void AbstractFileSystemConnectJob::Private::setWorkFilePath( const QString &workFilePath )
 {
     mWorkFilePath = workFilePath;
 }
 
 
-
-AbstractFileSystemSyncWithRemoteJob::AbstractFileSystemSyncWithRemoteJob( AbstractModelFileSystemSynchronizer* synchronizer,
-                                         const KUrl &url, AbstractModelSynchronizer::ConnectOption option )
- : d( new Private(synchronizer,url,option) )
+AbstractFileSystemConnectJob::AbstractFileSystemConnectJob( AbstractModelFileSystemSynchronizer* synchronizer,
+                                                            KAbstractDocument *document,
+                                                      const KUrl &url, AbstractModelSynchronizer::ConnectOption option )
+ : d( new Private(synchronizer,document,url,option) )
 {}
 
-AbstractModelFileSystemSynchronizer* AbstractFileSystemSyncWithRemoteJob::synchronizer() const
+AbstractModelFileSystemSynchronizer* AbstractFileSystemConnectJob::synchronizer() const
 {
     return d->synchronizer();
 }
-QString AbstractFileSystemSyncWithRemoteJob::workFilePath() const { return d->workFilePath(); }
-QWidget *AbstractFileSystemSyncWithRemoteJob::widget() const { return d->widget(); }
+KAbstractDocument *AbstractFileSystemConnectJob::document()   const { return d->document(); }
+QString AbstractFileSystemConnectJob::workFilePath() const { return d->workFilePath(); }
+QWidget *AbstractFileSystemConnectJob::widget() const { return d->widget(); }
 
-void AbstractFileSystemSyncWithRemoteJob::start()
+void AbstractFileSystemConnectJob::start()
 {
-    QTimer::singleShot( 0, this, SLOT(syncWithRemote()) );
+    QTimer::singleShot( 0, this, SLOT(connectWithFile()) );
 }
 
-void AbstractFileSystemSyncWithRemoteJob::syncWithRemote()
+void AbstractFileSystemConnectJob::connectWithFile()
 {
 // Comment: here we play tricks to reuse the temporary file
 // KIO::NetAccess::removeTempFile only removes tempfiles created by KIO::NetAccess::download
@@ -136,24 +142,24 @@ void AbstractFileSystemSyncWithRemoteJob::syncWithRemote()
     if( isWorkFileOk )
     {
         d->setWorkFilePath( workFilePath );
-        startSyncWithRemote();
+        startConnectWithFile();
     }
     else
     {
         setError( KilledJobError );
         setErrorText( KIO::NetAccess::lastErrorString() );
-        // TODO: should we rather skip completeSync in successthe API?
+        // TODO: should we rather skip setDocument in the API?
         emitResult();
     }
 }
 
-
-void AbstractFileSystemSyncWithRemoteJob::completeSync( bool success )
+void AbstractFileSystemConnectJob::complete( bool success )
 {
     AbstractModelFileSystemSynchronizer* synchronizer = d->synchronizer();
     if( success )
     {
         KDirWatch *dirWatch = KDirWatch::self();
+        const KUrl newUrl = d->url();
         const KUrl oldUrl = synchronizer->url();
         // care for old url
         if( oldUrl.isLocalFile() )
@@ -161,7 +167,7 @@ void AbstractFileSystemSyncWithRemoteJob::completeSync( bool success )
             dirWatch->disconnect( synchronizer );
             dirWatch->removeFile( oldUrl.path() );
         }
-        const KUrl newUrl = d->url();
+
         if( !newUrl.isLocalFile() )
         {
             const bool uploaded = KIO::NetAccess::upload( workFilePath(), newUrl, d->widget() );
@@ -184,9 +190,15 @@ void AbstractFileSystemSyncWithRemoteJob::completeSync( bool success )
             dirWatch->addFile( workFilePath() );
         }
         synchronizer->setUrl( newUrl );
+        // TODO; in path of both constructor by url and synchWithRemote
+        // only needed for the first, so constructor writers can forget about this
+        // for now we just check in setSynchronizer that new != old before deleting old
+        d->document()->setSynchronizer( synchronizer );
     }
     else
     {
+        delete synchronizer;
+        // TODO: these reports should go to a notification system, for log or popup
         setError( KilledJobError );
         setErrorText( i18nc("@info","Problem when synching with local filesystem.") );
     }
@@ -198,7 +210,7 @@ void AbstractFileSystemSyncWithRemoteJob::completeSync( bool success )
 }
 
 
-AbstractFileSystemSyncWithRemoteJob::~AbstractFileSystemSyncWithRemoteJob()
+AbstractFileSystemConnectJob::~AbstractFileSystemConnectJob()
 {
     delete d;
 }

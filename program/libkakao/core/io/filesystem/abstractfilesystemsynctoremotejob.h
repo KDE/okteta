@@ -1,5 +1,5 @@
 /*
-    This file is part of the Okteta Kakao module, part of the KDE project.
+    This file is part of the Kakao Framework, part of the KDE project.
 
     Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
@@ -20,44 +20,40 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTFILESYSTEMCONNECTJOB_H
-#define ABSTRACTFILESYSTEMCONNECTJOB_H
+#ifndef ABSTRACTFILESYSTEMSYNCTOREMOTEJOB_H
+#define ABSTRACTFILESYSTEMSYNCTOREMOTEJOB_H
 
 // library
-#include "abstractconnectjob.h"
-#include "abstractmodelsynchronizer.h"
+#include "abstractsynctoremotejob.h"
 
 class AbstractModelFileSystemSynchronizer;
-class KUrl;
 class QWidget;
 
 
-class AbstractFileSystemConnectJob : public AbstractConnectJob
+class AbstractFileSystemSyncToRemoteJob : public AbstractSyncToRemoteJob
 {
   Q_OBJECT
 
   public:
-    AbstractFileSystemConnectJob( AbstractModelFileSystemSynchronizer* synchronizer, KAbstractDocument* document,
-                                  const KUrl &url, AbstractModelSynchronizer::ConnectOption option );
-    virtual ~AbstractFileSystemConnectJob();
+    AbstractFileSystemSyncToRemoteJob( AbstractModelFileSystemSynchronizer* synchronizer );
+    virtual ~AbstractFileSystemSyncToRemoteJob();
 
   public: // KJob API
     virtual void start();
 
   protected: // API to be implemented
-    virtual void startConnectWithFile() = 0;
-
-  protected:
-    void complete( bool success );
+    virtual void startWriteToFile() = 0;
 
   protected:
     AbstractModelFileSystemSynchronizer* synchronizer() const;
-    KAbstractDocument *document() const;
     QString workFilePath() const;
     QWidget *widget() const;
 
+  protected:
+    void completeWrite( bool success );
+
   protected Q_SLOTS:
-    void connectWithFile();
+    void syncToRemote();
 
   protected:
     class Private;

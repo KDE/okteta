@@ -29,6 +29,7 @@
 #include "kversionable.h"
 #include "kbookmarkable.h"
 #include "changesdescribable.h"
+#include "changehistory.h"
 
 namespace KHECore
 {
@@ -37,10 +38,10 @@ namespace KHECore
   *@author Friedrich W. H. Kossebau
   */
 
-class OKTETACORE_EXPORT KPieceTableByteArrayModel : public KAbstractByteArrayModel, public Versionable, public Bookmarkable, public ChangesDescribable
+class OKTETACORE_EXPORT KPieceTableByteArrayModel : public KAbstractByteArrayModel, public Versionable, public Bookmarkable, public ChangesDescribable, public ChangeHistory
 {
     Q_OBJECT
-    Q_INTERFACES( KHECore::Versionable KHECore::Bookmarkable KHECore::ChangesDescribable )
+    Q_INTERFACES( KHECore::Versionable KHECore::Bookmarkable KHECore::ChangesDescribable KHECore::ChangeHistory )
 
     class Private;
     friend class Private;
@@ -98,6 +99,12 @@ class OKTETACORE_EXPORT KPieceTableByteArrayModel : public KAbstractByteArrayMod
     virtual void cancelGroupedChange();
     virtual void closeGroupedChange( const QString &description );
 
+  public: // ChangeHistory API
+    virtual QList<ByteArrayChange> changes( int firstVersionIndex, int lastVersionIndex ) const;
+    virtual QByteArray initialData() const;
+    virtual void doChanges( const QList<KHECore::ByteArrayChange>& changes,
+                            int oldVersionIndex, int newVersionIndex );
+
   public:
 //     void setMaxSize( int MS );
     /** sets whether the memory given by setData or in the constructor should be kept on resize
@@ -105,7 +112,6 @@ class OKTETACORE_EXPORT KPieceTableByteArrayModel : public KAbstractByteArrayMod
 //     void setKeepsMemory( bool keepMemory = true );
 //     void setAutoDelete( bool autoDelete = true );
     void setData( const char *data, unsigned int size, bool careForMemory = true );
-//     void signalContentsChanged( int i1, int i2 );
 
   public:
 //     char *data() const;
@@ -123,6 +129,10 @@ class OKTETACORE_EXPORT KPieceTableByteArrayModel : public KAbstractByteArrayMod
     virtual void bookmarksAdded( const QList<KHECore::KBookmark> &bookmarks );
     virtual void bookmarksRemoved( const QList<KHECore::KBookmark> &bookmarks );
     virtual void bookmarksModified( bool modified );
+
+  Q_SIGNALS: // ChangeHistory signals
+    virtual void changesDone( const QList<KHECore::ByteArrayChange>& changes,
+                              int oldVersionIndex, int newVersionIndex );
 
   protected:
     class Private * const d;

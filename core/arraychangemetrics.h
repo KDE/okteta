@@ -25,6 +25,9 @@
 
 // lib
 #include "oktetacore_export.h"
+// Qt
+#include <QtCore/QDataStream>
+
 
 namespace KHE
 {
@@ -32,6 +35,9 @@ namespace KHE
 // TODO: do we need the invalid status?
 class OKTETACORE_EXPORT ArrayChangeMetrics
 {
+    friend QDataStream& operator<<( QDataStream& outStream, const ArrayChangeMetrics& metrics );
+    friend QDataStream& operator>>( QDataStream& inStream, ArrayChangeMetrics& metrics );
+
   private:
     static const int InvalidOffset = -1;
 
@@ -46,6 +52,7 @@ class OKTETACORE_EXPORT ArrayChangeMetrics
     ArrayChangeMetrics();
 
   protected:
+  public:
     ArrayChangeMetrics( Type type, int offset, int secondArgument, int thirdArgument );
 
   public:
@@ -133,6 +140,24 @@ inline int ArrayChangeMetrics::secondStart()  const { return mSecondStart; }
 inline int ArrayChangeMetrics::secondEnd()    const { return mSecondStart+mSecondLength-1; }
 inline int ArrayChangeMetrics::firstLength()  const { return mSecondStart-mOffset; }
 inline int ArrayChangeMetrics::secondLength() const { return mSecondLength; }
+
+
+QDataStream& operator<<( QDataStream& outStream, const ArrayChangeMetrics& metrics );
+QDataStream& operator>>( QDataStream& inStream, ArrayChangeMetrics& metrics );
+
+inline QDataStream& operator<<( QDataStream& outStream, const ArrayChangeMetrics& metrics )
+{
+    outStream << metrics.mType << metrics.mOffset << metrics.mSecondArgument << metrics.mThirdArgument;
+    return outStream;
+}
+
+inline QDataStream& operator>>( QDataStream& inStream, ArrayChangeMetrics& metrics )
+{
+    int type;
+    inStream >> type >> metrics.mOffset >> metrics.mSecondArgument >> metrics.mThirdArgument;
+    metrics.mType = (ArrayChangeMetrics::Type)type; //TODO: find out how to stream to enum directly
+    return inStream;
+}
 
 }
 

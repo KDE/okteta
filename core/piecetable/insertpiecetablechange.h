@@ -43,6 +43,7 @@ class InsertPieceTableChange : public AbstractPieceTableChange
   public: // AbstractPieceTableChange API
     virtual int type() const;
     virtual QString description() const;
+    virtual int storageOffset() const;
     virtual bool merge( const AbstractPieceTableChange *other );
     virtual KHE::KSection apply( PieceTable *pieceTable ) const;
     virtual KHE::KSection revert( PieceTable *pieceTable ) const;

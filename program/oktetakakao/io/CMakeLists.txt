@@ -2,8 +2,10 @@ include_directories(
   ../../../core
   ../../../gui
   ../../../gui/libcolumnsview
+  ../../libkakao/core/entity
   ../../libkakao/core/document
   ../../libkakao/core/io
+  ../../libkakao/core/io/filesystem
   ../../libkakao/gui/view
   ../document
   ../view
@@ -21,6 +23,19 @@ set( OKTETA_TEXTRENDERER_SRCS
   bytearrayviewtextrenderer/charbytearraycolumntextrenderer.cpp
 )
 
+set( OKTETA_KAKAO_IO_FILESYSTEM_SRCS
+  filesystem/bytearrayrawfileloadthread.cpp
+  filesystem/bytearrayrawfilereloadthread.cpp
+  filesystem/bytearrayrawfilewritethread.cpp
+  filesystem/bytearrayrawfileloadjob.cpp
+  filesystem/bytearrayrawfileconnectjob.cpp
+  filesystem/bytearrayrawfilewritejob.cpp
+  filesystem/bytearrayrawfilereloadjob.cpp
+  filesystem/bytearrayrawfilewritetojob.cpp
+  filesystem/kbytearrayrawfilesynchronizer.cpp
+  filesystem/kbytearrayrawfilesynchronizerfactory.cpp
+)
+
 set( OKTETA_KAKAO_IO_SRCS
   kabstractbytearraystreamencoder.cpp
   kbytearraysourcecodestreamencoder.cpp
@@ -28,16 +43,7 @@ set( OKTETA_KAKAO_IO_SRCS
   kbytearraytextstreamencoder.cpp
   ${OKTETA_TEXTRENDERER_SRCS}
   bytearrayviewtextstreamencoder.cpp
-  bytearrayrawfileloadthread.cpp
-  bytearrayrawfilereloadthread.cpp
-  bytearrayrawfilewritethread.cpp
-  bytearrayrawfileloadjob.cpp
-  bytearrayrawfileconnectjob.cpp
-  bytearrayrawfilewritejob.cpp
-  bytearrayrawfilereloadjob.cpp
-  bytearrayrawfilewritetojob.cpp
-  kbytearrayrawfilesynchronizer.cpp
-  kbytearrayrawfilesynchronizerfactory.cpp
+  ${OKTETA_KAKAO_IO_FILESYSTEM_SRCS}
 )
 
 kde4_add_library( okteta_kakaoio STATIC ${OKTETA_KAKAO_IO_SRCS} )

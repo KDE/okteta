@@ -92,7 +92,6 @@ void KByteArrayModelPrivate::setData( char *data, unsigned int size, int rawSize
 
     m_modified = false;
     emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(0, oldSize, size) );
-    emit p->contentsChanged( 0, oldSize-1 );
     emit p->modificationChanged( false );
 }
 
@@ -118,7 +117,6 @@ int KByteArrayModelPrivate::insert( int position, const char* data, int length )
     m_modified = true;
 
     emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(position, 0, length) );
-    emit p->contentsChanged( position, m_size-1 );
     if( bookmarksModified ) emit p->bookmarksModified( true );
     emit p->modificationChanged( true );
     return length;
@@ -141,14 +139,12 @@ int KByteArrayModelPrivate::remove( const KSection &section )
     memmove( &m_data[removeSection.start()], &m_data[behindRemovePos], m_size-behindRemovePos );
 
     // set new values
-    const int oldSize = m_size;
     m_size -= removeSection.width();
 
     const bool bookmarksModified = m_bookmarks.adjustToReplaced( removeSection.start(), removeSection.width(), 0 );
     m_modified = true;
 
     emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(removeSection.start(), removeSection.width(), 0) );
-    emit p->contentsChanged( removeSection.start(), oldSize-1 );
     if( bookmarksModified ) emit p->bookmarksModified( true );
     emit p->modificationChanged( true );
     return removeSection.width();
@@ -214,7 +210,6 @@ unsigned int KByteArrayModelPrivate::replace( const KSection &section, const cha
     memcpy( &m_data[removeSection.start()], data, inputLength );
 
     // set new values
-    const int oldSize = m_size;
     m_size = newSize;
 
     const bool bookmarksModified = m_bookmarks.adjustToReplaced( removeSection.start(), removeSection.width(), inputLength );
@@ -222,7 +217,6 @@ unsigned int KByteArrayModelPrivate::replace( const KSection &section, const cha
 
     emit p->contentsChanged(
         KHE::ArrayChangeMetricsList::oneReplacement(removeSection.start(), removeSection.width(), inputLength) );
-    emit p->contentsChanged( removeSection.start(), sizeDiff==0?removeSection.end():((sizeDiff>0?m_size:oldSize)-1) );
     if( bookmarksModified ) emit p->bookmarksModified( true );
     emit p->modificationChanged( true );
     return inputLength;
@@ -305,7 +299,6 @@ bool KByteArrayModelPrivate::swap( int firstStart, const KSection &secondSection
 
     emit p->contentsChanged(
         KHE::ArrayChangeMetricsList::oneSwapping(firstStart,sourceSection.start(),sourceSection.width()) );
-    emit p->contentsChanged( toRight?sourceSection.start():firstStart, toRight?firstStart:sourceSection.end() );
     if( bookmarksModified ) emit p->bookmarksModified( true );
     emit p->modificationChanged( true );
     return true;
@@ -332,7 +325,6 @@ int KByteArrayModelPrivate::fill( const char fillDatum, unsigned int position, i
     m_modified = true;
 
     emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(position,fillLength,fillLength) );
-    emit p->contentsChanged( position, position+fillLength-1 );
     emit p->modificationChanged( true );
     return fillLength;
 }

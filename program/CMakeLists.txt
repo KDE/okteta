@@ -41,6 +41,7 @@ target_link_libraries( okteta
   oktetagui
   oktetacore
   ${KDE4_KIO_LIBS}
+  ${KDE4_KDNSSD_LIBS}
 )
 
 install( TARGETS okteta  ${INSTALL_TARGETS_DEFAULT_ARGS} )

@@ -1,5 +1,5 @@
 /*
-    This file is part of the Okteta Kakao module, part of the KDE project.
+    This file is part of the Kakao Framework, part of the KDE project.
 
     Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
@@ -20,44 +20,40 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTFILESYSTEMSYNCTOREMOTEJOB_H
-#define ABSTRACTFILESYSTEMSYNCTOREMOTEJOB_H
+#ifndef PERSON_H
+#define PERSON_H
 
-// library
-#include "abstractsynctoremotejob.h"
+// KDE
+#include <KSharedPtr>
 
-class AbstractModelFileSystemSynchronizer;
-class QWidget;
+class KIcon;
+class QString;
 
-
-class AbstractFileSystemSyncToRemoteJob : public AbstractSyncToRemoteJob
+class Person
 {
-  Q_OBJECT
+  public: // TODO: remove me again, hack!
+    static Person createEgo();
+    static void setEgoId( int egoId );
 
   public:
-    AbstractFileSystemSyncToRemoteJob( AbstractModelFileSystemSynchronizer* synchronizer );
-    virtual ~AbstractFileSystemSyncToRemoteJob();
+    Person( const QString& name, const KIcon& faceIcon );
+    Person();
+    Person( const Person& other );
+    ~Person();
 
-  public: // KJob API
-    virtual void start();
+  public:
+    Person& operator=( const Person& other );
 
-  protected: // API to be implemented
-    virtual void startWriteToFile() = 0;
+  public:
+    bool operator==( const Person& other ) const;
 
-  protected:
-    AbstractModelFileSystemSynchronizer* synchronizer() const;
-    QString workFilePath() const;
-    QWidget *widget() const;
-
-  protected:
-    void completeWrite( bool success );
-
-  protected Q_SLOTS:
-    void syncToRemote();
+  public:
+    QString name() const;
+    KIcon faceIcon() const;
 
   protected:
     class Private;
-    Private * const d;
+    KSharedPtr<Private> d;
 };
 
 #endif
