@@ -37,6 +37,7 @@
 #include <QtGui/QLabel>
 #include <QtGui/QLayout>
 #include <QtGui/QCheckBox>
+#include <QtGui/QStyle>
 
 
 static const unsigned char PrimitivesDefaultUndefinedChar = '?';
@@ -284,16 +285,47 @@ void KPrimitiveTypesView::onDataChange()
 
 void KPrimitiveTypesView::fontChanged()
 {
-    QFontMetrics metric( font() );
-    const int Int8Int16Width = metric.width( "XXXXXXXX" );
-    const int Int32FloatWidth = metric.width( "XXXXXXXXXXXX" );
-    const int ByteCodeWidth = metric.width( "888888888888888888" );
+    KLineEdit* exampleLineEdit = mInt8Int16Display[0];
+
+    const int verticalMargin = 1; // hardcoded in gui/widgets/qlineedit.cpp
+    const int horizontalMargin = 2; // hardcoded in gui/widgets/qlineedit.cpp
+    const int mysticBonusMargin = 1; // no idea where it come from, but with one pixel more it is equally margined
+    int leftMargin, rightMargin, topMargin, bottomMargin;
+    exampleLineEdit->getContentsMargins( &leftMargin, &topMargin, &rightMargin, &bottomMargin );
+
+    const QFontMetrics fontMetrics( font() );
+    const int Int8Int16Width = fontMetrics.width( "888888" );
+    const int Int32FloatWidth = fontMetrics.width( "88.888888e8888" );
+    const int ByteCodeWidth = fontMetrics.width( "88888888" ); // max 16 bits had "888888888888888888"
+    const int lineSpacing = fontMetrics.lineSpacing();
+
+    const int minLineSpacing = 14;
+    const int contentHeight =
+        qMax(lineSpacing,minLineSpacing)
+        + topMargin + 2 * verticalMargin + bottomMargin;
+    const int contentOtherWidth = leftMargin + 2 * horizontalMargin + rightMargin + mysticBonusMargin;
+
+    const QSize Int8Int16ContentSize( Int8Int16Width + contentOtherWidth, contentHeight );
+    const QSize Int32FloatContentSize( Int32FloatWidth + contentOtherWidth, contentHeight );
+    const QSize ByteCodeContentSize( ByteCodeWidth + contentOtherWidth, contentHeight );
+
+    QStyleOptionFrameV2 option;
+    option.initFrom( exampleLineEdit );
+    option.lineWidth = exampleLineEdit->hasFrame() ?
+         style()->pixelMetric( QStyle::PM_DefaultFrameWidth, &option, exampleLineEdit ) : 0;
+
+    const int Int8Int16DisplayWidth =
+        style()->sizeFromContents( QStyle::CT_LineEdit, &option, Int8Int16ContentSize, exampleLineEdit ).width();
+    const int Int32FloatDisplayWidth =
+        style()->sizeFromContents( QStyle::CT_LineEdit, &option, Int32FloatContentSize, exampleLineEdit ).width();
+    const int ByteCodeDisplayWidth =
+        style()->sizeFromContents( QStyle::CT_LineEdit, &option, ByteCodeContentSize, exampleLineEdit ).width();
 
     for( int i=0; i<NoOfRows; ++i )
     {
-        mInt8Int16Display[i]->setFixedWidth( Int8Int16Width );
-        mInt32FloatDisplay[i]->setFixedWidth( Int32FloatWidth );
-        mByteCodeDisplay[i]->setFixedWidth( ByteCodeWidth );
+        mInt8Int16Display[i]->setFixedWidth( Int8Int16DisplayWidth );
+        mInt32FloatDisplay[i]->setFixedWidth( Int32FloatDisplayWidth );
+        mByteCodeDisplay[i]->setFixedWidth( ByteCodeDisplayWidth );
     }
 }
 
