@@ -11,6 +11,7 @@ set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 include_directories(
   ${SUTDIR}
   ${SUTDIR}/../document
+  ${SUTDIR}/filesystem
   ${SUTDIR}/../../../core
   ${SUTDIR}/../../libkakao/core/document
   ${SUTDIR}/../../libkakao/core/io
@@ -21,14 +22,14 @@ include_directories(
 ########### io ###############
 
 set( oktetakakaoio_LIB_SRCS
-  ${SUTDIR}/bytearrayrawfileloadthread.cpp
-  ${SUTDIR}/bytearrayrawfilereloadthread.cpp
-  ${SUTDIR}/bytearrayrawfilewritethread.cpp
-  ${SUTDIR}/bytearrayrawfileloadjob.cpp
-  ${SUTDIR}/bytearrayrawfileconnectjob.cpp
-  ${SUTDIR}/bytearrayrawfilewritejob.cpp
-  ${SUTDIR}/bytearrayrawfilereloadjob.cpp
-  ${SUTDIR}/bytearrayrawfilewritetojob.cpp
+  ${SUTDIR}/filesystem/bytearrayrawfileloadthread.cpp
+  ${SUTDIR}/filesystem/bytearrayrawfilereloadthread.cpp
+  ${SUTDIR}/filesystem/bytearrayrawfilewritethread.cpp
+  ${SUTDIR}/filesystem/bytearrayrawfileloadjob.cpp
+  ${SUTDIR}/filesystem/bytearrayrawfileconnectjob.cpp
+  ${SUTDIR}/filesystem/bytearrayrawfilewritejob.cpp
+  ${SUTDIR}/filesystem/bytearrayrawfilereloadjob.cpp
+  ${SUTDIR}/filesystem/bytearrayrawfilewritetojob.cpp
 )
 
 kde4_add_library( oktetakakaoio  STATIC ${oktetakakaoio_LIB_SRCS} )
@@ -39,7 +40,7 @@ kde4_add_library( oktetakakaoio  STATIC ${oktetakakaoio_LIB_SRCS} )
 set( kbytearrayrawfilesynchronizertest_SRCS
   kbytearrayrawfilesynchronizertest.cpp
   ${SUTDIR}/../document/kbytearraydocument.cpp
-  ${SUTDIR}/kbytearrayrawfilesynchronizer.cpp
+  ${SUTDIR}/filesystem/kbytearrayrawfilesynchronizer.cpp
 )
 
 kde4_add_unit_test( kbytearrayrawfilesynchronizertest
@@ -61,8 +62,8 @@ target_link_libraries( kbytearrayrawfilesynchronizertest
 set( kbytearrayrawfilesynchronizerfactorytest_SRCS
   kbytearrayrawfilesynchronizerfactorytest.cpp
   ${SUTDIR}/../document/kbytearraydocument.cpp
-  ${SUTDIR}/kbytearrayrawfilesynchronizer.cpp
-  ${SUTDIR}/kbytearrayrawfilesynchronizerfactory.cpp
+  ${SUTDIR}/filesystem/kbytearrayrawfilesynchronizer.cpp
+  ${SUTDIR}/filesystem/kbytearrayrawfilesynchronizerfactory.cpp
 )
 
 kde4_add_unit_test( kbytearrayrawfilesynchronizerfactorytest
