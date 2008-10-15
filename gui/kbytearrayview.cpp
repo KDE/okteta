@@ -1515,7 +1515,7 @@ void KByteArrayView::emitSelectionSignals()
 void KByteArrayView::keyPressEvent( QKeyEvent *keyEvent )
 {
     if( !mController->handleKeyPress( keyEvent ) )
-        keyEvent->ignore();
+        ColumnsView::keyPressEvent( keyEvent );
 }
 
 bool KByteArrayView::event( QEvent *event )
