@@ -23,8 +23,6 @@
 #ifndef KHE_UI_DROPPER_H
 #define KHE_UI_DROPPER_H
 
-
-class KByteArrayView;
 class QDragEnterEvent;
 class QDragMoveEvent;
 class QDragLeaveEvent;
@@ -33,6 +31,8 @@ class QDropEvent;
 
 namespace KHEUI
 {
+class KByteArrayView;
+
 
 class Dropper
 {
