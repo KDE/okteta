@@ -69,7 +69,7 @@ class AbstractModelSynchronizer : public QObject
   public: // API to be implemented
     // TODO: makes this a job, too
     // TODO: filesystem synchronizer (or: to-passive-storage) does not need this: subclass or interface?
-    virtual void startOffering( KAbstractDocument* document ) = 0;
+//     virtual void startOffering( KAbstractDocument* document ) = 0;
     // TODO: once the synchronizer is attached to a document, this function should not be called
     // is there a way to ensure this?
     virtual AbstractLoadJob *startLoad( const KUrl &url ) = 0;
