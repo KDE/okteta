@@ -1977,28 +1977,36 @@ void KByteArrayView::startDrag()
 
 void KByteArrayView::dragEnterEvent( QDragEnterEvent* dragEnterEvent )
 {
-    if( !mDropper->handleDragEnterEvent(dragEnterEvent) )
+    if( mDropper->handleDragEnterEvent(dragEnterEvent) )
+        dragEnterEvent->accept();
+    else
         dragEnterEvent->ignore();
 }
 
 
 void KByteArrayView::dragMoveEvent( QDragMoveEvent* dragMoveEvent )
 {
-    if( !mDropper->handleDragMoveEvent(dragMoveEvent) )
+    if( mDropper->handleDragMoveEvent(dragMoveEvent) )
+        dragMoveEvent->accept();
+    else
         dragMoveEvent->ignore();
 }
 
 
 void KByteArrayView::dragLeaveEvent( QDragLeaveEvent* dragLeaveEvent )
 {
-    if( !mDropper->handleDragLeaveEvent(dragLeaveEvent) )
+    if( mDropper->handleDragLeaveEvent(dragLeaveEvent) )
+        dragLeaveEvent->accept();
+    else
         dragLeaveEvent->ignore();
 }
 
 
 void KByteArrayView::dropEvent( QDropEvent* dropEvent )
 {
-    if( !mDropper->handleDropEvent(dropEvent) )
+    if( mDropper->handleDropEvent(dropEvent) )
+        dropEvent->accept();
+    else
         dropEvent->ignore();
 }
 
