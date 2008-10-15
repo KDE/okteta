@@ -23,8 +23,6 @@
 #ifndef KHE_UI_DROPPER_H
 #define KHE_UI_DROPPER_H
 
-// lib
-#include "abstractmousecontroller.h"
 
 class KByteArrayView;
 class QDragEnterEvent;
