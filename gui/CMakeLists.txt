@@ -14,6 +14,9 @@ set( libcontroller_SRCS
   controller/knavigator.cpp
   controller/ktabcontroller.cpp
   controller/kvalueeditor.cpp
+  controller/abstractwheelcontroller.cpp
+  controller/zoomwheelcontroller.cpp
+  controller/dropper.cpp
 )
 
 set( libcolumnsview_SRCS

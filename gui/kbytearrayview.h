@@ -66,6 +66,11 @@ class KNavigator;
 class KValueEditor;
 class KCharEditor;
 
+class Dropper;
+
+class AbstractWheelController;
+class ZoomWheelController;
+
 class KCursor;
 
 
@@ -90,6 +95,7 @@ class OKTETAGUI_EXPORT KByteArrayView : public ColumnsView
   friend class KEditor;
   friend class KValueEditor;
   friend class KCharEditor;
+  friend class Dropper;
 
   Q_OBJECT
   Q_ENUMS( KResizeStyle KCoding )
@@ -510,6 +516,11 @@ class OKTETAGUI_EXPORT KByteArrayView : public ColumnsView
     KValueEditor *mValueEditor;
     /** */
     KCharEditor *mCharEditor;
+
+    Dropper* mDropper;
+
+    AbstractWheelController* mWheelController;
+    ZoomWheelController* mZoomWheelController;
 
   protected:
     /** Timer that controls the blinking of the cursor */

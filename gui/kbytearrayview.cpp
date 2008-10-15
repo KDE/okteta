@@ -34,6 +34,8 @@
 #include "controller/knavigator.h"
 #include "controller/kvalueeditor.h"
 #include "controller/kchareditor.h"
+#include "controller/dropper.h"
+#include "controller/zoomwheelcontroller.h"
 #include "kcursor.h"
 // Okteta core
 #include <kbytearraymodel.h> // TODO: used as dummy view, make own real dummyZzz
@@ -57,7 +59,6 @@
 #include <QtGui/QScrollBar>
 #include <QtGui/QShowEvent>
 #include <QtGui/QResizeEvent>
-#include <QtGui/QWheelEvent>
 #include <QtGui/QKeyEvent>
 #include <QtGui/QMouseEvent>
 #include <QtGui/QDragEnterEvent>
@@ -161,6 +162,9 @@ KByteArrayView::KByteArrayView( KHECore::KAbstractByteArrayModel *byteArrayModel
     mNavigator = new KNavigator( this, mTabController );
     mValueEditor = new KValueEditor( mValueColumn, mDataCursor, this, mNavigator );
     mCharEditor = new KCharEditor( mCharColumn, mDataCursor, this, mNavigator );
+    mZoomWheelController = new ZoomWheelController( this, 0 );
+    mDropper = new Dropper( this );
+    mWheelController = mZoomWheelController;
 
     adaptController();
 
@@ -1427,7 +1431,7 @@ void KByteArrayView::createCursorPixmaps()
 void KByteArrayView::drawActiveCursor( QPainter *painter )
 {
     // any reason to skip the cursor drawing?
-    if( mBlinkCursorVisible && !hasFocus() && !viewport()->hasFocus() && !mInDnD )
+    if( mBlinkCursorVisible && !hasFocus() && !viewport()->hasFocus() && !mDropper->isActive() )
         return;
 
     const int x = activeColumn().xOfLinePosition( mDataCursor->pos() );
@@ -1459,7 +1463,7 @@ void KByteArrayView::drawInactiveCursor( QPainter *painter )
     // any reason to skip the cursor drawing?
     if( !inactiveColumn().isVisible()
         || mCursorPaused
-        || (!mCursorPaused && !hasFocus() && !viewport()->hasFocus() && !mInDnD)  )
+        || (!mCursorPaused && !hasFocus() && !viewport()->hasFocus() && !mDropper->isActive())  )
         return;
 
     const int index = mDataCursor->validIndex();
@@ -1971,157 +1975,38 @@ void KByteArrayView::startDrag()
 }
 
 
-void KByteArrayView::dragEnterEvent( QDragEnterEvent *event )
+void KByteArrayView::dragEnterEvent( QDragEnterEvent* dragEnterEvent )
 {
-    // interesting for this widget?
-    if( isReadOnly() || !canReadData(event->mimeData()) )
-    {
-        event->ignore();
-        return;
-    }
-
-    event->accept();
-    mInDnD = true;
-    // TODO: store value edit data
-    mBeforeDragCursorPos = mDataCursor->index();
-    mBeforeDragCursorIsBehind = mDataCursor->isBehind();
-    mCursorIsMovedByDrag = false;
+    if( !mDropper->handleDragEnterEvent(dragEnterEvent) )
+        dragEnterEvent->ignore();
 }
 
 
-void KByteArrayView::dragMoveEvent( QDragMoveEvent *event )
+void KByteArrayView::dragMoveEvent( QDragMoveEvent* dragMoveEvent )
 {
-    // is this content still interesting for us?
-    if( isReadOnly() || !canReadData(event->mimeData()) )
-    {
-        event->ignore();
-        return;
-    }
-
-    // let text cursor follow mouse
-    pauseCursor(); //TODO: just for following skip the value edit, remember we are and get back
-    mValueEditor->finishEdit();
-    placeCursor( event->pos() );
-    mCursorIsMovedByDrag = true;
-    unpauseCursor();
-
-    event->accept();
+    if( !mDropper->handleDragMoveEvent(dragMoveEvent) )
+        dragMoveEvent->ignore();
 }
 
 
-void KByteArrayView::dragLeaveEvent( QDragLeaveEvent *event )
+void KByteArrayView::dragLeaveEvent( QDragLeaveEvent* dragLeaveEvent )
 {
-    // bye... and thanks for all the cursor movement...
-    mInDnD = false;
-    if( mCursorIsMovedByDrag )
-    {
-        pauseCursor();
-        // TODO: get back to value edit mode if we were in
-        mDataCursor->gotoIndex( mBeforeDragCursorPos );
-        if( mBeforeDragCursorIsBehind ) mDataCursor->stepBehind();
-        unpauseCursor();
-    }
-    event->accept();
-
+    if( !mDropper->handleDragLeaveEvent(dragLeaveEvent) )
+        dragLeaveEvent->ignore();
 }
 
 
-void KByteArrayView::dropEvent( QDropEvent *dropEvent )
+void KByteArrayView::dropEvent( QDropEvent* dropEvent )
 {
-    // after drag enter and move check one more time
-    if( isReadOnly() || !canReadData(dropEvent->mimeData()) )
-    {
+    if( !mDropper->handleDropEvent(dropEvent) )
         dropEvent->ignore();
-        return;
-    }
-
-    // leave state
-    mInDnD = false;
-    dropEvent->accept();
-
-    // is this an internal dnd?
-    if( dropEvent->source() == this )
-        handleInternalDrag( dropEvent );
-    else
-    {
-    //mDataRanges->removeSelection();
-        pasteData( dropEvent->mimeData() );
-    }
 }
 
 
-void KByteArrayView::handleInternalDrag( QDropEvent *dropEvent )
+void KByteArrayView::wheelEvent( QWheelEvent* wheelEvent )
 {
-    // get drag origin
-    KHE::KSection selection = mDataRanges->removeSelection();
-    int insertIndex = mDataCursor->realIndex();
-
-    // is this a move?
-    if( dropEvent->proposedAction() == Qt::MoveAction )
-    {
-        // ignore the copy hold in the event but only move
-        int newCursorIndex;
-        // need to swap?
-        if( selection.end() < insertIndex )
-        {
-            newCursorIndex = insertIndex;
-            const int firstIndex = selection.start();
-            selection.set( selection.nextBehindEnd(), insertIndex-1 );
-            insertIndex = firstIndex;
-        }
-        else
-            newCursorIndex = insertIndex + selection.width();
-
-        const bool success = mByteArrayModel->swap( insertIndex, selection );
-        if( success )
-        {
-            mDataCursor->gotoCIndex( newCursorIndex );
-            mDataRanges->addChangedRange( KHE::KSection(insertIndex,selection.end()) );
-            emit cursorPositionChanged( mDataCursor->realIndex() );
-        }
-    }
-    // is a copy
-    else
-    {
-        // get data
-        QByteArray data = dropEvent->mimeData()->data( OctetStreamFormatName );
-
-        if( !data.isEmpty() )
-        {
-            if( mOverWrite )
-            {
-                const int length = mDataLayout->length();
-                if( !mDataCursor->isBehind() && length > 0 )
-                {
-                    KHE::KSection overwriteRange = KHE::KSection::fromWidth( insertIndex, data.size() );
-                    overwriteRange.restrictEndTo( length-1 );
-                    if( overwriteRange.isValid() )
-                        mByteArrayModel->replace( overwriteRange, data.data(), overwriteRange.width() );
-                }
-            }
-            else
-                mByteArrayModel->insert( insertIndex, data.data(), data.size() );
-        }
-    }
-}
-
-
-void KByteArrayView::wheelEvent( QWheelEvent *mouseWheelEvent )
-{
-
-    if( mouseWheelEvent->modifiers() & Qt::CTRL )
-    {
-        const int delta = mouseWheelEvent->delta();
-        if( delta > 0 )
-            zoomOut();
-        else if( delta < 0 )
-            zoomIn();
-
-        mouseWheelEvent->accept();
-        return;
-    }
-
-    ColumnsView::wheelEvent( mouseWheelEvent );
+    if( !mWheelController->handleWheelEvent(wheelEvent) )
+        ColumnsView::wheelEvent( wheelEvent );
 }
 
 
@@ -2131,6 +2016,10 @@ KByteArrayView::~KByteArrayView()
     delete mNavigator;
     delete mValueEditor;
     delete mCharEditor;
+
+    delete mDropper;
+
+    delete mZoomWheelController;
 
     delete mDataCursor;
     delete mDataRanges;
