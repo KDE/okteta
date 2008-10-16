@@ -97,7 +97,7 @@ class KRange
     bool startsBehind( T Value ) const { return Value < Start; }
     /** returns true is the range starts before index. If the range is invalid the behaviour is undefined */
     bool startsBefore( T Value ) const { return Start < Value; }
-    /** returns true if the range ends later then index. If the range is invalid the behaviour is undefined */
+    /** returns true if the range ends later than index. If the range is invalid the behaviour is undefined */
     bool endsBehind( T Value )   const { return Value < End; }
     /** returns true if range is before index. if range is invalid the behaviour is undefined */
     bool endsBefore( T Value )   const { return End < Value; }

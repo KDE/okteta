@@ -106,7 +106,7 @@ class Coord
     /** moves the coord one position to the left. If the coord is invalid the result is undefined. */
     void goLeft();
     /** moves the coord a given number of positions to the left. 
-     * If the coord is invalid the result is undefined or the position smaller then the given number 
+     * If the coord is invalid the result is undefined or the position smaller than the given number 
      * the behaviour is undefined.
      * @param P number of positions
      */

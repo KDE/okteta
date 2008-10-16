@@ -234,7 +234,7 @@ class OKTETACORE_EXPORT KAbstractByteArrayModel : public QObject
     int indexOf( const QByteArray &pattern, int fromOffset = 0 ) const;
     /** searches for a given data string
       * The section limits the data within which the key has to be found
-      * If the end of the section is lower then the start the search continues at the start???
+      * If the end of the section is lower than the start the search continues at the start???
       * @param 
       * @param Length length of search string
       * @param Section section within the keydata is to be found
