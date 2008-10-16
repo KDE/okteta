@@ -389,6 +389,8 @@ class OKTETAGUI_EXPORT KByteArrayView : public ColumnsView
     void charCodecChanged( const QString &codecName );
     /** */
     void valueCodingChanged( int coding );
+    /** */
+    void overwriteModeChanged( bool newOverwriteMode );
 
 
   protected: // QWidget API

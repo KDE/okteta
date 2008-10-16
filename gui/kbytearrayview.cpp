@@ -247,6 +247,7 @@ void KByteArrayView::setOverwriteMode( bool overwriteMode )
     if( ChangeCursor )
         unpauseCursor();
 
+    emit overwriteModeChanged( mOverWrite );
     emit cutAvailable( !mOverWrite && mDataRanges->hasSelection() );
 }
 
