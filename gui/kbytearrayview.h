@@ -550,11 +550,6 @@ class OKTETAGUI_EXPORT KByteArrayView : public ColumnsView
     /** font size as set by user (used for zooming) */
     int mDefaultFontSize;
     double mZoomLevel;
-    /** stores the cursor before it follows a drag*/
-    int mBeforeDragCursorPos;
-    bool mBeforeDragCursorIsBehind:1;
-    bool mCursorIsMovedByDrag:1;
-
 
   protected: // parameters
     /** style of resizing */
