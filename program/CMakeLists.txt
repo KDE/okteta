@@ -6,6 +6,7 @@ add_subdirectory( oktetakakao )
 include_directories(
 #TODO: remove this
   ../core
+  ../gui
   libkakao/core/document
   libkakao/core/io
   libkakao/core/system

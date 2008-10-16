@@ -48,6 +48,7 @@
 #include <bookmarks/bookmarkscontroller.h>
 #include <print/printcontroller.h>
 #include <viewconfig/viewconfigcontroller.h>
+#include <viewstatus/viewstatuscontroller.h>
 // Kakao controllers
 #include <document/readonly/readonlycontroller.h>
 #include <documentsystem/creator/creatorcontroller.h>
@@ -132,6 +133,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new BookmarksController(this) );
     addXmlGuiController( new PrintController(this) );
     addXmlGuiController( new ViewConfigController(this) );
+    addXmlGuiController( new ViewStatusController(statusBar()) );
 
     addTool( new FilterToolView(new FilterTool()) );
     addTool( new StringsExtractToolView(new StringsExtractTool()) );
