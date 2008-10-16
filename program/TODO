@@ -90,6 +90,23 @@ Done for 0.2:
 * turned into AbstractTool: bytetable, info, stringsextract, filter, poddecoder, versionview
 * use KXMLGUIClient, not KXmlGuiWindow, if possible, so we can plug controller to any client
 * renamed KAbstractDocument*Synchronizer* to AbstractModel*Synchronizer*
+* turned poddecoder into two-column table, added int64 and utf-8
+
+merged to 871403: connected-models 851103:871380
+besides:
+* program.cpp
+* libkakao/core/CMakeLists.txt
+* libkakao/core/io/network
+* libkakao/core/system/kdocumentsyncmanager.*
+* libkakao/controllers/documentsystem/connector
+* libkakao/controllers/CMakeLists.txt
+* libkakao/controllers/io/setremote
+* libkakao/controllers/io/offer
+* libkakao/controllers/document/users
+* oktetakakao/io/CMakeLists.txt
+* oktetakakao/io/network
+
+* added first primitive monitor to the view for the status bar
 
 Next to work on:
 ----------------------------------
