@@ -31,6 +31,10 @@
 namespace KHEUI
 {
 
+static const int leftOffsetMargin = 2;
+static const int rightOffsetMargin = 2;
+
+
 OffsetColumnRenderer::OffsetColumnRenderer( ColumnsView *columnsView,
     int firstLineOffset, int delta, KOffsetFormat::KFormat format )
  : ColumnRenderer( columnsView ),
@@ -54,7 +58,7 @@ void OffsetColumnRenderer::renderLine( QPainter *painter, int Line )
 
     const QColor &buttonColor = viewport->palette().buttonText().color();
     painter->setPen( buttonColor );
-    painter->drawText( 0, mDigitBaseLine, QString().append(mCodedOffset) );
+    painter->drawText( leftOffsetMargin, mDigitBaseLine, QString().append(mCodedOffset) );
 }
 
 
@@ -114,7 +118,7 @@ void OffsetColumnRenderer::setDigitWidth( KPixelX digitWidth )
 void OffsetColumnRenderer::recalcX()
 {
     // recalculate depend sizes
-    setWidth( mCodingWidth * mDigitWidth );
+    setWidth( mCodingWidth * mDigitWidth + leftOffsetMargin + rightOffsetMargin );
 }
 
 
