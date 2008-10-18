@@ -79,8 +79,6 @@ class OffsetColumnRenderer : public ColumnRenderer
     int mDelta;
 
   protected: // pixel related
-    /** size of the line margin */
-    int mMargin;
     /** */
     KPixelX mDigitWidth;
     /** */

@@ -36,7 +36,6 @@ OffsetColumnRenderer::OffsetColumnRenderer( ColumnsView *columnsView,
  : ColumnRenderer( columnsView ),
    mFirstLineOffset( firstLineOffset ),
    mDelta( delta ),
-   mMargin( 0 ),
    mDigitWidth( 0 ),
    mDigitBaseLine( 0 ),
    mFormat( KOffsetFormat::None )
