@@ -29,9 +29,6 @@
 // Qt
 #include <QtCore/QList>
 
-class QAction;
-class QActionGroup;
-class KXMLGUIClient;
 namespace KHEUI {
 class KByteArrayView;
 }
@@ -40,6 +37,10 @@ class Bookmarkable;
 class KBookmark;
 class KAbstractByteArrayModel;
 }
+class KXMLGUIClient;
+class KAction;
+class QActionGroup;
+class QAction;
 
 
 class BookmarksController : public AbstractXmlGuiController
@@ -74,12 +75,12 @@ class BookmarksController : public AbstractXmlGuiController
     KHECore::KAbstractByteArrayModel *mByteArray;
     KHECore::Bookmarkable *mBookmarks;
 
-    QAction *mCreateAction;
-    QAction *mDeleteAction;
-    QAction *mDeleteAllAction;
+    KAction* mCreateAction;
+    KAction* mDeleteAction;
+    KAction* mDeleteAllAction;
 
-    QAction *mGotoNextBookmarkAction;
-    QAction *mGotoPreviousBookmarkAction;
+    KAction* mGotoNextBookmarkAction;
+    KAction* mGotoPreviousBookmarkAction;
 
     QActionGroup *mBookmarksActionGroup;
 };

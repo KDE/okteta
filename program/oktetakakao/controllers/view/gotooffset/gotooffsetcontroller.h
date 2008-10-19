@@ -27,7 +27,7 @@
 // Kakao gui
 #include <abstractxmlguicontroller.h>
 
-class QAction;
+class KAction;
 class KXMLGUIClient;
 namespace KHEUI {
 class KByteArrayView;
@@ -59,7 +59,7 @@ class GotoOffsetController : public AbstractXmlGuiController
     KHEUI::KByteArrayView* mByteArrayView;
     KHECore::KAbstractByteArrayModel* mByteArray;
 
-    QAction* mGotoOffsetAction;
+    KAction* mGotoOffsetAction;
 
     KGotoOffsetDialog* mGotoOffsetDialog;
 };

@@ -42,6 +42,7 @@
 // Qt
 #include <QtGui/QAction>
 
+
 static const int MaxEntryLength = 150;
 static const char BookmarkListActionListId[] = "bookmark_list";
 

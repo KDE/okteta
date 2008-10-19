@@ -30,7 +30,7 @@
 class KXMLGUIClient;
 class InsertPatternTool;
 class InsertPatternDialog;
-class QAction;
+class KAction;
 
 
 class InsertPatternController : public AbstractXmlGuiController
@@ -52,7 +52,7 @@ class InsertPatternController : public AbstractXmlGuiController
     void onOkClicked();
 
   protected:
-    QAction *mInsertPatternAction;
+    KAction* mInsertPatternAction;
 
     InsertPatternTool *mInsertPatternTool;
     InsertPatternDialog *mInsertPatternDialog;

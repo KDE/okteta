@@ -40,8 +40,6 @@
 #include <KAction>
 #include <KActionCollection>
 #include <KMessageBox>
-// Qt
-#include <QtGui/QAction>
 
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
