@@ -705,7 +705,6 @@ void KByteArrayView::toggleOffsetColumn( bool showOffsetColumn )
         return;
 
     mOffsetColumn->setVisible( showOffsetColumn );
-    mFirstBorderColumn->setVisible( showOffsetColumn );
 
     updateViewByWidth();
 }
