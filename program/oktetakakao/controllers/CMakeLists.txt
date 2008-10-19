@@ -17,6 +17,11 @@ include_directories(
   view/libframesprint
 )
 
+set( DOCUMENTINFOCONTROLLER_SRCS
+  document/info/documentinfotool.cpp
+  document/info/documentinfoview.cpp
+  document/info/documentinfotoolview.cpp
+)
 set( OVERWRITEONLYCONTROLLER_SRCS
   document/overwriteonly/overwriteonlycontroller.cpp
 )
@@ -133,6 +138,7 @@ set( VIEWSTATUSCONTROLLER_SRCS
 set( OKTETA_KAKAO_CONTROLLERS_SRCS
 #   ${OVERWRITEONLYCONTROLLER_SRCS}
   ${OVERWRITEMODECONTROLLER_SRCS}
+  ${DOCUMENTINFOCONTROLLER_SRCS}
   ${BYTEARRAYLINEEDIT_LIB_SRCS}
   ${PODDECODERCONTROLLER_SRCS}
   ${STRINGSEXTRACTCONTROLLER_SRCS}

@@ -31,6 +31,8 @@
 #include <document/versionview/versionviewtoolview.h>
 #include <document/versionview/versionviewtool.h>
 // controllers
+#include <info/documentinfotool.h>
+#include <info/documentinfotoolview.h>
 #include <overwriteonly/overwriteonlycontroller.h>
 #include <overwritemode/overwritemodecontroller.h>
 #include <poddecoder/poddecodertool.h>
@@ -135,6 +137,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new ViewConfigController(this) );
     addXmlGuiController( new ViewStatusController(statusBar()) );
 
+    addTool( new DocumentInfoToolView(new DocumentInfoTool(mProgram->documentManager()->syncManager())) );
     addTool( new FilterToolView(new FilterTool()) );
     addTool( new StringsExtractToolView(new StringsExtractTool()) );
     addTool( new ByteTableToolView(new ByteTableTool()) );
