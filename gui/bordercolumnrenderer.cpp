@@ -32,15 +32,17 @@
 namespace KHEUI
 {
 
-static const KPixelX DefaultWidth = 9;
-static const KPixelX LineX = DefaultWidth / 2;
+static const KPixelX BorderMargin = 4;
+static const KPixelX LineWidth = 1;
+static const KPixelX BorderWidth = 2 * BorderMargin + LineWidth;
+static const KPixelX LineX = BorderMargin;
 
 
 BorderColumnRenderer::BorderColumnRenderer( ColumnsView *columnsView, bool lineDrawn )
  : ColumnRenderer( columnsView ),
    mLineDrawn( lineDrawn )
 {
-    setWidth( mLineDrawn?DefaultWidth:LineX-1 );
+    setWidth( mLineDrawn ? BorderWidth : BorderMargin );
 }
 
 void BorderColumnRenderer::renderLine( QPainter *painter )
