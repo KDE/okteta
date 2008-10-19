@@ -47,7 +47,7 @@ InfoTool::InfoTool()
     updateStatistic();
 }
 
-QString InfoTool::title() const { return i18nc("@title:window", "Info"); }
+QString InfoTool::title() const { return i18nc("@title:window", "Statistic"); }
 StatisticTableModel *InfoTool::statisticTableModel() const { return mStatisticTableModel; }
 int InfoTool::size() const { return (mByteArrayModel!=0) ? mByteArrayModel->size() : 0; }
 bool InfoTool::isApplyable() const
