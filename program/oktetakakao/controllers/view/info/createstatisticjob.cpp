@@ -52,7 +52,5 @@ int CreateStatisticJob::exec()
 
     deleteLater(); // TODO: could be reused on next search
 
-    return ( mByteArrayModel ? mSelection.width() : 0 );
+    return ( mByteArrayModel ? mSelection.width() : -1 );
 }
-
-#include "createstatisticjob.moc"

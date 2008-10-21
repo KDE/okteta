@@ -74,7 +74,7 @@ InfoView::InfoView( InfoTool *tool, QWidget *parent )
     sizeLayout->addWidget( label );
 
     mSizeLabel = new QLabel( this );
-    sizeLayout->addWidget( mSizeLabel );
+    sizeLayout->addWidget( mSizeLabel, 10 );
     baseLayout->addLayout( sizeLayout );
     connect( mTool->statisticTableModel(), SIGNAL(sizeChanged( int )), SLOT(setByteArraySize( int )) );
 
@@ -98,6 +98,8 @@ InfoView::InfoView( InfoTool *tool, QWidget *parent )
     connect( mTool->statisticTableModel(), SIGNAL(headerChanged()), SLOT(updateHeader()) );
 
     baseLayout->addWidget( mStatisticTableView, 10 );
+
+    setByteArraySize( mTool->size() );
 }
 
 void InfoView::updateHeader()
@@ -109,8 +111,10 @@ void InfoView::updateHeader()
 
 void InfoView::setByteArraySize( int size )
 {
-    // TODO: use "-" if there is no byte array!
-    mSizeLabel->setText( KGlobal::locale()->formatNumber(size, 0) );
+    const QString sizeText = ( size == -1 ) ?
+        QString( '-' ) :
+        KGlobal::locale()->formatNumber( size, 0 );
+    mSizeLabel->setText( sizeText );
 }
 
 void InfoView::setDirty( bool dirty )
@@ -120,5 +124,3 @@ void InfoView::setDirty( bool dirty )
 }
 
 InfoView::~InfoView() {}
-
-#include "infoview.moc"

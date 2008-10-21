@@ -28,8 +28,8 @@
 #include <valuecodec.h>
 // KDE
 #include <KLocale>
-// Qt
-#include <QtCore/QLatin1Char>
+#include <KApplication>
+#include <KColorScheme>
 
 
 static const unsigned char StatisticsDefaultUndefinedChar = '?';
@@ -126,14 +126,16 @@ QVariant StatisticTableModel::data( const QModelIndex &index, int role ) const
                 break;
             }
             case CountId:
-                result = mByteCount[byte];
+                result =  ( mSize == -1 ) ?
+                    QVariant( QString('-') ) :
+                    QVariant( mByteCount[byte] );
                 break;
             case PercentId:
                 result = ( mSize > 0 ) ?
                           // TODO: before we printed only a string (which killed sorting) with QString::number( x, 'f', 6 )
                           // Qt now cuts trailing 0s, results in unaligned numbers, not so beautiful.
                           QVariant( 100.0*(double)mByteCount[byte]/mSize ) :
-                          QVariant( QLatin1Char('-') );
+                          QVariant( QString('-') );
                 break;
             default:
                 ;
@@ -141,6 +143,28 @@ QVariant StatisticTableModel::data( const QModelIndex &index, int role ) const
     }
     else if( role == Qt::TextAlignmentRole )
         result = Qt::AlignRight;
+    else if( role == Qt::ForegroundRole )
+    {
+        const int column = index.column();
+        bool isInactive = false;
+        switch( column )
+        {
+        case CountId:
+            isInactive = ( mSize == -1 );
+            break;
+        case PercentId:
+            isInactive = ( mSize <= 0 );
+            break;
+        default:
+            ;
+        }
+        if( isInactive )
+        {
+            const QPalette& palette = KApplication::kApplication()->palette();
+            const KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::View );
+            result = colorScheme.foreground( KColorScheme::InactiveText );
+        }
+    }
 
     return result;
 }
@@ -196,5 +220,3 @@ StatisticTableModel::~StatisticTableModel()
     delete mValueCodec;
     delete mCharCodec;
 }
-
-#include "statistictablemodel.moc"
