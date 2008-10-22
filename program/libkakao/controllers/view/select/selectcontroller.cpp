@@ -51,12 +51,12 @@ void SelectController::setTargetModel( AbstractModel* model )
     mModel = model ? model->findBaseModelWithInterface<KDE::If::DataSelectable*>() : 0;
     mSelectControl = mModel ? qobject_cast<KDE::If::DataSelectable *>( mModel ) : 0;
 
-    if( mSelectControl )
+    const bool hasSelectionControl = ( mSelectControl != 0 );
+    if( hasSelectionControl )
     {
         connect( mModel, SIGNAL(hasSelectedDataChanged( bool )), SLOT(onHasSelectedDataChanged( bool )) );
     }
 
-    const bool hasSelectionControl = ( mSelectControl != 0 );
     mSelectAllAction->setEnabled( hasSelectionControl );
     mDeselectAction->setEnabled( hasSelectionControl ? mSelectControl->hasSelectedData() : false );
 }
