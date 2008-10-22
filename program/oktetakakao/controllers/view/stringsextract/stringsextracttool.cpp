@@ -50,7 +50,7 @@ StringsExtractTool::StringsExtractTool()
 
 bool StringsExtractTool::isApplyable() const
 {
-    return ( mByteArrayModel != 0 && mByteArrayView->hasSelectedData() && mMinLength > 0 );
+    return ( mByteArrayModel && mByteArrayView && mByteArrayView->hasSelectedData() && mMinLength > 0 );
 }
 
 bool StringsExtractTool::canHighlightString() const
@@ -76,7 +76,7 @@ void StringsExtractTool::setTargetModel( AbstractModel* model )
     KByteArrayDocument* document = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
-    if( mByteArrayView )
+    if( mByteArrayView && mByteArrayModel )
     {
         connect( mByteArrayView,  SIGNAL(charCodecChanged( const QString & )),
                  SLOT(setCharCodec( const QString &)) );

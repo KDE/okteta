@@ -61,15 +61,15 @@ void GotoOffsetController::setTargetModel( AbstractModel* model )
     if( mByteArrayView ) mByteArrayView->disconnect( this );
 
     KByteArrayDisplay* view = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
-    mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
+    mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
     KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
     mByteArray = document ? document->content() : 0;
 
-    if( mByteArray )
+    const bool hasView = ( mByteArray && mByteArrayView );
+    if( hasView )
     {
 //         connect( mByteArrayView, SIGNAL( selectionChanged( bool )), SLOT( onSelectionChanged( bool )) );
     }
-    const bool hasView = ( mByteArray != 0 );
     mGotoOffsetAction->setEnabled( hasView );
 }
 

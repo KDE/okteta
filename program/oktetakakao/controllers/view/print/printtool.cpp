@@ -59,12 +59,12 @@ void PrintTool::setTargetModel( AbstractModel* model )
 //     if( mByteArrayView ) mByteArrayView->disconnect( this );
 
     KByteArrayDisplay* view = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
-    mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
+    mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
 
     mDocument = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
     mByteArrayModel = mDocument ? mDocument->content() : 0;
 
-    const bool hasView = ( mByteArrayModel != 0 );
+    const bool hasView = ( mByteArrayView && mByteArrayModel );
     emit viewChanged( hasView );
 }
 

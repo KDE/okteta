@@ -50,12 +50,12 @@ void InsertPatternTool::setTargetModel( AbstractModel* model )
 //     if( mByteArrayView ) mByteArrayView->disconnect( this );
 
     KByteArrayDisplay* view = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
-    mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
+    mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
 
     KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
-    const bool hasView = ( mByteArrayView != 0 );
+    const bool hasView = ( mByteArrayView && mByteArrayModel );
     emit viewChanged( hasView );
 }
 

@@ -90,7 +90,7 @@ void FilterTool::setTargetModel( AbstractModel* model )
     KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
-    const bool hasByteArray = ( mByteArrayModel != 0 );
+    const bool hasByteArray = ( mByteArrayModel && mByteArrayView );
     QString newCharCodecName;
     if( hasByteArray )
     {

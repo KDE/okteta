@@ -61,18 +61,18 @@ void SearchController::setTargetModel( AbstractModel* model )
 {
     if( ViewWidget ) ViewWidget->disconnect( this );
 
-    KByteArrayDisplay* View = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
-    ViewWidget = View ? static_cast<KHEUI::KByteArrayView *>( View->widget() ) : 0;
-    KByteArrayDocument* Document = View ? static_cast<KByteArrayDocument*>( View->baseModel() ) : 0;
-    ByteArray = Document ? Document->content() : 0;
+    KByteArrayDisplay* view = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
+    ViewWidget = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
+    KByteArrayDocument* document = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
+    ByteArray = document ? document->content() : 0;
 
-    if( ByteArray )
+    const bool hasView = ( ViewWidget && ByteArray );
+    if( hasView )
     {
     }
-    const bool HasView = ( ByteArray != 0 );
-    mFindAction->setEnabled( HasView );
-    mFindNextAction->setEnabled( HasView );
-    mFindPrevAction->setEnabled( HasView );
+    mFindAction->setEnabled( hasView );
+    mFindNextAction->setEnabled( hasView );
+    mFindPrevAction->setEnabled( hasView );
 }
 
 

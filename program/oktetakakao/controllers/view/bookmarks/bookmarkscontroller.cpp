@@ -92,7 +92,7 @@ void BookmarksController::setTargetModel( AbstractModel* model )
 
     KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
     mByteArray = document ? document->content() : 0;
-    mBookmarks = mByteArray ? qobject_cast<KHECore::Bookmarkable*>( mByteArray ) : 0;
+    mBookmarks = ( mByteArray && mByteArrayView ) ? qobject_cast<KHECore::Bookmarkable*>( mByteArray ) : 0;
 
     int bookmarksCount = 0;
     if( mBookmarks )

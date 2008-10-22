@@ -94,7 +94,7 @@ void ViewConfigController::setTargetModel( AbstractModel* model )
     if( mByteArrayView ) mByteArrayView->disconnect( this );
 
     KByteArrayDisplay* view = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
-    mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
+    mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
 
     if( mByteArrayView )
     {

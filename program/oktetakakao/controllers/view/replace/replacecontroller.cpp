@@ -64,14 +64,14 @@ void ReplaceController::setTargetModel( AbstractModel* model )
     if( mByteArrayView ) mByteArrayView->disconnect( this );
 
     KByteArrayDisplay* view = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
-    mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
-    KByteArrayDocument* Document = view ? static_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
+    mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
+    KByteArrayDocument* Document = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
     mByteArrayModel = Document ? Document->content() : 0;
 
-    if( mByteArrayModel )
+    const bool hasView = ( mByteArrayView && mByteArrayModel );
+    if( hasView )
     {
     }
-    const bool hasView = ( mByteArrayModel != 0 );
     mReplaceAction->setEnabled( hasView );
 }
 

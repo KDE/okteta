@@ -52,7 +52,7 @@ StatisticTableModel *InfoTool::statisticTableModel() const { return mStatisticTa
 int InfoTool::size() const { return (mByteArrayModel!=0) ? mByteArrayModel->size() : -1; }
 bool InfoTool::isApplyable() const
 {
-    return ( mByteArrayModel != 0 && mByteArrayView->hasSelectedData() && !isStatisticUptodate() );
+    return ( mByteArrayModel && mByteArrayView && mByteArrayView->hasSelectedData() && !isStatisticUptodate() );
 }
 bool InfoTool::isStatisticUptodate() const
 {
@@ -68,12 +68,12 @@ void InfoTool::setTargetModel( AbstractModel* model )
     if( mByteArrayView ) mByteArrayView->disconnect( this );
 
     KAbstractView* view = model ? qobject_cast<KAbstractView*>( model ) : 0;
-    mByteArrayView = view ? static_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
+    mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
 
     KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
-    if( mByteArrayView )
+    if( mByteArrayView && mByteArrayModel )
     {
         mStatisticTableModel->setCharCodec( mByteArrayView->encodingName() );
         mStatisticTableModel->setValueCoding( mByteArrayView->coding() );
