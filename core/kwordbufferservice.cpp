@@ -31,7 +31,7 @@
 namespace KHECore
 {
 
-KWordBufferService::KWordBufferService( KAbstractByteArrayModel *byteArrayModel, KCharCodec *charCodec )
+KWordBufferService::KWordBufferService( const KAbstractByteArrayModel* byteArrayModel, const KCharCodec* charCodec )
  : mByteArrayModel( byteArrayModel ), mCharCodec( charCodec )
 {}
 

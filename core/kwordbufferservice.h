@@ -43,7 +43,7 @@ class KCharCodec;
 class OKTETACORE_EXPORT KWordBufferService
 {
   public:
-    KWordBufferService( KAbstractByteArrayModel *byteArrayModel, KCharCodec *charCodec );
+    KWordBufferService( const KAbstractByteArrayModel* byteArrayModel, const KCharCodec* charCodec );
     ~KWordBufferService();
 
 
@@ -128,8 +128,8 @@ class OKTETACORE_EXPORT KWordBufferService
     KHE::KSection wordSection( unsigned int index ) const;
 
   protected:
-    KAbstractByteArrayModel *mByteArrayModel;
-    KCharCodec *mCharCodec;
+    const KAbstractByteArrayModel* const mByteArrayModel;
+    const KCharCodec* const mCharCodec;
 };
 
 }
