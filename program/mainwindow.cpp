@@ -103,7 +103,7 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram *program )
     setupControllers();
     setupGUI();
 
-    // all controllers which use plugActionList have to do so after(!) setupGUI() or their entrys will be removed
+    // all controllers which use plugActionList have to do so after(!) setupGUI() or their entries will be removed
     // TODO: why is this so?
     addXmlGuiController( new CopyAsController(mProgram->documentManager(),this) );
     addXmlGuiController( new ExportController(mProgram->documentManager(),this) );
