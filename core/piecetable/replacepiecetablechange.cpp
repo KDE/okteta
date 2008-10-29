@@ -47,7 +47,7 @@ int ReplacePieceTableChange::storageOffset() const { return mStorageOffset; }
 bool ReplacePieceTableChange::merge( const AbstractPieceTableChange *other )
 {
 // TODO: remove me again after synching solved
-return false;
+// return false;
     bool result = false;
     if( other->type() == ReplaceId )
     {

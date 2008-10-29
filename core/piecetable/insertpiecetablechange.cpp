@@ -47,7 +47,7 @@ int InsertPieceTableChange::storageOffset() const { return mStorageOffset; }
 bool InsertPieceTableChange::merge( const AbstractPieceTableChange *other )
 {
 // TODO: remove me again after synching solved
-return false;
+// return false;
     bool result = false;
     if( other->type() == InsertId )
     {
