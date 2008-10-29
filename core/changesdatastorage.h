@@ -37,7 +37,7 @@ class ChangesDataStorage
   public: // set/action
     void append( int from, char byte );
     void append( int from, const char *data, int dataLength );
-    void appendFill( int from, int fillLength, char fillDatum );
+    void appendFill( int from, char fillDatum, int fillLength );
 
     void clear();
 
@@ -72,7 +72,7 @@ inline void ChangesDataStorage::append( int from, const char *data, int dataLeng
     memcpy( mData.data()+from, data, dataLength );
 }
 
-inline void ChangesDataStorage::appendFill( int from, int fillLength, char fillDatum )
+inline void ChangesDataStorage::appendFill( int from, char fillDatum, int fillLength )
 {
     mData.resize( from + fillLength );
     memset( mData.data()+from, fillDatum, fillLength );
