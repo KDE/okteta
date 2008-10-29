@@ -26,8 +26,8 @@
 #include <kbytearraydocumentfactory.h>
 // lib
 #include <kbytearraydocument.h>
-// Qt
-#include <QtTest/QtTest>
+// KDE
+#include <qtest_kde.h>
 
 
 void KByteArrayDocumentFactoryTest::testCreate()
@@ -45,4 +45,4 @@ void KByteArrayDocumentFactoryTest::testCreate()
     delete factory;
 }
 
-QTEST_MAIN( KByteArrayDocumentFactoryTest )
+QTEST_KDEMAIN_CORE( KByteArrayDocumentFactoryTest )
