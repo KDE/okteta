@@ -30,8 +30,6 @@
 // lib
 #include <kbytearraydisplay.h>
 #include <kbytearraydocument.h>
-// Okteta gui
-#include <kbytearrayview.h>
 // Okteta core
 #include <kcharcodec.h>
 #include <kbytearraymodel.h>
@@ -50,7 +48,7 @@
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
 ReplaceController::ReplaceController( KXmlGuiWindow *window )
- : mWindow( window ), mByteArrayView( 0 ), mByteArrayModel( 0 ), mReplaceDialog( 0 ), mReplacePrompt( 0 )
+ : mWindow( window ), mByteArrayDisplay( 0 ), mByteArrayModel( 0 ), mReplaceDialog( 0 ), mReplacePrompt( 0 )
 {
     KActionCollection* ActionCollection = mWindow->actionCollection();
 
@@ -61,14 +59,14 @@ ReplaceController::ReplaceController( KXmlGuiWindow *window )
 
 void ReplaceController::setTargetModel( AbstractModel* model )
 {
-    if( mByteArrayView ) mByteArrayView->disconnect( this );
+    if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
 
-    KByteArrayDisplay* view = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
-    mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
-    KByteArrayDocument* Document = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
-    mByteArrayModel = Document ? Document->content() : 0;
+    mByteArrayDisplay = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
+    KByteArrayDocument* document =
+        mByteArrayDisplay ? qobject_cast<KByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
+    mByteArrayModel = document ? document->content() : 0;
 
-    const bool hasView = ( mByteArrayView && mByteArrayModel );
+    const bool hasView = ( mByteArrayDisplay && mByteArrayModel );
     if( hasView )
     {
     }
@@ -85,8 +83,8 @@ void ReplaceController::replace()
         connect( mReplaceDialog, SIGNAL(okClicked()), SLOT(onDialogOkClicked()) );
     }
 
-    mReplaceDialog->setInSelection( mByteArrayView->hasSelectedData() );
-    mReplaceDialog->setCharCodec( mByteArrayView->encodingName() );
+    mReplaceDialog->setInSelection( mByteArrayDisplay->hasSelectedData() );
+    mReplaceDialog->setCharCodec( mByteArrayDisplay->charCodingName() );
 
     mReplaceDialog->show();
 }
@@ -107,7 +105,7 @@ void ReplaceController::onDialogOkClicked()
     if( mReplaceDialog->inSelection() )
     {
         mDirection = FindForward;
-        const KHE::KSection selection = mByteArrayView->selection();
+        const KHE::KSection selection = mByteArrayDisplay->selection();
         mReplaceFirstIndex = selection.start();
         mReplaceLastIndex =  selection.end();
         mCurrentIndex = selection.start();
@@ -116,7 +114,7 @@ void ReplaceController::onDialogOkClicked()
     else
     {
         mDirection = mReplaceDialog->direction();
-        const int cursorPosition = mByteArrayView->cursorPosition();
+        const int cursorPosition = mByteArrayDisplay->cursorPosition();
         if( mReplaceDialog->fromCursor() && (cursorPosition!=0) )
         {
             mReplaceFirstIndex = cursorPosition;
@@ -153,7 +151,7 @@ void ReplaceController::findNext()
             {
                 QApplication::restoreOverrideCursor();
 
-                mByteArrayView->setSelection( pos, pos+mSearchData.size()-1 );
+                mByteArrayDisplay->setSelection( pos, pos+mSearchData.size()-1 );
                 if( !mReplacePrompt )
                 {
                     mReplacePrompt = new KReplacePrompt( mWindow );
@@ -174,7 +172,7 @@ void ReplaceController::findNext()
 
         if( mReplacePrompt )
             mReplacePrompt->hide();
-        mByteArrayView->selectAll( false );
+        mByteArrayDisplay->selectAllData( false );
 
         const QString replacementReport = (mNoOfReplacements==0) ?
             i18nc( "@info", "No replacements done.") :

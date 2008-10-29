@@ -31,13 +31,13 @@ class QDropEvent;
 
 namespace KHEUI
 {
-class KByteArrayView;
+class ByteArrayColumnView;
 
 
 class Dropper
 {
   public:
-    explicit Dropper( KByteArrayView* view );
+    explicit Dropper( ByteArrayColumnView* view );
     ~Dropper();
 
   public: // AbstractMouseController API
@@ -53,7 +53,7 @@ class Dropper
     void handleInternalDrag( QDropEvent* dropEvent );
 
   protected:
-    KByteArrayView* mByteArrayView;
+    ByteArrayColumnView* mByteArrayView;
 
     int mBeforeDragCursorPos;
     bool mBeforeDragCursorIsBehind:1;

@@ -33,10 +33,10 @@
 
 namespace KHECore {
 
-ValueCodec *ValueCodec::createCodec( KCoding coding )
+ValueCodec *ValueCodec::createCodec( ValueCoding valueCoding )
 {
     ValueCodec *result;
-    switch( coding )
+    switch( valueCoding )
     {
         case DecimalCoding: result = new KDecimalByteCodec(); break;
         case OctalCoding:   result = new KOctalByteCodec();   break;

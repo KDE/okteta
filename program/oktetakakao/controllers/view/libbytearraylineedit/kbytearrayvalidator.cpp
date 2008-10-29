@@ -38,18 +38,18 @@ const QStringList &KByteArrayValidator::codecNames()
     static QStringList list;
     if( list.isEmpty() )
     {
-        list.append( i18nc("@item:inlistbox encoding of the bytes as values in the hexadecimal format","Hexadecimal")  );
-        list.append( i18nc("@item:inlistbox encoding of the bytes as values in the decimal format",    "Decimal")      );
-        list.append( i18nc("@item:inlistbox encoding of the bytes as values in the octal format",      "Octal")        );
-        list.append( i18nc("@item:inlistbox encoding of the bytes as values in the binary format",     "Binary")       );
-        list.append( i18nc("@item:inlistbox encoding of the bytes as characters with the values",      "Character(s)") );
+        list.append( i18nc("@item:inlistbox coding of the bytes as values in the hexadecimal format","Hexadecimal")  );
+        list.append( i18nc("@item:inlistbox coding of the bytes as values in the decimal format",    "Decimal")      );
+        list.append( i18nc("@item:inlistbox cding of the bytes as values in the octal format",      "Octal")        );
+        list.append( i18nc("@item:inlistbox coding of the bytes as values in the binary format",     "Binary")       );
+        list.append( i18nc("@item:inlistbox coding of the bytes as characters with the values",      "Character(s)") );
     }
     return list;
 }
 
 
-KByteArrayValidator::KByteArrayValidator( QObject *parent, int codecId, int charCodecId )
- : QValidator( parent ), mCodecId( KHECore::InvalidCoding ),
+KByteArrayValidator::KByteArrayValidator( QObject *parent, Coding codecId, int charCodecId )
+ : QValidator( parent ), mCodecId( InvalidCoding ),
    mValueCodec( 0 ), mCharCodec( KHECore::KCharCodec::createCodec(KHECore::LocalEncoding) )
 {
 Q_UNUSED(charCodecId)
@@ -66,17 +66,17 @@ void KByteArrayValidator::setCharCodec( const QString &charCodecName )
     mCharCodec = KHECore::KCharCodec::createCodec( charCodecName );
 }
 
-void KByteArrayValidator::setCodec( int codecId )
+void KByteArrayValidator::setCodec( Coding codecId )
 {
     if( codecId == mCodecId )
         return;
 
-    mCodecId = (KHECore::KCoding)codecId;
+    mCodecId = codecId;
 
-    if( mCodecId != KHECore::CharCoding )
+    if( mCodecId != CharCoding )
     {
         delete mValueCodec;
-        mValueCodec = KHECore::ValueCodec::createCodec( mCodecId );
+        mValueCodec = KHECore::ValueCodec::createCodec( (KHECore::ValueCoding)mCodecId );
     }
 }
 
@@ -85,7 +85,7 @@ QValidator::State KByteArrayValidator::validate( QString &string, int &/*pos*/ )
     State result = QValidator::Acceptable;
 
     const int stringLength = string.length();
-    if( mCodecId == KHECore::CharCoding )
+    if( mCodecId == CharCoding )
     {
         for( int i=0; i<stringLength; ++i )
         {
@@ -119,7 +119,7 @@ QByteArray KByteArrayValidator::toByteArray( const QString &string ) const
     QByteArray result;
 
     const int stringLength = string.length();
-    if( mCodecId == KHECore::CharCoding )
+    if( mCodecId == CharCoding )
     {
         result.resize( stringLength );
         for( int i=0; i<stringLength; ++i )
@@ -156,7 +156,7 @@ QString KByteArrayValidator::toString( const QByteArray &byteArray ) const
     QString result;
 
     const int byteArraySize = byteArray.size();
-    if( mCodecId == KHECore::CharCoding )
+    if( mCodecId == CharCoding )
     {
         result.resize( byteArraySize );
         for( int i=0; i<byteArraySize; ++i )

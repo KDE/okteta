@@ -28,9 +28,7 @@
 // Okteta gui
 #include <koffsetformat.h>
 
-namespace KHEUI {
-class KByteArrayView;
-}
+class KByteArrayDisplay;
 class KStatusBar;
 class QLabel;
 class QString;
@@ -49,12 +47,12 @@ class ViewStatusController : public AbstractXmlGuiController
   protected Q_SLOTS:
     void onCursorPositionChanged( int offset );
     void onOverwriteModeChanged( bool isOverwrite );
-    void onValueCodingChanged( int coding );
+    void onValueCodingChanged( int valueCoding );
     void onCharCodecChanged( const QString& charCodecName );
     void onReadOnlyChanged( bool isReadOnly );
 
   protected:
-    KHEUI::KByteArrayView* mByteArrayView;
+    KByteArrayDisplay* mByteArrayDisplay;
 
     QLabel* mOffsetLabel;
     QLabel* mOverwriteModeLabel;

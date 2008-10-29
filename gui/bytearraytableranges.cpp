@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kdataranges.h"
+#include "bytearraytableranges.h"
 
 // lib
 #include "bytearraytablelayout.h"
@@ -30,19 +30,19 @@
 
 namespace KHEUI {
 
-KDataRanges::KDataRanges( ByteArrayTableLayout *L )
+ByteArrayTableRanges::ByteArrayTableRanges( ByteArrayTableLayout *L )
  : Modified( false ),
    Layout( L )
 {
 }
 
 
-KDataRanges::~KDataRanges()
+ByteArrayTableRanges::~ByteArrayTableRanges()
 {
 }
 
 
-void KDataRanges::reset()
+void ByteArrayTableRanges::reset()
 {
   mSelection.cancel();
   FirstWordSelection.unset();
@@ -51,7 +51,7 @@ void KDataRanges::reset()
 }
 
 
-void KDataRanges::setMarking( const KHE::KSection &M )
+void ByteArrayTableRanges::setMarking( const KHE::KSection &M )
 {
   if( Marking == M )
     return;
@@ -61,14 +61,14 @@ void KDataRanges::setMarking( const KHE::KSection &M )
 }
 
 
-void KDataRanges::removeFurtherSelections()
+void ByteArrayTableRanges::removeFurtherSelections()
 {
   for( int i = 1; i < noOfSelections(); ++i )
     removeSelection( i );
 }
 
 
-void KDataRanges::setSelection( const KHE::KSection &S )
+void ByteArrayTableRanges::setSelection( const KHE::KSection &S )
 {
   bool Changed = mSelection.isValid();
   if( Changed )
@@ -77,7 +77,7 @@ void KDataRanges::setSelection( const KHE::KSection &S )
   addChangedRange( mSelection.section() );
 }
 
-void KDataRanges::setSelectionStart( int StartIndex )
+void ByteArrayTableRanges::setSelectionStart( int StartIndex )
 {
   bool Changed = mSelection.isValid();
   if( Changed )
@@ -87,7 +87,7 @@ void KDataRanges::setSelectionStart( int StartIndex )
 }
 
 
-void KDataRanges::setSelectionEnd( int EndIndex )
+void ByteArrayTableRanges::setSelectionEnd( int EndIndex )
 {
   KHE::KSection OldSelection = mSelection.section();
   mSelection.setEnd( EndIndex );
@@ -150,7 +150,7 @@ void KDataRanges::setSelectionEnd( int EndIndex )
 }
 
 
-KHE::KSection KDataRanges::removeSelection( int id )
+KHE::KSection ByteArrayTableRanges::removeSelection( int id )
 {
   if( id > 0 )
     return KHE::KSection();
@@ -167,7 +167,7 @@ KHE::KSection KDataRanges::removeSelection( int id )
 }
 
 
-bool KDataRanges::overlapsSelection( int FirstIndex, int LastIndex, int *SI, int *EI ) const
+bool ByteArrayTableRanges::overlapsSelection( int FirstIndex, int LastIndex, int *SI, int *EI ) const
 {
   if( mSelection.section().overlaps(KHE::KSection(FirstIndex,LastIndex)) )
   {
@@ -179,7 +179,7 @@ bool KDataRanges::overlapsSelection( int FirstIndex, int LastIndex, int *SI, int
 }
 
 
-bool KDataRanges::overlapsMarking( int FirstIndex, int LastIndex, int *SI, int *EI ) const
+bool ByteArrayTableRanges::overlapsMarking( int FirstIndex, int LastIndex, int *SI, int *EI ) const
 {
   if( Marking.overlaps(KHE::KSection(FirstIndex,LastIndex)) )
   {
@@ -191,19 +191,19 @@ bool KDataRanges::overlapsMarking( int FirstIndex, int LastIndex, int *SI, int *
 }
 
 
-const KHE::KSection *KDataRanges::firstOverlappingSelection( const KHE::KSection &Range ) const
+const KHE::KSection *ByteArrayTableRanges::firstOverlappingSelection( const KHE::KSection &Range ) const
 {
   return mSelection.section().overlaps(Range) ? &mSelection.section() : 0;
 }
 
 
-const KHE::KSection *KDataRanges::overlappingMarking( const KHE::KSection &Range ) const
+const KHE::KSection *ByteArrayTableRanges::overlappingMarking( const KHE::KSection &Range ) const
 {
   return Marking.overlaps(Range) ? &Marking : 0;
 }
 
 /*
-bool KDataRanges::overlapsChanges( int FirstIndex, int LastIndex, int *SI, int *EI ) const
+bool ByteArrayTableRanges::overlapsChanges( int FirstIndex, int LastIndex, int *SI, int *EI ) const
 {
   for( CoordRangeList::const_iterator S=ChangedRanges.begin(); S!=ChangedRanges.end(); ++S )
   {
@@ -218,7 +218,7 @@ bool KDataRanges::overlapsChanges( int FirstIndex, int LastIndex, int *SI, int *
   return false;
 }
 
-bool KDataRanges::overlapsChanges( KHE::KSection Indizes, KHE::KSection *ChangedRange ) const
+bool ByteArrayTableRanges::overlapsChanges( KHE::KSection Indizes, KHE::KSection *ChangedRange ) const
 {
   for( KHE::KSectionList::const_iterator S=ChangedRanges.begin(); S!=ChangedRanges.end(); ++S )
   {
@@ -232,7 +232,7 @@ bool KDataRanges::overlapsChanges( KHE::KSection Indizes, KHE::KSection *Changed
   return false;
 }
 */
-bool KDataRanges::overlapsChanges( const CoordRange &Range, CoordRange *ChangedRange ) const
+bool ByteArrayTableRanges::overlapsChanges( const CoordRange &Range, CoordRange *ChangedRange ) const
 {
   // TODO: add a lastusedrange pointer for quicker access
   for( CoordRangeList::ConstIterator R=ChangedRanges.begin(); R!=ChangedRanges.end(); ++R )
@@ -248,20 +248,20 @@ bool KDataRanges::overlapsChanges( const CoordRange &Range, CoordRange *ChangedR
 }
 
 
-void KDataRanges::addChangedRange( int SI, int EI )
+void ByteArrayTableRanges::addChangedRange( int SI, int EI )
 {
   addChangedRange( KHE::KSection(SI,EI) );
 }
 
 
-void KDataRanges::addChangedRange( const KHE::KSection &S )
+void ByteArrayTableRanges::addChangedRange( const KHE::KSection &S )
 {
 // kDebug() << "adding change section "<<S.start()<<","<<S.end();
   addChangedRange( Layout->coordRangeOfIndizes(S) );
 }
 
 
-void KDataRanges::addChangedRange( const CoordRange &NewRange )
+void ByteArrayTableRanges::addChangedRange( const CoordRange &NewRange )
 {
   ChangedRanges.addCoordRange( NewRange );
 // kDebug() << "as range "<<NewRange.start().pos()<<","<<NewRange.start().line()<<"-"
@@ -271,7 +271,7 @@ void KDataRanges::addChangedRange( const CoordRange &NewRange )
 }
 
 
-void KDataRanges::removeMarking()
+void ByteArrayTableRanges::removeMarking()
 {
   bool Changed = Marking.isValid();
   if( Changed )
@@ -281,20 +281,20 @@ void KDataRanges::removeMarking()
 }
 
 
-void KDataRanges::resetChangedRanges()
+void ByteArrayTableRanges::resetChangedRanges()
 {
   ChangedRanges.clear();
   Modified = false;
 }
 
 
-void KDataRanges::setFirstWordSelection( const KHE::KSection &Section )
+void ByteArrayTableRanges::setFirstWordSelection( const KHE::KSection &Section )
 {
   FirstWordSelection = Section;
   setSelection( FirstWordSelection );
 }
 
- void KDataRanges::ensureWordSelectionForward( bool Forward )
+ void ByteArrayTableRanges::ensureWordSelectionForward( bool Forward )
  {
    // in the anchor not on the right side?
    if( mSelection.isForward() != Forward )
@@ -306,7 +306,7 @@ void KDataRanges::setFirstWordSelection( const KHE::KSection &Section )
  }
 
 
-void KDataRanges::adaptToChanges( const KHE::ArrayChangeMetricsList& changeList )
+void ByteArrayTableRanges::adaptToChanges( const KHE::ArrayChangeMetricsList& changeList )
 {
     foreach( const KHE::ArrayChangeMetrics& change, changeList )
     {

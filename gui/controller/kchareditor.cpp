@@ -24,8 +24,7 @@
 
 // lib
 #include "charbytearraycolumnrenderer.h"
-#include "kbytearrayview.h"
-#include "kdatacursor.h"
+#include "bytearraycolumnview.h"
 // commonlib
 #include <kcharcodec.h>
 // Qt
@@ -35,9 +34,8 @@
 namespace KHEUI {
 
 
-KCharEditor::KCharEditor( CharByteArrayColumnRenderer *charColumn, KDataCursor *dataCursor, KByteArrayView *view, KController *parent )
-  : KEditor( dataCursor, view, parent ),
-  mCharColumn( charColumn )
+KCharEditor::KCharEditor( ByteArrayTableCursor* cursor, ByteArrayColumnView* view, KController* parent )
+  : KEditor( cursor, view, parent )
 {
 }
 
@@ -53,7 +51,7 @@ bool KCharEditor::handleKeyPress( QKeyEvent *keyEvent )
         if( enteredChar.isPrint() )
         {
             QByteArray data( 1, 0 );
-            if( mCharColumn->charCodec()->encode(data.data(),enteredChar) )
+            if( mView->charCodec()->encode(data.data(),enteredChar) )
             {
                 mView->insert( data );
 

@@ -27,10 +27,8 @@
 // Qt
 #include <QtCore/QObject>
 
+class KByteArrayDisplay;
 class AbstractModel;
-namespace KHEUI {
-class KByteArrayView;
-}
 namespace KHECore {
 class KAbstractByteArrayModel;
 }
@@ -59,7 +57,7 @@ class InsertPatternTool : public QObject
     void viewChanged( bool hasView );
 
   protected:
-    KHEUI::KByteArrayView *mByteArrayView;
+    KByteArrayDisplay* mByteArrayDisplay;
     KHECore::KAbstractByteArrayModel *mByteArrayModel;
 };
 

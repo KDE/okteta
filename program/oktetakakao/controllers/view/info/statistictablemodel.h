@@ -64,7 +64,7 @@ class StatisticTableModel : public QAbstractTableModel
 
   public Q_SLOTS:
     void setCharCodec( const QString &codecName );
-    void setValueCoding( int coding );
+    void setValueCoding( int valueCoding );
 
   Q_SIGNALS:
     void headerChanged();
@@ -74,7 +74,7 @@ class StatisticTableModel : public QAbstractTableModel
     int mSize;
     int *mByteCount;
 
-    KHECore::KCoding mValueCoding;
+    KHECore::ValueCoding mValueCoding;
     KHECore::ValueCodec *mValueCodec;
     KHECore::KCharCodec *mCharCodec;
     QChar mUndefinedChar;

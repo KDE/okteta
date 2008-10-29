@@ -156,8 +156,9 @@ void KAbstractFindDialog::setCharCodec( const QString &codecName )
 
 void KAbstractFindDialog::onSearchDataFormatChanged( int index )
 {
-    CaseSensitiveCheckBox->setEnabled( index == KHECore::CharCoding );
-    WholeWordsCheckBox->setEnabled( index == KHECore::CharCoding );
+    const bool isCharCoding = ( index == KByteArrayLineEdit::CharCoding );
+    CaseSensitiveCheckBox->setEnabled( isCharCoding );
+    WholeWordsCheckBox->setEnabled( isCharCoding );
 }
 
 void KAbstractFindDialog::onSearchDataChanged( const QByteArray &data )

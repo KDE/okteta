@@ -34,11 +34,8 @@
 #include <filter/shiftbytearrayfilter.h>
 #include <abstractbytearrayfilter.h>
 // lib
+#include <kbytearraydisplay.h>
 #include <kbytearraydocument.h>
-// Kakao gui
-#include <kabstractview.h>
-// Okteta gui
-#include <kbytearrayview.h>
 // Okteta core
 #include <kabstractbytearraymodel.h>
 #include <changesdescribable.h>
@@ -50,7 +47,7 @@
 
 
 FilterTool::FilterTool()
- : mByteArrayView( 0 ), mByteArrayModel( 0 )
+ : mByteArrayDisplay( 0 ), mByteArrayModel( 0 )
 {
     setObjectName( "BinaryFilter" );
 
@@ -68,10 +65,10 @@ QString FilterTool::title() const { return i18nc("@title:window", "Binary Filter
 QList<AbstractByteArrayFilter*> FilterTool::filterList() const { return mFilterList; }
 QString FilterTool::charCodecName() const
 {
-    return mByteArrayView ? mByteArrayView->encodingName() : QString();
+    return mByteArrayDisplay ? mByteArrayDisplay->charCodingName() : QString();
 }
 
-bool FilterTool::dataSelected() const { return ( (mByteArrayView!=0) && mByteArrayView->hasSelectedData() ); }
+bool FilterTool::dataSelected() const { return ( (mByteArrayDisplay!=0) && mByteArrayDisplay->hasSelectedData() ); }
 
 AbstractByteArrayFilterParameterSet *FilterTool::parameterSet( int filterId )
 {
@@ -82,26 +79,26 @@ AbstractByteArrayFilterParameterSet *FilterTool::parameterSet( int filterId )
 
 void FilterTool::setTargetModel( AbstractModel* model )
 {
-    if( mByteArrayView ) mByteArrayView->disconnect( this );
+    if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
 
-    KAbstractView* view = model ? qobject_cast<KAbstractView*>( model ) : 0;
-    mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
+    mByteArrayDisplay = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
 
-    KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
+    KByteArrayDocument *document =
+        mByteArrayDisplay ? qobject_cast<KByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
-    const bool hasByteArray = ( mByteArrayModel && mByteArrayView );
+    const bool hasByteArray = ( mByteArrayModel && mByteArrayDisplay );
     QString newCharCodecName;
     if( hasByteArray )
     {
-        newCharCodecName = mByteArrayView->encodingName();
-        connect( mByteArrayView, SIGNAL(selectionChanged( bool )), SIGNAL(dataSelectionChanged( bool )) );
+        newCharCodecName = mByteArrayDisplay->charCodingName();
+        connect( mByteArrayDisplay, SIGNAL(hasSelectedDataChanged( bool )), SIGNAL(dataSelectionChanged( bool )) );
 
-        connect( mByteArrayView,  SIGNAL(charCodecChanged( const QString & )),
+        connect( mByteArrayDisplay,  SIGNAL(charCodecChanged( const QString& )),
                  SIGNAL(charCodecChanged( const QString & )) );
     }
 
-    const bool dataSelected = hasByteArray && mByteArrayView->hasSelectedData();
+    const bool dataSelected = hasByteArray && mByteArrayDisplay->hasSelectedData();
 
     emit charCodecChanged( newCharCodecName );
     emit dataSelectionChanged( dataSelected );
@@ -114,7 +111,7 @@ void FilterTool::filter( int filterId ) const
 
     if( byteArrayFilter )
     {
-        const KHE::KSection filteredSection = mByteArrayView->selection();
+        const KHE::KSection filteredSection = mByteArrayDisplay->selection();
 
         QByteArray filterResult;
         filterResult.resize( filteredSection.width() );

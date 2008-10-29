@@ -49,7 +49,7 @@ class ValueColumnRenderer : public ByteColumnRenderer
     /**
       * returns true if there was a change
       */
-    bool setCoding( KHECore::KCoding C );
+    bool setValueCoding( KHECore::ValueCoding C );
     /** sets the spacing in the middle of a binary byte in the value column
       * @param BinaryGapW spacing in the middle of a binary in pixels
       * returns true if there was a change
@@ -59,7 +59,7 @@ class ValueColumnRenderer : public ByteColumnRenderer
 
   public: // value access
     KPixelX binaryGapWidth()               const;
-    KHECore::KCoding coding()              const;
+    KHECore::ValueCoding valueCoding()              const;
     const KHECore::ValueCodec *byteCodec() const;
 
 
@@ -72,14 +72,14 @@ class ValueColumnRenderer : public ByteColumnRenderer
 
   protected: // set data
     /** */
-    KHECore::KCoding mCoding;
+    KHECore::ValueCoding mCoding;
     /** */
     KHECore::ValueCodec *mByteCodec;
     /** */
     KPixelX mBinaryGapWidth;
 
   protected: // buffered data
-    /** buffer to hold the formatted coding */
+    /** buffer to hold the formatted valueCoding */
     mutable QString mCodedByte;
     /** calculated: Offset in pixels of the second half of the binary */
     KPixelX mBinaryHalfOffset;
@@ -87,7 +87,7 @@ class ValueColumnRenderer : public ByteColumnRenderer
 
 
 inline KPixelX ValueColumnRenderer::binaryGapWidth()        const { return mBinaryGapWidth; }
-inline KHECore::KCoding ValueColumnRenderer::coding()                const { return mCoding; }
+inline KHECore::ValueCoding ValueColumnRenderer::valueCoding()                const { return mCoding; }
 inline const KHECore::ValueCodec *ValueColumnRenderer::byteCodec()   const { return mByteCodec; }
 
 }

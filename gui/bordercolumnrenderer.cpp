@@ -45,47 +45,27 @@ BorderColumnRenderer::BorderColumnRenderer( ColumnsView *columnsView, bool lineD
     setWidth( mLineDrawn ? BorderWidth : BorderMargin );
 }
 
-void BorderColumnRenderer::renderLine( QPainter *painter )
+void BorderColumnRenderer::renderColumn( QPainter* painter, const KPixelXs& Xs, const KPixelYs& Ys )
 {
-    if( lineHeight() > 0 )
-    {
-        ColumnRenderer::renderBlankLine( painter );
+    ColumnRenderer::renderColumn( painter, Xs,Ys );
 
-        if( mLineDrawn )
-        {
-            const QWidget *viewport = columnsView()->viewport();
-            const int lineColor = viewport->style()->styleHint( QStyle::SH_Table_GridLineColor, 0, viewport );
-
-            painter->setPen( lineColor != -1 ? (QRgb)lineColor : viewport->palette().mid().color() );
-            painter->drawLine( LineX, 0, LineX, lineHeight()-1 ) ;
-        }
-    }
-}
-
-
-void BorderColumnRenderer::renderFirstLine( QPainter *painter, const KPixelXs &Xs, int firstLineIndex )
-{
-Q_UNUSED( Xs )
-Q_UNUSED( firstLineIndex )
-
-    renderLine( painter );
-}
-
-
-void BorderColumnRenderer::renderNextLine( QPainter *painter )
-{
-    renderLine( painter );
+    renderBorderLine( painter, Xs,Ys );
 }
 
 void BorderColumnRenderer::renderEmptyColumn( QPainter *painter, const KPixelXs &Xs, const KPixelYs &Ys )
 {
     ColumnRenderer::renderEmptyColumn( painter, Xs,Ys );
 
+    renderBorderLine( painter, Xs,Ys );
+}
+
+void BorderColumnRenderer::renderBorderLine( QPainter* painter, const KPixelXs& Xs, const KPixelYs& Ys )
+{
     const KPixelX viewGlobalLineX = x() + LineX;
 
     if( mLineDrawn && Xs.includes(viewGlobalLineX) )
     {
-        const QWidget *viewport = columnsView()->viewport();
+        const QWidget* viewport = columnsView()->viewport();
         const int lineColor = viewport->style()->styleHint( QStyle::SH_Table_GridLineColor, 0, viewport );
 
         painter->setPen( lineColor != -1 ? (QRgb)lineColor : viewport->palette().mid().color() );

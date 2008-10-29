@@ -30,10 +30,7 @@
 
 class AbstractByteArrayFilterParameterSet;
 class AbstractByteArrayFilter;
-class KAbstractView;
-namespace KHEUI {
-class KByteArrayView;
-}
+class KByteArrayDisplay;
 namespace KHECore {
 class KAbstractByteArrayModel;
 }
@@ -68,7 +65,7 @@ class FilterTool : public AbstractTool
     void charCodecChanged( const QString &charCodecName );
 
   protected:
-    KHEUI::KByteArrayView *mByteArrayView;
+    KByteArrayDisplay* mByteArrayDisplay;
     KHECore::KAbstractByteArrayModel *mByteArrayModel;
 
     QList<AbstractByteArrayFilter*> mFilterList;

@@ -24,11 +24,12 @@
 
 // lib
 #include "columnsview.h"
-#include "kdatacursor.h"
+#include "bytearraytableranges.h"
+#include "bytearraytablecursor.h"
 #include "bytearraytablelayout.h"
-#include "kdataranges.h"
 #include "helper.h"
 // Okteta core
+#include <valuecodec.h>
 #include <kcharcodec.h>
 // KDE
 #include <KColorScheme>
@@ -39,33 +40,21 @@
 namespace KHEUI
 {
 
-static const KHECore::KCoding DefaultValueCoding =    KHECore::HexadecimalCoding;
-static const KHECore::KCoding NotDefaultCoding = KHECore::DecimalCoding;
-
 static const int DefaultBinaryGapWidth = 1;
 
 
 ValueByteArrayColumnRenderer::ValueByteArrayColumnRenderer( ColumnsView *columnsView,
-    KHECore::KAbstractByteArrayModel *byteArrayModel, ByteArrayTableLayout *layout, KDataRanges *ranges )
+    KHECore::KAbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges )
  : AbstractByteArrayColumnRenderer( columnsView, byteArrayModel, layout, ranges ),
-   mValueCoding( NotDefaultCoding ),
    mValueCodec( 0 ),
    mBinaryGapWidth( DefaultBinaryGapWidth )
 {
-    setValueCoding( DefaultValueCoding );
 }
 
-
-bool ValueByteArrayColumnRenderer::setValueCoding( KHECore::KCoding valueCoding )
+void ValueByteArrayColumnRenderer::setValueCodec( KHECore::ValueCoding valueCoding, const KHECore::ValueCodec* valueCodec )
 {
-    // no changes?
-    if( mValueCoding == valueCoding )
-        return false;
-
-    delete mValueCodec;
-
     mValueCoding = valueCoding;
-    mValueCodec = KHECore::ValueCodec::createCodec( mValueCoding );
+    mValueCodec = valueCodec;
     mDecodedByteText.resize( mValueCodec->encodingWidth() );
 
     // recalculate depend sizes
@@ -73,7 +62,6 @@ bool ValueByteArrayColumnRenderer::setValueCoding( KHECore::KCoding valueCoding 
 
     if( mLinePosLeftPixelX )
         recalcX();
-    return true;
 }
 
 
@@ -151,7 +139,6 @@ void ValueByteArrayColumnRenderer::renderCode( QPainter *painter, const QString 
 
 ValueByteArrayColumnRenderer::~ValueByteArrayColumnRenderer()
 {
-    delete mValueCodec;
 }
 
 }

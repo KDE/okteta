@@ -26,11 +26,9 @@
 // Qt
 #include <QtCore/QObject>
 
+class KByteArrayDisplay;
 class KByteArrayDocument;
 class AbstractModel;
-namespace KHEUI {
-class KByteArrayView;
-}
 namespace KHECore {
 class KAbstractByteArrayModel;
 }
@@ -74,7 +72,7 @@ class PrintTool : public QObject
   protected:
     KByteArrayDocument *mDocument;
 
-    KHEUI::KByteArrayView *mByteArrayView;
+    KByteArrayDisplay* mByteArrayDisplay;
     KHECore::KAbstractByteArrayModel *mByteArrayModel;
 };
 

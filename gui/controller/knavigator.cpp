@@ -23,9 +23,9 @@
 #include "knavigator.h"
 
 // lib
-#include "kdataranges.h"
-#include "kdatacursor.h"
-#include "kbytearrayview.h"
+#include "bytearraytableranges.h"
+#include "bytearraytablecursor.h"
+#include "bytearraycolumnview.h"
 #include "kvalueeditor.h"
 // lib
 #include <kwordbufferservice.h>
@@ -35,7 +35,7 @@
 
 namespace KHEUI {
 
-KNavigator::KNavigator( KByteArrayView* view, KController *parent )
+KNavigator::KNavigator( ByteArrayColumnView* view, KController *parent )
   : KController( view, parent )
 {
 }
@@ -89,51 +89,51 @@ bool KNavigator::handleKeyPress( QKeyEvent *keyEvent )
 void KNavigator::moveCursor( KMoveAction action, bool select )
 {
     mView->pauseCursor();
-    mView->mValueEditor->finishEdit();
+    mView->valueEditor()->finishEdit();
 
-    KDataCursor *dataCursor = mView->mDataCursor;
-    KDataRanges *dataRanges = mView->mDataRanges;
+    ByteArrayTableCursor* tableCursor = mView->tableCursor();
+    ByteArrayTableRanges* tableRanges = mView->tableRanges();
 
     if( select )
     {
-        if( !dataRanges->selectionStarted() )
-            dataRanges->setSelectionStart( dataCursor->realIndex() );
+        if( !tableRanges->selectionStarted() )
+            tableRanges->setSelectionStart( tableCursor->realIndex() );
     }
     else
-        dataRanges->removeSelection();
+        tableRanges->removeSelection();
 
     switch( action )
     {
-    case MoveBackward:     dataCursor->gotoPreviousByte(); break;
+    case MoveBackward:     tableCursor->gotoPreviousByte(); break;
     case MoveWordBackward: {
-            const KHECore::KWordBufferService WBS( mView->mByteArrayModel, mView->mCharCodec );
-            const int newIndex = WBS.indexOfPreviousWordStart( dataCursor->realIndex() );
-            dataCursor->gotoIndex( newIndex );
+            const KHECore::KWordBufferService WBS( mView->byteArrayModel(), mView->charCodec() );
+            const int newIndex = WBS.indexOfPreviousWordStart( tableCursor->realIndex() );
+            tableCursor->gotoIndex( newIndex );
         }
         break;
-    case MoveForward:      dataCursor->gotoNextByte();     break;
+    case MoveForward:      tableCursor->gotoNextByte();     break;
     case MoveWordForward:  {
-            const KHECore::KWordBufferService WBS( mView->mByteArrayModel, mView->mCharCodec );
-            const int newIndex = WBS.indexOfNextWordStart( dataCursor->realIndex() );
-            dataCursor->gotoCIndex( newIndex );
+            const KHECore::KWordBufferService WBS( mView->byteArrayModel(), mView->charCodec() );
+            const int newIndex = WBS.indexOfNextWordStart( tableCursor->realIndex() );
+            tableCursor->gotoCIndex( newIndex );
         }
         break;
-    case MoveUp:           dataCursor->gotoUp();             break;
-    case MovePgUp:         dataCursor->gotoPageUp();         break;
-    case MoveDown:         dataCursor->gotoDown();           break;
-    case MovePgDown:       dataCursor->gotoPageDown();       break;
-    case MoveLineStart:    dataCursor->gotoLineStart();      break;
-    case MoveHome:         dataCursor->gotoStart();          break;
-    case MoveLineEnd:      dataCursor->gotoLineEnd();        break;
-    case MoveEnd:          dataCursor->gotoEnd();            break;
+    case MoveUp:           tableCursor->gotoUp();             break;
+    case MovePgUp:         tableCursor->gotoPageUp();         break;
+    case MoveDown:         tableCursor->gotoDown();           break;
+    case MovePgDown:       tableCursor->gotoPageDown();       break;
+    case MoveLineStart:    tableCursor->gotoLineStart();      break;
+    case MoveHome:         tableCursor->gotoStart();          break;
+    case MoveLineEnd:      tableCursor->gotoLineEnd();        break;
+    case MoveEnd:          tableCursor->gotoEnd();            break;
     }
 
     if( select )
-        dataRanges->setSelectionEnd( dataCursor->realIndex() );
+        tableRanges->setSelectionEnd( tableCursor->realIndex() );
 
-    if( dataRanges->isModified() )
+    if( tableRanges->isModified() )
         mView->emitSelectionSignals(); // TODO: can this be moved somewhere
-    emit mView->cursorPositionChanged( dataCursor->realIndex() );
+    emit mView->cursorPositionChanged( tableCursor->realIndex() );
     mView->updateChanged();
     mView->ensureCursorVisible();
 

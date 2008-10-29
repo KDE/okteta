@@ -28,8 +28,6 @@
 // lib
 #include <kbytearraydisplay.h>
 #include <kbytearraydocument.h>
-// Okteta gui
-#include <kbytearrayview.h>
 // Okteta core
 #include <kcharcodec.h>
 #include <kbytearraymodel.h>
@@ -46,7 +44,7 @@
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
 SearchController::SearchController( KXmlGuiWindow *MW )
- : MainWindow( MW ), ViewWidget( 0 ), ByteArray( 0 ), SearchDialog( 0 )
+ : MainWindow( MW ), mByteArrayDisplay( 0 ), ByteArray( 0 ), SearchDialog( 0 )
 {
     KActionCollection *actionCollection = MainWindow->actionCollection();
 
@@ -59,14 +57,14 @@ SearchController::SearchController( KXmlGuiWindow *MW )
 
 void SearchController::setTargetModel( AbstractModel* model )
 {
-    if( ViewWidget ) ViewWidget->disconnect( this );
+    if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
 
-    KByteArrayDisplay* view = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
-    ViewWidget = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
-    KByteArrayDocument* document = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
+    mByteArrayDisplay = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
+    KByteArrayDocument* document =
+        mByteArrayDisplay ? qobject_cast<KByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
     ByteArray = document ? document->content() : 0;
 
-    const bool hasView = ( ViewWidget && ByteArray );
+    const bool hasView = ( mByteArrayDisplay && ByteArray );
     if( hasView )
     {
     }
@@ -86,7 +84,7 @@ void SearchController::findNext()
     if( SearchData.isEmpty() )
         showDialog( FindForward );
     else
-        searchData( FindForward, ViewWidget->cursorPosition() );
+        searchData( FindForward, mByteArrayDisplay->cursorPosition() );
 }
 
 void SearchController::findPrevious()
@@ -95,7 +93,7 @@ void SearchController::findPrevious()
         showDialog( FindBackward );
     else
     {
-        int StartIndex = ViewWidget->cursorPosition()-SearchData.size()-1;
+        int StartIndex = mByteArrayDisplay->cursorPosition()-SearchData.size()-1;
         searchData( FindBackward, StartIndex<0?0:StartIndex );
     }
 }
@@ -110,8 +108,8 @@ void SearchController::showDialog( KFindDirection Direction )
     }
 
     SearchDialog->setDirection( Direction );
-    SearchDialog->setInSelection( ViewWidget->hasSelectedData() );
-    SearchDialog->setCharCodec( ViewWidget->encodingName() );
+    SearchDialog->setInSelection( mByteArrayDisplay->hasSelectedData() );
+    SearchDialog->setCharCodec( mByteArrayDisplay->charCodingName() );
 
     SearchDialog->show();
 }
@@ -129,7 +127,7 @@ void SearchController::onOkClicked()
     int StartIndex;
     if( SearchDialog->inSelection() )
     {
-        const KHE::KSection Selection = ViewWidget->selection();
+        const KHE::KSection Selection = mByteArrayDisplay->selection();
         SearchFirstIndex = Selection.start();
         SearchLastIndex =  Selection.end();
         StartIndex = Selection.start();
@@ -138,7 +136,7 @@ void SearchController::onOkClicked()
     else
     {
         Direction = SearchDialog->direction();
-        const int CursorPosition = ViewWidget->cursorPosition();
+        const int CursorPosition = mByteArrayDisplay->cursorPosition();
         if( SearchDialog->fromCursor() && (CursorPosition!=0) )
         {
             SearchFirstIndex = CursorPosition;
@@ -171,7 +169,7 @@ void SearchController::searchData( KFindDirection Direction, int StartIndex )
         if( Pos != -1 )
         {
             PreviousFound = true;
-            ViewWidget->setSelection( Pos, Pos+SearchData.size()-1 );
+            mByteArrayDisplay->setSelection( Pos, Pos+SearchData.size()-1 );
             break;
         }
 

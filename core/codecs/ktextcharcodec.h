@@ -41,7 +41,7 @@ class KTextCharCodec : public KCharCodec
 {
   public:
     static KTextCharCodec *createCodec( const QString &CodeName );
-    static KTextCharCodec *createCodec( KEncoding C );
+    static KTextCharCodec *createCodec( CharCoding C );
     static KTextCharCodec *createLocalCodec();
 
     static const QStringList &codecNames();

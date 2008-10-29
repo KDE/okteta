@@ -24,11 +24,8 @@
 
 // lib
 #include "extractstringsjob.h"
+#include <kbytearraydisplay.h>
 #include <kbytearraydocument.h>
-// Kakao gui
-#include <kabstractview.h>
-// Okteta gui
-#include <kbytearrayview.h>
 // Okteta core
 #include <kcharcodec.h>
 #include <kbytearraymodel.h>
@@ -43,20 +40,20 @@ static const int DefaultMinLength = 3;
 StringsExtractTool::StringsExtractTool()
  : mExtractedStringsUptodate( false ), mSourceByteArrayModelUptodate( false ),
    mCharCodec( KHECore::KCharCodec::createCodec(KHECore::LocalEncoding) ), mMinLength( DefaultMinLength ),
-   mByteArrayView( 0 ), mByteArrayModel( 0 ), mSourceByteArrayModel( 0 ), mSourceMinLength( 0 )
+   mByteArrayDisplay( 0 ), mByteArrayModel( 0 ), mSourceByteArrayModel( 0 ), mSourceMinLength( 0 )
 {
     setObjectName( "Strings" );
 }
 
 bool StringsExtractTool::isApplyable() const
 {
-    return ( mByteArrayModel && mByteArrayView && mByteArrayView->hasSelectedData() && mMinLength > 0 );
+    return ( mByteArrayModel && mByteArrayDisplay && mByteArrayDisplay->hasSelectedData() && mMinLength > 0 );
 }
 
 bool StringsExtractTool::canHighlightString() const
 {
     return ( mSourceByteArrayModel == mByteArrayModel
-             && mByteArrayView && mSourceByteArrayModelUptodate );
+             && mByteArrayDisplay && mSourceByteArrayModelUptodate );
 }
 
 QString StringsExtractTool::title() const { return i18nc("@title:window of the tool to extract strings", "Strings"); }
@@ -68,22 +65,22 @@ QString StringsExtractTool::title() const { return i18nc("@title:window of the t
 // voll strings, auch mit Leerzeichen
 void StringsExtractTool::setTargetModel( AbstractModel* model )
 {
-    if( mByteArrayView ) mByteArrayView->disconnect( this );
+    if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
 
-    KAbstractView* view = model ? qobject_cast<KAbstractView*>( model ) : 0;
-    mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
+    mByteArrayDisplay = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
 
-    KByteArrayDocument* document = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
+    KByteArrayDocument* document =
+        mByteArrayDisplay ? qobject_cast<KByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
-    if( mByteArrayView && mByteArrayModel )
+    if( mByteArrayDisplay && mByteArrayModel )
     {
-        connect( mByteArrayView,  SIGNAL(charCodecChanged( const QString & )),
+        connect( mByteArrayDisplay,  SIGNAL(charCodecChanged( const QString& )),
                  SLOT(setCharCodec( const QString &)) );
-        connect( mByteArrayView,  SIGNAL(selectionChanged( bool )),
+        connect( mByteArrayDisplay,  SIGNAL(hasSelectedDataChanged( bool )),
                  SLOT(onSelectionChanged( bool )) );
 
-        setCharCodec( mByteArrayView->encodingName() );
+        setCharCodec( mByteArrayDisplay->charCodingName() );
     }
 
     // TODO: if there is no view, there is nothing to extract.
@@ -114,7 +111,7 @@ void StringsExtractTool::checkUptoDate()
 {
     mExtractedStringsUptodate =
         ( mSourceByteArrayModel == mByteArrayModel
-          && mByteArrayView && mSourceSelection == mByteArrayView->selection()
+          && mByteArrayDisplay && mSourceSelection == mByteArrayDisplay->selection()
           && mSourceMinLength == mMinLength
           && mSourceByteArrayModelUptodate );
 }
@@ -124,8 +121,8 @@ void StringsExtractTool::selectString( int stringId )
     const ContainedString &containedString = mContainedStringList.at(stringId);
     const int offset = containedString.offset();
     const int length = containedString.string().length();
-    mByteArrayView->setSelection( offset, offset+length-1 );
-    mByteArrayView->setFocus();
+    mByteArrayDisplay->setSelection( offset, offset+length-1 );
+    mByteArrayDisplay->setFocus();
 }
 
 void StringsExtractTool::onSelectionChanged( bool hasSelection )
@@ -155,7 +152,7 @@ void StringsExtractTool::extractStrings()
     QApplication::setOverrideCursor( Qt::WaitCursor );
 
     ExtractStringsJob *extractStringsJob =
-        new ExtractStringsJob( mByteArrayModel, mByteArrayView->selection(), mCharCodec, mMinLength,
+        new ExtractStringsJob( mByteArrayModel, mByteArrayDisplay->selection(), mCharCodec, mMinLength,
                                &mContainedStringList );
     extractStringsJob->exec();
 
@@ -163,7 +160,7 @@ void StringsExtractTool::extractStrings()
 
     // remember new string source
     mSourceByteArrayModel = mByteArrayModel;
-    mSourceSelection = mByteArrayView->selection();
+    mSourceSelection = mByteArrayDisplay->selection();
     mSourceMinLength = mMinLength;
     connect( mSourceByteArrayModel,  SIGNAL(contentsChanged( const KHE::ArrayChangeMetricsList & )),
              SLOT(onSourceChanged()) );

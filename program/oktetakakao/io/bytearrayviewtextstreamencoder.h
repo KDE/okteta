@@ -42,7 +42,7 @@ class ByteArrayViewTextStreamEncoderSettings
     int firstLineOffset;
     int startOffset;
     int delta;
-    KHECore::KCoding coding;
+    KHECore::ValueCoding valueCoding;
     QString codecName;
     QChar undefinedChar;
     QChar substituteChar;
@@ -62,7 +62,7 @@ class ByteArrayViewTextStreamEncoder : public KAbstractByteArrayStreamEncoder
 
   protected: // KAbstractByteArrayStreamEncoder API
     virtual bool encodeDataToStream( QIODevice *device,
-                                     const KHEUI::KByteArrayView *byteArrayView,
+                                     const KByteArrayDisplay* byteArrayView,
                                      const KHECore::KAbstractByteArrayModel *byteArrayModel,
                                      const KHE::KSection &section );
 

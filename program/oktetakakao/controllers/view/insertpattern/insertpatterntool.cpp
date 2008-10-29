@@ -25,37 +25,36 @@
 // lib
 #include <kbytearraydisplay.h>
 #include <kbytearraydocument.h>
-// Kakao core
-#include <abstractmodel.h>
-// Okteta gui
-#include <kbytearrayview.h>
 // Okteta core
 #include <kabstractbytearraymodel.h>
+#include <changesdescribable.h>
+// KDE
+#include <KLocale>
 // Qt
 #include <QtCore/QByteArray>
 
 
 InsertPatternTool::InsertPatternTool()
- : mByteArrayView( 0 ), mByteArrayModel( 0 )
+ : mByteArrayDisplay( 0 ), mByteArrayModel( 0 )
 {
 }
 
 QString InsertPatternTool::charCodecName() const
 {
-    return mByteArrayView ? mByteArrayView->encodingName() : QString();
+    return mByteArrayDisplay ? mByteArrayDisplay->charCodingName() : QString();
 }
 
 void InsertPatternTool::setTargetModel( AbstractModel* model )
 {
-//     if( mByteArrayView ) mByteArrayView->disconnect( this );
+//     if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
 
-    KByteArrayDisplay* view = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
-    mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
+    mByteArrayDisplay = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
 
-    KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
+    KByteArrayDocument* document =
+        mByteArrayDisplay ? qobject_cast<KByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
-    const bool hasView = ( mByteArrayView && mByteArrayModel );
+    const bool hasView = ( mByteArrayDisplay && mByteArrayModel );
     emit viewChanged( hasView );
 }
 
@@ -70,7 +69,17 @@ void InsertPatternTool::insertPattern( const QByteArray &pattern, int count )
         memcpy( &insertData.data()[i], pattern.constData(), patternSize );
 
     //TODO: support insert to selection
-    mByteArrayView->insert( insertData );
+//     const KHE::KSection selection = mByteArrayDisplay->selection();
+
+    KHECore::ChangesDescribable *changesDescribable =
+        qobject_cast<KHECore::ChangesDescribable*>( mByteArrayModel );
+
+    if( changesDescribable )
+        changesDescribable->openGroupedChange( i18n("Pattern inserted.") );
+    mByteArrayDisplay->insert( insertData );
+//     mByteArrayModel->replace( filteredSection, filterResult );
+    if( changesDescribable )
+        changesDescribable->closeGroupedChange();
 }
 
 InsertPatternTool::~InsertPatternTool() {}

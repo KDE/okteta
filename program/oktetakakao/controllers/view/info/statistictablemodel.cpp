@@ -33,7 +33,7 @@
 
 
 static const unsigned char StatisticsDefaultUndefinedChar = '?';
-static const KHECore::KCoding DefaultValueCoding =  KHECore::HexadecimalCoding;
+static const KHECore::ValueCoding DefaultValueCoding =  KHECore::HexadecimalCoding;
 static const int StatisticsByteSetSize = 256;
 
 
@@ -61,15 +61,15 @@ void StatisticTableModel::setUndefinedChar( const QChar &undefinedChar )
     emit dataChanged( index(0,CharacterId), index(StatisticsByteSetSize-1,CharacterId) );
 }
 
-void StatisticTableModel::setValueCoding( int coding )
+void StatisticTableModel::setValueCoding( int valueCoding )
 {
     // no changes?
-    if( mValueCoding == coding )
+    if( mValueCoding == valueCoding )
         return;
 
     delete mValueCodec;
 
-    mValueCoding = (KHECore::KCoding)coding;
+    mValueCoding = (KHECore::ValueCoding)valueCoding;
     mValueCodec = KHECore::ValueCodec::createCodec( mValueCoding );
 //     CodedByte.resize( ByteCodec->encodingWidth() );
 

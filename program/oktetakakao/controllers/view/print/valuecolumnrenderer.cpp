@@ -35,8 +35,8 @@
 namespace KHEPrint
 {
 
-static const KHECore::KCoding DefaultCoding =    KHECore::HexadecimalCoding;
-static const KHECore::KCoding NotDefaultCoding = KHECore::DecimalCoding;
+static const KHECore::ValueCoding DefaultCoding =    KHECore::HexadecimalCoding;
+static const KHECore::ValueCoding NotDefaultCoding = KHECore::DecimalCoding;
 
 static const int DefaultBinaryGapWidth = 1;
 
@@ -50,19 +50,19 @@ ValueColumnRenderer::ValueColumnRenderer( AbstractColumnFrameRenderer *columnFra
    mByteCodec( 0 ),
    mBinaryGapWidth( DefaultBinaryGapWidth )
 {
-    setCoding( DefaultCoding );
+    setValueCoding( DefaultCoding );
 }
 
 
-bool ValueColumnRenderer::setCoding( KHECore::KCoding coding )
+bool ValueColumnRenderer::setValueCoding( KHECore::ValueCoding valueCoding )
 {
     // no changes?
-    if( mCoding == coding )
+    if( mCoding == valueCoding )
         return false;
 
     delete mByteCodec;
 
-    mCoding = coding;
+    mCoding = valueCoding;
     mByteCodec = KHECore::ValueCodec::createCodec( mCoding );
     mCodedByte.resize( mByteCodec->encodingWidth() );
 

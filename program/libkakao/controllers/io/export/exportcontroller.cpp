@@ -72,7 +72,7 @@ void ExportController::updateActions()
 
     qDeleteAll( mExportActionGroup->actions() );
 
-    const AbstractModelSelection *selection = ( mSelectionControl != 0 ) ? mSelectionControl->selection() : 0;
+    const AbstractModelSelection* selection = ( mSelectionControl != 0 ) ? mSelectionControl->modelSelection() : 0;
 
     const QList<AbstractModelExporter*> exporterList =
         mDocumentManager->codecManager()->exporterList( mModel, selection );
@@ -104,7 +104,7 @@ void ExportController::onActionTriggered( QAction *action )
 {
     AbstractModelExporter *exporter = action->data().value<AbstractModelExporter *>();
 
-    const AbstractModelSelection *selection = ( mSelectionControl != 0 ) ? mSelectionControl->selection() : 0;
+    const AbstractModelSelection* selection = ( mSelectionControl != 0 ) ? mSelectionControl->modelSelection() : 0;
 
     mDocumentManager->codecManager()->exportDocument( exporter, mModel, selection );
 }

@@ -24,9 +24,8 @@
 
 // lib
 #include "valuebytearraycolumnrenderer.h"
-#include "kdataranges.h"
-#include "kdatacursor.h"
-#include "kbytearrayview.h"
+#include "bytearraytablecursor.h"
+#include "bytearraycolumnview.h"
 // Okteta core
 #include <kabstractbytearraymodel.h>
 #include <changesdescribable.h>
@@ -40,9 +39,8 @@
 namespace KHEUI
 {
 
-KValueEditor::KValueEditor( ValueByteArrayColumnRenderer *valueColumn, KDataCursor *dataCursor, KByteArrayView* view, KController *parent )
-  : KEditor( dataCursor, view, parent ),
-  mValueColumn( valueColumn ),
+KValueEditor::KValueEditor( ByteArrayTableCursor* cursor, ByteArrayColumnView* view, KController* parent )
+  : KEditor( cursor, view, parent ),
   mInEditMode( false ),
   mEditModeByInsert( false )
 {
@@ -50,7 +48,7 @@ KValueEditor::KValueEditor( ValueByteArrayColumnRenderer *valueColumn, KDataCurs
 
 void KValueEditor::adaptToValueCodecChange()
 {
-    const uint newCodingWidth = mValueColumn->valueCodec()->encodingWidth();
+    const uint newCodingWidth = mView->valueCodec()->encodingWidth();
     mValueString.resize( newCodingWidth );
 }
 
@@ -58,7 +56,7 @@ void KValueEditor::startEdit( const QString &description )
 {
     Q_ASSERT( !mInEditMode );
 
-    KHECore::KAbstractByteArrayModel *byteArrayModel = mView->mByteArrayModel;
+    KHECore::KAbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
     KHECore::ChangesDescribable *changesDescribable =
         qobject_cast<KHECore::ChangesDescribable*>( byteArrayModel );
 
@@ -74,7 +72,7 @@ void KValueEditor::cancelEdit()
 
     mInEditMode = false;
 
-    KHECore::KAbstractByteArrayModel *byteArrayModel = mView->mByteArrayModel;
+    KHECore::KAbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
     KHECore::ChangesDescribable *changesDescribable =
         qobject_cast<KHECore::ChangesDescribable*>( byteArrayModel );
 
@@ -89,7 +87,7 @@ void KValueEditor::finishEdit()
 
     mInEditMode = false;
 
-    KHECore::KAbstractByteArrayModel *byteArrayModel = mView->mByteArrayModel;
+    KHECore::KAbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
     KHECore::ChangesDescribable *changesDescribable =
         qobject_cast<KHECore::ChangesDescribable*>( byteArrayModel );
 
@@ -103,7 +101,7 @@ bool KValueEditor::handleKeyPress( QKeyEvent *keyEvent )
     bool keyUsed = true;
 
     // TODO: for now we don't touch it if there are selections
-    if( !mView->mDataRanges->hasSelection() )
+    if( !mView->hasSelectedData() )
     {
         //
         switch( keyEvent->key() )
@@ -149,7 +147,7 @@ bool KValueEditor::handleKeyPress( QKeyEvent *keyEvent )
                     break;
                 }
 
-                const KHECore::ValueCodec *valueCodec = mValueColumn->valueCodec();
+                const KHECore::ValueCodec* valueCodec = mView->valueCodec();
                 if( mInEditMode )
                 {
                     if( mInsertedDigitsCount < valueCodec->encodingWidth() )
@@ -165,20 +163,20 @@ bool KValueEditor::handleKeyPress( QKeyEvent *keyEvent )
                             doValueEditAction( ValueEdit, inputValue );
                         else
                         {
-                            const int index = mDataCursor->realIndex();
+                            const int index = mCursor->realIndex();
 
                             startEdit( i18nc( "name of the change", "Insert" ) );
-                            if( mView->mByteArrayModel->insert(index,(char*)&inputValue,1) > 0 )
+                            if( mView->byteArrayModel()->insert(index,(char*)&inputValue,1) > 0 )
                             {
                                 mEditModeByInsert = true;
                                 mOldValue = mEditValue = inputValue;
                                 mInsertedDigitsCount = 1;
                                 valueCodec->encode( mValueString, 0, mEditValue );
 
-                                mDataCursor->gotoIndex(index);
+                                mCursor->gotoIndex(index);
                                 mView->ensureCursorVisible();
                                 mView->updateCursors();
-                                emit mView->cursorPositionChanged( mDataCursor->realIndex() );
+                                emit mView->cursorPositionChanged( mCursor->realIndex() );
                             }
                             else
                                 cancelEdit();
@@ -199,21 +197,21 @@ bool KValueEditor::handleKeyPress( QKeyEvent *keyEvent )
 
 void KValueEditor::doValueEditAction( KValueEditAction Action, int input )
 {
-    const KHECore::ValueCodec *valueCodec = mValueColumn->valueCodec();
+    const KHECore::ValueCodec* valueCodec = mView->valueCodec();
 
     // we are not yet in edit mode?
     if( !mInEditMode )
     {
-        const int validIndex = mDataCursor->validIndex();
+        const int validIndex = mCursor->validIndex();
         // no valid cursor position?
-        if( validIndex == -1 || (!mView->isOverwriteMode() && input == -1) || mDataCursor->isBehind() )
+        if( validIndex == -1 || (!mView->isOverwriteMode() && input == -1) || mCursor->isBehind() )
             return;
 
         startEdit( i18nc( "name of the change", "Replace" ) );
         mEditModeByInsert = false; // default, to be overwritten if so
 
         // save old value
-        mOldValue = mEditValue = (unsigned char)mView->mByteArrayModel->datum( validIndex );
+        mOldValue = mEditValue = (unsigned char)mView->byteArrayModel()->datum( validIndex );
         mInsertedDigitsCount = valueCodec->encodingWidth();
     }
 
@@ -279,7 +277,7 @@ void KValueEditor::doValueEditAction( KValueEditAction Action, int input )
         // sync value
         mEditValue = newValue;
         valueCodec->encode( mValueString, 0, mEditValue );
-        mView->mByteArrayModel->replace( mDataCursor->index(), 1, (char*)&mEditValue, 1 );
+        mView->byteArrayModel()->replace( mCursor->index(), 1, (char*)&mEditValue, 1 );
     }
 
     mView->updateCursors();
@@ -290,11 +288,11 @@ void KValueEditor::doValueEditAction( KValueEditAction Action, int input )
         finishEdit();
 
         if( moveToNext )
-            mDataCursor->gotoNextByte();
+            mCursor->gotoNextByte();
 
         mView->unpauseCursor();
         if( moveToNext )
-            emit mView->cursorPositionChanged( mDataCursor->realIndex() );
+            emit mView->cursorPositionChanged( mCursor->realIndex() );
     }
 }
 

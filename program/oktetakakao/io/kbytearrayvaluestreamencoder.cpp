@@ -22,8 +22,8 @@
 
 #include "kbytearrayvaluestreamencoder.h"
 
-// Okteta gui
-#include <kbytearrayview.h>
+// lib
+#include <kbytearraydisplay.h>
 // Okteta core
 #include <kabstractbytearraymodel.h>
 #include <valuecodec.h>
@@ -34,7 +34,7 @@
 
 
 ValueStreamEncoderSettings::ValueStreamEncoderSettings()
- : coding( KHECore::HexadecimalCoding), separation( QLatin1String(" ") )
+ : valueCoding( KHECore::HexadecimalCoding), separation( QLatin1String(" ") )
 {}
 
 KByteArrayValueStreamEncoder::KByteArrayValueStreamEncoder()
@@ -43,7 +43,7 @@ KByteArrayValueStreamEncoder::KByteArrayValueStreamEncoder()
 
 
 bool KByteArrayValueStreamEncoder::encodeDataToStream( QIODevice *device,
-                                                       const KHEUI::KByteArrayView *byteArrayView,
+                                                       const KByteArrayDisplay* byteArrayView,
                                                        const KHECore::KAbstractByteArrayModel *byteArrayModel,
                                                        const KHE::KSection &section )
 {
@@ -52,12 +52,12 @@ bool KByteArrayValueStreamEncoder::encodeDataToStream( QIODevice *device,
     // settings
     mSettings.undefinedChar = byteArrayView->undefinedChar();
     mSettings.substituteChar = byteArrayView->substituteChar();
-    mSettings.coding = (KHECore::KCoding)byteArrayView->coding();
+    mSettings.valueCoding = (KHECore::ValueCoding)byteArrayView->valueCoding();
 
     // encode
     QTextStream textStream( device );
 
-    KHECore::ValueCodec *valueCodec = KHECore::ValueCodec::createCodec( mSettings.coding );
+    KHECore::ValueCodec *valueCodec = KHECore::ValueCodec::createCodec( mSettings.valueCoding );
 
     // prepare 
     QString valueString;
@@ -79,5 +79,3 @@ bool KByteArrayValueStreamEncoder::encodeDataToStream( QIODevice *device,
 }
 
 KByteArrayValueStreamEncoder::~KByteArrayValueStreamEncoder() {}
-
-#include "kbytearrayvaluestreamencoder.moc"

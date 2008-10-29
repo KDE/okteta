@@ -46,7 +46,7 @@ class DataSelectable
   public: // get
     virtual bool hasSelectedData() const = 0;
     virtual QMimeData *copySelectedData() const = 0; // TODO: move into AbstractModelSelection
-    virtual const AbstractModelSelection *selection() const = 0;
+    virtual const AbstractModelSelection* modelSelection() const = 0;
 
   public: // signal
     virtual void hasSelectedDataChanged( bool hasSelectedData ) = 0;

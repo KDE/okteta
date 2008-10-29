@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kdatacursor.h"
+#include "bytearraytablecursor.h"
 
 // lib
 #include "bytearraytablelayout.h"
@@ -31,7 +31,7 @@
 namespace KHEUI
 {
 
-KDataCursor::KDataCursor( const ByteArrayTableLayout *layout )
+ByteArrayTableCursor::ByteArrayTableCursor( const ByteArrayTableLayout* layout )
  : mLayout( layout ),
    mIndex( 0 ),
    mCoord( 0, 0 ),
@@ -40,14 +40,7 @@ KDataCursor::KDataCursor( const ByteArrayTableLayout *layout )
 {
 }
 
-
-bool KDataCursor::operator==( const KDataCursor &other ) const
-{
-    return ( mIndex == other.mIndex && mBehind == other.mBehind );
-}
-
-
-void KDataCursor::setAppendPosEnabled( bool appendPosEnabled )
+void ByteArrayTableCursor::setAppendPosEnabled( bool appendPosEnabled )
 {
     if( mAppendPosEnabled == appendPosEnabled )
         return;
@@ -73,7 +66,7 @@ void KDataCursor::setAppendPosEnabled( bool appendPosEnabled )
 }
 
 
-void KDataCursor::gotoPreviousByte()
+void ByteArrayTableCursor::gotoPreviousByte()
 {
     if( mBehind )
         mBehind = false;
@@ -85,7 +78,7 @@ void KDataCursor::gotoPreviousByte()
 }
 
 
-void KDataCursor::gotoPreviousByte( int indexSteps )
+void ByteArrayTableCursor::gotoPreviousByte( int indexSteps )
 {
     if( mBehind )
     {
@@ -104,7 +97,7 @@ void KDataCursor::gotoPreviousByte( int indexSteps )
 }
 
 
-void KDataCursor::gotoNextByte()
+void ByteArrayTableCursor::gotoNextByte()
 {
     const int lastIndex = mLayout->length() -1 ;
 
@@ -119,7 +112,7 @@ void KDataCursor::gotoNextByte()
 }
 
 
-void KDataCursor::gotoNextByte( int indexSteps ) // TODO: think about consistency with gotoNextByte!!!
+void ByteArrayTableCursor::gotoNextByte( int indexSteps ) // TODO: think about consistency with gotoNextByte!!!
 {
     if( mBehind )
     {
@@ -135,7 +128,7 @@ void KDataCursor::gotoNextByte( int indexSteps ) // TODO: think about consistenc
 }
 
 
-void KDataCursor::gotoNextByteInLine()
+void ByteArrayTableCursor::gotoNextByteInLine()
 {
     const int lastIndex = mLayout->length()-1;
 
@@ -153,7 +146,7 @@ void KDataCursor::gotoNextByteInLine()
 }
 
 
-void KDataCursor::gotoUp()
+void ByteArrayTableCursor::gotoUp()
 {
     // can we even go up?
     if( mCoord.isBelow(mLayout->startLine()) )
@@ -179,7 +172,7 @@ void KDataCursor::gotoUp()
 }
 
 
-void KDataCursor::gotoDown()
+void ByteArrayTableCursor::gotoDown()
 {
     if( mCoord.isAbove(mLayout->finalLine()) )
     {
@@ -193,7 +186,7 @@ void KDataCursor::gotoDown()
 }
 
 
-void KDataCursor::gotoLineStart()
+void ByteArrayTableCursor::gotoLineStart()
 {
     const int oldIndex = mIndex;
     mIndex = mLayout->indexAtFirstLinePosition( mCoord.line() );
@@ -202,7 +195,7 @@ void KDataCursor::gotoLineStart()
 }
 
 
-void KDataCursor::gotoLineEnd()
+void ByteArrayTableCursor::gotoLineEnd()
 {
     if( mIndex < mLayout->length() )
     {
@@ -215,7 +208,7 @@ void KDataCursor::gotoLineEnd()
 }
 
 
-void KDataCursor::gotoStart()
+void ByteArrayTableCursor::gotoStart()
 {
     mIndex = 0;
     mCoord = mLayout->startCoord();
@@ -223,7 +216,7 @@ void KDataCursor::gotoStart()
 }
 
 
-void KDataCursor::gotoEnd()
+void ByteArrayTableCursor::gotoEnd()
 {
     const int lastIndex = mLayout->length()-1;
     if( lastIndex >= 0 )
@@ -238,7 +231,7 @@ void KDataCursor::gotoEnd()
 }
 
 
-void KDataCursor::gotoCIndex( int index )
+void ByteArrayTableCursor::gotoCIndex( int index )
 {
     if( mLayout->length() > 0 )
     {
@@ -251,7 +244,7 @@ void KDataCursor::gotoCIndex( int index )
 }
 
 
-void KDataCursor::gotoCCoord( const Coord &coord )
+void ByteArrayTableCursor::gotoCCoord( const Coord& coord )
 {
     if( mLayout->length() > 0 )
     {
@@ -267,7 +260,7 @@ void KDataCursor::gotoCCoord( const Coord &coord )
 }
 
 
-void KDataCursor::stepToEnd()
+void ByteArrayTableCursor::stepToEnd()
 {
     if( mAppendPosEnabled && (mCoord.pos() < mLayout->noOfBytesPerLine()-1) )
     {
@@ -280,7 +273,7 @@ void KDataCursor::stepToEnd()
 }
 
 
-void KDataCursor::gotoIndex( int index )
+void ByteArrayTableCursor::gotoIndex( int index )
 {
     mIndex = index;
     mCoord = mLayout->coordOfIndex( mIndex );
@@ -288,7 +281,7 @@ void KDataCursor::gotoIndex( int index )
 }
 
 
-void KDataCursor::gotoRealIndex()
+void ByteArrayTableCursor::gotoRealIndex()
 {
     if( mBehind )
     {
@@ -299,7 +292,7 @@ void KDataCursor::gotoRealIndex()
 }
 
 
-void KDataCursor::gotoCoord( const Coord &coord )
+void ByteArrayTableCursor::gotoCoord( const Coord& coord )
 {
     mIndex = mLayout->indexAtCoord( coord );
     mCoord = coord;
@@ -307,14 +300,14 @@ void KDataCursor::gotoCoord( const Coord &coord )
 }
 
 
-void KDataCursor::updateCoord()
+void ByteArrayTableCursor::updateCoord()
 {
     mCoord = mLayout->coordOfIndex( mIndex );
 }
 
 // page down should be: one page minus one line
 // -> if in the very first line page down will put the cursor on the same page into the last line
-void KDataCursor::gotoPageUp()
+void ByteArrayTableCursor::gotoPageUp()
 {
     const int noOfLinesPerPage = mLayout->noOfLinesPerPage();
     const int newIndex = mIndex - noOfLinesPerPage * mLayout->noOfBytesPerLine();
@@ -334,7 +327,7 @@ void KDataCursor::gotoPageUp()
 }
 
 
-void KDataCursor::gotoPageDown()
+void ByteArrayTableCursor::gotoPageDown()
 {
     const int noOfLinesPerPage = mLayout->noOfLinesPerPage();
     const int newIndex = mIndex + noOfLinesPerPage * mLayout->noOfBytesPerLine();
@@ -348,25 +341,25 @@ void KDataCursor::gotoPageDown()
 }
 
 
-int KDataCursor::validIndex()       const { return mIndex < mLayout->length() ? mIndex : -1; }
-int KDataCursor::indexAtLineStart() const { return mLayout->indexAtFirstLinePosition( mCoord.line() ); }
-int KDataCursor::indexAtLineEnd()   const { return mLayout->indexAtLastLinePosition( mCoord.line() ); }
+int ByteArrayTableCursor::validIndex()       const { return mIndex < mLayout->length() ? mIndex : -1; }
+int ByteArrayTableCursor::indexAtLineStart() const { return mLayout->indexAtFirstLinePosition( mCoord.line() ); }
+int ByteArrayTableCursor::indexAtLineEnd()   const { return mLayout->indexAtLastLinePosition( mCoord.line() ); }
 
 
-bool KDataCursor::atStart()     const { return mIndex == 0; }
-bool KDataCursor::atEnd()       const { return mIndex == mLayout->length() - 1; }
-bool KDataCursor::atAppendPos() const { return realIndex() >= mLayout->length(); }
+bool ByteArrayTableCursor::atStart()     const { return mIndex == 0; }
+bool ByteArrayTableCursor::atEnd()       const { return mIndex == mLayout->length() - 1; }
+bool ByteArrayTableCursor::atAppendPos() const { return realIndex() >= mLayout->length(); }
 
 
-bool KDataCursor::atLineStart() const { return mLayout->atFirstLinePosition( mCoord ); }
-bool KDataCursor::atLineEnd()   const { return mLayout->atLastLinePosition( mCoord ); }
+bool ByteArrayTableCursor::atLineStart() const { return mLayout->atFirstLinePosition( mCoord ); }
+bool ByteArrayTableCursor::atLineEnd()   const { return mLayout->atLastLinePosition( mCoord ); }
 
 // TODO: oldLength is a hack, as DataLayout is already updated and used by e.g. gotoCIndex
-void KDataCursor::adaptToChanges( const KHE::ArrayChangeMetricsList &changeList, int oldLength )
+void ByteArrayTableCursor::adaptToChanges( const KHE::ArrayChangeMetricsList& changeList, int oldLength )
 {
     for( int i=0; i<changeList.size(); ++i )
     {
-        const KHE::ArrayChangeMetrics &change = changeList[i];
+        const KHE::ArrayChangeMetrics& change = changeList[i];
         // cursor affected?
         if( mIndex >= change.offset() )
         {
@@ -423,6 +416,6 @@ void KDataCursor::adaptToChanges( const KHE::ArrayChangeMetricsList &changeList,
         stepToEnd();
 }
 
-KDataCursor::~KDataCursor() {}
+ByteArrayTableCursor::~ByteArrayTableCursor() {}
 
 }

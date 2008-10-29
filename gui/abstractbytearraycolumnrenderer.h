@@ -46,7 +46,7 @@ namespace KHEUI
 {
 
 // class KByteArrayView;
-class KDataRanges;
+class ByteArrayTableRanges;
 class ByteArrayTableLayout;
 
 const int NoByteFound = -1;
@@ -64,7 +64,7 @@ class AbstractByteArrayColumnRenderer : public ColumnRenderer
     enum FrameStyle { Frame, Left, Right };
   public:
     AbstractByteArrayColumnRenderer( ColumnsView/*KByteArrayView*/ *columnsView,
-        KHECore::KAbstractByteArrayModel *byteArrayModel, ByteArrayTableLayout *layout, KDataRanges *ranges );
+        KHECore::KAbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges );
     virtual ~AbstractByteArrayColumnRenderer();
 
 
@@ -130,7 +130,7 @@ class AbstractByteArrayColumnRenderer : public ColumnRenderer
     /** creates new buffer for x-values; to be called on any change of NoOfBytesPerLine or metrics */
     void resetXBuffer();
     /** sets the codec to be used by the char column. */
-    void setCharCodec( KHECore::KCharCodec *charCodec );
+    void setCharCodec( const KHECore::KCharCodec* charCodec );
 
     void setByteTypeColored( bool byteTypeColored );
 
@@ -172,7 +172,6 @@ class AbstractByteArrayColumnRenderer : public ColumnRenderer
     int lastLinePos()  const;
     KHE::KSection visibleLinePositions() const;
     const ByteArrayTableLayout *layout() const;
-    KHECore::KCharCodec *charCodec() const;
     bool isByteTypeColored() const;
 
 
@@ -203,11 +202,11 @@ class AbstractByteArrayColumnRenderer : public ColumnRenderer
     /** pointer to the layout */
     const ByteArrayTableLayout *mLayout;
     /** pointer to the ranges */
-    KDataRanges *mRanges;
+    ByteArrayTableRanges* mRanges;
     /** */
     KHECore::Bookmarkable *mBookmarks;
     /** */
-    KHECore::KCharCodec *mCharCodec;
+    const KHECore::KCharCodec* mCharCodec;
 
     /** */
     KPixelX mDigitWidth;
@@ -262,8 +261,10 @@ inline KHE::KSection AbstractByteArrayColumnRenderer::visibleLinePositions() con
 
 inline const ByteArrayTableLayout *AbstractByteArrayColumnRenderer::layout() const { return mLayout; }
 
-inline void AbstractByteArrayColumnRenderer::setCharCodec( KHECore::KCharCodec *charCodec ) { mCharCodec = charCodec; }
-inline KHECore::KCharCodec* AbstractByteArrayColumnRenderer::charCodec() const { return mCharCodec; }
+inline void AbstractByteArrayColumnRenderer::setCharCodec( const KHECore::KCharCodec* charCodec )
+{
+    mCharCodec = charCodec;
+}
 
 inline void AbstractByteArrayColumnRenderer::setByteTypeColored( bool byteTypeColored )
 {

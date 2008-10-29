@@ -33,7 +33,7 @@ namespace KHEUI
 class ZoomWheelController : public AbstractWheelController
 {
   public:
-    ZoomWheelController( KByteArrayView* view, AbstractWheelController* parent );
+    ZoomWheelController( ByteArrayColumnView* view, AbstractWheelController* parent );
     virtual ~ZoomWheelController();
 
   public: // AbstractWheelController API

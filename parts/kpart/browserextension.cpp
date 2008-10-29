@@ -25,7 +25,7 @@
 // part
 #include "part.h"
 // Okteta gui
-#include <kbytearrayview.h>
+#include <bytearraycolumnview.h>
 // KDE
 #include <KAction>
 
@@ -54,14 +54,14 @@ void OktetaBrowserExtension::saveState( QDataStream &stream )
 {
     KParts::BrowserExtension::saveState( stream );
 
-    KHEUI::KByteArrayView *view = part->view;
+    KHEUI::ByteArrayColumnView *view = part->view;
 
-    stream << (int)view->offsetColumnVisible() << view->visibleBufferColumns()
-        << (int)view->resizeStyle() << (int)view->coding() 
-        << view->encodingName() << (int)view->showsNonprinting()
+    stream << (int)view->offsetColumnVisible() << view->visibleByteArrayCodings()
+        << (int)view->resizeStyle() << (int)view->valueCoding() 
+        << view->charCodingName() << (int)view->showsNonprinting()
         << view->xOffset() << view->yOffset()
         << view->cursorPosition() << (int)view->isCursorBehind()
-        << view->cursorColumn();
+        << view->activeCoding();
 }
 
 
@@ -70,30 +70,30 @@ void OktetaBrowserExtension::restoreState( QDataStream &stream )
     KParts::BrowserExtension::restoreState( stream );
 
     int offsetColumnVisible;
-    int visibleBufferColumns;
+    int visibleByteArrayCodings;
     int resizeStyle;
-    int coding;
-    QString encodingName;
+    int valueCoding;
+    QString charCodingName;
     int showsNonprinting;
     int x, y;
     int position;
     int cursorBehind;
-    int cursorColumn;
+    int activeCoding;
 
-    stream >> offsetColumnVisible >> visibleBufferColumns >> resizeStyle >> coding >> encodingName >> showsNonprinting 
-           >> x >> y >> position >> cursorBehind >> cursorColumn;
+    stream >> offsetColumnVisible >> visibleByteArrayCodings >> resizeStyle >> valueCoding >> charCodingName >> showsNonprinting 
+           >> x >> y >> position >> cursorBehind >> activeCoding;
 
-    KHEUI::KByteArrayView *view = part->view;
+    KHEUI::ByteArrayColumnView *view = part->view;
 
     view->toggleOffsetColumn( offsetColumnVisible );
-    view->setVisibleByteArrayColumns( visibleBufferColumns );
-    view->setResizeStyle( (KHEUI::KByteArrayView::KResizeStyle)resizeStyle );
-    view->setCoding( (KHEUI::KByteArrayView::KCoding)coding );
-    view->setEncoding( encodingName );
+    view->setVisibleByteArrayCodings( visibleByteArrayCodings );
+    view->setResizeStyle( (KHEUI::ByteArrayColumnView::ResizeStyle)resizeStyle );
+    view->setValueCoding( (KHEUI::ByteArrayColumnView::ValueCoding)valueCoding );
+    view->setCharCoding( charCodingName );
     view->setShowsNonprinting( showsNonprinting );
     view->setColumnsPos( x, y );
     view->setCursorPosition( position, cursorBehind );
-    view->setCursorColumn( (KHEUI::KByteArrayView::ByteArrayColumnId)cursorColumn );
+    view->setActiveCoding( (KHEUI::ByteArrayColumnView::CodingTypeId)activeCoding );
 
     part->fitActionSettings();
 }

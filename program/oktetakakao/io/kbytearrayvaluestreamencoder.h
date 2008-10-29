@@ -35,7 +35,7 @@ class ValueStreamEncoderSettings
   public:
     ValueStreamEncoderSettings();
   public:
-    KHECore::KCoding coding;
+    KHECore::ValueCoding valueCoding;
     QString separation;
     QChar undefinedChar;
     QChar substituteChar;
@@ -52,7 +52,7 @@ class KByteArrayValueStreamEncoder : public KAbstractByteArrayStreamEncoder
 
   protected: // KAbstractByteArrayStreamEncoder API
     virtual bool encodeDataToStream( QIODevice *device,
-                                     const KHEUI::KByteArrayView *byteArrayView,
+                                     const KByteArrayDisplay* byteArrayView,
                                      const KHECore::KAbstractByteArrayModel *byteArrayModel,
                                      const KHE::KSection &section );
 

@@ -61,7 +61,7 @@ void KByteArrayLineEditPrivate::setup( KByteArrayLineEdit *widget )
     mDataEdit = new KLineEdit( widget );
     widget->setFocusProxy( mDataEdit );
     widget->connect( mDataEdit, SIGNAL(textChanged(const QString&)), SLOT(onDataChanged(const QString&)) );
-    mValidator = new KByteArrayValidator( mDataEdit, KHECore::CharCoding );
+    mValidator = new KByteArrayValidator( mDataEdit );
     mDataEdit->setValidator( mValidator );
 
     baseLayout->addWidget( mFormatComboBox );
@@ -74,14 +74,14 @@ void KByteArrayLineEditPrivate::setup( KByteArrayLineEdit *widget )
 void KByteArrayLineEditPrivate::setCharCodec( const QString &charCodecName )
 {
     // update the char string
-    const QByteArray currentData = mValidator->toByteArray( mData[KHECore::CharCoding] );
+    const QByteArray currentData = mValidator->toByteArray( mData[KByteArrayValidator::CharCoding] );
 
     mValidator->setCharCodec( charCodecName );
 
     const QString dataString = mValidator->toString( currentData );
-    mData[KHECore::CharCoding] = dataString;
+    mData[KByteArrayValidator::CharCoding] = dataString;
 
-    const bool isCharVisible = ( mFormatComboBox->currentIndex() == KHECore::CharCoding );
+    const bool isCharVisible = ( mFormatComboBox->currentIndex() == KByteArrayValidator::CharCoding );
 
     if( isCharVisible )
         mDataEdit->setText( dataString );
@@ -93,7 +93,7 @@ inline QByteArray KByteArrayLineEditPrivate::data() const
 }
 inline void KByteArrayLineEditPrivate::onFormatChanged( int index )
 {
-    mValidator->setCodec( index );
+    mValidator->setCodec( (KByteArrayValidator::Coding)index );
     mDataEdit->setText( mData[index] );
 }
 inline void KByteArrayLineEditPrivate::onDataChanged( const QString &data )

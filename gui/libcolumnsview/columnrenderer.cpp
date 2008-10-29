@@ -110,12 +110,14 @@ void ColumnRenderer::renderFirstLine( QPainter *painter, const KPixelXs &Xs, int
 {
 Q_UNUSED( Xs )
 Q_UNUSED( firstLineIndex )
-    d->renderBlankLine( painter );
+Q_UNUSED( painter )
+//     d->renderBlankLine( painter );
 }
 
 void ColumnRenderer::renderNextLine( QPainter *painter )
 {
-    d->renderBlankLine( painter );
+Q_UNUSED( painter )
+//     d->renderBlankLine( painter );
 }
 
 void ColumnRenderer::renderBlankLine( QPainter *painter ) const
@@ -123,6 +125,11 @@ void ColumnRenderer::renderBlankLine( QPainter *painter ) const
     d->renderBlankLine( painter );
 }
 
+
+void ColumnRenderer::renderColumn( QPainter *painter, const KPixelXs &Xs, const KPixelYs &Ys )
+{
+    d->renderEmptyColumn( painter, Xs, Ys );
+}
 
 void ColumnRenderer::renderEmptyColumn( QPainter *painter, const KPixelXs &Xs, const KPixelYs &Ys )
 {

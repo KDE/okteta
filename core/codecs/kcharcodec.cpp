@@ -63,7 +63,7 @@ KCharCodec *KCharCodec::createCodec( const QString &Name )
 }
 
 
-KCharCodec *KCharCodec::createCodec( KEncoding C )
+KCharCodec *KCharCodec::createCodec( CharCoding C )
 {
   KCharCodec *Codec;
   if( C == EBCDIC1047Encoding )

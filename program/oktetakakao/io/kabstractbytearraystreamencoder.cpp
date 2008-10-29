@@ -23,11 +23,9 @@
 #include "kabstractbytearraystreamencoder.h"
 
 // lib
-#include "kbytearraydisplay.h"
-#include "kbytearraydocument.h"
-#include "kbytearrayselection.h"
-// Okteta gui
-#include <kbytearrayview.h>
+#include <kbytearraydisplay.h>
+#include <kbytearraydocument.h>
+#include <kbytearrayselection.h>
 // Okteta core
 #include <kabstractbytearraymodel.h>
 
@@ -53,8 +51,6 @@ bool KAbstractByteArrayStreamEncoder::encodeToStream( QIODevice *device,
                                                       AbstractModel *model, const AbstractModelSelection *selection )
 {
     const KByteArrayDisplay* byteArrayDisplay = qobject_cast<const KByteArrayDisplay*>( model );
-    const KHEUI::KByteArrayView* view =
-        byteArrayDisplay ? qobject_cast<KHEUI::KByteArrayView *>( byteArrayDisplay->widget() ) : 0;
 
     const KByteArrayDocument* byteArrayDocument =
         byteArrayDisplay ? qobject_cast<const KByteArrayDocument*>( byteArrayDisplay->baseModel() ) : 0;
@@ -69,11 +65,9 @@ bool KAbstractByteArrayStreamEncoder::encodeToStream( QIODevice *device,
     const KHE::KSection section = byteArraySelection && byteArraySelection->isValid() ? byteArraySelection->section() :
                                    KHE::KSection::fromWidth( 0, byteArray->size() );
 
-    const bool success = encodeDataToStream( device, view, byteArray, section );
+    const bool success = encodeDataToStream( device, byteArrayDisplay, byteArray, section );
 
     return success;
 }
 
 KAbstractByteArrayStreamEncoder::~KAbstractByteArrayStreamEncoder() {}
-
-#include "kabstractbytearraystreamencoder.moc"

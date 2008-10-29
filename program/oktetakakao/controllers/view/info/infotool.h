@@ -30,10 +30,7 @@
 
 class StatisticTableModel;
 
-class KAbstractView;
-namespace KHEUI {
-class KByteArrayView;
-}
+class KByteArrayDisplay;
 namespace KHECore {
 class KAbstractByteArrayModel;
 }
@@ -74,7 +71,7 @@ class InfoTool : public AbstractTool
 
     StatisticTableModel *mStatisticTableModel;
 
-    KHEUI::KByteArrayView *mByteArrayView;
+    KByteArrayDisplay* mByteArrayDisplay;
     KHECore::KAbstractByteArrayModel *mByteArrayModel;
 
     //

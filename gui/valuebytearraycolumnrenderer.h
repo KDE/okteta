@@ -25,9 +25,11 @@
 
 // lib
 #include "abstractbytearraycolumnrenderer.h"
-// Okteta core
-#include <valuecodec.h>
 
+
+namespace KHECore {
+class ValueCodec;
+}
 
 namespace KHEUI
 {
@@ -43,17 +45,14 @@ class ValueByteArrayColumnRenderer : public AbstractByteArrayColumnRenderer
 {
   public:
     ValueByteArrayColumnRenderer( ColumnsView *columnsView,
-        KHECore::KAbstractByteArrayModel *byteArrayModel, ByteArrayTableLayout *layout, KDataRanges *ranges );
+        KHECore::KAbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges );
     virtual ~ValueByteArrayColumnRenderer();
 
   public:
     void renderEditedByte( QPainter *painter, char byte, const QString &editBuffer );
 
   public: // modification access
-    /**
-      * returns true if there was a change
-      */
-    bool setValueCoding( KHECore::KCoding valueCoding );
+    void setValueCodec( KHECore::ValueCoding valueCoding, const KHECore::ValueCodec* valueCodec );
     /** sets the spacing in the middle of a binary byte in the value column
       * @param BinaryGapW spacing in the middle of a binary in pixels
       * returns true if there was a change
@@ -63,9 +62,6 @@ class ValueByteArrayColumnRenderer : public AbstractByteArrayColumnRenderer
 
   public: // value access
     KPixelX binaryGapWidth() const;
-    KHECore::KCoding valueCoding() const;
-    const KHECore::ValueCodec *valueCodec() const;
-
 
   protected: // AbstractByteArrayColumnRenderer API
     virtual void renderByteText( QPainter *painter, char byte, KHECore::KChar byteChar, const QColor &color ) const;
@@ -76,9 +72,9 @@ class ValueByteArrayColumnRenderer : public AbstractByteArrayColumnRenderer
 
   protected: // settings
     /** */
-    KHECore::KCoding mValueCoding;
+    KHECore::ValueCoding mValueCoding;
     /** */
-    KHECore::ValueCodec *mValueCodec;
+    const KHECore::ValueCodec* mValueCodec;
     /** */
     KPixelX mBinaryGapWidth;
 
@@ -91,8 +87,6 @@ class ValueByteArrayColumnRenderer : public AbstractByteArrayColumnRenderer
 
 
 inline KPixelX ValueByteArrayColumnRenderer::binaryGapWidth()                 const { return mBinaryGapWidth; }
-inline KHECore::KCoding ValueByteArrayColumnRenderer::valueCoding()           const { return mValueCoding; }
-inline const KHECore::ValueCodec *ValueByteArrayColumnRenderer::valueCodec()  const { return mValueCodec; }
 
 }
 

@@ -33,10 +33,10 @@ ValueByteArrayColumnTextRenderer::ValueByteArrayColumnTextRenderer(
     const KHECore::KAbstractByteArrayModel *byteArrayModel, int offset,
         const KHEUI::CoordRange &coordRange,
         int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
-        KHECore::KCoding coding )
+        KHECore::ValueCoding valueCoding )
   : AbstractByteArrayColumnTextRenderer( byteArrayModel, offset, coordRange,
     noOfBytesPerLine ),
-   mValueCodec( KHECore::ValueCodec::createCodec(coding) )
+   mValueCodec( KHECore::ValueCodec::createCodec(valueCoding) )
 {
     setWidths( mValueCodec->encodingWidth(), byteSpacingWidth, noOfGroupedBytes );
 }

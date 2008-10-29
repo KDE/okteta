@@ -24,21 +24,32 @@ set( libcolumnsview_SRCS
   libcolumnsview/columnsview.cpp
 )
 
+set( libabstractbytearrayview_SRCS
+  abstractbytearrayview_p.cpp
+  abstractbytearrayview.cpp
+)
+
+set( bytearraycolumnview_SRCS
+  bytearraycolumnview_p.cpp
+  bytearraycolumnview.cpp
+)
+
 set( oktetagui_LIB_SRCS
   ${libcolumnsview_SRCS}
   ${libcontroller_SRCS}
+  ${libabstractbytearrayview_SRCS}
   bordercolumnrenderer.cpp
   offsetcolumnrenderer.cpp
   abstractbytearraycolumnrenderer.cpp
   valuebytearraycolumnrenderer.cpp
   charbytearraycolumnrenderer.cpp
-  kbytearrayview.cpp
   koffsetformat.cpp
-  kdatacursor.cpp
+  bytearraytablecursor.cpp
   bytearraytablelayout.cpp
-  kdataranges.cpp
+  bytearraytableranges.cpp
   kcursor.cpp
   coordrangelist.cpp
+  ${bytearraycolumnview_SRCS}
 )
 
 kde4_add_library( oktetagui  SHARED ${oktetagui_LIB_SRCS} )

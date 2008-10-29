@@ -28,12 +28,12 @@
 
 namespace KHECore
 {
-  enum KCoding { HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, CharCoding=4,
+  enum ValueCoding { HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3,
                  InvalidCoding=0xFFFE,  MaxCodingId=0xFFFF };
   static const int NoOfCodings = 4;
 
   /** */
-  enum KEncoding
+  enum CharCoding
   {
     /** the coding of your shell */
     LocalEncoding=0,

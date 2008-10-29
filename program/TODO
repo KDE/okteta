@@ -107,6 +107,11 @@ besides:
 * oktetakakao/io/network
 
 * added first primitive monitor to the view for the status bar
+* refactored KByteaArrayView into AbstractByteArrayView and ByteArrayColumnView
+* renamed KDataCursor into ByteArrayTableCursor
+* renamed KDataRanges into ByteArrayTableRanges
+* made KByteArrayDisplay a complete layer to the used view
+* ported all controllers and tools to use KByteArrayDisplay, not the byteArray widget
 
 Next to work on:
 ----------------------------------
@@ -122,6 +127,8 @@ Less important:
 
 Later on:
 ---------
+* Support for Drop, both Import into and Open
+* Make tabs click proxies
 * Better handling of file errors:
   exact problem descriptions,
   options to solve problem (e.g. make file readable)

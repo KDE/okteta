@@ -81,7 +81,7 @@ void CopyAsController::updateActions()
 
     qDeleteAll( mCopyAsActionGroup->actions() );
 
-    const AbstractModelSelection *selection = ( mSelectionControl != 0 ) ? mSelectionControl->selection() : 0;
+    const AbstractModelSelection* selection = ( mSelectionControl != 0 ) ? mSelectionControl->modelSelection() : 0;
 
     const QList<AbstractModelStreamEncoder*> encoderList =
         mDocumentManager->codecManager()->encoderList( mModel, selection );
@@ -115,7 +115,7 @@ void CopyAsController::onActionTriggered( QAction *action )
 
     AbstractModelStreamEncoder *encoder = action->data().value<AbstractModelStreamEncoder *>();
 
-    const AbstractModelSelection *selection = mSelectionControl->selection();
+    const AbstractModelSelection* selection = mSelectionControl->modelSelection();
 
     QByteArray exportData;
     QBuffer exportDataBuffer( &exportData );

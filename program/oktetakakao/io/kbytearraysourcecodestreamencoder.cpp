@@ -74,7 +74,7 @@ KByteArraySourceCodeStreamEncoder::KByteArraySourceCodeStreamEncoder()
 
 
 bool KByteArraySourceCodeStreamEncoder::encodeDataToStream( QIODevice *device,
-                                                            const KHEUI::KByteArrayView *byteArrayView,
+                                                            const KByteArrayDisplay* byteArrayView,
                                                             const KHECore::KAbstractByteArrayModel *byteArrayModel,
                                                             const KHE::KSection &section )
 {
@@ -207,5 +207,3 @@ void KByteArraySourceCodeStreamEncoder::printFormatted( char *buffer,
 }
 
 KByteArraySourceCodeStreamEncoder::~KByteArraySourceCodeStreamEncoder() {}
-
-#include "kbytearraysourcecodestreamencoder.moc"

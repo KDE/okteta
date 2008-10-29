@@ -38,7 +38,7 @@ ByteTableModel::ByteTableModel( QObject *parent )
    mCharCodec( KHECore::KCharCodec::createCodec(KHECore::LocalEncoding) ),
    mUndefinedChar( ByteTableDefaultUndefinedChar )
 {
-    static const KHECore::KCoding CodingIds[NofOfValueCodings] =
+    static const KHECore::ValueCoding CodingIds[NofOfValueCodings] =
     {
         KHECore::DecimalCoding,
         KHECore::HexadecimalCoding,

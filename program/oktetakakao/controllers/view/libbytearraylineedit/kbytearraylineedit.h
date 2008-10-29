@@ -39,6 +39,11 @@ class KByteArrayLineEdit : public QWidget
   Q_OBJECT
 
   public:
+    // TODO: same as in kbytearrayvalidator.h, we need a global enum containing both value and char codings...
+    // matching KHECore::ValueCoding
+    enum Coding { InvalidCoding = -1, HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, CharCoding=4 };
+
+  public:
     explicit KByteArrayLineEdit( QWidget *parent = 0 );
     virtual ~KByteArrayLineEdit();
 

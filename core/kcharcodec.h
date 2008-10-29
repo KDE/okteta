@@ -45,7 +45,7 @@ class OKTETACORE_EXPORT KCharCodec
 
   public:
     /** */
-    static KCharCodec* createCodec( KEncoding E );
+    static KCharCodec* createCodec( CharCoding E );
     /** */
     static KCharCodec* createCodec( const QString &Name );
 

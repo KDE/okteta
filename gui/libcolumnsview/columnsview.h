@@ -135,6 +135,8 @@ class OKTETAGUI_EXPORT ColumnsView : public QAbstractScrollArea
     /** recalculates the positions of the columns and the total width */
     void updateWidths();
     void updateScrollBars();
+    /** calls updateContent for the Column */
+    void updateColumn( ColumnRenderer& columnRenderer );
 
   private:
     ColumnsViewPrivate * const d;

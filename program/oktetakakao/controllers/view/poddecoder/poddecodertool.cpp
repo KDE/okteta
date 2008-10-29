@@ -24,14 +24,11 @@
 
 // lib
 #include <kbytearraydocument.h>
-// Kakao gui
-#include <kabstractview.h>
-// Okteta gui
-#include <kbytearrayview.h>
+#include <kbytearraydisplay.h>
 // Okteta core
 #include <khechar.h>
 #include <kcharcodec.h>
-#include <kbytearraymodel.h>
+#include <kabstractbytearraymodel.h>
 // KDE
 #include <KLocale>
 // Qt
@@ -64,7 +61,7 @@ enum PODTypes
 
 
 PODDecoderTool::PODDecoderTool()
- : mByteArrayView( 0 ), mByteArrayModel( 0 ), mCursorIndex( 0 ),
+ : mByteArrayDisplay( 0 ), mByteArrayModel( 0 ), mCursorIndex( 0 ),
    mCharCodec( KHECore::KCharCodec::createCodec(KHECore::LocalEncoding) ),
    mUndefinedChar( PrimitivesDefaultUndefinedChar ),
    mUnsignedAsHex( true )
@@ -80,22 +77,22 @@ QString PODDecoderTool::title() const { return i18nc("@title:window", "Decoding 
 
 void PODDecoderTool::setTargetModel( AbstractModel* model )
 {
-    if( mByteArrayView ) mByteArrayView->disconnect( this );
+    if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
     if( mByteArrayModel ) mByteArrayModel->disconnect( this );
 
-    KAbstractView* view = model ? qobject_cast<KAbstractView*>( model ) : 0;
-    mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
-    KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
+    mByteArrayDisplay = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
+    KByteArrayDocument *document =
+        mByteArrayDisplay ? qobject_cast<KByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
-    if( mByteArrayModel && mByteArrayView )
+    if( mByteArrayModel && mByteArrayDisplay )
     {
-        mCursorIndex = mByteArrayView->cursorPosition();
-        connect( mByteArrayView, SIGNAL(cursorPositionChanged( int )), SLOT(onCursorPositionChange( int )) );
+        mCursorIndex = mByteArrayDisplay->cursorPosition();
+        connect( mByteArrayDisplay, SIGNAL(cursorPositionChanged( int )), SLOT(onCursorPositionChange( int )) );
         connect( mByteArrayModel, SIGNAL(contentsChanged( const KHE::ArrayChangeMetricsList& )),
                  SLOT(onContentsChange()) );
-        onCharCodecChange( mByteArrayView->encodingName() );
-        connect( mByteArrayView,  SIGNAL(charCodecChanged( const QString& )),
+        onCharCodecChange( mByteArrayDisplay->charCodingName() );
+        connect( mByteArrayDisplay,  SIGNAL(charCodecChanged( const QString& )),
                  SLOT(onCharCodecChange( const QString& )) );
     }
 

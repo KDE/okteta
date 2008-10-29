@@ -26,13 +26,10 @@
 #include "statistictablemodel.h"
 #include "createstatisticjob.h"
 // lib
+#include <kbytearraydisplay.h>
 #include <kbytearraydocument.h>
-// Kakao gui
-#include <kabstractview.h>
-// Okteta gui
-#include <kbytearrayview.h>
 // Okteta core
-#include <kbytearraymodel.h>
+#include <kabstractbytearraymodel.h>
 // KDE
 #include <KLocale>
 // Qt
@@ -41,7 +38,7 @@
 
 InfoTool::InfoTool()
  : mStatisticTableModel( new StatisticTableModel(mByteCount,this) ),
-   mByteArrayView( 0 ), mByteArrayModel( 0 ), mSourceByteArrayModelUptodate( false ), mSourceByteArrayModel( 0 )
+   mByteArrayDisplay( 0 ), mByteArrayModel( 0 ), mSourceByteArrayModelUptodate( false ), mSourceByteArrayModel( 0 )
 {
     setObjectName( "Info" );
     updateStatistic();
@@ -52,36 +49,36 @@ StatisticTableModel *InfoTool::statisticTableModel() const { return mStatisticTa
 int InfoTool::size() const { return (mByteArrayModel!=0) ? mByteArrayModel->size() : -1; }
 bool InfoTool::isApplyable() const
 {
-    return ( mByteArrayModel && mByteArrayView && mByteArrayView->hasSelectedData() && !isStatisticUptodate() );
+    return ( mByteArrayModel && mByteArrayDisplay && mByteArrayDisplay->hasSelectedData() && !isStatisticUptodate() );
 }
 bool InfoTool::isStatisticUptodate() const
 {
     return ( mSourceByteArrayModelUptodate
              && mSourceByteArrayModel == mByteArrayModel
-             && mByteArrayView && mSourceSelection == mByteArrayView->selection() );
+             && mByteArrayDisplay && mSourceSelection == mByteArrayDisplay->selection() );
 }
 
 
 void InfoTool::setTargetModel( AbstractModel* model )
 {
-    if( mByteArrayView ) mByteArrayView->disconnect( mStatisticTableModel );
-    if( mByteArrayView ) mByteArrayView->disconnect( this );
+    if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( mStatisticTableModel );
+    if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
 
-    KAbstractView* view = model ? qobject_cast<KAbstractView*>( model ) : 0;
-    mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
+    mByteArrayDisplay = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
 
-    KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
+    KByteArrayDocument* document =
+        mByteArrayDisplay ? qobject_cast<KByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
-    if( mByteArrayView && mByteArrayModel )
+    if( mByteArrayDisplay && mByteArrayModel )
     {
-        mStatisticTableModel->setCharCodec( mByteArrayView->encodingName() );
-        mStatisticTableModel->setValueCoding( mByteArrayView->coding() );
-        connect( mByteArrayView,  SIGNAL(charCodecChanged( const QString & )),
+        mStatisticTableModel->setCharCodec( mByteArrayDisplay->charCodingName() );
+        mStatisticTableModel->setValueCoding( mByteArrayDisplay->valueCoding() );
+        connect( mByteArrayDisplay,  SIGNAL(charCodecChanged( const QString & )),
                  mStatisticTableModel, SLOT(setCharCodec( const QString &)) );
-        connect( mByteArrayView,  SIGNAL(valueCodingChanged( int )),
+        connect( mByteArrayDisplay,  SIGNAL(valueCodingChanged( int )),
                  mStatisticTableModel, SLOT(setValueCoding( int )) );
-        connect( mByteArrayView,  SIGNAL(selectionChanged( bool )),
+        connect( mByteArrayDisplay,  SIGNAL(hasSelectedDataChanged( bool )),
                  SLOT(onSelectionChanged( bool )) );
     }
 
@@ -112,7 +109,7 @@ void InfoTool::updateStatistic()
 
     QApplication::setOverrideCursor( Qt::WaitCursor );
 
-    const KHE::KSection selection = ( mByteArrayView ? mByteArrayView->selection() : KHE::KSection() );
+    const KHE::KSection selection = ( mByteArrayDisplay ? mByteArrayDisplay->selection() : KHE::KSection() );
     CreateStatisticJob *createStatisticJob =
         new CreateStatisticJob( mByteArrayModel, selection, mByteCount );
     const int selectionSize = createStatisticJob->exec();

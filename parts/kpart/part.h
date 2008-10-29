@@ -34,7 +34,7 @@ class KAction;
 
 namespace KHEUI
 {
-class KByteArrayView;
+class ByteArrayColumnView;
 }
 
 
@@ -72,7 +72,7 @@ class OktetaPart : public KParts::ReadOnlyPart
     void onSelectionChanged( bool HasSelection );
 
   private:
-    KHEUI::KByteArrayView *view;
+    KHEUI::ByteArrayColumnView *view;
     KHECore::KFileByteArrayModel fileByteArray;
 
     // edit menu

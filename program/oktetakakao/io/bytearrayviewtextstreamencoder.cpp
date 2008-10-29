@@ -27,9 +27,10 @@
 #include "bytearrayviewtextrenderer/bordercolumntextrenderer.h"
 #include "bytearrayviewtextrenderer/valuebytearraycolumntextrenderer.h"
 #include "bytearrayviewtextrenderer/charbytearraycolumntextrenderer.h"
+#include <kbytearraydisplay.h>
 // Okteta gui
-#include <kbytearrayview.h>
 #include <bytearraytablelayout.h>
+#include <abstractbytearrayview.h>
 // Okteta core
 #include <kabstractbytearraymodel.h>
 #include <khechar.h>
@@ -42,7 +43,7 @@
 static const KHEUI::KOffsetFormat::KFormat DefaultOffsetFormat = KHEUI::KOffsetFormat::Hexadecimal;
 
 ByteArrayViewTextStreamEncoderSettings::ByteArrayViewTextStreamEncoderSettings()
- : /*offsetFormat(DefaultOffsetFormat),*/ coding( KHECore::HexadecimalCoding), codecName(), undefinedChar('?'), substituteChar( '.' ),
+ : /*offsetFormat(DefaultOffsetFormat),*/ valueCoding( KHECore::HexadecimalCoding), codecName(), undefinedChar('?'), substituteChar( '.' ),
    separation( QLatin1String(" ") )
 {}
 
@@ -52,15 +53,15 @@ ByteArrayViewTextStreamEncoder::ByteArrayViewTextStreamEncoder()
 
 
 bool ByteArrayViewTextStreamEncoder::encodeDataToStream( QIODevice *device,
-                                                         const KHEUI::KByteArrayView *byteArrayView,
+                                                         const KByteArrayDisplay* byteArrayView,
                                                          const KHECore::KAbstractByteArrayModel *byteArrayModel,
                                                          const KHE::KSection &section )
 {
     bool success = true;
 
     // settings
-    mSettings.codecName = byteArrayView->encodingName();
-    mSettings.coding = (KHECore::KCoding)byteArrayView->coding();
+    mSettings.codecName = byteArrayView->charCodingName();
+    mSettings.valueCoding = (KHECore::ValueCoding)byteArrayView->valueCoding();
     mSettings.undefinedChar = byteArrayView->undefinedChar();
     mSettings.substituteChar = byteArrayView->substituteChar();
     mSettings.firstLineOffset = byteArrayView->firstLineOffset();
@@ -86,16 +87,16 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream( QIODevice *device,
             new OffsetColumnTextRenderer(KHEUI::KOffsetFormat::Hexadecimal,mSettings.firstLineOffset,mSettings.delta) );
         columnTextRendererList.append( new BorderColumnTextRenderer() );
     }
-    const int visibleBufferColumns = byteArrayView->visibleBufferColumns();
-    if( visibleBufferColumns & KHEUI::KByteArrayView::ValueColumnId )
+    const int visibleByteArrayCodings = byteArrayView->visibleByteArrayCodings();
+    if( visibleByteArrayCodings & KHEUI::AbstractByteArrayView::ValueCodingId )
         columnTextRendererList.append(
             new ValueByteArrayColumnTextRenderer(byteArrayModel,section.start(),coordRange,
                                                  noOfBytesPerLine, byteSpacingWidth, noOfGroupedBytes,
-                                                 mSettings.coding) );
+                                                 mSettings.valueCoding) );
 
-    if( visibleBufferColumns & KHEUI::KByteArrayView::CharColumnId )
+    if( visibleByteArrayCodings & KHEUI::AbstractByteArrayView::CharCodingId )
     {
-        if( visibleBufferColumns & KHEUI::KByteArrayView::ValueColumnId )
+        if( visibleByteArrayCodings & KHEUI::AbstractByteArrayView::ValueCodingId )
             columnTextRendererList.append( new BorderColumnTextRenderer() );
         columnTextRendererList.append(
             new CharByteArrayColumnTextRenderer(byteArrayModel,section.start(),coordRange,
@@ -124,5 +125,3 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream( QIODevice *device,
 }
 
 ByteArrayViewTextStreamEncoder::~ByteArrayViewTextStreamEncoder() {}
-
-#include "bytearrayviewtextstreamencoder.moc"

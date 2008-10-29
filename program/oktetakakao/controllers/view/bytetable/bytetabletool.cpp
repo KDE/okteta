@@ -25,55 +25,61 @@
 // controller
 #include "bytetablemodel.h"
 // lib
+#include <kbytearraydisplay.h>
 #include <kbytearraydocument.h>
-// Kakao gui
-#include <kabstractview.h>
-// Okteta gui
-#include <kbytearrayview.h>
 // Okteta core
 #include <khechar.h>
 #include <kcharcodec.h>
-#include <kbytearraymodel.h>
+#include <kabstractbytearraymodel.h>
+#include <changesdescribable.h>
 // KDE
 #include <KLocale>
 
 
 ByteTableTool::ByteTableTool()
  : mByteTableModel( new ByteTableModel(this) ),
-   mByteArrayView( 0 ), mByteArrayModel( 0 )
+   mByteArrayDisplay( 0 ), mByteArrayModel( 0 )
 {
     setObjectName( "ByteTable" );
 }
 
 QString ByteTableTool::title() const { return i18nc("@title:window", "Byte Table"); }
 ByteTableModel *ByteTableTool::byteTableModel() const { return mByteTableModel; }
-bool ByteTableTool::hasByteArrayView() const { return ( mByteArrayView != 0 ); }
+bool ByteTableTool::hasByteArrayView() const { return ( mByteArrayDisplay != 0 ); }
 
 
 void ByteTableTool::setTargetModel( AbstractModel* model )
 {
-    if( mByteArrayView ) mByteArrayView->disconnect( mByteTableModel );
+    if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( mByteTableModel );
 
-    KAbstractView* view = model ? qobject_cast<KAbstractView*>( model ) : 0;
-    mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
+    mByteArrayDisplay = model ? qobject_cast<KByteArrayDisplay*>( model ) : 0;
 
-    KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
+    KByteArrayDocument* document =
+        mByteArrayDisplay ? qobject_cast<KByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
-    if( mByteArrayView )
+    const bool hasView = ( mByteArrayDisplay && mByteArrayModel );
+    if( hasView )
     {
-        mByteTableModel->setCharCodec( mByteArrayView->encodingName() );
-        connect( mByteArrayView,  SIGNAL(charCodecChanged( const QString & )),
-                 mByteTableModel, SLOT(setCharCodec( const QString &)) );
+        mByteTableModel->setCharCodec( mByteArrayDisplay->charCodingName() );
+        connect( mByteArrayDisplay,  SIGNAL(charCodecChanged( const QString& )),
+                 mByteTableModel, SLOT(setCharCodec( const QString& )) );
     }
-    emit byteArrayViewChanged( mByteArrayView != 0 );
+    emit byteArrayViewChanged( hasView );
 }
 
 void ByteTableTool::insert( unsigned char byte, int count )
 {
     const QByteArray data( count, byte );
 
-    mByteArrayView->insert( data );
+    KHECore::ChangesDescribable *changesDescribable =
+        qobject_cast<KHECore::ChangesDescribable*>( mByteArrayModel );
+
+    if( changesDescribable )
+        changesDescribable->openGroupedChange( i18n("Byte inserted.") );
+    mByteArrayDisplay->insert( data );
+    if( changesDescribable )
+        changesDescribable->closeGroupedChange();
 // void ByteTableController::fill( const QByteArray &Data )
 // {
 //     if( HexEdit && ByteArray )

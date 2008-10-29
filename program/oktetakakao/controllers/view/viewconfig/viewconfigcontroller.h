@@ -26,12 +26,10 @@
 // Kakao gui
 #include <abstractxmlguicontroller.h>
 
+class KByteArrayDisplay;
 class KXMLGUIClient;
 class KSelectAction;
 class KToggleAction;
-namespace KHEUI {
-class KByteArrayView;
-}
 
 
 class ViewConfigController : public AbstractXmlGuiController
@@ -45,15 +43,15 @@ class ViewConfigController : public AbstractXmlGuiController
     virtual void setTargetModel( AbstractModel* model );
 
   protected Q_SLOTS: // action slots
-    void setCoding( int coding );
-    void setEncoding( int encoding );
+    void setValueCoding( int valueCoding );
+    void setCharCoding( int valueCoding );
     void setShowsNonprinting( bool on );
     void setResizeStyle( int resizeStyle );
     void toggleOffsetColumn( bool on );
     void toggleValueCharColumns( int visibleColunms );
 
   protected:
-    KHEUI::KByteArrayView* mByteArrayView;
+    KByteArrayDisplay* mByteArrayDisplay;
 
     // view menu
     KSelectAction* mCodingAction;

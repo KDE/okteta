@@ -23,9 +23,9 @@
 #include "charbytearraycolumnrenderer.h"
 
 // lib
-#include "kdatacursor.h"
+#include "bytearraytableranges.h"
+#include "bytearraytablecursor.h"
 #include "bytearraytablelayout.h"
-#include "kdataranges.h"
 // KDE
 #include <kcharsets.h>
 #include <klocale.h>
@@ -45,7 +45,7 @@ static const QChar     DefaultUndefinedChar =   (char)'?';
 
 
 CharByteArrayColumnRenderer::CharByteArrayColumnRenderer( ColumnsView *columnsView,
-        KHECore::KAbstractByteArrayModel *byteArrayModel, ByteArrayTableLayout *layout, KDataRanges *ranges )
+        KHECore::KAbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges )
  : AbstractByteArrayColumnRenderer( columnsView, byteArrayModel, layout, ranges ),
    mShowingNonprinting( DefaultShowingNonprinting ),
    mSubstituteChar( DefaultSubstituteChar ),

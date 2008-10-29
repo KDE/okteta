@@ -46,7 +46,7 @@ namespace KHECore
 class OKTETACORE_EXPORT ValueCodec
 {
   public:
-    static ValueCodec *createCodec( KCoding coding );
+    static ValueCodec *createCodec( ValueCoding valueCoding );
 
   public:
     virtual ~ValueCodec();

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2003 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -60,16 +60,11 @@ class ByteArrayTableLayout;
   *
   *@author Friedrich W. H. Kossebau
   */
-class KDataCursor
+class ByteArrayTableCursor
 {
   public:
-    explicit KDataCursor( const ByteArrayTableLayout *layout );
-    ~KDataCursor();
-
-
-  public:
-    bool operator==( const KDataCursor &other ) const;
-    bool operator!=( const KDataCursor &other ) const { return !(*this == other); }
+    explicit ByteArrayTableCursor( const ByteArrayTableLayout* layout );
+    ~ByteArrayTableCursor();
 
   public: // modificator
     void setAppendPosEnabled( bool appendPosEnabled = true );
@@ -106,9 +101,9 @@ class KDataCursor
 
   public: // navigation commands
     void gotoIndex( int I );
-    void gotoCoord( const Coord &C );
+    void gotoCoord( const Coord& coord );
     void gotoCIndex( int I );
-    void gotoCCoord( const Coord &C );
+    void gotoCCoord( const Coord& coord );
     void gotoRealIndex();
 
     void gotoPreviousByte();
@@ -128,7 +123,7 @@ class KDataCursor
     /** puts the cursor behind the actual position if it isn't already*/
     void stepBehind();
     void updateCoord();
-    void adaptToChanges( const KHE::ArrayChangeMetricsList &changeList, int oldLength );
+    void adaptToChanges( const KHE::ArrayChangeMetricsList& changeList, int oldLength );
 
   public: // logical state access
     bool atStart() const;
@@ -148,7 +143,7 @@ class KDataCursor
 
   private:
     /** layout, tells how the column is organized  */
-    const ByteArrayTableLayout *mLayout;
+    const ByteArrayTableLayout* mLayout;
 
     /** Position in buffer */
     int mIndex;
@@ -165,16 +160,16 @@ class KDataCursor
 };
 
 
-inline int KDataCursor::index()          const { return mIndex; }
-inline int KDataCursor::pos()            const { return mCoord.pos(); }
-inline int KDataCursor::line()           const { return mCoord.line(); }
-inline Coord KDataCursor::coord()       const { return mCoord; }
-inline bool KDataCursor::isBehind()      const { return mBehind; }
-inline int KDataCursor::realIndex()      const { return mBehind ? mIndex + 1 : mIndex; }
+inline int ByteArrayTableCursor::index()          const { return mIndex; }
+inline int ByteArrayTableCursor::pos()            const { return mCoord.pos(); }
+inline int ByteArrayTableCursor::line()           const { return mCoord.line(); }
+inline Coord ByteArrayTableCursor::coord()        const { return mCoord; }
+inline bool ByteArrayTableCursor::isBehind()      const { return mBehind; }
+inline int ByteArrayTableCursor::realIndex()      const { return mBehind ? mIndex + 1 : mIndex; }
 
-inline void KDataCursor::stepBehind() { mBehind = true; }
+inline void ByteArrayTableCursor::stepBehind() { mBehind = true; }
 
-//inline bool KDataCursor::isValid()  const { return mIndex != -1; }
+//inline bool ByteArrayTableCursor::isValid()  const { return mIndex != -1; }
 
 }
 

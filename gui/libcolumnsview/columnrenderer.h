@@ -70,6 +70,8 @@ class ColumnRenderer
     virtual void renderNextLine( QPainter *painter );
 
     /** */
+    virtual void renderColumn( QPainter *painter, const KPixelXs &Xs, const KPixelYs &Ys );
+    /** */
     virtual void renderEmptyColumn( QPainter *painter, const KPixelXs &Xs, const KPixelYs &Ys );
 
   public: // modification access

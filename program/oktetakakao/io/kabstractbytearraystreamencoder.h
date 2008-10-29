@@ -26,9 +26,7 @@
 // Kakao core
 #include <abstractmodelstreamencoder.h>
 
-namespace KHEUI {
-class KByteArrayView;
-}
+class KByteArrayDisplay;
 namespace KHECore {
 class KAbstractByteArrayModel;
 }
@@ -50,7 +48,7 @@ class KAbstractByteArrayStreamEncoder : public AbstractModelStreamEncoder
 
   protected: // API to be implemented
     virtual bool encodeDataToStream( QIODevice *device,
-                                     const KHEUI::KByteArrayView *byteArrayView,
+                                     const KByteArrayDisplay* byteArrayView,
                                      const KHECore::KAbstractByteArrayModel *byteArrayModel,
                                      const KHE::KSection &section ) = 0;
 };

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,7 +25,7 @@
 // lib
 #include <kbytearraydocument.h>
 // Okteta gui
-#include <kbytearrayview.h>
+#include <bytearraycolumnview.h>
 // Okteta core
 #include <kabstractbytearraymodel.h>
 
@@ -36,7 +36,8 @@ KByteArrayDisplay::KByteArrayDisplay( KByteArrayDocument *document )
     setBaseModel( mDocument );
 
     KHECore::KAbstractByteArrayModel *content = mDocument->content();
-    mWidget = new KHEUI::KByteArrayView( content );
+    mWidget = new KHEUI::ByteArrayColumnView();// content );
+    mWidget->setByteArrayModel( content );
 
     const bool useOverwriteAsDefault = ( content->size() > 0 );
 
@@ -48,10 +49,14 @@ KByteArrayDisplay::KByteArrayDisplay( KByteArrayDocument *document )
                         SIGNAL(modified( KAbstractDocument::SynchronizationStates )) );
 //     connect( mWidget, SIGNAL(selectionChanged( bool )), SIGNAL(hasSelectedDataChanged( bool )) );
     connect( mWidget, SIGNAL(readOnlyChanged( bool )), SIGNAL(readOnlyChanged( bool )) );
+    connect( mWidget, SIGNAL(overwriteModeChanged( bool )), SIGNAL(overwriteModeChanged( bool )) );
     connect( mWidget, SIGNAL(selectionChanged( bool )), SLOT(onSelectionChange( bool )) );
+    connect( mWidget, SIGNAL(cursorPositionChanged( int )), SIGNAL(cursorPositionChanged( int )) );
+    connect( mWidget, SIGNAL(valueCodingChanged( int )), SIGNAL(valueCodingChanged( int )) );
+    connect( mWidget, SIGNAL(charCodecChanged( const QString& )), SIGNAL(charCodecChanged( const QString& )) );
 }
 
-const AbstractModelSelection *KByteArrayDisplay::selection() const { return &mSelection; }
+const AbstractModelSelection* KByteArrayDisplay::modelSelection() const { return &mSelection; }
 
 KAbstractDocument *KByteArrayDisplay::document() const { return mDocument; }
 QWidget* KByteArrayDisplay::widget()             const { return mWidget; }
@@ -112,6 +117,151 @@ void KByteArrayDisplay::onSelectionChange( bool selected )
 {
     mSelection.setSection( mWidget->selection() );
     emit hasSelectedDataChanged( selected );
+}
+
+void KByteArrayDisplay::setCursorPosition( int cursorPosition )
+{
+    mWidget->setCursorPosition( cursorPosition );
+}
+
+int KByteArrayDisplay::cursorPosition() const
+{
+    return mWidget->cursorPosition();
+}
+
+int KByteArrayDisplay::startOffset() const
+{
+    return mWidget->startOffset();
+}
+int KByteArrayDisplay::firstLineOffset() const
+{
+    return mWidget->firstLineOffset();
+}
+int KByteArrayDisplay::noOfBytesPerLine() const
+{
+    return mWidget->noOfBytesPerLine();
+}
+
+
+int KByteArrayDisplay::valueCoding() const
+{
+    return mWidget->valueCoding();
+}
+
+QString KByteArrayDisplay::charCodingName() const
+{
+    return mWidget->charCodingName();
+}
+
+void KByteArrayDisplay::setValueCoding( int valueCoding )
+{
+    mWidget->setValueCoding( (KHEUI::AbstractByteArrayView::ValueCoding)valueCoding );
+}
+
+void KByteArrayDisplay::setCharCoding( const QString& charCodingName )
+{
+    mWidget->setCharCoding( charCodingName );
+}
+
+void KByteArrayDisplay::setFocus()
+{
+    mWidget->setFocus();
+}
+
+KHE::KSection KByteArrayDisplay::selection() const
+{
+    return mWidget->selection();
+}
+
+void KByteArrayDisplay::setSelection( int start, int end )
+{
+    mWidget->setSelection( start, end );
+}
+
+void KByteArrayDisplay::insert( const QByteArray& byteArray )
+{
+    mWidget->insert( byteArray );
+}
+
+bool KByteArrayDisplay::showsNonprinting() const
+{
+    return mWidget->showsNonprinting();
+}
+
+bool KByteArrayDisplay::offsetColumnVisible() const
+{
+    return mWidget->offsetColumnVisible();
+}
+
+int KByteArrayDisplay::resizeStyle() const
+{
+    return (int)mWidget->resizeStyle();
+}
+
+int KByteArrayDisplay::visibleByteArrayCodings() const
+{
+    return (int)mWidget->visibleByteArrayCodings();
+}
+
+bool KByteArrayDisplay::isOverwriteMode() const
+{
+    return mWidget->isOverwriteMode();
+}
+
+void KByteArrayDisplay::setShowsNonprinting( bool on )
+{
+    mWidget->setShowsNonprinting( on );
+}
+
+void KByteArrayDisplay::toggleOffsetColumn( bool on )
+{
+    mWidget->toggleOffsetColumn( on );
+}
+
+void KByteArrayDisplay::setResizeStyle( int resizeStyle )
+{
+    mWidget->setResizeStyle( (KHEUI::AbstractByteArrayView::ResizeStyle)resizeStyle );
+}
+
+void KByteArrayDisplay::setVisibleByteArrayCodings( int visibleColumns )
+{
+    mWidget->setVisibleByteArrayCodings( visibleColumns );
+}
+
+QChar KByteArrayDisplay::substituteChar() const
+{
+    return mWidget->substituteChar();
+}
+QChar KByteArrayDisplay::undefinedChar() const
+{
+    return mWidget->undefinedChar();
+}
+
+int KByteArrayDisplay::byteSpacingWidth() const
+{
+    return mWidget->byteSpacingWidth();
+}
+int KByteArrayDisplay::noOfGroupedBytes() const
+{
+    return mWidget->noOfGroupedBytes();
+}
+int KByteArrayDisplay::groupSpacingWidth() const
+{
+    return mWidget->groupSpacingWidth();
+}
+int KByteArrayDisplay::binaryGapWidth() const
+{
+    return mWidget->binaryGapWidth();
+}
+
+bool KByteArrayDisplay::isOverwriteOnly() const
+{
+    return mWidget->isOverwriteOnly();
+}
+
+void KByteArrayDisplay::setOverwriteMode( bool overwriteMode )
+{
+    mWidget->setOverwriteMode( overwriteMode );
 }
 
 KByteArrayDisplay::~KByteArrayDisplay()

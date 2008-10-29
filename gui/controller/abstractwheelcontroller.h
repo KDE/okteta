@@ -29,12 +29,12 @@ class QWheelEvent;
 namespace KHEUI
 {
 
-class KByteArrayView;
+class ByteArrayColumnView;
 
 class AbstractWheelController
 {
   protected:
-    AbstractWheelController( KByteArrayView* view, AbstractWheelController* parent );
+    AbstractWheelController( ByteArrayColumnView* view, AbstractWheelController* parent );
   public:
     virtual ~AbstractWheelController();
 
@@ -43,7 +43,7 @@ class AbstractWheelController
 
   protected:
     AbstractWheelController* mParent;
-    KByteArrayView* mView;
+    ByteArrayColumnView* mView;
 };
 
 }

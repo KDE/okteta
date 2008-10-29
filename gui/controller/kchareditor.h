@@ -31,19 +31,16 @@
 namespace KHEUI
 {
 
-class CharByteArrayColumnRenderer;
-
 class KCharEditor : public KEditor
 {
   public:
-    KCharEditor( CharByteArrayColumnRenderer *charColumn, KDataCursor *dataCursor, KByteArrayView *view, KController *parent );
+    KCharEditor( ByteArrayTableCursor* cursor, ByteArrayColumnView* view, KController *parent );
     virtual ~KCharEditor();
 
   public: // KController API
     virtual bool handleKeyPress( QKeyEvent *keyEvent );
 
   protected:
-    CharByteArrayColumnRenderer *mCharColumn;
 };
 
 }

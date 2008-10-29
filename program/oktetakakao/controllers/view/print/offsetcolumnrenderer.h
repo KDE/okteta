@@ -95,7 +95,7 @@ class OffsetColumnRenderer : public AbstractColumnRenderer
     int mCodingWidth;
     KOffsetFormat::print mPrintFunction;
 
-    /** buffer to hold the formatted coding */
+    /** buffer to hold the formatted valueCoding */
     mutable char mCodedOffset[KOffsetFormat::MaxFormatWidth+1];
 
   protected: // firstnext trips related

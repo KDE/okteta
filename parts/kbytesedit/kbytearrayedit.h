@@ -36,7 +36,7 @@ namespace KHECore {
 class KByteArrayModel;
 }
 namespace KHEUI {
-class KByteArrayView;
+class ByteArrayColumnView;
 }
 
 
@@ -194,7 +194,7 @@ class KByteArrayEdit : public QWidget, public KHE::BytesEditInterface,
 
   private:
     KHECore::KByteArrayModel *Model;
-    KHEUI::KByteArrayView *View;
+    KHEUI::ByteArrayColumnView *View;
 };
 
 #endif

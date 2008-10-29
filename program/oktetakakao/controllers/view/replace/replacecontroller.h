@@ -29,16 +29,14 @@
 // Kakao gui
 #include <abstractxmlguicontroller.h>
 
-class KXmlGuiWindow;
-class KAction;
-namespace KHEUI {
-class KByteArrayView;
-}
+class KByteArrayDisplay;
 namespace KHECore {
 class KAbstractByteArrayModel;
 }
 class KReplaceDialog;
 class KReplacePrompt;
+class KXmlGuiWindow;
+class KAction;
 
 
 class ReplaceController : public AbstractXmlGuiController
@@ -67,7 +65,8 @@ class ReplaceController : public AbstractXmlGuiController
 
   protected:
     KXmlGuiWindow *mWindow;
-    KHEUI::KByteArrayView *mByteArrayView;
+
+    KByteArrayDisplay* mByteArrayDisplay;
     KHECore::KAbstractByteArrayModel *mByteArrayModel;
 
     KAction *mReplaceAction;

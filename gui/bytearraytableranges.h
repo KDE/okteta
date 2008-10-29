@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_KDATARANGES_H
-#define KHE_UI_KDATARANGES_H
+#ifndef KHE_UI_BYTEARRAYTABLERANGES_H
+#define KHE_UI_BYTEARRAYTABLERANGES_H
 
 // lib
 #include "selection.h"
@@ -44,11 +44,11 @@ class ByteArrayTableLayout;
   *
   * @author Friedrich W. H.  Kossebau
   */
-class KDataRanges
+class ByteArrayTableRanges
 {
   public:
-    explicit KDataRanges( ByteArrayTableLayout *L );
-    ~KDataRanges();
+    explicit ByteArrayTableRanges( ByteArrayTableLayout* layout );
+    ~ByteArrayTableRanges();
 
   public: // modifcation access
     void setMarking( const KHE::KSection &M );
@@ -119,24 +119,24 @@ class KDataRanges
 };
 
 
-inline int KDataRanges::noOfSelections()  const { return 1; }
+inline int ByteArrayTableRanges::noOfSelections()  const { return 1; }
 
-inline int KDataRanges::selectionStart()  const { return mSelection.start(); }
-inline int KDataRanges::selectionEnd()    const { return mSelection.end(); }
-inline KHE::KSection KDataRanges::selection()  const { return mSelection.section(); }
-inline KHE::KSection KDataRanges::firstWordSelection()  const { return FirstWordSelection; }
-inline int KDataRanges::selectionLength() const { return mSelection.section().width(); }
-inline bool KDataRanges::isModified()     const { return Modified; }
+inline int ByteArrayTableRanges::selectionStart()  const { return mSelection.start(); }
+inline int ByteArrayTableRanges::selectionEnd()    const { return mSelection.end(); }
+inline KHE::KSection ByteArrayTableRanges::selection()  const { return mSelection.section(); }
+inline KHE::KSection ByteArrayTableRanges::firstWordSelection()  const { return FirstWordSelection; }
+inline int ByteArrayTableRanges::selectionLength() const { return mSelection.section().width(); }
+inline bool ByteArrayTableRanges::isModified()     const { return Modified; }
 
-inline bool KDataRanges::hasSelection()             const { return mSelection.isValid(); }
-inline bool KDataRanges::selectionStarted()         const { return mSelection.started(); }
-inline bool KDataRanges::selectionJustStarted()     const { return mSelection.justStarted(); }
-inline bool KDataRanges::hasFirstWordSelection()    const { return FirstWordSelection.isValid(); }
-inline bool KDataRanges::hasMarking()               const { return Marking.isValid(); }
-inline bool KDataRanges::selectionIncludes( int Index ) const { return mSelection.section().includes( Index ); }
-inline bool KDataRanges::markingIncludes( int Index )   const { return Marking.includes( Index ); }
+inline bool ByteArrayTableRanges::hasSelection()             const { return mSelection.isValid(); }
+inline bool ByteArrayTableRanges::selectionStarted()         const { return mSelection.started(); }
+inline bool ByteArrayTableRanges::selectionJustStarted()     const { return mSelection.justStarted(); }
+inline bool ByteArrayTableRanges::hasFirstWordSelection()    const { return FirstWordSelection.isValid(); }
+inline bool ByteArrayTableRanges::hasMarking()               const { return Marking.isValid(); }
+inline bool ByteArrayTableRanges::selectionIncludes( int Index ) const { return mSelection.section().includes( Index ); }
+inline bool ByteArrayTableRanges::markingIncludes( int Index )   const { return Marking.includes( Index ); }
 
-inline void KDataRanges::setModified( bool M )           { Modified = M; }
+inline void ByteArrayTableRanges::setModified( bool M )           { Modified = M; }
 
 }
 

@@ -40,11 +40,14 @@ class KByteArrayValidator : public QValidator
   Q_OBJECT
 
   public:
+    // matching KHECore::ValueCoding
+    enum Coding { InvalidCoding = -1, HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, CharCoding=4 };
+
     static const QStringList &codecNames();
     static const int CodecNumber = 5;
 
   public:
-    KByteArrayValidator( QObject *parent, int valueCodecId, int charCodecId = KHECore::LocalEncoding );
+    KByteArrayValidator( QObject *parent, Coding codecId = CharCoding, int charCodecId = KHECore::LocalEncoding );
     virtual ~KByteArrayValidator();
 
   public: // QValidator API
@@ -52,7 +55,7 @@ class KByteArrayValidator : public QValidator
 
   public:
     /// sets one of the value codecs or any char codec
-    void setCodec( int codecId );
+    void setCodec( Coding codecId );
     /// sets the char codec to use
     void setCharCodec( const QString &charCodecName );
 
@@ -69,7 +72,7 @@ class KByteArrayValidator : public QValidator
      */
 //     QString zeroExtend( const QString &src, int destLen ) const;
 
-    KHECore::KCoding mCodecId;
+    Coding mCodecId;
     KHECore::ValueCodec *mValueCodec;
     KHECore::KCharCodec *mCharCodec;
 };

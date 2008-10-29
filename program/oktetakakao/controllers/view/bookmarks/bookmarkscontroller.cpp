@@ -29,7 +29,6 @@
 #include <abstractmodel.h>
 // Okteta gui
 #include <koffsetformat.h>
-#include <kbytearrayview.h>
 // Okteta core
 #include <kbookmarkable.h>
 #include <kbytearraymodel.h>
@@ -49,7 +48,7 @@ static const char BookmarkListActionListId[] = "bookmark_list";
 // TODO: Sortieren nach Offset oder Zeit
 
 BookmarksController::BookmarksController( KXMLGUIClient* guiClient )
- : mGuiClient( guiClient ), mByteArrayView( 0 ), mByteArray( 0 ), mBookmarks( 0 )
+ : mGuiClient( guiClient ), mByteArrayDisplay( 0 ), mByteArray( 0 ), mBookmarks( 0 )
 {
     KActionCollection* actionCollection = mGuiClient->actionCollection();
 
@@ -84,18 +83,19 @@ BookmarksController::BookmarksController( KXMLGUIClient* guiClient )
 
 void BookmarksController::setTargetModel( AbstractModel* model )
 {
-    if( mByteArrayView ) mByteArrayView->disconnect( this );
+    if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
     if( mByteArray ) mByteArray->disconnect( this );
 
-    KByteArrayDisplay* view = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
-    mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
+    mByteArrayDisplay = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
 
-    KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
+    KByteArrayDocument* document =
+        mByteArrayDisplay ? qobject_cast<KByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
     mByteArray = document ? document->content() : 0;
-    mBookmarks = ( mByteArray && mByteArrayView ) ? qobject_cast<KHECore::Bookmarkable*>( mByteArray ) : 0;
+    mBookmarks = ( mByteArray && mByteArrayDisplay ) ? qobject_cast<KHECore::Bookmarkable*>( mByteArray ) : 0;
 
+    const bool hasViewWithBookmarks = ( mBookmarks != 0 );
     int bookmarksCount = 0;
-    if( mBookmarks )
+    if( hasViewWithBookmarks )
     {
         bookmarksCount = mBookmarks->bookmarkList().size();
         connect( mByteArray, SIGNAL(bookmarksAdded( const QList<KHECore::KBookmark>& )),
@@ -104,15 +104,14 @@ void BookmarksController::setTargetModel( AbstractModel* model )
                  SLOT(onBookmarksRemoved( const QList<KHECore::KBookmark>& )) );
         connect( mByteArray, SIGNAL(bookmarksModified( bool )),
                  SLOT(updateBookmarks()) );
-        connect( mByteArrayView, SIGNAL( cursorPositionChanged( int )), SLOT( onCursorPositionChanged( int )) );
+        connect( mByteArrayDisplay, SIGNAL( cursorPositionChanged( int )), SLOT( onCursorPositionChanged( int )) );
     }
 
     updateBookmarks();
 
-    const bool hasViewWithBookmarks = ( mBookmarks != 0 );
     const bool hasBookmarks = hasViewWithBookmarks && ( bookmarksCount != 0 );
     if( hasViewWithBookmarks )
-        onCursorPositionChanged( mByteArrayView->cursorPosition() );
+        onCursorPositionChanged( mByteArrayDisplay->cursorPosition() );
     else
     {
         mCreateAction->setEnabled( false );
@@ -134,7 +133,7 @@ void BookmarksController::updateBookmarks()
 
     const KHECore::KBookmarkList bookmarks = mBookmarks->bookmarkList();
 
-    const int startOffset = mByteArrayView->startOffset();
+    const int startOffset = mByteArrayDisplay->startOffset();
     KHEUI::KOffsetFormat::print printFunction = KHEUI::KOffsetFormat::printFunction( KHEUI::KOffsetFormat::Hexadecimal );
 
     char codedOffset[KHEUI::KOffsetFormat::MaxFormatWidth+1];
@@ -161,7 +160,7 @@ void BookmarksController::updateBookmarks()
 void BookmarksController::onBookmarksAdded( const QList<KHECore::KBookmark> &bookmarks )
 {
 Q_UNUSED( bookmarks )
-    onCursorPositionChanged( mByteArrayView->cursorPosition() );
+    onCursorPositionChanged( mByteArrayDisplay->cursorPosition() );
 
     const int bookmarksCount = mBookmarks->bookmarkList().size();
     const bool hasBookmarks = ( bookmarksCount != 0 );
@@ -175,7 +174,7 @@ Q_UNUSED( bookmarks )
 void BookmarksController::onBookmarksRemoved( const QList<KHECore::KBookmark> &bookmarks )
 {
 Q_UNUSED( bookmarks )
-    onCursorPositionChanged( mByteArrayView->cursorPosition() );
+    onCursorPositionChanged( mByteArrayDisplay->cursorPosition() );
 
     const int bookmarksCount = mBookmarks->bookmarkList().size();
     const bool hasBookmarks = ( bookmarksCount != 0 );
@@ -196,7 +195,7 @@ void BookmarksController::onCursorPositionChanged( int newPosition )
 
 void BookmarksController::createBookmark()
 {
-    const int cursorPosition = mByteArrayView->cursorPosition();
+    const int cursorPosition = mByteArrayDisplay->cursorPosition();
     QList<KHECore::KBookmark> bookmarks;
     bookmarks.append( cursorPosition );
     mBookmarks->addBookmarks( bookmarks ); // TODO: popup for name tag
@@ -204,7 +203,7 @@ void BookmarksController::createBookmark()
 
 void BookmarksController::deleteBookmark()
 {
-    const int cursorPosition = mByteArrayView->cursorPosition();
+    const int cursorPosition = mByteArrayDisplay->cursorPosition();
     QList<KHECore::KBookmark> bookmarks;
     bookmarks.append( cursorPosition );
     mBookmarks->removeBookmarks( bookmarks );
@@ -217,32 +216,32 @@ void BookmarksController::deleteAllBookmarks()
 
 void BookmarksController::gotoNextBookmark()
 {
-    const int currentPosition = mByteArrayView->cursorPosition();
+    const int currentPosition = mByteArrayDisplay->cursorPosition();
     const KHECore::KBookmarkList bookmarkList = mBookmarks->bookmarkList();
     KHECore::KBookmarkList::ConstIterator nit = bookmarkList.nextFrom( currentPosition+1 );
     if( nit != bookmarkList.end() )
     {
         const int newPosition = nit->offset();
-        mByteArrayView->setCursorPosition( newPosition );
+        mByteArrayDisplay->setCursorPosition( newPosition );
     }
 }
 
 void BookmarksController::gotoPreviousBookmark()
 {
-    const int currentPosition = mByteArrayView->cursorPosition();
+    const int currentPosition = mByteArrayDisplay->cursorPosition();
     const KHECore::KBookmarkList bookmarkList = mBookmarks->bookmarkList();
     KHECore::KBookmarkList::ConstIterator pit = bookmarkList.previousFrom( currentPosition-1 );
     if( pit != bookmarkList.end() )
     {
         const int newPosition = pit->offset();
-        mByteArrayView->setCursorPosition( newPosition );
+        mByteArrayDisplay->setCursorPosition( newPosition );
     }
 }
 
 void BookmarksController::onBookmarkTriggered( QAction* action )
 {
     const int newPosition = action->data().toInt();
-    mByteArrayView->setCursorPosition( newPosition );
+    mByteArrayDisplay->setCursorPosition( newPosition );
 }
 
 

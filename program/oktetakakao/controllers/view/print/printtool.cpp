@@ -30,12 +30,8 @@
 // lib
 #include <kbytearraydisplay.h>
 #include <kbytearraydocument.h>
-// Kakao gui
-#include <kabstractview.h>
-// Okteta gui
-#include <kbytearrayview.h>
 // Okteta core
-#include <kbytearraymodel.h>
+#include <kabstractbytearraymodel.h>
 // KDE
 #include <KLocale>
 #include <KMessageBox>
@@ -50,21 +46,20 @@
 
 
 PrintTool::PrintTool()
- : mDocument( 0 ), mByteArrayView( 0 ), mByteArrayModel( 0 )
+ : mDocument( 0 ), mByteArrayDisplay( 0 ), mByteArrayModel( 0 )
 {
 }
 
 void PrintTool::setTargetModel( AbstractModel* model )
 {
-//     if( mByteArrayView ) mByteArrayView->disconnect( this );
+//     if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
 
-    KByteArrayDisplay* view = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
-    mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
+    mByteArrayDisplay = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
 
-    mDocument = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
+    mDocument = mByteArrayDisplay ? qobject_cast<KByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
     mByteArrayModel = mDocument ? mDocument->content() : 0;
 
-    const bool hasView = ( mByteArrayView && mByteArrayModel );
+    const bool hasView = ( mByteArrayDisplay && mByteArrayModel );
     emit viewChanged( hasView );
 }
 
@@ -123,31 +118,31 @@ void PrintTool::print()
         byteArrayFrameRenderer->setWidth( width );
         byteArrayFrameRenderer->setHeight( contentHeight );
 
-        KHE::KSection section = mByteArrayView->selection();
+        KHE::KSection section = mByteArrayDisplay->selection();
         if( !section.isValid() )
             section.setByWidth( 0, mByteArrayModel->size() );
         byteArrayFrameRenderer->setByteArrayModel( mByteArrayModel, section.start(), section.width() );
 
         // TODO: use noOfBytesPerLine of view, scale resolution down if it does not fit the page
-        const int noOfBytesPerLine = mByteArrayView->noOfBytesPerLine();
-//         byteArrayFrameRenderer->setNoOfBytesPerLine( mByteArrayView->noOfBytesPerLine() );
+        const int noOfBytesPerLine = mByteArrayDisplay->noOfBytesPerLine();
+//         byteArrayFrameRenderer->setNoOfBytesPerLine( mByteArrayDisplay->noOfBytesPerLine() );
 
-        const int startOffset = mByteArrayView->startOffset() + section.start();
+        const int startOffset = mByteArrayDisplay->startOffset() + section.start();
         const int line = startOffset / noOfBytesPerLine;
-        const int firstLineOffset = mByteArrayView->firstLineOffset() + line*noOfBytesPerLine;
+        const int firstLineOffset = mByteArrayDisplay->firstLineOffset() + line*noOfBytesPerLine;
         byteArrayFrameRenderer->setFirstLineOffset( firstLineOffset );
         byteArrayFrameRenderer->setStartOffset( startOffset );
 
-        byteArrayFrameRenderer->setEncoding( mByteArrayView->encodingName() );
-        byteArrayFrameRenderer->setBufferSpacing( mByteArrayView->byteSpacingWidth(),
-                                                  mByteArrayView->noOfGroupedBytes(),
-                                                  mByteArrayView->groupSpacingWidth() );
-        byteArrayFrameRenderer->setBinaryGapWidth( mByteArrayView->binaryGapWidth() );
+        byteArrayFrameRenderer->setCharCoding( mByteArrayDisplay->charCodingName() );
+        byteArrayFrameRenderer->setBufferSpacing( mByteArrayDisplay->byteSpacingWidth(),
+                                                  mByteArrayDisplay->noOfGroupedBytes(),
+                                                  mByteArrayDisplay->groupSpacingWidth() );
+        byteArrayFrameRenderer->setBinaryGapWidth( mByteArrayDisplay->binaryGapWidth() );
 
-        byteArrayFrameRenderer->setCoding( (KHECore::KCoding)mByteArrayView->coding() );
-        byteArrayFrameRenderer->setShowsNonprinting( mByteArrayView->showsNonprinting() );
-        byteArrayFrameRenderer->setSubstituteChar( mByteArrayView->substituteChar() );
-        byteArrayFrameRenderer->setUndefinedChar( mByteArrayView->undefinedChar() );
+        byteArrayFrameRenderer->setValueCoding( (KHECore::ValueCoding)mByteArrayDisplay->valueCoding() );
+        byteArrayFrameRenderer->setShowsNonprinting( mByteArrayDisplay->showsNonprinting() );
+        byteArrayFrameRenderer->setSubstituteChar( mByteArrayDisplay->substituteChar() );
+        byteArrayFrameRenderer->setUndefinedChar( mByteArrayDisplay->undefinedChar() );
 
 //     if( !confirmPrintPageNumber( byteArrayFrameRenderer->framesCount()) )
 //         return;

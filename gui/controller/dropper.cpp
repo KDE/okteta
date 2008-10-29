@@ -24,9 +24,9 @@
 
 // lib
 #include "kvalueeditor.h"
-#include <kbytearrayview.h>
-#include <kdatacursor.h>
-#include <kdataranges.h>
+#include <bytearraycolumnview.h>
+#include <bytearraytableranges.h>
+#include <bytearraytablecursor.h>
 #include <bytearraytablelayout.h>
 // Okteta core
 #include <kabstractbytearraymodel.h>
@@ -44,7 +44,7 @@ namespace KHEUI
 static const char OctetStreamFormatName[] = "application/octet-stream";
 
 
-Dropper::Dropper( KByteArrayView* view )
+Dropper::Dropper( ByteArrayColumnView* view )
   : mByteArrayView( view ), mIsActive( false )
 {
 }
@@ -60,9 +60,9 @@ bool Dropper::handleDragEnterEvent( QDragEnterEvent* dragEnterEvent )
     {
         mIsActive = true;
         // TODO: store value edit data
-        KDataCursor* dataCursor = mByteArrayView->mDataCursor;
-        mBeforeDragCursorPos = dataCursor->index();
-        mBeforeDragCursorIsBehind = dataCursor->isBehind();
+        ByteArrayTableCursor* tableCursor = mByteArrayView->tableCursor();
+        mBeforeDragCursorPos = tableCursor->index();
+        mBeforeDragCursorIsBehind = tableCursor->isBehind();
         mCursorIsMovedByDrag = false;
 
         eventUsed = true;
@@ -84,7 +84,7 @@ bool Dropper::handleDragMoveEvent( QDragMoveEvent* dragMoveEvent )
         // let text cursor follow mouse
         mByteArrayView->pauseCursor();
        //TODO: just for following skip the value edit, remember we are and get back
-        mByteArrayView->mValueEditor->finishEdit();
+        mByteArrayView->valueEditor()->finishEdit();
         mByteArrayView->placeCursor( dragMoveEvent->pos() );
         mByteArrayView->unpauseCursor();
 
@@ -106,9 +106,10 @@ Q_UNUSED( dragLeaveEvent )
     {
         mByteArrayView->pauseCursor();
         // TODO: get back to value edit mode if we were in
-        KDataCursor* dataCursor = mByteArrayView->mDataCursor;
-        dataCursor->gotoIndex( mBeforeDragCursorPos );
-        if( mBeforeDragCursorIsBehind ) dataCursor->stepBehind();
+        ByteArrayTableCursor* tableCursor = mByteArrayView->tableCursor();
+        tableCursor->gotoIndex( mBeforeDragCursorPos );
+        if( mBeforeDragCursorIsBehind )
+            tableCursor->stepBehind();
         mByteArrayView->unpauseCursor();
     }
 
@@ -131,7 +132,7 @@ bool Dropper::handleDropEvent( QDropEvent* dropEvent )
             handleInternalDrag( dropEvent );
         else
         {
-        //mDataRanges->removeSelection();
+        //mByteArrayView->tableRanges()->removeSelection();
             mByteArrayView->pasteData( dropEvent->mimeData() );
         }
     }
@@ -145,11 +146,12 @@ void Dropper::handleInternalDrag( QDropEvent* dropEvent )
     // TODO: this should 
 
     // get drag origin
-    KHE::KSection selection = mByteArrayView->mDataRanges->removeSelection();
-    int insertIndex = mByteArrayView->mDataCursor->realIndex();
+    KHE::KSection selection = mByteArrayView->tableRanges()->removeSelection();
 
-    KDataCursor* dataCursor = mByteArrayView->mDataCursor;
-    KHECore::KAbstractByteArrayModel* byteArrayModel = mByteArrayView->mByteArrayModel;
+    ByteArrayTableCursor* tableCursor = mByteArrayView->tableCursor();
+    KHECore::KAbstractByteArrayModel* byteArrayModel = mByteArrayView->byteArrayModel();
+
+    int insertIndex = tableCursor->realIndex();
 
     // is this a move?
     if( dropEvent->proposedAction() == Qt::MoveAction )
@@ -170,9 +172,9 @@ void Dropper::handleInternalDrag( QDropEvent* dropEvent )
         const bool success = byteArrayModel->swap( insertIndex, selection );
         if( success )
         {
-            dataCursor->gotoCIndex( newCursorIndex );
-            mByteArrayView->mDataRanges->addChangedRange( KHE::KSection(insertIndex,selection.end()) );
-            emit mByteArrayView->cursorPositionChanged( dataCursor->realIndex() );
+            tableCursor->gotoCIndex( newCursorIndex );
+            mByteArrayView->tableRanges()->addChangedRange( KHE::KSection(insertIndex,selection.end()) );
+            emit mByteArrayView->cursorPositionChanged( tableCursor->realIndex() );
         }
     }
     // is a copy
@@ -185,10 +187,10 @@ void Dropper::handleInternalDrag( QDropEvent* dropEvent )
 
         if( !data.isEmpty() )
         {
-            if( mByteArrayView->mOverWrite )
+            if( mByteArrayView->isOverwriteMode() )
             {
-                const int length = mByteArrayView->mDataLayout->length();
-                if( !dataCursor->isBehind() && length > 0 )
+                const int length = mByteArrayView->layout()->length();
+                if( !tableCursor->isBehind() && length > 0 )
                 {
                     KHE::KSection overwriteRange = KHE::KSection::fromWidth( insertIndex, data.size() );
                     overwriteRange.restrictEndTo( length-1 );

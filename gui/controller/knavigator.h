@@ -38,7 +38,7 @@ class KNavigator : public KController
                        MoveUp, MovePgUp, MoveDown, MovePgDown,
                        MoveLineStart, MoveHome, MoveLineEnd, MoveEnd };
   public:
-    KNavigator( KByteArrayView *view, KController *parent );
+    KNavigator( ByteArrayColumnView *view, KController *parent );
 
   public: // KController API
     virtual bool handleKeyPress( QKeyEvent *keyEvent );

@@ -23,9 +23,9 @@
 #include "abstractbytearraycolumnrenderer.h"
 
 // lib
-#include "kdatacursor.h"
+#include "bytearraytableranges.h"
+#include "bytearraytablecursor.h"
 #include "bytearraytablelayout.h"
-#include "kdataranges.h"
 #include "helper.h"
 // ColumnsView
 #include <columnsview.h>
@@ -51,7 +51,7 @@ static const KPixelX DefaultGroupSpacingWidth = 9;
 static const int DefaultNoOfGroupedBytes = 4;
 
 AbstractByteArrayColumnRenderer::AbstractByteArrayColumnRenderer( ColumnsView *columnsView,
-    KHECore::KAbstractByteArrayModel *byteArrayModel, ByteArrayTableLayout *layout, KDataRanges *ranges )
+    KHECore::KAbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges )
  : ColumnRenderer( columnsView ),
    mByteArrayModel( byteArrayModel ),
    mLayout( layout ),

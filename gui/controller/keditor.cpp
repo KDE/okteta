@@ -23,10 +23,9 @@
 #include "keditor.h"
 
 // lib
-#include "kdataranges.h"
-#include "bytearraytablelayout.h"
-#include "kdatacursor.h"
-#include "kbytearrayview.h"
+#include <bytearraytablelayout.h>
+#include <bytearraytablecursor.h>
+#include <bytearraycolumnview.h>
 // Okteta core
 #include <kabstractbytearraymodel.h>
 #include <kwordbufferservice.h>
@@ -36,9 +35,9 @@
 
 namespace KHEUI {
 
-KEditor::KEditor( KDataCursor *dataCursor, KByteArrayView* view, KController *parent )
+KEditor::KEditor( ByteArrayTableCursor* cursor, ByteArrayColumnView* view, KController *parent )
   : KController( view, parent ),
-  mDataCursor( dataCursor )
+  mCursor( cursor )
 {
 }
 
@@ -59,7 +58,7 @@ bool KEditor::handleKeyPress( QKeyEvent *keyEvent )
     case Qt::Key_Delete:
         if( shiftPressed )
             mView->cut();
-        else if( mView->mDataRanges->hasSelection() )
+        else if( mView->hasSelectedData() )
             mView->removeSelectedData();
         else
             doEditAction( controlPressed ? WordDelete : CharDelete );
@@ -75,7 +74,7 @@ bool KEditor::handleKeyPress( QKeyEvent *keyEvent )
     case Qt::Key_Backspace:
         if( altPressed )
             break;
-        else if( mView->mDataRanges->hasSelection() )
+        else if( mView->hasSelectedData() )
         {
             mView->removeSelectedData();
             break;
@@ -103,25 +102,26 @@ bool KEditor::handleKeyPress( QKeyEvent *keyEvent )
 
 void KEditor::doEditAction( KEditAction action )
 {
+    KHECore::KAbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
     switch( action )
     {
     case CharDelete:
         if( !mView->isOverwriteMode() )
         {
-            const int index = mDataCursor->realIndex();
-            if( index < mView->mDataLayout->length() )
-                mView->mByteArrayModel->remove( KHE::KSection::fromWidth(index,1) );
+            const int index = mCursor->realIndex();
+            if( index < mView->layout()->length() )
+                byteArrayModel->remove( KHE::KSection::fromWidth(index,1) );
         }
         break;
     case WordDelete: // kills data until the start of the next word
         if( !mView->isOverwriteMode() )
         {
-            const int index = mDataCursor->realIndex();
-            if( index < mView->mDataLayout->length() )
+            const int index = mCursor->realIndex();
+            if( index < mView->layout()->length() )
             {
-                const KHECore::KWordBufferService WBS( mView->mByteArrayModel, mView->mCharCodec );
+                const KHECore::KWordBufferService WBS( byteArrayModel, mView->charCodec() );
                 const int end = WBS.indexOfBeforeNextWordStart( index );
-                mView->mByteArrayModel->remove( KHE::KSection(index,end) );
+                byteArrayModel->remove( KHE::KSection(index,end) );
             }
         }
         break;
@@ -129,26 +129,26 @@ void KEditor::doEditAction( KEditAction action )
         if( mView->isOverwriteMode() )
         {
             mView->pauseCursor();
-            mDataCursor->gotoPreviousByte();
+            mCursor->gotoPreviousByte();
             mView->ensureCursorVisible();
             mView->unpauseCursor();
         }
         else
         {
-            const int deleteIndex = mDataCursor->realIndex() - 1;
+            const int deleteIndex = mCursor->realIndex() - 1;
             if( deleteIndex >= 0 )
-                mView->mByteArrayModel->remove( KHE::KSection::fromWidth(deleteIndex,1) );
+                byteArrayModel->remove( KHE::KSection::fromWidth(deleteIndex,1) );
         }
         break;
     case WordBackspace:
         {
-            const int leftIndex = mDataCursor->realIndex() - 1;
+            const int leftIndex = mCursor->realIndex() - 1;
             if( leftIndex >= 0 )
             {
-                const KHECore::KWordBufferService WBS( mView->mByteArrayModel, mView->mCharCodec );
+                const KHECore::KWordBufferService WBS( byteArrayModel, mView->charCodec() );
                 const int wordStart = WBS.indexOfPreviousWordStart( leftIndex );
                 if( !mView->isOverwriteMode() )
-                    mView->mByteArrayModel->remove( KHE::KSection(wordStart,leftIndex) );
+                    byteArrayModel->remove( KHE::KSection(wordStart,leftIndex) );
             }
         }
     }

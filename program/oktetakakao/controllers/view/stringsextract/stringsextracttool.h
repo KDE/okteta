@@ -32,10 +32,7 @@
 // Qt
 #include <QtCore/QList>
 
-class KAbstractView;
-namespace KHEUI {
-class KByteArrayView;
-}
+class KByteArrayDisplay;
 namespace KHECore {
 class KAbstractByteArrayModel;
 class KCharCodec;
@@ -95,7 +92,7 @@ class StringsExtractTool : public AbstractTool
     int mMinLength;
 
   protected: // sources
-    KHEUI::KByteArrayView *mByteArrayView;
+    KByteArrayDisplay* mByteArrayDisplay;
     // current
     KHECore::KAbstractByteArrayModel *mByteArrayModel;
 

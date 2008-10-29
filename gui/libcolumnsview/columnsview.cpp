@@ -184,6 +184,13 @@ void ColumnsView::updateScrollBars()
 }
 
 
+void ColumnsView::updateColumn( ColumnRenderer& columnRenderer )
+{
+    if( columnRenderer.isVisible() )
+        viewport()->update( columnRenderer.x()-xOffset(), 0, columnRenderer.width(), visibleHeight() );
+}
+
+
 int ColumnsView::noOfLinesPerPage() const
 {
     if( d->LineHeight < 1 )
@@ -287,6 +294,11 @@ void ColumnsView::renderColumns( QPainter *painter, int cx, int cy, int cw, int 
 
             if( dirtyLines.isValid() )
             {
+                // paint full columns
+                QListIterator<ColumnRenderer*> fit( d->Columns ); // TODO: reuse later, see some lines below
+                while( fit.hasNext() )
+                    fit.next()->renderColumn( painter, dirtyXs, dirtyYs );
+
                 KPixelY cy = dirtyLines.start() * d->LineHeight;
         //kDebug()<<"Dirty lines: "<<dirtyLines.start()<<"-"<<dirtyLines.end();
                 // starting painting with the first line

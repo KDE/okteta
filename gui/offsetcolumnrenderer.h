@@ -30,6 +30,7 @@
 
 namespace KHEUI
 {
+class ByteArrayTableLayout;
 
 /**
   *@author Friedrich W. H. Kossebau
@@ -38,18 +39,16 @@ namespace KHEUI
 class OffsetColumnRenderer : public ColumnRenderer
 {
   public:
-    OffsetColumnRenderer( ColumnsView *columnsView, int firstLineOffset, int delta, KOffsetFormat::KFormat format );
+    OffsetColumnRenderer( ColumnsView* columnsView, ByteArrayTableLayout* layout, KOffsetFormat::KFormat format );
     virtual ~OffsetColumnRenderer();
 
   public:  // ColumnRenderer API
     virtual void renderFirstLine( QPainter *painter, const KPixelXs &Xs, int firstLineIndex );
     virtual void renderNextLine( QPainter *painter );
+    virtual void renderColumn( QPainter* painter, const KPixelXs& Xs, const KPixelYs& Ys );
     virtual void renderEmptyColumn( QPainter *painter, const KPixelXs &Xs, const KPixelYs &Ys );
 
   public:
-    void setFirstLineOffset( int firstLineOffset );
-    void setDelta( int delta );
-
     void setFormat( KOffsetFormat::KFormat format );
     /** sets width of digits and recalculates depend sizes  */
     void setDigitWidth( KPixelX digitWidth );
@@ -57,8 +56,7 @@ class OffsetColumnRenderer : public ColumnRenderer
     void setMetrics( KPixelX DW, KPixelY DBL );
 
   public: // read access
-    int delta() const;
-    int firstLineOffset() const;
+//     int delta() const;
     int codingWidth() const;
     KOffsetFormat::print printFunction() const;
 
@@ -68,15 +66,11 @@ class OffsetColumnRenderer : public ColumnRenderer
     void recalcX();
     /** paints full line */
     void renderLine( QPainter *painter, int lineIndex );
-
+    /** */
+    void renderColumnBackground( QPainter* painter, const KPixelXs& Xs, const KPixelYs& Ys );
 
   protected: // user settings
-    /** starting offset of the first line
-      * if different from StartOffset results in leading space
-      */
-    int mFirstLineOffset;
-    /** offset delta per line */
-    int mDelta;
+    ByteArrayTableLayout* mLayout;
 
   protected: // pixel related
     /** */
@@ -98,11 +92,6 @@ class OffsetColumnRenderer : public ColumnRenderer
     int mRenderLineIndex;
 };
 
-
-inline int OffsetColumnRenderer::firstLineOffset()  const { return mFirstLineOffset; }
-inline int OffsetColumnRenderer::delta()            const { return mDelta; }
-inline void OffsetColumnRenderer::setFirstLineOffset( int firstLineOffset ) { mFirstLineOffset = firstLineOffset; }
-inline void OffsetColumnRenderer::setDelta( int delta )  { mDelta = delta; }
 
 inline int OffsetColumnRenderer::codingWidth()                       const { return mCodingWidth; }
 inline KOffsetFormat::print OffsetColumnRenderer::printFunction()    const { return PrintFunction; }

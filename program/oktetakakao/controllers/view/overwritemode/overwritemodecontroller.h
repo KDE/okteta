@@ -27,10 +27,7 @@
 // Kakao gui
 #include <abstractxmlguicontroller.h>
 
-namespace KHEUI {
-class KByteArrayView;
-}
-class KXMLGUIClient;
+class KByteArrayDisplay;
 class KToggleAction;
 
 class OverwriteModeController : public AbstractXmlGuiController
@@ -47,7 +44,7 @@ class OverwriteModeController : public AbstractXmlGuiController
     void setOverWrite( bool isOverWrite );
 
   protected:
-    KHEUI::KByteArrayView *mByteArrayView;
+    KByteArrayDisplay* mByteArrayDisplay;
 
     KToggleAction *mSetOverWriteAction;
 };

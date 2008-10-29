@@ -46,8 +46,8 @@
 static const int DefaultStartOffset = 0;
 static const int DefaultFirstLineOffset = 0;
 static const int DefaultNoOfBytesPerLine =  16;
-static const KResizeStyle DefaultResizeStyle = FullSizeUsage;
-static const KHECore::KEncoding DefaultEncoding = KHECore::LocalEncoding;
+static const ResizeStyle DefaultResizeStyle = FullSizeUsage;
+static const KHECore::CharCoding DefaultEncoding = KHECore::LocalEncoding;
 
 
 static const int BAFInitialHeight = 50;
@@ -78,7 +78,7 @@ ByteArrayFrameRenderer::ByteArrayFrameRenderer()
         new KHEPrint::CharColumnRenderer( this, mByteArrayModel, emptySection, mLayout );
 
     // set encoding
-    mCodec = KHECore::KCharCodec::createCodec( (KHECore::KEncoding)DefaultEncoding );
+    mCodec = KHECore::KCharCodec::createCodec( (KHECore::CharCoding)DefaultEncoding );
     mValueColumnRenderer->setCodec( mCodec );
     mCharColumnRenderer->setCodec( mCodec );
     mEncoding = DefaultEncoding;
@@ -93,8 +93,8 @@ int ByteArrayFrameRenderer::length()                                            
 int ByteArrayFrameRenderer::noOfBytesPerLine()               const { return mLayout->noOfBytesPerLine(); }
 int ByteArrayFrameRenderer::firstLineOffset()                const { return mOffsetColumnRenderer->firstLineOffset(); }
 int ByteArrayFrameRenderer::startOffset()                    const { return mLayout->startOffset(); }
-KResizeStyle ByteArrayFrameRenderer::resizeStyle()           const { return mResizeStyle; }
-KHECore::KCoding ByteArrayFrameRenderer::coding()            const { return mValueColumnRenderer->coding(); }
+ResizeStyle ByteArrayFrameRenderer::resizeStyle()           const { return mResizeStyle; }
+KHECore::ValueCoding ByteArrayFrameRenderer::valueCoding()            const { return mValueColumnRenderer->valueCoding(); }
 KPixelX ByteArrayFrameRenderer::byteSpacingWidth()           const { return mValueColumnRenderer->byteSpacingWidth(); }
 int ByteArrayFrameRenderer::noOfGroupedBytes()               const { return mValueColumnRenderer->noOfGroupedBytes(); }
 KPixelX ByteArrayFrameRenderer::groupSpacingWidth()          const { return mValueColumnRenderer->groupSpacingWidth(); }
@@ -102,12 +102,12 @@ KPixelX ByteArrayFrameRenderer::binaryGapWidth()             const { return mVal
 bool ByteArrayFrameRenderer::showsNonprinting()              const { return mCharColumnRenderer->showsNonprinting(); }
 QChar ByteArrayFrameRenderer::substituteChar()               const { return mCharColumnRenderer->substituteChar(); }
 QChar ByteArrayFrameRenderer::undefinedChar()                const { return mCharColumnRenderer->undefinedChar(); }
-KHECore::KEncoding ByteArrayFrameRenderer::encoding()        const { return mEncoding; }
-const QString &ByteArrayFrameRenderer::encodingName()        const { return mCodec->name(); }
+KHECore::CharCoding ByteArrayFrameRenderer::charCoding()        const { return mEncoding; }
+const QString &ByteArrayFrameRenderer::charCodingName()        const { return mCodec->name(); }
 
 bool ByteArrayFrameRenderer::offsetColumnVisible() const { return mOffsetColumnRenderer->isVisible(); }
-int ByteArrayFrameRenderer::visibleByteArrayColumns() const
-{ return (mValueColumnRenderer->isVisible() ? ValueColumnId : 0) | (mCharColumnRenderer->isVisible() ? CharColumnId : 0); }
+int ByteArrayFrameRenderer::visibleByteArrayCodings() const
+{ return (mValueColumnRenderer->isVisible() ? ValueCodingId : 0) | (mCharColumnRenderer->isVisible() ? CharCodingId : 0); }
 
 int ByteArrayFrameRenderer::height() const { return mHeight; }
 int ByteArrayFrameRenderer::width() const { return mWidth; }
@@ -186,11 +186,11 @@ void ByteArrayFrameRenderer::setBufferSpacing( KPixelX byteSpacing, int noOfGrou
 }
 
 
-void ByteArrayFrameRenderer::setCoding( KHECore::KCoding coding )
+void ByteArrayFrameRenderer::setValueCoding( KHECore::ValueCoding valueCoding )
 {
     const uint oldCodingWidth = mValueColumnRenderer->byteCodec()->encodingWidth();
 
-    if( !mValueColumnRenderer->setCoding(coding) )
+    if( !mValueColumnRenderer->setValueCoding(valueCoding) )
         return;
 
     const uint newCodingWidth = mValueColumnRenderer->byteCodec()->encodingWidth();
@@ -201,7 +201,7 @@ void ByteArrayFrameRenderer::setCoding( KHECore::KCoding coding )
 }
 
 
-void ByteArrayFrameRenderer::setResizeStyle( KResizeStyle style )
+void ByteArrayFrameRenderer::setResizeStyle( ResizeStyle style )
 {
     if( mResizeStyle == style )
         return;
@@ -270,12 +270,12 @@ void ByteArrayFrameRenderer::setShowsNonprinting( bool showsNonprinting )
 }
 
 
-void ByteArrayFrameRenderer::setEncoding( KHECore::KEncoding encoding )
+void ByteArrayFrameRenderer::setCharCoding( KHECore::CharCoding charCoding )
 {
-    if( mEncoding == encoding )
+    if( mEncoding == charCoding )
         return;
 
-    KHECore::KCharCodec *newCharCodec = KHECore::KCharCodec::createCodec( encoding );
+    KHECore::KCharCodec *newCharCodec = KHECore::KCharCodec::createCodec( charCoding );
     if( newCharCodec == 0 )
         return;
 
@@ -284,16 +284,16 @@ void ByteArrayFrameRenderer::setEncoding( KHECore::KEncoding encoding )
 
     delete mCodec;
     mCodec = newCharCodec;
-    mEncoding = encoding;
+    mEncoding = charCoding;
 }
 
 // TODO: join with function above!
-void ByteArrayFrameRenderer::setEncoding( const QString &encodingName )
+void ByteArrayFrameRenderer::setCharCoding( const QString &charCodingName )
 {
-    if( encodingName == mCodec->name() )
+    if( charCodingName == mCodec->name() )
         return;
 
-    KHECore::KCharCodec *newCharCodec = KHECore::KCharCodec::createCodec( encodingName );
+    KHECore::KCharCodec *newCharCodec = KHECore::KCharCodec::createCodec( charCodingName );
     if( newCharCodec == 0 )
         return;
 
@@ -302,7 +302,7 @@ void ByteArrayFrameRenderer::setEncoding( const QString &encodingName )
 
     delete mCodec;
     mCodec = newCharCodec;
-    mEncoding = KHECore::LocalEncoding; // TODO: add encoding no to every known codec
+    mEncoding = KHECore::LocalEncoding; // TODO: add charCoding no to every known codec
 }
 
 
@@ -479,15 +479,15 @@ int ByteArrayFrameRenderer::fittingBytesPerLine() const
 
 void ByteArrayFrameRenderer::showByteArrayColumns( int newColumns )
 {
-    int columns = visibleByteArrayColumns();
+    int columns = visibleByteArrayCodings();
 
     // no changes or no column selected?
-    if( newColumns == columns || !(newColumns&( ValueColumnId | CharColumnId )) )
+    if( newColumns == columns || !(newColumns&( ValueCodingId | CharCodingId )) )
         return;
 
-    mValueColumnRenderer->setVisible( ValueColumnId & newColumns );
-    mCharColumnRenderer->setVisible( CharColumnId & newColumns );
-    mSecondBorderColumnRenderer->setVisible( newColumns == (ValueColumnId|CharColumnId) );
+    mValueColumnRenderer->setVisible( ValueCodingId & newColumns );
+    mCharColumnRenderer->setVisible( CharCodingId & newColumns );
+    mSecondBorderColumnRenderer->setVisible( newColumns == (ValueCodingId|CharCodingId) );
 
     adjustToWidth();
 }

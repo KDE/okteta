@@ -29,9 +29,8 @@
 // Qt
 #include <QtCore/QList>
 
-namespace KHEUI {
-class KByteArrayView;
-}
+class KByteArrayDisplay;
+
 namespace KHECore {
 class Bookmarkable;
 class KBookmark;
@@ -71,7 +70,7 @@ class BookmarksController : public AbstractXmlGuiController
 
   protected:
     KXMLGUIClient* mGuiClient;
-    KHEUI::KByteArrayView *mByteArrayView;
+    KByteArrayDisplay* mByteArrayDisplay;
     KHECore::KAbstractByteArrayModel *mByteArray;
     KHECore::Bookmarkable *mBookmarks;
 

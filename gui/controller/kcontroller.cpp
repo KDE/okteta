@@ -26,7 +26,7 @@
 namespace KHEUI
 {
 
-KController::KController( KByteArrayView* view, KController *parent )
+KController::KController( ByteArrayColumnView* view, KController *parent )
   : mParent( parent ), mView( view )
 {
 }

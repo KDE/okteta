@@ -27,10 +27,6 @@
 // lib
 #include <kbytearraydisplay.h>
 #include <kbytearraydocument.h>
-// Kakao gui
-#include <kabstractview.h>
-// Okteta gui
-#include <kbytearrayview.h>
 // Okteta core
 #include <kcharcodec.h>
 #include <kbytearraymodel.h>
@@ -44,7 +40,7 @@
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
 GotoOffsetController::GotoOffsetController( KXMLGUIClient* guiClient )
- : mByteArrayView( 0 ), mByteArray( 0 ), mGotoOffsetDialog( 0 )
+ : mByteArrayDisplay( 0 ), mByteArray( 0 ), mGotoOffsetDialog( 0 )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -58,17 +54,17 @@ GotoOffsetController::GotoOffsetController( KXMLGUIClient* guiClient )
 
 void GotoOffsetController::setTargetModel( AbstractModel* model )
 {
-    if( mByteArrayView ) mByteArrayView->disconnect( this );
+//     if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
 
-    KByteArrayDisplay* view = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
-    mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
-    KByteArrayDocument *document = view ? qobject_cast<KByteArrayDocument*>( view->baseModel() ) : 0;
+    mByteArrayDisplay = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
+    KByteArrayDocument* document =
+        mByteArrayDisplay ? qobject_cast<KByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
     mByteArray = document ? document->content() : 0;
 
-    const bool hasView = ( mByteArray && mByteArrayView );
+    const bool hasView = ( mByteArray && mByteArrayDisplay );
     if( hasView )
     {
-//         connect( mByteArrayView, SIGNAL( selectionChanged( bool )), SLOT( onSelectionChanged( bool )) );
+//         connect( mByteArrayDisplay, SIGNAL( selectionChanged( bool )), SLOT( onSelectionChanged( bool )) );
     }
     mGotoOffsetAction->setEnabled( hasView );
 }
@@ -80,7 +76,7 @@ void GotoOffsetController::gotoOffset()
     if( !mGotoOffsetDialog )
     {
         mGotoOffsetDialog = new KGotoOffsetDialog( 0 );
-        const int startOffset = mByteArrayView->startOffset();
+        const int startOffset = mByteArrayDisplay->startOffset();
         mGotoOffsetDialog->setRange( startOffset, startOffset+mByteArray->size()-1 );
         connect( mGotoOffsetDialog, SIGNAL(okClicked()), SLOT(onOkClicked()) );
     }
@@ -96,9 +92,9 @@ void GotoOffsetController::onOkClicked()
     const bool IsRelative = mGotoOffsetDialog->isRelative();
     const int Offset = mGotoOffsetDialog->offset();
 
-    int NewPosition = IsRelative ?  mByteArrayView->cursorPosition()+Offset :
+    int NewPosition = IsRelative ?  mByteArrayDisplay->cursorPosition()+Offset :
                       Offset < 0 ? mByteArray->size()+Offset : Offset;
-    mByteArrayView->setCursorPosition( NewPosition );
+    mByteArrayDisplay->setCursorPosition( NewPosition );
 }
 
 GotoOffsetController::~GotoOffsetController() {}

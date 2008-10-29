@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -34,7 +34,10 @@
 class KByteArrayDocument;
 class KCursorProxy;
 namespace KHEUI {
-class KByteArrayView;
+class ByteArrayColumnView;
+}
+namespace KHE {
+class KSection;
 }
 
 class KByteArrayDisplay : public KAbstractView, public KDE::If::Zoomable, public KDE::If::DataSelectable, public KDE::If::SelectedDataWriteable
@@ -69,7 +72,8 @@ class KByteArrayDisplay : public KAbstractView, public KDE::If::Zoomable, public
     virtual void selectAllData( bool selectAll );
     virtual bool hasSelectedData() const;
     virtual QMimeData *copySelectedData() const;
-    virtual const AbstractModelSelection *selection() const;
+    virtual const AbstractModelSelection* modelSelection() const;
+//     virtual void setSelection();
   Q_SIGNALS:
     virtual void hasSelectedDataChanged( bool hasSelectedData );
 
@@ -79,12 +83,64 @@ class KByteArrayDisplay : public KAbstractView, public KDE::If::Zoomable, public
     virtual void deleteSelectedData();
     virtual bool canReadData( const QMimeData *data ) const;
 
+  public: // cursor API
+    void setCursorPosition( int cursorPosition );
+    int cursorPosition() const;
+  Q_SIGNALS:
+    void cursorPositionChanged( int cursorPosition );
+
+  public: // codings
+    void setValueCoding( int valueCoding );
+    void setCharCoding( const QString& charCodingName );
+    QString charCodingName() const;
+    int valueCoding() const;
+  Q_SIGNALS:
+    void charCodecChanged( const QString& charCodingName );
+    void valueCodingChanged( int valueCoding );
+
+  public:
+    void setFocus();
+    KHE::KSection selection() const;
+    void setSelection( int start, int end );
+    void insert( const QByteArray& byteArray );
+
+  public: // overwrite
+    void setOverwriteMode( bool overwriteMode );
+    bool isOverwriteMode() const;
+    bool isOverwriteOnly() const;
+  Q_SIGNALS:
+    void overwriteModeChanged( bool overwriteMode );
+
+  public: // elements
+    void toggleOffsetColumn( bool visible );
+    void setVisibleByteArrayCodings( int columns );
+    bool offsetColumnVisible() const;
+    int visibleByteArrayCodings() const;
+
+  public: // table layout
+    void setResizeStyle( int resizeStyle );
+    int startOffset() const;
+    int firstLineOffset() const;
+    int noOfBytesPerLine() const;
+    int resizeStyle() const;
+
+  public: // layout settings
+    void setShowsNonprinting( bool showsNonprinting = true );
+    QChar substituteChar() const;
+    QChar undefinedChar() const;
+    bool showsNonprinting() const;
+
+    int byteSpacingWidth() const;
+    int noOfGroupedBytes() const;
+    int groupSpacingWidth() const;
+    int binaryGapWidth() const;
+
   protected Q_SLOTS:
     void onSelectionChange( bool selected );
 
   protected:
-    KHEUI::KByteArrayView *mWidget;
-    KByteArrayDocument *mDocument;
+    KHEUI::ByteArrayColumnView* mWidget;
+    KByteArrayDocument* mDocument;
     KByteArraySelection mSelection;
 //     KCursorProxy *mCursorProxy;
 };

@@ -37,7 +37,7 @@ namespace KHECore {
 static const char QTextCodecWhiteSpace = 63;
 
 static struct KEncodingNames {
-  KEncoding Encoding;
+  CharCoding Encoding;
   const char *Name;
 }
 const EncodingNames[] = {
@@ -142,7 +142,7 @@ const QStringList &KTextCharCodec::codecNames()
   return CodecNames;
 }
 
-QString KTextCharCodec::nameOfEncoding( KEncoding C )
+QString KTextCharCodec::nameOfEncoding( CharCoding C )
 {
   KTextCharCodec *Codec = 0;
 

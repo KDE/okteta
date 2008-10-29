@@ -22,8 +22,8 @@
 
 #include "kbytearraytextstreamencoder.h"
 
-// Okteta gui
-#include <kbytearrayview.h>
+// lib
+#include <kbytearraydisplay.h>
 // Okteta core
 #include <kabstractbytearraymodel.h>
 #include <khechar.h>
@@ -44,14 +44,14 @@ KByteArrayTextStreamEncoder::KByteArrayTextStreamEncoder()
 
 
 bool KByteArrayTextStreamEncoder::encodeDataToStream( QIODevice *device,
-                                                      const KHEUI::KByteArrayView *byteArrayView,
+                                                      const KByteArrayDisplay* byteArrayView,
                                                       const KHECore::KAbstractByteArrayModel *byteArrayModel,
                                                       const KHE::KSection &section )
 {
     bool success = true;
 
     // settings
-    mSettings.codecName = byteArrayView->encodingName();
+    mSettings.codecName = byteArrayView->charCodingName();
     mSettings.undefinedChar = byteArrayView->undefinedChar();
     mSettings.substituteChar = byteArrayView->substituteChar();
 
@@ -79,5 +79,3 @@ bool KByteArrayTextStreamEncoder::encodeDataToStream( QIODevice *device,
 }
 
 KByteArrayTextStreamEncoder::~KByteArrayTextStreamEncoder() {}
-
-#include "kbytearraytextstreamencoder.moc"

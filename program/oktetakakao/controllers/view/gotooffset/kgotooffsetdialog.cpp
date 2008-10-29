@@ -90,7 +90,7 @@ KGotoOffsetDialog::KGotoOffsetDialog( QWidget *parent )
     OffsetEdit->setMaxCount( 10 );
     OffsetEdit->setInsertPolicy( KComboBox::InsertAtTop );
     connect( OffsetEdit, SIGNAL(textChanged(const QString&)), SLOT(onOffsetChanged(const QString&)) );
-    mOffsetValidator = new KByteArrayValidator( OffsetEdit, KHECore::HexadecimalCoding );
+    mOffsetValidator = new KByteArrayValidator( OffsetEdit, KByteArrayValidator::HexadecimalCoding );
     OffsetEdit->setValidator( mOffsetValidator );
     label->setBuddy( OffsetEdit );
     const QString InputWhatsThis =
@@ -142,7 +142,7 @@ bool KGotoOffsetDialog::isRelative() const { return AtCursorCheckBox->isChecked(
 
 void KGotoOffsetDialog::onSelectorChanged( int index )
 {
-    mOffsetValidator->setCodec( index );
+    mOffsetValidator->setCodec( (KByteArrayValidator::Coding)index );
     OffsetEdit->lineEdit()->setText( mOffsetString[ index ] );
 }
 

@@ -23,7 +23,7 @@
 #include "kbytearrayedit.h"
 
 // Okteta gui
-#include <kbytearrayview.h>
+#include <bytearraycolumnview.h>
 // Okteta core
 #include <kbytearraymodel.h>
 // Qt
@@ -36,7 +36,7 @@ KByteArrayEdit::KByteArrayEdit( QWidget *parent, const QStringList & )
   : QWidget( parent )
 {
     Model = new KHECore::KByteArrayModel;
-    View = new KHEUI::KByteArrayView( Model, this );
+    View = new KHEUI::ByteArrayColumnView( Model, this );
 
     QHBoxLayout* Layout = new QHBoxLayout( this );
     Layout->addWidget( View );
@@ -91,12 +91,12 @@ void KByteArrayEdit::setCursorPosition( int Index )
 
 void KByteArrayEdit::setCoding( KCoding C )
 {
-    View->setCoding( (KHEUI::KByteArrayView::KCoding) C );
+    View->setValueCoding( (KHEUI::ByteArrayColumnView::ValueCoding) C );
 }
 
 void KByteArrayEdit::setResizeStyle( KResizeStyle Style )
 {
-    View->setResizeStyle( (KHEUI::KByteArrayView::KResizeStyle) Style );
+    View->setResizeStyle( (KHEUI::ByteArrayColumnView::ResizeStyle) Style );
 }
 int KByteArrayEdit::noOfBytesPerLine() const
 {
@@ -154,7 +154,7 @@ void KByteArrayEdit::setBinaryGapWidth( int BGW )
 
 void KByteArrayEdit::setEncoding( KEncoding C )
 {
-    View->setEncoding( (KHEUI::KByteArrayView::KEncoding)C );
+    View->setCharCoding( (KHEUI::ByteArrayColumnView::CharCoding)C );
 }
 
 void KByteArrayEdit::setShowUnprintable( bool SU )
@@ -214,7 +214,7 @@ bool KByteArrayEdit::isReadOnly() const
 
 KByteArrayEdit::KCoding KByteArrayEdit::coding() const
 {
-    return (KCoding)View->coding();
+    return (KCoding)View->valueCoding();
 }
 
 int KByteArrayEdit::byteSpacingWidth() const
@@ -249,7 +249,7 @@ QChar KByteArrayEdit::substituteChar() const
 
 KByteArrayEdit::KEncoding KByteArrayEdit::encoding() const
 {
-    return (KEncoding)View->encoding();
+    return (KEncoding)View->charCoding();
 }
 
 

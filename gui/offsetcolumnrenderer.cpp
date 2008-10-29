@@ -23,6 +23,7 @@
 #include "offsetcolumnrenderer.h"
 
 // lib
+#include "bytearraytablelayout.h"
 #include <columnsview.h>
 // Qt
 #include <QtGui/QPainter>
@@ -35,11 +36,10 @@ static const int leftOffsetMargin = 2;
 static const int rightOffsetMargin = 2;
 
 
-OffsetColumnRenderer::OffsetColumnRenderer( ColumnsView *columnsView,
-    int firstLineOffset, int delta, KOffsetFormat::KFormat format )
+OffsetColumnRenderer::OffsetColumnRenderer( ColumnsView* columnsView,
+    ByteArrayTableLayout* layout, KOffsetFormat::KFormat format )
  : ColumnRenderer( columnsView ),
-   mFirstLineOffset( firstLineOffset ),
-   mDelta( delta ),
+   mLayout( layout ),
    mDigitWidth( 0 ),
    mDigitBaseLine( 0 ),
    mFormat( KOffsetFormat::None )
@@ -47,20 +47,26 @@ OffsetColumnRenderer::OffsetColumnRenderer( ColumnsView *columnsView,
     setFormat( format );
 }
 
-void OffsetColumnRenderer::renderLine( QPainter *painter, int Line )
+void OffsetColumnRenderer::renderLine( QPainter* painter, int lineIndex )
 {
     const QWidget *viewport = columnsView()->viewport();
 
-    const QBrush &buttonBrush = viewport->palette().button();
-    painter->fillRect( 0,0, width(),lineHeight(), buttonBrush );
-
-    printFunction()( mCodedOffset,mFirstLineOffset+mDelta*Line );
+    const int offset = mLayout->firstLineOffset() + mLayout->noOfBytesPerLine() * lineIndex;
+    printFunction()( mCodedOffset, offset );
 
     const QColor &buttonColor = viewport->palette().buttonText().color();
     painter->setPen( buttonColor );
     painter->drawText( leftOffsetMargin, mDigitBaseLine, QString().append(mCodedOffset) );
 }
 
+void OffsetColumnRenderer::renderColumnBackground( QPainter* painter, const KPixelXs& _Xs, const KPixelYs& Ys )
+{
+    KPixelXs Xs( _Xs );
+    restrictToXSpan( &Xs );
+
+    const QBrush& buttonBrush = columnsView()->viewport()->palette().button();
+    painter->fillRect( Xs.start(), Ys.start(), Xs.width(), Ys.width(), buttonBrush );
+}
 
 void OffsetColumnRenderer::renderFirstLine( QPainter *painter, const KPixelXs &, int firstLineIndex )
 {
@@ -75,13 +81,15 @@ void OffsetColumnRenderer::renderNextLine( QPainter *painter )
 }
 
 
-void OffsetColumnRenderer::renderEmptyColumn( QPainter *painter, const KPixelXs &_Xs, const KPixelYs &Ys )
+void OffsetColumnRenderer::renderColumn( QPainter* painter, const KPixelXs& Xs, const KPixelYs& Ys )
 {
-    KPixelXs Xs( _Xs );
-    restrictToXSpan( &Xs );
+    renderColumnBackground( painter, Xs, Ys );
+}
 
-    const QBrush &buttonBrush = columnsView()->viewport()->palette().button();
-    painter->fillRect( Xs.start(), Ys.start(), Xs.width(), Ys.width(), buttonBrush );
+
+void OffsetColumnRenderer::renderEmptyColumn( QPainter* painter, const KPixelXs& Xs, const KPixelYs& Ys )
+{
+    renderColumnBackground( painter, Xs, Ys );
 }
 
 void OffsetColumnRenderer::setFormat( KOffsetFormat::KFormat format )

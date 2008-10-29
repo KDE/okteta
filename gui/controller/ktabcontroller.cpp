@@ -23,16 +23,14 @@
 #include "ktabcontroller.h"
 
 // lib
-#include "valuebytearraycolumnrenderer.h"
-#include "charbytearraycolumnrenderer.h"
-#include "kbytearrayview.h"
+#include "bytearraycolumnview.h"
 // Qt
 #include <QtGui/QKeyEvent>
 
 namespace KHEUI
 {
 
-KTabController::KTabController( KByteArrayView* view, KController *parent )
+KTabController::KTabController( ByteArrayColumnView* view, KController *parent )
   : KController( view, parent ),
     mTabChangesFocus( true )
 {
@@ -48,27 +46,25 @@ bool KTabController::handleKeyPress( QKeyEvent *keyEvent )
 
     if( tabPressed || backTabPressed )
     {
+        const int visibleColumns = mView->visibleByteArrayCodings();
         // are we in the char column?
-        if( mView->cursorColumn() == KByteArrayView::CharColumnId )
+        if( mView->activeCoding() == ByteArrayColumnView::CharCodingId )
         {
             // in last column we care about tab changes focus
-            if( mView->mValueColumn->isVisible() && (!mTabChangesFocus || backTabPressed) )
+            if( (visibleColumns&ByteArrayColumnView::ValueCodingId) && (!mTabChangesFocus || backTabPressed) )
             {
-                mView->setCursorColumn( KByteArrayView::ValueColumnId );
+                mView->setActiveCoding( ByteArrayColumnView::ValueCodingId );
                 keyUsed = true;
             }
         }
         // value column then
         else
         {
-            if( mView->mCharColumn->isVisible() )
+            // in last column we care about tab changes focus
+            if( (visibleColumns&ByteArrayColumnView::CharCodingId) && (!mTabChangesFocus || tabPressed) )
             {
-                // in last column we care about tab changes focus
-                if( mView->mCharColumn->isVisible() && (!mTabChangesFocus || tabPressed) )
-                {
-                    mView->setCursorColumn( KByteArrayView::CharColumnId );
-                    keyUsed = true;
-                }
+                mView->setActiveCoding( ByteArrayColumnView::CharCodingId );
+                keyUsed = true;
             }
         }
     }

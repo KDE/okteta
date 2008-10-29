@@ -24,8 +24,6 @@
 
 // lib
 #include <kbytearraydisplay.h>
-// Okteta gui
-#include <kbytearrayview.h>
 // Okteta core
 #include <khe.h>
 // KDE
@@ -36,7 +34,7 @@
 
 
 ViewStatusController::ViewStatusController( KStatusBar* statusBar )
- : mByteArrayView( 0 )
+ : mByteArrayDisplay( 0 )
 {
     mPrintFunction = KHEUI::KOffsetFormat::printFunction( KHEUI::KOffsetFormat::Hexadecimal );
 
@@ -64,28 +62,27 @@ ViewStatusController::ViewStatusController( KStatusBar* statusBar )
 
 void ViewStatusController::setTargetModel( AbstractModel* model )
 {
-    if( mByteArrayView ) mByteArrayView->disconnect( this );
+    if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
 
-    KByteArrayDisplay* view = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
-    mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView*>( view->widget() ) : 0;
+    mByteArrayDisplay = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
 
-    const bool hasView = ( mByteArrayView != 0 );
+    const bool hasView = ( mByteArrayDisplay != 0 );
     if( hasView )
     {
-        mStartOffset = mByteArrayView->startOffset();
+        mStartOffset = mByteArrayDisplay->startOffset();
 
-        onCursorPositionChanged( mByteArrayView->cursorPosition() );
-        onOverwriteModeChanged( mByteArrayView->isOverwriteMode() );
-        onValueCodingChanged( (int)mByteArrayView->coding() );
-        onCharCodecChanged( mByteArrayView->encodingName() );
-        onReadOnlyChanged( mByteArrayView->isReadOnly() );
+        onCursorPositionChanged( mByteArrayDisplay->cursorPosition() );
+        onOverwriteModeChanged( mByteArrayDisplay->isOverwriteMode() );
+        onValueCodingChanged( (int)mByteArrayDisplay->valueCoding() );
+        onCharCodecChanged( mByteArrayDisplay->charCodingName() );
+        onReadOnlyChanged( mByteArrayDisplay->isReadOnly() );
 
-        connect( mByteArrayView, SIGNAL(cursorPositionChanged( int )), SLOT(onCursorPositionChanged( int )) );
-        connect( mByteArrayView, SIGNAL(overwriteModeChanged( bool )), SLOT(onOverwriteModeChanged( bool )) );
-        connect( mByteArrayView, SIGNAL(valueCodingChanged( int )), SLOT(onValueCodingChanged( int )) );
-        connect( mByteArrayView, SIGNAL(charCodecChanged( const QString& )),
+        connect( mByteArrayDisplay, SIGNAL(cursorPositionChanged( int )), SLOT(onCursorPositionChanged( int )) );
+        connect( mByteArrayDisplay, SIGNAL(overwriteModeChanged( bool )), SLOT(onOverwriteModeChanged( bool )) );
+        connect( mByteArrayDisplay, SIGNAL(valueCodingChanged( int )), SLOT(onValueCodingChanged( int )) );
+        connect( mByteArrayDisplay, SIGNAL(charCodecChanged( const QString& )),
             SLOT(onCharCodecChanged( const QString& )) );
-        connect( mByteArrayView, SIGNAL(readOnlyChanged( bool )), SLOT(onReadOnlyChanged( bool )) );
+        connect( mByteArrayDisplay, SIGNAL(readOnlyChanged( bool )), SLOT(onReadOnlyChanged( bool )) );
     }
     else
     {
@@ -128,16 +125,16 @@ void ViewStatusController::onOverwriteModeChanged( bool isOverwrite )
     mOverwriteModeLabel->setToolTip( overwriteModeToolTip );
 }
 
-void ViewStatusController::onValueCodingChanged( int coding )
+void ViewStatusController::onValueCodingChanged( int valueCoding )
 {
     const QString valueCodingName =
-         coding == KHECore::HexadecimalCoding ?
+         valueCoding == KHECore::HexadecimalCoding ?
             i18nc("@info:status encoding of the bytes as values in the hexadecimal format","Hexadecimal" ) :
-         coding == KHECore::DecimalCoding ?
+         valueCoding == KHECore::DecimalCoding ?
             i18nc("@info:status encoding of the bytes as values in the decimal format",    "Decimal") :
-         coding == KHECore::OctalCoding ?
+         valueCoding == KHECore::OctalCoding ?
             i18nc("@info:status encoding of the bytes as values in the octal format",      "Octal" ) :
-         coding == KHECore::BinaryCoding ?
+         valueCoding == KHECore::BinaryCoding ?
             i18nc("@info:status encoding of the bytes as values in the binary format",     "Binary") :
             QString();
 

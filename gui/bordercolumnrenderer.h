@@ -43,12 +43,11 @@ class BorderColumnRenderer : public ColumnRenderer
     virtual ~BorderColumnRenderer();
 
   public: // ColumnRenderer-API
-    virtual void renderFirstLine( QPainter *painter, const KPixelXs &Xs, int firstLineIndex );
-    virtual void renderNextLine( QPainter *painter );
+    virtual void renderColumn( QPainter* painter, const KPixelXs& Xs, const KPixelYs& Ys );
     virtual void renderEmptyColumn( QPainter *painter, const KPixelXs &Xs, const KPixelYs &Ys );
 
   protected:
-   virtual void renderLine( QPainter *painter );
+    void renderBorderLine( QPainter* painter, const KPixelXs& Xs, const KPixelYs& Ys );
 
   protected:
     /** true if we are between two columns and should show a line */

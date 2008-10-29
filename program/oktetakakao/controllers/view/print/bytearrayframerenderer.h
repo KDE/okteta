@@ -45,12 +45,12 @@ class KAbstractByteArrayModel;
 class KCharCodec;
 }
 
-enum KResizeStyle { NoResize=0, LockGrouping=1, FullSizeUsage=2, MaxResizeStyleId=0xFF };
+enum ResizeStyle { NoResize=0, LockGrouping=1, FullSizeUsage=2, MaxResizeStyleId=0xFF };
 
 class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
 {
   public:
-    enum KDataColumnId { ValueColumnId=1, CharColumnId=2 };
+    enum KDataColumnId { ValueCodingId=1, CharCodingId=2 };
 
   public:
     ByteArrayFrameRenderer();
@@ -82,8 +82,8 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
     int noOfBytesPerLine() const;
     int firstLineOffset() const;
     int startOffset() const;
-    KResizeStyle resizeStyle() const;
-    KHECore::KCoding coding() const;
+    ResizeStyle resizeStyle() const;
+    KHECore::ValueCoding valueCoding() const;
     KPixelX byteSpacingWidth() const;
     int noOfGroupedBytes() const;
     KPixelX groupSpacingWidth() const;
@@ -91,11 +91,11 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
     bool showsNonprinting() const;
     QChar substituteChar() const;
     QChar undefinedChar() const;
-    KHECore::KEncoding encoding() const;
-    const QString &encodingName() const;
+    KHECore::CharCoding charCoding() const;
+    const QString &charCodingName() const;
 
     bool offsetColumnVisible() const;
-    int visibleByteArrayColumns() const;
+    int visibleByteArrayCodings() const;
 
   public:
     void setByteArrayModel( const KHECore::KAbstractByteArrayModel *byteArrayModel, int offset = 0, int length = -1 );
@@ -105,8 +105,8 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
     void setFirstLineOffset( int firstLineOffset );
     void setStartOffset( int startOffset );
     void setBufferSpacing( KPixelX byteSpacing, int noOfGroupedBytes, KPixelX groupSpacing );
-    void setCoding( KHECore::KCoding coding );
-    void setResizeStyle( KResizeStyle style );
+    void setValueCoding( KHECore::ValueCoding valueCoding );
+    void setResizeStyle( ResizeStyle style );
     void setNoOfBytesPerLine( int noOfBytesPerLine );
     void setByteSpacingWidth( KPixelX byteSpacingWidth );
     void setNoOfGroupedBytes( int noOfGroupedBytes );
@@ -115,8 +115,8 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
     void setSubstituteChar( QChar substituteChar );
     void setUndefinedChar( QChar undefinedChar );
     void setShowsNonprinting( bool showsNonprinting );
-    void setEncoding( KHECore::KEncoding encoding );
-    void setEncoding( const QString &encodingName );
+    void setCharCoding( KHECore::CharCoding charCoding );
+    void setCharCoding( const QString &charCodingName );
     void showByteArrayColumns( int CCs );
     void showOffsetColumn( bool visible );
 
@@ -155,9 +155,9 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
     KHECore::KCharCodec *mCodec;
 
   protected: // parameters
-    KResizeStyle mResizeStyle;
+    ResizeStyle mResizeStyle;
     /** */
-    KHECore::KEncoding mEncoding;
+    KHECore::CharCoding mEncoding;
 };
 
 #endif

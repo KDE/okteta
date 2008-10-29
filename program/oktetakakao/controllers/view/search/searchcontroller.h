@@ -29,15 +29,13 @@
 // Kakao gui
 #include <abstractxmlguicontroller.h>
 
-class KXmlGuiWindow;
-class KAction;
-namespace KHEUI {
-class KByteArrayView;
-}
+class KSearchDialog;
+class KByteArrayDisplay;
 namespace KHECore {
 class KAbstractByteArrayModel;
 }
-class KSearchDialog;
+class KXmlGuiWindow;
+class KAction;
 
 
 class SearchController : public AbstractXmlGuiController
@@ -65,7 +63,8 @@ class SearchController : public AbstractXmlGuiController
 
   protected:
     KXmlGuiWindow *MainWindow;
-    KHEUI::KByteArrayView *ViewWidget;
+
+    KByteArrayDisplay* mByteArrayDisplay;
     KHECore::KAbstractByteArrayModel *ByteArray;
 
     KAction *mFindAction;

@@ -24,10 +24,6 @@
 
 // lib
 #include <kbytearraydisplay.h>
-// Kakao gui
-#include <abstractmodel.h>
-// Okteta gui
-#include <kbytearrayview.h>
 // KDE
 #include <KXmlGuiWindow>
 #include <KLocale>
@@ -36,7 +32,7 @@
 
 
 OverwriteModeController::OverwriteModeController( KXMLGUIClient* guiClient )
- : mByteArrayView( 0 )
+ : mByteArrayDisplay( 0 )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -54,26 +50,25 @@ OverwriteModeController::OverwriteModeController( KXMLGUIClient* guiClient )
 
 void OverwriteModeController::setTargetModel( AbstractModel* model )
 {
-//     if( mByteArrayView ) mByteArrayView->disconnect( mSetOverWriteAction );
+//     if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( mSetOverWriteAction );
 
-    KByteArrayDisplay* view = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
-    mByteArrayView = view ? qobject_cast<KHEUI::KByteArrayView *>( view->widget() ) : 0;
+    mByteArrayDisplay = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
 
-    if( mByteArrayView )
+    if( mByteArrayDisplay )
     {
-        mSetOverWriteAction->setChecked( mByteArrayView->isOverwriteMode() );
+        mSetOverWriteAction->setChecked( mByteArrayDisplay->isOverwriteMode() );
 
-//         connect( mByteArrayView, SIGNAL(overwriteModeChanged( bool )),
+//         connect( mByteArrayDisplay, SIGNAL(overwriteModeChanged( bool )),
 //                  mSetOverWriteAction, SLOT(setChecked( bool )) );
         // TODO: catch if isOverwriteOnly changes
     }
 
-    const bool canInsert = mByteArrayView && !mByteArrayView->isOverwriteOnly();
+    const bool canInsert = mByteArrayDisplay && !mByteArrayDisplay->isOverwriteOnly();
     mSetOverWriteAction->setEnabled( canInsert );
 }
 
 
 void OverwriteModeController::setOverWrite( bool isOverWrite )
 {
-    mByteArrayView->setOverwriteMode( isOverWrite );
+    mByteArrayDisplay->setOverwriteMode( isOverWrite );
 }

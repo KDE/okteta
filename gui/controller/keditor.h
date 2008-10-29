@@ -31,7 +31,7 @@
 namespace KHEUI
 {
 
-class KDataCursor;
+class ByteArrayTableCursor;
 
 class KEditor : public KController
 {
@@ -39,7 +39,7 @@ class KEditor : public KController
     enum KEditAction { CharDelete, WordDelete, CharBackspace, WordBackspace };
 
   protected:
-    KEditor( KDataCursor *dataCursor, KByteArrayView *view, KController *parent );
+    KEditor( ByteArrayTableCursor* cursor, ByteArrayColumnView* view, KController* parent );
   public:
     virtual ~KEditor();
 
@@ -51,7 +51,7 @@ class KEditor : public KController
     void doEditAction( KEditAction Action );
 
   protected:
-    KDataCursor *mDataCursor;
+    ByteArrayTableCursor* mCursor;
 };
 
 }

@@ -29,12 +29,12 @@ class QKeyEvent;
 namespace KHEUI
 {
 
-class KByteArrayView;
+class ByteArrayColumnView;
 
 class KController
 {
   protected:
-    KController( KByteArrayView *view, KController *parent );
+    KController( ByteArrayColumnView *view, KController *parent );
   public:
     virtual ~KController();
 
@@ -43,7 +43,7 @@ class KController
 
   protected:
     KController *mParent;
-    KByteArrayView *mView;
+    ByteArrayColumnView *mView;
 };
 
 }

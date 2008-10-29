@@ -32,10 +32,7 @@
 // Qt
 #include <QtCore/QVector>
 
-class KAbstractView;
-namespace KHEUI {
-class KByteArrayView;
-}
+class KByteArrayDisplay;
 namespace KHECore {
 class KCharCodec;
 class KAbstractByteArrayModel;
@@ -96,7 +93,7 @@ class PODDecoderTool : public AbstractTool
 //     void onUndefinedCharChanged( const QChar& undefinedChar );
 
   protected: // source
-    KHEUI::KByteArrayView* mByteArrayView;
+    KByteArrayDisplay* mByteArrayDisplay;
     KHECore::KAbstractByteArrayModel* mByteArrayModel;
     int mCursorIndex;
     KHECore::KCharCodec* mCharCodec;
