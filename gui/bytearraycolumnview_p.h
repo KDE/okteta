@@ -30,26 +30,6 @@
 #include "valuebytearraycolumnrenderer.h"
 #include "charbytearraycolumnrenderer.h"
 #include "offsetcolumnrenderer.h"
-// Okteta core
-// #include "khe.h"
-#include <ksection.h>
-#include <ksectionlist.h>
-// Qt
-#include <QtGui/QClipboard>
-#include <QtGui/QDragEnterEvent>
-#include <QtGui/QDragMoveEvent>
-#include <QtGui/QDragLeaveEvent>
-#include <QtGui/QDropEvent>
-#include <QtCore/QList>
-
-
-namespace KHECore {
-class KBookmark;
-}
-
-namespace KHE {
-class ArrayChangeMetricsList;
-}
 
 class QTimer;
 
@@ -64,15 +44,10 @@ class Dropper;
 
 class ZoomWheelController;
 
-class CharByteArrayColumnRenderer;
-class ValueByteArrayColumnRenderer;
-class AbstractByteArrayColumnRenderer;
-class OffsetColumnRenderer;
 class BorderColumnRenderer;
 
 class KCursor;
 
-class CoordRange;
 class Coord;
 
 

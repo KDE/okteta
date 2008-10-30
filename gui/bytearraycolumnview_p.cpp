@@ -38,7 +38,6 @@
 #include <valuecodec.h>
 #include <kcharcodec.h>
 #include <kwordbufferservice.h>
-// #include <arraychange.h>
 // KDE
 #include <KGlobalSettings>
 // Qt
@@ -46,12 +45,15 @@
 #include <QtGui/QStyle>
 #include <QtGui/QPainter>
 #include <QtGui/QCursor>
+#include <QtGui/QClipboard>
 #include <QtGui/QScrollBar>
 #include <QtGui/QMouseEvent>
+#include <QtGui/QDragEnterEvent>
+#include <QtGui/QDragMoveEvent>
+#include <QtGui/QDragLeaveEvent>
+#include <QtGui/QDropEvent>
 #include <QtCore/QListIterator>
 #include <QtCore/QTimer>
-// C
-#include <stdlib.h>
 
 
 namespace KHEUI
