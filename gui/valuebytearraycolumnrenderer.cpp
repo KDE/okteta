@@ -24,9 +24,6 @@
 
 // lib
 #include "columnsview.h"
-#include "bytearraytableranges.h"
-#include "bytearraytablecursor.h"
-#include "bytearraytablelayout.h"
 #include "helper.h"
 // Okteta core
 #include <valuecodec.h>

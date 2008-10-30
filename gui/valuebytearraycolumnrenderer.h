@@ -34,9 +34,6 @@ class ValueCodec;
 namespace KHEUI
 {
 
-class KDataRanges;
-
-
 /** buffer column which displays the numerical values of the bytes
   *
   *@author Friedrich W. H. Kossebau

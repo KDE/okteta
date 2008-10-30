@@ -22,18 +22,8 @@
 
 #include "charbytearraycolumnrenderer.h"
 
-// lib
-#include "bytearraytableranges.h"
-#include "bytearraytablecursor.h"
-#include "bytearraytablelayout.h"
-// KDE
-#include <kcharsets.h>
-#include <klocale.h>
-#include <kglobal.h>
 // Qt
 #include <QtGui/QPainter>
-// C
-#include <ctype.h>
 
 
 namespace KHEUI

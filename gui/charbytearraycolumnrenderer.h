@@ -26,11 +26,6 @@
 
 // lib
 #include "abstractbytearraycolumnrenderer.h"
-// Qt
-#include <QtCore/QString>
-
-class QPainter;
-class QColor;
 
 
 namespace KHEUI
