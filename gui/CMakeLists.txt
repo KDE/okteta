@@ -29,6 +29,12 @@ set( libabstractbytearrayview_SRCS
   abstractbytearrayview.cpp
 )
 
+set( bytearrayrowview_SRCS
+  bytearrayrowcolumnrenderer.cpp
+  bytearrayrowview_p.cpp
+  bytearrayrowview.cpp
+)
+
 set( bytearraycolumnview_SRCS
   bytearraycolumnview_p.cpp
   bytearraycolumnview.cpp
@@ -50,6 +56,7 @@ set( oktetagui_LIB_SRCS
   kcursor.cpp
   coordrangelist.cpp
   ${bytearraycolumnview_SRCS}
+  ${bytearrayrowview_SRCS}
 )
 
 kde4_add_library( oktetagui  SHARED ${oktetagui_LIB_SRCS} )
