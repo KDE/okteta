@@ -23,7 +23,7 @@
 #include "zoomwheelcontroller.h"
 
 // lib
-#include "bytearraycolumnview.h"
+#include <abstractbytearrayview.h>
 // Qt
 #include <QtGui/QWheelEvent>
 
@@ -31,8 +31,9 @@
 namespace KHEUI
 {
 
-ZoomWheelController::ZoomWheelController( ByteArrayColumnView* view, AbstractWheelController* parent )
-  : AbstractWheelController( view, parent )
+ZoomWheelController::ZoomWheelController( AbstractByteArrayView* view, AbstractWheelController* parent )
+  : AbstractWheelController( parent ),
+    mView( view )
 {
 }
 

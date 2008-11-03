@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2004 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2004,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -30,6 +30,8 @@
 
 namespace KHEUI
 {
+class AbstractByteArrayView;
+
 
 class KNavigator : public KController
 {
@@ -38,14 +40,17 @@ class KNavigator : public KController
                        MoveUp, MovePgUp, MoveDown, MovePgDown,
                        MoveLineStart, MoveHome, MoveLineEnd, MoveEnd };
   public:
-    KNavigator( ByteArrayColumnView *view, KController *parent );
+    KNavigator( AbstractByteArrayView* view, KController* parent );
 
   public: // KController API
-    virtual bool handleKeyPress( QKeyEvent *keyEvent );
+    virtual bool handleKeyPress( QKeyEvent* keyEvent );
 
   protected:
     /** moves the cursor according to the action, handles all drawing */
     void moveCursor( KMoveAction Action, bool Select );
+
+  protected:
+    AbstractByteArrayView* mView;
 };
 
 }

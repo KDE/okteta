@@ -200,7 +200,7 @@ int KByteArrayDisplay::resizeStyle() const
 
 int KByteArrayDisplay::visibleByteArrayCodings() const
 {
-    return (int)mWidget->visibleByteArrayCodings();
+    return (int)mWidget->visibleCodings();
 }
 
 bool KByteArrayDisplay::isOverwriteMode() const
@@ -225,7 +225,7 @@ void KByteArrayDisplay::setResizeStyle( int resizeStyle )
 
 void KByteArrayDisplay::setVisibleByteArrayCodings( int visibleColumns )
 {
-    mWidget->setVisibleByteArrayCodings( visibleColumns );
+    mWidget->setVisibleCodings( visibleColumns );
 }
 
 QChar KByteArrayDisplay::substituteChar() const

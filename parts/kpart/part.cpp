@@ -148,7 +148,7 @@ void OktetaPart::fitActionSettings()
 
     resizeStyleAction->setCurrentItem( (int)view->resizeStyle() );
 
-    toggleColumnsAction->setCurrentItem( (int)view->visibleByteArrayCodings()-1 );
+    toggleColumnsAction->setCurrentItem( (int)view->visibleCodings()-1 );
 }
 
 
@@ -208,9 +208,7 @@ void OktetaPart::onSetEncoding( int Encoding )
 
 void OktetaPart::onToggleValueCharColumns( int VisibleColumns)
 {
-    view->setVisibleByteArrayCodings( VisibleColumns+1 );
+    view->setVisibleCodings( VisibleColumns+1 );
 }
 
 OktetaPart::~OktetaPart() {}
-
-#include "part.moc"

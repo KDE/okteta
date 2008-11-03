@@ -28,6 +28,8 @@
 #include "bytearraytablecursor.h"
 #include "bytearraytableranges.h"
 #include "bytearraytablelayout.h"
+#include "controller/kvalueeditor.h"
+#include "controller/ktabcontroller.h"
 // Okteta core
 #include <kabstractbytearraymodel.h>
 #include <kcharcodec.h>
@@ -37,6 +39,13 @@
 
 namespace KHEUI
 {
+class KNavigator;
+class KCharEditor;
+
+class Dropper;
+
+class ZoomWheelController;
+
 
 class AbstractByteArrayViewPrivate
 {
@@ -66,6 +75,8 @@ class AbstractByteArrayViewPrivate
 
     AbstractByteArrayView::ResizeStyle resizeStyle() const;
 
+    bool tabChangesFocus() const;
+
     bool hasSelectedData() const;
     KHE::KSection selection() const;
     QByteArray selectedData() const;
@@ -73,6 +84,9 @@ class AbstractByteArrayViewPrivate
 
     KController* controller() const;
     AbstractWheelController* wheelController() const;
+
+    KValueEditor* valueEditor() const;
+    Dropper* dropper() const;
 
     ByteArrayTableLayout* layout() const;
     ByteArrayTableCursor* tableCursor() const;
@@ -95,6 +109,8 @@ class AbstractByteArrayViewPrivate
     void setReadOnly( bool readOnly );
     void setOverwriteOnly( bool overwriteOnly );
     void setOverwriteMode( bool overwriteMode );
+
+  public: // setting parameters
     void setValueCoding( AbstractByteArrayView::ValueCoding valueCoding );
     void setCharCoding( AbstractByteArrayView::CharCoding charCoding );
     void setCharCoding( const QString& charCodingName );
@@ -103,6 +119,8 @@ class AbstractByteArrayViewPrivate
     void setStartOffset( int startOffset );
     void setFirstLineOffset( int firstLineOffset );
     void setModified( bool modified );
+
+    void setTabChangesFocus( bool tabChangesFocus = true );
 
   public: // zooming
     void zoomIn( int pointInc );
@@ -123,11 +141,16 @@ class AbstractByteArrayViewPrivate
 
   public: // API to be implemented
     virtual void ensureCursorVisible() = 0;
+    virtual void placeCursor( const QPoint& point ) = 0;
 
   public: // events
     void resizeEvent( QResizeEvent* resizeEvent );
     void focusInEvent( QFocusEvent* focusEvent );
     void focusOutEvent( QFocusEvent* focusEvent );
+    void dragEnterEvent( QDragEnterEvent* dragEnterEvent );
+    void dragMoveEvent( QDragMoveEvent* dragMoveEvent );
+    void dragLeaveEvent( QDragLeaveEvent* dragLeaveEvent );
+    void dropEvent( QDropEvent* dropEvent );
 
   public: // slots
     void onContentsChanged( const KHE::ArrayChangeMetricsList& changeList );
@@ -140,9 +163,12 @@ class AbstractByteArrayViewPrivate
       */
     void updateViewByWidth();
     void adjustLayoutToSize();
+    void adaptController();
+    void finishByteEditor();
 
   protected:
     bool hasChanged( const CoordRange& visibleRange, CoordRange* changedRange ) const;
+    bool isByteEditorActive() const;
 
   protected: // 
     void removeSelectedData();
@@ -162,12 +188,13 @@ class AbstractByteArrayViewPrivate
     virtual void pauseCursor() = 0;
     virtual void unpauseCursor() = 0;
 
-    virtual void finishByteEditor() = 0;
+    virtual void setActiveCoding( AbstractByteArrayView::CodingTypeId codingId ) = 0;
+    virtual void setVisibleCodings( int visibleCodings ) = 0;
 
   protected: // API to be implemented
-    virtual bool isByteEditorActive() const = 0;
+    virtual AbstractByteArrayView::CodingTypeId activeCoding() const = 0;
+    virtual int visibleCodings() const = 0;
     virtual int fittingBytesPerLine() const = 0;
-    virtual void adaptController() = 0;
     /** recalcs all dependant values with the actual NoOfBytesPerLine  */
     virtual void adjustToLayoutNoOfBytesPerLine() = 0;
     /** repaints all the parts that are signed as changed */
@@ -187,6 +214,21 @@ class AbstractByteArrayViewPrivate
     /** */
     ByteArrayTableRanges* mTableRanges;
 
+  protected:
+    /** */
+    KTabController* mTabController;
+    /** */
+    KNavigator* mNavigator;
+    /** */
+    KValueEditor* mValueEditor;
+    /** */
+    KCharEditor* mCharEditor;
+
+    Dropper* mDropper;
+
+    ZoomWheelController* mZoomWheelController;
+
+  protected:
     /** flag whether the widget is set to readonly. Cannot override the databuffer's setting, of course. */
     bool mReadOnly:1;
     /** flag if only overwrite is allowed */
@@ -255,6 +297,19 @@ inline int AbstractByteArrayViewPrivate::startOffset()      const { return mTabl
 inline KHE::KSection AbstractByteArrayViewPrivate::selection() const { return mTableRanges->selection(); }
 inline bool AbstractByteArrayViewPrivate::hasSelectedData()    const { return mTableRanges->hasSelection(); }
 
+inline bool AbstractByteArrayViewPrivate::tabChangesFocus()      const { return mTabController->tabChangesFocus(); }
+inline bool AbstractByteArrayViewPrivate::isByteEditorActive()   const { return mValueEditor->isInEditMode(); }
+inline KValueEditor* AbstractByteArrayViewPrivate::valueEditor() const { return mValueEditor; }
+inline Dropper* AbstractByteArrayViewPrivate::dropper()          const { return mDropper; }
+
+inline void AbstractByteArrayViewPrivate::finishByteEditor()
+{
+    mValueEditor->finishEdit();
+}
+inline void AbstractByteArrayViewPrivate::setTabChangesFocus( bool tabChangesFocus )
+{
+    mTabController->setTabChangesFocus( tabChangesFocus );
+}
 
 inline void AbstractByteArrayViewPrivate::setController( KController* controller ) { mController = controller; }
 inline void AbstractByteArrayViewPrivate::setWheelController( AbstractWheelController* wheelController ) { mWheelController = wheelController; }

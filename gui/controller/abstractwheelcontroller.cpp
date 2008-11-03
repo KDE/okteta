@@ -26,8 +26,8 @@
 namespace KHEUI
 {
 
-AbstractWheelController::AbstractWheelController( ByteArrayColumnView* view, AbstractWheelController* parent )
-  : mParent( parent ), mView( view )
+AbstractWheelController::AbstractWheelController( AbstractWheelController* parent )
+  : mParent( parent )
 {
 }
 

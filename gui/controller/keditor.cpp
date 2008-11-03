@@ -25,7 +25,7 @@
 // lib
 #include <bytearraytablelayout.h>
 #include <bytearraytablecursor.h>
-#include <bytearraycolumnview.h>
+#include <abstractbytearrayview.h>
 // Okteta core
 #include <kabstractbytearraymodel.h>
 #include <kwordbufferservice.h>
@@ -33,16 +33,17 @@
 #include <QtGui/QKeyEvent>
 
 
-namespace KHEUI {
+namespace KHEUI
+{
 
-KEditor::KEditor( ByteArrayTableCursor* cursor, ByteArrayColumnView* view, KController *parent )
-  : KController( view, parent ),
-  mCursor( cursor )
+KEditor::KEditor( ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController *parent )
+  : KController( parent ),
+  mCursor( cursor ),  mView( view )
 {
 }
 
 
-bool KEditor::handleKeyPress( QKeyEvent *keyEvent )
+bool KEditor::handleKeyPress( QKeyEvent* keyEvent )
 {
     const bool shiftPressed =   keyEvent->modifiers() & Qt::SHIFT;
     const bool controlPressed = keyEvent->modifiers() & Qt::CTRL;

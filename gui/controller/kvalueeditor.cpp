@@ -23,9 +23,8 @@
 #include "kvalueeditor.h"
 
 // lib
-#include "valuebytearraycolumnrenderer.h"
-#include "bytearraytablecursor.h"
-#include "bytearraycolumnview.h"
+#include <bytearraytablecursor.h>
+#include <abstractbytearrayview.h>
 // Okteta core
 #include <kabstractbytearraymodel.h>
 #include <changesdescribable.h>
@@ -39,7 +38,7 @@
 namespace KHEUI
 {
 
-KValueEditor::KValueEditor( ByteArrayTableCursor* cursor, ByteArrayColumnView* view, KController* parent )
+KValueEditor::KValueEditor( ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent )
   : KEditor( cursor, view, parent ),
   mInEditMode( false ),
   mEditModeByInsert( false )
@@ -175,7 +174,7 @@ bool KValueEditor::handleKeyPress( QKeyEvent *keyEvent )
 
                                 mCursor->gotoIndex(index);
                                 mView->ensureCursorVisible();
-                                mView->updateCursors();
+//                                 mView->updateCursors();
                                 emit mView->cursorPositionChanged( mCursor->realIndex() );
                             }
                             else
@@ -280,7 +279,7 @@ void KValueEditor::doValueEditAction( KValueEditAction Action, int input )
         mView->byteArrayModel()->replace( mCursor->index(), 1, (char*)&mEditValue, 1 );
     }
 
-    mView->updateCursors();
+//     mView->updateCursors();
 
     if( !stayInEditMode )
     {

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2004 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2004,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -26,12 +26,12 @@
 namespace KHEUI
 {
 
-KController::KController( ByteArrayColumnView* view, KController *parent )
-  : mParent( parent ), mView( view )
+KController::KController( KController *parent )
+  : mParent( parent )
 {
 }
 
-bool KController::handleKeyPress( QKeyEvent *keyEvent )
+bool KController::handleKeyPress( QKeyEvent* keyEvent )
 {
     return mParent ? mParent->handleKeyPress( keyEvent ) : false;
 }

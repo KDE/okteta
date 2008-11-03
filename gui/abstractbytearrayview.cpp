@@ -268,6 +268,40 @@ void AbstractByteArrayView::setReadOnly( bool readOnly )
     d->setReadOnly( readOnly );
 }
 
+int AbstractByteArrayView::visibleCodings() const
+{
+    Q_D( const AbstractByteArrayView );
+    return d->visibleCodings();
+}
+bool AbstractByteArrayView::tabChangesFocus() const
+{
+    Q_D( const AbstractByteArrayView );
+    return d->tabChangesFocus();
+}
+AbstractByteArrayView::CodingTypeId AbstractByteArrayView::activeCoding() const
+{
+    Q_D( const AbstractByteArrayView );
+    return d->activeCoding();
+}
+
+void AbstractByteArrayView::setVisibleCodings( int visibleByteArrayCodings )
+{
+    Q_D( AbstractByteArrayView );
+    d->setVisibleCodings( visibleByteArrayCodings );
+}
+void AbstractByteArrayView::setActiveCoding( CodingTypeId codingId )
+{
+    Q_D( AbstractByteArrayView );
+    d->setActiveCoding( codingId );
+}
+
+void AbstractByteArrayView::setTabChangesFocus( bool tabChangesFocus )
+{
+    Q_D( AbstractByteArrayView );
+    d->setTabChangesFocus( tabChangesFocus );
+}
+
+
 void AbstractByteArrayView::selectAll( bool select )
 {
     Q_D( AbstractByteArrayView );
@@ -290,6 +324,45 @@ void AbstractByteArrayView::setSelection( int start, int end )
 {
     Q_D( AbstractByteArrayView );
     d->setSelection( start, end );
+}
+
+
+void AbstractByteArrayView::ensureCursorVisible()
+{
+    Q_D( AbstractByteArrayView );
+    d->ensureCursorVisible();
+}
+
+
+void AbstractByteArrayView::placeCursor( const QPoint& point )
+{
+    Q_D( AbstractByteArrayView );
+    d->placeCursor( point );
+}
+
+
+void AbstractByteArrayView::startCursor()
+{
+    Q_D( AbstractByteArrayView );
+    d->startCursor();
+}
+
+void AbstractByteArrayView::unpauseCursor()
+{
+    Q_D( AbstractByteArrayView );
+    d->unpauseCursor();
+}
+
+void AbstractByteArrayView::stopCursor()
+{
+    Q_D( AbstractByteArrayView );
+    d->stopCursor();
+}
+
+void AbstractByteArrayView::pauseCursor()
+{
+    Q_D( AbstractByteArrayView );
+    d->pauseCursor();
 }
 
 void AbstractByteArrayView::zoomIn( int pointInc )
@@ -343,6 +416,29 @@ QSize AbstractByteArrayView::sizeHint() const
 {
     return QSize( columnsWidth(), columnsHeight() );
 }
+
+void AbstractByteArrayView::finishByteEdit()
+{
+    Q_D( AbstractByteArrayView );
+    d->finishByteEditor();
+}
+
+void AbstractByteArrayView::emitSelectionSignals()
+{
+    Q_D( AbstractByteArrayView );
+
+    const bool hasSelection = tableRanges()->hasSelection();
+    if( !d->isOverwriteMode() ) emit cutAvailable( hasSelection );
+    emit copyAvailable( hasSelection );
+    emit selectionChanged( hasSelection );
+}
+
+void AbstractByteArrayView::updateChanged()
+{
+    Q_D( AbstractByteArrayView );
+    d->updateChanged();
+}
+
 
 bool AbstractByteArrayView::event( QEvent* event )
 {
@@ -399,6 +495,27 @@ void AbstractByteArrayView::wheelEvent( QWheelEvent* wheelEvent )
     Q_D( AbstractByteArrayView );
     if( !d->wheelController()->handleWheelEvent(wheelEvent) )
         ColumnsView::wheelEvent( wheelEvent );
+}
+
+void AbstractByteArrayView::dragEnterEvent( QDragEnterEvent* dragEnterEvent )
+{
+    Q_D( AbstractByteArrayView );
+    d->dragEnterEvent( dragEnterEvent );
+}
+void AbstractByteArrayView::dragMoveEvent( QDragMoveEvent* dragMoveEvent )
+{
+    Q_D( AbstractByteArrayView );
+    d->dragMoveEvent( dragMoveEvent );
+}
+void AbstractByteArrayView::dragLeaveEvent( QDragLeaveEvent* dragLeaveEvent )
+{
+    Q_D( AbstractByteArrayView );
+    d->dragLeaveEvent( dragLeaveEvent );
+}
+void AbstractByteArrayView::dropEvent( QDropEvent* dropEvent )
+{
+    Q_D( AbstractByteArrayView );
+    d->dropEvent( dropEvent );
 }
 
 AbstractByteArrayView::~AbstractByteArrayView()

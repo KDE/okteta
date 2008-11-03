@@ -29,17 +29,20 @@
 
 namespace KHEUI
 {
+class AbstractByteArrayView;
+
 
 class ZoomWheelController : public AbstractWheelController
 {
   public:
-    ZoomWheelController( ByteArrayColumnView* view, AbstractWheelController* parent );
+    ZoomWheelController( AbstractByteArrayView* view, AbstractWheelController* parent );
     virtual ~ZoomWheelController();
 
   public: // AbstractWheelController API
     virtual bool handleWheelEvent( QWheelEvent* wheelEvent );
 
   protected:
+    AbstractByteArrayView* mView;
 };
 
 }

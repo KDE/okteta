@@ -23,11 +23,10 @@
 #include "dropper.h"
 
 // lib
-#include "kvalueeditor.h"
-#include <bytearraycolumnview.h>
 #include <bytearraytableranges.h>
 #include <bytearraytablecursor.h>
 #include <bytearraytablelayout.h>
+#include <abstractbytearrayview.h>
 // Okteta core
 #include <kabstractbytearraymodel.h>
 // Qt
@@ -44,7 +43,7 @@ namespace KHEUI
 static const char OctetStreamFormatName[] = "application/octet-stream";
 
 
-Dropper::Dropper( ByteArrayColumnView* view )
+Dropper::Dropper( AbstractByteArrayView* view )
   : mByteArrayView( view ), mIsActive( false )
 {
 }
@@ -84,7 +83,7 @@ bool Dropper::handleDragMoveEvent( QDragMoveEvent* dragMoveEvent )
         // let text cursor follow mouse
         mByteArrayView->pauseCursor();
        //TODO: just for following skip the value edit, remember we are and get back
-        mByteArrayView->valueEditor()->finishEdit();
+        mByteArrayView->finishByteEdit();
         mByteArrayView->placeCursor( dragMoveEvent->pos() );
         mByteArrayView->unpauseCursor();
 

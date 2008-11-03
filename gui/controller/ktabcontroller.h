@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2004 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2004,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -30,14 +30,16 @@
 
 namespace KHEUI
 {
+class AbstractByteArrayView;
+
 
 class KTabController : public KController
 {
   public:
-    KTabController( ByteArrayColumnView *view, KController *parent );
+    KTabController( AbstractByteArrayView* view, KController* parent );
 
   public: // KController API
-    virtual bool handleKeyPress( QKeyEvent *keyEvent );
+    virtual bool handleKeyPress( QKeyEvent* keyEvent );
 
   public:
     bool tabChangesFocus() const;
@@ -45,6 +47,7 @@ class KTabController : public KController
     void setTabChangesFocus( bool tabChangesFocus );
 
   protected:
+    AbstractByteArrayView* mView;
     /** flag if tab key should be ignored */
     bool mTabChangesFocus:1;
 };

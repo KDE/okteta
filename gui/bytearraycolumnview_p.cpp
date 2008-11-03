@@ -26,12 +26,8 @@
 #include "bordercolumnrenderer.h"
 #include "bytearraytableranges.h"
 #include "bytearraytablelayout.h"
-#include "controller/ktabcontroller.h"
-#include "controller/knavigator.h"
 #include "controller/kvalueeditor.h"
-#include "controller/kchareditor.h"
 #include "controller/dropper.h"
-#include "controller/zoomwheelcontroller.h"
 #include "kcursor.h"
 // Okteta core
 #include <kabstractbytearraymodel.h>
@@ -48,10 +44,6 @@
 #include <QtGui/QClipboard>
 #include <QtGui/QScrollBar>
 #include <QtGui/QMouseEvent>
-#include <QtGui/QDragEnterEvent>
-#include <QtGui/QDragMoveEvent>
-#include <QtGui/QDragLeaveEvent>
-#include <QtGui/QDropEvent>
 #include <QtCore/QListIterator>
 #include <QtCore/QTimer>
 
@@ -103,15 +95,6 @@ void ByteArrayColumnViewPrivate::init()
     mValueColumn->setCharCodec( mCharCodec );
     mCharColumn->setCharCodec( mCharCodec );
 
-    mTabController = new KTabController( q, 0 );
-    mNavigator = new KNavigator( q, mTabController );
-    mValueEditor = new KValueEditor( mTableCursor, q, mNavigator );
-    mCharEditor = new KCharEditor( mTableCursor, q, mNavigator );
-    mZoomWheelController = new ZoomWheelController( q, 0 );
-    mDropper = new Dropper( q );
-
-    setWheelController( mZoomWheelController );
-
     adaptController();
 
     q->setFont( KGlobalSettings::fixedFont() );
@@ -125,19 +108,16 @@ void ByteArrayColumnViewPrivate::init()
     q->setAcceptDrops( true );
 }
 
-
-bool ByteArrayColumnViewPrivate::isByteEditorActive() const
+AbstractByteArrayView::CodingTypeId ByteArrayColumnViewPrivate::activeCoding() const
 {
-    return mValueEditor->isInEditMode();
+    const bool isValueColumnActive = ( mActiveColumn == (AbstractByteArrayColumnRenderer*)mValueColumn );
+    return isValueColumnActive ? AbstractByteArrayView::ValueCodingId : AbstractByteArrayView::CharCodingId;
 }
 
-void ByteArrayColumnViewPrivate::adaptController()
+int ByteArrayColumnViewPrivate::visibleCodings() const
 {
-    KController* controller =
-        isEffectiveReadOnly() ?                                 (KController*)mNavigator :
-        activeCoding() == AbstractByteArrayView::CharCodingId ? (KController*)mCharEditor :
-                                                                (KController*)mValueEditor;
-    setController( controller );
+    return (mValueColumn->isVisible() ? AbstractByteArrayView::ValueCodingId : 0)
+           | (mCharColumn->isVisible() ? AbstractByteArrayView::CharCodingId : 0);
 }
 
 void ByteArrayColumnViewPrivate::setByteArrayModel( KHECore::KAbstractByteArrayModel* _byteArrayModel )
@@ -526,19 +506,17 @@ int ByteArrayColumnViewPrivate::fittingBytesPerLine() const
     return fittingBytesPerLine;
 }
 
-void ByteArrayColumnViewPrivate::setVisibleByteArrayCodings( int newColumns )
+void ByteArrayColumnViewPrivate::setVisibleCodings( int newColumns )
 {
-    const int oldColumns = visibleByteArrayCodings();
-
-    const int bothColumns = AbstractByteArrayView::ValueCodingId | AbstractByteArrayView::CharCodingId;
+    const int oldColumns = visibleCodings();
 
     // no changes or no column selected?
-    if( newColumns == oldColumns || !(newColumns&bothColumns) )
+    if( newColumns == oldColumns || !(newColumns&AbstractByteArrayView::BothCodingsId) )
         return;
 
     mValueColumn->setVisible( AbstractByteArrayView::ValueCodingId & newColumns );
     mCharColumn->setVisible( AbstractByteArrayView::CharCodingId & newColumns );
-    mSecondBorderColumn->setVisible( newColumns == bothColumns );
+    mSecondBorderColumn->setVisible( newColumns == AbstractByteArrayView::BothCodingsId );
 
     // active column not visible anymore?
     if( !mActiveColumn->isVisible() )
@@ -676,11 +654,6 @@ void ByteArrayColumnViewPrivate::pauseCursor()
     mBlinkCursorVisible = false;
     updateCursor( *mActiveColumn );
     updateCursor( *mInactiveColumn );
-}
-
-void ByteArrayColumnViewPrivate::finishByteEditor()
-{
-    mValueEditor->finishEdit();
 }
 
 void ByteArrayColumnViewPrivate::updateCursor( const AbstractByteArrayColumnRenderer& column )
@@ -1273,54 +1246,9 @@ void ByteArrayColumnViewPrivate::startDrag()
             removeSelectedData();
 }
 
-
-void ByteArrayColumnViewPrivate::dragEnterEvent( QDragEnterEvent* dragEnterEvent )
-{
-    if( mDropper->handleDragEnterEvent(dragEnterEvent) )
-        dragEnterEvent->accept();
-    else
-        dragEnterEvent->ignore();
-}
-
-
-void ByteArrayColumnViewPrivate::dragMoveEvent( QDragMoveEvent* dragMoveEvent )
-{
-    if( mDropper->handleDragMoveEvent(dragMoveEvent) )
-        dragMoveEvent->accept();
-    else
-        dragMoveEvent->ignore();
-}
-
-
-void ByteArrayColumnViewPrivate::dragLeaveEvent( QDragLeaveEvent* dragLeaveEvent )
-{
-    if( mDropper->handleDragLeaveEvent(dragLeaveEvent) )
-        dragLeaveEvent->accept();
-    else
-        dragLeaveEvent->ignore();
-}
-
-
-void ByteArrayColumnViewPrivate::dropEvent( QDropEvent* dropEvent )
-{
-    if( mDropper->handleDropEvent(dropEvent) )
-        dropEvent->accept();
-    else
-        dropEvent->ignore();
-}
-
 ByteArrayColumnViewPrivate::~ByteArrayColumnViewPrivate()
 {
     delete mCursorPixmaps;
-
-    delete mDropper;
-
-    delete mZoomWheelController;
-
-    delete mCharEditor;
-    delete mValueEditor;
-    delete mNavigator;
-    delete mTabController;
 }
 
 }

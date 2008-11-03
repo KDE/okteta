@@ -55,7 +55,27 @@ class AbstractByteArrayViewPrivate;
 // so it's AbstractByteArrayView < ColumnsView < {ByteArrayRowView,ByteArrayColumnView}
 class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
 {
+  friend class KTabController;
+  friend class KNavigator;
+  friend class KEditor;
+  friend class KValueEditor;
+  friend class KCharEditor;
+  friend class Dropper;
+
   Q_OBJECT
+  Q_PROPERTY( bool OverwriteMode READ isOverwriteMode WRITE setOverwriteMode )
+  Q_PROPERTY( bool OverwriteOnly READ isOverwriteOnly WRITE setOverwriteOnly )
+  Q_PROPERTY( bool Modified READ isModified WRITE setModified DESIGNABLE false )
+  Q_PROPERTY( bool ReadOnly READ isReadOnly WRITE setReadOnly )
+
+  //Q_PROPERTY( bool hasSelectedData READ hasSelectedData )
+  //Q_PROPERTY( QByteArray SelectedData READ selectedData )
+  Q_PROPERTY( bool TabChangesFocus READ tabChangesFocus WRITE setTabChangesFocus )
+  Q_PROPERTY( ResizeStyle ResizeStyle READ resizeStyle WRITE setResizeStyle )
+  Q_PROPERTY( int NoOfBytesPerLine READ noOfBytesPerLine WRITE setNoOfBytesPerLine )
+  Q_PROPERTY( int StartOffset READ startOffset WRITE setStartOffset )
+  Q_PROPERTY( int FirstLineOffset READ firstLineOffset WRITE setFirstLineOffset )
+  Q_PROPERTY( int VisibleCodings READ visibleCodings WRITE setVisibleCodings )
   Q_ENUMS( ValueCoding CharCoding ResizeStyle )
 
   public:
@@ -64,7 +84,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
                      StartOfOwnEncoding=0x8000, MaxEncodingId=0xFFFF };
     enum ResizeStyle { NoResize=0, LockGrouping=1, FullSizeUsage=2, MaxResizeStyleId=0xFF };
 
-    enum CodingTypeId { ValueCodingId=1, CharCodingId=2 };
+    enum CodingTypeId { NoCodingId=0, ValueCodingId=1, CharCodingId=2, BothCodingsId=ValueCodingId|CharCodingId };
 
   public:
     virtual ~AbstractByteArrayView();
@@ -88,6 +108,11 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
 
     ResizeStyle resizeStyle() const;
 
+    bool tabChangesFocus() const;
+
+    int visibleCodings() const;
+    CodingTypeId activeCoding() const;
+
     /** returns true if there is a selected range in the array */
     bool hasSelectedData() const;
     KHE::KSection selection() const;
@@ -104,10 +129,97 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
 
     double zoomLevel() const;
 
+  public: // value access API
+    virtual bool offsetColumnVisible() const = 0;
+
+  // value column
+    virtual int/*KPixelX*/ byteSpacingWidth() const = 0;
+    virtual int noOfGroupedBytes() const = 0;
+    virtual int/*KPixelX*/ groupSpacingWidth() const = 0;
+    virtual int/*KPixelX*/ binaryGapWidth() const = 0;
+
+  // char column
+    /** reports if "non-printing" chars are displayed in the char column
+      * with their original character. Default is false
+      * @return @c true if original chars are displayed, otherwise @c false 
+      */
+    virtual bool showsNonprinting() const = 0;
+    /** gives the used substitute character for "unprintable" chars, default is '.'
+      * @return substitute character 
+      */
+    virtual QChar substituteChar() const = 0;
+    /** returns the actually used undefined character for "undefined" chars, default is '?' */
+    virtual QChar undefinedChar() const = 0;
+
+    virtual bool isByteTypeColored() const = 0;
+
+
   public:
     virtual void setByteArrayModel( KHECore::KAbstractByteArrayModel* byteArrayModel );
+
+    /** switches the Offset column on/off */
+    virtual void toggleOffsetColumn( bool offsetColumnVisible ) = 0;
+
+  // setting parameters
+  // value column parameters
+    /** sets the spacing between the bytes in the value column
+      * @param BSW spacing between the bytes in pixels
+      * default is 3
+      */
+    virtual void setByteSpacingWidth( int/*KPixelX*/ byteSpacingWidth ) = 0;
+    /** sets the number of grouped bytes in the value column
+      * @param NoGB numbers of grouped bytes, 0 means no grouping
+      * default is 4
+      */
+    virtual void setNoOfGroupedBytes( int noOfGroupedBytes ) = 0;
+    /** sets the spacing between the groups of bytes in the value column
+      * @param GSW spacing between the groups in pixels
+      * default is 9
+      */
+    virtual void setGroupSpacingWidth( int/*KPixelX*/ groupSpacingWidth ) = 0;
+    /** sets the spacing in the middle of a binary byte in the value column
+      * @param BinaryGapW spacing in the middle of a binary in pixels
+      * returns true if there was a change
+      */
+    virtual void setBinaryGapWidth( int binaryGapWidth ) = 0;
+    /** sets the spacing in the value column
+      * @param ByteSpacingWidth spacing between the bytes in pixels
+      * @param NoOfGroupedBytes numbers of grouped bytes, 0 means no grouping
+      * @param GroupSpacingWidth spacing between the groups in pixels
+      * Default is 4 for NoOfGroupedBytes
+      */
+    virtual void setBufferSpacing( int/*KPixelX*/ byteSpacingWidth, int noOfGroupedBytes = 0, int/*KPixelX*/ groupSpacingWidth = 0 ) = 0;
+    /** sets the format of the value column. Default is KHE::HexadecimalCoding */
+    virtual void setValueCoding( ValueCoding valueCoding ) = 0;
+  // char column parameters
+    /** sets whether control chars or "non-printing" chars should be displayed in the char column
+      * with their corresponding character. Currently this simply means all chars with value <32,
+      * as known from the ASCII.
+      * @param SU
+      * returns true if there was a change
+      */
+    virtual void setShowsNonprinting( bool showsNonprinting = true ) = 0;
+    /** sets the substitute character for "non-printing" chars
+      * returns true if there was a change
+      */
+    virtual void setSubstituteChar( QChar substituteChar ) = 0;
+    /** sets the undefined character for "undefined" chars
+     * returns true if there was a change
+     */
+    virtual void setUndefinedChar( QChar undefinedChar ) = 0;
+    /** sets the encoding of the char column. Default is KHE::LocalEncoding.
+      * If the encoding is not available the format will not be changed. */
+    virtual void setCharCoding( CharCoding charCoding ) = 0;
+    /** sets the encoding of the char column. Default is KHE::LocalEncoding.
+      * If the encoding is not available the format will not be changed.
+      * @param Encoding name of the encoding
+      */
+    virtual void setCharCoding( const QString& charCodingName ) = 0;
+    virtual void setByteTypeColored( bool isColored ) = 0;
+
+  public:
     /** sets whether the data should be treated modified or not */
-    virtual void setModified( bool modified );
+    void setModified( bool modified );
 
     /** sets the resizestyle for the value column. Default is KHE::FullSizeUsage */
     void setResizeStyle( ResizeStyle resizeStyle );
@@ -126,6 +238,16 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     void setStartOffset( int startOffset );
     /** sets offset of the char in the upper left corner */
     void setFirstLineOffset( int firstLineOffset );
+
+    /** sets whether on a tab key there should be switched from the char column back to the value column
+      * or be switched to the next focusable widget. Default is false
+      */
+    void setTabChangesFocus( bool tabChangesFocus = true );
+
+    /***/
+    void setActiveCoding( CodingTypeId codingId );
+    /** */
+    void setVisibleCodings( int visibleCodings );
 
   public:
     /** 
@@ -153,6 +275,10 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     void setSelection( int start, int end );
     /** selects word at index, returns true if there is one */
     bool selectWord( /*unsigned*/ int index /*, Chartype*/ );
+    /** scrolls the view as much as needed to have the cursor fully visible */
+    void ensureCursorVisible();
+    /** puts the cursor in the column at the pos of Point (in absolute coord), does not handle the drawing */
+    void placeCursor( const QPoint& point );
 
   public:
     bool canReadData( const QMimeData* data ) const;
@@ -165,6 +291,16 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     void zoomTo( int pointSize );
     void unZoom();
     void setZoomLevel( double level );
+
+  public: // cursor control
+    /** we have focus again, start the timer */
+    void startCursor();
+    /** we lost focus, stop the timer */
+    void stopCursor();
+    /** simply pauses any blinking, i.e. ignores any calls to blinkCursor */
+    void pauseCursor();
+    /** undoes pauseCursor */
+    void unpauseCursor();
 
   public:
   // clipboard interaction
@@ -199,14 +335,9 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     void valueCodingChanged( int valueCoding );
 
   protected:
-    /** sets whether the widget is readonly or not, Default is true.
-      * If the databuffer which is worked on can't be written the widget stays readonly
-      */
-//     void setReadOnly( bool readOnly );
-    /** sets whether the widget is overwriteonly or not. Default is false. */
-//     void setOverwriteOnly( bool overwriteOnly );
-    /** sets whether the widget is in overwrite mode or not. Default is true. */
-//     void setOverwriteMode( bool overwriteMode );
+    void finishByteEdit();
+    void emitSelectionSignals();
+    void updateChanged();
 
   protected:
     const KHECore::ValueCodec* valueCodec() const;
@@ -223,7 +354,10 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     virtual void focusInEvent( QFocusEvent* focusEvent );
     virtual void focusOutEvent( QFocusEvent* focusEvent );
     virtual void resizeEvent( QResizeEvent* resizeEvent );
-
+    virtual void dragEnterEvent( QDragEnterEvent* dragEnterEvent );
+    virtual void dragMoveEvent( QDragMoveEvent* dragMoveEvent) ;
+    virtual void dragLeaveEvent( QDragLeaveEvent* dragLeaveEvent );
+    virtual void dropEvent( QDropEvent* dropEvent );
 
   protected: // QAbstractScrollArea API
     virtual void wheelEvent( QWheelEvent *e );

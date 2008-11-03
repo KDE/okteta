@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2004 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2004,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,21 +23,22 @@
 #include "ktabcontroller.h"
 
 // lib
-#include "bytearraycolumnview.h"
+#include <abstractbytearrayview.h>
 // Qt
 #include <QtGui/QKeyEvent>
 
 namespace KHEUI
 {
 
-KTabController::KTabController( ByteArrayColumnView* view, KController *parent )
-  : KController( view, parent ),
+KTabController::KTabController( AbstractByteArrayView* view, KController* parent )
+  : KController( parent ),
+    mView( view ),
     mTabChangesFocus( true )
 {
 }
 
 
-bool KTabController::handleKeyPress( QKeyEvent *keyEvent )
+bool KTabController::handleKeyPress( QKeyEvent* keyEvent )
 {
     bool keyUsed = false;
 
@@ -46,14 +47,14 @@ bool KTabController::handleKeyPress( QKeyEvent *keyEvent )
 
     if( tabPressed || backTabPressed )
     {
-        const int visibleColumns = mView->visibleByteArrayCodings();
+        const int visibleCodings = mView->visibleCodings();
         // are we in the char column?
-        if( mView->activeCoding() == ByteArrayColumnView::CharCodingId )
+        if( mView->activeCoding() == AbstractByteArrayView::CharCodingId )
         {
             // in last column we care about tab changes focus
-            if( (visibleColumns&ByteArrayColumnView::ValueCodingId) && (!mTabChangesFocus || backTabPressed) )
+            if( (visibleCodings&AbstractByteArrayView::ValueCodingId) && (!mTabChangesFocus || backTabPressed) )
             {
-                mView->setActiveCoding( ByteArrayColumnView::ValueCodingId );
+                mView->setActiveCoding( AbstractByteArrayView::ValueCodingId );
                 keyUsed = true;
             }
         }
@@ -61,9 +62,9 @@ bool KTabController::handleKeyPress( QKeyEvent *keyEvent )
         else
         {
             // in last column we care about tab changes focus
-            if( (visibleColumns&ByteArrayColumnView::CharCodingId) && (!mTabChangesFocus || tabPressed) )
+            if( (visibleCodings&AbstractByteArrayView::CharCodingId) && (!mTabChangesFocus || tabPressed) )
             {
-                mView->setActiveCoding( ByteArrayColumnView::CharCodingId );
+                mView->setActiveCoding( AbstractByteArrayView::CharCodingId );
                 keyUsed = true;
             }
         }

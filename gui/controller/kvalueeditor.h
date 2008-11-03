@@ -32,6 +32,8 @@
 
 namespace KHEUI
 {
+class AbstractByteArrayView;
+
 
 class KValueEditor: public KEditor
 {
@@ -40,7 +42,7 @@ class KValueEditor: public KEditor
     { EnterValue, IncValue, DecValue, ValueAppend, ValueEdit, LeaveValue, ValueBackspace };
 
   public:
-    KValueEditor( ByteArrayTableCursor* cursor, ByteArrayColumnView* view, KController* parent );
+    KValueEditor( ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent );
     virtual ~KValueEditor();
 
   public: // KController API

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2004 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2004,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,20 +23,20 @@
 #include "knavigator.h"
 
 // lib
-#include "bytearraytableranges.h"
-#include "bytearraytablecursor.h"
-#include "bytearraycolumnview.h"
-#include "kvalueeditor.h"
+#include <bytearraytableranges.h>
+#include <bytearraytablecursor.h>
+#include <abstractbytearrayview.h>
 // lib
 #include <kwordbufferservice.h>
 // Qt
 #include <QtGui/QKeyEvent>
 
 
-namespace KHEUI {
+namespace KHEUI
+{
 
-KNavigator::KNavigator( ByteArrayColumnView* view, KController *parent )
-  : KController( view, parent )
+KNavigator::KNavigator( AbstractByteArrayView* view, KController* parent )
+  : KController( parent ), mView( view )
 {
 }
 
@@ -89,7 +89,7 @@ bool KNavigator::handleKeyPress( QKeyEvent *keyEvent )
 void KNavigator::moveCursor( KMoveAction action, bool select )
 {
     mView->pauseCursor();
-    mView->valueEditor()->finishEdit();
+    mView->finishByteEdit();
 
     ByteArrayTableCursor* tableCursor = mView->tableCursor();
     ByteArrayTableRanges* tableRanges = mView->tableRanges();

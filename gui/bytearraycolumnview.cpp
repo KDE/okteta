@@ -83,32 +83,6 @@ bool ByteArrayColumnView::offsetColumnVisible() const
     Q_D( const ByteArrayColumnView );
     return d->offsetColumnVisible();
 }
-int ByteArrayColumnView::visibleByteArrayCodings() const
-{
-    Q_D( const ByteArrayColumnView );
-    return d->visibleByteArrayCodings();
-}
-bool ByteArrayColumnView::tabChangesFocus() const
-{
-    Q_D( const ByteArrayColumnView );
-    return d->tabChangesFocus();
-}
-KValueEditor* ByteArrayColumnView::valueEditor() const
-{
-    Q_D( const ByteArrayColumnView );
-    return d->valueEditor();
-}
-ByteArrayColumnView::CodingTypeId ByteArrayColumnView::activeCoding() const
-{
-    Q_D( const ByteArrayColumnView );
-    return d->activeCoding();
-}
-
-void ByteArrayColumnView::setTabChangesFocus( bool tabChangesFocus )
-{
-    Q_D( ByteArrayColumnView );
-    d->setTabChangesFocus( tabChangesFocus );
-}
 
 
 void ByteArrayColumnView::setByteArrayModel( KHECore::KAbstractByteArrayModel* _byteArrayModel )
@@ -220,56 +194,11 @@ QSize ByteArrayColumnView::minimumSizeHint() const
 }
 
 
-void ByteArrayColumnView::setVisibleByteArrayCodings( int visibleByteArrayCodings )
-{
-    Q_D( ByteArrayColumnView );
-    d->setVisibleByteArrayCodings( visibleByteArrayCodings );
-}
-
-
-void ByteArrayColumnView::setActiveCoding( CodingTypeId codingId )
-{
-    Q_D( ByteArrayColumnView );
-    d->setActiveCoding( codingId );
-}
-
-
-void ByteArrayColumnView::placeCursor( const QPoint& point )
-{
-    Q_D( ByteArrayColumnView );
-    d->placeCursor( point );
-}
-
 
 int ByteArrayColumnView::indexByPoint( const QPoint& point ) const
 {
     Q_D( const ByteArrayColumnView );
     return d->indexByPoint( point );
-}
-
-
-void ByteArrayColumnView::startCursor()
-{
-    Q_D( ByteArrayColumnView );
-    d->startCursor();
-}
-
-void ByteArrayColumnView::unpauseCursor()
-{
-    Q_D( ByteArrayColumnView );
-    d->unpauseCursor();
-}
-
-void ByteArrayColumnView::stopCursor()
-{
-    Q_D( ByteArrayColumnView );
-    d->stopCursor();
-}
-
-void ByteArrayColumnView::pauseCursor()
-{
-    Q_D( ByteArrayColumnView );
-    d->pauseCursor();
 }
 
 
@@ -279,33 +208,11 @@ void ByteArrayColumnView::updateCursors()
     d->updateCursors();
 }
 
-void ByteArrayColumnView::ensureCursorVisible()
-{
-    Q_D( ByteArrayColumnView );
-    d->ensureCursorVisible();
-}
-
 
 void ByteArrayColumnView::renderColumns( QPainter* painter, int cx, int cy, int cw, int ch )
 {
     Q_D( ByteArrayColumnView );
     d->renderColumns( painter, cx, cy, cw, ch );
-}
-
-void ByteArrayColumnView::emitSelectionSignals()
-{
-    Q_D( ByteArrayColumnView );
-
-    const bool hasSelection = tableRanges()->hasSelection();
-    if( !d->isOverwriteMode() ) emit cutAvailable( hasSelection );
-    emit copyAvailable( hasSelection );
-    emit selectionChanged( hasSelection );
-}
-
-void ByteArrayColumnView::updateChanged()
-{
-    Q_D( ByteArrayColumnView );
-    d->updateChanged();
 }
 
 
@@ -335,34 +242,6 @@ void ByteArrayColumnView::mouseDoubleClickEvent( QMouseEvent* mouseEvent )
 {
     Q_D( ByteArrayColumnView );
     d->mouseDoubleClickEvent( mouseEvent );
-}
-
-
-void ByteArrayColumnView::dragEnterEvent( QDragEnterEvent* dragEnterEvent )
-{
-    Q_D( ByteArrayColumnView );
-    d->dragEnterEvent( dragEnterEvent );
-}
-
-
-void ByteArrayColumnView::dragMoveEvent( QDragMoveEvent* dragMoveEvent )
-{
-    Q_D( ByteArrayColumnView );
-    d->dragMoveEvent( dragMoveEvent );
-}
-
-
-void ByteArrayColumnView::dragLeaveEvent( QDragLeaveEvent* dragLeaveEvent )
-{
-    Q_D( ByteArrayColumnView );
-    d->dragLeaveEvent( dragLeaveEvent );
-}
-
-
-void ByteArrayColumnView::dropEvent( QDropEvent* dropEvent )
-{
-    Q_D( ByteArrayColumnView );
-    d->dropEvent( dropEvent );
 }
 
 

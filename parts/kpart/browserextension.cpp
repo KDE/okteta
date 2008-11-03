@@ -56,7 +56,7 @@ void OktetaBrowserExtension::saveState( QDataStream &stream )
 
     KHEUI::ByteArrayColumnView *view = part->view;
 
-    stream << (int)view->offsetColumnVisible() << view->visibleByteArrayCodings()
+    stream << (int)view->offsetColumnVisible() << view->visibleCodings()
         << (int)view->resizeStyle() << (int)view->valueCoding() 
         << view->charCodingName() << (int)view->showsNonprinting()
         << view->xOffset() << view->yOffset()
@@ -70,7 +70,7 @@ void OktetaBrowserExtension::restoreState( QDataStream &stream )
     KParts::BrowserExtension::restoreState( stream );
 
     int offsetColumnVisible;
-    int visibleByteArrayCodings;
+    int visibleCodings;
     int resizeStyle;
     int valueCoding;
     QString charCodingName;
@@ -80,13 +80,13 @@ void OktetaBrowserExtension::restoreState( QDataStream &stream )
     int cursorBehind;
     int activeCoding;
 
-    stream >> offsetColumnVisible >> visibleByteArrayCodings >> resizeStyle >> valueCoding >> charCodingName >> showsNonprinting 
+    stream >> offsetColumnVisible >> visibleCodings >> resizeStyle >> valueCoding >> charCodingName >> showsNonprinting 
            >> x >> y >> position >> cursorBehind >> activeCoding;
 
     KHEUI::ByteArrayColumnView *view = part->view;
 
     view->toggleOffsetColumn( offsetColumnVisible );
-    view->setVisibleByteArrayCodings( visibleByteArrayCodings );
+    view->setVisibleCodings( visibleCodings );
     view->setResizeStyle( (KHEUI::ByteArrayColumnView::ResizeStyle)resizeStyle );
     view->setValueCoding( (KHEUI::ByteArrayColumnView::ValueCoding)valueCoding );
     view->setCharCoding( charCodingName );

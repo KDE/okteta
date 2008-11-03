@@ -23,6 +23,11 @@
 #include "abstractbytearrayview_p.h"
 
 // lib
+#include "controller/ktabcontroller.h"
+#include "controller/knavigator.h"
+#include "controller/kchareditor.h"
+#include "controller/dropper.h"
+#include "controller/zoomwheelcontroller.h"
 // Okteta core
 #include <valuecodec.h>
 #include <kbookmarkable.h>
@@ -32,6 +37,10 @@
 // KDE
 #include <KGlobal>
 // Qt
+#include <QtGui/QDragEnterEvent>
+#include <QtGui/QDragMoveEvent>
+#include <QtGui/QDragLeaveEvent>
+#include <QtGui/QDropEvent>
 #include <QtGui/QApplication>
 #include <QtCore/QMimeData>
 #include <QtCore/QByteArray>
@@ -140,6 +149,15 @@ void AbstractByteArrayViewPrivate::init()
     mValueCoding = DefaultValueCoding;
     mCharCodec = KHECore::KCharCodec::createCodec( (KHECore::CharCoding)DefaultCharCoding );
     mCharCoding = DefaultCharCoding;
+
+    mTabController = new KTabController( q, 0 );
+    mNavigator = new KNavigator( q, mTabController );
+    mValueEditor = new KValueEditor( mTableCursor, q, mNavigator );
+    mCharEditor = new KCharEditor( mTableCursor, q, mNavigator );
+    mZoomWheelController = new ZoomWheelController( q, 0 );
+    mDropper = new Dropper( q );
+
+    setWheelController( mZoomWheelController );
 }
 
 void AbstractByteArrayViewPrivate::setByteArrayModel( KHECore::KAbstractByteArrayModel* byteArrayModel )
@@ -726,6 +744,16 @@ bool AbstractByteArrayViewPrivate::hasChanged( const CoordRange& visibleRange, C
     return result;
 }
 
+
+void AbstractByteArrayViewPrivate::adaptController()
+{
+    KController* controller =
+        isEffectiveReadOnly() ?                                 (KController*)mNavigator :
+        activeCoding() == AbstractByteArrayView::CharCodingId ? (KController*)mCharEditor :
+                                                                (KController*)mValueEditor;
+    setController( controller );
+}
+
 void AbstractByteArrayViewPrivate::updateViewByWidth()
 {
     Q_Q( AbstractByteArrayView );
@@ -795,6 +823,40 @@ void AbstractByteArrayViewPrivate::focusOutEvent( QFocusEvent* focusEvent )
     q->ColumnsView::focusOutEvent( focusEvent );
 }
 
+
+void AbstractByteArrayViewPrivate::dragEnterEvent( QDragEnterEvent* dragEnterEvent )
+{
+    if( mDropper->handleDragEnterEvent(dragEnterEvent) )
+        dragEnterEvent->accept();
+    else
+        dragEnterEvent->ignore();
+}
+
+void AbstractByteArrayViewPrivate::dragMoveEvent( QDragMoveEvent* dragMoveEvent )
+{
+    if( mDropper->handleDragMoveEvent(dragMoveEvent) )
+        dragMoveEvent->accept();
+    else
+        dragMoveEvent->ignore();
+}
+
+void AbstractByteArrayViewPrivate::dragLeaveEvent( QDragLeaveEvent* dragLeaveEvent )
+{
+    if( mDropper->handleDragLeaveEvent(dragLeaveEvent) )
+        dragLeaveEvent->accept();
+    else
+        dragLeaveEvent->ignore();
+}
+
+void AbstractByteArrayViewPrivate::dropEvent( QDropEvent* dropEvent )
+{
+    if( mDropper->handleDropEvent(dropEvent) )
+        dropEvent->accept();
+    else
+        dropEvent->ignore();
+}
+
+
 void AbstractByteArrayViewPrivate::onBookmarksChange( const QList<KHECore::KBookmark>& bookmarks )
 {
     foreach( const KHECore::KBookmark& bookmark, bookmarks )
@@ -861,6 +923,15 @@ void AbstractByteArrayViewPrivate::onContentsChanged( const KHE::ArrayChangeMetr
 
 AbstractByteArrayViewPrivate::~AbstractByteArrayViewPrivate()
 {
+    delete mDropper;
+
+    delete mZoomWheelController;
+
+    delete mCharEditor;
+    delete mValueEditor;
+    delete mNavigator;
+    delete mTabController;
+
     delete mTableRanges;
     delete mTableCursor;
     delete mTableLayout;

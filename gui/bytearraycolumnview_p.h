@@ -26,7 +26,6 @@
 // lib
 #include "bytearraycolumnview.h"
 #include "abstractbytearrayview_p.h"
-#include "controller/ktabcontroller.h"
 #include "valuebytearraycolumnrenderer.h"
 #include "charbytearraycolumnrenderer.h"
 #include "offsetcolumnrenderer.h"
@@ -36,14 +35,6 @@ class QTimer;
 
 namespace KHEUI
 {
-class KNavigator;
-class KValueEditor;
-class KCharEditor;
-
-class Dropper;
-
-class ZoomWheelController;
-
 class BorderColumnRenderer;
 
 class KCursor;
@@ -63,11 +54,7 @@ class ByteArrayColumnViewPrivate : public AbstractByteArrayViewPrivate
     void init();
 
   public:
-    bool tabChangesFocus() const;
-
-    AbstractByteArrayView::CodingTypeId activeCoding() const;
     bool offsetColumnVisible() const;
-    int visibleByteArrayCodings() const;
 
   // value column
     int/*KPixelX*/ byteSpacingWidth() const;
@@ -86,28 +73,19 @@ class ByteArrayColumnViewPrivate : public AbstractByteArrayViewPrivate
     int indexByPoint( const QPoint& point ) const;
     QSize minimumSizeHint() const;
 
-  public:
-    KValueEditor* valueEditor() const;
-    Dropper* dropper() const;
-
   public: // modification access
     void setByteArrayModel( KHECore::KAbstractByteArrayModel* byteArrayModel );
-    void placeCursor( const QPoint& point );
-    void setActiveCoding( AbstractByteArrayView::CodingTypeId codingId );
 //    void repaintByte( int row, int column, bool Erase = true );
 //    void updateByte( int row, int column );
 //    void ensureByteVisible( int row, int column );
 
   public: // AbstractByteArrayViewPrivate API
     virtual void ensureCursorVisible();
+    virtual void placeCursor( const QPoint& point );
 
   public:
     void toggleOffsetColumn( bool offsetColumnVisible );
-    void setVisibleByteArrayCodings( int visibleByteArrayCodings );
 
-  // setting parameters
-    void setTabChangesFocus( bool tabChangesFocus = true );
-  //
   // value column parameters
     void setByteSpacingWidth( int/*KPixelX*/ byteSpacingWidth ) ;
     void setNoOfGroupedBytes( int noOfGroupedBytes );
@@ -128,10 +106,6 @@ class ByteArrayColumnViewPrivate : public AbstractByteArrayViewPrivate
     void mouseReleaseEvent( QMouseEvent* mouseReleaseEvent );
     void mouseMoveEvent( QMouseEvent* mouseMoveEvent );
     void mouseDoubleClickEvent( QMouseEvent* mouseDoubleClickEvent );
-    void dragEnterEvent( QDragEnterEvent* dragEnterEvent );
-    void dragMoveEvent( QDragMoveEvent* dragMoveEvent );
-    void dragLeaveEvent( QDragLeaveEvent* dragLeaveEvent );
-    void dropEvent( QDropEvent* dropEvent );
 
   public: // slots
     /** gets called by the cursor blink timer */
@@ -165,7 +139,6 @@ class ByteArrayColumnViewPrivate : public AbstractByteArrayViewPrivate
       * and updates the dependant values
       */
     void ensureVisible( const AbstractByteArrayColumnRenderer& column, const Coord& coord );
-    void emitSelectionSignals();
     void renderColumns( QPainter* painter, int cx, int cy, int cw, int ch );
 
   protected: // AbstractByteArrayViewPrivate API
@@ -175,28 +148,15 @@ class ByteArrayColumnViewPrivate : public AbstractByteArrayViewPrivate
     virtual void pauseCursor();
     virtual void unpauseCursor();
 
-    virtual void finishByteEditor();
+    virtual void setActiveCoding( AbstractByteArrayView::CodingTypeId codingId );
+    virtual void setVisibleCodings( int visibleCodings );
 
   protected: // AbstractByteArrayViewPrivate API
-    virtual bool isByteEditorActive() const;
+    virtual AbstractByteArrayView::CodingTypeId activeCoding() const;
+    virtual int visibleCodings() const;
     virtual int fittingBytesPerLine() const;
-    virtual void adaptController();
     virtual void adjustToLayoutNoOfBytesPerLine();
     virtual void updateChanged();
-
-  protected:
-    /** */
-    KTabController* mTabController;
-    /** */
-    KNavigator* mNavigator;
-    /** */
-    KValueEditor* mValueEditor;
-    /** */
-    KCharEditor* mCharEditor;
-
-    Dropper* mDropper;
-
-    ZoomWheelController* mZoomWheelController;
 
   protected:
     OffsetColumnRenderer*         mOffsetColumn;
@@ -253,26 +213,7 @@ inline bool ByteArrayColumnViewPrivate::showsNonprinting()     const { return mC
 inline QChar ByteArrayColumnViewPrivate::substituteChar()      const { return mCharColumn->substituteChar(); }
 inline QChar ByteArrayColumnViewPrivate::undefinedChar()       const { return mCharColumn->undefinedChar(); }
 inline bool ByteArrayColumnViewPrivate::isByteTypeColored()    const { return mValueColumn->isByteTypeColored(); }
-inline ByteArrayColumnView::CodingTypeId ByteArrayColumnViewPrivate::activeCoding() const
-{
-    const bool isValueColumnActive = ( mActiveColumn == (AbstractByteArrayColumnRenderer*)mValueColumn );
-    return isValueColumnActive ? AbstractByteArrayView::ValueCodingId : AbstractByteArrayView::CharCodingId;
-}
-inline bool ByteArrayColumnViewPrivate::offsetColumnVisible() const { return mOffsetColumn->isVisible(); }
-inline int ByteArrayColumnViewPrivate::visibleByteArrayCodings() const
-{
-    return (mValueColumn->isVisible() ? AbstractByteArrayView::ValueCodingId : 0)
-           | (mCharColumn->isVisible() ? AbstractByteArrayView::CharCodingId : 0);
-}
-
-inline bool ByteArrayColumnViewPrivate::tabChangesFocus() const { return mTabController->tabChangesFocus(); }
-inline KValueEditor* ByteArrayColumnViewPrivate::valueEditor() const { return mValueEditor; }
-inline Dropper* ByteArrayColumnViewPrivate::dropper() const { return mDropper; }
-
-inline void ByteArrayColumnViewPrivate::setTabChangesFocus( bool tabChangesFocus )
-{
-    mTabController->setTabChangesFocus( tabChangesFocus );
-}
+inline bool ByteArrayColumnViewPrivate::offsetColumnVisible()  const { return mOffsetColumn->isVisible(); }
 
 }
 

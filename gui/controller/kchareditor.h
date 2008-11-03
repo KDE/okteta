@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2004 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2004,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -34,13 +34,11 @@ namespace KHEUI
 class KCharEditor : public KEditor
 {
   public:
-    KCharEditor( ByteArrayTableCursor* cursor, ByteArrayColumnView* view, KController *parent );
+    KCharEditor( ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent );
     virtual ~KCharEditor();
 
   public: // KController API
-    virtual bool handleKeyPress( QKeyEvent *keyEvent );
-
-  protected:
+    virtual bool handleKeyPress( QKeyEvent* keyEvent );
 };
 
 }

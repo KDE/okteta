@@ -656,8 +656,11 @@ void AbstractByteArrayColumnRenderer::renderFramedByte( QPainter *painter, int b
     const char byte = ( byteIndex > -1 ) ? mByteArrayModel->datum( byteIndex ) : EmptyByte;
     const KHECore::KChar byteChar = mCharCodec->decode( byte );
 
+    const bool isInSelection = ( byteIndex > -1 && mRanges->selectionIncludes(byteIndex) );
+    const KColorScheme::ColorSet colorSet = isInSelection ? KColorScheme::Selection : KColorScheme::View;
+
     const QPalette &palette = columnsView()->viewport()->palette();
-    KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::View );
+    KColorScheme colorScheme( palette.currentColorGroup(), colorSet );
     const KColorScheme::ForegroundRole foregroundRole =
         mByteTypeColored ? foregroundRoleForChar(byteChar): KColorScheme::NormalText;
     const QBrush brush = colorScheme.foreground( foregroundRole );
@@ -677,8 +680,11 @@ void AbstractByteArrayColumnRenderer::renderCursor( QPainter *painter, int byteI
     const char byte = ( byteIndex > -1 ) ? mByteArrayModel->datum( byteIndex ) : EmptyByte;
     const KHECore::KChar byteChar = mCharCodec->decode( byte );
 
+    const bool isInSelection = ( byteIndex > -1 && mRanges->selectionIncludes(byteIndex) );
+    const KColorScheme::ColorSet colorSet = isInSelection ? KColorScheme::Selection : KColorScheme::View;
+
     const QPalette &palette = columnsView()->viewport()->palette();
-    KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::View );
+    KColorScheme colorScheme( palette.currentColorGroup(), colorSet );
     const KColorScheme::ForegroundRole foregroundRole =
         mByteTypeColored ? foregroundRoleForChar(byteChar): KColorScheme::NormalText;
     const QBrush brush = colorScheme.foreground( foregroundRole );
