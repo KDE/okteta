@@ -13,6 +13,7 @@ include_directories(
 # endif(KDE4_BUILD_TESTS)
 
 set( OKTETA_KAKAO_GUI_SRCS
+  bytearrayjanusview.cpp
   kbytearraydisplayfactory.cpp
   kbytearraydisplay.cpp
 )

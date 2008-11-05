@@ -31,11 +31,11 @@
 #include <kidataselectable.h>
 #include <kiselecteddatawriteable.h>
 
+namespace KHEUI {
+class ByteArrayJanusView;
+}
 class KByteArrayDocument;
 class KCursorProxy;
-namespace KHEUI {
-class ByteArrayColumnView;
-}
 namespace KHE {
 class KSection;
 }
@@ -44,6 +44,9 @@ class KByteArrayDisplay : public KAbstractView, public KDE::If::Zoomable, public
 {
     Q_OBJECT
     Q_INTERFACES(KDE::If::Zoomable KDE::If::DataSelectable KDE::If::SelectedDataWriteable)
+
+  public:
+    enum { ColumnViewId = 0, RowViewId };
 
   public:
     KByteArrayDisplay( KByteArrayDocument *Document );
@@ -135,11 +138,15 @@ class KByteArrayDisplay : public KAbstractView, public KDE::If::Zoomable, public
     int groupSpacingWidth() const;
     int binaryGapWidth() const;
 
+  public:
+    void setViewModus( int viewModus );
+    int viewModus() const;
+
   protected Q_SLOTS:
     void onSelectionChange( bool selected );
 
   protected:
-    KHEUI::ByteArrayColumnView* mWidget;
+    KHEUI::ByteArrayJanusView* mWidget;
     KByteArrayDocument* mDocument;
     KByteArraySelection mSelection;
 //     KCursorProxy *mCursorProxy;

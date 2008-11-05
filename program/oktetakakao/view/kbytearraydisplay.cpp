@@ -23,9 +23,10 @@
 #include "kbytearraydisplay.h"
 
 // lib
+#include "bytearrayjanusview.h"
 #include <kbytearraydocument.h>
 // Okteta gui
-#include <bytearraycolumnview.h>
+#include <abstractbytearrayview.h>
 // Okteta core
 #include <kabstractbytearraymodel.h>
 
@@ -36,7 +37,7 @@ KByteArrayDisplay::KByteArrayDisplay( KByteArrayDocument *document )
     setBaseModel( mDocument );
 
     KHECore::KAbstractByteArrayModel *content = mDocument->content();
-    mWidget = new KHEUI::ByteArrayColumnView();// content );
+    mWidget = new KHEUI::ByteArrayJanusView();
     mWidget->setByteArrayModel( content );
 
     const bool useOverwriteAsDefault = ( content->size() > 0 );
@@ -47,7 +48,7 @@ KByteArrayDisplay::KByteArrayDisplay( KByteArrayDocument *document )
     connect( mDocument, SIGNAL(titleChanged( QString )), SIGNAL(titleChanged( QString )) );
     connect( mDocument, SIGNAL(modified( KAbstractDocument::SynchronizationStates )),
                         SIGNAL(modified( KAbstractDocument::SynchronizationStates )) );
-//     connect( mWidget, SIGNAL(selectionChanged( bool )), SIGNAL(hasSelectedDataChanged( bool )) );
+    connect( mWidget, SIGNAL(selectionChanged( bool )), SIGNAL(hasSelectedDataChanged( bool )) );
     connect( mWidget, SIGNAL(readOnlyChanged( bool )), SIGNAL(readOnlyChanged( bool )) );
     connect( mWidget, SIGNAL(overwriteModeChanged( bool )), SIGNAL(overwriteModeChanged( bool )) );
     connect( mWidget, SIGNAL(selectionChanged( bool )), SLOT(onSelectionChange( bool )) );
@@ -262,6 +263,15 @@ bool KByteArrayDisplay::isOverwriteOnly() const
 void KByteArrayDisplay::setOverwriteMode( bool overwriteMode )
 {
     mWidget->setOverwriteMode( overwriteMode );
+}
+
+void KByteArrayDisplay::setViewModus( int viewModus )
+{
+    mWidget->setViewModus( viewModus );
+}
+int KByteArrayDisplay::viewModus() const
+{
+    return mWidget->viewModus();
 }
 
 KByteArrayDisplay::~KByteArrayDisplay()
