@@ -112,6 +112,13 @@ besides:
 * renamed KDataRanges into ByteArrayTableRanges
 * made KByteArrayDisplay a complete layer to the used view
 * ported all controllers and tools to use KByteArrayDisplay, not the byteArray widget
+* added: ByteArrayRowView
+* added: ByteArrayJanusView, can toggle between a row and a column based view
+* ByteArrayJanusView used by KByteArrayDisplay
+* added: controller to toggle between a row and a column view mode
+* renamed some classes in okteta/core from K* to *, KWordBufferService to WordByteArrayService
+* added: ability to close documents by a close button on tabs
+* added: urls dropped next to other tabs will be loaded
 
 Next to work on:
 ----------------------------------
