@@ -55,12 +55,13 @@ Zusammenlegen?
   <Menu name="view">
     <Action name="view_showsnonprinting" />
     <Action name="view_lineoffset" />
+    <Action name="togglecolumns" />
     <Separator/>
     <Action name="view_valuecoding" />
     <Action name="view_charencoding" />
     <Separator/>
     <Action name="resizestyle" />
-    <Action name="togglecolumns" />
+    <Action name="viewmode" />
     <Separator/>
     <Action name="view_fullscreen"/>
   </Menu>

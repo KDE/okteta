@@ -50,6 +50,7 @@
 #include <bookmarks/bookmarkscontroller.h>
 #include <print/printcontroller.h>
 #include <viewconfig/viewconfigcontroller.h>
+#include <viewmode/viewmodecontroller.h>
 #include <viewstatus/viewstatuscontroller.h>
 // Kakao controllers
 #include <document/readonly/readonlycontroller.h>
@@ -135,6 +136,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new BookmarksController(this) );
     addXmlGuiController( new PrintController(this) );
     addXmlGuiController( new ViewConfigController(this) );
+    addXmlGuiController( new ViewModeController(this) );
     addXmlGuiController( new ViewStatusController(statusBar()) );
 
     addTool( new DocumentInfoToolView(new DocumentInfoTool(mProgram->documentManager()->syncManager())) );
