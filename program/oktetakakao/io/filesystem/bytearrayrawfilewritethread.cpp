@@ -25,7 +25,7 @@
 // lib
 #include "kbytearraydocument.h"
 // Okteta core
-#include <kpiecetablebytearraymodel.h>
+#include <piecetablebytearraymodel.h>
 // KDE
 #include <KUrl>
 #include <KLocale>
@@ -38,7 +38,7 @@
 
 void ByteArrayRawFileWriteThread::run()
 {
-    KHECore::KPieceTableByteArrayModel *byteArray = qobject_cast<KHECore::KPieceTableByteArrayModel*>( mDocument->content() );
+    KHECore::PieceTableByteArrayModel *byteArray = qobject_cast<KHECore::PieceTableByteArrayModel*>( mDocument->content() );
 
     QFile file( mFilePath );
     if( file.open(QIODevice::WriteOnly) )

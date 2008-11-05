@@ -28,7 +28,7 @@
 #include "bytearrayrawfilereloadthread.h"
 #include "kbytearraydocument.h"
 // Okteta core
-#include <kpiecetablebytearraymodel.h>
+#include <piecetablebytearraymodel.h>
 // Qt
 #include <QtGui/QApplication>
 #include <QtCore/QDataStream>
@@ -51,7 +51,7 @@ void ByteArrayRawFileReloadJob::startReadFromFile()
     // TODO: moved this here to avoid marshalling the change signals out of the thread. Good idea?
     if( success )
     {
-        KHECore::KPieceTableByteArrayModel *byteArray = qobject_cast<KHECore::KPieceTableByteArrayModel*>( document->content() );
+        KHECore::PieceTableByteArrayModel *byteArray = qobject_cast<KHECore::PieceTableByteArrayModel*>( document->content() );
         byteArray->setData( reloadThread->data(), reloadThread->size(), false );
     }
     delete reloadThread;
