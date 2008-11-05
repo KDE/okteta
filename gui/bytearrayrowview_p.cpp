@@ -492,16 +492,16 @@ void ByteArrayRowViewPrivate::setVisibleCodings( int newCodings )
 
     mByteArrayColumn->setVisibleCodings( newCodings );
 
-// TODO: instead also reshow offsetcolumn
     // active coding not visible anymore?
     const bool isActiveStillVisible = ( mActiveCoding & newCodings );
     if( !isActiveStillVisible )
     {
-        const AbstractByteArrayView::CodingTypeId help = mActiveCoding;
-        mActiveCoding = mInactiveCoding;
-        mInactiveCoding = help;
+        mActiveCoding = (AbstractByteArrayView::CodingTypeId)newCodings;
+        mInactiveCoding = AbstractByteArrayView::NoCodingId;
         adaptController();
     }
+    else
+        mInactiveCoding = (AbstractByteArrayView::CodingTypeId)( newCodings ^ mActiveCoding );
 
     const int rowHeight = mByteArrayColumn->rowHeight();
     q->setLineHeight( rowHeight );
@@ -520,8 +520,7 @@ void ByteArrayRowViewPrivate::setActiveCoding( AbstractByteArrayView::CodingType
     mValueEditor->finishEdit();
 
     mActiveCoding = codingId;
-    mInactiveCoding = ( codingId != AbstractByteArrayView::ValueCodingId ) ? AbstractByteArrayView::ValueCodingId :
-        AbstractByteArrayView::CharCodingId;
+    mInactiveCoding = (AbstractByteArrayView::CodingTypeId)( visibleCodings() ^ codingId );
 
     adaptController();
 
