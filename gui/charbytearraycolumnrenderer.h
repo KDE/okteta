@@ -39,7 +39,7 @@ class CharByteArrayColumnRenderer : public AbstractByteArrayColumnRenderer
 {
   public:
     CharByteArrayColumnRenderer( ColumnsView *columnsView,
-        KHECore::KAbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges );
+        KHECore::AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges );
     virtual ~CharByteArrayColumnRenderer();
 
 

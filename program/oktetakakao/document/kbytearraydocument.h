@@ -33,8 +33,8 @@
 #include <QtCore/QString>
 
 namespace KHECore {
-class KAbstractByteArrayModel;
-class KPieceTableByteArrayModel;
+class AbstractByteArrayModel;
+class PieceTableByteArrayModel;
 }
 
 
@@ -46,7 +46,7 @@ class KByteArrayDocument : public KAbstractDocument, public KDE::If::Versionable
 
   public:
     explicit KByteArrayDocument( const QString &initDescription );
-    KByteArrayDocument( KHECore::KPieceTableByteArrayModel *byteArray, const QString &initDescription );
+    KByteArrayDocument( KHECore::PieceTableByteArrayModel *byteArray, const QString &initDescription );
     virtual ~KByteArrayDocument();
 
   public: // AbstractModel API
@@ -71,7 +71,7 @@ class KByteArrayDocument : public KAbstractDocument, public KDE::If::Versionable
     virtual QList<Person> userList() const;
 
   public: // KDE::If::ByteArray
-    virtual KHECore::KAbstractByteArrayModel *content() const;
+    virtual KHECore::AbstractByteArrayModel *content() const;
 
   public:
     void setTitle( const QString &title );
@@ -93,7 +93,7 @@ class KByteArrayDocument : public KAbstractDocument, public KDE::If::Versionable
     void onHeadVersionDescriptionChanged( const QString &newDescription );
 
   protected:
-    KHECore::KPieceTableByteArrayModel *mByteArray;
+    KHECore::PieceTableByteArrayModel *mByteArray;
 
     mutable QString mTitle;
 

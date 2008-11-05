@@ -28,14 +28,14 @@
 // Kakao core
 #include <abstracttool.h>
 // Okteta core
-#include <ksection.h>
+#include <section.h>
 // Qt
 #include <QtCore/QList>
 
 class KByteArrayDisplay;
 namespace KHECore {
-class KAbstractByteArrayModel;
-class KCharCodec;
+class AbstractByteArrayModel;
+class CharCodec;
 }
 
 
@@ -88,18 +88,18 @@ class StringsExtractTool : public AbstractTool
     bool mSourceByteArrayModelUptodate:1;
 
   protected: // settings
-    KHECore::KCharCodec *mCharCodec;
+    KHECore::CharCodec *mCharCodec;
     int mMinLength;
 
   protected: // sources
     KByteArrayDisplay* mByteArrayDisplay;
     // current
-    KHECore::KAbstractByteArrayModel *mByteArrayModel;
+    KHECore::AbstractByteArrayModel *mByteArrayModel;
 
     // selection source
-    KHE::KSection mSourceSelection;
+    KHE::Section mSourceSelection;
     // source of strings
-    KHECore::KAbstractByteArrayModel *mSourceByteArrayModel;
+    KHECore::AbstractByteArrayModel *mSourceByteArrayModel;
     // minLength source
     int mSourceMinLength;
 };

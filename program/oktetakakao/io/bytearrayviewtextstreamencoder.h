@@ -47,7 +47,7 @@ class ByteArrayViewTextStreamEncoderSettings
     QChar undefinedChar;
     QChar substituteChar;
     QString separation;
-//     KHECore::KCharCodec *CharCodec;
+//     KHECore::CharCodec *CharCodec;
 //     KHEUI::KOffsetFormat::print printFunction;
 };
 
@@ -63,8 +63,8 @@ class ByteArrayViewTextStreamEncoder : public KAbstractByteArrayStreamEncoder
   protected: // KAbstractByteArrayStreamEncoder API
     virtual bool encodeDataToStream( QIODevice *device,
                                      const KByteArrayDisplay* byteArrayView,
-                                     const KHECore::KAbstractByteArrayModel *byteArrayModel,
-                                     const KHE::KSection &section );
+                                     const KHECore::AbstractByteArrayModel *byteArrayModel,
+                                     const KHE::Section &section );
 
   protected:
     ByteArrayViewTextStreamEncoderSettings mSettings;

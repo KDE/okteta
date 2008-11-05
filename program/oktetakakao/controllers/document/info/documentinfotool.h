@@ -31,7 +31,7 @@
 class KByteArrayDocument;
 class KDocumentSyncManager;
 namespace KHECore {
-class KAbstractByteArrayModel;
+class AbstractByteArrayModel;
 }
 class QString;
 
@@ -67,7 +67,7 @@ class DocumentInfoTool : public AbstractTool
 
   protected:
     KByteArrayDocument* mDocument;
-    KHECore::KAbstractByteArrayModel *mByteArrayModel;
+    KHECore::AbstractByteArrayModel *mByteArrayModel;
 
     KDocumentSyncManager* mDocumentSyncManager;
 };

@@ -44,7 +44,7 @@ void PieceTest::testSimpleConstructor()
 
 void PieceTest::testFullConstructor()
 {
-    const KSection storageSection( Start, End );
+    const Section storageSection( Start, End );
     Piece piece( storageSection, Piece::ChangeStorage );
 
     QCOMPARE( piece.start(), Start );
@@ -56,7 +56,7 @@ void PieceTest::testFullConstructor()
 
 void PieceTest::testSplitAt()
 {
-    const KSection storageSection( Start, End );
+    const Section storageSection( Start, End );
     Piece piece( storageSection, Piece::ChangeStorage );
 
     // split at start
@@ -108,7 +108,7 @@ void PieceTest::testSplitAt()
 
 void PieceTest::testSplitAtLocal()
 {
-    const KSection storageSection( Start, End );
+    const Section storageSection( Start, End );
     Piece piece( storageSection, Piece::ChangeStorage );
 
     // split at start
@@ -161,11 +161,11 @@ void PieceTest::testSplitAtLocal()
 void PieceTest::testRemove()
 {
     const int Mid = (Start+End)/2;
-    const KSection storageSection( Start, End );
+    const Section storageSection( Start, End );
     Piece piece( storageSection, Piece::ChangeStorage );
 
     // remove none at start
-    KSection RemoveSection( Start, Start-1  );
+    Section RemoveSection( Start, Start-1  );
     Piece splitPiece = piece.remove( RemoveSection );
     QVERIFY( !piece.isValid() );
     QCOMPARE( splitPiece.start(), Start );
@@ -257,11 +257,11 @@ void PieceTest::testRemove()
 void PieceTest::testRemoveLocal()
 {
     const int Mid = Width/2;
-    const KSection storageSection( Start, End );
+    const Section storageSection( Start, End );
     Piece piece( storageSection, Piece::ChangeStorage );
 
     // remove none at start
-    KSection RemoveSection( 0, 0-1  );
+    Section RemoveSection( 0, 0-1  );
     Piece splitPiece = piece.removeLocal( RemoveSection );
     QVERIFY( !piece.isValid() );
     QCOMPARE( splitPiece.start(), Start );

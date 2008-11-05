@@ -31,7 +31,7 @@
 #include <kbytearraydisplay.h>
 #include <kbytearraydocument.h>
 // Okteta core
-#include <kcharcodec.h>
+#include <charcodec.h>
 #include <kbytearraymodel.h>
 // Kakao gui
 #include <kabstractview.h>
@@ -105,7 +105,7 @@ void ReplaceController::onDialogOkClicked()
     if( mReplaceDialog->inSelection() )
     {
         mDirection = FindForward;
-        const KHE::KSection selection = mByteArrayDisplay->selection();
+        const KHE::Section selection = mByteArrayDisplay->selection();
         mReplaceFirstIndex = selection.start();
         mReplaceLastIndex =  selection.end();
         mCurrentIndex = selection.start();

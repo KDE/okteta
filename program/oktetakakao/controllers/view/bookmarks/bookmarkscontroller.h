@@ -33,8 +33,8 @@ class KByteArrayDisplay;
 
 namespace KHECore {
 class Bookmarkable;
-class KBookmark;
-class KAbstractByteArrayModel;
+class Bookmark;
+class AbstractByteArrayModel;
 }
 class KXMLGUIClient;
 class KAction;
@@ -64,14 +64,14 @@ class BookmarksController : public AbstractXmlGuiController
     void onBookmarkTriggered( QAction* );
 
   private Q_SLOTS:
-    void onBookmarksAdded( const QList<KHECore::KBookmark> &bookmarks );
-    void onBookmarksRemoved( const QList<KHECore::KBookmark> &bookmarks );
+    void onBookmarksAdded( const QList<KHECore::Bookmark> &bookmarks );
+    void onBookmarksRemoved( const QList<KHECore::Bookmark> &bookmarks );
     void onCursorPositionChanged( int newPosition );
 
   protected:
     KXMLGUIClient* mGuiClient;
     KByteArrayDisplay* mByteArrayDisplay;
-    KHECore::KAbstractByteArrayModel *mByteArray;
+    KHECore::AbstractByteArrayModel *mByteArray;
     KHECore::Bookmarkable *mBookmarks;
 
     KAction* mCreateAction;

@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kcharcodec.h"
+#include "charcodec.h"
 
 // lib
 #include "ktextcharcodec.h"
@@ -32,7 +32,7 @@
 namespace KHECore {
 
 
-const QStringList &KCharCodec::codecNames()
+const QStringList &CharCodec::codecNames()
 {
   static QStringList CodecNames;
   // first call?
@@ -46,9 +46,9 @@ const QStringList &KCharCodec::codecNames()
 }
 
 
-KCharCodec *KCharCodec::createCodec( const QString &Name )
+CharCodec *CharCodec::createCodec( const QString &Name )
 {
-  KCharCodec *Codec = 0;
+  CharCodec *Codec = 0;
 
   if( KTextCharCodec::codecNames().indexOf(Name) != -1 )
     Codec = KTextCharCodec::createCodec( Name );
@@ -63,9 +63,9 @@ KCharCodec *KCharCodec::createCodec( const QString &Name )
 }
 
 
-KCharCodec *KCharCodec::createCodec( CharCoding C )
+CharCodec *CharCodec::createCodec( CharCoding C )
 {
-  KCharCodec *Codec;
+  CharCodec *Codec;
   if( C == EBCDIC1047Encoding )
     Codec = KEBCDIC1047CharCodec::create();
   else if( C == ISO8859_1Encoding )

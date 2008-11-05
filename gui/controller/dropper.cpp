@@ -28,7 +28,7 @@
 #include <bytearraytablelayout.h>
 #include <abstractbytearrayview.h>
 // Okteta core
-#include <kabstractbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 // Qt
 #include <QtGui/QApplication>
 #include <QtGui/QDragEnterEvent>
@@ -145,10 +145,10 @@ void Dropper::handleInternalDrag( QDropEvent* dropEvent )
     // TODO: this should 
 
     // get drag origin
-    KHE::KSection selection = mByteArrayView->tableRanges()->removeSelection();
+    KHE::Section selection = mByteArrayView->tableRanges()->removeSelection();
 
     ByteArrayTableCursor* tableCursor = mByteArrayView->tableCursor();
-    KHECore::KAbstractByteArrayModel* byteArrayModel = mByteArrayView->byteArrayModel();
+    KHECore::AbstractByteArrayModel* byteArrayModel = mByteArrayView->byteArrayModel();
 
     int insertIndex = tableCursor->realIndex();
 
@@ -172,14 +172,14 @@ void Dropper::handleInternalDrag( QDropEvent* dropEvent )
         if( success )
         {
             tableCursor->gotoCIndex( newCursorIndex );
-            mByteArrayView->tableRanges()->addChangedRange( KHE::KSection(insertIndex,selection.end()) );
+            mByteArrayView->tableRanges()->addChangedRange( KHE::Section(insertIndex,selection.end()) );
             emit mByteArrayView->cursorPositionChanged( tableCursor->realIndex() );
         }
     }
     // is a copy
     else
     {
-        // TODO: should this be a method of KAbstractByteArrayModel, to reuse piece data?
+        // TODO: should this be a method of AbstractByteArrayModel, to reuse piece data?
 
         // get data
         const QByteArray data = dropEvent->mimeData()->data( OctetStreamFormatName );
@@ -191,7 +191,7 @@ void Dropper::handleInternalDrag( QDropEvent* dropEvent )
                 const int length = mByteArrayView->layout()->length();
                 if( !tableCursor->isBehind() && length > 0 )
                 {
-                    KHE::KSection overwriteRange = KHE::KSection::fromWidth( insertIndex, data.size() );
+                    KHE::Section overwriteRange = KHE::Section::fromWidth( insertIndex, data.size() );
                     overwriteRange.restrictEndTo( length-1 );
                     if( overwriteRange.isValid() )
                         byteArrayModel->replace( overwriteRange, data.data(), overwriteRange.width() );

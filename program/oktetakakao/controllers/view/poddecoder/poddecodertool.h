@@ -34,8 +34,8 @@
 
 class KByteArrayDisplay;
 namespace KHECore {
-class KCharCodec;
-class KAbstractByteArrayModel;
+class CharCodec;
+class AbstractByteArrayModel;
 }
 class QTextCodec;
 
@@ -94,9 +94,9 @@ class PODDecoderTool : public AbstractTool
 
   protected: // source
     KByteArrayDisplay* mByteArrayDisplay;
-    KHECore::KAbstractByteArrayModel* mByteArrayModel;
+    KHECore::AbstractByteArrayModel* mByteArrayModel;
     int mCursorIndex;
-    KHECore::KCharCodec* mCharCodec;
+    KHECore::CharCodec* mCharCodec;
     QChar mUndefinedChar;
 
   protected: // settings

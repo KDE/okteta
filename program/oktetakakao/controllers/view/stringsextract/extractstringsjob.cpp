@@ -23,8 +23,8 @@
 #include "extractstringsjob.h"
 
 // Okteta core
-#include <kabstractbytearraymodel.h>
-#include <kcharcodec.h>
+#include <abstractbytearraymodel.h>
+#include <charcodec.h>
 #include <khechar.h>
 // Qt
 #include <QtGui/QApplication>

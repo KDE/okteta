@@ -41,7 +41,7 @@ ByteArrayJanusView::ByteArrayJanusView( QWidget* parent )
     setViewModus( ColumnViewId );
 }
 
-void ByteArrayJanusView::setByteArrayModel( KHECore::KAbstractByteArrayModel* byteArrayModel )
+void ByteArrayJanusView::setByteArrayModel( KHECore::AbstractByteArrayModel* byteArrayModel )
 {
     mView->setByteArrayModel( byteArrayModel );
 }
@@ -68,7 +68,7 @@ void ByteArrayJanusView::setViewModus( int viewModus )
         newView->toggleOffsetColumn( mView->offsetColumnVisible() );
         newView->setResizeStyle( mView->resizeStyle() );
         newView->setCursorPosition( mView->cursorPosition() );
-        KHE::KSection selection = mView->selection();
+        KHE::Section selection = mView->selection();
         newView->setSelection( selection.start(), selection.end() );
 
         mLayout->removeWidget( mView );
@@ -181,7 +181,7 @@ void ByteArrayJanusView::setFocus()
     mView->setFocus();
 }
 
-KHE::KSection ByteArrayJanusView::selection() const
+KHE::Section ByteArrayJanusView::selection() const
 {
     return mView->selection();
 }

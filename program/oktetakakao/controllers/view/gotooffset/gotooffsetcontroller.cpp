@@ -28,7 +28,7 @@
 #include <kbytearraydisplay.h>
 #include <kbytearraydocument.h>
 // Okteta core
-#include <kcharcodec.h>
+#include <charcodec.h>
 #include <kbytearraymodel.h>
 // KDE
 #include <KXMLGUIClient>

@@ -31,8 +31,8 @@
 class KPieceTableByteArrayModelKAbstractByteArrayModelIfTest : public KAbstractByteArrayModelIfTest
 {
   protected: // KAbstractByteArrayModelIfTest API
-    KHECore::KAbstractByteArrayModel *createByteArrayModel();
-    void deleteByteArrayModel( KHECore::KAbstractByteArrayModel *byteArrayModel );
+    KHECore::AbstractByteArrayModel *createByteArrayModel();
+    void deleteByteArrayModel( KHECore::AbstractByteArrayModel *byteArrayModel );
 };
 
 #endif

@@ -26,13 +26,13 @@
 // Kakao core
 #include <abstracttool.h>
 // Okteta core
-#include <ksection.h>
+#include <section.h>
 
 class StatisticTableModel;
 
 class KByteArrayDisplay;
 namespace KHECore {
-class KAbstractByteArrayModel;
+class AbstractByteArrayModel;
 }
 
 /**
@@ -72,14 +72,14 @@ class InfoTool : public AbstractTool
     StatisticTableModel *mStatisticTableModel;
 
     KByteArrayDisplay* mByteArrayDisplay;
-    KHECore::KAbstractByteArrayModel *mByteArrayModel;
+    KHECore::AbstractByteArrayModel *mByteArrayModel;
 
     //
     bool mSourceByteArrayModelUptodate;
     // selection source
-    KHE::KSection mSourceSelection;
+    KHE::Section mSourceSelection;
     // source of strings
-    KHECore::KAbstractByteArrayModel *mSourceByteArrayModel;
+    KHECore::AbstractByteArrayModel *mSourceByteArrayModel;
 };
 
 #endif

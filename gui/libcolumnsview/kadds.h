@@ -24,7 +24,7 @@
 #define KHE_UI_KADDS_H
 
 namespace KHE {
-class KSection;
+class Section;
 }
 
 namespace KHEUI
@@ -35,8 +35,8 @@ namespace KHEUI
 typedef int KPixelX;
 typedef int KPixelY;
 
-typedef KHE::KSection KPixelXs;
-typedef KHE::KSection KPixelYs;
+typedef KHE::Section KPixelXs;
+typedef KHE::Section KPixelYs;
 }
 
 #endif

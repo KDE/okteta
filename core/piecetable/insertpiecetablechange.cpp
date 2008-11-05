@@ -26,7 +26,7 @@
 // lib
 #include "piecetable.h"
 //
-#include <ksection.h>
+#include <section.h>
 #include <arraychangemetrics.h>
 // KDE
 #include <KLocale>
@@ -62,18 +62,18 @@ bool InsertPieceTableChange::merge( const AbstractPieceTableChange *other )
     return result;
 }
 
-KHE::KSection InsertPieceTableChange::apply( PieceTable *pieceTable ) const
+KHE::Section InsertPieceTableChange::apply( PieceTable *pieceTable ) const
 {
     pieceTable->insert( mInsertOffset, mInsertLength, mStorageOffset );
 
-    return KHE::KSection( mInsertOffset, pieceTable->size()-1 );
+    return KHE::Section( mInsertOffset, pieceTable->size()-1 );
 }
 
-KHE::KSection InsertPieceTableChange::revert( PieceTable *pieceTable ) const
+KHE::Section InsertPieceTableChange::revert( PieceTable *pieceTable ) const
 {
     const int oldLast = pieceTable->size() - 1;
-    pieceTable->remove( KHE::KSection::fromWidth(mInsertOffset,mInsertLength) );
-    return KHE::KSection( mInsertOffset, oldLast );
+    pieceTable->remove( KHE::Section::fromWidth(mInsertOffset,mInsertLength) );
+    return KHE::Section( mInsertOffset, oldLast );
 }
 
 KHE::ArrayChangeMetrics InsertPieceTableChange::metrics() const

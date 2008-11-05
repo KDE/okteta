@@ -26,14 +26,14 @@
 // lib
 #include "coord.h"
 // Okteta core
-#include <krange.h>
-#include <ksection.h>
+#include <range.h>
+#include <section.h>
 
 
 namespace KHE
 {
 
-typedef KRange<KHEUI::Coord> KBaseCoordRange;
+typedef Range<KHEUI::Coord> KBaseCoordRange;
 
 template<>
 inline const KHEUI::Coord KBaseCoordRange::null() const 
@@ -59,7 +59,7 @@ class CoordRange : public KHE::KBaseCoordRange
       * @param Pos start and end pos
       * @param Lines start and end line
       */
-    CoordRange( const KHE::KSection &Pos, const KHE::KSection &Lines );
+    CoordRange( const KHE::Section &Pos, const KHE::Section &Lines );
     CoordRange();
     ~CoordRange();
 
@@ -91,7 +91,7 @@ class CoordRange : public KHE::KBaseCoordRange
 
 
 inline CoordRange::CoordRange( const Coord &SC, const Coord &EC ) : KHE::KBaseCoordRange(SC,EC) {}
-inline CoordRange::CoordRange( const KHE::KSection &Pos, const KHE::KSection &Lines )
+inline CoordRange::CoordRange( const KHE::Section &Pos, const KHE::Section &Lines )
  : KHE::KBaseCoordRange( Coord(Pos.start(),Lines.start()), Coord(Pos.end(),Lines.end()) ) {}
 inline CoordRange::CoordRange()  {}
 inline CoordRange::~CoordRange() {}

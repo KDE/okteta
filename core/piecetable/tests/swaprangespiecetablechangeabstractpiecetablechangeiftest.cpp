@@ -40,13 +40,13 @@ namespace KPieceTable
 AbstractPieceTableChange *SwapRangesPieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
 {
     SwapRangesPieceTableChange *pieceTableChange =
-        new SwapRangesPieceTableChange( FirstRangeStart, KHE::KSection(SecondRangeStart,SecondRangeEnd) );
+        new SwapRangesPieceTableChange( FirstRangeStart, KHE::Section(SecondRangeStart,SecondRangeEnd) );
 
     return pieceTableChange;
 }
 void SwapRangesPieceTableChangeAbstractPieceTableChangeIfTest::changePieceTable( PieceTable *pieceTable )
 {
-    pieceTable->swap( FirstRangeStart, KHE::KSection(SecondRangeStart,SecondRangeEnd) );
+    pieceTable->swap( FirstRangeStart, KHE::Section(SecondRangeStart,SecondRangeEnd) );
 }
 
 void SwapRangesPieceTableChangeAbstractPieceTableChangeIfTest::deletePieceTableChange( AbstractPieceTableChange *pieceTableChange )

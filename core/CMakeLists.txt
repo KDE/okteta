@@ -14,7 +14,7 @@ set( libcontroller_SRCS
 set(libcodecs_SRCS
   codecs/kbinarybytecodec.cpp
   codecs/valuecodec.cpp
-  codecs/kcharcodec.cpp
+  codecs/charcodec.cpp
   codecs/kdecimalbytecodec.cpp
   codecs/kebcdic1047charcodec.cpp
   codecs/khexadecimalbytecodec.cpp
@@ -39,18 +39,18 @@ set( libpiecetable_SRCS
 set( oktetacore_LIB_SRCS
   ${libcodecs_SRCS}
   ${libpiecetable_SRCS}
-  kabstractbytearraymodel.cpp
+  abstractbytearraymodel.cpp
   kbytearraymodel_p.cpp
   kbytearraymodel.cpp
   kfixedsizebytearraymodel.cpp
   kfilebytearraymodel_p.cpp
   kfilebytearraymodel.cpp
-  kpiecetablebytearraymodel_p.cpp
-  kpiecetablebytearraymodel.cpp
-  kwordbufferservice.cpp
-  kbookmarklist.cpp
-  ksection.cpp
-  ksectionlist.cpp
+  piecetablebytearraymodel_p.cpp
+  piecetablebytearraymodel.cpp
+  wordbytearrayservice.cpp
+  bookmarklist.cpp
+  section.cpp
+  sectionlist.cpp
 )
 
 kde4_add_library( oktetacore SHARED ${oktetacore_LIB_SRCS} )

@@ -20,15 +20,15 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kbookmarklist.h"
+#include "bookmarklist.h"
 
 
 namespace KHECore
 {
 
-KBookmarkList::KBookmarkList() {}
+BookmarkList::BookmarkList() {}
 
-void KBookmarkList::addBookmark( const KBookmark &bookmark )
+void BookmarkList::addBookmark( const Bookmark &bookmark )
 {
     if( !bookmark.isValid() )
        return;
@@ -58,13 +58,13 @@ void KBookmarkList::addBookmark( const KBookmark &bookmark )
         append( bookmark );
 }
 
-void KBookmarkList::addBookmarks( const QList<KHECore::KBookmark> &bookmarks )
+void BookmarkList::addBookmarks( const QList<KHECore::Bookmark> &bookmarks )
 {
-    foreach( const KBookmark &bookmark, bookmarks )
+    foreach( const Bookmark &bookmark, bookmarks )
         addBookmark( bookmark );
 }
 
-void KBookmarkList::removeBookmark( const KBookmark &bookmark )
+void BookmarkList::removeBookmark( const Bookmark &bookmark )
 {
     if( !bookmark.isValid() )
         return;
@@ -80,13 +80,13 @@ void KBookmarkList::removeBookmark( const KBookmark &bookmark )
     }
 }
 
-void KBookmarkList::removeBookmarks( const QList<KHECore::KBookmark> &bookmarks )
+void BookmarkList::removeBookmarks( const QList<KHECore::Bookmark> &bookmarks )
 {
-    foreach( const KBookmark &bookmark, bookmarks )
+    foreach( const Bookmark &bookmark, bookmarks )
         removeBookmark( bookmark );
 }
 
-bool KBookmarkList::adjustToReplaced( int offset, int removedLength, int insertedLength )
+bool BookmarkList::adjustToReplaced( int offset, int removedLength, int insertedLength )
 {
     bool result = false;
     iterator bIt = begin();
@@ -109,13 +109,13 @@ bool KBookmarkList::adjustToReplaced( int offset, int removedLength, int inserte
     return result;
 }
 
-bool KBookmarkList::adjustToSwapped( int firstPartStart, int secondPartStart, int secondPartLength )
+bool BookmarkList::adjustToSwapped( int firstPartStart, int secondPartStart, int secondPartLength )
 {
     bool result = false;
     iterator bIt = begin();
     while( bIt!=end() && bIt->offset() < firstPartStart )
         ++bIt;
-    QList<KHECore::KBookmark> bookmarksInFirstPart;
+    QList<KHECore::Bookmark> bookmarksInFirstPart;
     // take bookmarks from first part
     while( bIt!=end() && bIt->offset() < secondPartStart )
     {
@@ -133,7 +133,7 @@ bool KBookmarkList::adjustToSwapped( int firstPartStart, int secondPartStart, in
     // append bookmarks from first part as second
     if( !bookmarksInFirstPart.isEmpty() )
     {
-        foreach( KBookmark bookmark, bookmarksInFirstPart )
+        foreach( Bookmark bookmark, bookmarksInFirstPart )
         {
             bookmark.move( secondPartLength );
             insert( bIt, bookmark );
@@ -144,15 +144,15 @@ bool KBookmarkList::adjustToSwapped( int firstPartStart, int secondPartStart, in
     return result;
 }
 
-QList<KHECore::KBookmark> KBookmarkList::list() const
+QList<KHECore::Bookmark> BookmarkList::list() const
 {
-    QList<KHECore::KBookmark> result;
-    foreach( const KBookmark &bookmark, *this )
+    QList<KHECore::Bookmark> result;
+    foreach( const Bookmark &bookmark, *this )
         result.append( bookmark );
     return result;
 }
 
-bool KBookmarkList::contains( int offset ) const
+bool BookmarkList::contains( int offset ) const
 {
     bool result = false;
     const_iterator B = begin();
@@ -167,7 +167,7 @@ bool KBookmarkList::contains( int offset ) const
     return result;
 }
 
-KBookmarkList::const_iterator KBookmarkList::previousFrom( int offset ) const
+BookmarkList::const_iterator BookmarkList::previousFrom( int offset ) const
 {
     const_iterator b = begin();
     const_iterator result = end();
@@ -181,7 +181,7 @@ KBookmarkList::const_iterator KBookmarkList::previousFrom( int offset ) const
     return result;
 }
 
-KBookmarkList::const_iterator KBookmarkList::nextFrom( int offset ) const
+BookmarkList::const_iterator BookmarkList::nextFrom( int offset ) const
 {
     const_iterator b = begin();
     for( ; b!=end(); ++b )
@@ -192,6 +192,6 @@ KBookmarkList::const_iterator KBookmarkList::nextFrom( int offset ) const
     return b;
 }
 
-KBookmarkList::~KBookmarkList() {}
+BookmarkList::~BookmarkList() {}
 
 }

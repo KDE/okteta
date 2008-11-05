@@ -23,7 +23,7 @@
 #include "shiftbytearrayfilter.h"
 
 // Okteta core
-#include <kabstractbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 // KDE
 #include <KLocale>
 // Qt
@@ -40,7 +40,7 @@ ShiftByteArrayFilter::ShiftByteArrayFilter()
 AbstractByteArrayFilterParameterSet *ShiftByteArrayFilter::parameterSet() { return &mParameterSet; }
 
 bool ShiftByteArrayFilter::filter( char *result,
-                                   KHECore::KAbstractByteArrayModel *model, const KHE::KSection &section ) const
+                                   KHECore::AbstractByteArrayModel *model, const KHE::Section &section ) const
 {
     const int groupSize = mParameterSet.groupSize();
     const int groupBitCount = (groupSize * ShiftBitsPerByte );

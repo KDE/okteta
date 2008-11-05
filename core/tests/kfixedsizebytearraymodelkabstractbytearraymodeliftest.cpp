@@ -32,12 +32,12 @@ static const int FixedSizeByteArrayModelSize = 60;
 
 
 
-KHECore::KAbstractByteArrayModel *KFixedSizeByteArrayModelAbstractByteArrayModelIfTest::createByteArrayModel()
+KHECore::AbstractByteArrayModel *KFixedSizeByteArrayModelAbstractByteArrayModelIfTest::createByteArrayModel()
 {
   return new KHECore::KFixedSizeByteArrayModel( FixedSizeByteArrayModelSize );
 }
 
-void KFixedSizeByteArrayModelAbstractByteArrayModelIfTest::deleteByteArrayModel( KHECore::KAbstractByteArrayModel *ByteArrayModel )
+void KFixedSizeByteArrayModelAbstractByteArrayModelIfTest::deleteByteArrayModel( KHECore::AbstractByteArrayModel *ByteArrayModel )
 {
   delete ByteArrayModel;
 }

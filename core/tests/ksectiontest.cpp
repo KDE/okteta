@@ -23,7 +23,7 @@
 #include "ksectiontest.h"
 
 // test object
-#include <ksection.h>
+#include <section.h>
 // Qt
 #include <QtTest/QtTest>
 
@@ -38,7 +38,7 @@ static const int Width = End - Start + 1;
 
 void KSectionTest::testConstructorByEnd()
 {
-  KSection Section( Start, End );
+  Section Section( Start, End );
   QCOMPARE( Section.start(), Start );
   QCOMPARE( Section.end(),   End );
   QCOMPARE( Section.width(), Width );
@@ -46,13 +46,13 @@ void KSectionTest::testConstructorByEnd()
 
 void KSectionTest::testConstructorByWidth()
 {
-  KSection Section = KSection::fromWidth( Start, Width );
+  Section Section = Section::fromWidth( Start, Width );
 
   QCOMPARE( Section.start(), Start );
   QCOMPARE( Section.end(), End );
   QCOMPARE( Section.width(), Width );
 
-  Section = KSection::fromWidth( Width );
+  Section = Section::fromWidth( Width );
 
   QCOMPARE( Section.start(), 0 );
   QCOMPARE( Section.end(), Width-1 );
@@ -61,15 +61,15 @@ void KSectionTest::testConstructorByWidth()
 
 void KSectionTest::testSimpleConstructor()
 {
-  KSection Section;
+  Section Section;
   QVERIFY( Section.isEmpty() );
 }
 
 void KSectionTest::testCopyConstructor()
 {
-  const KSection OtherSection( Start, End );
+  const Section OtherSection( Start, End );
 
-  KSection Section( OtherSection );
+  Section Section( OtherSection );
   QCOMPARE( Section.start(), Start );
   QCOMPARE( Section.end(),   End );
   QCOMPARE( Section.width(), Width );
@@ -79,21 +79,21 @@ void KSectionTest::testCopyConstructor()
 
 void KSectionTest::testSetGetStart()
 {
-  KSection Section;
+  Section Section;
   Section.setStart( Start );
   QCOMPARE( Section.start(), Start );
 }
 
 void KSectionTest::testSetGetEnd()
 {
-  KSection Section;
+  Section Section;
   Section.setEnd( End );
   QCOMPARE( Section.end(), End );
 }
 
 void KSectionTest::testSetGetWidth()
 {
-  KSection Section;
+  Section Section;
   // end, width by width
   Section.setStart( Start );
   Section.setEndByWidth( Width );
@@ -108,7 +108,7 @@ void KSectionTest::testSetGetWidth()
 
 void KSectionTest::testIsEmpty()
 {
-  KSection Section( Start, End );
+  Section Section( Start, End );
   QVERIFY( !Section.isEmpty() );
   Section.unset();
   QVERIFY( Section.isEmpty() );
@@ -116,9 +116,9 @@ void KSectionTest::testIsEmpty()
 
 void KSectionTest::testCompare()
 {
-  KSection Section( Start, End );
+  Section Section( Start, End );
   // same
-  KSection OtherSection( Start, End );
+  Section OtherSection( Start, End );
   QVERIFY( Section == OtherSection );
   // different start
   OtherSection.set(Start+1, End);
@@ -130,7 +130,7 @@ void KSectionTest::testCompare()
 
 void KSectionTest::testIncludes()
 {
-  KSection Section( Start, End );
+  Section Section( Start, End );
   // at start
   int i = Section.start();
   QVERIFY( Section.includes(i) );
@@ -148,7 +148,7 @@ void KSectionTest::testIncludes()
 
 void KSectionTest::testLocalIndex()
 {
-    KSection section( Start, End );
+    Section section( Start, End );
 
     int localIndex = section.localIndex( Start );
     QCOMPARE( localIndex, 0 );
@@ -160,21 +160,21 @@ void KSectionTest::testLocalIndex()
 
 void KSectionTest::testLocalSection()
 {
-    KSection section( Start, End );
+    Section section( Start, End );
 
-    KSection localSection = section.localSection( KSection(Start,End) );
+    Section localSection = section.localSection( Section(Start,End) );
     QCOMPARE( localSection.start(), 0 );
     QCOMPARE( localSection.end(), Width-1 );
 
-    localSection = section.localSection( KSection(Start+1,End) );
+    localSection = section.localSection( Section(Start+1,End) );
     QCOMPARE( localSection.start(), 1 );
     QCOMPARE( localSection.end(), Width-1 );
 
-    localSection = section.localSection( KSection(Start,End-1) );
+    localSection = section.localSection( Section(Start,End-1) );
     QCOMPARE( localSection.start(), 0 );
     QCOMPARE( localSection.end(), Width-2 );
 
-    localSection = section.localSection( KSection(Start+1,End-1) );
+    localSection = section.localSection( Section(Start+1,End-1) );
     QCOMPARE( localSection.start(), 1 );
     QCOMPARE( localSection.end(), Width-2 );
 }
@@ -182,21 +182,21 @@ void KSectionTest::testLocalSection()
 
 void KSectionTest::testSubSection()
 {
-    KSection section( Start, End );
+    Section section( Start, End );
 
-    KSection subSection = section.subSection( KSection::fromWidth(Width) );
+    Section subSection = section.subSection( Section::fromWidth(Width) );
     QCOMPARE( subSection.start(), Start );
     QCOMPARE( subSection.end(), End );
 
-    subSection = section.subSection( KSection(1,Width-1) );
+    subSection = section.subSection( Section(1,Width-1) );
     QCOMPARE( subSection.start(), Start+1 );
     QCOMPARE( subSection.end(), End );
 
-    subSection = section.subSection( KSection(0,Width-2) );
+    subSection = section.subSection( Section(0,Width-2) );
     QCOMPARE( subSection.start(), Start );
     QCOMPARE( subSection.end(), End-1 );
 
-    subSection = section.subSection( KSection(1,Width-2) );
+    subSection = section.subSection( Section(1,Width-2) );
     QCOMPARE( subSection.start(), Start+1 );
     QCOMPARE( subSection.end(), End-1 );
 }
@@ -205,8 +205,8 @@ void KSectionTest::testSubSection()
 void KSectionTest::testAdaptToReplacement()
 {
   // adaptToReplacement, same length, behind
-  KSection Section( Start, End );
-  KSection OtherSection( Section );
+  Section Section( Start, End );
+  Section OtherSection( Section );
   Section.adaptToReplacement( End+1, Width, Width );
   QCOMPARE( Section, OtherSection );
 
@@ -419,10 +419,10 @@ void KSectionTest::testAdaptToReplacement()
 
 void KSectionTest::testSplitAt()
 {
-  KSection Section( Start, End );
+  Section Section( Start, End );
 
   // split at start
-  KSection SplitSection = Section.splitAt( Start );
+  Section SplitSection = Section.splitAt( Start );
   QVERIFY( !Section.isValid() );
   QCOMPARE( SplitSection.start(), Start );
   QCOMPARE( SplitSection.end(),   End );
@@ -462,10 +462,10 @@ void KSectionTest::testSplitAt()
 
 void KSectionTest::testSplitAtLocal()
 {
-  KSection Section( Start, End );
+  Section Section( Start, End );
 
   // split at start
-  KSection SplitSection = Section.splitAtLocal( 0 );
+  Section SplitSection = Section.splitAtLocal( 0 );
   QVERIFY( !Section.isValid() );
   QCOMPARE( SplitSection.start(), Start );
   QCOMPARE( SplitSection.end(),   End );
@@ -506,11 +506,11 @@ void KSectionTest::testSplitAtLocal()
 void KSectionTest::testRemove()
 {
   const int Mid = (Start+End)/2;
-  KSection Section( Start, End );
+  Section Section( Start, End );
 
   // remove none at start
-  KSection RemoveSection( Start, Start-1  );
-  KSection SplitSection = Section.remove( RemoveSection );
+  Section RemoveSection( Start, Start-1  );
+  Section SplitSection = Section.remove( RemoveSection );
   QVERIFY( !Section.isValid() );
   QCOMPARE( SplitSection.start(), Start );
   QCOMPARE( SplitSection.end(),   End );
@@ -591,11 +591,11 @@ void KSectionTest::testRemove()
 void KSectionTest::testRemoveLocal()
 {
   const int Mid = Width/2;
-  KSection Section( Start, End );
+  Section Section( Start, End );
 
   // remove none at start
-  KSection RemoveSection( 0, 0-1  );
-  KSection SplitSection = Section.removeLocal( RemoveSection );
+  Section RemoveSection( 0, 0-1  );
+  Section SplitSection = Section.removeLocal( RemoveSection );
   QVERIFY( !Section.isValid() );
   QCOMPARE( SplitSection.start(), Start );
   QCOMPARE( SplitSection.end(),   End );
@@ -676,8 +676,8 @@ void KSectionTest::testRemoveLocal()
 void KSectionTest::testStartForInclude()
 {
   // testStartForInclude, same length, start at start
-  const KSection Section( Start, End );
-  KSection OtherSection( Section );
+  const Section Section( Start, End );
+  Section OtherSection( Section );
   QCOMPARE( Section.startForInclude(OtherSection), OtherSection.start() );
 
   // testStartForInclude, same length, start before start
@@ -721,8 +721,8 @@ void KSectionTest::testStartForInclude()
 void KSectionTest::testIsJoinable()
 {
   // testStartForInclude, same length, start at start
-  const KSection Section( Start, End );
-  KSection OtherSection( Section );
+  const Section Section( Start, End );
+  Section OtherSection( Section );
   QVERIFY( Section.isJoinable(OtherSection) );
 
   // adaptToReplacement, insert, before

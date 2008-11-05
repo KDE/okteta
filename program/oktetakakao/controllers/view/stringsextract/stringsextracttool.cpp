@@ -27,7 +27,7 @@
 #include <kbytearraydisplay.h>
 #include <kbytearraydocument.h>
 // Okteta core
-#include <kcharcodec.h>
+#include <charcodec.h>
 #include <kbytearraymodel.h>
 // KDE
 #include <KLocale>
@@ -39,7 +39,7 @@ static const int DefaultMinLength = 3;
 
 StringsExtractTool::StringsExtractTool()
  : mExtractedStringsUptodate( false ), mSourceByteArrayModelUptodate( false ),
-   mCharCodec( KHECore::KCharCodec::createCodec(KHECore::LocalEncoding) ), mMinLength( DefaultMinLength ),
+   mCharCodec( KHECore::CharCodec::createCodec(KHECore::LocalEncoding) ), mMinLength( DefaultMinLength ),
    mByteArrayDisplay( 0 ), mByteArrayModel( 0 ), mSourceByteArrayModel( 0 ), mSourceMinLength( 0 )
 {
     setObjectName( "Strings" );
@@ -104,7 +104,7 @@ void StringsExtractTool::setCharCodec( const QString &codecName )
         return;
 
     delete mCharCodec;
-    mCharCodec = KHECore::KCharCodec::createCodec( codecName );
+    mCharCodec = KHECore::CharCodec::createCodec( codecName );
 }
 
 void StringsExtractTool::checkUptoDate()
@@ -143,7 +143,7 @@ void StringsExtractTool::onSourceChanged()
 }
 
 
-// TODO: use KWordBufferService
+// TODO: use WordByteArrayService
 void StringsExtractTool::extractStrings()
 {
     // forget old string source

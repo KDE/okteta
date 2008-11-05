@@ -25,7 +25,7 @@
 // test object
 #include <kbytearraydocument.h>
 // Okteta core
-#include <kpiecetablebytearraymodel.h>
+#include <piecetablebytearraymodel.h>
 // Qt
 #include <QtTest/QtTest>
 #include <QtTest/QSignalSpy>
@@ -42,7 +42,7 @@ void KByteArrayDocumentTest::testCreateNew()
     QVERIFY( document != 0 );
     QVERIFY( !document->hasLocalChanges() );
 
-    KHECore::KPieceTableByteArrayModel *byteArray = qobject_cast<KHECore::KPieceTableByteArrayModel*>( document->content() );
+    KHECore::PieceTableByteArrayModel *byteArray = qobject_cast<KHECore::PieceTableByteArrayModel*>( document->content() );
     QVERIFY( byteArray != 0 );
     QCOMPARE( byteArray->size(), 0 );
     QVERIFY( !byteArray->isModified() );

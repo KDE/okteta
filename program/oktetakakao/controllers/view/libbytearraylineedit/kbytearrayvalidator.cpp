@@ -25,7 +25,7 @@
 // Okteta core
 #include <valuecodec.h>
 #include <khechar.h>
-#include <kcharcodec.h>
+#include <charcodec.h>
 // KDE
 #include <KLocale>
 // Qt
@@ -50,7 +50,7 @@ const QStringList &KByteArrayValidator::codecNames()
 
 KByteArrayValidator::KByteArrayValidator( QObject *parent, Coding codecId, int charCodecId )
  : QValidator( parent ), mCodecId( InvalidCoding ),
-   mValueCodec( 0 ), mCharCodec( KHECore::KCharCodec::createCodec(KHECore::LocalEncoding) )
+   mValueCodec( 0 ), mCharCodec( KHECore::CharCodec::createCodec(KHECore::LocalEncoding) )
 {
 Q_UNUSED(charCodecId)
     setCodec( codecId );
@@ -63,7 +63,7 @@ void KByteArrayValidator::setCharCodec( const QString &charCodecName )
         return;
 
     delete mCharCodec;
-    mCharCodec = KHECore::KCharCodec::createCodec( charCodecName );
+    mCharCodec = KHECore::CharCodec::createCodec( charCodecName );
 }
 
 void KByteArrayValidator::setCodec( Coding codecId )

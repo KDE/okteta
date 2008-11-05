@@ -27,8 +27,8 @@
 #include <bytearraytablecursor.h>
 #include <abstractbytearrayview.h>
 // Okteta core
-#include <kabstractbytearraymodel.h>
-#include <kwordbufferservice.h>
+#include <abstractbytearraymodel.h>
+#include <wordbytearrayservice.h>
 // Qt
 #include <QtGui/QKeyEvent>
 
@@ -103,7 +103,7 @@ bool KEditor::handleKeyPress( QKeyEvent* keyEvent )
 
 void KEditor::doEditAction( KEditAction action )
 {
-    KHECore::KAbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
+    KHECore::AbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
     switch( action )
     {
     case CharDelete:
@@ -111,7 +111,7 @@ void KEditor::doEditAction( KEditAction action )
         {
             const int index = mCursor->realIndex();
             if( index < mView->layout()->length() )
-                byteArrayModel->remove( KHE::KSection::fromWidth(index,1) );
+                byteArrayModel->remove( KHE::Section::fromWidth(index,1) );
         }
         break;
     case WordDelete: // kills data until the start of the next word
@@ -120,9 +120,9 @@ void KEditor::doEditAction( KEditAction action )
             const int index = mCursor->realIndex();
             if( index < mView->layout()->length() )
             {
-                const KHECore::KWordBufferService WBS( byteArrayModel, mView->charCodec() );
+                const KHECore::WordByteArrayService WBS( byteArrayModel, mView->charCodec() );
                 const int end = WBS.indexOfBeforeNextWordStart( index );
-                byteArrayModel->remove( KHE::KSection(index,end) );
+                byteArrayModel->remove( KHE::Section(index,end) );
             }
         }
         break;
@@ -138,7 +138,7 @@ void KEditor::doEditAction( KEditAction action )
         {
             const int deleteIndex = mCursor->realIndex() - 1;
             if( deleteIndex >= 0 )
-                byteArrayModel->remove( KHE::KSection::fromWidth(deleteIndex,1) );
+                byteArrayModel->remove( KHE::Section::fromWidth(deleteIndex,1) );
         }
         break;
     case WordBackspace:
@@ -146,10 +146,10 @@ void KEditor::doEditAction( KEditAction action )
             const int leftIndex = mCursor->realIndex() - 1;
             if( leftIndex >= 0 )
             {
-                const KHECore::KWordBufferService WBS( byteArrayModel, mView->charCodec() );
+                const KHECore::WordByteArrayService WBS( byteArrayModel, mView->charCodec() );
                 const int wordStart = WBS.indexOfPreviousWordStart( leftIndex );
                 if( !mView->isOverwriteMode() )
-                    byteArrayModel->remove( KHE::KSection(wordStart,leftIndex) );
+                    byteArrayModel->remove( KHE::Section(wordStart,leftIndex) );
             }
         }
     }

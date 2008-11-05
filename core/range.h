@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_KRANGE_H
-#define KHE_KRANGE_H
+#ifndef KHE_RANGE_H
+#define KHE_RANGE_H
 
 
 namespace KHE
@@ -35,25 +35,25 @@ namespace KHE
   *@author Friedrich W. H.  Kossebau
   */
 template<class T>
-class KRange
+class Range
 {
   public:
-    KRange( T S, T E ) : Start( S ), End( E )  {}
-    KRange() : Start( null() ), End( null() )  {}
-    ~KRange() {}
+    Range( T S, T E ) : Start( S ), End( E )  {}
+    Range() : Start( null() ), End( null() )  {}
+    ~Range() {}
 
   public:
-    KRange &operator=( const KRange &R ) { Start = R.Start; End = R.End; return *this; }
+    Range &operator=( const Range &R ) { Start = R.Start; End = R.End; return *this; }
 
   public:
-    bool operator==( const KRange &R ) const
+    bool operator==( const Range &R ) const
          { return (Start == R.Start && End == R.End) || (!isValid() && !R.isValid()); }
 
   public: // modification access
     /** sets the first and the last index of the range */
     void set( T S, T E ) { Start = S; End = E; }
     /** sets the first and the last index of the range */
-    void set( const KRange &R ) { Start = R.Start; End = R.End; }
+    void set( const Range &R ) { Start = R.Start; End = R.End; }
     /** sets the first index of the range */
     void setStart( T S )  { Start = S; }
     /** sets the last index of the range */
@@ -61,14 +61,14 @@ class KRange
     /** sets the range to null */
     void unset()           { Start = End = null(); }
     /** restricts the range to Limit. If one of both ranges is invalid the behaviour is undefined */
-    void restrictTo( const KRange &Limit )
+    void restrictTo( const Range &Limit )
     { if( Start < Limit.start() ) Start = Limit.start(); if( End > Limit.end() ) End = Limit.end(); }
     /** restricts the start to Limit. If the range is invalid the behaviour is undefined */
     void restrictStartTo( T Limit )  { if( Start < Limit ) Start = Limit; }
     /** restricts the end to Limit. If the range is invalid the behaviour is undefined */
     void restrictEndTo( T Limit )    { if( End > Limit ) End = Limit; }
     /** extends the range to Limit. If one of both is invalid the behaviour is undefined */
-    void extendTo( const KRange &Limit )
+    void extendTo( const Range &Limit )
     { if( Start > Limit.start() ) Start = Limit.start(); if( End < Limit.end() ) End = Limit.end(); }
     /** extends the start to Limit. If the range is invalid the behaviour is undefined */
     void extendStartTo( T Limit )  { if( Start > Limit ) Start = Limit; }
@@ -103,19 +103,19 @@ class KRange
     bool endsBefore( T Value )   const { return End < Value; }
 
     /** returns true is the range covers R. If one of both is invalid the behaviour is undefined */
-    bool includes( const KRange &R )     const { return R.End <= End && Start <= R.Start; }
+    bool includes( const Range &R )     const { return R.End <= End && Start <= R.Start; }
     /** returns true is the range covers R. If one of both is invalid the behaviour is undefined */
-    bool includesInside( const KRange &R ) const { return R.End < End && Start < R.Start; }
+    bool includesInside( const Range &R ) const { return R.End < End && Start < R.Start; }
     /** returns true is the range ends before R starts. If one of both is invalid the behaviour is undefined */
-    bool endsBefore( const KRange &R )   const { return End < R.Start; }
+    bool endsBefore( const Range &R )   const { return End < R.Start; }
     /** returns true is the range starts later than R ends. If one of both is invalid the behaviour is undefined */
-    bool startsBehind( const KRange &R ) const { return R.End < Start; }
+    bool startsBehind( const Range &R ) const { return R.End < Start; }
     /** returns true is the range starts prior than R. If one of both is invalid the behaviour is undefined */
-    bool startsBefore( const KRange &R ) const { return Start < R.Start; }
+    bool startsBefore( const Range &R ) const { return Start < R.Start; }
     /** returns true is the range ends later than R. If one of both is invalid the behaviour is undefined */
-    bool endsBehind( const KRange &R )   const { return R.End < End; }
+    bool endsBehind( const Range &R )   const { return R.End < End; }
     /** returns true is the range shares at least one index with R. If one of both is invalid the behaviour is undefined */
-    bool overlaps( const KRange &R ) const { return Start <= R.End && R.Start <= End; }
+    bool overlaps( const Range &R ) const { return Start <= R.End && R.Start <= End; }
 
     /** returns true if the range covers at least one index */
     bool isValid() const { return Start != null() && Start <= End; }

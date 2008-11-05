@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_KPIECETABLEBYTEARRAYMODEL_H
-#define KHE_CORE_KPIECETABLEBYTEARRAYMODEL_H
+#ifndef KHE_CORE_PIECETABLEBYTEARRAYMODEL_H
+#define KHE_CORE_PIECETABLEBYTEARRAYMODEL_H
 
 
 // lib
-#include "kabstractbytearraymodel.h"
+#include "abstractbytearraymodel.h"
 #include "kversionable.h"
 #include "kbookmarkable.h"
 #include "changesdescribable.h"
@@ -38,7 +38,7 @@ namespace KHECore
   *@author Friedrich W. H. Kossebau
   */
 
-class OKTETACORE_EXPORT KPieceTableByteArrayModel : public KAbstractByteArrayModel, public Versionable, public Bookmarkable, public ChangesDescribable, public ChangeHistory
+class OKTETACORE_EXPORT PieceTableByteArrayModel : public AbstractByteArrayModel, public Versionable, public Bookmarkable, public ChangesDescribable, public ChangeHistory
 {
     Q_OBJECT
     Q_INTERFACES( KHECore::Versionable KHECore::Bookmarkable KHECore::ChangesDescribable KHECore::ChangeHistory )
@@ -47,29 +47,29 @@ class OKTETACORE_EXPORT KPieceTableByteArrayModel : public KAbstractByteArrayMod
     friend class Private;
 
   public:
-//     KPieceTableByteArrayModel( const char *data, unsigned int size );
-//     KPieceTableByteArrayModel( char *D, unsigned int size );
+//     PieceTableByteArrayModel( const char *data, unsigned int size );
+//     PieceTableByteArrayModel( char *D, unsigned int size );
     /**
      * makes a deep copy if careForMemory is false
      * @param data
      * @param careForMemory 
      */
-    KPieceTableByteArrayModel( const char *data, unsigned int size, bool careForMemory = true );
-//     explicit KPieceTableByteArrayModel( const QByteArray &data );
-    explicit KPieceTableByteArrayModel( unsigned int size = 0, char fillByte = '\0' );
-//     explicit KPieceTableByteArrayModel( int size = 0careForMemory, int maxSize = -1 );
-    virtual ~KPieceTableByteArrayModel();
+    PieceTableByteArrayModel( const char *data, unsigned int size, bool careForMemory = true );
+//     explicit PieceTableByteArrayModel( const QByteArray &data );
+    explicit PieceTableByteArrayModel( unsigned int size = 0, char fillByte = '\0' );
+//     explicit PieceTableByteArrayModel( int size = 0careForMemory, int maxSize = -1 );
+    virtual ~PieceTableByteArrayModel();
 
-  public: // KAbstractByteArrayModel API
+  public: // AbstractByteArrayModel API
     virtual char datum( unsigned int offset ) const;
     virtual int size() const;
     virtual bool isReadOnly() const;
     virtual bool isModified() const;
 
     virtual int insert( int at, const char *data, int length );
-    virtual int remove( const KSection &section );
-    virtual unsigned int replace( const KSection &before, const char *after, unsigned int afterLength );
-    virtual bool swap( int firstStart, const KSection &secondSection );
+    virtual int remove( const Section &section );
+    virtual unsigned int replace( const Section &before, const char *after, unsigned int afterLength );
+    virtual bool swap( int firstStart, const Section &secondSection );
     virtual int fill( const char fillChar, unsigned int from = 0, int length = -1 );
     virtual void setDatum( unsigned int offset, const char datum );
 
@@ -88,11 +88,11 @@ class OKTETACORE_EXPORT KPieceTableByteArrayModel : public KAbstractByteArrayMod
     virtual void revertToVersionByIndex( int versionIndex );
 
   public: // Bookmarkable API
-    virtual void addBookmarks( const QList<KHECore::KBookmark> &bookmarks );
-    virtual void removeBookmarks( const QList<KHECore::KBookmark> &bookmarks );
+    virtual void addBookmarks( const QList<KHECore::Bookmark> &bookmarks );
+    virtual void removeBookmarks( const QList<KHECore::Bookmark> &bookmarks );
     virtual void removeAllBookmarks();
 
-    virtual KHECore::KBookmarkList bookmarkList() const;
+    virtual KHECore::BookmarkList bookmarkList() const;
 
   public: // ChangesDescribable API
     virtual void openGroupedChange( const QString &description );
@@ -126,8 +126,8 @@ class OKTETACORE_EXPORT KPieceTableByteArrayModel : public KAbstractByteArrayMod
     virtual void headVersionChanged( int newHeadVersionIndex );
 
   Q_SIGNALS: // Bookmarkable signals
-    virtual void bookmarksAdded( const QList<KHECore::KBookmark> &bookmarks );
-    virtual void bookmarksRemoved( const QList<KHECore::KBookmark> &bookmarks );
+    virtual void bookmarksAdded( const QList<KHECore::Bookmark> &bookmarks );
+    virtual void bookmarksRemoved( const QList<KHECore::Bookmark> &bookmarks );
     virtual void bookmarksModified( bool modified );
 
   Q_SIGNALS: // ChangeHistory signals

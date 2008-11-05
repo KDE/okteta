@@ -24,7 +24,7 @@
 
 // Okteta core
 #include <khechar.h>
-#include <kcharcodec.h>
+#include <charcodec.h>
 #include <valuecodec.h>
 // KDE
 #include <KLocale>
@@ -42,7 +42,7 @@ StatisticTableModel::StatisticTableModel( int *byteCount, QObject *parent )
    mByteCount( byteCount ),
    mValueCoding( DefaultValueCoding ),
    mValueCodec( KHECore::ValueCodec::createCodec(DefaultValueCoding) ),
-   mCharCodec( KHECore::KCharCodec::createCodec(KHECore::LocalEncoding) ),
+   mCharCodec( KHECore::CharCodec::createCodec(KHECore::LocalEncoding) ),
    mUndefinedChar( StatisticsDefaultUndefinedChar )
 {
 }
@@ -83,7 +83,7 @@ void StatisticTableModel::setCharCodec( const QString &codeName )
         return;
 
     delete mCharCodec;
-    mCharCodec = KHECore::KCharCodec::createCodec( codeName );
+    mCharCodec = KHECore::CharCodec::createCodec( codeName );
 
     emit dataChanged( index(0,CharacterId), index(StatisticsByteSetSize-1,CharacterId) );
 }

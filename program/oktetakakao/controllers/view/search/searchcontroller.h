@@ -32,7 +32,7 @@
 class KSearchDialog;
 class KByteArrayDisplay;
 namespace KHECore {
-class KAbstractByteArrayModel;
+class AbstractByteArrayModel;
 }
 class KXmlGuiWindow;
 class KAction;
@@ -65,7 +65,7 @@ class SearchController : public AbstractXmlGuiController
     KXmlGuiWindow *MainWindow;
 
     KByteArrayDisplay* mByteArrayDisplay;
-    KHECore::KAbstractByteArrayModel *ByteArray;
+    KHECore::AbstractByteArrayModel *ByteArray;
 
     KAction *mFindAction;
     KAction *mFindNextAction;

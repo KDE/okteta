@@ -26,7 +26,7 @@
 // lib
 #include "piecetable.h"
 //
-#include <ksectionlist.h>
+#include <sectionlist.h>
 #include <arraychangemetricslist.h>
 // KDE
 #include <KLocale>
@@ -52,20 +52,20 @@ bool GroupPieceTableChange::merge( const AbstractPieceTableChange *other )
     return result;
 }
 
-KHE::KSection GroupPieceTableChange::apply( PieceTable *pieceTable ) const
+KHE::Section GroupPieceTableChange::apply( PieceTable *pieceTable ) const
 {
 Q_UNUSED( pieceTable )
 //     pieceTable->insert( mInsertOffset, mInsertLength, mStorageOffset );
 
-    return KHE::KSection();//( mInsertOffset, pieceTable->size()-1 );
+    return KHE::Section();//( mInsertOffset, pieceTable->size()-1 );
 }
 
-KHE::KSection GroupPieceTableChange::revert( PieceTable *pieceTable ) const
+KHE::Section GroupPieceTableChange::revert( PieceTable *pieceTable ) const
 {
 Q_UNUSED( pieceTable )
 //     const int oldLast = pieceTable->size() - 1;
-//     pieceTable->remove( KHE::KSection::fromWidth(mInsertOffset,mInsertLength) );
-    return KHE::KSection();//( mInsertOffset, oldLast );
+//     pieceTable->remove( KHE::Section::fromWidth(mInsertOffset,mInsertLength) );
+    return KHE::Section();//( mInsertOffset, oldLast );
 }
 
 KHE::ArrayChangeMetrics GroupPieceTableChange::metrics() const
@@ -110,15 +110,15 @@ bool GroupPieceTableChange::appendChange( AbstractPieceTableChange *change )
 }
 
 
-KHE::KSectionList GroupPieceTableChange::applyGroup( PieceTable *pieceTable ) const
+KHE::SectionList GroupPieceTableChange::applyGroup( PieceTable *pieceTable ) const
 {
-    KHE::KSectionList result;
+    KHE::SectionList result;
     foreach( AbstractPieceTableChange *change, mChangeStack )
     {
         if( change->type() == AbstractPieceTableChange::GroupId )
         {
             const GroupPieceTableChange *groupChange = static_cast<const GroupPieceTableChange *>(change);
-            const KHE::KSectionList changedSectionList = groupChange->applyGroup( pieceTable );
+            const KHE::SectionList changedSectionList = groupChange->applyGroup( pieceTable );
             result.addSectionList( changedSectionList );
         }
         else
@@ -128,9 +128,9 @@ KHE::KSectionList GroupPieceTableChange::applyGroup( PieceTable *pieceTable ) co
     return result;
 }
 
-KHE::KSectionList GroupPieceTableChange::revertGroup( PieceTable *pieceTable ) const
+KHE::SectionList GroupPieceTableChange::revertGroup( PieceTable *pieceTable ) const
 {
-    KHE::KSectionList result;
+    KHE::SectionList result;
 
     QStack<AbstractPieceTableChange*>::ConstIterator it = mChangeStack.end();
     while( it != mChangeStack.begin() )
@@ -140,7 +140,7 @@ KHE::KSectionList GroupPieceTableChange::revertGroup( PieceTable *pieceTable ) c
         if( change->type() == AbstractPieceTableChange::GroupId )
         {
             const GroupPieceTableChange *groupChange = static_cast<const GroupPieceTableChange *>(change);
-            const KHE::KSectionList changedSectionList = groupChange->revertGroup( pieceTable );
+            const KHE::SectionList changedSectionList = groupChange->revertGroup( pieceTable );
             result.addSectionList( changedSectionList );
         }
         else

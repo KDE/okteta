@@ -30,7 +30,7 @@ class KByteArrayDisplay;
 class KByteArrayDocument;
 class AbstractModel;
 namespace KHECore {
-class KAbstractByteArrayModel;
+class AbstractByteArrayModel;
 }
 
 /**
@@ -73,7 +73,7 @@ class PrintTool : public QObject
     KByteArrayDocument *mDocument;
 
     KByteArrayDisplay* mByteArrayDisplay;
-    KHECore::KAbstractByteArrayModel *mByteArrayModel;
+    KHECore::AbstractByteArrayModel *mByteArrayModel;
 };
 
 #endif

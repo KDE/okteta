@@ -31,7 +31,7 @@
 #include <QtCore/QString>
 
 namespace KHE {
-class KSectionList;
+class SectionList;
 class ArrayChangeMetricsList;
 }
 
@@ -60,7 +60,7 @@ class PieceTableChangeHistory
      * @return true if there were changes to revert, false otherwise
      */
     bool revertBeforeChange( PieceTable *pieceTable, int changeId,
-                             KHE::KSectionList *changedRanges, KHE::ArrayChangeMetricsList *changeList );
+                             KHE::SectionList *changedRanges, KHE::ArrayChangeMetricsList *changeList );
 
     /// 
     void openGroupedChange( const QString &description ); // TODO: hand over description? user change id?

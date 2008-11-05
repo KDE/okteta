@@ -27,7 +27,7 @@
 // Kakao core
 #include <kdocumentsyncmanager.h>
 // Okteta core
-#include <kabstractbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 // KDE
 #include <KLocale>
 #include <KUrl>
@@ -54,7 +54,7 @@ KMimeType::Ptr DocumentInfoTool::mimeType() const
     if( mDocument )
     {
 #if 0
-we have to create a QIODevice for KAbstractByteArrayModel and 
+we have to create a QIODevice for AbstractByteArrayModel and 
 do delayed tests for the mimetype on changes and cache the result.
 
 While KMimeType does not support QIODevices this code can be reused:

@@ -30,7 +30,7 @@ target_link_libraries( arraychangemetricstest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_
 
 set( ksectiontest_SRCS
   ksectiontest.cpp
-  ${SUTDIR}/ksection.cpp
+  ${SUTDIR}/section.cpp
 )
 
 kde4_add_unit_test( ksectiontest  TESTNAME libokteta-core-ksectiontest  ${ksectiontest_SRCS} )
@@ -198,7 +198,7 @@ target_link_libraries( kbookmarktest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} 
 
 set( kbookmarklisttest_SRCS
   kbookmarklisttest.cpp
-  ${SUTDIR}/kbookmarklist.cpp
+  ${SUTDIR}/bookmarklist.cpp
 )
 
 kde4_add_unit_test( kbookmarklisttest  TESTNAME libokteta-core-kbookmarklisttest  ${kbookmarklisttest_SRCS} )

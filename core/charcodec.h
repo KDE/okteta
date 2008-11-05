@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_KCHARCODEC_H
-#define KHE_CORE_KCHARCODEC_H
+#ifndef KHE_CORE_CHARCODEC_H
+#define KHE_CORE_CHARCODEC_H
 
 
 // lib
@@ -38,16 +38,16 @@ namespace KHECore
 class KChar;
 
 
-class OKTETACORE_EXPORT KCharCodec
+class OKTETACORE_EXPORT CharCodec
 {
   public:
-    virtual ~KCharCodec() {}
+    virtual ~CharCodec() {}
 
   public:
     /** */
-    static KCharCodec* createCodec( CharCoding E );
+    static CharCodec* createCodec( CharCoding E );
     /** */
-    static KCharCodec* createCodec( const QString &Name );
+    static CharCodec* createCodec( const QString &Name );
 
     static const QStringList &codecNames();
 

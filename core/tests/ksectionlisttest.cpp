@@ -23,7 +23,7 @@
 #include "ksectionlisttest.h"
 
 // test object
-#include <ksectionlist.h>
+#include <sectionlist.h>
 // Qt
 #include <QtTest/QtTest>
 
@@ -39,16 +39,16 @@ static const int End2 = Start2+Width-1;
 
 void KSectionListTest::testSimpleConstructor()
 {
-  KSectionList SectionList;
+  SectionList SectionList;
   QVERIFY( SectionList.isEmpty() );
 }
 
 
 void KSectionListTest::testAddSingleSection()
 {
-  KSectionList SectionList;
+  SectionList SectionList;
 
-  KSection Section( Start1, End1 );
+  Section Section( Start1, End1 );
   SectionList.addSection( Section );
   QCOMPARE( SectionList.size(), 1 );
   QCOMPARE( SectionList.first(), Section );
@@ -57,18 +57,18 @@ void KSectionListTest::testAddSingleSection()
 
 void KSectionListTest::testAddJoinableSections()
 {
-  KSectionList SectionList;
+  SectionList SectionList;
 
-  KSection Section1( Start1, End1 );
-  KSection Section2( Start2, End2 );
+  Section Section1( Start1, End1 );
+  Section Section2( Start2, End2 );
   // in front
-  KSection OtherSection( 0, Start1-1 );
+  Section OtherSection( 0, Start1-1 );
   SectionList.addSection( Section1 );
   SectionList.addSection( Section2 );
   SectionList.addSection( OtherSection );
 
   QCOMPARE( SectionList.size(), 2 );
-  QCOMPARE( SectionList.first(), KSection(OtherSection.start(),Section1.end()) );
+  QCOMPARE( SectionList.first(), Section(OtherSection.start(),Section1.end()) );
   QCOMPARE( SectionList.last(), Section2 );
 
   // in the middle, with first
@@ -79,7 +79,7 @@ void KSectionListTest::testAddJoinableSections()
   SectionList.addSection( OtherSection );
 
   QCOMPARE( SectionList.size(), 2 );
-  QCOMPARE( SectionList.first(), KSection(Section1.start(),OtherSection.end()) );
+  QCOMPARE( SectionList.first(), Section(Section1.start(),OtherSection.end()) );
   QCOMPARE( SectionList.last(), Section2 );
 
   // in the middle, with both
@@ -90,7 +90,7 @@ void KSectionListTest::testAddJoinableSections()
   SectionList.addSection( OtherSection );
 
   QCOMPARE( SectionList.size(), 1 );
-  QCOMPARE( SectionList.first(), KSection(Section1.start(),Section2.end()) );
+  QCOMPARE( SectionList.first(), Section(Section1.start(),Section2.end()) );
 
   // in the middle, with last
   SectionList.clear();
@@ -101,7 +101,7 @@ void KSectionListTest::testAddJoinableSections()
 
   QCOMPARE( SectionList.size(), 2 );
   QCOMPARE( SectionList.first(), Section1 );
-  QCOMPARE( SectionList.last(), KSection(OtherSection.start(),Section2.end()) );
+  QCOMPARE( SectionList.last(), Section(OtherSection.start(),Section2.end()) );
 
   // behind
   SectionList.clear();
@@ -112,18 +112,18 @@ void KSectionListTest::testAddJoinableSections()
 
   QCOMPARE( SectionList.size(), 2 );
   QCOMPARE( SectionList.first(), Section1 );
-  QCOMPARE( SectionList.last(), KSection(Section2.start(),OtherSection.end()) );
+  QCOMPARE( SectionList.last(), Section(Section2.start(),OtherSection.end()) );
 }
 
 
 void KSectionListTest::testAddNonJoinableSections()
 {
-  KSectionList SectionList;
+  SectionList SectionList;
 
-  KSection Section1( Start1, End1 );
-  KSection Section2( Start2, End2 );
+  Section Section1( Start1, End1 );
+  Section Section2( Start2, End2 );
   // in front
-  KSection OtherSection( 0, Start1-2 );
+  Section OtherSection( 0, Start1-2 );
   SectionList.addSection( Section1 );
   SectionList.addSection( Section2 );
   SectionList.addSection( OtherSection );

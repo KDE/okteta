@@ -25,7 +25,7 @@
 // lib
 #include <piecetable/piecetable.h>
 #include <arraychangemetrics.h>
-#include <ksection.h>
+#include <section.h>
 // Qt
 #include <QtCore/QString>
 
@@ -52,18 +52,18 @@ bool TestPieceTableChange::merge( const AbstractPieceTableChange *other )
     return result;
 }
 
-KHE::KSection TestPieceTableChange::apply( PieceTable *pieceTable ) const
+KHE::Section TestPieceTableChange::apply( PieceTable *pieceTable ) const
 {
     pieceTable->replaceOne( mPosition, mStoragePosition, mStorageId );
 
-    return KHE::KSection( mPosition, mPosition );
+    return KHE::Section( mPosition, mPosition );
 }
 
-KHE::KSection TestPieceTableChange::revert( PieceTable *pieceTable ) const
+KHE::Section TestPieceTableChange::revert( PieceTable *pieceTable ) const
 {
     const Piece replaced = pieceTable->replaceOne( mPosition, mReplacedStoragePosition, mReplacedStorageId );
 
-    return KHE::KSection( mPosition, mPosition );
+    return KHE::Section( mPosition, mPosition );
 }
 
 KHE::ArrayChangeMetrics TestPieceTableChange::metrics() const

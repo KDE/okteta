@@ -27,7 +27,7 @@
 #include <QtCore/QAbstractTableModel>
 
 namespace KHECore {
-class KCharCodec;
+class CharCodec;
 class ValueCodec;
 }
 
@@ -68,7 +68,7 @@ class ByteTableModel : public QAbstractTableModel
 
   protected:
     KHECore::ValueCodec *mValueCodec[NofOfValueCodings];
-    KHECore::KCharCodec *mCharCodec;
+    KHECore::CharCodec *mCharCodec;
     QChar mUndefinedChar;
 };
 

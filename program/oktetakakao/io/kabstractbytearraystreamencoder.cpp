@@ -27,7 +27,7 @@
 #include <kbytearraydocument.h>
 #include <kbytearrayselection.h>
 // Okteta core
-#include <kabstractbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 
 
 KAbstractByteArrayStreamEncoder::KAbstractByteArrayStreamEncoder( const QString &remoteTypeName,
@@ -57,13 +57,13 @@ bool KAbstractByteArrayStreamEncoder::encodeToStream( QIODevice *device,
     if( byteArrayDocument == 0 )
         return false;
 
-    const KHECore::KAbstractByteArrayModel* byteArray = byteArrayDocument->content();
+    const KHECore::AbstractByteArrayModel* byteArray = byteArrayDocument->content();
 
     const KByteArraySelection* byteArraySelection =
         selection ? static_cast<const KByteArraySelection*>( selection ) : 0;
 
-    const KHE::KSection section = byteArraySelection && byteArraySelection->isValid() ? byteArraySelection->section() :
-                                   KHE::KSection::fromWidth( 0, byteArray->size() );
+    const KHE::Section section = byteArraySelection && byteArraySelection->isValid() ? byteArraySelection->section() :
+                                   KHE::Section::fromWidth( 0, byteArray->size() );
 
     const bool success = encodeDataToStream( device, byteArrayDisplay, byteArray, section );
 

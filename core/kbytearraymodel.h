@@ -25,7 +25,7 @@
 
 
 // lib
-#include "kabstractbytearraymodel.h"
+#include "abstractbytearraymodel.h"
 #include "kbookmarkable.h"
 
 
@@ -38,7 +38,7 @@ class KByteArrayModelPrivate;
   *@author Friedrich W. H. Kossebau
   */
 
-class OKTETACORE_EXPORT KByteArrayModel : public KAbstractByteArrayModel, public Bookmarkable
+class OKTETACORE_EXPORT KByteArrayModel : public AbstractByteArrayModel, public Bookmarkable
 {
     Q_OBJECT
     Q_INTERFACES( KHECore::Bookmarkable )
@@ -51,16 +51,16 @@ class OKTETACORE_EXPORT KByteArrayModel : public KAbstractByteArrayModel, public
     explicit KByteArrayModel( int size=0, int maxSize = -1 );
     virtual ~KByteArrayModel();
 
-  public: // KAbstractByteArrayModel API
+  public: // AbstractByteArrayModel API
     virtual char datum( unsigned int offset ) const;
     virtual int size() const;
     virtual bool isReadOnly() const;
     virtual bool isModified() const;
 
     virtual int insert( int at, const char *data, int length );
-    virtual int remove( const KSection &section );
-    virtual unsigned int replace( const KSection &before, const char *after, unsigned int afterLength );
-    virtual bool swap( int firstStart, const KSection &secondSection );
+    virtual int remove( const Section &section );
+    virtual unsigned int replace( const Section &before, const char *after, unsigned int afterLength );
+    virtual bool swap( int firstStart, const Section &secondSection );
     virtual int fill( const char fillChar, unsigned int from = 0, int length = -1 );
     virtual void setDatum( unsigned int offset, const char datum );
 
@@ -71,15 +71,15 @@ class OKTETACORE_EXPORT KByteArrayModel : public KAbstractByteArrayModel, public
     virtual int lastIndexOf( const char *searchString, int length, int from = -1 ) const;
 
   public: // KHECore::Bookmarkable API
-    virtual void addBookmarks( const QList<KHECore::KBookmark> &bookmarks );
-    virtual void removeBookmarks( const QList<KHECore::KBookmark> &bookmarks );
+    virtual void addBookmarks( const QList<KHECore::Bookmark> &bookmarks );
+    virtual void removeBookmarks( const QList<KHECore::Bookmark> &bookmarks );
     virtual void removeAllBookmarks();
 
-    virtual KHECore::KBookmarkList bookmarkList() const;
+    virtual KHECore::BookmarkList bookmarkList() const;
 
   Q_SIGNALS: // KHECore::Bookmarkable API
-    virtual void bookmarksAdded( const QList<KHECore::KBookmark> &bookmarks );
-    virtual void bookmarksRemoved( const QList<KHECore::KBookmark> &bookmarks );
+    virtual void bookmarksAdded( const QList<KHECore::Bookmark> &bookmarks );
+    virtual void bookmarksRemoved( const QList<KHECore::Bookmark> &bookmarks );
     virtual void bookmarksModified( bool modified );
 
   public:

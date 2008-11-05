@@ -23,7 +23,7 @@
 #include "kpiecetablebytearraymodelkabstractbytearraymodeliftest.h"
 
 // test object
-#include <kpiecetablebytearraymodel.h>
+#include <piecetablebytearraymodel.h>
 // Qt
 #include <QtTest/QtTest>
 
@@ -31,16 +31,16 @@
 static const int ByteArrayModelSize = 60;
 
 
-KHECore::KAbstractByteArrayModel *KPieceTableByteArrayModelKAbstractByteArrayModelIfTest::createByteArrayModel()
+KHECore::AbstractByteArrayModel *KPieceTableByteArrayModelKAbstractByteArrayModelIfTest::createByteArrayModel()
 {
-    KHECore::KPieceTableByteArrayModel *byteArrayModel = new KHECore::KPieceTableByteArrayModel( ByteArrayModelSize );
+    KHECore::PieceTableByteArrayModel *byteArrayModel = new KHECore::PieceTableByteArrayModel( ByteArrayModelSize );
     byteArrayModel->setReadOnly( false );
 
     return byteArrayModel;
 }
 
 void KPieceTableByteArrayModelKAbstractByteArrayModelIfTest::deleteByteArrayModel(
-       KHECore::KAbstractByteArrayModel *byteArrayModel )
+       KHECore::AbstractByteArrayModel *byteArrayModel )
 {
     delete byteArrayModel;
 }

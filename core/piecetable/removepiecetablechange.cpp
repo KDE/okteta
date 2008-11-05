@@ -24,7 +24,7 @@
 
 // lib
 #include "piecetable.h"
-#include <ksection.h>
+#include <section.h>
 #include <arraychangemetrics.h>
 // KDE
 #include <KLocale>
@@ -67,20 +67,20 @@ bool RemovePieceTableChange::merge( const AbstractPieceTableChange *other )
     return result;
 }
 
-KHE::KSection RemovePieceTableChange::apply( PieceTable *pieceTable ) const
+KHE::Section RemovePieceTableChange::apply( PieceTable *pieceTable ) const
 {
     const int oldLast = pieceTable->size() - 1;
 
     pieceTable->remove( mRemoveSection );
 
-    return KHE::KSection( mRemoveSection.start(), oldLast );
+    return KHE::Section( mRemoveSection.start(), oldLast );
 }
 
-KHE::KSection RemovePieceTableChange::revert( PieceTable *pieceTable ) const
+KHE::Section RemovePieceTableChange::revert( PieceTable *pieceTable ) const
 {
     pieceTable->insert( mRemoveSection.start(), mRemovedPieces );
 
-    return KHE::KSection( mRemoveSection.start(), pieceTable->size()-1 );
+    return KHE::Section( mRemoveSection.start(), pieceTable->size()-1 );
 }
 
 KHE::ArrayChangeMetrics RemovePieceTableChange::metrics() const

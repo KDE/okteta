@@ -27,13 +27,13 @@
 #include "abstractbytearraycolumntextrenderer.h"
 
 namespace KHECore {
-class KCharCodec;
+class CharCodec;
 }
 
 class CharByteArrayColumnTextRenderer : public AbstractByteArrayColumnTextRenderer
 {
   public:
-    CharByteArrayColumnTextRenderer( const KHECore::KAbstractByteArrayModel *byteArrayModel, int offset,
+    CharByteArrayColumnTextRenderer( const KHECore::AbstractByteArrayModel *byteArrayModel, int offset,
         const KHEUI::CoordRange &coordRange,
         int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
         const QString &charCodecName, QChar substituteChar, QChar undefinedChar );
@@ -43,7 +43,7 @@ class CharByteArrayColumnTextRenderer : public AbstractByteArrayColumnTextRender
     virtual void renderLine( QTextStream *stream ) const;
 
   protected:
-    const KHECore::KCharCodec *mCharCodec;
+    const KHECore::CharCodec *mCharCodec;
     const QChar mSubstituteChar;
     const QChar mUndefinedChar;
 };

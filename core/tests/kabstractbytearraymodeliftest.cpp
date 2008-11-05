@@ -70,7 +70,7 @@ void KAbstractByteArrayModelIfTest::checkContentsReplaced( int Position, int Rem
    QCOMPARE( changeMetrics.removeLength(), RemovedLength );
    QCOMPARE( changeMetrics.insertLength(), InsertedLength );
 }
-void KAbstractByteArrayModelIfTest::checkContentsReplaced( const KHE::KSection &RemoveSection, int InsertedLength )
+void KAbstractByteArrayModelIfTest::checkContentsReplaced( const KHE::Section &RemoveSection, int InsertedLength )
 { checkContentsReplaced( RemoveSection.start(), RemoveSection.width(), InsertedLength ); }
 
 void KAbstractByteArrayModelIfTest::checkContentsSwapped( int firstStart, int secondStart, int secondLength )
@@ -83,7 +83,7 @@ void KAbstractByteArrayModelIfTest::checkContentsSwapped( int firstStart, int se
    QCOMPARE( changeMetrics.secondStart(), secondStart );
    QCOMPARE( changeMetrics.secondLength(), secondLength );
 }
-void KAbstractByteArrayModelIfTest::checkContentsSwapped( int firstStart, const KHE::KSection &secondSection )
+void KAbstractByteArrayModelIfTest::checkContentsSwapped( int firstStart, const KHE::Section &secondSection )
 { checkContentsSwapped( firstStart, secondSection.start(), secondSection.width() ); }
 
 
@@ -129,7 +129,7 @@ void KAbstractByteArrayModelIfTest::testCopyTo()
   //
   static const unsigned int CopySize = 10;
   unsigned int Size = ByteArrayModel->size();
-  KSection CopySection( 0, CopySize-1 );
+  Section CopySection( 0, CopySize-1 );
 
   KFixedSizeByteArrayModel Copy( Size, BlankChar );
   // copyTo() all
@@ -176,7 +176,7 @@ void KAbstractByteArrayModelIfTest::testFill()
 
   static const unsigned int FillSize = 10;
   unsigned int Size = ByteArrayModel->size();
-  KSection FillSection = KSection::fromWidth( 0, Size );
+  Section FillSection = Section::fromWidth( 0, Size );
 
   KFixedSizeByteArrayModel Copy( Size, PaintChar );
 
@@ -280,7 +280,7 @@ void KAbstractByteArrayModelIfTest::testRemove()
 
   // remove() at end
   ByteArrayModel->setModified( false );
-  KSection RemoveSection( Size-RemoveSize, Size-1 );
+  Section RemoveSection( Size-RemoveSize, Size-1 );
   clearSignalSpys();
 
   unsigned int Removed = ByteArrayModel->remove( RemoveSection );
@@ -301,7 +301,7 @@ void KAbstractByteArrayModelIfTest::testRemove()
   RemoveSection.setEndByWidth( Removed );
 
   QCOMPARE( Copy.compare(*ByteArrayModel,0,RemoveSection.nextBeforeStart(),0), 0 );
-  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(RemoveSection.start(),Size-Removed-1),RemoveSection.nextBehindEnd()), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,Section(RemoveSection.start(),Size-Removed-1),RemoveSection.nextBehindEnd()), 0 );
   QCOMPARE( ByteArrayModel->isModified(), Removed > 0 );
   checkContentsReplaced( RemoveSection, 0 );
 
@@ -315,7 +315,7 @@ void KAbstractByteArrayModelIfTest::testRemove()
   Removed = ByteArrayModel->remove( RemoveSection );
   RemoveSection.setEndByWidth( Removed );
 
-  QCOMPARE( Copy.compare( *ByteArrayModel,KSection(RemoveSection.start(),Size-Removed-1),RemoveSection.nextBehindEnd()), 0 );
+  QCOMPARE( Copy.compare( *ByteArrayModel,Section(RemoveSection.start(),Size-Removed-1),RemoveSection.nextBehindEnd()), 0 );
   QCOMPARE( ByteArrayModel->isModified(), Removed > 0 );
   checkContentsReplaced( RemoveSection, 0 );
 }
@@ -356,7 +356,7 @@ void KAbstractByteArrayModelIfTest::testInsertAtBegin()
   // prepare
   KTestData *Data = prepareTestInsert();
   int Size = ByteArrayModel->size();
-  KSection InsertSection( 0, -1 );
+  Section InsertSection( 0, -1 );
   clearSignalSpys();
 
   int Inserted = ByteArrayModel->insert( InsertSection.start(), Data->InsertData.rawData(), InsertSize );
@@ -380,7 +380,7 @@ void KAbstractByteArrayModelIfTest::testInsertAtMid()
   // prepare
   KTestData *Data = prepareTestInsert();
   int Size = ByteArrayModel->size();
-  KSection InsertSection( Size/2, -1 );
+  Section InsertSection( Size/2, -1 );
   clearSignalSpys();
 
   int Inserted = ByteArrayModel->insert( InsertSection.start(), Data->InsertData.rawData(), InsertSize );
@@ -408,7 +408,7 @@ void KAbstractByteArrayModelIfTest::testInsertAtEnd()
   // prepare
   KTestData *Data = prepareTestInsert();
   int Size = ByteArrayModel->size();
-  KSection InsertSection( Size, -1 );
+  Section InsertSection( Size, -1 );
   clearSignalSpys();
 
   int Inserted = ByteArrayModel->insert( InsertSection.start(), Data->InsertData.rawData(), InsertSize );
@@ -445,13 +445,13 @@ void KAbstractByteArrayModelIfTest::testSwap()
   // prepare Copy
   static const int MoveSize = 10;
   int Size = ByteArrayModel->size();
-  const KSection Origin = KSection::fromWidth( Size-MoveSize, MoveSize );
+  const Section Origin = Section::fromWidth( Size-MoveSize, MoveSize );
   KFixedSizeByteArrayModel Copy( Size );
 
   // prepare ByteArrayModel
   textureByteArrayModel( ByteArrayModel, 100, 255, 0, Origin.nextBeforeStart() );
   textureByteArrayModel( ByteArrayModel, 10, 99, Origin );
-  KSection Source = Origin;
+  Section Source = Origin;
   ByteArrayModel->setModified( false );
 
   // create Copy
@@ -459,15 +459,15 @@ void KAbstractByteArrayModelIfTest::testSwap()
 
   // Action: move to middle (to left)
   int DestPos = Size/2;
-  KSection Target = KSection::fromWidth( DestPos, Source.width() );
+  Section Target = Section::fromWidth( DestPos, Source.width() );
   clearSignalSpys();
 
   bool success = ByteArrayModel->swap( DestPos, Source );
 
   QVERIFY( success );
-  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(0,Target.nextBeforeStart()),0), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,Section(0,Target.nextBeforeStart()),0), 0 );
   QCOMPARE( Copy.compare(*ByteArrayModel,Target,Origin.start()), 0 );
-  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(Target.nextBehindEnd(),Size-1),Target.start()), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,Section(Target.nextBehindEnd(),Size-1),Target.start()), 0 );
   QCOMPARE( ByteArrayModel->isModified(), success );
   QCOMPARE( ByteArrayModel->size(), Size );
   checkContentsSwapped( DestPos, Source );
@@ -484,9 +484,9 @@ void KAbstractByteArrayModelIfTest::testSwap()
   success = ByteArrayModel->swap( DestPos, Source );
 
   QVERIFY( success );
-  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(0,Target.nextBeforeStart()),0), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,Section(0,Target.nextBeforeStart()),0), 0 );
   QCOMPARE( Copy.compare(*ByteArrayModel,Target,Origin.start()), 0 );
-  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(Target.nextBehindEnd(),Size-1),Target.start()), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,Section(Target.nextBehindEnd(),Size-1),Target.start()), 0 );
   QCOMPARE( ByteArrayModel->isModified(), success );
   QCOMPARE( ByteArrayModel->size(), Size );
   checkContentsSwapped( DestPos, Source );
@@ -504,7 +504,7 @@ void KAbstractByteArrayModelIfTest::testSwap()
 
   QVERIFY( success );
   QCOMPARE( Copy.compare(*ByteArrayModel,Target,Origin.start()), 0 );
-  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(Target.nextBehindEnd(),Size-1),Target.start()), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,Section(Target.nextBehindEnd(),Size-1),Target.start()), 0 );
   QCOMPARE( ByteArrayModel->isModified(), success );
   QCOMPARE( ByteArrayModel->size(), Size );
   checkContentsSwapped( DestPos, Source );
@@ -523,7 +523,7 @@ void KAbstractByteArrayModelIfTest::testSwap()
 
   QCOMPARE( NewPos, Target.start() );
   QCOMPARE( Copy.compare(*ByteArrayModel,Target,Origin.start()), 0 );
-  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(Target.nextBehindEnd(),Size-1),Origin.nextBehindEnd()), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,Section(Target.nextBehindEnd(),Size-1),Origin.nextBehindEnd()), 0 );
   QCOMPARE( ByteArrayModel->isModified(), NewPos != Source.start() );
   QCOMPARE( ByteArrayModel->size(), Size );
   checkContentsSwapped( DestPos, Source );
@@ -554,14 +554,14 @@ void KAbstractByteArrayModelIfTest::testReplaceEqual()
   ByteArrayModel->copyTo( Copy.rawData(), 0, Size );
 
   // Action: move to begin again (to left)
-  KSection Target = KSection::fromWidth( 0, RemoveSize );
+  Section Target = Section::fromWidth( 0, RemoveSize );
   clearSignalSpys();
 
   unsigned int Inserted = ByteArrayModel->replace( Target, InsertData.rawData(), InsertSize );
 
   QCOMPARE( Inserted, InsertSize );
   QCOMPARE( InsertData.compare(*ByteArrayModel,Target,0), 0 );
-  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(Target.nextBehindEnd(),Size-1),Target.nextBehindEnd()), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,Section(Target.nextBehindEnd(),Size-1),Target.nextBehindEnd()), 0 );
   QCOMPARE( ByteArrayModel->isModified(), true );
   QCOMPARE( ByteArrayModel->size(), (int)Size );
   checkContentsReplaced( Target, Inserted );
@@ -578,9 +578,9 @@ void KAbstractByteArrayModelIfTest::testReplaceEqual()
   Inserted = ByteArrayModel->replace( Target, InsertData.rawData(), InsertSize );
 
   QCOMPARE( Inserted, InsertSize );
-  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(0,Target.nextBeforeStart()),0), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,Section(0,Target.nextBeforeStart()),0), 0 );
   QCOMPARE( InsertData.compare(*ByteArrayModel,Target,0), 0 );
-  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(Target.nextBehindEnd(),Size-1),Target.nextBehindEnd()), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,Section(Target.nextBehindEnd(),Size-1),Target.nextBehindEnd()), 0 );
   QVERIFY( ByteArrayModel->isModified() );
   QCOMPARE( ByteArrayModel->size(), (int)Size );
   checkContentsReplaced( Target, Inserted );
@@ -597,7 +597,7 @@ void KAbstractByteArrayModelIfTest::testReplaceEqual()
   Inserted = ByteArrayModel->replace( Target, InsertData.rawData(), InsertSize );
 
   QCOMPARE( Inserted, InsertSize );
-  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(0,Target.nextBeforeStart()),0), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,Section(0,Target.nextBeforeStart()),0), 0 );
   QCOMPARE( InsertData.compare(*ByteArrayModel,Target,0), 0 );
   QVERIFY( ByteArrayModel->isModified() );
   QCOMPARE( ByteArrayModel->size(), (int)Size );
@@ -629,15 +629,15 @@ void KAbstractByteArrayModelIfTest::testReplaceLess()
   ByteArrayModel->copyTo( Copy.rawData(), 0, Size );
 
   // Action: replace at begin
-  KSection RemoveSection = KSection::fromWidth( 0, RemoveSize );
-  KSection InsertSection = KSection::fromWidth( 0, InsertSize );
+  Section RemoveSection = Section::fromWidth( 0, RemoveSize );
+  Section InsertSection = Section::fromWidth( 0, InsertSize );
   clearSignalSpys();
 
   unsigned int Inserted = ByteArrayModel->replace( RemoveSection, InsertData.rawData(), InsertSize );
 
   QCOMPARE( Inserted, InsertSize );
   QCOMPARE( InsertData.compare(*ByteArrayModel,InsertSection,0), 0 );
-  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(InsertSection.nextBehindEnd(),Size-1-Diff),RemoveSection.nextBehindEnd()), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,Section(InsertSection.nextBehindEnd(),Size-1-Diff),RemoveSection.nextBehindEnd()), 0 );
   QVERIFY( ByteArrayModel->isModified() );
   checkContentsReplaced( RemoveSection, Inserted );
 
@@ -655,9 +655,9 @@ void KAbstractByteArrayModelIfTest::testReplaceLess()
   Inserted = ByteArrayModel->replace( RemoveSection, InsertData.rawData(), InsertSize );
 
   QCOMPARE( Inserted, InsertSize );
-  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(0,InsertSection.nextBeforeStart()),0), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,Section(0,InsertSection.nextBeforeStart()),0), 0 );
   QCOMPARE( InsertData.compare(*ByteArrayModel,InsertSection,0), 0 );
-  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(InsertSection.nextBehindEnd(),Size-1-Diff),RemoveSection.nextBehindEnd()), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,Section(InsertSection.nextBehindEnd(),Size-1-Diff),RemoveSection.nextBehindEnd()), 0 );
   QVERIFY( ByteArrayModel->isModified() );
   checkContentsReplaced( RemoveSection, Inserted );
 
@@ -675,7 +675,7 @@ void KAbstractByteArrayModelIfTest::testReplaceLess()
   Inserted = ByteArrayModel->replace( RemoveSection, InsertData.rawData(), InsertSize );
 
   QCOMPARE( Inserted, InsertSize );
-  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(0,InsertSection.nextBeforeStart()),0), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,Section(0,InsertSection.nextBeforeStart()),0), 0 );
   QCOMPARE( InsertData.compare(*ByteArrayModel,InsertSection,0), 0 );
   QVERIFY( ByteArrayModel->isModified() );
   checkContentsReplaced( RemoveSection, Inserted );
@@ -706,15 +706,15 @@ void KAbstractByteArrayModelIfTest::testReplaceMore()
   ByteArrayModel->copyTo( Copy.rawData(), 0, Size );
 
   // Action: replace at begin
-  KSection RemoveSection = KSection::fromWidth( 0, RemoveSize );
-  KSection InsertSection = KSection::fromWidth( 0, InsertSize );
+  Section RemoveSection = Section::fromWidth( 0, RemoveSize );
+  Section InsertSection = Section::fromWidth( 0, InsertSize );
   clearSignalSpys();
 
   unsigned int Inserted = ByteArrayModel->replace( RemoveSection, InsertData.rawData(), InsertSize );
 
   QCOMPARE( Inserted, InsertSize );
   QCOMPARE( InsertData.compare(*ByteArrayModel,InsertSection,0), 0 );
-  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(InsertSection.nextBehindEnd(),Size-1),RemoveSection.nextBehindEnd()), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,Section(InsertSection.nextBehindEnd(),Size-1),RemoveSection.nextBehindEnd()), 0 );
   QVERIFY( ByteArrayModel->isModified() );
   checkContentsReplaced( RemoveSection, Inserted );
 
@@ -731,9 +731,9 @@ void KAbstractByteArrayModelIfTest::testReplaceMore()
   Inserted = ByteArrayModel->replace( RemoveSection, InsertData.rawData(), InsertSize );
 
   QCOMPARE( Inserted, InsertSize );
-  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(0,InsertSection.nextBeforeStart()),0), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,Section(0,InsertSection.nextBeforeStart()),0), 0 );
   QCOMPARE( InsertData.compare(*ByteArrayModel,InsertSection,0), 0 );
-  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(InsertSection.nextBehindEnd(),Size-1),RemoveSection.nextBehindEnd()), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,Section(InsertSection.nextBehindEnd(),Size-1),RemoveSection.nextBehindEnd()), 0 );
   QVERIFY( ByteArrayModel->isModified() );
   checkContentsReplaced( RemoveSection, Inserted );
 
@@ -751,9 +751,9 @@ void KAbstractByteArrayModelIfTest::testReplaceMore()
   Inserted = ByteArrayModel->replace( RemoveSection, InsertData.rawData(), InsertSize );
 
   QCOMPARE( RemoveSize<=Inserted && Inserted<=InsertSize, true );
-  QCOMPARE( Copy.compare(*ByteArrayModel,KSection(0,InsertSection.nextBeforeStart()),0), 0 );
+  QCOMPARE( Copy.compare(*ByteArrayModel,Section(0,InsertSection.nextBeforeStart()),0), 0 );
 
-  QCOMPARE( InsertData.compare(*ByteArrayModel,KSection(InsertSection.start(),ByteArrayModel->size()-1),0), 0 );
+  QCOMPARE( InsertData.compare(*ByteArrayModel,Section(InsertSection.start(),ByteArrayModel->size()-1),0), 0 );
   QVERIFY( ByteArrayModel->isModified() );
   checkContentsReplaced( RemoveSection, Inserted );
 }

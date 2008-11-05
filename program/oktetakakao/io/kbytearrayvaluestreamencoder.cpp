@@ -25,7 +25,7 @@
 // lib
 #include <kbytearraydisplay.h>
 // Okteta core
-#include <kabstractbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 #include <valuecodec.h>
 // KDE
 #include <KLocale>
@@ -44,8 +44,8 @@ KByteArrayValueStreamEncoder::KByteArrayValueStreamEncoder()
 
 bool KByteArrayValueStreamEncoder::encodeDataToStream( QIODevice *device,
                                                        const KByteArrayDisplay* byteArrayView,
-                                                       const KHECore::KAbstractByteArrayModel *byteArrayModel,
-                                                       const KHE::KSection &section )
+                                                       const KHECore::AbstractByteArrayModel *byteArrayModel,
+                                                       const KHE::Section &section )
 {
     bool success = true;
 

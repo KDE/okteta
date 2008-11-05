@@ -25,7 +25,7 @@
 // lib
 #include <kbytearraydisplay.h>
 // Okteta core
-#include <kcharcodec.h>
+#include <charcodec.h>
 // KDE
 #include <KXMLGUIClient>
 #include <KLocale>
@@ -53,7 +53,7 @@ ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
     // char valueCoding
     mEncodingAction = actionCollection->add<KSelectAction>( "view_charencoding" );
     mEncodingAction->setText( i18nc("@title:menu","&Char Coding") );
-    mEncodingAction->setItems( KHECore::KCharCodec::codecNames() );
+    mEncodingAction->setItems( KHECore::CharCodec::codecNames() );
     connect( mEncodingAction, SIGNAL(triggered(int)), SLOT(setCharCoding(int)) );
 
     mShowsNonprintingAction = actionCollection->add<KToggleAction>( "view_showsnonprinting" );
@@ -101,7 +101,7 @@ void ViewConfigController::setTargetModel( AbstractModel* model )
         mShowsNonprintingAction->setChecked( mByteArrayDisplay->showsNonprinting() );
 
         mCodingAction->setCurrentItem( mByteArrayDisplay->valueCoding() );
-        mEncodingAction->setCurrentItem( KHECore::KCharCodec::codecNames().indexOf(mByteArrayDisplay->charCodingName()) );
+        mEncodingAction->setCurrentItem( KHECore::CharCodec::codecNames().indexOf(mByteArrayDisplay->charCodingName()) );
 
         mResizeStyleAction->setCurrentItem( mByteArrayDisplay->resizeStyle() );
 
@@ -138,7 +138,7 @@ void ViewConfigController::setResizeStyle( int resizeStyle )
 
 void ViewConfigController::setCharCoding( int charCoding )
 {
-    mByteArrayDisplay->setCharCoding( KHECore::KCharCodec::codecNames()[charCoding] );
+    mByteArrayDisplay->setCharCoding( KHECore::CharCodec::codecNames()[charCoding] );
 }
 
 void ViewConfigController::toggleValueCharColumns( int visibleColumns )

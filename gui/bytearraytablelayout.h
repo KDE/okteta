@@ -27,7 +27,7 @@
 #include "coordrange.h"
 #include "oktetagui_export.h"
 // commonlib
-#include <ksection.h>
+#include <section.h>
 
 
 namespace KHEUI
@@ -129,10 +129,10 @@ class OKTETAGUI_EXPORT ByteArrayTableLayout
     /** calculates the coord in which index is found. if index is invalid the behaviour is undefinded */
     Coord coordOfIndex( int index ) const;
     /** calculates the range of coords in which the indizes are found. if indizes are invalid the behaviour is undefinded */
-    CoordRange coordRangeOfIndizes( const KHE::KSection &indizes ) const;
+    CoordRange coordRangeOfIndizes( const KHE::Section &indizes ) const;
 
     /** returns the used positions in line */
-    KHE::KSection linePositions( int line ) const;
+    KHE::Section linePositions( int line ) const;
     /** returns the first Pos in line. if line is invalid the behaviour is undefinded */
     int firstLinePosition( int line ) const;
     /** returns the last Pos in line. if line is invalid the behaviour is undefinded */

@@ -20,31 +20,31 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_KWORDBUFFERSERVICE_H
-#define KHE_CORE_KWORDBUFFERSERVICE_H
+#ifndef KHE_CORE_WORDBYTEARRAYSERVICE_H
+#define KHE_CORE_WORDBYTEARRAYSERVICE_H
 
 // lib
 #include "oktetacore_export.h"
 // commonlib
-#include <ksection.h>
+#include <section.h>
 
 
 namespace KHECore
 {
 
-class KAbstractByteArrayModel;
-class KCharCodec;
+class AbstractByteArrayModel;
+class CharCodec;
 
 /**
   *
   *@author Friedrich W. H. Kossebau
   */
 
-class OKTETACORE_EXPORT KWordBufferService
+class OKTETACORE_EXPORT WordByteArrayService
 {
   public:
-    KWordBufferService( const KAbstractByteArrayModel* byteArrayModel, const KCharCodec* charCodec );
-    ~KWordBufferService();
+    WordByteArrayService( const AbstractByteArrayModel* byteArrayModel, const CharCodec* charCodec );
+    ~WordByteArrayService();
 
 
   public:
@@ -125,11 +125,11 @@ class OKTETACORE_EXPORT KWordBufferService
       * @param CharType
       * @return the section with a word around index.
       */
-    KHE::KSection wordSection( unsigned int index ) const;
+    KHE::Section wordSection( unsigned int index ) const;
 
   protected:
-    const KAbstractByteArrayModel* const mByteArrayModel;
-    const KCharCodec* const mCharCodec;
+    const AbstractByteArrayModel* const mByteArrayModel;
+    const CharCodec* const mCharCodec;
 };
 
 }

@@ -80,17 +80,17 @@ int KByteArrayModel::insert( int at, const char *data, int length )
     return d->insert( at, data, length );
 }
 
-int KByteArrayModel::remove( const KSection &section )
+int KByteArrayModel::remove( const Section &section )
 {
     return d->remove( section );
 }
 
-unsigned int KByteArrayModel::replace( const KSection &before, const char *after, unsigned int afterLength )
+unsigned int KByteArrayModel::replace( const Section &before, const char *after, unsigned int afterLength )
 {
     return d->replace( before, after, afterLength );
 }
 
-bool KByteArrayModel::swap( int firstStart, const KSection &secondSection )
+bool KByteArrayModel::swap( int firstStart, const Section &secondSection )
 {
     return d->swap( firstStart, secondSection );
 }
@@ -110,12 +110,12 @@ int KByteArrayModel::lastIndexOf( const char *searchString, int length, int from
     return d->lastIndexOf( searchString, length, from );
 }
 
-void KByteArrayModel::addBookmarks( const QList<KHECore::KBookmark> &bookmarks )
+void KByteArrayModel::addBookmarks( const QList<KHECore::Bookmark> &bookmarks )
 {
     d->addBookmarks( bookmarks );
 }
 
-void KByteArrayModel::removeBookmarks( const QList<KHECore::KBookmark> &bookmarks )
+void KByteArrayModel::removeBookmarks( const QList<KHECore::Bookmark> &bookmarks )
 {
     d->removeBookmarks( bookmarks );
 }
@@ -125,7 +125,7 @@ void KByteArrayModel::removeAllBookmarks()
     d->removeAllBookmarks();
 }
 
-KHECore::KBookmarkList KByteArrayModel::bookmarkList() const
+KHECore::BookmarkList KByteArrayModel::bookmarkList() const
 {
     return d->bookmarkList();
 }

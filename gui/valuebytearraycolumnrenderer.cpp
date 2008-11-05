@@ -27,7 +27,7 @@
 #include "helper.h"
 // Okteta core
 #include <valuecodec.h>
-#include <kcharcodec.h>
+#include <charcodec.h>
 // KDE
 #include <KColorScheme>
 // Qt
@@ -41,7 +41,7 @@ static const int DefaultBinaryGapWidth = 1;
 
 
 ValueByteArrayColumnRenderer::ValueByteArrayColumnRenderer( ColumnsView *columnsView,
-    KHECore::KAbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges )
+    KHECore::AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges )
  : AbstractByteArrayColumnRenderer( columnsView, byteArrayModel, layout, ranges ),
    mValueCodec( 0 ),
    mBinaryGapWidth( DefaultBinaryGapWidth )

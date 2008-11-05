@@ -31,7 +31,7 @@
 #include <columnsview.h>
 // Okteta core
 #include <kbookmarkable.h>
-#include <kcharcodec.h>
+#include <charcodec.h>
 #include <valuecodec.h>
 // KDE
 #include <KColorScheme>
@@ -61,7 +61,7 @@ static const QChar     DefaultSubstituteChar =  (char)'.';
 static const QChar     DefaultUndefinedChar =   (char)'?';
 
 ByteArrayRowColumnRenderer::ByteArrayRowColumnRenderer( ColumnsView* columnsView,
-    KHECore::KAbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges )
+    KHECore::AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges )
  : ColumnRenderer( columnsView ),
    mByteArrayModel( byteArrayModel ),
    mLayout( layout ),
@@ -113,7 +113,7 @@ KPixelY ByteArrayRowColumnRenderer::yOfCodingId( AbstractByteArrayView::CodingTy
 }
 
 
-void ByteArrayRowColumnRenderer::set( KHECore::KAbstractByteArrayModel* byteArrayModel )
+void ByteArrayRowColumnRenderer::set( KHECore::AbstractByteArrayModel* byteArrayModel )
 {
     mByteArrayModel = byteArrayModel;
     mBookmarks = qobject_cast<KHECore::Bookmarkable*>(byteArrayModel );
@@ -402,16 +402,16 @@ int ByteArrayRowColumnRenderer::magneticLinePositionOfX( KPixelX PX ) const
 }
 
 
-KHE::KSection ByteArrayRowColumnRenderer::linePositionsOfX( KPixelX PX, KPixelX PW ) const
+KHE::Section ByteArrayRowColumnRenderer::linePositionsOfX( KPixelX PX, KPixelX PW ) const
 {
     if( !mLinePosLeftPixelX )
-        return KHE::KSection();
+        return KHE::Section();
 
     // translate
     PX -= x();
     const int PRX = PX + PW - 1;
 
-    KHE::KSection positions;
+    KHE::Section positions;
     // search backwards for the first byte that is equalleft to x
     for( int p=mLastLinePos; p>=0; --p )
         if( mLinePosLeftPixelX[p] <= PRX )
@@ -450,14 +450,14 @@ int ByteArrayRowColumnRenderer::linePositionOfColumnX( KPixelX PX ) const
 }
 
 
-KHE::KSection ByteArrayRowColumnRenderer::linePositionsOfColumnXs( KPixelX PX, KPixelX PW ) const
+KHE::Section ByteArrayRowColumnRenderer::linePositionsOfColumnXs( KPixelX PX, KPixelX PW ) const
 {
     if( !mLinePosLeftPixelX )
-        return KHE::KSection();
+        return KHE::Section();
 
     const int PRX = PX + PW - 1;
 
-    KHE::KSection positions;
+    KHE::Section positions;
     // search backwards for the first byte that is equalleft to x
     for( int p=mLastLinePos; p>=0; --p )
         if( mLinePosLeftPixelX[p] <= PRX )
@@ -482,7 +482,7 @@ KPixelX ByteArrayRowColumnRenderer::columnRightXOfLinePosition( int linePosition
 { return mLinePosRightPixelX ? mLinePosRightPixelX[linePosition] : 0; }
 
 
-KPixelXs ByteArrayRowColumnRenderer::xsOfLinePositionsInclSpaces( const KHE::KSection& linePositions ) const
+KPixelXs ByteArrayRowColumnRenderer::xsOfLinePositionsInclSpaces( const KHE::Section& linePositions ) const
 {
     const int x = (linePositions.start()>0) ? rightXOfLinePosition( linePositions.nextBeforeStart() ) + 1 :
                                               xOfLinePosition( linePositions.start() );
@@ -492,7 +492,7 @@ KPixelXs ByteArrayRowColumnRenderer::xsOfLinePositionsInclSpaces( const KHE::KSe
 }
 
 
-KPixelXs ByteArrayRowColumnRenderer::columnXsOfLinePositionsInclSpaces( const KHE::KSection& linePositions ) const
+KPixelXs ByteArrayRowColumnRenderer::columnXsOfLinePositionsInclSpaces( const KHE::Section& linePositions ) const
 {
     const int x = (linePositions.start()>0) ? columnRightXOfLinePosition( linePositions.nextBeforeStart() ) + 1 :
                                               columnXOfLinePosition( linePositions.start() );
@@ -534,7 +534,7 @@ void ByteArrayRowColumnRenderer::renderNextLine( QPainter* painter )
 }
 
 
-void ByteArrayRowColumnRenderer::renderLinePositions( QPainter* painter, int lineIndex, const KHE::KSection& _linePositions )
+void ByteArrayRowColumnRenderer::renderLinePositions( QPainter* painter, int lineIndex, const KHE::Section& _linePositions )
 {
     // clear background
     const unsigned int blankFlag =
@@ -546,7 +546,7 @@ void ByteArrayRowColumnRenderer::renderLinePositions( QPainter* painter, int lin
 
     // Go through the lines TODO: handle first and last line more effeciently
     // check for leading and trailing spaces
-    KHE::KSection linePositions( mLayout->firstLinePosition(Coord( _linePositions.start(), lineIndex )),
+    KHE::Section linePositions( mLayout->firstLinePosition(Coord( _linePositions.start(), lineIndex )),
                                  mLayout->lastLinePosition( Coord( _linePositions.end(),   lineIndex )) );
 
     // no bytes to paint?
@@ -554,13 +554,13 @@ void ByteArrayRowColumnRenderer::renderLinePositions( QPainter* painter, int lin
         return;
 
     // check for leading and trailing spaces
-    KHE::KSection byteIndizes =
-        KHE::KSection::fromWidth( mLayout->indexAtCoord(Coord( linePositions.start(), lineIndex )), linePositions.width() );
+    KHE::Section byteIndizes =
+        KHE::Section::fromWidth( mLayout->indexAtCoord(Coord( linePositions.start(), lineIndex )), linePositions.width() );
 
     unsigned int selectionFlag = 0;
     unsigned int markingFlag = 0;
-    KHE::KSection selection;
-    KHE::KSection markedSection;
+    KHE::Section selection;
+    KHE::Section markedSection;
     bool hasMarking = mRanges->hasMarking();
     bool hasSelection = mRanges->hasSelection();
 
@@ -569,8 +569,8 @@ void ByteArrayRowColumnRenderer::renderLinePositions( QPainter* painter, int lin
 //         <<" for byteIndizes "<<byteIndizes.start()<<"-"<<byteIndizes.start()<<endl;
     while( linePositions.isValid() )
     {
-        KHE::KSection positionsPart( linePositions );  // set of linePositions to paint next
-        KHE::KSection byteIndizesPart( byteIndizes );      // set of indizes to paint next
+        KHE::Section positionsPart( linePositions );  // set of linePositions to paint next
+        KHE::Section byteIndizesPart( byteIndizes );      // set of indizes to paint next
         // falls markedSection nicht mehr gebuffert und noch zu erwarten
         if( hasMarking && markedSection.endsBefore(byteIndizesPart.start()) )
         {
@@ -625,11 +625,11 @@ void ByteArrayRowColumnRenderer::renderLinePositions( QPainter* painter, int lin
 }
 
 
-void ByteArrayRowColumnRenderer::renderPlain( QPainter* painter, const KHE::KSection& linePositions, int byteIndex )
+void ByteArrayRowColumnRenderer::renderPlain( QPainter* painter, const KHE::Section& linePositions, int byteIndex )
 {
     bool hasBookmarks = ( mBookmarks != 0 );
-    KHECore::KBookmarkList bookmarkList;
-    KHECore::KBookmarkList::ConstIterator bit;
+    KHECore::BookmarkList bookmarkList;
+    KHECore::BookmarkList::ConstIterator bit;
     if( hasBookmarks )
     {
         bookmarkList = mBookmarks->bookmarkList();
@@ -669,11 +669,11 @@ void ByteArrayRowColumnRenderer::renderPlain( QPainter* painter, const KHE::KSec
 }
 
 
-void ByteArrayRowColumnRenderer::renderSelection( QPainter* painter, const KHE::KSection& linePositions, int byteIndex, int flag )
+void ByteArrayRowColumnRenderer::renderSelection( QPainter* painter, const KHE::Section& linePositions, int byteIndex, int flag )
 {
     bool hasBookmarks = ( mBookmarks != 0 );
-    KHECore::KBookmarkList bookmarkList;
-    KHECore::KBookmarkList::ConstIterator bit;
+    KHECore::BookmarkList bookmarkList;
+    KHECore::BookmarkList::ConstIterator bit;
     if( hasBookmarks )
     {
         bookmarkList = mBookmarks->bookmarkList();
@@ -715,7 +715,7 @@ void ByteArrayRowColumnRenderer::renderSelection( QPainter* painter, const KHE::
 }
 
 
-void ByteArrayRowColumnRenderer::renderMarking( QPainter* painter, const KHE::KSection& linePositions, int byteIndex, int flag )
+void ByteArrayRowColumnRenderer::renderMarking( QPainter* painter, const KHE::Section& linePositions, int byteIndex, int flag )
 {
     const QPalette& palette = columnsView()->viewport()->palette();
 
@@ -745,7 +745,7 @@ void ByteArrayRowColumnRenderer::renderBookmark( QPainter* painter, const QBrush
 }
 
 
-void ByteArrayRowColumnRenderer::renderRange( QPainter* painter, const QBrush& brush, const KHE::KSection& linePositions, int flag )
+void ByteArrayRowColumnRenderer::renderRange( QPainter* painter, const QBrush& brush, const KHE::Section& linePositions, int flag )
 {
     const KPixelX rangeX =
         ( flag & StartsBefore ) ? columnRightXOfLinePosition( linePositions.nextBeforeStart() ) + 1 :
@@ -848,14 +848,14 @@ Q_UNUSED( codingId )
 }
 
 
-bool ByteArrayRowColumnRenderer::isSelected( const KHE::KSection& section, KHE::KSection* _selection,
+bool ByteArrayRowColumnRenderer::isSelected( const KHE::Section& section, KHE::Section* _selection,
                                                   unsigned int* _flag ) const
 {
-    const KHE::KSection* overlappingSelectedSection = mRanges->firstOverlappingSelection( section );
+    const KHE::Section* overlappingSelectedSection = mRanges->firstOverlappingSelection( section );
     if( !overlappingSelectedSection )
         return false;
 
-    KHE::KSection selection = *overlappingSelectedSection;
+    KHE::Section selection = *overlappingSelectedSection;
     unsigned int flag = 0;
 
     // does selection start before asked range?
@@ -878,15 +878,15 @@ bool ByteArrayRowColumnRenderer::isSelected( const KHE::KSection& section, KHE::
 }
 
 
-bool ByteArrayRowColumnRenderer::isMarked( const KHE::KSection& section, KHE::KSection* _markedSection,
+bool ByteArrayRowColumnRenderer::isMarked( const KHE::Section& section, KHE::Section* _markedSection,
                                                 unsigned int* _flag ) const
 {
-    const KHE::KSection* overlappingMarkedSection = mRanges->overlappingMarking( section );
+    const KHE::Section* overlappingMarkedSection = mRanges->overlappingMarking( section );
     if( !overlappingMarkedSection )
         return false;
 
     unsigned int flag = 0;
-    KHE::KSection markedSection = *overlappingMarkedSection;
+    KHE::Section markedSection = *overlappingMarkedSection;
 
     if( markedSection.startsBefore(section) )
     {

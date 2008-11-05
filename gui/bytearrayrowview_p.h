@@ -73,7 +73,7 @@ class ByteArrayRowViewPrivate : public AbstractByteArrayViewPrivate
     QSize minimumSizeHint() const;
 
   public: // modification access
-    void setByteArrayModel( KHECore::KAbstractByteArrayModel* byteArrayModel );
+    void setByteArrayModel( KHECore::AbstractByteArrayModel* byteArrayModel );
 
   public: // AbstractByteArrayViewPrivate API
     virtual void ensureCursorVisible();

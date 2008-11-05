@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Core library, part of the KDE project.
 
-    Copyright 2003 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,30 +20,42 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_KSECTIONLIST_H
-#define KHE_KSECTIONLIST_H
+#ifndef KHE_CORE_BOOKMARK_H
+#define KHE_CORE_BOOKMARK_H
 
 // lib
-#include "ksection.h"
-// Qt
-#include <QtCore/QLinkedList>
+#include "oktetacore_export.h"
 
 
-namespace KHE {
-
-/**
-@author Friedrich W. H.  Kossebau
-*/
-class KSectionList : public QLinkedList<KSection>
+namespace KHECore
 {
-  public:
-    KSectionList();
-    ~KSectionList();
+
+// TODO: do we need the invalid status?
+class OKTETACORE_EXPORT Bookmark
+{
+  private:
+    static const int InvalidOffset = -1;
 
   public:
-    void addSection( const KSection& section );
-    void addSectionList( const KSectionList& sectionList );
+    Bookmark( int offset ); // krazy:exclude=explicit
+    Bookmark();
+  public:
+    bool operator==( const Bookmark &other ) const;
+  public:
+    int offset() const;
+    bool isValid() const;
+  public:
+    void move( int offset );
+  protected:
+    int mOffset;
 };
+
+inline Bookmark::Bookmark( int offset ) : mOffset( offset ) {}
+inline Bookmark::Bookmark() : mOffset( InvalidOffset ) {}
+inline bool Bookmark::operator==( const Bookmark &other ) const { return mOffset == other.mOffset; }
+inline bool Bookmark::isValid() const { return mOffset != InvalidOffset; }
+inline int Bookmark::offset() const { return mOffset; }
+inline void Bookmark::move( int offset ) { mOffset += offset; }
 
 }
 

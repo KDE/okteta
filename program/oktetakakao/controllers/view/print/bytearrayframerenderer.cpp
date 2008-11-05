@@ -30,9 +30,9 @@
 // Okteta gui
 #include <bytearraytablelayout.h>
 // Okteta core
-#include <kabstractbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 #include <valuecodec.h>
-#include <kcharcodec.h>
+#include <charcodec.h>
 // KDE
 #include <KGlobalSettings>
 // Qt
@@ -64,7 +64,7 @@ ByteArrayFrameRenderer::ByteArrayFrameRenderer()
     mLayout->setLength( 0 );//mByteArrayModel->size() );
     mLayout->setNoOfLinesPerPage( noOfLinesPerFrame() );
 
-    const KHE::KSection emptySection;
+    const KHE::Section emptySection;
     // creating the columns in the needed order
     mOffsetColumnRenderer =
         new KHEPrint::OffsetColumnRenderer( this, DefaultFirstLineOffset, DefaultNoOfBytesPerLine, KOffsetFormat::Hexadecimal );
@@ -78,7 +78,7 @@ ByteArrayFrameRenderer::ByteArrayFrameRenderer()
         new KHEPrint::CharColumnRenderer( this, mByteArrayModel, emptySection, mLayout );
 
     // set encoding
-    mCodec = KHECore::KCharCodec::createCodec( (KHECore::CharCoding)DefaultEncoding );
+    mCodec = KHECore::CharCodec::createCodec( (KHECore::CharCoding)DefaultEncoding );
     mValueColumnRenderer->setCodec( mCodec );
     mCharColumnRenderer->setCodec( mCodec );
     mEncoding = DefaultEncoding;
@@ -86,7 +86,7 @@ ByteArrayFrameRenderer::ByteArrayFrameRenderer()
     setFont( KGlobalSettings::fixedFont() );
 }
 
-const KHECore::KAbstractByteArrayModel *ByteArrayFrameRenderer::byteArrayModel() const { return mByteArrayModel; }
+const KHECore::AbstractByteArrayModel *ByteArrayFrameRenderer::byteArrayModel() const { return mByteArrayModel; }
 int ByteArrayFrameRenderer::offset()                                             const { return mLayout->startOffset(); }
 int ByteArrayFrameRenderer::length()                                             const { return mLayout->length(); }
 
@@ -124,7 +124,7 @@ int ByteArrayFrameRenderer::framesCount() const
     return frames;
 }
 
-void ByteArrayFrameRenderer::setByteArrayModel( const KHECore::KAbstractByteArrayModel *byteArrayModel,
+void ByteArrayFrameRenderer::setByteArrayModel( const KHECore::AbstractByteArrayModel *byteArrayModel,
                                                 int offset, int length )
 {
     mByteArrayModel = byteArrayModel;
@@ -133,7 +133,7 @@ void ByteArrayFrameRenderer::setByteArrayModel( const KHECore::KAbstractByteArra
              ( length <= byteArrayModel->size()-offset ) ? length :
                                                              byteArrayModel->size()-offset;
 
-    const KHE::KSection renderIndizes = KHE::KSection::fromWidth(offset,length);
+    const KHE::Section renderIndizes = KHE::Section::fromWidth(offset,length);
     mValueColumnRenderer->setByteArrayModel( byteArrayModel, renderIndizes );
     mCharColumnRenderer->setByteArrayModel( byteArrayModel, renderIndizes );
 
@@ -275,7 +275,7 @@ void ByteArrayFrameRenderer::setCharCoding( KHECore::CharCoding charCoding )
     if( mEncoding == charCoding )
         return;
 
-    KHECore::KCharCodec *newCharCodec = KHECore::KCharCodec::createCodec( charCoding );
+    KHECore::CharCodec *newCharCodec = KHECore::CharCodec::createCodec( charCoding );
     if( newCharCodec == 0 )
         return;
 
@@ -293,7 +293,7 @@ void ByteArrayFrameRenderer::setCharCoding( const QString &charCodingName )
     if( charCodingName == mCodec->name() )
         return;
 
-    KHECore::KCharCodec *newCharCodec = KHECore::KCharCodec::createCodec( charCodingName );
+    KHECore::CharCodec *newCharCodec = KHECore::CharCodec::createCodec( charCodingName );
     if( newCharCodec == 0 )
         return;
 

@@ -23,7 +23,7 @@
 #include "kcharcodeciftest.h"
 
 // test object
-#include <kcharcodec.h>
+#include <charcodec.h>
 // lib
 #include <khechar.h>
 // Qt

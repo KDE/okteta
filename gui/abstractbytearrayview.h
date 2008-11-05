@@ -27,14 +27,14 @@
 #include "columnsview.h"
 
 namespace KHECore {
-class KBookmark;
+class Bookmark;
 class ValueCodec;
-class KCharCodec;
-class KAbstractByteArrayModel;
+class CharCodec;
+class AbstractByteArrayModel;
 }
 namespace KHE {
 class ArrayChangeMetricsList;
-class KSection;
+class Section;
 }
 
 class QMimeData;
@@ -90,7 +90,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     virtual ~AbstractByteArrayView();
 
   public: // value access
-    KHECore::KAbstractByteArrayModel* byteArrayModel() const;
+    KHECore::AbstractByteArrayModel* byteArrayModel() const;
     bool isModified() const;
 
     bool isOverwriteMode() const;
@@ -115,7 +115,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
 
     /** returns true if there is a selected range in the array */
     bool hasSelectedData() const;
-    KHE::KSection selection() const;
+    KHE::Section selection() const;
 
     ValueCoding valueCoding() const;
     /**
@@ -155,7 +155,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
 
 
   public:
-    virtual void setByteArrayModel( KHECore::KAbstractByteArrayModel* byteArrayModel );
+    virtual void setByteArrayModel( KHECore::AbstractByteArrayModel* byteArrayModel );
 
     /** switches the Offset column on/off */
     virtual void toggleOffsetColumn( bool offsetColumnVisible ) = 0;
@@ -341,7 +341,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
 
   protected:
     const KHECore::ValueCodec* valueCodec() const;
-    const KHECore::KCharCodec* charCodec() const;
+    const KHECore::CharCodec* charCodec() const;
     ByteArrayTableCursor* tableCursor() const;
     ByteArrayTableRanges* tableRanges() const;
     ByteArrayTableLayout* layout() const;
@@ -376,7 +376,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     Q_PRIVATE_SLOT( d_func(), void adaptController() )
     Q_PRIVATE_SLOT( d_func(), void onByteArrayReadOnlyChange(bool isByteArrayReadOnly) )
     Q_PRIVATE_SLOT( d_func(), void onContentsChanged( const KHE::ArrayChangeMetricsList &changeList ) )
-    Q_PRIVATE_SLOT( d_func(), void onBookmarksChange( const QList<KHECore::KBookmark> &bookmarks ) )
+    Q_PRIVATE_SLOT( d_func(), void onBookmarksChange( const QList<KHECore::Bookmark> &bookmarks ) )
     Q_PRIVATE_SLOT( d_func(), void onRevertedToVersionIndex( int versionIndex ) )
 };
 

@@ -27,10 +27,10 @@
 #include <QtGui/QWidget>
 
 namespace KHECore {
-class KAbstractByteArrayModel;
+class AbstractByteArrayModel;
 }
 namespace KHE {
-class KSection;
+class Section;
 }
 class QHBoxLayout;
 class QMimeData;
@@ -51,7 +51,7 @@ class ByteArrayJanusView : public QWidget
     virtual ~ByteArrayJanusView();
 
   public:
-    void setByteArrayModel( KHECore::KAbstractByteArrayModel* byteArrayModel );
+    void setByteArrayModel( KHECore::AbstractByteArrayModel* byteArrayModel );
 
     void setFocus();
     void setZoomLevel( double Level );
@@ -80,7 +80,7 @@ class ByteArrayJanusView : public QWidget
     bool hasSelectedData() const;
     QMimeData* selectionAsMimeData() const;
     bool canReadData( const QMimeData* data ) const;
-    KHE::KSection selection() const;
+    KHE::Section selection() const;
 
   public: // overwrite
     void setOverwriteMode( bool overwriteMode );

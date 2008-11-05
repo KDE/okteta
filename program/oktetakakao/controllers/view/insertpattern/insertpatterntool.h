@@ -30,7 +30,7 @@
 class KByteArrayDisplay;
 class AbstractModel;
 namespace KHECore {
-class KAbstractByteArrayModel;
+class AbstractByteArrayModel;
 }
 class QString;
 class QByteArray;
@@ -58,7 +58,7 @@ class InsertPatternTool : public QObject
 
   protected:
     KByteArrayDisplay* mByteArrayDisplay;
-    KHECore::KAbstractByteArrayModel *mByteArrayModel;
+    KHECore::AbstractByteArrayModel *mByteArrayModel;
 };
 
 #endif

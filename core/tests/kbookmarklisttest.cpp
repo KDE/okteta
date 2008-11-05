@@ -23,7 +23,7 @@
 #include "kbookmarklisttest.h"
 
 // test object
-#include <kbookmarklist.h>
+#include <bookmarklist.h>
 // Qt
 #include <QtTest/QtTest>
 
@@ -44,17 +44,17 @@ static const int Distance35 = Distance34 + Distance45;
 
 void KBookmarkListTest::testSimpleConstructor()
 {
-    KBookmarkList bookmarkList;
+    BookmarkList bookmarkList;
 
     QVERIFY( bookmarkList.isEmpty() );
 }
 
 void KBookmarkListTest::testAddRemoveBookmark()
 {
-    const KBookmark bookmark1( Offset1 );
-    const KBookmark bookmark2( Offset2 );
+    const Bookmark bookmark1( Offset1 );
+    const Bookmark bookmark2( Offset2 );
 
-    KBookmarkList bookmarkList;
+    BookmarkList bookmarkList;
 
     bookmarkList.addBookmark( bookmark1 );
 
@@ -79,10 +79,10 @@ void KBookmarkListTest::testAddRemoveBookmark()
 
 void KBookmarkListTest::testContains()
 {
-    const KBookmark bookmark1( Offset1 );
-    const KBookmark bookmark2( Offset2 );
+    const Bookmark bookmark1( Offset1 );
+    const Bookmark bookmark2( Offset2 );
 
-    KBookmarkList bookmarkList;
+    BookmarkList bookmarkList;
 
     QVERIFY( !bookmarkList.contains(bookmark1.offset()) );
     QVERIFY( !bookmarkList.contains(bookmark2.offset()) );
@@ -106,10 +106,10 @@ void KBookmarkListTest::testContains()
 
 void KBookmarkListTest::testPreviousFrom()
 {
-    const KBookmark bookmark1( Offset1 );
-    const KBookmark bookmark2( Offset2 );
+    const Bookmark bookmark1( Offset1 );
+    const Bookmark bookmark2( Offset2 );
 
-    KBookmarkList bookmarkList;
+    BookmarkList bookmarkList;
 
     bookmarkList.addBookmark( bookmark1 );
     bookmarkList.addBookmark( bookmark2 );
@@ -123,10 +123,10 @@ void KBookmarkListTest::testPreviousFrom()
 
 void KBookmarkListTest::testNextFrom()
 {
-    const KBookmark bookmark1( Offset1 );
-    const KBookmark bookmark2( Offset2 );
+    const Bookmark bookmark1( Offset1 );
+    const Bookmark bookmark2( Offset2 );
 
-    KBookmarkList bookmarkList;
+    BookmarkList bookmarkList;
 
     bookmarkList.addBookmark( bookmark1 );
     bookmarkList.addBookmark( bookmark2 );
@@ -140,11 +140,11 @@ void KBookmarkListTest::testNextFrom()
 
 void KBookmarkListTest::testAdjustToReplaced()
 {
-    const KBookmark bookmark1( Offset1 );
-    const KBookmark bookmark2( Offset2 );
-    const KBookmark bookmark3( Offset3 );
+    const Bookmark bookmark1( Offset1 );
+    const Bookmark bookmark2( Offset2 );
+    const Bookmark bookmark3( Offset3 );
 
-    KBookmarkList bookmarkList;
+    BookmarkList bookmarkList;
 
     // replace after last -> no changes
     static const int behindOffset3 = Offset3 + 1;
@@ -212,13 +212,13 @@ void KBookmarkListTest::testAdjustToReplaced()
 
 void KBookmarkListTest::testAdjustToSwapped()
 {
-    const KBookmark bookmark1( Offset1 );
-    const KBookmark bookmark2( Offset2 );
-    const KBookmark bookmark3_1( Offset3-1 );
-    const KBookmark bookmark3( Offset3 );
-    const KBookmark bookmark4( Offset4 );
+    const Bookmark bookmark1( Offset1 );
+    const Bookmark bookmark2( Offset2 );
+    const Bookmark bookmark3_1( Offset3-1 );
+    const Bookmark bookmark3( Offset3 );
+    const Bookmark bookmark4( Offset4 );
 
-    KBookmarkList bookmarkList;
+    BookmarkList bookmarkList;
 
     // move all between 1 and 3 right before 4
     static const int secondLength = Distance34;
@@ -239,7 +239,7 @@ void KBookmarkListTest::testAdjustToSwapped()
     QVERIFY( !bookmarkList.isEmpty() );
     QCOMPARE( bookmarkList.count(), 5 );
     QList<int>::ConstIterator oit = newOffsets.begin();
-    foreach( const KBookmark &bookmark, bookmarkList )
+    foreach( const Bookmark &bookmark, bookmarkList )
         QCOMPARE( bookmark.offset(), *oit++ );
 }
 

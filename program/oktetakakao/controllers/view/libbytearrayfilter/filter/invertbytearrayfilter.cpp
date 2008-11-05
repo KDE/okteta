@@ -23,7 +23,7 @@
 #include "invertbytearrayfilter.h"
 
 // Okteta core
-#include <kabstractbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 // KDE
 #include <KLocale>
 
@@ -37,7 +37,7 @@ InvertByteArrayFilter::InvertByteArrayFilter()
 AbstractByteArrayFilterParameterSet *InvertByteArrayFilter::parameterSet() { return &mNoParameterSet; }
 
 bool InvertByteArrayFilter::filter( char *result,
-                                    KHECore::KAbstractByteArrayModel *model, const KHE::KSection &section ) const
+                                    KHECore::AbstractByteArrayModel *model, const KHE::Section &section ) const
 {
     int r = 0;
     int m = section.start();

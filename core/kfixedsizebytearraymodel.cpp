@@ -94,9 +94,9 @@ int KFixedSizeByteArrayModel::insert( int Pos, const char* D, int InputLength )
 }
 
 
-int KFixedSizeByteArrayModel::remove( const KSection &R )
+int KFixedSizeByteArrayModel::remove( const Section &R )
 {
-  KSection Remove( R );
+  Section Remove( R );
   if( Remove.start() >= (int)Size || Remove.width() == 0 )
     return 0;
 
@@ -118,9 +118,9 @@ int KFixedSizeByteArrayModel::remove( const KSection &R )
 }
 
 
-unsigned int KFixedSizeByteArrayModel::replace( const KSection &R, const char* D, unsigned int InputLength )
+unsigned int KFixedSizeByteArrayModel::replace( const Section &R, const char* D, unsigned int InputLength )
 {
-  KSection Remove( R );
+  Section Remove( R );
   // check all parameters
   if( Remove.startsBehind( Size-1 ) || (Remove.width()==0 && InputLength==0) )
     return 0;
@@ -159,9 +159,9 @@ unsigned int KFixedSizeByteArrayModel::replace( const KSection &R, const char* D
 }
 
 
-bool KFixedSizeByteArrayModel::swap( int firstStart, const KSection &secondSection )
+bool KFixedSizeByteArrayModel::swap( int firstStart, const Section &secondSection )
 {
-  KSection SourceSection( secondSection );
+  Section SourceSection( secondSection );
   // check all parameters
   if( SourceSection.start() >= (int)Size || SourceSection.width() == 0
       || firstStart > (int)Size || SourceSection.start() == firstStart )
@@ -253,9 +253,9 @@ int KFixedSizeByteArrayModel::fill( const char FChar, unsigned int Pos, int Fill
 }
 
 
-int KFixedSizeByteArrayModel::compare( const KAbstractByteArrayModel &Other, const KSection &OR, unsigned int Pos )
+int KFixedSizeByteArrayModel::compare( const AbstractByteArrayModel &Other, const Section &OR, unsigned int Pos )
 {
-  KSection OtherRange( OR );
+  Section OtherRange( OR );
   //kDebug() << QString("Pos: %1, OtherRange: (%3/%4)" ).arg(Pos).arg(OtherRange.start()).arg(OtherRange.end())
   //    << endl;
   // test other values
@@ -268,7 +268,7 @@ int KFixedSizeByteArrayModel::compare( const KAbstractByteArrayModel &Other, con
 
   int ValueByLength = 0; // default: equal
 
-  KSection Range = KSection::fromWidth( Pos, OtherRange.width() );
+  Section Range = Section::fromWidth( Pos, OtherRange.width() );
   int Last = Other.size()-1;
   // 
   if( OtherRange.endsBehind(Last) )

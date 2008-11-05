@@ -36,7 +36,7 @@
 #include <abstractsynctoremotejob.h>
 #include <abstractsyncwithremotejob.h>
 // Okteta core
-#include <kpiecetablebytearraymodel.h>
+#include <piecetablebytearraymodel.h>
 // KDE
 #include <KUrl>
 #include <KComponentData>
@@ -130,8 +130,8 @@ void KByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( FileProtocolName );
 
     KByteArrayDocument *document = new KByteArrayDocument("New created for test.");
-    KHECore::KPieceTableByteArrayModel *byteArray =
-        qobject_cast<KHECore::KPieceTableByteArrayModel *>( document->content() );
+    KHECore::PieceTableByteArrayModel *byteArray =
+        qobject_cast<KHECore::PieceTableByteArrayModel *>( document->content() );
 
     // fill array
     QByteArray testData( TestDataSize, TestDataChar );

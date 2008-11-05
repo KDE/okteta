@@ -27,7 +27,7 @@
 #include <bytearraytablecursor.h>
 #include <abstractbytearrayview.h>
 // lib
-#include <kwordbufferservice.h>
+#include <wordbytearrayservice.h>
 // Qt
 #include <QtGui/QKeyEvent>
 
@@ -106,14 +106,14 @@ void KNavigator::moveCursor( KMoveAction action, bool select )
     {
     case MoveBackward:     tableCursor->gotoPreviousByte(); break;
     case MoveWordBackward: {
-            const KHECore::KWordBufferService WBS( mView->byteArrayModel(), mView->charCodec() );
+            const KHECore::WordByteArrayService WBS( mView->byteArrayModel(), mView->charCodec() );
             const int newIndex = WBS.indexOfPreviousWordStart( tableCursor->realIndex() );
             tableCursor->gotoIndex( newIndex );
         }
         break;
     case MoveForward:      tableCursor->gotoNextByte();     break;
     case MoveWordForward:  {
-            const KHECore::KWordBufferService WBS( mView->byteArrayModel(), mView->charCodec() );
+            const KHECore::WordByteArrayService WBS( mView->byteArrayModel(), mView->charCodec() );
             const int newIndex = WBS.indexOfNextWordStart( tableCursor->realIndex() );
             tableCursor->gotoCIndex( newIndex );
         }

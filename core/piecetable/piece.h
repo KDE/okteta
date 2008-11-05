@@ -25,12 +25,12 @@
 
 
 // lib
-#include <ksection.h>
+#include <section.h>
 
 namespace KPieceTable
 {
 
-class Piece : public KHE::KSection
+class Piece : public KHE::Section
 {
   public:
     enum {
@@ -40,7 +40,7 @@ class Piece : public KHE::KSection
 
   public:
     Piece( int storageOffset, int size, int storageId );
-    Piece( const KHE::KSection &storageSection, int storageId );
+    Piece( const KHE::Section &storageSection, int storageId );
     Piece();
 
   public:
@@ -50,8 +50,8 @@ class Piece : public KHE::KSection
     void setStorageId( int storageId );
     Piece splitAt( int storageOffset );
     Piece splitAtLocal( int localStorageOffset );
-    Piece remove( const KHE::KSection &removeStorageSection );
-    Piece removeLocal( const KHE::KSection &localRemoveStorageSection );
+    Piece remove( const KHE::Section &removeStorageSection );
+    Piece removeLocal( const KHE::Section &localRemoveStorageSection );
     Piece removeStartBeforeLocal( int storageOffset );
     Piece removeEndBehindLocal( int storageOffset );
     bool prepend( const Piece &other );
@@ -59,16 +59,16 @@ class Piece : public KHE::KSection
 
 
   public:
-    Piece subPiece( const KSection &local ) const;
+    Piece subPiece( const Section &local ) const;
 
   protected:
     int mStorageId;
 };
 
 inline Piece::Piece( int storageOffset, int size, int storageId )
-: KHE::KSection( KHE::KSection::fromWidth(storageOffset,size) ), mStorageId( storageId ) {}
-inline Piece::Piece( const KHE::KSection &storageSection, int storageId )
-: KHE::KSection( storageSection ), mStorageId( storageId ) {}
+: KHE::Section( KHE::Section::fromWidth(storageOffset,size) ), mStorageId( storageId ) {}
+inline Piece::Piece( const KHE::Section &storageSection, int storageId )
+: KHE::Section( storageSection ), mStorageId( storageId ) {}
 inline Piece::Piece() : mStorageId(OriginalStorage) {}
 inline int Piece::storageId() const { return mStorageId; }
 
@@ -76,46 +76,46 @@ inline void Piece::setStorageId( int storageId ) { mStorageId = storageId; }
 
 inline Piece Piece::splitAt( int storageOffset )
 {
-    return Piece( KHE::KSection::splitAt(storageOffset), mStorageId );
+    return Piece( KHE::Section::splitAt(storageOffset), mStorageId );
 }
 inline Piece Piece::splitAtLocal( int localStorageOffset )
 {
-    return Piece( KHE::KSection::splitAtLocal(localStorageOffset), mStorageId );
+    return Piece( KHE::Section::splitAtLocal(localStorageOffset), mStorageId );
 }
-inline Piece Piece::remove( const KHE::KSection &removeStorageSection )
+inline Piece Piece::remove( const KHE::Section &removeStorageSection )
 {
-    return Piece( KHE::KSection::remove(removeStorageSection), mStorageId );
+    return Piece( KHE::Section::remove(removeStorageSection), mStorageId );
 }
-inline Piece Piece::removeLocal( const KHE::KSection &localRemoveStorageSection )
+inline Piece Piece::removeLocal( const KHE::Section &localRemoveStorageSection )
 {
-    return Piece( KHE::KSection::removeLocal(localRemoveStorageSection), mStorageId );
+    return Piece( KHE::Section::removeLocal(localRemoveStorageSection), mStorageId );
 }
 inline Piece Piece::removeStartBeforeLocal( int storageOffset )
 {
     const int oldStart = start();
     moveStartBy( storageOffset );
-    return Piece( KHE::KSection(oldStart,nextBeforeStart()), mStorageId );
+    return Piece( KHE::Section(oldStart,nextBeforeStart()), mStorageId );
 }
 inline Piece Piece::removeEndBehindLocal( int storageOffset )
 {
     const int oldEnd = end();
     setEndByWidth( storageOffset+1 );
-    return Piece( KHE::KSection(nextBehindEnd(),oldEnd), mStorageId );
+    return Piece( KHE::Section(nextBehindEnd(),oldEnd), mStorageId );
 }
 
-inline Piece Piece::subPiece( const KSection &local ) const
+inline Piece Piece::subPiece( const Section &local ) const
 {
-    return Piece( KHE::KSection::subSection(local), mStorageId );
+    return Piece( KHE::Section::subSection(local), mStorageId );
 }
 
 inline bool Piece::prepend( const Piece &other )
 {
-    const bool result = ( mStorageId == other.mStorageId && KHE::KSection::prepend(other) );
+    const bool result = ( mStorageId == other.mStorageId && KHE::Section::prepend(other) );
     return result;
 }
 inline bool Piece::append( const Piece &other )
 {
-    const bool result = ( mStorageId == other.mStorageId && KHE::KSection::append(other) );
+    const bool result = ( mStorageId == other.mStorageId && KHE::Section::append(other) );
     return result;
 }
 

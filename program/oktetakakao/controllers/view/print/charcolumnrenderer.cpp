@@ -37,8 +37,8 @@ static const char     CharColumnDefaultUndefinedChar =    (char)'?';
 
 
 CharColumnRenderer::CharColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer,
-                                        const KHECore::KAbstractByteArrayModel *byteArrayModel,
-                                        const KHE::KSection &renderIndizes,
+                                        const KHECore::AbstractByteArrayModel *byteArrayModel,
+                                        const KHE::Section &renderIndizes,
                                         const KHEUI::ByteArrayTableLayout *layout )
  : ByteColumnRenderer( columnFrameRenderer, byteArrayModel, renderIndizes, layout ),
    mShowsNonprinting( DefaultShowsNonprinting ),

@@ -35,7 +35,7 @@ ByteArrayRowView::ByteArrayRowView( QWidget* parent )
     d->init();
 }
 
-void ByteArrayRowView::setByteArrayModel( KHECore::KAbstractByteArrayModel* byteArrayModel )
+void ByteArrayRowView::setByteArrayModel( KHECore::AbstractByteArrayModel* byteArrayModel )
 {
     Q_D( ByteArrayRowView );
     d->setByteArrayModel( byteArrayModel );

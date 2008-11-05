@@ -20,16 +20,16 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "ksectionlist.h"
+#include "sectionlist.h"
 
 
 namespace KHE
 {
 
-KSectionList::KSectionList() {}
+SectionList::SectionList() {}
 
 
-void KSectionList::addSection( const KSection &newSection )
+void SectionList::addSection( const Section &newSection )
 {
     if( !newSection.isValid() )
         return;
@@ -50,7 +50,7 @@ void KSectionList::addSection( const KSection &newSection )
         // does the next section overlap?
         if( (*firstOverlappingIt).isJoinable(newSection) )
         {
-            KSection joinedSection( newSection );
+            Section joinedSection( newSection );
             // Start of the joined sections is the smaller one
             joinedSection.extendStartTo( (*firstOverlappingIt).start() );
             // next we search all the overlapping sections and keep the highest end index
@@ -78,14 +78,14 @@ void KSectionList::addSection( const KSection &newSection )
         append( newSection );
 }
 
-void KSectionList::addSectionList( const KSectionList& sectionList )
+void SectionList::addSectionList( const SectionList& sectionList )
 {
     // TODO: optimize with two parallel iterators
-    foreach( const KSection &section, sectionList )
+    foreach( const Section &section, sectionList )
         addSection( section );
 }
 
 
-KSectionList::~KSectionList() {}
+SectionList::~SectionList() {}
 
 }

@@ -29,8 +29,8 @@
 #include <kbytearraydocument.h>
 // Okteta core
 #include <khechar.h>
-#include <kcharcodec.h>
-#include <kabstractbytearraymodel.h>
+#include <charcodec.h>
+#include <abstractbytearraymodel.h>
 #include <changesdescribable.h>
 // KDE
 #include <KLocale>

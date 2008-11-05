@@ -23,21 +23,21 @@
 #include "charbytearraycolumntextrenderer.h"
 
 // Okteta core
-#include <kabstractbytearraymodel.h>
-#include <kcharcodec.h>
+#include <abstractbytearraymodel.h>
+#include <charcodec.h>
 #include <khechar.h>
 // Qt
 #include <QtCore/QTextStream>
 
 
 CharByteArrayColumnTextRenderer::CharByteArrayColumnTextRenderer(
-        const KHECore::KAbstractByteArrayModel *byteArrayModel, int offset,
+        const KHECore::AbstractByteArrayModel *byteArrayModel, int offset,
         const KHEUI::CoordRange &coordRange,
         int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
         const QString &charCodecName, QChar substituteChar, QChar undefinedChar )
  : AbstractByteArrayColumnTextRenderer( byteArrayModel, offset, coordRange,
         noOfBytesPerLine ),
-   mCharCodec( KHECore::KCharCodec::createCodec(charCodecName) ),
+   mCharCodec( KHECore::CharCodec::createCodec(charCodecName) ),
    mSubstituteChar( substituteChar ),
    mUndefinedChar( undefinedChar )
 {

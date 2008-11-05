@@ -36,7 +36,7 @@ QString AbstractByteArrayColumnTextRenderer::whiteSpace( uint s )
     return QString().fill( ' ', s );
 }
 
-AbstractByteArrayColumnTextRenderer::AbstractByteArrayColumnTextRenderer( const KHECore::KAbstractByteArrayModel *byteArrayModel, int offset, const KHEUI::CoordRange &coordRange,
+AbstractByteArrayColumnTextRenderer::AbstractByteArrayColumnTextRenderer( const KHECore::AbstractByteArrayModel *byteArrayModel, int offset, const KHEUI::CoordRange &coordRange,
     int noOfBytesPerLine )
  : mByteArrayModel( byteArrayModel ),
    mCoordRange( coordRange ),

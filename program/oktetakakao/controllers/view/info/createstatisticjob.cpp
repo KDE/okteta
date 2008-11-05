@@ -23,7 +23,7 @@
 #include "createstatisticjob.h"
 
 // Okteta core
-#include <kabstractbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 // Qt
 #include <QtGui/QApplication>
 

@@ -24,19 +24,19 @@
 #define KHE_CORE_KEBCDIC1047CHARCODEC_H
 
 // lib
-#include <kcharcodec.h>
+#include <charcodec.h>
 
 
 namespace KHECore
 {
 
 //
-class KEBCDIC1047CharCodec : public KCharCodec
+class KEBCDIC1047CharCodec : public CharCodec
 {
   protected:
     KEBCDIC1047CharCodec();
 
-  public: // KCharCodec API
+  public: // CharCodec API
     virtual KChar decode( char Byte ) const;
     virtual bool encode( char *D, const QChar &C ) const;
     virtual bool canEncode( const QChar &C ) const;

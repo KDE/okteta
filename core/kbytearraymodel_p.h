@@ -48,16 +48,16 @@ class KByteArrayModelPrivate
     bool isModified() const;
 
     int insert( int at, const char *data, int length );
-    int remove( const KSection &section );
-    unsigned int replace( const KSection &before, const char *after, unsigned int afterLength );
-    bool swap( int firstStart, const KSection &secondSection );
+    int remove( const Section &section );
+    unsigned int replace( const Section &before, const char *after, unsigned int afterLength );
+    bool swap( int firstStart, const Section &secondSection );
     int fill( const char fillChar, unsigned int from = 0, int length = -1 );
     void setDatum( unsigned int offset, const char datum );
 
     void setModified( bool modified = true );
 
     int indexOf( const char *searchString, int length, int from = 0 ) const;
-//     virtual int find( const char*KeyData, int length, const KSection &Section ) const;
+//     virtual int find( const char*KeyData, int length, const Section &Section ) const;
     int lastIndexOf( const char *searchString, int length, int from = -1 ) const;
 
   public:
@@ -77,11 +77,11 @@ class KByteArrayModelPrivate
     bool autoDelete() const;
 
   public:
-    void addBookmarks( const QList<KHECore::KBookmark> &bookmarks );
-    void removeBookmarks( const QList<KHECore::KBookmark> &bookmarks );
+    void addBookmarks( const QList<KHECore::Bookmark> &bookmarks );
+    void removeBookmarks( const QList<KHECore::Bookmark> &bookmarks );
     void removeAllBookmarks();
 
-    KHECore::KBookmarkList bookmarkList() const;
+    KHECore::BookmarkList bookmarkList() const;
 
   protected:
     /** resizes the buffer, if possible, saving the data and splitting the data, if demanded
@@ -111,7 +111,7 @@ class KByteArrayModelPrivate
     /** */
     bool m_modified:1;
     /** */
-    KBookmarkList m_bookmarks;
+    BookmarkList m_bookmarks;
 };
 
 
@@ -154,12 +154,12 @@ inline int KByteArrayModelPrivate::maxSize()      const { return m_maxSize; }
 inline bool KByteArrayModelPrivate::keepsMemory() const { return m_keepsMemory; }
 inline bool KByteArrayModelPrivate::autoDelete()  const { return m_autoDelete; }
 
-inline void KByteArrayModelPrivate::addBookmarks( const QList<KHECore::KBookmark> &bookmarks )
+inline void KByteArrayModelPrivate::addBookmarks( const QList<KHECore::Bookmark> &bookmarks )
 {
     m_bookmarks.addBookmarks( bookmarks );
     emit p->bookmarksAdded( bookmarks );
 }
-inline void KByteArrayModelPrivate::removeBookmarks( const QList<KHECore::KBookmark> &bookmarks )
+inline void KByteArrayModelPrivate::removeBookmarks( const QList<KHECore::Bookmark> &bookmarks )
 {
     m_bookmarks.removeBookmarks( bookmarks );
     emit p->bookmarksRemoved( bookmarks );
@@ -167,12 +167,12 @@ inline void KByteArrayModelPrivate::removeBookmarks( const QList<KHECore::KBookm
 
 inline void KByteArrayModelPrivate::removeAllBookmarks()
 {
-    QList<KHECore::KBookmark> bookmarks = m_bookmarks.list();
+    QList<KHECore::Bookmark> bookmarks = m_bookmarks.list();
     m_bookmarks.clear();
     emit p->bookmarksRemoved( bookmarks );
 }
 
-inline KHECore::KBookmarkList KByteArrayModelPrivate::bookmarkList() const { return m_bookmarks; }
+inline KHECore::BookmarkList KByteArrayModelPrivate::bookmarkList() const { return m_bookmarks; }
 
 }
 

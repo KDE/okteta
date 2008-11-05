@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "ksection.h"
+#include "section.h"
 
 
 namespace KHE {
 
-void KSection::adaptToReplacement( int Pos, int RemovedLength, int InsertedLength )
+void Section::adaptToReplacement( int Pos, int RemovedLength, int InsertedLength )
 {
   // nothing to adapt or not affected at all??
   if( !isValid() || endsBefore(Pos-1) )

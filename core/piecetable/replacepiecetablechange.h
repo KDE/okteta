@@ -38,7 +38,7 @@ namespace KPieceTable
 class ReplacePieceTableChange : public AbstractPieceTableChange
 {
   public:
-    ReplacePieceTableChange( const KHE::KSection &removeSection, int insertLength, int storageOffset,
+    ReplacePieceTableChange( const KHE::Section &removeSection, int insertLength, int storageOffset,
                              const PieceList &removedPieces );
     virtual ~ReplacePieceTableChange();
 
@@ -47,19 +47,19 @@ class ReplacePieceTableChange : public AbstractPieceTableChange
     virtual QString description() const;
     virtual int storageOffset() const;
     virtual bool merge( const AbstractPieceTableChange *other );
-    virtual KHE::KSection apply( PieceTable *pieceTable ) const;
-    virtual KHE::KSection revert( PieceTable *pieceTable ) const;
+    virtual KHE::Section apply( PieceTable *pieceTable ) const;
+    virtual KHE::Section revert( PieceTable *pieceTable ) const;
     virtual KHE::ArrayChangeMetrics metrics() const;
     virtual int dataSize() const;
 
   protected:
-    KHE::KSection mRemoveSection;
+    KHE::Section mRemoveSection;
     int mInsertLength;
     int mStorageOffset;
     PieceList mRemovedPieces;
 };
 
-inline ReplacePieceTableChange::ReplacePieceTableChange( const KHE::KSection &removeSection,
+inline ReplacePieceTableChange::ReplacePieceTableChange( const KHE::Section &removeSection,
                                                          int insertLength, int storageOffset,
                                                          const PieceList &removedPieces )
  : mRemoveSection( removeSection ),

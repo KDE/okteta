@@ -24,12 +24,12 @@
 #define CREATESTATISTICJOB_H
 
 // Okteta core
-#include <ksection.h>
+#include <section.h>
 // Qt
 #include <QtCore/QObject>
 
 namespace KHECore {
-class KAbstractByteArrayModel;
+class AbstractByteArrayModel;
 }
 
 class CreateStatisticJob : public QObject // not yet: KJob
@@ -37,7 +37,7 @@ class CreateStatisticJob : public QObject // not yet: KJob
   Q_OBJECT
 
   public:
-    CreateStatisticJob( const KHECore::KAbstractByteArrayModel *model, const KHE::KSection &selection,
+    CreateStatisticJob( const KHECore::AbstractByteArrayModel *model, const KHE::Section &selection,
                         int *byteCount );
 
   public:
@@ -45,14 +45,14 @@ class CreateStatisticJob : public QObject // not yet: KJob
     int exec();
 
   protected:
-    const KHECore::KAbstractByteArrayModel *mByteArrayModel;
-    const KHE::KSection mSelection;
+    const KHECore::AbstractByteArrayModel *mByteArrayModel;
+    const KHE::Section mSelection;
 
     int * const mByteCount;
 };
 
-inline CreateStatisticJob::CreateStatisticJob( const KHECore::KAbstractByteArrayModel *model,
-                                               const KHE::KSection &selection,
+inline CreateStatisticJob::CreateStatisticJob( const KHECore::AbstractByteArrayModel *model,
+                                               const KHE::Section &selection,
                                                int *byteCount )
  : mByteArrayModel( model ), mSelection( selection ), mByteCount( byteCount )
 {}

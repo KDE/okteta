@@ -27,8 +27,8 @@ KByteArraySelection::KByteArraySelection()
 {}
 
 bool KByteArraySelection::isValid() const { return mSection.isValid(); }
-KHE::KSection KByteArraySelection::section() const { return mSection; }
+KHE::Section KByteArraySelection::section() const { return mSection; }
 
-void KByteArraySelection::setSection( const KHE::KSection &section ) { mSection = section; }
+void KByteArraySelection::setSection( const KHE::Section &section ) { mSection = section; }
 
 KByteArraySelection::~KByteArraySelection() {}

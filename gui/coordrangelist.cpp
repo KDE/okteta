@@ -44,7 +44,7 @@ void CoordRangeList::addCoordRange( CoordRange NewCoordRange )
   iterator S = begin();
   for( ; S!=end(); ++S )
   {
- // TODO: add bufferwidth to rangelist so consecutive ranges can be joined, cmp ksectionlist
+ // TODO: add bufferwidth to rangelist so consecutive ranges can be joined, cmp sectionlist
     // is next CoordRange behind the new CoordRange?
     if( NewCoordRange.endsBefore(*S) )
     {

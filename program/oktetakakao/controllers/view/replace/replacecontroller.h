@@ -31,7 +31,7 @@
 
 class KByteArrayDisplay;
 namespace KHECore {
-class KAbstractByteArrayModel;
+class AbstractByteArrayModel;
 }
 class KReplaceDialog;
 class KReplacePrompt;
@@ -67,7 +67,7 @@ class ReplaceController : public AbstractXmlGuiController
     KXmlGuiWindow *mWindow;
 
     KByteArrayDisplay* mByteArrayDisplay;
-    KHECore::KAbstractByteArrayModel *mByteArrayModel;
+    KHECore::AbstractByteArrayModel *mByteArrayModel;
 
     KAction *mReplaceAction;
 

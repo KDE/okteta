@@ -26,7 +26,7 @@
 #include "kbytearraydocument.h"
 #include "kbytearrayselection.h"
 // Okteta core
-#include <kabstractbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 // KDE
 #include <KLocale>
 // Qt
@@ -75,8 +75,8 @@ KByteArraySourceCodeStreamEncoder::KByteArraySourceCodeStreamEncoder()
 
 bool KByteArraySourceCodeStreamEncoder::encodeDataToStream( QIODevice *device,
                                                             const KByteArrayDisplay* byteArrayView,
-                                                            const KHECore::KAbstractByteArrayModel *byteArrayModel,
-                                                            const KHE::KSection &section )
+                                                            const KHECore::AbstractByteArrayModel *byteArrayModel,
+                                                            const KHE::Section &section )
 {
 Q_UNUSED( byteArrayView )
 
@@ -117,7 +117,7 @@ Q_UNUSED( byteArrayView )
 
 
 void KByteArraySourceCodeStreamEncoder::printFormatted( char *buffer,
-                                                        const KHECore::KAbstractByteArrayModel *byteArrayModel, int pos,
+                                                        const KHECore::AbstractByteArrayModel *byteArrayModel, int pos,
                                                         unsigned int dataSize ) const
 {
     switch( mSettings.dataType )

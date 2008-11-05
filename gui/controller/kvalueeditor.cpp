@@ -26,7 +26,7 @@
 #include <bytearraytablecursor.h>
 #include <abstractbytearrayview.h>
 // Okteta core
-#include <kabstractbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 #include <changesdescribable.h>
 #include <valuecodec.h>
 // KDE
@@ -55,7 +55,7 @@ void KValueEditor::startEdit( const QString &description )
 {
     Q_ASSERT( !mInEditMode );
 
-    KHECore::KAbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
+    KHECore::AbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
     KHECore::ChangesDescribable *changesDescribable =
         qobject_cast<KHECore::ChangesDescribable*>( byteArrayModel );
 
@@ -71,7 +71,7 @@ void KValueEditor::cancelEdit()
 
     mInEditMode = false;
 
-    KHECore::KAbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
+    KHECore::AbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
     KHECore::ChangesDescribable *changesDescribable =
         qobject_cast<KHECore::ChangesDescribable*>( byteArrayModel );
 
@@ -86,7 +86,7 @@ void KValueEditor::finishEdit()
 
     mInEditMode = false;
 
-    KHECore::KAbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
+    KHECore::AbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
     KHECore::ChangesDescribable *changesDescribable =
         qobject_cast<KHECore::ChangesDescribable*>( byteArrayModel );
 

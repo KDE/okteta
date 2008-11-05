@@ -118,7 +118,7 @@ weiter an anfang
 
   static const unsigned int FillSize = 10;
   unsigned int Size = mVersionable->size();
-  KSection FillSection = KSection::fromWidth( 0, Size );
+  Section FillSection = Section::fromWidth( 0, Size );
 
   KFixedSizeByteArrayModel Copy( Size, PaintChar );
 

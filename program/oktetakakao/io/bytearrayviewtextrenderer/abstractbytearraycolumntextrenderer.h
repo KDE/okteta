@@ -31,7 +31,7 @@
 #include <QtCore/QString>
 
 namespace KHECore {
-class KAbstractByteArrayModel;
+class AbstractByteArrayModel;
 }
 
 // TODO: offset should be set in renderFirstLine, calculated using coordRange,
@@ -42,7 +42,7 @@ class AbstractByteArrayColumnTextRenderer : public AbstractColumnTextRenderer
     static QString whiteSpace( uint s );
 
   public:
-    AbstractByteArrayColumnTextRenderer( const KHECore::KAbstractByteArrayModel *byteArrayModel, int offset,
+    AbstractByteArrayColumnTextRenderer( const KHECore::AbstractByteArrayModel *byteArrayModel, int offset,
         const KHEUI::CoordRange &coordRange,
         int noOfBytesPerLine );
     virtual ~AbstractByteArrayColumnTextRenderer();
@@ -58,7 +58,7 @@ class AbstractByteArrayColumnTextRenderer : public AbstractColumnTextRenderer
     void setWidths( int byteWidth, int byteSpacingWidth, int noOfGroupedBytes );
 
   protected:
-    const KHECore::KAbstractByteArrayModel *mByteArrayModel;
+    const KHECore::AbstractByteArrayModel *mByteArrayModel;
 
     const KHEUI::CoordRange mCoordRange;
 

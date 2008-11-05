@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Core library, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,44 +20,29 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_KBOOKMARKLIST_H
-#define KHE_CORE_KBOOKMARKLIST_H
+#ifndef KHE_SECTIONLIST_H
+#define KHE_SECTIONLIST_H
 
 // lib
-#include "kbookmark.h"
+#include "section.h"
 // Qt
-#include <QtCore/QList>
 #include <QtCore/QLinkedList>
 
 
-namespace KHECore {
+namespace KHE {
 
 /**
 @author Friedrich W. H.  Kossebau
 */
-class OKTETACORE_EXPORT KBookmarkList : public QLinkedList<KBookmark>
+class SectionList : public QLinkedList<Section>
 {
   public:
-    KBookmarkList();
-    ~KBookmarkList();
+    SectionList();
+    ~SectionList();
 
   public:
-    void addBookmark( const KBookmark &bookmark );
-    void addBookmarks( const QList<KHECore::KBookmark> &bookmarks );
-    void removeBookmark( const KBookmark &bookmark );
-    void removeBookmarks( const QList<KHECore::KBookmark> &bookmarks );
-
-    bool adjustToReplaced( int offset, int removedLength, int insertedLength );
-    bool adjustToSwapped( int firstPartStart, int secondPartStart, int secondPartLength );
-
-  public:
-    bool contains( int offset ) const;
-    using QLinkedList<KBookmark>::contains;
-    const_iterator previousFrom( int offset ) const;
-    const_iterator nextFrom( int offset ) const;
-//     const_iterator begin( int offset ) const;
-//     using QLinkedList<KBookmark>::begin;
-    QList<KHECore::KBookmark> list() const;
+    void addSection( const Section& section );
+    void addSectionList( const SectionList& sectionList );
 };
 
 }

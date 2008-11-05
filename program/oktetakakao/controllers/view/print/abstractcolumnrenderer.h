@@ -26,7 +26,7 @@
 // Okteta ui
 #include <kadds.h>
 // Okteta core
-#include <ksection.h>
+#include <section.h>
 
 class QPainter;
 using namespace KHEUI;

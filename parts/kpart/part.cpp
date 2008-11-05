@@ -28,7 +28,7 @@
 // Okteta gui
 #include <bytearraycolumnview.h>
 // Okteta core
-#include <kcharcodec.h>
+#include <charcodec.h>
 // KDE
 #include <KLocale>
 //#include <kcomponentdata.h>
@@ -95,7 +95,7 @@ void OktetaPart::setupActions( bool browserViewWanted )
     // document encoding
     encodingAction = actions->add<KSelectAction>( "view_charencoding" );
     encodingAction->setText( i18nc("@title:menu","&Char Encoding") );
-    encodingAction->setItems( KHECore::KCharCodec::codecNames() );
+    encodingAction->setItems( KHECore::CharCodec::codecNames() );
     connect( encodingAction, SIGNAL(triggered(int)), SLOT(onSetEncoding(int)) );
 
     showNonprintingAction = actions->add<KToggleAction>( "view_showsnonprinting" );
@@ -144,7 +144,7 @@ void OktetaPart::fitActionSettings()
     showNonprintingAction->setChecked( view->showsNonprinting() );
 
     codingAction->setCurrentItem( (int)view->valueCoding() );
-    encodingAction->setCurrentItem( KHECore::KCharCodec::codecNames().indexOf(view->charCodingName()) );
+    encodingAction->setCurrentItem( KHECore::CharCodec::codecNames().indexOf(view->charCodingName()) );
 
     resizeStyleAction->setCurrentItem( (int)view->resizeStyle() );
 
@@ -203,7 +203,7 @@ void OktetaPart::onSetResizeStyle( int ResizeStyle )
 
 void OktetaPart::onSetEncoding( int Encoding )
 {
-    view->setCharCoding( KHECore::KCharCodec::codecNames()[Encoding] );
+    view->setCharCoding( KHECore::CharCodec::codecNames()[Encoding] );
 }
 
 void OktetaPart::onToggleValueCharColumns( int VisibleColumns)

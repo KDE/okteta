@@ -24,7 +24,7 @@
 
 // Okteta core
 #include <khechar.h>
-#include <kcharcodec.h>
+#include <charcodec.h>
 #include <valuecodec.h>
 // KDE
 #include <KLocale>
@@ -35,7 +35,7 @@ static const int ByteSetSize = 256;
 
 ByteTableModel::ByteTableModel( QObject *parent )
  : QAbstractTableModel( parent ),
-   mCharCodec( KHECore::KCharCodec::createCodec(KHECore::LocalEncoding) ),
+   mCharCodec( KHECore::CharCodec::createCodec(KHECore::LocalEncoding) ),
    mUndefinedChar( ByteTableDefaultUndefinedChar )
 {
     static const KHECore::ValueCoding CodingIds[NofOfValueCodings] =
@@ -62,7 +62,7 @@ void ByteTableModel::setCharCodec( const QString &codeName )
         return;
 
     delete mCharCodec;
-    mCharCodec = KHECore::KCharCodec::createCodec( codeName );
+    mCharCodec = KHECore::CharCodec::createCodec( codeName );
 
     emit dataChanged( index(0,CharacterId), index(ByteSetSize-1,CharacterId) );
 }

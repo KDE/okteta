@@ -44,7 +44,7 @@ void KFixedSizeByteArrayModelTest::testCompare()
   OtherBuffer.fill( 'b' );
 
   int Last = Size-1;
-  KSection FullRange(0,Last);
+  Section FullRange(0,Last);
   // same size and equal
   QCOMPARE( Buffer.compare(OtherBuffer), 0 );
   // same size and last smaller
@@ -74,7 +74,7 @@ void KDataBufferIfTest::testCopy()
 //  char[] TestArray = new char[OtherBuffer->size()];
 //  OtherBuffer->set( 't' );
 //  DataBuffwer
-//  QVERIFY( "copy() from begin",  OtherBuffer->compare(Buffer,KSection( 0, CopySize, true ),0) == 0 );
+//  QVERIFY( "copy() from begin",  OtherBuffer->compare(Buffer,Section( 0, CopySize, true ),0) == 0 );
 //  delete [] TestArray;
 
   int Size = 60;
@@ -85,7 +85,7 @@ void KDataBufferIfTest::testCopy()
   OtherBuffer.fill( 'a' );
 
   int Last = Size-1;
-  KSection FullRange(0,Last);
+  Section FullRange(0,Last);
 
   // copy from
   Buffer.copy( OtherBuffer, 0, CopySize );

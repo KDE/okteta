@@ -29,7 +29,7 @@
 #include <kbytearraydisplay.h>
 #include <kbytearraydocument.h>
 // Okteta core
-#include <kabstractbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 // KDE
 #include <KLocale>
 // Qt
@@ -109,7 +109,7 @@ void InfoTool::updateStatistic()
 
     QApplication::setOverrideCursor( Qt::WaitCursor );
 
-    const KHE::KSection selection = ( mByteArrayDisplay ? mByteArrayDisplay->selection() : KHE::KSection() );
+    const KHE::Section selection = ( mByteArrayDisplay ? mByteArrayDisplay->selection() : KHE::Section() );
     CreateStatisticJob *createStatisticJob =
         new CreateStatisticJob( mByteArrayModel, selection, mByteCount );
     const int selectionSize = createStatisticJob->exec();

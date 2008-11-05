@@ -29,7 +29,7 @@
 #include <piecetable/piecetable.h>
 //
 #include <arraychangemetricslist.h>
-#include <ksectionlist.h>
+#include <sectionlist.h>
 // Qt
 #include <QtTest/QtTest>
 
@@ -152,7 +152,7 @@ void PieceTableChangeHistoryTest::testRevertBeforeChange()
     result = pieceTableChangeHistory.appendChange( change4 );
 
     // revert before first change
-    KSectionList changedSectionList;
+    SectionList changedSectionList;
     ArrayChangeMetricsList changeList;
     result =
         pieceTableChangeHistory.revertBeforeChange( &pieceTable, 0, &changedSectionList, &changeList );
@@ -162,7 +162,7 @@ void PieceTableChangeHistoryTest::testRevertBeforeChange()
     QCOMPARE( pieceTableChangeHistory.appliedChangesCount(), 0 );
     QCOMPARE( pieceTableChangeHistory.headChangeDescription(), description4 );
     QCOMPARE( changedSectionList.count(), 1 );
-    QCOMPARE( changedSectionList.first(), KSection(1,4) );
+    QCOMPARE( changedSectionList.first(), Section(1,4) );
     QCOMPARE( changeList.count(), 4 );
     QCOMPARE( changeList[0], revertedChangeMetrics4 );
     QCOMPARE( changeList[1], revertedChangeMetrics3 );
@@ -180,7 +180,7 @@ void PieceTableChangeHistoryTest::testRevertBeforeChange()
     QCOMPARE( pieceTableChangeHistory.appliedChangesCount(), 3 );
     QCOMPARE( pieceTableChangeHistory.headChangeDescription(), description4 );
     QCOMPARE( changedSectionList.count(), 1 );
-    QCOMPARE( changedSectionList.first(), KSection(1,3) );
+    QCOMPARE( changedSectionList.first(), Section(1,3) );
     QCOMPARE( changeList.count(), 3 );
     QCOMPARE( changeList[0], changeMetrics1 );
     QCOMPARE( changeList[1], changeMetrics2 );
@@ -197,7 +197,7 @@ void PieceTableChangeHistoryTest::testRevertBeforeChange()
     QCOMPARE( pieceTableChangeHistory.appliedChangesCount(), 1 );
     QCOMPARE( pieceTableChangeHistory.headChangeDescription(), description4 );
     QCOMPARE( changedSectionList.count(), 1 );
-    QCOMPARE( changedSectionList.first(), KSection(2,3) );
+    QCOMPARE( changedSectionList.first(), Section(2,3) );
     QCOMPARE( changeList.count(), 2 );
     QCOMPARE( changeList[0], revertedChangeMetrics3 );
     QCOMPARE( changeList[1], revertedChangeMetrics2 );
@@ -213,7 +213,7 @@ void PieceTableChangeHistoryTest::testRevertBeforeChange()
     QCOMPARE( pieceTableChangeHistory.appliedChangesCount(), 4 );
     QCOMPARE( pieceTableChangeHistory.headChangeDescription(), description4 );
     QCOMPARE( changedSectionList.count(), 1 );
-    QCOMPARE( changedSectionList.first(), KSection(2,4) );
+    QCOMPARE( changedSectionList.first(), Section(2,4) );
     QCOMPARE( changeList.count(), 3 );
     QCOMPARE( changeList[0], changeMetrics2 );
     QCOMPARE( changeList[1], changeMetrics3 );

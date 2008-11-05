@@ -20,15 +20,15 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_KABSTRACTBYTEARRAYMODEL_H
-#define KHE_CORE_KABSTRACTBYTEARRAYMODEL_H
+#ifndef KHE_CORE_ABSTRACTBYTEARRAYMODEL_H
+#define KHE_CORE_ABSTRACTBYTEARRAYMODEL_H
 
 
 // lib
 #include "oktetacore_export.h"
 // commonlib
-#include <ksection.h>
-#include <ksectionlist.h>
+#include <section.h>
+#include <sectionlist.h>
 // Qt
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
@@ -79,16 +79,16 @@ char KDataBufferIterator::next()
   *@author Friedrich W. H. Kossebau
   */
 
-class OKTETACORE_EXPORT KAbstractByteArrayModel : public QObject
+class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
 {
   friend class KAbstractByteArrayModelIterator;
 
   Q_OBJECT
 
   protected:
-    KAbstractByteArrayModel();
+    AbstractByteArrayModel();
   public:
-    virtual ~KAbstractByteArrayModel();
+    virtual ~AbstractByteArrayModel();
 
 
   public: // data access API
@@ -99,7 +99,7 @@ class OKTETACORE_EXPORT KAbstractByteArrayModel : public QObject
       * @param Range
       * @return @c true if successfully, @c false otherwise
       */
-    //virtual bool prepareRange( const KSection &Range ) const = 0;
+    //virtual bool prepareRange( const Section &Range ) const = 0;
     /** convenience function, same as above */
     //bool prepareRange( int Offset, int Length ) const;
 
@@ -111,7 +111,7 @@ class OKTETACORE_EXPORT KAbstractByteArrayModel : public QObject
       * @param Section 
       * @return pointer to 
       */
-    //virtual const char *dataSet( const KSection &Section ) const = 0;
+    //virtual const char *dataSet( const Section &Section ) const = 0;
     /** convenience function, same as above */
     //const char *dataSet( int Offset, int Length ) const;
 
@@ -156,7 +156,7 @@ class OKTETACORE_EXPORT KAbstractByteArrayModel : public QObject
       * @param removeSection
       * @return length of removed data
       */
-    virtual int remove( const KSection &removeSection );
+    virtual int remove( const Section &removeSection );
     /** convenience function, behaves as above */
     int remove( int offset, int removeLength );
 
@@ -166,9 +166,9 @@ class OKTETACORE_EXPORT KAbstractByteArrayModel : public QObject
       * @param insertLength
       * @return length of inserted data
       */
-    virtual unsigned int replace( const KSection &removeSection, const char *insertData, unsigned int insertLength ) = 0;
+    virtual unsigned int replace( const Section &removeSection, const char *insertData, unsigned int insertLength ) = 0;
     /** convenience function, behaves as above */
-    unsigned int replace( const KSection &removeSection, const QByteArray &insertData );
+    unsigned int replace( const Section &removeSection, const QByteArray &insertData );
     /** convenience function, behaves as above */
     unsigned int replace( unsigned int offset, unsigned int removeLength,
                           const char *insertData, unsigned int insertLength );
@@ -180,7 +180,7 @@ class OKTETACORE_EXPORT KAbstractByteArrayModel : public QObject
       * @param secondSection data section to be moved
       * @return @true if operation was successful, @false otherwise
       */
-    virtual bool swap( int firstStart, const KSection &secondSection ) = 0;
+    virtual bool swap( int firstStart, const Section &secondSection ) = 0;
 
     /**
      * fills the buffer with the FillChar. If the buffer is to small it will be extended as much as possible.
@@ -190,7 +190,7 @@ class OKTETACORE_EXPORT KAbstractByteArrayModel : public QObject
      * @return number of filled characters
      */
     virtual int fill( const char fillChar, unsigned int offset = 0, int fillLength = -1 ) = 0;
-    int fill( const char fillChar, const KSection &fillSection );
+    int fill( const char fillChar, const Section &fillSection );
 
     /** sets a single byte
      * if the offset is not valid the behaviour is undefined
@@ -218,7 +218,7 @@ class OKTETACORE_EXPORT KAbstractByteArrayModel : public QObject
       * @param copySection
       * @return number of copied bytes
       */
-    virtual int copyTo( char *dest, const KSection &copySection ) const;
+    virtual int copyTo( char *dest, const Section &copySection ) const;
     /** convenience function, behaves as above */
     int copyTo( char *dest, int offset, unsigned int copyLength ) const;
 
@@ -240,7 +240,7 @@ class OKTETACORE_EXPORT KAbstractByteArrayModel : public QObject
       * @param Section section within the keydata is to be found
       * @return index of the first occurrence or -1
       */
-//     virtual int indexOf( const char*KeyData, int Length, const KSection &Section ) const { return -1; }//= 0;
+//     virtual int indexOf( const char*KeyData, int Length, const Section &Section ) const { return -1; }//= 0;
     /** searches backward beginning with byte at Pos.
       * @param 
       * @param patternLength length of search string
@@ -262,29 +262,29 @@ class OKTETACORE_EXPORT KAbstractByteArrayModel : public QObject
     void searchedBytes( int bytes ) const;
 };
 
-inline int KAbstractByteArrayModel::insert( int Pos, const QByteArray &Source )
+inline int AbstractByteArrayModel::insert( int Pos, const QByteArray &Source )
 { return insert( Pos, Source.data(), Source.size() ); }
 
-inline int KAbstractByteArrayModel::remove( int Pos, int Length )
-{ return remove( KSection(Pos,Pos+Length-1) ); }
+inline int AbstractByteArrayModel::remove( int Pos, int Length )
+{ return remove( Section(Pos,Pos+Length-1) ); }
 
-inline unsigned int KAbstractByteArrayModel::replace( const KSection &DestSection, const QByteArray &Source )
+inline unsigned int AbstractByteArrayModel::replace( const Section &DestSection, const QByteArray &Source )
 { return replace( DestSection, Source.data(), Source.size() );}
 
-inline unsigned int KAbstractByteArrayModel::replace( unsigned int Pos, unsigned int RemoveLength,
+inline unsigned int AbstractByteArrayModel::replace( unsigned int Pos, unsigned int RemoveLength,
                                  const char* D, unsigned int InputLength )
-{ return replace( KSection(Pos,Pos+RemoveLength-1), D, InputLength ); }
+{ return replace( Section(Pos,Pos+RemoveLength-1), D, InputLength ); }
 
-inline int KAbstractByteArrayModel::fill( const char FillChar, const KSection &Section )
+inline int AbstractByteArrayModel::fill( const char FillChar, const Section &Section )
 { return fill( FillChar, Section.start(), Section.width() ); }
 
-inline int KAbstractByteArrayModel::copyTo( char *dest, int offset, unsigned int copyLength ) const
-{ return copyTo( dest, KSection::fromWidth(offset,copyLength) ); }
+inline int AbstractByteArrayModel::copyTo( char *dest, int offset, unsigned int copyLength ) const
+{ return copyTo( dest, Section::fromWidth(offset,copyLength) ); }
 
-inline int KAbstractByteArrayModel::indexOf( const QByteArray& Data, int From ) const
+inline int AbstractByteArrayModel::indexOf( const QByteArray& Data, int From ) const
 { return indexOf( Data.constData(), Data.size(), From ); }
 
-inline int KAbstractByteArrayModel::lastIndexOf( const QByteArray& Data, int From ) const
+inline int AbstractByteArrayModel::lastIndexOf( const QByteArray& Data, int From ) const
 { return lastIndexOf( Data.constData(), Data.size(), From ); }
 
 }

@@ -32,7 +32,7 @@ class AbstractByteArrayFilterParameterSet;
 class AbstractByteArrayFilter;
 class KByteArrayDisplay;
 namespace KHECore {
-class KAbstractByteArrayModel;
+class AbstractByteArrayModel;
 }
 class QString;
 
@@ -66,7 +66,7 @@ class FilterTool : public AbstractTool
 
   protected:
     KByteArrayDisplay* mByteArrayDisplay;
-    KHECore::KAbstractByteArrayModel *mByteArrayModel;
+    KHECore::AbstractByteArrayModel *mByteArrayModel;
 
     QList<AbstractByteArrayFilter*> mFilterList;
 };

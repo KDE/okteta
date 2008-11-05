@@ -24,13 +24,13 @@
 #define FILTERJOB_H
 
 // Okteta core
-#include <ksection.h>
+#include <section.h>
 // Qt
 #include <QtCore/QObject>
 
 class AbstractByteArrayFilter;
 namespace KHECore {
-class KAbstractByteArrayModel;
+class AbstractByteArrayModel;
 }
 
 class FilterJob : public QObject // not yet: KJob
@@ -39,7 +39,7 @@ class FilterJob : public QObject // not yet: KJob
 
   public:
     FilterJob( AbstractByteArrayFilter *byteArrayFilter,
-               char *result, KHECore::KAbstractByteArrayModel *model, const KHE::KSection &section );
+               char *result, KHECore::AbstractByteArrayModel *model, const KHE::Section &section );
 
   public:
     bool exec();
@@ -51,12 +51,12 @@ class FilterJob : public QObject // not yet: KJob
     AbstractByteArrayFilter *mByteArrayFilter;
 
     char *mResult;
-    KHECore::KAbstractByteArrayModel *mModel;
-    const KHE::KSection mSection;
+    KHECore::AbstractByteArrayModel *mModel;
+    const KHE::Section mSection;
 };
 
 inline FilterJob::FilterJob( AbstractByteArrayFilter *byteArrayFilter,
-               char *result, KHECore::KAbstractByteArrayModel *model, const KHE::KSection &section )
+               char *result, KHECore::AbstractByteArrayModel *model, const KHE::Section &section )
  : mByteArrayFilter( byteArrayFilter ), mResult( result ), mModel( model ), mSection( section )
 {}
 

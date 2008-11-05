@@ -74,7 +74,7 @@ class ByteArrayColumnViewPrivate : public AbstractByteArrayViewPrivate
     QSize minimumSizeHint() const;
 
   public: // modification access
-    void setByteArrayModel( KHECore::KAbstractByteArrayModel* byteArrayModel );
+    void setByteArrayModel( KHECore::AbstractByteArrayModel* byteArrayModel );
 //    void repaintByte( int row, int column, bool Erase = true );
 //    void updateByte( int row, int column );
 //    void ensureByteVisible( int row, int column );

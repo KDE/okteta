@@ -24,7 +24,7 @@
 #define KHE_CORE_BOOKMARKABLE_H
 
 // lib
-#include "kbookmarklist.h"
+#include "bookmarklist.h"
 // Qt
 #include <QtCore/QtPlugin>
 #include <QtCore/QList>
@@ -38,17 +38,17 @@ class Bookmarkable
     virtual ~Bookmarkable();
 
   public: // set/action
-    virtual void addBookmarks( const QList<KHECore::KBookmark> &bookmarks ) = 0;
-    virtual void removeBookmarks( const QList<KHECore::KBookmark> &bookmarks ) = 0;
+    virtual void addBookmarks( const QList<KHECore::Bookmark> &bookmarks ) = 0;
+    virtual void removeBookmarks( const QList<KHECore::Bookmark> &bookmarks ) = 0;
     virtual void removeAllBookmarks() = 0;
 
   public: // get
-    virtual KHECore::KBookmarkList bookmarkList() const = 0;
+    virtual KHECore::BookmarkList bookmarkList() const = 0;
 
   public: // signal
-    virtual void bookmarksAdded( const QList<KHECore::KBookmark> &bookmarks ) = 0;
-    virtual void bookmarksRemoved( const QList<KHECore::KBookmark> &bookmarks ) = 0;
-//     virtual void bookmarksModified( const QList<KHECore::KBookmark> &bookmarks ) = 0; TODO; signal which changed?
+    virtual void bookmarksAdded( const QList<KHECore::Bookmark> &bookmarks ) = 0;
+    virtual void bookmarksRemoved( const QList<KHECore::Bookmark> &bookmarks ) = 0;
+//     virtual void bookmarksModified( const QList<KHECore::Bookmark> &bookmarks ) = 0; TODO; signal which changed?
     virtual void bookmarksModified( bool modified ) = 0;
 };
 

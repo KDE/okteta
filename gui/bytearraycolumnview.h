@@ -63,7 +63,7 @@ class OKTETAGUI_EXPORT ByteArrayColumnView : public AbstractByteArrayView
   Q_PROPERTY( QChar SubstituteChar READ substituteChar WRITE setSubstituteChar )
 
   public:
-    explicit ByteArrayColumnView( KHECore::KAbstractByteArrayModel* byteArrayModel = 0, QWidget* parent = 0 );
+    explicit ByteArrayColumnView( KHECore::AbstractByteArrayModel* byteArrayModel = 0, QWidget* parent = 0 );
     virtual ~ByteArrayColumnView();
 
   public: // AbstractByteArrayView API
@@ -82,7 +82,7 @@ class OKTETAGUI_EXPORT ByteArrayColumnView : public AbstractByteArrayView
 
     virtual bool isByteTypeColored() const;
 
-    virtual void setByteArrayModel( KHECore::KAbstractByteArrayModel* byteArrayModel );
+    virtual void setByteArrayModel( KHECore::AbstractByteArrayModel* byteArrayModel );
     virtual void toggleOffsetColumn( bool offsetColumnVisible );
     virtual void setByteSpacingWidth( int/*KPixelX*/ byteSpacingWidth ) ;
     virtual void setNoOfGroupedBytes( int noOfGroupedBytes );

@@ -27,7 +27,7 @@
 // Okteta gui
 #include <helper.h>
 // Okteta core
-#include <kcharcodec.h>
+#include <charcodec.h>
 // Qt
 #include <QtGui/QPainter>
 
@@ -42,8 +42,8 @@ static const int DefaultBinaryGapWidth = 1;
 
 
 ValueColumnRenderer::ValueColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer,
-                                          const KHECore::KAbstractByteArrayModel *byteArrayModel,
-                                          const KHE::KSection &renderIndizes,
+                                          const KHECore::AbstractByteArrayModel *byteArrayModel,
+                                          const KHE::Section &renderIndizes,
                                           const KHEUI::ByteArrayTableLayout *layout )
  : ByteColumnRenderer( columnFrameRenderer, byteArrayModel, renderIndizes, layout ),
    mCoding( NotDefaultCoding ),

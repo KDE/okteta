@@ -37,7 +37,7 @@ class ByteArrayJanusView;
 class KByteArrayDocument;
 class KCursorProxy;
 namespace KHE {
-class KSection;
+class Section;
 }
 
 class KByteArrayDisplay : public KAbstractView, public KDE::If::Zoomable, public KDE::If::DataSelectable, public KDE::If::SelectedDataWriteable
@@ -103,7 +103,7 @@ class KByteArrayDisplay : public KAbstractView, public KDE::If::Zoomable, public
 
   public:
     void setFocus();
-    KHE::KSection selection() const;
+    KHE::Section selection() const;
     void setSelection( int start, int end );
     void insert( const QByteArray& byteArray );
 

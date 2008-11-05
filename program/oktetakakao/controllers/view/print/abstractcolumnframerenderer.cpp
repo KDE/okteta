@@ -169,7 +169,7 @@ void AbstractColumnFrameRenderer::renderFrame( QPainter *painter, int frameIndex
 
         // calculate affected lines
         const int baseLine = frameIndex * noOfLinesPerFrame();
-        KHE::KSection renderedLines = KHE::KSection::fromWidth( baseLine, noOfLinesPerFrame() );
+        KHE::Section renderedLines = KHE::Section::fromWidth( baseLine, noOfLinesPerFrame() );
         renderedLines.restrictEndTo( noOfLines()-1 );
 
         KPixelYs renderedYs = KPixelYs::fromWidth( 0, renderedLines.width()*d->mLineHeight );

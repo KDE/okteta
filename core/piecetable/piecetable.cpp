@@ -47,7 +47,7 @@ bool PieceTable::getStorageData( int *storageId, int *storageOffset, int dataOff
 {
     bool result = false;
     // TODO: use width or offset from current and next?
-    KHE::KSection dataSection( 0, -1 );
+    KHE::Section dataSection( 0, -1 );
     foreach( const Piece &piece, mList )
     {
         dataSection.setEndByWidth( piece.width() );
@@ -75,7 +75,7 @@ void PieceTable::insert( int insertDataOffset, int insertLength, int storageOffs
     const Piece insertPiece( storageOffset, insertLength, storageId );
 
     // TODO: use width or offset from current and next?
-    KHE::KSection dataSection( 0, -1 );
+    KHE::Section dataSection( 0, -1 );
     while( it.hasNext() )
     {
         Piece &piece = it.peekNext();
@@ -118,7 +118,7 @@ void PieceTable::insert( int insertDataOffset, const PieceList &insertPieceList 
     QMutableLinkedListIterator<Piece> it( mList );
 
     // TODO: use width or offset from current and next?
-    KHE::KSection dataSection( 0, -1 );
+    KHE::Section dataSection( 0, -1 );
     while( it.hasNext() )
     {
         Piece &piece = it.peekNext();
@@ -186,11 +186,11 @@ void PieceTable::insert( int insertDataOffset, const PieceList &insertPieceList 
 }
 
 // TODO: make algorithm simpler
-PieceList PieceTable::remove( const KHE::KSection &removeSection )
+PieceList PieceTable::remove( const KHE::Section &removeSection )
 {
     PieceList removedPieceList;
 
-    KHE::KSection dataSection( 0, -1 );
+    KHE::Section dataSection( 0, -1 );
 
     QLinkedList<Piece>::Iterator it = mList.begin();
     while( it != mList.end() )
@@ -206,7 +206,7 @@ PieceList PieceTable::remove( const KHE::KSection &removeSection )
 
             if( dataSection.includesInside(removeSection) )
             {
-                const KHE::KSection localSection = dataSection.localSection( removeSection );
+                const KHE::Section localSection = dataSection.localSection( removeSection );
                 const Piece removedPiece = piece->subPiece( localSection );
                 const Piece secondPiece = piece->removeLocal( localSection );
 
@@ -293,21 +293,21 @@ PieceList PieceTable::remove( const KHE::KSection &removeSection )
     return removedPieceList;
 }
 
-PieceList PieceTable::replace( const KHE::KSection &removeSection, int insertLength, int storageOffset )
+PieceList PieceTable::replace( const KHE::Section &removeSection, int insertLength, int storageOffset )
 {
     PieceList removedPieceList = remove( removeSection );
     insert( removeSection.start(), insertLength, storageOffset );
     return removedPieceList;
 }
-void PieceTable::replace( const KHE::KSection &removeSection, const PieceList &insertPieceList )
+void PieceTable::replace( const KHE::Section &removeSection, const PieceList &insertPieceList )
 {
     remove( removeSection );
     insert( removeSection.start(), insertPieceList );
 }
 
-void PieceTable::swap( int firstStart, const KHE::KSection &secondSection )
+void PieceTable::swap( int firstStart, const KHE::Section &secondSection )
 {
-    KHE::KSection dataSection( 0, -1 );
+    KHE::Section dataSection( 0, -1 );
 
     QLinkedList<Piece>::Iterator it = mList.begin();
     while( it != mList.end() )
@@ -407,7 +407,7 @@ Piece PieceTable::replaceOne( int dataOffset, int storageOffset, int storageId )
 
     QMutableLinkedListIterator<Piece> it( mList );
 
-    KHE::KSection dataSection( 0, -1 );
+    KHE::Section dataSection( 0, -1 );
     while( it.hasNext() )
     {
         Piece *piece = &it.peekNext();
@@ -444,7 +444,7 @@ Piece PieceTable::replaceOne( int dataOffset, int storageOffset, int storageId )
                 const int localIndex = dataSection.localIndex( dataOffset );
                 replacedStorageOffset = piece->start() + localIndex;
 
-                const Piece secondPiece = piece->removeLocal( KHE::KSection::fromWidth(localIndex,1) );
+                const Piece secondPiece = piece->removeLocal( KHE::Section::fromWidth(localIndex,1) );
                 it.next();
                 it.insert( replacePiece );
                 it.insert( secondPiece );

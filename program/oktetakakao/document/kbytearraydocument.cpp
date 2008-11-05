@@ -25,7 +25,7 @@
 //
 #include <person.h>
 // Okteta core
-#include <kpiecetablebytearraymodel.h>
+#include <piecetablebytearraymodel.h>
 // KDE
 #include <KLocale>
 #include <KIcon>
@@ -34,7 +34,7 @@
 
 
 KByteArrayDocument::KByteArrayDocument( const QString &initDescription )
-: mByteArray( new KHECore::KPieceTableByteArrayModel() ),
+: mByteArray( new KHECore::PieceTableByteArrayModel() ),
   mInitDescription( initDescription )
 {
     connect( mByteArray, SIGNAL(modificationChanged( bool )), SLOT(onModelModification( bool )) );
@@ -45,7 +45,7 @@ KByteArrayDocument::KByteArrayDocument( const QString &initDescription )
              SLOT(onHeadVersionDescriptionChanged( const QString& )) );
 }
 
-KByteArrayDocument::KByteArrayDocument( KHECore::KPieceTableByteArrayModel *byteArray, const QString &initDescription )
+KByteArrayDocument::KByteArrayDocument( KHECore::PieceTableByteArrayModel *byteArray, const QString &initDescription )
 : mByteArray( byteArray ),
   mInitDescription( initDescription )
 {
@@ -66,7 +66,7 @@ KByteArrayDocument::KByteArrayDocument( const QString &filePath )
     }
 }
 #endif
-KHECore::KAbstractByteArrayModel* KByteArrayDocument::content() const { return mByteArray; }
+KHECore::AbstractByteArrayModel* KByteArrayDocument::content() const { return mByteArray; }
 
 QString KByteArrayDocument::title() const { return mTitle; }
 QString KByteArrayDocument::mimeType() const { return QLatin1String("KByteArrayDocument"); }

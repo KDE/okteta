@@ -24,7 +24,7 @@
 
 // lib
 #include "piecetable.h"
-#include <ksection.h>
+#include <section.h>
 #include <arraychangemetrics.h>
 // KDE
 #include <KLocale>
@@ -40,18 +40,18 @@ QString SwapRangesPieceTableChange::description() const
     return i18nc( "name of the change", "Swap Ranges" );
 }
 
-KHE::KSection SwapRangesPieceTableChange::apply( PieceTable *pieceTable ) const
+KHE::Section SwapRangesPieceTableChange::apply( PieceTable *pieceTable ) const
 {
     pieceTable->swap( mFirstStart, mSecondSection );
 
-    return KHE::KSection( mFirstStart, mSecondSection.end() );
+    return KHE::Section( mFirstStart, mSecondSection.end() );
 }
 
-KHE::KSection SwapRangesPieceTableChange::revert( PieceTable *pieceTable ) const
+KHE::Section SwapRangesPieceTableChange::revert( PieceTable *pieceTable ) const
 {
-    pieceTable->swap( mFirstStart, KHE::KSection(mFirstStart+mSecondSection.width(),mSecondSection.end()) );
+    pieceTable->swap( mFirstStart, KHE::Section(mFirstStart+mSecondSection.width(),mSecondSection.end()) );
 
-    return KHE::KSection( mFirstStart, mSecondSection.end() );
+    return KHE::Section( mFirstStart, mSecondSection.end() );
 }
 
 KHE::ArrayChangeMetrics SwapRangesPieceTableChange::metrics() const

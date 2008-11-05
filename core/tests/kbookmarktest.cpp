@@ -23,7 +23,7 @@
 #include "kbookmarktest.h"
 
 // test object
-#include <kbookmark.h>
+#include <bookmark.h>
 // Qt
 #include <QtTest/QtTest>
 
@@ -35,14 +35,14 @@ static const int Offset2 = 23;
 
 void KBookmarkTest::testSimpleConstructor()
 {
-  KBookmark bookmark;
+  Bookmark bookmark;
 
   QVERIFY( !bookmark.isValid() );
 }
 
 void KBookmarkTest::testConstructor()
 {
-  KBookmark bookmark( Offset1 );
+  Bookmark bookmark( Offset1 );
 
   QVERIFY( bookmark.isValid() );
   QCOMPARE( bookmark.offset(), Offset1 );
@@ -50,9 +50,9 @@ void KBookmarkTest::testConstructor()
 
 void KBookmarkTest::testCompare()
 {
-  KBookmark bookmark1( Offset1 );
-  KBookmark bookmark2( Offset1 );
-  KBookmark bookmark3( Offset2 );
+  Bookmark bookmark1( Offset1 );
+  Bookmark bookmark2( Offset1 );
+  Bookmark bookmark3( Offset2 );
 
   QVERIFY( bookmark1 == bookmark2 );
   QVERIFY( !(bookmark1 == bookmark3) );
@@ -60,7 +60,7 @@ void KBookmarkTest::testCompare()
 
 void KBookmarkTest::testMove()
 {
-  KBookmark bookmark( Offset1 );
+  Bookmark bookmark( Offset1 );
   bookmark.move( Offset2 );
 
   QVERIFY( bookmark.isValid() );

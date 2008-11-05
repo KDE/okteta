@@ -27,9 +27,9 @@
 #include "abstractcolumnrenderer.h"
 // Okteta core
 #include <khe.h>
-#include <kabstractbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 #include <khechar.h>
-#include <ksection.h>
+#include <section.h>
 
 
 class QPainter;
@@ -45,7 +45,7 @@ namespace KHEUI {
 class ByteArrayTableLayout;
 }
 namespace KHECore {
-class KCharCodec;
+class CharCodec;
 }
 
 namespace KHEPrint
@@ -66,8 +66,8 @@ class ByteColumnRenderer : public AbstractColumnRenderer
     enum KFrameStyle { Frame, Left, Right };
   public:
     ByteColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer,
-                        const KHECore::KAbstractByteArrayModel *byteArray,
-                        const KHE::KSection &renderIndizes,
+                        const KHECore::AbstractByteArrayModel *byteArray,
+                        const KHE::Section &renderIndizes,
                         const KHEUI::ByteArrayTableLayout *layout );
     virtual ~ByteColumnRenderer();
 
@@ -80,7 +80,7 @@ class ByteColumnRenderer : public AbstractColumnRenderer
     void prepareRendering( const KPixelXs &Xs );
 
   public:
-    void renderLinePositions( QPainter *painter, int Line, const KHE::KSection &Positions );
+    void renderLinePositions( QPainter *painter, int Line, const KHE::Section &Positions );
 
   public: // modification access
     /** sets the spacing in the hex column
@@ -115,15 +115,15 @@ class ByteColumnRenderer : public AbstractColumnRenderer
       */
     void setMetrics( KPixelX NewDigitWidth, KPixelY NewDigitBaseLine );
     /** */
-    void setByteArrayModel( const KHECore::KAbstractByteArrayModel *byteArrayModel, const KHE::KSection &renderIndizes );
+    void setByteArrayModel( const KHECore::AbstractByteArrayModel *byteArrayModel, const KHE::Section &renderIndizes );
     /** creates new buffer for x-values; to be called on any change of NoOfBytesPerLine or metrics */
     void resetXBuffer();
     /** sets the codec to be used by the char column. */
-    void setCodec( KHECore::KCharCodec *C );
+    void setCodec( KHECore::CharCodec *C );
 
   public: // functional logic
     /** returns byte positions covered by pixels with absolute x-coord x */
-    KHE::KSection linePositionsOfX( KPixelX x, KPixelX width ) const;
+    KHE::Section linePositionsOfX( KPixelX x, KPixelX width ) const;
     /** returns byte pos at pixel with absolute x-coord x */
     int linePositionOfX( KPixelX x ) const;
     /** returns byte pos at pixel with absolute x-coord x, and sets the flag to true if we are closer to the right */
@@ -135,17 +135,17 @@ class ByteColumnRenderer : public AbstractColumnRenderer
     /** returns byte pos at pixel with relative x-coord x */
     int linePositionOfColumnX( KPixelX x ) const;
     /** returns byte positions covered by pixels with relative x-coord x */
-    KHE::KSection linePositionsOfColumnXs( KPixelX x, KPixelX width ) const;
+    KHE::Section linePositionsOfColumnXs( KPixelX x, KPixelX width ) const;
     /** returns relative x-coord of byte at position posInLine */
     KPixelX columnXOfLinePosition( int posInLine ) const;
     /** returns right relative x-coord of byte at position posInLine */
     KPixelX columnRightXOfLinePosition( int posInLine ) const;
     /** returns the positions that overlap with the absolute x-coords */
-    KHE::KSection visibleLinePositions( KPixelX x, KPixelX width ) const;
+    KHE::Section visibleLinePositions( KPixelX x, KPixelX width ) const;
     /** returns the */
-    KPixelXs xsOfLinePositionsInclSpaces( const KHE::KSection &Positions ) const;
+    KPixelXs xsOfLinePositionsInclSpaces( const KHE::Section &Positions ) const;
     /** */
-    KPixelXs columnXsOfLinePositionsInclSpaces( const KHE::KSection &Positions ) const;
+    KPixelXs columnXsOfLinePositionsInclSpaces( const KHE::Section &Positions ) const;
 
   public: // value access
     KPixelX byteWidth()                      const;
@@ -156,9 +156,9 @@ class ByteColumnRenderer : public AbstractColumnRenderer
 
     int firstPos() const;
     int lastPos()  const;
-    KHE::KSection visiblePositions() const;
+    KHE::Section visiblePositions() const;
     const KHEUI::ByteArrayTableLayout *layout() const;
-    KHECore::KCharCodec* codec() const;
+    KHECore::CharCodec* codec() const;
 
 
   protected: // API to be redefined
@@ -169,22 +169,22 @@ class ByteColumnRenderer : public AbstractColumnRenderer
 
 
   protected:
-    void renderPlain( QPainter *painter, const KHE::KSection &Positions, int Index );
-    void renderRange( QPainter *painter, const QBrush &Brush, const KHE::KSection &Positions, int Flag );
+    void renderPlain( QPainter *painter, const KHE::Section &Positions, int Index );
+    void renderRange( QPainter *painter, const QBrush &Brush, const KHE::Section &Positions, int Flag );
 
     void recalcX();
 
   protected:
     /** pointer to the buffer */
-    const KHECore::KAbstractByteArrayModel *mByteArrayModel;
+    const KHECore::AbstractByteArrayModel *mByteArrayModel;
     /** */
-    KHE::KSection mRenderIndizes; // TODO: could also be done by a filter KAbstractByteArrayModel?
+    KHE::Section mRenderIndizes; // TODO: could also be done by a filter AbstractByteArrayModel?
     /** pointer to the layout */
     const KHEUI::ByteArrayTableLayout *mLayout;
     /** */
 //     KDE::If::Bookmarks *Bookmarks;
     /** */
-    KHECore::KCharCodec *mCodec;
+    KHECore::CharCodec *mCodec;
 
     /** */
     KPixelX mDigitWidth;
@@ -213,7 +213,7 @@ class ByteColumnRenderer : public AbstractColumnRenderer
 
 
   protected: // buffering drawing data
-    KHE::KSection mRenderPositions;
+    KHE::Section mRenderPositions;
     int mRenderLine;
     KPixelX mRenderX;
     KPixelX mRenderW;
@@ -230,12 +230,12 @@ inline int ByteColumnRenderer::noOfGroupedBytes()      const { return mNoOfGroup
 
 inline int ByteColumnRenderer::firstPos() const { return mRenderPositions.start(); }
 inline int ByteColumnRenderer::lastPos()  const { return mRenderPositions.end(); }
-inline KHE::KSection ByteColumnRenderer::visiblePositions() const { return mRenderPositions; }
+inline KHE::Section ByteColumnRenderer::visiblePositions() const { return mRenderPositions; }
 
 inline const KHEUI::ByteArrayTableLayout *ByteColumnRenderer::layout() const { return mLayout; }
 
-inline void ByteColumnRenderer::setCodec( KHECore::KCharCodec *C ) { mCodec = C; }
-inline KHECore::KCharCodec* ByteColumnRenderer::codec() const { return mCodec; }
+inline void ByteColumnRenderer::setCodec( KHECore::CharCodec *C ) { mCodec = C; }
+inline KHECore::CharCodec* ByteColumnRenderer::codec() const { return mCodec; }
 
 }
 

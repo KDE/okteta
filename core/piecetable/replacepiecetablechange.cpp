@@ -25,7 +25,7 @@
 // lib
 #include "piecetable.h"
 //
-#include <ksection.h>
+#include <section.h>
 #include <arraychangemetrics.h>
 // KDE
 #include <KLocale>
@@ -66,7 +66,7 @@ bool ReplacePieceTableChange::merge( const AbstractPieceTableChange *other )
     return result;
 }
 
-KHE::KSection ReplacePieceTableChange::apply( PieceTable *pieceTable ) const
+KHE::Section ReplacePieceTableChange::apply( PieceTable *pieceTable ) const
 {
     const int oldSize = pieceTable->size();
 
@@ -76,21 +76,21 @@ KHE::KSection ReplacePieceTableChange::apply( PieceTable *pieceTable ) const
     const int lastChanged = ( newSize == oldSize ) ? mRemoveSection.end() :
                             ( newSize > oldSize ) ?  newSize - 1 :
                                                      oldSize - 1;
-    return KHE::KSection( mRemoveSection.start(), lastChanged );
+    return KHE::Section( mRemoveSection.start(), lastChanged );
 }
 
-KHE::KSection ReplacePieceTableChange::revert( PieceTable *pieceTable ) const
+KHE::Section ReplacePieceTableChange::revert( PieceTable *pieceTable ) const
 {
     const int oldSize = pieceTable->size();
 
-    const KHE::KSection insertedSection = KHE::KSection::fromWidth( mRemoveSection.start(), mInsertLength );
+    const KHE::Section insertedSection = KHE::Section::fromWidth( mRemoveSection.start(), mInsertLength );
     pieceTable->replace( insertedSection, mRemovedPieces );
 
     const int newSize = pieceTable->size();
     const int lastChanged = ( newSize == oldSize ) ? insertedSection.end() :
                             ( newSize > oldSize ) ?  newSize - 1 :
                                                      oldSize - 1;
-    return KHE::KSection( mRemoveSection.start(), lastChanged );
+    return KHE::Section( mRemoveSection.start(), lastChanged );
 }
 
 KHE::ArrayChangeMetrics ReplacePieceTableChange::metrics() const

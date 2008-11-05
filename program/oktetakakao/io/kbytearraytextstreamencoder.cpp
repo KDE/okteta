@@ -25,9 +25,9 @@
 // lib
 #include <kbytearraydisplay.h>
 // Okteta core
-#include <kabstractbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 #include <khechar.h>
-#include <kcharcodec.h>
+#include <charcodec.h>
 // KDE
 #include <KLocale>
 // Qt
@@ -45,8 +45,8 @@ KByteArrayTextStreamEncoder::KByteArrayTextStreamEncoder()
 
 bool KByteArrayTextStreamEncoder::encodeDataToStream( QIODevice *device,
                                                       const KByteArrayDisplay* byteArrayView,
-                                                      const KHECore::KAbstractByteArrayModel *byteArrayModel,
-                                                      const KHE::KSection &section )
+                                                      const KHECore::AbstractByteArrayModel *byteArrayModel,
+                                                      const KHE::Section &section )
 {
     bool success = true;
 
@@ -58,7 +58,7 @@ bool KByteArrayTextStreamEncoder::encodeDataToStream( QIODevice *device,
     // encode
     QTextStream textStream( device );
 
-    KHECore::KCharCodec *charCodec = KHECore::KCharCodec::createCodec( mSettings.codecName );
+    KHECore::CharCodec *charCodec = KHECore::CharCodec::createCodec( mSettings.codecName );
     const QChar tabChar( '\t' );
     const QChar returnChar( '\n' );
 

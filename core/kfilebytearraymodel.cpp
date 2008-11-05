@@ -46,10 +46,10 @@ void KFileByteArrayModel::setDatum( unsigned int, const char )  {}
 char KFileByteArrayModel::datum( unsigned int datumOffset ) const { return d->datum( datumOffset ); }
 
 int KFileByteArrayModel::insert( int /*Pos*/, const char*, int /*Length*/ ) {  return 0; }
-int KFileByteArrayModel::remove( const KSection &/*Section*/ ) {  return 0; }
-unsigned int KFileByteArrayModel::replace( const KSection &/*Section*/, const char*, unsigned int /*Length*/ ) {  return 0; }
+int KFileByteArrayModel::remove( const Section &/*Section*/ ) {  return 0; }
+unsigned int KFileByteArrayModel::replace( const Section &/*Section*/, const char*, unsigned int /*Length*/ ) {  return 0; }
 int KFileByteArrayModel::fill( char /*FillChar*/, unsigned int /*Pos*/, int /*Length*/ ) {  return 0; }
-bool KFileByteArrayModel::swap( int /*DestPos*/, const KSection &/*SourceSection*/ ) { return false; }
+bool KFileByteArrayModel::swap( int /*DestPos*/, const Section &/*SourceSection*/ ) { return false; }
 
 bool KFileByteArrayModel::open( const QString &fileName ) { return d->open( fileName ); }
 bool KFileByteArrayModel::close() { return d->close(); }

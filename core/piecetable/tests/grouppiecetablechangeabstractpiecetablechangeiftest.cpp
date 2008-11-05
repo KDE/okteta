@@ -55,17 +55,17 @@ namespace KPieceTable
 
 AbstractPieceTableChange *GroupPieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
 {
-    const Piece replacedPiece( KHE::KSection::fromWidth(ReplacedOldStorageOffset,ReplacedWidth), Piece::ChangeStorage );
-    const Piece removedPiece( KHE::KSection::fromWidth(RemovedOldStorageOffset,RemovedWidth), Piece::ChangeStorage );
+    const Piece replacedPiece( KHE::Section::fromWidth(ReplacedOldStorageOffset,ReplacedWidth), Piece::ChangeStorage );
+    const Piece removedPiece( KHE::Section::fromWidth(RemovedOldStorageOffset,RemovedWidth), Piece::ChangeStorage );
 
     ReplacePieceTableChange *replaceChange =
-        new ReplacePieceTableChange( KHE::KSection(ReplacedStart,ReplacedEnd),
+        new ReplacePieceTableChange( KHE::Section(ReplacedStart,ReplacedEnd),
                                      ReplaceLength, ReplaceInsertStorageOffset,
                                      PieceList(replacedPiece) );
     InsertPieceTableChange *insertChange =
         new InsertPieceTableChange( InsertOffset, InsertLength, InsertStorageOffset );
     RemovePieceTableChange *removeChange =
-        new RemovePieceTableChange( KHE::KSection(RemovedStart,RemovedEnd), PieceList(removedPiece) );
+        new RemovePieceTableChange( KHE::Section(RemovedStart,RemovedEnd), PieceList(removedPiece) );
 
     GroupPieceTableChange *pieceTableChange =
         new GroupPieceTableChange( 0, QString() );
@@ -78,9 +78,9 @@ AbstractPieceTableChange *GroupPieceTableChangeAbstractPieceTableChangeIfTest::c
 }
 void GroupPieceTableChangeAbstractPieceTableChangeIfTest::changePieceTable( PieceTable *pieceTable )
 {
-    pieceTable->replace( KHE::KSection(ReplacedStart,ReplacedEnd), ReplaceLength, ReplaceInsertStorageOffset );
+    pieceTable->replace( KHE::Section(ReplacedStart,ReplacedEnd), ReplaceLength, ReplaceInsertStorageOffset );
     pieceTable->insert( InsertOffset, InsertLength, InsertStorageOffset );
-    pieceTable->remove( KHE::KSection(RemovedStart,RemovedEnd) );
+    pieceTable->remove( KHE::Section(RemovedStart,RemovedEnd) );
 }
 
 void GroupPieceTableChangeAbstractPieceTableChangeIfTest::deletePieceTableChange(

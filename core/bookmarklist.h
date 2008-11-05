@@ -20,42 +20,45 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_KBOOKMARK_H
-#define KHE_CORE_KBOOKMARK_H
+#ifndef KHE_CORE_BOOKMARKLIST_H
+#define KHE_CORE_BOOKMARKLIST_H
 
 // lib
-#include "oktetacore_export.h"
+#include "bookmark.h"
+// Qt
+#include <QtCore/QList>
+#include <QtCore/QLinkedList>
 
 
-namespace KHECore
+namespace KHECore {
+
+/**
+@author Friedrich W. H.  Kossebau
+*/
+class OKTETACORE_EXPORT BookmarkList : public QLinkedList<Bookmark>
 {
-
-// TODO: do we need the invalid status?
-class OKTETACORE_EXPORT KBookmark
-{
-  private:
-    static const int InvalidOffset = -1;
+  public:
+    BookmarkList();
+    ~BookmarkList();
 
   public:
-    KBookmark( int offset ); // krazy:exclude=explicit
-    KBookmark();
+    void addBookmark( const Bookmark &bookmark );
+    void addBookmarks( const QList<KHECore::Bookmark> &bookmarks );
+    void removeBookmark( const Bookmark &bookmark );
+    void removeBookmarks( const QList<KHECore::Bookmark> &bookmarks );
+
+    bool adjustToReplaced( int offset, int removedLength, int insertedLength );
+    bool adjustToSwapped( int firstPartStart, int secondPartStart, int secondPartLength );
+
   public:
-    bool operator==( const KBookmark &other ) const;
-  public:
-    int offset() const;
-    bool isValid() const;
-  public:
-    void move( int offset );
-  protected:
-    int mOffset;
+    bool contains( int offset ) const;
+    using QLinkedList<Bookmark>::contains;
+    const_iterator previousFrom( int offset ) const;
+    const_iterator nextFrom( int offset ) const;
+//     const_iterator begin( int offset ) const;
+//     using QLinkedList<Bookmark>::begin;
+    QList<KHECore::Bookmark> list() const;
 };
-
-inline KBookmark::KBookmark( int offset ) : mOffset( offset ) {}
-inline KBookmark::KBookmark() : mOffset( InvalidOffset ) {}
-inline bool KBookmark::operator==( const KBookmark &other ) const { return mOffset == other.mOffset; }
-inline bool KBookmark::isValid() const { return mOffset != InvalidOffset; }
-inline int KBookmark::offset() const { return mOffset; }
-inline void KBookmark::move( int offset ) { mOffset += offset; }
 
 }
 

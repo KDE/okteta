@@ -41,8 +41,8 @@ namespace KHEUI {
 class ByteArrayTableLayout;
 }
 namespace KHECore {
-class KAbstractByteArrayModel;
-class KCharCodec;
+class AbstractByteArrayModel;
+class CharCodec;
 }
 
 enum ResizeStyle { NoResize=0, LockGrouping=1, FullSizeUsage=2, MaxResizeStyleId=0xFF };
@@ -75,7 +75,7 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
     virtual int framesCount() const;
 
   public:
-    const KHECore::KAbstractByteArrayModel *byteArrayModel() const;
+    const KHECore::AbstractByteArrayModel *byteArrayModel() const;
     int offset() const;
     int length() const;
 
@@ -98,7 +98,7 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
     int visibleByteArrayCodings() const;
 
   public:
-    void setByteArrayModel( const KHECore::KAbstractByteArrayModel *byteArrayModel, int offset = 0, int length = -1 );
+    void setByteArrayModel( const KHECore::AbstractByteArrayModel *byteArrayModel, int offset = 0, int length = -1 );
     void setHeight( int height );
     void setWidth( int width );
     void setFont( const QFont &font );
@@ -137,7 +137,7 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
     int mWidth;
     QFont mFont;
 
-    const KHECore::KAbstractByteArrayModel *mByteArrayModel;
+    const KHECore::AbstractByteArrayModel *mByteArrayModel;
 
   protected:
     /** holds the logical layout */
@@ -152,7 +152,7 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
 
   protected:
     /** */
-    KHECore::KCharCodec *mCodec;
+    KHECore::CharCodec *mCodec;
 
   protected: // parameters
     ResizeStyle mResizeStyle;

@@ -42,12 +42,12 @@ class PieceTable
     void insert( int insertDataOffset, int insertLength, int storageOffset );
     /// for use to reapply
     void insert( int insertDataOffset, const PieceList &insertPieceList );
-    PieceList remove( const KHE::KSection &removeSection );
-    PieceList replace( const KHE::KSection &removeSection,
+    PieceList remove( const KHE::Section &removeSection );
+    PieceList replace( const KHE::Section &removeSection,
                        int insertLength, int storageOffset );
     /// for use to reapply
-    void replace( const KHE::KSection &removeSection, const PieceList &insertPieceList );
-    void swap( int firstStart, const KHE::KSection &secondSection );
+    void replace( const KHE::Section &removeSection, const PieceList &insertPieceList );
+    void swap( int firstStart, const KHE::Section &secondSection );
     Piece replaceOne( int dataOffset, int storageOffset, int storageId = Piece::ChangeStorage );
 
 //     int fill( const char FillChar, unsigned int Pos = 0, int Length = -1 ); TODO: filter change, calculated

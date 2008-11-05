@@ -30,7 +30,7 @@ class ByteTableModel;
 
 class KByteArrayDisplay;
 namespace KHECore {
-class KAbstractByteArrayModel;
+class AbstractByteArrayModel;
 }
 
 /**
@@ -63,7 +63,7 @@ class ByteTableTool : public AbstractTool
     ByteTableModel *mByteTableModel;
 
     KByteArrayDisplay* mByteArrayDisplay;
-    KHECore::KAbstractByteArrayModel *mByteArrayModel;
+    KHECore::AbstractByteArrayModel *mByteArrayModel;
 };
 
 #endif

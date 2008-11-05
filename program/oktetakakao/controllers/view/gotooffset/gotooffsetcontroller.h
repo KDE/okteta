@@ -30,7 +30,7 @@
 class KGotoOffsetDialog;
 class KByteArrayDisplay;
 namespace KHECore {
-class KAbstractByteArrayModel;
+class AbstractByteArrayModel;
 }
 class KAction;
 class KXMLGUIClient;
@@ -55,7 +55,7 @@ class GotoOffsetController : public AbstractXmlGuiController
 
   protected:
     KByteArrayDisplay* mByteArrayDisplay;
-    KHECore::KAbstractByteArrayModel* mByteArray;
+    KHECore::AbstractByteArrayModel* mByteArray;
 
     KAction* mGotoOffsetAction;
 

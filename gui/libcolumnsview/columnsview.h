@@ -28,7 +28,7 @@
 #include "kadds.h"
 #include "oktetagui_export.h"
 // commonlib
-#include <ksection.h> // TODO: think about moving this out of the public API
+#include <section.h> // TODO: think about moving this out of the public API
 // Qt
 #include <QtCore/QList>
 #include <QtGui/QAbstractScrollArea>
@@ -80,11 +80,11 @@ class OKTETAGUI_EXPORT ColumnsView : public QAbstractScrollArea
     /** gives the index of the first and the last line that would be visible
       * these lines might not contain anything
       */
-    KHE::KSection visibleLines() const;
+    KHE::Section visibleLines() const;
     /** gives the index of the first and the last line that would be visible in the given pixel range
       * these lines might not contain anything
       */
-    KHE::KSection visibleLines( const KPixelYs &YPixels ) const;
+    KHE::Section visibleLines( const KPixelYs &YPixels ) const;
 
     /** @return visible width of the current view */
     KPixelX visibleWidth() const;

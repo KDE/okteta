@@ -28,7 +28,7 @@
 #include <bytearraytablelayout.h>
 // Okteta core
 // #include <kibookmarks.h>
-#include <kcharcodec.h>
+#include <charcodec.h>
 // Qt
 #include <QtGui/QPainter>
 
@@ -46,8 +46,8 @@ static const KPixelX DefaultGroupSpacingWidth = 9;
 static const int DefaultNoOfGroupedBytes = 4;
 
 ByteColumnRenderer::ByteColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer,
-                                        const KHECore::KAbstractByteArrayModel *byteArray,
-                                        const KHE::KSection &renderIndizes,
+                                        const KHECore::AbstractByteArrayModel *byteArray,
+                                        const KHE::Section &renderIndizes,
                                         const KHEUI::ByteArrayTableLayout *layout )
  : AbstractColumnRenderer( columnFrameRenderer ),
    mByteArrayModel( byteArray ),
@@ -67,8 +67,8 @@ ByteColumnRenderer::ByteColumnRenderer( AbstractColumnFrameRenderer *columnFrame
 }
 
 
-void ByteColumnRenderer::setByteArrayModel( const KHECore::KAbstractByteArrayModel *byteArrayModel,
-                                            const KHE::KSection &renderIndizes )
+void ByteColumnRenderer::setByteArrayModel( const KHECore::AbstractByteArrayModel *byteArrayModel,
+                                            const KHE::Section &renderIndizes )
 {
     mByteArrayModel = byteArrayModel;
     mRenderIndizes = renderIndizes;
@@ -252,16 +252,16 @@ int ByteColumnRenderer::magneticLinePositionOfX( KPixelX PX ) const
 }
 
 
-KHE::KSection ByteColumnRenderer::linePositionsOfX( KPixelX PX, KPixelX PW ) const
+KHE::Section ByteColumnRenderer::linePositionsOfX( KPixelX PX, KPixelX PW ) const
 {
     if( !mPosX )
-       return KHE::KSection();
+       return KHE::Section();
 
     // translate
     PX -= x();
     const int PRX = PX + PW - 1;
 
-    KHE::KSection P;
+    KHE::Section P;
     // search backwards for the first byte that is equalleft to x
     for( int p=mLastPos; p>=0; --p )
         if( mPosX[p] <= PRX )
@@ -298,14 +298,14 @@ int ByteColumnRenderer::linePositionOfColumnX( KPixelX PX ) const
 }
 
 
-KHE::KSection ByteColumnRenderer::linePositionsOfColumnXs( KPixelX PX, KPixelX PW ) const
+KHE::Section ByteColumnRenderer::linePositionsOfColumnXs( KPixelX PX, KPixelX PW ) const
 {
     if( !mPosX )
-        return KHE::KSection();
+        return KHE::Section();
 
     const int PRX = PX + PW - 1;
 
-    KHE::KSection P;
+    KHE::Section P;
     // search backwards for the first byte that is equalleft to x
     for( int p=mLastPos; p>=0; --p )
         if( mPosX[p] <= PRX )
@@ -328,7 +328,7 @@ KPixelX ByteColumnRenderer::columnXOfLinePosition( int linePositions )      cons
 KPixelX ByteColumnRenderer::columnRightXOfLinePosition( int linePositions ) const { return mPosRightX ? mPosRightX[linePositions] : 0; }
 
 
-KPixelXs ByteColumnRenderer::xsOfLinePositionsInclSpaces( const KHE::KSection &positions ) const
+KPixelXs ByteColumnRenderer::xsOfLinePositionsInclSpaces( const KHE::Section &positions ) const
 {
     const int firstX = positions.startsBehind( 0 ) ? rightXOfLinePosition( positions.nextBeforeStart() ) + 1 :
                                                      xOfLinePosition( positions.start() );
@@ -338,7 +338,7 @@ KPixelXs ByteColumnRenderer::xsOfLinePositionsInclSpaces( const KHE::KSection &p
 }
 
 
-KPixelXs ByteColumnRenderer::columnXsOfLinePositionsInclSpaces( const KHE::KSection &positions ) const
+KPixelXs ByteColumnRenderer::columnXsOfLinePositionsInclSpaces( const KHE::Section &positions ) const
 {
     const int firstX = positions.startsBehind( 0 ) ? columnRightXOfLinePosition( positions.nextBeforeStart() ) + 1 :
                                                      columnXOfLinePosition( positions.start() );
@@ -380,7 +380,7 @@ void ByteColumnRenderer::renderNextLine( QPainter *painter )
 }
 
 
-void ByteColumnRenderer::renderLinePositions( QPainter *painter, int Line, const KHE::KSection &linePositions )
+void ByteColumnRenderer::renderLinePositions( QPainter *painter, int Line, const KHE::Section &linePositions )
 {
     // clear background
 //     const unsigned int isBlank = (linePositions.start()!=0?StartsBefore:0) | (linePositions.end()!=mLastPos?EndsLater:0);
@@ -389,7 +389,7 @@ void ByteColumnRenderer::renderLinePositions( QPainter *painter, int Line, const
 
     // Go through the lines TODO: handle first and last line more effeciently
     // check for leading and trailing spaces
-    KHE::KSection positions( mLayout->firstLinePosition(Coord( linePositions.start(), Line )),
+    KHE::Section positions( mLayout->firstLinePosition(Coord( linePositions.start(), Line )),
                              mLayout->lastLinePosition( Coord( linePositions.end(),  Line )) );
 
     // no bytes to paint?
@@ -397,20 +397,20 @@ void ByteColumnRenderer::renderLinePositions( QPainter *painter, int Line, const
         return;
 
     // check for leading and trailing spaces
-    KHE::KSection indices =
-        KHE::KSection::fromWidth( mLayout->indexAtCoord(Coord( positions.start(), Line )), positions.width() );
+    KHE::Section indices =
+        KHE::Section::fromWidth( mLayout->indexAtCoord(Coord( positions.start(), Line )), positions.width() );
 
     positions.setEndByWidth( indices.width() );
     renderPlain( painter, positions, indices.start() );
 }
 
 
-void ByteColumnRenderer::renderPlain( QPainter *painter, const KHE::KSection &positions, int index )
+void ByteColumnRenderer::renderPlain( QPainter *painter, const KHE::Section &positions, int index )
 {
 #if 0
   bool hasBookmarks = ( Bookmarks != 0 );
-  KHECore::KBookmarkList bookmarkList;
-  KHECore::KBookmarkList::ConstIterator bit;
+  KHECore::BookmarkList bookmarkList;
+  KHECore::BookmarkList::ConstIterator bit;
   if( hasBookmarks )
   {
     bookmarkList = Bookmarks->bookmarkList();
@@ -445,7 +445,7 @@ void ByteColumnRenderer::renderPlain( QPainter *painter, const KHE::KSection &po
 }
 
 
-void ByteColumnRenderer::renderRange( QPainter *painter, const QBrush &Brush, const KHE::KSection &positions, int Flag )
+void ByteColumnRenderer::renderRange( QPainter *painter, const QBrush &Brush, const KHE::Section &positions, int Flag )
 {
     KPixelX RangeX = Flag & StartsBefore ? columnRightXOfLinePosition( positions.nextBeforeStart() ) + 1 : columnXOfLinePosition( positions.start() );
     KPixelX RangeW = (Flag & EndsLater ? columnXOfLinePosition( positions.nextBehindEnd() ): columnRightXOfLinePosition( positions.end() ) + 1)  - RangeX;

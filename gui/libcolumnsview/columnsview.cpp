@@ -100,13 +100,13 @@ ColumnsView::ColumnsView( /*bool R,*/ QWidget *parent )
 int ColumnsView::noOfLines()          const { return d->NoOfLines; }
 KPixelY ColumnsView::lineHeight()     const { return d->LineHeight; }
 uint ColumnsView::lineAt( KPixelY y ) const { return (d->LineHeight!=0) ? y / d->LineHeight : 0; }
-KHE::KSection ColumnsView::visibleLines() const
+KHE::Section ColumnsView::visibleLines() const
 {
     const KPixelYs ySpan = KPixelYs::fromWidth( yOffset(), visibleHeight() );
-    return KHE::KSection( lineAt(ySpan.start()), lineAt(ySpan.end()) );
+    return KHE::Section( lineAt(ySpan.start()), lineAt(ySpan.end()) );
 }
-KHE::KSection ColumnsView::visibleLines( const KPixelYs &YPixels ) const
-{ return KHE::KSection( lineAt(YPixels.start()), lineAt(YPixels.end()) ); }
+KHE::Section ColumnsView::visibleLines( const KPixelYs &YPixels ) const
+{ return KHE::Section( lineAt(YPixels.start()), lineAt(YPixels.end()) ); }
 
 KPixelX ColumnsView::visibleWidth()  const { return viewport()->width(); }
 KPixelY ColumnsView::visibleHeight() const { return viewport()->height(); }
@@ -289,7 +289,7 @@ void ColumnsView::renderColumns( QPainter *painter, int cx, int cy, int cw, int 
         if( d->NoOfLines > 0 )
         {
             // calculate affected lines
-            KHE::KSection dirtyLines = visibleLines( dirtyYs );
+            KHE::Section dirtyLines = visibleLines( dirtyYs );
             dirtyLines.restrictEndTo( d->NoOfLines - 1 );
 
             if( dirtyLines.isValid() )

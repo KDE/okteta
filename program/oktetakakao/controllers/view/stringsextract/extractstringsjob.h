@@ -26,14 +26,14 @@
 // tool
 #include "containedstring.h"
 // Okteta core
-#include <ksection.h>
+#include <section.h>
 // Qt
 #include <QtCore/QObject>
 #include <QtCore/QList>
 
 namespace KHECore {
-class KAbstractByteArrayModel;
-class KCharCodec;
+class AbstractByteArrayModel;
+class CharCodec;
 }
 
 
@@ -42,9 +42,9 @@ class ExtractStringsJob : public QObject // not yet: KJob
   Q_OBJECT
 
   public:
-    ExtractStringsJob( const KHECore::KAbstractByteArrayModel *model,
-                       const KHE::KSection &selection,
-                       const KHECore::KCharCodec *charCodec,
+    ExtractStringsJob( const KHECore::AbstractByteArrayModel *model,
+                       const KHE::Section &selection,
+                       const KHECore::CharCodec *charCodec,
                        int minLength,
                        QList<ContainedString> *containedStringList );
 
@@ -52,17 +52,17 @@ class ExtractStringsJob : public QObject // not yet: KJob
     void exec();
 
   protected:
-    const KHECore::KAbstractByteArrayModel *mByteArrayModel;
-    const KHE::KSection mSelection;
-    const KHECore::KCharCodec *mCharCodec;
+    const KHECore::AbstractByteArrayModel *mByteArrayModel;
+    const KHE::Section mSelection;
+    const KHECore::CharCodec *mCharCodec;
     const int mMinLength;
 
     QList<ContainedString> *mContainedStringList;
 };
 
-inline ExtractStringsJob::ExtractStringsJob( const KHECore::KAbstractByteArrayModel *model,
-                                             const KHE::KSection &selection,
-                                             const KHECore::KCharCodec *charCodec,
+inline ExtractStringsJob::ExtractStringsJob( const KHECore::AbstractByteArrayModel *model,
+                                             const KHE::Section &selection,
+                                             const KHECore::CharCodec *charCodec,
                                              int minLength,
                                              QList<ContainedString> *containedStringList )
  : mByteArrayModel( model ), mSelection( selection ), mCharCodec( charCodec ), mMinLength( minLength ),

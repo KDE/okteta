@@ -24,13 +24,13 @@
 
 // Okteta core
 #include <valuecodec.h>
-#include <kabstractbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 // Qt
 #include <QtCore/QTextStream>
 
 
 ValueByteArrayColumnTextRenderer::ValueByteArrayColumnTextRenderer(
-    const KHECore::KAbstractByteArrayModel *byteArrayModel, int offset,
+    const KHECore::AbstractByteArrayModel *byteArrayModel, int offset,
         const KHEUI::CoordRange &coordRange,
         int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
         KHECore::ValueCoding valueCoding )

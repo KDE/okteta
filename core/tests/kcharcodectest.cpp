@@ -23,7 +23,7 @@
 #include "kcharcodectest.h"
 
 // test object
-#include <kcharcodec.h>
+#include <charcodec.h>
 // lib
 #include <khechar.h>
 // KDE
@@ -50,13 +50,13 @@ void KCharCodecTest::cleanupTestCase()
 
 void KCharCodecTest::testCodecNames()
 {
-  QStringList List( KCharCodec::codecNames() );
+  QStringList List( CharCodec::codecNames() );
 
   for( int i=0; i<List.size(); ++i )
   {
     // name exists
     const QString &Name = List[i];
-    KCharCodec* Codec = KCharCodec::createCodec( Name );
+    CharCodec* Codec = CharCodec::createCodec( Name );
     QCOMPARE( Codec->name(), Name );
     delete Codec;
   }

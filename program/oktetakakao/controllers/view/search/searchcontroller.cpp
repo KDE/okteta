@@ -29,7 +29,7 @@
 #include <kbytearraydisplay.h>
 #include <kbytearraydocument.h>
 // Okteta core
-#include <kcharcodec.h>
+#include <charcodec.h>
 #include <kbytearraymodel.h>
 // KDE
 #include <KXmlGuiWindow>
@@ -127,7 +127,7 @@ void SearchController::onOkClicked()
     int StartIndex;
     if( SearchDialog->inSelection() )
     {
-        const KHE::KSection Selection = mByteArrayDisplay->selection();
+        const KHE::Section Selection = mByteArrayDisplay->selection();
         SearchFirstIndex = Selection.start();
         SearchLastIndex =  Selection.end();
         StartIndex = Selection.start();

@@ -43,7 +43,7 @@ AbstractByteArrayView::AbstractByteArrayView( AbstractByteArrayViewPrivate* dd, 
     d->init();
 }
 
-KHECore::KAbstractByteArrayModel* AbstractByteArrayView::byteArrayModel() const
+KHECore::AbstractByteArrayModel* AbstractByteArrayView::byteArrayModel() const
 {
     Q_D( const AbstractByteArrayView );
     return d->byteArrayModel();
@@ -99,7 +99,7 @@ const QString& AbstractByteArrayView::charCodingName() const
     Q_D( const AbstractByteArrayView );
     return d->charCodingName();
 }
-const KHECore::KCharCodec* AbstractByteArrayView::charCodec() const
+const KHECore::CharCodec* AbstractByteArrayView::charCodec() const
 {
     Q_D( const AbstractByteArrayView );
     return d->charCodec();
@@ -148,7 +148,7 @@ AbstractByteArrayView::ResizeStyle AbstractByteArrayView::resizeStyle() const
     return d->resizeStyle();
 }
 
-KHE::KSection AbstractByteArrayView::selection() const
+KHE::Section AbstractByteArrayView::selection() const
 {
     Q_D( const AbstractByteArrayView );
     return d->selection();
@@ -213,7 +213,7 @@ void AbstractByteArrayView::removeSelectedData()
     d->removeSelectedData();
 }
 
-void AbstractByteArrayView::setByteArrayModel( KHECore::KAbstractByteArrayModel* byteArrayModel )
+void AbstractByteArrayView::setByteArrayModel( KHECore::AbstractByteArrayModel* byteArrayModel )
 {
     Q_D( AbstractByteArrayView );
     d->setByteArrayModel( byteArrayModel );

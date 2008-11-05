@@ -26,7 +26,7 @@
 #include <kbytearraydisplay.h>
 #include <kbytearraydocument.h>
 // Okteta core
-#include <kabstractbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 #include <changesdescribable.h>
 // KDE
 #include <KLocale>
@@ -69,7 +69,7 @@ void InsertPatternTool::insertPattern( const QByteArray &pattern, int count )
         memcpy( &insertData.data()[i], pattern.constData(), patternSize );
 
     //TODO: support insert to selection
-//     const KHE::KSection selection = mByteArrayDisplay->selection();
+//     const KHE::Section selection = mByteArrayDisplay->selection();
 
     KHECore::ChangesDescribable *changesDescribable =
         qobject_cast<KHECore::ChangesDescribable*>( mByteArrayModel );

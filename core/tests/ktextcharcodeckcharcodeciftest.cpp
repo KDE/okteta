@@ -29,13 +29,13 @@
 
 
 
-KHECore::KCharCodec *KTextCharCodecKCharCodecIfTest::createCodec()
+KHECore::CharCodec *KTextCharCodecKCharCodecIfTest::createCodec()
 {
   return KHECore::KTextCharCodec::createCodec("ISO8859-1"); // TODO: test for some more, e.g. KOI8-R
 }
 
 
-void KTextCharCodecKCharCodecIfTest::deleteCodec( KHECore::KCharCodec *Codec )
+void KTextCharCodecKCharCodecIfTest::deleteCodec( KHECore::CharCodec *Codec )
 {
   delete Codec;
 }

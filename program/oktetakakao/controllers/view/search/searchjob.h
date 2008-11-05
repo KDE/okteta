@@ -28,7 +28,7 @@
 #include <QtCore/QByteArray>
 
 namespace KHECore {
-class KAbstractByteArrayModel;
+class AbstractByteArrayModel;
 }
 
 class SearchJob : public QObject // not yet: KJob
@@ -36,7 +36,7 @@ class SearchJob : public QObject // not yet: KJob
   Q_OBJECT
 
   public:
-    SearchJob( const KHECore::KAbstractByteArrayModel *model,
+    SearchJob( const KHECore::AbstractByteArrayModel *model,
                const QByteArray &searchData, int startIndex, bool findForward );
 
   public:
@@ -46,14 +46,14 @@ class SearchJob : public QObject // not yet: KJob
     void onBytesSearched();
 
   protected:
-    const KHECore::KAbstractByteArrayModel *mByteArrayModel;
+    const KHECore::AbstractByteArrayModel *mByteArrayModel;
 
     const QByteArray mSearchData;
     int mStartIndex;
     bool mFindForward;
 };
 
-inline SearchJob::SearchJob( const KHECore::KAbstractByteArrayModel *model,
+inline SearchJob::SearchJob( const KHECore::AbstractByteArrayModel *model,
                const QByteArray &searchData, int startIndex, bool findForward )
  : mByteArrayModel( model ), mSearchData( searchData ), mStartIndex( startIndex), mFindForward( findForward )
 {}

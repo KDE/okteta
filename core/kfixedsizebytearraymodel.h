@@ -24,7 +24,7 @@
 #define KHE_CORE_KFIXEDSIZEBYTEARRAYMODEL_H
 
 // lib
-#include "kabstractbytearraymodel.h"
+#include "abstractbytearraymodel.h"
 
 
 namespace KHECore
@@ -36,7 +36,7 @@ namespace KHECore
   *@author Friedrich W. H. Kossebau
   */
 
-class KFixedSizeByteArrayModel : public KAbstractByteArrayModel
+class KFixedSizeByteArrayModel : public AbstractByteArrayModel
 {
   public:
     /** creates a readonly buffer around the given data */
@@ -45,18 +45,18 @@ class KFixedSizeByteArrayModel : public KAbstractByteArrayModel
     explicit KFixedSizeByteArrayModel( unsigned int S, char FUC = '\0' );
     virtual ~KFixedSizeByteArrayModel();
 
-  public: // KAbstractByteArrayModel API
-    virtual bool prepareRange( const KSection &Range ) const;
-    virtual const char *dataSet( const KSection &S ) const;
+  public: // AbstractByteArrayModel API
+    virtual bool prepareRange( const Section &Range ) const;
+    virtual const char *dataSet( const Section &S ) const;
     virtual char datum( unsigned int Offset ) const;
     virtual int size() const;
     virtual bool isReadOnly() const;
     virtual bool isModified() const;
 
     virtual int insert( int Pos, const char*, int Length );
-    virtual int remove( const KSection &Remove );
-    virtual unsigned int replace( const KSection &Remove, const char*, unsigned int InputLength );
-    virtual bool swap( int firstStart, const KSection &secondSection );
+    virtual int remove( const Section &Remove );
+    virtual unsigned int replace( const Section &Remove, const char*, unsigned int InputLength );
+    virtual bool swap( int firstStart, const Section &secondSection );
     virtual int fill( const char FillChar, unsigned int Pos = 0, int Length = -1 );
     virtual void setDatum( unsigned int Offset, const char Char );
 
@@ -64,9 +64,9 @@ class KFixedSizeByteArrayModel : public KAbstractByteArrayModel
     virtual void setReadOnly( bool RO = true );
 
   public:
-    int compare( const KAbstractByteArrayModel &Other, const KSection &Range, unsigned int Pos = 0 );
-    int compare( const KAbstractByteArrayModel &Other, int OtherPos, int Length, unsigned int Pos = 0 );
-    int compare( const KAbstractByteArrayModel &Other );
+    int compare( const AbstractByteArrayModel &Other, const Section &Range, unsigned int Pos = 0 );
+    int compare( const AbstractByteArrayModel &Other, int OtherPos, int Length, unsigned int Pos = 0 );
+    int compare( const AbstractByteArrayModel &Other );
 
   public:
     char *rawData() const;
@@ -90,8 +90,8 @@ class KFixedSizeByteArrayModel : public KAbstractByteArrayModel
 };
 
 
-inline bool KFixedSizeByteArrayModel::prepareRange( const KSection &) const { return true; }
-inline const char *KFixedSizeByteArrayModel::dataSet( const KSection &S ) const { return &Data[S.start()]; }
+inline bool KFixedSizeByteArrayModel::prepareRange( const Section &) const { return true; }
+inline const char *KFixedSizeByteArrayModel::dataSet( const Section &S ) const { return &Data[S.start()]; }
 
 inline char KFixedSizeByteArrayModel::datum( unsigned int Offset ) const { return Data[Offset]; }
 inline int KFixedSizeByteArrayModel::size() const  { return Size; }
@@ -102,11 +102,11 @@ inline bool KFixedSizeByteArrayModel::isModified()   const { return Modified; }
 inline void KFixedSizeByteArrayModel::setReadOnly( bool RO )  { ReadOnly = RO; }
 inline void KFixedSizeByteArrayModel::setModified( bool M )   { Modified = M; }
 
-inline int KFixedSizeByteArrayModel::compare( const KAbstractByteArrayModel &Other )
-{ return compare( Other, KSection(0,Other.size()-1),0 ); }
+inline int KFixedSizeByteArrayModel::compare( const AbstractByteArrayModel &Other )
+{ return compare( Other, Section(0,Other.size()-1),0 ); }
 
-inline int KFixedSizeByteArrayModel::compare( const KAbstractByteArrayModel &Other, int OtherPos, int Length, unsigned int Pos )
-{ return compare( Other, KSection::fromWidth(OtherPos,Length),Pos ); }
+inline int KFixedSizeByteArrayModel::compare( const AbstractByteArrayModel &Other, int OtherPos, int Length, unsigned int Pos )
+{ return compare( Other, Section::fromWidth(OtherPos,Length),Pos ); }
 
 inline char *KFixedSizeByteArrayModel::rawData() const { return Data; }
 

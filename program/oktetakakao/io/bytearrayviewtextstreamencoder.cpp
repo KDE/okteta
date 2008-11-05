@@ -32,7 +32,7 @@
 #include <bytearraytablelayout.h>
 #include <abstractbytearrayview.h>
 // Okteta core
-#include <kabstractbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 #include <khechar.h>
 // KDE
 #include <KLocale>
@@ -54,8 +54,8 @@ ByteArrayViewTextStreamEncoder::ByteArrayViewTextStreamEncoder()
 
 bool ByteArrayViewTextStreamEncoder::encodeDataToStream( QIODevice *device,
                                                          const KByteArrayDisplay* byteArrayView,
-                                                         const KHECore::KAbstractByteArrayModel *byteArrayModel,
-                                                         const KHE::KSection &section )
+                                                         const KHECore::AbstractByteArrayModel *byteArrayModel,
+                                                         const KHE::Section &section )
 {
     bool success = true;
 

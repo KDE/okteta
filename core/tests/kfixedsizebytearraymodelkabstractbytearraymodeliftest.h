@@ -29,8 +29,8 @@
 class KFixedSizeByteArrayModelAbstractByteArrayModelIfTest : public KAbstractByteArrayModelIfTest
 {
   protected: // KAbstractByteArrayModelIfTest API
-    KHECore::KAbstractByteArrayModel *createByteArrayModel();
-    void deleteByteArrayModel( KHECore::KAbstractByteArrayModel *ByteArrayModel );
+    KHECore::AbstractByteArrayModel *createByteArrayModel();
+    void deleteByteArrayModel( KHECore::AbstractByteArrayModel *ByteArrayModel );
 };
 
 #endif

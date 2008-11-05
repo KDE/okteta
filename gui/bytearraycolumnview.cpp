@@ -28,7 +28,7 @@
 namespace KHEUI
 {
 
-ByteArrayColumnView::ByteArrayColumnView( KHECore::KAbstractByteArrayModel* _byteArrayModel, QWidget *parent )
+ByteArrayColumnView::ByteArrayColumnView( KHECore::AbstractByteArrayModel* _byteArrayModel, QWidget *parent )
  : AbstractByteArrayView( new ByteArrayColumnViewPrivate(this), parent )
 {
     Q_D( ByteArrayColumnView );
@@ -85,7 +85,7 @@ bool ByteArrayColumnView::offsetColumnVisible() const
 }
 
 
-void ByteArrayColumnView::setByteArrayModel( KHECore::KAbstractByteArrayModel* _byteArrayModel )
+void ByteArrayColumnView::setByteArrayModel( KHECore::AbstractByteArrayModel* _byteArrayModel )
 {
     Q_D( ByteArrayColumnView );
     d->setByteArrayModel( _byteArrayModel );

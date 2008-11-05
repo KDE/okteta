@@ -199,7 +199,7 @@ Coord ByteArrayTableLayout::coordOfIndex( int index ) const
     return Coord::fromIndex( index+mRelativeStartOffset, mNoOfBytesPerLine );
 }
 
-CoordRange ByteArrayTableLayout::coordRangeOfIndizes( const KHE::KSection &indizes ) const
+CoordRange ByteArrayTableLayout::coordRangeOfIndizes( const KHE::Section &indizes ) const
 {
     return CoordRange(
              Coord::fromIndex(indizes.start()+mRelativeStartOffset, mNoOfBytesPerLine),
@@ -238,9 +238,9 @@ bool ByteArrayTableLayout::atLastLinePosition( const Coord &coord ) const
 }
 
 
-KHE::KSection ByteArrayTableLayout::linePositions( int line ) const
+KHE::Section ByteArrayTableLayout::linePositions( int line ) const
 {
-    return KHE::KSection( firstLinePosition(line), lastLinePosition(line) );
+    return KHE::Section( firstLinePosition(line), lastLinePosition(line) );
 }
 
 

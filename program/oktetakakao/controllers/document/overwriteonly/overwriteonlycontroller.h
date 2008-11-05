@@ -28,7 +28,7 @@
 #include <abstractxmlguicontroller.h>
 
 namespace KHECore {
-class KAbstractByteArrayModel;
+class AbstractByteArrayModel;
 }
 class KXMLGUIClient;
 class KToggleAction;
@@ -47,7 +47,7 @@ class OverwriteOnlyController : public AbstractXmlGuiController
     void setOverwriteOnly( bool isOverwriteOnly );
 
   protected:
-    KHECore::KAbstractByteArrayModel *mByteArrayModel;
+    KHECore::AbstractByteArrayModel *mByteArrayModel;
 
     KToggleAction *mSetOverwriteOnlyAction;
 };

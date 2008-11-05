@@ -23,7 +23,7 @@
 #include "xorbytearrayfilter.h"
 
 // Okteta core
-#include <kabstractbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 // KDE
 #include <KLocale>
 
@@ -37,7 +37,7 @@ XOrByteArrayFilter::XOrByteArrayFilter()
 AbstractByteArrayFilterParameterSet *XOrByteArrayFilter::parameterSet() { return &mParameterSet; }
 
 bool XOrByteArrayFilter::filter( char *result,
-                                 KHECore::KAbstractByteArrayModel *model, const KHE::KSection &section ) const
+                                 KHECore::AbstractByteArrayModel *model, const KHE::Section &section ) const
 {
     const QByteArray operand = mParameterSet.operand();
     const int operandSize = operand.size();

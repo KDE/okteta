@@ -27,7 +27,7 @@
 // lib
 #include "kadds.h"
 // commonlib
-#include <ksection.h>
+#include <section.h>
 
 class QPainter;
 

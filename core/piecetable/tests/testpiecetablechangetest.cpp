@@ -27,7 +27,7 @@
 //
 #include <piecetable/piecetable.h>
 //
-#include <ksectionlist.h>
+#include <sectionlist.h>
 // Qt
 #include <QtTest/QtTest>
 

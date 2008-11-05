@@ -28,10 +28,10 @@
 
 class KByteArrayDisplay;
 namespace KHECore {
-class KAbstractByteArrayModel;
+class AbstractByteArrayModel;
 }
 namespace KHE {
-class KSection;
+class Section;
 }
 
 class KAbstractByteArrayStreamEncoder : public AbstractModelStreamEncoder
@@ -49,8 +49,8 @@ class KAbstractByteArrayStreamEncoder : public AbstractModelStreamEncoder
   protected: // API to be implemented
     virtual bool encodeDataToStream( QIODevice *device,
                                      const KByteArrayDisplay* byteArrayView,
-                                     const KHECore::KAbstractByteArrayModel *byteArrayModel,
-                                     const KHE::KSection &section ) = 0;
+                                     const KHECore::AbstractByteArrayModel *byteArrayModel,
+                                     const KHE::Section &section ) = 0;
 };
 
 #endif

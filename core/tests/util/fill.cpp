@@ -23,9 +23,9 @@
 #include "fill.h"
 
 // 
-#include <kabstractbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 //
-#include <ksection.h>
+#include <section.h>
 // Qt
 #include <QtCore/QByteArray>
 
@@ -35,7 +35,7 @@ using namespace KHECore;
 
 
 // fills the buffer with char from b to e
-void textureByteArrayModel( KAbstractByteArrayModel *byteArrayModel,
+void textureByteArrayModel( AbstractByteArrayModel *byteArrayModel,
                             unsigned char b, unsigned char e,
                             unsigned int From, int To )
 {
@@ -60,9 +60,9 @@ void textureByteArrayModel( KAbstractByteArrayModel *byteArrayModel,
 }
 
 
-void textureByteArrayModel( KAbstractByteArrayModel *byteArrayModel,
+void textureByteArrayModel( AbstractByteArrayModel *byteArrayModel,
                             unsigned char b, unsigned char e,
-                            const KSection &section )
+                            const Section &section )
 {
     textureByteArrayModel( byteArrayModel, b, e, section.start(), section.end() );
 }
@@ -95,13 +95,13 @@ void textureByteArray( QByteArray *byteArray,
 
 void textureByteArray( QByteArray *byteArray,
                        unsigned char b, unsigned char e,
-                       const KSection &section )
+                       const Section &section )
 {
     textureByteArray( byteArray, b, e, section.start(), section.end() );
 }
 
 /*
-static void list( KAbstractByteArrayModel *byteArrayModel, const char* Name )
+static void list( AbstractByteArrayModel *byteArrayModel, const char* Name )
 {
   unsigned int size = byteArrayModel->size();
   for( unsigned int i=0; i<size; ++i )

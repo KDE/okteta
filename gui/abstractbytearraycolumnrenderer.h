@@ -27,10 +27,10 @@
 #include <columnrenderer.h>
 // Okteta core
 #include <khe.h>
-#include <kabstractbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 #include <khechar.h>
 // commonlib
-#include <ksection.h>
+#include <section.h>
 
 
 class QPainter;
@@ -39,7 +39,7 @@ class QBrush;
 
 namespace KHECore {
 class Bookmarkable;
-class KCharCodec;
+class CharCodec;
 }
 
 namespace KHEUI
@@ -64,7 +64,7 @@ class AbstractByteArrayColumnRenderer : public ColumnRenderer
     enum FrameStyle { Frame, Left, Right };
   public:
     AbstractByteArrayColumnRenderer( ColumnsView/*KByteArrayView*/ *columnsView,
-        KHECore::KAbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges );
+        KHECore::AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges );
     virtual ~AbstractByteArrayColumnRenderer();
 
 
@@ -77,7 +77,7 @@ class AbstractByteArrayColumnRenderer : public ColumnRenderer
 
   public:
     //void renderLine( QPainter *painter, int lineIndex );
-    void renderLinePositions( QPainter *painter, int lineIndex, const KHE::KSection &linePositions );
+    void renderLinePositions( QPainter *painter, int lineIndex, const KHE::Section &linePositions );
     /** paints a cursor based on the type of the byte.
       * @param byteIndex Index of the byte to paint the cursor for. If -1 a space is used as char.
       */
@@ -126,18 +126,18 @@ class AbstractByteArrayColumnRenderer : public ColumnRenderer
       */
     void setMetrics( KPixelX digitWidth, KPixelY digitBaseLine );
     /** */
-    void set( KHECore::KAbstractByteArrayModel *byteArrayModel );
+    void set( KHECore::AbstractByteArrayModel *byteArrayModel );
     /** creates new buffer for x-values; to be called on any change of NoOfBytesPerLine or metrics */
     void resetXBuffer();
     /** sets the codec to be used by the char column. */
-    void setCharCodec( const KHECore::KCharCodec* charCodec );
+    void setCharCodec( const KHECore::CharCodec* charCodec );
 
     void setByteTypeColored( bool byteTypeColored );
 
 
   public: // functional logic
     /** returns byte linePositions covered by pixels with absolute x-coord x */
-    KHE::KSection linePositionsOfX( KPixelX x, KPixelX width ) const;
+    KHE::Section linePositionsOfX( KPixelX x, KPixelX width ) const;
     /** returns byte pos at pixel with absolute x-coord x */
     int linePositionOfX( KPixelX x ) const;
     /** returns byte pos at pixel with absolute x-coord x, and sets the flag to true if we are closer to the right */
@@ -149,17 +149,17 @@ class AbstractByteArrayColumnRenderer : public ColumnRenderer
     /** returns byte pos at pixel with relative x-coord x */
     int linePositionOfColumnX( KPixelX x ) const;
     /** returns byte linePositions covered by pixels with relative x-coord x */
-    KHE::KSection linePositionsOfColumnXs( KPixelX x, KPixelX width ) const;
+    KHE::Section linePositionsOfColumnXs( KPixelX x, KPixelX width ) const;
     /** returns relative x-coord of byte at position posInLine */
     KPixelX columnXOfLinePosition( int posInLine ) const;
     /** returns right relative x-coord of byte at position posInLine */
     KPixelX columnRightXOfLinePosition( int posInLine ) const;
     /** returns the linePositions that overlap with the x-coords relative to the view */
-    KHE::KSection visibleLinePositions( KPixelX x, KPixelX width ) const;
+    KHE::Section visibleLinePositions( KPixelX x, KPixelX width ) const;
     /** returns the */
-    KPixelXs xsOfLinePositionsInclSpaces( const KHE::KSection &linePositions ) const;
+    KPixelXs xsOfLinePositionsInclSpaces( const KHE::Section &linePositions ) const;
     /** */
-    KPixelXs columnXsOfLinePositionsInclSpaces( const KHE::KSection &linePositions ) const;
+    KPixelXs columnXsOfLinePositionsInclSpaces( const KHE::Section &linePositions ) const;
 
   public: // value access
     KPixelX byteWidth() const;
@@ -170,7 +170,7 @@ class AbstractByteArrayColumnRenderer : public ColumnRenderer
 
     int firstLinePos() const;
     int lastLinePos()  const;
-    KHE::KSection visibleLinePositions() const;
+    KHE::Section visibleLinePositions() const;
     const ByteArrayTableLayout *layout() const;
     bool isByteTypeColored() const;
 
@@ -182,23 +182,23 @@ class AbstractByteArrayColumnRenderer : public ColumnRenderer
 
 
   protected:
-    void renderPlain( QPainter *painter, const KHE::KSection &linePositions, int byteIndex );
-    void renderSelection( QPainter *painter, const KHE::KSection &linePositions, int byteIndex, int flag );
-    void renderMarking( QPainter *painter, const KHE::KSection &linePositions, int byteIndex, int flag );
-    void renderRange( QPainter *painter, const QBrush &brush, const KHE::KSection &linePositions, int flag );
+    void renderPlain( QPainter *painter, const KHE::Section &linePositions, int byteIndex );
+    void renderSelection( QPainter *painter, const KHE::Section &linePositions, int byteIndex, int flag );
+    void renderMarking( QPainter *painter, const KHE::Section &linePositions, int byteIndex, int flag );
+    void renderRange( QPainter *painter, const QBrush &brush, const KHE::Section &linePositions, int flag );
     void renderBookmark( QPainter *painter, const QBrush &brush );
 
     void recalcX();
 
-    bool isSelected( const KHE::KSection &range, KHE::KSection *selection, unsigned int *flag ) const;
-    bool isMarked( const KHE::KSection &range, KHE::KSection *marking, unsigned int *flag ) const;
+    bool isSelected( const KHE::Section &range, KHE::Section *selection, unsigned int *flag ) const;
+    bool isMarked( const KHE::Section &range, KHE::Section *marking, unsigned int *flag ) const;
 
     void setByteWidth( int byteWidth );
 
 
   protected:
     /** pointer to the buffer */
-    KHECore::KAbstractByteArrayModel *mByteArrayModel;
+    KHECore::AbstractByteArrayModel *mByteArrayModel;
     /** pointer to the layout */
     const ByteArrayTableLayout *mLayout;
     /** pointer to the ranges */
@@ -206,7 +206,7 @@ class AbstractByteArrayColumnRenderer : public ColumnRenderer
     /** */
     KHECore::Bookmarkable *mBookmarks;
     /** */
-    const KHECore::KCharCodec* mCharCodec;
+    const KHECore::CharCodec* mCharCodec;
 
     /** */
     KPixelX mDigitWidth;
@@ -240,7 +240,7 @@ class AbstractByteArrayColumnRenderer : public ColumnRenderer
 
 
   protected: // buffering rendering data
-    KHE::KSection mRenderLinePositions;
+    KHE::Section mRenderLinePositions;
     int mRenderLine;
     KPixelX mRenderX;
     KPixelX mRenderWidth;
@@ -257,11 +257,11 @@ inline int AbstractByteArrayColumnRenderer::noOfGroupedBytes()      const { retu
 
 inline int AbstractByteArrayColumnRenderer::firstLinePos() const { return mRenderLinePositions.start(); }
 inline int AbstractByteArrayColumnRenderer::lastLinePos()  const { return mRenderLinePositions.end(); }
-inline KHE::KSection AbstractByteArrayColumnRenderer::visibleLinePositions() const { return mRenderLinePositions; }
+inline KHE::Section AbstractByteArrayColumnRenderer::visibleLinePositions() const { return mRenderLinePositions; }
 
 inline const ByteArrayTableLayout *AbstractByteArrayColumnRenderer::layout() const { return mLayout; }
 
-inline void AbstractByteArrayColumnRenderer::setCharCodec( const KHECore::KCharCodec* charCodec )
+inline void AbstractByteArrayColumnRenderer::setCharCodec( const KHECore::CharCodec* charCodec )
 {
     mCharCodec = charCodec;
 }

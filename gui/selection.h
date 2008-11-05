@@ -24,7 +24,7 @@
 #define KHE_UI_SELECTION_H
 
 // commonlib
-#include <ksection.h>
+#include <section.h>
 
 
 namespace KHEUI
@@ -35,7 +35,7 @@ namespace KHEUI
   * mouse and keyboard commands it offers two ways to set its range:
   * - by giving the startposition (of the cursor) of an interactive selection
   *   and the subsequent end positions (until selection is finished)
-  * - direct setting (as provided by KHE::KSection)
+  * - direct setting (as provided by KHE::Section)
   *
   * the interactive selection takes care that
   *
@@ -54,7 +54,7 @@ class Selection
 
   public:
     Selection &operator=( const Selection &other );
-    Selection &operator=( const KHE::KSection &section );
+    Selection &operator=( const KHE::Section &section );
 
   public: // modification access
     /** starts the selection.
@@ -96,7 +96,7 @@ class Selection
     /** 
       * @return section
       */
-    const KHE::KSection &section() const;
+    const KHE::Section &section() const;
 
 
   public: // logic access
@@ -116,7 +116,7 @@ class Selection
 
   protected:
     /** mSection */
-    KHE::KSection mSection;
+    KHE::Section mSection;
     /** cursor index where the selection starts */
     int mAnchor;
 };
@@ -133,7 +133,7 @@ inline Selection &Selection::operator=( const Selection &other )
     return *this;
 }
 
-inline Selection &Selection::operator=( const KHE::KSection &section )
+inline Selection &Selection::operator=( const KHE::Section &section )
 {
     mSection = section;
     mAnchor = section.start();
@@ -177,7 +177,7 @@ inline void Selection::setForward( bool Forward )
     mAnchor = Forward ? mSection.start() : mSection.nextBehindEnd();
 }
 
-inline const KHE::KSection &Selection::section() const { return mSection; }
+inline const KHE::Section &Selection::section() const { return mSection; }
 inline int Selection::anchor()              const { return mAnchor; }
 inline int Selection::start()               const { return mSection.start(); }
 inline int Selection::end()                 const { return mSection.end(); }
@@ -203,12 +203,12 @@ inline void Selection::adaptToSwap( int firstOffset, int secondOffset, int secon
     if( mSection.end() < firstOffset || mSection.start() > secondOffset+secondLength-1 )
         return;
 
-    const KHE::KSection firstSection( firstOffset, secondOffset-1 );
+    const KHE::Section firstSection( firstOffset, secondOffset-1 );
     if( firstSection.includes(mSection) )
         mSection.moveBy( secondLength );
     else
     {
-        const KHE::KSection secondSection = KHE::KSection::fromWidth( secondOffset, secondLength );
+        const KHE::Section secondSection = KHE::Section::fromWidth( secondOffset, secondLength );
         if( secondSection.includes(mSection) )
             mSection.moveBy( -firstSection.width() );
         else

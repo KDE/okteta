@@ -23,7 +23,7 @@
 #include "rotatebytearrayfilter.h"
 
 // Okteta core
-#include <kabstractbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 // KDE
 #include <KLocale>
 // Qt
@@ -40,7 +40,7 @@ RotateByteArrayFilter::RotateByteArrayFilter()
 AbstractByteArrayFilterParameterSet *RotateByteArrayFilter::parameterSet() { return &mParameterSet; }
 
 bool RotateByteArrayFilter::filter( char *result,
-                                    KHECore::KAbstractByteArrayModel *model, const KHE::KSection &section ) const
+                                    KHECore::AbstractByteArrayModel *model, const KHE::Section &section ) const
 {
     const int groupSize = mParameterSet.groupSize();
     const int groupBitCount = (groupSize * RotateBitsPerByte );

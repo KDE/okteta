@@ -31,13 +31,13 @@
 using namespace KHECore;
 
 
-KHECore::KCharCodec *KEBCDIC1047CharCodecKCharCodecIfTest::createCodec()
+KHECore::CharCodec *KEBCDIC1047CharCodecKCharCodecIfTest::createCodec()
 {
   return KEBCDIC1047CharCodec::create();
 }
 
 
-void KEBCDIC1047CharCodecKCharCodecIfTest::deleteCodec( KHECore::KCharCodec *Codec )
+void KEBCDIC1047CharCodecKCharCodecIfTest::deleteCodec( KHECore::CharCodec *Codec )
 {
   delete Codec;
 }

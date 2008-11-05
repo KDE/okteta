@@ -25,7 +25,7 @@
 // lib
 #include <abstractbytearrayview.h>
 // commonlib
-#include <kcharcodec.h>
+#include <charcodec.h>
 // Qt
 #include <QtGui/QKeyEvent>
 

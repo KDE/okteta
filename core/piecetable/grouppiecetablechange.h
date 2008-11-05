@@ -32,7 +32,7 @@
 
 namespace KHE
 {
-class KSectionList;
+class SectionList;
 class ArrayChangeMetricsList;
 }
 
@@ -53,8 +53,8 @@ class GroupPieceTableChange : public AbstractPieceTableChange
     virtual int type() const;
     virtual QString description() const;
     virtual bool merge( const AbstractPieceTableChange *other );
-    virtual KHE::KSection apply( PieceTable *pieceTable ) const;
-    virtual KHE::KSection revert( PieceTable *pieceTable ) const;
+    virtual KHE::Section apply( PieceTable *pieceTable ) const;
+    virtual KHE::Section revert( PieceTable *pieceTable ) const;
     virtual KHE::ArrayChangeMetrics metrics() const;
     virtual int dataSize() const;
 
@@ -66,8 +66,8 @@ class GroupPieceTableChange : public AbstractPieceTableChange
 
 
   public:
-    KHE::KSectionList applyGroup( PieceTable *pieceTable ) const;
-    KHE::KSectionList revertGroup( PieceTable *pieceTable ) const;
+    KHE::SectionList applyGroup( PieceTable *pieceTable ) const;
+    KHE::SectionList revertGroup( PieceTable *pieceTable ) const;
     KHE::ArrayChangeMetricsList groupMetrics( bool reverted = false ) const;
     GroupPieceTableChange *parent() const;
 

@@ -27,8 +27,8 @@
 #include <kbytearraydisplay.h>
 // Okteta core
 #include <khechar.h>
-#include <kcharcodec.h>
-#include <kabstractbytearraymodel.h>
+#include <charcodec.h>
+#include <abstractbytearraymodel.h>
 // KDE
 #include <KLocale>
 // Qt
@@ -62,7 +62,7 @@ enum PODTypes
 
 PODDecoderTool::PODDecoderTool()
  : mByteArrayDisplay( 0 ), mByteArrayModel( 0 ), mCursorIndex( 0 ),
-   mCharCodec( KHECore::KCharCodec::createCodec(KHECore::LocalEncoding) ),
+   mCharCodec( KHECore::CharCodec::createCodec(KHECore::LocalEncoding) ),
    mUndefinedChar( PrimitivesDefaultUndefinedChar ),
    mUnsignedAsHex( true )
 {
@@ -163,7 +163,7 @@ void PODDecoderTool::onCharCodecChange( const QString& codecName )
         return;
 
     delete mCharCodec;
-    mCharCodec = KHECore::KCharCodec::createCodec( codecName );
+    mCharCodec = KHECore::CharCodec::createCodec( codecName );
     updateData();
 }
 

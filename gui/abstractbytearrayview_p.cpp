@@ -32,7 +32,7 @@
 #include <valuecodec.h>
 #include <kbookmarkable.h>
 #include <kversionable.h>
-#include <kwordbufferservice.h>
+#include <wordbytearrayservice.h>
 #include <arraychangemetricslist.h>
 // KDE
 #include <KGlobal>
@@ -66,7 +66,7 @@ static const AbstractByteArrayView::ResizeStyle DefaultResizeStyle = AbstractByt
 static const char OctetStreamFormatName[] = "application/octet-stream";
 
 
-class NullModel : public KHECore::KAbstractByteArrayModel
+class NullModel : public KHECore::AbstractByteArrayModel
 {
   public:
     NullModel();
@@ -80,8 +80,8 @@ class NullModel : public KHECore::KAbstractByteArrayModel
     virtual bool isModified() const;
 
   public: // modification API
-    virtual unsigned int replace( const KHE::KSection& removeSection, const char* insertData, unsigned int insertLength );
-    virtual bool swap( int firstStart, const KHE::KSection& secondSection );
+    virtual unsigned int replace( const KHE::Section& removeSection, const char* insertData, unsigned int insertLength );
+    virtual bool swap( int firstStart, const KHE::Section& secondSection );
     virtual int fill( const char fillChar, unsigned int offset = 0, int fillLength = -1 );
     virtual void setDatum( unsigned int offset, const char value );
     virtual void setModified( bool modified );
@@ -93,12 +93,12 @@ NullModel::~NullModel() {}
 char NullModel::datum( unsigned int offset ) const { Q_UNUSED(offset) return 0; }
 int NullModel::size() const { return 0; }
 bool NullModel::isModified() const { return false; }
-unsigned int NullModel::replace( const KHE::KSection& removeSection, const char* insertData, unsigned int insertLength )
+unsigned int NullModel::replace( const KHE::Section& removeSection, const char* insertData, unsigned int insertLength )
 {
 Q_UNUSED(removeSection) Q_UNUSED(insertData) Q_UNUSED(insertLength)
     return 0;
 }
-bool NullModel::swap( int firstStart, const KHE::KSection& secondSection )
+bool NullModel::swap( int firstStart, const KHE::Section& secondSection )
 {
 Q_UNUSED(firstStart) Q_UNUSED(secondSection)
     return false;
@@ -147,7 +147,7 @@ void AbstractByteArrayViewPrivate::init()
 
     mValueCodec = KHECore::ValueCodec::createCodec( (KHECore::ValueCoding)DefaultValueCoding );
     mValueCoding = DefaultValueCoding;
-    mCharCodec = KHECore::KCharCodec::createCodec( (KHECore::CharCoding)DefaultCharCoding );
+    mCharCodec = KHECore::CharCodec::createCodec( (KHECore::CharCoding)DefaultCharCoding );
     mCharCoding = DefaultCharCoding;
 
     mTabController = new KTabController( q, 0 );
@@ -160,7 +160,7 @@ void AbstractByteArrayViewPrivate::init()
     setWheelController( mZoomWheelController );
 }
 
-void AbstractByteArrayViewPrivate::setByteArrayModel( KHECore::KAbstractByteArrayModel* byteArrayModel )
+void AbstractByteArrayViewPrivate::setByteArrayModel( KHECore::AbstractByteArrayModel* byteArrayModel )
 {
     Q_Q( AbstractByteArrayView );
 
@@ -186,10 +186,10 @@ void AbstractByteArrayViewPrivate::setByteArrayModel( KHECore::KAbstractByteArra
     KHECore::Bookmarkable *bookmarks = qobject_cast<KHECore::Bookmarkable*>( mByteArrayModel );
     if( bookmarks )
     {
-        q->connect( mByteArrayModel, SIGNAL(bookmarksAdded( const QList<KHECore::KBookmark>& )),
-                    q, SLOT(onBookmarksChange(const QList<KHECore::KBookmark>&)) );
-        q->connect( mByteArrayModel, SIGNAL(bookmarksRemoved( const QList<KHECore::KBookmark>& )),
-                    q, SLOT(onBookmarksChange(const QList<KHECore::KBookmark>&)) );
+        q->connect( mByteArrayModel, SIGNAL(bookmarksAdded( const QList<KHECore::Bookmark>& )),
+                    q, SLOT(onBookmarksChange(const QList<KHECore::Bookmark>&)) );
+        q->connect( mByteArrayModel, SIGNAL(bookmarksRemoved( const QList<KHECore::Bookmark>& )),
+                    q, SLOT(onBookmarksChange(const QList<KHECore::Bookmark>&)) );
     }
     KHECore::Versionable* versionControl = qobject_cast<KHECore::Versionable*>( mByteArrayModel );
     if( versionControl )
@@ -444,8 +444,8 @@ void AbstractByteArrayViewPrivate::setCharCoding( AbstractByteArrayView::CharCod
     if( mCharCoding == charCoding )
         return;
 
-    KHECore::KCharCodec* newCharCodec
-        = KHECore::KCharCodec::createCodec( (KHECore::CharCoding)charCoding );
+    KHECore::CharCodec* newCharCodec
+        = KHECore::CharCodec::createCodec( (KHECore::CharCoding)charCoding );
     if( newCharCodec == 0 )
         return;
 
@@ -458,8 +458,8 @@ void AbstractByteArrayViewPrivate::setCharCoding( const QString& charCodingName 
     if( mCharCodec->name() == charCodingName )
         return;
 
-    KHECore::KCharCodec *newCharCodec =
-        KHECore::KCharCodec::createCodec( charCodingName );
+    KHECore::CharCodec *newCharCodec =
+        KHECore::CharCodec::createCodec( charCodingName );
     if( newCharCodec == 0 )
         return;
 
@@ -476,8 +476,8 @@ bool AbstractByteArrayViewPrivate::selectWord( /*unsigned TODO:change all unneed
     bool result = false;
     if( 0 <= index && index < mTableLayout->length()  )
     {
-        const KHECore::KWordBufferService WBS( mByteArrayModel, mCharCodec );
-        const KHE::KSection wordSection = WBS.wordSection( index );
+        const KHECore::WordByteArrayService WBS( mByteArrayModel, mCharCodec );
+        const KHE::Section wordSection = WBS.wordSection( index );
         if( wordSection.isValid() )
         {
             pauseCursor();
@@ -505,7 +505,7 @@ void AbstractByteArrayViewPrivate::selectAll( bool select )
 
     if( select )
     {
-        mTableRanges->setSelection( KHE::KSection(0,mTableLayout->length()-1) );
+        mTableRanges->setSelection( KHE::Section(0,mTableLayout->length()-1) );
         mTableCursor->gotoEnd();
     }
     else
@@ -560,7 +560,7 @@ void AbstractByteArrayViewPrivate::setSelection( int start, int end )
 
     if( start >= 0 && end < mTableLayout->length()  )
     {
-        const KHE::KSection selection( start, end );
+        const KHE::Section selection( start, end );
         if( selection.isValid() )
         {
             pauseCursor();
@@ -584,7 +584,7 @@ QByteArray AbstractByteArrayViewPrivate::selectedData() const
     if( !mTableRanges->hasSelection() )
         return QByteArray();
 
-    const KHE::KSection selection = mTableRanges->selection();
+    const KHE::Section selection = mTableRanges->selection();
     QByteArray data;
     data.resize( selection.width() );
     byteArrayModel()->copyTo( data.data(), selection.start(), selection.width() );
@@ -677,7 +677,7 @@ void AbstractByteArrayViewPrivate::insert( const QByteArray& data )
         {
             // replacing the selection:
             // we restrict the replacement to the minimum length of selection and input
-            KHE::KSection selection = mTableRanges->removeSelection();
+            KHE::Section selection = mTableRanges->removeSelection();
             selection.restrictEndByWidth( data.size() );
             lengthOfInserted = mByteArrayModel->replace( selection, data.data(), selection.width() );
         }
@@ -687,7 +687,7 @@ void AbstractByteArrayViewPrivate::insert( const QByteArray& data )
             if( !isCursorBehind() && length > 0 )
             {
                 // replacing the normal data, at least until the end
-                KHE::KSection insertRange = KHE::KSection::fromWidth( cursorPosition(), data.size() );
+                KHE::Section insertRange = KHE::Section::fromWidth( cursorPosition(), data.size() );
                 insertRange.restrictEndTo( length-1 );
                 lengthOfInserted = mByteArrayModel->replace( insertRange, data.data(), insertRange.width() );
             }
@@ -708,7 +708,7 @@ void AbstractByteArrayViewPrivate::insert( const QByteArray& data )
         if( mTableRanges->hasSelection() )
         {
             // replacing the selection
-            const KHE::KSection selection = mTableRanges->removeSelection();
+            const KHE::Section selection = mTableRanges->removeSelection();
             mByteArrayModel->replace( selection, data );
         }
         else
@@ -725,7 +725,7 @@ void AbstractByteArrayViewPrivate::removeSelectedData()
     if( isEffectiveReadOnly() || mOverWrite ) //TODO: || mValueEditor->isInEditMode() )
         return;
 
-    const KHE::KSection selection = mTableRanges->removeSelection();
+    const KHE::Section selection = mTableRanges->removeSelection();
 
     mByteArrayModel->remove( selection );
 
@@ -857,9 +857,9 @@ void AbstractByteArrayViewPrivate::dropEvent( QDropEvent* dropEvent )
 }
 
 
-void AbstractByteArrayViewPrivate::onBookmarksChange( const QList<KHECore::KBookmark>& bookmarks )
+void AbstractByteArrayViewPrivate::onBookmarksChange( const QList<KHECore::Bookmark>& bookmarks )
 {
-    foreach( const KHECore::KBookmark& bookmark, bookmarks )
+    foreach( const KHECore::Bookmark& bookmark, bookmarks )
     {
         const int position = bookmark.offset();
         mTableRanges->addChangedRange( position, position );

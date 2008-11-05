@@ -27,7 +27,7 @@
 #include "selection.h"
 #include "coordrangelist.h"
 // Okteta core
-#include <ksectionlist.h>
+#include <sectionlist.h>
 
 namespace KHE {
 class ArrayChangeMetricsList;
@@ -51,23 +51,23 @@ class ByteArrayTableRanges
     ~ByteArrayTableRanges();
 
   public: // modifcation access
-    void setMarking( const KHE::KSection &M );
+    void setMarking( const KHE::Section &M );
     void setSelectionStart( int StartIndex );
     void setSelectionEnd( int StartIndex );
-    void setSelection( const KHE::KSection &S );
+    void setSelection( const KHE::Section &S );
     /** */
-    void setFirstWordSelection( const KHE::KSection &S );
+    void setFirstWordSelection( const KHE::Section &S );
     /** */
     void ensureWordSelectionForward( bool Forward );
 
     /** removes marking and returns true if something changed */
     void removeMarking();
     /** removes selection with id and returns it */
-    KHE::KSection removeSelection( int id = 0 );
+    KHE::Section removeSelection( int id = 0 );
     /** removes all but the standard selection and returns true if something changed */
     void removeFurtherSelections();
 
-    void addChangedRange( const KHE::KSection &S );
+    void addChangedRange( const KHE::Section &S );
     void addChangedRange( int SI, int EI );
     void addChangedRange( const CoordRange &NewRange );
     void adaptToChanges( const KHE::ArrayChangeMetricsList& changeList );
@@ -81,8 +81,8 @@ class ByteArrayTableRanges
     int noOfSelections() const;
     int selectionStart() const;
     int selectionEnd() const;
-    KHE::KSection selection() const;
-    KHE::KSection firstWordSelection() const;
+    KHE::Section selection() const;
+    KHE::Section firstWordSelection() const;
     int selectionLength() const;
     bool isModified() const;
 
@@ -98,20 +98,20 @@ class ByteArrayTableRanges
     bool overlapsSelection( int FirstIndex, int LastIndex, int *SI, int *EI ) const;
     bool overlapsMarking( int FirstIndex, int LastIndex, int *SI, int *EI ) const;
 //    bool overlapsChanges( int FirstIndex, int LastIndex, int *SI, int *EI ) const;
-//    bool overlapsChanges( KHE::KSection Indizes, KHE::KSection *ChangedRange ) const;
+//    bool overlapsChanges( KHE::Section Indizes, KHE::Section *ChangedRange ) const;
     bool overlapsChanges( const CoordRange &Range, CoordRange *ChangedRange ) const;
-    const KHE::KSection *firstOverlappingSelection( const KHE::KSection &Range ) const;
-    const KHE::KSection *overlappingMarking( const KHE::KSection &Range ) const;
+    const KHE::Section *firstOverlappingSelection( const KHE::Section &Range ) const;
+    const KHE::Section *overlappingMarking( const KHE::Section &Range ) const;
 
 
   protected:
     /** true if something changed */
     bool Modified;
 
-    KHE::KSection Marking;
+    KHE::Section Marking;
     Selection mSelection;
     /** memories first selected word on wordwise selection */
-    KHE::KSection FirstWordSelection;
+    KHE::Section FirstWordSelection;
 
     CoordRangeList ChangedRanges;
 
@@ -123,8 +123,8 @@ inline int ByteArrayTableRanges::noOfSelections()  const { return 1; }
 
 inline int ByteArrayTableRanges::selectionStart()  const { return mSelection.start(); }
 inline int ByteArrayTableRanges::selectionEnd()    const { return mSelection.end(); }
-inline KHE::KSection ByteArrayTableRanges::selection()  const { return mSelection.section(); }
-inline KHE::KSection ByteArrayTableRanges::firstWordSelection()  const { return FirstWordSelection; }
+inline KHE::Section ByteArrayTableRanges::selection()  const { return mSelection.section(); }
+inline KHE::Section ByteArrayTableRanges::firstWordSelection()  const { return FirstWordSelection; }
 inline int ByteArrayTableRanges::selectionLength() const { return mSelection.section().width(); }
 inline bool ByteArrayTableRanges::isModified()     const { return Modified; }
 

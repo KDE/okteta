@@ -28,7 +28,7 @@ class QString;
 
 namespace KHE
 {
-class KSection;
+class Section;
 class ArrayChangeMetrics;
 }
 
@@ -69,8 +69,8 @@ class AbstractPieceTableChange
     /// returns true if successful, false otherwise. Default returns false.
     virtual bool merge( const AbstractPieceTableChange *other );
 
-    virtual KHE::KSection apply( PieceTable *pieceTable ) const = 0;
-    virtual KHE::KSection revert( PieceTable *pieceTable ) const = 0;
+    virtual KHE::Section apply( PieceTable *pieceTable ) const = 0;
+    virtual KHE::Section revert( PieceTable *pieceTable ) const = 0;
 
     virtual KHE::ArrayChangeMetrics metrics() const = 0;
     /// returns the size of the added data. Default returns 0.

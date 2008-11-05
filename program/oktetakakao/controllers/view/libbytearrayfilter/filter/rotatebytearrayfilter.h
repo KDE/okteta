@@ -37,7 +37,7 @@ class RotateByteArrayFilter : public AbstractByteArrayFilter
     virtual ~RotateByteArrayFilter();
 
   public: // AbstractByteArrayFilter API
-    virtual bool filter( char *result, KHECore::KAbstractByteArrayModel *model, const KHE::KSection &section ) const;
+    virtual bool filter( char *result, KHECore::AbstractByteArrayModel *model, const KHE::Section &section ) const;
     virtual AbstractByteArrayFilterParameterSet *parameterSet();
 
   protected:

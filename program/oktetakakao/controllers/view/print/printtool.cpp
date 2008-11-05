@@ -31,7 +31,7 @@
 #include <kbytearraydisplay.h>
 #include <kbytearraydocument.h>
 // Okteta core
-#include <kabstractbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 // KDE
 #include <KLocale>
 #include <KMessageBox>
@@ -118,7 +118,7 @@ void PrintTool::print()
         byteArrayFrameRenderer->setWidth( width );
         byteArrayFrameRenderer->setHeight( contentHeight );
 
-        KHE::KSection section = mByteArrayDisplay->selection();
+        KHE::Section section = mByteArrayDisplay->selection();
         if( !section.isValid() )
             section.setByWidth( 0, mByteArrayModel->size() );
         byteArrayFrameRenderer->setByteArrayModel( mByteArrayModel, section.start(), section.width() );

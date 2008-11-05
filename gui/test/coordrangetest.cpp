@@ -53,8 +53,8 @@ void CoordRangeTest::testConstructorByCoords()
 
 void CoordRangeTest::testConstructorByPosLines()
 {
-    KSection positions( Pos1, Pos2 );
-    KSection lines( Line1, Line2 );
+    Section positions( Pos1, Pos2 );
+    Section lines( Line1, Line2 );
 
     CoordRange coordRange( positions, lines );
     QCOMPARE( coordRange.start(), Coord(Pos1,Line1) );

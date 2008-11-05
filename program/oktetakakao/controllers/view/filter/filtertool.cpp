@@ -37,7 +37,7 @@
 #include <kbytearraydisplay.h>
 #include <kbytearraydocument.h>
 // Okteta core
-#include <kabstractbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 #include <changesdescribable.h>
 // KDE
 #include <KLocale>
@@ -111,7 +111,7 @@ void FilterTool::filter( int filterId ) const
 
     if( byteArrayFilter )
     {
-        const KHE::KSection filteredSection = mByteArrayDisplay->selection();
+        const KHE::Section filteredSection = mByteArrayDisplay->selection();
 
         QByteArray filterResult;
         filterResult.resize( filteredSection.width() );

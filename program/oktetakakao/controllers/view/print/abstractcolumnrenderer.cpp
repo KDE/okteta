@@ -55,7 +55,7 @@ AbstractColumnRendererPrivate::AbstractColumnRendererPrivate( AbstractColumnFram
  : mColumnFrameRenderer( columnFrameRenderer ),
    mVisible( true ),  //TODO: would false be better?
    mLineHeight( columnFrameRenderer->lineHeight() ),
-   mXSpan( KHE::KSection::fromWidth(0,0) )
+   mXSpan( KHE::Section::fromWidth(0,0) )
 {
 }
 

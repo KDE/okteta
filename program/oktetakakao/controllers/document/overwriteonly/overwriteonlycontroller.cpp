@@ -23,7 +23,7 @@
 #include "overwriteonlycontroller.h"
 
 // Okteta core
-#include <kabstractbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 // KDE
 #include <KXMLGUIClient>
 #include <KLocale>

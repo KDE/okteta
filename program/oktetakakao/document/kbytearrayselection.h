@@ -26,7 +26,7 @@
 // Kakao core
 #include <abstractmodelselection.h>
 // Okteta core
-#include <ksection.h>
+#include <section.h>
 
 
 class KByteArraySelection : public AbstractModelSelection
@@ -36,14 +36,14 @@ class KByteArraySelection : public AbstractModelSelection
     virtual ~KByteArraySelection();
 
   public:
-    void setSection( const KHE::KSection &section );
+    void setSection( const KHE::Section &section );
 
   public:
-    KHE::KSection section() const;
+    KHE::Section section() const;
     bool isValid() const;
 
   protected:
-    KHE::KSection mSection;
+    KHE::Section mSection;
 };
 
 #endif

@@ -28,7 +28,7 @@
 // Okteta gui
 #include <abstractbytearrayview.h>
 // Okteta core
-#include <kabstractbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 
 
 KByteArrayDisplay::KByteArrayDisplay( KByteArrayDocument *document )
@@ -36,7 +36,7 @@ KByteArrayDisplay::KByteArrayDisplay( KByteArrayDocument *document )
 {
     setBaseModel( mDocument );
 
-    KHECore::KAbstractByteArrayModel *content = mDocument->content();
+    KHECore::AbstractByteArrayModel *content = mDocument->content();
     mWidget = new KHEUI::ByteArrayJanusView();
     mWidget->setByteArrayModel( content );
 
@@ -169,7 +169,7 @@ void KByteArrayDisplay::setFocus()
     mWidget->setFocus();
 }
 
-KHE::KSection KByteArrayDisplay::selection() const
+KHE::Section KByteArrayDisplay::selection() const
 {
     return mWidget->selection();
 }

@@ -29,7 +29,7 @@
 #include <QtCore/QAbstractTableModel>
 
 namespace KHECore {
-class KCharCodec;
+class CharCodec;
 class ValueCodec;
 }
 
@@ -76,7 +76,7 @@ class StatisticTableModel : public QAbstractTableModel
 
     KHECore::ValueCoding mValueCoding;
     KHECore::ValueCodec *mValueCodec;
-    KHECore::KCharCodec *mCharCodec;
+    KHECore::CharCodec *mCharCodec;
     QChar mUndefinedChar;
 };
 

@@ -20,37 +20,37 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kwordbufferservice.h"
+#include "wordbytearrayservice.h"
 
 // lib
-#include "kabstractbytearraymodel.h"
+#include "abstractbytearraymodel.h"
 #include "khechar.h"
-#include "kcharcodec.h"
+#include "charcodec.h"
 
 
 namespace KHECore
 {
 
-KWordBufferService::KWordBufferService( const KAbstractByteArrayModel* byteArrayModel, const KCharCodec* charCodec )
+WordByteArrayService::WordByteArrayService( const AbstractByteArrayModel* byteArrayModel, const CharCodec* charCodec )
  : mByteArrayModel( byteArrayModel ), mCharCodec( charCodec )
 {}
 
-KHE::KSection KWordBufferService::wordSection( unsigned int index ) const
+KHE::Section WordByteArrayService::wordSection( unsigned int index ) const
 {
     return isWordChar(index) ?
-            KHE::KSection( indexOfWordStart(index), indexOfWordEnd(index) ) :
-            KHE::KSection();
+            KHE::Section( indexOfWordStart(index), indexOfWordEnd(index) ) :
+            KHE::Section();
 }
 
 
-bool KWordBufferService::isWordChar( unsigned int index ) const
+bool WordByteArrayService::isWordChar( unsigned int index ) const
 {
     const KChar decodedChar = mCharCodec->decode( mByteArrayModel->datum(index) );
     return !decodedChar.isUndefined() && decodedChar.isLetterOrNumber();
 }
 
 
-int KWordBufferService::indexOfPreviousWordStart( unsigned int index ) const
+int WordByteArrayService::indexOfPreviousWordStart( unsigned int index ) const
 {
     const unsigned int size = mByteArrayModel->size();
     // already at the start or can the result only be 0?
@@ -75,7 +75,7 @@ int KWordBufferService::indexOfPreviousWordStart( unsigned int index ) const
 }
 
 
-int KWordBufferService::indexOfNextWordStart( unsigned int index ) const
+int WordByteArrayService::indexOfNextWordStart( unsigned int index ) const
 {
     const unsigned int size = mByteArrayModel->size();
     bool lookingForFirstWordChar = false;
@@ -95,7 +95,7 @@ int KWordBufferService::indexOfNextWordStart( unsigned int index ) const
 }
 
 
-int KWordBufferService::indexOfBeforeNextWordStart( unsigned int index ) const
+int WordByteArrayService::indexOfBeforeNextWordStart( unsigned int index ) const
 {
     const unsigned int size = mByteArrayModel->size();
     bool lookingForFirstWordChar = false;
@@ -115,7 +115,7 @@ int KWordBufferService::indexOfBeforeNextWordStart( unsigned int index ) const
 }
 
 
-int KWordBufferService::indexOfWordStart( unsigned int index ) const
+int WordByteArrayService::indexOfWordStart( unsigned int index ) const
 {
     for( ; index > 0; --index )
     {
@@ -126,7 +126,7 @@ int KWordBufferService::indexOfWordStart( unsigned int index ) const
 }
 
 
-int KWordBufferService::indexOfWordEnd( unsigned int index ) const
+int WordByteArrayService::indexOfWordEnd( unsigned int index ) const
 {
     const unsigned int size = mByteArrayModel->size();
     for( ++index; index<size; ++index )
@@ -139,7 +139,7 @@ int KWordBufferService::indexOfWordEnd( unsigned int index ) const
 }
 
 
-int KWordBufferService::indexOfLeftWordSelect( unsigned int index ) const
+int WordByteArrayService::indexOfLeftWordSelect( unsigned int index ) const
 {
     // word at index?
     if( isWordChar(index) )
@@ -168,7 +168,7 @@ int KWordBufferService::indexOfLeftWordSelect( unsigned int index ) const
 }
 
 
-int KWordBufferService::indexOfRightWordSelect( unsigned int index ) const
+int WordByteArrayService::indexOfRightWordSelect( unsigned int index ) const
 {
     // TODO: should this check be here or with the caller?
     // the later would need another function to search the previous word end
@@ -207,14 +207,14 @@ int KWordBufferService::indexOfRightWordSelect( unsigned int index ) const
 }
 
 /*
-int KWordBufferService::indexOfBehindWordEnd( unsigned int index ) const
+int WordByteArrayService::indexOfBehindWordEnd( unsigned int index ) const
 {
   // no word at index?
   return !::isWordChar(datum(index)) ? indexOfBehindLeftWordEnd(index) : indexOfBehindRightWordEnd(index+1)
 }
 
 
-int KWordBufferService::indexOfBehindRightWordEnd( unsigned int index ) const
+int WordByteArrayService::indexOfBehindRightWordEnd( unsigned int index ) const
 {
   for( ; index<size(); ++index )
 {
@@ -226,7 +226,7 @@ int KWordBufferService::indexOfBehindRightWordEnd( unsigned int index ) const
 }
 
 
-int KWordBufferService::indexOfBehindLeftWordEnd( unsigned int index ) const
+int WordByteArrayService::indexOfBehindLeftWordEnd( unsigned int index ) const
 {
   for( --index; index>=0; --index )
 {
@@ -238,6 +238,6 @@ int KWordBufferService::indexOfBehindLeftWordEnd( unsigned int index ) const
 }
 */
 
-KWordBufferService::~KWordBufferService() {}
+WordByteArrayService::~WordByteArrayService() {}
 
 }

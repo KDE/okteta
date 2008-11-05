@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kabstractbytearraymodel.h"
+#include "abstractbytearraymodel.h"
 
 
 namespace KHECore
@@ -28,31 +28,31 @@ namespace KHECore
 
 static const int SearchedByteCountSignalLimit = 10000;
 
-KAbstractByteArrayModel::KAbstractByteArrayModel() {}
+AbstractByteArrayModel::AbstractByteArrayModel() {}
 
-bool KAbstractByteArrayModel::isReadOnly() const { return false; }
+bool AbstractByteArrayModel::isReadOnly() const { return false; }
 
-void KAbstractByteArrayModel::setReadOnly( bool isReadOnly )
+void AbstractByteArrayModel::setReadOnly( bool isReadOnly )
 {
     Q_UNUSED( isReadOnly )
 }
 
-int KAbstractByteArrayModel::insert( int offset, const char *insertData, int insertLength )
+int AbstractByteArrayModel::insert( int offset, const char *insertData, int insertLength )
 {
     return replace( offset, 0, insertData, insertLength );
 }
 
 
-int KAbstractByteArrayModel::remove( const KSection &removeSection )
+int AbstractByteArrayModel::remove( const Section &removeSection )
 {
     replace( removeSection, 0, 0 );
     return removeSection.width(); // TODO: check if this is true
 }
 
 
-int KAbstractByteArrayModel::copyTo( char *dest, const KSection &cS ) const
+int AbstractByteArrayModel::copyTo( char *dest, const Section &cS ) const
 {
-    KSection copySection( cS );
+    Section copySection( cS );
     copySection.restrictEndTo( size()-1 );
 
     for( int i=copySection.start(); i<=copySection.end(); ++i )
@@ -62,7 +62,7 @@ int KAbstractByteArrayModel::copyTo( char *dest, const KSection &cS ) const
 }
 
 
-int KAbstractByteArrayModel::indexOf( const char *pattern, int patternLength, int fromOffset  ) const
+int AbstractByteArrayModel::indexOf( const char *pattern, int patternLength, int fromOffset  ) const
 {
     int result = -1;
 
@@ -93,7 +93,7 @@ int KAbstractByteArrayModel::indexOf( const char *pattern, int patternLength, in
     return result;
 }
 
-int KAbstractByteArrayModel::lastIndexOf( const char *pattern, int patternLength, int fromOffset ) const
+int AbstractByteArrayModel::lastIndexOf( const char *pattern, int patternLength, int fromOffset ) const
 {
     int result = -1;
 
@@ -129,8 +129,8 @@ int KAbstractByteArrayModel::lastIndexOf( const char *pattern, int patternLength
     return result;
 }
 
-KAbstractByteArrayModel::~KAbstractByteArrayModel() {}
+AbstractByteArrayModel::~AbstractByteArrayModel() {}
 
 }
 
-#include "kabstractbytearraymodel.moc"
+#include "abstractbytearraymodel.moc"

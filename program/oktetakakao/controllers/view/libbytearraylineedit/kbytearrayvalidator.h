@@ -31,7 +31,7 @@
 
 namespace KHECore {
 class ValueCodec;
-class KCharCodec;
+class CharCodec;
 }
 
 
@@ -74,7 +74,7 @@ class KByteArrayValidator : public QValidator
 
     Coding mCodecId;
     KHECore::ValueCodec *mValueCodec;
-    KHECore::KCharCodec *mCharCodec;
+    KHECore::CharCodec *mCharCodec;
 };
 
 #endif

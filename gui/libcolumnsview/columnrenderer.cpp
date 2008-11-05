@@ -55,7 +55,7 @@ ColumnRendererPrivate::ColumnRendererPrivate( ColumnsView *V )
  : View( V ),
    Visible( true ),  //TODO: would false be better?
    LineHeight( V->lineHeight() ),
-   XSpan( KHE::KSection::fromWidth(0,0) )
+   XSpan( KHE::Section::fromWidth(0,0) )
 {
 }
 

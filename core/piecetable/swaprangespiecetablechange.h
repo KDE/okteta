@@ -27,7 +27,7 @@
 // lib
 #include "abstractpiecetablechange.h"
 // common
-#include <ksection.h>
+#include <section.h>
 
 namespace KPieceTable
 {
@@ -39,22 +39,22 @@ namespace KPieceTable
 class SwapRangesPieceTableChange : public AbstractPieceTableChange
 {
   public:
-    SwapRangesPieceTableChange( int firstStart, const KHE::KSection &secondSection );
+    SwapRangesPieceTableChange( int firstStart, const KHE::Section &secondSection );
     virtual ~SwapRangesPieceTableChange();
 
   public: // AbstractPieceTableChange API
     virtual int type() const;
     virtual QString description() const;
-    virtual KHE::KSection apply( PieceTable *pieceTable ) const;
-    virtual KHE::KSection revert( PieceTable *pieceTable ) const;
+    virtual KHE::Section apply( PieceTable *pieceTable ) const;
+    virtual KHE::Section revert( PieceTable *pieceTable ) const;
     virtual KHE::ArrayChangeMetrics metrics() const;
 
   protected:
     int mFirstStart;
-    KHE::KSection mSecondSection;
+    KHE::Section mSecondSection;
 };
 
-inline SwapRangesPieceTableChange::SwapRangesPieceTableChange( int firstStart, const KHE::KSection &secondSection )
+inline SwapRangesPieceTableChange::SwapRangesPieceTableChange( int firstStart, const KHE::Section &secondSection )
  : mFirstStart( firstStart ), mSecondSection( secondSection )
 {}
 

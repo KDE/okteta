@@ -35,7 +35,7 @@ class ValueCodec;
 class ValueByteArrayColumnTextRenderer : public AbstractByteArrayColumnTextRenderer
 {
   public:
-    ValueByteArrayColumnTextRenderer( const KHECore::KAbstractByteArrayModel *byteArrayModel, int offset,
+    ValueByteArrayColumnTextRenderer( const KHECore::AbstractByteArrayModel *byteArrayModel, int offset,
         const KHEUI::CoordRange &coordRange,
         int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
         KHECore::ValueCoding valueCoding );

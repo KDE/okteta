@@ -67,7 +67,7 @@ class OKTETAGUI_EXPORT ByteArrayRowView : public AbstractByteArrayView
 
     virtual bool isByteTypeColored() const;
 
-    virtual void setByteArrayModel( KHECore::KAbstractByteArrayModel* byteArrayModel );
+    virtual void setByteArrayModel( KHECore::AbstractByteArrayModel* byteArrayModel );
     virtual void toggleOffsetColumn( bool offsetColumnVisible );
     virtual void setByteSpacingWidth( int/*KPixelX*/ byteSpacingWidth ) ;
     virtual void setNoOfGroupedBytes( int noOfGroupedBytes );

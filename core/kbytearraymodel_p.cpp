@@ -123,12 +123,12 @@ int KByteArrayModelPrivate::insert( int position, const char* data, int length )
 }
 
 
-int KByteArrayModelPrivate::remove( const KSection &section )
+int KByteArrayModelPrivate::remove( const Section &section )
 {
     if( m_readOnly )
         return 0;
 
-    KSection removeSection( section );
+    Section removeSection( section );
     if( removeSection.startsBehind(m_size-1) || removeSection.width() == 0 )
         return 0;
 
@@ -151,12 +151,12 @@ int KByteArrayModelPrivate::remove( const KSection &section )
 }
 
 
-unsigned int KByteArrayModelPrivate::replace( const KSection &section, const char* data, unsigned int inputLength )
+unsigned int KByteArrayModelPrivate::replace( const Section &section, const char* data, unsigned int inputLength )
 {
     if( m_readOnly )
         return 0;
 
-    KSection removeSection( section );
+    Section removeSection( section );
     // check all parameters
     if( removeSection.start() >= (int)m_size || (removeSection.width()==0 && inputLength==0) )
         return 0;
@@ -223,12 +223,12 @@ unsigned int KByteArrayModelPrivate::replace( const KSection &section, const cha
 }
 
 
-bool KByteArrayModelPrivate::swap( int firstStart, const KSection &secondSection )
+bool KByteArrayModelPrivate::swap( int firstStart, const Section &secondSection )
 {
     if( m_readOnly )
         return false;
 
-    KSection sourceSection( secondSection );
+    Section sourceSection( secondSection );
     // check all parameters
     if( sourceSection.start() >= (int)m_size || sourceSection.width() == 0
         || firstStart > (int)m_size || sourceSection.start() == firstStart )

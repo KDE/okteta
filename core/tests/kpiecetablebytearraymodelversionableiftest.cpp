@@ -23,7 +23,7 @@
 #include "kpiecetablebytearraymodelversionableiftest.h"
 
 // test object
-#include <kpiecetablebytearraymodel.h>
+#include <piecetablebytearraymodel.h>
 // Qt
 #include <QtTest/QtTest>
 
@@ -35,7 +35,7 @@ namespace KHECore
 
 QObject *KPieceTableByteArrayModelVersionableIfTest::createVersionable()
 {
-    KPieceTableByteArrayModel *byteArrayModel = new KPieceTableByteArrayModel( ByteArrayModelSize );
+    PieceTableByteArrayModel *byteArrayModel = new PieceTableByteArrayModel( ByteArrayModelSize );
     byteArrayModel->setReadOnly( false );
 
     return byteArrayModel;

@@ -31,8 +31,8 @@
 class KTextCharCodecKCharCodecIfTest : public KCharCodecIfTest
 {
   protected: // KCharCodecIfTest API
-    virtual KHECore::KCharCodec *createCodec();
-    virtual void deleteCodec( KHECore::KCharCodec *Codec );
+    virtual KHECore::CharCodec *createCodec();
+    virtual void deleteCodec( KHECore::CharCodec *Codec );
 };
 
 #endif

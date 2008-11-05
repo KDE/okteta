@@ -459,7 +459,7 @@ void PieceTableTest::testRemove()
 
     // removing at begin
     pieceTable.init( Size );
-    pieceTable.remove( KHE::KSection(0, Start-1) );
+    pieceTable.remove( KHE::Section(0, Start-1) );
 
         QCOMPARE( pieceTable.size(), Size-Start );
         result = pieceTable.getStorageData( &storageId, &storageOffset, 0 );
@@ -477,7 +477,7 @@ void PieceTableTest::testRemove()
 
     // removing at middle
     pieceTable.init( Size );
-    pieceTable.remove( KHE::KSection(Start, End) );
+    pieceTable.remove( KHE::Section(Start, End) );
 
         QCOMPARE( pieceTable.size(), Size-Width );
         result = pieceTable.getStorageData( &storageId, &storageOffset, Start-1 );
@@ -500,7 +500,7 @@ void PieceTableTest::testRemove()
 
     // removing at end
     pieceTable.init( Size );
-    pieceTable.remove( KHE::KSection(End+1, Size-1) );
+    pieceTable.remove( KHE::Section(End+1, Size-1) );
 
         QCOMPARE( pieceTable.size(), End+1 );
         result = pieceTable.getStorageData( &storageId, &storageOffset, End );
@@ -513,7 +513,7 @@ void PieceTableTest::testRemove()
 
     // removing all
     pieceTable.init( Size );
-    pieceTable.remove( KHE::KSection::fromWidth(Size) );
+    pieceTable.remove( KHE::Section::fromWidth(Size) );
 
         QCOMPARE( pieceTable.size(), 0 );
         result = pieceTable.getStorageData( &storageId, &storageOffset, 0 );
@@ -530,7 +530,7 @@ void PieceTableTest::testRemove()
 
     // removing inside a piece in the middle
     fillWithSize( &pieceTable, pieceCount );
-    pieceTable.remove( KHE::KSection::fromWidth(midPieceOffset+Start, Width) );
+    pieceTable.remove( KHE::Section::fromWidth(midPieceOffset+Start, Width) );
 
         QCOMPARE( pieceTable.size(), fullSize-Width );
 
@@ -554,7 +554,7 @@ void PieceTableTest::testRemove()
 
     // removing start of a piece in the middle
     fillWithSize( &pieceTable, pieceCount );
-    pieceTable.remove( KHE::KSection::fromWidth(midPieceOffset, Start) );
+    pieceTable.remove( KHE::Section::fromWidth(midPieceOffset, Start) );
 
         QCOMPARE( pieceTable.size(), fullSize-Start );
 
@@ -578,7 +578,7 @@ void PieceTableTest::testRemove()
 
     // removing end of a piece in the middle
     fillWithSize( &pieceTable, pieceCount );
-    pieceTable.remove( KHE::KSection::fromWidth(midPieceOffset+End+1, Size-(End+1)) );
+    pieceTable.remove( KHE::Section::fromWidth(midPieceOffset+End+1, Size-(End+1)) );
 
         QCOMPARE( pieceTable.size(), fullSize-(Size-End-1) );
 
@@ -602,7 +602,7 @@ void PieceTableTest::testRemove()
 
     // removing whole piece in the middle
     fillWithSize( &pieceTable, pieceCount );
-    pieceTable.remove( KHE::KSection::fromWidth(midPieceOffset, Size) );
+    pieceTable.remove( KHE::Section::fromWidth(midPieceOffset, Size) );
 
         QCOMPARE( pieceTable.size(), fullSize-Size );
 
@@ -626,7 +626,7 @@ void PieceTableTest::testRemove()
 
     // removing whole piece and start of next in the middke
     fillWithSize( &pieceTable, pieceCount );
-    pieceTable.remove( KHE::KSection::fromWidth(midPieceOffset, Size+Start) );
+    pieceTable.remove( KHE::Section::fromWidth(midPieceOffset, Size+Start) );
 
         QCOMPARE( pieceTable.size(), fullSize-Size-Start );
 
@@ -650,7 +650,7 @@ void PieceTableTest::testRemove()
 
     // removing whole piece and end of previous in the middle
     fillWithSize( &pieceTable, pieceCount );
-    pieceTable.remove( KHE::KSection::fromWidth(midPieceOffset-(Size-End-1), Size+Size-(End+1)) );
+    pieceTable.remove( KHE::Section::fromWidth(midPieceOffset-(Size-End-1), Size+Size-(End+1)) );
 
         QCOMPARE( pieceTable.size(), fullSize-Size-(Size-End-1) );
 
@@ -674,7 +674,7 @@ void PieceTableTest::testRemove()
 
     // removing end of previous, whole and start of next in the middle
     fillWithSize( &pieceTable, pieceCount );
-    pieceTable.remove( KHE::KSection::fromWidth(midPieceOffset-(Size-End-1), Start+Size+Size-(End+1)) );
+    pieceTable.remove( KHE::Section::fromWidth(midPieceOffset-(Size-End-1), Start+Size+Size-(End+1)) );
 
         QCOMPARE( pieceTable.size(), fullSize-Size-(Size-End-1)-Start );
 
@@ -698,7 +698,7 @@ void PieceTableTest::testRemove()
 
     // removing start of piece at start
     fillWithSize( &pieceTable, pieceCount );
-    pieceTable.remove( KHE::KSection::fromWidth(Start) );
+    pieceTable.remove( KHE::Section::fromWidth(Start) );
 
         QCOMPARE( pieceTable.size(), fullSize-Start );
 
@@ -717,7 +717,7 @@ void PieceTableTest::testRemove()
 
     // removing whole piece at start
     fillWithSize( &pieceTable, pieceCount );
-    pieceTable.remove( KHE::KSection::fromWidth(Size) );
+    pieceTable.remove( KHE::Section::fromWidth(Size) );
 
         QCOMPARE( pieceTable.size(), fullSize-Size );
 
@@ -736,7 +736,7 @@ void PieceTableTest::testRemove()
 
     // removing whole piece and start of next at start
     fillWithSize( &pieceTable, pieceCount );
-    pieceTable.remove( KHE::KSection::fromWidth(Size+Start) );
+    pieceTable.remove( KHE::Section::fromWidth(Size+Start) );
 
         QCOMPARE( pieceTable.size(), fullSize-Size-Start );
 
@@ -755,7 +755,7 @@ void PieceTableTest::testRemove()
 
     // removing end of piece at end
     fillWithSize( &pieceTable, pieceCount );
-    pieceTable.remove( KHE::KSection::fromWidth(fullSize-Size+End+1, Size-(End+1)) );
+    pieceTable.remove( KHE::Section::fromWidth(fullSize-Size+End+1, Size-(End+1)) );
 
         QCOMPARE( pieceTable.size(), fullSize-(Size-End-1) );
 
@@ -769,7 +769,7 @@ void PieceTableTest::testRemove()
 
     // removing whole piece at end
     fillWithSize( &pieceTable, pieceCount );
-    pieceTable.remove( KHE::KSection::fromWidth(fullSize-Size, Size) );
+    pieceTable.remove( KHE::Section::fromWidth(fullSize-Size, Size) );
 
         QCOMPARE( pieceTable.size(), fullSize-Size );
 
@@ -783,7 +783,7 @@ void PieceTableTest::testRemove()
 
     // removing whole piece and end of previous at end
     fillWithSize( &pieceTable, pieceCount );
-    pieceTable.remove( KHE::KSection::fromWidth(fullSize-Size-(Size-End-1), Size+Size-(End+1)) );
+    pieceTable.remove( KHE::Section::fromWidth(fullSize-Size-(Size-End-1), Size+Size-(End+1)) );
 
         QCOMPARE( pieceTable.size(), fullSize-Size-(Size-End-1) );
 
@@ -797,7 +797,7 @@ void PieceTableTest::testRemove()
 
     // removing all 
     fillWithSize( &pieceTable, pieceCount );
-    pieceTable.remove( KHE::KSection::fromWidth(fullSize) );
+    pieceTable.remove( KHE::Section::fromWidth(fullSize) );
 
         QCOMPARE( pieceTable.size(), 0 );
         result = pieceTable.getStorageData( &storageId, &storageOffset, 0 );
@@ -814,7 +814,7 @@ void PieceTableTest::testSwap()
 
     // moving end at begin
     pieceTable.init( Size );
-    pieceTable.swap( 0, KHE::KSection::fromWidth(End+1, Size-(End+1)) );
+    pieceTable.swap( 0, KHE::Section::fromWidth(End+1, Size-(End+1)) );
 
         QCOMPARE( pieceTable.size(), Size );
 
@@ -843,7 +843,7 @@ void PieceTableTest::testSwap()
 
     // moving end at mid
     pieceTable.init( Size );
-    pieceTable.swap( Start, KHE::KSection::fromWidth(End+1, Size-(End+1)) );
+    pieceTable.swap( Start, KHE::Section::fromWidth(End+1, Size-(End+1)) );
 
         QCOMPARE( pieceTable.size(), Size );
 
@@ -878,7 +878,7 @@ void PieceTableTest::testSwap()
 
     // moving mid at begin
     pieceTable.init( Size );
-    pieceTable.swap( 0, KHE::KSection::fromWidth(Start, Width) );
+    pieceTable.swap( 0, KHE::Section::fromWidth(Start, Width) );
 
         QCOMPARE( pieceTable.size(), Size );
 
@@ -911,7 +911,7 @@ void PieceTableTest::testSwap()
     // moving mid at mid
     pieceTable.init( Size );
     int mid = (End+Start)/2;
-    pieceTable.swap( Start, KHE::KSection::fromWidth(mid, End-mid+1) );
+    pieceTable.swap( Start, KHE::Section::fromWidth(mid, End-mid+1) );
 
         QCOMPARE( pieceTable.size(), Size );
 
@@ -955,7 +955,7 @@ void PieceTableTest::testSwap()
 
     // moving start of piece at start
     fillWithSize( &pieceTable, pieceCount );
-    pieceTable.swap( Start, KHE::KSection::fromWidth(mid, End-mid+1) );
+    pieceTable.swap( Start, KHE::Section::fromWidth(mid, End-mid+1) );
 
         QCOMPARE( pieceTable.size(), fullSize );
     //TODO: add other tests

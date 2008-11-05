@@ -25,7 +25,7 @@
 // lib
 #include "grouppiecetablechange.h"
 //
-#include <ksectionlist.h>
+#include <sectionlist.h>
 #include <arraychangemetricslist.h>
 
 namespace KPieceTable
@@ -128,7 +128,7 @@ bool PieceTableChangeHistory::appendChange( AbstractPieceTableChange *change )
 
 
 bool PieceTableChangeHistory::revertBeforeChange( PieceTable *pieceTable, int changeId,
-                                                  KHE::KSectionList *changedRanges,
+                                                  KHE::SectionList *changedRanges,
                                                   KHE::ArrayChangeMetricsList *changeList )
 {
     int currentChangeId = mAppliedChangesCount;
@@ -150,7 +150,7 @@ bool PieceTableChangeHistory::revertBeforeChange( PieceTable *pieceTable, int ch
             if( change->type() == AbstractPieceTableChange::GroupId )
             {
                 const GroupPieceTableChange *groupChange = static_cast<const GroupPieceTableChange *>(change);
-                const KHE::KSectionList changedSectionList = groupChange->applyGroup( pieceTable );
+                const KHE::SectionList changedSectionList = groupChange->applyGroup( pieceTable );
                 changedRanges->addSectionList( changedSectionList );
 
                 const QList<KHE::ArrayChangeMetrics> changeMetricsList = groupChange->groupMetrics();
@@ -158,7 +158,7 @@ bool PieceTableChangeHistory::revertBeforeChange( PieceTable *pieceTable, int ch
             }
             else
             {
-                const KHE::KSection changedSection = change->apply( pieceTable );
+                const KHE::Section changedSection = change->apply( pieceTable );
                 changedRanges->addSection( changedSection );
 
                 const KHE::ArrayChangeMetrics changeMetrics = change->metrics();
@@ -177,7 +177,7 @@ bool PieceTableChangeHistory::revertBeforeChange( PieceTable *pieceTable, int ch
             if( change->type() == AbstractPieceTableChange::GroupId )
             {
                 const GroupPieceTableChange *groupChange = static_cast<const GroupPieceTableChange *>(change);
-                const KHE::KSectionList changedSectionList = groupChange->revertGroup( pieceTable );
+                const KHE::SectionList changedSectionList = groupChange->revertGroup( pieceTable );
                 changedRanges->addSectionList( changedSectionList );
 
                 const QList<KHE::ArrayChangeMetrics> changeMetricsList = groupChange->groupMetrics( true );
@@ -185,7 +185,7 @@ bool PieceTableChangeHistory::revertBeforeChange( PieceTable *pieceTable, int ch
             }
             else
             {
-                const KHE::KSection changedSection = change->revert( pieceTable );
+                const KHE::Section changedSection = change->revert( pieceTable );
                 changedRanges->addSection( changedSection );
 
                 KHE::ArrayChangeMetrics changeMetrics = change->metrics();

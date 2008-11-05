@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_KPIECETABLEBYTEARRAYMODEL_PRIVATE_H
-#define KHE_CORE_KPIECETABLEBYTEARRAYMODEL_PRIVATE_H
+#ifndef KHE_CORE_PIECETABLEBYTEARRAYMODEL_PRIVATE_H
+#define KHE_CORE_PIECETABLEBYTEARRAYMODEL_PRIVATE_H
 
 // lib
-#include "kpiecetablebytearraymodel.h"
+#include "piecetablebytearraymodel.h"
 #include "changesdatastorage.h"
 #include "arraychangemetricslist.h"
 // piecetable
@@ -40,26 +40,26 @@ namespace KHECore
   *@author Friedrich W. H. Kossebau
   */
 
-class KPieceTableByteArrayModel::Private
+class PieceTableByteArrayModel::Private
 {
   public:
     /** creates a readonly buffer around the given data */
-    Private( KPieceTableByteArrayModel *parent, const char *data, unsigned int size,
+    Private( PieceTableByteArrayModel *parent, const char *data, unsigned int size,
              bool careForMemory = true );
     /** creates a writeable buffer which is deleted at the end */
-    explicit Private( KPieceTableByteArrayModel *parent, unsigned int size, char fillByte = '\0' );
+    explicit Private( PieceTableByteArrayModel *parent, unsigned int size, char fillByte = '\0' );
     ~Private();
 
-  public: // KAbstractByteArrayModel API
+  public: // AbstractByteArrayModel API
     char datum( unsigned int offset ) const;
     int size() const;
     bool isReadOnly() const;
     bool isModified() const;
 
     int insert( int offset, const char *insertData, int insertLength );
-    int remove( const KSection &removeSection );
-    unsigned int replace( const KSection &removeSection, const char *insertData, unsigned int insertLength );
-    bool swap( int firstStart, const KSection &secondSection );
+    int remove( const Section &removeSection );
+    unsigned int replace( const Section &removeSection, const char *insertData, unsigned int insertLength );
+    bool swap( int firstStart, const Section &secondSection );
     int fill( const char fillByte, unsigned int Pos = 0, int fillLength = -1 );
     void setDatum( unsigned int offset, const char byte );
 
@@ -75,11 +75,11 @@ class KPieceTableByteArrayModel::Private
     void revertToVersionByIndex( int versionIndex );
 
   public:
-    void addBookmarks( const QList<KHECore::KBookmark> &bookmarks );
-    void removeBookmarks( const QList<KHECore::KBookmark> &bookmarks );
+    void addBookmarks( const QList<KHECore::Bookmark> &bookmarks );
+    void removeBookmarks( const QList<KHECore::Bookmark> &bookmarks );
     void removeAllBookmarks();
 
-    KHECore::KBookmarkList bookmarkList() const;
+    KHECore::BookmarkList bookmarkList() const;
 
   public: // ChangesDescribable API
     void openGroupedChange( const QString &description );
@@ -97,9 +97,9 @@ class KPieceTableByteArrayModel::Private
 
   protected:
     void doInsertChange( unsigned int offset, const char* insertData, unsigned int insertLength );
-    void doRemoveChange( const KSection& removeSection );
-    void doReplaceChange( const KSection& removeSection, const char* insertData, unsigned int insertLength );
-    void doSwapChange( int firstStart, const KSection& secondSection );
+    void doRemoveChange( const Section& removeSection );
+    void doReplaceChange( const Section& removeSection, const char* insertData, unsigned int insertLength );
+    void doSwapChange( int firstStart, const Section& secondSection );
     void doFillChange( unsigned int offset, unsigned int filledLength,
                        const char fillByte, unsigned int fillLength );
 
@@ -107,7 +107,7 @@ class KPieceTableByteArrayModel::Private
     void endChanges();
 
   protected: // data
-    KPieceTableByteArrayModel *p;
+    PieceTableByteArrayModel *p;
     /**  */
     bool mReadOnly:1;
     /** */
@@ -118,7 +118,7 @@ class KPieceTableByteArrayModel::Private
     KPieceTable::RevertablePieceTable mPieceTable;
     ChangesDataStorage mChangesDataStorage;
     /** */
-    KBookmarkList mBookmarks;
+    BookmarkList mBookmarks;
     /** temporary workaround for cancelling groups. If -1 no group is opened. */
     int mBeforeGroupedChangeVersionIndex;
 
@@ -130,12 +130,12 @@ class KPieceTableByteArrayModel::Private
 };
 
 
-inline int KPieceTableByteArrayModel::Private::size() const  { return mPieceTable.size(); }
+inline int PieceTableByteArrayModel::Private::size() const  { return mPieceTable.size(); }
 
-inline bool KPieceTableByteArrayModel::Private::isReadOnly()   const { return mReadOnly; }
-inline bool KPieceTableByteArrayModel::Private::isModified()   const { return !mPieceTable.isAtBase(); }
+inline bool PieceTableByteArrayModel::Private::isReadOnly()   const { return mReadOnly; }
+inline bool PieceTableByteArrayModel::Private::isModified()   const { return !mPieceTable.isAtBase(); }
 
-inline void KPieceTableByteArrayModel::Private::setReadOnly( bool readOnly )
+inline void PieceTableByteArrayModel::Private::setReadOnly( bool readOnly )
 {
     if( mReadOnly != readOnly )
     {
@@ -143,7 +143,7 @@ inline void KPieceTableByteArrayModel::Private::setReadOnly( bool readOnly )
         emit p->readOnlyChanged( readOnly );
     }
 }
-inline void KPieceTableByteArrayModel::Private::setModified( bool modified )
+inline void PieceTableByteArrayModel::Private::setModified( bool modified )
 {
     if( isModified() != modified )
     {
@@ -154,30 +154,30 @@ inline void KPieceTableByteArrayModel::Private::setModified( bool modified )
     }
 }
 
-inline int KPieceTableByteArrayModel::Private::versionIndex() const { return mPieceTable.appliedChangesCount(); }
-inline int KPieceTableByteArrayModel::Private::versionCount() const { return mPieceTable.changesCount()+1; }
-inline QString KPieceTableByteArrayModel::Private::versionDescription( int versionIndex ) const
+inline int PieceTableByteArrayModel::Private::versionIndex() const { return mPieceTable.appliedChangesCount(); }
+inline int PieceTableByteArrayModel::Private::versionCount() const { return mPieceTable.changesCount()+1; }
+inline QString PieceTableByteArrayModel::Private::versionDescription( int versionIndex ) const
 { return mPieceTable.changeDescription( versionIndex-1 ); }
 
-inline void KPieceTableByteArrayModel::Private::addBookmarks( const QList<KHECore::KBookmark> &bookmarks )
+inline void PieceTableByteArrayModel::Private::addBookmarks( const QList<KHECore::Bookmark> &bookmarks )
 {
     mBookmarks.addBookmarks( bookmarks );
     emit p->bookmarksAdded( bookmarks );
 }
-inline void KPieceTableByteArrayModel::Private::removeBookmarks( const QList<KHECore::KBookmark> &bookmarks )
+inline void PieceTableByteArrayModel::Private::removeBookmarks( const QList<KHECore::Bookmark> &bookmarks )
 {
     mBookmarks.removeBookmarks( bookmarks );
     emit p->bookmarksRemoved( bookmarks );
 }
 
-inline void KPieceTableByteArrayModel::Private::removeAllBookmarks()
+inline void PieceTableByteArrayModel::Private::removeAllBookmarks()
 {
-    const QList<KHECore::KBookmark> bookmarks = mBookmarks.list();
+    const QList<KHECore::Bookmark> bookmarks = mBookmarks.list();
     mBookmarks.clear();
     emit p->bookmarksRemoved( bookmarks );
 }
 
-inline KHECore::KBookmarkList KPieceTableByteArrayModel::Private::bookmarkList() const { return mBookmarks; }
+inline KHECore::BookmarkList PieceTableByteArrayModel::Private::bookmarkList() const { return mBookmarks; }
 
 }
 
