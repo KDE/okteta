@@ -95,8 +95,11 @@ KAbstractView *TabbedViews::viewFocus() const
 
 void TabbedViews::onCurrentChanged( int index )
 {
-    QWidget *Widget = mTabWidget->widget( index );
-    KAbstractView *view = mViewManager->viewByWidget( Widget );
+    QWidget* widget = mTabWidget->widget( index );
+    KAbstractView* view = mViewManager->viewByWidget( widget );
+
+    if( widget )
+        widget->setFocus();
 
     emit viewFocusChanged( view );
 }
