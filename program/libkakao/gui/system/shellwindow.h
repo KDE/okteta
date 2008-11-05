@@ -40,6 +40,9 @@ class TabbedViews;
 class AbstractXmlGuiController;
 class AbstractToolView;
 class AbstractTool;
+class QDragMoveEvent;
+class QDropEvent;
+
 
 class ShellWindow : public KXmlGuiWindow, public KDE::If::WidgetsDockable
 {
@@ -66,6 +69,8 @@ class ShellWindow : public KXmlGuiWindow, public KDE::If::WidgetsDockable
     void onModifiedChanged( KAbstractDocument::SynchronizationStates newStates );
     void onViewFocusChanged( KAbstractView *view );
     void onCloseRequest( KAbstractView* view );
+    void onDragMoveEvent( const QDragMoveEvent* event, bool& accept );
+    void onDropEvent( QDropEvent* event );
 
   protected:
     TabbedViews* mGroupedViews;

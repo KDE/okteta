@@ -39,6 +39,10 @@ TabbedViews::TabbedViews( KViewManager *viewManager )
 
     connect( mTabWidget, SIGNAL(closeRequest( QWidget* )), SLOT(onCloseRequest( QWidget* )) );
     connect( mTabWidget, SIGNAL(currentChanged( int )), SLOT(onCurrentChanged( int )) );
+    connect( mTabWidget, SIGNAL(testCanDecode( const QDragMoveEvent* , bool& )),
+             SIGNAL(dragMove( const QDragMoveEvent* , bool& )) );
+    connect( mTabWidget, SIGNAL(receivedDropEvent( QDropEvent* )),
+             SIGNAL(drop( QDropEvent* )) );
 }
 
 

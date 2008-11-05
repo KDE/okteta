@@ -31,9 +31,14 @@
 #include <abstractxmlguicontroller.h>
 // Kakao core
 #include <kdocumentmanager.h>
+#include <kdocumentsyncmanager.h>
 #include <kabstractdocument.h>
+// KDE
+#include <KUrl>
 // Qt
 #include <QtGui/QDockWidget>
+#include <QtGui/QDragMoveEvent>
+#include <QtGui/QDropEvent>
 
 
 ShellWindow::ShellWindow( KDocumentManager *documentManager, KViewManager *viewManager )
@@ -48,8 +53,14 @@ ShellWindow::ShellWindow( KDocumentManager *documentManager, KViewManager *viewM
     connect( mViewManager, SIGNAL(closing( KAbstractView* )),
              mGroupedViews, SLOT(removeView( KAbstractView* )) );
 
-    connect( mGroupedViews, SIGNAL(viewFocusChanged( KAbstractView* )), SLOT(onViewFocusChanged( KAbstractView* )) );
-    connect( mGroupedViews, SIGNAL(closeRequest( KAbstractView* )), SLOT(onCloseRequest( KAbstractView* )) );
+    connect( mGroupedViews, SIGNAL(viewFocusChanged( KAbstractView* )),
+             SLOT(onViewFocusChanged( KAbstractView* )) );
+    connect( mGroupedViews, SIGNAL(closeRequest( KAbstractView* )),
+             SLOT(onCloseRequest( KAbstractView* )) );
+    connect( mGroupedViews, SIGNAL(dragMove( const QDragMoveEvent*, bool& )),
+             SLOT(onDragMoveEvent( const QDragMoveEvent*, bool& )) );
+    connect( mGroupedViews, SIGNAL(drop( QDropEvent* )),
+             SLOT(onDropEvent( QDropEvent* )) );
 }
 
 QList<QDockWidget*> ShellWindow::dockWidgets() const { return mDockWidgets; }
@@ -127,6 +138,23 @@ void ShellWindow::onCloseRequest( KAbstractView* view )
 
     if( mDocumentManager->canClose(document) )
         mDocumentManager->closeDocument( document );
+}
+
+void ShellWindow::onDragMoveEvent( const QDragMoveEvent* event, bool& accept )
+{
+    accept = KUrl::List::canDecode( event->mimeData() );
+}
+
+void ShellWindow::onDropEvent( QDropEvent* event )
+{
+    const KUrl::List urls = KUrl::List::fromMimeData( event->mimeData() );
+    if( !urls.isEmpty() )
+    {
+        KDocumentSyncManager* syncManager = mDocumentManager->syncManager();
+
+        foreach( const KUrl& url, urls )
+            syncManager->load( url );
+    }
 }
 
 ShellWindow::~ShellWindow()

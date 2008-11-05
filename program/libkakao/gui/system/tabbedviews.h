@@ -30,6 +30,8 @@
 
 class KTabWidget;
 class KViewManager;
+class QDragMoveEvent;
+class QDropEvent;
 
 
 class TabbedViews : public AbstractGroupedViews, public KDE::If::ViewFocusable
@@ -54,6 +56,8 @@ class TabbedViews : public AbstractGroupedViews, public KDE::If::ViewFocusable
 
   Q_SIGNALS:
     virtual void viewFocusChanged( KAbstractView *view );
+    void dragMove( const QDragMoveEvent* event, bool& accepted );
+    void drop( QDropEvent* event );
 
   private Q_SLOTS:
     void onCurrentChanged( int index );
