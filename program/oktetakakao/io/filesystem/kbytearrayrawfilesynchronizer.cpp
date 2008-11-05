@@ -30,7 +30,7 @@
 #include "bytearrayrawfilewritetojob.h"
 #include "kbytearraydocument.h"
 // Okteta core
-#include <kpiecetablebytearraymodel.h>
+#include <piecetablebytearraymodel.h>
 // KDE
 #include <KUrl>
 #include <KLocale>

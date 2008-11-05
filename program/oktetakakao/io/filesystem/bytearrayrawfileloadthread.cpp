@@ -27,7 +27,7 @@
 // Kakao core
 #include <person.h>
 // Okteta core
-#include <kpiecetablebytearraymodel.h>
+#include <piecetablebytearraymodel.h>
 // KDE
 #include <KUrl>
 #include <KLocale>
@@ -50,7 +50,7 @@ void ByteArrayRawFileLoadThread::run()
 
     char *data = new char[fileSize];
     inStream.readRawData( data, fileSize );
-    KHECore::KPieceTableByteArrayModel *byteArray = new KHECore::KPieceTableByteArrayModel( data, fileSize );
+    KHECore::PieceTableByteArrayModel *byteArray = new KHECore::PieceTableByteArrayModel( data, fileSize );
 
     byteArray->setModified( false );
 
@@ -63,7 +63,7 @@ void ByteArrayRawFileLoadThread::run()
     {
         mDocument = new KByteArrayDocument( byteArray, i18nc("destination of the byte array", "Loaded from file.") );
         mDocument->setOwner( Person::createEgo() );
-        // TODO: make KPieceTableByteArrayModel a child by constructor argument parent
+        // TODO: make PieceTableByteArrayModel a child by constructor argument parent
         byteArray->moveToThread( QApplication::instance()->thread() );
         mDocument->moveToThread( QApplication::instance()->thread() );
     }
