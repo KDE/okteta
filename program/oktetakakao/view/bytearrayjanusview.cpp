@@ -78,6 +78,7 @@ void ByteArrayJanusView::setViewModus( int viewModus )
     mView = newView;
 
     mLayout->addWidget( mView );
+    setFocusProxy( mView );
     mView->setFocus();
     mViewModus = viewModus;
 
@@ -174,11 +175,6 @@ void ByteArrayJanusView::setValueCoding( int valueCoding )
 void ByteArrayJanusView::setCharCoding( const QString& charCodingName )
 {
     mView->setCharCoding( charCodingName );
-}
-
-void ByteArrayJanusView::setFocus()
-{
-    mView->setFocus();
 }
 
 KHE::Section ByteArrayJanusView::selection() const

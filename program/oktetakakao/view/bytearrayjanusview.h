@@ -53,7 +53,6 @@ class ByteArrayJanusView : public QWidget
   public:
     void setByteArrayModel( KHECore::AbstractByteArrayModel* byteArrayModel );
 
-    void setFocus();
     void setZoomLevel( double Level );
     double zoomLevel() const;
 
