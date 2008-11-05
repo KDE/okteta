@@ -35,6 +35,9 @@ TabbedViews::TabbedViews( KViewManager *viewManager )
 {
     mTabWidget = new KTabWidget();
 
+    mTabWidget->setCloseButtonEnabled( true );
+
+    connect( mTabWidget, SIGNAL(closeRequest( QWidget* )), SLOT(onCloseRequest( QWidget* )) );
     connect( mTabWidget, SIGNAL(currentChanged( int )), SLOT(onCurrentChanged( int )) );
 }
 
@@ -96,6 +99,13 @@ void TabbedViews::onCurrentChanged( int index )
     KAbstractView *view = mViewManager->viewByWidget( Widget );
 
     emit viewFocusChanged( view );
+}
+
+void TabbedViews::onCloseRequest( QWidget* widget )
+{
+    KAbstractView* view = mViewManager->viewByWidget( widget );
+
+    emit closeRequest( view );
 }
 
 void TabbedViews::onTitleChanged( const QString &newTitle )

@@ -57,6 +57,7 @@ class TabbedViews : public AbstractGroupedViews, public KDE::If::ViewFocusable
 
   private Q_SLOTS:
     void onCurrentChanged( int index );
+    void onCloseRequest( QWidget* widget );
     void onTitleChanged( const QString &newTitle );
 //     void onModifiedChanged( KAbstractDocument::SynchronizationStates newStates );
 

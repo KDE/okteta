@@ -49,6 +49,8 @@ class AbstractGroupedViews : public QObject
     void added( KAbstractView *view );
     // view will be removed, already removed from list
     void removing( KAbstractView *view );
+    // closing the view is requested
+    void closeRequest( KAbstractView* view );
 };
 
 #endif

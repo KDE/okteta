@@ -49,6 +49,7 @@ ShellWindow::ShellWindow( KDocumentManager *documentManager, KViewManager *viewM
              mGroupedViews, SLOT(removeView( KAbstractView* )) );
 
     connect( mGroupedViews, SIGNAL(viewFocusChanged( KAbstractView* )), SLOT(onViewFocusChanged( KAbstractView* )) );
+    connect( mGroupedViews, SIGNAL(closeRequest( KAbstractView* )), SLOT(onCloseRequest( KAbstractView* )) );
 }
 
 QList<QDockWidget*> ShellWindow::dockWidgets() const { return mDockWidgets; }
@@ -118,6 +119,14 @@ void ShellWindow::onViewFocusChanged( KAbstractView *view )
         connect( view, SIGNAL(modified( KAbstractDocument::SynchronizationStates )),
                        SLOT(onModifiedChanged( KAbstractDocument::SynchronizationStates )) );
     }
+}
+
+void ShellWindow::onCloseRequest( KAbstractView* view )
+{
+    KAbstractDocument* document = view->document();
+
+    if( mDocumentManager->canClose(document) )
+        mDocumentManager->closeDocument( document );
 }
 
 ShellWindow::~ShellWindow()

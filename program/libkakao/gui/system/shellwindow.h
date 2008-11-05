@@ -65,6 +65,7 @@ class ShellWindow : public KXmlGuiWindow, public KDE::If::WidgetsDockable
     void onTitleChanged( const QString &newTitle );
     void onModifiedChanged( KAbstractDocument::SynchronizationStates newStates );
     void onViewFocusChanged( KAbstractView *view );
+    void onCloseRequest( KAbstractView* view );
 
   protected:
     TabbedViews* mGroupedViews;
