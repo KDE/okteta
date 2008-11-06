@@ -83,8 +83,8 @@ void ByteArrayRowViewPrivate::init()
         new ByteArrayRowColumnRenderer( q, mByteArrayModel, mTableLayout, mTableRanges );
 
     // select the active column
-    mActiveCoding = AbstractByteArrayView::ValueCodingId;
-    mInactiveCoding = AbstractByteArrayView::CharCodingId;
+    mActiveCoding = AbstractByteArrayView::CharCodingId;
+    mInactiveCoding = AbstractByteArrayView::ValueCodingId;
 
     // set char encoding
     mByteArrayColumn->setValueCodec( (KHECore::ValueCoding)mValueCoding, mValueCodec );
