@@ -65,6 +65,7 @@ void ByteArrayJanusView::setViewModus( int viewModus )
         newView->setValueCoding( mView->valueCoding() );
         newView->setCharCoding( mView->charCodingName() );
         newView->setVisibleCodings( mView->visibleCodings() );
+        newView->setActiveCoding( mView->activeCoding() );
         newView->toggleOffsetColumn( mView->offsetColumnVisible() );
         newView->setResizeStyle( mView->resizeStyle() );
         newView->setCursorPosition( mView->cursorPosition() );
