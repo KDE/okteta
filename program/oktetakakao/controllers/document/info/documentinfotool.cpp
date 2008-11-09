@@ -79,7 +79,7 @@ QString DocumentInfoTool::location() const
     if( mDocument )
     {
         const KUrl url = mDocumentSyncManager->urlOf( mDocument );
-        result = url.path();
+        result = url.isLocalFile() ? url.path() : url.prettyUrl();
     }
     return result;
 }
