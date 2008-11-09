@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_KDATACURSOR_H
-#define KHE_UI_KDATACURSOR_H
+#ifndef KHE_UI_BYTEARRAYTABLECURSOR_H
+#define KHE_UI_BYTEARRAYTABLECURSOR_H
 
 // lib
 #include "coord.h"
