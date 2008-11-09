@@ -554,6 +554,33 @@ void AbstractByteArrayViewPrivate::setCursorPosition( int index, bool behind )
     emit q->cursorPositionChanged( cursorPosition() );
 }
 
+
+
+void AbstractByteArrayViewPrivate::setSelectionCursorPosition( int index )
+{
+    Q_Q( AbstractByteArrayView );
+
+    pauseCursor();
+    finishByteEditor();
+
+    if( !mTableRanges->selectionStarted() )
+        mTableRanges->setSelectionStart( mTableCursor->realIndex() );
+
+    mTableCursor->gotoCIndex( index );
+
+    mTableRanges->setSelectionEnd( mTableCursor->realIndex() );
+
+    ensureCursorVisible();
+    updateChanged();
+
+    unpauseCursor();
+
+    if( mTableRanges->isModified() )
+        q->emitSelectionSignals(); // TODO: can this be moved somewhere
+    emit q->cursorPositionChanged( mTableCursor->realIndex() );
+}
+
+
 void AbstractByteArrayViewPrivate::setSelection( int start, int end )
 {
     Q_Q( AbstractByteArrayView );

@@ -88,6 +88,7 @@ class KByteArrayDisplay : public KAbstractView, public KDE::If::Zoomable, public
 
   public: // cursor API
     void setCursorPosition( int cursorPosition );
+    void setSelectionCursorPosition( int index );
     int cursorPosition() const;
   Q_SIGNALS:
     void cursorPositionChanged( int cursorPosition );

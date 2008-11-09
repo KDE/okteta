@@ -139,6 +139,10 @@ void ByteArrayJanusView::setCursorPosition( int cursorPosition )
 {
     mView->setCursorPosition( cursorPosition );
 }
+void ByteArrayJanusView::setSelectionCursorPosition( int index )
+{
+    mView->setSelectionCursorPosition( index );
+}
 int ByteArrayJanusView::cursorPosition() const
 {
     return mView->cursorPosition();

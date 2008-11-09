@@ -268,6 +268,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
       * @param isBehind 
       */
     void setCursorPosition( int index, bool isBehind = false );
+    void setSelectionCursorPosition( int index );
 
     /** de-/selects all data */
     void selectAll( bool select );

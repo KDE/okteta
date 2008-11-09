@@ -138,6 +138,7 @@ class AbstractByteArrayViewPrivate
     void setSelection( int start, int end );
 
     void setCursorPosition( int index, bool isBehind );
+    void setSelectionCursorPosition( int index );
 
   public: // API to be implemented
     virtual void ensureCursorVisible() = 0;

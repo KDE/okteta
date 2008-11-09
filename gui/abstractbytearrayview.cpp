@@ -320,6 +320,12 @@ void AbstractByteArrayView::setCursorPosition( int index, bool isBehind )
     d->setCursorPosition( index, isBehind );
 }
 
+void AbstractByteArrayView::setSelectionCursorPosition( int index )
+{
+    Q_D( AbstractByteArrayView );
+    d->setSelectionCursorPosition( index );
+}
+
 void AbstractByteArrayView::setSelection( int start, int end )
 {
     Q_D( AbstractByteArrayView );

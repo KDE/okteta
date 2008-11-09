@@ -125,6 +125,11 @@ void KByteArrayDisplay::setCursorPosition( int cursorPosition )
     mWidget->setCursorPosition( cursorPosition );
 }
 
+void KByteArrayDisplay::setSelectionCursorPosition( int index )
+{
+    mWidget->setSelectionCursorPosition( index );
+}
+
 int KByteArrayDisplay::cursorPosition() const
 {
     return mWidget->cursorPosition();
