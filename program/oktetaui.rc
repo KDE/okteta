@@ -87,9 +87,7 @@ Zusammenlegen?
     <ActionList name="windows_list"/>
   </Menu>
   <Menu name="settings">
-    <Separator append="show_merge" />
-    <Action name="show_full_path" append="show_merge"/>
-    <Separator append="show_merge"/>
+    <Action name="show_full_path" append="show_merge" />
     <!--Menu name="conversion_field" append="show_merge"><text>Conversion &amp;Field</text>
       <Action name="conversion_field_hide"/>
       <Action name="conversion_field_float"/>
