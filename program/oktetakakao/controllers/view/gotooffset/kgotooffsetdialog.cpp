@@ -89,7 +89,7 @@ KGotoOffsetDialog::KGotoOffsetDialog( QWidget *parent )
     OffsetEdit->setEditable( true );
     OffsetEdit->setMaxCount( 10 );
     OffsetEdit->setInsertPolicy( KComboBox::InsertAtTop );
-    connect( OffsetEdit, SIGNAL(textChanged(const QString&)), SLOT(onOffsetChanged(const QString&)) );
+    connect( OffsetEdit, SIGNAL(editTextChanged(const QString&)), SLOT(onOffsetChanged(const QString&)) );
     mOffsetValidator = new KByteArrayValidator( OffsetEdit, KByteArrayValidator::HexadecimalCoding );
     OffsetEdit->setValidator( mOffsetValidator );
     label->setBuddy( OffsetEdit );
