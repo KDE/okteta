@@ -47,7 +47,7 @@ class KByteArrayValidator : public QValidator
     static const int CodecNumber = 5;
 
   public:
-    KByteArrayValidator( QObject *parent, Coding codecId = CharCoding, int charCodecId = KHECore::LocalEncoding );
+    explicit KByteArrayValidator( QObject *parent, Coding codecId = CharCoding, int charCodecId = KHECore::LocalEncoding );
     virtual ~KByteArrayValidator();
 
   public: // QValidator API
