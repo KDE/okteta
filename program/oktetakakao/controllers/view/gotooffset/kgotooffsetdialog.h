@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -48,6 +48,8 @@ class KGotoOffsetDialog : public KDialog
   public: // get 
     int offset() const;
     bool isRelative() const;
+    bool isSelectionToExtent() const;
+    bool isBackwards() const;
 
   protected:
     virtual void showEvent( QShowEvent *e );
@@ -60,6 +62,7 @@ class KGotoOffsetDialog : public KDialog
     KComboBox *mSelector;
     KComboBox *OffsetEdit;
     QCheckBox *AtCursorCheckBox;
+    QCheckBox *ExtendSelectionCheckBox;
     QCheckBox *BackwardsCheckBox;
 
     QString    mOffsetString[2];

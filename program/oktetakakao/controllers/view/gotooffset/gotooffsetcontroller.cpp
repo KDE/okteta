@@ -91,10 +91,20 @@ void GotoOffsetController::onOkClicked()
 
     const bool IsRelative = mGotoOffsetDialog->isRelative();
     const int Offset = mGotoOffsetDialog->offset();
+    const bool isSelectionToExtent = mGotoOffsetDialog->isSelectionToExtent();
+    const bool isBackwards = mGotoOffsetDialog->isBackwards();
 
-    int NewPosition = IsRelative ?  mByteArrayDisplay->cursorPosition()+Offset :
-                      Offset < 0 ? mByteArray->size()+Offset : Offset;
-    mByteArrayDisplay->setCursorPosition( NewPosition );
+    const int newPosition =
+        IsRelative ?
+            ( isBackwards ? mByteArrayDisplay->cursorPosition() - Offset :
+                            mByteArrayDisplay->cursorPosition() + Offset ) :
+            ( isBackwards ? mByteArray->size() - Offset :
+                            Offset );
+
+    if( isSelectionToExtent )
+        mByteArrayDisplay->setSelectionCursorPosition( newPosition );
+    else
+        mByteArrayDisplay->setCursorPosition( newPosition );
 }
 
 GotoOffsetController::~GotoOffsetController() {}

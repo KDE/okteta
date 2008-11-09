@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -109,13 +109,18 @@ KGotoOffsetDialog::KGotoOffsetDialog( QWidget *parent )
     OptionsBoxLayout->setSpacing( spacingHint() );
 
     AtCursorCheckBox = new QCheckBox( i18nc("@option:check","From c&ursor"), OptionsBox );
-    OptionsBoxLayout->addWidget( AtCursorCheckBox, 0, 0 );
     AtCursorCheckBox->setWhatsThis(
         i18nc("@info:whatsthis","Go relative from the current cursor location and not absolute.") );
+    ExtendSelectionCheckBox = new QCheckBox( i18nc("@option:check","&Extend selection"), OptionsBox );
+    ExtendSelectionCheckBox->setWhatsThis(
+        i18nc("@info:whatsthis","Extend the selection by the cursor move.") );
     BackwardsCheckBox = new QCheckBox( i18nc("@option:check","&Backwards"), OptionsBox );
-    OptionsBoxLayout->addWidget( BackwardsCheckBox, 0, 1 );
     BackwardsCheckBox->setWhatsThis(
         i18nc("@info:whatsthis","Go backwards from the end or the current cursor location.") );
+
+    OptionsBoxLayout->addWidget( AtCursorCheckBox, 0, 0 );
+    OptionsBoxLayout->addWidget( ExtendSelectionCheckBox, 1, 0 );
+    OptionsBoxLayout->addWidget( BackwardsCheckBox, 0, 1 );
 
     setTabOrder( mSelector, OffsetEdit );
     setTabOrder( OffsetEdit, AtCursorCheckBox );
@@ -127,18 +132,22 @@ KGotoOffsetDialog::KGotoOffsetDialog( QWidget *parent )
 
 void KGotoOffsetDialog::setRange( int Start, int End )
 {
-    Start= End; // TOOO: handle limits
+Q_UNUSED( Start )
+Q_UNUSED( End )
+
+    // TOOO: handle limits
 }
 
 int KGotoOffsetDialog::offset() const
 {
     const int HD = mSelector->currentIndex();
     const int Offset = OffsetEdit->currentText().toInt( 0, HD==0?16:10 );
-    return BackwardsCheckBox->isChecked() ? -Offset : Offset;
+    return Offset;
 }
 
-bool KGotoOffsetDialog::isRelative() const { return AtCursorCheckBox->isChecked(); }
-
+bool KGotoOffsetDialog::isSelectionToExtent() const { return ExtendSelectionCheckBox->isChecked(); }
+bool KGotoOffsetDialog::isRelative() const          { return AtCursorCheckBox->isChecked(); }
+bool KGotoOffsetDialog::isBackwards() const         { return BackwardsCheckBox->isChecked(); }
 
 void KGotoOffsetDialog::onSelectorChanged( int index )
 {
@@ -161,5 +170,3 @@ void KGotoOffsetDialog::showEvent( QShowEvent *showEvent )
 
 
 KGotoOffsetDialog::~KGotoOffsetDialog() {}
-
-#include "kgotooffsetdialog.moc"
