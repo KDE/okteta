@@ -1,7 +1,9 @@
 [Desktop Entry]
 Name=Okteta
+Name[ar]=أكتيتا
 Name[x-test]=xxOktetaxx
 GenericName=Hex Editor
+GenericName[ar]=محرر Hex
 GenericName[ca]=Editor hexadecimal
 GenericName[cs]=Binární editor
 GenericName[da]=Hex-editor
