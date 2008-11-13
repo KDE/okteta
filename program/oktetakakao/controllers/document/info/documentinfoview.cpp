@@ -107,6 +107,7 @@ DocumentInfoView::DocumentInfoView( DocumentInfoTool* tool, QWidget* parent )
     mSizeLabel = new QLabel( this );
     propertyGrid->addWidget( mSizeLabel, currentPropertyRow++, 1 );
 
+#if 0
     label = new QLabel( i18n("Created/Loaded:"), this ); // TODO: make adjustable depending on document
     propertyGrid->addWidget( label, currentPropertyRow, 0, Qt::AlignRight);
     currentPropertyRow++;
@@ -120,7 +121,6 @@ DocumentInfoView::DocumentInfoView( DocumentInfoTool* tool, QWidget* parent )
     currentPropertyRow++;
 // last accessed from remote
 
-#if 0
     KDateTime dt;// = item.time(KFileItem::CreationTime);
     if ( !dt.isNull() )
     {
