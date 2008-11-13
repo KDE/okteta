@@ -73,10 +73,9 @@ DocumentInfoView::DocumentInfoView( DocumentInfoTool* tool, QWidget* parent )
 
     // property grid
     QGridLayout *propertyGrid = new QGridLayout(); // unknown rows
+    propertyGrid->setHorizontalSpacing( KDialog::spacingHint() );
     propertyGrid->setColumnStretch( 0, 0 );
-    propertyGrid->setColumnStretch( 1, 0 );
-    propertyGrid->setColumnStretch( 2, 1 );
-    propertyGrid->addItem( new QSpacerItem(KDialog::spacingHint(),0), 0, 1 );
+    propertyGrid->setColumnStretch( 1, 1 );
 
     int currentPropertyRow = 0;
 
@@ -85,7 +84,7 @@ DocumentInfoView::DocumentInfoView( DocumentInfoTool* tool, QWidget* parent )
     propertyGrid->addWidget( label, currentPropertyRow, 0, Qt::AlignRight);
 
     mMimeTypeLabel = new QLabel( QString(), this );
-    propertyGrid->addWidget( mMimeTypeLabel, currentPropertyRow++, 2);
+    propertyGrid->addWidget( mMimeTypeLabel, currentPropertyRow++, 1);
 
     // location property
     label = new QLabel( i18n("Location:"), this );
@@ -99,14 +98,14 @@ DocumentInfoView::DocumentInfoView( DocumentInfoTool* tool, QWidget* parent )
     if( layoutDirection() == Qt::RightToLeft )
 	   mLocationLabel->setAlignment( Qt::AlignRight );
     mLocationLabel->setTextInteractionFlags( Qt::TextSelectableByMouse|Qt::TextSelectableByKeyboard );
-    propertyGrid->addWidget( mLocationLabel, currentPropertyRow++, 2 );
+    propertyGrid->addWidget( mLocationLabel, currentPropertyRow++, 1 );
 
     // size property
     label = new QLabel( i18n("Size:"), this );
     propertyGrid->addWidget( label, currentPropertyRow, 0, Qt::AlignRight );
 
     mSizeLabel = new QLabel( this );
-    propertyGrid->addWidget( mSizeLabel, currentPropertyRow++, 2 );
+    propertyGrid->addWidget( mSizeLabel, currentPropertyRow++, 1 );
 
     label = new QLabel( i18n("Created/Loaded:"), this ); // TODO: make adjustable depending on document
     propertyGrid->addWidget( label, currentPropertyRow, 0, Qt::AlignRight);
