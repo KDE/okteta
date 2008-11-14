@@ -4,8 +4,10 @@ add_definitions( -DKDE_DEFAULT_DEBUG_AREA=1804 )
 
 include_directories(
   ../core/document
+  ../core/io
   ../core/system
   view
+  io
   system
   controller
 )
@@ -16,10 +18,17 @@ set( KAKAO_GUI_PARALLELVIEWS_SRCS
   system/parallelviews/titledwidget.cpp
 )
 
+set( KAKAO_GUI_IO_CONFIGEDITOR_SRCS
+  io/abstractmodelstreamencoderconfigeditor.cpp
+)
+
 set( KAKAO_GUI_SRCS
+  ${KAKAO_GUI_IO_CONFIGEDITOR_SRCS}
   view/kabstractview.cpp
+  view/abstractselectionview.cpp
   view/abstracttoolview.cpp
   system/dummyview.cpp
+  system/modelcodecviewmanager.cpp
   system/kviewmanager.cpp
   system/abstractgroupedviews.cpp
   system/tabbedviews.cpp

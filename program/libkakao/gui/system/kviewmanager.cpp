@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2006 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -32,9 +32,13 @@
 #include <QtCore/QListIterator>
 #include <QtCore/QMutableListIterator>
 
+// temporary
+#include "modelcodecviewmanager.h"
+
 
 KViewManager::KViewManager( KDocumentManager *documentManager )
- : mDocumentManager( documentManager )
+ : mDocumentManager( documentManager ),
+   mCodecViewManager( new ModelCodecViewManager() )
 {
     connect( mDocumentManager, SIGNAL(added( KAbstractDocument* )), SLOT(createViewFor( KAbstractDocument* )) );
     connect( mDocumentManager, SIGNAL(closing( KAbstractDocument* )), SLOT(removeViewsFor( KAbstractDocument* )) );
@@ -105,5 +109,6 @@ void KViewManager::removeViewsFor( KAbstractDocument *document )
 
 KViewManager::~KViewManager()
 {
+    delete mCodecViewManager;
     delete mFactory;
 }
