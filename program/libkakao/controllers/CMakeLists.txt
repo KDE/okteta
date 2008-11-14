@@ -9,6 +9,7 @@ include_directories(
   ../core/io/filesystem
   ../core/system
   ../gui/view
+  ../gui/io
   ../gui/system
   ../gui/controller
 )
@@ -52,6 +53,7 @@ set( CLIPBOARDCONTROLLER_SRCS
   io/clipboard/clipboardcontroller.cpp
 )
 set( COPYASCONTROLLER_SRCS
+  io/copyas/copyasdialog.cpp
   io/copyas/copyascontroller.cpp
 )
 set( EXPORTCONTROLLER_SRCS

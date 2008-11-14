@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,48 +20,39 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef COPYASCONTROLLER_H
-#define COPYASCONTROLLER_H
+#ifndef KGOTOOFFSETDIALOG_H
+#define KGOTOOFFSETDIALOG_H
+
+// KDE
+#include <KDialog>
+// Qt
+#include <QtCore/QByteArray>
+#include <QtCore/QString>
+
+class AbstractModelStreamEncoderConfigEditor;
+class AbstractSelectionView;
+class AbstractModelSelection;
+class AbstractModel;
 
 
-// Kakao gui
-#include <abstractxmlguicontroller.h>
-
-class KViewManager;
-class KDocumentManager;
-namespace KDE { namespace If {
-class DataSelectable;
-} }
-class KXMLGUIClient;
-class QAction;
-class QActionGroup;
-
-
-class CopyAsController : public AbstractXmlGuiController
+class CopyAsDialog : public KDialog
 {
   Q_OBJECT
 
   public:
-    CopyAsController( KViewManager* viewManager, KDocumentManager* documentManager, KXMLGUIClient* guiClient );
+    explicit CopyAsDialog( AbstractModelStreamEncoderConfigEditor* configEditor, QWidget* parent = 0 );
+    virtual ~CopyAsDialog();
 
-  public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
-
-  private:
-    void updateActions();
+  public:
+    void setData( AbstractModel* model, const AbstractModelSelection* selection );
 
   private Q_SLOTS:
-    void onActionTriggered( QAction *action );
+//     void onSelectorChanged( int index );
+//     void onOffsetChanged( const QString &text );
 
-  protected:
-    KViewManager* mViewManager;
-    KDocumentManager *mDocumentManager;
-    KXMLGUIClient *mGuiClient;
-
-    AbstractModel* mModel;
-    KDE::If::DataSelectable *mSelectionControl;
-
-    QActionGroup *mCopyAsActionGroup;
+  private:
+    AbstractModelStreamEncoderConfigEditor* mConfigEditor;
+    AbstractSelectionView* mPreviewView;
 };
 
 #endif

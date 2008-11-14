@@ -22,8 +22,13 @@
 
 #include "copyascontroller.h"
 
+// lib
+#include "copyasdialog.h"
 // Kakao gui
+#include <modelcodecviewmanager.h>
+#include <kviewmanager.h>
 #include <kidataselectable.h>
+#include <abstractmodelstreamencoderconfigeditor.h>
 // Kakao core
 #include <modelstreamencodethread.h>
 #include <modelcodecmanager.h>
@@ -45,8 +50,8 @@
 
 static const char CopyAsActionListId[] = "copy_as_list";
 
-CopyAsController::CopyAsController( KDocumentManager* documentManager, KXMLGUIClient* guiClient )
- : mDocumentManager( documentManager ), mGuiClient( guiClient ), mModel( 0 )
+CopyAsController::CopyAsController( KViewManager* viewManager, KDocumentManager* documentManager, KXMLGUIClient* guiClient )
+ : mViewManager( viewManager ), mDocumentManager( documentManager ), mGuiClient( guiClient ), mModel( 0 )
 {
     mCopyAsActionGroup = new QActionGroup( this ); // TODO: do we use this only for the signal mapping?
     connect( mCopyAsActionGroup, SIGNAL(triggered( QAction* )), SLOT(onActionTriggered( QAction* )) );
@@ -111,11 +116,22 @@ void CopyAsController::updateActions()
 
 void CopyAsController::onActionTriggered( QAction *action )
 {
-    QApplication::setOverrideCursor( Qt::WaitCursor );
-
     AbstractModelStreamEncoder *encoder = action->data().value<AbstractModelStreamEncoder *>();
 
     const AbstractModelSelection* selection = mSelectionControl->modelSelection();
+
+    AbstractModelStreamEncoderConfigEditor* configEditor =
+        mViewManager->codecViewManager()->createConfigEditor( encoder );
+
+    if( configEditor )
+    {
+        CopyAsDialog* dialog = new CopyAsDialog( configEditor );
+        dialog->setData( mModel, selection );
+        if( !dialog->exec() )
+            return;
+    }
+
+    QApplication::setOverrideCursor( Qt::WaitCursor );
 
     QByteArray exportData;
     QBuffer exportDataBuffer( &exportData );
