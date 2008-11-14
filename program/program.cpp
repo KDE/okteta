@@ -28,12 +28,14 @@
 #include <kbytearraydocumentfactory.h>
 #include <kbytearraydisplayfactory.h>
 #include <filesystem/kbytearrayrawfilesynchronizerfactory.h>
+#include <bytearraysourcecodestreamencoderconfigeditorfactory.h>
 #include <kbytearraytextstreamencoder.h>
 #include <kbytearrayvaluestreamencoder.h>
 #include <kbytearraysourcecodestreamencoder.h>
 #include <bytearrayviewtextstreamencoder.h>
 // Kakao gui
 #include <kviewmanager.h>
+#include <modelcodecviewmanager.h>
 // Kakao core
 #include <kdocumentmanager.h>
 #include <kdocumentcreatemanager.h>
@@ -78,11 +80,15 @@ int OktetaProgram::execute()
                 << new KByteArraySourceCodeStreamEncoder()
                 << new ByteArrayViewTextStreamEncoder();
 
+    QList<AbstractModelStreamEncoderConfigEditorFactory*> encoderConfigEditorFactoryList;
+    encoderConfigEditorFactoryList << new ByteArraySourceCodeStreamEncoderConfigEditorFactory();
+
     mDocumentManager->codecManager()->setEncoders( encoderList );
     mDocumentManager->createManager()->setDocumentFactory( new KByteArrayDocumentFactory() );
     mDocumentManager->syncManager()->setDocumentSynchronizerFactory( new KByteArrayRawFileSynchronizerFactory() );
 
     mViewManager->setViewFactory( new KByteArrayDisplayFactory() );
+    mViewManager->codecViewManager()->setEncoderConfigEditorFactories( encoderConfigEditorFactoryList );
 
     // started by session management?
     if( programCore.isSessionRestored() )

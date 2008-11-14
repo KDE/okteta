@@ -11,6 +11,7 @@ include_directories(
   libkakao/core/io
   libkakao/core/system
   libkakao/gui/view
+  libkakao/gui/io
   libkakao/gui/system
   libkakao/gui/controller
   libkakao/controllers
