@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -69,9 +69,11 @@ SourceCodeStreamEncoderSettings::SourceCodeStreamEncoderSettings()
 {}
 
 KByteArraySourceCodeStreamEncoder::KByteArraySourceCodeStreamEncoder()
- : KAbstractByteArrayStreamEncoder( i18nc("name of the encoding target","C array"), QLatin1String("text/x-csrc") )
+ : KAbstractByteArrayStreamEncoder( i18nc("name of the encoding target","C array"), QLatin1String("text/plain") )
 {}
 
+const char** KByteArraySourceCodeStreamEncoder::dataTypeNames() const { return PrimitiveDataTypeName; }
+int KByteArraySourceCodeStreamEncoder::dataTypesCount() const { return NoOfPrimitiveDataTypes; }
 
 bool KByteArraySourceCodeStreamEncoder::encodeDataToStream( QIODevice *device,
                                                             const KByteArrayDisplay* byteArrayView,
@@ -82,17 +84,17 @@ Q_UNUSED( byteArrayView )
 
     bool success = true;
 
-    // settings
-
     // encode
     QTextStream textStream( device );
+
+//     textStream << "// from File , selection \n";
 
     const int size = section.width();
     const int dataTypeSize = SizeOfPrimitiveDataType[mSettings.dataType];
     const int sizeOfArray = (size+dataTypeSize-1) / dataTypeSize;
 
     textStream << QLatin1String(PrimitiveDataTypeName[mSettings.dataType]) << " "
-               << mSettings.variableName << "[" << sizeOfArray << "] = {" << endl;
+               << mSettings.variableName << "[" << sizeOfArray << "] =\n{\n" << endl;
 
     int elementAddedOnLine = 0;
     for( int i=0; i<size; i+=dataTypeSize )
@@ -110,7 +112,7 @@ Q_UNUSED( byteArrayView )
         }
     }
 
-    textStream << "};" << endl;
+    textStream << "\n};" << endl;
 
     return success;
 }

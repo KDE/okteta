@@ -28,6 +28,11 @@
 #include <kbytearrayselection.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
+// Qt
+#include <QtCore/QBuffer>
+
+
+static const int MaxPreviewSize = 100;
 
 
 KAbstractByteArrayStreamEncoder::KAbstractByteArrayStreamEncoder( const QString &remoteTypeName,
@@ -39,9 +44,7 @@ QString KAbstractByteArrayStreamEncoder::modelTypeName( AbstractModel *model, co
 {
 Q_UNUSED( selection )
 
-    const KByteArrayDisplay* byteArrayDisplay = qobject_cast<const KByteArrayDisplay*>( model );
-    const KByteArrayDocument* byteArrayDocument =
-        byteArrayDisplay ? qobject_cast<const KByteArrayDocument*>( byteArrayDisplay->baseModel() ) : 0;
+    const KByteArrayDocument* byteArrayDocument = model->findBaseModel<const KByteArrayDocument*>();
 
     return ( byteArrayDocument == 0 ) ? QString() : byteArrayDocument->typeName();
 }
@@ -68,6 +71,35 @@ bool KAbstractByteArrayStreamEncoder::encodeToStream( QIODevice *device,
     const bool success = encodeDataToStream( device, byteArrayDisplay, byteArray, section );
 
     return success;
+}
+
+QString KAbstractByteArrayStreamEncoder::previewData( AbstractModel* model, const AbstractModelSelection* selection )
+{
+    const KByteArrayDisplay* byteArrayDisplay = qobject_cast<const KByteArrayDisplay*>( model );
+
+    const KByteArrayDocument* byteArrayDocument =
+        byteArrayDisplay ? qobject_cast<const KByteArrayDocument*>( byteArrayDisplay->baseModel() ) : 0;
+    if( byteArrayDocument == 0 )
+        return QString();
+
+    const KHECore::AbstractByteArrayModel* byteArray = byteArrayDocument->content();
+
+    const KByteArraySelection* byteArraySelection =
+        selection ? static_cast<const KByteArraySelection*>( selection ) : 0;
+
+    KHE::Section section = byteArraySelection && byteArraySelection->isValid() ?
+        byteArraySelection->section() :
+        KHE::Section::fromWidth( 0, byteArray->size() );
+    section.restrictEndByWidth( MaxPreviewSize );
+
+    QByteArray data;
+    QBuffer dataBuffer( &data );
+    dataBuffer.open( QIODevice::WriteOnly );
+
+    const bool success = encodeDataToStream( &dataBuffer, byteArrayDisplay, byteArray, section );
+    dataBuffer.close();
+
+    return success ? QString(data) : QString();
 }
 
 KAbstractByteArrayStreamEncoder::~KAbstractByteArrayStreamEncoder() {}

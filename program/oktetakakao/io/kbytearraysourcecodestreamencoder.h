@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -52,6 +52,7 @@ class SourceCodeStreamEncoderSettings
     bool unsignedAsHexadecimal;
 };
 
+
 // TODO: General synchronizer would load matching encoder and decoder
 // manually defined by desktopfile
 class KByteArraySourceCodeStreamEncoder : public KAbstractByteArrayStreamEncoder
@@ -61,6 +62,17 @@ class KByteArraySourceCodeStreamEncoder : public KAbstractByteArrayStreamEncoder
   public:
     KByteArraySourceCodeStreamEncoder();
     virtual ~KByteArraySourceCodeStreamEncoder();
+
+  public:
+    SourceCodeStreamEncoderSettings settings() const;
+    void setSettings( const SourceCodeStreamEncoderSettings& settings );
+
+  public:
+    const char** dataTypeNames() const;
+    int dataTypesCount() const;
+
+  Q_SIGNALS:
+    void settingsChanged();
 
   protected: // KAbstractByteArrayStreamEncoder API
     virtual bool encodeDataToStream( QIODevice *device,
@@ -74,5 +86,13 @@ class KByteArraySourceCodeStreamEncoder : public KAbstractByteArrayStreamEncoder
   protected:
     SourceCodeStreamEncoderSettings mSettings;
 };
+
+
+inline SourceCodeStreamEncoderSettings KByteArraySourceCodeStreamEncoder::settings() const { return mSettings; }
+inline void KByteArraySourceCodeStreamEncoder::setSettings( const SourceCodeStreamEncoderSettings& settings )
+{
+    mSettings = settings;
+    emit settingsChanged();
+}
 
 #endif

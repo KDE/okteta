@@ -7,6 +7,7 @@ include_directories(
   ../../libkakao/core/io
   ../../libkakao/core/io/filesystem
   ../../libkakao/gui/view
+  ../../libkakao/gui/io
   ../document
   ../view
 )
@@ -36,11 +37,18 @@ set( OKTETA_KAKAO_IO_FILESYSTEM_SRCS
   filesystem/kbytearrayrawfilesynchronizerfactory.cpp
 )
 
+set( OKTETA_SOURCECODE_STREAMENCODER_SRCS
+  bytearraysourcecodestreamencoderconfigeditor.cpp
+  bytearraysourcecodestreamencoderconfigeditorfactory.cpp
+  bytearraysourcecodestreamencoderpreview.cpp
+  kbytearraysourcecodestreamencoder.cpp
+)
+
 set( OKTETA_KAKAO_IO_SRCS
   kabstractbytearraystreamencoder.cpp
-  kbytearraysourcecodestreamencoder.cpp
   kbytearrayvaluestreamencoder.cpp
   kbytearraytextstreamencoder.cpp
+  ${OKTETA_SOURCECODE_STREAMENCODER_SRCS}
   ${OKTETA_TEXTRENDERER_SRCS}
   bytearrayviewtextstreamencoder.cpp
   ${OKTETA_KAKAO_IO_FILESYSTEM_SRCS}

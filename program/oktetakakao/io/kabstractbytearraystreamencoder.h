@@ -46,6 +46,9 @@ class KAbstractByteArrayStreamEncoder : public AbstractModelStreamEncoder
     virtual bool encodeToStream( QIODevice *device, AbstractModel *model, const AbstractModelSelection *selection );
     virtual QString modelTypeName( AbstractModel *model, const AbstractModelSelection *selection ) const;
 
+  public:
+    QString previewData( AbstractModel* model, const AbstractModelSelection* selection );
+
   protected: // API to be implemented
     virtual bool encodeDataToStream( QIODevice *device,
                                      const KByteArrayDisplay* byteArrayView,
