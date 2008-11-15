@@ -18,6 +18,9 @@ include_directories(
 set( SYNCHRONIZECONTROLLER_SRCS
   io/synchronize/synchronizecontroller.cpp
 )
+set( SETREMOTECONTROLLER_SRCS
+  io/setremote/setremotecontroller.cpp
+)
 set( CREATORCONTROLLER_SRCS
   documentsystem/creator/creatorcontroller.cpp
 )
@@ -76,6 +79,7 @@ set( QUITCONTROLLER_SRCS
 )
 
 set( KAKAO_CONTROLLERS_SRCS
+  ${SETREMOTECONTROLLER_SRCS}
   ${CLOSECONTROLLER_SRCS}
   ${VERSIONCONTROLLER_SRCS}
   ${VERSIONVIEWCONTROLLER_SRCS}
