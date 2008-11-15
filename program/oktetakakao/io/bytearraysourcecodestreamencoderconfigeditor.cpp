@@ -33,12 +33,15 @@
 // Qt
 #include <QtGui/QLayout>
 #include <QtGui/QLabel>
+#include <QtGui/QCheckBox>
 
-
+#include <KDebug>
 ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderConfigEditor( KByteArraySourceCodeStreamEncoder* encoder, QWidget* parent )
  : AbstractModelStreamEncoderConfigEditor( parent ),
    mEncoder( encoder )
 {
+    mSettings = mEncoder->settings();
+
     QGridLayout* pageLayout = new QGridLayout( this ); // unknown rows
     pageLayout->setSpacing( KDialog::spacingHint() );
     pageLayout->setMargin( 0 );
@@ -50,19 +53,21 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
     pageLayout->addWidget( label, 0, 0, Qt::AlignRight);
 
     mVariableNameEdit = new KLineEdit( this );
+    mVariableNameEdit->setText( mSettings.variableName );
     connect( mVariableNameEdit, SIGNAL(textChanged( const QString& )), SLOT(onSettingsChanged()) );
     pageLayout->addWidget( mVariableNameEdit, 0, 1);
 
-    // variable name
+    // items per line
     label = new QLabel( i18nc("","Items per line:"), this );
     pageLayout->addWidget( label, 1, 0, Qt::AlignRight);
 
     mItemsPerLineEdit = new KIntNumInput( this );
     mItemsPerLineEdit->setMinimum( 1 );
+    mItemsPerLineEdit->setValue( mSettings.elementsPerLine );
     connect( mItemsPerLineEdit, SIGNAL(valueChanged( int )), SLOT(onSettingsChanged()) );
     pageLayout->addWidget( mItemsPerLineEdit, 1, 1);
 
-    // variable name
+    // data type
     label = new QLabel( i18nc("","Data type:"), this );
     pageLayout->addWidget( label, 2, 0, Qt::AlignRight);
 
@@ -73,15 +78,21 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
     for( int i=0; i<dataTypesCount; ++i )
         dataTypeNameStrings << dataTypeNames[i];
     mDataTypeSelect->addItems( dataTypeNameStrings );
+    mDataTypeSelect->setCurrentIndex( mSettings.dataType );
     connect( mDataTypeSelect, SIGNAL(activated(int)), SLOT(onSettingsChanged()) );
     pageLayout->addWidget( mDataTypeSelect, 2, 1);
-    pageLayout->setRowStretch( 3, 10 );
 
-    mSettings = mEncoder->settings();
+    // unsigned as hexadezimal
+    label = new QLabel( i18nc("","Unsigned as hexadecimal:"), this );
+    pageLayout->addWidget( label, 3, 0, Qt::AlignRight);
 
-    mVariableNameEdit->setText( mSettings.variableName );
-    mItemsPerLineEdit->setValue( mSettings.elementsPerLine );
-    mDataTypeSelect->setCurrentIndex( mSettings.dataType );
+    mUnsignedAsHexadecimalCheck = new QCheckBox( this );
+    mUnsignedAsHexadecimalCheck->setChecked( mSettings.unsignedAsHexadecimal );
+    connect( mUnsignedAsHexadecimalCheck, SIGNAL(toggled( bool )), SLOT(onSettingsChanged()) );
+    pageLayout->addWidget( mUnsignedAsHexadecimalCheck, 3, 1);
+
+    // finish
+    pageLayout->setRowStretch( 4, 10 );
 }
 
 bool ByteArraySourceCodeStreamEncoderConfigEditor::isValid() const
@@ -99,6 +110,7 @@ void ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged()
     mSettings.variableName = mVariableNameEdit->text();
     mSettings.elementsPerLine = mItemsPerLineEdit->value();
     mSettings.dataType = mDataTypeSelect->currentIndex();
+    mSettings.unsignedAsHexadecimal = mUnsignedAsHexadecimalCheck->isChecked();
     mEncoder->setSettings( mSettings );
 }
 

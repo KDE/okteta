@@ -31,6 +31,7 @@
 class KLineEdit;
 class KIntNumInput;
 class KComboBox;
+class QCheckBox;
 
 
 class ByteArraySourceCodeStreamEncoderConfigEditor : public AbstractModelStreamEncoderConfigEditor
@@ -55,7 +56,7 @@ class ByteArraySourceCodeStreamEncoderConfigEditor : public AbstractModelStreamE
     KLineEdit* mVariableNameEdit;
     KIntNumInput* mItemsPerLineEdit;
     KComboBox* mDataTypeSelect;
-    KComboBox* mCodingSelect;
+    QCheckBox* mUnsignedAsHexadecimalCheck;
 };
 
 #endif
