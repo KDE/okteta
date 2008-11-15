@@ -29,7 +29,7 @@
 #include <KGlobal>
 #include <KLocale>
 // Qt
-#include <QtGui/QTextEdit>
+#include <QtGui/QSplitter>
 #include <QtGui/QGroupBox>
 #include <QtGui/QLayout>
 
@@ -48,23 +48,21 @@ CopyAsDialog::CopyAsDialog( AbstractModelStreamEncoderConfigEditor* configEditor
                             "with the settings you entered above.")) );
     setDefaultButton( Ok );
 
-    QWidget* page = new QWidget( this );
-    setMainWidget( page );
+    QSplitter* splitter = new QSplitter( this );
 
-    QHBoxLayout* pageLayout = new QHBoxLayout( page );
-    pageLayout->setSpacing( spacingHint() );
-    pageLayout->setMargin( 0 );
+    setMainWidget( splitter );
 
     // config editor
-    pageLayout->addWidget( mConfigEditor );
+    splitter->addWidget( mConfigEditor );
+    splitter->setCollapsible( 0, false );
 
     mPreviewView = configEditor->createPreviewView();
 
     if( mPreviewView )
     {
         // preview
-        QGroupBox* previewBox = new QGroupBox( i18nc("@title:group","Preview"), page );
-        pageLayout->addWidget( previewBox );
+        QGroupBox* previewBox = new QGroupBox( i18nc("@title:group","Preview"), this );
+        splitter->addWidget( previewBox );
 
         QHBoxLayout* previewBoxLayout = new QHBoxLayout( previewBox );
         previewBoxLayout->setSpacing( spacingHint() );
