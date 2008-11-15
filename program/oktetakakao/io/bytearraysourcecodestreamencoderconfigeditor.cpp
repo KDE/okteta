@@ -35,7 +35,7 @@
 #include <QtGui/QLabel>
 #include <QtGui/QCheckBox>
 
-#include <KDebug>
+
 ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderConfigEditor( KByteArraySourceCodeStreamEncoder* encoder, QWidget* parent )
  : AbstractModelStreamEncoderConfigEditor( parent ),
    mEncoder( encoder )
