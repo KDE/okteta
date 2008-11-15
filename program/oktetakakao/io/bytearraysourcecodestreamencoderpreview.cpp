@@ -26,13 +26,16 @@
 #include "kbytearraysourcecodestreamencoder.h"
 // KDE
 #include <KTextEdit>
+#include <KGlobalSettings>
 
 
 ByteArraySourceCodeStreamEncoderPreview::ByteArraySourceCodeStreamEncoderPreview( KByteArraySourceCodeStreamEncoder* encoder )
  : mEncoder( encoder ), mModel( 0 )
 {
-    mWidget = new KTextEdit(); // use Kate for syntax highlighting
+    mWidget = new KTextEdit(); // TODO: use Kate for syntax highlighting
     mWidget->setReadOnly( true );
+    mWidget->setLineWrapMode( QTextEdit::NoWrap );
+    mWidget->setFont( KGlobalSettings::fixedFont() );
 
     connect( mEncoder, SIGNAL(settingsChanged()), SLOT(update()) );
 }
