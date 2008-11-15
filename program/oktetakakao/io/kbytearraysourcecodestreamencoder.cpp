@@ -22,17 +22,12 @@
 
 #include "kbytearraysourcecodestreamencoder.h"
 
-// lib
-#include "kbytearraydocument.h"
-#include "kbytearrayselection.h"
 // Okteta core
 #include <abstractbytearraymodel.h>
 // KDE
 #include <KLocale>
 // Qt
 #include <QtCore/QTextStream>
-// C
-#include <stdlib.h>
 
 
 static const char *PrimitiveDataTypeName[] =
@@ -62,11 +57,10 @@ static const int SizeOfPrimitiveDataType[] =
 static const int NoOfPrimitiveDataTypes = 8;
 
 
-
-
 SourceCodeStreamEncoderSettings::SourceCodeStreamEncoderSettings()
- : variableName( QLatin1String("array") ), dataType( CharType ), elementsPerLine( 8 ), unsignedAsHexadecimal( false )
+ : variableName( QLatin1String("array") ), dataType( UnsignedCharType ), elementsPerLine( 4 ), unsignedAsHexadecimal( true )
 {}
+
 
 KByteArraySourceCodeStreamEncoder::KByteArraySourceCodeStreamEncoder()
  : KAbstractByteArrayStreamEncoder( i18nc("name of the encoding target","C array"), QLatin1String("text/plain") )
@@ -93,15 +87,16 @@ Q_UNUSED( byteArrayView )
     const int dataTypeSize = SizeOfPrimitiveDataType[mSettings.dataType];
     const int sizeOfArray = (size+dataTypeSize-1) / dataTypeSize;
 
-    textStream << QLatin1String(PrimitiveDataTypeName[mSettings.dataType]) << " "
-               << mSettings.variableName << "[" << sizeOfArray << "] =\n{\n" << endl;
+    textStream << "const " << QLatin1String(PrimitiveDataTypeName[mSettings.dataType]) << ' '
+               << mSettings.variableName << '[' << sizeOfArray << "] =" << endl
+               << '{' << endl;
 
     int elementAddedOnLine = 0;
     for( int i=0; i<size; i+=dataTypeSize )
     {
-        static char buffer[12];
-        printFormatted( buffer, byteArrayModel, i, size-i );
-        textStream << buffer;
+        if( elementAddedOnLine == 0 )
+            textStream << "   "; // just 3, one space before every datum
+        textStream << ' ' << printFormatted( byteArrayModel, i, size-i );
         if( i + dataTypeSize < size )
             textStream << ",";
 
@@ -111,101 +106,101 @@ Q_UNUSED( byteArrayView )
             elementAddedOnLine = 0;
         }
     }
+    if( elementAddedOnLine > 0 )
+        textStream << endl;
 
-    textStream << "\n};" << endl;
+    textStream << "};" << endl;
 
     return success;
 }
 
 
-void KByteArraySourceCodeStreamEncoder::printFormatted( char *buffer,
-                                                        const KHECore::AbstractByteArrayModel *byteArrayModel, int pos,
-                                                        unsigned int dataSize ) const
+QString KByteArraySourceCodeStreamEncoder::printFormatted( const KHECore::AbstractByteArrayModel* byteArrayModel, int pos,
+                                                           unsigned int dataSize ) const
 {
+    static const char DecimalFormattedNumberPlaceHolder[] = "%1";
+    static const char HexadecimalFormattedNumberPlaceHolder[] = "0x%1";
+
+    QString result;
     switch( mSettings.dataType )
     {
     case SourceCodeStreamEncoderSettings::CharType:
     {
         char e = 0;
         byteArrayModel->copyTo( &e, pos, qMin<size_t>(sizeof(e),dataSize) );
-        sprintf( buffer, "%d", e );
+        static const int fieldWidth = 4;
+        result = QString(DecimalFormattedNumberPlaceHolder).arg( (int)e, fieldWidth );
         break;
     }
     case SourceCodeStreamEncoderSettings::UnsignedCharType:
     {
         unsigned char e = 0;
         byteArrayModel->copyTo( (char*)&e, pos, qMin(uint(sizeof(e)),dataSize) );
-        if( mSettings.unsignedAsHexadecimal )
-        {
-        sprintf( buffer, "0x%02x", e );
-        }
-        else
-        {
-        sprintf( buffer, "%u", e );
-        }
+        const int base = mSettings.unsignedAsHexadecimal ? 16 : 10;
+        const int fieldWidth = mSettings.unsignedAsHexadecimal ? 2 : 3;
+        const char* FormattedNumberPlaceHolder = mSettings.unsignedAsHexadecimal ?
+            HexadecimalFormattedNumberPlaceHolder : DecimalFormattedNumberPlaceHolder;
+        result = QString(FormattedNumberPlaceHolder).arg( e, fieldWidth, base, QChar('0') );
         break;
     }
     case SourceCodeStreamEncoderSettings::ShortType:
     {
         short e = 0;
         byteArrayModel->copyTo( (char*)&e, pos, qMin(uint(sizeof(e)),dataSize) );
-        sprintf( buffer, "%d", e );
+        static const int fieldWidth = 6;
+        result = QString(DecimalFormattedNumberPlaceHolder).arg( e, fieldWidth );
         break;
     }
     case SourceCodeStreamEncoderSettings::UnsignedShortType:
     {
         unsigned short e = 0;
         byteArrayModel->copyTo( (char*)&e, pos, qMin(uint(sizeof(e)),dataSize) );
-        if( mSettings.unsignedAsHexadecimal )
-        {
-        sprintf( buffer, "0x%04x", e );
-        }
-        else
-        {
-        sprintf( buffer, "%u", e );
-        }
+        const int base = mSettings.unsignedAsHexadecimal ? 16 : 10;
+        const int fieldWidth = mSettings.unsignedAsHexadecimal ? 4 : 6;
+        const char* FormattedNumberPlaceHolder = mSettings.unsignedAsHexadecimal ?
+            HexadecimalFormattedNumberPlaceHolder : DecimalFormattedNumberPlaceHolder;
+        result = QString(FormattedNumberPlaceHolder).arg( e, fieldWidth, base, QChar('0') );
         break;
     }
     case SourceCodeStreamEncoderSettings::IntegerType:
     {
         int e = 0;
         byteArrayModel->copyTo( (char*)&e, pos, qMin(uint(sizeof(e)),dataSize) );
-        sprintf( buffer, "%u", e );
+        static const int fieldWidth = 11;
+        result = QString(DecimalFormattedNumberPlaceHolder).arg( e, fieldWidth );
         break;
     }
     case SourceCodeStreamEncoderSettings::UnsignedIntegerType:
     {
         unsigned int e = 0;
         byteArrayModel->copyTo( (char*)&e, pos, qMin(uint(sizeof(e)),dataSize) );
-        if( mSettings.unsignedAsHexadecimal )
-        {
-        sprintf( buffer, "0x%08x", e );
-        }
-        else
-        {
-        sprintf( buffer, "%u", e );
-        }
+        const int base = mSettings.unsignedAsHexadecimal ? 16 : 10;
+        const int fieldWidth = mSettings.unsignedAsHexadecimal ? 8 : 12;
+        const char* FormattedNumberPlaceHolder = mSettings.unsignedAsHexadecimal ?
+            HexadecimalFormattedNumberPlaceHolder : DecimalFormattedNumberPlaceHolder;
+        result = QString(FormattedNumberPlaceHolder).arg( e, fieldWidth, base, QChar('0') );
         break;
     }
     case SourceCodeStreamEncoderSettings::FloatType:
     {
         float e = 0;
         byteArrayModel->copyTo( (char*)&e, pos, qMin(uint(sizeof(e)),dataSize) );
-        sprintf( buffer, "%f", e );
+        static const int fieldWidth = 13;
+        result = QString(DecimalFormattedNumberPlaceHolder).arg( e, fieldWidth );
         break;
     }
     case SourceCodeStreamEncoderSettings::DoubleType:
     {
         double e = 0;
         byteArrayModel->copyTo( (char*)&e, pos, qMin(uint(sizeof(e)),dataSize) );
-        sprintf( buffer, "%f", e );
+        static const int fieldWidth = 13;
+        result = QString(DecimalFormattedNumberPlaceHolder).arg( e, fieldWidth );
         break;
     }
     default:
-    {
-        buffer[0] = 0;
+        break;
     }
-  }
+    return result;
 }
 
 KByteArraySourceCodeStreamEncoder::~KByteArraySourceCodeStreamEncoder() {}

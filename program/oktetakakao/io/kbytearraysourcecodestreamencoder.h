@@ -45,6 +45,7 @@ class SourceCodeStreamEncoderSettings
 
   public:
     SourceCodeStreamEncoderSettings();
+
   public:
     QString variableName;
     int  dataType;
@@ -81,7 +82,7 @@ class KByteArraySourceCodeStreamEncoder : public KAbstractByteArrayStreamEncoder
                                      const KHE::Section &section );
 
   protected:
-    void printFormatted( char *buffer, const KHECore::AbstractByteArrayModel *byteArrayModel, int pos, unsigned int dataSize ) const;
+    QString printFormatted( const KHECore::AbstractByteArrayModel* byteArrayModel, int pos, unsigned int dataSize ) const;
 
   protected:
     SourceCodeStreamEncoderSettings mSettings;
