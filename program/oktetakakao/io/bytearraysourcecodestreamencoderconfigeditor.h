@@ -45,6 +45,7 @@ class ByteArraySourceCodeStreamEncoderConfigEditor : public AbstractModelStreamE
   public: // AbstractModelStreamEncoderConfigEditor API
     virtual bool isValid() const;
     virtual AbstractSelectionView* createPreviewView() const;
+    virtual QString name() const;
 
   protected Q_SLOTS:
     void onSettingsChanged();

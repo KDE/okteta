@@ -20,16 +20,16 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearraysourcecodestreamencoderpreview.h"
+#include "bytearraytextstreamencoderpreview.h"
 
 // lib
-#include "kbytearraysourcecodestreamencoder.h"
+#include "kabstractbytearraystreamencoder.h"
 // KDE
 #include <KTextEdit>
 #include <KGlobalSettings>
 
 
-ByteArraySourceCodeStreamEncoderPreview::ByteArraySourceCodeStreamEncoderPreview( KByteArraySourceCodeStreamEncoder* encoder )
+ByteArrayTextStreamEncoderPreview::ByteArrayTextStreamEncoderPreview( KAbstractByteArrayStreamEncoder* encoder )
  : mEncoder( encoder ), mModel( 0 )
 {
     mWidget = new KTextEdit(); // TODO: use Kate for syntax highlighting
@@ -40,9 +40,9 @@ ByteArraySourceCodeStreamEncoderPreview::ByteArraySourceCodeStreamEncoderPreview
     connect( mEncoder, SIGNAL(settingsChanged()), SLOT(update()) );
 }
 
-QWidget* ByteArraySourceCodeStreamEncoderPreview::widget() const { return mWidget; }
+QWidget* ByteArrayTextStreamEncoderPreview::widget() const { return mWidget; }
 
-void ByteArraySourceCodeStreamEncoderPreview::setData( AbstractModel* model, const AbstractModelSelection* selection )
+void ByteArrayTextStreamEncoderPreview::setData( AbstractModel* model, const AbstractModelSelection* selection )
 {
     mModel = model;
     mSelection = selection;
@@ -51,13 +51,13 @@ void ByteArraySourceCodeStreamEncoderPreview::setData( AbstractModel* model, con
 }
 
 
-void ByteArraySourceCodeStreamEncoderPreview::update()
+void ByteArrayTextStreamEncoderPreview::update()
 {
     if( mModel )
         mWidget->setText( mEncoder->previewData(mModel,mSelection) );
 }
 
-ByteArraySourceCodeStreamEncoderPreview::~ByteArraySourceCodeStreamEncoderPreview()
+ByteArrayTextStreamEncoderPreview::~ByteArrayTextStreamEncoderPreview()
 {
     delete mWidget;
 }

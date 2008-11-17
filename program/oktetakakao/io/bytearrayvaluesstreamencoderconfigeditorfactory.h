@@ -20,38 +20,21 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTMODELSTREAMENCODERCONFIGEDITOR_H
-#define ABSTRACTMODELSTREAMENCODERCONFIGEDITOR_H
+#ifndef BYTEARRAYVALUESSTREAMENCODERCONFIGEDITORFACTORY_H
+#define BYTEARRAYVALUESSTREAMENCODERCONFIGEDITORFACTORY_H
 
-// Qt
-#include <QtGui/QWidget>
-
-class AbstractSelectionView;
+// Okteta gui
+#include <abstractmodelstreamencoderconfigeditorfactory.h>
 
 
-class AbstractModelStreamEncoderConfigEditor : public QWidget
+class ByteArrayValuesStreamEncoderConfigEditorFactory : public AbstractModelStreamEncoderConfigEditorFactory
 {
-  Q_OBJECT
-
-  protected:
-    explicit AbstractModelStreamEncoderConfigEditor( QWidget* parent = 0 );
   public:
-    virtual ~AbstractModelStreamEncoderConfigEditor();
+    ByteArrayValuesStreamEncoderConfigEditorFactory();
+    virtual ~ByteArrayValuesStreamEncoderConfigEditorFactory();
 
-  public: // API to be implemented
-    /// default returns true
-    virtual bool isValid() const;
-    /// default returns none
-    virtual AbstractSelectionView* createPreviewView() const;
-
-    virtual QString name() const = 0;
-
-  Q_SIGNALS:
-    void validityChanged( bool isValid );
-
-  protected:
-    class Private;
-    Private* const d;
+  public:
+    virtual AbstractModelStreamEncoderConfigEditor* tryCreateConfigEditor( AbstractModelStreamEncoder* encoder ) const;
 };
 
 #endif

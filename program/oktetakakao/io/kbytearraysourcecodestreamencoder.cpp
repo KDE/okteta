@@ -63,7 +63,7 @@ SourceCodeStreamEncoderSettings::SourceCodeStreamEncoderSettings()
 
 
 KByteArraySourceCodeStreamEncoder::KByteArraySourceCodeStreamEncoder()
- : KAbstractByteArrayStreamEncoder( i18nc("name of the encoding target","C array"), QLatin1String("text/plain") )
+ : KAbstractByteArrayStreamEncoder( i18nc("name of the encoding target","C array..."), QLatin1String("text/plain") )
 {}
 
 const char** KByteArraySourceCodeStreamEncoder::dataTypeNames() const { return PrimitiveDataTypeName; }

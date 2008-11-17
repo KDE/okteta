@@ -50,6 +50,10 @@ class KByteArrayValueStreamEncoder : public KAbstractByteArrayStreamEncoder
     KByteArrayValueStreamEncoder();
     virtual ~KByteArrayValueStreamEncoder();
 
+  public:
+    ValueStreamEncoderSettings settings() const;
+    void setSettings( const ValueStreamEncoderSettings& settings );
+
   protected: // KAbstractByteArrayStreamEncoder API
     virtual bool encodeDataToStream( QIODevice *device,
                                      const KByteArrayDisplay* byteArrayView,
@@ -59,5 +63,13 @@ class KByteArrayValueStreamEncoder : public KAbstractByteArrayStreamEncoder
   protected:
     ValueStreamEncoderSettings mSettings;
 };
+
+
+inline ValueStreamEncoderSettings KByteArrayValueStreamEncoder::settings() const { return mSettings; }
+inline void KByteArrayValueStreamEncoder::setSettings( const ValueStreamEncoderSettings& settings )
+{
+    mSettings = settings;
+    emit settingsChanged();
+}
 
 #endif

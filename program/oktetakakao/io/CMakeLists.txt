@@ -37,16 +37,22 @@ set( OKTETA_KAKAO_IO_FILESYSTEM_SRCS
   filesystem/kbytearrayrawfilesynchronizerfactory.cpp
 )
 
+set( OKTETA_VALUES_STREAMENCODER_SRCS
+  bytearrayvaluesstreamencoderconfigeditor.cpp
+  bytearrayvaluesstreamencoderconfigeditorfactory.cpp
+  kbytearrayvaluestreamencoder.cpp
+)
+
 set( OKTETA_SOURCECODE_STREAMENCODER_SRCS
   bytearraysourcecodestreamencoderconfigeditor.cpp
   bytearraysourcecodestreamencoderconfigeditorfactory.cpp
-  bytearraysourcecodestreamencoderpreview.cpp
   kbytearraysourcecodestreamencoder.cpp
 )
 
 set( OKTETA_KAKAO_IO_SRCS
   kabstractbytearraystreamencoder.cpp
-  kbytearrayvaluestreamencoder.cpp
+  bytearraytextstreamencoderpreview.cpp
+  ${OKTETA_VALUES_STREAMENCODER_SRCS}
   kbytearraytextstreamencoder.cpp
   ${OKTETA_SOURCECODE_STREAMENCODER_SRCS}
   ${OKTETA_TEXTRENDERER_SRCS}

@@ -23,7 +23,7 @@
 #include "bytearraysourcecodestreamencoderconfigeditor.h"
 
 // lib
-#include "bytearraysourcecodestreamencoderpreview.h"
+#include "bytearraytextstreamencoderpreview.h"
 // KDE
 #include <KLocale>
 #include <KDialog>
@@ -95,6 +95,8 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
     pageLayout->setRowStretch( 4, 10 );
 }
 
+QString ByteArraySourceCodeStreamEncoderConfigEditor::name() const { return i18nc("","C Array"); }
+
 bool ByteArraySourceCodeStreamEncoderConfigEditor::isValid() const
 {
     return true; // TODO: warn if not all selected bytes are used due to the data type length
@@ -102,7 +104,7 @@ bool ByteArraySourceCodeStreamEncoderConfigEditor::isValid() const
 
 AbstractSelectionView* ByteArraySourceCodeStreamEncoderConfigEditor::createPreviewView() const
 {
-    return new ByteArraySourceCodeStreamEncoderPreview( mEncoder );
+    return new ByteArrayTextStreamEncoderPreview( mEncoder );
 }
 
 void ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged()

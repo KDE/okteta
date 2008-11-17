@@ -38,7 +38,7 @@ ValueStreamEncoderSettings::ValueStreamEncoderSettings()
 {}
 
 KByteArrayValueStreamEncoder::KByteArrayValueStreamEncoder()
- : KAbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Values"), QLatin1String("text/plain") )
+ : KAbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Values..."), QLatin1String("text/plain") )
 {}
 
 
@@ -52,7 +52,7 @@ bool KByteArrayValueStreamEncoder::encodeDataToStream( QIODevice *device,
     // settings
     mSettings.undefinedChar = byteArrayView->undefinedChar();
     mSettings.substituteChar = byteArrayView->substituteChar();
-    mSettings.valueCoding = (KHECore::ValueCoding)byteArrayView->valueCoding();
+//     mSettings.valueCoding = (KHECore::ValueCoding)byteArrayView->valueCoding();
 
     // encode
     QTextStream textStream( device );
@@ -65,7 +65,7 @@ bool KByteArrayValueStreamEncoder::encodeDataToStream( QIODevice *device,
 
     for( int i=section.start(); i<=section.end(); ++i )
     {
-        if( i > 0 )
+        if( i > section.start() )
             textStream << mSettings.separation;
 
         valueCodec->encode( valueString, 0, byteArrayModel->datum(i) );

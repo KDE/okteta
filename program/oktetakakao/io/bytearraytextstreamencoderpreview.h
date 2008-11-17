@@ -1,5 +1,5 @@
 /*
-    This file is part of the Kakao Framework, part of the KDE project.
+    This file is part of the Okteta Kakao module, part of the KDE project.
 
     Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
@@ -20,38 +20,40 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTMODELSTREAMENCODERCONFIGEDITOR_H
-#define ABSTRACTMODELSTREAMENCODERCONFIGEDITOR_H
+#ifndef BYTEARRAYTEXTSTREAMENCODERPREVIEW_H
+#define BYTEARRAYTEXTSTREAMENCODERPREVIEW_H
 
-// Qt
-#include <QtGui/QWidget>
+// Kakao ui
+#include <abstractselectionview.h>
 
-class AbstractSelectionView;
+class KAbstractByteArrayStreamEncoder;
+class AbstractModelSelection;
+class AbstractModel;
+class KTextEdit;
 
 
-class AbstractModelStreamEncoderConfigEditor : public QWidget
+class ByteArrayTextStreamEncoderPreview : public AbstractSelectionView
 {
   Q_OBJECT
 
-  protected:
-    explicit AbstractModelStreamEncoderConfigEditor( QWidget* parent = 0 );
   public:
-    virtual ~AbstractModelStreamEncoderConfigEditor();
+    explicit ByteArrayTextStreamEncoderPreview( KAbstractByteArrayStreamEncoder* encoder );
+    virtual ~ByteArrayTextStreamEncoderPreview();
 
-  public: // API to be implemented
-    /// default returns true
-    virtual bool isValid() const;
-    /// default returns none
-    virtual AbstractSelectionView* createPreviewView() const;
+  public: // AbstractSelectionView API
+    virtual QWidget* widget() const;
+    virtual void setData( AbstractModel* model, const AbstractModelSelection* selection );
 
-    virtual QString name() const = 0;
-
-  Q_SIGNALS:
-    void validityChanged( bool isValid );
+  public Q_SLOTS:
+    void update();
 
   protected:
-    class Private;
-    Private* const d;
+    KAbstractByteArrayStreamEncoder* const mEncoder;
+
+    AbstractModel* mModel;
+    const AbstractModelSelection* mSelection;
+
+    KTextEdit* mWidget;
 };
 
 #endif

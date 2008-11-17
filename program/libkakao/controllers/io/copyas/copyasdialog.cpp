@@ -32,6 +32,8 @@
 #include <QtGui/QSplitter>
 #include <QtGui/QGroupBox>
 #include <QtGui/QLayout>
+#include <QtGui/QLabel>
+#include <QtGui/QFont>
 
 
 
@@ -53,7 +55,16 @@ CopyAsDialog::CopyAsDialog( AbstractModelStreamEncoderConfigEditor* configEditor
     setMainWidget( splitter );
 
     // config editor
-    splitter->addWidget( mConfigEditor );
+    QWidget* editorPage = new QWidget( splitter );
+    QVBoxLayout* editorPageLayout = new QVBoxLayout( editorPage );
+    QLabel* editorLabel = new QLabel( mConfigEditor->name() );
+    QFont font = editorLabel->font();
+    font.setBold( true );
+    editorLabel->setFont( font );
+    editorPageLayout->addWidget( editorLabel );
+    editorPageLayout->addWidget( mConfigEditor );
+
+    splitter->addWidget( editorPage );
     splitter->setCollapsible( 0, false );
 
     mPreviewView = configEditor->createPreviewView();

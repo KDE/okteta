@@ -20,38 +20,29 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTMODELSTREAMENCODERCONFIGEDITOR_H
-#define ABSTRACTMODELSTREAMENCODERCONFIGEDITOR_H
+#include "bytearrayvaluesstreamencoderconfigeditorfactory.h"
 
-// Qt
-#include <QtGui/QWidget>
-
-class AbstractSelectionView;
+// lib
+#include "bytearrayvaluesstreamencoderconfigeditor.h"
+#include "kbytearrayvaluestreamencoder.h"
 
 
-class AbstractModelStreamEncoderConfigEditor : public QWidget
+ByteArrayValuesStreamEncoderConfigEditorFactory::ByteArrayValuesStreamEncoderConfigEditorFactory()
 {
-  Q_OBJECT
+}
 
-  protected:
-    explicit AbstractModelStreamEncoderConfigEditor( QWidget* parent = 0 );
-  public:
-    virtual ~AbstractModelStreamEncoderConfigEditor();
 
-  public: // API to be implemented
-    /// default returns true
-    virtual bool isValid() const;
-    /// default returns none
-    virtual AbstractSelectionView* createPreviewView() const;
+AbstractModelStreamEncoderConfigEditor* ByteArrayValuesStreamEncoderConfigEditorFactory::tryCreateConfigEditor( AbstractModelStreamEncoder* encoder ) const
+{
+    AbstractModelStreamEncoderConfigEditor* result = 0;
+    KByteArrayValueStreamEncoder* valuesStreamEncoder =
+        qobject_cast<KByteArrayValueStreamEncoder*>( encoder );
 
-    virtual QString name() const = 0;
+    if( valuesStreamEncoder )
+        result = new ByteArrayValuesStreamEncoderConfigEditor( valuesStreamEncoder );
 
-  Q_SIGNALS:
-    void validityChanged( bool isValid );
+    return result;
+}
 
-  protected:
-    class Private;
-    Private* const d;
-};
 
-#endif
+ByteArrayValuesStreamEncoderConfigEditorFactory::~ByteArrayValuesStreamEncoderConfigEditorFactory() {}

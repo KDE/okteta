@@ -72,9 +72,6 @@ class KByteArraySourceCodeStreamEncoder : public KAbstractByteArrayStreamEncoder
     const char** dataTypeNames() const;
     int dataTypesCount() const;
 
-  Q_SIGNALS:
-    void settingsChanged();
-
   protected: // KAbstractByteArrayStreamEncoder API
     virtual bool encodeDataToStream( QIODevice *device,
                                      const KByteArrayDisplay* byteArrayView,

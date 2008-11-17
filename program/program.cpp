@@ -29,6 +29,7 @@
 #include <kbytearraydisplayfactory.h>
 #include <filesystem/kbytearrayrawfilesynchronizerfactory.h>
 #include <bytearraysourcecodestreamencoderconfigeditorfactory.h>
+#include <bytearrayvaluesstreamencoderconfigeditorfactory.h>
 #include <kbytearraytextstreamencoder.h>
 #include <kbytearrayvaluestreamencoder.h>
 #include <kbytearraysourcecodestreamencoder.h>
@@ -81,7 +82,8 @@ int OktetaProgram::execute()
                 << new ByteArrayViewTextStreamEncoder();
 
     QList<AbstractModelStreamEncoderConfigEditorFactory*> encoderConfigEditorFactoryList;
-    encoderConfigEditorFactoryList << new ByteArraySourceCodeStreamEncoderConfigEditorFactory();
+    encoderConfigEditorFactoryList << new ByteArraySourceCodeStreamEncoderConfigEditorFactory()
+                                   << new ByteArrayValuesStreamEncoderConfigEditorFactory();
 
     mDocumentManager->codecManager()->setEncoders( encoderList );
     mDocumentManager->createManager()->setDocumentFactory( new KByteArrayDocumentFactory() );
