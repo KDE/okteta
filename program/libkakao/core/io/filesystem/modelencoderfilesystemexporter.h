@@ -37,6 +37,9 @@ class ModelEncoderFileSystemExporter : public AbstractModelExporter
     explicit ModelEncoderFileSystemExporter( AbstractModelStreamEncoder *encoder );
     virtual ~ModelEncoderFileSystemExporter();
 
+  public:
+    AbstractModelStreamEncoder* encoder() const;
+
   public: // AbstractModelExporter API
     virtual AbstractExportJob *startExport( AbstractModel *model, const AbstractModelSelection *selection,
                                             const KUrl &url );
@@ -45,5 +48,8 @@ class ModelEncoderFileSystemExporter : public AbstractModelExporter
   protected:
     AbstractModelStreamEncoder * const mEncoder;
 };
+
+
+inline AbstractModelStreamEncoder* ModelEncoderFileSystemExporter::encoder() const { return mEncoder; }
 
 #endif
