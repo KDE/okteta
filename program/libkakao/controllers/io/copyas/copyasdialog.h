@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KGOTOOFFSETDIALOG_H
-#define KGOTOOFFSETDIALOG_H
+#ifndef COPYASDIALOG_H
+#define COPYASDIALOG_H
 
 // KDE
 #include <KDialog>
