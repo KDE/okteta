@@ -20,46 +20,26 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EXPORTCONTROLLER_H
-#define EXPORTCONTROLLER_H
+#ifndef MODELENCODERFILESYSTEMEXPORTERCONFIGEDITORFACTORY_H
+#define MODELENCODERFILESYSTEMEXPORTERCONFIGEDITORFACTORY_H
+
+// lib
+#include <abstractmodelexporterconfigeditorfactory.h>
+
+class AbstractModelStreamEncoderConfigEditorFactory;
 
 
-// kakao
-#include <abstractxmlguicontroller.h>
-
-class KViewManager;
-class KDocumentManager;
-namespace KDE { namespace If {
-class DataSelectable;
-} }
-class KXMLGUIClient;
-class QAction;
-class QActionGroup;
-
-
-class ExportController : public AbstractXmlGuiController
+class ModelEncoderFileSystemExporterConfigEditorFactory : public AbstractModelExporterConfigEditorFactory
 {
-  Q_OBJECT
+  public:
+    explicit ModelEncoderFileSystemExporterConfigEditorFactory( AbstractModelStreamEncoderConfigEditorFactory* encoderConfigEditorFactory );
+    virtual ~ModelEncoderFileSystemExporterConfigEditorFactory();
 
   public:
-    ExportController( KViewManager* viewManager, KDocumentManager* documentManager, KXMLGUIClient* guiClient );
-
-  public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
-
-  private Q_SLOTS:
-    void updateActions();
-    void onActionTriggered( QAction *action );
+    virtual AbstractModelExporterConfigEditor* tryCreateConfigEditor( AbstractModelExporter* exporter ) const;
 
   protected:
-    KViewManager* mViewManager;
-    KDocumentManager *mDocumentManager;
-    KXMLGUIClient *mGuiClient;
-
-    AbstractModel* mModel;
-    KDE::If::DataSelectable *mSelectionControl;
-
-    QActionGroup *mExportActionGroup;
+    AbstractModelStreamEncoderConfigEditorFactory* mEncoderConfigEditorFactory;
 };
 
 #endif

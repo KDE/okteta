@@ -20,46 +20,38 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EXPORTCONTROLLER_H
-#define EXPORTCONTROLLER_H
+#include "modelencoderfilesystemexporterconfigeditor.h"
+
+// lib
+#include <abstractmodelstreamencoderconfigeditor.h>
+// Qt
+#include <QtGui/QLayout>
 
 
-// kakao
-#include <abstractxmlguicontroller.h>
-
-class KViewManager;
-class KDocumentManager;
-namespace KDE { namespace If {
-class DataSelectable;
-} }
-class KXMLGUIClient;
-class QAction;
-class QActionGroup;
-
-
-class ExportController : public AbstractXmlGuiController
+ModelEncoderFileSystemExporterConfigEditor::ModelEncoderFileSystemExporterConfigEditor( AbstractModelStreamEncoderConfigEditor* encoderConfigEditor )
+ : mEncoderConfigEditor( encoderConfigEditor )
 {
-  Q_OBJECT
+    QHBoxLayout* layout = new QHBoxLayout( this );
+    layout->setSpacing( 0 );
+    layout->addWidget( mEncoderConfigEditor );
+}
 
-  public:
-    ExportController( KViewManager* viewManager, KDocumentManager* documentManager, KXMLGUIClient* guiClient );
+bool ModelEncoderFileSystemExporterConfigEditor::isValid() const
+{
+    return mEncoderConfigEditor->isValid();
+}
 
-  public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+QString ModelEncoderFileSystemExporterConfigEditor::name() const
+{
+    return mEncoderConfigEditor->name();
+}
 
-  private Q_SLOTS:
-    void updateActions();
-    void onActionTriggered( QAction *action );
+AbstractSelectionView* ModelEncoderFileSystemExporterConfigEditor::createPreviewView() const
+{
+    return mEncoderConfigEditor->createPreviewView();
+}
 
-  protected:
-    KViewManager* mViewManager;
-    KDocumentManager *mDocumentManager;
-    KXMLGUIClient *mGuiClient;
-
-    AbstractModel* mModel;
-    KDE::If::DataSelectable *mSelectionControl;
-
-    QActionGroup *mExportActionGroup;
-};
-
-#endif
+ModelEncoderFileSystemExporterConfigEditor::~ModelEncoderFileSystemExporterConfigEditor()
+{
+    delete mEncoderConfigEditor;
+}

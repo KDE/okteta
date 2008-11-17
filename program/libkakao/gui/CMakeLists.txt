@@ -19,7 +19,10 @@ set( KAKAO_GUI_PARALLELVIEWS_SRCS
 )
 
 set( KAKAO_GUI_IO_CONFIGEDITOR_SRCS
+  io/filesystem/modelencoderfilesystemexporterconfigeditorfactory.cpp
+  io/filesystem/modelencoderfilesystemexporterconfigeditor.cpp
   io/abstractmodelstreamencoderconfigeditor.cpp
+  io/abstractmodelexporterconfigeditor.cpp
 )
 
 set( KAKAO_GUI_SRCS

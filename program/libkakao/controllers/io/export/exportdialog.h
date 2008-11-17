@@ -20,46 +20,35 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EXPORTCONTROLLER_H
-#define EXPORTCONTROLLER_H
+#ifndef EXPORTDIALOG_H
+#define EXPORTDIALOG_H
+
+// KDE
+#include <KDialog>
+// Qt
+#include <QtCore/QByteArray>
+#include <QtCore/QString>
+
+class AbstractModelExporterConfigEditor;
+class AbstractSelectionView;
+class AbstractModelSelection;
+class AbstractModel;
 
 
-// kakao
-#include <abstractxmlguicontroller.h>
-
-class KViewManager;
-class KDocumentManager;
-namespace KDE { namespace If {
-class DataSelectable;
-} }
-class KXMLGUIClient;
-class QAction;
-class QActionGroup;
-
-
-class ExportController : public AbstractXmlGuiController
+class ExportDialog : public KDialog
 {
   Q_OBJECT
 
   public:
-    ExportController( KViewManager* viewManager, KDocumentManager* documentManager, KXMLGUIClient* guiClient );
+    explicit ExportDialog( AbstractModelExporterConfigEditor* configEditor, QWidget* parent = 0 );
+    virtual ~ExportDialog();
 
-  public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+  public:
+    void setData( AbstractModel* model, const AbstractModelSelection* selection );
 
-  private Q_SLOTS:
-    void updateActions();
-    void onActionTriggered( QAction *action );
-
-  protected:
-    KViewManager* mViewManager;
-    KDocumentManager *mDocumentManager;
-    KXMLGUIClient *mGuiClient;
-
-    AbstractModel* mModel;
-    KDE::If::DataSelectable *mSelectionControl;
-
-    QActionGroup *mExportActionGroup;
+  private:
+    AbstractModelExporterConfigEditor* mConfigEditor;
+    AbstractSelectionView* mPreviewView;
 };
 
 #endif

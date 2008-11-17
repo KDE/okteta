@@ -30,8 +30,12 @@
 class AbstractModelStreamEncoderConfigEditorFactory;
 class AbstractModelStreamEncoderConfigEditor;
 class AbstractModelStreamEncoder;
+class AbstractModelExporterConfigEditorFactory;
+class AbstractModelExporterConfigEditor;
+class AbstractModelExporter;
 class KViewManager;
 class QString;
+
 
 class ModelCodecViewManager : public QObject
 {
@@ -43,12 +47,15 @@ class ModelCodecViewManager : public QObject
 
   public:
     AbstractModelStreamEncoderConfigEditor* createConfigEditor( AbstractModelStreamEncoder* encoder ) const;
+    AbstractModelExporterConfigEditor* createConfigEditor( AbstractModelExporter* exporter ) const;
 
   public:
     void setEncoderConfigEditorFactories( QList<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList );
+    void setExporterConfigEditorFactories( QList<AbstractModelExporterConfigEditorFactory*>& factoryList );
 
   protected:
-    QList<AbstractModelStreamEncoderConfigEditorFactory*> mFactoryList;
+    QList<AbstractModelStreamEncoderConfigEditorFactory*> mEncoderFactoryList;
+    QList<AbstractModelExporterConfigEditorFactory*> mExporterFactoryList;
 };
 
 #endif

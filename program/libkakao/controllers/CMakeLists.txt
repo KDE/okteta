@@ -60,6 +60,7 @@ set( COPYASCONTROLLER_SRCS
   io/copyas/copyascontroller.cpp
 )
 set( EXPORTCONTROLLER_SRCS
+  io/export/exportdialog.cpp
   io/export/exportcontroller.cpp
 )
 # set( CLOSECONTROLLER_SRCS

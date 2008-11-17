@@ -23,23 +23,38 @@
 #include "modelcodecviewmanager.h"
 
 // lib
-#include "abstractmodelstreamencoderconfigeditorfactory.h"
-#include "abstractmodelstreamencoderconfigeditor.h"
-#include "abstractmodelstreamencoder.h"
+#include <filesystem/modelencoderfilesystemexporterconfigeditorfactory.h>
+#include <abstractmodelstreamencoderconfigeditorfactory.h>
+#include <abstractmodelstreamencoderconfigeditor.h>
+#include <abstractmodelstreamencoder.h>
+#include <abstractmodelexporterconfigeditorfactory.h>
+#include <abstractmodelexporterconfigeditor.h>
+#include <abstractmodelexporter.h>
 
 
 ModelCodecViewManager::ModelCodecViewManager() {}
 
 void ModelCodecViewManager::setEncoderConfigEditorFactories( QList<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList )
 {
-    mFactoryList = factoryList;
+    mEncoderFactoryList = factoryList;
+
+    qDeleteAll( mExporterFactoryList );
+    mExporterFactoryList.clear();
+
+    foreach( AbstractModelStreamEncoderConfigEditorFactory* factory, mEncoderFactoryList )
+        mExporterFactoryList << new ModelEncoderFileSystemExporterConfigEditorFactory( factory );
+}
+
+void ModelCodecViewManager::setExporterConfigEditorFactories( QList<AbstractModelExporterConfigEditorFactory*>& factoryList )
+{
+    mExporterFactoryList = factoryList;
 }
 
 AbstractModelStreamEncoderConfigEditor* ModelCodecViewManager::createConfigEditor( AbstractModelStreamEncoder* encoder ) const
 {
     AbstractModelStreamEncoderConfigEditor* result = 0;
 
-    foreach( const AbstractModelStreamEncoderConfigEditorFactory* factory, mFactoryList )
+    foreach( const AbstractModelStreamEncoderConfigEditorFactory* factory, mEncoderFactoryList )
     {
         result = factory->tryCreateConfigEditor( encoder );
         if( result )
@@ -49,7 +64,22 @@ AbstractModelStreamEncoderConfigEditor* ModelCodecViewManager::createConfigEdito
     return result;
 }
 
+AbstractModelExporterConfigEditor* ModelCodecViewManager::createConfigEditor( AbstractModelExporter* exporter ) const
+{
+    AbstractModelExporterConfigEditor* result = 0;
+
+    foreach( const AbstractModelExporterConfigEditorFactory* factory, mExporterFactoryList )
+    {
+        result = factory->tryCreateConfigEditor( exporter );
+        if( result )
+            break;
+    }
+
+    return result;
+}
+
 ModelCodecViewManager::~ModelCodecViewManager()
 {
-    qDeleteAll( mFactoryList );
+    qDeleteAll( mEncoderFactoryList );
+    qDeleteAll( mExporterFactoryList );
 }

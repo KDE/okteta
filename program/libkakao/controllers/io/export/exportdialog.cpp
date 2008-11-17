@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "copyasdialog.h"
+#include "exportdialog.h"
 
 // Kakao gui
-#include <abstractmodelstreamencoderconfigeditor.h>
+#include <abstractmodelexporterconfigeditor.h>
 #include <abstractselectionview.h>
 // KDE
 #include <KGlobal>
@@ -31,22 +31,20 @@
 // Qt
 #include <QtGui/QSplitter>
 #include <QtGui/QGroupBox>
-#include <QtGui/QLayout>
 #include <QtGui/QLabel>
-#include <QtGui/QFont>
+#include <QtGui/QLayout>
 
 
-
-CopyAsDialog::CopyAsDialog( AbstractModelStreamEncoderConfigEditor* configEditor, QWidget* parent )
+ExportDialog::ExportDialog( AbstractModelExporterConfigEditor* configEditor, QWidget* parent )
   : KDialog( parent ),
     mConfigEditor( configEditor )
 {
-    setCaption( i18nc("@title:window","Copy settings...") );
+    setCaption( i18nc("@title:window","Export settings...") );
     setButtons( Ok | Cancel );
-    setButtonGuiItem( Ok, KGuiItem(i18nc("@action:button","&Copy to clipboard"), "edit-copy",
-                      i18nc("@info:tooltip","Copy the selected data to the clipboard."),
-                      i18nc("@info:whatsthis","If you press the <interface>Copy to clipboard</interface> "
-                            "button, the selected data will be copied to the clipboard "
+    setButtonGuiItem( Ok, KGuiItem(i18nc("@action:button","&Export to file"), "",
+                      i18nc("@info:tooltip","Export the selected data to a file."),
+                      i18nc("@info:whatsthis","If you press the <interface>Export to file</interface> "
+                            "button, the selected data will be copied to a file "
                             "with the settings you entered above.")) );
     setDefaultButton( Ok );
 
@@ -85,13 +83,13 @@ CopyAsDialog::CopyAsDialog( AbstractModelStreamEncoderConfigEditor* configEditor
     connect( configEditor, SIGNAL(validityChanged( bool )), SLOT(enableButtonOk( bool )) );
 }
 
-void CopyAsDialog::setData( AbstractModel* model, const AbstractModelSelection* selection )
+void ExportDialog::setData( AbstractModel* model, const AbstractModelSelection* selection )
 {
     if( mPreviewView )
         mPreviewView->setData( model, selection );
 }
 
-CopyAsDialog::~CopyAsDialog()
+ExportDialog::~ExportDialog()
 {
     delete mPreviewView;
 }

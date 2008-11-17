@@ -24,7 +24,12 @@
 #include "exportcontroller.h"
 
 // lib
+#include "exportdialog.h"
+// Kakao gui
+#include <modelcodecviewmanager.h>
 #include <kidataselectable.h>
+#include <kviewmanager.h>
+#include <abstractmodelexporterconfigeditor.h>
 // Kakao core
 #include <kdocumentmanager.h>
 #include <modelcodecmanager.h>
@@ -38,10 +43,11 @@
 // Qt
 #include <QtGui/QActionGroup>
 
+
 static const char ExportActionListId[] = "export_list";
 
-ExportController::ExportController( KDocumentManager* documentManager, KXMLGUIClient* guiClient )
- : mDocumentManager( documentManager ), mGuiClient( guiClient ), mModel( 0 )
+ExportController::ExportController( KViewManager* viewManager, KDocumentManager* documentManager, KXMLGUIClient* guiClient )
+ : mViewManager( viewManager ), mDocumentManager( documentManager ), mGuiClient( guiClient ), mModel( 0 )
 {
     mExportActionGroup = new QActionGroup( this ); // TODO: do we use this only for the signal mapping?
     connect( mExportActionGroup, SIGNAL(triggered( QAction* )), SLOT(onActionTriggered( QAction* )) );
@@ -105,6 +111,17 @@ void ExportController::onActionTriggered( QAction *action )
     AbstractModelExporter *exporter = action->data().value<AbstractModelExporter *>();
 
     const AbstractModelSelection* selection = ( mSelectionControl != 0 ) ? mSelectionControl->modelSelection() : 0;
+
+    AbstractModelExporterConfigEditor* configEditor =
+        mViewManager->codecViewManager()->createConfigEditor( exporter );
+
+    if( configEditor )
+    {
+        ExportDialog* dialog = new ExportDialog( configEditor );
+        dialog->setData( mModel, selection );
+        if( !dialog->exec() )
+            return;
+    }
 
     mDocumentManager->codecManager()->exportDocument( exporter, mModel, selection );
 }
