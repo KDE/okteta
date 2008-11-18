@@ -128,7 +128,7 @@ bool KDocumentSyncManager::setSynchronizer( KAbstractDocument *document )
                     // ask synchronizer for capabilities, as some can only overwrite
                     const QString message =
                         i18nc( "@info",
-                               "There is already a file at <nl/><filename>%1</filename>.<nl/>"
+                               "There is already a file at<nl/><filename>%1</filename>.<nl/>"
                                "Overwrite?", newUrl.url() );
                     int answer = KMessageBox::warningYesNoCancel( mWidget, message, processTitle, KStandardGuiItem::overwrite(), KStandardGuiItem::back() );
                     if( answer == KMessageBox::Cancel )
@@ -199,9 +199,9 @@ bool KDocumentSyncManager::canClose( KAbstractDocument *document )
 
         if( synchronizer || couldSynchronize )
         {
-            const QString message = i18nc( "@info The %typename \"%title\" has been modified.",
-                "The %1 <emphasis>%2</emphasis> has been modified.<nl/>"
-                "Do you want to save your changes or discard them?", document->typeName(), document->title() );
+            const QString message = i18nc( "@info \"%title\" has been modified.",
+                "<filename>%1</filename> has been modified.<nl/>"
+                "Do you want to save your changes or discard them?", document->title() );
             const int answer = KMessageBox::warningYesNoCancel( mWidget, message, processTitle,
                                                                 KStandardGuiItem::save(), KStandardGuiItem::discard() );
             if( answer == KMessageBox::Yes )
@@ -221,9 +221,9 @@ bool KDocumentSyncManager::canClose( KAbstractDocument *document )
         }
         else
         {
-            const QString message = i18nc( "@info The %typename \"%title\" has been modified.",
-                "The %1 <emphasis>%2</emphasis> has been modified.<nl/>"
-                "Do you want to discard your changes?", document->typeName(), document->title() );
+            const QString message = i18nc( "@info \"%title\" has been modified.",
+                "<filename>%1</filename> has been modified.<nl/>"
+                "Do you want to discard your changes?", document->title() );
             const int answer = KMessageBox::warningContinueCancel( mWidget, message, processTitle,
                                                                    KStandardGuiItem::discard() );
             canClose = ( answer == KMessageBox::Continue );
