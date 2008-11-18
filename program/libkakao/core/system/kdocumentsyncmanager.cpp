@@ -105,7 +105,7 @@ bool KDocumentSyncManager::setSynchronizer( KAbstractDocument *document )
 //     if( currentSynchronizer )
 //         currentSynchronizer->pauseSynchronization(); also unpause below
     const QString processTitle =
-        i18nc( "@title:window Save %typename As...", "Save %1 As...", document->typeName() );
+        i18nc( "@title:window", "Save As" );
     do
     {
         KUrl newUrl = KFileDialog::getSaveUrl( /*mWorkingUrl.url()*/QString(), QString(), mWidget, processTitle );
@@ -195,7 +195,7 @@ bool KDocumentSyncManager::canClose( KAbstractDocument *document )
         AbstractModelSynchronizer* synchronizer = document->synchronizer();
         const bool couldSynchronize = hasSynchronizerForLocal( document->mimeType() );
 
-        const QString processTitle = i18nc( "@title:window Close %typename", "Close %1", document->typeName() );
+        const QString processTitle = i18nc( "@title:window", "Close" );
 
         if( synchronizer || couldSynchronize )
         {

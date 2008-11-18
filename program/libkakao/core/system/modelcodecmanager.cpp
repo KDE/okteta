@@ -94,8 +94,7 @@ void ModelCodecManager::exportDocument( AbstractModelExporter *exporter,
     bool exportDone = false;
 
     const QString dialogTitle =
-        i18nc( "@title:window Export %typename As %exportedtypename...", "Export %1 As %2...",
-               exporter->modelTypeName(model,selection), exporter->remoteTypeName() );
+        i18nc( "@title:window", "Export" );
     do
     {
         KUrl exportUrl = KFileDialog::getSaveUrl( /*mWorkingUrl.url()*/QString(), QString(), mWidget, dialogTitle );
@@ -141,5 +140,3 @@ ModelCodecManager::~ModelCodecManager()
     qDeleteAll( mEncoderList );
 //     qDeleteAll( mDecoderList );
 }
-
-#include "modelcodecmanager.moc"
