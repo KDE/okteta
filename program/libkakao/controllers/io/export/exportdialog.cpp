@@ -39,7 +39,7 @@ ExportDialog::ExportDialog( AbstractModelExporterConfigEditor* configEditor, QWi
   : KDialog( parent ),
     mConfigEditor( configEditor )
 {
-    setCaption( i18nc("@title:window","Export settings...") );
+    setCaption( i18nc("@title:window","Export") );
     setButtons( Ok | Cancel );
     setButtonGuiItem( Ok, KGuiItem(i18nc("@action:button","&Export to file"), "",
                       i18nc("@info:tooltip","Export the selected data to a file."),

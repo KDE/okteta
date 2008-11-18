@@ -41,7 +41,7 @@ CopyAsDialog::CopyAsDialog( AbstractModelStreamEncoderConfigEditor* configEditor
   : KDialog( parent ),
     mConfigEditor( configEditor )
 {
-    setCaption( i18nc("@title:window","Copy settings...") );
+    setCaption( i18nc("@title:window","Copy As") );
     setButtons( Ok | Cancel );
     setButtonGuiItem( Ok, KGuiItem(i18nc("@action:button","&Copy to clipboard"), "edit-copy",
                       i18nc("@info:tooltip","Copy the selected data to the clipboard."),
