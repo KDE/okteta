@@ -63,7 +63,7 @@ ByteArrayValuesStreamEncoderConfigEditor::ByteArrayValuesStreamEncoderConfigEdit
     pageLayout->addWidget( mValueCodingSelect, 0, 1);
 #endif
     // separation string
-    QLabel* label = new QLabel( i18nc("","Separation:"), this );
+    QLabel* label = new QLabel( i18nc("@label:textbox substring which separates the values","Separation:"), this );
     pageLayout->addWidget( label, 0, 0, Qt::AlignRight);
 
     mSeparationEdit = new KLineEdit( this );
@@ -76,7 +76,10 @@ ByteArrayValuesStreamEncoderConfigEditor::ByteArrayValuesStreamEncoderConfigEdit
     pageLayout->setRowStretch( 2, 10 );
 }
 
-QString ByteArrayValuesStreamEncoderConfigEditor::name() const { return i18nc("","Values"); }
+QString ByteArrayValuesStreamEncoderConfigEditor::name() const
+{
+    return i18nc("@item name of the encoding result","Values");
+}
 
 
 AbstractSelectionView* ByteArrayValuesStreamEncoderConfigEditor::createPreviewView() const

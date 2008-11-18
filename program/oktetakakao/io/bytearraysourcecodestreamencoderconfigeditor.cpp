@@ -49,7 +49,7 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
     pageLayout->setColumnStretch( 1, 0 );
 
     // variable name
-    QLabel* label = new QLabel( i18nc("","Name of variable:"), this );
+    QLabel* label = new QLabel( i18nc("@label:textbox name of the created variable","Name of variable:"), this );
     pageLayout->addWidget( label, 0, 0, Qt::AlignRight);
 
     mVariableNameEdit = new KLineEdit( this );
@@ -58,7 +58,7 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
     pageLayout->addWidget( mVariableNameEdit, 0, 1);
 
     // items per line
-    label = new QLabel( i18nc("","Items per line:"), this );
+    label = new QLabel( i18nc("@label:textbox to define after how many items the list is wrapped","Items per line:"), this );
     pageLayout->addWidget( label, 1, 0, Qt::AlignRight);
 
     mItemsPerLineEdit = new KIntNumInput( this );
@@ -68,7 +68,7 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
     pageLayout->addWidget( mItemsPerLineEdit, 1, 1);
 
     // data type
-    label = new QLabel( i18nc("","Data type:"), this );
+    label = new QLabel( i18nc("@label:listbox the type of the data: char, integer, etc.","Data type:"), this );
     pageLayout->addWidget( label, 2, 0, Qt::AlignRight);
 
     mDataTypeSelect = new KComboBox( this );
@@ -83,7 +83,9 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
     pageLayout->addWidget( mDataTypeSelect, 2, 1);
 
     // unsigned as hexadezimal
-    label = new QLabel( i18nc("","Unsigned as hexadecimal:"), this );
+    label = new QLabel( i18nc("@option:check Encode the values in hexadecimal instead of decimal, "
+                              "if the datatype has the property Unsigned",
+                              "Unsigned as hexadecimal:"), this );
     pageLayout->addWidget( label, 3, 0, Qt::AlignRight);
 
     mUnsignedAsHexadecimalCheck = new QCheckBox( this );
@@ -95,7 +97,10 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
     pageLayout->setRowStretch( 4, 10 );
 }
 
-QString ByteArraySourceCodeStreamEncoderConfigEditor::name() const { return i18nc("","C Array"); }
+QString ByteArraySourceCodeStreamEncoderConfigEditor::name() const
+{
+    return i18nc("@item name of the encoding result","C Array");
+}
 
 bool ByteArraySourceCodeStreamEncoderConfigEditor::isValid() const
 {
