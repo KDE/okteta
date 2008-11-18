@@ -128,9 +128,9 @@ void PODDecoderTool::setupDecoder()
     mDecoderNameList[Unsigned64BitId] =
         i18nc("@label:textbox","Unsigned 64 bit:");
     mDecoderNameList[Float32BitId] =
-        i18nc("@label:textbox","32 bit float:");
+        i18nc("@label:textbox","Float 32 bit:");
     mDecoderNameList[Float64BitId] =
-        i18nc("@label:textbox","64 bit float:");
+        i18nc("@label:textbox","Float 64 bit:");
     mDecoderNameList[Char8BitId] =
         i18nc("@label:textbox encoding of one byte as character", "Character 8 bit:");
     mDecoderNameList[UTF8Id] =
