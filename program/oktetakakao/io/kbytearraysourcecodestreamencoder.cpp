@@ -157,7 +157,7 @@ QString KByteArraySourceCodeStreamEncoder::printFormatted( const KHECore::Abstra
         unsigned short e = 0;
         byteArrayModel->copyTo( (char*)&e, pos, qMin(uint(sizeof(e)),dataSize) );
         const int base = mSettings.unsignedAsHexadecimal ? 16 : 10;
-        const int fieldWidth = mSettings.unsignedAsHexadecimal ? 4 : 6;
+        const int fieldWidth = mSettings.unsignedAsHexadecimal ? 4 : 5;
         const char* FormattedNumberPlaceHolder = mSettings.unsignedAsHexadecimal ?
             HexadecimalFormattedNumberPlaceHolder : DecimalFormattedNumberPlaceHolder;
         const QChar stuffChar( mSettings.unsignedAsHexadecimal ? '0' : ' ' );
@@ -177,7 +177,7 @@ QString KByteArraySourceCodeStreamEncoder::printFormatted( const KHECore::Abstra
         unsigned int e = 0;
         byteArrayModel->copyTo( (char*)&e, pos, qMin(uint(sizeof(e)),dataSize) );
         const int base = mSettings.unsignedAsHexadecimal ? 16 : 10;
-        const int fieldWidth = mSettings.unsignedAsHexadecimal ? 8 : 12;
+        const int fieldWidth = mSettings.unsignedAsHexadecimal ? 8 : 10;
         const char* FormattedNumberPlaceHolder = mSettings.unsignedAsHexadecimal ?
             HexadecimalFormattedNumberPlaceHolder : DecimalFormattedNumberPlaceHolder;
         const QChar stuffChar( mSettings.unsignedAsHexadecimal ? '0' : ' ' );
