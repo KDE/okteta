@@ -140,7 +140,8 @@ QString KByteArraySourceCodeStreamEncoder::printFormatted( const KHECore::Abstra
         const int fieldWidth = mSettings.unsignedAsHexadecimal ? 2 : 3;
         const char* FormattedNumberPlaceHolder = mSettings.unsignedAsHexadecimal ?
             HexadecimalFormattedNumberPlaceHolder : DecimalFormattedNumberPlaceHolder;
-        result = QString(FormattedNumberPlaceHolder).arg( e, fieldWidth, base, QChar('0') );
+        const QChar stuffChar( mSettings.unsignedAsHexadecimal ? '0' : ' ' );
+        result = QString(FormattedNumberPlaceHolder).arg( e, fieldWidth, base, stuffChar );
         break;
     }
     case SourceCodeStreamEncoderSettings::ShortType:
@@ -159,7 +160,8 @@ QString KByteArraySourceCodeStreamEncoder::printFormatted( const KHECore::Abstra
         const int fieldWidth = mSettings.unsignedAsHexadecimal ? 4 : 6;
         const char* FormattedNumberPlaceHolder = mSettings.unsignedAsHexadecimal ?
             HexadecimalFormattedNumberPlaceHolder : DecimalFormattedNumberPlaceHolder;
-        result = QString(FormattedNumberPlaceHolder).arg( e, fieldWidth, base, QChar('0') );
+        const QChar stuffChar( mSettings.unsignedAsHexadecimal ? '0' : ' ' );
+        result = QString(FormattedNumberPlaceHolder).arg( e, fieldWidth, base, stuffChar );
         break;
     }
     case SourceCodeStreamEncoderSettings::IntegerType:
@@ -178,7 +180,8 @@ QString KByteArraySourceCodeStreamEncoder::printFormatted( const KHECore::Abstra
         const int fieldWidth = mSettings.unsignedAsHexadecimal ? 8 : 12;
         const char* FormattedNumberPlaceHolder = mSettings.unsignedAsHexadecimal ?
             HexadecimalFormattedNumberPlaceHolder : DecimalFormattedNumberPlaceHolder;
-        result = QString(FormattedNumberPlaceHolder).arg( e, fieldWidth, base, QChar('0') );
+        const QChar stuffChar( mSettings.unsignedAsHexadecimal ? '0' : ' ' );
+        result = QString(FormattedNumberPlaceHolder).arg( e, fieldWidth, base, stuffChar );
         break;
     }
     case SourceCodeStreamEncoderSettings::FloatType:
