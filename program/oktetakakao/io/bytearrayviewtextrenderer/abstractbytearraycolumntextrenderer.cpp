@@ -24,27 +24,21 @@
 
 // Qt
 #include <QtCore/QTextStream>
-// C
-#include <string.h>
 
 
 static const int DefaultTRByteSpacingWidth = 1;
 static const int TRGroupSpacingWidth = 2;
 
-QString AbstractByteArrayColumnTextRenderer::whiteSpace( uint s )
-{
-    return QString().fill( ' ', s );
-}
 
 AbstractByteArrayColumnTextRenderer::AbstractByteArrayColumnTextRenderer( const KHECore::AbstractByteArrayModel *byteArrayModel, int offset, const KHEUI::CoordRange &coordRange,
     int noOfBytesPerLine )
  : mByteArrayModel( byteArrayModel ),
    mCoordRange( coordRange ),
    mNoOfBytesPerLine( noOfBytesPerLine ),
-   mOffset( offset )
+   mOffset( offset ),
+   mNoOfCharsPerLine( 0 ),
+   mLinePositions( new int[mNoOfBytesPerLine] )
 {
-    mLinePositions = new int[mNoOfBytesPerLine];
-    mNoOfCharsPerLine = 0;
 }
 
 void AbstractByteArrayColumnTextRenderer::setWidths( int byteWidth, int byteSpacingWidth, int noOfGroupedBytes )
@@ -84,13 +78,13 @@ void AbstractByteArrayColumnTextRenderer::setWidths( int byteWidth, int byteSpac
 void AbstractByteArrayColumnTextRenderer::renderFirstLine( QTextStream *stream, int lineIndex ) const
 {
     mRenderLine = lineIndex;
-    renderLine( stream );
+    renderLine( stream, false );
 }
 
 
-void AbstractByteArrayColumnTextRenderer::renderNextLine( QTextStream *stream ) const
+void AbstractByteArrayColumnTextRenderer::renderNextLine( QTextStream* stream, bool isSubline ) const
 {
-    renderLine( stream );
+    renderLine( stream, isSubline );
 }
 
 AbstractByteArrayColumnTextRenderer::~AbstractByteArrayColumnTextRenderer()

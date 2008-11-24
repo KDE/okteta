@@ -32,8 +32,9 @@ Q_UNUSED( lineIndex )
     render( stream );
 }
 
-void BorderColumnTextRenderer::renderNextLine( QTextStream *stream ) const
+void BorderColumnTextRenderer::renderNextLine( QTextStream* stream, bool isSubline ) const
 {
+Q_UNUSED( isSubline )
     render( stream );
 }
 

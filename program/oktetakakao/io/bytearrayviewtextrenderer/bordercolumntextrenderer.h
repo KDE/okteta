@@ -35,7 +35,7 @@ class BorderColumnTextRenderer : public AbstractColumnTextRenderer
 
   public: // AbstractColumnTextRenderer API
     virtual void renderFirstLine( QTextStream *stream, int lineIndex ) const;
-    virtual void renderNextLine( QTextStream *stream ) const;
+    virtual void renderNextLine( QTextStream* stream, bool isSubline ) const;
 
   protected:
     void render( QTextStream *stream ) const;

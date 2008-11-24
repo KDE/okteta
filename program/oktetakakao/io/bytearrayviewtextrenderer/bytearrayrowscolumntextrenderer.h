@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,45 +20,60 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTBYTEARRAYCOLUMNTEXTRENDERER_H
-#define ABSTRACTBYTEARRAYCOLUMNTEXTRENDERER_H
+#ifndef BYTEARRAYROWSCOLUMNTEXTRENDERER_H
+#define BYTEARRAYROWSCOLUMNTEXTRENDERER_H
 
 // lib
 #include "abstractcolumntextrenderer.h"
 // Okteta gui
 #include <coordrange.h>
-
+// Okteta core
+#include <khe.h>
+// Qt
+#include <QtCore/QChar>
 
 namespace KHECore {
+class ValueCodec;
+class CharCodec;
 class AbstractByteArrayModel;
 }
 
 // TODO: offset should be set in renderFirstLine, calculated using coordRange,
 // in constructor instead take startOffset
-class AbstractByteArrayColumnTextRenderer : public AbstractColumnTextRenderer
+class ByteArrayRowsColumnTextRenderer : public AbstractColumnTextRenderer
 {
   public:
-    AbstractByteArrayColumnTextRenderer( const KHECore::AbstractByteArrayModel *byteArrayModel, int offset,
-        const KHEUI::CoordRange &coordRange,
-        int noOfBytesPerLine );
-    virtual ~AbstractByteArrayColumnTextRenderer();
+    ByteArrayRowsColumnTextRenderer( const KHECore::AbstractByteArrayModel* byteArrayModel, int offset,
+        const KHEUI::CoordRange& coordRange,
+        int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
+        int visibleCodings,
+        KHECore::ValueCoding valueCoding,
+        const QString& charCodecName, QChar substituteChar, QChar undefinedChar );
+    virtual ~ByteArrayRowsColumnTextRenderer();
 
   public: // AbstractColumnTextRenderer API
-    virtual void renderFirstLine( QTextStream *stream, int lineIndex ) const;
+    virtual void renderFirstLine( QTextStream* stream, int lineIndex ) const;
     virtual void renderNextLine( QTextStream* stream, bool isSubline ) const;
+    virtual int noOfSublinesNeeded() const;
 
-  protected: // API to be reimplemented by subclasses
-    virtual void renderLine( QTextStream* stream, bool isSubline ) const = 0;
+  protected:
+    void renderLine( QTextStream* stream, bool isSubline ) const;
 
   protected:
     void setWidths( int byteWidth, int byteSpacingWidth, int noOfGroupedBytes );
 
   protected:
-    const KHECore::AbstractByteArrayModel *mByteArrayModel;
+    const KHECore::AbstractByteArrayModel* mByteArrayModel;
 
     const KHEUI::CoordRange mCoordRange;
 
     const int mNoOfBytesPerLine;
+
+    const int mVisibleCodings;
+    const KHECore::ValueCodec* mValueCodec;
+    const KHECore::CharCodec* mCharCodec;
+    const QChar mSubstituteChar;
+    const QChar mUndefinedChar;
 
     /** Line to print */
     mutable int mRenderLine;

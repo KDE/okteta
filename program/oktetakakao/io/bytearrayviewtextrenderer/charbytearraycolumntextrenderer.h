@@ -25,10 +25,13 @@
 
 // lib
 #include "abstractbytearraycolumntextrenderer.h"
+// Qt
+#include <QtCore/QChar>
 
 namespace KHECore {
 class CharCodec;
 }
+
 
 class CharByteArrayColumnTextRenderer : public AbstractByteArrayColumnTextRenderer
 {
@@ -40,7 +43,7 @@ class CharByteArrayColumnTextRenderer : public AbstractByteArrayColumnTextRender
     virtual ~CharByteArrayColumnTextRenderer();
 
   protected: // AbstractByteArrayColumnTextRenderer API
-    virtual void renderLine( QTextStream *stream ) const;
+    virtual void renderLine( QTextStream* stream, bool isSubline ) const;
 
   protected:
     const KHECore::CharCodec *mCharCodec;

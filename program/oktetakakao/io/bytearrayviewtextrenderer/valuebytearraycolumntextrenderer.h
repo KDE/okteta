@@ -42,7 +42,7 @@ class ValueByteArrayColumnTextRenderer : public AbstractByteArrayColumnTextRende
     virtual ~ValueByteArrayColumnTextRenderer();
 
   protected: // AbstractByteArrayColumnTextRenderer API
-    virtual void renderLine( QTextStream *stream ) const;
+    virtual void renderLine( QTextStream* stream, bool isSubline ) const;
 
   protected:
     const KHECore::ValueCodec *mValueCodec;

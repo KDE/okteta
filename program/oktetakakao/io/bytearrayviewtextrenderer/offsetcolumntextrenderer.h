@@ -37,19 +37,20 @@ class OffsetColumnTextRenderer : public AbstractColumnTextRenderer
 
   public: // AbstractColumnTextRenderer API
     virtual void renderFirstLine( QTextStream *stream, int lineIndex ) const;
-    virtual void renderNextLine( QTextStream *stream ) const;
+    virtual void renderNextLine( QTextStream* stream, bool isSubline ) const;
 
   protected:
-    void renderLine( QTextStream *stream ) const;
+    void renderLine( QTextStream* stream, bool isSubline ) const;
 
   protected:
     const int mFirstLineOffset;
     const int mDelta;
     const KHEUI::KOffsetFormat::print printFunction;
+    const int mCodingWidth;
 
     /** the line we are in */
     mutable int mRenderLine;
-    mutable char *mEncodedOffsetBuffer;
+    mutable char* mEncodedOffsetBuffer;
 };
 
 #endif

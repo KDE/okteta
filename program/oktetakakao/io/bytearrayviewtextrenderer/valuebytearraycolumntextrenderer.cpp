@@ -42,8 +42,10 @@ ValueByteArrayColumnTextRenderer::ValueByteArrayColumnTextRenderer(
 }
 
 
-void ValueByteArrayColumnTextRenderer::renderLine( QTextStream *stream ) const
+void ValueByteArrayColumnTextRenderer::renderLine( QTextStream* stream, bool isSubline ) const
 {
+Q_UNUSED( isSubline )
+
     int p = 0;
     int pEnd = mNoOfBytesPerLine;
     // correct boundaries

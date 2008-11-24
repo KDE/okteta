@@ -27,6 +27,7 @@
 #include "bytearrayviewtextrenderer/bordercolumntextrenderer.h"
 #include "bytearrayviewtextrenderer/valuebytearraycolumntextrenderer.h"
 #include "bytearrayviewtextrenderer/charbytearraycolumntextrenderer.h"
+#include "bytearrayviewtextrenderer/bytearrayrowscolumntextrenderer.h"
 #include <kbytearraydisplay.h>
 // Okteta gui
 #include <bytearraytablelayout.h>
@@ -67,6 +68,7 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream( QIODevice *device,
     mSettings.firstLineOffset = byteArrayView->firstLineOffset();
     mSettings.startOffset = byteArrayView->startOffset();
     mSettings.delta = byteArrayView->noOfBytesPerLine();
+    const int viewModus = byteArrayView->viewModus();
 
     // setup
     KHEUI::ByteArrayTableLayout layout( byteArrayView->noOfBytesPerLine(), mSettings.firstLineOffset,
@@ -78,6 +80,7 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream( QIODevice *device,
     const int noOfBytesPerLine = byteArrayView->noOfBytesPerLine();
     const int byteSpacingWidth = byteArrayView->byteSpacingWidth();
     const int noOfGroupedBytes = byteArrayView->noOfGroupedBytes();
+    const int visibleByteArrayCodings = byteArrayView->visibleByteArrayCodings();
 
     QList<AbstractColumnTextRenderer*> columnTextRendererList;
 
@@ -87,35 +90,63 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream( QIODevice *device,
             new OffsetColumnTextRenderer(KHEUI::KOffsetFormat::Hexadecimal,mSettings.firstLineOffset,mSettings.delta) );
         columnTextRendererList.append( new BorderColumnTextRenderer() );
     }
-    const int visibleByteArrayCodings = byteArrayView->visibleByteArrayCodings();
-    if( visibleByteArrayCodings & KHEUI::AbstractByteArrayView::ValueCodingId )
-        columnTextRendererList.append(
-            new ValueByteArrayColumnTextRenderer(byteArrayModel,section.start(),coordRange,
-                                                 noOfBytesPerLine, byteSpacingWidth, noOfGroupedBytes,
-                                                 mSettings.valueCoding) );
 
-    if( visibleByteArrayCodings & KHEUI::AbstractByteArrayView::CharCodingId )
+    if( viewModus == 0 )
     {
         if( visibleByteArrayCodings & KHEUI::AbstractByteArrayView::ValueCodingId )
-            columnTextRendererList.append( new BorderColumnTextRenderer() );
-        columnTextRendererList.append(
-            new CharByteArrayColumnTextRenderer(byteArrayModel,section.start(),coordRange,
-                                                noOfBytesPerLine, 0, 0,
-                                                mSettings.codecName,mSettings.substituteChar,mSettings.undefinedChar) );
+            columnTextRendererList.append(
+                new ValueByteArrayColumnTextRenderer(byteArrayModel,section.start(),coordRange,
+                                                    noOfBytesPerLine, byteSpacingWidth, noOfGroupedBytes,
+                                                    mSettings.valueCoding) );
+
+        if( visibleByteArrayCodings & KHEUI::AbstractByteArrayView::CharCodingId )
+        {
+            if( visibleByteArrayCodings & KHEUI::AbstractByteArrayView::ValueCodingId )
+                columnTextRendererList.append( new BorderColumnTextRenderer() );
+            columnTextRendererList.append(
+                new CharByteArrayColumnTextRenderer(byteArrayModel,section.start(),coordRange,
+                                                    noOfBytesPerLine, 0, 0,
+                                                    mSettings.codecName,mSettings.substituteChar,mSettings.undefinedChar) );
+        }
     }
+    else
+    {
+            columnTextRendererList.append(
+                new ByteArrayRowsColumnTextRenderer(byteArrayModel,section.start(),coordRange,
+                                                    noOfBytesPerLine, byteSpacingWidth, noOfGroupedBytes,
+                                                    visibleByteArrayCodings,
+                                                    mSettings.valueCoding,
+                                                    mSettings.codecName,mSettings.substituteChar,mSettings.undefinedChar) );
+    }
+
+    int subLinesCount = 1;
+    foreach( const AbstractColumnTextRenderer* renderer, columnTextRendererList )
+        if( renderer->noOfSublinesNeeded() > subLinesCount )
+            subLinesCount = renderer->noOfSublinesNeeded();
 
     // encode
     QTextStream textStream( device );
 
     int l = coordRange.start().line();
-    foreach( AbstractColumnTextRenderer* renderer, columnTextRendererList )
+    foreach( const AbstractColumnTextRenderer* renderer, columnTextRendererList )
         renderer->renderFirstLine( &textStream, l );
     textStream << endl;
-    for( ++l; l<=coordRange.end().line(); ++l )
+
+    int subLine = 1;
+    while( true )
     {
-        foreach( AbstractColumnTextRenderer* renderer, columnTextRendererList )
-            renderer->renderNextLine( &textStream );
+        if( subLine == subLinesCount )
+        {
+            ++l;
+            if( l > coordRange.end().line() )
+                break;
+            subLine = 0;
+        }
+        const bool isSubline = ( subLine > 0 );
+        foreach( const AbstractColumnTextRenderer* renderer, columnTextRendererList )
+            renderer->renderNextLine( &textStream, isSubline );
         textStream << endl;
+        ++subLine;
     }
 
     // clean up

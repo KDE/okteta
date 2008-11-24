@@ -17,11 +17,13 @@ if(KDE4_BUILD_TESTS)
 endif(KDE4_BUILD_TESTS)
 
 set( OKTETA_TEXTRENDERER_SRCS
+  bytearrayviewtextrenderer/abstractcolumntextrenderer.cpp
   bytearrayviewtextrenderer/offsetcolumntextrenderer.cpp
   bytearrayviewtextrenderer/bordercolumntextrenderer.cpp
   bytearrayviewtextrenderer/abstractbytearraycolumntextrenderer.cpp
   bytearrayviewtextrenderer/valuebytearraycolumntextrenderer.cpp
   bytearrayviewtextrenderer/charbytearraycolumntextrenderer.cpp
+  bytearrayviewtextrenderer/bytearrayrowscolumntextrenderer.cpp
 )
 
 set( OKTETA_KAKAO_IO_FILESYSTEM_SRCS

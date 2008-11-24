@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,29 +20,20 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTCOLUMNTEXTRENDERER_H
-#define ABSTRACTCOLUMNTEXTRENDERER_H
+#include "abstractcolumntextrenderer.h"
 
-class QTextStream;
-class QString;
+// Qt
+#include <QtCore/QString>
 
-/**
- * interface for the text export of columns
- * @author Friedrich W. H. Kossebau <kossebau@kde.org>
- */
-class AbstractColumnTextRenderer
+
+static const int DefaultNoOfSublines = 1;
+
+
+QString AbstractColumnTextRenderer::whiteSpace( unsigned int length )
 {
-  protected:
-    static QString whiteSpace( unsigned int length );
+    return QString().fill( ' ', length );
+}
 
-  public:
-    virtual ~AbstractColumnTextRenderer();
+int AbstractColumnTextRenderer::noOfSublinesNeeded() const { return DefaultNoOfSublines; }
 
-  public: // API to be implemented
-    virtual void renderFirstLine( QTextStream *stream, int lineIndex ) const = 0;
-    virtual void renderNextLine( QTextStream* stream, bool isSubline = false ) const = 0;
-    /// default returns 1
-    virtual int noOfSublinesNeeded() const;
-};
-
-#endif
+AbstractColumnTextRenderer::~AbstractColumnTextRenderer() {}

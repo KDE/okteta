@@ -30,31 +30,36 @@
 OffsetColumnTextRenderer::OffsetColumnTextRenderer( int offsetFormat, int firstLineOffset, int delta )
   : mFirstLineOffset( firstLineOffset),
     mDelta( delta ),
-    printFunction( KHEUI::KOffsetFormat::printFunction(offsetFormat) )
+    printFunction( KHEUI::KOffsetFormat::printFunction(offsetFormat) ),
+    mCodingWidth( KHEUI::KOffsetFormat::codingWidth(offsetFormat) )
 {
-    const int codingWidth = KHEUI::KOffsetFormat::codingWidth( offsetFormat );
-    mEncodedOffsetBuffer = new char[codingWidth+1];
+    mEncodedOffsetBuffer = new char[mCodingWidth+1];
 }
 
 
 void OffsetColumnTextRenderer::renderFirstLine( QTextStream *stream, int lineIndex ) const
 {
     mRenderLine = lineIndex;
-    renderLine( stream );
+    renderLine( stream, false );
 }
 
-void OffsetColumnTextRenderer::renderNextLine( QTextStream *stream ) const
+void OffsetColumnTextRenderer::renderNextLine( QTextStream* stream, bool isSubline ) const
 {
-    renderLine( stream );
+    renderLine( stream, isSubline );
 }
 
-void OffsetColumnTextRenderer::renderLine( QTextStream *stream ) const
+void OffsetColumnTextRenderer::renderLine( QTextStream* stream, bool isSubline ) const
 {
-    // TODO: fix me (no more printFunction)
-    printFunction( mEncodedOffsetBuffer, mFirstLineOffset + mDelta*mRenderLine );
-    *stream << mEncodedOffsetBuffer;
+    if( isSubline )
+        *stream << whiteSpace( mCodingWidth );
+    else
+    {
+        // TODO: fix me (no more printFunction)
+        printFunction( mEncodedOffsetBuffer, mFirstLineOffset + mDelta*mRenderLine );
+        *stream << mEncodedOffsetBuffer;
 
-    ++mRenderLine;
+        ++mRenderLine;
+    }
 }
 
 OffsetColumnTextRenderer::~OffsetColumnTextRenderer()
