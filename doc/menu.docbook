@@ -453,12 +453,29 @@ simply raw data.</para>
     on and off.</action></para></listitem>
     </varlistentry>
 
+
+    <varlistentry>
+    <term><menuchoice>
+    <guimenu>View</guimenu>
+    <guisubmenu>Show Values or Chars</guisubmenu>
+    </menuchoice></term>
+    <listitem><para><action>Select which of the byte interpretations are shown.</action>
+    Possible are:</para>
+    <itemizedlist>
+    <listitem><para><guimenuitem>Values</guimenuitem></para>
+    </listitem>
+    <listitem><para><guimenuitem>Chars</guimenuitem></para></listitem>
+    <listitem><para><guimenuitem>Values and Chars</guimenuitem></para></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
     <varlistentry>
     <term><menuchoice>
     <guimenu>View</guimenu>
     <guisubmenu>Value Coding</guisubmenu>
     </menuchoice></term>
-    <listitem><para><action>Select the coding in the value column</action> from:</para>
+    <listitem><para><action>Select the coding of the values</action> from:</para>
     <itemizedlist>
     <listitem><para><guimenuitem>Hexadecimal</guimenuitem></para></listitem>
     <listitem><para><guimenuitem>Decimal</guimenuitem></para></listitem>
@@ -471,9 +488,9 @@ simply raw data.</para>
     <varlistentry>
     <term><menuchoice>
     <guimenu>View</guimenu>
-    <guisubmenu>Char Encoding</guisubmenu>
+    <guisubmenu>Char Coding</guisubmenu>
     </menuchoice></term>
-    <listitem><para><action>Select the encoding in the character column</action>
+    <listitem><para><action>Select the coding of the chars</action>
     from the submenu.
     </para>
     </listitem>
@@ -503,15 +520,15 @@ simply raw data.</para>
     <varlistentry>
     <term><menuchoice>
     <guimenu>View</guimenu>
-    <guisubmenu>Columns</guisubmenu>
+    <guisubmenu>View Mode</guisubmenu>
     </menuchoice></term>
-    <listitem><para><action>Select which columns are shown.</action>
-    Possible are:</para>
+    <listitem><para><action>Select the layout for the view</action> from:</para>
     <itemizedlist>
-    <listitem><para><guimenuitem>Values Column</guimenuitem></para>
-    </listitem>
-    <listitem><para><guimenuitem>Chars Column</guimenuitem></para></listitem>
-    <listitem><para><guimenuitem>Both Columns</guimenuitem></para></listitem>
+    <listitem><para><guimenuitem>Columns</guimenuitem>: The values and chars
+    interpretations are shown in the classic layout with each listed in a
+    separate column.</para></listitem>
+    <listitem><para><guimenuitem>Rows</guimenuitem>: The char
+    interpretation of a byte is directly shown under the value interpretation.</para></listitem>
     </itemizedlist>
     </listitem>
     </varlistentry>
