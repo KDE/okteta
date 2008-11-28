@@ -46,8 +46,9 @@ GotoOffsetController::GotoOffsetController( KXMLGUIClient* guiClient )
 
     mGotoOffsetAction = actionCollection->addAction( "goto_offset" );
     mGotoOffsetAction->setText( i18nc("@action:inmenu","&Goto Offset...") );
-    connect( mGotoOffsetAction, SIGNAL(triggered(bool) ), SLOT(gotoOffset()) );
+    mGotoOffsetAction->setIcon( KIcon("go-jump") );
     mGotoOffsetAction->setShortcut( Qt::CTRL + Qt::Key_G );
+    connect( mGotoOffsetAction, SIGNAL(triggered(bool) ), SLOT(gotoOffset()) );
 
     setTargetModel( 0 );
 }
