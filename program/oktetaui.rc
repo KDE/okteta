@@ -11,7 +11,7 @@
     <Action name="save_copy_as" />
     <Action name="save_as_template" />
     <!--Action name="export" append="save_merge" /-->
-    <Menu name="export" append="save_merge">
+    <Menu name="export" icon="document-export" append="save_merge">
       <text context="@title:menu">Export</text>
       <ActionList name="export_list" />
     </Menu>
@@ -29,7 +29,7 @@
     <Action name="close_window"/>
   </Menu>
   <Menu name="edit">
-    <Menu name="copy_as" append="edit_paste_merge">
+    <Menu name="copy_as" icon="edit-copy" append="edit_paste_merge">
       <text context="@title:menu">Copy as</text>
       <ActionList name="copy_as_list" />
       <!--Action name="copy_values" />
