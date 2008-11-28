@@ -48,7 +48,7 @@ ByteArrayValuesStreamEncoderConfigEditor::ByteArrayValuesStreamEncoderConfigEdit
 
 #if 0
     // data type
-    QLabel* label = new QLabel( i18nc("","Value coding:"), this );
+    QLabel* label = new QLabel( i18n("Value coding:"), this );
     pageLayout->addWidget( label, 0, 0, Qt::AlignRight);
 
     mValueCodingSelect = new KComboBox( this );
