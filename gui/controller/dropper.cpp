@@ -60,6 +60,7 @@ bool Dropper::handleDragEnterEvent( QDragEnterEvent* dragEnterEvent )
         mIsActive = true;
         // TODO: store value edit data
         ByteArrayTableCursor* tableCursor = mByteArrayView->tableCursor();
+        // TODO: behind state should not be controllable, add cursorData for (re)storingdragEnterEvent
         mBeforeDragCursorPos = tableCursor->index();
         mBeforeDragCursorIsBehind = tableCursor->isBehind();
         mCursorIsMovedByDrag = false;
