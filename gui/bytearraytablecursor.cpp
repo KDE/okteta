@@ -134,10 +134,11 @@ void ByteArrayTableCursor::gotoNextByteInLine()
 
     if( mIndex < lastIndex )
     {
-        ++mIndex;
-
         if( mCoord.pos() < mLayout->noOfBytesPerLine()-1 )
+        {
+            ++mIndex;
             mCoord.goRight();
+        }
         else
             mBehind = true;
     }
