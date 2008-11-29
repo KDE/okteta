@@ -91,6 +91,9 @@ class ByteArrayTableCursor
     int validIndex() const;
 
     //bool isValid() const;
+    /**
+     *  Default is false.
+     */
     bool appendPosEnabled() const;
 
   public: // index calculation service
@@ -104,6 +107,9 @@ class ByteArrayTableCursor
     void gotoCoord( const Coord& coord );
     void gotoCIndex( int I );
     void gotoCCoord( const Coord& coord );
+    /** sets the index to the real index, i.e. if "behind" one index, sets it to the next.
+      * Undefined if the real index is invalid, or on the append pos if not allowed.
+      */
     void gotoRealIndex();
 
     void gotoPreviousByte();
@@ -116,11 +122,16 @@ class ByteArrayTableCursor
     void gotoLineStart();
     void gotoLineEnd();
     void gotoStart();
+    /** sets the index behind the last index.
+      * If appendPosEnabled is true, this will be the last index + 1,
+      * otherwise it will be the last index and the flag behind.
+      */
     void gotoEnd();
     void gotoPageUp();
     void gotoPageDown();
 
     /** puts the cursor behind the actual position if it isn't already*/
+    // TODO: make protected again
     void stepBehind();
     void updateCoord();
     void adaptToChanges( const KHE::ArrayChangeMetricsList& changeList, int oldLength );
@@ -166,6 +177,7 @@ inline int ByteArrayTableCursor::line()           const { return mCoord.line(); 
 inline Coord ByteArrayTableCursor::coord()        const { return mCoord; }
 inline bool ByteArrayTableCursor::isBehind()      const { return mBehind; }
 inline int ByteArrayTableCursor::realIndex()      const { return mBehind ? mIndex + 1 : mIndex; }
+inline bool ByteArrayTableCursor::appendPosEnabled() const { return mAppendPosEnabled; }
 
 inline void ByteArrayTableCursor::stepBehind() { mBehind = true; }
 

@@ -919,7 +919,7 @@ void AbstractByteArrayViewPrivate::onContentsChanged( const KHE::ArrayChangeMetr
 
     pauseCursor();
 
-    const bool appending = mTableCursor->atAppendPos();
+    const bool atEnd = mTableCursor->atEnd();
     const int oldLength = mTableLayout->length(); // TODO: hack for mDataCursor->adaptSelectionToChange
     // update lengths
     int oldNoOfLines = q->noOfLines();
@@ -932,7 +932,7 @@ void AbstractByteArrayViewPrivate::onContentsChanged( const KHE::ArrayChangeMetr
     }
 
     // adapt cursor(s)
-    if( appending )
+    if( atEnd )
         mTableCursor->gotoEnd();
     else
         mTableCursor->adaptToChanges( changeList, oldLength );

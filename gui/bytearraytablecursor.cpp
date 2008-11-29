@@ -283,10 +283,11 @@ void ByteArrayTableCursor::gotoIndex( int index )
 
 void ByteArrayTableCursor::gotoRealIndex()
 {
-    if( mBehind )
+    if( mBehind
+        && (mAppendPosEnabled || ( mIndex < mLayout->length()-1 )) )
     {
         ++mIndex;
-        mCoord = mLayout->coordOfIndex( mIndex );
+        mCoord.goCRight( mLayout->noOfBytesPerLine()-1 );
         mBehind = false;
     }
 }
@@ -341,14 +342,18 @@ void ByteArrayTableCursor::gotoPageDown()
 }
 
 
-int ByteArrayTableCursor::validIndex()       const { return mIndex < mLayout->length() ? mIndex : -1; }
+int ByteArrayTableCursor::validIndex() const
+{
+    return ( 0 <= mIndex && mIndex < mLayout->length() ) ? mIndex : -1;
+}
+
 int ByteArrayTableCursor::indexAtLineStart() const { return mLayout->indexAtFirstLinePosition( mCoord.line() ); }
 int ByteArrayTableCursor::indexAtLineEnd()   const { return mLayout->indexAtLastLinePosition( mCoord.line() ); }
 
 
 bool ByteArrayTableCursor::atStart()     const { return mIndex == 0; }
-bool ByteArrayTableCursor::atEnd()       const { return mIndex == mLayout->length() - 1; }
-bool ByteArrayTableCursor::atAppendPos() const { return realIndex() >= mLayout->length(); }
+bool ByteArrayTableCursor::atEnd()       const { return realIndex() == mLayout->length(); }
+bool ByteArrayTableCursor::atAppendPos() const { return mIndex == mLayout->length(); }
 
 
 bool ByteArrayTableCursor::atLineStart() const { return mLayout->atFirstLinePosition( mCoord ); }
