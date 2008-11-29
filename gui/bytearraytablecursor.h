@@ -103,9 +103,9 @@ class ByteArrayTableCursor
     int indexAtLineEnd() const;
 
   public: // navigation commands
-    void gotoIndex( int I );
+    void gotoIndex( int index );
     void gotoCoord( const Coord& coord );
-    void gotoCIndex( int I );
+    void gotoCIndex( int index );
     void gotoCCoord( const Coord& coord );
     /** sets the index to the real index, i.e. if "behind" one index, sets it to the next.
       * Undefined if the real index is invalid, or on the append pos if not allowed.
@@ -114,8 +114,8 @@ class ByteArrayTableCursor
 
     void gotoPreviousByte();
     void gotoNextByte();
-    void gotoPreviousByte( int D );
-    void gotoNextByte( int D );
+    void gotoPreviousByte( int indexSteps );
+    void gotoNextByte( int indexSteps );
     void gotoNextByteInLine();
     void gotoUp();
     void gotoDown();
