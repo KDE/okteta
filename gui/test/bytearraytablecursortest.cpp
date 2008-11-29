@@ -605,6 +605,381 @@ void ByteArrayTableCursorTest::testGotoPreviousByte()
     QCOMPARE( cursor.coord(), coord );
 }
 
+void ByteArrayTableCursorTest::testGotoNextByteN()
+{
+    const ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, Length );
+
+    ByteArrayTableCursor cursor( &layout );
+
+    // at start
+    // one right
+    int indexSteps = 1;
+    int expectedIndex = FirstIndex + indexSteps;
+    Coord expectedCoord = layout.coordOfIndex( expectedIndex );
+    cursor.gotoStart();
+
+    cursor.gotoNextByte( indexSteps );
+
+    QCOMPARE( cursor.index(), expectedIndex );
+    QCOMPARE( cursor.validIndex(), expectedIndex );
+    QCOMPARE( cursor.realIndex(), expectedIndex );
+    QCOMPARE( cursor.isBehind(), false );
+    QCOMPARE( cursor.atStart(), false );
+    QCOMPARE( cursor.atEnd(), false );
+    QCOMPARE( cursor.atAppendPos(), false );
+    QCOMPARE( cursor.atLineStart(), false );
+    QCOMPARE( cursor.atLineEnd(), false );
+    QCOMPARE( cursor.coord(), expectedCoord );
+
+    // one line
+    indexSteps = layout.noOfBytesPerLine();
+    expectedIndex = FirstIndex + indexSteps;
+    expectedCoord = layout.coordOfIndex( expectedIndex );
+    cursor.gotoStart();
+
+    cursor.gotoNextByte( indexSteps );
+
+    QCOMPARE( cursor.index(), expectedIndex );
+    QCOMPARE( cursor.validIndex(), expectedIndex );
+    QCOMPARE( cursor.realIndex(), expectedIndex );
+    QCOMPARE( cursor.isBehind(), false );
+    QCOMPARE( cursor.atStart(), false );
+    QCOMPARE( cursor.atEnd(), false );
+    QCOMPARE( cursor.atAppendPos(), false );
+    QCOMPARE( cursor.atLineStart(), false );
+    QCOMPARE( cursor.atLineEnd(), false );
+    QCOMPARE( cursor.coord(), expectedCoord );
+
+    // to end, append disabled
+    cursor.setAppendPosEnabled( false );
+    indexSteps = layout.length();
+    expectedIndex = FirstIndex + indexSteps -1;
+    expectedCoord = layout.coordOfIndex( expectedIndex );
+    cursor.gotoStart();
+
+    cursor.gotoNextByte( indexSteps );
+
+    QCOMPARE( cursor.index(), expectedIndex );
+    QCOMPARE( cursor.validIndex(), expectedIndex );
+    QCOMPARE( cursor.realIndex(), expectedIndex+1 );
+    QCOMPARE( cursor.isBehind(), true );
+    QCOMPARE( cursor.atStart(), false );
+    QCOMPARE( cursor.atEnd(), true );
+    QCOMPARE( cursor.atAppendPos(), false );
+    QCOMPARE( cursor.atLineStart(), false );
+    QCOMPARE( cursor.atLineEnd(), true );
+    QCOMPARE( cursor.coord(), expectedCoord );
+
+    // to end, append disabled
+    cursor.setAppendPosEnabled( true );
+    indexSteps = layout.length();
+    expectedIndex = FirstIndex + indexSteps;
+    expectedCoord = layout.coordOfIndex( expectedIndex );
+    cursor.gotoStart();
+
+    cursor.gotoNextByte( indexSteps );
+
+    QCOMPARE( cursor.index(), expectedIndex );
+    QCOMPARE( cursor.validIndex(), -1 );
+    QCOMPARE( cursor.realIndex(), expectedIndex );
+    QCOMPARE( cursor.isBehind(), false );
+    QCOMPARE( cursor.atStart(), false );
+    QCOMPARE( cursor.atEnd(), true );
+    QCOMPARE( cursor.atAppendPos(), true );
+    QCOMPARE( cursor.atLineStart(), false );
+    QCOMPARE( cursor.atLineEnd(), false );
+    QCOMPARE( cursor.coord(), expectedCoord );
+
+    // behind end, append disabled
+    cursor.setAppendPosEnabled( false );
+    indexSteps = layout.length() + 1;
+    expectedIndex = LastIndex;
+    expectedCoord = layout.coordOfIndex( expectedIndex );
+    cursor.gotoStart();
+
+    cursor.gotoNextByte( indexSteps );
+
+    QCOMPARE( cursor.index(), expectedIndex );
+    QCOMPARE( cursor.validIndex(), expectedIndex );
+    QCOMPARE( cursor.realIndex(), expectedIndex+1 );
+    QCOMPARE( cursor.isBehind(), true );
+    QCOMPARE( cursor.atStart(), false );
+    QCOMPARE( cursor.atEnd(), true );
+    QCOMPARE( cursor.atAppendPos(), false );
+    QCOMPARE( cursor.atLineStart(), false );
+    QCOMPARE( cursor.atLineEnd(), true );
+    QCOMPARE( cursor.coord(), expectedCoord );
+
+    // behind end, append disabled
+    cursor.setAppendPosEnabled( true );
+    indexSteps = layout.length() + 1;
+    expectedIndex = LastIndex + 1;
+    expectedCoord = layout.coordOfIndex( expectedIndex );
+    cursor.gotoStart();
+
+    cursor.gotoNextByte( indexSteps );
+
+    QCOMPARE( cursor.index(), expectedIndex );
+    QCOMPARE( cursor.validIndex(), -1 );
+    QCOMPARE( cursor.realIndex(), expectedIndex );
+    QCOMPARE( cursor.isBehind(), false );
+    QCOMPARE( cursor.atStart(), false );
+    QCOMPARE( cursor.atEnd(), true );
+    QCOMPARE( cursor.atAppendPos(), true );
+    QCOMPARE( cursor.atLineStart(), false );
+    QCOMPARE( cursor.atLineEnd(), false );
+    QCOMPARE( cursor.coord(), expectedCoord );
+
+
+    // one before end
+    // to end
+    indexSteps = 1;
+    expectedIndex = LastIndex;
+    expectedCoord = layout.coordOfIndex( expectedIndex );
+    cursor.gotoIndex( LastIndex-1 );
+
+    cursor.gotoNextByte( indexSteps );
+
+    QCOMPARE( cursor.index(), expectedIndex );
+    QCOMPARE( cursor.validIndex(), expectedIndex );
+    QCOMPARE( cursor.realIndex(), expectedIndex );
+    QCOMPARE( cursor.isBehind(), false );
+    QCOMPARE( cursor.atStart(), false );
+    QCOMPARE( cursor.atEnd(), false );
+    QCOMPARE( cursor.atAppendPos(), false );
+    QCOMPARE( cursor.atLineStart(), false );
+    QCOMPARE( cursor.atLineEnd(), true );
+    QCOMPARE( cursor.coord(), expectedCoord );
+
+    // behind end, append disabled
+    cursor.setAppendPosEnabled( false );
+    indexSteps = 2;
+    expectedIndex = LastIndex;
+    expectedCoord = layout.coordOfIndex( expectedIndex );
+    cursor.gotoIndex( LastIndex-1 );
+
+    cursor.gotoNextByte( indexSteps );
+
+    QCOMPARE( cursor.index(), expectedIndex );
+    QCOMPARE( cursor.validIndex(), expectedIndex );
+    QCOMPARE( cursor.realIndex(), expectedIndex+1 );
+    QCOMPARE( cursor.isBehind(), true );
+    QCOMPARE( cursor.atStart(), false );
+    QCOMPARE( cursor.atEnd(), true );
+    QCOMPARE( cursor.atAppendPos(), false );
+    QCOMPARE( cursor.atLineStart(), false );
+    QCOMPARE( cursor.atLineEnd(), true );
+    QCOMPARE( cursor.coord(), expectedCoord );
+
+    // behind end, append disabled
+    cursor.setAppendPosEnabled( true );
+    indexSteps = 2;
+    expectedIndex = LastIndex + 1;
+    expectedCoord = layout.coordOfIndex( expectedIndex );
+    cursor.gotoIndex( LastIndex-1 );
+
+    cursor.gotoNextByte( indexSteps );
+
+    QCOMPARE( cursor.index(), expectedIndex );
+    QCOMPARE( cursor.validIndex(), -1 );
+    QCOMPARE( cursor.realIndex(), expectedIndex );
+    QCOMPARE( cursor.isBehind(), false );
+    QCOMPARE( cursor.atStart(), false );
+    QCOMPARE( cursor.atEnd(), true );
+    QCOMPARE( cursor.atAppendPos(), true );
+    QCOMPARE( cursor.atLineStart(), false );
+    QCOMPARE( cursor.atLineEnd(), false );
+    QCOMPARE( cursor.coord(), expectedCoord );
+
+    // at end
+    // TODO: check for end == lineEnd
+    // append disabled -> noop
+    cursor.setAppendPosEnabled( false );
+    indexSteps = 1;
+    expectedIndex = LastIndex;
+    expectedCoord = layout.coordOfIndex( expectedIndex );
+    cursor.gotoEnd();
+
+    cursor.gotoNextByte( indexSteps );
+
+    QCOMPARE( cursor.index(), expectedIndex );
+    QCOMPARE( cursor.validIndex(), expectedIndex );
+    QCOMPARE( cursor.realIndex(), expectedIndex+1 );
+    QCOMPARE( cursor.isBehind(), true );
+    QCOMPARE( cursor.atStart(), false );
+    QCOMPARE( cursor.atEnd(), true );
+    QCOMPARE( cursor.atAppendPos(), false );
+    QCOMPARE( cursor.atLineStart(), false );
+    QCOMPARE( cursor.atLineEnd(), true );
+    QCOMPARE( cursor.coord(), expectedCoord );
+
+    // append enabled -> noop
+    cursor.setAppendPosEnabled( true );
+    indexSteps = 1;
+    expectedIndex = LastIndex + 1;
+    expectedCoord = layout.coordOfIndex( expectedIndex );
+    cursor.gotoEnd();
+
+    cursor.gotoNextByte( indexSteps );
+
+    QCOMPARE( cursor.index(), expectedIndex );
+    QCOMPARE( cursor.validIndex(), -1 );
+    QCOMPARE( cursor.realIndex(), expectedIndex );
+    QCOMPARE( cursor.isBehind(), false );
+    QCOMPARE( cursor.atStart(), false );
+    QCOMPARE( cursor.atEnd(), true );
+    QCOMPARE( cursor.atAppendPos(), true );
+    QCOMPARE( cursor.atLineStart(), false );
+    QCOMPARE( cursor.atLineEnd(), false );
+    QCOMPARE( cursor.coord(), expectedCoord );
+}
+
+void ByteArrayTableCursorTest::testGotoPreviousByteN()
+{
+    const ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, Length );
+
+    ByteArrayTableCursor cursor( &layout );
+
+    // at start
+    int indexSteps = 1;
+    int expectedIndex = FirstIndex;
+    Coord expectedCoord = layout.coordOfIndex( expectedIndex );
+    cursor.gotoStart();
+
+    cursor.gotoPreviousByte( indexSteps );
+
+    QCOMPARE( cursor.index(), expectedIndex );
+    QCOMPARE( cursor.validIndex(), expectedIndex );
+    QCOMPARE( cursor.realIndex(), expectedIndex );
+    QCOMPARE( cursor.isBehind(), false );
+    QCOMPARE( cursor.atStart(), true );
+    QCOMPARE( cursor.atEnd(), false );
+    QCOMPARE( cursor.atAppendPos(), false );
+    QCOMPARE( cursor.atLineStart(), true );
+    QCOMPARE( cursor.atLineEnd(), false );
+    QCOMPARE( cursor.coord(), expectedCoord );
+
+    // one behind start
+    // to start
+    indexSteps = 1;
+    expectedIndex = FirstIndex;
+    expectedCoord = layout.coordOfIndex( expectedIndex );
+    cursor.gotoIndex( FirstIndex+1 );
+
+    cursor.gotoPreviousByte( indexSteps );
+
+    QCOMPARE( cursor.index(), expectedIndex );
+    QCOMPARE( cursor.validIndex(), expectedIndex );
+    QCOMPARE( cursor.realIndex(), expectedIndex );
+    QCOMPARE( cursor.isBehind(), false );
+    QCOMPARE( cursor.atStart(), true );
+    QCOMPARE( cursor.atEnd(), false );
+    QCOMPARE( cursor.atAppendPos(), false );
+    QCOMPARE( cursor.atLineStart(), true );
+    QCOMPARE( cursor.atLineEnd(), false );
+    QCOMPARE( cursor.coord(), expectedCoord );
+
+    // to one before start
+    indexSteps = 2;
+    expectedIndex = FirstIndex;
+    expectedCoord = layout.coordOfIndex( expectedIndex );
+    cursor.gotoIndex( FirstIndex+1 );
+
+    cursor.gotoPreviousByte( indexSteps );
+
+    QCOMPARE( cursor.index(), expectedIndex );
+    QCOMPARE( cursor.validIndex(), expectedIndex );
+    QCOMPARE( cursor.realIndex(), expectedIndex );
+    QCOMPARE( cursor.isBehind(), false );
+    QCOMPARE( cursor.atStart(), true );
+    QCOMPARE( cursor.atEnd(), false );
+    QCOMPARE( cursor.atAppendPos(), false );
+    QCOMPARE( cursor.atLineStart(), true );
+    QCOMPARE( cursor.atLineEnd(), false );
+    QCOMPARE( cursor.coord(), expectedCoord );
+
+    // at end
+    // append disabled -> noop
+    cursor.setAppendPosEnabled( false );
+    // to start
+    indexSteps = layout.length();
+    expectedIndex = FirstIndex;
+    expectedCoord = layout.coordOfIndex( expectedIndex );
+    cursor.gotoEnd();
+
+    cursor.gotoPreviousByte( indexSteps );
+
+    QCOMPARE( cursor.index(), expectedIndex );
+    QCOMPARE( cursor.validIndex(), expectedIndex );
+    QCOMPARE( cursor.realIndex(), expectedIndex );
+    QCOMPARE( cursor.isBehind(), false );
+    QCOMPARE( cursor.atStart(), true );
+    QCOMPARE( cursor.atEnd(), false );
+    QCOMPARE( cursor.atAppendPos(), false );
+    QCOMPARE( cursor.atLineStart(), true );
+    QCOMPARE( cursor.atLineEnd(), false );
+    QCOMPARE( cursor.coord(), expectedCoord );
+
+    // to one before start
+    indexSteps = layout.length() + 1;
+    expectedIndex = FirstIndex;
+    expectedCoord = layout.coordOfIndex( expectedIndex );
+    cursor.gotoEnd();
+
+    cursor.gotoPreviousByte( indexSteps );
+
+    QCOMPARE( cursor.index(), expectedIndex );
+    QCOMPARE( cursor.validIndex(), expectedIndex );
+    QCOMPARE( cursor.realIndex(), expectedIndex );
+    QCOMPARE( cursor.isBehind(), false );
+    QCOMPARE( cursor.atStart(), true );
+    QCOMPARE( cursor.atEnd(), false );
+    QCOMPARE( cursor.atAppendPos(), false );
+    QCOMPARE( cursor.atLineStart(), true );
+    QCOMPARE( cursor.atLineEnd(), false );
+    QCOMPARE( cursor.coord(), expectedCoord );
+
+    // append disabled -> noop
+    cursor.setAppendPosEnabled( true );
+    // to start
+    indexSteps = layout.length();
+    expectedIndex = FirstIndex;
+    expectedCoord = layout.coordOfIndex( expectedIndex );
+    cursor.gotoEnd();
+
+    cursor.gotoPreviousByte( indexSteps );
+
+    QCOMPARE( cursor.index(), expectedIndex );
+    QCOMPARE( cursor.validIndex(), expectedIndex );
+    QCOMPARE( cursor.realIndex(), expectedIndex );
+    QCOMPARE( cursor.isBehind(), false );
+    QCOMPARE( cursor.atStart(), true );
+    QCOMPARE( cursor.atEnd(), false );
+    QCOMPARE( cursor.atAppendPos(), false );
+    QCOMPARE( cursor.atLineStart(), true );
+    QCOMPARE( cursor.atLineEnd(), false );
+    QCOMPARE( cursor.coord(), expectedCoord );
+
+    // to one before start
+    indexSteps = layout.length() + 1;
+    expectedIndex = FirstIndex;
+    expectedCoord = layout.coordOfIndex( expectedIndex );
+    cursor.gotoEnd();
+
+    cursor.gotoPreviousByte( indexSteps );
+
+    QCOMPARE( cursor.index(), expectedIndex );
+    QCOMPARE( cursor.validIndex(), expectedIndex );
+    QCOMPARE( cursor.realIndex(), expectedIndex );
+    QCOMPARE( cursor.isBehind(), false );
+    QCOMPARE( cursor.atStart(), true );
+    QCOMPARE( cursor.atEnd(), false );
+    QCOMPARE( cursor.atAppendPos(), false );
+    QCOMPARE( cursor.atLineStart(), true );
+    QCOMPARE( cursor.atLineEnd(), false );
+    QCOMPARE( cursor.coord(), expectedCoord );
+}
+
 }
 
 QTEST_MAIN( KHEUI::ByteArrayTableCursorTest )

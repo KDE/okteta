@@ -43,6 +43,8 @@ class ByteArrayTableCursorTest : public QObject
     void testGotoEnd();
     void testGotoNextByte();
     void testGotoPreviousByte();
+    void testGotoNextByteN();
+    void testGotoPreviousByteN();
 };
 
 }
