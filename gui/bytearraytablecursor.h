@@ -116,7 +116,6 @@ class ByteArrayTableCursor
     void gotoNextByte();
     void gotoPreviousByte( int indexSteps );
     void gotoNextByte( int indexSteps );
-    void gotoNextByteInLine();
     void gotoUp();
     void gotoDown();
     void gotoLineStart();

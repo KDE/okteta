@@ -128,25 +128,6 @@ void ByteArrayTableCursor::gotoNextByte( int indexSteps ) // TODO: think about c
 }
 
 
-void ByteArrayTableCursor::gotoNextByteInLine()
-{
-    const int lastIndex = mLayout->length()-1;
-
-    if( mIndex < lastIndex )
-    {
-        if( mCoord.pos() < mLayout->noOfBytesPerLine()-1 )
-        {
-            ++mIndex;
-            mCoord.goRight();
-        }
-        else
-            mBehind = true;
-    }
-    else if( mIndex == lastIndex )
-        stepToEnd();
-}
-
-
 void ByteArrayTableCursor::gotoUp()
 {
     // can we even go up?
