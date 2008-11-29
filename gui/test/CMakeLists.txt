@@ -4,6 +4,7 @@ set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/.. )
 # make sure to not use KDE_EXPORT or KDE_IMPORT because we link statically
 # against a small part of the libs
 add_definitions( -DOKTETACORE_EXPORT= )
+add_definitions( -DOKTETAGUI_EXPORT= )
 
 include_directories(
   ${SUTDIR}
@@ -68,6 +69,25 @@ target_link_libraries( bytearraytablelayouttest  ${KDE4_KDECORE_LIBS} ${QT_QTTES
 # FIXME:
 # this is a rather stupid workaround - you should link to liboktetagui instead
 set_target_properties( bytearraytablelayouttest PROPERTIES COMPILE_FLAGS "-DMAKE_OKTETAGUI_LIB" )
+
+
+########### bytearraytablecursortest ###############
+
+set( bytearraytablecursortest_SRCS
+  ${SUTDIR}/bytearraytablecursor.cpp
+  ${SUTDIR}/bytearraytablelayout.cpp
+  ${SUTDIR}/../core/section.cpp
+  bytearraytablecursortest.cpp
+)
+
+kde4_add_unit_test( bytearraytablecursortest
+  TESTNAME libokteta-gui-bytearraytablecursortest
+  ${bytearraytablecursortest_SRCS}
+)
+target_link_libraries( bytearraytablecursortest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+# FIXME:
+# this is a rather stupid workaround - you should link to liboktetagui instead
+set_target_properties( bytearraytablecursortest PROPERTIES COMPILE_FLAGS "-DMAKE_OKTETAGUI_LIB" )
 
 
 ########### mvctest ###############
