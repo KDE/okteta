@@ -317,7 +317,7 @@ void ByteArrayTableRanges::setFirstWordSelection( const KHE::Section &Section )
  }
 
 
-void ByteArrayTableRanges::adaptToChanges( const KHE::ArrayChangeMetricsList& changeList )
+void ByteArrayTableRanges::adaptToChanges( const KHE::ArrayChangeMetricsList& changeList, int oldLength )
 {
     foreach( const KHE::ArrayChangeMetrics& change, changeList )
     {
@@ -326,11 +326,12 @@ void ByteArrayTableRanges::adaptToChanges( const KHE::ArrayChangeMetricsList& ch
         {
         case KHE::ArrayChangeMetrics::Replacement:
         {
+            oldLength += change.lengthChange();
             const int offset = change.offset();
             const int diff = change.lengthChange();
             const int behindLast = (diff == 0) ? offset + change.insertLength() :
-                                   (diff < 0) ?  Layout->length() - diff :
-                                                 Layout->length();
+                                   (diff < 0) ?  oldLength - diff :
+                                                 oldLength;
             addChangedRange( offset, behindLast-1 );
 
             if( mSelection.isValid() )

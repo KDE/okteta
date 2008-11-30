@@ -940,7 +940,7 @@ void AbstractByteArrayViewPrivate::onContentsChanged( const KHE::ArrayChangeMetr
     else
         mTableCursor->adaptToChanges( changeList, oldLength );
 
-    mTableRanges->adaptToChanges( changeList );
+    mTableRanges->adaptToChanges( changeList, oldLength );
     // kDebug() << "Cursor:"<<mDataCursor->index()<<", selection:"<<mTableRanges->selectionStart()<<"-"<<mTableRanges->selectionEnd()
     //          <<", BytesPerLine: "<<mTableLayout->noOfBytesPerLine()<<endl;
 

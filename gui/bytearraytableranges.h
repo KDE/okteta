@@ -73,7 +73,7 @@ class ByteArrayTableRanges
     void addChangedRange( const KHE::Section &S );
     void addChangedRange( int SI, int EI );
     void addChangedRange( const CoordRange &NewRange );
-    void adaptToChanges( const KHE::ArrayChangeMetricsList& changeList );
+    void adaptToChanges( const KHE::ArrayChangeMetricsList& changeList, int oldLength );
     void resetChangedRanges();
 
     void setModified( bool M = true );
