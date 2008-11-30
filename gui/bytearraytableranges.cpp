@@ -247,6 +247,16 @@ bool ByteArrayTableRanges::overlapsChanges( const CoordRange &Range, CoordRange 
   return false;
 }
 
+void ByteArrayTableRanges::addChangedOffsetLines( const KHE::Section& changedLines )
+{
+    if( mChangedOffsetLines.isEmpty() )
+    {
+        mChangedOffsetLines = changedLines;
+        Modified = true;
+    }
+    else
+        mChangedOffsetLines.extendTo( changedLines );
+}
 
 void ByteArrayTableRanges::addChangedRange( int SI, int EI )
 {
@@ -283,6 +293,7 @@ void ByteArrayTableRanges::removeMarking()
 
 void ByteArrayTableRanges::resetChangedRanges()
 {
+    mChangedOffsetLines.unset();
   ChangedRanges.clear();
   Modified = false;
 }

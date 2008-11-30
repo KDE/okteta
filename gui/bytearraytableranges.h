@@ -67,6 +67,9 @@ class ByteArrayTableRanges
     /** removes all but the standard selection and returns true if something changed */
     void removeFurtherSelections();
 
+    /** assumes all added lines to overlap */
+    void addChangedOffsetLines( const KHE::Section& changesLines );
+
     void addChangedRange( const KHE::Section &S );
     void addChangedRange( int SI, int EI );
     void addChangedRange( const CoordRange &NewRange );
@@ -85,6 +88,7 @@ class ByteArrayTableRanges
     KHE::Section firstWordSelection() const;
     int selectionLength() const;
     bool isModified() const;
+    KHE::Section changedOffsetLines() const;
 
   public: // calculated logic access
     bool hasSelection() const;
@@ -113,6 +117,9 @@ class ByteArrayTableRanges
     /** memories first selected word on wordwise selection */
     KHE::Section FirstWordSelection;
 
+    /** lines that were added or removed */
+    KHE::Section mChangedOffsetLines;
+
     CoordRangeList ChangedRanges;
 
     ByteArrayTableLayout *Layout;
@@ -127,6 +134,7 @@ inline KHE::Section ByteArrayTableRanges::selection()  const { return mSelection
 inline KHE::Section ByteArrayTableRanges::firstWordSelection()  const { return FirstWordSelection; }
 inline int ByteArrayTableRanges::selectionLength() const { return mSelection.section().width(); }
 inline bool ByteArrayTableRanges::isModified()     const { return Modified; }
+inline KHE::Section ByteArrayTableRanges::changedOffsetLines() const { return mChangedOffsetLines; }
 
 inline bool ByteArrayTableRanges::hasSelection()             const { return mSelection.isValid(); }
 inline bool ByteArrayTableRanges::selectionStarted()         const { return mSelection.started(); }
