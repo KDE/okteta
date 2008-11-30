@@ -928,7 +928,10 @@ void AbstractByteArrayViewPrivate::onContentsChanged( const KHE::ArrayChangeMetr
     if( oldNoOfLines != newNoOfLines )
     {
         q->setNoOfLines( newNoOfLines );
-//         TODO: still needed? q->updateColumn( *mOffsetColumn );
+        const KHE::Section changedLines = (oldNoOfLines < newNoOfLines) ?
+            KHE::Section( oldNoOfLines, newNoOfLines-1 ) :
+            KHE::Section( newNoOfLines, oldNoOfLines-1 );
+        mTableRanges->addChangedOffsetLines( changedLines );
     }
 
     // adapt cursor(s)

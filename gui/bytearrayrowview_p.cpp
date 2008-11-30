@@ -757,7 +757,13 @@ void ByteArrayRowViewPrivate::updateChanged()
 {
     Q_Q( ByteArrayRowView );
 
-    const KPixelXs Xs = KPixelXs::fromWidth( q->xOffset(), q->visibleWidth() );
+    const int xOffset = q->xOffset();
+    const KPixelXs Xs = KPixelXs::fromWidth( xOffset, q->visibleWidth() );
+
+    // do updates in offset column 
+    const KHE::Section changedOffsetLines = mTableRanges->changedOffsetLines();
+    if( !changedOffsetLines.isEmpty() )
+        q->updateColumn( *mOffsetColumn, changedOffsetLines );
 
     // collect affected buffer columns
     QList<ByteArrayRowColumnRenderer*> dirtyColumns;
@@ -771,19 +777,16 @@ void ByteArrayRowViewPrivate::updateChanged()
     // any colums to paint?
     if( dirtyColumns.size() > 0 )
     {
-        KPixelYs Ys = KPixelYs::fromWidth( q->yOffset(), q->visibleHeight() );
-
         // calculate affected lines/indizes
         const KHE::Section fullPositions( 0, mTableLayout->noOfBytesPerLine()-1 );
-        CoordRange visibleRange( fullPositions, q->visibleLines(Ys) );
+        CoordRange visibleRange( fullPositions, q->visibleLines() );
 
         const int lineHeight = q->lineHeight();
-        const int xOffset = q->xOffset();
         CoordRange changedRange;
         // as there might be multiple selections on this line redo until no more is changed
         while( hasChanged(visibleRange,&changedRange) )
         {
-            KPixelY cy = changedRange.start().line() * lineHeight - q->yOffset();
+            KPixelY cy = q->yOffsetOfLine( changedRange.start().line() );
 
             QListIterator<ByteArrayRowColumnRenderer*> columnIt( dirtyColumns );
             // only one line?
