@@ -328,8 +328,10 @@ void ByteArrayTableRanges::adaptToChanges( const KHE::ArrayChangeMetricsList& ch
         {
             const int offset = change.offset();
             const int diff = change.lengthChange();
-            const int last = (diff == 0) ? offset+change.insertLength() : Layout->length()+qAbs(diff);
-            addChangedRange( offset, last );
+            const int behindLast = (diff == 0) ? offset + change.insertLength() :
+                                   (diff < 0) ?  Layout->length() - diff :
+                                                 Layout->length();
+            addChangedRange( offset, behindLast-1 );
 
             if( mSelection.isValid() )
                 mSelection.adaptToReplacement( offset, change.removeLength(), change.insertLength() );
