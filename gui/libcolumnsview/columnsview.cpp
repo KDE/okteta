@@ -120,6 +120,10 @@ QPoint ColumnsView::viewportToColumns( const QPoint &P ) const
 
 KPixelX ColumnsView::xOffset() const { return horizontalScrollBar()->value(); }
 KPixelY ColumnsView::yOffset() const { return verticalScrollBar()->value(); }
+KPixelY ColumnsView::yOffsetOfLine( int lineIndex ) const
+{
+    return lineIndex * d->LineHeight - yOffset();
+}
 
 
 void ColumnsView::setColumnsPos( KPixelX x, KPixelY y )
@@ -188,6 +192,23 @@ void ColumnsView::updateColumn( ColumnRenderer& columnRenderer )
 {
     if( columnRenderer.isVisible() )
         viewport()->update( columnRenderer.x()-xOffset(), 0, columnRenderer.width(), visibleHeight() );
+}
+
+void ColumnsView::updateColumn( ColumnRenderer& columnRenderer, const KHE::Section& lines )
+{
+    if( columnRenderer.isVisible() ) // TODO: catch hidden range && columnRenderer.overlaps(Xs) )
+    {
+        KHE::Section linesToUpdate = visibleLines();
+        linesToUpdate.restrictTo( lines );
+        if( linesToUpdate.isValid() )
+        {
+            const KPixelX x = columnRenderer.x() - xOffset();
+            const KPixelY y = yOffsetOfLine( linesToUpdate.start() );
+            const int width = columnRenderer.width();
+            const int height = d->LineHeight * linesToUpdate.width();
+            viewport()->update( x, y, width, height );
+        }
+    }
 }
 
 

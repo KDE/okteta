@@ -95,6 +95,9 @@ class OKTETAGUI_EXPORT ColumnsView : public QAbstractScrollArea
     /** @return y offset of the current view */
     KPixelY yOffset() const;
 
+    /** @return y offset of the current view */
+    KPixelY yOffsetOfLine( int lineIndex ) const;
+
     /** translates the point to coordinates in the columns */
     QPoint viewportToColumns( const QPoint &point ) const;
 
@@ -137,6 +140,8 @@ class OKTETAGUI_EXPORT ColumnsView : public QAbstractScrollArea
     void updateScrollBars();
     /** calls updateContent for the Column */
     void updateColumn( ColumnRenderer& columnRenderer );
+    /** calls updateContent for the Column for the given lines, if needed */
+    void updateColumn( ColumnRenderer& columnRenderer, const KHE::Section& lines );
 
   private:
     ColumnsViewPrivate * const d;
