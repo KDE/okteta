@@ -95,12 +95,12 @@ Q_UNUSED( byteArrayView )
                << mSettings.variableName << "[" << sizeOfArray << "] = {" << endl;
 
     int elementAddedOnLine = 0;
-    for( int i=0; i<size; i+=dataTypeSize )
+    for( int i=section.start(); i<=section.end(); i+=dataTypeSize )
     {
         static char buffer[12];
-        printFormatted( buffer, byteArrayModel, i, size-i );
+        printFormatted( buffer, byteArrayModel, i, section.end()-i+1 );
         textStream << buffer;
-        if( i + dataTypeSize < size )
+        if( i + dataTypeSize <=section.end() )
             textStream << ",";
 
         if( ++elementAddedOnLine >= mSettings.elementsPerLine )
