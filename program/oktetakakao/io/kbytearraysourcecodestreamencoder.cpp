@@ -92,13 +92,13 @@ Q_UNUSED( byteArrayView )
                << '{' << endl;
 
     int elementAddedOnLine = 0;
-    for( int i=0; i<size; i+=dataTypeSize )
+    for( int i=section.start(); i<=section.end(); i+=dataTypeSize )
     {
         if( elementAddedOnLine == 0 )
             textStream << "   "; // just 3, one space before every datum
-        textStream << ' ' << printFormatted( byteArrayModel, i, size-i );
-        if( i + dataTypeSize < size )
-            textStream << ",";
+        textStream << ' ' << printFormatted( byteArrayModel, i, section.end()-i+1 );
+        if( i + dataTypeSize <= section.end() )
+            textStream << ',';
 
         if( ++elementAddedOnLine >= mSettings.elementsPerLine )
         {
