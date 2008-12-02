@@ -73,12 +73,7 @@ void KDocumentSyncManager::load()
     KUrl url = KFileDialog::getOpenUrl( QString()/*mWorkingUrl.url()*/, AllFileNamesFilter, mWidget );
 
     if( !url.isEmpty() )
-    {
         load( url );
-        // store path
-//         mWorkingUrl = url.upUrl();
-        emit urlUsed( url );
-    }
 }
 
 void KDocumentSyncManager::load( const KUrl &url )
@@ -88,6 +83,10 @@ void KDocumentSyncManager::load( const KUrl &url )
     connect( loadJob, SIGNAL(documentLoaded( KAbstractDocument * )), SLOT(onDocumentLoaded( KAbstractDocument * )) );
 
     JobManager::executeJob( loadJob, mWidget );
+
+    // store path
+//     mWorkingUrl = url.upUrl();
+    emit urlUsed( url );
 }
 
 void KDocumentSyncManager::onDocumentLoaded( KAbstractDocument *document )
