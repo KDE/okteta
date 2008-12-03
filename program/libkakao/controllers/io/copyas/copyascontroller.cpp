@@ -40,51 +40,49 @@
 #include <KXMLGUIFactory>
 #include <KActionCollection>
 #include <KLocale>
+#include <KSelectAction>
 // Qt
 #include <QtCore/QBuffer>
 #include <QtCore/QMimeData>
-#include <QtGui/QActionGroup>
 #include <QtGui/QClipboard>
 #include <QtGui/QApplication>
 
 
-static const char CopyAsActionListId[] = "copy_as_list";
-
 CopyAsController::CopyAsController( KViewManager* viewManager, KDocumentManager* documentManager, KXMLGUIClient* guiClient )
  : mViewManager( viewManager ), mDocumentManager( documentManager ), mGuiClient( guiClient ), mModel( 0 )
 {
-    mCopyAsActionGroup = new QActionGroup( this ); // TODO: do we use this only for the signal mapping?
-    connect( mCopyAsActionGroup, SIGNAL(triggered( QAction* )), SLOT(onActionTriggered( QAction* )) );
+    KActionCollection* actionCollection = guiClient->actionCollection();
+
+    mCopyAsSelectAction = actionCollection->add<KSelectAction>( "copy_as" );
+    mCopyAsSelectAction->setText( i18nc("@title:menu","Copy as") );
+    mCopyAsSelectAction->setIcon( KIcon("edit-copy") );
+    mCopyAsSelectAction->setToolBarMode( KSelectAction::MenuMode );
+    connect( mCopyAsSelectAction, SIGNAL(triggered( QAction* )), SLOT(onActionTriggered( QAction* )) );
 
     setTargetModel( 0 );
 }
 
 void CopyAsController::setTargetModel( AbstractModel* model )
 {
-    if( mModel ) mModel->disconnect( mCopyAsActionGroup );
+    if( mModel ) mModel->disconnect( this );
 
     mModel = model ? model->findBaseModelWithInterface<KDE::If::DataSelectable*>() : 0;
     mSelectionControl = mModel ? qobject_cast<KDE::If::DataSelectable*>( mModel ) : 0;
 
     if( mSelectionControl )
     {
-        connect( mModel, SIGNAL(hasSelectedDataChanged( bool )),
-                 mCopyAsActionGroup, SLOT(setEnabled( bool )) );
+        // TODO: only fill the list on menu call...
+        connect( mModel, SIGNAL(hasSelectedDataChanged( bool )), SLOT(updateActions()) );
     }
 
     updateActions();
-
-    const bool hasSelectedData = ( mSelectionControl != 0 ) ? mSelectionControl->hasSelectedData() : false;
-    mCopyAsActionGroup->setEnabled( hasSelectedData );
 }
 
 Q_DECLARE_METATYPE(AbstractModelStreamEncoder*)
 
 void CopyAsController::updateActions()
 {
-    mGuiClient->unplugActionList( CopyAsActionListId );
-
-    qDeleteAll( mCopyAsActionGroup->actions() );
+    mCopyAsSelectAction->removeAllActions();
 
     const AbstractModelSelection* selection = ( mSelectionControl != 0 ) ? mSelectionControl->modelSelection() : 0;
 
@@ -98,20 +96,21 @@ void CopyAsController::updateActions()
         {
             AbstractModelStreamEncoder *encoder = encoderList.at( c );
             const QString title = encoder->remoteTypeName();
-            QAction *action = new QAction( title, mCopyAsActionGroup );
+            QAction* action = new QAction( title, mCopyAsSelectAction );
 
             action->setData( QVariant::fromValue(encoder) );
-            mCopyAsActionGroup->addAction( action );
+            mCopyAsSelectAction->addAction( action );
         }
     }
     else
     {
-        QAction *noneAction = new QAction( i18nc("@item There are no encoders.","Not available."), mCopyAsActionGroup );
-        mCopyAsActionGroup->addAction( noneAction );
+        QAction* noneAction = new QAction( i18nc("@item There are no encoders.","Not available."), mCopyAsSelectAction );
+        noneAction->setEnabled( false );
+        mCopyAsSelectAction->addAction( noneAction );
     }
-    mCopyAsActionGroup->setEnabled( hasEncoders );
 
-    mGuiClient->plugActionList( CopyAsActionListId, mCopyAsActionGroup->actions() );
+    // TODO: need a call AbstractModelSelection::isEmpty
+    mCopyAsSelectAction->setEnabled( mSelectionControl && mSelectionControl->hasSelectedData() );
 }
 
 void CopyAsController::onActionTriggered( QAction *action )

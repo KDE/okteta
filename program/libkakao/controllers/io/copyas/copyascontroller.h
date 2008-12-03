@@ -33,8 +33,8 @@ namespace KDE { namespace If {
 class DataSelectable;
 } }
 class KXMLGUIClient;
+class KSelectAction;
 class QAction;
-class QActionGroup;
 
 
 class CopyAsController : public AbstractXmlGuiController
@@ -47,10 +47,8 @@ class CopyAsController : public AbstractXmlGuiController
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
-  private:
-    void updateActions();
-
   private Q_SLOTS:
+    void updateActions();
     void onActionTriggered( QAction *action );
 
   protected:
@@ -61,7 +59,7 @@ class CopyAsController : public AbstractXmlGuiController
     AbstractModel* mModel;
     KDE::If::DataSelectable *mSelectionControl;
 
-    QActionGroup *mCopyAsActionGroup;
+    KSelectAction* mCopyAsSelectAction;
 };
 
 #endif

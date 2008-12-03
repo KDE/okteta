@@ -107,8 +107,6 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram *program )
 
     // all controllers which use plugActionList have to do so after(!) setupGUI() or their entries will be removed
     // TODO: why is this so?
-    addXmlGuiController( new CopyAsController(mProgram->viewManager(),mProgram->documentManager(),this) );
-    addXmlGuiController( new ExportController(mProgram->viewManager(),mProgram->documentManager(),this) );
     addXmlGuiController( new ToolListMenuController(this,this) );
     addXmlGuiController( new ViewListMenuController(mProgram->viewManager(),mGroupedViews,this) );
 }
@@ -119,6 +117,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new LoaderController(mProgram->documentManager()->syncManager(),this) );
     addXmlGuiController( new SetRemoteController(mProgram->documentManager()->syncManager(),this) );
     addXmlGuiController( new SynchronizeController(this) );
+    addXmlGuiController( new ExportController(mProgram->viewManager(),mProgram->documentManager(),this) );
     addXmlGuiController( new CloseController(mProgram->documentManager(),this) );
     addXmlGuiController( new VersionController(this) );
     addXmlGuiController( new ReadOnlyController(this) );
@@ -128,6 +127,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new ZoomController(this) );
     addXmlGuiController( new SelectController(this) );
     addXmlGuiController( new ClipboardController(this) );
+    addXmlGuiController( new CopyAsController(mProgram->viewManager(),mProgram->documentManager(),this) );
 
 //     addXmlGuiController( new OverwriteOnlyController(this) );
     addXmlGuiController( new OverwriteModeController(this) );

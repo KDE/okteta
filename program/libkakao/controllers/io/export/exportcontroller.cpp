@@ -40,30 +40,33 @@
 #include <KXMLGUIFactory>
 #include <KActionCollection>
 #include <KLocale>
-// Qt
-#include <QtGui/QActionGroup>
+#include <KSelectAction>
 
-
-static const char ExportActionListId[] = "export_list";
 
 ExportController::ExportController( KViewManager* viewManager, KDocumentManager* documentManager, KXMLGUIClient* guiClient )
  : mViewManager( viewManager ), mDocumentManager( documentManager ), mGuiClient( guiClient ), mModel( 0 )
 {
-    mExportActionGroup = new QActionGroup( this ); // TODO: do we use this only for the signal mapping?
-    connect( mExportActionGroup, SIGNAL(triggered( QAction* )), SLOT(onActionTriggered( QAction* )) );
+    KActionCollection* actionCollection = guiClient->actionCollection();
+
+    mExportSelectAction = actionCollection->add<KSelectAction>( "export" );
+    mExportSelectAction->setText( i18nc("@title:menu","Export") );
+    mExportSelectAction->setIcon( KIcon("document-export") );
+    mExportSelectAction->setToolBarMode( KSelectAction::MenuMode );
+    connect( mExportSelectAction, SIGNAL(triggered( QAction* )), SLOT(onActionTriggered( QAction* )) );
 
     setTargetModel( 0 );
 }
 
 void ExportController::setTargetModel( AbstractModel* model )
 {
-    if( mModel ) mModel->disconnect( mExportActionGroup );
+    if( mModel ) mModel->disconnect( this );
 
     mModel = model ? model->findBaseModelWithInterface<KDE::If::DataSelectable*>() : 0;
     mSelectionControl = mModel ? qobject_cast<KDE::If::DataSelectable *>( mModel ) : 0;
 
     if( mSelectionControl )
     {
+        // TODO: only fill the list on menu call...
         connect( mModel, SIGNAL(hasSelectedDataChanged( bool )), SLOT(updateActions()) );
     }
 
@@ -74,9 +77,7 @@ Q_DECLARE_METATYPE( AbstractModelExporter* )
 
 void ExportController::updateActions()
 {
-    mGuiClient->unplugActionList( ExportActionListId );
-
-    qDeleteAll( mExportActionGroup->actions() );
+    mExportSelectAction->removeAllActions();
 
     const AbstractModelSelection* selection = ( mSelectionControl != 0 ) ? mSelectionControl->modelSelection() : 0;
 
@@ -90,20 +91,20 @@ void ExportController::updateActions()
         {
             AbstractModelExporter *exporter = exporterList.at( c );
             const QString title = exporter->remoteTypeName();
-            QAction *action = new QAction( title, mExportActionGroup );
+            QAction* action = new QAction( title, mExportSelectAction );
 
             action->setData( QVariant::fromValue(exporter) );
-            mExportActionGroup->addAction( action );
+            mExportSelectAction->addAction( action );
         }
     }
     else
     {
-        QAction *noneAction = new QAction( i18nc("@item There are no exporters.","Not available."), mExportActionGroup );
-        mExportActionGroup->addAction( noneAction );
+        QAction* noneAction = new QAction( i18nc("@item There are no exporters.","Not available."), mExportSelectAction );
+        noneAction->setEnabled( false );
+        mExportSelectAction->addAction( noneAction );
     }
-    mExportActionGroup->setEnabled( hasExporters );
 
-    mGuiClient->plugActionList( ExportActionListId, mExportActionGroup->actions() );
+    mExportSelectAction->setEnabled( mModel != 0 );
 }
 
 void ExportController::onActionTriggered( QAction *action )

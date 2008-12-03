@@ -33,8 +33,8 @@ namespace KDE { namespace If {
 class DataSelectable;
 } }
 class KXMLGUIClient;
+class KSelectAction;
 class QAction;
-class QActionGroup;
 
 
 class ExportController : public AbstractXmlGuiController
@@ -59,7 +59,7 @@ class ExportController : public AbstractXmlGuiController
     AbstractModel* mModel;
     KDE::If::DataSelectable *mSelectionControl;
 
-    QActionGroup *mExportActionGroup;
+    KSelectAction* mExportSelectAction;
 };
 
 #endif
