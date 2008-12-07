@@ -137,4 +137,7 @@ void FilterTool::filter( int filterId ) const
     }
 }
 
-FilterTool::~FilterTool() {}
+FilterTool::~FilterTool()
+{
+    qDeleteAll( mFilterList );
+}
