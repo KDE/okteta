@@ -59,7 +59,7 @@ class ShellWindow : public KXmlGuiWindow, public KDE::If::WidgetsDockable
     void addTool( AbstractToolView* toolView );
 
   public: // KDE::If::WidgetsDockable API
-    virtual QList<QDockWidget*> dockWidgets() const;
+    virtual QList<ToolViewDockWidget*> dockWidgets() const;
 
   protected: // KMainWindow API
     virtual bool queryClose();
@@ -68,6 +68,7 @@ class ShellWindow : public KXmlGuiWindow, public KDE::If::WidgetsDockable
     void onTitleChanged( const QString &newTitle );
     void onModifiedChanged( KAbstractDocument::SynchronizationStates newStates );
     void onViewFocusChanged( KAbstractView *view );
+    void onToolVisibilityChanged( bool isVisible );
     void onCloseRequest( KAbstractView* view );
     void onDragMoveEvent( const QDragMoveEvent* event, bool& accept );
     void onDropEvent( QDropEvent* event );
@@ -82,8 +83,7 @@ class ShellWindow : public KXmlGuiWindow, public KDE::If::WidgetsDockable
     KViewManager *mViewManager;
     QList<AbstractXmlGuiController*> mControllers;
 
-    QList<QDockWidget*> mDockWidgets;
-    QList<AbstractToolView*> mToolViews;
+    QList<ToolViewDockWidget*> mDockWidgets;
     QList<AbstractTool*> mTools;
 };
 

@@ -24,11 +24,11 @@
 
 // lib
 #include <iwidgetsdockable.h>
+#include <toolviewdockwidget.h>
 // KDE
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
 // Qt
-#include <QtGui/QDockWidget>
 #include <QtGui/QAction>
 
 
@@ -54,9 +54,9 @@ void ToolListMenuController::updateActions()
     qDeleteAll( mToolActionList );
     mToolActionList.clear();
 
-    const QList<QDockWidget*> dockWidgets = mWidgetsDockable->dockWidgets();
+    const QList<ToolViewDockWidget*> dockWidgets = mWidgetsDockable->dockWidgets();
 
-    foreach( const QDockWidget* dockWidget, dockWidgets )
+    foreach( const ToolViewDockWidget* dockWidget, dockWidgets )
     {
         QAction *action = dockWidget->toggleViewAction();
         action->setText( dockWidget->windowTitle() );

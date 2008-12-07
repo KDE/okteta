@@ -27,7 +27,7 @@
 #include <QtCore/QtPlugin>
 #include <QtCore/QList>
 
-class QDockWidget;
+class ToolViewDockWidget;
 
 namespace KDE
 {
@@ -43,7 +43,7 @@ class WidgetsDockable
 //     virtual void setViewFocus( KAbstractView *view ) = 0;
 
   public: // get
-    virtual QList<QDockWidget*> dockWidgets() const = 0;
+    virtual QList<ToolViewDockWidget*> dockWidgets() const = 0;
 
   public: // signal
 //     virtual void viewFocusChanged( KAbstractView *view ) = 0;

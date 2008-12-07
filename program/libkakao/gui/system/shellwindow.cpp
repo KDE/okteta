@@ -29,6 +29,7 @@
 #include <abstracttoolview.h>
 #include <abstracttool.h>
 #include <abstractxmlguicontroller.h>
+#include <toolviewdockwidget.h>
 // Kakao core
 #include <kdocumentmanager.h>
 #include <kdocumentsyncmanager.h>
@@ -63,7 +64,7 @@ ShellWindow::ShellWindow( KDocumentManager *documentManager, KViewManager *viewM
              SLOT(onDropEvent( QDropEvent* )) );
 }
 
-QList<QDockWidget*> ShellWindow::dockWidgets() const { return mDockWidgets; }
+QList<ToolViewDockWidget*> ShellWindow::dockWidgets() const { return mDockWidgets; }
 
 void ShellWindow::addXmlGuiController( AbstractXmlGuiController* controller )
 {
@@ -72,15 +73,17 @@ void ShellWindow::addXmlGuiController( AbstractXmlGuiController* controller )
 
 void ShellWindow::addTool( AbstractToolView* toolView )
 {
-    QDockWidget *dockWidget = new QDockWidget( toolView->title(), this );
-    dockWidget->setWidget( toolView->widget() );
-    dockWidget->setObjectName( toolView->tool()->objectName() );
+    ToolViewDockWidget* dockWidget = new ToolViewDockWidget( toolView, this );
     // TODO: where to set the initial area?
     addDockWidget( Qt::RightDockWidgetArea, dockWidget );
 
     mTools.append( toolView->tool() );
-    mToolViews.append( toolView );
     mDockWidgets.append( dockWidget );
+
+    if( dockWidget->isVisible() && mCurrentView )
+        toolView->tool()->setTargetModel( mCurrentView );
+
+    connect( dockWidget, SIGNAL(visibilityChanged( bool )), SLOT(onToolVisibilityChanged( bool )) );
 }
 
 void ShellWindow::updateControllers( KAbstractView* view )
@@ -88,8 +91,11 @@ void ShellWindow::updateControllers( KAbstractView* view )
     foreach( AbstractXmlGuiController* controller, mControllers )
         controller->setTargetModel( view );
 
-    foreach( AbstractTool* tool, mTools )
-        tool->setTargetModel( view );
+    foreach( ToolViewDockWidget* dockWidget, mDockWidgets )
+    {
+        if( dockWidget->isShown() )
+            dockWidget->toolView()->tool()->setTargetModel( view );
+    }
 }
 
 bool ShellWindow::queryClose()
@@ -157,10 +163,19 @@ void ShellWindow::onDropEvent( QDropEvent* event )
     }
 }
 
+void ShellWindow::onToolVisibilityChanged( bool isVisible )
+{
+    ToolViewDockWidget* dockWidget = qobject_cast<ToolViewDockWidget *>( sender() );
+    if( dockWidget )
+    {
+        KAbstractView* view = isVisible ? mCurrentView : 0;
+        dockWidget->toolView()->tool()->setTargetModel( view );
+    }
+}
+
 ShellWindow::~ShellWindow()
 {
     qDeleteAll( mControllers );
-    qDeleteAll( mToolViews );
     qDeleteAll( mTools );
 
     delete mGroupedViews;
