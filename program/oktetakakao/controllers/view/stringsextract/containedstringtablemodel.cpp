@@ -53,7 +53,8 @@ Q_UNUSED( parent )
 QVariant ContainedStringTableModel::data( const QModelIndex &index, int role ) const
 {
     QVariant result;
-    if( role == Qt::DisplayRole )
+    if( role == Qt::DisplayRole
+        || role == Qt::ToolTipRole )
     {
         const int stringIndex = index.row();
 
@@ -66,9 +67,12 @@ QVariant ContainedStringTableModel::data( const QModelIndex &index, int role ) c
             {
                 case OffsetColumnId:
                 {
-                    mPrintFunction( mCodedOffset, string.offset() );
+                    if( role == Qt::DisplayRole )
+                    {
+                        mPrintFunction( mCodedOffset, string.offset() );
 
-                    result = QString().append( mCodedOffset );
+                        result = QString().append( mCodedOffset );
+                    }
                     break;
                 }
                 case StringColumnId:
