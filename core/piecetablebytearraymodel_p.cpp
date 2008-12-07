@@ -81,7 +81,7 @@ char PieceTableByteArrayModel::Private::datum( unsigned int offset ) const
 void PieceTableByteArrayModel::Private::setData( const char *data, unsigned int size, bool careForMemory )
 {
     if( mAutoDelete )
-        delete mInitialData;
+        delete [] mInitialData;
     const unsigned int oldSize = mPieceTable.size();
     const bool wasModifiedBefore = isModified();
     const QList<KHECore::Bookmark> bookmarks = mBookmarks.list();
