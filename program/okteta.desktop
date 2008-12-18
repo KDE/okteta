@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Okteta
 Name[ar]=أكتيتا
+Name[pa]=ਓਕਟੀਟਾ
 Name[x-test]=xxOktetaxx
 GenericName=Hex Editor
 GenericName[ar]=محرر Hex
@@ -22,6 +23,7 @@ GenericName[lv]=Heksadecimālais redaktors
 GenericName[nb]=Hex-redigerer
 GenericName[nds]=Hexeditor
 GenericName[nl]=Hexbewerker
+GenericName[pa]=ਹੈਕਸਾ ਐਡੀਟਰ
 GenericName[pl]=Edytor szesnastkowy
 GenericName[pt]=Editor Hexadecimal
 GenericName[pt_BR]=Editor hexadecimal
