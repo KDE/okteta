@@ -43,6 +43,7 @@ class InsertPatternDialog : public KDialog
 
   public: // set
     void setCharCodec( const QString &codecName );
+    void setHasWriteable( bool hasWriteable );
 
   public: // get 
     QByteArray pattern() const;
@@ -55,6 +56,8 @@ class InsertPatternDialog : public KDialog
     void onInputChanged( const QByteArray &data );
 
   private:
+    bool mHasWriteable;
+
     QSpinBox *mNumberSpinBox;
     KByteArrayLineEdit *mPatternEdit;
 };

@@ -35,7 +35,8 @@
 
 
 InsertPatternDialog::InsertPatternDialog( QWidget *parent )
-  : KDialog( parent )
+  : KDialog( parent ),
+    mHasWriteable( false )
 {
     setCaption( i18nc("@title:window","Insert Pattern") );
     setButtons( Ok | Cancel );
@@ -104,6 +105,14 @@ void InsertPatternDialog::setCharCodec( const QString &codecName )
     mPatternEdit->setCharCodec( codecName );
 }
 
+void InsertPatternDialog::setHasWriteable( bool hasWriteable )
+{
+    mHasWriteable = hasWriteable;
+
+    enableButtonOk( mHasWriteable && !mPatternEdit->data().isEmpty() );
+}
+
+
 int InsertPatternDialog::number() const { return mNumberSpinBox->value(); }
 
 QByteArray InsertPatternDialog::pattern() const
@@ -114,7 +123,7 @@ QByteArray InsertPatternDialog::pattern() const
 
 void InsertPatternDialog::onInputChanged( const QByteArray &data )
 {
-    enableButtonOk( !data.isEmpty() );
+    enableButtonOk( mHasWriteable && !data.isEmpty() );
 }
 
 
@@ -126,5 +135,3 @@ void InsertPatternDialog::showEvent( QShowEvent *event )
 
 
 InsertPatternDialog::~InsertPatternDialog() {}
-
-#include "insertpatterndialog.moc"

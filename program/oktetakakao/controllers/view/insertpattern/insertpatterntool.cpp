@@ -44,9 +44,14 @@ QString InsertPatternTool::charCodecName() const
     return mByteArrayDisplay ? mByteArrayDisplay->charCodingName() : QString();
 }
 
+bool InsertPatternTool::hasWriteable() const
+{
+    return ( mByteArrayDisplay && mByteArrayModel ) ? !mByteArrayDisplay->isReadOnly() : false;
+}
+
 void InsertPatternTool::setTargetModel( AbstractModel* model )
 {
-//     if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
+    if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
 
     mByteArrayDisplay = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
 
@@ -55,7 +60,14 @@ void InsertPatternTool::setTargetModel( AbstractModel* model )
     mByteArrayModel = document ? document->content() : 0;
 
     const bool hasView = ( mByteArrayDisplay && mByteArrayModel );
-    emit viewChanged( hasView );
+    if( hasView )
+    {
+        connect( mByteArrayDisplay, SIGNAL(readOnlyChanged( bool )), SLOT(onReadOnlyChanged( bool )) );
+    }
+
+    const bool isWriteable = ( hasView && !mByteArrayDisplay->isReadOnly() );
+
+    emit hasWriteableChanged( isWriteable );
 }
 
 void InsertPatternTool::insertPattern( const QByteArray &pattern, int count )
@@ -82,6 +94,12 @@ void InsertPatternTool::insertPattern( const QByteArray &pattern, int count )
         changesDescribable->closeGroupedChange();
 }
 
-InsertPatternTool::~InsertPatternTool() {}
 
-#include "insertpatterntool.moc"
+void InsertPatternTool::onReadOnlyChanged( bool isReadOnly )
+{
+    const bool isWriteable = !isReadOnly;
+
+    emit hasWriteableChanged( isWriteable );
+}
+
+InsertPatternTool::~InsertPatternTool() {}

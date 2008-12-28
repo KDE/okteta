@@ -37,7 +37,7 @@
 InsertPatternController::InsertPatternController( KXMLGUIClient* guiClient )
  : mInsertPatternTool( new InsertPatternTool() ), mInsertPatternDialog( 0 )
 {
-    connect( mInsertPatternTool, SIGNAL(viewChanged( bool )), SLOT(onViewChanged( bool )) );
+    connect( mInsertPatternTool, SIGNAL(hasWriteableChanged( bool )), SLOT(onHasWriteableChanged( bool )) );
 
     KActionCollection *actionCollection = guiClient->actionCollection();
 
@@ -54,12 +54,12 @@ void InsertPatternController::setTargetModel( AbstractModel* model )
     mInsertPatternTool->setTargetModel( model );
 }
 
-void InsertPatternController::onViewChanged( bool hasView )
+void InsertPatternController::onHasWriteableChanged( bool hasWriteable )
 {
-    if( !hasView && mInsertPatternDialog )
-        mInsertPatternDialog->hide();
+    if( mInsertPatternDialog )
+        mInsertPatternDialog->setHasWriteable( hasWriteable );
 
-    mInsertPatternAction->setEnabled( hasView );
+    mInsertPatternAction->setEnabled( hasWriteable );
 }
 
 

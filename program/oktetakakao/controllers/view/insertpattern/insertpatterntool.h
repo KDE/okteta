@@ -52,9 +52,13 @@ class InsertPatternTool : public QObject
 
   public:
     QString charCodecName() const;
+    bool hasWriteable() const;
 
   Q_SIGNALS:
-    void viewChanged( bool hasView );
+    void hasWriteableChanged( bool hasWriteable );
+
+  protected Q_SLOTS:
+    void onReadOnlyChanged( bool isReadOnly );
 
   protected:
     KByteArrayDisplay* mByteArrayDisplay;

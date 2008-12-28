@@ -46,7 +46,7 @@ class InsertPatternController : public AbstractXmlGuiController
 
   protected Q_SLOTS:
     void onActionTriggered();
-    void onViewChanged( bool hasView );
+    void onHasWriteableChanged( bool hasWriteable );
 
   private Q_SLOTS:
     void onOkClicked();
