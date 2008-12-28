@@ -179,7 +179,7 @@ void AbstractByteArrayViewPrivate::setByteArrayModel( KHECore::AbstractByteArray
         setReadOnly( true );
 
     q->connect( mByteArrayModel, SIGNAL(readOnlyChanged( bool )),
-                q, SLOT(adaptController()) );
+                q, SLOT(onByteArrayReadOnlyChange( bool )) );
     q->connect( mByteArrayModel, SIGNAL(contentsChanged( const KHE::ArrayChangeMetricsList& )),
                 q, SLOT(onContentsChanged( const KHE::ArrayChangeMetricsList& )) );
 
