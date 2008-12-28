@@ -101,6 +101,7 @@ class AbstractModelSynchronizer : public QObject
     void urlChanged( const KUrl &url );
     void dataPulled( int ) const;
     void dataPushed( int ) const;
+    void synchronized();
 
   protected: // get
     void setUrl( const KUrl &url );

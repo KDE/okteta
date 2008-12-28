@@ -33,6 +33,7 @@ class AbstractModelFileSystemSynchronizer : public AbstractModelSynchronizer
   friend class AbstractFileSystemLoadJob;
   friend class AbstractFileSystemConnectJob;
   friend class AbstractFileSystemSyncWithRemoteJob;
+  friend class AbstractFileSystemSyncToRemoteJob;
 
   public:
     AbstractModelFileSystemSynchronizer();

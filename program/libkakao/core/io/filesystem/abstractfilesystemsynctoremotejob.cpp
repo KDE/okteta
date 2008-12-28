@@ -121,6 +121,9 @@ void AbstractFileSystemSyncToRemoteJob::completeWrite( bool success )
                 setErrorText( KIO::NetAccess::lastErrorString() );
             }
         }
+        // TODO: right place? And we did only push, not synchronize! Is a hack to get DocumentInfoTool working
+        if( success )
+            emit d->synchronizer()->synchronized();
     }
     else
     {
