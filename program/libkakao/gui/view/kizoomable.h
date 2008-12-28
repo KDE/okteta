@@ -31,6 +31,9 @@ namespace KDE
 namespace If
 {
 
+// TODO: add support for automatic zoom
+// enum { Manual, Width, Height, FullSize };
+// perhaps zoomLevelChanged needs a flag automatically
 class Zoomable
 {
   public:
