@@ -69,10 +69,21 @@ void ReplaceController::setTargetModel( AbstractModel* model )
     const bool hasView = ( mByteArrayDisplay && mByteArrayModel );
     if( hasView )
     {
+        connect( mByteArrayDisplay, SIGNAL(readOnlyChanged( bool )), SLOT(onReadOnlyChanged( bool )) );
     }
-    mReplaceAction->setEnabled( hasView );
+
+    const bool isWriteable = ( hasView && !mByteArrayDisplay->isReadOnly() );
+
+    mReplaceAction->setEnabled( isWriteable );
 }
 
+
+void ReplaceController::onReadOnlyChanged( bool isReadOnly )
+{
+    const bool isWriteable = !isReadOnly;
+
+    mReplaceAction->setEnabled( isWriteable );
+}
 
 void ReplaceController::replace()
 {
@@ -249,5 +260,3 @@ void ReplaceController::onPromptAllClicked()
 }
 
 ReplaceController::~ReplaceController() {}
-
-#include "replacecontroller.moc"

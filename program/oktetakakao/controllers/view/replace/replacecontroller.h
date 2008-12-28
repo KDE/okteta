@@ -63,6 +63,8 @@ class ReplaceController : public AbstractXmlGuiController
     void onPromptSkipClicked();
     void onPromptReplaceClicked();
 
+    void onReadOnlyChanged( bool isReadOnly );
+
   protected:
     KXmlGuiWindow *mWindow;
 
