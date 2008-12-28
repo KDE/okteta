@@ -29,10 +29,12 @@
 #include <KMimeType>
 
 class KByteArrayDocument;
+class AbstractModelSynchronizer;
 class KDocumentSyncManager;
 namespace KHECore {
 class AbstractByteArrayModel;
 }
+class KUrl;
 class QString;
 
 
@@ -64,10 +66,15 @@ class DocumentInfoTool : public AbstractTool
 
   protected Q_SLOTS:
     void onContentsChanged();
+    void onSynchronizerChanged( AbstractModelSynchronizer* synchronizer );
+    void onUrlChanged( const KUrl& url );
+    void onSynchronized();
 
   protected:
     KByteArrayDocument* mDocument;
     KHECore::AbstractByteArrayModel *mByteArrayModel;
+
+    AbstractModelSynchronizer* mSynchronizer;
 
     KDocumentSyncManager* mDocumentSyncManager;
 };

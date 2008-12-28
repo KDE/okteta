@@ -26,6 +26,7 @@
 #include <kbytearraydocument.h>
 // Kakao core
 #include <kdocumentsyncmanager.h>
+#include <abstractmodelsynchronizer.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
 // KDE
@@ -36,7 +37,7 @@
 
 
 DocumentInfoTool::DocumentInfoTool( KDocumentSyncManager* syncManager )
- : mDocument( 0 ), mByteArrayModel( 0 ),
+ : mDocument( 0 ), mByteArrayModel( 0 ), mSynchronizer( 0 ),
     mDocumentSyncManager( syncManager )
 {
     setObjectName( "DocumentInfo" );
@@ -94,33 +95,69 @@ int DocumentInfoTool::documentSize() const
 
 void DocumentInfoTool::setTargetModel( AbstractModel* model )
 {
+    if( mSynchronizer ) mSynchronizer->disconnect( this );
     if( mDocument ) mDocument->disconnect( this );
 
     mDocument = model ? model->findBaseModel<KByteArrayDocument*>() : 0;
     mByteArrayModel = mDocument ? mDocument->content() : 0;
 
     const bool hasDocument = ( mDocument != 0 );
+    AbstractModelSynchronizer* synchronizer = 0;
     QString documentTitle;
     int documentSize = -1;
     if( hasDocument )
     {
         documentTitle = mDocument->title();
         documentSize = mByteArrayModel->size();
+        synchronizer = mDocument->synchronizer();
+
         connect( mDocument, SIGNAL(titleChanged( const QString & )),
                  SIGNAL(documentTitleChanged( const QString & )) );
+        connect( mDocument, SIGNAL(synchronizerChanged( AbstractModelSynchronizer* )),
+                 SLOT(onSynchronizerChanged( AbstractModelSynchronizer* )) );
         connect( mByteArrayModel, SIGNAL(contentsChanged( const KHE::ArrayChangeMetricsList& )),
                  SLOT(onContentsChanged()) );
     }
 
+    onSynchronizerChanged( synchronizer );
+
     emit documentTitleChanged( documentTitle );
-    emit documentMimeTypeChanged( mimeType() );
-    emit locationChanged( location() );
     emit documentSizeChanged( documentSize );
 }
 
 void DocumentInfoTool::onContentsChanged()
 {
     emit documentSizeChanged( mByteArrayModel->size() );
+}
+
+void DocumentInfoTool::onSynchronizerChanged( AbstractModelSynchronizer* synchronizer )
+{
+    if( mSynchronizer ) mSynchronizer->disconnect( this );
+    mSynchronizer = synchronizer;
+
+    if( mSynchronizer )
+    {
+        connect( mSynchronizer, SIGNAL(urlChanged( const KUrl& )),
+                 SLOT(onUrlChanged( const KUrl& )) );
+        connect( mSynchronizer, SIGNAL(synchronized()),
+                 SLOT(onSynchronized()) );
+        //
+    }
+    emit locationChanged( location() );
+    onSynchronized();
+}
+
+void DocumentInfoTool::onUrlChanged( const KUrl& url )
+{
+    Q_UNUSED( url );
+
+    emit locationChanged( location() );
+    emit documentMimeTypeChanged( mimeType() );
+}
+
+void DocumentInfoTool::onSynchronized()
+{
+    emit documentMimeTypeChanged( mimeType() );
 }
 
 DocumentInfoTool::~DocumentInfoTool() {}
