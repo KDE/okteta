@@ -97,6 +97,7 @@ void DocumentInfoTool::setTargetModel( AbstractModel* model )
 {
     if( mSynchronizer ) mSynchronizer->disconnect( this );
     if( mDocument ) mDocument->disconnect( this );
+    if( mByteArrayModel ) mByteArrayModel->disconnect( this );
 
     mDocument = model ? model->findBaseModel<KByteArrayDocument*>() : 0;
     mByteArrayModel = mDocument ? mDocument->content() : 0;
