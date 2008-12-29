@@ -369,7 +369,7 @@ void PieceTableByteArrayModel::Private::endChanges()
     const int currentVersionIndex = versionIndex();
     const bool newChange = ( mBeforeChangesVersionIndex != currentVersionIndex );
     const bool currentIsModified = isModified();
-    const bool modificationChanged = ( mBeforeChangesModified == currentIsModified );
+    const bool modificationChanged = ( mBeforeChangesModified != currentIsModified );
 
     emit p->contentsChanged( mChangeMetrics );
     emit p->changesDone( mChanges, mBeforeChangesVersionIndex, currentVersionIndex );
