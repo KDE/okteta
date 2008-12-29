@@ -331,9 +331,11 @@ void PieceTableByteArrayModel::Private::doChanges( const QList<KHECore::ByteArra
             const int oldSize = mPieceTable.size();
             const Section removeSection = Section::fromWidth( metrics.offset(), metrics.removeLength() );
             // check parameters
-            if( removeSection.startsBehind(oldSize-1) && (removeSection.width()>0) )
+            if( removeSection.startsBehind(oldSize-1) && (removeSection.width()>0) ) 
+            {
                 // something is not matching
                 ; // TODO: set flag to undo all changes
+            }
 
             const QByteArray& insertData = change.data();
             doReplaceChange( removeSection, insertData.data(), insertData.size() );
