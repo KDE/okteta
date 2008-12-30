@@ -49,7 +49,8 @@ static const QStringList &formatStrings()
 }
 
 KGotoOffsetDialog::KGotoOffsetDialog( QWidget *parent )
-  : KDialog( parent )
+  : KDialog( parent ),
+    mHasView( false )
 {
     setCaption( i18nc("@title:window","Go to Offset") );
     setButtons( Ok | Cancel );
@@ -138,6 +139,14 @@ Q_UNUSED( End )
     // TOOO: handle limits
 }
 
+void KGotoOffsetDialog::setHasView( bool hasView )
+{
+    mHasView = hasView;
+
+    enableButtonOk( mHasView && !OffsetEdit->currentText().isEmpty() );
+}
+
+
 int KGotoOffsetDialog::offset() const
 {
     const int HD = mSelector->currentIndex();
@@ -158,7 +167,7 @@ void KGotoOffsetDialog::onSelectorChanged( int index )
 void KGotoOffsetDialog::onOffsetChanged( const QString &text )
 {
     mOffsetString[ mSelector->currentIndex() ] = text;
-    enableButtonOk( !text.isEmpty() );
+    enableButtonOk( mHasView && !text.isEmpty() );
 }
 
 

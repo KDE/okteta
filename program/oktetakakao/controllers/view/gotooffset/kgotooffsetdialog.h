@@ -44,6 +44,7 @@ class KGotoOffsetDialog : public KDialog
 
   public: // set
     void setRange( int Start, int End );
+    void setHasView( bool hasView );
 
   public: // get 
     int offset() const;
@@ -59,6 +60,8 @@ class KGotoOffsetDialog : public KDialog
     void onOffsetChanged( const QString &text );
 
   private:
+    bool mHasView;
+
     KComboBox *mSelector;
     KComboBox *OffsetEdit;
     QCheckBox *AtCursorCheckBox;

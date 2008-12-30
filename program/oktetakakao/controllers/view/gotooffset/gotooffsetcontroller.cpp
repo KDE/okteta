@@ -67,6 +67,9 @@ void GotoOffsetController::setTargetModel( AbstractModel* model )
     {
 //         connect( mByteArrayDisplay, SIGNAL( selectionChanged( bool )), SLOT( onSelectionChanged( bool )) );
     }
+
+    if( mGotoOffsetDialog )
+        mGotoOffsetDialog->setHasView( hasView );
     mGotoOffsetAction->setEnabled( hasView );
 }
 
@@ -79,6 +82,7 @@ void GotoOffsetController::gotoOffset()
         mGotoOffsetDialog = new KGotoOffsetDialog( 0 );
         const int startOffset = mByteArrayDisplay->startOffset();
         mGotoOffsetDialog->setRange( startOffset, startOffset+mByteArray->size()-1 );
+        mGotoOffsetDialog->setHasView( true );
         connect( mGotoOffsetDialog, SIGNAL(okClicked()), SLOT(onOkClicked()) );
     }
 
