@@ -44,6 +44,12 @@ class ViewStatusController : public AbstractXmlGuiController
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
+  protected:
+    void fixWidths();
+
+  protected:
+    QString valueCodingName( int valueCoding ) const;
+
   protected Q_SLOTS:
     void onCursorPositionChanged( int offset );
     void onOverwriteModeChanged( bool isOverwrite );
@@ -54,6 +60,7 @@ class ViewStatusController : public AbstractXmlGuiController
   protected:
     KByteArrayDisplay* mByteArrayDisplay;
 
+    KStatusBar* mStatusBar;
     QLabel* mOffsetLabel;
     QLabel* mOverwriteModeLabel;
     QLabel* mValueCodingLabel;

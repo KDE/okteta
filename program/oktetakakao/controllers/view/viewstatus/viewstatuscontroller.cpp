@@ -25,16 +25,19 @@
 // lib
 #include <kbytearraydisplay.h>
 // Okteta core
+#include <charcodec.h>
 #include <khe.h>
 // KDE
 #include <KStatusBar>
 #include <KLocale>
 // Qt
 #include <QtGui/QLabel>
+#include <QtGui/QFontMetrics>
 
+// TODO: make status bar capable to hide entries if size is too small, use priorisation
 
 ViewStatusController::ViewStatusController( KStatusBar* statusBar )
- : mByteArrayDisplay( 0 )
+ : mByteArrayDisplay( 0 ), mStatusBar( statusBar )
 {
     mPrintFunction = KHEUI::KOffsetFormat::printFunction( KHEUI::KOffsetFormat::Hexadecimal );
 
@@ -57,7 +60,87 @@ ViewStatusController::ViewStatusController( KStatusBar* statusBar )
     mReadOnlyLabel = new QLabel( statusBar );
     statusBar->addWidget( mReadOnlyLabel, 0 );
 
+    fixWidths();
+
     setTargetModel( 0 );
+}
+
+
+QString ViewStatusController::valueCodingName( int valueCoding ) const
+{
+    const QString valueCodingName =
+         valueCoding == KHECore::HexadecimalCoding ?
+            i18nc("@info:status encoding of the bytes as values in the hexadecimal format","Hexadecimal" ) :
+         valueCoding == KHECore::DecimalCoding ?
+            i18nc("@info:status encoding of the bytes as values in the decimal format",    "Decimal") :
+         valueCoding == KHECore::OctalCoding ?
+            i18nc("@info:status encoding of the bytes as values in the octal format",      "Octal" ) :
+         valueCoding == KHECore::BinaryCoding ?
+            i18nc("@info:status encoding of the bytes as values in the binary format",     "Binary") :
+            QString();
+
+    return valueCodingName;
+}
+
+void ViewStatusController::fixWidths()
+{
+    const QFontMetrics metrics = mStatusBar->fontMetrics();
+
+    // mOffsetLabel
+    static const char HexDigitsCount = 16;
+    static const char HexDigits[HexDigitsCount] =
+    {
+        '0','1','2','3','4','5','6','7','8','9',
+        'A','B','C','D','E','F'
+    };
+
+    int largestOffsetWidth = 0;
+    for( int i=0; i<HexDigitsCount; ++i )
+    {
+        QString offset = QString( 9, HexDigits[i] );
+        offset[4] = ':';
+        const QString offsetText = i18n( "Offset: %1", offset );
+        const int offsetWidth = metrics.boundingRect( offsetText ).width();
+        if( largestOffsetWidth < offsetWidth )
+            largestOffsetWidth = offsetWidth;
+    }
+    mOffsetLabel->setFixedWidth( largestOffsetWidth );
+
+    // mReadOnlyLabel
+    const QString ro = i18nc( "@info:status short for: Readonly mode",  "RO" );
+    const QString rw = i18nc( "@info:status short for: Readwrite mode", "RW" );
+    const int roWidth = metrics.boundingRect( ro ).width();
+    const int rwWidth = metrics.boundingRect( rw ).width();
+    mReadOnlyLabel->setFixedWidth( roWidth>rwWidth ? roWidth : rwWidth );
+
+    // mValueCodingLabel
+    int largestValueCodingNameWidth = 0;
+    for( int vc=KHECore::HexadecimalCoding; vc<=KHECore::BinaryCoding; ++vc )
+    {
+        const QString name = valueCodingName( vc );
+        const int valueCodingNameWidth = metrics.boundingRect( name ).width();
+        if( largestValueCodingNameWidth < valueCodingNameWidth )
+            largestValueCodingNameWidth = valueCodingNameWidth;
+    }
+    mValueCodingLabel->setFixedWidth( largestValueCodingNameWidth );
+
+    // mCharCodingLabel
+    const QStringList charCodingNames = KHECore::CharCodec::codecNames();
+    int largestCharCodingNameWidth = 0;
+    foreach( const QString& charCodingName, charCodingNames )
+    {
+        const int charCodingNameWidth = metrics.boundingRect( charCodingName ).width();
+        if( largestCharCodingNameWidth < charCodingNameWidth )
+            largestCharCodingNameWidth = charCodingNameWidth;
+    }
+    mCharCodingLabel->setFixedWidth( largestCharCodingNameWidth );
+
+    // mOverwriteModeLabel
+    const QString ovr = i18nc( "@info:status short for: Overwrite mode", "OVR" );
+    const QString ins = i18nc( "@info:status short for: Insert mode",    "INS" );
+    const int ovrWidth = metrics.boundingRect( ovr ).width();
+    const int insWidth = metrics.boundingRect( ins ).width();
+    mOverwriteModeLabel->setFixedWidth( ovrWidth>insWidth ? ovrWidth : insWidth );
 }
 
 void ViewStatusController::setTargetModel( AbstractModel* model )
@@ -127,18 +210,9 @@ void ViewStatusController::onOverwriteModeChanged( bool isOverwrite )
 
 void ViewStatusController::onValueCodingChanged( int valueCoding )
 {
-    const QString valueCodingName =
-         valueCoding == KHECore::HexadecimalCoding ?
-            i18nc("@info:status encoding of the bytes as values in the hexadecimal format","Hexadecimal" ) :
-         valueCoding == KHECore::DecimalCoding ?
-            i18nc("@info:status encoding of the bytes as values in the decimal format",    "Decimal") :
-         valueCoding == KHECore::OctalCoding ?
-            i18nc("@info:status encoding of the bytes as values in the octal format",      "Octal" ) :
-         valueCoding == KHECore::BinaryCoding ?
-            i18nc("@info:status encoding of the bytes as values in the binary format",     "Binary") :
-            QString();
+    const QString name = valueCodingName( valueCoding );
 
-    mValueCodingLabel->setText( valueCodingName );
+    mValueCodingLabel->setText( name );
 }
 
 void ViewStatusController::onCharCodecChanged( const QString& charCodecName )
