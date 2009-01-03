@@ -120,20 +120,45 @@ besides:
 * added: ability to close documents by a close button on tabs
 * added: urls dropped next to other tabs will be loaded
 
-Next to work on:
+Fixed after 0.2 Beta 1:
+-----------------------
+* added some icons to actions previously without
+* offset numbers are cleared or added if lines are removed or added
+* source code encoder always used data starting at offset 0, not from the selection
+* correctly calculate dirty ranges also for multiple undo/redo
+* update recently used files also with those from url drop and commandline parameter
+* Menus for Export and Copy As could not be added to the toolbar
+* only activate tools that are really visible 
+* for extracted strings show tooltips with full length (for now simply done for all strings)
+
+Fixed after 0.2 Beta 2:
+-----------------------
+* make info tool update info on change of file type and url
+* readonly in status bar does not get updated, because view did not forward document signal
+* disable menu entries for "Replace" and "Insert pattern" if view is readonly
+* do not hide "Insert pattern" dialog on readonly view, but block Ok button
+* no change signal was emitted on first change after disk synch
+* block Goto button in Goto dialog if there is no view
+
+Next to work on for 0.2:
 ----------------------------------
 Important:
-* 
+* width calculation for resize seems to need to include some margins
 Less important:
+* some more unit tests
 * do not show Paste from clipboard if not possible (at end or overwrite at line end), also for other tools
 * cursor does not get redone on color change
 * on tripple click turn into selecting just whole lines if button kept pressed
 * ask artists for own icon
-* see how the cursor and the value editor could be turned into tool+view
-* fix info and string docker (all with update function) to just work on update, react to change of data origin
+* scroll on drag in first and last line
 
 Later on:
 ---------
+* see how Tool and Document menus can be turned into KActionMenu (and add clear() call to KActionMenu)
+* see how the cursor and the value editor could be turned into tool+view
+* fix info and string docker (all with update function) to just work on update, react to change of data origin
+* name Resize style to Relayout modus
+* add option for offset and char comments to Source code encoder (cmp #163204)
 * Support for Drop, both Import into and Open
 * Make tabs click proxies
 * Better handling of file errors:
@@ -167,6 +192,8 @@ Later on:
   * dropping next to tab creates new data object by the drop data
 * copy also for all tables, e.g. statistic
 * mouse shadow cursor, shows where cursor would be positioned, also useful for drops
+* option to split in regular sections, than show only one section or all with a line between,
+  similar to page modi of Okular (so page=section)
 
 Future plans:
 -------------
