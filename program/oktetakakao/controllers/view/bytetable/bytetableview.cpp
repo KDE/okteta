@@ -75,8 +75,8 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget *parent )
     mInsertCountSpinBox->setValue( 1 );
     insertLayout->addWidget( mInsertCountSpinBox );
     mInsertButton = new KPushButton( KStandardGuiItem::insert(), this );
-    mInsertButton->setEnabled( mTool->hasByteArrayView() );
-    connect( mTool, SIGNAL(byteArrayViewChanged(bool)), mInsertButton, SLOT( setEnabled(bool )) );
+    mInsertButton->setEnabled( mTool->hasWriteable() );
+    connect( mTool, SIGNAL(hasWriteableChanged(bool)), mInsertButton, SLOT( setEnabled(bool )) );
     connect( mInsertButton, SIGNAL(clicked(bool)), SLOT(onInsertClicked()) ); 
     insertLayout->addWidget( mInsertButton );
 
@@ -86,7 +86,7 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget *parent )
 
 void ByteTableView::onDoubleClicked( const QModelIndex &index )
 {
-    if( !mTool->hasByteArrayView() )
+    if( !mTool->hasWriteable() )
         return;
 
     const unsigned char byte = index.row();
@@ -100,5 +100,3 @@ void ByteTableView::onInsertClicked()
 }
 
 ByteTableView::~ByteTableView() {}
-
-#include "bytetableview.moc"

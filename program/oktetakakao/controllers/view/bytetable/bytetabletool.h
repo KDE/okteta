@@ -54,10 +54,13 @@ class ByteTableTool : public AbstractTool
 
   public:
     ByteTableModel *byteTableModel() const;
-    bool hasByteArrayView() const;
+    bool hasWriteable() const;
 
   Q_SIGNALS:
-    void byteArrayViewChanged( bool hasByteArrayView );
+    void hasWriteableChanged( bool hasWriteable );
+
+  protected Q_SLOTS:
+    void onReadOnlyChanged( bool isReadOnly );
 
   protected:
     ByteTableModel *mByteTableModel;

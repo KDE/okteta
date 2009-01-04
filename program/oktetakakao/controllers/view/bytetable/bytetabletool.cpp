@@ -45,12 +45,19 @@ ByteTableTool::ByteTableTool()
 
 QString ByteTableTool::title() const { return i18nc("@title:window", "Byte Table"); }
 ByteTableModel *ByteTableTool::byteTableModel() const { return mByteTableModel; }
-bool ByteTableTool::hasByteArrayView() const { return ( mByteArrayDisplay != 0 ); }
+bool ByteTableTool::hasWriteable() const
+{
+    return ( mByteArrayDisplay && mByteArrayModel ) ? !mByteArrayDisplay->isReadOnly() : false;
+}
 
 
 void ByteTableTool::setTargetModel( AbstractModel* model )
 {
-    if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( mByteTableModel );
+    if( mByteArrayDisplay )
+    {
+        mByteArrayDisplay->disconnect( mByteTableModel );
+        mByteArrayDisplay->disconnect( this );
+    }
 
     mByteArrayDisplay = model ? qobject_cast<KByteArrayDisplay*>( model ) : 0;
 
@@ -64,8 +71,12 @@ void ByteTableTool::setTargetModel( AbstractModel* model )
         mByteTableModel->setCharCodec( mByteArrayDisplay->charCodingName() );
         connect( mByteArrayDisplay,  SIGNAL(charCodecChanged( const QString& )),
                  mByteTableModel, SLOT(setCharCodec( const QString& )) );
+        connect( mByteArrayDisplay, SIGNAL(readOnlyChanged( bool )), SLOT(onReadOnlyChanged( bool )) );
     }
-    emit byteArrayViewChanged( hasView );
+
+    const bool isWriteable = ( hasView && !mByteArrayDisplay->isReadOnly() );
+
+    emit hasWriteableChanged( isWriteable );
 }
 
 void ByteTableTool::insert( unsigned char byte, int count )
@@ -87,5 +98,11 @@ void ByteTableTool::insert( unsigned char byte, int count )
 // }
 }
 
+void ByteTableTool::onReadOnlyChanged( bool isReadOnly )
+{
+    const bool isWriteable = !isReadOnly;
+
+    emit hasWriteableChanged( isWriteable );
+}
 
 ByteTableTool::~ByteTableTool() {}
