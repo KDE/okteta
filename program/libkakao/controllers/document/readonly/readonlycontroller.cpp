@@ -37,8 +37,12 @@ ReadOnlyController::ReadOnlyController( KXMLGUIClient* guiClient )
     KActionCollection* actionCollection = guiClient->actionCollection();
 
     mSetReadOnlyAction = actionCollection->add<KToggleAction>( "isreadonly" );
-    mSetReadOnlyAction->setText( i18nc("@option:check the document is read-only","Read only") );
-    mSetReadOnlyAction->setIcon( KIcon("object-locked.png") );
+    const QString text = i18nc( "@option:check the document is read-only", "Read only" );
+    mSetReadOnlyAction->setText( text );
+    mSetReadOnlyAction->setIcon( KIcon("object-unlocked.png") );
+    // TODO: set different text 
+    const KGuiItem checkedState( text, KIcon("object-locked.png") );
+    mSetReadOnlyAction->setCheckedState( checkedState );
     connect( mSetReadOnlyAction, SIGNAL(triggered(bool)), SLOT(setReadOnly(bool)) );
 
     setTargetModel( 0 );
