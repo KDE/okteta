@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta program, part of the KDE project.
 
-    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -30,7 +30,7 @@
 
 // Program
 static const char ProgramId[] =          "okteta";
-static const char ProgramVersion[] =     "0.2.0";
+static const char ProgramVersion[] =     "0.2.80";
 static const char ProgramHomepage[] =    "http://utils.kde.org/projects/okteta";
 // Author
 static const char FWHKEmailAddress[] =   "kossebau@kde.org";
@@ -41,13 +41,11 @@ OktetaAboutData::OktetaAboutData()
               ki18n("Okteta"), ProgramVersion, // name
               ki18n("KDE bytes editor"), // description
               KAboutData::License_GPL_V2,
-              ki18n("Copyright 2006-2008 Friedrich W. H. Kossebau"), //copyright
+              ki18n("Copyright 2006-2009 Friedrich W. H. Kossebau"), //copyright
               ki18n("Edit files as an array of bytes"), // comment
               ProgramHomepage )
 {
-#if KDE_IS_VERSION(4,0,70)
     addLicense(KAboutData::License_GPL_V3);
-#endif
     setOrganizationDomain( "kde.org" );
     addAuthor( ki18n("Friedrich W. H. Kossebau"), // name
                ki18n("Author"), // task
