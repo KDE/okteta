@@ -55,7 +55,6 @@ class ViewStatusController : public AbstractXmlGuiController
     void onOverwriteModeChanged( bool isOverwrite );
     void onValueCodingChanged( int valueCoding );
     void onCharCodecChanged( const QString& charCodecName );
-    void onReadOnlyChanged( bool isReadOnly );
 
   protected:
     KByteArrayDisplay* mByteArrayDisplay;
@@ -65,7 +64,6 @@ class ViewStatusController : public AbstractXmlGuiController
     QLabel* mOverwriteModeLabel;
     QLabel* mValueCodingLabel;
     QLabel* mCharCodingLabel;
-    QLabel* mReadOnlyLabel;
 
     KHEUI::KOffsetFormat::print mPrintFunction;
     int mStartOffset;

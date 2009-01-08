@@ -57,9 +57,6 @@ ViewStatusController::ViewStatusController( KStatusBar* statusBar )
         i18nc("@info:tooltip","Encoding in the character column of the current view.") );
     statusBar->addWidget( mCharCodingLabel, 0 );
 
-    mReadOnlyLabel = new QLabel( statusBar );
-    statusBar->addWidget( mReadOnlyLabel, 0 );
-
     fixWidths();
 
     setTargetModel( 0 );
@@ -106,13 +103,6 @@ void ViewStatusController::fixWidths()
     }
     mOffsetLabel->setFixedWidth( largestOffsetWidth );
 
-    // mReadOnlyLabel
-    const QString ro = i18nc( "@info:status short for: Readonly mode",  "RO" );
-    const QString rw = i18nc( "@info:status short for: Readwrite mode", "RW" );
-    const int roWidth = metrics.boundingRect( ro ).width();
-    const int rwWidth = metrics.boundingRect( rw ).width();
-    mReadOnlyLabel->setFixedWidth( roWidth>rwWidth ? roWidth : rwWidth );
-
     // mValueCodingLabel
     int largestValueCodingNameWidth = 0;
     for( int vc=KHECore::HexadecimalCoding; vc<=KHECore::BinaryCoding; ++vc )
@@ -158,14 +148,12 @@ void ViewStatusController::setTargetModel( AbstractModel* model )
         onOverwriteModeChanged( mByteArrayDisplay->isOverwriteMode() );
         onValueCodingChanged( (int)mByteArrayDisplay->valueCoding() );
         onCharCodecChanged( mByteArrayDisplay->charCodingName() );
-        onReadOnlyChanged( mByteArrayDisplay->isReadOnly() );
 
         connect( mByteArrayDisplay, SIGNAL(cursorPositionChanged( int )), SLOT(onCursorPositionChanged( int )) );
         connect( mByteArrayDisplay, SIGNAL(overwriteModeChanged( bool )), SLOT(onOverwriteModeChanged( bool )) );
         connect( mByteArrayDisplay, SIGNAL(valueCodingChanged( int )), SLOT(onValueCodingChanged( int )) );
         connect( mByteArrayDisplay, SIGNAL(charCodecChanged( const QString& )),
             SLOT(onCharCodecChanged( const QString& )) );
-        connect( mByteArrayDisplay, SIGNAL(readOnlyChanged( bool )), SLOT(onReadOnlyChanged( bool )) );
     }
     else
     {
@@ -175,14 +163,12 @@ void ViewStatusController::setTargetModel( AbstractModel* model )
         mOverwriteModeLabel->setText( emptyString );
         mValueCodingLabel->setText( emptyString );
         mCharCodingLabel->setText( emptyString );
-        mReadOnlyLabel->setText( emptyString );
     }
 
     mOffsetLabel->setEnabled( hasView );
     mOverwriteModeLabel->setEnabled( hasView );
     mValueCodingLabel->setEnabled( hasView );
     mCharCodingLabel->setEnabled( hasView );
-    mReadOnlyLabel->setEnabled( hasView );
 }
 
 
@@ -219,17 +205,3 @@ void ViewStatusController::onCharCodecChanged( const QString& charCodecName )
 {
     mCharCodingLabel->setText( charCodecName );
 }
-
-void ViewStatusController::onReadOnlyChanged( bool isReadOnly )
-{
-    const QString overwriteModeText = isReadOnly ?
-        i18nc( "@info:status short for: Readonly mode",  "RO" ) :
-        i18nc( "@info:status short for: Readwrite mode", "RW");
-    mReadOnlyLabel->setText( overwriteModeText );
-
-    const QString overwriteModeToolTip = isReadOnly ?
-        i18nc( "@info:tooltip", "Readonly mode" ) :
-        i18nc( "@info:tooltip", "Readwrite mode" );
-    mReadOnlyLabel->setToolTip( overwriteModeToolTip );
-}
-
