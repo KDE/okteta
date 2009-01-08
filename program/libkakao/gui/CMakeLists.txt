@@ -37,6 +37,8 @@ set( KAKAO_GUI_SRCS
   system/abstractgroupedviews.cpp
   system/tabbedviews.cpp
   system/shellwindow.cpp
+  controller/togglebutton.cpp
+  controller/togglebutton_p.cpp
   controller/abstractxmlguicontroller.cpp
 )
 
