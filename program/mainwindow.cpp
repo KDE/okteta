@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta program, part of the KDE project.
 
-    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -54,6 +54,7 @@
 #include <viewstatus/viewstatuscontroller.h>
 // Kakao controllers
 #include <document/readonly/readonlycontroller.h>
+#include <document/readonly/readonlybarcontroller.h>
 #include <documentsystem/creator/creatorcontroller.h>
 #include <documentsystem/loader/loadercontroller.h>
 #include <documentsystem/close/closecontroller.h>
@@ -140,6 +141,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new ViewConfigController(this) );
     addXmlGuiController( new ViewModeController(this) );
     addXmlGuiController( new ViewStatusController(statusBar()) );
+    addXmlGuiController( new ReadOnlyBarController(statusBar()) );
 
     addTool( new DocumentInfoToolView(new DocumentInfoTool(mProgram->documentManager()->syncManager())) );
     addTool( new FilterToolView(new FilterTool()) );
