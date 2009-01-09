@@ -65,6 +65,7 @@
 #include <io/export/exportcontroller.h>
 #include <view/version/versioncontroller.h>
 #include <view/zoom/zoomcontroller.h>
+#include <view/zoom/zoombarcontroller.h>
 #include <view/select/selectcontroller.h>
 #include <shellwindow/viewlistmenu/viewlistmenucontroller.h>
 #include <shellwindow/toollistmenu/toollistmenucontroller.h>
@@ -142,6 +143,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new ViewModeController(this) );
     addXmlGuiController( new ViewStatusController(statusBar()) );
     addXmlGuiController( new ReadOnlyBarController(statusBar()) );
+    addXmlGuiController( new ZoomBarController(statusBar()) );
 
     addTool( new DocumentInfoToolView(new DocumentInfoTool(mProgram->documentManager()->syncManager())) );
     addTool( new FilterToolView(new FilterTool()) );
