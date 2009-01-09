@@ -147,9 +147,11 @@ void ZoomSlider::onSliderValueChanged( int sliderValue )
 // use timer to delay resize, so that sliding is not delayed by resizing
 void ZoomSlider::onSliderMoved( int sliderValue )
 {
+Q_UNUSED( sliderValue )
+
     QPoint toolTipPoint = mSlider->rect().topLeft();
     toolTipPoint.ry() += mSlider->height() / 2;
-    toolTipPoint = mapToGlobal( toolTipPoint );
+    toolTipPoint = mSlider->mapToGlobal( toolTipPoint );
 
     QHelpEvent toolTipEvent( QEvent::ToolTip, QPoint(0, 0), toolTipPoint );
     QApplication::sendEvent( mSlider, &toolTipEvent );
