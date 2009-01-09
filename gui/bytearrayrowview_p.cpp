@@ -328,12 +328,15 @@ QSize ByteArrayRowViewPrivate::minimumSizeHint() const
     Q_Q( const ByteArrayRowView );
 
     // TODO: better minimal width (visibility!)
-    return QSize(
+    const int minWidth =
         mOffsetColumn->visibleWidth()
         + mBorderColumn->visibleWidth()
-        + mByteArrayColumn->byteWidth(),
+        + mByteArrayColumn->byteWidth();
+    const int minHeight =
         q->lineHeight()
-        + q->noOfLines()>1? q->style()->pixelMetric(QStyle::PM_ScrollBarExtent):0 );
+        + q->noOfLines()>1? q->style()->pixelMetric(QStyle::PM_ScrollBarExtent):0;
+
+    return QSize( qMin(minWidth,100), qMin(minHeight,100) );
 }
 
 
