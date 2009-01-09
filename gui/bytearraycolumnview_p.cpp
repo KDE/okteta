@@ -347,14 +347,17 @@ QSize ByteArrayColumnViewPrivate::minimumSizeHint() const
     Q_Q( const ByteArrayColumnView );
 
     // TODO: better minimal width (visibility!)
-    return QSize(
+    const int minWidth =
         mOffsetColumn->visibleWidth()
         + mFirstBorderColumn->visibleWidth()
         + mSecondBorderColumn->visibleWidth()
         + mValueColumn->byteWidth()
-        + mCharColumn->byteWidth(),
+        + mCharColumn->byteWidth();
+    const int minHeight =
         q->lineHeight()
-        + q->noOfLines()>1? q->style()->pixelMetric(QStyle::PM_ScrollBarExtent):0 );
+        + q->noOfLines()>1? q->style()->pixelMetric(QStyle::PM_ScrollBarExtent):0;
+
+    return QSize( qMin(minWidth,100), qMin(minHeight,100) );
 }
 
 
