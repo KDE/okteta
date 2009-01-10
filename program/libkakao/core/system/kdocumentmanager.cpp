@@ -52,6 +52,22 @@ QStringList KDocumentManager::urls() const
     return result;
 }
 
+KAbstractDocument* KDocumentManager::documentOfUrl( const KUrl& url ) const
+{
+    KAbstractDocument* result = 0;
+
+    foreach( KAbstractDocument *document, mList )
+    {
+        if( url == mSyncManager->urlOf(document) )
+        {
+            result = document;
+            break;
+        }
+    }
+
+    return result;
+}
+
 void KDocumentManager::addDocument( KAbstractDocument *document )
 {
     // TODO: check for double insert
