@@ -29,6 +29,7 @@
 #include <QtCore/QList>
 #include <QtCore/QObject>
 
+class KUrl;
 class QStringList;
 
 class KDocumentCreateManager; //TODO: temporary
@@ -55,6 +56,7 @@ class KDocumentManager : public QObject
 
   public: //TODO: see is this can be removed out of this api, hack for now to MainWindow::saveProperties
     QStringList urls() const;
+    KAbstractDocument* documentOfUrl( const KUrl& url ) const;
 
   public:
     KDocumentCreateManager *createManager();
