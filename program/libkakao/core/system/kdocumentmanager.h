@@ -39,6 +39,8 @@ class KDocumentManager : public QObject
 {
   Q_OBJECT
 
+  friend class KDocumentSyncManager;
+
   public:
     KDocumentManager();
     virtual ~KDocumentManager();
@@ -68,6 +70,9 @@ class KDocumentManager : public QObject
 // TODO: other than QObject event gets modified by observers, take care of unsetting a close cancel
 // problem with a signal is that all(!) observers get notified, even if event is already cancelled
 // better a visitor pattern?
+
+    // TODO: or should the document be able to emit this?
+    void focusRequested( KAbstractDocument* document );
 
 //  protected:
 //    virtual KAbstractDocument* createDocument();

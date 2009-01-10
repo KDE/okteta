@@ -50,6 +50,7 @@ class KViewManager : public QObject
   public:
     QList<KAbstractView*> views() const;
     KAbstractView *viewByWidget( QWidget *widget ) const;
+    KAbstractView* viewOfDocument( KAbstractDocument* document ) const;
 
   public:
     ModelCodecViewManager* codecViewManager();

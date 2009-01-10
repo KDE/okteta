@@ -106,6 +106,20 @@ void KViewManager::removeViewsFor( KAbstractDocument *document )
     }
 }
 
+KAbstractView* KViewManager::viewOfDocument( KAbstractDocument* document ) const
+{
+    KAbstractView* result = 0;
+    foreach( KAbstractView* view, mViewList )
+    {
+        if( view->document() == document )
+        {
+            result = view;
+            break;
+        }
+    }
+    return result;
+}
+
 
 KViewManager::~KViewManager()
 {

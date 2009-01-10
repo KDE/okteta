@@ -78,6 +78,13 @@ void KDocumentSyncManager::load()
 
 void KDocumentSyncManager::load( const KUrl &url )
 {
+    KAbstractDocument* document = mManager->documentOfUrl( url );
+    if( document )
+    {
+        emit mManager->focusRequested( document );
+        return;
+    }
+
     AbstractModelSynchronizer* synchronizer = mSynchronizerFactory->createSynchronizer();
     AbstractLoadJob *loadJob = synchronizer->startLoad( url );
     connect( loadJob, SIGNAL(documentLoaded( KAbstractDocument * )), SLOT(onDocumentLoaded( KAbstractDocument * )) );
