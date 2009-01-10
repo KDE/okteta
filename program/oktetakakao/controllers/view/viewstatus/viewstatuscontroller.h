@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -30,6 +30,7 @@
 
 class KByteArrayDisplay;
 class KStatusBar;
+class KComboBox;
 class QLabel;
 class QString;
 
@@ -47,10 +48,10 @@ class ViewStatusController : public AbstractXmlGuiController
   protected:
     void fixWidths();
 
-  protected:
-    QString valueCodingName( int valueCoding ) const;
-
   protected Q_SLOTS:
+    void setValueCoding( int valueCoding );
+    void setCharCoding( int charCoding );
+
     void onCursorPositionChanged( int offset );
     void onOverwriteModeChanged( bool isOverwrite );
     void onValueCodingChanged( int valueCoding );
@@ -62,8 +63,8 @@ class ViewStatusController : public AbstractXmlGuiController
     KStatusBar* mStatusBar;
     QLabel* mOffsetLabel;
     QLabel* mOverwriteModeLabel;
-    QLabel* mValueCodingLabel;
-    QLabel* mCharCodingLabel;
+    KComboBox* mValueCodingComboBox;
+    KComboBox* mCharCodingComboBox;
 
     KHEUI::KOffsetFormat::print mPrintFunction;
     int mStartOffset;

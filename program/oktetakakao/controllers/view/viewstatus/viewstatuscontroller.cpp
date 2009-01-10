@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,7 @@
 #include <charcodec.h>
 #include <khe.h>
 // KDE
+#include <KComboBox>
 #include <KStatusBar>
 #include <KLocale>
 // Qt
@@ -47,37 +48,30 @@ ViewStatusController::ViewStatusController( KStatusBar* statusBar )
     mOverwriteModeLabel = new QLabel( statusBar );
     statusBar->addWidget( mOverwriteModeLabel, 0 );
 
-    mValueCodingLabel = new QLabel( statusBar );
-    mValueCodingLabel->setToolTip(
-        i18nc("@info:tooltip","Coding in the value column of the current view.") );
-    statusBar->addWidget( mValueCodingLabel, 0 );
+    mValueCodingComboBox = new KComboBox( statusBar );
+    QStringList list;
+    list.append( i18nc("@item:inmenu encoding of the bytes as values in the hexadecimal format","Hexadecimal") );
+    list.append( i18nc("@item:inmenu encoding of the bytes as values in the decimal format",    "Decimal")     );
+    list.append( i18nc("@item:inmenu encoding of the bytes as values in the octal format",      "Octal")       );
+    list.append( i18nc("@item:inmenu encoding of the bytes as values in the binary format",     "Binary")      );
+    mValueCodingComboBox->addItems( list );
+    mValueCodingComboBox->setToolTip(
+        i18nc("@info:tooltip","Coding of the value interpretation in the current view.") );
+    connect( mValueCodingComboBox, SIGNAL(activated(int)), SLOT(setValueCoding(int)) );
+    statusBar->addWidget( mValueCodingComboBox, 0 );
 
-    mCharCodingLabel = new QLabel( statusBar );
-    mCharCodingLabel->setToolTip(
+    mCharCodingComboBox = new KComboBox( statusBar );
+    mCharCodingComboBox->addItems( KHECore::CharCodec::codecNames() );
+    mCharCodingComboBox->setToolTip(
         i18nc("@info:tooltip","Encoding in the character column of the current view.") );
-    statusBar->addWidget( mCharCodingLabel, 0 );
+    connect( mCharCodingComboBox, SIGNAL(activated(int)), SLOT(setCharCoding(int)) );
+    statusBar->addWidget( mCharCodingComboBox, 0 );
 
     fixWidths();
 
     setTargetModel( 0 );
 }
 
-
-QString ViewStatusController::valueCodingName( int valueCoding ) const
-{
-    const QString valueCodingName =
-         valueCoding == KHECore::HexadecimalCoding ?
-            i18nc("@info:status encoding of the bytes as values in the hexadecimal format","Hexadecimal" ) :
-         valueCoding == KHECore::DecimalCoding ?
-            i18nc("@info:status encoding of the bytes as values in the decimal format",    "Decimal") :
-         valueCoding == KHECore::OctalCoding ?
-            i18nc("@info:status encoding of the bytes as values in the octal format",      "Octal" ) :
-         valueCoding == KHECore::BinaryCoding ?
-            i18nc("@info:status encoding of the bytes as values in the binary format",     "Binary") :
-            QString();
-
-    return valueCodingName;
-}
 
 void ViewStatusController::fixWidths()
 {
@@ -102,28 +96,6 @@ void ViewStatusController::fixWidths()
             largestOffsetWidth = offsetWidth;
     }
     mOffsetLabel->setFixedWidth( largestOffsetWidth );
-
-    // mValueCodingLabel
-    int largestValueCodingNameWidth = 0;
-    for( int vc=KHECore::HexadecimalCoding; vc<=KHECore::BinaryCoding; ++vc )
-    {
-        const QString name = valueCodingName( vc );
-        const int valueCodingNameWidth = metrics.boundingRect( name ).width();
-        if( largestValueCodingNameWidth < valueCodingNameWidth )
-            largestValueCodingNameWidth = valueCodingNameWidth;
-    }
-    mValueCodingLabel->setFixedWidth( largestValueCodingNameWidth );
-
-    // mCharCodingLabel
-    const QStringList charCodingNames = KHECore::CharCodec::codecNames();
-    int largestCharCodingNameWidth = 0;
-    foreach( const QString& charCodingName, charCodingNames )
-    {
-        const int charCodingNameWidth = metrics.boundingRect( charCodingName ).width();
-        if( largestCharCodingNameWidth < charCodingNameWidth )
-            largestCharCodingNameWidth = charCodingNameWidth;
-    }
-    mCharCodingLabel->setFixedWidth( largestCharCodingNameWidth );
 
     // mOverwriteModeLabel
     const QString ovr = i18nc( "@info:status short for: Overwrite mode", "OVR" );
@@ -161,16 +133,23 @@ void ViewStatusController::setTargetModel( AbstractModel* model )
 
         mOffsetLabel->setText( i18nc("@info:status offset value not available", "Offset: -") );
         mOverwriteModeLabel->setText( emptyString );
-        mValueCodingLabel->setText( emptyString );
-        mCharCodingLabel->setText( emptyString );
     }
 
     mOffsetLabel->setEnabled( hasView );
     mOverwriteModeLabel->setEnabled( hasView );
-    mValueCodingLabel->setEnabled( hasView );
-    mCharCodingLabel->setEnabled( hasView );
+    mValueCodingComboBox->setEnabled( hasView );
+    mCharCodingComboBox->setEnabled( hasView );
 }
 
+void ViewStatusController::setValueCoding( int valueCoding )
+{
+    mByteArrayDisplay->setValueCoding( valueCoding );
+}
+
+void ViewStatusController::setCharCoding( int charCoding )
+{
+    mByteArrayDisplay->setCharCoding( KHECore::CharCodec::codecNames()[charCoding] );
+}
 
 void ViewStatusController::onCursorPositionChanged( int offset )
 {
@@ -196,12 +175,12 @@ void ViewStatusController::onOverwriteModeChanged( bool isOverwrite )
 
 void ViewStatusController::onValueCodingChanged( int valueCoding )
 {
-    const QString name = valueCodingName( valueCoding );
-
-    mValueCodingLabel->setText( name );
+    mValueCodingComboBox->setCurrentIndex( valueCoding );
 }
 
 void ViewStatusController::onCharCodecChanged( const QString& charCodecName )
 {
-    mCharCodingLabel->setText( charCodecName );
+    const int charCodingIndex = KHECore::CharCodec::codecNames().indexOf( charCodecName );
+
+    mCharCodingComboBox->setCurrentIndex( charCodingIndex );
 }
