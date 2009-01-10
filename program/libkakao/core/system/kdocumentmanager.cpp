@@ -42,6 +42,8 @@ KDocumentManager::KDocumentManager()
    mCodecManager( new ModelCodecManager(this) )
 {}
 
+QList<KAbstractDocument*> KDocumentManager::documents() const { return mList; }
+
 QStringList KDocumentManager::urls() const
 {
     QStringList result;
@@ -112,11 +114,14 @@ bool KDocumentManager::canCloseAll()
     return canCloseAll;
 }
 
+void KDocumentManager::requestFocus( KAbstractDocument* document )
+{
+    emit focusRequested( document );
+}
+
 KDocumentManager::~KDocumentManager()
 {
     delete mCreateManager;
     delete mSyncManager;
     delete mCodecManager;
 } //TODO: destroy all documents?
-
-#include "kdocumentmanager.moc"

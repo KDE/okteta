@@ -54,6 +54,11 @@ class KDocumentManager : public QObject
     bool canClose( KAbstractDocument *document );
     bool canCloseAll();
 
+    void requestFocus( KAbstractDocument* document );
+
+  public:
+    QList<KAbstractDocument*> documents() const;
+
   public: //TODO: see is this can be removed out of this api, hack for now to MainWindow::saveProperties
     QStringList urls() const;
     KAbstractDocument* documentOfUrl( const KUrl& url ) const;
