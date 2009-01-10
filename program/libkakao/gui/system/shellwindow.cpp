@@ -54,6 +54,9 @@ ShellWindow::ShellWindow( KDocumentManager *documentManager, KViewManager *viewM
     connect( mViewManager, SIGNAL(closing( KAbstractView* )),
              mGroupedViews, SLOT(removeView( KAbstractView* )) );
 
+    connect( mDocumentManager, SIGNAL(focusRequested( KAbstractDocument* )),
+             SLOT(onFocusRequested( KAbstractDocument* )) );
+
     connect( mGroupedViews, SIGNAL(viewFocusChanged( KAbstractView* )),
              SLOT(onViewFocusChanged( KAbstractView* )) );
     connect( mGroupedViews, SIGNAL(closeRequest( KAbstractView* )),
@@ -136,6 +139,13 @@ void ShellWindow::onViewFocusChanged( KAbstractView *view )
         connect( view, SIGNAL(modified( KAbstractDocument::SynchronizationStates )),
                        SLOT(onModifiedChanged( KAbstractDocument::SynchronizationStates )) );
     }
+}
+
+void ShellWindow::onFocusRequested( KAbstractDocument* document )
+{
+    KAbstractView* view = mViewManager->viewOfDocument( document );
+    if( view )
+        mGroupedViews->setViewFocus( view );
 }
 
 void ShellWindow::onCloseRequest( KAbstractView* view )
