@@ -106,6 +106,10 @@ void ViewConfigController::setTargetModel( AbstractModel* model )
         mResizeStyleAction->setCurrentItem( mByteArrayDisplay->resizeStyle() );
 
         mToggleColumnsAction->setCurrentItem( mByteArrayDisplay->visibleByteArrayCodings()-1 );
+
+        connect( mByteArrayDisplay, SIGNAL(valueCodingChanged( int )), SLOT(onValueCodingChanged( int )) );
+        connect( mByteArrayDisplay, SIGNAL(charCodecChanged( const QString& )),
+            SLOT(onCharCodecChanged( const QString& )) );
     }
     mCodingAction->setEnabled( hasView );
     mEncodingAction->setEnabled( hasView );
@@ -144,4 +148,16 @@ void ViewConfigController::setCharCoding( int charCoding )
 void ViewConfigController::toggleValueCharColumns( int visibleColumns )
 {
     mByteArrayDisplay->setVisibleByteArrayCodings( visibleColumns+1 );
+}
+
+void ViewConfigController::onValueCodingChanged( int valueCoding )
+{
+    mCodingAction->setCurrentItem( valueCoding );
+}
+
+void ViewConfigController::onCharCodecChanged( const QString& charCodecName )
+{
+    const int charCodingIndex = KHECore::CharCodec::codecNames().indexOf( charCodecName );
+
+    mEncodingAction->setCurrentItem( charCodingIndex );
 }

@@ -50,6 +50,9 @@ class ViewConfigController : public AbstractXmlGuiController
     void toggleOffsetColumn( bool on );
     void toggleValueCharColumns( int visibleColunms );
 
+    void onValueCodingChanged( int valueCoding );
+    void onCharCodecChanged( const QString& charCodecName );
+
   protected:
     KByteArrayDisplay* mByteArrayDisplay;
 
