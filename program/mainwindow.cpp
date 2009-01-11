@@ -40,6 +40,10 @@
 // Kakao tools
 #include <document/versionview/versionviewtoolview.h>
 #include <document/versionview/versionviewtool.h>
+#include <documentsystem/filesystembrowser/filesystembrowsertoolview.h>
+#include <documentsystem/filesystembrowser/filesystembrowsertool.h>
+#include <documentsystem/documentsbrowser/documentstoolview.h>
+#include <documentsystem/documentsbrowser/documentstool.h>
 // controllers
 #include <overwriteonly/overwriteonlycontroller.h>
 #include <overwritemode/overwritemodecontroller.h>
@@ -145,6 +149,8 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new ReadOnlyBarController(statusBar()) );
     addXmlGuiController( new ZoomBarController(statusBar()) );
 
+    addTool( new FileSystemBrowserToolView(new FileSystemBrowserTool( mProgram->documentManager() )) );
+    addTool( new DocumentsToolView(new DocumentsTool( mProgram->documentManager() )) );
     addTool( new DocumentInfoToolView(new DocumentInfoTool(mProgram->documentManager()->syncManager())) );
     addTool( new FilterToolView(new FilterTool()) );
     addTool( new StringsExtractToolView(new StringsExtractTool()) );
