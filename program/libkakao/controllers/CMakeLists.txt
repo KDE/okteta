@@ -30,6 +30,17 @@ set( LOADERCONTROLLER_SRCS
 set( CLOSECONTROLLER_SRCS
   documentsystem/close/closecontroller.cpp
 )
+set( FILESYSTEMBROWSERCONTROLLER_SRCS
+  documentsystem/filesystembrowser/filesystembrowsertool.cpp
+  documentsystem/filesystembrowser/filesystembrowserview.cpp
+  documentsystem/filesystembrowser/filesystembrowsertoolview.cpp
+)
+set( DOCUMENTSBROWSERCONTROLLER_SRCS
+  documentsystem/documentsbrowser/documentlistmodel.cpp
+  documentsystem/documentsbrowser/documentstool.cpp
+  documentsystem/documentsbrowser/documentsview.cpp
+  documentsystem/documentsbrowser/documentstoolview.cpp
+)
 set( READONLYCONTROLLER_SRCS
   document/readonly/readonlycontroller.cpp
 )
@@ -89,6 +100,8 @@ set( QUITCONTROLLER_SRCS
 set( KAKAO_CONTROLLERS_SRCS
   ${SETREMOTECONTROLLER_SRCS}
   ${CLOSECONTROLLER_SRCS}
+  ${FILESYSTEMBROWSERCONTROLLER_SRCS}
+  ${DOCUMENTSBROWSERCONTROLLER_SRCS}
   ${VERSIONCONTROLLER_SRCS}
   ${VERSIONVIEWCONTROLLER_SRCS}
   ${READONLYCONTROLLER_SRCS}
