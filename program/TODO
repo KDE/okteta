@@ -139,11 +139,29 @@ Fixed after 0.2 Beta 2:
 * do not hide "Insert pattern" dialog on readonly view, but block Ok button
 * no change signal was emitted on first change after disk synch
 * block Goto button in Goto dialog if there is no view
+* Insert button of byte table tool disabled if view is readonly
 
-Next to work on for 0.2:
+Fixed after 0.2 RC 1:
+---------------------
+* mininumSizeHint does not get larger than 100x100
+
+Done for 0.3:
+-------------
+* added a ToggleButton, to be used for the statusbar
+* standalone readonly statusbar controller
+* ZoomSlider, working directly on a model
+* zoom statusbar controller, using the ZoomSlider
+* turned value and char coding displays in the statusbar into active selections
+* added a filesystem browser tool
+* added a documents management tool
+* added a controller to switch between view by Alt + ->/<-
+
+Next to work on:
 ----------------------------------
 Important:
 * width calculation for resize seems to need to include some margins
+* old wrong sized cursor picture gets painted on zoom change
+* QActionGroups are cleared on setupGui, e.g. if toolbar gets edited
 Less important:
 * some more unit tests
 * do not show Paste from clipboard if not possible (at end or overwrite at line end), also for other tools
@@ -154,6 +172,8 @@ Less important:
 
 Later on:
 ---------
+* make status bar tools more flat, e.g. see how the zoom tool of KOffice is done
+* add direction to tool views, so that e.g. the file info tool view puts the icon left to the data in vertical mode
 * see how Tool and Document menus can be turned into KActionMenu (and add clear() call to KActionMenu)
 * see how the cursor and the value editor could be turned into tool+view
 * fix info and string docker (all with update function) to just work on update, react to change of data origin
@@ -194,6 +214,17 @@ Later on:
 * mouse shadow cursor, shows where cursor would be positioned, also useful for drops
 * option to split in regular sections, than show only one section or all with a line between,
   similar to page modi of Okular (so page=section)
+* make all jobs (searching, filter operations, ...) cancellable, e.g. using ESC
+* add versions to view model, to be synched with the data model (if created later, create prior versions on demand)
+* make status bar entries non-readonly, e.g. for offset->goto, readonly, codings, selection,...
+* add Lock symbol for Readonly to statusbar, also Modified state
+* search for other ideas in Inkscape
+* make bookmarks program-wide, switch doc if needed.
+* add bookmark tool, hovering drag over bookmark should select it
+* store bookmarks for usage on further opening, similar to Okular's memory
+* bookmarks to load vs. bookmarks/marked regions in loaded documents? lokal vs. global perhaps? search inside.
+* in-place saving instead of new-and-delete-old (ZFS Snpashots work blockbased, so only changed blocks get snapshotted)
+* for processes show estimated rest time
 
 Future plans:
 -------------
