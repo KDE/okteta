@@ -71,6 +71,7 @@
 #include <view/zoom/zoomcontroller.h>
 #include <view/zoom/zoombarcontroller.h>
 #include <view/select/selectcontroller.h>
+#include <shellwindow/switchview/switchviewcontroller.h>
 #include <shellwindow/viewlistmenu/viewlistmenucontroller.h>
 #include <shellwindow/toollistmenu/toollistmenucontroller.h>
 #include <shellwindow/fullscreen/fullscreencontroller.h>
@@ -128,6 +129,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new CloseController(mProgram->documentManager(),this) );
     addXmlGuiController( new VersionController(this) );
     addXmlGuiController( new ReadOnlyController(this) );
+    addXmlGuiController( new SwitchViewController(mGroupedViews,this) );
     addXmlGuiController( new FullScreenController(this) );
     addXmlGuiController( new QuitController(0,this) );
 

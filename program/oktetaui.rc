@@ -63,8 +63,8 @@ Zusammenlegen?
     <Action name="bookmark_remove" />
     <Action name="bookmark_remove_all" />
     <Separator/>
-    <Action name="bookmark_next" />
     <Action name="bookmark_previous" />
+    <Action name="bookmark_next" />
     <Separator/>
     <ActionList name="bookmark_list" />
   </Menu>
@@ -74,6 +74,9 @@ Zusammenlegen?
     <ActionList name="tools_list" />
   </Menu>
   <Menu name="windows"><text>&amp;Windows</text>
+    <Action name="window_previous" />
+    <Action name="window_next" />
+    <Separator/>
     <ActionList name="windows_list"/>
   </Menu>
   <Menu name="settings">
