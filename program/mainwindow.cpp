@@ -119,6 +119,7 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram *program )
 
 void OktetaMainWindow::setupControllers()
 {
+    // general, part of Kakao
     addXmlGuiController( new CreatorController(mProgram->documentManager()->createManager(),this) );
     addXmlGuiController( new LoaderController(mProgram->documentManager()->syncManager(),this) );
     addXmlGuiController( new SetRemoteController(mProgram->documentManager()->syncManager(),this) );
@@ -135,6 +136,13 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new ClipboardController(this) );
     addXmlGuiController( new CopyAsController(mProgram->viewManager(),mProgram->documentManager(),this) );
 
+    addTool( new FileSystemBrowserToolView(new FileSystemBrowserTool( mProgram->documentManager() )) );
+    addTool( new DocumentsToolView(new DocumentsTool( mProgram->documentManager() )) );
+#ifndef NDEBUG
+    addTool( new VersionViewToolView(new VersionViewTool()) );
+#endif
+
+    // Okteta specific
 //     addXmlGuiController( new OverwriteOnlyController(this) );
     addXmlGuiController( new OverwriteModeController(this) );
     addXmlGuiController( new SearchController(this) );
@@ -145,21 +153,17 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new PrintController(this) );
     addXmlGuiController( new ViewConfigController(this) );
     addXmlGuiController( new ViewModeController(this) );
+
     addXmlGuiController( new ViewStatusController(statusBar()) );
     addXmlGuiController( new ReadOnlyBarController(statusBar()) );
     addXmlGuiController( new ZoomBarController(statusBar()) );
 
-    addTool( new FileSystemBrowserToolView(new FileSystemBrowserTool( mProgram->documentManager() )) );
-    addTool( new DocumentsToolView(new DocumentsTool( mProgram->documentManager() )) );
     addTool( new DocumentInfoToolView(new DocumentInfoTool(mProgram->documentManager()->syncManager())) );
     addTool( new FilterToolView(new FilterTool()) );
     addTool( new StringsExtractToolView(new StringsExtractTool()) );
     addTool( new ByteTableToolView(new ByteTableTool()) );
     addTool( new InfoToolView(new InfoTool()) );
     addTool( new PODDecoderToolView(new PODDecoderTool()) );
-#ifndef NDEBUG
-    addTool( new VersionViewToolView(new VersionViewTool()) );
-#endif
 }
 
 void OktetaMainWindow::saveProperties( KConfigGroup &configGroup )
