@@ -52,7 +52,7 @@ class TabbedViews : public AbstractGroupedViews, public KDE::If::ViewFocusable
     virtual void removeView( KAbstractView *view );
 
     virtual QWidget *widget() const;
-
+    virtual QList<KAbstractView*> viewList() const;
 
   Q_SIGNALS:
     virtual void viewFocusChanged( KAbstractView *view );

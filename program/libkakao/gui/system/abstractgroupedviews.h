@@ -43,6 +43,8 @@ class AbstractGroupedViews : public QObject
 
   public: // get API to be implemented
     virtual QWidget *widget() const = 0;
+    // returns the list in the order of display
+    virtual QList<KAbstractView*> viewList() const = 0;
 
   Q_SIGNALS:
     // view was created and already added to the list

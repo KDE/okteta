@@ -45,6 +45,20 @@ TabbedViews::TabbedViews( KViewManager *viewManager )
              SIGNAL(drop( QDropEvent* )) );
 }
 
+QList<KAbstractView*> TabbedViews::viewList() const
+{
+    QList<KAbstractView*> result;
+
+    const int count = mTabWidget->count();
+    for( int i=0; i<count; ++i )
+    {
+        QWidget* widget = mTabWidget->widget( i );
+        KAbstractView* view = mViewManager->viewByWidget( widget );
+        result.append( view );
+    }
+
+    return result;
+}
 
 void TabbedViews::addView( KAbstractView *view )
 {
