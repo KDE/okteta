@@ -31,6 +31,30 @@ ToggleButtonPrivate::ToggleButtonPrivate( ToggleButton* parent ) : p( parent )
     p->connect( p, SIGNAL(toggled( bool )), SLOT(onToggled( bool )) );
 }
 
+void ToggleButtonPrivate::setOtherState( const KIcon& icon, const QString& text, const QString& toolTip )
+{
+    const QFontMetrics metrics = p->fontMetrics();
+    mOtherIcon = icon;
+    mOtherText = text;
+    mOtherToolTip = toolTip;
+
+    if( !text.isEmpty() )
+    {
+        const QString currentText = p->text();
+
+        const int currentTextWidth = p->sizeHint().width();
+
+        p->setText( text );
+        const int otherTextWidth = p->sizeHint().width();
+
+        p->setText( currentText );
+
+        // TODO: this breaks on new font (size) or style change
+        // better would be to reimplement sizeHint()
+        p->setFixedWidth( qMax(currentTextWidth,otherTextWidth) );
+    }
+}
+
 void ToggleButtonPrivate::onToggled( bool )
 {
     const KIcon otherIcon = mOtherIcon;
@@ -38,6 +62,13 @@ void ToggleButtonPrivate::onToggled( bool )
     {
         mOtherIcon = KIcon( p->icon() );
         p->setIcon( otherIcon );
+    }
+
+    const QString otherText = mOtherText;
+    if( !otherText.isEmpty() )
+    {
+        mOtherText = p->text();
+        p->setText( otherText );
     }
 
     const QString otherToolTip = mOtherToolTip;

@@ -37,23 +37,17 @@ class ToggleButtonPrivate
     explicit ToggleButtonPrivate( ToggleButton* parent );
 
   public:
-    void setOtherState( const KIcon& icon, const QString& toolTip );
+    void setOtherState( const KIcon& icon, const QString& text, const QString& toolTip );
 
   public:
     void onToggled( bool );
 
   private:
     KIcon mOtherIcon;
+    QString mOtherText;
     QString mOtherToolTip;
 
     ToggleButton* const p;
 };
-
-
-inline void ToggleButtonPrivate::setOtherState( const KIcon& icon, const QString& toolTip )
-{
-    mOtherIcon = icon;
-    mOtherToolTip = toolTip;
-}
 
 #endif

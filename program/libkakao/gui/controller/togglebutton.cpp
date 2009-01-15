@@ -25,18 +25,32 @@
 #include "togglebutton.moc"
 
 
-ToggleButton::ToggleButton( const KIcon& icon, const QString& toolTip, QWidget* parent )
+ToggleButton::ToggleButton( const KIcon& icon, const QString& text, const QString& toolTip, QWidget* parent )
   : QToolButton( parent ),
     d( new ToggleButtonPrivate(this) )
 {
     setIcon( icon );
+    setText( text );
     setToolTip( toolTip );
 }
 
 
-void ToggleButton::setCheckedState( const KIcon& icon, const QString& toolTip )
+ToggleButton::ToggleButton( const QString& text, const QString& toolTip, QWidget* parent )
+  : QToolButton( parent ),
+    d( new ToggleButtonPrivate(this) )
 {
-    d->setOtherState( icon, toolTip );
+    setText( text );
+    setToolTip( toolTip );
+}
+
+void ToggleButton::setCheckedState( const KIcon& icon, const QString& text, const QString& toolTip )
+{
+    d->setOtherState( icon, text, toolTip );
+}
+
+void ToggleButton::setCheckedState( const QString& text, const QString& toolTip )
+{
+    d->setOtherState( KIcon(), text, toolTip );
 }
 
 ToggleButton::~ToggleButton()
