@@ -29,6 +29,7 @@
 #include <koffsetformat.h>
 
 class KByteArrayDisplay;
+class ToggleButton;
 class KStatusBar;
 class KComboBox;
 class QLabel;
@@ -49,11 +50,11 @@ class ViewStatusController : public AbstractXmlGuiController
     void fixWidths();
 
   protected Q_SLOTS:
+    void setOverwriteMode( bool overwrite );
     void setValueCoding( int valueCoding );
     void setCharCoding( int charCoding );
 
     void onCursorPositionChanged( int offset );
-    void onOverwriteModeChanged( bool isOverwrite );
     void onValueCodingChanged( int valueCoding );
     void onCharCodecChanged( const QString& charCodecName );
 
@@ -62,7 +63,7 @@ class ViewStatusController : public AbstractXmlGuiController
 
     KStatusBar* mStatusBar;
     QLabel* mOffsetLabel;
-    QLabel* mOverwriteModeLabel;
+    ToggleButton* mOverwriteModeToggleButton;
     KComboBox* mValueCodingComboBox;
     KComboBox* mCharCodingComboBox;
 

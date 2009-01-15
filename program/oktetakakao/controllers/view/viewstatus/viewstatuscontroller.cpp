@@ -24,6 +24,8 @@
 
 // lib
 #include <kbytearraydisplay.h>
+// Kakao ui
+#include <togglebutton.h>
 // Okteta core
 #include <charcodec.h>
 #include <khe.h>
@@ -45,8 +47,14 @@ ViewStatusController::ViewStatusController( KStatusBar* statusBar )
     mOffsetLabel = new QLabel( statusBar );
     statusBar->addWidget( mOffsetLabel, 0 );
 
-    mOverwriteModeLabel = new QLabel( statusBar );
-    statusBar->addWidget( mOverwriteModeLabel, 0 );
+    const QString insertModeText = i18nc( "@info:status short for: Insert mode",    "INS" );
+    const QString overwriteModeText = i18nc( "@info:status short for: Overwrite mode", "OVR" );
+    const QString insertModeTooltip = i18nc( "@info:tooltip", "Insert mode" );
+    const QString overwriteModeTooltip = i18nc( "@info:tooltip", "Overwrite mode" );
+    mOverwriteModeToggleButton = new ToggleButton( insertModeText, insertModeTooltip, statusBar );
+    mOverwriteModeToggleButton->setCheckedState( overwriteModeText, overwriteModeTooltip );
+    statusBar->addWidget( mOverwriteModeToggleButton, 0 );
+    connect( mOverwriteModeToggleButton, SIGNAL(clicked(bool)), SLOT(setOverwriteMode(bool)) );
 
     mValueCodingComboBox = new KComboBox( statusBar );
     QStringList list;
@@ -96,18 +104,15 @@ void ViewStatusController::fixWidths()
             largestOffsetWidth = offsetWidth;
     }
     mOffsetLabel->setFixedWidth( largestOffsetWidth );
-
-    // mOverwriteModeLabel
-    const QString ovr = i18nc( "@info:status short for: Overwrite mode", "OVR" );
-    const QString ins = i18nc( "@info:status short for: Insert mode",    "INS" );
-    const int ovrWidth = metrics.boundingRect( ovr ).width();
-    const int insWidth = metrics.boundingRect( ins ).width();
-    mOverwriteModeLabel->setFixedWidth( ovrWidth>insWidth ? ovrWidth : insWidth );
 }
 
 void ViewStatusController::setTargetModel( AbstractModel* model )
 {
-    if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
+    if( mByteArrayDisplay )
+    {
+        mByteArrayDisplay->disconnect( this );
+        mByteArrayDisplay->disconnect( mOverwriteModeToggleButton );
+    }
 
     mByteArrayDisplay = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
 
@@ -117,12 +122,13 @@ void ViewStatusController::setTargetModel( AbstractModel* model )
         mStartOffset = mByteArrayDisplay->startOffset();
 
         onCursorPositionChanged( mByteArrayDisplay->cursorPosition() );
-        onOverwriteModeChanged( mByteArrayDisplay->isOverwriteMode() );
+        mOverwriteModeToggleButton->setChecked( mByteArrayDisplay->isOverwriteMode() );
         onValueCodingChanged( (int)mByteArrayDisplay->valueCoding() );
         onCharCodecChanged( mByteArrayDisplay->charCodingName() );
 
         connect( mByteArrayDisplay, SIGNAL(cursorPositionChanged( int )), SLOT(onCursorPositionChanged( int )) );
-        connect( mByteArrayDisplay, SIGNAL(overwriteModeChanged( bool )), SLOT(onOverwriteModeChanged( bool )) );
+        connect( mByteArrayDisplay, SIGNAL(overwriteModeChanged( bool )),
+                 mOverwriteModeToggleButton, SLOT(setChecked( bool )) );
         connect( mByteArrayDisplay, SIGNAL(valueCodingChanged( int )), SLOT(onValueCodingChanged( int )) );
         connect( mByteArrayDisplay, SIGNAL(charCodecChanged( const QString& )),
             SLOT(onCharCodecChanged( const QString& )) );
@@ -132,13 +138,20 @@ void ViewStatusController::setTargetModel( AbstractModel* model )
         const QString emptyString( '-' );
 
         mOffsetLabel->setText( i18nc("@info:status offset value not available", "Offset: -") );
-        mOverwriteModeLabel->setText( emptyString );
+        mOverwriteModeToggleButton->setChecked( false );
+        mValueCodingComboBox->setCurrentIndex( 0 );
+        mCharCodingComboBox->setCurrentIndex( 0 );
     }
 
     mOffsetLabel->setEnabled( hasView );
-    mOverwriteModeLabel->setEnabled( hasView );
+    mOverwriteModeToggleButton->setEnabled( hasView );
     mValueCodingComboBox->setEnabled( hasView );
     mCharCodingComboBox->setEnabled( hasView );
+}
+
+void ViewStatusController::setOverwriteMode( bool overwrite )
+{
+    mByteArrayDisplay->setOverwriteMode( overwrite );
 }
 
 void ViewStatusController::setValueCoding( int valueCoding )
@@ -158,19 +171,6 @@ void ViewStatusController::onCursorPositionChanged( int offset )
     mPrintFunction( codedOffset, mStartOffset + offset );
 
     mOffsetLabel->setText( i18n("Offset: %1", QLatin1String(codedOffset)) );
-}
-
-void ViewStatusController::onOverwriteModeChanged( bool isOverwrite )
-{
-    const QString overwriteModeText = isOverwrite ?
-        i18nc( "@info:status short for: Overwrite mode", "OVR" ) :
-        i18nc( "@info:status short for: Insert mode",    "INS");
-    mOverwriteModeLabel->setText( overwriteModeText );
-
-    const QString overwriteModeToolTip = isOverwrite ?
-        i18nc( "@info:tooltip", "Overwrite mode" ) :
-        i18nc( "@info:tooltip", "Insert mode" );
-    mOverwriteModeLabel->setToolTip( overwriteModeToolTip );
 }
 
 void ViewStatusController::onValueCodingChanged( int valueCoding )
