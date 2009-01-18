@@ -111,6 +111,12 @@ set( GOTOOFFSETCONTROLLER_SRCS
 set( BOOKMARKSCONTROLLER_SRCS
   view/bookmarks/bookmarkscontroller.cpp
 )
+set( BOOKMARKSTOOL_SRCS
+  view/bookmarks/bookmarklistmodel.cpp
+  view/bookmarks/bookmarkstool.cpp
+  view/bookmarks/bookmarksview.cpp
+  view/bookmarks/bookmarkstoolview.cpp
+)
 set( LIBFRAMESPRINT_SRCS
   view/libframesprint/abstractframerenderer.cpp
   view/libframesprint/framestopaperprinter.cpp
@@ -157,6 +163,7 @@ set( OKTETA_KAKAO_CONTROLLERS_SRCS
   ${LIBFRAMESPRINT_SRCS}
   ${PRINTCONTROLLER_SRCS}
   ${BOOKMARKSCONTROLLER_SRCS}
+  ${BOOKMARKSTOOL_SRCS}
   ${VIEWCONFIGCONTROLLER_SRCS}
   ${VIEWSTATUSCONTROLLER_SRCS}
   ${VIEWMODECONTROLLER_SRCS}
