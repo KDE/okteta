@@ -42,44 +42,52 @@ KNavigator::KNavigator( AbstractByteArrayView* view, KController* parent )
 
 bool KNavigator::handleKeyPress( QKeyEvent *keyEvent )
 {
-    bool keyUsed = true;
+    bool keyUsed;
 
-    const bool shiftPressed =  keyEvent->modifiers() & Qt::SHIFT;
-    const bool controlPressed = keyEvent->modifiers() & Qt::CTRL;
-    //bool AltPressed = keyEvent->modifiers() & Qt::ALT;
-
-    // we only care for cursor keys and the like, won't hardcode any other keys
-    // we also don't check whether the commands are allowed
-    // as the commands are also available as API so the check has to be done
-    // in each command anyway
-    switch( keyEvent->key() )
-    {
-    case Qt::Key_Left:
-        moveCursor( controlPressed ? MoveWordBackward : MoveBackward, shiftPressed );
-        break;
-    case Qt::Key_Right:
-        moveCursor( controlPressed ? MoveWordForward : MoveForward, shiftPressed );
-        break;
-    case Qt::Key_Up:
-        moveCursor( controlPressed ? MovePgUp : MoveUp, shiftPressed );
-        break;
-    case Qt::Key_Down:
-        moveCursor( controlPressed ? MovePgDown : MoveDown, shiftPressed );
-        break;
-    case Qt::Key_Home:
-        moveCursor( controlPressed ? MoveHome : MoveLineStart, shiftPressed );
-        break;
-    case Qt::Key_End:
-        moveCursor( controlPressed ? MoveEnd : MoveLineEnd, shiftPressed );
-        break;
-    case Qt::Key_PageUp:
-        moveCursor( MovePgUp, shiftPressed );
-        break;
-    case Qt::Key_PageDown:
-        moveCursor( MovePgDown, shiftPressed );
-        break;
-    default:
+    const bool altPressed = keyEvent->modifiers() & Qt::ALT;
+    if( altPressed )
+        // currently there is no input with the Alt modifier used, so ignore them all
         keyUsed = false;
+    else
+    {
+        keyUsed = true;
+
+        const bool shiftPressed =  keyEvent->modifiers() & Qt::SHIFT;
+        const bool controlPressed = keyEvent->modifiers() & Qt::CTRL;
+
+        // we only care for cursor keys and the like, won't hardcode any other keys
+        // we also don't check whether the commands are allowed
+        // as the commands are also available as API so the check has to be done
+        // in each command anyway
+        switch( keyEvent->key() )
+        {
+        case Qt::Key_Left:
+            moveCursor( controlPressed ? MoveWordBackward : MoveBackward, shiftPressed );
+            break;
+        case Qt::Key_Right:
+            moveCursor( controlPressed ? MoveWordForward : MoveForward, shiftPressed );
+            break;
+        case Qt::Key_Up:
+            moveCursor( controlPressed ? MovePgUp : MoveUp, shiftPressed );
+            break;
+        case Qt::Key_Down:
+            moveCursor( controlPressed ? MovePgDown : MoveDown, shiftPressed );
+            break;
+        case Qt::Key_Home:
+            moveCursor( controlPressed ? MoveHome : MoveLineStart, shiftPressed );
+            break;
+        case Qt::Key_End:
+            moveCursor( controlPressed ? MoveEnd : MoveLineEnd, shiftPressed );
+            break;
+        case Qt::Key_PageUp:
+            moveCursor( MovePgUp, shiftPressed );
+            break;
+        case Qt::Key_PageDown:
+            moveCursor( MovePgDown, shiftPressed );
+            break;
+        default:
+            keyUsed = false;
+        }
     }
 
     return keyUsed ? true : KController::handleKeyPress(keyEvent);
