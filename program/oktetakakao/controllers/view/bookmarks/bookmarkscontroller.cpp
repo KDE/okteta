@@ -160,13 +160,14 @@ void BookmarksController::updateBookmarks()
 void BookmarksController::onBookmarksAdded( const QList<KHECore::Bookmark> &bookmarks )
 {
 Q_UNUSED( bookmarks )
-    onCursorPositionChanged( mByteArrayDisplay->cursorPosition() );
+    const int currentPosition = mByteArrayDisplay->cursorPosition();
+    onCursorPositionChanged( currentPosition );
 
-    const int bookmarksCount = mBookmarks->bookmarkList().size();
+    const KHECore::BookmarkList bookmarkList = mBookmarks->bookmarkList();
+    const int bookmarksCount = bookmarkList.size();
     const bool hasBookmarks = ( bookmarksCount != 0 );
+
     mDeleteAllAction->setEnabled( hasBookmarks );
-    mGotoNextBookmarkAction->setEnabled( hasBookmarks );
-    mGotoPreviousBookmarkAction->setEnabled( hasBookmarks );
 
     updateBookmarks();
 }
@@ -174,23 +175,47 @@ Q_UNUSED( bookmarks )
 void BookmarksController::onBookmarksRemoved( const QList<KHECore::Bookmark> &bookmarks )
 {
 Q_UNUSED( bookmarks )
-    onCursorPositionChanged( mByteArrayDisplay->cursorPosition() );
+    const int currentPosition = mByteArrayDisplay->cursorPosition();
+    onCursorPositionChanged( currentPosition );
 
-    const int bookmarksCount = mBookmarks->bookmarkList().size();
+    const KHECore::BookmarkList bookmarkList = mBookmarks->bookmarkList();
+    const int bookmarksCount = bookmarkList.size();
     const bool hasBookmarks = ( bookmarksCount != 0 );
+
     mDeleteAllAction->setEnabled( hasBookmarks );
-    mGotoNextBookmarkAction->setEnabled( hasBookmarks );
-    mGotoPreviousBookmarkAction->setEnabled( hasBookmarks );
 
     updateBookmarks();
 }
 
 void BookmarksController::onCursorPositionChanged( int newPosition )
 {
+    const KHECore::BookmarkList bookmarkList = mBookmarks->bookmarkList();
+    const int bookmarksCount = bookmarkList.size();
+    const bool hasBookmarks = ( bookmarksCount != 0 );
     const bool isInsideByteArray = ( newPosition < mByteArray->size() );
-    const bool hasBookmark = mBookmarks->bookmarkList().contains( newPosition );
-    mCreateAction->setEnabled( !hasBookmark && isInsideByteArray );
-    mDeleteAction->setEnabled( hasBookmark );
+    bool isAtBookmark;
+    bool hasPrevious;
+    bool hasNext;
+    if( hasBookmarks )
+    {
+        isAtBookmark = bookmarkList.contains( newPosition );
+        const KHECore::BookmarkList::ConstIterator end = bookmarkList.constEnd();
+        const KHECore::BookmarkList::ConstIterator pit = bookmarkList.previousFrom( newPosition-1 );
+        hasPrevious = ( pit != end );
+        const KHECore::BookmarkList::ConstIterator nit = bookmarkList.nextFrom( newPosition+1 );
+        hasNext = ( nit != end );
+    }
+    else
+    {
+        isAtBookmark = false;
+        hasPrevious = false;
+        hasNext = false;
+    }
+
+    mCreateAction->setEnabled( !isAtBookmark && isInsideByteArray );
+    mDeleteAction->setEnabled( isAtBookmark );
+    mGotoNextBookmarkAction->setEnabled( hasNext );
+    mGotoPreviousBookmarkAction->setEnabled( hasPrevious );
 }
 
 void BookmarksController::createBookmark()
