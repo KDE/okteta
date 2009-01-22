@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui>
-<kpartgui name="Okteta" version="1">
+<kpartgui name="Okteta" version="2">
 <MenuBar>
   <Menu name="file">
     <Action name="connect_to" append="open_merge" />
@@ -101,8 +101,8 @@ Zusammenlegen?
   <Action name="file_new"/>
   <Action name="file_open"/>
   <Action name="file_save"/>
+  <Action name="file_save_as"/>
   <Action name="file_revert"/>
-  <Action name="file_print"/>
   <Separator/>
   <Action name="edit_undo"/>
   <Action name="edit_redo"/>
