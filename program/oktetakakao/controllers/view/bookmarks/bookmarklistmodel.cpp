@@ -80,7 +80,7 @@ QVariant BookmarkListModel::data( const QModelIndex& index, int role ) const
                 break;
             }
             case TitleColumnId:
-                result = "Bookmark";//bookmark.name();
+                result = bookmark.name();
                 break;
             default:
                 ;
