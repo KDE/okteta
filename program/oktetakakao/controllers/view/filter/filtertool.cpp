@@ -47,7 +47,7 @@
 
 
 FilterTool::FilterTool()
- : mByteArrayDisplay( 0 ), mByteArrayModel( 0 )
+ : mByteArrayDisplay( 0 ), mByteArrayModel( 0 ), mHasWritable( false )
 {
     setObjectName( "BinaryFilter" );
 
@@ -68,7 +68,7 @@ QString FilterTool::charCodecName() const
     return mByteArrayDisplay ? mByteArrayDisplay->charCodingName() : QString();
 }
 
-bool FilterTool::dataSelected() const { return ( (mByteArrayDisplay!=0) && mByteArrayDisplay->hasSelectedData() ); }
+bool FilterTool::hasWriteable() const { return mHasWritable; }
 
 AbstractByteArrayFilterParameterSet *FilterTool::parameterSet( int filterId )
 {
@@ -92,16 +92,14 @@ void FilterTool::setTargetModel( AbstractModel* model )
     if( hasByteArray )
     {
         newCharCodecName = mByteArrayDisplay->charCodingName();
-        connect( mByteArrayDisplay, SIGNAL(hasSelectedDataChanged( bool )), SIGNAL(dataSelectionChanged( bool )) );
-
-        connect( mByteArrayDisplay,  SIGNAL(charCodecChanged( const QString& )),
+        connect( mByteArrayDisplay, SIGNAL(hasSelectedDataChanged( bool )), SLOT(onApplyableChanged()) );
+        connect( mByteArrayDisplay, SIGNAL(readOnlyChanged( bool )),        SLOT(onApplyableChanged()) );
+        connect( mByteArrayDisplay, SIGNAL(charCodecChanged( const QString& )),
                  SIGNAL(charCodecChanged( const QString & )) );
     }
 
-    const bool dataSelected = hasByteArray && mByteArrayDisplay->hasSelectedData();
-
+    onApplyableChanged();
     emit charCodecChanged( newCharCodecName );
-    emit dataSelectionChanged( dataSelected );
 }
 
 
@@ -134,6 +132,17 @@ void FilterTool::filter( int filterId ) const
             if( changesDescribable )
                 changesDescribable->closeGroupedChange();
         }
+    }
+}
+
+void FilterTool::onApplyableChanged()
+{
+    const bool newHasWriteable = ( mByteArrayModel && mByteArrayDisplay
+                                   && !mByteArrayDisplay->isReadOnly() && mByteArrayDisplay->hasSelectedData() );
+    if( newHasWriteable != mHasWritable )
+    {
+        mHasWritable = newHasWriteable;
+        emit hasWriteableChanged( newHasWriteable );
     }
 }
 

@@ -33,6 +33,7 @@ class KComboBox;
 class QStackedWidget;
 class QString;
 
+
 class FilterView : public QWidget
 {
   Q_OBJECT
@@ -53,7 +54,7 @@ class FilterView : public QWidget
   private Q_SLOTS:
     void onFilterClicked();
     void onOperationChange( int index );
-    void onDataSelectionChanged( bool dataSelected );
+    void onHasWriteableChanged( bool hasWriteable );
     void onCharCodecChanged( const QString &charCodecName );
     void onValidityChanged( bool isValid );
 
