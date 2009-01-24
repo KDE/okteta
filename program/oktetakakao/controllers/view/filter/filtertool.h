@@ -53,7 +53,7 @@ class FilterTool : public AbstractTool
 
   public:
     void filter( int filterId ) const;
-    bool dataSelected() const;
+    bool hasWriteable() const;
     QList<AbstractByteArrayFilter*> filterList() const;
 
   public:
@@ -61,12 +61,16 @@ class FilterTool : public AbstractTool
     AbstractByteArrayFilterParameterSet *parameterSet( int filterId );
 
   Q_SIGNALS:
-    void dataSelectionChanged( bool dataSelected );
+    void hasWriteableChanged( bool hasWriteable );
     void charCodecChanged( const QString &charCodecName );
+
+  protected Q_SLOTS:
+    void onApplyableChanged();
 
   protected:
     KByteArrayDisplay* mByteArrayDisplay;
     KHECore::AbstractByteArrayModel *mByteArrayModel;
+    bool mHasWritable;
 
     QList<AbstractByteArrayFilter*> mFilterList;
 };

@@ -89,8 +89,8 @@ FilterView::FilterView( FilterTool *tool, QWidget *parent )
                       i18nc("@info:whatsthis",
                             "If you press the <interface>Filter</interface> button, the operation you selected "
                             "above is executed on the document with the given options.")), this );
-    mFilterButton->setEnabled( mTool->dataSelected() );
-    connect( mTool, SIGNAL(dataSelectionChanged( bool )), SLOT(onDataSelectionChanged( bool )) );
+    mFilterButton->setEnabled( mTool->hasWriteable() );
+    connect( mTool, SIGNAL(hasWriteableChanged( bool )), SLOT(onHasWriteableChanged( bool )) );
     connect( mTool, SIGNAL(charCodecChanged( const QString & )), SLOT(onCharCodecChanged( const QString & )) );
     connect( mFilterButton, SIGNAL(clicked( bool )), SLOT(onFilterClicked()) );
     buttonLayout->addWidget( mFilterButton );
@@ -162,13 +162,13 @@ void FilterView::onOperationChange( int index )
     }
 }
 
-void FilterView::onDataSelectionChanged( bool dataSelected )
+void FilterView::onHasWriteableChanged( bool hasWriteable )
 {
     AbstractByteArrayFilterParameterSetEdit *parametersetEdit =
         qobject_cast<AbstractByteArrayFilterParameterSetEdit *>( mParameterSetEditStack->currentWidget() );
     const bool isValid = ( parametersetEdit ? parametersetEdit->isValid() : false );
 
-    mFilterButton->setEnabled( dataSelected && isValid );
+    mFilterButton->setEnabled( hasWriteable && isValid );
 }
 
 void FilterView::onCharCodecChanged( const QString &charCodecName )
@@ -181,7 +181,7 @@ void FilterView::onCharCodecChanged( const QString &charCodecName )
 
 void FilterView::onValidityChanged( bool isValid )
 {
-    mFilterButton->setEnabled( mTool->dataSelected() && isValid );
+    mFilterButton->setEnabled( mTool->hasWriteable() && isValid );
 }
 
 FilterView::~FilterView() {}
