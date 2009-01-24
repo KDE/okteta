@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -28,13 +28,18 @@
 // KDE
 #include <KColorScheme>
 // Qt
-#include <QColor>
+#include <QtGui/QColor>
 
 
 // temporary solution until syntax highlighting is implemented
-static inline QColor colorForChar( const KHECore::KChar Byte )
+static inline QColor colorForChar( const KHECore::KChar byteChar )
 {
-  return Byte.isUndefined() ? Qt::yellow : Byte.isPunct() ? Qt::red : Byte.isPrint() ? Qt::black : Qt::blue;
+  return byteChar.isUndefined() ? Qt::yellow :
+         byteChar.isPunct() ?     Qt::red :
+         byteChar.isPrint() ?     Qt::black :
+         (byteChar == QLatin1Char(0x0A) || byteChar == QLatin1Char(0x0D)) ?
+                                  Qt::darkCyan :
+                                  Qt::blue;
 }
 
 
@@ -43,6 +48,8 @@ static inline KColorScheme::ForegroundRole foregroundRoleForChar( const KHECore:
   return byteChar.isUndefined() ? KColorScheme::NegativeText :
          byteChar.isPunct() ?     KColorScheme::InactiveText :
          byteChar.isPrint() ?     KColorScheme::NormalText :
+         (byteChar == QLatin1Char(0x0A) || byteChar == QLatin1Char(0x0D)) ?
+                                  KColorScheme::VisitedText :
                                   KColorScheme::ActiveText;
 }
 
