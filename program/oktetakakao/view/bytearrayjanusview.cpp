@@ -148,6 +148,10 @@ int ByteArrayJanusView::cursorPosition() const
 {
     return mView->cursorPosition();
 }
+QRect ByteArrayJanusView::cursorRect() const
+{
+    return mView->cursorRect();
+}
 
 int ByteArrayJanusView::startOffset() const
 {

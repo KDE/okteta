@@ -134,6 +134,10 @@ int KByteArrayDisplay::cursorPosition() const
 {
     return mWidget->cursorPosition();
 }
+QRect KByteArrayDisplay::cursorRect() const
+{
+    return mWidget->cursorRect();
+}
 
 int KByteArrayDisplay::startOffset() const
 {

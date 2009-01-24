@@ -78,6 +78,7 @@ class ByteArrayRowViewPrivate : public AbstractByteArrayViewPrivate
   public: // AbstractByteArrayViewPrivate API
     virtual void ensureCursorVisible();
     virtual void placeCursor( const QPoint& point );
+    virtual QRect cursorRect() const;
 
   public:
     void toggleOffsetColumn( bool offsetColumnVisible );

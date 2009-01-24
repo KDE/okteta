@@ -630,6 +630,22 @@ void ByteArrayRowViewPrivate::pauseCursor()
     updateCursor( *mByteArrayColumn );
 }
 
+QRect ByteArrayRowViewPrivate::cursorRect() const
+{
+    Q_Q( const ByteArrayRowView );
+
+    const int x = mByteArrayColumn->xOfLinePosition( mTableCursor->pos() ) - q->xOffset();
+    const int y = q->lineHeight() * mTableCursor->line()
+                  + mByteArrayColumn->yOfCodingId( mActiveCoding ) - q->yOffset();
+    const int w = mByteArrayColumn->byteWidth();
+    const int h = q->lineHeight();
+    const QPoint viewportPoint( x, y );
+    const QPoint point = q->viewport()->mapToParent( viewportPoint ); // TODO: seems still missing some offset
+    const QSize size( w, h );
+
+    const QRect result( point, size );
+    return result;
+}
 
 // TODO: should be movable to base class
 void ByteArrayRowViewPrivate::updateCursor( const ByteArrayRowColumnRenderer& column )

@@ -143,6 +143,7 @@ class AbstractByteArrayViewPrivate
   public: // API to be implemented
     virtual void ensureCursorVisible() = 0;
     virtual void placeCursor( const QPoint& point ) = 0;
+    virtual QRect cursorRect() const = 0;
 
   public: // events
     void resizeEvent( QResizeEvent* resizeEvent );

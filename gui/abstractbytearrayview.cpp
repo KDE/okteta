@@ -445,6 +445,12 @@ void AbstractByteArrayView::updateChanged()
     d->updateChanged();
 }
 
+QRect AbstractByteArrayView::cursorRect() const
+{
+    Q_D( const AbstractByteArrayView );
+    return d->cursorRect();
+}
+
 
 bool AbstractByteArrayView::event( QEvent* event )
 {

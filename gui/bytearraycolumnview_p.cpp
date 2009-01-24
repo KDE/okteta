@@ -659,6 +659,23 @@ void ByteArrayColumnViewPrivate::pauseCursor()
     updateCursor( *mInactiveColumn );
 }
 
+
+QRect ByteArrayColumnViewPrivate::cursorRect() const
+{
+    Q_Q( const ByteArrayColumnView );
+
+    const int x = mActiveColumn->xOfLinePosition( mTableCursor->pos() ) - q->xOffset();
+    const int y = q->lineHeight() * mTableCursor->line() - q->yOffset();
+    const int w = mActiveColumn->byteWidth();
+    const int h = q->lineHeight();
+    const QPoint viewportPoint( x, y );
+    const QPoint point = q->viewport()->mapToParent( viewportPoint ); // TODO: seems still missing some offset
+    const QSize size( w, h );
+
+    const QRect result( point, size );
+    return result;
+}
+
 void ByteArrayColumnViewPrivate::updateCursor( const AbstractByteArrayColumnRenderer& column )
 {
     Q_Q( ByteArrayColumnView );

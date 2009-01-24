@@ -309,6 +309,9 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     virtual void cut();
     virtual void paste();
 
+  public:
+    QRect cursorRect() const;
+
   public: // QWidget API
     virtual QSize sizeHint() const;
 

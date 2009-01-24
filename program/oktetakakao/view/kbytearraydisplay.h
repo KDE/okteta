@@ -39,6 +39,8 @@ class KCursorProxy;
 namespace KHE {
 class Section;
 }
+class QRect;
+
 
 class KByteArrayDisplay : public KAbstractView, public KDE::If::Zoomable, public KDE::If::DataSelectable, public KDE::If::SelectedDataWriteable
 {
@@ -107,6 +109,7 @@ class KByteArrayDisplay : public KAbstractView, public KDE::If::Zoomable, public
     KHE::Section selection() const;
     void setSelection( int start, int end );
     void insert( const QByteArray& byteArray );
+    QRect cursorRect() const;
 
   public: // overwrite
     void setOverwriteMode( bool overwriteMode );

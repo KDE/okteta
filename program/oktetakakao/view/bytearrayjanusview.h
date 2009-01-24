@@ -64,6 +64,7 @@ class ByteArrayJanusView : public QWidget
     void setCursorPosition( int cursorPosition );
     void setSelectionCursorPosition( int index );
     int cursorPosition() const;
+    QRect cursorRect() const;
 
   public: // codings
     void setValueCoding( int valueCoding );
