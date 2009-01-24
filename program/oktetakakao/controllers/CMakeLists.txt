@@ -109,6 +109,7 @@ set( GOTOOFFSETCONTROLLER_SRCS
   view/gotooffset/gotooffsetcontroller.cpp
 )
 set( BOOKMARKSCONTROLLER_SRCS
+  view/bookmarks/bookmarkeditpopup.cpp
   view/bookmarks/bookmarkscontroller.cpp
 )
 set( BOOKMARKSTOOL_SRCS
