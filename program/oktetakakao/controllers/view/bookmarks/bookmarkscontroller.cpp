@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -22,6 +22,8 @@
 
 #include "bookmarkscontroller.h"
 
+// controller
+#include "bookmarkeditpopup.h"
 // lib
 #include <kbytearraydisplay.h>
 #include <kbytearraydocument.h>
@@ -30,8 +32,10 @@
 // Okteta gui
 #include <koffsetformat.h>
 // Okteta core
+#include <charcodec.h>
+#include <khechar.h>
 #include <kbookmarkable.h>
-#include <kbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 // KDE
 #include <KXMLGUIClient>
 #include <KLocale>
@@ -43,6 +47,7 @@
 
 
 static const int MaxEntryLength = 150;
+static const int MaxBookmarkNameSize = 40;
 static const char BookmarkListActionListId[] = "bookmark_list";
 
 // TODO: Sortieren nach Offset oder Zeit
@@ -145,7 +150,7 @@ void BookmarksController::updateBookmarks()
     {
         KHECore::Bookmark bookmark = *bit;
         printFunction( codedOffset, startOffset+bookmark.offset() );
-        QString title = i18nc( "@item description of bookmark", "Offset: %1", QLatin1String(codedOffset) );
+        QString title = i18nc( "@item description of bookmark", "%1: %2", QLatin1String(codedOffset),bookmark.name() );
         if( b <= lastWithNumericShortCut )
             title = QString::fromLatin1("&%1 %2").arg( b ).arg( title );
         // = KStringHandler::rsqueeze( view->title(), MaxEntryLength );
@@ -221,9 +226,46 @@ void BookmarksController::onCursorPositionChanged( int newPosition )
 void BookmarksController::createBookmark()
 {
     const int cursorPosition = mByteArrayDisplay->cursorPosition();
-    QList<KHECore::Bookmark> bookmarks;
-    bookmarks.append( cursorPosition );
-    mBookmarks->addBookmarks( bookmarks ); // TODO: popup for name tag
+
+    // search for text at cursor
+    const int endPosition = qMax( cursorPosition+MaxBookmarkNameSize, mByteArray->size() );
+    KHECore::CharCodec* charCodec = KHECore::CharCodec::createCodec( mByteArrayDisplay->charCodingName() );
+    QString bookmarkName;
+    for( int i=cursorPosition; i<endPosition; ++i )
+    {
+        const KHECore::KChar decodedChar = charCodec->decode( mByteArray->datum(i) );
+        // TODO: Zeilenumbrüche ausnehmen
+        const bool isStringChar = ( !decodedChar.isUndefined() &&
+                                    (decodedChar.isLetterOrNumber() || decodedChar.isSpace() || decodedChar.isPunct()) );
+
+        if( !isStringChar )
+            break;
+        // TODO: only use complete words
+        bookmarkName.append( decodedChar );
+    }
+    delete charCodec;
+    if( bookmarkName.isEmpty() )
+        bookmarkName = i18nc( "default name of a bookmark", "Bookmark" );// %1").arg( 0 ) ); // TODO: use counter like with new file, globally
+
+    BookmarkEditPopup* bookmarkEditPopup = new BookmarkEditPopup( mByteArrayDisplay->widget() );
+    QPoint popupPoint = mByteArrayDisplay->cursorRect().topLeft();
+//     popupPoint.ry() += mSlider->height() / 2;
+    popupPoint = mByteArrayDisplay->widget()->mapToGlobal( popupPoint );
+
+    bookmarkEditPopup->setPosition( popupPoint );
+    bookmarkEditPopup->setName( bookmarkName );
+    const bool success = ( bookmarkEditPopup->exec() != 0 );
+
+    if( success )
+    {
+        KHECore::Bookmark bookmark( cursorPosition );
+        bookmark.setName( bookmarkEditPopup->name() );
+
+        QList<KHECore::Bookmark> bookmarks;
+        bookmarks.append( bookmark );
+        mBookmarks->addBookmarks( bookmarks );
+    }
+    delete bookmarkEditPopup;
 }
 
 void BookmarksController::deleteBookmark()
