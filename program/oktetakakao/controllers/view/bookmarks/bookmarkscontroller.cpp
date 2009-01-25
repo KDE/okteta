@@ -32,8 +32,8 @@
 // Okteta gui
 #include <koffsetformat.h>
 // Okteta core
+#include <wordbytearrayservice.h>
 #include <charcodec.h>
-#include <khechar.h>
 #include <kbookmarkable.h>
 #include <abstractbytearraymodel.h>
 // KDE
@@ -228,22 +228,11 @@ void BookmarksController::createBookmark()
     const int cursorPosition = mByteArrayDisplay->cursorPosition();
 
     // search for text at cursor
-    const int endPosition = qMax( cursorPosition+MaxBookmarkNameSize, mByteArray->size() );
-    KHECore::CharCodec* charCodec = KHECore::CharCodec::createCodec( mByteArrayDisplay->charCodingName() );
-    QString bookmarkName;
-    for( int i=cursorPosition; i<endPosition; ++i )
-    {
-        const KHECore::KChar decodedChar = charCodec->decode( mByteArray->datum(i) );
-        // TODO: Zeilenumbrüche ausnehmen
-        const bool isStringChar = ( !decodedChar.isUndefined() &&
-                                    (decodedChar.isLetterOrNumber() || decodedChar.isSpace() || decodedChar.isPunct()) );
-
-        if( !isStringChar )
-            break;
-        // TODO: only use complete words
-        bookmarkName.append( decodedChar );
-    }
+    const KHECore::CharCodec* charCodec = KHECore::CharCodec::createCodec( mByteArrayDisplay->charCodingName() );
+    const KHECore::WordByteArrayService textService( mByteArray, charCodec );
+    QString bookmarkName = textService.text( cursorPosition, cursorPosition+MaxBookmarkNameSize-1 );
     delete charCodec;
+
     if( bookmarkName.isEmpty() )
         bookmarkName = i18nc( "default name of a bookmark", "Bookmark" );// %1").arg( 0 ) ); // TODO: use counter like with new file, globally
 
