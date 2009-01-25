@@ -97,5 +97,21 @@ void BookmarksTool::gotoBookmark( const KHECore::Bookmark& bookmark )
     }
 }
 
+void BookmarksTool::setBookmarkName( const QString& name, int bookmarkIndex )
+{
+    // TODO: this is a very ugly hack!
+    // Fix this by turning Bookmarkable into a list API, so the change of one bookmark is a one op call
+    KHECore::Bookmark bookmark = mBookmarks->bookmarkList().list().at( bookmarkIndex );
+
+    QList<KHECore::Bookmark> bookmarks;
+    bookmarks.append( bookmark );
+    mBookmarks->removeBookmarks( bookmarks );
+
+    bookmark.setName( name );
+    bookmarks.clear();
+    bookmarks.append( bookmark );
+    mBookmarks->addBookmarks( bookmarks );
+}
+
 
 BookmarksTool::~BookmarksTool() {}

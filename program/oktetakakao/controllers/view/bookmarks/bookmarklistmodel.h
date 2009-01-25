@@ -56,7 +56,9 @@ class BookmarkListModel : public QAbstractTableModel
     virtual int rowCount( const QModelIndex& parent ) const;
     virtual int columnCount( const QModelIndex& parent ) const;
     virtual QVariant data( const QModelIndex& index, int role ) const;
+    virtual Qt::ItemFlags flags( const QModelIndex& index ) const;
     virtual QVariant headerData( int section, Qt::Orientation orientation, int role ) const;
+    virtual bool setData( const QModelIndex& index, const QVariant& value, int role );
 
   public:
     KHECore::Bookmark bookmark( const QModelIndex& index ) const;

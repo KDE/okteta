@@ -62,7 +62,10 @@ Q_UNUSED( parent )
 QVariant BookmarkListModel::data( const QModelIndex& index, int role ) const
 {
     QVariant result;
-    if( role == Qt::DisplayRole )
+
+    switch( role )
+    {
+    case Qt::DisplayRole:
     {
         const int bookmarkIndex = index.row();
 
@@ -86,6 +89,21 @@ QVariant BookmarkListModel::data( const QModelIndex& index, int role ) const
                 ;
         }
     }
+    case Qt::EditRole:
+    {
+        const int bookmarkIndex = index.row();
+
+        const int column = index.column();
+        if( column == TitleColumnId )
+        {
+            const KHECore::Bookmark bookmark = mBookmarkList.at( bookmarkIndex );
+            result = bookmark.name();
+        }
+        break;
+    }
+    default:
+        break;
+    }
 #if 0
     else if( role == Qt::DecorationRole )
     {
@@ -98,6 +116,16 @@ QVariant BookmarkListModel::data( const QModelIndex& index, int role ) const
         }
     }
 #endif
+    return result;
+}
+
+Qt::ItemFlags BookmarkListModel::flags( const QModelIndex& index ) const
+{
+    Qt::ItemFlags result = QAbstractTableModel::flags( index );
+    const int column = index.column();
+    if( column == TitleColumnId )
+        result |= Qt::ItemIsEditable;
+
     return result;
 }
 
@@ -115,6 +143,28 @@ QVariant BookmarkListModel::headerData( int section, Qt::Orientation orientation
     }
     else
         result = QAbstractTableModel::headerData( section, orientation, role );
+
+    return result;
+}
+
+bool BookmarkListModel::setData( const QModelIndex& index, const QVariant& value, int role )
+{
+    bool result;
+
+    if( role == Qt::EditRole )
+    {
+        const int bookmarkIndex = index.row();
+
+        const int column = index.column();
+        if( column == TitleColumnId )
+        {
+            mTool->setBookmarkName( value.toString(), bookmarkIndex );
+//             emit dataChanged( index, index );
+            result = true;
+        }
+    }
+    else
+        result = QAbstractItemModel::setData( index, value, role );
 
     return result;
 }

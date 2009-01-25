@@ -57,6 +57,7 @@ class BookmarksTool : public AbstractTool
 
   public:
     void gotoBookmark( const KHECore::Bookmark& bookmark );
+    void setBookmarkName( const QString& name, int bookmarkIndex );
 
   Q_SIGNALS:
     void modelChanged( bool hasModel );

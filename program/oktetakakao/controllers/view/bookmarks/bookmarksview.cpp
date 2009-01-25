@@ -58,7 +58,9 @@ BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
 
 void BookmarksView::onBookmarkDoubleClicked( const QModelIndex& index )
 {
-    if( mTool->hasModel() )
+    const int column = index.column();
+    const bool isOffsetColum = ( column == BookmarkListModel::OffsetColumnId );
+    if( mTool->hasModel() && isOffsetColum )
         mTool->gotoBookmark( mBookmarkListModel->bookmark(index) );
 }
 
