@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Core library, part of the KDE project.
 
-    Copyright 2005,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2005,2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -237,6 +237,36 @@ int WordByteArrayService::indexOfBehindLeftWordEnd( unsigned int index ) const
   return 0;
 }
 */
+
+// TODO: rename WordByteArrayService to TextByteArrayService or TextByteArrayAnalyser
+QString WordByteArrayService::text( unsigned int index, int lastIndex ) const
+{
+    QString result;
+
+    const int lastValidIndex = mByteArrayModel->size() - 1;
+    const unsigned int behindLastIndex =
+        (( lastIndex < 0 || lastIndex > lastValidIndex ) ? lastValidIndex : lastIndex ) + 1;
+
+    const int maxTextLength = behindLastIndex - index;
+    result.reserve( maxTextLength );
+
+    for( ; index<behindLastIndex; ++index )
+    {
+        const KChar decodedChar = mCharCodec->decode( mByteArrayModel->datum(index) );
+        // TODO: handle line breaks, separators and spacing, controlled by flags given as parameter
+        const bool isTextChar = ( !decodedChar.isUndefined() &&
+                                  (decodedChar.isLetterOrNumber() || decodedChar.isSpace() || decodedChar.isPunct()) );
+
+        if( !isTextChar )
+            break;
+
+        result.append( decodedChar );
+    }
+
+    result.squeeze();
+
+    return result;
+}
 
 WordByteArrayService::~WordByteArrayService() {}
 

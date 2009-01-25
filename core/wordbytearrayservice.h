@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Core library, part of the KDE project.
 
-    Copyright 2005,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2005,2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -27,6 +27,8 @@
 #include "oktetacore_export.h"
 // commonlib
 #include <section.h>
+
+class QString;
 
 
 namespace KHECore
@@ -126,6 +128,14 @@ class OKTETACORE_EXPORT WordByteArrayService
       * @return the section with a word around index.
       */
     KHE::Section wordSection( unsigned int index ) const;
+
+    /** returns the text starting at the given index until the first non-text byte
+      * if there is no text byte at the index the result is empty.
+      * @param index
+      * @param lastIndex if -1 lastIndex is set to the end of th byte array.
+      * @return the text starting at the index
+      */
+    QString text( unsigned int index, int lastIndex = -1 ) const;
 
   protected:
     const AbstractByteArrayModel* const mByteArrayModel;
