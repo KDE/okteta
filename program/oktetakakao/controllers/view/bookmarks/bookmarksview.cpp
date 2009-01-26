@@ -27,6 +27,10 @@
 #include "bookmarkstool.h"
 // Okteta core
 #include <bookmark.h>
+// KDE
+#include <KPushButton>
+#include <KLocale>
+#include <KGuiItem>
 // Qt
 #include <QtGui/QLayout>
 #include <QtGui/QTreeView>
@@ -36,6 +40,8 @@ BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
  : QWidget( parent ), mTool( tool )
 {
     mBookmarkListModel = new BookmarkListModel( mTool, this );
+    connect( mBookmarkListModel, SIGNAL(modelReset()),
+             SLOT(onBookmarkSelectionChanged()) );
 
     QVBoxLayout *baseLayout = new QVBoxLayout( this );
     baseLayout->setMargin( 0 );
@@ -46,13 +52,64 @@ BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
     mBookmarkListView->setItemsExpandable( false );
     mBookmarkListView->setUniformRowHeights( true );
     mBookmarkListView->setAllColumnsShowFocus( true );
+    mBookmarkListView->setSelectionMode( QAbstractItemView::ExtendedSelection );
     mBookmarkListView->setModel( mBookmarkListModel );
     for( int c = 0; c<BookmarkListModel::NoOfColumnIds; ++c )
         mBookmarkListView->resizeColumnToContents( c );
     connect( mBookmarkListView, SIGNAL(doubleClicked( const QModelIndex& )),
              SLOT(onBookmarkDoubleClicked( const QModelIndex& )) );
+    connect( mBookmarkListView->selectionModel(),
+             SIGNAL(selectionChanged( const QItemSelection&, const QItemSelection& )),
+             SLOT(onBookmarkSelectionChanged()) );
 
     baseLayout->addWidget( mBookmarkListView, 10 );
+
+    // actions
+    QHBoxLayout* actionsLayout = new QHBoxLayout();
+
+    const KGuiItem createBookmarkGuiItem( QString()/*i18n("C&opy")*/, "bookmark-new",
+                      i18nc("@info:tooltip","Creates a new bookmark for the current cursor position."),
+                      i18nc("@info:whatsthis",
+                            "If you press this button, a new bookmark will be created "
+                            "for the current cursor position.") );
+    mCreateBookmarkButton = new KPushButton( createBookmarkGuiItem, this );
+    mCreateBookmarkButton->setEnabled( mTool->canCreateBookmark() );
+    connect( mCreateBookmarkButton, SIGNAL(clicked(bool)), SLOT(onCreateBookmarkButtonClicked()) );
+    connect( mTool, SIGNAL(canCreateBookmarkChanged( bool )), mCreateBookmarkButton, SLOT(setEnabled( bool )) );
+    actionsLayout->addWidget( mCreateBookmarkButton );
+
+    const KGuiItem deleteBookmarkGuiItem( QString()/*i18n("&Go to")*/, "edit-delete",
+                      i18nc("@info:tooltip","Deletes all the selected bookmarks."),
+                      i18nc("@info:whatsthis",
+                            "If you press this button, all bookmarks which are "
+                            "selected will be deleted.") );
+    mDeleteBookmarksButton = new KPushButton( deleteBookmarkGuiItem, this );
+    connect( mDeleteBookmarksButton, SIGNAL(clicked(bool)), SLOT(onDeleteBookmarkButtonClicked()) );
+    actionsLayout->addWidget( mDeleteBookmarksButton );
+
+    actionsLayout->addStretch();
+
+    const KGuiItem gotoGuiItem( QString()/*i18n("&Go to")*/, "go-jump",
+                      i18nc("@info:tooltip","Moves the cursor to the selected bookmark."),
+                      i18nc("@info:whatsthis",
+                            "If you press this button, the cursor is moved to the position "
+                            "of the bookmark which has been last selected.") );
+    mGotoBookmarkButton = new KPushButton( gotoGuiItem, this );
+    connect( mGotoBookmarkButton, SIGNAL(clicked(bool)), SLOT(onGotoBookmarkButtonClicked()) );
+    actionsLayout->addWidget( mGotoBookmarkButton );
+
+    const KGuiItem renameGuiItem( QString()/*i18n("&Go to")*/, "edit-rename",
+                      i18nc("@info:tooltip","Enables the renaming of the selected bookmark."),
+                      i18nc("@info:whatsthis",
+                            "If you press this button, the name of the bookmark "
+                            "which has been last selected can be edited.") );
+    mRenameBookmarkButton = new KPushButton( renameGuiItem, this );
+    connect( mRenameBookmarkButton, SIGNAL(clicked(bool)), SLOT(onRenameBookmarkButtonClicked()) );
+    actionsLayout->addWidget( mRenameBookmarkButton );
+
+    baseLayout->addLayout( actionsLayout );
+
+    onBookmarkSelectionChanged();
 }
 
 
@@ -60,8 +117,62 @@ void BookmarksView::onBookmarkDoubleClicked( const QModelIndex& index )
 {
     const int column = index.column();
     const bool isOffsetColum = ( column == BookmarkListModel::OffsetColumnId );
-    if( mTool->hasModel() && isOffsetColum )
+    if( isOffsetColum )
         mTool->gotoBookmark( mBookmarkListModel->bookmark(index) );
 }
+
+void BookmarksView::onBookmarkSelectionChanged()
+{
+    const QItemSelectionModel* selectionModel = mBookmarkListView->selectionModel();
+
+    // TODO: selectionModel->selectedIndexes() is a expensive operation,
+    // but with Qt 4.4.3 hasSelection() has the flaw to return true with a current index
+    const bool hasSelection = !selectionModel->selectedIndexes().isEmpty();
+    mDeleteBookmarksButton->setEnabled( hasSelection );
+
+    const bool bookmarkSelected = selectionModel->isSelected( selectionModel->currentIndex() );
+    mRenameBookmarkButton->setEnabled( bookmarkSelected );
+    mGotoBookmarkButton->setEnabled( bookmarkSelected );
+}
+
+void BookmarksView::onCreateBookmarkButtonClicked()
+{
+    const KHECore::Bookmark bookmark = mTool->createBookmark();
+    if( bookmark.isValid() )
+    {
+        const QModelIndex index = mBookmarkListModel->index( bookmark, BookmarkListModel::TitleColumnId );
+        if( index.isValid() )
+            mBookmarkListView->edit( index );
+    }
+}
+
+void BookmarksView::onDeleteBookmarkButtonClicked()
+{
+    const QModelIndexList selectedRows = mBookmarkListView->selectionModel()->selectedRows();
+
+    QList<KHECore::Bookmark> bookmarksToBeDeleted;
+    foreach( const QModelIndex& index, selectedRows )
+    {
+        const KHECore::Bookmark bookmark = mBookmarkListModel->bookmark( index );
+        bookmarksToBeDeleted.append( bookmark );
+    }
+    mTool->deleteBookmarks( bookmarksToBeDeleted );
+}
+
+void BookmarksView::onGotoBookmarkButtonClicked()
+{
+    const QModelIndex index = mBookmarkListView->selectionModel()->currentIndex();
+    if( index.isValid() )
+        mTool->gotoBookmark( mBookmarkListModel->bookmark(index) );
+}
+
+void BookmarksView::onRenameBookmarkButtonClicked()
+{
+    QModelIndex index = mBookmarkListView->selectionModel()->currentIndex();
+    const QModelIndex nameIndex = index.sibling( index.row(), BookmarkListModel::TitleColumnId );
+    if( index.isValid() )
+        mBookmarkListView->edit( index );
+}
+
 
 BookmarksView::~BookmarksView() {}

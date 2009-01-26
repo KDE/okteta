@@ -28,6 +28,7 @@
 
 class BookmarkListModel;
 class BookmarksTool;
+class KPushButton;
 class QTreeView;
 class QModelIndex;
 
@@ -45,6 +46,11 @@ class BookmarksView : public QWidget
 
   protected Q_SLOTS:
     void onBookmarkDoubleClicked( const QModelIndex& index );
+    void onBookmarkSelectionChanged();
+    void onCreateBookmarkButtonClicked();
+    void onDeleteBookmarkButtonClicked();
+    void onGotoBookmarkButtonClicked();
+    void onRenameBookmarkButtonClicked();
 
   private:
     BookmarksTool* mTool;
@@ -52,6 +58,10 @@ class BookmarksView : public QWidget
     BookmarkListModel* mBookmarkListModel;
 
     QTreeView* mBookmarkListView;
+    KPushButton* mCreateBookmarkButton;
+    KPushButton* mDeleteBookmarksButton;
+    KPushButton* mGotoBookmarkButton;
+    KPushButton* mRenameBookmarkButton;
 };
 
 

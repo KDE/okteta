@@ -30,6 +30,8 @@
 // Okteta gui
 #include <koffsetformat.h>
 // Okteta core
+#include <wordbytearrayservice.h>
+#include <charcodec.h>
 #include <kbookmarkable.h>
 #include <kbytearraymodel.h>
 // KDE
@@ -37,18 +39,18 @@
 // Qt
 #include <QtGui/QWidget>
 
+static const int MaxBookmarkNameSize = 40;
+
 
 BookmarksTool::BookmarksTool()
- : mByteArrayDisplay( 0 ), mByteArray( 0 ), mBookmarks( 0 )
+ : mByteArrayDisplay( 0 ), mByteArray( 0 ), mBookmarks( 0 ), mCanCreateBookmark( false )
 {
     setObjectName( "Bookmarks" );
 }
 
 
 QString BookmarksTool::title() const { return i18nc("@title:window", "Bookmarks"); }
-
-bool BookmarksTool::hasModel() const { return ( mBookmarks != 0 ); }
-int BookmarksTool::cursorPosition() const { return mByteArrayDisplay ? mByteArrayDisplay->cursorPosition() : 0; }
+bool BookmarksTool::canCreateBookmark() const { return mCanCreateBookmark; }
 KHECore::BookmarkList BookmarksTool::bookmarks() const
 {
     KHECore::BookmarkList result;
@@ -75,18 +77,68 @@ void BookmarksTool::setTargetModel( AbstractModel* model )
     const bool hasViewWithBookmarks = ( mBookmarks != 0 );
     if( hasViewWithBookmarks )
     {
+        onCursorPositionChanged( mByteArrayDisplay->cursorPosition() );
+
         connect( mByteArray, SIGNAL(bookmarksAdded( const QList<KHECore::Bookmark>& )),
                  SIGNAL(bookmarksAdded( const QList<KHECore::Bookmark>& )) );
         connect( mByteArray, SIGNAL(bookmarksRemoved( const QList<KHECore::Bookmark>& )),
                  SIGNAL(bookmarksRemoved( const QList<KHECore::Bookmark>& )) );
-        connect( mByteArray, SIGNAL(bookmarksModified( bool )),
-                 SIGNAL(bookmarksModified( bool )) );
-        connect( mByteArrayDisplay, SIGNAL(cursorPositionChanged( int )), SIGNAL(cursorPositionChanged( int )) );
+        connect( mByteArray, SIGNAL(bookmarksAdded( const QList<KHECore::Bookmark>& )),
+                 SLOT(onBookmarksModified()) );
+        connect( mByteArray, SIGNAL(bookmarksRemoved( const QList<KHECore::Bookmark>& )),
+                 SLOT(onBookmarksModified()) );
+//         connect( mByteArray, SIGNAL(bookmarksModified( bool )),
+//                  SIGNAL(bookmarksModified( bool )) );
+        connect( mByteArrayDisplay, SIGNAL(cursorPositionChanged( int )), SLOT(onCursorPositionChanged( int )) );
+    }
+    else
+    {
+        static const bool cantCreateBookmark = false;
+        if( mCanCreateBookmark != cantCreateBookmark )
+        {
+            mCanCreateBookmark = cantCreateBookmark;
+            emit canCreateBookmarkChanged( cantCreateBookmark );
+        }
     }
 
-    emit modelChanged( hasViewWithBookmarks );
+    emit hasBookmarksChanged( hasViewWithBookmarks );
 }
 
+KHECore::Bookmark BookmarksTool::createBookmark()
+{
+    KHECore::Bookmark bookmark;
+
+    if( mBookmarks )
+    {
+        const int cursorPosition = mByteArrayDisplay->cursorPosition();
+
+        // search for text at cursor
+        const KHECore::CharCodec* charCodec = KHECore::CharCodec::createCodec( mByteArrayDisplay->charCodingName() );
+        const KHECore::WordByteArrayService textService( mByteArray, charCodec );
+        QString bookmarkName = textService.text( cursorPosition, cursorPosition+MaxBookmarkNameSize-1 );
+        delete charCodec;
+
+        if( bookmarkName.isEmpty() )
+            bookmarkName = i18nc( "default name of a bookmark", "Bookmark" );
+        // %1").arg( 0 ) ); // TODO: use counter like with new file, globally
+
+        bookmark.setOffset( mByteArrayDisplay->cursorPosition() );
+        bookmark.setName( bookmarkName );
+
+        QList<KHECore::Bookmark> bookmarksToBeCreated;
+        bookmarksToBeCreated.append( bookmark );
+        mBookmarks->addBookmarks( bookmarksToBeCreated );
+    }
+
+    return bookmark;
+}
+
+void BookmarksTool::deleteBookmarks( const QList<KHECore::Bookmark>& bookmarks )
+{
+    if( mBookmarks )
+        mBookmarks->removeBookmarks( bookmarks );
+    mByteArrayDisplay->widget()->setFocus();
+}
 
 void BookmarksTool::gotoBookmark( const KHECore::Bookmark& bookmark )
 {
@@ -111,7 +163,32 @@ void BookmarksTool::setBookmarkName( const QString& name, int bookmarkIndex )
     bookmarks.clear();
     bookmarks.append( bookmark );
     mBookmarks->addBookmarks( bookmarks );
+
+    mByteArrayDisplay->widget()->setFocus();
 }
 
+void BookmarksTool::onCursorPositionChanged( int newPosition )
+{
+    const KHECore::BookmarkList bookmarkList = mBookmarks->bookmarkList();
+    const int bookmarksCount = bookmarkList.size();
+    const bool hasBookmarks = ( bookmarksCount != 0 );
+    const bool isInsideByteArray = ( newPosition < mByteArray->size() );
+    const bool isAtBookmark = hasBookmarks ? bookmarkList.contains( newPosition ) : false;
+    const bool canCreateBookmark = ( !isAtBookmark && isInsideByteArray );
+
+    if( canCreateBookmark != mCanCreateBookmark )
+    {
+        mCanCreateBookmark = canCreateBookmark;
+        emit canCreateBookmarkChanged( canCreateBookmark );
+    }
+}
+
+// TODO: is a hack
+// better just only check for the added and removed, if they include the current position, then change mCanCreateBookmark
+void BookmarksTool::onBookmarksModified()
+{
+    const int cursorPosition = mByteArrayDisplay->cursorPosition();
+    onCursorPositionChanged( cursorPosition );
+}
 
 BookmarksTool::~BookmarksTool() {}

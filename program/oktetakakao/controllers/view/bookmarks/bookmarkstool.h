@@ -45,8 +45,8 @@ class BookmarksTool : public AbstractTool
     virtual ~BookmarksTool();
 
   public:
-    bool hasModel() const;
-    int cursorPosition() const;
+    bool hasBookmarks() const;
+    bool canCreateBookmark() const;
     KHECore::BookmarkList bookmarks() const;
 
   public: // AbstractTool API
@@ -56,20 +56,28 @@ class BookmarksTool : public AbstractTool
     virtual void setTargetModel( AbstractModel* model );
 
   public:
+    KHECore::Bookmark createBookmark();
     void gotoBookmark( const KHECore::Bookmark& bookmark );
     void setBookmarkName( const QString& name, int bookmarkIndex );
+    void deleteBookmarks( const QList<KHECore::Bookmark>& bookmarks );
 
   Q_SIGNALS:
-    void modelChanged( bool hasModel );
+    void hasBookmarksChanged( bool hasBookmarks );
     void bookmarksAdded( const QList<KHECore::Bookmark>& bookmarks );
     void bookmarksRemoved( const QList<KHECore::Bookmark>& bookmarks );
-    void bookmarksModified( bool modified );
-    void cursorPositionChanged( int newPosition );
+//     void bookmarksModified( bool modified );
+    void canCreateBookmarkChanged( bool canCreateBookmark );
+
+  protected Q_SLOTS:
+    void onCursorPositionChanged( int newPosition );
+    void onBookmarksModified();
 
   protected: // sources
     KByteArrayDisplay* mByteArrayDisplay;
     KHECore::AbstractByteArrayModel* mByteArray;
     KHECore::Bookmarkable* mBookmarks;
+
+    bool mCanCreateBookmark;
 };
 
 #endif

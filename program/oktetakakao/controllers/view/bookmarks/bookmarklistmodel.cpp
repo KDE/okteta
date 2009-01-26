@@ -37,7 +37,7 @@ BookmarkListModel::BookmarkListModel( BookmarksTool* tool, QObject* parent )
 {
     mPrintFunction = KHEUI::KOffsetFormat::printFunction( KHEUI::KOffsetFormat::Hexadecimal );
 
-    connect( mTool, SIGNAL(modelChanged( bool )), SLOT(onModelChanged( bool )) );
+    connect( mTool, SIGNAL(hasBookmarksChanged( bool )), SLOT(onHasBookmarksChanged( bool )) );
     connect( mTool, SIGNAL(bookmarksAdded( const QList<KHECore::Bookmark>& )),
              SLOT(onBookmarksChanged()) );
     connect( mTool, SIGNAL(bookmarksRemoved( const QList<KHECore::Bookmark>& )),
@@ -175,10 +175,25 @@ KHECore::Bookmark BookmarkListModel::bookmark( const QModelIndex& index ) const
     return mBookmarkList.at( bookmarkIndex );
 }
 
-
-void BookmarkListModel::onModelChanged( bool hasModel )
+QModelIndex BookmarkListModel::index( const KHECore::Bookmark& bookmark, int column ) const
 {
-    if( hasModel )
+    QModelIndex result;
+    for( int i=0; i<mBookmarkList.count(); ++i )
+    {
+        if( bookmark == mBookmarkList.at(i) )
+        {
+            result = createIndex( i, column );
+            break;
+        }
+    }
+
+    return result;
+}
+
+
+void BookmarkListModel::onHasBookmarksChanged( bool hasBookmarks )
+{
+    if( hasBookmarks )
         mBookmarkList = mTool->bookmarks().list();
     else
         mBookmarkList.clear();

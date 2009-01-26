@@ -62,9 +62,11 @@ class BookmarkListModel : public QAbstractTableModel
 
   public:
     KHECore::Bookmark bookmark( const QModelIndex& index ) const;
+    QModelIndex index( const KHECore::Bookmark& bookmark, int column = BookmarkListModel::TitleColumnId ) const;
+    using QAbstractTableModel::index;
 
   protected Q_SLOTS:
-    void onModelChanged( bool hasModel );
+    void onHasBookmarksChanged( bool hasBookmarks );
     void onBookmarksChanged();
 //     void onHeadVersionChanged( int newHeadVersionIndex );
 //     void onHeadVersionDataChanged( const KDocumentVersionData &newVersionData );
