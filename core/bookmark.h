@@ -50,6 +50,7 @@ class OKTETACORE_EXPORT Bookmark
   public:
     void move( int offset );
     void setName( const QString& name );
+    void setOffset( int offset );
   protected:
     int mOffset;
     QString mName;
@@ -65,6 +66,7 @@ inline QString Bookmark::name() const { return mName; }
 
 inline void Bookmark::move( int offset ) { mOffset += offset; }
 inline void Bookmark::setName( const QString& name ) { mName = name; }
+inline void Bookmark::setOffset( int offset ) { mOffset = offset; }
 
 }
 
