@@ -209,7 +209,9 @@ void StringsExtractView::onStringSelectionChanged()
 {
     const QItemSelectionModel *selectionModel = mContainedStringTableView->selectionModel();
 
-    const bool hasSelection = selectionModel->hasSelection();
+    // TODO: selectionModel->selectedIndexes() is a expensive operation,
+    // but with Qt 4.4.3 hasSelection() has the flaw to return true with a current index
+    const bool hasSelection = !selectionModel->selectedIndexes().isEmpty();
     mCopyButton->setEnabled( hasSelection );
 
     const bool stringSelected = selectionModel->isSelected( selectionModel->currentIndex() );
