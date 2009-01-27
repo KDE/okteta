@@ -102,12 +102,12 @@ void BookmarksController::setTargetModel( AbstractModel* model )
     int bookmarksCount = 0;
     if( hasViewWithBookmarks )
     {
-        bookmarksCount = mBookmarks->bookmarkList().size();
+        bookmarksCount = mBookmarks->bookmarksCount();
         connect( mByteArray, SIGNAL(bookmarksAdded( const QList<KHECore::Bookmark>& )),
                  SLOT(onBookmarksAdded( const QList<KHECore::Bookmark>& )) );
         connect( mByteArray, SIGNAL(bookmarksRemoved( const QList<KHECore::Bookmark>& )),
                  SLOT(onBookmarksRemoved( const QList<KHECore::Bookmark>& )) );
-        connect( mByteArray, SIGNAL(bookmarksModified( bool )),
+        connect( mByteArray, SIGNAL(bookmarksModified( const QList<int>& )),
                  SLOT(updateBookmarks()) );
         connect( mByteArrayDisplay, SIGNAL( cursorPositionChanged( int )), SLOT( onCursorPositionChanged( int )) );
     }
@@ -168,8 +168,7 @@ Q_UNUSED( bookmarks )
     const int currentPosition = mByteArrayDisplay->cursorPosition();
     onCursorPositionChanged( currentPosition );
 
-    const KHECore::BookmarkList bookmarkList = mBookmarks->bookmarkList();
-    const int bookmarksCount = bookmarkList.size();
+    const int bookmarksCount = mBookmarks->bookmarksCount();
     const bool hasBookmarks = ( bookmarksCount != 0 );
 
     mDeleteAllAction->setEnabled( hasBookmarks );
@@ -183,8 +182,7 @@ Q_UNUSED( bookmarks )
     const int currentPosition = mByteArrayDisplay->cursorPosition();
     onCursorPositionChanged( currentPosition );
 
-    const KHECore::BookmarkList bookmarkList = mBookmarks->bookmarkList();
-    const int bookmarksCount = bookmarkList.size();
+    const int bookmarksCount = mBookmarks->bookmarksCount();
     const bool hasBookmarks = ( bookmarksCount != 0 );
 
     mDeleteAllAction->setEnabled( hasBookmarks );
