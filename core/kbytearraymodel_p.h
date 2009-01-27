@@ -80,8 +80,11 @@ class KByteArrayModelPrivate
     void addBookmarks( const QList<KHECore::Bookmark> &bookmarks );
     void removeBookmarks( const QList<KHECore::Bookmark> &bookmarks );
     void removeAllBookmarks();
+    void setBookmark( unsigned int index, const KHECore::Bookmark& bookmark );
 
     KHECore::BookmarkList bookmarkList() const;
+    const KHECore::Bookmark& bookmarkAt( unsigned int index ) const;
+    unsigned int bookmarksCount() const;
 
   protected:
     /** resizes the buffer, if possible, saving the data and splitting the data, if demanded
@@ -171,8 +174,40 @@ inline void KByteArrayModelPrivate::removeAllBookmarks()
     m_bookmarks.clear();
     emit p->bookmarksRemoved( bookmarks );
 }
+inline void KByteArrayModelPrivate::setBookmark( unsigned int index, const KHECore::Bookmark& bookmark )
+{
+    const BookmarkList::Iterator end = m_bookmarks.end();
+    unsigned int i = 0;
+    for( BookmarkList::Iterator it = m_bookmarks.begin(); it!=end; ++it,++i )
+    {
+        if( i == index )
+        {
+            *it = bookmark;
+
+            QList<int> changedBookmarkIndizes;
+            changedBookmarkIndizes.append( index );
+            emit p->bookmarksModified( changedBookmarkIndizes );
+            break;
+        }
+    }
+}
 
 inline KHECore::BookmarkList KByteArrayModelPrivate::bookmarkList() const { return m_bookmarks; }
+inline const KHECore::Bookmark& KByteArrayModelPrivate::bookmarkAt( unsigned int index ) const
+{
+    Q_ASSERT_X( (int)index < m_bookmarks.size(), "KByteArrayModelPrivate::bookmarkAt", "index out of range" );
+
+    const BookmarkList::ConstIterator end = m_bookmarks.end();
+    unsigned int i = 0;
+    for( BookmarkList::ConstIterator it = m_bookmarks.begin(); it!=end; ++it,++i )
+    {
+        if( i == index )
+            return *it;
+    }
+    static const KHECore::Bookmark* const noBookmark = 0;
+    return (const KHECore::Bookmark&)*noBookmark;
+}
+inline unsigned int KByteArrayModelPrivate::bookmarksCount() const { return m_bookmarks.size(); }
 
 }
 

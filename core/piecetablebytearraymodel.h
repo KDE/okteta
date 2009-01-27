@@ -91,8 +91,11 @@ class OKTETACORE_EXPORT PieceTableByteArrayModel : public AbstractByteArrayModel
     virtual void addBookmarks( const QList<KHECore::Bookmark> &bookmarks );
     virtual void removeBookmarks( const QList<KHECore::Bookmark> &bookmarks );
     virtual void removeAllBookmarks();
+    virtual void setBookmark( unsigned int index, const KHECore::Bookmark& bookmark );
 
     virtual KHECore::BookmarkList bookmarkList() const;
+    virtual const KHECore::Bookmark& bookmarkAt( unsigned int index ) const;
+    virtual unsigned int bookmarksCount() const;
 
   public: // ChangesDescribable API
     virtual void openGroupedChange( const QString &description );
@@ -129,6 +132,7 @@ class OKTETACORE_EXPORT PieceTableByteArrayModel : public AbstractByteArrayModel
     virtual void bookmarksAdded( const QList<KHECore::Bookmark> &bookmarks );
     virtual void bookmarksRemoved( const QList<KHECore::Bookmark> &bookmarks );
     virtual void bookmarksModified( bool modified );
+    virtual void bookmarksModified( const QList<int>& indizes );
 
   Q_SIGNALS: // ChangeHistory signals
     virtual void changesDone( const QList<KHECore::ByteArrayChange>& changes,

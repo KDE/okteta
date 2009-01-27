@@ -51,6 +51,8 @@ class OKTETACORE_EXPORT ByteArrayChange
   protected:
     KHE::ArrayChangeMetrics mMetrics;
     QByteArray mData;
+//     UserId mUserId;
+//      mTime;
 };
 
 

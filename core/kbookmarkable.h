@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Core library, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -31,7 +31,8 @@
 
 namespace KHECore
 {
-// TODO: add and remove with lists, not only single items
+// interface to a list of bookmarks, sorted by the offset
+//
 class Bookmarkable
 {
   public:
@@ -41,14 +42,18 @@ class Bookmarkable
     virtual void addBookmarks( const QList<KHECore::Bookmark> &bookmarks ) = 0;
     virtual void removeBookmarks( const QList<KHECore::Bookmark> &bookmarks ) = 0;
     virtual void removeAllBookmarks() = 0;
+    virtual void setBookmark( unsigned int index, const KHECore::Bookmark& bookmark ) = 0;
 
   public: // get
     virtual KHECore::BookmarkList bookmarkList() const = 0;
+    virtual const KHECore::Bookmark& bookmarkAt( unsigned int index ) const = 0;
+    virtual unsigned int bookmarksCount() const = 0;
 
   public: // signal
+    // TODO: use also QList<int> for added?
     virtual void bookmarksAdded( const QList<KHECore::Bookmark> &bookmarks ) = 0;
     virtual void bookmarksRemoved( const QList<KHECore::Bookmark> &bookmarks ) = 0;
-//     virtual void bookmarksModified( const QList<KHECore::Bookmark> &bookmarks ) = 0; TODO; signal which changed?
+    virtual void bookmarksModified( const QList<int>& indizes ) = 0;
     virtual void bookmarksModified( bool modified ) = 0;
 };
 

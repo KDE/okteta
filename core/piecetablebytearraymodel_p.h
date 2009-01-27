@@ -78,8 +78,11 @@ class PieceTableByteArrayModel::Private
     void addBookmarks( const QList<KHECore::Bookmark> &bookmarks );
     void removeBookmarks( const QList<KHECore::Bookmark> &bookmarks );
     void removeAllBookmarks();
+    void setBookmark( unsigned int index, const KHECore::Bookmark& bookmark );
 
     KHECore::BookmarkList bookmarkList() const;
+    const KHECore::Bookmark& bookmarkAt( unsigned int index ) const;
+    unsigned int bookmarksCount() const;
 
   public: // ChangesDescribable API
     void openGroupedChange( const QString &description );
@@ -176,8 +179,40 @@ inline void PieceTableByteArrayModel::Private::removeAllBookmarks()
     mBookmarks.clear();
     emit p->bookmarksRemoved( bookmarks );
 }
+inline void PieceTableByteArrayModel::Private::setBookmark( unsigned int index, const KHECore::Bookmark& bookmark )
+{
+    const BookmarkList::Iterator end = mBookmarks.end();
+    unsigned int i = 0;
+    for( BookmarkList::Iterator it = mBookmarks.begin(); it!=end; ++it,++i )
+    {
+        if( i == index )
+        {
+            *it = bookmark;
+
+            QList<int> changedBookmarkIndizes;
+            changedBookmarkIndizes.append( index );
+            emit p->bookmarksModified( changedBookmarkIndizes );
+            break;
+        }
+    }
+}
 
 inline KHECore::BookmarkList PieceTableByteArrayModel::Private::bookmarkList() const { return mBookmarks; }
+inline const KHECore::Bookmark& PieceTableByteArrayModel::Private::bookmarkAt( unsigned int index ) const
+{
+    Q_ASSERT_X( (int)index < mBookmarks.size(), "PieceTableByteArrayModel::Private::bookmarkAt", "index out of range" );
+
+    const BookmarkList::ConstIterator end = mBookmarks.end();
+    unsigned int i = 0;
+    for( BookmarkList::ConstIterator it = mBookmarks.begin(); it!=end; ++it,++i )
+    {
+        if( i == index )
+            return *it;
+    }
+    static const KHECore::Bookmark* const noBookmark = 0;
+    return (const KHECore::Bookmark&)*noBookmark;
+}
+inline unsigned int PieceTableByteArrayModel::Private::bookmarksCount() const { return mBookmarks.size(); }
 
 }
 

@@ -74,13 +74,17 @@ class OKTETACORE_EXPORT KByteArrayModel : public AbstractByteArrayModel, public 
     virtual void addBookmarks( const QList<KHECore::Bookmark> &bookmarks );
     virtual void removeBookmarks( const QList<KHECore::Bookmark> &bookmarks );
     virtual void removeAllBookmarks();
+    virtual void setBookmark( unsigned int index, const KHECore::Bookmark& bookmark );
 
     virtual KHECore::BookmarkList bookmarkList() const;
+    virtual const KHECore::Bookmark& bookmarkAt( unsigned int index ) const;
+    virtual unsigned int bookmarksCount() const;
 
   Q_SIGNALS: // KHECore::Bookmarkable API
     virtual void bookmarksAdded( const QList<KHECore::Bookmark> &bookmarks );
     virtual void bookmarksRemoved( const QList<KHECore::Bookmark> &bookmarks );
     virtual void bookmarksModified( bool modified );
+    virtual void bookmarksModified( const QList<int>& indizes );
 
   public:
     void setMaxSize( int MS );

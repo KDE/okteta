@@ -125,9 +125,24 @@ void KByteArrayModel::removeAllBookmarks()
     d->removeAllBookmarks();
 }
 
+void KByteArrayModel::setBookmark( unsigned int index, const KHECore::Bookmark& bookmark )
+{
+    d->setBookmark( index, bookmark );
+}
+
 KHECore::BookmarkList KByteArrayModel::bookmarkList() const
 {
     return d->bookmarkList();
+}
+
+const KHECore::Bookmark& KByteArrayModel::bookmarkAt( unsigned int index ) const
+{
+    return d->bookmarkAt( index );
+}
+
+unsigned int KByteArrayModel::bookmarksCount() const
+{
+    return d->bookmarksCount();
 }
 
 KByteArrayModel::~KByteArrayModel()

@@ -124,9 +124,24 @@ void PieceTableByteArrayModel::removeAllBookmarks()
     d->removeAllBookmarks();
 }
 
+void PieceTableByteArrayModel::setBookmark( unsigned int index, const KHECore::Bookmark& bookmark )
+{
+    d->setBookmark( index, bookmark );
+}
+
 KHECore::BookmarkList PieceTableByteArrayModel::bookmarkList() const
 {
     return d->bookmarkList();
+}
+
+const KHECore::Bookmark& PieceTableByteArrayModel::bookmarkAt( unsigned int index ) const
+{
+    return d->bookmarkAt( index );
+}
+
+unsigned int PieceTableByteArrayModel::bookmarksCount() const
+{
+    return d->bookmarksCount();
 }
 
 void PieceTableByteArrayModel::openGroupedChange( const QString &description )
