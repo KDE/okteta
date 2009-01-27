@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Core library, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -46,6 +46,7 @@ class OKTETACORE_EXPORT BookmarkList : public QLinkedList<Bookmark>
     void addBookmarks( const QList<KHECore::Bookmark> &bookmarks );
     void removeBookmark( const Bookmark &bookmark );
     void removeBookmarks( const QList<KHECore::Bookmark> &bookmarks );
+    void setBookmark( unsigned int index, const Bookmark& bookmark );
 
     bool adjustToReplaced( int offset, int removedLength, int insertedLength );
     bool adjustToSwapped( int firstPartStart, int secondPartStart, int secondPartLength );
@@ -53,6 +54,7 @@ class OKTETACORE_EXPORT BookmarkList : public QLinkedList<Bookmark>
   public:
     bool contains( int offset ) const;
     using QLinkedList<Bookmark>::contains;
+    const Bookmark& at( unsigned int index ) const;
     const_iterator previousFrom( int offset ) const;
     const_iterator nextFrom( int offset ) const;
 //     const_iterator begin( int offset ) const;

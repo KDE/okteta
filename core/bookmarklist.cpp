@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Core library, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -84,6 +84,20 @@ void BookmarkList::removeBookmarks( const QList<KHECore::Bookmark> &bookmarks )
 {
     foreach( const Bookmark &bookmark, bookmarks )
         removeBookmark( bookmark );
+}
+
+void BookmarkList::setBookmark( unsigned int index, const Bookmark& bookmark )
+{
+    const Iterator endIt = end();
+    unsigned int i = 0;
+    for( Iterator it = begin(); it!=endIt; ++it,++i )
+    {
+        if( i == index )
+        {
+            *it = bookmark;
+            break;
+        }
+    }
 }
 
 bool BookmarkList::adjustToReplaced( int offset, int removedLength, int insertedLength )
@@ -190,6 +204,21 @@ BookmarkList::const_iterator BookmarkList::nextFrom( int offset ) const
             break;
     }
     return b;
+}
+
+const Bookmark& BookmarkList::at( unsigned int index ) const
+{
+    Q_ASSERT_X( (int)index < size(), "BookmarkList::at", "index out of range" );
+
+    const ConstIterator endIt = end();
+    unsigned int i = 0;
+    for( ConstIterator it = begin(); it!=endIt; ++it,++i )
+    {
+        if( i == index )
+            return *it;
+    }
+    static const Bookmark* const noBookmark = 0;
+    return (const Bookmark&)*noBookmark;
 }
 
 BookmarkList::~BookmarkList() {}
