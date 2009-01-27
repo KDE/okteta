@@ -170,8 +170,8 @@ void BookmarksView::onRenameBookmarkButtonClicked()
 {
     QModelIndex index = mBookmarkListView->selectionModel()->currentIndex();
     const QModelIndex nameIndex = index.sibling( index.row(), BookmarkListModel::TitleColumnId );
-    if( index.isValid() )
-        mBookmarkListView->edit( index );
+    if( nameIndex.isValid() )
+        mBookmarkListView->edit( nameIndex );
 }
 
 
