@@ -153,7 +153,7 @@ void BookmarksView::onDeleteBookmarkButtonClicked()
     QList<KHECore::Bookmark> bookmarksToBeDeleted;
     foreach( const QModelIndex& index, selectedRows )
     {
-        const KHECore::Bookmark bookmark = mBookmarkListModel->bookmark( index );
+        const KHECore::Bookmark& bookmark = mBookmarkListModel->bookmark( index );
         bookmarksToBeDeleted.append( bookmark );
     }
     mTool->deleteBookmarks( bookmarksToBeDeleted );

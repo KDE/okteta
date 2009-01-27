@@ -29,7 +29,6 @@
 class KByteArrayDisplay;
 namespace KHECore {
 class Bookmarkable;
-class BookmarkList;
 class Bookmark;
 class AbstractByteArrayModel;
 }
@@ -47,7 +46,8 @@ class BookmarksTool : public AbstractTool
   public:
     bool hasBookmarks() const;
     bool canCreateBookmark() const;
-    KHECore::BookmarkList bookmarks() const;
+    const KHECore::Bookmark& bookmarkAt( unsigned int index ) const;
+    unsigned int bookmarksCount() const;
 
   public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
@@ -58,14 +58,14 @@ class BookmarksTool : public AbstractTool
   public:
     KHECore::Bookmark createBookmark();
     void gotoBookmark( const KHECore::Bookmark& bookmark );
-    void setBookmarkName( const QString& name, int bookmarkIndex );
+    void setBookmarkName( unsigned int bookmarkIndex, const QString& name );
     void deleteBookmarks( const QList<KHECore::Bookmark>& bookmarks );
 
   Q_SIGNALS:
     void hasBookmarksChanged( bool hasBookmarks );
     void bookmarksAdded( const QList<KHECore::Bookmark>& bookmarks );
     void bookmarksRemoved( const QList<KHECore::Bookmark>& bookmarks );
-//     void bookmarksModified( bool modified );
+    void bookmarksModified( const QList<int>& indizes );
     void canCreateBookmarkChanged( bool canCreateBookmark );
 
   protected Q_SLOTS:

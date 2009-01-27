@@ -51,15 +51,8 @@ BookmarksTool::BookmarksTool()
 
 QString BookmarksTool::title() const { return i18nc("@title:window", "Bookmarks"); }
 bool BookmarksTool::canCreateBookmark() const { return mCanCreateBookmark; }
-KHECore::BookmarkList BookmarksTool::bookmarks() const
-{
-    KHECore::BookmarkList result;
-
-    if( mBookmarks )
-        result = mBookmarks->bookmarkList();
-
-    return result;
-}
+const KHECore::Bookmark& BookmarksTool::bookmarkAt( unsigned int index ) const { return mBookmarks->bookmarkAt( index ); }
+unsigned int BookmarksTool::bookmarksCount() const { return mBookmarks ? mBookmarks->bookmarksCount() : 0; }
 
 
 void BookmarksTool::setTargetModel( AbstractModel* model )
@@ -87,8 +80,8 @@ void BookmarksTool::setTargetModel( AbstractModel* model )
                  SLOT(onBookmarksModified()) );
         connect( mByteArray, SIGNAL(bookmarksRemoved( const QList<KHECore::Bookmark>& )),
                  SLOT(onBookmarksModified()) );
-//         connect( mByteArray, SIGNAL(bookmarksModified( bool )),
-//                  SIGNAL(bookmarksModified( bool )) );
+        connect( mByteArray, SIGNAL(bookmarksModified( const QList<int>& )),
+                 SIGNAL(bookmarksModified( const QList<int>& )) );
         connect( mByteArrayDisplay, SIGNAL(cursorPositionChanged( int )), SLOT(onCursorPositionChanged( int )) );
     }
     else
@@ -149,20 +142,12 @@ void BookmarksTool::gotoBookmark( const KHECore::Bookmark& bookmark )
     }
 }
 
-void BookmarksTool::setBookmarkName( const QString& name, int bookmarkIndex )
+void BookmarksTool::setBookmarkName( unsigned int bookmarkIndex, const QString& name )
 {
-    // TODO: this is a very ugly hack!
-    // Fix this by turning Bookmarkable into a list API, so the change of one bookmark is a one op call
-    KHECore::Bookmark bookmark = mBookmarks->bookmarkList().list().at( bookmarkIndex );
-
-    QList<KHECore::Bookmark> bookmarks;
-    bookmarks.append( bookmark );
-    mBookmarks->removeBookmarks( bookmarks );
+    KHECore::Bookmark bookmark = mBookmarks->bookmarkAt( bookmarkIndex );
 
     bookmark.setName( name );
-    bookmarks.clear();
-    bookmarks.append( bookmark );
-    mBookmarks->addBookmarks( bookmarks );
+    mBookmarks->setBookmark( bookmarkIndex, bookmark );
 
     mByteArrayDisplay->widget()->setFocus();
 }

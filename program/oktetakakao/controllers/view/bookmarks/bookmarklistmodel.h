@@ -27,13 +27,13 @@
 #include <koffsetformat.h>
 // Qt
 #include <QtCore/QAbstractTableModel>
-#include <QtCore/QList>
 
 class BookmarksTool;
 namespace KHECore {
 class BookmarkList;
 class Bookmark;
 }
+template <class T> class QList;
 
 
 class BookmarkListModel : public QAbstractTableModel
@@ -61,19 +61,19 @@ class BookmarkListModel : public QAbstractTableModel
     virtual bool setData( const QModelIndex& index, const QVariant& value, int role );
 
   public:
-    KHECore::Bookmark bookmark( const QModelIndex& index ) const;
+    const KHECore::Bookmark& bookmark( const QModelIndex& index ) const;
     QModelIndex index( const KHECore::Bookmark& bookmark, int column = BookmarkListModel::TitleColumnId ) const;
     using QAbstractTableModel::index;
 
   protected Q_SLOTS:
     void onHasBookmarksChanged( bool hasBookmarks );
     void onBookmarksChanged();
+    void onBookmarksChanged( const QList<int>& bookmarkIndizes );
 //     void onHeadVersionChanged( int newHeadVersionIndex );
 //     void onHeadVersionDataChanged( const KDocumentVersionData &newVersionData );
 
   protected:
     BookmarksTool* mTool;
-    QList<KHECore::Bookmark> mBookmarkList;
 
     KHEUI::KOffsetFormat::print mPrintFunction;
     mutable char mCodedOffset[KHEUI::KOffsetFormat::MaxFormatWidth+1];

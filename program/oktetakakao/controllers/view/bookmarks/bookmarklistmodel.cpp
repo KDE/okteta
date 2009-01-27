@@ -42,15 +42,13 @@ BookmarkListModel::BookmarkListModel( BookmarksTool* tool, QObject* parent )
              SLOT(onBookmarksChanged()) );
     connect( mTool, SIGNAL(bookmarksRemoved( const QList<KHECore::Bookmark>& )),
              SLOT(onBookmarksChanged()) );
-    connect( mTool, SIGNAL(bookmarksModified( bool )), SLOT(onBookmarksChanged()) );
-//     connect( mTool, SIGNAL(cursorPositionChanged( int )),
-//              SLOT(onCursorPositionChanged( int )) );
+    connect( mTool, SIGNAL(bookmarksModified( const QList<int>& )), SLOT(onBookmarksChanged( const QList<int>& )) );
 }
 
 int BookmarkListModel::rowCount( const QModelIndex& parent ) const
 {
 Q_UNUSED( parent )
-    return mBookmarkList.count();
+    return mTool->bookmarksCount();
 }
 
 int BookmarkListModel::columnCount( const QModelIndex& parent ) const
@@ -69,8 +67,7 @@ QVariant BookmarkListModel::data( const QModelIndex& index, int role ) const
     {
         const int bookmarkIndex = index.row();
 
-        // TODO: think if QLinkedList is really useful here
-        const KHECore::Bookmark bookmark = mBookmarkList.at( bookmarkIndex );
+        const KHECore::Bookmark& bookmark = mTool->bookmarkAt( bookmarkIndex );
 
         const int tableColumn = index.column();
         switch( tableColumn )
@@ -96,7 +93,7 @@ QVariant BookmarkListModel::data( const QModelIndex& index, int role ) const
         const int column = index.column();
         if( column == TitleColumnId )
         {
-            const KHECore::Bookmark bookmark = mBookmarkList.at( bookmarkIndex );
+            const KHECore::Bookmark& bookmark = mTool->bookmarkAt( bookmarkIndex );
             result = bookmark.name();
         }
         break;
@@ -104,18 +101,7 @@ QVariant BookmarkListModel::data( const QModelIndex& index, int role ) const
     default:
         break;
     }
-#if 0
-    else if( role == Qt::DecorationRole )
-    {
-        const int tableColumn = index.column();
-        if( tableColumn == CurrentColumnId )
-        {
-            const int versionIndex = index.row();
-            if( mVersionControl->versionIndex() == versionIndex )
-                result = KIcon( "arrow-right" );
-        }
-    }
-#endif
+
     return result;
 }
 
@@ -158,7 +144,7 @@ bool BookmarkListModel::setData( const QModelIndex& index, const QVariant& value
         const int column = index.column();
         if( column == TitleColumnId )
         {
-            mTool->setBookmarkName( value.toString(), bookmarkIndex );
+            mTool->setBookmarkName( bookmarkIndex, value.toString() );
 //             emit dataChanged( index, index );
             result = true;
         }
@@ -169,18 +155,21 @@ bool BookmarkListModel::setData( const QModelIndex& index, const QVariant& value
     return result;
 }
 
-KHECore::Bookmark BookmarkListModel::bookmark( const QModelIndex& index ) const
+const KHECore::Bookmark& BookmarkListModel::bookmark( const QModelIndex& index ) const
 {
     const int bookmarkIndex = index.row();
-    return mBookmarkList.at( bookmarkIndex );
+    return mTool->bookmarkAt( bookmarkIndex );
 }
 
 QModelIndex BookmarkListModel::index( const KHECore::Bookmark& bookmark, int column ) const
 {
     QModelIndex result;
-    for( int i=0; i<mBookmarkList.count(); ++i )
+
+    // TODO: a iterator would be nice here.
+    const int bookmarksCount = mTool->bookmarksCount();
+    for( int i=0; i<bookmarksCount; ++i )
     {
-        if( bookmark == mBookmarkList.at(i) )
+        if( bookmark == mTool->bookmarkAt(i) )
         {
             result = createIndex( i, column );
             break;
@@ -193,19 +182,22 @@ QModelIndex BookmarkListModel::index( const KHECore::Bookmark& bookmark, int col
 
 void BookmarkListModel::onHasBookmarksChanged( bool hasBookmarks )
 {
-    if( hasBookmarks )
-        mBookmarkList = mTool->bookmarks().list();
-    else
-        mBookmarkList.clear();
+Q_UNUSED( hasBookmarks )
 
     reset();
 }
 
 void BookmarkListModel::onBookmarksChanged()
 {
-    mBookmarkList = mTool->bookmarks().list();
     reset();
 }
+
+void BookmarkListModel::onBookmarksChanged( const QList<int>& bookmarkIndizes )
+{
+    foreach( int row, bookmarkIndizes )
+        emit dataChanged( index(row,OffsetColumnId), index(row,TitleColumnId) );
+}
+
 #if 0
 void BookmarkListModel::onRevertedToVersionIndex( int versionIndex )
 {
