@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Core library, part of the KDE project.
 
-    Copyright 2003,2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -176,36 +176,17 @@ inline void KByteArrayModelPrivate::removeAllBookmarks()
 }
 inline void KByteArrayModelPrivate::setBookmark( unsigned int index, const KHECore::Bookmark& bookmark )
 {
-    const BookmarkList::Iterator end = m_bookmarks.end();
-    unsigned int i = 0;
-    for( BookmarkList::Iterator it = m_bookmarks.begin(); it!=end; ++it,++i )
-    {
-        if( i == index )
-        {
-            *it = bookmark;
+    m_bookmarks.setBookmark( index, bookmark );
 
-            QList<int> changedBookmarkIndizes;
-            changedBookmarkIndizes.append( index );
-            emit p->bookmarksModified( changedBookmarkIndizes );
-            break;
-        }
-    }
+    QList<int> changedBookmarkIndizes;
+    changedBookmarkIndizes.append( index );
+    emit p->bookmarksModified( changedBookmarkIndizes );
 }
 
 inline KHECore::BookmarkList KByteArrayModelPrivate::bookmarkList() const { return m_bookmarks; }
 inline const KHECore::Bookmark& KByteArrayModelPrivate::bookmarkAt( unsigned int index ) const
 {
-    Q_ASSERT_X( (int)index < m_bookmarks.size(), "KByteArrayModelPrivate::bookmarkAt", "index out of range" );
-
-    const BookmarkList::ConstIterator end = m_bookmarks.end();
-    unsigned int i = 0;
-    for( BookmarkList::ConstIterator it = m_bookmarks.begin(); it!=end; ++it,++i )
-    {
-        if( i == index )
-            return *it;
-    }
-    static const KHECore::Bookmark* const noBookmark = 0;
-    return (const KHECore::Bookmark&)*noBookmark;
+    return m_bookmarks.at( index );
 }
 inline unsigned int KByteArrayModelPrivate::bookmarksCount() const { return m_bookmarks.size(); }
 

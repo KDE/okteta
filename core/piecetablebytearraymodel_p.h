@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Core library, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -181,36 +181,17 @@ inline void PieceTableByteArrayModel::Private::removeAllBookmarks()
 }
 inline void PieceTableByteArrayModel::Private::setBookmark( unsigned int index, const KHECore::Bookmark& bookmark )
 {
-    const BookmarkList::Iterator end = mBookmarks.end();
-    unsigned int i = 0;
-    for( BookmarkList::Iterator it = mBookmarks.begin(); it!=end; ++it,++i )
-    {
-        if( i == index )
-        {
-            *it = bookmark;
+    mBookmarks.setBookmark( index, bookmark );
 
-            QList<int> changedBookmarkIndizes;
-            changedBookmarkIndizes.append( index );
-            emit p->bookmarksModified( changedBookmarkIndizes );
-            break;
-        }
-    }
+    QList<int> changedBookmarkIndizes;
+    changedBookmarkIndizes.append( index );
+    emit p->bookmarksModified( changedBookmarkIndizes );
 }
 
 inline KHECore::BookmarkList PieceTableByteArrayModel::Private::bookmarkList() const { return mBookmarks; }
 inline const KHECore::Bookmark& PieceTableByteArrayModel::Private::bookmarkAt( unsigned int index ) const
 {
-    Q_ASSERT_X( (int)index < mBookmarks.size(), "PieceTableByteArrayModel::Private::bookmarkAt", "index out of range" );
-
-    const BookmarkList::ConstIterator end = mBookmarks.end();
-    unsigned int i = 0;
-    for( BookmarkList::ConstIterator it = mBookmarks.begin(); it!=end; ++it,++i )
-    {
-        if( i == index )
-            return *it;
-    }
-    static const KHECore::Bookmark* const noBookmark = 0;
-    return (const KHECore::Bookmark&)*noBookmark;
+    return mBookmarks.at( index );
 }
 inline unsigned int PieceTableByteArrayModel::Private::bookmarksCount() const { return mBookmarks.size(); }
 
