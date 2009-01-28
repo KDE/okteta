@@ -145,6 +145,12 @@ Fixed after 0.2 RC 1:
 ---------------------
 * mininumSizeHint does not get larger than 100x100
 
+Fixed after 0.2.0:
+------------------
+* removed Print from toolbar, added Save As instead
+* fixed: enable filtering only if view is not readonly
+* fixed: disable copy for strings if all are deselected (workaround Qt bug)
+
 Done for 0.3:
 -------------
 * added a ToggleButton, to be used for the statusbar
@@ -155,6 +161,12 @@ Done for 0.3:
 * added a filesystem browser tool
 * added a documents management tool
 * added a controller to switch between view by Alt + ->/<-
+* turned the overwrite mode display in the status bar into active display
+* added a bookmarks tool
+* added name property to bookmarks
+* added popup editor for the name of bookmarks on creation
+* added option to edit the name of a bookmark to the bookmark tool
+* reworked Bookmarkable to simulate a list interface, including a wrapping iterator with an abstract adapter
 
 Next to work on:
 ----------------------------------
@@ -173,6 +185,7 @@ Less important:
 Later on:
 ---------
 * make status bar tools more flat, e.g. see how the zoom tool of KOffice is done
+* add border to BookmarkEditPopup, perhaps like that of QMenu
 * add direction to tool views, so that e.g. the file info tool view puts the icon left to the data in vertical mode
 * see how Tool and Document menus can be turned into KActionMenu (and add clear() call to KActionMenu)
 * see how the cursor and the value editor could be turned into tool+view
@@ -217,10 +230,11 @@ Later on:
 * make all jobs (searching, filter operations, ...) cancellable, e.g. using ESC
 * add versions to view model, to be synched with the data model (if created later, create prior versions on demand)
 * make status bar entries non-readonly, e.g. for offset->goto, readonly, codings, selection,...
-* add Lock symbol for Readonly to statusbar, also Modified state
+* add Modified state symbol for Readonly to statusbar
 * search for other ideas in Inkscape
 * make bookmarks program-wide, switch doc if needed.
-* add bookmark tool, hovering drag over bookmark should select it
+* add bookmark tool
+* hovering drag over bookmark in tool should select it
 * store bookmarks for usage on further opening, similar to Okular's memory
 * bookmarks to load vs. bookmarks/marked regions in loaded documents? lokal vs. global perhaps? search inside.
 * in-place saving instead of new-and-delete-old (ZFS Snpashots work blockbased, so only changed blocks get snapshotted)
