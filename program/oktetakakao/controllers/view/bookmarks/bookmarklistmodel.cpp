@@ -165,16 +165,9 @@ QModelIndex BookmarkListModel::index( const KHECore::Bookmark& bookmark, int col
 {
     QModelIndex result;
 
-    // TODO: a iterator would be nice here.
-    const int bookmarksCount = mTool->bookmarksCount();
-    for( int i=0; i<bookmarksCount; ++i )
-    {
-        if( bookmark == mTool->bookmarkAt(i) )
-        {
-            result = createIndex( i, column );
-            break;
-        }
-    }
+    const int indexOfBookmark = mTool->indexOf( bookmark );
+    if( indexOfBookmark != -1 )
+        result = createIndex( indexOfBookmark, column );
 
     return result;
 }
