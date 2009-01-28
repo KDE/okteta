@@ -22,6 +22,9 @@
 
 #include "bookmarklist.h"
 
+// Qt
+#include <QtCore/QList>
+
 
 namespace KHECore
 {
@@ -179,31 +182,6 @@ bool BookmarkList::contains( int offset ) const
         }
     }
     return result;
-}
-
-BookmarkList::const_iterator BookmarkList::previousFrom( int offset ) const
-{
-    const_iterator b = begin();
-    const_iterator result = end();
-
-    for( ; b!=end(); ++b )
-    {
-        if( offset < b->offset() )
-            break;
-        result = b;
-    }
-    return result;
-}
-
-BookmarkList::const_iterator BookmarkList::nextFrom( int offset ) const
-{
-    const_iterator b = begin();
-    for( ; b!=end(); ++b )
-    {
-        if( offset <= b->offset() )
-            break;
-    }
-    return b;
 }
 
 const Bookmark& BookmarkList::at( unsigned int index ) const

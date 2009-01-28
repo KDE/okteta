@@ -35,6 +35,8 @@
 #include <wordbytearrayservice.h>
 #include <charcodec.h>
 #include <kbookmarkable.h>
+#include <kbookmarksconstiterator.h>
+#include <bookmark.h>
 #include <abstractbytearraymodel.h>
 // KDE
 #include <KXMLGUIClient>
@@ -136,24 +138,27 @@ void BookmarksController::updateBookmarks()
     if( mBookmarks == 0 )
         return;
 
-    const KHECore::BookmarkList bookmarks = mBookmarks->bookmarkList();
-
     const int startOffset = mByteArrayDisplay->startOffset();
     KHEUI::KOffsetFormat::print printFunction = KHEUI::KOffsetFormat::printFunction( KHEUI::KOffsetFormat::Hexadecimal );
 
     char codedOffset[KHEUI::KOffsetFormat::MaxFormatWidth+1];
-    KHECore::BookmarkList::ConstIterator bit = bookmarks.begin();
+
     static const int firstWithNumericShortCut = 1;
     static const int lastWithNumericShortCut = 9;
     int b = firstWithNumericShortCut;
-    for( ; bit != bookmarks.end(); ++b,++bit )
+
+    KHECore::BookmarksConstIterator bit = mBookmarks->createBookmarksConstIterator();
+    while( bit.hasNext() )
     {
-        KHECore::Bookmark bookmark = *bit;
+        const KHECore::Bookmark& bookmark = bit.next();
         printFunction( codedOffset, startOffset+bookmark.offset() );
         QString title = i18nc( "@item description of bookmark", "%1: %2", QLatin1String(codedOffset),bookmark.name() );
         if( b <= lastWithNumericShortCut )
+        {
             title = QString::fromLatin1("&%1 %2").arg( b ).arg( title );
         // = KStringHandler::rsqueeze( view->title(), MaxEntryLength );
+            ++b;
+        }
         QAction *action = new QAction( title, mBookmarksActionGroup );
 
         action->setData( bookmark.offset() );
@@ -192,8 +197,7 @@ Q_UNUSED( bookmarks )
 
 void BookmarksController::onCursorPositionChanged( int newPosition )
 {
-    const KHECore::BookmarkList bookmarkList = mBookmarks->bookmarkList();
-    const int bookmarksCount = bookmarkList.size();
+    const int bookmarksCount = mBookmarks->bookmarksCount();
     const bool hasBookmarks = ( bookmarksCount != 0 );
     const bool isInsideByteArray = ( newPosition < mByteArray->size() );
     bool isAtBookmark;
@@ -201,12 +205,10 @@ void BookmarksController::onCursorPositionChanged( int newPosition )
     bool hasNext;
     if( hasBookmarks )
     {
-        isAtBookmark = bookmarkList.contains( newPosition );
-        const KHECore::BookmarkList::ConstIterator end = bookmarkList.constEnd();
-        const KHECore::BookmarkList::ConstIterator pit = bookmarkList.previousFrom( newPosition-1 );
-        hasPrevious = ( pit != end );
-        const KHECore::BookmarkList::ConstIterator nit = bookmarkList.nextFrom( newPosition+1 );
-        hasNext = ( nit != end );
+        isAtBookmark = mBookmarks->containsBookmarkFor( newPosition );
+        KHECore::BookmarksConstIterator bookmarksIterator = mBookmarks->createBookmarksConstIterator();
+        hasPrevious = bookmarksIterator.findPreviousFrom( newPosition );
+        hasNext = bookmarksIterator.findNextFrom( newPosition );
     }
     else
     {
@@ -271,11 +273,12 @@ void BookmarksController::deleteAllBookmarks()
 void BookmarksController::gotoNextBookmark()
 {
     const int currentPosition = mByteArrayDisplay->cursorPosition();
-    const KHECore::BookmarkList bookmarkList = mBookmarks->bookmarkList();
-    KHECore::BookmarkList::ConstIterator nit = bookmarkList.nextFrom( currentPosition+1 );
-    if( nit != bookmarkList.end() )
+
+    KHECore::BookmarksConstIterator bookmarksIterator = mBookmarks->createBookmarksConstIterator();
+    const bool hasNext = bookmarksIterator.findNextFrom( currentPosition );
+    if( hasNext )
     {
-        const int newPosition = nit->offset();
+        const int newPosition = bookmarksIterator.next().offset();
         mByteArrayDisplay->setCursorPosition( newPosition );
     }
 }
@@ -283,11 +286,12 @@ void BookmarksController::gotoNextBookmark()
 void BookmarksController::gotoPreviousBookmark()
 {
     const int currentPosition = mByteArrayDisplay->cursorPosition();
-    const KHECore::BookmarkList bookmarkList = mBookmarks->bookmarkList();
-    KHECore::BookmarkList::ConstIterator pit = bookmarkList.previousFrom( currentPosition-1 );
-    if( pit != bookmarkList.end() )
+
+    KHECore::BookmarksConstIterator bookmarksIterator = mBookmarks->createBookmarksConstIterator();
+    const bool hasPrevious = bookmarksIterator.findPreviousFrom( currentPosition );
+    if( hasPrevious )
     {
-        const int newPosition = pit->offset();
+        const int newPosition = bookmarksIterator.previous().offset();
         mByteArrayDisplay->setCursorPosition( newPosition );
     }
 }

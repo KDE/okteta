@@ -26,6 +26,9 @@
 
 // lib
 #include "kbytearraymodel.h"
+#include "kbookmarksconstiterator.h"
+#include "bookmarklistconstiteratoradapter.h"
+#include "bookmarklist.h"
 // 
 #include <arraychangemetricslist.h>
 
@@ -82,8 +85,9 @@ class KByteArrayModelPrivate
     void removeAllBookmarks();
     void setBookmark( unsigned int index, const KHECore::Bookmark& bookmark );
 
-    KHECore::BookmarkList bookmarkList() const;
+    KHECore::BookmarksConstIterator createBookmarksConstIterator() const;
     const KHECore::Bookmark& bookmarkAt( unsigned int index ) const;
+    bool containsBookmarkFor( int offset ) const;
     unsigned int bookmarksCount() const;
 
   protected:
@@ -183,11 +187,16 @@ inline void KByteArrayModelPrivate::setBookmark( unsigned int index, const KHECo
     emit p->bookmarksModified( changedBookmarkIndizes );
 }
 
-inline KHECore::BookmarkList KByteArrayModelPrivate::bookmarkList() const { return m_bookmarks; }
+inline KHECore::BookmarksConstIterator KByteArrayModelPrivate::createBookmarksConstIterator() const
+{
+    return BookmarksConstIterator( new BookmarkListConstIteratorAdapter(m_bookmarks) );
+}
+
 inline const KHECore::Bookmark& KByteArrayModelPrivate::bookmarkAt( unsigned int index ) const
 {
     return m_bookmarks.at( index );
 }
+inline bool KByteArrayModelPrivate::containsBookmarkFor( int offset ) const { return m_bookmarks.contains( offset ); }
 inline unsigned int KByteArrayModelPrivate::bookmarksCount() const { return m_bookmarks.size(); }
 
 }

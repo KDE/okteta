@@ -30,7 +30,6 @@
 
 class BookmarksTool;
 namespace KHECore {
-class BookmarkList;
 class Bookmark;
 }
 template <class T> class QList;

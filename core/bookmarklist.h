@@ -26,16 +26,18 @@
 // lib
 #include "bookmark.h"
 // Qt
-#include <QtCore/QList>
 #include <QtCore/QLinkedList>
 
+template <class T> class QList;
 
-namespace KHECore {
+
+namespace KHECore
+{
 
 /**
 @author Friedrich W. H.  Kossebau
 */
-class OKTETACORE_EXPORT BookmarkList : public QLinkedList<Bookmark>
+class BookmarkList : public QLinkedList<Bookmark>
 {
   public:
     BookmarkList();
@@ -55,10 +57,6 @@ class OKTETACORE_EXPORT BookmarkList : public QLinkedList<Bookmark>
     bool contains( int offset ) const;
     using QLinkedList<Bookmark>::contains;
     const Bookmark& at( unsigned int index ) const;
-    const_iterator previousFrom( int offset ) const;
-    const_iterator nextFrom( int offset ) const;
-//     const_iterator begin( int offset ) const;
-//     using QLinkedList<Bookmark>::begin;
     QList<KHECore::Bookmark> list() const;
 };
 

@@ -34,6 +34,7 @@
 #include <kversionable.h>
 #include <wordbytearrayservice.h>
 #include <arraychangemetricslist.h>
+#include <bookmark.h>
 // KDE
 #include <KGlobal>
 // Qt

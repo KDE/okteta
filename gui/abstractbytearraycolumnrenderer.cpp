@@ -31,6 +31,8 @@
 #include <columnsview.h>
 // Okteta core
 #include <kbookmarkable.h>
+#include <kbookmarksconstiterator.h>
+#include <bookmark.h>
 #include <charcodec.h>
 // KDE
 #include <KColorScheme>
@@ -478,14 +480,15 @@ void AbstractByteArrayColumnRenderer::renderLinePositions( QPainter *painter, in
 
 void AbstractByteArrayColumnRenderer::renderPlain( QPainter *painter, const KHE::Section &linePositions, int byteIndex )
 {
-    bool hasBookmarks = ( mBookmarks != 0 );
-    KHECore::BookmarkList bookmarkList;
-    KHECore::BookmarkList::ConstIterator bit;
+    KHECore::BookmarksConstIterator bit;
+    int nextBookmarkOffset = -1;
+
+    const bool hasBookmarks = ( mBookmarks != 0 );
     if( hasBookmarks )
     {
-        bookmarkList = mBookmarks->bookmarkList();
-        bit = bookmarkList.nextFrom(byteIndex);
-        hasBookmarks = ( bit != bookmarkList.constEnd() );
+        bit = mBookmarks->createBookmarksConstIterator();
+        if( bit.findNextFrom( byteIndex) )
+            nextBookmarkOffset = bit.next().offset();
     }
 
     const QPalette &palette = columnsView()->viewport()->palette();
@@ -499,11 +502,11 @@ void AbstractByteArrayColumnRenderer::renderPlain( QPainter *painter, const KHE:
         // draw the byte
         painter->translate( x, 0 );
 
-        if( hasBookmarks && (byteIndex == bit->offset()) )
+        if( byteIndex == nextBookmarkOffset )
         {
             renderBookmark( painter, colorScheme.background(KColorScheme::LinkBackground) );
-            ++bit;
-            hasBookmarks = (bit != bookmarkList.constEnd());//TODO )&& ( bit->offset() <= LastIndex );
+
+            nextBookmarkOffset = bit.hasNext() ? bit.next().offset() : -1;//TODO )&& ( bit->offset() <= LastIndex );
         }
 
         const char byte = mByteArrayModel->datum( byteIndex );
@@ -522,14 +525,15 @@ void AbstractByteArrayColumnRenderer::renderPlain( QPainter *painter, const KHE:
 
 void AbstractByteArrayColumnRenderer::renderSelection( QPainter *painter, const KHE::Section &linePositions, int byteIndex, int flag )
 {
-    bool hasBookmarks = ( mBookmarks != 0 );
-    KHECore::BookmarkList bookmarkList;
-    KHECore::BookmarkList::ConstIterator bit;
+    KHECore::BookmarksConstIterator bit;
+    int nextBookmarkOffset = -1;
+
+    const bool hasBookmarks = ( mBookmarks != 0 );
     if( hasBookmarks )
     {
-        bookmarkList = mBookmarks->bookmarkList();
-        bit = bookmarkList.nextFrom(byteIndex);
-        hasBookmarks = ( bit != bookmarkList.constEnd() );
+        bit = mBookmarks->createBookmarksConstIterator();
+        if( bit.findNextFrom( byteIndex) )
+            nextBookmarkOffset = bit.next().offset();
     }
 
     const QPalette &palette = columnsView()->viewport()->palette();
@@ -545,11 +549,11 @@ void AbstractByteArrayColumnRenderer::renderSelection( QPainter *painter, const 
         // draw the byte
         painter->translate( x, 0 );
 
-        if( hasBookmarks && (byteIndex == bit->offset()) )
+        if( byteIndex == nextBookmarkOffset )
         {
             renderBookmark( painter, colorScheme.background(KColorScheme::LinkBackground) );
-            ++bit;
-            hasBookmarks = (bit != bookmarkList.constEnd());//TODO )&& ( bit->offset() <= LastIndex );
+
+            nextBookmarkOffset = bit.hasNext() ? bit.next().offset() : -1;//TODO )&& ( bit->offset() <= LastIndex );
         }
 
         const char byte = mByteArrayModel->datum( byteIndex );
@@ -634,7 +638,7 @@ void AbstractByteArrayColumnRenderer::renderByte( QPainter *painter, int byteInd
     const QBrush backgroundBrush = colorScheme.background();
     painter->fillRect( 0,0, mByteWidth,lineHeight(), backgroundBrush );
 
-    if( mBookmarks && mBookmarks->bookmarkList().contains(byteIndex) )
+    if( mBookmarks && mBookmarks->containsBookmarkFor(byteIndex) )
         renderBookmark( painter, colorScheme.background(KColorScheme::LinkBackground) );
 
     if( byteIndex > -1 )

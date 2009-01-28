@@ -130,14 +130,19 @@ void KByteArrayModel::setBookmark( unsigned int index, const KHECore::Bookmark& 
     d->setBookmark( index, bookmark );
 }
 
-KHECore::BookmarkList KByteArrayModel::bookmarkList() const
+KHECore::BookmarksConstIterator KByteArrayModel::createBookmarksConstIterator() const
 {
-    return d->bookmarkList();
+    return d->createBookmarksConstIterator();
 }
 
 const KHECore::Bookmark& KByteArrayModel::bookmarkAt( unsigned int index ) const
 {
     return d->bookmarkAt( index );
+}
+
+bool KByteArrayModel::containsBookmarkFor( int offset ) const
+{
+    return d->containsBookmarkFor( offset );
 }
 
 unsigned int KByteArrayModel::bookmarksCount() const

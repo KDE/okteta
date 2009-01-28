@@ -48,6 +48,7 @@ set( oktetacore_LIB_SRCS
   piecetablebytearraymodel_p.cpp
   piecetablebytearraymodel.cpp
   wordbytearrayservice.cpp
+  bookmarklistconstiteratoradapter.cpp
   bookmarklist.cpp
   section.cpp
   sectionlist.cpp

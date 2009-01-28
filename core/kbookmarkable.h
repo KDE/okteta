@@ -23,14 +23,17 @@
 #ifndef KHE_CORE_BOOKMARKABLE_H
 #define KHE_CORE_BOOKMARKABLE_H
 
-// lib
-#include "bookmarklist.h"
 // Qt
 #include <QtCore/QtPlugin>
-#include <QtCore/QList>
+
+template <class T> class QList;
+
 
 namespace KHECore
 {
+
+class BookmarksConstIterator;
+class Bookmark;
 // interface to a list of bookmarks, sorted by the offset
 //
 class Bookmarkable
@@ -45,8 +48,10 @@ class Bookmarkable
     virtual void setBookmark( unsigned int index, const KHECore::Bookmark& bookmark ) = 0;
 
   public: // get
-    virtual KHECore::BookmarkList bookmarkList() const = 0;
+    virtual KHECore::BookmarksConstIterator createBookmarksConstIterator() const = 0;
+//     virtual BookmarksMutableIterator createBookmarksMutableIterator() const = 0;
     virtual const KHECore::Bookmark& bookmarkAt( unsigned int index ) const = 0;
+    virtual bool containsBookmarkFor( int offset ) const = 0;
     virtual unsigned int bookmarksCount() const = 0;
 
   public: // signal

@@ -25,6 +25,9 @@
 
 // lib
 #include "piecetablebytearraymodel.h"
+#include "kbookmarksconstiterator.h"
+#include "bookmarklistconstiteratoradapter.h"
+#include "bookmarklist.h"
 #include "changesdatastorage.h"
 #include "arraychangemetricslist.h"
 // piecetable
@@ -80,8 +83,9 @@ class PieceTableByteArrayModel::Private
     void removeAllBookmarks();
     void setBookmark( unsigned int index, const KHECore::Bookmark& bookmark );
 
-    KHECore::BookmarkList bookmarkList() const;
+    KHECore::BookmarksConstIterator createBookmarksConstIterator() const;
     const KHECore::Bookmark& bookmarkAt( unsigned int index ) const;
+    bool containsBookmarkFor( int offset ) const;
     unsigned int bookmarksCount() const;
 
   public: // ChangesDescribable API
@@ -188,11 +192,16 @@ inline void PieceTableByteArrayModel::Private::setBookmark( unsigned int index, 
     emit p->bookmarksModified( changedBookmarkIndizes );
 }
 
-inline KHECore::BookmarkList PieceTableByteArrayModel::Private::bookmarkList() const { return mBookmarks; }
+inline KHECore::BookmarksConstIterator PieceTableByteArrayModel::Private::createBookmarksConstIterator() const
+{
+    return BookmarksConstIterator( new BookmarkListConstIteratorAdapter(mBookmarks) );
+}
+
 inline const KHECore::Bookmark& PieceTableByteArrayModel::Private::bookmarkAt( unsigned int index ) const
 {
     return mBookmarks.at( index );
 }
+inline bool PieceTableByteArrayModel::Private::containsBookmarkFor( int offset ) const { return mBookmarks.contains( offset ); }
 inline unsigned int PieceTableByteArrayModel::Private::bookmarksCount() const { return mBookmarks.size(); }
 
 }

@@ -25,7 +25,7 @@
 // lib
 #include "bookmarkstool.h"
 // Okteta core
-#include <bookmarklist.h>
+#include <bookmark.h>
 // KDE
 #include <KLocale>
 #include <KIcon>

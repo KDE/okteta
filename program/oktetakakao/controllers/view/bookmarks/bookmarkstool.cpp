@@ -33,6 +33,7 @@
 #include <wordbytearrayservice.h>
 #include <charcodec.h>
 #include <kbookmarkable.h>
+#include <bookmark.h>
 #include <kbytearraymodel.h>
 // KDE
 #include <KLocale>
@@ -154,11 +155,10 @@ void BookmarksTool::setBookmarkName( unsigned int bookmarkIndex, const QString& 
 
 void BookmarksTool::onCursorPositionChanged( int newPosition )
 {
-    const KHECore::BookmarkList bookmarkList = mBookmarks->bookmarkList();
-    const int bookmarksCount = bookmarkList.size();
+    const int bookmarksCount = mBookmarks->bookmarksCount();
     const bool hasBookmarks = ( bookmarksCount != 0 );
     const bool isInsideByteArray = ( newPosition < mByteArray->size() );
-    const bool isAtBookmark = hasBookmarks ? bookmarkList.contains( newPosition ) : false;
+    const bool isAtBookmark = hasBookmarks ? mBookmarks->containsBookmarkFor( newPosition ) : false;
     const bool canCreateBookmark = ( !isAtBookmark && isInsideByteArray );
 
     if( canCreateBookmark != mCanCreateBookmark )

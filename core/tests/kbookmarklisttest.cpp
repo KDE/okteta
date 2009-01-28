@@ -103,7 +103,8 @@ void KBookmarkListTest::testContains()
     QVERIFY( !bookmarkList.contains(bookmark1.offset()) );
     QVERIFY( !bookmarkList.contains(bookmark2.offset()) );
 }
-
+// TODO: these functions (in a variant) are now part of BookmarksConstIterator
+#if 0
 void KBookmarkListTest::testPreviousFrom()
 {
     const Bookmark bookmark1( Offset1 );
@@ -137,7 +138,7 @@ void KBookmarkListTest::testNextFrom()
     QVERIFY( *bookmarkList.nextFrom(Offset2) == bookmark2 );
     QVERIFY( bookmarkList.nextFrom(Offset2+1) == bookmarkList.end() );
 }
-
+#endif
 void KBookmarkListTest::testAdjustToReplaced()
 {
     const Bookmark bookmark1( Offset1 );

@@ -34,8 +34,8 @@ class KBookmarkListTest : public QObject
     void testSimpleConstructor();
     void testAddRemoveBookmark();
     void testContains();
-    void testPreviousFrom();
-    void testNextFrom();
+//     void testPreviousFrom();
+//     void testNextFrom();
     void testAdjustToSwapped();
     void testAdjustToReplaced();
 };

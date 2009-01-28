@@ -129,14 +129,19 @@ void PieceTableByteArrayModel::setBookmark( unsigned int index, const KHECore::B
     d->setBookmark( index, bookmark );
 }
 
-KHECore::BookmarkList PieceTableByteArrayModel::bookmarkList() const
+KHECore::BookmarksConstIterator PieceTableByteArrayModel::createBookmarksConstIterator() const
 {
-    return d->bookmarkList();
+    return d->createBookmarksConstIterator();
 }
 
 const KHECore::Bookmark& PieceTableByteArrayModel::bookmarkAt( unsigned int index ) const
 {
     return d->bookmarkAt( index );
+}
+
+bool PieceTableByteArrayModel::containsBookmarkFor( int offset ) const
+{
+    return d->containsBookmarkFor( offset );
 }
 
 unsigned int PieceTableByteArrayModel::bookmarksCount() const
