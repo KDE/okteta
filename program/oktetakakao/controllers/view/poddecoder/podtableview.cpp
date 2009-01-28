@@ -34,6 +34,7 @@
 #include <QtGui/QLayout>
 #include <QtGui/QCheckBox>
 #include <QtGui/QTreeView>
+#include <QtGui/QHeaderView>
 
 
 PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
@@ -56,8 +57,9 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
     mPODTableView->setDragEnabled( true );
     mPODTableView->setSortingEnabled( false );
     mPODTableView->setModel( mPODTableModel );
-    for( int c = 0; c<PODTableModel::NoOfColumnIds; ++c )
-        mPODTableView->resizeColumnToContents( c );
+    QHeaderView* header = mPODTableView->header();
+    header->setResizeMode( QHeaderView::ResizeToContents );
+    header->setStretchLastSection( false );
 //     connect( mPODTableView, SIGNAL(doubleClicked( const QModelIndex& )),
 //              SLOT(onDoubleClicked( const QModelIndex& )) );
 

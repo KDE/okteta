@@ -54,10 +54,11 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget *parent )
     mByteTableView->setAllColumnsShowFocus( true );
     mByteTableView->setSortingEnabled( false );
     mByteTableView->setFont( KGlobalSettings::fixedFont() );
-    mByteTableView->header()->setFont( font() );
+    QHeaderView* header = mByteTableView->header();
+    header->setFont( font() );
+    header->setResizeMode( QHeaderView::ResizeToContents );
+    header->setStretchLastSection( false );
     mByteTableView->setModel( mTool->byteTableModel() );
-    for( int c = 0; c<ByteTableModel::NoOfIds; ++c )
-        mByteTableView->resizeColumnToContents( c );
     connect( mByteTableView, SIGNAL(doubleClicked( const QModelIndex& )),
              SLOT(onDoubleClicked( const QModelIndex& )) );
 

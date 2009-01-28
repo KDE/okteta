@@ -34,6 +34,7 @@
 // Qt
 #include <QtGui/QLayout>
 #include <QtGui/QTreeView>
+#include <QtGui/QHeaderView>
 
 
 BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
@@ -54,8 +55,7 @@ BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
     mBookmarkListView->setAllColumnsShowFocus( true );
     mBookmarkListView->setSelectionMode( QAbstractItemView::ExtendedSelection );
     mBookmarkListView->setModel( mBookmarkListModel );
-    for( int c = 0; c<BookmarkListModel::NoOfColumnIds; ++c )
-        mBookmarkListView->resizeColumnToContents( c );
+    mBookmarkListView->header()->setResizeMode( QHeaderView::ResizeToContents );
     connect( mBookmarkListView, SIGNAL(doubleClicked( const QModelIndex& )),
              SLOT(onBookmarkDoubleClicked( const QModelIndex& )) );
     connect( mBookmarkListView->selectionModel(),
