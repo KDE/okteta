@@ -86,14 +86,15 @@ InfoView::InfoView( InfoTool *tool, QWidget *parent )
     mStatisticTableView->setAllColumnsShowFocus( true );
     mStatisticTableView->setSortingEnabled( true );
     mStatisticTableView->setFont( KGlobalSettings::fixedFont() );
-    mStatisticTableView->header()->setFont( font() );
+    QHeaderView* header = mStatisticTableView->header();
+    header->setFont( font() );
+    header->setResizeMode( QHeaderView::ResizeToContents );
+    header->setStretchLastSection( false );
     // TODO: write subclass to filter count and percent by num, not string
     QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel( this );
     proxyModel->setDynamicSortFilter( true );
     proxyModel->setSourceModel( mTool->statisticTableModel() );
     mStatisticTableView->setModel( proxyModel );
-    for( int c = 0; c<StatisticTableModel::NoOfIds; ++c )
-        mStatisticTableView->resizeColumnToContents( c );
     mStatisticTableView->sortByColumn( StatisticTableModel::CountId, Qt::DescendingOrder );
     connect( mTool->statisticTableModel(), SIGNAL(headerChanged()), SLOT(updateHeader()) );
 

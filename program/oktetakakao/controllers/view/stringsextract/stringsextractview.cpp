@@ -113,7 +113,9 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget *paren
     mContainedStringTableView->setSelectionMode( QAbstractItemView::ExtendedSelection );
     mContainedStringTableView->setSortingEnabled( true );
     mContainedStringTableView->setFont( KGlobalSettings::fixedFont() );
-    mContainedStringTableView->header()->setFont( font() );
+    QHeaderView* header = mContainedStringTableView->header();
+    header->setFont( font() );
+    header->setResizeMode( QHeaderView::ResizeToContents );
     mContainedStringTableView->setModel( mSortFilterProxyModel );
     mContainedStringTableView->sortByColumn( ContainedStringTableModel::OffsetColumnId, Qt::AscendingOrder );
     connect( mContainedStringTableView, SIGNAL(doubleClicked( const QModelIndex& )),
@@ -226,5 +228,3 @@ void StringsExtractView::onStringDoubleClicked( const QModelIndex &index )
 }
 
 StringsExtractView::~StringsExtractView() {}
-
-#include "stringsextractview.moc"
