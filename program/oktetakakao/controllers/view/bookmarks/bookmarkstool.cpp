@@ -33,6 +33,7 @@
 #include <wordbytearrayservice.h>
 #include <charcodec.h>
 #include <kbookmarkable.h>
+#include <kbookmarksconstiterator.h>
 #include <bookmark.h>
 #include <kbytearraymodel.h>
 // KDE
@@ -53,6 +54,23 @@ BookmarksTool::BookmarksTool()
 QString BookmarksTool::title() const { return i18nc("@title:window", "Bookmarks"); }
 bool BookmarksTool::canCreateBookmark() const { return mCanCreateBookmark; }
 const KHECore::Bookmark& BookmarksTool::bookmarkAt( unsigned int index ) const { return mBookmarks->bookmarkAt( index ); }
+int BookmarksTool::indexOf( const KHECore::Bookmark& bookmark ) const
+{
+    int result = -1;
+
+    KHECore::BookmarksConstIterator bit = mBookmarks->createBookmarksConstIterator();
+    int i = 0;
+    while( bit.hasNext() )
+    {
+        if( bookmark == bit.next() )
+        {
+            result = i;
+            break;
+        }
+        ++i;
+    }
+    return result;
+}
 unsigned int BookmarksTool::bookmarksCount() const { return mBookmarks ? mBookmarks->bookmarksCount() : 0; }
 
 

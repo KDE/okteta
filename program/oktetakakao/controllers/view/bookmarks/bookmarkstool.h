@@ -47,6 +47,7 @@ class BookmarksTool : public AbstractTool
     bool hasBookmarks() const;
     bool canCreateBookmark() const;
     const KHECore::Bookmark& bookmarkAt( unsigned int index ) const;
+    int indexOf( const KHECore::Bookmark& bookmark ) const;
     unsigned int bookmarksCount() const;
 
   public: // AbstractTool API
