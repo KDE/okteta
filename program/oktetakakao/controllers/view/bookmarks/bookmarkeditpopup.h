@@ -23,16 +23,14 @@
 #ifndef BOOKMARKEDITPOPUP_H
 #define BOOKMARKEDITPOPUP_H
 
-// Qt
-#include <QtGui/QFrame>
+// Kakao gui
+#include <abstractlinepopup.h>
 
 // class Bookmark;
 class QLineEdit;
-class QEventLoop;
 
 
-// TODO: find better name then popup for this kind of view
-class BookmarkEditPopup : public QFrame
+class BookmarkEditPopup : public AbstractLinePopup
 {
   Q_OBJECT
 
@@ -44,28 +42,13 @@ class BookmarkEditPopup : public QFrame
     QString name() const;
 
   public:
-    void setPosition( const QPoint& globalPosition );
     void setName( const QString& name );
-    int exec();
-
-  protected: // QObject API
-    virtual bool eventFilter( QObject* object, QEvent* event );
-
-  protected: // QWidget API
-    virtual void setVisible( bool visible );
-
-  public:
-    bool isOrContainsObject( QObject* object ) const;
-    void adjustRect();
 
   protected Q_SLOTS:
     void onReturnPressed();
 
   private:
     QLineEdit* mBookmarkNameLineEdit;
-
-    QEventLoop* mEventLoop;
-    int mResult;
 };
 
 #endif
