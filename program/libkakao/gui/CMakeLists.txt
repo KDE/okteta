@@ -25,6 +25,13 @@ set( KAKAO_GUI_IO_CONFIGEDITOR_SRCS
   io/abstractmodelexporterconfigeditor.cpp
 )
 
+set( KAKAO_GUI_CONTROLLER_WIDGETS_SRCS
+  controller/togglebutton_p.cpp
+  controller/togglebutton.cpp
+  controller/abstractlinepopup_p.cpp
+  controller/abstractlinepopup.cpp
+)
+
 set( KAKAO_GUI_SRCS
   ${KAKAO_GUI_IO_CONFIGEDITOR_SRCS}
   view/kabstractview.cpp
@@ -37,8 +44,7 @@ set( KAKAO_GUI_SRCS
   system/abstractgroupedviews.cpp
   system/tabbedviews.cpp
   system/shellwindow.cpp
-  controller/togglebutton.cpp
-  controller/togglebutton_p.cpp
+  ${KAKAO_GUI_CONTROLLER_WIDGETS_SRCS}
   controller/abstractxmlguicontroller.cpp
 )
 
