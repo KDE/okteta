@@ -42,7 +42,7 @@ QList<KAbstractDocument*> DocumentsTool::documents() const { return mDocumentMan
 
 QString DocumentsTool::title() const { return i18nc("@title:window", "Documents"); }
 
-// TODO: this is an abuse of setTargetModel. Find other way to get focussed model
+// TODO: this is an abuse of setTargetModel. Find other way to get focused model
 void DocumentsTool::setTargetModel( AbstractModel* model )
 {
     mFocussedDocument = model ? model->findBaseModel<KAbstractDocument*>() : 0;

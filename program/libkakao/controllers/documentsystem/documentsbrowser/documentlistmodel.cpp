@@ -126,7 +126,7 @@ void DocumentListModel::onFocussedDocumentChanged( KAbstractDocument* document )
 Q_UNUSED( document )
 
     reset();
-// TODO: store current focussed document, then only emit for changed
+// TODO: store current focused document, then only emit for changed
 #if 0
     const int oldVersionIndex = mVersionIndex;
     mVersionIndex = versionIndex;
