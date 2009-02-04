@@ -27,7 +27,7 @@
 #include <abstractlinepopup.h>
 
 // class Bookmark;
-class QLineEdit;
+class KLineEdit;
 
 
 class BookmarkEditPopup : public AbstractLinePopup
@@ -48,7 +48,7 @@ class BookmarkEditPopup : public AbstractLinePopup
     void onReturnPressed();
 
   private:
-    QLineEdit* mBookmarkNameLineEdit;
+    KLineEdit* mBookmarkNameLineEdit;
 };
 
 #endif

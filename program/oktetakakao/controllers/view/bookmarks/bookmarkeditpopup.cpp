@@ -26,8 +26,7 @@
 // #include <bookmark.h>
 // KDE
 #include <KIcon>
-// Qt
-#include <QtGui/QLineEdit>
+#include <KLineEdit>
 
 
 BookmarkEditPopup::BookmarkEditPopup( QWidget* parent )
@@ -35,7 +34,7 @@ BookmarkEditPopup::BookmarkEditPopup( QWidget* parent )
 {
     setIcon( KIcon("bookmark-new") );
 
-    mBookmarkNameLineEdit = new QLineEdit( this );
+    mBookmarkNameLineEdit = new KLineEdit( this );
     connect( mBookmarkNameLineEdit, SIGNAL(returnPressed()), SLOT(onReturnPressed()) );
 
     setWidget( mBookmarkNameLineEdit );
