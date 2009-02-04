@@ -1,3 +1,3 @@
 #! /bin/sh
-$EXTRACTRC `find . -name \*.rc` > rc.cpp
+$EXTRACTRC `find . -name \*.rc` >> rc.cpp
 $XGETTEXT `find . -name \*.cpp` -o $podir/okteta.pot
