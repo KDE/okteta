@@ -69,7 +69,7 @@ class KByteArraySourceCodeStreamEncoder : public KAbstractByteArrayStreamEncoder
     void setSettings( const SourceCodeStreamEncoderSettings& settings );
 
   public:
-    const char** dataTypeNames() const;
+    const char* const* dataTypeNames() const;
     int dataTypesCount() const;
 
   protected: // KAbstractByteArrayStreamEncoder API

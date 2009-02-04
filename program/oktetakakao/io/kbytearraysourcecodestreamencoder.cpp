@@ -30,7 +30,7 @@
 #include <QtCore/QTextStream>
 
 
-static const char *PrimitiveDataTypeName[] =
+static const char * const PrimitiveDataTypeName[] =
 {
     "char",
     "unsigned char",
@@ -66,7 +66,7 @@ KByteArraySourceCodeStreamEncoder::KByteArraySourceCodeStreamEncoder()
  : KAbstractByteArrayStreamEncoder( i18nc("name of the encoding target","C array..."), QLatin1String("text/plain") )
 {}
 
-const char** KByteArraySourceCodeStreamEncoder::dataTypeNames() const { return PrimitiveDataTypeName; }
+const char* const* KByteArraySourceCodeStreamEncoder::dataTypeNames() const { return PrimitiveDataTypeName; }
 int KByteArraySourceCodeStreamEncoder::dataTypesCount() const { return NoOfPrimitiveDataTypes; }
 
 bool KByteArraySourceCodeStreamEncoder::encodeDataToStream( QIODevice *device,

@@ -72,7 +72,7 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
     pageLayout->addWidget( label, 2, 0, Qt::AlignRight);
 
     mDataTypeSelect = new KComboBox( this );
-    const char** dataTypeNames = mEncoder->dataTypeNames();
+    const char* const* dataTypeNames = mEncoder->dataTypeNames();
     const int dataTypesCount = mEncoder->dataTypesCount();
     QStringList dataTypeNameStrings;
     for( int i=0; i<dataTypesCount; ++i )
