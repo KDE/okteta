@@ -2,6 +2,7 @@
 Name=Okteta
 Name[ar]=أكتيتا
 Name[pa]=ਓਕਟੀਟਾ
+Name[sr]=Октета
 Name[x-test]=xxOktetaxx
 GenericName=Hex Editor
 GenericName[ar]=محرر Hex
@@ -31,6 +32,8 @@ GenericName[pt_BR]=Editor hexadecimal
 GenericName[ro]=Editor hexazecimal
 GenericName[ru]=Бинарный редактор
 GenericName[sl]=Urejevalnik binarnih datotek
+GenericName[sr]=Хексадекадни уређивач
+GenericName[sr@latin]=Heksadekadni uređivač
 GenericName[sv]=Binäreditor
 GenericName[th]=เครื่องมือแก้ไขเลขฐานสิบหก
 GenericName[tr]=On Altılık Dosya Düzenleyici
