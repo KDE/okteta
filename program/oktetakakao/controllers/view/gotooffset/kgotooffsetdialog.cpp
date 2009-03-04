@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -37,18 +37,18 @@
 #include <QtGui/QLayout>
 
 
-static const QStringList &formatStrings()
+static const QStringList& formatStrings()
 {
-  static QStringList list;
-  if( list.isEmpty() )
-  {
-    list.append( i18nc( "@item:inlistbox coding of offset in the hexadecimal format", "Hexadecimal" ) );
-    list.append( i18nc( "@item:inlistbox coding of offset in the decimal format",     "Decimal" )     );
-  }
-  return list;
+    static QStringList list;
+    if( list.isEmpty() )
+    {
+        list.append( i18nc( "@item:inlistbox coding of offset in the hexadecimal format", "Hexadecimal" ) );
+        list.append( i18nc( "@item:inlistbox coding of offset in the decimal format",     "Decimal" )     );
+    }
+    return list;
 }
 
-KGotoOffsetDialog::KGotoOffsetDialog( QWidget *parent )
+KGotoOffsetDialog::KGotoOffsetDialog( QWidget* parent )
   : KDialog( parent ),
     mHasView( false )
 {
@@ -62,79 +62,78 @@ KGotoOffsetDialog::KGotoOffsetDialog( QWidget *parent )
     setDefaultButton( Ok );
     setModal( false );
 
-    QWidget *page = new QWidget( this );
+    QWidget* page = new QWidget( this );
     setMainWidget( page );
 
-    QVBoxLayout *topLayout = new QVBoxLayout( page );
-    topLayout->setSpacing( spacingHint() );
+    QVBoxLayout* topLayout = new QVBoxLayout( page );
     topLayout->setMargin( 0 );
 
     // search term
-    QGroupBox *OffsetBox = new QGroupBox( i18nc("@title:group","Go to"), page );
-    topLayout->addWidget( OffsetBox );
+    QGroupBox* offsetBox = new QGroupBox( i18nc("@title:group","Go to"), page );
+    topLayout->addWidget( offsetBox );
 
-    QVBoxLayout *GotoBoxLayout = new QVBoxLayout;
-    GotoBoxLayout->setSpacing( spacingHint() );
+    QVBoxLayout* gotoBoxLayout = new QVBoxLayout;
+    gotoBoxLayout->setSpacing( spacingHint() );
 
-    QLabel *label = new QLabel( i18nc("@label:listbox","Fo&rmat:"), OffsetBox );
-    mSelector = new KComboBox( OffsetBox );
+    QLabel* label = new QLabel( i18nc("@label:listbox","Fo&rmat:"), offsetBox );
+    mSelector = new KComboBox( offsetBox );
     mSelector->addItems( formatStrings() );
     connect( mSelector, SIGNAL(activated(int)), SLOT(onSelectorChanged(int)) );
     label->setBuddy( mSelector );
 
-    GotoBoxLayout->addWidget( label );
-    GotoBoxLayout->addWidget( mSelector );
+    gotoBoxLayout->addWidget( label );
+    gotoBoxLayout->addWidget( mSelector );
 
-    label = new QLabel( i18nc("@label:listbox","O&ffset:"), OffsetBox );
-    OffsetEdit = new KComboBox( OffsetBox );
-    OffsetEdit->setEditable( true );
-    OffsetEdit->setMaxCount( 10 );
-    OffsetEdit->setInsertPolicy( KComboBox::InsertAtTop );
-    connect( OffsetEdit, SIGNAL(editTextChanged(const QString&)), SLOT(onOffsetChanged(const QString&)) );
-    mOffsetValidator = new KByteArrayValidator( OffsetEdit, KByteArrayValidator::HexadecimalCoding );
-    OffsetEdit->setValidator( mOffsetValidator );
-    label->setBuddy( OffsetEdit );
-    const QString InputWhatsThis =
+    label = new QLabel( i18nc("@label:listbox","O&ffset:"), offsetBox );
+    mOffsetEdit = new KComboBox( offsetBox );
+    mOffsetEdit->setEditable( true );
+    mOffsetEdit->setMaxCount( 10 );
+    mOffsetEdit->setInsertPolicy( KComboBox::InsertAtTop );
+    connect( mOffsetEdit, SIGNAL(editTextChanged(const QString&)), SLOT(onOffsetChanged(const QString&)) );
+    mOffsetValidator = new KByteArrayValidator( mOffsetEdit, KByteArrayValidator::HexadecimalCoding );
+    mOffsetEdit->setValidator( mOffsetValidator );
+    label->setBuddy( mOffsetEdit );
+    const QString inputWhatsThis =
         i18nc( "@info:whatsthis","Enter an offset to go to, or select a previous offset from the list." );
-    label->setWhatsThis( InputWhatsThis );
-    OffsetEdit->setWhatsThis( InputWhatsThis );
-    GotoBoxLayout->addWidget( label );
-    GotoBoxLayout->addWidget( OffsetEdit );
-    OffsetBox->setLayout( GotoBoxLayout );
+    label->setWhatsThis( inputWhatsThis );
+    mOffsetEdit->setWhatsThis( inputWhatsThis );
+    gotoBoxLayout->addWidget( label );
+    gotoBoxLayout->addWidget( mOffsetEdit );
+    offsetBox->setLayout( gotoBoxLayout );
 
     // options
-    QGroupBox *OptionsBox = new QGroupBox( i18nc("@title:group","Options"), page );
-    topLayout->addWidget( OptionsBox );
+    QGroupBox* optionsBox = new QGroupBox( i18nc("@title:group","Options"), page );
+    topLayout->addWidget( optionsBox );
 
-    QGridLayout *OptionsBoxLayout = new QGridLayout( OptionsBox );
-    OptionsBoxLayout->setSpacing( spacingHint() );
+    QGridLayout* optionsBoxLayout = new QGridLayout( optionsBox );
+    optionsBoxLayout->setSpacing( spacingHint() );
 
-    AtCursorCheckBox = new QCheckBox( i18nc("@option:check","From c&ursor"), OptionsBox );
-    AtCursorCheckBox->setWhatsThis(
+    mAtCursorCheckBox = new QCheckBox( i18nc("@option:check","From c&ursor"), optionsBox );
+    mAtCursorCheckBox->setWhatsThis(
         i18nc("@info:whatsthis","Go relative from the current cursor location and not absolute.") );
-    ExtendSelectionCheckBox = new QCheckBox( i18nc("@option:check","&Extend selection"), OptionsBox );
-    ExtendSelectionCheckBox->setWhatsThis(
+    mExtendSelectionCheckBox = new QCheckBox( i18nc("@option:check","&Extend selection"), optionsBox );
+    mExtendSelectionCheckBox->setWhatsThis(
         i18nc("@info:whatsthis","Extend the selection by the cursor move.") );
-    BackwardsCheckBox = new QCheckBox( i18nc("@option:check","&Backwards"), OptionsBox );
-    BackwardsCheckBox->setWhatsThis(
+    mBackwardsCheckBox = new QCheckBox( i18nc("@option:check","&Backwards"), optionsBox );
+    mBackwardsCheckBox->setWhatsThis(
         i18nc("@info:whatsthis","Go backwards from the end or the current cursor location.") );
 
-    OptionsBoxLayout->addWidget( AtCursorCheckBox, 0, 0 );
-    OptionsBoxLayout->addWidget( ExtendSelectionCheckBox, 1, 0 );
-    OptionsBoxLayout->addWidget( BackwardsCheckBox, 0, 1 );
+    optionsBoxLayout->addWidget( mAtCursorCheckBox, 0, 0 );
+    optionsBoxLayout->addWidget( mExtendSelectionCheckBox, 1, 0 );
+    optionsBoxLayout->addWidget( mBackwardsCheckBox, 0, 1 );
 
-    setTabOrder( mSelector, OffsetEdit );
-    setTabOrder( OffsetEdit, AtCursorCheckBox );
-    setTabOrder( AtCursorCheckBox, BackwardsCheckBox );
+    setTabOrder( mSelector, mOffsetEdit );
+    setTabOrder( mOffsetEdit, mAtCursorCheckBox );
+    setTabOrder( mAtCursorCheckBox, mBackwardsCheckBox );
 
     onSelectorChanged( mSelector->currentIndex() );
     enableButtonOk( false );
 }
 
-void KGotoOffsetDialog::setRange( int Start, int End )
+void KGotoOffsetDialog::setRange( int firstOffset, int lastOffset )
 {
-Q_UNUSED( Start )
-Q_UNUSED( End )
+Q_UNUSED( firstOffset )
+Q_UNUSED( lastOffset )
 
     // TOOO: handle limits
 }
@@ -143,38 +142,38 @@ void KGotoOffsetDialog::setHasView( bool hasView )
 {
     mHasView = hasView;
 
-    enableButtonOk( mHasView && !OffsetEdit->currentText().isEmpty() );
+    enableButtonOk( mHasView && !mOffsetEdit->currentText().isEmpty() );
 }
 
 
 int KGotoOffsetDialog::offset() const
 {
-    const int HD = mSelector->currentIndex();
-    const int Offset = OffsetEdit->currentText().toInt( 0, HD==0?16:10 );
-    return Offset;
+    const int isHexadecimal = ( mSelector->currentIndex() == 0 );
+    const int offset = mOffsetEdit->currentText().toInt( 0, isHexadecimal?16:10 );
+    return offset;
 }
 
-bool KGotoOffsetDialog::isSelectionToExtent() const { return ExtendSelectionCheckBox->isChecked(); }
-bool KGotoOffsetDialog::isRelative() const          { return AtCursorCheckBox->isChecked(); }
-bool KGotoOffsetDialog::isBackwards() const         { return BackwardsCheckBox->isChecked(); }
+bool KGotoOffsetDialog::isSelectionToExtent() const { return mExtendSelectionCheckBox->isChecked(); }
+bool KGotoOffsetDialog::isRelative() const          { return mAtCursorCheckBox->isChecked(); }
+bool KGotoOffsetDialog::isBackwards() const         { return mBackwardsCheckBox->isChecked(); }
 
 void KGotoOffsetDialog::onSelectorChanged( int index )
 {
-    mOffsetValidator->setCodec( (KByteArrayValidator::Coding)index );
-    OffsetEdit->lineEdit()->setText( mOffsetString[ index ] );
+    mOffsetValidator->setCodec( static_cast<KByteArrayValidator::Coding>(index) );
+    mOffsetEdit->lineEdit()->setText( mOffsetString[ index ] );
 }
 
-void KGotoOffsetDialog::onOffsetChanged( const QString &text )
+void KGotoOffsetDialog::onOffsetChanged( const QString& text )
 {
     mOffsetString[ mSelector->currentIndex() ] = text;
     enableButtonOk( mHasView && !text.isEmpty() );
 }
 
 
-void KGotoOffsetDialog::showEvent( QShowEvent *showEvent )
+void KGotoOffsetDialog::showEvent( QShowEvent* showEvent )
 {
     KDialog::showEvent(showEvent);
-    OffsetEdit->setFocus();
+    mOffsetEdit->setFocus();
 }
 
 

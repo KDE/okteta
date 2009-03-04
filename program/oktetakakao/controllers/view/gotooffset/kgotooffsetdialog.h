@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -39,37 +39,37 @@ class KGotoOffsetDialog : public KDialog
   Q_OBJECT
 
   public:
-    explicit KGotoOffsetDialog( QWidget *parent = 0 );
+    explicit KGotoOffsetDialog( QWidget* parent = 0 );
     ~KGotoOffsetDialog();
 
   public: // set
-    void setRange( int Start, int End );
+    void setRange( int firstOffset, int lastOffset );
     void setHasView( bool hasView );
 
-  public: // get 
+  public: // get
     int offset() const;
     bool isRelative() const;
     bool isSelectionToExtent() const;
     bool isBackwards() const;
 
-  protected:
-    virtual void showEvent( QShowEvent *e );
+  protected: // QWidget API
+    virtual void showEvent( QShowEvent* showEvent );
 
   private Q_SLOTS:
     void onSelectorChanged( int index );
-    void onOffsetChanged( const QString &text );
+    void onOffsetChanged( const QString& text );
 
   private:
     bool mHasView;
 
-    KComboBox *mSelector;
-    KComboBox *OffsetEdit;
-    QCheckBox *AtCursorCheckBox;
-    QCheckBox *ExtendSelectionCheckBox;
-    QCheckBox *BackwardsCheckBox;
+    KComboBox* mSelector;
+    KComboBox* mOffsetEdit;
+    QCheckBox* mAtCursorCheckBox;
+    QCheckBox* mExtendSelectionCheckBox;
+    QCheckBox* mBackwardsCheckBox;
 
-    QString    mOffsetString[2];
-    KByteArrayValidator *mOffsetValidator;
+    QString mOffsetString[2];
+    KByteArrayValidator* mOffsetValidator;
 };
 
 #endif
