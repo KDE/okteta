@@ -130,6 +130,13 @@ KGotoOffsetDialog::KGotoOffsetDialog( QWidget* parent )
     enableButtonOk( false );
 }
 
+void KGotoOffsetDialog::setOffset( int offset )
+{
+    const int isHexadecimal = ( mSelector->currentIndex() == 0 );
+    const int base = isHexadecimal ? 16 : 10;
+    mOffsetEdit->lineEdit()->setText( QString::number(offset,base) );
+}
+
 void KGotoOffsetDialog::setRange( int firstOffset, int lastOffset )
 {
 Q_UNUSED( firstOffset )
@@ -149,7 +156,8 @@ void KGotoOffsetDialog::setHasView( bool hasView )
 int KGotoOffsetDialog::offset() const
 {
     const int isHexadecimal = ( mSelector->currentIndex() == 0 );
-    const int offset = mOffsetEdit->currentText().toInt( 0, isHexadecimal?16:10 );
+    const int base = isHexadecimal ? 16 : 10;
+    const int offset = mOffsetEdit->currentText().toInt( 0, base );
     return offset;
 }
 
@@ -172,7 +180,7 @@ void KGotoOffsetDialog::onOffsetChanged( const QString& text )
 
 void KGotoOffsetDialog::showEvent( QShowEvent* showEvent )
 {
-    KDialog::showEvent(showEvent);
+    KDialog::showEvent( showEvent );
     mOffsetEdit->setFocus();
 }
 

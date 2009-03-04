@@ -76,15 +76,19 @@ void GotoOffsetController::setTargetModel( AbstractModel* model )
 
 void GotoOffsetController::gotoOffset()
 {
+    const int startOffset = mByteArrayDisplay->startOffset();
+
     // ensure dialog
     if( !mGotoOffsetDialog )
     {
         mGotoOffsetDialog = new KGotoOffsetDialog( 0 );
-        const int startOffset = mByteArrayDisplay->startOffset();
         mGotoOffsetDialog->setRange( startOffset, startOffset+mByteArray->size()-1 );
         mGotoOffsetDialog->setHasView( true );
         connect( mGotoOffsetDialog, SIGNAL(okClicked()), SLOT(onOkClicked()) );
     }
+
+    const int currentOffset = mByteArrayDisplay->cursorPosition();
+    mGotoOffsetDialog->setOffset( startOffset + currentOffset );
 
     mGotoOffsetDialog->show();
 }

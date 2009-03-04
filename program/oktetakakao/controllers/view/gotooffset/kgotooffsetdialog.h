@@ -43,6 +43,7 @@ class KGotoOffsetDialog : public KDialog
     ~KGotoOffsetDialog();
 
   public: // set
+    void setOffset( int offset );
     void setRange( int firstOffset, int lastOffset );
     void setHasView( bool hasView );
 
