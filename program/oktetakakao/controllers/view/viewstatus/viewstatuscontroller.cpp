@@ -157,11 +157,13 @@ void ViewStatusController::setOverwriteMode( bool overwrite )
 void ViewStatusController::setValueCoding( int valueCoding )
 {
     mByteArrayDisplay->setValueCoding( valueCoding );
+    mByteArrayDisplay->setFocus();
 }
 
 void ViewStatusController::setCharCoding( int charCoding )
 {
     mByteArrayDisplay->setCharCoding( KHECore::CharCodec::codecNames()[charCoding] );
+    mByteArrayDisplay->setFocus();
 }
 
 void ViewStatusController::onCursorPositionChanged( int offset )
