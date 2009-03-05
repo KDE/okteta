@@ -29,7 +29,6 @@
 #include "kiviewfocusable.h"
 
 class KTabWidget;
-class KViewManager;
 class QDragMoveEvent;
 class QDropEvent;
 
@@ -40,7 +39,7 @@ class TabbedViews : public AbstractGroupedViews, public KDE::If::ViewFocusable
    Q_INTERFACES( KDE::If::ViewFocusable )
 
   public:
-    explicit TabbedViews( KViewManager *viewManager );
+    explicit TabbedViews();
     virtual ~TabbedViews();
 
   public: // KDE::If::ViewFocusable API
@@ -66,7 +65,9 @@ class TabbedViews : public AbstractGroupedViews, public KDE::If::ViewFocusable
 //     void onModifiedChanged( KAbstractDocument::SynchronizationStates newStates );
 
   protected:
-   KViewManager *mViewManager;
+    int indexOf( KAbstractView* view ) const;
+
+  protected:
    KTabWidget *mTabWidget;
 };
 

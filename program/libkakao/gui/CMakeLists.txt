@@ -37,6 +37,7 @@ set( KAKAO_GUI_SRCS
   view/kabstractview.cpp
   view/abstractselectionview.cpp
   view/abstracttoolview.cpp
+  system/viewbox.cpp
   system/toolviewdockwidget.cpp
   system/dummyview.cpp
   system/modelcodecviewmanager.cpp

@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,15 +23,14 @@
 #include "tabbedviews.h"
 
 // lib
+#include "viewbox.h"
 #include <kabstractdocument.h>
 #include <kabstractview.h>
-#include <kviewmanager.h>
 // KDE
 #include <KTabWidget>
 
 
-TabbedViews::TabbedViews( KViewManager *viewManager )
- : mViewManager( viewManager )
+TabbedViews::TabbedViews()
 {
     mTabWidget = new KTabWidget();
 
@@ -53,9 +52,27 @@ QList<KAbstractView*> TabbedViews::viewList() const
     const int count = mTabWidget->count();
     for( int i=0; i<count; ++i )
     {
-        QWidget* widget = mTabWidget->widget( i );
-        KAbstractView* view = mViewManager->viewByWidget( widget );
+        const ViewBox* viewBox = static_cast<const ViewBox*>( mTabWidget->widget(i) );
+        KAbstractView* view = viewBox->view();
         result.append( view );
+    }
+
+    return result;
+}
+
+int TabbedViews::indexOf( KAbstractView* view ) const
+{
+    int result = -1;
+
+    const int tabCount = mTabWidget->count();
+    for( int i=0; i<tabCount; ++i )
+    {
+        const ViewBox* viewBox = static_cast<const ViewBox*>( mTabWidget->widget(i) );
+        if( view == viewBox->view() )
+        {
+            result = i;
+            break;
+        }
     }
 
     return result;
@@ -65,7 +82,8 @@ void TabbedViews::addView( KAbstractView *view )
 {
     connect( view, SIGNAL(titleChanged( QString )), SLOT(onTitleChanged( QString )) );
 
-    const int index = mTabWidget->addTab( view->widget(), view->title() );
+    ViewBox* viewBox = new ViewBox( view, mTabWidget );
+    const int index = mTabWidget->addTab( viewBox, view->title() );
     mTabWidget->setCurrentIndex( index );
     view->widget()->setFocus();
 
@@ -82,7 +100,7 @@ void TabbedViews::removeView( KAbstractView *view )
 {
     view->disconnect( this );
 
-    const int index = mTabWidget->indexOf( view->widget() );
+    const int index = indexOf( view );
     if( index != -1 )
         mTabWidget->removeTab( index );
 
@@ -103,29 +121,31 @@ QWidget *TabbedViews::widget() const
 
 void TabbedViews::setViewFocus( KAbstractView *view )
 {
-    const int index = mTabWidget->indexOf( view->widget() );
+    const int index = indexOf( view );
     mTabWidget->setCurrentIndex( index );
 }
 
 KAbstractView *TabbedViews::viewFocus() const
 {
-    return mViewManager->viewByWidget( mTabWidget->currentWidget() );
+    const ViewBox* viewBox = static_cast<const ViewBox*>( mTabWidget->currentWidget() );
+    return viewBox ? viewBox->view() : 0;
 }
 
 void TabbedViews::onCurrentChanged( int index )
 {
-    QWidget* widget = mTabWidget->widget( index );
-    KAbstractView* view = mViewManager->viewByWidget( widget );
+    const ViewBox* viewBox = static_cast<const ViewBox*>( mTabWidget->widget(index) );
+    KAbstractView* view = viewBox ? viewBox->view() : 0;
 
-    if( widget )
-        widget->setFocus();
+    if( view )
+        view->widget()->setFocus();
 
     emit viewFocusChanged( view );
 }
 
 void TabbedViews::onCloseRequest( QWidget* widget )
 {
-    KAbstractView* view = mViewManager->viewByWidget( widget );
+    const ViewBox* viewBox = static_cast<const ViewBox*>( widget );
+    KAbstractView* view = viewBox->view();
 
     emit closeRequest( view );
 }
@@ -135,12 +155,12 @@ void TabbedViews::onTitleChanged( const QString &newTitle )
     KAbstractView* view = qobject_cast<KAbstractView *>( sender() );
     if( view )
     {
-        const int index = mTabWidget->indexOf( view->widget() );
+        const int index = indexOf( view );
         if( index != -1 )
             mTabWidget->setTabText( index, newTitle );
     }
-
 }
+
 
 #if 0
 void TabbedViews::onModifiedChanged( KAbstractDocument::SynchronizationStates newStates )
@@ -149,7 +169,7 @@ Q_UNUSED( newStates )
     KAbstractView* view = qobject_cast<KAbstractView *>( sender() );
     if( view )
     {
-        const int index = mViewsTab->indexOf( view->widget() );
+        const int index = indexOf( view );
         if( index != -1 )
         {
 //             mViewsTab->setIcon( index, newTitle ); //modificationSymbol

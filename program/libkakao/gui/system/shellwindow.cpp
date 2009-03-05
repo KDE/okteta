@@ -43,7 +43,7 @@
 
 
 ShellWindow::ShellWindow( KDocumentManager *documentManager, KViewManager *viewManager )
- : mGroupedViews( new TabbedViews(viewManager) ), mCurrentView( 0 ),
+ : mGroupedViews( new TabbedViews() ), mCurrentView( 0 ),
    mDocumentManager( documentManager ), mViewManager( viewManager )
 {
     setCentralWidget( mGroupedViews->widget() );
