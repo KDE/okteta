@@ -36,6 +36,7 @@ TabbedViews::TabbedViews( KViewManager *viewManager )
     mTabWidget = new KTabWidget();
 
     mTabWidget->setCloseButtonEnabled( true );
+    mTabWidget->setDocumentMode( true );
 
     connect( mTabWidget, SIGNAL(closeRequest( QWidget* )), SLOT(onCloseRequest( QWidget* )) );
     connect( mTabWidget, SIGNAL(currentChanged( int )), SLOT(onCurrentChanged( int )) );
