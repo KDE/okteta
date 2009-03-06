@@ -183,4 +183,5 @@ Q_UNUSED( newStates )
 
 TabbedViews::~TabbedViews()
 {
+    delete mTabWidget;
 }
