@@ -99,10 +99,10 @@ BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
     actionsLayout->addWidget( mGotoBookmarkButton );
 
     const KGuiItem renameGuiItem( QString()/*i18n("&Go to")*/, "edit-rename",
-                      i18nc("@info:tooltip","Enables the renaming of the selected bookmark."),
+                      i18nc("@info:tooltip","Enables renaming of the selected bookmark."),
                       i18nc("@info:whatsthis",
                             "If you press this button, the name of the bookmark "
-                            "which has been last selected can be edited.") );
+                            "which was last selected can be edited.") );
     mRenameBookmarkButton = new KPushButton( renameGuiItem, this );
     connect( mRenameBookmarkButton, SIGNAL(clicked(bool)), SLOT(onRenameBookmarkButtonClicked()) );
     actionsLayout->addWidget( mRenameBookmarkButton );

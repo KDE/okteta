@@ -188,7 +188,7 @@ void AbstractFileSystemSyncWithRemoteJob::completeSync( bool success )
     else
     {
         setError( KilledJobError );
-        setErrorText( i18nc("@info","Problem when synching with local filesystem.") );
+        setErrorText( i18nc("@info","Problem while synching with local filesystem.") );
     }
 
     KIO::NetAccess::removeTempFile( d->workFilePath() );

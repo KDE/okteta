@@ -137,7 +137,7 @@ void AbstractFileSystemLoadJob::setDocument( KAbstractDocument *document )
         delete synchronizer;
         // TODO: these reports should go to a notification system, for log or popup
         setError( KilledJobError );
-        setErrorText( i18nc("@info","Problem when loading from local filesystem.") );
+        setErrorText( i18nc("@info","Problem while loading from local filesystem.") );
     }
 
     KIO::NetAccess::removeTempFile( d->workFilePath() );

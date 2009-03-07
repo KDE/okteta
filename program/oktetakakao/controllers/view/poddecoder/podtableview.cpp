@@ -71,8 +71,8 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
     settingsLayout->setMargin( 0 );
 
     mEndianSelection = new KComboBox( this );
-    mEndianSelection->addItem( i18nc("@item:inlistbox","Little endian") ); // add first for index
-    mEndianSelection->addItem( i18nc("@item:inlistbox","Big endian") );    // add second for index
+    mEndianSelection->addItem( i18nc("@item:inlistbox","Little-endian") ); // add first for index
+    mEndianSelection->addItem( i18nc("@item:inlistbox","Big-endian") );    // add second for index
     mEndianSelection->setCurrentIndex( mTool->byteOrder() );
     settingsLayout->addWidget( mEndianSelection, 0, Qt::AlignVCenter );
     connect( mEndianSelection, SIGNAL(activated( int )),

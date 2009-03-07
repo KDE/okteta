@@ -44,7 +44,7 @@ InsertPatternDialog::InsertPatternDialog( QWidget *parent )
                       i18nc("@info:tooltip","Insert the pattern"),
                       i18nc("@info:whatsthis",
                             "If you press the <interface>Insert</interface> button, "
-                            "the pattern you entered above are inserted in the "
+                            "the pattern you entered above is inserted in the "
                             "byte array at the cursor position.")) );
     setDefaultButton( Ok );
     setModal( false );
@@ -81,7 +81,7 @@ InsertPatternDialog::InsertPatternDialog( QWidget *parent )
     mNumberSpinBox->setValue( 1 );
     label->setBuddy( mNumberSpinBox );
     const QString numberWhatsThis =
-        i18nc( "@info:whatsthis", "Enter the number for how often the pattern should be inserted." );
+        i18nc( "@info:whatsthis", "Enter the number of times the pattern should be inserted." );
     label->setWhatsThis( numberWhatsThis );
     mNumberSpinBox->setWhatsThis( numberWhatsThis );
 

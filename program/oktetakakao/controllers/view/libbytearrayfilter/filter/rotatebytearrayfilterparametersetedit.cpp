@@ -49,7 +49,7 @@ RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit( QW
     label->setBuddy( mGroupSizeSpinBox );
     const QString groupSizeWhatsThis =
         i18nc( "@info:whatsthis",
-               "Control the number of the bytes each rotation is done within." );
+               "Control the number of bytes within which each rotation is made." );
     label->setWhatsThis( groupSizeWhatsThis );
     mGroupSizeSpinBox->setWhatsThis( groupSizeWhatsThis );
 

@@ -113,7 +113,7 @@ void AbstractFileSystemSyncFromRemoteJob::completeRead( bool success )
     if( !success )
     {
         setError( KilledJobError );
-        setErrorText( i18nc("@info","Problem when loading from local filesystem.") );
+        setErrorText( i18nc("@info","Problem while loading from local filesystem.") );
     }
 
     KIO::NetAccess::removeTempFile( d->workFilePath() );

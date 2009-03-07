@@ -111,7 +111,7 @@ void ModelCodecManager::exportDocument( AbstractModelExporter *exporter,
                 // TODO: offer "Synchronize" as alternative, if supported, see below
                 const QString message =
                     i18nc( "@info",
-                            "There is already a file at <nl/><filename>%1</filename>.<nl/>"
+                            "There is already a file at<nl/><filename>%1</filename>.<nl/>"
                             "Overwrite?", exportUrl.url() );
                 const int answer = KMessageBox::warningYesNoCancel( mWidget, message, dialogTitle,
                                                                     KStandardGuiItem::overwrite(),

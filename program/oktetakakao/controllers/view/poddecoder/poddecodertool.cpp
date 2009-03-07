@@ -106,33 +106,33 @@ void PODDecoderTool::setupDecoder()
     mDecoderValueList.resize( PODTypeCount );
 
     mDecoderNameList[BinaryId] =
-        i18nc("@label:textbox encoding of one byte as value in the binary format",     "Binary 8 bit:");
+        i18nc("@label:textbox encoding of one byte as value in the binary format",     "Binary 8-bit:");
     mDecoderNameList[OctalId] =
-        i18nc("@label:textbox encoding of one byte as value in the octal format",      "Octal 8 bit:");
+        i18nc("@label:textbox encoding of one byte as value in the octal format",      "Octal 8-bit:");
     mDecoderNameList[HexadecimalId] =
-        i18nc("@label:textbox encoding of one byte as value in the hexadecimal format","Hexadecimal 8 bit:");
+        i18nc("@label:textbox encoding of one byte as value in the hexadecimal format","Hexadecimal 8-bit:");
     mDecoderNameList[Signed8BitId] =
-        i18nc("@label:textbox","Signed 8 bit:");
+        i18nc("@label:textbox","Signed 8-bit:");
     mDecoderNameList[Unsigned8BitId] =
-        i18nc("@label:textbox","Unsigned 8 bit:");
+        i18nc("@label:textbox","Unsigned 8-bit:");
     mDecoderNameList[Signed16BitId] =
-        i18nc("@label:textbox","Signed 16 bit:");
+        i18nc("@label:textbox","Signed 16-bit:");
     mDecoderNameList[Unsigned16BitId] =
-        i18nc("@label:textbox","Unsigned 16 bit:");
+        i18nc("@label:textbox","Unsigned 16-bit:");
     mDecoderNameList[Signed32BitId] =
-        i18nc("@label:textbox","Signed 32 bit:");
+        i18nc("@label:textbox","Signed 32-bit:");
     mDecoderNameList[Unsigned32BitId] =
-        i18nc("@label:textbox","Unsigned 32 bit:");
+        i18nc("@label:textbox","Unsigned 32-bit:");
     mDecoderNameList[Signed64BitId] =
-        i18nc("@label:textbox","Signed 64 bit:");
+        i18nc("@label:textbox","Signed 64-bit:");
     mDecoderNameList[Unsigned64BitId] =
-        i18nc("@label:textbox","Unsigned 64 bit:");
+        i18nc("@label:textbox","Unsigned 64-bit:");
     mDecoderNameList[Float32BitId] =
-        i18nc("@label:textbox","Float 32 bit:");
+        i18nc("@label:textbox","Float 32-bit:");
     mDecoderNameList[Float64BitId] =
-        i18nc("@label:textbox","Float 64 bit:");
+        i18nc("@label:textbox","Float 64-bit:");
     mDecoderNameList[Char8BitId] =
-        i18nc("@label:textbox encoding of one byte as character", "Character 8 bit:");
+        i18nc("@label:textbox encoding of one byte as character", "Character 8-bit:");
     mDecoderNameList[UTF8Id] =
         i18nc("@label:textbox","UTF-8:");
 #if 0

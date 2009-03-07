@@ -72,12 +72,12 @@ BookmarksController::BookmarksController( KXMLGUIClient* guiClient )
 //     mDeleteAllAction->setShortcut( Qt::CTRL + Qt::Key_G );
 
     mGotoNextBookmarkAction = actionCollection->addAction( "bookmark_next" );
-    mGotoNextBookmarkAction->setText( i18nc("@action:inmenu","Goto Next Bookmark") );
+    mGotoNextBookmarkAction->setText( i18nc("@action:inmenu","Go to Next Bookmark") );
     connect( mGotoNextBookmarkAction, SIGNAL(triggered(bool) ), SLOT(gotoNextBookmark()) );
     mGotoNextBookmarkAction->setShortcut( Qt::ALT + Qt::Key_Down );
 
     mGotoPreviousBookmarkAction = actionCollection->addAction( "bookmark_previous" );
-    mGotoPreviousBookmarkAction->setText( i18nc("@action:inmenu","Goto Previous Bookmark") );
+    mGotoPreviousBookmarkAction->setText( i18nc("@action:inmenu","Go to Previous Bookmark") );
     connect( mGotoPreviousBookmarkAction, SIGNAL(triggered(bool) ), SLOT(gotoPreviousBookmark()) );
     mGotoPreviousBookmarkAction->setShortcut( Qt::ALT + Qt::Key_Up );
 

@@ -186,8 +186,8 @@ void ReplaceController::findNext()
         mByteArrayDisplay->selectAllData( false );
 
         const QString replacementReport = (mNoOfReplacements==0) ?
-            i18nc( "@info", "No replacements done.") :
-            i18ncp( "@info", "1 replacement done.", "%1 replacements done.", mNoOfReplacements );
+            i18nc( "@info", "No replacements made.") :
+            i18ncp( "@info", "1 replacement made.", "%1 replacements made.", mNoOfReplacements );
         const QString messageBoxTitle = i18nc( "@title:window", "Replace" );
         // reached end and
         if( mDoWrap )

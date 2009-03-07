@@ -57,9 +57,9 @@ InfoView::InfoView( InfoTool *tool, QWidget *parent )
     const KGuiItem updateGuiItem(
         i18nc("@action:button update the statistic of the byte frequency","&Update"),
         "view-refresh",
-        i18nc("@info:tooltip","Updates the statistic of the byte frequency."),
+        i18nc("@info:tooltip","Updates the byte frequency statistics."),
         i18nc("@info:whatsthis",
-              "If you press the <interface>Update</interface> button, the statistic of the byte frequency is updated.") );
+              "If you press the <interface>Update</interface> button, the byte frequency statistics are updated.") );
     mUpdateButton = new KPushButton( updateGuiItem, this );
     mUpdateButton->setEnabled( mTool->isApplyable() );
     connect( mTool, SIGNAL(isApplyableChanged(bool)), mUpdateButton, SLOT( setEnabled(bool )) );
@@ -120,8 +120,8 @@ void InfoView::setByteArraySize( int size )
 
 void InfoView::setDirty( bool dirty )
 {
-    mDirtyLabel->setText( dirty ? i18nc("@info:status the statistic is not uptodate","Warning: not uptodate") : QString() );
-    mDirtyLabel->setToolTip( dirty ? i18nc("@info:tooltip","Warning: Byte Array has been modified since last update.") : QString() );
+    mDirtyLabel->setText( dirty ? i18nc("@info:status the statistic is not uptodate","Warning: not up-to-date") : QString() );
+    mDirtyLabel->setToolTip( dirty ? i18nc("@info:tooltip","Warning: byte array has been modified since last update.") : QString() );
 }
 
 InfoView::~InfoView() {}

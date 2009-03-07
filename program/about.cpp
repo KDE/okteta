@@ -39,7 +39,7 @@ static const char FWHKEmailAddress[] =   "kossebau@kde.org";
 OktetaAboutData::OktetaAboutData()
 : KAboutData( ProgramId, 0,
               ki18n("Okteta"), ProgramVersion, // name
-              ki18n("KDE bytes editor"), // description
+              ki18n("KDE byte editor"), // description
               KAboutData::License_GPL_V2,
               ki18n("Copyright 2006-2009 Friedrich W. H. Kossebau"), //copyright
               ki18n("Edit files as an array of bytes"), // comment

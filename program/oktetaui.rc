@@ -30,7 +30,7 @@
 "Paste as" ist wie "Insert from Clipboard as", also von Quelle
 Siehe unten "Insert", ist sowohl wiederholbar generiert als von Quelle
 Zusammenlegen?
-      <text>Paste as</text>
+      <text>Paste As</text>
       <ActionList name="paste_as_list" />
     </Menu-->
     <Action name="set_overwrite" group="edit_select_merge" />
@@ -86,7 +86,7 @@ Zusammenlegen?
       <Action name="conversion_field_float"/>
       <Action name="conversion_field_embed"/>
     </Menu-->
-    <!--Menu name="searchbar" append="show_merge"><text>Searc&amp;hbar</text>
+    <!--Menu name="searchbar" append="show_merge"><text>Searc&amp;h Bar</text>
       <Action name="searchbar_hide"/>
       <Action name="searchbar_above"/>
       <Action name="searchbar_below"/>

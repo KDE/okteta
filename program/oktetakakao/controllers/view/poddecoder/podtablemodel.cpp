@@ -163,9 +163,9 @@ QVariant PODTableModel::headerData( int section, Qt::Orientation orientation, in
     {
         const QString titel =
             section == NameId ?
-                    i18nc("@info:tooltip for column Type",    "type of the data ") :
+                    i18nc("@info:tooltip for column Type",    "The type of data") :
             section == ValueId ?
-                    i18nc("@info:tooltip for column Value",   "value of the bytes for the datatype") :
+                    i18nc("@info:tooltip for column Value",   "The value of the bytes for the datatype") :
             QString();
         result = titel;
     }

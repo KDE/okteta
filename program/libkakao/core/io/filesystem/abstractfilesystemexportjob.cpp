@@ -120,7 +120,7 @@ void AbstractFileSystemExportJob::completeExport( bool success )
     else
     {
         setError( KilledJobError );
-        setErrorText( i18nc("@info","Problem when saving to local filesystem.") );
+        setErrorText( i18nc("@info","Problem while saving to local filesystem.") );
     }
 
     d->removeWorkFile();
