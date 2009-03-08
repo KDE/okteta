@@ -178,6 +178,9 @@
 
     <varlistentry>
     <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Ctrl;<keycap>Q</keycap></keycombo>
+    </shortcut>
     <guimenu>File</guimenu>
     <guimenuitem>Quit</guimenuitem>
     </menuchoice></term>

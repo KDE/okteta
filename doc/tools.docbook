@@ -1,12 +1,23 @@
 <chapter id="tools">
 <title>Tools</title>
 
-<!--<para>There are several.</para>-->
+<!-- only in 4.3>
+<sect1 id="tools-filesystem">
+<title>Filesystem</title>
+<para>to be written</para>
+</sect1>
 
-<!--<sect1 id="tools-find">
-<title>Find</title>
-<para>blabla</para>
-</sect1>-->
+<sect1 id="tools-documents">
+<title>Documents</title>
+<para>to be written</para>
+</sect1>
+<-->
+
+<sect1 id="tools-fileinfo">
+<title>File Info</title>
+<para>The view displays some information about the current file,
+    including its type, the location of storage and the size.</para>
+</sect1>
 
 <sect1 id="tools-filter">
 <title>Binary Filter</title>
@@ -51,6 +62,7 @@
     <para>The table displays the value of the byte or the bytes starting
     at the cursor, interpreted as common simple data types like Integer or Float.</para>
 </sect1>
+
 <!-- not in released version
 <sect1 id="tools-versions">
 <title>Versions</title>
