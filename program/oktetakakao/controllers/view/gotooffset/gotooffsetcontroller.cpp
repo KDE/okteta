@@ -116,4 +116,7 @@ void GotoOffsetController::onOkClicked()
         mByteArrayDisplay->setCursorPosition( newPosition );
 }
 
-GotoOffsetController::~GotoOffsetController() {}
+GotoOffsetController::~GotoOffsetController()
+{
+    delete mGotoOffsetDialog;
+}
