@@ -81,6 +81,7 @@ void KDocumentSyncManager::load( const KUrl &url )
     KAbstractDocument* document = mManager->documentOfUrl( url );
     if( document )
     {
+        // TODO: query if file should be reloaded/synched from disk
         emit mManager->focusRequested( document );
         return;
     }
