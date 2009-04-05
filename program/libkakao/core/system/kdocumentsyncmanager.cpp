@@ -70,9 +70,9 @@ void KDocumentSyncManager::setDocumentSynchronizerFactory( AbstractModelSynchron
 
 void KDocumentSyncManager::load()
 {
-    KUrl url = KFileDialog::getOpenUrl( QString()/*mWorkingUrl.url()*/, AllFileNamesFilter, mWidget );
+    KUrl::List urls = KFileDialog::getOpenUrls( QString()/*mWorkingUrl.url()*/, AllFileNamesFilter, mWidget );
 
-    if( !url.isEmpty() )
+    foreach( const KUrl& url, urls )
         load( url );
 }
 
