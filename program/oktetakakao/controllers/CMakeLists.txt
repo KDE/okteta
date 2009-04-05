@@ -66,11 +66,13 @@ set( BYTETABLECONTROLLER_SRCS
 set( SEARCHCONTROLLER_SRCS
   view/search/ksearchdialog.cpp
   view/search/searchjob.cpp
+  view/search/searchtool.cpp
   view/search/searchcontroller.cpp
 )
 set( REPLACECONTROLLER_SRCS
   view/replace/kreplacedialog.cpp
   view/replace/kreplaceprompt.cpp
+  view/replace/replacetool.cpp
   view/replace/replacecontroller.cpp
 )
 set( INSERTPATTERNCONTROLLER_SRCS
@@ -105,6 +107,8 @@ set( FILTERCONTROLLER_SRCS
   view/filter/filtertoolview.cpp
 )
 set( GOTOOFFSETCONTROLLER_SRCS
+  view/gotooffset/gotooffsettool.cpp
+  view/gotooffset/gotooffsetview.cpp
   view/gotooffset/kgotooffsetdialog.cpp
   view/gotooffset/gotooffsetcontroller.cpp
 )

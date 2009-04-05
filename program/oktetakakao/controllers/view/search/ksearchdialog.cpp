@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -22,13 +22,16 @@
 
 #include "ksearchdialog.h"
 
+// controller
+#include "searchtool.h"
 // KDE
 #include <KLocale>
 // #include <kstandardguiitem.h>
 
 
-KSearchDialog::KSearchDialog( QWidget *parent )
- : KAbstractFindDialog( parent )
+KSearchDialog::KSearchDialog( SearchTool* tool, QWidget* parent )
+  : KAbstractFindDialog( parent ),
+    mTool( tool )
 {
     setCaption( i18nc("@title:window","Find Bytes") );
     setButtonGuiItem( Ok, KGuiItem( i18nc("@action:button","&Find"), "edit-find",
@@ -45,6 +48,28 @@ KSearchDialog::KSearchDialog( QWidget *parent )
     setModal( false );
 }
 
-KSearchDialog::~KSearchDialog() {}
 
-#include "ksearchdialog.moc"
+void KSearchDialog::slotButtonClicked( int button )
+{
+    if( button != KDialog::Ok )
+        KAbstractFindDialog::slotButtonClicked( button );
+    else
+    {
+        hide();
+
+        mTool->setSearchData( data() );
+        mTool->setIgnoreCase( ignoreCase() );
+
+        mTool->search( direction(), fromCursor(), inSelection() );
+    }
+}
+
+void KSearchDialog::showEvent( QShowEvent* showEvent )
+{
+    KAbstractFindDialog::showEvent( showEvent );
+
+    setInSelection( mTool->hasSelectedData() );
+    setCharCodec( mTool->charCodingName() );
+}
+
+KSearchDialog::~KSearchDialog() {}

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,16 +25,7 @@
 // controller
 #include "kreplacedialog.h"
 #include "kreplaceprompt.h"
-// search controller
-#include "../search/searchjob.h"
-// lib
-#include <kbytearraydisplay.h>
-#include <kbytearraydocument.h>
-// Okteta core
-#include <charcodec.h>
-#include <kbytearraymodel.h>
-// Kakao gui
-#include <kabstractview.h>
+#include "replacetool.h"
 // KDE
 #include <KXmlGuiWindow>
 #include <KLocale>
@@ -48,215 +39,90 @@
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
 ReplaceController::ReplaceController( KXmlGuiWindow *window )
- : mWindow( window ), mByteArrayDisplay( 0 ), mByteArrayModel( 0 ), mReplaceDialog( 0 ), mReplacePrompt( 0 )
+  : mWindow( window ),
+    mReplaceDialog( 0 ),
+    mReplacePrompt( 0 )
 {
     KActionCollection* ActionCollection = mWindow->actionCollection();
 
     mReplaceAction = KStandardAction::replace( this, SLOT(replace()), ActionCollection );
 
-    setTargetModel( 0 );
+    mTool = new ReplaceTool();
+    mTool->setUserQueryAgent( this );
+
+    connect( mTool, SIGNAL(isApplyableChanged( bool )),
+             mReplaceAction, SLOT(setEnabled( bool )) );
+
+    connect( mTool, SIGNAL(finished( bool, int )), SLOT(onFinished( bool, int )) );
 }
 
 void ReplaceController::setTargetModel( AbstractModel* model )
 {
-    if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
-
-    mByteArrayDisplay = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
-    KByteArrayDocument* document =
-        mByteArrayDisplay ? qobject_cast<KByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
-    mByteArrayModel = document ? document->content() : 0;
-
-    const bool hasView = ( mByteArrayDisplay && mByteArrayModel );
-    if( hasView )
-    {
-        connect( mByteArrayDisplay, SIGNAL(readOnlyChanged( bool )), SLOT(onReadOnlyChanged( bool )) );
-    }
-
-    const bool isWriteable = ( hasView && !mByteArrayDisplay->isReadOnly() );
-
-    mReplaceAction->setEnabled( isWriteable );
-}
-
-
-void ReplaceController::onReadOnlyChanged( bool isReadOnly )
-{
-    const bool isWriteable = !isReadOnly;
-
-    mReplaceAction->setEnabled( isWriteable );
+    mTool->setTargetModel( model );
 }
 
 void ReplaceController::replace()
 {
     // ensure dialog
     if( !mReplaceDialog )
-    {
-        mReplaceDialog = new KReplaceDialog( mWindow );
-        connect( mReplaceDialog, SIGNAL(okClicked()), SLOT(onDialogOkClicked()) );
-    }
-
-    mReplaceDialog->setInSelection( mByteArrayDisplay->hasSelectedData() );
-    mReplaceDialog->setCharCodec( mByteArrayDisplay->charCodingName() );
+        mReplaceDialog = new KReplaceDialog( mTool, mWindow );
 
     mReplaceDialog->show();
+    mReplaceDialog->setFocus();
 }
 
-void ReplaceController::onDialogOkClicked()
+
+void ReplaceController::onFinished( bool previousFound, int noOfReplacements )
 {
-    mPreviousFound = false;
-    mNoOfReplacements = 0;
+    if( mReplacePrompt )
+        mReplacePrompt->hide();
 
-    mReplaceDialog->hide();
-
-    // prepare settings
-    mSearchData = mReplaceDialog->data();
-    mReplaceData = mReplaceDialog->replaceData();
-    mIgnoreCase = mReplaceDialog->ignoreCase();
-    mDoPrompt = mReplaceDialog->prompt();
-
-    if( mReplaceDialog->inSelection() )
-    {
-        mDirection = FindForward;
-        const KHE::Section selection = mByteArrayDisplay->selection();
-        mReplaceFirstIndex = selection.start();
-        mReplaceLastIndex =  selection.end();
-        mCurrentIndex = selection.start();
-        mDoWrap = true;
-    }
-    else
-    {
-        mDirection = mReplaceDialog->direction();
-        const int cursorPosition = mByteArrayDisplay->cursorPosition();
-        if( mReplaceDialog->fromCursor() && (cursorPosition!=0) )
-        {
-            mReplaceFirstIndex = cursorPosition;
-            mReplaceLastIndex =  cursorPosition-1;
-        }
-        else
-        {
-            mReplaceFirstIndex = 0;
-            mReplaceLastIndex =  mByteArrayModel->size()-1;
-        }
-        mCurrentIndex = (mDirection==FindForward) ? mReplaceFirstIndex : mReplaceLastIndex;
-        mDoWrap = (mDirection==FindForward) ? (mReplaceLastIndex<mCurrentIndex) : (mCurrentIndex<mReplaceFirstIndex);
-    }
-
-    findNext();
-}
-
-void ReplaceController::findNext()
-{
-    QApplication::setOverrideCursor( Qt::WaitCursor );
-
-    while( true )
-    {
-        // TODO: support ignorecase
-        SearchJob *searchJob = new SearchJob( mByteArrayModel, mSearchData, mCurrentIndex, (mDirection==FindForward) );
-        const int pos = searchJob->exec();
-
-        if( pos != -1 )
-        {
-            mPreviousFound = true;
-
-            mCurrentIndex = pos;
-            if( mDoPrompt )
-            {
-                QApplication::restoreOverrideCursor();
-
-                mByteArrayDisplay->setSelection( pos, pos+mSearchData.size()-1 );
-                if( !mReplacePrompt )
-                {
-                    mReplacePrompt = new KReplacePrompt( mWindow );
-                    connect( mReplacePrompt, SIGNAL(user1Clicked()), SLOT(onPromptAllClicked()) );
-                    connect( mReplacePrompt, SIGNAL(user2Clicked()), SLOT(onPromptSkipClicked()) );
-                    connect( mReplacePrompt, SIGNAL(user3Clicked()), SLOT(onPromptReplaceClicked()) );
-                }
-                if( mReplacePrompt->isHidden() )
-                    mReplacePrompt->show();
-             break;
-           }
-           else
-           {
-               replaceCurrent();
-               continue;
-           }
-        }
-
-        if( mReplacePrompt )
-            mReplacePrompt->hide();
-        mByteArrayDisplay->selectAllData( false );
-
-        const QString replacementReport = (mNoOfReplacements==0) ?
+    const QString messageBoxTitle = i18nc( "@title:window", "Replace" );
+    const QString replacementReport = (noOfReplacements==0) ?
             i18nc( "@info", "No replacements made.") :
-            i18ncp( "@info", "1 replacement made.", "%1 replacements made.", mNoOfReplacements );
-        const QString messageBoxTitle = i18nc( "@title:window", "Replace" );
-        // reached end and
-        if( mDoWrap )
-        {
-            QApplication::restoreOverrideCursor();
+            i18ncp( "@info", "1 replacement made.", "%1 replacements made.", noOfReplacements );
 
-            const QString Question = ((mDirection==FindForward) ?
-                i18nc( "@info", "<nl/>End of byte array reached.<nl/>Continue from the beginning?" ) :
-                i18nc( "@info", "<nl/>Beginning of byte array reached.<nl/>Continue from the end?" ));
-
-            const int answer = KMessageBox::questionYesNo( mWindow, replacementReport+Question, messageBoxTitle,
-                                                           KStandardGuiItem::cont(), KStandardGuiItem::cancel() );
-            if( answer == KMessageBox::No )
-                break;
-            mCurrentIndex = (mDirection==FindForward) ? 0 : mByteArrayModel->size()-1;
-            mDoWrap = false;
-            mNoOfReplacements = 0;
-
-            QApplication::setOverrideCursor( Qt::WaitCursor );
-        }
-        else
-        {
-            QApplication::restoreOverrideCursor();
-
-            if( !mPreviousFound )
-                KMessageBox::sorry( mWindow, i18nc("@info","Replace pattern not found in byte array."), messageBoxTitle );
-            else
-                KMessageBox::information( mWindow, replacementReport, messageBoxTitle );
-            break;
-        }
-    }
-}
-
-void ReplaceController::replaceCurrent()
-{
-    ++mNoOfReplacements;
-    const int inserted = mByteArrayModel->replace( mCurrentIndex, mSearchData.size(),
-                                             mReplaceData.constData(), mReplaceData.size() );
-    if( mDirection == FindForward )
-        mCurrentIndex += inserted;
+    if( ! previousFound )
+        KMessageBox::sorry( mWindow, i18nc("@info","Replace pattern not found in byte array."), messageBoxTitle );
     else
-        --mCurrentIndex;
+        KMessageBox::information( mWindow, replacementReport, messageBoxTitle );
 }
 
-void ReplaceController::onPromptSkipClicked()
+bool ReplaceController::queryContinue( KFindDirection direction, int noOfReplacements ) const
 {
-    // skip current
-    {
-        if( mDirection == FindForward )
-            mCurrentIndex += mReplaceData.size();
-        else
-            --mCurrentIndex;
-    }
-    findNext();
+    const QString messageBoxTitle = i18nc( "@title:window", "Replace" );
+    const QString replacementReport = (noOfReplacements==0) ?
+            i18nc( "@info", "No replacements made.") :
+            i18ncp( "@info", "1 replacement made.", "%1 replacements made.", noOfReplacements );
+    const QString question = ( direction == FindForward ) ?
+        i18nc( "@info", "<nl/>End of byte array reached.<nl/>Continue from the beginning?" ) :
+        i18nc( "@info", "<nl/>Beginning of byte array reached.<nl/>Continue from the end?" );
+
+    const int answer = KMessageBox::questionYesNo( mWindow, replacementReport+question, messageBoxTitle,
+                                                   KStandardGuiItem::cont(), KStandardGuiItem::cancel() );
+
+    const bool result = ( answer != KMessageBox::No );
+
+    return result;
 }
 
-void ReplaceController::onPromptReplaceClicked()
+KDE::ReplaceBehaviour ReplaceController::queryReplaceCurrent() const
 {
-    replaceCurrent();
-    findNext();
+    if( !mReplacePrompt )
+        mReplacePrompt = new KReplacePrompt( mWindow );
+
+    mReplacePrompt->show();
+    const KDE::ReplaceBehaviour answer = mReplacePrompt->query();
+
+    if( answer == KDE::ReplaceAll || answer == KDE::CancelReplacing )
+        mReplacePrompt->hide();
+
+    return answer;
 }
 
-void ReplaceController::onPromptAllClicked()
+ReplaceController::~ReplaceController()
 {
-    mDoPrompt = false;
-    mReplacePrompt->hide();
-
-    replaceCurrent();
-    findNext();
+    delete mReplaceDialog;
+    delete mReplacePrompt;
+    delete mTool;
 }
-
-ReplaceController::~ReplaceController() {}

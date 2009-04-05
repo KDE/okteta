@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -24,22 +24,21 @@
 #define REPLACECONTROLLER_H
 
 
+// controller
+#include "replaceuserqueryable.h"
 // lib
 #include <kfinddirection.h>
 // Kakao gui
 #include <abstractxmlguicontroller.h>
 
-class KByteArrayDisplay;
-namespace KHECore {
-class AbstractByteArrayModel;
-}
 class KReplaceDialog;
 class KReplacePrompt;
+class ReplaceTool;
 class KXmlGuiWindow;
 class KAction;
 
 
-class ReplaceController : public AbstractXmlGuiController
+class ReplaceController : public AbstractXmlGuiController, public KDE::If::ReplaceUserQueryable
 {
   Q_OBJECT
 
@@ -50,43 +49,23 @@ class ReplaceController : public AbstractXmlGuiController
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
-  protected:
-    void findNext();
-    void replaceCurrent();
+  public: // KDE::If::ReplaceUserQueryable API
+    virtual bool queryContinue( KFindDirection direction, int noOfReplacements ) const;
+    virtual KDE::ReplaceBehaviour queryReplaceCurrent() const;
 
   protected Q_SLOTS: // action slots
     void replace();
 
-  private Q_SLOTS:
-    void onDialogOkClicked();
-    void onPromptAllClicked();
-    void onPromptSkipClicked();
-    void onPromptReplaceClicked();
-
-    void onReadOnlyChanged( bool isReadOnly );
+    void onFinished( bool previousFound, int noOfReplacements );
 
   protected:
     KXmlGuiWindow *mWindow;
 
-    KByteArrayDisplay* mByteArrayDisplay;
-    KHECore::AbstractByteArrayModel *mByteArrayModel;
-
     KAction *mReplaceAction;
 
-    QByteArray mSearchData;
-    QByteArray mReplaceData;
-    bool mPreviousFound:1;
-    bool mDoWrap:1;
-    bool mIgnoreCase:1;
-    bool mDoPrompt:1;
-    KFindDirection mDirection;
-    int mReplaceFirstIndex;
-    int mReplaceLastIndex;
-    int mCurrentIndex;
-    int mNoOfReplacements;
-
     KReplaceDialog *mReplaceDialog;
-    KReplacePrompt *mReplacePrompt;
+    mutable KReplacePrompt* mReplacePrompt;
+    ReplaceTool* mTool;
 };
 
 #endif

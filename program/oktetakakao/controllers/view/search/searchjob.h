@@ -31,6 +31,7 @@ namespace KHECore {
 class AbstractByteArrayModel;
 }
 
+
 class SearchJob : public QObject // not yet: KJob
 {
   Q_OBJECT

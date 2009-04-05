@@ -29,7 +29,9 @@
 // Qt
 #include <QtGui/QApplication>
 
+
 static const int MaxEventProcessTimeInMS = 100;
+
 
 int SearchJob::exec()
 {
@@ -50,5 +52,3 @@ void SearchJob::onBytesSearched()
 {
     QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, MaxEventProcessTimeInMS );
 }
-
-#include "searchjob.moc"

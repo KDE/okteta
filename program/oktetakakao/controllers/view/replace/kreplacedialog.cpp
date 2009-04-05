@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -22,6 +22,8 @@
 
 #include "kreplacedialog.h"
 
+// controller
+#include "replacetool.h"
 //  lib
 #include <kbytearraylineedit.h>
 // KDE
@@ -37,8 +39,9 @@
 
 
 
-KReplaceDialog::KReplaceDialog( QWidget *parent )
- : KAbstractFindDialog( parent )
+KReplaceDialog::KReplaceDialog( ReplaceTool* tool, QWidget* parent )
+  : KAbstractFindDialog( parent ),
+    mTool( tool )
 {
     setCaption( i18nc("@title:window","Replace Bytes") );
     setButtonGuiItem( Ok, KGuiItem( i18nc("@action;button", "&Replace"), "edit-find-replace",
@@ -97,6 +100,29 @@ void KReplaceDialog::setCharCodec( const QString &codecName )
 }
 
 
-KReplaceDialog::~KReplaceDialog() {}
+void KReplaceDialog::slotButtonClicked( int button )
+{
+    if( button != KDialog::Ok )
+        KAbstractFindDialog::slotButtonClicked( button );
+    else
+    {
+        hide();
 
-#include "kreplacedialog.moc"
+        mTool->setSearchData( data() );
+        mTool->setReplaceData( replaceData() );
+        mTool->setIgnoreCase( ignoreCase() );
+        mTool->setDoPrompt( prompt() );
+
+        mTool->replace( direction(), fromCursor(), inSelection() );
+    }
+}
+
+void KReplaceDialog::showEvent( QShowEvent* showEvent )
+{
+    KAbstractFindDialog::showEvent( showEvent );
+
+    setInSelection( mTool->hasSelectedData() );
+    setCharCodec( mTool->charCodingName() );
+}
+
+KReplaceDialog::~KReplaceDialog() {}

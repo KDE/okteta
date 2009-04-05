@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,58 +20,53 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KGOTOOFFSETDIALOG_H
-#define KGOTOOFFSETDIALOG_H
+#ifndef GOTOOFFSETVIEW_H
+#define GOTOOFFSETVIEW_H
 
-// KDE
-#include <KDialog>
 // Qt
-#include <QtCore/QByteArray>
-#include <QtCore/QString>
+#include <QtGui/QWidget>
 
 class GotoOffsetTool;
-class QCheckBox;
-class KComboBox;
 class KByteArrayValidator;
+class KComboBox;
+class KPushButton;
+class QCheckBox;
 
 
-class KGotoOffsetDialog : public KDialog
+class GotoOffsetView : public QWidget
 {
   Q_OBJECT
 
   public:
-    explicit KGotoOffsetDialog( GotoOffsetTool* tool, QWidget* parent = 0 );
-    ~KGotoOffsetDialog();
+    explicit GotoOffsetView( GotoOffsetTool* tool, QWidget* parent = 0 );
+    virtual ~GotoOffsetView();
 
-  public: // set
-    void setOffset( int offset );
-    void setRange( int firstOffset, int lastOffset );
+  public:
+    GotoOffsetTool* tool() const;
 
-  public: // get
-    int offset() const;
-
-  protected: // QWidget API
-    virtual void showEvent( QShowEvent* showEvent );
-
-  protected: // KDialog API
-    virtual void slotButtonClicked( int button );
-
-  private Q_SLOTS:
+  public Q_SLOTS: // gui
     void onSelectorChanged( int index );
     void onOffsetChanged( const QString& text );
-    void onToolIsApplyableChanged( bool isApplyable );
+    void onGotoButtonClicked();
+
+  public Q_SLOTS: // tool
+    void onApplyableChanged( bool isApplyable );
 
   private:
-    KComboBox* mSelector;
+    GotoOffsetTool* mTool;
+
+    KComboBox* mFormatSelector;
     KComboBox* mOffsetEdit;
+    KPushButton* mGotoButton;
     QCheckBox* mAtCursorCheckBox;
     QCheckBox* mExtendSelectionCheckBox;
     QCheckBox* mBackwardsCheckBox;
 
     QString mOffsetString[2];
     KByteArrayValidator* mOffsetValidator;
-
-    GotoOffsetTool* mTool;
 };
+
+
+inline GotoOffsetTool* GotoOffsetView::tool() const { return mTool; }
 
 #endif

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,60 +23,52 @@
 #ifndef SEARCHCONTROLLER_H
 #define SEARCHCONTROLLER_H
 
-
+// controller
+#include "searchuserqueryable.h"
 // libfinddialog
 #include <kfinddirection.h>
 // Kakao gui
 #include <abstractxmlguicontroller.h>
 
 class KSearchDialog;
-class KByteArrayDisplay;
-namespace KHECore {
-class AbstractByteArrayModel;
-}
+class SearchTool;
 class KXmlGuiWindow;
 class KAction;
 
 
-class SearchController : public AbstractXmlGuiController
+class SearchController : public AbstractXmlGuiController, public KDE::If::SearchUserQueryable
 {
   Q_OBJECT
 
   public:
-    SearchController( KXmlGuiWindow *window );
+    SearchController( KXmlGuiWindow* window );
     virtual ~SearchController();
 
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
+  public: // SearchUserQueryable API
+    virtual bool queryContinue( KFindDirection direction ) const;
+
   protected:
     void showDialog( KFindDirection Direction );
-    void searchData( KFindDirection Direction, int StartIndex );
 
   protected Q_SLOTS: // action slots
     void find();
     void findNext();
     void findPrevious();
 
-  private Q_SLOTS:
-    void onOkClicked();
+    void onDataNotFound();
 
   protected:
-    KXmlGuiWindow *MainWindow;
+    KXmlGuiWindow* mWindow;
 
-    KByteArrayDisplay* mByteArrayDisplay;
-    KHECore::AbstractByteArrayModel *ByteArray;
+    KAction* mFindAction;
+    KAction* mFindNextAction;
+    KAction* mFindPrevAction;
 
-    KAction *mFindAction;
-    KAction *mFindNextAction;
-    KAction *mFindPrevAction;
-
-    QByteArray SearchData;
-    bool PreviousFound;
-    bool IgnoreCase;
-    int SearchFirstIndex;
-    int SearchLastIndex;
-    KSearchDialog *SearchDialog;
+    KSearchDialog* mSearchDialog;
+    SearchTool* mTool;
 };
 
 #endif

@@ -1,7 +1,7 @@
 /*
-    This file is part of the Okteta Kakao module, part of the KDE project.
+    This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2006-2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,32 +20,37 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KREPLACEPROMPT_H
-#define KREPLACEPROMPT_H
+#ifndef KDE_IF_REPLACEUSERQUERYABLE_H
+#define KDE_IF_REPLACEUSERQUERYABLE_H
 
-// controller
-#include "replaceuserqueryable.h"
-// KDE
-#include <KDialog>
+// libfinddialog
+#include <kfinddirection.h>
+// Qt
+#include <QtCore/QtPlugin>
 
-class QEventLoop;
+namespace KDE
+{
 
+enum ReplaceBehaviour { ReplaceAll, SkipCurrent, ReplaceCurrent, CancelReplacing };
 
-class KReplacePrompt : public KDialog
+namespace If
+{
+
+class ReplaceUserQueryable
 {
   public:
-    explicit KReplacePrompt( QWidget* parent );
+    virtual ~ReplaceUserQueryable();
 
-  public:
-    KDE::ReplaceBehaviour query();
-
-  public: // KDialog API
-    virtual void slotButtonClicked( int button );
-
-  protected:
-    QEventLoop* mEventLoop;
-
-    KDE::ReplaceBehaviour mResult;
+  public: // API to be implemented
+    virtual bool queryContinue( KFindDirection direction, int noOfReplacements ) const = 0;
+    virtual KDE::ReplaceBehaviour queryReplaceCurrent() const = 0;
 };
+
+inline ReplaceUserQueryable::~ReplaceUserQueryable() {}
+
+}
+}
+
+// Q_DECLARE_INTERFACE( KDE::If::ReplaceUserQueryable, "org.kde.if.userlistable/1.0" )
 
 #endif

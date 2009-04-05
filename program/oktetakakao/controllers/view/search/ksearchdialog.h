@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -27,14 +27,25 @@
 // lib
 #include <kabstractfinddialog.h>
 
+class SearchTool;
+
 
 class KSearchDialog : public KAbstractFindDialog
 {
   Q_OBJECT
 
   public:
-    explicit KSearchDialog( QWidget *parent = 0 );
+    explicit KSearchDialog( SearchTool* tool, QWidget* parent = 0 );
     virtual ~KSearchDialog();
+
+  protected: // KDialog API
+    virtual void slotButtonClicked( int button );
+
+  protected: // QWidget API
+    virtual void showEvent( QShowEvent* showEvent );
+
+  protected:
+    SearchTool* mTool;
 };
 
 #endif

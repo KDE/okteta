@@ -22,6 +22,8 @@
 
 #include "kgotooffsetdialog.h"
 
+// tool
+#include "gotooffsettool.h"
 // lib
 #include <kbytearrayvalidator.h>
 // KDE
@@ -48,9 +50,9 @@ static const QStringList& formatStrings()
     return list;
 }
 
-KGotoOffsetDialog::KGotoOffsetDialog( QWidget* parent )
+KGotoOffsetDialog::KGotoOffsetDialog( GotoOffsetTool* tool, QWidget* parent )
   : KDialog( parent ),
-    mHasView( false )
+    mTool( tool )
 {
     setCaption( i18nc("@title:window","Go to Offset") );
     setButtons( Ok | Cancel );
@@ -111,12 +113,20 @@ KGotoOffsetDialog::KGotoOffsetDialog( QWidget* parent )
     mAtCursorCheckBox = new QCheckBox( i18nc("@option:check","From c&ursor"), optionsBox );
     mAtCursorCheckBox->setWhatsThis(
         i18nc("@info:whatsthis","Go relative from the current cursor location and not absolute.") );
+    connect( mAtCursorCheckBox, SIGNAL(clicked( bool )),
+             mTool, SLOT(setIsRelative( bool )) );
+
     mExtendSelectionCheckBox = new QCheckBox( i18nc("@option:check","&Extend selection"), optionsBox );
     mExtendSelectionCheckBox->setWhatsThis(
         i18nc("@info:whatsthis","Extend the selection by the cursor move.") );
+    connect( mExtendSelectionCheckBox, SIGNAL(clicked( bool )),
+             mTool, SLOT(setIsSelectionToExtent( bool )) );
+
     mBackwardsCheckBox = new QCheckBox( i18nc("@option:check","&Backwards"), optionsBox );
     mBackwardsCheckBox->setWhatsThis(
         i18nc("@info:whatsthis","Go backwards from the end or the current cursor location.") );
+    connect( mBackwardsCheckBox, SIGNAL(clicked( bool )),
+             mTool, SLOT(setIsBackwards( bool )) );
 
     optionsBoxLayout->addWidget( mAtCursorCheckBox, 0, 0 );
     optionsBoxLayout->addWidget( mExtendSelectionCheckBox, 1, 0 );
@@ -126,8 +136,10 @@ KGotoOffsetDialog::KGotoOffsetDialog( QWidget* parent )
     setTabOrder( mOffsetEdit, mAtCursorCheckBox );
     setTabOrder( mAtCursorCheckBox, mBackwardsCheckBox );
 
+    connect( mTool, SIGNAL(isApplyableChanged( bool )), SLOT(onToolIsApplyableChanged( bool )) );
+
     onSelectorChanged( mSelector->currentIndex() );
-    enableButtonOk( false );
+    onToolIsApplyableChanged( mTool->isApplyable() );
 }
 
 void KGotoOffsetDialog::setOffset( int offset )
@@ -145,11 +157,9 @@ Q_UNUSED( lastOffset )
     // TOOO: handle limits
 }
 
-void KGotoOffsetDialog::setHasView( bool hasView )
+void KGotoOffsetDialog::onToolIsApplyableChanged( bool isApplyable )
 {
-    mHasView = hasView;
-
-    enableButtonOk( mHasView && !mOffsetEdit->currentText().isEmpty() );
+    enableButtonOk( isApplyable && !mOffsetEdit->currentText().isEmpty() );
 }
 
 
@@ -161,10 +171,6 @@ int KGotoOffsetDialog::offset() const
     return offset;
 }
 
-bool KGotoOffsetDialog::isSelectionToExtent() const { return mExtendSelectionCheckBox->isChecked(); }
-bool KGotoOffsetDialog::isRelative() const          { return mAtCursorCheckBox->isChecked(); }
-bool KGotoOffsetDialog::isBackwards() const         { return mBackwardsCheckBox->isChecked(); }
-
 void KGotoOffsetDialog::onSelectorChanged( int index )
 {
     mOffsetValidator->setCodec( static_cast<KByteArrayValidator::Coding>(index) );
@@ -174,13 +180,33 @@ void KGotoOffsetDialog::onSelectorChanged( int index )
 void KGotoOffsetDialog::onOffsetChanged( const QString& text )
 {
     mOffsetString[ mSelector->currentIndex() ] = text;
-    enableButtonOk( mHasView && !text.isEmpty() );
+    mTool->setTargetOffset( offset() );
+    enableButtonOk( mTool->isApplyable() && !text.isEmpty() );
+}
+
+
+void KGotoOffsetDialog::slotButtonClicked( int button )
+{
+    if( button != KDialog::Ok )
+        KDialog::slotButtonClicked( button );
+    else
+    {
+        hide();
+
+        mTool->gotoOffset();
+    }
 }
 
 
 void KGotoOffsetDialog::showEvent( QShowEvent* showEvent )
 {
     KDialog::showEvent( showEvent );
+
+//     const int startOffset = mByteArrayDisplay->startOffset();
+//         mGotoOffsetDialog->setRange( startOffset, startOffset+mByteArray->size()-1 );
+//         mGotoOffsetDialog->setHasView( true );
+
+    setOffset( mTool->currentOffset() );
     mOffsetEdit->setFocus();
 }
 

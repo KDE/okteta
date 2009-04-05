@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -28,10 +28,7 @@
 #include <abstractxmlguicontroller.h>
 
 class KGotoOffsetDialog;
-class KByteArrayDisplay;
-namespace KHECore {
-class AbstractByteArrayModel;
-}
+class GotoOffsetTool;
 class KAction;
 class KXMLGUIClient;
 
@@ -50,16 +47,11 @@ class GotoOffsetController : public AbstractXmlGuiController
   protected Q_SLOTS: // action slots
     void gotoOffset();
 
-  private Q_SLOTS:
-    void onOkClicked();
-
   protected:
-    KByteArrayDisplay* mByteArrayDisplay;
-    KHECore::AbstractByteArrayModel* mByteArray;
-
     KAction* mGotoOffsetAction;
 
     KGotoOffsetDialog* mGotoOffsetDialog;
+    GotoOffsetTool* mTool;
 };
 
 #endif

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -24,6 +24,8 @@
 
 // KDE
 #include <KLocale>
+// Qt
+#include <QtCore/QEventLoop>
 
 
 KReplacePrompt::KReplacePrompt( QWidget *parent )
@@ -32,7 +34,7 @@ KReplacePrompt::KReplacePrompt( QWidget *parent )
     setModal( true );
     setCaption( i18nc("@title:window prompt for iterative replacement","Replace") );
 
-    setButtons( User3 | User2 | User1 | Close );
+    setButtons( User1 | User2 | User3 | Close );
 
     setButtonGuiItem( User1, KGuiItem(i18nc("@action:button","Replace &All")) );
     setButtonGuiItem( User2, KGuiItem(i18nc("@action:button","&Skip")) );
@@ -42,4 +44,33 @@ KReplacePrompt::KReplacePrompt( QWidget *parent )
     showButtonSeparator( false );
 
     resize(minimumSize());
+}
+
+KDE::ReplaceBehaviour KReplacePrompt::query()
+{
+    QEventLoop eventLoop;
+    mEventLoop = &eventLoop;
+    eventLoop.exec();
+
+    return mResult;
+}
+
+void KReplacePrompt::slotButtonClicked( int buttonCode )
+{
+    const struct { int mButtonCode; KDE::ReplaceBehaviour mBehaviour; } table[] =
+    {
+        {User1, KDE::ReplaceAll},
+        {User2, KDE::SkipCurrent},
+        {User3,KDE::ReplaceCurrent},
+        {Close,KDE::CancelReplacing}
+    };
+    const int tableSize = sizeof(table) / sizeof(table[0]);
+
+    for( int i=0; i<tableSize; ++i )
+        if( table[i].mButtonCode == buttonCode )
+        {
+            mResult = table[i].mBehaviour;
+            mEventLoop->quit();
+            break;
+        }
 }

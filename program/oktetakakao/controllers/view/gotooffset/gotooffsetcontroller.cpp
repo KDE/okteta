@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -24,23 +24,17 @@
 
 // controller
 #include "kgotooffsetdialog.h"
-// lib
-#include <kbytearraydisplay.h>
-#include <kbytearraydocument.h>
-// Okteta core
-#include <charcodec.h>
-#include <kbytearraymodel.h>
+#include "gotooffsettool.h"
 // KDE
 #include <KXMLGUIClient>
 #include <KLocale>
 #include <KAction>
 #include <KActionCollection>
-#include <KMessageBox>
 
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
 GotoOffsetController::GotoOffsetController( KXMLGUIClient* guiClient )
- : mByteArrayDisplay( 0 ), mByteArray( 0 ), mGotoOffsetDialog( 0 )
+ : mGotoOffsetDialog( 0 )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -48,75 +42,33 @@ GotoOffsetController::GotoOffsetController( KXMLGUIClient* guiClient )
     mGotoOffsetAction->setText( i18nc("@action:inmenu","&Go to Offset...") );
     mGotoOffsetAction->setIcon( KIcon("go-jump") );
     mGotoOffsetAction->setShortcut( Qt::CTRL + Qt::Key_G );
+    mGotoOffsetAction->setEnabled( false );
     connect( mGotoOffsetAction, SIGNAL(triggered(bool) ), SLOT(gotoOffset()) );
 
-    setTargetModel( 0 );
+    mTool = new GotoOffsetTool();
+    connect( mTool, SIGNAL(isApplyableChanged( bool )),
+             mGotoOffsetAction, SLOT(setEnabled( bool )) );
 }
 
 void GotoOffsetController::setTargetModel( AbstractModel* model )
 {
-//     if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
-
-    mByteArrayDisplay = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
-    KByteArrayDocument* document =
-        mByteArrayDisplay ? qobject_cast<KByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
-    mByteArray = document ? document->content() : 0;
-
-    const bool hasView = ( mByteArray && mByteArrayDisplay );
-    if( hasView )
-    {
-//         connect( mByteArrayDisplay, SIGNAL( selectionChanged( bool )), SLOT( onSelectionChanged( bool )) );
-    }
-
-    if( mGotoOffsetDialog )
-        mGotoOffsetDialog->setHasView( hasView );
-    mGotoOffsetAction->setEnabled( hasView );
+    mTool->setTargetModel( model );
 }
 
 
 void GotoOffsetController::gotoOffset()
 {
-    const int startOffset = mByteArrayDisplay->startOffset();
-
     // ensure dialog
     if( !mGotoOffsetDialog )
-    {
-        mGotoOffsetDialog = new KGotoOffsetDialog( 0 );
-        mGotoOffsetDialog->setRange( startOffset, startOffset+mByteArray->size()-1 );
-        mGotoOffsetDialog->setHasView( true );
-        connect( mGotoOffsetDialog, SIGNAL(okClicked()), SLOT(onOkClicked()) );
-    }
-
-    const int currentOffset = mByteArrayDisplay->cursorPosition();
-    mGotoOffsetDialog->setOffset( startOffset + currentOffset );
+        mGotoOffsetDialog = new KGotoOffsetDialog( mTool, 0 );
 
     mGotoOffsetDialog->show();
+    mGotoOffsetDialog->setFocus();
 }
 
-
-void GotoOffsetController::onOkClicked()
-{
-    mGotoOffsetDialog->hide();
-
-    const bool IsRelative = mGotoOffsetDialog->isRelative();
-    const int Offset = mGotoOffsetDialog->offset();
-    const bool isSelectionToExtent = mGotoOffsetDialog->isSelectionToExtent();
-    const bool isBackwards = mGotoOffsetDialog->isBackwards();
-
-    const int newPosition =
-        IsRelative ?
-            ( isBackwards ? mByteArrayDisplay->cursorPosition() - Offset :
-                            mByteArrayDisplay->cursorPosition() + Offset ) :
-            ( isBackwards ? mByteArray->size() - Offset :
-                            Offset );
-
-    if( isSelectionToExtent )
-        mByteArrayDisplay->setSelectionCursorPosition( newPosition );
-    else
-        mByteArrayDisplay->setCursorPosition( newPosition );
-}
 
 GotoOffsetController::~GotoOffsetController()
 {
     delete mGotoOffsetDialog;
+    delete mTool;
 }

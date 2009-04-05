@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -24,13 +24,7 @@
 
 // controller
 #include "ksearchdialog.h"
-#include "searchjob.h"
-// lib
-#include <kbytearraydisplay.h>
-#include <kbytearraydocument.h>
-// Okteta core
-#include <charcodec.h>
-#include <kbytearraymodel.h>
+#include "searchtool.h"
 // KDE
 #include <KXmlGuiWindow>
 #include <KLocale>
@@ -38,41 +32,36 @@
 #include <KActionCollection>
 #include <KStandardAction>
 #include <KMessageBox>
-// Qt
-#include <QtGui/QApplication>
 
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
-SearchController::SearchController( KXmlGuiWindow *MW )
- : MainWindow( MW ), mByteArrayDisplay( 0 ), ByteArray( 0 ), SearchDialog( 0 )
+SearchController::SearchController( KXmlGuiWindow* window )
+  : mWindow( window ),
+    mSearchDialog( 0 )
 {
-    KActionCollection *actionCollection = MainWindow->actionCollection();
+    KActionCollection* actionCollection = mWindow->actionCollection();
 
     mFindAction     = KStandardAction::find(     this, SLOT(find()),         actionCollection );
     mFindNextAction = KStandardAction::findNext( this, SLOT(findNext()),     actionCollection );
     mFindPrevAction = KStandardAction::findPrev( this, SLOT(findPrevious()), actionCollection );
 
-    setTargetModel( 0 );
+    mTool = new SearchTool();
+    mTool->setUserQueryAgent( this );
+
+    connect( mTool, SIGNAL(isApplyableChanged( bool )),
+             mFindAction, SLOT(setEnabled( bool )) );
+    connect( mTool, SIGNAL(isApplyableChanged( bool )),
+             mFindNextAction, SLOT(setEnabled( bool )) );
+    connect( mTool, SIGNAL(isApplyableChanged( bool )),
+             mFindPrevAction, SLOT(setEnabled( bool )) );
+
+    connect( mTool, SIGNAL(dataNotFound()), SLOT(onDataNotFound()) );
 }
 
 void SearchController::setTargetModel( AbstractModel* model )
 {
-    if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
-
-    mByteArrayDisplay = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
-    KByteArrayDocument* document =
-        mByteArrayDisplay ? qobject_cast<KByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
-    ByteArray = document ? document->content() : 0;
-
-    const bool hasView = ( mByteArrayDisplay && ByteArray );
-    if( hasView )
-    {
-    }
-    mFindAction->setEnabled( hasView );
-    mFindNextAction->setEnabled( hasView );
-    mFindPrevAction->setEnabled( hasView );
+    mTool->setTargetModel( model );
 }
-
 
 void SearchController::find()
 {
@@ -81,121 +70,56 @@ void SearchController::find()
 
 void SearchController::findNext()
 {
-    if( SearchData.isEmpty() )
+    if( mTool->searchData().isEmpty() )
         showDialog( FindForward );
     else
-        searchData( FindForward, mByteArrayDisplay->cursorPosition() );
+        mTool->search( FindForward, true, false );
+;
 }
 
 void SearchController::findPrevious()
 {
-    if( SearchData.isEmpty() )
+    if( mTool->searchData().isEmpty() )
         showDialog( FindBackward );
     else
-    {
-        int StartIndex = mByteArrayDisplay->cursorPosition()-SearchData.size()-1;
-        searchData( FindBackward, StartIndex<0?0:StartIndex );
-    }
+        mTool->search( FindBackward, true, false );
 }
 
-void SearchController::showDialog( KFindDirection Direction )
+void SearchController::showDialog( KFindDirection direction )
 {
     // ensure dialog
-    if( !SearchDialog )
-    {
-        SearchDialog = new KSearchDialog( MainWindow );
-        connect( SearchDialog, SIGNAL(okClicked()), SLOT(onOkClicked()) );
-    }
+    if( !mSearchDialog )
+        mSearchDialog = new KSearchDialog( mTool, mWindow );
 
-    SearchDialog->setDirection( Direction );
-    SearchDialog->setInSelection( mByteArrayDisplay->hasSelectedData() );
-    SearchDialog->setCharCodec( mByteArrayDisplay->charCodingName() );
+    mSearchDialog->setDirection( direction );
 
-    SearchDialog->show();
+    mSearchDialog->show();
+    mSearchDialog->setFocus();
 }
 
-
-void SearchController::onOkClicked()
+void SearchController::onDataNotFound()
 {
-    PreviousFound = false;
-
-    SearchDialog->hide();
-
-    SearchData = SearchDialog->data();
-    IgnoreCase = SearchDialog->ignoreCase();
-    KFindDirection Direction;
-    int StartIndex;
-    if( SearchDialog->inSelection() )
-    {
-        const KHE::Section Selection = mByteArrayDisplay->selection();
-        SearchFirstIndex = Selection.start();
-        SearchLastIndex =  Selection.end();
-        StartIndex = Selection.start();
-        Direction = FindForward;
-    }
-    else
-    {
-        Direction = SearchDialog->direction();
-        const int CursorPosition = mByteArrayDisplay->cursorPosition();
-        if( SearchDialog->fromCursor() && (CursorPosition!=0) )
-        {
-            SearchFirstIndex = CursorPosition;
-            SearchLastIndex =   CursorPosition-1;
-        }
-        else
-        {
-            SearchFirstIndex = 0;
-            SearchLastIndex =  ByteArray->size()-1;
-        }
-        StartIndex = (Direction==FindForward) ? SearchFirstIndex : SearchLastIndex;
-    }
-    searchData( Direction, StartIndex );
+    const QString messageBoxTitle = i18nc( "@title:window", "Find" );
+    KMessageBox::sorry( mWindow, i18nc("@info","Search key not found in byte array."), messageBoxTitle );
 }
 
-void SearchController::searchData( KFindDirection Direction, int StartIndex )
+bool SearchController::queryContinue( KFindDirection direction ) const
 {
-    bool DoWrap = (Direction==FindForward) ? (SearchLastIndex<StartIndex) : (StartIndex<SearchFirstIndex);
+    const QString messageBoxTitle = i18nc( "@title:window", "Find" );
+    const QString question = ( direction == FindForward ) ?
+        i18nc( "@info", "End of byte array reached.<nl/>Continue from the beginning?" ) :
+        i18nc( "@info", "Beginning of byte array reached.<nl/>Continue from the end?" );
 
-    while( true )
-    {
+    const int answer = KMessageBox::questionYesNo( mWindow, question, messageBoxTitle,
+                                                   KStandardGuiItem::cont(), KStandardGuiItem::cancel() );
 
-        QApplication::setOverrideCursor( Qt::WaitCursor );
+    const bool result = ( answer != KMessageBox::No );
 
-        SearchJob *searchJob = new SearchJob( ByteArray, SearchData, StartIndex, (Direction==FindForward) );
-        const int Pos = searchJob->exec();
-
-        QApplication::restoreOverrideCursor();
-
-        if( Pos != -1 )
-        {
-            PreviousFound = true;
-            mByteArrayDisplay->setSelection( Pos, Pos+SearchData.size()-1 );
-            break;
-        }
-
-        const QString messageBoxTitle = i18nc( "@title:window", "Find" );
-        if( DoWrap )
-        {
-            const QString Question = ( Direction == FindForward ) ?
-                i18nc( "@info", "End of byte array reached.<nl/>Continue from the beginning?" ) :
-                i18nc( "@info", "Beginning of byte array reached.<nl/>Continue from the end?" );
-
-            int Result = KMessageBox::questionYesNo( MainWindow, Question, messageBoxTitle,
-                                                     KStandardGuiItem::cont(), KStandardGuiItem::cancel() );
-            if( Result == KMessageBox::No )
-                break;
-            StartIndex = ( Direction == FindForward ) ? 0 : ByteArray->size()-1;
-            DoWrap = false;
-        }
-        else
-        {
-            if( !PreviousFound )
-                KMessageBox::sorry( MainWindow, i18nc("@info","Search key not found in byte array."), messageBoxTitle );
-            break;
-        }
-    }
+    return result;
 }
 
-SearchController::~SearchController() {}
-
-#include "searchcontroller.moc"
+SearchController::~SearchController()
+{
+    delete mSearchDialog;
+    delete mTool;
+}
