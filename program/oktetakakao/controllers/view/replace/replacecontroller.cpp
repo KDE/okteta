@@ -95,10 +95,10 @@ bool ReplaceController::queryContinue( KFindDirection direction, int noOfReplace
             i18nc( "@info", "No replacements made.") :
             i18ncp( "@info", "1 replacement made.", "%1 replacements made.", noOfReplacements );
     const QString question = ( direction == FindForward ) ?
-        i18nc( "@info", "<nl/>End of byte array reached.<nl/>Continue from the beginning?" ) :
-        i18nc( "@info", "<nl/>Beginning of byte array reached.<nl/>Continue from the end?" );
+        i18nc( "@info", "End of byte array reached.<nl/>Continue from the beginning?" ) :
+        i18nc( "@info", "Beginning of byte array reached.<nl/>Continue from the end?" );
 
-    const int answer = KMessageBox::questionYesNo( mWindow, replacementReport+question, messageBoxTitle,
+    const int answer = KMessageBox::questionYesNo( mWindow, replacementReport+"<nl/>"+question, messageBoxTitle,
                                                    KStandardGuiItem::cont(), KStandardGuiItem::cancel() );
 
     const bool result = ( answer != KMessageBox::No );
