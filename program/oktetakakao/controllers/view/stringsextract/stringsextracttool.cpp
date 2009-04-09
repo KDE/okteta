@@ -28,7 +28,7 @@
 #include <kbytearraydocument.h>
 // Okteta core
 #include <charcodec.h>
-#include <kbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 // KDE
 #include <KLocale>
 // Qt
@@ -176,5 +176,3 @@ StringsExtractTool::~StringsExtractTool()
 {
     delete mCharCodec;
 }
-
-#include "stringsextracttool.moc"
