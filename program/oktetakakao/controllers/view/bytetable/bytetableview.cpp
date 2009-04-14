@@ -27,7 +27,6 @@
 #include "bytetablemodel.h"
 // KDE
 #include <KPushButton>
-#include <KDialog>
 #include <KLocale>
 #include <KStandardGuiItem>
 #include <KGlobalSettings>
@@ -44,7 +43,6 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget *parent )
 {
     QVBoxLayout *baseLayout = new QVBoxLayout( this );
     baseLayout->setMargin( 0 );
-    baseLayout->setSpacing( KDialog::spacingHint() );
 
     mByteTableView = new QTreeView( this );
     mByteTableView->setObjectName( "ByteTable" );

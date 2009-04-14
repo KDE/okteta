@@ -28,7 +28,6 @@
 // KDE
 #include <KPushButton>
 #include <KLineEdit>
-#include <KDialog>
 #include <KGuiItem>
 #include <KLocale>
 #include <KGlobalSettings>
@@ -50,7 +49,6 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget *paren
 {
     QVBoxLayout *baseLayout = new QVBoxLayout( this );
     baseLayout->setMargin( 0 );
-    baseLayout->setSpacing( KDialog::spacingHint() );
 
     // update
     QHBoxLayout *updateLayout = new QHBoxLayout();

@@ -27,7 +27,6 @@
 #include "statistictablemodel.h"
 // KDE
 #include <KPushButton>
-#include <KDialog>
 #include <KGuiItem>
 #include <KLocale>
 #include <KGlobal>
@@ -45,7 +44,6 @@ InfoView::InfoView( InfoTool *tool, QWidget *parent )
 {
     QVBoxLayout *baseLayout = new QVBoxLayout( this );
     baseLayout->setMargin( 0 );
-    baseLayout->setSpacing( KDialog::spacingHint() );
 
     QHBoxLayout *updateLayout = new QHBoxLayout();
 

@@ -33,7 +33,6 @@
 #include <abstractbytearrayfilter.h>
 // KDE
 #include <KPushButton>
-#include <KDialog>
 #include <KLocale>
 #include <KComboBox>
 #include <KGuiItem>
@@ -49,7 +48,6 @@ FilterView::FilterView( FilterTool *tool, QWidget *parent )
   : QWidget( parent ), mTool( tool )
 {
     QVBoxLayout *baseLayout = new QVBoxLayout( this );
-    baseLayout->setSpacing( KDialog::spacingHint() );
     baseLayout->setMargin( 0 );
 
     // filter
@@ -73,7 +71,6 @@ FilterView::FilterView( FilterTool *tool, QWidget *parent )
     baseLayout->addWidget( parameterSetBox );
 
     QVBoxLayout *parameterSetLayout = new QVBoxLayout;
-    parameterSetLayout->setSpacing( KDialog::spacingHint() );
 
     parameterSetBox->setLayout( parameterSetLayout );
 

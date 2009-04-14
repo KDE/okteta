@@ -26,7 +26,6 @@
 #include "rotatebytearrayfilterparameterset.h"
 // KDE
 #include <KLocale>
-#include <KDialog>
 // Qt
 #include <QtGui/QLayout>
 #include <QtGui/QLabel>
@@ -37,7 +36,6 @@ RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit( QW
  : AbstractByteArrayFilterParameterSetEdit( parent )
 {
     QVBoxLayout *baseLayout = new QVBoxLayout( this );
-    baseLayout->setSpacing( KDialog::spacingHint() );
     baseLayout->setMargin( 0 );
 
     mGroupSizeSpinBox = new QSpinBox( this );
@@ -101,5 +99,3 @@ void RotateByteArrayFilterParameterSetEdit::onValueChanged( int value )
 
 RotateByteArrayFilterParameterSetEdit::~RotateByteArrayFilterParameterSetEdit()
 {}
-
-#include "rotatebytearrayfilterparametersetedit.moc"

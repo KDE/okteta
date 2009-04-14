@@ -27,7 +27,6 @@
 // KDE
 #include <KComboBox>
 #include <KLineEdit>
-#include <KDialog>
 // Qt
 #include <QtGui/QLayout>
 
@@ -51,7 +50,6 @@ class KByteArrayLineEditPrivate
 void KByteArrayLineEditPrivate::setup( KByteArrayLineEdit *widget )
 {
     QVBoxLayout *baseLayout = new QVBoxLayout( widget );
-    baseLayout->setSpacing( KDialog::spacingHint() );
     baseLayout->setMargin( 0 );
 
     mFormatComboBox = new KComboBox( widget );
@@ -137,5 +135,3 @@ void KByteArrayLineEdit::onDataChanged( const QString &data )
 }
 
 KByteArrayLineEdit::~KByteArrayLineEdit() { delete d; }
-
-#include "kbytearraylineedit.moc"

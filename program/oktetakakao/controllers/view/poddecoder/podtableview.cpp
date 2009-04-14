@@ -27,7 +27,6 @@
 #include "poddecodertool.h"
 // KDE
 #include <KComboBox>
-#include <KDialog>
 #include <KLocale>
 // Qt
 #include <QtGui/QLabel>
@@ -41,8 +40,7 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
  : QWidget( parent ), mTool( tool )
 {
     QBoxLayout* baseLayout = new QVBoxLayout( this );
-    baseLayout->setMargin( 0 );//KDialog::marginHint() );
-    baseLayout->setSpacing( KDialog::spacingHint() );
+    baseLayout->setMargin( 0 );
 
     // table
     mPODTableModel = new PODTableModel( mTool, this );
@@ -67,7 +65,6 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
 
     // settings
     QBoxLayout *settingsLayout = new QHBoxLayout();
-    settingsLayout->setSpacing( KDialog::spacingHint() );
     settingsLayout->setMargin( 0 );
 
     mEndianSelection = new KComboBox( this );

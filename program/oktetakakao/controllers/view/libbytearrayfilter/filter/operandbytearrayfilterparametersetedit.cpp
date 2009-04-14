@@ -28,7 +28,6 @@
 #include <kbytearraylineedit.h>
 // KDE
 #include <KLocale>
-#include <KDialog>
 // Qt
 #include <QtGui/QLabel>
 #include <QtGui/QCheckBox>
@@ -39,7 +38,6 @@ OperandByteArrayFilterParameterSetEdit::OperandByteArrayFilterParameterSetEdit( 
  : AbstractByteArrayFilterParameterSetEdit( parent )
 {
     QVBoxLayout *baseLayout = new QVBoxLayout( this );
-    baseLayout->setSpacing( KDialog::spacingHint() );
     baseLayout->setMargin( 0 );
 
     QLabel *label = new QLabel( i18nc("@label:textbox operand to the arithmetic filter function","Operand:"), this );
@@ -99,5 +97,3 @@ void OperandByteArrayFilterParameterSetEdit::onInputChanged( const QByteArray &d
 
 OperandByteArrayFilterParameterSetEdit::~OperandByteArrayFilterParameterSetEdit()
 {}
-
-#include "operandbytearrayfilterparametersetedit.moc"

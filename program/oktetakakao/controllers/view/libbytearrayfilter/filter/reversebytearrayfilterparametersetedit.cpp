@@ -26,7 +26,6 @@
 #include "reversebytearrayfilterparameterset.h"
 // KDE
 #include <KLocale>
-#include <KDialog>
 // Qt
 #include <QtGui/QCheckBox>
 #include <QtGui/QLayout>
@@ -36,7 +35,6 @@ ReverseByteArrayFilterParameterSetEdit::ReverseByteArrayFilterParameterSetEdit( 
  : AbstractByteArrayFilterParameterSetEdit( parent )
 {
     QVBoxLayout *baseLayout = new QVBoxLayout( this );
-    baseLayout->setSpacing( KDialog::spacingHint() );
     baseLayout->setMargin( 0 );
 
     mInvertsBitsCheckBox = new QCheckBox( i18nc("@option:check","Also reverse bits"), this );
@@ -66,5 +64,3 @@ void ReverseByteArrayFilterParameterSetEdit::getParameterSet( AbstractByteArrayF
 }
 
 ReverseByteArrayFilterParameterSetEdit::~ReverseByteArrayFilterParameterSetEdit() {}
-
-#include "reversebytearrayfilterparametersetedit.moc"

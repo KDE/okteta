@@ -25,7 +25,6 @@
 // 
 #include "documentinfotool.h"
 // KDE
-#include <KDialog>
 #include <KLocale>
 #include <KIconLoader>
 #include <KSeparator>
@@ -45,7 +44,6 @@ DocumentInfoView::DocumentInfoView( DocumentInfoTool* tool, QWidget* parent )
   : QWidget( parent ), mTool( tool )
 {
     QVBoxLayout* baseLayout = new QVBoxLayout( this );
-    baseLayout->setSpacing( KDialog::spacingHint() );
     baseLayout->setMargin( 0 );
 
     // icon
@@ -73,7 +71,6 @@ DocumentInfoView::DocumentInfoView( DocumentInfoTool* tool, QWidget* parent )
 
     // property grid
     QGridLayout *propertyGrid = new QGridLayout(); // unknown rows
-    propertyGrid->setHorizontalSpacing( KDialog::spacingHint() );
     propertyGrid->setColumnStretch( 0, 0 );
     propertyGrid->setColumnStretch( 1, 1 );
 

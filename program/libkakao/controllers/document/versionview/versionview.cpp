@@ -28,8 +28,6 @@
 // Kakao core
 #include <kiversionable.h>
 #include <abstractmodel.h>
-// KDE
-#include <KDialog>
 // Qt
 #include <QtGui/QLayout>
 #include <QtGui/QTreeView>
@@ -42,7 +40,6 @@ VersionView::VersionView( VersionViewTool* tool, QWidget* parent )
 
     QVBoxLayout *baseLayout = new QVBoxLayout( this );
     baseLayout->setMargin( 0 );
-    baseLayout->setSpacing( KDialog::spacingHint() );
 
     mVersionTableView = new QTreeView( this );
     mVersionTableView->setObjectName( "VersionsTable" );

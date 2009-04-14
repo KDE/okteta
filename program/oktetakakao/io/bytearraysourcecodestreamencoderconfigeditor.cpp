@@ -26,7 +26,6 @@
 #include "bytearraytextstreamencoderpreview.h"
 // KDE
 #include <KLocale>
-#include <KDialog>
 #include <KLineEdit>
 #include <KIntNumInput>
 #include <KComboBox>
@@ -43,7 +42,6 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
     mSettings = mEncoder->settings();
 
     QGridLayout* pageLayout = new QGridLayout( this ); // unknown rows
-    pageLayout->setSpacing( KDialog::spacingHint() );
     pageLayout->setMargin( 0 );
     pageLayout->setColumnStretch( 0, 0 );
     pageLayout->setColumnStretch( 1, 0 );
