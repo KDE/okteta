@@ -18,6 +18,7 @@ include_directories(
   oktetakakao/document
   oktetakakao/io
   oktetakakao/view
+  ${CMAKE_CURRENT_BINARY_DIR}/oktetakakao/controllers
   oktetakakao/controllers/document
   oktetakakao/controllers/view
   oktetakakao/controllers/view/libfinddialog
@@ -47,6 +48,7 @@ target_link_libraries( okteta
   ${KDE4_KIO_LIBS}
   ${KDE4_KFILE_LIBS}
   ${KDE4_KDNSSD_LIBS}
+  ${QCA2_LIBRARIES}
 )
 
 install( TARGETS okteta  ${INSTALL_TARGETS_DEFAULT_ARGS} )

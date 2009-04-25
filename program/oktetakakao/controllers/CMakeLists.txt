@@ -13,10 +13,15 @@ include_directories(
   ../io
   ../view
   view/libbytearraylineedit
+  view/libbytearraychecksum
   view/libbytearrayfilter
   view/libfinddialog
   view/libframesprint
+  ${QCA2_INCLUDE_DIR}
 )
+
+macro_bool_to_01( QCA2_FOUND  HAVE_QCA2 )
+configure_file( config-qca2.h.cmake  ${CMAKE_CURRENT_BINARY_DIR}/config-qca2.h )
 
 set( DOCUMENTINFOCONTROLLER_SRCS
   document/info/documentinfotool.cpp
@@ -42,6 +47,35 @@ set( STRINGSEXTRACTCONTROLLER_SRCS
   view/stringsextract/containedstringtablemodel.cpp
   view/stringsextract/stringsextractview.cpp
   view/stringsextract/stringsextracttoolview.cpp
+)
+
+if( QCA2_FOUND )
+    set( QCA2CHECKSUM_SRCS
+      view/libbytearraychecksum/algorithm/qca2bytearraychecksumalgorithm.cpp
+    )
+endif( QCA2_FOUND )
+
+set( LIBCHECKSUM_SRCS
+  view/libbytearraychecksum/abstractbytearraychecksumalgorithm.cpp
+  view/libbytearraychecksum/abstractbytearraychecksumparameterset.cpp
+  view/libbytearraychecksum/abstractbytearraychecksumparametersetedit.cpp
+  view/libbytearraychecksum/algorithm/nobytearraychecksumparameterset.cpp
+  view/libbytearraychecksum/algorithm/nobytearraychecksumparametersetedit.cpp
+  view/libbytearraychecksum/algorithm/crc32bytearraychecksumalgorithm.cpp
+  view/libbytearraychecksum/algorithm/adler32bytearraychecksumalgorithm.cpp
+  view/libbytearraychecksum/algorithm/modsum8bytearraychecksumalgorithm.cpp
+  view/libbytearraychecksum/algorithm/modsum16bytearraychecksumalgorithm.cpp
+  view/libbytearraychecksum/algorithm/modsum32bytearraychecksumalgorithm.cpp
+  view/libbytearraychecksum/algorithm/modsum64bytearraychecksumalgorithm.cpp
+  view/libbytearraychecksum/algorithm/modsumbytearraychecksumparameterset.cpp
+  view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp
+  ${QCA2CHECKSUM_SRCS}
+)
+set( CHECKSUMCONTROLLER_SRCS
+  view/checksum/checksumcalculatejob.cpp
+  view/checksum/checksumtool.cpp
+  view/checksum/checksumview.cpp
+  view/checksum/checksumtoolview.cpp
 )
 set( BYTEARRAYLINEEDIT_LIB_SRCS
   view/libbytearraylineedit/kbytearrayvalidator.cpp
@@ -155,6 +189,8 @@ set( OKTETA_KAKAO_CONTROLLERS_SRCS
   ${DOCUMENTINFOCONTROLLER_SRCS}
   ${BYTEARRAYLINEEDIT_LIB_SRCS}
   ${PODDECODERCONTROLLER_SRCS}
+  ${LIBCHECKSUM_SRCS}
+  ${CHECKSUMCONTROLLER_SRCS}
   ${STRINGSEXTRACTCONTROLLER_SRCS}
   ${BYTETABLECONTROLLER_SRCS}
   ${INFOCONTROLLER_SRCS}

@@ -31,6 +31,8 @@
 #include <info/infotool.h>
 #include <filter/filtertoolview.h>
 #include <filter/filtertool.h>
+#include <checksum/checksumtoolview.h>
+#include <checksum/checksumtool.h>
 #include <info/documentinfotoolview.h>
 #include <info/documentinfotool.h>
 #include <poddecoder/poddecodertoolview.h>
@@ -163,6 +165,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new ZoomBarController(statusBar()) );
 
     addTool( new DocumentInfoToolView(new DocumentInfoTool(mProgram->documentManager()->syncManager())) );
+    addTool( new ChecksumToolView(new ChecksumTool()) );
     addTool( new FilterToolView(new FilterTool()) );
     addTool( new StringsExtractToolView(new StringsExtractTool()) );
     addTool( new ByteTableToolView(new ByteTableTool()) );
