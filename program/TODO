@@ -150,14 +150,15 @@ Fixed after 0.2.0:
 * removed Print from toolbar, added Save As instead
 * fixed: enable filtering only if view is not readonly
 * fixed: disable copy for strings if all are deselected (workaround Qt bug)
+* fixed: set all listviews in tools to autoresize to content
 
 Done for 0.3:
 -------------
 * added a ToggleButton, to be used for the statusbar
 * standalone readonly statusbar controller
 * ZoomSlider, working directly on a model
-* zoom statusbar controller, using the ZoomSlider
-* turned value and char coding displays in the statusbar into active selections
+* zoom statusbar controller, using the ZoomSlider (unused due to space problems in the status bar)
+* turned value and char coding displays in the statusbar into active selections  (hidden due to space problems in the status bar)
 * added a filesystem browser tool
 * added a documents management tool
 * added a controller to switch between view by Alt + ->/<-
@@ -167,6 +168,8 @@ Done for 0.3:
 * added popup editor for the name of bookmarks on creation
 * added option to edit the name of a bookmark to the bookmark tool
 * reworked Bookmarkable to simulate a list interface, including a wrapping iterator with an abstract adapter
+* turned Goto, Search and Replace utils into kind of tools/controllers (first step, needs more refinement)
+* added a checksum calculator tool (using also QCA2, but got just MD5 and SHA-1 from it for now, hm)
 
 Next to work on:
 ----------------------------------
@@ -174,8 +177,10 @@ Important:
 * width calculation for resize seems to need to include some margins
 * old wrong sized cursor picture gets painted on zoom change
 * QActionGroups are cleared on setupGui, e.g. if toolbar gets edited
+* selecting by mouse should send updates during movements
 Less important:
 * some more unit tests
+* fix wrong font width calculation for offset and selection in statusbar
 * do not show Paste from clipboard if not possible (at end or overwrite at line end), also for other tools
 * cursor does not get redone on color change
 * on tripple click turn into selecting just whole lines if button kept pressed
@@ -239,6 +244,11 @@ Later on:
 * bookmarks to load vs. bookmarks/marked regions in loaded documents? lokal vs. global perhaps? search inside.
 * in-place saving instead of new-and-delete-old (ZFS Snpashots work blockbased, so only changed blocks get snapshotted)
 * for processes show estimated rest time
+* goto tool shows shadow cursor to see where current would go
+* goto, search, replace and similar tools could be triggered by calls for handlers,
+  so a click on the offset status would trigger the goto tool
+  (or better do in-place/by-model editing, e.g. offset status would mean editing number?)
+* all KDE inputs should show state with colors (invalid, okay)
 
 Future plans:
 -------------
