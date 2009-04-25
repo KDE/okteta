@@ -80,7 +80,7 @@ ChecksumTool::ChecksumTool()
 
 #ifdef HAVE_QCA2
     mQcaInitializer = new QCA::Initializer( QCA::Practical, 64 );
-kDebug()<< QCA::Hash::supportedTypes();
+kDebug()<< QCA::supportedFeatures();//Hash::supportedTypes();
 
     addQca2Algorithm( mAlgorithmList, i18nc( "name of the hash algorithm", "SHA-0"),     "sha0" );
     addQca2Algorithm( mAlgorithmList, i18nc( "name of the hash algorithm", "SHA-1"),     "sha1" );
