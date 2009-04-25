@@ -27,7 +27,7 @@
 // Kakao ui
 #include <togglebutton.h>
 // Okteta core
-#include <charcodec.h>
+// #include <charcodec.h>
 #include <khe.h>
 // KDE
 #include <KComboBox>
@@ -36,6 +36,8 @@
 // Qt
 #include <QtGui/QLabel>
 #include <QtGui/QFontMetrics>
+
+#include <KDebug>
 
 // TODO: make status bar capable to hide entries if size is too small, use priorisation
 
@@ -47,6 +49,9 @@ ViewStatusController::ViewStatusController( KStatusBar* statusBar )
     mOffsetLabel = new QLabel( statusBar );
     statusBar->addWidget( mOffsetLabel, 0 );
 
+    mSelectionLabel = new QLabel( statusBar );
+    statusBar->addWidget( mSelectionLabel, 0 );
+
     const QString insertModeText = i18nc( "@info:status short for: Insert mode",    "INS" );
     const QString overwriteModeText = i18nc( "@info:status short for: Overwrite mode", "OVR" );
     const QString insertModeTooltip = i18nc( "@info:tooltip", "Insert mode" );
@@ -56,6 +61,7 @@ ViewStatusController::ViewStatusController( KStatusBar* statusBar )
     statusBar->addWidget( mOverwriteModeToggleButton, 0 );
     connect( mOverwriteModeToggleButton, SIGNAL(clicked(bool)), SLOT(setOverwriteMode(bool)) );
 
+#if 0
     mValueCodingComboBox = new KComboBox( statusBar );
     QStringList list;
     list.append( i18nc("@item:inmenu encoding of the bytes as values in the hexadecimal format","Hexadecimal") );
@@ -74,6 +80,7 @@ ViewStatusController::ViewStatusController( KStatusBar* statusBar )
         i18nc("@info:tooltip","Encoding in the character column of the current view.") );
     connect( mCharCodingComboBox, SIGNAL(activated(int)), SLOT(setCharCoding(int)) );
     statusBar->addWidget( mCharCodingComboBox, 0 );
+#endif
 
     fixWidths();
 
@@ -81,6 +88,7 @@ ViewStatusController::ViewStatusController( KStatusBar* statusBar )
 }
 
 
+// TODO: width is still to long calculated, check if correct font is used and perhaps move to onShown()
 void ViewStatusController::fixWidths()
 {
     const QFontMetrics metrics = mStatusBar->fontMetrics();
@@ -94,6 +102,7 @@ void ViewStatusController::fixWidths()
     };
 
     int largestOffsetWidth = 0;
+    int largestSelectionWidth = 0;
     for( int i=0; i<HexDigitsCount; ++i )
     {
         QString offset = QString( 9, HexDigits[i] );
@@ -102,8 +111,17 @@ void ViewStatusController::fixWidths()
         const int offsetWidth = metrics.boundingRect( offsetText ).width();
         if( largestOffsetWidth < offsetWidth )
             largestOffsetWidth = offsetWidth;
+
+        const QString bytesCount = i18n( "%1 bytes", QString(8,HexDigits[i]) );
+        const QString selectionString = i18nc( "@info:status selection: start offset - end offset ()",
+                        "Selection: %1 - %2 (%3)", offset, offset, bytesCount );
+
+        const int selectionWidth = metrics.boundingRect( selectionString ).width();
+        if( largestSelectionWidth < selectionWidth )
+            largestSelectionWidth = selectionWidth;
     }
     mOffsetLabel->setFixedWidth( largestOffsetWidth );
+    mSelectionLabel->setFixedWidth( largestSelectionWidth );
 }
 
 void ViewStatusController::setTargetModel( AbstractModel* model )
@@ -122,31 +140,34 @@ void ViewStatusController::setTargetModel( AbstractModel* model )
         mStartOffset = mByteArrayDisplay->startOffset();
 
         onCursorPositionChanged( mByteArrayDisplay->cursorPosition() );
+        onHasSelectedDataChanged( mByteArrayDisplay->hasSelectedData() );
         mOverwriteModeToggleButton->setChecked( mByteArrayDisplay->isOverwriteMode() );
-        onValueCodingChanged( (int)mByteArrayDisplay->valueCoding() );
-        onCharCodecChanged( mByteArrayDisplay->charCodingName() );
+//         onValueCodingChanged( (int)mByteArrayDisplay->valueCoding() );
+//         onCharCodecChanged( mByteArrayDisplay->charCodingName() );
 
         connect( mByteArrayDisplay, SIGNAL(cursorPositionChanged( int )), SLOT(onCursorPositionChanged( int )) );
+        connect( mByteArrayDisplay, SIGNAL(hasSelectedDataChanged( bool )), SLOT(onHasSelectedDataChanged( bool )) );
         connect( mByteArrayDisplay, SIGNAL(overwriteModeChanged( bool )),
                  mOverwriteModeToggleButton, SLOT(setChecked( bool )) );
-        connect( mByteArrayDisplay, SIGNAL(valueCodingChanged( int )), SLOT(onValueCodingChanged( int )) );
-        connect( mByteArrayDisplay, SIGNAL(charCodecChanged( const QString& )),
-            SLOT(onCharCodecChanged( const QString& )) );
+//         connect( mByteArrayDisplay, SIGNAL(valueCodingChanged( int )), SLOT(onValueCodingChanged( int )) );
+//         connect( mByteArrayDisplay, SIGNAL(charCodecChanged( const QString& )),
+//             SLOT(onCharCodecChanged( const QString& )) );
     }
     else
     {
         const QString emptyString( '-' );
 
         mOffsetLabel->setText( i18nc("@info:status offset value not available", "Offset: -") );
+        mSelectionLabel->setText( i18nc("@info:status offset value not available", "Selection: -") );
         mOverwriteModeToggleButton->setChecked( false );
-        mValueCodingComboBox->setCurrentIndex( 0 );
-        mCharCodingComboBox->setCurrentIndex( 0 );
+//         mValueCodingComboBox->setCurrentIndex( 0 );
+//         mCharCodingComboBox->setCurrentIndex( 0 );
     }
 
     mOffsetLabel->setEnabled( hasView );
     mOverwriteModeToggleButton->setEnabled( hasView );
-    mValueCodingComboBox->setEnabled( hasView );
-    mCharCodingComboBox->setEnabled( hasView );
+//     mValueCodingComboBox->setEnabled( hasView );
+//     mCharCodingComboBox->setEnabled( hasView );
 }
 
 void ViewStatusController::setOverwriteMode( bool overwrite )
@@ -154,6 +175,7 @@ void ViewStatusController::setOverwriteMode( bool overwrite )
     mByteArrayDisplay->setOverwriteMode( overwrite );
 }
 
+#if 0
 void ViewStatusController::setValueCoding( int valueCoding )
 {
     mByteArrayDisplay->setValueCoding( valueCoding );
@@ -165,6 +187,7 @@ void ViewStatusController::setCharCoding( int charCoding )
     mByteArrayDisplay->setCharCoding( KHECore::CharCodec::codecNames()[charCoding] );
     mByteArrayDisplay->setFocus();
 }
+#endif
 
 void ViewStatusController::onCursorPositionChanged( int offset )
 {
@@ -175,6 +198,30 @@ void ViewStatusController::onCursorPositionChanged( int offset )
     mOffsetLabel->setText( i18n("Offset: %1", QLatin1String(codedOffset)) );
 }
 
+// TODO: we need signal selectionChanged( selection ), also fix selection by cursor not sending updates
+void ViewStatusController::onHasSelectedDataChanged( bool hasSelectedData )
+{
+    QString string;
+
+    if( hasSelectedData )
+    {
+        static char codedSelectionStart[KHEUI::KOffsetFormat::MaxFormatWidth+1];
+        static char codedSelectionEnd[KHEUI::KOffsetFormat::MaxFormatWidth+1];
+
+        const KHE::Section selection = mByteArrayDisplay->selection();
+        mPrintFunction( codedSelectionStart, mStartOffset + selection.start() );
+        mPrintFunction( codedSelectionEnd,   mStartOffset + selection.end() );
+
+        const QString bytesCount = i18np( "1 byte", "%1 bytes", selection.width() );
+        string = i18nc( "@info:status selection: start offset - end offset (number of bytes)",
+                        "Selection: %1 - %2 (%3)", QLatin1String(codedSelectionStart), QLatin1String(codedSelectionEnd), bytesCount );
+    }
+    else
+        string = i18nc( "@info:status offset value not available", "Selection: -" );
+
+    mSelectionLabel->setText( string );
+}
+#if 0
 void ViewStatusController::onValueCodingChanged( int valueCoding )
 {
     mValueCodingComboBox->setCurrentIndex( valueCoding );
@@ -186,3 +233,4 @@ void ViewStatusController::onCharCodecChanged( const QString& charCodecName )
 
     mCharCodingComboBox->setCurrentIndex( charCodingIndex );
 }
+#endif

@@ -51,21 +51,23 @@ class ViewStatusController : public AbstractXmlGuiController
 
   protected Q_SLOTS:
     void setOverwriteMode( bool overwrite );
-    void setValueCoding( int valueCoding );
-    void setCharCoding( int charCoding );
+//     void setValueCoding( int valueCoding );
+//     void setCharCoding( int charCoding );
 
     void onCursorPositionChanged( int offset );
-    void onValueCodingChanged( int valueCoding );
-    void onCharCodecChanged( const QString& charCodecName );
+    void onHasSelectedDataChanged( bool hasSelectedData );
+//     void onValueCodingChanged( int valueCoding );
+//     void onCharCodecChanged( const QString& charCodecName );
 
   protected:
     KByteArrayDisplay* mByteArrayDisplay;
 
     KStatusBar* mStatusBar;
     QLabel* mOffsetLabel;
+    QLabel* mSelectionLabel;
     ToggleButton* mOverwriteModeToggleButton;
-    KComboBox* mValueCodingComboBox;
-    KComboBox* mCharCodingComboBox;
+//     KComboBox* mValueCodingComboBox;
+//     KComboBox* mCharCodingComboBox;
 
     KHEUI::KOffsetFormat::print mPrintFunction;
     int mStartOffset;
