@@ -162,7 +162,7 @@ void OktetaMainWindow::setupControllers()
 
     addXmlGuiController( new ViewStatusController(statusBar()) );
     addXmlGuiController( new ReadOnlyBarController(statusBar()) );
-    addXmlGuiController( new ZoomBarController(statusBar()) );
+//     addXmlGuiController( new ZoomBarController(statusBar()) );
 
     addTool( new DocumentInfoToolView(new DocumentInfoTool(mProgram->documentManager()->syncManager())) );
     addTool( new ChecksumToolView(new ChecksumTool()) );
