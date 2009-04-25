@@ -88,13 +88,15 @@ ViewStatusController::ViewStatusController( KStatusBar* statusBar )
 }
 
 
-// TODO: width is still to long calculated, check if correct font is used and perhaps move to onShown()
+// the letter C can be very wide, that is why with proportianl fonts there seems too much space used, but isn't
+// see http://frinring.wordpress.com/2008/10/14/better-width-with-open-sources/
 void ViewStatusController::fixWidths()
 {
     const QFontMetrics metrics = mStatusBar->fontMetrics();
 
     // mOffsetLabel
     static const char HexDigitsCount = 16;
+    static const char FirstLetterIndex = 10;
     static const char HexDigits[HexDigitsCount] =
     {
         '0','1','2','3','4','5','6','7','8','9',
@@ -103,6 +105,7 @@ void ViewStatusController::fixWidths()
 
     int largestOffsetWidth = 0;
     int largestSelectionWidth = 0;
+    int widestDigitIndex = 0;
     for( int i=0; i<HexDigitsCount; ++i )
     {
         QString offset = QString( 9, HexDigits[i] );
@@ -112,16 +115,22 @@ void ViewStatusController::fixWidths()
         if( largestOffsetWidth < offsetWidth )
             largestOffsetWidth = offsetWidth;
 
-        const QString bytesCount = i18n( "%1 bytes", QString(8,HexDigits[i]) );
+        const char countDigit = (i<FirstLetterIndex) ? HexDigits[i] : widestDigitIndex;
+        const QString bytesCount = i18np( "1 byte", "%1 bytes", ('1'+QString(9,countDigit)).toInt() );
         const QString selectionString = i18nc( "@info:status selection: start offset - end offset ()",
                         "Selection: %1 - %2 (%3)", offset, offset, bytesCount );
 
         const int selectionWidth = metrics.boundingRect( selectionString ).width();
         if( largestSelectionWidth < selectionWidth )
+        {
+            if( i < FirstLetterIndex )
+                widestDigitIndex = 1;
             largestSelectionWidth = selectionWidth;
+        }
     }
     mOffsetLabel->setFixedWidth( largestOffsetWidth );
     mSelectionLabel->setFixedWidth( largestSelectionWidth );
+kDebug()<<"offset"<<largestOffsetWidth<<"selection"<<largestSelectionWidth;
 }
 
 void ViewStatusController::setTargetModel( AbstractModel* model )
