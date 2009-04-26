@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -45,13 +45,11 @@ class InfoView : public QWidget
 
   public Q_SLOTS:
     void updateHeader();
-    void setDirty( bool dirty );
     void setByteArraySize( int size );
 
   private:
     InfoTool *mTool;
 
-    QLabel *mDirtyLabel;
     QLabel *mSizeLabel;
     QTreeView *mStatisticTableView;
     KPushButton *mUpdateButton;
