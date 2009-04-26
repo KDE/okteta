@@ -68,7 +68,7 @@ InfoView::InfoView( InfoTool *tool, QWidget *parent )
 
     QHBoxLayout *sizeLayout = new QHBoxLayout();
 
-    QLabel *label = new QLabel( i18nc("@label","Size [bytes]: "), this );
+    QLabel *label = new QLabel( i18nc("@label size of selected bytes","Size:"), this );
     sizeLayout->addWidget( label );
 
     mSizeLabel = new QLabel( this );
@@ -110,9 +110,10 @@ void InfoView::updateHeader()
 
 void InfoView::setByteArraySize( int size )
 {
-    const QString sizeText = ( size == -1 ) ?
+    const QString sizeText = ( size < 1 ) ? // -1 is default, 0 should not happen
         QString( '-' ) :
-        KGlobal::locale()->formatNumber( size, 0 );
+        i18np( "1 byte", "%1 bytes", size );
+
     mSizeLabel->setText( sizeText );
 }
 
