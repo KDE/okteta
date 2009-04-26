@@ -48,7 +48,7 @@ ReplaceTool::ReplaceTool()
 
 bool ReplaceTool::isApplyable() const
 {
-    return ( mByteArrayDisplay && mByteArrayModel );
+    return ( mByteArrayDisplay && mByteArrayModel && !mByteArrayDisplay->isReadOnly() );
 //     const int newPosition = finalTargetOffset();
 
 //     return ( mByteArrayDisplay && mByteArrayModel
@@ -76,6 +76,7 @@ void ReplaceTool::setTargetModel( AbstractModel* model )
 
     if( mByteArrayDisplay && mByteArrayModel )
     {
+        connect( mByteArrayDisplay, SIGNAL(readOnlyChanged( bool )), SLOT(onReadOnlyChanged( bool )) );
         // TODO: update isApplyable on cursor movement and size changes
     }
 
@@ -267,6 +268,13 @@ void ReplaceTool::doReplace( KFindDirection direction, int startIndex )
     }
 }
 
+void ReplaceTool::onReadOnlyChanged( bool isReadOnly )
+{
+Q_UNUSED( isReadOnly )
+
+    // TODO: find out if isApplyable really changed, perhaps by caching the readonly state?
+    emit isApplyableChanged( isApplyable() );
+}
 
 ReplaceTool::~ReplaceTool()
 {

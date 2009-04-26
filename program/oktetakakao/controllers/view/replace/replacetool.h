@@ -79,6 +79,9 @@ class ReplaceTool : public AbstractTool
   protected:
     void doReplace( KFindDirection direction, int startIndex );
 
+  protected Q_SLOTS:
+    void onReadOnlyChanged( bool isReadOnly );
+
   protected: // settings
     QByteArray mSearchData;
     QByteArray mReplaceData;
