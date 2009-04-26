@@ -81,6 +81,7 @@ ChecksumView::ChecksumView( ChecksumTool* tool, QWidget* parent )
     // calculate
     QHBoxLayout* calculateLayout = new QHBoxLayout();
 
+    calculateLayout->addStretch();
     const KGuiItem updateGuiItem( i18nc("@action:button calculate the checksum","&Calculate"), "system-run",
                       i18nc("@info:tooltip","Calculate the checksum for the bytes in the selected range."),
                       i18nc("@info:whatsthis",
@@ -90,14 +91,14 @@ ChecksumView::ChecksumView( ChecksumTool* tool, QWidget* parent )
     mCalculateButton->setEnabled( mTool->isApplyable() );
     connect( mCalculateButton, SIGNAL(clicked(bool)), SLOT(onCalculateClicked()) );
     calculateLayout->addWidget( mCalculateButton );
+    baseLayout->addLayout( calculateLayout );
 
     mChecksumLabel = new KLineEdit( this );
     mChecksumLabel->setReadOnly( true );
     mChecksumLabel->setText( mTool->checkSum() );
     connect( mTool, SIGNAL(checksumChanged( const QString& )), mChecksumLabel, SLOT(setText( const QString& )) );
-    calculateLayout->addWidget( mChecksumLabel, 10 );
+    baseLayout->addWidget( mChecksumLabel, 10 );
 
-    baseLayout->addLayout( calculateLayout );
     baseLayout->addStretch( 10 );
 
     connect( mTool, SIGNAL(uptodateChanged( bool )), SLOT(onChecksumUptodateChanged( bool )) );
