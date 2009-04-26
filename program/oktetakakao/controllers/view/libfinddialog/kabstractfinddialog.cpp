@@ -43,7 +43,10 @@ KAbstractFindDialog::KAbstractFindDialog( QWidget *parent )
 {
     setButtons( Ok | Cancel );
     setDefaultButton( Ok );
-    enableButtonOk( false );
+
+    // TODO: setting ok button to disabled as before done gets overwritten to true
+    // if setting the button gui with an inline KGuiItem in the subclass,
+    // which has no parameter for enabled and defaults to true
 }
 
 void KAbstractFindDialog::setupFindBox()
@@ -177,5 +180,3 @@ void KAbstractFindDialog::showEvent( QShowEvent *showEvent )
 KAbstractFindDialog::~KAbstractFindDialog()
 {
 }
-
-#include "kabstractfinddialog.moc"

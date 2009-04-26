@@ -45,6 +45,7 @@ KSearchDialog::KSearchDialog( SearchTool* tool, QWidget* parent )
     setupOperationBox();
     setupCheckBoxes();
 
+    enableButtonOk( false );
     setModal( false );
 }
 

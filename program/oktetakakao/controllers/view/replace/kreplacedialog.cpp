@@ -38,7 +38,6 @@
 #include <QtGui/QLayout>
 
 
-
 KReplaceDialog::KReplaceDialog( ReplaceTool* tool, QWidget* parent )
   : KAbstractFindDialog( parent ),
     mTool( tool )
@@ -51,7 +50,6 @@ KReplaceDialog::KReplaceDialog( ReplaceTool* tool, QWidget* parent )
                             "the bytes you entered above are searched for within "
                             "the byte array and any occurrence is replaced with "
                             "the replacement bytes.")) );
-    setModal( true );
 
     setupFindBox();
 
@@ -80,6 +78,9 @@ KReplaceDialog::KReplaceDialog( ReplaceTool* tool, QWidget* parent )
     PromptCheckBox->setWhatsThis( i18nc("@info:whatsthis","Ask before replacing each match found.") );
 
     setupCheckBoxes( PromptCheckBox );
+
+    enableButtonOk( false );
+    setModal( true );
 }
 
 
