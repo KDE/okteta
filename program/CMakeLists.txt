@@ -48,8 +48,12 @@ target_link_libraries( okteta
   ${KDE4_KIO_LIBS}
   ${KDE4_KFILE_LIBS}
   ${KDE4_KDNSSD_LIBS}
-  ${QCA2_LIBRARIES}
 )
+
+if( QCA2_FOUND )
+  target_link_libraries( okteta ${QCA2_LIBRARIES} )
+endif( QCA2_FOUND )
+
 
 install( TARGETS okteta  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 

@@ -17,8 +17,11 @@ include_directories(
   view/libbytearrayfilter
   view/libfinddialog
   view/libframesprint
-  ${QCA2_INCLUDE_DIR}
 )
+
+if( QCA2_FOUND )
+  include_directories( ${QCA2_INCLUDE_DIR} )
+endif( QCA2_FOUND )
 
 macro_bool_to_01( QCA2_FOUND  HAVE_QCA2 )
 configure_file( config-qca2.h.cmake  ${CMAKE_CURRENT_BINARY_DIR}/config-qca2.h )
