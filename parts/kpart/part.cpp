@@ -107,11 +107,14 @@ void OktetaPart::setupActions( bool browserViewWanted )
 
     // resize style
     resizeStyleAction = actions->add<KSelectAction>( "resizestyle" );
-    resizeStyleAction->setText( i18nc("@title:menu","&Resize Style") );
+    resizeStyleAction->setText( i18nc("@title:menu","&Dynamic Layout") );
     strings.clear();
-    strings.append( i18nc("@item:inmenu","&No Resize") );
-    strings.append( i18nc("@item:inmenu","&Lock Groups") );
-    strings.append( i18nc("@item:inmenu","&Full Size Usage") );
+    strings.append( i18nc("@item:inmenu  The layout will not change on size changes.",
+                          "&Off") );
+    strings.append( i18nc("@item:inmenu  The layout will adapt to the size, but only with complete groups of bytes.",
+                          "&Wrap only complete Byte Groups") );
+    strings.append( i18nc("@item:inmenu  The layout will adapt to the size and fit in as much bytes per line as possible.",
+                          "&On") );
     resizeStyleAction->setItems( strings );
     connect( resizeStyleAction, SIGNAL(triggered(int)), SLOT(onSetResizeStyle(int)) );
 
@@ -122,11 +125,11 @@ void OktetaPart::setupActions( bool browserViewWanted )
 
     // show buffer columns
     toggleColumnsAction = actions->add<KSelectAction>( "togglecolumns" );
-    toggleColumnsAction->setText( i18nc("@title:menu","&Columns") );
+    toggleColumnsAction->setText( i18nc("@title:menu","&Show Values or Chars") );
     strings.clear();
-    strings.append( i18nc("@item:inmenu","&Values Column") );
-    strings.append( i18nc("@item:inmenu","&Chars Column") );
-    strings.append( i18nc("@item:inmenu","&Both Columns") );
+    strings.append( i18nc("@item:inmenu","&Values") );
+    strings.append( i18nc("@item:inmenu","&Chars") );
+    strings.append( i18nc("@item:inmenu","Values &and Chars") );
     toggleColumnsAction->setItems( strings );
     connect( toggleColumnsAction, SIGNAL(triggered(int)), SLOT(onToggleValueCharColumns(int)) );
 
