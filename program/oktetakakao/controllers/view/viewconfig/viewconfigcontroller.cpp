@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -62,11 +62,14 @@ ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
 
     // resize style
     mResizeStyleAction = actionCollection->add<KSelectAction>( "resizestyle" );
-    mResizeStyleAction->setText( i18nc("@title:menu","&Resize Style") );
+    mResizeStyleAction->setText( i18nc("@title:menu","&Dynamic Layout") );
     list.clear();
-    list.append( i18nc("@item:inmenu","&No Resize") );
-    list.append( i18nc("@item:inmenu","&Lock Groups") );
-    list.append( i18nc("@item:inmenu","&Full Size Usage") );
+    list.append( i18nc("@item:inmenu  The layout will not change on size changes.",
+                       "&Off") );
+    list.append( i18nc("@item:inmenu  The layout will adapt to the size, but only with complete groups of bytes.",
+                       "&Wrap only complete Byte Groups") );
+    list.append( i18nc("@item:inmenu  The layout will adapt to the size and fit in as much bytes per line as possible.",
+                       "&On") );
     mResizeStyleAction->setItems( list );
     connect( mResizeStyleAction, SIGNAL(triggered(int)), SLOT(setResizeStyle(int)) );
 
