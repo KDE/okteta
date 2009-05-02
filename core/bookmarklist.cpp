@@ -169,6 +169,18 @@ QList<KHECore::Bookmark> BookmarkList::list() const
     return result;
 }
 
+const Bookmark& BookmarkList::bookmark( int offset ) const
+{
+    const ConstIterator endIt = end();
+    for( ConstIterator it = begin(); it!=endIt; ++it )
+    {
+        if( it->offset() == offset )
+            return *it;
+    }
+    static const Bookmark* const noBookmark = 0;
+    return (const Bookmark&)*noBookmark;
+}
+
 bool BookmarkList::contains( int offset ) const
 {
     bool result = false;

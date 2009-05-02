@@ -135,6 +135,11 @@ KHECore::BookmarksConstIterator KByteArrayModel::createBookmarksConstIterator() 
     return d->createBookmarksConstIterator();
 }
 
+const KHECore::Bookmark& KByteArrayModel::bookmarkFor( int offset ) const
+{
+    return d->bookmarkFor( offset );
+}
+
 const KHECore::Bookmark& KByteArrayModel::bookmarkAt( unsigned int index ) const
 {
     return d->bookmarkAt( index );

@@ -139,6 +139,11 @@ const KHECore::Bookmark& PieceTableByteArrayModel::bookmarkAt( unsigned int inde
     return d->bookmarkAt( index );
 }
 
+const KHECore::Bookmark& PieceTableByteArrayModel::bookmarkFor( int offset ) const
+{
+    return d->bookmarkFor( offset );
+}
+
 bool PieceTableByteArrayModel::containsBookmarkFor( int offset ) const
 {
     return d->containsBookmarkFor( offset );

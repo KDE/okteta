@@ -95,6 +95,7 @@ class OKTETACORE_EXPORT PieceTableByteArrayModel : public AbstractByteArrayModel
 
     virtual KHECore::BookmarksConstIterator createBookmarksConstIterator() const;
     virtual const KHECore::Bookmark& bookmarkAt( unsigned int index ) const;
+    virtual const KHECore::Bookmark& bookmarkFor( int offset ) const;
     virtual bool containsBookmarkFor( int offset ) const;
     virtual unsigned int bookmarksCount() const;
 

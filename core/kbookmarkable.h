@@ -51,6 +51,7 @@ class Bookmarkable
     virtual KHECore::BookmarksConstIterator createBookmarksConstIterator() const = 0;
 //     virtual BookmarksMutableIterator createBookmarksMutableIterator() const = 0;
     virtual const KHECore::Bookmark& bookmarkAt( unsigned int index ) const = 0;
+    virtual const KHECore::Bookmark& bookmarkFor( int offset ) const = 0;
     virtual bool containsBookmarkFor( int offset ) const = 0;
     virtual unsigned int bookmarksCount() const = 0;
 

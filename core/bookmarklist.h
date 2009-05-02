@@ -54,6 +54,7 @@ class BookmarkList : public QLinkedList<Bookmark>
     bool adjustToSwapped( int firstPartStart, int secondPartStart, int secondPartLength );
 
   public:
+    const Bookmark& bookmark( int offset ) const;
     bool contains( int offset ) const;
     using QLinkedList<Bookmark>::contains;
     const Bookmark& at( unsigned int index ) const;

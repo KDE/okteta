@@ -85,6 +85,7 @@ class PieceTableByteArrayModel::Private
 
     KHECore::BookmarksConstIterator createBookmarksConstIterator() const;
     const KHECore::Bookmark& bookmarkAt( unsigned int index ) const;
+    const KHECore::Bookmark& bookmarkFor( int offset ) const;
     bool containsBookmarkFor( int offset ) const;
     unsigned int bookmarksCount() const;
 
@@ -200,6 +201,10 @@ inline KHECore::BookmarksConstIterator PieceTableByteArrayModel::Private::create
 inline const KHECore::Bookmark& PieceTableByteArrayModel::Private::bookmarkAt( unsigned int index ) const
 {
     return mBookmarks.at( index );
+}
+inline const KHECore::Bookmark& PieceTableByteArrayModel::Private::bookmarkFor( int offset ) const
+{
+    return mBookmarks.bookmark( offset );
 }
 inline bool PieceTableByteArrayModel::Private::containsBookmarkFor( int offset ) const { return mBookmarks.contains( offset ); }
 inline unsigned int PieceTableByteArrayModel::Private::bookmarksCount() const { return mBookmarks.size(); }

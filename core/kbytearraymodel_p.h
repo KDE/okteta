@@ -87,6 +87,7 @@ class KByteArrayModelPrivate
 
     KHECore::BookmarksConstIterator createBookmarksConstIterator() const;
     const KHECore::Bookmark& bookmarkAt( unsigned int index ) const;
+    const KHECore::Bookmark& bookmarkFor( int offset ) const;
     bool containsBookmarkFor( int offset ) const;
     unsigned int bookmarksCount() const;
 
@@ -192,6 +193,10 @@ inline KHECore::BookmarksConstIterator KByteArrayModelPrivate::createBookmarksCo
     return BookmarksConstIterator( new BookmarkListConstIteratorAdapter(m_bookmarks) );
 }
 
+inline const KHECore::Bookmark& KByteArrayModelPrivate::bookmarkFor( int offset ) const
+{
+    return m_bookmarks.bookmark( offset );
+}
 inline const KHECore::Bookmark& KByteArrayModelPrivate::bookmarkAt( unsigned int index ) const
 {
     return m_bookmarks.at( index );
