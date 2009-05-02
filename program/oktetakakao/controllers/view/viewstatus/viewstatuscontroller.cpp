@@ -174,6 +174,7 @@ void ViewStatusController::setTargetModel( AbstractModel* model )
     }
 
     mOffsetLabel->setEnabled( hasView );
+    mSelectionLabel->setEnabled( hasView );
     mOverwriteModeToggleButton->setEnabled( hasView );
 //     mValueCodingComboBox->setEnabled( hasView );
 //     mCharCodingComboBox->setEnabled( hasView );
