@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -38,11 +38,13 @@
 // KDE
 #include <KGlobal>
 // Qt
+#include <QtGui/QKeyEvent>
 #include <QtGui/QDragEnterEvent>
 #include <QtGui/QDragMoveEvent>
 #include <QtGui/QDragLeaveEvent>
 #include <QtGui/QDropEvent>
 #include <QtGui/QApplication>
+#include <QtGui/QToolTip>
 #include <QtCore/QMimeData>
 #include <QtCore/QByteArray>
 
@@ -814,6 +816,52 @@ void AbstractByteArrayViewPrivate::adjustLayoutToSize()
     }
 
     q->setNoOfLines( mTableLayout->noOfLines() );
+}
+
+bool AbstractByteArrayViewPrivate::event( QEvent* event )
+{
+    Q_Q( AbstractByteArrayView );
+
+    // 
+    if( event->type() == QEvent::KeyPress )
+    {
+        QKeyEvent* keyEvent = static_cast<QKeyEvent*>( event );
+        if( keyEvent->key() == Qt::Key_Tab || keyEvent->key() == Qt::Key_Backtab )
+        {
+            q->keyPressEvent( keyEvent );
+            if( keyEvent->isAccepted() )
+                return true;
+        }
+    }
+    else if( event->type() == QEvent::ToolTip )
+    {
+        QHelpEvent* helpEvent = static_cast<QHelpEvent*>( event );
+
+        QString toolTip;
+
+        KHECore::Bookmarkable* bookmarks = qobject_cast<KHECore::Bookmarkable*>( mByteArrayModel );
+        if( bookmarks )
+        {
+            const int index = indexByPoint( helpEvent->pos() );
+            if( index != -1 )
+            {
+                if( bookmarks->containsBookmarkFor(index) )
+                    toolTip = bookmarks->bookmarkFor( index ).name();
+            }
+        }
+
+        if( ! toolTip.isNull() )
+            QToolTip::showText( helpEvent->globalPos(), toolTip );
+        else
+        {
+            QToolTip::hideText();
+            event->ignore();
+        }
+
+        return true;
+     }
+
+    return q->ColumnsView::event( event );
 }
 
 void AbstractByteArrayViewPrivate::resizeEvent( QResizeEvent* resizeEvent )

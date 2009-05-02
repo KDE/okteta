@@ -69,7 +69,6 @@ class ByteArrayRowViewPrivate : public AbstractByteArrayViewPrivate
     bool isByteTypeColored() const;
 
   public: // logic value service
-    int indexByPoint( const QPoint& point ) const;
     QSize minimumSizeHint() const;
 
   public: // modification access
@@ -148,6 +147,8 @@ class ByteArrayRowViewPrivate : public AbstractByteArrayViewPrivate
 
     virtual void setActiveCoding( AbstractByteArrayView::CodingTypeId codingId );
     virtual void setVisibleCodings( int visibleCodings );
+
+    virtual int indexByPoint( const QPoint& point ) const;
 
   protected: // AbstractByteArrayViewPrivate API
     virtual AbstractByteArrayView::CodingTypeId activeCoding() const;

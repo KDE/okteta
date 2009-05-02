@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -28,8 +28,6 @@
 #include "controller/kcontroller.h"
 #include "controller/abstractwheelcontroller.h"
 #include "bytearraytablelayout.h"
-// Qt
-#include <QtGui/QKeyEvent>
 
 
 namespace KHEUI
@@ -454,18 +452,8 @@ QRect AbstractByteArrayView::cursorRect() const
 
 bool AbstractByteArrayView::event( QEvent* event )
 {
-    if( event->type() == QEvent::KeyPress )
-    {
-        QKeyEvent* keyEvent = (QKeyEvent*)event;
-        if( keyEvent->key() == Qt::Key_Tab || keyEvent->key() == Qt::Key_Backtab )
-        {
-            keyPressEvent( keyEvent );
-            if( keyEvent->isAccepted() )
-                return true;
-        }
-    }
-
-    return ColumnsView::event( event );
+    Q_D( AbstractByteArrayView );
+    return d->event( event );
 }
 
 void AbstractByteArrayView::showEvent( QShowEvent* showEvent )
