@@ -54,6 +54,8 @@ class BookmarkList : public QLinkedList<Bookmark>
     bool adjustToSwapped( int firstPartStart, int secondPartStart, int secondPartLength );
 
   public:
+    // TODO: this function needs to be called with a valid offset, will return a reference to a zero pointer else
+    // want a reference for speed, perhaps need a global static dummy invalid bookmark
     const Bookmark& bookmark( int offset ) const;
     bool contains( int offset ) const;
     using QLinkedList<Bookmark>::contains;
