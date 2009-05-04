@@ -33,14 +33,15 @@ Zusammenlegen?
       <text>Paste As</text>
       <ActionList name="paste_as_list" />
     </Menu-->
-    <Action name="set_overwrite" group="edit_select_merge" />
-    <Separator group="edit_select_merge" />
-    <Action name="goto_offset" />
-    <Menu name="insert">
+    <Menu name="insert" append="edit_paste_merge">
       <text context="@title:menu">Insert</text>
       <Action name="insert_pattern" />
       <Action name="insert_file" />
     </Menu>
+    <Separator append="edit_select_merge" />
+    <Action name="set_overwrite" append="edit_select_merge" />
+    <Separator append="edit_select_merge" />
+    <Action name="goto_offset" />
   </Menu>
   <Menu name="view">
     <Action name="view_showsnonprinting" />
