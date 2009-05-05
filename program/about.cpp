@@ -42,7 +42,7 @@ OktetaAboutData::OktetaAboutData()
               ki18n("KDE byte editor"), // description
               KAboutData::License_GPL_V2,
               ki18n("Copyright 2006-2009 Friedrich W. H. Kossebau"), //copyright
-              ki18n("Edit files as an array of bytes"), // comment
+              ki18n("Edit the raw data of files"), // comment
               ProgramHomepage )
 {
     addLicense(KAboutData::License_GPL_V3);
