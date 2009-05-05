@@ -54,6 +54,8 @@ ReplaceController::ReplaceController( KXmlGuiWindow *window )
              mReplaceAction, SLOT(setEnabled( bool )) );
 
     connect( mTool, SIGNAL(finished( bool, int )), SLOT(onFinished( bool, int )) );
+
+    mReplaceAction->setEnabled( false );
 }
 
 void ReplaceController::setTargetModel( AbstractModel* model )

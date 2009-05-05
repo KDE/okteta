@@ -56,6 +56,10 @@ SearchController::SearchController( KXmlGuiWindow* window )
              mFindPrevAction, SLOT(setEnabled( bool )) );
 
     connect( mTool, SIGNAL(dataNotFound()), SLOT(onDataNotFound()) );
+
+    mFindAction->setEnabled( false );
+    mFindNextAction->setEnabled( false );
+    mFindPrevAction->setEnabled( false );
 }
 
 void SearchController::setTargetModel( AbstractModel* model )
