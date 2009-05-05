@@ -27,13 +27,14 @@
 #include <kdocumentsyncmanager.h>
 #include <kiversionable.h>
 #include <kabstractdocument.h>
+#include <abstractmodelsynchronizer.h>
 // KDE
 #include <KLocale>
 #include <KUrl>
 
 
 FileSystemBrowserTool::FileSystemBrowserTool( KDocumentManager* documentManager )
- : mModel( 0 ), mDocumentManager( documentManager )
+ : mDocument( 0 ), mDocumentManager( documentManager )
 {
     setObjectName( "FileSystemBrowser" );
 }
@@ -42,17 +43,31 @@ FileSystemBrowserTool::FileSystemBrowserTool( KDocumentManager* documentManager 
 QString FileSystemBrowserTool::title() const { return i18nc("@title:window", "Filesystem"); }
 
 
-KUrl FileSystemBrowserTool::urlOfDirOfCurrentDocument() const
+KUrl FileSystemBrowserTool::currentUrl() const
 {
     KUrl result;
-//     if( mModel )
-//     url().upUrl();
+
+    if( mDocument )
+        result = mDocumentManager->syncManager()->urlOf( mDocument ).upUrl();
+
     return result;
+}
+
+bool FileSystemBrowserTool::hasCurrentUrl() const
+{
+    return ( mDocument && mDocument->synchronizer() != 0 );
 }
 
 void FileSystemBrowserTool::setTargetModel( AbstractModel* model )
 {
-    mModel = model ? model->findBaseModelWithInterface<KDE::If::Versionable*>() : 0;
+    const bool oldHasCurrentUrl = hasCurrentUrl();
+
+    mDocument = model ? model->findBaseModel<KAbstractDocument*>() : 0;
+
+    const bool newHasCurrentUrl = hasCurrentUrl();
+
+    if( oldHasCurrentUrl != newHasCurrentUrl )
+        emit hasCurrentUrlChanged( newHasCurrentUrl );
 }
 
 void FileSystemBrowserTool::open( const KUrl& url )

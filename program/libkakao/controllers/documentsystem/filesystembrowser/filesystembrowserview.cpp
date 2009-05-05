@@ -28,6 +28,9 @@
 #include <KUrlNavigator>
 #include <KFilePlacesModel>
 #include <KDirOperator>
+#include <KActionCollection>
+#include <KToolBar>
+#include <KLocale>
 // Qt
 #include <QtGui/QLayout>
 #include <QtCore/QDir>
@@ -41,16 +44,48 @@ FileSystemBrowserView::FileSystemBrowserView( FileSystemBrowserTool* tool, QWidg
     layout->setMargin( 0 );
     layout->setSpacing( 0 );
 
+    // tool bar
+    mActionCollection = new KActionCollection( this );
+
+    mToolbar = new KToolBar( this );
+    mToolbar->setMovable( false );
+    mToolbar->setToolButtonStyle( Qt::ToolButtonIconOnly );
+    mToolbar->setIconDimensions( 16 );
+    mToolbar->setContextMenuPolicy( Qt::NoContextMenu );
+    layout->addWidget( mToolbar );
+
+    // url bar
     KFilePlacesModel* filePlacesModel = new KFilePlacesModel( this );
     mUrlNavigator = new KUrlNavigator( filePlacesModel , KUrl( QDir::homePath() ), this );
     connect( mUrlNavigator, SIGNAL(urlChanged( const KUrl& )), SLOT(setDirOperatorUrl( const KUrl& )) );
     layout->addWidget( mUrlNavigator );
 
+    // view
     mDirOperator = new KDirOperator( QDir::homePath(), this );
-    mDirOperator->setView( KFile::Tree );
+    mDirOperator->setView( KFile::Detail );
     connect( mDirOperator, SIGNAL(urlEntered( const KUrl& )), SLOT(setNavigatorUrl( const KUrl& )));
     connect( mDirOperator, SIGNAL(fileSelected( const KFileItem& )), SLOT(openFile( const KFileItem& )) );
     layout->addWidget( mDirOperator );
+
+    // fill toolbar
+    static const char* const ToolbarActionNames[] =
+    { "up", "back", "forward", "home", "short view", "detailed view", "tree view"  };
+    static const int ToolbarActionNamesCount = sizeof(ToolbarActionNames) / sizeof(ToolbarActionNames[0]);
+
+    for( int i = 0; i<ToolbarActionNamesCount; ++i )
+    {
+        QAction* action = mDirOperator->actionCollection()->action( ToolbarActionNames[i] );
+        if( action )
+            mToolbar->addAction( action );
+    }
+    QAction* syncDirAction = mActionCollection->addAction( "sync_dir" );
+    syncDirAction->setIcon( KIcon("curfiledir") );
+    syncDirAction->setText( i18nc("", "Folder of Current Document") );
+    connect( syncDirAction, SIGNAL(triggered()), SLOT(syncCurrentDocumentDirectory()) );
+    connect( mTool, SIGNAL(hasCurrentUrlChanged( bool )), syncDirAction, SLOT(setEnabled( bool )) );
+    syncDirAction->setEnabled( mTool->hasCurrentUrl() );
+
+    mToolbar->addAction( syncDirAction );
 }
 
 
@@ -67,7 +102,7 @@ void FileSystemBrowserView::setNavigatorUrl( const KUrl& url )
 
 void FileSystemBrowserView::syncCurrentDocumentDirectory()
 {
-    const KUrl url = mTool->urlOfDirOfCurrentDocument();
+    const KUrl url = mTool->currentUrl();
 
     if( !url.isEmpty() )
         setNavigatorUrl( url );

@@ -31,6 +31,8 @@ class KDirOperator;
 class KUrlNavigator;
 class KUrl;
 class KFileItem;
+class KActionCollection;
+class KToolBar;
 
 
 class FileSystemBrowserView : public QWidget
@@ -53,6 +55,8 @@ class FileSystemBrowserView : public QWidget
   protected:
     FileSystemBrowserTool* const mTool;
 
+    KActionCollection* mActionCollection;
+    KToolBar* mToolbar;
     KDirOperator* mDirOperator;
     KUrlNavigator* mUrlNavigator;
 };

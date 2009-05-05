@@ -27,6 +27,7 @@
 #include <abstracttool.h>
 
 class KDocumentManager;
+class KAbstractDocument;
 class KUrl;
 
 
@@ -42,7 +43,8 @@ class FileSystemBrowserTool : public AbstractTool
     void open( const KUrl& url );
 
   public:
-    KUrl urlOfDirOfCurrentDocument() const;
+    KUrl currentUrl() const;
+    bool hasCurrentUrl() const;
 
   public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
@@ -50,8 +52,11 @@ class FileSystemBrowserTool : public AbstractTool
 
     virtual void setTargetModel( AbstractModel* model );
 
+  Q_SIGNALS:
+    void hasCurrentUrlChanged( bool hasCurrentUrl );
+
   protected: // sources
-    AbstractModel* mModel;
+    KAbstractDocument* mDocument;
 
     KDocumentManager* mDocumentManager;
 };
