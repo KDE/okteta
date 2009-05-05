@@ -65,7 +65,7 @@ void KAbstractFindDialog::setupFindBox()
     QVBoxLayout *findBoxLayout = new QVBoxLayout;
     findBoxLayout->setSpacing( spacingHint() );
 
-    QLabel *bytesLabel = new QLabel( i18nc("@label:textbox","Byte String to F&ind:"), findBox );
+    QLabel *bytesLabel = new QLabel( i18nc("@label:textbox","Byte string to f&ind:"), findBox );
     SearchDataEdit = new KByteArrayLineEdit( findBox );
     connect( SearchDataEdit, SIGNAL(dataChanged(const QByteArray&)), SLOT(onSearchDataChanged(const QByteArray&)) );
     connect( SearchDataEdit, SIGNAL(formatChanged(int)), SLOT(onSearchDataFormatChanged(int)) );

@@ -54,7 +54,7 @@ KReplaceDialog::KReplaceDialog( ReplaceTool* tool, QWidget* parent )
     setupFindBox();
 
     // replace term
-    QGroupBox *ReplaceBox = new QGroupBox( i18nc("@title:group","Replace by"), mainWidget() );
+    QGroupBox *ReplaceBox = new QGroupBox( i18nc("@title:group","Replace By"), mainWidget() );
 
     QVBoxLayout *ReplaceBoxLayout = new QVBoxLayout;
     ReplaceBoxLayout->setSpacing( spacingHint() );

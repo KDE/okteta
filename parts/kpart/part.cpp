@@ -112,7 +112,7 @@ void OktetaPart::setupActions( bool browserViewWanted )
     strings.append( i18nc("@item:inmenu  The layout will not change on size changes.",
                           "&Off") );
     strings.append( i18nc("@item:inmenu  The layout will adapt to the size, but only with complete groups of bytes.",
-                          "&Wrap only complete Byte Groups") );
+                          "&Wrap Only Complete Byte Groups") );
     strings.append( i18nc("@item:inmenu  The layout will adapt to the size and fit in as much bytes per line as possible.",
                           "&On") );
     resizeStyleAction->setItems( strings );
@@ -129,7 +129,7 @@ void OktetaPart::setupActions( bool browserViewWanted )
     strings.clear();
     strings.append( i18nc("@item:inmenu","&Values") );
     strings.append( i18nc("@item:inmenu","&Chars") );
-    strings.append( i18nc("@item:inmenu","Values &and Chars") );
+    strings.append( i18nc("@item:inmenu","Values && Chars") );
     toggleColumnsAction->setItems( strings );
     connect( toggleColumnsAction, SIGNAL(triggered(int)), SLOT(onToggleValueCharColumns(int)) );
 

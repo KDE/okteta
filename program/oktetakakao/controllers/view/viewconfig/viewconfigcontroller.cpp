@@ -67,7 +67,7 @@ ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
     list.append( i18nc("@item:inmenu  The layout will not change on size changes.",
                        "&Off") );
     list.append( i18nc("@item:inmenu  The layout will adapt to the size, but only with complete groups of bytes.",
-                       "&Wrap only complete Byte Groups") );
+                       "&Wrap Only Complete Byte Groups") );
     list.append( i18nc("@item:inmenu  The layout will adapt to the size and fit in as much bytes per line as possible.",
                        "&On") );
     mResizeStyleAction->setItems( list );
@@ -84,7 +84,7 @@ ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
     list.clear();
     list.append( i18nc("@item:inmenu","&Values") );
     list.append( i18nc("@item:inmenu","&Chars") );
-    list.append( i18nc("@item:inmenu","Values &and Chars") );
+    list.append( i18nc("@item:inmenu","Values && Chars") );
     mToggleColumnsAction->setItems( list );
     connect( mToggleColumnsAction, SIGNAL(triggered(int)), SLOT(toggleValueCharColumns(int)) );
 

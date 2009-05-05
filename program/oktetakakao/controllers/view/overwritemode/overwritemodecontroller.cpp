@@ -37,9 +37,9 @@ OverwriteModeController::OverwriteModeController( KXMLGUIClient* guiClient )
     KActionCollection* actionCollection = guiClient->actionCollection();
 
     mSetOverWriteAction = actionCollection->add<KToggleAction>( "set_overwrite" );
-    const QString text = i18nc( "@option:check set the view into overwrite mode", "Set Overwrite mode" );
+    const QString text = i18nc( "@option:check set the view into overwrite mode", "Set Overwrite Mode" );
     mSetOverWriteAction->setText( text );
-    const QString checkedText = i18nc( "@option:check set the view into insert mode", "Set Insert mode" );
+    const QString checkedText = i18nc( "@option:check set the view into insert mode", "Set Insert Mode" );
     const KGuiItem checkedState( checkedText );
     mSetOverWriteAction->setCheckedState( checkedState );
     mSetOverWriteAction->setWhatsThis(

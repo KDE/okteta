@@ -71,7 +71,7 @@ KGotoOffsetDialog::KGotoOffsetDialog( GotoOffsetTool* tool, QWidget* parent )
     topLayout->setMargin( 0 );
 
     // search term
-    QGroupBox* offsetBox = new QGroupBox( i18nc("@title:group","Go to"), page );
+    QGroupBox* offsetBox = new QGroupBox( i18nc("@title:group","Go To"), page );
     topLayout->addWidget( offsetBox );
 
     QVBoxLayout* gotoBoxLayout = new QVBoxLayout;
