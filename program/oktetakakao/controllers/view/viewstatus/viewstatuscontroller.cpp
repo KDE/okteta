@@ -130,7 +130,7 @@ void ViewStatusController::fixWidths()
     }
     mOffsetLabel->setFixedWidth( largestOffsetWidth );
     mSelectionLabel->setFixedWidth( largestSelectionWidth );
-kDebug()<<"offset"<<largestOffsetWidth<<"selection"<<largestSelectionWidth;
+// kDebug()<<"offset"<<largestOffsetWidth<<"selection"<<largestSelectionWidth;
 }
 
 void ViewStatusController::setTargetModel( AbstractModel* model )
