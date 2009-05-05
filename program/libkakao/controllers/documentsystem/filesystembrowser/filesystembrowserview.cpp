@@ -26,8 +26,7 @@
 #include "filesystembrowsertool.h"
 // KDE
 #include <KUrlNavigator>
-// #include <KFilePlacesModel>
-#include <kfileplacesmodel.h>
+#include <KFilePlacesModel>
 #include <KDirOperator>
 // Qt
 #include <QtGui/QLayout>
