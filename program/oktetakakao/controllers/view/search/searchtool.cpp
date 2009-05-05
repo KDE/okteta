@@ -57,21 +57,8 @@ bool SearchTool::isApplyable() const
 
 QString SearchTool::title() const { return i18nc("@title", "Search"); }
 
-bool SearchTool::hasSelectedData() const   
-{ 
-   if( mByteArrayDisplay )
-     return mByteArrayDisplay->hasSelectedData(); 
-   else
-     return false;
-}
-
-QString SearchTool::charCodingName() const 
-{ 
-   if( mByteArrayDisplay ) 
-    return mByteArrayDisplay->charCodingName(); 
-   else 
-    return QString();
-}
+bool SearchTool::hasSelectedData()   const { return mByteArrayDisplay->hasSelectedData(); }
+QString SearchTool::charCodingName() const { return mByteArrayDisplay->charCodingName(); }
 
 void SearchTool::setTargetModel( AbstractModel* model )
 {
