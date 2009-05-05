@@ -40,7 +40,7 @@ const QStringList &KByteArrayValidator::codecNames()
     {
         list.append( i18nc("@item:inlistbox coding of the bytes as values in the hexadecimal format","Hexadecimal")  );
         list.append( i18nc("@item:inlistbox coding of the bytes as values in the decimal format",    "Decimal")      );
-        list.append( i18nc("@item:inlistbox cding of the bytes as values in the octal format",      "Octal")        );
+        list.append( i18nc("@item:inlistbox coding of the bytes as values in the octal format",      "Octal")        );
         list.append( i18nc("@item:inlistbox coding of the bytes as values in the binary format",     "Binary")       );
         list.append( i18nc("@item:inlistbox coding of the bytes as characters with the values",      "Character(s)") );
     }
@@ -182,5 +182,3 @@ KByteArrayValidator::~KByteArrayValidator()
     delete mValueCodec;
     delete mCharCodec;
 }
-
-#include "kbytearrayvalidator.moc"
