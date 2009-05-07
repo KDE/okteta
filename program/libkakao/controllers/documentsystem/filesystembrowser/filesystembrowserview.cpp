@@ -69,7 +69,7 @@ FileSystemBrowserView::FileSystemBrowserView( FileSystemBrowserTool* tool, QWidg
 
     // fill toolbar
     static const char* const ToolbarActionNames[] =
-    { "up", "back", "forward", "home", "short view", "detailed view", "tree view"  };
+    { "back", "forward", "up", "home", "short view", "detailed view", "tree view"  };
     static const int ToolbarActionNamesCount = sizeof(ToolbarActionNames) / sizeof(ToolbarActionNames[0]);
 
     for( int i = 0; i<ToolbarActionNamesCount; ++i )
