@@ -51,8 +51,8 @@
 #include <QtCore/QList>
 
 
-static const char OffsetOptionId[] = "offset";
-static const char OffsetOptionShortId[] = "o";
+// static const char OffsetOptionId[] = "offset";
+// static const char OffsetOptionShortId[] = "o";
 
 
 OktetaProgram::OktetaProgram( int argc, char *argv[] )
