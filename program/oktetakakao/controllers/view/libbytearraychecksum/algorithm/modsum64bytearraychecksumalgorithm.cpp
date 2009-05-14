@@ -56,16 +56,16 @@ bool ModSum64ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
             value += quint64( model->datum(i) ) << 32;
         ++i;
         if( i<=section.end() )
-            value += model->datum( i ) << 24;
+            value += (quint8)( model->datum(i) ) << 24;
         ++i;
         if( i<=section.end() )
-            value += model->datum( i ) << 16;
+            value += (quint8)( model->datum(i) ) << 16;
         ++i;
         if( i<=section.end() )
-            value += model->datum( i ) << 8;
+            value += (quint8)( model->datum(i) ) << 8;
         ++i;
         if( i<=section.end() )
-            value += model->datum( i );
+            value += (quint8)( model->datum(i) );
 
         modSum += value;
 #if 0

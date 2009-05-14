@@ -45,7 +45,7 @@ bool ModSum8ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
     int nextBlockEnd = section.start() + CalculatedByteCountSignalLimit;
     for( int i = section.start(); i<=section.end(); ++i )
     {
-        modSum += model->datum( i );
+        modSum += (quint8)( model->datum(i) );
 #if 0
         const uchar value = (crcBits & 0xFF) + model->datum( i );
         crcBits >>= 8;

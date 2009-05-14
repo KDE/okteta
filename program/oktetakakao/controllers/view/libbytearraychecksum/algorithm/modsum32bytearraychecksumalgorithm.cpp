@@ -44,16 +44,16 @@ bool ModSum32ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
     // TODO: move padding checks into extra code before and after loop
     for( int i = section.start(); i<=section.end(); ++i )
     {
-        quint32 value = model->datum( i ) << 24;
+        quint32 value = (quint8)( model->datum(i) ) << 24;
         ++i;
         if( i<=section.end() )
-            value += model->datum( i ) << 16;
+            value += (quint8)( model->datum(i) ) << 16;
         ++i;
         if( i<=section.end() )
-            value += model->datum( i ) << 8;
+            value += (quint8)( model->datum(i) ) << 8;
         ++i;
         if( i<=section.end() )
-            value += model->datum( i );
+            value += (quint8)( model->datum(i) );
 
         modSum += value;
 #if 0
