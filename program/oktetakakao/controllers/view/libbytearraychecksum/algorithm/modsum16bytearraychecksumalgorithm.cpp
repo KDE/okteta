@@ -43,7 +43,7 @@ bool ModSum16ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
         calculateModSumWithMachineEndianness( model, section ) :
         calculateModSumWithNonMachineEndianness( model, section );
 
-    *result = QString::number( modSum, 16 );
+    *result = QString::fromLatin1("%1").arg( modSum, 4, 16, QChar::fromLatin1('0') );
     return true;
 }
 

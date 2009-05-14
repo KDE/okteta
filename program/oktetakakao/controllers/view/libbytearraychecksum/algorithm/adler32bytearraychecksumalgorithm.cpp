@@ -58,7 +58,9 @@ bool Adler32ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
         }
     }
 
-    *result = QString::number( (b << 16) | a, 16 );
+    const quint32 sum = (b << 16) | a;
+    *result = QString::fromLatin1("%1").arg( sum, 8, 16, QChar::fromLatin1('0') );
+
     return true;
 }
 

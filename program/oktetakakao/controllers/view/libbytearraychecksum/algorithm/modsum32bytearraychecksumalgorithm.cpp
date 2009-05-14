@@ -27,7 +27,6 @@
 // KDE
 #include <KLocale>
 
-#include <KDebug>
 
 ModSum32ByteArrayChecksumAlgorithm::ModSum32ByteArrayChecksumAlgorithm()
   : AbstractByteArrayChecksumAlgorithm(
@@ -44,7 +43,7 @@ bool ModSum32ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
         calculateModSumWithMachineEndianness( model, section ) :
         calculateModSumWithNonMachineEndianness( model, section );
 
-    *result = QString::number( modSum, 16 );
+    *result = QString::fromLatin1("%1").arg( modSum, 8, 16, QChar::fromLatin1('0') );
     return true;
 }
 
@@ -70,7 +69,6 @@ quint32 ModSum32ByteArrayChecksumAlgorithm::calculateModSumWithMachineEndianness
                     value += (quint8)( model->datum(i) );
             }
         }
-kDebug() << "modSum:"<<QString::number( modSum, 16 )<<"value:"<<QString::number( value, 16 );
 
         modSum += value;
 #if 0
@@ -85,7 +83,6 @@ kDebug() << "modSum:"<<QString::number( modSum, 16 )<<"value:"<<QString::number(
         }
     }
 
-kDebug() << "result:"<<QString::number( modSum, 16 );
     return modSum;
 }
 
@@ -111,7 +108,7 @@ quint32 ModSum32ByteArrayChecksumAlgorithm::calculateModSumWithNonMachineEndiann
                     value += (quint8)( model->datum(i) ) << 24;
             }
         }
-kDebug() << "modSum:"<<QString::number( modSum, 16 )<<"value:"<<QString::number( value, 16 );
+
         modSum += value;
 
         if( i >= nextBlockEnd )
@@ -120,7 +117,7 @@ kDebug() << "modSum:"<<QString::number( modSum, 16 )<<"value:"<<QString::number(
             emit calculatedBytes( section.localIndex(i)+1 );
         }
     }
-kDebug() << "result:"<<QString::number( modSum, 16 );
+
     return modSum;
 }
 
