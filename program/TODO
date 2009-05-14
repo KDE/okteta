@@ -171,9 +171,16 @@ Done for 0.3:
 * turned Goto, Search and Replace utils into kind of tools/controllers (first step, needs more refinement)
 * added a checksum calculator tool (using also QCA2, but got just MD5 and SHA-1 from it for now, hm)
 
+Fixed after 0.3 Beta 1:
+-----------------------
+* fixed: ensure unsigned values if calculating modsum
+* fixed: make modsum algorithms endianness aware (controlled by parameter endianess)
+* fixed: make change of selection also emitted on mouse move with pressed button
+
 Next to work on:
 ----------------------------------
 Important:
+* bookmark is not painted correctly if cursor moves from it
 * width calculation for resize seems to need to include some margins
 * old wrong sized cursor picture gets painted on zoom change
 * QActionGroups are cleared on setupGui, e.g. if toolbar gets edited
