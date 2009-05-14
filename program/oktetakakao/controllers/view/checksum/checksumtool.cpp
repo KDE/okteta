@@ -187,6 +187,18 @@ void ChecksumTool::setAlgorithm( int algorithmId )
     emit isApplyableChanged( isApplyable() );
 }
 
+// TODO: hack!
+// better would be to store the parameter set used for the source and compare if equal
+// this hack does the same, except for that the source will never be uptodate
+void ChecksumTool::resetSourceTool()
+{
+    mSourceAlgorithmId = -1;
+
+    checkUptoDate();
+    emit uptodateChanged( mChecksumUptodate );
+    emit isApplyableChanged( isApplyable() );
+}
+
 void ChecksumTool::onSelectionChanged( bool hasSelection )
 {
 // TODO: could be quicker

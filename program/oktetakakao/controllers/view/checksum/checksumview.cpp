@@ -155,7 +155,10 @@ void ChecksumView::onOperationChange( int index )
 {
     QWidget* oldWidget = mParameterSetEditStack->currentWidget();
     if( oldWidget )
+    {
         oldWidget->disconnect( this );
+        oldWidget->disconnect( mTool );
+    }
 
     mTool->setAlgorithm( index );
     mParameterSetEditStack->setCurrentIndex( index );
@@ -166,6 +169,9 @@ void ChecksumView::onOperationChange( int index )
     {
         connect( parametersetEdit, SIGNAL(validityChanged( bool )),
                  SLOT(onValidityChanged( bool )) );
+        // TODO: hack, see checksum source
+        connect( parametersetEdit, SIGNAL(valuesChanged()),
+                 mTool, SLOT(resetSourceTool()) );
         onValidityChanged( parametersetEdit->isValid() );
     }
 }

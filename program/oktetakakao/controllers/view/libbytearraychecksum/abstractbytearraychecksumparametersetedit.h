@@ -47,6 +47,8 @@ class AbstractByteArrayChecksumParameterSetEdit : public QWidget
 
   Q_SIGNALS:
     void validityChanged( bool isValid );
+    // TODO: hack, see checksum source
+    void valuesChanged();
 
   protected:
     class Private;

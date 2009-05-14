@@ -41,6 +41,8 @@ ModSumByteArrayChecksumParameterSetEdit::ModSumByteArrayChecksumParameterSetEdit
     mEndiannessComboBox = new KComboBox( this );
     mEndiannessComboBox->addItem( i18nc("@item:inlistbox","Little-endian") ); // add first for index
     mEndiannessComboBox->addItem( i18nc("@item:inlistbox","Big-endian") );    // add second for index
+    connect( mEndiannessComboBox, SIGNAL(activated( int )),
+             SIGNAL(valuesChanged()) );
 
     baseLayout->addWidget( mEndiannessComboBox );
     baseLayout->addStretch( 10 );

@@ -70,6 +70,8 @@ class ChecksumTool : public AbstractTool
     void calculateChecksum();
 
     void setAlgorithm( int algorithmId );
+    // TODO: hack, see checksum source
+    void resetSourceTool();
 
   Q_SIGNALS:
     void checksumChanged( const QString& checksum );
