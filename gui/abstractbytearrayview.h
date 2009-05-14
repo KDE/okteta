@@ -329,6 +329,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     void readOnlyChanged( bool isReadOnly );
     /** selection has changed */
     void selectionChanged( bool hasSelection );
+    void selectionChanged( const KHE::Section& selection );
     /** there is a cut available or not */
     void cutAvailable( bool Really );
     /** there is a copy available or not */

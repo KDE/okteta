@@ -1101,6 +1101,7 @@ void ByteArrayRowViewPrivate::mouseReleaseEvent( QMouseEvent* mouseEvent )
     if( !mOverWrite ) emit q->cutAvailable( mTableRanges->hasSelection() );
     emit q->copyAvailable( mTableRanges->hasSelection() );
     emit q->selectionChanged( mTableRanges->hasSelection() );
+    emit q->selectionChanged( mTableRanges->selection() );
 }
 
 
@@ -1205,6 +1206,8 @@ void ByteArrayRowViewPrivate::handleMouseMove( const QPoint& point ) // handles 
 
     unpauseCursor();
     emit q->cursorPositionChanged( cursorPosition() );
+    emit q->selectionChanged( mTableRanges->hasSelection() );
+    emit q->selectionChanged( mTableRanges->selection() );
 }
 
 

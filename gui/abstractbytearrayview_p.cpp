@@ -519,9 +519,11 @@ void AbstractByteArrayViewPrivate::selectAll( bool select )
     unpauseCursor();
 
     const bool hasSelection = mTableRanges->hasSelection();
+    const KHE::Section selection = mTableRanges->selection();
     if( !mOverWrite ) emit q->cutAvailable( hasSelection );
     emit q->copyAvailable( hasSelection );
     emit q->selectionChanged( hasSelection );
+    emit q->selectionChanged( selection );
     emit q->cursorPositionChanged( cursorPosition() );
     q->viewport()->setCursor( isEffectiveReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor );
 }
@@ -547,9 +549,11 @@ void AbstractByteArrayViewPrivate::setCursorPosition( int index, bool behind )
         q->viewport()->setCursor( isEffectiveReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor );
 
         const bool hasSelection = mTableRanges->hasSelection();
+        const KHE::Section selection = mTableRanges->selection();
         if( !mOverWrite ) emit q->cutAvailable( hasSelection );
         emit q->copyAvailable( hasSelection );
         emit q->selectionChanged( hasSelection );
+        emit q->selectionChanged( selection );
     }
     ensureCursorVisible();
 
@@ -746,6 +750,7 @@ void AbstractByteArrayViewPrivate::insert( const QByteArray& data )
     }
 
     emit q->selectionChanged( mTableRanges->hasSelection() );
+    emit q->selectionChanged( mTableRanges->selection() );
 }
 
 

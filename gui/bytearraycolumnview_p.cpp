@@ -1136,6 +1136,7 @@ void ByteArrayColumnViewPrivate::mouseReleaseEvent( QMouseEvent* mouseEvent )
     if( !mOverWrite ) emit q->cutAvailable( mTableRanges->hasSelection() );
     emit q->copyAvailable( mTableRanges->hasSelection() );
     emit q->selectionChanged( mTableRanges->hasSelection() );
+    emit q->selectionChanged( mTableRanges->selection() );
 }
 
 
@@ -1240,6 +1241,8 @@ void ByteArrayColumnViewPrivate::handleMouseMove( const QPoint& point ) // handl
 
     unpauseCursor();
     emit q->cursorPositionChanged( cursorPosition() );
+    emit q->selectionChanged( mTableRanges->hasSelection() );
+    emit q->selectionChanged( mTableRanges->selection() );
 }
 
 
