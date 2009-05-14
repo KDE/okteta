@@ -55,10 +55,10 @@ quint16 ModSum16ByteArrayChecksumAlgorithm::calculateModSumWithMachineEndianness
     // TODO: move padding checks into extra code before and after loop
     for( int i = section.start(); i<=section.end(); ++i )
     {
-        quint16 value = (quint16)( model->datum(i) ) << 8;
+        quint16 value = (quint8)( model->datum(i) ) << 8;
         ++i;
         if( i<=section.end() )
-            value += (quint16)( model->datum(i) );
+            value += (quint8)( model->datum(i) );
 
         modSum += value;
 #if 0
@@ -84,10 +84,10 @@ quint16 ModSum16ByteArrayChecksumAlgorithm::calculateModSumWithNonMachineEndiann
     // TODO: move padding checks into extra code before and after loop
     for( int i = section.start(); i<=section.end(); ++i )
     {
-        quint16 value = (quint16)( model->datum(i) );
+        quint16 value = (quint8)( model->datum(i) );
         ++i;
         if( i<=section.end() )
-            value += (quint16)( model->datum(i) ) << 8;
+            value += (quint8)( model->datum(i) ) << 8;
 
         modSum += value;
 

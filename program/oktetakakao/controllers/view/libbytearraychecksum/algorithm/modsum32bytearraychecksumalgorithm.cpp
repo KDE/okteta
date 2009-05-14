@@ -56,18 +56,18 @@ quint32 ModSum32ByteArrayChecksumAlgorithm::calculateModSumWithMachineEndianness
     // TODO: move padding checks into extra code before and after loop
     for( int i = section.start(); i<=section.end(); ++i )
     {
-        quint32 value = (quint32)( model->datum(i) ) << 24;
+        quint32 value = (quint8)( model->datum(i) ) << 24;
         ++i;
         if( i<=section.end() )
         {
-            value += (quint32)( model->datum(i) ) << 16;
+            value += (quint8)( model->datum(i) ) << 16;
             ++i;
             if( i<=section.end() )
             {
-                value += (quint32)( model->datum(i) ) << 8;
+                value += (quint8)( model->datum(i) ) << 8;
                 ++i;
                 if( i<=section.end() )
-                    value += (quint32)( model->datum(i) );
+                    value += (quint8)( model->datum(i) );
             }
         }
 kDebug() << "modSum:"<<QString::number( modSum, 16 )<<"value:"<<QString::number( value, 16 );
@@ -97,18 +97,18 @@ quint32 ModSum32ByteArrayChecksumAlgorithm::calculateModSumWithNonMachineEndiann
     // TODO: move padding checks into extra code before and after loop
     for( int i = section.start(); i<=section.end(); ++i )
     {
-        quint32 value = (quint32)( model->datum(i) );
+        quint32 value = (quint8)( model->datum(i) );
         ++i;
         if( i<=section.end() )
         {
-            value += (quint32)( model->datum(i) ) << 8;
+            value += (quint8)( model->datum(i) ) << 8;
             ++i;
             if( i<=section.end() )
             {
-                value += (quint32)( model->datum(i) ) << 16;
+                value += (quint8)( model->datum(i) ) << 16;
                 ++i;
                 if( i<=section.end() )
-                    value += (quint32)( model->datum(i) ) << 24;
+                    value += (quint8)( model->datum(i) ) << 24;
             }
         }
 kDebug() << "modSum:"<<QString::number( modSum, 16 )<<"value:"<<QString::number( value, 16 );

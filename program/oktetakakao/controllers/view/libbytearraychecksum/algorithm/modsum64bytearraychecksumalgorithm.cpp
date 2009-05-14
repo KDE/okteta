@@ -55,34 +55,34 @@ quint64 ModSum64ByteArrayChecksumAlgorithm::calculateModSumWithMachineEndianness
     // TODO: move padding checks into extra code before and after loop
     for( int i = section.start(); i<=section.end(); ++i )
     {
-        quint64 value = (quint64)( model->datum(i) ) << 56;
+        quint64 value = (quint64)( (quint8)(model->datum( i )) ) << 56;
         ++i;
         if( i<=section.end() )
         {
-            value += (quint64)( model->datum(i) ) << 48;
+            value += (quint64)( (quint8)(model->datum( i )) ) << 48;
             ++i;
             if( i<=section.end() )
             {
-                value += (quint64)( model->datum(i) ) << 40;
+                value += (quint64)( (quint8)(model->datum( i )) ) << 40;
                 ++i;
                 if( i<=section.end() )
                 {
-                    value += (quint64)( model->datum(i) ) << 32;
+                    value += (quint64)( (quint8)(model->datum( i )) ) << 32;
                     ++i;
                     if( i<=section.end() )
                     {
-                        value += (quint64)( model->datum(i) ) << 24;
+                        value += (quint8)( model->datum(i) ) << 24;
                         ++i;
                         if( i<=section.end() )
                         {
-                            value += (quint64)( model->datum(i) ) << 16;
+                            value += (quint8)( model->datum(i) ) << 16;
                             ++i;
                             if( i<=section.end() )
                             {
-                                value += (quint64)( model->datum(i) ) << 8;
+                                value += (quint8)( model->datum(i) ) << 8;
                                 ++i;
                                 if( i<=section.end() )
-                                    value += (quint64)( model->datum(i) );
+                                    value += (quint8)( model->datum(i) );
                             }
                         }
                     }
@@ -114,34 +114,34 @@ quint64 ModSum64ByteArrayChecksumAlgorithm::calculateModSumWithNonMachineEndiann
     // TODO: move padding checks into extra code before and after loop
     for( int i = section.start(); i<=section.end(); ++i )
     {
-        quint64 value = (quint64)( model->datum(i) );
+        quint64 value = (quint8)( model->datum(i) );
         ++i;
         if( i<=section.end() )
         {
-            value += (quint64)( model->datum(i) ) << 8;
+            value += (quint8)( model->datum(i) ) << 8;
             ++i;
             if( i<=section.end() )
             {
-                value += (quint64)( model->datum(i) ) << 16;
+                value += (quint8)( model->datum(i) ) << 16;
                 ++i;
                 if( i<=section.end() )
                 {
-                    value += (quint64)( model->datum(i) ) << 24;
+                    value += (quint8)( model->datum(i) ) << 24;
                     ++i;
                     if( i<=section.end() )
                     {
-                        value += (quint64)( model->datum(i) ) << 32;
+                        value += (quint64)( (quint8)(model->datum( i )) ) << 32;
                         ++i;
                         if( i<=section.end() )
                         {
-                            value += (quint64)( model->datum(i) ) << 40;
+                            value += (quint64)( (quint8)(model->datum( i )) ) << 40;
                             ++i;
                             if( i<=section.end() )
                             {
-                                value += (quint64)( model->datum(i) ) << 48;
+                                value += (quint64)( (quint8)(model->datum( i )) ) << 48;
                                 ++i;
                                 if( i<=section.end() )
-                                    value += (quint64)( model->datum(i) ) << 56;
+                                    value += (quint64)( (quint8)(model->datum( i )) ) << 56;
                             }
                         }
                     }
