@@ -80,7 +80,7 @@ FileSystemBrowserView::FileSystemBrowserView( FileSystemBrowserTool* tool, QWidg
     }
     QAction* syncDirAction = mActionCollection->addAction( "sync_dir" );
     syncDirAction->setIcon( KIcon("dirsync") );
-    syncDirAction->setText( i18nc("", "Folder of Current Document") );
+    syncDirAction->setText( i18nc("@action:intoolbar", "Folder of Current Document") );
     connect( syncDirAction, SIGNAL(triggered()), SLOT(syncCurrentDocumentDirectory()) );
     connect( mTool, SIGNAL(hasCurrentUrlChanged( bool )), syncDirAction, SLOT(setEnabled( bool )) );
     syncDirAction->setEnabled( mTool->hasCurrentUrl() );
