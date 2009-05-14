@@ -25,6 +25,7 @@
 
 // lib
 #include "abstractbytearraychecksumparameterset.h"
+#include "endianness.h"
 
 
 class ModSumByteArrayChecksumParameterSet : public AbstractByteArrayChecksumParameterSet
@@ -37,16 +38,13 @@ class ModSumByteArrayChecksumParameterSet : public AbstractByteArrayChecksumPara
     virtual QString id() const;
 
   public:
-//     void setGroupSize( int groupSize );
-//     void setMoveBitWidth( int moveBitWidth );
+    void setEndianess( Endianess endianess );
 
   public:
-//     int groupSize() const;
-//     int moveBitWidth() const;
+    Endianess endianess() const;
 
   protected:
-//     int mGroupSize;
-//     int mMoveBitWidth;
+    Endianess mEndianess;
 };
 
 #endif

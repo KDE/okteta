@@ -38,16 +38,27 @@ AbstractByteArrayChecksumParameterSet* ModSum16ByteArrayChecksumAlgorithm::param
 bool ModSum16ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
                                                             const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
 {
+    const bool useMachineEndianess = ( mParameterSet.endianess() == ThisMachineEndianness );
+    const quint16 modSum = useMachineEndianess ?
+        calculateModSumWithMachineEndianness( model, section ) :
+        calculateModSumWithNonMachineEndianness( model, section );
+
+    *result = QString::number( modSum, 16 );
+    return true;
+}
+
+quint16 ModSum16ByteArrayChecksumAlgorithm::calculateModSumWithMachineEndianness( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
+{
     quint16 modSum = 0x0000;
     int nextBlockEnd = section.start() + CalculatedByteCountSignalLimit;
 
     // TODO: move padding checks into extra code before and after loop
     for( int i = section.start(); i<=section.end(); ++i )
     {
-        quint16 value = (quint8)( model->datum(i) ) << 8;
+        quint16 value = (quint16)( model->datum(i) ) << 8;
         ++i;
         if( i<=section.end() )
-            value += (quint8)( model->datum(i) );
+            value += (quint16)( model->datum(i) );
 
         modSum += value;
 #if 0
@@ -62,8 +73,32 @@ bool ModSum16ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
         }
     }
 
-    *result = QString::number( modSum, 16 );
-    return true;
+    return modSum;
+}
+
+quint16 ModSum16ByteArrayChecksumAlgorithm::calculateModSumWithNonMachineEndianness( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
+{
+    quint16 modSum = 0x0000;
+    int nextBlockEnd = section.start() + CalculatedByteCountSignalLimit;
+
+    // TODO: move padding checks into extra code before and after loop
+    for( int i = section.start(); i<=section.end(); ++i )
+    {
+        quint16 value = (quint16)( model->datum(i) );
+        ++i;
+        if( i<=section.end() )
+            value += (quint16)( model->datum(i) ) << 8;
+
+        modSum += value;
+
+        if( i >= nextBlockEnd )
+        {
+            nextBlockEnd += CalculatedByteCountSignalLimit;
+            emit calculatedBytes( section.localIndex(i)+1 );
+        }
+    }
+
+    return modSum;
 }
 
 ModSum16ByteArrayChecksumAlgorithm::~ModSum16ByteArrayChecksumAlgorithm() {}

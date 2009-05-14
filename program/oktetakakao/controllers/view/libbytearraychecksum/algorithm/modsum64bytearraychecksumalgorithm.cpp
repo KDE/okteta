@@ -38,34 +38,57 @@ AbstractByteArrayChecksumParameterSet* ModSum64ByteArrayChecksumAlgorithm::param
 bool ModSum64ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
                                                             const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
 {
+    const bool useMachineEndianess = ( mParameterSet.endianess() == ThisMachineEndianness );
+    const quint64 modSum = useMachineEndianess ?
+        calculateModSumWithMachineEndianness( model, section ) :
+        calculateModSumWithNonMachineEndianness( model, section );
+
+    *result = QString::number( modSum, 16 );
+    return true;
+}
+
+quint64 ModSum64ByteArrayChecksumAlgorithm::calculateModSumWithMachineEndianness( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
+{
     quint64 modSum = 0x00000000;
     int nextBlockEnd = section.start() + CalculatedByteCountSignalLimit;
 
     // TODO: move padding checks into extra code before and after loop
     for( int i = section.start(); i<=section.end(); ++i )
     {
-        quint64 value = quint64( model->datum(i) ) << 56;
+        quint64 value = (quint64)( model->datum(i) ) << 56;
         ++i;
         if( i<=section.end() )
-            value += quint64( model->datum(i) ) << 48;
-        ++i;
-        if( i<=section.end() )
-            value += quint64( model->datum(i) ) << 40;
-        ++i;
-        if( i<=section.end() )
-            value += quint64( model->datum(i) ) << 32;
-        ++i;
-        if( i<=section.end() )
-            value += (quint8)( model->datum(i) ) << 24;
-        ++i;
-        if( i<=section.end() )
-            value += (quint8)( model->datum(i) ) << 16;
-        ++i;
-        if( i<=section.end() )
-            value += (quint8)( model->datum(i) ) << 8;
-        ++i;
-        if( i<=section.end() )
-            value += (quint8)( model->datum(i) );
+        {
+            value += (quint64)( model->datum(i) ) << 48;
+            ++i;
+            if( i<=section.end() )
+            {
+                value += (quint64)( model->datum(i) ) << 40;
+                ++i;
+                if( i<=section.end() )
+                {
+                    value += (quint64)( model->datum(i) ) << 32;
+                    ++i;
+                    if( i<=section.end() )
+                    {
+                        value += (quint64)( model->datum(i) ) << 24;
+                        ++i;
+                        if( i<=section.end() )
+                        {
+                            value += (quint64)( model->datum(i) ) << 16;
+                            ++i;
+                            if( i<=section.end() )
+                            {
+                                value += (quint64)( model->datum(i) ) << 8;
+                                ++i;
+                                if( i<=section.end() )
+                                    value += (quint64)( model->datum(i) );
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         modSum += value;
 #if 0
@@ -80,8 +103,66 @@ bool ModSum64ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
         }
     }
 
-    *result = QString::number( modSum, 16 );
-    return true;
+    return modSum;
+}
+
+quint64 ModSum64ByteArrayChecksumAlgorithm::calculateModSumWithNonMachineEndianness( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
+{
+    quint64 modSum = 0x00000000;
+    int nextBlockEnd = section.start() + CalculatedByteCountSignalLimit;
+
+    // TODO: move padding checks into extra code before and after loop
+    for( int i = section.start(); i<=section.end(); ++i )
+    {
+        quint64 value = (quint64)( model->datum(i) );
+        ++i;
+        if( i<=section.end() )
+        {
+            value += (quint64)( model->datum(i) ) << 8;
+            ++i;
+            if( i<=section.end() )
+            {
+                value += (quint64)( model->datum(i) ) << 16;
+                ++i;
+                if( i<=section.end() )
+                {
+                    value += (quint64)( model->datum(i) ) << 24;
+                    ++i;
+                    if( i<=section.end() )
+                    {
+                        value += (quint64)( model->datum(i) ) << 32;
+                        ++i;
+                        if( i<=section.end() )
+                        {
+                            value += (quint64)( model->datum(i) ) << 40;
+                            ++i;
+                            if( i<=section.end() )
+                            {
+                                value += (quint64)( model->datum(i) ) << 48;
+                                ++i;
+                                if( i<=section.end() )
+                                    value += (quint64)( model->datum(i) ) << 56;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        modSum += value;
+#if 0
+        const uchar value = (crcBits & 0xFF) + model->datum( i );
+        crcBits >>= 8;
+        crcBits ^= lookupTable[value];
+#endif
+        if( i >= nextBlockEnd )
+        {
+            nextBlockEnd += CalculatedByteCountSignalLimit;
+            emit calculatedBytes( section.localIndex(i)+1 );
+        }
+    }
+
+    return modSum;
 }
 
 ModSum64ByteArrayChecksumAlgorithm::~ModSum64ByteArrayChecksumAlgorithm() {}

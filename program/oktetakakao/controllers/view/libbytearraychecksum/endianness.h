@@ -20,30 +20,25 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MODSUMBYTEARRAYCHECKSUMPARAMETERSETEDIT_H
-#define MODSUMBYTEARRAYCHECKSUMPARAMETERSETEDIT_H
+#ifndef ENDIANESS_H
+#define ENDIANESS_H
 
-// lib
-#include "abstractbytearraychecksumparametersetedit.h"
-
-class KComboBox;
+// Qt
+#include <QtCore/Qt>
 
 
-class ModSumByteArrayChecksumParameterSetEdit : public AbstractByteArrayChecksumParameterSetEdit
+enum Endianess
 {
-  Q_OBJECT
-
-  public:
-    ModSumByteArrayChecksumParameterSetEdit( QWidget* parent = 0 );
-    virtual ~ModSumByteArrayChecksumParameterSetEdit();
-
-  public: // AbstractByteArrayFilterParameterSetEdit API
-    virtual void setParameterSet( const AbstractByteArrayChecksumParameterSet* parameterSet );
-    virtual void getParameterSet( AbstractByteArrayChecksumParameterSet* parameterSet ) const;
-    virtual bool isValid() const;
-
-  protected:
-    KComboBox* mEndiannessComboBox;
+    LittleEndian = 0, // Intel, Alpha, ...
+    BigEndian =    1 // Sun, Motorola, ...
 };
+
+
+static const Endianess ThisMachineEndianness =
+#if Q_BYTE_ORDER == Q_LITTLE_ENDIAN
+    LittleEndian;
+#else
+    BigEndian;
+#endif
 
 #endif

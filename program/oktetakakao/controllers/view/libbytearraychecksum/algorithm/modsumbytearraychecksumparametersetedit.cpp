@@ -26,83 +26,44 @@
 #include "modsumbytearraychecksumparameterset.h"
 // KDE
 #include <KLocale>
+#include <KComboBox>
 // Qt
 #include <QtGui/QLayout>
-#include <QtGui/QLabel>
-#include <QtGui/QSpinBox>
 
 
 ModSumByteArrayChecksumParameterSetEdit::ModSumByteArrayChecksumParameterSetEdit( QWidget* parent )
   : AbstractByteArrayChecksumParameterSetEdit( parent )
 {
-#if 0
-    QVBoxLayout *baseLayout = new QVBoxLayout( this );
+    QVBoxLayout* baseLayout = new QVBoxLayout( this );
     baseLayout->setMargin( 0 );
 
-    mGroupSizeSpinBox = new QSpinBox( this );
-    mGroupSizeSpinBox->setRange( 1, INT_MAX );
+    // TODO KDE4.4: add label
+    mEndiannessComboBox = new KComboBox( this );
+    mEndiannessComboBox->addItem( i18nc("@item:inlistbox","Little-endian") ); // add first for index
+    mEndiannessComboBox->addItem( i18nc("@item:inlistbox","Big-endian") );    // add second for index
 
-    QLabel *label = new QLabel( i18nc("@label:spinbox number of bytes the rotation is done within",
-                                      "&Group size [bytes]"),
-                                this );
-    label->setBuddy( mGroupSizeSpinBox );
-    const QString groupSizeWhatsThis =
-        i18nc( "@info:whatsthis",
-               "Control the number of bytes within which each rotation is made." );
-    label->setWhatsThis( groupSizeWhatsThis );
-    mGroupSizeSpinBox->setWhatsThis( groupSizeWhatsThis );
-
-    baseLayout->addWidget( label );
-    baseLayout->addWidget( mGroupSizeSpinBox );
-
-    mMoveBitWidthSpinBox = new QSpinBox( this );
-    mMoveBitWidthSpinBox->setRange( INT_MIN, INT_MAX );
-    connect( mMoveBitWidthSpinBox, SIGNAL(valueChanged( int )), SLOT(onValueChanged( int )) );
-
-    label = new QLabel( i18nc("@label:spinbox","S&hift width [bits]"), this );
-    label->setBuddy( mMoveBitWidthSpinBox );
-    const QString moveBitWidthWhatsThis =
-        i18nc( "@info:whatsthis",
-               "Control the width of the shift. Positive numbers move the bits to the right, negative to the left." );
-    label->setWhatsThis( moveBitWidthWhatsThis );
-    mMoveBitWidthSpinBox->setWhatsThis( moveBitWidthWhatsThis );
-
-    baseLayout->addWidget( label );
-    baseLayout->addWidget( mMoveBitWidthSpinBox );
+    baseLayout->addWidget( mEndiannessComboBox );
     baseLayout->addStretch( 10 );
-#endif
 }
 
-bool ModSumByteArrayChecksumParameterSetEdit::isValid() const { return true; } //mMoveBitWidthSpinBox->value() != 0; }
+bool ModSumByteArrayChecksumParameterSetEdit::isValid() const { return true; }
 
-void ModSumByteArrayChecksumParameterSetEdit::setParameterSet( const AbstractByteArrayChecksumParameterSet *parameterSet )
+void ModSumByteArrayChecksumParameterSetEdit::setParameterSet( const AbstractByteArrayChecksumParameterSet* parameterSet )
 {
-#if 0
-    const RotateByteArrayFilterParameterSet *rotateParameterSet =
-        static_cast<const RotateByteArrayFilterParameterSet *>( parameterSet );
+    const ModSumByteArrayChecksumParameterSet* modSumParameterSet =
+        static_cast<const ModSumByteArrayChecksumParameterSet *>( parameterSet );
 
-    mGroupSizeSpinBox->setValue( rotateParameterSet->groupSize() );
-    mMoveBitWidthSpinBox->setValue( rotateParameterSet->moveBitWidth() );
-#endif
+    mEndiannessComboBox->setCurrentIndex( modSumParameterSet->endianess() );
 }
 
 void ModSumByteArrayChecksumParameterSetEdit::getParameterSet( AbstractByteArrayChecksumParameterSet* parameterSet ) const
 {
-#if 0
-    RotateByteArrayFilterParameterSet *rotateParameterSet =
-        static_cast<RotateByteArrayFilterParameterSet *>( parameterSet );
+    ModSumByteArrayChecksumParameterSet* modSumParameterSet =
+        static_cast<ModSumByteArrayChecksumParameterSet *>( parameterSet );
 
-    rotateParameterSet->setGroupSize( mGroupSizeSpinBox->value() );
-    rotateParameterSet->setMoveBitWidth( mMoveBitWidthSpinBox->value() );
-#endif
+    modSumParameterSet->setEndianess( static_cast<Endianess>( mEndiannessComboBox->currentIndex() ) );
 }
 
-#if 0
-void ModSumByteArrayChecksumParameterSetEdit::onValueChanged( int value )
-{
-    emit validityChanged( value != 0 );
-}
-#endif
 
 ModSumByteArrayChecksumParameterSetEdit::~ModSumByteArrayChecksumParameterSetEdit()
 {}

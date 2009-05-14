@@ -40,6 +40,10 @@ class ModSum32ByteArrayChecksumAlgorithm : public AbstractByteArrayChecksumAlgor
     virtual AbstractByteArrayChecksumParameterSet* parameterSet();
 
   protected:
+    quint32 calculateModSumWithMachineEndianness( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const;
+    quint32 calculateModSumWithNonMachineEndianness( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const;
+
+  protected:
     ModSumByteArrayChecksumParameterSet mParameterSet;
 };
 

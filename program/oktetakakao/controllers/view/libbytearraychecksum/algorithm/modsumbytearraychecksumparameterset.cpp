@@ -27,17 +27,15 @@
 
 
 ModSumByteArrayChecksumParameterSet::ModSumByteArrayChecksumParameterSet()
+  : mEndianess( ThisMachineEndianness )
 {}
 
 QString ModSumByteArrayChecksumParameterSet::id() const { return QString::fromLatin1("ModSum"); }
 
-#if 0
-int ModSumByteArrayChecksumParameterSet::groupSize() const { return mGroupSize; }
-int ModSumByteArrayChecksumParameterSet::moveBitWidth() const { return mMoveBitWidth; }
+Endianess ModSumByteArrayChecksumParameterSet::endianess() const { return mEndianess; }
 
-void ModSumByteArrayChecksumParameterSet::setGroupSize( int groupSize ) { mGroupSize = groupSize; }
-void ModSumByteArrayChecksumParameterSet::setMoveBitWidth( int moveBitWidth ) { mMoveBitWidth = moveBitWidth; }
-#endif
+void ModSumByteArrayChecksumParameterSet::setEndianess( Endianess endianess ) { mEndianess = endianess; }
+
 
 ModSumByteArrayChecksumParameterSet::~ModSumByteArrayChecksumParameterSet()
 {

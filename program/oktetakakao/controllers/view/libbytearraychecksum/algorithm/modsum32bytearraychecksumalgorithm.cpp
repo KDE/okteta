@@ -27,6 +27,7 @@
 // KDE
 #include <KLocale>
 
+#include <KDebug>
 
 ModSum32ByteArrayChecksumAlgorithm::ModSum32ByteArrayChecksumAlgorithm()
   : AbstractByteArrayChecksumAlgorithm(
@@ -38,22 +39,38 @@ AbstractByteArrayChecksumParameterSet* ModSum32ByteArrayChecksumAlgorithm::param
 bool ModSum32ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
                                                             const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
 {
+    const bool useMachineEndianess = ( mParameterSet.endianess() == ThisMachineEndianness );
+    const quint32 modSum = useMachineEndianess ?
+        calculateModSumWithMachineEndianness( model, section ) :
+        calculateModSumWithNonMachineEndianness( model, section );
+
+    *result = QString::number( modSum, 16 );
+    return true;
+}
+
+quint32 ModSum32ByteArrayChecksumAlgorithm::calculateModSumWithMachineEndianness( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
+{
     quint32 modSum = 0x000000;
     int nextBlockEnd = section.start() + CalculatedByteCountSignalLimit;
 
     // TODO: move padding checks into extra code before and after loop
     for( int i = section.start(); i<=section.end(); ++i )
     {
-        quint32 value = (quint8)( model->datum(i) ) << 24;
+        quint32 value = (quint32)( model->datum(i) ) << 24;
         ++i;
         if( i<=section.end() )
-            value += (quint8)( model->datum(i) ) << 16;
-        ++i;
-        if( i<=section.end() )
-            value += (quint8)( model->datum(i) ) << 8;
-        ++i;
-        if( i<=section.end() )
-            value += (quint8)( model->datum(i) );
+        {
+            value += (quint32)( model->datum(i) ) << 16;
+            ++i;
+            if( i<=section.end() )
+            {
+                value += (quint32)( model->datum(i) ) << 8;
+                ++i;
+                if( i<=section.end() )
+                    value += (quint32)( model->datum(i) );
+            }
+        }
+kDebug() << "modSum:"<<QString::number( modSum, 16 )<<"value:"<<QString::number( value, 16 );
 
         modSum += value;
 #if 0
@@ -68,8 +85,43 @@ bool ModSum32ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
         }
     }
 
-    *result = QString::number( modSum, 16 );
-    return true;
+kDebug() << "result:"<<QString::number( modSum, 16 );
+    return modSum;
+}
+
+quint32 ModSum32ByteArrayChecksumAlgorithm::calculateModSumWithNonMachineEndianness( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
+{
+    quint32 modSum = 0x000000;
+    int nextBlockEnd = section.start() + CalculatedByteCountSignalLimit;
+
+    // TODO: move padding checks into extra code before and after loop
+    for( int i = section.start(); i<=section.end(); ++i )
+    {
+        quint32 value = (quint32)( model->datum(i) );
+        ++i;
+        if( i<=section.end() )
+        {
+            value += (quint32)( model->datum(i) ) << 8;
+            ++i;
+            if( i<=section.end() )
+            {
+                value += (quint32)( model->datum(i) ) << 16;
+                ++i;
+                if( i<=section.end() )
+                    value += (quint32)( model->datum(i) ) << 24;
+            }
+        }
+kDebug() << "modSum:"<<QString::number( modSum, 16 )<<"value:"<<QString::number( value, 16 );
+        modSum += value;
+
+        if( i >= nextBlockEnd )
+        {
+            nextBlockEnd += CalculatedByteCountSignalLimit;
+            emit calculatedBytes( section.localIndex(i)+1 );
+        }
+    }
+kDebug() << "result:"<<QString::number( modSum, 16 );
+    return modSum;
 }
 
 ModSum32ByteArrayChecksumAlgorithm::~ModSum32ByteArrayChecksumAlgorithm() {}
