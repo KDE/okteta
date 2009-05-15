@@ -45,8 +45,6 @@ FileSystemBrowserView::FileSystemBrowserView( FileSystemBrowserTool* tool, QWidg
     layout->setSpacing( 0 );
 
     // tool bar
-    mActionCollection = new KActionCollection( this );
-
     mToolbar = new KToolBar( this );
     mToolbar->setMovable( false );
     mToolbar->setToolButtonStyle( Qt::ToolButtonIconOnly );
@@ -72,19 +70,21 @@ FileSystemBrowserView::FileSystemBrowserView( FileSystemBrowserTool* tool, QWidg
     { "back", "forward", "up", "home", "short view", "detailed view", "tree view"  };
     static const int ToolbarActionNamesCount = sizeof(ToolbarActionNames) / sizeof(ToolbarActionNames[0]);
 
+    const KActionCollection* dirOperatorActionCollection = mDirOperator->actionCollection();
     for( int i = 0; i<ToolbarActionNamesCount; ++i )
     {
-        QAction* action = mDirOperator->actionCollection()->action( ToolbarActionNames[i] );
+        QAction* action = dirOperatorActionCollection->action( ToolbarActionNames[i] );
         if( action )
             mToolbar->addAction( action );
     }
+
+    mActionCollection = new KActionCollection( this );
     QAction* syncDirAction = mActionCollection->addAction( "sync_dir" );
     syncDirAction->setIcon( KIcon("dirsync") );
     syncDirAction->setText( i18nc("@action:intoolbar", "Folder of Current Document") );
     connect( syncDirAction, SIGNAL(triggered()), SLOT(syncCurrentDocumentDirectory()) );
     connect( mTool, SIGNAL(hasCurrentUrlChanged( bool )), syncDirAction, SLOT(setEnabled( bool )) );
     syncDirAction->setEnabled( mTool->hasCurrentUrl() );
-
     mToolbar->addAction( syncDirAction );
 }
 
