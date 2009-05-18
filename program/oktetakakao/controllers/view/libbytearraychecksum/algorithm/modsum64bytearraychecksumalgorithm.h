@@ -40,8 +40,8 @@ class ModSum64ByteArrayChecksumAlgorithm : public AbstractByteArrayChecksumAlgor
     virtual AbstractByteArrayChecksumParameterSet* parameterSet();
 
   protected:
-    quint64 calculateModSumWithMachineEndianness( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const;
-    quint64 calculateModSumWithNonMachineEndianness( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const;
+    quint64 calculateModSumWithBigEndian( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const;
+    quint64 calculateModSumWithLittleEndian( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const;
 
   protected:
     ModSumByteArrayChecksumParameterSet mParameterSet;

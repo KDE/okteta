@@ -26,6 +26,8 @@
 #include <abstractbytearraymodel.h>
 // KDE
 #include <KLocale>
+// Qt
+#include <QtCore/QtEndian>
 
 
 ModSum64ByteArrayChecksumAlgorithm::ModSum64ByteArrayChecksumAlgorithm()
@@ -38,16 +40,21 @@ AbstractByteArrayChecksumParameterSet* ModSum64ByteArrayChecksumAlgorithm::param
 bool ModSum64ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
                                                             const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
 {
-    const bool useMachineEndianess = ( mParameterSet.endianess() == ThisMachineEndianness );
-    const quint64 modSum = useMachineEndianess ?
-        calculateModSumWithMachineEndianness( model, section ) :
-        calculateModSumWithNonMachineEndianness( model, section );
+    const bool useLittleEndian = ( mParameterSet.endianess() == LittleEndian );
+    quint64 modSum = useLittleEndian ?
+        calculateModSumWithLittleEndian( model, section ) :
+        calculateModSumWithBigEndian( model, section );
+
+    modSum = ~modSum + 1;
+
+    if( useLittleEndian )
+        modSum = qbswap( modSum );
 
     *result = QString::fromLatin1("%1").arg( modSum, 16, 16, QChar::fromLatin1('0') );
     return true;
 }
 
-quint64 ModSum64ByteArrayChecksumAlgorithm::calculateModSumWithMachineEndianness( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
+quint64 ModSum64ByteArrayChecksumAlgorithm::calculateModSumWithBigEndian( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
 {
     quint64 modSum = 0x00000000;
     int nextBlockEnd = section.start() + CalculatedByteCountSignalLimit;
@@ -59,30 +66,30 @@ quint64 ModSum64ByteArrayChecksumAlgorithm::calculateModSumWithMachineEndianness
         ++i;
         if( i<=section.end() )
         {
-            value += (quint64)( (quint8)(model->datum( i )) ) << 48;
+            value |= (quint64)( (quint8)(model->datum( i )) ) << 48;
             ++i;
             if( i<=section.end() )
             {
-                value += (quint64)( (quint8)(model->datum( i )) ) << 40;
+                value |= (quint64)( (quint8)(model->datum( i )) ) << 40;
                 ++i;
                 if( i<=section.end() )
                 {
-                    value += (quint64)( (quint8)(model->datum( i )) ) << 32;
+                    value |= (quint64)( (quint8)(model->datum( i )) ) << 32;
                     ++i;
                     if( i<=section.end() )
                     {
-                        value += (quint8)( model->datum(i) ) << 24;
+                        value |= (quint64)( (quint8)(model->datum( i )) ) << 24;
                         ++i;
                         if( i<=section.end() )
                         {
-                            value += (quint8)( model->datum(i) ) << 16;
+                            value |= (quint64)( (quint8)(model->datum( i )) ) << 16;
                             ++i;
                             if( i<=section.end() )
                             {
-                                value += (quint8)( model->datum(i) ) << 8;
+                                value |= (quint64)( (quint8)(model->datum( i )) ) << 8;
                                 ++i;
                                 if( i<=section.end() )
-                                    value += (quint8)( model->datum(i) );
+                                    value |= (quint64)( (quint8)(model->datum( i )) );
                             }
                         }
                     }
@@ -106,7 +113,7 @@ quint64 ModSum64ByteArrayChecksumAlgorithm::calculateModSumWithMachineEndianness
     return modSum;
 }
 
-quint64 ModSum64ByteArrayChecksumAlgorithm::calculateModSumWithNonMachineEndianness( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
+quint64 ModSum64ByteArrayChecksumAlgorithm::calculateModSumWithLittleEndian( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
 {
     quint64 modSum = 0x00000000;
     int nextBlockEnd = section.start() + CalculatedByteCountSignalLimit;
@@ -118,30 +125,30 @@ quint64 ModSum64ByteArrayChecksumAlgorithm::calculateModSumWithNonMachineEndiann
         ++i;
         if( i<=section.end() )
         {
-            value += (quint8)( model->datum(i) ) << 8;
+            value |= (quint64)( (quint8)(model->datum( i )) ) << 8;
             ++i;
             if( i<=section.end() )
             {
-                value += (quint8)( model->datum(i) ) << 16;
+                value |= (quint64)( (quint8)(model->datum( i )) ) << 16;
                 ++i;
                 if( i<=section.end() )
                 {
-                    value += (quint8)( model->datum(i) ) << 24;
+                    value |= (quint64)( (quint8)(model->datum( i )) ) << 24;
                     ++i;
                     if( i<=section.end() )
                     {
-                        value += (quint64)( (quint8)(model->datum( i )) ) << 32;
+                        value |= (quint64)( (quint8)(model->datum( i )) ) << 32;
                         ++i;
                         if( i<=section.end() )
                         {
-                            value += (quint64)( (quint8)(model->datum( i )) ) << 40;
+                            value |= (quint64)( (quint8)(model->datum( i )) ) << 40;
                             ++i;
                             if( i<=section.end() )
                             {
-                                value += (quint64)( (quint8)(model->datum( i )) ) << 48;
+                                value |= (quint64)( (quint8)(model->datum( i )) ) << 48;
                                 ++i;
                                 if( i<=section.end() )
-                                    value += (quint64)( (quint8)(model->datum( i )) ) << 56;
+                                    value |= (quint64)( (quint8)(model->datum( i )) ) << 56;
                             }
                         }
                     }

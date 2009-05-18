@@ -57,6 +57,7 @@ bool ModSum8ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
             emit calculatedBytes( section.localIndex(i)+1 );
         }
     }
+    modSum = ~modSum + 1;
 
     *result = QString::fromLatin1("%1").arg( modSum, 2, 16, QChar::fromLatin1('0') );
     return true;

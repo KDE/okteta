@@ -26,6 +26,8 @@
 #include <abstractbytearraymodel.h>
 // KDE
 #include <KLocale>
+// Qt
+#include <QtCore/QtEndian>
 
 
 ModSum16ByteArrayChecksumAlgorithm::ModSum16ByteArrayChecksumAlgorithm()
@@ -38,16 +40,21 @@ AbstractByteArrayChecksumParameterSet* ModSum16ByteArrayChecksumAlgorithm::param
 bool ModSum16ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
                                                             const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
 {
-    const bool useMachineEndianess = ( mParameterSet.endianess() == ThisMachineEndianness );
-    const quint16 modSum = useMachineEndianess ?
-        calculateModSumWithMachineEndianness( model, section ) :
-        calculateModSumWithNonMachineEndianness( model, section );
+    const bool useLittleEndian = ( mParameterSet.endianess() == LittleEndian );
+    quint16 modSum = useLittleEndian ?
+        calculateModSumWithLittleEndian( model, section ) :
+        calculateModSumWithBigEndian( model, section );
+
+    modSum = ~modSum + 1;
+
+    if( useLittleEndian )
+        modSum = qbswap( modSum );
 
     *result = QString::fromLatin1("%1").arg( modSum, 4, 16, QChar::fromLatin1('0') );
     return true;
 }
 
-quint16 ModSum16ByteArrayChecksumAlgorithm::calculateModSumWithMachineEndianness( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
+quint16 ModSum16ByteArrayChecksumAlgorithm::calculateModSumWithBigEndian( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
 {
     quint16 modSum = 0x0000;
     int nextBlockEnd = section.start() + CalculatedByteCountSignalLimit;
@@ -55,10 +62,10 @@ quint16 ModSum16ByteArrayChecksumAlgorithm::calculateModSumWithMachineEndianness
     // TODO: move padding checks into extra code before and after loop
     for( int i = section.start(); i<=section.end(); ++i )
     {
-        quint16 value = (quint8)( model->datum(i) ) << 8;
+        quint16 value = (quint16)( (quint8)(model->datum( i )) ) << 8;
         ++i;
         if( i<=section.end() )
-            value += (quint8)( model->datum(i) );
+            value |= (quint16)( (quint8)(model->datum( i )) );
 
         modSum += value;
 #if 0
@@ -76,7 +83,7 @@ quint16 ModSum16ByteArrayChecksumAlgorithm::calculateModSumWithMachineEndianness
     return modSum;
 }
 
-quint16 ModSum16ByteArrayChecksumAlgorithm::calculateModSumWithNonMachineEndianness( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
+quint16 ModSum16ByteArrayChecksumAlgorithm::calculateModSumWithLittleEndian( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
 {
     quint16 modSum = 0x0000;
     int nextBlockEnd = section.start() + CalculatedByteCountSignalLimit;
@@ -84,10 +91,10 @@ quint16 ModSum16ByteArrayChecksumAlgorithm::calculateModSumWithNonMachineEndiann
     // TODO: move padding checks into extra code before and after loop
     for( int i = section.start(); i<=section.end(); ++i )
     {
-        quint16 value = (quint8)( model->datum(i) );
+        quint16 value = (quint16)( (quint8)(model->datum( i )) );
         ++i;
         if( i<=section.end() )
-            value += (quint8)( model->datum(i) ) << 8;
+            value |= (quint16)( (quint8)(model->datum( i )) ) << 8;
 
         modSum += value;
 

@@ -26,6 +26,8 @@
 #include <abstractbytearraymodel.h>
 // KDE
 #include <KLocale>
+// Qt
+#include <QtCore/QtEndian>
 
 
 ModSum32ByteArrayChecksumAlgorithm::ModSum32ByteArrayChecksumAlgorithm()
@@ -38,16 +40,21 @@ AbstractByteArrayChecksumParameterSet* ModSum32ByteArrayChecksumAlgorithm::param
 bool ModSum32ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
                                                             const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
 {
-    const bool useMachineEndianess = ( mParameterSet.endianess() == ThisMachineEndianness );
-    const quint32 modSum = useMachineEndianess ?
-        calculateModSumWithMachineEndianness( model, section ) :
-        calculateModSumWithNonMachineEndianness( model, section );
+    const bool useLittleEndian = ( mParameterSet.endianess() == LittleEndian );
+    quint32 modSum = useLittleEndian ?
+        calculateModSumWithLittleEndian( model, section ) :
+        calculateModSumWithBigEndian( model, section );
+
+    modSum = ~modSum + 1;
+
+    if( useLittleEndian )
+        modSum = qbswap( modSum );
 
     *result = QString::fromLatin1("%1").arg( modSum, 8, 16, QChar::fromLatin1('0') );
     return true;
 }
 
-quint32 ModSum32ByteArrayChecksumAlgorithm::calculateModSumWithMachineEndianness( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
+quint32 ModSum32ByteArrayChecksumAlgorithm::calculateModSumWithBigEndian( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
 {
     quint32 modSum = 0x000000;
     int nextBlockEnd = section.start() + CalculatedByteCountSignalLimit;
@@ -55,18 +62,18 @@ quint32 ModSum32ByteArrayChecksumAlgorithm::calculateModSumWithMachineEndianness
     // TODO: move padding checks into extra code before and after loop
     for( int i = section.start(); i<=section.end(); ++i )
     {
-        quint32 value = (quint8)( model->datum(i) ) << 24;
+        quint32 value = (quint32)(quint8)( model->datum(i) ) << 24;
         ++i;
         if( i<=section.end() )
         {
-            value += (quint8)( model->datum(i) ) << 16;
+            value |= (quint32)(quint8)( model->datum(i) ) << 16;
             ++i;
             if( i<=section.end() )
             {
-                value += (quint8)( model->datum(i) ) << 8;
+                value |= (quint32)(quint8)( model->datum(i) ) << 8;
                 ++i;
                 if( i<=section.end() )
-                    value += (quint8)( model->datum(i) );
+                    value |= (quint32)(quint8)( model->datum(i) );
             }
         }
 
@@ -86,7 +93,7 @@ quint32 ModSum32ByteArrayChecksumAlgorithm::calculateModSumWithMachineEndianness
     return modSum;
 }
 
-quint32 ModSum32ByteArrayChecksumAlgorithm::calculateModSumWithNonMachineEndianness( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
+quint32 ModSum32ByteArrayChecksumAlgorithm::calculateModSumWithLittleEndian( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
 {
     quint32 modSum = 0x000000;
     int nextBlockEnd = section.start() + CalculatedByteCountSignalLimit;
@@ -94,18 +101,18 @@ quint32 ModSum32ByteArrayChecksumAlgorithm::calculateModSumWithNonMachineEndiann
     // TODO: move padding checks into extra code before and after loop
     for( int i = section.start(); i<=section.end(); ++i )
     {
-        quint32 value = (quint8)( model->datum(i) );
+        quint32 value = (quint32)(quint8)( model->datum(i) );
         ++i;
         if( i<=section.end() )
         {
-            value += (quint8)( model->datum(i) ) << 8;
+            value |= (quint32)(quint8)( model->datum(i) ) << 8;
             ++i;
             if( i<=section.end() )
             {
-                value += (quint8)( model->datum(i) ) << 16;
+                value |= (quint32)(quint8)( model->datum(i) ) << 16;
                 ++i;
                 if( i<=section.end() )
-                    value += (quint8)( model->datum(i) ) << 24;
+                    value |= (quint32)(quint8)( model->datum(i) ) << 24;
             }
         }
 
