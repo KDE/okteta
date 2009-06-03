@@ -49,7 +49,7 @@ bool BookmarkListConstIteratorAdapter::findNextFrom( unsigned int offset )
     mIterator.toFront();
     while( mIterator.hasNext() )
     {
-        if( (int)offset < mIterator.peekNext().offset() )
+        if( (int)offset <= mIterator.peekNext().offset() )
         {
             result = true;
             break;
@@ -67,7 +67,7 @@ bool BookmarkListConstIteratorAdapter::findPreviousFrom( unsigned int offset )
     mIterator.toBack();
     while( mIterator.hasPrevious() )
     {
-        if( mIterator.peekPrevious().offset() < (int)offset )
+        if( mIterator.peekPrevious().offset() <= (int)offset )
         {
             result = true;
             break;
