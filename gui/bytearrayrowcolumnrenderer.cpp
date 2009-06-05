@@ -653,7 +653,7 @@ void ByteArrayRowColumnRenderer::renderPlain( QPainter* painter, const KHE::Sect
 
         if( byteIndex == nextBookmarkOffset )
         {
-            renderBookmark( painter, colorScheme.background(KColorScheme::LinkBackground) );
+            renderBookmark( painter, colorScheme.background(KColorScheme::NeutralBackground) );
 
             nextBookmarkOffset = bit.hasNext() ? bit.next().offset() : -1;//TODO )&& ( bit->offset() <= LastIndex );
         }
@@ -700,7 +700,7 @@ void ByteArrayRowColumnRenderer::renderSelection( QPainter* painter, const KHE::
 
         if( byteIndex == nextBookmarkOffset )
         {
-            renderBookmark( painter, colorScheme.background(KColorScheme::LinkBackground) );
+            renderBookmark( painter, colorScheme.background(KColorScheme::NeutralBackground) );
 
             nextBookmarkOffset = bit.hasNext() ? bit.next().offset() : -1;//TODO )&& ( bit->offset() <= LastIndex );
         }
@@ -790,7 +790,7 @@ void ByteArrayRowColumnRenderer::renderByte( QPainter* painter,
 
     if( mBookmarks && mBookmarks->containsBookmarkFor(byteIndex) )
     {
-        const QBrush bookmarkBackgroundBrush = colorScheme.background( KColorScheme::LinkBackground );
+        const QBrush bookmarkBackgroundBrush = colorScheme.background( KColorScheme::NeutralBackground );
         painter->fillRect( 1,1, mByteWidth-2,mDigitHeight-2, bookmarkBackgroundBrush );
     }
 
