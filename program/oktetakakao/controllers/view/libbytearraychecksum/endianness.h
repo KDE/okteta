@@ -20,21 +20,21 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ENDIANESS_H
-#define ENDIANESS_H
+#ifndef ENDIANNESS_H
+#define ENDIANNESS_H
 
 // Qt
 #include <QtCore/Qt>
 
 
-enum Endianess
+enum Endianness
 {
     LittleEndian = 0, // Intel, Alpha, ...
     BigEndian =    1 // Sun, Motorola, ...
 };
 
 
-static const Endianess ThisMachineEndianness =
+static const Endianness ThisMachineEndianness =
 #if Q_BYTE_ORDER == Q_LITTLE_ENDIAN
     LittleEndian;
 #else

@@ -27,14 +27,14 @@
 
 
 ModSumByteArrayChecksumParameterSet::ModSumByteArrayChecksumParameterSet()
-  : mEndianess( ThisMachineEndianness )
+  : mEndianness( ThisMachineEndianness )
 {}
 
 QString ModSumByteArrayChecksumParameterSet::id() const { return QString::fromLatin1("ModSum"); }
 
-Endianess ModSumByteArrayChecksumParameterSet::endianess() const { return mEndianess; }
+Endianness ModSumByteArrayChecksumParameterSet::endianness() const { return mEndianness; }
 
-void ModSumByteArrayChecksumParameterSet::setEndianess( Endianess endianess ) { mEndianess = endianess; }
+void ModSumByteArrayChecksumParameterSet::setEndianness( Endianness endianness ) { mEndianness = endianness; }
 
 
 ModSumByteArrayChecksumParameterSet::~ModSumByteArrayChecksumParameterSet()

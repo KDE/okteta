@@ -38,13 +38,13 @@ class ModSumByteArrayChecksumParameterSet : public AbstractByteArrayChecksumPara
     virtual QString id() const;
 
   public:
-    void setEndianess( Endianess endianess );
+    void setEndianness( Endianness endianness );
 
   public:
-    Endianess endianess() const;
+    Endianness endianness() const;
 
   protected:
-    Endianess mEndianess;
+    Endianness mEndianness;
 };
 
 #endif

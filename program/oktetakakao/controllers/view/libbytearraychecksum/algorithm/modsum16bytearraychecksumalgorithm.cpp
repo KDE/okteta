@@ -40,7 +40,7 @@ AbstractByteArrayChecksumParameterSet* ModSum16ByteArrayChecksumAlgorithm::param
 bool ModSum16ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
                                                             const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
 {
-    const bool useLittleEndian = ( mParameterSet.endianess() == LittleEndian );
+    const bool useLittleEndian = ( mParameterSet.endianness() == LittleEndian );
     quint16 modSum = useLittleEndian ?
         calculateModSumWithLittleEndian( model, section ) :
         calculateModSumWithBigEndian( model, section );

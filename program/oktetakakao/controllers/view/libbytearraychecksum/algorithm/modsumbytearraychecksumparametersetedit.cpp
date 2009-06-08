@@ -55,7 +55,7 @@ void ModSumByteArrayChecksumParameterSetEdit::setParameterSet( const AbstractByt
     const ModSumByteArrayChecksumParameterSet* modSumParameterSet =
         static_cast<const ModSumByteArrayChecksumParameterSet *>( parameterSet );
 
-    mEndiannessComboBox->setCurrentIndex( modSumParameterSet->endianess() );
+    mEndiannessComboBox->setCurrentIndex( modSumParameterSet->endianness() );
 }
 
 void ModSumByteArrayChecksumParameterSetEdit::getParameterSet( AbstractByteArrayChecksumParameterSet* parameterSet ) const
@@ -63,7 +63,7 @@ void ModSumByteArrayChecksumParameterSetEdit::getParameterSet( AbstractByteArray
     ModSumByteArrayChecksumParameterSet* modSumParameterSet =
         static_cast<ModSumByteArrayChecksumParameterSet *>( parameterSet );
 
-    modSumParameterSet->setEndianess( static_cast<Endianess>( mEndiannessComboBox->currentIndex() ) );
+    modSumParameterSet->setEndianness( static_cast<Endianness>( mEndiannessComboBox->currentIndex() ) );
 }
 
 
