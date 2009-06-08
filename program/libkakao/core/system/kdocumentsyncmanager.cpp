@@ -39,7 +39,8 @@
 #include <QtGui/QApplication>
 
 
-static const char AllFileNamesFilter[] = "*";
+static const char AllFileNamesFilter[] = "*";  // krazy:exclude=doublequote_chars
+
 
 KDocumentSyncManager::KDocumentSyncManager( KDocumentManager *manager )
  : mManager( manager ), mWidget( 0 ), mSynchronizerFactory( 0 )

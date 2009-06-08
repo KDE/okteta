@@ -33,8 +33,10 @@
 #include <KConfigGroup>
 #include <KGlobal>
 
-static const char AllFileNamesFilter[] = "*";
+
+static const char AllFileNamesFilter[] = "*";  // krazy:exclude=doublequote_chars
 static const char CreatorConfigGroupId[] = "Recent Files";
+
 
 LoaderController::LoaderController( KDocumentSyncManager* syncManager, KXMLGUIClient* guiClient )
 : mSyncManager( syncManager )
