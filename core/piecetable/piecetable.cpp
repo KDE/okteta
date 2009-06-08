@@ -65,7 +65,7 @@ bool PieceTable::getStorageData( int *storageId, int *storageOffset, int dataOff
     return result;
 }
 
-// TODO: optimise search from behind if dataOffset is large (perhaps by counting total size
+// TODO: optimize search from behind if dataOffset is large (perhaps by counting total size
 // TODO: combine sucsequenting inserts, also on other changes if possible link neighbors
 void PieceTable::insert( int insertDataOffset, int insertLength, int storageOffset )
 {

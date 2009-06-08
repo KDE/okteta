@@ -65,7 +65,7 @@ PieceTableByteArrayModel::Private::Private( PieceTableByteArrayModel *parent, un
 }
 
 
-// TODO: getStorageData needs some caching, optimise for successive access
+// TODO: getStorageData needs some caching, optimize for successive access
 char PieceTableByteArrayModel::Private::datum( unsigned int offset ) const
 {
     int storageId;

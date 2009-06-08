@@ -793,7 +793,7 @@ void ByteArrayRowViewPrivate::updateChanged()
         mByteArrayColumn->prepareRendering( Xs );
     }
 
-    // any colums to paint?
+    // any columns to paint?
     if( dirtyColumns.size() > 0 )
     {
         // calculate affected lines/indizes

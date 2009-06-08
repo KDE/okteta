@@ -828,7 +828,7 @@ void ByteArrayColumnViewPrivate::updateChanged()
         column = mCharColumn;
     }
 
-    // any colums to paint?
+    // any columns to paint?
     if( dirtyColumns.size() > 0 )
     {
         // calculate affected lines/indizes
