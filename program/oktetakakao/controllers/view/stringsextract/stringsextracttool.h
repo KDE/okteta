@@ -73,6 +73,7 @@ class StringsExtractTool : public AbstractTool
   public Q_SLOTS: // actions
     void onSelectionChanged( bool hasSelection );
     void onSourceChanged();
+    void onSourceDestroyed();
 
   Q_SIGNALS:
     void uptodateChanged( bool isUptodate );

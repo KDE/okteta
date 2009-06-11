@@ -61,6 +61,7 @@ class InfoTool : public AbstractTool
     void updateStatistic();
     void onSelectionChanged( bool hasSelection );
     void onSourceChanged();
+    void onSourceDestroyed();
 
   Q_SIGNALS:
     void isApplyableChanged( bool isApplyable );

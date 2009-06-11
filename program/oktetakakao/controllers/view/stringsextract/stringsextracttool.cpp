@@ -142,6 +142,12 @@ void StringsExtractTool::onSourceChanged()
     emit canHighlightStringChanged( false );
 }
 
+void StringsExtractTool::onSourceDestroyed()
+{
+    mSourceByteArrayModel = 0;
+    onSourceChanged();
+}
+
 
 // TODO: use WordByteArrayService
 void StringsExtractTool::extractStrings()
@@ -164,6 +170,8 @@ void StringsExtractTool::extractStrings()
     mSourceMinLength = mMinLength;
     connect( mSourceByteArrayModel,  SIGNAL(contentsChanged( const KHE::ArrayChangeMetricsList & )),
              SLOT(onSourceChanged()) );
+    connect( mSourceByteArrayModel,  SIGNAL(destroyed()),
+             SLOT(onSourceDestroyed()) );
 
     mExtractedStringsUptodate = true;
     mSourceByteArrayModelUptodate = true;

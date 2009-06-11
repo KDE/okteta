@@ -101,6 +101,11 @@ void InfoTool::onSourceChanged()
     emit isApplyableChanged( isApplyable() );
 }
 
+void InfoTool::onSourceDestroyed()
+{
+    mSourceByteArrayModel = 0;
+    onSourceChanged();
+}
 
 void InfoTool::updateStatistic()
 {
@@ -122,8 +127,12 @@ void InfoTool::updateStatistic()
     mSourceByteArrayModel = mByteArrayModel;
     mSourceSelection = selection;
     if( mSourceByteArrayModel )
+    {
         connect( mSourceByteArrayModel,  SIGNAL(contentsChanged( const KHE::ArrayChangeMetricsList & )),
                  SLOT(onSourceChanged()) );
+        connect( mSourceByteArrayModel,  SIGNAL(destroyed()),
+                 SLOT(onSourceDestroyed()) );
+    }
 
     mSourceByteArrayModelUptodate = true;
     emit statisticDirty( false );
