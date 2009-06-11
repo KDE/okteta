@@ -84,6 +84,7 @@ class ChecksumTool : public AbstractTool
   protected Q_SLOTS:
     void onSelectionChanged( bool hasSelection );
     void onSourceChanged();
+    void onSourceDestroyed();
 
   protected: // created data
     QString mCheckSum;

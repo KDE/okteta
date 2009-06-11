@@ -170,7 +170,9 @@ void ChecksumTool::calculateChecksum()
         mSourceByteArrayModel = mByteArrayModel;
         mSourceSelection = mByteArrayDisplay->selection();
         connect( mSourceByteArrayModel,  SIGNAL(contentsChanged( const KHE::ArrayChangeMetricsList& )),
-                SLOT(onSourceChanged()) );
+                 SLOT(onSourceChanged()) );
+        connect( mSourceByteArrayModel,  SIGNAL(destroyed()),
+                 SLOT(onSourceDestroyed()) );
 
         mChecksumUptodate = true;
         mSourceByteArrayModelUptodate = true;
@@ -213,6 +215,12 @@ void ChecksumTool::onSourceChanged()
     mChecksumUptodate = false;
     mSourceByteArrayModelUptodate = false;
     emit uptodateChanged( false );
+}
+
+void ChecksumTool::onSourceDestroyed()
+{
+    mSourceByteArrayModel = 0;
+    onSourceChanged();
 }
 
 ChecksumTool::~ChecksumTool()

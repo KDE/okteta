@@ -59,12 +59,15 @@ class InfoTool : public AbstractTool
 
   public Q_SLOTS:
     void updateStatistic();
-    void onSelectionChanged( bool hasSelection );
-    void onSourceChanged();
 
   Q_SIGNALS:
     void isApplyableChanged( bool isApplyable );
     void statisticDirty( bool dirty );
+
+  protected Q_SLOTS:
+    void onSelectionChanged( bool hasSelection );
+    void onSourceChanged();
+    void onSourceDestroyed();
 
   protected:
     int mByteCount[256]; // TODO: here or in statistic model?

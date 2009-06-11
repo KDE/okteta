@@ -70,10 +70,6 @@ class StringsExtractTool : public AbstractTool
   public Q_SLOTS: // actions
     void extractStrings();
 
-  public Q_SLOTS: // actions
-    void onSelectionChanged( bool hasSelection );
-    void onSourceChanged();
-
   Q_SIGNALS:
     void uptodateChanged( bool isUptodate );
     void isApplyableChanged( bool isApplyable );  // candidate for AbstractTool API
@@ -81,6 +77,11 @@ class StringsExtractTool : public AbstractTool
 
   protected:
     void checkUptoDate();
+
+  protected Q_SLOTS:
+    void onSelectionChanged( bool hasSelection );
+    void onSourceChanged();
+    void onSourceDestroyed();
 
   protected: // created data
     QList<ContainedString> mContainedStringList;
