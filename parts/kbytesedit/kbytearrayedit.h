@@ -66,11 +66,11 @@ class KByteArrayEdit : public QWidget, public KHE::BytesEditInterface,
     /** hands over to the editor a new byte array.
       * If there exists an old one and autodelete is set the old one gets deleted.
       * @param D pointer to memory
-      * @param DS size of used memory
-      * @param RS real size of the memory
-      * @param KM keep the memory on resize (RS is the maximum size)
+      * @param DSize size of used memory
+      * @param RSize real size of the memory
+      * @param KM keep the memory on resize (RSize is the maximum size)
       */
-    virtual void setData( char *D, int DS, int RS = -1, bool KM = true );
+    virtual void setData( char *D, int DSize, int RSize = -1, bool KM = true );
 
     /** sets the maximal size of the actual byte array. If the actual array is already larger
       * it will not be modified but there can be only done non-inserting actions
