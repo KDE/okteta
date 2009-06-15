@@ -27,6 +27,7 @@
 // lib
 #include "abstractbytearraymodel.h"
 #include "kbookmarkable.h"
+#include "kbookmarksconstiterator.h"
 
 
 namespace KHECore

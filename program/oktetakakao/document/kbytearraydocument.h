@@ -26,6 +26,7 @@
 // lib
 // #include "kbytearrayinterface.h"
 // Kakao core
+#include <person.h>
 #include <userlistable.h>
 #include <kiversionable.h>
 #include <kabstractdocument.h>
