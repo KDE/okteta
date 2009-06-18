@@ -28,7 +28,7 @@
 
 class ToggleButton;
 class KAbstractDocument;
-class KStatusBar;
+class Statusbar;
 
 
 class ReadOnlyBarController : public AbstractXmlGuiController
@@ -36,7 +36,7 @@ class ReadOnlyBarController : public AbstractXmlGuiController
   Q_OBJECT
 
   public:
-    explicit ReadOnlyBarController( KStatusBar* statusBar );
+    explicit ReadOnlyBarController( Statusbar* statusBar );
 
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );

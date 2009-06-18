@@ -24,14 +24,14 @@
 
 // lib
 #include "zoomslider.h"
-// KDE
-#include <KStatusBar>
+// 
+#include <statusbar.h>
 
 
-ZoomBarController::ZoomBarController( KStatusBar* statusBar )
+ZoomBarController::ZoomBarController( Statusbar* statusBar )
 {
     mZoomSlider = new ZoomSlider( statusBar );
-    statusBar->addWidget( mZoomSlider, 0 );
+    statusBar->addWidget( mZoomSlider );
 
     setTargetModel( 0 );
 }

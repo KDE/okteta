@@ -1,5 +1,5 @@
 /*
-    This file is part of the Okteta Kakao module, part of the KDE project.
+    This file is part of the Kakao Framework, part of the KDE project.
 
     Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
@@ -20,31 +20,51 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ZOOMBARCONTROLLER_H
-#define ZOOMBARCONTROLLER_H
+#include "statusbar.h"
 
 // lib
-#include <abstractxmlguicontroller.h>
-
-class ZoomSlider;
-namespace KDE { namespace If {
-class Zoomable;
-} }
-class Statusbar;
+#include "statusbarlayout.h"
+// Qt
+#include <QtCore/QEvent>
 
 
-class ZoomBarController : public AbstractXmlGuiController
+Statusbar::Statusbar( QWidget* parent )
+  : KStatusBar( parent )
 {
-  Q_OBJECT
+//     setMinimumWidth( 1 );
 
-  public:
-    explicit ZoomBarController( Statusbar* statusBar );
+    QWidget* baseWidget = new QWidget( this );
 
-  public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+    mLayout = new StatusBarLayout( baseWidget );
+    mLayout->setSpacing( 6 ); // hard coded in QStatusBar
+    KStatusBar::addWidget( baseWidget );
+}
 
-  protected:
-    ZoomSlider* mZoomSlider;
-};
 
-#endif
+void Statusbar::addWidget( QWidget* widget )
+{
+    mWidgetList.append( widget );
+
+    mLayout->addWidget( widget );
+}
+
+
+void Statusbar::changeEvent( QEvent* event )
+{
+    switch( event->type() )
+    {
+    case QEvent::StyleChange:
+        mLayout->invalidate();
+//         mLayout->updateMarginAndSpacing();
+        break;
+    default:
+        break;
+    }
+
+    KStatusBar::changeEvent( event );
+}
+
+
+Statusbar::~Statusbar()
+{
+}

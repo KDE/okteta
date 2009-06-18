@@ -26,20 +26,20 @@
 #include <kabstractdocument.h>
 // Kakao ui
 #include <togglebutton.h>
+#include <statusbar.h>
 // KDE
-#include <KStatusBar>
 #include <KLocale>
 #include <KIcon>
 
 
-ReadOnlyBarController::ReadOnlyBarController( KStatusBar* statusBar )
+ReadOnlyBarController::ReadOnlyBarController( Statusbar* statusBar )
  : mDocument( 0 )
 {
     const QString readWriteText = i18nc( "@option:check the document is read-write", "Read-write" );
     const QString readOnlyText = i18nc( "@option:check the document is read-only", "Read-only" );
     mReadOnlyButton = new ToggleButton( KIcon("object-unlocked.png"), QString(), readWriteText, statusBar );
     mReadOnlyButton->setCheckedState( KIcon("object-locked.png"), QString(), readOnlyText );
-    statusBar->addWidget( mReadOnlyButton, 0 );
+    statusBar->addWidget( mReadOnlyButton );
     connect( mReadOnlyButton, SIGNAL(clicked(bool)), SLOT(setReadOnly(bool)) );
 
     setTargetModel( 0 );

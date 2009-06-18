@@ -85,6 +85,7 @@
 #include <kviewmanager.h>
 #include <tabbedviews.h>
 #include <parallelviews/parallelviews.h>
+#include <statusbar.h>
 // Kakao core
 #include <kdocumentcreatemanager.h>
 #include <kdocumentsyncmanager.h>
@@ -92,6 +93,7 @@
 // KDE
 #include <KGlobal>
 #include <KConfigGroup>
+
 
 static const char LoadedUrlsKey[] = "LoadedUrls";
 
@@ -112,6 +114,8 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram *program )
     KConfigGroup group( KGlobal::config(), "MainWindow" );
     if( !group.hasKey(mainWindowStateKey) )
         group.writeEntry( mainWindowStateKey, mainWindowState );
+
+    setStatusBar( new Statusbar(this) );
 
     setupControllers();
     setupGUI();
@@ -160,9 +164,10 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new ViewConfigController(this) );
     addXmlGuiController( new ViewModeController(this) );
 
-    addXmlGuiController( new ViewStatusController(statusBar()) );
-    addXmlGuiController( new ReadOnlyBarController(statusBar()) );
-//     addXmlGuiController( new ZoomBarController(statusBar()) );
+    Statusbar* bottomBar = static_cast<Statusbar*>( statusBar() );
+    addXmlGuiController( new ViewStatusController(bottomBar) );
+    addXmlGuiController( new ReadOnlyBarController(bottomBar) );
+    addXmlGuiController( new ZoomBarController(bottomBar) );
 
     addTool( new DocumentInfoToolView(new DocumentInfoTool(mProgram->documentManager()->syncManager())) );
     addTool( new ChecksumToolView(new ChecksumTool()) );

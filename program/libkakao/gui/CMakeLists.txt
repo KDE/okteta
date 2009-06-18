@@ -45,6 +45,8 @@ set( KAKAO_GUI_SRCS
   system/abstractgroupedviews.cpp
   system/tabbedviews.cpp
   system/shellwindow.cpp
+  system/statusbar.cpp
+  system/statusbarlayout.cpp
   ${KAKAO_GUI_CONTROLLER_WIDGETS_SRCS}
   controller/abstractxmlguicontroller.cpp
 )

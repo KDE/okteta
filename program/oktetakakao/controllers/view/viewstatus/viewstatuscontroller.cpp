@@ -26,12 +26,13 @@
 #include <kbytearraydisplay.h>
 // Kakao ui
 #include <togglebutton.h>
+#include <statusbar.h>
 // Okteta core
-// #include <charcodec.h>
+#include <charcodec.h>
 #include <khe.h>
 // KDE
+#include <KSqueezedTextLabel>
 #include <KComboBox>
-#include <KStatusBar>
 #include <KLocale>
 // Qt
 #include <QtGui/QLabel>
@@ -41,16 +42,16 @@
 
 // TODO: make status bar capable to hide entries if size is too small, use priorisation
 
-ViewStatusController::ViewStatusController( KStatusBar* statusBar )
+ViewStatusController::ViewStatusController( Statusbar* statusBar )
  : mByteArrayDisplay( 0 ), mStatusBar( statusBar )
 {
     mPrintFunction = KHEUI::KOffsetFormat::printFunction( KHEUI::KOffsetFormat::Hexadecimal );
 
     mOffsetLabel = new QLabel( statusBar );
-    statusBar->addWidget( mOffsetLabel, 0 );
+    statusBar->addWidget( mOffsetLabel );
 
     mSelectionLabel = new QLabel( statusBar );
-    statusBar->addWidget( mSelectionLabel, 0 );
+    statusBar->addWidget( mSelectionLabel );
 
     const QString insertModeText = i18nc( "@info:status short for: Insert mode",    "INS" );
     const QString overwriteModeText = i18nc( "@info:status short for: Overwrite mode", "OVR" );
@@ -58,10 +59,10 @@ ViewStatusController::ViewStatusController( KStatusBar* statusBar )
     const QString overwriteModeTooltip = i18nc( "@info:tooltip", "Overwrite mode" );
     mOverwriteModeToggleButton = new ToggleButton( insertModeText, insertModeTooltip, statusBar );
     mOverwriteModeToggleButton->setCheckedState( overwriteModeText, overwriteModeTooltip );
-    statusBar->addWidget( mOverwriteModeToggleButton, 0 );
+    statusBar->addWidget( mOverwriteModeToggleButton );
     connect( mOverwriteModeToggleButton, SIGNAL(clicked(bool)), SLOT(setOverwriteMode(bool)) );
 
-#if 0
+// #if 0
     mValueCodingComboBox = new KComboBox( statusBar );
     QStringList list;
     list.append( i18nc("@item:inmenu encoding of the bytes as values in the hexadecimal format","Hexadecimal") );
@@ -72,15 +73,15 @@ ViewStatusController::ViewStatusController( KStatusBar* statusBar )
     mValueCodingComboBox->setToolTip(
         i18nc("@info:tooltip","Coding of the value interpretation in the current view.") );
     connect( mValueCodingComboBox, SIGNAL(activated(int)), SLOT(setValueCoding(int)) );
-    statusBar->addWidget( mValueCodingComboBox, 0 );
+    statusBar->addWidget( mValueCodingComboBox );
 
     mCharCodingComboBox = new KComboBox( statusBar );
     mCharCodingComboBox->addItems( KHECore::CharCodec::codecNames() );
     mCharCodingComboBox->setToolTip(
         i18nc("@info:tooltip","Encoding in the character column of the current view.") );
     connect( mCharCodingComboBox, SIGNAL(activated(int)), SLOT(setCharCoding(int)) );
-    statusBar->addWidget( mCharCodingComboBox, 0 );
-#endif
+    statusBar->addWidget( mCharCodingComboBox );
+// #endif
 
     fixWidths();
 
@@ -151,16 +152,16 @@ void ViewStatusController::setTargetModel( AbstractModel* model )
         onCursorPositionChanged( mByteArrayDisplay->cursorPosition() );
         onHasSelectedDataChanged( mByteArrayDisplay->hasSelectedData() );
         mOverwriteModeToggleButton->setChecked( mByteArrayDisplay->isOverwriteMode() );
-//         onValueCodingChanged( (int)mByteArrayDisplay->valueCoding() );
-//         onCharCodecChanged( mByteArrayDisplay->charCodingName() );
+        onValueCodingChanged( (int)mByteArrayDisplay->valueCoding() );
+        onCharCodecChanged( mByteArrayDisplay->charCodingName() );
 
         connect( mByteArrayDisplay, SIGNAL(cursorPositionChanged( int )), SLOT(onCursorPositionChanged( int )) );
         connect( mByteArrayDisplay, SIGNAL(hasSelectedDataChanged( bool )), SLOT(onHasSelectedDataChanged( bool )) );
         connect( mByteArrayDisplay, SIGNAL(overwriteModeChanged( bool )),
                  mOverwriteModeToggleButton, SLOT(setChecked( bool )) );
-//         connect( mByteArrayDisplay, SIGNAL(valueCodingChanged( int )), SLOT(onValueCodingChanged( int )) );
-//         connect( mByteArrayDisplay, SIGNAL(charCodecChanged( const QString& )),
-//             SLOT(onCharCodecChanged( const QString& )) );
+        connect( mByteArrayDisplay, SIGNAL(valueCodingChanged( int )), SLOT(onValueCodingChanged( int )) );
+        connect( mByteArrayDisplay, SIGNAL(charCodecChanged( const QString& )),
+            SLOT(onCharCodecChanged( const QString& )) );
     }
     else
     {
@@ -169,15 +170,15 @@ void ViewStatusController::setTargetModel( AbstractModel* model )
         mOffsetLabel->setText( i18nc("@info:status offset value not available", "Offset: -") );
         mSelectionLabel->setText( i18nc("@info:status offset value not available", "Selection: -") );
         mOverwriteModeToggleButton->setChecked( false );
-//         mValueCodingComboBox->setCurrentIndex( 0 );
-//         mCharCodingComboBox->setCurrentIndex( 0 );
+        mValueCodingComboBox->setCurrentIndex( 0 );
+        mCharCodingComboBox->setCurrentIndex( 0 );
     }
 
     mOffsetLabel->setEnabled( hasView );
     mSelectionLabel->setEnabled( hasView );
     mOverwriteModeToggleButton->setEnabled( hasView );
-//     mValueCodingComboBox->setEnabled( hasView );
-//     mCharCodingComboBox->setEnabled( hasView );
+    mValueCodingComboBox->setEnabled( hasView );
+    mCharCodingComboBox->setEnabled( hasView );
 }
 
 void ViewStatusController::setOverwriteMode( bool overwrite )
@@ -185,7 +186,7 @@ void ViewStatusController::setOverwriteMode( bool overwrite )
     mByteArrayDisplay->setOverwriteMode( overwrite );
 }
 
-#if 0
+// #if 0
 void ViewStatusController::setValueCoding( int valueCoding )
 {
     mByteArrayDisplay->setValueCoding( valueCoding );
@@ -197,7 +198,7 @@ void ViewStatusController::setCharCoding( int charCoding )
     mByteArrayDisplay->setCharCoding( KHECore::CharCodec::codecNames()[charCoding] );
     mByteArrayDisplay->setFocus();
 }
-#endif
+// #endif
 
 void ViewStatusController::onCursorPositionChanged( int offset )
 {
@@ -231,7 +232,7 @@ void ViewStatusController::onHasSelectedDataChanged( bool hasSelectedData )
 
     mSelectionLabel->setText( string );
 }
-#if 0
+// #if 0
 void ViewStatusController::onValueCodingChanged( int valueCoding )
 {
     mValueCodingComboBox->setCurrentIndex( valueCoding );
@@ -243,4 +244,4 @@ void ViewStatusController::onCharCodecChanged( const QString& charCodecName )
 
     mCharCodingComboBox->setCurrentIndex( charCodingIndex );
 }
-#endif
+// #endif

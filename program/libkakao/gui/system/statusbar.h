@@ -1,5 +1,5 @@
 /*
-    This file is part of the Okteta Kakao module, part of the KDE project.
+    This file is part of the Kakao Framework, part of the KDE project.
 
     Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
@@ -20,31 +20,35 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ZOOMBARCONTROLLER_H
-#define ZOOMBARCONTROLLER_H
+#ifndef STATUSBAR_H
+#define STATUSBAR_H
 
-// lib
-#include <abstractxmlguicontroller.h>
+// KDE
+#include <KStatusBar>
+// Qt
+#include <QtCore/QList>
 
-class ZoomSlider;
-namespace KDE { namespace If {
-class Zoomable;
-} }
-class Statusbar;
+class StatusBarLayout;
 
 
-class ZoomBarController : public AbstractXmlGuiController
+// TODO: rename to StatusBar, once it is namespaced
+class Statusbar : public KStatusBar
 {
-  Q_OBJECT
+    Q_OBJECT
 
   public:
-    explicit ZoomBarController( Statusbar* statusBar );
+    explicit Statusbar( QWidget* parent = 0 );
+    virtual ~Statusbar();
 
-  public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+  public: // overwrite QStatusBar API
+    void addWidget( QWidget* widget );
+
+  protected: // QWidget API
+    virtual void changeEvent( QEvent* changeEvent );
 
   protected:
-    ZoomSlider* mZoomSlider;
+    QList<QWidget*> mWidgetList;
+    StatusBarLayout* mLayout;
 };
 
 #endif

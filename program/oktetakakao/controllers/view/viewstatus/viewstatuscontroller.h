@@ -30,8 +30,9 @@
 
 class KByteArrayDisplay;
 class ToggleButton;
-class KStatusBar;
+class Statusbar;
 class KComboBox;
+class KSqueezedTextLabel;
 class QLabel;
 class QString;
 
@@ -41,7 +42,7 @@ class ViewStatusController : public AbstractXmlGuiController
   Q_OBJECT
 
   public:
-    explicit ViewStatusController( KStatusBar* statusBar );
+    explicit ViewStatusController( Statusbar* statusBar );
 
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
@@ -51,23 +52,23 @@ class ViewStatusController : public AbstractXmlGuiController
 
   protected Q_SLOTS:
     void setOverwriteMode( bool overwrite );
-//     void setValueCoding( int valueCoding );
-//     void setCharCoding( int charCoding );
+    void setValueCoding( int valueCoding );
+    void setCharCoding( int charCoding );
 
     void onCursorPositionChanged( int offset );
     void onHasSelectedDataChanged( bool hasSelectedData );
-//     void onValueCodingChanged( int valueCoding );
-//     void onCharCodecChanged( const QString& charCodecName );
+    void onValueCodingChanged( int valueCoding );
+    void onCharCodecChanged( const QString& charCodecName );
 
   protected:
     KByteArrayDisplay* mByteArrayDisplay;
 
-    KStatusBar* mStatusBar;
+    Statusbar* mStatusBar;
     QLabel* mOffsetLabel;
     QLabel* mSelectionLabel;
     ToggleButton* mOverwriteModeToggleButton;
-//     KComboBox* mValueCodingComboBox;
-//     KComboBox* mCharCodingComboBox;
+    KComboBox* mValueCodingComboBox;
+    KComboBox* mCharCodingComboBox;
 
     KHEUI::KOffsetFormat::print mPrintFunction;
     int mStartOffset;
