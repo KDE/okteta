@@ -177,14 +177,19 @@ Fixed after 0.3 Beta 1:
 * fixed: make modsum algorithms endianness aware (controlled by parameter endianess)
 * fixed: make change of selection also emitted on mouse move with pressed button
 
+Fixed after 0.3 Beta 2:
+-----------------------
+* bookmark is not painted correctly if cursor moves from it
+* minimumsize of status bar no longer limited to sum of size of embedded widgets, using new class Statusbar/StatusBarLayout
+
 Next to work on:
 ----------------------------------
 Important:
-* bookmark is not painted correctly if cursor moves from it
+* delayed filebrowser init to speedup start
+* improve resize of status bar with priority-based limiting of shown items, use perhaps SqueezedLabel for Selection
 * width calculation for resize seems to need to include some margins
 * old wrong sized cursor picture gets painted on zoom change
 * QActionGroups are cleared on setupGui, e.g. if toolbar gets edited
-* selecting by mouse should send updates during movements
 Less important:
 * some more unit tests
 * fix wrong font width calculation for offset and selection in statusbar
@@ -196,6 +201,7 @@ Less important:
 
 Later on:
 ---------
+* make offset 64-Bit, in the whole Api, best by using own datatype/define/typedef
 * make status bar tools more flat, e.g. see how the zoom tool of KOffice is done
 * add border to BookmarkEditPopup, perhaps like that of QMenu
 * add direction to tool views, so that e.g. the file info tool view puts the icon left to the data in vertical mode
