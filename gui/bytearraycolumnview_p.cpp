@@ -86,6 +86,12 @@ void ByteArrayColumnViewPrivate::init()
     mCharColumn =
         new CharByteArrayColumnRenderer( q, mByteArrayModel, mTableLayout, mTableRanges );
 
+    q->addColumn( mOffsetColumn );
+    q->addColumn( mFirstBorderColumn );
+    q->addColumn( mValueColumn );
+    q->addColumn( mSecondBorderColumn );
+    q->addColumn( mCharColumn );
+
     // select the active column
     mActiveColumn = mCharColumn;
     mInactiveColumn = mValueColumn;

@@ -60,7 +60,7 @@ class ColumnRendererPrivate
 inline ColumnRendererPrivate::ColumnRendererPrivate( ColumnsView* columnsView )
  : mColumnView( columnsView ),
    mIsVisible( true ),  //TODO: would false be better?
-   mLineHeight( columnsView->lineHeight() ),
+   mLineHeight( 0 ),//columnsView->lineHeight() ),
    mXSpan( KHE::Section::fromWidth(0,0) )
 {
 }

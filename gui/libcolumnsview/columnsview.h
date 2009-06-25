@@ -50,8 +50,6 @@ class OKTETAGUI_EXPORT ColumnsView : public QAbstractScrollArea
 {
    Q_OBJECT
 
-   friend class AbstractColumnRenderer;
-
   public:
     explicit ColumnsView( /*bool R = false,*/ QWidget *parent = 0 );
     virtual ~ColumnsView();

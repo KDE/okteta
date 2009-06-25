@@ -82,6 +82,10 @@ void ByteArrayRowViewPrivate::init()
     mByteArrayColumn =
         new ByteArrayRowColumnRenderer( q, mByteArrayModel, mTableLayout, mTableRanges );
 
+    q->addColumn( mOffsetColumn );
+    q->addColumn( mBorderColumn );
+    q->addColumn( mByteArrayColumn );
+
     // select the active column
     mActiveCoding = AbstractByteArrayView::CharCodingId;
     mInactiveCoding = AbstractByteArrayView::ValueCodingId;
