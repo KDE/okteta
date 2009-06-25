@@ -22,8 +22,6 @@
 
 #include "valuecolumnrenderer.h"
 
-// lib
-#include "abstractcolumnframerenderer.h"
 // Okteta gui
 #include <helper.h>
 // Okteta core
@@ -41,11 +39,10 @@ static const KHECore::ValueCoding NotDefaultCoding = KHECore::DecimalCoding;
 static const int DefaultBinaryGapWidth = 1;
 
 
-ValueColumnRenderer::ValueColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer,
-                                          const KHECore::AbstractByteArrayModel *byteArrayModel,
+ValueColumnRenderer::ValueColumnRenderer( const KHECore::AbstractByteArrayModel *byteArrayModel,
                                           const KHE::Section &renderIndizes,
                                           const KHEUI::ByteArrayTableLayout *layout )
- : ByteColumnRenderer( columnFrameRenderer, byteArrayModel, renderIndizes, layout ),
+ : ByteColumnRenderer( byteArrayModel, renderIndizes, layout ),
    mCoding( NotDefaultCoding ),
    mByteCodec( 0 ),
    mBinaryGapWidth( DefaultBinaryGapWidth )

@@ -38,7 +38,7 @@ namespace KHEPrint
 class BorderColumnRenderer : public AbstractColumnRenderer
 {
   public:
-    BorderColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer, bool middle, bool inEmpty = false );
+    BorderColumnRenderer( bool middle, bool inEmpty = false );
     ~BorderColumnRenderer();
 
   public: // AbstractColumnRenderer API

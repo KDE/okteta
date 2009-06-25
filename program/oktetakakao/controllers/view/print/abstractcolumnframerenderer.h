@@ -49,8 +49,6 @@ class AbstractColumnFrameRendererPrivate;
 
 class AbstractColumnFrameRenderer : public AbstractFrameRenderer
 {
-   friend class KHEPrint::AbstractColumnRenderer;
-
   public:
     AbstractColumnFrameRenderer();
     virtual ~AbstractColumnFrameRenderer();
@@ -85,7 +83,7 @@ class AbstractColumnFrameRenderer : public AbstractFrameRenderer
     virtual void drawEmptyArea( QPainter *painter, int cx, int cy, int cw, int ch );
 
   protected:
-    /** called by AbstractColumnRenderer */
+    /** takes ownership of column renderer */
     void addColumn( KHEPrint::AbstractColumnRenderer *column );
     void removeColumn( KHEPrint::AbstractColumnRenderer *column );
 

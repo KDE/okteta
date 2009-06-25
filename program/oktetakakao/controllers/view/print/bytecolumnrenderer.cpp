@@ -45,11 +45,10 @@ static const KPixelX DefaultByteSpacingWidth = 3;
 static const KPixelX DefaultGroupSpacingWidth = 9;
 static const int DefaultNoOfGroupedBytes = 4;
 
-ByteColumnRenderer::ByteColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer,
-                                        const KHECore::AbstractByteArrayModel *byteArray,
+ByteColumnRenderer::ByteColumnRenderer( const KHECore::AbstractByteArrayModel *byteArray,
                                         const KHE::Section &renderIndizes,
                                         const KHEUI::ByteArrayTableLayout *layout )
- : AbstractColumnRenderer( columnFrameRenderer ),
+ : AbstractColumnRenderer(),
    mByteArrayModel( byteArray ),
    mRenderIndizes( renderIndizes ),
    mLayout( layout ),

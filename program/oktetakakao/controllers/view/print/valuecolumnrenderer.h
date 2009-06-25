@@ -39,8 +39,7 @@ namespace KHEPrint
 class ValueColumnRenderer : public ByteColumnRenderer
 {
   public:
-    ValueColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer,
-                         const KHECore::AbstractByteArrayModel *byteArrayModel,
+    ValueColumnRenderer( const KHECore::AbstractByteArrayModel *byteArrayModel,
                          const KHE::Section &renderIndizes,
                          const KHEUI::ByteArrayTableLayout *layout );
     virtual ~ValueColumnRenderer();

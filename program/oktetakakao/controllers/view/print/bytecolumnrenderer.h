@@ -65,8 +65,7 @@ class ByteColumnRenderer : public AbstractColumnRenderer
   public:
     enum KFrameStyle { Frame, Left, Right };
   public:
-    ByteColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer,
-                        const KHECore::AbstractByteArrayModel *byteArray,
+    ByteColumnRenderer( const KHECore::AbstractByteArrayModel *byteArray,
                         const KHE::Section &renderIndizes,
                         const KHEUI::ByteArrayTableLayout *layout );
     virtual ~ByteColumnRenderer();

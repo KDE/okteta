@@ -22,10 +22,9 @@
 
 #include "abstractcolumnrenderer.h"
 
-// lib
-#include "abstractcolumnframerenderer.h"
 // Qt
 #include <QtGui/QPainter>
+
 
 namespace KHEPrint
 {
@@ -33,14 +32,12 @@ namespace KHEPrint
 class AbstractColumnRendererPrivate
 {
   public:
-    AbstractColumnRendererPrivate( AbstractColumnFrameRenderer *columnFrameRenderer );
+    AbstractColumnRendererPrivate();
   public:
     void renderBlankLine( QPainter *painter ) const;
     void renderEmptyColumn( QPainter *painter, const KPixelXs &_Xs, const KPixelYs &Ys );
 
   public: // general column data
-    /** pointer to the view */
-    AbstractColumnFrameRenderer *mColumnFrameRenderer;
     /** should Column be displayed? */
     bool mVisible;
 
@@ -51,10 +48,10 @@ class AbstractColumnRendererPrivate
     KPixelXs mXSpan;
 };
 
-AbstractColumnRendererPrivate::AbstractColumnRendererPrivate( AbstractColumnFrameRenderer *columnFrameRenderer )
- : mColumnFrameRenderer( columnFrameRenderer ),
-   mVisible( true ),  //TODO: would false be better?
-   mLineHeight( columnFrameRenderer->lineHeight() ),
+
+AbstractColumnRendererPrivate::AbstractColumnRendererPrivate()
+ : mVisible( true ),  //TODO: would false be better?
+   mLineHeight( 0 ),
    mXSpan( KHE::Section::fromWidth(0,0) )
 {
 }
@@ -79,13 +76,10 @@ void AbstractColumnRendererPrivate::renderEmptyColumn( QPainter *painter, const 
 }
 
 
-AbstractColumnRenderer::AbstractColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer )
- : d( new AbstractColumnRendererPrivate(columnFrameRenderer) )
+AbstractColumnRenderer::AbstractColumnRenderer()
+ : d( new AbstractColumnRendererPrivate() )
 {
-    columnFrameRenderer->addColumn( this );
 }
-
-AbstractColumnFrameRenderer *AbstractColumnRenderer::columnFrameRenderer() const { return d->mColumnFrameRenderer; }
 
 KPixelX AbstractColumnRenderer::x()            const { return d->mXSpan.start(); }
 KPixelX AbstractColumnRenderer::rightX()       const { return d->mXSpan.end(); }

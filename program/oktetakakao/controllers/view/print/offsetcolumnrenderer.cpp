@@ -29,9 +29,8 @@
 namespace KHEPrint
 {
 
-OffsetColumnRenderer::OffsetColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer,
-                                            int firstLineOffset, int delta, KOffsetFormat::KFormat format )
- : AbstractColumnRenderer( columnFrameRenderer ),
+OffsetColumnRenderer::OffsetColumnRenderer( int firstLineOffset, int delta, KOffsetFormat::KFormat format )
+ : AbstractColumnRenderer(),
    mFirstLineOffset( firstLineOffset ),
    mDeltaPerLine( delta ),
    mMargin( 0 ),

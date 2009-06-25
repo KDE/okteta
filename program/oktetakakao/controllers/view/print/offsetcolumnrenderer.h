@@ -39,8 +39,7 @@ namespace KHEPrint
 class OffsetColumnRenderer : public AbstractColumnRenderer
 {
   public:
-    OffsetColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer,
-                          int firstLineOffset, int delta, KOffsetFormat::KFormat format );
+    OffsetColumnRenderer( int firstLineOffset, int delta, KOffsetFormat::KFormat format );
     virtual ~OffsetColumnRenderer();
 
   public:  // AbstractColumnRenderer API

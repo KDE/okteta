@@ -31,7 +31,6 @@
 class QPainter;
 using namespace KHEUI;
 
-class AbstractColumnFrameRenderer;
 
 namespace KHEPrint
 {
@@ -47,7 +46,7 @@ class AbstractColumnRendererPrivate;
 class AbstractColumnRenderer
 {
   public:
-    explicit AbstractColumnRenderer( AbstractColumnFrameRenderer *columnframeRenderer );
+    AbstractColumnRenderer();
     virtual ~AbstractColumnRenderer();
 
   public: // API to be reimplemented in the subclasses
@@ -81,8 +80,6 @@ class AbstractColumnRenderer
     void setLineHeight( KPixelY H );
 
   public: // value access
-    /** */
-    AbstractColumnFrameRenderer *columnFrameRenderer() const;
     /** left offset x in pixel */
     KPixelX x() const;
     /** total width in pixel */

@@ -22,8 +22,6 @@
 
 #include "bordercolumnrenderer.h"
 
-// lib
-#include "abstractcolumnframerenderer.h"
 // Qt
 #include <QtGui/QPainter>
 
@@ -35,8 +33,8 @@ static const KPixelX DefaultWidth = 9;
 static const KPixelX LineX = DefaultWidth / 2;
 
 
-BorderColumnRenderer::BorderColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer, bool middle, bool inEmpty )
- : AbstractColumnRenderer( columnFrameRenderer ),
+BorderColumnRenderer::BorderColumnRenderer( bool middle, bool inEmpty )
+ : AbstractColumnRenderer(),
    mMiddle( middle ), mInEmpty( inEmpty )
 {
     setWidth( middle ? DefaultWidth : LineX-1 );

@@ -22,8 +22,6 @@
 
 #include "charcolumnrenderer.h"
 
-// lib
-#include "abstractcolumnframerenderer.h"
 // Qt
 #include <QtGui/QPainter>
 
@@ -36,11 +34,10 @@ static const char     DefaultSubstituteChar =   (char)'.';
 static const char     CharColumnDefaultUndefinedChar =    (char)'?';
 
 
-CharColumnRenderer::CharColumnRenderer( AbstractColumnFrameRenderer *columnFrameRenderer,
-                                        const KHECore::AbstractByteArrayModel *byteArrayModel,
+CharColumnRenderer::CharColumnRenderer( const KHECore::AbstractByteArrayModel *byteArrayModel,
                                         const KHE::Section &renderIndizes,
                                         const KHEUI::ByteArrayTableLayout *layout )
- : ByteColumnRenderer( columnFrameRenderer, byteArrayModel, renderIndizes, layout ),
+ : ByteColumnRenderer( byteArrayModel, renderIndizes, layout ),
    mShowsNonprinting( DefaultShowsNonprinting ),
    mSubstituteChar( DefaultSubstituteChar ),
    mUndefinedChar( CharColumnDefaultUndefinedChar )
