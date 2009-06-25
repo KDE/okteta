@@ -37,7 +37,7 @@ namespace KHEUI
 
 class ColumnsView;
 
-class ColumnRendererPrivate;
+class AbstractColumnRendererPrivate;
 
 /** base class for columns of the ColumnsView
   *
@@ -110,7 +110,7 @@ class AbstractColumnRenderer
     void renderBlankLine( QPainter* painter ) const;
 
   private:
-     ColumnRendererPrivate* const d;
+     AbstractColumnRendererPrivate* const d;
 };
 
 }

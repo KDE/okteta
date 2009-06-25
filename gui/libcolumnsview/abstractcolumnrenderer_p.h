@@ -34,13 +34,13 @@
 namespace KHEUI
 {
 
-class ColumnRendererPrivate
+class AbstractColumnRendererPrivate
 {
   public:
-    explicit ColumnRendererPrivate( ColumnsView* columnsView );
+    explicit AbstractColumnRendererPrivate( ColumnsView* columnsView );
 
   public:
-    void renderBlankLine( QPainter *painter ) const;
+    void renderBlankLine( QPainter* painter ) const;
     void renderEmptyColumn( QPainter* painter, const KPixelXs& xSpan, const KPixelYs& ySpan );
 
   public: // general column data
@@ -57,7 +57,7 @@ class ColumnRendererPrivate
 };
 
 
-inline ColumnRendererPrivate::ColumnRendererPrivate( ColumnsView* columnsView )
+inline AbstractColumnRendererPrivate::AbstractColumnRendererPrivate( ColumnsView* columnsView )
  : mColumnView( columnsView ),
    mIsVisible( true ),  //TODO: would false be better?
    mLineHeight( 0 ),//columnsView->lineHeight() ),
@@ -65,7 +65,7 @@ inline ColumnRendererPrivate::ColumnRendererPrivate( ColumnsView* columnsView )
 {
 }
 
-inline void ColumnRendererPrivate::renderBlankLine( QPainter* painter ) const
+inline void AbstractColumnRendererPrivate::renderBlankLine( QPainter* painter ) const
 {
     if( mLineHeight > 0 )
     {
@@ -75,7 +75,7 @@ inline void ColumnRendererPrivate::renderBlankLine( QPainter* painter ) const
     }
 }
 
-inline void ColumnRendererPrivate::renderEmptyColumn( QPainter* painter, const KPixelXs& _xSpan, const KPixelYs& ySpan )
+inline void AbstractColumnRendererPrivate::renderEmptyColumn( QPainter* painter, const KPixelXs& _xSpan, const KPixelYs& ySpan )
 {
     KPixelXs xSpan( _xSpan );
     xSpan.restrictTo( mXSpan );

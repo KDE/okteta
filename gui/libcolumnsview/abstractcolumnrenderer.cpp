@@ -34,7 +34,7 @@ namespace KHEUI
 
 
 AbstractColumnRenderer::AbstractColumnRenderer( ColumnsView* columnsView )
- : d( new ColumnRendererPrivate(columnsView) )
+ : d( new AbstractColumnRendererPrivate(columnsView) )
 {
 }
 
