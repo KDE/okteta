@@ -39,7 +39,7 @@ static const KPixelX LineX = BorderMargin;
 
 
 BorderColumnRenderer::BorderColumnRenderer( ColumnsView *columnsView, bool lineDrawn )
- : ColumnRenderer( columnsView ),
+ : AbstractColumnRenderer( columnsView ),
    mLineDrawn( lineDrawn )
 {
     setWidth( mLineDrawn ? BorderWidth : BorderMargin );
@@ -47,14 +47,14 @@ BorderColumnRenderer::BorderColumnRenderer( ColumnsView *columnsView, bool lineD
 
 void BorderColumnRenderer::renderColumn( QPainter* painter, const KPixelXs& Xs, const KPixelYs& Ys )
 {
-    ColumnRenderer::renderColumn( painter, Xs,Ys );
+    AbstractColumnRenderer::renderColumn( painter, Xs,Ys );
 
     renderBorderLine( painter, Xs,Ys );
 }
 
 void BorderColumnRenderer::renderEmptyColumn( QPainter *painter, const KPixelXs &Xs, const KPixelYs &Ys )
 {
-    ColumnRenderer::renderEmptyColumn( painter, Xs,Ys );
+    AbstractColumnRenderer::renderEmptyColumn( painter, Xs,Ys );
 
     renderBorderLine( painter, Xs,Ys );
 }

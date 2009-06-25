@@ -25,7 +25,7 @@
 
 
 // lib
-#include "columnrenderer.h"
+#include <abstractcolumnrenderer.h>
 
 
 namespace KHEUI
@@ -36,13 +36,13 @@ namespace KHEUI
   *@author Friedrich W. H. Kossebau
   */
 
-class BorderColumnRenderer : public ColumnRenderer
+class BorderColumnRenderer : public AbstractColumnRenderer
 {
   public:
     BorderColumnRenderer( ColumnsView *columnsView, bool lineDrawn );
     virtual ~BorderColumnRenderer();
 
-  public: // ColumnRenderer-API
+  public: // AbstractColumnRenderer-API
     virtual void renderColumn( QPainter* painter, const KPixelXs& Xs, const KPixelYs& Ys );
     virtual void renderEmptyColumn( QPainter *painter, const KPixelXs &Xs, const KPixelYs &Ys );
 

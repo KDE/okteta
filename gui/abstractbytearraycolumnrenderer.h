@@ -24,7 +24,7 @@
 #define KHE_UI_ABSTRACTBYTEARRAYCOLUMNRENDERER_H
 
 // ColumnsView
-#include <columnrenderer.h>
+#include <abstractcolumnrenderer.h>
 // Okteta core
 #include <khe.h>
 #include <abstractbytearraymodel.h>
@@ -58,7 +58,7 @@ const int NoByteFound = -1;
   *
   *@author Friedrich W. H. Kossebau
   */
-class AbstractByteArrayColumnRenderer : public ColumnRenderer
+class AbstractByteArrayColumnRenderer : public AbstractColumnRenderer
 {
   public:
     enum FrameStyle { Frame, Left, Right };
@@ -68,7 +68,7 @@ class AbstractByteArrayColumnRenderer : public ColumnRenderer
     virtual ~AbstractByteArrayColumnRenderer();
 
 
-  public: // ColumnRenderer API
+  public: // AbstractColumnRenderer API
     virtual void renderFirstLine( QPainter *painter, const KPixelXs &Xs, int firstLineIndex );
     virtual void renderNextLine( QPainter *painter );
 

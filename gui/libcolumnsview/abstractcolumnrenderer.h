@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2003,2007,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_COLUMNRENDERER_H
-#define KHE_UI_COLUMNRENDERER_H
+#ifndef KHE_UI_ABSTRACTCOLUMNRENDERER_H
+#define KHE_UI_ABSTRACTCOLUMNRENDERER_H
 
 
 // lib
@@ -45,12 +45,12 @@ class ColumnRendererPrivate;
   *@author Friedrich W. H. Kossebau
   */
 
-class ColumnRenderer
+class AbstractColumnRenderer
 {
 //    friend class ColumnsView;
   public:
-    explicit ColumnRenderer( ColumnsView *columnsView );
-    virtual ~ColumnRenderer();
+    explicit AbstractColumnRenderer( ColumnsView* columnsView );
+    virtual ~AbstractColumnRenderer();
 
   public: // API to be reimplemented in the subclasses
     /** Before an update of the columns view each column that intersects with the area to be painted
@@ -59,32 +59,31 @@ class ColumnRenderer
       * This function enables a one-time-calculation for such data that must be stored in some
       * class members, though.
       * @param painter painter variable
-      * @param cx
-      * @param cw
+      * @param xSpan
       * @param firstLineIndex no of the first of the range of lines to paint
       */
-    virtual void renderFirstLine( QPainter *painter, const KPixelXs &Xs, int firstLineIndex );
+    virtual void renderFirstLine( QPainter* painter, const KPixelXs& xSpan, int firstLineIndex );
     /** the actual painting call for a column's line.
       * The default implementation simply paints the background
       */
-    virtual void renderNextLine( QPainter *painter );
+    virtual void renderNextLine( QPainter* painter );
 
     /** */
-    virtual void renderColumn( QPainter *painter, const KPixelXs &Xs, const KPixelYs &Ys );
+    virtual void renderColumn( QPainter* painter, const KPixelXs& xSpan, const KPixelYs& ySpan );
     /** */
-    virtual void renderEmptyColumn( QPainter *painter, const KPixelXs &Xs, const KPixelYs &Ys );
+    virtual void renderEmptyColumn( QPainter* painter, const KPixelXs& xSpan, const KPixelYs& ySpan );
 
   public: // modification access
     /** sets starting point of the column */
-    void setX( KPixelX newX );
+    void setX( KPixelX x );
     /** sets visibily */
-    void setVisible( bool visible );
+    void setVisible( bool isVisible );
     /** buffer actual line height in column */
     void setLineHeight( KPixelY lineHeight );
 
   public: // value access
     /** */
-    ColumnsView *columnsView() const;
+    ColumnsView* columnsView() const;
     /** left offset x in pixel */
     KPixelX x() const;
     /** total width in pixel */
@@ -100,18 +99,18 @@ class ColumnRenderer
 
   public: // functional logic
     /** true if column overlaps with pixels between x-positions x1, x2 */
-    bool overlaps( const KPixelXs &Xs ) const;
+    bool overlaps( const KPixelXs& xSpan ) const;
 
   protected:
     /** sets width of the column */
     void setWidth( KPixelX width );
     /** */
-    void restrictToXSpan( KPixelXs *Xs ) const;
+    void restrictToXSpan( KPixelXs* xSpan ) const;
     /** */
-    void renderBlankLine( QPainter *painter ) const;
+    void renderBlankLine( QPainter* painter ) const;
 
   private:
-     ColumnRendererPrivate * const d;
+     ColumnRendererPrivate* const d;
 };
 
 }

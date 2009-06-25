@@ -37,7 +37,7 @@
 namespace KHEUI
 {
 
-class ColumnRenderer;
+class AbstractColumnRenderer;
 class ColumnsViewPrivate;
 
 /** general class for widgets with columns that display different aspects of the same data
@@ -50,7 +50,7 @@ class OKTETAGUI_EXPORT ColumnsView : public QAbstractScrollArea
 {
    Q_OBJECT
 
-   friend class ColumnRenderer;
+   friend class AbstractColumnRenderer;
 
   public:
     explicit ColumnsView( /*bool R = false,*/ QWidget *parent = 0 );
@@ -118,9 +118,9 @@ class OKTETAGUI_EXPORT ColumnsView : public QAbstractScrollArea
     virtual void renderEmptyArea( QPainter *painter, int cx, int cy, int cw, int ch );
 
   protected:
-    /** called by ColumnRenderer */
-    void addColumn( ColumnRenderer *columnRenderer );
-    void removeColumn( ColumnRenderer *columnRenderer );
+    /** called by AbstractColumnRenderer */
+    void addColumn( AbstractColumnRenderer *columnRenderer );
+    void removeColumn( AbstractColumnRenderer *columnRenderer );
 
   protected: //
     /** sets height of all lines and propagates this information to all columns
@@ -139,9 +139,9 @@ class OKTETAGUI_EXPORT ColumnsView : public QAbstractScrollArea
     void updateWidths();
     void updateScrollBars();
     /** calls updateContent for the Column */
-    void updateColumn( ColumnRenderer& columnRenderer );
+    void updateColumn( AbstractColumnRenderer& columnRenderer );
     /** calls updateContent for the Column for the given lines, if needed */
-    void updateColumn( ColumnRenderer& columnRenderer, const KHE::Section& lines );
+    void updateColumn( AbstractColumnRenderer& columnRenderer, const KHE::Section& lines );
 
   private:
     ColumnsViewPrivate * const d;

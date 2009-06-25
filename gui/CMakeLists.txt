@@ -20,7 +20,7 @@ set( libcontroller_SRCS
 )
 
 set( libcolumnsview_SRCS
-  libcolumnsview/columnrenderer.cpp
+  libcolumnsview/abstractcolumnrenderer.cpp
   libcolumnsview/columnsview.cpp
 )
 

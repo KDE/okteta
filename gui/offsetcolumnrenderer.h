@@ -25,7 +25,7 @@
 
 // lib
 #include "koffsetformat.h"
-#include "columnrenderer.h"
+#include <abstractcolumnrenderer.h>
 
 
 namespace KHEUI
@@ -36,13 +36,13 @@ class ByteArrayTableLayout;
   *@author Friedrich W. H. Kossebau
   */
 
-class OffsetColumnRenderer : public ColumnRenderer
+class OffsetColumnRenderer : public AbstractColumnRenderer
 {
   public:
     OffsetColumnRenderer( ColumnsView* columnsView, ByteArrayTableLayout* layout, KOffsetFormat::KFormat format );
     virtual ~OffsetColumnRenderer();
 
-  public:  // ColumnRenderer API
+  public:  // AbstractColumnRenderer API
     virtual void renderFirstLine( QPainter *painter, const KPixelXs &Xs, int firstLineIndex );
     virtual void renderNextLine( QPainter *painter );
     virtual void renderColumn( QPainter* painter, const KPixelXs& Xs, const KPixelYs& Ys );

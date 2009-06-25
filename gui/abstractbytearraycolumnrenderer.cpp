@@ -54,7 +54,7 @@ static const int DefaultNoOfGroupedBytes = 4;
 
 AbstractByteArrayColumnRenderer::AbstractByteArrayColumnRenderer( ColumnsView *columnsView,
     KHECore::AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges )
- : ColumnRenderer( columnsView ),
+ : AbstractColumnRenderer( columnsView ),
    mByteArrayModel( byteArrayModel ),
    mLayout( layout ),
    mRanges( ranges ),

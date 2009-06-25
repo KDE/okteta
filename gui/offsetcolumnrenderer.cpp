@@ -38,7 +38,7 @@ static const int rightOffsetMargin = 2;
 
 OffsetColumnRenderer::OffsetColumnRenderer( ColumnsView* columnsView,
     ByteArrayTableLayout* layout, KOffsetFormat::KFormat format )
- : ColumnRenderer( columnsView ),
+ : AbstractColumnRenderer( columnsView ),
    mLayout( layout ),
    mDigitWidth( 0 ),
    mDigitBaseLine( 0 ),
