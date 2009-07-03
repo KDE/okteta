@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -26,22 +26,146 @@
 #include <abstractbytearrayfilter.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
+#include <khechar.h>
+#include <charcodec.h>
 // Qt
 #include <QtGui/QApplication>
 
 
 static const int MaxEventProcessTimeInMS = 100;
+static const int IgnoreCaseSearchedByteCountSignalLimit = 10000;
 
+
+SearchJob::SearchJob( const KHECore::AbstractByteArrayModel* model,
+                      const QByteArray& searchData, int startIndex, bool findForward, bool ignoreCase, const QString& charCodecName )
+  : mByteArrayModel( model ),
+    mSearchData( searchData ),
+    mStartIndex( startIndex),
+    mFindForward( findForward ),
+    mIgnoreCase( ignoreCase ),
+    mCharCodec( KHECore::CharCodec::createCodec(charCodecName) )
+{
+    if( mIgnoreCase )
+    {
+        // create variant of search data with all letters lowercase
+        const int patternLength = mSearchData.size();
+        char* pattern = mSearchData.data();
+        for( int i = 0; i<patternLength; ++i )
+        {
+            const KHECore::KChar decodedChar = mCharCodec->decode( pattern[i] );
+
+            if( decodedChar.isUndefined() )
+                continue;
+
+            mCharCodec->encode( &pattern[i], decodedChar.toLower() );
+        }
+    }
+}
+
+
+int SearchJob::indexOfIgnoreCase()
+{
+    int result = -1;
+
+    const char* const pattern = mSearchData.constData();
+    const int patternLength = mSearchData.size();
+    const int lastFrom = mByteArrayModel->size() - patternLength;
+
+    int nextSignalByteCount = mStartIndex + IgnoreCaseSearchedByteCountSignalLimit;
+
+    for( int i=mStartIndex; i<=lastFrom ; ++i )
+    {
+        int c = 0;
+        for( ; c<patternLength; ++c )
+        {
+            char byte = mByteArrayModel->datum( i+c );
+
+            // turn to lowercase if possible
+            // TODO: optimize, like caching and not reencoding chars without a lower letter
+            const KHECore::KChar decodedChar = mCharCodec->decode( byte );
+            if( ! decodedChar.isUndefined() )
+                mCharCodec->encode( &byte, decodedChar.toLower() );
+
+            if( byte != pattern[c]  )
+                break;
+        }
+
+        if( nextSignalByteCount <= i )
+        {
+            nextSignalByteCount += IgnoreCaseSearchedByteCountSignalLimit;
+            onBytesSearched();//( i-fromOffset+1 );
+        }
+
+        if( c == patternLength )
+        {
+            result = i;
+            break;
+        }
+    }
+
+    return result;
+}
+
+int SearchJob::lastIndexOfIgnoreCase()
+{
+    int result = -1;
+
+    const char* const pattern = mSearchData.constData();
+    const int patternLength = mSearchData.size();
+    const int lastFrom = mByteArrayModel->size() - patternLength;
+
+    const int fromOffset =
+        ( mStartIndex < 0 ) ?        lastFrom + 1 + mStartIndex :
+        ( mStartIndex > lastFrom ) ? lastFrom :
+        /* else */                   mStartIndex;
+
+    int nextSignalByteCount = fromOffset - IgnoreCaseSearchedByteCountSignalLimit;
+
+    for( int i=fromOffset; i>=0 ; --i )
+    {
+        int c = 0;
+        for( ; c<patternLength; ++c )
+        {
+            char byte = mByteArrayModel->datum( i+c );
+
+            // turn to lowercase if possible
+            // TODO: optimize, like caching and not reencoding chars without a lower letter
+            const KHECore::KChar decodedChar = mCharCodec->decode( byte );
+            if( ! decodedChar.isUndefined() )
+                mCharCodec->encode( &byte, decodedChar.toLower() );
+
+            if( byte != pattern[c]  )
+                break;
+        }
+
+        if( nextSignalByteCount >= i )
+        {
+            nextSignalByteCount -= IgnoreCaseSearchedByteCountSignalLimit;
+            onBytesSearched();//( i-fromOffset+1 );
+        }
+
+        if( c == patternLength )
+        {
+            result = i;
+            break;
+        }
+    }
+
+    return result;
+}
 
 int SearchJob::exec()
 {
     //TODO: what kind of signal could a filter send?
     connect( mByteArrayModel, SIGNAL(searchedBytes(int)), SLOT(onBytesSearched()) );
 
-    // TODO: support ignorecase
     const int result = mFindForward ?
-        mByteArrayModel->indexOf( mSearchData, mStartIndex ) :
-        mByteArrayModel->lastIndexOf( mSearchData, mStartIndex-mSearchData.size()+1 );
+        ( mIgnoreCase ?
+            indexOfIgnoreCase() :
+            mByteArrayModel->indexOf( mSearchData, mStartIndex ) ) :
+        ( mIgnoreCase ?
+            lastIndexOfIgnoreCase() :
+            mByteArrayModel->lastIndexOf( mSearchData, mStartIndex-mSearchData.size()+1 ) );
 
     deleteLater(); // TODO: could be reused on next search
 
@@ -51,4 +175,10 @@ int SearchJob::exec()
 void SearchJob::onBytesSearched()
 {
     QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, MaxEventProcessTimeInMS );
+}
+
+
+SearchJob::~SearchJob()
+{
+    delete mCharCodec;
 }

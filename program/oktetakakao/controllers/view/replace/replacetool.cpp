@@ -174,7 +174,8 @@ void ReplaceTool::doReplace( KFindDirection direction, int startIndex )
     {
         // TODO: support ignorecase
         const bool isForward = ( direction == FindForward );
-        SearchJob* searchJob = new SearchJob( mByteArrayModel, mSearchData, startIndex, isForward );
+        SearchJob* searchJob =
+            new SearchJob( mByteArrayModel, mSearchData, startIndex, isForward, mIgnoreCase, mByteArrayDisplay->charCodingName() );
         const int pos = searchJob->exec();
 
         if( pos != -1 )

@@ -134,8 +134,11 @@ void KAbstractFindDialog::setupCheckBoxes( QCheckBox *optionCheckBox )
 
 bool KAbstractFindDialog::fromCursor()            const { return AtCursorCheckBox->isChecked(); }
 bool KAbstractFindDialog::inSelection()           const { return SelectedCheckBox->isChecked(); }
-bool KAbstractFindDialog::ignoreCase()            const { return !CaseSensitiveCheckBox->isChecked(); }
 KFindDirection KAbstractFindDialog::direction() const { return BackwardsCheckBox->isChecked() ? FindBackward : FindForward; }
+bool KAbstractFindDialog::ignoreCase()            const
+{
+    return ( SearchDataEdit->format() == KByteArrayLineEdit::CharCoding ) && ! CaseSensitiveCheckBox->isChecked();
+}
 
 QByteArray KAbstractFindDialog::data()  const
 {

@@ -154,7 +154,8 @@ void SearchTool::doSearch( KFindDirection direction, int startIndex )
         QApplication::setOverrideCursor( Qt::WaitCursor );
 
         const bool isForward = ( direction == FindForward );
-        SearchJob* searchJob = new SearchJob( mByteArrayModel, mSearchData, startIndex, isForward );
+        SearchJob* searchJob =
+            new SearchJob( mByteArrayModel, mSearchData, startIndex, isForward, mIgnoreCase, mByteArrayDisplay->charCodingName() );
         const int pos = searchJob->exec();
 
         QApplication::restoreOverrideCursor();
