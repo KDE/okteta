@@ -23,8 +23,10 @@
 #include "gotooffsetcontroller.h"
 
 // controller
-#include "kgotooffsetdialog.h"
+#include "gotooffsettoolview.h"
 #include "gotooffsettool.h"
+// Kakao gui
+#include <kitoolinlineviewable.h>
 // KDE
 #include <KXMLGUIClient>
 #include <KLocale>
@@ -33,8 +35,8 @@
 
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
-GotoOffsetController::GotoOffsetController( KXMLGUIClient* guiClient )
- : mGotoOffsetDialog( 0 )
+GotoOffsetController::GotoOffsetController( KDE::If::ToolInlineViewable* toolInlineViewable, KXMLGUIClient* guiClient )
+ : mToolInlineViewable( toolInlineViewable )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -42,12 +44,15 @@ GotoOffsetController::GotoOffsetController( KXMLGUIClient* guiClient )
     mGotoOffsetAction->setText( i18nc("@action:inmenu","&Go to Offset...") );
     mGotoOffsetAction->setIcon( KIcon("go-jump") );
     mGotoOffsetAction->setShortcut( Qt::CTRL + Qt::Key_G );
-    mGotoOffsetAction->setEnabled( false );
     connect( mGotoOffsetAction, SIGNAL(triggered(bool) ), SLOT(gotoOffset()) );
 
     mTool = new GotoOffsetTool();
-    connect( mTool, SIGNAL(isApplyableChanged( bool )),
+    connect( mTool, SIGNAL(isUsableChanged( bool )),
              mGotoOffsetAction, SLOT(setEnabled( bool )) );
+    mGotoOffsetAction->setEnabled( mTool->isUsable() );
+
+    mView = new GotoOffsetToolView( mTool );
+    toolInlineViewable->addToolInlineView( mView );
 }
 
 void GotoOffsetController::setTargetModel( AbstractModel* model )
@@ -58,17 +63,12 @@ void GotoOffsetController::setTargetModel( AbstractModel* model )
 
 void GotoOffsetController::gotoOffset()
 {
-    // ensure dialog
-    if( !mGotoOffsetDialog )
-        mGotoOffsetDialog = new KGotoOffsetDialog( mTool, 0 );
-
-    mGotoOffsetDialog->show();
-    mGotoOffsetDialog->setFocus();
+    mToolInlineViewable->setCurrentToolInlineView( mView );
 }
 
 
 GotoOffsetController::~GotoOffsetController()
 {
-    delete mGotoOffsetDialog;
+    delete mView;
     delete mTool;
 }

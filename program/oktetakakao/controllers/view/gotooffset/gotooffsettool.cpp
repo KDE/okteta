@@ -49,6 +49,11 @@ int GotoOffsetTool::currentOffset() const
         -1;
 }
 
+bool GotoOffsetTool::isUsable() const
+{
+    return ( mByteArrayDisplay && mByteArrayModel && (mByteArrayModel->size() > 0) );
+}
+
 bool GotoOffsetTool::isApplyable() const
 {
     const int newPosition = finalTargetOffset();
@@ -61,6 +66,7 @@ QString GotoOffsetTool::title() const { return i18nc("@title:window of the tool 
 
 void GotoOffsetTool::setTargetModel( AbstractModel* model )
 {
+    const bool oldIsUsable = isUsable();
     const bool oldIsApplyable = isApplyable();
 
     if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
@@ -74,10 +80,15 @@ void GotoOffsetTool::setTargetModel( AbstractModel* model )
 
     if( mByteArrayDisplay && mByteArrayModel )
     {
+        connect( mByteArrayModel, SIGNAL(contentsChanged( const KHE::ArrayChangeMetricsList& )),
+                 SLOT(onContentsChanged()) );
         // TODO: update isApplyable on cursor movement and size changes
     }
 
+    const bool newIsUsable = isUsable();
     const bool newIsApplyable = isApplyable();
+    if( oldIsUsable != newIsUsable )
+        emit isUsableChanged( newIsUsable );
     if( oldIsApplyable != newIsApplyable )
         emit isApplyableChanged( newIsApplyable );
 }
@@ -150,6 +161,12 @@ int GotoOffsetTool::finalTargetOffset() const
                              mTargetOffset );
 
     return newPosition;
+}
+
+void GotoOffsetTool::onContentsChanged()
+{
+    // TODO: find status before content changed, e.g. by caching
+    emit isUsableChanged( isUsable() );
 }
 
 GotoOffsetTool::~GotoOffsetTool()
