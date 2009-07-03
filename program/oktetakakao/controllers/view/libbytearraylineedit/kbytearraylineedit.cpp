@@ -29,6 +29,7 @@
 #include <KLineEdit>
 // Qt
 #include <QtGui/QLayout>
+#include <QtGui/QAbstractItemView>
 
 
 class KByteArrayLineEditPrivate
@@ -55,6 +56,12 @@ void KByteArrayLineEditPrivate::setup( KByteArrayLineEdit *widget )
     mFormatComboBox = new KComboBox( widget );
     mFormatComboBox->addItems( KByteArrayValidator::codecNames() );
     widget->connect( mFormatComboBox, SIGNAL(activated(int)), SLOT(onFormatChanged(int)) );
+    QAbstractItemView* formatComboBoxListView = mFormatComboBox->view();
+    QObject::connect( formatComboBoxListView, SIGNAL(activated( const QModelIndex& )),
+             mDataEdit, SLOT(setFocus()) );
+    // TODO: is a workaround for Qt 4.5.1 which doesn't emit activated() for mouse clicks
+    QObject::connect( formatComboBoxListView, SIGNAL(pressed( const QModelIndex& )),
+             mDataEdit, SLOT(setFocus()) );
 
     mDataEdit = new KLineEdit( widget );
     widget->setFocusProxy( mDataEdit );
