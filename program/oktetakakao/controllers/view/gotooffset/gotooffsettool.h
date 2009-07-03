@@ -54,7 +54,6 @@ class GotoOffsetTool : public AbstractTool
     bool isSelectionToExtent() const;
     bool isBackwards() const;
 
-    bool isUsable() const;
     bool isApplyable() const; // candidate for AbstractTool API
 
   public Q_SLOTS: // settings
@@ -67,12 +66,8 @@ class GotoOffsetTool : public AbstractTool
     void gotoOffset();
 
   Q_SIGNALS:
-    void isUsableChanged( bool isUsable );
     void isApplyableChanged( bool isApplyable );  // candidate for AbstractTool API
     // TODO: isAtLine useful, to prevent noop actions, or should they be allowed, too?
-
-  protected Q_SLOTS:
-    void onContentsChanged();
 
   protected:
     int finalTargetOffset() const;

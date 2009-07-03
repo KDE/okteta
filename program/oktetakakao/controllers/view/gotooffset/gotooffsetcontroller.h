@@ -27,11 +27,8 @@
 // Kakao gui
 #include <abstractxmlguicontroller.h>
 
-class GotoOffsetToolView;
+class KGotoOffsetDialog;
 class GotoOffsetTool;
-namespace KDE { namespace If {
-class ToolInlineViewable;
-} }
 class KAction;
 class KXMLGUIClient;
 
@@ -41,7 +38,7 @@ class GotoOffsetController : public AbstractXmlGuiController
   Q_OBJECT
 
   public:
-    explicit GotoOffsetController( KDE::If::ToolInlineViewable* toolInlineViewable, KXMLGUIClient* guiClient );
+    explicit GotoOffsetController( KXMLGUIClient* guiClient );
     virtual ~GotoOffsetController();
 
   public: // AbstractXmlGuiController API
@@ -53,9 +50,7 @@ class GotoOffsetController : public AbstractXmlGuiController
   protected:
     KAction* mGotoOffsetAction;
 
-    KDE::If::ToolInlineViewable* mToolInlineViewable;
-
-    GotoOffsetToolView* mView;
+    KGotoOffsetDialog* mGotoOffsetDialog;
     GotoOffsetTool* mTool;
 };
 

@@ -23,10 +23,8 @@
 #include "gotooffsetcontroller.h"
 
 // controller
-#include "gotooffsettoolview.h"
+#include "kgotooffsetdialog.h"
 #include "gotooffsettool.h"
-// Kakao gui
-#include <kitoolinlineviewable.h>
 // KDE
 #include <KXMLGUIClient>
 #include <KLocale>
@@ -35,8 +33,8 @@
 
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
-GotoOffsetController::GotoOffsetController( KDE::If::ToolInlineViewable* toolInlineViewable, KXMLGUIClient* guiClient )
- : mToolInlineViewable( toolInlineViewable )
+GotoOffsetController::GotoOffsetController( KXMLGUIClient* guiClient )
+ : mGotoOffsetDialog( 0 )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -44,15 +42,12 @@ GotoOffsetController::GotoOffsetController( KDE::If::ToolInlineViewable* toolInl
     mGotoOffsetAction->setText( i18nc("@action:inmenu","&Go to Offset...") );
     mGotoOffsetAction->setIcon( KIcon("go-jump") );
     mGotoOffsetAction->setShortcut( Qt::CTRL + Qt::Key_G );
+    mGotoOffsetAction->setEnabled( false );
     connect( mGotoOffsetAction, SIGNAL(triggered(bool) ), SLOT(gotoOffset()) );
 
     mTool = new GotoOffsetTool();
-    connect( mTool, SIGNAL(isUsableChanged( bool )),
+    connect( mTool, SIGNAL(isApplyableChanged( bool )),
              mGotoOffsetAction, SLOT(setEnabled( bool )) );
-    mGotoOffsetAction->setEnabled( mTool->isUsable() );
-
-    mView = new GotoOffsetToolView( mTool );
-    toolInlineViewable->addToolInlineView( mView );
 }
 
 void GotoOffsetController::setTargetModel( AbstractModel* model )
@@ -63,12 +58,17 @@ void GotoOffsetController::setTargetModel( AbstractModel* model )
 
 void GotoOffsetController::gotoOffset()
 {
-    mToolInlineViewable->setCurrentToolInlineView( mView );
+    // ensure dialog
+    if( !mGotoOffsetDialog )
+        mGotoOffsetDialog = new KGotoOffsetDialog( mTool, 0 );
+
+    mGotoOffsetDialog->show();
+    mGotoOffsetDialog->setFocus();
 }
 
 
 GotoOffsetController::~GotoOffsetController()
 {
-    delete mView;
+    delete mGotoOffsetDialog;
     delete mTool;
 }
