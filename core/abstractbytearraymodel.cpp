@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Core library, part of the KDE project.
 
-    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -27,6 +27,7 @@ namespace KHECore
 {
 
 static const int SearchedByteCountSignalLimit = 10000;
+
 
 AbstractByteArrayModel::AbstractByteArrayModel() {}
 
@@ -67,19 +68,18 @@ int AbstractByteArrayModel::indexOf( const char *pattern, int patternLength, int
     int result = -1;
 
     const int lastFrom = size() - patternLength;
-    int searchedBytesCount = 0;
+    int nextSignalByteCount = fromOffset + SearchedByteCountSignalLimit;
 
     for( int i=fromOffset; i<=lastFrom ; ++i )
     {
-        ++searchedBytesCount;
         int c = 0;
         for( ; c<patternLength; ++c )
             if( pattern[c] != datum(i+c) )
                 break;
 
-        if( searchedBytesCount >= SearchedByteCountSignalLimit )
+        if( nextSignalByteCount <= i )
         {
-            searchedBytesCount = 0;
+            nextSignalByteCount += SearchedByteCountSignalLimit;
             emit searchedBytes( i-fromOffset+1 );
         }
 
@@ -98,24 +98,24 @@ int AbstractByteArrayModel::lastIndexOf( const char *pattern, int patternLength,
     int result = -1;
 
     const int lastFrom = size() - patternLength;
-    int searchedBytesCount = 0;
 
     if( fromOffset < 0 )
         fromOffset = lastFrom + 1 + fromOffset;
     else if( fromOffset > lastFrom )
         fromOffset = lastFrom;
 
+    int nextSignalByteCount = fromOffset - SearchedByteCountSignalLimit;
+
     for( int i=fromOffset; i>=0 ; --i )
     {
-        ++searchedBytesCount;
         int c = 0;
         for( ; c<patternLength; ++c )
             if( pattern[c] != datum(i+c) )
                 break;
 
-        if( searchedBytesCount >= SearchedByteCountSignalLimit )
+        if( nextSignalByteCount >= i )
         {
-            searchedBytesCount = 0;
+            nextSignalByteCount -= SearchedByteCountSignalLimit;
             emit searchedBytes( i-fromOffset+1 );
         }
 
@@ -132,5 +132,3 @@ int AbstractByteArrayModel::lastIndexOf( const char *pattern, int patternLength,
 AbstractByteArrayModel::~AbstractByteArrayModel() {}
 
 }
-
-#include "abstractbytearraymodel.moc"
