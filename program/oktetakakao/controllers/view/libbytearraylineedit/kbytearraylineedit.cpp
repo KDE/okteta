@@ -31,7 +31,7 @@
 #include <QtGui/QLayout>
 #include <QtGui/QAbstractItemView>
 
-#include <KDebug>
+
 class KByteArrayLineEditPrivate
 {
   public:
