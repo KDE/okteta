@@ -182,14 +182,23 @@ Fixed after 0.3 Beta 2:
 * bookmark is not painted correctly if cursor moves from it
 * minimumsize of status bar no longer limited to sum of size of embedded widgets, using new class Statusbar/StatusBarLayout
 
+Fixed after 0.3 RC 1:
+---------------------
+* search/replace did not respect ignorecase
+* selecting a format in the popup of the kbytearraylinedit format chooser now moves the cursor to the linedit
+* delayed filebrowser init to speedup appearance of the mainwindow
+* search/replace dialogs had a bad focus on start
+
 Next to work on:
 ----------------------------------
 Important:
-* delayed filebrowser init to speedup start
+* implement find whole words only!
 * improve resize of status bar with priority-based limiting of shown items, use perhaps SqueezedLabel for Selection
 * width calculation for resize seems to need to include some margins
 * old wrong sized cursor picture gets painted on zoom change
 * QActionGroups are cleared on setupGui, e.g. if toolbar gets edited
+* search previous does not work in a row, as the cursor is exactly after a full match
+* find/replace dialogs need to handle change charcodec, but what to do with than invalid characters already entered?
 Less important:
 * some more unit tests
 * fix wrong font width calculation for offset and selection in statusbar
