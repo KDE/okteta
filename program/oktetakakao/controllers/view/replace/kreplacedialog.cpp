@@ -57,7 +57,6 @@ KReplaceDialog::KReplaceDialog( ReplaceTool* tool, QWidget* parent )
     QGroupBox *ReplaceBox = new QGroupBox( i18nc("@title:group","Replace By"), mainWidget() );
 
     QVBoxLayout *ReplaceBoxLayout = new QVBoxLayout;
-    ReplaceBoxLayout->setSpacing( spacingHint() );
 
     QLabel *EditLabel = new QLabel( i18nc("@label:textbox","Replacing bytes:"), ReplaceBox );
     ReplaceDataEdit = new KByteArrayLineEdit( ReplaceBox );

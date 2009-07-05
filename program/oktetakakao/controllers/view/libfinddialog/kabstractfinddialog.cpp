@@ -55,7 +55,6 @@ void KAbstractFindDialog::setupFindBox()
     setMainWidget( page );
 
     QVBoxLayout *pageLayout = new QVBoxLayout( page );
-    pageLayout->setSpacing( spacingHint() );
     pageLayout->setMargin( 0 );
 
     // find term
@@ -63,7 +62,6 @@ void KAbstractFindDialog::setupFindBox()
     pageLayout->addWidget( findBox );
 
     QVBoxLayout *findBoxLayout = new QVBoxLayout;
-    findBoxLayout->setSpacing( spacingHint() );
 
     QLabel *bytesLabel = new QLabel( i18nc("@label:textbox","Byte string to f&ind:"), findBox );
     SearchDataEdit = new KByteArrayLineEdit( findBox );
@@ -99,7 +97,6 @@ void KAbstractFindDialog::setupCheckBoxes( QCheckBox *optionCheckBox )
     pageLayout->addWidget( optionsBox );
 
     QGridLayout *optionsBoxLayout = new QGridLayout( optionsBox );
-    optionsBoxLayout->setSpacing( spacingHint() );
 
     CaseSensitiveCheckBox = new QCheckBox( i18nc("@option:check","C&ase sensitive"),optionsBox);
     CaseSensitiveCheckBox->setWhatsThis( i18nc("@info:whatsthis","Perform a case sensitive search: "
