@@ -70,7 +70,6 @@ void ReplaceController::replace()
         mReplaceDialog = new KReplaceDialog( mTool, mWindow );
 
     mReplaceDialog->show();
-    mReplaceDialog->setFocus();
 }
 
 

@@ -98,7 +98,6 @@ void SearchController::showDialog( KFindDirection direction )
     mSearchDialog->setDirection( direction );
 
     mSearchDialog->show();
-    mSearchDialog->setFocus();
 }
 
 void SearchController::onDataNotFound()
