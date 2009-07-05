@@ -76,7 +76,6 @@ CopyAsDialog::CopyAsDialog( AbstractModelStreamEncoderConfigEditor* configEditor
         splitter->addWidget( previewBox );
 
         QHBoxLayout* previewBoxLayout = new QHBoxLayout( previewBox );
-        previewBoxLayout->setSpacing( spacingHint() );
 
         previewBoxLayout->addWidget( mPreviewView->widget() );
     }
