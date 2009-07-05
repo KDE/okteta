@@ -36,6 +36,7 @@
 #include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
 #include <QtGui/QGroupBox>
+#include <QtGui/QAbstractItemView>
 #include <QtGui/QLayout>
 
 
@@ -91,6 +92,12 @@ KGotoOffsetDialog::KGotoOffsetDialog( GotoOffsetTool* tool, QWidget* parent )
     mOffsetEdit->setMaxCount( 10 );
     mOffsetEdit->setInsertPolicy( KComboBox::InsertAtTop );
     connect( mOffsetEdit, SIGNAL(editTextChanged(const QString&)), SLOT(onOffsetChanged(const QString&)) );
+    QAbstractItemView* formatComboBoxListView = mSelector->view();
+    connect( formatComboBoxListView, SIGNAL(activated( const QModelIndex& )),
+             mOffsetEdit, SLOT(setFocus()) );
+    // TODO: is a workaround for Qt 4.5.1 which doesn't emit activated() for mouse clicks
+    connect( formatComboBoxListView, SIGNAL(pressed( const QModelIndex& )),
+             mOffsetEdit, SLOT(setFocus()) );
     mOffsetValidator = new KByteArrayValidator( mOffsetEdit, KByteArrayValidator::HexadecimalCoding );
     mOffsetEdit->setValidator( mOffsetValidator );
     label->setBuddy( mOffsetEdit );
