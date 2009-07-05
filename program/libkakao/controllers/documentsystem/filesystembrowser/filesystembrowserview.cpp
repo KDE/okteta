@@ -34,11 +34,17 @@
 // Qt
 #include <QtGui/QLayout>
 #include <QtCore/QDir>
+#include <QtCore/QTimer>
 
 
 FileSystemBrowserView::FileSystemBrowserView( FileSystemBrowserTool* tool, QWidget* parent )
   : QWidget( parent ),
     mTool( tool )
+{
+    QTimer::singleShot( 0, this, SLOT(init()) );
+}
+
+void FileSystemBrowserView::init()
 {
     QVBoxLayout* layout = new QVBoxLayout( this );
     layout->setMargin( 0 );
