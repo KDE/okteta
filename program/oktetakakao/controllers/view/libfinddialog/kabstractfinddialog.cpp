@@ -164,7 +164,7 @@ void KAbstractFindDialog::onSearchDataFormatChanged( int index )
 {
     const bool isCharCoding = ( index == KByteArrayLineEdit::CharCoding );
     CaseSensitiveCheckBox->setEnabled( isCharCoding );
-    WholeWordsCheckBox->setEnabled( isCharCoding );
+    WholeWordsCheckBox->setEnabled( false );//isCharCoding ); TODO: not implemented!
 }
 
 void KAbstractFindDialog::onSearchDataChanged( const QByteArray &data )
