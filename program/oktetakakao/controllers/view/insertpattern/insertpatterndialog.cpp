@@ -53,7 +53,6 @@ InsertPatternDialog::InsertPatternDialog( QWidget *parent )
     setMainWidget( page );
 
     QVBoxLayout *baseLayout = new QVBoxLayout( page );
-    baseLayout->setSpacing( spacingHint() );
     baseLayout->setMargin( 0 );
 
     // search term
@@ -61,7 +60,6 @@ InsertPatternDialog::InsertPatternDialog( QWidget *parent )
     baseLayout->addWidget( insertBox );
 
     QVBoxLayout *patternLayout = new QVBoxLayout;
-    patternLayout->setSpacing( spacingHint() );
 
     QLabel *label = new QLabel( i18nc("@label:textbox","Pattern:"), insertBox );
     mPatternEdit = new KByteArrayLineEdit( insertBox );
@@ -93,7 +91,6 @@ InsertPatternDialog::InsertPatternDialog( QWidget *parent )
 //     baseLayout->addWidget( OptionsBox );
 
 //     QGridLayout *OptionsBoxLayout = new QGridLayout( OptionsBox );
-//     OptionsBoxLayout->setSpacing( spacingHint() );
 
     setTabOrder( mPatternEdit, mNumberSpinBox );
 

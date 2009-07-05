@@ -74,7 +74,6 @@ ExportDialog::ExportDialog( AbstractModelExporterConfigEditor* configEditor, QWi
         splitter->addWidget( previewBox );
 
         QHBoxLayout* previewBoxLayout = new QHBoxLayout( previewBox );
-        previewBoxLayout->setSpacing( spacingHint() );
 
         previewBoxLayout->addWidget( mPreviewView->widget() );
     }

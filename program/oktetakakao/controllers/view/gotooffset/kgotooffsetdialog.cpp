@@ -75,7 +75,6 @@ KGotoOffsetDialog::KGotoOffsetDialog( GotoOffsetTool* tool, QWidget* parent )
     topLayout->addWidget( offsetBox );
 
     QVBoxLayout* gotoBoxLayout = new QVBoxLayout;
-    gotoBoxLayout->setSpacing( spacingHint() );
 
     QLabel* label = new QLabel( i18nc("@label:listbox","Fo&rmat:"), offsetBox );
     mSelector = new KComboBox( offsetBox );
@@ -108,7 +107,6 @@ KGotoOffsetDialog::KGotoOffsetDialog( GotoOffsetTool* tool, QWidget* parent )
     topLayout->addWidget( optionsBox );
 
     QGridLayout* optionsBoxLayout = new QGridLayout( optionsBox );
-    optionsBoxLayout->setSpacing( spacingHint() );
 
     mAtCursorCheckBox = new QCheckBox( i18nc("@option:check","From c&ursor"), optionsBox );
     mAtCursorCheckBox->setWhatsThis(
