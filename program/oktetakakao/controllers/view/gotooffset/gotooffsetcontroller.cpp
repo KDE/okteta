@@ -63,7 +63,6 @@ void GotoOffsetController::gotoOffset()
         mGotoOffsetDialog = new KGotoOffsetDialog( mTool, 0 );
 
     mGotoOffsetDialog->show();
-    mGotoOffsetDialog->setFocus();
 }
 
 
