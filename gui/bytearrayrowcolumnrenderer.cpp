@@ -27,8 +27,8 @@
 #include "bytearraytablecursor.h"
 #include "bytearraytablelayout.h"
 #include "helper.h"
-// ColumnsView
-#include <columnsview.h>
+// lib
+#include <abstractcolumnstylist.h>
 // Okteta core
 #include <kbookmarkable.h>
 #include <kbookmarksconstiterator.h>
@@ -62,9 +62,9 @@ static const bool      DefaultShowingNonprinting = false;
 static const QChar     DefaultSubstituteChar =  (char)'.';
 static const QChar     DefaultUndefinedChar =   (char)'?';
 
-ByteArrayRowColumnRenderer::ByteArrayRowColumnRenderer( ColumnsView* columnsView,
+ByteArrayRowColumnRenderer::ByteArrayRowColumnRenderer( AbstractColumnStylist* stylist,
     KHECore::AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges )
- : AbstractColumnRenderer( columnsView ),
+ : AbstractColumnRenderer( stylist ),
    mByteArrayModel( byteArrayModel ),
    mLayout( layout ),
    mRanges( ranges ),
@@ -277,7 +277,7 @@ void ByteArrayRowColumnRenderer::renderEditedByte( QPainter* painter, char byte,
 {
     const KHECore::KChar byteChar = mCharCodec->decode( byte );
 
-    const QPalette& palette = columnsView()->viewport()->palette();
+    const QPalette& palette = stylist()->palette();
     KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::View );
     const KColorScheme::ForegroundRole foregroundRole =
         mByteTypeColored ? foregroundRoleForChar(byteChar): KColorScheme::NormalText;
@@ -541,8 +541,7 @@ void ByteArrayRowColumnRenderer::renderLinePositions( QPainter* painter, int lin
     // clear background
     const unsigned int blankFlag =
         (_linePositions.start()!=0?StartsBefore:0) | (_linePositions.end()!=mLastLinePos?EndsLater:0);
-    const QWidget* viewport = columnsView()->viewport();
-    const QBrush& backgroundBrush = viewport->palette().brush( viewport->backgroundRole() );
+    const QBrush& backgroundBrush = stylist()->palette().brush( QPalette::Base );
 
     renderRange( painter, backgroundBrush, _linePositions, blankFlag );
 
@@ -640,7 +639,7 @@ void ByteArrayRowColumnRenderer::renderPlain( QPainter* painter, const KHE::Sect
             nextBookmarkOffset = bit.next().offset();
     }
 
-    const QPalette& palette = columnsView()->viewport()->palette();
+    const QPalette& palette = stylist()->palette();
     KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::View );
 
     // paint all the bytes affected
@@ -685,7 +684,7 @@ void ByteArrayRowColumnRenderer::renderSelection( QPainter* painter, const KHE::
             nextBookmarkOffset = bit.next().offset();
     }
 
-    const QPalette& palette = columnsView()->viewport()->palette();
+    const QPalette& palette = stylist()->palette();
     KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::Selection );
 
     renderRange( painter, colorScheme.background(), linePositions, flag );
@@ -721,7 +720,7 @@ void ByteArrayRowColumnRenderer::renderSelection( QPainter* painter, const KHE::
 
 void ByteArrayRowColumnRenderer::renderMarking( QPainter* painter, const KHE::Section& linePositions, int byteIndex, int flag )
 {
-    const QPalette& palette = columnsView()->viewport()->palette();
+    const QPalette& palette = stylist()->palette();
 
     renderRange( painter, palette.text(), linePositions, flag );
 
@@ -769,8 +768,7 @@ void ByteArrayRowColumnRenderer::renderByte( QPainter* painter,
     const char byte = ( byteIndex > -1 ) ? mByteArrayModel->datum( byteIndex ) : EmptyByte;
     const KHECore::KChar byteChar = mCharCodec->decode( byte );
 
-    const QWidget* viewport = columnsView()->viewport();
-    const QPalette& palette = viewport->palette();
+    const QPalette& palette = stylist()->palette();
 
     KColorScheme::ColorSet colorSet = KColorScheme::View;
     if( byteIndex > -1 )
@@ -818,7 +816,7 @@ void ByteArrayRowColumnRenderer::renderFramedByte( QPainter* painter,
     const bool isInSelection = ( byteIndex > -1 && mRanges->selectionIncludes(byteIndex) );
     const KColorScheme::ColorSet colorSet = isInSelection ? KColorScheme::Selection : KColorScheme::View;
 
-    const QPalette& palette = columnsView()->viewport()->palette();
+    const QPalette& palette = stylist()->palette();
     KColorScheme colorScheme( palette.currentColorGroup(), colorSet );
     const KColorScheme::ForegroundRole foregroundRole =
         mByteTypeColored ? foregroundRoleForChar(byteChar): KColorScheme::NormalText;
@@ -843,7 +841,7 @@ Q_UNUSED( codingId )
     const bool isInSelection = ( byteIndex > -1 && mRanges->selectionIncludes(byteIndex) );
     const KColorScheme::ColorSet colorSet = isInSelection ? KColorScheme::Selection : KColorScheme::View;
 
-    const QPalette& palette = columnsView()->viewport()->palette();
+    const QPalette& palette = stylist()->palette();
     KColorScheme colorScheme( palette.currentColorGroup(), colorSet );
     const KColorScheme::ForegroundRole foregroundRole =
         mByteTypeColored ? foregroundRoleForChar(byteChar): KColorScheme::NormalText;

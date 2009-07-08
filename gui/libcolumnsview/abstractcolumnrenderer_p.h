@@ -26,9 +26,10 @@
 #include "abstractcolumnrenderer.h"
 
 // lib
-#include "columnsview.h"
+#include "abstractcolumnstylist.h"
 // Qt
 #include <QtGui/QPainter>
+#include <QtGui/QPalette>
 
 
 namespace KHEUI
@@ -37,7 +38,7 @@ namespace KHEUI
 class AbstractColumnRendererPrivate
 {
   public:
-    explicit AbstractColumnRendererPrivate( ColumnsView* columnsView );
+    explicit AbstractColumnRendererPrivate( AbstractColumnStylist* stylist );
 
   public:
     void renderBlankLine( QPainter* painter ) const;
@@ -45,7 +46,7 @@ class AbstractColumnRendererPrivate
 
   public: // general column data
     /** pointer to the view */
-    ColumnsView* mColumnView;
+    AbstractColumnStylist* mStylist;
     /** should Column be displayed? */
     bool mIsVisible;
 
@@ -57,10 +58,10 @@ class AbstractColumnRendererPrivate
 };
 
 
-inline AbstractColumnRendererPrivate::AbstractColumnRendererPrivate( ColumnsView* columnsView )
- : mColumnView( columnsView ),
+inline AbstractColumnRendererPrivate::AbstractColumnRendererPrivate( AbstractColumnStylist* stylist )
+ : mStylist( stylist ),
    mIsVisible( true ),  //TODO: would false be better?
-   mLineHeight( 0 ),//columnsView->lineHeight() ),
+   mLineHeight( 0 ),
    mXSpan( KHE::Section::fromWidth(0,0) )
 {
 }
@@ -69,9 +70,8 @@ inline void AbstractColumnRendererPrivate::renderBlankLine( QPainter* painter ) 
 {
     if( mLineHeight > 0 )
     {
-        const QWidget* viewport = mColumnView->viewport();
         painter->fillRect( 0,0, mXSpan.width(),mLineHeight,
-                           viewport->palette().brush(viewport->backgroundRole()) );
+                           mStylist->palette().brush(QPalette::Base) );
     }
 }
 
@@ -80,9 +80,8 @@ inline void AbstractColumnRendererPrivate::renderEmptyColumn( QPainter* painter,
     KPixelXs xSpan( _xSpan );
     xSpan.restrictTo( mXSpan );
 
-    const QWidget* viewport = mColumnView->viewport();
     painter->fillRect( xSpan.start(),ySpan.start(), xSpan.width(),ySpan.width(),
-                       viewport->palette().brush(viewport->backgroundRole()) );
+                       mStylist->palette().brush(QPalette::Base) );
 }
 
 }

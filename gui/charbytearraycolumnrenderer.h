@@ -35,10 +35,10 @@ namespace KHEUI
   *
   *@author Friedrich W. H. Kossebau
   */
-class CharByteArrayColumnRenderer : public AbstractByteArrayColumnRenderer
+class OKTETAGUI_EXPORT CharByteArrayColumnRenderer : public AbstractByteArrayColumnRenderer
 {
   public:
-    CharByteArrayColumnRenderer( ColumnsView *columnsView,
+    CharByteArrayColumnRenderer( AbstractColumnStylist* stylist,
         KHECore::AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges );
     virtual ~CharByteArrayColumnRenderer();
 

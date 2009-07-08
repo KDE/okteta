@@ -35,7 +35,7 @@
 
 using namespace KHEUI;
 
-namespace KHEPrint {
+namespace KHEUI {
 class AbstractColumnRenderer;
 }
 
@@ -84,8 +84,8 @@ class AbstractColumnFrameRenderer : public AbstractFrameRenderer
 
   protected:
     /** takes ownership of column renderer */
-    void addColumn( KHEPrint::AbstractColumnRenderer *column );
-    void removeColumn( KHEPrint::AbstractColumnRenderer *column );
+    void addColumn( KHEUI::AbstractColumnRenderer *column );
+    void removeColumn( KHEUI::AbstractColumnRenderer *column );
 
   protected: //
     /** sets height of all lines and propagates this information to all columns

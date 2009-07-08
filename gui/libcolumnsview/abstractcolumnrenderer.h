@@ -23,9 +23,9 @@
 #ifndef KHE_UI_ABSTRACTCOLUMNRENDERER_H
 #define KHE_UI_ABSTRACTCOLUMNRENDERER_H
 
-
 // lib
 #include "kadds.h"
+#include "oktetagui_export.h"
 // commonlib
 #include <section.h>
 
@@ -35,7 +35,7 @@ class QPainter;
 namespace KHEUI
 {
 
-class ColumnsView;
+class AbstractColumnStylist;
 
 class AbstractColumnRendererPrivate;
 
@@ -45,11 +45,11 @@ class AbstractColumnRendererPrivate;
   *@author Friedrich W. H. Kossebau
   */
 
-class AbstractColumnRenderer
+class OKTETAGUI_EXPORT AbstractColumnRenderer
 {
 //    friend class ColumnsView;
   public:
-    explicit AbstractColumnRenderer( ColumnsView* columnsView );
+    explicit AbstractColumnRenderer( AbstractColumnStylist* stylist );
     virtual ~AbstractColumnRenderer();
 
   public: // API to be reimplemented in the subclasses
@@ -83,7 +83,7 @@ class AbstractColumnRenderer
 
   public: // value access
     /** */
-    ColumnsView* columnsView() const;
+    AbstractColumnStylist* stylist() const;
     /** left offset x in pixel */
     KPixelX x() const;
     /** total width in pixel */
@@ -110,7 +110,7 @@ class AbstractColumnRenderer
     void renderBlankLine( QPainter* painter ) const;
 
   private:
-     AbstractColumnRendererPrivate* const d;
+     AbstractColumnRendererPrivate* const d; // TODO: shared d
 };
 
 }

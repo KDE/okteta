@@ -33,12 +33,12 @@ namespace KHEUI
 {
 
 
-AbstractColumnRenderer::AbstractColumnRenderer( ColumnsView* columnsView )
- : d( new AbstractColumnRendererPrivate(columnsView) )
+AbstractColumnRenderer::AbstractColumnRenderer( AbstractColumnStylist* stylist )
+ : d( new AbstractColumnRendererPrivate(stylist) )
 {
 }
 
-ColumnsView *AbstractColumnRenderer::columnsView() const { return d->mColumnView; }
+AbstractColumnStylist* AbstractColumnRenderer::stylist() const { return d->mStylist; }
 
 KPixelX AbstractColumnRenderer::x()            const { return d->mXSpan.start(); }
 KPixelX AbstractColumnRenderer::rightX()       const { return d->mXSpan.end(); }

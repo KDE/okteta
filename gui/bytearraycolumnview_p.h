@@ -36,6 +36,7 @@ class QTimer;
 namespace KHEUI
 {
 class BorderColumnRenderer;
+class WidgetColumnStylist;
 
 class KCursor;
 
@@ -171,6 +172,8 @@ class ByteArrayColumnViewPrivate : public AbstractByteArrayViewPrivate
     AbstractByteArrayColumnRenderer* mActiveColumn;
     /** points to the column without keyboard focus (if there is) */
     AbstractByteArrayColumnRenderer* mInactiveColumn;
+
+    WidgetColumnStylist* mStylist;
 
   protected:
     /** Timer that controls the blinking of the cursor */

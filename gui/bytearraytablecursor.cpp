@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -33,8 +33,8 @@ namespace KHEUI
 
 ByteArrayTableCursor::ByteArrayTableCursor( const ByteArrayTableLayout* layout )
  : mLayout( layout ),
-   mIndex( 0 ),
-   mCoord( 0, 0 ),
+   mIndex( layout->byteArrayOffset() ),
+   mCoord( layout->startCoord() ),
    mBehind( false ),
    mAppendPosEnabled( false )
 {
@@ -47,8 +47,9 @@ void ByteArrayTableCursor::setAppendPosEnabled( bool appendPosEnabled )
 
     mAppendPosEnabled = appendPosEnabled;
     // reposition Cursor
-    const int length = mLayout->length();
-    if( realIndex() >= length && mCoord.pos() < mLayout->noOfBytesPerLine()-1 && length > 0 )
+    if( realIndex() > mLayout->lastByteArrayOffset()
+        && mCoord.pos() < mLayout->noOfBytesPerLine()-1
+        && mLayout->length() > 0 )
     {
         if( mAppendPosEnabled )
         {
@@ -70,7 +71,7 @@ void ByteArrayTableCursor::gotoPreviousByte()
 {
     if( mBehind )
         mBehind = false;
-    else if( mIndex > 0 )
+    else if( mIndex > mLayout->byteArrayOffset() )
     {
         --mIndex;
         mCoord.goCLeft( mLayout->noOfBytesPerLine()-1 );
@@ -87,9 +88,10 @@ void ByteArrayTableCursor::gotoPreviousByte( int indexSteps )
     }
     const int newIndex = mIndex - indexSteps;
     // would step before first position?
-    if( newIndex < 0 )
+    const int firstIndex = mLayout->byteArrayOffset();
+    if( newIndex < firstIndex )
     {
-        if( mIndex > 0 )
+        if( mIndex > firstIndex )
             gotoStart();
     }
     else
@@ -99,7 +101,7 @@ void ByteArrayTableCursor::gotoPreviousByte( int indexSteps )
 
 void ByteArrayTableCursor::gotoNextByte()
 {
-    const int lastIndex = mLayout->length() -1 ;
+    const int lastIndex = mLayout->lastByteArrayOffset();
 
     if( mIndex < lastIndex )
     {
@@ -121,7 +123,7 @@ void ByteArrayTableCursor::gotoNextByte( int indexSteps ) // TODO: think about c
     }
     const int newIndex = mIndex + indexSteps;
     // would step behind the end?
-    if( newIndex >= mLayout->length() )
+    if( newIndex > mLayout->lastByteArrayOffset() )
         gotoEnd();
     else
         gotoIndex( newIndex );
@@ -136,7 +138,7 @@ void ByteArrayTableCursor::gotoUp()
         mCoord.goUp();
         if( mCoord.isPriorInLineThan(mLayout->startCoord()) )
         {
-            mIndex = 0;
+            mIndex = mLayout->byteArrayOffset();
             mCoord.setPos( mLayout->startLinePosition() );
             mBehind = false;
         }
@@ -179,7 +181,7 @@ void ByteArrayTableCursor::gotoLineStart()
 
 void ByteArrayTableCursor::gotoLineEnd()
 {
-    if( mIndex < mLayout->length() )
+    if( mIndex <= mLayout->lastByteArrayOffset() )
     {
         const int oldIndex = mIndex;
         mIndex = mLayout->indexAtLastLinePosition( mCoord.line() );
@@ -192,7 +194,7 @@ void ByteArrayTableCursor::gotoLineEnd()
 
 void ByteArrayTableCursor::gotoStart()
 {
-    mIndex = 0;
+    mIndex = mLayout->byteArrayOffset();
     mCoord = mLayout->startCoord();
     mBehind = false;
 }
@@ -200,7 +202,7 @@ void ByteArrayTableCursor::gotoStart()
 
 void ByteArrayTableCursor::gotoEnd()
 {
-    const int lastIndex = mLayout->length()-1;
+    const int lastIndex = mLayout->lastByteArrayOffset();
     if( lastIndex >= 0 )
     {
         mIndex = lastIndex;
@@ -266,7 +268,7 @@ void ByteArrayTableCursor::gotoIndex( int index )
 void ByteArrayTableCursor::gotoRealIndex()
 {
     if( mBehind
-        && (mAppendPosEnabled || ( mIndex < mLayout->length()-1 )) )
+        && (mAppendPosEnabled || ( mIndex < mLayout->lastByteArrayOffset() )) )
     {
         ++mIndex;
         mCoord.goCRight( mLayout->noOfBytesPerLine()-1 );
@@ -294,7 +296,7 @@ void ByteArrayTableCursor::gotoPageUp()
 {
     const int noOfLinesPerPage = mLayout->noOfLinesPerPage();
     const int newIndex = mIndex - noOfLinesPerPage * mLayout->noOfBytesPerLine();
-    if( newIndex >= 0 )
+    if( newIndex >= mLayout->byteArrayOffset() )
     {
         mIndex = newIndex;
         mCoord.goUp( noOfLinesPerPage );
@@ -314,7 +316,7 @@ void ByteArrayTableCursor::gotoPageDown()
 {
     const int noOfLinesPerPage = mLayout->noOfLinesPerPage();
     const int newIndex = mIndex + noOfLinesPerPage * mLayout->noOfBytesPerLine();
-    if( newIndex < mLayout->length() )
+    if( newIndex <= mLayout->lastByteArrayOffset() )
     {
         mIndex = newIndex;
         mCoord.goDown( noOfLinesPerPage );
@@ -326,16 +328,16 @@ void ByteArrayTableCursor::gotoPageDown()
 
 int ByteArrayTableCursor::validIndex() const
 {
-    return ( 0 <= mIndex && mIndex < mLayout->length() ) ? mIndex : -1;
+    return ( mLayout->byteArrayOffset() <= mIndex && mIndex <= mLayout->lastByteArrayOffset() ) ? mIndex : -1;
 }
 
 int ByteArrayTableCursor::indexAtLineStart() const { return mLayout->indexAtFirstLinePosition( mCoord.line() ); }
 int ByteArrayTableCursor::indexAtLineEnd()   const { return mLayout->indexAtLastLinePosition( mCoord.line() ); }
 
 
-bool ByteArrayTableCursor::atStart()     const { return mIndex == 0; }
-bool ByteArrayTableCursor::atEnd()       const { return realIndex() == mLayout->length(); }
-bool ByteArrayTableCursor::atAppendPos() const { return mIndex == mLayout->length(); }
+bool ByteArrayTableCursor::atStart()     const { return mIndex == mLayout->byteArrayOffset(); }
+bool ByteArrayTableCursor::atEnd()       const { return realIndex() == mLayout->lastByteArrayOffset()+1; }
+bool ByteArrayTableCursor::atAppendPos() const { return mIndex == mLayout->lastByteArrayOffset()+1; }
 
 
 bool ByteArrayTableCursor::atLineStart() const { return mLayout->atFirstLinePosition( mCoord ); }

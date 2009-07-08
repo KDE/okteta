@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,27 +20,37 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYTABLELAYOUTTEST_H
-#define BYTEARRAYTABLELAYOUTTEST_H
+#ifndef KHE_UI_ABSTRACTCOLUMNSTYLIST_H
+#define KHE_UI_ABSTRACTCOLUMNSTYLIST_H
 
-// Qt
-#include <QtCore/QObject>
+// lib
+#include "oktetagui_export.h"
+
+class QPalette;
+
 
 namespace KHEUI
 {
 
-class ByteArrayTableLayoutTest : public QObject
-{
-  Q_OBJECT
+class AbstractColumnStylistPrivate;
 
-  private Q_SLOTS: // test functions
-    void testConstructor();
-    void testSetStartOffset();
-    void testSetFirstLineOffset();
-    void testSetNoOfBytesPerLine();
-    void testSetByteArrayOffset();
-    void testSetLength();
-    void testSetNoOfLinesPerPage();
+
+class OKTETAGUI_EXPORT AbstractColumnStylist
+{
+  public:
+    AbstractColumnStylist();
+    virtual ~AbstractColumnStylist();
+
+  public: // API to be reimplemented in the subclasses
+    virtual const QPalette& palette() = 0;
+
+  protected:
+    explicit AbstractColumnStylist( AbstractColumnStylistPrivate* d );
+  protected:
+    AbstractColumnStylistPrivate* const d_ptr;
+
+  private:
+    Q_DECLARE_PRIVATE( AbstractColumnStylist )
 };
 
 }

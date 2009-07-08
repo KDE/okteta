@@ -23,7 +23,7 @@
 #include "bordercolumnrenderer.h"
 
 // lib
-#include "columnsview.h"
+#include <abstractcolumnstylist.h>
 // Qt
 #include <QtGui/QPainter>
 #include <QtGui/QStyle>
@@ -38,9 +38,10 @@ static const KPixelX BorderWidth = 2 * BorderMargin + LineWidth;
 static const KPixelX LineX = BorderMargin;
 
 
-BorderColumnRenderer::BorderColumnRenderer( ColumnsView *columnsView, bool lineDrawn )
- : AbstractColumnRenderer( columnsView ),
-   mLineDrawn( lineDrawn )
+BorderColumnRenderer::BorderColumnRenderer( AbstractColumnStylist* stylist, bool lineDrawn, bool inEmpty )
+  : AbstractColumnRenderer( stylist ),
+    mLineDrawn( lineDrawn ),
+    mInEmpty( inEmpty )
 {
     setWidth( mLineDrawn ? BorderWidth : BorderMargin );
 }
@@ -56,7 +57,8 @@ void BorderColumnRenderer::renderEmptyColumn( QPainter *painter, const KPixelXs 
 {
     AbstractColumnRenderer::renderEmptyColumn( painter, Xs,Ys );
 
-    renderBorderLine( painter, Xs,Ys );
+    if( mInEmpty )
+        renderBorderLine( painter, Xs,Ys );
 }
 
 void BorderColumnRenderer::renderBorderLine( QPainter* painter, const KPixelXs& Xs, const KPixelYs& Ys )
@@ -65,10 +67,9 @@ void BorderColumnRenderer::renderBorderLine( QPainter* painter, const KPixelXs& 
 
     if( mLineDrawn && Xs.includes(viewGlobalLineX) )
     {
-        const QWidget* viewport = columnsView()->viewport();
-        const int lineColor = viewport->style()->styleHint( QStyle::SH_Table_GridLineColor, 0, viewport );
+        const int lineColor = -1; // TODO: viewport->style()->styleHint( QStyle::SH_Table_GridLineColor, 0, viewport );
 
-        painter->setPen( lineColor != -1 ? (QRgb)lineColor : viewport->palette().mid().color() );
+        painter->setPen( lineColor != -1 ? (QRgb)lineColor : stylist()->palette().mid().color() );
         painter->drawLine( viewGlobalLineX, Ys.start(), viewGlobalLineX, Ys.end() ) ;
     }
 }

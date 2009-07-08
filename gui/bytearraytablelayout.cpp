@@ -28,12 +28,14 @@ namespace KHEUI
 
 static const int DefaultNoOfLinesPerPage = 1;
 
-ByteArrayTableLayout::ByteArrayTableLayout( int noOfBytesPerLine, int firstLineOffset, int startOffset, int length )
+ByteArrayTableLayout::ByteArrayTableLayout( int noOfBytesPerLine, int firstLineOffset, int startOffset,
+                                            int byteArrayOffset, int byteArrayLength )
  : mNoOfBytesPerLine( noOfBytesPerLine ),
    mFirstLineOffset( firstLineOffset ),
    mStartOffset( startOffset ),
    mRelativeStartOffset( startOffset-firstLineOffset ),
-   mLength( length ),
+   mByteArrayOffset( byteArrayOffset ),
+   mLastByteArrayOffset( byteArrayOffset+byteArrayLength-1 ),
    mNoOfLinesPerPage( DefaultNoOfLinesPerPage )
 {
     calcStart();
@@ -94,17 +96,39 @@ bool ByteArrayTableLayout::setNoOfBytesPerLine( int noOfBytesPerLine )
 }
 
 
+bool ByteArrayTableLayout::setByteArrayOffset( int byteArrayOffset )
+{
+    // rejecting < 0
+    if( byteArrayOffset < 0 )
+        byteArrayOffset = 0;
+
+    // no changes?
+    if( mByteArrayOffset == byteArrayOffset )
+        return false;
+
+    const int l = length();
+
+    mByteArrayOffset = byteArrayOffset;
+    mLastByteArrayOffset = mByteArrayOffset + l-1;
+
+    calcEnd();
+    return true;
+}
+
+
 bool ByteArrayTableLayout::setLength( int length )
 {
     // rejecting < 0
     if( length < 0 )
         length = 0;
 
+    const int newLastByteArrayOffset = mByteArrayOffset + length-1;
+
     // no changes?
-    if( mLength == length )
+    if( mLastByteArrayOffset == newLastByteArrayOffset )
         return false;
 
-    mLength = length;
+    mLastByteArrayOffset = newLastByteArrayOffset;
 
     calcEnd();
     return true;
@@ -125,24 +149,26 @@ void ByteArrayTableLayout::calcStart()
 
 void ByteArrayTableLayout::calcEnd()
 {
-    mCoordRange.setEnd( (mLength>0)?Coord::fromIndex(mLength-1+mRelativeStartOffset,mNoOfBytesPerLine):
-                                    Coord(-1,mCoordRange.start().line()) );
+    const int l = length();
+    mCoordRange.setEnd( (l>0) ?
+                            Coord::fromIndex(l-1+mRelativeStartOffset,mNoOfBytesPerLine):
+                            Coord(-1,mCoordRange.start().line()) );
 }
 
 
 int ByteArrayTableLayout::indexAtCFirstLinePosition( int line ) const
 {
-    return ( line <= mCoordRange.start().line() ) ? 0:
-           ( line > mCoordRange.end().line() ) ?    mLength-1:
-                                                    line * mNoOfBytesPerLine - mRelativeStartOffset;
+    return ( line <= mCoordRange.start().line() ) ? mByteArrayOffset :
+           ( line > mCoordRange.end().line() ) ?    mLastByteArrayOffset:
+                                                    line * mNoOfBytesPerLine - mRelativeStartOffset + mByteArrayOffset;
 }
 
 
 int ByteArrayTableLayout::indexAtCLastLinePosition( int line ) const
 {
-    return ( line < mCoordRange.start().line() ) ? 0:
-           ( line >= mCoordRange.end().line() ) ?  mLength-1:
-                                                   (line+1)*mNoOfBytesPerLine-mRelativeStartOffset-1;
+    return ( line < mCoordRange.start().line() ) ? mByteArrayOffset :
+           ( line >= mCoordRange.end().line() ) ?  mLastByteArrayOffset :
+                                                   (line+1)*mNoOfBytesPerLine-mRelativeStartOffset-1 + mByteArrayOffset;
 }
 
 
@@ -150,69 +176,69 @@ int ByteArrayTableLayout::indexAtCCoord( const Coord &coord ) const
 {
     const int index = indexAtCoord( coord );
 
-    return ( index <= 0 ) ?       0:
-           ( index >= mLength ) ? mLength-1:
-                                  index;
+    return ( index <= mByteArrayOffset ) ?     mByteArrayOffset :
+           ( index >= mLastByteArrayOffset ) ? mLastByteArrayOffset:
+                                               index;
 }
 
 
 int ByteArrayTableLayout::lineAtCIndex( int index ) const
 {
-    return ( index <= 0 ) ?       mCoordRange.start().line():
-           ( index >= mLength ) ? mCoordRange.end().line():
-                                  lineAtIndex(index);
+    return ( index <= mByteArrayOffset ) ?     mCoordRange.start().line():
+           ( index >= mLastByteArrayOffset ) ? mCoordRange.end().line():
+                                               lineAtIndex(index);
 }
 
 
 Coord ByteArrayTableLayout::coordOfCIndex( int index ) const
 {
-    return ( index <= 0 ) ?       mCoordRange.start():
-           ( index >= mLength ) ? mCoordRange.end():
-                                  coordOfIndex(index);
+    return ( index <= mByteArrayOffset ) ?     mCoordRange.start():
+           ( index >= mLastByteArrayOffset ) ? mCoordRange.end():
+                                               coordOfIndex(index);
 }
 
 
 int ByteArrayTableLayout::indexAtFirstLinePosition( int line ) const
 {
-    return ( line == mCoordRange.start().line() ) ? 0 : line*mNoOfBytesPerLine-mRelativeStartOffset;
+    return ( line == mCoordRange.start().line() ) ? mByteArrayOffset : line*mNoOfBytesPerLine-mRelativeStartOffset+mByteArrayOffset;
 }
 
 
 int ByteArrayTableLayout::indexAtLastLinePosition( int line ) const
 {
-    return ( line == mCoordRange.end().line() ) ? mLength-1 : (line+1)*mNoOfBytesPerLine-mRelativeStartOffset-1;
+    return ( line == mCoordRange.end().line() ) ? mLastByteArrayOffset : (line+1)*mNoOfBytesPerLine-mRelativeStartOffset+mByteArrayOffset-1;
 }
 
 
 int ByteArrayTableLayout::indexAtCoord( const Coord &coord ) const
 {
-    return coord.indexByLineWidth( mNoOfBytesPerLine ) - mRelativeStartOffset;
+    return coord.indexByLineWidth( mNoOfBytesPerLine ) - mRelativeStartOffset + mByteArrayOffset;
 }
 
 int ByteArrayTableLayout::lineAtIndex( int index ) const
 {
-    return (index+mRelativeStartOffset)/mNoOfBytesPerLine;
+    return (index+mRelativeStartOffset-mByteArrayOffset)/mNoOfBytesPerLine;
 }
 
 Coord ByteArrayTableLayout::coordOfIndex( int index ) const
 {
-    return Coord::fromIndex( index+mRelativeStartOffset, mNoOfBytesPerLine );
+    return Coord::fromIndex( index+mRelativeStartOffset-mByteArrayOffset, mNoOfBytesPerLine );
 }
 
 CoordRange ByteArrayTableLayout::coordRangeOfIndizes( const KHE::Section &indizes ) const
 {
     return CoordRange(
-             Coord::fromIndex(indizes.start()+mRelativeStartOffset, mNoOfBytesPerLine),
-             Coord::fromIndex(indizes.end()+mRelativeStartOffset,   mNoOfBytesPerLine) );
+             Coord::fromIndex(indizes.start()+mRelativeStartOffset-mByteArrayOffset, mNoOfBytesPerLine),
+             Coord::fromIndex(indizes.end()+mRelativeStartOffset-mByteArrayOffset,   mNoOfBytesPerLine) );
 }
 
 
 
 int ByteArrayTableLayout::correctIndex( int index ) const
 {
-    return ( index <= 0 ) ?       0:
-           ( index >= mLength ) ? mLength-1:
-                                  index;
+    return ( index <= mByteArrayOffset ) ?     mByteArrayOffset:
+           ( index >= mLastByteArrayOffset ) ? mLastByteArrayOffset:
+                                               index;
 }
 
 

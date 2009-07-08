@@ -20,11 +20,13 @@ set( libcontroller_SRCS
 )
 
 set( libcolumnsview_SRCS
+  libcolumnsview/abstractcolumnstylist.cpp
   libcolumnsview/abstractcolumnrenderer.cpp
   libcolumnsview/columnsview.cpp
 )
 
 set( libabstractbytearrayview_SRCS
+  widgetcolumnstylist.cpp
   abstractbytearrayview_p.cpp
   abstractbytearrayview.cpp
 )

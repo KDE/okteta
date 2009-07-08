@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -30,6 +30,7 @@
 #include <section.h>
 
 
+// TODO: rename things like startOffset and firstLineOffset, not really descriptive
 namespace KHEUI
 {
 
@@ -39,7 +40,8 @@ namespace KHEUI
   * * number of bytes per line,
   * * a possible offset of the first line displayed,
   * * a possible offset of the displayed bytearray, and
-  * * length of the byte array
+  * * length of the byte array as well as
+  * * offset in the byte array
   * * the number of lines per page jump
   * the following values are calculated:
   * * starting line of display,
@@ -59,7 +61,7 @@ namespace KHEUI
 class OKTETAGUI_EXPORT ByteArrayTableLayout
 {
   public:
-    ByteArrayTableLayout( int noOfBytesPerLine, int firstLineOffset, int startOffset, int length );
+    ByteArrayTableLayout( int noOfBytesPerLine, int firstLineOffset, int startOffset, int byteArrayOffset, int byteArrayLength );
     //ByteArrayTableLayout();
     ~ByteArrayTableLayout();
 
@@ -71,6 +73,8 @@ class OKTETAGUI_EXPORT ByteArrayTableLayout
     int firstLineOffset() const;
     /** returns number of bytes per line */
     int noOfBytesPerLine() const;
+    /** returns the offset of the start of the displayed byte array section */
+    int byteArrayOffset() const;
     /** returns the length of the displayed byte array section */
     int length() const;
     /** returns number of lines per visual page */
@@ -87,6 +91,7 @@ class OKTETAGUI_EXPORT ByteArrayTableLayout
     /** returns the coord of the end */
     Coord finalCoord() const;
 
+    int lastByteArrayOffset() const;
     /** tells how much lines this layout needs (incl. blank leading lines due to mStartOffset and mFirstLineOffset) */
     int noOfLines() const;
 
@@ -161,6 +166,8 @@ class OKTETAGUI_EXPORT ByteArrayTableLayout
     bool setFirstLineOffset( int firstLineOffset );
     /** sets number of bytes per line, returns true if changed */
     bool setNoOfBytesPerLine( int noOfBytesPerLine );
+    /** sets offset in the data to display, returns true if changed */
+    bool setByteArrayOffset( int byteArrayOffset );
     /** sets length of data to display, returns true if changed */
     bool setLength( int length );
     /** sets number of lines per page, 1 as default */
@@ -183,8 +190,10 @@ class OKTETAGUI_EXPORT ByteArrayTableLayout
     int mStartOffset;
     /** */
     int mRelativeStartOffset;
-    /** length of the displayed bytearray */
-    int mLength;
+    /** offset in the given bytearray */
+    int mByteArrayOffset;
+    /** last offset in the displayed bytearray section */
+    int mLastByteArrayOffset;
     /** number of lines that are moved by page up/down */
     int mNoOfLinesPerPage;
 
@@ -197,7 +206,9 @@ class OKTETAGUI_EXPORT ByteArrayTableLayout
 inline int ByteArrayTableLayout::startOffset()       const { return mStartOffset; }
 inline int ByteArrayTableLayout::firstLineOffset()   const { return mFirstLineOffset; }
 inline int ByteArrayTableLayout::noOfBytesPerLine()  const { return mNoOfBytesPerLine; }
-inline int ByteArrayTableLayout::length()            const { return mLength; }
+inline int ByteArrayTableLayout::byteArrayOffset()   const { return mByteArrayOffset; }
+inline int ByteArrayTableLayout::length()            const { return mLastByteArrayOffset-mByteArrayOffset+1; }
+inline int ByteArrayTableLayout::lastByteArrayOffset() const { return mLastByteArrayOffset; }
 
 inline Coord ByteArrayTableLayout::finalCoord()      const { return mCoordRange.end(); }
 inline Coord ByteArrayTableLayout::startCoord()      const { return mCoordRange.start(); }
@@ -206,7 +217,7 @@ inline int ByteArrayTableLayout::finalLinePosition() const { return finalCoord()
 inline int ByteArrayTableLayout::startLine()         const { return startCoord().line(); }
 inline int ByteArrayTableLayout::finalLine()         const { return finalCoord().line(); }
 inline int ByteArrayTableLayout::noOfLinesPerPage()  const { return mNoOfLinesPerPage; }
-inline int ByteArrayTableLayout::noOfLines()         const { return mLength==0?0:finalLine()+1; }
+inline int ByteArrayTableLayout::noOfLines()         const { return mByteArrayOffset>mLastByteArrayOffset?0:finalLine()+1; }
 
 }
 

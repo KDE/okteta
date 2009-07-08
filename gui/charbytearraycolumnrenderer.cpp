@@ -34,9 +34,9 @@ static const QChar     DefaultSubstituteChar =  (char)'.';
 static const QChar     DefaultUndefinedChar =   (char)'?';
 
 
-CharByteArrayColumnRenderer::CharByteArrayColumnRenderer( ColumnsView *columnsView,
+CharByteArrayColumnRenderer::CharByteArrayColumnRenderer( AbstractColumnStylist* stylist,
         KHECore::AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges )
- : AbstractByteArrayColumnRenderer( columnsView, byteArrayModel, layout, ranges ),
+ : AbstractByteArrayColumnRenderer( stylist, byteArrayModel, layout, ranges ),
    mShowingNonprinting( DefaultShowingNonprinting ),
    mSubstituteChar( DefaultSubstituteChar ),
    mUndefinedChar( DefaultUndefinedChar )

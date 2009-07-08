@@ -23,10 +23,12 @@
 #include "offsetcolumnrenderer.h"
 
 // lib
+#include <abstractcolumnstylist.h>
+// lib
 #include "bytearraytablelayout.h"
-#include <columnsview.h>
 // Qt
 #include <QtGui/QPainter>
+#include <QtGui/QPalette>
 
 
 namespace KHEUI
@@ -36,9 +38,9 @@ static const int leftOffsetMargin = 2;
 static const int rightOffsetMargin = 2;
 
 
-OffsetColumnRenderer::OffsetColumnRenderer( ColumnsView* columnsView,
+OffsetColumnRenderer::OffsetColumnRenderer( AbstractColumnStylist* stylist,
     ByteArrayTableLayout* layout, KOffsetFormat::KFormat format )
- : AbstractColumnRenderer( columnsView ),
+ : AbstractColumnRenderer( stylist ),
    mLayout( layout ),
    mDigitWidth( 0 ),
    mDigitBaseLine( 0 ),
@@ -49,12 +51,10 @@ OffsetColumnRenderer::OffsetColumnRenderer( ColumnsView* columnsView,
 
 void OffsetColumnRenderer::renderLine( QPainter* painter, int lineIndex )
 {
-    const QWidget *viewport = columnsView()->viewport();
-
     const int offset = mLayout->firstLineOffset() + mLayout->noOfBytesPerLine() * lineIndex;
     printFunction()( mCodedOffset, offset );
 
-    const QColor &buttonColor = viewport->palette().buttonText().color();
+    const QColor& buttonColor = stylist()->palette().buttonText().color();
     painter->setPen( buttonColor );
     painter->drawText( leftOffsetMargin, mDigitBaseLine, QString().append(mCodedOffset) );
 }
@@ -64,7 +64,7 @@ void OffsetColumnRenderer::renderColumnBackground( QPainter* painter, const KPix
     KPixelXs Xs( _Xs );
     restrictToXSpan( &Xs );
 
-    const QBrush& buttonBrush = columnsView()->viewport()->palette().button();
+    const QBrush& buttonBrush = stylist()->palette().button();
     painter->fillRect( Xs.start(), Ys.start(), Xs.width(), Ys.width(), buttonBrush );
 }
 

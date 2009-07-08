@@ -29,6 +29,8 @@
 // Qt
 #include <QtTest/QtTest>
 
+#include <KDebug>
+
 namespace KHEUI
 {
 
@@ -37,12 +39,13 @@ static const int NoOfBytesPerLine = 8;
 static const int StartOffset = 22;
 static const int FirstLineOffset = 10;
 static const int RelativeStartOffset = StartOffset-FirstLineOffset;
+static const int ByteArrayOffset = 9;
 static const int Length = 250;
 static const int FinalOffset = (StartOffset+Length-1);
 static const int RelativeFinalOffset = FinalOffset-FirstLineOffset;
 
-static const int FirstIndex = 0;
-static const int LastIndex = Length-1;
+static const int FirstIndex = ByteArrayOffset;
+static const int LastIndex = Length-1+ByteArrayOffset;
 
 static const int StartLine = RelativeStartOffset / NoOfBytesPerLine;
 static const int StartLinePosition = RelativeStartOffset % NoOfBytesPerLine;
@@ -65,8 +68,7 @@ static Coord End(   Pos2, Line2 );
 
 void ByteArrayTableCursorTest::testConstructor()
 {
-    const Coord StartCoord( 0, 0 );
-    const ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, Length );
+    const ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, ByteArrayOffset, Length );
 
     ByteArrayTableCursor cursor( &layout );
 
@@ -87,7 +89,7 @@ void ByteArrayTableCursorTest::testConstructor()
 
 void ByteArrayTableCursorTest::testSetAppendPosEnabled()
 {
-    const ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, Length );
+    const ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, ByteArrayOffset, Length );
     const Coord finalCoord = layout.finalCoord();
 
     ByteArrayTableCursor cursor( &layout );
@@ -112,7 +114,7 @@ void ByteArrayTableCursorTest::testSetAppendPosEnabled()
 
 void ByteArrayTableCursorTest::testGotoIndex()
 {
-    const ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, Length );
+    const ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, ByteArrayOffset, Length );
 
     ByteArrayTableCursor cursor( &layout );
 
@@ -221,7 +223,7 @@ void ByteArrayTableCursorTest::testGotoIndex()
 
 void ByteArrayTableCursorTest::testGotoCIndex()
 {
-    const ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, Length );
+    const ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, ByteArrayOffset, Length );
 
     ByteArrayTableCursor cursor( &layout );
 
@@ -328,7 +330,7 @@ void ByteArrayTableCursorTest::testGotoCIndex()
 
 void ByteArrayTableCursorTest::testGotoRealIndex()
 {
-    const ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, Length );
+    const ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, ByteArrayOffset, Length );
 
     ByteArrayTableCursor cursor( &layout );
 
@@ -390,7 +392,7 @@ void ByteArrayTableCursorTest::testGotoRealIndex()
 
 void ByteArrayTableCursorTest::testGotoStart()
 {
-    const ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, Length );
+    const ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, ByteArrayOffset, Length );
     const Coord startCoord = layout.startCoord();
 
     ByteArrayTableCursor cursor( &layout );
@@ -408,7 +410,7 @@ void ByteArrayTableCursorTest::testGotoStart()
 
 void ByteArrayTableCursorTest::testGotoEnd()
 {
-    const ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, Length );
+    const ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, ByteArrayOffset, Length );
     const Coord finalCoord = layout.finalCoord();
 
     ByteArrayTableCursor cursor( &layout );
@@ -442,7 +444,7 @@ void ByteArrayTableCursorTest::testGotoEnd()
 
 void ByteArrayTableCursorTest::testGotoNextByte()
 {
-    const ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, Length );
+    const ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, ByteArrayOffset, Length );
 
     ByteArrayTableCursor cursor( &layout );
 
@@ -526,7 +528,7 @@ void ByteArrayTableCursorTest::testGotoNextByte()
 
 void ByteArrayTableCursorTest::testGotoPreviousByte()
 {
-    const ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, Length );
+    const ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, ByteArrayOffset, Length );
 
     ByteArrayTableCursor cursor( &layout );
 
@@ -607,7 +609,7 @@ void ByteArrayTableCursorTest::testGotoPreviousByte()
 
 void ByteArrayTableCursorTest::testGotoNextByteN()
 {
-    const ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, Length );
+    const ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, ByteArrayOffset, Length );
 
     ByteArrayTableCursor cursor( &layout );
 
@@ -836,7 +838,7 @@ void ByteArrayTableCursorTest::testGotoNextByteN()
 
 void ByteArrayTableCursorTest::testGotoPreviousByteN()
 {
-    const ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, Length );
+    const ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, ByteArrayOffset, Length );
 
     ByteArrayTableCursor cursor( &layout );
 

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,12 +23,14 @@
 #include "bytearrayframerenderer.h"
 
 // lib
-#include "offsetcolumnrenderer.h"
-#include "valuecolumnrenderer.h"
-#include "charcolumnrenderer.h"
-#include "bordercolumnrenderer.h"
+#include "printcolumnstylist.h"
 // Okteta gui
+#include <offsetcolumnrenderer.h>
+#include <bordercolumnrenderer.h>
+#include <valuebytearraycolumnrenderer.h>
+#include <charbytearraycolumnrenderer.h>
 #include <bytearraytablelayout.h>
+#include <bytearraytableranges.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
 #include <valuecodec.h>
@@ -43,11 +45,13 @@
 #include <QtGui/QApplication>
 #include <QtCore/QListIterator>
 
+
 static const int DefaultStartOffset = 0;
 static const int DefaultFirstLineOffset = 0;
 static const int DefaultNoOfBytesPerLine =  16;
 static const ResizeStyle DefaultResizeStyle = FullSizeUsage;
-static const KHECore::CharCoding DefaultEncoding = KHECore::LocalEncoding;
+static const KHECore::ValueCoding DefaultValueCoding =  KHECore::HexadecimalCoding;
+static const KHECore::CharCoding DefaultCharCoding = KHECore::LocalEncoding;
 
 
 static const int BAFInitialHeight = 50;
@@ -57,25 +61,33 @@ ByteArrayFrameRenderer::ByteArrayFrameRenderer()
  : mHeight( BAFInitialHeight ),
    mWidth( BAFInitialWidth ),
    mByteArrayModel( 0 ),
-   mCodec( 0 ),
+   mCharCodec( 0 ),
    mResizeStyle( DefaultResizeStyle )
 {
-    mLayout = new KHEUI::ByteArrayTableLayout( DefaultNoOfBytesPerLine, DefaultFirstLineOffset, DefaultStartOffset, 0 );
-    mLayout->setLength( 0 );//mByteArrayModel->size() );
+    mLayout = new KHEUI::ByteArrayTableLayout( DefaultNoOfBytesPerLine, DefaultFirstLineOffset, DefaultStartOffset, 0, 0 );
     mLayout->setNoOfLinesPerPage( noOfLinesPerFrame() );
+    mTableRanges = new ByteArrayTableRanges( mLayout );
+
+    // set codecs
+    mValueCodec = KHECore::ValueCodec::createCodec( (KHECore::ValueCoding)DefaultValueCoding );
+    mValueCoding = DefaultValueCoding;
+    mCharCodec = KHECore::CharCodec::createCodec( (KHECore::CharCoding)DefaultCharCoding );
+    mCharCoding = DefaultCharCoding;
+
+    mStylist = new PrintColumnStylist();
 
     const KHE::Section emptySection;
     // creating the columns in the needed order
     mOffsetColumnRenderer =
-        new KHEPrint::OffsetColumnRenderer( DefaultFirstLineOffset, DefaultNoOfBytesPerLine, KOffsetFormat::Hexadecimal );
+        new KHEUI::OffsetColumnRenderer( mStylist, mLayout, KOffsetFormat::Hexadecimal );
     mFirstBorderColumnRenderer =
-        new KHEPrint::BorderColumnRenderer( true );//false );
+        new KHEUI::BorderColumnRenderer( mStylist, true, false );
     mValueColumnRenderer =
-        new KHEPrint::ValueColumnRenderer( mByteArrayModel, emptySection, mLayout );
+        new KHEUI::ValueByteArrayColumnRenderer( mStylist, mByteArrayModel, mLayout, mTableRanges );
     mSecondBorderColumnRenderer =
-        new KHEPrint::BorderColumnRenderer( true );
+        new KHEUI::BorderColumnRenderer( mStylist, true, false );
     mCharColumnRenderer =
-        new KHEPrint::CharColumnRenderer( mByteArrayModel, emptySection, mLayout );
+        new KHEUI::CharByteArrayColumnRenderer( mStylist, mByteArrayModel, mLayout, mTableRanges );
 
     addColumn( mOffsetColumnRenderer );
     addColumn( mFirstBorderColumnRenderer );
@@ -83,33 +95,31 @@ ByteArrayFrameRenderer::ByteArrayFrameRenderer()
     addColumn( mSecondBorderColumnRenderer );
     addColumn( mCharColumnRenderer );
 
-    // set encoding
-    mCodec = KHECore::CharCodec::createCodec( (KHECore::CharCoding)DefaultEncoding );
-    mValueColumnRenderer->setCodec( mCodec );
-    mCharColumnRenderer->setCodec( mCodec );
-    mEncoding = DefaultEncoding;
+    mValueColumnRenderer->setValueCodec( (KHECore::ValueCoding)mValueCoding, mValueCodec );
+    mValueColumnRenderer->setCharCodec( mCharCodec );
+    mCharColumnRenderer->setCharCodec( mCharCodec );
 
     setFont( KGlobalSettings::fixedFont() );
 }
 
-const KHECore::AbstractByteArrayModel *ByteArrayFrameRenderer::byteArrayModel() const { return mByteArrayModel; }
+KHECore::AbstractByteArrayModel* ByteArrayFrameRenderer::byteArrayModel() const { return mByteArrayModel; }
 int ByteArrayFrameRenderer::offset()                                             const { return mLayout->startOffset(); }
 int ByteArrayFrameRenderer::length()                                             const { return mLayout->length(); }
 
 int ByteArrayFrameRenderer::noOfBytesPerLine()               const { return mLayout->noOfBytesPerLine(); }
-int ByteArrayFrameRenderer::firstLineOffset()                const { return mOffsetColumnRenderer->firstLineOffset(); }
+int ByteArrayFrameRenderer::firstLineOffset()                const { return mLayout->firstLineOffset(); }
 int ByteArrayFrameRenderer::startOffset()                    const { return mLayout->startOffset(); }
-ResizeStyle ByteArrayFrameRenderer::resizeStyle()           const { return mResizeStyle; }
-KHECore::ValueCoding ByteArrayFrameRenderer::valueCoding()            const { return mValueColumnRenderer->valueCoding(); }
+ResizeStyle ByteArrayFrameRenderer::resizeStyle()            const { return mResizeStyle; }
+KHECore::ValueCoding ByteArrayFrameRenderer::valueCoding()   const { return mValueCoding; }
 KPixelX ByteArrayFrameRenderer::byteSpacingWidth()           const { return mValueColumnRenderer->byteSpacingWidth(); }
 int ByteArrayFrameRenderer::noOfGroupedBytes()               const { return mValueColumnRenderer->noOfGroupedBytes(); }
 KPixelX ByteArrayFrameRenderer::groupSpacingWidth()          const { return mValueColumnRenderer->groupSpacingWidth(); }
 KPixelX ByteArrayFrameRenderer::binaryGapWidth()             const { return mValueColumnRenderer->binaryGapWidth(); }
-bool ByteArrayFrameRenderer::showsNonprinting()              const { return mCharColumnRenderer->showsNonprinting(); }
+bool ByteArrayFrameRenderer::showsNonprinting()              const { return mCharColumnRenderer->isShowingNonprinting(); }
 QChar ByteArrayFrameRenderer::substituteChar()               const { return mCharColumnRenderer->substituteChar(); }
 QChar ByteArrayFrameRenderer::undefinedChar()                const { return mCharColumnRenderer->undefinedChar(); }
-KHECore::CharCoding ByteArrayFrameRenderer::charCoding()        const { return mEncoding; }
-const QString &ByteArrayFrameRenderer::charCodingName()        const { return mCodec->name(); }
+KHECore::CharCoding ByteArrayFrameRenderer::charCoding()     const { return mCharCoding; }
+const QString& ByteArrayFrameRenderer::charCodingName()      const { return mCharCodec->name(); }
 
 bool ByteArrayFrameRenderer::offsetColumnVisible() const { return mOffsetColumnRenderer->isVisible(); }
 int ByteArrayFrameRenderer::visibleByteArrayCodings() const
@@ -130,21 +140,21 @@ int ByteArrayFrameRenderer::framesCount() const
     return frames;
 }
 
-void ByteArrayFrameRenderer::setByteArrayModel( const KHECore::AbstractByteArrayModel *byteArrayModel,
+void ByteArrayFrameRenderer::setByteArrayModel( KHECore::AbstractByteArrayModel* byteArrayModel,
                                                 int offset, int length )
 {
     mByteArrayModel = byteArrayModel;
     length = ( byteArrayModel == 0 ) ?                      0 :
              ( length == -1 ) ?                             byteArrayModel->size()-offset :
-             ( length <= byteArrayModel->size()-offset ) ? length :
-                                                             byteArrayModel->size()-offset;
+             ( length <= byteArrayModel->size()-offset ) ?  length :
+                                                            byteArrayModel->size()-offset;
 
-    const KHE::Section renderIndizes = KHE::Section::fromWidth(offset,length);
-    mValueColumnRenderer->setByteArrayModel( byteArrayModel, renderIndizes );
-    mCharColumnRenderer->setByteArrayModel( byteArrayModel, renderIndizes );
+    mValueColumnRenderer->set( byteArrayModel );
+    mCharColumnRenderer->set( byteArrayModel );
 
     // affected:
     // length -> no of lines -> width
+    mLayout->setByteArrayOffset( offset );
     mLayout->setLength( length );
 
     adjustLayoutToSize();
@@ -166,7 +176,6 @@ void ByteArrayFrameRenderer::setFirstLineOffset( int firstLineOffset )
     if( !mLayout->setFirstLineOffset(firstLineOffset) )
         return;
 
-    mOffsetColumnRenderer->setFirstLineOffset( firstLineOffset );
     // affects:
     // the no of lines -> width
     adjustLayoutToSize();
@@ -189,21 +198,6 @@ void ByteArrayFrameRenderer::setBufferSpacing( KPixelX byteSpacing, int noOfGrou
         return;
 
     adjustToWidth();
-}
-
-
-void ByteArrayFrameRenderer::setValueCoding( KHECore::ValueCoding valueCoding )
-{
-    const uint oldCodingWidth = mValueColumnRenderer->byteCodec()->encodingWidth();
-
-    if( !mValueColumnRenderer->setValueCoding(valueCoding) )
-        return;
-
-    const uint newCodingWidth = mValueColumnRenderer->byteCodec()->encodingWidth();
-
-    // change in the width?
-    if( newCodingWidth != oldCodingWidth )
-        adjustToWidth();
 }
 
 
@@ -272,43 +266,69 @@ void ByteArrayFrameRenderer::setUndefinedChar( QChar undefinedChar )
 
 void ByteArrayFrameRenderer::setShowsNonprinting( bool showsNonprinting )
 {
-    mCharColumnRenderer->setShowsNonprinting( showsNonprinting );
+    mCharColumnRenderer->setShowingNonprinting( showsNonprinting );
+}
+
+
+void ByteArrayFrameRenderer::setValueCoding( KHECore::ValueCoding valueCoding )
+{
+    if( mValueCoding == valueCoding )
+        return;
+
+    const uint oldCodingWidth = mValueCodec->encodingWidth();
+
+    KHECore::ValueCodec* newValueCodec =
+        KHECore::ValueCodec::createCodec( valueCoding );
+    if( newValueCodec == 0 )
+        return;
+
+    delete mValueCodec;
+    mValueCodec = newValueCodec;
+    mValueCoding = valueCoding;
+
+    mValueColumnRenderer->setValueCodec( (KHECore::ValueCoding)mValueCoding, mValueCodec );
+
+    const uint newCodingWidth = mValueCodec->encodingWidth();
+
+    // change in the width?
+    if( newCodingWidth != oldCodingWidth )
+        adjustToWidth();
 }
 
 
 void ByteArrayFrameRenderer::setCharCoding( KHECore::CharCoding charCoding )
 {
-    if( mEncoding == charCoding )
+    if( mCharCoding == charCoding )
         return;
 
-    KHECore::CharCodec *newCharCodec = KHECore::CharCodec::createCodec( charCoding );
+    KHECore::CharCodec* newCharCodec = KHECore::CharCodec::createCodec( charCoding );
     if( newCharCodec == 0 )
         return;
 
-    mValueColumnRenderer->setCodec( newCharCodec );
-    mCharColumnRenderer->setCodec( newCharCodec );
+    delete mCharCodec;
+    mCharCodec = newCharCodec;
+    mCharCoding = charCoding;
 
-    delete mCodec;
-    mCodec = newCharCodec;
-    mEncoding = charCoding;
+    mValueColumnRenderer->setCharCodec( mCharCodec );
+    mCharColumnRenderer->setCharCodec( mCharCodec );
 }
 
 // TODO: join with function above!
-void ByteArrayFrameRenderer::setCharCoding( const QString &charCodingName )
+void ByteArrayFrameRenderer::setCharCoding( const QString& newCharCodingName )
 {
-    if( charCodingName == mCodec->name() )
+    if( charCodingName() == newCharCodingName )
         return;
 
-    KHECore::CharCodec *newCharCodec = KHECore::CharCodec::createCodec( charCodingName );
+    KHECore::CharCodec* newCharCodec = KHECore::CharCodec::createCodec( newCharCodingName );
     if( newCharCodec == 0 )
         return;
 
-    mValueColumnRenderer->setCodec( newCharCodec );
-    mCharColumnRenderer->setCodec( newCharCodec );
+    delete mCharCodec;
+    mCharCodec = newCharCodec;
+    mCharCoding = KHECore::LocalEncoding; // TODO: add encoding no to every known codec
 
-    delete mCodec;
-    mCodec = newCharCodec;
-    mEncoding = KHECore::LocalEncoding; // TODO: add charCoding no to every known codec
+    mValueColumnRenderer->setCharCodec( mCharCodec );
+    mCharColumnRenderer->setCharCodec( mCharCodec );
 }
 
 
@@ -367,7 +387,6 @@ void ByteArrayFrameRenderer::adjustLayoutToSize()
 
 void ByteArrayFrameRenderer::adjustToLayoutNoOfBytesPerLine()
 {
-    mOffsetColumnRenderer->setDelta( mLayout->noOfBytesPerLine() );
     mValueColumnRenderer->resetXBuffer();
     mCharColumnRenderer->resetXBuffer();
 
@@ -500,6 +519,9 @@ void ByteArrayFrameRenderer::showByteArrayColumns( int newColumns )
 
 ByteArrayFrameRenderer::~ByteArrayFrameRenderer()
 {
+    delete mStylist;
+    delete mTableRanges;
     delete mLayout;
-    delete mCodec;
+    delete mValueCodec;
+    delete mCharCodec;
 }

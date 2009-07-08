@@ -36,10 +36,10 @@ class ByteArrayTableLayout;
   *@author Friedrich W. H. Kossebau
   */
 
-class OffsetColumnRenderer : public AbstractColumnRenderer
+class OKTETAGUI_EXPORT OffsetColumnRenderer : public AbstractColumnRenderer
 {
   public:
-    OffsetColumnRenderer( ColumnsView* columnsView, ByteArrayTableLayout* layout, KOffsetFormat::KFormat format );
+    OffsetColumnRenderer( AbstractColumnStylist* stylist, ByteArrayTableLayout* layout, KOffsetFormat::KFormat format );
     virtual ~OffsetColumnRenderer();
 
   public:  // AbstractColumnRenderer API

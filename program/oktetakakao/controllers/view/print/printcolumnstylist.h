@@ -1,7 +1,7 @@
 /*
-    This file is part of the Okteta Gui library, part of the KDE project.
+    This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,29 +20,26 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYTABLELAYOUTTEST_H
-#define BYTEARRAYTABLELAYOUTTEST_H
+#ifndef PRINTCOLUMNSTYLIST_H
+#define PRINTCOLUMNSTYLIST_H
 
+// lib
+#include <abstractcolumnstylist.h>
 // Qt
-#include <QtCore/QObject>
+#include <QtGui/QPalette>
 
-namespace KHEUI
+
+class PrintColumnStylist : public KHEUI::AbstractColumnStylist
 {
+  public:
+    PrintColumnStylist();
+    virtual ~PrintColumnStylist();
 
-class ByteArrayTableLayoutTest : public QObject
-{
-  Q_OBJECT
+  public: // AbstractColumnStylist API
+    virtual const QPalette& palette();
 
-  private Q_SLOTS: // test functions
-    void testConstructor();
-    void testSetStartOffset();
-    void testSetFirstLineOffset();
-    void testSetNoOfBytesPerLine();
-    void testSetByteArrayOffset();
-    void testSetLength();
-    void testSetNoOfLinesPerPage();
+  protected:
+    QPalette mPalette;
 };
-
-}
 
 #endif

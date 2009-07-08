@@ -58,12 +58,12 @@ const int NoByteFound = -1;
   *
   *@author Friedrich W. H. Kossebau
   */
-class AbstractByteArrayColumnRenderer : public AbstractColumnRenderer
+class OKTETAGUI_EXPORT AbstractByteArrayColumnRenderer : public AbstractColumnRenderer
 {
   public:
     enum FrameStyle { Frame, Left, Right };
   public:
-    AbstractByteArrayColumnRenderer( ColumnsView/*KByteArrayView*/ *columnsView,
+    AbstractByteArrayColumnRenderer( AbstractColumnStylist* stylist,
         KHECore::AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges );
     virtual ~AbstractByteArrayColumnRenderer();
 

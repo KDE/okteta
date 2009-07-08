@@ -386,7 +386,7 @@ void ColumnsView::renderColumns( QPainter *painter, int cx, int cy, int cw, int 
 
 void ColumnsView::renderEmptyArea( QPainter *painter, int cx ,int cy, int cw, int ch)
 {
-    painter->fillRect( cx,cy, cw,ch, viewport()->palette().brush(viewport()->backgroundRole()) );
+    painter->fillRect( cx,cy, cw,ch, viewport()->palette().brush(QPalette::Base) ); // TODO: use stylist here, too
 }
 
 

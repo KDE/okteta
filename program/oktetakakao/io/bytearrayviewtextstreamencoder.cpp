@@ -72,7 +72,7 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream( QIODevice *device,
 
     // setup
     KHEUI::ByteArrayTableLayout layout( byteArrayView->noOfBytesPerLine(), mSettings.firstLineOffset,
-                                        mSettings.startOffset, byteArrayModel->size() );
+                                        mSettings.startOffset, 0, byteArrayModel->size() );
 
     KHEUI::CoordRange coordRange;
     coordRange.set( layout.coordRangeOfIndizes(section) );

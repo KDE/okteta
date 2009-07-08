@@ -26,6 +26,7 @@
 // lib
 #include "selection.h"
 #include "coordrangelist.h"
+#include "oktetagui_export.h"
 // Okteta core
 #include <sectionlist.h>
 
@@ -44,7 +45,8 @@ class ByteArrayTableLayout;
   *
   * @author Friedrich W. H.  Kossebau
   */
-class ByteArrayTableRanges
+// TODO: split info about ranges from info about dirty ranges into a second class
+class OKTETAGUI_EXPORT ByteArrayTableRanges
 {
   public:
     explicit ByteArrayTableRanges( ByteArrayTableLayout* layout );

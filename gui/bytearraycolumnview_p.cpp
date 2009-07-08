@@ -24,6 +24,7 @@
 
 // lib
 #include "bordercolumnrenderer.h"
+#include "widgetcolumnstylist.h"
 #include "bytearraytableranges.h"
 #include "bytearraytablelayout.h"
 #include "controller/kvalueeditor.h"
@@ -74,17 +75,19 @@ void ByteArrayColumnViewPrivate::init()
     mDragStartTimer = new QTimer( q );
     mTrippleClickTimer = new QTimer( q );
 
+    mStylist = new WidgetColumnStylist( q );
+
     // creating the columns in the needed order
     mOffsetColumn =
-        new OffsetColumnRenderer( q, mTableLayout, KOffsetFormat::Hexadecimal );
+        new OffsetColumnRenderer( mStylist, mTableLayout, KOffsetFormat::Hexadecimal );
     mFirstBorderColumn =
-        new BorderColumnRenderer( q, false );
+        new BorderColumnRenderer( mStylist, false );
     mValueColumn =
-        new ValueByteArrayColumnRenderer( q, mByteArrayModel, mTableLayout, mTableRanges );
+        new ValueByteArrayColumnRenderer( mStylist, mByteArrayModel, mTableLayout, mTableRanges );
     mSecondBorderColumn =
-        new BorderColumnRenderer( q, true );
+        new BorderColumnRenderer( mStylist, true );
     mCharColumn =
-        new CharByteArrayColumnRenderer( q, mByteArrayModel, mTableLayout, mTableRanges );
+        new CharByteArrayColumnRenderer( mStylist, mByteArrayModel, mTableLayout, mTableRanges );
 
     q->addColumn( mOffsetColumn );
     q->addColumn( mFirstBorderColumn );
@@ -1281,6 +1284,7 @@ void ByteArrayColumnViewPrivate::startDrag()
 ByteArrayColumnViewPrivate::~ByteArrayColumnViewPrivate()
 {
     delete mCursorPixmaps;
+    delete mStylist;
 }
 
 }

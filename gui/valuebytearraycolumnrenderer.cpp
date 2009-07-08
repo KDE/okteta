@@ -23,8 +23,9 @@
 #include "valuebytearraycolumnrenderer.h"
 
 // lib
-#include "columnsview.h"
 #include "helper.h"
+// lib
+#include <abstractcolumnstylist.h>
 // Okteta core
 #include <valuecodec.h>
 #include <charcodec.h>
@@ -40,9 +41,9 @@ namespace KHEUI
 static const int DefaultBinaryGapWidth = 1;
 
 
-ValueByteArrayColumnRenderer::ValueByteArrayColumnRenderer( ColumnsView *columnsView,
+ValueByteArrayColumnRenderer::ValueByteArrayColumnRenderer( AbstractColumnStylist* stylist,
     KHECore::AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges )
- : AbstractByteArrayColumnRenderer( columnsView, byteArrayModel, layout, ranges ),
+ : AbstractByteArrayColumnRenderer( stylist, byteArrayModel, layout, ranges ),
    mValueCodec( 0 ),
    mBinaryGapWidth( DefaultBinaryGapWidth )
 {
@@ -97,7 +98,7 @@ void ValueByteArrayColumnRenderer::renderEditedByte( QPainter *painter, char byt
 {
     const KHECore::KChar byteChar = mCharCodec->decode( byte );
 
-    const QPalette &palette = columnsView()->viewport()->palette();
+    const QPalette& palette = stylist()->palette();
     KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::View );
     const KColorScheme::ForegroundRole foregroundRole =
         mByteTypeColored ? foregroundRoleForChar(byteChar): KColorScheme::NormalText;

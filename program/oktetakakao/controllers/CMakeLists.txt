@@ -168,13 +168,8 @@ set( PRINTCONTROLLER_SRCS
   view/print/printcontroller.cpp
   view/print/printtool.cpp
   view/print/printjob.cpp
-  view/print/abstractcolumnrenderer.cpp
   view/print/abstractcolumnframerenderer.cpp
-  view/print/offsetcolumnrenderer.cpp
-  view/print/bordercolumnrenderer.cpp
-  view/print/bytecolumnrenderer.cpp
-  view/print/valuecolumnrenderer.cpp
-  view/print/charcolumnrenderer.cpp
+  view/print/printcolumnstylist.cpp
   view/print/bytearrayframerenderer.cpp
 )
 set( VIEWCONFIGCONTROLLER_SRCS

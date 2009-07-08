@@ -36,10 +36,10 @@ namespace KHEUI
   *@author Friedrich W. H. Kossebau
   */
 
-class BorderColumnRenderer : public AbstractColumnRenderer
+class OKTETAGUI_EXPORT BorderColumnRenderer : public AbstractColumnRenderer
 {
   public:
-    BorderColumnRenderer( ColumnsView *columnsView, bool lineDrawn );
+    BorderColumnRenderer( AbstractColumnStylist* stylist, bool lineDrawn, bool inEmpty = true );
     virtual ~BorderColumnRenderer();
 
   public: // AbstractColumnRenderer-API
@@ -52,6 +52,8 @@ class BorderColumnRenderer : public AbstractColumnRenderer
   protected:
     /** true if we are between two columns and should show a line */
     bool mLineDrawn;
+    /** true if the line is also drawn in empty space */
+    bool mInEmpty;
 };
 
 }

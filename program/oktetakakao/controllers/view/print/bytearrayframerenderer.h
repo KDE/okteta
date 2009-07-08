@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -31,17 +31,18 @@
 #include <QtGui/QFont>
 
 
-namespace KHEPrint {
+class PrintColumnStylist;
+namespace KHEUI {
 class OffsetColumnRenderer;
 class BorderColumnRenderer;
-class ValueColumnRenderer;
-class CharColumnRenderer;
-}
-namespace KHEUI {
+class ValueByteArrayColumnRenderer;
+class CharByteArrayColumnRenderer;
 class ByteArrayTableLayout;
+class ByteArrayTableRanges;
 }
 namespace KHECore {
 class AbstractByteArrayModel;
+class ValueCodec;
 class CharCodec;
 }
 
@@ -75,7 +76,7 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
     virtual int framesCount() const;
 
   public:
-    const KHECore::AbstractByteArrayModel *byteArrayModel() const;
+    KHECore::AbstractByteArrayModel* byteArrayModel() const;
     int offset() const;
     int length() const;
 
@@ -98,7 +99,7 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
     int visibleByteArrayCodings() const;
 
   public:
-    void setByteArrayModel( const KHECore::AbstractByteArrayModel *byteArrayModel, int offset = 0, int length = -1 );
+    void setByteArrayModel( KHECore::AbstractByteArrayModel* byteArrayModel, int offset = 0, int length = -1 );
     void setHeight( int height );
     void setWidth( int width );
     void setFont( const QFont &font );
@@ -137,27 +138,33 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
     int mWidth;
     QFont mFont;
 
-    const KHECore::AbstractByteArrayModel *mByteArrayModel;
+    KHECore::AbstractByteArrayModel* mByteArrayModel;
 
   protected:
     /** holds the logical layout */
     KHEUI::ByteArrayTableLayout *mLayout;
+    KHEUI::ByteArrayTableRanges* mTableRanges;
 
   protected:
-    KHEPrint::OffsetColumnRenderer *mOffsetColumnRenderer;
-    KHEPrint::BorderColumnRenderer *mFirstBorderColumnRenderer;
-    KHEPrint::ValueColumnRenderer  *mValueColumnRenderer;
-    KHEPrint::BorderColumnRenderer *mSecondBorderColumnRenderer;
-    KHEPrint::CharColumnRenderer   *mCharColumnRenderer;
+    KHEUI::OffsetColumnRenderer*         mOffsetColumnRenderer;
+    KHEUI::BorderColumnRenderer*         mFirstBorderColumnRenderer;
+    KHEUI::ValueByteArrayColumnRenderer* mValueColumnRenderer;
+    KHEUI::BorderColumnRenderer*         mSecondBorderColumnRenderer;
+    KHEUI::CharByteArrayColumnRenderer*  mCharColumnRenderer;
+    PrintColumnStylist* mStylist;
 
   protected:
     /** */
-    KHECore::CharCodec *mCodec;
+    KHECore::ValueCodec* mValueCodec;
+    /** */
+    KHECore::ValueCoding mValueCoding;
+    /** */
+    KHECore::CharCodec* mCharCodec;
+    /** */
+    KHECore::CharCoding mCharCoding;
 
   protected: // parameters
     ResizeStyle mResizeStyle;
-    /** */
-    KHECore::CharCoding mEncoding;
 };
 
 #endif

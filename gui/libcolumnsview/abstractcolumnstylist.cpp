@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,29 +20,26 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYTABLELAYOUTTEST_H
-#define BYTEARRAYTABLELAYOUTTEST_H
+#include "abstractcolumnstylist.h"
+#include "abstractcolumnstylist_p.h"
 
-// Qt
-#include <QtCore/QObject>
 
 namespace KHEUI
 {
 
-class ByteArrayTableLayoutTest : public QObject
+AbstractColumnStylist::AbstractColumnStylist()
+  : d_ptr( new AbstractColumnStylistPrivate() )
 {
-  Q_OBJECT
-
-  private Q_SLOTS: // test functions
-    void testConstructor();
-    void testSetStartOffset();
-    void testSetFirstLineOffset();
-    void testSetNoOfBytesPerLine();
-    void testSetByteArrayOffset();
-    void testSetLength();
-    void testSetNoOfLinesPerPage();
-};
-
 }
 
-#endif
+AbstractColumnStylist::AbstractColumnStylist( AbstractColumnStylistPrivate* d )
+  : d_ptr( d )
+{
+}
+
+AbstractColumnStylist::~AbstractColumnStylist()
+{
+    delete d_ptr;
+}
+
+}

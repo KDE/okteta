@@ -124,7 +124,7 @@ K_GLOBAL_STATIC( NullModel, nullModel )
 
 AbstractByteArrayViewPrivate::AbstractByteArrayViewPrivate( AbstractByteArrayView* parent )
  : mByteArrayModel( nullModel ),
-   mTableLayout( new ByteArrayTableLayout(DefaultNoOfBytesPerLine,DefaultFirstLineOffset,DefaultStartOffset,0) ),
+   mTableLayout( new ByteArrayTableLayout(DefaultNoOfBytesPerLine,DefaultFirstLineOffset,DefaultStartOffset,0,0) ),
    mTableCursor( new ByteArrayTableCursor(mTableLayout) ),
    mTableRanges( new ByteArrayTableRanges(mTableLayout) ),
    mReadOnly( false ),
