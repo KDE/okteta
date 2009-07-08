@@ -37,6 +37,7 @@
 #include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
 #include <QtGui/QGroupBox>
+#include <QtGui/QAbstractItemView>
 #include <QtGui/QLayout>
 
 
@@ -57,18 +58,23 @@ static const QStringList& formatStrings()
 GotoOffsetView::GotoOffsetView( GotoOffsetTool* tool, QWidget* parent )
  : QWidget( parent ), mTool( tool )
 {
-    QVBoxLayout* baseLayout = new QVBoxLayout( this );
+    QHBoxLayout* baseLayout = new QHBoxLayout( this );
     baseLayout->setMargin( 0 );
 
     // offset
+    QGridLayout* offsetLayout = new QGridLayout();
+    offsetLayout->setMargin( 0 );
+    offsetLayout->setColumnStretch( 0, 0 );
+    offsetLayout->setColumnStretch( 1, 0 );
+
     QLabel* label = new QLabel( i18nc("@label:listbox","Fo&rmat:"), this );
     mFormatSelector = new KComboBox( this );
     mFormatSelector->addItems( formatStrings() );
     connect( mFormatSelector, SIGNAL(activated(int)), SLOT(onSelectorChanged(int)) );
     label->setBuddy( mFormatSelector );
 
-    baseLayout->addWidget( label );
-    baseLayout->addWidget( mFormatSelector );
+    offsetLayout->addWidget( label, 0, 0, Qt::AlignRight);
+    offsetLayout->addWidget( mFormatSelector, 0, 1);
 
     label = new QLabel( i18nc("@label:listbox","O&ffset:"), this );
     mOffsetEdit = new KComboBox( this );
@@ -76,6 +82,12 @@ GotoOffsetView::GotoOffsetView( GotoOffsetTool* tool, QWidget* parent )
     mOffsetEdit->setMaxCount( 10 );
     mOffsetEdit->setInsertPolicy( KComboBox::InsertAtTop );
     connect( mOffsetEdit, SIGNAL(editTextChanged(const QString&)), SLOT(onOffsetChanged(const QString&)) );
+    QAbstractItemView* formatComboBoxListView = mFormatSelector->view();
+    connect( formatComboBoxListView, SIGNAL(activated( const QModelIndex& )),
+             mOffsetEdit, SLOT(setFocus()) );
+    // TODO: is a workaround for Qt 4.5.1 which doesn't emit activated() for mouse clicks
+    connect( formatComboBoxListView, SIGNAL(pressed( const QModelIndex& )),
+             mOffsetEdit, SLOT(setFocus()) );
     mOffsetValidator = new KByteArrayValidator( mOffsetEdit, KByteArrayValidator::HexadecimalCoding );
     mOffsetEdit->setValidator( mOffsetValidator );
     label->setBuddy( mOffsetEdit );
@@ -83,8 +95,40 @@ GotoOffsetView::GotoOffsetView( GotoOffsetTool* tool, QWidget* parent )
         i18nc( "@info:whatsthis","Enter an offset to go to, or select a previous offset from the list." );
     label->setWhatsThis( inputWhatsThis );
     mOffsetEdit->setWhatsThis( inputWhatsThis );
-    baseLayout->addWidget( label );
-    baseLayout->addWidget( mOffsetEdit );
+
+    offsetLayout->addWidget( label, 1, 0, Qt::AlignRight);
+    offsetLayout->addWidget( mOffsetEdit, 1, 1);
+
+    baseLayout->addLayout( offsetLayout );
+    setFocusProxy( mOffsetEdit ); // TODO: see how KDialog does it, e.g. see if there is already a focuswidget as child
+
+    // options
+    QVBoxLayout* optionsLayout = new QVBoxLayout();
+    optionsLayout->setMargin( 0 );
+
+    mAtCursorCheckBox = new QCheckBox( i18nc("@option:check","From c&ursor"), this );
+    mAtCursorCheckBox->setWhatsThis(
+        i18nc("@info:whatsthis","Go relative from the current cursor location and not absolute.") );
+    connect( mAtCursorCheckBox, SIGNAL(toggled( bool )), mTool, SLOT(setIsRelative( bool )) );
+    mExtendSelectionCheckBox = new QCheckBox( i18nc("@option:check","&Extend selection"), this );
+    mExtendSelectionCheckBox->setWhatsThis(
+        i18nc("@info:whatsthis","Extend the selection by the cursor move.") );
+    connect( mExtendSelectionCheckBox, SIGNAL(toggled( bool )), mTool, SLOT(setIsSelectionToExtent( bool )) );
+    mBackwardsCheckBox = new QCheckBox( i18nc("@option:check","&Backwards"), this );
+    mBackwardsCheckBox->setWhatsThis(
+        i18nc("@info:whatsthis","Go backwards from the end or the current cursor location.") );
+    connect( mBackwardsCheckBox, SIGNAL(toggled( bool )), mTool, SLOT(setIsBackwards( bool )) );
+
+    QHBoxLayout* upperOptionsLayout = new QHBoxLayout();
+    upperOptionsLayout->setMargin( 0 );
+    upperOptionsLayout->addWidget( mAtCursorCheckBox );
+    upperOptionsLayout->addWidget( mBackwardsCheckBox );
+
+    optionsLayout->addLayout( upperOptionsLayout );
+    optionsLayout->addWidget( mExtendSelectionCheckBox );
+    optionsLayout->addStretch();
+
+    baseLayout->addLayout( optionsLayout );
 
     // Goto button
     const KGuiItem gotoGuiItem( i18nc("@action:button","&Go"), "go-jump",
@@ -95,26 +139,15 @@ GotoOffsetView::GotoOffsetView( GotoOffsetTool* tool, QWidget* parent )
     mGotoButton = new KPushButton( gotoGuiItem, this );
     connect( mGotoButton, SIGNAL(clicked(bool)), SLOT(onGotoButtonClicked()) );
     baseLayout->addWidget( mGotoButton );
+    baseLayout->setAlignment( mGotoButton, Qt::AlignTop );
 
-    // options
-    mAtCursorCheckBox = new QCheckBox( i18nc("@option:check","From c&ursor"), this );
-    mAtCursorCheckBox->setWhatsThis(
-        i18nc("@info:whatsthis","Go relative from the current cursor location and not absolute.") );
-    mExtendSelectionCheckBox = new QCheckBox( i18nc("@option:check","&Extend selection"), this );
-    mExtendSelectionCheckBox->setWhatsThis(
-        i18nc("@info:whatsthis","Extend the selection by the cursor move.") );
-    mBackwardsCheckBox = new QCheckBox( i18nc("@option:check","&Backwards"), this );
-    mBackwardsCheckBox->setWhatsThis(
-        i18nc("@info:whatsthis","Go backwards from the end or the current cursor location.") );
-
-    baseLayout->addWidget( mAtCursorCheckBox );
-    baseLayout->addWidget( mExtendSelectionCheckBox );
-    baseLayout->addWidget( mBackwardsCheckBox );
     baseLayout->addStretch();
 
     setTabOrder( mFormatSelector, mOffsetEdit );
     setTabOrder( mOffsetEdit, mAtCursorCheckBox );
     setTabOrder( mAtCursorCheckBox, mBackwardsCheckBox );
+    setTabOrder( mBackwardsCheckBox, mExtendSelectionCheckBox );
+    setTabOrder( mExtendSelectionCheckBox, mGotoButton );
 
     connect( mTool, SIGNAL(isApplyableChanged( bool )), SLOT( onApplyableChanged( bool )) );
 

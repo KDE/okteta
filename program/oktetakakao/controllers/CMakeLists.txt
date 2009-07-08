@@ -146,7 +146,7 @@ set( FILTERCONTROLLER_SRCS
 set( GOTOOFFSETCONTROLLER_SRCS
   view/gotooffset/gotooffsettool.cpp
   view/gotooffset/gotooffsetview.cpp
-  view/gotooffset/kgotooffsetdialog.cpp
+  view/gotooffset/gotooffsettoolview.cpp
   view/gotooffset/gotooffsetcontroller.cpp
 )
 set( BOOKMARKSCONTROLLER_SRCS

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kakao module, part of the KDE project.
 
-    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,43 +20,29 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef GOTOOFFSETCONTROLLER_H
-#define GOTOOFFSETCONTROLLER_H
-
+#ifndef GOTOOFFSETTOOLVIEW_H
+#define GOTOOFFSETTOOLVIEW_H
 
 // Kakao gui
-#include <abstractxmlguicontroller.h>
+#include <abstracttoolinlineview.h>
 
-class GotoOffsetToolView;
+class GotoOffsetView;
 class GotoOffsetTool;
-namespace KDE { namespace If {
-class ToolInlineViewable;
-} }
-class KAction;
-class KXMLGUIClient;
 
 
-class GotoOffsetController : public AbstractXmlGuiController
+class GotoOffsetToolView : public AbstractToolInlineView
 {
-  Q_OBJECT
-
   public:
-    explicit GotoOffsetController( KDE::If::ToolInlineViewable* toolInlineViewable, KXMLGUIClient* guiClient );
-    virtual ~GotoOffsetController();
+    explicit GotoOffsetToolView( GotoOffsetTool* tool );
+    virtual ~GotoOffsetToolView();
 
-  public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
-
-  protected Q_SLOTS: // action slots
-    void gotoOffset();
+  public: // AbstractToolView API
+    virtual QWidget* widget() const;
+    virtual QString title() const;
+    virtual AbstractTool* tool() const;
 
   protected:
-    KAction* mGotoOffsetAction;
-
-    KDE::If::ToolInlineViewable* mToolInlineViewable;
-
-    GotoOffsetToolView* mView;
-    GotoOffsetTool* mTool;
+    GotoOffsetView* mWidget;
 };
 
 #endif
