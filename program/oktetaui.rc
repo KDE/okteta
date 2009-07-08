@@ -38,6 +38,7 @@ Zusammenlegen?
       <Action name="insert_pattern" />
       <Action name="insert_file" />
     </Menu>
+    <Action name="edit_select" append="edit_select_merge" />
     <Separator append="edit_select_merge" />
     <Action name="set_overwrite" append="edit_select_merge" />
     <Separator append="edit_select_merge" />

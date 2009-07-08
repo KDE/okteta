@@ -149,6 +149,12 @@ set( GOTOOFFSETCONTROLLER_SRCS
   view/gotooffset/gotooffsettoolview.cpp
   view/gotooffset/gotooffsetcontroller.cpp
 )
+set( SELECTRANGECONTROLLER_SRCS
+  view/selectrange/selectrangetool.cpp
+  view/selectrange/selectrangeview.cpp
+  view/selectrange/selectrangetoolview.cpp
+  view/selectrange/selectrangecontroller.cpp
+)
 set( BOOKMARKSCONTROLLER_SRCS
   view/bookmarks/bookmarkeditpopup.cpp
   view/bookmarks/bookmarkscontroller.cpp
@@ -199,6 +205,7 @@ set( OKTETA_KAKAO_CONTROLLERS_SRCS
   ${FILTERCONTROLLER_SRCS}
   ${INSERTPATTERNCONTROLLER_SRCS}
   ${GOTOOFFSETCONTROLLER_SRCS}
+  ${SELECTRANGECONTROLLER_SRCS}
   ${LIBFRAMESPRINT_SRCS}
   ${PRINTCONTROLLER_SRCS}
   ${BOOKMARKSCONTROLLER_SRCS}
