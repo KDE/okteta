@@ -20,32 +20,37 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "viewbox.h"
+#ifndef TOOLINLINEVIEWWIDGET_H
+#define TOOLINLINEVIEWWIDGET_H
 
-// lib
-#include "kabstractview.h"
 // Qt
-#include <QtGui/QVBoxLayout>
+#include <QtGui/QWidget>
+
+class AbstractToolInlineView;
 
 
-ViewBox::ViewBox( KAbstractView* view, QWidget* parent )
-  : QWidget( parent ),
-    mView( view )
+class ToolInlineViewWidget : public QWidget
 {
-    QVBoxLayout* layout = new QVBoxLayout( this );
-    layout->setMargin (0);
-    layout->setSpacing (0);
-    layout->addWidget( view->widget() );
-}
+    Q_OBJECT
 
+  public:
+    enum Area { TopArea, BottomArea };
 
-KAbstractView* ViewBox::view() const { return mView; }
+  public:
+    explicit ToolInlineViewWidget( AbstractToolInlineView* view, QWidget* parent = 0 );
+    virtual ~ToolInlineViewWidget();
 
+  public:
+    AbstractToolInlineView* view() const;
 
-void ViewBox::add( ViewBox::Area area )
-{
-}
+  public:
+//     void add( ToolInlineViewWidget::Area area );
 
-ViewBox::~ViewBox()
-{
-}
+  Q_SIGNALS:
+    void done();
+
+  protected:
+    AbstractToolInlineView* mView;
+};
+
+#endif

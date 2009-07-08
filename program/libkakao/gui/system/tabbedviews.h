@@ -27,20 +27,26 @@
 // lib
 #include "abstractgroupedviews.h"
 #include "kiviewfocusable.h"
+#include "kitoolinlineviewable.h"
 
+class TabbedViewsBox;
 class KTabWidget;
 class QDragMoveEvent;
 class QDropEvent;
 
 
-class TabbedViews : public AbstractGroupedViews, public KDE::If::ViewFocusable
+class TabbedViews : public AbstractGroupedViews, public KDE::If::ViewFocusable, public KDE::If::ToolInlineViewable
 {
    Q_OBJECT
-   Q_INTERFACES( KDE::If::ViewFocusable )
+   Q_INTERFACES( KDE::If::ViewFocusable KDE::If::ToolInlineViewable )
 
   public:
     explicit TabbedViews();
     virtual ~TabbedViews();
+
+  public: // KDE::If::ToolInlineViewable API
+    virtual void addToolInlineView( AbstractToolInlineView* view );
+    virtual void setCurrentToolInlineView( AbstractToolInlineView* view );
 
   public: // KDE::If::ViewFocusable API
     virtual void setViewFocus( KAbstractView *view );
@@ -68,7 +74,9 @@ class TabbedViews : public AbstractGroupedViews, public KDE::If::ViewFocusable
     int indexOf( KAbstractView* view ) const;
 
   protected:
-   KTabWidget *mTabWidget;
+    TabbedViewsBox* mTabbedViewsBox;
+    KTabWidget* mTabWidget;
+    QList<AbstractToolInlineView*> mToolInlineViewList;
 };
 
 #endif

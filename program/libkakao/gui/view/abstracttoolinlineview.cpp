@@ -1,7 +1,7 @@
 /*
     This file is part of the Kakao Framework, part of the KDE project.
 
-    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,32 +20,30 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "viewbox.h"
+#include "abstracttoolinlineview.h"
 
-// lib
-#include "kabstractview.h"
 // Qt
-#include <QtGui/QVBoxLayout>
+#include <Qt>
 
-
-ViewBox::ViewBox( KAbstractView* view, QWidget* parent )
-  : QWidget( parent ),
-    mView( view )
+class AbstractToolInlineView::Private
 {
-    QVBoxLayout* layout = new QVBoxLayout( this );
-    layout->setMargin (0);
-    layout->setSpacing (0);
-    layout->addWidget( view->widget() );
-}
+  public:
+    explicit Private( AbstractToolInlineView* view );
+};
+
+AbstractToolInlineView::Private::Private( AbstractToolInlineView* view ) { Q_UNUSED(view) }
+
+AbstractToolInlineView::AbstractToolInlineView()
+ : d( new Private(this) )
+{}
 
 
-KAbstractView* ViewBox::view() const { return mView; }
-
-
-void ViewBox::add( ViewBox::Area area )
+void AbstractToolInlineView::activate()
 {
 }
 
-ViewBox::~ViewBox()
+
+AbstractToolInlineView::~AbstractToolInlineView()
 {
+    delete d;
 }

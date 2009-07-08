@@ -23,7 +23,10 @@
 #include "tabbedviews.h"
 
 // lib
+#include "tabbedviewsbox.h"
 #include "viewbox.h"
+#include "toolinlineviewwidget.h"
+#include <abstracttoolinlineview.h>
 #include <kabstractdocument.h>
 #include <kabstractview.h>
 // KDE
@@ -32,8 +35,9 @@
 
 TabbedViews::TabbedViews()
 {
-    mTabWidget = new KTabWidget();
+    mTabbedViewsBox = new TabbedViewsBox();
 
+    mTabWidget = mTabbedViewsBox->tabWidget();
     mTabWidget->setCloseButtonEnabled( true );
     mTabWidget->setDocumentMode( true );
 
@@ -114,9 +118,28 @@ void TabbedViews::removeView( KAbstractView *view )
     emit removing( view );
 }
 
-QWidget *TabbedViews::widget() const
+void TabbedViews::addToolInlineView( AbstractToolInlineView* view )
 {
-    return mTabWidget;
+    mToolInlineViewList.append( view );
+}
+
+void TabbedViews::setCurrentToolInlineView( AbstractToolInlineView* view )
+{
+    ToolInlineViewWidget* currentViewWidget =
+        qobject_cast<ToolInlineViewWidget*>( mTabbedViewsBox->bottomWidget() );
+
+    if( ! currentViewWidget || (currentViewWidget->view() != view) )
+    {
+        ToolInlineViewWidget* toolInlineViewWidget = new ToolInlineViewWidget( view/*->widget()*/ );
+        mTabbedViewsBox->setBottomWidget( toolInlineViewWidget );
+    }
+
+    view->widget()->setFocus();
+}
+
+QWidget* TabbedViews::widget() const
+{
+    return mTabbedViewsBox;
 }
 
 void TabbedViews::setViewFocus( KAbstractView *view )
@@ -133,6 +156,8 @@ KAbstractView *TabbedViews::viewFocus() const
 
 void TabbedViews::onCurrentChanged( int index )
 {
+    mTabbedViewsBox->setBottomWidget( 0 );
+
     const ViewBox* viewBox = static_cast<const ViewBox*>( mTabWidget->widget(index) );
     KAbstractView* view = viewBox ? viewBox->view() : 0;
 
@@ -183,5 +208,5 @@ Q_UNUSED( newStates )
 
 TabbedViews::~TabbedViews()
 {
-    delete mTabWidget;
+    delete mTabbedViewsBox;
 }

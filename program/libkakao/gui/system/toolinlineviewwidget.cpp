@@ -20,32 +20,39 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "viewbox.h"
+#include "toolinlineviewwidget.h"
 
 // lib
-#include "kabstractview.h"
+#include <abstracttoolinlineview.h>
+// KDE
+#include <KIcon>
 // Qt
-#include <QtGui/QVBoxLayout>
+#include <QtGui/QHBoxLayout>
+#include <QtGui/QToolButton>
 
 
-ViewBox::ViewBox( KAbstractView* view, QWidget* parent )
+ToolInlineViewWidget::ToolInlineViewWidget( AbstractToolInlineView* view, QWidget* parent )
   : QWidget( parent ),
     mView( view )
 {
-    QVBoxLayout* layout = new QVBoxLayout( this );
-    layout->setMargin (0);
-    layout->setSpacing (0);
-    layout->addWidget( view->widget() );
+    QHBoxLayout* layout = new QHBoxLayout( this );
+    layout->addWidget( view->widget(), 10 ); //TODO: find out why this takes ownership of widget to this
+
+    QToolButton* closeButton = new QToolButton( this );
+    closeButton->setAutoRaise( true );
+    closeButton->setIcon( KIcon("dialog-close") );
+    connect( closeButton, SIGNAL(clicked()), SIGNAL(done()) );
+    layout->addWidget( closeButton );
+    layout->setAlignment( closeButton, Qt::AlignLeft|Qt::AlignTop );
 }
 
 
-KAbstractView* ViewBox::view() const { return mView; }
+AbstractToolInlineView* ToolInlineViewWidget::view() const { return mView; }
 
 
-void ViewBox::add( ViewBox::Area area )
+ToolInlineViewWidget::~ToolInlineViewWidget()
 {
-}
-
-ViewBox::~ViewBox()
-{
+    // TODO: crashes on close of the program if view is still open
+    layout()->removeWidget( mView->widget() );
+    mView->widget()->setParent( 0 );
 }

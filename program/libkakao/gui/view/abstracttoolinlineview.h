@@ -20,32 +20,33 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "viewbox.h"
-
-// lib
-#include "kabstractview.h"
-// Qt
-#include <QtGui/QVBoxLayout>
+#ifndef ABSTRACTTOOLINLINEVIEW_H
+#define ABSTRACTTOOLINLINEVIEW_H
 
 
-ViewBox::ViewBox( KAbstractView* view, QWidget* parent )
-  : QWidget( parent ),
-    mView( view )
+class AbstractTool;
+class QWidget;
+class QString;
+
+// TODO: is there a common base for view and document?
+class AbstractToolInlineView
 {
-    QVBoxLayout* layout = new QVBoxLayout( this );
-    layout->setMargin (0);
-    layout->setSpacing (0);
-    layout->addWidget( view->widget() );
-}
+  protected:
+    AbstractToolInlineView();
+  public:
+    virtual ~AbstractToolInlineView();
 
+  public: // API to be implemented
+    virtual QWidget* widget() const = 0;
+    virtual QString title() const = 0;
+    virtual AbstractTool* tool() const = 0;
 
-KAbstractView* ViewBox::view() const { return mView; }
+  public:
+    void activate();
 
+  protected:
+    class Private;
+    Private* const d;
+};
 
-void ViewBox::add( ViewBox::Area area )
-{
-}
-
-ViewBox::~ViewBox()
-{
-}
+#endif

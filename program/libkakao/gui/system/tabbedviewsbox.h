@@ -20,32 +20,42 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "viewbox.h"
+#ifndef TABBEDVIEWSBOX_H
+#define TABBEDVIEWSBOX_H
 
-// lib
-#include "kabstractview.h"
 // Qt
-#include <QtGui/QVBoxLayout>
+#include <QtGui/QWidget>
+
+class KTabWidget;
+class QShortcut;
 
 
-ViewBox::ViewBox( KAbstractView* view, QWidget* parent )
-  : QWidget( parent ),
-    mView( view )
+class TabbedViewsBox : public QWidget
 {
-    QVBoxLayout* layout = new QVBoxLayout( this );
-    layout->setMargin (0);
-    layout->setSpacing (0);
-    layout->addWidget( view->widget() );
-}
+    Q_OBJECT
 
+  public:
+    enum Area { TopArea, BottomArea };
 
-KAbstractView* ViewBox::view() const { return mView; }
+  public:
+    explicit TabbedViewsBox( QWidget* parent = 0 );
+    virtual ~TabbedViewsBox();
 
+  public:
+    KTabWidget* tabWidget() const;
+    QWidget* bottomWidget() const;
 
-void ViewBox::add( ViewBox::Area area )
-{
-}
+  public:
+    void setBottomWidget( QWidget* bottomWidget );
 
-ViewBox::~ViewBox()
-{
-}
+  protected Q_SLOTS:
+    void onDone();
+
+  protected:
+    KTabWidget* mTabWidget;
+
+    QWidget* mBottomWidget;
+    QShortcut* mEscapeShortcut;
+};
+
+#endif

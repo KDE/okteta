@@ -20,32 +20,39 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "viewbox.h"
+#ifndef KDE_IF_TOOLINLINEVIEWABLE_H
+#define KDE_IF_TOOLINLINEVIEWABLE_H
 
-// lib
-#include "kabstractview.h"
 // Qt
-#include <QtGui/QVBoxLayout>
+#include <QtCore/QtPlugin>
+
+class AbstractToolInlineView;
 
 
-ViewBox::ViewBox( KAbstractView* view, QWidget* parent )
-  : QWidget( parent ),
-    mView( view )
+namespace KDE
 {
-    QVBoxLayout* layout = new QVBoxLayout( this );
-    layout->setMargin (0);
-    layout->setSpacing (0);
-    layout->addWidget( view->widget() );
+namespace If
+{
+
+class ToolInlineViewable
+{
+  public:
+    virtual ~ToolInlineViewable();
+
+  public: // set/action
+    virtual void addToolInlineView( AbstractToolInlineView* view ) = 0;
+    virtual void setCurrentToolInlineView( AbstractToolInlineView* view ) = 0;
+
+  public: // get
+
+  public: // signal
+};
+
+inline ToolInlineViewable::~ToolInlineViewable() {}
+
+}
 }
 
+Q_DECLARE_INTERFACE( KDE::If::ToolInlineViewable, "org.kde.if.toolinlineviewable/1.0" )
 
-KAbstractView* ViewBox::view() const { return mView; }
-
-
-void ViewBox::add( ViewBox::Area area )
-{
-}
-
-ViewBox::~ViewBox()
-{
-}
+#endif

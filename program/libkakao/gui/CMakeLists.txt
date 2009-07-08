@@ -36,13 +36,16 @@ set( KAKAO_GUI_SRCS
   ${KAKAO_GUI_IO_CONFIGEDITOR_SRCS}
   view/kabstractview.cpp
   view/abstractselectionview.cpp
+  view/abstracttoolinlineview.cpp
   view/abstracttoolview.cpp
   system/viewbox.cpp
+  system/toolinlineviewwidget.cpp
   system/toolviewdockwidget.cpp
   system/dummyview.cpp
   system/modelcodecviewmanager.cpp
   system/kviewmanager.cpp
   system/abstractgroupedviews.cpp
+  system/tabbedviewsbox.cpp
   system/tabbedviews.cpp
   system/shellwindow.cpp
   system/statusbar.cpp

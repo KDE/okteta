@@ -35,11 +35,17 @@ class ViewBox : public QWidget
     Q_OBJECT
 
   public:
+    enum Area { TopArea, BottomArea };
+
+  public:
     explicit ViewBox( KAbstractView* view, QWidget* parent = 0 );
     virtual ~ViewBox();
 
   public:
     KAbstractView* view() const;
+
+  public:
+    void add( ViewBox::Area area );
 
   protected:
     KAbstractView* mView;
