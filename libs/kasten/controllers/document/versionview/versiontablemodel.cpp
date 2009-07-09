@@ -43,8 +43,8 @@ VersionTableModel::VersionTableModel( AbstractModel* model, If::Versionable* ver
     {
         connect( mModel, SIGNAL(revertedToVersionIndex( int )), SLOT(onRevertedToVersionIndex( int )) );
         connect( mModel, SIGNAL(headVersionChanged( int )), SLOT(onHeadVersionChanged( int )) );
-        connect( mModel, SIGNAL(headVersionDataChanged( const KDocumentVersionData & )),
-                 SLOT(onHeadVersionDataChanged( const KDocumentVersionData & )) );
+        connect( mModel, SIGNAL(headVersionDataChanged( const Kasten::KDocumentVersionData & )),
+                 SLOT(onHeadVersionDataChanged( const Kasten::KDocumentVersionData & )) );
     }
 }
 
