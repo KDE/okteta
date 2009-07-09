@@ -77,6 +77,9 @@ int OktetaProgram::execute()
     KApplication programCore;
 
     KGlobal::locale()->insertCatalog( "liboktetacore" );
+    KGlobal::locale()->insertCatalog( "libkastencore" );
+    KGlobal::locale()->insertCatalog( "libkastengui" );
+    KGlobal::locale()->insertCatalog( "libkastencontroller" );
 
     QList<AbstractModelStreamEncoder*> encoderList;
     encoderList << new KByteArrayValueStreamEncoder()
