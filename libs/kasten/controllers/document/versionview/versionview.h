@@ -50,7 +50,7 @@ class VersionView : public QWidget
     VersionViewTool* tool() const;
 
   public Q_SLOTS:
-    void setModel( AbstractModel* model );
+    void setModel( Kasten::AbstractModel* model );
 
   private:
     VersionViewTool* mTool;

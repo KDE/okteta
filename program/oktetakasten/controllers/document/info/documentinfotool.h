@@ -71,7 +71,7 @@ class DocumentInfoTool : public AbstractTool
 
   protected Q_SLOTS:
     void onContentsChanged();
-    void onSynchronizerChanged( AbstractModelSynchronizer* synchronizer );
+    void onSynchronizerChanged( Kasten::AbstractModelSynchronizer* synchronizer );
     void onUrlChanged( const KUrl& url );
     void onSynchronized();
 

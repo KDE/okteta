@@ -117,8 +117,8 @@ void DocumentInfoTool::setTargetModel( AbstractModel* model )
 
         connect( mDocument, SIGNAL(titleChanged( const QString & )),
                  SIGNAL(documentTitleChanged( const QString & )) );
-        connect( mDocument, SIGNAL(synchronizerChanged( AbstractModelSynchronizer* )),
-                 SLOT(onSynchronizerChanged( AbstractModelSynchronizer* )) );
+        connect( mDocument, SIGNAL(synchronizerChanged( Kasten::AbstractModelSynchronizer* )),
+                 SLOT(onSynchronizerChanged( Kasten::AbstractModelSynchronizer* )) );
         connect( mByteArrayModel, SIGNAL(contentsChanged( const KHE::ArrayChangeMetricsList& )),
                  SLOT(onContentsChanged()) );
     }

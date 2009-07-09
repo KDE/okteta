@@ -52,7 +52,7 @@ class KASTENCONTROLLER_EXPORT VersionViewTool : public AbstractTool
     virtual void setTargetModel( AbstractModel* model );
 
   Q_SIGNALS:
-    void modelChanged( AbstractModel* model );
+    void modelChanged( Kasten::AbstractModel* model );
 
   protected: // sources
     AbstractModel *mModel;

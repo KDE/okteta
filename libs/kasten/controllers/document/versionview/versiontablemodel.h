@@ -67,7 +67,7 @@ class VersionTableModel : public QAbstractTableModel
   protected Q_SLOTS:
     void onRevertedToVersionIndex( int versionIndex );
     void onHeadVersionChanged( int newHeadVersionIndex );
-    void onHeadVersionDataChanged( const KDocumentVersionData &newVersionData );
+    void onHeadVersionDataChanged( const Kasten::KDocumentVersionData& newVersionData );
 
   protected:
     AbstractModel *mModel;
