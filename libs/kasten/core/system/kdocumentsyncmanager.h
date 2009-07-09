@@ -23,6 +23,8 @@
 #ifndef KDOCUMENTSYNCMANAGER_H
 #define KDOCUMENTSYNCMANAGER_H
 
+// lib
+#include "kastencore_export.h"
 // Qt
 #include <QtCore/QObject>
 
@@ -39,7 +41,7 @@ class AbstractModelSynchronizerFactory;
 class KDocumentManager;
 
 
-class KDocumentSyncManager : public QObject
+class KASTENCORE_EXPORT KDocumentSyncManager : public QObject
 {
   Q_OBJECT
 

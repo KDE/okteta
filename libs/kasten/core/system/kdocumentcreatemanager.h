@@ -23,6 +23,8 @@
 #ifndef KDOCUMENTCREATEMANAGER_H
 #define KDOCUMENTCREATEMANAGER_H
 
+// lib
+#include "kastencore_export.h"
 // Qt
 #include <QtCore/QObject>
 
@@ -36,7 +38,7 @@ class KAbstractDocumentFactory;
 class KDocumentManager;
 
 
-class KDocumentCreateManager : public QObject
+class KASTENCORE_EXPORT KDocumentCreateManager : public QObject
 {
   Q_OBJECT
 

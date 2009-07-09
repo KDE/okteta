@@ -23,8 +23,9 @@
 #ifndef SWITCHVIEWCONTROLLER_H
 #define SWITCHVIEWCONTROLLER_H
 
-
 // lib
+#include "kastencontroller_export.h"
+// Kasten gui
 #include <abstractxmlguicontroller.h>
 
 class KXMLGUIClient;
@@ -40,7 +41,7 @@ class ViewFocusable;
 class AbstractGroupedViews;
 
 
-class SwitchViewController : public AbstractXmlGuiController
+class KASTENCONTROLLER_EXPORT SwitchViewController : public AbstractXmlGuiController
 {
   Q_OBJECT
 

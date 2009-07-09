@@ -3,11 +3,13 @@ project( kastencontrollers )
 add_definitions( -DKDE_DEFAULT_DEBUG_AREA=1805 )
 
 include_directories(
+  ../core
   ../core/entity
   ../core/document
   ../core/io
   ../core/io/filesystem
   ../core/system
+  ../gui
   ../gui/view
   ../gui/io
   ../gui/system
@@ -100,7 +102,7 @@ set( QUITCONTROLLER_SRCS
   program/quit/quitcontroller.cpp
 )
 
-set( KASTEN_CONTROLLERS_SRCS
+set( kastencontroller_LIB_SRCS
   ${SETREMOTECONTROLLER_SRCS}
   ${CLOSECONTROLLER_SRCS}
   ${FILESYSTEMBROWSERCONTROLLER_SRCS}
@@ -125,4 +127,48 @@ set( KASTEN_CONTROLLERS_SRCS
   ${QUITCONTROLLER_SRCS}
 )
 
-kde4_add_library( kastencontrollers STATIC ${KASTEN_CONTROLLERS_SRCS} )
+set( kastencontrollers_LIB_HDRS
+  kastencontroller_export.h
+  document/readonly/readonlybarcontroller.h
+  document/readonly/readonlycontroller.h
+  document/versionview/versionviewtool.h
+  document/versionview/versionviewtoolview.h
+  documentsystem/connector/connectorcontroller.h
+  documentsystem/close/closecontroller.h
+  documentsystem/documentsbrowser/documentstoolview.h
+  documentsystem/documentsbrowser/documentstool.h
+  documentsystem/creator/creatorcontroller.h
+  documentsystem/loader/loadercontroller.h
+  documentsystem/filesystembrowser/filesystembrowsertoolview.h
+  documentsystem/filesystembrowser/filesystembrowsertool.h
+  io/offer/offercontroller.h
+  io/export/exportcontroller.h
+  io/setremote/setremotecontroller.h
+  io/copyas/copyascontroller.h
+  io/clipboard/clipboardcontroller.h
+  io/synchronize/synchronizecontroller.h
+  view/select/selectcontroller.h
+  view/zoom/zoomcontroller.h
+  view/zoom/zoombarcontroller.h
+  view/version/versioncontroller.h
+  viewsystem/close/closecontroller.h
+  shellwindow/fullscreen/fullscreencontroller.h
+  shellwindow/toollistmenu/toollistmenucontroller.h
+  shellwindow/switchview/switchviewcontroller.h
+  shellwindow/viewlistmenu/viewlistmenucontroller.h
+  program/quit/quitcontroller.h
+)
+
+
+kde4_add_library( kastencontrollers SHARED ${kastencontroller_LIB_SRCS} )
+target_link_libraries( kastencontrollers
+  kastengui
+  kastencore
+  ${KDE4_KIO_LIBS}
+  ${KDE4_KFILE_LIBS}
+)
+set_target_properties( kastencontrollers  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+
+install( TARGETS kastencontrollers  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+
+install( FILES ${kastencontrollers_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )

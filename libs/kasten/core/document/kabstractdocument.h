@@ -25,7 +25,10 @@
 
 
 // lib
+#include "kastencore_export.h"
+// lib
 #include "abstractmodel.h"
+
 
 namespace Kasten
 {
@@ -36,7 +39,7 @@ class AbstractModelSynchronizer;
 // last both might be too much overhead, unless modification and access are grained enough
 // in multiuser environment also author/creator and group/identity
 // we would end with a in-memory file/document system, why not?
-class KAbstractDocument : public AbstractModel
+class KASTENCORE_EXPORT KAbstractDocument : public AbstractModel
 {
     Q_OBJECT
     Q_PROPERTY( SynchronizationStates synchronizationStates READ synchronizationStates )

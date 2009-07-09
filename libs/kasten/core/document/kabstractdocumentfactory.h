@@ -23,8 +23,11 @@
 #ifndef KABSTRACTDOCUMENTFACTORY_H
 #define KABSTRACTDOCUMENTFACTORY_H
 
+// lib
+#include "kastencore_export.h"
 // Qt
 #include <QtCore/QObject>
+
 
 namespace Kasten
 {
@@ -32,7 +35,7 @@ namespace Kasten
 class KAbstractDocument;
 
 
-class KAbstractDocumentFactory : public QObject
+class KASTENCORE_EXPORT KAbstractDocumentFactory : public QObject
 {
   Q_OBJECT
 

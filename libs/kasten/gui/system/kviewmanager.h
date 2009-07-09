@@ -40,7 +40,7 @@ class KDocumentManager;
 class KViewFactory;
 
 
-class KViewManager : public QObject
+class KASTENGUI_EXPORT KViewManager : public QObject
 {
   Q_OBJECT
 

@@ -23,6 +23,8 @@
 #ifndef ABSTRACTMODELSYNCHRONIZER_H
 #define ABSTRACTMODELSYNCHRONIZER_H
 
+// lib
+#include "kastencore_export.h"
 // Qt
 #include <QtCore/QObject>
 
@@ -52,7 +54,7 @@ possible actions:
 2. synchronizer gets attached to a document new created or with other synchronizer
 3. synchronizer used to export a model
 */
-class AbstractModelSynchronizer : public QObject
+class KASTENCORE_EXPORT AbstractModelSynchronizer : public QObject
 {
   Q_OBJECT
 

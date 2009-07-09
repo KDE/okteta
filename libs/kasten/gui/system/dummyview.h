@@ -33,7 +33,7 @@ class QLabel;
 namespace Kasten
 {
 
-class DummyView : public KAbstractView
+class KASTENGUI_EXPORT DummyView : public KAbstractView
 {
     Q_OBJECT
 

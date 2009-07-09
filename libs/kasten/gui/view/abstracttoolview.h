@@ -23,6 +23,9 @@
 #ifndef ABSTRACTTOOLVIEW_H
 #define ABSTRACTTOOLVIEW_H
 
+// lib
+#include "kastengui_export.h"
+
 class QWidget;
 class QString;
 
@@ -33,7 +36,7 @@ namespace Kasten
 class AbstractTool;
 
 // TODO: is there a common base for view and document?
-class AbstractToolView
+class KASTENGUI_EXPORT AbstractToolView
 {
   protected:
     AbstractToolView();

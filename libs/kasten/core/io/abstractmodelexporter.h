@@ -23,11 +23,14 @@
 #ifndef ABSTRACTMODELEXPORTER_H
 #define ABSTRACTMODELEXPORTER_H
 
+// lib
+#include "kastencore_export.h"
 // Qt
 #include <QtCore/QObject>
 #include <QtCore/QString>
 
 class KUrl;
+
 
 namespace Kasten
 {
@@ -37,7 +40,7 @@ class AbstractModelSelection;
 class AbstractExportJob;
 
 
-class AbstractModelExporter : public QObject
+class KASTENCORE_EXPORT AbstractModelExporter : public QObject
 {
   Q_OBJECT
 

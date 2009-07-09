@@ -32,7 +32,7 @@ namespace Kasten
 class AbstractModelStreamEncoder;
 
 
-class ModelEncoderFileSystemExportJob : public AbstractFileSystemExportJob
+class KASTENCORE_EXPORT ModelEncoderFileSystemExportJob : public AbstractFileSystemExportJob
 {
   Q_OBJECT
 

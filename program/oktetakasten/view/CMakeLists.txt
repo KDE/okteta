@@ -2,8 +2,10 @@ include_directories(
   ../../../core
   ../../../gui
   ../../../gui/libcolumnsview
+  ../../../libs/kasten/core
   ../../../libs/kasten/core/entity
   ../../../libs/kasten/core/document
+  ../../../libs/kasten/gui
   ../../../libs/kasten/gui/view
   ../document
 )

@@ -23,6 +23,9 @@
 #ifndef KVIEWFACTORY_H
 #define KVIEWFACTORY_H
 
+// lib
+#include "kastengui_export.h"
+
 
 namespace Kasten
 {
@@ -31,7 +34,7 @@ class KAbstractDocument;
 class KAbstractView;
 
 
-class KViewFactory
+class KASTENGUI_EXPORT KViewFactory
 {
   public:
     virtual ~KViewFactory();

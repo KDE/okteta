@@ -25,6 +25,7 @@
 
 
 // Kasten gui
+#include "kastengui_export.h"
 #include "iwidgetsdockable.h"
 // Kasten core
 #include <kabstractdocument.h>
@@ -49,7 +50,7 @@ class AbstractToolView;
 class AbstractTool;
 
 
-class ShellWindow : public KXmlGuiWindow, public If::WidgetsDockable
+class KASTENGUI_EXPORT ShellWindow : public KXmlGuiWindow, public If::WidgetsDockable
 {
    Q_OBJECT
    Q_INTERFACES( Kasten::If::WidgetsDockable )

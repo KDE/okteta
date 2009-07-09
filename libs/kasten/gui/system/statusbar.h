@@ -23,6 +23,8 @@
 #ifndef STATUSBAR_H
 #define STATUSBAR_H
 
+// lib
+#include "kastengui_export.h"
 // KDE
 #include <KStatusBar>
 // Qt
@@ -35,7 +37,7 @@ namespace Kasten
 class StatusBarLayout;
 
 
-class StatusBar : public KStatusBar
+class KASTENGUI_EXPORT StatusBar : public KStatusBar
 {
     Q_OBJECT
 

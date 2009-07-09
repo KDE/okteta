@@ -23,6 +23,8 @@
 #ifndef MODELSTREAMENCODETHREAD_U
 #define MODELSTREAMENCODETHREAD_U
 
+// lib
+#include "kastencore_export.h"
 // Qt
 #include <QtCore/QThread>
 
@@ -37,7 +39,7 @@ class AbstractModel;
 class AbstractModelSelection;
 
 // TODO: instead of doubling all data just read them from the job?
-class ModelStreamEncodeThread : public QThread
+class KASTENCORE_EXPORT ModelStreamEncodeThread : public QThread
 {
   Q_OBJECT
   public:
@@ -64,6 +66,7 @@ class ModelStreamEncodeThread : public QThread
 
     bool mSuccess;
 };
+
 
 inline ModelStreamEncodeThread::ModelStreamEncodeThread( QObject *parent,
     QIODevice *ioDevice,

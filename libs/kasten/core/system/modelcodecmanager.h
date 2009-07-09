@@ -23,6 +23,8 @@
 #ifndef MODELCODECMANAGER_H
 #define MODELCODECMANAGER_H
 
+// lib
+#include "kastencore_export.h"
 // Qt
 #include <QtCore/QObject>
 #include <QtCore/QList>
@@ -42,7 +44,7 @@ class AbstractModelExporter;
 class KDocumentManager;
 
 
-class ModelCodecManager : public QObject
+class KASTENCORE_EXPORT ModelCodecManager : public QObject
 {
   Q_OBJECT
 

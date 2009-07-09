@@ -24,6 +24,7 @@
 #define KDOCUMENTVERSIONDATA_H
 
 // lib
+#include "kastencore_export.h"
 #include "kdocumentversionid.h"
 // Qt
 #include <QtCore/QString>
@@ -32,7 +33,7 @@
 namespace Kasten
 {
 
-class KDocumentVersionData
+class KASTENCORE_EXPORT KDocumentVersionData
 {
   public:
     KDocumentVersionData( KDocumentVersionId id, const QString &changeComment );

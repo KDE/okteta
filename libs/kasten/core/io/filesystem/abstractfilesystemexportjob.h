@@ -36,7 +36,7 @@ class AbstractModel;
 class AbstractModelSelection;
 
 
-class AbstractFileSystemExportJob : public AbstractExportJob
+class KASTENCORE_EXPORT AbstractFileSystemExportJob : public AbstractExportJob
 {
   Q_OBJECT
 

@@ -23,6 +23,8 @@
 #ifndef VERSIONVIEWTOOL_H
 #define VERSIONVIEWTOOL_H
 
+// lib
+#include "kastencontroller_export.h"
 // Kasten core
 #include <abstracttool.h>
 
@@ -32,7 +34,7 @@ namespace Kasten
 
 /**
 */
-class VersionViewTool : public AbstractTool
+class KASTENCONTROLLER_EXPORT VersionViewTool : public AbstractTool
 {
   Q_OBJECT
 

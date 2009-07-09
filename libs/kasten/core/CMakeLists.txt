@@ -64,7 +64,7 @@ set( KASTEN_CORE_SYSTEM_SRCS
   system/modelcodecmanager.cpp
 )
 
-set( KASTEN_CORE_SRCS
+set( kastencore_LIB_SRCS
   ${KASTEN_CORE_ENTITY_SRCS}
   ${KASTEN_CORE_DOCUMENT_SRCS}
   ${KASTEN_CORE_IO_SRCS}
@@ -72,4 +72,51 @@ set( KASTEN_CORE_SRCS
   ${KASTEN_CORE_SYSTEM_SRCS}
 )
 
-kde4_add_library( kastencore STATIC ${KASTEN_CORE_SRCS} )
+set( kastencore_LIB_HDRS
+  kastencore_export.h
+  document/abstractmodel.h
+  document/abstractmodelselection.h
+  document/kabstractdocument.h
+  document/kabstractdocumentfactory.h
+  document/abstracttool.h
+  document/kdocumentversiondata.h
+  document/kdocumentversionid.h
+  document/kiversionable.h
+  document/userlistable.h
+  entity/person.h
+  io/abstractsynctoremotejob.h
+  io/abstractmodelsynchronizer.h
+  io/abstractsyncwithremotejob.h
+  io/filesystem/abstractfilesystemsyncwithremotejob.h
+  io/filesystem/abstractfilesystemsyncfromremotejob.h
+  io/filesystem/abstractfilesystemsynctoremotejob.h
+  io/filesystem/abstractmodelfilesystemsynchronizer.h
+  io/filesystem/abstractfilesystemconnectjob.h
+  io/filesystem/abstractfilesystemloadjob.h
+  io/filesystem/abstractfilesystemexportjob.h
+  io/filesystem/modelencoderfilesystemexporter.h
+  io/filesystem/modelencoderfilesystemexportjob.h
+  io/abstractsyncfromremotejob.h
+  io/abstractconnectjob.h
+  io/abstractmodelstreamencoder.h
+  io/abstractexportjob.h
+  io/abstractmodelexporter.h
+  io/modelstreamencodethread.h
+  io/abstractloadjob.h
+  io/abstractmodelsynchronizerfactory.h
+  system/jobmanager.h
+  system/kdocumentmanager.h
+  system/kdocumentcreatemanager.h
+  system/kdocumentsyncmanager.h
+  system/modelcodecmanager.h
+)
+
+kde4_add_library( kastencore SHARED ${kastencore_LIB_SRCS} )
+target_link_libraries( kastencore
+  ${KDE4_KIO_LIBS}
+)
+set_target_properties( kastencore  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+
+install( TARGETS kastencore  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+
+install( FILES ${kastencore_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )

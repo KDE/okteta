@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,46 +20,25 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTMODELEXPORTERCONFIGEDITOR_H
-#define ABSTRACTMODELEXPORTERCONFIGEDITOR_H
+#ifndef KASTENGUI_EXPORT_H
+#define KASTENGUI_EXPORT_H
 
-// lib
-#include "kastengui_export.h"
-// Qt
-#include <QtGui/QWidget>
+// KDE
+#include <kdemacros.h>
 
 
-namespace Kasten
-{
+#ifndef KASTENGUI_EXPORT
+  // building the library?
+# if defined(MAKE_KASTENGUI_LIB)
+#  define KASTENGUI_EXPORT KDE_EXPORT
+  // using the library
+# else
+#  define KASTENGUI_EXPORT KDE_IMPORT
+# endif
+#endif
 
-class AbstractSelectionView;
-
-
-class KASTENGUI_EXPORT AbstractModelExporterConfigEditor : public QWidget
-{
-  Q_OBJECT
-
-  protected:
-    explicit AbstractModelExporterConfigEditor( QWidget* parent = 0 );
-  public:
-    virtual ~AbstractModelExporterConfigEditor();
-
-  public: // API to be implemented
-    /// default returns true
-    virtual bool isValid() const;
-    /// default returns none
-    virtual AbstractSelectionView* createPreviewView() const;
-
-    virtual QString name() const = 0;
-
-  Q_SIGNALS:
-    void validityChanged( bool isValid );
-
-  protected:
-    class Private;
-    Private* const d;
-};
-
-}
+# ifndef KASTENGUI_EXPORT_DEPRECATED
+#  define KASTENGUI_EXPORT_DEPRECATED KDE_DEPRECATED KASTENGUI_EXPORT
+# endif
 
 #endif

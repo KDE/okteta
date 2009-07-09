@@ -23,6 +23,8 @@
 #ifndef TOGGLEBUTTON_H
 #define TOGGLEBUTTON_H
 
+// lib
+#include "kastengui_export.h"
 // Qt
 #include <QtGui/QToolButton>
 
@@ -35,7 +37,7 @@ namespace Kasten
 class ToggleButtonPrivate;
 
 
-class ToggleButton : public QToolButton
+class KASTENGUI_EXPORT ToggleButton : public QToolButton
 {
     Q_OBJECT
 

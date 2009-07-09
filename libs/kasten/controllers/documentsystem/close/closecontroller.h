@@ -23,8 +23,9 @@
 #ifndef CLOSECONTROLLER_H
 #define CLOSECONTROLLER_H
 
-
 // lib
+#include "kastencontroller_export.h"
+// Kasten gui
 #include <abstractxmlguicontroller.h>
 
 class KAction;
@@ -38,7 +39,7 @@ class KDocumentManager;
 class KAbstractDocument;
 
 
-class CloseController : public AbstractXmlGuiController
+class KASTENCONTROLLER_EXPORT CloseController : public AbstractXmlGuiController
 {
   Q_OBJECT
 

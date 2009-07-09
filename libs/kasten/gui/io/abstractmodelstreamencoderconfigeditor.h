@@ -23,6 +23,8 @@
 #ifndef ABSTRACTMODELSTREAMENCODERCONFIGEDITOR_H
 #define ABSTRACTMODELSTREAMENCODERCONFIGEDITOR_H
 
+// lib
+#include "kastengui_export.h"
 // Qt
 #include <QtGui/QWidget>
 
@@ -33,7 +35,7 @@ namespace Kasten
 class AbstractSelectionView;
 
 
-class AbstractModelStreamEncoderConfigEditor : public QWidget
+class KASTENGUI_EXPORT AbstractModelStreamEncoderConfigEditor : public QWidget
 {
   Q_OBJECT
 

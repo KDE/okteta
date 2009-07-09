@@ -3,6 +3,7 @@ project( kastengui )
 add_definitions( -DKDE_DEFAULT_DEBUG_AREA=1804 )
 
 include_directories(
+  ../core
   ../core/document
   ../core/io
   ../core/system
@@ -32,7 +33,7 @@ set( KASTEN_GUI_CONTROLLER_WIDGETS_SRCS
   controller/abstractlinepopup.cpp
 )
 
-set( KASTEN_GUI_SRCS
+set( kastengui_LIB_SRCS
   ${KASTEN_GUI_IO_CONFIGEDITOR_SRCS}
   view/kabstractview.cpp
   view/abstractselectionview.cpp
@@ -54,4 +55,50 @@ set( KASTEN_GUI_SRCS
   controller/abstractxmlguicontroller.cpp
 )
 
-kde4_add_library( kastengui STATIC ${KASTEN_GUI_SRCS} )
+set( kastengui_LIB_HDRS
+  kastengui_export.h
+  view/kviewfactory.h
+  view/kiselecteddatawriteable.h
+  view/abstracttoolinlineview.h
+  view/kabstractview.h
+  view/abstractselectionview.h
+  view/abstracttoolview.h
+  view/kiclipboard.h
+  view/kidataselectable.h
+  view/kizoomable.h
+  io/filesystem/modelencoderfilesystemexporterconfigeditor.h
+  io/filesystem/modelencoderfilesystemexporterconfigeditorfactory.h
+  io/abstractmodelstreamencoderconfigeditor.h
+  io/abstractmodelexporterconfigeditor.h
+  io/abstractmodelexporterconfigeditorfactory.h
+  io/abstractmodelstreamencoderconfigeditorfactory.h
+  system/kviewmanager.h
+  system/shellwindow.h
+  system/abstractgroupedviews.h
+  system/statusbar.h
+  system/tabbedviewsbox.h
+  system/viewbox.h
+  system/tabbedviews.h
+  system/toolinlineviewwidget.h
+  system/toolviewdockwidget.h
+  system/statusbarlayout.h
+  system/dummyview.h
+  system/modelcodecviewmanager.h
+  system/kiviewfocusable.h
+  system/kitoolinlineviewable.h
+  system/iwidgetsdockable.h
+  controller/abstractxmlguicontroller.h
+  controller/abstractlinepopup.h
+  controller/togglebutton.h
+)
+
+kde4_add_library( kastengui SHARED ${kastengui_LIB_SRCS} )
+target_link_libraries( kastengui
+  kastencore
+  ${KDE4_KDEUI_LIBS}
+)
+set_target_properties( kastengui  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+
+install( TARGETS kastengui  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+
+install( FILES ${kastengui_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )

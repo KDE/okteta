@@ -23,6 +23,10 @@
 #ifndef ABSTRACTMODELEXPORTERCONFIGEDITORFACTORY_H
 #define ABSTRACTMODELEXPORTERCONFIGEDITORFACTORY_H
 
+// lib
+#include "kastengui_export.h"
+
+
 namespace Kasten
 {
 
@@ -30,7 +34,7 @@ class AbstractModelExporterConfigEditor;
 class AbstractModelExporter;
 
 
-class AbstractModelExporterConfigEditorFactory
+class KASTENGUI_EXPORT AbstractModelExporterConfigEditorFactory
 {
   public:
     virtual ~AbstractModelExporterConfigEditorFactory();

@@ -23,8 +23,9 @@
 #ifndef VIEWLISTMENUCONTROLLER_H
 #define VIEWLISTMENUCONTROLLER_H
 
-
 // lib
+#include "kastencontroller_export.h"
+// Kasten gui
 #include <abstractxmlguicontroller.h>
 
 class QAction;
@@ -41,7 +42,7 @@ class ViewFocusable;
 class KViewManager;
 
 
-class ViewListMenuController : public AbstractXmlGuiController
+class KASTENCONTROLLER_EXPORT ViewListMenuController : public AbstractXmlGuiController
 {
   Q_OBJECT
 

@@ -23,8 +23,9 @@
 #ifndef CREATORCONTROLLER_H
 #define CREATORCONTROLLER_H
 
-
 // lib
+#include "kastencontroller_export.h"
+// Kasten gui
 #include <abstractxmlguicontroller.h>
 
 class KXMLGUIClient;
@@ -36,7 +37,7 @@ namespace Kasten
 class KDocumentCreateManager;
 
 
-class CreatorController : public AbstractXmlGuiController
+class KASTENCONTROLLER_EXPORT CreatorController : public AbstractXmlGuiController
 {
   Q_OBJECT
 

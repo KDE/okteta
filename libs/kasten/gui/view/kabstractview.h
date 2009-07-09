@@ -25,6 +25,8 @@
 
 
 // lib
+#include "kastengui_export.h"
+// Kasten core
 #include <kabstractdocument.h>
 
 class QWidget;
@@ -34,7 +36,7 @@ namespace Kasten
 {
 
 // TODO: is there a common base for view and document?
-class KAbstractView : public AbstractModel
+class KASTENGUI_EXPORT KAbstractView : public AbstractModel
 {
     Q_OBJECT
   public:

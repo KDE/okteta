@@ -23,6 +23,10 @@
 #ifndef ABSTRACTMODELSTREAMENCODERCONFIGEDITORFACTORY_H
 #define ABSTRACTMODELSTREAMENCODERCONFIGEDITORFACTORY_H
 
+// lib
+#include "kastengui_export.h"
+
+
 namespace Kasten
 {
 
@@ -30,7 +34,7 @@ class AbstractModelStreamEncoderConfigEditor;
 class AbstractModelStreamEncoder;
 
 
-class AbstractModelStreamEncoderConfigEditorFactory
+class KASTENGUI_EXPORT AbstractModelStreamEncoderConfigEditorFactory
 {
   public:
     virtual ~AbstractModelStreamEncoderConfigEditorFactory();

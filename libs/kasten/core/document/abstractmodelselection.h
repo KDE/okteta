@@ -23,6 +23,8 @@
 #ifndef ABSTRACTMODELSELECTION_H
 #define ABSTRACTMODELSELECTION_H
 
+// lib
+#include "kastencore_export.h"
 // Qt
 #include <QtCore/QObject>
 
@@ -30,7 +32,7 @@
 namespace Kasten
 {
 
-class AbstractModelSelection
+class KASTENCORE_EXPORT AbstractModelSelection
 {
   protected:
     AbstractModelSelection();

@@ -23,7 +23,8 @@
 #ifndef COPYASCONTROLLER_H
 #define COPYASCONTROLLER_H
 
-
+// lib
+#include "kastencontroller_export.h"
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 
@@ -42,7 +43,7 @@ class DataSelectable;
 }
 
 
-class CopyAsController : public AbstractXmlGuiController
+class KASTENCONTROLLER_EXPORT CopyAsController : public AbstractXmlGuiController
 {
   Q_OBJECT
 

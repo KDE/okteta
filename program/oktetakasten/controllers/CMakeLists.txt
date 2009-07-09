@@ -3,10 +3,12 @@ include_directories(
   ../../../core
   ../../../gui
   ../../../gui/libcolumnsview
+  ../../../libs/kasten/core
   ../../../libs/kasten/core/entity
   ../../../libs/kasten/core/document
   ../../../libs/kasten/core/io
   ../../../libs/kasten/core/system
+  ../../../libs/kasten/gui
   ../../../libs/kasten/gui/view
   ../../../libs/kasten/gui/system
   ../../../libs/kasten/gui/controller

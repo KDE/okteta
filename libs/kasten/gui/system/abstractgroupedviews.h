@@ -23,6 +23,8 @@
 #ifndef ABSTRACTGROUPEDVIEWS_H
 #define ABSTRACTGROUPEDVIEWS_H
 
+// lib
+#include "kastengui_export.h"
 // Qt
 #include <QtCore/QObject>
 
@@ -35,7 +37,7 @@ namespace Kasten
 class KAbstractView;
 
 
-class AbstractGroupedViews : public QObject
+class KASTENGUI_EXPORT AbstractGroupedViews : public QObject
 {
     Q_OBJECT
   public:

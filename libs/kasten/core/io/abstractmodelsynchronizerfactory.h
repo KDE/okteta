@@ -39,7 +39,7 @@ namespace Kasten
 // TODO: should the load/connect/export jobs be created here or from the synchronizer?
 // putting jobs to synchronizer keeps factory simple, but forces synchronizer to be
 // in invalid states, like with simple constructor
-class AbstractModelSynchronizerFactory : public QObject
+class KASTENCORE_EXPORT AbstractModelSynchronizerFactory : public QObject
 {
   Q_OBJECT
 

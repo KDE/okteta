@@ -23,6 +23,8 @@
 #ifndef ABSTRACTMODEL_H
 #define ABSTRACTMODEL_H
 
+// lib
+#include "kastencore_export.h"
 // Qt
 #include <QtCore/QObject>
 
@@ -33,7 +35,7 @@ namespace Kasten
 {
 
 // TODO: reasons not to name it AbstractObjectModel, but just as it is
-class AbstractModel : public QObject
+class KASTENCORE_EXPORT AbstractModel : public QObject
 {
     Q_OBJECT
 

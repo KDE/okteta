@@ -23,6 +23,8 @@
 #ifndef ABSTRACTTOOL_H
 #define ABSTRACTTOOL_H
 
+// lib
+#include "kastencore_export.h"
 // Qt
 #include <QtCore/QObject>
 
@@ -35,7 +37,7 @@ class AbstractModel;
 
 // TODO: what is the difference to a plain dependent model?
 // 
-class AbstractTool : public QObject
+class KASTENCORE_EXPORT AbstractTool : public QObject
 {
     Q_OBJECT
 

@@ -23,11 +23,14 @@
 #ifndef ABSTRACTMODELSTREAMENCODER_H
 #define ABSTRACTMODELSTREAMENCODER_H
 
+// lib
+#include "kastencore_export.h"
 // Qt
 #include <QtCore/QObject>
 #include <QtCore/QString>
 
 class QIODevice;
+
 
 namespace Kasten
 {
@@ -41,7 +44,7 @@ class AbstractModelSelection;
 // TODO: perhaps just create one instance per encode process,
 // giving AbstractModel *model, AbstractModelSelection *selection in the constructor?
 // so all precalculated values like used model (type) can be cached
-class AbstractModelStreamEncoder : public QObject
+class KASTENCORE_EXPORT AbstractModelStreamEncoder : public QObject
 {
     Q_OBJECT
 

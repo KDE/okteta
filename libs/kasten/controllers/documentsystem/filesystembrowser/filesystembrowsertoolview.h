@@ -23,11 +23,14 @@
 #ifndef FILESYSTEMBROWSERTOOLVIEW_H
 #define FILESYSTEMBROWSERTOOLVIEW_H
 
+// lib
+#include "kastencontroller_export.h"
 // Kasten gui
 #include <abstracttoolview.h>
 
 class KDirOperator;
 class KUrlNavigator;
+
 
 namespace Kasten
 {
@@ -36,7 +39,7 @@ class FileSystemBrowserView;
 class FileSystemBrowserTool;
 
 
-class FileSystemBrowserToolView : public AbstractToolView
+class KASTENCONTROLLER_EXPORT FileSystemBrowserToolView : public AbstractToolView
 {
   public:
     explicit FileSystemBrowserToolView( FileSystemBrowserTool* tool );

@@ -6,9 +6,11 @@ include_directories(
 #TODO: remove this
   ../core
   ../gui
+  ../libs/kasten/core
   ../libs/kasten/core/document
   ../libs/kasten/core/io
   ../libs/kasten/core/system
+  ../libs/kasten/gui
   ../libs/kasten/gui/view
   ../libs/kasten/gui/io
   ../libs/kasten/gui/system
@@ -45,9 +47,9 @@ target_link_libraries( okteta
   oktetagui
   oktetacore
   framesprint
-  ${KDE4_KIO_LIBS}
-  ${KDE4_KFILE_LIBS}
-  ${KDE4_KDNSSD_LIBS}
+#   ${KDE4_KIO_LIBS}
+#   ${KDE4_KFILE_LIBS}
+#   ${KDE4_KDNSSD_LIBS}
 )
 
 if( QCA2_FOUND )

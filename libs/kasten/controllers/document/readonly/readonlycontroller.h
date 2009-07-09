@@ -25,6 +25,8 @@
 
 
 // lib
+#include "kastencontroller_export.h"
+// Kasten gui
 #include <abstractxmlguicontroller.h>
 
 class KToggleAction;
@@ -36,7 +38,7 @@ namespace Kasten
 class KAbstractDocument;
 
 
-class ReadOnlyController : public AbstractXmlGuiController
+class KASTENCONTROLLER_EXPORT ReadOnlyController : public AbstractXmlGuiController
 {
   Q_OBJECT
 

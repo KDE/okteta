@@ -23,6 +23,8 @@
 #ifndef ABSTRACTSYNCFROMREMOTEJOB_H
 #define ABSTRACTSYNCFROMREMOTEJOB_H
 
+// lib
+#include "kastencore_export.h"
 // KDE
 #include <KJob>
 
@@ -32,7 +34,7 @@ namespace Kasten
 
 class KAbstractDocument;
 
-class AbstractSyncFromRemoteJob : public KJob
+class KASTENCORE_EXPORT AbstractSyncFromRemoteJob : public KJob
 {
   Q_OBJECT
 

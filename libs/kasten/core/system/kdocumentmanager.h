@@ -24,7 +24,8 @@
 #define KDOCUMENTMANAGER_H
 
 // lib
-#include "kabstractdocument.h"
+#include "kastencore_export.h"
+#include <kabstractdocument.h>
 // Qt
 #include <QtCore/QList>
 #include <QtCore/QObject>
@@ -40,7 +41,7 @@ class KDocumentCreateManager; //TODO: temporary
 class KDocumentSyncManager; //TODO: temporary
 class ModelCodecManager; //TODO: temporary
 
-class KDocumentManager : public QObject
+class KASTENCORE_EXPORT KDocumentManager : public QObject
 {
   Q_OBJECT
 

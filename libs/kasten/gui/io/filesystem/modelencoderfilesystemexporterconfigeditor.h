@@ -26,13 +26,14 @@
 // lib
 #include <abstractmodelexporterconfigeditor.h>
 
+
 namespace Kasten
 {
 
 class AbstractModelStreamEncoderConfigEditor;
 
 
-class ModelEncoderFileSystemExporterConfigEditor : public AbstractModelExporterConfigEditor
+class KASTENGUI_EXPORT ModelEncoderFileSystemExporterConfigEditor : public AbstractModelExporterConfigEditor
 {
   Q_OBJECT
 

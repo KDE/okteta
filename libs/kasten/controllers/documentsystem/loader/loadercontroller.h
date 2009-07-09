@@ -23,8 +23,9 @@
 #ifndef LOADERCONTROLLER_H
 #define LOADERCONTROLLER_H
 
-
 // lib
+#include "kastencontroller_export.h"
+// Kasten gui
 #include <abstractxmlguicontroller.h>
 
 class KRecentFilesAction;
@@ -38,7 +39,7 @@ namespace Kasten
 class KDocumentSyncManager;
 
 
-class LoaderController : public AbstractXmlGuiController
+class KASTENCONTROLLER_EXPORT LoaderController : public AbstractXmlGuiController
 {
   Q_OBJECT
 

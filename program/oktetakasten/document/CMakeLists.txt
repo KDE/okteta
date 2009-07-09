@@ -1,5 +1,6 @@
 include_directories(
   ../../../core
+  ../../../libs/kasten/core
   ../../../libs/kasten/core/entity
   ../../../libs/kasten/core/document
 )

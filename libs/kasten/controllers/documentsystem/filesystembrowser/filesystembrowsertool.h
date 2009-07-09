@@ -23,6 +23,8 @@
 #ifndef FILESYSTEMBROWSERTOOL_H
 #define FILESYSTEMBROWSERTOOL_H
 
+// lib
+#include "kastencontroller_export.h"
 // Kasten core
 #include <abstracttool.h>
 
@@ -36,7 +38,7 @@ class KDocumentManager;
 class KAbstractDocument;
 
 
-class FileSystemBrowserTool : public AbstractTool
+class KASTENCONTROLLER_EXPORT FileSystemBrowserTool : public AbstractTool
 {
   Q_OBJECT
 

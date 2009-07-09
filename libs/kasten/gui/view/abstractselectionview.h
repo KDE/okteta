@@ -23,6 +23,8 @@
 #ifndef ABSTRACTSELECTIONVIEW_H
 #define ABSTRACTSELECTIONVIEW_H
 
+// lib
+#include "kastengui_export.h"
 // Qt
 #include <QtCore/QObject>
 
@@ -36,7 +38,7 @@ class AbstractModel;
 class AbstractModelSelection;
 
 
-class AbstractSelectionView : public QObject
+class KASTENGUI_EXPORT AbstractSelectionView : public QObject
 {
   Q_OBJECT
 

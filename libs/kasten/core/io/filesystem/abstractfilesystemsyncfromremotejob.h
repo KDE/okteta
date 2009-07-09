@@ -35,7 +35,7 @@ namespace Kasten
 class AbstractModelFileSystemSynchronizer;
 
 
-class AbstractFileSystemSyncFromRemoteJob : public AbstractSyncFromRemoteJob
+class KASTENCORE_EXPORT AbstractFileSystemSyncFromRemoteJob : public AbstractSyncFromRemoteJob
 {
   Q_OBJECT
 

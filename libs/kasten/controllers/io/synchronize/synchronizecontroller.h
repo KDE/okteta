@@ -23,7 +23,8 @@
 #ifndef SYNCHRONIZECONTROLLER_H
 #define SYNCHRONIZECONTROLLER_H
 
-
+// lib
+#include "kastencontroller_export.h"
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 // Kasten core
@@ -40,7 +41,7 @@ class AbstractModelSynchronizer;
 class AbstractModelFileSystemSynchronizer;
 
 
-class SynchronizeController : public AbstractXmlGuiController
+class KASTENCONTROLLER_EXPORT SynchronizeController : public AbstractXmlGuiController
 {
   Q_OBJECT
 

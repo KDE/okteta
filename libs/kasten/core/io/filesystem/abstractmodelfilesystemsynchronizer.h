@@ -30,7 +30,7 @@
 namespace Kasten
 {
 
-class AbstractModelFileSystemSynchronizer : public AbstractModelSynchronizer
+class KASTENCORE_EXPORT AbstractModelFileSystemSynchronizer : public AbstractModelSynchronizer
 {
   Q_OBJECT
 

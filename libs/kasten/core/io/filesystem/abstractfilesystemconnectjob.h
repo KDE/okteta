@@ -37,7 +37,7 @@ namespace Kasten
 class AbstractModelFileSystemSynchronizer;
 
 
-class AbstractFileSystemConnectJob : public AbstractConnectJob
+class KASTENCORE_EXPORT AbstractFileSystemConnectJob : public AbstractConnectJob
 {
   Q_OBJECT
 

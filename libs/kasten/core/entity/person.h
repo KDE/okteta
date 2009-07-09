@@ -23,16 +23,19 @@
 #ifndef PERSON_H
 #define PERSON_H
 
+// lib
+#include "kastencore_export.h"
 // KDE
 #include <KSharedPtr>
 
 class KIcon;
 class QString;
 
+
 namespace Kasten
 {
 
-class Person
+class KASTENCORE_EXPORT Person
 {
   public: // TODO: remove me again, hack!
     static Person createEgo();

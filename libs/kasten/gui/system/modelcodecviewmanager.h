@@ -23,6 +23,8 @@
 #ifndef MODELCODECVIEWMANAGER_H
 #define MODELCODECVIEWMANAGER_H
 
+// lib
+#include "kastengui_export.h"
 // Qt
 #include <QtCore/QObject>
 #include <QtCore/QList>
@@ -42,7 +44,7 @@ class AbstractModelExporter;
 class KViewManager;
 
 
-class ModelCodecViewManager : public QObject
+class KASTENGUI_EXPORT ModelCodecViewManager : public QObject
 {
   Q_OBJECT
 

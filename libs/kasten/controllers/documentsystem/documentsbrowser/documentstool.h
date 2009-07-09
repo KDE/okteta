@@ -23,6 +23,8 @@
 #ifndef DOCUMENTSTOOL_H
 #define DOCUMENTSTOOL_H
 
+// lib
+#include "kastencontroller_export.h"
 // Kasten core
 #include <abstracttool.h>
 
@@ -33,7 +35,7 @@ class KDocumentManager;
 class KAbstractDocument;
 
 
-class DocumentsTool : public AbstractTool
+class KASTENCONTROLLER_EXPORT DocumentsTool : public AbstractTool
 {
   Q_OBJECT
 

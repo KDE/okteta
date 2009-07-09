@@ -23,6 +23,9 @@
 #ifndef JOBMANAGER_H
 #define JOBMANAGER_H
 
+// lib
+#include "kastencore_export.h"
+
 class KJob;
 class QWidget;
 
@@ -30,7 +33,7 @@ class QWidget;
 namespace Kasten
 {
 
-class JobManager
+class KASTENCORE_EXPORT JobManager
 {
   public:
     // temporary, remove quickly

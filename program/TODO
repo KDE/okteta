@@ -199,6 +199,7 @@ Done for 0.4:
 * created toplevel folder libs to collect the neutral utility libs
 * moved libframesprinter to libs
 * renamed Kakao to Kasten and moved it to libs
+* made all three modules of Kasten dynamic libraries and install header to ${}/kasten
 
 Next to work on:
 ----------------------------------

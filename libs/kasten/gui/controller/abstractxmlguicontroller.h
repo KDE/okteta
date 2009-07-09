@@ -23,6 +23,8 @@
 #ifndef ABSTRACTXMLGUICONTROLLER_H
 #define ABSTRACTXMLGUICONTROLLER_H
 
+// lib
+#include "kastengui_export.h"
 // Qt
 #include <QtCore/QObject>
 
@@ -45,7 +47,7 @@ class AbstractModel;
 * ...
 Controllers can plug into the 
 */
-class AbstractXmlGuiController : public QObject
+class KASTENGUI_EXPORT AbstractXmlGuiController : public QObject
 {
   Q_OBJECT
 

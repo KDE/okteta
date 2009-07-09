@@ -40,7 +40,7 @@ namespace Kasten
 class TabbedViewsBox;
 
 
-class TabbedViews : public AbstractGroupedViews, public If::ViewFocusable, public If::ToolInlineViewable
+class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews, public If::ViewFocusable, public If::ToolInlineViewable
 {
    Q_OBJECT
    Q_INTERFACES( Kasten::If::ViewFocusable Kasten::If::ToolInlineViewable )

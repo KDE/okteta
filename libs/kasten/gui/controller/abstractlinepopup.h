@@ -23,6 +23,8 @@
 #ifndef ABSTRACTLINEPOPUP_H
 #define ABSTRACTLINEPOPUP_H
 
+// lib
+#include "kastengui_export.h"
 // Qt
 #include <QtGui/QWidget>
 
@@ -41,7 +43,7 @@ class AbstractLinePopupPrivate;
 // TODO: add option to add a pointer to the border, to show origin
 
 // a minimal dialog
-class AbstractLinePopup : public QWidget
+class KASTENGUI_EXPORT AbstractLinePopup : public QWidget
 {
   Q_OBJECT
 

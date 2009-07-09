@@ -23,7 +23,8 @@
 #ifndef CLIPBOARDCONTROLLER_H
 #define CLIPBOARDCONTROLLER_H
 
-
+// lib
+#include "kastencontroller_export.h"
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 
@@ -40,7 +41,7 @@ class SelectedDataWriteable;
 }
 
 
-class ClipboardController : public AbstractXmlGuiController
+class KASTENCONTROLLER_EXPORT ClipboardController : public AbstractXmlGuiController
 {
   Q_OBJECT
 

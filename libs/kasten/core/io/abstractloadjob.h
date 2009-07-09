@@ -23,8 +23,11 @@
 #ifndef ABSTRACTLOADJOB_H
 #define ABSTRACTLOADJOB_H
 
+// lib
+#include "kastencore_export.h"
 // KDE
 #include <KJob>
+
 
 namespace Kasten
 {
@@ -32,7 +35,7 @@ namespace Kasten
 class KAbstractDocument;
 
 
-class AbstractLoadJob : public KJob
+class KASTENCORE_EXPORT AbstractLoadJob : public KJob
 {
   Q_OBJECT
 

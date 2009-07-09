@@ -23,8 +23,9 @@
 #ifndef ZOOMCONTROLLER_H
 #define ZOOMCONTROLLER_H
 
-
 // lib
+#include "kastencontroller_export.h"
+// Kasten gui
 #include <abstractxmlguicontroller.h>
 
 class KXMLGUIClient;
@@ -39,7 +40,7 @@ class Zoomable;
 }
 
 
-class ZoomController : public AbstractXmlGuiController
+class KASTENCONTROLLER_EXPORT ZoomController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
