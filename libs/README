@@ -1,0 +1,22 @@
+Useful neutral libraries
+========================
+part of the Okteta project, a part of the KDE project.
+
+Copyright: 2003-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+
+Author/Maintainer: Friedrich W. H. Kossebau <kossebau@kde.org>
+
+
+description:
+-----------
+This folder contains several libraries that are not specific to the project Okteta
+and could be reused elsewhere. They only depend on the Qt and KDE libraries, if
+at all.
+
+Some are static libraries and some are dynamic libraries.
+
+
+content:
+--------
+
+libframesprint: a library for simple layouting of things to print

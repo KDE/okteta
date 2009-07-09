@@ -45,6 +45,7 @@ target_link_libraries( okteta
   kakaocore
   oktetagui
   oktetacore
+  framesprint
   ${KDE4_KIO_LIBS}
   ${KDE4_KFILE_LIBS}
   ${KDE4_KDNSSD_LIBS}

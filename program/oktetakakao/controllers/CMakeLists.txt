@@ -1,4 +1,5 @@
 include_directories(
+  ../../../libs/framesprint
   ../../../core
   ../../../gui
   ../../../gui/libcolumnsview
@@ -16,7 +17,6 @@ include_directories(
   view/libbytearraychecksum
   view/libbytearrayfilter
   view/libfinddialog
-  view/libframesprint
 )
 
 if( QCA2_FOUND )
@@ -165,11 +165,6 @@ set( BOOKMARKSTOOL_SRCS
   view/bookmarks/bookmarksview.cpp
   view/bookmarks/bookmarkstoolview.cpp
 )
-set( LIBFRAMESPRINT_SRCS
-  view/libframesprint/abstractframerenderer.cpp
-  view/libframesprint/framestopaperprinter.cpp
-  view/libframesprint/headerfooterframerenderer.cpp
-)
 set( PRINTCONTROLLER_SRCS
   view/print/printcontroller.cpp
   view/print/printtool.cpp
@@ -206,7 +201,6 @@ set( OKTETA_KAKAO_CONTROLLERS_SRCS
   ${INSERTPATTERNCONTROLLER_SRCS}
   ${GOTOOFFSETCONTROLLER_SRCS}
   ${SELECTRANGECONTROLLER_SRCS}
-  ${LIBFRAMESPRINT_SRCS}
   ${PRINTCONTROLLER_SRCS}
   ${BOOKMARKSCONTROLLER_SRCS}
   ${BOOKMARKSTOOL_SRCS}
