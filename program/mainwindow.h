@@ -23,9 +23,12 @@
 #ifndef OKTETAMAINWINDOW_H
 #define OKTETAMAINWINDOW_H
 
-
-// Kakao gui
+// Kasten gui
 #include <shellwindow.h>
+
+
+namespace Kasten
+{
 
 class OktetaProgram;
 
@@ -48,5 +51,7 @@ class OktetaMainWindow : public ShellWindow
   protected:
     OktetaProgram* mProgram;
 };
+
+}
 
 #endif

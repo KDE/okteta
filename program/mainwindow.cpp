@@ -41,7 +41,7 @@
 #include <bytetable/bytetabletool.h>
 #include <bookmarks/bookmarkstoolview.h>
 #include <bookmarks/bookmarkstool.h>
-// Kakao tools
+// Kasten tools
 #include <document/versionview/versionviewtoolview.h>
 #include <document/versionview/versionviewtool.h>
 #include <documentsystem/filesystembrowser/filesystembrowsertoolview.h>
@@ -61,7 +61,7 @@
 #include <viewconfig/viewconfigcontroller.h>
 #include <viewmode/viewmodecontroller.h>
 #include <viewstatus/viewstatuscontroller.h>
-// Kakao controllers
+// Kasten controllers
 #include <document/readonly/readonlycontroller.h>
 #include <document/readonly/readonlybarcontroller.h>
 #include <documentsystem/creator/creatorcontroller.h>
@@ -82,12 +82,12 @@
 #include <shellwindow/fullscreen/fullscreencontroller.h>
 /*#include <viewsystem/close/closecontroller.h>*/
 #include <program/quit/quitcontroller.h>
-// Kakao gui
+// Kasten gui
 #include <kviewmanager.h>
 #include <tabbedviews.h>
-#include <parallelviews/parallelviews.h>
+// #include <parallelviews/parallelviews.h>
 #include <statusbar.h>
-// Kakao core
+// Kasten core
 #include <kdocumentcreatemanager.h>
 #include <kdocumentsyncmanager.h>
 #include <kdocumentmanager.h>
@@ -95,6 +95,9 @@
 #include <KGlobal>
 #include <KConfigGroup>
 
+
+namespace Kasten
+{
 
 static const char LoadedUrlsKey[] = "LoadedUrls";
 
@@ -116,7 +119,7 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram *program )
     if( !group.hasKey(mainWindowStateKey) )
         group.writeEntry( mainWindowStateKey, mainWindowState );
 
-    setStatusBar( new Statusbar(this) );
+    setStatusBar( new Kasten::StatusBar(this) );
 
     setupControllers();
     setupGUI();
@@ -129,7 +132,7 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram *program )
 
 void OktetaMainWindow::setupControllers()
 {
-    // general, part of Kakao
+    // general, part of Kasten
     addXmlGuiController( new CreatorController(mProgram->documentManager()->createManager(),this) );
     addXmlGuiController( new LoaderController(mProgram->documentManager()->syncManager(),this) );
     addXmlGuiController( new SetRemoteController(mProgram->documentManager()->syncManager(),this) );
@@ -166,7 +169,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new ViewConfigController(this) );
     addXmlGuiController( new ViewModeController(this) );
 
-    Statusbar* bottomBar = static_cast<Statusbar*>( statusBar() );
+    Kasten::StatusBar* bottomBar = static_cast<Kasten::StatusBar*>( statusBar() );
     addXmlGuiController( new ViewStatusController(bottomBar) );
     addXmlGuiController( new ReadOnlyBarController(bottomBar) );
     addXmlGuiController( new ZoomBarController(bottomBar) );
@@ -206,3 +209,5 @@ void OktetaMainWindow::readProperties( const KConfigGroup &configGroup )
 
 
 OktetaMainWindow::~OktetaMainWindow() {}
+
+}

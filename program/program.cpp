@@ -24,7 +24,7 @@
 
 // program
 #include "mainwindow.h"
-// Okteta Kakao
+// Okteta Kasten
 #include <kbytearraydocumentfactory.h>
 #include <kbytearraydisplayfactory.h>
 #include <filesystem/kbytearrayrawfilesynchronizerfactory.h>
@@ -34,10 +34,10 @@
 #include <kbytearrayvaluestreamencoder.h>
 #include <kbytearraysourcecodestreamencoder.h>
 #include <bytearrayviewtextstreamencoder.h>
-// Kakao gui
+// Kasten gui
 #include <kviewmanager.h>
 #include <modelcodecviewmanager.h>
-// Kakao core
+// Kasten core
 #include <kdocumentmanager.h>
 #include <kdocumentcreatemanager.h>
 #include <kdocumentsyncmanager.h>
@@ -50,6 +50,9 @@
 // Qt
 #include <QtCore/QList>
 
+
+namespace Kasten
+{
 
 // static const char OffsetOptionId[] = "offset";
 // static const char OffsetOptionShortId[] = "o";
@@ -142,4 +145,6 @@ OktetaProgram::~OktetaProgram()
 {
     delete mDocumentManager;
     delete mViewManager;
+}
+
 }

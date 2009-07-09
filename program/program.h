@@ -23,9 +23,12 @@
 #ifndef OKTETAPROGRAM_H
 #define OKTETAPROGRAM_H
 
-
 // program
 #include "about.h"
+
+
+namespace Kasten
+{
 
 class KDocumentManager;
 class KViewManager;
@@ -33,19 +36,19 @@ class KViewManager;
 
 class OktetaProgram
 {
-public:
+  public:
     OktetaProgram( int argc, char *argv[] );
     ~OktetaProgram();
 
-public:
+  public:
     int execute();
     void quit();
 
-public:
+  public:
     KDocumentManager *documentManager();
     KViewManager *viewManager();
 
-protected:
+  protected:
     OktetaAboutData mAboutData;
 
     KDocumentManager *mDocumentManager;
@@ -55,5 +58,7 @@ protected:
 
 inline KDocumentManager* OktetaProgram::documentManager() { return mDocumentManager; }
 inline KViewManager* OktetaProgram::viewManager()         { return mViewManager; }
+
+}
 
 #endif

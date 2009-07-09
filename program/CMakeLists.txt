@@ -1,27 +1,26 @@
 project( oktetaprogram )
 
-add_subdirectory( libkakao )
-add_subdirectory( oktetakakao )
+add_subdirectory( oktetakasten )
 
 include_directories(
 #TODO: remove this
   ../core
   ../gui
-  libkakao/core/document
-  libkakao/core/io
-  libkakao/core/system
-  libkakao/gui/view
-  libkakao/gui/io
-  libkakao/gui/system
-  libkakao/gui/controller
-  libkakao/controllers
-  oktetakakao/document
-  oktetakakao/io
-  oktetakakao/view
-  ${CMAKE_CURRENT_BINARY_DIR}/oktetakakao/controllers
-  oktetakakao/controllers/document
-  oktetakakao/controllers/view
-  oktetakakao/controllers/view/libfinddialog
+  ../libs/kasten/core/document
+  ../libs/kasten/core/io
+  ../libs/kasten/core/system
+  ../libs/kasten/gui/view
+  ../libs/kasten/gui/io
+  ../libs/kasten/gui/system
+  ../libs/kasten/gui/controller
+  ../libs/kasten/controllers
+  oktetakasten/document
+  oktetakasten/io
+  oktetakasten/view
+  ${CMAKE_CURRENT_BINARY_DIR}/oktetakasten/controllers
+  oktetakasten/controllers/document
+  oktetakasten/controllers/view
+  oktetakasten/controllers/view/libfinddialog
 )
 
 set( okteta_SRCS
@@ -36,13 +35,13 @@ kde4_add_app_icon(okteta_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/hi*-app-okteta.png")
 kde4_add_executable( okteta  ${okteta_SRCS} )
 
 target_link_libraries( okteta
-  okteta_kakaocontrollers
-  okteta_kakaogui
-  okteta_kakaoio
-  okteta_kakaodocument
-  kakaocontrollers
-  kakaogui
-  kakaocore
+  okteta_kastencontrollers
+  okteta_kastengui
+  okteta_kastenio
+  okteta_kastendocument
+  kastencontrollers
+  kastengui
+  kastencore
   oktetagui
   oktetacore
   framesprint
