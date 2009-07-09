@@ -170,6 +170,7 @@ Done for 0.3:
 * reworked Bookmarkable to simulate a list interface, including a wrapping iterator with an abstract adapter
 * turned Goto, Search and Replace utils into kind of tools/controllers (first step, needs more refinement)
 * added a checksum calculator tool (using also QCA2, but got just MD5 and SHA-1 from it for now, hm)
+* renamed Resize style to Dynamic layout
 
 Fixed after 0.3 Beta 1:
 -----------------------
@@ -185,9 +186,19 @@ Fixed after 0.3 Beta 2:
 Fixed after 0.3 RC 1:
 ---------------------
 * search/replace did not respect ignorecase
-* selecting a format in the popup of the kbytearraylinedit format chooser now moves the cursor to the linedit
+* selecting a format in the popup of the kbytearraylinedit format chooser now moves the cursor to the lineedit
+  also done for KGotoOffsetDialog with a similar widget setup
 * delayed filebrowser init to speedup appearance of the mainwindow
-* search/replace dialogs had a bad focus on start
+* search/replace/goto dialogs had a bad focus on start
+
+Done for 0.4:
+-------------
+* added a framework for inline dialogs
+* ported goto dialog to inline dialog
+* added a select range tool using editing of values in an inline dialog
+* created toplevel folder libs to collect the neutral utility libs
+* moved libframesprinter to libs
+* renamed Kakao to Kasten and moved it to libs
 
 Next to work on:
 ----------------------------------
@@ -217,7 +228,6 @@ Later on:
 * see how Tool and Document menus can be turned into KActionMenu (and add clear() call to KActionMenu)
 * see how the cursor and the value editor could be turned into tool+view
 * fix info and string docker (all with update function) to just work on update, react to change of data origin
-* name Resize style to Relayout modus
 * add option for offset and char comments to Source code encoder (cmp #163204)
 * Support for Drop, both Import into and Open
 * Make tabs click proxies
@@ -232,14 +242,13 @@ Later on:
 * add support for memory mapped files (includes enabling overwrite controller again)
 * think about turning insert pattern & Co. into a tool
 * session support: full storing and restoring of view/model state
-* port KPart to libkakao
+* port the KPart to Kasten
 * add support for more commandline options
 * port bytearrayview to bytearrayrenderer (esp. non-line-centric paiting)
 * complete work on input controllers for the bytearray view
 * rename AbstractDocument into AbstractObjectModel
 * add AbstractTool, ToolManager and ToolManagerControl
 * Prepare libframesprint for inclusion into kdelibs
-* find good name for libkakao
 * add profiles with loaded tools and their positions (environments)
 * add splitting of views
 * templates
@@ -251,7 +260,7 @@ Later on:
   * hovering of drag about tab changes to tab
   * dropping next to tab creates new data object by the drop data
 * copy also for all tables, e.g. statistic
-* mouse shadow cursor, shows where cursor would be positioned, also useful for drops
+* mouse shadow cursor, shows where cursor would be positioned, also useful for drops (for drops already done)
 * option to split in regular sections, than show only one section or all with a line between,
   similar to page modi of Okular (so page=section)
 * make all jobs (searching, filter operations, ...) cancellable, e.g. using ESC
