@@ -28,7 +28,12 @@
 // Qt
 #include <QtCore/QByteArray>
 
+
+namespace Kasten
+{
+
 class TestDocument;
+
 
 class TestDocumentFileSynchronizer : public AbstractModelFileSystemSynchronizer
 {
@@ -61,7 +66,10 @@ class TestDocumentFileSynchronizer : public AbstractModelFileSystemSynchronizer
     const QByteArray mHeader;
 };
 
+
 inline  const QByteArray &TestDocumentFileSynchronizer::header() const { return mHeader; }
 inline void TestDocumentFileSynchronizer::setDocument( TestDocument *document ) { mDocument = document; }
+
+}
 
 #endif

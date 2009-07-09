@@ -57,8 +57,8 @@ void SynchronizeController::setTargetModel( AbstractModel* model )
 
     if( mDocument )
     {
-        connect( mDocument, SIGNAL(synchronizerChanged( AbstractModelSynchronizer* )),
-                            SLOT(onSynchronizerChange( AbstractModelSynchronizer* )) );
+        connect( mDocument, SIGNAL(synchronizerChanged( Kasten::AbstractModelSynchronizer* )),
+                            SLOT(onSynchronizerChange( Kasten::AbstractModelSynchronizer* )) );
     }
     onSynchronizerChange( mDocument ? mDocument->synchronizer() : 0 );
 }
@@ -86,8 +86,8 @@ void SynchronizeController::onSynchronizerChange( AbstractModelSynchronizer* new
     {
         hasUrl = !mSynchronizer->url().isEmpty();
         outOfSync = hasUrl && ( mDocument->synchronizationStates() != KAbstractDocument::InSync );
-        connect( mDocument, SIGNAL(modified( KAbstractDocument::SynchronizationStates )),
-                            SLOT(onSynchronizationStateChange( KAbstractDocument::SynchronizationStates )) );
+        connect( mDocument, SIGNAL(modified( Kasten::KAbstractDocument::SynchronizationStates )),
+                            SLOT(onSynchronizationStateChange( Kasten::KAbstractDocument::SynchronizationStates )) );
     }
 
     mSaveAction->setEnabled( mSynchronizer && outOfSync );

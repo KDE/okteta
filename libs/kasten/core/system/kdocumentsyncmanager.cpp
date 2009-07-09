@@ -92,7 +92,7 @@ void KDocumentSyncManager::load( const KUrl &url )
 
     AbstractModelSynchronizer* synchronizer = mSynchronizerFactory->createSynchronizer();
     AbstractLoadJob *loadJob = synchronizer->startLoad( url );
-    connect( loadJob, SIGNAL(documentLoaded( KAbstractDocument * )), SLOT(onDocumentLoaded( KAbstractDocument * )) );
+    connect( loadJob, SIGNAL(documentLoaded( Kasten::KAbstractDocument * )), SLOT(onDocumentLoaded( Kasten::KAbstractDocument * )) );
 
     JobManager::executeJob( loadJob, mWidget );
 

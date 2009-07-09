@@ -33,6 +33,9 @@
 #include <QtCore/QFile>
 
 
+namespace Kasten
+{
+
 TestDocumentFileWriteToJob::TestDocumentFileWriteToJob( TestDocumentFileSynchronizer *synchronizer,
                                          const KUrl& url, AbstractModelSynchronizer::ConnectOption option )
  : AbstractFileSystemSyncWithRemoteJob( synchronizer, url, option )
@@ -55,4 +58,6 @@ void TestDocumentFileWriteToJob::startSyncWithRemote()
 
 TestDocumentFileWriteToJob::~TestDocumentFileWriteToJob()
 {
+}
+
 }

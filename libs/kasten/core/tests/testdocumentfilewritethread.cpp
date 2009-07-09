@@ -29,6 +29,9 @@
 #include <QtCore/QFile>
 
 
+namespace Kasten
+{
+
 void TestDocumentFileWriteThread::run()
 {
     const QByteArray *byteArray = mDocument->data();
@@ -50,3 +53,5 @@ void TestDocumentFileWriteThread::run()
 }
 
 TestDocumentFileWriteThread::~TestDocumentFileWriteThread() {}
+
+}

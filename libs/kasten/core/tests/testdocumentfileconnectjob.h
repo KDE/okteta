@@ -26,6 +26,10 @@
 // Kasten core
 #include <abstractfilesystemconnectjob.h>
 
+
+namespace Kasten
+{
+
 class TestDocumentFileSynchronizer;
 class TestDocument;
 // class TestDocumentFileWriteThread;
@@ -48,5 +52,7 @@ class TestDocumentFileConnectJob : public AbstractFileSystemConnectJob
   protected:
 //     TestDocumentFileWriteThread *mWriteThread;
 };
+
+}
 
 #endif

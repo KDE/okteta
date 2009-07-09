@@ -47,7 +47,7 @@ class KASTENCORE_EXPORT AbstractLoadJob : public KJob
     KAbstractDocument *document() const;
 
   Q_SIGNALS:
-    void documentLoaded( KAbstractDocument *document );
+    void documentLoaded( Kasten::KAbstractDocument* document );
 
   protected:
     // emits documentLoaded()

@@ -25,6 +25,10 @@
 // Qt
 #include <QtCore/QLatin1String>
 
+
+namespace Kasten
+{
+
 TestDocument::TestDocument()
 {
 }
@@ -66,4 +70,4 @@ TestDocument::~TestDocument()
 {
 }
 
-#include "testdocument.moc"
+}

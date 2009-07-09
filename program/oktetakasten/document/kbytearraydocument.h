@@ -86,7 +86,7 @@ class KByteArrayDocument : public KAbstractDocument, public If::Versionable, pub
 
   Q_SIGNALS: // If::Versionable
     virtual void revertedToVersionIndex( int versionIndex );
-    virtual void headVersionDataChanged( const KDocumentVersionData &versionData );
+    virtual void headVersionDataChanged( const Kasten::KDocumentVersionData &versionData );
     virtual void headVersionChanged( int newHeadVersionIndex );
   Q_SIGNALS: // If::UserListable
     virtual void usersAdded( const QList<Person>& newUserList );

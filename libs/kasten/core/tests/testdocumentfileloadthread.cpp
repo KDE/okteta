@@ -34,6 +34,9 @@
 #include <QtCore/QFile>
 
 
+namespace Kasten
+{
+
 void TestDocumentFileLoadThread::run()
 {
     QFile file( mFilePath );
@@ -73,3 +76,5 @@ void TestDocumentFileLoadThread::run()
 }
 
 TestDocumentFileLoadThread::~TestDocumentFileLoadThread() {}
+
+}

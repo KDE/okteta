@@ -29,6 +29,10 @@
 
 class QString;
 
+
+namespace Kasten
+{
+
 class TestDocumentFileReloadThread : public QThread
 {
   Q_OBJECT
@@ -56,7 +60,10 @@ class TestDocumentFileReloadThread : public QThread
     QByteArray mByteArray;
 };
 
+
 inline bool TestDocumentFileReloadThread::success()         const { return mSuccess; }
 inline QByteArray TestDocumentFileReloadThread::byteArray() const { return mByteArray; }
+
+}
 
 #endif

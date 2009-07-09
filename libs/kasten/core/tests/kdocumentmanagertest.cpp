@@ -31,42 +31,42 @@
 #include <QtTest/QSignalSpy>
 
 
-Q_DECLARE_METATYPE ( KAbstractDocument * )
+Q_DECLARE_METATYPE ( Kasten::KAbstractDocument * )
 
-void KDocumentManagerTest::checkAdded( QSignalSpy *changedSpy, KAbstractDocument *document )
+void KDocumentManagerTest::checkAdded( QSignalSpy *changedSpy, Kasten::KAbstractDocument *document )
 {
    QVERIFY( changedSpy->isValid() );
    QCOMPARE( changedSpy->count(), 1 );
    QList<QVariant> arguments = changedSpy->takeFirst();
-   QCOMPARE( arguments.at(0).value<KAbstractDocument *>(), document );
+   QCOMPARE( arguments.at(0).value<Kasten::KAbstractDocument *>(), document );
 }
 
-void KDocumentManagerTest::checkRemoving( QSignalSpy *changedSpy, KAbstractDocument *document )
+void KDocumentManagerTest::checkRemoving( QSignalSpy *changedSpy, Kasten::KAbstractDocument *document )
 {
    QVERIFY( changedSpy->isValid() );
    QCOMPARE( changedSpy->count(), 1 );
    QList<QVariant> arguments = changedSpy->takeFirst();
-   QCOMPARE( arguments.at(0).value<KAbstractDocument *>(), document );
+   QCOMPARE( arguments.at(0).value<Kasten::KAbstractDocument *>(), document );
 }
 
 
 void KDocumentManagerTest::testConstructor()
 {
-    KDocumentManager *documentManager = new KDocumentManager();
+    Kasten::KDocumentManager *documentManager = new Kasten::KDocumentManager();
     delete documentManager;
 }
 
 void KDocumentManagerTest::testAddRemove()
 {
-    qRegisterMetaType<KAbstractDocument *>("KAbstractDocument *");
+    qRegisterMetaType<Kasten::KAbstractDocument *>("Kasten::KAbstractDocument *");
 
-    TestDocument *doc1 = new TestDocument();
-    TestDocument *doc2 = new TestDocument();
-    TestDocument *doc3 = new TestDocument();
+    Kasten::TestDocument *doc1 = new Kasten::TestDocument();
+    Kasten::TestDocument *doc2 = new Kasten::TestDocument();
+    Kasten::TestDocument *doc3 = new Kasten::TestDocument();
 
-    KDocumentManager *documentManager = new KDocumentManager();
-    QSignalSpy *addedSpy = new QSignalSpy( documentManager, SIGNAL(added( KAbstractDocument * )) );
-    QSignalSpy *closingSpy = new QSignalSpy( documentManager, SIGNAL(closing( KAbstractDocument * )) );
+    Kasten::KDocumentManager *documentManager = new Kasten::KDocumentManager();
+    QSignalSpy *addedSpy = new QSignalSpy( documentManager, SIGNAL(added( Kasten::KAbstractDocument * )) );
+    QSignalSpy *closingSpy = new QSignalSpy( documentManager, SIGNAL(closing( Kasten::KAbstractDocument * )) );
 
     documentManager->addDocument( doc1 );
     checkAdded( addedSpy, doc1 );
@@ -91,13 +91,13 @@ void KDocumentManagerTest::testAddRemove()
 
 void KDocumentManagerTest::testCanClose()
 {
-    TestDocument *doc = new TestDocument();
+    Kasten::TestDocument *doc = new Kasten::TestDocument();
 
-    KDocumentManager *documentManager = new KDocumentManager();
+    Kasten::KDocumentManager *documentManager = new Kasten::KDocumentManager();
     documentManager->addDocument( doc );
     QVERIFY( documentManager->canClose(doc) );
 
-//     doc->setSynchronizationStates( KAbstractDocument::LocalHasChanges );
+//     doc->setSynchronizationStates( Kasten::KAbstractDocument::LocalHasChanges );
 //     QVERIFY( !documentManager->canClose(doc) );
 
     delete documentManager;

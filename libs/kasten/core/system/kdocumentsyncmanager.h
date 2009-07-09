@@ -68,7 +68,7 @@ class KASTENCORE_EXPORT KDocumentSyncManager : public QObject
     void urlUsed( const KUrl &url );
 
   protected Q_SLOTS:
-    void onDocumentLoaded( KAbstractDocument *document );
+    void onDocumentLoaded( Kasten::KAbstractDocument* document );
 
   protected:
     // unless there is a singleton

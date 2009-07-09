@@ -38,7 +38,7 @@ class TestDocumentTest : public QObject
 
   private:
     void checkTitleChanged( QSignalSpy *titleChangedSpy, const QString &title );
-    void checkSynchronizationStatesChanged( QSignalSpy *changedSpy, KAbstractDocument::SynchronizationStates states );
+    void checkSynchronizationStatesChanged( QSignalSpy *changedSpy, Kasten::KAbstractDocument::SynchronizationStates states );
 
   private Q_SLOTS: // test functions
     void testPlainConstructor();

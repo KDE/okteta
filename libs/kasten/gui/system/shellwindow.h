@@ -72,11 +72,11 @@ class KASTENGUI_EXPORT ShellWindow : public KXmlGuiWindow, public If::WidgetsDoc
 
   private Q_SLOTS:
     void onTitleChanged( const QString &newTitle );
-    void onModifiedChanged( KAbstractDocument::SynchronizationStates newStates );
-    void onViewFocusChanged( KAbstractView *view );
-    void onFocusRequested( KAbstractDocument* document );
+    void onModifiedChanged( Kasten::KAbstractDocument::SynchronizationStates newStates );
+    void onViewFocusChanged( Kasten::KAbstractView* view );
+    void onFocusRequested( Kasten::KAbstractDocument* document );
     void onToolVisibilityChanged( bool isVisible );
-    void onCloseRequest( KAbstractView* view );
+    void onCloseRequest( Kasten::KAbstractView* view );
     void onDragMoveEvent( const QDragMoveEvent* event, bool& accept );
     void onDropEvent( QDropEvent* event );
 

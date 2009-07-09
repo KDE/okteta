@@ -49,9 +49,6 @@
 #include <QtCore/QDataStream>
 
 
-namespace Kasten
-{
-
 static const char TestDirectory[] = "kbytearrayrawfilesynchronizertest";
 static const char TestFileName[] = "test.data";
 static const char NotExistingUrl[] = "notexisting://";
@@ -99,11 +96,11 @@ void KByteArrayRawFileSynchronizerTest::init()
 void KByteArrayRawFileSynchronizerTest::testLoadFromUrl()
 {
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( FileProtocolName );
-    KByteArrayRawFileSynchronizer *synchronizer = new KByteArrayRawFileSynchronizer();
+    Kasten::KByteArrayRawFileSynchronizer *synchronizer = new Kasten::KByteArrayRawFileSynchronizer();
     synchronizer->startLoad( fileUrl )->exec();
-    KAbstractDocument *document = synchronizer->document();
+    Kasten::KAbstractDocument *document = synchronizer->document();
 
-    KByteArrayDocument *byteArrayDocument = qobject_cast<KByteArrayDocument *>( document );
+    Kasten::KByteArrayDocument *byteArrayDocument = qobject_cast<Kasten::KByteArrayDocument *>( document );
 
     QVERIFY( document != 0 );
     QVERIFY( byteArrayDocument != 0 );
@@ -120,9 +117,9 @@ void KByteArrayRawFileSynchronizerTest::testLoadFromNotExistingUrl()
 {
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(NotExistingUrl) );
 
-    KByteArrayRawFileSynchronizer *synchronizer = new KByteArrayRawFileSynchronizer();
+    Kasten::KByteArrayRawFileSynchronizer *synchronizer = new Kasten::KByteArrayRawFileSynchronizer();
     synchronizer->startLoad( fileUrl )->exec();
-    KAbstractDocument *document = synchronizer->document();
+    Kasten::KAbstractDocument *document = synchronizer->document();
 
     QVERIFY( document == 0 );
     delete synchronizer;
@@ -132,7 +129,7 @@ void KByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
 {
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( FileProtocolName );
 
-    KByteArrayDocument *document = new KByteArrayDocument("New created for test.");
+    Kasten::KByteArrayDocument *document = new Kasten::KByteArrayDocument("New created for test.");
     KHECore::PieceTableByteArrayModel *byteArray =
         qobject_cast<KHECore::PieceTableByteArrayModel *>( document->content() );
 
@@ -142,12 +139,12 @@ void KByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
     byteArray->setData( testData.constData(), testData.size(), false );
 
     // save
-    KByteArrayRawFileSynchronizer *synchronizer = new KByteArrayRawFileSynchronizer();
-    synchronizer->startConnect( document, fileUrl, AbstractModelSynchronizer::ReplaceRemote )->exec();
+    Kasten::KByteArrayRawFileSynchronizer *synchronizer = new Kasten::KByteArrayRawFileSynchronizer();
+    synchronizer->startConnect( document, fileUrl, Kasten::AbstractModelSynchronizer::ReplaceRemote )->exec();
     QCOMPARE( synchronizer->document(), document );
 
 //     // load into other and...
-//     KByteArrayDocument *otherDocument = new KByteArrayDocument( filePath );
+//     Kasten::KByteArrayDocument *otherDocument = new Kasten::KByteArrayDocument( filePath );
 
 //     QVERIFY( document != 0 );
 
@@ -159,6 +156,4 @@ void KByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
     delete document;
 }
 
-}
-
-QTEST_KDEMAIN_CORE( Kasten::KByteArrayRawFileSynchronizerTest )
+QTEST_KDEMAIN_CORE( KByteArrayRawFileSynchronizerTest )

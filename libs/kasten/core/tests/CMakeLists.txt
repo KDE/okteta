@@ -6,6 +6,7 @@ set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/.. )
 
 include_directories(
+  ${SUTDIR}/..
   ${SUTDIR}
 )
 

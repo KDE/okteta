@@ -33,6 +33,9 @@
 #include <QtCore/QFile>
 
 
+namespace Kasten
+{
+
 TestDocumentFileConnectJob::TestDocumentFileConnectJob( TestDocumentFileSynchronizer *synchronizer,
                                                         KAbstractDocument *document,
                                                         const KUrl &url,
@@ -62,3 +65,5 @@ void TestDocumentFileConnectJob::startConnectWithFile()
 }
 
 TestDocumentFileConnectJob::~TestDocumentFileConnectJob() {}
+
+}

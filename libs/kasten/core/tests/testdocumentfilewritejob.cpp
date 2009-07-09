@@ -33,6 +33,9 @@
 #include <QtCore/QFile>
 
 
+namespace Kasten
+{
+
 TestDocumentFileWriteJob::TestDocumentFileWriteJob( TestDocumentFileSynchronizer *synchronizer )
  : AbstractFileSystemSyncToRemoteJob( synchronizer )
 {}
@@ -55,4 +58,6 @@ void TestDocumentFileWriteJob::startWriteToFile()
 
 TestDocumentFileWriteJob::~TestDocumentFileWriteJob()
 {
+}
+
 }

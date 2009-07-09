@@ -52,7 +52,7 @@ class KASTENGUI_EXPORT KAbstractView : public AbstractModel
 
   Q_SIGNALS:
     // TODO: should be signal the diff? how to say then remote is in synch again?
-    void modified( KAbstractDocument::SynchronizationStates newStates );
+    void modified( Kasten::KAbstractDocument::SynchronizationStates newStates );
 };
 
 // TODO: hack!!!! remove me!

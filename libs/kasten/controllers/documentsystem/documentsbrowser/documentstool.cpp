@@ -37,8 +37,8 @@ DocumentsTool::DocumentsTool( KDocumentManager* documentManager )
 {
     setObjectName( "Documents" );
 
-    connect( mDocumentManager, SIGNAL(added( KAbstractDocument* )), SIGNAL(documentAdded( KAbstractDocument* )) );
-    connect( mDocumentManager, SIGNAL(closing( KAbstractDocument* )), SIGNAL(documentClosing( KAbstractDocument* )) );
+    connect( mDocumentManager, SIGNAL(added( Kasten::KAbstractDocument* )), SIGNAL(documentAdded( Kasten::KAbstractDocument* )) );
+    connect( mDocumentManager, SIGNAL(closing( Kasten::KAbstractDocument* )), SIGNAL(documentClosing( Kasten::KAbstractDocument* )) );
 }
 
 QList<KAbstractDocument*> DocumentsTool::documents() const { return mDocumentManager->documents(); }

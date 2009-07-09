@@ -75,16 +75,16 @@ class KASTENCORE_EXPORT KDocumentManager : public QObject
 
   Q_SIGNALS:
     // document got added
-    void added( KAbstractDocument *document );
+    void added( Kasten::KAbstractDocument *document );
     /// document is about to be closed, cannot be stopped
-    void closing( KAbstractDocument *document );
+    void closing( Kasten::KAbstractDocument *document );
 //     void closing( KCloseEvent *event );
 // TODO: other than QObject event gets modified by observers, take care of unsetting a close cancel
 // problem with a signal is that all(!) observers get notified, even if event is already cancelled
 // better a visitor pattern?
 
     // TODO: or should the document be able to emit this?
-    void focusRequested( KAbstractDocument* document );
+    void focusRequested( Kasten::KAbstractDocument* document );
 
 //  protected:
 //    virtual KAbstractDocument* createDocument();

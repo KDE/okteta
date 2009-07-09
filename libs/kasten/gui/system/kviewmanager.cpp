@@ -43,8 +43,8 @@ KViewManager::KViewManager( KDocumentManager *documentManager )
  : mDocumentManager( documentManager ),
    mCodecViewManager( new ModelCodecViewManager() )
 {
-    connect( mDocumentManager, SIGNAL(added( KAbstractDocument* )), SLOT(createViewFor( KAbstractDocument* )) );
-    connect( mDocumentManager, SIGNAL(closing( KAbstractDocument* )), SLOT(removeViewsFor( KAbstractDocument* )) );
+    connect( mDocumentManager, SIGNAL(added( Kasten::KAbstractDocument* )), SLOT(createViewFor( Kasten::KAbstractDocument* )) );
+    connect( mDocumentManager, SIGNAL(closing( Kasten::KAbstractDocument* )), SLOT(removeViewsFor( Kasten::KAbstractDocument* )) );
 }
 
 void KViewManager::setWindow( KXmlGuiWindow *window )

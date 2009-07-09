@@ -65,7 +65,7 @@ class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews, public If::Vie
     virtual QList<KAbstractView*> viewList() const;
 
   Q_SIGNALS:
-    virtual void viewFocusChanged( KAbstractView *view );
+    virtual void viewFocusChanged( Kasten::KAbstractView* view );
     void dragMove( const QDragMoveEvent* event, bool& accepted );
     void drop( QDropEvent* event );
 
@@ -73,7 +73,7 @@ class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews, public If::Vie
     void onCurrentChanged( int index );
     void onCloseRequest( QWidget* widget );
     void onTitleChanged( const QString &newTitle );
-//     void onModifiedChanged( KAbstractDocument::SynchronizationStates newStates );
+//     void onModifiedChanged( Kasten::KAbstractDocument::SynchronizationStates newStates );
 
   protected:
     int indexOf( KAbstractView* view ) const;

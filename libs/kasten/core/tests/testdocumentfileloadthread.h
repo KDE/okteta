@@ -27,6 +27,10 @@
 #include <QtCore/QThread>
 #include <QtCore/QString>
 
+
+namespace Kasten
+{
+
 class TestDocument;
 
 class TestDocumentFileLoadThread : public QThread
@@ -53,10 +57,13 @@ class TestDocumentFileLoadThread : public QThread
     TestDocument *mDocument;
 };
 
+
 inline TestDocumentFileLoadThread::TestDocumentFileLoadThread( QObject *parent, const QByteArray &header, const QString &filePath )
  : QThread( parent ), mFilePath( filePath ), mHeader( header ), mDocument( 0 )
 {}
 
 inline TestDocument *TestDocumentFileLoadThread::document() const { return mDocument; }
+
+}
 
 #endif

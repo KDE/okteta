@@ -28,6 +28,10 @@
 // Qt
 #include <QtCore/QLatin1String>
 
+
+namespace Kasten
+{
+
 TestDocumentFileSynchronizerFactory::TestDocumentFileSynchronizerFactory( const QByteArray &header )
  : mHeader( header ) {}
 
@@ -44,3 +48,5 @@ AbstractModelSynchronizer *TestDocumentFileSynchronizerFactory::createSynchroniz
 }
 
 TestDocumentFileSynchronizerFactory::~TestDocumentFileSynchronizerFactory() {}
+
+}

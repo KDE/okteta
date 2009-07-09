@@ -42,9 +42,6 @@
 #include <QtCore/QDataStream>
 
 
-namespace Kasten
-{
-
 static const char TestDirectory[] = "kbytearrayrawfilesynchronizertest";
 static const char TestFileName[] = "test.data";
 static const char NotExistingUrl[] = "notexisting://";
@@ -90,7 +87,7 @@ void KByteArrayRawFileSynchronizerFactoryTest::init()
 
 void KByteArrayRawFileSynchronizerFactoryTest::testCreate()
 {
-    KByteArrayRawFileSynchronizerFactory *factory = new KByteArrayRawFileSynchronizerFactory();
+    Kasten::KByteArrayRawFileSynchronizerFactory *factory = new Kasten::KByteArrayRawFileSynchronizerFactory();
 
     QVERIFY( factory != 0 );
 
@@ -100,7 +97,7 @@ void KByteArrayRawFileSynchronizerFactoryTest::testCreate()
 void KByteArrayRawFileSynchronizerFactoryTest::testLoadFromUrl()
 {
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( FileProtocolName );
-    KByteArrayRawFileSynchronizerFactory *factory = new KByteArrayRawFileSynchronizerFactory();
+    Kasten::KByteArrayRawFileSynchronizerFactory *factory = new Kasten::KByteArrayRawFileSynchronizerFactory();
     KAbstractDocument *document = factory->loadNewDocument( fileUrl );
 
     KByteArrayDocument *byteArrayDocument = qobject_cast<KByteArrayDocument *>( document );
@@ -121,7 +118,7 @@ void KByteArrayRawFileSynchronizerFactoryTest::testLoadFromNotExistingUrl()
 {
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(NotExistingUrl) );
 
-    KByteArrayRawFileSynchronizerFactory *factory = new KByteArrayRawFileSynchronizerFactory();
+    Kasten::KByteArrayRawFileSynchronizerFactory *factory = new Kasten::KByteArrayRawFileSynchronizerFactory();
     KAbstractDocument *document = factory->loadNewDocument( fileUrl );
 
     QVERIFY( document == 0 );
@@ -160,6 +157,4 @@ TODO: save mit path als Parameter? Oder separat setzen? Wie Kopie speichern?
 }
 #endif
 
-}
-
-QTEST_KDEMAIN_CORE( Kasten::KByteArrayRawFileSynchronizerFactoryTest )
+QTEST_KDEMAIN_CORE( KByteArrayRawFileSynchronizerFactoryTest )

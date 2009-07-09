@@ -52,18 +52,18 @@ ShellWindow::ShellWindow( KDocumentManager *documentManager, KViewManager *viewM
     setCentralWidget( mGroupedViews->widget() );
 
     mViewManager->setWindow( this );
-    connect( mViewManager, SIGNAL(opened( KAbstractView* )),
-             mGroupedViews, SLOT(addView( KAbstractView* )) );
-    connect( mViewManager, SIGNAL(closing( KAbstractView* )),
-             mGroupedViews, SLOT(removeView( KAbstractView* )) );
+    connect( mViewManager, SIGNAL(opened( Kasten::KAbstractView* )),
+             mGroupedViews, SLOT(addView( Kasten::KAbstractView* )) );
+    connect( mViewManager, SIGNAL(closing( Kasten::KAbstractView* )),
+             mGroupedViews, SLOT(removeView( Kasten::KAbstractView* )) );
 
-    connect( mDocumentManager, SIGNAL(focusRequested( KAbstractDocument* )),
-             SLOT(onFocusRequested( KAbstractDocument* )) );
+    connect( mDocumentManager, SIGNAL(focusRequested( Kasten::KAbstractDocument* )),
+             SLOT(onFocusRequested( Kasten::KAbstractDocument* )) );
 
-    connect( mGroupedViews, SIGNAL(viewFocusChanged( KAbstractView* )),
-             SLOT(onViewFocusChanged( KAbstractView* )) );
-    connect( mGroupedViews, SIGNAL(closeRequest( KAbstractView* )),
-             SLOT(onCloseRequest( KAbstractView* )) );
+    connect( mGroupedViews, SIGNAL(viewFocusChanged( Kasten::KAbstractView* )),
+             SLOT(onViewFocusChanged( Kasten::KAbstractView* )) );
+    connect( mGroupedViews, SIGNAL(closeRequest( Kasten::KAbstractView* )),
+             SLOT(onCloseRequest( Kasten::KAbstractView* )) );
     connect( mGroupedViews, SIGNAL(dragMove( const QDragMoveEvent*, bool& )),
              SLOT(onDragMoveEvent( const QDragMoveEvent*, bool& )) );
     connect( mGroupedViews, SIGNAL(drop( QDropEvent* )),
@@ -139,8 +139,8 @@ void ShellWindow::onViewFocusChanged( KAbstractView *view )
     if( view )
     {
         connect( view, SIGNAL(titleChanged( QString )), SLOT(onTitleChanged( QString )) );
-        connect( view, SIGNAL(modified( KAbstractDocument::SynchronizationStates )),
-                       SLOT(onModifiedChanged( KAbstractDocument::SynchronizationStates )) );
+        connect( view, SIGNAL(modified( Kasten::KAbstractDocument::SynchronizationStates )),
+                       SLOT(onModifiedChanged( Kasten::KAbstractDocument::SynchronizationStates )) );
     }
 }
 

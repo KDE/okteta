@@ -55,9 +55,9 @@ class KASTENCONTROLLER_EXPORT DocumentsTool : public AbstractTool
     virtual void setTargetModel( AbstractModel* model );
 
   Q_SIGNALS:
-    void documentAdded( KAbstractDocument* document );
-    void documentClosing( KAbstractDocument* document );
-    void focussedDocumentChanged( KAbstractDocument* document );
+    void documentAdded( Kasten::KAbstractDocument* document );
+    void documentClosing( Kasten::KAbstractDocument* document );
+    void focussedDocumentChanged( Kasten::KAbstractDocument* document );
 
   protected: // sources
     KDocumentManager* mDocumentManager;

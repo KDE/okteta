@@ -49,8 +49,8 @@ KByteArrayDisplay::KByteArrayDisplay( KByteArrayDocument *document )
 
     // propagate signals
     connect( mDocument, SIGNAL(titleChanged( QString )), SIGNAL(titleChanged( QString )) );
-    connect( mDocument, SIGNAL(modified( KAbstractDocument::SynchronizationStates )),
-                        SIGNAL(modified( KAbstractDocument::SynchronizationStates )) );
+    connect( mDocument, SIGNAL(modified( Kasten::KAbstractDocument::SynchronizationStates )),
+                        SIGNAL(modified( Kasten::KAbstractDocument::SynchronizationStates )) );
     connect( mWidget, SIGNAL(selectionChanged( bool )), SIGNAL(hasSelectedDataChanged( bool )) );
     connect( mWidget, SIGNAL(readOnlyChanged( bool )), SIGNAL(readOnlyChanged( bool )) );
     connect( mWidget, SIGNAL(overwriteModeChanged( bool )), SIGNAL(overwriteModeChanged( bool )) );

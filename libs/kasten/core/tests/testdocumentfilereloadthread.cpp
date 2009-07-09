@@ -33,6 +33,10 @@
 #include <QtCore/QFile>
 #include <QtCore/QString>
 
+
+namespace Kasten
+{
+
 TestDocumentFileReloadThread::TestDocumentFileReloadThread( QObject *parent, const QByteArray &header,
     /*TestDocument *document,*/ const QString &filePath )
  : QThread( parent ), /*mDocument( document ),*/ mHeader( header), mFilePath( filePath ), mSuccess( false )
@@ -69,3 +73,5 @@ void TestDocumentFileReloadThread::run()
 }
 
 TestDocumentFileReloadThread::~TestDocumentFileReloadThread() {}
+
+}

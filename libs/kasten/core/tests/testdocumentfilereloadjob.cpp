@@ -33,6 +33,9 @@
 #include <QtCore/QFile>
 
 
+namespace Kasten
+{
+
 TestDocumentFileReloadJob::TestDocumentFileReloadJob( TestDocumentFileSynchronizer *synchronizer )
  : AbstractFileSystemSyncFromRemoteJob( synchronizer )
 {}
@@ -60,4 +63,6 @@ void TestDocumentFileReloadJob::startReadFromFile()
 
 TestDocumentFileReloadJob::~TestDocumentFileReloadJob()
 {
+}
+
 }

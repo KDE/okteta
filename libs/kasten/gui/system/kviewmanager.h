@@ -62,13 +62,13 @@ class KASTENGUI_EXPORT KViewManager : public QObject
 
   Q_SIGNALS:
     // view was created and already added to the list
-    void opened( KAbstractView *view );
+    void opened( Kasten::KAbstractView* view );
     // view will be closed, already removed from list
-    void closing( KAbstractView *view );
+    void closing( Kasten::KAbstractView* view );
 
   protected Q_SLOTS:
-    void createViewFor( KAbstractDocument *document );
-    void removeViewsFor( KAbstractDocument *document );
+    void createViewFor( Kasten::KAbstractDocument* document );
+    void removeViewsFor( Kasten::KAbstractDocument* document );
     /**
     * asks the manager to close and delete the view
     * may fail if the process if cancelled due to user input

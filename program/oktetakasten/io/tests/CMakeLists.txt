@@ -13,10 +13,10 @@ include_directories(
   ${SUTDIR}/../document
   ${SUTDIR}/filesystem
   ${SUTDIR}/../../../core
-  ${SUTDIR}/../../libkasten/core/document
-  ${SUTDIR}/../../libkasten/core/io
+  ${SUTDIR}/../../../libs/kasten/core/document
+  ${SUTDIR}/../../../libs/kasten/core/io
   ${SUTDIR}/../../../core/tests
-  ${SUTDIR}/../../libkasten/core/tests
+  ${SUTDIR}/../../../libs/kasten/core/tests
 )
 
 ########### io ###############

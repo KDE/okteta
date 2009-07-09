@@ -26,6 +26,10 @@
 // Kasten core
 #include <abstractfilesystemsynctoremotejob.h>
 
+
+namespace Kasten
+{
+
 class TestDocumentFileSynchronizer;
 class TestDocumentFileWriteThread;
 
@@ -46,5 +50,7 @@ class TestDocumentFileWriteJob : public AbstractFileSystemSyncToRemoteJob
   protected:
     TestDocumentFileWriteThread *mWriteThread;
 };
+
+}
 
 #endif

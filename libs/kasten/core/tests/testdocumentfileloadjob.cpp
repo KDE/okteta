@@ -33,6 +33,9 @@
 #include <QtCore/QFile>
 
 
+namespace Kasten
+{
+
 TestDocumentFileLoadJob::TestDocumentFileLoadJob( TestDocumentFileSynchronizer *synchronizer, const KUrl &url )
  : AbstractFileSystemLoadJob( synchronizer, url )
 {}
@@ -57,4 +60,6 @@ void TestDocumentFileLoadJob::startLoadFromFile()
 
 TestDocumentFileLoadJob::~TestDocumentFileLoadJob()
 {
+}
+
 }

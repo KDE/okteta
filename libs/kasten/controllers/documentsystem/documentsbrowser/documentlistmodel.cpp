@@ -38,9 +38,12 @@ DocumentListModel::DocumentListModel( DocumentsTool* documentsTool, QObject* par
  : QAbstractTableModel( parent ),
    mDocumentsTool( documentsTool )
 {
-    connect( mDocumentsTool, SIGNAL(documentAdded( KAbstractDocument* )), SLOT(onDocumentAdded( KAbstractDocument* )) );
-    connect( mDocumentsTool, SIGNAL(documentClosing( KAbstractDocument* )), SLOT(onDocumentClosing( KAbstractDocument* )) );
-    connect( mDocumentsTool, SIGNAL(focussedDocumentChanged( KAbstractDocument* )), SLOT(onFocussedDocumentChanged( KAbstractDocument* )) );
+    connect( mDocumentsTool, SIGNAL(documentAdded( Kasten::KAbstractDocument* )),
+             SLOT(onDocumentAdded( Kasten::KAbstractDocument* )) );
+    connect( mDocumentsTool, SIGNAL(documentClosing( Kasten::KAbstractDocument* )),
+             SLOT(onDocumentClosing( Kasten::KAbstractDocument* )) );
+    connect( mDocumentsTool, SIGNAL(focussedDocumentChanged( Kasten::KAbstractDocument* )),
+             SLOT(onFocussedDocumentChanged( Kasten::KAbstractDocument* )) );
 }
 
 int DocumentListModel::rowCount( const QModelIndex& parent ) const
@@ -141,7 +144,7 @@ Q_UNUSED( document )
 
 void DocumentListModel::onDocumentAdded( KAbstractDocument* document )
 {
-    connect( document, SIGNAL(modified( KAbstractDocument::SynchronizationStates )),
+    connect( document, SIGNAL(modified( Kasten::KAbstractDocument::SynchronizationStates )),
              SLOT(onModifiedChanged()) );
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
     reset();

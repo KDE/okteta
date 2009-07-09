@@ -30,6 +30,9 @@
 #include <QtCore/QString>
 
 
+namespace Kasten
+{
+
 class TestDocument : public KAbstractDocument
 {
     Q_OBJECT
@@ -58,5 +61,7 @@ class TestDocument : public KAbstractDocument
     QByteArray mData;
     SynchronizationStates mSynchronizationStates;
 };
+
+}
 
 #endif

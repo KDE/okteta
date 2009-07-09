@@ -28,6 +28,10 @@
 // Qt
 #include <QtCore/QByteArray>
 
+
+namespace Kasten
+{
+
 class TestDocumentFileSynchronizerFactory : public AbstractModelSynchronizerFactory
 {
   Q_OBJECT
@@ -45,5 +49,7 @@ class TestDocumentFileSynchronizerFactory : public AbstractModelSynchronizerFact
   protected:
     QByteArray mHeader;
 };
+
+}
 
 #endif

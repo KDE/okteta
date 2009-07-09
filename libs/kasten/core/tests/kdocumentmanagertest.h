@@ -26,7 +26,9 @@
 // Qt
 #include <QtCore/QObject>
 
+namespace Kasten {
 class KAbstractDocument;
+}
 class QSignalSpy;
 
 
@@ -35,8 +37,8 @@ class KDocumentManagerTest : public QObject
   Q_OBJECT
 
   private:
-    void checkAdded( QSignalSpy *changedSpy, KAbstractDocument *document );
-    void checkRemoving( QSignalSpy *changedSpy, KAbstractDocument *document );
+    void checkAdded( QSignalSpy *changedSpy, Kasten::KAbstractDocument *document );
+    void checkRemoving( QSignalSpy *changedSpy, Kasten::KAbstractDocument *document );
 
   private Q_SLOTS: // test functions
     void testConstructor();

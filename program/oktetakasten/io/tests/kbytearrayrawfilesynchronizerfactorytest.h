@@ -26,11 +26,8 @@
 // Qt
 #include <QtCore/QObject>
 
-
-namespace Kasten
-{
-
 class TestFileSystem;
+
 
 class KByteArrayRawFileSynchronizerFactoryTest : public QObject
 {
@@ -50,7 +47,5 @@ class KByteArrayRawFileSynchronizerFactoryTest : public QObject
   private:
     TestFileSystem *mFileSystem;
 };
-
-}
 
 #endif

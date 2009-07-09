@@ -55,8 +55,8 @@ ViewListMenuController::ViewListMenuController( KViewManager* viewManager, If::V
 //     mWindowsActionGroup->setExclusive( true );
     connect( mWindowsActionGroup, SIGNAL(triggered( QAction* )), SLOT(onActionTriggered( QAction* )) );
 
-    connect( mViewManager, SIGNAL(opened( KAbstractView* )),  SLOT(updateActions()) );
-    connect( mViewManager, SIGNAL(closing( KAbstractView* )), SLOT(updateActions()) );
+    connect( mViewManager, SIGNAL(opened( Kasten::KAbstractView* )),  SLOT(updateActions()) );
+    connect( mViewManager, SIGNAL(closing( Kasten::KAbstractView* )), SLOT(updateActions()) );
 
     updateActions();
 }

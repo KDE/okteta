@@ -88,9 +88,9 @@ class KASTENCORE_EXPORT KAbstractDocument : public AbstractModel
   Q_SIGNALS:
     // TODO: should be signal the diff? how to say then remote is in synch again?
     // could be done by pairs of flags instead of notset = isnot
-    void modified( KAbstractDocument::SynchronizationStates newStates );
-    void synchronizerChanged( AbstractModelSynchronizer *newSynchronizer );
-    void liveSynchronizerChanged( AbstractModelSynchronizer* newSynchronizer );
+    void modified( Kasten::KAbstractDocument::SynchronizationStates newStates );
+    void synchronizerChanged( Kasten::AbstractModelSynchronizer* newSynchronizer );
+    void liveSynchronizerChanged( Kasten::AbstractModelSynchronizer* newSynchronizer );
 
   protected:
     void setId( const QString& id );

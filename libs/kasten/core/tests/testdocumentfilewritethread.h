@@ -27,8 +27,14 @@
 #include <QtCore/QByteArray>
 #include <QtCore/QThread>
 
-class TestDocument;
 class QString;
+
+
+namespace Kasten
+{
+
+class TestDocument;
+
 
 class TestDocumentFileWriteThread : public QThread
 {
@@ -55,11 +61,14 @@ class TestDocumentFileWriteThread : public QThread
     bool mSuccess;
 };
 
+
 inline TestDocumentFileWriteThread::TestDocumentFileWriteThread( QObject *parent, const QByteArray &header,
     TestDocument *document, const QString &filePath )
  : QThread( parent ), mHeader( header ), mDocument( document ), mFilePath( filePath ), mSuccess( false )
 {}
 
 inline bool TestDocumentFileWriteThread::success() const { return mSuccess; }
+
+}
 
 #endif

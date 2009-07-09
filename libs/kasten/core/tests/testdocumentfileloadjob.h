@@ -26,6 +26,10 @@
 // Kasten core
 #include <abstractfilesystemloadjob.h>
 
+
+namespace Kasten
+{
+
 class TestDocumentFileSynchronizer;
 class TestDocumentFileLoadThread;
 
@@ -46,5 +50,7 @@ class TestDocumentFileLoadJob : public AbstractFileSystemLoadJob
   protected:
     TestDocumentFileLoadThread *mLoadThread;
 };
+
+}
 
 #endif

@@ -37,6 +37,9 @@
 #include <QtCore/QFile>
 
 
+namespace Kasten
+{
+
 TestDocumentFileSynchronizer::TestDocumentFileSynchronizer( const QByteArray &header )
  : mHeader( header )
 {
@@ -71,4 +74,6 @@ AbstractConnectJob *TestDocumentFileSynchronizer::startConnect( KAbstractDocumen
                                               const KUrl &url, AbstractModelSynchronizer::ConnectOption option )
 {
     return new TestDocumentFileConnectJob( this, document, url, option );
+}
+
 }
