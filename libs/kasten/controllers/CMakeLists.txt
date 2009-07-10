@@ -133,7 +133,6 @@ set( kastencontrollers_LIB_HDRS
   document/readonly/readonlycontroller.h
   document/versionview/versionviewtool.h
   document/versionview/versionviewtoolview.h
-  documentsystem/connector/connectorcontroller.h
   documentsystem/close/closecontroller.h
   documentsystem/documentsbrowser/documentstoolview.h
   documentsystem/documentsbrowser/documentstool.h
@@ -141,7 +140,6 @@ set( kastencontrollers_LIB_HDRS
   documentsystem/loader/loadercontroller.h
   documentsystem/filesystembrowser/filesystembrowsertoolview.h
   documentsystem/filesystembrowser/filesystembrowsertool.h
-  io/offer/offercontroller.h
   io/export/exportcontroller.h
   io/setremote/setremotecontroller.h
   io/copyas/copyascontroller.h
