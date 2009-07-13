@@ -46,6 +46,7 @@ class KAbstractDocument;
 
 // TODO: should synchronizers set the document to readonly if remote is readonly? or who?
 // TODO: should synchronizers offer to change writeflag at remote?
+// TODO: allow synchronizers which can read-only, perhaps also write-only (usecase?)
 
 /**
 possible actions:
