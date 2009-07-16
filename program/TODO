@@ -231,6 +231,18 @@ Later on:
 * fix info and string docker (all with update function) to just work on update, react to change of data origin
 * add option for offset and char comments to Source code encoder (cmp #163204)
 * Support for Drop, both Import into and Open
+* rework import and paste as:
+    <!Menu name="import" append="open_merge">
+      <text context="@title:menu">Import</text>
+      <!- -Action name="import_clipboard" /- ->
+      <ActionList name="import_list" />
+    </Menu>
+    <Menu name="paste_as" append="edit_paste_merge">
+"Paste as" is like "Insert from Clipboard as", means it comes from a source
+See "Insert", is generated as well as from a source, so perhaps join there?
+      <text>Paste As</text>
+      <ActionList name="paste_as_list" />
+    </Menu>
 * Make tabs click proxies
 * Better handling of file errors:
   exact problem descriptions,
