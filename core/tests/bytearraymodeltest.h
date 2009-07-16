@@ -20,19 +20,18 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KBYTEARRAYMODELKABSTRACTBYTEARRAYMODELIFTEST_H
-#define KBYTEARRAYMODELKABSTRACTBYTEARRAYMODELIFTEST_H
+#ifndef BYTEARRAYMODELTEST_H
+#define BYTEARRAYMODELTEST_H
 
+// Qt
+#include <QtCore/QObject>
 
-// test
-#include "abstractbytearraymodeliftest.h"
-
-
-class KByteArrayModelKAbstractByteArrayModelIfTest : public AbstractByteArrayModelIfTest
+class ByteArrayModelTest : public QObject
 {
-  protected: // AbstractByteArrayModelIfTest API
-    Okteta::AbstractByteArrayModel *createByteArrayModel();
-    void deleteByteArrayModel( Okteta::AbstractByteArrayModel *ByteArrayModel );
+  Q_OBJECT
+
+  private Q_SLOTS: // test functions
+    void testNothing();
 };
 
 #endif

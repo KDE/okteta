@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef OKTETA_KBYTEARRAYMODEL_P_H
-#define OKTETA_KBYTEARRAYMODEL_P_H
+#ifndef OKTETA_BYTEARRAYMODEL_P_H
+#define OKTETA_BYTEARRAYMODEL_P_H
 
 
 // lib
-#include "kbytearraymodel.h"
+#include "bytearraymodel.h"
 #include "bookmarksconstiterator.h"
 #include "bookmarklistconstiteratoradapter.h"
 #include "bookmarklist.h"
@@ -36,13 +36,13 @@
 namespace Okteta
 {
 
-class KByteArrayModelPrivate
+class ByteArrayModelPrivate
 {
   public:
-    KByteArrayModelPrivate( KByteArrayModel *parent, char *D, unsigned int S, int RS, bool KM );
-    KByteArrayModelPrivate( KByteArrayModel *parent, const char *D, unsigned int S );
-    KByteArrayModelPrivate( KByteArrayModel *parent, int S, int MS );
-    ~KByteArrayModelPrivate();
+    ByteArrayModelPrivate( ByteArrayModel *parent, char *D, unsigned int S, int RS, bool KM );
+    ByteArrayModelPrivate( ByteArrayModel *parent, const char *D, unsigned int S );
+    ByteArrayModelPrivate( ByteArrayModel *parent, int S, int MS );
+    ~ByteArrayModelPrivate();
 
   public:
     char datum( unsigned int offset ) const;
@@ -101,7 +101,7 @@ class KByteArrayModelPrivate
     int addSize( int AddSize, int SplitPos = -1, bool SaveUpperPart = true );
 
   protected:
-    KByteArrayModel *p;
+    ByteArrayModel *p;
     /** */
     char *m_data;
     /** size of the data */
@@ -123,15 +123,15 @@ class KByteArrayModelPrivate
 };
 
 
-inline KByteArrayModelPrivate::~KByteArrayModelPrivate() { if( m_autoDelete ) delete m_data; }
+inline ByteArrayModelPrivate::~ByteArrayModelPrivate() { if( m_autoDelete ) delete m_data; }
 
-inline char KByteArrayModelPrivate::datum( unsigned int Offset ) const { return m_data[Offset]; }
-inline int KByteArrayModelPrivate::size()                        const { return m_size; }
+inline char ByteArrayModelPrivate::datum( unsigned int Offset ) const { return m_data[Offset]; }
+inline int ByteArrayModelPrivate::size()                        const { return m_size; }
 
-inline bool KByteArrayModelPrivate::isReadOnly()   const { return m_readOnly; }
-inline bool KByteArrayModelPrivate::isModified()   const { return m_modified; }
+inline bool ByteArrayModelPrivate::isReadOnly()   const { return m_readOnly; }
+inline bool ByteArrayModelPrivate::isModified()   const { return m_modified; }
 
-inline void KByteArrayModelPrivate::setReadOnly( bool isReadOnly )
+inline void ByteArrayModelPrivate::setReadOnly( bool isReadOnly )
 {
     if( m_readOnly != isReadOnly )
     {
@@ -139,17 +139,17 @@ inline void KByteArrayModelPrivate::setReadOnly( bool isReadOnly )
         emit p->readOnlyChanged( isReadOnly );
     }
 }
-inline void KByteArrayModelPrivate::setMaxSize( int MS )      { m_maxSize = MS; }
-inline void KByteArrayModelPrivate::setKeepsMemory( bool KM ) { m_keepsMemory = KM; }
-inline void KByteArrayModelPrivate::setAutoDelete( bool AD )  { m_autoDelete = AD; }
-inline void KByteArrayModelPrivate::setDatum( unsigned int offset, const char datum )
+inline void ByteArrayModelPrivate::setMaxSize( int MS )      { m_maxSize = MS; }
+inline void ByteArrayModelPrivate::setKeepsMemory( bool KM ) { m_keepsMemory = KM; }
+inline void ByteArrayModelPrivate::setAutoDelete( bool AD )  { m_autoDelete = AD; }
+inline void ByteArrayModelPrivate::setDatum( unsigned int offset, const char datum )
 {
     m_data[offset] = datum;
     m_modified = true;
     emit p->contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(offset,1,1) );
     emit p->modificationChanged( true );
 }
-inline void KByteArrayModelPrivate::setModified( bool modified )
+inline void ByteArrayModelPrivate::setModified( bool modified )
 {
     m_modified = modified;
     emit p->modificationChanged( m_modified );
@@ -157,29 +157,29 @@ inline void KByteArrayModelPrivate::setModified( bool modified )
 
 
 
-inline char *KByteArrayModelPrivate::data()       const { return m_data; }
-inline int KByteArrayModelPrivate::maxSize()      const { return m_maxSize; }
-inline bool KByteArrayModelPrivate::keepsMemory() const { return m_keepsMemory; }
-inline bool KByteArrayModelPrivate::autoDelete()  const { return m_autoDelete; }
+inline char *ByteArrayModelPrivate::data()       const { return m_data; }
+inline int ByteArrayModelPrivate::maxSize()      const { return m_maxSize; }
+inline bool ByteArrayModelPrivate::keepsMemory() const { return m_keepsMemory; }
+inline bool ByteArrayModelPrivate::autoDelete()  const { return m_autoDelete; }
 
-inline void KByteArrayModelPrivate::addBookmarks( const QList<Okteta::Bookmark> &bookmarks )
+inline void ByteArrayModelPrivate::addBookmarks( const QList<Okteta::Bookmark> &bookmarks )
 {
     m_bookmarks.addBookmarks( bookmarks );
     emit p->bookmarksAdded( bookmarks );
 }
-inline void KByteArrayModelPrivate::removeBookmarks( const QList<Okteta::Bookmark> &bookmarks )
+inline void ByteArrayModelPrivate::removeBookmarks( const QList<Okteta::Bookmark> &bookmarks )
 {
     m_bookmarks.removeBookmarks( bookmarks );
     emit p->bookmarksRemoved( bookmarks );
 }
 
-inline void KByteArrayModelPrivate::removeAllBookmarks()
+inline void ByteArrayModelPrivate::removeAllBookmarks()
 {
     QList<Okteta::Bookmark> bookmarks = m_bookmarks.list();
     m_bookmarks.clear();
     emit p->bookmarksRemoved( bookmarks );
 }
-inline void KByteArrayModelPrivate::setBookmark( unsigned int index, const Okteta::Bookmark& bookmark )
+inline void ByteArrayModelPrivate::setBookmark( unsigned int index, const Okteta::Bookmark& bookmark )
 {
     m_bookmarks.setBookmark( index, bookmark );
 
@@ -188,21 +188,21 @@ inline void KByteArrayModelPrivate::setBookmark( unsigned int index, const Oktet
     emit p->bookmarksModified( changedBookmarkIndizes );
 }
 
-inline Okteta::BookmarksConstIterator KByteArrayModelPrivate::createBookmarksConstIterator() const
+inline Okteta::BookmarksConstIterator ByteArrayModelPrivate::createBookmarksConstIterator() const
 {
     return BookmarksConstIterator( new BookmarkListConstIteratorAdapter(m_bookmarks) );
 }
 
-inline const Okteta::Bookmark& KByteArrayModelPrivate::bookmarkFor( int offset ) const
+inline const Okteta::Bookmark& ByteArrayModelPrivate::bookmarkFor( int offset ) const
 {
     return m_bookmarks.bookmark( offset );
 }
-inline const Okteta::Bookmark& KByteArrayModelPrivate::bookmarkAt( unsigned int index ) const
+inline const Okteta::Bookmark& ByteArrayModelPrivate::bookmarkAt( unsigned int index ) const
 {
     return m_bookmarks.at( index );
 }
-inline bool KByteArrayModelPrivate::containsBookmarkFor( int offset ) const { return m_bookmarks.contains( offset ); }
-inline unsigned int KByteArrayModelPrivate::bookmarksCount() const { return m_bookmarks.size(); }
+inline bool ByteArrayModelPrivate::containsBookmarkFor( int offset ) const { return m_bookmarks.contains( offset ); }
+inline unsigned int ByteArrayModelPrivate::bookmarksCount() const { return m_bookmarks.size(); }
 
 }
 

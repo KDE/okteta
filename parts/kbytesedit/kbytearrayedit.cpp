@@ -25,7 +25,7 @@
 // Okteta gui
 #include <bytearraycolumnview.h>
 // Okteta core
-#include <kbytearraymodel.h>
+#include <bytearraymodel.h>
 // Qt
 #include <QtGui/QLayout>
 #include <QtGui/QWidget>
@@ -35,7 +35,7 @@
 KByteArrayEdit::KByteArrayEdit( QWidget *parent, const QStringList & )
   : QWidget( parent )
 {
-    Model = new Okteta::KByteArrayModel;
+    Model = new Okteta::ByteArrayModel;
     View = new Okteta::ByteArrayColumnView( Model, this );
 
     QHBoxLayout* Layout = new QHBoxLayout( this );
@@ -48,8 +48,8 @@ KByteArrayEdit::KByteArrayEdit( QWidget *parent, const QStringList & )
 
 void KByteArrayEdit::setData( char *D, int S, int RS, bool KM )
 {
-    Okteta::KByteArrayModel *OldModel = Model;
-    Model = new Okteta::KByteArrayModel( D, S, RS, KM );
+    Okteta::ByteArrayModel *OldModel = Model;
+    Model = new Okteta::ByteArrayModel( D, S, RS, KM );
 
     // get attributes
     Model->setReadOnly( OldModel->isReadOnly() );

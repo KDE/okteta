@@ -30,7 +30,7 @@
 #include <util/filesystem.h>
 #include <util/fill.h>
 // Okteta core
-#include <kbytearraymodel.h>
+#include <piecetablebytearraymodel.h>
 // KDE
 #include <KUrl>
 #include <qtest_kde.h>
@@ -133,7 +133,7 @@ void KByteArrayRawFileSynchronizerFactoryTest::testSaveToFile()
 
 
     KByteArrayDocument *document = new KByteArrayDocument();
-    Okteta::KByteArrayModel *byteArray = document->content();
+    Okteta::PieceTableByteArrayModel *byteArray = document->content();
 
     // fill array
     byteArray->
@@ -149,7 +149,7 @@ TODO: save mit path als Parameter? Oder separat setzen? Wie Kopie speichern?
     QVERIFY( document != 0 );
 
     // compare with old
-    Okteta::KByteArrayModel *otherByteArray = document->content();
+    Okteta::PieceTableByteArrayModel *otherByteArray = document->content();
     QCOMPARE( byteArray->size(), otherByteArray->size() );
     QVERIFY( qstrncmp(byteArray->data(),otherByteArray->data(),byteArray->size()) == 0 );
 

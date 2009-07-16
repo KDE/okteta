@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kbytearraymodelkabstractbytearraymodeliftest.h"
+#include "bytearraymodelabstractbytearraymodeliftest.h"
 
 // test object
-#include <kbytearraymodel.h>
+#include <bytearraymodel.h>
 // Qt
 #include <QtTest/QtTest>
 
@@ -31,19 +31,19 @@
 static const int ByteArrayModelSize = 60;
 
 
-Okteta::AbstractByteArrayModel *KByteArrayModelKAbstractByteArrayModelIfTest::createByteArrayModel()
+Okteta::AbstractByteArrayModel *ByteArrayModelAbstractByteArrayModelIfTest::createByteArrayModel()
 {
-  Okteta::KByteArrayModel *ByteArrayModel = new Okteta::KByteArrayModel( ByteArrayModelSize );
+  Okteta::ByteArrayModel *ByteArrayModel = new Okteta::ByteArrayModel( ByteArrayModelSize );
   ByteArrayModel->setReadOnly( false );
 
   return ByteArrayModel;
 }
 
-void KByteArrayModelKAbstractByteArrayModelIfTest::deleteByteArrayModel(
+void ByteArrayModelAbstractByteArrayModelIfTest::deleteByteArrayModel(
        Okteta::AbstractByteArrayModel *ByteArrayModel )
 {
   delete ByteArrayModel;
 }
 
 
-QTEST_MAIN( KByteArrayModelKAbstractByteArrayModelIfTest )
+QTEST_MAIN( ByteArrayModelAbstractByteArrayModelIfTest )

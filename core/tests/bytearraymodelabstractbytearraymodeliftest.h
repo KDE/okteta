@@ -20,19 +20,19 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kbytearraymodeltest.h"
-
-// test object
-#include <kbytearraymodel.h>
-// Qt
-#include <QtTest/QtTest>
+#ifndef BYTEARRAYMODELKABSTRACTBYTEARRAYMODELIFTEST_H
+#define BYTEARRAYMODELKABSTRACTBYTEARRAYMODELIFTEST_H
 
 
-using namespace KDE;
+// test
+#include "abstractbytearraymodeliftest.h"
 
 
-void KByteArrayModelTest::testNothing()
+class ByteArrayModelAbstractByteArrayModelIfTest : public AbstractByteArrayModelIfTest
 {
-}
+  protected: // AbstractByteArrayModelIfTest API
+    Okteta::AbstractByteArrayModel *createByteArrayModel();
+    void deleteByteArrayModel( Okteta::AbstractByteArrayModel *ByteArrayModel );
+};
 
-QTEST_MAIN( KByteArrayModelTest )
+#endif

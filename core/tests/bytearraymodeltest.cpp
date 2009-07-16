@@ -20,18 +20,19 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KBYTEARRAYMODELTEST_H
-#define KBYTEARRAYMODELTEST_H
+#include "bytearraymodeltest.h"
 
+// test object
+#include <bytearraymodel.h>
 // Qt
-#include <QtCore/QObject>
+#include <QtTest/QtTest>
 
-class KByteArrayModelTest : public QObject
+
+using namespace KDE;
+
+
+void ByteArrayModelTest::testNothing()
 {
-  Q_OBJECT
+}
 
-  private Q_SLOTS: // test functions
-    void testNothing();
-};
-
-#endif
+QTEST_MAIN( ByteArrayModelTest )

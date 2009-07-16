@@ -40,8 +40,8 @@ set( oktetacore_LIB_SRCS
   ${libcodecs_SRCS}
   ${libpiecetable_SRCS}
   abstractbytearraymodel.cpp
-  kbytearraymodel_p.cpp
-  kbytearraymodel.cpp
+  bytearraymodel_p.cpp
+  bytearraymodel.cpp
   fixedsizebytearraymodel.cpp
   filebytearraymodel_p.cpp
   filebytearraymodel.cpp

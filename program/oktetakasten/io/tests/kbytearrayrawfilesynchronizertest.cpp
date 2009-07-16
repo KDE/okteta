@@ -149,7 +149,7 @@ void KByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
 //     QVERIFY( document != 0 );
 
 //     // compare with old
-//     Okteta::KByteArrayModel *otherByteArray = document->content();
+//     Okteta::PieceTableByteArrayModel *otherByteArray = document->content();
 //     QCOMPARE( byteArray->size(), otherByteArray->size() );
 //     QVERIFY( qstrncmp(byteArray->data(),otherByteArray->data(),byteArray->size()) == 0 );
 

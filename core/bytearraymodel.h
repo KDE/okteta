@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef OKTETA_KBYTEARRAYMODEL_H
-#define OKTETA_KBYTEARRAYMODEL_H
+#ifndef OKTETA_BYTEARRAYMODEL_H
+#define OKTETA_BYTEARRAYMODEL_H
 
 
 // lib
@@ -33,24 +33,24 @@
 namespace Okteta
 {
 
-class KByteArrayModelPrivate;
+class ByteArrayModelPrivate;
 
 /** 
   *@author Friedrich W. H. Kossebau
   */
 
-class OKTETACORE_EXPORT KByteArrayModel : public AbstractByteArrayModel, public Bookmarkable
+class OKTETACORE_EXPORT ByteArrayModel : public AbstractByteArrayModel, public Bookmarkable
 {
     Q_OBJECT
     Q_INTERFACES( Okteta::Bookmarkable )
 
-    friend class KByteArrayModelPrivate;
+    friend class ByteArrayModelPrivate;
 
   public:
-    KByteArrayModel( char *data, unsigned int size, int rawSize = -1, bool keepMemory = true );
-    KByteArrayModel( const char *data, unsigned int size );
-    explicit KByteArrayModel( int size=0, int maxSize = -1 );
-    virtual ~KByteArrayModel();
+    ByteArrayModel( char *data, unsigned int size, int rawSize = -1, bool keepMemory = true );
+    ByteArrayModel( const char *data, unsigned int size );
+    explicit ByteArrayModel( int size=0, int maxSize = -1 );
+    virtual ~ByteArrayModel();
 
   public: // AbstractByteArrayModel API
     virtual char datum( unsigned int offset ) const;
@@ -106,7 +106,7 @@ class OKTETACORE_EXPORT KByteArrayModel : public AbstractByteArrayModel, public 
     bool autoDelete() const;
 
   protected:
-    KByteArrayModelPrivate * const d;
+    ByteArrayModelPrivate * const d;
 };
 
 }

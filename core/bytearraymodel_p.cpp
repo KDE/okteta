@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kbytearraymodel_p.h"
+#include "bytearraymodel_p.h"
 
 // C
 #include <string.h>
@@ -32,10 +32,11 @@ static const unsigned int maxChunkSize = 1024*10; // TODO: get max. memory page 
 
 // TODO: think about realloc & Co.
 
-namespace Okteta {
+namespace Okteta
+{
 
 
-KByteArrayModelPrivate::KByteArrayModelPrivate( KByteArrayModel *parent,
+ByteArrayModelPrivate::ByteArrayModelPrivate( ByteArrayModel *parent,
                                                 char *data, unsigned int size, int rawSize, bool keepsMemory )
  : p( parent ),
    m_data( data ),
@@ -49,7 +50,7 @@ KByteArrayModelPrivate::KByteArrayModelPrivate( KByteArrayModel *parent,
 {
 }
 
-KByteArrayModelPrivate::KByteArrayModelPrivate( KByteArrayModel *parent,
+ByteArrayModelPrivate::ByteArrayModelPrivate( ByteArrayModel *parent,
                                                 const char *data, unsigned int size )
  : p( parent ),
    m_data( (char *)data ),
@@ -63,7 +64,7 @@ KByteArrayModelPrivate::KByteArrayModelPrivate( KByteArrayModel *parent,
 {
 }
 
-KByteArrayModelPrivate::KByteArrayModelPrivate( KByteArrayModel *parent,
+ByteArrayModelPrivate::ByteArrayModelPrivate( ByteArrayModel *parent,
                                                 int size, int maxSize )
  : p( parent ),
    m_data( (size>0) ? new char[size] : 0 ),
@@ -77,7 +78,7 @@ KByteArrayModelPrivate::KByteArrayModelPrivate( KByteArrayModel *parent,
 {
 }
 
-void KByteArrayModelPrivate::setData( char *data, unsigned int size, int rawSize, bool keepMemory )
+void ByteArrayModelPrivate::setData( char *data, unsigned int size, int rawSize, bool keepMemory )
 {
     if( m_autoDelete )
         delete m_data;
@@ -96,7 +97,7 @@ void KByteArrayModelPrivate::setData( char *data, unsigned int size, int rawSize
 }
 
 
-int KByteArrayModelPrivate::insert( int position, const char* data, int length )
+int ByteArrayModelPrivate::insert( int position, const char* data, int length )
 {
     if( m_readOnly )
         return 0;
@@ -123,7 +124,7 @@ int KByteArrayModelPrivate::insert( int position, const char* data, int length )
 }
 
 
-int KByteArrayModelPrivate::remove( const Section &section )
+int ByteArrayModelPrivate::remove( const Section &section )
 {
     if( m_readOnly )
         return 0;
@@ -151,7 +152,7 @@ int KByteArrayModelPrivate::remove( const Section &section )
 }
 
 
-unsigned int KByteArrayModelPrivate::replace( const Section &section, const char* data, unsigned int inputLength )
+unsigned int ByteArrayModelPrivate::replace( const Section &section, const char* data, unsigned int inputLength )
 {
     if( m_readOnly )
         return 0;
@@ -223,7 +224,7 @@ unsigned int KByteArrayModelPrivate::replace( const Section &section, const char
 }
 
 
-bool KByteArrayModelPrivate::swap( int firstStart, const Section &secondSection )
+bool ByteArrayModelPrivate::swap( int firstStart, const Section &secondSection )
 {
     if( m_readOnly )
         return false;
@@ -305,7 +306,7 @@ bool KByteArrayModelPrivate::swap( int firstStart, const Section &secondSection 
 }
 
 
-int KByteArrayModelPrivate::fill( const char fillDatum, unsigned int position, int fillLength )
+int ByteArrayModelPrivate::fill( const char fillDatum, unsigned int position, int fillLength )
 {
     if( m_readOnly )
         return 0;
@@ -330,7 +331,7 @@ int KByteArrayModelPrivate::fill( const char fillDatum, unsigned int position, i
 }
 
 
-int KByteArrayModelPrivate::indexOf( const char *searchString, int length, int from ) const
+int ByteArrayModelPrivate::indexOf( const char *searchString, int length, int from ) const
 {
     int result = -1;
 
@@ -350,7 +351,7 @@ int KByteArrayModelPrivate::indexOf( const char *searchString, int length, int f
     return result;
 }
 
-int KByteArrayModelPrivate::lastIndexOf( const char *searchString, int length, int from ) const
+int ByteArrayModelPrivate::lastIndexOf( const char *searchString, int length, int from ) const
 {
     int result = -1;
 
@@ -376,7 +377,7 @@ int KByteArrayModelPrivate::lastIndexOf( const char *searchString, int length, i
 }
 
 
-int KByteArrayModelPrivate::addSize( int addSize, int splitPosition, bool saveUpperPart )
+int ByteArrayModelPrivate::addSize( int addSize, int splitPosition, bool saveUpperPart )
 {
     if( m_readOnly )
         return 0;

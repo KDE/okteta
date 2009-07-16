@@ -61,7 +61,7 @@ KByteArrayDocument::KByteArrayDocument( Okteta::PieceTableByteArrayModel *byteAr
 }
 #if 0
 KByteArrayDocument::KByteArrayDocument( const QString &filePath )
-: mByteArray( new Okteta::KByteArrayModel() )
+: mByteArray( new Okteta::ByteArrayModel() )
 {
     if( load(filePath) )
     {

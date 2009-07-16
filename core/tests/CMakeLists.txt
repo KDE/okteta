@@ -75,30 +75,30 @@ target_link_libraries( fixedsizebytearraymodelabstractbytearraymodeliftest
 )
 
 
-########### kbytearraymodeltest ###############
+########### bytearraymodeltest ###############
 
-set( kbytearraymodeltest_SRCS
-  kbytearraymodeltest.cpp
+set( bytearraymodeltest_SRCS
+  bytearraymodeltest.cpp
 )
 
-kde4_add_unit_test( kbytearraymodeltest  TESTNAME libokteta-core-kbytearraymodeltest  ${kbytearraymodeltest_SRCS} )
-target_link_libraries( kbytearraymodeltest
+kde4_add_unit_test( bytearraymodeltest  TESTNAME libokteta-core-bytearraymodeltest  ${bytearraymodeltest_SRCS} )
+target_link_libraries( bytearraymodeltest
   testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY}
 )
 
 
-########### kbytearraymodelkabstractbytearraymodeliftest ###############
+########### bytearraymodelabstractbytearraymodeliftest ###############
 
-set( kbytearraymodelkabstractbytearraymodeliftest_SRCS
+set( bytearraymodelabstractbytearraymodeliftest_SRCS
   abstractbytearraymodeliftest.cpp
-  kbytearraymodelkabstractbytearraymodeliftest.cpp
+  bytearraymodelabstractbytearraymodeliftest.cpp
 )
 
-kde4_add_unit_test( kbytearraymodelkabstractbytearraymodeliftest
-  TESTNAME libokteta-core-kbytearraymodelkabstractbytearraymodeliftest
-  ${kbytearraymodelkabstractbytearraymodeliftest_SRCS}
+kde4_add_unit_test( bytearraymodelabstractbytearraymodeliftest
+  TESTNAME libokteta-core-bytearraymodelabstractbytearraymodeliftest
+  ${bytearraymodelabstractbytearraymodeliftest_SRCS}
 )
-target_link_libraries( kbytearraymodelkabstractbytearraymodeliftest
+target_link_libraries( bytearraymodelabstractbytearraymodeliftest
   oktetacoretestutil testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY}
 )
 

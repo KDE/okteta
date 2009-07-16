@@ -33,7 +33,7 @@
 #include <QtGui/QWidget>
 
 namespace Okteta {
-class KByteArrayModel;
+class ByteArrayModel;
 }
 namespace Okteta {
 class ByteArrayColumnView;
@@ -193,7 +193,7 @@ class KByteArrayEdit : public QWidget, public KHE::BytesEditInterface,
     void copyAvailable( bool Really );
 
   private:
-    Okteta::KByteArrayModel *Model;
+    Okteta::ByteArrayModel *Model;
     Okteta::ByteArrayColumnView *View;
 };
 
