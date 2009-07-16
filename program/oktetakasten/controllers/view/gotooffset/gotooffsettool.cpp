@@ -26,7 +26,7 @@
 #include <kbytearraydisplay.h>
 #include <kbytearraydocument.h>
 // Okteta core
-#include <kbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 // KDE
 #include <KLocale>
 

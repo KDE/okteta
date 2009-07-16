@@ -35,7 +35,7 @@
 #include <bookmarkable.h>
 #include <bookmarksconstiterator.h>
 #include <bookmark.h>
-#include <kbytearraymodel.h>
+#include <abstractbytearraymodel.h>
 // KDE
 #include <KLocale>
 // Qt
