@@ -61,12 +61,18 @@ set( oktetacore_LIB_HDRS
   piecetablebytearraymodel.h
 #   filebytearraymodel.h
   bytearraymodel.h
+  bookmarkable.h
+  changesdescribable.h
+  changehistory.h
+  versionable.h
   arraychangemetrics.h
   bookmark.h
   bookmarksconstiterator.h
+  bookmarksconstiteratoradapter.h
   bytearraychange.h
   charcodec.h
   character.h
+  range.h
   section.h
   valuecodec.h
   wordbytearrayservice.h
