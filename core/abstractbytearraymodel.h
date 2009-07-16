@@ -26,7 +26,7 @@
 // lib
 #include "oktetacore_export.h"
 // commonlib
-#include <section.h>
+#include "section.h"
 // Qt
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
