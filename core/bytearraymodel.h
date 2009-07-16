@@ -59,9 +59,9 @@ class OKTETACORE_EXPORT ByteArrayModel : public AbstractByteArrayModel, public B
     virtual bool isModified() const;
 
     virtual int insert( int at, const char *data, int length );
-    virtual int remove( const Section &section );
-    virtual unsigned int replace( const Section &before, const char *after, unsigned int afterLength );
-    virtual bool swap( int firstStart, const Section &secondSection );
+    virtual int remove( const KDE::Section& section );
+    virtual unsigned int replace( const KDE::Section& before, const char* after, unsigned int afterLength );
+    virtual bool swap( int firstStart, const KDE::Section& secondSection );
     virtual int fill( const char fillChar, unsigned int from = 0, int length = -1 );
     virtual void setDatum( unsigned int offset, const char datum );
 

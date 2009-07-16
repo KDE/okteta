@@ -60,9 +60,9 @@ class PieceTableByteArrayModel::Private
     bool isModified() const;
 
     int insert( int offset, const char *insertData, int insertLength );
-    int remove( const Section &removeSection );
-    unsigned int replace( const Section &removeSection, const char *insertData, unsigned int insertLength );
-    bool swap( int firstStart, const Section &secondSection );
+    int remove( const KDE::Section& removeSection );
+    unsigned int replace( const KDE::Section& removeSection, const char* insertData, unsigned int insertLength );
+    bool swap( int firstStart, const KDE::Section& secondSection );
     int fill( const char fillByte, unsigned int Pos = 0, int fillLength = -1 );
     void setDatum( unsigned int offset, const char byte );
 
@@ -105,9 +105,9 @@ class PieceTableByteArrayModel::Private
 
   protected:
     void doInsertChange( unsigned int offset, const char* insertData, unsigned int insertLength );
-    void doRemoveChange( const Section& removeSection );
-    void doReplaceChange( const Section& removeSection, const char* insertData, unsigned int insertLength );
-    void doSwapChange( int firstStart, const Section& secondSection );
+    void doRemoveChange( const KDE::Section& removeSection );
+    void doReplaceChange( const KDE::Section& removeSection, const char* insertData, unsigned int insertLength );
+    void doSwapChange( int firstStart, const KDE::Section& secondSection );
     void doFillChange( unsigned int offset, unsigned int filledLength,
                        const char fillByte, unsigned int fillLength );
 

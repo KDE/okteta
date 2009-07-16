@@ -51,9 +51,9 @@ class ByteArrayModelPrivate
     bool isModified() const;
 
     int insert( int at, const char *data, int length );
-    int remove( const Section &section );
-    unsigned int replace( const Section &before, const char *after, unsigned int afterLength );
-    bool swap( int firstStart, const Section &secondSection );
+    int remove( const KDE::Section& section );
+    unsigned int replace( const KDE::Section& before, const char* after, unsigned int afterLength );
+    bool swap( int firstStart, const KDE::Section& secondSection );
     int fill( const char fillChar, unsigned int from = 0, int length = -1 );
     void setDatum( unsigned int offset, const char datum );
 

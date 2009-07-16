@@ -46,17 +46,15 @@ class FixedSizeByteArrayModel : public AbstractByteArrayModel
     virtual ~FixedSizeByteArrayModel();
 
   public: // AbstractByteArrayModel API
-    virtual bool prepareRange( const Section &Range ) const;
-    virtual const char *dataSet( const Section &S ) const;
     virtual char datum( unsigned int Offset ) const;
     virtual int size() const;
     virtual bool isReadOnly() const;
     virtual bool isModified() const;
 
     virtual int insert( int Pos, const char*, int Length );
-    virtual int remove( const Section &Remove );
-    virtual unsigned int replace( const Section &Remove, const char*, unsigned int InputLength );
-    virtual bool swap( int firstStart, const Section &secondSection );
+    virtual int remove( const KDE::Section& removeSection );
+    virtual unsigned int replace( const KDE::Section& removeSection, const char*, unsigned int inputLength );
+    virtual bool swap( int firstStart, const KDE::Section& secondSection );
     virtual int fill( const char FillChar, unsigned int Pos = 0, int Length = -1 );
     virtual void setDatum( unsigned int Offset, const char Char );
 
@@ -64,7 +62,7 @@ class FixedSizeByteArrayModel : public AbstractByteArrayModel
     virtual void setReadOnly( bool RO = true );
 
   public:
-    int compare( const AbstractByteArrayModel &Other, const Section &Range, unsigned int Pos = 0 );
+    int compare( const AbstractByteArrayModel &Other, const KDE::Section& range, unsigned int Pos = 0 );
     int compare( const AbstractByteArrayModel &Other, int OtherPos, int Length, unsigned int Pos = 0 );
     int compare( const AbstractByteArrayModel &Other );
 
@@ -90,9 +88,6 @@ class FixedSizeByteArrayModel : public AbstractByteArrayModel
 };
 
 
-inline bool FixedSizeByteArrayModel::prepareRange( const Section &) const { return true; }
-inline const char *FixedSizeByteArrayModel::dataSet( const Section &S ) const { return &Data[S.start()]; }
-
 inline char FixedSizeByteArrayModel::datum( unsigned int Offset ) const { return Data[Offset]; }
 inline int FixedSizeByteArrayModel::size() const  { return Size; }
 
@@ -103,10 +98,10 @@ inline void FixedSizeByteArrayModel::setReadOnly( bool RO )  { ReadOnly = RO; }
 inline void FixedSizeByteArrayModel::setModified( bool M )   { Modified = M; }
 
 inline int FixedSizeByteArrayModel::compare( const AbstractByteArrayModel &Other )
-{ return compare( Other, Section(0,Other.size()-1),0 ); }
+{ return compare( Other, KDE::Section(0,Other.size()-1),0 ); }
 
 inline int FixedSizeByteArrayModel::compare( const AbstractByteArrayModel &Other, int OtherPos, int Length, unsigned int Pos )
-{ return compare( Other, Section::fromWidth(OtherPos,Length),Pos ); }
+{ return compare( Other, KDE::Section::fromWidth(OtherPos,Length),Pos ); }
 
 inline char *FixedSizeByteArrayModel::rawData() const { return Data; }
 

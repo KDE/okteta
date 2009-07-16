@@ -124,12 +124,12 @@ int ByteArrayModelPrivate::insert( int position, const char* data, int length )
 }
 
 
-int ByteArrayModelPrivate::remove( const Section &section )
+int ByteArrayModelPrivate::remove( const KDE::Section& section )
 {
     if( m_readOnly )
         return 0;
 
-    Section removeSection( section );
+    KDE::Section removeSection( section );
     if( removeSection.startsBehind(m_size-1) || removeSection.width() == 0 )
         return 0;
 
@@ -152,12 +152,12 @@ int ByteArrayModelPrivate::remove( const Section &section )
 }
 
 
-unsigned int ByteArrayModelPrivate::replace( const Section &section, const char* data, unsigned int inputLength )
+unsigned int ByteArrayModelPrivate::replace( const KDE::Section& section, const char* data, unsigned int inputLength )
 {
     if( m_readOnly )
         return 0;
 
-    Section removeSection( section );
+    KDE::Section removeSection( section );
     // check all parameters
     if( removeSection.start() >= (int)m_size || (removeSection.width()==0 && inputLength==0) )
         return 0;
@@ -224,12 +224,12 @@ unsigned int ByteArrayModelPrivate::replace( const Section &section, const char*
 }
 
 
-bool ByteArrayModelPrivate::swap( int firstStart, const Section &secondSection )
+bool ByteArrayModelPrivate::swap( int firstStart, const KDE::Section& secondSection )
 {
     if( m_readOnly )
         return false;
 
-    Section sourceSection( secondSection );
+    KDE::Section sourceSection( secondSection );
     // check all parameters
     if( sourceSection.start() >= (int)m_size || sourceSection.width() == 0
         || firstStart > (int)m_size || sourceSection.start() == firstStart )

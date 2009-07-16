@@ -123,7 +123,7 @@ void PieceTableByteArrayModel::Private::setDatum( unsigned int offset, const cha
     mChangesDataStorage.append( storageOffset, byte );
 
     const KDE::ArrayChangeMetrics metrics =
-        ArrayChangeMetrics::asReplacement( offset, 1, 1 );
+        KDE::ArrayChangeMetrics::asReplacement( offset, 1, 1 );
     const ByteArrayChange modification( metrics, mChangesDataStorage.data(storageOffset,1) );
     QList<Okteta::ByteArrayChange> modificationsList;
     modificationsList.append( modification );
@@ -159,9 +159,9 @@ int PieceTableByteArrayModel::Private::insert( int offset, const char *insertDat
 
 
 //TODO: is anyone interested in the removed data? so we need a signal beforeRemoving(section)?
-int PieceTableByteArrayModel::Private::remove( const Section &_removeSection )
+int PieceTableByteArrayModel::Private::remove( const KDE::Section& _removeSection )
 {
-    Section removeSection( _removeSection );
+    KDE::Section removeSection( _removeSection );
     // correct parameters
     const int oldSize = mPieceTable.size();
     removeSection.restrictEndTo( oldSize-1 );
@@ -178,9 +178,9 @@ int PieceTableByteArrayModel::Private::remove( const Section &_removeSection )
     return removeSection.width();
 }
 
-unsigned int PieceTableByteArrayModel::Private::replace( const Section &r, const char *insertData, unsigned int insertLength )
+unsigned int PieceTableByteArrayModel::Private::replace( const KDE::Section& r, const char* insertData, unsigned int insertLength )
 {
-    Section removeSection( r );
+    KDE::Section removeSection( r );
     // correct parameters
     const int oldSize = mPieceTable.size();
     removeSection.restrictEndTo( oldSize-1 );
@@ -199,9 +199,9 @@ unsigned int PieceTableByteArrayModel::Private::replace( const Section &r, const
 }
 
 
-bool PieceTableByteArrayModel::Private::swap( int firstStart, const Section &second )
+bool PieceTableByteArrayModel::Private::swap( int firstStart, const KDE::Section& second )
 {
-    Section secondSection( second );
+    KDE::Section secondSection( second );
     // correct parameters
     secondSection.restrictEndTo( mPieceTable.size()-1 );
     // check parameters
@@ -291,12 +291,12 @@ QList<ByteArrayChange> PieceTableByteArrayModel::Private::changes( int firstVers
 
     for( int i=firstVersionIndex; i<lastVersionIndex; ++i )
     {
-        ArrayChangeMetrics metrics;
+        KDE::ArrayChangeMetrics metrics;
         int storageOffset;
         mPieceTable.getChangeData( &metrics, &storageOffset, i );
 
         QByteArray data;
-        if( metrics.type() == ArrayChangeMetrics::Replacement )
+        if( metrics.type() == KDE::ArrayChangeMetrics::Replacement )
             data = mChangesDataStorage.data( storageOffset, metrics.insertLength() );
         result.append( ByteArrayChange(metrics,data) );
     }
@@ -328,10 +328,10 @@ void PieceTableByteArrayModel::Private::doChanges( const QList<Okteta::ByteArray
         const KDE::ArrayChangeMetrics& metrics = change.metrics();
         switch( metrics.type() )
         {
-        case ArrayChangeMetrics::Replacement:
+        case KDE::ArrayChangeMetrics::Replacement:
         {
             const int oldSize = mPieceTable.size();
-            const Section removeSection = Section::fromWidth( metrics.offset(), metrics.removeLength() );
+            const KDE::Section removeSection = KDE::Section::fromWidth( metrics.offset(), metrics.removeLength() );
             // check parameters
             if( removeSection.startsBehind(oldSize-1) && (removeSection.width()>0) ) 
             {
@@ -343,9 +343,9 @@ void PieceTableByteArrayModel::Private::doChanges( const QList<Okteta::ByteArray
             doReplaceChange( removeSection, insertData.data(), insertData.size() );
             break;
         }
-        case ArrayChangeMetrics::Swapping:
+        case KDE::ArrayChangeMetrics::Swapping:
         {
-            const Section secondSection( metrics.secondStart(), metrics.secondEnd() );
+            const KDE::Section secondSection( metrics.secondStart(), metrics.secondEnd() );
             doSwapChange( metrics.offset(), secondSection );
             break;
         }
@@ -399,28 +399,28 @@ void PieceTableByteArrayModel::Private::doInsertChange( unsigned int offset,
 
     mBookmarksModified |= mBookmarks.adjustToReplaced( offset, 0, insertLength );
 
-    const KDE::ArrayChangeMetrics metrics = ArrayChangeMetrics::asReplacement( offset, 0, insertLength );
+    const KDE::ArrayChangeMetrics metrics = KDE::ArrayChangeMetrics::asReplacement( offset, 0, insertLength );
     const ByteArrayChange change( metrics, mChangesDataStorage.data(storageOffset,insertLength) );
 
     mChangeMetrics.append( metrics );
     mChanges.append( change );
 }
 
-void PieceTableByteArrayModel::Private::doRemoveChange( const Section& removeSection )
+void PieceTableByteArrayModel::Private::doRemoveChange( const KDE::Section& removeSection )
 {
     mPieceTable.remove( removeSection );
 
     mBookmarksModified |= mBookmarks.adjustToReplaced( removeSection.start(), removeSection.width(), 0 );
 
     const KDE::ArrayChangeMetrics metrics =
-        ArrayChangeMetrics::asReplacement( removeSection.start(), removeSection.width(), 0 );
+        KDE::ArrayChangeMetrics::asReplacement( removeSection.start(), removeSection.width(), 0 );
     const ByteArrayChange change( metrics );
 
     mChangeMetrics.append( metrics );
     mChanges.append( change );
 }
 
-void PieceTableByteArrayModel::Private::doReplaceChange( const Section& removeSection,
+void PieceTableByteArrayModel::Private::doReplaceChange( const KDE::Section& removeSection,
                                                           const char* insertData, unsigned int insertLength )
 {
     int storageOffset;
@@ -430,21 +430,21 @@ void PieceTableByteArrayModel::Private::doReplaceChange( const Section& removeSe
     mBookmarksModified |= mBookmarks.adjustToReplaced( removeSection.start(), removeSection.width(), insertLength );
 
     const KDE::ArrayChangeMetrics metrics =
-        ArrayChangeMetrics::asReplacement( removeSection.start(), removeSection.width(), insertLength );
+        KDE::ArrayChangeMetrics::asReplacement( removeSection.start(), removeSection.width(), insertLength );
     const ByteArrayChange change( metrics, mChangesDataStorage.data(storageOffset,insertLength) );
 
     mChangeMetrics.append( metrics );
     mChanges.append( change );
 }
 
-void PieceTableByteArrayModel::Private::doSwapChange( int firstStart, const Section& secondSection )
+void PieceTableByteArrayModel::Private::doSwapChange( int firstStart, const KDE::Section& secondSection )
 {
     mPieceTable.swap( firstStart, secondSection );
 
     mBookmarksModified |= mBookmarks.adjustToSwapped( firstStart, secondSection.start(),secondSection.width() );
 
     const KDE::ArrayChangeMetrics metrics =
-        ArrayChangeMetrics::asSwapping( firstStart, secondSection.start(), secondSection.width() );
+        KDE::ArrayChangeMetrics::asSwapping( firstStart, secondSection.start(), secondSection.width() );
     const ByteArrayChange change( metrics );
 
     mChangeMetrics.append( metrics );
@@ -460,7 +460,7 @@ void PieceTableByteArrayModel::Private::doFillChange( unsigned int offset, unsig
     mChangesDataStorage.appendFill( storageOffset, fillByte, fillLength );
 
     const KDE::ArrayChangeMetrics metrics =
-        ArrayChangeMetrics::asReplacement( offset, fillLength, fillLength );
+        KDE::ArrayChangeMetrics::asReplacement( offset, fillLength, fillLength );
     const ByteArrayChange change( metrics );
 
     mChangeMetrics.append( metrics );

@@ -94,9 +94,9 @@ int FixedSizeByteArrayModel::insert( int Pos, const char* D, int InputLength )
 }
 
 
-int FixedSizeByteArrayModel::remove( const Section &R )
+int FixedSizeByteArrayModel::remove( const KDE::Section& R )
 {
-  Section Remove( R );
+  KDE::Section Remove( R );
   if( Remove.start() >= (int)Size || Remove.width() == 0 )
     return 0;
 
@@ -118,9 +118,9 @@ int FixedSizeByteArrayModel::remove( const Section &R )
 }
 
 
-unsigned int FixedSizeByteArrayModel::replace( const Section &R, const char* D, unsigned int InputLength )
+unsigned int FixedSizeByteArrayModel::replace( const KDE::Section& R, const char* D, unsigned int InputLength )
 {
-  Section Remove( R );
+  KDE::Section Remove( R );
   // check all parameters
   if( Remove.startsBehind( Size-1 ) || (Remove.width()==0 && InputLength==0) )
     return 0;
@@ -159,9 +159,9 @@ unsigned int FixedSizeByteArrayModel::replace( const Section &R, const char* D, 
 }
 
 
-bool FixedSizeByteArrayModel::swap( int firstStart, const Section &secondSection )
+bool FixedSizeByteArrayModel::swap( int firstStart, const KDE::Section& secondSection )
 {
-  Section SourceSection( secondSection );
+  KDE::Section SourceSection( secondSection );
   // check all parameters
   if( SourceSection.start() >= (int)Size || SourceSection.width() == 0
       || firstStart > (int)Size || SourceSection.start() == firstStart )
@@ -253,9 +253,9 @@ int FixedSizeByteArrayModel::fill( const char FChar, unsigned int Pos, int FillL
 }
 
 
-int FixedSizeByteArrayModel::compare( const AbstractByteArrayModel &Other, const Section &OR, unsigned int Pos )
+int FixedSizeByteArrayModel::compare( const AbstractByteArrayModel &Other, const KDE::Section& OR, unsigned int Pos )
 {
-  Section OtherRange( OR );
+  KDE::Section OtherRange( OR );
   //kDebug() << QString("Pos: %1, OtherRange: (%3/%4)" ).arg(Pos).arg(OtherRange.start()).arg(OtherRange.end())
   //    << endl;
   // test other values
@@ -268,7 +268,7 @@ int FixedSizeByteArrayModel::compare( const AbstractByteArrayModel &Other, const
 
   int ValueByLength = 0; // default: equal
 
-  Section Range = Section::fromWidth( Pos, OtherRange.width() );
+  KDE::Section Range = KDE::Section::fromWidth( Pos, OtherRange.width() );
   int Last = Other.size()-1;
   // 
   if( OtherRange.endsBehind(Last) )

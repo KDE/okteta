@@ -44,16 +44,16 @@ int AbstractByteArrayModel::insert( int offset, const char *insertData, int inse
 }
 
 
-int AbstractByteArrayModel::remove( const Section &removeSection )
+int AbstractByteArrayModel::remove( const KDE::Section& removeSection )
 {
     replace( removeSection, 0, 0 );
     return removeSection.width(); // TODO: check if this is true
 }
 
 
-int AbstractByteArrayModel::copyTo( char *dest, const Section &cS ) const
+int AbstractByteArrayModel::copyTo( char *dest, const KDE::Section& cS ) const
 {
-    Section copySection( cS );
+    KDE::Section copySection( cS );
     copySection.restrictEndTo( size()-1 );
 
     for( int i=copySection.start(); i<=copySection.end(); ++i )

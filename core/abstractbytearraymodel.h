@@ -36,8 +36,6 @@ namespace KDE {
 class ArrayChangeMetricsList;
 }
 
-using namespace KDE; // TODO: remove me
-
 namespace Okteta
 {
 
@@ -154,7 +152,7 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
       * @param removeSection
       * @return length of removed data
       */
-    virtual int remove( const Section &removeSection );
+    virtual int remove( const KDE::Section& removeSection );
     /** convenience function, behaves as above */
     int remove( int offset, int removeLength );
 
@@ -164,9 +162,9 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
       * @param insertLength
       * @return length of inserted data
       */
-    virtual unsigned int replace( const Section &removeSection, const char *insertData, unsigned int insertLength ) = 0;
+    virtual unsigned int replace( const KDE::Section& removeSection, const char* insertData, unsigned int insertLength ) = 0;
     /** convenience function, behaves as above */
-    unsigned int replace( const Section &removeSection, const QByteArray &insertData );
+    unsigned int replace( const KDE::Section& removeSection, const QByteArray& insertData );
     /** convenience function, behaves as above */
     unsigned int replace( unsigned int offset, unsigned int removeLength,
                           const char *insertData, unsigned int insertLength );
@@ -178,7 +176,7 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
       * @param secondSection data section to be moved
       * @return @true if operation was successful, @false otherwise
       */
-    virtual bool swap( int firstStart, const Section &secondSection ) = 0;
+    virtual bool swap( int firstStart, const KDE::Section& secondSection ) = 0;
 
     /**
      * fills the buffer with the FillChar. If the buffer is to small it will be extended as much as possible.
@@ -188,7 +186,7 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
      * @return number of filled characters
      */
     virtual int fill( const char fillChar, unsigned int offset = 0, int fillLength = -1 ) = 0;
-    int fill( const char fillChar, const Section &fillSection );
+    int fill( const char fillChar, const KDE::Section& fillSection );
 
     /** sets a single byte
      * if the offset is not valid the behaviour is undefined
@@ -216,7 +214,7 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
       * @param copySection
       * @return number of copied bytes
       */
-    virtual int copyTo( char *dest, const Section &copySection ) const;
+    virtual int copyTo( char *dest, const KDE::Section& copySection ) const;
     /** convenience function, behaves as above */
     int copyTo( char *dest, int offset, unsigned int copyLength ) const;
 
@@ -264,20 +262,20 @@ inline int AbstractByteArrayModel::insert( int Pos, const QByteArray &Source )
 { return insert( Pos, Source.data(), Source.size() ); }
 
 inline int AbstractByteArrayModel::remove( int Pos, int Length )
-{ return remove( Section(Pos,Pos+Length-1) ); }
+{ return remove( KDE::Section(Pos,Pos+Length-1) ); }
 
-inline unsigned int AbstractByteArrayModel::replace( const Section &DestSection, const QByteArray &Source )
-{ return replace( DestSection, Source.data(), Source.size() );}
+inline unsigned int AbstractByteArrayModel::replace( const KDE::Section& destSection, const QByteArray& source )
+{ return replace( destSection, source.data(), source.size() );}
 
 inline unsigned int AbstractByteArrayModel::replace( unsigned int Pos, unsigned int RemoveLength,
                                  const char* D, unsigned int InputLength )
-{ return replace( Section(Pos,Pos+RemoveLength-1), D, InputLength ); }
+{ return replace( KDE::Section(Pos,Pos+RemoveLength-1), D, InputLength ); }
 
-inline int AbstractByteArrayModel::fill( const char FillChar, const Section &Section )
-{ return fill( FillChar, Section.start(), Section.width() ); }
+inline int AbstractByteArrayModel::fill( const char FillChar, const KDE::Section& section )
+{ return fill( FillChar, section.start(), section.width() ); }
 
 inline int AbstractByteArrayModel::copyTo( char *dest, int offset, unsigned int copyLength ) const
-{ return copyTo( dest, Section::fromWidth(offset,copyLength) ); }
+{ return copyTo( dest, KDE::Section::fromWidth(offset,copyLength) ); }
 
 inline int AbstractByteArrayModel::indexOf( const QByteArray& Data, int From ) const
 { return indexOf( Data.constData(), Data.size(), From ); }

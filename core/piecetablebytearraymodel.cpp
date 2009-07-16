@@ -72,17 +72,17 @@ int PieceTableByteArrayModel::insert( int at, const char *data, int length )
     return d->insert( at, data, length );
 }
 
-int PieceTableByteArrayModel::remove( const Section &section )
+int PieceTableByteArrayModel::remove( const KDE::Section& section )
 {
     return d->remove( section );
 }
 
-unsigned int PieceTableByteArrayModel::replace( const Section &before, const char *after, unsigned int afterLength )
+unsigned int PieceTableByteArrayModel::replace( const KDE::Section& before, const char* after, unsigned int afterLength )
 {
     return d->replace( before, after, afterLength );
 }
 
-bool PieceTableByteArrayModel::swap( int firstStart, const Section &secondSection )
+bool PieceTableByteArrayModel::swap( int firstStart, const KDE::Section& secondSection )
 {
     return d->swap( firstStart, secondSection );
 }

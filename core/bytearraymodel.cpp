@@ -66,7 +66,7 @@ bool ByteArrayModel::autoDelete()  const { return d->autoDelete(); }
 void ByteArrayModel::signalContentsChanged( int start, int end )
 {
     const int length = end - start + 1;
-    emit contentsChanged( ArrayChangeMetricsList::oneReplacement(start,length,length) );
+    emit contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(start,length,length) );
 }
 
 
@@ -80,17 +80,17 @@ int ByteArrayModel::insert( int at, const char *data, int length )
     return d->insert( at, data, length );
 }
 
-int ByteArrayModel::remove( const Section &section )
+int ByteArrayModel::remove( const KDE::Section& section )
 {
     return d->remove( section );
 }
 
-unsigned int ByteArrayModel::replace( const Section &before, const char *after, unsigned int afterLength )
+unsigned int ByteArrayModel::replace( const KDE::Section& before, const char* after, unsigned int afterLength )
 {
     return d->replace( before, after, afterLength );
 }
 
-bool ByteArrayModel::swap( int firstStart, const Section &secondSection )
+bool ByteArrayModel::swap( int firstStart, const KDE::Section& secondSection )
 {
     return d->swap( firstStart, secondSection );
 }
