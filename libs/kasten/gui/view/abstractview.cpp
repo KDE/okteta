@@ -20,31 +20,6 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KDOCUMENTMANAGERTEST_H
-#define KDOCUMENTMANAGERTEST_H
+#include "abstractview.h"
 
-// Qt
-#include <QtCore/QObject>
-
-namespace Kasten {
-class KAbstractDocument;
-}
-class QSignalSpy;
-
-
-class KDocumentManagerTest : public QObject
-{
-  Q_OBJECT
-
-  private:
-    void checkAdded( QSignalSpy *changedSpy, Kasten::KAbstractDocument *document );
-    void checkRemoving( QSignalSpy *changedSpy, Kasten::KAbstractDocument *document );
-
-  private Q_SLOTS: // test functions
-    void testConstructor();
-    void testAddRemove();
-    void testCanClose();
-
-};
-
-#endif
+#include "abstractview.moc"

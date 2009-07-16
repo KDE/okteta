@@ -35,7 +35,7 @@ FileSystemBrowserToolView::FileSystemBrowserToolView( FileSystemBrowserTool *too
 {
 }
 
-QWidget *FileSystemBrowserToolView::widget()    const { return mWidget; }
+QWidget* FileSystemBrowserToolView::widget()    const { return mWidget; }
 QString FileSystemBrowserToolView::title()      const { return mWidget->tool()->title(); }
 AbstractTool *FileSystemBrowserToolView::tool() const { return mWidget->tool(); }
 

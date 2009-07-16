@@ -49,7 +49,7 @@ class UserListable
     virtual QList<Person> userList() const = 0;
 
   public: // set/action
-//     virtual void setVersion( KDocumentVersionId id ) = 0;
+//     virtual void setVersion( DocumentVersionId id ) = 0;
 //     virtual void revertToVersionByIndex( int versionIndex ) = 0;
 
   public: // signal

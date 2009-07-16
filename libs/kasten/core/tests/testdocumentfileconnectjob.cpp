@@ -37,7 +37,7 @@ namespace Kasten
 {
 
 TestDocumentFileConnectJob::TestDocumentFileConnectJob( TestDocumentFileSynchronizer *synchronizer,
-                                                        KAbstractDocument *document,
+                                                        AbstractDocument* document,
                                                         const KUrl &url,
                                                         AbstractModelSynchronizer::ConnectOption option )
  : AbstractFileSystemConnectJob( synchronizer, document, url, option )
@@ -47,7 +47,7 @@ TestDocumentFileConnectJob::TestDocumentFileConnectJob( TestDocumentFileSynchron
 void TestDocumentFileConnectJob::startConnectWithFile()
 {
     TestDocumentFileSynchronizer *testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>( synchronizer() );
-    TestDocument *testDocument = qobject_cast<TestDocument*>( document() );
+    TestDocument* testDocument = qobject_cast<TestDocument*>( document() );
     TestDocumentFileWriteThread *writeThread =
         new TestDocumentFileWriteThread( this, testSynchronizer->header(), testDocument, workFilePath() );
 

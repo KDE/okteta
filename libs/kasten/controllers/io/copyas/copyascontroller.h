@@ -36,8 +36,8 @@ class QAction;
 namespace Kasten
 {
 
-class KViewManager;
-class KDocumentManager;
+class ViewManager;
+class DocumentManager;
 namespace If {
 class DataSelectable;
 }
@@ -48,7 +48,7 @@ class KASTENCONTROLLER_EXPORT CopyAsController : public AbstractXmlGuiController
   Q_OBJECT
 
   public:
-    CopyAsController( KViewManager* viewManager, KDocumentManager* documentManager, KXMLGUIClient* guiClient );
+    CopyAsController( ViewManager* viewManager, DocumentManager* documentManager, KXMLGUIClient* guiClient );
 
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
@@ -58,8 +58,8 @@ class KASTENCONTROLLER_EXPORT CopyAsController : public AbstractXmlGuiController
     void onActionTriggered( QAction *action );
 
   protected:
-    KViewManager* mViewManager;
-    KDocumentManager *mDocumentManager;
+    ViewManager* mViewManager;
+    DocumentManager* mDocumentManager;
     KXMLGUIClient *mGuiClient;
 
     AbstractModel* mModel;

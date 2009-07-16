@@ -23,7 +23,7 @@
 #include "closecontroller.h"
 
 // Kasten core
-#include <kdocumentmanager.h>
+#include <documentmanager.h>
 // KDE
 #include <KActionCollection>
 #include <KAction>
@@ -34,7 +34,7 @@
 namespace Kasten
 {
 
-CloseController::CloseController( KDocumentManager* documentManager, KXMLGUIClient* guiClient )
+CloseController::CloseController( DocumentManager* documentManager, KXMLGUIClient* guiClient )
 : mDocumentManager( documentManager )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
@@ -45,7 +45,7 @@ CloseController::CloseController( KDocumentManager* documentManager, KXMLGUIClie
 
 void CloseController::setTargetModel( AbstractModel* model )
 {
-    mDocument = model ? model->findBaseModel<KAbstractDocument*>() : 0;
+    mDocument = model ? model->findBaseModel<AbstractDocument*>() : 0;
     const bool hasDocument = ( mDocument != 0 );
 
     mCloseAction->setEnabled( hasDocument );

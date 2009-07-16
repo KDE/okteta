@@ -23,8 +23,8 @@
 #include "versionviewtool.h"
 
 // Kasten core
-#include <kiversionable.h>
-#include <kabstractdocument.h>
+#include <versionable.h>
+#include <abstractdocument.h>
 // KDE
 #include <KLocale>
 

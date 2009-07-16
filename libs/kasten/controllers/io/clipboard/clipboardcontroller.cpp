@@ -23,8 +23,8 @@
 #include "clipboardcontroller.h"
 
 // Kasten gui
-#include <kidataselectable.h>
-#include <kiselecteddatawriteable.h>
+#include <dataselectable.h>
+#include <selecteddatawriteable.h>
 // Kasten core
 #include <abstractmodel.h>
 // KDE

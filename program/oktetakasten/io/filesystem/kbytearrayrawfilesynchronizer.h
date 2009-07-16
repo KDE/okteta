@@ -43,15 +43,15 @@ class KByteArrayRawFileSynchronizer : public AbstractModelFileSystemSynchronizer
     KByteArrayRawFileSynchronizer();
 
   public: // AbstractModelSynchronizer API
-    virtual void startOffering( KAbstractDocument* document );
+    virtual void startOffering( AbstractDocument* document );
     virtual AbstractLoadJob *startLoad( const KUrl &url );
     virtual AbstractSyncToRemoteJob *startSyncToRemote();
     virtual AbstractSyncFromRemoteJob *startSyncFromRemote();
     virtual AbstractSyncWithRemoteJob *startSyncWithRemote( const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
-    virtual AbstractConnectJob *startConnect( KAbstractDocument *document,
+    virtual AbstractConnectJob *startConnect( AbstractDocument* document,
                                               const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
 
-    virtual KAbstractDocument *document() const;
+    virtual AbstractDocument* document() const;
 
   protected:
     void setDocument( KByteArrayDocument *document );

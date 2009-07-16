@@ -39,7 +39,7 @@ namespace Kasten
 namespace If {
 class ViewFocusable;
 }
-class KViewManager;
+class ViewManager;
 
 
 class KASTENCONTROLLER_EXPORT ViewListMenuController : public AbstractXmlGuiController
@@ -47,7 +47,7 @@ class KASTENCONTROLLER_EXPORT ViewListMenuController : public AbstractXmlGuiCont
   Q_OBJECT
 
   public:
-    ViewListMenuController( KViewManager* viewManager, If::ViewFocusable* focusable, KXMLGUIClient* guiClient );
+    ViewListMenuController( ViewManager* viewManager, If::ViewFocusable* focusable, KXMLGUIClient* guiClient );
 
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
@@ -57,7 +57,7 @@ class KASTENCONTROLLER_EXPORT ViewListMenuController : public AbstractXmlGuiCont
     void onActionTriggered( QAction *action );
 
   protected:
-    KViewManager *mViewManager;
+    ViewManager *mViewManager;
     If::ViewFocusable *mFocusable;
     KXMLGUIClient* mGuiClient;
 

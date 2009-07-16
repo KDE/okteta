@@ -56,7 +56,7 @@ InfoController::InfoController( KXmlGuiWindow *window )
     setView( 0 );
 }
 
-void InfoController::setView( KAbstractView *view )
+void InfoController::setView( AbstractView *view )
 {
     mTool->setView( view );
 }

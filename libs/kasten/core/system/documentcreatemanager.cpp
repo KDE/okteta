@@ -20,32 +20,41 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KABSTRACTDOCUMENTFACTORY_H
-#define KABSTRACTDOCUMENTFACTORY_H
+#include "documentcreatemanager.h"
 
 // lib
-#include "kastencore_export.h"
-// Qt
-#include <QtCore/QObject>
+#include "abstractdocumentfactory.h"
+#include "documentmanager.h"
 
 
 namespace Kasten
 {
 
-class KAbstractDocument;
+DocumentCreateManager::DocumentCreateManager( DocumentManager* manager )
+ : mManager( manager ), mFactory( 0 ) {}
 
-
-class KASTENCORE_EXPORT KAbstractDocumentFactory : public QObject
+void DocumentCreateManager::setWidget( QWidget* widget )
 {
-  Q_OBJECT
-
-  public:
-    virtual ~KAbstractDocumentFactory();
-
-  public: // API to be implemented
-    virtual KAbstractDocument *create() = 0;
-};
-
+    mWidget = widget;
 }
 
-#endif
+void DocumentCreateManager::setDocumentFactory( AbstractDocumentFactory* factory )
+{
+    mFactory = factory;
+}
+
+
+void DocumentCreateManager::createNew()
+{
+    AbstractDocument* document = mFactory->create();
+    if( document )
+        mManager->addDocument( document );
+}
+
+
+DocumentCreateManager::~DocumentCreateManager()
+{
+    delete mFactory;
+}
+
+}

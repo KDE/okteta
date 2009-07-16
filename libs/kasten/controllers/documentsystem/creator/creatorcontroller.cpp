@@ -23,7 +23,7 @@
 #include "creatorcontroller.h"
 
 // Kasten core
-#include <kdocumentcreatemanager.h>
+#include <documentcreatemanager.h>
 // KDE
 #include <KActionCollection>
 #include <KStandardAction>
@@ -33,7 +33,7 @@
 namespace Kasten
 {
 
-CreatorController::CreatorController( KDocumentCreateManager* createManager, KXMLGUIClient* guiClient )
+CreatorController::CreatorController( DocumentCreateManager* createManager, KXMLGUIClient* guiClient )
 : mCreateManager( createManager )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();

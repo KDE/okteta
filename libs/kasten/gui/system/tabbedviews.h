@@ -26,8 +26,8 @@
 
 // lib
 #include "abstractgroupedviews.h"
-#include "kiviewfocusable.h"
-#include "kitoolinlineviewable.h"
+#include "viewfocusable.h"
+#include "toolinlineviewable.h"
 
 class KTabWidget;
 class QDragMoveEvent;
@@ -54,18 +54,18 @@ class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews, public If::Vie
     virtual void setCurrentToolInlineView( AbstractToolInlineView* view );
 
   public: // If::ViewFocusable API
-    virtual void setViewFocus( KAbstractView *view );
-    virtual KAbstractView *viewFocus() const;
+    virtual void setViewFocus( AbstractView *view );
+    virtual AbstractView *viewFocus() const;
 
   public: // AbstractGroupedViews API
-    virtual void addView( KAbstractView *view );
-    virtual void removeView( KAbstractView *view );
+    virtual void addView( AbstractView *view );
+    virtual void removeView( AbstractView *view );
 
-    virtual QWidget *widget() const;
-    virtual QList<KAbstractView*> viewList() const;
+    virtual QWidget* widget() const;
+    virtual QList<AbstractView*> viewList() const;
 
   Q_SIGNALS:
-    virtual void viewFocusChanged( Kasten::KAbstractView* view );
+    virtual void viewFocusChanged( Kasten::AbstractView* view );
     void dragMove( const QDragMoveEvent* event, bool& accepted );
     void drop( QDropEvent* event );
 
@@ -73,10 +73,10 @@ class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews, public If::Vie
     void onCurrentChanged( int index );
     void onCloseRequest( QWidget* widget );
     void onTitleChanged( const QString &newTitle );
-//     void onModifiedChanged( Kasten::KAbstractDocument::SynchronizationStates newStates );
+//     void onModifiedChanged( Kasten::AbstractDocument::SynchronizationStates newStates );
 
   protected:
-    int indexOf( KAbstractView* view ) const;
+    int indexOf( AbstractView* view ) const;
 
   protected:
     TabbedViewsBox* mTabbedViewsBox;

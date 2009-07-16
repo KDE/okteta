@@ -37,7 +37,7 @@ void KByteArrayDocumentFactoryTest::testCreate()
 {
     KByteArrayDocumentFactory *factory = new KByteArrayDocumentFactory();
 
-    KAbstractDocument *document = factory->create();
+    AbstractDocument* document = factory->create();
     KByteArrayDocument *byteArrayDocument = qobject_cast<KByteArrayDocument *>( document );
 
     QVERIFY( document != 0 );

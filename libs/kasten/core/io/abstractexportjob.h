@@ -32,7 +32,7 @@
 namespace Kasten
 {
 
-class KAbstractDocument;
+class AbstractDocument;
 
 
 class KASTENCORE_EXPORT AbstractExportJob : public KJob
@@ -44,15 +44,15 @@ class KASTENCORE_EXPORT AbstractExportJob : public KJob
     virtual ~AbstractExportJob();
 
   public:
-    KAbstractDocument *document() const;
+    AbstractDocument* document() const;
 
   Q_SIGNALS:
-    void documentLoaded( Kasten::KAbstractDocument* document );
+    void documentLoaded( Kasten::AbstractDocument* document );
 
   protected:
     // emits documentLoaded()
     // TODO: or better name property LoadedDocument?
-    virtual void setDocument( KAbstractDocument *document );
+    virtual void setDocument( AbstractDocument* document );
 
   protected:
     class Private;

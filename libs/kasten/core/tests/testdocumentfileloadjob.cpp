@@ -50,7 +50,7 @@ void TestDocumentFileLoadJob::startLoadFromFile()
     while( !loadThread->wait(100) )
         QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
 
-    TestDocument *document = loadThread->document();
+    TestDocument* document = loadThread->document();
     testSynchronizer->setDocument( document );
 
     delete loadThread;

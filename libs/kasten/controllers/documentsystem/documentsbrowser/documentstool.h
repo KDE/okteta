@@ -31,8 +31,8 @@
 namespace Kasten
 {
 
-class KDocumentManager;
-class KAbstractDocument;
+class DocumentManager;
+class AbstractDocument;
 
 
 class KASTENCONTROLLER_EXPORT DocumentsTool : public AbstractTool
@@ -40,33 +40,33 @@ class KASTENCONTROLLER_EXPORT DocumentsTool : public AbstractTool
   Q_OBJECT
 
   public:
-    explicit DocumentsTool( KDocumentManager* documentManager );
+    explicit DocumentsTool( DocumentManager* documentManager );
     virtual ~DocumentsTool();
 
   public:
-    KAbstractDocument* focussedDocument() const;
-    QList<KAbstractDocument*> documents() const;
+    AbstractDocument* focussedDocument() const;
+    QList<AbstractDocument*> documents() const;
 
   public:
-    void setFocussedDocument( KAbstractDocument* document );
+    void setFocussedDocument( AbstractDocument* document );
 
   public: // AbstractTool API
     virtual QString title() const;
     virtual void setTargetModel( AbstractModel* model );
 
   Q_SIGNALS:
-    void documentAdded( Kasten::KAbstractDocument* document );
-    void documentClosing( Kasten::KAbstractDocument* document );
-    void focussedDocumentChanged( Kasten::KAbstractDocument* document );
+    void documentAdded( Kasten::AbstractDocument* document );
+    void documentClosing( Kasten::AbstractDocument* document );
+    void focussedDocumentChanged( Kasten::AbstractDocument* document );
 
   protected: // sources
-    KDocumentManager* mDocumentManager;
+    DocumentManager* mDocumentManager;
 
-    KAbstractDocument* mFocussedDocument;
+    AbstractDocument* mFocussedDocument;
 };
 
 
-inline KAbstractDocument* DocumentsTool::focussedDocument() const { return mFocussedDocument; }
+inline AbstractDocument* DocumentsTool::focussedDocument() const { return mFocussedDocument; }
 
 }
 

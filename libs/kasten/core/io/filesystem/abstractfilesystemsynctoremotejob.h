@@ -52,7 +52,7 @@ class KASTENCORE_EXPORT AbstractFileSystemSyncToRemoteJob : public AbstractSyncT
   protected:
     AbstractModelFileSystemSynchronizer* synchronizer() const;
     QString workFilePath() const;
-    QWidget *widget() const;
+    QWidget* widget() const;
 
   protected:
     void completeWrite( bool success );

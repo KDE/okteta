@@ -30,18 +30,18 @@
 namespace Kasten
 {
 
-ModelEncoderFileSystemExporter::ModelEncoderFileSystemExporter( AbstractModelStreamEncoder *encoder )
+ModelEncoderFileSystemExporter::ModelEncoderFileSystemExporter( AbstractModelStreamEncoder* encoder )
 : AbstractModelExporter(encoder->remoteTypeName(),encoder->remoteMimeType()), mEncoder( encoder )
 {}
 
-AbstractExportJob *ModelEncoderFileSystemExporter::startExport( AbstractModel *model,
-                                                                const AbstractModelSelection *selection,
+AbstractExportJob* ModelEncoderFileSystemExporter::startExport( AbstractModel* model,
+                                                                const AbstractModelSelection* selection,
                                                                 const KUrl &url )
 {
     return new ModelEncoderFileSystemExportJob( model, selection, url, mEncoder );
 }
 
-QString ModelEncoderFileSystemExporter::modelTypeName( AbstractModel *model, const AbstractModelSelection *selection ) const
+QString ModelEncoderFileSystemExporter::modelTypeName( AbstractModel* model, const AbstractModelSelection* selection ) const
 {
     return mEncoder->modelTypeName( model, selection );
 }

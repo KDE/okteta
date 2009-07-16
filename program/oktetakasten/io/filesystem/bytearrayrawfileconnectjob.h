@@ -39,7 +39,7 @@ class ByteArrayRawFileConnectJob : public AbstractFileSystemConnectJob
   Q_OBJECT
 
   public:
-    ByteArrayRawFileConnectJob( KByteArrayRawFileSynchronizer *synchronizer, KAbstractDocument *document,
+    ByteArrayRawFileConnectJob( KByteArrayRawFileSynchronizer *synchronizer, AbstractDocument* document,
                                 const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
     virtual ~ByteArrayRawFileConnectJob();
 

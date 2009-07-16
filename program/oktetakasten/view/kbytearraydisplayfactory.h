@@ -25,16 +25,16 @@
 
 
 // Kasten gui
-#include <kviewfactory.h>
+#include <abstractviewfactory.h>
 
 
 namespace Kasten
 {
 
-class KByteArrayDisplayFactory : public KViewFactory
+class KByteArrayDisplayFactory : public AbstractViewFactory
 {
   public:
-    virtual KAbstractView *createViewFor( KAbstractDocument *Document );
+    virtual AbstractView *createViewFor( AbstractDocument* Document );
 };
 
 

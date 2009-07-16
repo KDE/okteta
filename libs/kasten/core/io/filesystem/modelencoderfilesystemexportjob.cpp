@@ -35,27 +35,27 @@ namespace Kasten
 class ModelEncoderFileSystemExportJob::Private
 {
   public:
-    Private( AbstractModelStreamEncoder *encoder );
+    Private( AbstractModelStreamEncoder* encoder );
 
   public:
-    AbstractModelStreamEncoder *encoder() const;
+    AbstractModelStreamEncoder* encoder() const;
 
   protected:
-    AbstractModelStreamEncoder * const mEncoder;
+    AbstractModelStreamEncoder*  const mEncoder;
 };
 
-ModelEncoderFileSystemExportJob::Private::Private( AbstractModelStreamEncoder *encoder )
+ModelEncoderFileSystemExportJob::Private::Private( AbstractModelStreamEncoder* encoder )
  : mEncoder( encoder )
 {}
 
-inline AbstractModelStreamEncoder *ModelEncoderFileSystemExportJob::Private::encoder() const { return mEncoder; }
+inline AbstractModelStreamEncoder* ModelEncoderFileSystemExportJob::Private::encoder() const { return mEncoder; }
 
 
 
-ModelEncoderFileSystemExportJob::ModelEncoderFileSystemExportJob( AbstractModel *model,
-                                                                  const AbstractModelSelection *selection,
+ModelEncoderFileSystemExportJob::ModelEncoderFileSystemExportJob( AbstractModel* model,
+                                                                  const AbstractModelSelection* selection,
                                                                   const KUrl &url,
-                                                                  AbstractModelStreamEncoder *encoder )
+                                                                  AbstractModelStreamEncoder* encoder )
  : AbstractFileSystemExportJob(model,selection,url), d( new Private(encoder) )
 {}
 

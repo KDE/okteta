@@ -26,9 +26,9 @@
 
 // lib
 #include "abstractgroupedviews.h"
-#include "kiviewfocusable.h"
+#include "viewfocusable.h"
 
-class KViewManager;
+class ViewManager;
 class ParallelWidget;
 class QHBoxLayout;
 
@@ -39,29 +39,29 @@ class ParallelViews : public AbstractGroupedViews, public If::ViewFocusable
    Q_INTERFACES( Kasten::If::ViewFocusable )
 
   public:
-    explicit ParallelViews( KViewManager* viewManager );
+    explicit ParallelViews( ViewManager* viewManager );
     virtual ~ParallelViews();
 
   public: // If::ViewFocusable API
-    virtual void setViewFocus( KAbstractView* view );
-    virtual KAbstractView* viewFocus() const;
+    virtual void setViewFocus( AbstractView* view );
+    virtual AbstractView* viewFocus() const;
 
   public: // AbstractGroupedViews API
-    virtual void addView( KAbstractView* view );
-    virtual void removeView( KAbstractView* view );
+    virtual void addView( AbstractView* view );
+    virtual void removeView( AbstractView* view );
 
     virtual QWidget* widget() const;
 
 
   Q_SIGNALS:
-    virtual void viewFocusChanged( KAbstractView* view );
+    virtual void viewFocusChanged( AbstractView* view );
 
   private Q_SLOTS:
     void onCurrentChanged( QWidget* widget );
     void onTitleChanged( const QString& newTitle );
 
   protected:
-    KViewManager* mViewManager;
+    ViewManager* mViewManager;
     ParallelWidget* mParallelWidget;
 };
 

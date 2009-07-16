@@ -47,7 +47,7 @@ class KASTENCORE_EXPORT AbstractFileSystemLoadJob : public AbstractLoadJob
     virtual void start();
 
   protected: // AbstractLoadJob API
-    virtual void setDocument( KAbstractDocument *document );
+    virtual void setDocument( AbstractDocument* document );
 
   protected: // API to be implemented
     virtual void startLoadFromFile() = 0;
@@ -58,7 +58,7 @@ class KASTENCORE_EXPORT AbstractFileSystemLoadJob : public AbstractLoadJob
   protected:
     AbstractModelFileSystemSynchronizer* synchronizer() const;
     QString workFilePath() const;
-    QWidget *widget() const;
+    QWidget* widget() const;
 
   protected:
     class Private;

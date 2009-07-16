@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kviewmanager.h"
+#include "viewmanager.h"
 
 // lib
-#include "kviewfactory.h"
+#include "abstractviewfactory.h"
 #include "dummyview.h"
-#include "kdocumentmanager.h"
+#include "documentmanager.h"
 // KDE
 #include <KXmlGuiWindow>
 // Qt
@@ -39,37 +39,37 @@
 namespace Kasten
 {
 
-KViewManager::KViewManager( KDocumentManager *documentManager )
+ViewManager::ViewManager( DocumentManager* documentManager )
  : mDocumentManager( documentManager ),
    mCodecViewManager( new ModelCodecViewManager() )
 {
-    connect( mDocumentManager, SIGNAL(added( Kasten::KAbstractDocument* )), SLOT(createViewFor( Kasten::KAbstractDocument* )) );
-    connect( mDocumentManager, SIGNAL(closing( Kasten::KAbstractDocument* )), SLOT(removeViewsFor( Kasten::KAbstractDocument* )) );
+    connect( mDocumentManager, SIGNAL(added( Kasten::AbstractDocument* )), SLOT(createViewFor( Kasten::AbstractDocument* )) );
+    connect( mDocumentManager, SIGNAL(closing( Kasten::AbstractDocument* )), SLOT(removeViewsFor( Kasten::AbstractDocument* )) );
 }
 
-void KViewManager::setWindow( KXmlGuiWindow *window )
+void ViewManager::setWindow( KXmlGuiWindow *window )
 {
     mMainWindow = window;
 }
 
-void KViewManager::setViewFactory( KViewFactory *factory )
+void ViewManager::setViewFactory( AbstractViewFactory* factory )
 {
     mFactory = factory;
 }
 
-QList<KAbstractView*> KViewManager::views() const
+QList<AbstractView*> ViewManager::views() const
 {
     return mViewList;
 }
 
-KAbstractView *KViewManager::viewByWidget( QWidget *widget ) const
+AbstractView* ViewManager::viewByWidget( QWidget* widget ) const
 {
-    KAbstractView *result = 0;
+    AbstractView* result = 0;
 
-    QListIterator<KAbstractView*> it( mViewList );
+    QListIterator<AbstractView*> it( mViewList );
     while( it.hasNext() )
     {
-        KAbstractView *view = it.next();
+        AbstractView* view = it.next();
         if( view->widget() == widget)
         {
             result = view;
@@ -80,12 +80,12 @@ KAbstractView *KViewManager::viewByWidget( QWidget *widget ) const
 }
 
 
-void KViewManager::createViewFor( KAbstractDocument *document )
+void ViewManager::createViewFor( AbstractDocument* document )
 {
     if( !document )
         return;
 
-    KAbstractView *view = mFactory->createViewFor( document );
+    AbstractView* view = mFactory->createViewFor( document );
     if( !view )
         view = new DummyView( document );
 
@@ -94,12 +94,12 @@ void KViewManager::createViewFor( KAbstractDocument *document )
 }
 
 
-void KViewManager::removeViewsFor( KAbstractDocument *document )
+void ViewManager::removeViewsFor( AbstractDocument* document )
 {
-    QMutableListIterator<KAbstractView*> it( mViewList );
+    QMutableListIterator<AbstractView*> it( mViewList );
     while( it.hasNext() )
     {
-        KAbstractView *view = it.next();
+        AbstractView* view = it.next();
         if( view->document() == document )
         {
             it.remove();
@@ -109,10 +109,10 @@ void KViewManager::removeViewsFor( KAbstractDocument *document )
     }
 }
 
-KAbstractView* KViewManager::viewOfDocument( KAbstractDocument* document ) const
+AbstractView* ViewManager::viewOfDocument( AbstractDocument* document ) const
 {
-    KAbstractView* result = 0;
-    foreach( KAbstractView* view, mViewList )
+    AbstractView* result = 0;
+    foreach( AbstractView* view, mViewList )
     {
         if( view->document() == document )
         {
@@ -124,7 +124,7 @@ KAbstractView* KViewManager::viewOfDocument( KAbstractDocument* document ) const
 }
 
 
-KViewManager::~KViewManager()
+ViewManager::~ViewManager()
 {
     delete mCodecViewManager;
     delete mFactory;

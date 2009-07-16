@@ -44,7 +44,7 @@ class KASTENGUI_EXPORT AbstractToolView
     virtual ~AbstractToolView();
 
   public: // API to be implemented
-    virtual QWidget *widget() const = 0;
+    virtual QWidget* widget() const = 0;
     virtual QString title() const = 0;
     virtual AbstractTool *tool() const = 0;
 

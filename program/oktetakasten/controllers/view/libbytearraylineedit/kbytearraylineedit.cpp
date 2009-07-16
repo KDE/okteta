@@ -107,7 +107,7 @@ inline void KByteArrayLineEditPrivate::onDataChanged( const QString &data )
 }
 
 
-KByteArrayLineEdit::KByteArrayLineEdit( QWidget *parent )
+KByteArrayLineEdit::KByteArrayLineEdit( QWidget* parent )
   : QWidget( parent ), d( new KByteArrayLineEditPrivate() )
 {
     d->setup( this );

@@ -24,7 +24,7 @@
 
 // library
 #include "abstractmodelfilesystemsynchronizer.h"
-#include <kabstractdocument.h>
+#include <abstractdocument.h>
 // KDE
 #include <KIO/NetAccess>
 #include <KTemporaryFile>
@@ -40,7 +40,7 @@ namespace Kasten
 class AbstractFileSystemConnectJob::Private
 {
   public:
-    Private( AbstractModelFileSystemSynchronizer* synchronizer, KAbstractDocument* document,
+    Private( AbstractModelFileSystemSynchronizer* synchronizer, AbstractDocument* document,
              const KUrl &url, AbstractModelSynchronizer::ConnectOption option );
 
   public:
@@ -48,17 +48,17 @@ class AbstractFileSystemConnectJob::Private
     void setWorkFilePath( const QString &workFilePath );
 
   public:
-    KAbstractDocument *document() const;
+    AbstractDocument* document() const;
     KUrl url() const;
     AbstractModelSynchronizer::ConnectOption option() const;
     KTemporaryFile *temporaryFile() const;
     QString workFilePath() const;
-    QWidget *widget() const;
+    QWidget* widget() const;
     AbstractModelFileSystemSynchronizer* synchronizer() const;
 
   protected:
     AbstractModelFileSystemSynchronizer* mSynchronizer;
-    KAbstractDocument *mDocument;
+    AbstractDocument* mDocument;
     const KUrl mUrl;
     const AbstractModelSynchronizer::ConnectOption mOption;
     KTemporaryFile *mTemporaryFile;
@@ -66,7 +66,7 @@ class AbstractFileSystemConnectJob::Private
 };
 
 AbstractFileSystemConnectJob::Private::Private( AbstractModelFileSystemSynchronizer* synchronizer,
-                                                KAbstractDocument *document,
+                                                AbstractDocument* document,
                                                 const KUrl &url, AbstractModelSynchronizer::ConnectOption option )
  : mSynchronizer( synchronizer ), mDocument( document ), mUrl( url ), mOption( option ), mTemporaryFile( 0 )
 {}
@@ -75,12 +75,12 @@ AbstractModelFileSystemSynchronizer* AbstractFileSystemConnectJob::Private::sync
 {
     return mSynchronizer;
 }
-inline KAbstractDocument *AbstractFileSystemConnectJob::Private::document()   const { return mDocument; }
+inline AbstractDocument* AbstractFileSystemConnectJob::Private::document()   const { return mDocument; }
 inline KUrl AbstractFileSystemConnectJob::Private::url()               const { return mUrl; }
 inline KTemporaryFile *AbstractFileSystemConnectJob::Private::temporaryFile() const { return mTemporaryFile; }
 inline QString AbstractFileSystemConnectJob::Private::workFilePath()          const { return mWorkFilePath; }
 // TODO: setup a notification system
-inline QWidget *AbstractFileSystemConnectJob::Private::widget()               const { return 0; }
+inline QWidget* AbstractFileSystemConnectJob::Private::widget()               const { return 0; }
 inline AbstractModelSynchronizer::ConnectOption AbstractFileSystemConnectJob::Private::option() const
 {
     return mOption;
@@ -98,7 +98,7 @@ inline void AbstractFileSystemConnectJob::Private::setWorkFilePath( const QStrin
 
 
 AbstractFileSystemConnectJob::AbstractFileSystemConnectJob( AbstractModelFileSystemSynchronizer* synchronizer,
-                                                            KAbstractDocument *document,
+                                                            AbstractDocument* document,
                                                       const KUrl &url, AbstractModelSynchronizer::ConnectOption option )
  : d( new Private(synchronizer,document,url,option) )
 {}
@@ -107,9 +107,9 @@ AbstractModelFileSystemSynchronizer* AbstractFileSystemConnectJob::synchronizer(
 {
     return d->synchronizer();
 }
-KAbstractDocument *AbstractFileSystemConnectJob::document()   const { return d->document(); }
+AbstractDocument* AbstractFileSystemConnectJob::document()   const { return d->document(); }
 QString AbstractFileSystemConnectJob::workFilePath() const { return d->workFilePath(); }
-QWidget *AbstractFileSystemConnectJob::widget() const { return d->widget(); }
+QWidget* AbstractFileSystemConnectJob::widget() const { return d->widget(); }
 
 void AbstractFileSystemConnectJob::start()
 {

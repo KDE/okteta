@@ -40,7 +40,7 @@ namespace Kasten
 
 class KByteArrayDocument;
 class AbstractModelSynchronizer;
-class KDocumentSyncManager;
+class DocumentSyncManager;
 
 
 class DocumentInfoTool : public AbstractTool
@@ -48,7 +48,7 @@ class DocumentInfoTool : public AbstractTool
   Q_OBJECT
 
   public:
-    explicit DocumentInfoTool( KDocumentSyncManager* syncManager );
+    explicit DocumentInfoTool( DocumentSyncManager* syncManager );
     virtual ~DocumentInfoTool();
 
   public: // AbstractTool API
@@ -81,7 +81,7 @@ class DocumentInfoTool : public AbstractTool
 
     AbstractModelSynchronizer* mSynchronizer;
 
-    KDocumentSyncManager* mDocumentSyncManager;
+    DocumentSyncManager* mDocumentSyncManager;
 };
 
 }

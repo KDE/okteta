@@ -34,7 +34,7 @@ class ReverseByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterPar
   Q_OBJECT
 
   public:
-    explicit ReverseByteArrayFilterParameterSetEdit( QWidget *parent = 0 );
+    explicit ReverseByteArrayFilterParameterSetEdit( QWidget* parent = 0 );
     virtual ~ReverseByteArrayFilterParameterSetEdit();
 
   public: // AbstractByteArrayFilterParameterSetEdit API

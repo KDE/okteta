@@ -23,7 +23,7 @@
 #include "zoomcontroller.h"
 
 // Kasten gui
-#include <kizoomable.h>
+#include <zoomable.h>
 // Kasten core
 #include <abstractmodel.h>
 // KDE

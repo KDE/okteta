@@ -26,9 +26,9 @@
 
 // Kasten gui
 #include "kastengui_export.h"
-#include "iwidgetsdockable.h"
+#include "widgetsdockable.h"
 // Kasten core
-#include <kabstractdocument.h>
+#include <abstractdocument.h>
 // KDE
 #include <KXmlGuiWindow>
 // Qt
@@ -41,9 +41,9 @@ class QDropEvent;
 namespace Kasten
 {
 
-class KDocumentManager;
-class KAbstractView;
-class KViewManager;
+class DocumentManager;
+class AbstractView;
+class ViewManager;
 class TabbedViews;
 class AbstractXmlGuiController;
 class AbstractToolView;
@@ -56,11 +56,11 @@ class KASTENGUI_EXPORT ShellWindow : public KXmlGuiWindow, public If::WidgetsDoc
    Q_INTERFACES( Kasten::If::WidgetsDockable )
 
   public:
-    ShellWindow( KDocumentManager *documentManager, KViewManager *viewManager );
+    ShellWindow( DocumentManager* documentManager, ViewManager *viewManager );
     virtual ~ShellWindow();
 
   public:
-    void updateControllers( KAbstractView *view );
+    void updateControllers( AbstractView *view );
     void addXmlGuiController( AbstractXmlGuiController* controller );
     void addTool( AbstractToolView* toolView );
 
@@ -72,11 +72,11 @@ class KASTENGUI_EXPORT ShellWindow : public KXmlGuiWindow, public If::WidgetsDoc
 
   private Q_SLOTS:
     void onTitleChanged( const QString &newTitle );
-    void onModifiedChanged( Kasten::KAbstractDocument::SynchronizationStates newStates );
-    void onViewFocusChanged( Kasten::KAbstractView* view );
-    void onFocusRequested( Kasten::KAbstractDocument* document );
+    void onModifiedChanged( Kasten::AbstractDocument::SynchronizationStates newStates );
+    void onViewFocusChanged( Kasten::AbstractView* view );
+    void onFocusRequested( Kasten::AbstractDocument* document );
     void onToolVisibilityChanged( bool isVisible );
-    void onCloseRequest( Kasten::KAbstractView* view );
+    void onCloseRequest( Kasten::AbstractView* view );
     void onDragMoveEvent( const QDragMoveEvent* event, bool& accept );
     void onDropEvent( QDropEvent* event );
 
@@ -84,10 +84,10 @@ class KASTENGUI_EXPORT ShellWindow : public KXmlGuiWindow, public If::WidgetsDoc
     TabbedViews* mGroupedViews;
     // hack:
     // used to store a pointer to the current, so we can disconnect to its signals... well, not perfect
-    KAbstractView *mCurrentView;
+    AbstractView *mCurrentView;
 
-    KDocumentManager *mDocumentManager;
-    KViewManager *mViewManager;
+    DocumentManager* mDocumentManager;
+    ViewManager *mViewManager;
     QList<AbstractXmlGuiController*> mControllers;
 
     QList<ToolViewDockWidget*> mDockWidgets;

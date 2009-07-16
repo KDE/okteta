@@ -28,8 +28,8 @@
 // Kasten core
 #include <person.h>
 #include <userlistable.h>
-#include <kiversionable.h>
-#include <kabstractdocument.h>
+#include <versionable.h>
+#include <abstractdocument.h>
 // Qt
 #include <QtCore/QString>
 
@@ -42,7 +42,7 @@ class PieceTableByteArrayModel;
 namespace Kasten
 {
 
-class KByteArrayDocument : public KAbstractDocument, public If::Versionable, public If::UserListable//, public If::ByteArray
+class KByteArrayDocument : public AbstractDocument, public If::Versionable, public If::UserListable//, public If::ByteArray
 {
     Q_OBJECT
     Q_INTERFACES(Kasten::If::Versionable Kasten::If::UserListable)
@@ -59,14 +59,14 @@ class KByteArrayDocument : public KAbstractDocument, public If::Versionable, pub
     virtual bool isReadOnly() const;
     virtual void setReadOnly( bool isReadOnly );
 
-  public: // KAbstractDocument API
+  public: // AbstractDocument API
     virtual QString typeName() const;
     virtual QString mimeType() const;
     virtual SynchronizationStates synchronizationStates() const;
 
   public: // If::Versionable
     virtual int versionIndex() const;
-    virtual KDocumentVersionData versionData( int versionIndex ) const;
+    virtual DocumentVersionData versionData( int versionIndex ) const;
     virtual int versionCount() const;
     virtual void revertToVersionByIndex( int versionIndex );
 
@@ -86,7 +86,7 @@ class KByteArrayDocument : public KAbstractDocument, public If::Versionable, pub
 
   Q_SIGNALS: // If::Versionable
     virtual void revertedToVersionIndex( int versionIndex );
-    virtual void headVersionDataChanged( const Kasten::KDocumentVersionData &versionData );
+    virtual void headVersionDataChanged( const Kasten::DocumentVersionData &versionData );
     virtual void headVersionChanged( int newHeadVersionIndex );
   Q_SIGNALS: // If::UserListable
     virtual void usersAdded( const QList<Person>& newUserList );

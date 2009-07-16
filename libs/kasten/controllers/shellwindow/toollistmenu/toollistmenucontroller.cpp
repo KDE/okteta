@@ -23,7 +23,7 @@
 #include "toollistmenucontroller.h"
 
 // lib
-#include <iwidgetsdockable.h>
+#include <widgetsdockable.h>
 #include <toolviewdockwidget.h>
 // KDE
 #include <KXMLGUIClient>

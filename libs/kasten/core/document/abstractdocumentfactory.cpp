@@ -20,6 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kabstractview.h"
+#include "abstractdocumentfactory.h"
 
-#include "kabstractview.moc"
+
+namespace Kasten
+{
+
+AbstractDocumentFactory::~AbstractDocumentFactory() {}
+
+}

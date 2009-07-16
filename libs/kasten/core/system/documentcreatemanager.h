@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,64 +20,47 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KDOCUMENTSYNCMANAGER_H
-#define KDOCUMENTSYNCMANAGER_H
+#ifndef DOCUMENTCREATEMANAGER_H
+#define DOCUMENTCREATEMANAGER_H
 
 // lib
 #include "kastencore_export.h"
 // Qt
 #include <QtCore/QObject>
 
-class KUrl;
-class QString;
 class QWidget;
 
 
 namespace Kasten
 {
 
-class KAbstractDocument;
-class AbstractModelSynchronizerFactory;
-class KDocumentManager;
+class AbstractDocumentFactory;
+class DocumentManager;
 
 
-class KASTENCORE_EXPORT KDocumentSyncManager : public QObject
+class KASTENCORE_EXPORT DocumentCreateManager : public QObject
 {
   Q_OBJECT
 
   public:
-    explicit KDocumentSyncManager( KDocumentManager *manager );
-    virtual ~KDocumentSyncManager();
+    explicit DocumentCreateManager( DocumentManager* manager );
+    virtual ~DocumentCreateManager();
 
   public:
-    void load( const KUrl &url );
-    void load();
-// TODO: better name
-    bool setSynchronizer( KAbstractDocument *document );
-    bool canClose( KAbstractDocument *document );
+    void createNew();
 
   public:
-    bool hasSynchronizerForLocal( const QString &mimeType ) const;
-    KUrl urlOf( KAbstractDocument *document ) const;
-
-  public:
-    void setDocumentSynchronizerFactory( AbstractModelSynchronizerFactory* synchronizerFactory );
-    void setWidget( QWidget *widget );
-
-  Q_SIGNALS:
-    void urlUsed( const KUrl &url );
-
-  protected Q_SLOTS:
-    void onDocumentLoaded( Kasten::KAbstractDocument* document );
+    void setDocumentFactory( AbstractDocumentFactory* factory );
+    void setWidget( QWidget* widget );
 
   protected:
     // unless there is a singleton
-    KDocumentManager *mManager;
+    DocumentManager* mManager;
     // used for dialogs, TODO: create (or use?) global instance for this
-    QWidget *mWidget;
+    QWidget* mWidget;
 
-    // temporary hack: hard coded factories for byte arrays
-    AbstractModelSynchronizerFactory* mSynchronizerFactory;
+    // temporary hack: hard coded factory for byte arrays
+    AbstractDocumentFactory* mFactory;
 };
 
 }

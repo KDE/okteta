@@ -36,7 +36,7 @@ namespace Kasten
 static int newByteArrayDocumentCounter = 0;
 
 
-KAbstractDocument *KByteArrayDocumentFactory::create()
+AbstractDocument* KByteArrayDocumentFactory::create()
 {
     KByteArrayDocument *document = new KByteArrayDocument( i18nc("The byte array was new created.","New created.") );
 

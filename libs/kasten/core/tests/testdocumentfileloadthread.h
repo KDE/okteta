@@ -45,16 +45,16 @@ class TestDocumentFileLoadThread : public QThread
     virtual void run();
 
   public:
-    TestDocument *document() const;
+    TestDocument* document() const;
 
   Q_SIGNALS:
-    void documentRead( TestDocument *document );
+    void documentRead( TestDocument* document );
 
   protected:
     const QString mFilePath;
     const QByteArray mHeader;
 
-    TestDocument *mDocument;
+    TestDocument* mDocument;
 };
 
 
@@ -62,7 +62,7 @@ inline TestDocumentFileLoadThread::TestDocumentFileLoadThread( QObject *parent, 
  : QThread( parent ), mFilePath( filePath ), mHeader( header ), mDocument( 0 )
 {}
 
-inline TestDocument *TestDocumentFileLoadThread::document() const { return mDocument; }
+inline TestDocument* TestDocumentFileLoadThread::document() const { return mDocument; }
 
 }
 

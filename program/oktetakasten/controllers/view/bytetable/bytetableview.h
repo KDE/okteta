@@ -43,7 +43,7 @@ class ByteTableView : public QWidget
   Q_OBJECT
 
   public:
-    explicit ByteTableView( ByteTableTool *tool, QWidget *parent = 0 );
+    explicit ByteTableView( ByteTableTool *tool, QWidget* parent = 0 );
     virtual ~ByteTableView();
 
   public:

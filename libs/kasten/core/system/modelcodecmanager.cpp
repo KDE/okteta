@@ -27,7 +27,7 @@
 #include "abstractmodelstreamencoder.h"
 // #include "abstractmodelstreamdecoder.h"
 #include "jobmanager.h"
-#include "kdocumentmanager.h"
+#include "documentmanager.h"
 #include "abstractexportjob.h"
 // KDE
 #include <KIO/NetAccess>
@@ -39,11 +39,11 @@
 namespace Kasten
 {
 
-ModelCodecManager::ModelCodecManager( KDocumentManager *manager )
+ModelCodecManager::ModelCodecManager( DocumentManager* manager )
  : mManager( manager ), mWidget( 0 ) {}
 
 QList<AbstractModelStreamEncoder*>
-ModelCodecManager::encoderList( AbstractModel *model, const AbstractModelSelection *selection ) const
+ModelCodecManager::encoderList( AbstractModel* model, const AbstractModelSelection* selection ) const
 {
 Q_UNUSED( selection )
     return model ? mEncoderList : QList<AbstractModelStreamEncoder*>();
@@ -53,46 +53,46 @@ QList<AbstractModelStreamDecoder*>
 ModelCodecManager::decoderList() const { return mDecoderList; }
 
 QList<AbstractModelExporter*>
-ModelCodecManager::exporterList( AbstractModel *model, const AbstractModelSelection *selection ) const
+ModelCodecManager::exporterList( AbstractModel* model, const AbstractModelSelection* selection ) const
 {
 Q_UNUSED( selection )
     return model ? mExporterList : QList<AbstractModelExporter*>();
 }
 
-void ModelCodecManager::setWidget( QWidget *widget )
+void ModelCodecManager::setWidget( QWidget* widget )
 {
     mWidget = widget;
 }
 
-void ModelCodecManager::setEncoders( QList<AbstractModelStreamEncoder*> &encoderList )
+void ModelCodecManager::setEncoders( QList<AbstractModelStreamEncoder*>& encoderList )
 {
     mEncoderList = encoderList;
 
     qDeleteAll( mExporterList );
     mExporterList.clear();
 
-    foreach( AbstractModelStreamEncoder *encoder, mEncoderList )
+    foreach( AbstractModelStreamEncoder* encoder, mEncoderList )
         mExporterList << new ModelEncoderFileSystemExporter( encoder );
 }
 
-void ModelCodecManager::setDecoders( QList<AbstractModelStreamDecoder*> &decoderList )
+void ModelCodecManager::setDecoders( QList<AbstractModelStreamDecoder*>& decoderList )
 {
     mDecoderList = decoderList;
 }
 
-void ModelCodecManager::encodeToStream( AbstractModelStreamEncoder *encoder,
-                                        AbstractModel *model, const AbstractModelSelection *selection )
+void ModelCodecManager::encodeToStream( AbstractModelStreamEncoder* encoder,
+                                        AbstractModel* model, const AbstractModelSelection* selection )
 {
    Q_UNUSED( selection )
    Q_UNUSED( model )
    Q_UNUSED( encoder )
-//    KAbstractDocument *model = mFactory->create();
+//    AbstractDocument* model = mFactory->create();
 //    mManager->addDocument( model );
 }
 
 
-void ModelCodecManager::exportDocument( AbstractModelExporter *exporter,
-                                        AbstractModel *model, const AbstractModelSelection *selection )
+void ModelCodecManager::exportDocument( AbstractModelExporter* exporter,
+                                        AbstractModel* model, const AbstractModelSelection* selection )
 {
     bool exportDone = false;
 
@@ -125,7 +125,7 @@ void ModelCodecManager::exportDocument( AbstractModelExporter *exporter,
                     continue;
             }
 
-            AbstractExportJob *exportJob = exporter->startExport( model, selection, exportUrl );
+            AbstractExportJob* exportJob = exporter->startExport( model, selection, exportUrl );
             exportDone = JobManager::executeJob( exportJob, mWidget );
 
 //                 if( exportDone )

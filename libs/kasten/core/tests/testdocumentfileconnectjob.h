@@ -39,7 +39,7 @@ class TestDocumentFileConnectJob : public AbstractFileSystemConnectJob
   Q_OBJECT
 
   public:
-    TestDocumentFileConnectJob( TestDocumentFileSynchronizer *synchronizer, KAbstractDocument *document,
+    TestDocumentFileConnectJob( TestDocumentFileSynchronizer *synchronizer, AbstractDocument* document,
                                 const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
     virtual ~TestDocumentFileConnectJob();
 

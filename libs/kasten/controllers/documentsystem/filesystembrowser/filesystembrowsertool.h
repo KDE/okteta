@@ -34,8 +34,8 @@ class KUrl;
 namespace Kasten
 {
 
-class KDocumentManager;
-class KAbstractDocument;
+class DocumentManager;
+class AbstractDocument;
 
 
 class KASTENCONTROLLER_EXPORT FileSystemBrowserTool : public AbstractTool
@@ -43,7 +43,7 @@ class KASTENCONTROLLER_EXPORT FileSystemBrowserTool : public AbstractTool
   Q_OBJECT
 
   public:
-    explicit FileSystemBrowserTool( KDocumentManager* documentManager );
+    explicit FileSystemBrowserTool( DocumentManager* documentManager );
     virtual ~FileSystemBrowserTool();
 
   public:
@@ -63,9 +63,9 @@ class KASTENCONTROLLER_EXPORT FileSystemBrowserTool : public AbstractTool
     void hasCurrentUrlChanged( bool hasCurrentUrl );
 
   protected: // sources
-    KAbstractDocument* mDocument;
+    AbstractDocument* mDocument;
 
-    KDocumentManager* mDocumentManager;
+    DocumentManager* mDocumentManager;
 };
 
 }

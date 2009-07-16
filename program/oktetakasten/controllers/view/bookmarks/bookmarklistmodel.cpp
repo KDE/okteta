@@ -207,7 +207,7 @@ void BookmarkListModel::onRevertedToVersionIndex( int versionIndex )
     emit dataChanged( index(oldVersionIndex,CurrentColumnId), index(oldVersionIndex,CurrentColumnId) );
 }
 
-void BookmarkListModel::onHeadVersionDataChanged( const KDocumentVersionData &versionData )
+void BookmarkListModel::onHeadVersionDataChanged( const DocumentVersionData &versionData )
 {
     Q_UNUSED( versionData )
     const int headVersionIndex = mVersionControl->versionCount() - 1;

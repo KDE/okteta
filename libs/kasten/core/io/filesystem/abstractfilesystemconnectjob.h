@@ -42,7 +42,7 @@ class KASTENCORE_EXPORT AbstractFileSystemConnectJob : public AbstractConnectJob
   Q_OBJECT
 
   public:
-    AbstractFileSystemConnectJob( AbstractModelFileSystemSynchronizer* synchronizer, KAbstractDocument* document,
+    AbstractFileSystemConnectJob( AbstractModelFileSystemSynchronizer* synchronizer, AbstractDocument* document,
                                   const KUrl &url, AbstractModelSynchronizer::ConnectOption option );
     virtual ~AbstractFileSystemConnectJob();
 
@@ -57,9 +57,9 @@ class KASTENCORE_EXPORT AbstractFileSystemConnectJob : public AbstractConnectJob
 
   protected:
     AbstractModelFileSystemSynchronizer* synchronizer() const;
-    KAbstractDocument *document() const;
+    AbstractDocument* document() const;
     QString workFilePath() const;
-    QWidget *widget() const;
+    QWidget* widget() const;
 
   protected Q_SLOTS:
     void connectWithFile();

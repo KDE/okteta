@@ -23,7 +23,7 @@
 #include "versiontablemodel.h"
 
 // Kasten core
-#include <kiversionable.h>
+#include <versionable.h>
 #include <abstractmodel.h>
 // KDE
 #include <KLocale>
@@ -43,8 +43,8 @@ VersionTableModel::VersionTableModel( AbstractModel* model, If::Versionable* ver
     {
         connect( mModel, SIGNAL(revertedToVersionIndex( int )), SLOT(onRevertedToVersionIndex( int )) );
         connect( mModel, SIGNAL(headVersionChanged( int )), SLOT(onHeadVersionChanged( int )) );
-        connect( mModel, SIGNAL(headVersionDataChanged( const Kasten::KDocumentVersionData & )),
-                 SLOT(onHeadVersionDataChanged( const Kasten::KDocumentVersionData & )) );
+        connect( mModel, SIGNAL(headVersionDataChanged( const Kasten::DocumentVersionData & )),
+                 SLOT(onHeadVersionDataChanged( const Kasten::DocumentVersionData & )) );
     }
 }
 
@@ -59,8 +59,8 @@ void VersionTableModel::setModel( AbstractModel* model, If::Versionable* version
     {
         connect( mModel, SIGNAL(revertedToVersionIndex( int )), SLOT(onRevertedToVersionIndex( int )) );
         connect( mModel, SIGNAL(headVersionChanged( int )), SLOT(onHeadVersionChanged( int )) );
-        connect( mModel, SIGNAL(headVersionDataChanged( const Kasten::KDocumentVersionData & )),
-                 SLOT(onHeadVersionDataChanged( const Kasten::KDocumentVersionData & )) );
+        connect( mModel, SIGNAL(headVersionDataChanged( const Kasten::DocumentVersionData & )),
+                 SLOT(onHeadVersionDataChanged( const Kasten::DocumentVersionData & )) );
     }
     mVersionIndex = versionControl ? versionControl->versionIndex() : 0;
 
@@ -85,7 +85,7 @@ QVariant VersionTableModel::data( const QModelIndex &index, int role ) const
     if( role == Qt::DisplayRole )
     {
         const int versionIndex = index.row();
-        const KDocumentVersionData version = mVersionControl->versionData( versionIndex );
+        const DocumentVersionData version = mVersionControl->versionData( versionIndex );
 
         const int tableColumn = index.column();
         switch( tableColumn )
@@ -161,7 +161,7 @@ void VersionTableModel::onHeadVersionChanged( int newHeadVersionIndex )
     reset();
 }
 
-void VersionTableModel::onHeadVersionDataChanged( const KDocumentVersionData &versionData )
+void VersionTableModel::onHeadVersionDataChanged( const DocumentVersionData &versionData )
 {
     Q_UNUSED( versionData )
     const int headVersionIndex = mVersionControl->versionCount() - 1;

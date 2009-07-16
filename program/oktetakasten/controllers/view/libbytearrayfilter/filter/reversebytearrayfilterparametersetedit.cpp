@@ -31,7 +31,7 @@
 #include <QtGui/QLayout>
 
 
-ReverseByteArrayFilterParameterSetEdit::ReverseByteArrayFilterParameterSetEdit( QWidget *parent )
+ReverseByteArrayFilterParameterSetEdit::ReverseByteArrayFilterParameterSetEdit( QWidget* parent )
  : AbstractByteArrayFilterParameterSetEdit( parent )
 {
     QVBoxLayout *baseLayout = new QVBoxLayout( this );

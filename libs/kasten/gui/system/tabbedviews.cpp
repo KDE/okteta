@@ -27,8 +27,8 @@
 #include "viewbox.h"
 #include "toolinlineviewwidget.h"
 #include <abstracttoolinlineview.h>
-#include <kabstractdocument.h>
-#include <kabstractview.h>
+#include <abstractdocument.h>
+#include <abstractview.h>
 // KDE
 #include <KTabWidget>
 
@@ -52,22 +52,22 @@ TabbedViews::TabbedViews()
              SIGNAL(drop( QDropEvent* )) );
 }
 
-QList<KAbstractView*> TabbedViews::viewList() const
+QList<AbstractView*> TabbedViews::viewList() const
 {
-    QList<KAbstractView*> result;
+    QList<AbstractView*> result;
 
     const int count = mTabWidget->count();
     for( int i=0; i<count; ++i )
     {
         const ViewBox* viewBox = static_cast<const ViewBox*>( mTabWidget->widget(i) );
-        KAbstractView* view = viewBox->view();
+        AbstractView* view = viewBox->view();
         result.append( view );
     }
 
     return result;
 }
 
-int TabbedViews::indexOf( KAbstractView* view ) const
+int TabbedViews::indexOf( AbstractView* view ) const
 {
     int result = -1;
 
@@ -85,7 +85,7 @@ int TabbedViews::indexOf( KAbstractView* view ) const
     return result;
 }
 
-void TabbedViews::addView( KAbstractView *view )
+void TabbedViews::addView( AbstractView *view )
 {
     connect( view, SIGNAL(titleChanged( QString )), SLOT(onTitleChanged( QString )) );
 
@@ -103,7 +103,7 @@ void TabbedViews::addView( KAbstractView *view )
 
 }
 
-void TabbedViews::removeView( KAbstractView *view )
+void TabbedViews::removeView( AbstractView *view )
 {
     view->disconnect( this );
 
@@ -145,13 +145,13 @@ QWidget* TabbedViews::widget() const
     return mTabbedViewsBox;
 }
 
-void TabbedViews::setViewFocus( KAbstractView *view )
+void TabbedViews::setViewFocus( AbstractView *view )
 {
     const int index = indexOf( view );
     mTabWidget->setCurrentIndex( index );
 }
 
-KAbstractView *TabbedViews::viewFocus() const
+AbstractView *TabbedViews::viewFocus() const
 {
     const ViewBox* viewBox = static_cast<const ViewBox*>( mTabWidget->currentWidget() );
     return viewBox ? viewBox->view() : 0;
@@ -162,7 +162,7 @@ void TabbedViews::onCurrentChanged( int index )
     mTabbedViewsBox->setBottomWidget( 0 );
 
     const ViewBox* viewBox = static_cast<const ViewBox*>( mTabWidget->widget(index) );
-    KAbstractView* view = viewBox ? viewBox->view() : 0;
+    AbstractView* view = viewBox ? viewBox->view() : 0;
 
     if( view )
         view->widget()->setFocus();
@@ -173,14 +173,14 @@ void TabbedViews::onCurrentChanged( int index )
 void TabbedViews::onCloseRequest( QWidget* widget )
 {
     const ViewBox* viewBox = static_cast<const ViewBox*>( widget );
-    KAbstractView* view = viewBox->view();
+    AbstractView* view = viewBox->view();
 
     emit closeRequest( view );
 }
 
 void TabbedViews::onTitleChanged( const QString &newTitle )
 {
-    KAbstractView* view = qobject_cast<KAbstractView *>( sender() );
+    AbstractView* view = qobject_cast<AbstractView *>( sender() );
     if( view )
     {
         const int index = indexOf( view );
@@ -191,10 +191,10 @@ void TabbedViews::onTitleChanged( const QString &newTitle )
 
 
 #if 0
-void TabbedViews::onModifiedChanged( KAbstractDocument::SynchronizationStates newStates )
+void TabbedViews::onModifiedChanged( AbstractDocument::SynchronizationStates newStates )
 {
 Q_UNUSED( newStates )
-    KAbstractView* view = qobject_cast<KAbstractView *>( sender() );
+    AbstractView* view = qobject_cast<AbstractView *>( sender() );
     if( view )
     {
         const int index = indexOf( view );

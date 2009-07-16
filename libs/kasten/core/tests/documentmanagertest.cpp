@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kdocumentmanagertest.h"
+#include "documentmanagertest.h"
 
 // sut
-#include <kdocumentmanager.h>
+#include <documentmanager.h>
 // test
 #include <testdocument.h>
 // Qt
@@ -31,42 +31,42 @@
 #include <QtTest/QSignalSpy>
 
 
-Q_DECLARE_METATYPE ( Kasten::KAbstractDocument * )
+Q_DECLARE_METATYPE ( Kasten::AbstractDocument*  )
 
-void KDocumentManagerTest::checkAdded( QSignalSpy *changedSpy, Kasten::KAbstractDocument *document )
+void DocumentManagerTest::checkAdded( QSignalSpy* changedSpy, Kasten::AbstractDocument* document )
 {
    QVERIFY( changedSpy->isValid() );
    QCOMPARE( changedSpy->count(), 1 );
    QList<QVariant> arguments = changedSpy->takeFirst();
-   QCOMPARE( arguments.at(0).value<Kasten::KAbstractDocument *>(), document );
+   QCOMPARE( arguments.at(0).value<Kasten::AbstractDocument* >(), document );
 }
 
-void KDocumentManagerTest::checkRemoving( QSignalSpy *changedSpy, Kasten::KAbstractDocument *document )
+void DocumentManagerTest::checkRemoving( QSignalSpy* changedSpy, Kasten::AbstractDocument* document )
 {
    QVERIFY( changedSpy->isValid() );
    QCOMPARE( changedSpy->count(), 1 );
    QList<QVariant> arguments = changedSpy->takeFirst();
-   QCOMPARE( arguments.at(0).value<Kasten::KAbstractDocument *>(), document );
+   QCOMPARE( arguments.at(0).value<Kasten::AbstractDocument* >(), document );
 }
 
 
-void KDocumentManagerTest::testConstructor()
+void DocumentManagerTest::testConstructor()
 {
-    Kasten::KDocumentManager *documentManager = new Kasten::KDocumentManager();
+    Kasten::DocumentManager* documentManager = new Kasten::DocumentManager();
     delete documentManager;
 }
 
-void KDocumentManagerTest::testAddRemove()
+void DocumentManagerTest::testAddRemove()
 {
-    qRegisterMetaType<Kasten::KAbstractDocument *>("Kasten::KAbstractDocument *");
+    qRegisterMetaType<Kasten::AbstractDocument* >("Kasten::AbstractDocument* ");
 
-    Kasten::TestDocument *doc1 = new Kasten::TestDocument();
-    Kasten::TestDocument *doc2 = new Kasten::TestDocument();
-    Kasten::TestDocument *doc3 = new Kasten::TestDocument();
+    Kasten::TestDocument* doc1 = new Kasten::TestDocument();
+    Kasten::TestDocument* doc2 = new Kasten::TestDocument();
+    Kasten::TestDocument* doc3 = new Kasten::TestDocument();
 
-    Kasten::KDocumentManager *documentManager = new Kasten::KDocumentManager();
-    QSignalSpy *addedSpy = new QSignalSpy( documentManager, SIGNAL(added( Kasten::KAbstractDocument * )) );
-    QSignalSpy *closingSpy = new QSignalSpy( documentManager, SIGNAL(closing( Kasten::KAbstractDocument * )) );
+    Kasten::DocumentManager* documentManager = new Kasten::DocumentManager();
+    QSignalSpy* addedSpy = new QSignalSpy( documentManager, SIGNAL(added( Kasten::AbstractDocument*  )) );
+    QSignalSpy* closingSpy = new QSignalSpy( documentManager, SIGNAL(closing( Kasten::AbstractDocument*  )) );
 
     documentManager->addDocument( doc1 );
     checkAdded( addedSpy, doc1 );
@@ -89,18 +89,18 @@ void KDocumentManagerTest::testAddRemove()
     delete closingSpy;
 }
 
-void KDocumentManagerTest::testCanClose()
+void DocumentManagerTest::testCanClose()
 {
-    Kasten::TestDocument *doc = new Kasten::TestDocument();
+    Kasten::TestDocument* doc = new Kasten::TestDocument();
 
-    Kasten::KDocumentManager *documentManager = new Kasten::KDocumentManager();
+    Kasten::DocumentManager* documentManager = new Kasten::DocumentManager();
     documentManager->addDocument( doc );
     QVERIFY( documentManager->canClose(doc) );
 
-//     doc->setSynchronizationStates( Kasten::KAbstractDocument::LocalHasChanges );
+//     doc->setSynchronizationStates( Kasten::AbstractDocument::LocalHasChanges );
 //     QVERIFY( !documentManager->canClose(doc) );
 
     delete documentManager;
 }
 
-QTEST_MAIN( KDocumentManagerTest )
+QTEST_MAIN( DocumentManagerTest )

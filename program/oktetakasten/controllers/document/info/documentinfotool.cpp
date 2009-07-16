@@ -25,7 +25,7 @@
 // lib
 #include <kbytearraydocument.h>
 // Kasten core
-#include <kdocumentsyncmanager.h>
+#include <documentsyncmanager.h>
 #include <abstractmodelsynchronizer.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
@@ -39,7 +39,7 @@
 namespace Kasten
 {
 
-DocumentInfoTool::DocumentInfoTool( KDocumentSyncManager* syncManager )
+DocumentInfoTool::DocumentInfoTool( DocumentSyncManager* syncManager )
  : mDocument( 0 ), mByteArrayModel( 0 ), mSynchronizer( 0 ),
     mDocumentSyncManager( syncManager )
 {

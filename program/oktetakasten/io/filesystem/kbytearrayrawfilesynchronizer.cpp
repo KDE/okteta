@@ -49,9 +49,9 @@ KByteArrayRawFileSynchronizer::KByteArrayRawFileSynchronizer()
     connect( this, SIGNAL(urlChanged(const KUrl&)), SLOT(onUrlChange( const KUrl & )) );
 }
 
-KAbstractDocument *KByteArrayRawFileSynchronizer::document() const { return mDocument; }
+AbstractDocument* KByteArrayRawFileSynchronizer::document() const { return mDocument; }
 
-void KByteArrayRawFileSynchronizer::startOffering( KAbstractDocument* document ) { Q_UNUSED(document) }
+void KByteArrayRawFileSynchronizer::startOffering( AbstractDocument* document ) { Q_UNUSED(document) }
 
 AbstractLoadJob *KByteArrayRawFileSynchronizer::startLoad( const KUrl &url )
 {
@@ -73,7 +73,7 @@ AbstractSyncWithRemoteJob *KByteArrayRawFileSynchronizer::startSyncWithRemote( c
     return new ByteArrayRawFileWriteToJob( this, url, option );
 }
 
-AbstractConnectJob *KByteArrayRawFileSynchronizer::startConnect( KAbstractDocument *document,
+AbstractConnectJob *KByteArrayRawFileSynchronizer::startConnect( AbstractDocument* document,
                                               const KUrl& url, AbstractModelSynchronizer::ConnectOption option )
 {
     return new ByteArrayRawFileConnectJob( this, document, url, option );

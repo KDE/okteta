@@ -32,7 +32,7 @@
 namespace Kasten
 {
 
-class KAbstractDocument;
+class AbstractDocument;
 
 
 class KASTENCORE_EXPORT AbstractConnectJob : public KJob

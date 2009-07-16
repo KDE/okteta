@@ -31,7 +31,7 @@
 namespace Kasten
 {
 
-class KDocumentVersionData;
+class DocumentVersionData;
 namespace If {
 class Versionable;
 }
@@ -67,10 +67,10 @@ class VersionTableModel : public QAbstractTableModel
   protected Q_SLOTS:
     void onRevertedToVersionIndex( int versionIndex );
     void onHeadVersionChanged( int newHeadVersionIndex );
-    void onHeadVersionDataChanged( const Kasten::KDocumentVersionData& newVersionData );
+    void onHeadVersionDataChanged( const Kasten::DocumentVersionData& newVersionData );
 
   protected:
-    AbstractModel *mModel;
+    AbstractModel* mModel;
     If::Versionable *mVersionControl;
     /// holds the current version index
     int mVersionIndex;

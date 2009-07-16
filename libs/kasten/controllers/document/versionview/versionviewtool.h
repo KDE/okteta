@@ -43,7 +43,7 @@ class KASTENCONTROLLER_EXPORT VersionViewTool : public AbstractTool
     virtual ~VersionViewTool();
 
   public:
-    AbstractModel *model() const;
+    AbstractModel* model() const;
 
   public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
@@ -55,11 +55,11 @@ class KASTENCONTROLLER_EXPORT VersionViewTool : public AbstractTool
     void modelChanged( Kasten::AbstractModel* model );
 
   protected: // sources
-    AbstractModel *mModel;
+    AbstractModel* mModel;
 };
 
 
-inline AbstractModel *VersionViewTool::model() const { return mModel; }
+inline AbstractModel* VersionViewTool::model() const { return mModel; }
 
 }
 

@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2006 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,31 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KVIEWFACTORY_H
-#define KVIEWFACTORY_H
-
-// lib
-#include "kastengui_export.h"
-
+#ifndef DOCUMENTVERSIONID_H
+#define DOCUMENTVERSIONID_H
 
 namespace Kasten
 {
 
-class KAbstractDocument;
-class KAbstractView;
-
-
-class KASTENGUI_EXPORT KViewFactory
-{
-  public:
-    virtual ~KViewFactory();
-
-  public:
-    virtual KAbstractView *createViewFor( KAbstractDocument *Document ) = 0;
-};
-
-
-inline KViewFactory::~KViewFactory() {}
+typedef int DocumentVersionId;
 
 }
 

@@ -23,7 +23,7 @@
 #include "dummyview.h"
 
 // lib
-#include "kabstractdocument.h"
+#include "abstractdocument.h"
 // Qt
 #include <QtGui/QLabel>
 
@@ -31,7 +31,7 @@
 namespace Kasten
 {
 
-DummyView::DummyView( KAbstractDocument *document )
+DummyView::DummyView( AbstractDocument* document )
  : mLabel( new QLabel() ),
    mDocument( document )
 {
@@ -41,7 +41,7 @@ DummyView::DummyView( KAbstractDocument *document )
 }
 
 
-KAbstractDocument *DummyView::document() const { return mDocument; }
+AbstractDocument* DummyView::document() const { return mDocument; }
 QWidget* DummyView::widget()             const { return mLabel; }
 QString DummyView::title()               const { return mDocument->title(); }
 

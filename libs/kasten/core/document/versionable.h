@@ -24,8 +24,8 @@
 #define KDE_IF_VERSIONABLE_H
 
 // lib
-// #include "kdocumentversionid.h"
-#include "kdocumentversiondata.h"
+// #include "documentversionid.h"
+#include "documentversiondata.h"
 // Qt
 #include <QtCore/QtPlugin>
 
@@ -73,7 +73,7 @@ class Versionable
   public: // get
 //     virtual KDocumentVersionId versionId() const = 0;
     virtual int versionIndex() const = 0;
-    virtual KDocumentVersionData versionData( int versionIndex ) const = 0;
+    virtual DocumentVersionData versionData( int versionIndex ) const = 0;
 //     virtual KDocumentVersionIterator currentVersion() const = 0;
 //     virtual KDocumentVersionIterator rootVersion() const = 0;
 //     virtual KDocumentVersionIterator headVersion() const = 0;
@@ -91,7 +91,7 @@ class Versionable
     // 
     virtual void revertedToVersionIndex( int versionIndex ) = 0;
     //
-    virtual void headVersionDataChanged( const KDocumentVersionData &versionData ) = 0;
+    virtual void headVersionDataChanged( const DocumentVersionData& versionData ) = 0;
     virtual void headVersionChanged( int newHeadVersionIndex ) = 0;
 };
 

@@ -37,7 +37,7 @@ namespace Kasten
 {
 
 ByteArrayRawFileConnectJob::ByteArrayRawFileConnectJob( KByteArrayRawFileSynchronizer *synchronizer,
-                                                        KAbstractDocument *document,
+                                                        AbstractDocument* document,
                                                         const KUrl &url,
                                                         AbstractModelSynchronizer::ConnectOption option )
  : AbstractFileSystemConnectJob( synchronizer, document, url, option )

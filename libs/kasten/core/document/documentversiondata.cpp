@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,41 +20,18 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kdocumentcreatemanager.h"
-
-// lib
-#include "kabstractdocumentfactory.h"
-#include "kdocumentmanager.h"
+#include "documentversiondata.h"
 
 
 namespace Kasten
 {
 
-KDocumentCreateManager::KDocumentCreateManager( KDocumentManager *manager )
- : mManager( manager ), mFactory( 0 ) {}
+DocumentVersionData::DocumentVersionData( DocumentVersionId id, const QString& changeComment )
+ : mId( id ), mChangeComment( changeComment )
+{}
 
-void KDocumentCreateManager::setWidget( QWidget *widget )
-{
-    mWidget = widget;
-}
+DocumentVersionId DocumentVersionData::id() const { return mId; }
 
-void KDocumentCreateManager::setDocumentFactory( KAbstractDocumentFactory *factory )
-{
-    mFactory = factory;
-}
-
-
-void KDocumentCreateManager::createNew()
-{
-    KAbstractDocument *document = mFactory->create();
-    if( document )
-        mManager->addDocument( document );
-}
-
-
-KDocumentCreateManager::~KDocumentCreateManager()
-{
-    delete mFactory;
-}
+QString DocumentVersionData::changeComment() const { return mChangeComment; }
 
 }

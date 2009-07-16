@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,12 +20,43 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kabstractdocumentfactory.h"
+#ifndef KASTEN_IF_WIDGETSDOCKABLE_H
+#define KASTEN_IF_WIDGETSDOCKABLE_H
+
+// Qt
+#include <QtCore/QtPlugin>
+#include <QtCore/QList>
 
 
 namespace Kasten
 {
 
-KAbstractDocumentFactory::~KAbstractDocumentFactory() {}
+class ToolViewDockWidget;
+
+
+namespace If
+{
+
+class WidgetsDockable
+{
+  public:
+    virtual ~WidgetsDockable();
+
+  public: // set/action
+//     virtual void setViewFocus( AbstractView *view ) = 0;
+
+  public: // get
+    virtual QList<ToolViewDockWidget*> dockWidgets() const = 0;
+
+  public: // signal
+//     virtual void viewFocusChanged( AbstractView *view ) = 0;
+};
+
+inline WidgetsDockable::~WidgetsDockable() {}
 
 }
+}
+
+Q_DECLARE_INTERFACE( Kasten::If::WidgetsDockable, "org.kde.kasten.if.widgetsdockable/1.0" )
+
+#endif

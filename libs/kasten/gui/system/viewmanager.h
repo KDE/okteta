@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KVIEWMANAGER_H
-#define KVIEWMANAGER_H
+#ifndef VIEWMANAGER_H
+#define VIEWMANAGER_H
 
 // lib
-#include "kabstractview.h"
+#include "abstractview.h"
 // Qt
 #include <QtCore/QList>
 #include <QtCore/QObject>
@@ -36,49 +36,49 @@ namespace Kasten
 {
 
 class ModelCodecViewManager;
-class KDocumentManager;
-class KViewFactory;
+class DocumentManager;
+class AbstractViewFactory;
 
 
-class KASTENGUI_EXPORT KViewManager : public QObject
+class KASTENGUI_EXPORT ViewManager : public QObject
 {
   Q_OBJECT
 
   public:
-    explicit KViewManager( KDocumentManager *documentManager );
-    virtual ~KViewManager();
+    explicit ViewManager( DocumentManager* documentManager );
+    virtual ~ViewManager();
 
   public:
     void setWindow( KXmlGuiWindow *window );
-    void setViewFactory( KViewFactory *factory );
+    void setViewFactory( AbstractViewFactory* factory );
 
   public:
-    QList<KAbstractView*> views() const;
-    KAbstractView *viewByWidget( QWidget *widget ) const;
-    KAbstractView* viewOfDocument( KAbstractDocument* document ) const;
+    QList<AbstractView*> views() const;
+    AbstractView *viewByWidget( QWidget* widget ) const;
+    AbstractView* viewOfDocument( AbstractDocument* document ) const;
 
   public:
     ModelCodecViewManager* codecViewManager();
 
   Q_SIGNALS:
     // view was created and already added to the list
-    void opened( Kasten::KAbstractView* view );
+    void opened( Kasten::AbstractView* view );
     // view will be closed, already removed from list
-    void closing( Kasten::KAbstractView* view );
+    void closing( Kasten::AbstractView* view );
 
   protected Q_SLOTS:
-    void createViewFor( Kasten::KAbstractDocument* document );
-    void removeViewsFor( Kasten::KAbstractDocument* document );
+    void createViewFor( Kasten::AbstractDocument* document );
+    void removeViewsFor( Kasten::AbstractDocument* document );
     /**
     * asks the manager to close and delete the view
     * may fail if the process if cancelled due to user input
     */
-//     void closeView( KAbstractView *view );
+//     void closeView( AbstractView *view );
 
   protected:
-    QList<KAbstractView*> mViewList;
-    KViewFactory *mFactory;
-    KDocumentManager *mDocumentManager;
+    QList<AbstractView*> mViewList;
+    AbstractViewFactory* mFactory;
+    DocumentManager* mDocumentManager;
 
     KXmlGuiWindow *mMainWindow;
 
@@ -87,7 +87,7 @@ class KASTENGUI_EXPORT KViewManager : public QObject
 };
 
 
-inline ModelCodecViewManager* KViewManager::codecViewManager() { return mCodecViewManager; }
+inline ModelCodecViewManager* ViewManager::codecViewManager() { return mCodecViewManager; }
 
 }
 

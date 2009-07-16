@@ -39,7 +39,7 @@ class KByteArrayRawFileSynchronizerFactory : public AbstractModelSynchronizerFac
     virtual ~KByteArrayRawFileSynchronizerFactory();
 
   public: // AbstractModelSynchronizerFactory API
-    virtual AbstractModelSynchronizer *createSynchronizer() const;
+    virtual AbstractModelSynchronizer* createSynchronizer() const;
 
     virtual QString supportedWorkType() const;
     virtual QString supportedRemoteType() const;

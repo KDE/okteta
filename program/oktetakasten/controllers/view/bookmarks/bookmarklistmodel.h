@@ -74,7 +74,7 @@ class BookmarkListModel : public QAbstractTableModel
     void onBookmarksChanged();
     void onBookmarksChanged( const QList<int>& bookmarkIndizes );
 //     void onHeadVersionChanged( int newHeadVersionIndex );
-//     void onHeadVersionDataChanged( const KDocumentVersionData &newVersionData );
+//     void onHeadVersionDataChanged( const DocumentVersionData &newVersionData );
 
   protected:
     BookmarksTool* mTool;

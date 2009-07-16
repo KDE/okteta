@@ -41,7 +41,7 @@ class TestDocumentFileWriteThread : public QThread
   Q_OBJECT
   public:
     TestDocumentFileWriteThread( QObject *parent, const QByteArray &header,
-                                 TestDocument *document, const QString &filePath );
+                                 TestDocument* document, const QString &filePath );
     virtual ~TestDocumentFileWriteThread();
 
   public: // QThread API
@@ -55,7 +55,7 @@ class TestDocumentFileWriteThread : public QThread
 
   protected:
     const QByteArray mHeader;
-    const TestDocument *mDocument;
+    const TestDocument* mDocument;
     const QString mFilePath;
 
     bool mSuccess;
@@ -63,7 +63,7 @@ class TestDocumentFileWriteThread : public QThread
 
 
 inline TestDocumentFileWriteThread::TestDocumentFileWriteThread( QObject *parent, const QByteArray &header,
-    TestDocument *document, const QString &filePath )
+    TestDocument* document, const QString &filePath )
  : QThread( parent ), mHeader( header ), mDocument( document ), mFilePath( filePath ), mSuccess( false )
 {}
 

@@ -25,7 +25,7 @@
 // lib
 #include "documentstool.h"
 // Kasten core
-#include <kabstractdocument.h>
+#include <abstractdocument.h>
 // KDE
 #include <KLocale>
 #include <KIcon>
@@ -38,12 +38,12 @@ DocumentListModel::DocumentListModel( DocumentsTool* documentsTool, QObject* par
  : QAbstractTableModel( parent ),
    mDocumentsTool( documentsTool )
 {
-    connect( mDocumentsTool, SIGNAL(documentAdded( Kasten::KAbstractDocument* )),
-             SLOT(onDocumentAdded( Kasten::KAbstractDocument* )) );
-    connect( mDocumentsTool, SIGNAL(documentClosing( Kasten::KAbstractDocument* )),
-             SLOT(onDocumentClosing( Kasten::KAbstractDocument* )) );
-    connect( mDocumentsTool, SIGNAL(focussedDocumentChanged( Kasten::KAbstractDocument* )),
-             SLOT(onFocussedDocumentChanged( Kasten::KAbstractDocument* )) );
+    connect( mDocumentsTool, SIGNAL(documentAdded( Kasten::AbstractDocument* )),
+             SLOT(onDocumentAdded( Kasten::AbstractDocument* )) );
+    connect( mDocumentsTool, SIGNAL(documentClosing( Kasten::AbstractDocument* )),
+             SLOT(onDocumentClosing( Kasten::AbstractDocument* )) );
+    connect( mDocumentsTool, SIGNAL(focussedDocumentChanged( Kasten::AbstractDocument* )),
+             SLOT(onFocussedDocumentChanged( Kasten::AbstractDocument* )) );
 }
 
 int DocumentListModel::rowCount( const QModelIndex& parent ) const
@@ -65,7 +65,7 @@ QVariant DocumentListModel::data( const QModelIndex& index, int role ) const
     if( role == Qt::DisplayRole )
     {
         const int documentIndex = index.row();
-        const KAbstractDocument* document = mDocumentsTool->documents().at( documentIndex );
+        const AbstractDocument* document = mDocumentsTool->documents().at( documentIndex );
 
         const int tableColumn = index.column();
         switch( tableColumn )
@@ -80,7 +80,7 @@ QVariant DocumentListModel::data( const QModelIndex& index, int role ) const
     else if( role == Qt::DecorationRole )
     {
         const int documentIndex = index.row();
-        const KAbstractDocument* document = mDocumentsTool->documents().at( documentIndex );
+        const AbstractDocument* document = mDocumentsTool->documents().at( documentIndex );
 
         const int tableColumn = index.column();
         switch( tableColumn )
@@ -90,7 +90,7 @@ QVariant DocumentListModel::data( const QModelIndex& index, int role ) const
                     result = KIcon( "arrow-right" );
                 break;
             case ModifiedColumnId:
-                if( document->synchronizationStates() != KAbstractDocument::InSync )
+                if( document->synchronizationStates() != AbstractDocument::InSync )
                     result = KIcon( "document-save" );
                 break;
             default:
@@ -127,7 +127,7 @@ QVariant DocumentListModel::headerData( int section, Qt::Orientation orientation
     return result;
 }
 
-void DocumentListModel::onFocussedDocumentChanged( KAbstractDocument* document )
+void DocumentListModel::onFocussedDocumentChanged( AbstractDocument* document )
 {
 Q_UNUSED( document )
 
@@ -142,15 +142,15 @@ Q_UNUSED( document )
 #endif
 }
 
-void DocumentListModel::onDocumentAdded( KAbstractDocument* document )
+void DocumentListModel::onDocumentAdded( AbstractDocument* document )
 {
-    connect( document, SIGNAL(modified( Kasten::KAbstractDocument::SynchronizationStates )),
+    connect( document, SIGNAL(modified( Kasten::AbstractDocument::SynchronizationStates )),
              SLOT(onModifiedChanged()) );
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
     reset();
 }
 
-void DocumentListModel::onDocumentClosing( KAbstractDocument* document )
+void DocumentListModel::onDocumentClosing( AbstractDocument* document )
 {
 Q_UNUSED( document )
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns

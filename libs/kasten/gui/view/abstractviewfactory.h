@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,13 +20,31 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KDOCUMENTVERSIONID_H
-#define KDOCUMENTVERSIONID_H
+#ifndef ABSTRACTVIEWFACTORY_H
+#define ABSTRACTVIEWFACTORY_H
+
+// lib
+#include "kastengui_export.h"
+
 
 namespace Kasten
 {
 
-typedef int KDocumentVersionId;
+class AbstractDocument;
+class AbstractView;
+
+
+class KASTENGUI_EXPORT AbstractViewFactory
+{
+  public:
+    virtual ~AbstractViewFactory();
+
+  public:
+    virtual AbstractView *createViewFor( AbstractDocument* document ) = 0;
+};
+
+
+inline AbstractViewFactory::~AbstractViewFactory() {}
 
 }
 

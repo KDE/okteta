@@ -50,25 +50,25 @@ class TestDocumentFileSynchronizer : public AbstractModelFileSystemSynchronizer
     virtual AbstractSyncToRemoteJob *startSyncToRemote();
     virtual AbstractSyncFromRemoteJob *startSyncFromRemote();
     virtual AbstractSyncWithRemoteJob *startSyncWithRemote( const KUrl &url, AbstractModelSynchronizer::ConnectOption option );
-    virtual AbstractConnectJob *startConnect( KAbstractDocument *document,
+    virtual AbstractConnectJob *startConnect( AbstractDocument* document,
                                               const KUrl &url, AbstractModelSynchronizer::ConnectOption option );
 
-    virtual KAbstractDocument *document() const;
+    virtual AbstractDocument* document() const;
 
   public:
     const QByteArray &header() const;
 
   protected:
-    void setDocument( TestDocument *document );
+    void setDocument( TestDocument* document );
 
   protected:
-    TestDocument *mDocument;
+    TestDocument* mDocument;
     const QByteArray mHeader;
 };
 
 
 inline  const QByteArray &TestDocumentFileSynchronizer::header() const { return mHeader; }
-inline void TestDocumentFileSynchronizer::setDocument( TestDocument *document ) { mDocument = document; }
+inline void TestDocumentFileSynchronizer::setDocument( TestDocument* document ) { mDocument = document; }
 
 }
 

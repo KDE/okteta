@@ -53,7 +53,7 @@ void SynchronizeController::setTargetModel( AbstractModel* model )
 {
     if( mDocument ) mDocument->disconnect( this );
 
-    mDocument = model ? model->findBaseModel<KAbstractDocument*>() : 0;
+    mDocument = model ? model->findBaseModel<AbstractDocument*>() : 0;
 
     if( mDocument )
     {
@@ -85,19 +85,19 @@ void SynchronizeController::onSynchronizerChange( AbstractModelSynchronizer* new
     if( mSynchronizer )
     {
         hasUrl = !mSynchronizer->url().isEmpty();
-        outOfSync = hasUrl && ( mDocument->synchronizationStates() != KAbstractDocument::InSync );
-        connect( mDocument, SIGNAL(modified( Kasten::KAbstractDocument::SynchronizationStates )),
-                            SLOT(onSynchronizationStateChange( Kasten::KAbstractDocument::SynchronizationStates )) );
+        outOfSync = hasUrl && ( mDocument->synchronizationStates() != AbstractDocument::InSync );
+        connect( mDocument, SIGNAL(modified( Kasten::AbstractDocument::SynchronizationStates )),
+                            SLOT(onSynchronizationStateChange( Kasten::AbstractDocument::SynchronizationStates )) );
     }
 
     mSaveAction->setEnabled( mSynchronizer && outOfSync );
     mReloadAction->setEnabled( mSynchronizer && outOfSync );
 }
 
-void SynchronizeController::onSynchronizationStateChange( KAbstractDocument::SynchronizationStates newStates )
+void SynchronizeController::onSynchronizationStateChange( AbstractDocument::SynchronizationStates newStates )
 {
     const bool hasUrl = !mSynchronizer->url().isEmpty();
-    const bool outOfSync = hasUrl && ( newStates != KAbstractDocument::InSync );
+    const bool outOfSync = hasUrl && ( newStates != AbstractDocument::InSync );
     mSaveAction->setEnabled( outOfSync );
     mReloadAction->setEnabled( outOfSync );
 }

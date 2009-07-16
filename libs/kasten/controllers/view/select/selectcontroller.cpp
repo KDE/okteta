@@ -23,8 +23,8 @@
 #include "selectcontroller.h"
 
 // Kasten gui
-#include <kidataselectable.h>
-#include <kabstractview.h>
+#include <dataselectable.h>
+#include <abstractview.h>
 // KDE
 #include <KXMLGUIClient>
 #include <KLocale>

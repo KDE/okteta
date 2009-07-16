@@ -36,7 +36,7 @@ class KUrl;
 namespace Kasten
 {
 
-class KDocumentSyncManager;
+class DocumentSyncManager;
 
 
 class KASTENCONTROLLER_EXPORT LoaderController : public AbstractXmlGuiController
@@ -44,7 +44,7 @@ class KASTENCONTROLLER_EXPORT LoaderController : public AbstractXmlGuiController
   Q_OBJECT
 
   public:
-    LoaderController( KDocumentSyncManager* syncManager, KXMLGUIClient* guiClient );
+    LoaderController( DocumentSyncManager* syncManager, KXMLGUIClient* guiClient );
     ~LoaderController();
 
   public: // AbstractXmlGuiController API
@@ -57,7 +57,7 @@ class KASTENCONTROLLER_EXPORT LoaderController : public AbstractXmlGuiController
     void onUrlUsed( const KUrl &url );
 
   protected:
-    KDocumentSyncManager *mSyncManager;
+    DocumentSyncManager* mSyncManager;
 
     KRecentFilesAction *mOpenRecentAction;
 };

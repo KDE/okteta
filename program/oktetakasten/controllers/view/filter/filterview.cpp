@@ -46,7 +46,7 @@
 namespace Kasten
 {
 
-FilterView::FilterView( FilterTool *tool, QWidget *parent )
+FilterView::FilterView( FilterTool *tool, QWidget* parent )
   : QWidget( parent ), mTool( tool )
 {
     QVBoxLayout *baseLayout = new QVBoxLayout( this );
@@ -145,7 +145,7 @@ void FilterView::onFilterClicked()
 
 void FilterView::onOperationChange( int index )
 {
-    QWidget *oldWidget = mParameterSetEditStack->currentWidget();
+    QWidget* oldWidget = mParameterSetEditStack->currentWidget();
     if( oldWidget )
         oldWidget->disconnect( this );
 

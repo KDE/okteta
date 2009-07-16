@@ -89,8 +89,8 @@ Q_UNUSED( data )
 Q_UNUSED( fileUrl )
     Kasten::TestDocumentFileSynchronizerFactory *factory = new Kasten::TestDocumentFileSynchronizerFactory( header );
 #if 0
-    KAbstractDocument *document = factory->loadNewDocument( fileUrl );
-    Kasten::TestDocument *testDocument = qobject_cast<Kasten::TestDocument *>( document );
+    AbstractDocument* document = factory->loadNewDocument( fileUrl );
+    Kasten::TestDocument* testDocument = qobject_cast<Kasten::TestDocument* >( document );
     QVERIFY( testDocument != 0 );
     QCOMPARE( *testDocument->data(), data );
 
@@ -115,9 +115,9 @@ void TestDocumentFileSynchronizerFactoryTest::testLoadFromFile()
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName1) ).prepend( FileProtocolName );
 
     Kasten::TestDocumentFileSynchronizerFactory *factory = new Kasten::TestDocumentFileSynchronizerFactory();
-    KAbstractDocument *document = factory->loadNewDocument( fileUrl );
+    AbstractDocument* document = factory->loadNewDocument( fileUrl );
 
-    Kasten::TestDocument *testDocument = qobject_cast<Kasten::TestDocument *>( document );
+    Kasten::TestDocument* testDocument = qobject_cast<Kasten::TestDocument* >( document );
 
     QVERIFY( document != 0 );
     QVERIFY( testDocument != 0 );
@@ -136,7 +136,7 @@ void TestDocumentFileSynchronizerFactoryTest::testLoadFromNotExistingUrl()
 {
     const KUrl fileUrl( QString::fromLatin1(NotExistingUrlName) );
     Kasten::TestDocumentFileSynchronizerFactory *factory = new Kasten::TestDocumentFileSynchronizerFactory();
-    KAbstractDocument *document = factory->loadNewDocument( fileUrl );
+    AbstractDocument* document = factory->loadNewDocument( fileUrl );
 
     QVERIFY( document == 0 );
     delete factory;
@@ -146,7 +146,7 @@ void TestDocumentFileSynchronizerFactoryTest::testLoadFromNotExistingFile()
 {
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(NotExistingFileName) ).prepend( FileProtocolName );
     Kasten::TestDocumentFileSynchronizerFactory *factory = new Kasten::TestDocumentFileSynchronizerFactory();
-    KAbstractDocument *document = factory->loadNewDocument( fileUrl );
+    AbstractDocument* document = factory->loadNewDocument( fileUrl );
 
     QVERIFY( document == 0 );
     delete factory;
@@ -158,9 +158,9 @@ void TestDocumentFileSynchronizerFactoryTest::testLoadSaveFile()
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName1) ).prepend( FileProtocolName );
 
     Kasten::TestDocumentFileSynchronizerFactory *factory = new Kasten::TestDocumentFileSynchronizerFactory();
-    KAbstractDocument *document = factory->loadNewDocument( fileUrl );
+    AbstractDocument* document = factory->loadNewDocument( fileUrl );
 
-    Kasten::TestDocument *testDocument = qobject_cast<Kasten::TestDocument *>( document );
+    Kasten::TestDocument* testDocument = qobject_cast<Kasten::TestDocument* >( document );
     QVERIFY( testDocument != 0 );
     // change and save
     testDocument->setData( otherData );
@@ -180,9 +180,9 @@ void TestDocumentFileSynchronizerFactoryTest::testLoadReloadFile()
     const KUrl fileUrl = QString( filePath ).prepend( FileProtocolName );
 
     Kasten::TestDocumentFileSynchronizerFactory *factory = new Kasten::TestDocumentFileSynchronizerFactory();
-    KAbstractDocument *document = factory->loadNewDocument( fileUrl );
+    AbstractDocument* document = factory->loadNewDocument( fileUrl );
 
-    Kasten::TestDocument *testDocument = qobject_cast<Kasten::TestDocument *>( document );
+    Kasten::TestDocument* testDocument = qobject_cast<Kasten::TestDocument* >( document );
     QVERIFY( testDocument != 0 );
 
     // change on disc and reload
@@ -206,8 +206,8 @@ void TestDocumentFileSynchronizerFactoryTest::testConnectToFile()
     const KUrl fileUrl2 = QString( filePath2 ).prepend( FileProtocolName );
 
     Kasten::TestDocumentFileSynchronizerFactory *factory = new Kasten::TestDocumentFileSynchronizerFactory();
-    Kasten::TestDocument *testDocument = new Kasten::TestDocument();
-    KAbstractDocument *document = testDocument;
+    Kasten::TestDocument* testDocument = new Kasten::TestDocument();
+    AbstractDocument* document = testDocument;
     testDocument->setData( otherData );
 
     // file 1

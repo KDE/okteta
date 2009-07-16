@@ -43,7 +43,7 @@ TestDocumentFileWriteJob::TestDocumentFileWriteJob( TestDocumentFileSynchronizer
 void TestDocumentFileWriteJob::startWriteToFile()
 {
     TestDocumentFileSynchronizer *testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>( synchronizer() );
-    TestDocument *document = qobject_cast<TestDocument*>( synchronizer()->document() );
+    TestDocument* document = qobject_cast<TestDocument*>( synchronizer()->document() );
 
     TestDocumentFileWriteThread *writeThread = new TestDocumentFileWriteThread( this, testSynchronizer->header(),  document, workFilePath() );
     writeThread->start();

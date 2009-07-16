@@ -60,7 +60,7 @@ DocumentsView::DocumentsView( DocumentsTool* tool, QWidget* parent )
 void DocumentsView::onDocumentActivated( const QModelIndex& index )
 {
     const int documentIndex = index.row();
-    KAbstractDocument* document = mTool->documents().at( documentIndex );
+    AbstractDocument* document = mTool->documents().at( documentIndex );
 
     if( document )
         mTool->setFocussedDocument( document );

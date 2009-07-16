@@ -30,7 +30,7 @@
 namespace Kasten
 {
 
-class KAbstractView;
+class AbstractView;
 
 
 class ViewBox : public QWidget
@@ -41,17 +41,17 @@ class ViewBox : public QWidget
     enum Area { TopArea, BottomArea };
 
   public:
-    explicit ViewBox( KAbstractView* view, QWidget* parent = 0 );
+    explicit ViewBox( AbstractView* view, QWidget* parent = 0 );
     virtual ~ViewBox();
 
   public:
-    KAbstractView* view() const;
+    AbstractView* view() const;
 
   public:
     void add( ViewBox::Area area );
 
   protected:
-    KAbstractView* mView;
+    AbstractView* mView;
 };
 
 }

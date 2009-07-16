@@ -23,7 +23,7 @@
 #include "nobytearrayfilterparametersetedit.h"
 
 
-NoByteArrayFilterParameterSetEdit::NoByteArrayFilterParameterSetEdit( QWidget *parent )
+NoByteArrayFilterParameterSetEdit::NoByteArrayFilterParameterSetEdit( QWidget* parent )
  : AbstractByteArrayFilterParameterSetEdit( parent )
 {}
 

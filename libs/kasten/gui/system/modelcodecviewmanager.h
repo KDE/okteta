@@ -41,7 +41,7 @@ class AbstractModelStreamEncoder;
 class AbstractModelExporterConfigEditorFactory;
 class AbstractModelExporterConfigEditor;
 class AbstractModelExporter;
-class KViewManager;
+class ViewManager;
 
 
 class KASTENGUI_EXPORT ModelCodecViewManager : public QObject

@@ -25,18 +25,18 @@
 
 
 // Kasten core
-#include <kabstractdocumentfactory.h>
+#include <abstractdocumentfactory.h>
 
 
 namespace Kasten
 {
 
-class KByteArrayDocumentFactory : public KAbstractDocumentFactory
+class KByteArrayDocumentFactory : public AbstractDocumentFactory
 {
     Q_OBJECT
 
-  public: // KAbstractDocumentFactory API
-    virtual KAbstractDocument *create();
+  public: // AbstractDocumentFactory API
+    virtual AbstractDocument* create();
 };
 
 }

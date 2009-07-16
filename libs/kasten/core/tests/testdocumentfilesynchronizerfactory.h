@@ -41,7 +41,7 @@ class TestDocumentFileSynchronizerFactory : public AbstractModelSynchronizerFact
     virtual ~TestDocumentFileSynchronizerFactory();
 
   public: // AbstractModelSynchronizerFactory API
-    virtual AbstractModelSynchronizer *createSynchronizer() const;
+    virtual AbstractModelSynchronizer* createSynchronizer() const;
 
     virtual QString supportedWorkType() const;
     virtual QString supportedRemoteType() const;

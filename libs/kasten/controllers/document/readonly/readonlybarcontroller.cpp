@@ -23,7 +23,7 @@
 #include "readonlybarcontroller.h"
 
 // lib
-#include <kabstractdocument.h>
+#include <abstractdocument.h>
 // Kasten ui
 #include <togglebutton.h>
 #include <statusbar.h>
@@ -53,7 +53,7 @@ void ReadOnlyBarController::setTargetModel( AbstractModel* model )
 {
     if( mDocument ) mDocument->disconnect( mReadOnlyButton );
 
-    mDocument = model ? model->findBaseModel<KAbstractDocument*>() : 0;
+    mDocument = model ? model->findBaseModel<AbstractDocument*>() : 0;
 
     if( mDocument )
     {

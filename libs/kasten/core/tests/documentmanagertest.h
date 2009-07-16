@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,43 +20,31 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KASTEN_IF_WIDGETSDOCKABLE_H
-#define KASTEN_IF_WIDGETSDOCKABLE_H
+#ifndef DOCUMENTMANAGERTEST_H
+#define DOCUMENTMANAGERTEST_H
 
 // Qt
-#include <QtCore/QtPlugin>
-#include <QtCore/QList>
+#include <QtCore/QObject>
+
+namespace Kasten {
+class AbstractDocument;
+}
+class QSignalSpy;
 
 
-namespace Kasten
+class DocumentManagerTest : public QObject
 {
+  Q_OBJECT
 
-class ToolViewDockWidget;
+  private:
+    void checkAdded( QSignalSpy* changedSpy, Kasten::AbstractDocument* document );
+    void checkRemoving( QSignalSpy* changedSpy, Kasten::AbstractDocument* document );
 
+  private Q_SLOTS: // test functions
+    void testConstructor();
+    void testAddRemove();
+    void testCanClose();
 
-namespace If
-{
-
-class WidgetsDockable
-{
-  public:
-    virtual ~WidgetsDockable();
-
-  public: // set/action
-//     virtual void setViewFocus( KAbstractView *view ) = 0;
-
-  public: // get
-    virtual QList<ToolViewDockWidget*> dockWidgets() const = 0;
-
-  public: // signal
-//     virtual void viewFocusChanged( KAbstractView *view ) = 0;
 };
-
-inline WidgetsDockable::~WidgetsDockable() {}
-
-}
-}
-
-Q_DECLARE_INTERFACE( Kasten::If::WidgetsDockable, "org.kde.kasten.if.widgetsdockable/1.0" )
 
 #endif

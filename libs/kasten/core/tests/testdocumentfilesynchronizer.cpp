@@ -47,7 +47,7 @@ TestDocumentFileSynchronizer::TestDocumentFileSynchronizer( const QByteArray &he
 //     mDocument->setTitle( url.fileName() );
 }
 
-KAbstractDocument *TestDocumentFileSynchronizer::document() const { return mDocument; }
+AbstractDocument* TestDocumentFileSynchronizer::document() const { return mDocument; }
 
 
 AbstractLoadJob *TestDocumentFileSynchronizer::startLoad( const KUrl &url )
@@ -70,7 +70,7 @@ AbstractSyncWithRemoteJob *TestDocumentFileSynchronizer::startSyncWithRemote( co
     return new TestDocumentFileWriteToJob( this, url, option );
 }
 
-AbstractConnectJob *TestDocumentFileSynchronizer::startConnect( KAbstractDocument *document,
+AbstractConnectJob *TestDocumentFileSynchronizer::startConnect( AbstractDocument* document,
                                               const KUrl &url, AbstractModelSynchronizer::ConnectOption option )
 {
     return new TestDocumentFileConnectJob( this, document, url, option );

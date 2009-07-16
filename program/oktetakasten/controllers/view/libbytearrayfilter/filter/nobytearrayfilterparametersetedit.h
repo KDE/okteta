@@ -30,7 +30,7 @@
 class NoByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterParameterSetEdit
 {
   public:
-    explicit NoByteArrayFilterParameterSetEdit( QWidget *parent = 0 );
+    explicit NoByteArrayFilterParameterSetEdit( QWidget* parent = 0 );
     virtual ~NoByteArrayFilterParameterSetEdit();
 
   public: // AbstractByteArrayFilterParameterSetEdit API

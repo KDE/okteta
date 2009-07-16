@@ -35,7 +35,7 @@ set( KASTEN_GUI_CONTROLLER_WIDGETS_SRCS
 
 set( kastengui_LIB_SRCS
   ${KASTEN_GUI_IO_CONFIGEDITOR_SRCS}
-  view/kabstractview.cpp
+  view/abstractview.cpp
   view/abstractselectionview.cpp
   view/abstracttoolinlineview.cpp
   view/abstracttoolview.cpp
@@ -44,7 +44,7 @@ set( kastengui_LIB_SRCS
   system/toolviewdockwidget.cpp
   system/dummyview.cpp
   system/modelcodecviewmanager.cpp
-  system/kviewmanager.cpp
+  system/viewmanager.cpp
   system/abstractgroupedviews.cpp
   system/tabbedviewsbox.cpp
   system/tabbedviews.cpp
@@ -57,22 +57,21 @@ set( kastengui_LIB_SRCS
 
 set( kastengui_LIB_HDRS
   kastengui_export.h
-  view/kviewfactory.h
-  view/kiselecteddatawriteable.h
+  view/abstractviewfactory.h
+  view/selecteddatawriteable.h
   view/abstracttoolinlineview.h
-  view/kabstractview.h
+  view/abstractview.h
   view/abstractselectionview.h
   view/abstracttoolview.h
-  view/kiclipboard.h
-  view/kidataselectable.h
-  view/kizoomable.h
+  view/dataselectable.h
+  view/zoomable.h
   io/filesystem/modelencoderfilesystemexporterconfigeditor.h
   io/filesystem/modelencoderfilesystemexporterconfigeditorfactory.h
   io/abstractmodelstreamencoderconfigeditor.h
   io/abstractmodelexporterconfigeditor.h
   io/abstractmodelexporterconfigeditorfactory.h
   io/abstractmodelstreamencoderconfigeditorfactory.h
-  system/kviewmanager.h
+  system/viewmanager.h
   system/shellwindow.h
   system/abstractgroupedviews.h
   system/statusbar.h
@@ -84,9 +83,9 @@ set( kastengui_LIB_HDRS
   system/statusbarlayout.h
   system/dummyview.h
   system/modelcodecviewmanager.h
-  system/kiviewfocusable.h
-  system/kitoolinlineviewable.h
-  system/iwidgetsdockable.h
+  system/viewfocusable.h
+  system/toolinlineviewable.h
+  system/widgetsdockable.h
   controller/abstractxmlguicontroller.h
   controller/abstractlinepopup.h
   controller/togglebutton.h

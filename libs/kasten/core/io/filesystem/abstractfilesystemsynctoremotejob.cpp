@@ -24,7 +24,7 @@
 
 // library
 #include "abstractmodelfilesystemsynchronizer.h"
-#include <kabstractdocument.h>
+#include <abstractdocument.h>
 // KDE
 #include <KIO/NetAccess>
 #include <KTemporaryFile>
@@ -49,7 +49,7 @@ class AbstractFileSystemSyncToRemoteJob::Private
   public:
     KUrl url() const;
     QString workFilePath() const;
-    QWidget *widget() const;
+    QWidget* widget() const;
     AbstractModelFileSystemSynchronizer* synchronizer() const;
 
   protected:
@@ -65,7 +65,7 @@ AbstractFileSystemSyncToRemoteJob::Private::Private( AbstractModelFileSystemSync
 inline KUrl AbstractFileSystemSyncToRemoteJob::Private::url()             const { return mSynchronizer->url(); }
 inline QString AbstractFileSystemSyncToRemoteJob::Private::workFilePath() const { return mWorkFilePath; }
 // TODO: setup a notification system
-inline QWidget *AbstractFileSystemSyncToRemoteJob::Private::widget()      const { return 0; }
+inline QWidget* AbstractFileSystemSyncToRemoteJob::Private::widget()      const { return 0; }
 inline AbstractModelFileSystemSynchronizer *AbstractFileSystemSyncToRemoteJob::Private::synchronizer() const
 {
     return mSynchronizer;
@@ -97,7 +97,7 @@ AbstractModelFileSystemSynchronizer* AbstractFileSystemSyncToRemoteJob::synchron
     return d->synchronizer();
 }
 QString AbstractFileSystemSyncToRemoteJob::workFilePath() const { return d->workFilePath(); }
-QWidget *AbstractFileSystemSyncToRemoteJob::widget() const { return d->widget(); }
+QWidget* AbstractFileSystemSyncToRemoteJob::widget() const { return d->widget(); }
 
 void AbstractFileSystemSyncToRemoteJob::start()
 {

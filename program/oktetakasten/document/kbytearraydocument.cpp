@@ -79,7 +79,7 @@ bool KByteArrayDocument::isModifiable() const { return true; }
 bool KByteArrayDocument::isReadOnly()   const { return mByteArray->isReadOnly(); }
 void KByteArrayDocument::setReadOnly( bool isReadOnly ) { mByteArray->setReadOnly( isReadOnly ); }
 
-KAbstractDocument::SynchronizationStates KByteArrayDocument::synchronizationStates() const
+AbstractDocument::SynchronizationStates KByteArrayDocument::synchronizationStates() const
 {
     return mByteArray->isModified() ? LocalHasChanges : InSync;
 }
@@ -93,10 +93,10 @@ void KByteArrayDocument::setTitle( const QString &title )
 
 int KByteArrayDocument::versionIndex() const { return mByteArray->versionIndex(); }
 int KByteArrayDocument::versionCount() const { return mByteArray->versionCount(); }
-KDocumentVersionData KByteArrayDocument::versionData( int versionIndex ) const
+DocumentVersionData KByteArrayDocument::versionData( int versionIndex ) const
 {
     const QString changeComment = ( versionIndex == 0 ) ? mInitDescription : mByteArray->versionDescription(versionIndex);
-    return KDocumentVersionData( versionIndex, changeComment );
+    return DocumentVersionData( versionIndex, changeComment );
 }
 
 void KByteArrayDocument::revertToVersionByIndex( int versionIndex ) { mByteArray->revertToVersionByIndex( versionIndex ); }
@@ -108,7 +108,7 @@ void KByteArrayDocument::onModelModification( bool newState )
 
 void KByteArrayDocument::onHeadVersionDescriptionChanged( const QString &newDescription )
 {
-    const KDocumentVersionData data( mByteArray->versionIndex(), newDescription );
+    const DocumentVersionData data( mByteArray->versionIndex(), newDescription );
     emit headVersionDataChanged( data );
 }
 

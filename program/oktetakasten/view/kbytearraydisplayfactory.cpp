@@ -30,7 +30,7 @@
 namespace Kasten
 {
 
-KAbstractView *KByteArrayDisplayFactory::createViewFor( KAbstractDocument *D )
+AbstractView *KByteArrayDisplayFactory::createViewFor( AbstractDocument* D )
 {
     KByteArrayDisplay *result = 0;
 

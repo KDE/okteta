@@ -34,7 +34,7 @@
 #include <QtGui/QLayout>
 
 
-OperandByteArrayFilterParameterSetEdit::OperandByteArrayFilterParameterSetEdit( QWidget *parent )
+OperandByteArrayFilterParameterSetEdit::OperandByteArrayFilterParameterSetEdit( QWidget* parent )
  : AbstractByteArrayFilterParameterSetEdit( parent )
 {
     QVBoxLayout *baseLayout = new QVBoxLayout( this );

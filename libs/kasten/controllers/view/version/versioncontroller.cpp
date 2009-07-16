@@ -23,8 +23,8 @@
 #include "versioncontroller.h"
 
 // Kasten core
-#include <kdocumentversiondata.h>
-#include <kiversionable.h>
+#include <documentversiondata.h>
+#include <versionable.h>
 #include <abstractmodel.h>
 // KDE
 #include <KXMLGUIClient>
@@ -139,7 +139,7 @@ void VersionController::onOlderVersionMenuAboutToShow()
          versionIndex > 0 && menuEntries < MaxMenuEntries;
          --versionIndex, ++menuEntries )
     {
-        KDocumentVersionData versionData = mVersionControl->versionData( versionIndex );
+        DocumentVersionData versionData = mVersionControl->versionData( versionIndex );
 
         const QString changeComment = versionData.changeComment();
 
@@ -160,7 +160,7 @@ void VersionController::onNewerVersionMenuAboutToShow()
          versionIndex < mVersionControl->versionCount() && menuEntries < MaxMenuEntries;
          ++versionIndex, ++menuEntries )
     {
-        KDocumentVersionData versionData = mVersionControl->versionData( versionIndex );
+        DocumentVersionData versionData = mVersionControl->versionData( versionIndex );
 
         const QString changeComment = versionData.changeComment();
 

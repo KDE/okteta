@@ -42,7 +42,7 @@ QString KByteArrayRawFileSynchronizerFactory::supportedWorkType() const { return
 QString KByteArrayRawFileSynchronizerFactory::supportedRemoteType() const { return QLatin1String("application/octet-stream");}
 
 
-AbstractModelSynchronizer *KByteArrayRawFileSynchronizerFactory::createSynchronizer() const
+AbstractModelSynchronizer* KByteArrayRawFileSynchronizerFactory::createSynchronizer() const
 {
     return new KByteArrayRawFileSynchronizer();
 }

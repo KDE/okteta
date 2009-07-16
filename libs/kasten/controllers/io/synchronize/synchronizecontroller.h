@@ -28,7 +28,7 @@
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 // Kasten core
-#include <kabstractdocument.h>
+#include <abstractdocument.h>
 
 class KAction;
 class KXMLGUIClient;
@@ -57,10 +57,10 @@ class KASTENCONTROLLER_EXPORT SynchronizeController : public AbstractXmlGuiContr
 
   private Q_SLOTS:
     void onSynchronizerChange( Kasten::AbstractModelSynchronizer* newSynchronizer );
-    void onSynchronizationStateChange( Kasten::KAbstractDocument::SynchronizationStates newStates );
+    void onSynchronizationStateChange( Kasten::AbstractDocument::SynchronizationStates newStates );
 
   protected:
-    KAbstractDocument *mDocument;
+    AbstractDocument* mDocument;
     AbstractModelFileSystemSynchronizer* mSynchronizer;
 
     KAction *mSaveAction;

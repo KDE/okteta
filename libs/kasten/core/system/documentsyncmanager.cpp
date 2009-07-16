@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kdocumentsyncmanager.h"
+#include "documentsyncmanager.h"
 
 // lib
 #include "jobmanager.h"
-#include "kdocumentmanager.h"
+#include "documentmanager.h"
 #include <abstractloadjob.h>
 #include <abstractconnectjob.h>
 #include <abstractsynctoremotejob.h>
@@ -45,34 +45,34 @@ namespace Kasten
 static const char AllFileNamesFilter[] = "*";  // krazy:exclude=doublequote_chars
 
 
-KDocumentSyncManager::KDocumentSyncManager( KDocumentManager *manager )
+DocumentSyncManager::DocumentSyncManager( DocumentManager* manager )
  : mManager( manager ), mWidget( 0 ), mSynchronizerFactory( 0 )
 {}
 
-void KDocumentSyncManager::setWidget( QWidget *widget )
+void DocumentSyncManager::setWidget( QWidget* widget )
 {
     mWidget = widget;
 }
 
-bool KDocumentSyncManager::hasSynchronizerForLocal( const QString &workDocumentType ) const
+bool DocumentSyncManager::hasSynchronizerForLocal( const QString &workDocumentType ) const
 {
     // TODO: need synchronizerfactory classes to query for this or a local datastructure
     return ( mSynchronizerFactory->supportedWorkType() == workDocumentType );
 }
 
-KUrl KDocumentSyncManager::urlOf( KAbstractDocument *document ) const
+KUrl DocumentSyncManager::urlOf( AbstractDocument* document ) const
 {
     AbstractModelSynchronizer* synchronizer = document->synchronizer();
 
     return synchronizer ? synchronizer->url() : KUrl();
 }
 
-void KDocumentSyncManager::setDocumentSynchronizerFactory( AbstractModelSynchronizerFactory* synchronizerFactory )
+void DocumentSyncManager::setDocumentSynchronizerFactory( AbstractModelSynchronizerFactory* synchronizerFactory )
 {
     mSynchronizerFactory = synchronizerFactory;
 }
 
-void KDocumentSyncManager::load()
+void DocumentSyncManager::load()
 {
     KUrl::List urls = KFileDialog::getOpenUrls( QString()/*mWorkingUrl.url()*/, AllFileNamesFilter, mWidget );
 
@@ -80,9 +80,9 @@ void KDocumentSyncManager::load()
         load( url );
 }
 
-void KDocumentSyncManager::load( const KUrl &url )
+void DocumentSyncManager::load( const KUrl &url )
 {
-    KAbstractDocument* document = mManager->documentOfUrl( url );
+    AbstractDocument* document = mManager->documentOfUrl( url );
     if( document )
     {
         // TODO: query if file should be reloaded/synched from disk
@@ -92,7 +92,7 @@ void KDocumentSyncManager::load( const KUrl &url )
 
     AbstractModelSynchronizer* synchronizer = mSynchronizerFactory->createSynchronizer();
     AbstractLoadJob *loadJob = synchronizer->startLoad( url );
-    connect( loadJob, SIGNAL(documentLoaded( Kasten::KAbstractDocument * )), SLOT(onDocumentLoaded( Kasten::KAbstractDocument * )) );
+    connect( loadJob, SIGNAL(documentLoaded( Kasten::AbstractDocument* )), SLOT(onDocumentLoaded( Kasten::AbstractDocument* )) );
 
     JobManager::executeJob( loadJob, mWidget );
 
@@ -101,13 +101,13 @@ void KDocumentSyncManager::load( const KUrl &url )
     emit urlUsed( url );
 }
 
-void KDocumentSyncManager::onDocumentLoaded( KAbstractDocument *document )
+void DocumentSyncManager::onDocumentLoaded( AbstractDocument* document )
 {
     if( document )
         mManager->addDocument( document );
 }
 
-bool KDocumentSyncManager::setSynchronizer( KAbstractDocument *document )
+bool DocumentSyncManager::setSynchronizer( AbstractDocument* document )
 {
     bool storingDone = false;
 
@@ -197,7 +197,7 @@ bool KDocumentSyncManager::setSynchronizer( KAbstractDocument *document )
    return storingDone;
 }
 
-bool KDocumentSyncManager::canClose( KAbstractDocument *document )
+bool DocumentSyncManager::canClose( AbstractDocument* document )
 {
     bool canClose = true;
 
@@ -244,7 +244,7 @@ bool KDocumentSyncManager::canClose( KAbstractDocument *document )
     return canClose;
 }
 
-KDocumentSyncManager::~KDocumentSyncManager()
+DocumentSyncManager::~DocumentSyncManager()
 {
     delete mSynchronizerFactory;
 }

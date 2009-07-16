@@ -20,14 +20,14 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KABSTRACTVIEW_H
-#define KABSTRACTVIEW_H
+#ifndef ABSTRACTVIEW_H
+#define ABSTRACTVIEW_H
 
 
 // lib
 #include "kastengui_export.h"
 // Kasten core
-#include <kabstractdocument.h>
+#include <abstractdocument.h>
 
 class QWidget;
 
@@ -36,29 +36,29 @@ namespace Kasten
 {
 
 // TODO: is there a common base for view and document?
-class KASTENGUI_EXPORT KAbstractView : public AbstractModel
+class KASTENGUI_EXPORT AbstractView : public AbstractModel
 {
     Q_OBJECT
   public:
-    virtual ~KAbstractView();
+    virtual ~AbstractView();
 
   public: // API to be implemented
-    virtual QWidget *widget() const = 0;
-    virtual KAbstractDocument *document() const = 0;
+    virtual QWidget* widget() const = 0;
+    virtual AbstractDocument* document() const = 0;
 
   public:
-//     virtual bool setDocument( KAbstractDocument *document ) = 0;
+//     virtual bool setDocument( AbstractDocument* document ) = 0;
     bool hasLocalChanges() const;
 
   Q_SIGNALS:
     // TODO: should be signal the diff? how to say then remote is in synch again?
-    void modified( Kasten::KAbstractDocument::SynchronizationStates newStates );
+    void modified( Kasten::AbstractDocument::SynchronizationStates newStates );
 };
 
 // TODO: hack!!!! remove me!
-inline bool KAbstractView::hasLocalChanges() const { return document()->hasLocalChanges(); }
+inline bool AbstractView::hasLocalChanges() const { return document()->hasLocalChanges(); }
 
-inline KAbstractView::~KAbstractView() {}
+inline AbstractView::~AbstractView() {}
 
 }
 

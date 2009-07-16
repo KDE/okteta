@@ -43,7 +43,7 @@ class KASTENCONTROLLER_EXPORT VersionViewToolView : public AbstractToolView
     virtual ~VersionViewToolView();
 
   public: // AbstractToolView API
-    virtual QWidget *widget() const;
+    virtual QWidget* widget() const;
     virtual QString title() const;
     virtual AbstractTool *tool() const;
 

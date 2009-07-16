@@ -23,7 +23,7 @@
 #include "loadercontroller.h"
 
 // Kasten core
-#include <kdocumentsyncmanager.h>
+#include <documentsyncmanager.h>
 // KDE
 #include <KUrl>
 #include <KRecentFilesAction>
@@ -41,7 +41,7 @@ static const char AllFileNamesFilter[] = "*";  // krazy:exclude=doublequote_char
 static const char CreatorConfigGroupId[] = "Recent Files";
 
 
-LoaderController::LoaderController( KDocumentSyncManager* syncManager, KXMLGUIClient* guiClient )
+LoaderController::LoaderController( DocumentSyncManager* syncManager, KXMLGUIClient* guiClient )
 : mSyncManager( syncManager )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();

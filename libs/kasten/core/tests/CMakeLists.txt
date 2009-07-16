@@ -91,18 +91,18 @@ target_link_libraries( testdocumentfilesynchronizerfactorytest
   ${QT_QTTEST_LIBRARY}
 )
 
-########### kdocumentmanagertest ###############
+########### documentmanagertest ###############
 
-set( kdocumentmanagertest_SRCS
+set( documentmanagertest_SRCS
   testdocument.cpp
-  kdocumentmanagertest.cpp
+  documentmanagertest.cpp
 )
 
-kde4_add_unit_test( kdocumentmanagertest
-  TESTNAME libkasten-core-kdocumentmanagertest
-  ${kdocumentmanagertest_SRCS}
+kde4_add_unit_test( documentmanagertest
+  TESTNAME libkasten-core-documentmanagertest
+  ${documentmanagertest_SRCS}
 )
-target_link_libraries( kdocumentmanagertest
+target_link_libraries( documentmanagertest
   kastencore
   ${KDE4_KIO_LIBS}
   ${QT_QTTEST_LIBRARY}

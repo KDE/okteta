@@ -46,7 +46,7 @@ class InfoController : public KViewController
     virtual ~InfoController();
 
   public: // KViewController API
-    virtual void setView( KAbstractView *view );
+    virtual void setView( AbstractView *view );
 
   protected:
     InfoTool *mTool;

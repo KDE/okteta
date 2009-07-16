@@ -34,7 +34,7 @@ class KXMLGUIClient;
 namespace Kasten
 {
 
-class KDocumentCreateManager;
+class DocumentCreateManager;
 
 
 class KASTENCONTROLLER_EXPORT CreatorController : public AbstractXmlGuiController
@@ -42,7 +42,7 @@ class KASTENCONTROLLER_EXPORT CreatorController : public AbstractXmlGuiControlle
   Q_OBJECT
 
   public:
-    CreatorController( KDocumentCreateManager* createManager, KXMLGUIClient* guiClient );
+    CreatorController( DocumentCreateManager* createManager, KXMLGUIClient* guiClient );
     ~CreatorController();
 
   public: // AbstractXmlGuiController API
@@ -52,7 +52,7 @@ class KASTENCONTROLLER_EXPORT CreatorController : public AbstractXmlGuiControlle
     void createNew();
 
   protected:
-    KDocumentCreateManager *mCreateManager;
+    DocumentCreateManager* mCreateManager;
 };
 
 }

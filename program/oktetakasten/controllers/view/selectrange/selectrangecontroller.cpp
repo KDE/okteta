@@ -26,7 +26,7 @@
 #include "selectrangetoolview.h"
 #include "selectrangetool.h"
 // Kasten gui
-#include <kitoolinlineviewable.h>
+#include <toolinlineviewable.h>
 // KDE
 #include <KXMLGUIClient>
 #include <KLocale>

@@ -41,7 +41,7 @@ class StringsExtractToolView : public AbstractToolView
     virtual ~StringsExtractToolView();
 
   public: // AbstractToolView API
-    virtual QWidget *widget() const;
+    virtual QWidget* widget() const;
     virtual QString title() const;
     virtual AbstractTool *tool() const;
 

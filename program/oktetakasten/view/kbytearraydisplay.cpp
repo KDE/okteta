@@ -49,8 +49,8 @@ KByteArrayDisplay::KByteArrayDisplay( KByteArrayDocument *document )
 
     // propagate signals
     connect( mDocument, SIGNAL(titleChanged( QString )), SIGNAL(titleChanged( QString )) );
-    connect( mDocument, SIGNAL(modified( Kasten::KAbstractDocument::SynchronizationStates )),
-                        SIGNAL(modified( Kasten::KAbstractDocument::SynchronizationStates )) );
+    connect( mDocument, SIGNAL(modified( Kasten::AbstractDocument::SynchronizationStates )),
+                        SIGNAL(modified( Kasten::AbstractDocument::SynchronizationStates )) );
     connect( mWidget, SIGNAL(selectionChanged( bool )), SIGNAL(hasSelectedDataChanged( bool )) );
     connect( mWidget, SIGNAL(readOnlyChanged( bool )), SIGNAL(readOnlyChanged( bool )) );
     connect( mWidget, SIGNAL(overwriteModeChanged( bool )), SIGNAL(overwriteModeChanged( bool )) );
@@ -62,7 +62,7 @@ KByteArrayDisplay::KByteArrayDisplay( KByteArrayDocument *document )
 
 const AbstractModelSelection* KByteArrayDisplay::modelSelection() const { return &mSelection; }
 
-KAbstractDocument *KByteArrayDisplay::document() const { return mDocument; }
+AbstractDocument* KByteArrayDisplay::document() const { return mDocument; }
 QWidget* KByteArrayDisplay::widget()             const { return mWidget; }
 QString KByteArrayDisplay::title()               const { return mDocument->title(); }
 bool KByteArrayDisplay::isModifiable()           const { return true; }

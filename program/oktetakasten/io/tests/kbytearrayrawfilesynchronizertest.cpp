@@ -98,7 +98,7 @@ void KByteArrayRawFileSynchronizerTest::testLoadFromUrl()
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( FileProtocolName );
     Kasten::KByteArrayRawFileSynchronizer *synchronizer = new Kasten::KByteArrayRawFileSynchronizer();
     synchronizer->startLoad( fileUrl )->exec();
-    Kasten::KAbstractDocument *document = synchronizer->document();
+    Kasten::AbstractDocument* document = synchronizer->document();
 
     Kasten::KByteArrayDocument *byteArrayDocument = qobject_cast<Kasten::KByteArrayDocument *>( document );
 
@@ -119,7 +119,7 @@ void KByteArrayRawFileSynchronizerTest::testLoadFromNotExistingUrl()
 
     Kasten::KByteArrayRawFileSynchronizer *synchronizer = new Kasten::KByteArrayRawFileSynchronizer();
     synchronizer->startLoad( fileUrl )->exec();
-    Kasten::KAbstractDocument *document = synchronizer->document();
+    Kasten::AbstractDocument* document = synchronizer->document();
 
     QVERIFY( document == 0 );
     delete synchronizer;

@@ -57,7 +57,7 @@ class KASTENCORE_EXPORT AbstractTool : public QObject
 
   protected:
     class Private;
-    Private * const d;
+    Private* const d;
 };
 
 }

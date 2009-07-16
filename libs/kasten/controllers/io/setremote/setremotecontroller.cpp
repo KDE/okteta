@@ -23,8 +23,8 @@
 #include "setremotecontroller.h"
 
 // Kasten core
-#include <kdocumentsyncmanager.h>
-#include <kabstractdocument.h>
+#include <documentsyncmanager.h>
+#include <abstractdocument.h>
 // KDE
 #include <KActionCollection>
 #include <KAction>
@@ -35,7 +35,7 @@
 namespace Kasten
 {
 
-SetRemoteController::SetRemoteController( KDocumentSyncManager* syncManager, KXMLGUIClient* guiClient )
+SetRemoteController::SetRemoteController( DocumentSyncManager* syncManager, KXMLGUIClient* guiClient )
 : mSyncManager( syncManager )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
@@ -47,7 +47,7 @@ SetRemoteController::SetRemoteController( KDocumentSyncManager* syncManager, KXM
 
 void SetRemoteController::setTargetModel( AbstractModel* model )
 {
-    mDocument = model ? model->findBaseModel<KAbstractDocument*>() : 0;
+    mDocument = model ? model->findBaseModel<AbstractDocument*>() : 0;
 
     const bool canBeSaved = mDocument ?
                                 ( mDocument->synchronizer() != 0 ||

@@ -50,9 +50,9 @@ class KASTENCORE_EXPORT AbstractModelExporter : public QObject
     virtual ~AbstractModelExporter();
 
   public: // API to be implemented
-    virtual AbstractExportJob *startExport( AbstractModel *model, const AbstractModelSelection *selection,
+    virtual AbstractExportJob* startExport( AbstractModel* model, const AbstractModelSelection* selection,
                                             const KUrl &url ) = 0;
-    virtual QString modelTypeName( AbstractModel *model, const AbstractModelSelection *selection ) const = 0;
+    virtual QString modelTypeName( AbstractModel* model, const AbstractModelSelection* selection ) const = 0;
 
   public:
     QString remoteTypeName() const;

@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kdocumentmanager.h"
+#include "documentmanager.h"
 
 // KDE
 #include <KUrl>
@@ -29,8 +29,8 @@
 #include <QtCore/QStringList>
 
 // temporary
-#include "kdocumentcreatemanager.h"
-#include "kdocumentsyncmanager.h"
+#include "documentcreatemanager.h"
+#include "documentsyncmanager.h"
 #include "modelcodecmanager.h"
 
 
@@ -40,29 +40,29 @@ namespace Kasten
 static int lastDocumentId = 0;
 
 
-KDocumentManager::KDocumentManager()
- : mCreateManager( new KDocumentCreateManager(this) ),
-   mSyncManager( new KDocumentSyncManager(this) ),
+DocumentManager::DocumentManager()
+ : mCreateManager( new DocumentCreateManager(this) ),
+   mSyncManager( new DocumentSyncManager(this) ),
    mCodecManager( new ModelCodecManager(this) )
 {}
 
-QList<KAbstractDocument*> KDocumentManager::documents() const { return mList; }
+QList<AbstractDocument*> DocumentManager::documents() const { return mList; }
 
-QStringList KDocumentManager::urls() const
+QStringList DocumentManager::urls() const
 {
     QStringList result;
 
-    foreach( KAbstractDocument *document, mList )
+    foreach( AbstractDocument* document, mList )
         result.append( mSyncManager->urlOf(document).url() );
 
     return result;
 }
 
-KAbstractDocument* KDocumentManager::documentOfUrl( const KUrl& url ) const
+AbstractDocument* DocumentManager::documentOfUrl( const KUrl& url ) const
 {
-    KAbstractDocument* result = 0;
+    AbstractDocument* result = 0;
 
-    foreach( KAbstractDocument *document, mList )
+    foreach( AbstractDocument* document, mList )
     {
         if( url == mSyncManager->urlOf(document) )
         {
@@ -74,7 +74,7 @@ KAbstractDocument* KDocumentManager::documentOfUrl( const KUrl& url ) const
     return result;
 }
 
-void KDocumentManager::addDocument( KAbstractDocument *document )
+void DocumentManager::addDocument( AbstractDocument* document )
 {
     // TODO: check for double insert
     document->setId( QString::number(++lastDocumentId) );
@@ -83,9 +83,9 @@ void KDocumentManager::addDocument( KAbstractDocument *document )
     emit added( document );
 }
 
-void KDocumentManager::closeDocument( KAbstractDocument *document )
+void DocumentManager::closeDocument( AbstractDocument* document )
 {
-    QMutableListIterator<KAbstractDocument*> iterator( mList );
+    QMutableListIterator<AbstractDocument*> iterator( mList );
 
     if( iterator.findNext(document) )
     {
@@ -97,16 +97,16 @@ void KDocumentManager::closeDocument( KAbstractDocument *document )
     }
 }
 
-bool KDocumentManager::canClose( KAbstractDocument *document )
+bool DocumentManager::canClose( AbstractDocument* document )
 {
     return mSyncManager->canClose( document );
 }
 
-bool KDocumentManager::canCloseAll()
+bool DocumentManager::canCloseAll()
 {
     bool canCloseAll = true;
 
-    foreach( KAbstractDocument *document, mList )
+    foreach( AbstractDocument* document, mList )
     {
         if( !mSyncManager->canClose(document) )
         {
@@ -118,12 +118,12 @@ bool KDocumentManager::canCloseAll()
     return canCloseAll;
 }
 
-void KDocumentManager::requestFocus( KAbstractDocument* document )
+void DocumentManager::requestFocus( AbstractDocument* document )
 {
     emit focusRequested( document );
 }
 
-KDocumentManager::~KDocumentManager()
+DocumentManager::~DocumentManager()
 {
     delete mCreateManager;
     delete mSyncManager;

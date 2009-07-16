@@ -24,7 +24,7 @@
 
 // library
 #include "abstractmodelfilesystemsynchronizer.h"
-#include <kabstractdocument.h>
+#include <abstractdocument.h>
 // KDE
 #include <KIO/NetAccess>
 #include <KTemporaryFile>
@@ -48,7 +48,7 @@ class AbstractFileSystemLoadJob::Private
   public:
     const KUrl &url() const;
     QString workFilePath() const;
-    QWidget *widget() const;
+    QWidget* widget() const;
     AbstractModelFileSystemSynchronizer* synchronizer() const;
 
   protected:
@@ -68,7 +68,7 @@ inline AbstractModelFileSystemSynchronizer* AbstractFileSystemLoadJob::Private::
 inline const KUrl &AbstractFileSystemLoadJob::Private::url()      const { return mUrl; }
 inline QString AbstractFileSystemLoadJob::Private::workFilePath() const { return mWorkFilePath; }
 // TODO: setup a notification system
-inline QWidget *AbstractFileSystemLoadJob::Private::widget()      const { return 0; }
+inline QWidget* AbstractFileSystemLoadJob::Private::widget()      const { return 0; }
 
 inline void AbstractFileSystemLoadJob::Private::setWorkFilePath( const QString &workFilePath )
 {
@@ -87,7 +87,7 @@ AbstractModelFileSystemSynchronizer* AbstractFileSystemLoadJob::synchronizer() c
     return d->synchronizer();
 }
 QString AbstractFileSystemLoadJob::workFilePath() const { return d->workFilePath(); }
-QWidget *AbstractFileSystemLoadJob::widget() const { return d->widget(); }
+QWidget* AbstractFileSystemLoadJob::widget() const { return d->widget(); }
 
 void AbstractFileSystemLoadJob::start()
 {
@@ -113,7 +113,7 @@ void AbstractFileSystemLoadJob::load()
 }
 
 
-void AbstractFileSystemLoadJob::setDocument( KAbstractDocument *document )
+void AbstractFileSystemLoadJob::setDocument( AbstractDocument* document )
 {
     AbstractModelFileSystemSynchronizer* synchronizer = d->synchronizer();
 

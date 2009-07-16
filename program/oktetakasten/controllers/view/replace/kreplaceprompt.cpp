@@ -31,7 +31,7 @@
 namespace Kasten
 {
 
-KReplacePrompt::KReplacePrompt( QWidget *parent )
+KReplacePrompt::KReplacePrompt( QWidget* parent )
  : KDialog( parent )
 {
     setModal( true );

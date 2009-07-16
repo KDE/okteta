@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,18 +20,42 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kdocumentversiondata.h"
+#ifndef KASTEN_IF_VIEWFOCUSABLE_H
+#define KASTEN_IF_VIEWFOCUSABLE_H
+
+// Qt
+#include <QtCore/QtPlugin>
 
 
 namespace Kasten
 {
 
-KDocumentVersionData::KDocumentVersionData( KDocumentVersionId id, const QString &changeComment )
- : mId( id ), mChangeComment( changeComment )
-{}
+class AbstractView;
 
-KDocumentVersionId KDocumentVersionData::id() const { return mId; }
 
-QString KDocumentVersionData::changeComment() const { return mChangeComment; }
+namespace If
+{
+
+class ViewFocusable
+{
+  public:
+    virtual ~ViewFocusable();
+
+  public: // set/action TODO: FocussedView instead of ViewFocus?
+    virtual void setViewFocus( AbstractView *view ) = 0;
+
+  public: // get
+    virtual AbstractView *viewFocus() const = 0;
+
+  public: // signal
+    virtual void viewFocusChanged( AbstractView *view ) = 0;
+};
+
+inline ViewFocusable::~ViewFocusable() {}
 
 }
+}
+
+Q_DECLARE_INTERFACE( Kasten::If::ViewFocusable, "org.kde.kasten.if.viewfocusable/1.0" )
+
+#endif

@@ -46,7 +46,7 @@ class FilterView : public QWidget
   Q_OBJECT
 
   public:
-    explicit FilterView( FilterTool *tool, QWidget *parent = 0 );
+    explicit FilterView( FilterTool *tool, QWidget* parent = 0 );
     virtual ~FilterView();
 
   public:

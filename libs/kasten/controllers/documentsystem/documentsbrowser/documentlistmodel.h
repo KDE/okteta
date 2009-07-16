@@ -31,7 +31,7 @@ namespace Kasten
 {
 
 class DocumentsTool;
-class KAbstractDocument;
+class AbstractDocument;
 
 
 class DocumentListModel : public QAbstractTableModel
@@ -58,9 +58,9 @@ class DocumentListModel : public QAbstractTableModel
     virtual QVariant headerData( int section, Qt::Orientation orientation, int role ) const;
 
   protected Q_SLOTS:
-    void onDocumentAdded( Kasten::KAbstractDocument* document );
-    void onDocumentClosing( Kasten::KAbstractDocument* document );
-    void onFocussedDocumentChanged( Kasten::KAbstractDocument* document );
+    void onDocumentAdded( Kasten::AbstractDocument* document );
+    void onDocumentClosing( Kasten::AbstractDocument* document );
+    void onFocussedDocumentChanged( Kasten::AbstractDocument* document );
     void onModifiedChanged();
 
   protected:

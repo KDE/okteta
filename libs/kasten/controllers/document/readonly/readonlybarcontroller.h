@@ -33,7 +33,7 @@ namespace Kasten
 {
 
 class ToggleButton;
-class KAbstractDocument;
+class AbstractDocument;
 class StatusBar;
 
 
@@ -51,7 +51,7 @@ class KASTENCONTROLLER_EXPORT ReadOnlyBarController : public AbstractXmlGuiContr
     void setReadOnly( bool isReadOnly );
 
   protected:
-    KAbstractDocument* mDocument;
+    AbstractDocument* mDocument;
 
     ToggleButton* mReadOnlyButton;
 };

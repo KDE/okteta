@@ -43,7 +43,7 @@ KAbstractByteArrayStreamEncoder::KAbstractByteArrayStreamEncoder( const QString 
  : AbstractModelStreamEncoder( remoteTypeName, remoteMimeType )
 {}
 
-QString KAbstractByteArrayStreamEncoder::modelTypeName( AbstractModel *model, const AbstractModelSelection *selection ) const
+QString KAbstractByteArrayStreamEncoder::modelTypeName( AbstractModel* model, const AbstractModelSelection* selection ) const
 {
 Q_UNUSED( selection )
 
@@ -54,7 +54,7 @@ Q_UNUSED( selection )
 
 
 bool KAbstractByteArrayStreamEncoder::encodeToStream( QIODevice *device,
-                                                      AbstractModel *model, const AbstractModelSelection *selection )
+                                                      AbstractModel* model, const AbstractModelSelection* selection )
 {
     const KByteArrayDisplay* byteArrayDisplay = qobject_cast<const KByteArrayDisplay*>( model );
 

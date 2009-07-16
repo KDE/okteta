@@ -38,7 +38,7 @@ class TestDocumentFileReloadThread : public QThread
   Q_OBJECT
   public:
     TestDocumentFileReloadThread( QObject *parent, const QByteArray &header,
-                                  /*TestDocument *document, */const QString &filePath );
+                                  /*TestDocument* document, */const QString &filePath );
     virtual ~TestDocumentFileReloadThread();
 
   public: // QThread API
@@ -52,7 +52,7 @@ class TestDocumentFileReloadThread : public QThread
     void documentReloaded( bool success );
 
   protected:
-//     TestDocument *mDocument;
+//     TestDocument* mDocument;
     const QByteArray mHeader;
     const QString mFilePath;
 

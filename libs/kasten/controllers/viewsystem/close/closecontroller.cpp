@@ -23,7 +23,7 @@
 #include "closecontroller.h"
 
 // Kasten gui
-#include <kviewmanager.h>
+#include <viewmanager.h>
 // KDE
 #include <KActionCollection>
 #include <KAction>
@@ -34,7 +34,7 @@
 namespace Kasten
 {
 
-CloseController::CloseController( KViewManager* viewManager, KXMLGUIClient* guiClient )
+CloseController::CloseController( ViewManager* viewManager, KXMLGUIClient* guiClient )
 : mViewManager( viewManager )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
@@ -45,7 +45,7 @@ CloseController::CloseController( KViewManager* viewManager, KXMLGUIClient* guiC
 
 void CloseController::setTargetModel( AbstractModel* model )
 {
-    mView = model ? model->findBaseModel<KAbstractView*>() : 0;
+    mView = model ? model->findBaseModel<AbstractView*>() : 0;
 
     const bool hasView = ( mView != 0 );
 

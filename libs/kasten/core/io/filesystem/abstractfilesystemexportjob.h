@@ -41,7 +41,7 @@ class KASTENCORE_EXPORT AbstractFileSystemExportJob : public AbstractExportJob
   Q_OBJECT
 
   protected:
-    AbstractFileSystemExportJob( AbstractModel *model, const AbstractModelSelection *selection,
+    AbstractFileSystemExportJob( AbstractModel* model, const AbstractModelSelection* selection,
                                  const KUrl &url );
   public:
     virtual ~AbstractFileSystemExportJob();
@@ -56,10 +56,10 @@ class KASTENCORE_EXPORT AbstractFileSystemExportJob : public AbstractExportJob
     void completeExport( bool success );
 
   protected:
-    AbstractModel *model() const;
-    const AbstractModelSelection *selection() const;
+    AbstractModel* model() const;
+    const AbstractModelSelection* selection() const;
     QString workFilePath() const;
-    QWidget *widget() const;
+    QWidget* widget() const;
 
   protected Q_SLOTS:
     void exportToFile();

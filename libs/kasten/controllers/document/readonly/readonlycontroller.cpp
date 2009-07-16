@@ -23,7 +23,7 @@
 #include "readonlycontroller.h"
 
 // Kasten core
-#include <kabstractdocument.h>
+#include <abstractdocument.h>
 // KDE
 #include <KXMLGUIClient>
 #include <KLocale>
@@ -55,7 +55,7 @@ void ReadOnlyController::setTargetModel( AbstractModel* model )
 {
     if( mDocument ) mDocument->disconnect( mSetReadOnlyAction );
 
-    mDocument = model ? model->findBaseModel<KAbstractDocument*>() : 0;
+    mDocument = model ? model->findBaseModel<AbstractDocument*>() : 0;
 
     if( mDocument )
     {

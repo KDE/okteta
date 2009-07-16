@@ -30,8 +30,8 @@
 namespace Kasten
 {
 
-class KDocumentManager;
-class KViewManager;
+class DocumentManager;
+class ViewManager;
 
 
 class OktetaProgram
@@ -45,19 +45,19 @@ class OktetaProgram
     void quit();
 
   public:
-    KDocumentManager *documentManager();
-    KViewManager *viewManager();
+    DocumentManager* documentManager();
+    ViewManager* viewManager();
 
   protected:
     OktetaAboutData mAboutData;
 
-    KDocumentManager *mDocumentManager;
-    KViewManager *mViewManager;
+    DocumentManager* mDocumentManager;
+    ViewManager* mViewManager;
 };
 
 
-inline KDocumentManager* OktetaProgram::documentManager() { return mDocumentManager; }
-inline KViewManager* OktetaProgram::viewManager()         { return mViewManager; }
+inline DocumentManager* OktetaProgram::documentManager() { return mDocumentManager; }
+inline ViewManager* OktetaProgram::viewManager()         { return mViewManager; }
 
 }
 

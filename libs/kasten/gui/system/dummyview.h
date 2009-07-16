@@ -25,7 +25,7 @@
 
 
 // lib
-#include <kabstractview.h>
+#include <abstractview.h>
 
 class QLabel;
 
@@ -33,20 +33,20 @@ class QLabel;
 namespace Kasten
 {
 
-class KASTENGUI_EXPORT DummyView : public KAbstractView
+class KASTENGUI_EXPORT DummyView : public AbstractView
 {
     Q_OBJECT
 
   public:
-    DummyView( KAbstractDocument *document );
+    DummyView( AbstractDocument* document );
     virtual ~DummyView();
 
   public:
 //     KCursorObject *cursor() const;
 
-  public: // KAbstractView API
-    virtual QWidget *widget() const;
-    virtual KAbstractDocument *document() const;
+  public: // AbstractView API
+    virtual QWidget* widget() const;
+    virtual AbstractDocument* document() const;
     virtual QString title() const;
 
   protected Q_SLOTS:
@@ -54,7 +54,7 @@ class KASTENGUI_EXPORT DummyView : public KAbstractView
 
   protected:
     QLabel *mLabel;
-    KAbstractDocument *mDocument;
+    AbstractDocument* mDocument;
 };
 
 }

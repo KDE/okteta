@@ -35,7 +35,7 @@ class OperandByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterPar
   Q_OBJECT
 
   public:
-    explicit OperandByteArrayFilterParameterSetEdit( QWidget *parent = 0 );
+    explicit OperandByteArrayFilterParameterSetEdit( QWidget* parent = 0 );
     virtual ~OperandByteArrayFilterParameterSetEdit();
 
   public: // AbstractByteArrayFilterParameterSetEdit API

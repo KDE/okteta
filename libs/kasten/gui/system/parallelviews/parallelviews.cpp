@@ -24,12 +24,12 @@
 
 // lib
 #include "parallelwidget.h"
-#include <kabstractview.h>
-#include <kabstractdocument.h>
-#include <kviewmanager.h>
+#include <abstractview.h>
+#include <abstractdocument.h>
+#include <viewmanager.h>
 
 
-ParallelViews::ParallelViews( KViewManager* viewManager )
+ParallelViews::ParallelViews( ViewManager* viewManager )
  : mViewManager( viewManager )
 {
     mParallelWidget = new ParallelWidget();
@@ -37,9 +37,9 @@ ParallelViews::ParallelViews( KViewManager* viewManager )
     connect( mParallelWidget, SIGNAL(currentChanged( QWidget* )), SLOT(onCurrentChanged( QWidget* )) );
 }
 
-QWidget *ParallelViews::widget() const { return mParallelWidget; }
+QWidget* ParallelViews::widget() const { return mParallelWidget; }
 
-void ParallelViews::addView( KAbstractView* view )
+void ParallelViews::addView( AbstractView* view )
 {
     connect( view, SIGNAL(titleChanged( QString )), SLOT(onTitleChanged( QString )) );
 
@@ -48,7 +48,7 @@ void ParallelViews::addView( KAbstractView* view )
     emit added( view );
 }
 
-void ParallelViews::removeView( KAbstractView* view )
+void ParallelViews::removeView( AbstractView* view )
 {
     view->disconnect( this );
 
@@ -57,35 +57,35 @@ void ParallelViews::removeView( KAbstractView* view )
     emit removing( view );
 }
 
-void ParallelViews::setViewFocus( KAbstractView* view )
+void ParallelViews::setViewFocus( AbstractView* view )
 {
     mParallelWidget->setCurrentWidget( view->widget() );
 }
 
-KAbstractView *ParallelViews::viewFocus() const
+AbstractView *ParallelViews::viewFocus() const
 {
     return mViewManager->viewByWidget( mParallelWidget->currentWidget() );
 }
 
 void ParallelViews::onCurrentChanged( QWidget* widget )
 {
-    KAbstractView* view = mViewManager->viewByWidget( widget );
+    AbstractView* view = mViewManager->viewByWidget( widget );
 
     emit viewFocusChanged( view );
 }
 
 void ParallelViews::onTitleChanged( const QString& newTitle )
 {
-    KAbstractView* view = qobject_cast<KAbstractView *>( sender() );
+    AbstractView* view = qobject_cast<AbstractView *>( sender() );
     if( view )
         mParallelWidget->setTitle( view->widget(), newTitle );
 }
 
 #if 0
-void ParallelViews::onModifiedChanged( KAbstractDocument::SynchronizationStates newStates )
+void ParallelViews::onModifiedChanged( AbstractDocument::SynchronizationStates newStates )
 {
 Q_UNUSED( newStates )
-    KAbstractView* view = qobject_cast<KAbstractView *>( sender() );
+    AbstractView* view = qobject_cast<AbstractView *>( sender() );
     if( view )
     {
         const int index = mViewsTab->indexOf( view->widget() );

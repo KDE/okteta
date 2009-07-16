@@ -42,7 +42,7 @@ class AbstractModelSelection;
 // manually defined by desktopfile
 
 // TODO: perhaps just create one instance per encode process,
-// giving AbstractModel *model, AbstractModelSelection *selection in the constructor?
+// giving AbstractModel* model, AbstractModelSelection* selection in the constructor?
 // so all precalculated values like used model (type) can be cached
 class KASTENCORE_EXPORT AbstractModelStreamEncoder : public QObject
 {
@@ -54,8 +54,8 @@ class KASTENCORE_EXPORT AbstractModelStreamEncoder : public QObject
     virtual ~AbstractModelStreamEncoder();
 
   public: // API to be implemented
-    virtual bool encodeToStream( QIODevice *device, AbstractModel *model, const AbstractModelSelection *selection ) = 0;
-    virtual QString modelTypeName( AbstractModel *model, const AbstractModelSelection *selection ) const = 0;
+    virtual bool encodeToStream( QIODevice *device, AbstractModel* model, const AbstractModelSelection* selection ) = 0;
+    virtual QString modelTypeName( AbstractModel* model, const AbstractModelSelection* selection ) const = 0;
 
   public:
     QString remoteTypeName() const;

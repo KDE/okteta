@@ -23,10 +23,10 @@
 #include "filesystembrowsertool.h"
 
 // Kasten core
-#include <kdocumentmanager.h>
-#include <kdocumentsyncmanager.h>
-#include <kiversionable.h>
-#include <kabstractdocument.h>
+#include <documentmanager.h>
+#include <documentsyncmanager.h>
+#include <versionable.h>
+#include <abstractdocument.h>
 #include <abstractmodelsynchronizer.h>
 // KDE
 #include <KLocale>
@@ -36,7 +36,7 @@
 namespace Kasten
 {
 
-FileSystemBrowserTool::FileSystemBrowserTool( KDocumentManager* documentManager )
+FileSystemBrowserTool::FileSystemBrowserTool( DocumentManager* documentManager )
  : mDocument( 0 ), mDocumentManager( documentManager )
 {
     setObjectName( "FileSystemBrowser" );
@@ -65,7 +65,7 @@ void FileSystemBrowserTool::setTargetModel( AbstractModel* model )
 {
     const bool oldHasCurrentUrl = hasCurrentUrl();
 
-    mDocument = model ? model->findBaseModel<KAbstractDocument*>() : 0;
+    mDocument = model ? model->findBaseModel<AbstractDocument*>() : 0;
 
     const bool newHasCurrentUrl = hasCurrentUrl();
 

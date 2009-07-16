@@ -47,7 +47,7 @@ namespace Kasten
 
 static const int MinimumStringLength = 1;
 
-StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget *parent )
+StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* parent )
  : QWidget( parent ), mTool( tool )
 {
     QVBoxLayout *baseLayout = new QVBoxLayout( this );

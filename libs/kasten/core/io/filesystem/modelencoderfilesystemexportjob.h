@@ -37,8 +37,8 @@ class KASTENCORE_EXPORT ModelEncoderFileSystemExportJob : public AbstractFileSys
   Q_OBJECT
 
   public:
-    ModelEncoderFileSystemExportJob( AbstractModel *model, const AbstractModelSelection *selection,
-                                     const KUrl &url, AbstractModelStreamEncoder *encoder );
+    ModelEncoderFileSystemExportJob( AbstractModel* model, const AbstractModelSelection* selection,
+                                     const KUrl &url, AbstractModelStreamEncoder* encoder );
     virtual ~ModelEncoderFileSystemExportJob();
 
   protected: // AbstractFileSystemExportJob API

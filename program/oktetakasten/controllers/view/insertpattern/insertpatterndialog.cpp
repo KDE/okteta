@@ -36,7 +36,7 @@
 namespace Kasten
 {
 
-InsertPatternDialog::InsertPatternDialog( QWidget *parent )
+InsertPatternDialog::InsertPatternDialog( QWidget* parent )
   : KDialog( parent ),
     mHasWriteable( false )
 {
@@ -51,7 +51,7 @@ InsertPatternDialog::InsertPatternDialog( QWidget *parent )
     setDefaultButton( Ok );
     setModal( false );
 
-    QWidget *page = new QWidget( this );
+    QWidget* page = new QWidget( this );
     setMainWidget( page );
 
     QVBoxLayout *baseLayout = new QVBoxLayout( page );

@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kabstractdocument.h"
+#include "abstractdocument.h"
 
 // lib
 #include "abstractmodelsynchronizer.h"
@@ -29,32 +29,32 @@
 namespace Kasten
 {
 
-class KAbstractDocument::Private
+class AbstractDocument::Private
 {
   public:
-      explicit Private( KAbstractDocument *parent );
+      explicit Private( AbstractDocument* parent );
       ~Private();
   public:
     void setId( const QString& id );
     QString id() const;
-    void setSynchronizer( AbstractModelSynchronizer *synchronizer );
+    void setSynchronizer( AbstractModelSynchronizer* synchronizer );
     void setLiveSynchronizer( AbstractModelSynchronizer* synchronizer );
-    AbstractModelSynchronizer *synchronizer() const;
+    AbstractModelSynchronizer* synchronizer() const;
     AbstractModelSynchronizer* liveSynchronizer() const;
   protected:
-    KAbstractDocument *d;
+    AbstractDocument* d;
     QString mId;
-    AbstractModelSynchronizer *mSynchronizer; // TODO: should this be here, with public setters and getters?
+    AbstractModelSynchronizer* mSynchronizer; // TODO: should this be here, with public setters and getters?
     AbstractModelSynchronizer* mLiveSynchronizer; // TODO: should this be here, with public setters and getters?
 };
 
-inline KAbstractDocument::Private::Private( KAbstractDocument *parent )
+inline AbstractDocument::Private::Private( AbstractDocument* parent )
 : d( parent ), mSynchronizer( 0 ), mLiveSynchronizer( 0 ) {}
-inline QString KAbstractDocument::Private::id() const { return mId; }
-inline void KAbstractDocument::Private::setId( const QString& id ) { mId = id; }
+inline QString AbstractDocument::Private::id() const { return mId; }
+inline void AbstractDocument::Private::setId( const QString& id ) { mId = id; }
 
-inline AbstractModelSynchronizer *KAbstractDocument::Private::synchronizer() const { return mSynchronizer; }
-inline void KAbstractDocument::Private::setSynchronizer( AbstractModelSynchronizer *synchronizer )
+inline AbstractModelSynchronizer* AbstractDocument::Private::synchronizer() const { return mSynchronizer; }
+inline void AbstractDocument::Private::setSynchronizer( AbstractModelSynchronizer* synchronizer )
 {
     // plugging the same more than once?
     if( mSynchronizer == synchronizer )
@@ -64,8 +64,8 @@ inline void KAbstractDocument::Private::setSynchronizer( AbstractModelSynchroniz
     mSynchronizer = synchronizer;
     emit d->synchronizerChanged( synchronizer );
 }
-inline AbstractModelSynchronizer* KAbstractDocument::Private::liveSynchronizer() const { return mLiveSynchronizer; }
-inline void KAbstractDocument::Private::setLiveSynchronizer( AbstractModelSynchronizer* synchronizer )
+inline AbstractModelSynchronizer* AbstractDocument::Private::liveSynchronizer() const { return mLiveSynchronizer; }
+inline void AbstractDocument::Private::setLiveSynchronizer( AbstractModelSynchronizer* synchronizer )
 {
     // plugging the same more than once?
     if( mLiveSynchronizer == synchronizer )
@@ -75,7 +75,7 @@ inline void KAbstractDocument::Private::setLiveSynchronizer( AbstractModelSynchr
     mLiveSynchronizer = synchronizer;
     emit d->liveSynchronizerChanged( synchronizer );
 }
-inline KAbstractDocument::Private::~Private()
+inline AbstractDocument::Private::~Private()
 {
     delete mSynchronizer;
     delete mLiveSynchronizer;
@@ -83,21 +83,21 @@ inline KAbstractDocument::Private::~Private()
 
 
 
-KAbstractDocument::KAbstractDocument()
+AbstractDocument::AbstractDocument()
  : d( new Private(this) )
 {}
 
-QString KAbstractDocument::id() const { return d->id(); }
-AbstractModelSynchronizer *KAbstractDocument::synchronizer() const { return d->synchronizer(); }
-AbstractModelSynchronizer* KAbstractDocument::liveSynchronizer() const { return d->liveSynchronizer(); }
+QString AbstractDocument::id() const { return d->id(); }
+AbstractModelSynchronizer* AbstractDocument::synchronizer() const { return d->synchronizer(); }
+AbstractModelSynchronizer* AbstractDocument::liveSynchronizer() const { return d->liveSynchronizer(); }
 
-void KAbstractDocument::setId( const QString& id ) { d->setId(id); }
-void KAbstractDocument::setSynchronizer( AbstractModelSynchronizer *synchronizer ) { d->setSynchronizer(synchronizer); }
-void KAbstractDocument::setLiveSynchronizer( AbstractModelSynchronizer* synchronizer ) { d->setLiveSynchronizer(synchronizer); }
+void AbstractDocument::setId( const QString& id ) { d->setId(id); }
+void AbstractDocument::setSynchronizer( AbstractModelSynchronizer* synchronizer ) { d->setSynchronizer(synchronizer); }
+void AbstractDocument::setLiveSynchronizer( AbstractModelSynchronizer* synchronizer ) { d->setLiveSynchronizer(synchronizer); }
 
-bool KAbstractDocument::hasLocalChanges() const { return synchronizationStates().testFlag(LocalHasChanges) ; }
+bool AbstractDocument::hasLocalChanges() const { return synchronizationStates().testFlag(LocalHasChanges) ; }
 
-KAbstractDocument::~KAbstractDocument()
+AbstractDocument::~AbstractDocument()
 {
     delete d;
 }

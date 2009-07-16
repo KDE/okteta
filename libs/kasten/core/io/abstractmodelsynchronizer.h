@@ -39,7 +39,7 @@ class AbstractConnectJob;
 class AbstractSyncToRemoteJob;
 class AbstractSyncFromRemoteJob;
 class AbstractSyncWithRemoteJob;
-class KAbstractDocument;
+class AbstractDocument;
 
 // TODO: better names? Active Translator? 
 // synchronizers are created by factory functions (like plugins)
@@ -77,17 +77,17 @@ class KASTENCORE_EXPORT AbstractModelSynchronizer : public QObject
   public: // API to be implemented
     // TODO: makes this a job, too
     // TODO: filesystem synchronizer (or: to-passive-storage) does not need this: subclass or interface?
-//     virtual void startOffering( KAbstractDocument* document ) = 0;
+//     virtual void startOffering( AbstractDocument* document ) = 0;
     // TODO: once the synchronizer is attached to a document, this function should not be called
     // is there a way to ensure this?
     virtual AbstractLoadJob *startLoad( const KUrl &url ) = 0;
     /** */
     // TODO: not in constructor? cannot be called twice, each synchronizer is attached to its document
-//     virtual KAbstractDocument *createWorkingCopy( const KUrl &originUrl, int *success ) const = 0;
+//     virtual AbstractDocument* createWorkingCopy( const KUrl &originUrl, int *success ) const = 0;
 
     /** */
     // TODO: static? or by function? or another class? but 
-//     virtual void copyTo( const KUrl &url, KAbstractDocument *document, int *success ) const = 0;
+//     virtual void copyTo( const KUrl &url, AbstractDocument* document, int *success ) const = 0;
 
     /** overwrite remote with local (save) */
     virtual AbstractSyncToRemoteJob *startSyncToRemote() = 0;
@@ -97,13 +97,13 @@ class KASTENCORE_EXPORT AbstractModelSynchronizer : public QObject
     /** changes the  */ // TODO: better name for replace: overwrite?
     virtual AbstractSyncWithRemoteJob *startSyncWithRemote( const KUrl &url, AbstractModelSynchronizer::ConnectOption option ) = 0;
 
-    virtual AbstractConnectJob *startConnect( KAbstractDocument *document,
+    virtual AbstractConnectJob *startConnect( AbstractDocument* document,
                                               const KUrl &url, AbstractModelSynchronizer::ConnectOption option ) = 0;
 //     virtual bool syncBiDirectly() = 0;
 //     virtual bool canSyncBiDirectly() const = 0;
 //     virtual bool deleteDocument();
 
-    virtual KAbstractDocument *document() const = 0;
+    virtual AbstractDocument* document() const = 0;
 
   Q_SIGNALS:
     void urlChanged( const KUrl &url );

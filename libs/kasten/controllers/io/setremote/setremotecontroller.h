@@ -35,8 +35,8 @@ class KXMLGUIClient;
 namespace Kasten
 {
 
-class KAbstractDocument;
-class KDocumentSyncManager;
+class AbstractDocument;
+class DocumentSyncManager;
 
 
 class KASTENCONTROLLER_EXPORT SetRemoteController : public AbstractXmlGuiController
@@ -44,7 +44,7 @@ class KASTENCONTROLLER_EXPORT SetRemoteController : public AbstractXmlGuiControl
   Q_OBJECT
 
   public:
-    SetRemoteController( KDocumentSyncManager* syncManager, KXMLGUIClient* guiClient );
+    SetRemoteController( DocumentSyncManager* syncManager, KXMLGUIClient* guiClient );
 
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
@@ -55,8 +55,8 @@ class KASTENCONTROLLER_EXPORT SetRemoteController : public AbstractXmlGuiControl
   protected:
     KAction *mSaveAsAction;
 
-    KDocumentSyncManager *mSyncManager;
-    KAbstractDocument *mDocument;
+    DocumentSyncManager* mSyncManager;
+    AbstractDocument* mDocument;
 };
 
 }

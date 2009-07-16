@@ -41,7 +41,7 @@
 namespace Kasten
 {
 
-ByteTableView::ByteTableView( ByteTableTool *tool, QWidget *parent )
+ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
  : QWidget( parent ), mTool( tool )
 {
     QVBoxLayout *baseLayout = new QVBoxLayout( this );

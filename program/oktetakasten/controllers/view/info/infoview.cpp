@@ -42,7 +42,7 @@
 namespace Kasten
 {
 
-InfoView::InfoView( InfoTool *tool, QWidget *parent )
+InfoView::InfoView( InfoTool *tool, QWidget* parent )
  : QWidget( parent ), mTool( tool )
 {
     QVBoxLayout *baseLayout = new QVBoxLayout( this );

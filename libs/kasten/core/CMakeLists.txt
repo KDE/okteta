@@ -25,9 +25,9 @@ set( KASTEN_CORE_DOCUMENT_SRCS
   document/abstractmodel.cpp
   document/abstractmodelselection.cpp
   document/abstracttool.cpp
-  document/kabstractdocument.cpp
-  document/kabstractdocumentfactory.cpp
-  document/kdocumentversiondata.cpp
+  document/abstractdocument.cpp
+  document/abstractdocumentfactory.cpp
+  document/documentversiondata.cpp
 )
 
 set( KASTEN_CORE_IO_SRCS
@@ -58,9 +58,9 @@ set( KASTEN_CORE_IO_FILESYSTEM_SRCS
 
 set( KASTEN_CORE_SYSTEM_SRCS
   system/jobmanager.cpp
-  system/kdocumentmanager.cpp
-  system/kdocumentcreatemanager.cpp
-  system/kdocumentsyncmanager.cpp
+  system/documentmanager.cpp
+  system/documentcreatemanager.cpp
+  system/documentsyncmanager.cpp
   system/modelcodecmanager.cpp
 )
 
@@ -76,12 +76,12 @@ set( kastencore_LIB_HDRS
   kastencore_export.h
   document/abstractmodel.h
   document/abstractmodelselection.h
-  document/kabstractdocument.h
-  document/kabstractdocumentfactory.h
+  document/abstractdocument.h
+  document/abstractdocumentfactory.h
   document/abstracttool.h
-  document/kdocumentversiondata.h
-  document/kdocumentversionid.h
-  document/kiversionable.h
+  document/documentversiondata.h
+  document/documentversionid.h
+  document/versionable.h
   document/userlistable.h
   entity/person.h
   io/abstractsynctoremotejob.h
@@ -105,9 +105,9 @@ set( kastencore_LIB_HDRS
   io/abstractloadjob.h
   io/abstractmodelsynchronizerfactory.h
   system/jobmanager.h
-  system/kdocumentmanager.h
-  system/kdocumentcreatemanager.h
-  system/kdocumentsyncmanager.h
+  system/documentmanager.h
+  system/documentcreatemanager.h
+  system/documentsyncmanager.h
   system/modelcodecmanager.h
 )
 

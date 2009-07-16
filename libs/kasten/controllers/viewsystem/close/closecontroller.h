@@ -35,7 +35,7 @@ class KXMLGUIClient;
 namespace Kasten
 {
 
-class KViewManager;
+class ViewManager;
 
 
 class KASTENCONTROLLER_EXPORT CloseController : public AbstractXmlGuiController
@@ -43,7 +43,7 @@ class KASTENCONTROLLER_EXPORT CloseController : public AbstractXmlGuiController
   Q_OBJECT
 
   public:
-    CloseController( KViewManager* viewManager, KXMLGUIClient* guiClient );
+    CloseController( ViewManager* viewManager, KXMLGUIClient* guiClient );
 
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
@@ -52,9 +52,9 @@ class KASTENCONTROLLER_EXPORT CloseController : public AbstractXmlGuiController
     void close();
 
   protected:
-    KViewManager *mViewManager;
+    ViewManager *mViewManager;
 
-    KAbstractView *mView;
+    AbstractView *mView;
     KAction *mCloseAction;
 };
 

@@ -33,7 +33,7 @@ class RotateByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterPara
   Q_OBJECT
 
   public:
-    RotateByteArrayFilterParameterSetEdit( QWidget *parent = 0 );
+    RotateByteArrayFilterParameterSetEdit( QWidget* parent = 0 );
     virtual ~RotateByteArrayFilterParameterSetEdit();
 
   public: // AbstractByteArrayFilterParameterSetEdit API

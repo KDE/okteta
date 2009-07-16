@@ -31,7 +31,7 @@
 static const char TestData[] = "TestData";
 
 
-void TestDocumentTest::checkTitleChanged( QSignalSpy *titleChangedSpy, const QString &title )
+void TestDocumentTest::checkTitleChanged( QSignalSpy* titleChangedSpy, const QString &title )
 {
    QVERIFY( titleChangedSpy->isValid() );
    QCOMPARE( titleChangedSpy->count(), 1 );
@@ -39,14 +39,14 @@ void TestDocumentTest::checkTitleChanged( QSignalSpy *titleChangedSpy, const QSt
    QCOMPARE( arguments.at(0).toString(), title );
 }
 
-Q_DECLARE_METATYPE ( Kasten::KAbstractDocument::SynchronizationStates )
+Q_DECLARE_METATYPE ( Kasten::AbstractDocument::SynchronizationStates )
 
-void TestDocumentTest::checkSynchronizationStatesChanged( QSignalSpy *changedSpy, Kasten::KAbstractDocument::SynchronizationStates states )
+void TestDocumentTest::checkSynchronizationStatesChanged( QSignalSpy* changedSpy, Kasten::AbstractDocument::SynchronizationStates states )
 {
    QVERIFY( changedSpy->isValid() );
    QCOMPARE( changedSpy->count(), 1 );
    QList<QVariant> arguments = changedSpy->takeFirst();
-   QCOMPARE( arguments.at(0).value<Kasten::KAbstractDocument::SynchronizationStates>(), states );
+   QCOMPARE( arguments.at(0).value<Kasten::AbstractDocument::SynchronizationStates>(), states );
 }
 
 
@@ -54,7 +54,7 @@ void TestDocumentTest::checkSynchronizationStatesChanged( QSignalSpy *changedSpy
 
 void TestDocumentTest::testPlainConstructor()
 {
-    Kasten::TestDocument *document = new Kasten::TestDocument();
+    Kasten::TestDocument* document = new Kasten::TestDocument();
 
     QVERIFY( document != 0 );
     QCOMPARE( *document->data(), QByteArray() );
@@ -67,7 +67,7 @@ void TestDocumentTest::testPlainConstructor()
 void TestDocumentTest::testDataConstructor()
 {
     const QByteArray testData( TestData );
-    Kasten::TestDocument *document = new Kasten::TestDocument( testData );
+    Kasten::TestDocument* document = new Kasten::TestDocument( testData );
 
     QVERIFY( document != 0 );
     QCOMPARE( *document->data(), testData );
@@ -79,19 +79,19 @@ void TestDocumentTest::testDataConstructor()
 
 void TestDocumentTest::testChangeData()
 {
-    qRegisterMetaType<Kasten::KAbstractDocument::SynchronizationStates>("Kasten::KAbstractDocument::SynchronizationStates");
+    qRegisterMetaType<Kasten::AbstractDocument::SynchronizationStates>("Kasten::AbstractDocument::SynchronizationStates");
     const QByteArray testData( TestData );
 
-    Kasten::TestDocument *document = new Kasten::TestDocument();
+    Kasten::TestDocument* document = new Kasten::TestDocument();
 
-    QSignalSpy *changedSpy = new QSignalSpy( document, SIGNAL(modified( Kasten::KAbstractDocument::SynchronizationStates )) );
+    QSignalSpy* changedSpy = new QSignalSpy( document, SIGNAL(modified( Kasten::AbstractDocument::SynchronizationStates )) );
 
     QCOMPARE( *document->data(), QByteArray() );
     QCOMPARE( document->synchronizationStates(), Kasten::TestDocument::InSync );
 
     document->setData( testData );
 
-    const Kasten::KAbstractDocument::SynchronizationStates states( Kasten::KAbstractDocument::LocalHasChanges );
+    const Kasten::AbstractDocument::SynchronizationStates states( Kasten::AbstractDocument::LocalHasChanges );
     QCOMPARE( *document->data(), testData );
     QCOMPARE( document->synchronizationStates(), states );
     checkSynchronizationStatesChanged( changedSpy, states );
@@ -102,9 +102,9 @@ void TestDocumentTest::testChangeData()
 
 void TestDocumentTest::testSetTitle()
 {
-    Kasten::TestDocument *document = new Kasten::TestDocument();
+    Kasten::TestDocument* document = new Kasten::TestDocument();
 
-    QSignalSpy *titleChangedSpy = new QSignalSpy( document, SIGNAL(titleChanged(QString)) );
+    QSignalSpy* titleChangedSpy = new QSignalSpy( document, SIGNAL(titleChanged(QString)) );
 
     const QLatin1String title( "title" );
     document->setTitle( title );
@@ -119,14 +119,14 @@ void TestDocumentTest::testSetTitle()
 
 void TestDocumentTest::testSetSynchronizationStates()
 {
-    qRegisterMetaType<Kasten::KAbstractDocument::SynchronizationStates>("Kasten::KAbstractDocument::SynchronizationStates");
+    qRegisterMetaType<Kasten::AbstractDocument::SynchronizationStates>("Kasten::AbstractDocument::SynchronizationStates");
 
-    Kasten::TestDocument *document = new Kasten::TestDocument();
+    Kasten::TestDocument* document = new Kasten::TestDocument();
 
-    QSignalSpy *changedSpy = new QSignalSpy( document, SIGNAL(modified( Kasten::KAbstractDocument::SynchronizationStates )) );
+    QSignalSpy* changedSpy = new QSignalSpy( document, SIGNAL(modified( Kasten::AbstractDocument::SynchronizationStates )) );
 
-    const Kasten::KAbstractDocument::SynchronizationStates
-        states( Kasten::KAbstractDocument::LocalHasChanges | Kasten::KAbstractDocument::RemoteUnknown );
+    const Kasten::AbstractDocument::SynchronizationStates
+        states( Kasten::AbstractDocument::LocalHasChanges | Kasten::AbstractDocument::RemoteUnknown );
     document->setSynchronizationStates( states );
 
     QCOMPARE( document->title(), QString() );

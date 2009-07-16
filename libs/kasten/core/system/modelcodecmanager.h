@@ -41,7 +41,7 @@ class AbstractModelSelection;
 class AbstractModelStreamEncoder;
 class AbstractModelStreamDecoder;
 class AbstractModelExporter;
-class KDocumentManager;
+class DocumentManager;
 
 
 class KASTENCORE_EXPORT ModelCodecManager : public QObject
@@ -49,33 +49,33 @@ class KASTENCORE_EXPORT ModelCodecManager : public QObject
   Q_OBJECT
 
   public:
-    explicit ModelCodecManager( KDocumentManager *manager );
+    explicit ModelCodecManager( DocumentManager* manager );
     virtual ~ModelCodecManager();
 
   public:
     // or use the viewmodel here? on what should the export be based?
-    void encodeToStream( AbstractModelStreamEncoder *encoder,
-                         AbstractModel *model, const AbstractModelSelection *selection );
+    void encodeToStream( AbstractModelStreamEncoder* encoder,
+                         AbstractModel* model, const AbstractModelSelection* selection );
 
-    void exportDocument( AbstractModelExporter *exporter,
-                         AbstractModel *model, const AbstractModelSelection *selection );
+    void exportDocument( AbstractModelExporter* exporter,
+                         AbstractModel* model, const AbstractModelSelection* selection );
 
   public:
-    QList<AbstractModelStreamEncoder*> encoderList( AbstractModel *model, const AbstractModelSelection *selection ) const;
+    QList<AbstractModelStreamEncoder*> encoderList( AbstractModel* model, const AbstractModelSelection* selection ) const;
     QList<AbstractModelStreamDecoder*> decoderList() const;
 
-    QList<AbstractModelExporter*> exporterList( AbstractModel *model, const AbstractModelSelection *selection ) const;
+    QList<AbstractModelExporter*> exporterList( AbstractModel* model, const AbstractModelSelection* selection ) const;
 
   public:
     void setEncoders( QList<AbstractModelStreamEncoder*> &encoderList );
     void setDecoders( QList<AbstractModelStreamDecoder*> &decoderList );
-    void setWidget( QWidget *widget );
+    void setWidget( QWidget* widget );
 
   protected:
     // unless there is a singleton
-    KDocumentManager *mManager;
+    DocumentManager* mManager;
     // used for dialogs, TODO: create (or use?) global instance for this
-    QWidget *mWidget;
+    QWidget* mWidget;
 
     // temporary hack: hard coded codecs for byte arrays
     QList<AbstractModelStreamEncoder*> mEncoderList;

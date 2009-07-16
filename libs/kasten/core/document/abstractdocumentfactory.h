@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,31 +20,30 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KDOCUMENTVERSIONDATA_H
-#define KDOCUMENTVERSIONDATA_H
+#ifndef ABSTRACTDOCUMENTFACTORY_H
+#define ABSTRACTDOCUMENTFACTORY_H
 
 // lib
 #include "kastencore_export.h"
-#include "kdocumentversionid.h"
 // Qt
-#include <QtCore/QString>
+#include <QtCore/QObject>
 
 
 namespace Kasten
 {
 
-class KASTENCORE_EXPORT KDocumentVersionData
+class AbstractDocument;
+
+
+class KASTENCORE_EXPORT AbstractDocumentFactory : public QObject
 {
-  public:
-    KDocumentVersionData( KDocumentVersionId id, const QString &changeComment );
+  Q_OBJECT
 
   public:
-    KDocumentVersionId id() const;
-    QString changeComment() const;
+    virtual ~AbstractDocumentFactory();
 
-  protected:
-    KDocumentVersionId mId;
-    QString mChangeComment;
+  public: // API to be implemented
+    virtual AbstractDocument* create() = 0;
 };
 
 }

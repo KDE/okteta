@@ -23,7 +23,7 @@
 #include "viewbox.h"
 
 // lib
-#include "kabstractview.h"
+#include "abstractview.h"
 // Qt
 #include <QtGui/QVBoxLayout>
 
@@ -31,7 +31,7 @@
 namespace Kasten
 {
 
-ViewBox::ViewBox( KAbstractView* view, QWidget* parent )
+ViewBox::ViewBox( AbstractView* view, QWidget* parent )
   : QWidget( parent ),
     mView( view )
 {
@@ -42,7 +42,7 @@ ViewBox::ViewBox( KAbstractView* view, QWidget* parent )
 }
 
 
-KAbstractView* ViewBox::view() const { return mView; }
+AbstractView* ViewBox::view() const { return mView; }
 
 
 void ViewBox::add( ViewBox::Area area )

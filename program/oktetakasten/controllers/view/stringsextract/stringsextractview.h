@@ -48,7 +48,7 @@ class StringsExtractView : public QWidget
   Q_OBJECT
 
   public:
-    explicit StringsExtractView( StringsExtractTool *tool, QWidget *parent = 0 );
+    explicit StringsExtractView( StringsExtractTool *tool, QWidget* parent = 0 );
     virtual ~StringsExtractView();
 
   public:

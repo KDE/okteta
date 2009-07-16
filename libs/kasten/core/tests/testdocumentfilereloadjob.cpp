@@ -43,7 +43,7 @@ TestDocumentFileReloadJob::TestDocumentFileReloadJob( TestDocumentFileSynchroniz
 void TestDocumentFileReloadJob::startReadFromFile()
 {
     TestDocumentFileSynchronizer *testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>( synchronizer() );
-    TestDocument *document = qobject_cast<TestDocument*>( synchronizer()->document() );
+    TestDocument* document = qobject_cast<TestDocument*>( synchronizer()->document() );
     TestDocumentFileReloadThread *reloadThread =
         new TestDocumentFileReloadThread( this, testSynchronizer->header(), /*document, */workFilePath() );
     reloadThread->start();

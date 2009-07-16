@@ -24,7 +24,7 @@
 #define TESTDOCUMENT_H
 
 // lib
-#include "kabstractdocument.h"
+#include "abstractdocument.h"
 // Qt
 #include <QtCore/QByteArray>
 #include <QtCore/QString>
@@ -33,7 +33,7 @@
 namespace Kasten
 {
 
-class TestDocument : public KAbstractDocument
+class TestDocument : public AbstractDocument
 {
     Q_OBJECT
 

@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KDOCUMENTMANAGER_H
-#define KDOCUMENTMANAGER_H
+#ifndef DOCUMENTMANAGER_H
+#define DOCUMENTMANAGER_H
 
 // lib
 #include "kastencore_export.h"
-#include <kabstractdocument.h>
+#include <abstractdocument.h>
 // Qt
 #include <QtCore/QList>
 #include <QtCore/QObject>
@@ -37,71 +37,71 @@ class QStringList;
 namespace Kasten
 {
 
-class KDocumentCreateManager; //TODO: temporary
-class KDocumentSyncManager; //TODO: temporary
+class DocumentCreateManager; //TODO: temporary
+class DocumentSyncManager; //TODO: temporary
 class ModelCodecManager; //TODO: temporary
 
-class KASTENCORE_EXPORT KDocumentManager : public QObject
+class KASTENCORE_EXPORT DocumentManager : public QObject
 {
   Q_OBJECT
 
-  friend class KDocumentSyncManager;
+  friend class DocumentSyncManager;
 
   public:
-    KDocumentManager();
-    virtual ~KDocumentManager();
+    DocumentManager();
+    virtual ~DocumentManager();
 
   public:
-    void addDocument( KAbstractDocument *document );
-    void closeDocument( KAbstractDocument* document );
+    void addDocument( AbstractDocument* document );
+    void closeDocument( AbstractDocument* document );
 
     // TODO: what to do for documents not added?
-    bool canClose( KAbstractDocument *document );
+    bool canClose( AbstractDocument* document );
     bool canCloseAll();
 
-    void requestFocus( KAbstractDocument* document );
+    void requestFocus( AbstractDocument* document );
 
   public:
-    QList<KAbstractDocument*> documents() const;
+    QList<AbstractDocument*> documents() const;
 
   public: //TODO: see is this can be removed out of this api, hack for now to MainWindow::saveProperties
     QStringList urls() const;
-    KAbstractDocument* documentOfUrl( const KUrl& url ) const;
+    AbstractDocument* documentOfUrl( const KUrl& url ) const;
 
   public:
-    KDocumentCreateManager *createManager();
-    KDocumentSyncManager *syncManager();
-    ModelCodecManager *codecManager();
+    DocumentCreateManager* createManager();
+    DocumentSyncManager* syncManager();
+    ModelCodecManager* codecManager();
 
   Q_SIGNALS:
     // document got added
-    void added( Kasten::KAbstractDocument *document );
+    void added( Kasten::AbstractDocument* document );
     /// document is about to be closed, cannot be stopped
-    void closing( Kasten::KAbstractDocument *document );
+    void closing( Kasten::AbstractDocument* document );
 //     void closing( KCloseEvent *event );
 // TODO: other than QObject event gets modified by observers, take care of unsetting a close cancel
 // problem with a signal is that all(!) observers get notified, even if event is already cancelled
 // better a visitor pattern?
 
     // TODO: or should the document be able to emit this?
-    void focusRequested( Kasten::KAbstractDocument* document );
+    void focusRequested( Kasten::AbstractDocument* document );
 
 //  protected:
-//    virtual KAbstractDocument* createDocument();
+//    virtual AbstractDocument* createDocument();
 
   protected:
-    QList<KAbstractDocument*> mList;
+    QList<AbstractDocument*> mList;
 
     // TODO: remove into own singleton
-    KDocumentCreateManager *mCreateManager;
-    KDocumentSyncManager *mSyncManager;
-    ModelCodecManager *mCodecManager;
+    DocumentCreateManager* mCreateManager;
+    DocumentSyncManager* mSyncManager;
+    ModelCodecManager* mCodecManager;
 };
 
 
-inline KDocumentCreateManager *KDocumentManager::createManager() { return mCreateManager; }
-inline KDocumentSyncManager *KDocumentManager::syncManager() { return mSyncManager; }
-inline ModelCodecManager *KDocumentManager::codecManager() { return mCodecManager; }
+inline DocumentCreateManager* DocumentManager::createManager() { return mCreateManager; }
+inline DocumentSyncManager* DocumentManager::syncManager() { return mSyncManager; }
+inline ModelCodecManager* DocumentManager::codecManager() { return mCodecManager; }
 
 }
 

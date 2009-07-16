@@ -35,12 +35,12 @@
 #include <kbytearraysourcecodestreamencoder.h>
 #include <bytearrayviewtextstreamencoder.h>
 // Kasten gui
-#include <kviewmanager.h>
+#include <viewmanager.h>
 #include <modelcodecviewmanager.h>
 // Kasten core
-#include <kdocumentmanager.h>
-#include <kdocumentcreatemanager.h>
-#include <kdocumentsyncmanager.h>
+#include <documentmanager.h>
+#include <documentcreatemanager.h>
+#include <documentsyncmanager.h>
 #include <modelcodecmanager.h>
 // KDE
 #include <KLocale>
@@ -59,8 +59,8 @@ namespace Kasten
 
 
 OktetaProgram::OktetaProgram( int argc, char *argv[] )
- : mDocumentManager( new KDocumentManager() ),
-   mViewManager( new KViewManager(mDocumentManager) )
+ : mDocumentManager( new DocumentManager() ),
+   mViewManager( new ViewManager(mDocumentManager) )
 {
     KCmdLineOptions programOptions;
 //     programOptions.add( OffsetOptionShortId );
@@ -120,7 +120,7 @@ int OktetaProgram::execute()
 //                 offset = readOut( offsetOptionArgument );
 //             }
 
-            KDocumentSyncManager *syncManager = mDocumentManager->syncManager();
+            DocumentSyncManager* syncManager = mDocumentManager->syncManager();
             for( int i=0; i<arguments->count(); ++i )
             {
                 syncManager->load( arguments->url(i) );

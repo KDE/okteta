@@ -23,10 +23,10 @@
 #include "viewlistmenucontroller.h"
 
 // lib
-#include <kviewmanager.h>
-#include <kiviewfocusable.h>
+#include <viewmanager.h>
+#include <viewfocusable.h>
 // Kasten core
-#include <kabstractdocument.h>
+#include <abstractdocument.h>
 // KDE
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
@@ -38,7 +38,7 @@
 
 
 
-Q_DECLARE_METATYPE(Kasten::KAbstractView*)
+Q_DECLARE_METATYPE(Kasten::AbstractView*)
 
 namespace Kasten
 {
@@ -47,7 +47,7 @@ static const int MaxEntryLength = 150;
 static const char WindowsListActionListId[] = "windows_list";
 
 
-ViewListMenuController::ViewListMenuController( KViewManager* viewManager, If::ViewFocusable* focusable,
+ViewListMenuController::ViewListMenuController( ViewManager* viewManager, If::ViewFocusable* focusable,
                                                 KXMLGUIClient* guiClient )
  : mViewManager( viewManager ), mFocusable( focusable ), mGuiClient( guiClient )
 {
@@ -55,8 +55,8 @@ ViewListMenuController::ViewListMenuController( KViewManager* viewManager, If::V
 //     mWindowsActionGroup->setExclusive( true );
     connect( mWindowsActionGroup, SIGNAL(triggered( QAction* )), SLOT(onActionTriggered( QAction* )) );
 
-    connect( mViewManager, SIGNAL(opened( Kasten::KAbstractView* )),  SLOT(updateActions()) );
-    connect( mViewManager, SIGNAL(closing( Kasten::KAbstractView* )), SLOT(updateActions()) );
+    connect( mViewManager, SIGNAL(opened( Kasten::AbstractView* )),  SLOT(updateActions()) );
+    connect( mViewManager, SIGNAL(closing( Kasten::AbstractView* )), SLOT(updateActions()) );
 
     updateActions();
 }
@@ -73,7 +73,7 @@ void ViewListMenuController::updateActions()
 
     qDeleteAll( mWindowsActionGroup->actions() );
 
-    const QList<KAbstractView*> views = mViewManager->views();
+    const QList<AbstractView*> views = mViewManager->views();
     const bool hasViews = ( views.size() > 0 );
 
     if( hasViews )
@@ -81,7 +81,7 @@ void ViewListMenuController::updateActions()
         //TODO: sortieren nach namen und erste 10 mit Zahl, siehe unten
         for( int v = 0; v < views.size(); ++v )
         {
-            KAbstractView *view = views.at( v );
+            AbstractView *view = views.at( v );
             const QString title = KStringHandler::rsqueeze( view->title(), MaxEntryLength );
             QAction *action = new QAction( v<9 ? QString::fromLatin1("&%1 %2").arg(v+1).arg(title) : title, mWindowsActionGroup );
     //         action->setCheckable( true );
@@ -105,7 +105,7 @@ void ViewListMenuController::updateActions()
 
 void ViewListMenuController::onActionTriggered( QAction *action )
 {
-    KAbstractView *view = action->data().value<KAbstractView *>();
+    AbstractView *view = action->data().value<AbstractView *>();
     mFocusable->setViewFocus( view );
 }
 

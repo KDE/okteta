@@ -27,7 +27,7 @@ class AbstractByteArrayFilterParameterSetEdit::Private
 {
 };
 
-AbstractByteArrayFilterParameterSetEdit::AbstractByteArrayFilterParameterSetEdit( QWidget *parent )
+AbstractByteArrayFilterParameterSetEdit::AbstractByteArrayFilterParameterSetEdit( QWidget* parent )
  : QWidget( parent ), d( new Private() )
 {}
 

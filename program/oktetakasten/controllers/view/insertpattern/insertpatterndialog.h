@@ -42,7 +42,7 @@ class InsertPatternDialog : public KDialog
   Q_OBJECT
 
   public:
-    explicit InsertPatternDialog( QWidget *parent = 0 );
+    explicit InsertPatternDialog( QWidget* parent = 0 );
     virtual ~InsertPatternDialog();
 
   public: // set

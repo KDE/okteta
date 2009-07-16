@@ -56,7 +56,7 @@ void KByteArrayDocumentTest::testCreateNew()
 void KByteArrayDocumentTest::testSetTitle()
 {
     KByteArrayDocument *document = new KByteArrayDocument("New created for test.");
-    QSignalSpy *titleChangeSpy =  new QSignalSpy( document, SIGNAL(titleChanged( const QString& )) );
+    QSignalSpy* titleChangeSpy =  new QSignalSpy( document, SIGNAL(titleChanged( const QString& )) );
 
     const QLatin1String title( Title );
     document->setTitle( title );

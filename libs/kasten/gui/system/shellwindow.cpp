@@ -24,16 +24,16 @@
 
 // lib
 #include <tabbedviews.h>
-#include <kviewmanager.h>
-#include <kabstractview.h>
+#include <viewmanager.h>
+#include <abstractview.h>
 #include <abstracttoolview.h>
 #include <abstracttool.h>
 #include <abstractxmlguicontroller.h>
 #include <toolviewdockwidget.h>
 // Kasten core
-#include <kdocumentmanager.h>
-#include <kdocumentsyncmanager.h>
-#include <kabstractdocument.h>
+#include <documentmanager.h>
+#include <documentsyncmanager.h>
+#include <abstractdocument.h>
 // KDE
 #include <KUrl>
 // Qt
@@ -45,25 +45,25 @@
 namespace Kasten
 {
 
-ShellWindow::ShellWindow( KDocumentManager *documentManager, KViewManager *viewManager )
+ShellWindow::ShellWindow( DocumentManager* documentManager, ViewManager *viewManager )
  : mGroupedViews( new TabbedViews() ), mCurrentView( 0 ),
    mDocumentManager( documentManager ), mViewManager( viewManager )
 {
     setCentralWidget( mGroupedViews->widget() );
 
     mViewManager->setWindow( this );
-    connect( mViewManager, SIGNAL(opened( Kasten::KAbstractView* )),
-             mGroupedViews, SLOT(addView( Kasten::KAbstractView* )) );
-    connect( mViewManager, SIGNAL(closing( Kasten::KAbstractView* )),
-             mGroupedViews, SLOT(removeView( Kasten::KAbstractView* )) );
+    connect( mViewManager, SIGNAL(opened( Kasten::AbstractView* )),
+             mGroupedViews, SLOT(addView( Kasten::AbstractView* )) );
+    connect( mViewManager, SIGNAL(closing( Kasten::AbstractView* )),
+             mGroupedViews, SLOT(removeView( Kasten::AbstractView* )) );
 
-    connect( mDocumentManager, SIGNAL(focusRequested( Kasten::KAbstractDocument* )),
-             SLOT(onFocusRequested( Kasten::KAbstractDocument* )) );
+    connect( mDocumentManager, SIGNAL(focusRequested( Kasten::AbstractDocument* )),
+             SLOT(onFocusRequested( Kasten::AbstractDocument* )) );
 
-    connect( mGroupedViews, SIGNAL(viewFocusChanged( Kasten::KAbstractView* )),
-             SLOT(onViewFocusChanged( Kasten::KAbstractView* )) );
-    connect( mGroupedViews, SIGNAL(closeRequest( Kasten::KAbstractView* )),
-             SLOT(onCloseRequest( Kasten::KAbstractView* )) );
+    connect( mGroupedViews, SIGNAL(viewFocusChanged( Kasten::AbstractView* )),
+             SLOT(onViewFocusChanged( Kasten::AbstractView* )) );
+    connect( mGroupedViews, SIGNAL(closeRequest( Kasten::AbstractView* )),
+             SLOT(onCloseRequest( Kasten::AbstractView* )) );
     connect( mGroupedViews, SIGNAL(dragMove( const QDragMoveEvent*, bool& )),
              SLOT(onDragMoveEvent( const QDragMoveEvent*, bool& )) );
     connect( mGroupedViews, SIGNAL(drop( QDropEvent* )),
@@ -92,7 +92,7 @@ void ShellWindow::addTool( AbstractToolView* toolView )
     connect( dockWidget, SIGNAL(visibilityChanged( bool )), SLOT(onToolVisibilityChanged( bool )) );
 }
 
-void ShellWindow::updateControllers( KAbstractView* view )
+void ShellWindow::updateControllers( AbstractView* view )
 {
     foreach( AbstractXmlGuiController* controller, mControllers )
         controller->setTargetModel( view );
@@ -112,20 +112,20 @@ bool ShellWindow::queryClose()
 
 void ShellWindow::onTitleChanged( const QString &newTitle )
 {
-    KAbstractView* view = qobject_cast<KAbstractView *>( sender() );
+    AbstractView* view = qobject_cast<AbstractView *>( sender() );
     if( view )
         setCaption( newTitle, view->document()->hasLocalChanges() );
 }
 
-void ShellWindow::onModifiedChanged( KAbstractDocument::SynchronizationStates newStates )
+void ShellWindow::onModifiedChanged( AbstractDocument::SynchronizationStates newStates )
 {
 Q_UNUSED( newStates )
-    KAbstractView* view = qobject_cast<KAbstractView *>( sender() );
+    AbstractView* view = qobject_cast<AbstractView *>( sender() );
     if( view )
         setCaption( view->title(), view->document()->hasLocalChanges() );
 }
 
-void ShellWindow::onViewFocusChanged( KAbstractView *view )
+void ShellWindow::onViewFocusChanged( AbstractView *view )
 {
     if( mCurrentView ) mCurrentView->disconnect( this );
 
@@ -139,21 +139,21 @@ void ShellWindow::onViewFocusChanged( KAbstractView *view )
     if( view )
     {
         connect( view, SIGNAL(titleChanged( QString )), SLOT(onTitleChanged( QString )) );
-        connect( view, SIGNAL(modified( Kasten::KAbstractDocument::SynchronizationStates )),
-                       SLOT(onModifiedChanged( Kasten::KAbstractDocument::SynchronizationStates )) );
+        connect( view, SIGNAL(modified( Kasten::AbstractDocument::SynchronizationStates )),
+                       SLOT(onModifiedChanged( Kasten::AbstractDocument::SynchronizationStates )) );
     }
 }
 
-void ShellWindow::onFocusRequested( KAbstractDocument* document )
+void ShellWindow::onFocusRequested( AbstractDocument* document )
 {
-    KAbstractView* view = mViewManager->viewOfDocument( document );
+    AbstractView* view = mViewManager->viewOfDocument( document );
     if( view )
         mGroupedViews->setViewFocus( view );
 }
 
-void ShellWindow::onCloseRequest( KAbstractView* view )
+void ShellWindow::onCloseRequest( AbstractView* view )
 {
-    KAbstractDocument* document = view->document();
+    AbstractDocument* document = view->document();
 
     if( mDocumentManager->canClose(document) )
         mDocumentManager->closeDocument( document );
@@ -169,7 +169,7 @@ void ShellWindow::onDropEvent( QDropEvent* event )
     const KUrl::List urls = KUrl::List::fromMimeData( event->mimeData() );
     if( !urls.isEmpty() )
     {
-        KDocumentSyncManager* syncManager = mDocumentManager->syncManager();
+        DocumentSyncManager* syncManager = mDocumentManager->syncManager();
 
         foreach( const KUrl& url, urls )
             syncManager->load( url );
@@ -181,7 +181,7 @@ void ShellWindow::onToolVisibilityChanged( bool isVisible )
     ToolViewDockWidget* dockWidget = qobject_cast<ToolViewDockWidget *>( sender() );
     if( dockWidget )
     {
-        KAbstractView* view = isVisible ? mCurrentView : 0;
+        AbstractView* view = isVisible ? mCurrentView : 0;
         dockWidget->toolView()->tool()->setTargetModel( view );
     }
 }

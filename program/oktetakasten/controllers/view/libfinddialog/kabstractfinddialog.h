@@ -46,7 +46,7 @@ class KAbstractFindDialog : public KDialog
   Q_OBJECT
 
   public:
-    explicit KAbstractFindDialog( QWidget *parent = 0 );
+    explicit KAbstractFindDialog( QWidget* parent = 0 );
     virtual ~KAbstractFindDialog();
 
   public: // set

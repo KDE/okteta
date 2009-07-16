@@ -83,14 +83,14 @@
 /*#include <viewsystem/close/closecontroller.h>*/
 #include <program/quit/quitcontroller.h>
 // Kasten gui
-#include <kviewmanager.h>
+#include <viewmanager.h>
 #include <tabbedviews.h>
 // #include <parallelviews/parallelviews.h>
 #include <statusbar.h>
 // Kasten core
-#include <kdocumentcreatemanager.h>
-#include <kdocumentsyncmanager.h>
-#include <kdocumentmanager.h>
+#include <documentcreatemanager.h>
+#include <documentsyncmanager.h>
+#include <documentmanager.h>
 // KDE
 #include <KGlobal>
 #include <KConfigGroup>
@@ -194,8 +194,8 @@ void OktetaMainWindow::readProperties( const KConfigGroup &configGroup )
 {
     const QStringList urls = configGroup.readPathEntry( LoadedUrlsKey, QStringList() );
 
-    KDocumentSyncManager *syncManager = mDocumentManager->syncManager();
-    KDocumentCreateManager *createManager = mDocumentManager->createManager();
+    DocumentSyncManager* syncManager = mDocumentManager->syncManager();
+    DocumentCreateManager* createManager = mDocumentManager->createManager();
     for( int i=0; i<urls.count(); ++i )
     {
         if( urls[i].isEmpty() )

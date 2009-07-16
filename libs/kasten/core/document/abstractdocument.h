@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KABSTRACTDOCUMENT_H
-#define KABSTRACTDOCUMENT_H
+#ifndef ABSTRACTDOCUMENT_H
+#define ABSTRACTDOCUMENT_H
 
 
 // lib
@@ -39,14 +39,14 @@ class AbstractModelSynchronizer;
 // last both might be too much overhead, unless modification and access are grained enough
 // in multiuser environment also author/creator and group/identity
 // we would end with a in-memory file/document system, why not?
-class KASTENCORE_EXPORT KAbstractDocument : public AbstractModel
+class KASTENCORE_EXPORT AbstractDocument : public AbstractModel
 {
     Q_OBJECT
     Q_PROPERTY( SynchronizationStates synchronizationStates READ synchronizationStates )
     Q_FLAGS( SynchronizationStates SynchronizationState )
 
   friend class AbstractModelSynchronizer;
-  friend class KDocumentManager;
+  friend class DocumentManager;
 
   public:
     //TODO: some things are a tristate, is it the right thing to embed them here?
@@ -63,9 +63,9 @@ class KASTENCORE_EXPORT KAbstractDocument : public AbstractModel
     Q_DECLARE_FLAGS( SynchronizationStates, SynchronizationState )
 
   protected:
-    KAbstractDocument();
+    AbstractDocument();
   public:
-    virtual ~KAbstractDocument();
+    virtual ~AbstractDocument();
 
   public: // API to be implemented
     // TODO: what about plurals?
@@ -76,19 +76,19 @@ class KASTENCORE_EXPORT KAbstractDocument : public AbstractModel
 // virtual QVariant data ( const QModelIndex & index, int role = Qt::DisplayRole ) const = 0
 
   public:
-    void setSynchronizer( AbstractModelSynchronizer *synchronizer );
+    void setSynchronizer( AbstractModelSynchronizer* synchronizer );
     void setLiveSynchronizer( AbstractModelSynchronizer* synchronizer );
 
   public: // helper or basic?
     bool hasLocalChanges() const;
-    AbstractModelSynchronizer *synchronizer() const;
+    AbstractModelSynchronizer* synchronizer() const;
     AbstractModelSynchronizer* liveSynchronizer() const;
     QString id() const;
 
   Q_SIGNALS:
     // TODO: should be signal the diff? how to say then remote is in synch again?
     // could be done by pairs of flags instead of notset = isnot
-    void modified( Kasten::KAbstractDocument::SynchronizationStates newStates );
+    void modified( Kasten::AbstractDocument::SynchronizationStates newStates );
     void synchronizerChanged( Kasten::AbstractModelSynchronizer* newSynchronizer );
     void liveSynchronizerChanged( Kasten::AbstractModelSynchronizer* newSynchronizer );
 
@@ -97,10 +97,10 @@ class KASTENCORE_EXPORT KAbstractDocument : public AbstractModel
 
   protected:
     class Private;
-    Private * const d;
+    Private* const d;
 };
 
-Q_DECLARE_OPERATORS_FOR_FLAGS( KAbstractDocument::SynchronizationStates )
+Q_DECLARE_OPERATORS_FOR_FLAGS( AbstractDocument::SynchronizationStates )
 
 }
 

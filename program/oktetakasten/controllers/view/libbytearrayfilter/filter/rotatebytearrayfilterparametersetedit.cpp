@@ -32,7 +32,7 @@
 #include <QtGui/QSpinBox>
 
 
-RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit( QWidget *parent )
+RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit( QWidget* parent )
  : AbstractByteArrayFilterParameterSetEdit( parent )
 {
     QVBoxLayout *baseLayout = new QVBoxLayout( this );

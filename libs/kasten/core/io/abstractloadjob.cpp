@@ -32,11 +32,11 @@ class AbstractLoadJob::Private
     Private();
 
   public:
-    KAbstractDocument *document() const;
-    void setDocument( KAbstractDocument *document );
+    AbstractDocument* document() const;
+    void setDocument( AbstractDocument* document );
 
   protected:
-    KAbstractDocument *mDocument;
+    AbstractDocument* mDocument;
 };
 
 AbstractLoadJob::Private::Private()
@@ -44,17 +44,17 @@ AbstractLoadJob::Private::Private()
 {}
 
 
-inline KAbstractDocument *AbstractLoadJob::Private::document() const { return mDocument; }
-inline void AbstractLoadJob::Private::setDocument( KAbstractDocument *document ) { mDocument = document; }
+inline AbstractDocument* AbstractLoadJob::Private::document() const { return mDocument; }
+inline void AbstractLoadJob::Private::setDocument( AbstractDocument* document ) { mDocument = document; }
 
 
 AbstractLoadJob::AbstractLoadJob()
  : d( new Private() )
 {}
 
-KAbstractDocument *AbstractLoadJob::document() const { return d->document(); }
+AbstractDocument* AbstractLoadJob::document() const { return d->document(); }
 
-void AbstractLoadJob::setDocument( KAbstractDocument *document )
+void AbstractLoadJob::setDocument( AbstractDocument* document )
 {
     if( document )
     {

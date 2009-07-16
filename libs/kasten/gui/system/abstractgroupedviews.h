@@ -34,7 +34,7 @@ class QWidget;
 namespace Kasten
 {
 
-class KAbstractView;
+class AbstractView;
 
 
 class KASTENGUI_EXPORT AbstractGroupedViews : public QObject
@@ -45,21 +45,21 @@ class KASTENGUI_EXPORT AbstractGroupedViews : public QObject
     virtual ~AbstractGroupedViews();
 
   public Q_SLOTS: // set/action API to be implemented
-    virtual void addView( Kasten::KAbstractView* view ) = 0;
-    virtual void removeView( Kasten::KAbstractView* view ) = 0;
+    virtual void addView( Kasten::AbstractView* view ) = 0;
+    virtual void removeView( Kasten::AbstractView* view ) = 0;
 
   public: // get API to be implemented
-    virtual QWidget *widget() const = 0;
+    virtual QWidget* widget() const = 0;
     // returns the list in the order of display
-    virtual QList<KAbstractView*> viewList() const = 0;
+    virtual QList<AbstractView*> viewList() const = 0;
 
   Q_SIGNALS:
     // view was created and already added to the list
-    void added( Kasten::KAbstractView *view );
+    void added( Kasten::AbstractView *view );
     // view will be removed, already removed from list
-    void removing( Kasten::KAbstractView *view );
+    void removing( Kasten::AbstractView *view );
     // closing the view is requested
-    void closeRequest( Kasten::KAbstractView* view );
+    void closeRequest( Kasten::AbstractView* view );
 };
 
 }

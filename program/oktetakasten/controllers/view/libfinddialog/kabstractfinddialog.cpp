@@ -41,7 +41,7 @@
 namespace Kasten
 {
 
-KAbstractFindDialog::KAbstractFindDialog( QWidget *parent )
+KAbstractFindDialog::KAbstractFindDialog( QWidget* parent )
   : KDialog( parent )
 {
     setButtons( Ok | Cancel );
@@ -54,7 +54,7 @@ KAbstractFindDialog::KAbstractFindDialog( QWidget *parent )
 
 void KAbstractFindDialog::setupFindBox()
 {
-    QWidget *page = new QWidget( this );
+    QWidget* page = new QWidget( this );
     setMainWidget( page );
 
     QVBoxLayout *pageLayout = new QVBoxLayout( page );
@@ -92,7 +92,7 @@ void KAbstractFindDialog::setupOperationBox( QGroupBox *operationBox )
 
 void KAbstractFindDialog::setupCheckBoxes( QCheckBox *optionCheckBox )
 {
-    QWidget *page = mainWidget();
+    QWidget* page = mainWidget();
     QVBoxLayout *pageLayout = static_cast<QVBoxLayout *>( mainWidget()->layout() );
 
     // options

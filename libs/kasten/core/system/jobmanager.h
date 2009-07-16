@@ -37,7 +37,7 @@ class KASTENCORE_EXPORT JobManager
 {
   public:
     // temporary, remove quickly
-    static bool executeJob( KJob *job, QWidget *widget = 0 );
+    static bool executeJob( KJob* job, QWidget* widget = 0 );
 
   public:
 };

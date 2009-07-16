@@ -26,13 +26,13 @@
 #include "copyasdialog.h"
 // Kasten gui
 #include <modelcodecviewmanager.h>
-#include <kviewmanager.h>
-#include <kidataselectable.h>
+#include <viewmanager.h>
+#include <dataselectable.h>
 #include <abstractmodelstreamencoderconfigeditor.h>
 // Kasten core
 #include <modelstreamencodethread.h>
 #include <modelcodecmanager.h>
-#include <kdocumentmanager.h>
+#include <documentmanager.h>
 #include <abstractmodelstreamencoder.h>
 #include <abstractmodel.h>
 // KDE
@@ -53,7 +53,7 @@ Q_DECLARE_METATYPE(Kasten::AbstractModelStreamEncoder*)
 namespace Kasten
 {
 
-CopyAsController::CopyAsController( KViewManager* viewManager, KDocumentManager* documentManager, KXMLGUIClient* guiClient )
+CopyAsController::CopyAsController( ViewManager* viewManager, DocumentManager* documentManager, KXMLGUIClient* guiClient )
  : mViewManager( viewManager ), mDocumentManager( documentManager ), mGuiClient( guiClient ), mModel( 0 )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
@@ -98,7 +98,7 @@ void CopyAsController::updateActions()
     {
         for( int c = 0; c < encoderList.size(); ++c )
         {
-            AbstractModelStreamEncoder *encoder = encoderList.at( c );
+            AbstractModelStreamEncoder* encoder = encoderList.at( c );
             const QString title = encoder->remoteTypeName();
             QAction* action = new QAction( title, mCopyAsSelectAction );
 
@@ -119,7 +119,7 @@ void CopyAsController::updateActions()
 
 void CopyAsController::onActionTriggered( QAction *action )
 {
-    AbstractModelStreamEncoder *encoder = action->data().value<AbstractModelStreamEncoder *>();
+    AbstractModelStreamEncoder* encoder = action->data().value<AbstractModelStreamEncoder* >();
 
     const AbstractModelSelection* selection = mSelectionControl->modelSelection();
 

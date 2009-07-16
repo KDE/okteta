@@ -36,34 +36,34 @@ namespace Kasten
 class AbstractFileSystemExportJob::Private
 {
   public:
-    Private( AbstractModel *model, const AbstractModelSelection *selection, const KUrl &url );
+    Private( AbstractModel* model, const AbstractModelSelection* selection, const KUrl &url );
   public:
     void prepareWorkFile();
     void removeWorkFile();
   public:
-    AbstractModel *model() const;
-    const AbstractModelSelection *selection() const;
+    AbstractModel* model() const;
+    const AbstractModelSelection* selection() const;
     const KUrl &url() const;
     QString workFilePath() const;
-    QWidget *widget() const;
+    QWidget* widget() const;
   protected:
-    AbstractModel *mModel;
-    const AbstractModelSelection *mSelection;
+    AbstractModel* mModel;
+    const AbstractModelSelection* mSelection;
     const KUrl mUrl;
     KTemporaryFile *mTemporaryFile;
     QString mWorkFilePath;
-    QWidget *mWidget;
+    QWidget* mWidget;
 };
 
-inline AbstractFileSystemExportJob::Private::Private( AbstractModel *model, const AbstractModelSelection *selection,
+inline AbstractFileSystemExportJob::Private::Private( AbstractModel* model, const AbstractModelSelection* selection,
                                  const KUrl &url)
  : mModel( model ), mSelection( selection ), mUrl( url ), mTemporaryFile( 0 ), mWidget( 0 )
 {}
-inline AbstractModel *AbstractFileSystemExportJob::Private::model()                    const { return mModel; }
-inline const AbstractModelSelection *AbstractFileSystemExportJob::Private::selection() const { return mSelection; }
+inline AbstractModel* AbstractFileSystemExportJob::Private::model()                    const { return mModel; }
+inline const AbstractModelSelection* AbstractFileSystemExportJob::Private::selection() const { return mSelection; }
 inline const KUrl &AbstractFileSystemExportJob::Private::url()                         const { return mUrl; }
 inline QString AbstractFileSystemExportJob::Private::workFilePath()                    const { return mWorkFilePath; }
-inline QWidget *AbstractFileSystemExportJob::Private::widget()                         const { return mWidget; }
+inline QWidget* AbstractFileSystemExportJob::Private::widget()                         const { return mWidget; }
 
 inline void AbstractFileSystemExportJob::Private::prepareWorkFile()
 {
@@ -82,16 +82,16 @@ inline void AbstractFileSystemExportJob::Private::removeWorkFile()
 }
 
 
-AbstractFileSystemExportJob::AbstractFileSystemExportJob( AbstractModel *model, const AbstractModelSelection *selection,
+AbstractFileSystemExportJob::AbstractFileSystemExportJob( AbstractModel* model, const AbstractModelSelection* selection,
                                  const KUrl &url )
 : d( new Private(model,selection,url) )
 {
 }
 
-AbstractModel *AbstractFileSystemExportJob::model() const { return d->model(); }
-const AbstractModelSelection *AbstractFileSystemExportJob::selection() const { return d->selection(); }
+AbstractModel* AbstractFileSystemExportJob::model() const { return d->model(); }
+const AbstractModelSelection* AbstractFileSystemExportJob::selection() const { return d->selection(); }
 QString AbstractFileSystemExportJob::workFilePath() const { return d->workFilePath(); }
-QWidget *AbstractFileSystemExportJob::widget() const { return d->widget(); }
+QWidget* AbstractFileSystemExportJob::widget() const { return d->widget(); }
 
 
 void AbstractFileSystemExportJob::start()

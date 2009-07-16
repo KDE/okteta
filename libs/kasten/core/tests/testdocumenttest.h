@@ -24,7 +24,7 @@
 #define TESTDOCUMENTTEST_H
 
 // sut
-#include <kabstractdocument.h>
+#include <abstractdocument.h>
 // Qt
 #include <QtCore/QObject>
 
@@ -37,8 +37,8 @@ class TestDocumentTest : public QObject
   Q_OBJECT
 
   private:
-    void checkTitleChanged( QSignalSpy *titleChangedSpy, const QString &title );
-    void checkSynchronizationStatesChanged( QSignalSpy *changedSpy, Kasten::KAbstractDocument::SynchronizationStates states );
+    void checkTitleChanged( QSignalSpy* titleChangedSpy, const QString &title );
+    void checkSynchronizationStatesChanged( QSignalSpy* changedSpy, Kasten::AbstractDocument::SynchronizationStates states );
 
   private Q_SLOTS: // test functions
     void testPlainConstructor();

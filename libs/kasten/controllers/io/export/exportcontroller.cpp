@@ -27,13 +27,13 @@
 #include "exportdialog.h"
 // Kasten gui
 #include <modelcodecviewmanager.h>
-#include <kidataselectable.h>
-#include <kviewmanager.h>
+#include <dataselectable.h>
+#include <viewmanager.h>
 #include <abstractmodelexporterconfigeditor.h>
 // Kasten core
-#include <kdocumentmanager.h>
+#include <documentmanager.h>
 #include <modelcodecmanager.h>
-#include <kabstractdocument.h>
+#include <abstractdocument.h>
 #include <abstractmodelexporter.h>
 // KDE
 #include <KXmlGuiWindow>
@@ -48,7 +48,7 @@ Q_DECLARE_METATYPE( Kasten::AbstractModelExporter* )
 namespace Kasten
 {
 
-ExportController::ExportController( KViewManager* viewManager, KDocumentManager* documentManager, KXMLGUIClient* guiClient )
+ExportController::ExportController( ViewManager* viewManager, DocumentManager* documentManager, KXMLGUIClient* guiClient )
  : mViewManager( viewManager ), mDocumentManager( documentManager ), mGuiClient( guiClient ), mModel( 0 )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
@@ -93,7 +93,7 @@ void ExportController::updateActions()
     {
         for( int c = 0; c < exporterList.size(); ++c )
         {
-            AbstractModelExporter *exporter = exporterList.at( c );
+            AbstractModelExporter* exporter = exporterList.at( c );
             const QString title = exporter->remoteTypeName();
             QAction* action = new QAction( title, mExportSelectAction );
 
@@ -113,7 +113,7 @@ void ExportController::updateActions()
 
 void ExportController::onActionTriggered( QAction *action )
 {
-    AbstractModelExporter *exporter = action->data().value<AbstractModelExporter *>();
+    AbstractModelExporter* exporter = action->data().value<AbstractModelExporter* >();
 
     const AbstractModelSelection* selection = ( mSelectionControl != 0 ) ? mSelectionControl->modelSelection() : 0;
 

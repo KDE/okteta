@@ -32,7 +32,7 @@
 namespace Kasten
 {
 
-bool JobManager::executeJob( KJob *job, QWidget *widget )
+bool JobManager::executeJob( KJob* job, QWidget* widget )
 {
     QApplication::setOverrideCursor( Qt::WaitCursor );
 

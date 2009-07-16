@@ -37,19 +37,19 @@ class KASTENCORE_EXPORT ModelEncoderFileSystemExporter : public AbstractModelExp
   Q_OBJECT
 
   public:
-    explicit ModelEncoderFileSystemExporter( AbstractModelStreamEncoder *encoder );
+    explicit ModelEncoderFileSystemExporter( AbstractModelStreamEncoder* encoder );
     virtual ~ModelEncoderFileSystemExporter();
 
   public:
     AbstractModelStreamEncoder* encoder() const;
 
   public: // AbstractModelExporter API
-    virtual AbstractExportJob *startExport( AbstractModel *model, const AbstractModelSelection *selection,
+    virtual AbstractExportJob* startExport( AbstractModel* model, const AbstractModelSelection* selection,
                                             const KUrl &url );
-    virtual QString modelTypeName( AbstractModel *model, const AbstractModelSelection *selection ) const;
+    virtual QString modelTypeName( AbstractModel* model, const AbstractModelSelection* selection ) const;
 
   protected:
-    AbstractModelStreamEncoder * const mEncoder;
+    AbstractModelStreamEncoder*  const mEncoder;
 };
 
 

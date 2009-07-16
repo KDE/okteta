@@ -35,7 +35,7 @@ class KToggleAction;
 namespace Kasten
 {
 
-class KAbstractDocument;
+class AbstractDocument;
 
 
 class KASTENCONTROLLER_EXPORT ReadOnlyController : public AbstractXmlGuiController
@@ -52,7 +52,7 @@ class KASTENCONTROLLER_EXPORT ReadOnlyController : public AbstractXmlGuiControll
     void setReadOnly( bool isReadOnly );
 
   protected:
-    KAbstractDocument *mDocument;
+    AbstractDocument* mDocument;
 
     KToggleAction *mSetReadOnlyAction;
 };

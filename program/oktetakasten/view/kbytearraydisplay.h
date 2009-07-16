@@ -26,10 +26,10 @@
 // lib
 #include <kbytearrayselection.h>
 // Kasten gui
-#include <kabstractview.h>
-#include <kizoomable.h> // TODO: able instead of interface? or else?
-#include <kidataselectable.h>
-#include <kiselecteddatawriteable.h>
+#include <abstractview.h>
+#include <zoomable.h> // TODO: able instead of interface? or else?
+#include <dataselectable.h>
+#include <selecteddatawriteable.h>
 
 namespace KHEUI {
 class ByteArrayJanusView;
@@ -47,7 +47,7 @@ class KByteArrayDocument;
 class KCursorProxy;
 
 
-class KByteArrayDisplay : public KAbstractView, public If::Zoomable, public If::DataSelectable, public If::SelectedDataWriteable
+class KByteArrayDisplay : public AbstractView, public If::Zoomable, public If::DataSelectable, public If::SelectedDataWriteable
 {
     Q_OBJECT
     Q_INTERFACES(Kasten::If::Zoomable Kasten::If::DataSelectable Kasten::If::SelectedDataWriteable)
@@ -68,9 +68,9 @@ class KByteArrayDisplay : public KAbstractView, public If::Zoomable, public If::
     virtual bool isReadOnly() const;
     virtual void setReadOnly( bool isReadOnly );
 
-  public: // KAbstractView API
-    virtual QWidget *widget() const;
-    virtual KAbstractDocument *document() const;
+  public: // AbstractView API
+    virtual QWidget* widget() const;
+    virtual AbstractDocument* document() const;
 
   public: // If::Zoomable API TODO: make all such methods slots?
     virtual void setZoomLevel( double Level );

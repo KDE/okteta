@@ -23,7 +23,7 @@
 #include "abstractmodelfilesystemsynchronizer.h"
 
 // lib
-#include <kabstractdocument.h>
+#include <abstractdocument.h>
 // KDE
 #include <KIO/NetAccess>
 #include <KTemporaryFile>
