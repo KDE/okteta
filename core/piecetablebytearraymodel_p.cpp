@@ -23,7 +23,9 @@
 #include "piecetablebytearraymodel_p.h"
 #include "piecetablebytearraymodel.h"
 
-#include <KDebug>
+// lib
+#include <sectionlist.h>
+
 
 namespace Okteta
 {
