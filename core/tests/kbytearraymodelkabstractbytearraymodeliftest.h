@@ -25,14 +25,14 @@
 
 
 // test
-#include "kabstractbytearraymodeliftest.h"
+#include "abstractbytearraymodeliftest.h"
 
 
-class KByteArrayModelKAbstractByteArrayModelIfTest : public KAbstractByteArrayModelIfTest
+class KByteArrayModelKAbstractByteArrayModelIfTest : public AbstractByteArrayModelIfTest
 {
-  protected: // KAbstractByteArrayModelIfTest API
-    KHECore::AbstractByteArrayModel *createByteArrayModel();
-    void deleteByteArrayModel( KHECore::AbstractByteArrayModel *ByteArrayModel );
+  protected: // AbstractByteArrayModelIfTest API
+    Okteta::AbstractByteArrayModel *createByteArrayModel();
+    void deleteByteArrayModel( Okteta::AbstractByteArrayModel *ByteArrayModel );
 };
 
 #endif

@@ -25,7 +25,7 @@
 #include "bytearrayrowview.moc" // due to Q_PRIVATE_SLOT
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 ByteArrayRowView::ByteArrayRowView( QWidget* parent )
@@ -35,7 +35,7 @@ ByteArrayRowView::ByteArrayRowView( QWidget* parent )
     d->init();
 }
 
-void ByteArrayRowView::setByteArrayModel( KHECore::AbstractByteArrayModel* byteArrayModel )
+void ByteArrayRowView::setByteArrayModel( Okteta::AbstractByteArrayModel* byteArrayModel )
 {
     Q_D( ByteArrayRowView );
     d->setByteArrayModel( byteArrayModel );

@@ -23,7 +23,7 @@
 #include "bytetablemodel.h"
 
 // Okteta core
-#include <khechar.h>
+#include <character.h>
 #include <charcodec.h>
 #include <valuecodec.h>
 // KDE
@@ -39,18 +39,18 @@ static const int ByteSetSize = 256;
 
 ByteTableModel::ByteTableModel( QObject *parent )
  : QAbstractTableModel( parent ),
-   mCharCodec( KHECore::CharCodec::createCodec(KHECore::LocalEncoding) ),
+   mCharCodec( Okteta::CharCodec::createCodec(Okteta::LocalEncoding) ),
    mUndefinedChar( ByteTableDefaultUndefinedChar )
 {
-    static const KHECore::ValueCoding CodingIds[NofOfValueCodings] =
+    static const Okteta::ValueCoding CodingIds[NofOfValueCodings] =
     {
-        KHECore::DecimalCoding,
-        KHECore::HexadecimalCoding,
-        KHECore::OctalCoding,
-        KHECore::BinaryCoding
+        Okteta::DecimalCoding,
+        Okteta::HexadecimalCoding,
+        Okteta::OctalCoding,
+        Okteta::BinaryCoding
     };
     for( int i=0; i<NofOfValueCodings; ++i )
-        mValueCodec[i] = KHECore::ValueCodec::createCodec( CodingIds[i] );
+        mValueCodec[i] = Okteta::ValueCodec::createCodec( CodingIds[i] );
 }
 
 void ByteTableModel::setUndefinedChar( const QChar &undefinedChar )
@@ -66,7 +66,7 @@ void ByteTableModel::setCharCodec( const QString &codeName )
         return;
 
     delete mCharCodec;
-    mCharCodec = KHECore::CharCodec::createCodec( codeName );
+    mCharCodec = Okteta::CharCodec::createCodec( codeName );
 
     emit dataChanged( index(0,CharacterId), index(ByteSetSize-1,CharacterId) );
 }
@@ -94,7 +94,7 @@ QVariant ByteTableModel::data( const QModelIndex &index, int role ) const
         const int column = index.column();
         if( column == CharacterId )
         {
-            const KHECore::KChar decodedChar = mCharCodec->decode( byte );
+            const Okteta::Character decodedChar = mCharCodec->decode( byte );
             content = decodedChar.isUndefined() ?
                 i18nc( "@item:intable character is not defined", "undef." ) :
                 QString( (QChar)decodedChar );

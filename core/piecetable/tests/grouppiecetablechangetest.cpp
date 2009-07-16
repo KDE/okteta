@@ -35,7 +35,7 @@
 
 #include <KDebug>
 
-using namespace KHE;
+using namespace KDE;
 
 // local variables
 static const int Start = 15;
@@ -142,14 +142,14 @@ void GroupPieceTableChangeTest::testRevertBeforeChange()
     TestPieceTableChange *change2 = new TestPieceTableChange( type2Id, description2, 2 );
     TestPieceTableChange *change3 = new TestPieceTableChange( type3Id, description3, 3 );
     TestPieceTableChange *change4 = new TestPieceTableChange( type4Id, description4, 4 );
-    KHE::ArrayChangeMetrics changeMetrics1 = change1->metrics();
-    KHE::ArrayChangeMetrics changeMetrics2 = change2->metrics();
-    KHE::ArrayChangeMetrics changeMetrics3 = change3->metrics();
-    KHE::ArrayChangeMetrics changeMetrics4 = change4->metrics();
-    KHE::ArrayChangeMetrics revertedChangeMetrics1 = change1->metrics(); revertedChangeMetrics1.revert();
-    KHE::ArrayChangeMetrics revertedChangeMetrics2 = change2->metrics(); revertedChangeMetrics2.revert();
-    KHE::ArrayChangeMetrics revertedChangeMetrics3 = change3->metrics(); revertedChangeMetrics3.revert();
-    KHE::ArrayChangeMetrics revertedChangeMetrics4 = change4->metrics(); revertedChangeMetrics4.revert();
+    KDE::ArrayChangeMetrics changeMetrics1 = change1->metrics();
+    KDE::ArrayChangeMetrics changeMetrics2 = change2->metrics();
+    KDE::ArrayChangeMetrics changeMetrics3 = change3->metrics();
+    KDE::ArrayChangeMetrics changeMetrics4 = change4->metrics();
+    KDE::ArrayChangeMetrics revertedChangeMetrics1 = change1->metrics(); revertedChangeMetrics1.revert();
+    KDE::ArrayChangeMetrics revertedChangeMetrics2 = change2->metrics(); revertedChangeMetrics2.revert();
+    KDE::ArrayChangeMetrics revertedChangeMetrics3 = change3->metrics(); revertedChangeMetrics3.revert();
+    KDE::ArrayChangeMetrics revertedChangeMetrics4 = change4->metrics(); revertedChangeMetrics4.revert();
 
     bool result = groupPieceTableChange.appendChange( change1 );
     result = groupPieceTableChange.appendChange( change2 );

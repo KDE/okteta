@@ -28,7 +28,7 @@
 // Kasten core
 #include <abstracttool.h>
 
-namespace KHECore {
+namespace Okteta {
 class AbstractByteArrayModel;
 }
 
@@ -105,7 +105,7 @@ class ReplaceTool : public AbstractTool
 
   protected: // target
     KByteArrayDisplay* mByteArrayDisplay;
-    KHECore::AbstractByteArrayModel* mByteArrayModel;
+    Okteta::AbstractByteArrayModel* mByteArrayModel;
 };
 
 

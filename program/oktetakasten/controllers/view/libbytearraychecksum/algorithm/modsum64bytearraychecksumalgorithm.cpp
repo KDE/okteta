@@ -38,7 +38,7 @@ ModSum64ByteArrayChecksumAlgorithm::ModSum64ByteArrayChecksumAlgorithm()
 AbstractByteArrayChecksumParameterSet* ModSum64ByteArrayChecksumAlgorithm::parameterSet() { return &mParameterSet; }
 
 bool ModSum64ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
-                                                            const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
+                                                            const Okteta::AbstractByteArrayModel* model, const KDE::Section& section ) const
 {
     const bool useLittleEndian = ( mParameterSet.endianness() == LittleEndian );
     quint64 modSum = useLittleEndian ?
@@ -54,7 +54,7 @@ bool ModSum64ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
     return true;
 }
 
-quint64 ModSum64ByteArrayChecksumAlgorithm::calculateModSumWithBigEndian( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
+quint64 ModSum64ByteArrayChecksumAlgorithm::calculateModSumWithBigEndian( const Okteta::AbstractByteArrayModel* model, const KDE::Section& section ) const
 {
     quint64 modSum = 0x00000000;
     int nextBlockEnd = section.start() + CalculatedByteCountSignalLimit;
@@ -113,7 +113,7 @@ quint64 ModSum64ByteArrayChecksumAlgorithm::calculateModSumWithBigEndian( const 
     return modSum;
 }
 
-quint64 ModSum64ByteArrayChecksumAlgorithm::calculateModSumWithLittleEndian( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
+quint64 ModSum64ByteArrayChecksumAlgorithm::calculateModSumWithLittleEndian( const Okteta::AbstractByteArrayModel* model, const KDE::Section& section ) const
 {
     quint64 modSum = 0x00000000;
     int nextBlockEnd = section.start() + CalculatedByteCountSignalLimit;

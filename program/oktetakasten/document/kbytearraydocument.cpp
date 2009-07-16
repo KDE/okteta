@@ -37,7 +37,7 @@ namespace Kasten
 {
 
 KByteArrayDocument::KByteArrayDocument( const QString &initDescription )
-: mByteArray( new KHECore::PieceTableByteArrayModel() ),
+: mByteArray( new Okteta::PieceTableByteArrayModel() ),
   mInitDescription( initDescription )
 {
     connect( mByteArray, SIGNAL(modificationChanged( bool )), SLOT(onModelModification( bool )) );
@@ -48,7 +48,7 @@ KByteArrayDocument::KByteArrayDocument( const QString &initDescription )
              SLOT(onHeadVersionDescriptionChanged( const QString& )) );
 }
 
-KByteArrayDocument::KByteArrayDocument( KHECore::PieceTableByteArrayModel *byteArray, const QString &initDescription )
+KByteArrayDocument::KByteArrayDocument( Okteta::PieceTableByteArrayModel *byteArray, const QString &initDescription )
 : mByteArray( byteArray ),
   mInitDescription( initDescription )
 {
@@ -61,7 +61,7 @@ KByteArrayDocument::KByteArrayDocument( KHECore::PieceTableByteArrayModel *byteA
 }
 #if 0
 KByteArrayDocument::KByteArrayDocument( const QString &filePath )
-: mByteArray( new KHECore::KByteArrayModel() )
+: mByteArray( new Okteta::KByteArrayModel() )
 {
     if( load(filePath) )
     {
@@ -69,7 +69,7 @@ KByteArrayDocument::KByteArrayDocument( const QString &filePath )
     }
 }
 #endif
-KHECore::AbstractByteArrayModel* KByteArrayDocument::content() const { return mByteArray; }
+Okteta::AbstractByteArrayModel* KByteArrayDocument::content() const { return mByteArray; }
 
 QString KByteArrayDocument::title() const { return mTitle; }
 QString KByteArrayDocument::mimeType() const { return QLatin1String("KByteArrayDocument"); }

@@ -30,7 +30,7 @@
 #include <QtCore/QStack>
 #include <QtCore/QString>
 
-namespace KHE
+namespace KDE
 {
 class SectionList;
 class ArrayChangeMetricsList;
@@ -53,9 +53,9 @@ class GroupPieceTableChange : public AbstractPieceTableChange
     virtual int type() const;
     virtual QString description() const;
     virtual bool merge( const AbstractPieceTableChange *other );
-    virtual KHE::Section apply( PieceTable *pieceTable ) const;
-    virtual KHE::Section revert( PieceTable *pieceTable ) const;
-    virtual KHE::ArrayChangeMetrics metrics() const;
+    virtual KDE::Section apply( PieceTable *pieceTable ) const;
+    virtual KDE::Section revert( PieceTable *pieceTable ) const;
+    virtual KDE::ArrayChangeMetrics metrics() const;
     virtual int dataSize() const;
 
   public:
@@ -66,9 +66,9 @@ class GroupPieceTableChange : public AbstractPieceTableChange
 
 
   public:
-    KHE::SectionList applyGroup( PieceTable *pieceTable ) const;
-    KHE::SectionList revertGroup( PieceTable *pieceTable ) const;
-    KHE::ArrayChangeMetricsList groupMetrics( bool reverted = false ) const;
+    KDE::SectionList applyGroup( PieceTable *pieceTable ) const;
+    KDE::SectionList revertGroup( PieceTable *pieceTable ) const;
+    KDE::ArrayChangeMetricsList groupMetrics( bool reverted = false ) const;
     GroupPieceTableChange *parent() const;
 
   public: // TODO: this interface part is shared with PieceTableChangeHistory, try to use this fact

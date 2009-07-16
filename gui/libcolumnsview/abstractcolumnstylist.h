@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_ABSTRACTCOLUMNSTYLIST_H
-#define KHE_UI_ABSTRACTCOLUMNSTYLIST_H
+#ifndef OKTETA_ABSTRACTCOLUMNSTYLIST_H
+#define OKTETA_ABSTRACTCOLUMNSTYLIST_H
 
 // lib
 #include "oktetagui_export.h"
@@ -29,7 +29,7 @@
 class QPalette;
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 class AbstractColumnStylistPrivate;

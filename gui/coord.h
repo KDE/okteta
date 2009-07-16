@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_COORD_H
-#define KHE_UI_COORD_H
+#ifndef OKTETA_COORD_H
+#define OKTETA_COORD_H
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 /**

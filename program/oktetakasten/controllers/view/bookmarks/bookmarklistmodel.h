@@ -24,11 +24,11 @@
 #define BOOKMARKLISTMODEL_H
 
 // Okteta gui
-#include <koffsetformat.h>
+#include <offsetformat.h>
 // Qt
 #include <QtCore/QAbstractTableModel>
 
-namespace KHECore {
+namespace Okteta {
 class Bookmark;
 }
 template <class T> class QList;
@@ -65,8 +65,8 @@ class BookmarkListModel : public QAbstractTableModel
     virtual bool setData( const QModelIndex& index, const QVariant& value, int role );
 
   public:
-    const KHECore::Bookmark& bookmark( const QModelIndex& index ) const;
-    QModelIndex index( const KHECore::Bookmark& bookmark, int column = BookmarkListModel::TitleColumnId ) const;
+    const Okteta::Bookmark& bookmark( const QModelIndex& index ) const;
+    QModelIndex index( const Okteta::Bookmark& bookmark, int column = BookmarkListModel::TitleColumnId ) const;
     using QAbstractTableModel::index;
 
   protected Q_SLOTS:
@@ -79,8 +79,8 @@ class BookmarkListModel : public QAbstractTableModel
   protected:
     BookmarksTool* mTool;
 
-    KHEUI::KOffsetFormat::print mPrintFunction;
-    mutable char mCodedOffset[KHEUI::KOffsetFormat::MaxFormatWidth+1];
+    Okteta::OffsetFormat::print mPrintFunction;
+    mutable char mCodedOffset[Okteta::OffsetFormat::MaxFormatWidth+1];
 };
 
 }

@@ -20,18 +20,18 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_VALUEBYTEARRAYCOLUMNRENDERER_H
-#define KHE_UI_VALUEBYTEARRAYCOLUMNRENDERER_H
+#ifndef OKTETA_VALUEBYTEARRAYCOLUMNRENDERER_H
+#define OKTETA_VALUEBYTEARRAYCOLUMNRENDERER_H
 
 // lib
 #include "abstractbytearraycolumnrenderer.h"
 
 
-namespace KHECore {
+namespace Okteta {
 class ValueCodec;
 }
 
-namespace KHEUI
+namespace Okteta
 {
 
 /** buffer column which displays the numerical values of the bytes
@@ -42,14 +42,14 @@ class OKTETAGUI_EXPORT ValueByteArrayColumnRenderer : public AbstractByteArrayCo
 {
   public:
     ValueByteArrayColumnRenderer( AbstractColumnStylist* stylist,
-        KHECore::AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges );
+        Okteta::AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges );
     virtual ~ValueByteArrayColumnRenderer();
 
   public:
     void renderEditedByte( QPainter *painter, char byte, const QString &editBuffer );
 
   public: // modification access
-    void setValueCodec( KHECore::ValueCoding valueCoding, const KHECore::ValueCodec* valueCodec );
+    void setValueCodec( Okteta::ValueCoding valueCoding, const Okteta::ValueCodec* valueCodec );
     /** sets the spacing in the middle of a binary byte in the value column
       * @param BinaryGapW spacing in the middle of a binary in pixels
       * returns true if there was a change
@@ -61,7 +61,7 @@ class OKTETAGUI_EXPORT ValueByteArrayColumnRenderer : public AbstractByteArrayCo
     KPixelX binaryGapWidth() const;
 
   protected: // AbstractByteArrayColumnRenderer API
-    virtual void renderByteText( QPainter *painter, char byte, KHECore::KChar byteChar, const QColor &color ) const;
+    virtual void renderByteText( QPainter *painter, char byte, Okteta::Character byteChar, const QColor &color ) const;
     virtual void recalcByteWidth();
 
   protected:
@@ -69,9 +69,9 @@ class OKTETAGUI_EXPORT ValueByteArrayColumnRenderer : public AbstractByteArrayCo
 
   protected: // settings
     /** */
-    KHECore::ValueCoding mValueCoding;
+    Okteta::ValueCoding mValueCoding;
     /** */
-    const KHECore::ValueCodec* mValueCodec;
+    const Okteta::ValueCodec* mValueCodec;
     /** */
     KPixelX mBinaryGapWidth;
 

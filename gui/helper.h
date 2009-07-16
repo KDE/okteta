@@ -24,7 +24,7 @@
 #define OKTETA_HELPER
 
 // lib
-#include <khechar.h>
+#include <character.h>
 // KDE
 #include <KColorScheme>
 // Qt
@@ -32,7 +32,7 @@
 
 
 // temporary solution until syntax highlighting is implemented
-static inline QColor colorForChar( const KHECore::KChar byteChar )
+static inline QColor colorForChar( const Okteta::Character byteChar )
 {
   return byteChar.isUndefined() ? Qt::yellow :
          byteChar.isPunct() ?     Qt::red :
@@ -43,7 +43,7 @@ static inline QColor colorForChar( const KHECore::KChar byteChar )
 }
 
 
-static inline KColorScheme::ForegroundRole foregroundRoleForChar( const KHECore::KChar byteChar )
+static inline KColorScheme::ForegroundRole foregroundRoleForChar( const Okteta::Character byteChar )
 {
   return byteChar.isUndefined() ? KColorScheme::NegativeText :
          byteChar.isPunct() ?     KColorScheme::InactiveText :

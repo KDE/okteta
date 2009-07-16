@@ -26,9 +26,9 @@
 // lib
 #include "abstractbytearraycolumntextrenderer.h"
 // Okteta core
-#include <khe.h>
+#include <oktetacore.h>
 
-namespace KHECore {
+namespace Okteta {
 class ValueCodec;
 }
 
@@ -38,17 +38,17 @@ namespace Kasten
 class ValueByteArrayColumnTextRenderer : public AbstractByteArrayColumnTextRenderer
 {
   public:
-    ValueByteArrayColumnTextRenderer( const KHECore::AbstractByteArrayModel *byteArrayModel, int offset,
-        const KHEUI::CoordRange &coordRange,
+    ValueByteArrayColumnTextRenderer( const Okteta::AbstractByteArrayModel *byteArrayModel, int offset,
+        const Okteta::CoordRange &coordRange,
         int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
-        KHECore::ValueCoding valueCoding );
+        Okteta::ValueCoding valueCoding );
     virtual ~ValueByteArrayColumnTextRenderer();
 
   protected: // AbstractByteArrayColumnTextRenderer API
     virtual void renderLine( QTextStream* stream, bool isSubline ) const;
 
   protected:
-    const KHECore::ValueCodec *mValueCodec;
+    const Okteta::ValueCodec *mValueCodec;
 };
 
 }

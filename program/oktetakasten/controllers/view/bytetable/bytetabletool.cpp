@@ -28,7 +28,7 @@
 #include <kbytearraydisplay.h>
 #include <kbytearraydocument.h>
 // Okteta core
-#include <khechar.h>
+#include <character.h>
 #include <charcodec.h>
 #include <abstractbytearraymodel.h>
 #include <changesdescribable.h>
@@ -86,8 +86,8 @@ void ByteTableTool::insert( unsigned char byte, int count )
 {
     const QByteArray data( count, byte );
 
-    KHECore::ChangesDescribable *changesDescribable =
-        qobject_cast<KHECore::ChangesDescribable*>( mByteArrayModel );
+    Okteta::ChangesDescribable *changesDescribable =
+        qobject_cast<Okteta::ChangesDescribable*>( mByteArrayModel );
 
     if( changesDescribable )
         changesDescribable->openGroupedChange( i18n("Byte inserted.") );

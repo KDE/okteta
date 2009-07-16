@@ -27,10 +27,10 @@
 #include <QtCore/QObject>
 
 class AbstractByteArrayFilterParameterSet;
-namespace KHECore {
+namespace Okteta {
 class AbstractByteArrayModel;
 }
-namespace KHE {
+namespace KDE {
 class Section;
 }
 class QString;
@@ -48,7 +48,7 @@ class AbstractByteArrayFilter : public QObject
     virtual ~AbstractByteArrayFilter();
 
   public: // API to be implemented
-    virtual bool filter( char *result, KHECore::AbstractByteArrayModel *model, const KHE::Section &section ) const = 0;
+    virtual bool filter( char *result, Okteta::AbstractByteArrayModel *model, const KDE::Section &section ) const = 0;
     /** used by the editor to get write access to the parameters */
     virtual AbstractByteArrayFilterParameterSet *parameterSet() = 0;
 

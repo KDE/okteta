@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_DROPPER_H
-#define KHE_UI_DROPPER_H
+#ifndef OKTETA_DROPPER_H
+#define OKTETA_DROPPER_H
 
 class QDragEnterEvent;
 class QDragMoveEvent;
@@ -29,7 +29,7 @@ class QDragLeaveEvent;
 class QDropEvent;
 
 
-namespace KHEUI
+namespace Okteta
 {
 class AbstractByteArrayView;
 

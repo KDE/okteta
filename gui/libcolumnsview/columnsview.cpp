@@ -32,7 +32,7 @@
 #include <QtGui/QScrollBar>
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 static const int DefaultSingleStep = 20;
@@ -101,13 +101,13 @@ ColumnsView::ColumnsView( /*bool R,*/ QWidget *parent )
 int ColumnsView::noOfLines()          const { return d->NoOfLines; }
 KPixelY ColumnsView::lineHeight()     const { return d->LineHeight; }
 uint ColumnsView::lineAt( KPixelY y ) const { return (d->LineHeight!=0) ? y / d->LineHeight : 0; }
-KHE::Section ColumnsView::visibleLines() const
+KDE::Section ColumnsView::visibleLines() const
 {
     const KPixelYs ySpan = KPixelYs::fromWidth( yOffset(), visibleHeight() );
-    return KHE::Section( lineAt(ySpan.start()), lineAt(ySpan.end()) );
+    return KDE::Section( lineAt(ySpan.start()), lineAt(ySpan.end()) );
 }
-KHE::Section ColumnsView::visibleLines( const KPixelYs &YPixels ) const
-{ return KHE::Section( lineAt(YPixels.start()), lineAt(YPixels.end()) ); }
+KDE::Section ColumnsView::visibleLines( const KPixelYs &YPixels ) const
+{ return KDE::Section( lineAt(YPixels.start()), lineAt(YPixels.end()) ); }
 
 KPixelX ColumnsView::visibleWidth()  const { return viewport()->width(); }
 KPixelY ColumnsView::visibleHeight() const { return viewport()->height(); }
@@ -195,11 +195,11 @@ void ColumnsView::updateColumn( AbstractColumnRenderer& columnRenderer )
         viewport()->update( columnRenderer.x()-xOffset(), 0, columnRenderer.width(), visibleHeight() );
 }
 
-void ColumnsView::updateColumn( AbstractColumnRenderer& columnRenderer, const KHE::Section& lines )
+void ColumnsView::updateColumn( AbstractColumnRenderer& columnRenderer, const KDE::Section& lines )
 {
     if( columnRenderer.isVisible() ) // TODO: catch hidden range && columnRenderer.overlaps(Xs) )
     {
-        KHE::Section linesToUpdate = visibleLines();
+        KDE::Section linesToUpdate = visibleLines();
         linesToUpdate.restrictTo( lines );
         if( linesToUpdate.isValid() )
         {
@@ -311,7 +311,7 @@ void ColumnsView::renderColumns( QPainter *painter, int cx, int cy, int cw, int 
         if( d->NoOfLines > 0 )
         {
             // calculate affected lines
-            KHE::Section dirtyLines = visibleLines( dirtyYs );
+            KDE::Section dirtyLines = visibleLines( dirtyYs );
             dirtyLines.restrictEndTo( d->NoOfLines - 1 );
 
             if( dirtyLines.isValid() )

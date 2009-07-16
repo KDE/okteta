@@ -53,7 +53,7 @@ void ByteArrayRawFileLoadThread::run()
 
     char *data = new char[fileSize];
     inStream.readRawData( data, fileSize );
-    KHECore::PieceTableByteArrayModel *byteArray = new KHECore::PieceTableByteArrayModel( data, fileSize );
+    Okteta::PieceTableByteArrayModel *byteArray = new Okteta::PieceTableByteArrayModel( data, fileSize );
 
     byteArray->setModified( false );
 

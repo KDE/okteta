@@ -20,13 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_KCONTROLLER_H
-#define KHE_UI_KCONTROLLER_H
+#ifndef OKTETA_KCONTROLLER_H
+#define OKTETA_KCONTROLLER_H
 
 
 class QKeyEvent;
 
-namespace KHEUI
+namespace Okteta
 {
 
 class KController

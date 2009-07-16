@@ -23,7 +23,7 @@
 #include "ktextcharcodec.h"
 
 // lib
-#include <khechar.h>
+#include <character.h>
 // KDE
 #include <kglobal.h>
 #include <klocale.h>
@@ -32,7 +32,7 @@
 #include <QtCore/QTextCodec>
 
 
-namespace KHECore {
+namespace Okteta {
 
 static const char QTextCodecWhiteSpace = 63;
 
@@ -234,10 +234,10 @@ bool KTextCharCodec::encode( char *D, const QChar &C ) const
 }
 
 
-KChar KTextCharCodec::decode( char Byte ) const
+Character KTextCharCodec::decode( char Byte ) const
 {
   QString S( Decoder->toUnicode(&Byte,1) );
-  return KChar(S.at(0));
+  return Character(S.at(0));
 }
 
 

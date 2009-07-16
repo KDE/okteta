@@ -20,14 +20,14 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_KADDS_H
-#define KHE_UI_KADDS_H
+#ifndef OKTETA_KADDS_H
+#define OKTETA_KADDS_H
 
-namespace KHE {
+namespace KDE {
 class Section;
 }
 
-namespace KHEUI
+namespace Okteta
 {
 // some possibly useful additions to KDE
 
@@ -35,8 +35,8 @@ namespace KHEUI
 typedef int KPixelX;
 typedef int KPixelY;
 
-typedef KHE::Section KPixelXs;
-typedef KHE::Section KPixelYs;
+typedef KDE::Section KPixelXs;
+typedef KDE::Section KPixelYs;
 }
 
 #endif

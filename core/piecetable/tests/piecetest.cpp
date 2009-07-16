@@ -27,7 +27,7 @@
 // Qt
 #include <QtTest/QtTest>
 
-using namespace KHE;
+using namespace KDE;
 using namespace KPieceTable ;
 
 // local variables

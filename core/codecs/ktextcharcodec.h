@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_KTEXTCHARCODEC_H
-#define KHE_CORE_KTEXTCHARCODEC_H
+#ifndef KTEXTCHARCODEC_H
+#define KTEXTCHARCODEC_H
 
 // lib
 #include <charcodec.h>
@@ -33,7 +33,7 @@ class QTextDecoder;
 class QTextEncoder;
 
 
-namespace KHECore
+namespace Okteta
 {
 
 // used by all codecs with full char coping, i.e. there are no undefined chars
@@ -53,7 +53,7 @@ class KTextCharCodec : public CharCodec
 
   public: // CharCodec API
     virtual bool encode( char *D, const QChar &C ) const;
-    virtual KChar decode( char Byte ) const;
+    virtual Character decode( char Byte ) const;
     virtual bool canEncode( const QChar &C ) const;
     virtual const QString& name() const;
 

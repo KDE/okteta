@@ -24,7 +24,7 @@
 #include "abstractcolumnstylist_p.h"
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 AbstractColumnStylist::AbstractColumnStylist()

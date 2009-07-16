@@ -20,15 +20,15 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_SECTION_H
-#define KHE_SECTION_H
+#ifndef KDE_SECTION_H
+#define KDE_SECTION_H
 
 // lib
 #include "range.h"
 #include "oktetacore_export.h"
 
 
-namespace KHE
+namespace KDE
 {
 
 /** describes a section of indizes

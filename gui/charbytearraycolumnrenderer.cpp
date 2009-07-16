@@ -26,7 +26,7 @@
 #include <QtGui/QPainter>
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 static const bool      DefaultShowingNonprinting = false;
@@ -35,7 +35,7 @@ static const QChar     DefaultUndefinedChar =   (char)'?';
 
 
 CharByteArrayColumnRenderer::CharByteArrayColumnRenderer( AbstractColumnStylist* stylist,
-        KHECore::AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges )
+        Okteta::AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges )
  : AbstractByteArrayColumnRenderer( stylist, byteArrayModel, layout, ranges ),
    mShowingNonprinting( DefaultShowingNonprinting ),
    mSubstituteChar( DefaultSubstituteChar ),
@@ -45,13 +45,13 @@ CharByteArrayColumnRenderer::CharByteArrayColumnRenderer( AbstractColumnStylist*
 }
 
 
-void CharByteArrayColumnRenderer::renderByteText( QPainter *painter, char byte, KHECore::KChar byteChar, const QColor &color ) const
+void CharByteArrayColumnRenderer::renderByteText( QPainter *painter, char byte, Okteta::Character byteChar, const QColor &color ) const
 {
 Q_UNUSED( byte )
 
     // turn into a drawable String
-    const QString text( byteChar.isUndefined() ?                      KHECore::KChar(mUndefinedChar) :
-                       !(mShowingNonprinting || byteChar.isPrint()) ? KHECore::KChar(mSubstituteChar) :
+    const QString text( byteChar.isUndefined() ?                      Okteta::Character(mUndefinedChar) :
+                       !(mShowingNonprinting || byteChar.isPrint()) ? Okteta::Character(mSubstituteChar) :
                                                                       byteChar );
 
     painter->setPen( color );

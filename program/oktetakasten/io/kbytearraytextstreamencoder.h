@@ -54,8 +54,8 @@ class KByteArrayTextStreamEncoder : public KAbstractByteArrayStreamEncoder
   protected: // KAbstractByteArrayStreamEncoder API
     virtual bool encodeDataToStream( QIODevice *device,
                                      const KByteArrayDisplay* byteArrayView,
-                                     const KHECore::AbstractByteArrayModel *byteArrayModel,
-                                     const KHE::Section &section );
+                                     const Okteta::AbstractByteArrayModel *byteArrayModel,
+                                     const KDE::Section &section );
 
   protected:
     TextStreamEncoderSettings mSettings;

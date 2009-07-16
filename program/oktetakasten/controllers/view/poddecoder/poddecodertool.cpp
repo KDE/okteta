@@ -26,7 +26,7 @@
 #include <kbytearraydocument.h>
 #include <kbytearraydisplay.h>
 // Okteta core
-#include <khechar.h>
+#include <character.h>
 #include <charcodec.h>
 #include <abstractbytearraymodel.h>
 // KDE
@@ -65,7 +65,7 @@ enum PODTypes
 
 PODDecoderTool::PODDecoderTool()
  : mByteArrayDisplay( 0 ), mByteArrayModel( 0 ), mCursorIndex( 0 ),
-   mCharCodec( KHECore::CharCodec::createCodec(KHECore::LocalEncoding) ),
+   mCharCodec( Okteta::CharCodec::createCodec(Okteta::LocalEncoding) ),
    mUndefinedChar( PrimitivesDefaultUndefinedChar ),
    mUnsignedAsHex( true )
 {
@@ -92,7 +92,7 @@ void PODDecoderTool::setTargetModel( AbstractModel* model )
     {
         mCursorIndex = mByteArrayDisplay->cursorPosition();
         connect( mByteArrayDisplay, SIGNAL(cursorPositionChanged( int )), SLOT(onCursorPositionChange( int )) );
-        connect( mByteArrayModel, SIGNAL(contentsChanged( const KHE::ArrayChangeMetricsList& )),
+        connect( mByteArrayModel, SIGNAL(contentsChanged( const KDE::ArrayChangeMetricsList& )),
                  SLOT(onContentsChange()) );
         onCharCodecChange( mByteArrayDisplay->charCodingName() );
         connect( mByteArrayDisplay,  SIGNAL(charCodecChanged( const QString& )),
@@ -166,7 +166,7 @@ void PODDecoderTool::onCharCodecChange( const QString& codecName )
         return;
 
     delete mCharCodec;
-    mCharCodec = KHECore::CharCodec::createCodec( codecName );
+    mCharCodec = Okteta::CharCodec::createCodec( codecName );
     updateData();
 }
 
@@ -335,7 +335,7 @@ void PODDecoderTool::updateData()
             mDecoderValueList[HexadecimalId] = HexDezValue.arg(lowerBits,2,HexBase,ZeroChar );
         }
 
-        const KHECore::KChar decodedChar = mCharCodec->decode( *(unsigned char*)P8Bit );
+        const Okteta::Character decodedChar = mCharCodec->decode( *(unsigned char*)P8Bit );
         mDecoderValueList[Char8BitId] = QString(decodedChar.isUndefined()?mUndefinedChar:(QChar)decodedChar );
     }
     else

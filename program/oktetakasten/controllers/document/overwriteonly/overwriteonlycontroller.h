@@ -27,7 +27,7 @@
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 
-namespace KHECore {
+namespace Okteta {
 class AbstractByteArrayModel;
 }
 class KXMLGUIClient;
@@ -51,7 +51,7 @@ class OverwriteOnlyController : public AbstractXmlGuiController
     void setOverwriteOnly( bool isOverwriteOnly );
 
   protected:
-    KHECore::AbstractByteArrayModel *mByteArrayModel;
+    Okteta::AbstractByteArrayModel *mByteArrayModel;
 
     KToggleAction *mSetOverwriteOnlyAction;
 };

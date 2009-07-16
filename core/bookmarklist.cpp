@@ -26,7 +26,7 @@
 #include <QtCore/QList>
 
 
-namespace KHECore
+namespace Okteta
 {
 
 BookmarkList::BookmarkList() {}
@@ -61,7 +61,7 @@ void BookmarkList::addBookmark( const Bookmark &bookmark )
         append( bookmark );
 }
 
-void BookmarkList::addBookmarks( const QList<KHECore::Bookmark> &bookmarks )
+void BookmarkList::addBookmarks( const QList<Okteta::Bookmark> &bookmarks )
 {
     foreach( const Bookmark &bookmark, bookmarks )
         addBookmark( bookmark );
@@ -83,7 +83,7 @@ void BookmarkList::removeBookmark( const Bookmark &bookmark )
     }
 }
 
-void BookmarkList::removeBookmarks( const QList<KHECore::Bookmark> &bookmarks )
+void BookmarkList::removeBookmarks( const QList<Okteta::Bookmark> &bookmarks )
 {
     foreach( const Bookmark &bookmark, bookmarks )
         removeBookmark( bookmark );
@@ -132,7 +132,7 @@ bool BookmarkList::adjustToSwapped( int firstPartStart, int secondPartStart, int
     iterator bIt = begin();
     while( bIt!=end() && bIt->offset() < firstPartStart )
         ++bIt;
-    QList<KHECore::Bookmark> bookmarksInFirstPart;
+    QList<Okteta::Bookmark> bookmarksInFirstPart;
     // take bookmarks from first part
     while( bIt!=end() && bIt->offset() < secondPartStart )
     {
@@ -161,9 +161,9 @@ bool BookmarkList::adjustToSwapped( int firstPartStart, int secondPartStart, int
     return result;
 }
 
-QList<KHECore::Bookmark> BookmarkList::list() const
+QList<Okteta::Bookmark> BookmarkList::list() const
 {
-    QList<KHECore::Bookmark> result;
+    QList<Okteta::Bookmark> result;
     foreach( const Bookmark &bookmark, *this )
         result.append( bookmark );
     return result;

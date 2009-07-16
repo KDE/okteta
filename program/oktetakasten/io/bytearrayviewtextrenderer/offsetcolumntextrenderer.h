@@ -26,7 +26,7 @@
 // lib
 #include "abstractcolumntextrenderer.h"
 // Okteta gui
-#include <koffsetformat.h>
+#include <offsetformat.h>
 
 
 namespace Kasten
@@ -48,7 +48,7 @@ class OffsetColumnTextRenderer : public AbstractColumnTextRenderer
   protected:
     const int mFirstLineOffset;
     const int mDelta;
-    const KHEUI::KOffsetFormat::print printFunction;
+    const Okteta::OffsetFormat::print printFunction;
     const int mCodingWidth;
 
     /** the line we are in */

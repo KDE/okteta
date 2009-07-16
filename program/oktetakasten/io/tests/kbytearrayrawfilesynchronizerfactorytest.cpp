@@ -133,7 +133,7 @@ void KByteArrayRawFileSynchronizerFactoryTest::testSaveToFile()
 
 
     KByteArrayDocument *document = new KByteArrayDocument();
-    KHECore::KByteArrayModel *byteArray = document->content();
+    Okteta::KByteArrayModel *byteArray = document->content();
 
     // fill array
     byteArray->
@@ -149,7 +149,7 @@ TODO: save mit path als Parameter? Oder separat setzen? Wie Kopie speichern?
     QVERIFY( document != 0 );
 
     // compare with old
-    KHECore::KByteArrayModel *otherByteArray = document->content();
+    Okteta::KByteArrayModel *otherByteArray = document->content();
     QCOMPARE( byteArray->size(), otherByteArray->size() );
     QVERIFY( qstrncmp(byteArray->data(),otherByteArray->data(),byteArray->size()) == 0 );
 

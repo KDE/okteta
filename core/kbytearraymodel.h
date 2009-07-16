@@ -20,17 +20,17 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_KBYTEARRAYMODEL_H
-#define KHE_CORE_KBYTEARRAYMODEL_H
+#ifndef KBYTEARRAYMODEL_H
+#define KBYTEARRAYMODEL_H
 
 
 // lib
 #include "abstractbytearraymodel.h"
-#include "kbookmarkable.h"
-#include "kbookmarksconstiterator.h"
+#include "bookmarkable.h"
+#include "bookmarksconstiterator.h"
 
 
-namespace KHECore
+namespace Okteta
 {
 
 class KByteArrayModelPrivate;
@@ -42,7 +42,7 @@ class KByteArrayModelPrivate;
 class OKTETACORE_EXPORT KByteArrayModel : public AbstractByteArrayModel, public Bookmarkable
 {
     Q_OBJECT
-    Q_INTERFACES( KHECore::Bookmarkable )
+    Q_INTERFACES( Okteta::Bookmarkable )
 
     friend class KByteArrayModelPrivate;
 
@@ -71,21 +71,21 @@ class OKTETACORE_EXPORT KByteArrayModel : public AbstractByteArrayModel, public 
     virtual int indexOf( const char *searchString, int length, int from  = 0 ) const;
     virtual int lastIndexOf( const char *searchString, int length, int from = -1 ) const;
 
-  public: // KHECore::Bookmarkable API
-    virtual void addBookmarks( const QList<KHECore::Bookmark> &bookmarks );
-    virtual void removeBookmarks( const QList<KHECore::Bookmark> &bookmarks );
+  public: // Okteta::Bookmarkable API
+    virtual void addBookmarks( const QList<Okteta::Bookmark> &bookmarks );
+    virtual void removeBookmarks( const QList<Okteta::Bookmark> &bookmarks );
     virtual void removeAllBookmarks();
-    virtual void setBookmark( unsigned int index, const KHECore::Bookmark& bookmark );
+    virtual void setBookmark( unsigned int index, const Okteta::Bookmark& bookmark );
 
-    virtual KHECore::BookmarksConstIterator createBookmarksConstIterator() const;
-    virtual const KHECore::Bookmark& bookmarkAt( unsigned int index ) const;
-    virtual const KHECore::Bookmark& bookmarkFor( int offset ) const;
+    virtual Okteta::BookmarksConstIterator createBookmarksConstIterator() const;
+    virtual const Okteta::Bookmark& bookmarkAt( unsigned int index ) const;
+    virtual const Okteta::Bookmark& bookmarkFor( int offset ) const;
     virtual bool containsBookmarkFor( int offset ) const;
     virtual unsigned int bookmarksCount() const;
 
-  Q_SIGNALS: // KHECore::Bookmarkable API
-    virtual void bookmarksAdded( const QList<KHECore::Bookmark> &bookmarks );
-    virtual void bookmarksRemoved( const QList<KHECore::Bookmark> &bookmarks );
+  Q_SIGNALS: // Okteta::Bookmarkable API
+    virtual void bookmarksAdded( const QList<Okteta::Bookmark> &bookmarks );
+    virtual void bookmarksRemoved( const QList<Okteta::Bookmark> &bookmarks );
     virtual void bookmarksModified( bool modified );
     virtual void bookmarksModified( const QList<int>& indizes );
 

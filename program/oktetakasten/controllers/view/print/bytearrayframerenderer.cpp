@@ -50,8 +50,8 @@ static const int DefaultStartOffset = 0;
 static const int DefaultFirstLineOffset = 0;
 static const int DefaultNoOfBytesPerLine =  16;
 static const ResizeStyle DefaultResizeStyle = FullSizeUsage;
-static const KHECore::ValueCoding DefaultValueCoding =  KHECore::HexadecimalCoding;
-static const KHECore::CharCoding DefaultCharCoding = KHECore::LocalEncoding;
+static const Okteta::ValueCoding DefaultValueCoding =  Okteta::HexadecimalCoding;
+static const Okteta::CharCoding DefaultCharCoding = Okteta::LocalEncoding;
 
 
 static const int BAFInitialHeight = 50;
@@ -65,30 +65,30 @@ ByteArrayFrameRenderer::ByteArrayFrameRenderer()
    mCharCodec( 0 ),
    mResizeStyle( DefaultResizeStyle )
 {
-    mLayout = new KHEUI::ByteArrayTableLayout( DefaultNoOfBytesPerLine, DefaultFirstLineOffset, DefaultStartOffset, 0, 0 );
+    mLayout = new Okteta::ByteArrayTableLayout( DefaultNoOfBytesPerLine, DefaultFirstLineOffset, DefaultStartOffset, 0, 0 );
     mLayout->setNoOfLinesPerPage( noOfLinesPerFrame() );
-    mTableRanges = new KHEUI::ByteArrayTableRanges( mLayout );
+    mTableRanges = new Okteta::ByteArrayTableRanges( mLayout );
 
     // set codecs
-    mValueCodec = KHECore::ValueCodec::createCodec( (KHECore::ValueCoding)DefaultValueCoding );
+    mValueCodec = Okteta::ValueCodec::createCodec( (Okteta::ValueCoding)DefaultValueCoding );
     mValueCoding = DefaultValueCoding;
-    mCharCodec = KHECore::CharCodec::createCodec( (KHECore::CharCoding)DefaultCharCoding );
+    mCharCodec = Okteta::CharCodec::createCodec( (Okteta::CharCoding)DefaultCharCoding );
     mCharCoding = DefaultCharCoding;
 
-    mStylist = new KHEUI::PrintColumnStylist();
+    mStylist = new Okteta::PrintColumnStylist();
 
-    const KHE::Section emptySection;
+    const KDE::Section emptySection;
     // creating the columns in the needed order
     mOffsetColumnRenderer =
-        new KHEUI::OffsetColumnRenderer( mStylist, mLayout, KHEUI::KOffsetFormat::Hexadecimal );
+        new Okteta::OffsetColumnRenderer( mStylist, mLayout, Okteta::OffsetFormat::Hexadecimal );
     mFirstBorderColumnRenderer =
-        new KHEUI::BorderColumnRenderer( mStylist, true, false );
+        new Okteta::BorderColumnRenderer( mStylist, true, false );
     mValueColumnRenderer =
-        new KHEUI::ValueByteArrayColumnRenderer( mStylist, mByteArrayModel, mLayout, mTableRanges );
+        new Okteta::ValueByteArrayColumnRenderer( mStylist, mByteArrayModel, mLayout, mTableRanges );
     mSecondBorderColumnRenderer =
-        new KHEUI::BorderColumnRenderer( mStylist, true, false );
+        new Okteta::BorderColumnRenderer( mStylist, true, false );
     mCharColumnRenderer =
-        new KHEUI::CharByteArrayColumnRenderer( mStylist, mByteArrayModel, mLayout, mTableRanges );
+        new Okteta::CharByteArrayColumnRenderer( mStylist, mByteArrayModel, mLayout, mTableRanges );
 
     addColumn( mOffsetColumnRenderer );
     addColumn( mFirstBorderColumnRenderer );
@@ -96,14 +96,14 @@ ByteArrayFrameRenderer::ByteArrayFrameRenderer()
     addColumn( mSecondBorderColumnRenderer );
     addColumn( mCharColumnRenderer );
 
-    mValueColumnRenderer->setValueCodec( (KHECore::ValueCoding)mValueCoding, mValueCodec );
+    mValueColumnRenderer->setValueCodec( (Okteta::ValueCoding)mValueCoding, mValueCodec );
     mValueColumnRenderer->setCharCodec( mCharCodec );
     mCharColumnRenderer->setCharCodec( mCharCodec );
 
     setFont( KGlobalSettings::fixedFont() );
 }
 
-KHECore::AbstractByteArrayModel* ByteArrayFrameRenderer::byteArrayModel() const { return mByteArrayModel; }
+Okteta::AbstractByteArrayModel* ByteArrayFrameRenderer::byteArrayModel() const { return mByteArrayModel; }
 int ByteArrayFrameRenderer::offset()                                             const { return mLayout->startOffset(); }
 int ByteArrayFrameRenderer::length()                                             const { return mLayout->length(); }
 
@@ -111,15 +111,15 @@ int ByteArrayFrameRenderer::noOfBytesPerLine()               const { return mLay
 int ByteArrayFrameRenderer::firstLineOffset()                const { return mLayout->firstLineOffset(); }
 int ByteArrayFrameRenderer::startOffset()                    const { return mLayout->startOffset(); }
 ResizeStyle ByteArrayFrameRenderer::resizeStyle()            const { return mResizeStyle; }
-KHECore::ValueCoding ByteArrayFrameRenderer::valueCoding()   const { return mValueCoding; }
-KHEUI::KPixelX ByteArrayFrameRenderer::byteSpacingWidth()           const { return mValueColumnRenderer->byteSpacingWidth(); }
+Okteta::ValueCoding ByteArrayFrameRenderer::valueCoding()   const { return mValueCoding; }
+Okteta::KPixelX ByteArrayFrameRenderer::byteSpacingWidth()           const { return mValueColumnRenderer->byteSpacingWidth(); }
 int ByteArrayFrameRenderer::noOfGroupedBytes()               const { return mValueColumnRenderer->noOfGroupedBytes(); }
-KHEUI::KPixelX ByteArrayFrameRenderer::groupSpacingWidth()          const { return mValueColumnRenderer->groupSpacingWidth(); }
-KHEUI::KPixelX ByteArrayFrameRenderer::binaryGapWidth()             const { return mValueColumnRenderer->binaryGapWidth(); }
+Okteta::KPixelX ByteArrayFrameRenderer::groupSpacingWidth()          const { return mValueColumnRenderer->groupSpacingWidth(); }
+Okteta::KPixelX ByteArrayFrameRenderer::binaryGapWidth()             const { return mValueColumnRenderer->binaryGapWidth(); }
 bool ByteArrayFrameRenderer::showsNonprinting()              const { return mCharColumnRenderer->isShowingNonprinting(); }
 QChar ByteArrayFrameRenderer::substituteChar()               const { return mCharColumnRenderer->substituteChar(); }
 QChar ByteArrayFrameRenderer::undefinedChar()                const { return mCharColumnRenderer->undefinedChar(); }
-KHECore::CharCoding ByteArrayFrameRenderer::charCoding()     const { return mCharCoding; }
+Okteta::CharCoding ByteArrayFrameRenderer::charCoding()     const { return mCharCoding; }
 const QString& ByteArrayFrameRenderer::charCodingName()      const { return mCharCodec->name(); }
 
 bool ByteArrayFrameRenderer::offsetColumnVisible() const { return mOffsetColumnRenderer->isVisible(); }
@@ -141,7 +141,7 @@ int ByteArrayFrameRenderer::framesCount() const
     return frames;
 }
 
-void ByteArrayFrameRenderer::setByteArrayModel( KHECore::AbstractByteArrayModel* byteArrayModel,
+void ByteArrayFrameRenderer::setByteArrayModel( Okteta::AbstractByteArrayModel* byteArrayModel,
                                                 int offset, int length )
 {
     mByteArrayModel = byteArrayModel;
@@ -193,7 +193,7 @@ void ByteArrayFrameRenderer::setStartOffset( int startOffset )
 }
 
 
-void ByteArrayFrameRenderer::setBufferSpacing( KHEUI::KPixelX byteSpacing, int noOfGroupedBytes, KHEUI::KPixelX groupSpacing )
+void ByteArrayFrameRenderer::setBufferSpacing( Okteta::KPixelX byteSpacing, int noOfGroupedBytes, Okteta::KPixelX groupSpacing )
 {
     if( !mValueColumnRenderer->setSpacing(byteSpacing,noOfGroupedBytes,groupSpacing) )
         return;
@@ -224,7 +224,7 @@ void ByteArrayFrameRenderer::setNoOfBytesPerLine( int noOfBytesPerLine )
 }
 
 
-void ByteArrayFrameRenderer::setByteSpacingWidth( KHEUI::KPixelX byteSpacingWidth )
+void ByteArrayFrameRenderer::setByteSpacingWidth( Okteta::KPixelX byteSpacingWidth )
 {
     if( !mValueColumnRenderer->setByteSpacingWidth(byteSpacingWidth) )
         return;
@@ -239,7 +239,7 @@ void ByteArrayFrameRenderer::setNoOfGroupedBytes( int noOfGroupedBytes )
 }
 
 
-void ByteArrayFrameRenderer::setGroupSpacingWidth( KHEUI::KPixelX groupSpacingWidth )
+void ByteArrayFrameRenderer::setGroupSpacingWidth( Okteta::KPixelX groupSpacingWidth )
 {
     if( !mValueColumnRenderer->setGroupSpacingWidth(groupSpacingWidth) )
         return;
@@ -247,7 +247,7 @@ void ByteArrayFrameRenderer::setGroupSpacingWidth( KHEUI::KPixelX groupSpacingWi
 }
 
 
-void ByteArrayFrameRenderer::setBinaryGapWidth( KHEUI::KPixelX binaryGapWidth )
+void ByteArrayFrameRenderer::setBinaryGapWidth( Okteta::KPixelX binaryGapWidth )
 {
     if( !mValueColumnRenderer->setBinaryGapWidth(binaryGapWidth) )
         return;
@@ -271,15 +271,15 @@ void ByteArrayFrameRenderer::setShowsNonprinting( bool showsNonprinting )
 }
 
 
-void ByteArrayFrameRenderer::setValueCoding( KHECore::ValueCoding valueCoding )
+void ByteArrayFrameRenderer::setValueCoding( Okteta::ValueCoding valueCoding )
 {
     if( mValueCoding == valueCoding )
         return;
 
     const uint oldCodingWidth = mValueCodec->encodingWidth();
 
-    KHECore::ValueCodec* newValueCodec =
-        KHECore::ValueCodec::createCodec( valueCoding );
+    Okteta::ValueCodec* newValueCodec =
+        Okteta::ValueCodec::createCodec( valueCoding );
     if( newValueCodec == 0 )
         return;
 
@@ -287,7 +287,7 @@ void ByteArrayFrameRenderer::setValueCoding( KHECore::ValueCoding valueCoding )
     mValueCodec = newValueCodec;
     mValueCoding = valueCoding;
 
-    mValueColumnRenderer->setValueCodec( (KHECore::ValueCoding)mValueCoding, mValueCodec );
+    mValueColumnRenderer->setValueCodec( (Okteta::ValueCoding)mValueCoding, mValueCodec );
 
     const uint newCodingWidth = mValueCodec->encodingWidth();
 
@@ -297,12 +297,12 @@ void ByteArrayFrameRenderer::setValueCoding( KHECore::ValueCoding valueCoding )
 }
 
 
-void ByteArrayFrameRenderer::setCharCoding( KHECore::CharCoding charCoding )
+void ByteArrayFrameRenderer::setCharCoding( Okteta::CharCoding charCoding )
 {
     if( mCharCoding == charCoding )
         return;
 
-    KHECore::CharCodec* newCharCodec = KHECore::CharCodec::createCodec( charCoding );
+    Okteta::CharCodec* newCharCodec = Okteta::CharCodec::createCodec( charCoding );
     if( newCharCodec == 0 )
         return;
 
@@ -320,13 +320,13 @@ void ByteArrayFrameRenderer::setCharCoding( const QString& newCharCodingName )
     if( charCodingName() == newCharCodingName )
         return;
 
-    KHECore::CharCodec* newCharCodec = KHECore::CharCodec::createCodec( newCharCodingName );
+    Okteta::CharCodec* newCharCodec = Okteta::CharCodec::createCodec( newCharCodingName );
     if( newCharCodec == 0 )
         return;
 
     delete mCharCodec;
     mCharCodec = newCharCodec;
-    mCharCoding = KHECore::LocalEncoding; // TODO: add encoding no to every known codec
+    mCharCoding = Okteta::LocalEncoding; // TODO: add encoding no to every known codec
 
     mValueColumnRenderer->setCharCodec( mCharCodec );
     mCharColumnRenderer->setCharCodec( mCharCodec );
@@ -339,8 +339,8 @@ void ByteArrayFrameRenderer::setFont( const QFont &font )
 
     // get new values
     QFontMetrics fontMetrics( font );
-    KHEUI::KPixelX digitWidth = fontMetrics.maxWidth();
-    KHEUI::KPixelY digitBaseLine = fontMetrics.ascent();
+    Okteta::KPixelX digitWidth = fontMetrics.maxWidth();
+    Okteta::KPixelY digitBaseLine = fontMetrics.ascent();
 
     setLineHeight( fontMetrics.height() );
 
@@ -432,19 +432,19 @@ QSize ByteArrayFrameRenderer::minimumSizeHint() const
 
 int ByteArrayFrameRenderer::fittingBytesPerLine() const
 {
-    const KHEUI::KPixelX nonDataWidth =
+    const Okteta::KPixelX nonDataWidth =
         mOffsetColumnRenderer->visibleWidth()
         + mFirstBorderColumnRenderer->visibleWidth()
         + mSecondBorderColumnRenderer->visibleWidth();
 
     // abstract offset and border columns width
-    const KHEUI::KPixelX maxDataWidth = width() - nonDataWidth;
+    const Okteta::KPixelX maxDataWidth = width() - nonDataWidth;
 
     // prepare needed values
-    const KHEUI::KPixelX charByteWidth = mCharColumnRenderer->isVisible() ? mCharColumnRenderer->digitWidth() : 0;
-    const KHEUI::KPixelX valueByteWidth = mValueColumnRenderer->isVisible() ? mValueColumnRenderer->byteWidth() : 0;
-    const KHEUI::KPixelX valueByteSpacingWidth = mValueColumnRenderer->isVisible() ? mValueColumnRenderer->byteSpacingWidth() : 0;
-    KHEUI::KPixelX valueByteGroupSpacingWidth;
+    const Okteta::KPixelX charByteWidth = mCharColumnRenderer->isVisible() ? mCharColumnRenderer->digitWidth() : 0;
+    const Okteta::KPixelX valueByteWidth = mValueColumnRenderer->isVisible() ? mValueColumnRenderer->byteWidth() : 0;
+    const Okteta::KPixelX valueByteSpacingWidth = mValueColumnRenderer->isVisible() ? mValueColumnRenderer->byteSpacingWidth() : 0;
+    Okteta::KPixelX valueByteGroupSpacingWidth;
     int noOfGroupedBytes = mValueColumnRenderer->noOfGroupedBytes();
     // no grouping?
     if( noOfGroupedBytes == 0 )
@@ -456,9 +456,9 @@ int ByteArrayFrameRenderer::fittingBytesPerLine() const
     else
         valueByteGroupSpacingWidth = mValueColumnRenderer->isVisible() ? mValueColumnRenderer->groupSpacingWidth() : 0;
 
-    KHEUI::KPixelX valueByteGroupWidth =  noOfGroupedBytes * valueByteWidth + (noOfGroupedBytes-1)*valueByteSpacingWidth;
-    KHEUI::KPixelX charByteGroupWidth =   noOfGroupedBytes * charByteWidth;
-    KHEUI::KPixelX charAndValueGroupWidth = (valueByteGroupWidth + valueByteGroupSpacingWidth) + charByteGroupWidth;
+    Okteta::KPixelX valueByteGroupWidth =  noOfGroupedBytes * valueByteWidth + (noOfGroupedBytes-1)*valueByteSpacingWidth;
+    Okteta::KPixelX charByteGroupWidth =   noOfGroupedBytes * charByteWidth;
+    Okteta::KPixelX charAndValueGroupWidth = (valueByteGroupWidth + valueByteGroupSpacingWidth) + charByteGroupWidth;
 
     // calculate fitting groups per line
 

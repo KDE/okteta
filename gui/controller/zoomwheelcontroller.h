@@ -20,14 +20,14 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_ZOOMWHEELCONTROLLER_H
-#define KHE_UI_ZOOMWHEELCONTROLLER_H
+#ifndef OKTETA_ZOOMWHEELCONTROLLER_H
+#define OKTETA_ZOOMWHEELCONTROLLER_H
 
 // lib
 #include "abstractwheelcontroller.h"
 
 
-namespace KHEUI
+namespace Okteta
 {
 class AbstractByteArrayView;
 

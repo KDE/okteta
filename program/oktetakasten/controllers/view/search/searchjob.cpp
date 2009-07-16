@@ -26,7 +26,7 @@
 #include <abstractbytearrayfilter.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
-#include <khechar.h>
+#include <character.h>
 #include <charcodec.h>
 // Qt
 #include <QtGui/QApplication>
@@ -39,14 +39,14 @@ static const int MaxEventProcessTimeInMS = 100;
 static const int IgnoreCaseSearchedByteCountSignalLimit = 10000;
 
 
-SearchJob::SearchJob( const KHECore::AbstractByteArrayModel* model,
+SearchJob::SearchJob( const Okteta::AbstractByteArrayModel* model,
                       const QByteArray& searchData, int startIndex, bool findForward, bool ignoreCase, const QString& charCodecName )
   : mByteArrayModel( model ),
     mSearchData( searchData ),
     mStartIndex( startIndex),
     mFindForward( findForward ),
     mIgnoreCase( ignoreCase ),
-    mCharCodec( KHECore::CharCodec::createCodec(charCodecName) )
+    mCharCodec( Okteta::CharCodec::createCodec(charCodecName) )
 {
     if( mIgnoreCase )
     {
@@ -55,7 +55,7 @@ SearchJob::SearchJob( const KHECore::AbstractByteArrayModel* model,
         char* pattern = mSearchData.data();
         for( int i = 0; i<patternLength; ++i )
         {
-            const KHECore::KChar decodedChar = mCharCodec->decode( pattern[i] );
+            const Okteta::Character decodedChar = mCharCodec->decode( pattern[i] );
 
             if( decodedChar.isUndefined() )
                 continue;
@@ -85,7 +85,7 @@ int SearchJob::indexOfIgnoreCase()
 
             // turn to lowercase if possible
             // TODO: optimize, like caching and not reencoding chars without a lower letter
-            const KHECore::KChar decodedChar = mCharCodec->decode( byte );
+            const Okteta::Character decodedChar = mCharCodec->decode( byte );
             if( ! decodedChar.isUndefined() )
                 mCharCodec->encode( &byte, decodedChar.toLower() );
 
@@ -133,7 +133,7 @@ int SearchJob::lastIndexOfIgnoreCase()
 
             // turn to lowercase if possible
             // TODO: optimize, like caching and not reencoding chars without a lower letter
-            const KHECore::KChar decodedChar = mCharCodec->decode( byte );
+            const Okteta::Character decodedChar = mCharCodec->decode( byte );
             if( ! decodedChar.isUndefined() )
                 mCharCodec->encode( &byte, decodedChar.toLower() );
 

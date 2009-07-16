@@ -37,7 +37,7 @@
 #include <QtGui/QDropEvent>
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 static const char OctetStreamFormatName[] = "application/octet-stream";
@@ -146,10 +146,10 @@ void Dropper::handleInternalDrag( QDropEvent* dropEvent )
     // TODO: this should 
 
     // get drag origin
-    KHE::Section selection = mByteArrayView->tableRanges()->removeSelection();
+    KDE::Section selection = mByteArrayView->tableRanges()->removeSelection();
 
     ByteArrayTableCursor* tableCursor = mByteArrayView->tableCursor();
-    KHECore::AbstractByteArrayModel* byteArrayModel = mByteArrayView->byteArrayModel();
+    Okteta::AbstractByteArrayModel* byteArrayModel = mByteArrayView->byteArrayModel();
 
     int insertIndex = tableCursor->realIndex();
 
@@ -173,7 +173,7 @@ void Dropper::handleInternalDrag( QDropEvent* dropEvent )
         if( success )
         {
             tableCursor->gotoCIndex( newCursorIndex );
-            mByteArrayView->tableRanges()->addChangedRange( KHE::Section(insertIndex,selection.end()) );
+            mByteArrayView->tableRanges()->addChangedRange( KDE::Section(insertIndex,selection.end()) );
             emit mByteArrayView->cursorPositionChanged( tableCursor->realIndex() );
         }
     }
@@ -192,7 +192,7 @@ void Dropper::handleInternalDrag( QDropEvent* dropEvent )
                 const int length = mByteArrayView->layout()->length();
                 if( !tableCursor->isBehind() && length > 0 )
                 {
-                    KHE::Section overwriteRange = KHE::Section::fromWidth( insertIndex, data.size() );
+                    KDE::Section overwriteRange = KDE::Section::fromWidth( insertIndex, data.size() );
                     overwriteRange.restrictEndTo( length-1 );
                     if( overwriteRange.isValid() )
                         byteArrayModel->replace( overwriteRange, data.data(), overwriteRange.width() );

@@ -26,7 +26,7 @@
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 // Okteta gui
-#include <koffsetformat.h>
+#include <offsetformat.h>
 
 class KComboBox;
 class KSqueezedTextLabel;
@@ -75,7 +75,7 @@ class ViewStatusController : public AbstractXmlGuiController
     KComboBox* mValueCodingComboBox;
     KComboBox* mCharCodingComboBox;
 
-    KHEUI::KOffsetFormat::print mPrintFunction;
+    Okteta::OffsetFormat::print mPrintFunction;
     int mStartOffset;
 };
 

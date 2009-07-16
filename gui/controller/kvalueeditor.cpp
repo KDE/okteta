@@ -35,7 +35,7 @@
 #include <QtGui/QKeyEvent>
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 KValueEditor::KValueEditor( ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent )
@@ -55,9 +55,9 @@ void KValueEditor::startEdit( const QString &description )
 {
     Q_ASSERT( !mInEditMode );
 
-    KHECore::AbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
-    KHECore::ChangesDescribable *changesDescribable =
-        qobject_cast<KHECore::ChangesDescribable*>( byteArrayModel );
+    Okteta::AbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
+    Okteta::ChangesDescribable *changesDescribable =
+        qobject_cast<Okteta::ChangesDescribable*>( byteArrayModel );
 
     if( changesDescribable )
         changesDescribable->openGroupedChange( description );
@@ -71,9 +71,9 @@ void KValueEditor::cancelEdit()
 
     mInEditMode = false;
 
-    KHECore::AbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
-    KHECore::ChangesDescribable *changesDescribable =
-        qobject_cast<KHECore::ChangesDescribable*>( byteArrayModel );
+    Okteta::AbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
+    Okteta::ChangesDescribable *changesDescribable =
+        qobject_cast<Okteta::ChangesDescribable*>( byteArrayModel );
 
     if( changesDescribable )
         changesDescribable->cancelGroupedChange();
@@ -86,9 +86,9 @@ void KValueEditor::finishEdit()
 
     mInEditMode = false;
 
-    KHECore::AbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
-    KHECore::ChangesDescribable *changesDescribable =
-        qobject_cast<KHECore::ChangesDescribable*>( byteArrayModel );
+    Okteta::AbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
+    Okteta::ChangesDescribable *changesDescribable =
+        qobject_cast<Okteta::ChangesDescribable*>( byteArrayModel );
 
     if( changesDescribable )
         changesDescribable->closeGroupedChange();
@@ -146,7 +146,7 @@ bool KValueEditor::handleKeyPress( QKeyEvent *keyEvent )
                     break;
                 }
 
-                const KHECore::ValueCodec* valueCodec = mView->valueCodec();
+                const Okteta::ValueCodec* valueCodec = mView->valueCodec();
                 if( mInEditMode )
                 {
                     if( mInsertedDigitsCount < valueCodec->encodingWidth() )
@@ -196,7 +196,7 @@ bool KValueEditor::handleKeyPress( QKeyEvent *keyEvent )
 
 void KValueEditor::doValueEditAction( KValueEditAction Action, int input )
 {
-    const KHECore::ValueCodec* valueCodec = mView->valueCodec();
+    const Okteta::ValueCodec* valueCodec = mView->valueCodec();
 
     // we are not yet in edit mode?
     if( !mInEditMode )

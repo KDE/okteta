@@ -23,7 +23,7 @@
 #include "kcontroller.h"
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 KController::KController( KController *parent )

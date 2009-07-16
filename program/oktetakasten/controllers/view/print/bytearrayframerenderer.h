@@ -26,11 +26,11 @@
 // lib
 #include "abstractcolumnframerenderer.h"
 // Okteta core
-#include <khe.h>
+#include <oktetacore.h>
 // Qt
 #include <QtGui/QFont>
 
-namespace KHEUI {
+namespace Okteta {
 class OffsetColumnRenderer;
 class BorderColumnRenderer;
 class ValueByteArrayColumnRenderer;
@@ -39,7 +39,7 @@ class ByteArrayTableLayout;
 class ByteArrayTableRanges;
 class PrintColumnStylist;
 }
-namespace KHECore {
+namespace Okteta {
 class AbstractByteArrayModel;
 class ValueCodec;
 class CharCodec;
@@ -77,7 +77,7 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
     virtual int framesCount() const;
 
   public:
-    KHECore::AbstractByteArrayModel* byteArrayModel() const;
+    Okteta::AbstractByteArrayModel* byteArrayModel() const;
     int offset() const;
     int length() const;
 
@@ -85,39 +85,39 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
     int firstLineOffset() const;
     int startOffset() const;
     ResizeStyle resizeStyle() const;
-    KHECore::ValueCoding valueCoding() const;
-    KHEUI::KPixelX byteSpacingWidth() const;
+    Okteta::ValueCoding valueCoding() const;
+    Okteta::KPixelX byteSpacingWidth() const;
     int noOfGroupedBytes() const;
-    KHEUI::KPixelX groupSpacingWidth() const;
-    KHEUI::KPixelX binaryGapWidth() const;
+    Okteta::KPixelX groupSpacingWidth() const;
+    Okteta::KPixelX binaryGapWidth() const;
     bool showsNonprinting() const;
     QChar substituteChar() const;
     QChar undefinedChar() const;
-    KHECore::CharCoding charCoding() const;
+    Okteta::CharCoding charCoding() const;
     const QString &charCodingName() const;
 
     bool offsetColumnVisible() const;
     int visibleByteArrayCodings() const;
 
   public:
-    void setByteArrayModel( KHECore::AbstractByteArrayModel* byteArrayModel, int offset = 0, int length = -1 );
+    void setByteArrayModel( Okteta::AbstractByteArrayModel* byteArrayModel, int offset = 0, int length = -1 );
     void setHeight( int height );
     void setWidth( int width );
     void setFont( const QFont &font );
     void setFirstLineOffset( int firstLineOffset );
     void setStartOffset( int startOffset );
-    void setBufferSpacing( KHEUI::KPixelX byteSpacing, int noOfGroupedBytes, KHEUI::KPixelX groupSpacing );
-    void setValueCoding( KHECore::ValueCoding valueCoding );
+    void setBufferSpacing( Okteta::KPixelX byteSpacing, int noOfGroupedBytes, Okteta::KPixelX groupSpacing );
+    void setValueCoding( Okteta::ValueCoding valueCoding );
     void setResizeStyle( ResizeStyle style );
     void setNoOfBytesPerLine( int noOfBytesPerLine );
-    void setByteSpacingWidth( KHEUI::KPixelX byteSpacingWidth );
+    void setByteSpacingWidth( Okteta::KPixelX byteSpacingWidth );
     void setNoOfGroupedBytes( int noOfGroupedBytes );
-    void setGroupSpacingWidth( KHEUI::KPixelX groupSpacingWidth );
-    void setBinaryGapWidth( KHEUI::KPixelX binaryGapWidth );
+    void setGroupSpacingWidth( Okteta::KPixelX groupSpacingWidth );
+    void setBinaryGapWidth( Okteta::KPixelX binaryGapWidth );
     void setSubstituteChar( QChar substituteChar );
     void setUndefinedChar( QChar undefinedChar );
     void setShowsNonprinting( bool showsNonprinting );
-    void setCharCoding( KHECore::CharCoding charCoding );
+    void setCharCoding( Okteta::CharCoding charCoding );
     void setCharCoding( const QString &charCodingName );
     void showByteArrayColumns( int CCs );
     void showOffsetColumn( bool visible );
@@ -139,30 +139,30 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
     int mWidth;
     QFont mFont;
 
-    KHECore::AbstractByteArrayModel* mByteArrayModel;
+    Okteta::AbstractByteArrayModel* mByteArrayModel;
 
   protected:
     /** holds the logical layout */
-    KHEUI::ByteArrayTableLayout *mLayout;
-    KHEUI::ByteArrayTableRanges* mTableRanges;
+    Okteta::ByteArrayTableLayout *mLayout;
+    Okteta::ByteArrayTableRanges* mTableRanges;
 
   protected:
-    KHEUI::OffsetColumnRenderer*         mOffsetColumnRenderer;
-    KHEUI::BorderColumnRenderer*         mFirstBorderColumnRenderer;
-    KHEUI::ValueByteArrayColumnRenderer* mValueColumnRenderer;
-    KHEUI::BorderColumnRenderer*         mSecondBorderColumnRenderer;
-    KHEUI::CharByteArrayColumnRenderer*  mCharColumnRenderer;
-    KHEUI::PrintColumnStylist* mStylist;
+    Okteta::OffsetColumnRenderer*         mOffsetColumnRenderer;
+    Okteta::BorderColumnRenderer*         mFirstBorderColumnRenderer;
+    Okteta::ValueByteArrayColumnRenderer* mValueColumnRenderer;
+    Okteta::BorderColumnRenderer*         mSecondBorderColumnRenderer;
+    Okteta::CharByteArrayColumnRenderer*  mCharColumnRenderer;
+    Okteta::PrintColumnStylist* mStylist;
 
   protected:
     /** */
-    KHECore::ValueCodec* mValueCodec;
+    Okteta::ValueCodec* mValueCodec;
     /** */
-    KHECore::ValueCoding mValueCoding;
+    Okteta::ValueCoding mValueCoding;
     /** */
-    KHECore::CharCodec* mCharCodec;
+    Okteta::CharCodec* mCharCodec;
     /** */
-    KHECore::CharCoding mCharCoding;
+    Okteta::CharCoding mCharCoding;
 
   protected: // parameters
     ResizeStyle mResizeStyle;

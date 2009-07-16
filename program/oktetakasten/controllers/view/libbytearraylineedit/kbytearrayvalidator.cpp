@@ -24,7 +24,7 @@
 
 // Okteta core
 #include <valuecodec.h>
-#include <khechar.h>
+#include <character.h>
 #include <charcodec.h>
 // KDE
 #include <KLocale>
@@ -50,7 +50,7 @@ const QStringList &KByteArrayValidator::codecNames()
 
 KByteArrayValidator::KByteArrayValidator( QObject *parent, Coding codecId, int charCodecId )
  : QValidator( parent ), mCodecId( InvalidCoding ),
-   mValueCodec( 0 ), mCharCodec( KHECore::CharCodec::createCodec(KHECore::LocalEncoding) )
+   mValueCodec( 0 ), mCharCodec( Okteta::CharCodec::createCodec(Okteta::LocalEncoding) )
 {
 Q_UNUSED(charCodecId)
     setCodec( codecId );
@@ -63,7 +63,7 @@ void KByteArrayValidator::setCharCodec( const QString &charCodecName )
         return;
 
     delete mCharCodec;
-    mCharCodec = KHECore::CharCodec::createCodec( charCodecName );
+    mCharCodec = Okteta::CharCodec::createCodec( charCodecName );
 }
 
 void KByteArrayValidator::setCodec( Coding codecId )
@@ -76,7 +76,7 @@ void KByteArrayValidator::setCodec( Coding codecId )
     if( mCodecId != CharCoding )
     {
         delete mValueCodec;
-        mValueCodec = KHECore::ValueCodec::createCodec( (KHECore::ValueCoding)mCodecId );
+        mValueCodec = Okteta::ValueCodec::createCodec( (Okteta::ValueCoding)mCodecId );
     }
 }
 
@@ -161,7 +161,7 @@ QString KByteArrayValidator::toString( const QByteArray &byteArray ) const
         result.resize( byteArraySize );
         for( int i=0; i<byteArraySize; ++i )
         {
-            KHECore::KChar c = mCharCodec->decode( byteArray[i] );
+            Okteta::Character c = mCharCodec->decode( byteArray[i] );
             result[i] = c.isUndefined() ? QChar('?') : c; // TODO: define unknown symbol
         }
     }

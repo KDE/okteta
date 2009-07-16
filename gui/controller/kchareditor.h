@@ -20,15 +20,15 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_KCHAREDITOR_H
-#define KHE_UI_KCHAREDITOR_H
+#ifndef OKTETA_KCHAREDITOR_H
+#define OKTETA_KCHAREDITOR_H
 
 
 // lib
 #include "keditor.h"
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 class KCharEditor : public KEditor

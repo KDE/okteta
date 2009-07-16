@@ -20,14 +20,14 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_CHANGESDESCRIBABLE_H
-#define KHE_CORE_CHANGESDESCRIBABLE_H
+#ifndef CHANGESDESCRIBABLE_H
+#define CHANGESDESCRIBABLE_H
 
 // Qt
 #include <QtCore/QtPlugin>
 #include <QtCore/QString>
 
-namespace KHECore
+namespace Okteta
 {
 
 class ChangesDescribable
@@ -49,6 +49,6 @@ inline ChangesDescribable::~ChangesDescribable() {}
 
 }
 
-Q_DECLARE_INTERFACE( KHECore::ChangesDescribable, "org.kde.khecore.changesdescribable/1.0" )
+Q_DECLARE_INTERFACE( Okteta::ChangesDescribable, "org.kde.khecore.changesdescribable/1.0" )
 
 #endif

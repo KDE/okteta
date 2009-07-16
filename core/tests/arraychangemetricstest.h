@@ -26,7 +26,7 @@
 // Qt
 #include <QtCore/QObject>
 
-namespace KHE
+namespace KDE
 {
 
 class ArrayChangeMetricsTest : public QObject

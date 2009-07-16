@@ -50,7 +50,7 @@ OktetaPart::OktetaPart( QWidget *parentWidget,
 {
     setComponentData( OktetaPartFactory::componentData() );
 
-    view = new KHEUI::ByteArrayColumnView( &fileByteArray, parentWidget );
+    view = new Okteta::ByteArrayColumnView( &fileByteArray, parentWidget );
     view->setNoOfBytesPerLine( 16 );
     view->setBufferSpacing( 3, 4, 10 );
     view->setShowsNonprinting( false );
@@ -95,7 +95,7 @@ void OktetaPart::setupActions( bool browserViewWanted )
     // document encoding
     encodingAction = actions->add<KSelectAction>( "view_charencoding" );
     encodingAction->setText( i18nc("@title:menu","&Char Encoding") );
-    encodingAction->setItems( KHECore::CharCodec::codecNames() );
+    encodingAction->setItems( Okteta::CharCodec::codecNames() );
     connect( encodingAction, SIGNAL(triggered(int)), SLOT(onSetEncoding(int)) );
 
     showNonprintingAction = actions->add<KToggleAction>( "view_showsnonprinting" );
@@ -147,7 +147,7 @@ void OktetaPart::fitActionSettings()
     showNonprintingAction->setChecked( view->showsNonprinting() );
 
     codingAction->setCurrentItem( (int)view->valueCoding() );
-    encodingAction->setCurrentItem( KHECore::CharCodec::codecNames().indexOf(view->charCodingName()) );
+    encodingAction->setCurrentItem( Okteta::CharCodec::codecNames().indexOf(view->charCodingName()) );
 
     resizeStyleAction->setCurrentItem( (int)view->resizeStyle() );
 
@@ -186,7 +186,7 @@ void OktetaPart::onUnselect()
 
 void OktetaPart::onSetCoding( int Coding )
 {
-    view->setValueCoding( (KHEUI::ByteArrayColumnView::ValueCoding)Coding );
+    view->setValueCoding( (Okteta::ByteArrayColumnView::ValueCoding)Coding );
 }
 
 void OktetaPart::onSetShowsNonprinting( bool on )
@@ -201,12 +201,12 @@ void OktetaPart::onToggleOffsetColumn( bool on )
 
 void OktetaPart::onSetResizeStyle( int ResizeStyle )
 {
-    view->setResizeStyle( (KHEUI::ByteArrayColumnView::ResizeStyle)ResizeStyle );
+    view->setResizeStyle( (Okteta::ByteArrayColumnView::ResizeStyle)ResizeStyle );
 }
 
 void OktetaPart::onSetEncoding( int Encoding )
 {
-    view->setCharCoding( KHECore::CharCodec::codecNames()[Encoding] );
+    view->setCharCoding( Okteta::CharCodec::codecNames()[Encoding] );
 }
 
 void OktetaPart::onToggleValueCharColumns( int VisibleColumns)

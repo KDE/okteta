@@ -41,15 +41,15 @@ namespace KPieceTable
 
 AbstractPieceTableChange *RemovePieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
 {
-    const Piece removedPiece( KHE::Section::fromWidth(Start+ChangeStorageOffset,Width), Piece::ChangeStorage );
+    const Piece removedPiece( KDE::Section::fromWidth(Start+ChangeStorageOffset,Width), Piece::ChangeStorage );
     RemovePieceTableChange *pieceTableChange =
-        new RemovePieceTableChange( KHE::Section(Start,End), PieceList(removedPiece) );
+        new RemovePieceTableChange( KDE::Section(Start,End), PieceList(removedPiece) );
 
     return pieceTableChange;
 }
 void RemovePieceTableChangeAbstractPieceTableChangeIfTest::changePieceTable ( PieceTable *pieceTable )
 {
-    pieceTable->remove( KHE::Section(Start,End) );
+    pieceTable->remove( KDE::Section(Start,End) );
 }
 
 void RemovePieceTableChangeAbstractPieceTableChangeIfTest::deletePieceTableChange(

@@ -29,7 +29,7 @@
 #include <coordrange.h>
 
 
-namespace KHECore {
+namespace Okteta {
 class AbstractByteArrayModel;
 }
 
@@ -42,8 +42,8 @@ namespace Kasten
 class AbstractByteArrayColumnTextRenderer : public AbstractColumnTextRenderer
 {
   public:
-    AbstractByteArrayColumnTextRenderer( const KHECore::AbstractByteArrayModel *byteArrayModel, int offset,
-        const KHEUI::CoordRange &coordRange,
+    AbstractByteArrayColumnTextRenderer( const Okteta::AbstractByteArrayModel *byteArrayModel, int offset,
+        const Okteta::CoordRange &coordRange,
         int noOfBytesPerLine );
     virtual ~AbstractByteArrayColumnTextRenderer();
 
@@ -58,9 +58,9 @@ class AbstractByteArrayColumnTextRenderer : public AbstractColumnTextRenderer
     void setWidths( int byteWidth, int byteSpacingWidth, int noOfGroupedBytes );
 
   protected:
-    const KHECore::AbstractByteArrayModel *mByteArrayModel;
+    const Okteta::AbstractByteArrayModel *mByteArrayModel;
 
-    const KHEUI::CoordRange mCoordRange;
+    const Okteta::CoordRange mCoordRange;
 
     const int mNoOfBytesPerLine;
 

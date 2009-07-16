@@ -33,7 +33,7 @@
 // Qt
 #include <QtCore/QList>
 
-namespace KHEUI {
+namespace Okteta {
 class AbstractColumnRenderer;
 }
 
@@ -67,15 +67,15 @@ class AbstractColumnFrameRenderer : public AbstractFrameRenderer
 
   public: // pixel-wise sizes
     /** returns the height of each line */
-    KHEUI::KPixelY lineHeight() const;
+    Okteta::KPixelY lineHeight() const;
     /** returns the width of all visible columns together */
-    KHEUI::KPixelX columnsWidth() const;
+    Okteta::KPixelX columnsWidth() const;
     /** returns the height of all lines together */
-    KHEUI::KPixelY columnsHeight() const;
+    Okteta::KPixelY columnsHeight() const;
 
   public:
     /**  */
-    void setColumnsPos( KHEUI::KPixelX x, KHEUI::KPixelY y );
+    void setColumnsPos( Okteta::KPixelX x, Okteta::KPixelY y );
 
   protected: // our API
     /** draws area without columns in columns coordinates */
@@ -83,15 +83,15 @@ class AbstractColumnFrameRenderer : public AbstractFrameRenderer
 
   protected:
     /** takes ownership of column renderer */
-    void addColumn( KHEUI::AbstractColumnRenderer *column );
-    void removeColumn( KHEUI::AbstractColumnRenderer *column );
+    void addColumn( Okteta::AbstractColumnRenderer *column );
+    void removeColumn( Okteta::AbstractColumnRenderer *column );
 
   protected: //
     /** sets height of all lines and propagates this information to all columns
       * doesn't update the content size
       * @param NewLineHeight height in pixels
       */
-    virtual void setLineHeight( KHEUI::KPixelY NewLineHeight );
+    virtual void setLineHeight( Okteta::KPixelY NewLineHeight );
     /** sets the number of lines
       * doesn't update the content size
       * @param NewNoOfLines new number of lines to display

@@ -66,7 +66,7 @@ bool ReplacePieceTableChange::merge( const AbstractPieceTableChange *other )
     return result;
 }
 
-KHE::Section ReplacePieceTableChange::apply( PieceTable *pieceTable ) const
+KDE::Section ReplacePieceTableChange::apply( PieceTable *pieceTable ) const
 {
     const int oldSize = pieceTable->size();
 
@@ -76,26 +76,26 @@ KHE::Section ReplacePieceTableChange::apply( PieceTable *pieceTable ) const
     const int lastChanged = ( newSize == oldSize ) ? mRemoveSection.end() :
                             ( newSize > oldSize ) ?  newSize - 1 :
                                                      oldSize - 1;
-    return KHE::Section( mRemoveSection.start(), lastChanged );
+    return KDE::Section( mRemoveSection.start(), lastChanged );
 }
 
-KHE::Section ReplacePieceTableChange::revert( PieceTable *pieceTable ) const
+KDE::Section ReplacePieceTableChange::revert( PieceTable *pieceTable ) const
 {
     const int oldSize = pieceTable->size();
 
-    const KHE::Section insertedSection = KHE::Section::fromWidth( mRemoveSection.start(), mInsertLength );
+    const KDE::Section insertedSection = KDE::Section::fromWidth( mRemoveSection.start(), mInsertLength );
     pieceTable->replace( insertedSection, mRemovedPieces );
 
     const int newSize = pieceTable->size();
     const int lastChanged = ( newSize == oldSize ) ? insertedSection.end() :
                             ( newSize > oldSize ) ?  newSize - 1 :
                                                      oldSize - 1;
-    return KHE::Section( mRemoveSection.start(), lastChanged );
+    return KDE::Section( mRemoveSection.start(), lastChanged );
 }
 
-KHE::ArrayChangeMetrics ReplacePieceTableChange::metrics() const
+KDE::ArrayChangeMetrics ReplacePieceTableChange::metrics() const
 {
-    return KHE::ArrayChangeMetrics::asReplacement( mRemoveSection.start(), mRemoveSection.width(), mInsertLength );
+    return KDE::ArrayChangeMetrics::asReplacement( mRemoveSection.start(), mRemoveSection.width(), mInsertLength );
 }
 
 int ReplacePieceTableChange::dataSize() const { return mInsertLength; }

@@ -20,17 +20,17 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_BYTEARRAYTABLECURSOR_H
-#define KHE_UI_BYTEARRAYTABLECURSOR_H
+#ifndef OKTETA_BYTEARRAYTABLECURSOR_H
+#define OKTETA_BYTEARRAYTABLECURSOR_H
 
 // lib
 #include "coord.h"
 
-namespace KHE {
+namespace KDE {
 class ArrayChangeMetricsList;
 }
 
-namespace KHEUI
+namespace Okteta
 {
 
 class ByteArrayTableLayout;
@@ -133,7 +133,7 @@ class ByteArrayTableCursor
     // TODO: make protected again
     void stepBehind();
     void updateCoord();
-    void adaptToChanges( const KHE::ArrayChangeMetricsList& changeList, int oldLength );
+    void adaptToChanges( const KDE::ArrayChangeMetricsList& changeList, int oldLength );
 
   public: // logical state access
     bool atStart() const;

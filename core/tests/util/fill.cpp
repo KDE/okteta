@@ -30,8 +30,8 @@
 #include <QtCore/QByteArray>
 
 
-using namespace KHE;
-using namespace KHECore;
+using namespace KDE;
+using namespace Okteta;
 
 
 // fills the buffer with char from b to e

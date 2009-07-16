@@ -20,15 +20,15 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_KNAVIGATOR_H
-#define KHE_UI_KNAVIGATOR_H
+#ifndef OKTETA_KNAVIGATOR_H
+#define OKTETA_KNAVIGATOR_H
 
 
 // lib
 #include "kcontroller.h"
 
 
-namespace KHEUI
+namespace Okteta
 {
 class AbstractByteArrayView;
 

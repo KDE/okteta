@@ -31,7 +31,7 @@
 #include <QtGui/QPalette>
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 static const int leftOffsetMargin = 2;
@@ -39,12 +39,12 @@ static const int rightOffsetMargin = 2;
 
 
 OffsetColumnRenderer::OffsetColumnRenderer( AbstractColumnStylist* stylist,
-    ByteArrayTableLayout* layout, KOffsetFormat::KFormat format )
+    ByteArrayTableLayout* layout, OffsetFormat::Format format )
  : AbstractColumnRenderer( stylist ),
    mLayout( layout ),
    mDigitWidth( 0 ),
    mDigitBaseLine( 0 ),
-   mFormat( KOffsetFormat::None )
+   mFormat( OffsetFormat::None )
 {
     setFormat( format );
 }
@@ -92,7 +92,7 @@ void OffsetColumnRenderer::renderEmptyColumn( QPainter* painter, const KPixelXs&
     renderColumnBackground( painter, Xs, Ys );
 }
 
-void OffsetColumnRenderer::setFormat( KOffsetFormat::KFormat format )
+void OffsetColumnRenderer::setFormat( OffsetFormat::Format format )
 {
     // no changes?
     if( mFormat == format )
@@ -100,8 +100,8 @@ void OffsetColumnRenderer::setFormat( KOffsetFormat::KFormat format )
 
     mFormat = format;
 
-    mCodingWidth = KOffsetFormat::codingWidth( mFormat );
-    PrintFunction = KOffsetFormat::printFunction( mFormat );
+    mCodingWidth = OffsetFormat::codingWidth( mFormat );
+    PrintFunction = OffsetFormat::printFunction( mFormat );
 
     recalcX();
 }

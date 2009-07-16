@@ -27,7 +27,7 @@
 #include <QtGui/QWidget>
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 WidgetColumnStylist::WidgetColumnStylist( QWidget* parent )

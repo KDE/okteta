@@ -28,7 +28,7 @@
 #include <arraychangemetricslist.h>
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 ByteArrayTableCursor::ByteArrayTableCursor( const ByteArrayTableLayout* layout )
@@ -344,16 +344,16 @@ bool ByteArrayTableCursor::atLineStart() const { return mLayout->atFirstLinePosi
 bool ByteArrayTableCursor::atLineEnd()   const { return mLayout->atLastLinePosition( mCoord ); }
 
 // TODO: oldLength is a hack, as DataLayout is already updated and used by e.g. gotoCIndex
-void ByteArrayTableCursor::adaptToChanges( const KHE::ArrayChangeMetricsList& changeList, int oldLength )
+void ByteArrayTableCursor::adaptToChanges( const KDE::ArrayChangeMetricsList& changeList, int oldLength )
 {
-    foreach( const KHE::ArrayChangeMetrics& change, changeList )
+    foreach( const KDE::ArrayChangeMetrics& change, changeList )
     {
         // cursor affected?
         if( mIndex >= change.offset() )
         {
             switch( change.type() )
             {
-            case KHE::ArrayChangeMetrics::Replacement:
+            case KDE::ArrayChangeMetrics::Replacement:
                 oldLength += change.lengthChange();
                 if( oldLength > 0 )
                 {
@@ -380,7 +380,7 @@ void ByteArrayTableCursor::adaptToChanges( const KHE::ArrayChangeMetricsList& ch
                     return;
                 }
                 break;
-            case KHE::ArrayChangeMetrics::Swapping:
+            case KDE::ArrayChangeMetrics::Swapping:
                 if( mIndex < change.secondStart() )
                 {
                     mIndex += change.secondLength();

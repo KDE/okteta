@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_ABSTRACTCOLUMNRENDERER_H
-#define KHE_UI_ABSTRACTCOLUMNRENDERER_H
+#ifndef OKTETA_ABSTRACTCOLUMNRENDERER_H
+#define OKTETA_ABSTRACTCOLUMNRENDERER_H
 
 // lib
 #include "kadds.h"
@@ -32,7 +32,7 @@
 class QPainter;
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 class AbstractColumnStylist;

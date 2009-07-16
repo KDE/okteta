@@ -23,7 +23,8 @@
 #include "section.h"
 
 
-namespace KHE {
+namespace KDE
+{
 
 void Section::adaptToReplacement( int Pos, int RemovedLength, int InsertedLength )
 {

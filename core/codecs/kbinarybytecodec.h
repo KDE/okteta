@@ -20,15 +20,15 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_KBINARYBYTECODEC_H
-#define KHE_CORE_KBINARYBYTECODEC_H
+#ifndef KBINARYBYTECODEC_H
+#define KBINARYBYTECODEC_H
 
 
 // lib
 #include <valuecodec.h>
 
 
-namespace KHECore
+namespace Okteta
 {
 
 

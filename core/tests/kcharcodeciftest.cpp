@@ -25,11 +25,11 @@
 // test object
 #include <charcodec.h>
 // lib
-#include <khechar.h>
+#include <character.h>
 // Qt
 #include <QtTest/QtTest>
 
-using namespace KHECore;
+using namespace Okteta;
 
 static const char QTextCodecWhiteSpace = 63;
 
@@ -51,7 +51,7 @@ void KCharCodecIfTest::testEncodeDecode()
   do
   {
     ++c;
-    KChar UTF8 = CharCodec->decode( c );
+    Character UTF8 = CharCodec->decode( c );
     char r = 0;
     bool Success = CharCodec->encode( &r, UTF8 );
     QCOMPARE( (unsigned char)r, c );

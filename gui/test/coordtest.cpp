@@ -27,7 +27,7 @@
 // Qt
 #include <QtTest/QtTest>
 
-using namespace KHEUI;
+using namespace Okteta;
 
 // local variables
 static const int Line = 3;

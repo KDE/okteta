@@ -31,7 +31,7 @@
 class AbstractByteArrayFilterParameterSet;
 class AbstractByteArrayFilter;
 
-namespace KHECore {
+namespace Okteta {
 class AbstractByteArrayModel;
 }
 class QString;
@@ -74,7 +74,7 @@ class FilterTool : public AbstractTool
 
   protected:
     KByteArrayDisplay* mByteArrayDisplay;
-    KHECore::AbstractByteArrayModel *mByteArrayModel;
+    Okteta::AbstractByteArrayModel *mByteArrayModel;
     bool mHasWritable;
 
     QList<AbstractByteArrayFilter*> mFilterList;

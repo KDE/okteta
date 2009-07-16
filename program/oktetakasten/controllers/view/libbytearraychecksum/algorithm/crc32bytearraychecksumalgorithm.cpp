@@ -86,7 +86,7 @@ Crc32ByteArrayChecksumAlgorithm::Crc32ByteArrayChecksumAlgorithm()
 AbstractByteArrayChecksumParameterSet* Crc32ByteArrayChecksumAlgorithm::parameterSet() { return &mParameterSet; }
 
 bool Crc32ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
-                                                       const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
+                                                       const Okteta::AbstractByteArrayModel* model, const KDE::Section& section ) const
 {
     Crc32LookupTable lookupTable;
     quint32 crcBits = 0xffffffff;

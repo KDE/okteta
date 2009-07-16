@@ -24,11 +24,11 @@
 #define STATISTICTABLEMODEL_H
 
 // Okteta core
-#include <khe.h>
+#include <oktetacore.h>
 // Qt
 #include <QtCore/QAbstractTableModel>
 
-namespace KHECore {
+namespace Okteta {
 class CharCodec;
 class ValueCodec;
 }
@@ -77,9 +77,9 @@ class StatisticTableModel : public QAbstractTableModel
     int mSize;
     int *mByteCount;
 
-    KHECore::ValueCoding mValueCoding;
-    KHECore::ValueCodec *mValueCodec;
-    KHECore::CharCodec *mCharCodec;
+    Okteta::ValueCoding mValueCoding;
+    Okteta::ValueCodec *mValueCodec;
+    Okteta::CharCodec *mCharCodec;
     QChar mUndefinedChar;
 };
 

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_WIDGETCOLUMNSTYLIST_H
-#define KHE_UI_WIDGETCOLUMNSTYLIST_H
+#ifndef OKTETA_WIDGETCOLUMNSTYLIST_H
+#define OKTETA_WIDGETCOLUMNSTYLIST_H
 
 // lib
 #include <abstractcolumnstylist.h>
@@ -29,7 +29,7 @@
 class QWidget;
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 class WidgetColumnStylistPrivate;

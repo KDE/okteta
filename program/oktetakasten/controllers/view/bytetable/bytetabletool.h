@@ -27,7 +27,7 @@
 #include <abstracttool.h>
 
 
-namespace KHECore {
+namespace Okteta {
 class AbstractByteArrayModel;
 }
 
@@ -71,7 +71,7 @@ class ByteTableTool : public AbstractTool
     ByteTableModel *mByteTableModel;
 
     KByteArrayDisplay* mByteArrayDisplay;
-    KHECore::AbstractByteArrayModel *mByteArrayModel;
+    Okteta::AbstractByteArrayModel *mByteArrayModel;
 };
 
 }

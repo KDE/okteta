@@ -20,20 +20,20 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_KBYTEARRAYMODEL_P_H
-#define KHE_CORE_KBYTEARRAYMODEL_P_H
+#ifndef KBYTEARRAYMODEL_P_H
+#define KBYTEARRAYMODEL_P_H
 
 
 // lib
 #include "kbytearraymodel.h"
-#include "kbookmarksconstiterator.h"
+#include "bookmarksconstiterator.h"
 #include "bookmarklistconstiteratoradapter.h"
 #include "bookmarklist.h"
 // 
 #include <arraychangemetricslist.h>
 
 
-namespace KHECore
+namespace Okteta
 {
 
 class KByteArrayModelPrivate
@@ -80,14 +80,14 @@ class KByteArrayModelPrivate
     bool autoDelete() const;
 
   public:
-    void addBookmarks( const QList<KHECore::Bookmark> &bookmarks );
-    void removeBookmarks( const QList<KHECore::Bookmark> &bookmarks );
+    void addBookmarks( const QList<Okteta::Bookmark> &bookmarks );
+    void removeBookmarks( const QList<Okteta::Bookmark> &bookmarks );
     void removeAllBookmarks();
-    void setBookmark( unsigned int index, const KHECore::Bookmark& bookmark );
+    void setBookmark( unsigned int index, const Okteta::Bookmark& bookmark );
 
-    KHECore::BookmarksConstIterator createBookmarksConstIterator() const;
-    const KHECore::Bookmark& bookmarkAt( unsigned int index ) const;
-    const KHECore::Bookmark& bookmarkFor( int offset ) const;
+    Okteta::BookmarksConstIterator createBookmarksConstIterator() const;
+    const Okteta::Bookmark& bookmarkAt( unsigned int index ) const;
+    const Okteta::Bookmark& bookmarkFor( int offset ) const;
     bool containsBookmarkFor( int offset ) const;
     unsigned int bookmarksCount() const;
 
@@ -146,7 +146,7 @@ inline void KByteArrayModelPrivate::setDatum( unsigned int offset, const char da
 {
     m_data[offset] = datum;
     m_modified = true;
-    emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(offset,1,1) );
+    emit p->contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(offset,1,1) );
     emit p->modificationChanged( true );
 }
 inline void KByteArrayModelPrivate::setModified( bool modified )
@@ -162,12 +162,12 @@ inline int KByteArrayModelPrivate::maxSize()      const { return m_maxSize; }
 inline bool KByteArrayModelPrivate::keepsMemory() const { return m_keepsMemory; }
 inline bool KByteArrayModelPrivate::autoDelete()  const { return m_autoDelete; }
 
-inline void KByteArrayModelPrivate::addBookmarks( const QList<KHECore::Bookmark> &bookmarks )
+inline void KByteArrayModelPrivate::addBookmarks( const QList<Okteta::Bookmark> &bookmarks )
 {
     m_bookmarks.addBookmarks( bookmarks );
     emit p->bookmarksAdded( bookmarks );
 }
-inline void KByteArrayModelPrivate::removeBookmarks( const QList<KHECore::Bookmark> &bookmarks )
+inline void KByteArrayModelPrivate::removeBookmarks( const QList<Okteta::Bookmark> &bookmarks )
 {
     m_bookmarks.removeBookmarks( bookmarks );
     emit p->bookmarksRemoved( bookmarks );
@@ -175,11 +175,11 @@ inline void KByteArrayModelPrivate::removeBookmarks( const QList<KHECore::Bookma
 
 inline void KByteArrayModelPrivate::removeAllBookmarks()
 {
-    QList<KHECore::Bookmark> bookmarks = m_bookmarks.list();
+    QList<Okteta::Bookmark> bookmarks = m_bookmarks.list();
     m_bookmarks.clear();
     emit p->bookmarksRemoved( bookmarks );
 }
-inline void KByteArrayModelPrivate::setBookmark( unsigned int index, const KHECore::Bookmark& bookmark )
+inline void KByteArrayModelPrivate::setBookmark( unsigned int index, const Okteta::Bookmark& bookmark )
 {
     m_bookmarks.setBookmark( index, bookmark );
 
@@ -188,16 +188,16 @@ inline void KByteArrayModelPrivate::setBookmark( unsigned int index, const KHECo
     emit p->bookmarksModified( changedBookmarkIndizes );
 }
 
-inline KHECore::BookmarksConstIterator KByteArrayModelPrivate::createBookmarksConstIterator() const
+inline Okteta::BookmarksConstIterator KByteArrayModelPrivate::createBookmarksConstIterator() const
 {
     return BookmarksConstIterator( new BookmarkListConstIteratorAdapter(m_bookmarks) );
 }
 
-inline const KHECore::Bookmark& KByteArrayModelPrivate::bookmarkFor( int offset ) const
+inline const Okteta::Bookmark& KByteArrayModelPrivate::bookmarkFor( int offset ) const
 {
     return m_bookmarks.bookmark( offset );
 }
-inline const KHECore::Bookmark& KByteArrayModelPrivate::bookmarkAt( unsigned int index ) const
+inline const Okteta::Bookmark& KByteArrayModelPrivate::bookmarkAt( unsigned int index ) const
 {
     return m_bookmarks.at( index );
 }

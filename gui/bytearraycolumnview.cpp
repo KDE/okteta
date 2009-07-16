@@ -25,10 +25,10 @@
 #include "bytearraycolumnview.moc" // due to Q_PRIVATE_SLOT
 
 
-namespace KHEUI
+namespace Okteta
 {
 
-ByteArrayColumnView::ByteArrayColumnView( KHECore::AbstractByteArrayModel* _byteArrayModel, QWidget *parent )
+ByteArrayColumnView::ByteArrayColumnView( Okteta::AbstractByteArrayModel* _byteArrayModel, QWidget *parent )
  : AbstractByteArrayView( new ByteArrayColumnViewPrivate(this), parent )
 {
     Q_D( ByteArrayColumnView );
@@ -85,7 +85,7 @@ bool ByteArrayColumnView::offsetColumnVisible() const
 }
 
 
-void ByteArrayColumnView::setByteArrayModel( KHECore::AbstractByteArrayModel* _byteArrayModel )
+void ByteArrayColumnView::setByteArrayModel( Okteta::AbstractByteArrayModel* _byteArrayModel )
 {
     Q_D( ByteArrayColumnView );
     d->setByteArrayModel( _byteArrayModel );

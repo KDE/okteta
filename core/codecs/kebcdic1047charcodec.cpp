@@ -23,12 +23,12 @@
 #include "kebcdic1047charcodec.h"
 
 // lib
-#include <khechar.h>
+#include <character.h>
 // Qt
 #include <QtCore/QString>
 
 
-namespace KHECore {
+namespace Okteta {
 
 static quint16 UnicodeChars[256] =
 {
@@ -116,7 +116,7 @@ bool KEBCDIC1047CharCodec::encode( char *D, const QChar &C ) const
   return true;
 }
 
-KChar KEBCDIC1047CharCodec::decode( char Byte ) const
+Character KEBCDIC1047CharCodec::decode( char Byte ) const
 {
   return QChar(UnicodeChars[(unsigned char)Byte]);
 }

@@ -3,26 +3,26 @@ project( oktetaprogram )
 add_subdirectory( oktetakasten )
 
 include_directories(
-#TODO: remove this
-  ../core
-  ../gui
-  ../libs/kasten/core
-  ../libs/kasten/core/document
-  ../libs/kasten/core/io
-  ../libs/kasten/core/system
+  ${CMAKE_CURRENT_BINARY_DIR}/oktetakasten/controllers
+  oktetakasten/controllers/document
+  oktetakasten/controllers/view
+  oktetakasten/controllers/view/libfinddialog
+  oktetakasten/view
+  oktetakasten/io
+  oktetakasten/document
+  ../libs/kasten/controllers
   ../libs/kasten/gui
   ../libs/kasten/gui/view
   ../libs/kasten/gui/io
   ../libs/kasten/gui/system
   ../libs/kasten/gui/controller
-  ../libs/kasten/controllers
-  oktetakasten/document
-  oktetakasten/io
-  oktetakasten/view
-  ${CMAKE_CURRENT_BINARY_DIR}/oktetakasten/controllers
-  oktetakasten/controllers/document
-  oktetakasten/controllers/view
-  oktetakasten/controllers/view/libfinddialog
+  ../libs/kasten/core
+  ../libs/kasten/core/document
+  ../libs/kasten/core/io
+  ../libs/kasten/core/system
+#TODO: remove this
+  ../gui
+  ../core
 )
 
 set( okteta_SRCS

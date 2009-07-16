@@ -42,7 +42,7 @@ static const int DefaultMinLength = 3;
 
 StringsExtractTool::StringsExtractTool()
  : mExtractedStringsUptodate( false ), mSourceByteArrayModelUptodate( false ),
-   mCharCodec( KHECore::CharCodec::createCodec(KHECore::LocalEncoding) ), mMinLength( DefaultMinLength ),
+   mCharCodec( Okteta::CharCodec::createCodec(Okteta::LocalEncoding) ), mMinLength( DefaultMinLength ),
    mByteArrayDisplay( 0 ), mByteArrayModel( 0 ), mSourceByteArrayModel( 0 ), mSourceMinLength( 0 )
 {
     setObjectName( "Strings" );
@@ -107,7 +107,7 @@ void StringsExtractTool::setCharCodec( const QString &codecName )
         return;
 
     delete mCharCodec;
-    mCharCodec = KHECore::CharCodec::createCodec( codecName );
+    mCharCodec = Okteta::CharCodec::createCodec( codecName );
 }
 
 void StringsExtractTool::checkUptoDate()
@@ -171,7 +171,7 @@ void StringsExtractTool::extractStrings()
     mSourceByteArrayModel = mByteArrayModel;
     mSourceSelection = mByteArrayDisplay->selection();
     mSourceMinLength = mMinLength;
-    connect( mSourceByteArrayModel,  SIGNAL(contentsChanged( const KHE::ArrayChangeMetricsList & )),
+    connect( mSourceByteArrayModel,  SIGNAL(contentsChanged( const KDE::ArrayChangeMetricsList & )),
              SLOT(onSourceChanged()) );
     connect( mSourceByteArrayModel,  SIGNAL(destroyed()),
              SLOT(onSourceDestroyed()) );

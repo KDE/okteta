@@ -30,7 +30,7 @@
 
 class AbstractByteArrayFilter;
 
-namespace KHECore {
+namespace Okteta {
 class AbstractByteArrayModel;
 }
 
@@ -44,7 +44,7 @@ class FilterJob : public QObject // not yet: KJob
 
   public:
     FilterJob( AbstractByteArrayFilter *byteArrayFilter,
-               char *result, KHECore::AbstractByteArrayModel *model, const KHE::Section &section );
+               char *result, Okteta::AbstractByteArrayModel *model, const KDE::Section &section );
 
   public:
     bool exec();
@@ -56,13 +56,13 @@ class FilterJob : public QObject // not yet: KJob
     AbstractByteArrayFilter *mByteArrayFilter;
 
     char *mResult;
-    KHECore::AbstractByteArrayModel *mModel;
-    const KHE::Section mSection;
+    Okteta::AbstractByteArrayModel *mModel;
+    const KDE::Section mSection;
 };
 
 
 inline FilterJob::FilterJob( AbstractByteArrayFilter *byteArrayFilter,
-               char *result, KHECore::AbstractByteArrayModel *model, const KHE::Section &section )
+               char *result, Okteta::AbstractByteArrayModel *model, const KDE::Section &section )
  : mByteArrayFilter( byteArrayFilter ), mResult( result ), mModel( model ), mSection( section )
 {}
 

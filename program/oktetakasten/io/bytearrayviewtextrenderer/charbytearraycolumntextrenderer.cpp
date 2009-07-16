@@ -25,7 +25,7 @@
 // Okteta core
 #include <abstractbytearraymodel.h>
 #include <charcodec.h>
-#include <khechar.h>
+#include <character.h>
 // Qt
 #include <QtCore/QTextStream>
 
@@ -34,13 +34,13 @@ namespace Kasten
 {
 
 CharByteArrayColumnTextRenderer::CharByteArrayColumnTextRenderer(
-        const KHECore::AbstractByteArrayModel *byteArrayModel, int offset,
-        const KHEUI::CoordRange &coordRange,
+        const Okteta::AbstractByteArrayModel *byteArrayModel, int offset,
+        const Okteta::CoordRange &coordRange,
         int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
         const QString &charCodecName, QChar substituteChar, QChar undefinedChar )
  : AbstractByteArrayColumnTextRenderer( byteArrayModel, offset, coordRange,
         noOfBytesPerLine ),
-   mCharCodec( KHECore::CharCodec::createCodec(charCodecName) ),
+   mCharCodec( Okteta::CharCodec::createCodec(charCodecName) ),
    mSubstituteChar( substituteChar ),
    mUndefinedChar( undefinedChar )
 {
@@ -73,12 +73,12 @@ Q_UNUSED( isSubline )
         *stream << whiteSpace( t-e );
 
         // print char
-        const KHECore::KChar byteChar = mCharCodec->decode( mByteArrayModel->datum(mOffset) );
+        const Okteta::Character byteChar = mCharCodec->decode( mByteArrayModel->datum(mOffset) );
 
-        const QChar streamChar = byteChar.isUndefined() ?      KHECore::KChar(mUndefinedChar) :
+        const QChar streamChar = byteChar.isUndefined() ?      Okteta::Character(mUndefinedChar) :
                                  (!byteChar.isPrint()
                                   || byteChar == tabChar
-                                  || byteChar == returnChar) ? KHECore::KChar(mSubstituteChar) :
+                                  || byteChar == returnChar) ? Okteta::Character(mSubstituteChar) :
                                                                byteChar;
         *stream << streamChar;
 

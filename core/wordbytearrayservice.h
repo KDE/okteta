@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_WORDBYTEARRAYSERVICE_H
-#define KHE_CORE_WORDBYTEARRAYSERVICE_H
+#ifndef WORDBYTEARRAYSERVICE_H
+#define WORDBYTEARRAYSERVICE_H
 
 // lib
 #include "oktetacore_export.h"
@@ -31,7 +31,7 @@
 class QString;
 
 
-namespace KHECore
+namespace Okteta
 {
 
 class AbstractByteArrayModel;
@@ -127,7 +127,7 @@ class OKTETACORE_EXPORT WordByteArrayService
       * @param CharType
       * @return the section with a word around index.
       */
-    KHE::Section wordSection( unsigned int index ) const;
+    KDE::Section wordSection( unsigned int index ) const;
 
     /** returns the text starting at the given index until the first non-text byte
       * if there is no text byte at the index the result is empty.

@@ -39,8 +39,8 @@ KByteArrayDisplay::KByteArrayDisplay( KByteArrayDocument *document )
 {
     setBaseModel( mDocument );
 
-    KHECore::AbstractByteArrayModel *content = mDocument->content();
-    mWidget = new KHEUI::ByteArrayJanusView();
+    Okteta::AbstractByteArrayModel *content = mDocument->content();
+    mWidget = new Okteta::ByteArrayJanusView();
     mWidget->setByteArrayModel( content );
 
     const bool useOverwriteAsDefault = ( content->size() > 0 );
@@ -168,7 +168,7 @@ QString KByteArrayDisplay::charCodingName() const
 
 void KByteArrayDisplay::setValueCoding( int valueCoding )
 {
-    mWidget->setValueCoding( (KHEUI::AbstractByteArrayView::ValueCoding)valueCoding );
+    mWidget->setValueCoding( (Okteta::AbstractByteArrayView::ValueCoding)valueCoding );
 }
 
 void KByteArrayDisplay::setCharCoding( const QString& charCodingName )
@@ -181,7 +181,7 @@ void KByteArrayDisplay::setFocus()
     mWidget->setFocus();
 }
 
-KHE::Section KByteArrayDisplay::selection() const
+KDE::Section KByteArrayDisplay::selection() const
 {
     return mWidget->selection();
 }
@@ -233,7 +233,7 @@ void KByteArrayDisplay::toggleOffsetColumn( bool on )
 
 void KByteArrayDisplay::setResizeStyle( int resizeStyle )
 {
-    mWidget->setResizeStyle( (KHEUI::AbstractByteArrayView::ResizeStyle)resizeStyle );
+    mWidget->setResizeStyle( (Okteta::AbstractByteArrayView::ResizeStyle)resizeStyle );
 }
 
 void KByteArrayDisplay::setVisibleByteArrayCodings( int visibleColumns )

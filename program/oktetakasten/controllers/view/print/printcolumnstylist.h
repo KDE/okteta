@@ -29,10 +29,10 @@
 #include <QtGui/QPalette>
 
 
-namespace KHEUI
+namespace Okteta
 {
 
-class PrintColumnStylist : public KHEUI::AbstractColumnStylist
+class PrintColumnStylist : public Okteta::AbstractColumnStylist
 {
   public:
     PrintColumnStylist();

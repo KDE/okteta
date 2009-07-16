@@ -25,7 +25,7 @@
 // lib
 #include <kbytearraylineedit.h>
 // Okteta core
-#include <khe.h>
+#include <oktetacore.h>
 // KDE
 #include <KGlobal>
 #include <KLocale>

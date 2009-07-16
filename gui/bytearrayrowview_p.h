@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_BYTEARRAYROWVIEW_P_H
-#define KHE_UI_BYTEARRAYROWVIEW_P_H
+#ifndef OKTETA_BYTEARRAYROWVIEW_P_H
+#define OKTETA_BYTEARRAYROWVIEW_P_H
 
 // lib
 #include "bytearrayrowview.h"
@@ -32,7 +32,7 @@
 class QTimer;
 
 
-namespace KHEUI
+namespace Okteta
 {
 class BorderColumnRenderer;
 class WidgetColumnStylist;
@@ -73,7 +73,7 @@ class ByteArrayRowViewPrivate : public AbstractByteArrayViewPrivate
     QSize minimumSizeHint() const;
 
   public: // modification access
-    void setByteArrayModel( KHECore::AbstractByteArrayModel* byteArrayModel );
+    void setByteArrayModel( Okteta::AbstractByteArrayModel* byteArrayModel );
 
   public: // AbstractByteArrayViewPrivate API
     virtual void ensureCursorVisible();

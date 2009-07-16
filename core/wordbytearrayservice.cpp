@@ -24,28 +24,28 @@
 
 // lib
 #include "abstractbytearraymodel.h"
-#include "khechar.h"
+#include "character.h"
 #include "charcodec.h"
 
 
-namespace KHECore
+namespace Okteta
 {
 
 WordByteArrayService::WordByteArrayService( const AbstractByteArrayModel* byteArrayModel, const CharCodec* charCodec )
  : mByteArrayModel( byteArrayModel ), mCharCodec( charCodec )
 {}
 
-KHE::Section WordByteArrayService::wordSection( unsigned int index ) const
+KDE::Section WordByteArrayService::wordSection( unsigned int index ) const
 {
     return isWordChar(index) ?
-            KHE::Section( indexOfWordStart(index), indexOfWordEnd(index) ) :
-            KHE::Section();
+            KDE::Section( indexOfWordStart(index), indexOfWordEnd(index) ) :
+            KDE::Section();
 }
 
 
 bool WordByteArrayService::isWordChar( unsigned int index ) const
 {
-    const KChar decodedChar = mCharCodec->decode( mByteArrayModel->datum(index) );
+    const Character decodedChar = mCharCodec->decode( mByteArrayModel->datum(index) );
     return !decodedChar.isUndefined() && decodedChar.isLetterOrNumber();
 }
 
@@ -252,7 +252,7 @@ QString WordByteArrayService::text( unsigned int index, int lastIndex ) const
 
     for( ; index<behindLastIndex; ++index )
     {
-        const KChar decodedChar = mCharCodec->decode( mByteArrayModel->datum(index) );
+        const Character decodedChar = mCharCodec->decode( mByteArrayModel->datum(index) );
         // TODO: handle line breaks, separators and spacing, controlled by flags given as parameter
         const bool isTextChar = ( !decodedChar.isUndefined() &&
                                   (decodedChar.isLetterOrNumber() || decodedChar.isSpace() || decodedChar.isPunct()) );

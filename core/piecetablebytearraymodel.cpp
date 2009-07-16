@@ -24,7 +24,7 @@
 #include "piecetablebytearraymodel_p.h"
 
 
-namespace KHECore
+namespace Okteta
 {
 
 PieceTableByteArrayModel::PieceTableByteArrayModel( const char *data, unsigned int size,
@@ -109,12 +109,12 @@ QString PieceTableByteArrayModel::versionDescription( int versionIndex ) const {
 void PieceTableByteArrayModel::revertToVersionByIndex( int versionIndex )
 { d->revertToVersionByIndex( versionIndex ); }
 
-void PieceTableByteArrayModel::addBookmarks( const QList<KHECore::Bookmark> &bookmarks )
+void PieceTableByteArrayModel::addBookmarks( const QList<Okteta::Bookmark> &bookmarks )
 {
     d->addBookmarks( bookmarks );
 }
 
-void PieceTableByteArrayModel::removeBookmarks( const QList<KHECore::Bookmark> &bookmarks )
+void PieceTableByteArrayModel::removeBookmarks( const QList<Okteta::Bookmark> &bookmarks )
 {
     d->removeBookmarks( bookmarks );
 }
@@ -124,22 +124,22 @@ void PieceTableByteArrayModel::removeAllBookmarks()
     d->removeAllBookmarks();
 }
 
-void PieceTableByteArrayModel::setBookmark( unsigned int index, const KHECore::Bookmark& bookmark )
+void PieceTableByteArrayModel::setBookmark( unsigned int index, const Okteta::Bookmark& bookmark )
 {
     d->setBookmark( index, bookmark );
 }
 
-KHECore::BookmarksConstIterator PieceTableByteArrayModel::createBookmarksConstIterator() const
+Okteta::BookmarksConstIterator PieceTableByteArrayModel::createBookmarksConstIterator() const
 {
     return d->createBookmarksConstIterator();
 }
 
-const KHECore::Bookmark& PieceTableByteArrayModel::bookmarkAt( unsigned int index ) const
+const Okteta::Bookmark& PieceTableByteArrayModel::bookmarkAt( unsigned int index ) const
 {
     return d->bookmarkAt( index );
 }
 
-const KHECore::Bookmark& PieceTableByteArrayModel::bookmarkFor( int offset ) const
+const Okteta::Bookmark& PieceTableByteArrayModel::bookmarkFor( int offset ) const
 {
     return d->bookmarkFor( offset );
 }
@@ -179,7 +179,7 @@ QByteArray PieceTableByteArrayModel::initialData() const
     return d->initialData();
 }
 
-void PieceTableByteArrayModel::doChanges( const QList<KHECore::ByteArrayChange>& changes,
+void PieceTableByteArrayModel::doChanges( const QList<Okteta::ByteArrayChange>& changes,
                                            int oldVersionIndex, int newVersionIndex )
 {
     return d->doChanges( changes, oldVersionIndex, newVersionIndex );

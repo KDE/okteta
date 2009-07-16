@@ -31,7 +31,7 @@
 #include <QtCore/QString>
 
 
-namespace KHECore {
+namespace Okteta {
 
 ValueCodec *ValueCodec::createCodec( ValueCoding valueCoding )
 {

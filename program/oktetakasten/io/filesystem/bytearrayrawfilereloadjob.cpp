@@ -54,7 +54,7 @@ void ByteArrayRawFileReloadJob::startReadFromFile()
     // TODO: moved this here to avoid marshalling the change signals out of the thread. Good idea?
     if( success )
     {
-        KHECore::PieceTableByteArrayModel *byteArray = qobject_cast<KHECore::PieceTableByteArrayModel*>( document->content() );
+        Okteta::PieceTableByteArrayModel *byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>( document->content() );
         byteArray->setData( reloadThread->data(), reloadThread->size(), false );
     }
     delete reloadThread;

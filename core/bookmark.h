@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_BOOKMARK_H
-#define KHE_CORE_BOOKMARK_H
+#ifndef BOOKMARK_H
+#define BOOKMARK_H
 
 // lib
 #include "oktetacore_export.h"
@@ -29,7 +29,7 @@
 #include <QtCore/QString>
 
 
-namespace KHECore
+namespace Okteta
 {
 
 // TODO: do we need the invalid status?

@@ -32,7 +32,7 @@
 #include <QtGui/QKeyEvent>
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 KNavigator::KNavigator( AbstractByteArrayView* view, KController* parent )
@@ -114,14 +114,14 @@ void KNavigator::moveCursor( KMoveAction action, bool select )
     {
     case MoveBackward:     tableCursor->gotoPreviousByte(); break;
     case MoveWordBackward: {
-            const KHECore::WordByteArrayService WBS( mView->byteArrayModel(), mView->charCodec() );
+            const Okteta::WordByteArrayService WBS( mView->byteArrayModel(), mView->charCodec() );
             const int newIndex = WBS.indexOfPreviousWordStart( tableCursor->realIndex() );
             tableCursor->gotoIndex( newIndex );
         }
         break;
     case MoveForward:      tableCursor->gotoNextByte();     break;
     case MoveWordForward:  {
-            const KHECore::WordByteArrayService WBS( mView->byteArrayModel(), mView->charCodec() );
+            const Okteta::WordByteArrayService WBS( mView->byteArrayModel(), mView->charCodec() );
             const int newIndex = WBS.indexOfNextWordStart( tableCursor->realIndex() );
             tableCursor->gotoCIndex( newIndex );
         }

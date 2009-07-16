@@ -20,14 +20,14 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_BYTEARRAYROWVIEW_H
-#define KHE_UI_BYTEARRAYROWVIEW_H
+#ifndef OKTETA_BYTEARRAYROWVIEW_H
+#define OKTETA_BYTEARRAYROWVIEW_H
 
 // lib
 #include "abstractbytearrayview.h"
 
 
-namespace KHEUI
+namespace Okteta
 {
 class KValueEditor;
 
@@ -67,7 +67,7 @@ class OKTETAGUI_EXPORT ByteArrayRowView : public AbstractByteArrayView
 
     virtual bool isByteTypeColored() const;
 
-    virtual void setByteArrayModel( KHECore::AbstractByteArrayModel* byteArrayModel );
+    virtual void setByteArrayModel( Okteta::AbstractByteArrayModel* byteArrayModel );
     virtual void toggleOffsetColumn( bool offsetColumnVisible );
     virtual void setByteSpacingWidth( int/*KPixelX*/ byteSpacingWidth ) ;
     virtual void setNoOfGroupedBytes( int noOfGroupedBytes );

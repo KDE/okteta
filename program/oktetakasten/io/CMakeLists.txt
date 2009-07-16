@@ -1,17 +1,17 @@
 include_directories(
-  ../../../core
-  ../../../gui
-  ../../../gui/libcolumnsview
+  ../view
+  ../document
+  ../../../libs/kasten/gui
+  ../../../libs/kasten/gui/view
+  ../../../libs/kasten/gui/io
   ../../../libs/kasten/core
   ../../../libs/kasten/core/entity
   ../../../libs/kasten/core/document
   ../../../libs/kasten/core/io
   ../../../libs/kasten/core/io/filesystem
-  ../../../libs/kasten/gui
-  ../../../libs/kasten/gui/view
-  ../../../libs/kasten/gui/io
-  ../document
-  ../view
+  ../../../gui
+  ../../../gui/libcolumnsview
+  ../../../core
 )
 
 if(KDE4_BUILD_TESTS)

@@ -30,9 +30,9 @@ KByteArraySelection::KByteArraySelection()
 {}
 
 bool KByteArraySelection::isValid() const { return mSection.isValid(); }
-KHE::Section KByteArraySelection::section() const { return mSection; }
+KDE::Section KByteArraySelection::section() const { return mSection; }
 
-void KByteArraySelection::setSection( const KHE::Section &section ) { mSection = section; }
+void KByteArraySelection::setSection( const KDE::Section &section ) { mSection = section; }
 
 KByteArraySelection::~KByteArraySelection() {}
 

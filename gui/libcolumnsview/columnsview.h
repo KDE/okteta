@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_COLUMNSVIEW_H
-#define KHE_UI_COLUMNSVIEW_H
+#ifndef OKTETA_COLUMNSVIEW_H
+#define OKTETA_COLUMNSVIEW_H
 
 
 // lib
@@ -34,7 +34,7 @@
 #include <QtGui/QAbstractScrollArea>
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 class AbstractColumnRenderer;
@@ -78,11 +78,11 @@ class OKTETAGUI_EXPORT ColumnsView : public QAbstractScrollArea
     /** gives the index of the first and the last line that would be visible
       * these lines might not contain anything
       */
-    KHE::Section visibleLines() const;
+    KDE::Section visibleLines() const;
     /** gives the index of the first and the last line that would be visible in the given pixel range
       * these lines might not contain anything
       */
-    KHE::Section visibleLines( const KPixelYs &YPixels ) const;
+    KDE::Section visibleLines( const KPixelYs &YPixels ) const;
 
     /** @return visible width of the current view */
     KPixelX visibleWidth() const;
@@ -139,7 +139,7 @@ class OKTETAGUI_EXPORT ColumnsView : public QAbstractScrollArea
     /** calls updateContent for the Column */
     void updateColumn( AbstractColumnRenderer& columnRenderer );
     /** calls updateContent for the Column for the given lines, if needed */
-    void updateColumn( AbstractColumnRenderer& columnRenderer, const KHE::Section& lines );
+    void updateColumn( AbstractColumnRenderer& columnRenderer, const KDE::Section& lines );
 
   private:
     ColumnsViewPrivate * const d;

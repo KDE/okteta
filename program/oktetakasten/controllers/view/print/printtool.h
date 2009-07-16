@@ -26,7 +26,7 @@
 // Qt
 #include <QtCore/QObject>
 
-namespace KHECore {
+namespace Okteta {
 class AbstractByteArrayModel;
 }
 
@@ -79,7 +79,7 @@ class PrintTool : public QObject
     KByteArrayDocument *mDocument;
 
     KByteArrayDisplay* mByteArrayDisplay;
-    KHECore::AbstractByteArrayModel *mByteArrayModel;
+    Okteta::AbstractByteArrayModel *mByteArrayModel;
 };
 
 }

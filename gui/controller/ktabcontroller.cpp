@@ -27,7 +27,7 @@
 // Qt
 #include <QtGui/QKeyEvent>
 
-namespace KHEUI
+namespace Okteta
 {
 
 KTabController::KTabController( AbstractByteArrayView* view, KController* parent )

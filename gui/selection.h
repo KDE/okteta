@@ -20,14 +20,14 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_SELECTION_H
-#define KHE_UI_SELECTION_H
+#ifndef OKTETA_SELECTION_H
+#define OKTETA_SELECTION_H
 
 // commonlib
 #include <section.h>
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 /** This class describes a selected section of the buffer.
@@ -35,7 +35,7 @@ namespace KHEUI
   * mouse and keyboard commands it offers two ways to set its range:
   * - by giving the startposition (of the cursor) of an interactive selection
   *   and the subsequent end positions (until selection is finished)
-  * - direct setting (as provided by KHE::Section)
+  * - direct setting (as provided by KDE::Section)
   *
   * the interactive selection takes care that
   *
@@ -54,7 +54,7 @@ class Selection
 
   public:
     Selection &operator=( const Selection &other );
-    Selection &operator=( const KHE::Section &section );
+    Selection &operator=( const KDE::Section &section );
 
   public: // modification access
     /** starts the selection.
@@ -96,7 +96,7 @@ class Selection
     /** 
       * @return section
       */
-    const KHE::Section &section() const;
+    const KDE::Section &section() const;
 
 
   public: // logic access
@@ -116,7 +116,7 @@ class Selection
 
   protected:
     /** mSection */
-    KHE::Section mSection;
+    KDE::Section mSection;
     /** cursor index where the selection starts */
     int mAnchor;
 };
@@ -133,7 +133,7 @@ inline Selection &Selection::operator=( const Selection &other )
     return *this;
 }
 
-inline Selection &Selection::operator=( const KHE::Section &section )
+inline Selection &Selection::operator=( const KDE::Section &section )
 {
     mSection = section;
     mAnchor = section.start();
@@ -177,7 +177,7 @@ inline void Selection::setForward( bool Forward )
     mAnchor = Forward ? mSection.start() : mSection.nextBehindEnd();
 }
 
-inline const KHE::Section &Selection::section() const { return mSection; }
+inline const KDE::Section &Selection::section() const { return mSection; }
 inline int Selection::anchor()              const { return mAnchor; }
 inline int Selection::start()               const { return mSection.start(); }
 inline int Selection::end()                 const { return mSection.end(); }
@@ -203,12 +203,12 @@ inline void Selection::adaptToSwap( int firstOffset, int secondOffset, int secon
     if( mSection.end() < firstOffset || mSection.start() > secondOffset+secondLength-1 )
         return;
 
-    const KHE::Section firstSection( firstOffset, secondOffset-1 );
+    const KDE::Section firstSection( firstOffset, secondOffset-1 );
     if( firstSection.includes(mSection) )
         mSection.moveBy( secondLength );
     else
     {
-        const KHE::Section secondSection = KHE::Section::fromWidth( secondOffset, secondLength );
+        const KDE::Section secondSection = KDE::Section::fromWidth( secondOffset, secondLength );
         if( secondSection.includes(mSection) )
             mSection.moveBy( -firstSection.width() );
         else

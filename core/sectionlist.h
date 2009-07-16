@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_SECTIONLIST_H
-#define KHE_SECTIONLIST_H
+#ifndef KDE_SECTIONLIST_H
+#define KDE_SECTIONLIST_H
 
 // lib
 #include "section.h"
@@ -29,7 +29,7 @@
 #include <QtCore/QLinkedList>
 
 
-namespace KHE {
+namespace KDE {
 
 /**
 @author Friedrich W. H.  Kossebau

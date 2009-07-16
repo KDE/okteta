@@ -25,8 +25,8 @@
 
 
 class QByteArray;
-namespace KHE { class Section; }
-namespace KHECore { class AbstractByteArrayModel; }
+namespace KDE { class Section; }
+namespace Okteta { class AbstractByteArrayModel; }
 
 
 // some defines
@@ -35,13 +35,13 @@ static const char SecondMarkChar = 3;
 static const char PaintChar = 1;
 static const char BlankChar = '\0';
 
-void textureByteArrayModel( KHECore::AbstractByteArrayModel *ByteArrayModel,
+void textureByteArrayModel( Okteta::AbstractByteArrayModel *ByteArrayModel,
                             unsigned char b = 1, unsigned char e = 255,
                             unsigned int From = 0, int To = -1 );
 
-void textureByteArrayModel( KHECore::AbstractByteArrayModel *byteArrayModel,
+void textureByteArrayModel( Okteta::AbstractByteArrayModel *byteArrayModel,
                             unsigned char b, unsigned char e,
-                            const KHE::Section &section );
+                            const KDE::Section &section );
 
 void textureByteArray( QByteArray *byteArray,
                        unsigned char b = 1, unsigned char e = 255,
@@ -49,6 +49,6 @@ void textureByteArray( QByteArray *byteArray,
 
 void textureByteArray( QByteArray *byteArray,
                        unsigned char b, unsigned char e,
-                       const KHE::Section &section );
+                       const KDE::Section &section );
 
 #endif

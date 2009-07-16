@@ -30,7 +30,7 @@
 #include <QtCore/QStack>
 #include <QtCore/QString>
 
-namespace KHE {
+namespace KDE {
 class SectionList;
 class ArrayChangeMetricsList;
 }
@@ -60,7 +60,7 @@ class PieceTableChangeHistory
      * @return true if there were changes to revert, false otherwise
      */
     bool revertBeforeChange( PieceTable *pieceTable, int changeId,
-                             KHE::SectionList *changedRanges, KHE::ArrayChangeMetricsList *changeList );
+                             KDE::SectionList *changedRanges, KDE::ArrayChangeMetricsList *changeList );
 
     /// 
     void openGroupedChange( const QString &description ); // TODO: hand over description? user change id?
@@ -84,7 +84,7 @@ class PieceTableChangeHistory
     /// @return size of the data used by the applied changes
     int appliedChangesDataSize() const;
 
-    void getChangeData( KHE::ArrayChangeMetrics* metrics, int *storageOffset, int versionIndex ) const;
+    void getChangeData( KDE::ArrayChangeMetrics* metrics, int *storageOffset, int versionIndex ) const;
 
   protected:
     /// if true, try to merge changes

@@ -33,13 +33,13 @@ namespace Kasten
 {
 
 ValueByteArrayColumnTextRenderer::ValueByteArrayColumnTextRenderer(
-    const KHECore::AbstractByteArrayModel *byteArrayModel, int offset,
-        const KHEUI::CoordRange &coordRange,
+    const Okteta::AbstractByteArrayModel *byteArrayModel, int offset,
+        const Okteta::CoordRange &coordRange,
         int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
-        KHECore::ValueCoding valueCoding )
+        Okteta::ValueCoding valueCoding )
   : AbstractByteArrayColumnTextRenderer( byteArrayModel, offset, coordRange,
     noOfBytesPerLine ),
-   mValueCodec( KHECore::ValueCodec::createCodec(valueCoding) )
+   mValueCodec( Okteta::ValueCodec::createCodec(valueCoding) )
 {
     setWidths( mValueCodec->encodingWidth(), byteSpacingWidth, noOfGroupedBytes );
 }

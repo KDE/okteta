@@ -20,19 +20,19 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_ABSTRACTBYTEARRAYVIEW_H
-#define KHE_UI_ABSTRACTBYTEARRAYVIEW_H
+#ifndef OKTETA_ABSTRACTBYTEARRAYVIEW_H
+#define OKTETA_ABSTRACTBYTEARRAYVIEW_H
 
 // lib
 #include "columnsview.h"
 
-namespace KHECore {
+namespace Okteta {
 class Bookmark;
 class ValueCodec;
 class CharCodec;
 class AbstractByteArrayModel;
 }
-namespace KHE {
+namespace KDE {
 class ArrayChangeMetricsList;
 class Section;
 }
@@ -40,7 +40,7 @@ class Section;
 class QMimeData;
 class QByteArray;
 
-namespace KHEUI
+namespace Okteta
 {
 class KController;
 class AbstractWheelController;
@@ -90,7 +90,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     virtual ~AbstractByteArrayView();
 
   public: // value access
-    KHECore::AbstractByteArrayModel* byteArrayModel() const;
+    Okteta::AbstractByteArrayModel* byteArrayModel() const;
     bool isModified() const;
 
     bool isOverwriteMode() const;
@@ -115,7 +115,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
 
     /** returns true if there is a selected range in the array */
     bool hasSelectedData() const;
-    KHE::Section selection() const;
+    KDE::Section selection() const;
 
     ValueCoding valueCoding() const;
     /**
@@ -155,7 +155,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
 
 
   public:
-    virtual void setByteArrayModel( KHECore::AbstractByteArrayModel* byteArrayModel );
+    virtual void setByteArrayModel( Okteta::AbstractByteArrayModel* byteArrayModel );
 
     /** switches the Offset column on/off */
     virtual void toggleOffsetColumn( bool offsetColumnVisible ) = 0;
@@ -189,7 +189,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
       * Default is 4 for NoOfGroupedBytes
       */
     virtual void setBufferSpacing( int/*KPixelX*/ byteSpacingWidth, int noOfGroupedBytes = 0, int/*KPixelX*/ groupSpacingWidth = 0 ) = 0;
-    /** sets the format of the value column. Default is KHE::HexadecimalCoding */
+    /** sets the format of the value column. Default is KDE::HexadecimalCoding */
     virtual void setValueCoding( ValueCoding valueCoding ) = 0;
   // char column parameters
     /** sets whether control chars or "non-printing" chars should be displayed in the char column
@@ -207,10 +207,10 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
      * returns true if there was a change
      */
     virtual void setUndefinedChar( QChar undefinedChar ) = 0;
-    /** sets the encoding of the char column. Default is KHE::LocalEncoding.
+    /** sets the encoding of the char column. Default is KDE::LocalEncoding.
       * If the encoding is not available the format will not be changed. */
     virtual void setCharCoding( CharCoding charCoding ) = 0;
-    /** sets the encoding of the char column. Default is KHE::LocalEncoding.
+    /** sets the encoding of the char column. Default is KDE::LocalEncoding.
       * If the encoding is not available the format will not be changed.
       * @param Encoding name of the encoding
       */
@@ -221,7 +221,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     /** sets whether the data should be treated modified or not */
     void setModified( bool modified );
 
-    /** sets the resizestyle for the value column. Default is KHE::FullSizeUsage */
+    /** sets the resizestyle for the value column. Default is KDE::FullSizeUsage */
     void setResizeStyle( ResizeStyle resizeStyle );
     /** sets whether the widget is readonly or not, Default is true.
       * If the databuffer which is worked on can't be written the widget stays readonly
@@ -232,7 +232,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     /** sets whether the widget is in overwrite mode or not. Default is true. */
     void setOverwriteMode( bool overwriteMode );
 
-    /** sets the number of bytes per line, switching the resize style to KHE::NoResize */
+    /** sets the number of bytes per line, switching the resize style to KDE::NoResize */
     void setNoOfBytesPerLine( int noOfBytesPerLine );
     /** sets absolut offset of the data */
     void setStartOffset( int startOffset );
@@ -329,7 +329,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     void readOnlyChanged( bool isReadOnly );
     /** selection has changed */
     void selectionChanged( bool hasSelection );
-    void selectionChanged( const KHE::Section& selection );
+    void selectionChanged( const KDE::Section& selection );
     /** there is a cut available or not */
     void cutAvailable( bool Really );
     /** there is a copy available or not */
@@ -345,8 +345,8 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     void updateChanged();
 
   protected:
-    const KHECore::ValueCodec* valueCodec() const;
-    const KHECore::CharCodec* charCodec() const;
+    const Okteta::ValueCodec* valueCodec() const;
+    const Okteta::CharCodec* charCodec() const;
     ByteArrayTableCursor* tableCursor() const;
     ByteArrayTableRanges* tableRanges() const;
     ByteArrayTableLayout* layout() const;
@@ -380,8 +380,8 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     Q_DECLARE_PRIVATE( AbstractByteArrayView )
     Q_PRIVATE_SLOT( d_func(), void adaptController() )
     Q_PRIVATE_SLOT( d_func(), void onByteArrayReadOnlyChange(bool isByteArrayReadOnly) )
-    Q_PRIVATE_SLOT( d_func(), void onContentsChanged( const KHE::ArrayChangeMetricsList &changeList ) )
-    Q_PRIVATE_SLOT( d_func(), void onBookmarksChange( const QList<KHECore::Bookmark> &bookmarks ) )
+    Q_PRIVATE_SLOT( d_func(), void onContentsChanged( const KDE::ArrayChangeMetricsList &changeList ) )
+    Q_PRIVATE_SLOT( d_func(), void onBookmarksChange( const QList<Okteta::Bookmark> &bookmarks ) )
     Q_PRIVATE_SLOT( d_func(), void onRevertedToVersionIndex( int versionIndex ) )
 };
 

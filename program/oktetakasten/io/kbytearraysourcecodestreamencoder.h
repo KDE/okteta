@@ -79,11 +79,11 @@ class KByteArraySourceCodeStreamEncoder : public KAbstractByteArrayStreamEncoder
   protected: // KAbstractByteArrayStreamEncoder API
     virtual bool encodeDataToStream( QIODevice *device,
                                      const KByteArrayDisplay* byteArrayView,
-                                     const KHECore::AbstractByteArrayModel *byteArrayModel,
-                                     const KHE::Section &section );
+                                     const Okteta::AbstractByteArrayModel *byteArrayModel,
+                                     const KDE::Section &section );
 
   protected:
-    QString printFormatted( const KHECore::AbstractByteArrayModel* byteArrayModel, int pos, unsigned int dataSize ) const;
+    QString printFormatted( const Okteta::AbstractByteArrayModel* byteArrayModel, int pos, unsigned int dataSize ) const;
 
   protected:
     SourceCodeStreamEncoderSettings mSettings;

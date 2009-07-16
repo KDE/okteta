@@ -23,12 +23,12 @@
 #include "versionableiftest.h"
 
 // test object
-#include <kversionable.h>
+#include <versionable.h>
 // Qt
 #include <QtTest/QtTest>
 #include <QtTest/QSignalSpy>
 
-namespace KHECore
+namespace Okteta
 {
 
 // ---------------------------------------------------------------- Tests -----
@@ -37,7 +37,7 @@ void VersionableIfTest::init()
 {
     mObject = createVersionable();
 
-    mVersionableControl = qobject_cast<KHECore::Versionable*>( mObject );
+    mVersionableControl = qobject_cast<Okteta::Versionable*>( mObject );
 
     mRevertedToVersionIndexSpy =
         new QSignalSpy( mObject, SIGNAL(revertedToVersionIndex(int)) );
@@ -120,7 +120,7 @@ weiter an anfang
   unsigned int Size = mVersionable->size();
   Section FillSection = Section::fromWidth( 0, Size );
 
-  KFixedSizeByteArrayModel Copy( Size, PaintChar );
+  FixedSizeByteArrayModel Copy( Size, PaintChar );
 
   // fill() all
   mVersionable->setModified( false );

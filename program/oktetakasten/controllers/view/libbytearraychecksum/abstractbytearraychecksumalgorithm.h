@@ -27,10 +27,10 @@
 #include <QtCore/QObject>
 
 class AbstractByteArrayChecksumParameterSet;
-namespace KHECore {
+namespace Okteta {
 class AbstractByteArrayModel;
 }
-namespace KHE {
+namespace KDE {
 class Section;
 }
 class QString;
@@ -48,7 +48,7 @@ class AbstractByteArrayChecksumAlgorithm : public QObject
     virtual ~AbstractByteArrayChecksumAlgorithm();
 
   public: // API to be implemented
-    virtual bool calculateChecksum( QString* result, const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const = 0;
+    virtual bool calculateChecksum( QString* result, const Okteta::AbstractByteArrayModel* model, const KDE::Section& section ) const = 0;
     /** used by the editor to get write access to the parameters */
     virtual AbstractByteArrayChecksumParameterSet* parameterSet() = 0;
 

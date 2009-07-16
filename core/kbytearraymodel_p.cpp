@@ -32,7 +32,7 @@ static const unsigned int maxChunkSize = 1024*10; // TODO: get max. memory page 
 
 // TODO: think about realloc & Co.
 
-namespace KHECore {
+namespace Okteta {
 
 
 KByteArrayModelPrivate::KByteArrayModelPrivate( KByteArrayModel *parent,
@@ -91,7 +91,7 @@ void KByteArrayModelPrivate::setData( char *data, unsigned int size, int rawSize
     m_keepsMemory = keepMemory;
 
     m_modified = false;
-    emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(0, oldSize, size) );
+    emit p->contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(0, oldSize, size) );
     emit p->modificationChanged( false );
 }
 
@@ -116,7 +116,7 @@ int KByteArrayModelPrivate::insert( int position, const char* data, int length )
     const bool bookmarksModified = m_bookmarks.adjustToReplaced( position, 0, length );
     m_modified = true;
 
-    emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(position, 0, length) );
+    emit p->contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(position, 0, length) );
     if( bookmarksModified ) emit p->bookmarksModified( true );
     emit p->modificationChanged( true );
     return length;
@@ -144,7 +144,7 @@ int KByteArrayModelPrivate::remove( const Section &section )
     const bool bookmarksModified = m_bookmarks.adjustToReplaced( removeSection.start(), removeSection.width(), 0 );
     m_modified = true;
 
-    emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(removeSection.start(), removeSection.width(), 0) );
+    emit p->contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(removeSection.start(), removeSection.width(), 0) );
     if( bookmarksModified ) emit p->bookmarksModified( true );
     emit p->modificationChanged( true );
     return removeSection.width();
@@ -216,7 +216,7 @@ unsigned int KByteArrayModelPrivate::replace( const Section &section, const char
     m_modified = true;
 
     emit p->contentsChanged(
-        KHE::ArrayChangeMetricsList::oneReplacement(removeSection.start(), removeSection.width(), inputLength) );
+        KDE::ArrayChangeMetricsList::oneReplacement(removeSection.start(), removeSection.width(), inputLength) );
     if( bookmarksModified ) emit p->bookmarksModified( true );
     emit p->modificationChanged( true );
     return inputLength;
@@ -298,7 +298,7 @@ bool KByteArrayModelPrivate::swap( int firstStart, const Section &secondSection 
     m_modified = true;
 
     emit p->contentsChanged(
-        KHE::ArrayChangeMetricsList::oneSwapping(firstStart,sourceSection.start(),sourceSection.width()) );
+        KDE::ArrayChangeMetricsList::oneSwapping(firstStart,sourceSection.start(),sourceSection.width()) );
     if( bookmarksModified ) emit p->bookmarksModified( true );
     emit p->modificationChanged( true );
     return true;
@@ -324,7 +324,7 @@ int KByteArrayModelPrivate::fill( const char fillDatum, unsigned int position, i
     memset( &m_data[position], fillDatum, fillLength );
     m_modified = true;
 
-    emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(position,fillLength,fillLength) );
+    emit p->contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(position,fillLength,fillLength) );
     emit p->modificationChanged( true );
     return fillLength;
 }

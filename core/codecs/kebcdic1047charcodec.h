@@ -20,14 +20,14 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_KEBCDIC1047CHARCODEC_H
-#define KHE_CORE_KEBCDIC1047CHARCODEC_H
+#ifndef KEBCDIC1047CHARCODEC_H
+#define KEBCDIC1047CHARCODEC_H
 
 // lib
 #include <charcodec.h>
 
 
-namespace KHECore
+namespace Okteta
 {
 
 //
@@ -37,7 +37,7 @@ class KEBCDIC1047CharCodec : public CharCodec
     KEBCDIC1047CharCodec();
 
   public: // CharCodec API
-    virtual KChar decode( char Byte ) const;
+    virtual Character decode( char Byte ) const;
     virtual bool encode( char *D, const QChar &C ) const;
     virtual bool canEncode( const QChar &C ) const;
     virtual const QString& name() const;

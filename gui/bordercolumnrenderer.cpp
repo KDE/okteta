@@ -29,7 +29,7 @@
 #include <QtGui/QStyle>
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 static const KPixelX BorderMargin = 4;

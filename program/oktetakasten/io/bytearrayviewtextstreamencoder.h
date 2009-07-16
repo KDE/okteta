@@ -26,9 +26,9 @@
 // lib
 #include "kabstractbytearraystreamencoder.h"
 // Okteta gui
-// #include <koffsetformat.h>
+// #include <offsetformat.h>
 // Okteta core
-#include <khe.h>
+#include <oktetacore.h>
 // Qt
 #include <QtCore/QString>
 
@@ -41,18 +41,18 @@ class ByteArrayViewTextStreamEncoderSettings
   public:
     ByteArrayViewTextStreamEncoderSettings();
   public:
-//     KHEUI::KOffsetFormat::KFormat offsetFormat;
+//     Okteta::OffsetFormat::Format offsetFormat;
     int codingWidth;
     int firstLineOffset;
     int startOffset;
     int delta;
-    KHECore::ValueCoding valueCoding;
+    Okteta::ValueCoding valueCoding;
     QString codecName;
     QChar undefinedChar;
     QChar substituteChar;
     QString separation;
-//     KHECore::CharCodec *CharCodec;
-//     KHEUI::KOffsetFormat::print printFunction;
+//     Okteta::CharCodec *CharCodec;
+//     Okteta::OffsetFormat::print printFunction;
 };
 
 // TODO: this could rather be one of the default cop
@@ -67,8 +67,8 @@ class ByteArrayViewTextStreamEncoder : public KAbstractByteArrayStreamEncoder
   protected: // KAbstractByteArrayStreamEncoder API
     virtual bool encodeDataToStream( QIODevice *device,
                                      const KByteArrayDisplay* byteArrayView,
-                                     const KHECore::AbstractByteArrayModel *byteArrayModel,
-                                     const KHE::Section &section );
+                                     const Okteta::AbstractByteArrayModel *byteArrayModel,
+                                     const KDE::Section &section );
 
   protected:
     ByteArrayViewTextStreamEncoderSettings mSettings;

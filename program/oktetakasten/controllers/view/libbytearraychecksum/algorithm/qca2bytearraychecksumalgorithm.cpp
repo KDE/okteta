@@ -38,7 +38,7 @@ Qca2ByteArrayChecksumAlgorithm::Qca2ByteArrayChecksumAlgorithm( const QString& n
 AbstractByteArrayChecksumParameterSet* Qca2ByteArrayChecksumAlgorithm::parameterSet() { return &mParameterSet; }
 
 bool Qca2ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
-                                                        const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
+                                                        const Okteta::AbstractByteArrayModel* model, const KDE::Section& section ) const
 {
     QCA::Hash hash( mType );
 

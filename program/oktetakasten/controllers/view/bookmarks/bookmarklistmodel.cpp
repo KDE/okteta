@@ -38,12 +38,12 @@ BookmarkListModel::BookmarkListModel( BookmarksTool* tool, QObject* parent )
  : QAbstractTableModel( parent ),
    mTool( tool )
 {
-    mPrintFunction = KHEUI::KOffsetFormat::printFunction( KHEUI::KOffsetFormat::Hexadecimal );
+    mPrintFunction = Okteta::OffsetFormat::printFunction( Okteta::OffsetFormat::Hexadecimal );
 
     connect( mTool, SIGNAL(hasBookmarksChanged( bool )), SLOT(onHasBookmarksChanged( bool )) );
-    connect( mTool, SIGNAL(bookmarksAdded( const QList<KHECore::Bookmark>& )),
+    connect( mTool, SIGNAL(bookmarksAdded( const QList<Okteta::Bookmark>& )),
              SLOT(onBookmarksChanged()) );
-    connect( mTool, SIGNAL(bookmarksRemoved( const QList<KHECore::Bookmark>& )),
+    connect( mTool, SIGNAL(bookmarksRemoved( const QList<Okteta::Bookmark>& )),
              SLOT(onBookmarksChanged()) );
     connect( mTool, SIGNAL(bookmarksModified( const QList<int>& )), SLOT(onBookmarksChanged( const QList<int>& )) );
 }
@@ -70,7 +70,7 @@ QVariant BookmarkListModel::data( const QModelIndex& index, int role ) const
     {
         const int bookmarkIndex = index.row();
 
-        const KHECore::Bookmark& bookmark = mTool->bookmarkAt( bookmarkIndex );
+        const Okteta::Bookmark& bookmark = mTool->bookmarkAt( bookmarkIndex );
 
         const int tableColumn = index.column();
         switch( tableColumn )
@@ -96,7 +96,7 @@ QVariant BookmarkListModel::data( const QModelIndex& index, int role ) const
         const int column = index.column();
         if( column == TitleColumnId )
         {
-            const KHECore::Bookmark& bookmark = mTool->bookmarkAt( bookmarkIndex );
+            const Okteta::Bookmark& bookmark = mTool->bookmarkAt( bookmarkIndex );
             result = bookmark.name();
         }
         break;
@@ -158,13 +158,13 @@ bool BookmarkListModel::setData( const QModelIndex& index, const QVariant& value
     return result;
 }
 
-const KHECore::Bookmark& BookmarkListModel::bookmark( const QModelIndex& index ) const
+const Okteta::Bookmark& BookmarkListModel::bookmark( const QModelIndex& index ) const
 {
     const int bookmarkIndex = index.row();
     return mTool->bookmarkAt( bookmarkIndex );
 }
 
-QModelIndex BookmarkListModel::index( const KHECore::Bookmark& bookmark, int column ) const
+QModelIndex BookmarkListModel::index( const Okteta::Bookmark& bookmark, int column ) const
 {
     QModelIndex result;
 

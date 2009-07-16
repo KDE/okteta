@@ -1,24 +1,24 @@
 include_directories(
-  ../../../libs/framesprint
-  ../../../core
-  ../../../gui
-  ../../../gui/libcolumnsview
+  ../view
+  ../io
+  ../document
+  ../../../libs/kasten/gui
+  ../../../libs/kasten/gui/view
+  ../../../libs/kasten/gui/system
+  ../../../libs/kasten/gui/controller
   ../../../libs/kasten/core
   ../../../libs/kasten/core/entity
   ../../../libs/kasten/core/document
   ../../../libs/kasten/core/io
   ../../../libs/kasten/core/system
-  ../../../libs/kasten/gui
-  ../../../libs/kasten/gui/view
-  ../../../libs/kasten/gui/system
-  ../../../libs/kasten/gui/controller
-  ../document
-  ../io
-  ../view
   view/libbytearraylineedit
   view/libbytearraychecksum
   view/libbytearrayfilter
   view/libfinddialog
+  ../../../libs/framesprint
+  ../../../gui
+  ../../../gui/libcolumnsview
+  ../../../core
 )
 
 if( QCA2_FOUND )

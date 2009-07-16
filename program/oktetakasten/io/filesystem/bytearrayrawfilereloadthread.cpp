@@ -67,7 +67,7 @@ void ByteArrayRawFileReloadThread::run()
 //     mDocument->moveToThread( QApplication::instance()->thread() );
     if( mSuccess )
     {
-//         KHECore::PieceTableByteArrayModel *byteArray = qobject_cast<KHECore::PieceTableByteArrayModel*>( mDocument->content() );
+//         Okteta::PieceTableByteArrayModel *byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>( mDocument->content() );
 //         byteArray->setData( mData, mSize, false );
     }
     else

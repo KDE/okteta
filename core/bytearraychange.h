@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_BYTEARRAYCHANGE_H
-#define KHE_CORE_BYTEARRAYCHANGE_H
+#ifndef BYTEARRAYCHANGE_H
+#define BYTEARRAYCHANGE_H
 
 // lib
 #include "oktetacore_export.h"
@@ -29,7 +29,7 @@
 // Qt
 #include <QtCore/QByteArray>
 
-namespace KHECore
+namespace Okteta
 {
 
 // TODO: do we need the invalid status?
@@ -42,14 +42,14 @@ class OKTETACORE_EXPORT ByteArrayChange
 
   public:
     ByteArrayChange();
-    explicit ByteArrayChange( const KHE::ArrayChangeMetrics& metrics, const QByteArray& data = QByteArray() );
+    explicit ByteArrayChange( const KDE::ArrayChangeMetrics& metrics, const QByteArray& data = QByteArray() );
 
   public:
-    const KHE::ArrayChangeMetrics& metrics() const;
+    const KDE::ArrayChangeMetrics& metrics() const;
     const QByteArray& data() const;
 
   protected:
-    KHE::ArrayChangeMetrics mMetrics;
+    KDE::ArrayChangeMetrics mMetrics;
     QByteArray mData;
 //     UserId mUserId;
 //      mTime;
@@ -59,11 +59,11 @@ class OKTETACORE_EXPORT ByteArrayChange
 inline ByteArrayChange::ByteArrayChange()
 {}
 
-inline ByteArrayChange::ByteArrayChange( const KHE::ArrayChangeMetrics& metrics, const QByteArray& data )
+inline ByteArrayChange::ByteArrayChange( const KDE::ArrayChangeMetrics& metrics, const QByteArray& data )
  : mMetrics( metrics ), mData( data )
 {}
 
-inline const KHE::ArrayChangeMetrics& ByteArrayChange::metrics() const { return mMetrics; }
+inline const KDE::ArrayChangeMetrics& ByteArrayChange::metrics() const { return mMetrics; }
 inline const QByteArray& ByteArrayChange::data()                 const { return mData; }
 
 

@@ -37,7 +37,7 @@ namespace Kasten
 {
 
 ValueStreamEncoderSettings::ValueStreamEncoderSettings()
- : valueCoding( KHECore::HexadecimalCoding), separation( QLatin1String(" ") )
+ : valueCoding( Okteta::HexadecimalCoding), separation( QLatin1String(" ") )
 {}
 
 KByteArrayValueStreamEncoder::KByteArrayValueStreamEncoder()
@@ -47,20 +47,20 @@ KByteArrayValueStreamEncoder::KByteArrayValueStreamEncoder()
 
 bool KByteArrayValueStreamEncoder::encodeDataToStream( QIODevice *device,
                                                        const KByteArrayDisplay* byteArrayView,
-                                                       const KHECore::AbstractByteArrayModel *byteArrayModel,
-                                                       const KHE::Section &section )
+                                                       const Okteta::AbstractByteArrayModel *byteArrayModel,
+                                                       const KDE::Section &section )
 {
     bool success = true;
 
     // settings
     mSettings.undefinedChar = byteArrayView->undefinedChar();
     mSettings.substituteChar = byteArrayView->substituteChar();
-//     mSettings.valueCoding = (KHECore::ValueCoding)byteArrayView->valueCoding();
+//     mSettings.valueCoding = (Okteta::ValueCoding)byteArrayView->valueCoding();
 
     // encode
     QTextStream textStream( device );
 
-    KHECore::ValueCodec *valueCodec = KHECore::ValueCodec::createCodec( mSettings.valueCoding );
+    Okteta::ValueCodec *valueCodec = Okteta::ValueCodec::createCodec( mSettings.valueCoding );
 
     // prepare 
     QString valueString;

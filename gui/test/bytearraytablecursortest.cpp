@@ -31,7 +31,7 @@
 
 #include <KDebug>
 
-namespace KHEUI
+namespace Okteta
 {
 
 // local variables
@@ -984,4 +984,4 @@ void ByteArrayTableCursorTest::testGotoPreviousByteN()
 
 }
 
-QTEST_MAIN( KHEUI::ByteArrayTableCursorTest )
+QTEST_MAIN( Okteta::ByteArrayTableCursorTest )

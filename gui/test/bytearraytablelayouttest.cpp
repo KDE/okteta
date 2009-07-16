@@ -27,7 +27,7 @@
 // Qt
 #include <QtTest/QtTest>
 
-namespace KHEUI
+namespace Okteta
 {
 
 // local variables
@@ -193,4 +193,4 @@ void ByteArrayTableLayoutTest::testSetNoOfLinesPerPage()
 
 }
 
-QTEST_MAIN( KHEUI::ByteArrayTableLayoutTest )
+QTEST_MAIN( Okteta::ByteArrayTableLayoutTest )

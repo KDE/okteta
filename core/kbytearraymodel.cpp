@@ -27,7 +27,7 @@
 #include "arraychangemetricslist.h"
 
 
-namespace KHECore
+namespace Okteta
 {
 
 KByteArrayModel::KByteArrayModel( char *data, unsigned int size, int rawSize, bool keepMemory )
@@ -110,12 +110,12 @@ int KByteArrayModel::lastIndexOf( const char *searchString, int length, int from
     return d->lastIndexOf( searchString, length, from );
 }
 
-void KByteArrayModel::addBookmarks( const QList<KHECore::Bookmark> &bookmarks )
+void KByteArrayModel::addBookmarks( const QList<Okteta::Bookmark> &bookmarks )
 {
     d->addBookmarks( bookmarks );
 }
 
-void KByteArrayModel::removeBookmarks( const QList<KHECore::Bookmark> &bookmarks )
+void KByteArrayModel::removeBookmarks( const QList<Okteta::Bookmark> &bookmarks )
 {
     d->removeBookmarks( bookmarks );
 }
@@ -125,22 +125,22 @@ void KByteArrayModel::removeAllBookmarks()
     d->removeAllBookmarks();
 }
 
-void KByteArrayModel::setBookmark( unsigned int index, const KHECore::Bookmark& bookmark )
+void KByteArrayModel::setBookmark( unsigned int index, const Okteta::Bookmark& bookmark )
 {
     d->setBookmark( index, bookmark );
 }
 
-KHECore::BookmarksConstIterator KByteArrayModel::createBookmarksConstIterator() const
+Okteta::BookmarksConstIterator KByteArrayModel::createBookmarksConstIterator() const
 {
     return d->createBookmarksConstIterator();
 }
 
-const KHECore::Bookmark& KByteArrayModel::bookmarkFor( int offset ) const
+const Okteta::Bookmark& KByteArrayModel::bookmarkFor( int offset ) const
 {
     return d->bookmarkFor( offset );
 }
 
-const KHECore::Bookmark& KByteArrayModel::bookmarkAt( unsigned int index ) const
+const Okteta::Bookmark& KByteArrayModel::bookmarkAt( unsigned int index ) const
 {
     return d->bookmarkAt( index );
 }

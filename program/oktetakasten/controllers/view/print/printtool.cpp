@@ -123,7 +123,7 @@ void PrintTool::print()
         byteArrayFrameRenderer->setWidth( width );
         byteArrayFrameRenderer->setHeight( contentHeight );
 
-        KHE::Section section = mByteArrayDisplay->selection();
+        KDE::Section section = mByteArrayDisplay->selection();
         if( !section.isValid() )
             section.setByWidth( 0, mByteArrayModel->size() );
         byteArrayFrameRenderer->setByteArrayModel( mByteArrayModel, section.start(), section.width() );
@@ -144,7 +144,7 @@ void PrintTool::print()
                                                   mByteArrayDisplay->groupSpacingWidth() );
         byteArrayFrameRenderer->setBinaryGapWidth( mByteArrayDisplay->binaryGapWidth() );
 
-        byteArrayFrameRenderer->setValueCoding( (KHECore::ValueCoding)mByteArrayDisplay->valueCoding() );
+        byteArrayFrameRenderer->setValueCoding( (Okteta::ValueCoding)mByteArrayDisplay->valueCoding() );
         byteArrayFrameRenderer->setShowsNonprinting( mByteArrayDisplay->showsNonprinting() );
         byteArrayFrameRenderer->setSubstituteChar( mByteArrayDisplay->substituteChar() );
         byteArrayFrameRenderer->setUndefinedChar( mByteArrayDisplay->undefinedChar() );

@@ -26,7 +26,7 @@
 #include <QtGui/QWidget>
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 PrintColumnStylist::PrintColumnStylist()

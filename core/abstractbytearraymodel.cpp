@@ -23,7 +23,7 @@
 #include "abstractbytearraymodel.h"
 
 
-namespace KHECore
+namespace Okteta
 {
 
 static const int SearchedByteCountSignalLimit = 10000;

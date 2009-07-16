@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_COORDRANGE_H
-#define KHE_UI_COORDRANGE_H
+#ifndef OKTETA_COORDRANGE_H
+#define OKTETA_COORDRANGE_H
 
 // lib
 #include "coord.h"
@@ -30,24 +30,24 @@
 #include <section.h>
 
 
-namespace KHE
+namespace KDE
 {
 
-typedef Range<KHEUI::Coord> KBaseCoordRange;
+typedef Range<Okteta::Coord> KBaseCoordRange;
 
 template<>
-inline const KHEUI::Coord KBaseCoordRange::null() const 
-{ return KHEUI::Coord(-1,-1); }
+inline const Okteta::Coord KBaseCoordRange::null() const 
+{ return Okteta::Coord(-1,-1); }
 
 }
 
-namespace KHEUI
+namespace Okteta
 {
 
 /** describes a range in the buffercoord
   *@author Friedrich W. H.  Kossebau
   */
-class CoordRange : public KHE::KBaseCoordRange
+class CoordRange : public KDE::KBaseCoordRange
 {
   public:
     /** 
@@ -59,7 +59,7 @@ class CoordRange : public KHE::KBaseCoordRange
       * @param Pos start and end pos
       * @param Lines start and end line
       */
-    CoordRange( const KHE::Section &Pos, const KHE::Section &Lines );
+    CoordRange( const KDE::Section &Pos, const KDE::Section &Lines );
     CoordRange();
     ~CoordRange();
 
@@ -90,15 +90,15 @@ class CoordRange : public KHE::KBaseCoordRange
 };
 
 
-inline CoordRange::CoordRange( const Coord &SC, const Coord &EC ) : KHE::KBaseCoordRange(SC,EC) {}
-inline CoordRange::CoordRange( const KHE::Section &Pos, const KHE::Section &Lines )
- : KHE::KBaseCoordRange( Coord(Pos.start(),Lines.start()), Coord(Pos.end(),Lines.end()) ) {}
+inline CoordRange::CoordRange( const Coord &SC, const Coord &EC ) : KDE::KBaseCoordRange(SC,EC) {}
+inline CoordRange::CoordRange( const KDE::Section &Pos, const KDE::Section &Lines )
+ : KDE::KBaseCoordRange( Coord(Pos.start(),Lines.start()), Coord(Pos.end(),Lines.end()) ) {}
 inline CoordRange::CoordRange()  {}
 inline CoordRange::~CoordRange() {}
 
-inline bool CoordRange::operator==( const CoordRange &R ) const { return  KHE::KBaseCoordRange::operator==(R); }
+inline bool CoordRange::operator==( const CoordRange &R ) const { return  KDE::KBaseCoordRange::operator==(R); }
 
-inline CoordRange &CoordRange::operator=( const CoordRange &R ) {  KHE::KBaseCoordRange::operator=(R); return *this; }
+inline CoordRange &CoordRange::operator=( const CoordRange &R ) {  KDE::KBaseCoordRange::operator=(R); return *this; }
 
 inline int CoordRange::width( int LineLength )   const { return LineLength*(lines()-1) + End.pos() - Start.pos()+1; }
 inline int CoordRange::lines()                   const { return End.line() - Start.line() + 1; }

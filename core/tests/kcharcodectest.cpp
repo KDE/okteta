@@ -25,14 +25,14 @@
 // test object
 #include <charcodec.h>
 // lib
-#include <khechar.h>
+#include <character.h>
 // KDE
 #include <kcomponentdata.h>
 // Qt
 #include <QtTest/QtTest>
 
 // namespaces
-using namespace KHECore;
+using namespace Okteta;
 
 
 void KCharCodecTest::initTestCase()

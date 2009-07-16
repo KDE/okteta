@@ -31,10 +31,10 @@
 #include <dataselectable.h>
 #include <selecteddatawriteable.h>
 
-namespace KHEUI {
+namespace Okteta {
 class ByteArrayJanusView;
 }
-namespace KHE {
+namespace KDE {
 class Section;
 }
 class QRect;
@@ -111,7 +111,7 @@ class KByteArrayDisplay : public AbstractView, public If::Zoomable, public If::D
 
   public:
     void setFocus();
-    KHE::Section selection() const;
+    KDE::Section selection() const;
     void setSelection( int start, int end );
     void insert( const QByteArray& byteArray );
     QRect cursorRect() const;
@@ -155,7 +155,7 @@ class KByteArrayDisplay : public AbstractView, public If::Zoomable, public If::D
     void onSelectionChange( bool selected );
 
   protected:
-    KHEUI::ByteArrayJanusView* mWidget;
+    Okteta::ByteArrayJanusView* mWidget;
     KByteArrayDocument* mDocument;
     KByteArraySelection mSelection;
 //     KCursorProxy *mCursorProxy;

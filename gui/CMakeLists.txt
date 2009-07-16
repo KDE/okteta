@@ -51,7 +51,7 @@ set( oktetagui_LIB_SRCS
   abstractbytearraycolumnrenderer.cpp
   valuebytearraycolumnrenderer.cpp
   charbytearraycolumnrenderer.cpp
-  koffsetformat.cpp
+  offsetformat.cpp
   bytearraytablecursor.cpp
   bytearraytablelayout.cpp
   bytearraytableranges.cpp

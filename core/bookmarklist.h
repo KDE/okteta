@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_BOOKMARKLIST_H
-#define KHE_CORE_BOOKMARKLIST_H
+#ifndef BOOKMARKLIST_H
+#define BOOKMARKLIST_H
 
 // lib
 #include "bookmark.h"
@@ -31,7 +31,7 @@
 template <class T> class QList;
 
 
-namespace KHECore
+namespace Okteta
 {
 
 /**
@@ -45,9 +45,9 @@ class BookmarkList : public QLinkedList<Bookmark>
 
   public:
     void addBookmark( const Bookmark &bookmark );
-    void addBookmarks( const QList<KHECore::Bookmark> &bookmarks );
+    void addBookmarks( const QList<Okteta::Bookmark> &bookmarks );
     void removeBookmark( const Bookmark &bookmark );
-    void removeBookmarks( const QList<KHECore::Bookmark> &bookmarks );
+    void removeBookmarks( const QList<Okteta::Bookmark> &bookmarks );
     void setBookmark( unsigned int index, const Bookmark& bookmark );
 
     bool adjustToReplaced( int offset, int removedLength, int insertedLength );
@@ -60,7 +60,7 @@ class BookmarkList : public QLinkedList<Bookmark>
     bool contains( int offset ) const;
     using QLinkedList<Bookmark>::contains;
     const Bookmark& at( unsigned int index ) const;
-    QList<KHECore::Bookmark> list() const;
+    QList<Okteta::Bookmark> list() const;
 };
 
 }

@@ -89,7 +89,7 @@ void SelectRangeTool::setTargetModel( AbstractModel* model )
 
     if( mByteArrayDisplay && mByteArrayModel )
     {
-        connect( mByteArrayModel, SIGNAL(contentsChanged( const KHE::ArrayChangeMetricsList& )),
+        connect( mByteArrayModel, SIGNAL(contentsChanged( const KDE::ArrayChangeMetricsList& )),
                  SLOT(onContentsChanged()) );
         // TODO: update isApplyable on cursor movement and size changes
     }

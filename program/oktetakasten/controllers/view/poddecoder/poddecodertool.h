@@ -28,11 +28,11 @@
 // Kasten core
 #include <abstracttool.h>
 // Okteta core
-#include <khe.h>
+#include <oktetacore.h>
 // Qt
 #include <QtCore/QVector>
 
-namespace KHECore {
+namespace Okteta {
 class CharCodec;
 class AbstractByteArrayModel;
 }
@@ -99,9 +99,9 @@ class PODDecoderTool : public AbstractTool
 
   protected: // source
     KByteArrayDisplay* mByteArrayDisplay;
-    KHECore::AbstractByteArrayModel* mByteArrayModel;
+    Okteta::AbstractByteArrayModel* mByteArrayModel;
     int mCursorIndex;
-    KHECore::CharCodec* mCharCodec;
+    Okteta::CharCodec* mCharCodec;
     QChar mUndefinedChar;
 
   protected: // settings

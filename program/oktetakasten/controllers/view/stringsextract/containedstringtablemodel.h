@@ -26,7 +26,7 @@
 // tool
 #include "containedstring.h"
 // Okteta gui
-#include <koffsetformat.h>
+#include <offsetformat.h>
 // Qt
 #include <QtCore/QList>
 #include <QtCore/QAbstractTableModel>
@@ -60,8 +60,8 @@ class ContainedStringTableModel : public QAbstractTableModel
   protected:
     const QList<ContainedString> * const mContainedStringList;
 
-    KHEUI::KOffsetFormat::print mPrintFunction;
-    mutable char mCodedOffset[KHEUI::KOffsetFormat::MaxFormatWidth+1];
+    Okteta::OffsetFormat::print mPrintFunction;
+    mutable char mCodedOffset[Okteta::OffsetFormat::MaxFormatWidth+1];
 };
 
 #endif

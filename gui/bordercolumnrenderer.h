@@ -20,15 +20,15 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_BORDERCOLUMNRENDERER_H
-#define KHE_UI_BORDERCOLUMNRENDERER_H
+#ifndef OKTETA_BORDERCOLUMNRENDERER_H
+#define OKTETA_BORDERCOLUMNRENDERER_H
 
 
 // lib
 #include <abstractcolumnrenderer.h>
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 /** column that does nothing but draw a vertical line in the middle of the column

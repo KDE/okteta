@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_ABSTRACTBYTEARRAYMODEL_H
-#define KHE_CORE_ABSTRACTBYTEARRAYMODEL_H
+#ifndef ABSTRACTBYTEARRAYMODEL_H
+#define ABSTRACTBYTEARRAYMODEL_H
 
 
 // lib
@@ -34,13 +34,13 @@
 #include <QtCore/QByteArray>
 
 
-namespace KHE {
+namespace KDE {
 class ArrayChangeMetricsList;
 }
 
-using namespace KHE; // TODO: remove me
+using namespace KDE; // TODO: remove me
 
-namespace KHECore
+namespace Okteta
 {
 
 /** could it be useful to hide the data access behind an iterator? *
@@ -254,7 +254,7 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
 
   Q_SIGNALS:
     // TODO: how to deal replacing with fixed size of buffer?
-    void contentsChanged( const KHE::ArrayChangeMetricsList &changeList );
+    void contentsChanged( const KDE::ArrayChangeMetricsList &changeList );
 
     void readOnlyChanged( bool isReadOnly );
     void modificationChanged( bool isModified );

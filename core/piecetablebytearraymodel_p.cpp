@@ -25,7 +25,7 @@
 
 #include <KDebug>
 
-namespace KHECore
+namespace Okteta
 {
 
 static const int InvalidVersionIndex = -1;
@@ -84,7 +84,7 @@ void PieceTableByteArrayModel::Private::setData( const char *data, unsigned int 
         delete [] mInitialData;
     const unsigned int oldSize = mPieceTable.size();
     const bool wasModifiedBefore = isModified();
-    const QList<KHECore::Bookmark> bookmarks = mBookmarks.list();
+    const QList<Okteta::Bookmark> bookmarks = mBookmarks.list();
 
     if( data == 0 )
         size = 0;
@@ -102,7 +102,7 @@ void PieceTableByteArrayModel::Private::setData( const char *data, unsigned int 
     mBookmarks.clear();
 
     // TODO: how to tell this to the synchronizer?
-    emit p->contentsChanged( KHE::ArrayChangeMetricsList::oneReplacement(0,oldSize,size) );
+    emit p->contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(0,oldSize,size) );
     if( wasModifiedBefore ) emit p->modificationChanged( false );
     if( !bookmarks.empty() ) emit p->bookmarksRemoved( bookmarks );
     emit p->headVersionChanged( mPieceTable.changesCount() );
@@ -120,13 +120,13 @@ void PieceTableByteArrayModel::Private::setDatum( unsigned int offset, const cha
     const bool newChange = mPieceTable.replaceOne( offset, &storageOffset );
     mChangesDataStorage.append( storageOffset, byte );
 
-    const KHE::ArrayChangeMetrics metrics =
+    const KDE::ArrayChangeMetrics metrics =
         ArrayChangeMetrics::asReplacement( offset, 1, 1 );
     const ByteArrayChange modification( metrics, mChangesDataStorage.data(storageOffset,1) );
-    QList<KHECore::ByteArrayChange> modificationsList;
+    QList<Okteta::ByteArrayChange> modificationsList;
     modificationsList.append( modification );
 
-    emit p->contentsChanged( KHE::ArrayChangeMetricsList(metrics) );
+    emit p->contentsChanged( KDE::ArrayChangeMetricsList(metrics) );
     emit p->changesDone( modificationsList, oldVersionIndex, versionIndex() );
     if( !wasModifiedBefore ) emit p->modificationChanged( true );
     if( newChange )
@@ -239,8 +239,8 @@ int PieceTableByteArrayModel::Private::fill( const char fillByte, unsigned int o
 
 void PieceTableByteArrayModel::Private::revertToVersionByIndex( int versionIndex )
 {
-    KHE::ArrayChangeMetricsList changeList;
-    KHE::SectionList changedRanges;
+    KDE::ArrayChangeMetricsList changeList;
+    KDE::SectionList changedRanges;
 
     const bool oldModified = isModified();
 
@@ -307,7 +307,7 @@ QByteArray PieceTableByteArrayModel::Private::initialData() const
     return QByteArray( mInitialData, mInitialSize );
 }
 
-void PieceTableByteArrayModel::Private::doChanges( const QList<KHECore::ByteArrayChange>& changes,
+void PieceTableByteArrayModel::Private::doChanges( const QList<Okteta::ByteArrayChange>& changes,
                                                     int oldVersionIndex, int newVersionIndex )
 {
 // kDebug() << this<<" is at "<<versionIndex()<<", should from "<<oldVersionIndex<<" to "<<newVersionIndex;
@@ -323,7 +323,7 @@ void PieceTableByteArrayModel::Private::doChanges( const QList<KHECore::ByteArra
 
     foreach( const ByteArrayChange& change, changes )
     {
-        const KHE::ArrayChangeMetrics& metrics = change.metrics();
+        const KDE::ArrayChangeMetrics& metrics = change.metrics();
         switch( metrics.type() )
         {
         case ArrayChangeMetrics::Replacement:
@@ -397,7 +397,7 @@ void PieceTableByteArrayModel::Private::doInsertChange( unsigned int offset,
 
     mBookmarksModified |= mBookmarks.adjustToReplaced( offset, 0, insertLength );
 
-    const KHE::ArrayChangeMetrics metrics = ArrayChangeMetrics::asReplacement( offset, 0, insertLength );
+    const KDE::ArrayChangeMetrics metrics = ArrayChangeMetrics::asReplacement( offset, 0, insertLength );
     const ByteArrayChange change( metrics, mChangesDataStorage.data(storageOffset,insertLength) );
 
     mChangeMetrics.append( metrics );
@@ -410,7 +410,7 @@ void PieceTableByteArrayModel::Private::doRemoveChange( const Section& removeSec
 
     mBookmarksModified |= mBookmarks.adjustToReplaced( removeSection.start(), removeSection.width(), 0 );
 
-    const KHE::ArrayChangeMetrics metrics =
+    const KDE::ArrayChangeMetrics metrics =
         ArrayChangeMetrics::asReplacement( removeSection.start(), removeSection.width(), 0 );
     const ByteArrayChange change( metrics );
 
@@ -427,7 +427,7 @@ void PieceTableByteArrayModel::Private::doReplaceChange( const Section& removeSe
 
     mBookmarksModified |= mBookmarks.adjustToReplaced( removeSection.start(), removeSection.width(), insertLength );
 
-    const KHE::ArrayChangeMetrics metrics =
+    const KDE::ArrayChangeMetrics metrics =
         ArrayChangeMetrics::asReplacement( removeSection.start(), removeSection.width(), insertLength );
     const ByteArrayChange change( metrics, mChangesDataStorage.data(storageOffset,insertLength) );
 
@@ -441,7 +441,7 @@ void PieceTableByteArrayModel::Private::doSwapChange( int firstStart, const Sect
 
     mBookmarksModified |= mBookmarks.adjustToSwapped( firstStart, secondSection.start(),secondSection.width() );
 
-    const KHE::ArrayChangeMetrics metrics =
+    const KDE::ArrayChangeMetrics metrics =
         ArrayChangeMetrics::asSwapping( firstStart, secondSection.start(), secondSection.width() );
     const ByteArrayChange change( metrics );
 
@@ -457,7 +457,7 @@ void PieceTableByteArrayModel::Private::doFillChange( unsigned int offset, unsig
 
     mChangesDataStorage.appendFill( storageOffset, fillByte, fillLength );
 
-    const KHE::ArrayChangeMetrics metrics =
+    const KDE::ArrayChangeMetrics metrics =
         ArrayChangeMetrics::asReplacement( offset, fillLength, fillLength );
     const ByteArrayChange change( metrics );
 

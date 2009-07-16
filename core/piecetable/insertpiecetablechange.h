@@ -45,9 +45,9 @@ class InsertPieceTableChange : public AbstractPieceTableChange
     virtual QString description() const;
     virtual int storageOffset() const;
     virtual bool merge( const AbstractPieceTableChange *other );
-    virtual KHE::Section apply( PieceTable *pieceTable ) const;
-    virtual KHE::Section revert( PieceTable *pieceTable ) const;
-    virtual KHE::ArrayChangeMetrics metrics() const;
+    virtual KDE::Section apply( PieceTable *pieceTable ) const;
+    virtual KDE::Section revert( PieceTable *pieceTable ) const;
+    virtual KDE::ArrayChangeMetrics metrics() const;
     virtual int dataSize() const;
 
   protected:

@@ -26,10 +26,10 @@
 // Kasten core
 #include <abstractmodelstreamencoder.h>
 
-namespace KHECore {
+namespace Okteta {
 class AbstractByteArrayModel;
 }
-namespace KHE {
+namespace KDE {
 class Section;
 }
 
@@ -61,8 +61,8 @@ class KAbstractByteArrayStreamEncoder : public AbstractModelStreamEncoder
   protected: // API to be implemented
     virtual bool encodeDataToStream( QIODevice *device,
                                      const KByteArrayDisplay* byteArrayView,
-                                     const KHECore::AbstractByteArrayModel *byteArrayModel,
-                                     const KHE::Section &section ) = 0;
+                                     const Okteta::AbstractByteArrayModel *byteArrayModel,
+                                     const KDE::Section &section ) = 0;
 };
 
 }

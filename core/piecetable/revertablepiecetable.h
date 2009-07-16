@@ -41,12 +41,12 @@ class RevertablePieceTable
 
   public: // operations return true if it results in a new change and is not merged to the current
     bool insert( int pos, int length, int *storageSize );
-    bool remove( const KHE::Section &removeSection );
+    bool remove( const KDE::Section &removeSection );
     bool remove( int start, int end );
-    bool replace( const KHE::Section &removeSection, int insertLength, int *storageSize );
+    bool replace( const KDE::Section &removeSection, int insertLength, int *storageSize );
     bool replace( int removeStart, int removeLength, int insertLength, int *storageSize );
     bool replaceOne( int dataOffset, int *storageSize );
-    bool swap( int firstStart, const KHE::Section &secondSection );
+    bool swap( int firstStart, const KDE::Section &secondSection );
     bool swap( int firstStart, int secondStart, int secondLength );
 //     int fill( const char FillChar, unsigned int Pos = 0, int Length = -1 ); TODO: filter change, calculated
 
@@ -75,7 +75,7 @@ class RevertablePieceTable
      * @param changeList
      */
     bool revertBeforeChange( int changeId,
-                             KHE::SectionList *changedRanges, KHE::ArrayChangeMetricsList *changeList );
+                             KDE::SectionList *changedRanges, KDE::ArrayChangeMetricsList *changeList );
     //TODO: hide should be a flag with or just an own function unsetBase();
     /**
      * @param hide  if true sets the base to none.
@@ -85,7 +85,7 @@ class RevertablePieceTable
   public:
     bool getStorageData( int *storageId, int *storageOffset, int dataOffset ) const;
     int size() const;
-    void getChangeData( KHE::ArrayChangeMetrics* metrics, int *storageOffset, int versionIndex ) const;
+    void getChangeData( KDE::ArrayChangeMetrics* metrics, int *storageOffset, int versionIndex ) const;
 
   public:
     int changesCount() const;
@@ -125,15 +125,15 @@ inline QString RevertablePieceTable::headChangeDescription() const
 
 inline bool RevertablePieceTable::remove( int start, int length )
 {
-    return remove( KHE::Section::fromWidth(start,length) );
+    return remove( KDE::Section::fromWidth(start,length) );
 }
 inline bool RevertablePieceTable::replace( int removeStart, int removeLength, int insertLength, int *storageSize )
 {
-    return replace( KHE::Section::fromWidth(removeStart,removeLength), insertLength, storageSize );
+    return replace( KDE::Section::fromWidth(removeStart,removeLength), insertLength, storageSize );
 }
 inline bool RevertablePieceTable::swap( int firstStart, int secondStart, int secondLength )
 {
-    return swap( firstStart, KHE::Section::fromWidth(secondStart,secondLength) );
+    return swap( firstStart, KDE::Section::fromWidth(secondStart,secondLength) );
 }
 
 inline void RevertablePieceTable::openGroupedChange( const QString &description )
@@ -148,8 +148,8 @@ inline void RevertablePieceTable::closeGroupedChange( const QString &description
 inline void RevertablePieceTable::finishChange()       { mChangeHistory.finishChange(); }
 
 inline bool RevertablePieceTable::revertBeforeChange( int changeId,
-                                                      KHE::SectionList *changedRanges,
-                                                      KHE::ArrayChangeMetricsList *changeList )
+                                                      KDE::SectionList *changedRanges,
+                                                      KDE::ArrayChangeMetricsList *changeList )
 {
     return mChangeHistory.revertBeforeChange( &mPieceTable, changeId, changedRanges, changeList );
 }

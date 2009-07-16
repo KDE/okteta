@@ -40,23 +40,23 @@ QString SwapRangesPieceTableChange::description() const
     return i18nc( "name of the change", "Swap Ranges" );
 }
 
-KHE::Section SwapRangesPieceTableChange::apply( PieceTable *pieceTable ) const
+KDE::Section SwapRangesPieceTableChange::apply( PieceTable *pieceTable ) const
 {
     pieceTable->swap( mFirstStart, mSecondSection );
 
-    return KHE::Section( mFirstStart, mSecondSection.end() );
+    return KDE::Section( mFirstStart, mSecondSection.end() );
 }
 
-KHE::Section SwapRangesPieceTableChange::revert( PieceTable *pieceTable ) const
+KDE::Section SwapRangesPieceTableChange::revert( PieceTable *pieceTable ) const
 {
-    pieceTable->swap( mFirstStart, KHE::Section(mFirstStart+mSecondSection.width(),mSecondSection.end()) );
+    pieceTable->swap( mFirstStart, KDE::Section(mFirstStart+mSecondSection.width(),mSecondSection.end()) );
 
-    return KHE::Section( mFirstStart, mSecondSection.end() );
+    return KDE::Section( mFirstStart, mSecondSection.end() );
 }
 
-KHE::ArrayChangeMetrics SwapRangesPieceTableChange::metrics() const
+KDE::ArrayChangeMetrics SwapRangesPieceTableChange::metrics() const
 {
-    return KHE::ArrayChangeMetrics::asSwapping( mFirstStart, mSecondSection.start(), mSecondSection.width() );
+    return KDE::ArrayChangeMetrics::asSwapping( mFirstStart, mSecondSection.start(), mSecondSection.width() );
 }
 
 SwapRangesPieceTableChange::~SwapRangesPieceTableChange() {}

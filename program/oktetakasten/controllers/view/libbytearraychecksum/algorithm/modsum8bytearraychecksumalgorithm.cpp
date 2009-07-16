@@ -39,7 +39,7 @@ ModSum8ByteArrayChecksumAlgorithm::ModSum8ByteArrayChecksumAlgorithm()
 AbstractByteArrayChecksumParameterSet* ModSum8ByteArrayChecksumAlgorithm::parameterSet() { return &mParameterSet; }
 
 bool ModSum8ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
-                                                          const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
+                                                          const Okteta::AbstractByteArrayModel* model, const KDE::Section& section ) const
 {
     quint8 modSum = 0x00;
     int nextBlockEnd = section.start() + CalculatedByteCountSignalLimit;

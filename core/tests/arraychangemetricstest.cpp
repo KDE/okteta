@@ -42,7 +42,7 @@ static const int SecondOffset = Offset + FirstLength;
 static const int SecondLength = 10;
 static const int SecondEnd = SecondOffset + SecondLength - 1;
 
-namespace KHE
+namespace KDE
 {
 
 void ArrayChangeMetricsTest::testConstructorAsReplacement()
@@ -110,4 +110,4 @@ void ArrayChangeMetricsTest::testRevert()
 
 }
 
-QTEST_MAIN( KHE::ArrayChangeMetricsTest )
+QTEST_MAIN( KDE::ArrayChangeMetricsTest )

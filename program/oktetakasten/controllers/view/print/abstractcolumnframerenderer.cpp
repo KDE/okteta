@@ -41,13 +41,13 @@ class AbstractColumnFrameRendererPrivate
     void updateWidths();
   public: // calculated
     /** collection of all the columns. All columns will be autodeleted. */
-    QList<KHEUI::AbstractColumnRenderer*> mColumns;
+    QList<Okteta::AbstractColumnRenderer*> mColumns;
     /** the number of lines which the columnRenderer view has */
     int mNoOfLines;
     /** the height of each line in pixels */
-    KHEUI::KPixelY mLineHeight;
+    Okteta::KPixelY mLineHeight;
     /** the width of all visible columns together */
-    KHEUI::KPixelX mColumnsWidth;
+    Okteta::KPixelX mColumnsWidth;
 };
 
 
@@ -60,10 +60,10 @@ AbstractColumnFrameRendererPrivate::AbstractColumnFrameRendererPrivate()
 void AbstractColumnFrameRendererPrivate::updateWidths()
 {
     mColumnsWidth = 0;
-    QListIterator<KHEUI::AbstractColumnRenderer*> it( mColumns );
+    QListIterator<Okteta::AbstractColumnRenderer*> it( mColumns );
     while( it.hasNext() )
     {
-        KHEUI::AbstractColumnRenderer *columnRenderer = it.next();
+        Okteta::AbstractColumnRenderer *columnRenderer = it.next();
         columnRenderer->setX( mColumnsWidth );
         mColumnsWidth += columnRenderer->visibleWidth();
     }
@@ -81,10 +81,10 @@ AbstractColumnFrameRenderer::AbstractColumnFrameRenderer()
 
 
 int AbstractColumnFrameRenderer::noOfLines()          const { return d->mNoOfLines; }
-KHEUI::KPixelY AbstractColumnFrameRenderer::lineHeight()     const { return d->mLineHeight; }
+Okteta::KPixelY AbstractColumnFrameRenderer::lineHeight()     const { return d->mLineHeight; }
 
-KHEUI::KPixelY AbstractColumnFrameRenderer::columnsHeight() const { return d->mNoOfLines*d->mLineHeight; }
-KHEUI::KPixelX AbstractColumnFrameRenderer::columnsWidth()  const { return d->mColumnsWidth; }
+Okteta::KPixelY AbstractColumnFrameRenderer::columnsHeight() const { return d->mNoOfLines*d->mLineHeight; }
+Okteta::KPixelX AbstractColumnFrameRenderer::columnsWidth()  const { return d->mColumnsWidth; }
 
 void AbstractColumnFrameRenderer::setNoOfLines( int noOfLines )
 {
@@ -95,7 +95,7 @@ void AbstractColumnFrameRenderer::setNoOfLines( int noOfLines )
 }
 
 
-void AbstractColumnFrameRenderer::setLineHeight( KHEUI::KPixelY newLineHeight )
+void AbstractColumnFrameRenderer::setLineHeight( Okteta::KPixelY newLineHeight )
 {
     if( newLineHeight == d->mLineHeight )
         return;
@@ -104,7 +104,7 @@ void AbstractColumnFrameRenderer::setLineHeight( KHEUI::KPixelY newLineHeight )
         newLineHeight = 1;
     d->mLineHeight = newLineHeight;
 
-    QListIterator<KHEUI::AbstractColumnRenderer*> it( d->mColumns );
+    QListIterator<Okteta::AbstractColumnRenderer*> it( d->mColumns );
     while( it.hasNext() )
         it.next()->setLineHeight( d->mLineHeight );
 }
@@ -131,7 +131,7 @@ int AbstractColumnFrameRenderer::noOfLinesPerFrame() const
 }
 
 
-void AbstractColumnFrameRenderer::addColumn( KHEUI::AbstractColumnRenderer *columnRenderer )
+void AbstractColumnFrameRenderer::addColumn( Okteta::AbstractColumnRenderer *columnRenderer )
 {
     d->mColumns.append( columnRenderer );
 
@@ -139,7 +139,7 @@ void AbstractColumnFrameRenderer::addColumn( KHEUI::AbstractColumnRenderer *colu
 }
 
 
-void AbstractColumnFrameRenderer::removeColumn( KHEUI::AbstractColumnRenderer *columnRenderer )
+void AbstractColumnFrameRenderer::removeColumn( Okteta::AbstractColumnRenderer *columnRenderer )
 {
     const int columnPos = d->mColumns.indexOf( columnRenderer );
     if( columnPos != -1 )
@@ -153,41 +153,41 @@ void AbstractColumnFrameRenderer::removeColumn( KHEUI::AbstractColumnRenderer *c
 
 void AbstractColumnFrameRenderer::renderFrame( QPainter *painter, int frameIndex )
 {
-    KHEUI::KPixelXs renderedXs = KHEUI::KPixelXs::fromWidth( 0, width() );
+    Okteta::KPixelXs renderedXs = Okteta::KPixelXs::fromWidth( 0, width() );
 
     // content to be shown?
     if( renderedXs.startsBefore(d->mColumnsWidth) )
     {
         // collect affected columns
-        QList<KHEUI::AbstractColumnRenderer*> columnRenderers;
-        QListIterator<KHEUI::AbstractColumnRenderer*> it( d->mColumns );
+        QList<Okteta::AbstractColumnRenderer*> columnRenderers;
+        QListIterator<Okteta::AbstractColumnRenderer*> it( d->mColumns );
         while( it.hasNext() )
         {
-            KHEUI::AbstractColumnRenderer *columnRenderer = it.next();
+            Okteta::AbstractColumnRenderer *columnRenderer = it.next();
             if( columnRenderer->isVisible() && columnRenderer->overlaps(renderedXs) )
                 columnRenderers.append( columnRenderer );
         }
 
         // calculate affected lines
         const int baseLine = frameIndex * noOfLinesPerFrame();
-        KHE::Section renderedLines = KHE::Section::fromWidth( baseLine, noOfLinesPerFrame() );
+        KDE::Section renderedLines = KDE::Section::fromWidth( baseLine, noOfLinesPerFrame() );
         renderedLines.restrictEndTo( noOfLines()-1 );
 
-        KHEUI::KPixelYs renderedYs = KHEUI::KPixelYs::fromWidth( 0, renderedLines.width()*d->mLineHeight );
+        Okteta::KPixelYs renderedYs = Okteta::KPixelYs::fromWidth( 0, renderedLines.width()*d->mLineHeight );
 
         // any lines of any columns to be drawn?
         if( renderedLines.isValid() )
         {
             // paint full columns
-            QListIterator<KHEUI::AbstractColumnRenderer*> fit( columnRenderers ); // TODO: reuse later, see some lines below
+            QListIterator<Okteta::AbstractColumnRenderer*> fit( columnRenderers ); // TODO: reuse later, see some lines below
             while( fit.hasNext() )
                 fit.next()->renderColumn( painter, renderedXs, renderedYs );
 
-            KHEUI::KPixelY cy = 0;
+            Okteta::KPixelY cy = 0;
             // starting painting with the first line
             int line = renderedLines.start();
-            QListIterator<KHEUI::AbstractColumnRenderer*> it( columnRenderers );
-            KHEUI::AbstractColumnRenderer *columnRenderer = it.next();
+            QListIterator<Okteta::AbstractColumnRenderer*> it( columnRenderers );
+            Okteta::AbstractColumnRenderer *columnRenderer = it.next();
             painter->translate( columnRenderer->x(), cy );
 
             while( true )
@@ -208,7 +208,7 @@ void AbstractColumnFrameRenderer::renderFrame( QPainter *painter, int frameIndex
                 if( line > renderedLines.end() )
                     break;
 
-                QListIterator<KHEUI::AbstractColumnRenderer*> it( columnRenderers );
+                QListIterator<Okteta::AbstractColumnRenderer*> it( columnRenderers );
                 columnRenderer = it.next();
                 painter->translate( columnRenderer->x(), d->mLineHeight );
 
@@ -231,7 +231,7 @@ void AbstractColumnFrameRenderer::renderFrame( QPainter *painter, int frameIndex
        renderedYs.set( renderedYs.nextBehindEnd(), height()-1 );
         if( renderedYs.isValid() )
         {
-            QListIterator<KHEUI::AbstractColumnRenderer*> it( columnRenderers );
+            QListIterator<Okteta::AbstractColumnRenderer*> it( columnRenderers );
             while( it.hasNext() )
                 it.next()->renderEmptyColumn( painter, renderedXs, renderedYs );
         }

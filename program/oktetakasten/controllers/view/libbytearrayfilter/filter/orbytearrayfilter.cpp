@@ -37,7 +37,7 @@ OrByteArrayFilter::OrByteArrayFilter()
 AbstractByteArrayFilterParameterSet *OrByteArrayFilter::parameterSet() { return &mParameterSet; }
 
 bool OrByteArrayFilter::filter( char *result,
-                                KHECore::AbstractByteArrayModel *model, const KHE::Section &section ) const
+                                Okteta::AbstractByteArrayModel *model, const KDE::Section &section ) const
 {
     const QByteArray operand = mParameterSet.operand();
     const int operandSize = operand.size();

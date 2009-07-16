@@ -20,13 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_CHANGESDATASTORAGE_H
-#define KHE_CORE_CHANGESDATASTORAGE_H
+#ifndef CHANGESDATASTORAGE_H
+#define CHANGESDATASTORAGE_H
 
 // Qt
 #include <QtCore/QByteArray>
 
-namespace KHECore
+namespace Okteta
 {
 
 class ChangesDataStorage

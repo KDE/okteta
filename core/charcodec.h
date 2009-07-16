@@ -20,22 +20,22 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_CHARCODEC_H
-#define KHE_CORE_CHARCODEC_H
+#ifndef CHARCODEC_H
+#define CHARCODEC_H
 
 
 // lib
-#include "khe.h"
+#include "oktetacore.h"
 #include "oktetacore_export.h"
 
 class QStringList;
 class QChar;
 
 
-namespace KHECore
+namespace Okteta
 {
 
-class KChar;
+class Character;
 
 
 class OKTETACORE_EXPORT CharCodec
@@ -52,7 +52,7 @@ class OKTETACORE_EXPORT CharCodec
     static const QStringList &codecNames();
 
   public: // API to be implemented
-    virtual KChar decode( char Byte ) const = 0;
+    virtual Character decode( char Byte ) const = 0;
     virtual bool encode( char *D, const QChar &C ) const = 0;
     virtual bool canEncode( const QChar &C ) const = 0;
     virtual const QString& name() const = 0;

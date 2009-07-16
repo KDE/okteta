@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_BYTEARRAYTABLERANGES_H
-#define KHE_UI_BYTEARRAYTABLERANGES_H
+#ifndef OKTETA_BYTEARRAYTABLERANGES_H
+#define OKTETA_BYTEARRAYTABLERANGES_H
 
 // lib
 #include "selection.h"
@@ -30,12 +30,12 @@
 // Okteta core
 #include <sectionlist.h>
 
-namespace KHE {
+namespace KDE {
 class ArrayChangeMetricsList;
 }
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 class ByteArrayTableLayout;
@@ -53,29 +53,29 @@ class OKTETAGUI_EXPORT ByteArrayTableRanges
     ~ByteArrayTableRanges();
 
   public: // modifcation access
-    void setMarking( const KHE::Section &M );
+    void setMarking( const KDE::Section &M );
     void setSelectionStart( int StartIndex );
     void setSelectionEnd( int StartIndex );
-    void setSelection( const KHE::Section &S );
+    void setSelection( const KDE::Section &S );
     /** */
-    void setFirstWordSelection( const KHE::Section &S );
+    void setFirstWordSelection( const KDE::Section &S );
     /** */
     void ensureWordSelectionForward( bool Forward );
 
     /** removes marking and returns true if something changed */
     void removeMarking();
     /** removes selection with id and returns it */
-    KHE::Section removeSelection( int id = 0 );
+    KDE::Section removeSelection( int id = 0 );
     /** removes all but the standard selection and returns true if something changed */
     void removeFurtherSelections();
 
     /** assumes all added lines to overlap */
-    void addChangedOffsetLines( const KHE::Section& changesLines );
+    void addChangedOffsetLines( const KDE::Section& changesLines );
 
-    void addChangedRange( const KHE::Section &S );
+    void addChangedRange( const KDE::Section &S );
     void addChangedRange( int SI, int EI );
     void addChangedRange( const CoordRange &NewRange );
-    void adaptToChanges( const KHE::ArrayChangeMetricsList& changeList, int oldLength );
+    void adaptToChanges( const KDE::ArrayChangeMetricsList& changeList, int oldLength );
     void resetChangedRanges();
 
     void setModified( bool M = true );
@@ -86,11 +86,11 @@ class OKTETAGUI_EXPORT ByteArrayTableRanges
     int noOfSelections() const;
     int selectionStart() const;
     int selectionEnd() const;
-    KHE::Section selection() const;
-    KHE::Section firstWordSelection() const;
+    KDE::Section selection() const;
+    KDE::Section firstWordSelection() const;
     int selectionLength() const;
     bool isModified() const;
-    KHE::Section changedOffsetLines() const;
+    KDE::Section changedOffsetLines() const;
 
   public: // calculated logic access
     bool hasSelection() const;
@@ -104,23 +104,23 @@ class OKTETAGUI_EXPORT ByteArrayTableRanges
     bool overlapsSelection( int FirstIndex, int LastIndex, int *SI, int *EI ) const;
     bool overlapsMarking( int FirstIndex, int LastIndex, int *SI, int *EI ) const;
 //    bool overlapsChanges( int FirstIndex, int LastIndex, int *SI, int *EI ) const;
-//    bool overlapsChanges( KHE::Section Indizes, KHE::Section *ChangedRange ) const;
+//    bool overlapsChanges( KDE::Section Indizes, KDE::Section *ChangedRange ) const;
     bool overlapsChanges( const CoordRange &Range, CoordRange *ChangedRange ) const;
-    const KHE::Section *firstOverlappingSelection( const KHE::Section &Range ) const;
-    const KHE::Section *overlappingMarking( const KHE::Section &Range ) const;
+    const KDE::Section *firstOverlappingSelection( const KDE::Section &Range ) const;
+    const KDE::Section *overlappingMarking( const KDE::Section &Range ) const;
 
 
   protected:
     /** true if something changed */
     bool Modified;
 
-    KHE::Section Marking;
+    KDE::Section Marking;
     Selection mSelection;
     /** memories first selected word on wordwise selection */
-    KHE::Section FirstWordSelection;
+    KDE::Section FirstWordSelection;
 
     /** lines that were added or removed */
-    KHE::Section mChangedOffsetLines;
+    KDE::Section mChangedOffsetLines;
 
     CoordRangeList ChangedRanges;
 
@@ -132,11 +132,11 @@ inline int ByteArrayTableRanges::noOfSelections()  const { return 1; }
 
 inline int ByteArrayTableRanges::selectionStart()  const { return mSelection.start(); }
 inline int ByteArrayTableRanges::selectionEnd()    const { return mSelection.end(); }
-inline KHE::Section ByteArrayTableRanges::selection()  const { return mSelection.section(); }
-inline KHE::Section ByteArrayTableRanges::firstWordSelection()  const { return FirstWordSelection; }
+inline KDE::Section ByteArrayTableRanges::selection()  const { return mSelection.section(); }
+inline KDE::Section ByteArrayTableRanges::firstWordSelection()  const { return FirstWordSelection; }
 inline int ByteArrayTableRanges::selectionLength() const { return mSelection.section().width(); }
 inline bool ByteArrayTableRanges::isModified()     const { return Modified; }
-inline KHE::Section ByteArrayTableRanges::changedOffsetLines() const { return mChangedOffsetLines; }
+inline KDE::Section ByteArrayTableRanges::changedOffsetLines() const { return mChangedOffsetLines; }
 
 inline bool ByteArrayTableRanges::hasSelection()             const { return mSelection.isValid(); }
 inline bool ByteArrayTableRanges::selectionStarted()         const { return mSelection.started(); }

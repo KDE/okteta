@@ -29,7 +29,7 @@
 // Qt
 #include <QtCore/QList>
 
-namespace KHECore {
+namespace Okteta {
 class Bookmarkable;
 class Bookmark;
 class AbstractByteArrayModel;
@@ -68,15 +68,15 @@ class BookmarksController : public AbstractXmlGuiController
     void onBookmarkTriggered( QAction* );
 
   private Q_SLOTS:
-    void onBookmarksAdded( const QList<KHECore::Bookmark> &bookmarks );
-    void onBookmarksRemoved( const QList<KHECore::Bookmark> &bookmarks );
+    void onBookmarksAdded( const QList<Okteta::Bookmark> &bookmarks );
+    void onBookmarksRemoved( const QList<Okteta::Bookmark> &bookmarks );
     void onCursorPositionChanged( int newPosition );
 
   protected:
     KXMLGUIClient* mGuiClient;
     KByteArrayDisplay* mByteArrayDisplay;
-    KHECore::AbstractByteArrayModel *mByteArray;
-    KHECore::Bookmarkable *mBookmarks;
+    Okteta::AbstractByteArrayModel *mByteArray;
+    Okteta::Bookmarkable *mBookmarks;
 
     KAction* mCreateAction;
     KAction* mDeleteAction;

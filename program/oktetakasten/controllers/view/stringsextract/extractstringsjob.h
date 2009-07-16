@@ -31,7 +31,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QList>
 
-namespace KHECore {
+namespace Okteta {
 class AbstractByteArrayModel;
 class CharCodec;
 }
@@ -45,9 +45,9 @@ class ExtractStringsJob : public QObject // not yet: KJob
   Q_OBJECT
 
   public:
-    ExtractStringsJob( const KHECore::AbstractByteArrayModel *model,
-                       const KHE::Section &selection,
-                       const KHECore::CharCodec *charCodec,
+    ExtractStringsJob( const Okteta::AbstractByteArrayModel *model,
+                       const KDE::Section &selection,
+                       const Okteta::CharCodec *charCodec,
                        int minLength,
                        QList<ContainedString> *containedStringList );
 
@@ -55,18 +55,18 @@ class ExtractStringsJob : public QObject // not yet: KJob
     void exec();
 
   protected:
-    const KHECore::AbstractByteArrayModel *mByteArrayModel;
-    const KHE::Section mSelection;
-    const KHECore::CharCodec *mCharCodec;
+    const Okteta::AbstractByteArrayModel *mByteArrayModel;
+    const KDE::Section mSelection;
+    const Okteta::CharCodec *mCharCodec;
     const int mMinLength;
 
     QList<ContainedString> *mContainedStringList;
 };
 
 
-inline ExtractStringsJob::ExtractStringsJob( const KHECore::AbstractByteArrayModel *model,
-                                             const KHE::Section &selection,
-                                             const KHECore::CharCodec *charCodec,
+inline ExtractStringsJob::ExtractStringsJob( const Okteta::AbstractByteArrayModel *model,
+                                             const KDE::Section &selection,
+                                             const Okteta::CharCodec *charCodec,
                                              int minLength,
                                              QList<ContainedString> *containedStringList )
  : mByteArrayModel( model ), mSelection( selection ), mCharCodec( charCodec ), mMinLength( minLength ),

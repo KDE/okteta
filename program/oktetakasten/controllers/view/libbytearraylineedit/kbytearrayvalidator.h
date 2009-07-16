@@ -25,11 +25,11 @@
 
 
 // Okteta core
-#include <khe.h>
+#include <oktetacore.h>
 // Qt
 #include <QtGui/QValidator>
 
-namespace KHECore {
+namespace Okteta {
 class ValueCodec;
 class CharCodec;
 }
@@ -40,14 +40,14 @@ class KByteArrayValidator : public QValidator
   Q_OBJECT
 
   public:
-    // matching KHECore::ValueCoding
+    // matching Okteta::ValueCoding
     enum Coding { InvalidCoding = -1, HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, CharCoding=4 };
 
     static const QStringList &codecNames();
     static const int CodecNumber = 5;
 
   public:
-    explicit KByteArrayValidator( QObject *parent, Coding codecId = CharCoding, int charCodecId = KHECore::LocalEncoding );
+    explicit KByteArrayValidator( QObject *parent, Coding codecId = CharCoding, int charCodecId = Okteta::LocalEncoding );
     virtual ~KByteArrayValidator();
 
   public: // QValidator API
@@ -73,8 +73,8 @@ class KByteArrayValidator : public QValidator
 //     QString zeroExtend( const QString &src, int destLen ) const;
 
     Coding mCodecId;
-    KHECore::ValueCodec *mValueCodec;
-    KHECore::CharCodec *mCharCodec;
+    Okteta::ValueCodec *mValueCodec;
+    Okteta::CharCodec *mCharCodec;
 };
 
 #endif

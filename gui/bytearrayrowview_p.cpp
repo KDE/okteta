@@ -49,7 +49,7 @@
 #include <QtCore/QTimer>
 
 
-namespace KHEUI
+namespace Okteta
 {
 static const int DefaultScrollTimerPeriod = 100;
 static const int InsertCursorWidth = 2;
@@ -79,7 +79,7 @@ void ByteArrayRowViewPrivate::init()
 
     // creating the columns in the needed order
     mOffsetColumn =
-        new OffsetColumnRenderer( mStylist, mTableLayout, KOffsetFormat::Hexadecimal );
+        new OffsetColumnRenderer( mStylist, mTableLayout, OffsetFormat::Hexadecimal );
     mBorderColumn =
         new BorderColumnRenderer( mStylist, false );
     mByteArrayColumn =
@@ -94,7 +94,7 @@ void ByteArrayRowViewPrivate::init()
     mInactiveCoding = AbstractByteArrayView::ValueCodingId;
 
     // set char encoding
-    mByteArrayColumn->setValueCodec( (KHECore::ValueCoding)mValueCoding, mValueCodec );
+    mByteArrayColumn->setValueCodec( (Okteta::ValueCoding)mValueCoding, mValueCodec );
     mByteArrayColumn->setCharCodec( mCharCodec );
 //     mByteArrayColumn->setActiveCoding( mActiveCoding );
 
@@ -114,7 +114,7 @@ void ByteArrayRowViewPrivate::init()
 int ByteArrayRowViewPrivate::visibleCodings()                          const { return mByteArrayColumn->visibleCodings(); }
 ByteArrayRowView::CodingTypeId ByteArrayRowViewPrivate::activeCoding() const { return mActiveCoding; }
 
-void ByteArrayRowViewPrivate::setByteArrayModel( KHECore::AbstractByteArrayModel* _byteArrayModel )
+void ByteArrayRowViewPrivate::setByteArrayModel( Okteta::AbstractByteArrayModel* _byteArrayModel )
 {
     mValueEditor->reset();
 
@@ -145,7 +145,7 @@ void ByteArrayRowViewPrivate::setValueCoding( AbstractByteArrayView::ValueCoding
 
     AbstractByteArrayViewPrivate::setValueCoding( valueCoding );
 
-    mByteArrayColumn->setValueCodec( (KHECore::ValueCoding)mValueCoding, mValueCodec );
+    mByteArrayColumn->setValueCodec( (Okteta::ValueCoding)mValueCoding, mValueCodec );
     mValueEditor->adaptToValueCodecChange();
 
     const uint newCodingWidth = mValueCodec->encodingWidth();
@@ -787,7 +787,7 @@ void ByteArrayRowViewPrivate::updateChanged()
     const KPixelXs Xs = KPixelXs::fromWidth( xOffset, q->visibleWidth() );
 
     // do updates in offset column 
-    const KHE::Section changedOffsetLines = mTableRanges->changedOffsetLines();
+    const KDE::Section changedOffsetLines = mTableRanges->changedOffsetLines();
     if( !changedOffsetLines.isEmpty() )
         q->updateColumn( *mOffsetColumn, changedOffsetLines );
 
@@ -804,7 +804,7 @@ void ByteArrayRowViewPrivate::updateChanged()
     if( dirtyColumns.size() > 0 )
     {
         // calculate affected lines/indizes
-        const KHE::Section fullPositions( 0, mTableLayout->noOfBytesPerLine()-1 );
+        const KDE::Section fullPositions( 0, mTableLayout->noOfBytesPerLine()-1 );
         CoordRange visibleRange( fullPositions, q->visibleLines() );
 
         const int lineHeight = q->lineHeight();
@@ -818,7 +818,7 @@ void ByteArrayRowViewPrivate::updateChanged()
             // only one line?
             if( changedRange.start().line() == changedRange.end().line() )
             {
-                const KHE::Section changedPositions( changedRange.start().pos(), changedRange.end().pos() );
+                const KDE::Section changedPositions( changedRange.start().pos(), changedRange.end().pos() );
                 while( columnIt.hasNext() )
                 {
                     const KPixelXs xPixels = columnIt.next()->xsOfLinePositionsInclSpaces( changedPositions );
@@ -830,7 +830,7 @@ void ByteArrayRowViewPrivate::updateChanged()
             else
             {
                 // first line
-                const KHE::Section firstChangedPositions( changedRange.start().pos(), fullPositions.end() );
+                const KDE::Section firstChangedPositions( changedRange.start().pos(), fullPositions.end() );
                 while( columnIt.hasNext() )
                 {
                     const KPixelXs XPixels = columnIt.next()->xsOfLinePositionsInclSpaces( firstChangedPositions );
@@ -853,7 +853,7 @@ void ByteArrayRowViewPrivate::updateChanged()
                 // last line
                 cy += lineHeight;
                 columnIt.toFront();
-                const KHE::Section lastChangedPositions( fullPositions.start(), changedRange.end().pos() );
+                const KDE::Section lastChangedPositions( fullPositions.start(), changedRange.end().pos() );
                 while( columnIt.hasNext() )
                 {
                     const KPixelXs XPixels = columnIt.next()->xsOfLinePositionsInclSpaces( lastChangedPositions );
@@ -1182,8 +1182,8 @@ void ByteArrayRowViewPrivate::handleMouseMove( const QPoint& point ) // handles 
     if( mInDoubleClick && mTableRanges->hasFirstWordSelection() )
     {
         int newIndex = mTableCursor->realIndex();
-        const KHE::Section firstWordSelection = mTableRanges->firstWordSelection();
-        const KHECore::WordByteArrayService WBS( mByteArrayModel, charCodec() );
+        const KDE::Section firstWordSelection = mTableRanges->firstWordSelection();
+        const Okteta::WordByteArrayService WBS( mByteArrayModel, charCodec() );
         // are we before the selection?
         if( firstWordSelection.startsBehind(newIndex) )
         {

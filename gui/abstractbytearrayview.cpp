@@ -30,7 +30,7 @@
 #include "bytearraytablelayout.h"
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 AbstractByteArrayView::AbstractByteArrayView( AbstractByteArrayViewPrivate* dd, QWidget* parent )
@@ -41,7 +41,7 @@ AbstractByteArrayView::AbstractByteArrayView( AbstractByteArrayViewPrivate* dd, 
     d->init();
 }
 
-KHECore::AbstractByteArrayModel* AbstractByteArrayView::byteArrayModel() const
+Okteta::AbstractByteArrayModel* AbstractByteArrayView::byteArrayModel() const
 {
     Q_D( const AbstractByteArrayView );
     return d->byteArrayModel();
@@ -82,7 +82,7 @@ AbstractByteArrayView::ValueCoding AbstractByteArrayView::valueCoding() const
     Q_D( const AbstractByteArrayView );
     return d->valueCoding();
 }
-const KHECore::ValueCodec* AbstractByteArrayView::valueCodec() const
+const Okteta::ValueCodec* AbstractByteArrayView::valueCodec() const
 {
     Q_D( const AbstractByteArrayView );
     return d->valueCodec();
@@ -97,7 +97,7 @@ const QString& AbstractByteArrayView::charCodingName() const
     Q_D( const AbstractByteArrayView );
     return d->charCodingName();
 }
-const KHECore::CharCodec* AbstractByteArrayView::charCodec() const
+const Okteta::CharCodec* AbstractByteArrayView::charCodec() const
 {
     Q_D( const AbstractByteArrayView );
     return d->charCodec();
@@ -146,7 +146,7 @@ AbstractByteArrayView::ResizeStyle AbstractByteArrayView::resizeStyle() const
     return d->resizeStyle();
 }
 
-KHE::Section AbstractByteArrayView::selection() const
+KDE::Section AbstractByteArrayView::selection() const
 {
     Q_D( const AbstractByteArrayView );
     return d->selection();
@@ -211,7 +211,7 @@ void AbstractByteArrayView::removeSelectedData()
     d->removeSelectedData();
 }
 
-void AbstractByteArrayView::setByteArrayModel( KHECore::AbstractByteArrayModel* byteArrayModel )
+void AbstractByteArrayView::setByteArrayModel( Okteta::AbstractByteArrayModel* byteArrayModel )
 {
     Q_D( AbstractByteArrayView );
     d->setByteArrayModel( byteArrayModel );

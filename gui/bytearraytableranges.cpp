@@ -28,7 +28,7 @@
 #include <arraychangemetricslist.h>
 
 
-namespace KHEUI {
+namespace Okteta {
 
 ByteArrayTableRanges::ByteArrayTableRanges( ByteArrayTableLayout *L )
  : Modified( false ),
@@ -51,7 +51,7 @@ void ByteArrayTableRanges::reset()
 }
 
 
-void ByteArrayTableRanges::setMarking( const KHE::Section &M )
+void ByteArrayTableRanges::setMarking( const KDE::Section &M )
 {
   if( Marking == M )
     return;
@@ -68,7 +68,7 @@ void ByteArrayTableRanges::removeFurtherSelections()
 }
 
 
-void ByteArrayTableRanges::setSelection( const KHE::Section &S )
+void ByteArrayTableRanges::setSelection( const KDE::Section &S )
 {
   bool Changed = mSelection.isValid();
   if( Changed )
@@ -89,7 +89,7 @@ void ByteArrayTableRanges::setSelectionStart( int StartIndex )
 
 void ByteArrayTableRanges::setSelectionEnd( int EndIndex )
 {
-  KHE::Section OldSelection = mSelection.section();
+  KDE::Section OldSelection = mSelection.section();
   mSelection.setEnd( EndIndex );
 
   // TODO: think about rather building a diff of the sections
@@ -141,7 +141,7 @@ void ByteArrayTableRanges::setSelectionEnd( int EndIndex )
       CE = OldSelection.end();
     }
   }
-  KHE::Section C( CS, CE );
+  KDE::Section C( CS, CE );
 
   bool Changed = C.isValid();
   if( Changed )
@@ -150,12 +150,12 @@ void ByteArrayTableRanges::setSelectionEnd( int EndIndex )
 }
 
 
-KHE::Section ByteArrayTableRanges::removeSelection( int id )
+KDE::Section ByteArrayTableRanges::removeSelection( int id )
 {
   if( id > 0 )
-    return KHE::Section();
+    return KDE::Section();
 
-  KHE::Section Section = mSelection.section();
+  KDE::Section Section = mSelection.section();
   bool Changed = Section.isValid();
   if( Changed )
     addChangedRange( Section );
@@ -169,7 +169,7 @@ KHE::Section ByteArrayTableRanges::removeSelection( int id )
 
 bool ByteArrayTableRanges::overlapsSelection( int FirstIndex, int LastIndex, int *SI, int *EI ) const
 {
-  if( mSelection.section().overlaps(KHE::Section(FirstIndex,LastIndex)) )
+  if( mSelection.section().overlaps(KDE::Section(FirstIndex,LastIndex)) )
   {
     *SI = mSelection.start();
     *EI = mSelection.end();
@@ -181,7 +181,7 @@ bool ByteArrayTableRanges::overlapsSelection( int FirstIndex, int LastIndex, int
 
 bool ByteArrayTableRanges::overlapsMarking( int FirstIndex, int LastIndex, int *SI, int *EI ) const
 {
-  if( Marking.overlaps(KHE::Section(FirstIndex,LastIndex)) )
+  if( Marking.overlaps(KDE::Section(FirstIndex,LastIndex)) )
   {
     *SI = Marking.start();
     *EI = Marking.end();
@@ -191,13 +191,13 @@ bool ByteArrayTableRanges::overlapsMarking( int FirstIndex, int LastIndex, int *
 }
 
 
-const KHE::Section *ByteArrayTableRanges::firstOverlappingSelection( const KHE::Section &Range ) const
+const KDE::Section *ByteArrayTableRanges::firstOverlappingSelection( const KDE::Section &Range ) const
 {
   return mSelection.section().overlaps(Range) ? &mSelection.section() : 0;
 }
 
 
-const KHE::Section *ByteArrayTableRanges::overlappingMarking( const KHE::Section &Range ) const
+const KDE::Section *ByteArrayTableRanges::overlappingMarking( const KDE::Section &Range ) const
 {
   return Marking.overlaps(Range) ? &Marking : 0;
 }
@@ -218,9 +218,9 @@ bool ByteArrayTableRanges::overlapsChanges( int FirstIndex, int LastIndex, int *
   return false;
 }
 
-bool ByteArrayTableRanges::overlapsChanges( KHE::Section Indizes, KHE::Section *ChangedRange ) const
+bool ByteArrayTableRanges::overlapsChanges( KDE::Section Indizes, KDE::Section *ChangedRange ) const
 {
-  for( KHE::SectionList::const_iterator S=ChangedRanges.begin(); S!=ChangedRanges.end(); ++S )
+  for( KDE::SectionList::const_iterator S=ChangedRanges.begin(); S!=ChangedRanges.end(); ++S )
   {
     if( (*S).overlaps(Indizes) )
     {
@@ -247,7 +247,7 @@ bool ByteArrayTableRanges::overlapsChanges( const CoordRange &Range, CoordRange 
   return false;
 }
 
-void ByteArrayTableRanges::addChangedOffsetLines( const KHE::Section& changedLines )
+void ByteArrayTableRanges::addChangedOffsetLines( const KDE::Section& changedLines )
 {
     if( mChangedOffsetLines.isEmpty() )
     {
@@ -260,11 +260,11 @@ void ByteArrayTableRanges::addChangedOffsetLines( const KHE::Section& changedLin
 
 void ByteArrayTableRanges::addChangedRange( int SI, int EI )
 {
-  addChangedRange( KHE::Section(SI,EI) );
+  addChangedRange( KDE::Section(SI,EI) );
 }
 
 
-void ByteArrayTableRanges::addChangedRange( const KHE::Section &S )
+void ByteArrayTableRanges::addChangedRange( const KDE::Section &S )
 {
 // kDebug() << "adding change section "<<S.start()<<","<<S.end();
   addChangedRange( Layout->coordRangeOfIndizes(S) );
@@ -299,7 +299,7 @@ void ByteArrayTableRanges::resetChangedRanges()
 }
 
 
-void ByteArrayTableRanges::setFirstWordSelection( const KHE::Section &Section )
+void ByteArrayTableRanges::setFirstWordSelection( const KDE::Section &Section )
 {
   FirstWordSelection = Section;
   setSelection( FirstWordSelection );
@@ -317,14 +317,14 @@ void ByteArrayTableRanges::setFirstWordSelection( const KHE::Section &Section )
  }
 
 
-void ByteArrayTableRanges::adaptToChanges( const KHE::ArrayChangeMetricsList& changeList, int oldLength )
+void ByteArrayTableRanges::adaptToChanges( const KDE::ArrayChangeMetricsList& changeList, int oldLength )
 {
-    foreach( const KHE::ArrayChangeMetrics& change, changeList )
+    foreach( const KDE::ArrayChangeMetrics& change, changeList )
     {
         //TODO: change parameters to ArrayChangeMetrics
         switch( change.type() )
         {
-        case KHE::ArrayChangeMetrics::Replacement:
+        case KDE::ArrayChangeMetrics::Replacement:
         {
             oldLength += change.lengthChange();
             const int offset = change.offset();
@@ -338,7 +338,7 @@ void ByteArrayTableRanges::adaptToChanges( const KHE::ArrayChangeMetricsList& ch
                 mSelection.adaptToReplacement( offset, change.removeLength(), change.insertLength() );
             break;
         }
-        case KHE::ArrayChangeMetrics::Swapping:
+        case KDE::ArrayChangeMetrics::Swapping:
             addChangedRange( change.offset(), change.secondEnd() );
 
             if( mSelection.isValid() )

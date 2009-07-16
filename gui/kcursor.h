@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_KCURSOR_H
-#define KHE_UI_KCURSOR_H
+#ifndef OKTETA_KCURSOR_H
+#define OKTETA_KCURSOR_H
 
 
 // lib
@@ -30,7 +30,7 @@
 #include <QtGui/QPixmap>
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 /**

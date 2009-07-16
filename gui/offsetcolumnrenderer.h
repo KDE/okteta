@@ -20,15 +20,15 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_OFFSETCOLUMNRENDERER_H
-#define KHE_UI_OFFSETCOLUMNRENDERER_H
+#ifndef OKTETA_OFFSETCOLUMNRENDERER_H
+#define OKTETA_OFFSETCOLUMNRENDERER_H
 
 // lib
-#include "koffsetformat.h"
+#include "offsetformat.h"
 #include <abstractcolumnrenderer.h>
 
 
-namespace KHEUI
+namespace Okteta
 {
 class ByteArrayTableLayout;
 
@@ -39,7 +39,7 @@ class ByteArrayTableLayout;
 class OKTETAGUI_EXPORT OffsetColumnRenderer : public AbstractColumnRenderer
 {
   public:
-    OffsetColumnRenderer( AbstractColumnStylist* stylist, ByteArrayTableLayout* layout, KOffsetFormat::KFormat format );
+    OffsetColumnRenderer( AbstractColumnStylist* stylist, ByteArrayTableLayout* layout, OffsetFormat::Format format );
     virtual ~OffsetColumnRenderer();
 
   public:  // AbstractColumnRenderer API
@@ -49,7 +49,7 @@ class OKTETAGUI_EXPORT OffsetColumnRenderer : public AbstractColumnRenderer
     virtual void renderEmptyColumn( QPainter *painter, const KPixelXs &Xs, const KPixelYs &Ys );
 
   public:
-    void setFormat( KOffsetFormat::KFormat format );
+    void setFormat( OffsetFormat::Format format );
     /** sets width of digits and recalculates depend sizes  */
     void setDigitWidth( KPixelX digitWidth );
     /** */
@@ -58,7 +58,7 @@ class OKTETAGUI_EXPORT OffsetColumnRenderer : public AbstractColumnRenderer
   public: // read access
 //     int delta() const;
     int codingWidth() const;
-    KOffsetFormat::print printFunction() const;
+    OffsetFormat::print printFunction() const;
 
 
   protected:
@@ -79,13 +79,13 @@ class OKTETAGUI_EXPORT OffsetColumnRenderer : public AbstractColumnRenderer
     KPixelY mDigitBaseLine;
 
   protected: // general layout
-    KOffsetFormat::KFormat mFormat;
+    OffsetFormat::Format mFormat;
 
     int mCodingWidth;
-    KOffsetFormat::print PrintFunction;
+    OffsetFormat::print PrintFunction;
 
     /** buffer to hold the formatted coding */
-    mutable char mCodedOffset[KOffsetFormat::MaxFormatWidth+1];
+    mutable char mCodedOffset[OffsetFormat::MaxFormatWidth+1];
 
   protected: // firstnext trips related
     /** */
@@ -94,7 +94,7 @@ class OKTETAGUI_EXPORT OffsetColumnRenderer : public AbstractColumnRenderer
 
 
 inline int OffsetColumnRenderer::codingWidth()                       const { return mCodingWidth; }
-inline KOffsetFormat::print OffsetColumnRenderer::printFunction()    const { return PrintFunction; }
+inline OffsetFormat::print OffsetColumnRenderer::printFunction()    const { return PrintFunction; }
 
 }
 

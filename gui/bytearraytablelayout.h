@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_BYTEARRAYTABLELAYOUT_H
-#define KHE_UI_BYTEARRAYTABLELAYOUT_H
+#ifndef OKTETA_BYTEARRAYTABLELAYOUT_H
+#define OKTETA_BYTEARRAYTABLELAYOUT_H
 
 // lib
 #include "coordrange.h"
@@ -31,7 +31,7 @@
 
 
 // TODO: rename things like startOffset and firstLineOffset, not really descriptive
-namespace KHEUI
+namespace Okteta
 {
 
 /**@short the logical layout of a byte array table for a view
@@ -134,10 +134,10 @@ class OKTETAGUI_EXPORT ByteArrayTableLayout
     /** calculates the coord in which index is found. if index is invalid the behaviour is undefinded */
     Coord coordOfIndex( int index ) const;
     /** calculates the range of coords in which the indizes are found. if indizes are invalid the behaviour is undefinded */
-    CoordRange coordRangeOfIndizes( const KHE::Section &indizes ) const;
+    CoordRange coordRangeOfIndizes( const KDE::Section &indizes ) const;
 
     /** returns the used positions in line */
-    KHE::Section linePositions( int line ) const;
+    KDE::Section linePositions( int line ) const;
     /** returns the first Pos in line. if line is invalid the behaviour is undefinded */
     int firstLinePosition( int line ) const;
     /** returns the last Pos in line. if line is invalid the behaviour is undefinded */

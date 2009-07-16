@@ -20,15 +20,15 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_CHARBYTEARRAYCOLUMNRENDERER_H
-#define KHE_UI_CHARBYTEARRAYCOLUMNRENDERER_H
+#ifndef OKTETA_CHARBYTEARRAYCOLUMNRENDERER_H
+#define OKTETA_CHARBYTEARRAYCOLUMNRENDERER_H
 
 
 // lib
 #include "abstractbytearraycolumnrenderer.h"
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 /** buffer column that interprets the bytes as chars
@@ -39,7 +39,7 @@ class OKTETAGUI_EXPORT CharByteArrayColumnRenderer : public AbstractByteArrayCol
 {
   public:
     CharByteArrayColumnRenderer( AbstractColumnStylist* stylist,
-        KHECore::AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges );
+        Okteta::AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges );
     virtual ~CharByteArrayColumnRenderer();
 
 
@@ -72,7 +72,7 @@ class OKTETAGUI_EXPORT CharByteArrayColumnRenderer : public AbstractByteArrayCol
 
 
   protected: // AbstractByteArrayColumnRenderer API
-    virtual void renderByteText( QPainter *painter, char byte, KHECore::KChar byteChar, const QColor &color ) const;
+    virtual void renderByteText( QPainter *painter, char byte, Okteta::Character byteChar, const QColor &color ) const;
 
   protected:
     /** */

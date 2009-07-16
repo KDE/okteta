@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_KVALUEEDITOR_H
-#define KHE_UI_KVALUEEDITOR_H
+#ifndef OKTETA_KVALUEEDITOR_H
+#define OKTETA_KVALUEEDITOR_H
 
 
 // lib
@@ -30,7 +30,7 @@
 #include <QtCore/QString>
 
 
-namespace KHEUI
+namespace Okteta
 {
 class AbstractByteArrayView;
 

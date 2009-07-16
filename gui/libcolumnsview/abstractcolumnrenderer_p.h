@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_ABSTRACTCOLUMNRENDERER_P_H
-#define KHE_UI_ABSTRACTCOLUMNRENDERER_P_H
+#ifndef OKTETA_ABSTRACTCOLUMNRENDERER_P_H
+#define OKTETA_ABSTRACTCOLUMNRENDERER_P_H
 
 #include "abstractcolumnrenderer.h"
 
@@ -32,7 +32,7 @@
 #include <QtGui/QPalette>
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 class AbstractColumnRendererPrivate
@@ -62,7 +62,7 @@ inline AbstractColumnRendererPrivate::AbstractColumnRendererPrivate( AbstractCol
  : mStylist( stylist ),
    mIsVisible( true ),  //TODO: would false be better?
    mLineHeight( 0 ),
-   mXSpan( KHE::Section::fromWidth(0,0) )
+   mXSpan( KDE::Section::fromWidth(0,0) )
 {
 }
 

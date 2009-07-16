@@ -28,7 +28,7 @@
 // Qt
 #include <QtCore/QChar>
 
-namespace KHECore {
+namespace Okteta {
 class CharCodec;
 }
 
@@ -39,8 +39,8 @@ namespace Kasten
 class CharByteArrayColumnTextRenderer : public AbstractByteArrayColumnTextRenderer
 {
   public:
-    CharByteArrayColumnTextRenderer( const KHECore::AbstractByteArrayModel *byteArrayModel, int offset,
-        const KHEUI::CoordRange &coordRange,
+    CharByteArrayColumnTextRenderer( const Okteta::AbstractByteArrayModel *byteArrayModel, int offset,
+        const Okteta::CoordRange &coordRange,
         int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
         const QString &charCodecName, QChar substituteChar, QChar undefinedChar );
     virtual ~CharByteArrayColumnTextRenderer();
@@ -49,7 +49,7 @@ class CharByteArrayColumnTextRenderer : public AbstractByteArrayColumnTextRender
     virtual void renderLine( QTextStream* stream, bool isSubline ) const;
 
   protected:
-    const KHECore::CharCodec *mCharCodec;
+    const Okteta::CharCodec *mCharCodec;
     const QChar mSubstituteChar;
     const QChar mUndefinedChar;
 };

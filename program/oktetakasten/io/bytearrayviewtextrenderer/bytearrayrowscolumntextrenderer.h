@@ -28,11 +28,11 @@
 // Okteta gui
 #include <coordrange.h>
 // Okteta core
-#include <khe.h>
+#include <oktetacore.h>
 // Qt
 #include <QtCore/QChar>
 
-namespace KHECore {
+namespace Okteta {
 class ValueCodec;
 class CharCodec;
 class AbstractByteArrayModel;
@@ -46,11 +46,11 @@ namespace Kasten
 class ByteArrayRowsColumnTextRenderer : public AbstractColumnTextRenderer
 {
   public:
-    ByteArrayRowsColumnTextRenderer( const KHECore::AbstractByteArrayModel* byteArrayModel, int offset,
-        const KHEUI::CoordRange& coordRange,
+    ByteArrayRowsColumnTextRenderer( const Okteta::AbstractByteArrayModel* byteArrayModel, int offset,
+        const Okteta::CoordRange& coordRange,
         int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
         int visibleCodings,
-        KHECore::ValueCoding valueCoding,
+        Okteta::ValueCoding valueCoding,
         const QString& charCodecName, QChar substituteChar, QChar undefinedChar );
     virtual ~ByteArrayRowsColumnTextRenderer();
 
@@ -66,15 +66,15 @@ class ByteArrayRowsColumnTextRenderer : public AbstractColumnTextRenderer
     void setWidths( int byteWidth, int byteSpacingWidth, int noOfGroupedBytes );
 
   protected:
-    const KHECore::AbstractByteArrayModel* mByteArrayModel;
+    const Okteta::AbstractByteArrayModel* mByteArrayModel;
 
-    const KHEUI::CoordRange mCoordRange;
+    const Okteta::CoordRange mCoordRange;
 
     const int mNoOfBytesPerLine;
 
     const int mVisibleCodings;
-    const KHECore::ValueCodec* mValueCodec;
-    const KHECore::CharCodec* mCharCodec;
+    const Okteta::ValueCodec* mValueCodec;
+    const Okteta::CharCodec* mCharCodec;
     const QChar mSubstituteChar;
     const QChar mUndefinedChar;
 

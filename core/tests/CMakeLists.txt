@@ -26,51 +26,51 @@ kde4_add_unit_test( arraychangemetricstest  TESTNAME libokteta-core-arraychangem
 target_link_libraries( arraychangemetricstest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
 
-########### ksectiontest ###############
+########### sectiontest ###############
 
-set( ksectiontest_SRCS
-  ksectiontest.cpp
+set( sectiontest_SRCS
+  sectiontest.cpp
   ${SUTDIR}/section.cpp
 )
 
-kde4_add_unit_test( ksectiontest  TESTNAME libokteta-core-ksectiontest  ${ksectiontest_SRCS} )
-target_link_libraries( ksectiontest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+kde4_add_unit_test( sectiontest  TESTNAME libokteta-core-sectiontest  ${sectiontest_SRCS} )
+target_link_libraries( sectiontest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
 
-########### ksectionlisttest ###############
+########### sectionlisttest ###############
 
-set( ksectionlisttest_SRCS
-  ksectionlisttest.cpp
+set( sectionlisttest_SRCS
+  sectionlisttest.cpp
 )
 
-kde4_add_unit_test( ksectionlisttest  TESTNAME libokteta-core-ksectionlisttest  ${ksectionlisttest_SRCS} )
-target_link_libraries( ksectionlisttest  testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+kde4_add_unit_test( sectionlisttest  TESTNAME libokteta-core-sectionlisttest  ${sectionlisttest_SRCS} )
+target_link_libraries( sectionlisttest  testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
 
-########### kfixedsizebytearraymodeltest ###############
+########### fixedsizebytearraymodeltest ###############
 
-set( kfixedsizebytearraymodeltest_SRCS
-  kfixedsizebytearraymodeltest.cpp
+set( fixedsizebytearraymodeltest_SRCS
+  fixedsizebytearraymodeltest.cpp
 )
 
-kde4_add_unit_test( kfixedsizebytearraymodeltest  TESTNAME libokteta-core-kfixedsizebytearraymodeltest  ${kfixedsizebytearraymodeltest_SRCS})
-target_link_libraries( kfixedsizebytearraymodeltest
+kde4_add_unit_test( fixedsizebytearraymodeltest  TESTNAME libokteta-core-fixedsizebytearraymodeltest  ${fixedsizebytearraymodeltest_SRCS})
+target_link_libraries( fixedsizebytearraymodeltest
   testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY}
 )
 
 
-########### kfixedsizebytearraymodelkabstractbytearraymodeliftest ###############
+########### fixedsizebytearraymodelabstractbytearraymodeliftest ###############
 
-set( kfixedsizebytearraymodelkabstractbytearraymodeliftest_SRCS
-  kabstractbytearraymodeliftest.cpp
-  kfixedsizebytearraymodelkabstractbytearraymodeliftest.cpp
+set( fixedsizebytearraymodelabstractbytearraymodeliftest_SRCS
+  abstractbytearraymodeliftest.cpp
+  fixedsizebytearraymodelabstractbytearraymodeliftest.cpp
 )
 
-kde4_add_unit_test( kfixedsizebytearraymodelkabstractbytearraymodeliftest
-  TESTNAME libokteta-core-kfixedsizebytearraymodelkabstractbytearraymodeliftest
-  ${kfixedsizebytearraymodelkabstractbytearraymodeliftest_SRCS}
+kde4_add_unit_test( fixedsizebytearraymodelabstractbytearraymodeliftest
+  TESTNAME libokteta-core-fixedsizebytearraymodelabstractbytearraymodeliftest
+  ${fixedsizebytearraymodelabstractbytearraymodeliftest_SRCS}
 )
-target_link_libraries( kfixedsizebytearraymodelkabstractbytearraymodeliftest
+target_link_libraries( fixedsizebytearraymodelabstractbytearraymodeliftest
   oktetacoretestutil testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY}
 )
 
@@ -90,7 +90,7 @@ target_link_libraries( kbytearraymodeltest
 ########### kbytearraymodelkabstractbytearraymodeliftest ###############
 
 set( kbytearraymodelkabstractbytearraymodeliftest_SRCS
-  kabstractbytearraymodeliftest.cpp
+  abstractbytearraymodeliftest.cpp
   kbytearraymodelkabstractbytearraymodeliftest.cpp
 )
 
@@ -103,34 +103,34 @@ target_link_libraries( kbytearraymodelkabstractbytearraymodeliftest
 )
 
 
-########### kpiecetablebytearraymodelkabstractbytearraymodeliftest ###############
+########### piecetablebytearraymodelabstractbytearraymodeliftest ###############
 
-set( kpiecetablebytearraymodelkabstractbytearraymodeliftest_SRCS
-  kabstractbytearraymodeliftest.cpp
-  kpiecetablebytearraymodelkabstractbytearraymodeliftest.cpp
+set( piecetablebytearraymodelabstractbytearraymodeliftest_SRCS
+  abstractbytearraymodeliftest.cpp
+  piecetablebytearraymodelabstractbytearraymodeliftest.cpp
 )
 
-kde4_add_unit_test( kpiecetablebytearraymodelkabstractbytearraymodeliftest
-  TESTNAME libokteta-core-kpiecetablebytearraymodelkabstractbytearraymodeliftest
-  ${kpiecetablebytearraymodelkabstractbytearraymodeliftest_SRCS}
+kde4_add_unit_test( piecetablebytearraymodelabstractbytearraymodeliftest
+  TESTNAME libokteta-core-piecetablebytearraymodelabstractbytearraymodeliftest
+  ${piecetablebytearraymodelabstractbytearraymodeliftest_SRCS}
 )
-target_link_libraries( kpiecetablebytearraymodelkabstractbytearraymodeliftest
+target_link_libraries( piecetablebytearraymodelabstractbytearraymodeliftest
   oktetacoretestutil testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY}
 )
 
 
-########### kpiecetablebytearraymodelversionableiftest ###############
+########### piecetablebytearraymodelversionableiftest ###############
 
-set( kpiecetablebytearraymodelversionableiftest_SRCS
+set( piecetablebytearraymodelversionableiftest_SRCS
   versionableiftest.cpp
-  kpiecetablebytearraymodelversionableiftest.cpp
+  piecetablebytearraymodelversionableiftest.cpp
 )
 
-kde4_add_unit_test( kpiecetablebytearraymodelversionableiftest
-  TESTNAME libokteta-core-kpiecetablebytearraymodelversionableiftest
-  ${kpiecetablebytearraymodelversionableiftest_SRCS}
+kde4_add_unit_test( piecetablebytearraymodelversionableiftest
+  TESTNAME libokteta-core-piecetablebytearraymodelversionableiftest
+  ${piecetablebytearraymodelversionableiftest_SRCS}
 )
-target_link_libraries( kpiecetablebytearraymodelversionableiftest
+target_link_libraries( piecetablebytearraymodelversionableiftest
   oktetacoretestutil testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY}
 )
 
@@ -184,24 +184,24 @@ target_link_libraries( kebcdic1047charcodeckcharcodeciftest
 )
 
 
-########### kbookmarktest ###############
+########### bookmarktest ###############
 
-set( kbookmarktest_SRCS
-  kbookmarktest.cpp
+set( bookmarktest_SRCS
+  bookmarktest.cpp
 )
 
-kde4_add_unit_test( kbookmarktest  TESTNAME libokteta-core-kbookmarktest  ${kbookmarktest_SRCS} )
-target_link_libraries( kbookmarktest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+kde4_add_unit_test( bookmarktest  TESTNAME libokteta-core-bookmarktest  ${bookmarktest_SRCS} )
+target_link_libraries( bookmarktest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
 
-########### kbookmarklisttest ###############
+########### bookmarklisttest ###############
 
-set( kbookmarklisttest_SRCS
-  kbookmarklisttest.cpp
+set( bookmarklisttest_SRCS
+  bookmarklisttest.cpp
   ${SUTDIR}/bookmarklist.cpp
 )
 
-kde4_add_unit_test( kbookmarklisttest  TESTNAME libokteta-core-kbookmarklisttest  ${kbookmarklisttest_SRCS} )
-target_link_libraries( kbookmarklisttest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+kde4_add_unit_test( bookmarklisttest  TESTNAME libokteta-core-bookmarklisttest  ${bookmarklisttest_SRCS} )
+target_link_libraries( bookmarklisttest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
 

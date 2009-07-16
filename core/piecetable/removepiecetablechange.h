@@ -38,23 +38,23 @@ namespace KPieceTable
 class RemovePieceTableChange : public AbstractPieceTableChange
 {
   public:
-    RemovePieceTableChange( const KHE::Section &removeSection, const PieceList &removedPieces );
+    RemovePieceTableChange( const KDE::Section &removeSection, const PieceList &removedPieces );
     virtual ~RemovePieceTableChange();
 
   public: // AbstractPieceTableChange API
     virtual int type() const;
     virtual QString description() const;
     virtual bool merge( const AbstractPieceTableChange *other );
-    virtual KHE::Section apply( PieceTable *pieceTable ) const;
-    virtual KHE::Section revert( PieceTable *pieceTable ) const;
-    virtual KHE::ArrayChangeMetrics metrics() const;
+    virtual KDE::Section apply( PieceTable *pieceTable ) const;
+    virtual KDE::Section revert( PieceTable *pieceTable ) const;
+    virtual KDE::ArrayChangeMetrics metrics() const;
 
   protected:
-    KHE::Section mRemoveSection;
+    KDE::Section mRemoveSection;
     PieceList mRemovedPieces;
 };
 
-inline RemovePieceTableChange::RemovePieceTableChange( const KHE::Section &removeSection, const PieceList &removedPieces )
+inline RemovePieceTableChange::RemovePieceTableChange( const KDE::Section &removeSection, const PieceList &removedPieces )
  : mRemoveSection( removeSection ), mRemovedPieces( removedPieces ) {}
 }
 

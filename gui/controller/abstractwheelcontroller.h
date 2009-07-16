@@ -20,13 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_ABSTRACTWHEELCONTROLLER_H
-#define KHE_UI_ABSTRACTWHEELCONTROLLER_H
+#ifndef OKTETA_ABSTRACTWHEELCONTROLLER_H
+#define OKTETA_ABSTRACTWHEELCONTROLLER_H
 
 
 class QWheelEvent;
 
-namespace KHEUI
+namespace Okteta
 {
 
 

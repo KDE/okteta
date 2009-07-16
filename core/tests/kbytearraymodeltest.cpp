@@ -28,7 +28,7 @@
 #include <QtTest/QtTest>
 
 
-using namespace KHE;
+using namespace KDE;
 
 
 void KByteArrayModelTest::testNothing()

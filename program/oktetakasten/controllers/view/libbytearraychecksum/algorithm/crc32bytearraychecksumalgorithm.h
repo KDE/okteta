@@ -36,7 +36,7 @@ class Crc32ByteArrayChecksumAlgorithm : public AbstractByteArrayChecksumAlgorith
     virtual ~Crc32ByteArrayChecksumAlgorithm();
 
   public: // AbstractByteArrayChecksumAlgorithm API
-    virtual bool calculateChecksum( QString* result, const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const;
+    virtual bool calculateChecksum( QString* result, const Okteta::AbstractByteArrayModel* model, const KDE::Section& section ) const;
     virtual AbstractByteArrayChecksumParameterSet* parameterSet();
 
   protected:

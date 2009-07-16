@@ -33,7 +33,7 @@
 class AbstractByteArrayChecksumParameterSet;
 class AbstractByteArrayChecksumAlgorithm;
 
-namespace KHECore {
+namespace Okteta {
 class AbstractByteArrayModel;
 }
 namespace QCA {
@@ -107,11 +107,11 @@ class ChecksumTool : public AbstractTool
   protected: // sources
     KByteArrayDisplay* mByteArrayDisplay;
     // current
-    KHECore::AbstractByteArrayModel* mByteArrayModel;
+    Okteta::AbstractByteArrayModel* mByteArrayModel;
 
     int mSourceAlgorithmId;
-    KHE::Section mSourceSelection;
-    KHECore::AbstractByteArrayModel* mSourceByteArrayModel;
+    KDE::Section mSourceSelection;
+    Okteta::AbstractByteArrayModel* mSourceByteArrayModel;
 };
 
 

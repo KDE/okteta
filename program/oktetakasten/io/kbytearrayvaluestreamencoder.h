@@ -26,7 +26,7 @@
 // lib
 #include "kabstractbytearraystreamencoder.h"
 // Okteta core
-#include <khe.h>
+#include <oktetacore.h>
 // Qt
 #include <QtCore/QString>
 
@@ -39,7 +39,7 @@ class ValueStreamEncoderSettings
   public:
     ValueStreamEncoderSettings();
   public:
-    KHECore::ValueCoding valueCoding;
+    Okteta::ValueCoding valueCoding;
     QString separation;
     QChar undefinedChar;
     QChar substituteChar;
@@ -61,8 +61,8 @@ class KByteArrayValueStreamEncoder : public KAbstractByteArrayStreamEncoder
   protected: // KAbstractByteArrayStreamEncoder API
     virtual bool encodeDataToStream( QIODevice *device,
                                      const KByteArrayDisplay* byteArrayView,
-                                     const KHECore::AbstractByteArrayModel *byteArrayModel,
-                                     const KHE::Section &section );
+                                     const Okteta::AbstractByteArrayModel *byteArrayModel,
+                                     const KDE::Section &section );
 
   protected:
     ValueStreamEncoderSettings mSettings;

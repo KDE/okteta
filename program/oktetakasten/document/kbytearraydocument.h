@@ -33,7 +33,7 @@
 // Qt
 #include <QtCore/QString>
 
-namespace KHECore {
+namespace Okteta {
 class AbstractByteArrayModel;
 class PieceTableByteArrayModel;
 }
@@ -50,7 +50,7 @@ class KByteArrayDocument : public AbstractDocument, public If::Versionable, publ
 
   public:
     explicit KByteArrayDocument( const QString &initDescription );
-    KByteArrayDocument( KHECore::PieceTableByteArrayModel *byteArray, const QString &initDescription );
+    KByteArrayDocument( Okteta::PieceTableByteArrayModel *byteArray, const QString &initDescription );
     virtual ~KByteArrayDocument();
 
   public: // AbstractModel API
@@ -75,7 +75,7 @@ class KByteArrayDocument : public AbstractDocument, public If::Versionable, publ
     virtual QList<Person> userList() const;
 
   public: // If::ByteArray
-    virtual KHECore::AbstractByteArrayModel *content() const;
+    virtual Okteta::AbstractByteArrayModel *content() const;
 
   public:
     void setTitle( const QString &title );
@@ -97,7 +97,7 @@ class KByteArrayDocument : public AbstractDocument, public If::Versionable, publ
     void onHeadVersionDescriptionChanged( const QString &newDescription );
 
   protected:
-    KHECore::PieceTableByteArrayModel *mByteArray;
+    Okteta::PieceTableByteArrayModel *mByteArray;
 
     mutable QString mTitle;
 

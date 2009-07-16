@@ -130,8 +130,8 @@ void KByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( FileProtocolName );
 
     Kasten::KByteArrayDocument *document = new Kasten::KByteArrayDocument("New created for test.");
-    KHECore::PieceTableByteArrayModel *byteArray =
-        qobject_cast<KHECore::PieceTableByteArrayModel *>( document->content() );
+    Okteta::PieceTableByteArrayModel *byteArray =
+        qobject_cast<Okteta::PieceTableByteArrayModel *>( document->content() );
 
     // fill array
     QByteArray testData( TestDataSize, TestDataChar );
@@ -149,7 +149,7 @@ void KByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
 //     QVERIFY( document != 0 );
 
 //     // compare with old
-//     KHECore::KByteArrayModel *otherByteArray = document->content();
+//     Okteta::KByteArrayModel *otherByteArray = document->content();
 //     QCOMPARE( byteArray->size(), otherByteArray->size() );
 //     QVERIFY( qstrncmp(byteArray->data(),otherByteArray->data(),byteArray->size()) == 0 );
 

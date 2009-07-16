@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_ARRAYCHANGEMETRICS_H
-#define KHE_CORE_ARRAYCHANGEMETRICS_H
+#ifndef ARRAYCHANGEMETRICS_H
+#define ARRAYCHANGEMETRICS_H
 
 // lib
 #include "oktetacore_export.h"
@@ -29,7 +29,7 @@
 #include <QtCore/QDataStream>
 
 
-namespace KHE
+namespace KDE
 {
 
 // TODO: do we need the invalid status?

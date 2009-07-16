@@ -28,7 +28,7 @@
 // KDE
 #include <KMimeType>
 
-namespace KHECore {
+namespace Okteta {
 class AbstractByteArrayModel;
 }
 class KUrl;
@@ -77,7 +77,7 @@ class DocumentInfoTool : public AbstractTool
 
   protected:
     KByteArrayDocument* mDocument;
-    KHECore::AbstractByteArrayModel *mByteArrayModel;
+    Okteta::AbstractByteArrayModel *mByteArrayModel;
 
     AbstractModelSynchronizer* mSynchronizer;
 

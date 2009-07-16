@@ -23,7 +23,7 @@
 #include "bytearraytablelayout.h"
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 static const int DefaultNoOfLinesPerPage = 1;
@@ -225,7 +225,7 @@ Coord ByteArrayTableLayout::coordOfIndex( int index ) const
     return Coord::fromIndex( index+mRelativeStartOffset-mByteArrayOffset, mNoOfBytesPerLine );
 }
 
-CoordRange ByteArrayTableLayout::coordRangeOfIndizes( const KHE::Section &indizes ) const
+CoordRange ByteArrayTableLayout::coordRangeOfIndizes( const KDE::Section &indizes ) const
 {
     return CoordRange(
              Coord::fromIndex(indizes.start()+mRelativeStartOffset-mByteArrayOffset, mNoOfBytesPerLine),
@@ -264,9 +264,9 @@ bool ByteArrayTableLayout::atLastLinePosition( const Coord &coord ) const
 }
 
 
-KHE::Section ByteArrayTableLayout::linePositions( int line ) const
+KDE::Section ByteArrayTableLayout::linePositions( int line ) const
 {
-    return KHE::Section( firstLinePosition(line), lastLinePosition(line) );
+    return KDE::Section( firstLinePosition(line), lastLinePosition(line) );
 }
 
 

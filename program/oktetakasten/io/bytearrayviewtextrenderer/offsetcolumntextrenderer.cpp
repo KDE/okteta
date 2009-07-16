@@ -33,8 +33,8 @@ namespace Kasten
 OffsetColumnTextRenderer::OffsetColumnTextRenderer( int offsetFormat, int firstLineOffset, int delta )
   : mFirstLineOffset( firstLineOffset),
     mDelta( delta ),
-    printFunction( KHEUI::KOffsetFormat::printFunction(offsetFormat) ),
-    mCodingWidth( KHEUI::KOffsetFormat::codingWidth(offsetFormat) )
+    printFunction( Okteta::OffsetFormat::printFunction(offsetFormat) ),
+    mCodingWidth( Okteta::OffsetFormat::codingWidth(offsetFormat) )
 {
     mEncodedOffsetBuffer = new char[mCodingWidth+1];
 }

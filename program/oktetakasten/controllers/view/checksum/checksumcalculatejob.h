@@ -30,7 +30,7 @@
 
 class AbstractByteArrayChecksumAlgorithm;
 
-namespace KHECore {
+namespace Okteta {
 class AbstractByteArrayModel;
 }
 
@@ -45,8 +45,8 @@ class ChecksumCalculateJob : public QObject // not yet: KJob
   public:
     ChecksumCalculateJob( QString* checksum,
                           const AbstractByteArrayChecksumAlgorithm* algorithm,
-                          const KHECore::AbstractByteArrayModel* model,
-                          const KHE::Section& selection );
+                          const Okteta::AbstractByteArrayModel* model,
+                          const KDE::Section& selection );
 
   public:
     void exec();
@@ -59,15 +59,15 @@ class ChecksumCalculateJob : public QObject // not yet: KJob
 
     const AbstractByteArrayChecksumAlgorithm* mAlgorithm;
 
-    const KHECore::AbstractByteArrayModel* mByteArrayModel;
-    const KHE::Section mSelection;
+    const Okteta::AbstractByteArrayModel* mByteArrayModel;
+    const KDE::Section mSelection;
 };
 
 
 inline ChecksumCalculateJob::ChecksumCalculateJob( QString* checksum,
                                                    const AbstractByteArrayChecksumAlgorithm* algorithm,
-                                                   const KHECore::AbstractByteArrayModel* model,
-                                                   const KHE::Section &selection )
+                                                   const Okteta::AbstractByteArrayModel* model,
+                                                   const KDE::Section &selection )
  : mChecksum( checksum ), mAlgorithm( algorithm ), mByteArrayModel( model ), mSelection( selection )
 {}
 

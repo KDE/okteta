@@ -23,7 +23,7 @@
 #include "coordrangelist.h"
 
 
-namespace KHEUI {
+namespace Okteta {
 
 CoordRangeList::CoordRangeList()
 {

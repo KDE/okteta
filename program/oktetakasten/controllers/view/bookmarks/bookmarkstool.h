@@ -26,7 +26,7 @@
 // Kasten core
 #include <abstracttool.h>
 
-namespace KHECore {
+namespace Okteta {
 class Bookmarkable;
 class Bookmark;
 class AbstractByteArrayModel;
@@ -51,8 +51,8 @@ class BookmarksTool : public AbstractTool
   public:
     bool hasBookmarks() const;
     bool canCreateBookmark() const;
-    const KHECore::Bookmark& bookmarkAt( unsigned int index ) const;
-    int indexOf( const KHECore::Bookmark& bookmark ) const;
+    const Okteta::Bookmark& bookmarkAt( unsigned int index ) const;
+    int indexOf( const Okteta::Bookmark& bookmark ) const;
     unsigned int bookmarksCount() const;
 
   public: // AbstractTool API
@@ -62,15 +62,15 @@ class BookmarksTool : public AbstractTool
     virtual void setTargetModel( AbstractModel* model );
 
   public:
-    KHECore::Bookmark createBookmark();
-    void gotoBookmark( const KHECore::Bookmark& bookmark );
+    Okteta::Bookmark createBookmark();
+    void gotoBookmark( const Okteta::Bookmark& bookmark );
     void setBookmarkName( unsigned int bookmarkIndex, const QString& name );
-    void deleteBookmarks( const QList<KHECore::Bookmark>& bookmarks );
+    void deleteBookmarks( const QList<Okteta::Bookmark>& bookmarks );
 
   Q_SIGNALS:
     void hasBookmarksChanged( bool hasBookmarks );
-    void bookmarksAdded( const QList<KHECore::Bookmark>& bookmarks );
-    void bookmarksRemoved( const QList<KHECore::Bookmark>& bookmarks );
+    void bookmarksAdded( const QList<Okteta::Bookmark>& bookmarks );
+    void bookmarksRemoved( const QList<Okteta::Bookmark>& bookmarks );
     void bookmarksModified( const QList<int>& indizes );
     void canCreateBookmarkChanged( bool canCreateBookmark );
 
@@ -80,8 +80,8 @@ class BookmarksTool : public AbstractTool
 
   protected: // sources
     KByteArrayDisplay* mByteArrayDisplay;
-    KHECore::AbstractByteArrayModel* mByteArray;
-    KHECore::Bookmarkable* mBookmarks;
+    Okteta::AbstractByteArrayModel* mByteArray;
+    Okteta::Bookmarkable* mBookmarks;
 
     bool mCanCreateBookmark;
 };

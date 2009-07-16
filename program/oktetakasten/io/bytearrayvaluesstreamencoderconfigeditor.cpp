@@ -90,7 +90,7 @@ AbstractSelectionView* ByteArrayValuesStreamEncoderConfigEditor::createPreviewVi
 
 void ByteArrayValuesStreamEncoderConfigEditor::onSettingsChanged()
 {
-//     mSettings.valueCoding = (KHECore::ValueCoding) mValueCodingSelect->currentIndex();
+//     mSettings.valueCoding = (Okteta::ValueCoding) mValueCodingSelect->currentIndex();
     mSettings.separation = mSeparationEdit->text();
 
     mEncoder->setSettings( mSettings );

@@ -39,7 +39,7 @@ Adler32ByteArrayChecksumAlgorithm::Adler32ByteArrayChecksumAlgorithm()
 AbstractByteArrayChecksumParameterSet* Adler32ByteArrayChecksumAlgorithm::parameterSet() { return &mParameterSet; }
 
 bool Adler32ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
-                                                           const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const
+                                                           const Okteta::AbstractByteArrayModel* model, const KDE::Section& section ) const
 {
     quint32 a = 1;
     quint32 b = 0;

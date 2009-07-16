@@ -43,17 +43,17 @@ namespace KPieceTable
 
 AbstractPieceTableChange *ReplacePieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
 {
-    const Piece replacedPiece( KHE::Section::fromWidth(Start+ChangeStorageOffset,Width), Piece::ChangeStorage );
+    const Piece replacedPiece( KDE::Section::fromWidth(Start+ChangeStorageOffset,Width), Piece::ChangeStorage );
 
     ReplacePieceTableChange *pieceTableChange =
-        new ReplacePieceTableChange( KHE::Section(Start,End), InsertLength, InsertStorageOffset,
+        new ReplacePieceTableChange( KDE::Section(Start,End), InsertLength, InsertStorageOffset,
                                               PieceList(replacedPiece) );
 
     return pieceTableChange;
 }
 void ReplacePieceTableChangeAbstractPieceTableChangeIfTest::changePieceTable( PieceTable *pieceTable )
 {
-    pieceTable->replace( KHE::Section(Start,End), InsertLength, InsertStorageOffset );
+    pieceTable->replace( KDE::Section(Start,End), InsertLength, InsertStorageOffset );
 }
 
 void ReplacePieceTableChangeAbstractPieceTableChangeIfTest::deletePieceTableChange(

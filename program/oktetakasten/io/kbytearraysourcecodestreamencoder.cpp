@@ -74,8 +74,8 @@ int KByteArraySourceCodeStreamEncoder::dataTypesCount() const { return NoOfPrimi
 
 bool KByteArraySourceCodeStreamEncoder::encodeDataToStream( QIODevice *device,
                                                             const KByteArrayDisplay* byteArrayView,
-                                                            const KHECore::AbstractByteArrayModel *byteArrayModel,
-                                                            const KHE::Section &section )
+                                                            const Okteta::AbstractByteArrayModel *byteArrayModel,
+                                                            const KDE::Section &section )
 {
 Q_UNUSED( byteArrayView )
 
@@ -118,7 +118,7 @@ Q_UNUSED( byteArrayView )
 }
 
 
-QString KByteArraySourceCodeStreamEncoder::printFormatted( const KHECore::AbstractByteArrayModel* byteArrayModel, int pos,
+QString KByteArraySourceCodeStreamEncoder::printFormatted( const Okteta::AbstractByteArrayModel* byteArrayModel, int pos,
                                                            unsigned int dataSize ) const
 {
     static const char DecimalFormattedNumberPlaceHolder[] = "%1";

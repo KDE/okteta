@@ -27,7 +27,7 @@
 // Qt
 #include <QtCore/QObject>
 
-namespace KHECore {
+namespace Okteta {
 class CharCodec;
 }
 
@@ -40,8 +40,8 @@ class KCharCodecIfTest : public QObject
     KCharCodecIfTest();
 
   protected: // our API
-    virtual KHECore::CharCodec *createCodec() = 0;
-    virtual void deleteCodec( KHECore::CharCodec *Codec ) = 0;
+    virtual Okteta::CharCodec *createCodec() = 0;
+    virtual void deleteCodec( Okteta::CharCodec *Codec ) = 0;
 
   private Q_SLOTS: // test functions
     void init();
@@ -51,7 +51,7 @@ class KCharCodecIfTest : public QObject
 
   private:
     /** pointer to the buffer to test */
-    KHECore::CharCodec *CharCodec;
+    Okteta::CharCodec *CharCodec;
 };
 
 

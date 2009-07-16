@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_ABSTRACTBYTEARRAYVIEW_P_H
-#define KHE_UI_ABSTRACTBYTEARRAYVIEW_P_H
+#ifndef OKTETA_ABSTRACTBYTEARRAYVIEW_P_H
+#define OKTETA_ABSTRACTBYTEARRAYVIEW_P_H
 
 // lib
 #include "abstractbytearrayview.h"
@@ -37,7 +37,7 @@
 #include <QtGui/QClipboard>
 
 
-namespace KHEUI
+namespace Okteta
 {
 class KNavigator;
 class KCharEditor;
@@ -54,7 +54,7 @@ class AbstractByteArrayViewPrivate
     virtual ~AbstractByteArrayViewPrivate();
 
   public: // value access
-    KHECore::AbstractByteArrayModel* byteArrayModel() const;
+    Okteta::AbstractByteArrayModel* byteArrayModel() const;
 
     // TODO: needed?
     bool isModified() const;
@@ -78,7 +78,7 @@ class AbstractByteArrayViewPrivate
     bool tabChangesFocus() const;
 
     bool hasSelectedData() const;
-    KHE::Section selection() const;
+    KDE::Section selection() const;
     QByteArray selectedData() const;
     QMimeData* selectionAsMimeData() const;
 
@@ -92,9 +92,9 @@ class AbstractByteArrayViewPrivate
     ByteArrayTableCursor* tableCursor() const;
     ByteArrayTableRanges* tableRanges() const;
 
-    const KHECore::ValueCodec* valueCodec() const;
+    const Okteta::ValueCodec* valueCodec() const;
     AbstractByteArrayView::ValueCoding valueCoding() const;
-    const KHECore::CharCodec* charCodec() const;
+    const Okteta::CharCodec* charCodec() const;
     AbstractByteArrayView::CharCoding charCoding() const;
     const QString& charCodingName() const;
 
@@ -102,7 +102,7 @@ class AbstractByteArrayViewPrivate
 
   public:
     void init();
-    void setByteArrayModel( KHECore::AbstractByteArrayModel* byteArrayModel );
+    void setByteArrayModel( Okteta::AbstractByteArrayModel* byteArrayModel );
     // TODO: delete old controller?
     void setController( KController* controller );
     void setWheelController( AbstractWheelController* wheelController );
@@ -156,8 +156,8 @@ class AbstractByteArrayViewPrivate
     void dropEvent( QDropEvent* dropEvent );
 
   public: // slots
-    void onContentsChanged( const KHE::ArrayChangeMetricsList& changeList );
-    void onBookmarksChange( const QList<KHECore::Bookmark>& bookmarks );
+    void onContentsChanged( const KDE::ArrayChangeMetricsList& changeList );
+    void onBookmarksChange( const QList<Okteta::Bookmark>& bookmarks );
     void onRevertedToVersionIndex( int versionIndex );
     void onByteArrayReadOnlyChange( bool isByteArrayReadOnly );
 
@@ -206,7 +206,7 @@ class AbstractByteArrayViewPrivate
     virtual void updateChanged() = 0;
 
   protected:
-    KHECore::AbstractByteArrayModel* mByteArrayModel;
+    Okteta::AbstractByteArrayModel* mByteArrayModel;
 
     /** the current input controller */
     KController* mController;
@@ -253,11 +253,11 @@ class AbstractByteArrayViewPrivate
 
     // parameters
     /** */
-    KHECore::ValueCodec* mValueCodec;
+    Okteta::ValueCodec* mValueCodec;
     /** */
     AbstractByteArrayView::ValueCoding mValueCoding;
     /** */
-    KHECore::CharCodec* mCharCodec;
+    Okteta::CharCodec* mCharCodec;
     /** */
     AbstractByteArrayView::CharCoding mCharCoding;
     /** style of resizing */
@@ -269,7 +269,7 @@ class AbstractByteArrayViewPrivate
 };
 
 
-inline KHECore::AbstractByteArrayModel* AbstractByteArrayViewPrivate::byteArrayModel() const { return mByteArrayModel; }
+inline Okteta::AbstractByteArrayModel* AbstractByteArrayViewPrivate::byteArrayModel() const { return mByteArrayModel; }
 inline KController* AbstractByteArrayViewPrivate::controller() const { return mController; }
 inline AbstractWheelController* AbstractByteArrayViewPrivate::wheelController() const { return mWheelController; }
 
@@ -283,9 +283,9 @@ inline ByteArrayTableLayout* AbstractByteArrayViewPrivate::layout()      const {
 inline ByteArrayTableCursor* AbstractByteArrayViewPrivate::tableCursor() const { return mTableCursor; }
 inline ByteArrayTableRanges* AbstractByteArrayViewPrivate::tableRanges() const { return mTableRanges; }
 
-inline const KHECore::ValueCodec* AbstractByteArrayViewPrivate::valueCodec()  const { return mValueCodec; }
+inline const Okteta::ValueCodec* AbstractByteArrayViewPrivate::valueCodec()  const { return mValueCodec; }
 inline AbstractByteArrayView::ValueCoding AbstractByteArrayViewPrivate::valueCoding() const { return mValueCoding; }
-inline const KHECore::CharCodec* AbstractByteArrayViewPrivate::charCodec()   const { return mCharCodec; }
+inline const Okteta::CharCodec* AbstractByteArrayViewPrivate::charCodec()   const { return mCharCodec; }
 inline AbstractByteArrayView::CharCoding AbstractByteArrayViewPrivate::charCoding() const
 {
     return (AbstractByteArrayView::CharCoding)mCharCoding;
@@ -299,7 +299,7 @@ inline int AbstractByteArrayViewPrivate::noOfBytesPerLine() const { return mTabl
 inline int AbstractByteArrayViewPrivate::firstLineOffset()  const { return mTableLayout->firstLineOffset(); }
 inline int AbstractByteArrayViewPrivate::startOffset()      const { return mTableLayout->startOffset(); }
 
-inline KHE::Section AbstractByteArrayViewPrivate::selection() const { return mTableRanges->selection(); }
+inline KDE::Section AbstractByteArrayViewPrivate::selection() const { return mTableRanges->selection(); }
 inline bool AbstractByteArrayViewPrivate::hasSelectedData()    const { return mTableRanges->hasSelection(); }
 
 inline bool AbstractByteArrayViewPrivate::tabChangesFocus()      const { return mTabController->tabChangesFocus(); }

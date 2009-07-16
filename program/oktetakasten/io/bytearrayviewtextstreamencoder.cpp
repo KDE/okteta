@@ -34,7 +34,7 @@
 #include <abstractbytearrayview.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
-#include <khechar.h>
+#include <character.h>
 // KDE
 #include <KLocale>
 // Qt
@@ -44,10 +44,10 @@
 namespace Kasten
 {
 
-static const KHEUI::KOffsetFormat::KFormat DefaultOffsetFormat = KHEUI::KOffsetFormat::Hexadecimal;
+static const Okteta::OffsetFormat::Format DefaultOffsetFormat = Okteta::OffsetFormat::Hexadecimal;
 
 ByteArrayViewTextStreamEncoderSettings::ByteArrayViewTextStreamEncoderSettings()
- : /*offsetFormat(DefaultOffsetFormat),*/ valueCoding( KHECore::HexadecimalCoding), codecName(), undefinedChar('?'), substituteChar( '.' ),
+ : /*offsetFormat(DefaultOffsetFormat),*/ valueCoding( Okteta::HexadecimalCoding), codecName(), undefinedChar('?'), substituteChar( '.' ),
    separation( QLatin1String(" ") )
 {}
 
@@ -58,14 +58,14 @@ ByteArrayViewTextStreamEncoder::ByteArrayViewTextStreamEncoder()
 
 bool ByteArrayViewTextStreamEncoder::encodeDataToStream( QIODevice *device,
                                                          const KByteArrayDisplay* byteArrayView,
-                                                         const KHECore::AbstractByteArrayModel *byteArrayModel,
-                                                         const KHE::Section &section )
+                                                         const Okteta::AbstractByteArrayModel *byteArrayModel,
+                                                         const KDE::Section &section )
 {
     bool success = true;
 
     // settings
     mSettings.codecName = byteArrayView->charCodingName();
-    mSettings.valueCoding = (KHECore::ValueCoding)byteArrayView->valueCoding();
+    mSettings.valueCoding = (Okteta::ValueCoding)byteArrayView->valueCoding();
     mSettings.undefinedChar = byteArrayView->undefinedChar();
     mSettings.substituteChar = byteArrayView->substituteChar();
     mSettings.firstLineOffset = byteArrayView->firstLineOffset();
@@ -74,10 +74,10 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream( QIODevice *device,
     const int viewModus = byteArrayView->viewModus();
 
     // setup
-    KHEUI::ByteArrayTableLayout layout( byteArrayView->noOfBytesPerLine(), mSettings.firstLineOffset,
+    Okteta::ByteArrayTableLayout layout( byteArrayView->noOfBytesPerLine(), mSettings.firstLineOffset,
                                         mSettings.startOffset, 0, byteArrayModel->size() );
 
-    KHEUI::CoordRange coordRange;
+    Okteta::CoordRange coordRange;
     coordRange.set( layout.coordRangeOfIndizes(section) );
 
     const int noOfBytesPerLine = byteArrayView->noOfBytesPerLine();
@@ -90,21 +90,21 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream( QIODevice *device,
     if( byteArrayView->offsetColumnVisible() )
     {
         columnTextRendererList.append(
-            new OffsetColumnTextRenderer(KHEUI::KOffsetFormat::Hexadecimal,mSettings.firstLineOffset,mSettings.delta) );
+            new OffsetColumnTextRenderer(Okteta::OffsetFormat::Hexadecimal,mSettings.firstLineOffset,mSettings.delta) );
         columnTextRendererList.append( new BorderColumnTextRenderer() );
     }
 
     if( viewModus == 0 )
     {
-        if( visibleByteArrayCodings & KHEUI::AbstractByteArrayView::ValueCodingId )
+        if( visibleByteArrayCodings & Okteta::AbstractByteArrayView::ValueCodingId )
             columnTextRendererList.append(
                 new ValueByteArrayColumnTextRenderer(byteArrayModel,section.start(),coordRange,
                                                     noOfBytesPerLine, byteSpacingWidth, noOfGroupedBytes,
                                                     mSettings.valueCoding) );
 
-        if( visibleByteArrayCodings & KHEUI::AbstractByteArrayView::CharCodingId )
+        if( visibleByteArrayCodings & Okteta::AbstractByteArrayView::CharCodingId )
         {
-            if( visibleByteArrayCodings & KHEUI::AbstractByteArrayView::ValueCodingId )
+            if( visibleByteArrayCodings & Okteta::AbstractByteArrayView::ValueCodingId )
                 columnTextRendererList.append( new BorderColumnTextRenderer() );
             columnTextRendererList.append(
                 new CharByteArrayColumnTextRenderer(byteArrayModel,section.start(),coordRange,

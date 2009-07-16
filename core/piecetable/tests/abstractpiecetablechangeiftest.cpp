@@ -30,7 +30,7 @@
 // Qt
 #include <QtTest/QtTest>
 
-using namespace KHE;
+using namespace KDE;
 
 namespace KPieceTable
 {

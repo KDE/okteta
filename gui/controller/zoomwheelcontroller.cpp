@@ -28,7 +28,7 @@
 #include <QtGui/QWheelEvent>
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 ZoomWheelController::ZoomWheelController( AbstractByteArrayView* view, AbstractWheelController* parent )

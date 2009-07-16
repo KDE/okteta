@@ -140,7 +140,7 @@ void BookmarksView::onBookmarkSelectionChanged()
 
 void BookmarksView::onCreateBookmarkButtonClicked()
 {
-    const KHECore::Bookmark bookmark = mTool->createBookmark();
+    const Okteta::Bookmark bookmark = mTool->createBookmark();
     if( bookmark.isValid() )
     {
         const QModelIndex index = mBookmarkListModel->index( bookmark, BookmarkListModel::TitleColumnId );
@@ -153,10 +153,10 @@ void BookmarksView::onDeleteBookmarkButtonClicked()
 {
     const QModelIndexList selectedRows = mBookmarkListView->selectionModel()->selectedRows();
 
-    QList<KHECore::Bookmark> bookmarksToBeDeleted;
+    QList<Okteta::Bookmark> bookmarksToBeDeleted;
     foreach( const QModelIndex& index, selectedRows )
     {
-        const KHECore::Bookmark& bookmark = mBookmarkListModel->bookmark( index );
+        const Okteta::Bookmark& bookmark = mBookmarkListModel->bookmark( index );
         bookmarksToBeDeleted.append( bookmark );
     }
     mTool->deleteBookmarks( bookmarksToBeDeleted );

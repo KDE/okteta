@@ -30,7 +30,7 @@
 #include <QtGui/QKeyEvent>
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 KCharEditor::KCharEditor( ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent )

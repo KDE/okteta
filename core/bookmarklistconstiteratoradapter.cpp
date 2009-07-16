@@ -26,7 +26,7 @@
 #include "bookmarklist.h"
 
 
-namespace KHECore
+namespace Okteta
 {
 
 BookmarkListConstIteratorAdapter::BookmarkListConstIteratorAdapter( const BookmarkList& list )
@@ -36,11 +36,11 @@ BookmarkListConstIteratorAdapter::BookmarkListConstIteratorAdapter( const Bookma
 
 bool BookmarkListConstIteratorAdapter::hasNext() const     { return mIterator.hasNext(); }
 bool BookmarkListConstIteratorAdapter::hasPrevious() const { return mIterator.hasPrevious(); }
-const KHECore::Bookmark& BookmarkListConstIteratorAdapter::peekNext() const     { return mIterator.peekNext(); }
-const KHECore::Bookmark& BookmarkListConstIteratorAdapter::peekPrevious() const { return mIterator.peekPrevious(); }
+const Okteta::Bookmark& BookmarkListConstIteratorAdapter::peekNext() const     { return mIterator.peekNext(); }
+const Okteta::Bookmark& BookmarkListConstIteratorAdapter::peekPrevious() const { return mIterator.peekPrevious(); }
 
-bool BookmarkListConstIteratorAdapter::findNext( const KHECore::Bookmark& bookmark )     { return mIterator.findNext( bookmark ); }
-bool BookmarkListConstIteratorAdapter::findPrevious( const KHECore::Bookmark& bookmark ) { return mIterator.findPrevious( bookmark ); }
+bool BookmarkListConstIteratorAdapter::findNext( const Okteta::Bookmark& bookmark )     { return mIterator.findNext( bookmark ); }
+bool BookmarkListConstIteratorAdapter::findPrevious( const Okteta::Bookmark& bookmark ) { return mIterator.findPrevious( bookmark ); }
 
 bool BookmarkListConstIteratorAdapter::findNextFrom( unsigned int offset )
 {
@@ -78,8 +78,8 @@ bool BookmarkListConstIteratorAdapter::findPreviousFrom( unsigned int offset )
     return result;
 }
 
-const KHECore::Bookmark& BookmarkListConstIteratorAdapter::next()     { return mIterator.next(); }
-const KHECore::Bookmark& BookmarkListConstIteratorAdapter::previous() { return mIterator.previous(); }
+const Okteta::Bookmark& BookmarkListConstIteratorAdapter::next()     { return mIterator.next(); }
+const Okteta::Bookmark& BookmarkListConstIteratorAdapter::previous() { return mIterator.previous(); }
 
 void BookmarkListConstIteratorAdapter::toBack()  { mIterator.toBack(); }
 void BookmarkListConstIteratorAdapter::toFront() { mIterator.toFront(); }

@@ -1,13 +1,13 @@
 include_directories(
-  ../../../core
-  ../../../gui
-  ../../../gui/libcolumnsview
+  ../document
+  ../../../libs/kasten/gui
+  ../../../libs/kasten/gui/view
   ../../../libs/kasten/core
   ../../../libs/kasten/core/entity
   ../../../libs/kasten/core/document
-  ../../../libs/kasten/gui
-  ../../../libs/kasten/gui/view
-  ../document
+  ../../../gui
+  ../../../gui/libcolumnsview
+  ../../../core
 )
 
 # if(KDE4_BUILD_TESTS)

@@ -20,15 +20,15 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_KTABCONTROLLER_H
-#define KHE_UI_KTABCONTROLLER_H
+#ifndef OKTETA_KTABCONTROLLER_H
+#define OKTETA_KTABCONTROLLER_H
 
 
 // lib
 #include "kcontroller.h"
 
 
-namespace KHEUI
+namespace Okteta
 {
 class AbstractByteArrayView;
 

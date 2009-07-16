@@ -62,23 +62,23 @@ bool InsertPieceTableChange::merge( const AbstractPieceTableChange *other )
     return result;
 }
 
-KHE::Section InsertPieceTableChange::apply( PieceTable *pieceTable ) const
+KDE::Section InsertPieceTableChange::apply( PieceTable *pieceTable ) const
 {
     pieceTable->insert( mInsertOffset, mInsertLength, mStorageOffset );
 
-    return KHE::Section( mInsertOffset, pieceTable->size()-1 );
+    return KDE::Section( mInsertOffset, pieceTable->size()-1 );
 }
 
-KHE::Section InsertPieceTableChange::revert( PieceTable *pieceTable ) const
+KDE::Section InsertPieceTableChange::revert( PieceTable *pieceTable ) const
 {
     const int oldLast = pieceTable->size() - 1;
-    pieceTable->remove( KHE::Section::fromWidth(mInsertOffset,mInsertLength) );
-    return KHE::Section( mInsertOffset, oldLast );
+    pieceTable->remove( KDE::Section::fromWidth(mInsertOffset,mInsertLength) );
+    return KDE::Section( mInsertOffset, oldLast );
 }
 
-KHE::ArrayChangeMetrics InsertPieceTableChange::metrics() const
+KDE::ArrayChangeMetrics InsertPieceTableChange::metrics() const
 {
-    return KHE::ArrayChangeMetrics::asReplacement( mInsertOffset, 0, mInsertLength );
+    return KDE::ArrayChangeMetrics::asReplacement( mInsertOffset, 0, mInsertLength );
 }
 
 int InsertPieceTableChange::dataSize() const { return mInsertLength; }

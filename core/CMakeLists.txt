@@ -42,9 +42,9 @@ set( oktetacore_LIB_SRCS
   abstractbytearraymodel.cpp
   kbytearraymodel_p.cpp
   kbytearraymodel.cpp
-  kfixedsizebytearraymodel.cpp
-  kfilebytearraymodel_p.cpp
-  kfilebytearraymodel.cpp
+  fixedsizebytearraymodel.cpp
+  filebytearraymodel_p.cpp
+  filebytearraymodel.cpp
   piecetablebytearraymodel_p.cpp
   piecetablebytearraymodel.cpp
   wordbytearrayservice.cpp

@@ -173,7 +173,7 @@ void ChecksumTool::calculateChecksum()
         mSourceAlgorithmId = mAlgorithmId;
         mSourceByteArrayModel = mByteArrayModel;
         mSourceSelection = mByteArrayDisplay->selection();
-        connect( mSourceByteArrayModel,  SIGNAL(contentsChanged( const KHE::ArrayChangeMetricsList& )),
+        connect( mSourceByteArrayModel,  SIGNAL(contentsChanged( const KDE::ArrayChangeMetricsList& )),
                  SLOT(onSourceChanged()) );
         connect( mSourceByteArrayModel,  SIGNAL(destroyed()),
                  SLOT(onSourceDestroyed()) );

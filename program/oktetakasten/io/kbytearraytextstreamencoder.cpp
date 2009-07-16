@@ -26,7 +26,7 @@
 #include <kbytearraydisplay.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
-#include <khechar.h>
+#include <character.h>
 #include <charcodec.h>
 // KDE
 #include <KLocale>
@@ -48,8 +48,8 @@ KByteArrayTextStreamEncoder::KByteArrayTextStreamEncoder()
 
 bool KByteArrayTextStreamEncoder::encodeDataToStream( QIODevice *device,
                                                       const KByteArrayDisplay* byteArrayView,
-                                                      const KHECore::AbstractByteArrayModel *byteArrayModel,
-                                                      const KHE::Section &section )
+                                                      const Okteta::AbstractByteArrayModel *byteArrayModel,
+                                                      const KDE::Section &section )
 {
     bool success = true;
 
@@ -61,13 +61,13 @@ bool KByteArrayTextStreamEncoder::encodeDataToStream( QIODevice *device,
     // encode
     QTextStream textStream( device );
 
-    KHECore::CharCodec *charCodec = KHECore::CharCodec::createCodec( mSettings.codecName );
+    Okteta::CharCodec *charCodec = Okteta::CharCodec::createCodec( mSettings.codecName );
     const QChar tabChar( '\t' );
     const QChar returnChar( '\n' );
 
     for( int i=section.start(); i<=section.end(); ++i )
     {
-        const KHECore::KChar byteChar = charCodec->decode( byteArrayModel->datum(i) );
+        const Okteta::Character byteChar = charCodec->decode( byteArrayModel->datum(i) );
 
         const QChar streamChar = byteChar.isUndefined() ?      mSettings.undefinedChar :
                                  (!byteChar.isPrint()

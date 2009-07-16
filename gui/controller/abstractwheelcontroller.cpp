@@ -23,7 +23,7 @@
 #include "abstractwheelcontroller.h"
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 AbstractWheelController::AbstractWheelController( AbstractWheelController* parent )

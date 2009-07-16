@@ -43,7 +43,7 @@ void RevertablePieceTable::init( int size )
     mChangeHistory.clear();
 }
 
-void RevertablePieceTable::getChangeData( KHE::ArrayChangeMetrics* metrics, int *storageOffset, int versionIndex ) const
+void RevertablePieceTable::getChangeData( KDE::ArrayChangeMetrics* metrics, int *storageOffset, int versionIndex ) const
 {
     mChangeHistory.getChangeData( metrics, storageOffset, versionIndex );
 }
@@ -60,7 +60,7 @@ bool RevertablePieceTable::insert( int dataOffset, int length, int *storageOffse
     return mChangeHistory.appendChange( change );
 }
 
-bool RevertablePieceTable::remove( const KHE::Section &removeSection )
+bool RevertablePieceTable::remove( const KDE::Section &removeSection )
 {
     const PieceList removedPieces = mPieceTable.remove( removeSection );
 
@@ -70,7 +70,7 @@ bool RevertablePieceTable::remove( const KHE::Section &removeSection )
     return mChangeHistory.appendChange( change );
 }
 
-bool RevertablePieceTable::replace( const KHE::Section &removeSection, int insertLength, int *storageOffset )
+bool RevertablePieceTable::replace( const KDE::Section &removeSection, int insertLength, int *storageOffset )
 {
     *storageOffset = mChangeHistory.appliedChangesDataSize();
 
@@ -83,7 +83,7 @@ bool RevertablePieceTable::replace( const KHE::Section &removeSection, int inser
     return mChangeHistory.appendChange( change );
 }
 
-bool RevertablePieceTable::swap( int firstStart, const KHE::Section &secondSection )
+bool RevertablePieceTable::swap( int firstStart, const KDE::Section &secondSection )
 {
     mPieceTable.swap( firstStart, secondSection );
 
@@ -101,7 +101,7 @@ bool RevertablePieceTable::replaceOne( int dataOffset, int *storageOffset )
     const PieceList replacedPieces( replacedPiece );
 
     ReplacePieceTableChange *change =
-        new ReplacePieceTableChange( KHE::Section::fromWidth(dataOffset,1), 1, *storageOffset, replacedPieces );
+        new ReplacePieceTableChange( KDE::Section::fromWidth(dataOffset,1), 1, *storageOffset, replacedPieces );
 
     return mChangeHistory.appendChange( change );
 }

@@ -29,7 +29,7 @@
 #include <statusbar.h>
 // Okteta core
 #include <charcodec.h>
-#include <khe.h>
+#include <oktetacore.h>
 // KDE
 #include <KSqueezedTextLabel>
 #include <KComboBox>
@@ -48,7 +48,7 @@ namespace Kasten
 ViewStatusController::ViewStatusController( StatusBar* statusBar )
  : mByteArrayDisplay( 0 ), mStatusBar( statusBar )
 {
-    mPrintFunction = KHEUI::KOffsetFormat::printFunction( KHEUI::KOffsetFormat::Hexadecimal );
+    mPrintFunction = Okteta::OffsetFormat::printFunction( Okteta::OffsetFormat::Hexadecimal );
 
     mOffsetLabel = new QLabel( statusBar );
     statusBar->addWidget( mOffsetLabel );
@@ -79,7 +79,7 @@ ViewStatusController::ViewStatusController( StatusBar* statusBar )
     statusBar->addWidget( mValueCodingComboBox );
 
     mCharCodingComboBox = new KComboBox( statusBar );
-    mCharCodingComboBox->addItems( KHECore::CharCodec::codecNames() );
+    mCharCodingComboBox->addItems( Okteta::CharCodec::codecNames() );
     mCharCodingComboBox->setToolTip(
         i18nc("@info:tooltip","Encoding in the character column of the current view.") );
     connect( mCharCodingComboBox, SIGNAL(activated(int)), SLOT(setCharCoding(int)) );
@@ -198,14 +198,14 @@ void ViewStatusController::setValueCoding( int valueCoding )
 
 void ViewStatusController::setCharCoding( int charCoding )
 {
-    mByteArrayDisplay->setCharCoding( KHECore::CharCodec::codecNames()[charCoding] );
+    mByteArrayDisplay->setCharCoding( Okteta::CharCodec::codecNames()[charCoding] );
     mByteArrayDisplay->setFocus();
 }
 // #endif
 
 void ViewStatusController::onCursorPositionChanged( int offset )
 {
-    static char codedOffset[KHEUI::KOffsetFormat::MaxFormatWidth+1];
+    static char codedOffset[Okteta::OffsetFormat::MaxFormatWidth+1];
 
     mPrintFunction( codedOffset, mStartOffset + offset );
 
@@ -219,10 +219,10 @@ void ViewStatusController::onHasSelectedDataChanged( bool hasSelectedData )
 
     if( hasSelectedData )
     {
-        static char codedSelectionStart[KHEUI::KOffsetFormat::MaxFormatWidth+1];
-        static char codedSelectionEnd[KHEUI::KOffsetFormat::MaxFormatWidth+1];
+        static char codedSelectionStart[Okteta::OffsetFormat::MaxFormatWidth+1];
+        static char codedSelectionEnd[Okteta::OffsetFormat::MaxFormatWidth+1];
 
-        const KHE::Section selection = mByteArrayDisplay->selection();
+        const KDE::Section selection = mByteArrayDisplay->selection();
         mPrintFunction( codedSelectionStart, mStartOffset + selection.start() );
         mPrintFunction( codedSelectionEnd,   mStartOffset + selection.end() );
 
@@ -243,7 +243,7 @@ void ViewStatusController::onValueCodingChanged( int valueCoding )
 
 void ViewStatusController::onCharCodecChanged( const QString& charCodecName )
 {
-    const int charCodingIndex = KHECore::CharCodec::codecNames().indexOf( charCodecName );
+    const int charCodingIndex = Okteta::CharCodec::codecNames().indexOf( charCodecName );
 
     mCharCodingComboBox->setCurrentIndex( charCodingIndex );
 }

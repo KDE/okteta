@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_KHEXADECIMALBYTECODEC_H
-#define KHE_CORE_KHEXADECIMALBYTECODEC_H
+#ifndef KHEXADECIMALBYTECODEC_H
+#define KHEXADECIMALBYTECODEC_H
 
 // lib
 #include <valuecodec.h>
@@ -29,7 +29,7 @@
 class QChar;
 
 
-namespace KHECore
+namespace Okteta
 {
 
 class KHexadecimalByteCodec : public ValueCodec

@@ -27,7 +27,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
 
-namespace KHECore {
+namespace Okteta {
 class AbstractByteArrayModel;
 class CharCodec;
 }
@@ -41,7 +41,7 @@ class SearchJob : public QObject // not yet: KJob
   Q_OBJECT
 
   public:
-    SearchJob( const KHECore::AbstractByteArrayModel *model,
+    SearchJob( const Okteta::AbstractByteArrayModel *model,
                const QByteArray &searchData, int startIndex, bool findForward, bool ignoreCase, const QString& charCodecName );
     virtual ~SearchJob();
 
@@ -56,13 +56,13 @@ class SearchJob : public QObject // not yet: KJob
     void onBytesSearched();
 
   protected:
-    const KHECore::AbstractByteArrayModel *mByteArrayModel;
+    const Okteta::AbstractByteArrayModel *mByteArrayModel;
 
     QByteArray mSearchData;
     int mStartIndex;
     bool mFindForward;
     bool mIgnoreCase;
-    const KHECore::CharCodec* mCharCodec;
+    const Okteta::CharCodec* mCharCodec;
 };
 
 }

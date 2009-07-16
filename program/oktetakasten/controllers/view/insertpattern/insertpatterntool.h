@@ -27,7 +27,7 @@
 // Qt
 #include <QtCore/QObject>
 
-namespace KHECore {
+namespace Okteta {
 class AbstractByteArrayModel;
 }
 class QString;
@@ -67,7 +67,7 @@ class InsertPatternTool : public QObject
 
   protected:
     KByteArrayDisplay* mByteArrayDisplay;
-    KHECore::AbstractByteArrayModel *mByteArrayModel;
+    Okteta::AbstractByteArrayModel *mByteArrayModel;
 };
 
 }

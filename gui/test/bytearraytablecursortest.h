@@ -26,7 +26,7 @@
 // Qt
 #include <QtCore/QObject>
 
-namespace KHEUI
+namespace Okteta
 {
 
 class ByteArrayTableCursorTest : public QObject

@@ -29,7 +29,7 @@
 #include <QtGui/QPainter>
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 

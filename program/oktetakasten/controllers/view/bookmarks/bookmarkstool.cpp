@@ -28,12 +28,12 @@
 // Kasten core
 #include <abstractmodel.h>
 // Okteta gui
-#include <koffsetformat.h>
+#include <offsetformat.h>
 // Okteta core
 #include <wordbytearrayservice.h>
 #include <charcodec.h>
-#include <kbookmarkable.h>
-#include <kbookmarksconstiterator.h>
+#include <bookmarkable.h>
+#include <bookmarksconstiterator.h>
 #include <bookmark.h>
 #include <kbytearraymodel.h>
 // KDE
@@ -57,12 +57,12 @@ BookmarksTool::BookmarksTool()
 
 QString BookmarksTool::title() const { return i18nc("@title:window", "Bookmarks"); }
 bool BookmarksTool::canCreateBookmark() const { return mCanCreateBookmark; }
-const KHECore::Bookmark& BookmarksTool::bookmarkAt( unsigned int index ) const { return mBookmarks->bookmarkAt( index ); }
-int BookmarksTool::indexOf( const KHECore::Bookmark& bookmark ) const
+const Okteta::Bookmark& BookmarksTool::bookmarkAt( unsigned int index ) const { return mBookmarks->bookmarkAt( index ); }
+int BookmarksTool::indexOf( const Okteta::Bookmark& bookmark ) const
 {
     int result = -1;
 
-    KHECore::BookmarksConstIterator bit = mBookmarks->createBookmarksConstIterator();
+    Okteta::BookmarksConstIterator bit = mBookmarks->createBookmarksConstIterator();
     int i = 0;
     while( bit.hasNext() )
     {
@@ -88,20 +88,20 @@ void BookmarksTool::setTargetModel( AbstractModel* model )
     KByteArrayDocument* document =
         mByteArrayDisplay ? qobject_cast<KByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
     mByteArray = document ? document->content() : 0;
-    mBookmarks = ( mByteArray && mByteArrayDisplay ) ? qobject_cast<KHECore::Bookmarkable*>( mByteArray ) : 0;
+    mBookmarks = ( mByteArray && mByteArrayDisplay ) ? qobject_cast<Okteta::Bookmarkable*>( mByteArray ) : 0;
 
     const bool hasViewWithBookmarks = ( mBookmarks != 0 );
     if( hasViewWithBookmarks )
     {
         onCursorPositionChanged( mByteArrayDisplay->cursorPosition() );
 
-        connect( mByteArray, SIGNAL(bookmarksAdded( const QList<KHECore::Bookmark>& )),
-                 SIGNAL(bookmarksAdded( const QList<KHECore::Bookmark>& )) );
-        connect( mByteArray, SIGNAL(bookmarksRemoved( const QList<KHECore::Bookmark>& )),
-                 SIGNAL(bookmarksRemoved( const QList<KHECore::Bookmark>& )) );
-        connect( mByteArray, SIGNAL(bookmarksAdded( const QList<KHECore::Bookmark>& )),
+        connect( mByteArray, SIGNAL(bookmarksAdded( const QList<Okteta::Bookmark>& )),
+                 SIGNAL(bookmarksAdded( const QList<Okteta::Bookmark>& )) );
+        connect( mByteArray, SIGNAL(bookmarksRemoved( const QList<Okteta::Bookmark>& )),
+                 SIGNAL(bookmarksRemoved( const QList<Okteta::Bookmark>& )) );
+        connect( mByteArray, SIGNAL(bookmarksAdded( const QList<Okteta::Bookmark>& )),
                  SLOT(onBookmarksModified()) );
-        connect( mByteArray, SIGNAL(bookmarksRemoved( const QList<KHECore::Bookmark>& )),
+        connect( mByteArray, SIGNAL(bookmarksRemoved( const QList<Okteta::Bookmark>& )),
                  SLOT(onBookmarksModified()) );
         connect( mByteArray, SIGNAL(bookmarksModified( const QList<int>& )),
                  SIGNAL(bookmarksModified( const QList<int>& )) );
@@ -120,17 +120,17 @@ void BookmarksTool::setTargetModel( AbstractModel* model )
     emit hasBookmarksChanged( hasViewWithBookmarks );
 }
 
-KHECore::Bookmark BookmarksTool::createBookmark()
+Okteta::Bookmark BookmarksTool::createBookmark()
 {
-    KHECore::Bookmark bookmark;
+    Okteta::Bookmark bookmark;
 
     if( mBookmarks )
     {
         const int cursorPosition = mByteArrayDisplay->cursorPosition();
 
         // search for text at cursor
-        const KHECore::CharCodec* charCodec = KHECore::CharCodec::createCodec( mByteArrayDisplay->charCodingName() );
-        const KHECore::WordByteArrayService textService( mByteArray, charCodec );
+        const Okteta::CharCodec* charCodec = Okteta::CharCodec::createCodec( mByteArrayDisplay->charCodingName() );
+        const Okteta::WordByteArrayService textService( mByteArray, charCodec );
         QString bookmarkName = textService.text( cursorPosition, cursorPosition+MaxBookmarkNameSize-1 );
         delete charCodec;
 
@@ -141,7 +141,7 @@ KHECore::Bookmark BookmarksTool::createBookmark()
         bookmark.setOffset( mByteArrayDisplay->cursorPosition() );
         bookmark.setName( bookmarkName );
 
-        QList<KHECore::Bookmark> bookmarksToBeCreated;
+        QList<Okteta::Bookmark> bookmarksToBeCreated;
         bookmarksToBeCreated.append( bookmark );
         mBookmarks->addBookmarks( bookmarksToBeCreated );
     }
@@ -149,14 +149,14 @@ KHECore::Bookmark BookmarksTool::createBookmark()
     return bookmark;
 }
 
-void BookmarksTool::deleteBookmarks( const QList<KHECore::Bookmark>& bookmarks )
+void BookmarksTool::deleteBookmarks( const QList<Okteta::Bookmark>& bookmarks )
 {
     if( mBookmarks )
         mBookmarks->removeBookmarks( bookmarks );
     mByteArrayDisplay->widget()->setFocus();
 }
 
-void BookmarksTool::gotoBookmark( const KHECore::Bookmark& bookmark )
+void BookmarksTool::gotoBookmark( const Okteta::Bookmark& bookmark )
 {
     if( mByteArrayDisplay )
     {
@@ -167,7 +167,7 @@ void BookmarksTool::gotoBookmark( const KHECore::Bookmark& bookmark )
 
 void BookmarksTool::setBookmarkName( unsigned int bookmarkIndex, const QString& name )
 {
-    KHECore::Bookmark bookmark = mBookmarks->bookmarkAt( bookmarkIndex );
+    Okteta::Bookmark bookmark = mBookmarks->bookmarkAt( bookmarkIndex );
 
     bookmark.setName( name );
     mBookmarks->setBookmark( bookmarkIndex, bookmark );

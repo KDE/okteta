@@ -20,16 +20,16 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_BOOKMARKLISTCONSTITERATORADAPTER_H
-#define KHE_CORE_BOOKMARKLISTCONSTITERATORADAPTER_H
+#ifndef BOOKMARKLISTCONSTITERATORADAPTER_H
+#define BOOKMARKLISTCONSTITERATORADAPTER_H
 
 // lib
-#include "kbookmarksconstiteratoradapter.h"
+#include "bookmarksconstiteratoradapter.h"
 // Qt
 #include <QtCore/QLinkedListIterator>
 
 
-namespace KHECore
+namespace Okteta
 {
 class BookmarkList;
 
@@ -43,20 +43,20 @@ class BookmarkListConstIteratorAdapter : public BookmarksConstIteratorAdapter
   public: // BookmarksConstIteratorAdapter API
     virtual bool hasNext() const;
     virtual bool hasPrevious() const;
-    virtual const KHECore::Bookmark& peekNext() const;
-    virtual const KHECore::Bookmark& peekPrevious() const;
+    virtual const Okteta::Bookmark& peekNext() const;
+    virtual const Okteta::Bookmark& peekPrevious() const;
 
-    virtual bool findNext( const KHECore::Bookmark& bookmark );
-    virtual bool findPrevious( const KHECore::Bookmark& bookmark );
+    virtual bool findNext( const Okteta::Bookmark& bookmark );
+    virtual bool findPrevious( const Okteta::Bookmark& bookmark );
     virtual bool findNextFrom( unsigned int offset );
     virtual bool findPreviousFrom( unsigned int offset );
-    virtual const KHECore::Bookmark& next();
-    virtual const KHECore::Bookmark& previous();
+    virtual const Okteta::Bookmark& next();
+    virtual const Okteta::Bookmark& previous();
     virtual void toBack();
     virtual void toFront();
 
   protected:
-    QLinkedListIterator<KHECore::Bookmark> mIterator;
+    QLinkedListIterator<Okteta::Bookmark> mIterator;
 };
 
 }

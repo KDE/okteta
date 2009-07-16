@@ -40,7 +40,7 @@ RotateByteArrayFilter::RotateByteArrayFilter()
 AbstractByteArrayFilterParameterSet *RotateByteArrayFilter::parameterSet() { return &mParameterSet; }
 
 bool RotateByteArrayFilter::filter( char *result,
-                                    KHECore::AbstractByteArrayModel *model, const KHE::Section &section ) const
+                                    Okteta::AbstractByteArrayModel *model, const KDE::Section &section ) const
 {
     const int groupSize = mParameterSet.groupSize();
     const int groupBitCount = (groupSize * RotateBitsPerByte );

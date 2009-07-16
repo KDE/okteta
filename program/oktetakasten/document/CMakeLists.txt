@@ -1,8 +1,8 @@
 include_directories(
-  ../../../core
   ../../../libs/kasten/core
   ../../../libs/kasten/core/entity
   ../../../libs/kasten/core/document
+  ../../../core
 )
 
 if(KDE4_BUILD_TESTS)

@@ -140,7 +140,7 @@ void ReplaceTool::replace( KFindDirection direction, bool fromCursor, bool inSel
 
     if( inSelection )
     {
-        const KHE::Section selection = mByteArrayDisplay->selection();
+        const KDE::Section selection = mByteArrayDisplay->selection();
         mReplaceFirstIndex = selection.start();
         mReplaceLastIndex =  selection.end();
         startIndex = selection.start();

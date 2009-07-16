@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_CHANGEHISTORY_H
-#define KHE_CORE_CHANGEHISTORY_H
+#ifndef CHANGEHISTORY_H
+#define CHANGEHISTORY_H
 
 
 // lib
@@ -32,7 +32,7 @@
 
 class QByteArray;
 
-namespace KHECore
+namespace Okteta
 {
 
 // TODO: split readonly part into own interface
@@ -46,11 +46,11 @@ class ChangeHistory
     virtual QByteArray initialData() const = 0;
 
   public: // set
-    virtual void doChanges( const QList<KHECore::ByteArrayChange>& changes,
+    virtual void doChanges( const QList<Okteta::ByteArrayChange>& changes,
                                   int oldVersionIndex, int newVersionIndex ) = 0;
 
   public: // signal
-    virtual void changesDone( const QList<KHECore::ByteArrayChange>& changes,
+    virtual void changesDone( const QList<Okteta::ByteArrayChange>& changes,
                                     int oldVersionIndex, int newVersionIndex ) = 0;
 };
 
@@ -58,6 +58,6 @@ inline ChangeHistory::~ChangeHistory() {}
 
 }
 
-Q_DECLARE_INTERFACE( KHECore::ChangeHistory, "org.kde.khecore.changehistory/1.0" )
+Q_DECLARE_INTERFACE( Okteta::ChangeHistory, "org.kde.khecore.changehistory/1.0" )
 
 #endif

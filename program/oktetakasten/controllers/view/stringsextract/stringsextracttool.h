@@ -32,7 +32,7 @@
 // Qt
 #include <QtCore/QList>
 
-namespace KHECore {
+namespace Okteta {
 class AbstractByteArrayModel;
 class CharCodec;
 }
@@ -94,18 +94,18 @@ class StringsExtractTool : public AbstractTool
     bool mSourceByteArrayModelUptodate:1;
 
   protected: // settings
-    KHECore::CharCodec *mCharCodec;
+    Okteta::CharCodec *mCharCodec;
     int mMinLength;
 
   protected: // sources
     KByteArrayDisplay* mByteArrayDisplay;
     // current
-    KHECore::AbstractByteArrayModel *mByteArrayModel;
+    Okteta::AbstractByteArrayModel *mByteArrayModel;
 
     // selection source
-    KHE::Section mSourceSelection;
+    KDE::Section mSourceSelection;
     // source of strings
-    KHECore::AbstractByteArrayModel *mSourceByteArrayModel;
+    Okteta::AbstractByteArrayModel *mSourceByteArrayModel;
     // minLength source
     int mSourceMinLength;
 };

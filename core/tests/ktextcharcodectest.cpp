@@ -31,7 +31,7 @@
 
 
 
-using namespace KHECore;
+using namespace Okteta;
 
 
 void KTextCharCodecTest::initTestCase()

@@ -25,7 +25,7 @@
 // Okteta core
 #include <abstractbytearraymodel.h>
 #include <charcodec.h>
-#include <khechar.h>
+#include <character.h>
 // Qt
 #include <QtGui/QApplication>
 
@@ -63,7 +63,7 @@ void ExtractStringsJob::exec()
 
         for( ; i<=blockEnd; ++i )
         {
-            const KHECore::KChar decodedChar = mCharCodec->decode( mByteArrayModel->datum(i) );
+            const Okteta::Character decodedChar = mCharCodec->decode( mByteArrayModel->datum(i) );
             // TODO: Zeilenumbrüche ausnehmen
             const bool isStringChar = ( !decodedChar.isUndefined() &&
                                         (decodedChar.isLetterOrNumber() || decodedChar.isSpace() || decodedChar.isPunct()) );

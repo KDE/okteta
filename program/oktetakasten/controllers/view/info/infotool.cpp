@@ -117,7 +117,7 @@ void InfoTool::updateStatistic()
 
     QApplication::setOverrideCursor( Qt::WaitCursor );
 
-    const KHE::Section selection = ( mByteArrayDisplay ? mByteArrayDisplay->selection() : KHE::Section() );
+    const KDE::Section selection = ( mByteArrayDisplay ? mByteArrayDisplay->selection() : KDE::Section() );
     CreateStatisticJob *createStatisticJob =
         new CreateStatisticJob( mByteArrayModel, selection, mByteCount );
     const int selectionSize = createStatisticJob->exec();
@@ -131,7 +131,7 @@ void InfoTool::updateStatistic()
     mSourceSelection = selection;
     if( mSourceByteArrayModel )
     {
-        connect( mSourceByteArrayModel,  SIGNAL(contentsChanged( const KHE::ArrayChangeMetricsList & )),
+        connect( mSourceByteArrayModel,  SIGNAL(contentsChanged( const KDE::ArrayChangeMetricsList & )),
                  SLOT(onSourceChanged()) );
         connect( mSourceByteArrayModel,  SIGNAL(destroyed()),
                  SLOT(onSourceDestroyed()) );

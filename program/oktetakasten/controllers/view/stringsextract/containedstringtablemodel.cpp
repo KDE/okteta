@@ -30,7 +30,7 @@ ContainedStringTableModel::ContainedStringTableModel( const QList<ContainedStrin
  : QAbstractTableModel( parent ),
    mContainedStringList( containedStringList )
 {
-    mPrintFunction = KHEUI::KOffsetFormat::printFunction( KHEUI::KOffsetFormat::Hexadecimal );
+    mPrintFunction = Okteta::OffsetFormat::printFunction( Okteta::OffsetFormat::Hexadecimal );
 }
 
 void ContainedStringTableModel::update()

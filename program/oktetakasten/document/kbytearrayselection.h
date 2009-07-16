@@ -39,14 +39,14 @@ class KByteArraySelection : public AbstractModelSelection
     virtual ~KByteArraySelection();
 
   public:
-    void setSection( const KHE::Section &section );
+    void setSection( const KDE::Section &section );
 
   public:
-    KHE::Section section() const;
+    KDE::Section section() const;
     bool isValid() const;
 
   protected:
-    KHE::Section mSection;
+    KDE::Section mSection;
 };
 
 }

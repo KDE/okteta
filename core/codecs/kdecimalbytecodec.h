@@ -20,14 +20,14 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_KDECIMALBYTECODEC_H
-#define KHE_CORE_KDECIMALBYTECODEC_H
+#ifndef KDECIMALBYTECODEC_H
+#define KDECIMALBYTECODEC_H
 
 // lib
 #include <valuecodec.h>
 
 
-namespace KHECore
+namespace Okteta
 {
 
 class KDecimalByteCodec : public ValueCodec

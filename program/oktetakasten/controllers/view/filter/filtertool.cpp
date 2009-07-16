@@ -112,7 +112,7 @@ void FilterTool::filter( int filterId ) const
 
     if( byteArrayFilter )
     {
-        const KHE::Section filteredSection = mByteArrayDisplay->selection();
+        const KDE::Section filteredSection = mByteArrayDisplay->selection();
 
         QByteArray filterResult;
         filterResult.resize( filteredSection.width() );
@@ -126,8 +126,8 @@ void FilterTool::filter( int filterId ) const
 
         if( success )
         {
-            KHECore::ChangesDescribable *changesDescribable =
-                qobject_cast<KHECore::ChangesDescribable*>( mByteArrayModel );
+            Okteta::ChangesDescribable *changesDescribable =
+                qobject_cast<Okteta::ChangesDescribable*>( mByteArrayModel );
 
             if( changesDescribable )
                 changesDescribable->openGroupedChange( byteArrayFilter->name() );

@@ -20,14 +20,14 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_ABSTRACTCOLUMNSTYLIST_P_H
-#define KHE_UI_ABSTRACTCOLUMNSTYLIST_P_H
+#ifndef OKTETA_ABSTRACTCOLUMNSTYLIST_P_H
+#define OKTETA_ABSTRACTCOLUMNSTYLIST_P_H
 
 // lib
 #include "abstractcolumnstylist.h"
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 class AbstractColumnStylistPrivate

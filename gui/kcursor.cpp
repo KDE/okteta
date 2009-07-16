@@ -23,7 +23,7 @@
 #include "kcursor.h"
 
 
-namespace KHEUI {
+namespace Okteta {
 
 KCursor::KCursor()
 : CursorX( 0 ),

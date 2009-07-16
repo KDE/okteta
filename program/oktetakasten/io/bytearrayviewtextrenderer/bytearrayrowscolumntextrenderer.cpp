@@ -25,7 +25,7 @@
 // Okteta core
 #include <valuecodec.h>
 #include <charcodec.h>
-#include <khechar.h>
+#include <character.h>
 #include <abstractbytearraymodel.h>
 // Qt
 #include <QtCore/QTextStream>
@@ -38,19 +38,19 @@ static const int DefaultTRByteSpacingWidth = 1;
 static const int TRGroupSpacingWidth = 2;
 
 
-ByteArrayRowsColumnTextRenderer::ByteArrayRowsColumnTextRenderer( const KHECore::AbstractByteArrayModel* byteArrayModel,
+ByteArrayRowsColumnTextRenderer::ByteArrayRowsColumnTextRenderer( const Okteta::AbstractByteArrayModel* byteArrayModel,
         int offset,
-        const KHEUI::CoordRange& coordRange,
+        const Okteta::CoordRange& coordRange,
         int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
         int visibleCodings,
-        KHECore::ValueCoding valueCoding,
+        Okteta::ValueCoding valueCoding,
         const QString& charCodecName, QChar substituteChar, QChar undefinedChar )
  : mByteArrayModel( byteArrayModel ),
    mCoordRange( coordRange ),
    mNoOfBytesPerLine( noOfBytesPerLine ),
    mVisibleCodings( visibleCodings ),
-   mValueCodec( KHECore::ValueCodec::createCodec(valueCoding) ),
-   mCharCodec( KHECore::CharCodec::createCodec(charCodecName) ),
+   mValueCodec( Okteta::ValueCodec::createCodec(valueCoding) ),
+   mCharCodec( Okteta::CharCodec::createCodec(charCodecName) ),
    mSubstituteChar( substituteChar ),
    mUndefinedChar( undefinedChar ),
    mOffset( offset ),
@@ -140,12 +140,12 @@ void ByteArrayRowsColumnTextRenderer::renderLine( QTextStream* stream, bool isSu
             *stream << whiteSpace( t-e );
 
             // print char
-            const KHECore::KChar byteChar = mCharCodec->decode( mByteArrayModel->datum(mOffset) );
+            const Okteta::Character byteChar = mCharCodec->decode( mByteArrayModel->datum(mOffset) );
 
-            const QChar streamChar = byteChar.isUndefined() ?      KHECore::KChar(mUndefinedChar) :
+            const QChar streamChar = byteChar.isUndefined() ?      Okteta::Character(mUndefinedChar) :
                                     (!byteChar.isPrint()
                                     || byteChar == tabChar
-                                    || byteChar == returnChar) ? KHECore::KChar(mSubstituteChar) :
+                                    || byteChar == returnChar) ? Okteta::Character(mSubstituteChar) :
                                                                 byteChar;
             *stream << streamChar;
 

@@ -27,8 +27,8 @@
 // Qt
 #include <QtTest/QtTest>
 
-using namespace KHE;
-using namespace KHEUI;
+using namespace KDE;
+using namespace Okteta;
 
 // local variables
 static const int Pos1 = 15;

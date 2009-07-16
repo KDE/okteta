@@ -35,8 +35,8 @@
 KByteArrayEdit::KByteArrayEdit( QWidget *parent, const QStringList & )
   : QWidget( parent )
 {
-    Model = new KHECore::KByteArrayModel;
-    View = new KHEUI::ByteArrayColumnView( Model, this );
+    Model = new Okteta::KByteArrayModel;
+    View = new Okteta::ByteArrayColumnView( Model, this );
 
     QHBoxLayout* Layout = new QHBoxLayout( this );
     Layout->addWidget( View );
@@ -48,8 +48,8 @@ KByteArrayEdit::KByteArrayEdit( QWidget *parent, const QStringList & )
 
 void KByteArrayEdit::setData( char *D, int S, int RS, bool KM )
 {
-    KHECore::KByteArrayModel *OldModel = Model;
-    Model = new KHECore::KByteArrayModel( D, S, RS, KM );
+    Okteta::KByteArrayModel *OldModel = Model;
+    Model = new Okteta::KByteArrayModel( D, S, RS, KM );
 
     // get attributes
     Model->setReadOnly( OldModel->isReadOnly() );
@@ -91,12 +91,12 @@ void KByteArrayEdit::setCursorPosition( int Index )
 
 void KByteArrayEdit::setCoding( KCoding C )
 {
-    View->setValueCoding( (KHEUI::ByteArrayColumnView::ValueCoding) C );
+    View->setValueCoding( (Okteta::ByteArrayColumnView::ValueCoding) C );
 }
 
 void KByteArrayEdit::setResizeStyle( KResizeStyle Style )
 {
-    View->setResizeStyle( (KHEUI::ByteArrayColumnView::ResizeStyle) Style );
+    View->setResizeStyle( (Okteta::ByteArrayColumnView::ResizeStyle) Style );
 }
 int KByteArrayEdit::noOfBytesPerLine() const
 {
@@ -154,7 +154,7 @@ void KByteArrayEdit::setBinaryGapWidth( int BGW )
 
 void KByteArrayEdit::setEncoding( KEncoding C )
 {
-    View->setCharCoding( (KHEUI::ByteArrayColumnView::CharCoding)C );
+    View->setCharCoding( (Okteta::ByteArrayColumnView::CharCoding)C );
 }
 
 void KByteArrayEdit::setShowUnprintable( bool SU )

@@ -29,7 +29,7 @@
 
 class QSignalSpy;
 
-namespace KHECore
+namespace Okteta
 {
 
 class Versionable;

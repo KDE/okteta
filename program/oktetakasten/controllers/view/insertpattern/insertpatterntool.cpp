@@ -84,10 +84,10 @@ void InsertPatternTool::insertPattern( const QByteArray &pattern, int count )
         memcpy( &insertData.data()[i], pattern.constData(), patternSize );
 
     //TODO: support insert to selection
-//     const KHE::Section selection = mByteArrayDisplay->selection();
+//     const KDE::Section selection = mByteArrayDisplay->selection();
 
-    KHECore::ChangesDescribable *changesDescribable =
-        qobject_cast<KHECore::ChangesDescribable*>( mByteArrayModel );
+    Okteta::ChangesDescribable *changesDescribable =
+        qobject_cast<Okteta::ChangesDescribable*>( mByteArrayModel );
 
     if( changesDescribable )
         changesDescribable->openGroupedChange( i18n("Pattern inserted.") );

@@ -20,15 +20,15 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_ARRAYCHANGEMETRICSLIST_H
-#define KHE_CORE_ARRAYCHANGEMETRICSLIST_H
+#ifndef ARRAYCHANGEMETRICSLIST_H
+#define ARRAYCHANGEMETRICSLIST_H
 
 // lib
 #include "arraychangemetrics.h"
 //
 #include <QtCore/QList>
 
-namespace KHE
+namespace KDE
 {
 
 // TODO: do we need the invalid status?

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_COORDRANGELIST_H
-#define KHE_UI_COORDRANGELIST_H
+#ifndef OKTETA_COORDRANGELIST_H
+#define OKTETA_COORDRANGELIST_H
 
 
 // lib
@@ -30,7 +30,7 @@
 #include <QtCore/QLinkedList>
 
 
-namespace KHEUI {
+namespace Okteta {
 
 /**
 @author Friedrich W. H.  Kossebau

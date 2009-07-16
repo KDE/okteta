@@ -20,12 +20,12 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_PIECETABLEBYTEARRAYMODEL_PRIVATE_H
-#define KHE_CORE_PIECETABLEBYTEARRAYMODEL_PRIVATE_H
+#ifndef PIECETABLEBYTEARRAYMODEL_PRIVATE_H
+#define PIECETABLEBYTEARRAYMODEL_PRIVATE_H
 
 // lib
 #include "piecetablebytearraymodel.h"
-#include "kbookmarksconstiterator.h"
+#include "bookmarksconstiterator.h"
 #include "bookmarklistconstiteratoradapter.h"
 #include "bookmarklist.h"
 #include "changesdatastorage.h"
@@ -34,7 +34,7 @@
 #include "piecetable/revertablepiecetable.h"
 
 
-namespace KHECore
+namespace Okteta
 {
 
 /** base class for all mInitialData buffers that are used to display
@@ -78,14 +78,14 @@ class PieceTableByteArrayModel::Private
     void revertToVersionByIndex( int versionIndex );
 
   public:
-    void addBookmarks( const QList<KHECore::Bookmark> &bookmarks );
-    void removeBookmarks( const QList<KHECore::Bookmark> &bookmarks );
+    void addBookmarks( const QList<Okteta::Bookmark> &bookmarks );
+    void removeBookmarks( const QList<Okteta::Bookmark> &bookmarks );
     void removeAllBookmarks();
-    void setBookmark( unsigned int index, const KHECore::Bookmark& bookmark );
+    void setBookmark( unsigned int index, const Okteta::Bookmark& bookmark );
 
-    KHECore::BookmarksConstIterator createBookmarksConstIterator() const;
-    const KHECore::Bookmark& bookmarkAt( unsigned int index ) const;
-    const KHECore::Bookmark& bookmarkFor( int offset ) const;
+    Okteta::BookmarksConstIterator createBookmarksConstIterator() const;
+    const Okteta::Bookmark& bookmarkAt( unsigned int index ) const;
+    const Okteta::Bookmark& bookmarkFor( int offset ) const;
     bool containsBookmarkFor( int offset ) const;
     unsigned int bookmarksCount() const;
 
@@ -97,7 +97,7 @@ class PieceTableByteArrayModel::Private
   public: // ChangeHistory API
     QList<ByteArrayChange> changes( int firstVersionIndex, int lastVersionIndex ) const;
     QByteArray initialData() const;
-    void doChanges( const QList<KHECore::ByteArrayChange>& changes,
+    void doChanges( const QList<Okteta::ByteArrayChange>& changes,
                     int oldVersionIndex, int newVersionIndex );
 
   public:
@@ -131,7 +131,7 @@ class PieceTableByteArrayModel::Private
     int mBeforeGroupedChangeVersionIndex;
 
     int mBeforeChangesVersionIndex;
-    KHE::ArrayChangeMetricsList mChangeMetrics;
+    KDE::ArrayChangeMetricsList mChangeMetrics;
     QList<ByteArrayChange> mChanges;
     bool mBeforeChangesModified:1;
     bool mBookmarksModified:1;
@@ -167,12 +167,12 @@ inline int PieceTableByteArrayModel::Private::versionCount() const { return mPie
 inline QString PieceTableByteArrayModel::Private::versionDescription( int versionIndex ) const
 { return mPieceTable.changeDescription( versionIndex-1 ); }
 
-inline void PieceTableByteArrayModel::Private::addBookmarks( const QList<KHECore::Bookmark> &bookmarks )
+inline void PieceTableByteArrayModel::Private::addBookmarks( const QList<Okteta::Bookmark> &bookmarks )
 {
     mBookmarks.addBookmarks( bookmarks );
     emit p->bookmarksAdded( bookmarks );
 }
-inline void PieceTableByteArrayModel::Private::removeBookmarks( const QList<KHECore::Bookmark> &bookmarks )
+inline void PieceTableByteArrayModel::Private::removeBookmarks( const QList<Okteta::Bookmark> &bookmarks )
 {
     mBookmarks.removeBookmarks( bookmarks );
     emit p->bookmarksRemoved( bookmarks );
@@ -180,11 +180,11 @@ inline void PieceTableByteArrayModel::Private::removeBookmarks( const QList<KHEC
 
 inline void PieceTableByteArrayModel::Private::removeAllBookmarks()
 {
-    const QList<KHECore::Bookmark> bookmarks = mBookmarks.list();
+    const QList<Okteta::Bookmark> bookmarks = mBookmarks.list();
     mBookmarks.clear();
     emit p->bookmarksRemoved( bookmarks );
 }
-inline void PieceTableByteArrayModel::Private::setBookmark( unsigned int index, const KHECore::Bookmark& bookmark )
+inline void PieceTableByteArrayModel::Private::setBookmark( unsigned int index, const Okteta::Bookmark& bookmark )
 {
     mBookmarks.setBookmark( index, bookmark );
 
@@ -193,16 +193,16 @@ inline void PieceTableByteArrayModel::Private::setBookmark( unsigned int index, 
     emit p->bookmarksModified( changedBookmarkIndizes );
 }
 
-inline KHECore::BookmarksConstIterator PieceTableByteArrayModel::Private::createBookmarksConstIterator() const
+inline Okteta::BookmarksConstIterator PieceTableByteArrayModel::Private::createBookmarksConstIterator() const
 {
     return BookmarksConstIterator( new BookmarkListConstIteratorAdapter(mBookmarks) );
 }
 
-inline const KHECore::Bookmark& PieceTableByteArrayModel::Private::bookmarkAt( unsigned int index ) const
+inline const Okteta::Bookmark& PieceTableByteArrayModel::Private::bookmarkAt( unsigned int index ) const
 {
     return mBookmarks.at( index );
 }
-inline const KHECore::Bookmark& PieceTableByteArrayModel::Private::bookmarkFor( int offset ) const
+inline const Okteta::Bookmark& PieceTableByteArrayModel::Private::bookmarkFor( int offset ) const
 {
     return mBookmarks.bookmark( offset );
 }

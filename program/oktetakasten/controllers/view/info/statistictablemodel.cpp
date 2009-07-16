@@ -23,7 +23,7 @@
 #include "statistictablemodel.h"
 
 // Okteta core
-#include <khechar.h>
+#include <character.h>
 #include <charcodec.h>
 #include <valuecodec.h>
 // KDE
@@ -36,7 +36,7 @@ namespace Kasten
 {
 
 static const unsigned char StatisticsDefaultUndefinedChar = '?';
-static const KHECore::ValueCoding DefaultValueCoding =  KHECore::HexadecimalCoding;
+static const Okteta::ValueCoding DefaultValueCoding =  Okteta::HexadecimalCoding;
 static const int StatisticsByteSetSize = 256;
 
 
@@ -44,8 +44,8 @@ StatisticTableModel::StatisticTableModel( int *byteCount, QObject *parent )
  : QAbstractTableModel( parent ),
    mByteCount( byteCount ),
    mValueCoding( DefaultValueCoding ),
-   mValueCodec( KHECore::ValueCodec::createCodec(DefaultValueCoding) ),
-   mCharCodec( KHECore::CharCodec::createCodec(KHECore::LocalEncoding) ),
+   mValueCodec( Okteta::ValueCodec::createCodec(DefaultValueCoding) ),
+   mCharCodec( Okteta::CharCodec::createCodec(Okteta::LocalEncoding) ),
    mUndefinedChar( StatisticsDefaultUndefinedChar )
 {
 }
@@ -72,8 +72,8 @@ void StatisticTableModel::setValueCoding( int valueCoding )
 
     delete mValueCodec;
 
-    mValueCoding = (KHECore::ValueCoding)valueCoding;
-    mValueCodec = KHECore::ValueCodec::createCodec( mValueCoding );
+    mValueCoding = (Okteta::ValueCoding)valueCoding;
+    mValueCodec = Okteta::ValueCodec::createCodec( mValueCoding );
 //     CodedByte.resize( ByteCodec->encodingWidth() );
 
     emit dataChanged( index(0,ValueId), index(StatisticsByteSetSize-1,ValueId) );
@@ -86,7 +86,7 @@ void StatisticTableModel::setCharCodec( const QString &codeName )
         return;
 
     delete mCharCodec;
-    mCharCodec = KHECore::CharCodec::createCodec( codeName );
+    mCharCodec = Okteta::CharCodec::createCodec( codeName );
 
     emit dataChanged( index(0,CharacterId), index(StatisticsByteSetSize-1,CharacterId) );
 }
@@ -115,7 +115,7 @@ QVariant StatisticTableModel::data( const QModelIndex &index, int role ) const
         {
             case CharacterId:
             {
-                const KHECore::KChar decodedChar = mCharCodec->decode( byte );
+                const Okteta::Character decodedChar = mCharCodec->decode( byte );
                 result = decodedChar.isUndefined() ?
                     i18nc( "@item:intable character is not defined", "undef." ) :
                     QString( (QChar)decodedChar );
@@ -180,10 +180,10 @@ QVariant StatisticTableModel::headerData( int section, Qt::Orientation orientati
     {
         const QString titel =
             section == ValueId ? (
-                mValueCoding == KHECore::HexadecimalCoding ? i18nc("@title:column short for Hexadecimal","Hex") :
-                mValueCoding == KHECore::DecimalCoding ?     i18nc("@title:column short for Decimal",    "Dec") :
-                mValueCoding == KHECore::OctalCoding ?       i18nc("@title:column short for Octal",      "Oct") :
-                mValueCoding == KHECore::BinaryCoding ?      i18nc("@title:column short for Binary",     "Bin") :
+                mValueCoding == Okteta::HexadecimalCoding ? i18nc("@title:column short for Hexadecimal","Hex") :
+                mValueCoding == Okteta::DecimalCoding ?     i18nc("@title:column short for Decimal",    "Dec") :
+                mValueCoding == Okteta::OctalCoding ?       i18nc("@title:column short for Octal",      "Oct") :
+                mValueCoding == Okteta::BinaryCoding ?      i18nc("@title:column short for Binary",     "Bin") :
                                                 QString() ) :
             section == CharacterId ?   i18nc("@title:column short for Character",      "Char") :
             section == CountId ?       i18nc("@title:column count of characters",      "Count") :
@@ -195,13 +195,13 @@ QVariant StatisticTableModel::headerData( int section, Qt::Orientation orientati
     {
         const QString titel =
             section == ValueId ? (
-                mValueCoding == KHECore::HexadecimalCoding ?
+                mValueCoding == Okteta::HexadecimalCoding ?
                     i18nc("@info:tooltip column contains the value in hexadecimal format","Hexadecimal") :
-                mValueCoding == KHECore::DecimalCoding ?
+                mValueCoding == Okteta::DecimalCoding ?
                     i18nc("@info:tooltip column contains the value in decimal format",    "Decimal") :
-                mValueCoding == KHECore::OctalCoding ?
+                mValueCoding == Okteta::OctalCoding ?
                     i18nc("@info:tooltip column contains the value in octal format",      "Octal") :
-                mValueCoding == KHECore::BinaryCoding ?
+                mValueCoding == Okteta::BinaryCoding ?
                     i18nc("@info:tooltip column contains the value in binary format",     "Binary") :
                 // else
                     QString() ) :

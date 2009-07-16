@@ -29,7 +29,7 @@
 #include <QtCore/QStringList>
 
 
-namespace KHECore {
+namespace Okteta {
 
 
 const QStringList &CharCodec::codecNames()

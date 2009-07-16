@@ -31,16 +31,16 @@
 static const int ByteArrayModelSize = 60;
 
 
-KHECore::AbstractByteArrayModel *KByteArrayModelKAbstractByteArrayModelIfTest::createByteArrayModel()
+Okteta::AbstractByteArrayModel *KByteArrayModelKAbstractByteArrayModelIfTest::createByteArrayModel()
 {
-  KHECore::KByteArrayModel *ByteArrayModel = new KHECore::KByteArrayModel( ByteArrayModelSize );
+  Okteta::KByteArrayModel *ByteArrayModel = new Okteta::KByteArrayModel( ByteArrayModelSize );
   ByteArrayModel->setReadOnly( false );
 
   return ByteArrayModel;
 }
 
 void KByteArrayModelKAbstractByteArrayModelIfTest::deleteByteArrayModel(
-       KHECore::AbstractByteArrayModel *ByteArrayModel )
+       Okteta::AbstractByteArrayModel *ByteArrayModel )
 {
   delete ByteArrayModel;
 }

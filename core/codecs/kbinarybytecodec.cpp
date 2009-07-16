@@ -26,7 +26,7 @@
 #include <QtCore/QString>
 
 
-namespace KHECore {
+namespace Okteta {
 
 void KBinaryByteCodec::encode( QString &Digits, unsigned int Pos, const unsigned char Char ) const
 {

@@ -23,7 +23,7 @@
 #include "sectionlist.h"
 
 
-namespace KHE
+namespace KDE
 {
 
 SectionList::SectionList() {}

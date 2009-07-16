@@ -36,12 +36,12 @@ class ModSum32ByteArrayChecksumAlgorithm : public AbstractByteArrayChecksumAlgor
     virtual ~ModSum32ByteArrayChecksumAlgorithm();
 
   public: // AbstractByteArrayChecksumAlgorithm API
-    virtual bool calculateChecksum( QString* result, const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const;
+    virtual bool calculateChecksum( QString* result, const Okteta::AbstractByteArrayModel* model, const KDE::Section& section ) const;
     virtual AbstractByteArrayChecksumParameterSet* parameterSet();
 
   protected:
-    quint32 calculateModSumWithBigEndian( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const;
-    quint32 calculateModSumWithLittleEndian( const KHECore::AbstractByteArrayModel* model, const KHE::Section& section ) const;
+    quint32 calculateModSumWithBigEndian( const Okteta::AbstractByteArrayModel* model, const KDE::Section& section ) const;
+    quint32 calculateModSumWithLittleEndian( const Okteta::AbstractByteArrayModel* model, const KDE::Section& section ) const;
 
   protected:
     ModSumByteArrayChecksumParameterSet mParameterSet;

@@ -20,18 +20,18 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_CORE_VALUECODEC_H
-#define KHE_CORE_VALUECODEC_H
+#ifndef VALUECODEC_H
+#define VALUECODEC_H
 
 
 // lib
-#include "khe.h"
+#include "oktetacore.h"
 #include "oktetacore_export.h"
 
 class QString;
 
 
-namespace KHECore
+namespace Okteta
 {
 
 /** class that is able to convert codings to and from
@@ -46,7 +46,7 @@ namespace KHECore
 class OKTETACORE_EXPORT ValueCodec
 {
   public:
-    static ValueCodec *createCodec( ValueCoding valueCoding );
+    static ValueCodec* createCodec( ValueCoding valueCoding );
 
   public:
     virtual ~ValueCodec();

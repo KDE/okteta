@@ -54,7 +54,7 @@ void OktetaBrowserExtension::saveState( QDataStream &stream )
 {
     KParts::BrowserExtension::saveState( stream );
 
-    KHEUI::ByteArrayColumnView *view = part->view;
+    Okteta::ByteArrayColumnView *view = part->view;
 
     stream << (int)view->offsetColumnVisible() << view->visibleCodings()
         << (int)view->resizeStyle() << (int)view->valueCoding() 
@@ -83,17 +83,17 @@ void OktetaBrowserExtension::restoreState( QDataStream &stream )
     stream >> offsetColumnVisible >> visibleCodings >> resizeStyle >> valueCoding >> charCodingName >> showsNonprinting 
            >> x >> y >> position >> cursorBehind >> activeCoding;
 
-    KHEUI::ByteArrayColumnView *view = part->view;
+    Okteta::ByteArrayColumnView *view = part->view;
 
     view->toggleOffsetColumn( offsetColumnVisible );
     view->setVisibleCodings( visibleCodings );
-    view->setResizeStyle( (KHEUI::ByteArrayColumnView::ResizeStyle)resizeStyle );
-    view->setValueCoding( (KHEUI::ByteArrayColumnView::ValueCoding)valueCoding );
+    view->setResizeStyle( (Okteta::ByteArrayColumnView::ResizeStyle)resizeStyle );
+    view->setValueCoding( (Okteta::ByteArrayColumnView::ValueCoding)valueCoding );
     view->setCharCoding( charCodingName );
     view->setShowsNonprinting( showsNonprinting );
     view->setColumnsPos( x, y );
     view->setCursorPosition( position, cursorBehind );
-    view->setActiveCoding( (KHEUI::ByteArrayColumnView::CodingTypeId)activeCoding );
+    view->setActiveCoding( (Okteta::ByteArrayColumnView::CodingTypeId)activeCoding );
 
     part->fitActionSettings();
 }

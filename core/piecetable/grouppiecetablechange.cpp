@@ -52,25 +52,25 @@ bool GroupPieceTableChange::merge( const AbstractPieceTableChange *other )
     return result;
 }
 
-KHE::Section GroupPieceTableChange::apply( PieceTable *pieceTable ) const
+KDE::Section GroupPieceTableChange::apply( PieceTable *pieceTable ) const
 {
 Q_UNUSED( pieceTable )
 //     pieceTable->insert( mInsertOffset, mInsertLength, mStorageOffset );
 
-    return KHE::Section();//( mInsertOffset, pieceTable->size()-1 );
+    return KDE::Section();//( mInsertOffset, pieceTable->size()-1 );
 }
 
-KHE::Section GroupPieceTableChange::revert( PieceTable *pieceTable ) const
+KDE::Section GroupPieceTableChange::revert( PieceTable *pieceTable ) const
 {
 Q_UNUSED( pieceTable )
 //     const int oldLast = pieceTable->size() - 1;
-//     pieceTable->remove( KHE::Section::fromWidth(mInsertOffset,mInsertLength) );
-    return KHE::Section();//( mInsertOffset, oldLast );
+//     pieceTable->remove( KDE::Section::fromWidth(mInsertOffset,mInsertLength) );
+    return KDE::Section();//( mInsertOffset, oldLast );
 }
 
-KHE::ArrayChangeMetrics GroupPieceTableChange::metrics() const
+KDE::ArrayChangeMetrics GroupPieceTableChange::metrics() const
 {
-    return KHE::ArrayChangeMetrics::asReplacement( 0, 0, 0);
+    return KDE::ArrayChangeMetrics::asReplacement( 0, 0, 0);
 }
 
 bool GroupPieceTableChange::appendChange( AbstractPieceTableChange *change )
@@ -110,15 +110,15 @@ bool GroupPieceTableChange::appendChange( AbstractPieceTableChange *change )
 }
 
 
-KHE::SectionList GroupPieceTableChange::applyGroup( PieceTable *pieceTable ) const
+KDE::SectionList GroupPieceTableChange::applyGroup( PieceTable *pieceTable ) const
 {
-    KHE::SectionList result;
+    KDE::SectionList result;
     foreach( AbstractPieceTableChange *change, mChangeStack )
     {
         if( change->type() == AbstractPieceTableChange::GroupId )
         {
             const GroupPieceTableChange *groupChange = static_cast<const GroupPieceTableChange *>(change);
-            const KHE::SectionList changedSectionList = groupChange->applyGroup( pieceTable );
+            const KDE::SectionList changedSectionList = groupChange->applyGroup( pieceTable );
             result.addSectionList( changedSectionList );
         }
         else
@@ -128,9 +128,9 @@ KHE::SectionList GroupPieceTableChange::applyGroup( PieceTable *pieceTable ) con
     return result;
 }
 
-KHE::SectionList GroupPieceTableChange::revertGroup( PieceTable *pieceTable ) const
+KDE::SectionList GroupPieceTableChange::revertGroup( PieceTable *pieceTable ) const
 {
-    KHE::SectionList result;
+    KDE::SectionList result;
 
     QStack<AbstractPieceTableChange*>::ConstIterator it = mChangeStack.end();
     while( it != mChangeStack.begin() )
@@ -140,7 +140,7 @@ KHE::SectionList GroupPieceTableChange::revertGroup( PieceTable *pieceTable ) co
         if( change->type() == AbstractPieceTableChange::GroupId )
         {
             const GroupPieceTableChange *groupChange = static_cast<const GroupPieceTableChange *>(change);
-            const KHE::SectionList changedSectionList = groupChange->revertGroup( pieceTable );
+            const KDE::SectionList changedSectionList = groupChange->revertGroup( pieceTable );
             result.addSectionList( changedSectionList );
         }
         else
@@ -150,20 +150,20 @@ KHE::SectionList GroupPieceTableChange::revertGroup( PieceTable *pieceTable ) co
     return result;
 }
 
-KHE::ArrayChangeMetricsList GroupPieceTableChange::groupMetrics( bool reverted ) const
+KDE::ArrayChangeMetricsList GroupPieceTableChange::groupMetrics( bool reverted ) const
 {
-    KHE::ArrayChangeMetricsList result;
+    KDE::ArrayChangeMetricsList result;
     foreach( AbstractPieceTableChange *change, mChangeStack )
     {
         if( change->type() == AbstractPieceTableChange::GroupId )
         {
             const GroupPieceTableChange *groupChange = static_cast<const GroupPieceTableChange *>(change);
-            const KHE::ArrayChangeMetricsList metricsList = groupChange->groupMetrics( reverted );
+            const KDE::ArrayChangeMetricsList metricsList = groupChange->groupMetrics( reverted );
             result += metricsList;
         }
         else
         {
-            KHE::ArrayChangeMetrics changeMetrics = change->metrics();
+            KDE::ArrayChangeMetrics changeMetrics = change->metrics();
             if( reverted )
                 changeMetrics.revert();
             result.append( changeMetrics );

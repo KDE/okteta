@@ -41,7 +41,7 @@ namespace Kasten
 
 void ByteArrayRawFileWriteThread::run()
 {
-    KHECore::PieceTableByteArrayModel *byteArray = qobject_cast<KHECore::PieceTableByteArrayModel*>( mDocument->content() );
+    Okteta::PieceTableByteArrayModel *byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>( mDocument->content() );
 
     QFile file( mFilePath );
     if( file.open(QIODevice::WriteOnly) )

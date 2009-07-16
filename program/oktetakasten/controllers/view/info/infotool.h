@@ -28,7 +28,7 @@
 // Okteta core
 #include <section.h>
 
-namespace KHECore {
+namespace Okteta {
 class AbstractByteArrayModel;
 }
 
@@ -81,14 +81,14 @@ class InfoTool : public AbstractTool
     StatisticTableModel *mStatisticTableModel;
 
     KByteArrayDisplay* mByteArrayDisplay;
-    KHECore::AbstractByteArrayModel *mByteArrayModel;
+    Okteta::AbstractByteArrayModel *mByteArrayModel;
 
     //
     bool mSourceByteArrayModelUptodate;
     // selection source
-    KHE::Section mSourceSelection;
+    KDE::Section mSourceSelection;
     // source of strings
-    KHECore::AbstractByteArrayModel *mSourceByteArrayModel;
+    Okteta::AbstractByteArrayModel *mSourceByteArrayModel;
 };
 
 }

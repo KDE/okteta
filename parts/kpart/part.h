@@ -24,7 +24,7 @@
 #define OKTETAPART_H
 
 // Okteta core
-#include <kfilebytearraymodel.h>
+#include <filebytearraymodel.h>
 // KDE
 #include <kparts/part.h>
 
@@ -32,7 +32,7 @@ class KToggleAction;
 class KSelectAction;
 class KAction;
 
-namespace KHEUI
+namespace Okteta
 {
 class ByteArrayColumnView;
 }
@@ -72,8 +72,8 @@ class OktetaPart : public KParts::ReadOnlyPart
     void onSelectionChanged( bool HasSelection );
 
   private:
-    KHEUI::ByteArrayColumnView *view;
-    KHECore::KFileByteArrayModel fileByteArray;
+    Okteta::ByteArrayColumnView *view;
+    Okteta::FileByteArrayModel fileByteArray;
 
     // edit menu
     KAction *copyAction;

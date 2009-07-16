@@ -122,7 +122,7 @@ void SearchTool::search( KFindDirection direction, bool fromCursor, bool inSelec
 
     if( inSelection )
     {
-        const KHE::Section selection = mByteArrayDisplay->selection();
+        const KDE::Section selection = mByteArrayDisplay->selection();
         mSearchFirstIndex = selection.start();
         mSearchLastIndex =  selection.end();
         startIndex = selection.start();

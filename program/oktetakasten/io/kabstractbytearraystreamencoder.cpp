@@ -63,13 +63,13 @@ bool KAbstractByteArrayStreamEncoder::encodeToStream( QIODevice *device,
     if( byteArrayDocument == 0 )
         return false;
 
-    const KHECore::AbstractByteArrayModel* byteArray = byteArrayDocument->content();
+    const Okteta::AbstractByteArrayModel* byteArray = byteArrayDocument->content();
 
     const KByteArraySelection* byteArraySelection =
         selection ? static_cast<const KByteArraySelection*>( selection ) : 0;
 
-    const KHE::Section section = byteArraySelection && byteArraySelection->isValid() ? byteArraySelection->section() :
-                                   KHE::Section::fromWidth( 0, byteArray->size() );
+    const KDE::Section section = byteArraySelection && byteArraySelection->isValid() ? byteArraySelection->section() :
+                                   KDE::Section::fromWidth( 0, byteArray->size() );
 
     const bool success = encodeDataToStream( device, byteArrayDisplay, byteArray, section );
 
@@ -85,14 +85,14 @@ QString KAbstractByteArrayStreamEncoder::previewData( AbstractModel* model, cons
     if( byteArrayDocument == 0 )
         return QString();
 
-    const KHECore::AbstractByteArrayModel* byteArray = byteArrayDocument->content();
+    const Okteta::AbstractByteArrayModel* byteArray = byteArrayDocument->content();
 
     const KByteArraySelection* byteArraySelection =
         selection ? static_cast<const KByteArraySelection*>( selection ) : 0;
 
-    KHE::Section section = byteArraySelection && byteArraySelection->isValid() ?
+    KDE::Section section = byteArraySelection && byteArraySelection->isValid() ?
         byteArraySelection->section() :
-        KHE::Section::fromWidth( 0, byteArray->size() );
+        KDE::Section::fromWidth( 0, byteArray->size() );
     section.restrictEndByWidth( MaxPreviewSize );
 
     QByteArray data;

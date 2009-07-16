@@ -67,25 +67,25 @@ bool RemovePieceTableChange::merge( const AbstractPieceTableChange *other )
     return result;
 }
 
-KHE::Section RemovePieceTableChange::apply( PieceTable *pieceTable ) const
+KDE::Section RemovePieceTableChange::apply( PieceTable *pieceTable ) const
 {
     const int oldLast = pieceTable->size() - 1;
 
     pieceTable->remove( mRemoveSection );
 
-    return KHE::Section( mRemoveSection.start(), oldLast );
+    return KDE::Section( mRemoveSection.start(), oldLast );
 }
 
-KHE::Section RemovePieceTableChange::revert( PieceTable *pieceTable ) const
+KDE::Section RemovePieceTableChange::revert( PieceTable *pieceTable ) const
 {
     pieceTable->insert( mRemoveSection.start(), mRemovedPieces );
 
-    return KHE::Section( mRemoveSection.start(), pieceTable->size()-1 );
+    return KDE::Section( mRemoveSection.start(), pieceTable->size()-1 );
 }
 
-KHE::ArrayChangeMetrics RemovePieceTableChange::metrics() const
+KDE::ArrayChangeMetrics RemovePieceTableChange::metrics() const
 {
-    return KHE::ArrayChangeMetrics::asReplacement( mRemoveSection.start(), mRemoveSection.width(), 0 );
+    return KDE::ArrayChangeMetrics::asReplacement( mRemoveSection.start(), mRemoveSection.width(), 0 );
 }
 
 RemovePieceTableChange::~RemovePieceTableChange() {}

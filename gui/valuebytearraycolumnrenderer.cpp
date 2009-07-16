@@ -35,21 +35,21 @@
 #include <QtGui/QPainter>
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 static const int DefaultBinaryGapWidth = 1;
 
 
 ValueByteArrayColumnRenderer::ValueByteArrayColumnRenderer( AbstractColumnStylist* stylist,
-    KHECore::AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges )
+    Okteta::AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges )
  : AbstractByteArrayColumnRenderer( stylist, byteArrayModel, layout, ranges ),
    mValueCodec( 0 ),
    mBinaryGapWidth( DefaultBinaryGapWidth )
 {
 }
 
-void ValueByteArrayColumnRenderer::setValueCodec( KHECore::ValueCoding valueCoding, const KHECore::ValueCodec* valueCodec )
+void ValueByteArrayColumnRenderer::setValueCodec( Okteta::ValueCoding valueCoding, const Okteta::ValueCodec* valueCodec )
 {
     mValueCoding = valueCoding;
     mValueCodec = valueCodec;
@@ -84,7 +84,7 @@ void ValueByteArrayColumnRenderer::recalcByteWidth()
 {
     int byteWidth = mValueCodec->encodingWidth() * mDigitWidth;
 
-    if( mValueCoding == KHECore::BinaryCoding )
+    if( mValueCoding == Okteta::BinaryCoding )
     {
         mBinaryHalfOffset = 4 * mDigitWidth + mBinaryGapWidth;
         byteWidth += mBinaryGapWidth;
@@ -96,7 +96,7 @@ void ValueByteArrayColumnRenderer::recalcByteWidth()
 // perhaps sometimes there will be a grammar
 void ValueByteArrayColumnRenderer::renderEditedByte( QPainter *painter, char byte, const QString &EditBuffer )
 {
-    const KHECore::KChar byteChar = mCharCodec->decode( byte );
+    const Okteta::Character byteChar = mCharCodec->decode( byte );
 
     const QPalette& palette = stylist()->palette();
     KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::View );
@@ -112,7 +112,7 @@ void ValueByteArrayColumnRenderer::renderEditedByte( QPainter *painter, char byt
 
 
 void ValueByteArrayColumnRenderer::renderByteText( QPainter *painter,
-                                                   char byte, KHECore::KChar byteChar, const QColor &color ) const
+                                                   char byte, Okteta::Character byteChar, const QColor &color ) const
 {
 Q_UNUSED( byteChar )
 
@@ -124,7 +124,7 @@ Q_UNUSED( byteChar )
 void ValueByteArrayColumnRenderer::renderCode( QPainter *painter, const QString &code, const QColor &color ) const
 {
     painter->setPen( color );
-    if( mValueCoding == KHECore::BinaryCoding )
+    if( mValueCoding == Okteta::BinaryCoding )
     {
         // leave a gap in the middle
         painter->drawText( 0, mDigitBaseLine, code.left(4) );

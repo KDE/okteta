@@ -29,7 +29,7 @@
 #include <QtGui/QLayout>
 
 
-namespace KHEUI
+namespace Okteta
 {
 
 ByteArrayJanusView::ByteArrayJanusView( QWidget* parent )
@@ -42,7 +42,7 @@ ByteArrayJanusView::ByteArrayJanusView( QWidget* parent )
     setViewModus( ColumnViewId );
 }
 
-void ByteArrayJanusView::setByteArrayModel( KHECore::AbstractByteArrayModel* byteArrayModel )
+void ByteArrayJanusView::setByteArrayModel( Okteta::AbstractByteArrayModel* byteArrayModel )
 {
     mView->setByteArrayModel( byteArrayModel );
 }
@@ -53,8 +53,8 @@ void ByteArrayJanusView::setViewModus( int viewModus )
         return;
 
     AbstractByteArrayView* newView = ( viewModus == ColumnViewId ) ?
-        (AbstractByteArrayView*)new KHEUI::ByteArrayColumnView( 0, this ) :
-        (AbstractByteArrayView*)new KHEUI::ByteArrayRowView( this );
+        (AbstractByteArrayView*)new Okteta::ByteArrayColumnView( 0, this ) :
+        (AbstractByteArrayView*)new Okteta::ByteArrayRowView( this );
 
     if( mView )
     {
@@ -70,7 +70,7 @@ void ByteArrayJanusView::setViewModus( int viewModus )
         newView->toggleOffsetColumn( mView->offsetColumnVisible() );
         newView->setResizeStyle( mView->resizeStyle() );
         newView->setCursorPosition( mView->cursorPosition() );
-        KHE::Section selection = mView->selection();
+        KDE::Section selection = mView->selection();
         newView->setSelection( selection.start(), selection.end() );
 
         mLayout->removeWidget( mView );
@@ -179,7 +179,7 @@ QString ByteArrayJanusView::charCodingName() const
 
 void ByteArrayJanusView::setValueCoding( int valueCoding )
 {
-    mView->setValueCoding( (KHEUI::AbstractByteArrayView::ValueCoding)valueCoding );
+    mView->setValueCoding( (Okteta::AbstractByteArrayView::ValueCoding)valueCoding );
 }
 
 void ByteArrayJanusView::setCharCoding( const QString& charCodingName )
@@ -187,7 +187,7 @@ void ByteArrayJanusView::setCharCoding( const QString& charCodingName )
     mView->setCharCoding( charCodingName );
 }
 
-KHE::Section ByteArrayJanusView::selection() const
+KDE::Section ByteArrayJanusView::selection() const
 {
     return mView->selection();
 }
@@ -239,7 +239,7 @@ void ByteArrayJanusView::toggleOffsetColumn( bool on )
 
 void ByteArrayJanusView::setResizeStyle( int resizeStyle )
 {
-    mView->setResizeStyle( (KHEUI::AbstractByteArrayView::ResizeStyle)resizeStyle );
+    mView->setResizeStyle( (Okteta::AbstractByteArrayView::ResizeStyle)resizeStyle );
 }
 
 void ByteArrayJanusView::setVisibleCodings( int visibleColumns )

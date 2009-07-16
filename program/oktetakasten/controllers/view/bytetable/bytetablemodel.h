@@ -26,7 +26,7 @@
 // Qt
 #include <QtCore/QAbstractTableModel>
 
-namespace KHECore {
+namespace Okteta {
 class CharCodec;
 class ValueCodec;
 }
@@ -70,8 +70,8 @@ class ByteTableModel : public QAbstractTableModel
     static const int NofOfValueCodings = 4;
 
   protected:
-    KHECore::ValueCodec *mValueCodec[NofOfValueCodings];
-    KHECore::CharCodec *mCharCodec;
+    Okteta::ValueCodec *mValueCodec[NofOfValueCodings];
+    Okteta::CharCodec *mCharCodec;
     QChar mUndefinedChar;
 };
 

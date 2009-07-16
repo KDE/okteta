@@ -37,7 +37,7 @@ ReverseByteArrayFilter::ReverseByteArrayFilter()
 AbstractByteArrayFilterParameterSet *ReverseByteArrayFilter::parameterSet() { return &mParameterSet; }
 
 bool ReverseByteArrayFilter::filter( char *result,
-                                     KHECore::AbstractByteArrayModel *model, const KHE::Section &section ) const
+                                     Okteta::AbstractByteArrayModel *model, const KDE::Section &section ) const
 {
     int r = section.width()-1;
     int m = section.start();

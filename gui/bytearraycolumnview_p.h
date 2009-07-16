@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHE_UI_BYTEARRAYCOLUMNVIEW_P_H
-#define KHE_UI_BYTEARRAYCOLUMNVIEW_P_H
+#ifndef OKTETA_BYTEARRAYCOLUMNVIEW_P_H
+#define OKTETA_BYTEARRAYCOLUMNVIEW_P_H
 
 // lib
 #include "bytearraycolumnview.h"
@@ -33,7 +33,7 @@
 class QTimer;
 
 
-namespace KHEUI
+namespace Okteta
 {
 class BorderColumnRenderer;
 class WidgetColumnStylist;
@@ -74,7 +74,7 @@ class ByteArrayColumnViewPrivate : public AbstractByteArrayViewPrivate
     QSize minimumSizeHint() const;
 
   public: // modification access
-    void setByteArrayModel( KHECore::AbstractByteArrayModel* byteArrayModel );
+    void setByteArrayModel( Okteta::AbstractByteArrayModel* byteArrayModel );
 //    void repaintByte( int row, int column, bool Erase = true );
 //    void updateByte( int row, int column );
 //    void ensureByteVisible( int row, int column );
