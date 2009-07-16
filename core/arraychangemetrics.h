@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ARRAYCHANGEMETRICS_H
-#define ARRAYCHANGEMETRICS_H
+#ifndef KDE_ARRAYCHANGEMETRICS_H
+#define KDE_ARRAYCHANGEMETRICS_H
 
 // lib
 #include "oktetacore_export.h"

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYCHANGE_H
-#define BYTEARRAYCHANGE_H
+#ifndef OKTETA_BYTEARRAYCHANGE_H
+#define OKTETA_BYTEARRAYCHANGE_H
 
 // lib
 #include "oktetacore_export.h"

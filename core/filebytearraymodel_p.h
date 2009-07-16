@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FILEBYTEARRAYMODEL_P_H
-#define FILEBYTEARRAYMODEL_P_H
+#ifndef OKTETA_FILEBYTEARRAYMODEL_P_H
+#define OKTETA_FILEBYTEARRAYMODEL_P_H
 
 // Qt
 #include <QtCore/QVector>

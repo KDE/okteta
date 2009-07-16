@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CHANGESDESCRIBABLE_H
-#define CHANGESDESCRIBABLE_H
+#ifndef OKTETA_CHANGESDESCRIBABLE_H
+#define OKTETA_CHANGESDESCRIBABLE_H
 
 // Qt
 #include <QtCore/QtPlugin>

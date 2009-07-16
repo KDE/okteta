@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ARRAYCHANGEMETRICSLIST_H
-#define ARRAYCHANGEMETRICSLIST_H
+#ifndef KDE_ARRAYCHANGEMETRICSLIST_H
+#define KDE_ARRAYCHANGEMETRICSLIST_H
 
 // lib
 #include "arraychangemetrics.h"

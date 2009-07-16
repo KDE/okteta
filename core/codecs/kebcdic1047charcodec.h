@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KEBCDIC1047CHARCODEC_H
-#define KEBCDIC1047CHARCODEC_H
+#ifndef OKTETA_KEBCDIC1047CHARCODEC_H
+#define OKTETA_KEBCDIC1047CHARCODEC_H
 
 // lib
 #include <charcodec.h>

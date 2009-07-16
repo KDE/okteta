@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BOOKMARK_H
-#define BOOKMARK_H
+#ifndef OKTETA_BOOKMARK_H
+#define OKTETA_BOOKMARK_H
 
 // lib
 #include "oktetacore_export.h"

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KOCTALBYTECODEC_H
-#define KOCTALBYTECODEC_H
+#ifndef OKTETA_KOCTALBYTECODEC_H
+#define OKTETA_KOCTALBYTECODEC_H
 
 // lib
 #include <valuecodec.h>

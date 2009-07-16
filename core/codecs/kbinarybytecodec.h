@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KBINARYBYTECODEC_H
-#define KBINARYBYTECODEC_H
+#ifndef OKTETA_KBINARYBYTECODEC_H
+#define OKTETA_KBINARYBYTECODEC_H
 
 
 // lib

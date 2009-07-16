@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PIECETABLEBYTEARRAYMODEL_H
-#define PIECETABLEBYTEARRAYMODEL_H
+#ifndef OKTETA_PIECETABLEBYTEARRAYMODEL_H
+#define OKTETA_PIECETABLEBYTEARRAYMODEL_H
 
 
 // lib

@@ -20,9 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CHANGEHISTORY_H
-#define CHANGEHISTORY_H
-
+#ifndef OKTETA_CHANGEHISTORY_H
+#define OKTETA_CHANGEHISTORY_H
 
 // lib
 #include "bytearraychange.h"
@@ -31,6 +30,7 @@
 #include <QtCore/QtPlugin>
 
 class QByteArray;
+
 
 namespace Okteta
 {

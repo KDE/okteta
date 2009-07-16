@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BOOKMARKABLE_H
-#define BOOKMARKABLE_H
+#ifndef OKTETA_BOOKMARKABLE_H
+#define OKTETA_BOOKMARKABLE_H
 
 // Qt
 #include <QtCore/QtPlugin>

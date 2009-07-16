@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BOOKMARKSCONSTITERATORADAPTER_H
-#define BOOKMARKSCONSTITERATORADAPTER_H
+#ifndef OKTETA_BOOKMARKSCONSTITERATORADAPTER_H
+#define OKTETA_BOOKMARKSCONSTITERATORADAPTER_H
 
 // Qt
 #include <QtCore/QSharedData>

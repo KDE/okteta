@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VERSIONABLE_H
-#define VERSIONABLE_H
+#ifndef OKTETA_VERSIONABLE_H
+#define OKTETA_VERSIONABLE_H
 
 // Qt
 #include <QtCore/QtPlugin>

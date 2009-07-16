@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KCHAR_H
-#define KCHAR_H
+#ifndef OKTETA_CHARACTER_H
+#define OKTETA_CHARACTER_H
 
 // lib
 #include "oktetacore_export.h"

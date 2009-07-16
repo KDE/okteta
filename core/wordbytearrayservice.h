@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef WORDBYTEARRAYSERVICE_H
-#define WORDBYTEARRAYSERVICE_H
+#ifndef OKTETA_WORDBYTEARRAYSERVICE_H
+#define OKTETA_WORDBYTEARRAYSERVICE_H
 
 // lib
 #include "oktetacore_export.h"

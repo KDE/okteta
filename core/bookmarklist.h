@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BOOKMARKLIST_H
-#define BOOKMARKLIST_H
+#ifndef OKTETA_BOOKMARKLIST_H
+#define OKTETA_BOOKMARKLIST_H
 
 // lib
 #include "bookmark.h"

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VALUECODEC_H
-#define VALUECODEC_H
+#ifndef OKTETA_VALUECODEC_H
+#define OKTETA_VALUECODEC_H
 
 
 // lib

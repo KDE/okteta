@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KBYTEARRAYMODEL_P_H
-#define KBYTEARRAYMODEL_P_H
+#ifndef OKTETA_KBYTEARRAYMODEL_P_H
+#define OKTETA_KBYTEARRAYMODEL_P_H
 
 
 // lib

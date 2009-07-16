@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FILEBYTEARRAYMODEL_H
-#define FILEBYTEARRAYMODEL_H
+#ifndef OKTETA_FILEBYTEARRAYMODEL_H
+#define OKTETA_FILEBYTEARRAYMODEL_H
 
 
 // lib

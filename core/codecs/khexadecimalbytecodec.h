@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KHEXADECIMALBYTECODEC_H
-#define KHEXADECIMALBYTECODEC_H
+#ifndef OKTETA_KHEXADECIMALBYTECODEC_H
+#define OKTETA_KHEXADECIMALBYTECODEC_H
 
 // lib
 #include <valuecodec.h>

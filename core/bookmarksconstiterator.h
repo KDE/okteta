@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BOOKMARKSCONSTITERATOR_H
-#define BOOKMARKSCONSTITERATOR_H
+#ifndef OKTETA_BOOKMARKSCONSTITERATOR_H
+#define OKTETA_BOOKMARKSCONSTITERATOR_H
 
 // lib
 #include "bookmarksconstiteratoradapter.h"

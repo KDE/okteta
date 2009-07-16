@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTBYTEARRAYMODEL_H
-#define ABSTRACTBYTEARRAYMODEL_H
+#ifndef OKTETA_ABSTRACTBYTEARRAYMODEL_H
+#define OKTETA_ABSTRACTBYTEARRAYMODEL_H
 
 
 // lib

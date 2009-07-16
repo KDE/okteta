@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KTEXTCHARCODEC_H
-#define KTEXTCHARCODEC_H
+#ifndef OKTETA_KTEXTCHARCODEC_H
+#define OKTETA_KTEXTCHARCODEC_H
 
 // lib
 #include <charcodec.h>

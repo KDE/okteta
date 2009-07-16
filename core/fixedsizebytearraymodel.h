@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FIXEDSIZEBYTEARRAYMODEL_H
-#define FIXEDSIZEBYTEARRAYMODEL_H
+#ifndef OKTETA_FIXEDSIZEBYTEARRAYMODEL_H
+#define OKTETA_FIXEDSIZEBYTEARRAYMODEL_H
 
 // lib
 #include "abstractbytearraymodel.h"
