@@ -23,12 +23,10 @@
 #ifndef OKTETA_ABSTRACTBYTEARRAYMODEL_H
 #define OKTETA_ABSTRACTBYTEARRAYMODEL_H
 
-
 // lib
 #include "oktetacore_export.h"
 // commonlib
 #include <section.h>
-#include <sectionlist.h>
 // Qt
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
