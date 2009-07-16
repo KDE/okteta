@@ -54,11 +54,32 @@ set( oktetacore_LIB_SRCS
   sectionlist.cpp
 )
 
+set( oktetacore_LIB_HDRS
+  oktetacore_export.h
+  oktetacore.h
+  abstractbytearraymodel.h
+  piecetablebytearraymodel.h
+#   filebytearraymodel.h
+  bytearraymodel.h
+  arraychangemetrics.h
+  bookmark.h
+  bookmarksconstiterator.h
+  bytearraychange.h
+  charcodec.h
+  character.h
+  section.h
+  valuecodec.h
+  wordbytearrayservice.h
+)
+
 kde4_add_library( oktetacore SHARED ${oktetacore_LIB_SRCS} )
 target_link_libraries( oktetacore  ${KDE4_KDECORE_LIBS} )
 set_target_properties( oktetacore  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 
 install( TARGETS oktetacore  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+
+install( FILES ${oktetacore_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/okteta  COMPONENT Devel )
+
 
 add_subdirectory( piecetable/tests )
 add_subdirectory( tests )
