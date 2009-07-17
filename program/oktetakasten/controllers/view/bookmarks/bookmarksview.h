@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BHOKMARKSVIEW_H
-#define BHOKMARKSVIEW_H
+#ifndef BOOKMARKSVIEW_H
+#define BOOKMARKSVIEW_H
 
 // Qt
 #include <QtGui/QWidget>

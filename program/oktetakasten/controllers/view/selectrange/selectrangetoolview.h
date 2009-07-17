@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SELECTRANGETOOLINLINEVIEW_H
-#define SELECTRANGETOOLINLINEVIEW_H
+#ifndef SELECTRANGETOOLVIEW_H
+#define SELECTRANGETOOLVIEW_H
 
 // Kasten gui
 #include <abstracttoolinlineview.h>
