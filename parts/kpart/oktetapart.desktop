@@ -2,6 +2,7 @@
 Type=Service
 Icon=okteta
 Name=Okteta Hex Viewer
+Name[sv]=Okteta hexadecimalvisning
 MimeType=all/allfiles;
 #MimeType=application/octet-stream
 X-KDE-ServiceTypes=KParts/ReadOnlyPart,Browser/View
