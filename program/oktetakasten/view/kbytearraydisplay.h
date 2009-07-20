@@ -56,7 +56,8 @@ class KByteArrayDisplay : public AbstractView, public If::Zoomable, public If::D
     enum { ColumnViewId = 0, RowViewId };
 
   public:
-    KByteArrayDisplay( KByteArrayDocument *Document );
+    explicit KByteArrayDisplay( KByteArrayDocument* document );
+    
     virtual ~KByteArrayDisplay();
 
   public:
