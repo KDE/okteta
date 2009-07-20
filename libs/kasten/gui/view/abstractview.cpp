@@ -22,4 +22,15 @@
 
 #include "abstractview.h"
 
-#include "abstractview.moc"
+
+namespace Kasten
+{
+
+AbstractView::AbstractView( AbstractModel* baseModel)
+  : AbstractModel( baseModel )
+{
+}
+
+AbstractView::~AbstractView() {}
+
+}

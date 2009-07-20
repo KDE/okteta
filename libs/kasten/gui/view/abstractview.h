@@ -23,7 +23,6 @@
 #ifndef ABSTRACTVIEW_H
 #define ABSTRACTVIEW_H
 
-
 // lib
 #include "kastengui_export.h"
 // Kasten core
@@ -39,7 +38,9 @@ namespace Kasten
 class KASTENGUI_EXPORT AbstractView : public AbstractModel
 {
     Q_OBJECT
+    
   public:
+    explicit AbstractView( AbstractModel* baseModel = 0 );
     virtual ~AbstractView();
 
   public: // API to be implemented
@@ -50,9 +51,6 @@ class KASTENGUI_EXPORT AbstractView : public AbstractModel
     // TODO: this signal should be part of AbstractModel?
     void modified( Kasten::AbstractDocument::SynchronizationStates newStates );
 };
-
-
-inline AbstractView::~AbstractView() {}
 
 }
 

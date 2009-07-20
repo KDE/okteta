@@ -34,11 +34,11 @@
 namespace Kasten
 {
 
-KByteArrayDisplay::KByteArrayDisplay( KByteArrayDocument *document )
- : mWidget( 0 ), mDocument( document )
+KByteArrayDisplay::KByteArrayDisplay( KByteArrayDocument* document )
+  : AbstractView( document ),
+  mWidget( 0 ),
+  mDocument( document )
 {
-    setBaseModel( mDocument );
-
     Okteta::AbstractByteArrayModel *content = mDocument->content();
     mWidget = new Okteta::ByteArrayJanusView();
     mWidget->setByteArrayModel( content );

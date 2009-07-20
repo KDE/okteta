@@ -38,7 +38,7 @@ class KASTENGUI_EXPORT DummyView : public AbstractView
     Q_OBJECT
 
   public:
-    DummyView( AbstractDocument* document );
+    explicit DummyView( AbstractDocument* document );
     virtual ~DummyView();
 
   public:

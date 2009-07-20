@@ -32,11 +32,10 @@ namespace Kasten
 {
 
 DummyView::DummyView( AbstractDocument* document )
- : mLabel( new QLabel() ),
-   mDocument( document )
+  : AbstractView( document ),
+    mLabel( new QLabel() ),
+    mDocument( document )
 {
-    setBaseModel( mDocument );
-
     mLabel->setText( mDocument->title() );
 
     connect( document, SIGNAL(titleChanged( const QString & )), SLOT(onTitleChange( const QString & )) );
