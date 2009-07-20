@@ -48,15 +48,12 @@ class KASTENGUI_EXPORT AbstractView : public AbstractModel
 
   public:
 //     virtual bool setDocument( AbstractDocument* document ) = 0;
-    bool hasLocalChanges() const;
 
   Q_SIGNALS:
     // TODO: should be signal the diff? how to say then remote is in synch again?
     void modified( Kasten::AbstractDocument::SynchronizationStates newStates );
 };
 
-// TODO: hack!!!! remove me!
-inline bool AbstractView::hasLocalChanges() const { return document()->hasLocalChanges(); }
 
 inline AbstractView::~AbstractView() {}
 
