@@ -100,7 +100,8 @@ void ViewManager::removeViewsFor( AbstractDocument* document )
     while( it.hasNext() )
     {
         AbstractView* view = it.next();
-        if( view->document() == document )
+        AbstractDocument* documentOfView = view->findBaseModel<AbstractDocument*>();
+        if( documentOfView == document )
         {
             it.remove();
             emit closing( view );
@@ -114,7 +115,8 @@ AbstractView* ViewManager::viewOfDocument( AbstractDocument* document ) const
     AbstractView* result = 0;
     foreach( AbstractView* view, mViewList )
     {
-        if( view->document() == document )
+        AbstractDocument* documentOfView = view->findBaseModel<AbstractDocument*>();
+        if( documentOfView == document )
         {
             result = view;
             break;

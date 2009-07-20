@@ -62,7 +62,6 @@ KByteArrayDisplay::KByteArrayDisplay( KByteArrayDocument *document )
 
 const AbstractModelSelection* KByteArrayDisplay::modelSelection() const { return &mSelection; }
 
-AbstractDocument* KByteArrayDisplay::document() const { return mDocument; }
 QWidget* KByteArrayDisplay::widget()             const { return mWidget; }
 QString KByteArrayDisplay::title()               const { return mDocument->title(); }
 bool KByteArrayDisplay::isModifiable()           const { return true; }

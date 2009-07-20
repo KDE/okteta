@@ -35,13 +35,14 @@ DummyView::DummyView( AbstractDocument* document )
  : mLabel( new QLabel() ),
    mDocument( document )
 {
+    setBaseModel( mDocument );
+
     mLabel->setText( mDocument->title() );
 
     connect( document, SIGNAL(titleChanged( const QString & )), SLOT(onTitleChange( const QString & )) );
 }
 
 
-AbstractDocument* DummyView::document() const { return mDocument; }
 QWidget* DummyView::widget()             const { return mLabel; }
 QString DummyView::title()               const { return mDocument->title(); }
 

@@ -114,7 +114,10 @@ void ShellWindow::onTitleChanged( const QString &newTitle )
 {
     AbstractView* view = qobject_cast<AbstractView *>( sender() );
     if( view )
-        setCaption( newTitle, view->document()->hasLocalChanges() );
+    {
+	AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
+        setCaption( newTitle, document->hasLocalChanges() );
+    }
 }
 
 void ShellWindow::onModifiedChanged( AbstractDocument::SynchronizationStates newStates )
@@ -122,7 +125,10 @@ void ShellWindow::onModifiedChanged( AbstractDocument::SynchronizationStates new
 Q_UNUSED( newStates )
     AbstractView* view = qobject_cast<AbstractView *>( sender() );
     if( view )
-        setCaption( view->title(), view->document()->hasLocalChanges() );
+    {
+	AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
+        setCaption( view->title(), document->hasLocalChanges() );
+    }
 }
 
 void ShellWindow::onViewFocusChanged( AbstractView *view )
@@ -133,7 +139,9 @@ void ShellWindow::onViewFocusChanged( AbstractView *view )
 
     updateControllers( view );
     const QString title = view ? view->title() : QString();
-    const bool changes = view ? view->document()->hasLocalChanges() : false;
+    AbstractDocument* document = view ? view->findBaseModel<AbstractDocument*>() : 0;
+
+    const bool changes = document ? document->hasLocalChanges() : false;
     setCaption( title, changes );
 
     if( view )
@@ -153,7 +161,7 @@ void ShellWindow::onFocusRequested( AbstractDocument* document )
 
 void ShellWindow::onCloseRequest( AbstractView* view )
 {
-    AbstractDocument* document = view->document();
+    AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
 
     if( mDocumentManager->canClose(document) )
         mDocumentManager->closeDocument( document );

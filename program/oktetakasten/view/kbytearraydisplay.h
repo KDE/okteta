@@ -70,7 +70,6 @@ class KByteArrayDisplay : public AbstractView, public If::Zoomable, public If::D
 
   public: // AbstractView API
     virtual QWidget* widget() const;
-    virtual AbstractDocument* document() const;
 
   public: // If::Zoomable API TODO: make all such methods slots?
     virtual void setZoomLevel( double Level );

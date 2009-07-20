@@ -46,7 +46,6 @@ class KASTENGUI_EXPORT DummyView : public AbstractView
 
   public: // AbstractView API
     virtual QWidget* widget() const;
-    virtual AbstractDocument* document() const;
     virtual QString title() const;
 
   protected Q_SLOTS:
