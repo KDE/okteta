@@ -2,11 +2,14 @@
 Type=Service
 Icon=okteta
 Name=Okteta Hex Viewer
+Name[es]=Visor hexadecimal Okteta
 Name[nds]=Okteta-Hexkieker
 Name[pt]=Visualizador Hexadecimal do Okteta
 Name[pt_BR]=Visualizador hexadecimal do Okteta
+Name[ru]=Шестнадцатиричный просмотрщик Okteta
 Name[sv]=Okteta hexadecimalvisning
 Name[uk]=Шістнадцятковий переглядач Okteta
+Name[x-test]=xxOkteta Hex Viewerxx
 MimeType=all/allfiles;
 #MimeType=application/octet-stream
 X-KDE-ServiceTypes=KParts/ReadOnlyPart,Browser/View
