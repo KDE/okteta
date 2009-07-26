@@ -1,17 +1,58 @@
+set( KASTEN_REL_DIR ../../libs/kasten )
+set( OKTETAKASTEN_REL_DIR ../../program/oktetakasten )
+set( OKTETA_REL_DIR ../.. )
 
 include_directories(
-  ../../core
-  ../../gui/libcolumnsview
-  ../../gui
+  ${CMAKE_CURRENT_BINARY_DIR}/${OKTETAKASTEN_REL_DIR}/controllers
+  ${OKTETAKASTEN_REL_DIR}/controllers/document
+  ${OKTETAKASTEN_REL_DIR}/controllers/view
+  ${OKTETAKASTEN_REL_DIR}/controllers/view/libfinddialog
+  ${OKTETAKASTEN_REL_DIR}/view
+  ${OKTETAKASTEN_REL_DIR}/io
+  ${OKTETAKASTEN_REL_DIR}/document
+  ${KASTEN_REL_DIR}/controllers
+  ${KASTEN_REL_DIR}/gui
+  ${KASTEN_REL_DIR}/gui/view
+  ${KASTEN_REL_DIR}/gui/io
+  ${KASTEN_REL_DIR}/gui/system
+  ${KASTEN_REL_DIR}/gui/controller
+  ${KASTEN_REL_DIR}/core
+  ${KASTEN_REL_DIR}/core/document
+  ${KASTEN_REL_DIR}/core/entity
+  ${KASTEN_REL_DIR}/core/io
+  ${KASTEN_REL_DIR}/core/system
+#TODO: remove this
+  ${OKTETA_REL_DIR}/core
+  ${OKTETA_REL_DIR}/gui/libcolumnsview
+  ${OKTETA_REL_DIR}/gui
 )
 
 
-set( oktetapart_SRCS part.cpp browserextension.cpp partfactory.cpp )
+set( oktetapart_SRCS
+  part.cpp
+  browserextension.cpp
+  partfactory.cpp
+)
 
 kde4_add_plugin( oktetapart WITH_PREFIX ${oktetapart_SRCS})
 
 
-target_link_libraries( oktetapart  oktetacore oktetagui ${KDE4_KPARTS_LIBS} )
+target_link_libraries( oktetapart
+  okteta_kastencontrollers
+  okteta_kastengui
+  okteta_kastenio
+  okteta_kastendocument
+  kastencontrollers
+  kastengui
+  kastencore
+  oktetagui
+  oktetacore
+  framesprint
+  ${KDE4_KPARTS_LIBS}
+)
+if( QCA2_FOUND )
+  target_link_libraries( oktetapart ${QCA2_LIBRARIES} )
+endif( QCA2_FOUND )
 
 install( TARGETS oktetapart  DESTINATION ${PLUGIN_INSTALL_DIR})
 install( FILES oktetapart.desktop  DESTINATION ${SERVICES_INSTALL_DIR} )

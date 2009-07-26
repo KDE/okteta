@@ -39,11 +39,11 @@ class OktetaBrowserExtension : public KParts::BrowserExtension
     Q_OBJECT
 
   public:
-    explicit OktetaBrowserExtension( OktetaPart *part );
+    explicit OktetaBrowserExtension( OktetaPart* part );
 
   public: // KParts::BrowserExtension API
-    virtual void saveState( QDataStream &stream );
-    virtual void restoreState( QDataStream &stream );
+    virtual void saveState( QDataStream& stream );
+    virtual void restoreState( QDataStream& stream );
 
   public Q_SLOTS:
     /** copy text to clipboard */
@@ -51,10 +51,10 @@ class OktetaBrowserExtension : public KParts::BrowserExtension
 
   private Q_SLOTS:
     /** selection has changed */
-    void onSelectionChanged( bool );
+    void onSelectionChanged( bool hasSelection );
 
   protected:
-    OktetaPart *part;
+    OktetaPart* mPart;
 };
 
 #endif

@@ -1,42 +1,44 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="oktetapart" version="1">
+<kpartgui name="oktetapart" version="2">
+
 <MenuBar>
+  <Menu name="file">
+    <Action name="export" append="save_merge" />
+  </Menu>
   <Menu name="edit">
-    <Action name="edit_copy" group="edit_paste_merge" />
-    <Action name="edit_select_all" group="edit_select_merge" />
-    <Action name="edit_deselect" group="edit_select_merge" />
+    <Action name="copy_as" append="edit_paste_merge" />
+    <Separator/>
+    <Action name="edit_select_all"/>
+    <Action name="edit_deselect"/>
+    <MergeLocal name="edit_select_merge"/>
+    <Action name="edit_select" append="edit_select_merge" />
+    <Separator/>
+    <Action name="edit_find"/>
+    <Action name="edit_find_next"/>
+    <Action name="edit_find_prev"/>
+    <Separator/>
+    <Action name="goto_offset" />
   </Menu>
   <Menu name="view">
     <Separator/>
-    <Action name="view_zoom_in" />
-    <Action name="view_zoom_out" />
+    <Action name="view_zoom_in"/>
+    <Action name="view_zoom_out"/>
     <Separator/>
     <Action name="view_showsnonprinting" />
     <Action name="view_lineoffset" />
+    <Action name="togglecolumns" />
     <Separator/>
     <Action name="view_valuecoding" />
     <Action name="view_charencoding" />
-  </Menu>
-  <Menu name="settings">
     <Separator/>
-    <Action name="resizestyle" group="show_merge" />
-    <Action name="togglecolumns" group="show_merge" />
+    <Action name="resizestyle" />
+    <Action name="viewmode" />
   </Menu>
 </MenuBar>
 
 <ToolBar name="mainToolBar"><text>Main Toolbar</text>
-  <Action name="edit_copy" />
   <Action name="view_zoom_in" />
   <Action name="view_zoom_out" />
 </ToolBar>
 
-<!-- Editor popup menu //-->
-<Menu name="editor_popup">
-  <Action name="view_hexcoding" />
-  <Action name="view_deccoding" />
-  <Action name="view_octcoding" />
-  <Action name="view_bincoding" />
-  <Separator/>
-  <Action name="resize_lock" />
-</Menu>
 </kpartgui>

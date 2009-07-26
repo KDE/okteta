@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta KPart module, part of the KDE project.
 
-    Copyright 2003,2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,19 +23,17 @@
 #ifndef OKTETAPART_H
 #define OKTETAPART_H
 
-// Okteta core
-#include <filebytearraymodel.h>
 // KDE
 #include <kparts/part.h>
 
-class KToggleAction;
-class KSelectAction;
-class KAction;
-
-namespace Okteta
-{
-class ByteArrayColumnView;
+namespace Kasten {
+class KByteArrayDisplay;
+class KByteArrayDocument;
+class AbstractXmlGuiController;
+class AbstractDocument;
 }
+class QVBoxLayout;
+template <class T> class QList;
 
 
 class OktetaPart : public KParts::ReadOnlyPart
@@ -49,43 +47,31 @@ class OktetaPart : public KParts::ReadOnlyPart
                 bool browserViewWanted );
     virtual ~OktetaPart();
 
+  Q_SIGNALS:
+    void hasSelectedDataChanged( bool hasSelectedData );
 
   protected: // KParts::ReadOnlyPart API
     virtual bool openFile();
 
   protected:
-    void setupActions( bool BrowserViewWanted );
-    void fitActionSettings();
+    void setupActions( bool browserViewWanted );
 
-  protected Q_SLOTS: // action slots
-    void onSelectAll();
-    void onUnselect();
-    void onSetCoding( int Coding );
-    void onSetEncoding( int Encoding );
-    void onSetShowsNonprinting( bool on );
-    void onSetResizeStyle( int Style );
-    void onToggleOffsetColumn( bool on );
-    void onToggleValueCharColumns( int VisibleColunms );
+  protected:
+    Kasten::KByteArrayDisplay* byteArrayView() const;
 
-  private Q_SLOTS:
-    // used to catch changes in the bytearray widget
-    void onSelectionChanged( bool HasSelection );
+  protected Q_SLOTS:
+    void onDocumentLoaded( Kasten::AbstractDocument* document );
 
   private:
-    Okteta::ByteArrayColumnView *view;
-    Okteta::FileByteArrayModel fileByteArray;
+    QVBoxLayout* mLayout;
 
-    // edit menu
-    KAction *copyAction;
-    KAction *deselectAction;
-    // view menu
-    KSelectAction *codingAction;
-    KSelectAction *encodingAction;
-    KToggleAction *showNonprintingAction;
-    // settings menu
-    KSelectAction *resizeStyleAction;
-    KToggleAction *showOffsetColumnAction;
-    KSelectAction *toggleColumnsAction;
+    Kasten::KByteArrayDocument* mDocument;
+    Kasten::KByteArrayDisplay* mDisplay;
+
+    QList<Kasten::AbstractXmlGuiController*> mControllers;
 };
+
+
+inline Kasten::KByteArrayDisplay* OktetaPart::byteArrayView() const { return mDisplay; }
 
 #endif

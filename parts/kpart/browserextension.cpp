@@ -24,48 +24,57 @@
 
 // part
 #include "part.h"
-// Okteta gui
-#include <bytearraycolumnview.h>
-// KDE
-#include <KAction>
+// Okteta Kasten
+#include <kbytearraydocument.h>
+#include <kbytearraydisplay.h>
+// Qt
+#include <QtGui/QClipboard>
+#include <QtGui/QApplication>
 
 
-OktetaBrowserExtension::OktetaBrowserExtension( OktetaPart *p )
- : KParts::BrowserExtension( p ),
-   part( p )
+OktetaBrowserExtension::OktetaBrowserExtension( OktetaPart* part )
+  : KParts::BrowserExtension( part ),
+    mPart( part )
 {
     setObjectName( "oktetapartbrowserextension" );
-    connect( part->view, SIGNAL( selectionChanged( bool ) ), SLOT( onSelectionChanged( bool ) ) );
+
+    connect( mPart, SIGNAL(hasSelectedDataChanged( bool )), SLOT(onSelectionChanged( bool )) );
 }
 
 void OktetaBrowserExtension::copy()
 {
-    part->view->copy();
+    QMimeData* data = mPart->byteArrayView()->copySelectedData();
+    if( !data )
+      return;
+
+    QApplication::clipboard()->setMimeData( data, QClipboard::Clipboard );
 }
 
 
-void OktetaBrowserExtension::onSelectionChanged( bool HasSelection )
+void OktetaBrowserExtension::onSelectionChanged( bool hasSelection )
 {
-    emit enableAction( "copy", HasSelection );
+    emit enableAction( "copy", hasSelection );
 }
 
 
-void OktetaBrowserExtension::saveState( QDataStream &stream )
+void OktetaBrowserExtension::saveState( QDataStream& stream )
 {
     KParts::BrowserExtension::saveState( stream );
 
-    Okteta::ByteArrayColumnView *view = part->view;
+    Kasten::KByteArrayDisplay* view = mPart->byteArrayView();
 
-    stream << (int)view->offsetColumnVisible() << view->visibleCodings()
+    stream << (int)view->offsetColumnVisible() << view->visibleByteArrayCodings()
         << (int)view->resizeStyle() << (int)view->valueCoding() 
         << view->charCodingName() << (int)view->showsNonprinting()
-        << view->xOffset() << view->yOffset()
-        << view->cursorPosition() << (int)view->isCursorBehind()
-        << view->activeCoding();
+//         << view->xOffset() << view->yOffset()
+        << view->cursorPosition()
+//         << (int)view->isCursorBehind()
+//         << view->activeCoding()
+        ;
 }
 
 
-void OktetaBrowserExtension::restoreState( QDataStream &stream )
+void OktetaBrowserExtension::restoreState( QDataStream& stream )
 {
     KParts::BrowserExtension::restoreState( stream );
 
@@ -75,27 +84,27 @@ void OktetaBrowserExtension::restoreState( QDataStream &stream )
     int valueCoding;
     QString charCodingName;
     int showsNonprinting;
-    int x, y;
+//     int x, y;
     int position;
-    int cursorBehind;
-    int activeCoding;
+//     int cursorBehind;
+//     int activeCoding;
 
-    stream >> offsetColumnVisible >> visibleCodings >> resizeStyle >> valueCoding >> charCodingName >> showsNonprinting 
-           >> x >> y >> position >> cursorBehind >> activeCoding;
+    stream >> offsetColumnVisible >> visibleCodings >> resizeStyle >> valueCoding >> charCodingName >> showsNonprinting
+//            >> x >> y
+           >> position
+//            >> cursorBehind
+//            >> activeCoding
+           ;
 
-    Okteta::ByteArrayColumnView *view = part->view;
+    Kasten::KByteArrayDisplay* view = mPart->byteArrayView();
 
     view->toggleOffsetColumn( offsetColumnVisible );
-    view->setVisibleCodings( visibleCodings );
-    view->setResizeStyle( (Okteta::ByteArrayColumnView::ResizeStyle)resizeStyle );
-    view->setValueCoding( (Okteta::ByteArrayColumnView::ValueCoding)valueCoding );
+    view->setVisibleByteArrayCodings( visibleCodings );
+    view->setResizeStyle( resizeStyle );
+    view->setValueCoding( valueCoding );
     view->setCharCoding( charCodingName );
     view->setShowsNonprinting( showsNonprinting );
-    view->setColumnsPos( x, y );
-    view->setCursorPosition( position, cursorBehind );
-    view->setActiveCoding( (Okteta::ByteArrayColumnView::CodingTypeId)activeCoding );
-
-    part->fitActionSettings();
+//     view->setColumnsPos( x, y );
+    view->setCursorPosition( position );//, cursorBehind );
+//     view->setActiveCoding( (Okteta::ByteArrayColumnView::CodingTypeId)activeCoding );
 }
-
-#include "browserextension.moc"

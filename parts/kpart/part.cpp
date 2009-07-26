@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta KPart module, part of the KDE project.
 
-    Copyright 2003,2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,193 +25,159 @@
 // part
 #include "partfactory.h"
 #include "browserextension.h"
-// Okteta gui
-#include <bytearraycolumnview.h>
-// Okteta core
-#include <charcodec.h>
+// Okteta Kasten
+#include <kbytearraydocument.h>
+#include <kbytearraydisplay.h>
+#include <filesystem/kbytearrayrawfilesynchronizerfactory.h>
+#include <overwriteonly/overwriteonlycontroller.h>
+#include <overwritemode/overwritemodecontroller.h>
+#include <insertpattern/insertpatterncontroller.h>
+#include <gotooffset/gotooffsetcontroller.h>
+#include <selectrange/selectrangecontroller.h>
+#include <search/searchcontroller.h>
+#include <replace/replacecontroller.h>
+#include <bookmarks/bookmarkscontroller.h>
+#include <print/printcontroller.h>
+#include <viewconfig/viewconfigcontroller.h>
+#include <viewmode/viewmodecontroller.h>
+#include <viewstatus/viewstatuscontroller.h>
+// Kasten
+#include <jobmanager.h>
+#include <abstractloadjob.h>
+#include <document/readonly/readonlycontroller.h>
+// #include <document/readonly/readonlybarcontroller.h>
+// #include <io/synchronize/synchronizecontroller.h>
+#include <io/clipboard/clipboardcontroller.h>
+#include <io/copyas/copyascontroller.h>
+#include <io/export/exportcontroller.h>
+#include <view/zoom/zoomcontroller.h>
+#include <view/zoom/zoombarcontroller.h>
+#include <view/select/selectcontroller.h>
 // KDE
 #include <KLocale>
-//#include <kcomponentdata.h>
-#include <KAction>
 #include <KActionCollection>
-#include <KStandardAction>
-#include <KSelectAction>
-#include <KToggleAction>
-//#include <kglobalsettings.h>
+// Qt
+#include <QtGui/QWidget>
+#include <QtGui/QLayout>
+#include <QtCore/QList>
 
 
 static const char RCFileName[] = "oktetapartui.rc";
 
 
-OktetaPart::OktetaPart( QWidget *parentWidget,
-                        QObject *parent,
+OktetaPart::OktetaPart( QWidget* parentWidget,
+                        QObject* parent,
                         bool browserViewWanted )
- : KParts::ReadOnlyPart( parent )
+  : KParts::ReadOnlyPart( parent ),
+    mDocument( 0 ),
+    mDisplay( 0 )
 {
     setComponentData( OktetaPartFactory::componentData() );
 
-    view = new Okteta::ByteArrayColumnView( &fileByteArray, parentWidget );
-    view->setNoOfBytesPerLine( 16 );
-    view->setBufferSpacing( 3, 4, 10 );
-    view->setShowsNonprinting( false );
+    KGlobal::locale()->insertCatalog( "liboktetacore" );
+    KGlobal::locale()->insertCatalog( "libkastencore" );
+    KGlobal::locale()->insertCatalog( "libkastengui" );
+    KGlobal::locale()->insertCatalog( "libkastencontroller" );
 
-    setWidget( view );
+//     QList<AbstractModelStreamEncoder*> encoderList;
+//     encoderList << new KByteArrayValueStreamEncoder()
+//                 << new KByteArrayTextStreamEncoder()
+//                 << new KByteArraySourceCodeStreamEncoder()
+//                 << new ByteArrayViewTextStreamEncoder();
 
-    setupActions( browserViewWanted );
+//     QList<AbstractModelStreamEncoderConfigEditorFactory*> encoderConfigEditorFactoryList;
+//     encoderConfigEditorFactoryList << new ByteArraySourceCodeStreamEncoderConfigEditorFactory()
+//                                    << new ByteArrayValuesStreamEncoderConfigEditorFactory();
 
-    connect( view, SIGNAL(selectionChanged( bool )), SLOT(onSelectionChanged( bool )) );
-    if( copyAction )
-    {
-        connect( view, SIGNAL(copyAvailable(bool)), copyAction, SLOT(setEnabled(bool)) );
-        copyAction->setEnabled( false );
-    }
+//     mDocumentManager->codecManager()->setEncoders( encoderList );
+//     mDocumentManager->syncManager()->setDocumentSynchronizerFactory( new KByteArrayRawFileSynchronizerFactory() );
+
+//     mViewManager->codecViewManager()->setEncoderConfigEditorFactories( encoderConfigEditorFactoryList );
+
+
+    QWidget* widget = new QWidget();
+    mLayout = new QVBoxLayout( widget );
+    mLayout->setMargin( 0 );
+
+    setWidget( widget );
+    setAutoDeleteWidget( true );
+
+    setXMLFile( RCFileName );
+
+//     mControllers.append( new ExportController(mProgram->viewManager(),mProgram->documentManager(),this) );
+    mControllers.append( new Kasten::ZoomController(this) );
+    mControllers.append( new Kasten::SelectController(this) );
+    if( ! browserViewWanted )
+        mControllers.append( new Kasten::ClipboardController(this) );
+//     mControllers.append( new Kasten::CopyAsController(mProgram->viewManager(),mProgram->documentManager(),this) );
+//     mControllers.append( new Kasten::OverwriteModeController(this) );
+    mControllers.append( new Kasten::SearchController(this,widget) );
+//     mControllers.append( new Kasten::ReplaceController(this,widget) );
+//     mControllers.append( new Kasten::GotoOffsetController(mGroupedViews,this) );
+//     mControllers.append( new Kasten::SelectRangeController(mGroupedViews,this) );
+//     mControllers.append( new Kasten::InsertPatternController(this) );
+//     mControllers.append( new Kasten::BookmarksController(this) );
+//     mControllers.append( new Kasten::PrintController(this) ); TODO: print is done by BrowserExtension
+    mControllers.append( new Kasten::ViewConfigController(this) );
+    mControllers.append( new Kasten::ViewModeController(this) );
+
+//     Kasten::StatusBar* bottomBar = static_cast<Kasten::StatusBar*>( statusBar() );
+//     mControllers.append( new ViewStatusController(bottomBar) );
+//     mControllers.append( new ReadOnlyBarController(bottomBar) );
+//     mControllers.append( new ZoomBarController(bottomBar) );
+
+//     addTool( new DocumentInfoToolView(new DocumentInfoTool(mProgram->documentManager()->syncManager())) );
+//     addTool( new ChecksumToolView(new ChecksumTool()) );
+//     addTool( new FilterToolView(new FilterTool()) );
+//     addTool( new StringsExtractToolView(new StringsExtractTool()) );
+//     addTool( new ByteTableToolView(new ByteTableTool()) );
+//     addTool( new InfoToolView(new InfoTool()) );
+//     addTool( new PODDecoderToolView(new PODDecoderTool()) );
+//     addTool( new BookmarksToolView(new BookmarksTool()) );
 
     if( browserViewWanted )
         new OktetaBrowserExtension( this );
 }
 
-
-void OktetaPart::setupActions( bool browserViewWanted )
-{
-    KActionCollection *actions = actionCollection();
-
-    // create our actions
-    copyAction = browserViewWanted ? 0 : KStandardAction::copy( view, SLOT(copy()), actions );
-
-    KStandardAction::selectAll( this, SLOT(onSelectAll()), actions );
-    deselectAction = KStandardAction::deselect( this, SLOT(onUnselect()), actions );
-
-    // value encoding
-    codingAction = actions->add<KSelectAction>( "view_valuecoding" );
-    codingAction->setText( i18nc("@title:menu","&Value Coding") );
-    QStringList strings;
-    strings.append( i18nc("@item:inmenu encoding of the bytes as values in the hexadecimal format","&Hexadecimal") );
-    strings.append( i18nc("@item:inmenu encoding of the bytes as values in the decimal format",    "&Decimal")     );
-    strings.append( i18nc("@item:inmenu encoding of the bytes as values in the octal format",      "&Octal")       );
-    strings.append( i18nc("@item:inmenu encoding of the bytes as values in the binary format",     "&Binary")      );
-    codingAction->setItems( strings );
-    connect( codingAction, SIGNAL(triggered(int)), SLOT(onSetCoding(int)) );
-
-    // document encoding
-    encodingAction = actions->add<KSelectAction>( "view_charencoding" );
-    encodingAction->setText( i18nc("@title:menu","&Char Encoding") );
-    encodingAction->setItems( Okteta::CharCodec::codecNames() );
-    connect( encodingAction, SIGNAL(triggered(int)), SLOT(onSetEncoding(int)) );
-
-    showNonprintingAction = actions->add<KToggleAction>( "view_showsnonprinting" );
-    showNonprintingAction->setText( i18nc("@option:check","Show &Non-printing Chars") );
-    connect( showNonprintingAction, SIGNAL(triggered(bool)), SLOT(onSetShowsNonprinting(bool)) );
-
-    KStandardAction::zoomIn(  view, SLOT(zoomIn()),  actions );
-    KStandardAction::zoomOut( view, SLOT(zoomOut()), actions );
-
-    // resize style
-    resizeStyleAction = actions->add<KSelectAction>( "resizestyle" );
-    resizeStyleAction->setText( i18nc("@title:menu","&Dynamic Layout") );
-    strings.clear();
-    strings.append( i18nc("@item:inmenu  The layout will not change on size changes.",
-                          "&Off") );
-    strings.append( i18nc("@item:inmenu  The layout will adapt to the size, but only with complete groups of bytes.",
-                          "&Wrap Only Complete Byte Groups") );
-    strings.append( i18nc("@item:inmenu  The layout will adapt to the size and fit in as much bytes per line as possible.",
-                          "&On") );
-    resizeStyleAction->setItems( strings );
-    connect( resizeStyleAction, SIGNAL(triggered(int)), SLOT(onSetResizeStyle(int)) );
-
-    showOffsetColumnAction = actions->add<KToggleAction>( "view_lineoffset" );
-    showOffsetColumnAction->setText( i18nc("@option:check","&Line Offset") );
-    showOffsetColumnAction->setShortcut( QKeySequence( Qt::Key_F11 ) );
-    connect( showOffsetColumnAction, SIGNAL(triggered(bool)), SLOT(onToggleOffsetColumn(bool)) );
-
-    // show buffer columns
-    toggleColumnsAction = actions->add<KSelectAction>( "togglecolumns" );
-    toggleColumnsAction->setText( i18nc("@title:menu","&Show Values or Chars") );
-    strings.clear();
-    strings.append( i18nc("@item:inmenu","&Values") );
-    strings.append( i18nc("@item:inmenu","&Chars") );
-    strings.append( i18nc("@item:inmenu","Values && Chars") );
-    toggleColumnsAction->setItems( strings );
-    connect( toggleColumnsAction, SIGNAL(triggered(int)), SLOT(onToggleValueCharColumns(int)) );
-
-    fitActionSettings();
-
-    setXMLFile( RCFileName );
-}
-
-
-void OktetaPart::fitActionSettings()
-{
-    deselectAction->setEnabled( view->hasSelectedData() );
-
-    showOffsetColumnAction->setChecked( view->offsetColumnVisible() );
-    showNonprintingAction->setChecked( view->showsNonprinting() );
-
-    codingAction->setCurrentItem( (int)view->valueCoding() );
-    encodingAction->setCurrentItem( Okteta::CharCodec::codecNames().indexOf(view->charCodingName()) );
-
-    resizeStyleAction->setCurrentItem( (int)view->resizeStyle() );
-
-    toggleColumnsAction->setCurrentItem( (int)view->visibleCodings()-1 );
-}
-
-
 bool OktetaPart::openFile()
 {
-    fileByteArray.open( localFilePath() );
-    view->setByteArrayModel( &fileByteArray );
-    view->setCursorPosition( 0 );
-    view->selectAll( false );
+    Kasten::KByteArrayRawFileSynchronizerFactory* synchronizerFactory = new Kasten::KByteArrayRawFileSynchronizerFactory();
+    Kasten::AbstractModelSynchronizer* synchronizer = synchronizerFactory->createSynchronizer();
+
+    Kasten::AbstractLoadJob* loadJob = synchronizer->startLoad( localFilePath() );
+    connect( loadJob, SIGNAL(documentLoaded( Kasten::AbstractDocument* )), SLOT(onDocumentLoaded( Kasten::AbstractDocument* )) );
+    Kasten::JobManager::executeJob( loadJob, widget() );
+
+    delete synchronizerFactory;
 
     return true;
 }
 
-
-
-void OktetaPart::onSelectionChanged( bool hasSelection )
+void OktetaPart::onDocumentLoaded( Kasten::AbstractDocument* document )
 {
-    if( copyAction ) copyAction->setEnabled( hasSelection );
-    deselectAction->setEnabled( hasSelection );
+    if( document )
+    {
+        delete mDisplay;
+        delete mDocument;
+
+        mDocument = static_cast<Kasten::KByteArrayDocument*>( document );
+        mDocument->setReadOnly( true );
+
+        mDisplay = new Kasten::KByteArrayDisplay( mDocument );
+//     mDisplay->setNoOfBytesPerLine( 16 );
+        mDisplay->setShowsNonprinting( false );
+        connect( mDisplay, SIGNAL(hasSelectedDataChanged( bool )), SIGNAL(hasSelectedDataChanged( bool )) );
+
+        mLayout->addWidget( mDisplay->widget() );
+
+        foreach( Kasten::AbstractXmlGuiController* controller, mControllers )
+            controller->setTargetModel( mDisplay );
+    }
 }
 
-
-void OktetaPart::onSelectAll()
+OktetaPart::~OktetaPart()
 {
-    view->selectAll( true );
+    qDeleteAll( mControllers );
+    delete mDisplay;
+    delete mDocument;
 }
-
-void OktetaPart::onUnselect()
-{
-    view->selectAll( false );
-}
-
-void OktetaPart::onSetCoding( int Coding )
-{
-    view->setValueCoding( (Okteta::ByteArrayColumnView::ValueCoding)Coding );
-}
-
-void OktetaPart::onSetShowsNonprinting( bool on )
-{
-    view->setShowsNonprinting( on );
-}
-
-void OktetaPart::onToggleOffsetColumn( bool on )
-{
-    view->toggleOffsetColumn( on );
-}
-
-void OktetaPart::onSetResizeStyle( int ResizeStyle )
-{
-    view->setResizeStyle( (Okteta::ByteArrayColumnView::ResizeStyle)ResizeStyle );
-}
-
-void OktetaPart::onSetEncoding( int Encoding )
-{
-    view->setCharCoding( Okteta::CharCodec::codecNames()[Encoding] );
-}
-
-void OktetaPart::onToggleValueCharColumns( int VisibleColumns)
-{
-    view->setVisibleCodings( VisibleColumns+1 );
-}
-
-OktetaPart::~OktetaPart() {}
