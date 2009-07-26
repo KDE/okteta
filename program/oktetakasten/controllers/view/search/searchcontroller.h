@@ -30,8 +30,9 @@
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 
-class KXmlGuiWindow;
+class KXMLGUIClient;
 class KAction;
+class QWidget;
 
 
 namespace Kasten
@@ -46,7 +47,7 @@ class SearchController : public AbstractXmlGuiController, public If::SearchUserQ
   Q_OBJECT
 
   public:
-    SearchController( KXmlGuiWindow* window );
+    SearchController( KXMLGUIClient* guiClient, QWidget* parentWidget );
     virtual ~SearchController();
 
   public: // AbstractXmlGuiController API
@@ -66,7 +67,7 @@ class SearchController : public AbstractXmlGuiController, public If::SearchUserQ
     void onDataNotFound();
 
   protected:
-    KXmlGuiWindow* mWindow;
+    QWidget* mParentWidget;
 
     KAction* mFindAction;
     KAction* mFindNextAction;

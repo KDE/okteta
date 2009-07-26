@@ -159,8 +159,8 @@ void OktetaMainWindow::setupControllers()
     // Okteta specific
 //     addXmlGuiController( new OverwriteOnlyController(this) );
     addXmlGuiController( new OverwriteModeController(this) );
-    addXmlGuiController( new SearchController(this) );
-    addXmlGuiController( new ReplaceController(this) );
+    addXmlGuiController( new SearchController(this,this) );
+    addXmlGuiController( new ReplaceController(this,this) );
     addXmlGuiController( new GotoOffsetController(mGroupedViews,this) );
     addXmlGuiController( new SelectRangeController(mGroupedViews,this) );
     addXmlGuiController( new InsertPatternController(this) );

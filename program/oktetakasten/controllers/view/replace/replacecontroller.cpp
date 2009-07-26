@@ -41,12 +41,12 @@ namespace Kasten
 {
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
-ReplaceController::ReplaceController( KXmlGuiWindow *window )
-  : mWindow( window ),
+ReplaceController::ReplaceController( KXMLGUIClient* guiClient, QWidget* parentWidget )
+  : mParentWidget( parentWidget ),
     mReplaceDialog( 0 ),
     mReplacePrompt( 0 )
 {
-    KActionCollection* ActionCollection = mWindow->actionCollection();
+    KActionCollection* ActionCollection = guiClient->actionCollection();
 
     mReplaceAction = KStandardAction::replace( this, SLOT(replace()), ActionCollection );
 
@@ -70,7 +70,7 @@ void ReplaceController::replace()
 {
     // ensure dialog
     if( !mReplaceDialog )
-        mReplaceDialog = new KReplaceDialog( mTool, mWindow );
+        mReplaceDialog = new KReplaceDialog( mTool, mParentWidget );
 
     mReplaceDialog->show();
 }
@@ -87,9 +87,9 @@ void ReplaceController::onFinished( bool previousFound, int noOfReplacements )
             i18ncp( "@info", "1 replacement made.", "%1 replacements made.", noOfReplacements );
 
     if( ! previousFound )
-        KMessageBox::sorry( mWindow, i18nc("@info","Replace pattern not found in byte array."), messageBoxTitle );
+        KMessageBox::sorry( mParentWidget, i18nc("@info","Replace pattern not found in byte array."), messageBoxTitle );
     else
-        KMessageBox::information( mWindow, replacementReport, messageBoxTitle );
+        KMessageBox::information( mParentWidget, replacementReport, messageBoxTitle );
 }
 
 bool ReplaceController::queryContinue( KFindDirection direction, int noOfReplacements ) const
@@ -102,7 +102,7 @@ bool ReplaceController::queryContinue( KFindDirection direction, int noOfReplace
         i18nc( "@info", "End of byte array reached.<nl/>Continue from the beginning?" ) :
         i18nc( "@info", "Beginning of byte array reached.<nl/>Continue from the end?" );
 
-    const int answer = KMessageBox::questionYesNo( mWindow, replacementReport+"<nl/>"+question, messageBoxTitle,
+    const int answer = KMessageBox::questionYesNo( mParentWidget, replacementReport+"<nl/>"+question, messageBoxTitle,
                                                    KStandardGuiItem::cont(), KStandardGuiItem::cancel() );
 
     const bool result = ( answer != KMessageBox::No );
@@ -113,7 +113,7 @@ bool ReplaceController::queryContinue( KFindDirection direction, int noOfReplace
 ReplaceBehaviour ReplaceController::queryReplaceCurrent() const
 {
     if( !mReplacePrompt )
-        mReplacePrompt = new KReplacePrompt( mWindow );
+        mReplacePrompt = new KReplacePrompt( mParentWidget );
 
     mReplacePrompt->show();
     const ReplaceBehaviour answer = mReplacePrompt->query();

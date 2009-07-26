@@ -26,7 +26,7 @@
 #include "ksearchdialog.h"
 #include "searchtool.h"
 // KDE
-#include <KXmlGuiWindow>
+#include <KXMLGUIClient>
 #include <KLocale>
 #include <KAction>
 #include <KActionCollection>
@@ -38,11 +38,11 @@ namespace Kasten
 {
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
-SearchController::SearchController( KXmlGuiWindow* window )
-  : mWindow( window ),
+SearchController::SearchController( KXMLGUIClient* guiClient, QWidget* parentWidget )
+  : mParentWidget( parentWidget ),
     mSearchDialog( 0 )
 {
-    KActionCollection* actionCollection = mWindow->actionCollection();
+    KActionCollection* actionCollection = guiClient->actionCollection();
 
     mFindAction     = KStandardAction::find(     this, SLOT(find()),         actionCollection );
     mFindNextAction = KStandardAction::findNext( this, SLOT(findNext()),     actionCollection );
@@ -96,7 +96,7 @@ void SearchController::showDialog( KFindDirection direction )
 {
     // ensure dialog
     if( !mSearchDialog )
-        mSearchDialog = new KSearchDialog( mTool, mWindow );
+        mSearchDialog = new KSearchDialog( mTool, mParentWidget );
 
     mSearchDialog->setDirection( direction );
 
@@ -106,7 +106,7 @@ void SearchController::showDialog( KFindDirection direction )
 void SearchController::onDataNotFound()
 {
     const QString messageBoxTitle = i18nc( "@title:window", "Find" );
-    KMessageBox::sorry( mWindow, i18nc("@info","Search key not found in byte array."), messageBoxTitle );
+    KMessageBox::sorry( mParentWidget, i18nc("@info","Search key not found in byte array."), messageBoxTitle );
 }
 
 bool SearchController::queryContinue( KFindDirection direction ) const
@@ -116,7 +116,7 @@ bool SearchController::queryContinue( KFindDirection direction ) const
         i18nc( "@info", "End of byte array reached.<nl/>Continue from the beginning?" ) :
         i18nc( "@info", "Beginning of byte array reached.<nl/>Continue from the end?" );
 
-    const int answer = KMessageBox::questionYesNo( mWindow, question, messageBoxTitle,
+    const int answer = KMessageBox::questionYesNo( mParentWidget, question, messageBoxTitle,
                                                    KStandardGuiItem::cont(), KStandardGuiItem::cancel() );
 
     const bool result = ( answer != KMessageBox::No );

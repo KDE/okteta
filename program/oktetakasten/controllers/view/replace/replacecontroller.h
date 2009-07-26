@@ -30,8 +30,9 @@
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 
-class KXmlGuiWindow;
+class KXMLGUIClient;
 class KAction;
+class QWidget;
 
 
 namespace Kasten
@@ -47,7 +48,8 @@ class ReplaceController : public AbstractXmlGuiController, public If::ReplaceUse
   Q_OBJECT
 
   public:
-    explicit ReplaceController( KXmlGuiWindow *window );
+    ReplaceController( KXMLGUIClient* guiClient, QWidget* parentWidget );
+
     virtual ~ReplaceController();
 
   public: // AbstractXmlGuiController API
@@ -63,7 +65,7 @@ class ReplaceController : public AbstractXmlGuiController, public If::ReplaceUse
     void onFinished( bool previousFound, int noOfReplacements );
 
   protected:
-    KXmlGuiWindow *mWindow;
+    QWidget* mParentWidget;
 
     KAction *mReplaceAction;
 
