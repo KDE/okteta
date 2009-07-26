@@ -25,7 +25,7 @@
 // lib
 #include <kbytearraydisplay.h>
 // KDE
-#include <KXmlGuiWindow>
+#include <KXMLGUIClient>
 #include <KLocale>
 #include <KActionCollection>
 #include <KToggleAction>
