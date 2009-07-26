@@ -36,7 +36,7 @@
 #include <abstractdocument.h>
 #include <abstractmodelexporter.h>
 // KDE
-#include <KXmlGuiWindow>
+#include <KXMLGUIClient>
 #include <KXMLGUIFactory>
 #include <KActionCollection>
 #include <KLocale>
