@@ -2,27 +2,32 @@ project( oktetaprogram )
 
 add_subdirectory( oktetakasten )
 
+set( OKTETAKASTEN_REL_DIR oktetakasten )
+set( KASTEN_REL_DIR ../libs/kasten )
+set( OKTETA_REL_DIR .. )
+
 include_directories(
-  ${CMAKE_CURRENT_BINARY_DIR}/oktetakasten/controllers
-  oktetakasten/controllers/document
-  oktetakasten/controllers/view
-  oktetakasten/controllers/view/libfinddialog
-  oktetakasten/view
-  oktetakasten/io
-  oktetakasten/document
-  ../libs/kasten/controllers
-  ../libs/kasten/gui
-  ../libs/kasten/gui/view
-  ../libs/kasten/gui/io
-  ../libs/kasten/gui/system
-  ../libs/kasten/gui/controller
-  ../libs/kasten/core
-  ../libs/kasten/core/document
-  ../libs/kasten/core/io
-  ../libs/kasten/core/system
+  ${CMAKE_CURRENT_BINARY_DIR}/${OKTETAKASTEN_REL_DIR}/controllers
+  ${OKTETAKASTEN_REL_DIR}/controllers/document
+  ${OKTETAKASTEN_REL_DIR}/controllers/view
+  ${OKTETAKASTEN_REL_DIR}/controllers/view/libfinddialog
+  ${OKTETAKASTEN_REL_DIR}/gui/view
+  ${OKTETAKASTEN_REL_DIR}/core/io
+  ${OKTETAKASTEN_REL_DIR}/core/document
+  ${KASTEN_REL_DIR}/controllers
+  ${KASTEN_REL_DIR}/gui
+  ${KASTEN_REL_DIR}/gui/view
+  ${KASTEN_REL_DIR}/gui/io
+  ${KASTEN_REL_DIR}/gui/system
+  ${KASTEN_REL_DIR}/gui/controller
+  ${KASTEN_REL_DIR}/core
+  ${KASTEN_REL_DIR}/core/document
+  ${KASTEN_REL_DIR}/core/entity
+  ${KASTEN_REL_DIR}/core/io
+  ${KASTEN_REL_DIR}/core/system
 #TODO: remove this
-  ../gui
-  ../core
+  ${OKTETA_REL_DIR}/gui
+  ${OKTETA_REL_DIR}/core
 )
 
 set( okteta_SRCS
@@ -39,8 +44,7 @@ kde4_add_executable( okteta  ${okteta_SRCS} )
 target_link_libraries( okteta
   okteta_kastencontrollers
   okteta_kastengui
-  okteta_kastenio
-  okteta_kastendocument
+  okteta_kastencore
   kastencontrollers
   kastengui
   kastencore

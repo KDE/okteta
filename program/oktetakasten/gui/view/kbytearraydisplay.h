@@ -57,7 +57,7 @@ class KByteArrayDisplay : public AbstractView, public If::Zoomable, public If::D
 
   public:
     explicit KByteArrayDisplay( KByteArrayDocument* document );
-    
+
     virtual ~KByteArrayDisplay();
 
   public:

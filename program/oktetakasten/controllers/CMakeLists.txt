@@ -1,24 +1,27 @@
+set( KASTEN_REL_DIR ../../../libs/kasten )
+set( OKTETA_REL_DIR ../../.. )
+
 include_directories(
-  ../view
-  ../io
-  ../document
-  ../../../libs/kasten/gui
-  ../../../libs/kasten/gui/view
-  ../../../libs/kasten/gui/system
-  ../../../libs/kasten/gui/controller
-  ../../../libs/kasten/core
-  ../../../libs/kasten/core/entity
-  ../../../libs/kasten/core/document
-  ../../../libs/kasten/core/io
-  ../../../libs/kasten/core/system
+  ../gui/view
+  ../core/io
+  ../core/document
+  ${KASTEN_REL_DIR}/gui
+  ${KASTEN_REL_DIR}/gui/view
+  ${KASTEN_REL_DIR}/gui/system
+  ${KASTEN_REL_DIR}/gui/controller
+  ${KASTEN_REL_DIR}/core
+  ${KASTEN_REL_DIR}/core/document
+  ${KASTEN_REL_DIR}/core/entity
+  ${KASTEN_REL_DIR}/core/io
+  ${KASTEN_REL_DIR}/core/system
   view/libbytearraylineedit
   view/libbytearraychecksum
   view/libbytearrayfilter
   view/libfinddialog
   ../../../libs/framesprint
-  ../../../gui
-  ../../../gui/libcolumnsview
-  ../../../core
+  ${OKTETA_REL_DIR}/gui
+  ${OKTETA_REL_DIR}/gui/libcolumnsview
+  ${OKTETA_REL_DIR}/core
 )
 
 if( QCA2_FOUND )

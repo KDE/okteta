@@ -7,9 +7,9 @@ include_directories(
   ${OKTETAKASTEN_REL_DIR}/controllers/document
   ${OKTETAKASTEN_REL_DIR}/controllers/view
   ${OKTETAKASTEN_REL_DIR}/controllers/view/libfinddialog
-  ${OKTETAKASTEN_REL_DIR}/view
-  ${OKTETAKASTEN_REL_DIR}/io
-  ${OKTETAKASTEN_REL_DIR}/document
+  ${OKTETAKASTEN_REL_DIR}/gui/view
+  ${OKTETAKASTEN_REL_DIR}/core/io
+  ${OKTETAKASTEN_REL_DIR}/core/document
   ${KASTEN_REL_DIR}/controllers
   ${KASTEN_REL_DIR}/gui
   ${KASTEN_REL_DIR}/gui/view
@@ -40,8 +40,7 @@ kde4_add_plugin( oktetapart WITH_PREFIX ${oktetapart_SRCS})
 target_link_libraries( oktetapart
   okteta_kastencontrollers
   okteta_kastengui
-  okteta_kastenio
-  okteta_kastendocument
+  okteta_kastencore
   kastencontrollers
   kastengui
   kastencore
