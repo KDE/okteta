@@ -37,6 +37,7 @@ class Section;
 namespace Kasten
 {
 
+// TODO: make display model an interface, so these encoders can stay in core
 class KByteArrayDisplay;
 
 
