@@ -23,6 +23,8 @@
 #ifndef ABSTRACTBYTEARRAYSTREAMENCODER_H
 #define ABSTRACTBYTEARRAYSTREAMENCODER_H
 
+// lib
+#include "oktetakastengui_export.h"
 // Kasten core
 #include <abstractmodelstreamencoder.h>
 
@@ -41,7 +43,7 @@ namespace Kasten
 class KByteArrayDisplay;
 
 
-class AbstractByteArrayStreamEncoder : public AbstractModelStreamEncoder
+class OKTETAKASTENGUI_EXPORT AbstractByteArrayStreamEncoder : public AbstractModelStreamEncoder
 {
     Q_OBJECT
 

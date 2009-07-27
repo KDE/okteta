@@ -46,7 +46,7 @@ class ValueStreamEncoderSettings
 };
 
 
-class ByteArrayValueStreamEncoder : public AbstractByteArrayStreamEncoder
+class OKTETAKASTENGUI_EXPORT ByteArrayValueStreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
 

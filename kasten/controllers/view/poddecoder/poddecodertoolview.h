@@ -23,6 +23,8 @@
 #ifndef PODDECODERTOOLVIEW_H
 #define PODDECODERTOOLVIEW_H
 
+// lib
+#include "oktetakastencontroller_export.h"
 // Kasten gui
 #include <abstracttoolview.h>
 
@@ -34,7 +36,7 @@ class PODTableView;
 class PODDecoderTool;
 
 
-class PODDecoderToolView : public AbstractToolView
+class OKTETAKASTENCONTROLLER_EXPORT PODDecoderToolView : public AbstractToolView
 {
   public:
     explicit PODDecoderToolView( PODDecoderTool *tool );

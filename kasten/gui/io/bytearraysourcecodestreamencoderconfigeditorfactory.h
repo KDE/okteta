@@ -23,6 +23,8 @@
 #ifndef BYTEARRAYSOURCECODESTREAMENCODERCONFIGEDITORFACTORY_H
 #define BYTEARRAYSOURCECODESTREAMENCODERCONFIGEDITORFACTORY_H
 
+// lib
+#include "oktetakastengui_export.h"
 // Okteta gui
 #include <abstractmodelstreamencoderconfigeditorfactory.h>
 
@@ -30,7 +32,7 @@
 namespace Kasten
 {
 
-class ByteArraySourceCodeStreamEncoderConfigEditorFactory : public AbstractModelStreamEncoderConfigEditorFactory
+class OKTETAKASTENGUI_EXPORT ByteArraySourceCodeStreamEncoderConfigEditorFactory : public AbstractModelStreamEncoderConfigEditorFactory
 {
   public:
     ByteArraySourceCodeStreamEncoderConfigEditorFactory();

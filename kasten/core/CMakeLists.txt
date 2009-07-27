@@ -17,7 +17,7 @@ set( okteta_kastencore_document_SRCS
   document/kbytearrayselection.cpp
 )
 
-set( okteta_kasten_io_filesystem_SRCS
+set( okteta_kastencore_io_filesystem_SRCS
   io/filesystem/bytearrayrawfileloadthread.cpp
   io/filesystem/bytearrayrawfilereloadthread.cpp
   io/filesystem/bytearrayrawfilewritethread.cpp
@@ -32,7 +32,7 @@ set( okteta_kasten_io_filesystem_SRCS
 
 
 set( okteta_kastencore_io_SRCS
-  ${okteta_kasten_io_filesystem_SRCS}
+  ${okteta_kastencore_io_filesystem_SRCS}
 )
 
 set( okteta_kastencore_LIB_SRCS
@@ -40,8 +40,27 @@ set( okteta_kastencore_LIB_SRCS
   ${okteta_kastencore_io_SRCS}
 )
 
+set( oktete_kastencore_LIB_HDRS
+  oktetakastencore_export.h
+  document/kbytearrayselection.h
+  document/kbytearraydocument.h
+  document/kbytearraydocumentfactory.h
+  io/filesystem/kbytearrayrawfilesynchronizer.h
+  io/filesystem/kbytearrayrawfilesynchronizerfactory.h
+)
 
-kde4_add_library( okteta_kastencore  STATIC ${okteta_kastencore_LIB_SRCS} )
+kde4_add_library( okteta_kastencore  SHARED ${okteta_kastencore_LIB_SRCS} )
+
+target_link_libraries( okteta_kastencore
+  kastencore
+  oktetacore
+  ${KDE4_KIO_LIBS}
+)
+set_target_properties( okteta_kastencore  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+
+install( TARGETS okteta_kastencore  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+
+install( FILES ${oktete_kastencore_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )
 
 
 if(KDE4_BUILD_TESTS)

@@ -23,7 +23,8 @@
 #ifndef CHECKSUMTOOL_H
 #define CHECKSUMTOOL_H
 
-//
+// lib
+#include "oktetakastencontroller_export.h"
 #include <config-qca2.h>
 // Kasten core
 #include <abstracttool.h>
@@ -47,7 +48,7 @@ namespace Kasten
 class KByteArrayDisplay;
 
 
-class ChecksumTool : public AbstractTool
+class OKTETAKASTENCONTROLLER_EXPORT ChecksumTool : public AbstractTool
 {
   Q_OBJECT
 

@@ -23,7 +23,8 @@
 #ifndef KBYTEARRAYDOCUMENTFACTORY_H
 #define KBYTEARRAYDOCUMENTFACTORY_H
 
-
+// lib
+#include "oktetakastencore_export.h"
 // Kasten core
 #include <abstractdocumentfactory.h>
 
@@ -31,7 +32,7 @@
 namespace Kasten
 {
 
-class KByteArrayDocumentFactory : public AbstractDocumentFactory
+class OKTETAKASTENCORE_EXPORT KByteArrayDocumentFactory : public AbstractDocumentFactory
 {
     Q_OBJECT
 

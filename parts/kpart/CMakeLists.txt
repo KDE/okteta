@@ -4,10 +4,13 @@ set( OKTETA_REL_DIR ../.. )
 
 include_directories(
   ${CMAKE_CURRENT_BINARY_DIR}/${OKTETAKASTEN_REL_DIR}/controllers
+  ${OKTETAKASTEN_REL_DIR}/controllers
   ${OKTETAKASTEN_REL_DIR}/controllers/document
   ${OKTETAKASTEN_REL_DIR}/controllers/view
   ${OKTETAKASTEN_REL_DIR}/controllers/view/libfinddialog
+  ${OKTETAKASTEN_REL_DIR}/gui
   ${OKTETAKASTEN_REL_DIR}/gui/view
+  ${OKTETAKASTEN_REL_DIR}/core
   ${OKTETAKASTEN_REL_DIR}/core/io
   ${OKTETAKASTEN_REL_DIR}/core/document
   ${KASTEN_REL_DIR}/controllers
@@ -44,9 +47,6 @@ target_link_libraries( oktetapart
   kastencontrollers
   kastengui
   kastencore
-  oktetagui
-  oktetacore
-  framesprint
   ${KDE4_KPARTS_LIBS}
 )
 if( QCA2_FOUND )

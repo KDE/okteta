@@ -23,6 +23,8 @@
 #ifndef INFOTOOL_H
 #define INFOTOOL_H
 
+// lib
+#include "oktetakastencontroller_export.h"
 // Kasten core
 #include <abstracttool.h>
 // Okteta core
@@ -43,7 +45,7 @@ class KByteArrayDisplay;
 
 /**
 */
-class InfoTool : public AbstractTool
+class OKTETAKASTENCONTROLLER_EXPORT InfoTool : public AbstractTool
 {
   Q_OBJECT
 

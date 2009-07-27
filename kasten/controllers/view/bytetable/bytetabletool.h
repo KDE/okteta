@@ -23,9 +23,10 @@
 #ifndef BYTETABLETOOL_H
 #define BYTETABLETOOL_H
 
+// lib
+#include "oktetakastencontroller_export.h"
 // Kasten core
 #include <abstracttool.h>
-
 
 namespace Okteta {
 class AbstractByteArrayModel;
@@ -40,7 +41,7 @@ class KByteArrayDisplay;
 
 /**
 */
-class ByteTableTool : public AbstractTool
+class OKTETAKASTENCONTROLLER_EXPORT ByteTableTool : public AbstractTool
 {
   Q_OBJECT
 

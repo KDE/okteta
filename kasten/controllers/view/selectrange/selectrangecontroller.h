@@ -23,6 +23,8 @@
 #ifndef SELECTRANGECONTROLLER_H
 #define SELECTRANGECONTROLLER_H
 
+// lib
+#include "oktetakastencontroller_export.h"
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 
@@ -40,7 +42,7 @@ class ToolInlineViewable;
 }
 
 
-class SelectRangeController : public AbstractXmlGuiController
+class OKTETAKASTENCONTROLLER_EXPORT SelectRangeController : public AbstractXmlGuiController
 {
   Q_OBJECT
 

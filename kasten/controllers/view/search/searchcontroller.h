@@ -23,6 +23,8 @@
 #ifndef SEARCHCONTROLLER_H
 #define SEARCHCONTROLLER_H
 
+// lib
+#include "oktetakastencontroller_export.h"
 // controller
 #include "searchuserqueryable.h"
 // libfinddialog
@@ -42,7 +44,7 @@ class KSearchDialog;
 class SearchTool;
 
 
-class SearchController : public AbstractXmlGuiController, public If::SearchUserQueryable
+class OKTETAKASTENCONTROLLER_EXPORT SearchController : public AbstractXmlGuiController, public If::SearchUserQueryable
 {
   Q_OBJECT
 

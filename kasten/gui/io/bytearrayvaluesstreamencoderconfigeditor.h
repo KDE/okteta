@@ -35,7 +35,7 @@ class KComboBox;
 namespace Kasten
 {
 
-class ByteArrayValuesStreamEncoderConfigEditor : public AbstractModelStreamEncoderConfigEditor
+class OKTETAKASTENGUI_EXPORT ByteArrayValuesStreamEncoderConfigEditor : public AbstractModelStreamEncoderConfigEditor
 {
   Q_OBJECT
 

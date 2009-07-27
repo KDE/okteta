@@ -56,7 +56,7 @@ class ByteArrayViewTextStreamEncoderSettings
 };
 
 // TODO: this could rather be one of the default cop
-class ByteArrayViewTextStreamEncoder : public AbstractByteArrayStreamEncoder
+class OKTETAKASTENGUI_EXPORT ByteArrayViewTextStreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
 

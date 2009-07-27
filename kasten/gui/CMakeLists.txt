@@ -3,6 +3,7 @@ set( OKTETA_REL_DIR ../.. )
 
 include_directories(
   view
+  ../core
   ../core/document
   ${KASTEN_REL_DIR}/gui
   ${KASTEN_REL_DIR}/gui/view
@@ -63,4 +64,42 @@ set( okteta_kastengui_LIB_SRCS
   ${okteta_kastengui_io_SRCS}
 )
 
-kde4_add_library( okteta_kastengui  STATIC ${okteta_kastengui_LIB_SRCS} )
+set( okteta_kastengui_view_HDRS
+  view/kbytearraydisplayfactory.h
+  view/kbytearraydisplay.h
+)
+
+set( okteta_kastengui_io_HDRS
+  io/bytearrayviewtextstreamencoder.h
+  io/bytearraysourcecodestreamencoder.h
+  io/bytearraytextstreamencoder.h
+  io/bytearrayvaluestreamencoder.h
+  io/bytearrayvaluesstreamencoderconfigeditor.h
+  io/bytearraysourcecodestreamencoderconfigeditor.h
+  io/bytearraysourcecodestreamencoderconfigeditorfactory.h
+  io/bytearrayvaluesstreamencoderconfigeditorfactory.h
+  io/abstractbytearraystreamencoder.h
+  io/bytearraytextstreamencoderpreview.h
+)
+
+set( oktete_kastengui_LIB_HDRS
+  oktetakastengui_export.h
+  ${okteta_kastengui_view_HDRS}
+  ${okteta_kastengui_io_HDRS}
+)
+
+kde4_add_library( okteta_kastengui  SHARED ${okteta_kastengui_LIB_SRCS} )
+
+target_link_libraries( okteta_kastengui
+  okteta_kastencore
+  kastengui
+  kastencore
+  oktetagui
+  oktetacore
+  ${KDE4_KDEUI_LIBS}
+)
+set_target_properties( okteta_kastengui  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+
+install( TARGETS okteta_kastengui  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+
+install( FILES ${oktete_kastengui_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )

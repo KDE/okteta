@@ -60,7 +60,7 @@ class SourceCodeStreamEncoderSettings
 
 // TODO: General synchronizer would load matching encoder and decoder
 // manually defined by desktopfile
-class ByteArraySourceCodeStreamEncoder : public AbstractByteArrayStreamEncoder
+class OKTETAKASTENGUI_EXPORT ByteArraySourceCodeStreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
 

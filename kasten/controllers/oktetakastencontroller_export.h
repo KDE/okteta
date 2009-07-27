@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,43 +20,25 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VIEWMODECONTROLLER_H
-#define VIEWMODECONTROLLER_H
+#ifndef OKTETAKASTENCONTROLLER_EXPORT_H
+#define OKTETAKASTENCONTROLLER_EXPORT_H
 
-// lib
-#include "oktetakastencontroller_export.h"
-// Kasten gui
-#include <abstractxmlguicontroller.h>
-
-class KXMLGUIClient;
-class KSelectAction;
+// KDE
+#include <kdemacros.h>
 
 
-namespace Kasten
-{
+#ifndef OKTETAKASTENCONTROLLER_EXPORT
+  // building the library?
+# if defined(MAKE_OKTETAKASTENCONTROLLER_LIB)
+#  define OKTETAKASTENCONTROLLER_EXPORT KDE_EXPORT
+  // using the library
+# else
+#  define OKTETAKASTENCONTROLLER_EXPORT KDE_IMPORT
+# endif
+#endif
 
-class KByteArrayDisplay;
-
-
-class OKTETAKASTENCONTROLLER_EXPORT ViewModeController : public AbstractXmlGuiController
-{
-  Q_OBJECT
-
-  public:
-    explicit ViewModeController( KXMLGUIClient* guiClient );
-
-  public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
-
-  protected Q_SLOTS: // action slots
-    void setViewMode( int viewMode );
-
-  protected:
-    KByteArrayDisplay* mByteArrayView;
-
-    KSelectAction* mViewModeAction;
-};
-
-}
+# ifndef OKTETAKASTENCONTROLLER_EXPORT_DEPRECATED
+#  define OKTETAKASTENCONTROLLER_EXPORT_DEPRECATED KDE_DEPRECATED OKTETAKASTENCONTROLLER_EXPORT
+# endif
 
 #endif

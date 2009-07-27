@@ -2,7 +2,9 @@ set( KASTEN_REL_DIR ../../libs/kasten )
 set( OKTETA_REL_DIR ../.. )
 
 include_directories(
+  ../gui
   ../gui/view
+  ../core
   ../core/io
   ../core/document
   ${KASTEN_REL_DIR}/gui
@@ -189,7 +191,6 @@ set( VIEWMODECONTROLLER_SRCS
 )
 set( OKTETA_KASTEN_CONTROLLERS_SRCS
 #   ${OVERWRITEONLYCONTROLLER_SRCS}
-
   ${OVERWRITEMODECONTROLLER_SRCS}
   ${DOCUMENTINFOCONTROLLER_SRCS}
   ${BYTEARRAYLINEEDIT_LIB_SRCS}
@@ -215,4 +216,58 @@ set( OKTETA_KASTEN_CONTROLLERS_SRCS
   ${VIEWMODECONTROLLER_SRCS}
 )
 
-kde4_add_library( okteta_kastencontrollers STATIC ${OKTETA_KASTEN_CONTROLLERS_SRCS} )
+set( okteta_kastencontrollers_LIB_HDRS
+  oktetakastencontroller_export.h
+  view/print/printcontroller.h
+  view/bookmarks/bookmarkstoolview.h
+  view/bookmarks/bookmarkscontroller.h
+  view/bookmarks/bookmarkstool.h
+  view/overwritemode/overwritemodecontroller.h
+  view/poddecoder/poddecodertool.h
+  view/poddecoder/poddecodertoolview.h
+  view/viewconfig/viewconfigcontroller.h
+  view/gotooffset/gotooffsettool.h
+  view/gotooffset/gotooffsettoolview.h
+  view/viewmode/viewmodecontroller.h
+  view/checksum/checksumtool.h
+  view/checksum/checksumtoolview.h
+  view/info/infotoolview.h
+  view/info/infotool.h
+  view/bytetable/bytetabletoolview.h
+  view/bytetable/bytetabletool.h
+  view/filter/filtertool.h
+  view/filter/filtertoolview.h
+  view/selectrange/selectrangecontroller.h
+  view/insertpattern/insertpatterncontroller.h
+  view/replace/replacecontroller.h
+  view/viewstatus/viewstatuscontroller.h
+  view/stringsextract/stringsextracttool.h
+  view/stringsextract/stringsextracttoolview.h
+  view/search/searchcontroller.h
+  document/info/documentinfotoolview.h
+  document/info/documentinfotool.h
+  document/overwriteonly/overwriteonlycontroller.h
+)
+
+kde4_add_library( okteta_kastencontrollers  SHARED ${OKTETA_KASTEN_CONTROLLERS_SRCS} )
+
+target_link_libraries( okteta_kastencontrollers
+  okteta_kastengui
+  okteta_kastencore
+  kastengui
+  kastencore
+  oktetagui
+  oktetacore
+  framesprint
+  ${KDE4_KIO_LIBS}
+  ${KDE4_KDEUI_LIBS}
+)
+if( QCA2_FOUND )
+  target_link_libraries( okteta_kastencontrollers ${QCA2_LIBRARIES} )
+endif( QCA2_FOUND )
+
+set_target_properties( okteta_kastencontrollers  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+
+install( TARGETS okteta_kastencontrollers  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+
+install( FILES ${oktete_kastencore_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )

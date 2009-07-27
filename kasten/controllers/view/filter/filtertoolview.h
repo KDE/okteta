@@ -23,6 +23,8 @@
 #ifndef FILTERTOOLVIEW_H
 #define FILTERTOOLVIEW_H
 
+// lib
+#include "oktetakastencontroller_export.h"
 // Kasten gui
 #include <abstracttoolview.h>
 
@@ -34,7 +36,7 @@ class FilterView;
 class FilterTool;
 
 
-class FilterToolView : public AbstractToolView
+class OKTETAKASTENCONTROLLER_EXPORT FilterToolView : public AbstractToolView
 {
   public:
     explicit FilterToolView( FilterTool* tool );

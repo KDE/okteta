@@ -23,6 +23,8 @@
 #ifndef STRINGSEXTRACTTOOLVIEW_H
 #define STRINGSEXTRACTTOOLVIEW_H
 
+// lib
+#include "oktetakastencontroller_export.h"
 // Kasten gui
 #include <abstracttoolview.h>
 
@@ -34,7 +36,7 @@ class StringsExtractView;
 class StringsExtractTool;
 
 
-class StringsExtractToolView : public AbstractToolView
+class OKTETAKASTENCONTROLLER_EXPORT StringsExtractToolView : public AbstractToolView
 {
   public:
     explicit StringsExtractToolView( StringsExtractTool *tool );

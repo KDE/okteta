@@ -23,6 +23,8 @@
 #ifndef FILTERTOOL_H
 #define FILTERTOOL_H
 
+// lib
+#include "oktetakastencontroller_export.h"
 // Kasten core
 #include <abstracttool.h>
 // Qt
@@ -42,7 +44,7 @@ namespace Kasten
 class KByteArrayDisplay;
 
 
-class FilterTool : public AbstractTool
+class OKTETAKASTENCONTROLLER_EXPORT FilterTool : public AbstractTool
 {
   Q_OBJECT
 

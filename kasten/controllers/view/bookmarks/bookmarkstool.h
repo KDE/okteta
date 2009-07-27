@@ -23,6 +23,8 @@
 #ifndef BOOKMARKSTOOL_H
 #define BOOKMARKSTOOL_H
 
+// lib
+#include "oktetakastencontroller_export.h"
 // Kasten core
 #include <abstracttool.h>
 
@@ -40,7 +42,7 @@ namespace Kasten
 class KByteArrayDisplay;
 
 
-class BookmarksTool : public AbstractTool
+class OKTETAKASTENCONTROLLER_EXPORT BookmarksTool : public AbstractTool
 {
   Q_OBJECT
 

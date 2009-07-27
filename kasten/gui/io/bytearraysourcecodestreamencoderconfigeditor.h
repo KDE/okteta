@@ -37,7 +37,7 @@ class QCheckBox;
 namespace Kasten
 {
 
-class ByteArraySourceCodeStreamEncoderConfigEditor : public AbstractModelStreamEncoderConfigEditor
+class OKTETAKASTENGUI_EXPORT ByteArraySourceCodeStreamEncoderConfigEditor : public AbstractModelStreamEncoderConfigEditor
 {
   Q_OBJECT
 

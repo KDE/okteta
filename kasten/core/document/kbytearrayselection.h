@@ -23,6 +23,8 @@
 #ifndef KBYTEARRAYSELECTION_H
 #define KBYTEARRAYSELECTION_H
 
+// lib
+#include "oktetakastencore_export.h"
 // Kasten core
 #include <abstractmodelselection.h>
 // Okteta core
@@ -32,7 +34,7 @@
 namespace Kasten
 {
 
-class KByteArraySelection : public AbstractModelSelection
+class OKTETAKASTENCORE_EXPORT KByteArraySelection : public AbstractModelSelection
 {
   public:
     KByteArraySelection();

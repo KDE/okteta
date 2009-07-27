@@ -23,6 +23,8 @@
 #ifndef KBYTEARRAYRAWFILESYNCHRONIZER_H
 #define KBYTEARRAYRAWFILESYNCHRONIZER_H
 
+// lib
+#include "oktetakastencore_export.h"
 // Kasten core
 #include <abstractmodelfilesystemsynchronizer.h>
 
@@ -32,7 +34,7 @@ namespace Kasten
 
 class KByteArrayDocument;
 
-class KByteArrayRawFileSynchronizer : public AbstractModelFileSystemSynchronizer
+class OKTETAKASTENCORE_EXPORT KByteArrayRawFileSynchronizer : public AbstractModelFileSystemSynchronizer
 {
     Q_OBJECT
 

@@ -24,6 +24,7 @@
 #define KBYTEARRAYDOCUMENT_H
 
 // lib
+#include "oktetakastencore_export.h"
 // #include "kbytearrayinterface.h"
 // Kasten core
 #include <person.h>
@@ -42,7 +43,7 @@ class PieceTableByteArrayModel;
 namespace Kasten
 {
 
-class KByteArrayDocument : public AbstractDocument, public If::Versionable, public If::UserListable//, public If::ByteArray
+class OKTETAKASTENCORE_EXPORT KByteArrayDocument : public AbstractDocument, public If::Versionable, public If::UserListable//, public If::ByteArray
 {
     Q_OBJECT
     Q_INTERFACES(Kasten::If::Versionable Kasten::If::UserListable)

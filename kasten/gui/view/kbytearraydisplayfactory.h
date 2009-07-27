@@ -23,7 +23,8 @@
 #ifndef KBYTEARRAYDISPLAYFACTORY_H
 #define KBYTEARRAYDISPLAYFACTORY_H
 
-
+// lib
+#include "oktetakastengui_export.h"
 // Kasten gui
 #include <abstractviewfactory.h>
 
@@ -31,7 +32,7 @@
 namespace Kasten
 {
 
-class KByteArrayDisplayFactory : public AbstractViewFactory
+class OKTETAKASTENGUI_EXPORT KByteArrayDisplayFactory : public AbstractViewFactory
 {
   public:
     virtual AbstractView *createViewFor( AbstractDocument* Document );

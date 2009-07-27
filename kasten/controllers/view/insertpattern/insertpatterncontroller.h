@@ -23,7 +23,8 @@
 #ifndef INSERTPATTERNCONTROLLER_H
 #define INSERTPATTERNCONTROLLER_H
 
-
+// lib
+#include "oktetakastencontroller_export.h"
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 
@@ -38,7 +39,7 @@ class InsertPatternTool;
 class InsertPatternDialog;
 
 
-class InsertPatternController : public AbstractXmlGuiController
+class OKTETAKASTENCONTROLLER_EXPORT InsertPatternController : public AbstractXmlGuiController
 {
   Q_OBJECT
 

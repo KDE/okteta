@@ -23,6 +23,8 @@
 #ifndef BYTEARRAYTEXTSTREAMENCODERPREVIEW_H
 #define BYTEARRAYTEXTSTREAMENCODERPREVIEW_H
 
+// lib
+#include "oktetakastengui_export.h"
 // Kasten ui
 #include <abstractselectionview.h>
 
@@ -37,7 +39,7 @@ class AbstractModelSelection;
 class AbstractModel;
 
 
-class ByteArrayTextStreamEncoderPreview : public AbstractSelectionView
+class OKTETAKASTENGUI_EXPORT ByteArrayTextStreamEncoderPreview : public AbstractSelectionView
 {
   Q_OBJECT
 

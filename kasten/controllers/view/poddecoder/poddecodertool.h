@@ -23,6 +23,8 @@
 #ifndef PODDECODERTOOL_H
 #define PODDECODERTOOL_H
 
+// lib
+#include "oktetakastencontroller_export.h"
 // tool
 #include "poddata.h"
 // Kasten core
@@ -45,7 +47,7 @@ namespace Kasten
 class KByteArrayDisplay;
 
 
-class PODDecoderTool : public AbstractTool
+class OKTETAKASTENCONTROLLER_EXPORT PODDecoderTool : public AbstractTool
 {
   Q_OBJECT
 

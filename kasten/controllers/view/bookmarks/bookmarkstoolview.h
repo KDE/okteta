@@ -23,6 +23,8 @@
 #ifndef BOOKMARKSTOOLVIEW_H
 #define BOOKMARKSTOOLVIEW_H
 
+// lib
+#include "oktetakastencontroller_export.h"
 // Kasten gui
 #include <abstracttoolview.h>
 
@@ -34,7 +36,7 @@ class BookmarksView;
 class BookmarksTool;
 
 
-class BookmarksToolView : public AbstractToolView
+class OKTETAKASTENCONTROLLER_EXPORT BookmarksToolView : public AbstractToolView
 {
   public:
     explicit BookmarksToolView( BookmarksTool* tool );

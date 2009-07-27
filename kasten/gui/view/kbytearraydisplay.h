@@ -24,6 +24,8 @@
 #define KBYTEARRAYDISPLAY_H
 
 // lib
+#include "oktetakastengui_export.h"
+// lib
 #include <kbytearrayselection.h>
 // Kasten gui
 #include <abstractview.h>
@@ -47,7 +49,7 @@ class KByteArrayDocument;
 class KCursorProxy;
 
 
-class KByteArrayDisplay : public AbstractView, public If::Zoomable, public If::DataSelectable, public If::SelectedDataWriteable
+class OKTETAKASTENGUI_EXPORT KByteArrayDisplay : public AbstractView, public If::Zoomable, public If::DataSelectable, public If::SelectedDataWriteable
 {
     Q_OBJECT
     Q_INTERFACES(Kasten::If::Zoomable Kasten::If::DataSelectable Kasten::If::SelectedDataWriteable)

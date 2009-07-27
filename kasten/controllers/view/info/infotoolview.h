@@ -23,6 +23,8 @@
 #ifndef INFOTOOLVIEW_H
 #define INFOTOOLVIEW_H
 
+// lib
+#include "oktetakastencontroller_export.h"
 // Kasten gui
 #include <abstracttoolview.h>
 
@@ -34,7 +36,7 @@ class InfoView;
 class InfoTool;
 
 
-class InfoToolView : public AbstractToolView
+class OKTETAKASTENCONTROLLER_EXPORT InfoToolView : public AbstractToolView
 {
   public:
     explicit InfoToolView( InfoTool* tool );

@@ -23,7 +23,8 @@
 #ifndef BOOKMARKSCONTROLLER_H
 #define BOOKMARKSCONTROLLER_H
 
-
+// lib
+#include "oktetakastencontroller_export.h"
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 // Qt
@@ -46,7 +47,7 @@ namespace Kasten
 class KByteArrayDisplay;
 
 
-class BookmarksController : public AbstractXmlGuiController
+class OKTETAKASTENCONTROLLER_EXPORT BookmarksController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
