@@ -80,9 +80,9 @@ OktetaPart::OktetaPart( QWidget* parentWidget,
     KGlobal::locale()->insertCatalog( "libkastencontroller" );
 
 //     QList<AbstractModelStreamEncoder*> encoderList;
-//     encoderList << new KByteArrayValueStreamEncoder()
-//                 << new KByteArrayTextStreamEncoder()
-//                 << new KByteArraySourceCodeStreamEncoder()
+//     encoderList << new ByteArrayValueStreamEncoder()
+//                 << new ByteArrayTextStreamEncoder()
+//                 << new ByteArraySourceCodeStreamEncoder()
 //                 << new ByteArrayViewTextStreamEncoder();
 
 //     QList<AbstractModelStreamEncoderConfigEditorFactory*> encoderConfigEditorFactoryList;

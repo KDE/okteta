@@ -24,7 +24,7 @@
 #define BYTEARRAYSOURCECODESTREAMENCODERCONFIGEDITOR_H
 
 // lib
-#include "kbytearraysourcecodestreamencoder.h"
+#include "bytearraysourcecodestreamencoder.h"
 // Qt
 #include <abstractmodelstreamencoderconfigeditor.h>
 
@@ -42,7 +42,7 @@ class ByteArraySourceCodeStreamEncoderConfigEditor : public AbstractModelStreamE
   Q_OBJECT
 
   public:
-    explicit ByteArraySourceCodeStreamEncoderConfigEditor( KByteArraySourceCodeStreamEncoder* encoder, QWidget* parent = 0 );
+    explicit ByteArraySourceCodeStreamEncoderConfigEditor( ByteArraySourceCodeStreamEncoder* encoder, QWidget* parent = 0 );
     virtual ~ByteArraySourceCodeStreamEncoderConfigEditor();
 
   public: // AbstractModelStreamEncoderConfigEditor API
@@ -54,7 +54,7 @@ class ByteArraySourceCodeStreamEncoderConfigEditor : public AbstractModelStreamE
     void onSettingsChanged();
 
   protected:
-    KByteArraySourceCodeStreamEncoder* mEncoder;
+    ByteArraySourceCodeStreamEncoder* mEncoder;
     SourceCodeStreamEncoderSettings mSettings;
 
     KLineEdit* mVariableNameEdit;

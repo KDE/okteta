@@ -30,9 +30,9 @@
 #include <filesystem/kbytearrayrawfilesynchronizerfactory.h>
 #include <bytearraysourcecodestreamencoderconfigeditorfactory.h>
 #include <bytearrayvaluesstreamencoderconfigeditorfactory.h>
-#include <kbytearraytextstreamencoder.h>
-#include <kbytearrayvaluestreamencoder.h>
-#include <kbytearraysourcecodestreamencoder.h>
+#include <bytearraytextstreamencoder.h>
+#include <bytearrayvaluestreamencoder.h>
+#include <bytearraysourcecodestreamencoder.h>
 #include <bytearrayviewtextstreamencoder.h>
 // Kasten gui
 #include <viewmanager.h>
@@ -82,9 +82,9 @@ int OktetaProgram::execute()
     KGlobal::locale()->insertCatalog( "libkastencontroller" );
 
     QList<AbstractModelStreamEncoder*> encoderList;
-    encoderList << new KByteArrayValueStreamEncoder()
-                << new KByteArrayTextStreamEncoder()
-                << new KByteArraySourceCodeStreamEncoder()
+    encoderList << new ByteArrayValueStreamEncoder()
+                << new ByteArrayTextStreamEncoder()
+                << new ByteArraySourceCodeStreamEncoder()
                 << new ByteArrayViewTextStreamEncoder();
 
     QList<AbstractModelStreamEncoderConfigEditorFactory*> encoderConfigEditorFactoryList;

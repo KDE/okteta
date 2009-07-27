@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,11 +20,15 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KBYTEARRAYTEXTSTREAMENCODER_H
-#define KBYTEARRAYTEXTSTREAMENCODER_H
+#ifndef BYTEARRAYVIEWTEXTSTREAMENCODER_H
+#define BYTEARRAYVIEWTEXTSTREAMENCODER_H
 
 // lib
-#include "kabstractbytearraystreamencoder.h"
+#include "abstractbytearraystreamencoder.h"
+// Okteta gui
+// #include <offsetformat.h>
+// Okteta core
+#include <oktetacore.h>
 // Qt
 #include <QtCore/QString>
 
@@ -32,33 +36,42 @@
 namespace Kasten
 {
 
-class TextStreamEncoderSettings
+class ByteArrayViewTextStreamEncoderSettings
 {
   public:
-    TextStreamEncoderSettings();
+    ByteArrayViewTextStreamEncoderSettings();
   public:
+//     Okteta::OffsetFormat::Format offsetFormat;
+    int codingWidth;
+    int firstLineOffset;
+    int startOffset;
+    int delta;
+    Okteta::ValueCoding valueCoding;
     QString codecName;
     QChar undefinedChar;
     QChar substituteChar;
+    QString separation;
+//     Okteta::CharCodec *CharCodec;
+//     Okteta::OffsetFormat::print printFunction;
 };
 
 // TODO: this could rather be one of the default cop
-class KByteArrayTextStreamEncoder : public KAbstractByteArrayStreamEncoder
+class ByteArrayViewTextStreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
 
   public:
-    KByteArrayTextStreamEncoder();
-    virtual ~KByteArrayTextStreamEncoder();
+    ByteArrayViewTextStreamEncoder();
+    virtual ~ByteArrayViewTextStreamEncoder();
 
-  protected: // KAbstractByteArrayStreamEncoder API
+  protected: // AbstractByteArrayStreamEncoder API
     virtual bool encodeDataToStream( QIODevice *device,
                                      const KByteArrayDisplay* byteArrayView,
                                      const Okteta::AbstractByteArrayModel *byteArrayModel,
                                      const KDE::Section &section );
 
   protected:
-    TextStreamEncoderSettings mSettings;
+    ByteArrayViewTextStreamEncoderSettings mSettings;
 };
 
 }

@@ -20,13 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KBYTEARRAYVALUESTREAMENCODER_H
-#define KBYTEARRAYVALUESTREAMENCODER_H
+#ifndef BYTEARRAYTEXTSTREAMENCODER_H
+#define BYTEARRAYTEXTSTREAMENCODER_H
 
 // lib
-#include "kabstractbytearraystreamencoder.h"
-// Okteta core
-#include <oktetacore.h>
+#include "abstractbytearraystreamencoder.h"
 // Qt
 #include <QtCore/QString>
 
@@ -34,47 +32,34 @@
 namespace Kasten
 {
 
-class ValueStreamEncoderSettings
+class TextStreamEncoderSettings
 {
   public:
-    ValueStreamEncoderSettings();
+    TextStreamEncoderSettings();
   public:
-    Okteta::ValueCoding valueCoding;
-    QString separation;
+    QString codecName;
     QChar undefinedChar;
     QChar substituteChar;
 };
 
-
-class KByteArrayValueStreamEncoder : public KAbstractByteArrayStreamEncoder
+// TODO: this could rather be one of the default cop
+class ByteArrayTextStreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
 
   public:
-    KByteArrayValueStreamEncoder();
-    virtual ~KByteArrayValueStreamEncoder();
+    ByteArrayTextStreamEncoder();
+    virtual ~ByteArrayTextStreamEncoder();
 
-  public:
-    ValueStreamEncoderSettings settings() const;
-    void setSettings( const ValueStreamEncoderSettings& settings );
-
-  protected: // KAbstractByteArrayStreamEncoder API
+  protected: // AbstractByteArrayStreamEncoder API
     virtual bool encodeDataToStream( QIODevice *device,
                                      const KByteArrayDisplay* byteArrayView,
                                      const Okteta::AbstractByteArrayModel *byteArrayModel,
                                      const KDE::Section &section );
 
   protected:
-    ValueStreamEncoderSettings mSettings;
+    TextStreamEncoderSettings mSettings;
 };
-
-
-inline ValueStreamEncoderSettings KByteArrayValueStreamEncoder::settings() const { return mSettings; }
-inline void KByteArrayValueStreamEncoder::setSettings( const ValueStreamEncoderSettings& settings )
-{
-    mSettings = settings;
-    emit settingsChanged();
-}
 
 }
 

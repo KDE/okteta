@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kbytearraysourcecodestreamencoder.h"
+#include "bytearraysourcecodestreamencoder.h"
 
 // Okteta core
 #include <abstractbytearraymodel.h>
@@ -65,14 +65,14 @@ SourceCodeStreamEncoderSettings::SourceCodeStreamEncoderSettings()
 {}
 
 
-KByteArraySourceCodeStreamEncoder::KByteArraySourceCodeStreamEncoder()
- : KAbstractByteArrayStreamEncoder( i18nc("name of the encoding target","C Array..."), QLatin1String("text/plain") )
+ByteArraySourceCodeStreamEncoder::ByteArraySourceCodeStreamEncoder()
+ : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","C Array..."), QLatin1String("text/plain") )
 {}
 
-const char* const* KByteArraySourceCodeStreamEncoder::dataTypeNames() const { return PrimitiveDataTypeName; }
-int KByteArraySourceCodeStreamEncoder::dataTypesCount() const { return NoOfPrimitiveDataTypes; }
+const char* const* ByteArraySourceCodeStreamEncoder::dataTypeNames() const { return PrimitiveDataTypeName; }
+int ByteArraySourceCodeStreamEncoder::dataTypesCount() const { return NoOfPrimitiveDataTypes; }
 
-bool KByteArraySourceCodeStreamEncoder::encodeDataToStream( QIODevice *device,
+bool ByteArraySourceCodeStreamEncoder::encodeDataToStream( QIODevice *device,
                                                             const KByteArrayDisplay* byteArrayView,
                                                             const Okteta::AbstractByteArrayModel *byteArrayModel,
                                                             const KDE::Section &section )
@@ -118,7 +118,7 @@ Q_UNUSED( byteArrayView )
 }
 
 
-QString KByteArraySourceCodeStreamEncoder::printFormatted( const Okteta::AbstractByteArrayModel* byteArrayModel, int pos,
+QString ByteArraySourceCodeStreamEncoder::printFormatted( const Okteta::AbstractByteArrayModel* byteArrayModel, int pos,
                                                            unsigned int dataSize ) const
 {
     static const char DecimalFormattedNumberPlaceHolder[] = "%1";
@@ -209,6 +209,6 @@ QString KByteArraySourceCodeStreamEncoder::printFormatted( const Okteta::Abstrac
     return result;
 }
 
-KByteArraySourceCodeStreamEncoder::~KByteArraySourceCodeStreamEncoder() {}
+ByteArraySourceCodeStreamEncoder::~ByteArraySourceCodeStreamEncoder() {}
 
 }

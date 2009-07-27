@@ -20,14 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kbytearraytextstreamencoder.h"
+#include "bytearrayvaluestreamencoder.h"
 
 // lib
 #include <kbytearraydisplay.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
-#include <character.h>
-#include <charcodec.h>
+#include <valuecodec.h>
 // KDE
 #include <KLocale>
 // Qt
@@ -37,50 +36,51 @@
 namespace Kasten
 {
 
-TextStreamEncoderSettings::TextStreamEncoderSettings()
- : codecName(), undefinedChar('?'), substituteChar( '.' )
+ValueStreamEncoderSettings::ValueStreamEncoderSettings()
+ : valueCoding( Okteta::HexadecimalCoding), separation( QLatin1String(" ") )
 {}
 
-KByteArrayTextStreamEncoder::KByteArrayTextStreamEncoder()
- : KAbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Plain Text"), QLatin1String("text/plain") )
+ByteArrayValueStreamEncoder::ByteArrayValueStreamEncoder()
+ : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Values..."), QLatin1String("text/plain") )
 {}
 
 
-bool KByteArrayTextStreamEncoder::encodeDataToStream( QIODevice *device,
-                                                      const KByteArrayDisplay* byteArrayView,
-                                                      const Okteta::AbstractByteArrayModel *byteArrayModel,
-                                                      const KDE::Section &section )
+bool ByteArrayValueStreamEncoder::encodeDataToStream( QIODevice *device,
+                                                       const KByteArrayDisplay* byteArrayView,
+                                                       const Okteta::AbstractByteArrayModel *byteArrayModel,
+                                                       const KDE::Section &section )
 {
     bool success = true;
 
     // settings
-    mSettings.codecName = byteArrayView->charCodingName();
     mSettings.undefinedChar = byteArrayView->undefinedChar();
     mSettings.substituteChar = byteArrayView->substituteChar();
+//     mSettings.valueCoding = (Okteta::ValueCoding)byteArrayView->valueCoding();
 
     // encode
     QTextStream textStream( device );
 
-    Okteta::CharCodec *charCodec = Okteta::CharCodec::createCodec( mSettings.codecName );
-    const QChar tabChar( '\t' );
-    const QChar returnChar( '\n' );
+    Okteta::ValueCodec *valueCodec = Okteta::ValueCodec::createCodec( mSettings.valueCoding );
+
+    // prepare 
+    QString valueString;
+    valueString.resize( valueCodec->encodingWidth() );
 
     for( int i=section.start(); i<=section.end(); ++i )
     {
-        const Okteta::Character byteChar = charCodec->decode( byteArrayModel->datum(i) );
+        if( i > section.start() )
+            textStream << mSettings.separation;
 
-        const QChar streamChar = byteChar.isUndefined() ?      mSettings.undefinedChar :
-                                 (!byteChar.isPrint()
-                                  || byteChar == tabChar
-                                  || byteChar == returnChar) ? mSettings.substituteChar :
-                                                               (QChar)byteChar;
-        textStream << streamChar;
+        valueCodec->encode( valueString, 0, byteArrayModel->datum(i) );
+
+        textStream << valueString;
     }
     // clean up
-    delete charCodec;
+    delete valueCodec;
+
     return success;
 }
 
-KByteArrayTextStreamEncoder::~KByteArrayTextStreamEncoder() {}
+ByteArrayValueStreamEncoder::~ByteArrayValueStreamEncoder() {}
 
 }

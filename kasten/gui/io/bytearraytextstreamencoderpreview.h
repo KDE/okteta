@@ -1,5 +1,5 @@
 /*
-    This file is part of the Kasten Framework, part of the KDE project.
+    This file is part of the Okteta Kasten module, part of the KDE project.
 
     Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
 
@@ -20,42 +20,45 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYVALUESSTREAMENCODERCONFIGEDITOR_H
-#define BYTEARRAYVALUESSTREAMENCODERCONFIGEDITOR_H
+#ifndef BYTEARRAYTEXTSTREAMENCODERPREVIEW_H
+#define BYTEARRAYTEXTSTREAMENCODERPREVIEW_H
 
-// lib
-#include "kbytearrayvaluestreamencoder.h"
-// Qt
-#include <abstractmodelstreamencoderconfigeditor.h>
+// Kasten ui
+#include <abstractselectionview.h>
 
-class KLineEdit;
-class KComboBox;
+class KTextEdit;
 
 
 namespace Kasten
 {
 
-class ByteArrayValuesStreamEncoderConfigEditor : public AbstractModelStreamEncoderConfigEditor
+class AbstractByteArrayStreamEncoder;
+class AbstractModelSelection;
+class AbstractModel;
+
+
+class ByteArrayTextStreamEncoderPreview : public AbstractSelectionView
 {
   Q_OBJECT
 
   public:
-    explicit ByteArrayValuesStreamEncoderConfigEditor( KByteArrayValueStreamEncoder* encoder, QWidget* parent = 0 );
-    virtual ~ByteArrayValuesStreamEncoderConfigEditor();
+    explicit ByteArrayTextStreamEncoderPreview( AbstractByteArrayStreamEncoder* encoder );
+    virtual ~ByteArrayTextStreamEncoderPreview();
 
-  public: // AbstractModelStreamEncoderConfigEditor API
-    virtual AbstractSelectionView* createPreviewView() const;
-    virtual QString name() const;
+  public: // AbstractSelectionView API
+    virtual QWidget* widget() const;
+    virtual void setData( AbstractModel* model, const AbstractModelSelection* selection );
 
-  protected Q_SLOTS:
-    void onSettingsChanged();
+  public Q_SLOTS:
+    void update();
 
   protected:
-    KByteArrayValueStreamEncoder* mEncoder;
-    ValueStreamEncoderSettings mSettings;
+    AbstractByteArrayStreamEncoder* const mEncoder;
 
-//     KComboBox* mValueCodingSelect;
-    KLineEdit* mSeparationEdit;
+    AbstractModel* mModel;
+    const AbstractModelSelection* mSelection;
+
+    KTextEdit* mWidget;
 };
 
 }

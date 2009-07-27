@@ -2,12 +2,15 @@ set( KASTEN_REL_DIR ../../libs/kasten )
 set( OKTETA_REL_DIR ../.. )
 
 include_directories(
+  view
   ../core/document
   ${KASTEN_REL_DIR}/gui
   ${KASTEN_REL_DIR}/gui/view
+  ${KASTEN_REL_DIR}/gui/io
   ${KASTEN_REL_DIR}/core
   ${KASTEN_REL_DIR}/core/document
   ${KASTEN_REL_DIR}/core/entity
+  ${KASTEN_REL_DIR}/core/io
   ${OKTETA_REL_DIR}/gui
   ${OKTETA_REL_DIR}/gui/libcolumnsview
   ${OKTETA_REL_DIR}/core
@@ -17,10 +20,47 @@ include_directories(
 #   add_subdirectory(tests)
 # endif(KDE4_BUILD_TESTS)
 
-set( OKTETA_KASTEN_GUI_SRCS
+set( okteta_textrenderer_SRCS
+  io/bytearrayviewtextrenderer/abstractcolumntextrenderer.cpp
+  io/bytearrayviewtextrenderer/offsetcolumntextrenderer.cpp
+  io/bytearrayviewtextrenderer/bordercolumntextrenderer.cpp
+  io/bytearrayviewtextrenderer/abstractbytearraycolumntextrenderer.cpp
+  io/bytearrayviewtextrenderer/valuebytearraycolumntextrenderer.cpp
+  io/bytearrayviewtextrenderer/charbytearraycolumntextrenderer.cpp
+  io/bytearrayviewtextrenderer/bytearrayrowscolumntextrenderer.cpp
+)
+
+set( okteta_values_streamencoder_SRCS
+  io/bytearrayvaluesstreamencoderconfigeditor.cpp
+  io/bytearrayvaluesstreamencoderconfigeditorfactory.cpp
+  io/bytearrayvaluestreamencoder.cpp
+)
+
+set( okteta_sourcecode_streamencoder_SRCS
+  io/bytearraysourcecodestreamencoderconfigeditor.cpp
+  io/bytearraysourcecodestreamencoderconfigeditorfactory.cpp
+  io/bytearraysourcecodestreamencoder.cpp
+)
+
+set( okteta_kastengui_io_SRCS
+  io/abstractbytearraystreamencoder.cpp
+  io/bytearraytextstreamencoderpreview.cpp
+  ${okteta_values_streamencoder_SRCS}
+  io/bytearraytextstreamencoder.cpp
+  ${okteta_sourcecode_streamencoder_SRCS}
+  ${okteta_textrenderer_SRCS}
+  io/bytearrayviewtextstreamencoder.cpp
+)
+
+set( okteta_kastengui_view_SRCS
   view/bytearrayjanusview.cpp
   view/kbytearraydisplayfactory.cpp
   view/kbytearraydisplay.cpp
 )
 
-kde4_add_library( okteta_kastengui STATIC ${OKTETA_KASTEN_GUI_SRCS} )
+set( okteta_kastengui_LIB_SRCS
+  ${okteta_kastengui_view_SRCS}
+  ${okteta_kastengui_io_SRCS}
+)
+
+kde4_add_library( okteta_kastengui  STATIC ${okteta_kastengui_LIB_SRCS} )

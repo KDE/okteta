@@ -24,7 +24,7 @@
 
 // lib
 #include "bytearrayvaluesstreamencoderconfigeditor.h"
-#include "kbytearrayvaluestreamencoder.h"
+#include "bytearrayvaluestreamencoder.h"
 
 
 namespace Kasten
@@ -38,8 +38,8 @@ ByteArrayValuesStreamEncoderConfigEditorFactory::ByteArrayValuesStreamEncoderCon
 AbstractModelStreamEncoderConfigEditor* ByteArrayValuesStreamEncoderConfigEditorFactory::tryCreateConfigEditor( AbstractModelStreamEncoder* encoder ) const
 {
     AbstractModelStreamEncoderConfigEditor* result = 0;
-    KByteArrayValueStreamEncoder* valuesStreamEncoder =
-        qobject_cast<KByteArrayValueStreamEncoder*>( encoder );
+    ByteArrayValueStreamEncoder* valuesStreamEncoder =
+        qobject_cast<ByteArrayValueStreamEncoder*>( encoder );
 
     if( valuesStreamEncoder )
         result = new ByteArrayValuesStreamEncoderConfigEditor( valuesStreamEncoder );

@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kabstractbytearraystreamencoder.h"
+#include "abstractbytearraystreamencoder.h"
 
 // lib
 #include <kbytearraydisplay.h>
@@ -38,12 +38,12 @@ namespace Kasten
 static const int MaxPreviewSize = 100;
 
 
-KAbstractByteArrayStreamEncoder::KAbstractByteArrayStreamEncoder( const QString &remoteTypeName,
+AbstractByteArrayStreamEncoder::AbstractByteArrayStreamEncoder( const QString &remoteTypeName,
                                                                   const QString &remoteMimeType )
  : AbstractModelStreamEncoder( remoteTypeName, remoteMimeType )
 {}
 
-QString KAbstractByteArrayStreamEncoder::modelTypeName( AbstractModel* model, const AbstractModelSelection* selection ) const
+QString AbstractByteArrayStreamEncoder::modelTypeName( AbstractModel* model, const AbstractModelSelection* selection ) const
 {
 Q_UNUSED( selection )
 
@@ -53,7 +53,7 @@ Q_UNUSED( selection )
 }
 
 
-bool KAbstractByteArrayStreamEncoder::encodeToStream( QIODevice *device,
+bool AbstractByteArrayStreamEncoder::encodeToStream( QIODevice *device,
                                                       AbstractModel* model, const AbstractModelSelection* selection )
 {
     const KByteArrayDisplay* byteArrayDisplay = qobject_cast<const KByteArrayDisplay*>( model );
@@ -76,7 +76,7 @@ bool KAbstractByteArrayStreamEncoder::encodeToStream( QIODevice *device,
     return success;
 }
 
-QString KAbstractByteArrayStreamEncoder::previewData( AbstractModel* model, const AbstractModelSelection* selection )
+QString AbstractByteArrayStreamEncoder::previewData( AbstractModel* model, const AbstractModelSelection* selection )
 {
     const KByteArrayDisplay* byteArrayDisplay = qobject_cast<const KByteArrayDisplay*>( model );
 
@@ -105,6 +105,6 @@ QString KAbstractByteArrayStreamEncoder::previewData( AbstractModel* model, cons
     return success ? QString(data) : QString();
 }
 
-KAbstractByteArrayStreamEncoder::~KAbstractByteArrayStreamEncoder() {}
+AbstractByteArrayStreamEncoder::~AbstractByteArrayStreamEncoder() {}
 
 }

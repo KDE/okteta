@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KABSTRACTBYTEARRAYSTREAMENCODER_H
-#define KABSTRACTBYTEARRAYSTREAMENCODER_H
+#ifndef ABSTRACTBYTEARRAYSTREAMENCODER_H
+#define ABSTRACTBYTEARRAYSTREAMENCODER_H
 
 // Kasten core
 #include <abstractmodelstreamencoder.h>
@@ -41,13 +41,13 @@ namespace Kasten
 class KByteArrayDisplay;
 
 
-class KAbstractByteArrayStreamEncoder : public AbstractModelStreamEncoder
+class AbstractByteArrayStreamEncoder : public AbstractModelStreamEncoder
 {
     Q_OBJECT
 
   public:
-    KAbstractByteArrayStreamEncoder( const QString &remoteTypeName, const QString &remoteMimeType );
-    virtual ~KAbstractByteArrayStreamEncoder();
+    AbstractByteArrayStreamEncoder( const QString& remoteTypeName, const QString& remoteMimeType );
+    virtual ~AbstractByteArrayStreamEncoder();
 
   public: // AbstractModelStreamEncoder API
     virtual bool encodeToStream( QIODevice *device, AbstractModel* model, const AbstractModelSelection* selection );

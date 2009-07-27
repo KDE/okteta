@@ -20,11 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KBYTEARRAYSOURCECODESTREAMENCODER_H
-#define KBYTEARRAYSOURCECODESTREAMENCODER_H
+#ifndef BYTEARRAYSOURCECODESTREAMENCODER_H
+#define BYTEARRAYSOURCECODESTREAMENCODER_H
 
 // lib
-#include "kabstractbytearraystreamencoder.h"
+#include "abstractbytearraystreamencoder.h"
 // Qt
 #include <QtCore/QString>
 
@@ -60,13 +60,13 @@ class SourceCodeStreamEncoderSettings
 
 // TODO: General synchronizer would load matching encoder and decoder
 // manually defined by desktopfile
-class KByteArraySourceCodeStreamEncoder : public KAbstractByteArrayStreamEncoder
+class ByteArraySourceCodeStreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
 
   public:
-    KByteArraySourceCodeStreamEncoder();
-    virtual ~KByteArraySourceCodeStreamEncoder();
+    ByteArraySourceCodeStreamEncoder();
+    virtual ~ByteArraySourceCodeStreamEncoder();
 
   public:
     SourceCodeStreamEncoderSettings settings() const;
@@ -76,7 +76,7 @@ class KByteArraySourceCodeStreamEncoder : public KAbstractByteArrayStreamEncoder
     const char* const* dataTypeNames() const;
     int dataTypesCount() const;
 
-  protected: // KAbstractByteArrayStreamEncoder API
+  protected: // AbstractByteArrayStreamEncoder API
     virtual bool encodeDataToStream( QIODevice *device,
                                      const KByteArrayDisplay* byteArrayView,
                                      const Okteta::AbstractByteArrayModel *byteArrayModel,
@@ -90,8 +90,8 @@ class KByteArraySourceCodeStreamEncoder : public KAbstractByteArrayStreamEncoder
 };
 
 
-inline SourceCodeStreamEncoderSettings KByteArraySourceCodeStreamEncoder::settings() const { return mSettings; }
-inline void KByteArraySourceCodeStreamEncoder::setSettings( const SourceCodeStreamEncoderSettings& settings )
+inline SourceCodeStreamEncoderSettings ByteArraySourceCodeStreamEncoder::settings() const { return mSettings; }
+inline void ByteArraySourceCodeStreamEncoder::setSettings( const SourceCodeStreamEncoderSettings& settings )
 {
     mSettings = settings;
     emit settingsChanged();

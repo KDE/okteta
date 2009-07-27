@@ -23,7 +23,7 @@
 #include "bytearraytextstreamencoderpreview.h"
 
 // lib
-#include "kabstractbytearraystreamencoder.h"
+#include "abstractbytearraystreamencoder.h"
 // KDE
 #include <KTextEdit>
 #include <KGlobalSettings>
@@ -32,7 +32,7 @@
 namespace Kasten
 {
 
-ByteArrayTextStreamEncoderPreview::ByteArrayTextStreamEncoderPreview( KAbstractByteArrayStreamEncoder* encoder )
+ByteArrayTextStreamEncoderPreview::ByteArrayTextStreamEncoderPreview( AbstractByteArrayStreamEncoder* encoder )
  : mEncoder( encoder ), mModel( 0 )
 {
     mWidget = new KTextEdit(); // TODO: use Kate for syntax highlighting

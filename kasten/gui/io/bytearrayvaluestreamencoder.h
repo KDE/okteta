@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,13 +20,11 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYVIEWTEXTSTREAMENCODER_H
-#define BYTEARRAYVIEWTEXTSTREAMENCODER_H
+#ifndef BYTEARRAYVALUESTREAMENCODER_H
+#define BYTEARRAYVALUESTREAMENCODER_H
 
 // lib
-#include "kabstractbytearraystreamencoder.h"
-// Okteta gui
-// #include <offsetformat.h>
+#include "abstractbytearraystreamencoder.h"
 // Okteta core
 #include <oktetacore.h>
 // Qt
@@ -36,43 +34,47 @@
 namespace Kasten
 {
 
-class ByteArrayViewTextStreamEncoderSettings
+class ValueStreamEncoderSettings
 {
   public:
-    ByteArrayViewTextStreamEncoderSettings();
+    ValueStreamEncoderSettings();
   public:
-//     Okteta::OffsetFormat::Format offsetFormat;
-    int codingWidth;
-    int firstLineOffset;
-    int startOffset;
-    int delta;
     Okteta::ValueCoding valueCoding;
-    QString codecName;
+    QString separation;
     QChar undefinedChar;
     QChar substituteChar;
-    QString separation;
-//     Okteta::CharCodec *CharCodec;
-//     Okteta::OffsetFormat::print printFunction;
 };
 
-// TODO: this could rather be one of the default cop
-class ByteArrayViewTextStreamEncoder : public KAbstractByteArrayStreamEncoder
+
+class ByteArrayValueStreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
 
   public:
-    ByteArrayViewTextStreamEncoder();
-    virtual ~ByteArrayViewTextStreamEncoder();
+    ByteArrayValueStreamEncoder();
+    virtual ~ByteArrayValueStreamEncoder();
 
-  protected: // KAbstractByteArrayStreamEncoder API
+  public:
+    ValueStreamEncoderSettings settings() const;
+    void setSettings( const ValueStreamEncoderSettings& settings );
+
+  protected: // AbstractByteArrayStreamEncoder API
     virtual bool encodeDataToStream( QIODevice *device,
                                      const KByteArrayDisplay* byteArrayView,
                                      const Okteta::AbstractByteArrayModel *byteArrayModel,
                                      const KDE::Section &section );
 
   protected:
-    ByteArrayViewTextStreamEncoderSettings mSettings;
+    ValueStreamEncoderSettings mSettings;
 };
+
+
+inline ValueStreamEncoderSettings ByteArrayValueStreamEncoder::settings() const { return mSettings; }
+inline void ByteArrayValueStreamEncoder::setSettings( const ValueStreamEncoderSettings& settings )
+{
+    mSettings = settings;
+    emit settingsChanged();
+}
 
 }
 

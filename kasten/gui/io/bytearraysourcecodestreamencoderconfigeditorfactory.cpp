@@ -24,7 +24,7 @@
 
 // lib
 #include "bytearraysourcecodestreamencoderconfigeditor.h"
-#include "kbytearraysourcecodestreamencoder.h"
+#include "bytearraysourcecodestreamencoder.h"
 
 
 namespace Kasten
@@ -38,8 +38,8 @@ ByteArraySourceCodeStreamEncoderConfigEditorFactory::ByteArraySourceCodeStreamEn
 AbstractModelStreamEncoderConfigEditor* ByteArraySourceCodeStreamEncoderConfigEditorFactory::tryCreateConfigEditor( AbstractModelStreamEncoder* encoder ) const
 {
     AbstractModelStreamEncoderConfigEditor* result = 0;
-    KByteArraySourceCodeStreamEncoder* sourceCodeStreamEncoder =
-        qobject_cast<KByteArraySourceCodeStreamEncoder*>( encoder );
+    ByteArraySourceCodeStreamEncoder* sourceCodeStreamEncoder =
+        qobject_cast<ByteArraySourceCodeStreamEncoder*>( encoder );
 
     if( sourceCodeStreamEncoder )
         result = new ByteArraySourceCodeStreamEncoderConfigEditor( sourceCodeStreamEncoder );
