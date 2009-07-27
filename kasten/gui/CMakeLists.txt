@@ -1,5 +1,5 @@
-set( KASTEN_REL_DIR ../../../libs/kasten )
-set( OKTETA_REL_DIR ../../.. )
+set( KASTEN_REL_DIR ../../libs/kasten )
+set( OKTETA_REL_DIR ../.. )
 
 include_directories(
   ../core/document

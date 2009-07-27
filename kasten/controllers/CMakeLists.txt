@@ -1,5 +1,5 @@
-set( KASTEN_REL_DIR ../../../libs/kasten )
-set( OKTETA_REL_DIR ../../.. )
+set( KASTEN_REL_DIR ../../libs/kasten )
+set( OKTETA_REL_DIR ../.. )
 
 include_directories(
   ../gui/view
@@ -18,7 +18,7 @@ include_directories(
   view/libbytearraychecksum
   view/libbytearrayfilter
   view/libfinddialog
-  ../../../libs/framesprint
+  ../../libs/framesprint
   ${OKTETA_REL_DIR}/gui
   ${OKTETA_REL_DIR}/gui/libcolumnsview
   ${OKTETA_REL_DIR}/core

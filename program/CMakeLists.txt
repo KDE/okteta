@@ -1,8 +1,6 @@
 project( oktetaprogram )
 
-add_subdirectory( oktetakasten )
-
-set( OKTETAKASTEN_REL_DIR oktetakasten )
+set( OKTETAKASTEN_REL_DIR ../kasten )
 set( KASTEN_REL_DIR ../libs/kasten )
 set( OKTETA_REL_DIR .. )
 

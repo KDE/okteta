@@ -1,5 +1,5 @@
 set( KASTEN_REL_DIR ../../libs/kasten )
-set( OKTETAKASTEN_REL_DIR ../../program/oktetakasten )
+set( OKTETAKASTEN_REL_DIR ../../kasten )
 set( OKTETA_REL_DIR ../.. )
 
 include_directories(
