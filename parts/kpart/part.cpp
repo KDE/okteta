@@ -62,7 +62,8 @@
 #include <QtCore/QList>
 
 
-static const char RCFileName[] = "oktetapartui.rc";
+static const char ReadOnlyUIFileName[] =  "oktetapartreadonlyui.rc";
+static const char BrowserUIFileName[] =   "oktetapartbrowserui.rc";
 
 
 OktetaPart::OktetaPart( QWidget* parentWidget,
@@ -102,8 +103,9 @@ OktetaPart::OktetaPart( QWidget* parentWidget,
     setWidget( widget );
     setAutoDeleteWidget( true );
 
-    setXMLFile( RCFileName );
+    setXMLFile( browserViewWanted ? BrowserUIFileName : ReadOnlyUIFileName );
 
+    // TODO: save_as
 //     mControllers.append( new ExportController(mProgram->viewManager(),mProgram->documentManager(),this) );
     mControllers.append( new Kasten::ZoomController(this) );
     mControllers.append( new Kasten::SelectController(this) );
