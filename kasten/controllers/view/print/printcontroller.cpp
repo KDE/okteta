@@ -51,6 +51,10 @@ void PrintController::setTargetModel( AbstractModel* model )
     mPrintTool->setTargetModel( model );
 }
 
+void PrintController::print()
+{
+    mPrintTool->print();
+}
 
 PrintController::~PrintController()
 {

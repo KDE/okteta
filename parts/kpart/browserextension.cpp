@@ -25,8 +25,9 @@
 // part
 #include "part.h"
 // Okteta Kasten
-#include <kbytearraydocument.h>
+#include <print/printcontroller.h>
 #include <kbytearraydisplay.h>
+#include <kbytearraydocument.h>
 // Qt
 #include <QtGui/QClipboard>
 #include <QtGui/QApplication>
@@ -39,6 +40,9 @@ OktetaBrowserExtension::OktetaBrowserExtension( OktetaPart* part )
     setObjectName( "oktetapartbrowserextension" );
 
     connect( mPart, SIGNAL(hasSelectedDataChanged( bool )), SLOT(onSelectionChanged( bool )) );
+
+    emit enableAction( "copy", false );
+    emit enableAction( "print", true);
 }
 
 void OktetaBrowserExtension::copy()
@@ -48,6 +52,11 @@ void OktetaBrowserExtension::copy()
       return;
 
     QApplication::clipboard()->setMimeData( data, QClipboard::Clipboard );
+}
+
+void OktetaBrowserExtension::print()
+{
+    mPart->printController()->print();
 }
 
 

@@ -117,7 +117,8 @@ OktetaPart::OktetaPart( QWidget* parentWidget,
 //     mControllers.append( new Kasten::SelectRangeController(mGroupedViews,this) );
 //     mControllers.append( new Kasten::InsertPatternController(this) );
 //     mControllers.append( new Kasten::BookmarksController(this) );
-//     mControllers.append( new Kasten::PrintController(this) ); TODO: print is done by BrowserExtension
+    mPrintController = new Kasten::PrintController( this );
+    mControllers.append( mPrintController );
     mControllers.append( new Kasten::ViewConfigController(this) );
     mControllers.append( new Kasten::ViewModeController(this) );
 
@@ -138,6 +139,8 @@ OktetaPart::OktetaPart( QWidget* parentWidget,
     if( browserViewWanted )
         new OktetaBrowserExtension( this );
 }
+
+Kasten::PrintController* OktetaPart::printController() const { return mPrintController; }
 
 bool OktetaPart::openFile()
 {

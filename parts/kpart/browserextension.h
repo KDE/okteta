@@ -48,6 +48,7 @@ class OktetaBrowserExtension : public KParts::BrowserExtension
   public Q_SLOTS:
     /** copy text to clipboard */
     void copy();
+    void print();
 
   private Q_SLOTS:
     /** selection has changed */

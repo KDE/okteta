@@ -29,6 +29,7 @@
 namespace Kasten {
 class KByteArrayDisplay;
 class KByteArrayDocument;
+class PrintController;
 class AbstractXmlGuiController;
 class AbstractDocument;
 }
@@ -46,6 +47,9 @@ class OktetaPart : public KParts::ReadOnlyPart
     OktetaPart( QWidget *parentWidget, QObject *parent,
                 bool browserViewWanted );
     virtual ~OktetaPart();
+
+  public:
+    Kasten::PrintController* printController() const;
 
   Q_SIGNALS:
     void hasSelectedDataChanged( bool hasSelectedData );
@@ -68,6 +72,7 @@ class OktetaPart : public KParts::ReadOnlyPart
     Kasten::KByteArrayDocument* mDocument;
     Kasten::KByteArrayDisplay* mDisplay;
 
+    Kasten::PrintController* mPrintController;
     QList<Kasten::AbstractXmlGuiController*> mControllers;
 };
 
