@@ -71,6 +71,8 @@ OktetaPart::OktetaPart( QWidget* parentWidget,
                         bool browserViewWanted )
   : KParts::ReadOnlyPart( parent )
 {
+Q_UNUSED( parentWidget )
+
     setComponentData( OktetaPartFactory::componentData() );
 
     KGlobal::locale()->insertCatalog( "liboktetacore" );
