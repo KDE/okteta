@@ -37,7 +37,7 @@ set( oktetapart_SRCS
   partfactory.cpp
 )
 
-kde4_add_plugin( oktetapart WITH_PREFIX ${oktetapart_SRCS})
+kde4_add_plugin( oktetapart  ${oktetapart_SRCS})
 
 
 target_link_libraries( oktetapart

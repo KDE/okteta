@@ -17,4 +17,4 @@ MimeType=all/allfiles;
 #MimeType=application/octet-stream
 X-KDE-ServiceTypes=KParts/ReadOnlyPart,Browser/View
 #,KParts/ReadWritePart
-X-KDE-Library=liboktetapart
+X-KDE-Library=oktetapart
