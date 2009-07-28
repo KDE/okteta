@@ -35,6 +35,7 @@ set( oktetapart_SRCS
   part.cpp
   browserextension.cpp
   partfactory.cpp
+  main.cpp
 )
 
 kde4_add_plugin( oktetapart  ${oktetapart_SRCS})

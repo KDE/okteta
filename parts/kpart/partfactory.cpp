@@ -86,6 +86,3 @@ const KComponentData &OktetaPartFactory::componentData()
     }
     return *_componentData;
 }
-
-
-K_EXPORT_COMPONENT_FACTORY( oktetapart, OktetaPartFactory )
