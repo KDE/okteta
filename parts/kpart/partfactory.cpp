@@ -63,8 +63,9 @@ OktetaPartFactory::~OktetaPartFactory()
 
 KParts::Part* OktetaPartFactory::createPartObject( QWidget *parentWidget,
                                                    QObject *parent,
-                                                   const char *cn, const QStringList &/*args*/ )
+                                                   const char* cn, const QStringList& args )
 {
+Q_UNUSED( args )
     const QByteArray classname( cn );
     const bool browserViewWanted = ( classname == "Browser/View" );
     //bool ReadOnlyWanted = (BrowserViewWanted || ( Classname == "KParts::ReadOnlyPart" ));
