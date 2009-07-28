@@ -49,9 +49,6 @@ target_link_libraries( oktetapart
   kastencore
   ${KDE4_KPARTS_LIBS}
 )
-if( QCA2_FOUND )
-  target_link_libraries( oktetapart ${QCA2_LIBRARIES} )
-endif( QCA2_FOUND )
 
 install( TARGETS oktetapart  DESTINATION ${PLUGIN_INSTALL_DIR})
 install( FILES oktetapart.desktop  DESTINATION ${SERVICES_INSTALL_DIR} )
