@@ -214,6 +214,7 @@ set( OKTETA_KASTEN_CONTROLLERS_SRCS
   ${VIEWCONFIGCONTROLLER_SRCS}
   ${VIEWSTATUSCONTROLLER_SRCS}
   ${VIEWMODECONTROLLER_SRCS}
+  ${LIBFRAMESPRINT_SRCS}
 )
 
 set( okteta_kastencontrollers_LIB_HDRS
@@ -258,7 +259,6 @@ target_link_libraries( okteta_kastencontrollers
   kastencore
   oktetagui
   oktetacore
-  framesprint
   ${KDE4_KIO_LIBS}
   ${KDE4_KDEUI_LIBS}
 )
