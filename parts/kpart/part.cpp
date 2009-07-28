@@ -69,9 +69,7 @@ static const char BrowserUIFileName[] =   "oktetapartbrowserui.rc";
 OktetaPart::OktetaPart( QWidget* parentWidget,
                         QObject* parent,
                         bool browserViewWanted )
-  : KParts::ReadOnlyPart( parent ),
-    mDocument( 0 ),
-    mDisplay( 0 )
+  : KParts::ReadOnlyPart( parent )
 {
     setComponentData( OktetaPartFactory::componentData() );
 
@@ -137,6 +135,11 @@ OktetaPart::OktetaPart( QWidget* parentWidget,
 //     addTool( new InfoToolView(new InfoTool()) );
 //     addTool( new PODDecoderToolView(new PODDecoderTool()) );
 //     addTool( new BookmarksToolView(new BookmarksTool()) );
+
+    // TODO: BrowserExtension might rely on existing objects (session snap while loadJob),
+    // so this hack just creates some dummies
+    mDocument = new Kasten::KByteArrayDocument( QString() );
+    mDisplay = new Kasten::KByteArrayDisplay( mDocument );
 
     if( browserViewWanted )
         new OktetaBrowserExtension( this );
