@@ -250,11 +250,11 @@ set( okteta_kastencontrollers_LIB_HDRS
   document/overwriteonly/overwriteonlycontroller.h
 )
 
-kde4_add_library( okteta_kastencontrollers  SHARED ${OKTETA_KASTEN_CONTROLLERS_SRCS} )
+kde4_add_library( oktetakastencontrollers  SHARED ${OKTETA_KASTEN_CONTROLLERS_SRCS} )
 
-target_link_libraries( okteta_kastencontrollers
-  okteta_kastengui
-  okteta_kastencore
+target_link_libraries( oktetakastencontrollers
+  oktetakastengui
+  oktetakastencore
   kastengui
   kastencore
   oktetagui
@@ -263,11 +263,11 @@ target_link_libraries( okteta_kastencontrollers
   ${KDE4_KDEUI_LIBS}
 )
 if( QCA2_FOUND )
-  target_link_libraries( okteta_kastencontrollers ${QCA2_LIBRARIES} )
+  target_link_libraries( oktetakastencontrollers ${QCA2_LIBRARIES} )
 endif( QCA2_FOUND )
 
-set_target_properties( okteta_kastencontrollers  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+set_target_properties( oktetakastencontrollers  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 
-install( TARGETS okteta_kastencontrollers  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS oktetakastencontrollers  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${oktete_kastencore_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )

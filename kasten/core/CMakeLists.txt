@@ -49,16 +49,16 @@ set( oktete_kastencore_LIB_HDRS
   io/filesystem/kbytearrayrawfilesynchronizerfactory.h
 )
 
-kde4_add_library( okteta_kastencore  SHARED ${okteta_kastencore_LIB_SRCS} )
+kde4_add_library( oktetakastencore  SHARED ${okteta_kastencore_LIB_SRCS} )
 
-target_link_libraries( okteta_kastencore
+target_link_libraries( oktetakastencore
   kastencore
   oktetacore
   ${KDE4_KIO_LIBS}
 )
-set_target_properties( okteta_kastencore  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+set_target_properties( oktetakastencore  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 
-install( TARGETS okteta_kastencore  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS oktetakastencore  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${oktete_kastencore_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )
 

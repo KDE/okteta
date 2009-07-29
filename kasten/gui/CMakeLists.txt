@@ -88,18 +88,18 @@ set( oktete_kastengui_LIB_HDRS
   ${okteta_kastengui_io_HDRS}
 )
 
-kde4_add_library( okteta_kastengui  SHARED ${okteta_kastengui_LIB_SRCS} )
+kde4_add_library( oktetakastengui  SHARED ${okteta_kastengui_LIB_SRCS} )
 
-target_link_libraries( okteta_kastengui
-  okteta_kastencore
+target_link_libraries( oktetakastengui
+  oktetakastencore
   kastengui
   kastencore
   oktetagui
   oktetacore
   ${KDE4_KDEUI_LIBS}
 )
-set_target_properties( okteta_kastengui  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+set_target_properties( oktetakastengui  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 
-install( TARGETS okteta_kastengui  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS oktetakastengui  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${oktete_kastengui_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )
