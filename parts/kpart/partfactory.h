@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta KPart module, part of the KDE project.
 
-    Copyright 2003,2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,11 +23,8 @@
 #ifndef OKTETAPARTFACTORY_H
 #define OKTETAPARTFACTORY_H
 
-
 // KDE
 #include <kparts/factory.h>
-
-class KComponentData;
 
 
 class OktetaPartFactory : public KParts::Factory
@@ -36,15 +33,13 @@ class OktetaPartFactory : public KParts::Factory
 
   public:
     OktetaPartFactory();
+
     virtual ~OktetaPartFactory();
 
   public:
-    virtual KParts::Part* createPartObject( QWidget *parentWidget,
-                                            QObject *parent,
-                                            const char *classname, const QStringList &args );
-
-  public:
-    static const KComponentData &componentData();
+    virtual KParts::Part* createPartObject( QWidget* parentWidget,
+                                            QObject* parent,
+                                            const char* className, const QStringList& args );
 };
 
 #endif

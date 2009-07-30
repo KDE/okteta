@@ -37,22 +37,33 @@ class QVBoxLayout;
 template <class T> class QList;
 
 
-class OktetaPart : public KParts::ReadOnlyPart
+class OktetaPart : public KParts::ReadWritePart
 {
     Q_OBJECT
 
     friend class OktetaBrowserExtension;
 
   public:
-    OktetaPart( QWidget *parentWidget, QObject *parent,
-                bool browserViewWanted );
+    enum Modus { ReadOnlyModus = 0, BrowserViewModus = 1, ReadWriteModus = 2 };
+
+  public:
+    OktetaPart( QObject* parent,
+                const KComponentData& componentData,
+                Modus modus );
+
     virtual ~OktetaPart();
 
   public:
     Kasten::PrintController* printController() const;
 
+  public: // KParts::ReadWritePart API
+    virtual void setReadWrite( bool readWrite = true );
+
   Q_SIGNALS:
     void hasSelectedDataChanged( bool hasSelectedData );
+
+  protected: // KParts::ReadWritePart API
+    virtual bool saveFile();
 
   protected: // KParts::ReadOnlyPart API
     virtual bool openFile();
@@ -65,8 +76,10 @@ class OktetaPart : public KParts::ReadOnlyPart
 
   protected Q_SLOTS:
     void onDocumentLoaded( Kasten::AbstractDocument* document );
+    void onModified( int states );
 
   private:
+    const Modus mModus;
     QVBoxLayout* mLayout;
 
     Kasten::KByteArrayDocument* mDocument;

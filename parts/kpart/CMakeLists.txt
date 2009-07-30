@@ -53,5 +53,8 @@ target_link_libraries( oktetapart
 
 install( TARGETS oktetapart  DESTINATION ${PLUGIN_INSTALL_DIR})
 install( FILES oktetapart.desktop  DESTINATION ${SERVICES_INSTALL_DIR} )
-install( FILES oktetapartreadonlyui.rc oktetapartbrowserui.rc  DESTINATION ${DATA_INSTALL_DIR}/oktetapart )
+install(
+  FILES oktetapartreadonlyui.rc oktetapartbrowserui.rc oktetapartreadwriteui.rc
+  DESTINATION ${DATA_INSTALL_DIR}/oktetapart
+)
 

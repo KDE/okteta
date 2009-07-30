@@ -1,0 +1,54 @@
+<!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
+<kpartgui name="oktetapartreadonly" version="1">
+
+<MenuBar>
+  <Menu name="file">
+    <Action name="file_save_as" group="save_merge" />
+    <Action name="export" group="save_merge" />
+    <Action name="file_print" group="print_merge" />
+  </Menu>
+  <Menu name="edit">
+    <Action name="edit_copy" group="edit_paste_merge" />
+    <Action name="copy_as" group="edit_paste_merge" />
+    <Menu name="insert" group="edit_paste_merge">
+      <text context="@title:menu">Insert</text>
+      <Action name="insert_pattern" />
+      <Action name="insert_file" />
+    </Menu>
+    <Separator group="edit_paste_merge" />
+    <Action name="edit_select_all" group="edit_select_merge" />
+    <Action name="edit_deselect" group="edit_select_merge" />
+    <Action name="set_verticalSelect" group="edit_select_merge" />
+    <Action name="edit_select" group="edit_select_merge" />
+    <Separator group="edit_select_merge" />
+    <Action name="edit_find" group="edit_find_merge" />
+    <Action name="edit_find_next" group="edit_find_merge" />
+    <Action name="edit_find_prev" group="edit_find_merge" />
+    <Action name="edit_replace" group="edit_find_merge" />
+    <Separator group="edit_find_merge" />
+    <Action name="set_overwrite" group="edit_select_merge" />
+    <Separator group="edit_find_merge" />
+    <Action name="goto_offset" group="edit_find_merge" />
+  </Menu>
+  <Menu name="view">
+    <Action name="view_zoom_in" group="view_operations" />
+    <Action name="view_zoom_out" group="view_operations" />
+    <Separator group="view_operations" />
+    <Action name="view_showsnonprinting" group="view_operations" />
+    <Action name="view_lineoffset" group="view_operations" />
+    <Action name="togglecolumns" group="view_operations" />
+    <Separator group="view_operations" />
+    <Action name="view_valuecoding" group="view_operations" />
+    <Action name="view_charencoding" group="view_operations" />
+    <Separator group="view_operations" />
+    <Action name="resizestyle" group="view_operations" />
+    <Action name="viewmode" group="view_operations" />
+  </Menu>
+</MenuBar>
+
+<ToolBar name="mainToolBar"><text>Main Toolbar</text>
+  <Action name="view_zoom_in" />
+  <Action name="view_zoom_out" />
+</ToolBar>
+
+</kpartgui>

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta KPart module, part of the KDE project.
 
-    Copyright 2003,2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -34,7 +34,7 @@
 static const char PartId[] =          "oktetapart";
 static const char PartName[] =        I18N_NOOP("OktetaPart");
 static const char PartDescription[] = I18N_NOOP("Embedded hex editor");
-static const char PartVersion[] =     "0.4.0";
+static const char PartVersion[] =     "0.5.0";
 static const char PartCopyright[] =   "2003-2009 Friedrich W. H. Kossebau";
 // Author
 static const char FWHKName[] =         "Friedrich W. H. Kossebau";
@@ -42,13 +42,40 @@ static const char FWHKTask[] =         I18N_NOOP("Author");
 static const char FWHKEmailAddress[] = "kossebau@kde.org";
 
 
-static KComponentData *_componentData = 0;
+static KComponentData* _componentData = 0;
 static KAboutData* _aboutData = 0;
 
 
 OktetaPartFactory::OktetaPartFactory()
- : KParts::Factory()
 {
+// TODO: also load encoder and other plugins here
+    _aboutData = new KAboutData( PartId, 0, ki18n(PartName), PartVersion, ki18n(PartDescription),
+                                 KAboutData::License_GPL_V2, ki18n(PartCopyright), KLocalizedString(), 0, FWHKEmailAddress );
+    _aboutData->addAuthor( ki18n(FWHKName), ki18n(FWHKTask), FWHKEmailAddress );
+    _componentData = new KComponentData( _aboutData );
+
+    KGlobal::locale()->insertCatalog( "liboktetacore" );
+    KGlobal::locale()->insertCatalog( "libkasten" );
+    KGlobal::locale()->insertCatalog( "liboktetakasten" );
+}
+
+
+KParts::Part* OktetaPartFactory::createPartObject( QWidget* parentWidget,
+                                                   QObject* parent,
+                                                   const char* cn, const QStringList& args )
+{
+Q_UNUSED( parentWidget )
+Q_UNUSED( args )
+
+    const QByteArray className( cn );
+    const OktetaPart::Modus modus =
+        ( className == "KParts::ReadOnlyPart" ) ? OktetaPart::ReadOnlyModus :
+        ( className == "Browser/View" ) ?         OktetaPart::BrowserViewModus :
+        /* else */                                OktetaPart::ReadWriteModus;
+
+    OktetaPart* part = new OktetaPart( parent, *_componentData, modus );
+
+    return part;
 }
 
 
@@ -56,34 +83,4 @@ OktetaPartFactory::~OktetaPartFactory()
 {
     delete _componentData;
     delete _aboutData;
-
-    _componentData = 0;
-}
-
-
-KParts::Part* OktetaPartFactory::createPartObject( QWidget *parentWidget,
-                                                   QObject *parent,
-                                                   const char* cn, const QStringList& args )
-{
-Q_UNUSED( args )
-    const QByteArray classname( cn );
-    const bool browserViewWanted = ( classname == "Browser/View" );
-    //bool ReadOnlyWanted = (BrowserViewWanted || ( Classname == "KParts::ReadOnlyPart" ));
-
-    OktetaPart* part = new OktetaPart( parentWidget, parent, browserViewWanted );
-
-    return part;
-}
-
-
-const KComponentData &OktetaPartFactory::componentData()
-{
-    if( !_componentData )
-    {
-        _aboutData = new KAboutData( PartId, 0, ki18n(PartName), PartVersion, ki18n(PartDescription),
-                                    KAboutData::License_GPL_V2, ki18n(PartCopyright), KLocalizedString(), 0, FWHKEmailAddress );
-        _aboutData->addAuthor( ki18n(FWHKName), ki18n(FWHKTask), FWHKEmailAddress );
-        _componentData = new KComponentData( _aboutData );
-    }
-    return *_componentData;
 }
