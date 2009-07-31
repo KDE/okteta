@@ -24,7 +24,7 @@
 #define OKTETAPART_H
 
 // KDE
-#include <kparts/part.h>
+#include <KParts/ReadWritePart>
 
 namespace Kasten {
 class KByteArrayDisplay;

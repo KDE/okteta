@@ -24,7 +24,7 @@
 #define OKTETAPARTFACTORY_H
 
 // KDE
-#include <kparts/factory.h>
+#include <KParts/Factory>
 
 
 class OktetaPartFactory : public KParts::Factory

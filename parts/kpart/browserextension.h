@@ -25,7 +25,7 @@
 
 
 // KDE
-#include <kparts/browserextension.h>
+#include <KParts/BrowserExtension>
 
 class OktetaPart;
 
