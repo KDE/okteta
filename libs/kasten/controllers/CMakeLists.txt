@@ -149,7 +149,6 @@ set( kastencontrollers_LIB_HDRS
   view/zoom/zoomcontroller.h
   view/zoom/zoombarcontroller.h
   view/version/versioncontroller.h
-  viewsystem/close/closecontroller.h
   shellwindow/fullscreen/fullscreencontroller.h
   shellwindow/toollistmenu/toollistmenucontroller.h
   shellwindow/switchview/switchviewcontroller.h
