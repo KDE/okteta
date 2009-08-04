@@ -9,6 +9,7 @@ include_directories(
   ${OKTETAKASTEN_REL_DIR}/controllers/view
   ${OKTETAKASTEN_REL_DIR}/controllers/view/libfinddialog
   ${OKTETAKASTEN_REL_DIR}/gui
+  ${OKTETAKASTEN_REL_DIR}/gui/io
   ${OKTETAKASTEN_REL_DIR}/gui/view
   ${OKTETAKASTEN_REL_DIR}/core
   ${OKTETAKASTEN_REL_DIR}/core/io

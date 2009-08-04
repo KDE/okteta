@@ -78,22 +78,6 @@ OktetaPart::OktetaPart( QObject* parent,
 {
     setComponentData( componentData );
 
-//     QList<AbstractModelStreamEncoder*> encoderList;
-//     encoderList << new ByteArrayValueStreamEncoder()
-//                 << new ByteArrayTextStreamEncoder()
-//                 << new ByteArraySourceCodeStreamEncoder()
-//                 << new ByteArrayViewTextStreamEncoder();
-
-//     QList<AbstractModelStreamEncoderConfigEditorFactory*> encoderConfigEditorFactoryList;
-//     encoderConfigEditorFactoryList << new ByteArraySourceCodeStreamEncoderConfigEditorFactory()
-//                                    << new ByteArrayValuesStreamEncoderConfigEditorFactory();
-
-//     mDocumentManager->codecManager()->setEncoders( encoderList );
-//     mDocumentManager->syncManager()->setDocumentSynchronizerFactory( new KByteArrayRawFileSynchronizerFactory() );
-
-//     mViewManager->codecViewManager()->setEncoderConfigEditorFactories( encoderConfigEditorFactoryList );
-
-
     QWidget* widget = new QWidget();
     mLayout = new QVBoxLayout( widget );
     mLayout->setMargin( 0 );

@@ -24,6 +24,13 @@
 
 // part
 #include "part.h"
+// Okteta Kasten
+#include <bytearraysourcecodestreamencoderconfigeditorfactory.h>
+#include <bytearrayvaluesstreamencoderconfigeditorfactory.h>
+#include <bytearraytextstreamencoder.h>
+#include <bytearrayvaluestreamencoder.h>
+#include <bytearraysourcecodestreamencoder.h>
+#include <bytearrayviewtextstreamencoder.h>
 // KDE
 #include <KComponentData>
 #include <KAboutData>
@@ -57,6 +64,22 @@ OktetaPartFactory::OktetaPartFactory()
     KGlobal::locale()->insertCatalog( "liboktetacore" );
     KGlobal::locale()->insertCatalog( "libkasten" );
     KGlobal::locale()->insertCatalog( "liboktetakasten" );
+
+
+//     QList<AbstractModelStreamEncoder*> encoderList;
+//     encoderList << new ByteArrayValueStreamEncoder()
+//                 << new ByteArrayTextStreamEncoder()
+//                 << new ByteArraySourceCodeStreamEncoder()
+//                 << new ByteArrayViewTextStreamEncoder();
+
+//     QList<AbstractModelStreamEncoderConfigEditorFactory*> encoderConfigEditorFactoryList;
+//     encoderConfigEditorFactoryList << new ByteArraySourceCodeStreamEncoderConfigEditorFactory()
+//                                    << new ByteArrayValuesStreamEncoderConfigEditorFactory();
+
+//     mDocumentManager->codecManager()->setEncoders( encoderList );
+//     mDocumentManager->syncManager()->setDocumentSynchronizerFactory( new KByteArrayRawFileSynchronizerFactory() );
+
+//     mViewManager->codecViewManager()->setEncoderConfigEditorFactories( encoderConfigEditorFactoryList );
 }
 
 
