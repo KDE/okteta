@@ -51,6 +51,7 @@
 #include <io/clipboard/clipboardcontroller.h>
 #include <io/copyas/copyascontroller.h>
 #include <io/export/exportcontroller.h>
+#include <view/version/versioncontroller.h>
 #include <view/zoom/zoomcontroller.h>
 #include <view/zoom/zoombarcontroller.h>
 #include <view/select/selectcontroller.h>
@@ -87,6 +88,10 @@ OktetaPart::OktetaPart( QObject* parent,
 
     setXMLFile( UIFileName[modus] );
 
+    if( modus == ReadWriteModus )
+        mControllers.append( new Kasten::VersionController(this) );
+    if( modus == ReadWriteModus )
+        mControllers.append( new Kasten::ReadOnlyController(this) );
     // TODO: save_as
 //     mControllers.append( new ExportController(mProgram->viewManager(),mProgram->documentManager(),this) );
     mControllers.append( new Kasten::ZoomController(this) );
@@ -97,7 +102,8 @@ OktetaPart::OktetaPart( QObject* parent,
     if( modus == ReadWriteModus )
         mControllers.append( new Kasten::OverwriteModeController(this) );
     mControllers.append( new Kasten::SearchController(this,widget) );
-//     mControllers.append( new Kasten::ReplaceController(this,widget) );
+    if( modus == ReadWriteModus )
+        mControllers.append( new Kasten::ReplaceController(this,widget) );
 //     mControllers.append( new Kasten::GotoOffsetController(mGroupedViews,this) );
 //     mControllers.append( new Kasten::SelectRangeController(mGroupedViews,this) );
     if( modus == ReadWriteModus )

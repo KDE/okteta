@@ -1,14 +1,25 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="oktetapartreadonly" version="1">
+<kpartgui name="oktetapartreadwrite" version="1">
 
 <MenuBar>
   <Menu name="file">
+    <Action name="file_save" group="save_merge" /> <!-- TODO: why isn't this offered by the host? -->
     <Action name="file_save_as" group="save_merge" />
     <Action name="export" group="save_merge" />
     <Action name="file_print" group="print_merge" />
+    <Menu name="permission" group="print_merge">
+      <text context="@title:menu">Permissions</text>
+      <Action name="isreadonly" />
+      <Action name="isoverwriteonly" />
+    </Menu>
   </Menu>
   <Menu name="edit">
+    <Action name="edit_undo" group="edit_undo_merge" />
+    <Action name="edit_redo" group="edit_undo_merge" />
+    <Separator group="edit_undo_merge" />
+    <Action name="edit_cut" group="edit_paste_merge" />
     <Action name="edit_copy" group="edit_paste_merge" />
+    <Action name="edit_paste" group="edit_paste_merge" />
     <Action name="copy_as" group="edit_paste_merge" />
     <Menu name="insert" group="edit_paste_merge">
       <text context="@title:menu">Insert</text>
@@ -18,7 +29,6 @@
     <Separator group="edit_paste_merge" />
     <Action name="edit_select_all" group="edit_select_merge" />
     <Action name="edit_deselect" group="edit_select_merge" />
-    <Action name="set_verticalSelect" group="edit_select_merge" />
     <Action name="edit_select" group="edit_select_merge" />
     <Separator group="edit_select_merge" />
     <Action name="edit_find" group="edit_find_merge" />
@@ -47,8 +57,12 @@
 </MenuBar>
 
 <ToolBar name="mainToolBar"><text>Main Toolbar</text>
-  <Action name="view_zoom_in" />
-  <Action name="view_zoom_out" />
+  <Action name="edit_undo" group="edit_operations" />
+  <Action name="edit_redo" group="edit_operations" />
+  <Separator/>
+  <Action name="edit_find" group="edit_operations" />
+  <Action name="edit_find_next" group="edit_operations" />
+  <Action name="edit_find_last" group="edit_operations" />
 </ToolBar>
 
 </kpartgui>
