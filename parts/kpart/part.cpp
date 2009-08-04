@@ -190,7 +190,9 @@ void OktetaPart::onDocumentLoaded( Kasten::AbstractDocument* document )
         mDisplay->setShowsNonprinting( false );
         connect( mDisplay, SIGNAL(hasSelectedDataChanged( bool )), SIGNAL(hasSelectedDataChanged( bool )) );
 
-        mLayout->addWidget( mDisplay->widget() );
+        QWidget* displayWidget = mDisplay->widget();
+        mLayout->addWidget( displayWidget );
+        mLayout->parentWidget()->setFocusProxy( displayWidget );
 
         foreach( Kasten::AbstractXmlGuiController* controller, mControllers )
             controller->setTargetModel( mDisplay );
