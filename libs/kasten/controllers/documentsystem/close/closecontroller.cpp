@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -29,6 +29,8 @@
 #include <KAction>
 #include <KStandardAction>
 #include <KXMLGUIClient>
+#include <KLocale>
+#include <KIcon>
 
 
 namespace Kasten
@@ -40,6 +42,12 @@ CloseController::CloseController( DocumentManager* documentManager, KXMLGUIClien
     KActionCollection* actionCollection = guiClient->actionCollection();
 
     mCloseAction  = KStandardAction::close(  this, SLOT(close()),  actionCollection );
+
+    mCloseAllAction = actionCollection->addAction( "file_close_all" );
+    mCloseAllAction->setText( i18nc("@title:menu","Close All") );
+    mCloseAllAction->setIcon( KIcon("window-close") );
+    connect( mCloseAllAction, SIGNAL(triggered( bool )), SLOT(closeAll()) );
+
     setTargetModel( 0 );
 }
 
@@ -58,4 +66,10 @@ void CloseController::close()
         mDocumentManager->closeDocument( mDocument );
 }
 
+
+void CloseController::closeAll()
+{
+    if( mDocumentManager->canCloseAll() )
+        mDocumentManager->closeAll();
+}
 }
