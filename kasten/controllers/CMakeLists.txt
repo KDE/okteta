@@ -1,3 +1,4 @@
+set( LIBFRAMESPRINT_REL_DIR ../../libs/framesprint )
 set( KASTEN_REL_DIR ../../libs/kasten )
 set( OKTETA_REL_DIR ../.. )
 
@@ -20,7 +21,7 @@ include_directories(
   view/libbytearraychecksum
   view/libbytearrayfilter
   view/libfinddialog
-  ../../libs/framesprint
+  ${LIBFRAMESPRINT_REL_DIR}
   ${OKTETA_REL_DIR}/gui
   ${OKTETA_REL_DIR}/gui/libcolumnsview
   ${OKTETA_REL_DIR}/core
@@ -172,7 +173,13 @@ set( BOOKMARKSTOOL_SRCS
   view/bookmarks/bookmarksview.cpp
   view/bookmarks/bookmarkstoolview.cpp
 )
+set( LIBFRAMESPRINT_SRCS
+  ${LIBFRAMESPRINT_REL_DIR}/abstractframerenderer.cpp
+  ${LIBFRAMESPRINT_REL_DIR}/framestopaperprinter.cpp
+  ${LIBFRAMESPRINT_REL_DIR}/headerfooterframerenderer.cpp
+)
 set( PRINTCONTROLLER_SRCS
+  ${LIBFRAMESPRINT_SRCS}
   view/print/printcontroller.cpp
   view/print/printtool.cpp
   view/print/printjob.cpp
@@ -214,7 +221,6 @@ set( OKTETA_KASTEN_CONTROLLERS_SRCS
   ${VIEWCONFIGCONTROLLER_SRCS}
   ${VIEWSTATUSCONTROLLER_SRCS}
   ${VIEWMODECONTROLLER_SRCS}
-  ${LIBFRAMESPRINT_SRCS}
 )
 
 set( okteta_kastencontrollers_LIB_HDRS
