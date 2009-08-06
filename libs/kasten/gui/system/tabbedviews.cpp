@@ -85,40 +85,52 @@ int TabbedViews::indexOf( AbstractView* view ) const
     return result;
 }
 
-void TabbedViews::addView( AbstractView *view )
+void TabbedViews::addViews( const QList<AbstractView*>& views )
 {
-    connect( view, SIGNAL(titleChanged( QString )), SLOT(onTitleChanged( QString )) );
+    int index;
+    AbstractView* lastView;
+    foreach( AbstractView* view, views )
+    {
+        connect( view, SIGNAL(titleChanged( QString )), SLOT(onTitleChanged( QString )) );
 
-    ViewBox* viewBox = new ViewBox( view, mTabWidget );
-    const int index = mTabWidget->addTab( viewBox, view->title() );
+        ViewBox* viewBox = new ViewBox( view, mTabWidget );
+        index = mTabWidget->addTab( viewBox, view->title() );
+        lastView = view;
+    }
+
     mTabWidget->setCurrentIndex( index );
-    view->widget()->setFocus();
+    lastView->widget()->setFocus();
 
     // fix for Qt bug:
     if( mTabWidget->count() == 1 )
         // simulate signal reaction
         onCurrentChanged( index );
 
-    emit added( view );
+    emit added( views );
 
 }
 
-void TabbedViews::removeView( AbstractView *view )
+void TabbedViews::removeViews( const QList<AbstractView*>& views )
 {
-    view->disconnect( this );
+    int index;
 
-    const int index = indexOf( view );
-    if( index != -1 )
-        mTabWidget->removeTab( index );
+    foreach( AbstractView* view, views )
+    {
+        view->disconnect( this );
 
-    // fix for Qt bug: 
+        index = indexOf( view );
+        if( index != -1 )
+            mTabWidget->removeTab( index );
+    }
+
+    // fix for Qt bug:
     const int currentIndex = mTabWidget->currentIndex();
     // last removed or no change in index?
     if( currentIndex == -1 || currentIndex == index )
         // simulate signal reaction
         onCurrentChanged( currentIndex );
 
-    emit removing( view );
+    emit removing( views );
 }
 
 void TabbedViews::addToolInlineView( AbstractToolInlineView* view )

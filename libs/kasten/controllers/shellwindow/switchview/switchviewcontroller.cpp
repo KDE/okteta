@@ -44,8 +44,8 @@ SwitchViewController::SwitchViewController( AbstractGroupedViews* groupedViews, 
     mForwardAction = actionCollection->addAction( KStandardAction::Forward, "window_next", this, SLOT(forward()) );
     mBackwardAction = actionCollection->addAction( KStandardAction::Back, "window_previous", this, SLOT(backward()) );
 
-    connect( groupedViews, SIGNAL(added( Kasten::AbstractView* )),  SLOT(updateActions()) );
-    connect( groupedViews, SIGNAL(removing( Kasten::AbstractView* )), SLOT(updateActions()) );
+    connect( groupedViews, SIGNAL(added( const QList<Kasten::AbstractView*>& )),  SLOT(updateActions()) );
+    connect( groupedViews, SIGNAL(removing( const QList<Kasten::AbstractView*>& )), SLOT(updateActions()) );
 
     mFocusable = mGroupedViews ? qobject_cast<If::ViewFocusable*>( mGroupedViews ) : 0;
     connect( groupedViews, SIGNAL(viewFocusChanged( Kasten::AbstractView* )), SLOT(updateActions()) );

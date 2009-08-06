@@ -45,8 +45,8 @@ class KASTENGUI_EXPORT AbstractGroupedViews : public QObject
     virtual ~AbstractGroupedViews();
 
   public Q_SLOTS: // set/action API to be implemented
-    virtual void addView( Kasten::AbstractView* view ) = 0;
-    virtual void removeView( Kasten::AbstractView* view ) = 0;
+    virtual void addViews( const QList<Kasten::AbstractView*>& views ) = 0;
+    virtual void removeViews( const QList<Kasten::AbstractView*>& views ) = 0;
 
   public: // get API to be implemented
     virtual QWidget* widget() const = 0;
@@ -55,9 +55,9 @@ class KASTENGUI_EXPORT AbstractGroupedViews : public QObject
 
   Q_SIGNALS:
     // view was created and already added to the list
-    void added( Kasten::AbstractView *view );
+    void added( const QList<Kasten::AbstractView*>& views );
     // view will be removed, already removed from list
-    void removing( Kasten::AbstractView *view );
+    void removing( const QList<Kasten::AbstractView*>& views );
     // closing the view is requested
     void closeRequest( Kasten::AbstractView* view );
 };

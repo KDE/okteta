@@ -62,9 +62,9 @@ class KASTENGUI_EXPORT ViewManager : public QObject
 
   Q_SIGNALS:
     // view was created and already added to the list
-    void opened( Kasten::AbstractView* view );
+    void opened( const QList<Kasten::AbstractView*>& views );
     // view will be closed, already removed from list
-    void closing( Kasten::AbstractView* view );
+    void closing( const QList<Kasten::AbstractView*>& views );
 
   protected Q_SLOTS:
     void createViewsFor( const QList<Kasten::AbstractDocument*>& documents );

@@ -84,6 +84,8 @@ AbstractView* ViewManager::viewByWidget( QWidget* widget ) const
 
 void ViewManager::createViewsFor( const QList<Kasten::AbstractDocument*>& documents )
 {
+    QList<Kasten::AbstractView*> openedViews;
+
     foreach( AbstractDocument* document, documents )
     {
         AbstractView* view = mFactory->createViewFor( document );
@@ -91,13 +93,18 @@ void ViewManager::createViewsFor( const QList<Kasten::AbstractDocument*>& docume
             view = new DummyView( document );
 
         mViewList.append( view );
-        emit opened( view );
+        openedViews.append( view );
     }
+
+    if( ! openedViews.isEmpty() )
+        emit opened( openedViews );
 }
 
 
 void ViewManager::removeViewsFor( const QList<Kasten::AbstractDocument*>& documents )
 {
+    QList<Kasten::AbstractView*> closedViews;
+
     QMutableListIterator<AbstractView*> it( mViewList );
     foreach( AbstractDocument* document, documents )
     {
@@ -108,12 +115,15 @@ void ViewManager::removeViewsFor( const QList<Kasten::AbstractDocument*>& docume
             if( documentOfView == document )
             {
                 it.remove();
-                emit closing( view );
-                delete view;
+                closedViews.append( view );
             }
         }
         it.toFront();
     }
+
+    emit closing( closedViews );
+    foreach( AbstractView* view, closedViews )
+        delete view;
 }
 
 AbstractView* ViewManager::viewOfDocument( AbstractDocument* document ) const

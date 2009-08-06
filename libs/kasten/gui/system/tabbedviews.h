@@ -58,8 +58,8 @@ class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews, public If::Vie
     virtual AbstractView *viewFocus() const;
 
   public: // AbstractGroupedViews API
-    virtual void addView( AbstractView *view );
-    virtual void removeView( AbstractView *view );
+    virtual void addViews( const QList<AbstractView*>& views );
+    virtual void removeViews( const QList<AbstractView*>& views );
 
     virtual QWidget* widget() const;
     virtual QList<AbstractView*> viewList() const;
