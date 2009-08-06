@@ -43,8 +43,10 @@ ViewManager::ViewManager( DocumentManager* documentManager )
  : mDocumentManager( documentManager ),
    mCodecViewManager( new ModelCodecViewManager() )
 {
-    connect( mDocumentManager, SIGNAL(added( Kasten::AbstractDocument* )), SLOT(createViewFor( Kasten::AbstractDocument* )) );
-    connect( mDocumentManager, SIGNAL(closing( Kasten::AbstractDocument* )), SLOT(removeViewsFor( Kasten::AbstractDocument* )) );
+    connect( mDocumentManager, SIGNAL(added( const QList<Kasten::AbstractDocument*>& )),
+             SLOT(createViewsFor( const QList<Kasten::AbstractDocument*>& )) );
+    connect( mDocumentManager, SIGNAL(closing( const QList<Kasten::AbstractDocument*>& )),
+             SLOT(removeViewsFor( const QList<Kasten::AbstractDocument*>& )) );
 }
 
 void ViewManager::setWindow( KXmlGuiWindow *window )
@@ -80,33 +82,37 @@ AbstractView* ViewManager::viewByWidget( QWidget* widget ) const
 }
 
 
-void ViewManager::createViewFor( AbstractDocument* document )
+void ViewManager::createViewsFor( const QList<Kasten::AbstractDocument*>& documents )
 {
-    if( !document )
-        return;
+    foreach( AbstractDocument* document, documents )
+    {
+        AbstractView* view = mFactory->createViewFor( document );
+        if( ! view )
+            view = new DummyView( document );
 
-    AbstractView* view = mFactory->createViewFor( document );
-    if( !view )
-        view = new DummyView( document );
-
-    mViewList.append( view );
-    emit opened( view );
+        mViewList.append( view );
+        emit opened( view );
+    }
 }
 
 
-void ViewManager::removeViewsFor( AbstractDocument* document )
+void ViewManager::removeViewsFor( const QList<Kasten::AbstractDocument*>& documents )
 {
     QMutableListIterator<AbstractView*> it( mViewList );
-    while( it.hasNext() )
+    foreach( AbstractDocument* document, documents )
     {
-        AbstractView* view = it.next();
-        AbstractDocument* documentOfView = view->findBaseModel<AbstractDocument*>();
-        if( documentOfView == document )
+        while( it.hasNext() )
         {
-            it.remove();
-            emit closing( view );
-            delete view;
+            AbstractView* view = it.next();
+            AbstractDocument* documentOfView = view->findBaseModel<AbstractDocument*>();
+            if( documentOfView == document )
+            {
+                it.remove();
+                emit closing( view );
+                delete view;
+            }
         }
+        it.toFront();
     }
 }
 

@@ -67,8 +67,8 @@ class KASTENGUI_EXPORT ViewManager : public QObject
     void closing( Kasten::AbstractView* view );
 
   protected Q_SLOTS:
-    void createViewFor( Kasten::AbstractDocument* document );
-    void removeViewsFor( Kasten::AbstractDocument* document );
+    void createViewsFor( const QList<Kasten::AbstractDocument*>& documents );
+    void removeViewsFor( const QList<Kasten::AbstractDocument*>& documents );
     /**
     * asks the manager to close and delete the view
     * may fail if the process if cancelled due to user input
