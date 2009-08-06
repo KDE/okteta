@@ -80,7 +80,9 @@ void DocumentManager::addDocument( AbstractDocument* document )
     document->setId( QString::number(++lastDocumentId) );
     mList.append( document );
     // TODO: only emit if document was not included before
-    emit added( document );
+    QList<AbstractDocument*> addedDocuments;
+    addedDocuments.append( document );
+    emit added( addedDocuments );
 }
 
 void DocumentManager::closeDocument( AbstractDocument* document )
@@ -92,19 +94,46 @@ void DocumentManager::closeDocument( AbstractDocument* document )
     // TODO: first check if unsaved and ask, only then close
 
         iterator.remove();
-        emit closing( document );
+
+        QList<AbstractDocument*> closedDocuments;
+        closedDocuments.append( document );
+        emit closing( closedDocuments );
+
         delete document;
     }
 }
 
 void DocumentManager::closeAll()
 {
-    foreach( AbstractDocument* document, mList )
+    // TODO: is it better for remove the document from the list before emitting closing(document)?
+    // TODO: or better emit close(documentList)? who would use this?
+    QList<AbstractDocument*> closedDocuments = mList;
+    mList.clear();
+
+    emit closing( closedDocuments );
+
+    foreach( AbstractDocument* document, closedDocuments )
     {
-        emit closing( document );
         delete document;
     }
+}
+
+void DocumentManager::closeAllOther( AbstractDocument* keptDocument )
+{
+    // TODO: is it better for remove the document from the list before emitting closing(document)?
+    // TODO: or better emit close(documentList)? who would use this?
+    QList<AbstractDocument*> closedDocuments = mList;
+    closedDocuments.removeOne( keptDocument );
+
     mList.clear();
+    mList.append( keptDocument );
+
+    emit closing( closedDocuments );
+
+    foreach( AbstractDocument* document, closedDocuments )
+    {
+        delete document;
+    }
 }
 
 bool DocumentManager::canClose( AbstractDocument* document )
@@ -119,6 +148,23 @@ bool DocumentManager::canCloseAll()
     foreach( AbstractDocument* document, mList )
     {
         if( !mSyncManager->canClose(document) )
+        {
+            canCloseAll = false;
+            break;
+        }
+    }
+
+    return canCloseAll;
+}
+
+bool DocumentManager::canCloseAllOther( AbstractDocument* keptDocument )
+{
+    bool canCloseAll = true;
+
+    foreach( AbstractDocument* document, mList )
+    {
+        if( ( document != keptDocument ) &&
+            ! mSyncManager->canClose(document) )
         {
             canCloseAll = false;
             break;

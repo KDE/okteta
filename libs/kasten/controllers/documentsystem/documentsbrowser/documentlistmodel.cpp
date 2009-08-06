@@ -38,10 +38,10 @@ DocumentListModel::DocumentListModel( DocumentsTool* documentsTool, QObject* par
  : QAbstractTableModel( parent ),
    mDocumentsTool( documentsTool )
 {
-    connect( mDocumentsTool, SIGNAL(documentAdded( Kasten::AbstractDocument* )),
-             SLOT(onDocumentAdded( Kasten::AbstractDocument* )) );
-    connect( mDocumentsTool, SIGNAL(documentClosing( Kasten::AbstractDocument* )),
-             SLOT(onDocumentClosing( Kasten::AbstractDocument* )) );
+    connect( mDocumentsTool, SIGNAL(documentsAdded( const QList<Kasten::AbstractDocument*>& )),
+             SLOT(onDocumentsAdded( const QList<Kasten::AbstractDocument*>& )) );
+    connect( mDocumentsTool, SIGNAL(documentsClosing( const QList<Kasten::AbstractDocument*>& )),
+             SLOT(onDocumentsClosing( const QList<Kasten::AbstractDocument*>& )) );
     connect( mDocumentsTool, SIGNAL(focussedDocumentChanged( Kasten::AbstractDocument* )),
              SLOT(onFocussedDocumentChanged( Kasten::AbstractDocument* )) );
 }
@@ -142,17 +142,18 @@ Q_UNUSED( document )
 #endif
 }
 
-void DocumentListModel::onDocumentAdded( AbstractDocument* document )
+void DocumentListModel::onDocumentsAdded( const QList<Kasten::AbstractDocument*>& documents )
 {
-    connect( document, SIGNAL(modified( Kasten::AbstractDocument::SynchronizationStates )),
-             SLOT(onModifiedChanged()) );
+    foreach( AbstractDocument* document, documents )
+        connect( document, SIGNAL(modified( Kasten::AbstractDocument::SynchronizationStates )),
+                 SLOT(onModifiedChanged()) );
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
     reset();
 }
 
-void DocumentListModel::onDocumentClosing( AbstractDocument* document )
+void DocumentListModel::onDocumentsClosing( const QList<Kasten::AbstractDocument*>& documents )
 {
-Q_UNUSED( document )
+Q_UNUSED( documents )
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
     reset();
 }

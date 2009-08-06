@@ -53,12 +53,16 @@ class KASTENCORE_EXPORT DocumentManager : public QObject
 
   public:
     void addDocument( AbstractDocument* document );
+
     void closeDocument( AbstractDocument* document );
     void closeAll();
+// TODO: think about if a more general close( documentList, theseOrOthers ) is better, same with canCloseAllOther()
+    void closeAllOther( AbstractDocument* document );
 
     // TODO: what to do for documents not added?
     bool canClose( AbstractDocument* document );
     bool canCloseAll();
+    bool canCloseAllOther( AbstractDocument* document );
 
     void requestFocus( AbstractDocument* document );
 
@@ -75,10 +79,11 @@ class KASTENCORE_EXPORT DocumentManager : public QObject
     ModelCodecManager* codecManager();
 
   Q_SIGNALS:
-    // document got added
-    void added( Kasten::AbstractDocument* document );
-    /// document is about to be closed, cannot be stopped
-    void closing( Kasten::AbstractDocument* document );
+    // documents got added
+    void added( const QList<Kasten::AbstractDocument*>& documents );
+    /// documents are about to be closed, cannot be stopped
+    void closing( const QList<Kasten::AbstractDocument*>& documents );
+
 //     void closing( KCloseEvent *event );
 // TODO: other than QObject event gets modified by observers, take care of unsetting a close cancel
 // problem with a signal is that all(!) observers get notified, even if event is already cancelled

@@ -55,8 +55,8 @@ class KASTENCONTROLLER_EXPORT DocumentsTool : public AbstractTool
     virtual void setTargetModel( AbstractModel* model );
 
   Q_SIGNALS:
-    void documentAdded( Kasten::AbstractDocument* document );
-    void documentClosing( Kasten::AbstractDocument* document );
+    void documentsAdded( const QList<Kasten::AbstractDocument*>& documents );
+    void documentsClosing( const QList<Kasten::AbstractDocument*>& documents );
     void focussedDocumentChanged( Kasten::AbstractDocument* document );
 
   protected: // sources
