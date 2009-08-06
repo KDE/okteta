@@ -37,8 +37,13 @@ namespace Kasten
 {
 
 CloseController::CloseController( DocumentManager* documentManager, KXMLGUIClient* guiClient )
-: mDocumentManager( documentManager )
+  : mDocumentManager( documentManager )
 {
+    connect( mDocumentManager, SIGNAL(added( const QList<Kasten::AbstractDocument*>& )),
+             SLOT(onDocumentsChanged()) );
+    connect( mDocumentManager, SIGNAL(closing( const QList<Kasten::AbstractDocument*>& )),
+             SLOT(onDocumentsChanged()) );
+
     KActionCollection* actionCollection = guiClient->actionCollection();
 
     mCloseAction  = KStandardAction::close(  this, SLOT(close()),  actionCollection );
@@ -47,6 +52,11 @@ CloseController::CloseController( DocumentManager* documentManager, KXMLGUIClien
     mCloseAllAction->setText( i18nc("@title:menu","Close All") );
     mCloseAllAction->setIcon( KIcon("window-close") );
     connect( mCloseAllAction, SIGNAL(triggered( bool )), SLOT(closeAll()) );
+
+    mCloseAllOtherAction = actionCollection->addAction( "file_close_all_other" );
+    mCloseAllOtherAction->setText( i18nc("@title:menu","Close All Other") );
+    mCloseAllOtherAction->setIcon( KIcon("window-close") );
+    connect( mCloseAllOtherAction, SIGNAL(triggered( bool )), SLOT(closeAllOther()) );
 
     setTargetModel( 0 );
 }
@@ -66,10 +76,28 @@ void CloseController::close()
         mDocumentManager->closeDocument( mDocument );
 }
 
-
 void CloseController::closeAll()
 {
     if( mDocumentManager->canCloseAll() )
         mDocumentManager->closeAll();
 }
+
+void CloseController::closeAllOther()
+{
+    if( mDocumentManager->canCloseAllOther(mDocument) )
+        mDocumentManager->closeAllOther( mDocument );
+}
+
+void CloseController::onDocumentsChanged()
+{
+    const QList<AbstractDocument*> documents = mDocumentManager->documents();
+
+    const bool hasDocuments = ! documents.isEmpty();
+    // TODO: there could be just one, but not set for this tool?
+    const bool hasOtherDocuments = ( documents.size() > 1 );
+
+    mCloseAllAction->setEnabled( hasDocuments );
+    mCloseAllOtherAction->setEnabled( hasOtherDocuments );
+}
+
 }

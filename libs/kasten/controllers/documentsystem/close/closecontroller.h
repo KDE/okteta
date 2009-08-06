@@ -52,6 +52,9 @@ class KASTENCONTROLLER_EXPORT CloseController : public AbstractXmlGuiController
   protected Q_SLOTS:
     void close();
     void closeAll();
+    void closeAllOther();
+
+    void onDocumentsChanged();
 
   protected:
     DocumentManager* mDocumentManager;
@@ -59,6 +62,7 @@ class KASTENCONTROLLER_EXPORT CloseController : public AbstractXmlGuiController
     AbstractDocument* mDocument;
     KAction* mCloseAction;
     KAction* mCloseAllAction;
+    KAction* mCloseAllOtherAction;
 };
 
 }

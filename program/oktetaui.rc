@@ -18,6 +18,7 @@
     <Separator/>
     <Action name="new_window"/>
     <Action name="close_window"/>
+    <Action name="file_close_all_other" append="close_merge"/>
   </Menu>
   <Menu name="edit">
     <Action name="copy_as" append="edit_paste_merge" />
