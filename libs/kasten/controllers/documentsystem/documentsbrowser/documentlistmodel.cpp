@@ -145,8 +145,8 @@ Q_UNUSED( document )
 void DocumentListModel::onDocumentsAdded( const QList<Kasten::AbstractDocument*>& documents )
 {
     foreach( AbstractDocument* document, documents )
-        connect( document, SIGNAL(modified( Kasten::AbstractDocument::SynchronizationStates )),
-                 SLOT(onModifiedChanged()) );
+        connect( document, SIGNAL(syncStatesChanged( Kasten::AbstractDocument::SynchronizationStates )),
+                 SLOT(onSyncStatesChanged()) );
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
     reset();
 }
@@ -158,7 +158,7 @@ Q_UNUSED( documents )
     reset();
 }
 
-void DocumentListModel::onModifiedChanged()
+void DocumentListModel::onSyncStatesChanged()
 {
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
     reset();

@@ -88,7 +88,7 @@ class KASTENCORE_EXPORT AbstractDocument : public AbstractModel
   Q_SIGNALS:
     // TODO: should be signal the diff? how to say then remote is in synch again?
     // could be done by pairs of flags instead of notset = isnot
-    void modified( Kasten::AbstractDocument::SynchronizationStates newStates );
+    void syncStatesChanged( Kasten::AbstractDocument::SynchronizationStates newStates );
     void synchronizerChanged( Kasten::AbstractModelSynchronizer* newSynchronizer );
     void liveSynchronizerChanged( Kasten::AbstractModelSynchronizer* newSynchronizer );
 

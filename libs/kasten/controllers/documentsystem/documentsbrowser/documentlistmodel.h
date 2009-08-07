@@ -61,7 +61,7 @@ class DocumentListModel : public QAbstractTableModel
     void onDocumentsAdded( const QList<Kasten::AbstractDocument*>& documents );
     void onDocumentsClosing( const QList<Kasten::AbstractDocument*>& documents );
     void onFocussedDocumentChanged( Kasten::AbstractDocument* document );
-    void onModifiedChanged();
+    void onSyncStatesChanged();
 
   protected:
     DocumentsTool* mDocumentsTool;

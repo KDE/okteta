@@ -103,7 +103,7 @@ void KByteArrayDocument::revertToVersionByIndex( int versionIndex ) { mByteArray
 
 void KByteArrayDocument::onModelModification( bool newState )
 {
-    emit modified( newState ? LocalHasChanges : InSync );
+    emit syncStatesChanged( newState ? LocalHasChanges : InSync );
 }
 
 void KByteArrayDocument::onHeadVersionDescriptionChanged( const QString &newDescription )

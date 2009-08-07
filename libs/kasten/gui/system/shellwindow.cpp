@@ -120,7 +120,7 @@ void ShellWindow::onTitleChanged( const QString &newTitle )
     }
 }
 
-void ShellWindow::onModifiedChanged( AbstractDocument::SynchronizationStates newStates )
+void ShellWindow::onSyncStatesChanged( AbstractDocument::SynchronizationStates newStates )
 {
 Q_UNUSED( newStates )
     AbstractView* view = qobject_cast<AbstractView *>( sender() );
@@ -147,8 +147,8 @@ void ShellWindow::onViewFocusChanged( AbstractView *view )
     if( view )
     {
         connect( view, SIGNAL(titleChanged( QString )), SLOT(onTitleChanged( QString )) );
-        connect( view, SIGNAL(modified( Kasten::AbstractDocument::SynchronizationStates )),
-                       SLOT(onModifiedChanged( Kasten::AbstractDocument::SynchronizationStates )) );
+        connect( view, SIGNAL(syncStatesChanged( Kasten::AbstractDocument::SynchronizationStates )),
+                       SLOT(onSyncStatesChanged( Kasten::AbstractDocument::SynchronizationStates )) );
     }
 }
 
