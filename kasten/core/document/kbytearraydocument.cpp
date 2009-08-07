@@ -40,7 +40,7 @@ KByteArrayDocument::KByteArrayDocument( const QString &initDescription )
 : mByteArray( new Okteta::PieceTableByteArrayModel() ),
   mInitDescription( initDescription )
 {
-    connect( mByteArray, SIGNAL(modificationChanged( bool )), SLOT(onModelModification( bool )) );
+    connect( mByteArray, SIGNAL(modifiedChanged( bool )), SLOT(onModelModified( bool )) );
     connect( mByteArray, SIGNAL(readOnlyChanged( bool )), SIGNAL(readOnlyChanged( bool )) );
     connect( mByteArray, SIGNAL(revertedToVersionIndex( int )), SIGNAL(revertedToVersionIndex( int )) );
     connect( mByteArray, SIGNAL(headVersionChanged( int )), SIGNAL(headVersionChanged( int )) );
@@ -52,7 +52,7 @@ KByteArrayDocument::KByteArrayDocument( Okteta::PieceTableByteArrayModel *byteAr
 : mByteArray( byteArray ),
   mInitDescription( initDescription )
 {
-    connect( mByteArray, SIGNAL(modificationChanged( bool )), SLOT(onModelModification( bool )) );
+    connect( mByteArray, SIGNAL(modifiedChanged( bool )), SLOT(onModelModified( bool )) );
     connect( mByteArray, SIGNAL(readOnlyChanged( bool )), SIGNAL(readOnlyChanged( bool )) );
     connect( mByteArray, SIGNAL(revertedToVersionIndex( int )), SIGNAL(revertedToVersionIndex( int )) );
     connect( mByteArray, SIGNAL(headVersionChanged( int )), SIGNAL(headVersionChanged( int )) );
@@ -101,7 +101,7 @@ DocumentVersionData KByteArrayDocument::versionData( int versionIndex ) const
 
 void KByteArrayDocument::revertToVersionByIndex( int versionIndex ) { mByteArray->revertToVersionByIndex( versionIndex ); }
 
-void KByteArrayDocument::onModelModification( bool newState )
+void KByteArrayDocument::onModelModified( bool newState )
 {
     emit syncStatesChanged( newState ? LocalHasChanges : InSync );
 }

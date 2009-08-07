@@ -158,7 +158,7 @@ inline void PieceTableByteArrayModel::Private::setModified( bool modified )
         mPieceTable.setBeforeCurrentChangeAsBase(modified);
         // TODO: is the call setModified of any use?
         // shouldn't there be only a setUnmodified(void) or else call?
-        emit p->modificationChanged( modified );
+        emit p->modifiedChanged( modified );
     }
 }
 

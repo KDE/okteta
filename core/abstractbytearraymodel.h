@@ -253,7 +253,7 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
     void contentsChanged( const KDE::ArrayChangeMetricsList &changeList );
 
     void readOnlyChanged( bool isReadOnly );
-    void modificationChanged( bool isModified );
+    void modifiedChanged( bool isModified );
 
     void searchedBytes( int bytes ) const;
 };

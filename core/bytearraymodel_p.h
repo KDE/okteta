@@ -147,12 +147,12 @@ inline void ByteArrayModelPrivate::setDatum( unsigned int offset, const char dat
     m_data[offset] = datum;
     m_modified = true;
     emit p->contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(offset,1,1) );
-    emit p->modificationChanged( true );
+    emit p->modifiedChanged( true );
 }
 inline void ByteArrayModelPrivate::setModified( bool modified )
 {
     m_modified = modified;
-    emit p->modificationChanged( m_modified );
+    emit p->modifiedChanged( m_modified );
 }
 
 

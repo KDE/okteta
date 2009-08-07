@@ -105,7 +105,7 @@ void PieceTableByteArrayModel::Private::setData( const char *data, unsigned int 
 
     // TODO: how to tell this to the synchronizer?
     emit p->contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(0,oldSize,size) );
-    if( wasModifiedBefore ) emit p->modificationChanged( false );
+    if( wasModifiedBefore ) emit p->modifiedChanged( false );
     if( !bookmarks.empty() ) emit p->bookmarksRemoved( bookmarks );
     emit p->headVersionChanged( mPieceTable.changesCount() );
 }
@@ -130,7 +130,7 @@ void PieceTableByteArrayModel::Private::setDatum( unsigned int offset, const cha
 
     emit p->contentsChanged( KDE::ArrayChangeMetricsList(metrics) );
     emit p->changesDone( modificationsList, oldVersionIndex, versionIndex() );
-    if( !wasModifiedBefore ) emit p->modificationChanged( true );
+    if( ! wasModifiedBefore ) emit p->modifiedChanged( true );
     if( newChange )
         emit p->headVersionChanged( mPieceTable.changesCount() );
     else
@@ -259,7 +259,7 @@ void PieceTableByteArrayModel::Private::revertToVersionByIndex( int versionIndex
 // Modell of the bookmarks. But shouldn't they be independent?
 
     emit p->contentsChanged( changeList );
-    if( isModificationChanged ) emit p->modificationChanged( newModified );
+    if( isModificationChanged ) emit p->modifiedChanged( newModified );
     emit p->revertedToVersionIndex( versionIndex );
 }
 
@@ -373,12 +373,12 @@ void PieceTableByteArrayModel::Private::endChanges()
     const int currentVersionIndex = versionIndex();
     const bool newChange = ( mBeforeChangesVersionIndex != currentVersionIndex );
     const bool currentIsModified = isModified();
-    const bool modificationChanged = ( mBeforeChangesModified != currentIsModified );
+    const bool modifiedChanged = ( mBeforeChangesModified != currentIsModified );
 
     emit p->contentsChanged( mChangeMetrics );
     emit p->changesDone( mChanges, mBeforeChangesVersionIndex, currentVersionIndex );
     if( mBookmarksModified ) emit p->bookmarksModified( true );
-    if( modificationChanged ) emit p->modificationChanged( currentIsModified );
+    if( modifiedChanged ) emit p->modifiedChanged( currentIsModified );
     if( newChange )
         emit p->headVersionChanged( mPieceTable.changesCount() );
     else

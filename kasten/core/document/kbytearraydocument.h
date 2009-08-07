@@ -94,7 +94,7 @@ class OKTETAKASTENCORE_EXPORT KByteArrayDocument : public AbstractDocument, publ
     virtual void usersRemoved( const QList<Person>& newUserList );
 
   protected Q_SLOTS:
-    void onModelModification( bool newState );
+    void onModelModified( bool newState );
     void onHeadVersionDescriptionChanged( const QString &newDescription );
 
   protected:

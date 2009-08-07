@@ -93,7 +93,7 @@ void ByteArrayModelPrivate::setData( char *data, unsigned int size, int rawSize,
 
     m_modified = false;
     emit p->contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(0, oldSize, size) );
-    emit p->modificationChanged( false );
+    emit p->modifiedChanged( false );
 }
 
 
@@ -119,7 +119,7 @@ int ByteArrayModelPrivate::insert( int position, const char* data, int length )
 
     emit p->contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(position, 0, length) );
     if( bookmarksModified ) emit p->bookmarksModified( true );
-    emit p->modificationChanged( true );
+    emit p->modifiedChanged( true );
     return length;
 }
 
@@ -147,7 +147,7 @@ int ByteArrayModelPrivate::remove( const KDE::Section& section )
 
     emit p->contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(removeSection.start(), removeSection.width(), 0) );
     if( bookmarksModified ) emit p->bookmarksModified( true );
-    emit p->modificationChanged( true );
+    emit p->modifiedChanged( true );
     return removeSection.width();
 }
 
@@ -219,7 +219,7 @@ unsigned int ByteArrayModelPrivate::replace( const KDE::Section& section, const 
     emit p->contentsChanged(
         KDE::ArrayChangeMetricsList::oneReplacement(removeSection.start(), removeSection.width(), inputLength) );
     if( bookmarksModified ) emit p->bookmarksModified( true );
-    emit p->modificationChanged( true );
+    emit p->modifiedChanged( true );
     return inputLength;
 }
 
@@ -301,7 +301,7 @@ bool ByteArrayModelPrivate::swap( int firstStart, const KDE::Section& secondSect
     emit p->contentsChanged(
         KDE::ArrayChangeMetricsList::oneSwapping(firstStart,sourceSection.start(),sourceSection.width()) );
     if( bookmarksModified ) emit p->bookmarksModified( true );
-    emit p->modificationChanged( true );
+    emit p->modifiedChanged( true );
     return true;
 }
 
@@ -326,7 +326,7 @@ int ByteArrayModelPrivate::fill( const char fillDatum, unsigned int position, in
     m_modified = true;
 
     emit p->contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(position,fillLength,fillLength) );
-    emit p->modificationChanged( true );
+    emit p->modifiedChanged( true );
     return fillLength;
 }
 

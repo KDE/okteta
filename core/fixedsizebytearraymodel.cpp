@@ -66,7 +66,7 @@ void FixedSizeByteArrayModel::setDatum( unsigned int Offset, const char Char )
   Modified = true;
 
   emit contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(Offset, 1, 1) );
-  emit modificationChanged( true );
+  emit modifiedChanged( true );
 }
 
 
@@ -89,7 +89,7 @@ int FixedSizeByteArrayModel::insert( int Pos, const char* D, int InputLength )
 
   emit contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(Pos, 0, InputLength) );
   //emit contentsReplaced( Pos, , 0 ); TODO: how to signal the removed data?
-  emit modificationChanged( true );
+  emit modifiedChanged( true );
   return InputLength;
 }
 
@@ -113,7 +113,7 @@ int FixedSizeByteArrayModel::remove( const KDE::Section& R )
 
   emit contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(Remove.start(), Remove.width(), 0) );
   //emit contentsReplaced( Pos, 0,  ); TODO: how to signal the inserted data?
-  emit modificationChanged( true );
+  emit modifiedChanged( true );
   return RemoveLength;
 }
 
@@ -154,7 +154,7 @@ unsigned int FixedSizeByteArrayModel::replace( const KDE::Section& R, const char
 
   emit contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(Remove.start(), Remove.width(), InputLength) );
   //emit contentsReplaced( Pos, 0,  ); TODO: how to signal the changed data at the end?
-  emit modificationChanged( true );
+  emit modifiedChanged( true );
   return InputLength;
 }
 
@@ -228,7 +228,7 @@ bool FixedSizeByteArrayModel::swap( int firstStart, const KDE::Section& secondSe
   Modified = true;
 
   emit contentsChanged( KDE::ArrayChangeMetricsList::oneSwapping(firstStart, SourceSection.start(),SourceSection.width()) );
-  emit modificationChanged( true );
+  emit modifiedChanged( true );
   return true;
 }
 
@@ -248,7 +248,7 @@ int FixedSizeByteArrayModel::fill( const char FChar, unsigned int Pos, int FillL
   Modified = true;
 
   emit contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(Pos, FillLength, FillLength) );
-  emit modificationChanged( true );
+  emit modifiedChanged( true );
   return FillLength;
 }
 
