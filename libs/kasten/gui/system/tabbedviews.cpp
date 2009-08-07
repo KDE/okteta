@@ -203,7 +203,7 @@ void TabbedViews::onTitleChanged( const QString &newTitle )
 
 
 #if 0
-void TabbedViews::onModifiedChanged( AbstractDocument::SynchronizationStates newStates )
+void TabbedViews::onModifiedChanged( AbstractDocument::SyncStates newStates )
 {
 Q_UNUSED( newStates )
     AbstractView* view = qobject_cast<AbstractView *>( sender() );

@@ -82,7 +82,7 @@ void ParallelViews::onTitleChanged( const QString& newTitle )
 }
 
 #if 0
-void ParallelViews::onModifiedChanged( AbstractDocument::SynchronizationStates newStates )
+void ParallelViews::onModifiedChanged( AbstractDocument::SyncStates newStates )
 {
 Q_UNUSED( newStates )
     AbstractView* view = qobject_cast<AbstractView *>( sender() );

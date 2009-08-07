@@ -85,16 +85,16 @@ void SynchronizeController::onSynchronizerChange( AbstractModelSynchronizer* new
     if( mSynchronizer )
     {
         hasUrl = !mSynchronizer->url().isEmpty();
-        outOfSync = hasUrl && ( mDocument->synchronizationStates() != AbstractDocument::InSync );
-        connect( mDocument, SIGNAL(syncStatesChanged( Kasten::AbstractDocument::SynchronizationStates )),
-                            SLOT(onSyncStatesChanged( Kasten::AbstractDocument::SynchronizationStates )) );
+        outOfSync = hasUrl && ( mDocument->syncStates() != AbstractDocument::InSync );
+        connect( mDocument, SIGNAL(syncStatesChanged( Kasten::AbstractDocument::SyncStates )),
+                            SLOT(onSyncStatesChanged( Kasten::AbstractDocument::SyncStates )) );
     }
 
     mSaveAction->setEnabled( mSynchronizer && outOfSync );
     mReloadAction->setEnabled( mSynchronizer && outOfSync );
 }
 
-void SynchronizeController::onSyncStatesChanged( AbstractDocument::SynchronizationStates newStates )
+void SynchronizeController::onSyncStatesChanged( AbstractDocument::SyncStates newStates )
 {
     const bool hasUrl = !mSynchronizer->url().isEmpty();
     const bool outOfSync = hasUrl && ( newStates != AbstractDocument::InSync );

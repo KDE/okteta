@@ -73,7 +73,7 @@ class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews, public If::Vie
     void onCurrentChanged( int index );
     void onCloseRequest( QWidget* widget );
     void onTitleChanged( const QString &newTitle );
-//     void onModifiedChanged( Kasten::AbstractDocument::SynchronizationStates newStates );
+//     void onModifiedChanged( Kasten::AbstractDocument::SyncStates newStates );
 
   protected:
     int indexOf( AbstractView* view ) const;

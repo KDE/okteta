@@ -42,8 +42,8 @@ class AbstractModelSynchronizer;
 class KASTENCORE_EXPORT AbstractDocument : public AbstractModel
 {
     Q_OBJECT
-    Q_PROPERTY( SynchronizationStates synchronizationStates READ synchronizationStates )
-    Q_FLAGS( SynchronizationStates SynchronizationState )
+    Q_PROPERTY( SyncStates syncStates READ syncStates )
+    Q_FLAGS( SyncStates SyncState )
 
   friend class AbstractModelSynchronizer;
   friend class DocumentManager;
@@ -52,7 +52,7 @@ class KASTENCORE_EXPORT AbstractDocument : public AbstractModel
     //TODO: some things are a tristate, is it the right thing to embed them here?
     // or make it a value of its own?
     // see RemoteHasChanges or not, RemoteUnknown
-    enum SynchronizationState
+    enum SyncState
     {
         InSync = 0, //TODO: find better name
         LocalHasChanges  = 1,
@@ -60,7 +60,7 @@ class KASTENCORE_EXPORT AbstractDocument : public AbstractModel
         /// unknown, e.g. because connection not available/lost
         RemoteUnknown = 4
     };
-    Q_DECLARE_FLAGS( SynchronizationStates, SynchronizationState )
+    Q_DECLARE_FLAGS( SyncStates, SyncState )
 
   protected:
     AbstractDocument();
@@ -72,7 +72,7 @@ class KASTENCORE_EXPORT AbstractDocument : public AbstractModel
     virtual QString typeName() const = 0;
     virtual QString mimeType() const = 0;
 
-    virtual SynchronizationStates synchronizationStates() const = 0;
+    virtual SyncStates syncStates() const = 0;
 // virtual QVariant data ( const QModelIndex & index, int role = Qt::DisplayRole ) const = 0
 
   public:
@@ -88,7 +88,7 @@ class KASTENCORE_EXPORT AbstractDocument : public AbstractModel
   Q_SIGNALS:
     // TODO: should be signal the diff? how to say then remote is in synch again?
     // could be done by pairs of flags instead of notset = isnot
-    void syncStatesChanged( Kasten::AbstractDocument::SynchronizationStates newStates );
+    void syncStatesChanged( Kasten::AbstractDocument::SyncStates newStates );
     void synchronizerChanged( Kasten::AbstractModelSynchronizer* newSynchronizer );
     void liveSynchronizerChanged( Kasten::AbstractModelSynchronizer* newSynchronizer );
 
@@ -100,7 +100,7 @@ class KASTENCORE_EXPORT AbstractDocument : public AbstractModel
     Private* const d;
 };
 
-Q_DECLARE_OPERATORS_FOR_FLAGS( AbstractDocument::SynchronizationStates )
+Q_DECLARE_OPERATORS_FOR_FLAGS( AbstractDocument::SyncStates )
 
 }
 

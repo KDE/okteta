@@ -57,7 +57,7 @@ class KASTENCONTROLLER_EXPORT SynchronizeController : public AbstractXmlGuiContr
 
   private Q_SLOTS:
     void onSynchronizerChange( Kasten::AbstractModelSynchronizer* newSynchronizer );
-    void onSyncStatesChanged( Kasten::AbstractDocument::SynchronizationStates newStates );
+    void onSyncStatesChanged( Kasten::AbstractDocument::SyncStates newStates );
 
   protected:
     AbstractDocument* mDocument;

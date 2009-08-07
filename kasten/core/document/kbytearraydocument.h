@@ -63,7 +63,7 @@ class OKTETAKASTENCORE_EXPORT KByteArrayDocument : public AbstractDocument, publ
   public: // AbstractDocument API
     virtual QString typeName() const;
     virtual QString mimeType() const;
-    virtual SynchronizationStates synchronizationStates() const;
+    virtual SyncStates syncStates() const;
 
   public: // If::Versionable
     virtual int versionIndex() const;

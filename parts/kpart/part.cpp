@@ -182,7 +182,7 @@ void OktetaPart::onDocumentLoaded( Kasten::AbstractDocument* document )
 
         mDocument = static_cast<Kasten::KByteArrayDocument*>( document );
         mDocument->setReadOnly( mModus != ReadWriteModus );
-        connect( mDocument, SIGNAL(syncStatesChanged( Kasten::AbstractDocument::SynchronizationStates )),
+        connect( mDocument, SIGNAL(syncStatesChanged( Kasten::AbstractDocument::SyncStates )),
                  SLOT(onModified( int )) );
 
         mDisplay = new Kasten::KByteArrayDisplay( mDocument );
@@ -204,7 +204,7 @@ void OktetaPart::onDocumentLoaded( Kasten::AbstractDocument* document )
 
 void OktetaPart::onModified( int states )
 {
-    Kasten::AbstractDocument::SynchronizationStates syncStates = (Kasten::AbstractDocument::SynchronizationStates)( states );
+    Kasten::AbstractDocument::SyncStates syncStates = (Kasten::AbstractDocument::SyncStates)( states );
 
     const bool isModified = ( syncStates != Kasten::AbstractDocument::InSync );
     setModified( isModified );

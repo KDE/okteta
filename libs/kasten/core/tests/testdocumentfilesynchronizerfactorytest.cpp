@@ -188,7 +188,7 @@ void TestDocumentFileSynchronizerFactoryTest::testLoadReloadFile()
     // change on disc and reload
     writeToFile( filePath, otherData );
    // ? use QTest::kWaitForSignal (QObject *obj, const char *signal, int timeout=0)
-//     QCOMPARE( document->synchronizationStates(), Kasten::TestDocument::RemoteHasChanges );
+//     QCOMPARE( document->syncStates(), Kasten::TestDocument::RemoteHasChanges );
 
     document->synchronizer()->syncFromRemote();
 

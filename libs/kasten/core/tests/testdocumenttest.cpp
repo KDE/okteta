@@ -39,14 +39,14 @@ void TestDocumentTest::checkTitleChanged( QSignalSpy* titleChangedSpy, const QSt
    QCOMPARE( arguments.at(0).toString(), title );
 }
 
-Q_DECLARE_METATYPE ( Kasten::AbstractDocument::SynchronizationStates )
+Q_DECLARE_METATYPE ( Kasten::AbstractDocument::SyncStates )
 
-void TestDocumentTest::checkSynchronizationStatesChanged( QSignalSpy* changedSpy, Kasten::AbstractDocument::SynchronizationStates states )
+void TestDocumentTest::checkSyncStatesChanged( QSignalSpy* changedSpy, Kasten::AbstractDocument::SyncStates states )
 {
    QVERIFY( changedSpy->isValid() );
    QCOMPARE( changedSpy->count(), 1 );
    QList<QVariant> arguments = changedSpy->takeFirst();
-   QCOMPARE( arguments.at(0).value<Kasten::AbstractDocument::SynchronizationStates>(), states );
+   QCOMPARE( arguments.at(0).value<Kasten::AbstractDocument::SyncStates>(), states );
 }
 
 
@@ -59,7 +59,7 @@ void TestDocumentTest::testPlainConstructor()
     QVERIFY( document != 0 );
     QCOMPARE( *document->data(), QByteArray() );
     QCOMPARE( document->title(), QString() );
-    QCOMPARE( document->synchronizationStates(), Kasten::TestDocument::InSync );
+    QCOMPARE( document->syncStates(), Kasten::TestDocument::InSync );
 
     delete document;
 }
@@ -72,29 +72,29 @@ void TestDocumentTest::testDataConstructor()
     QVERIFY( document != 0 );
     QCOMPARE( *document->data(), testData );
     QCOMPARE( document->title(), QString() );
-    QCOMPARE( document->synchronizationStates(), Kasten::TestDocument::InSync );
+    QCOMPARE( document->syncStates(), Kasten::TestDocument::InSync );
 
     delete document;
 }
 
 void TestDocumentTest::testChangeData()
 {
-    qRegisterMetaType<Kasten::AbstractDocument::SynchronizationStates>("Kasten::AbstractDocument::SynchronizationStates");
+    qRegisterMetaType<Kasten::AbstractDocument::SyncStates>("Kasten::AbstractDocument::SyncStates");
     const QByteArray testData( TestData );
 
     Kasten::TestDocument* document = new Kasten::TestDocument();
 
-    QSignalSpy* changedSpy = new QSignalSpy( document, SIGNAL(syncStatesChanged( Kasten::AbstractDocument::SynchronizationStates )) );
+    QSignalSpy* changedSpy = new QSignalSpy( document, SIGNAL(syncStatesChanged( Kasten::AbstractDocument::SyncStates )) );
 
     QCOMPARE( *document->data(), QByteArray() );
-    QCOMPARE( document->synchronizationStates(), Kasten::TestDocument::InSync );
+    QCOMPARE( document->syncStates(), Kasten::TestDocument::InSync );
 
     document->setData( testData );
 
-    const Kasten::AbstractDocument::SynchronizationStates states( Kasten::AbstractDocument::LocalHasChanges );
+    const Kasten::AbstractDocument::SyncStates states( Kasten::AbstractDocument::LocalHasChanges );
     QCOMPARE( *document->data(), testData );
-    QCOMPARE( document->synchronizationStates(), states );
-    checkSynchronizationStatesChanged( changedSpy, states );
+    QCOMPARE( document->syncStates(), states );
+    checkSyncStatesChanged( changedSpy, states );
 
     delete document;
     delete changedSpy;
@@ -110,28 +110,28 @@ void TestDocumentTest::testSetTitle()
     document->setTitle( title );
 
     QCOMPARE( document->title(), title );
-    QCOMPARE( document->synchronizationStates(), Kasten::TestDocument::InSync );
+    QCOMPARE( document->syncStates(), Kasten::TestDocument::InSync );
     checkTitleChanged( titleChangedSpy, title );
 
     delete document;
     delete titleChangedSpy;
 }
 
-void TestDocumentTest::testSetSynchronizationStates()
+void TestDocumentTest::testSetSyncStates()
 {
-    qRegisterMetaType<Kasten::AbstractDocument::SynchronizationStates>("Kasten::AbstractDocument::SynchronizationStates");
+    qRegisterMetaType<Kasten::AbstractDocument::SyncStates>("Kasten::AbstractDocument::SyncStates");
 
     Kasten::TestDocument* document = new Kasten::TestDocument();
 
-    QSignalSpy* changedSpy = new QSignalSpy( document, SIGNAL(syncStatesChanged( Kasten::AbstractDocument::SynchronizationStates )) );
+    QSignalSpy* changedSpy = new QSignalSpy( document, SIGNAL(syncStatesChanged( Kasten::AbstractDocument::SyncStates )) );
 
-    const Kasten::AbstractDocument::SynchronizationStates
+    const Kasten::AbstractDocument::SyncStates
         states( Kasten::AbstractDocument::LocalHasChanges | Kasten::AbstractDocument::RemoteUnknown );
-    document->setSynchronizationStates( states );
+    document->setSyncStates( states );
 
     QCOMPARE( document->title(), QString() );
-    QCOMPARE( document->synchronizationStates(), states );
-    checkSynchronizationStatesChanged( changedSpy, states );
+    QCOMPARE( document->syncStates(), states );
+    checkSyncStatesChanged( changedSpy, states );
 
     delete document;
     delete changedSpy;

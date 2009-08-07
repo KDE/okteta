@@ -79,7 +79,7 @@ bool KByteArrayDocument::isModifiable() const { return true; }
 bool KByteArrayDocument::isReadOnly()   const { return mByteArray->isReadOnly(); }
 void KByteArrayDocument::setReadOnly( bool isReadOnly ) { mByteArray->setReadOnly( isReadOnly ); }
 
-AbstractDocument::SynchronizationStates KByteArrayDocument::synchronizationStates() const
+AbstractDocument::SyncStates KByteArrayDocument::syncStates() const
 {
     return mByteArray->isModified() ? LocalHasChanges : InSync;
 }

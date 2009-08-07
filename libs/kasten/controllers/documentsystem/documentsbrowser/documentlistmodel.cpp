@@ -90,7 +90,7 @@ QVariant DocumentListModel::data( const QModelIndex& index, int role ) const
                     result = KIcon( "arrow-right" );
                 break;
             case ModifiedColumnId:
-                if( document->synchronizationStates() != AbstractDocument::InSync )
+                if( document->syncStates() != AbstractDocument::InSync )
                     result = KIcon( "document-save" );
                 break;
             default:
@@ -145,7 +145,7 @@ Q_UNUSED( document )
 void DocumentListModel::onDocumentsAdded( const QList<Kasten::AbstractDocument*>& documents )
 {
     foreach( AbstractDocument* document, documents )
-        connect( document, SIGNAL(syncStatesChanged( Kasten::AbstractDocument::SynchronizationStates )),
+        connect( document, SIGNAL(syncStatesChanged( Kasten::AbstractDocument::SyncStates )),
                  SLOT(onSyncStatesChanged()) );
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
     reset();

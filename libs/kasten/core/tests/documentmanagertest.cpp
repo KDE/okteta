@@ -97,7 +97,7 @@ void DocumentManagerTest::testCanClose()
     documentManager->addDocument( doc );
     QVERIFY( documentManager->canClose(doc) );
 
-//     doc->setSynchronizationStates( Kasten::AbstractDocument::LocalHasChanges );
+//     doc->setSyncStates( Kasten::AbstractDocument::LocalHasChanges );
 //     QVERIFY( !documentManager->canClose(doc) );
 
     delete documentManager;

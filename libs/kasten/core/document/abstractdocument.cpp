@@ -95,7 +95,7 @@ void AbstractDocument::setId( const QString& id ) { d->setId(id); }
 void AbstractDocument::setSynchronizer( AbstractModelSynchronizer* synchronizer ) { d->setSynchronizer(synchronizer); }
 void AbstractDocument::setLiveSynchronizer( AbstractModelSynchronizer* synchronizer ) { d->setLiveSynchronizer(synchronizer); }
 
-bool AbstractDocument::hasLocalChanges() const { return synchronizationStates().testFlag(LocalHasChanges) ; }
+bool AbstractDocument::hasLocalChanges() const { return syncStates().testFlag(LocalHasChanges) ; }
 
 AbstractDocument::~AbstractDocument()
 {

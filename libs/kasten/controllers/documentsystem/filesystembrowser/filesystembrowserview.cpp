@@ -89,7 +89,7 @@ void FileSystemBrowserView::init()
 
     mActionCollection = new KActionCollection( this );
     QAction* syncDirAction = mActionCollection->addAction( "sync_dir" );
-    syncDirAction->setIcon( KIcon("dirsync") );
+    syncDirAction->setIcon( KIcon("go-parent-folder") );
     syncDirAction->setText( i18nc("@action:intoolbar", "Folder of Current Document") );
     connect( syncDirAction, SIGNAL(triggered()), SLOT(syncCurrentDocumentDirectory()) );
     connect( mTool, SIGNAL(hasCurrentUrlChanged( bool )), syncDirAction, SLOT(setEnabled( bool )) );

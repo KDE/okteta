@@ -40,17 +40,17 @@ TestDocument::TestDocument( const QByteArray &data )
 QString TestDocument::mimeType() const { return QLatin1String("TestDocument"); }
 QString TestDocument::typeName() const { return QLatin1String("Test Document"); }
 QString TestDocument::title() const { return mTitle; }
-TestDocument::SynchronizationStates TestDocument::synchronizationStates() const { return mSynchronizationStates; }
+TestDocument::SyncStates TestDocument::syncStates() const { return mSyncStates; }
 const QByteArray* TestDocument::data() const { return &mData; }
 void TestDocument::setData( const QByteArray& data )
 {
-    const SynchronizationStates oldSyncStates = mSynchronizationStates;
+    const SyncStates oldSyncStates = mSyncStates;
 
     mData = data;
 
-    mSynchronizationStates |= LocalHasChanges;
-    if( oldSyncStates != mSynchronizationStates )
-        emit syncStatesChanged( mSynchronizationStates );
+    mSyncStates |= LocalHasChanges;
+    if( oldSyncStates != mSyncStates )
+        emit syncStatesChanged( mSyncStates );
 }
 
 void TestDocument::setTitle( const QString &title )
@@ -61,12 +61,12 @@ void TestDocument::setTitle( const QString &title )
         emit titleChanged( title );
     }
  }
-void TestDocument::setSynchronizationStates( SynchronizationStates synchronizationStates )
+void TestDocument::setSyncStates( SyncStates syncStates )
 {
-    if( mSynchronizationStates != synchronizationStates )
+    if( mSyncStates != syncStates )
     {
-        mSynchronizationStates = synchronizationStates;
-        emit syncStatesChanged( synchronizationStates );
+        mSyncStates = syncStates;
+        emit syncStatesChanged( syncStates );
     }
 }
 
