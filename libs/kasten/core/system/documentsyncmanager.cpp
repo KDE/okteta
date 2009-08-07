@@ -101,12 +101,6 @@ void DocumentSyncManager::load( const KUrl &url )
     emit urlUsed( url );
 }
 
-void DocumentSyncManager::onDocumentLoaded( AbstractDocument* document )
-{
-    if( document )
-        mManager->addDocument( document );
-}
-
 bool DocumentSyncManager::setSynchronizer( AbstractDocument* document )
 {
     bool storingDone = false;
@@ -243,6 +237,13 @@ bool DocumentSyncManager::canClose( AbstractDocument* document )
 
     return canClose;
 }
+
+void DocumentSyncManager::onDocumentLoaded( AbstractDocument* document )
+{
+    if( document )
+        mManager->addDocument( document );
+}
+
 
 DocumentSyncManager::~DocumentSyncManager()
 {
