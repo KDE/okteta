@@ -31,301 +31,306 @@
 namespace Okteta
 {
 
-FixedSizeByteArrayModel::FixedSizeByteArrayModel( char *D, unsigned int S, char FUC )
-  : Data( D ),
-   Size( S ),
-   FillUpChar( FUC ),
-   ReadOnly( true ),
-   Modified( false ),
-   AutoDelete( false )
+FixedSizeByteArrayModel::FixedSizeByteArrayModel( char* data, unsigned int size, char fillUpChar )
+  : mData( data ),
+    mSize( size ),
+    mFillUpChar( fillUpChar ),
+    mReadOnly( true ),
+    mModified( false ),
+    mAutoDelete( false )
 {
 }
 
-FixedSizeByteArrayModel::FixedSizeByteArrayModel( unsigned int S, char FUC )
-  : Data( new char[S] ),
-   Size( S ),
-   FillUpChar( FUC ),
-   ReadOnly( false ),
-   Modified( false ),
-   AutoDelete( true )
+FixedSizeByteArrayModel::FixedSizeByteArrayModel( unsigned int size, char fillUpChar )
+  : mData( new char[size] ),
+    mSize( size ),
+    mFillUpChar( fillUpChar ),
+    mReadOnly( false ),
+    mModified( false ),
+    mAutoDelete( true )
 {
-  reset( 0, S );
-}
-
-FixedSizeByteArrayModel::~FixedSizeByteArrayModel()
-{
-  if( AutoDelete )
-    delete [] Data;
+    reset( 0, size );
 }
 
 
-
-void FixedSizeByteArrayModel::setDatum( unsigned int Offset, const char Char )
+void FixedSizeByteArrayModel::setDatum( unsigned int offset, const char datum )
 {
-    const bool wasModifiedBefore = Modified;
+    const bool wasModifiedBefore = mModified;
 
-  Data[Offset] = Char;
-  Modified = true;
+    mData[offset] = datum;
+    mModified = true;
 
-  emit contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(Offset, 1, 1) );
+    emit contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(offset, 1, 1) );
     if( ! wasModifiedBefore )
         emit modifiedChanged( true );
 }
 
 
 
-int FixedSizeByteArrayModel::insert( int Pos, const char* D, int InputLength )
+int FixedSizeByteArrayModel::insert( int offset, const char* insertData, int insertLength )
 {
-  // check all parameters
-  if( Pos >= (int)Size || InputLength == 0 )
-    return 0;
+    // check all parameters
+    if( offset >= (int)mSize || insertLength == 0 )
+        return 0;
 
-    const bool wasModifiedBefore = Modified;
+    const bool wasModifiedBefore = mModified;
 
-  if( Pos + InputLength > (int)Size )
-    InputLength = Size - Pos;
+    if( offset + insertLength > (int)mSize )
+        insertLength = mSize - offset;
 
-  unsigned int BehindInsertPos = Pos + InputLength;
-  // fmove right data behind the input range
-  memmove( &Data[BehindInsertPos], &Data[Pos], Size-BehindInsertPos );
-  // insert input
-  memcpy( &Data[Pos], D, InputLength );
-
-  Modified = true;
-
-  emit contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(Pos, 0, InputLength) );
-  //emit contentsReplaced( Pos, , 0 ); TODO: how to signal the removed data?
-    if( ! wasModifiedBefore )
-        emit modifiedChanged( true );
-  return InputLength;
-}
-
-
-int FixedSizeByteArrayModel::remove( const KDE::Section& R )
-{
-  KDE::Section Remove( R );
-  if( Remove.start() >= (int)Size || Remove.width() == 0 )
-    return 0;
-
-    const bool wasModifiedBefore = Modified;
-
-  Remove.restrictEndTo( Size-1 );
-
-  int RemoveLength = Remove.width();
-  int BehindRemovePos = Remove.nextBehindEnd();
-  // fmove right data behind the input range
-  memmove( &Data[Remove.start()], &Data[BehindRemovePos], Size-BehindRemovePos );
-  // clear freed space
-  reset( Size-RemoveLength, RemoveLength );
-
-  Modified = true;
-
-  emit contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(Remove.start(), Remove.width(), 0) );
-  //emit contentsReplaced( Pos, 0,  ); TODO: how to signal the inserted data?
-    if( ! wasModifiedBefore )
-        emit modifiedChanged( true );
-  return RemoveLength;
-}
-
-
-unsigned int FixedSizeByteArrayModel::replace( const KDE::Section& R, const char* D, unsigned int InputLength )
-{
-  KDE::Section Remove( R );
-  // check all parameters
-  if( Remove.startsBehind( Size-1 ) || (Remove.width()==0 && InputLength==0) )
-    return 0;
-
-    const bool wasModifiedBefore = Modified;
-
-  Remove.restrictEndTo( Size-1 );
-  if( Remove.start() + InputLength > Size )
-    InputLength = Size - Remove.start();
-
-  int SizeDiff = InputLength - Remove.width();
-
-  // is input longer than removed?
-  if( SizeDiff > 0 )
-  {
-    unsigned int BehindInsertPos = Remove.start() + InputLength;
+    const unsigned int behindInsertOffset = offset + insertLength;
     // fmove right data behind the input range
-    memmove( &Data[BehindInsertPos], &Data[Remove.nextBehindEnd()], Size-BehindInsertPos );
-  }
-  // is input smaller than removed?
-  else if( SizeDiff < 0 )
-  {
-    unsigned int BehindRemovePos = Remove.nextBehindEnd();
-    // fmove right data behind the input range
-    memmove( &Data[Remove.start()+InputLength], &Data[BehindRemovePos], Size-BehindRemovePos );
-   // clear freed space
-    reset( Size+SizeDiff, -SizeDiff );
-  }
-  // insert input
-  memcpy( &Data[Remove.start()], D, InputLength );
+    memmove( &mData[behindInsertOffset], &mData[offset], mSize-behindInsertOffset );
+    // insert input
+    memcpy( &mData[offset], insertData, insertLength );
 
-  Modified = true;
+    mModified = true;
 
-  emit contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(Remove.start(), Remove.width(), InputLength) );
-  //emit contentsReplaced( Pos, 0,  ); TODO: how to signal the changed data at the end?
+    emit contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(offset, 0, insertLength) );
+    //emit contentsReplaced( offset, , 0 ); TODO: how to signal the removed data?
     if( ! wasModifiedBefore )
         emit modifiedChanged( true );
-  return InputLength;
+
+    return insertLength;
+}
+
+
+int FixedSizeByteArrayModel::remove( const KDE::Section& _removeSection )
+{
+    KDE::Section removeSection( _removeSection );
+    if( removeSection.start() >= (int)mSize || removeSection.width() == 0 )
+        return 0;
+
+    const bool wasModifiedBefore = mModified;
+
+    removeSection.restrictEndTo( mSize-1 );
+
+    const int removeLength = removeSection.width();
+    const int behindRemoveOffset = removeSection.nextBehindEnd();
+    // fmove right data behind the input range
+    memmove( &mData[removeSection.start()], &mData[behindRemoveOffset], mSize-behindRemoveOffset );
+    // clear freed space
+    reset( mSize-removeLength, removeLength );
+
+    mModified = true;
+
+    emit contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(removeSection.start(), removeSection.width(), 0) );
+    //emit contentsReplaced( offset, 0,  ); TODO: how to signal the inserted data?
+    if( ! wasModifiedBefore )
+        emit modifiedChanged( true );
+
+    return removeLength;
+}
+
+
+unsigned int FixedSizeByteArrayModel::replace( const KDE::Section& _removeSection, const char* insertData, unsigned int insertLength )
+{
+    KDE::Section removeSection( _removeSection );
+    // check all parameters
+    if( removeSection.startsBehind( mSize-1 ) || (removeSection.width()==0 && insertLength==0) )
+        return 0;
+
+    const bool wasModifiedBefore = mModified;
+
+    removeSection.restrictEndTo( mSize-1 );
+    if( removeSection.start() + insertLength > mSize )
+        insertLength = mSize - removeSection.start();
+
+    const int sizeDiff = insertLength - removeSection.width();
+
+    // is input longer than removed?
+    if( sizeDiff > 0 )
+    {
+        unsigned int behindInsertOffset = removeSection.start() + insertLength;
+        // fmove right data behind the input range
+        memmove( &mData[behindInsertOffset], &mData[removeSection.nextBehindEnd()], mSize-behindInsertOffset );
+    }
+    // is input smaller than removed?
+    else if( sizeDiff < 0 )
+    {
+        unsigned int behindRemoveOffset = removeSection.nextBehindEnd();
+        // fmove right data behind the input range
+        memmove( &mData[removeSection.start()+insertLength], &mData[behindRemoveOffset], mSize-behindRemoveOffset );
+        // clear freed space
+        reset( mSize+sizeDiff, -sizeDiff );
+    }
+    // insert input
+    memcpy( &mData[removeSection.start()], insertData, insertLength );
+
+    mModified = true;
+
+    emit contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(removeSection.start(), removeSection.width(), insertLength) );
+    //emit contentsReplaced( offset, 0,  ); TODO: how to signal the changed data at the end?
+    if( ! wasModifiedBefore )
+        emit modifiedChanged( true );
+
+    return insertLength;
 }
 
 
 bool FixedSizeByteArrayModel::swap( int firstStart, const KDE::Section& secondSection )
 {
-  KDE::Section SourceSection( secondSection );
-  // check all parameters
-  if( SourceSection.start() >= (int)Size || SourceSection.width() == 0
-      || firstStart > (int)Size || SourceSection.start() == firstStart )
-    return false;
+    KDE::Section sourceSection( secondSection );
+    // check all parameters
+    if( sourceSection.start() >= (int)mSize || sourceSection.width() == 0
+        || firstStart > (int)mSize || sourceSection.start() == firstStart )
+        return false;
 
-    const bool wasModifiedBefore = Modified;
+    const bool wasModifiedBefore = mModified;
 
-  SourceSection.restrictEndTo( Size-1 );
-  bool ToRight = firstStart > SourceSection.start();
-  int MovedLength = SourceSection.width();
-  int DisplacedLength = ToRight ?  firstStart - SourceSection.end()-1 : SourceSection.start() - firstStart;
+    sourceSection.restrictEndTo( mSize-1 );
+    const bool toRight = firstStart > sourceSection.start();
+    const int movedLength = sourceSection.width();
+    const int displacedLength = toRight ?  firstStart - sourceSection.end()-1 : sourceSection.start() - firstStart;
 
-  // find out section that is smaller
-  int SmallPartLength, LargePartLength, SmallPartStart, LargePartStart, SmallPartDest, LargePartDest;
-  // moving part is smaller?
-  if( MovedLength < DisplacedLength )
-  {
-    SmallPartStart = SourceSection.start();
-    SmallPartLength = MovedLength;
-    LargePartLength = DisplacedLength;
-    // moving part moves right?
-    if( ToRight )
+    // find out section that is smaller
+    int smallPartLength, largePartLength, smallPartStart, largePartStart, smallPartDest, largePartDest;
+    // moving part is smaller?
+    if( movedLength < displacedLength )
     {
-      SmallPartDest = firstStart - MovedLength;
-      LargePartStart = SourceSection.nextBehindEnd();
-      LargePartDest = SourceSection.start();
+        smallPartStart = sourceSection.start();
+        smallPartLength = movedLength;
+        largePartLength = displacedLength;
+        // moving part moves right?
+        if( toRight )
+        {
+            smallPartDest = firstStart - movedLength;
+            largePartStart = sourceSection.nextBehindEnd();
+            largePartDest = sourceSection.start();
+        }
+        else
+        {
+            smallPartDest = firstStart;
+            largePartStart = firstStart;
+            largePartDest = firstStart + movedLength;
+        }
     }
     else
     {
-      SmallPartDest = firstStart;
-      LargePartStart = firstStart;
-      LargePartDest = firstStart + MovedLength;
+        largePartStart = sourceSection.start();
+        largePartLength = movedLength;
+        smallPartLength = displacedLength;
+        // moving part moves right?
+        if( toRight )
+        {
+            largePartDest = firstStart - movedLength;
+            smallPartStart = sourceSection.nextBehindEnd();
+            smallPartDest = sourceSection.start();
+        }
+        else
+        {
+            largePartDest = firstStart;
+            smallPartStart = firstStart;
+            smallPartDest = firstStart + movedLength;
+        }
     }
-  }
-  else
-  {
-    LargePartStart = SourceSection.start();
-    LargePartLength = MovedLength;
-    SmallPartLength = DisplacedLength;
-    // moving part moves right?
-    if( ToRight )
-    {
-      LargePartDest = firstStart - MovedLength;
-      SmallPartStart = SourceSection.nextBehindEnd();
-      SmallPartDest = SourceSection.start();
-    }
-    else
-    {
-      LargePartDest = firstStart;
-      SmallPartStart = firstStart;
-      SmallPartDest = firstStart + MovedLength;
-    }
-  }
 
-  // copy smaller part to tempbuffer
-  char *Temp = new char[SmallPartLength];
-  memcpy( Temp, &Data[SmallPartStart], SmallPartLength );
+    // copy smaller part to tempbuffer
+    char* tempBuffer = new char[smallPartLength];
+    memcpy( tempBuffer, &mData[smallPartStart], smallPartLength );
 
-  // move the larger part
-  memmove( &Data[LargePartDest], &Data[LargePartStart], LargePartLength );
+    // move the larger part
+    memmove( &mData[largePartDest], &mData[largePartStart], largePartLength );
 
-  // copy smaller part to its new dest
-  memcpy( &Data[SmallPartDest], Temp, SmallPartLength );
-  delete [] Temp;
+    // copy smaller part to its new dest
+    memcpy( &mData[smallPartDest], tempBuffer, smallPartLength );
+    delete [] tempBuffer;
 
-  Modified = true;
+    mModified = true;
 
-  emit contentsChanged( KDE::ArrayChangeMetricsList::oneSwapping(firstStart, SourceSection.start(),SourceSection.width()) );
+    emit contentsChanged( KDE::ArrayChangeMetricsList::oneSwapping(firstStart, sourceSection.start(),sourceSection.width()) );
     if( ! wasModifiedBefore )
         emit modifiedChanged( true );
-  return true;
+
+    return true;
 }
 
 
-int FixedSizeByteArrayModel::fill( const char FChar, unsigned int Pos, int FillLength )
+int FixedSizeByteArrayModel::fill( const char fillChar, unsigned int offset, int fillLength )
 {
-  // nothing to fill
-  if( Pos >= Size )
-    return 0;
+    // nothing to fill
+    if( offset >= mSize )
+        return 0;
 
-    const bool wasModifiedBefore = Modified;
+    const bool wasModifiedBefore = mModified;
 
-  unsigned int LengthToEnd = Size - Pos;
+    const unsigned int lengthToEnd = mSize - offset;
 
-  if( FillLength < 0 || FillLength > (int)LengthToEnd )
-    FillLength = LengthToEnd;
+    if( fillLength < 0 || fillLength > (int)lengthToEnd )
+        fillLength = lengthToEnd;
 
-  memset( &Data[Pos], FChar, FillLength );
-  Modified = true;
+    memset( &mData[offset], fillChar, fillLength );
+    mModified = true;
 
-  emit contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(Pos, FillLength, FillLength) );
+    emit contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(offset, fillLength, fillLength) );
     if( ! wasModifiedBefore )
         emit modifiedChanged( true );
-  return FillLength;
+
+    return fillLength;
 }
 
 
-int FixedSizeByteArrayModel::compare( const AbstractByteArrayModel &Other, const KDE::Section& OR, unsigned int Pos )
+int FixedSizeByteArrayModel::compare( const AbstractByteArrayModel& other, const KDE::Section& _otherRange, unsigned int offset )
 {
-  KDE::Section OtherRange( OR );
-  //kDebug() << QString("Pos: %1, OtherRange: (%3/%4)" ).arg(Pos).arg(OtherRange.start()).arg(OtherRange.end())
-  //    << endl;
-  // test other values
-  if( OtherRange.startsBehind(Other.size()-1) )
-    return 1;
+    KDE::Section otherRange( _otherRange );
+    //kDebug() << QString("offset: %1, otherRange: (%3/%4)" ).arg(offset).arg(otherRange.start()).arg(otherRange.end())
+    //    << endl;
+    // test other values
+    if( otherRange.startsBehind(other.size()-1) )
+        return 1;
 
-  // check own values
-  if( Pos >= Size )
-    return -1;
+    // check own values
+    if( offset >= mSize )
+        return -1;
 
-  int ValueByLength = 0; // default: equal
+    int valueByLength = 0; // default: equal
 
-  KDE::Section Range = KDE::Section::fromWidth( Pos, OtherRange.width() );
-  int Last = Other.size()-1;
-  // 
-  if( OtherRange.endsBehind(Last) )
-  {
-    // make shorter
-    OtherRange.setEnd( Last );
-    if( OtherRange.width() < Range.width() )
-      ValueByLength = 1;
-  }
-  Last = Size-1;
-  if( Range.endsBehind(Last) )
-  {
-    // make shorter
-    Range.setEnd( Last );
-    if( OtherRange.width() > Range.width() )
-      ValueByLength = -1;
-  }
-  //kDebug()
-  //    << QString( "Range: (%1/%2), OtherRange: (%3/%4)" ).arg(Range.start()).arg(Range.end()).arg(OtherRange.start()).arg(OtherRange.end())
-  //    << endl;
-  int oi = OtherRange.start();
-  for( int i=Range.start(); i<=Range.end(); ++i,++oi )
-  {
-    char OD = Other.datum(oi);
-    char D = Data[i];
-    //kDebug() << QString("%1==%2").arg((int)D).arg((int)OD) ;
-    if( OD == D )
-      continue;
-    return OD < D ? 1 : -1;
-  }
+    KDE::Section range = KDE::Section::fromWidth( offset, otherRange.width() );
+    int lastOffset = other.size()-1;
+    // 
+    if( otherRange.endsBehind(lastOffset) )
+    {
+        // make shorter
+        otherRange.setEnd( lastOffset );
+        if( otherRange.width() < range.width() )
+            valueByLength = 1;
+    }
+    lastOffset = mSize-1;
+    if( range.endsBehind(lastOffset) )
+    {
+        // make shorter
+        range.setEnd( lastOffset );
+        if( otherRange.width() > range.width() )
+            valueByLength = -1;
+    }
+    //kDebug()
+    //    << QString( "range: (%1/%2), otherRange: (%3/%4)" ).arg(range.start()).arg(range.end()).arg(otherRange.start()).arg(otherRange.end())
+    //    << endl;
+    int oi = otherRange.start();
+    for( int i=range.start(); i<=range.end(); ++i,++oi )
+    {
+        char OD = other.datum(oi);
+        char data = mData[i];
+        //kDebug() << QString("%1==%2").arg((int)data).arg((int)OD) ;
+        if( OD == data )
+            continue;
+        return ( OD < data ) ? 1 : -1;
+    }
 
-  return ValueByLength;
+    return valueByLength;
 }
 
 
-void FixedSizeByteArrayModel::reset( unsigned int Pos, unsigned int Length )
+void FixedSizeByteArrayModel::reset( unsigned int offset, unsigned int length )
 {
-  memset( &Data[Pos], FillUpChar, Length );
+    memset( &mData[offset], mFillUpChar, length );
+}
+
+
+FixedSizeByteArrayModel::~FixedSizeByteArrayModel()
+{
+    if( mAutoDelete )
+        delete [] mData;
 }
 
 }

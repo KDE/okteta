@@ -30,7 +30,7 @@
 namespace Okteta
 {
 
-/** base class for all Data buffers that are used to display
+/** base class for all mData buffers that are used to display
   * TODO: think about a way to inform KHexEdit that there has been
   * a change in the buffer outside. what kind of changes are possible?
   *@author Friedrich W. H. Kossebau
@@ -40,70 +40,71 @@ class FixedSizeByteArrayModel : public AbstractByteArrayModel
 {
   public:
     /** creates a readonly buffer around the given data */
-    FixedSizeByteArrayModel( char *D, unsigned int S, char FUC = '\0' );
+    FixedSizeByteArrayModel( char* data, unsigned int size, char fillUpChar = '\0' );
     /** creates a writeable buffer which is deleted at the end */
-    explicit FixedSizeByteArrayModel( unsigned int S, char FUC = '\0' );
+    explicit FixedSizeByteArrayModel( unsigned int size, char fillUpChar = '\0' );
+
     virtual ~FixedSizeByteArrayModel();
 
   public: // AbstractByteArrayModel API
-    virtual char datum( unsigned int Offset ) const;
+    virtual char datum( unsigned int offset ) const;
     virtual int size() const;
     virtual bool isReadOnly() const;
     virtual bool isModified() const;
 
-    virtual int insert( int Pos, const char*, int Length );
+    virtual int insert( int offset, const char* insertData, int insertLength );
     virtual int remove( const KDE::Section& removeSection );
-    virtual unsigned int replace( const KDE::Section& removeSection, const char*, unsigned int inputLength );
+    virtual unsigned int replace( const KDE::Section& removeSection, const char* insertData, unsigned int insertLength );
     virtual bool swap( int firstStart, const KDE::Section& secondSection );
-    virtual int fill( const char FillChar, unsigned int Pos = 0, int Length = -1 );
-    virtual void setDatum( unsigned int Offset, const char Char );
+    virtual int fill( const char fillChar, unsigned int offset = 0, int fillLength = -1 );
+    virtual void setDatum( unsigned int offset, const char datum );
 
-    virtual void setModified( bool M = true );
-    virtual void setReadOnly( bool RO = true );
-
-  public:
-    int compare( const AbstractByteArrayModel &Other, const KDE::Section& range, unsigned int Pos = 0 );
-    int compare( const AbstractByteArrayModel &Other, int OtherPos, int Length, unsigned int Pos = 0 );
-    int compare( const AbstractByteArrayModel &Other );
+    virtual void setModified( bool modified = true );
+    virtual void setReadOnly( bool readOnly = true );
 
   public:
-    char *rawData() const;
+    int compare( const AbstractByteArrayModel& other, const KDE::Section& range, unsigned int pos = 0 );
+    int compare( const AbstractByteArrayModel& other, int otherPos, int length, unsigned int pos = 0 );
+    int compare( const AbstractByteArrayModel& other );
+
+  public:
+    char* rawData() const;
 
   protected:
-    void reset( unsigned int Pos, unsigned int Length );
+    void reset( unsigned int pos, unsigned int length );
 
   protected:
     /** */
-    char *Data;
+    char* mData;
     /***/
-    unsigned int Size;
+    unsigned int mSize;
     /** */
-    char FillUpChar;
+    char mFillUpChar;
     /**  */
-    bool ReadOnly:1;
+    bool mReadOnly :1;
     /** */
-    bool Modified:1;
+    bool mModified :1;
     /** */
-    bool AutoDelete:1;
+    bool mAutoDelete :1;
 };
 
 
-inline char FixedSizeByteArrayModel::datum( unsigned int Offset ) const { return Data[Offset]; }
-inline int FixedSizeByteArrayModel::size() const  { return Size; }
+inline char FixedSizeByteArrayModel::datum( unsigned int offset ) const { return mData[offset]; }
+inline int FixedSizeByteArrayModel::size() const  { return mSize; }
 
-inline bool FixedSizeByteArrayModel::isReadOnly()   const { return ReadOnly; }
-inline bool FixedSizeByteArrayModel::isModified()   const { return Modified; }
+inline bool FixedSizeByteArrayModel::isReadOnly()   const { return mReadOnly; }
+inline bool FixedSizeByteArrayModel::isModified()   const { return mModified; }
 
-inline void FixedSizeByteArrayModel::setReadOnly( bool RO )  { ReadOnly = RO; }
-inline void FixedSizeByteArrayModel::setModified( bool M )   { Modified = M; }
+inline void FixedSizeByteArrayModel::setReadOnly( bool readOnly )  { mReadOnly = readOnly; }
+inline void FixedSizeByteArrayModel::setModified( bool modified )   { mModified = modified; }
 
-inline int FixedSizeByteArrayModel::compare( const AbstractByteArrayModel &Other )
-{ return compare( Other, KDE::Section(0,Other.size()-1),0 ); }
+inline int FixedSizeByteArrayModel::compare( const AbstractByteArrayModel& other )
+{ return compare( other, KDE::Section(0,other.size()-1),0 ); }
 
-inline int FixedSizeByteArrayModel::compare( const AbstractByteArrayModel &Other, int OtherPos, int Length, unsigned int Pos )
-{ return compare( Other, KDE::Section::fromWidth(OtherPos,Length),Pos ); }
+inline int FixedSizeByteArrayModel::compare( const AbstractByteArrayModel& other, int otherPos, int length, unsigned int pos )
+{ return compare( other, KDE::Section::fromWidth(otherPos,length),pos ); }
 
-inline char *FixedSizeByteArrayModel::rawData() const { return Data; }
+inline char* FixedSizeByteArrayModel::rawData() const { return mData; }
 
 }
 
