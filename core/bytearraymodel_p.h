@@ -144,10 +144,12 @@ inline void ByteArrayModelPrivate::setKeepsMemory( bool KM ) { m_keepsMemory = K
 inline void ByteArrayModelPrivate::setAutoDelete( bool AD )  { m_autoDelete = AD; }
 inline void ByteArrayModelPrivate::setDatum( unsigned int offset, const char datum )
 {
+    const bool wasModifiedBefore = m_modified;
     m_data[offset] = datum;
     m_modified = true;
     emit p->contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(offset,1,1) );
-    emit p->modifiedChanged( true );
+    if( ! wasModifiedBefore )
+        emit p->modifiedChanged( true );
 }
 inline void ByteArrayModelPrivate::setModified( bool modified )
 {

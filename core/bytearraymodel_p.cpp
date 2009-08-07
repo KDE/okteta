@@ -105,6 +105,8 @@ int ByteArrayModelPrivate::insert( int position, const char* data, int length )
     if( length == 0 )
       return 0;
 
+    const bool wasModifiedBefore = m_modified;
+
     // correct for appending
     if( position > (int)m_size )
         position = m_size;
@@ -119,7 +121,8 @@ int ByteArrayModelPrivate::insert( int position, const char* data, int length )
 
     emit p->contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(position, 0, length) );
     if( bookmarksModified ) emit p->bookmarksModified( true );
-    emit p->modifiedChanged( true );
+    if( ! wasModifiedBefore )
+        emit p->modifiedChanged( true );
     return length;
 }
 
@@ -132,6 +135,8 @@ int ByteArrayModelPrivate::remove( const KDE::Section& section )
     KDE::Section removeSection( section );
     if( removeSection.startsBehind(m_size-1) || removeSection.width() == 0 )
         return 0;
+
+    const bool wasModifiedBefore = m_modified;
 
     removeSection.restrictEndTo( m_size-1 );
 
@@ -147,7 +152,8 @@ int ByteArrayModelPrivate::remove( const KDE::Section& section )
 
     emit p->contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(removeSection.start(), removeSection.width(), 0) );
     if( bookmarksModified ) emit p->bookmarksModified( true );
-    emit p->modifiedChanged( true );
+    if( ! wasModifiedBefore )
+        emit p->modifiedChanged( true );
     return removeSection.width();
 }
 
@@ -161,6 +167,8 @@ unsigned int ByteArrayModelPrivate::replace( const KDE::Section& section, const 
     // check all parameters
     if( removeSection.start() >= (int)m_size || (removeSection.width()==0 && inputLength==0) )
         return 0;
+
+    const bool wasModifiedBefore = m_modified;
 
     removeSection.restrictEndTo( m_size-1 );
 
@@ -219,7 +227,8 @@ unsigned int ByteArrayModelPrivate::replace( const KDE::Section& section, const 
     emit p->contentsChanged(
         KDE::ArrayChangeMetricsList::oneReplacement(removeSection.start(), removeSection.width(), inputLength) );
     if( bookmarksModified ) emit p->bookmarksModified( true );
-    emit p->modifiedChanged( true );
+    if( ! wasModifiedBefore )
+        emit p->modifiedChanged( true );
     return inputLength;
 }
 
@@ -234,6 +243,8 @@ bool ByteArrayModelPrivate::swap( int firstStart, const KDE::Section& secondSect
     if( sourceSection.start() >= (int)m_size || sourceSection.width() == 0
         || firstStart > (int)m_size || sourceSection.start() == firstStart )
         return false;
+
+    const bool wasModifiedBefore = m_modified;
 
     sourceSection.restrictEndTo( m_size-1 );
     const bool toRight = firstStart > sourceSection.start();
@@ -301,7 +312,8 @@ bool ByteArrayModelPrivate::swap( int firstStart, const KDE::Section& secondSect
     emit p->contentsChanged(
         KDE::ArrayChangeMetricsList::oneSwapping(firstStart,sourceSection.start(),sourceSection.width()) );
     if( bookmarksModified ) emit p->bookmarksModified( true );
-    emit p->modifiedChanged( true );
+    if( ! wasModifiedBefore )
+        emit p->modifiedChanged( true );
     return true;
 }
 
@@ -315,6 +327,8 @@ int ByteArrayModelPrivate::fill( const char fillDatum, unsigned int position, in
     if( position >= m_size )
         return 0;
 
+    const bool wasModifiedBefore = m_modified;
+
     const int lengthToEnd = m_size - position;
 
     if( fillLength < 0 )
@@ -326,7 +340,8 @@ int ByteArrayModelPrivate::fill( const char fillDatum, unsigned int position, in
     m_modified = true;
 
     emit p->contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(position,fillLength,fillLength) );
-    emit p->modifiedChanged( true );
+    if( ! wasModifiedBefore )
+        emit p->modifiedChanged( true );
     return fillLength;
 }
 

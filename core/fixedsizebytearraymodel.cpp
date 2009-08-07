@@ -62,11 +62,14 @@ FixedSizeByteArrayModel::~FixedSizeByteArrayModel()
 
 void FixedSizeByteArrayModel::setDatum( unsigned int Offset, const char Char )
 {
+    const bool wasModifiedBefore = Modified;
+
   Data[Offset] = Char;
   Modified = true;
 
   emit contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(Offset, 1, 1) );
-  emit modifiedChanged( true );
+    if( ! wasModifiedBefore )
+        emit modifiedChanged( true );
 }
 
 
@@ -76,6 +79,9 @@ int FixedSizeByteArrayModel::insert( int Pos, const char* D, int InputLength )
   // check all parameters
   if( Pos >= (int)Size || InputLength == 0 )
     return 0;
+
+    const bool wasModifiedBefore = Modified;
+
   if( Pos + InputLength > (int)Size )
     InputLength = Size - Pos;
 
@@ -89,7 +95,8 @@ int FixedSizeByteArrayModel::insert( int Pos, const char* D, int InputLength )
 
   emit contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(Pos, 0, InputLength) );
   //emit contentsReplaced( Pos, , 0 ); TODO: how to signal the removed data?
-  emit modifiedChanged( true );
+    if( ! wasModifiedBefore )
+        emit modifiedChanged( true );
   return InputLength;
 }
 
@@ -99,6 +106,8 @@ int FixedSizeByteArrayModel::remove( const KDE::Section& R )
   KDE::Section Remove( R );
   if( Remove.start() >= (int)Size || Remove.width() == 0 )
     return 0;
+
+    const bool wasModifiedBefore = Modified;
 
   Remove.restrictEndTo( Size-1 );
 
@@ -113,7 +122,8 @@ int FixedSizeByteArrayModel::remove( const KDE::Section& R )
 
   emit contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(Remove.start(), Remove.width(), 0) );
   //emit contentsReplaced( Pos, 0,  ); TODO: how to signal the inserted data?
-  emit modifiedChanged( true );
+    if( ! wasModifiedBefore )
+        emit modifiedChanged( true );
   return RemoveLength;
 }
 
@@ -124,6 +134,8 @@ unsigned int FixedSizeByteArrayModel::replace( const KDE::Section& R, const char
   // check all parameters
   if( Remove.startsBehind( Size-1 ) || (Remove.width()==0 && InputLength==0) )
     return 0;
+
+    const bool wasModifiedBefore = Modified;
 
   Remove.restrictEndTo( Size-1 );
   if( Remove.start() + InputLength > Size )
@@ -154,7 +166,8 @@ unsigned int FixedSizeByteArrayModel::replace( const KDE::Section& R, const char
 
   emit contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(Remove.start(), Remove.width(), InputLength) );
   //emit contentsReplaced( Pos, 0,  ); TODO: how to signal the changed data at the end?
-  emit modifiedChanged( true );
+    if( ! wasModifiedBefore )
+        emit modifiedChanged( true );
   return InputLength;
 }
 
@@ -166,6 +179,8 @@ bool FixedSizeByteArrayModel::swap( int firstStart, const KDE::Section& secondSe
   if( SourceSection.start() >= (int)Size || SourceSection.width() == 0
       || firstStart > (int)Size || SourceSection.start() == firstStart )
     return false;
+
+    const bool wasModifiedBefore = Modified;
 
   SourceSection.restrictEndTo( Size-1 );
   bool ToRight = firstStart > SourceSection.start();
@@ -228,7 +243,8 @@ bool FixedSizeByteArrayModel::swap( int firstStart, const KDE::Section& secondSe
   Modified = true;
 
   emit contentsChanged( KDE::ArrayChangeMetricsList::oneSwapping(firstStart, SourceSection.start(),SourceSection.width()) );
-  emit modifiedChanged( true );
+    if( ! wasModifiedBefore )
+        emit modifiedChanged( true );
   return true;
 }
 
@@ -239,6 +255,8 @@ int FixedSizeByteArrayModel::fill( const char FChar, unsigned int Pos, int FillL
   if( Pos >= Size )
     return 0;
 
+    const bool wasModifiedBefore = Modified;
+
   unsigned int LengthToEnd = Size - Pos;
 
   if( FillLength < 0 || FillLength > (int)LengthToEnd )
@@ -248,7 +266,8 @@ int FixedSizeByteArrayModel::fill( const char FChar, unsigned int Pos, int FillL
   Modified = true;
 
   emit contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(Pos, FillLength, FillLength) );
-  emit modifiedChanged( true );
+    if( ! wasModifiedBefore )
+        emit modifiedChanged( true );
   return FillLength;
 }
 
