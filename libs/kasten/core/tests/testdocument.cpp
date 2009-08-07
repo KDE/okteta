@@ -42,11 +42,15 @@ QString TestDocument::typeName() const { return QLatin1String("Test Document"); 
 QString TestDocument::title() const { return mTitle; }
 TestDocument::SynchronizationStates TestDocument::synchronizationStates() const { return mSynchronizationStates; }
 const QByteArray* TestDocument::data() const { return &mData; }
-void TestDocument::setData( const QByteArray &data )
+void TestDocument::setData( const QByteArray& data )
 {
+    const SynchronizationStates oldSyncStates = mSynchronizationStates;
+
     mData = data;
+
     mSynchronizationStates |= LocalHasChanges;
-    emit modified( mSynchronizationStates );
+    if( oldSyncStates != mSynchronizationStates )
+        emit syncStatesChanged( mSynchronizationStates );
 }
 
 void TestDocument::setTitle( const QString &title )
@@ -62,7 +66,7 @@ void TestDocument::setSynchronizationStates( SynchronizationStates synchronizati
     if( mSynchronizationStates != synchronizationStates )
     {
         mSynchronizationStates = synchronizationStates;
-        emit modified( synchronizationStates );
+        emit syncStatesChanged( synchronizationStates );
     }
 }
 

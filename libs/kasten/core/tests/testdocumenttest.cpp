@@ -84,7 +84,7 @@ void TestDocumentTest::testChangeData()
 
     Kasten::TestDocument* document = new Kasten::TestDocument();
 
-    QSignalSpy* changedSpy = new QSignalSpy( document, SIGNAL(modified( Kasten::AbstractDocument::SynchronizationStates )) );
+    QSignalSpy* changedSpy = new QSignalSpy( document, SIGNAL(syncStatesChanged( Kasten::AbstractDocument::SynchronizationStates )) );
 
     QCOMPARE( *document->data(), QByteArray() );
     QCOMPARE( document->synchronizationStates(), Kasten::TestDocument::InSync );
@@ -123,7 +123,7 @@ void TestDocumentTest::testSetSynchronizationStates()
 
     Kasten::TestDocument* document = new Kasten::TestDocument();
 
-    QSignalSpy* changedSpy = new QSignalSpy( document, SIGNAL(modified( Kasten::AbstractDocument::SynchronizationStates )) );
+    QSignalSpy* changedSpy = new QSignalSpy( document, SIGNAL(syncStatesChanged( Kasten::AbstractDocument::SynchronizationStates )) );
 
     const Kasten::AbstractDocument::SynchronizationStates
         states( Kasten::AbstractDocument::LocalHasChanges | Kasten::AbstractDocument::RemoteUnknown );

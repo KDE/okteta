@@ -31,14 +31,14 @@
 #include <QtTest/QSignalSpy>
 
 
-Q_DECLARE_METATYPE ( Kasten::AbstractDocument*  )
+Q_DECLARE_METATYPE ( QList<Kasten::AbstractDocument*>  )
 
 void DocumentManagerTest::checkAdded( QSignalSpy* changedSpy, Kasten::AbstractDocument* document )
 {
    QVERIFY( changedSpy->isValid() );
    QCOMPARE( changedSpy->count(), 1 );
    QList<QVariant> arguments = changedSpy->takeFirst();
-   QCOMPARE( arguments.at(0).value<Kasten::AbstractDocument* >(), document );
+   QCOMPARE( arguments.at(0).value<QList<Kasten::AbstractDocument*> >().at(0), document );
 }
 
 void DocumentManagerTest::checkRemoving( QSignalSpy* changedSpy, Kasten::AbstractDocument* document )
@@ -46,7 +46,7 @@ void DocumentManagerTest::checkRemoving( QSignalSpy* changedSpy, Kasten::Abstrac
    QVERIFY( changedSpy->isValid() );
    QCOMPARE( changedSpy->count(), 1 );
    QList<QVariant> arguments = changedSpy->takeFirst();
-   QCOMPARE( arguments.at(0).value<Kasten::AbstractDocument* >(), document );
+   QCOMPARE( arguments.at(0).value<QList<Kasten::AbstractDocument*> >().at(0), document );
 }
 
 
@@ -58,15 +58,15 @@ void DocumentManagerTest::testConstructor()
 
 void DocumentManagerTest::testAddRemove()
 {
-    qRegisterMetaType<Kasten::AbstractDocument* >("Kasten::AbstractDocument* ");
+    qRegisterMetaType<Kasten::AbstractDocument* >("QList<Kasten::AbstractDocument*>");
 
     Kasten::TestDocument* doc1 = new Kasten::TestDocument();
     Kasten::TestDocument* doc2 = new Kasten::TestDocument();
     Kasten::TestDocument* doc3 = new Kasten::TestDocument();
 
     Kasten::DocumentManager* documentManager = new Kasten::DocumentManager();
-    QSignalSpy* addedSpy = new QSignalSpy( documentManager, SIGNAL(added( Kasten::AbstractDocument*  )) );
-    QSignalSpy* closingSpy = new QSignalSpy( documentManager, SIGNAL(closing( Kasten::AbstractDocument*  )) );
+    QSignalSpy* addedSpy = new QSignalSpy( documentManager, SIGNAL(added( const QList<Kasten::AbstractDocument*>& )) );
+    QSignalSpy* closingSpy = new QSignalSpy( documentManager, SIGNAL(closing( const QList<Kasten::AbstractDocument*>& )) );
 
     documentManager->addDocument( doc1 );
     checkAdded( addedSpy, doc1 );
