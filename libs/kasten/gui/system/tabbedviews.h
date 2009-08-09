@@ -64,8 +64,9 @@ class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews, public If::Vie
     virtual QWidget* widget() const;
     virtual QList<AbstractView*> viewList() const;
 
-  Q_SIGNALS:
+  Q_SIGNALS: // If::ViewFocusable API
     virtual void viewFocusChanged( Kasten::AbstractView* view );
+  Q_SIGNALS:
     void dragMove( const QDragMoveEvent* event, bool& accepted );
     void drop( QDropEvent* event );
 
