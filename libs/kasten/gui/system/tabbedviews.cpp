@@ -85,6 +85,17 @@ int TabbedViews::indexOf( AbstractView* view ) const
     return result;
 }
 
+QWidget* TabbedViews::widget() const
+{
+    return mTabbedViewsBox;
+}
+
+AbstractView* TabbedViews::viewFocus() const
+{
+    const ViewBox* viewBox = static_cast<const ViewBox*>( mTabWidget->currentWidget() );
+    return viewBox ? viewBox->view() : 0;
+}
+
 void TabbedViews::addViews( const QList<AbstractView*>& views )
 {
     int index;
@@ -152,21 +163,10 @@ void TabbedViews::setCurrentToolInlineView( AbstractToolInlineView* view )
     view->widget()->setFocus();
 }
 
-QWidget* TabbedViews::widget() const
-{
-    return mTabbedViewsBox;
-}
-
 void TabbedViews::setViewFocus( AbstractView *view )
 {
     const int index = indexOf( view );
     mTabWidget->setCurrentIndex( index );
-}
-
-AbstractView *TabbedViews::viewFocus() const
-{
-    const ViewBox* viewBox = static_cast<const ViewBox*>( mTabWidget->currentWidget() );
-    return viewBox ? viewBox->view() : 0;
 }
 
 void TabbedViews::onCurrentChanged( int index )
