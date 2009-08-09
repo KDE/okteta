@@ -45,9 +45,11 @@
 namespace Kasten
 {
 
-ShellWindow::ShellWindow( DocumentManager* documentManager, ViewManager *viewManager )
- : mGroupedViews( new TabbedViews() ), mCurrentView( 0 ),
-   mDocumentManager( documentManager ), mViewManager( viewManager )
+ShellWindow::ShellWindow( DocumentManager* documentManager, ViewManager* viewManager )
+  : mGroupedViews( new TabbedViews() ),
+    mCurrentView( 0 ),
+    mDocumentManager( documentManager ),
+    mViewManager( viewManager )
 {
     setCentralWidget( mGroupedViews->widget() );
 

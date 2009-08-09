@@ -27,8 +27,8 @@ namespace Kasten
 {
 
 AbstractModelStreamEncoderConfigEditor::AbstractModelStreamEncoderConfigEditor( QWidget* parent )
- : QWidget( parent ),
-   d( 0 )
+  : QWidget( parent ),
+    d( 0 )
 {}
 
 bool AbstractModelStreamEncoderConfigEditor::isValid() const

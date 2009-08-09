@@ -40,8 +40,8 @@ namespace Kasten
 {
 
 ViewManager::ViewManager( DocumentManager* documentManager )
- : mDocumentManager( documentManager ),
-   mCodecViewManager( new ModelCodecViewManager() )
+  : mDocumentManager( documentManager ),
+    mCodecViewManager( new ModelCodecViewManager() )
 {
     connect( mDocumentManager, SIGNAL(added( const QList<Kasten::AbstractDocument*>& )),
              SLOT(createViewsFor( const QList<Kasten::AbstractDocument*>& )) );
