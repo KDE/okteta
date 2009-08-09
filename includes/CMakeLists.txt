@@ -6,7 +6,7 @@ set( oktetacore_CamelCase_HDRS
   ChangeHistory
 
   ByteArrayModel
-  FileByteArrayModel
+  #FileByteArrayModel
   PieceTableByteArrayModel
 
   Section
