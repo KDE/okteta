@@ -53,8 +53,8 @@ set( kastengui_CamelCase_HDRS
   AbstractModelStreamEncoderConfigEditorFactory
   AbstractModelExporterConfigEditor
   AbstractModelExporterConfigEditorFactory
-  ModelEncoderFileSystemExporterConfigEditorConfigEditor
-  ModelEncoderFileSystemExporterConfigEditorFactoryConfigEditorFactory
+  ModelEncoderFileSystemExporterConfigEditor
+  ModelEncoderFileSystemExporterConfigEditorFactory
   AbstractToolInlineView
   AbstractGroupedViews
   ToolInlineViewable
