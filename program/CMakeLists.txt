@@ -50,6 +50,7 @@ target_link_libraries( okteta
   kastencontrollers
   kastengui
   kastencore
+  ${KDE4_KDEUI_LIBS}
 )
 
 install( TARGETS okteta  ${INSTALL_TARGETS_DEFAULT_ARGS} )
