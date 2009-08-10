@@ -29,7 +29,7 @@
 
 #ifndef OKTETAKASTENCONTROLLER_EXPORT
   // building the library?
-# if defined(MAKE_OKTETAKASTENCONTROLLER_LIB)
+# if defined(MAKE_OKTETAKASTENCONTROLLERS_LIB)
 #  define OKTETAKASTENCONTROLLER_EXPORT KDE_EXPORT
   // using the library
 # else
