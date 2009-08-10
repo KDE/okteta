@@ -29,7 +29,7 @@
 
 #ifndef KASTENCONTROLLER_EXPORT
   // building the library?
-# if defined(MAKE_KASTENCONTROLLER_LIB)
+# if defined(MAKE_KASTENCONTROLLERS_LIB)
 #  define KASTENCONTROLLER_EXPORT KDE_EXPORT
   // using the library
 # else
