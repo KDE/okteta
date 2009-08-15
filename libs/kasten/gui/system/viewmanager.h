@@ -48,6 +48,7 @@ class KASTENGUI_EXPORT ViewManager : public QObject
 
   public:
     void setViewFactory( AbstractViewFactory* factory );
+    void removeViews( const QList<AbstractView*>& views );
 
   public:
     QList<AbstractView*> views() const;

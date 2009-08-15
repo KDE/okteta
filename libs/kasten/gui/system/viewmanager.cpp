@@ -118,6 +118,20 @@ void ViewManager::removeViewsFor( const QList<Kasten::AbstractDocument*>& docume
     }
 }
 
+void ViewManager::removeViews( const QList<AbstractView*>& views )
+{
+    foreach( AbstractView* view, views )
+        mViewList.removeOne( view );
+
+    emit closing( views );
+
+    foreach( AbstractView* view, views )
+    {
+        kDebug()<<view->title();
+        delete view;
+    }
+}
+
 
 ViewManager::~ViewManager()
 {
