@@ -23,6 +23,7 @@
 #include "shellwindow.h"
 
 // lib
+#include <multiviewareas.h>
 #include <tabbedviews.h>
 #include <viewmanager.h>
 #include <abstractview.h>
@@ -46,7 +47,7 @@ namespace Kasten
 {
 
 ShellWindow::ShellWindow( DocumentManager* documentManager, ViewManager* viewManager )
-  : mGroupedViews( new TabbedViews() ),
+  : mGroupedViews( new MultiViewAreas() ),// TabbedViews() ),
     mCurrentView( 0 ),
     mDocumentManager( documentManager ),
     mViewManager( viewManager )
@@ -64,8 +65,8 @@ ShellWindow::ShellWindow( DocumentManager* documentManager, ViewManager* viewMan
 
     connect( mGroupedViews, SIGNAL(viewFocusChanged( Kasten::AbstractView* )),
              SLOT(onViewFocusChanged( Kasten::AbstractView* )) );
-    connect( mGroupedViews, SIGNAL(closeRequest( Kasten::AbstractView* )),
-             SLOT(onCloseRequest( Kasten::AbstractView* )) );
+    connect( mGroupedViews, SIGNAL(closeRequest( const QList<Kasten::AbstractView*>& )),
+             SLOT(onCloseRequest( const QList<Kasten::AbstractView*>& )) );
     connect( mGroupedViews, SIGNAL(dragMove( const QDragMoveEvent*, bool& )),
              SLOT(onDragMoveEvent( const QDragMoveEvent*, bool& )) );
     connect( mGroupedViews, SIGNAL(drop( QDropEvent* )),
@@ -161,12 +162,19 @@ void ShellWindow::onFocusRequested( AbstractDocument* document )
         mGroupedViews->setViewFocus( view );
 }
 
-void ShellWindow::onCloseRequest( AbstractView* view )
+void ShellWindow::onCloseRequest( const QList<Kasten::AbstractView*>& views )
 {
-    AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
+    // TODO: optimize, e.g. add all, sort and remove all doubles, or hash and take values as list
+    QList<AbstractDocument*> documents;
+    foreach( AbstractView* view, views )
+    {
+        AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
+        if( ! documents.contains(document) )
+            documents.append( document );
+    }
 
-    if( mDocumentManager->canClose(document) )
-        mDocumentManager->closeDocument( document );
+    if( mDocumentManager->canClose(documents) )
+        mDocumentManager->closeDocuments( documents );
 }
 
 void ShellWindow::onDragMoveEvent( const QDragMoveEvent* event, bool& accept )

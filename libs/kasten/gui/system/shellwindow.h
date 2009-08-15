@@ -44,7 +44,7 @@ namespace Kasten
 class DocumentManager;
 class AbstractView;
 class ViewManager;
-class TabbedViews;
+class MultiViewAreas;
 class AbstractXmlGuiController;
 class AbstractToolView;
 class AbstractTool;
@@ -76,12 +76,12 @@ class KASTENGUI_EXPORT ShellWindow : public KXmlGuiWindow, public If::WidgetsDoc
     void onViewFocusChanged( Kasten::AbstractView* view );
     void onFocusRequested( Kasten::AbstractDocument* document );
     void onToolVisibilityChanged( bool isVisible );
-    void onCloseRequest( Kasten::AbstractView* view );
+    void onCloseRequest( const QList<Kasten::AbstractView*>& views );
     void onDragMoveEvent( const QDragMoveEvent* event, bool& accept );
     void onDropEvent( QDropEvent* event );
 
   protected:
-    TabbedViews* mGroupedViews;
+    MultiViewAreas* mGroupedViews;
     // hack:
     // used to store a pointer to the current, so we can disconnect to its signals... well, not perfect
     AbstractView *mCurrentView;

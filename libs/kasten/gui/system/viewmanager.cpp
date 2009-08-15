@@ -35,7 +35,7 @@
 // temporary
 #include "modelcodecviewmanager.h"
 
-
+#include <KDebug>
 namespace Kasten
 {
 
@@ -122,8 +122,12 @@ void ViewManager::removeViewsFor( const QList<Kasten::AbstractDocument*>& docume
     }
 
     emit closing( closedViews );
+
     foreach( AbstractView* view, closedViews )
+    {
+        kDebug()<<view->title();
         delete view;
+    }
 }
 
 AbstractView* ViewManager::viewOfDocument( AbstractDocument* document ) const

@@ -32,11 +32,12 @@
 // KDE
 #include <KTabWidget>
 
-
+#include <KDebug>
 namespace Kasten
 {
 
 TabbedViews::TabbedViews()
+  : mCurrentView( 0 )
 {
     mTabbedViewsBox = new TabbedViewsBox();
 
@@ -67,6 +68,8 @@ QList<AbstractView*> TabbedViews::viewList() const
     return result;
 }
 
+int TabbedViews::viewCount() const { return mTabWidget->count(); }
+
 int TabbedViews::indexOf( AbstractView* view ) const
 {
     int result = -1;
@@ -96,21 +99,27 @@ AbstractView* TabbedViews::viewFocus() const
     return viewBox ? viewBox->view() : 0;
 }
 
+bool TabbedViews::hasFocus() const
+{
+    return mCurrentView ? mCurrentView->hasFocus() : false;
+}
+
+
 void TabbedViews::addViews( const QList<AbstractView*>& views )
 {
     int index;
-    AbstractView* lastView;
+//     AbstractView* lastView;
     foreach( AbstractView* view, views )
     {
         connect( view, SIGNAL(titleChanged( QString )), SLOT(onTitleChanged( QString )) );
 
         ViewBox* viewBox = new ViewBox( view, mTabWidget );
         index = mTabWidget->addTab( viewBox, view->title() );
-        lastView = view;
+//         lastView = view;
     }
 
     mTabWidget->setCurrentIndex( index );
-    lastView->widget()->setFocus();
+//     lastView->widget()->setFocus(); // TODO: check if this is always done in onCurrentChanged
 
     // fix for Qt bug:
     if( mTabWidget->count() == 1 )
@@ -123,20 +132,26 @@ void TabbedViews::addViews( const QList<AbstractView*>& views )
 
 void TabbedViews::removeViews( const QList<AbstractView*>& views )
 {
-    int index;
+    int index = -1;
 
+    // TODO: check if contained
     foreach( AbstractView* view, views )
     {
         view->disconnect( this );
 
         index = indexOf( view );
         if( index != -1 )
+        {
+            ViewBox* viewBox = static_cast<ViewBox*>( mTabWidget->widget(index) );
+
             mTabWidget->removeTab( index );
+            delete viewBox;
+        }
     }
 
     // fix for Qt bug:
     const int currentIndex = mTabWidget->currentIndex();
-    // last removed or no change in index?
+    // last removed or no change in index (not bound to widget)?
     if( currentIndex == -1 || currentIndex == index )
         // simulate signal reaction
         onCurrentChanged( currentIndex );
@@ -169,15 +184,31 @@ void TabbedViews::setViewFocus( AbstractView *view )
     mTabWidget->setCurrentIndex( index );
 }
 
+void TabbedViews::setFocus()
+{
+    mTabbedViewsBox->setFocus();
+}
+
 void TabbedViews::onCurrentChanged( int index )
 {
-    mTabbedViewsBox->setBottomWidget( 0 );
-
     const ViewBox* viewBox = static_cast<const ViewBox*>( mTabWidget->widget(index) );
     AbstractView* view = viewBox ? viewBox->view() : 0;
 
+    if( view == mCurrentView )
+        return;
+
+    mTabbedViewsBox->setBottomWidget( 0 );
+
+    if( mCurrentView )
+        mCurrentView->disconnect( this );
+
+    mCurrentView = view;
+
     if( view )
+    {
+        connect( view, SIGNAL(focusChanged( bool )), SLOT(onViewFocusChanged( bool )) );
         view->widget()->setFocus();
+    }
 
     emit viewFocusChanged( view );
 }
@@ -187,7 +218,9 @@ void TabbedViews::onCloseRequest( QWidget* widget )
     const ViewBox* viewBox = static_cast<const ViewBox*>( widget );
     AbstractView* view = viewBox->view();
 
-    emit closeRequest( view );
+    QList<Kasten::AbstractView*> views;
+    views.append( view );
+    emit closeRequest( views );
 }
 
 void TabbedViews::onTitleChanged( const QString &newTitle )
@@ -220,6 +253,17 @@ Q_UNUSED( newStates )
 
 }
 #endif
+
+// TODO: could be just a signal forwarder
+void TabbedViews::onViewFocusChanged( bool hasFocus )
+{
+    AbstractView* view = qobject_cast<AbstractView *>( sender() );
+
+    kDebug()<<view<<view->title()<<hasFocus;
+
+    emit focusChanged( hasFocus );
+}
+
 
 TabbedViews::~TabbedViews()
 {

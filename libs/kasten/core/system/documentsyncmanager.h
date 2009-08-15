@@ -70,6 +70,9 @@ class KASTENCORE_EXPORT DocumentSyncManager : public QObject
   protected Q_SLOTS:
     void onDocumentLoaded( Kasten::AbstractDocument* document );
 
+    void onDocumentsAdded( const QList<Kasten::AbstractDocument*>& documents );
+    void onDocumentsClosing( const QList<Kasten::AbstractDocument*>& documents );
+
   protected:
     // unless there is a singleton
     DocumentManager* mManager;

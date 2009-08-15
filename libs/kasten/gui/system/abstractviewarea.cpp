@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,22 +20,28 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractgroupedviews.h"
-#include "abstractgroupedviews_p.h"
+#include "abstractviewarea.h"
+#include "abstractviewarea_p.h"
+
+// Qt
+#include <Qt>
 
 
 namespace Kasten
 {
 
-AbstractGroupedViews::AbstractGroupedViews()
-  : AbstractViewArea( new AbstractGroupedViewsPrivate(this) )
-{
-}
-AbstractGroupedViews::AbstractGroupedViews(AbstractGroupedViewsPrivate* d)
-  : AbstractViewArea( d )
-{
-}
+AbstractViewArea::AbstractViewArea()
+  : d( new AbstractViewAreaPrivate(this) )
+{}
 
-AbstractGroupedViews::~AbstractGroupedViews() {}
+AbstractViewArea::AbstractViewArea( AbstractViewAreaPrivate* _d )
+  : d( _d )
+{}
+
+
+AbstractViewArea::~AbstractViewArea()
+{
+    delete d;
+}
 
 }

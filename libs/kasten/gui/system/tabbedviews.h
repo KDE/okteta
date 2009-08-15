@@ -46,7 +46,8 @@ class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews, public If::Vie
    Q_INTERFACES( Kasten::If::ViewFocusable Kasten::If::ToolInlineViewable )
 
   public:
-    explicit TabbedViews();
+    TabbedViews();
+
     virtual ~TabbedViews();
 
   public: // If::ToolInlineViewable API
@@ -61,8 +62,16 @@ class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews, public If::Vie
     virtual void addViews( const QList<AbstractView*>& views );
     virtual void removeViews( const QList<AbstractView*>& views );
 
-    virtual QWidget* widget() const;
     virtual QList<AbstractView*> viewList() const;
+    virtual int viewCount() const;
+
+  public: // AbstractViewArea API
+    virtual void setFocus();
+    virtual QWidget* widget() const;
+    virtual bool hasFocus() const;
+
+  public:
+    int indexOf( AbstractView* view ) const;
 
   Q_SIGNALS: // If::ViewFocusable API
     virtual void viewFocusChanged( Kasten::AbstractView* view );
@@ -75,14 +84,15 @@ class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews, public If::Vie
     void onCloseRequest( QWidget* widget );
     void onTitleChanged( const QString &newTitle );
 //     void onModifiedChanged( Kasten::AbstractDocument::SyncStates newStates );
-
-  protected:
-    int indexOf( AbstractView* view ) const;
+    void onViewFocusChanged( bool focusChanged );
 
   protected:
     TabbedViewsBox* mTabbedViewsBox;
     KTabWidget* mTabWidget;
+
     QList<AbstractToolInlineView*> mToolInlineViewList;
+
+    AbstractView* mCurrentView;
 };
 
 }

@@ -55,12 +55,14 @@ class KASTENCORE_EXPORT DocumentManager : public QObject
     void addDocument( AbstractDocument* document );
 
     void closeDocument( AbstractDocument* document );
+    void closeDocuments( const QList<AbstractDocument*>& documents );
     void closeAll();
 // TODO: think about if a more general close( documentList, theseOrOthers ) is better, same with canCloseAllOther()
     void closeAllOther( AbstractDocument* document );
 
     // TODO: what to do for documents not added?
     bool canClose( AbstractDocument* document );
+    bool canClose( const QList<AbstractDocument*>& documents );
     bool canCloseAll();
     bool canCloseAllOther( AbstractDocument* document );
 

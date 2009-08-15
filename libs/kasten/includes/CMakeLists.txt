@@ -56,12 +56,15 @@ set( kastengui_CamelCase_HDRS
   ModelEncoderFileSystemExporterConfigEditor
   ModelEncoderFileSystemExporterConfigEditorFactory
   AbstractToolInlineView
+  AbstractViewArea
   AbstractGroupedViews
+  ViewAreaSplitable
   ToolInlineViewable
   ViewFocusable
   WidgetsDockable
 
   TabbedViews
+  MultiViewAreas
   ShellWindow
 
   DummyView

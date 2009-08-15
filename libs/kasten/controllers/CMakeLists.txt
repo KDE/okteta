@@ -92,6 +92,9 @@ set( SWITCHVIEWCONTROLLER_SRCS
 set( VIEWLISTMENUCONTROLLER_SRCS
   shellwindow/viewlistmenu/viewlistmenucontroller.cpp
 )
+set( VIEWAREASPLITCONTROLLER_SRCS
+  shellwindow/viewareasplit/viewareasplitcontroller.cpp
+)
 set( TOOLLISTMENUCONTROLLER_SRCS
   shellwindow/toollistmenu/toollistmenucontroller.cpp
 )
@@ -113,6 +116,7 @@ set( kastencontroller_LIB_SRCS
   ${READONLYBARCONTROLLER_SRCS}
   ${SWITCHVIEWCONTROLLER_SRCS}
   ${VIEWLISTMENUCONTROLLER_SRCS}
+  ${VIEWAREASPLITCONTROLLER_SRCS}
   ${TOOLLISTMENUCONTROLLER_SRCS}
   ${FULLSCREENCONTROLLER_SRCS}
   ${ZOOMCONTROLLER_SRCS}
@@ -153,6 +157,7 @@ set( kastencontrollers_LIB_HDRS
   shellwindow/toollistmenu/toollistmenucontroller.h
   shellwindow/switchview/switchviewcontroller.h
   shellwindow/viewlistmenu/viewlistmenucontroller.h
+  shellwindow/viewareasplit/viewareasplitcontroller.h
   program/quit/quitcontroller.h
 )
 

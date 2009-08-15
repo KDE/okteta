@@ -44,6 +44,10 @@
     <Action name="resizestyle" />
     <Action name="viewmode" />
     <Separator/>
+    <Action name="view_area_split_horizontally"/>
+    <Action name="view_area_split_vertically"/>
+    <Action name="view_area_close"/>
+    <Separator/>
     <Action name="view_fullscreen"/>
   </Menu>
   <Menu name="bookmarks">

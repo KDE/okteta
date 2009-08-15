@@ -244,6 +244,14 @@ void DocumentSyncManager::onDocumentLoaded( AbstractDocument* document )
         mManager->addDocument( document );
 }
 
+void DocumentSyncManager::onDocumentsAdded( const QList<Kasten::AbstractDocument*>& documents )
+{
+}
+
+void DocumentSyncManager::onDocumentsClosing( const QList<Kasten::AbstractDocument*>& documents )
+{
+}
+
 
 DocumentSyncManager::~DocumentSyncManager()
 {

@@ -45,9 +45,11 @@ set( kastengui_LIB_SRCS
   system/dummyview.cpp
   system/modelcodecviewmanager.cpp
   system/viewmanager.cpp
+  system/abstractviewarea.cpp
   system/abstractgroupedviews.cpp
   system/tabbedviewsbox.cpp
   system/tabbedviews.cpp
+  system/multiviewareas.cpp
   system/shellwindow.cpp
   system/statusbar.cpp
   system/statusbarlayout.cpp
@@ -73,11 +75,13 @@ set( kastengui_LIB_HDRS
   io/abstractmodelstreamencoderconfigeditorfactory.h
   system/viewmanager.h
   system/shellwindow.h
+  system/abstractviewarea.h
   system/abstractgroupedviews.h
   system/statusbar.h
   system/tabbedviewsbox.h
   system/viewbox.h
   system/tabbedviews.h
+  system/multiviewareas.h
   system/toolinlineviewwidget.h
   system/toolviewdockwidget.h
   system/statusbarlayout.h
@@ -86,6 +90,7 @@ set( kastengui_LIB_HDRS
   system/viewfocusable.h
   system/toolinlineviewable.h
   system/widgetsdockable.h
+  system/viewareasplitable.h
   controller/abstractxmlguicontroller.h
   controller/abstractlinepopup.h
   controller/togglebutton.h

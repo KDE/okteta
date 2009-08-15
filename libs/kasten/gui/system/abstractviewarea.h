@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,22 +20,51 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractgroupedviews.h"
-#include "abstractgroupedviews_p.h"
+#ifndef ABSTRACTVIEWAREA_H
+#define ABSTRACTVIEWAREA_H
+
+// lib
+#include "kastengui_export.h"
+// Qt
+#include <QtCore/QObject>
+
+class QWidget;
 
 
 namespace Kasten
 {
 
-AbstractGroupedViews::AbstractGroupedViews()
-  : AbstractViewArea( new AbstractGroupedViewsPrivate(this) )
+class AbstractViewAreaPrivate;
+
+
+// TODO: rename abstractdocumentviewarea?
+class KASTENGUI_EXPORT AbstractViewArea : public QObject
 {
-}
-AbstractGroupedViews::AbstractGroupedViews(AbstractGroupedViewsPrivate* d)
-  : AbstractViewArea( d )
-{
+    Q_OBJECT
+
+  protected:
+    AbstractViewArea();
+    explicit AbstractViewArea( AbstractViewAreaPrivate* d );
+
+  public:
+    virtual ~AbstractViewArea();
+
+  public: // API to be implemented
+    virtual void setFocus() = 0;
+
+    virtual QWidget* widget() const = 0;
+//     virtual QString title() const = 0;
+//     virtual AbstractTool* tool() const = 0;
+    virtual bool hasFocus() const = 0;
+
+  Q_SIGNALS:
+    // area has focus in the window
+    void focusChanged( bool hasFocus );
+
+  protected:
+    AbstractViewAreaPrivate* const d;
+};
+
 }
 
-AbstractGroupedViews::~AbstractGroupedViews() {}
-
-}
+#endif

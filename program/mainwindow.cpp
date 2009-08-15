@@ -78,6 +78,7 @@
 #include <view/select/selectcontroller.h>
 #include <shellwindow/switchview/switchviewcontroller.h>
 #include <shellwindow/viewlistmenu/viewlistmenucontroller.h>
+#include <shellwindow/viewareasplit/viewareasplitcontroller.h>
 #include <shellwindow/toollistmenu/toollistmenucontroller.h>
 #include <shellwindow/fullscreen/fullscreencontroller.h>
 /*#include <viewsystem/close/closecontroller.h>*/
@@ -85,6 +86,7 @@
 // Kasten gui
 #include <viewmanager.h>
 #include <tabbedviews.h>
+#include <multiviewareas.h>
 // #include <parallelviews/parallelviews.h>
 #include <statusbar.h>
 // Kasten core
@@ -142,6 +144,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new VersionController(this) );
     addXmlGuiController( new ReadOnlyController(this) );
     addXmlGuiController( new SwitchViewController(mGroupedViews,this) );
+    addXmlGuiController( new ViewAreaSplitController(mGroupedViews,this) );
     addXmlGuiController( new FullScreenController(this) );
     addXmlGuiController( new QuitController(0,this) );
 
@@ -161,8 +164,8 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new OverwriteModeController(this) );
     addXmlGuiController( new SearchController(this,this) );
     addXmlGuiController( new ReplaceController(this,this) );
-    addXmlGuiController( new GotoOffsetController(mGroupedViews,this) );
-    addXmlGuiController( new SelectRangeController(mGroupedViews,this) );
+//     addXmlGuiController( new GotoOffsetController(mGroupedViews,this) );
+//     addXmlGuiController( new SelectRangeController(mGroupedViews,this) );
     addXmlGuiController( new InsertPatternController(this) );
     addXmlGuiController( new BookmarksController(this) );
     addXmlGuiController( new PrintController(this) );

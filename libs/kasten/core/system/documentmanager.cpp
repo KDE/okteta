@@ -103,6 +103,18 @@ void DocumentManager::closeDocument( AbstractDocument* document )
     }
 }
 
+void DocumentManager::closeDocuments( const QList<AbstractDocument*>& documents )
+{
+    // TODO: optimize
+    foreach( AbstractDocument* document, documents )
+        mList.removeOne( document );
+
+    emit closing( documents );
+
+    foreach( AbstractDocument* document, documents )
+        delete document;
+}
+
 void DocumentManager::closeAll()
 {
     // TODO: is it better for remove the document from the list before emitting closing(document)?
@@ -113,9 +125,7 @@ void DocumentManager::closeAll()
     emit closing( closedDocuments );
 
     foreach( AbstractDocument* document, closedDocuments )
-    {
         delete document;
-    }
 }
 
 void DocumentManager::closeAllOther( AbstractDocument* keptDocument )
@@ -139,6 +149,22 @@ void DocumentManager::closeAllOther( AbstractDocument* keptDocument )
 bool DocumentManager::canClose( AbstractDocument* document )
 {
     return mSyncManager->canClose( document );
+}
+
+bool DocumentManager::canClose( const QList<AbstractDocument*>& documents )
+{
+    bool canClose = true;
+
+    foreach( AbstractDocument* document, documents )
+    {
+        if( ! mSyncManager->canClose(document) )
+        {
+            canClose = false;
+            break;
+        }
+    }
+
+    return canClose;
 }
 
 bool DocumentManager::canCloseAll()
