@@ -69,6 +69,21 @@ AbstractView* ViewManager::viewByWidget( QWidget* widget ) const
     return result;
 }
 
+void ViewManager::createCopyOfView( AbstractView* view )
+{
+    AbstractDocument* documentOfView = view->findBaseModel<AbstractDocument*>();
+
+    AbstractView* viewCopy = mFactory->createViewFor( documentOfView ); // TODO: create real copy
+    if( ! viewCopy )
+        viewCopy = new DummyView( documentOfView );
+
+    mViewList.append( viewCopy );
+
+    QList<Kasten::AbstractView*> views;
+    views.append( viewCopy );
+
+    emit opened( views );
+}
 
 void ViewManager::createViewsFor( const QList<Kasten::AbstractDocument*>& documents )
 {
