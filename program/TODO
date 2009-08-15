@@ -191,6 +191,10 @@ Fixed after 0.3 RC 1:
 * delayed filebrowser init to speedup appearance of the mainwindow
 * search/replace/goto dialogs had a bad focus on start
 
+Fixed after 0.3.0:
+------------------
+* possibly outdated offcursor bitmap was painted if view is unfocused
+
 Done for 0.4:
 -------------
 * added a framework for inline dialogs
@@ -198,8 +202,15 @@ Done for 0.4:
 * added a select range tool using editing of values in an inline dialog
 * created toplevel folder libs to collect the neutral utility libs
 * moved libframesprinter to libs
+* made AbstractColumnRenderer independent of ColumnsView and reuse in print plugin
 * renamed Kakao to Kasten and moved it to libs
 * made all three modules of Kasten dynamic libraries and install header to ${}/kasten
+* made the Okteta Kastem modules dynamic libraries, too, including public headers in ${}/kasten
+* turned OktetaPart to use the Kasten classes
+* removed unneeded prefix lib from the OktetaPart
+* turned OktetaPart into a KParts::ReadWritePart
+* added Close All action
+* added MultiViewArea and a split controller
 
 Next to work on:
 ----------------------------------
@@ -207,7 +218,6 @@ Important:
 * implement find whole words only!
 * improve resize of status bar with priority-based limiting of shown items, use perhaps SqueezedLabel for Selection
 * width calculation for resize seems to need to include some margins
-* old wrong sized cursor picture gets painted on zoom change
 * QActionGroups are cleared on setupGui, e.g. if toolbar gets edited
 * search previous does not work in a row, as the cursor is exactly after a full match
 * find/replace dialogs need to handle change charcodec, but what to do with than invalid characters already entered?
@@ -223,7 +233,9 @@ Less important:
 Later on:
 ---------
 * make offset 64-Bit, in the whole Api, best by using own datatype/define/typedef
+* add dialogplugins to DocumentSyncManager for the interaction
 * make status bar tools more flat, e.g. see how the zoom tool of KOffice is done
+* for close all and exit make a collective list of unsaved in one dialog instead of single requests
 * add border to BookmarkEditPopup, perhaps like that of QMenu
 * add direction to tool views, so that e.g. the file info tool view puts the icon left to the data in vertical mode
 * see how Tool and Document menus can be turned into KActionMenu (and add clear() call to KActionMenu)
@@ -254,16 +266,17 @@ See "Insert", is generated as well as from a source, so perhaps join there?
 * more explicit titels for undo/redo actions (range, data), also paste, drag, and cut
 * add support for memory mapped files (includes enabling overwrite controller again)
 * think about turning insert pattern & Co. into a tool
+* add close button-on-hovering to Documents browser, also make unsynced button clickable
+* add utf-8 input variant to search/replace, also enable auto-detect-modus
 * session support: full storing and restoring of view/model state
-* port the KPart to Kasten
 * add support for more commandline options
-* port bytearrayview to bytearrayrenderer (esp. non-line-centric paiting)
 * complete work on input controllers for the bytearray view
 * rename AbstractDocument into AbstractObjectModel
 * add AbstractTool, ToolManager and ToolManagerControl
+* make controllers with one action generic, turn into tool&view
+  and have description/factory a xmlgui creator interface
 * Prepare libframesprint for inclusion into kdelibs
 * add profiles with loaded tools and their positions (environments)
-* add splitting of views
 * templates
 * + and - operates on whole selections
 * better selection by mouse using the offset column 
