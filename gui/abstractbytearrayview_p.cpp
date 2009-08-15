@@ -894,6 +894,7 @@ void AbstractByteArrayViewPrivate::focusInEvent( QFocusEvent* focusEvent )
 
     q->ColumnsView::focusInEvent( focusEvent );
     startCursor();
+    emit q->focusChanged( true );
 }
 
 void AbstractByteArrayViewPrivate::focusOutEvent( QFocusEvent* focusEvent )
@@ -902,6 +903,7 @@ void AbstractByteArrayViewPrivate::focusOutEvent( QFocusEvent* focusEvent )
 
     stopCursor();
     q->ColumnsView::focusOutEvent( focusEvent );
+    emit q->focusChanged( false );
 }
 
 

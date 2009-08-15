@@ -338,6 +338,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     void charCodecChanged( const QString& codecName );
     /** */
     void valueCodingChanged( int valueCoding );
+    void focusChanged( bool hasFocus );
 
   protected:
     void finishByteEdit();
