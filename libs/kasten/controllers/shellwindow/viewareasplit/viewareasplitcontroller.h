@@ -40,6 +40,7 @@ class ViewAreaSplitable;
 }
 class AbstractGroupedViews;
 class AbstractViewArea;
+class ViewManager;
 
 
 class KASTENCONTROLLERS_EXPORT ViewAreaSplitController : public AbstractXmlGuiController
@@ -47,10 +48,13 @@ class KASTENCONTROLLERS_EXPORT ViewAreaSplitController : public AbstractXmlGuiCo
   Q_OBJECT
 
   public:
-    ViewAreaSplitController( AbstractGroupedViews* groupedViews, KXMLGUIClient* guiClient );
+    ViewAreaSplitController( ViewManager* viewManager, AbstractGroupedViews* groupedViews, KXMLGUIClient* guiClient );
 
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
+
+  private:
+    void splitViewArea( Qt::Orientation orientation );
 
   private Q_SLOTS:
     void splitVertically();
@@ -62,6 +66,7 @@ class KASTENCONTROLLERS_EXPORT ViewAreaSplitController : public AbstractXmlGuiCo
     void onViewsChanged();
 
   protected:
+    ViewManager* mViewManager;
     AbstractGroupedViews* mGroupedViews;
     If::ViewAreaSplitable* mViewAreaSplitable;
     AbstractGroupedViews* mCurrentViewArea;

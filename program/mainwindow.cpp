@@ -144,7 +144,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new VersionController(this) );
     addXmlGuiController( new ReadOnlyController(this) );
     addXmlGuiController( new SwitchViewController(mGroupedViews,this) );
-    addXmlGuiController( new ViewAreaSplitController(mGroupedViews,this) );
+    addXmlGuiController( new ViewAreaSplitController(mProgram->viewManager(),mGroupedViews,this) );
     addXmlGuiController( new FullScreenController(this) );
     addXmlGuiController( new QuitController(0,this) );
 

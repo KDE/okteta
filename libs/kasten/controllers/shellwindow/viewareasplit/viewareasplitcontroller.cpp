@@ -26,6 +26,8 @@
 #include <abstractgroupedviews.h>
 #include <viewareasplitable.h>
 #include <abstractviewarea.h>
+#include <viewfocusable.h>
+#include <viewmanager.h>
 // KDE
 #include <KXMLGUIClient>
 #include <KActionCollection>
@@ -36,8 +38,9 @@
 namespace Kasten
 {
 
-ViewAreaSplitController::ViewAreaSplitController( AbstractGroupedViews* groupedViews, KXMLGUIClient* guiClient )
-  : mGroupedViews( groupedViews ),
+ViewAreaSplitController::ViewAreaSplitController( ViewManager* viewManager, AbstractGroupedViews* groupedViews, KXMLGUIClient* guiClient )
+  : mViewManager( viewManager ),
+    mGroupedViews( groupedViews ),
     mViewAreaSplitable( 0 ),
     mCurrentViewArea( 0 )
 {
@@ -85,12 +88,12 @@ Q_UNUSED(model)
 
 void ViewAreaSplitController::splitVertically()
 {
-    mViewAreaSplitable->splitViewArea( mCurrentViewArea, Qt::Vertical );
+    splitViewArea( Qt::Vertical );
 }
 
 void ViewAreaSplitController::splitHorizontally()
 {
-    mViewAreaSplitable->splitViewArea( mCurrentViewArea, Qt::Horizontal );
+    splitViewArea( Qt::Horizontal );
 }
 
 void ViewAreaSplitController::close()
@@ -98,11 +101,28 @@ void ViewAreaSplitController::close()
     mViewAreaSplitable->closeViewArea( mCurrentViewArea );
 }
 
+void ViewAreaSplitController::splitViewArea( Qt::Orientation orientation )
+{
+    If::ViewFocusable* viewFocusable = qobject_cast<If::ViewFocusable*>( mCurrentViewArea );
+
+    if( ! viewFocusable )
+        return;
+
+    AbstractView* currentView = viewFocusable->viewFocus();
+
+    mViewAreaSplitable->splitViewArea( mCurrentViewArea, orientation );
+
+    // TODO: ideal would be a new view which copies the existing one
+    // and starts visually where the old one stops after the resize
+    mViewManager->createCopyOfView( currentView );
+}
+
 void ViewAreaSplitController::onViewAreaFocusChanged( AbstractViewArea* viewArea )
 {
     if( mCurrentViewArea )
         mCurrentViewArea->disconnect( this );
 
+    // TODO: how to handle single view areas? examples, signals?
     mCurrentViewArea = qobject_cast<AbstractGroupedViews*>( viewArea );
 
     if( mCurrentViewArea )
