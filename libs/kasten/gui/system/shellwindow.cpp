@@ -41,6 +41,7 @@
 #include <QtGui/QDockWidget>
 #include <QtGui/QDragMoveEvent>
 #include <QtGui/QDropEvent>
+#include <QtCore/QHash>
 
 
 namespace Kasten
@@ -186,17 +187,38 @@ void ShellWindow::onFocusRequested( AbstractDocument* document )
 
 void ShellWindow::onCloseRequest( const QList<Kasten::AbstractView*>& views )
 {
-    // TODO: optimize, e.g. add all, sort and remove all doubles, or hash and take values as list
-    QList<AbstractDocument*> documents;
+    // group views per document
+    QHash<AbstractDocument*,QList<AbstractView*> > viewsToClosePerDocument;
     foreach( AbstractView* view, views )
     {
         AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
-        if( ! documents.contains(document) )
-            documents.append( document );
+        viewsToClosePerDocument[document].append( view );
     }
 
-    if( mDocumentManager->canClose(documents) )
-        mDocumentManager->closeDocuments( documents );
+    // find documents which lose all views
+    const QList<AbstractView*> allViews = mViewManager->views();
+    foreach( AbstractView* view, allViews )
+    {
+        AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
+        QHash<AbstractDocument*,QList<AbstractView*> >::Iterator it =
+            viewsToClosePerDocument.find( document );
+
+        if( it != viewsToClosePerDocument.end() )
+        {
+            const QList<AbstractView*>& viewsOfDocument = it.value();
+            const bool isAnotherView = ! viewsOfDocument.contains( view );
+            if( isAnotherView )
+                viewsToClosePerDocument.erase( it );
+        }
+    }
+
+    const QList<AbstractDocument*> documentsWithoutViews = viewsToClosePerDocument.keys();
+
+    if( mDocumentManager->canClose(documentsWithoutViews) )
+    {
+        mViewManager->removeViews( views );
+        mDocumentManager->closeDocuments( documentsWithoutViews );
+    }
 }
 
 void ShellWindow::onDragMoveEvent( const QDragMoveEvent* event, bool& accept )
