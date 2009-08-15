@@ -54,7 +54,6 @@ ShellWindow::ShellWindow( DocumentManager* documentManager, ViewManager* viewMan
 {
     setCentralWidget( mGroupedViews->widget() );
 
-    mViewManager->setWindow( this );
     connect( mViewManager, SIGNAL(opened( const QList<Kasten::AbstractView*>& )),
              mGroupedViews, SLOT(addViews( const QList<Kasten::AbstractView*>& )) );
     connect( mViewManager, SIGNAL(closing( const QList<Kasten::AbstractView*>& )),

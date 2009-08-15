@@ -29,8 +29,6 @@
 #include <QtCore/QList>
 #include <QtCore/QObject>
 
-class KXmlGuiWindow;
-
 
 namespace Kasten
 {
@@ -49,7 +47,6 @@ class KASTENGUI_EXPORT ViewManager : public QObject
     virtual ~ViewManager();
 
   public:
-    void setWindow( KXmlGuiWindow *window );
     void setViewFactory( AbstractViewFactory* factory );
 
   public:
@@ -79,8 +76,6 @@ class KASTENGUI_EXPORT ViewManager : public QObject
     QList<AbstractView*> mViewList;
     AbstractViewFactory* mFactory;
     DocumentManager* mDocumentManager;
-
-    KXmlGuiWindow *mMainWindow;
 
     // TODO: remove into own singleton
     ModelCodecViewManager* mCodecViewManager;

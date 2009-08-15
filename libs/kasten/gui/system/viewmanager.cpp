@@ -26,8 +26,6 @@
 #include "abstractviewfactory.h"
 #include "dummyview.h"
 #include "documentmanager.h"
-// KDE
-#include <KXmlGuiWindow>
 // Qt
 #include <QtCore/QListIterator>
 #include <QtCore/QMutableListIterator>
@@ -49,10 +47,6 @@ ViewManager::ViewManager( DocumentManager* documentManager )
              SLOT(removeViewsFor( const QList<Kasten::AbstractDocument*>& )) );
 }
 
-void ViewManager::setWindow( KXmlGuiWindow *window )
-{
-    mMainWindow = window;
-}
 
 void ViewManager::setViewFactory( AbstractViewFactory* factory )
 {
