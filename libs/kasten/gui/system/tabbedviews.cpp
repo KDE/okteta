@@ -107,24 +107,25 @@ bool TabbedViews::hasFocus() const
 
 void TabbedViews::addViews( const QList<AbstractView*>& views )
 {
-    int index;
-//     AbstractView* lastView;
+    if( views.count() == 0 )
+        return;
+
+    int insertIndex = mTabWidget->currentIndex() + 1;
     foreach( AbstractView* view, views )
     {
         connect( view, SIGNAL(titleChanged( QString )), SLOT(onTitleChanged( QString )) );
 
         ViewBox* viewBox = new ViewBox( view, mTabWidget );
-        index = mTabWidget->addTab( viewBox, view->title() );
-//         lastView = view;
+        mTabWidget->insertTab( insertIndex, viewBox, view->title() );
+        ++insertIndex;
     }
 
-    mTabWidget->setCurrentIndex( index );
-//     lastView->widget()->setFocus(); // TODO: check if this is always done in onCurrentChanged
+    mTabWidget->setCurrentIndex( insertIndex - 1 );
 
     // fix for Qt bug:
     if( mTabWidget->count() == 1 )
         // simulate signal reaction
-        onCurrentChanged( index );
+        onCurrentChanged( 0 );
 
     emit added( views );
 
