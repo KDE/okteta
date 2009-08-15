@@ -42,8 +42,14 @@ DummyView::DummyView( AbstractDocument* document )
 }
 
 
+bool DummyView::hasFocus()               const { return mLabel->hasFocus(); } // TODO: make sure, label really holds focus after setFocus()
 QWidget* DummyView::widget()             const { return mLabel; }
 QString DummyView::title()               const { return mDocument->title(); }
+
+void DummyView::setFocus()
+{
+    mLabel->setFocus();
+}
 
 void DummyView::onTitleChange( const QString &newTitle )
 {

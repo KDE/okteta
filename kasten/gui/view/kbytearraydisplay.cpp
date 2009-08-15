@@ -58,14 +58,24 @@ KByteArrayDisplay::KByteArrayDisplay( KByteArrayDocument* document )
     connect( mWidget, SIGNAL(cursorPositionChanged( int )), SIGNAL(cursorPositionChanged( int )) );
     connect( mWidget, SIGNAL(valueCodingChanged( int )), SIGNAL(valueCodingChanged( int )) );
     connect( mWidget, SIGNAL(charCodecChanged( const QString& )), SIGNAL(charCodecChanged( const QString& )) );
+    connect( mWidget, SIGNAL(focusChanged( bool )), SIGNAL(focusChanged( bool )) );
 }
 
 const AbstractModelSelection* KByteArrayDisplay::modelSelection() const { return &mSelection; }
 
 QWidget* KByteArrayDisplay::widget()             const { return mWidget; }
+bool KByteArrayDisplay::hasFocus()               const { return mWidget->focusWidget()->hasFocus(); } // TODO: does this work?
+
 QString KByteArrayDisplay::title()               const { return mDocument->title(); }
 bool KByteArrayDisplay::isModifiable()           const { return true; }
 bool KByteArrayDisplay::isReadOnly()             const { return mWidget->isReadOnly(); }
+
+
+void KByteArrayDisplay::setFocus()
+{
+    mWidget->setFocus();
+}
+
 void KByteArrayDisplay::setReadOnly( bool isReadOnly ) { mWidget->setReadOnly( isReadOnly ); }
 
 void KByteArrayDisplay::setZoomLevel( double Level )
@@ -175,10 +185,6 @@ void KByteArrayDisplay::setCharCoding( const QString& charCodingName )
     mWidget->setCharCoding( charCodingName );
 }
 
-void KByteArrayDisplay::setFocus()
-{
-    mWidget->setFocus();
-}
 
 KDE::Section KByteArrayDisplay::selection() const
 {

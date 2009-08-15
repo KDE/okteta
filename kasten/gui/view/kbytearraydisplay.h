@@ -72,7 +72,9 @@ class OKTETAKASTENGUI_EXPORT KByteArrayDisplay : public AbstractView, public If:
     virtual void setReadOnly( bool isReadOnly );
 
   public: // AbstractView API
+    virtual void setFocus();
     virtual QWidget* widget() const;
+    virtual bool hasFocus() const;
 
   public: // If::Zoomable API TODO: make all such methods slots?
     virtual void setZoomLevel( double Level );
@@ -112,7 +114,6 @@ class OKTETAKASTENGUI_EXPORT KByteArrayDisplay : public AbstractView, public If:
     void valueCodingChanged( int valueCoding );
 
   public:
-    void setFocus();
     KDE::Section selection() const;
     void setSelection( int start, int end );
     void insert( const QByteArray& byteArray );
