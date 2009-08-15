@@ -56,26 +56,10 @@ class KASTENGUI_EXPORT MultiViewAreas : public AbstractGroupedViews,
 
     virtual ~MultiViewAreas();
 
-  public: // If::ToolInlineViewable API
-//     virtual void addToolInlineView( AbstractToolInlineView* view );
-//     virtual void setCurrentToolInlineView( AbstractToolInlineView* view );
-
-  public: // If::ViewFocusable API
-    virtual void setViewFocus( AbstractView* view );
-    virtual AbstractView* viewFocus() const;
-  Q_SIGNALS:
-    virtual void viewFocusChanged( Kasten::AbstractView* view );
-
-  public: // If::ViewAreaSplitable API
-    virtual AbstractViewArea* splitViewArea( AbstractViewArea* viewArea, Qt::Orientation orientation );
-    virtual void closeViewArea( AbstractViewArea* viewArea );
-    virtual void setViewAreaFocus( AbstractViewArea* viewArea );
-    virtual AbstractViewArea* viewAreaFocus() const;
-    virtual int viewAreasCount() const;
-  Q_SIGNALS:
-    virtual void viewAreasAdded( const QList<Kasten::AbstractViewArea*>& viewAreas );
-    virtual void viewAreasRemoved( const QList<Kasten::AbstractViewArea*>& viewAreas );
-    virtual void viewAreaFocusChanged( Kasten::AbstractViewArea* viewArea );
+  public: // AbstractViewArea API
+    virtual void setFocus();
+    virtual QWidget* widget() const;
+    virtual bool hasFocus() const;
 
   public: // AbstractGroupedViews API
     virtual void addViews( const QList<AbstractView*>& views );
@@ -84,10 +68,28 @@ class KASTENGUI_EXPORT MultiViewAreas : public AbstractGroupedViews,
     virtual QList<AbstractView*> viewList() const;
     virtual int viewCount() const;
 
-  public: // AbstractViewArea API
-    virtual void setFocus();
-    virtual QWidget* widget() const;
-    virtual bool hasFocus() const;
+  public: // If::ViewFocusable API
+    virtual void setViewFocus( AbstractView* view );
+    virtual AbstractView* viewFocus() const;
+
+  public: // If::ToolInlineViewable API
+//     virtual void addToolInlineView( AbstractToolInlineView* view );
+//     virtual void setCurrentToolInlineView( AbstractToolInlineView* view );
+
+  public: // If::ViewAreaSplitable API
+    virtual AbstractViewArea* splitViewArea( AbstractViewArea* viewArea, Qt::Orientation orientation );
+    virtual void closeViewArea( AbstractViewArea* viewArea );
+    virtual void setViewAreaFocus( AbstractViewArea* viewArea );
+    virtual AbstractViewArea* viewAreaFocus() const;
+    virtual int viewAreasCount() const;
+
+  Q_SIGNALS: // If::ViewFocusable API
+    virtual void viewFocusChanged( Kasten::AbstractView* view );
+
+  Q_SIGNALS: // If::ViewAreaSplitable API
+    virtual void viewAreasAdded( const QList<Kasten::AbstractViewArea*>& viewAreas );
+    virtual void viewAreasRemoved( const QList<Kasten::AbstractViewArea*>& viewAreas );
+    virtual void viewAreaFocusChanged( Kasten::AbstractViewArea* viewArea );
 
   Q_SIGNALS:
     void dragMove( const QDragMoveEvent* event, bool& accepted );
