@@ -118,21 +118,6 @@ void ViewManager::removeViewsFor( const QList<Kasten::AbstractDocument*>& docume
     }
 }
 
-AbstractView* ViewManager::viewOfDocument( AbstractDocument* document ) const
-{
-    AbstractView* result = 0;
-    foreach( AbstractView* view, mViewList )
-    {
-        AbstractDocument* documentOfView = view->findBaseModel<AbstractDocument*>();
-        if( documentOfView == document )
-        {
-            result = view;
-            break;
-        }
-    }
-    return result;
-}
-
 
 ViewManager::~ViewManager()
 {

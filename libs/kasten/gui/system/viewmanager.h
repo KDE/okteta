@@ -52,7 +52,6 @@ class KASTENGUI_EXPORT ViewManager : public QObject
   public:
     QList<AbstractView*> views() const;
     AbstractView *viewByWidget( QWidget* widget ) const;
-    AbstractView* viewOfDocument( AbstractDocument* document ) const;
 
   public:
     ModelCodecViewManager* codecViewManager();
