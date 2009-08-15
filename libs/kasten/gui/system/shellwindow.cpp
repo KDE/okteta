@@ -164,18 +164,18 @@ void ShellWindow::onFocusRequested( AbstractDocument* document )
     AbstractGroupedViews* currentGroupedViews = static_cast<AbstractGroupedViews*>( mGroupedViews->viewAreaFocus() );
     const QList<AbstractView*> viewList = currentGroupedViews->viewList();
 
-    AbstractView* viewofDocument = 0;
+    AbstractView* viewOfDocument = 0;
     foreach( AbstractView* view, viewList )
     {
         if( view->findBaseModel<AbstractDocument*>() == document )
         {
-            viewofDocument = view;
+            viewOfDocument = view;
             break;
         }
     }
 
-    if( viewofDocument )
-        mGroupedViews->setViewFocus( viewofDocument );
+    if( viewOfDocument )
+        mGroupedViews->setViewFocus( viewOfDocument );
     else
     {
         QList<Kasten::AbstractDocument*> documents;
