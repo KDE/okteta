@@ -24,7 +24,7 @@
 #define FILESYSTEMBROWSERTOOLVIEW_H
 
 // lib
-#include "kastencontroller_export.h"
+#include "kastencontrollers_export.h"
 // Kasten gui
 #include <abstracttoolview.h>
 
@@ -39,7 +39,7 @@ class FileSystemBrowserView;
 class FileSystemBrowserTool;
 
 
-class KASTENCONTROLLER_EXPORT FileSystemBrowserToolView : public AbstractToolView
+class KASTENCONTROLLERS_EXPORT FileSystemBrowserToolView : public AbstractToolView
 {
   public:
     explicit FileSystemBrowserToolView( FileSystemBrowserTool* tool );

@@ -24,7 +24,7 @@
 #define VERSIONCONTROLLER_H
 
 // lib
-#include "kastencontroller_export.h"
+#include "kastencontrollers_export.h"
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 
@@ -41,7 +41,7 @@ class Versionable;
 }
 
 
-class KASTENCONTROLLER_EXPORT VersionController : public AbstractXmlGuiController
+class KASTENCONTROLLERS_EXPORT VersionController : public AbstractXmlGuiController
 {
   Q_OBJECT
 

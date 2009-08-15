@@ -24,7 +24,7 @@
 #define VIEWSTATUSCONTROLLER_H
 
 // lib
-#include "oktetakastencontroller_export.h"
+#include "oktetakastencontrollers_export.h"
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 // Okteta gui
@@ -44,7 +44,7 @@ class ToggleButton;
 class StatusBar;
 
 
-class OKTETAKASTENCONTROLLER_EXPORT ViewStatusController : public AbstractXmlGuiController
+class OKTETAKASTENCONTROLLERS_EXPORT ViewStatusController : public AbstractXmlGuiController
 {
   Q_OBJECT
 

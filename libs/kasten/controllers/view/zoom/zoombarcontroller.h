@@ -24,7 +24,7 @@
 #define ZOOMBARCONTROLLER_H
 
 // lib
-#include "kastencontroller_export.h"
+#include "kastencontrollers_export.h"
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 
@@ -39,7 +39,7 @@ class Zoomable;
 class StatusBar;
 
 
-class KASTENCONTROLLER_EXPORT ZoomBarController : public AbstractXmlGuiController
+class KASTENCONTROLLERS_EXPORT ZoomBarController : public AbstractXmlGuiController
 {
   Q_OBJECT
 

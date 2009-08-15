@@ -24,7 +24,7 @@
 #define READONLYBARCONTROLLER_H
 
 // lib
-#include "kastencontroller_export.h"
+#include "kastencontrollers_export.h"
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 
@@ -37,7 +37,7 @@ class AbstractDocument;
 class StatusBar;
 
 
-class KASTENCONTROLLER_EXPORT ReadOnlyBarController : public AbstractXmlGuiController
+class KASTENCONTROLLERS_EXPORT ReadOnlyBarController : public AbstractXmlGuiController
 {
   Q_OBJECT
 

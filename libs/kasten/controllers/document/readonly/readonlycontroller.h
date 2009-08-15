@@ -25,7 +25,7 @@
 
 
 // lib
-#include "kastencontroller_export.h"
+#include "kastencontrollers_export.h"
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 
@@ -38,7 +38,7 @@ namespace Kasten
 class AbstractDocument;
 
 
-class KASTENCONTROLLER_EXPORT ReadOnlyController : public AbstractXmlGuiController
+class KASTENCONTROLLERS_EXPORT ReadOnlyController : public AbstractXmlGuiController
 {
   Q_OBJECT
 

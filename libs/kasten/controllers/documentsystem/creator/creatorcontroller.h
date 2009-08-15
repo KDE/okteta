@@ -24,7 +24,7 @@
 #define CREATORCONTROLLER_H
 
 // lib
-#include "kastencontroller_export.h"
+#include "kastencontrollers_export.h"
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 
@@ -37,7 +37,7 @@ namespace Kasten
 class DocumentCreateManager;
 
 
-class KASTENCONTROLLER_EXPORT CreatorController : public AbstractXmlGuiController
+class KASTENCONTROLLERS_EXPORT CreatorController : public AbstractXmlGuiController
 {
   Q_OBJECT
 

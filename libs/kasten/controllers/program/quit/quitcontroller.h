@@ -24,7 +24,7 @@
 #define QUITCONTROLLER_H
 
 // lib
-#include "kastencontroller_export.h"
+#include "kastencontrollers_export.h"
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 
@@ -37,7 +37,7 @@ namespace Kasten
 class KProgram;
 
 
-class KASTENCONTROLLER_EXPORT QuitController : public AbstractXmlGuiController
+class KASTENCONTROLLERS_EXPORT QuitController : public AbstractXmlGuiController
 {
   Q_OBJECT
 

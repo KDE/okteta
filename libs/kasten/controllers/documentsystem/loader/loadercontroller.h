@@ -24,7 +24,7 @@
 #define LOADERCONTROLLER_H
 
 // lib
-#include "kastencontroller_export.h"
+#include "kastencontrollers_export.h"
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 
@@ -39,7 +39,7 @@ namespace Kasten
 class DocumentSyncManager;
 
 
-class KASTENCONTROLLER_EXPORT LoaderController : public AbstractXmlGuiController
+class KASTENCONTROLLERS_EXPORT LoaderController : public AbstractXmlGuiController
 {
   Q_OBJECT
 

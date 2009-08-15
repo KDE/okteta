@@ -24,7 +24,7 @@
 #define VERSIONVIEWTOOLVIEW_H
 
 // lib
-#include "kastencontroller_export.h"
+#include "kastencontrollers_export.h"
 // Kasten gui
 #include <abstracttoolview.h>
 
@@ -36,7 +36,7 @@ class VersionView;
 class VersionViewTool;
 
 
-class KASTENCONTROLLER_EXPORT VersionViewToolView : public AbstractToolView
+class KASTENCONTROLLERS_EXPORT VersionViewToolView : public AbstractToolView
 {
   public:
     explicit VersionViewToolView( VersionViewTool* tool );

@@ -24,7 +24,7 @@
 #define REPLACECONTROLLER_H
 
 // lib
-#include "oktetakastencontroller_export.h"
+#include "oktetakastencontrollers_export.h"
 // controller
 #include "replaceuserqueryable.h"
 // lib
@@ -45,7 +45,7 @@ class KReplacePrompt;
 class ReplaceTool;
 
 
-class OKTETAKASTENCONTROLLER_EXPORT ReplaceController : public AbstractXmlGuiController, public If::ReplaceUserQueryable
+class OKTETAKASTENCONTROLLERS_EXPORT ReplaceController : public AbstractXmlGuiController, public If::ReplaceUserQueryable
 {
   Q_OBJECT
 

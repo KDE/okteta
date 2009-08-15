@@ -24,7 +24,7 @@
 #define VIEWAREASPLITCONTROLLER_H
 
 // lib
-#include "kastencontroller_export.h"
+#include "kastencontrollers_export.h"
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 
@@ -42,7 +42,7 @@ class AbstractGroupedViews;
 class AbstractViewArea;
 
 
-class KASTENCONTROLLER_EXPORT ViewAreaSplitController : public AbstractXmlGuiController
+class KASTENCONTROLLERS_EXPORT ViewAreaSplitController : public AbstractXmlGuiController
 {
   Q_OBJECT
 

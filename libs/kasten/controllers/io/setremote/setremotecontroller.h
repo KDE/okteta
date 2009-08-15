@@ -24,7 +24,7 @@
 #define SETREMOTECONTROLLER_H
 
 // lib
-#include "kastencontroller_export.h"
+#include "kastencontrollers_export.h"
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 
@@ -39,7 +39,7 @@ class AbstractDocument;
 class DocumentSyncManager;
 
 
-class KASTENCONTROLLER_EXPORT SetRemoteController : public AbstractXmlGuiController
+class KASTENCONTROLLERS_EXPORT SetRemoteController : public AbstractXmlGuiController
 {
   Q_OBJECT
 

@@ -24,7 +24,7 @@
 #define FULLSCREENCONTROLLER_H
 
 // lib
-#include "kastencontroller_export.h"
+#include "kastencontrollers_export.h"
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 
@@ -34,7 +34,7 @@ class KXmlGuiWindow;
 namespace Kasten
 {
 
-class KASTENCONTROLLER_EXPORT FullScreenController : public AbstractXmlGuiController
+class KASTENCONTROLLERS_EXPORT FullScreenController : public AbstractXmlGuiController
 {
   Q_OBJECT
 

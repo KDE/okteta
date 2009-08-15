@@ -24,7 +24,7 @@
 #define BYTETABLETOOLVIEW_H
 
 // lib
-#include "oktetakastencontroller_export.h"
+#include "oktetakastencontrollers_export.h"
 // Kasten gui
 #include <abstracttoolview.h>
 
@@ -35,7 +35,7 @@ class ByteTableView;
 class ByteTableTool;
 
 
-class OKTETAKASTENCONTROLLER_EXPORT ByteTableToolView : public AbstractToolView
+class OKTETAKASTENCONTROLLERS_EXPORT ByteTableToolView : public AbstractToolView
 {
   public:
     explicit ByteTableToolView( ByteTableTool* tool );

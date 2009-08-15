@@ -224,7 +224,7 @@ set( OKTETA_KASTEN_CONTROLLERS_SRCS
 )
 
 set( okteta_kastencontrollers_LIB_HDRS
-  oktetakastencontroller_export.h
+  oktetakastencontrollers_export.h
   view/print/printcontroller.h
   view/bookmarks/bookmarkstoolview.h
   view/bookmarks/bookmarkscontroller.h

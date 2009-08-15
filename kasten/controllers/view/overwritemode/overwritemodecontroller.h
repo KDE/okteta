@@ -24,7 +24,7 @@
 #define OVERWRITEMODECONTROLLER_H
 
 // lib
-#include "oktetakastencontroller_export.h"
+#include "oktetakastencontrollers_export.h"
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 
@@ -37,7 +37,7 @@ namespace Kasten
 class KByteArrayDisplay;
 
 
-class OKTETAKASTENCONTROLLER_EXPORT OverwriteModeController : public AbstractXmlGuiController
+class OKTETAKASTENCONTROLLERS_EXPORT OverwriteModeController : public AbstractXmlGuiController
 {
   Q_OBJECT
 

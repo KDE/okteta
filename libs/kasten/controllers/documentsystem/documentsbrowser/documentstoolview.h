@@ -24,7 +24,7 @@
 #define DOCUMENTSTOOLVIEW_H
 
 // lib
-#include "kastencontroller_export.h"
+#include "kastencontrollers_export.h"
 // Kasten gui
 #include <abstracttoolview.h>
 
@@ -36,7 +36,7 @@ class DocumentsView;
 class DocumentsTool;
 
 
-class KASTENCONTROLLER_EXPORT DocumentsToolView : public AbstractToolView
+class KASTENCONTROLLERS_EXPORT DocumentsToolView : public AbstractToolView
 {
   public:
     explicit DocumentsToolView( DocumentsTool* tool );

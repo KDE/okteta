@@ -24,7 +24,7 @@
 #define DOCUMENTINFOTOOLVIEW_H
 
 // lib
-#include "oktetakastencontroller_export.h"
+#include "oktetakastencontrollers_export.h"
 // Kasten gui
 #include <abstracttoolview.h>
 
@@ -36,7 +36,7 @@ class DocumentInfoView;
 class DocumentInfoTool;
 
 
-class OKTETAKASTENCONTROLLER_EXPORT DocumentInfoToolView : public AbstractToolView
+class OKTETAKASTENCONTROLLERS_EXPORT DocumentInfoToolView : public AbstractToolView
 {
   public:
     explicit DocumentInfoToolView( DocumentInfoTool* tool );

@@ -24,7 +24,7 @@
 #define BYTETABLETOOL_H
 
 // lib
-#include "oktetakastencontroller_export.h"
+#include "oktetakastencontrollers_export.h"
 // Kasten core
 #include <abstracttool.h>
 
@@ -41,7 +41,7 @@ class KByteArrayDisplay;
 
 /**
 */
-class OKTETAKASTENCONTROLLER_EXPORT ByteTableTool : public AbstractTool
+class OKTETAKASTENCONTROLLERS_EXPORT ByteTableTool : public AbstractTool
 {
   Q_OBJECT
 

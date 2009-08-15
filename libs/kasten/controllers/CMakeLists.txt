@@ -132,7 +132,7 @@ set( kastencontroller_LIB_SRCS
 )
 
 set( kastencontrollers_LIB_HDRS
-  kastencontroller_export.h
+  kastencontrollers_export.h
   document/readonly/readonlybarcontroller.h
   document/readonly/readonlycontroller.h
   document/versionview/versionviewtool.h

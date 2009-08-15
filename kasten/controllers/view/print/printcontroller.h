@@ -24,7 +24,7 @@
 #define PRINTCONTROLLER_H
 
 // lib
-#include "oktetakastencontroller_export.h"
+#include "oktetakastencontrollers_export.h"
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 
@@ -38,7 +38,7 @@ namespace Kasten
 class PrintTool;
 
 
-class OKTETAKASTENCONTROLLER_EXPORT PrintController : public AbstractXmlGuiController
+class OKTETAKASTENCONTROLLERS_EXPORT PrintController : public AbstractXmlGuiController
 {
   Q_OBJECT
 

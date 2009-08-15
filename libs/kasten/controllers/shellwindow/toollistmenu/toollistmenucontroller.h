@@ -24,7 +24,7 @@
 #define TOOLLISTMENUCONTROLLER_H
 
 // lib
-#include "kastencontroller_export.h"
+#include "kastencontrollers_export.h"
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 // Qt
@@ -44,7 +44,7 @@ class WidgetsDockable;
 }
 
 
-class KASTENCONTROLLER_EXPORT ToolListMenuController : public AbstractXmlGuiController
+class KASTENCONTROLLERS_EXPORT ToolListMenuController : public AbstractXmlGuiController
 {
   Q_OBJECT
 

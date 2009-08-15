@@ -24,7 +24,7 @@
 #define VIEWMODECONTROLLER_H
 
 // lib
-#include "oktetakastencontroller_export.h"
+#include "oktetakastencontrollers_export.h"
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 
@@ -38,7 +38,7 @@ namespace Kasten
 class KByteArrayDisplay;
 
 
-class OKTETAKASTENCONTROLLER_EXPORT ViewModeController : public AbstractXmlGuiController
+class OKTETAKASTENCONTROLLERS_EXPORT ViewModeController : public AbstractXmlGuiController
 {
   Q_OBJECT
 

@@ -24,7 +24,7 @@
 #define DOCUMENTINFOTOOL_H
 
 // lib
-#include "oktetakastencontroller_export.h"
+#include "oktetakastencontrollers_export.h"
 // Kasten core
 #include <abstracttool.h>
 // KDE
@@ -45,7 +45,7 @@ class AbstractModelSynchronizer;
 class DocumentSyncManager;
 
 
-class OKTETAKASTENCONTROLLER_EXPORT DocumentInfoTool : public AbstractTool
+class OKTETAKASTENCONTROLLERS_EXPORT DocumentInfoTool : public AbstractTool
 {
   Q_OBJECT
 

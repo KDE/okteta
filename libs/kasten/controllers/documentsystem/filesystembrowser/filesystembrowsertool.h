@@ -24,7 +24,7 @@
 #define FILESYSTEMBROWSERTOOL_H
 
 // lib
-#include "kastencontroller_export.h"
+#include "kastencontrollers_export.h"
 // Kasten core
 #include <abstracttool.h>
 
@@ -38,7 +38,7 @@ class DocumentManager;
 class AbstractDocument;
 
 
-class KASTENCONTROLLER_EXPORT FileSystemBrowserTool : public AbstractTool
+class KASTENCONTROLLERS_EXPORT FileSystemBrowserTool : public AbstractTool
 {
   Q_OBJECT
 

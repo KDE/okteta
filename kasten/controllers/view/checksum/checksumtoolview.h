@@ -24,7 +24,7 @@
 #define CHECKSUMTOOLVIEW_H
 
 // lib
-#include "oktetakastencontroller_export.h"
+#include "oktetakastencontrollers_export.h"
 // Kasten gui
 #include <abstracttoolview.h>
 
@@ -36,7 +36,7 @@ class ChecksumView;
 class ChecksumTool;
 
 
-class OKTETAKASTENCONTROLLER_EXPORT ChecksumToolView : public AbstractToolView
+class OKTETAKASTENCONTROLLERS_EXPORT ChecksumToolView : public AbstractToolView
 {
   public:
     explicit ChecksumToolView( ChecksumTool* tool );

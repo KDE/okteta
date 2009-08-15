@@ -24,7 +24,7 @@
 #define STRINGSEXTRACTTOOL_H
 
 // lib
-#include "oktetakastencontroller_export.h"
+#include "oktetakastencontrollers_export.h"
 // tool
 #include "containedstring.h"
 // Kasten core
@@ -48,7 +48,7 @@ class KByteArrayDisplay;
 
 /**
 */
-class OKTETAKASTENCONTROLLER_EXPORT StringsExtractTool : public AbstractTool
+class OKTETAKASTENCONTROLLERS_EXPORT StringsExtractTool : public AbstractTool
 {
   Q_OBJECT
 

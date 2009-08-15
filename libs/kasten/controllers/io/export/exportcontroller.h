@@ -24,7 +24,7 @@
 #define EXPORTCONTROLLER_H
 
 // lib
-#include "kastencontroller_export.h"
+#include "kastencontrollers_export.h"
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 
@@ -43,7 +43,7 @@ class DataSelectable;
 }
 
 
-class KASTENCONTROLLER_EXPORT ExportController : public AbstractXmlGuiController
+class KASTENCONTROLLERS_EXPORT ExportController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
