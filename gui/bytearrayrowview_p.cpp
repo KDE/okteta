@@ -708,7 +708,7 @@ void ByteArrayRowViewPrivate::drawActiveCursor( QPainter* painter )
     Q_Q( ByteArrayRowView );
 
     // any reason to skip the cursor drawing?
-    if( mBlinkCursorVisible && !q->hasFocus() && !q->viewport()->hasFocus() && !mDropper->isActive() )
+    if( !q->hasFocus() && !q->viewport()->hasFocus() && !mDropper->isActive() )
         return;
 
     const int x = mByteArrayColumn->xOfLinePosition( mTableCursor->pos() );

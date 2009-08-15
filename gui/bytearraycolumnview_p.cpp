@@ -737,8 +737,11 @@ void ByteArrayColumnViewPrivate::drawActiveCursor( QPainter *painter )
 {
     Q_Q( ByteArrayColumnView );
 
+    // TODO: review the cursor drawing, not fully matching the new paint only on updates yet
+    // see also rowView
+
     // any reason to skip the cursor drawing?
-    if( mBlinkCursorVisible && !q->hasFocus() && !q->viewport()->hasFocus() && !mDropper->isActive() )
+    if( !q->hasFocus() && !q->viewport()->hasFocus() && !mDropper->isActive() )
         return;
 
     const int x = mActiveColumn->xOfLinePosition( mTableCursor->pos() );
