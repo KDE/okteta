@@ -92,6 +92,7 @@ void ByteArrayJanusView::setViewModus( int viewModus )
     connect( mView, SIGNAL(cursorPositionChanged( int )), SIGNAL(cursorPositionChanged( int )) );
     connect( mView, SIGNAL(valueCodingChanged( int )), SIGNAL(valueCodingChanged( int )) );
     connect( mView, SIGNAL(charCodecChanged( const QString& )), SIGNAL(charCodecChanged( const QString& )) );
+    connect( mView, SIGNAL(focusChanged( bool )), SIGNAL(focusChanged( bool )) );
 }
 
 

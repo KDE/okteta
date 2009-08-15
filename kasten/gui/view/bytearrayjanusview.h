@@ -123,6 +123,7 @@ class ByteArrayJanusView : public QWidget
     void cursorPositionChanged( int cursorPosition );
     void valueCodingChanged( int valueCoding );
     void charCodecChanged( const QString& charCodingName );
+    void focusChanged( bool hasFocus );
 
   private:
     AbstractByteArrayView* mView;
