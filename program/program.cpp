@@ -60,7 +60,7 @@ namespace Kasten
 
 OktetaProgram::OktetaProgram( int argc, char *argv[] )
  : mDocumentManager( new DocumentManager() ),
-   mViewManager( new ViewManager(mDocumentManager) )
+   mViewManager( new ViewManager() )
 {
     KCmdLineOptions programOptions;
 //     programOptions.add( OffsetOptionShortId );

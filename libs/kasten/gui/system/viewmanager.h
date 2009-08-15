@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2006,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006,2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -34,7 +34,6 @@ namespace Kasten
 {
 
 class ModelCodecViewManager;
-class DocumentManager;
 class AbstractViewFactory;
 
 
@@ -43,7 +42,8 @@ class KASTENGUI_EXPORT ViewManager : public QObject
   Q_OBJECT
 
   public:
-    explicit ViewManager( DocumentManager* documentManager );
+    ViewManager();
+
     virtual ~ViewManager();
 
   public:
@@ -57,25 +57,19 @@ class KASTENGUI_EXPORT ViewManager : public QObject
   public:
     ModelCodecViewManager* codecViewManager();
 
+  public Q_SLOTS:
+    void createViewsFor( const QList<Kasten::AbstractDocument*>& documents );
+    void removeViewsFor( const QList<Kasten::AbstractDocument*>& documents );
+
   Q_SIGNALS:
     // view was created and already added to the list
     void opened( const QList<Kasten::AbstractView*>& views );
     // view will be closed, already removed from list
     void closing( const QList<Kasten::AbstractView*>& views );
 
-  protected Q_SLOTS:
-    void createViewsFor( const QList<Kasten::AbstractDocument*>& documents );
-    void removeViewsFor( const QList<Kasten::AbstractDocument*>& documents );
-    /**
-    * asks the manager to close and delete the view
-    * may fail if the process if cancelled due to user input
-    */
-//     void closeView( AbstractView *view );
-
   protected:
     QList<AbstractView*> mViewList;
     AbstractViewFactory* mFactory;
-    DocumentManager* mDocumentManager;
 
     // TODO: remove into own singleton
     ModelCodecViewManager* mCodecViewManager;
