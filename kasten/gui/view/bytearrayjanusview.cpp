@@ -56,6 +56,7 @@ void ByteArrayJanusView::setViewModus( int viewModus )
         (AbstractByteArrayView*)new Okteta::ByteArrayColumnView( 0, this ) :
         (AbstractByteArrayView*)new Okteta::ByteArrayRowView( this );
 
+    const bool hasFocus = mView ? mView->hasFocus() : false;
     if( mView )
     {
         newView->setByteArrayModel( mView->byteArrayModel() );
@@ -81,7 +82,8 @@ void ByteArrayJanusView::setViewModus( int viewModus )
 
     mLayout->addWidget( mView );
     setFocusProxy( mView );
-    mView->setFocus();
+    if( hasFocus )
+        mView->setFocus();
     mViewModus = viewModus;
 
     connect( mView, SIGNAL(selectionChanged( bool )), SIGNAL(selectionChanged( bool )) );
