@@ -67,7 +67,7 @@ class KASTENGUI_EXPORT MultiViewAreas : public AbstractGroupedViews,
     virtual void viewFocusChanged( Kasten::AbstractView* view );
 
   public: // If::ViewAreaSplitable API
-    virtual void splitViewArea( AbstractViewArea* viewArea, Qt::Orientation orientation );
+    virtual AbstractViewArea* splitViewArea( AbstractViewArea* viewArea, Qt::Orientation orientation );
     virtual void closeViewArea( AbstractViewArea* viewArea );
     virtual void setViewAreaFocus( AbstractViewArea* viewArea );
     virtual AbstractViewArea* viewAreaFocus() const;

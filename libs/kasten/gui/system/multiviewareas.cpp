@@ -177,7 +177,7 @@ void MultiViewAreas::setViewAreaFocus( AbstractViewArea* _viewArea )
         viewArea->setViewFocus( viewArea->viewFocus() );
 }
 
-void MultiViewAreas::splitViewArea( AbstractViewArea* _viewArea, Qt::Orientation orientation )
+AbstractViewArea* MultiViewAreas::splitViewArea( AbstractViewArea* _viewArea, Qt::Orientation orientation )
 {
     TabbedViews* firstViewArea = static_cast<TabbedViews*>( _viewArea );
     QWidget* firstViewAreaWidget = firstViewArea->widget();
@@ -223,6 +223,8 @@ void MultiViewAreas::splitViewArea( AbstractViewArea* _viewArea, Qt::Orientation
     viewAreas.append( secondViewArea );
     emit viewAreasAdded( viewAreas );
     emit viewAreaFocusChanged( secondViewArea );
+
+    return secondViewArea;
 }
 
 void MultiViewAreas::closeViewArea( AbstractViewArea* _viewArea )
