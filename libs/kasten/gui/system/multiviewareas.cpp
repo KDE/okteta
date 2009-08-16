@@ -271,12 +271,12 @@ void MultiViewAreas::onViewsRemoved()
 
         if( mCurrentViewArea == viewArea )
         {
-            // search for the previous widget which is the next or the previous, using otherIndex
+            // search for the previous widget which is the next or the previous, using index
             while( true )
             {
                 QSplitter* splitter = qobject_cast<QSplitter*>( otherWidget );
                 if( splitter )
-                    otherWidget = splitter->widget( otherIndex );
+                    otherWidget = splitter->widget( index );
                 else
                     break;
             }
