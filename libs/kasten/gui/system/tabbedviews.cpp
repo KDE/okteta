@@ -187,7 +187,10 @@ void TabbedViews::setViewFocus( AbstractView *view )
 
 void TabbedViews::setFocus()
 {
-    mTabbedViewsBox->setFocus();
+    if( mCurrentView )
+        mCurrentView->setFocus();
+    // TODO: would ensure the bottomwidget gets focus if there is one. Just, it didn't work at all
+//     mTabbedViewsBox->setFocus();
 }
 
 void TabbedViews::onCurrentChanged( int index )
