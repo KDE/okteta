@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -70,6 +70,9 @@ void ByteArrayJanusView::setViewModus( int viewModus )
         newView->setActiveCoding( mView->activeCoding() );
         newView->toggleOffsetColumn( mView->offsetColumnVisible() );
         newView->setResizeStyle( mView->resizeStyle() );
+        newView->setStartOffset( mView->startOffset() );
+        newView->setFirstLineOffset( mView->firstLineOffset() );
+        newView->setNoOfBytesPerLine( mView->noOfBytesPerLine() );
         newView->setCursorPosition( mView->cursorPosition() );
         KDE::Section selection = mView->selection();
         newView->setSelection( selection.start(), selection.end() );
@@ -156,6 +159,18 @@ QRect ByteArrayJanusView::cursorRect() const
     return mView->cursorRect();
 }
 
+void ByteArrayJanusView::setStartOffset( int startOffset )
+{
+    mView->setStartOffset( startOffset );
+}
+void ByteArrayJanusView::setFirstLineOffset( int firstLineOffset )
+{
+    mView->setFirstLineOffset( firstLineOffset );
+}
+void ByteArrayJanusView::setNoOfBytesPerLine( int noOfBytesPerLine )
+{
+    mView->setNoOfBytesPerLine( noOfBytesPerLine );
+}
 int ByteArrayJanusView::startOffset() const
 {
     return mView->startOffset();

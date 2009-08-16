@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -96,6 +96,9 @@ class ByteArrayJanusView : public QWidget
 
   public: // table layout
     void setResizeStyle( int resizeStyle );
+    void setStartOffset( int startOffset );
+    void setFirstLineOffset( int firstLineOffset );
+    void setNoOfBytesPerLine( int noOfBytesPerLine );
     int startOffset() const;
     int firstLineOffset() const;
     int noOfBytesPerLine() const;
