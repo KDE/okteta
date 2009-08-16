@@ -45,8 +45,6 @@ KByteArrayDisplay::KByteArrayDisplay( KByteArrayDisplay* other, Qt::Alignment al
   : AbstractView( static_cast<KByteArrayDocument*>(other->baseModel()) ),
     mDocument( static_cast<KByteArrayDocument*>(other->baseModel()) )
 {
-    Q_UNUSED( alignment )
-
     init();
 
     setViewModus( other->viewModus() );
@@ -57,15 +55,32 @@ KByteArrayDisplay::KByteArrayDisplay( KByteArrayDisplay* other, Qt::Alignment al
     setCharCoding( other->charCodingName() );
     setOverwriteMode( other->isOverwriteMode() );
     setCursorPosition( other->cursorPosition() );
-    setResizeStyle( other->resizeStyle() );
     mWidget->setStartOffset( other->startOffset() );
     mWidget->setFirstLineOffset( other->firstLineOffset() );
     mWidget->setNoOfBytesPerLine( other->noOfBytesPerLine() );
+    // TODO: this can lead to different layouts due to possible one-pixel difference in width!
+    setResizeStyle( other->resizeStyle() );
     const KDE::Section selection = other->selection();
     setSelection( selection.start(), selection.end() );
     setZoomLevel( other->zoomLevel() );
     setReadOnly( other->isReadOnly() );
     // TODO: substituteChar, undefinedChar, all width, groupedBytes
+
+    const QRect otherViewRect = other->mWidget->viewRect();
+
+    QPoint viewPos = otherViewRect.topLeft();
+    if( alignment == Qt::AlignBottom )
+    {
+        viewPos.setY( otherViewRect.bottom() + 1 );
+    }
+    // TODO: care for resize style
+    else if( alignment == Qt::AlignRight )
+    {
+        viewPos.setX( otherViewRect.right() + 1 );
+    }
+    // TODO: doesn't really work at this stage, because the widget will get resized when inserted
+    // and then ensureCursorVisible destroys the fun
+    mWidget->setViewPos( viewPos );
 }
 
 void KByteArrayDisplay::init()
