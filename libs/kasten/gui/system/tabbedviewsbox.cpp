@@ -37,6 +37,7 @@ TabbedViewsBox::TabbedViewsBox( QWidget* parent )
     mBottomWidget( 0 )
 {
     mTabWidget = new KTabWidget();
+    setFocusProxy( mTabWidget );
 
     QVBoxLayout* layout = new QVBoxLayout( this );
     layout->setMargin( 0 );
@@ -67,11 +68,15 @@ void TabbedViewsBox::setBottomWidget( QWidget* bottomWidget )
     mBottomWidget = bottomWidget;
     if( bottomWidget )
     {
+        setFocusProxy( bottomWidget );
         connect( bottomWidget, SIGNAL(done()), SLOT(onDone()) );
         layout->addWidget( bottomWidget );
         bottomWidget->show();
         bottomWidget->setFocus();
     }
+    else
+        setFocusProxy( mTabWidget );
+
     mEscapeShortcut->setEnabled( (bottomWidget != 0) );
 }
 
