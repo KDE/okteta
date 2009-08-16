@@ -27,6 +27,7 @@
 #include <bytearrayrowview.h>
 // Qt
 #include <QtGui/QLayout>
+#include <QtGui/QScrollBar>
 
 
 namespace Okteta
@@ -299,6 +300,20 @@ bool ByteArrayJanusView::isOverwriteOnly() const
 void ByteArrayJanusView::setOverwriteMode( bool overwriteMode )
 {
     mView->setOverwriteMode( overwriteMode );
+}
+
+void ByteArrayJanusView::setViewPos( const QPoint& pos )
+{
+    mView->horizontalScrollBar()->setValue( pos.x() );
+    mView->verticalScrollBar()->setValue( pos.y() );
+}
+QRect ByteArrayJanusView::viewRect() const
+{
+    // TODO: find why mView->viewport()->rect() doesn't work but is always at pos (0.0)
+    const QRect result(
+        QPoint(mView->horizontalScrollBar()->value(), mView->verticalScrollBar()->value()),
+        mView->viewport()->size() );
+    return result;
 }
 
 ByteArrayJanusView::~ByteArrayJanusView()

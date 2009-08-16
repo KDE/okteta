@@ -119,6 +119,9 @@ class ByteArrayJanusView : public QWidget
     void setViewModus( int viewModus );
     int viewModus() const;
 
+    void setViewPos( const QPoint& pos );
+    QRect viewRect() const;
+
   Q_SIGNALS:
     void readOnlyChanged( bool );
     void overwriteModeChanged( bool overwriteMode );
