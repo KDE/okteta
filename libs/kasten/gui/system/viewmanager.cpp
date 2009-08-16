@@ -151,6 +151,9 @@ void ViewManager::removeViews( const QList<AbstractView*>& views )
 
 ViewManager::~ViewManager()
 {
+    // TODO: signal closing here, too?
+    qDeleteAll( mViewList );
+
     delete mCodecViewManager;
     delete mFactory;
 }
