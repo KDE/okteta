@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2006 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -35,7 +35,8 @@ namespace Kasten
 class OKTETAKASTENGUI_EXPORT KByteArrayDisplayFactory : public AbstractViewFactory
 {
   public:
-    virtual AbstractView *createViewFor( AbstractDocument* Document );
+    virtual AbstractView* createViewFor( AbstractDocument* Document );
+    virtual AbstractView* createCopyOfView( AbstractView* view, Qt::Alignment alignment );
 };
 
 

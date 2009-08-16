@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -59,6 +59,7 @@ class OKTETAKASTENGUI_EXPORT KByteArrayDisplay : public AbstractView, public If:
 
   public:
     explicit KByteArrayDisplay( KByteArrayDocument* document );
+    explicit KByteArrayDisplay( KByteArrayDisplay* other, Qt::Alignment alignment = 0 );
 
     virtual ~KByteArrayDisplay();
 
@@ -114,6 +115,7 @@ class OKTETAKASTENGUI_EXPORT KByteArrayDisplay : public AbstractView, public If:
     void valueCodingChanged( int valueCoding );
 
   public:
+    // TODO: fix section vs. two ints
     KDE::Section selection() const;
     void setSelection( int start, int end );
     void insert( const QByteArray& byteArray );
@@ -153,6 +155,9 @@ class OKTETAKASTENGUI_EXPORT KByteArrayDisplay : public AbstractView, public If:
   public:
     void setViewModus( int viewModus );
     int viewModus() const;
+
+  protected:
+    void init();
 
   protected Q_SLOTS:
     void onSelectionChange( bool selected );

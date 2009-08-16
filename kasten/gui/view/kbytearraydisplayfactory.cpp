@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2006 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -30,13 +30,24 @@
 namespace Kasten
 {
 
-AbstractView *KByteArrayDisplayFactory::createViewFor( AbstractDocument* D )
+AbstractView* KByteArrayDisplayFactory::createViewFor( AbstractDocument* _document )
 {
-    KByteArrayDisplay *result = 0;
+    KByteArrayDisplay* result = 0;
 
-    KByteArrayDocument *document = static_cast<KByteArrayDocument*>( D );
+    KByteArrayDocument* document = static_cast<KByteArrayDocument*>( _document );
     if( document )
         result = new KByteArrayDisplay( document );
+
+    return result;
+}
+
+AbstractView* KByteArrayDisplayFactory::createCopyOfView( AbstractView* _view, Qt::Alignment alignment )
+{
+    KByteArrayDisplay* result = 0;
+
+    KByteArrayDisplay* view = qobject_cast<KByteArrayDisplay*>( _view );
+    if( view )
+        result = new KByteArrayDisplay( view, alignment );
 
     return result;
 }

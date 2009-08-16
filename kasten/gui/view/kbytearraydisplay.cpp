@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -36,8 +36,36 @@ namespace Kasten
 
 KByteArrayDisplay::KByteArrayDisplay( KByteArrayDocument* document )
   : AbstractView( document ),
-  mWidget( 0 ),
-  mDocument( document )
+    mDocument( document )
+{
+    init();
+}
+
+KByteArrayDisplay::KByteArrayDisplay( KByteArrayDisplay* other, Qt::Alignment alignment )
+  : AbstractView( static_cast<KByteArrayDocument*>(other->baseModel()) ),
+    mDocument( static_cast<KByteArrayDocument*>(other->baseModel()) )
+{
+    Q_UNUSED( alignment )
+
+    init();
+
+    setViewModus( other->viewModus() );
+    setShowsNonprinting( other->showsNonprinting() );
+    setVisibleByteArrayCodings( other->visibleByteArrayCodings() );
+    toggleOffsetColumn( other->offsetColumnVisible() );
+    setValueCoding( other->valueCoding() );
+    setCharCoding( other->charCodingName() );
+    setOverwriteMode( other->isOverwriteMode() );
+    setCursorPosition( other->cursorPosition() );
+    setResizeStyle( other->resizeStyle() );
+    const KDE::Section selection = other->selection();
+    setSelection( selection.start(), selection.end() );
+    setZoomLevel( other->zoomLevel() );
+    setReadOnly( other->isReadOnly() );
+        // TODO: startOffset, firstLineOffset, substituteChar, undefinedChar, all width, groupedBytes
+}
+
+void KByteArrayDisplay::init()
 {
     Okteta::AbstractByteArrayModel *content = mDocument->content();
     mWidget = new Okteta::ByteArrayJanusView();
