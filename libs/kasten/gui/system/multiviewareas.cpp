@@ -33,7 +33,7 @@
 #include <KGlobalSettings>
 // Qt
 #include <QtGui/QSplitter>
-#include <KDebug>
+
 
 namespace Kasten
 {
@@ -167,6 +167,7 @@ void MultiViewAreas::setViewFocus( AbstractView *view )
     }
 }
 
+ //TODO: this method could be removed, as it is the same as _viewArea->setFocus(), or?
 void MultiViewAreas::setViewAreaFocus( AbstractViewArea* _viewArea )
 {
     TabbedViews* viewArea = static_cast<TabbedViews*>( _viewArea );
@@ -174,7 +175,7 @@ void MultiViewAreas::setViewAreaFocus( AbstractViewArea* _viewArea )
         return;
 
     if( mViewAreaList.contains(viewArea) )
-        viewArea->setViewFocus( viewArea->viewFocus() );
+        viewArea->setFocus();
 }
 
 AbstractViewArea* MultiViewAreas::splitViewArea( AbstractViewArea* _viewArea, Qt::Orientation orientation )
@@ -284,14 +285,12 @@ void MultiViewAreas::onViewsRemoved()
             {
                 if( viewArea->widget() == otherWidget )
                 {
-                    mCurrentViewArea = viewArea;
-                    mCurrentViewArea->setFocus();
+                    viewArea->setFocus();
                     break;
                 }
             }
         }
 
-        emit viewAreaFocusChanged( mCurrentViewArea );
         QList<AbstractViewArea*> viewAreas;
         viewAreas.append( viewArea );
         emit viewAreasRemoved( viewAreas );
