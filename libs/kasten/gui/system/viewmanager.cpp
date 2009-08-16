@@ -69,13 +69,14 @@ AbstractView* ViewManager::viewByWidget( QWidget* widget ) const
     return result;
 }
 
-void ViewManager::createCopyOfView( AbstractView* view )
+void ViewManager::createCopyOfView( AbstractView* view, Qt::Alignment alignment )
 {
-    AbstractDocument* documentOfView = view->findBaseModel<AbstractDocument*>();
-
-    AbstractView* viewCopy = mFactory->createViewFor( documentOfView ); // TODO: create real copy
+    AbstractView* viewCopy = mFactory->createCopyOfView( view, alignment );
     if( ! viewCopy )
+    {
+        AbstractDocument* documentOfView = view->findBaseModel<AbstractDocument*>();
         viewCopy = new DummyView( documentOfView );
+    }
 
     mViewList.append( viewCopy );
 

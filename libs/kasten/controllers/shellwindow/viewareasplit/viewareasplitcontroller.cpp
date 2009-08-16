@@ -114,7 +114,8 @@ void ViewAreaSplitController::splitViewArea( Qt::Orientation orientation )
 
     // TODO: ideal would be a new view which copies the existing one
     // and starts visually where the old one stops after the resize
-    mViewManager->createCopyOfView( currentView );
+    const Qt::Alignment alignment = ( orientation == Qt::Horizontal ) ? Qt::AlignBottom : Qt::AlignRight;
+    mViewManager->createCopyOfView( currentView, alignment );
 }
 
 void ViewAreaSplitController::onViewAreaFocusChanged( AbstractViewArea* viewArea )
