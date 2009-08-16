@@ -58,11 +58,14 @@ KByteArrayDisplay::KByteArrayDisplay( KByteArrayDisplay* other, Qt::Alignment al
     setOverwriteMode( other->isOverwriteMode() );
     setCursorPosition( other->cursorPosition() );
     setResizeStyle( other->resizeStyle() );
+    mWidget->setStartOffset( other->startOffset() );
+    mWidget->setFirstLineOffset( other->firstLineOffset() );
+    mWidget->setNoOfBytesPerLine( other->noOfBytesPerLine() );
     const KDE::Section selection = other->selection();
     setSelection( selection.start(), selection.end() );
     setZoomLevel( other->zoomLevel() );
     setReadOnly( other->isReadOnly() );
-        // TODO: startOffset, firstLineOffset, substituteChar, undefinedChar, all width, groupedBytes
+    // TODO: substituteChar, undefinedChar, all width, groupedBytes
 }
 
 void KByteArrayDisplay::init()
