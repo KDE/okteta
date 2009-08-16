@@ -70,10 +70,10 @@ void ByteArrayJanusView::setViewModus( int viewModus )
         newView->setVisibleCodings( mView->visibleCodings() );
         newView->setActiveCoding( mView->activeCoding() );
         newView->toggleOffsetColumn( mView->offsetColumnVisible() );
-        newView->setResizeStyle( mView->resizeStyle() );
         newView->setStartOffset( mView->startOffset() );
         newView->setFirstLineOffset( mView->firstLineOffset() );
         newView->setNoOfBytesPerLine( mView->noOfBytesPerLine() );
+        newView->setResizeStyle( mView->resizeStyle() );
         newView->setCursorPosition( mView->cursorPosition() );
         KDE::Section selection = mView->selection();
         newView->setSelection( selection.start(), selection.end() );
