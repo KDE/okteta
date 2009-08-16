@@ -35,10 +35,13 @@ ViewBox::ViewBox( AbstractView* view, QWidget* parent )
   : QWidget( parent ),
     mView( view )
 {
+    QWidget* widget = view->widget();
+    setFocusProxy( widget );
+
     QVBoxLayout* layout = new QVBoxLayout( this );
     layout->setMargin (0);
     layout->setSpacing (0);
-    layout->addWidget( view->widget() );
+    layout->addWidget( widget );
 }
 
 
