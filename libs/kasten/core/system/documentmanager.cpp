@@ -207,6 +207,9 @@ void DocumentManager::requestFocus( AbstractDocument* document )
 
 DocumentManager::~DocumentManager()
 {
+    // TODO: emit signal here, too?
+    qDeleteAll( mList );
+
     delete mCreateManager;
     delete mSyncManager;
     delete mCodecManager;
