@@ -242,7 +242,7 @@ void MultiViewAreas::onViewsRemoved()
     if( mViewAreaList.count() < 2 )
         return;
 
-    TabbedViews* viewArea = qobject_cast<TabbedViews *>( sender() );
+    TabbedViews* viewArea = qobject_cast<TabbedViews*>( sender() );
 
     if( viewArea->viewCount() == 0 )
     {
@@ -267,14 +267,25 @@ void MultiViewAreas::onViewsRemoved()
         }
 
         mViewAreaList.removeOne( viewArea );
+
         if( mCurrentViewArea == viewArea )
         {
+            // search for the previous widget which is the next or the previous, using otherIndex
+            while( true )
+            {
+                QSplitter* splitter = qobject_cast<QSplitter*>( otherWidget );
+                if( splitter )
+                    otherWidget = splitter->widget( otherIndex );
+                else
+                    break;
+            }
+
             foreach( TabbedViews* viewArea, mViewAreaList )
             {
                 if( viewArea->widget() == otherWidget )
                 {
                     mCurrentViewArea = viewArea;
-//                     previousViewArea->setFocus();
+                    mCurrentViewArea->setFocus();
                     break;
                 }
             }
