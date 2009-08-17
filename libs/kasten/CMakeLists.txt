@@ -4,4 +4,4 @@ add_subdirectory( controllers )
 
 add_subdirectory( includes )
 
-add_subdirectory( kparts )
+#add_subdirectory( kparts )
