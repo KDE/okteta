@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -36,7 +36,7 @@ class AbstractGroupedViewsPrivate;
 
 class KASTENGUI_EXPORT AbstractGroupedViews : public AbstractViewArea
 {
-    Q_OBJECT
+  Q_OBJECT
 
   protected:
     AbstractGroupedViews();
@@ -48,11 +48,13 @@ class KASTENGUI_EXPORT AbstractGroupedViews : public AbstractViewArea
   public Q_SLOTS: // set/action API to be implemented
     virtual void addViews( const QList<Kasten::AbstractView*>& views ) = 0;
     virtual void removeViews( const QList<Kasten::AbstractView*>& views ) = 0;
+    virtual void setViewFocus( AbstractView* view ) = 0;
 
   public: // get API to be implemented
     // returns the list in the order of display
     virtual QList<AbstractView*> viewList() const = 0;
     virtual int viewCount() const = 0;
+    virtual AbstractView* viewFocus() const = 0;
 
   Q_SIGNALS:
     // view was created and already added to the list
@@ -61,6 +63,7 @@ class KASTENGUI_EXPORT AbstractGroupedViews : public AbstractViewArea
     void removing( const QList<Kasten::AbstractView*>& views );
     // closing the view is requested
     void closeRequest( const QList<Kasten::AbstractView*>& views );
+    void viewFocusChanged( Kasten::AbstractView* view );
 };
 
 }

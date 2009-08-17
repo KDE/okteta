@@ -26,7 +26,6 @@
 
 // lib
 #include "abstractgroupedviews.h"
-#include "viewfocusable.h"
 #include "viewareasplitable.h"
 #include "toolinlineviewable.h"
 
@@ -43,13 +42,11 @@ class TabbedViews;
 
 
 class KASTENGUI_EXPORT MultiViewAreas : public AbstractGroupedViews,
-                                        public If::ViewFocusable,
 //                                         public If::ToolInlineViewable,
                                         public If::ViewAreaSplitable
 {
   Q_OBJECT
   Q_INTERFACES(
-    Kasten::If::ViewFocusable
 //     Kasten::If::ToolInlineViewable
     Kasten::If::ViewAreaSplitable
   )
@@ -67,12 +64,10 @@ class KASTENGUI_EXPORT MultiViewAreas : public AbstractGroupedViews,
   public: // AbstractGroupedViews API
     virtual void addViews( const QList<AbstractView*>& views );
     virtual void removeViews( const QList<AbstractView*>& views );
+    virtual void setViewFocus( AbstractView* view );
 
     virtual QList<AbstractView*> viewList() const;
     virtual int viewCount() const;
-
-  public: // If::ViewFocusable API
-    virtual void setViewFocus( AbstractView* view );
     virtual AbstractView* viewFocus() const;
 
   public: // If::ToolInlineViewable API
@@ -85,9 +80,6 @@ class KASTENGUI_EXPORT MultiViewAreas : public AbstractGroupedViews,
     virtual void setViewAreaFocus( AbstractViewArea* viewArea );
     virtual AbstractViewArea* viewAreaFocus() const;
     virtual int viewAreasCount() const;
-
-  Q_SIGNALS: // If::ViewFocusable API
-    virtual void viewFocusChanged( Kasten::AbstractView* view );
 
   Q_SIGNALS: // If::ViewAreaSplitable API
     virtual void viewAreasAdded( const QList<Kasten::AbstractViewArea*>& viewAreas );

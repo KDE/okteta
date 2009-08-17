@@ -23,8 +23,8 @@
 #include "viewlistmenucontroller.h"
 
 // lib
+#include <abstractgroupedviews.h>
 #include <viewmanager.h>
-#include <viewfocusable.h>
 // Kasten core
 #include <abstractdocument.h>
 // KDE
@@ -47,9 +47,11 @@ static const int MaxEntryLength = 150;
 static const char WindowsListActionListId[] = "windows_list";
 
 
-ViewListMenuController::ViewListMenuController( ViewManager* viewManager, If::ViewFocusable* focusable,
+ViewListMenuController::ViewListMenuController( ViewManager* viewManager, AbstractGroupedViews* groupedViews,
                                                 KXMLGUIClient* guiClient )
- : mViewManager( viewManager ), mFocusable( focusable ), mGuiClient( guiClient )
+  : mViewManager( viewManager ),
+    mGroupedViews( groupedViews ),
+    mGuiClient( guiClient )
 {
     mWindowsActionGroup = new QActionGroup( this ); // TODO: do we use this only for the signal mapping?
 //     mWindowsActionGroup->setExclusive( true );
@@ -106,7 +108,7 @@ void ViewListMenuController::updateActions()
 void ViewListMenuController::onActionTriggered( QAction *action )
 {
     AbstractView *view = action->data().value<AbstractView *>();
-    mFocusable->setViewFocus( view );
+    mGroupedViews->setViewFocus( view );
 }
 
 }

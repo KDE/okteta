@@ -82,7 +82,6 @@ set( kastengui_LIB_HDRS
   shell/toolinlineviewwidget.h
   shell/toolviewdockwidget.h
   shell/statusbarlayout.h
-  shell/viewfocusable.h
   shell/toolinlineviewable.h
   shell/widgetsdockable.h
   shell/viewareasplitable.h

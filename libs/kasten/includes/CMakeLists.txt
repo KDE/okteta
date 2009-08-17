@@ -60,7 +60,6 @@ set( kastengui_CamelCase_HDRS
   AbstractGroupedViews
   ViewAreaSplitable
   ToolInlineViewable
-  ViewFocusable
   WidgetsDockable
 
   TabbedViews

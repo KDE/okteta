@@ -35,9 +35,6 @@ class KAction;
 namespace Kasten
 {
 
-namespace If {
-class ViewFocusable;
-}
 class AbstractGroupedViews;
 
 
@@ -59,7 +56,6 @@ class KASTENCONTROLLERS_EXPORT SwitchViewController : public AbstractXmlGuiContr
 
   protected:
     AbstractGroupedViews* mGroupedViews;
-    If::ViewFocusable* mFocusable;
 
     KAction* mForwardAction;
     KAction* mBackwardAction;

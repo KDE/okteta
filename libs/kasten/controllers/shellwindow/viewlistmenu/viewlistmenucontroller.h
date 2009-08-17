@@ -36,10 +36,8 @@ class KXMLGUIClient;
 namespace Kasten
 {
 
-namespace If {
-class ViewFocusable;
-}
 class ViewManager;
+class AbstractGroupedViews;
 
 
 class KASTENCONTROLLERS_EXPORT ViewListMenuController : public AbstractXmlGuiController
@@ -47,7 +45,7 @@ class KASTENCONTROLLERS_EXPORT ViewListMenuController : public AbstractXmlGuiCon
   Q_OBJECT
 
   public:
-    ViewListMenuController( ViewManager* viewManager, If::ViewFocusable* focusable, KXMLGUIClient* guiClient );
+    ViewListMenuController( ViewManager* viewManager, AbstractGroupedViews* groupedViews, KXMLGUIClient* guiClient );
 
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
@@ -58,7 +56,7 @@ class KASTENCONTROLLERS_EXPORT ViewListMenuController : public AbstractXmlGuiCon
 
   protected:
     ViewManager *mViewManager;
-    If::ViewFocusable *mFocusable;
+    AbstractGroupedViews* mGroupedViews;
     KXMLGUIClient* mGuiClient;
 
     QActionGroup *mWindowsActionGroup;

@@ -26,7 +26,6 @@
 
 // lib
 #include "abstractgroupedviews.h"
-#include "viewfocusable.h"
 #include "toolinlineviewable.h"
 
 class KTabWidget;
@@ -41,12 +40,10 @@ class TabbedViewsBox;
 
 
 class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews,
-                                     public If::ViewFocusable,
                                      public If::ToolInlineViewable
 {
   Q_OBJECT
   Q_INTERFACES(
-    Kasten::If::ViewFocusable
     Kasten::If::ToolInlineViewable
   )
 
@@ -59,16 +56,14 @@ class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews,
     virtual void addToolInlineView( AbstractToolInlineView* view );
     virtual void setCurrentToolInlineView( AbstractToolInlineView* view );
 
-  public: // If::ViewFocusable API
-    virtual void setViewFocus( AbstractView *view );
-    virtual AbstractView *viewFocus() const;
-
   public: // AbstractGroupedViews API
     virtual void addViews( const QList<AbstractView*>& views );
     virtual void removeViews( const QList<AbstractView*>& views );
+    virtual void setViewFocus( AbstractView *view );
 
     virtual QList<AbstractView*> viewList() const;
     virtual int viewCount() const;
+    virtual AbstractView *viewFocus() const;
 
   public: // AbstractViewArea API
     virtual void setFocus();
@@ -78,8 +73,6 @@ class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews,
   public:
     int indexOf( AbstractView* view ) const;
 
-  Q_SIGNALS: // If::ViewFocusable API
-    virtual void viewFocusChanged( Kasten::AbstractView* view );
   Q_SIGNALS:
     void dragMove( const QDragMoveEvent* event, bool& accepted );
     void drop( QDropEvent* event );

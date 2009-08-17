@@ -26,7 +26,6 @@
 #include <abstractgroupedviews.h>
 #include <viewareasplitable.h>
 #include <abstractviewarea.h>
-#include <viewfocusable.h>
 #include <viewmanager.h>
 // KDE
 #include <KXMLGUIClient>
@@ -103,12 +102,7 @@ void ViewAreaSplitController::close()
 
 void ViewAreaSplitController::splitViewArea( Qt::Orientation orientation )
 {
-    If::ViewFocusable* viewFocusable = qobject_cast<If::ViewFocusable*>( mCurrentViewArea );
-
-    if( ! viewFocusable )
-        return;
-
-    AbstractView* currentView = viewFocusable->viewFocus();
+    AbstractView* currentView = mCurrentViewArea->viewFocus();
 
     mViewAreaSplitable->splitViewArea( mCurrentViewArea, orientation );
 
