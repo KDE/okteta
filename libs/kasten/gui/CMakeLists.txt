@@ -10,6 +10,7 @@ include_directories(
   view
   io
   system
+  shell
   controller
 )
 
@@ -33,20 +34,20 @@ set( kastengui_LIB_SRCS
   view/abstractselectionview.cpp
   view/abstracttoolinlineview.cpp
   view/abstracttoolview.cpp
-  system/viewbox.cpp
-  system/toolinlineviewwidget.cpp
-  system/toolviewdockwidget.cpp
   system/dummyview.cpp
   system/modelcodecviewmanager.cpp
   system/viewmanager.cpp
-  system/abstractviewarea.cpp
-  system/abstractgroupedviews.cpp
-  system/tabbedviewsbox.cpp
-  system/tabbedviews.cpp
-  system/multiviewareas.cpp
-  system/shellwindow.cpp
-  system/statusbar.cpp
-  system/statusbarlayout.cpp
+  shell/viewbox.cpp
+  shell/toolinlineviewwidget.cpp
+  shell/toolviewdockwidget.cpp
+  shell/abstractviewarea.cpp
+  shell/abstractgroupedviews.cpp
+  shell/tabbedviewsbox.cpp
+  shell/tabbedviews.cpp
+  shell/multiviewareas.cpp
+  shell/shellwindow.cpp
+  shell/statusbar.cpp
+  shell/statusbarlayout.cpp
   ${KASTEN_GUI_CONTROLLER_WIDGETS_SRCS}
   controller/abstractxmlguicontroller.cpp
 )
@@ -67,24 +68,24 @@ set( kastengui_LIB_HDRS
   io/abstractmodelexporterconfigeditor.h
   io/abstractmodelexporterconfigeditorfactory.h
   io/abstractmodelstreamencoderconfigeditorfactory.h
-  system/viewmanager.h
-  system/shellwindow.h
-  system/abstractviewarea.h
-  system/abstractgroupedviews.h
-  system/statusbar.h
-  system/tabbedviewsbox.h
-  system/viewbox.h
-  system/tabbedviews.h
-  system/multiviewareas.h
-  system/toolinlineviewwidget.h
-  system/toolviewdockwidget.h
-  system/statusbarlayout.h
   system/dummyview.h
   system/modelcodecviewmanager.h
-  system/viewfocusable.h
-  system/toolinlineviewable.h
-  system/widgetsdockable.h
-  system/viewareasplitable.h
+  system/viewmanager.h
+  shell/shellwindow.h
+  shell/abstractviewarea.h
+  shell/abstractgroupedviews.h
+  shell/statusbar.h
+  shell/tabbedviewsbox.h
+  shell/viewbox.h
+  shell/tabbedviews.h
+  shell/multiviewareas.h
+  shell/toolinlineviewwidget.h
+  shell/toolviewdockwidget.h
+  shell/statusbarlayout.h
+  shell/viewfocusable.h
+  shell/toolinlineviewable.h
+  shell/widgetsdockable.h
+  shell/viewareasplitable.h
   controller/abstractxmlguicontroller.h
   controller/abstractlinepopup.h
   controller/togglebutton.h

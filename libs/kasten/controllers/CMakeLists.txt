@@ -13,6 +13,7 @@ include_directories(
   ../gui/view
   ../gui/io
   ../gui/system
+  ../gui/shell
   ../gui/controller
 )
 
