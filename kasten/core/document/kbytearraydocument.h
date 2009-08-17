@@ -43,11 +43,17 @@ class PieceTableByteArrayModel;
 namespace Kasten
 {
 
-class OKTETAKASTENCORE_EXPORT KByteArrayDocument : public AbstractDocument, public If::Versionable, public If::UserListable//, public If::ByteArray
+class OKTETAKASTENCORE_EXPORT KByteArrayDocument : public AbstractDocument,
+                                                   public If::Versionable,
+                                                   public If::UserListable//,
+//                                                    public If::ByteArray
 {
-    Q_OBJECT
-    Q_INTERFACES(Kasten::If::Versionable Kasten::If::UserListable)
-//     Q_INTERFACES(If::ByteArray)
+  Q_OBJECT
+  Q_INTERFACES(
+    Kasten::If::Versionable
+    Kasten::If::UserListable
+//     Kasten::If::ByteArray
+  )
 
   public:
     explicit KByteArrayDocument( const QString &initDescription );

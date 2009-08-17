@@ -50,7 +50,8 @@ class AbstractToolView;
 class AbstractTool;
 
 
-class KASTENGUI_EXPORT ShellWindow : public KXmlGuiWindow, public If::WidgetsDockable
+class KASTENGUI_EXPORT ShellWindow : public KXmlGuiWindow,
+                                     public If::WidgetsDockable
 {
    Q_OBJECT
    Q_INTERFACES( Kasten::If::WidgetsDockable )

@@ -39,7 +39,8 @@ class ByteArrayModelPrivate;
   *@author Friedrich W. H. Kossebau
   */
 
-class OKTETACORE_EXPORT ByteArrayModel : public AbstractByteArrayModel, public Bookmarkable
+class OKTETACORE_EXPORT ByteArrayModel : public AbstractByteArrayModel,
+                                         public Bookmarkable
 {
     Q_OBJECT
     Q_INTERFACES( Okteta::Bookmarkable )

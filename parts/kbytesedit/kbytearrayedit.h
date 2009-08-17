@@ -46,12 +46,21 @@ class ByteArrayColumnView;
    @author Friedrich W. H. Kossebau <kossebau@kde.org>
    @version 0.1
  **/
-class KByteArrayEdit : public QWidget, public KHE::BytesEditInterface,
-                       public KHE::ValueColumnInterface, public KHE::CharColumnInterface,
-                       public KHE::ZoomInterface, public KHE::ClipboardInterface
+class KByteArrayEdit : public QWidget,
+                       public KHE::BytesEditInterface,
+                       public KHE::ValueColumnInterface,
+                       public KHE::CharColumnInterface,
+                       public KHE::ZoomInterface,
+                       public KHE::ClipboardInterface
 {
   Q_OBJECT
-  Q_INTERFACES(KHE::BytesEditInterface KHE::ValueColumnInterface KHE::CharColumnInterface KHE::ZoomInterface KHE::ClipboardInterface)
+  Q_INTERFACES(
+    KHE::BytesEditInterface
+    KHE::ValueColumnInterface
+    KHE::CharColumnInterface
+    KHE::ZoomInterface
+    KHE::ClipboardInterface
+  )
   //_PROPERTY( char * Data READ data )
   Q_PROPERTY( int DataSize READ dataSize )
   Q_PROPERTY( int MaxDataSize READ maxDataSize WRITE setMaxDataSize )

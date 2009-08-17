@@ -47,9 +47,12 @@ class KASTENGUI_EXPORT MultiViewAreas : public AbstractGroupedViews,
 //                                         public If::ToolInlineViewable,
                                         public If::ViewAreaSplitable
 {
-   Q_OBJECT
-   Q_INTERFACES( Kasten::If::ViewFocusable  Kasten::If::ViewAreaSplitable )
-//    Q_INTERFACES( Kasten::If::ViewFocusable Kasten::If::ToolInlineViewable Kasten::If::ViewAreaSplitable )
+  Q_OBJECT
+  Q_INTERFACES(
+    Kasten::If::ViewFocusable
+//     Kasten::If::ToolInlineViewable
+    Kasten::If::ViewAreaSplitable
+  )
 
   public:
     explicit MultiViewAreas();

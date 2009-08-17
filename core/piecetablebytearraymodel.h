@@ -38,10 +38,19 @@ namespace Okteta
   *@author Friedrich W. H. Kossebau
   */
 
-class OKTETACORE_EXPORT PieceTableByteArrayModel : public AbstractByteArrayModel, public Versionable, public Bookmarkable, public ChangesDescribable, public ChangeHistory
+class OKTETACORE_EXPORT PieceTableByteArrayModel : public AbstractByteArrayModel,
+                                                   public Versionable,
+                                                   public Bookmarkable,
+                                                   public ChangesDescribable,
+                                                   public ChangeHistory
 {
-    Q_OBJECT
-    Q_INTERFACES( Okteta::Versionable Okteta::Bookmarkable Okteta::ChangesDescribable Okteta::ChangeHistory )
+  Q_OBJECT
+  Q_INTERFACES(
+    Okteta::Versionable
+    Okteta::Bookmarkable
+    Okteta::ChangesDescribable
+    Okteta::ChangeHistory
+  )
 
     class Private;
     friend class Private;

@@ -49,10 +49,17 @@ class KByteArrayDocument;
 class KCursorProxy;
 
 
-class OKTETAKASTENGUI_EXPORT KByteArrayDisplay : public AbstractView, public If::Zoomable, public If::DataSelectable, public If::SelectedDataWriteable
+class OKTETAKASTENGUI_EXPORT KByteArrayDisplay : public AbstractView,
+                                                 public If::Zoomable,
+                                                 public If::DataSelectable,
+                                                 public If::SelectedDataWriteable
 {
-    Q_OBJECT
-    Q_INTERFACES(Kasten::If::Zoomable Kasten::If::DataSelectable Kasten::If::SelectedDataWriteable)
+  Q_OBJECT
+  Q_INTERFACES(
+    Kasten::If::Zoomable
+    Kasten::If::DataSelectable
+    Kasten::If::SelectedDataWriteable
+  )
 
   public:
     enum { ColumnViewId = 0, RowViewId };
