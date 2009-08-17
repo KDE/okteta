@@ -87,7 +87,6 @@
 #include <viewmanager.h>
 #include <tabbedviews.h>
 #include <multiviewareas.h>
-// #include <parallelviews/parallelviews.h>
 #include <statusbar.h>
 // Kasten core
 #include <documentcreatemanager.h>

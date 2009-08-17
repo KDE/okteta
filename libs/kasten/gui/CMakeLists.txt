@@ -13,12 +13,6 @@ include_directories(
   controller
 )
 
-set( KASTEN_GUI_PARALLELVIEWS_SRCS
-  system/parallelviews/parallelviews.cpp
-  system/parallelviews/parallelwidget.cpp
-  system/parallelviews/titledwidget.cpp
-)
-
 set( KASTEN_GUI_IO_CONFIGEDITOR_SRCS
   io/filesystem/modelencoderfilesystemexporterconfigeditorfactory.cpp
   io/filesystem/modelencoderfilesystemexporterconfigeditor.cpp
