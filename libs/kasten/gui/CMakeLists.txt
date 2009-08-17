@@ -68,7 +68,7 @@ set( kastengui_shell_SRCS
   shell/toolviewdockwidget.cpp
   shell/abstractviewarea.cpp
   shell/abstractgroupedviews.cpp
-  shell/tabbedviewsbox.cpp
+  shell/viewareabox.cpp
   shell/tabbedviews.cpp
   shell/multiviewareas.cpp
   shell/shellwindow.cpp
@@ -80,7 +80,7 @@ set( kastengui_shell_HDRS
   shell/abstractviewarea.h
   shell/abstractgroupedviews.h
   shell/statusbar.h
-  shell/tabbedviewsbox.h
+  shell/viewareabox.h
   shell/viewbox.h
   shell/tabbedviews.h
   shell/multiviewareas.h

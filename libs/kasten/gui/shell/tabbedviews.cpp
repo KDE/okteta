@@ -23,7 +23,7 @@
 #include "tabbedviews.h"
 
 // lib
-#include "tabbedviewsbox.h"
+#include "viewareabox.h"
 #include "viewbox.h"
 #include "toolinlineviewwidget.h"
 #include <abstracttoolinlineview.h>
@@ -39,11 +39,10 @@ namespace Kasten
 TabbedViews::TabbedViews()
   : mCurrentView( 0 )
 {
-    mTabbedViewsBox = new TabbedViewsBox();
-
-    mTabWidget = mTabbedViewsBox->tabWidget();
+    mTabWidget = new KTabWidget();
     mTabWidget->setCloseButtonEnabled( true );
     mTabWidget->setDocumentMode( true );
+    mViewAreaBox = new ViewAreaBox( mTabWidget );
 
     connect( mTabWidget, SIGNAL(closeRequest( QWidget* )), SLOT(onCloseRequest( QWidget* )) );
     connect( mTabWidget, SIGNAL(currentChanged( int )), SLOT(onCurrentChanged( int )) );
@@ -90,7 +89,7 @@ int TabbedViews::indexOf( AbstractView* view ) const
 
 QWidget* TabbedViews::widget() const
 {
-    return mTabbedViewsBox;
+    return mViewAreaBox;
 }
 
 AbstractView* TabbedViews::viewFocus() const
@@ -168,12 +167,12 @@ void TabbedViews::addToolInlineView( AbstractToolInlineView* view )
 void TabbedViews::setCurrentToolInlineView( AbstractToolInlineView* view )
 {
     ToolInlineViewWidget* currentViewWidget =
-        qobject_cast<ToolInlineViewWidget*>( mTabbedViewsBox->bottomWidget() );
+        qobject_cast<ToolInlineViewWidget*>( mViewAreaBox->bottomWidget() );
 
     if( ! currentViewWidget || (currentViewWidget->view() != view) )
     {
         ToolInlineViewWidget* toolInlineViewWidget = new ToolInlineViewWidget( view/*->widget()*/ );
-        mTabbedViewsBox->setBottomWidget( toolInlineViewWidget );
+        mViewAreaBox->setBottomWidget( toolInlineViewWidget );
     }
 
     view->widget()->setFocus();
@@ -190,7 +189,7 @@ void TabbedViews::setFocus()
     if( mCurrentView )
         mCurrentView->setFocus();
     // TODO: would ensure the bottomwidget gets focus if there is one. Just, it didn't work at all
-//     mTabbedViewsBox->setFocus();
+//     mViewAreaBox->setFocus();
 }
 
 void TabbedViews::onCurrentChanged( int index )
@@ -201,7 +200,7 @@ void TabbedViews::onCurrentChanged( int index )
     if( view == mCurrentView )
         return;
 
-    mTabbedViewsBox->setBottomWidget( 0 );
+    mViewAreaBox->setBottomWidget( 0 );
 
     if( mCurrentView )
         mCurrentView->disconnect( this );
@@ -271,7 +270,7 @@ void TabbedViews::onViewFocusChanged( bool hasFocus )
 
 TabbedViews::~TabbedViews()
 {
-    delete mTabbedViewsBox;
+    delete mViewAreaBox;
 }
 
 }

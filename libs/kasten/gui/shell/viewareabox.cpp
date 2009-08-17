@@ -20,10 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "tabbedviewsbox.h"
+#include "viewareabox.h"
 
-// KDE
-#include <KTabWidget>
 // Qt
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QShortcut>
@@ -32,17 +30,17 @@
 namespace Kasten
 {
 
-TabbedViewsBox::TabbedViewsBox( QWidget* parent )
+ViewAreaBox::ViewAreaBox( QWidget* centralWidget, QWidget* parent )
   : QWidget( parent ),
+    mCentralWidget( centralWidget ),
     mBottomWidget( 0 )
 {
-    mTabWidget = new KTabWidget();
-    setFocusProxy( mTabWidget );
+    setFocusProxy( mCentralWidget );
 
     QVBoxLayout* layout = new QVBoxLayout( this );
     layout->setMargin( 0 );
     layout->setSpacing( 0 );
-    layout->addWidget( mTabWidget );
+    layout->addWidget( mCentralWidget );
 
     mEscapeShortcut = new QShortcut( Qt::Key_Escape, this );
     mEscapeShortcut->setEnabled( false );
@@ -50,11 +48,11 @@ TabbedViewsBox::TabbedViewsBox( QWidget* parent )
 }
 
 
-KTabWidget* TabbedViewsBox::tabWidget() const { return mTabWidget; }
-QWidget* TabbedViewsBox::bottomWidget() const { return mBottomWidget; }
+QWidget* ViewAreaBox::centralWidget() const { return mCentralWidget; }
+QWidget* ViewAreaBox::bottomWidget()  const { return mBottomWidget; }
 
 
-void TabbedViewsBox::setBottomWidget( QWidget* bottomWidget )
+void ViewAreaBox::setBottomWidget( QWidget* bottomWidget )
 {
     QVBoxLayout* layout = static_cast<QVBoxLayout*>( this->layout() );
 
@@ -75,19 +73,20 @@ void TabbedViewsBox::setBottomWidget( QWidget* bottomWidget )
         bottomWidget->setFocus();
     }
     else
-        setFocusProxy( mTabWidget );
+        setFocusProxy( mCentralWidget );
 
     mEscapeShortcut->setEnabled( (bottomWidget != 0) );
 }
 
-void TabbedViewsBox::onDone()
+void ViewAreaBox::onDone()
 {
     setBottomWidget( 0 );
 }
 
-TabbedViewsBox::~TabbedViewsBox()
+ViewAreaBox::~ViewAreaBox()
 {
     delete mBottomWidget;
+    mCentralWidget->setParent( 0 );
 }
 
 }

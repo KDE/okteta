@@ -26,15 +26,13 @@
 // Qt
 #include <QtGui/QWidget>
 
-class KTabWidget;
 class QShortcut;
 
 
 namespace Kasten
 {
 
-
-class TabbedViewsBox : public QWidget
+class ViewAreaBox : public QWidget
 {
     Q_OBJECT
 
@@ -42,11 +40,11 @@ class TabbedViewsBox : public QWidget
     enum Area { TopArea, BottomArea };
 
   public:
-    explicit TabbedViewsBox( QWidget* parent = 0 );
-    virtual ~TabbedViewsBox();
+    explicit ViewAreaBox( QWidget* centralWidget, QWidget* parent = 0 );
+    virtual ~ViewAreaBox();
 
   public:
-    KTabWidget* tabWidget() const;
+    QWidget* centralWidget() const;
     QWidget* bottomWidget() const;
 
   public:
@@ -56,7 +54,7 @@ class TabbedViewsBox : public QWidget
     void onDone();
 
   protected:
-    KTabWidget* mTabWidget;
+    QWidget* mCentralWidget;
 
     QWidget* mBottomWidget;
     QShortcut* mEscapeShortcut;

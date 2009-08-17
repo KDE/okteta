@@ -36,7 +36,7 @@ class QDropEvent;
 namespace Kasten
 {
 
-class TabbedViewsBox;
+class ViewAreaBox;
 
 
 class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews,
@@ -85,7 +85,7 @@ class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews,
     void onViewFocusChanged( bool focusChanged );
 
   protected:
-    TabbedViewsBox* mTabbedViewsBox;
+    ViewAreaBox* mViewAreaBox;
     KTabWidget* mTabWidget;
 
     QList<AbstractToolInlineView*> mToolInlineViewList;
