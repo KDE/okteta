@@ -76,6 +76,7 @@ set( kastengui_CamelCase_HDRS
 )
 
 set( kastencontrollers_CamelCase_HDRS
+  ModifiedBarController
   ReadOnlyBarController
   ReadOnlyController
   VersionViewTool
