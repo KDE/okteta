@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -67,7 +67,6 @@ class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews,
     virtual AbstractView *viewFocus() const;
 
   public: // If::ToolInlineViewable API
-    virtual void addToolInlineView( AbstractToolInlineView* view );
     virtual void setCurrentToolInlineView( AbstractToolInlineView* view );
 
   public:
@@ -87,8 +86,6 @@ class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews,
   protected:
     ViewAreaBox* mViewAreaBox;
     KTabWidget* mTabWidget;
-
-    QList<AbstractToolInlineView*> mToolInlineViewList;
 
     AbstractView* mCurrentView;
 };

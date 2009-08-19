@@ -55,7 +55,6 @@ GotoOffsetController::GotoOffsetController( If::ToolInlineViewable* toolInlineVi
     mGotoOffsetAction->setEnabled( mTool->isUsable() );
 
     mView = new GotoOffsetToolView( mTool );
-    toolInlineViewable->addToolInlineView( mView );
 }
 
 void GotoOffsetController::setTargetModel( AbstractModel* model )

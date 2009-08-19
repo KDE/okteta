@@ -158,12 +158,12 @@ void TabbedViews::removeViews( const QList<AbstractView*>& views )
 
     emit removing( views );
 }
-
+#if 0
 void TabbedViews::addToolInlineView( AbstractToolInlineView* view )
 {
     mToolInlineViewList.append( view );
 }
-
+#endif
 void TabbedViews::setCurrentToolInlineView( AbstractToolInlineView* view )
 {
     ToolInlineViewWidget* currentViewWidget =

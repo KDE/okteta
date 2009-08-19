@@ -42,7 +42,6 @@ class ToolInlineViewable
     virtual ~ToolInlineViewable();
 
   public: // set/action
-    virtual void addToolInlineView( AbstractToolInlineView* view ) = 0;
     virtual void setCurrentToolInlineView( AbstractToolInlineView* view ) = 0;
 
   public: // get

@@ -56,7 +56,6 @@ SelectRangeController::SelectRangeController( If::ToolInlineViewable* toolInline
     mSelectAction->setEnabled( mTool->isUsable() );
 
     mView = new SelectRangeToolView( mTool );
-    toolInlineViewable->addToolInlineView( mView );
 }
 
 void SelectRangeController::setTargetModel( AbstractModel* model )
