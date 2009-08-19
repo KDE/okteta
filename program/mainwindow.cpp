@@ -62,6 +62,7 @@
 #include <viewmode/viewmodecontroller.h>
 #include <viewstatus/viewstatuscontroller.h>
 // Kasten controllers
+#include <document/modified/modifiedbarcontroller.h>
 #include <document/readonly/readonlycontroller.h>
 #include <document/readonly/readonlybarcontroller.h>
 #include <documentsystem/creator/creatorcontroller.h>
@@ -173,6 +174,7 @@ void OktetaMainWindow::setupControllers()
 
     Kasten::StatusBar* bottomBar = static_cast<Kasten::StatusBar*>( statusBar() );
     addXmlGuiController( new ViewStatusController(bottomBar) );
+    addXmlGuiController( new ModifiedBarController(bottomBar) );
     addXmlGuiController( new ReadOnlyBarController(bottomBar) );
     addXmlGuiController( new ZoomBarController(bottomBar) );
 

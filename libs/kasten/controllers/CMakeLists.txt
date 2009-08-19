@@ -44,6 +44,9 @@ set( DOCUMENTSBROWSERCONTROLLER_SRCS
   documentsystem/documentsbrowser/documentsview.cpp
   documentsystem/documentsbrowser/documentstoolview.cpp
 )
+set( MODIFIEDBARCONTROLLER_SRCS
+  document/modified/modifiedbarcontroller.cpp
+)
 set( READONLYCONTROLLER_SRCS
   document/readonly/readonlycontroller.cpp
 )
@@ -113,6 +116,7 @@ set( kastencontroller_LIB_SRCS
   ${DOCUMENTSBROWSERCONTROLLER_SRCS}
   ${VERSIONCONTROLLER_SRCS}
   ${VERSIONVIEWCONTROLLER_SRCS}
+  ${MODIFIEDBARCONTROLLER_SRCS}
   ${READONLYCONTROLLER_SRCS}
   ${READONLYBARCONTROLLER_SRCS}
   ${SWITCHVIEWCONTROLLER_SRCS}
@@ -134,6 +138,7 @@ set( kastencontroller_LIB_SRCS
 
 set( kastencontrollers_LIB_HDRS
   kastencontrollers_export.h
+  document/modified/modifiedbarcontroller.h
   document/readonly/readonlybarcontroller.h
   document/readonly/readonlycontroller.h
   document/versionview/versionviewtool.h
