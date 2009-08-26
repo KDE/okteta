@@ -34,14 +34,16 @@
 // Qt
 #include <QtGui/QSplitter>
 
-
+#include <KDebug>
 namespace Kasten
 {
 // TODO: catch area focues change!
 MultiViewAreas::MultiViewAreas()
+  : mCurrentInlineToolViewArea( 0 )
 {
     mMainSplitter = new QSplitter();
 
+    // create start view area
     TabbedViews* viewArea = new TabbedViews();
     connect( viewArea, SIGNAL(focusChanged( bool )),
              SLOT(onViewAreaFocusChanged( bool )) );
@@ -133,26 +135,18 @@ void MultiViewAreas::removeViews( const QList<AbstractView*>& views )
     // TODO: above might trigger removal of areas before, is this a problem?
     emit removing( views );
 }
-#if 0
-void MultiViewAreas::addToolInlineView( AbstractToolInlineView* view )
-{
-    mToolInlineViewList.append( view );
-}
+
 
 void MultiViewAreas::setCurrentToolInlineView( AbstractToolInlineView* view )
 {
-    ToolInlineViewWidget* currentViewWidget =
-        qobject_cast<ToolInlineViewWidget*>( mTabbedViewsBox->bottomWidget() );
+    if( mCurrentInlineToolViewArea && mCurrentInlineToolViewArea != mCurrentViewArea )
+        mCurrentInlineToolViewArea->setCurrentToolInlineView( 0 );
+kDebug()<<"war:"<<mCurrentInlineToolViewArea<<"wird:"<<mCurrentViewArea;
+    mCurrentInlineToolViewArea = mCurrentViewArea;
 
-    if( ! currentViewWidget || (currentViewWidget->view() != view) )
-    {
-        ToolInlineViewWidget* toolInlineViewWidget = new ToolInlineViewWidget( view/*->widget()*/ );
-        mTabbedViewsBox->setBottomWidget( toolInlineViewWidget );
-    }
-
-    view->widget()->setFocus();
+    mCurrentViewArea->setCurrentToolInlineView( view );
 }
-#endif
+
 void MultiViewAreas::setViewFocus( AbstractView *view )
 {
     // TODO: makes this more efficient!
@@ -269,6 +263,9 @@ void MultiViewAreas::onViewsRemoved()
 
         mViewAreaList.removeOne( viewArea );
 
+        if( mCurrentInlineToolViewArea == viewArea )
+            mCurrentInlineToolViewArea = 0;
+
         if( mCurrentViewArea == viewArea )
         {
             // search for the previous widget which is the next or the previous, using index
@@ -302,7 +299,7 @@ void MultiViewAreas::onViewsRemoved()
 void MultiViewAreas::onViewAreaFocusChanged( bool hasFocus )
 {
     TabbedViews* viewArea = qobject_cast<TabbedViews *>( sender() );
-
+kDebug()<<viewArea<<hasFocus;
     if( mCurrentViewArea == viewArea )
         return;
 

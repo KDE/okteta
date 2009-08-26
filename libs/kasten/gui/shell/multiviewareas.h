@@ -42,12 +42,12 @@ class TabbedViews;
 
 
 class KASTENGUI_EXPORT MultiViewAreas : public AbstractGroupedViews,
-//                                         public If::ToolInlineViewable,
+                                        public If::ToolInlineViewable,
                                         public If::ViewAreaSplitable
 {
   Q_OBJECT
   Q_INTERFACES(
-//     Kasten::If::ToolInlineViewable
+    Kasten::If::ToolInlineViewable
     Kasten::If::ViewAreaSplitable
   )
 
@@ -71,8 +71,7 @@ class KASTENGUI_EXPORT MultiViewAreas : public AbstractGroupedViews,
     virtual AbstractView* viewFocus() const;
 
   public: // If::ToolInlineViewable API
-//     virtual void addToolInlineView( AbstractToolInlineView* view );
-//     virtual void setCurrentToolInlineView( AbstractToolInlineView* view );
+    virtual void setCurrentToolInlineView( AbstractToolInlineView* view );
 
   public: // If::ViewAreaSplitable API
     virtual AbstractViewArea* splitViewArea( AbstractViewArea* viewArea, Qt::Orientation orientation );
@@ -102,6 +101,7 @@ class KASTENGUI_EXPORT MultiViewAreas : public AbstractGroupedViews,
     QSplitter* mMainSplitter;
 
     TabbedViews* mCurrentViewArea;
+    TabbedViews* mCurrentInlineToolViewArea;
 };
 
 }
