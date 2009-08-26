@@ -433,6 +433,7 @@ void AbstractByteArrayView::finishByteEdit()
     d->finishByteEditor();
 }
 
+// TODO: remove me!
 void AbstractByteArrayView::emitSelectionSignals()
 {
     Q_D( AbstractByteArrayView );
@@ -440,6 +441,7 @@ void AbstractByteArrayView::emitSelectionSignals()
     const bool hasSelection = tableRanges()->hasSelection();
     if( !d->isOverwriteMode() ) emit cutAvailable( hasSelection );
     emit copyAvailable( hasSelection );
+    emit selectionChanged( selection() );
     emit selectionChanged( hasSelection );
 }
 
