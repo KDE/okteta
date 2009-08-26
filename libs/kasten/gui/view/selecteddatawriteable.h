@@ -39,6 +39,7 @@ namespace If
 // for now the mimedata is the write extension to the selection interface
 // as "createCopyOfSelectedData()" got moved to selection
 // rename both interfaces to Selection and SelectionWriteable?
+// TODO: cut does not work on overwrite modus (for me), how to generalize this?
 class SelectedDataWriteable
 {
   public:
