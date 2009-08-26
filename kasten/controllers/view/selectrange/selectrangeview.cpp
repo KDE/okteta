@@ -153,13 +153,15 @@ SelectRangeView::SelectRangeView( SelectRangeTool* tool, QWidget* parent )
     mRelativeCheckBox->setWhatsThis(
         i18nc("@info:whatsthis","Extend the selection by the cursor move.") );
     connect( mRelativeCheckBox, SIGNAL(toggled( bool )), mTool, SLOT(setIsEndRelative( bool )) );
+    mRelativeCheckBox->setChecked( mTool->isEndRelative() );
     mBackwardsCheckBox = new QCheckBox( i18nc("@option:check","&Backwards"), this );
     mBackwardsCheckBox->setWhatsThis(
         i18nc("@info:whatsthis","Go backwards from the end or the current cursor location.") );
     connect( mBackwardsCheckBox, SIGNAL(toggled( bool )), mTool, SLOT(setIsEndBackwards( bool )) );
+    mBackwardsCheckBox->setChecked( mTool->isEndBackwards() );
 
     connect( mRelativeCheckBox, SIGNAL(toggled( bool )), mBackwardsCheckBox, SLOT(setEnabled( bool )) );
-    mBackwardsCheckBox->setEnabled( false );
+    mBackwardsCheckBox->setEnabled( mRelativeCheckBox->isChecked() );
 
     optionsLayout->addWidget( mRelativeCheckBox );
     optionsLayout->addWidget( mBackwardsCheckBox );
