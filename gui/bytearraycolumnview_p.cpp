@@ -959,6 +959,8 @@ void ByteArrayColumnViewPrivate::mousePressEvent( QMouseEvent* mouseEvent )
 {
     Q_Q( ByteArrayColumnView );
 
+    const bool oldHasSelection = mTableRanges->hasSelection();
+
     pauseCursor();
     mValueEditor->finishEdit();
 
@@ -980,7 +982,16 @@ void ByteArrayColumnViewPrivate::mousePressEvent( QMouseEvent* mouseEvent )
             updateChanged();
 
             unpauseCursor();
+
+            const bool newHasSelection = mTableRanges->hasSelection();
             emit q->cursorPositionChanged( cursorPosition() );
+            emit q->selectionChanged( mTableRanges->selection() );
+            if( oldHasSelection != newHasSelection )
+            {
+                if( !mOverWrite ) emit q->cutAvailable( newHasSelection );
+                emit q->copyAvailable( newHasSelection );
+                emit q->hasSelectedDataChanged( newHasSelection );
+            }
             return;
         }
 
@@ -1030,6 +1041,15 @@ void ByteArrayColumnViewPrivate::mousePressEvent( QMouseEvent* mouseEvent )
     }
 
     unpauseCursor();
+
+    const bool newHasSelection = mTableRanges->hasSelection();
+    emit q->selectionChanged( mTableRanges->selection() );
+    if( oldHasSelection != newHasSelection )
+    {
+        if( !mOverWrite ) emit q->cutAvailable( newHasSelection );
+        emit q->copyAvailable( newHasSelection );
+        emit q->hasSelectedDataChanged( newHasSelection );
+    }
 }
 
 
