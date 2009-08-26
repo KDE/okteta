@@ -42,6 +42,7 @@ namespace Kasten
 class KByteArrayDisplay;
 class ToggleButton;
 class StatusBar;
+class AbstractModelSelection;
 
 
 class OKTETAKASTENCONTROLLERS_EXPORT ViewStatusController : public AbstractXmlGuiController
@@ -63,7 +64,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewStatusController : public AbstractXmlGu
     void setCharCoding( int charCoding );
 
     void onCursorPositionChanged( int offset );
-    void onHasSelectedDataChanged( bool hasSelectedData );
+    void onSelectedDataChanged( const Kasten::AbstractModelSelection* modelSelection );
     void onValueCodingChanged( int valueCoding );
     void onCharCodecChanged( const QString& charCodecName );
 

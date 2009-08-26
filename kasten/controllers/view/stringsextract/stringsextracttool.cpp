@@ -80,8 +80,8 @@ void StringsExtractTool::setTargetModel( AbstractModel* model )
     {
         connect( mByteArrayDisplay,  SIGNAL(charCodecChanged( const QString& )),
                  SLOT(setCharCodec( const QString &)) );
-        connect( mByteArrayDisplay,  SIGNAL(hasSelectedDataChanged( bool )),
-                 SLOT(onSelectionChanged( bool )) );
+        connect( mByteArrayDisplay,  SIGNAL(selectedDataChanged( const Kasten::AbstractModelSelection* )),
+                 SLOT(onSelectionChanged()) );
 
         setCharCodec( mByteArrayDisplay->charCodingName() );
     }
@@ -128,10 +128,9 @@ void StringsExtractTool::selectString( int stringId )
     mByteArrayDisplay->setFocus();
 }
 
-void StringsExtractTool::onSelectionChanged( bool hasSelection )
+void StringsExtractTool::onSelectionChanged()
 {
-// TODO: could be quicker
-Q_UNUSED( hasSelection )
+// TODO: could be quicker using the selection data
     checkUptoDate();
     emit uptodateChanged( mExtractedStringsUptodate );
     emit isApplyableChanged( isApplyable() );

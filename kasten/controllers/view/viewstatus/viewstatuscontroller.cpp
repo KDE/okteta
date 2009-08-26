@@ -153,13 +153,14 @@ void ViewStatusController::setTargetModel( AbstractModel* model )
         mStartOffset = mByteArrayDisplay->startOffset();
 
         onCursorPositionChanged( mByteArrayDisplay->cursorPosition() );
-        onHasSelectedDataChanged( mByteArrayDisplay->hasSelectedData() );
+        onSelectedDataChanged( mByteArrayDisplay->modelSelection() );
         mOverwriteModeToggleButton->setChecked( mByteArrayDisplay->isOverwriteMode() );
         onValueCodingChanged( (int)mByteArrayDisplay->valueCoding() );
         onCharCodecChanged( mByteArrayDisplay->charCodingName() );
 
         connect( mByteArrayDisplay, SIGNAL(cursorPositionChanged( int )), SLOT(onCursorPositionChanged( int )) );
-        connect( mByteArrayDisplay, SIGNAL(hasSelectedDataChanged( bool )), SLOT(onHasSelectedDataChanged( bool )) );
+        connect( mByteArrayDisplay, SIGNAL(selectedDataChanged( const Kasten::AbstractModelSelection* )),
+            SLOT(onSelectedDataChanged( const Kasten::AbstractModelSelection* )) );
         connect( mByteArrayDisplay, SIGNAL(overwriteModeChanged( bool )),
                  mOverwriteModeToggleButton, SLOT(setChecked( bool )) );
         connect( mByteArrayDisplay, SIGNAL(valueCodingChanged( int )), SLOT(onValueCodingChanged( int )) );
@@ -212,28 +213,29 @@ void ViewStatusController::onCursorPositionChanged( int offset )
     mOffsetLabel->setText( i18n("Offset: %1", QLatin1String(codedOffset)) );
 }
 
-// TODO: we need signal selectionChanged( selection ), also fix selection by cursor not sending updates
-void ViewStatusController::onHasSelectedDataChanged( bool hasSelectedData )
+// TODO: fix selection by cursor not sending updates
+void ViewStatusController::onSelectedDataChanged( const Kasten::AbstractModelSelection* modelSelection )
 {
-    QString string;
+    const KByteArraySelection* byteArraySelection = static_cast<const KByteArraySelection*>( modelSelection );
+    const KDE::Section selection = byteArraySelection->section();
 
-    if( hasSelectedData )
+    QString selectionString;
+    if( ! selection.isEmpty() )
     {
         static char codedSelectionStart[Okteta::OffsetFormat::MaxFormatWidth+1];
         static char codedSelectionEnd[Okteta::OffsetFormat::MaxFormatWidth+1];
 
-        const KDE::Section selection = mByteArrayDisplay->selection();
         mPrintFunction( codedSelectionStart, mStartOffset + selection.start() );
         mPrintFunction( codedSelectionEnd,   mStartOffset + selection.end() );
 
         const QString bytesCount = i18np( "1 byte", "%1 bytes", selection.width() );
-        string = i18nc( "@info:status selection: start offset - end offset (number of bytes)",
-                        "Selection: %1 - %2 (%3)", QLatin1String(codedSelectionStart), QLatin1String(codedSelectionEnd), bytesCount );
+        selectionString = i18nc( "@info:status selection: start offset - end offset (number of bytes)",
+                                 "Selection: %1 - %2 (%3)", QLatin1String(codedSelectionStart), QLatin1String(codedSelectionEnd), bytesCount );
     }
     else
-        string = i18nc( "@info:status offset value not available", "Selection: -" );
+        selectionString = i18nc( "@info:status offset value not available", "Selection: -" );
 
-    mSelectionLabel->setText( string );
+    mSelectionLabel->setText( selectionString );
 }
 // #if 0
 void ViewStatusController::onValueCodingChanged( int valueCoding )

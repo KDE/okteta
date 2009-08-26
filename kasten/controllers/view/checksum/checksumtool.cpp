@@ -130,8 +130,8 @@ void ChecksumTool::setTargetModel( AbstractModel* model )
 
     if( mByteArrayDisplay && mByteArrayModel )
     {
-        connect( mByteArrayDisplay,  SIGNAL(hasSelectedDataChanged( bool )),
-                 SLOT(onSelectionChanged( bool )) );
+        connect( mByteArrayDisplay,  SIGNAL(selectedDataChanged( const Kasten::AbstractModelSelection* )),
+                 SLOT(onSelectionChanged()) );
     }
 
     // TODO: if there is no view, there is nothing calculate a checksum from
@@ -205,10 +205,9 @@ void ChecksumTool::resetSourceTool()
     emit isApplyableChanged( isApplyable() );
 }
 
-void ChecksumTool::onSelectionChanged( bool hasSelection )
+void ChecksumTool::onSelectionChanged()
 {
-// TODO: could be quicker
-Q_UNUSED( hasSelection )
+// TODO: could be quicker using the selection data
     checkUptoDate();
     emit uptodateChanged( mChecksumUptodate );
     emit isApplyableChanged( isApplyable() );

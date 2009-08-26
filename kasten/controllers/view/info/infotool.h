@@ -73,7 +73,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT InfoTool : public AbstractTool
     void statisticDirty( bool dirty );
 
   protected Q_SLOTS:
-    void onSelectionChanged( bool hasSelection );
+    void onSelectionChanged();
     void onSourceChanged();
     void onSourceDestroyed();
 

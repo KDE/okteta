@@ -81,7 +81,7 @@ void InfoTool::setTargetModel( AbstractModel* model )
                  mStatisticTableModel, SLOT(setCharCodec( const QString &)) );
         connect( mByteArrayDisplay,  SIGNAL(valueCodingChanged( int )),
                  mStatisticTableModel, SLOT(setValueCoding( int )) );
-        connect( mByteArrayDisplay,  SIGNAL(hasSelectedDataChanged( bool )),
+        connect( mByteArrayDisplay,  SIGNAL(selectedDataChanged( const Kasten::AbstractModelSelection* )),
                  SLOT(onSelectionChanged( bool )) );
     }
 
@@ -89,10 +89,9 @@ void InfoTool::setTargetModel( AbstractModel* model )
     emit isApplyableChanged( isApplyable() );
 }
 
-void InfoTool::onSelectionChanged( bool hasSelection )
+void InfoTool::onSelectionChanged()
 {
-// TODO: could be quicker
-Q_UNUSED( hasSelection )
+// TODO: could be quicker using the selection data
     emit statisticDirty( !isStatisticUptodate() );
     emit isApplyableChanged( isApplyable() );
 }
