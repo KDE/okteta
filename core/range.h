@@ -117,6 +117,7 @@ class Range
     /** returns true is the range shares at least one index with R. If one of both is invalid the behaviour is undefined */
     bool overlaps( const Range &R ) const { return Start <= R.End && R.Start <= End; }
 
+    // TODO: this is wrong, a empty range is valid, too
     /** returns true if the range covers at least one index */
     bool isValid() const { return Start != null() && Start <= End; }
     /** returns true if the range has not been set */
