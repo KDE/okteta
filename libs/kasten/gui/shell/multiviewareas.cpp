@@ -303,6 +303,9 @@ kDebug()<<viewArea<<hasFocus;
     if( mCurrentViewArea == viewArea )
         return;
 
+    if( mCurrentInlineToolViewArea && mCurrentInlineToolViewArea == mCurrentViewArea )
+        mCurrentInlineToolViewArea->setCurrentToolInlineView( 0 );
+
     // TODO: care for ! hasFocus?
     if( hasFocus )
     {
