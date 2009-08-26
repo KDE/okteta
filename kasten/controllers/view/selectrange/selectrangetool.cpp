@@ -67,6 +67,7 @@ bool SelectRangeTool::isApplyable() const
     const int end =   finalTargetSelectionEnd();
 
     return ( mByteArrayDisplay && mByteArrayModel
+             && (start <= end)
              && (0 <= start) && (start < mByteArrayModel->size())
              && (0 <= end) && (end < mByteArrayModel->size()) );
 }
