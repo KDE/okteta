@@ -75,8 +75,7 @@ void ByteArrayJanusView::setViewModus( int viewModus )
         newView->setNoOfBytesPerLine( mView->noOfBytesPerLine() );
         newView->setResizeStyle( mView->resizeStyle() );
         newView->setCursorPosition( mView->cursorPosition() );
-        KDE::Section selection = mView->selection();
-        newView->setSelection( selection.start(), selection.end() );
+        newView->setSelection( mView->selection() );
 
         mLayout->removeWidget( mView );
         delete mView;
