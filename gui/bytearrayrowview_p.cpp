@@ -1028,6 +1028,7 @@ void ByteArrayRowViewPrivate::mouseReleaseEvent( QMouseEvent* mouseEvent )
 {
     Q_Q( ByteArrayRowView );
 
+    const bool oldHasSelection = mTableRanges->hasSelection();
     const QPoint releasePoint = q->viewportToColumns( mouseEvent->pos() );
 
     // this is not the release of a doubleclick so we need to process it?
@@ -1105,10 +1106,14 @@ void ByteArrayRowViewPrivate::mouseReleaseEvent( QMouseEvent* mouseEvent )
     if( mTableRanges->selectionJustStarted() )
         mTableRanges->removeSelection();
 
-    if( !mOverWrite ) emit q->cutAvailable( mTableRanges->hasSelection() );
-    emit q->copyAvailable( mTableRanges->hasSelection() );
-    emit q->selectionChanged( mTableRanges->hasSelection() );
+    const bool newHasSelection = mTableRanges->hasSelection();
     emit q->selectionChanged( mTableRanges->selection() );
+    if( oldHasSelection != newHasSelection )
+    {
+        if( !mOverWrite ) emit q->cutAvailable( newHasSelection );
+        emit q->copyAvailable( newHasSelection );
+        emit q->hasSelectedDataChanged( newHasSelection );
+    }
 }
 
 
@@ -1159,6 +1164,7 @@ void ByteArrayRowViewPrivate::handleMouseMove( const QPoint& point ) // handles 
 {
     Q_Q( ByteArrayRowView );
 
+    const bool oldHasSelection = mTableRanges->hasSelection();
     const int yOffset = q->yOffset();
     const int behindLastYOffset = yOffset + q->visibleHeight();
     // scrolltimer but inside of viewport?
@@ -1212,9 +1218,16 @@ void ByteArrayRowViewPrivate::handleMouseMove( const QPoint& point ) // handles 
     updateChanged();
 
     unpauseCursor();
+
+    const bool newHasSelection = mTableRanges->hasSelection();
     emit q->cursorPositionChanged( cursorPosition() );
-    emit q->selectionChanged( mTableRanges->hasSelection() );
     emit q->selectionChanged( mTableRanges->selection() );
+    if( oldHasSelection != newHasSelection )
+    {
+        if( !mOverWrite ) emit q->cutAvailable( newHasSelection );
+        emit q->copyAvailable( newHasSelection );
+        emit q->hasSelectedDataChanged( newHasSelection );
+    }
 }
 
 

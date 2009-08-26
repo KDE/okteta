@@ -442,7 +442,7 @@ void AbstractByteArrayView::emitSelectionSignals()
     if( !d->isOverwriteMode() ) emit cutAvailable( hasSelection );
     emit copyAvailable( hasSelection );
     emit selectionChanged( selection() );
-    emit selectionChanged( hasSelection );
+    emit hasSelectedDataChanged( hasSelection );
 }
 
 void AbstractByteArrayView::updateChanged()

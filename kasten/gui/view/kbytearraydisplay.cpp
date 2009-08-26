@@ -97,7 +97,7 @@ void KByteArrayDisplay::init()
     connect( mDocument, SIGNAL(titleChanged( QString )), SIGNAL(titleChanged( QString )) );
     connect( mDocument, SIGNAL(syncStatesChanged( Kasten::AbstractDocument::SyncStates )),
                         SIGNAL(syncStatesChanged( Kasten::AbstractDocument::SyncStates )) );
-    connect( mWidget, SIGNAL(selectionChanged( bool )), SIGNAL(hasSelectedDataChanged( bool )) );
+    connect( mWidget, SIGNAL(hasSelectedDataChanged( bool )), SIGNAL(hasSelectedDataChanged( bool )) );
     connect( mWidget, SIGNAL(readOnlyChanged( bool )), SIGNAL(readOnlyChanged( bool )) );
     connect( mWidget, SIGNAL(overwriteModeChanged( bool )), SIGNAL(overwriteModeChanged( bool )) );
     connect( mWidget, SIGNAL(selectionChanged( const KDE::Section& )), SLOT(onSelectionChanged( const KDE::Section& )) );

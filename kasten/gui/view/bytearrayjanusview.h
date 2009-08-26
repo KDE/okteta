@@ -125,7 +125,7 @@ class ByteArrayJanusView : public QWidget
   Q_SIGNALS:
     void readOnlyChanged( bool );
     void overwriteModeChanged( bool overwriteMode );
-    void selectionChanged( bool hasSelectedData );
+    void hasSelectedDataChanged( bool hasSelectedData );
     void selectionChanged( const KDE::Section& selection );
     void cursorPositionChanged( int cursorPosition );
     void valueCodingChanged( int valueCoding );

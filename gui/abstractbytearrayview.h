@@ -329,7 +329,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     /** */
     void readOnlyChanged( bool isReadOnly );
     /** selection has changed */
-    void selectionChanged( bool hasSelection );
+    void hasSelectedDataChanged( bool hasSelectedData );
     void selectionChanged( const KDE::Section& selection );
     /** there is a cut available or not */
     void cutAvailable( bool Really );
