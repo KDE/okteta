@@ -163,14 +163,21 @@ void TabbedViews::setCurrentToolInlineView( AbstractToolInlineView* view )
 {
     ToolInlineViewWidget* currentViewWidget =
         qobject_cast<ToolInlineViewWidget*>( mViewAreaBox->bottomWidget() );
+    AbstractToolInlineView* currentToolInlineView =
+        currentViewWidget ? currentViewWidget->view() : 0;
 
-    if( ! currentViewWidget || (currentViewWidget->view() != view) )
+    if( currentToolInlineView != view )
     {
-        ToolInlineViewWidget* toolInlineViewWidget = new ToolInlineViewWidget( view/*->widget()*/ );
+        ToolInlineViewWidget* toolInlineViewWidget =
+            view ? new ToolInlineViewWidget( view/*->widget()*/ ) : 0;
         mViewAreaBox->setBottomWidget( toolInlineViewWidget );
     }
 
-    view->widget()->setFocus();
+    if( view )
+        view->widget()->setFocus();
+//     else
+//         if( mCurrentView )
+//             mCurrentView->setFocus();
 }
 
 void TabbedViews::setViewFocus( AbstractView *view )
