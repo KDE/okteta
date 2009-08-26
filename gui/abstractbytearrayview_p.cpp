@@ -483,6 +483,8 @@ bool AbstractByteArrayViewPrivate::selectWord( /*unsigned TODO:change all unneed
         const KDE::Section wordSection = WBS.wordSection( index );
         if( wordSection.isValid() )
         {
+            const bool oldHasSelection = mTableRanges->hasSelection();
+
             pauseCursor();
             finishByteEditor();
 
@@ -491,7 +493,17 @@ bool AbstractByteArrayViewPrivate::selectWord( /*unsigned TODO:change all unneed
             updateChanged();
 
             unpauseCursor();
-            emit q->cursorPositionChanged( mTableCursor->realIndex() );
+
+            const bool newHasSelection = mTableRanges->hasSelection();
+            emit q->selectionChanged( wordSection );
+            if( oldHasSelection != newHasSelection )
+            {
+                if( !mOverWrite ) emit q->cutAvailable( newHasSelection );
+                emit q->copyAvailable( newHasSelection );
+                emit q->hasSelectedDataChanged( newHasSelection );
+            }
+            emit q->cursorPositionChanged( cursorPosition() );
+
             result = true;
         }
     }
