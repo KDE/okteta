@@ -100,7 +100,7 @@ void KByteArrayDisplay::init()
     connect( mWidget, SIGNAL(selectionChanged( bool )), SIGNAL(hasSelectedDataChanged( bool )) );
     connect( mWidget, SIGNAL(readOnlyChanged( bool )), SIGNAL(readOnlyChanged( bool )) );
     connect( mWidget, SIGNAL(overwriteModeChanged( bool )), SIGNAL(overwriteModeChanged( bool )) );
-    connect( mWidget, SIGNAL(selectionChanged( bool )), SLOT(onSelectionChange( bool )) );
+    connect( mWidget, SIGNAL(selectionChanged( const KDE::Section& )), SLOT(onSelectionChanged( const KDE::Section& )) );
     connect( mWidget, SIGNAL(cursorPositionChanged( int )), SIGNAL(cursorPositionChanged( int )) );
     connect( mWidget, SIGNAL(valueCodingChanged( int )), SIGNAL(valueCodingChanged( int )) );
     connect( mWidget, SIGNAL(charCodecChanged( const QString& )), SIGNAL(charCodecChanged( const QString& )) );
@@ -172,10 +172,11 @@ bool KByteArrayDisplay::canReadData( const QMimeData *data ) const
     return mWidget->canReadData( data );
 }
 
-void KByteArrayDisplay::onSelectionChange( bool selected )
+void KByteArrayDisplay::onSelectionChanged( const KDE::Section& selection )
 {
-    mSelection.setSection( mWidget->selection() );
-    emit hasSelectedDataChanged( selected );
+    // TODO: how to make sure the signal hasSelectedDataChanged() is not emitted before?
+    mSelection.setSection( selection );
+    emit selectedDataChanged( &mSelection );
 }
 
 void KByteArrayDisplay::setCursorPosition( int cursorPosition )

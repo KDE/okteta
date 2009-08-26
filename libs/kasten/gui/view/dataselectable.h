@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -53,7 +53,10 @@ class DataSelectable
     virtual const AbstractModelSelection* modelSelection() const = 0;
 
   public: // signal
+    /// emitted if there is a change in whether selected data is available or not
     virtual void hasSelectedDataChanged( bool hasSelectedData ) = 0;
+    /// emitted if the selection changes, to other data or none
+    virtual void selectedDataChanged( const AbstractModelSelection* modelSelection ) = 0;
 };
 
 inline DataSelectable::~DataSelectable() {}

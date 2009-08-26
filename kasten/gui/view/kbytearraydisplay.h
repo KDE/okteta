@@ -98,6 +98,7 @@ class OKTETAKASTENGUI_EXPORT KByteArrayDisplay : public AbstractView,
 //     virtual void setSelection();
   Q_SIGNALS:
     virtual void hasSelectedDataChanged( bool hasSelectedData );
+    virtual void selectedDataChanged( const Kasten::AbstractModelSelection* modelSelection );
 
   public: // If::SelectedDataWriteable API
     virtual void insertData( const QMimeData *data );
@@ -122,7 +123,7 @@ class OKTETAKASTENGUI_EXPORT KByteArrayDisplay : public AbstractView,
     void valueCodingChanged( int valueCoding );
 
   public:
-    // TODO: fix section vs. two ints
+    // TODO: see how this can be solved by modelSelection
     KDE::Section selection() const;
     void setSelection( int start, int end );
     void insert( const QByteArray& byteArray );
@@ -167,7 +168,7 @@ class OKTETAKASTENGUI_EXPORT KByteArrayDisplay : public AbstractView,
     void init();
 
   protected Q_SLOTS:
-    void onSelectionChange( bool selected );
+    void onSelectionChanged( const KDE::Section& selection );
 
   protected:
     Okteta::ByteArrayJanusView* mWidget;
