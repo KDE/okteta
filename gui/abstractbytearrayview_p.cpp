@@ -471,7 +471,7 @@ void AbstractByteArrayViewPrivate::setCharCoding( const QString& charCodingName 
     mCharCoding = AbstractByteArrayView::LocalEncoding; // TODO: add encoding no to every known codec
 }
 
-
+// TODO: make this use select( start, end )
 bool AbstractByteArrayViewPrivate::selectWord( /*unsigned TODO:change all unneeded signed into unsigned!*/ int index )
 {
     Q_Q( AbstractByteArrayView );
@@ -499,6 +499,7 @@ bool AbstractByteArrayViewPrivate::selectWord( /*unsigned TODO:change all unneed
 }
 
 
+// TODO: make this use select( start, end )
 void AbstractByteArrayViewPrivate::selectAll( bool select )
 {
     Q_Q( AbstractByteArrayView );
@@ -588,28 +589,39 @@ void AbstractByteArrayViewPrivate::setSelectionCursorPosition( int index )
 }
 
 
-void AbstractByteArrayViewPrivate::setSelection( int start, int end )
+
+void AbstractByteArrayViewPrivate::setSelection( const KDE::Section& _selection )
 {
     Q_Q( AbstractByteArrayView );
 
-    if( start >= 0 && end < mTableLayout->length()  )
-    {
-        const KDE::Section selection( start, end );
-        if( selection.isValid() )
-        {
-            pauseCursor();
-            finishByteEditor();
+    KDE::Section selection( _selection );
+    selection.restrictEndTo( mTableLayout->length()-1 );
 
-            mTableRanges->setSelection( selection );
-            mTableCursor->gotoCIndex( selection.nextBehindEnd() );
+    const KDE::Section oldSelection = mTableRanges->selection();
+
+    if( ! selection.isValid()
+        || selection == oldSelection )
+        return;
+
+    pauseCursor();
+    finishByteEditor();
+
+    mTableRanges->setSelection( selection );
+    mTableCursor->gotoCIndex( selection.nextBehindEnd() );
 // TODO:            ensureVisible( *mActiveColumn, mTableLayout->coordOfIndex(selection.start()) );
-            ensureCursorVisible();
-            updateChanged();
+    ensureCursorVisible();
+    updateChanged();
 
-            unpauseCursor();
-            emit q->cursorPositionChanged( cursorPosition() );
-        }
+    unpauseCursor();
+
+    if( oldSelection.isEmpty() )
+    {
+        if( !mOverWrite ) emit q->cutAvailable( true );
+        emit q->copyAvailable( true );
+        emit q->selectionChanged( true );
     }
+    emit q->selectionChanged( selection );
+    emit q->cursorPositionChanged( cursorPosition() );
 }
 
 

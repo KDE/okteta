@@ -274,6 +274,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     void selectAll( bool select );
 
     void setSelection( int start, int end );
+    void setSelection( const KDE::Section& selection );
     /** selects word at index, returns true if there is one */
     bool selectWord( /*unsigned*/ int index /*, Chartype*/ );
     /** scrolls the view as much as needed to have the cursor fully visible */

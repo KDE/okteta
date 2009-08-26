@@ -327,7 +327,13 @@ void AbstractByteArrayView::setSelectionCursorPosition( int index )
 void AbstractByteArrayView::setSelection( int start, int end )
 {
     Q_D( AbstractByteArrayView );
-    d->setSelection( start, end );
+    d->setSelection( KDE::Section(start,end) );
+}
+
+void AbstractByteArrayView::setSelection( const KDE::Section& selection )
+{
+    Q_D( AbstractByteArrayView );
+    d->setSelection( selection );
 }
 
 

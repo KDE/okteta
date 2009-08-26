@@ -135,7 +135,7 @@ class AbstractByteArrayViewPrivate
   public: // interaction
     void selectAll( bool select );
     bool selectWord( /*unsigned*/ int index /*, Chartype*/ );
-    void setSelection( int start, int end );
+    void setSelection( const KDE::Section& selection );
 
     void setCursorPosition( int index, bool isBehind );
     void setSelectionCursorPosition( int index );
