@@ -133,9 +133,7 @@ void ClipboardController::onHasSelectedDataChanged( bool hasSelectedData )
 void ClipboardController::onClipboardDataChanged()
 {
     const bool isWriteable = ( mMimeDataControl != 0 && !mModel->isReadOnly() );
-    const bool isPastable = isWriteable ?
-        mMimeDataControl->canReadData( QApplication::clipboard()->mimeData() ) :
-        false;
+    const bool isPastable = isWriteable && mMimeDataControl->canReadData( QApplication::clipboard()->mimeData() );
 
     mPasteAction->setEnabled( isPastable );
 }
