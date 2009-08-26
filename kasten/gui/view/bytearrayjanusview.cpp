@@ -90,6 +90,7 @@ void ByteArrayJanusView::setViewModus( int viewModus )
     mViewModus = viewModus;
 
     connect( mView, SIGNAL(selectionChanged( bool )), SIGNAL(selectionChanged( bool )) );
+    connect( mView, SIGNAL(selectionChanged( const KDE::Section& )), SIGNAL(selectionChanged( const KDE::Section& )) );
     connect( mView, SIGNAL(readOnlyChanged( bool )), SIGNAL(readOnlyChanged( bool )) );
     connect( mView, SIGNAL(overwriteModeChanged( bool )), SIGNAL(overwriteModeChanged( bool )) );
     connect( mView, SIGNAL(cursorPositionChanged( int )), SIGNAL(cursorPositionChanged( int )) );
