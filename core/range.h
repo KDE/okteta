@@ -34,7 +34,7 @@ namespace KDE
   *
   *@author Friedrich W. H.  Kossebau
   */
-template<class T>
+template<typename T>
 class Range
 {
   public:
