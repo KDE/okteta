@@ -53,8 +53,8 @@ static const int NoOfLinesPerPage = 5;
 static const int Pos1 = 15;
 static const int Pos2 = 25;
 static const int Line1 = 10;
-static const int LineSize = 10;
-static const int Line2 = Line1 + LineSize - 1;
+static const int LineCount = 10;
+static const int Line2 = Line1 + LineCount - 1;
 static Coord Start( Pos1, Line1 );
 static Coord End(   Pos2, Line2 );
 
