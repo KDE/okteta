@@ -26,24 +26,24 @@ kde4_add_unit_test( arraychangemetricstest  TESTNAME libokteta-core-arraychangem
 target_link_libraries( arraychangemetricstest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
 
-########### sectiontest ###############
+########### addressrangetest ###############
 
-set( sectiontest_SRCS
-  sectiontest.cpp
+set( addressrangetest_SRCS
+  addressrangetest.cpp
 )
 
-kde4_add_unit_test( sectiontest  TESTNAME libokteta-core-sectiontest  ${sectiontest_SRCS} )
-target_link_libraries( sectiontest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+kde4_add_unit_test( addressrangetest  TESTNAME libokteta-core-addressrangetest  ${addressrangetest_SRCS} )
+target_link_libraries( addressrangetest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
 
-########### sectionlisttest ###############
+########### addressrangelisttest ###############
 
-set( sectionlisttest_SRCS
-  sectionlisttest.cpp
+set( addressrangelisttest_SRCS
+  addressrangelisttest.cpp
 )
 
-kde4_add_unit_test( sectionlisttest  TESTNAME libokteta-core-sectionlisttest  ${sectionlisttest_SRCS} )
-target_link_libraries( sectionlisttest  testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+kde4_add_unit_test( addressrangelisttest  TESTNAME libokteta-core-addressrangelisttest  ${addressrangelisttest_SRCS} )
+target_link_libraries( addressrangelisttest  testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
 
 ########### fixedsizebytearraymodeltest ###############

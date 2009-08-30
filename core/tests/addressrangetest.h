@@ -20,13 +20,17 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SECTIONTEST_H
-#define SECTIONTEST_H
+#ifndef ADDRESSRANGETEST_H
+#define ADDRESSRANGETEST_H
 
 // Qt
 #include <QtCore/QObject>
 
-class SectionTest : public QObject
+
+namespace Okteta
+{
+
+class AddressRangeTest : public QObject
 {
   Q_OBJECT
 
@@ -52,5 +56,7 @@ class SectionTest : public QObject
     void testStartForInclude();
     void testIsJoinable();
 };
+
+}
 
 #endif

@@ -20,21 +20,27 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SECTIONLISTTEST_H
-#define SECTIONLISTTEST_H
+#ifndef ADDRESSRANGELISTTEST_H
+#define ADDRESSRANGELISTTEST_H
 
 // Qt
 #include <QtCore/QObject>
 
-class SectionListTest : public QObject
+
+namespace Okteta
+{
+
+class AddressRangeListTest : public QObject
 {
   Q_OBJECT
 
   private Q_SLOTS: // test functions
     void testSimpleConstructor();
-    void testAddSingleSection();
-    void testAddJoinableSections();
-    void testAddNonJoinableSections();
+    void testAddSingleRange();
+    void testAddJoinableRanges();
+    void testAddNonJoinableRanges();
 };
+
+}
 
 #endif
