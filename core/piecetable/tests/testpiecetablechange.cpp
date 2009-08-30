@@ -25,7 +25,6 @@
 // lib
 #include <piecetable/piecetable.h>
 #include <arraychangemetrics.h>
-#include <section.h>
 // Qt
 #include <QtCore/QString>
 

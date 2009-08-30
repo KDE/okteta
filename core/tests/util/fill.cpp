@@ -24,8 +24,6 @@
 
 // 
 #include <abstractbytearraymodel.h>
-//
-#include <section.h>
 // Qt
 #include <QtCore/QByteArray>
 
