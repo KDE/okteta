@@ -28,7 +28,7 @@
 #include "kadds.h"
 #include "oktetagui_export.h"
 // commonlib
-#include <section.h> // TODO: think about moving this out of the public API
+#include "section.h" // TODO: think about moving this out of the public API
 // Qt
 #include <QtCore/QList>
 #include <QtGui/QAbstractScrollArea>
