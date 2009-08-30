@@ -29,29 +29,16 @@
 #include <piecetable/piecetable.h>
 //
 #include <arraychangemetricslist.h>
-#include <sectionlist.h>
 // Qt
 #include <QtTest/QtTest>
 
-#include <KDebug>
-
-using namespace KDE;
-
-// local variables
-static const int Start = 15;
-static const int End = 27;
-static const int HalfSize = 50;
-static const int Size = 2 * HalfSize;
-
-static const int Width = End - Start + 1;
-
-static const int ChangeStart = 8;
-static const int ChangeEnd = ChangeStart + Width - 1;
-
-static const char Description[] = "description";
 
 namespace KPieceTable
 {
+
+// local variables
+static const char Description[] = "description";
+
 
 void GroupPieceTableChangeTest::testConstructor()
 {
