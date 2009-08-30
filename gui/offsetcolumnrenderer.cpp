@@ -34,8 +34,8 @@
 namespace Okteta
 {
 
-static const int leftOffsetMargin = 2;
-static const int rightOffsetMargin = 2;
+static const PixelX leftOffsetMargin = 2;
+static const PixelX rightOffsetMargin = 2;
 
 
 OffsetColumnRenderer::OffsetColumnRenderer( AbstractColumnStylist* stylist,
@@ -49,9 +49,9 @@ OffsetColumnRenderer::OffsetColumnRenderer( AbstractColumnStylist* stylist,
     setFormat( format );
 }
 
-void OffsetColumnRenderer::renderLine( QPainter* painter, int lineIndex )
+void OffsetColumnRenderer::renderLine( QPainter* painter, Line lineIndex )
 {
-    const int offset = mLayout->firstLineOffset() + mLayout->noOfBytesPerLine() * lineIndex;
+    const PixelX offset = mLayout->firstLineOffset() + mLayout->noOfBytesPerLine() * lineIndex;
     printFunction()( mCodedOffset, offset );
 
     const QColor& buttonColor = stylist()->palette().buttonText().color();
@@ -68,7 +68,7 @@ void OffsetColumnRenderer::renderColumnBackground( QPainter* painter, const Pixe
     painter->fillRect( Xs.start(), Ys.start(), Xs.width(), Ys.width(), buttonBrush );
 }
 
-void OffsetColumnRenderer::renderFirstLine( QPainter *painter, const PixelXRange &, int firstLineIndex )
+void OffsetColumnRenderer::renderFirstLine( QPainter *painter, const PixelXRange &, Line firstLineIndex )
 {
     mRenderLineIndex = firstLineIndex;
     renderLine( painter, mRenderLineIndex++ );

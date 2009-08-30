@@ -26,6 +26,10 @@
 // Qt
 #include <QtCore/QObject>
 
+
+namespace Okteta
+{
+
 class CoordRangeTest : public QObject
 {
   Q_OBJECT
@@ -42,5 +46,7 @@ class CoordRangeTest : public QObject
     void testIncludesLine();
     void testWidth();
 };
+
+}
 
 #endif

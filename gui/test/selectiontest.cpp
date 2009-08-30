@@ -27,14 +27,15 @@
 // Qt
 #include <QtTest/QtTest>
 
-using namespace KDE;
-using namespace Okteta;
+
+namespace Okteta
+{
 
 // local variables
-static const int Start = 15;
-static const int End = 27;
+static const Address Start = 15;
+static const Address End = 27;
 
-static const int Width = End - Start + 1;
+static const Size Width = End - Start + 1;
 
 
 void SelectionTest::testPlainConstructor()
@@ -152,5 +153,6 @@ void SelectionTest::testReverse()
     QVERIFY( selection.isForward() );
 }
 
+}
 
-QTEST_MAIN( SelectionTest )
+QTEST_MAIN( Okteta::SelectionTest )

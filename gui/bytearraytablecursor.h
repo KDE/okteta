@@ -26,6 +26,7 @@
 // lib
 #include "coord.h"
 
+
 namespace Okteta
 {
 class ArrayChangeMetricsList;
@@ -69,9 +70,9 @@ class ByteArrayTableCursor
     /** the index that is drawn at the actual coord */
     Address index() const;
     /** the pos of the actual coord */
-    int pos() const;
+    LinePosition pos() const;
     /** the line of the actual coord */
-    int line() const;
+    Line line() const;
     /** the actual coord */
     Coord coord() const;
     /** true if the cursor is located to the right of the actual coord but still shown at the coord */
@@ -167,8 +168,8 @@ class ByteArrayTableCursor
 
 
 inline Address ByteArrayTableCursor::index()      const { return mIndex; }
-inline int ByteArrayTableCursor::pos()            const { return mCoord.pos(); }
-inline int ByteArrayTableCursor::line()           const { return mCoord.line(); }
+inline LinePosition ByteArrayTableCursor::pos()   const { return mCoord.pos(); }
+inline Line ByteArrayTableCursor::line()          const { return mCoord.line(); }
 inline Coord ByteArrayTableCursor::coord()        const { return mCoord; }
 inline bool ByteArrayTableCursor::isBehind()      const { return mBehind; }
 inline Address ByteArrayTableCursor::realIndex()  const { return mBehind ? mIndex + 1 : mIndex; }

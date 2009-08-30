@@ -47,7 +47,7 @@ class OKTETAGUI_EXPORT ValueByteArrayColumnRenderer : public AbstractByteArrayCo
     void renderEditedByte( QPainter* painter, Byte byte, const QString& editBuffer );
 
   public: // modification access
-    void setValueCodec( Okteta::ValueCoding valueCoding, const Okteta::ValueCodec* valueCodec );
+    void setValueCodec( ValueCoding valueCoding, const ValueCodec* valueCodec );
     /** sets the spacing in the middle of a binary byte in the value column
       * @param BinaryGapW spacing in the middle of a binary in pixels
       * returns true if there was a change
@@ -63,7 +63,7 @@ class OKTETAGUI_EXPORT ValueByteArrayColumnRenderer : public AbstractByteArrayCo
     virtual void recalcByteWidth();
 
   protected:
-    void renderCode( QPainter *painter, const QString &code, const QColor &color ) const;
+    void renderCode( QPainter *painter, const QString &code, const QColor& color ) const;
 
   protected: // settings
     /** */

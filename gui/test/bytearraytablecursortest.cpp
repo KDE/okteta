@@ -29,39 +29,38 @@
 // Qt
 #include <QtTest/QtTest>
 
-#include <KDebug>
 
 namespace Okteta
 {
 
 // local variables
-static const int NoOfBytesPerLine = 8;
-static const int StartOffset = 22;
-static const int FirstLineOffset = 10;
-static const int RelativeStartOffset = StartOffset-FirstLineOffset;
-static const int ByteArrayOffset = 9;
-static const int Length = 250;
-static const int FinalOffset = (StartOffset+Length-1);
-static const int RelativeFinalOffset = FinalOffset-FirstLineOffset;
+static const Size NoOfBytesPerLine = 8;
+static const Address StartOffset = 22;
+static const Address FirstLineOffset = 10;
+static const Address RelativeStartOffset = StartOffset-FirstLineOffset;
+static const Address ByteArrayOffset = 9;
+static const Size Length = 250;
+static const Address FinalOffset = (StartOffset+Length-1);
+static const Address RelativeFinalOffset = FinalOffset-FirstLineOffset;
 
-static const int FirstIndex = ByteArrayOffset;
-static const int LastIndex = Length-1+ByteArrayOffset;
+static const Address FirstIndex = ByteArrayOffset;
+static const Address LastIndex = Length-1+ByteArrayOffset;
 
-static const int StartLine = RelativeStartOffset / NoOfBytesPerLine;
-static const int StartLinePosition = RelativeStartOffset % NoOfBytesPerLine;
+static const Line StartLine = RelativeStartOffset / NoOfBytesPerLine;
+static const LinePosition StartLinePosition = RelativeStartOffset % NoOfBytesPerLine;
 static Coord StartCoord( StartLinePosition, StartLine );
 
-static const int FinalLine =  RelativeFinalOffset/ NoOfBytesPerLine;
-static const int FinalLinePosition = RelativeFinalOffset % NoOfBytesPerLine;
+static const Line FinalLine =  RelativeFinalOffset/ NoOfBytesPerLine;
+static const LinePosition FinalLinePosition = RelativeFinalOffset % NoOfBytesPerLine;
 static Coord FinalCoord( FinalLinePosition, FinalLine );
 
-static const int NoOfLinesPerPage = 5;
+static const LineSize NoOfLinesPerPage = 5;
 
-static const int Pos1 = 15;
-static const int Pos2 = 25;
-static const int Line1 = 10;
-static const int LineCount = 10;
-static const int Line2 = Line1 + LineCount - 1;
+static const LinePosition Pos1 = 15;
+static const LinePosition Pos2 = 25;
+static const Line Line1 = 10;
+static const LineSize LineCount = 10;
+static const Line Line2 = Line1 + LineCount - 1;
 static Coord Start( Pos1, Line1 );
 static Coord End(   Pos2, Line2 );
 
@@ -119,7 +118,7 @@ void ByteArrayTableCursorTest::testGotoIndex()
     ByteArrayTableCursor cursor( &layout );
 
     // 2 before first valid, as (in)validIndex equals -1, see next test
-    int index = FirstIndex-2;
+    Address index = FirstIndex-2;
     Coord coord = layout.coordOfIndex( index );
 
     cursor.gotoIndex( index );
@@ -228,7 +227,7 @@ void ByteArrayTableCursorTest::testGotoCIndex()
     ByteArrayTableCursor cursor( &layout );
 
     // 2 before first valid, as (in)validIndex equals -1, see next test
-    int index = FirstIndex-2;
+    Address index = FirstIndex-2;
     const Coord startCoord = layout.startCoord();
 
     cursor.gotoCIndex( index );
@@ -335,7 +334,7 @@ void ByteArrayTableCursorTest::testGotoRealIndex()
     ByteArrayTableCursor cursor( &layout );
 
     // 2 before first valid, as (in)validIndex equals -1, see next test
-    int index = FirstIndex;
+    Address index = FirstIndex;
     Coord coord = layout.coordOfIndex( index );
     cursor.gotoIndex( index );
 
@@ -449,7 +448,7 @@ void ByteArrayTableCursorTest::testGotoNextByte()
     ByteArrayTableCursor cursor( &layout );
 
     // at start
-    int index = FirstIndex + 1;
+    Address index = FirstIndex + 1;
     Coord coord = layout.startCoord();
     coord.goCRight( layout.noOfBytesPerLine()-1 );
     cursor.gotoStart();
@@ -534,7 +533,7 @@ void ByteArrayTableCursorTest::testGotoPreviousByte()
 
     // at start
     cursor.gotoStart();
-    int index = cursor.index();
+    Address index = cursor.index();
     Coord coord = cursor.coord();
 
     cursor.gotoPreviousByte();
@@ -615,8 +614,8 @@ void ByteArrayTableCursorTest::testGotoNextByteN()
 
     // at start
     // one right
-    int indexSteps = 1;
-    int expectedIndex = FirstIndex + indexSteps;
+    Address indexSteps = 1;
+    Address expectedIndex = FirstIndex + indexSteps;
     Coord expectedCoord = layout.coordOfIndex( expectedIndex );
     cursor.gotoStart();
 
@@ -843,8 +842,8 @@ void ByteArrayTableCursorTest::testGotoPreviousByteN()
     ByteArrayTableCursor cursor( &layout );
 
     // at start
-    int indexSteps = 1;
-    int expectedIndex = FirstIndex;
+    Address indexSteps = 1;
+    Address expectedIndex = FirstIndex;
     Coord expectedCoord = layout.coordOfIndex( expectedIndex );
     cursor.gotoStart();
 

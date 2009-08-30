@@ -28,6 +28,7 @@
 #include "abstractframerenderer.h"
 // Okteta gui
 #include <kadds.h>
+#include <line.h>
 // Okteta core
 #include <addressrange.h>
 // Qt
@@ -55,15 +56,15 @@ class AbstractColumnFrameRenderer : public AbstractFrameRenderer
   public: // AbstractFrameRenderer API
 //     virtual int height() const;
 //     virtual int width() const;
-    virtual void renderFrame( QPainter *painter, int frameIndex );
+    virtual void renderFrame( QPainter* painter, int frameIndex );
 
   public: // data-wise sizes
     /** returns the number of all lines */
-    int noOfLines() const;
+    Okteta::LineSize noOfLines() const;
     /** returns number of fully visible lines, at least 1 (as needed by page down/up)
       * doesn't care about the total height being smaller than the display height
       */
-    int noOfLinesPerFrame() const;
+    Okteta::LineSize noOfLinesPerFrame() const;
 
   public: // pixel-wise sizes
     /** returns the height of each line */
@@ -79,12 +80,7 @@ class AbstractColumnFrameRenderer : public AbstractFrameRenderer
 
   protected: // our API
     /** draws area without columns in columns coordinates */
-    virtual void drawEmptyArea( QPainter *painter, int cx, int cy, int cw, int ch );
-
-  protected:
-    /** takes ownership of column renderer */
-    void addColumn( Okteta::AbstractColumnRenderer *column );
-    void removeColumn( Okteta::AbstractColumnRenderer *column );
+    virtual void drawEmptyArea( QPainter* painter, int cx, int cy, int cw, int ch );
 
   protected: //
     /** sets height of all lines and propagates this information to all columns
@@ -96,14 +92,19 @@ class AbstractColumnFrameRenderer : public AbstractFrameRenderer
       * doesn't update the content size
       * @param NewNoOfLines new number of lines to display
       */
-    virtual void setNoOfLines( int NewNoOfLines );
+    virtual void setNoOfLines( Okteta::LineSize NewNoOfLines );
+
+  protected:
+    /** takes ownership of column renderer */
+    void addColumn( Okteta::AbstractColumnRenderer* column );
+    void removeColumn( Okteta::AbstractColumnRenderer* column );
 
   protected: // recalculations
     /** recalculates the positions of the columns and the total width */
     void updateWidths();
 
   private:
-    AbstractColumnFrameRendererPrivate * const d;
+    AbstractColumnFrameRendererPrivate* const d;
 };
 
 #endif

@@ -26,6 +26,10 @@
 // Qt
 #include <QtCore/QObject>
 
+
+namespace Okteta
+{
+
 class SelectionTest : public QObject
 {
   Q_OBJECT
@@ -39,5 +43,7 @@ class SelectionTest : public QObject
     void testSetForward();
     void testReverse();
 };
+
+}
 
 #endif

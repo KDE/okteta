@@ -183,7 +183,7 @@ void ByteArrayTableCursor::gotoLineEnd()
 {
     if( mIndex <= mLayout->lastByteArrayOffset() )
     {
-        const int oldIndex = mIndex;
+        const Address oldIndex = mIndex;
         mIndex = mLayout->indexAtLastLinePosition( mCoord.line() );
         mCoord.goRight( mIndex-oldIndex );
 
@@ -202,7 +202,7 @@ void ByteArrayTableCursor::gotoStart()
 
 void ByteArrayTableCursor::gotoEnd()
 {
-    const int lastIndex = mLayout->lastByteArrayOffset();
+    const Address lastIndex = mLayout->lastByteArrayOffset();
     if( lastIndex >= 0 )
     {
         mIndex = lastIndex;
@@ -294,7 +294,7 @@ void ByteArrayTableCursor::updateCoord()
 // -> if in the very first line page down will put the cursor on the same page into the last line
 void ByteArrayTableCursor::gotoPageUp()
 {
-    const int noOfLinesPerPage = mLayout->noOfLinesPerPage();
+    const LineSize noOfLinesPerPage = mLayout->noOfLinesPerPage();
     const Address newIndex = mIndex - noOfLinesPerPage * mLayout->noOfBytesPerLine();
     if( newIndex >= mLayout->byteArrayOffset() )
     {
@@ -314,7 +314,7 @@ void ByteArrayTableCursor::gotoPageUp()
 
 void ByteArrayTableCursor::gotoPageDown()
 {
-    const int noOfLinesPerPage = mLayout->noOfLinesPerPage();
+    const LineSize noOfLinesPerPage = mLayout->noOfLinesPerPage();
     const Address newIndex = mIndex + noOfLinesPerPage * mLayout->noOfBytesPerLine();
     if( newIndex <= mLayout->lastByteArrayOffset() )
     {

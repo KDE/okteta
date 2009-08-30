@@ -195,7 +195,7 @@ void AbstractByteArrayColumnRenderer::recalcX()
     int groupedBytes = 0;
     PixelX *PX = mLinePosLeftPixelX;
     PixelX *PRX = mLinePosRightPixelX;
-    int p = 0;
+    LinePosition p = 0;
     for( ; p<=mLastLinePos; ++PX, ++PRX, ++p, ++groupedBytes )
     {
         *PX = newWidth;
@@ -217,7 +217,7 @@ void AbstractByteArrayColumnRenderer::recalcX()
 
 // TODO: why are inlined functions not available as symbols when defined before their use
 //TODO: works not precisly for the byte rects but includes spacing and left and right
-/*inline*/ int AbstractByteArrayColumnRenderer::linePositionOfX( PixelX PX ) const
+/*inline*/ LinePosition AbstractByteArrayColumnRenderer::linePositionOfX( PixelX PX ) const
 {
     if( !mLinePosLeftPixelX )
         return NoByteFound;
@@ -225,7 +225,7 @@ void AbstractByteArrayColumnRenderer::recalcX()
     // translate
     PX -= x();
     // search backwards for the first byte that is equalleft to x
-    for( int p=mLastLinePos; p>=0; --p )
+    for( LinePosition p=mLastLinePos; p>=0; --p )
         if( mLinePosLeftPixelX[p] <= PX )
             return p;
 
@@ -233,7 +233,7 @@ void AbstractByteArrayColumnRenderer::recalcX()
 }
 
 
-int AbstractByteArrayColumnRenderer::magneticLinePositionOfX( PixelX PX ) const
+LinePosition AbstractByteArrayColumnRenderer::magneticLinePositionOfX( PixelX PX ) const
 {
     if( !mLinePosLeftPixelX )
         return NoByteFound;
@@ -241,7 +241,7 @@ int AbstractByteArrayColumnRenderer::magneticLinePositionOfX( PixelX PX ) const
     // translate
     PX -= x();
     // search backwards for the first byte that is equalleft to x
-    for( int p=mLastLinePos; p>=0; --p )
+    for( LinePosition p = mLastLinePos; p>=0; --p )
         if( mLinePosLeftPixelX[p] <= PX )
         {
             // are we close to the right?
@@ -254,18 +254,18 @@ int AbstractByteArrayColumnRenderer::magneticLinePositionOfX( PixelX PX ) const
 }
 
 
-KDE::Section AbstractByteArrayColumnRenderer::linePositionsOfX( PixelX PX, PixelX PW ) const
+LinePositionRange AbstractByteArrayColumnRenderer::linePositionsOfX( PixelX PX, PixelX PW ) const
 {
     if( !mLinePosLeftPixelX )
-        return KDE::Section();
+        return LinePositionRange();
 
     // translate
     PX -= x();
-    const int PRX = PX + PW - 1;
+    const PixelX PRX = PX + PW - 1;
 
-    KDE::Section positions;
+    LinePositionRange positions;
     // search backwards for the first byte that is equalleft to x
-    for( int p=mLastLinePos; p>=0; --p )
+    for( LinePosition p = mLastLinePos; p>=0; --p )
         if( mLinePosLeftPixelX[p] <= PRX )
         {
             positions.setEnd( p );
@@ -282,20 +282,20 @@ KDE::Section AbstractByteArrayColumnRenderer::linePositionsOfX( PixelX PX, Pixel
 }
 
 
-PixelX AbstractByteArrayColumnRenderer::xOfLinePosition( int linePosition ) const
+PixelX AbstractByteArrayColumnRenderer::xOfLinePosition( LinePosition linePosition ) const
 { return x() + (mLinePosLeftPixelX?mLinePosLeftPixelX[linePosition]:0); }
 
-PixelX AbstractByteArrayColumnRenderer::rightXOfLinePosition( int linePosition ) const
+PixelX AbstractByteArrayColumnRenderer::rightXOfLinePosition( LinePosition linePosition ) const
 { return x() + (mLinePosRightPixelX?mLinePosRightPixelX[linePosition]:0); }
 
 
-int AbstractByteArrayColumnRenderer::linePositionOfColumnX( PixelX PX ) const
+LinePosition AbstractByteArrayColumnRenderer::linePositionOfColumnX( PixelX PX ) const
 {
     if( !mLinePosLeftPixelX )
         return NoByteFound;
 
     // search backwards for the first byte that is equalleft to x
-    for( int p=mLastLinePos; p>=0; --p )
+    for( LinePosition p=mLastLinePos; p>=0; --p )
         if( mLinePosLeftPixelX[p] <= PX )
             return p;
 
@@ -303,16 +303,16 @@ int AbstractByteArrayColumnRenderer::linePositionOfColumnX( PixelX PX ) const
 }
 
 
-KDE::Section AbstractByteArrayColumnRenderer::linePositionsOfColumnXs( PixelX PX, PixelX PW ) const
+LinePositionRange AbstractByteArrayColumnRenderer::linePositionsOfColumnXs( PixelX PX, PixelX PW ) const
 {
     if( !mLinePosLeftPixelX )
-        return KDE::Section();
+        return LinePositionRange();
 
-    const int PRX = PX + PW - 1;
+    const PixelX PRX = PX + PW - 1;
 
-    KDE::Section positions;
+    LinePositionRange positions;
     // search backwards for the first byte that is equalleft to x
-    for( int p=mLastLinePos; p>=0; --p )
+    for( LinePosition p = mLastLinePos; p>=0; --p )
         if( mLinePosLeftPixelX[p] <= PRX )
         {
             positions.setEnd( p );
@@ -329,13 +329,17 @@ KDE::Section AbstractByteArrayColumnRenderer::linePositionsOfColumnXs( PixelX PX
 }
 
 
-PixelX AbstractByteArrayColumnRenderer::columnXOfLinePosition( int linePosition ) const
-{ return mLinePosLeftPixelX ? mLinePosLeftPixelX[linePosition] : 0; }
-PixelX AbstractByteArrayColumnRenderer::columnRightXOfLinePosition( int linePosition ) const
-{ return mLinePosRightPixelX ? mLinePosRightPixelX[linePosition] : 0; }
+PixelX AbstractByteArrayColumnRenderer::columnXOfLinePosition( LinePosition linePosition ) const
+{
+    return mLinePosLeftPixelX ? mLinePosLeftPixelX[linePosition] : 0;
+}
+PixelX AbstractByteArrayColumnRenderer::columnRightXOfLinePosition( LinePosition linePosition ) const
+{
+    return mLinePosRightPixelX ? mLinePosRightPixelX[linePosition] : 0;
+}
 
 
-PixelXRange AbstractByteArrayColumnRenderer::xsOfLinePositionsInclSpaces( const KDE::Section &linePositions ) const
+PixelXRange AbstractByteArrayColumnRenderer::xsOfLinePositionsInclSpaces( const LinePositionRange& linePositions ) const
 {
     const PixelX x = (linePositions.start()>0) ? rightXOfLinePosition( linePositions.nextBeforeStart() ) + 1 :
                                               xOfLinePosition( linePositions.start() );
@@ -345,7 +349,7 @@ PixelXRange AbstractByteArrayColumnRenderer::xsOfLinePositionsInclSpaces( const 
 }
 
 
-PixelXRange AbstractByteArrayColumnRenderer::columnXsOfLinePositionsInclSpaces( const KDE::Section &linePositions ) const
+PixelXRange AbstractByteArrayColumnRenderer::columnXsOfLinePositionsInclSpaces( const LinePositionRange& linePositions ) const
 {
     const PixelX x = (linePositions.start()>0) ? columnRightXOfLinePosition( linePositions.nextBeforeStart() ) + 1 :
                                               columnXOfLinePosition( linePositions.start() );
@@ -371,7 +375,7 @@ void AbstractByteArrayColumnRenderer::prepareRendering( const PixelXRange &_Xs )
 }
 
 
-void AbstractByteArrayColumnRenderer::renderFirstLine( QPainter *painter, const PixelXRange &Xs, int firstLineIndex )
+void AbstractByteArrayColumnRenderer::renderFirstLine( QPainter *painter, const PixelXRange &Xs, Line firstLineIndex )
 {
     prepareRendering( Xs );
 
@@ -387,7 +391,7 @@ void AbstractByteArrayColumnRenderer::renderNextLine( QPainter *painter )
 }
 
 
-void AbstractByteArrayColumnRenderer::renderLinePositions( QPainter *painter, int lineIndex, const KDE::Section &_linePositions )
+void AbstractByteArrayColumnRenderer::renderLinePositions( QPainter *painter, Line lineIndex, const LinePositionRange& _linePositions )
 {
     // clear background
     const unsigned int blankFlag =
@@ -398,7 +402,7 @@ void AbstractByteArrayColumnRenderer::renderLinePositions( QPainter *painter, in
 
     // Go through the lines TODO: handle first and last line more effeciently
     // check for leading and trailing spaces
-    KDE::Section linePositions( mLayout->firstLinePosition(Coord( _linePositions.start(), lineIndex )),
+    LinePositionRange linePositions( mLayout->firstLinePosition(Coord( _linePositions.start(), lineIndex )),
                                  mLayout->lastLinePosition( Coord( _linePositions.end(),   lineIndex )) );
 
     // no bytes to paint?
@@ -421,7 +425,7 @@ void AbstractByteArrayColumnRenderer::renderLinePositions( QPainter *painter, in
 //         <<" for byteIndizes "<<byteIndizes.start()<<"-"<<byteIndizes.start()<<endl;
     while( linePositions.isValid() )
     {
-        KDE::Section positionsPart( linePositions );  // set of linePositions to paint next
+        LinePositionRange positionsPart( linePositions );  // set of linePositions to paint next
         AddressRange byteIndizesPart( byteIndizes );      // set of indizes to paint next
         // falls markedSection nicht mehr gebuffert und noch zu erwarten
         if( hasMarking && markedSection.endsBefore(byteIndizesPart.start()) )
@@ -477,7 +481,7 @@ void AbstractByteArrayColumnRenderer::renderLinePositions( QPainter *painter, in
 }
 
 
-void AbstractByteArrayColumnRenderer::renderPlain( QPainter *painter, const KDE::Section &linePositions, Address byteIndex )
+void AbstractByteArrayColumnRenderer::renderPlain( QPainter *painter, const LinePositionRange& linePositions, Address byteIndex )
 {
     BookmarksConstIterator bit;
     Address nextBookmarkOffset = -1;
@@ -494,7 +498,7 @@ void AbstractByteArrayColumnRenderer::renderPlain( QPainter *painter, const KDE:
     KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::View );
 
     // paint all the bytes affected
-    for( int linePosition=linePositions.start(); linePosition<=linePositions.end(); ++linePosition,++byteIndex )
+    for( LinePosition linePosition=linePositions.start(); linePosition<=linePositions.end(); ++linePosition,++byteIndex )
     {
         const PixelX x = columnXOfLinePosition( linePosition );
 
@@ -522,10 +526,10 @@ void AbstractByteArrayColumnRenderer::renderPlain( QPainter *painter, const KDE:
 }
 
 
-void AbstractByteArrayColumnRenderer::renderSelection( QPainter *painter, const KDE::Section &linePositions, Address byteIndex, int flag )
+void AbstractByteArrayColumnRenderer::renderSelection( QPainter *painter, const LinePositionRange& linePositions, Address byteIndex, int flag )
 {
     BookmarksConstIterator bit;
-    int nextBookmarkOffset = -1;
+    Address nextBookmarkOffset = -1;
 
     const bool hasBookmarks = ( mBookmarks != 0 );
     if( hasBookmarks )
@@ -541,7 +545,7 @@ void AbstractByteArrayColumnRenderer::renderSelection( QPainter *painter, const 
     renderRange( painter, colorScheme.background(), linePositions, flag );
 
     // paint all the bytes affected
-    for( int linePosition=linePositions.start(); linePosition<=linePositions.end(); ++linePosition,++byteIndex )
+    for( LinePosition linePosition = linePositions.start(); linePosition<=linePositions.end(); ++linePosition,++byteIndex )
     {
         const PixelX x = columnXOfLinePosition( linePosition );
 
@@ -569,15 +573,15 @@ void AbstractByteArrayColumnRenderer::renderSelection( QPainter *painter, const 
 }
 
 
-void AbstractByteArrayColumnRenderer::renderMarking( QPainter *painter, const KDE::Section &linePositions, Address byteIndex, int flag )
+void AbstractByteArrayColumnRenderer::renderMarking( QPainter *painter, const LinePositionRange& linePositions, Address byteIndex, int flag )
 {
     const QPalette& palette = stylist()->palette();
 
     renderRange( painter, palette.text(), linePositions, flag );
 
-    const QColor &baseColor = palette.base().color();
+    const QColor& baseColor = palette.base().color();
     // paint all the bytes affected
-    for( int p=linePositions.start(); p<=linePositions.end(); ++p,++byteIndex )
+    for( LinePosition p = linePositions.start(); p <= linePositions.end(); ++p,++byteIndex )
     {
         const PixelX x = columnXOfLinePosition( p );
 
@@ -599,7 +603,7 @@ void AbstractByteArrayColumnRenderer::renderBookmark( QPainter *painter, const Q
 }
 
 
-void AbstractByteArrayColumnRenderer::renderRange( QPainter *painter, const QBrush &brush, const KDE::Section &linePositions, int flag )
+void AbstractByteArrayColumnRenderer::renderRange( QPainter *painter, const QBrush &brush, const LinePositionRange& linePositions, int flag )
 {
     const PixelX rangeX =
         ( flag & StartsBefore ) ? columnRightXOfLinePosition( linePositions.nextBeforeStart() ) + 1 :

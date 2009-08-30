@@ -62,7 +62,7 @@ inline AbstractColumnRendererPrivate::AbstractColumnRendererPrivate( AbstractCol
  : mStylist( stylist ),
    mIsVisible( true ),  //TODO: would false be better?
    mLineHeight( 0 ),
-   mXSpan( KDE::Section::fromWidth(0,0) )
+   mXSpan( PixelXRange::fromWidth(0,0) )
 {
 }
 

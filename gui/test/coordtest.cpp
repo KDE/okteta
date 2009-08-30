@@ -27,15 +27,17 @@
 // Qt
 #include <QtTest/QtTest>
 
-using namespace Okteta;
+
+namespace Okteta
+{
 
 // local variables
-static const int Line = 3;
-static const int Pos = 15;
-static const int LineWidth = 19;
-static const int Index = Line*LineWidth + Pos;
-static const int MaxPos = LineWidth-1;
-static const int Steps = 5;
+static const Line LineIndex =          3;
+static const LinePosition Pos =        15;
+static const LineSize LineWidth =      19;
+static const Address Index =           LineIndex*LineWidth + Pos;
+static const LinePositionSize MaxPos = LineWidth-1;
+static const LinePositionSize Steps =  5;
 
 
 void CoordTest::testConstructor()
@@ -50,10 +52,10 @@ void CoordTest::testConstructor()
 
 void CoordTest::testSetConstructor()
 {
-    const Coord coord( Pos, Line );
+    const Coord coord( Pos, LineIndex );
 
     QCOMPARE( coord.pos(), Pos );
-    QCOMPARE( coord.line(), Line );
+    QCOMPARE( coord.line(), LineIndex );
     QVERIFY( coord.isValid() );
 }
 
@@ -64,25 +66,25 @@ void CoordTest::testFromIndexConstructor()
 
     QCOMPARE( coord.indexByLineWidth(LineWidth), Index );
     QCOMPARE( coord.pos(), Pos );
-    QCOMPARE( coord.line(), Line );
+    QCOMPARE( coord.line(), LineIndex );
     QVERIFY( coord.isValid() );
 }
 
 
 void CoordTest::testCopyConstructor()
 {
-    const Coord coord( Pos, Line );
+    const Coord coord( Pos, LineIndex );
     const Coord otherCoord( coord );
 
     QCOMPARE( otherCoord.pos(), Pos );
-    QCOMPARE( otherCoord.line(), Line );
+    QCOMPARE( otherCoord.line(), LineIndex );
     QVERIFY( otherCoord.isValid() );
 }
 
 
 void CoordTest::testEquals()
 {
-    const Coord coord( Pos, Line );
+    const Coord coord( Pos, LineIndex );
 
     Coord otherCoord( coord );
     QVERIFY( otherCoord == coord );
@@ -93,7 +95,7 @@ void CoordTest::testEquals()
 
 void CoordTest::testAssign()
 {
-    const Coord coord( Pos, Line );
+    const Coord coord( Pos, LineIndex );
 
     Coord otherCoord;
     otherCoord = coord;
@@ -108,17 +110,17 @@ void CoordTest::testSetPosLine()
     coord.setPos( Pos );
     QCOMPARE( coord.pos(), Pos );
     // setLine()
-    coord.setLine( Line );
-    QCOMPARE( coord.line(), Line );
+    coord.setLine( LineIndex );
+    QCOMPARE( coord.line(), LineIndex );
 }
 
 
 void CoordTest::testSet()
 {
     Coord coord;
-    coord.set( Pos, Line );
+    coord.set( Pos, LineIndex );
     QCOMPARE( coord.pos(), Pos );
-    QCOMPARE( coord.line(), Line );
+    QCOMPARE( coord.line(), LineIndex );
 }
 
 
@@ -127,7 +129,7 @@ void CoordTest::testIsAtStart()
     Coord coord(0,0);
 
     QVERIFY( coord.isAtStart() );
-    coord.set( Pos, Line );
+    coord.set( Pos, LineIndex );
     QVERIFY( !coord.isAtStart() );
     coord.set( 0, 0 );
     QVERIFY( coord.isAtStart() );
@@ -144,7 +146,7 @@ void CoordTest::testGotoStart()
 
 void CoordTest::testGo()
 {
-    const Coord coord( Pos, Line );
+    const Coord coord( Pos, LineIndex );
     Coord otherCoord( coord );
 
     // going clockwise by one
@@ -158,7 +160,7 @@ void CoordTest::testGo()
 
 void CoordTest::testGoN()
 {
-    const Coord coord( Pos, Line );
+    const Coord coord( Pos, LineIndex );
     Coord otherCoord( coord );
 
     // going clockwise by N
@@ -174,7 +176,7 @@ void CoordTest::testGoN()
 
 void CoordTest::testGotoControlled()
 {
-    Coord coord( MaxPos, Line );
+    Coord coord( MaxPos, LineIndex );
     Coord otherCoord( coord );
 
     // gotoStartOfNextLine(), goCRight()
@@ -190,7 +192,7 @@ void CoordTest::testGotoControlled()
 
 void CoordTest::testGoLineStart()
 {
-    const Coord coord( Pos, Line );
+    const Coord coord( Pos, LineIndex );
     Coord otherCoord;
 
     // goLineStart(), same line
@@ -206,7 +208,7 @@ void CoordTest::testGoLineStart()
 
 void CoordTest::testGoLineEnd()
 {
-    const Coord coord( Pos, Line );
+    const Coord coord( Pos, LineIndex );
     Coord otherCoord;
 
     //goLineEnd(), same line
@@ -221,7 +223,7 @@ void CoordTest::testGoLineEnd()
 
 void CoordTest::testCompareOperator()
 {
-    const Coord coord( Pos, Line );
+    const Coord coord( Pos, LineIndex );
     Coord otherCoord( coord );
 
     otherCoord.goRight();
@@ -238,7 +240,7 @@ void CoordTest::testCompareOperator()
 
 void CoordTest::testIsBelowIsAbove()
 {
-    const Coord coord( Pos, Line );
+    const Coord coord( Pos, LineIndex );
     Coord otherCoord( coord );
 
     otherCoord.goDown();
@@ -254,7 +256,7 @@ void CoordTest::testIsBelowIsAbove()
 
 void CoordTest::testIsLaterPriorInLineThan()
 {
-    const Coord coord( Pos, Line );
+    const Coord coord( Pos, LineIndex );
     Coord otherCoord( coord );
 
     otherCoord.goRight();
@@ -270,7 +272,7 @@ void CoordTest::testIsLaterPriorInLineThan()
 
 void CoordTest::testIsBeforeLineStart()
 {
-    Coord coord( 1, Line );
+    Coord coord( 1, LineIndex );
 
     QVERIFY( coord.isBehindLineStart() );
     QVERIFY( coord.isValid() );
@@ -281,7 +283,7 @@ void CoordTest::testIsBeforeLineStart()
 
 void CoordTest::testIsBeforeLineEnd()
 {
-    Coord coord( MaxPos-1, Line );
+    Coord coord( MaxPos-1, LineIndex );
 
     QVERIFY( coord.isBeforeLineEnd(MaxPos) );
     QVERIFY( coord.isValid() );
@@ -299,5 +301,6 @@ void CoordTest::testIndexNWidth()
     QVERIFY( coord.isValid() );
 }
 
+}
 
-QTEST_MAIN( CoordTest )
+QTEST_MAIN( Okteta::CoordTest )

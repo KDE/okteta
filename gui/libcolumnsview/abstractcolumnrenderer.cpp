@@ -32,7 +32,6 @@
 namespace Okteta
 {
 
-
 AbstractColumnRenderer::AbstractColumnRenderer( AbstractColumnStylist* stylist )
  : d( new AbstractColumnRendererPrivate(stylist) )
 {
@@ -43,13 +42,13 @@ AbstractColumnStylist* AbstractColumnRenderer::stylist() const { return d->mStyl
 PixelX AbstractColumnRenderer::x()            const { return d->mXSpan.start(); }
 PixelX AbstractColumnRenderer::rightX()       const { return d->mXSpan.end(); }
 PixelX AbstractColumnRenderer::width()        const { return d->mXSpan.width(); }
-bool    AbstractColumnRenderer::isVisible()    const { return d->mIsVisible; }
+bool   AbstractColumnRenderer::isVisible()    const { return d->mIsVisible; }
 PixelX AbstractColumnRenderer::visibleWidth() const { return d->mIsVisible ? d->mXSpan.width(): 0; }
 PixelY AbstractColumnRenderer::lineHeight()   const { return d->mLineHeight; }
 
 void AbstractColumnRenderer::setX( PixelX x )                    { d->mXSpan.moveToStart( x ); }
 void AbstractColumnRenderer::setWidth( PixelX width )            { d->mXSpan.setEndByWidth( width ); }
-void AbstractColumnRenderer::setVisible( bool isVisible )         { d->mIsVisible = isVisible; }
+void AbstractColumnRenderer::setVisible( bool isVisible )        { d->mIsVisible = isVisible; }
 void AbstractColumnRenderer::setLineHeight( PixelY lineHeight )  { d->mLineHeight = lineHeight; }
 
 void AbstractColumnRenderer::restrictToXSpan( PixelXRange* xSpan ) const { xSpan->restrictTo( d->mXSpan ); }

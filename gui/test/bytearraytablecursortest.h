@@ -26,6 +26,7 @@
 // Qt
 #include <QtCore/QObject>
 
+
 namespace Okteta
 {
 

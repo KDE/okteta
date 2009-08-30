@@ -787,7 +787,7 @@ void ByteArrayRowViewPrivate::updateChanged()
     const PixelXRange Xs = PixelXRange::fromWidth( xOffset, q->visibleWidth() );
 
     // do updates in offset column 
-    const KDE::Section changedOffsetLines = mTableRanges->changedOffsetLines();
+    const LineRange changedOffsetLines = mTableRanges->changedOffsetLines();
     if( !changedOffsetLines.isEmpty() )
         q->updateColumn( *mOffsetColumn, changedOffsetLines );
 
@@ -804,7 +804,7 @@ void ByteArrayRowViewPrivate::updateChanged()
     if( dirtyColumns.size() > 0 )
     {
         // calculate affected lines/indizes
-        const KDE::Section fullPositions( 0, mTableLayout->noOfBytesPerLine()-1 );
+        const LinePositionRange fullPositions( 0, mTableLayout->noOfBytesPerLine()-1 );
         CoordRange visibleRange( fullPositions, q->visibleLines() );
 
         const int lineHeight = q->lineHeight();
@@ -818,7 +818,7 @@ void ByteArrayRowViewPrivate::updateChanged()
             // only one line?
             if( changedRange.start().line() == changedRange.end().line() )
             {
-                const KDE::Section changedPositions( changedRange.start().pos(), changedRange.end().pos() );
+                const LinePositionRange changedPositions( changedRange.start().pos(), changedRange.end().pos() );
                 while( columnIt.hasNext() )
                 {
                     const PixelXRange xPixels = columnIt.next()->xsOfLinePositionsInclSpaces( changedPositions );
@@ -830,7 +830,7 @@ void ByteArrayRowViewPrivate::updateChanged()
             else
             {
                 // first line
-                const KDE::Section firstChangedPositions( changedRange.start().pos(), fullPositions.end() );
+                const LinePositionRange firstChangedPositions( changedRange.start().pos(), fullPositions.end() );
                 while( columnIt.hasNext() )
                 {
                     const PixelXRange XPixels = columnIt.next()->xsOfLinePositionsInclSpaces( firstChangedPositions );
@@ -853,7 +853,7 @@ void ByteArrayRowViewPrivate::updateChanged()
                 // last line
                 cy += lineHeight;
                 columnIt.toFront();
-                const KDE::Section lastChangedPositions( fullPositions.start(), changedRange.end().pos() );
+                const LinePositionRange lastChangedPositions( fullPositions.start(), changedRange.end().pos() );
                 while( columnIt.hasNext() )
                 {
                     const PixelXRange XPixels = columnIt.next()->xsOfLinePositionsInclSpaces( lastChangedPositions );

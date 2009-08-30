@@ -27,19 +27,20 @@
 // Qt
 #include <QtTest/QtTest>
 
-using namespace KDE;
-using namespace Okteta;
+
+namespace Okteta
+{
 
 // local variables
-static const int Pos1 = 15;
-static const int Pos2 = 25;
-static const int Line1 = 10;
-static const int LineSize = 10;
-static const int Line2 = Line1 + LineSize - 1;
+static const LinePosition Pos1 = 15;
+static const LinePosition Pos2 = 25;
+static const Line Line1 = 10;
+static const LineSize LineCount = 10;
+static const Line Line2 = Line1 + LineCount - 1;
 static Coord Start( Pos1, Line1 );
 static Coord End(   Pos2, Line2 );
 
-static const int BufferWidth = Pos2 + 5;
+static const Size BufferWidth = Pos2 + 5;
 
 
 void CoordRangeTest::testConstructorByCoords()
@@ -47,19 +48,19 @@ void CoordRangeTest::testConstructorByCoords()
     CoordRange coordRange( Start, End );
     QCOMPARE( coordRange.start(), Start );
     QCOMPARE( coordRange.end(),   End );
-    QCOMPARE( coordRange.lines(), LineSize );
+    QCOMPARE( coordRange.lines(), LineCount );
     QVERIFY( coordRange.isValid() );
 }
 
 void CoordRangeTest::testConstructorByPosLines()
 {
-    Section positions( Pos1, Pos2 );
-    Section lines( Line1, Line2 );
+    LinePositionRange positions( Pos1, Pos2 );
+    LineRange lines( Line1, Line2 );
 
     CoordRange coordRange( positions, lines );
     QCOMPARE( coordRange.start(), Coord(Pos1,Line1) );
     QCOMPARE( coordRange.end(),   Coord(Pos2,Line2) );
-    QCOMPARE( coordRange.lines(), LineSize );
+    QCOMPARE( coordRange.lines(), LineCount );
     QVERIFY( coordRange.isValid() );
 }
 
@@ -127,7 +128,7 @@ void CoordRangeTest::testIncludesLine()
 {
     CoordRange coordRange( Start, End );
     // at start
-    int L = coordRange.start().line();
+    Line L = coordRange.start().line();
     QVERIFY( coordRange.includesLine(L) );
     // before start
     --L;
@@ -143,7 +144,7 @@ void CoordRangeTest::testIncludesLine()
 void CoordRangeTest::testWidth()
 {
     CoordRange coordRange( Start, End );
-    const int width = BufferWidth*(LineSize-1) - Start.pos() + End.pos()+1;
+    const Size width = BufferWidth*(LineCount-1) - Start.pos() + End.pos()+1;
     QCOMPARE( coordRange.width(BufferWidth), width );
 }
 
@@ -455,5 +456,6 @@ void CoordRangeTest::testIsJoinable()
 }
 */
 
+}
 
-QTEST_MAIN( CoordRangeTest )
+QTEST_MAIN( Okteta::CoordRangeTest )

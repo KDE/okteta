@@ -35,7 +35,7 @@ namespace Okteta
   * mouse and keyboard commands it offers two ways to set its range:
   * - by giving the startposition (of the cursor) of an interactive selection
   *   and the subsequent end positions (until selection is finished)
-  * - direct setting (as provided by KDE::Section)
+  * - direct setting (as provided by AddressRange)
   *
   * the interactive selection takes care that
   *

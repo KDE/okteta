@@ -27,7 +27,7 @@
 #include "coordrange.h"
 #include "oktetagui_export.h"
 // Okteta core
-#include <addressrange.h>
+#include "addressrange.h"
 
 
 // TODO: rename things like startOffset and firstLineOffset, not really descriptive
@@ -61,7 +61,7 @@ namespace Okteta
 class OKTETAGUI_EXPORT ByteArrayTableLayout
 {
   public:
-    ByteArrayTableLayout( int noOfBytesPerLine, Address firstLineOffset, Address startOffset, Address byteArrayOffset, Size byteArrayLength );
+    ByteArrayTableLayout( Size noOfBytesPerLine, Address firstLineOffset, Address startOffset, Address byteArrayOffset, Size byteArrayLength );
     //ByteArrayTableLayout();
 
     ~ByteArrayTableLayout();
@@ -73,28 +73,28 @@ class OKTETAGUI_EXPORT ByteArrayTableLayout
     /** */
     Address firstLineOffset() const;
     /** returns number of bytes per line */
-    int noOfBytesPerLine() const;
+    Size noOfBytesPerLine() const;
     /** returns the offset of the start of the displayed byte array section */
     Address byteArrayOffset() const;
     /** returns the length of the displayed byte array section */
     Size length() const;
     /** returns number of lines per visual page */
-    int noOfLinesPerPage() const;
+    LineSize noOfLinesPerPage() const;
 
   public: // calculated values
-    int startLine() const;
-    int startLinePosition() const;
+    Line startLine() const;
+    LinePosition startLinePosition() const;
     /** returns the coord of the start */
     Coord startCoord() const;
 
-    int finalLine() const;
-    int finalLinePosition() const;
+    Line finalLine() const;
+    LinePosition finalLinePosition() const;
     /** returns the coord of the end */
     Coord finalCoord() const;
 
     Address lastByteArrayOffset() const;
     /** tells how much lines this layout needs (incl. blank leading lines due to mStartOffset and mFirstLineOffset) */
-    int noOfLines() const;
+    LineSize noOfLines() const;
 
 
   public: // value calculation service
@@ -107,17 +107,17 @@ class OKTETAGUI_EXPORT ByteArrayTableLayout
       * If the line is below the first line the first index is returned,
       * if the line is above the last line the last index is returned
       */
-    Address indexAtCFirstLinePosition( int line ) const;
+    Address indexAtCFirstLinePosition( Line line ) const;
     /** calculates the index of last pos in line
       * If the line is below the first line the first index is returned,
       * if the line is above the last line the last index is returned
       */
-    Address indexAtCLastLinePosition( int line ) const;
+    Address indexAtCLastLinePosition( Line line ) const;
     /** calculates the line in which index is found
       * If the index is below the first index the first line is returned,
       * if the index is above the last index the last line is returned
       */
-    int lineAtCIndex( int index ) const;
+    Line lineAtCIndex( Address index ) const;
     /** calculates the coord in which index is found
       * If the index is below the first index the first coord is returned,
       * if the index is above the last index the last coord is returned
@@ -127,35 +127,35 @@ class OKTETAGUI_EXPORT ByteArrayTableLayout
     /** calculates the index of coord. if coord is invalid the behaviour is undefinded */
     Address indexAtCoord( const Coord& coord ) const;
     /** calculates the index of the first pos in line. if line is invalid the behaviour is undefinded */
-    Address indexAtFirstLinePosition( int line ) const;
+    Address indexAtFirstLinePosition( Line line ) const;
     /** calculates the index of last pos in line. if line is invalid the behaviour is undefinded */
-    Address indexAtLastLinePosition( int line ) const;
+    Address indexAtLastLinePosition( Line line ) const;
     /** calculates the line in which index is found. if index is invalid the behaviour is undefinded */
-    int lineAtIndex( Address index ) const;
+    Line lineAtIndex( Address index ) const;
     /** calculates the coord in which index is found. if index is invalid the behaviour is undefinded */
     Coord coordOfIndex( Address index ) const;
     /** calculates the range of coords in which the indizes are found. if indizes are invalid the behaviour is undefinded */
     CoordRange coordRangeOfIndizes( const AddressRange& indizes ) const;
 
     /** returns the used positions in line */
-    KDE::Section linePositions( int line ) const;
+    LinePositionRange linePositions( Line line ) const;
     /** returns the first Pos in line. if line is invalid the behaviour is undefinded */
-    int firstLinePosition( int line ) const;
+    LinePosition firstLinePosition( Line line ) const;
     /** returns the last Pos in line. if line is invalid the behaviour is undefinded */
-    int lastLinePosition( int line ) const;
+    LinePosition lastLinePosition( Line line ) const;
     /** returns the valid Pos or the first Pos in line. if coord is invalid the behaviour is undefinded */
-    int firstLinePosition( const Coord& coord ) const;
+    LinePosition firstLinePosition( const Coord& coord ) const;
     /** returns the valid Pos or the last Pos in line. if coord is invalid the behaviour is undefinded */
-    int lastLinePosition( const Coord& coord ) const;
+    LinePosition lastLinePosition( const Coord& coord ) const;
     /** returns true if the line has content */
-    bool hasContent( int line ) const;
+    bool hasContent( Line line ) const;
     /** returns true if the coord is the first in it's line. if coord is invalid the behaviour is undefinded */
     bool atFirstLinePosition( const Coord& coord ) const;
     /** returns true if the coord is the last in it's line. if coord is invalid the behaviour is undefinded */
     bool atLastLinePosition( const Coord& coord ) const;
 
     /** returns the index if valid or the nearest valid index */
-    int correctIndex( int index ) const;
+    Address correctIndex( Address index ) const;
     /** returns the coord if valid or the nearest valid coord */
     Coord correctCoord( const Coord& coord ) const;
 
@@ -166,13 +166,13 @@ class OKTETAGUI_EXPORT ByteArrayTableLayout
      /** sets mStartOffset, returns true if changed */
     bool setFirstLineOffset( Address firstLineOffset );
     /** sets number of bytes per line, returns true if changed */
-    bool setNoOfBytesPerLine( int noOfBytesPerLine );
+    bool setNoOfBytesPerLine( LineSize noOfBytesPerLine );
     /** sets offset in the data to display, returns true if changed */
     bool setByteArrayOffset( Address byteArrayOffset );
     /** sets length of data to display, returns true if changed */
     bool setLength( Size length );
     /** sets number of lines per page, 1 as default */
-    void setNoOfLinesPerPage( int noOfLinesPerPage );
+    void setNoOfLinesPerPage( LineSize noOfLinesPerPage );
 
 
   protected:
@@ -184,7 +184,7 @@ class OKTETAGUI_EXPORT ByteArrayTableLayout
 
  protected:
     /** how many chars per line */
-    int mNoOfBytesPerLine;
+    Size mNoOfBytesPerLine;
     /** starting offset of the first displayed line */
     Address mFirstLineOffset;
     /** starting offset of the displayed bytearray */
@@ -196,7 +196,7 @@ class OKTETAGUI_EXPORT ByteArrayTableLayout
     /** last offset in the displayed bytearray section */
     Address mLastByteArrayOffset;
     /** number of lines that are moved by page up/down */
-    int mNoOfLinesPerPage;
+    LineSize mNoOfLinesPerPage;
 
   protected: // calculated values, buffered
     /** */
@@ -206,19 +206,19 @@ class OKTETAGUI_EXPORT ByteArrayTableLayout
 
 inline Address ByteArrayTableLayout::startOffset()         const { return mStartOffset; }
 inline Address ByteArrayTableLayout::firstLineOffset()     const { return mFirstLineOffset; }
-inline int ByteArrayTableLayout::noOfBytesPerLine()        const { return mNoOfBytesPerLine; }
+inline Size ByteArrayTableLayout::noOfBytesPerLine()       const { return mNoOfBytesPerLine; }
 inline Address ByteArrayTableLayout::byteArrayOffset()     const { return mByteArrayOffset; }
 inline Size ByteArrayTableLayout::length()                 const { return mLastByteArrayOffset-mByteArrayOffset+1; }
 inline Address ByteArrayTableLayout::lastByteArrayOffset() const { return mLastByteArrayOffset; }
 
-inline Coord ByteArrayTableLayout::finalCoord()      const { return mCoordRange.end(); }
-inline Coord ByteArrayTableLayout::startCoord()      const { return mCoordRange.start(); }
-inline int ByteArrayTableLayout::startLinePosition() const { return startCoord().pos(); }
-inline int ByteArrayTableLayout::finalLinePosition() const { return finalCoord().pos(); }
-inline int ByteArrayTableLayout::startLine()         const { return startCoord().line(); }
-inline int ByteArrayTableLayout::finalLine()         const { return finalCoord().line(); }
-inline int ByteArrayTableLayout::noOfLinesPerPage()  const { return mNoOfLinesPerPage; }
-inline int ByteArrayTableLayout::noOfLines()         const { return mByteArrayOffset>mLastByteArrayOffset?0:finalLine()+1; }
+inline Coord ByteArrayTableLayout::finalCoord()               const { return mCoordRange.end(); }
+inline Coord ByteArrayTableLayout::startCoord()               const { return mCoordRange.start(); }
+inline LinePosition ByteArrayTableLayout::startLinePosition() const { return startCoord().pos(); }
+inline LinePosition ByteArrayTableLayout::finalLinePosition() const { return finalCoord().pos(); }
+inline Line ByteArrayTableLayout::startLine()                 const { return startCoord().line(); }
+inline Line ByteArrayTableLayout::finalLine()                 const { return finalCoord().line(); }
+inline LineSize ByteArrayTableLayout::noOfLinesPerPage()      const { return mNoOfLinesPerPage; }
+inline LineSize ByteArrayTableLayout::noOfLines()             const { return mByteArrayOffset>mLastByteArrayOffset?0:finalLine()+1; }
 
 }
 

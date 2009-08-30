@@ -27,34 +27,35 @@
 // Qt
 #include <QtTest/QtTest>
 
+
 namespace Okteta
 {
 
 // local variables
-static const int NoOfBytesPerLine = 8;
-static const int StartOffset = 22;
-static const int FirstLineOffset = 10;
-static const int RelativeStartOffset = StartOffset-FirstLineOffset;
-static const int ByteArrayOffset = 9;
-static const int Length = 250;
-static const int FinalOffset = (StartOffset+Length-1);
-static const int RelativeFinalOffset = FinalOffset-FirstLineOffset;
+static const Size NoOfBytesPerLine = 8;
+static const Address StartOffset = 22;
+static const Address FirstLineOffset = 10;
+static const Address RelativeStartOffset = StartOffset-FirstLineOffset;
+static const Address ByteArrayOffset = 9;
+static const Size Length = 250;
+static const Address FinalOffset = (StartOffset+Length-1);
+static const Address RelativeFinalOffset = FinalOffset-FirstLineOffset;
 
-static const int StartLine = RelativeStartOffset / NoOfBytesPerLine;
-static const int StartLinePosition = RelativeStartOffset % NoOfBytesPerLine;
+static const Line StartLine = RelativeStartOffset / NoOfBytesPerLine;
+static const LinePosition StartLinePosition = RelativeStartOffset % NoOfBytesPerLine;
 static Coord StartCoord( StartLinePosition, StartLine );
 
-static const int FinalLine =  RelativeFinalOffset/ NoOfBytesPerLine;
-static const int FinalLinePosition = RelativeFinalOffset % NoOfBytesPerLine;
+static const Line FinalLine =  RelativeFinalOffset/ NoOfBytesPerLine;
+static const LinePosition FinalLinePosition = RelativeFinalOffset % NoOfBytesPerLine;
 static Coord FinalCoord( FinalLinePosition, FinalLine );
 
-static const int NoOfLinesPerPage = 5;
+static const LineSize NoOfLinesPerPage = 5;
 
-static const int Pos1 = 15;
-static const int Pos2 = 25;
-static const int Line1 = 10;
-static const int LineCount = 10;
-static const int Line2 = Line1 + LineCount - 1;
+static const LinePosition Pos1 = 15;
+static const LinePosition Pos2 = 25;
+static const Line Line1 = 10;
+static const LineSize LineCount = 10;
+static const Line Line2 = Line1 + LineCount - 1;
 static Coord Start( Pos1, Line1 );
 static Coord End(   Pos2, Line2 );
 

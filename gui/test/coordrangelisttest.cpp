@@ -27,24 +27,26 @@
 // Qt
 #include <QtTest/QtTest>
 
-using namespace Okteta;
+
+namespace Okteta
+{
 
 // local variables
-static const int Pos1 = 15;
-static const int Pos2 = 25;
-static const int Line1 = 10;
-static const int LineSize = 10;
-static const int Line2 = Line1 + LineSize - 1;
-static const int LineDistance = 5;
-static const int Line3 = Line2 + LineDistance;
-static const int Line4 = Line3 + LineSize - 1;
+static const LinePosition Pos1 = 15;
+static const LinePosition Pos2 = 25;
+static const Line Line1 = 10;
+static const LineSize LineCount = 10;
+static const Line Line2 = Line1 + LineCount - 1;
+static const LineSize LineDistance = 5;
+static const Line Line3 = Line2 + LineDistance;
+static const Line Line4 = Line3 + LineCount - 1;
 
 static Coord Start1( Pos1, Line1 );
 static Coord End1(   Pos2, Line2 );
 static Coord Start2( Pos1, Line3 );
 static Coord End2(   Pos2, Line4 );
 
-static const int BufferWidth = Pos2 + 5;
+static const Size BufferWidth = Pos2 + 5;
 
 
 void CoordRangeListTest::testSimpleConstructor()
@@ -125,7 +127,7 @@ void CoordRangeListTest::testAddJoinableSections()
   OtherStart = End2;
   OtherStart.goRight( 0 );
   OtherEnd = OtherStart;
-  OtherEnd.goDown( LineSize );
+  OtherEnd.goDown( LineCount );
   OtherCoordRange.set( OtherStart, OtherEnd );
   CoordRangeList.addCoordRange( CoordRange1 );
   CoordRangeList.addCoordRange( CoordRange2 );
@@ -175,7 +177,7 @@ void CoordRangeListTest::testAddNonJoinableSections()
   OtherStart = End2;
   OtherStart.goRight( 2 );
   OtherEnd = OtherStart;
-  OtherEnd.goDown( LineSize );
+  OtherEnd.goDown( LineCount );
   OtherCoordRange.set( OtherStart, OtherEnd );
   CoordRangeList.addCoordRange( CoordRange1 );
   CoordRangeList.addCoordRange( CoordRange2 );
@@ -186,5 +188,6 @@ void CoordRangeListTest::testAddNonJoinableSections()
   QCOMPARE( CoordRangeList.last(), OtherCoordRange );
 }
 
+}
 
-QTEST_MAIN( CoordRangeListTest )
+QTEST_MAIN( Okteta::CoordRangeListTest )

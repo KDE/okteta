@@ -23,14 +23,14 @@
 #ifndef OKTETA_COORDRANGELIST_H
 #define OKTETA_COORDRANGELIST_H
 
-
 // lib
 #include "coordrange.h"
 // Qt
 #include <QtCore/QLinkedList>
 
 
-namespace Okteta {
+namespace Okteta
+{
 
 /**
 @author Friedrich W. H.  Kossebau
@@ -39,10 +39,11 @@ class CoordRangeList : public QLinkedList<CoordRange>
 {
   public:
     CoordRangeList();
+
     ~CoordRangeList();
 
   public:
-    void addCoordRange( CoordRange R );
+    void addCoordRange( const CoordRange& coordRange );
 };
 
 }

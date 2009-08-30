@@ -26,13 +26,12 @@
 // lib
 #include "abstractbytearrayview.h"
 // ColumnsView
-#include <abstractcolumnrenderer.h>
+#include "abstractcolumnrenderer.h"
+#include "linepositionrange.h"
 // Okteta core
-#include <oktetacore.h>
-#include <abstractbytearraymodel.h>
-#include <character.h>
-// commonlib
-#include <section.h>
+#include "oktetacore.h"
+#include "abstractbytearraymodel.h"
+#include "character.h"
 
 
 class QPainter;
@@ -70,7 +69,7 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
 
 
   public: // AbstractColumnRenderer API
-    virtual void renderFirstLine( QPainter* painter, const PixelXRange& Xs, int firstLineIndex );
+    virtual void renderFirstLine( QPainter* painter, const PixelXRange& Xs, Line firstLineIndex );
     virtual void renderNextLine( QPainter* painter );
 
   public:
@@ -78,7 +77,7 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
 
   public:
     //void renderLine( QPainter* painter, int lineIndex );
-    void renderLinePositions( QPainter* painter, int lineIndex, const KDE::Section& linePositions );
+    void renderLinePositions( QPainter* painter, Line lineIndex, const LinePositionRange& linePositions );
     /** paints a cursor based on the type of the byte.
       * @param byteIndex Index of the byte to paint the cursor for. If -1 a space is used as char.
       */
@@ -102,7 +101,7 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
       * @param groupSpacingWidth spacing between the groups in pixels
       * returns true if there was a change
       */
-    bool setSpacing( PixelX byteSpacingWidth, int noOfGroupedBytes = 0, PixelX groupSpacingWidth = 0 );
+    bool setSpacing( PixelX byteSpacingWidth, Size noOfGroupedBytes = 0, PixelX groupSpacingWidth = 0 );
     /** sets the spacing between the bytes in the hex column
       * @param byteSpacingWidth spacing between the bytes in pixels
       * returns true if there was a change
@@ -112,7 +111,7 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
       * @param NewNoOfGroupedBytes numbers of grouped bytes, 0 means no grouping
       * returns true if there was a change
       */
-    bool setNoOfGroupedBytes( int noOfGroupedBytes );
+    bool setNoOfGroupedBytes( Size noOfGroupedBytes );
     /** sets the spacing between the groups of bytes in the hex column
       * @param GroupSpacingW spacing between the groups in pixels
       * returns true if there was a change
@@ -163,29 +162,29 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
 
   public: // functional logic
     /** returns byte linePositions covered by pixels with absolute x-coord x */
-    KDE::Section linePositionsOfX( PixelX x, PixelX width ) const;
+    LinePositionRange linePositionsOfX( PixelX x, PixelX width ) const;
     /** returns byte pos at pixel with absolute x-coord x */
-    int linePositionOfX( PixelX x ) const;
+    LinePosition linePositionOfX( PixelX x ) const;
     /** returns byte pos at pixel with absolute x-coord x, and sets the flag to true if we are closer to the right */
-    int magneticLinePositionOfX( PixelX x ) const;
+    LinePosition magneticLinePositionOfX( PixelX x ) const;
     /** returns absolute x-coord of byte at position posInLine */
-    PixelX xOfLinePosition( int posInLine ) const;
+    PixelX xOfLinePosition( LinePosition posInLine ) const;
     /** returns right absolute x-coord of byte at position posInLine */
-    PixelX rightXOfLinePosition( int posInLine ) const;
+    PixelX rightXOfLinePosition( LinePosition posInLine ) const;
     /** returns byte pos at pixel with relative x-coord x */
-    int linePositionOfColumnX( PixelX x ) const;
+    LinePosition linePositionOfColumnX( PixelX x ) const;
     /** returns byte linePositions covered by pixels with relative x-coord x */
-    KDE::Section linePositionsOfColumnXs( PixelX x, PixelX width ) const;
+    LinePositionRange linePositionsOfColumnXs( PixelX x, PixelX width ) const;
     /** returns relative x-coord of byte at position posInLine */
-    PixelX columnXOfLinePosition( int posInLine ) const;
+    PixelX columnXOfLinePosition( LinePosition posInLine ) const;
     /** returns right relative x-coord of byte at position posInLine */
-    PixelX columnRightXOfLinePosition( int posInLine ) const;
+    PixelX columnRightXOfLinePosition( LinePosition posInLine ) const;
     /** returns the linePositions that overlap with the x-coords relative to the view */
-    KDE::Section visibleLinePositions( PixelX x, PixelX width ) const;
+    LinePositionRange visibleLinePositions( PixelX x, PixelX width ) const;
     /** returns the */
-    PixelXRange xsOfLinePositionsInclSpaces( const KDE::Section& linePositions ) const;
+    PixelXRange xsOfLinePositionsInclSpaces( const LinePositionRange& linePositions ) const;
     /** */
-    PixelXRange columnXsOfLinePositionsInclSpaces( const KDE::Section& linePositions ) const;
+    PixelXRange columnXsOfLinePositionsInclSpaces( const LinePositionRange& linePositions ) const;
 
     AbstractByteArrayView::CodingTypeId codingIdofY( PixelY y ) const;
     PixelY yOfCodingId( AbstractByteArrayView::CodingTypeId codingId ) const;
@@ -195,7 +194,7 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
     PixelX digitWidth() const;
     PixelX groupSpacingWidth() const;
     PixelX byteSpacingWidth() const;
-    int noOfGroupedBytes() const;
+    Size noOfGroupedBytes() const;
     PixelY digitHeight() const;
     PixelY rowHeight() const;
 
@@ -210,10 +209,10 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
     /** returns the actually used undefined character for "undefined" chars, default is '?' */
     QChar undefinedChar() const;
 
-    int firstLinePos() const;
-    int lastLinePos()  const;
-    KDE::Section visibleLinePositions() const;
-    const ByteArrayTableLayout *layout() const;
+    LinePosition firstLinePos() const;
+    LinePosition lastLinePos()  const;
+    LinePositionRange visibleLinePositions() const;
+    const ByteArrayTableLayout* layout() const;
     bool isByteTypeColored() const;
 
     int visibleCodings() const;
@@ -227,10 +226,10 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
 
 
   protected:
-    void renderPlain( QPainter* painter, const KDE::Section& linePositions, Address byteIndex );
-    void renderSelection( QPainter* painter, const KDE::Section& linePositions, Address byteIndex, int flag );
-    void renderMarking( QPainter* painter, const KDE::Section& linePositions, Address byteIndex, int flag );
-    void renderRange( QPainter* painter, const QBrush& brush, const KDE::Section& linePositions, int flag );
+    void renderPlain( QPainter* painter, const LinePositionRange& linePositions, Address byteIndex );
+    void renderSelection( QPainter* painter, const LinePositionRange& linePositions, Address byteIndex, int flag );
+    void renderMarking( QPainter* painter, const LinePositionRange& linePositions, Address byteIndex, int flag );
+    void renderRange( QPainter* painter, const QBrush& brush, const LinePositionRange& linePositions, int flag );
     void renderBookmark( QPainter* painter, const QBrush& brush );
 
     void renderCode( QPainter* painter, const QString& code, const QColor& color ) const;
@@ -275,7 +274,7 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
     PixelX mGroupSpacingWidth;
 
     /** number of grouped bytes */
-    int mNoOfGroupedBytes;
+    Size mNoOfGroupedBytes;
 
     /** pointer to array with buffered linePositions (relative to column position)
       * any spacing gets assigned to the byte left to it -> ...|c|c|c |c|c...
@@ -283,7 +282,7 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
     PixelX* mLinePosLeftPixelX;
     PixelX* mLinePosRightPixelX;
     /** index of right position */
-    int mLastLinePos;
+    LinePosition mLastLinePos;
 
     /** */
     bool mByteTypeColored;
@@ -311,8 +310,8 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
     QChar mUndefinedChar;
 
   protected: // buffering rendering data
-    KDE::Section mRenderLinePositions;
-    int mRenderLine;
+    LinePositionRange mRenderLinePositions;
+    Line mRenderLine;
     PixelX mRenderX;
     PixelX mRenderWidth;
     int mSpacingTrigger;
@@ -326,11 +325,11 @@ inline PixelX ByteArrayRowColumnRenderer::digitWidth()        const { return mDi
 inline PixelX ByteArrayRowColumnRenderer::byteSpacingWidth()  const { return mByteSpacingWidth; }
 inline PixelX ByteArrayRowColumnRenderer::groupSpacingWidth() const { return mGroupSpacingWidth; }
 inline PixelY ByteArrayRowColumnRenderer::digitHeight()       const { return mDigitHeight; }
-inline int ByteArrayRowColumnRenderer::noOfGroupedBytes()      const { return mNoOfGroupedBytes; }
+inline Size ByteArrayRowColumnRenderer::noOfGroupedBytes()      const { return mNoOfGroupedBytes; }
 
-inline int ByteArrayRowColumnRenderer::firstLinePos() const { return mRenderLinePositions.start(); }
-inline int ByteArrayRowColumnRenderer::lastLinePos()  const { return mRenderLinePositions.end(); }
-inline KDE::Section ByteArrayRowColumnRenderer::visibleLinePositions() const { return mRenderLinePositions; }
+inline LinePosition ByteArrayRowColumnRenderer::firstLinePos() const { return mRenderLinePositions.start(); }
+inline LinePosition ByteArrayRowColumnRenderer::lastLinePos()  const { return mRenderLinePositions.end(); }
+inline LinePositionRange ByteArrayRowColumnRenderer::visibleLinePositions() const { return mRenderLinePositions; }
 
 inline const ByteArrayTableLayout *ByteArrayRowColumnRenderer::layout() const { return mLayout; }
 

@@ -1018,9 +1018,9 @@ void AbstractByteArrayViewPrivate::onContentsChanged( const ArrayChangeMetricsLi
     if( oldNoOfLines != newNoOfLines )
     {
         q->setNoOfLines( newNoOfLines );
-        const KDE::Section changedLines = (oldNoOfLines < newNoOfLines) ?
-            KDE::Section( oldNoOfLines, newNoOfLines-1 ) :
-            KDE::Section( newNoOfLines, oldNoOfLines-1 );
+        const LineRange changedLines = (oldNoOfLines < newNoOfLines) ?
+            LineRange( oldNoOfLines, newNoOfLines-1 ) :
+            LineRange( newNoOfLines, oldNoOfLines-1 );
         mTableRanges->addChangedOffsetLines( changedLines );
     }
 

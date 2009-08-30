@@ -26,6 +26,10 @@
 // Qt
 #include <QtCore/QObject>
 
+
+namespace Okteta
+{
+
 class CoordRangeListTest : public QObject
 {
   Q_OBJECT
@@ -36,5 +40,7 @@ class CoordRangeListTest : public QObject
     void testAddJoinableSections();
     void testAddNonJoinableSections();
 };
+
+}
 
 #endif

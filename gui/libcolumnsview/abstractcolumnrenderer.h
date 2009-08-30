@@ -26,8 +26,6 @@
 // lib
 #include "kadds.h"
 #include "oktetagui_export.h"
-// commonlib
-#include <section.h>
 
 class QPainter;
 

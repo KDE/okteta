@@ -26,6 +26,10 @@
 // Qt
 #include <QtCore/QObject>
 
+
+namespace Okteta
+{
+
 class CoordTest : public QObject
 {
   Q_OBJECT
@@ -53,5 +57,7 @@ class CoordTest : public QObject
     void testIsBeforeLineEnd();
     void testIndexNWidth();
 };
+
+}
 
 #endif

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2003,2007,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,12 +23,10 @@
 #ifndef OKTETA_COLUMNSVIEW_H
 #define OKTETA_COLUMNSVIEW_H
 
-
 // lib
-#include "kadds.h"
 #include "oktetagui_export.h"
-// commonlib
-#include "section.h" // TODO: think about moving this out of the public API
+#include "kadds.h"
+#include "linerange.h"
 // Qt
 #include <QtCore/QList>
 #include <QtGui/QAbstractScrollArea>
@@ -51,16 +49,16 @@ class OKTETAGUI_EXPORT ColumnsView : public QAbstractScrollArea
    Q_OBJECT
 
   public:
-    explicit ColumnsView( /*bool R = false,*/ QWidget *parent = 0 );
+    explicit ColumnsView( /*bool R = false,*/ QWidget* parent = 0 );
     virtual ~ColumnsView();
 
   public: // data-wise sizes
     /** returns the number of all lines */
-    int noOfLines() const;
+    LineSize noOfLines() const;
     /** returns number of fully visible lines, at least 1 (as needed by page down/up)
       * doesn't care about the total height being smaller than the display height
       */
-    int noOfLinesPerPage() const;
+    LineSize noOfLinesPerPage() const;
 
   public: // pixel-wise sizes
     /** returns the height of each line */
@@ -74,15 +72,15 @@ class OKTETAGUI_EXPORT ColumnsView : public QAbstractScrollArea
     /** gives the index of the line that would include y in pixel coord.
       * y is not forced to be inside the total height.
       */
-    uint lineAt( PixelY y ) const;
+    Line lineAt( PixelY y ) const;
     /** gives the index of the first and the last line that would be visible
       * these lines might not contain anything
       */
-    KDE::Section visibleLines() const;
+    LineRange visibleLines() const;
     /** gives the index of the first and the last line that would be visible in the given pixel range
       * these lines might not contain anything
       */
-    KDE::Section visibleLines( const PixelYRange &YPixels ) const;
+    LineRange visibleLines( const PixelYRange& yPixels ) const;
 
     /** @return visible width of the current view */
     PixelX visibleWidth() const;
@@ -94,31 +92,26 @@ class OKTETAGUI_EXPORT ColumnsView : public QAbstractScrollArea
     PixelY yOffset() const;
 
     /** @return y offset of the current view */
-    PixelY yOffsetOfLine( int lineIndex ) const;
+    PixelY yOffsetOfLine( Line lineIndex ) const;
 
     /** translates the point to coordinates in the columns */
-    QPoint viewportToColumns( const QPoint &point ) const;
+    QPoint viewportToColumns( const QPoint& point ) const;
 
   public:
     /**  */
     void setColumnsPos( PixelX x, PixelY y );
 
   protected: // QAbstractScrollArea API
-    virtual bool event( QEvent *event );
-    virtual void resizeEvent( QResizeEvent *event );
-    virtual void paintEvent( QPaintEvent *paintEvent );
+    virtual bool event( QEvent* event );
+    virtual void resizeEvent( QResizeEvent* event );
+    virtual void paintEvent( QPaintEvent* paintEvent );
     virtual void scrollContentsBy( int dx, int dy );
 
   protected: // our API
     /** draws all columns in columns coordinates */
-    virtual void renderColumns( QPainter *painter, int cx, int cy, int cw, int ch );
+    virtual void renderColumns( QPainter* painter, int cx, int cy, int cw, int ch );
     /** draws area without columns in columns coordinates */
-    virtual void renderEmptyArea( QPainter *painter, int cx, int cy, int cw, int ch );
-
-  protected:
-    /** called by AbstractColumnRenderer */
-    void addColumn( AbstractColumnRenderer *columnRenderer );
-    void removeColumn( AbstractColumnRenderer *columnRenderer );
+    virtual void renderEmptyArea( QPainter* painter, int cx, int cy, int cw, int ch );
 
   protected: //
     /** sets height of all lines and propagates this information to all columns
@@ -130,7 +123,11 @@ class OKTETAGUI_EXPORT ColumnsView : public QAbstractScrollArea
       * doesn't update the content size
       * @param NewNoOfLines new number of lines to display
       */
-    virtual void setNoOfLines( int noOfLines );
+    virtual void setNoOfLines( LineSize noOfLines );
+
+  protected:
+    void addColumn( AbstractColumnRenderer* columnRenderer );
+    void removeColumn( AbstractColumnRenderer* columnRenderer );
 
   protected: // recalculations
     /** recalculates the positions of the columns and the total width */
@@ -139,10 +136,10 @@ class OKTETAGUI_EXPORT ColumnsView : public QAbstractScrollArea
     /** calls updateContent for the Column */
     void updateColumn( AbstractColumnRenderer& columnRenderer );
     /** calls updateContent for the Column for the given lines, if needed */
-    void updateColumn( AbstractColumnRenderer& columnRenderer, const KDE::Section& lines );
+    void updateColumn( AbstractColumnRenderer& columnRenderer, const LineRange& lines );
 
   private:
-    ColumnsViewPrivate * const d;
+    ColumnsViewPrivate* const d;
 };
 
 }

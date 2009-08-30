@@ -26,9 +26,9 @@
 namespace Okteta
 {
 
-static const int DefaultNoOfLinesPerPage = 1;
+static const LineSize DefaultNoOfLinesPerPage = 1;
 
-ByteArrayTableLayout::ByteArrayTableLayout( int noOfBytesPerLine, Address firstLineOffset, Address startOffset,
+ByteArrayTableLayout::ByteArrayTableLayout( Size noOfBytesPerLine, Address firstLineOffset, Address startOffset,
                                             Address byteArrayOffset, Size byteArrayLength )
  : mNoOfBytesPerLine( noOfBytesPerLine ),
    mFirstLineOffset( firstLineOffset ),
@@ -78,7 +78,7 @@ bool ByteArrayTableLayout::setFirstLineOffset( Address firstLineOffset )
 }
 
 
-bool ByteArrayTableLayout::setNoOfBytesPerLine( int noOfBytesPerLine )
+bool ByteArrayTableLayout::setNoOfBytesPerLine( LineSize noOfBytesPerLine )
 {
     // rejecting <1
     if( noOfBytesPerLine < 1 )
@@ -135,7 +135,7 @@ bool ByteArrayTableLayout::setLength( Size length )
 }
 
 
-void ByteArrayTableLayout::setNoOfLinesPerPage( int noOfLinesPerPage )
+void ByteArrayTableLayout::setNoOfLinesPerPage( LineSize noOfLinesPerPage )
 {
     mNoOfLinesPerPage = noOfLinesPerPage;
 }
@@ -156,7 +156,7 @@ void ByteArrayTableLayout::calcEnd()
 }
 
 
-int ByteArrayTableLayout::indexAtCFirstLinePosition( int line ) const
+Address ByteArrayTableLayout::indexAtCFirstLinePosition( Line line ) const
 {
     return ( line <= mCoordRange.start().line() ) ? mByteArrayOffset :
            ( line > mCoordRange.end().line() ) ?    mLastByteArrayOffset:
@@ -164,7 +164,7 @@ int ByteArrayTableLayout::indexAtCFirstLinePosition( int line ) const
 }
 
 
-int ByteArrayTableLayout::indexAtCLastLinePosition( int line ) const
+Address ByteArrayTableLayout::indexAtCLastLinePosition( Line line ) const
 {
     return ( line < mCoordRange.start().line() ) ? mByteArrayOffset :
            ( line >= mCoordRange.end().line() ) ?  mLastByteArrayOffset :
@@ -172,9 +172,9 @@ int ByteArrayTableLayout::indexAtCLastLinePosition( int line ) const
 }
 
 
-int ByteArrayTableLayout::indexAtCCoord( const Coord& coord ) const
+Address ByteArrayTableLayout::indexAtCCoord( const Coord& coord ) const
 {
-    const int index = indexAtCoord( coord );
+    const Address index = indexAtCoord( coord );
 
     return ( index <= mByteArrayOffset ) ?     mByteArrayOffset :
            ( index >= mLastByteArrayOffset ) ? mLastByteArrayOffset:
@@ -182,7 +182,7 @@ int ByteArrayTableLayout::indexAtCCoord( const Coord& coord ) const
 }
 
 
-int ByteArrayTableLayout::lineAtCIndex( int index ) const
+Line ByteArrayTableLayout::lineAtCIndex( Address index ) const
 {
     return ( index <= mByteArrayOffset ) ?     mCoordRange.start().line():
            ( index >= mLastByteArrayOffset ) ? mCoordRange.end().line():
@@ -190,7 +190,7 @@ int ByteArrayTableLayout::lineAtCIndex( int index ) const
 }
 
 
-Coord ByteArrayTableLayout::coordOfCIndex( int index ) const
+Coord ByteArrayTableLayout::coordOfCIndex( Address index ) const
 {
     return ( index <= mByteArrayOffset ) ?     mCoordRange.start():
            ( index >= mLastByteArrayOffset ) ? mCoordRange.end():
@@ -198,24 +198,24 @@ Coord ByteArrayTableLayout::coordOfCIndex( int index ) const
 }
 
 
-int ByteArrayTableLayout::indexAtFirstLinePosition( int line ) const
+Address ByteArrayTableLayout::indexAtFirstLinePosition( Line line ) const
 {
     return ( line == mCoordRange.start().line() ) ? mByteArrayOffset : line*mNoOfBytesPerLine-mRelativeStartOffset+mByteArrayOffset;
 }
 
 
-int ByteArrayTableLayout::indexAtLastLinePosition( int line ) const
+Address ByteArrayTableLayout::indexAtLastLinePosition( Line line ) const
 {
     return ( line == mCoordRange.end().line() ) ? mLastByteArrayOffset : (line+1)*mNoOfBytesPerLine-mRelativeStartOffset+mByteArrayOffset-1;
 }
 
 
-int ByteArrayTableLayout::indexAtCoord( const Coord& coord ) const
+Address ByteArrayTableLayout::indexAtCoord( const Coord& coord ) const
 {
     return coord.indexByLineWidth( mNoOfBytesPerLine ) - mRelativeStartOffset + mByteArrayOffset;
 }
 
-int ByteArrayTableLayout::lineAtIndex( Address index ) const
+Line ByteArrayTableLayout::lineAtIndex( Address index ) const
 {
     return (index+mRelativeStartOffset-mByteArrayOffset)/mNoOfBytesPerLine;
 }
@@ -234,7 +234,7 @@ CoordRange ByteArrayTableLayout::coordRangeOfIndizes( const AddressRange& indize
 
 
 
-int ByteArrayTableLayout::correctIndex( Address index ) const
+Address ByteArrayTableLayout::correctIndex( Address index ) const
 {
     return ( index <= mByteArrayOffset ) ?     mByteArrayOffset:
            ( index >= mLastByteArrayOffset ) ? mLastByteArrayOffset:
@@ -264,33 +264,33 @@ bool ByteArrayTableLayout::atLastLinePosition( const Coord& coord ) const
 }
 
 
-KDE::Section ByteArrayTableLayout::linePositions( int line ) const
+LinePositionRange ByteArrayTableLayout::linePositions( Line line ) const
 {
-    return KDE::Section( firstLinePosition(line), lastLinePosition(line) );
+    return LinePositionRange( firstLinePosition(line), lastLinePosition(line) );
 }
 
 
-int ByteArrayTableLayout::firstLinePosition( const Coord& coord ) const
+LinePosition ByteArrayTableLayout::firstLinePosition( const Coord& coord ) const
 {
     return ( mCoordRange.start().isLaterInLineThan(coord) ) ? mCoordRange.start().pos() : coord.pos();
 }
 
-int ByteArrayTableLayout::lastLinePosition( const Coord& coord ) const
+LinePosition ByteArrayTableLayout::lastLinePosition( const Coord& coord ) const
 {
     return ( mCoordRange.end().isPriorInLineThan(coord) ) ? mCoordRange.end().pos() : coord.pos();
 }
 
-int ByteArrayTableLayout::firstLinePosition( int line ) const
+LinePosition ByteArrayTableLayout::firstLinePosition( Line line ) const
 {
     return line == mCoordRange.start().line() ? mCoordRange.start().pos() : 0;
 }
 
-int ByteArrayTableLayout::lastLinePosition( int line ) const
+LinePosition ByteArrayTableLayout::lastLinePosition( Line line ) const
 {
     return ( line == mCoordRange.end().line() ) ? mCoordRange.end().pos() : mNoOfBytesPerLine-1;
 }
 
-bool ByteArrayTableLayout::hasContent( int line ) const
+bool ByteArrayTableLayout::hasContent( Line line ) const
 {
     return mCoordRange.includesLine( line );
 }

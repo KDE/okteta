@@ -23,7 +23,6 @@
 #ifndef OKTETA_CHARBYTEARRAYCOLUMNRENDERER_H
 #define OKTETA_CHARBYTEARRAYCOLUMNRENDERER_H
 
-
 // lib
 #include "abstractbytearraycolumnrenderer.h"
 

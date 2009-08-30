@@ -25,7 +25,8 @@
 
 // lib
 #include "offsetformat.h"
-#include <abstractcolumnrenderer.h>
+#include "abstractcolumnrenderer.h"
+#include "line.h"
 
 
 namespace Okteta
@@ -43,8 +44,8 @@ class OKTETAGUI_EXPORT OffsetColumnRenderer : public AbstractColumnRenderer
     virtual ~OffsetColumnRenderer();
 
   public:  // AbstractColumnRenderer API
-    virtual void renderFirstLine( QPainter *painter, const PixelXRange &Xs, int firstLineIndex );
-    virtual void renderNextLine( QPainter *painter );
+    virtual void renderFirstLine( QPainter* painter, const PixelXRange& Xs, Line firstLineIndex );
+    virtual void renderNextLine( QPainter* painter );
     virtual void renderColumn( QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys );
     virtual void renderEmptyColumn( QPainter *painter, const PixelXRange &Xs, const PixelYRange &Ys );
 
@@ -65,7 +66,7 @@ class OKTETAGUI_EXPORT OffsetColumnRenderer : public AbstractColumnRenderer
     /** recalculates all x values */
     void recalcX();
     /** paints full line */
-    void renderLine( QPainter *painter, int lineIndex );
+    void renderLine( QPainter *painter, Line lineIndex );
     /** */
     void renderColumnBackground( QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys );
 
@@ -89,7 +90,7 @@ class OKTETAGUI_EXPORT OffsetColumnRenderer : public AbstractColumnRenderer
 
   protected: // firstnext trips related
     /** */
-    int mRenderLineIndex;
+    Line mRenderLineIndex;
 };
 
 

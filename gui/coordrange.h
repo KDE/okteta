@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2003 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,9 +25,10 @@
 
 // lib
 #include "coord.h"
+#include "linepositionrange.h"
+#include "linerange.h"
 // Okteta core
-#include <range.h>
-#include <section.h>
+#include "range.h"
 
 
 namespace KDE
@@ -36,7 +37,7 @@ namespace KDE
 typedef Range<Okteta::Coord> KBaseCoordRange;
 
 template<>
-inline const Okteta::Coord KBaseCoordRange::null() const 
+inline const Okteta::Coord KBaseCoordRange::null() const
 { return Okteta::Coord(-1,-1); }
 
 }
@@ -54,20 +55,20 @@ class CoordRange : public KDE::KBaseCoordRange
       * @param SC start coord
       * @param EC end coord
       */
-    CoordRange( const Coord &SC, const Coord &EC );
+    CoordRange( const Coord& start, const Coord& end );
     /** 
       * @param Pos start and end pos
       * @param Lines start and end line
       */
-    CoordRange( const KDE::Section &Pos, const KDE::Section &Lines );
+    CoordRange( const LinePositionRange& posRange, const LineRange& lineRange );
     CoordRange();
     ~CoordRange();
 
   public:
-    CoordRange &operator=( const CoordRange &S );
+    CoordRange &operator=( const CoordRange& other );
 
   public:
-    bool operator==( const CoordRange &S ) const;
+    bool operator==( const CoordRange& other ) const;
 
   public:
     /** calculates the number of coords that are covered if a line has the given length.
@@ -75,34 +76,35 @@ class CoordRange : public KDE::KBaseCoordRange
       * @param LineLength 
       * @return the number of points covered if a line has a length of LineLength.
       */
-    int width( int LineLength ) const;
+    Size width( LinePositionSize lineWidth ) const;
     /** calculates the number of lines that are covered by the range.
       * If the range is invalid the behaviour is undefined.
       * @return number of lines covered
       */
-    int lines() const;
+    LineSize lines() const;
     /** tests if the given line is included by the range. 
       * If the range is invalid or the line < 0 the behaviour is undefined.      
       * @param Line index of line
       * @return @c true if Line is included, otherwise @c false
       */
-    bool includesLine( int Line ) const;
+    bool includesLine( Line line ) const;
 };
 
 
-inline CoordRange::CoordRange( const Coord &SC, const Coord &EC ) : KDE::KBaseCoordRange(SC,EC) {}
-inline CoordRange::CoordRange( const KDE::Section &Pos, const KDE::Section &Lines )
- : KDE::KBaseCoordRange( Coord(Pos.start(),Lines.start()), Coord(Pos.end(),Lines.end()) ) {}
+inline CoordRange::CoordRange( const Coord& start, const Coord& end ) : KDE::KBaseCoordRange(start,end) {}
+inline CoordRange::CoordRange( const LinePositionRange& posRange, const LineRange& lineRange )
+ : KDE::KBaseCoordRange( Coord(posRange.start(),lineRange.start()), Coord(posRange.end(),lineRange.end()) ) {}
 inline CoordRange::CoordRange()  {}
+
 inline CoordRange::~CoordRange() {}
 
-inline bool CoordRange::operator==( const CoordRange &R ) const { return  KDE::KBaseCoordRange::operator==(R); }
+inline CoordRange& CoordRange::operator=( const CoordRange& other ) {  KDE::KBaseCoordRange::operator=(other); return *this; }
 
-inline CoordRange &CoordRange::operator=( const CoordRange &R ) {  KDE::KBaseCoordRange::operator=(R); return *this; }
+inline bool CoordRange::operator==( const CoordRange& other ) const { return  KDE::KBaseCoordRange::operator==(other); }
 
-inline int CoordRange::width( int LineLength )   const { return LineLength*(lines()-1) + End.pos() - Start.pos()+1; }
-inline int CoordRange::lines()                   const { return End.line() - Start.line() + 1; }
-inline bool CoordRange::includesLine( int Line ) const { return Line >= Start.line() && Line <= End.line(); }
+inline Size CoordRange::width( LinePositionSize lineWidth )   const { return lineWidth*(lines()-1) + end().pos() - start().pos()+1; }
+inline LineSize CoordRange::lines()                           const { return end().line() - start().line() + 1; }
+inline bool CoordRange::includesLine( Line line )             const { return ( start().line() <= line && line <= end().line() ); }
 
 }
 

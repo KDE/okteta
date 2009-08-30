@@ -28,7 +28,7 @@
 #include "coordrangelist.h"
 #include "oktetagui_export.h"
 // Okteta core
-#include <addressrangelist.h>
+#include "addressrangelist.h"
 
 
 namespace Okteta
@@ -66,7 +66,7 @@ class OKTETAGUI_EXPORT ByteArrayTableRanges
     void removeFurtherSelections();
 
     /** assumes all added lines to overlap */
-    void addChangedOffsetLines( const KDE::Section& changesLines );
+    void addChangedOffsetLines( const LineRange& changesLines );
 
     void addChangedRange( const AddressRange& range );
     void addChangedRange( Address start, Address end );
@@ -86,7 +86,7 @@ class OKTETAGUI_EXPORT ByteArrayTableRanges
     AddressRange firstWordSelection() const;
     Size selectionLength() const;
     bool isModified() const;
-    KDE::Section changedOffsetLines() const;
+    LineRange changedOffsetLines() const;
 
   public: // calculated logic access
     bool hasSelection() const;
@@ -115,7 +115,7 @@ class OKTETAGUI_EXPORT ByteArrayTableRanges
     AddressRange FirstWordSelection;
 
     /** lines that were added or removed */
-    KDE::Section mChangedOffsetLines;
+    LineRange mChangedOffsetLines;
 
     CoordRangeList ChangedRanges;
 
@@ -131,7 +131,7 @@ inline AddressRange ByteArrayTableRanges::selection()  const { return mSelection
 inline AddressRange ByteArrayTableRanges::firstWordSelection()  const { return FirstWordSelection; }
 inline Size ByteArrayTableRanges::selectionLength()    const { return mSelection.range().width(); }
 inline bool ByteArrayTableRanges::isModified()         const { return mModified; }
-inline KDE::Section ByteArrayTableRanges::changedOffsetLines() const { return mChangedOffsetLines; }
+inline LineRange ByteArrayTableRanges::changedOffsetLines() const { return mChangedOffsetLines; }
 
 inline bool ByteArrayTableRanges::hasSelection()             const { return mSelection.isValid(); }
 inline bool ByteArrayTableRanges::selectionStarted()         const { return mSelection.started(); }
