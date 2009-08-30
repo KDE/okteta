@@ -30,6 +30,11 @@ set( oktetacore_CamelCase_HDRS
 )
 
 set( oktetagui_CamelCase_HDRS
+  LinePosition
+  Line
+  LinePositionRange
+  LineRange
+
   AbstractColumnStylist
   AbstractColumnRenderer
   ColumnsView
