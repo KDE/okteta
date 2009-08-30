@@ -42,8 +42,8 @@ class SectionTest : public QObject
     void testCompare();
     void testIncludes();
     void testLocalIndex();
-    void testLocalSection();
-    void testSubSection();
+    void testLocalRange();
+    void testSubRange();
     void testAdaptToReplacement();
     void testSplitAt();
     void testSplitAtLocal();

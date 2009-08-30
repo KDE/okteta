@@ -158,47 +158,47 @@ void SectionTest::testLocalIndex()
 }
 
 
-void SectionTest::testLocalSection()
+void SectionTest::testLocalRange()
 {
     Section section( Start, End );
 
-    Section localSection = section.localSection( Section(Start,End) );
-    QCOMPARE( localSection.start(), 0 );
-    QCOMPARE( localSection.end(), Width-1 );
+    Section localRange = section.localRange( Section(Start,End) );
+    QCOMPARE( localRange.start(), 0 );
+    QCOMPARE( localRange.end(), Width-1 );
 
-    localSection = section.localSection( Section(Start+1,End) );
-    QCOMPARE( localSection.start(), 1 );
-    QCOMPARE( localSection.end(), Width-1 );
+    localRange = section.localRange( Section(Start+1,End) );
+    QCOMPARE( localRange.start(), 1 );
+    QCOMPARE( localRange.end(), Width-1 );
 
-    localSection = section.localSection( Section(Start,End-1) );
-    QCOMPARE( localSection.start(), 0 );
-    QCOMPARE( localSection.end(), Width-2 );
+    localRange = section.localRange( Section(Start,End-1) );
+    QCOMPARE( localRange.start(), 0 );
+    QCOMPARE( localRange.end(), Width-2 );
 
-    localSection = section.localSection( Section(Start+1,End-1) );
-    QCOMPARE( localSection.start(), 1 );
-    QCOMPARE( localSection.end(), Width-2 );
+    localRange = section.localRange( Section(Start+1,End-1) );
+    QCOMPARE( localRange.start(), 1 );
+    QCOMPARE( localRange.end(), Width-2 );
 }
 
 
-void SectionTest::testSubSection()
+void SectionTest::testSubRange()
 {
     Section section( Start, End );
 
-    Section subSection = section.subSection( Section::fromWidth(Width) );
-    QCOMPARE( subSection.start(), Start );
-    QCOMPARE( subSection.end(), End );
+    Section subRange = section.subRange( Section::fromWidth(Width) );
+    QCOMPARE( subRange.start(), Start );
+    QCOMPARE( subRange.end(), End );
 
-    subSection = section.subSection( Section(1,Width-1) );
-    QCOMPARE( subSection.start(), Start+1 );
-    QCOMPARE( subSection.end(), End );
+    subRange = section.subRange( Section(1,Width-1) );
+    QCOMPARE( subRange.start(), Start+1 );
+    QCOMPARE( subRange.end(), End );
 
-    subSection = section.subSection( Section(0,Width-2) );
-    QCOMPARE( subSection.start(), Start );
-    QCOMPARE( subSection.end(), End-1 );
+    subRange = section.subRange( Section(0,Width-2) );
+    QCOMPARE( subRange.start(), Start );
+    QCOMPARE( subRange.end(), End-1 );
 
-    subSection = section.subSection( Section(1,Width-2) );
-    QCOMPARE( subSection.start(), Start+1 );
-    QCOMPARE( subSection.end(), End-1 );
+    subRange = section.subRange( Section(1,Width-2) );
+    QCOMPARE( subRange.start(), Start+1 );
+    QCOMPARE( subRange.end(), End-1 );
 }
 
 
