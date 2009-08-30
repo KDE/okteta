@@ -52,11 +52,15 @@ set( oktetacore_LIB_SRCS
   bookmarklist.cpp
   section.cpp
   sectionlist.cpp
+  addressrangelist.cpp
 )
 
 set( oktetacore_LIB_HDRS
   oktetacore_export.h
   oktetacore.h
+  address.h
+  size.h
+  byte.h
   abstractbytearraymodel.h
   piecetablebytearraymodel.h
 #   filebytearraymodel.h
@@ -73,6 +77,8 @@ set( oktetacore_LIB_HDRS
   charcodec.h
   character.h
   range.h
+  numberrange.h
+  addressrange.h
   section.h
   valuecodec.h
   wordbytearrayservice.h

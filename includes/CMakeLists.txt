@@ -1,4 +1,11 @@
 set( oktetacore_CamelCase_HDRS
+  Range
+  NumberRange
+
+  Address
+  AddressRange
+  Size
+  Byte
   AbstractByteArrayModel
   Versionable
   Bookmarkable
