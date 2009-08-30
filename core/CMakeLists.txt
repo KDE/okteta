@@ -50,7 +50,7 @@ set( oktetacore_LIB_SRCS
   wordbytearrayservice.cpp
   bookmarklistconstiteratoradapter.cpp
   bookmarklist.cpp
-  section.cpp
+#   section.cpp
   sectionlist.cpp
   addressrangelist.cpp
 )

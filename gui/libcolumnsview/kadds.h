@@ -23,9 +23,8 @@
 #ifndef OKTETA_KADDS_H
 #define OKTETA_KADDS_H
 
-namespace KDE {
-class Section;
-}
+// Okteta core
+#include <section.h>
 
 namespace Okteta
 {
