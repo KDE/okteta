@@ -28,13 +28,13 @@ target_link_libraries( arraychangemetricstest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_
 
 ########### sectiontest ###############
 
-set( sectiontest_SRCS
-  sectiontest.cpp
-  ${SUTDIR}/section.cpp
-)
+#set( sectiontest_SRCS
+#  sectiontest.cpp
+#  ${SUTDIR}/section.cpp
+#)
 
-kde4_add_unit_test( sectiontest  TESTNAME libokteta-core-sectiontest  ${sectiontest_SRCS} )
-target_link_libraries( sectiontest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+#kde4_add_unit_test( sectiontest  TESTNAME libokteta-core-sectiontest  ${sectiontest_SRCS} )
+#target_link_libraries( sectiontest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
 
 ########### sectionlisttest ###############
