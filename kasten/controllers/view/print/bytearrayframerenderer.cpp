@@ -77,7 +77,6 @@ ByteArrayFrameRenderer::ByteArrayFrameRenderer()
 
     mStylist = new Okteta::PrintColumnStylist();
 
-    const KDE::Section emptySection;
     // creating the columns in the needed order
     mOffsetColumnRenderer =
         new Okteta::OffsetColumnRenderer( mStylist, mLayout, Okteta::OffsetFormat::Hexadecimal );
