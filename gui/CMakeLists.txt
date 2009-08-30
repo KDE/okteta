@@ -71,6 +71,10 @@ set( oktetagui_LIB_SRCS
 set( oktetagui_LIB_HDRS
   ${libcolumnsview_HDRS}
   oktetagui_export.h
+  lineposition.h
+  line.h
+  linepositionrange.h
+  linerange.h
   abstractbytearraycolumnrenderer.h
   offsetcolumnrenderer.h
   bordercolumnrenderer.h
