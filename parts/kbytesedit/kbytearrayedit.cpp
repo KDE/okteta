@@ -49,7 +49,7 @@ KByteArrayEdit::KByteArrayEdit( QWidget *parent, const QStringList & )
 void KByteArrayEdit::setData( char *D, int S, int RS, bool KM )
 {
     Okteta::ByteArrayModel *OldModel = Model;
-    Model = new Okteta::ByteArrayModel( D, S, RS, KM );
+    Model = new Okteta::ByteArrayModel( reinterpret_cast<Okteta::Byte*>(D), S, RS, KM );
 
     // get attributes
     Model->setReadOnly( OldModel->isReadOnly() );
@@ -170,7 +170,7 @@ void KByteArrayEdit::setSubstituteChar( QChar SC )
 
 char *KByteArrayEdit::data() const
 {
-    return Model->data();
+    return reinterpret_cast<char*>( Model->data() );
 }
 
 int KByteArrayEdit::dataSize() const
