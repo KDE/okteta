@@ -33,7 +33,7 @@ namespace KDE
 /** describes a range of numbers which have a distance of 1 each
   *@author Friedrich W. H.  Kossebau
   */
-template<typename N, typename S>
+template<typename N, typename S = N>
 class NumberRange : public Range<N>
 {
   public:
