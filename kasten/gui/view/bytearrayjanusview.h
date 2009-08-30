@@ -28,9 +28,6 @@
 // Qt
 #include <QtGui/QWidget>
 
-namespace KDE {
-class Section;
-}
 class QHBoxLayout;
 class QMimeData;
 
