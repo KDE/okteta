@@ -50,8 +50,6 @@ set( oktetacore_LIB_SRCS
   wordbytearrayservice.cpp
   bookmarklistconstiteratoradapter.cpp
   bookmarklist.cpp
-#   section.cpp
-  sectionlist.cpp
   addressrangelist.cpp
 )
 
@@ -79,7 +77,6 @@ set( oktetacore_LIB_HDRS
   range.h
   numberrange.h
   addressrange.h
-  section.h
   valuecodec.h
   wordbytearrayservice.h
 )

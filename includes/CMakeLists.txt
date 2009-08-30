@@ -16,7 +16,6 @@ set( oktetacore_CamelCase_HDRS
   #FileByteArrayModel
   PieceTableByteArrayModel
 
-  Section
   Character
   ArrayChangeMetrics
   ByteArrayChange
