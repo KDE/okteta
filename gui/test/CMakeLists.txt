@@ -15,7 +15,6 @@ include_directories(
 
 set( selectiontest_SRCS
   selectiontest.cpp
-  ${SUTDIR}/../core/section.cpp
 )
 
 kde4_add_unit_test( selectiontest  TESTNAME libokteta-gui-selectiontest  ${selectiontest_SRCS} )
@@ -57,7 +56,6 @@ target_link_libraries( coordrangelisttest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBR
 
 set( bytearraytablelayouttest_SRCS
   ${SUTDIR}/bytearraytablelayout.cpp
-  ${SUTDIR}/../core/section.cpp
   bytearraytablelayouttest.cpp
 )
 
@@ -76,7 +74,6 @@ set_target_properties( bytearraytablelayouttest PROPERTIES COMPILE_FLAGS "-DMAKE
 set( bytearraytablecursortest_SRCS
   ${SUTDIR}/bytearraytablecursor.cpp
   ${SUTDIR}/bytearraytablelayout.cpp
-  ${SUTDIR}/../core/section.cpp
   bytearraytablecursortest.cpp
 )
 
