@@ -23,15 +23,15 @@
 #ifndef ABSTRACTBYTEARRAYFILTER_H
 #define ABSTRACTBYTEARRAYFILTER_H
 
+// Okteta core
+#include <addressrange.h>
+#include <byte.h>
 // Qt
 #include <QtCore/QObject>
 
 class AbstractByteArrayFilterParameterSet;
 namespace Okteta {
 class AbstractByteArrayModel;
-}
-namespace KDE {
-class Section;
 }
 class QString;
 
@@ -43,12 +43,12 @@ class AbstractByteArrayFilter : public QObject
   protected:
     static const int FilteredByteCountSignalLimit = 10000;
   protected:
-    explicit AbstractByteArrayFilter( const QString &name );
+    explicit AbstractByteArrayFilter( const QString& name );
   public:
     virtual ~AbstractByteArrayFilter();
 
   public: // API to be implemented
-    virtual bool filter( char *result, Okteta::AbstractByteArrayModel *model, const KDE::Section &section ) const = 0;
+    virtual bool filter( Okteta::Byte* result, Okteta::AbstractByteArrayModel *model, const Okteta::AddressRange& range ) const = 0;
     /** used by the editor to get write access to the parameters */
     virtual AbstractByteArrayFilterParameterSet *parameterSet() = 0;
 

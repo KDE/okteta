@@ -26,7 +26,6 @@
 // lib
 #include "piecetable.h"
 //
-#include <section.h>
 #include <arraychangemetrics.h>
 // KDE
 #include <KLocale>
@@ -42,16 +41,17 @@ QString InsertPieceTableChange::description() const
     return i18nc( "name of the change", "Insert" );
 }
 
-int InsertPieceTableChange::storageOffset() const { return mStorageOffset; }
+Address InsertPieceTableChange::storageOffset() const { return mStorageOffset; }
 
-bool InsertPieceTableChange::merge( const AbstractPieceTableChange *other )
+bool InsertPieceTableChange::merge( const AbstractPieceTableChange* other )
 {
 // TODO: remove me again after synching solved
 // return false;
     bool result = false;
+
     if( other->type() == InsertId )
     {
-        const InsertPieceTableChange *otherInsertChange = static_cast<const InsertPieceTableChange *>( other );
+        const InsertPieceTableChange* otherInsertChange = static_cast<const InsertPieceTableChange *>( other );
         if( mInsertOffset+mInsertLength == otherInsertChange->mInsertOffset )
         {
             mInsertLength += otherInsertChange->mInsertLength;
@@ -62,26 +62,26 @@ bool InsertPieceTableChange::merge( const AbstractPieceTableChange *other )
     return result;
 }
 
-KDE::Section InsertPieceTableChange::apply( PieceTable *pieceTable ) const
+AddressRange InsertPieceTableChange::apply( PieceTable* pieceTable ) const
 {
     pieceTable->insert( mInsertOffset, mInsertLength, mStorageOffset );
 
-    return KDE::Section( mInsertOffset, pieceTable->size()-1 );
+    return AddressRange( mInsertOffset, pieceTable->size()-1 );
 }
 
-KDE::Section InsertPieceTableChange::revert( PieceTable *pieceTable ) const
+AddressRange InsertPieceTableChange::revert( PieceTable* pieceTable ) const
 {
-    const int oldLast = pieceTable->size() - 1;
-    pieceTable->remove( KDE::Section::fromWidth(mInsertOffset,mInsertLength) );
-    return KDE::Section( mInsertOffset, oldLast );
+    const Address oldLast = pieceTable->size() - 1;
+    pieceTable->remove( AddressRange::fromWidth(mInsertOffset,mInsertLength) );
+    return AddressRange( mInsertOffset, oldLast );
 }
 
-KDE::ArrayChangeMetrics InsertPieceTableChange::metrics() const
+ArrayChangeMetrics InsertPieceTableChange::metrics() const
 {
-    return KDE::ArrayChangeMetrics::asReplacement( mInsertOffset, 0, mInsertLength );
+    return ArrayChangeMetrics::asReplacement( mInsertOffset, 0, mInsertLength );
 }
 
-int InsertPieceTableChange::dataSize() const { return mInsertLength; }
+Size InsertPieceTableChange::dataSize() const { return mInsertLength; }
 
 InsertPieceTableChange::~InsertPieceTableChange() {}
 

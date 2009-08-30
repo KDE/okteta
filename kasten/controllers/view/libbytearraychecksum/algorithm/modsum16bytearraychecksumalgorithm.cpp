@@ -38,12 +38,12 @@ ModSum16ByteArrayChecksumAlgorithm::ModSum16ByteArrayChecksumAlgorithm()
 AbstractByteArrayChecksumParameterSet* ModSum16ByteArrayChecksumAlgorithm::parameterSet() { return &mParameterSet; }
 
 bool ModSum16ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
-                                                            const Okteta::AbstractByteArrayModel* model, const KDE::Section& section ) const
+                                                            const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const
 {
     const bool useLittleEndian = ( mParameterSet.endianness() == LittleEndian );
     quint16 modSum = useLittleEndian ?
-        calculateModSumWithLittleEndian( model, section ) :
-        calculateModSumWithBigEndian( model, section );
+        calculateModSumWithLittleEndian( model, range ) :
+        calculateModSumWithBigEndian( model, range );
 
     modSum = ~modSum + 1;
 
@@ -54,54 +54,54 @@ bool ModSum16ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
     return true;
 }
 
-quint16 ModSum16ByteArrayChecksumAlgorithm::calculateModSumWithBigEndian( const Okteta::AbstractByteArrayModel* model, const KDE::Section& section ) const
+quint16 ModSum16ByteArrayChecksumAlgorithm::calculateModSumWithBigEndian( const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const
 {
     quint16 modSum = 0x0000;
-    int nextBlockEnd = section.start() + CalculatedByteCountSignalLimit;
+    Okteta::Address nextBlockEnd = range.start() + CalculatedByteCountSignalLimit;
 
     // TODO: move padding checks into extra code before and after loop
-    for( int i = section.start(); i<=section.end(); ++i )
+    for( Okteta::Address i = range.start(); i<=range.end(); ++i )
     {
-        quint16 value = (quint16)( (quint8)(model->datum( i )) ) << 8;
+        quint16 value = (quint16)( (quint8)(model->byte( i )) ) << 8;
         ++i;
-        if( i<=section.end() )
-            value |= (quint16)( (quint8)(model->datum( i )) );
+        if( i<=range.end() )
+            value |= (quint16)( (quint8)(model->byte( i )) );
 
         modSum += value;
 #if 0
-        const uchar value = (crcBits & 0xFF) + model->datum( i );
+        const uchar value = (crcBits & 0xFF) + model->byte( i );
         crcBits >>= 8;
         crcBits ^= lookupTable[value];
 #endif
         if( i >= nextBlockEnd )
         {
             nextBlockEnd += CalculatedByteCountSignalLimit;
-            emit calculatedBytes( section.localIndex(i)+1 );
+            emit calculatedBytes( range.localIndex(i)+1 );
         }
     }
 
     return modSum;
 }
 
-quint16 ModSum16ByteArrayChecksumAlgorithm::calculateModSumWithLittleEndian( const Okteta::AbstractByteArrayModel* model, const KDE::Section& section ) const
+quint16 ModSum16ByteArrayChecksumAlgorithm::calculateModSumWithLittleEndian( const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const
 {
     quint16 modSum = 0x0000;
-    int nextBlockEnd = section.start() + CalculatedByteCountSignalLimit;
+    Okteta::Address nextBlockEnd = range.start() + CalculatedByteCountSignalLimit;
 
     // TODO: move padding checks into extra code before and after loop
-    for( int i = section.start(); i<=section.end(); ++i )
+    for( Okteta::Address i = range.start(); i<=range.end(); ++i )
     {
-        quint16 value = (quint16)( (quint8)(model->datum( i )) );
+        quint16 value = (quint16)( (quint8)(model->byte( i )) );
         ++i;
-        if( i<=section.end() )
-            value |= (quint16)( (quint8)(model->datum( i )) ) << 8;
+        if( i<=range.end() )
+            value |= (quint16)( (quint8)(model->byte( i )) ) << 8;
 
         modSum += value;
 
         if( i >= nextBlockEnd )
         {
             nextBlockEnd += CalculatedByteCountSignalLimit;
-            emit calculatedBytes( section.localIndex(i)+1 );
+            emit calculatedBytes( range.localIndex(i)+1 );
         }
     }
 

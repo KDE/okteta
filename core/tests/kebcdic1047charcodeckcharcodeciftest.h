@@ -23,16 +23,20 @@
 #ifndef KEBCDIC1047CHARCODECKCHARCODECIFTEST_H
 #define KEBCDIC1047CHARCODECKCHARCODECIFTEST_H
 
-
 // test
 #include "kcharcodeciftest.h"
 
 
+namespace Okteta
+{
+
 class KEBCDIC1047CharCodecKCharCodecIfTest : public KCharCodecIfTest
 {
   protected: // KCharCodecIfTest API
-    virtual Okteta::CharCodec *createCodec();
-    virtual void deleteCodec( Okteta::CharCodec *Codec );
+    virtual CharCodec* createCodec();
+    virtual void deleteCodec( CharCodec* codec );
 };
+
+}
 
 #endif

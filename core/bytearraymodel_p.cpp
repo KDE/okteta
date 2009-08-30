@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Core library, part of the KDE project.
 
-    Copyright 2003,2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -27,8 +27,8 @@
 #include <stdlib.h>
 
 
-static const unsigned int minChunkSize = 512;
-static const unsigned int maxChunkSize = 1024*10; // TODO: get max. memory page size
+static const int minChunkSize = 512;
+static const int maxChunkSize = 1024*10; // TODO: get max. memory page size
 
 // TODO: think about realloc & Co.
 
@@ -37,234 +37,236 @@ namespace Okteta
 
 
 ByteArrayModelPrivate::ByteArrayModelPrivate( ByteArrayModel *parent,
-                                                char *data, unsigned int size, int rawSize, bool keepsMemory )
+                                              Byte* data, int size, int rawSize, bool keepsMemory )
  : p( parent ),
-   m_data( data ),
-   m_size( size ),
-   m_rawSize( rawSize<(int)size?size:rawSize ),
-   m_maxSize( -1 ),
-   m_keepsMemory( keepsMemory ),
-   m_autoDelete( false ),
-   m_readOnly( true ),
-   m_modified( false )
+   mData( data ),
+   mSize( size ),
+   mRawSize( rawSize<size?size:rawSize ),
+   mMaxSize( -1 ),
+   mKeepsMemory( keepsMemory ),
+   mAutoDelete( false ),
+   mReadOnly( true ),
+   mModified( false )
 {
 }
 
 ByteArrayModelPrivate::ByteArrayModelPrivate( ByteArrayModel *parent,
-                                                const char *data, unsigned int size )
+                                              const Byte* data, int size )
  : p( parent ),
-   m_data( (char *)data ),
-   m_size( size ),
-   m_rawSize( size ),
-   m_maxSize( -1 ),
-   m_keepsMemory( true ),
-   m_autoDelete( false ),
-   m_readOnly( true ),
-   m_modified( false )
+   mData( const_cast<Byte*>(data) ),
+   mSize( size ),
+   mRawSize( size ),
+   mMaxSize( -1 ),
+   mKeepsMemory( true ),
+   mAutoDelete( false ),
+   mReadOnly( true ),
+   mModified( false )
 {
 }
 
 ByteArrayModelPrivate::ByteArrayModelPrivate( ByteArrayModel *parent,
-                                                int size, int maxSize )
+                                              int size, int maxSize )
  : p( parent ),
-   m_data( (size>0) ? new char[size] : 0 ),
-   m_size( size ),
-   m_rawSize( size ),
-   m_maxSize( maxSize ),
-   m_keepsMemory( false ),
-   m_autoDelete( true ),
-   m_readOnly( false ),
-   m_modified( false )
+   mData( (size>0) ? new Byte[size] : 0 ),
+   mSize( size ),
+   mRawSize( size ),
+   mMaxSize( maxSize ),
+   mKeepsMemory( false ),
+   mAutoDelete( true ),
+   mReadOnly( false ),
+   mModified( false )
 {
 }
 
-void ByteArrayModelPrivate::setData( char *data, unsigned int size, int rawSize, bool keepMemory )
+void ByteArrayModelPrivate::setData( Byte* data, int size, int rawSize, bool keepMemory )
 {
-    if( m_autoDelete )
-        delete m_data;
-    const int oldSize = m_size;
+    if( mAutoDelete )
+        delete mData;
+    const int oldSize = mSize;
 
-    m_data = data;
-    m_size = size;
-    m_rawSize = (rawSize<(int)size) ? size : rawSize;
-    if( m_maxSize != -1 && m_maxSize < (int)size )
-        m_maxSize = size;
-    m_keepsMemory = keepMemory;
+    mData = data;
+    mSize = size;
+    mRawSize = (rawSize<size) ? size : rawSize;
+    if( mMaxSize != -1 && mMaxSize < size )
+        mMaxSize = size;
+    mKeepsMemory = keepMemory;
 
-    m_modified = false;
-    emit p->contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(0, oldSize, size) );
+    mModified = false;
+    emit p->contentsChanged( ArrayChangeMetricsList::oneReplacement(0, oldSize, size) );
     emit p->modifiedChanged( false );
 }
 
 
-int ByteArrayModelPrivate::insert( int position, const char* data, int length )
+Size ByteArrayModelPrivate::insert( Address offset, const Byte* insertData, int insertLength )
 {
-    if( m_readOnly )
+    if( mReadOnly )
         return 0;
     // check all parameters
-    if( length == 0 )
+    if( insertLength == 0 )
       return 0;
 
-    const bool wasModifiedBefore = m_modified;
+    const bool wasModifiedBefore = mModified;
 
     // correct for appending
-    if( position > (int)m_size )
-        position = m_size;
+    if( offset > mSize )
+        offset = mSize;
 
-    length = addSize( length, position, true );
+    insertLength = addSize( insertLength, offset, true );
 
     // copy new data to its place
-    memcpy( &m_data[position], data, length );
+    memcpy( &mData[offset], insertData, insertLength );
 
-    const bool bookmarksModified = m_bookmarks.adjustToReplaced( position, 0, length );
-    m_modified = true;
+    const bool bookmarksModified = m_bookmarks.adjustToReplaced( offset, 0, insertLength );
+    mModified = true;
 
-    emit p->contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(position, 0, length) );
+    emit p->contentsChanged( ArrayChangeMetricsList::oneReplacement(offset, 0, insertLength) );
     if( bookmarksModified ) emit p->bookmarksModified( true );
     if( ! wasModifiedBefore )
         emit p->modifiedChanged( true );
-    return length;
+
+    return insertLength;
 }
 
 
-int ByteArrayModelPrivate::remove( const KDE::Section& section )
+Size ByteArrayModelPrivate::remove( const AddressRange& _removeRange )
 {
-    if( m_readOnly )
+    if( mReadOnly )
         return 0;
 
-    KDE::Section removeSection( section );
-    if( removeSection.startsBehind(m_size-1) || removeSection.width() == 0 )
+    AddressRange removeRange( _removeRange );
+    if( removeRange.startsBehind(mSize-1) || removeRange.width() == 0 )
         return 0;
 
-    const bool wasModifiedBefore = m_modified;
+    const bool wasModifiedBefore = mModified;
 
-    removeSection.restrictEndTo( m_size-1 );
+    removeRange.restrictEndTo( mSize-1 );
 
-    const unsigned int behindRemovePos = removeSection.nextBehindEnd();
+    const Address behindRemovePos = removeRange.nextBehindEnd();
     // move right data behind the input range
-    memmove( &m_data[removeSection.start()], &m_data[behindRemovePos], m_size-behindRemovePos );
+    memmove( &mData[removeRange.start()], &mData[behindRemovePos], mSize-behindRemovePos );
 
     // set new values
-    m_size -= removeSection.width();
+    mSize -= removeRange.width();
 
-    const bool bookmarksModified = m_bookmarks.adjustToReplaced( removeSection.start(), removeSection.width(), 0 );
-    m_modified = true;
+    const bool bookmarksModified = m_bookmarks.adjustToReplaced( removeRange.start(), removeRange.width(), 0 );
+    mModified = true;
 
-    emit p->contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(removeSection.start(), removeSection.width(), 0) );
+    emit p->contentsChanged( ArrayChangeMetricsList::oneReplacement(removeRange.start(), removeRange.width(), 0) );
     if( bookmarksModified ) emit p->bookmarksModified( true );
     if( ! wasModifiedBefore )
         emit p->modifiedChanged( true );
-    return removeSection.width();
+
+    return removeRange.width();
 }
 
 
-unsigned int ByteArrayModelPrivate::replace( const KDE::Section& section, const char* data, unsigned int inputLength )
+Size ByteArrayModelPrivate::replace( const AddressRange& _removeRange, const Byte* insertData, int insertLength )
 {
-    if( m_readOnly )
+    if( mReadOnly )
         return 0;
 
-    KDE::Section removeSection( section );
+    AddressRange removeRange( _removeRange );
     // check all parameters
-    if( removeSection.start() >= (int)m_size || (removeSection.width()==0 && inputLength==0) )
+    if( removeRange.start() >= mSize || (removeRange.width()==0 && insertLength==0) )
         return 0;
 
-    const bool wasModifiedBefore = m_modified;
+    const bool wasModifiedBefore = mModified;
 
-    removeSection.restrictEndTo( m_size-1 );
+    removeRange.restrictEndTo( mSize-1 );
 
-    const int sizeDiff = inputLength - removeSection.width();
-    unsigned int newSize = m_size + sizeDiff;
+    const Size sizeDiff = insertLength - removeRange.width();
+    int newSize = mSize + sizeDiff;
     // check if buffer does not get to big TODO: make algo simplier and less if else
-    if( m_maxSize != -1 && (int)newSize > m_maxSize)
+    if( mMaxSize != -1 && newSize > mMaxSize)
     {
-        if( (int)m_size == m_maxSize )
+        if( mSize == mMaxSize )
             return 0;
-        inputLength -= newSize - m_maxSize;
-        newSize = m_maxSize;
+        insertLength -= newSize - mMaxSize;
+        newSize = mMaxSize;
     }
-    else if( m_keepsMemory && newSize > m_rawSize )
+    else if( mKeepsMemory && newSize > mRawSize )
     {
-        if( m_size == m_rawSize )
+        if( mSize == mRawSize )
             return 0;
-        inputLength -= newSize - m_rawSize;
-        newSize = m_rawSize;
+        insertLength -= newSize - mRawSize;
+        newSize = mRawSize;
     }
 
-    const int behindInsertPos = removeSection.start() + inputLength;
-    const int behindRemovePos = removeSection.nextBehindEnd();
+    const Address behindInsertPos = removeRange.start() + insertLength;
+    const Address behindRemovePos = removeRange.nextBehindEnd();
 
     // raw array not big enough?
-    if( m_rawSize < newSize )
+    if( mRawSize < newSize )
     {
         // create new buffer
-        char *newData = new char[newSize];
+        Byte* newData = new Byte[newSize];
         if( newData == 0 )
             return 0;
 
         // move old data to its (new) places
-        memcpy( newData, m_data, removeSection.start() );
-        memcpy( &newData[behindInsertPos], &m_data[behindRemovePos], m_size-behindRemovePos );
+        memcpy( newData, mData, removeRange.start() );
+        memcpy( &newData[behindInsertPos], &mData[behindRemovePos], mSize-behindRemovePos );
 
         // remove old
-        delete [] m_data;
+        delete [] mData;
         // set new values
-        m_data = newData;
-        m_rawSize = newSize;
+        mData = newData;
+        mRawSize = newSize;
     }
     else
         // move old data to its (new) places
-        memmove( &m_data[behindInsertPos], &m_data[behindRemovePos], m_size-behindRemovePos );
+        memmove( &mData[behindInsertPos], &mData[behindRemovePos], mSize-behindRemovePos );
 
     // copy new data to its place
-    memcpy( &m_data[removeSection.start()], data, inputLength );
+    memcpy( &mData[removeRange.start()], insertData, insertLength );
 
     // set new values
-    m_size = newSize;
+    mSize = newSize;
 
-    const bool bookmarksModified = m_bookmarks.adjustToReplaced( removeSection.start(), removeSection.width(), inputLength );
-    m_modified = true;
+    const bool bookmarksModified = m_bookmarks.adjustToReplaced( removeRange.start(), removeRange.width(), insertLength );
+    mModified = true;
 
     emit p->contentsChanged(
-        KDE::ArrayChangeMetricsList::oneReplacement(removeSection.start(), removeSection.width(), inputLength) );
+        ArrayChangeMetricsList::oneReplacement(removeRange.start(), removeRange.width(), insertLength) );
     if( bookmarksModified ) emit p->bookmarksModified( true );
     if( ! wasModifiedBefore )
         emit p->modifiedChanged( true );
-    return inputLength;
+    return insertLength;
 }
 
 
-bool ByteArrayModelPrivate::swap( int firstStart, const KDE::Section& secondSection )
+bool ByteArrayModelPrivate::swap( Address firstStart, const AddressRange& _secondRange )
 {
-    if( m_readOnly )
+    if( mReadOnly )
         return false;
 
-    KDE::Section sourceSection( secondSection );
+    AddressRange secondRange( _secondRange );
     // check all parameters
-    if( sourceSection.start() >= (int)m_size || sourceSection.width() == 0
-        || firstStart > (int)m_size || sourceSection.start() == firstStart )
+    if( secondRange.start() >= mSize || secondRange.width() == 0
+        || firstStart > mSize || secondRange.start() == firstStart )
         return false;
 
-    const bool wasModifiedBefore = m_modified;
+    const bool wasModifiedBefore = mModified;
 
-    sourceSection.restrictEndTo( m_size-1 );
-    const bool toRight = firstStart > sourceSection.start();
-    const int movedLength = sourceSection.width();
-    const int displacedLength = toRight ?  firstStart - sourceSection.end()-1 : sourceSection.start() - firstStart;
+    secondRange.restrictEndTo( mSize-1 );
+    const bool toRight = firstStart > secondRange.start();
+    const Size movedLength = secondRange.width();
+    const Size displacedLength = toRight ?  firstStart - secondRange.end()-1 : secondRange.start() - firstStart;
 
     // find out section that is smaller
-    int smallPartLength, largePartLength, smallPartStart, largePartStart, smallPartDest, largePartDest;
+    Size smallPartLength, largePartLength, smallPartStart, largePartStart, smallPartDest, largePartDest;
     // moving part is smaller?
     if( movedLength < displacedLength )
     {
-        smallPartStart = sourceSection.start();
+        smallPartStart = secondRange.start();
         smallPartLength = movedLength;
         largePartLength = displacedLength;
         // moving part moves right?
         if( toRight )
         {
             smallPartDest = firstStart - movedLength;
-            largePartStart = sourceSection.nextBehindEnd();
-            largePartDest = sourceSection.start();
+            largePartStart = secondRange.nextBehindEnd();
+            largePartDest = secondRange.start();
         }
         else
         {
@@ -275,15 +277,15 @@ bool ByteArrayModelPrivate::swap( int firstStart, const KDE::Section& secondSect
     }
     else
     {
-        largePartStart = sourceSection.start();
+        largePartStart = secondRange.start();
         largePartLength = movedLength;
         smallPartLength = displacedLength;
         // moving part moves right?
         if( toRight )
         {
             largePartDest = firstStart - movedLength;
-            smallPartStart = sourceSection.nextBehindEnd();
-            smallPartDest = sourceSection.start();
+            smallPartStart = secondRange.nextBehindEnd();
+            smallPartDest = secondRange.start();
         }
         else
         {
@@ -294,23 +296,23 @@ bool ByteArrayModelPrivate::swap( int firstStart, const KDE::Section& secondSect
     }
 
     // copy smaller part to tempbuffer
-    char *temp = new char[smallPartLength];
-    memcpy( temp, &m_data[smallPartStart], smallPartLength );
+    Byte* temp = new Byte[smallPartLength];
+    memcpy( temp, &mData[smallPartStart], smallPartLength );
 
     // move the larger part
-    memmove( &m_data[largePartDest], &m_data[largePartStart], largePartLength );
+    memmove( &mData[largePartDest], &mData[largePartStart], largePartLength );
 
     // copy smaller part to its new dest
-    memcpy( &m_data[smallPartDest], temp, smallPartLength );
+    memcpy( &mData[smallPartDest], temp, smallPartLength );
     delete [] temp;
 
     const bool bookmarksModified = toRight ?
-        m_bookmarks.adjustToSwapped( sourceSection.start(), sourceSection.nextBehindEnd(), firstStart-sourceSection.end()-1 ) :
-        m_bookmarks.adjustToSwapped( firstStart, sourceSection.start(),sourceSection.width() );
-    m_modified = true;
+        m_bookmarks.adjustToSwapped( secondRange.start(), secondRange.nextBehindEnd(), firstStart-secondRange.end()-1 ) :
+        m_bookmarks.adjustToSwapped( firstStart, secondRange.start(),secondRange.width() );
+    mModified = true;
 
     emit p->contentsChanged(
-        KDE::ArrayChangeMetricsList::oneSwapping(firstStart,sourceSection.start(),sourceSection.width()) );
+        ArrayChangeMetricsList::oneSwapping(firstStart,secondRange.start(),secondRange.width()) );
     if( bookmarksModified ) emit p->bookmarksModified( true );
     if( ! wasModifiedBefore )
         emit p->modifiedChanged( true );
@@ -318,43 +320,43 @@ bool ByteArrayModelPrivate::swap( int firstStart, const KDE::Section& secondSect
 }
 
 
-int ByteArrayModelPrivate::fill( const char fillDatum, unsigned int position, int fillLength )
+Size ByteArrayModelPrivate::fill( const Byte fillByte, Address offset, Size fillLength )
 {
-    if( m_readOnly )
+    if( mReadOnly )
         return 0;
 
     // nothing to fill
-    if( position >= m_size )
+    if( offset >= mSize )
         return 0;
 
-    const bool wasModifiedBefore = m_modified;
+    const bool wasModifiedBefore = mModified;
 
-    const int lengthToEnd = m_size - position;
+    const Size lengthToEnd = mSize - offset;
 
     if( fillLength < 0 )
         fillLength = lengthToEnd;
     else if( fillLength > lengthToEnd )
-        fillLength = addSize( fillLength, position, false );
+        fillLength = addSize( fillLength, offset, false );
 
-    memset( &m_data[position], fillDatum, fillLength );
-    m_modified = true;
+    memset( &mData[offset], fillByte, fillLength );
+    mModified = true;
 
-    emit p->contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(position,fillLength,fillLength) );
+    emit p->contentsChanged( ArrayChangeMetricsList::oneReplacement(offset,fillLength,fillLength) );
     if( ! wasModifiedBefore )
         emit p->modifiedChanged( true );
     return fillLength;
 }
 
 
-int ByteArrayModelPrivate::indexOf( const char *searchString, int length, int from ) const
+Address ByteArrayModelPrivate::indexOf( const Byte* pattern, int patternLength, Address fromOffset ) const
 {
-    int result = -1;
+    Address result = -1;
 
-    const int lastFrom = m_size - length;
+    const Address lastFrom = mSize - patternLength;
 
-    for( int i=from; i<=lastFrom ; ++i )
+    for( Address i=fromOffset; i<=lastFrom ; ++i )
     {
-        int c = memcmp( &m_data[i], searchString, length );
+        int c = memcmp( &mData[i], pattern, patternLength );
 
         if( c == 0 )
         {
@@ -366,20 +368,20 @@ int ByteArrayModelPrivate::indexOf( const char *searchString, int length, int fr
     return result;
 }
 
-int ByteArrayModelPrivate::lastIndexOf( const char *searchString, int length, int from ) const
+Address ByteArrayModelPrivate::lastIndexOf( const Byte* pattern, int patternLength, Address fromOffset ) const
 {
-    int result = -1;
+    Address result = -1;
 
-    const int lastFrom = size() - length;
+    const Address lastFrom = size() - patternLength;
 
-    if( from < 0 )
-        from = lastFrom + 1 + from;
-    else if( from > lastFrom )
-        from = lastFrom;
+    if( fromOffset < 0 )
+        fromOffset = lastFrom + 1 + fromOffset;
+    else if( fromOffset > lastFrom )
+        fromOffset = lastFrom;
 
-    for( int i=from; i>=0 ; --i )
+    for( Address i=fromOffset; i>=0 ; --i )
     {
-        int c = memcmp( &m_data[i], searchString, length );
+        int c = memcmp( &mData[i], pattern, patternLength );
 
         if( c == 0 )
         {
@@ -394,32 +396,32 @@ int ByteArrayModelPrivate::lastIndexOf( const char *searchString, int length, in
 
 int ByteArrayModelPrivate::addSize( int addSize, int splitPosition, bool saveUpperPart )
 {
-    if( m_readOnly )
+    if( mReadOnly )
         return 0;
 
-    unsigned int newSize = m_size + addSize;
+    int newSize = mSize + addSize;
     // check if buffer does not get too big
-    if( m_maxSize != -1 && (int)newSize > m_maxSize )
+    if( mMaxSize != -1 && newSize > mMaxSize )
     {
-        if( (int)m_size == m_maxSize )
+        if( mSize == mMaxSize )
             return 0;
-        newSize = m_maxSize;
-        addSize = newSize - m_size;
+        newSize = mMaxSize;
+        addSize = newSize - mSize;
     }
-    else if( m_keepsMemory && newSize > m_rawSize )
+    else if( mKeepsMemory && newSize > mRawSize )
     {
-        if( m_size == m_rawSize )
+        if( mSize == mRawSize )
             return 0;
-        newSize = m_rawSize;
-        addSize = newSize - m_size;
+        newSize = mRawSize;
+        addSize = newSize - mSize;
     }
 
     const int BehindSplitPos = splitPosition + addSize;
     // raw array not big enough?
-    if( m_rawSize < newSize )
+    if( mRawSize < newSize )
     {
         // get new raw size
-        unsigned int chunkSize = minChunkSize;
+        int chunkSize = minChunkSize;
         // find chunk size where newsize fits into
         while( chunkSize < newSize )
             chunkSize <<= 1;
@@ -427,33 +429,33 @@ int ByteArrayModelPrivate::addSize( int addSize, int splitPosition, bool saveUpp
         if( chunkSize > maxChunkSize )
             chunkSize = maxChunkSize;
         // find add size
-        unsigned int NewRawSize = chunkSize;
+        int NewRawSize = chunkSize;
         while( NewRawSize<newSize )
             NewRawSize += chunkSize;
         // create new buffer
-        char *newData = new char[NewRawSize];
+        Byte* newData = new Byte[NewRawSize];
 
         // move old data to its (new) places
-        memcpy( newData, m_data, splitPosition );
+        memcpy( newData, mData, splitPosition );
         if( saveUpperPart )
-            memcpy( &newData[BehindSplitPos], &m_data[splitPosition], m_size-splitPosition );
+            memcpy( &newData[BehindSplitPos], &mData[splitPosition], mSize-splitPosition );
 
         // remove old
-        delete [] m_data;
+        delete [] mData;
         // set new values
-        m_data = newData;
-        m_rawSize = NewRawSize;
+        mData = newData;
+        mRawSize = NewRawSize;
     }
     // old buffer kept
     else
     {
         if( saveUpperPart )
             // move old data to its (new) places
-        memmove( &m_data[BehindSplitPos], &m_data[splitPosition], m_size-splitPosition );
+        memmove( &mData[BehindSplitPos], &mData[splitPosition], mSize-splitPosition );
     }
 
     // set new values
-    m_size = newSize;
+    mSize = newSize;
 
     return addSize;
 }

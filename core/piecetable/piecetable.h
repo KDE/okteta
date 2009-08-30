@@ -23,11 +23,11 @@
 #ifndef KPIECETABLE_PIECETABLE_H
 #define KPIECETABLE_PIECETABLE_H
 
-
 // lib
 #include "piecelist.h"
 // Qt
 #include <QtCore/QLinkedList>
+
 
 namespace KPieceTable
 {
@@ -35,33 +35,33 @@ namespace KPieceTable
 class PieceTable
 {
   public:
-    explicit PieceTable( int size = 0 );
+    explicit PieceTable( Size size = 0 );
 
   public:
-    void init( int size );
-    void insert( int insertDataOffset, int insertLength, int storageOffset );
+    void init( Size size );
+    void insert( Address insertDataOffset, Size insertLength, Address storageOffset );
     /// for use to reapply
-    void insert( int insertDataOffset, const PieceList &insertPieceList );
-    PieceList remove( const KDE::Section &removeSection );
-    PieceList replace( const KDE::Section &removeSection,
-                       int insertLength, int storageOffset );
+    void insert( Address insertDataOffset, const PieceList& insertPieceList );
+    PieceList remove( const AddressRange& removeRange );
+    PieceList replace( const AddressRange& removeRange,
+                       Size insertLength, Address storageOffset );
     /// for use to reapply
-    void replace( const KDE::Section &removeSection, const PieceList &insertPieceList );
-    void swap( int firstStart, const KDE::Section &secondSection );
-    Piece replaceOne( int dataOffset, int storageOffset, int storageId = Piece::ChangeStorage );
+    void replace( const AddressRange& removeRange, const PieceList& insertPieceList );
+    void swap( Address firstStart, const AddressRange& secondRange );
+    Piece replaceOne( Address dataOffset, Address storageOffset, int storageId = Piece::ChangeStorage );
 
 //     int fill( const char FillChar, unsigned int Pos = 0, int Length = -1 ); TODO: filter change, calculated
 
   public:
-    bool getStorageData( int *storageId, int *storageOffset, int dataOffset ) const;
-    int size() const;
+    bool getStorageData( int* storageId, Address* storageOffset, Address dataOffset ) const;
+    Size size() const;
 
   protected:
     QLinkedList<Piece> mList;
-    int mSize;
+    Size mSize;
 };
 
-inline int PieceTable::size() const { return mSize; }
+inline Size PieceTable::size() const { return mSize; }
 
 }
 

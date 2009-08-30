@@ -54,7 +54,7 @@ class AbstractByteArrayViewPrivate
     virtual ~AbstractByteArrayViewPrivate();
 
   public: // value access
-    Okteta::AbstractByteArrayModel* byteArrayModel() const;
+    AbstractByteArrayModel* byteArrayModel() const;
 
     // TODO: needed?
     bool isModified() const;
@@ -65,20 +65,20 @@ class AbstractByteArrayViewPrivate
     bool isEffectiveReadOnly() const;
 
     /** returns the index of the cursor position */
-    int cursorPosition() const;
+    Address cursorPosition() const;
     /***/
     bool isCursorBehind() const;
 
     int noOfBytesPerLine() const;
-    int startOffset() const;
-    int firstLineOffset() const;
+    Address startOffset() const;
+    Address firstLineOffset() const;
 
     AbstractByteArrayView::ResizeStyle resizeStyle() const;
 
     bool tabChangesFocus() const;
 
     bool hasSelectedData() const;
-    KDE::Section selection() const;
+    AddressRange selection() const;
     QByteArray selectedData() const;
     QMimeData* selectionAsMimeData() const;
 
@@ -92,9 +92,9 @@ class AbstractByteArrayViewPrivate
     ByteArrayTableCursor* tableCursor() const;
     ByteArrayTableRanges* tableRanges() const;
 
-    const Okteta::ValueCodec* valueCodec() const;
+    const ValueCodec* valueCodec() const;
     AbstractByteArrayView::ValueCoding valueCoding() const;
-    const Okteta::CharCodec* charCodec() const;
+    const CharCodec* charCodec() const;
     AbstractByteArrayView::CharCoding charCoding() const;
     const QString& charCodingName() const;
 
@@ -102,7 +102,7 @@ class AbstractByteArrayViewPrivate
 
   public:
     void init();
-    void setByteArrayModel( Okteta::AbstractByteArrayModel* byteArrayModel );
+    void setByteArrayModel( AbstractByteArrayModel* byteArrayModel );
     // TODO: delete old controller?
     void setController( KController* controller );
     void setWheelController( AbstractWheelController* wheelController );
@@ -116,8 +116,8 @@ class AbstractByteArrayViewPrivate
     void setCharCoding( const QString& charCodingName );
     void setResizeStyle( AbstractByteArrayView::ResizeStyle resizeStyle );
     void setNoOfBytesPerLine( int noOfBytesPerLine );
-    void setStartOffset( int startOffset );
-    void setFirstLineOffset( int firstLineOffset );
+    void setStartOffset( Address startOffset );
+    void setFirstLineOffset( Address firstLineOffset );
     void setModified( bool modified );
 
     void setTabChangesFocus( bool tabChangesFocus = true );
@@ -134,11 +134,11 @@ class AbstractByteArrayViewPrivate
 
   public: // interaction
     void selectAll( bool select );
-    bool selectWord( /*unsigned*/ int index /*, Chartype*/ );
-    void setSelection( const KDE::Section& selection );
+    bool selectWord( Address index /*, Chartype*/ );
+    void setSelection( const AddressRange& selection );
 
-    void setCursorPosition( int index, bool isBehind );
-    void setSelectionCursorPosition( int index );
+    void setCursorPosition( Address index, bool isBehind );
+    void setSelectionCursorPosition( Address index );
 
   public: // API to be implemented
     virtual void ensureCursorVisible() = 0;
@@ -156,8 +156,8 @@ class AbstractByteArrayViewPrivate
     void dropEvent( QDropEvent* dropEvent );
 
   public: // slots
-    void onContentsChanged( const KDE::ArrayChangeMetricsList& changeList );
-    void onBookmarksChange( const QList<Okteta::Bookmark>& bookmarks );
+    void onContentsChanged( const ArrayChangeMetricsList& changeList );
+    void onBookmarksChange( const QList<Bookmark>& bookmarks );
     void onRevertedToVersionIndex( int versionIndex );
     void onByteArrayReadOnlyChange( bool isByteArrayReadOnly );
 
@@ -194,7 +194,7 @@ class AbstractByteArrayViewPrivate
     virtual void setActiveCoding( AbstractByteArrayView::CodingTypeId codingId ) = 0;
     virtual void setVisibleCodings( int visibleCodings ) = 0;
 
-    virtual int indexByPoint( const QPoint& point ) const = 0;
+    virtual Address indexByPoint( const QPoint& point ) const = 0;
 
   protected: // API to be implemented
     virtual AbstractByteArrayView::CodingTypeId activeCoding() const = 0;
@@ -206,7 +206,7 @@ class AbstractByteArrayViewPrivate
     virtual void updateChanged() = 0;
 
   protected:
-    Okteta::AbstractByteArrayModel* mByteArrayModel;
+    AbstractByteArrayModel* mByteArrayModel;
 
     /** the current input controller */
     KController* mController;
@@ -253,11 +253,11 @@ class AbstractByteArrayViewPrivate
 
     // parameters
     /** */
-    Okteta::ValueCodec* mValueCodec;
+    ValueCodec* mValueCodec;
     /** */
     AbstractByteArrayView::ValueCoding mValueCoding;
     /** */
-    Okteta::CharCodec* mCharCodec;
+    CharCodec* mCharCodec;
     /** */
     AbstractByteArrayView::CharCoding mCharCoding;
     /** style of resizing */
@@ -269,7 +269,7 @@ class AbstractByteArrayViewPrivate
 };
 
 
-inline Okteta::AbstractByteArrayModel* AbstractByteArrayViewPrivate::byteArrayModel() const { return mByteArrayModel; }
+inline AbstractByteArrayModel* AbstractByteArrayViewPrivate::byteArrayModel() const { return mByteArrayModel; }
 inline KController* AbstractByteArrayViewPrivate::controller() const { return mController; }
 inline AbstractWheelController* AbstractByteArrayViewPrivate::wheelController() const { return mWheelController; }
 
@@ -283,23 +283,23 @@ inline ByteArrayTableLayout* AbstractByteArrayViewPrivate::layout()      const {
 inline ByteArrayTableCursor* AbstractByteArrayViewPrivate::tableCursor() const { return mTableCursor; }
 inline ByteArrayTableRanges* AbstractByteArrayViewPrivate::tableRanges() const { return mTableRanges; }
 
-inline const Okteta::ValueCodec* AbstractByteArrayViewPrivate::valueCodec()  const { return mValueCodec; }
+inline const ValueCodec* AbstractByteArrayViewPrivate::valueCodec()  const { return mValueCodec; }
 inline AbstractByteArrayView::ValueCoding AbstractByteArrayViewPrivate::valueCoding() const { return mValueCoding; }
-inline const Okteta::CharCodec* AbstractByteArrayViewPrivate::charCodec()   const { return mCharCodec; }
+inline const CharCodec* AbstractByteArrayViewPrivate::charCodec()   const { return mCharCodec; }
 inline AbstractByteArrayView::CharCoding AbstractByteArrayViewPrivate::charCoding() const
 {
     return (AbstractByteArrayView::CharCoding)mCharCoding;
 }
 inline const QString& AbstractByteArrayViewPrivate::charCodingName() const { return mCharCodec->name(); }
 inline AbstractByteArrayView::ResizeStyle AbstractByteArrayViewPrivate::resizeStyle() const { return mResizeStyle; }
-inline int AbstractByteArrayViewPrivate::cursorPosition()   const { return mTableCursor->realIndex(); }
+inline Address AbstractByteArrayViewPrivate::cursorPosition()   const { return mTableCursor->realIndex(); }
 inline bool AbstractByteArrayViewPrivate::isCursorBehind()  const { return mTableCursor->isBehind(); }
 inline bool AbstractByteArrayViewPrivate::isModified()      const { return mByteArrayModel->isModified(); }
 inline int AbstractByteArrayViewPrivate::noOfBytesPerLine() const { return mTableLayout->noOfBytesPerLine(); }
-inline int AbstractByteArrayViewPrivate::firstLineOffset()  const { return mTableLayout->firstLineOffset(); }
-inline int AbstractByteArrayViewPrivate::startOffset()      const { return mTableLayout->startOffset(); }
+inline Address AbstractByteArrayViewPrivate::firstLineOffset()  const { return mTableLayout->firstLineOffset(); }
+inline Address AbstractByteArrayViewPrivate::startOffset()      const { return mTableLayout->startOffset(); }
 
-inline KDE::Section AbstractByteArrayViewPrivate::selection() const { return mTableRanges->selection(); }
+inline AddressRange AbstractByteArrayViewPrivate::selection() const { return mTableRanges->selection(); }
 inline bool AbstractByteArrayViewPrivate::hasSelectedData()    const { return mTableRanges->hasSelection(); }
 
 inline bool AbstractByteArrayViewPrivate::tabChangesFocus()      const { return mTabController->tabChangesFocus(); }

@@ -23,6 +23,10 @@
 #ifndef OKTETA_DROPPER_H
 #define OKTETA_DROPPER_H
 
+// Okteta core
+#include <address.h>
+
+
 class QDragEnterEvent;
 class QDragMoveEvent;
 class QDragLeaveEvent;
@@ -38,6 +42,7 @@ class Dropper
 {
   public:
     explicit Dropper( AbstractByteArrayView* view );
+
     ~Dropper();
 
   public: // AbstractMouseController API
@@ -55,7 +60,7 @@ class Dropper
   protected:
     AbstractByteArrayView* mByteArrayView;
 
-    int mBeforeDragCursorPos;
+    Address mBeforeDragCursorPos;
     bool mBeforeDragCursorIsBehind:1;
     bool mCursorIsMovedByDrag:1;
 

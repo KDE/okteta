@@ -23,9 +23,9 @@
 #ifndef REMOVEPIECETABLECHANGEABSTRACTPIECETABLECHANGEIFTEST_H
 #define REMOVEPIECETABLECHANGEABSTRACTPIECETABLECHANGEIFTEST_H
 
-
 // test
 #include "abstractpiecetablechangeiftest.h"
+
 
 namespace KPieceTable
 {

@@ -23,10 +23,10 @@
 #ifndef KPIECETABLE_REPLACEPIECETABLECHANGE_H
 #define KPIECETABLE_REPLACEPIECETABLECHANGE_H
 
-
 // lib
 #include "abstractpiecetablechange.h"
 #include "piecelist.h"
+
 
 namespace KPieceTable
 {
@@ -38,33 +38,36 @@ namespace KPieceTable
 class ReplacePieceTableChange : public AbstractPieceTableChange
 {
   public:
-    ReplacePieceTableChange( const KDE::Section &removeSection, int insertLength, int storageOffset,
-                             const PieceList &removedPieces );
+    ReplacePieceTableChange( const AddressRange& removeRange, Size insertLength, Address storageOffset,
+                             const PieceList& removedPieces );
+
     virtual ~ReplacePieceTableChange();
 
   public: // AbstractPieceTableChange API
     virtual int type() const;
     virtual QString description() const;
-    virtual int storageOffset() const;
-    virtual bool merge( const AbstractPieceTableChange *other );
-    virtual KDE::Section apply( PieceTable *pieceTable ) const;
-    virtual KDE::Section revert( PieceTable *pieceTable ) const;
-    virtual KDE::ArrayChangeMetrics metrics() const;
-    virtual int dataSize() const;
+    virtual Address storageOffset() const;
+    virtual bool merge( const AbstractPieceTableChange* other );
+    virtual AddressRange apply( PieceTable* pieceTable ) const;
+    virtual AddressRange revert( PieceTable* pieceTable ) const;
+    virtual ArrayChangeMetrics metrics() const;
+    virtual Size dataSize() const;
 
   protected:
-    KDE::Section mRemoveSection;
-    int mInsertLength;
-    int mStorageOffset;
+    AddressRange mRemoveRange;
+    Size mInsertLength;
+    Address mStorageOffset;
     PieceList mRemovedPieces;
 };
 
-inline ReplacePieceTableChange::ReplacePieceTableChange( const KDE::Section &removeSection,
-                                                         int insertLength, int storageOffset,
-                                                         const PieceList &removedPieces )
- : mRemoveSection( removeSection ),
-   mInsertLength( insertLength ), mStorageOffset( storageOffset ),
-   mRemovedPieces( removedPieces )
+
+inline ReplacePieceTableChange::ReplacePieceTableChange( const AddressRange& removeRange,
+                                                         Size insertLength, Address storageOffset,
+                                                         const PieceList& removedPieces )
+  : mRemoveRange( removeRange ),
+    mInsertLength( insertLength ),
+    mStorageOffset( storageOffset ),
+    mRemovedPieces( removedPieces )
 {}
 
 }

@@ -23,7 +23,6 @@
 #ifndef ROTATEBYTEARRAYFILTER_H
 #define ROTATEBYTEARRAYFILTER_H
 
-
 //
 #include "rotatebytearrayfilterparameterset.h"
 //
@@ -34,10 +33,11 @@ class RotateByteArrayFilter : public AbstractByteArrayFilter
 {
   public:
     RotateByteArrayFilter();
+
     virtual ~RotateByteArrayFilter();
 
   public: // AbstractByteArrayFilter API
-    virtual bool filter( char *result, Okteta::AbstractByteArrayModel *model, const KDE::Section &section ) const;
+    virtual bool filter( Okteta::Byte* result, Okteta::AbstractByteArrayModel *model, const Okteta::AddressRange& range ) const;
     virtual AbstractByteArrayFilterParameterSet *parameterSet();
 
   protected:

@@ -36,23 +36,23 @@ FileByteArrayModel::FileByteArrayModel( int pageNumber, int pageSize )
 {
 }
 
-int FileByteArrayModel::size()        const { return d->size(); }
+Size FileByteArrayModel::size()        const { return d->size(); }
 bool FileByteArrayModel::isReadOnly() const { return d->isReadOnly(); }
 bool FileByteArrayModel::isModified() const { return false; }
 bool FileByteArrayModel::isOpen()     const { return d->isOpen(); }
 
 void FileByteArrayModel::setReadOnly( bool readOnly ) { d->setReadOnly( readOnly ); }
 void FileByteArrayModel::setModified( bool )  {}
-void FileByteArrayModel::setDatum( unsigned int, const char )  {}
-char FileByteArrayModel::datum( unsigned int datumOffset ) const { return d->datum( datumOffset ); }
+void FileByteArrayModel::setByte( Address, Byte )  {}
+Byte FileByteArrayModel::byte( Address offset ) const { return d->byte( offset ); }
 
-int FileByteArrayModel::insert( int /*Pos*/, const char*, int /*Length*/ ) {  return 0; }
-int FileByteArrayModel::remove( const KDE::Section& /*Section*/ ) {  return 0; }
-unsigned int FileByteArrayModel::replace( const KDE::Section& /*Section*/, const char*, unsigned int /*Length*/ ) {  return 0; }
-int FileByteArrayModel::fill( char /*FillChar*/, unsigned int /*Pos*/, int /*Length*/ ) {  return 0; }
-bool FileByteArrayModel::swap( int /*DestPos*/, const KDE::Section& /*SourceSection*/ ) { return false; }
+Size FileByteArrayModel::insert( Address /*Pos*/, const Byte*, int /*Length*/ ) {  return 0; }
+Size FileByteArrayModel::remove( const AddressRange& /*Section*/ ) {  return 0; }
+Size FileByteArrayModel::replace( const AddressRange& /*Section*/, const Byte*, int /*Length*/ ) {  return 0; }
+Size FileByteArrayModel::fill( Byte /*FillChar*/, Address /*Pos*/, Size /*Length*/ ) {  return 0; }
+bool FileByteArrayModel::swap( Address /*DestPos*/, const AddressRange& /*SourceSection*/ ) { return false; }
 
-bool FileByteArrayModel::open( const QString &fileName ) { return d->open( fileName ); }
+bool FileByteArrayModel::open( const QString& fileName ) { return d->open( fileName ); }
 bool FileByteArrayModel::close() { return d->close(); }
 
 FileByteArrayModel::~FileByteArrayModel()

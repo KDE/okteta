@@ -29,7 +29,7 @@
 // Okteta gui
 #include <kadds.h>
 // Okteta core
-#include <section.h>
+#include <addressrange.h>
 // Qt
 #include <QtCore/QList>
 

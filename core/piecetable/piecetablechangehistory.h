@@ -23,21 +23,23 @@
 #ifndef KPIECETABLE_PIECETABLECHANGEHISTORY_H
 #define KPIECETABLE_PIECETABLECHANGEHISTORY_H
 
-
 // lib
 #include "abstractpiecetablechange.h"
 // Qt
 #include <QtCore/QStack>
 #include <QtCore/QString>
 
-namespace KDE {
-class SectionList;
+
+namespace Okteta {
+class AddressRangeList;
 class ArrayChangeMetricsList;
 }
 
 namespace KPieceTable
 {
 
+typedef Okteta::AddressRangeList AddressRangeList;
+typedef Okteta::ArrayChangeMetricsList ArrayChangeMetricsList;
 class GroupPieceTableChange;
 
 
@@ -45,12 +47,13 @@ class PieceTableChangeHistory
 {
   public:
     PieceTableChangeHistory();
+
     ~PieceTableChangeHistory();
 
   public:
     void clear();
     /// returns true, if a new change is appended, false if merged
-    bool appendChange( AbstractPieceTableChange *change );
+    bool appendChange( AbstractPieceTableChange* change );
 
     /**
      * @param pieceTable
@@ -59,12 +62,12 @@ class PieceTableChangeHistory
      * @param changeList
      * @return true if there were changes to revert, false otherwise
      */
-    bool revertBeforeChange( PieceTable *pieceTable, int changeId,
-                             KDE::SectionList *changedRanges, KDE::ArrayChangeMetricsList *changeList );
+    bool revertBeforeChange( PieceTable* pieceTable, int changeId,
+                             AddressRangeList* changedRanges, ArrayChangeMetricsList* changeList );
 
     /// 
-    void openGroupedChange( const QString &description ); // TODO: hand over description? user change id?
-    void closeGroupedChange( const QString &description );
+    void openGroupedChange( const QString& description ); // TODO: hand over description? user change id?
+    void closeGroupedChange( const QString& description );
     /// closes the current change, so any following operation will not be tried to merge
     void finishChange();
 
@@ -82,9 +85,9 @@ class PieceTableChangeHistory
     /// @return true if the current change is the base
     bool isAtBase() const;
     /// @return size of the data used by the applied changes
-    int appliedChangesDataSize() const;
+    Size appliedChangesDataSize() const;
 
-    void getChangeData( KDE::ArrayChangeMetrics* metrics, int *storageOffset, int versionIndex ) const;
+    void getChangeData( ArrayChangeMetrics* metrics, Address* storageOffset, int versionIndex ) const;
 
   protected:
     /// if true, try to merge changes
@@ -96,7 +99,7 @@ class PieceTableChangeHistory
     ///
     QStack<AbstractPieceTableChange*> mChangeStack;
     ///
-    int mAppliedChangesDataSize;
+    Size mAppliedChangesDataSize;
 
     /// if 0, there is no
     GroupPieceTableChange *mActiveGroupChange;
@@ -104,9 +107,11 @@ class PieceTableChangeHistory
 
 
 inline PieceTableChangeHistory::PieceTableChangeHistory()
- : mTryToMergeAppendedChange( false ),
-   mAppliedChangesCount( 0 ), mBaseBeforeChangeIndex( 0 ), mAppliedChangesDataSize( 0 ),
-   mActiveGroupChange( 0 )
+  : mTryToMergeAppendedChange( false ),
+    mAppliedChangesCount( 0 ),
+    mBaseBeforeChangeIndex( 0 ),
+    mAppliedChangesDataSize( 0 ),
+    mActiveGroupChange( 0 )
 {}
 
 inline int PieceTableChangeHistory::count()                     const { return mChangeStack.count(); }
@@ -116,11 +121,11 @@ inline bool PieceTableChangeHistory::isAtBase()                 const
 {
     return ( mBaseBeforeChangeIndex == mAppliedChangesCount );
 }
-inline int PieceTableChangeHistory::appliedChangesDataSize()    const { return mAppliedChangesDataSize; }
+inline Size PieceTableChangeHistory::appliedChangesDataSize()    const { return mAppliedChangesDataSize; }
 
 inline QString PieceTableChangeHistory::changeDescription( int changeId ) const
 {
-    const AbstractPieceTableChange *change = mChangeStack.value( changeId );
+    const AbstractPieceTableChange* change = mChangeStack.value( changeId );
 
     return change ? change->description() : QString();
 }

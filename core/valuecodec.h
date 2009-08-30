@@ -23,10 +23,10 @@
 #ifndef OKTETA_VALUECODEC_H
 #define OKTETA_VALUECODEC_H
 
-
 // lib
 #include "oktetacore.h"
 #include "oktetacore_export.h"
+#include "byte.h"
 
 class QString;
 
@@ -71,14 +71,14 @@ class OKTETACORE_EXPORT ValueCodec
      * @param pos offset in digits where to write the code to
      * @param byte data to encode
      */
-    virtual void encode( QString &digits, unsigned int pos, const unsigned char byte ) const = 0;
+    virtual void encode( QString& digits, unsigned int pos, Byte byte ) const = 0;
     /**
      * encodes the byte and writes the result to digits, no leading 0s
      * @param digits
      * @param pos offset in digits where to write the code to
      * @param byte data to encode
      */
-    virtual void encodeShort( QString &digits, unsigned int pos, const unsigned char byte ) const = 0;
+    virtual void encodeShort( QString& digits, unsigned int pos, Byte byte ) const = 0;
 
     /**
      * encodes the byte and writes the result to digits, no leading 0s
@@ -86,31 +86,32 @@ class OKTETACORE_EXPORT ValueCodec
      * @param pos offset in digits where to write the code to
      * @return true if successful, false otherwise
      */
-    virtual bool appendDigit( unsigned char *byte, const unsigned char digit ) const = 0;
+    virtual bool appendDigit( Byte* byte, unsigned char digit ) const = 0;
     /**
      * tries to remove the last (least significant) digit from byte
      * @param byte value to remove the last digit from
      * @return true if successful, false otherwise
      */
-    virtual void removeLastDigit( unsigned char *byte ) const = 0;
+    virtual void removeLastDigit( Byte* byte ) const = 0;
     /**
      * checks if the given digit is used in the encoding
      * @param digit value to check
      * @return true if digit is valid, false otherwise
      */
-    virtual bool isValidDigit( const unsigned char digit ) const = 0;
+    virtual bool isValidDigit( unsigned char digit ) const = 0;
     /**
      * turns the digit into a byte with the value of the digit
      * @param digit digit to turn into the value
      * @return true if successful, false otherwise
      */
-    virtual bool turnToValue( unsigned char *digit ) const = 0;
+    virtual bool turnToValue( unsigned char* digit ) const = 0;
 
 
   public:
     /** */
-    unsigned int decode( unsigned char *byte, const QString &digits, unsigned int pos ) const;
+    unsigned int decode( Byte* byte, const QString& digits, unsigned int pos ) const;
 };
+
 
 inline ValueCodec::ValueCodec() {}
 

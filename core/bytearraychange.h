@@ -42,14 +42,14 @@ class OKTETACORE_EXPORT ByteArrayChange
 
   public:
     ByteArrayChange();
-    explicit ByteArrayChange( const KDE::ArrayChangeMetrics& metrics, const QByteArray& data = QByteArray() );
+    explicit ByteArrayChange( const ArrayChangeMetrics& metrics, const QByteArray& data = QByteArray() );
 
   public:
-    const KDE::ArrayChangeMetrics& metrics() const;
+    const ArrayChangeMetrics& metrics() const;
     const QByteArray& data() const;
 
   protected:
-    KDE::ArrayChangeMetrics mMetrics;
+    ArrayChangeMetrics mMetrics;
     QByteArray mData;
 //     UserId mUserId;
 //      mTime;
@@ -59,12 +59,13 @@ class OKTETACORE_EXPORT ByteArrayChange
 inline ByteArrayChange::ByteArrayChange()
 {}
 
-inline ByteArrayChange::ByteArrayChange( const KDE::ArrayChangeMetrics& metrics, const QByteArray& data )
- : mMetrics( metrics ), mData( data )
+inline ByteArrayChange::ByteArrayChange( const ArrayChangeMetrics& metrics, const QByteArray& data )
+  : mMetrics( metrics ),
+    mData( data )
 {}
 
-inline const KDE::ArrayChangeMetrics& ByteArrayChange::metrics() const { return mMetrics; }
-inline const QByteArray& ByteArrayChange::data()                 const { return mData; }
+inline const ArrayChangeMetrics& ByteArrayChange::metrics() const { return mMetrics; }
+inline const QByteArray& ByteArrayChange::data()            const { return mData; }
 
 
 QDataStream& operator<<( QDataStream& outStream, const ByteArrayChange& change );

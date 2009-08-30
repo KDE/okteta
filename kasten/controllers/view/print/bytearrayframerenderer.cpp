@@ -46,8 +46,8 @@
 #include <QtCore/QListIterator>
 
 
-static const int DefaultStartOffset = 0;
-static const int DefaultFirstLineOffset = 0;
+static const Okteta::Address DefaultStartOffset = 0;
+static const Okteta::Address DefaultFirstLineOffset = 0;
 static const int DefaultNoOfBytesPerLine =  16;
 static const ResizeStyle DefaultResizeStyle = FullSizeUsage;
 static const Okteta::ValueCoding DefaultValueCoding =  Okteta::HexadecimalCoding;
@@ -104,12 +104,12 @@ ByteArrayFrameRenderer::ByteArrayFrameRenderer()
 }
 
 Okteta::AbstractByteArrayModel* ByteArrayFrameRenderer::byteArrayModel() const { return mByteArrayModel; }
-int ByteArrayFrameRenderer::offset()                                             const { return mLayout->startOffset(); }
-int ByteArrayFrameRenderer::length()                                             const { return mLayout->length(); }
+Okteta::Address ByteArrayFrameRenderer::offset()                         const { return mLayout->startOffset(); }
+Okteta::Size ByteArrayFrameRenderer::length()                            const { return mLayout->length(); }
 
 int ByteArrayFrameRenderer::noOfBytesPerLine()               const { return mLayout->noOfBytesPerLine(); }
-int ByteArrayFrameRenderer::firstLineOffset()                const { return mLayout->firstLineOffset(); }
-int ByteArrayFrameRenderer::startOffset()                    const { return mLayout->startOffset(); }
+Okteta::Address ByteArrayFrameRenderer::firstLineOffset()    const { return mLayout->firstLineOffset(); }
+Okteta::Address ByteArrayFrameRenderer::startOffset()        const { return mLayout->startOffset(); }
 ResizeStyle ByteArrayFrameRenderer::resizeStyle()            const { return mResizeStyle; }
 Okteta::ValueCoding ByteArrayFrameRenderer::valueCoding()   const { return mValueCoding; }
 Okteta::KPixelX ByteArrayFrameRenderer::byteSpacingWidth()           const { return mValueColumnRenderer->byteSpacingWidth(); }
@@ -142,7 +142,7 @@ int ByteArrayFrameRenderer::framesCount() const
 }
 
 void ByteArrayFrameRenderer::setByteArrayModel( Okteta::AbstractByteArrayModel* byteArrayModel,
-                                                int offset, int length )
+                                                Okteta::Address offset, Okteta::Size length )
 {
     mByteArrayModel = byteArrayModel;
     length = ( byteArrayModel == 0 ) ?                      0 :
@@ -172,7 +172,7 @@ void ByteArrayFrameRenderer::setWidth( int width )
     adjustToWidth();
 }
 
-void ByteArrayFrameRenderer::setFirstLineOffset( int firstLineOffset )
+void ByteArrayFrameRenderer::setFirstLineOffset( Okteta::Address firstLineOffset )
 {
     if( !mLayout->setFirstLineOffset(firstLineOffset) )
         return;
@@ -182,7 +182,7 @@ void ByteArrayFrameRenderer::setFirstLineOffset( int firstLineOffset )
     adjustLayoutToSize();
 }
 
-void ByteArrayFrameRenderer::setStartOffset( int startOffset )
+void ByteArrayFrameRenderer::setStartOffset( Okteta::Address startOffset )
 {
     if( !mLayout->setStartOffset(startOffset) )
         return;
@@ -333,7 +333,7 @@ void ByteArrayFrameRenderer::setCharCoding( const QString& newCharCodingName )
 }
 
 
-void ByteArrayFrameRenderer::setFont( const QFont &font )
+void ByteArrayFrameRenderer::setFont( const QFont& font )
 {
     mFont = font;
 

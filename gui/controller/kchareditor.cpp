@@ -49,9 +49,10 @@ bool KCharEditor::handleKeyPress( QKeyEvent* keyEvent )
         const QChar enteredChar = keyEvent->text()[0];
         if( enteredChar.isPrint() )
         {
-            QByteArray data( 1, 0 );
-            if( mView->charCodec()->encode(data.data(),enteredChar) )
+            Byte byte;
+            if( mView->charCodec()->encode(&byte,enteredChar) )
             {
+                QByteArray data( 1, byte );
                 mView->insert( data );
 
                 keyUsed = true;

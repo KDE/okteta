@@ -38,7 +38,7 @@ bool FilterJob::exec()
     //TODO: what kind of signal could a filter send?
     connect( mByteArrayFilter, SIGNAL(filteredBytes(int)), SLOT(onFilteredBytes()) );
 
-    const bool result = mByteArrayFilter->filter( mResult, mModel, mSection );
+    const bool result = mByteArrayFilter->filter( mResult, mModel, mRange );
 
     deleteLater();
 

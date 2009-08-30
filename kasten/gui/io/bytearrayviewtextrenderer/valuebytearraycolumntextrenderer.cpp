@@ -33,8 +33,8 @@ namespace Kasten
 {
 
 ValueByteArrayColumnTextRenderer::ValueByteArrayColumnTextRenderer(
-    const Okteta::AbstractByteArrayModel *byteArrayModel, int offset,
-        const Okteta::CoordRange &coordRange,
+    const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset,
+        const Okteta::CoordRange& coordRange,
         int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
         Okteta::ValueCoding valueCoding )
   : AbstractByteArrayColumnTextRenderer( byteArrayModel, offset, coordRange,
@@ -67,7 +67,7 @@ Q_UNUSED( isSubline )
         const uint t = mLinePositions[p];
         // clear spacing
         *stream << whiteSpace( t-e );
-        mValueCodec->encode( E, 0, mByteArrayModel->datum(mOffset) );
+        mValueCodec->encode( E, 0, mByteArrayModel->byte(mOffset) );
         *stream << E;
         e = t + mValueCodec->encodingWidth();
     }

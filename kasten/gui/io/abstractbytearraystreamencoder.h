@@ -27,12 +27,11 @@
 #include "oktetakastengui_export.h"
 // Kasten core
 #include <abstractmodelstreamencoder.h>
+// Okteta core
+#include <addressrange.h>
 
 namespace Okteta {
 class AbstractByteArrayModel;
-}
-namespace KDE {
-class Section;
 }
 
 
@@ -64,8 +63,8 @@ class OKTETAKASTENGUI_EXPORT AbstractByteArrayStreamEncoder : public AbstractMod
   protected: // API to be implemented
     virtual bool encodeDataToStream( QIODevice *device,
                                      const KByteArrayDisplay* byteArrayView,
-                                     const Okteta::AbstractByteArrayModel *byteArrayModel,
-                                     const KDE::Section &section ) = 0;
+                                     const Okteta::AbstractByteArrayModel* byteArrayModel,
+                                     const Okteta::AddressRange& range ) = 0;
 };
 
 }

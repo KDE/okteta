@@ -46,7 +46,7 @@ namespace Kasten
 class ByteArrayRowsColumnTextRenderer : public AbstractColumnTextRenderer
 {
   public:
-    ByteArrayRowsColumnTextRenderer( const Okteta::AbstractByteArrayModel* byteArrayModel, int offset,
+    ByteArrayRowsColumnTextRenderer( const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset,
         const Okteta::CoordRange& coordRange,
         int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
         int visibleCodings,
@@ -81,7 +81,7 @@ class ByteArrayRowsColumnTextRenderer : public AbstractColumnTextRenderer
     /** Line to print */
     mutable int mRenderLine;
     /** Data to print */
-    mutable int mOffset;
+    mutable Okteta::Address mOffset;
 
     /** buffered value of how many chars a line needs */
     int mNoOfCharsPerLine;

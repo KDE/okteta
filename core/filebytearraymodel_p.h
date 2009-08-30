@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Core library, part of the KDE project.
 
-    Copyright 2003,2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,6 +23,8 @@
 #ifndef OKTETA_FILEBYTEARRAYMODEL_P_H
 #define OKTETA_FILEBYTEARRAYMODEL_P_H
 
+// lib
+#include "filebytearraymodel.h"
 // Qt
 #include <QtCore/QVector>
 #include <QtCore/QFile>
@@ -37,57 +39,59 @@ class FileByteArrayModelPrivate
 
   public:
     FileByteArrayModelPrivate( int pageNumber, int pageSize );
+
     ~FileByteArrayModelPrivate();
 
   public:
-    int size() const;
-    char datum( unsigned int datumOffset ) const;
+    Byte byte( Address offset ) const;
+    Size size() const;
     bool isReadOnly() const;
     void setReadOnly( bool readonly );
 
   public:
     bool isOpen() const;
-    bool open( const QString &fileName );
+    bool open( const QString& fileName );
     bool close();
 
   protected:
-    bool ensurePageLoaded( unsigned int PageIndex ) const;
-    bool freePage( unsigned int PageIndex ) const;
+    bool ensurePageLoaded( unsigned int pageIndex ) const;
+    bool freePage( unsigned int pageIndex ) const;
 
 
   protected:
     /** */
-    mutable QFile m_file;
+    mutable QFile mFile;
     /**  */
-    bool m_readOnly:1;
-    bool m_isOpen:1;
-    bool m_atEOF:1;
+    bool mReadOnly :1;
+    bool mIsOpen :1;
+    bool mAtEof :1;
     /** maximum number of pages which could be currently loaded */
-    unsigned int m_noOfUsedPages;
+    unsigned int mNoOfUsedPages;
     /**  number of actually not used pages (in terms of NoOfUsedPages) */
-    mutable int m_noOfFreePages;
+    mutable int mNoOfFreePages;
     /** number of bytes in a page */
-    unsigned int m_pageSize;
+    unsigned int mPageSize;
     /** first currently loaded page */
-    mutable int m_firstPage;
+    mutable int mFirstPage;
     /** last currently loaded page */
-    mutable int m_lastPage;
+    mutable int mLastPage;
     /** */
-    mutable KPageOfChar m_data;
+    mutable KPageOfChar mData;
     /** */
-    unsigned int m_size;
+    int mSize;
 
     /** current offset */
-    mutable unsigned int m_offsetOfActualPage;
+    mutable unsigned int mOffsetOfActualPage;
     /** points to the actual page */
-    mutable char* m_actualPage;
+    mutable char* mActualPage;
 };
 
-inline int FileByteArrayModelPrivate::size()        const   { return m_size; }
-inline bool FileByteArrayModelPrivate::isReadOnly() const   { return m_readOnly; }
-inline void FileByteArrayModelPrivate::setReadOnly( bool readonly ) { m_readOnly = readonly; }
 
-inline bool FileByteArrayModelPrivate::isOpen() const { return m_file.isOpen(); }
+inline Size FileByteArrayModelPrivate::size()        const   { return mSize; }
+inline bool FileByteArrayModelPrivate::isReadOnly() const   { return mReadOnly; }
+inline void FileByteArrayModelPrivate::setReadOnly( bool readonly ) { mReadOnly = readonly; }
+
+inline bool FileByteArrayModelPrivate::isOpen() const { return mFile.isOpen(); }
 
 }
 

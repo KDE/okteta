@@ -24,7 +24,7 @@
 #define CREATESTATISTICJOB_H
 
 // Okteta core
-#include <section.h>
+#include <addressrange.h>
 // Qt
 #include <QtCore/QObject>
 
@@ -41,24 +41,24 @@ class CreateStatisticJob : public QObject // not yet: KJob
   Q_OBJECT
 
   public:
-    CreateStatisticJob( const Okteta::AbstractByteArrayModel *model, const KDE::Section &selection,
-                        int *byteCount );
+    CreateStatisticJob( const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& selection,
+                        int* byteCount );
 
   public:
     // return size of selected byte array
     int exec();
 
   protected:
-    const Okteta::AbstractByteArrayModel *mByteArrayModel;
-    const KDE::Section mSelection;
+    const Okteta::AbstractByteArrayModel* mByteArrayModel;
+    const Okteta::AddressRange mSelection;
 
-    int * const mByteCount;
+    int* const mByteCount;
 };
 
 
-inline CreateStatisticJob::CreateStatisticJob( const Okteta::AbstractByteArrayModel *model,
-                                               const KDE::Section &selection,
-                                               int *byteCount )
+inline CreateStatisticJob::CreateStatisticJob( const Okteta::AbstractByteArrayModel* model,
+                                               const Okteta::AddressRange& selection,
+                                               int* byteCount )
  : mByteArrayModel( model ), mSelection( selection ), mByteCount( byteCount )
 {}
 

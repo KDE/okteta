@@ -31,20 +31,20 @@
 namespace Okteta
 {
 
-FixedSizeByteArrayModel::FixedSizeByteArrayModel( char* data, unsigned int size, char fillUpChar )
+FixedSizeByteArrayModel::FixedSizeByteArrayModel( Byte* data, int size, Byte fillUpByte )
   : mData( data ),
     mSize( size ),
-    mFillUpChar( fillUpChar ),
+    mFillUpByte( fillUpByte ),
     mReadOnly( true ),
     mModified( false ),
     mAutoDelete( false )
 {
 }
 
-FixedSizeByteArrayModel::FixedSizeByteArrayModel( unsigned int size, char fillUpChar )
-  : mData( new char[size] ),
+FixedSizeByteArrayModel::FixedSizeByteArrayModel( int size, Byte fillUpByte )
+  : mData( new Byte[size] ),
     mSize( size ),
-    mFillUpChar( fillUpChar ),
+    mFillUpByte( fillUpByte ),
     mReadOnly( false ),
     mModified( false ),
     mAutoDelete( true )
@@ -53,32 +53,32 @@ FixedSizeByteArrayModel::FixedSizeByteArrayModel( unsigned int size, char fillUp
 }
 
 
-void FixedSizeByteArrayModel::setDatum( unsigned int offset, const char datum )
+void FixedSizeByteArrayModel::setByte( Address offset, Byte byte )
 {
     const bool wasModifiedBefore = mModified;
 
-    mData[offset] = datum;
+    mData[offset] = byte;
     mModified = true;
 
-    emit contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(offset, 1, 1) );
+    emit contentsChanged( ArrayChangeMetricsList::oneReplacement(offset, 1, 1) );
     if( ! wasModifiedBefore )
         emit modifiedChanged( true );
 }
 
 
 
-int FixedSizeByteArrayModel::insert( int offset, const char* insertData, int insertLength )
+Size FixedSizeByteArrayModel::insert( Address offset, const Byte* insertData, int insertLength )
 {
     // check all parameters
-    if( offset >= (int)mSize || insertLength == 0 )
+    if( offset >= mSize || insertLength == 0 )
         return 0;
 
     const bool wasModifiedBefore = mModified;
 
-    if( offset + insertLength > (int)mSize )
+    if( offset + insertLength > mSize )
         insertLength = mSize - offset;
 
-    const unsigned int behindInsertOffset = offset + insertLength;
+    const Address behindInsertOffset = offset + insertLength;
     // fmove right data behind the input range
     memmove( &mData[behindInsertOffset], &mData[offset], mSize-behindInsertOffset );
     // insert input
@@ -86,7 +86,7 @@ int FixedSizeByteArrayModel::insert( int offset, const char* insertData, int ins
 
     mModified = true;
 
-    emit contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(offset, 0, insertLength) );
+    emit contentsChanged( ArrayChangeMetricsList::oneReplacement(offset, 0, insertLength) );
     //emit contentsReplaced( offset, , 0 ); TODO: how to signal the removed data?
     if( ! wasModifiedBefore )
         emit modifiedChanged( true );
@@ -95,26 +95,26 @@ int FixedSizeByteArrayModel::insert( int offset, const char* insertData, int ins
 }
 
 
-int FixedSizeByteArrayModel::remove( const KDE::Section& _removeSection )
+Size FixedSizeByteArrayModel::remove( const AddressRange& _removeRange )
 {
-    KDE::Section removeSection( _removeSection );
-    if( removeSection.start() >= (int)mSize || removeSection.width() == 0 )
+    AddressRange removeRange( _removeRange );
+    if( removeRange.start() >= mSize || removeRange.width() == 0 )
         return 0;
 
     const bool wasModifiedBefore = mModified;
 
-    removeSection.restrictEndTo( mSize-1 );
+    removeRange.restrictEndTo( mSize-1 );
 
-    const int removeLength = removeSection.width();
-    const int behindRemoveOffset = removeSection.nextBehindEnd();
+    const Size removeLength = removeRange.width();
+    const Address behindRemoveOffset = removeRange.nextBehindEnd();
     // fmove right data behind the input range
-    memmove( &mData[removeSection.start()], &mData[behindRemoveOffset], mSize-behindRemoveOffset );
+    memmove( &mData[removeRange.start()], &mData[behindRemoveOffset], mSize-behindRemoveOffset );
     // clear freed space
     reset( mSize-removeLength, removeLength );
 
     mModified = true;
 
-    emit contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(removeSection.start(), removeSection.width(), 0) );
+    emit contentsChanged( ArrayChangeMetricsList::oneReplacement(removeRange.start(), removeRange.width(), 0) );
     //emit contentsReplaced( offset, 0,  ); TODO: how to signal the inserted data?
     if( ! wasModifiedBefore )
         emit modifiedChanged( true );
@@ -123,43 +123,43 @@ int FixedSizeByteArrayModel::remove( const KDE::Section& _removeSection )
 }
 
 
-unsigned int FixedSizeByteArrayModel::replace( const KDE::Section& _removeSection, const char* insertData, unsigned int insertLength )
+Size FixedSizeByteArrayModel::replace( const AddressRange& _removeRange, const Byte* insertData, int insertLength )
 {
-    KDE::Section removeSection( _removeSection );
+    AddressRange removeRange( _removeRange );
     // check all parameters
-    if( removeSection.startsBehind( mSize-1 ) || (removeSection.width()==0 && insertLength==0) )
+    if( removeRange.startsBehind( mSize-1 ) || (removeRange.width()==0 && insertLength==0) )
         return 0;
 
     const bool wasModifiedBefore = mModified;
 
-    removeSection.restrictEndTo( mSize-1 );
-    if( removeSection.start() + insertLength > mSize )
-        insertLength = mSize - removeSection.start();
+    removeRange.restrictEndTo( mSize-1 );
+    if( removeRange.start() + insertLength > mSize )
+        insertLength = mSize - removeRange.start();
 
-    const int sizeDiff = insertLength - removeSection.width();
+    const Size sizeDiff = insertLength - removeRange.width();
 
     // is input longer than removed?
     if( sizeDiff > 0 )
     {
-        unsigned int behindInsertOffset = removeSection.start() + insertLength;
+        const Address behindInsertOffset = removeRange.start() + insertLength;
         // fmove right data behind the input range
-        memmove( &mData[behindInsertOffset], &mData[removeSection.nextBehindEnd()], mSize-behindInsertOffset );
+        memmove( &mData[behindInsertOffset], &mData[removeRange.nextBehindEnd()], mSize-behindInsertOffset );
     }
     // is input smaller than removed?
     else if( sizeDiff < 0 )
     {
-        unsigned int behindRemoveOffset = removeSection.nextBehindEnd();
+        const Address behindRemoveOffset = removeRange.nextBehindEnd();
         // fmove right data behind the input range
-        memmove( &mData[removeSection.start()+insertLength], &mData[behindRemoveOffset], mSize-behindRemoveOffset );
+        memmove( &mData[removeRange.start()+insertLength], &mData[behindRemoveOffset], mSize-behindRemoveOffset );
         // clear freed space
         reset( mSize+sizeDiff, -sizeDiff );
     }
     // insert input
-    memcpy( &mData[removeSection.start()], insertData, insertLength );
+    memcpy( &mData[removeRange.start()], insertData, insertLength );
 
     mModified = true;
 
-    emit contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(removeSection.start(), removeSection.width(), insertLength) );
+    emit contentsChanged( ArrayChangeMetricsList::oneReplacement(removeRange.start(), removeRange.width(), insertLength) );
     //emit contentsReplaced( offset, 0,  ); TODO: how to signal the changed data at the end?
     if( ! wasModifiedBefore )
         emit modifiedChanged( true );
@@ -168,35 +168,35 @@ unsigned int FixedSizeByteArrayModel::replace( const KDE::Section& _removeSectio
 }
 
 
-bool FixedSizeByteArrayModel::swap( int firstStart, const KDE::Section& secondSection )
+bool FixedSizeByteArrayModel::swap( Address firstStart, const AddressRange& _secondRange )
 {
-    KDE::Section sourceSection( secondSection );
+    AddressRange secondRange( _secondRange );
     // check all parameters
-    if( sourceSection.start() >= (int)mSize || sourceSection.width() == 0
-        || firstStart > (int)mSize || sourceSection.start() == firstStart )
+    if( secondRange.start() >= mSize || secondRange.width() == 0
+        || firstStart > mSize || secondRange.start() == firstStart )
         return false;
 
     const bool wasModifiedBefore = mModified;
 
-    sourceSection.restrictEndTo( mSize-1 );
-    const bool toRight = firstStart > sourceSection.start();
-    const int movedLength = sourceSection.width();
-    const int displacedLength = toRight ?  firstStart - sourceSection.end()-1 : sourceSection.start() - firstStart;
+    secondRange.restrictEndTo( mSize-1 );
+    const bool toRight = firstStart > secondRange.start();
+    const Size movedLength = secondRange.width();
+    const Size displacedLength = toRight ?  firstStart - secondRange.end()-1 : secondRange.start() - firstStart;
 
     // find out section that is smaller
-    int smallPartLength, largePartLength, smallPartStart, largePartStart, smallPartDest, largePartDest;
+    Size smallPartLength, largePartLength, smallPartStart, largePartStart, smallPartDest, largePartDest;
     // moving part is smaller?
     if( movedLength < displacedLength )
     {
-        smallPartStart = sourceSection.start();
+        smallPartStart = secondRange.start();
         smallPartLength = movedLength;
         largePartLength = displacedLength;
         // moving part moves right?
         if( toRight )
         {
             smallPartDest = firstStart - movedLength;
-            largePartStart = sourceSection.nextBehindEnd();
-            largePartDest = sourceSection.start();
+            largePartStart = secondRange.nextBehindEnd();
+            largePartDest = secondRange.start();
         }
         else
         {
@@ -207,15 +207,15 @@ bool FixedSizeByteArrayModel::swap( int firstStart, const KDE::Section& secondSe
     }
     else
     {
-        largePartStart = sourceSection.start();
+        largePartStart = secondRange.start();
         largePartLength = movedLength;
         smallPartLength = displacedLength;
         // moving part moves right?
         if( toRight )
         {
             largePartDest = firstStart - movedLength;
-            smallPartStart = sourceSection.nextBehindEnd();
-            smallPartDest = sourceSection.start();
+            smallPartStart = secondRange.nextBehindEnd();
+            smallPartDest = secondRange.start();
         }
         else
         {
@@ -226,7 +226,7 @@ bool FixedSizeByteArrayModel::swap( int firstStart, const KDE::Section& secondSe
     }
 
     // copy smaller part to tempbuffer
-    char* tempBuffer = new char[smallPartLength];
+    Byte* tempBuffer = new Byte[smallPartLength];
     memcpy( tempBuffer, &mData[smallPartStart], smallPartLength );
 
     // move the larger part
@@ -238,7 +238,7 @@ bool FixedSizeByteArrayModel::swap( int firstStart, const KDE::Section& secondSe
 
     mModified = true;
 
-    emit contentsChanged( KDE::ArrayChangeMetricsList::oneSwapping(firstStart, sourceSection.start(),sourceSection.width()) );
+    emit contentsChanged( ArrayChangeMetricsList::oneSwapping(firstStart, secondRange.start(),secondRange.width()) );
     if( ! wasModifiedBefore )
         emit modifiedChanged( true );
 
@@ -246,7 +246,7 @@ bool FixedSizeByteArrayModel::swap( int firstStart, const KDE::Section& secondSe
 }
 
 
-int FixedSizeByteArrayModel::fill( const char fillChar, unsigned int offset, int fillLength )
+Size FixedSizeByteArrayModel::fill( const Byte fillByte, Address offset, Size fillLength )
 {
     // nothing to fill
     if( offset >= mSize )
@@ -254,15 +254,15 @@ int FixedSizeByteArrayModel::fill( const char fillChar, unsigned int offset, int
 
     const bool wasModifiedBefore = mModified;
 
-    const unsigned int lengthToEnd = mSize - offset;
+    const Size lengthToEnd = mSize - offset;
 
-    if( fillLength < 0 || fillLength > (int)lengthToEnd )
+    if( fillLength < 0 || fillLength > lengthToEnd )
         fillLength = lengthToEnd;
 
-    memset( &mData[offset], fillChar, fillLength );
+    memset( &mData[offset], fillByte, fillLength );
     mModified = true;
 
-    emit contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(offset, fillLength, fillLength) );
+    emit contentsChanged( ArrayChangeMetricsList::oneReplacement(offset, fillLength, fillLength) );
     if( ! wasModifiedBefore )
         emit modifiedChanged( true );
 
@@ -270,9 +270,9 @@ int FixedSizeByteArrayModel::fill( const char fillChar, unsigned int offset, int
 }
 
 
-int FixedSizeByteArrayModel::compare( const AbstractByteArrayModel& other, const KDE::Section& _otherRange, unsigned int offset )
+int FixedSizeByteArrayModel::compare( const AbstractByteArrayModel& other, const AddressRange& _otherRange, Address offset )
 {
-    KDE::Section otherRange( _otherRange );
+    AddressRange otherRange( _otherRange );
     //kDebug() << QString("offset: %1, otherRange: (%3/%4)" ).arg(offset).arg(otherRange.start()).arg(otherRange.end())
     //    << endl;
     // test other values
@@ -285,8 +285,8 @@ int FixedSizeByteArrayModel::compare( const AbstractByteArrayModel& other, const
 
     int valueByLength = 0; // default: equal
 
-    KDE::Section range = KDE::Section::fromWidth( offset, otherRange.width() );
-    int lastOffset = other.size()-1;
+    AddressRange range = AddressRange::fromWidth( offset, otherRange.width() );
+    Address lastOffset = other.size()-1;
     // 
     if( otherRange.endsBehind(lastOffset) )
     {
@@ -306,11 +306,12 @@ int FixedSizeByteArrayModel::compare( const AbstractByteArrayModel& other, const
     //kDebug()
     //    << QString( "range: (%1/%2), otherRange: (%3/%4)" ).arg(range.start()).arg(range.end()).arg(otherRange.start()).arg(otherRange.end())
     //    << endl;
-    int oi = otherRange.start();
-    for( int i=range.start(); i<=range.end(); ++i,++oi )
+    const Address rangeEnd = range.end();
+    Address oi = otherRange.start();
+    for( Address i=range.start(); i<=rangeEnd; ++i,++oi )
     {
-        char OD = other.datum(oi);
-        char data = mData[i];
+        Byte OD = other.byte(oi);
+        Byte data = mData[i];
         //kDebug() << QString("%1==%2").arg((int)data).arg((int)OD) ;
         if( OD == data )
             continue;
@@ -323,7 +324,7 @@ int FixedSizeByteArrayModel::compare( const AbstractByteArrayModel& other, const
 
 void FixedSizeByteArrayModel::reset( unsigned int offset, unsigned int length )
 {
-    memset( &mData[offset], mFillUpChar, length );
+    memset( &mData[offset], mFillUpByte, length );
 }
 
 

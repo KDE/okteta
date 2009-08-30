@@ -122,7 +122,7 @@ void StringsExtractTool::checkUptoDate()
 void StringsExtractTool::selectString( int stringId )
 {
     const ContainedString &containedString = mContainedStringList.at(stringId);
-    const int offset = containedString.offset();
+    const Okteta::Address offset = containedString.offset();
     const int length = containedString.string().length();
     mByteArrayDisplay->setSelection( offset, offset+length-1 );
     mByteArrayDisplay->setFocus();
@@ -170,7 +170,7 @@ void StringsExtractTool::extractStrings()
     mSourceByteArrayModel = mByteArrayModel;
     mSourceSelection = mByteArrayDisplay->selection();
     mSourceMinLength = mMinLength;
-    connect( mSourceByteArrayModel,  SIGNAL(contentsChanged( const KDE::ArrayChangeMetricsList & )),
+    connect( mSourceByteArrayModel,  SIGNAL(contentsChanged( const Okteta::ArrayChangeMetricsList & )),
              SLOT(onSourceChanged()) );
     connect( mSourceByteArrayModel,  SIGNAL(destroyed()),
              SLOT(onSourceDestroyed()) );

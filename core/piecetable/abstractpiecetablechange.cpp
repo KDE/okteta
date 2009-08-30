@@ -28,14 +28,14 @@
 namespace KPieceTable
 {
 
-bool AbstractPieceTableChange::merge( const AbstractPieceTableChange *other )
+bool AbstractPieceTableChange::merge( const AbstractPieceTableChange* other )
 {
 Q_UNUSED( other )
     return false;
 }
 
-int AbstractPieceTableChange::storageOffset() const { return -1; }
+Address AbstractPieceTableChange::storageOffset() const { return -1; }
 
-int AbstractPieceTableChange::dataSize() const { return 0; }
+Size AbstractPieceTableChange::dataSize() const { return 0; }
 
 }

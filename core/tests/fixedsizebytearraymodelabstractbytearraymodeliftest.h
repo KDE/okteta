@@ -26,11 +26,16 @@
 // test
 #include "abstractbytearraymodeliftest.h"
 
+namespace Okteta
+{
+
 class FixedSizeByteArrayModelAbstractByteArrayModelIfTest : public AbstractByteArrayModelIfTest
 {
   protected: // AbstractByteArrayModelIfTest API
-    Okteta::AbstractByteArrayModel *createByteArrayModel();
-    void deleteByteArrayModel( Okteta::AbstractByteArrayModel *ByteArrayModel );
+    AbstractByteArrayModel* createByteArrayModel();
+    void deleteByteArrayModel( AbstractByteArrayModel* byteArrayModel );
 };
+
+}
 
 #endif

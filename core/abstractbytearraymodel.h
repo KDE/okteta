@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Core library, part of the KDE project.
 
-    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,19 +25,19 @@
 
 // lib
 #include "oktetacore_export.h"
-// commonlib
-#include "section.h"
+#include "addressrange.h"
+#include "size.h"
+#include "byte.h"
 // Qt
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
 
 
-namespace KDE {
-class ArrayChangeMetricsList;
-}
-
 namespace Okteta
 {
+
+class ArrayChangeMetricsList;
+
 
 /** could it be useful to hide the data access behind an iterator? *
 class KDataBufferIterator
@@ -112,15 +112,15 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
     //const char *dataSet( int Offset, int Length ) const;
 
     /** requests a single byte
-      * if the offset is not valid the behaviout is undefined
+      * if the offset is not valid the behaviour is undefined
       * @param offset offset of the datum requested
       */
-    virtual char datum( unsigned int offset ) const = 0;
+    virtual Byte byte( Address offset ) const = 0;
 
     /**
       * @return the size of the data
       */
-    virtual int size() const = 0;
+    virtual Size size() const = 0;
 
 
   public: // state read API
@@ -134,7 +134,7 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
       */
     virtual bool isModified() const = 0;
 
-
+// TODO: for data outside the model using char* and int as well as QByteArray should always work, no?
   public: // modification API
     /** inserts bytes copied from the given source at Position.
       * The original data beginnung at the position is moved
@@ -145,16 +145,16 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
       * @param insertLength number of bytes to copy
       * @return length of inserted data
       */
-    virtual int insert( int offset, const char *insertData, int insertLength );
-    int insert( int offset, const QByteArray &insertData );
+    virtual Size insert( Address offset, const Byte* insertData, int insertLength );
+    Size insert( Address offset, const QByteArray& insertData );
 
     /** removes beginning with position as much as possible
       * @param removeSection
       * @return length of removed data
       */
-    virtual int remove( const KDE::Section& removeSection );
+    virtual Size remove( const AddressRange& removeRange );
     /** convenience function, behaves as above */
-    int remove( int offset, int removeLength );
+    Size remove( Address offset, Size removeLength );
 
     /** replaces as much as possible
       * @param removeSection
@@ -162,38 +162,38 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
       * @param insertLength
       * @return length of inserted data
       */
-    virtual unsigned int replace( const KDE::Section& removeSection, const char* insertData, unsigned int insertLength ) = 0;
+    virtual Size replace( const AddressRange& removeRange, const Byte* insertData, int insertLength ) = 0;
     /** convenience function, behaves as above */
-    unsigned int replace( const KDE::Section& removeSection, const QByteArray& insertData );
+    Size replace( const AddressRange& removeRange, const QByteArray& insertData );
     /** convenience function, behaves as above */
-    unsigned int replace( unsigned int offset, unsigned int removeLength,
-                          const char *insertData, unsigned int insertLength );
+    Size replace( Address offset, Size removeLength,
+                  const Byte* insertData, Size insertLength );
 
     // todo use parameters grouped differrently?
     /** moves the second section before the start of the first
       * which is the same as moving the first behind the second.
       * @param firstStart position of the data where the section should be moved behind
-      * @param secondSection data section to be moved
+      * @param secondRange data range to be moved
       * @return @true if operation was successful, @false otherwise
       */
-    virtual bool swap( int firstStart, const KDE::Section& secondSection ) = 0;
+    virtual bool swap( Address firstStart, const AddressRange& secondRange ) = 0;
 
     /**
      * fills the buffer with the FillChar. If the buffer is to small it will be extended as much as possible.
-     * @param fillChar char to use
+     * @param fillByte byte to use
      * @param offset position where the filling starts
-     * @param fillLength number of chars to fill. If Length is -1, the buffer is filled till the end.
-     * @return number of filled characters
+     * @param fillLength number of bytes to fill. If Length is -1, the buffer is filled till the end.
+     * @return number of filled bytes
      */
-    virtual int fill( const char fillChar, unsigned int offset = 0, int fillLength = -1 ) = 0;
-    int fill( const char fillChar, const KDE::Section& fillSection );
+    virtual Size fill( const Byte fillByte, Address offset = 0, Size fillLength = -1 ) = 0;
+    Size fill( const Byte fillChar, const AddressRange& fillRange );
 
     /** sets a single byte
      * if the offset is not valid the behaviour is undefined
      * @param offset offset of the datum requested
      * @param value new byte value
      */
-    virtual void setDatum( unsigned int offset, const char value ) = 0;
+    virtual void setByte( Address offset, Byte byte ) = 0;
 
     /** sets the modified flag for the buffer
       * @param modified
@@ -211,12 +211,12 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
     /** copies the data of the section into a given array Dest. If the section extends the buffers range
       * the section is limited to the buffer's end. If the section is invalid the behaviour is undefined.
       * @param dest pointer to a char array large enough to hold the copied section
-      * @param copySection
+      * @param copyRange
       * @return number of copied bytes
       */
-    virtual int copyTo( char *dest, const KDE::Section& copySection ) const;
+    virtual Size copyTo( Byte* dest, const AddressRange& copyRange ) const;
     /** convenience function, behaves as above */
-    int copyTo( char *dest, int offset, unsigned int copyLength ) const;
+    Size copyTo( Byte* dest, Address offset, Size copyLength ) const;
 
 
   public: // finding API
@@ -226,8 +226,8 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
       * @param fromOffset the position to start the search
       * @return index of the first  or -1
       */
-    virtual int indexOf( const char *pattern, int patternLength, int fromOffset = 0 ) const;
-    int indexOf( const QByteArray &pattern, int fromOffset = 0 ) const;
+    virtual Address indexOf( const Byte* pattern, int patternLength, Address fromOffset = 0 ) const;
+    Address indexOf( const QByteArray& pattern, Address fromOffset = 0 ) const;
     /** searches for a given data string
       * The section limits the data within which the key has to be found
       * If the end of the section is lower than the start the search continues at the start???
@@ -243,45 +243,47 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
       * @param fromOffset the position to start the search. If -1 the search starts at the end.
       * @return index of the first  or -1
       */
-    virtual int lastIndexOf( const char *pattern, int patternLength, int fromOffset = -1 ) const;
-    int lastIndexOf( const QByteArray &pattern, int fromOffset = -1 ) const;
+    virtual Address lastIndexOf( const Byte* pattern, int patternLength, Address fromOffset = -1 ) const;
+    Address lastIndexOf( const QByteArray& pattern, Address fromOffset = -1 ) const;
 
 /*     virtual int find( const QString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */
 
   Q_SIGNALS:
     // TODO: how to deal replacing with fixed size of buffer?
-    void contentsChanged( const KDE::ArrayChangeMetricsList &changeList );
+    void contentsChanged( const Okteta::ArrayChangeMetricsList& changeList );
 
     void readOnlyChanged( bool isReadOnly );
     void modifiedChanged( bool isModified );
 
-    void searchedBytes( int bytes ) const;
+    // TODO: how to handle a typedef with signals
+    void searchedBytes( Okteta::Size bytes ) const;
 };
 
-inline int AbstractByteArrayModel::insert( int Pos, const QByteArray &Source )
-{ return insert( Pos, Source.data(), Source.size() ); }
+// TODO: find why static_cast fails
+inline Size AbstractByteArrayModel::insert( Address offset, const QByteArray& insertData )
+{ return insert( offset, reinterpret_cast<const Byte*>(insertData.constData()), insertData.size() ); }
 
-inline int AbstractByteArrayModel::remove( int Pos, int Length )
-{ return remove( KDE::Section(Pos,Pos+Length-1) ); }
+inline Size AbstractByteArrayModel::remove( Address offset, Size removeLength )
+{ return remove( AddressRange::fromWidth(offset,removeLength) ); }
 
-inline unsigned int AbstractByteArrayModel::replace( const KDE::Section& destSection, const QByteArray& source )
-{ return replace( destSection, source.data(), source.size() );}
+inline Size AbstractByteArrayModel::replace( const AddressRange& removeRange, const QByteArray& insertData )
+{ return replace( removeRange, reinterpret_cast<const Byte*>(insertData.constData()), insertData.size() );}
 
-inline unsigned int AbstractByteArrayModel::replace( unsigned int Pos, unsigned int RemoveLength,
-                                 const char* D, unsigned int InputLength )
-{ return replace( KDE::Section(Pos,Pos+RemoveLength-1), D, InputLength ); }
+inline Size AbstractByteArrayModel::replace( Address offset, Size removeLength,
+                                             const Byte* insertData, Size insertLength )
+{ return replace( AddressRange::fromWidth(offset,removeLength), insertData, insertLength ); }
 
-inline int AbstractByteArrayModel::fill( const char FillChar, const KDE::Section& section )
-{ return fill( FillChar, section.start(), section.width() ); }
+inline Size AbstractByteArrayModel::fill( const Byte fillChar, const AddressRange& fillRange )
+{ return fill( fillChar, fillRange.start(), fillRange.width() ); }
 
-inline int AbstractByteArrayModel::copyTo( char *dest, int offset, unsigned int copyLength ) const
-{ return copyTo( dest, KDE::Section::fromWidth(offset,copyLength) ); }
+inline Size AbstractByteArrayModel::copyTo( Byte* dest, Address offset, Size copyLength ) const
+{ return copyTo( dest, AddressRange::fromWidth(offset,copyLength) ); }
 
-inline int AbstractByteArrayModel::indexOf( const QByteArray& Data, int From ) const
-{ return indexOf( Data.constData(), Data.size(), From ); }
+inline Address AbstractByteArrayModel::indexOf( const QByteArray& pattern, Address fromOffset ) const
+{ return indexOf( reinterpret_cast<const Byte*>(pattern.constData()), pattern.size(), fromOffset ); }
 
-inline int AbstractByteArrayModel::lastIndexOf( const QByteArray& Data, int From ) const
-{ return lastIndexOf( Data.constData(), Data.size(), From ); }
+inline Address AbstractByteArrayModel::lastIndexOf( const QByteArray& pattern, Address fromOffset ) const
+{ return lastIndexOf( reinterpret_cast<const Byte*>(pattern.constData()), pattern.size(), fromOffset ); }
 
 }
 

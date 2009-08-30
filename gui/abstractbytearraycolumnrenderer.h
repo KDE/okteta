@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2003,2007,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -37,13 +37,10 @@ class QPainter;
 class QColor;
 class QBrush;
 
-namespace Okteta {
-class Bookmarkable;
-class CharCodec;
-}
-
 namespace Okteta
 {
+class Bookmarkable;
+class CharCodec;
 
 // class KByteArrayView;
 class ByteArrayTableRanges;
@@ -64,7 +61,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayColumnRenderer : public AbstractColumnRe
     enum FrameStyle { Frame, Left, Right };
   public:
     AbstractByteArrayColumnRenderer( AbstractColumnStylist* stylist,
-        Okteta::AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges );
+        AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges );
     virtual ~AbstractByteArrayColumnRenderer();
 
 
@@ -77,20 +74,20 @@ class OKTETAGUI_EXPORT AbstractByteArrayColumnRenderer : public AbstractColumnRe
 
   public:
     //void renderLine( QPainter *painter, int lineIndex );
-    void renderLinePositions( QPainter *painter, int lineIndex, const KDE::Section &linePositions );
+    void renderLinePositions( QPainter *painter, int lineIndex, const KDE::Section& linePositions );
     /** paints a cursor based on the type of the byte.
       * @param byteIndex Index of the byte to paint the cursor for. If -1 a space is used as char.
       */
-    void renderCursor( QPainter *painter, int byteIndex );
+    void renderCursor( QPainter *painter, Address byteIndex );
     /** paints the byte with background.
       * @param byteIndex Index of the byte to paint. If -1 only the background is painted.
       */
-    void renderByte( QPainter *painter, int byteIndex );
+    void renderByte( QPainter *painter, Address byteIndex );
     /** paints the byte with background and a frame around.
       * @param byteIndex Index of the byte to paint the frame for. If -1 a space is used as char.
       * @param Style the style of the framing
       */
-    void renderFramedByte( QPainter *painter, int byteIndex, FrameStyle style );
+    void renderFramedByte( QPainter *painter, Address byteIndex, FrameStyle style );
 
 
   public: // modification access
@@ -126,11 +123,11 @@ class OKTETAGUI_EXPORT AbstractByteArrayColumnRenderer : public AbstractColumnRe
       */
     void setMetrics( KPixelX digitWidth, KPixelY digitBaseLine );
     /** */
-    void set( Okteta::AbstractByteArrayModel *byteArrayModel );
+    void set( AbstractByteArrayModel *byteArrayModel );
     /** creates new buffer for x-values; to be called on any change of NoOfBytesPerLine or metrics */
     void resetXBuffer();
     /** sets the codec to be used by the char column. */
-    void setCharCodec( const Okteta::CharCodec* charCodec );
+    void setCharCodec( const CharCodec* charCodec );
 
     void setByteTypeColored( bool byteTypeColored );
 
@@ -171,42 +168,42 @@ class OKTETAGUI_EXPORT AbstractByteArrayColumnRenderer : public AbstractColumnRe
     int firstLinePos() const;
     int lastLinePos()  const;
     KDE::Section visibleLinePositions() const;
-    const ByteArrayTableLayout *layout() const;
+    const ByteArrayTableLayout* layout() const;
     bool isByteTypeColored() const;
 
 
   protected: // API to be redefined
-    virtual void renderByteText( QPainter *painter, char byte, Okteta::Character charByte, const QColor &color ) const = 0;
+    virtual void renderByteText( QPainter* painter, Byte byte, Character charByte, const QColor& color ) const = 0;
     /** default implementation sets byte width to one digit width */
     virtual void recalcByteWidth();
 
 
   protected:
-    void renderPlain( QPainter *painter, const KDE::Section &linePositions, int byteIndex );
-    void renderSelection( QPainter *painter, const KDE::Section &linePositions, int byteIndex, int flag );
-    void renderMarking( QPainter *painter, const KDE::Section &linePositions, int byteIndex, int flag );
-    void renderRange( QPainter *painter, const QBrush &brush, const KDE::Section &linePositions, int flag );
-    void renderBookmark( QPainter *painter, const QBrush &brush );
+    void renderPlain( QPainter* painter, const KDE::Section &linePositions, Address byteIndex );
+    void renderSelection( QPainter* painter, const KDE::Section &linePositions, Address byteIndex, int flag );
+    void renderMarking( QPainter* painter, const KDE::Section &linePositions, Address byteIndex, int flag );
+    void renderRange( QPainter* painter, const QBrush &brush, const KDE::Section &linePositions, int flag );
+    void renderBookmark( QPainter* painter, const QBrush& brush );
 
     void recalcX();
 
-    bool isSelected( const KDE::Section &range, KDE::Section *selection, unsigned int *flag ) const;
-    bool isMarked( const KDE::Section &range, KDE::Section *marking, unsigned int *flag ) const;
+    bool isSelected( const AddressRange& range, AddressRange* selection, unsigned int* flag ) const;
+    bool isMarked( const AddressRange& range, AddressRange* markedSection, unsigned int* flag ) const;
 
     void setByteWidth( int byteWidth );
 
 
   protected:
     /** pointer to the buffer */
-    Okteta::AbstractByteArrayModel *mByteArrayModel;
+    AbstractByteArrayModel *mByteArrayModel;
     /** pointer to the layout */
     const ByteArrayTableLayout *mLayout;
     /** pointer to the ranges */
     ByteArrayTableRanges* mRanges;
     /** */
-    Okteta::Bookmarkable *mBookmarks;
+    Bookmarkable *mBookmarks;
     /** */
-    const Okteta::CharCodec* mCharCodec;
+    const CharCodec* mCharCodec;
 
     /** */
     KPixelX mDigitWidth;
@@ -261,7 +258,7 @@ inline KDE::Section AbstractByteArrayColumnRenderer::visibleLinePositions() cons
 
 inline const ByteArrayTableLayout *AbstractByteArrayColumnRenderer::layout() const { return mLayout; }
 
-inline void AbstractByteArrayColumnRenderer::setCharCodec( const Okteta::CharCodec* charCodec )
+inline void AbstractByteArrayColumnRenderer::setCharCodec( const CharCodec* charCodec )
 {
     mCharCodec = charCodec;
 }

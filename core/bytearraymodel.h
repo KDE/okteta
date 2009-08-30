@@ -23,7 +23,6 @@
 #ifndef OKTETA_BYTEARRAYMODEL_H
 #define OKTETA_BYTEARRAYMODEL_H
 
-
 // lib
 #include "abstractbytearraymodel.h"
 #include "bookmarkable.h"
@@ -42,35 +41,38 @@ class ByteArrayModelPrivate;
 class OKTETACORE_EXPORT ByteArrayModel : public AbstractByteArrayModel,
                                          public Bookmarkable
 {
-    Q_OBJECT
-    Q_INTERFACES( Okteta::Bookmarkable )
+  Q_OBJECT
+  Q_INTERFACES(
+    Okteta::Bookmarkable
+  )
 
-    friend class ByteArrayModelPrivate;
+  friend class ByteArrayModelPrivate;
 
   public:
-    ByteArrayModel( char *data, unsigned int size, int rawSize = -1, bool keepMemory = true );
-    ByteArrayModel( const char *data, unsigned int size );
-    explicit ByteArrayModel( int size=0, int maxSize = -1 );
+    ByteArrayModel( Byte* data, int size, int rawSize = -1, bool keepsMemory = true );
+    ByteArrayModel( const Byte* data, int size );
+    explicit ByteArrayModel( int size = 0, int maxSize = -1 );
+
     virtual ~ByteArrayModel();
 
   public: // AbstractByteArrayModel API
-    virtual char datum( unsigned int offset ) const;
-    virtual int size() const;
+    virtual Byte byte( Address offset ) const;
+    virtual Size size() const;
     virtual bool isReadOnly() const;
     virtual bool isModified() const;
 
-    virtual int insert( int at, const char *data, int length );
-    virtual int remove( const KDE::Section& section );
-    virtual unsigned int replace( const KDE::Section& before, const char* after, unsigned int afterLength );
-    virtual bool swap( int firstStart, const KDE::Section& secondSection );
-    virtual int fill( const char fillChar, unsigned int from = 0, int length = -1 );
-    virtual void setDatum( unsigned int offset, const char datum );
+    virtual Size insert( Address offset, const Byte* insertData, int insertLength );
+    virtual Size remove( const AddressRange& removeRange );
+    virtual Size replace( const AddressRange& removeRange, const Byte* insertData, int insertLength );
+    virtual bool swap( Address firstStart, const AddressRange& secondRange );
+    virtual Size fill( const Byte fillByte, Address offset = 0, Size fillLength = -1 );
+    virtual void setByte( Address offset, Byte byte );
 
     virtual void setModified( bool modified = true );
     virtual void setReadOnly( bool isReadOnly = true );
 
-    virtual int indexOf( const char *searchString, int length, int from  = 0 ) const;
-    virtual int lastIndexOf( const char *searchString, int length, int from = -1 ) const;
+    virtual Address indexOf( const Byte* pattern, int patternLength, Address fromOffset = 0 ) const;
+    virtual Address lastIndexOf( const Byte* pattern, int patternLength, Address fromOffset = -1 ) const;
 
   public: // Okteta::Bookmarkable API
     virtual void addBookmarks( const QList<Okteta::Bookmark> &bookmarks );
@@ -91,23 +93,23 @@ class OKTETACORE_EXPORT ByteArrayModel : public AbstractByteArrayModel,
     virtual void bookmarksModified( const QList<int>& indizes );
 
   public:
-    void setMaxSize( int MS );
+    void setMaxSize( int maxSize );
     /** sets whether the memory given by setData or in the constructor should be kept on resize
       */
-    void setKeepsMemory( bool keepMemory = true );
+    void setKeepsMemory( bool keepsMemory = true );
     void setAutoDelete( bool autoDelete = true );
-    void setData( char *data, unsigned int size, int rawSize = -1, bool keepMemory = true );
+    void setData( Byte* data, int size, int rawSize = -1, bool keepsMemory = true );
     void signalContentsChanged( int i1, int i2 );
 
   public:
-    char *data() const;
+    Byte* data() const;
     int maxSize() const;
     /** returns whether the memory of the byte array is kept on resize */
     bool keepsMemory() const;
     bool autoDelete() const;
 
   protected:
-    ByteArrayModelPrivate * const d;
+    ByteArrayModelPrivate* const d;
 };
 
 }

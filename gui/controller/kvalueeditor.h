@@ -26,6 +26,8 @@
 
 // lib
 #include "keditor.h"
+// Okteta core
+#include <byte.h>
 // Qt
 #include <QtCore/QString>
 
@@ -56,7 +58,7 @@ class KValueEditor: public KEditor
 
   public:
     bool isInEditMode() const;
-    unsigned char value() const;
+    Byte value() const;
     QString valueAsString() const;
 
   protected:
@@ -75,9 +77,9 @@ class KValueEditor: public KEditor
     /** flag whether byte edit mode was reached by inserting */
     bool mEditModeByInsert:1;
     /** */
-    unsigned char mEditValue;
+    Byte mEditValue;
     /** stores the old byte value */
-    unsigned char mOldValue; // TODO: this or rely on undo?
+    Byte mOldValue; // TODO: this or rely on undo?
     /** */
     unsigned int mInsertedDigitsCount;
     /** buffer with the  */
@@ -86,7 +88,7 @@ class KValueEditor: public KEditor
 
 inline bool KValueEditor::isInEditMode() const { return mInEditMode; }
 inline void KValueEditor::reset() { mInEditMode = false; }
-inline unsigned char KValueEditor::value() const { return mEditValue; }
+inline Byte KValueEditor::value() const { return mEditValue; }
 inline QString KValueEditor::valueAsString() const { return mValueString; }
 
 }

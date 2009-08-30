@@ -118,11 +118,11 @@ void SearchTool::search( KFindDirection direction, bool fromCursor, bool inSelec
 {
     mPreviousFound = false;
 
-    int startIndex;
+    Okteta::Address startIndex;
 
     if( inSelection )
     {
-        const KDE::Section selection = mByteArrayDisplay->selection();
+        const Okteta::AddressRange selection = mByteArrayDisplay->selection();
         mSearchFirstIndex = selection.start();
         mSearchLastIndex =  selection.end();
         startIndex = selection.start();
@@ -130,7 +130,7 @@ void SearchTool::search( KFindDirection direction, bool fromCursor, bool inSelec
     }
     else
     {
-        const int cursorPosition = mByteArrayDisplay->cursorPosition();
+        const Okteta::Address cursorPosition = mByteArrayDisplay->cursorPosition();
         if( fromCursor && (cursorPosition!=0) )
         {
             mSearchFirstIndex = cursorPosition;
@@ -148,7 +148,7 @@ void SearchTool::search( KFindDirection direction, bool fromCursor, bool inSelec
     doSearch( direction, startIndex );
 }
 
-void SearchTool::doSearch( KFindDirection direction, int startIndex )
+void SearchTool::doSearch( KFindDirection direction, Okteta::Address startIndex )
 {
     bool wrapEnabled = (direction==FindForward) ? (mSearchLastIndex<startIndex) : (startIndex<mSearchFirstIndex);
 
@@ -159,7 +159,7 @@ void SearchTool::doSearch( KFindDirection direction, int startIndex )
         const bool isForward = ( direction == FindForward );
         SearchJob* searchJob =
             new SearchJob( mByteArrayModel, mSearchData, startIndex, isForward, mIgnoreCase, mByteArrayDisplay->charCodingName() );
-        const int pos = searchJob->exec();
+        const Okteta::Address pos = searchJob->exec();
 
         QApplication::restoreOverrideCursor();
 

@@ -26,6 +26,10 @@
 // Qt
 #include <QtCore/QObject>
 
+
+namespace Okteta
+{
+
 class FixedSizeByteArrayModelTest : public QObject
 {
   Q_OBJECT
@@ -35,5 +39,7 @@ class FixedSizeByteArrayModelTest : public QObject
     //void testCopy();
 
 };
+
+}
 
 #endif

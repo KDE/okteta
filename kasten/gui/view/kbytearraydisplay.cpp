@@ -60,7 +60,7 @@ KByteArrayDisplay::KByteArrayDisplay( KByteArrayDisplay* other, Qt::Alignment al
     mWidget->setNoOfBytesPerLine( other->noOfBytesPerLine() );
     // TODO: this can lead to different layouts due to possible one-pixel difference in width!
     setResizeStyle( other->resizeStyle() );
-    const KDE::Section selection = other->selection();
+    const Okteta::AddressRange selection = other->selection();
     setSelection( selection.start(), selection.end() );
     setZoomLevel( other->zoomLevel() );
     setReadOnly( other->isReadOnly() );
@@ -100,8 +100,8 @@ void KByteArrayDisplay::init()
     connect( mWidget, SIGNAL(hasSelectedDataChanged( bool )), SIGNAL(hasSelectedDataChanged( bool )) );
     connect( mWidget, SIGNAL(readOnlyChanged( bool )), SIGNAL(readOnlyChanged( bool )) );
     connect( mWidget, SIGNAL(overwriteModeChanged( bool )), SIGNAL(overwriteModeChanged( bool )) );
-    connect( mWidget, SIGNAL(selectionChanged( const KDE::Section& )), SLOT(onSelectionChanged( const KDE::Section& )) );
-    connect( mWidget, SIGNAL(cursorPositionChanged( int )), SIGNAL(cursorPositionChanged( int )) );
+    connect( mWidget, SIGNAL(selectionChanged( const Okteta::AddressRange& )), SLOT(onSelectionChanged( const Okteta::AddressRange& )) );
+    connect( mWidget, SIGNAL(cursorPositionChanged( Okteta::Address )), SIGNAL(cursorPositionChanged( Okteta::Address )) );
     connect( mWidget, SIGNAL(valueCodingChanged( int )), SIGNAL(valueCodingChanged( int )) );
     connect( mWidget, SIGNAL(charCodecChanged( const QString& )), SIGNAL(charCodecChanged( const QString& )) );
     connect( mWidget, SIGNAL(focusChanged( bool )), SIGNAL(focusChanged( bool )) );
@@ -172,24 +172,24 @@ bool KByteArrayDisplay::canReadData( const QMimeData *data ) const
     return mWidget->canReadData( data );
 }
 
-void KByteArrayDisplay::onSelectionChanged( const KDE::Section& selection )
+void KByteArrayDisplay::onSelectionChanged( const Okteta::AddressRange& selection )
 {
     // TODO: how to make sure the signal hasSelectedDataChanged() is not emitted before?
-    mSelection.setSection( selection );
+    mSelection.setRange( selection );
     emit selectedDataChanged( &mSelection );
 }
 
-void KByteArrayDisplay::setCursorPosition( int cursorPosition )
+void KByteArrayDisplay::setCursorPosition( Okteta::Address cursorPosition )
 {
     mWidget->setCursorPosition( cursorPosition );
 }
 
-void KByteArrayDisplay::setSelectionCursorPosition( int index )
+void KByteArrayDisplay::setSelectionCursorPosition( Okteta::Address index )
 {
     mWidget->setSelectionCursorPosition( index );
 }
 
-int KByteArrayDisplay::cursorPosition() const
+Okteta::Address KByteArrayDisplay::cursorPosition() const
 {
     return mWidget->cursorPosition();
 }
@@ -198,11 +198,11 @@ QRect KByteArrayDisplay::cursorRect() const
     return mWidget->cursorRect();
 }
 
-int KByteArrayDisplay::startOffset() const
+Okteta::Address KByteArrayDisplay::startOffset() const
 {
     return mWidget->startOffset();
 }
-int KByteArrayDisplay::firstLineOffset() const
+Okteta::Address KByteArrayDisplay::firstLineOffset() const
 {
     return mWidget->firstLineOffset();
 }
@@ -233,12 +233,12 @@ void KByteArrayDisplay::setCharCoding( const QString& charCodingName )
 }
 
 
-KDE::Section KByteArrayDisplay::selection() const
+Okteta::AddressRange KByteArrayDisplay::selection() const
 {
     return mWidget->selection();
 }
 
-void KByteArrayDisplay::setSelection( int start, int end )
+void KByteArrayDisplay::setSelection( Okteta::Address start, Okteta::Address end )
 {
     mWidget->setSelection( start, end );
 }

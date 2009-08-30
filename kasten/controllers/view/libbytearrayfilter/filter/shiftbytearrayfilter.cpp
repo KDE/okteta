@@ -29,6 +29,7 @@
 // Qt
 #include <QtCore/QtGlobal>
 
+
 static const int ShiftBitsPerByte = 8;
 
 ShiftByteArrayFilter::ShiftByteArrayFilter()
@@ -39,8 +40,8 @@ ShiftByteArrayFilter::ShiftByteArrayFilter()
 
 AbstractByteArrayFilterParameterSet *ShiftByteArrayFilter::parameterSet() { return &mParameterSet; }
 
-bool ShiftByteArrayFilter::filter( char *result,
-                                   Okteta::AbstractByteArrayModel *model, const KDE::Section &section ) const
+bool ShiftByteArrayFilter::filter( Okteta::Byte* result,
+                                   Okteta::AbstractByteArrayModel *model, const Okteta::AddressRange& range ) const
 {
     const int groupSize = mParameterSet.groupSize();
     const int groupBitCount = (groupSize * ShiftBitsPerByte );
@@ -55,21 +56,21 @@ bool ShiftByteArrayFilter::filter( char *result,
     if( toRight )
     {
         int r = 0;
-        int m = section.start();
-        while( m <= section.end() )
+        Okteta::Address m = range.start();
+        while( m <= range.end() )
         {
             int g = 0;
             // full free bytes
-            while( g < shiftByteWidth && m <= section.end() )
+            while( g < shiftByteWidth && m <= range.end() )
             {
                 result[r++] = 0;
                 ++m;
                 ++g;
             }
             // byte layer shift
-            while( g < groupSize && m <= section.end() )
+            while( g < groupSize && m <= range.end() )
             {
-                result[r++] = model->datum( (m++)-shiftByteWidth );
+                result[r++] = model->byte( (m++)-shiftByteWidth );
                 ++g;
             }
             // bit layer shift
@@ -84,25 +85,25 @@ bool ShiftByteArrayFilter::filter( char *result,
             if( filteredBytesCount >= FilteredByteCountSignalLimit )
             {
                 filteredBytesCount = 0;
-                emit filteredBytes( m-section.start() );
+                emit filteredBytes( m-range.start() );
             }
         }
     }
     else
     {
         int r = 0;
-        int m = section.start();
-        while( m <= section.end() )
+        Okteta::Address m = range.start();
+        while( m <= range.end() )
         {
             int g = 0;
             // byte layer shift
-            while( g+shiftByteWidth < groupSize && m+shiftByteWidth <= section.end() )
+            while( g+shiftByteWidth < groupSize && m+shiftByteWidth <= range.end() )
             {
-                result[r++] = model->datum( (m++)+shiftByteWidth );
+                result[r++] = model->byte( (m++)+shiftByteWidth );
                 ++g;
             }
             // full free bytes
-            while( g < groupSize && m <= section.end() )
+            while( g < groupSize && m <= range.end() )
             {
                 result[r++] = 0;
                 ++m;
@@ -121,7 +122,7 @@ bool ShiftByteArrayFilter::filter( char *result,
             if( filteredBytesCount >= FilteredByteCountSignalLimit )
             {
                 filteredBytesCount = 0;
-                emit filteredBytes( m-section.start() );
+                emit filteredBytes( m-range.start() );
             }
         }
     }

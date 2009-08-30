@@ -28,11 +28,13 @@
 #include <QtTest/QtTest>
 
 
-using namespace KDE;
-
+namespace Okteta
+{
 
 void ByteArrayModelTest::testNothing()
 {
 }
 
-QTEST_MAIN( ByteArrayModelTest )
+}
+
+QTEST_MAIN( Okteta::ByteArrayModelTest )

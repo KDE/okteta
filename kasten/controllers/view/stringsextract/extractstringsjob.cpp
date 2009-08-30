@@ -50,11 +50,11 @@ void ExtractStringsJob::exec()
     }
 
     bool stringStarted = false;
-    int stringStart = mSelection.start();
+    Okteta::Address stringStart = mSelection.start();
     QString string;
 
-    int i = mSelection.start();
-    int blockEnd = mSelection.start();
+    Okteta::Address i = mSelection.start();
+    Okteta::Address blockEnd = mSelection.start();
     while( i<=mSelection.end() )
     {
         blockEnd += ExtractStringBlockSize;
@@ -63,7 +63,7 @@ void ExtractStringsJob::exec()
 
         for( ; i<=blockEnd; ++i )
         {
-            const Okteta::Character decodedChar = mCharCodec->decode( mByteArrayModel->datum(i) );
+            const Okteta::Character decodedChar = mCharCodec->decode( mByteArrayModel->byte(i) );
             // TODO: Zeilenumbrüche ausnehmen
             const bool isStringChar = ( !decodedChar.isUndefined() &&
                                         (decodedChar.isLetterOrNumber() || decodedChar.isSpace() || decodedChar.isPunct()) );

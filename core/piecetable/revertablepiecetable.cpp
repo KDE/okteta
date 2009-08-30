@@ -29,79 +29,78 @@
 #include "swaprangespiecetablechange.h"
 //
 #include <arraychangemetricslist.h>
-//
-#include <sectionlist.h>
+
 
 namespace KPieceTable
 {
 
 RevertablePieceTable::RevertablePieceTable() {}
 
-void RevertablePieceTable::init( int size )
+void RevertablePieceTable::init( Size size )
 {
     mPieceTable.init( size );
     mChangeHistory.clear();
 }
 
-void RevertablePieceTable::getChangeData( KDE::ArrayChangeMetrics* metrics, int *storageOffset, int versionIndex ) const
+void RevertablePieceTable::getChangeData( ArrayChangeMetrics* metrics, Address* storageOffset, int versionIndex ) const
 {
     mChangeHistory.getChangeData( metrics, storageOffset, versionIndex );
 }
 
-bool RevertablePieceTable::insert( int dataOffset, int length, int *storageOffset )
+bool RevertablePieceTable::insert( Address dataOffset, Size length, Address* storageOffset )
 {
     *storageOffset = mChangeHistory.appliedChangesDataSize();
 
     mPieceTable.insert( dataOffset, length, *storageOffset );
 
-    InsertPieceTableChange *change =
+    InsertPieceTableChange* change =
         new InsertPieceTableChange( dataOffset, length, *storageOffset );
 
     return mChangeHistory.appendChange( change );
 }
 
-bool RevertablePieceTable::remove( const KDE::Section &removeSection )
+bool RevertablePieceTable::remove( const AddressRange& removeRange )
 {
-    const PieceList removedPieces = mPieceTable.remove( removeSection );
+    const PieceList removedPieces = mPieceTable.remove( removeRange );
 
-    RemovePieceTableChange *change =
-        new RemovePieceTableChange( removeSection, removedPieces );
+    RemovePieceTableChange* change =
+        new RemovePieceTableChange( removeRange, removedPieces );
 
     return mChangeHistory.appendChange( change );
 }
 
-bool RevertablePieceTable::replace( const KDE::Section &removeSection, int insertLength, int *storageOffset )
+bool RevertablePieceTable::replace( const AddressRange& removeRange, Size insertLength, Size* storageSize )
 {
-    *storageOffset = mChangeHistory.appliedChangesDataSize();
+    *storageSize = mChangeHistory.appliedChangesDataSize();
 
-    const PieceList replacedPieces = mPieceTable.remove( removeSection );
-    mPieceTable.insert( removeSection.start(), insertLength, *storageOffset );
+    const PieceList replacedPieces = mPieceTable.remove( removeRange );
+    mPieceTable.insert( removeRange.start(), insertLength, *storageSize );
 
-    ReplacePieceTableChange *change =
-        new ReplacePieceTableChange( removeSection, insertLength, *storageOffset, replacedPieces );
+    ReplacePieceTableChange* change =
+        new ReplacePieceTableChange( removeRange, insertLength, *storageSize, replacedPieces );
 
     return mChangeHistory.appendChange( change );
 }
 
-bool RevertablePieceTable::swap( int firstStart, const KDE::Section &secondSection )
+bool RevertablePieceTable::swap( Address firstStart, const AddressRange& secondRange )
 {
-    mPieceTable.swap( firstStart, secondSection );
+    mPieceTable.swap( firstStart, secondRange );
 
-    SwapRangesPieceTableChange *change =
-        new SwapRangesPieceTableChange( firstStart, secondSection);
+    SwapRangesPieceTableChange* change =
+        new SwapRangesPieceTableChange( firstStart, secondRange);
 
     return mChangeHistory.appendChange( change );
 }
 
-bool RevertablePieceTable::replaceOne( int dataOffset, int *storageOffset )
+bool RevertablePieceTable::replaceOne( Address dataOffset, Size* storageSize )
 {
-    *storageOffset = mChangeHistory.appliedChangesDataSize();
+    *storageSize = mChangeHistory.appliedChangesDataSize();
 
-    const Piece replacedPiece = mPieceTable.replaceOne( dataOffset, *storageOffset );
+    const Piece replacedPiece = mPieceTable.replaceOne( dataOffset, *storageSize );
     const PieceList replacedPieces( replacedPiece );
 
-    ReplacePieceTableChange *change =
-        new ReplacePieceTableChange( KDE::Section::fromWidth(dataOffset,1), 1, *storageOffset, replacedPieces );
+    ReplacePieceTableChange* change =
+        new ReplacePieceTableChange( AddressRange::fromWidth(dataOffset,1), 1, *storageSize, replacedPieces );
 
     return mChangeHistory.appendChange( change );
 }

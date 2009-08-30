@@ -90,7 +90,7 @@ void SelectRangeTool::setTargetModel( AbstractModel* model )
 
     if( mByteArrayDisplay && mByteArrayModel )
     {
-        connect( mByteArrayModel, SIGNAL(contentsChanged( const KDE::ArrayChangeMetricsList& )),
+        connect( mByteArrayModel, SIGNAL(contentsChanged( const Okteta::ArrayChangeMetricsList& )),
                  SLOT(onContentsChanged()) );
         // TODO: update isApplyable on cursor movement and size changes
     }

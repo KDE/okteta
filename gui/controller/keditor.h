@@ -23,7 +23,6 @@
 #ifndef OKTETA_KEDITOR_H
 #define OKTETA_KEDITOR_H
 
-
 // lib
 #include "kcontroller.h"
 
@@ -32,6 +31,7 @@ namespace Okteta
 {
 class AbstractByteArrayView;
 class ByteArrayTableCursor;
+
 
 class KEditor : public KController
 {

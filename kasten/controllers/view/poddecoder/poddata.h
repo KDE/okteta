@@ -23,6 +23,8 @@
 #ifndef PODDATA_H
 #define PODDATA_H
 
+// Okteta core
+#include <byte.h>
 // Qt
 #include <QtCore/Qt>
 
@@ -50,7 +52,7 @@ class PODData
   public:
     void setByteOrder( int byteOrder );
     bool updateRawData( int size );
-    unsigned char* rawData();
+    Okteta::Byte* rawData();
 
   public:
     const unsigned char* originalData() const;
@@ -64,7 +66,7 @@ class PODData
 
   protected:
     // ensure strict alignment for double as needed on some architectures (e.g. PA-RISC)
-    typedef union { unsigned char Data[Size]; double Dummy; } Aligned64Bit;
+    typedef union { unsigned char Data[Size]; double Dummy; Okteta::Byte Bytes[Size]; } Aligned64Bit;
 
   protected:
     unsigned char* mCurrentOriginalData;

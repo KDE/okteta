@@ -38,12 +38,12 @@ ModSum64ByteArrayChecksumAlgorithm::ModSum64ByteArrayChecksumAlgorithm()
 AbstractByteArrayChecksumParameterSet* ModSum64ByteArrayChecksumAlgorithm::parameterSet() { return &mParameterSet; }
 
 bool ModSum64ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
-                                                            const Okteta::AbstractByteArrayModel* model, const KDE::Section& section ) const
+                                                            const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const
 {
     const bool useLittleEndian = ( mParameterSet.endianness() == LittleEndian );
     quint64 modSum = useLittleEndian ?
-        calculateModSumWithLittleEndian( model, section ) :
-        calculateModSumWithBigEndian( model, section );
+        calculateModSumWithLittleEndian( model, range ) :
+        calculateModSumWithBigEndian( model, range );
 
     modSum = ~modSum + 1;
 
@@ -54,42 +54,42 @@ bool ModSum64ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
     return true;
 }
 
-quint64 ModSum64ByteArrayChecksumAlgorithm::calculateModSumWithBigEndian( const Okteta::AbstractByteArrayModel* model, const KDE::Section& section ) const
+quint64 ModSum64ByteArrayChecksumAlgorithm::calculateModSumWithBigEndian( const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const
 {
     quint64 modSum = 0x00000000;
-    int nextBlockEnd = section.start() + CalculatedByteCountSignalLimit;
+    Okteta::Address nextBlockEnd = range.start() + CalculatedByteCountSignalLimit;
 
     // TODO: move padding checks into extra code before and after loop
-    for( int i = section.start(); i<=section.end(); ++i )
+    for( Okteta::Address i = range.start(); i<=range.end(); ++i )
     {
-        quint64 value = (quint64)( (quint8)(model->datum( i )) ) << 56;
+        quint64 value = (quint64)( (quint8)(model->byte( i )) ) << 56;
         ++i;
-        if( i<=section.end() )
+        if( i<=range.end() )
         {
-            value |= (quint64)( (quint8)(model->datum( i )) ) << 48;
+            value |= (quint64)( (quint8)(model->byte( i )) ) << 48;
             ++i;
-            if( i<=section.end() )
+            if( i<=range.end() )
             {
-                value |= (quint64)( (quint8)(model->datum( i )) ) << 40;
+                value |= (quint64)( (quint8)(model->byte( i )) ) << 40;
                 ++i;
-                if( i<=section.end() )
+                if( i<=range.end() )
                 {
-                    value |= (quint64)( (quint8)(model->datum( i )) ) << 32;
+                    value |= (quint64)( (quint8)(model->byte( i )) ) << 32;
                     ++i;
-                    if( i<=section.end() )
+                    if( i<=range.end() )
                     {
-                        value |= (quint64)( (quint8)(model->datum( i )) ) << 24;
+                        value |= (quint64)( (quint8)(model->byte( i )) ) << 24;
                         ++i;
-                        if( i<=section.end() )
+                        if( i<=range.end() )
                         {
-                            value |= (quint64)( (quint8)(model->datum( i )) ) << 16;
+                            value |= (quint64)( (quint8)(model->byte( i )) ) << 16;
                             ++i;
-                            if( i<=section.end() )
+                            if( i<=range.end() )
                             {
-                                value |= (quint64)( (quint8)(model->datum( i )) ) << 8;
+                                value |= (quint64)( (quint8)(model->byte( i )) ) << 8;
                                 ++i;
-                                if( i<=section.end() )
-                                    value |= (quint64)( (quint8)(model->datum( i )) );
+                                if( i<=range.end() )
+                                    value |= (quint64)( (quint8)(model->byte( i )) );
                             }
                         }
                     }
@@ -99,56 +99,56 @@ quint64 ModSum64ByteArrayChecksumAlgorithm::calculateModSumWithBigEndian( const 
 
         modSum += value;
 #if 0
-        const uchar value = (crcBits & 0xFF) + model->datum( i );
+        const uchar value = (crcBits & 0xFF) + model->byte( i );
         crcBits >>= 8;
         crcBits ^= lookupTable[value];
 #endif
         if( i >= nextBlockEnd )
         {
             nextBlockEnd += CalculatedByteCountSignalLimit;
-            emit calculatedBytes( section.localIndex(i)+1 );
+            emit calculatedBytes( range.localIndex(i)+1 );
         }
     }
 
     return modSum;
 }
 
-quint64 ModSum64ByteArrayChecksumAlgorithm::calculateModSumWithLittleEndian( const Okteta::AbstractByteArrayModel* model, const KDE::Section& section ) const
+quint64 ModSum64ByteArrayChecksumAlgorithm::calculateModSumWithLittleEndian( const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const
 {
     quint64 modSum = 0x00000000;
-    int nextBlockEnd = section.start() + CalculatedByteCountSignalLimit;
+    Okteta::Address nextBlockEnd = range.start() + CalculatedByteCountSignalLimit;
 
     // TODO: move padding checks into extra code before and after loop
-    for( int i = section.start(); i<=section.end(); ++i )
+    for( Okteta::Address i = range.start(); i<=range.end(); ++i )
     {
-        quint64 value = (quint8)( model->datum(i) );
+        quint64 value = (quint8)( model->byte(i) );
         ++i;
-        if( i<=section.end() )
+        if( i<=range.end() )
         {
-            value |= (quint64)( (quint8)(model->datum( i )) ) << 8;
+            value |= (quint64)( (quint8)(model->byte( i )) ) << 8;
             ++i;
-            if( i<=section.end() )
+            if( i<=range.end() )
             {
-                value |= (quint64)( (quint8)(model->datum( i )) ) << 16;
+                value |= (quint64)( (quint8)(model->byte( i )) ) << 16;
                 ++i;
-                if( i<=section.end() )
+                if( i<=range.end() )
                 {
-                    value |= (quint64)( (quint8)(model->datum( i )) ) << 24;
+                    value |= (quint64)( (quint8)(model->byte( i )) ) << 24;
                     ++i;
-                    if( i<=section.end() )
+                    if( i<=range.end() )
                     {
-                        value |= (quint64)( (quint8)(model->datum( i )) ) << 32;
+                        value |= (quint64)( (quint8)(model->byte( i )) ) << 32;
                         ++i;
-                        if( i<=section.end() )
+                        if( i<=range.end() )
                         {
-                            value |= (quint64)( (quint8)(model->datum( i )) ) << 40;
+                            value |= (quint64)( (quint8)(model->byte( i )) ) << 40;
                             ++i;
-                            if( i<=section.end() )
+                            if( i<=range.end() )
                             {
-                                value |= (quint64)( (quint8)(model->datum( i )) ) << 48;
+                                value |= (quint64)( (quint8)(model->byte( i )) ) << 48;
                                 ++i;
-                                if( i<=section.end() )
-                                    value |= (quint64)( (quint8)(model->datum( i )) ) << 56;
+                                if( i<=range.end() )
+                                    value |= (quint64)( (quint8)(model->byte( i )) ) << 56;
                             }
                         }
                     }
@@ -158,14 +158,14 @@ quint64 ModSum64ByteArrayChecksumAlgorithm::calculateModSumWithLittleEndian( con
 
         modSum += value;
 #if 0
-        const uchar value = (crcBits & 0xFF) + model->datum( i );
+        const uchar value = (crcBits & 0xFF) + model->byte( i );
         crcBits >>= 8;
         crcBits ^= lookupTable[value];
 #endif
         if( i >= nextBlockEnd )
         {
             nextBlockEnd += CalculatedByteCountSignalLimit;
-            emit calculatedBytes( section.localIndex(i)+1 );
+            emit calculatedBytes( range.localIndex(i)+1 );
         }
     }
 

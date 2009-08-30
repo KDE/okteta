@@ -26,7 +26,7 @@
 // Qt
 #include <QtCore/QObject>
 
-namespace KDE
+namespace Okteta
 {
 
 class ArrayChangeMetricsTest : public QObject

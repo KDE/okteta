@@ -42,14 +42,14 @@ static const int DefaultBinaryGapWidth = 1;
 
 
 ValueByteArrayColumnRenderer::ValueByteArrayColumnRenderer( AbstractColumnStylist* stylist,
-    Okteta::AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges )
+    AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges )
  : AbstractByteArrayColumnRenderer( stylist, byteArrayModel, layout, ranges ),
    mValueCodec( 0 ),
    mBinaryGapWidth( DefaultBinaryGapWidth )
 {
 }
 
-void ValueByteArrayColumnRenderer::setValueCodec( Okteta::ValueCoding valueCoding, const Okteta::ValueCodec* valueCodec )
+void ValueByteArrayColumnRenderer::setValueCodec( ValueCoding valueCoding, const ValueCodec* valueCodec )
 {
     mValueCoding = valueCoding;
     mValueCodec = valueCodec;
@@ -94,9 +94,9 @@ void ValueByteArrayColumnRenderer::recalcByteWidth()
 
 
 // perhaps sometimes there will be a grammar
-void ValueByteArrayColumnRenderer::renderEditedByte( QPainter *painter, char byte, const QString &EditBuffer )
+void ValueByteArrayColumnRenderer::renderEditedByte( QPainter* painter, Byte byte, const QString& editBuffer )
 {
-    const Okteta::Character byteChar = mCharCodec->decode( byte );
+    const Character byteChar = mCharCodec->decode( byte );
 
     const QPalette& palette = stylist()->palette();
     KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::View );
@@ -107,12 +107,12 @@ void ValueByteArrayColumnRenderer::renderEditedByte( QPainter *painter, char byt
 
     const QBrush backgroundBrush = colorScheme.background();
     const QColor &charColor = backgroundBrush.color();
-    renderCode( painter, EditBuffer, charColor );
+    renderCode( painter, editBuffer, charColor );
 }
 
 
-void ValueByteArrayColumnRenderer::renderByteText( QPainter *painter,
-                                                   char byte, Okteta::Character byteChar, const QColor &color ) const
+void ValueByteArrayColumnRenderer::renderByteText( QPainter* painter,
+                                                   Byte byte, Character byteChar, const QColor& color ) const
 {
 Q_UNUSED( byteChar )
 

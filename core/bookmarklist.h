@@ -50,14 +50,14 @@ class BookmarkList : public QLinkedList<Bookmark>
     void removeBookmarks( const QList<Okteta::Bookmark> &bookmarks );
     void setBookmark( unsigned int index, const Bookmark& bookmark );
 
-    bool adjustToReplaced( int offset, int removedLength, int insertedLength );
-    bool adjustToSwapped( int firstPartStart, int secondPartStart, int secondPartLength );
+    bool adjustToReplaced( Address offset, Size removedLength, Size insertedLength );
+    bool adjustToSwapped( Address firstPartStart, Address secondPartStart, Size secondPartLength );
 
   public:
     // TODO: this function needs to be called with a valid offset, will return a reference to a zero pointer else
     // want a reference for speed, perhaps need a global static dummy invalid bookmark
-    const Bookmark& bookmark( int offset ) const;
-    bool contains( int offset ) const;
+    const Bookmark& bookmark( Address offset ) const;
+    bool contains( Address offset ) const;
     using QLinkedList<Bookmark>::contains;
     const Bookmark& at( unsigned int index ) const;
     QList<Okteta::Bookmark> list() const;

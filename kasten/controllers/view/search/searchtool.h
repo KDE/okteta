@@ -27,6 +27,8 @@
 #include <kfinddirection.h>
 // Kasten core
 #include <abstracttool.h>
+// Okteta core
+#include <address.h>
 
 namespace Okteta {
 class AbstractByteArrayModel;
@@ -79,7 +81,7 @@ class SearchTool : public AbstractTool
     void dataNotFound();
 
   protected:
-    void doSearch( KFindDirection direction, int startIndex );
+    void doSearch( KFindDirection direction, Okteta::Address startIndex );
 
   protected: // settings
     QByteArray mSearchData;
@@ -87,8 +89,8 @@ class SearchTool : public AbstractTool
 
   protected: // status
     bool mPreviousFound;
-    int mSearchFirstIndex;
-    int mSearchLastIndex;
+    Okteta::Address mSearchFirstIndex;
+    Okteta::Address mSearchLastIndex;
 
   protected: //
     If::SearchUserQueryable* mUserQueryAgent;

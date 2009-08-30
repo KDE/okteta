@@ -25,12 +25,17 @@
 
 
 // lib
-#include <section.h>
+#include <addressrange.h>
 
 namespace KPieceTable
 {
 
-class Piece : public KDE::Section
+typedef Okteta::Size Size;
+typedef Okteta::Address Address;
+typedef Okteta::AddressRange AddressRange;
+
+
+class Piece : public AddressRange
 {
   public:
     enum {
@@ -39,8 +44,8 @@ class Piece : public KDE::Section
     };
 
   public:
-    Piece( int storageOffset, int size, int storageId );
-    Piece( const KDE::Section &storageSection, int storageId );
+    Piece( Address storageOffset, Size size, int storageId );
+    Piece( const AddressRange& storageRange, int storageId );
     Piece();
 
   public:
@@ -48,74 +53,79 @@ class Piece : public KDE::Section
 
   public:
     void setStorageId( int storageId );
-    Piece splitAt( int storageOffset );
-    Piece splitAtLocal( int localStorageOffset );
-    Piece remove( const KDE::Section &removeStorageSection );
-    Piece removeLocal( const KDE::Section &localRemoveStorageSection );
-    Piece removeStartBeforeLocal( int storageOffset );
-    Piece removeEndBehindLocal( int storageOffset );
-    bool prepend( const Piece &other );
-    bool append( const Piece &other );
-
+    Piece splitAt( Address storageOffset );
+    Piece splitAtLocal( Address localStorageOffset );
+    Piece remove( const AddressRange& removeStorageRange );
+    Piece removeLocal( const AddressRange& localRemoveStorageRange );
+    Piece removeStartBeforeLocal( Address storageOffset );
+    Piece removeEndBehindLocal( Address storageOffset );
+    bool prepend( const Piece& other );
+    bool append( const Piece& other );
 
   public:
-    Piece subPiece( const Section &local ) const;
+    Piece subPiece( const AddressRange& local ) const;
 
   protected:
     int mStorageId;
 };
 
-inline Piece::Piece( int storageOffset, int size, int storageId )
-: KDE::Section( KDE::Section::fromWidth(storageOffset,size) ), mStorageId( storageId ) {}
-inline Piece::Piece( const KDE::Section &storageSection, int storageId )
-: KDE::Section( storageSection ), mStorageId( storageId ) {}
+
+inline Piece::Piece( Address storageOffset, Size size, int storageId )
+  : AddressRange( AddressRange::fromWidth(storageOffset,size) ),
+    mStorageId( storageId )
+{}
+inline Piece::Piece( const AddressRange& storageRange, int storageId )
+  : AddressRange( storageRange ),
+    mStorageId( storageId )
+{}
 inline Piece::Piece() : mStorageId(OriginalStorage) {}
+
 inline int Piece::storageId() const { return mStorageId; }
 
 inline void Piece::setStorageId( int storageId ) { mStorageId = storageId; }
 
-inline Piece Piece::splitAt( int storageOffset )
+inline Piece Piece::splitAt( Address storageOffset )
 {
-    return Piece( KDE::Section::splitAt(storageOffset), mStorageId );
+    return Piece( AddressRange::splitAt(storageOffset), mStorageId );
 }
-inline Piece Piece::splitAtLocal( int localStorageOffset )
+inline Piece Piece::splitAtLocal( Address localStorageOffset )
 {
-    return Piece( KDE::Section::splitAtLocal(localStorageOffset), mStorageId );
+    return Piece( AddressRange::splitAtLocal(localStorageOffset), mStorageId );
 }
-inline Piece Piece::remove( const KDE::Section &removeStorageSection )
+inline Piece Piece::remove( const AddressRange& removeStorageRange )
 {
-    return Piece( KDE::Section::remove(removeStorageSection), mStorageId );
+    return Piece( AddressRange::remove(removeStorageRange), mStorageId );
 }
-inline Piece Piece::removeLocal( const KDE::Section &localRemoveStorageSection )
+inline Piece Piece::removeLocal( const AddressRange& localRemoveStorageRange )
 {
-    return Piece( KDE::Section::removeLocal(localRemoveStorageSection), mStorageId );
+    return Piece( AddressRange::removeLocal(localRemoveStorageRange), mStorageId );
 }
-inline Piece Piece::removeStartBeforeLocal( int storageOffset )
+inline Piece Piece::removeStartBeforeLocal( Address storageOffset )
 {
-    const int oldStart = start();
+    const Address oldStart = start();
     moveStartBy( storageOffset );
-    return Piece( KDE::Section(oldStart,nextBeforeStart()), mStorageId );
+    return Piece( AddressRange(oldStart,nextBeforeStart()), mStorageId );
 }
-inline Piece Piece::removeEndBehindLocal( int storageOffset )
+inline Piece Piece::removeEndBehindLocal( Address storageOffset )
 {
-    const int oldEnd = end();
+    const Address oldEnd = end();
     setEndByWidth( storageOffset+1 );
-    return Piece( KDE::Section(nextBehindEnd(),oldEnd), mStorageId );
+    return Piece( AddressRange(nextBehindEnd(),oldEnd), mStorageId );
 }
 
-inline Piece Piece::subPiece( const Section &local ) const
+inline Piece Piece::subPiece( const AddressRange& local ) const
 {
-    return Piece( KDE::Section::subSection(local), mStorageId );
+    return Piece( AddressRange::subRange(local), mStorageId );
 }
 
-inline bool Piece::prepend( const Piece &other )
+inline bool Piece::prepend( const Piece& other )
 {
-    const bool result = ( mStorageId == other.mStorageId && KDE::Section::prepend(other) );
+    const bool result = ( mStorageId == other.mStorageId && AddressRange::prepend(other) );
     return result;
 }
-inline bool Piece::append( const Piece &other )
+inline bool Piece::append( const Piece& other )
 {
-    const bool result = ( mStorageId == other.mStorageId && KDE::Section::append(other) );
+    const bool result = ( mStorageId == other.mStorageId && AddressRange::append(other) );
     return result;
 }
 

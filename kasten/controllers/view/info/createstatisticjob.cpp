@@ -38,9 +38,9 @@ int CreateStatisticJob::exec()
     // reset
     memset( mByteCount, 0, 256*sizeof(int) );
 
-    const int last = mByteArrayModel ? mSelection.end() : -1;
-    int i = mByteArrayModel ? mSelection.start() : 0;
-    int blockEnd = i;
+    const Okteta::Address last = mByteArrayModel ? mSelection.end() : -1;
+    Okteta::Address i = mByteArrayModel ? mSelection.start() : 0;
+    Okteta::Address blockEnd = i;
     while( i<=last )
     {
         blockEnd += StatisticBlockSize;
@@ -48,7 +48,7 @@ int CreateStatisticJob::exec()
             blockEnd = last;
 
         for( ; i<=blockEnd; ++i )
-            ++mByteCount[(unsigned char)mByteArrayModel->datum(i)];
+            ++mByteCount[mByteArrayModel->byte(i)];
 
         QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
     }

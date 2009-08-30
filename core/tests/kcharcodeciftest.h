@@ -23,13 +23,13 @@
 #ifndef KCHARCODECIFTEST_H
 #define KCHARCODECIFTEST_H
 
-
 // Qt
 #include <QtCore/QObject>
 
-namespace Okteta {
+
+namespace Okteta
+{
 class CharCodec;
-}
 
 
 class KCharCodecIfTest : public QObject
@@ -40,8 +40,8 @@ class KCharCodecIfTest : public QObject
     KCharCodecIfTest();
 
   protected: // our API
-    virtual Okteta::CharCodec *createCodec() = 0;
-    virtual void deleteCodec( Okteta::CharCodec *Codec ) = 0;
+    virtual CharCodec* createCodec() = 0;
+    virtual void deleteCodec( CharCodec* codec ) = 0;
 
   private Q_SLOTS: // test functions
     void init();
@@ -51,10 +51,12 @@ class KCharCodecIfTest : public QObject
 
   private:
     /** pointer to the buffer to test */
-    Okteta::CharCodec *CharCodec;
+    CharCodec* mCharCodec;
 };
 
 
-inline KCharCodecIfTest::KCharCodecIfTest() : CharCodec( 0 ) {}
+inline KCharCodecIfTest::KCharCodecIfTest() : mCharCodec( 0 ) {}
+
+}
 
 #endif

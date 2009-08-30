@@ -39,8 +39,8 @@ RotateByteArrayFilter::RotateByteArrayFilter()
 
 AbstractByteArrayFilterParameterSet *RotateByteArrayFilter::parameterSet() { return &mParameterSet; }
 
-bool RotateByteArrayFilter::filter( char *result,
-                                    Okteta::AbstractByteArrayModel *model, const KDE::Section &section ) const
+bool RotateByteArrayFilter::filter( Okteta::Byte* result,
+                                    Okteta::AbstractByteArrayModel *model, const Okteta::AddressRange& range ) const
 {
     const int groupSize = mParameterSet.groupSize();
     const int groupBitCount = (groupSize * RotateBitsPerByte );
@@ -55,20 +55,20 @@ bool RotateByteArrayFilter::filter( char *result,
     if( toRight )
     {
         int r = 0;
-        int m = section.start();
-        while( m <= section.end() )
+        Okteta::Address m = range.start();
+        while( m <= range.end() )
         {
             int g = 0;
             // round the edge byte layer shift
-            while( g < shiftByteWidth && m+groupSize <= section.end() )
+            while( g < shiftByteWidth && m+groupSize <= range.end() )
             {
-                result[r++] = model->datum( (m++)+groupSize-shiftByteWidth );
+                result[r++] = model->byte( (m++)+groupSize-shiftByteWidth );
                 ++g;
             }
             // normal byte layer shift
-            while( g < groupSize && m <= section.end() )
+            while( g < groupSize && m <= range.end() )
             {
-                result[r++] = model->datum( (m++)-shiftByteWidth );
+                result[r++] = model->byte( (m++)-shiftByteWidth );
                 ++g;
             }
 
@@ -87,27 +87,27 @@ bool RotateByteArrayFilter::filter( char *result,
             if( filteredBytesCount >= FilteredByteCountSignalLimit )
             {
                 filteredBytesCount = 0;
-                emit filteredBytes( m-section.start() );
+                emit filteredBytes( m-range.start() );
             }
         }
     }
     else
     {
         int r = 0;
-        int m = section.start();
-        while( m <= section.end() )
+        Okteta::Address m = range.start();
+        while( m <= range.end() )
         {
             int g = 0;
             // normal byte layer shift
-            while( g+shiftByteWidth < groupSize && m+shiftByteWidth <= section.end() )
+            while( g+shiftByteWidth < groupSize && m+shiftByteWidth <= range.end() )
             {
-                result[r++] = model->datum( (m++)-shiftByteWidth );
+                result[r++] = model->byte( (m++)-shiftByteWidth );
                 ++g;
             }
             // round the edge byte layer shift
-            while( g < groupSize && m <= section.end() )
+            while( g < groupSize && m <= range.end() )
             {
-                result[r++] = model->datum( (m++)+shiftByteWidth-groupSize );
+                result[r++] = model->byte( (m++)+shiftByteWidth-groupSize );
                 ++g;
             }
 
@@ -126,7 +126,7 @@ bool RotateByteArrayFilter::filter( char *result,
             if( filteredBytesCount >= FilteredByteCountSignalLimit )
             {
                 filteredBytesCount = 0;
-                emit filteredBytes( m-section.start() );
+                emit filteredBytes( m-range.start() );
             }
         }
     }

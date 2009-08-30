@@ -32,12 +32,11 @@
 #include <zoomable.h> // TODO: able instead of interface? or else?
 #include <dataselectable.h>
 #include <selecteddatawriteable.h>
+// Okteta core
+#include <addressrange.h>
 
 namespace Okteta {
 class ByteArrayJanusView;
-}
-namespace KDE {
-class Section;
 }
 class QRect;
 
@@ -107,11 +106,11 @@ class OKTETAKASTENGUI_EXPORT KByteArrayDisplay : public AbstractView,
     virtual bool canReadData( const QMimeData *data ) const;
 
   public: // cursor API
-    void setCursorPosition( int cursorPosition );
-    void setSelectionCursorPosition( int index );
-    int cursorPosition() const;
+    void setCursorPosition( Okteta::Address cursorPosition );
+    void setSelectionCursorPosition( Okteta::Address index );
+    Okteta::Address cursorPosition() const;
   Q_SIGNALS:
-    void cursorPositionChanged( int cursorPosition );
+    void cursorPositionChanged( Okteta::Address cursorPosition );
 
   public: // codings
     void setValueCoding( int valueCoding );
@@ -124,8 +123,8 @@ class OKTETAKASTENGUI_EXPORT KByteArrayDisplay : public AbstractView,
 
   public:
     // TODO: see how this can be solved by modelSelection
-    KDE::Section selection() const;
-    void setSelection( int start, int end );
+    Okteta::AddressRange selection() const;
+    void setSelection( Okteta::Address start, Okteta::Address end );
     void insert( const QByteArray& byteArray );
     QRect cursorRect() const;
 
@@ -144,8 +143,8 @@ class OKTETAKASTENGUI_EXPORT KByteArrayDisplay : public AbstractView,
 
   public: // table layout
     void setResizeStyle( int resizeStyle );
-    int startOffset() const;
-    int firstLineOffset() const;
+    Okteta::Address startOffset() const;
+    Okteta::Address firstLineOffset() const;
     int noOfBytesPerLine() const;
     int resizeStyle() const;
 
@@ -168,7 +167,7 @@ class OKTETAKASTENGUI_EXPORT KByteArrayDisplay : public AbstractView,
     void init();
 
   protected Q_SLOTS:
-    void onSelectionChanged( const KDE::Section& selection );
+    void onSelectionChanged( const Okteta::AddressRange& selection );
 
   protected:
     Okteta::ByteArrayJanusView* mWidget;

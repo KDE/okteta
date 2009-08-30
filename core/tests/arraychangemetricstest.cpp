@@ -27,23 +27,23 @@
 // Qt
 #include <QtTest/QtTest>
 
+namespace Okteta
+{
 
 // local variables
-static const int Offset = 15;
+static const Address Offset = 15;
 
-static const int LengthDiff = 5;
-static const int InsertLength = 15;
-static const int BiggerRemoveLength = InsertLength + LengthDiff;
-static const int SameRemoveLength = InsertLength;
-static const int SmallerRemoveLength = InsertLength - LengthDiff;
+static const Size LengthDiff = 5;
+static const Size InsertLength = 15;
+static const Size BiggerRemoveLength = InsertLength + LengthDiff;
+static const Size SameRemoveLength = InsertLength;
+static const Size SmallerRemoveLength = InsertLength - LengthDiff;
 
-static const int FirstLength = 15;
-static const int SecondOffset = Offset + FirstLength;
-static const int SecondLength = 10;
-static const int SecondEnd = SecondOffset + SecondLength - 1;
+static const Size FirstLength = 15;
+static const Address SecondOffset = Offset + FirstLength;
+static const Size SecondLength = 10;
+static const Address SecondEnd = SecondOffset + SecondLength - 1;
 
-namespace KDE
-{
 
 void ArrayChangeMetricsTest::testConstructorAsReplacement()
 {
@@ -110,4 +110,4 @@ void ArrayChangeMetricsTest::testRevert()
 
 }
 
-QTEST_MAIN( KDE::ArrayChangeMetricsTest )
+QTEST_MAIN( Okteta::ArrayChangeMetricsTest )

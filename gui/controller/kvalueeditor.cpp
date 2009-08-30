@@ -154,7 +154,7 @@ bool KValueEditor::handleKeyPress( QKeyEvent *keyEvent )
                 }
                 else
                 {
-                    unsigned char inputValue = 0;
+                    Byte inputValue = 0;
                     // valid digit?
                     if( valueCodec->appendDigit(&inputValue,input) )
                     {
@@ -162,10 +162,10 @@ bool KValueEditor::handleKeyPress( QKeyEvent *keyEvent )
                             doValueEditAction( ValueEdit, inputValue );
                         else
                         {
-                            const int index = mCursor->realIndex();
+                            const Address index = mCursor->realIndex();
 
                             startEdit( i18nc( "name of the change", "Insert" ) );
-                            if( mView->byteArrayModel()->insert(index,(char*)&inputValue,1) > 0 )
+                            if( mView->byteArrayModel()->insert(index,&inputValue,1) > 0 )
                             {
                                 mEditModeByInsert = true;
                                 mOldValue = mEditValue = inputValue;
@@ -201,7 +201,7 @@ void KValueEditor::doValueEditAction( KValueEditAction Action, int input )
     // we are not yet in edit mode?
     if( !mInEditMode )
     {
-        const int validIndex = mCursor->validIndex();
+        const Address validIndex = mCursor->validIndex();
         // no valid cursor position?
         if( validIndex == -1 || (!mView->isOverwriteMode() && input == -1) || mCursor->isBehind() )
             return;
@@ -210,12 +210,12 @@ void KValueEditor::doValueEditAction( KValueEditAction Action, int input )
         mEditModeByInsert = false; // default, to be overwritten if so
 
         // save old value
-        mOldValue = mEditValue = (unsigned char)mView->byteArrayModel()->datum( validIndex );
+        mOldValue = mEditValue = (unsigned char)mView->byteArrayModel()->byte( validIndex );
         mInsertedDigitsCount = valueCodec->encodingWidth();
     }
 
     // 
-    unsigned char newValue = mEditValue;
+    Byte newValue = mEditValue;
     bool stayInEditMode = true;
     bool moveToNext = false;
 
@@ -276,7 +276,7 @@ void KValueEditor::doValueEditAction( KValueEditAction Action, int input )
         // sync value
         mEditValue = newValue;
         valueCodec->encode( mValueString, 0, mEditValue );
-        mView->byteArrayModel()->replace( mCursor->index(), 1, (char*)&mEditValue, 1 );
+        mView->byteArrayModel()->replace( mCursor->index(), 1, &mEditValue, 1 );
     }
 
 //     mView->updateCursors();

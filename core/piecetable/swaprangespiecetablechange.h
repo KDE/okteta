@@ -23,11 +23,9 @@
 #ifndef KPIECETABLE_SWAPRANGESPIECETABLECHANGE_H
 #define KPIECETABLE_SWAPRANGESPIECETABLECHANGE_H
 
-
 // lib
 #include "abstractpiecetablechange.h"
-// common
-#include <section.h>
+
 
 namespace KPieceTable
 {
@@ -39,23 +37,25 @@ namespace KPieceTable
 class SwapRangesPieceTableChange : public AbstractPieceTableChange
 {
   public:
-    SwapRangesPieceTableChange( int firstStart, const KDE::Section &secondSection );
+    SwapRangesPieceTableChange( Address firstStart, const AddressRange& secondRange );
     virtual ~SwapRangesPieceTableChange();
 
   public: // AbstractPieceTableChange API
     virtual int type() const;
     virtual QString description() const;
-    virtual KDE::Section apply( PieceTable *pieceTable ) const;
-    virtual KDE::Section revert( PieceTable *pieceTable ) const;
-    virtual KDE::ArrayChangeMetrics metrics() const;
+    virtual AddressRange apply( PieceTable* pieceTable ) const;
+    virtual AddressRange revert( PieceTable* pieceTable ) const;
+    virtual ArrayChangeMetrics metrics() const;
 
   protected:
-    int mFirstStart;
-    KDE::Section mSecondSection;
+    Address mFirstStart;
+    AddressRange mSecondRange;
 };
 
-inline SwapRangesPieceTableChange::SwapRangesPieceTableChange( int firstStart, const KDE::Section &secondSection )
- : mFirstStart( firstStart ), mSecondSection( secondSection )
+
+inline SwapRangesPieceTableChange::SwapRangesPieceTableChange( Address firstStart, const AddressRange& secondRange )
+  : mFirstStart( firstStart ),
+    mSecondRange( secondRange )
 {}
 
 }

@@ -28,19 +28,20 @@
 #include <QtTest/QtTest>
 
 
-using namespace Okteta;
-
-
-Okteta::CharCodec *KEBCDIC1047CharCodecKCharCodecIfTest::createCodec()
+namespace Okteta
 {
-  return KEBCDIC1047CharCodec::create();
+
+CharCodec* KEBCDIC1047CharCodecKCharCodecIfTest::createCodec()
+{
+    return KEBCDIC1047CharCodec::create();
 }
 
 
-void KEBCDIC1047CharCodecKCharCodecIfTest::deleteCodec( Okteta::CharCodec *Codec )
+void KEBCDIC1047CharCodecKCharCodecIfTest::deleteCodec( CharCodec* codec )
 {
-  delete Codec;
+    delete codec;
 }
 
+}
 
-QTEST_MAIN( KEBCDIC1047CharCodecKCharCodecIfTest )
+QTEST_MAIN( Okteta::KEBCDIC1047CharCodecKCharCodecIfTest )

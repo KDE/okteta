@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -28,8 +28,8 @@ namespace Okteta
 
 static const int DefaultNoOfLinesPerPage = 1;
 
-ByteArrayTableLayout::ByteArrayTableLayout( int noOfBytesPerLine, int firstLineOffset, int startOffset,
-                                            int byteArrayOffset, int byteArrayLength )
+ByteArrayTableLayout::ByteArrayTableLayout( int noOfBytesPerLine, Address firstLineOffset, Address startOffset,
+                                            Address byteArrayOffset, Size byteArrayLength )
  : mNoOfBytesPerLine( noOfBytesPerLine ),
    mFirstLineOffset( firstLineOffset ),
    mStartOffset( startOffset ),
@@ -43,7 +43,7 @@ ByteArrayTableLayout::ByteArrayTableLayout( int noOfBytesPerLine, int firstLineO
 }
 
 
-bool ByteArrayTableLayout::setStartOffset( int startOffset )
+bool ByteArrayTableLayout::setStartOffset( Address startOffset )
 {
     // rejecting <0
     if( startOffset < 0 )
@@ -60,7 +60,7 @@ bool ByteArrayTableLayout::setStartOffset( int startOffset )
     return true;
 }
 
-bool ByteArrayTableLayout::setFirstLineOffset( int firstLineOffset )
+bool ByteArrayTableLayout::setFirstLineOffset( Address firstLineOffset )
 {
     // rejecting <0
     if( firstLineOffset < 0 )
@@ -96,7 +96,7 @@ bool ByteArrayTableLayout::setNoOfBytesPerLine( int noOfBytesPerLine )
 }
 
 
-bool ByteArrayTableLayout::setByteArrayOffset( int byteArrayOffset )
+bool ByteArrayTableLayout::setByteArrayOffset( Address byteArrayOffset )
 {
     // rejecting < 0
     if( byteArrayOffset < 0 )
@@ -106,7 +106,7 @@ bool ByteArrayTableLayout::setByteArrayOffset( int byteArrayOffset )
     if( mByteArrayOffset == byteArrayOffset )
         return false;
 
-    const int l = length();
+    const Size l = length();
 
     mByteArrayOffset = byteArrayOffset;
     mLastByteArrayOffset = mByteArrayOffset + l-1;
@@ -116,13 +116,13 @@ bool ByteArrayTableLayout::setByteArrayOffset( int byteArrayOffset )
 }
 
 
-bool ByteArrayTableLayout::setLength( int length )
+bool ByteArrayTableLayout::setLength( Size length )
 {
     // rejecting < 0
     if( length < 0 )
         length = 0;
 
-    const int newLastByteArrayOffset = mByteArrayOffset + length-1;
+    const Address newLastByteArrayOffset = mByteArrayOffset + length-1;
 
     // no changes?
     if( mLastByteArrayOffset == newLastByteArrayOffset )
@@ -149,7 +149,7 @@ void ByteArrayTableLayout::calcStart()
 
 void ByteArrayTableLayout::calcEnd()
 {
-    const int l = length();
+    const Size l = length();
     mCoordRange.setEnd( (l>0) ?
                             Coord::fromIndex(l-1+mRelativeStartOffset,mNoOfBytesPerLine):
                             Coord(-1,mCoordRange.start().line()) );
@@ -172,7 +172,7 @@ int ByteArrayTableLayout::indexAtCLastLinePosition( int line ) const
 }
 
 
-int ByteArrayTableLayout::indexAtCCoord( const Coord &coord ) const
+int ByteArrayTableLayout::indexAtCCoord( const Coord& coord ) const
 {
     const int index = indexAtCoord( coord );
 
@@ -210,22 +210,22 @@ int ByteArrayTableLayout::indexAtLastLinePosition( int line ) const
 }
 
 
-int ByteArrayTableLayout::indexAtCoord( const Coord &coord ) const
+int ByteArrayTableLayout::indexAtCoord( const Coord& coord ) const
 {
     return coord.indexByLineWidth( mNoOfBytesPerLine ) - mRelativeStartOffset + mByteArrayOffset;
 }
 
-int ByteArrayTableLayout::lineAtIndex( int index ) const
+int ByteArrayTableLayout::lineAtIndex( Address index ) const
 {
     return (index+mRelativeStartOffset-mByteArrayOffset)/mNoOfBytesPerLine;
 }
 
-Coord ByteArrayTableLayout::coordOfIndex( int index ) const
+Coord ByteArrayTableLayout::coordOfIndex( Address index ) const
 {
     return Coord::fromIndex( index+mRelativeStartOffset-mByteArrayOffset, mNoOfBytesPerLine );
 }
 
-CoordRange ByteArrayTableLayout::coordRangeOfIndizes( const KDE::Section &indizes ) const
+CoordRange ByteArrayTableLayout::coordRangeOfIndizes( const AddressRange& indizes ) const
 {
     return CoordRange(
              Coord::fromIndex(indizes.start()+mRelativeStartOffset-mByteArrayOffset, mNoOfBytesPerLine),
@@ -234,7 +234,7 @@ CoordRange ByteArrayTableLayout::coordRangeOfIndizes( const KDE::Section &indize
 
 
 
-int ByteArrayTableLayout::correctIndex( int index ) const
+int ByteArrayTableLayout::correctIndex( Address index ) const
 {
     return ( index <= mByteArrayOffset ) ?     mByteArrayOffset:
            ( index >= mLastByteArrayOffset ) ? mLastByteArrayOffset:
@@ -242,7 +242,7 @@ int ByteArrayTableLayout::correctIndex( int index ) const
 }
 
 
-Coord ByteArrayTableLayout::correctCoord( const Coord &coord ) const
+Coord ByteArrayTableLayout::correctCoord( const Coord& coord ) const
 {
     return ( coord <= mCoordRange.start() ) ?    mCoordRange.start():
            ( coord >= mCoordRange.end() ) ?      mCoordRange.end():
@@ -251,13 +251,13 @@ Coord ByteArrayTableLayout::correctCoord( const Coord &coord ) const
 }
 
 
-bool ByteArrayTableLayout::atFirstLinePosition( const Coord &coord ) const
+bool ByteArrayTableLayout::atFirstLinePosition( const Coord& coord ) const
 {
     return ( coord.line() == mCoordRange.start().line() ) ? coord.pos() == mCoordRange.start().pos():
                                                             coord.pos() == 0;
 }
 
-bool ByteArrayTableLayout::atLastLinePosition( const Coord &coord ) const
+bool ByteArrayTableLayout::atLastLinePosition( const Coord& coord ) const
 {
     return ( coord.line() == mCoordRange.end().line() ) ? coord.pos() == mCoordRange.end().pos():
                                                           coord.pos() == mNoOfBytesPerLine-1;
@@ -270,12 +270,12 @@ KDE::Section ByteArrayTableLayout::linePositions( int line ) const
 }
 
 
-int ByteArrayTableLayout::firstLinePosition( const Coord &coord ) const
+int ByteArrayTableLayout::firstLinePosition( const Coord& coord ) const
 {
     return ( mCoordRange.start().isLaterInLineThan(coord) ) ? mCoordRange.start().pos() : coord.pos();
 }
 
-int ByteArrayTableLayout::lastLinePosition( const Coord &coord ) const
+int ByteArrayTableLayout::lastLinePosition( const Coord& coord ) const
 {
     return ( mCoordRange.end().isPriorInLineThan(coord) ) ? mCoordRange.end().pos() : coord.pos();
 }

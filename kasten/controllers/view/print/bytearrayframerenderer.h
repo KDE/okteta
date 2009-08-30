@@ -27,6 +27,8 @@
 #include "abstractcolumnframerenderer.h"
 // Okteta core
 #include <oktetacore.h>
+#include <address.h>
+#include <size.h>
 // Qt
 #include <QtGui/QFont>
 
@@ -70,7 +72,7 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
 //     virtual QSize sizeHint( const QSize &maxSize ) const;
 
     virtual void prepare();
-    virtual void renderFrame( QPainter *painter, int frameIndex );
+    virtual void renderFrame( QPainter* painter, int frameIndex );
 
   public: // AbstractSerialFramePrinter
     // only vertical for now...
@@ -78,12 +80,12 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
 
   public:
     Okteta::AbstractByteArrayModel* byteArrayModel() const;
-    int offset() const;
-    int length() const;
+    Okteta::Address offset() const;
+    Okteta::Size length() const;
 
     int noOfBytesPerLine() const;
-    int firstLineOffset() const;
-    int startOffset() const;
+    Okteta::Address firstLineOffset() const;
+    Okteta::Address startOffset() const;
     ResizeStyle resizeStyle() const;
     Okteta::ValueCoding valueCoding() const;
     Okteta::KPixelX byteSpacingWidth() const;
@@ -94,18 +96,18 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
     QChar substituteChar() const;
     QChar undefinedChar() const;
     Okteta::CharCoding charCoding() const;
-    const QString &charCodingName() const;
+    const QString& charCodingName() const;
 
     bool offsetColumnVisible() const;
     int visibleByteArrayCodings() const;
 
   public:
-    void setByteArrayModel( Okteta::AbstractByteArrayModel* byteArrayModel, int offset = 0, int length = -1 );
+    void setByteArrayModel( Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset = 0, Okteta::Size length = -1 );
     void setHeight( int height );
     void setWidth( int width );
-    void setFont( const QFont &font );
-    void setFirstLineOffset( int firstLineOffset );
-    void setStartOffset( int startOffset );
+    void setFont( const QFont& font );
+    void setFirstLineOffset( Okteta::Address firstLineOffset );
+    void setStartOffset( Okteta::Address startOffset );
     void setBufferSpacing( Okteta::KPixelX byteSpacing, int noOfGroupedBytes, Okteta::KPixelX groupSpacing );
     void setValueCoding( Okteta::ValueCoding valueCoding );
     void setResizeStyle( ResizeStyle style );
@@ -143,7 +145,7 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
 
   protected:
     /** holds the logical layout */
-    Okteta::ByteArrayTableLayout *mLayout;
+    Okteta::ByteArrayTableLayout* mLayout;
     Okteta::ByteArrayTableRanges* mTableRanges;
 
   protected:

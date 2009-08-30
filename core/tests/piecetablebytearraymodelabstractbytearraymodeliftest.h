@@ -23,16 +23,20 @@
 #ifndef PIECETABLEBYTEARRAYMODELKABSTRACTBYTEARRAYMODELIFTEST_H
 #define PIECETABLEBYTEARRAYMODELKABSTRACTBYTEARRAYMODELIFTEST_H
 
-
 // test
 #include "abstractbytearraymodeliftest.h"
 
 
+namespace Okteta
+{
+
 class PieceTableByteArrayModelKAbstractByteArrayModelIfTest : public AbstractByteArrayModelIfTest
 {
   protected: // AbstractByteArrayModelIfTest API
-    Okteta::AbstractByteArrayModel *createByteArrayModel();
-    void deleteByteArrayModel( Okteta::AbstractByteArrayModel *byteArrayModel );
+    AbstractByteArrayModel* createByteArrayModel();
+    void deleteByteArrayModel( AbstractByteArrayModel* byteArrayModel );
 };
+
+}
 
 #endif

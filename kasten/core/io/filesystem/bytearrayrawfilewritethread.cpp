@@ -54,8 +54,8 @@ void ByteArrayRawFileWriteThread::run()
 
         for( int i = 0; i<byteArray->size(); ++i )
         {
-            const char datum = byteArray->datum(i);
-            outStream.writeRawData( &datum, 1 );
+            const Okteta::Byte byte = byteArray->byte(i);
+            outStream.writeRawData( reinterpret_cast<const char*>(&byte), 1 );
         }
 
         byteArray->setModified( false );

@@ -20,16 +20,18 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KDE_ARRAYCHANGEMETRICS_H
-#define KDE_ARRAYCHANGEMETRICS_H
+#ifndef OKTETA_ARRAYCHANGEMETRICS_H
+#define OKTETA_ARRAYCHANGEMETRICS_H
 
 // lib
 #include "oktetacore_export.h"
+#include "size.h"
+#include "address.h"
 // Qt
 #include <QtCore/QDataStream>
 
 
-namespace KDE
+namespace Okteta
 {
 
 // TODO: do we need the invalid status?
@@ -39,107 +41,110 @@ class OKTETACORE_EXPORT ArrayChangeMetrics
     friend QDataStream& operator>>( QDataStream& inStream, ArrayChangeMetrics& metrics );
 
   private:
-    static const int InvalidOffset = -1;
+    static const Address InvalidAddress = -1;
 
   public:
     enum Type { /*Insertion, Removal,*/ Replacement, Swapping/*, Filling, Setting*/ };
 
   public:
-    static ArrayChangeMetrics asReplacement( int offset, int removeLength, int insertLength );
-    static ArrayChangeMetrics asSwapping( int firstOffset, int secondOffset, int secondLength );
+    static ArrayChangeMetrics asReplacement( Address offset, Size removeLength, Size insertLength );
+    static ArrayChangeMetrics asSwapping( Address firstOffset, Address secondOffset, Size secondLength );
 
   public:
     ArrayChangeMetrics();
 
   protected:
   public:
-    ArrayChangeMetrics( Type type, int offset, int secondArgument, int thirdArgument );
+    ArrayChangeMetrics( Type type, Address offset, qint32 secondArgument, qint32 thirdArgument );
 
   public:
-    bool operator==( const ArrayChangeMetrics &other ) const;
+    bool operator==( const ArrayChangeMetrics& other ) const;
 
   public:
     void revert();
 
   public:
     int type() const;
-    int offset() const;
+    Address offset() const;
     bool isValid() const;
 
   public: // Replacement properties
-    int removeLength() const;
-    int insertLength() const;
-    int lengthChange() const;
+    Size removeLength() const;
+    Size insertLength() const;
+    Size lengthChange() const;
 
   public: // Swapping properties
-    int firstLength() const;
-    int secondStart() const;
-    int secondEnd() const;
-    int secondLength() const;
+    Size firstLength() const;
+    Address secondStart() const;
+    Address secondEnd() const;
+    Size secondLength() const;
 
   protected:
     Type mType;
-    int mOffset;
+    Address mOffset;
+    // TODO: how to make the arguments of the size of the largest union member?
     union
     {
-    int mSecondArgument;
-    int mRemoveLength;
-    int mSecondStart;
+    qint32 mSecondArgument;
+    Size mRemoveLength;
+    Address mSecondStart;
     };
     union
     {
-    int mThirdArgument;
-    int mInsertLength;
-    int mSecondLength;
+    qint32 mThirdArgument;
+    Size mInsertLength;
+    Size mSecondLength;
     };
 };
 
-inline ArrayChangeMetrics ArrayChangeMetrics::asReplacement( int offset, int removeLength, int insertLength )
+inline ArrayChangeMetrics ArrayChangeMetrics::asReplacement( Address offset, Size removeLength, Size insertLength )
 {
     return ArrayChangeMetrics( Replacement, offset, removeLength, insertLength );
 }
 
-inline ArrayChangeMetrics ArrayChangeMetrics::asSwapping( int firstOffset, int secondOffset, int secondLength )
+inline ArrayChangeMetrics ArrayChangeMetrics::asSwapping( Address firstOffset, Address secondOffset, Size secondLength )
 {
     return ArrayChangeMetrics( Swapping, firstOffset, secondOffset, secondLength );
 }
 
 
-inline ArrayChangeMetrics::ArrayChangeMetrics( Type type, int offset, int secondArgument, int thirdArgument )
+inline ArrayChangeMetrics::ArrayChangeMetrics( Type type, Address offset, qint32 secondArgument, qint32 thirdArgument )
  : mType( type ), mOffset( offset ), mSecondArgument( secondArgument ), mThirdArgument( thirdArgument )
 {}
-inline ArrayChangeMetrics::ArrayChangeMetrics() : mOffset( InvalidOffset ), mRemoveLength( 0 ), mInsertLength( 0 ) {}
-inline bool ArrayChangeMetrics::operator==( const ArrayChangeMetrics &other ) const
-{ return mType == other.mType
-         && mOffset == other.mOffset
-         && mSecondArgument == other.mSecondArgument
-         && mThirdArgument == other.mThirdArgument; }
+inline ArrayChangeMetrics::ArrayChangeMetrics() : mOffset( InvalidAddress ), mSecondArgument( 0 ), mThirdArgument( 0 ) {}
+inline bool ArrayChangeMetrics::operator==( const ArrayChangeMetrics& other ) const
+{
+    return mType == other.mType
+           && mOffset == other.mOffset
+           && mSecondArgument == other.mSecondArgument
+           && mThirdArgument == other.mThirdArgument;
+}
 inline void ArrayChangeMetrics::revert()
 {
     if( mType == Replacement )
     {
-        const int helper = mInsertLength;
+        const Size helper = mInsertLength;
         mInsertLength = mRemoveLength;
         mRemoveLength = helper;
     }
     else if( mType == Swapping )
     {
-        const int oldSecondLength = mSecondLength;
+        const Size oldSecondLength = mSecondLength;
         mSecondLength = firstLength();
         mSecondStart = mOffset + oldSecondLength;
     }
 }
 
-inline bool ArrayChangeMetrics::isValid()     const { return mOffset != InvalidOffset; }
-inline int ArrayChangeMetrics::type()         const { return mType; }
-inline int ArrayChangeMetrics::offset()       const { return mOffset; }
-inline int ArrayChangeMetrics::removeLength() const { return mRemoveLength; }
-inline int ArrayChangeMetrics::insertLength() const { return mInsertLength; }
-inline int ArrayChangeMetrics::lengthChange() const { return mInsertLength-mRemoveLength; }
-inline int ArrayChangeMetrics::secondStart()  const { return mSecondStart; }
-inline int ArrayChangeMetrics::secondEnd()    const { return mSecondStart+mSecondLength-1; }
-inline int ArrayChangeMetrics::firstLength()  const { return mSecondStart-mOffset; }
-inline int ArrayChangeMetrics::secondLength() const { return mSecondLength; }
+inline bool ArrayChangeMetrics::isValid()        const { return mOffset != InvalidAddress; }
+inline int ArrayChangeMetrics::type()            const { return mType; }
+inline Address ArrayChangeMetrics::offset()      const { return mOffset; }
+inline Size ArrayChangeMetrics::removeLength()   const { return mRemoveLength; }
+inline Size ArrayChangeMetrics::insertLength()   const { return mInsertLength; }
+inline Size ArrayChangeMetrics::lengthChange()   const { return mInsertLength-mRemoveLength; }
+inline Address ArrayChangeMetrics::secondStart() const { return mSecondStart; }
+inline Address ArrayChangeMetrics::secondEnd()   const { return mSecondStart+mSecondLength-1; }
+inline Size ArrayChangeMetrics::firstLength()    const { return mSecondStart-mOffset; }
+inline Size ArrayChangeMetrics::secondLength()   const { return mSecondLength; }
 
 
 QDataStream& operator<<( QDataStream& outStream, const ArrayChangeMetrics& metrics );

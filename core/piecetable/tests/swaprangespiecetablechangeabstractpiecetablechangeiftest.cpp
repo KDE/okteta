@@ -30,26 +30,28 @@
 #include <QtTest/QtTest>
 
 
-static const int FirstRangeStart = 30;
-static const int SecondRangeStart = 50;
-static const int SecondRangeEnd = 66;
-
 namespace KPieceTable
 {
 
-AbstractPieceTableChange *SwapRangesPieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
+static const Address FirstRangeStart = 30;
+static const Address SecondRangeStart = 50;
+static const Address SecondRangeEnd = 66;
+
+
+AbstractPieceTableChange* SwapRangesPieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
 {
-    SwapRangesPieceTableChange *pieceTableChange =
-        new SwapRangesPieceTableChange( FirstRangeStart, KDE::Section(SecondRangeStart,SecondRangeEnd) );
+    SwapRangesPieceTableChange* pieceTableChange =
+        new SwapRangesPieceTableChange( FirstRangeStart, AddressRange(SecondRangeStart,SecondRangeEnd) );
 
     return pieceTableChange;
 }
-void SwapRangesPieceTableChangeAbstractPieceTableChangeIfTest::changePieceTable( PieceTable *pieceTable )
+
+void SwapRangesPieceTableChangeAbstractPieceTableChangeIfTest::changePieceTable( PieceTable* pieceTable )
 {
-    pieceTable->swap( FirstRangeStart, KDE::Section(SecondRangeStart,SecondRangeEnd) );
+    pieceTable->swap( FirstRangeStart, AddressRange(SecondRangeStart,SecondRangeEnd) );
 }
 
-void SwapRangesPieceTableChangeAbstractPieceTableChangeIfTest::deletePieceTableChange( AbstractPieceTableChange *pieceTableChange )
+void SwapRangesPieceTableChangeAbstractPieceTableChangeIfTest::deletePieceTableChange( AbstractPieceTableChange* pieceTableChange )
 {
     delete pieceTableChange;
 }

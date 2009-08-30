@@ -52,10 +52,10 @@ class OKTETAKASTENGUI_EXPORT ByteArrayTextStreamEncoder : public AbstractByteArr
     virtual ~ByteArrayTextStreamEncoder();
 
   protected: // AbstractByteArrayStreamEncoder API
-    virtual bool encodeDataToStream( QIODevice *device,
+    virtual bool encodeDataToStream( QIODevice* device,
                                      const KByteArrayDisplay* byteArrayView,
-                                     const Okteta::AbstractByteArrayModel *byteArrayModel,
-                                     const KDE::Section &section );
+                                     const Okteta::AbstractByteArrayModel* byteArrayModel,
+                                     const Okteta::AddressRange& range );
 
   protected:
     TextStreamEncoderSettings mSettings;

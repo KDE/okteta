@@ -43,20 +43,20 @@ class BookmarkListConstIteratorAdapter : public BookmarksConstIteratorAdapter
   public: // BookmarksConstIteratorAdapter API
     virtual bool hasNext() const;
     virtual bool hasPrevious() const;
-    virtual const Okteta::Bookmark& peekNext() const;
-    virtual const Okteta::Bookmark& peekPrevious() const;
+    virtual const Bookmark& peekNext() const;
+    virtual const Bookmark& peekPrevious() const;
 
-    virtual bool findNext( const Okteta::Bookmark& bookmark );
-    virtual bool findPrevious( const Okteta::Bookmark& bookmark );
-    virtual bool findNextFrom( unsigned int offset );
-    virtual bool findPreviousFrom( unsigned int offset );
-    virtual const Okteta::Bookmark& next();
-    virtual const Okteta::Bookmark& previous();
+    virtual bool findNext( const Bookmark& bookmark );
+    virtual bool findPrevious( const Bookmark& bookmark );
+    virtual bool findNextFrom( Address offset );
+    virtual bool findPreviousFrom( Address offset );
+    virtual const Bookmark& next();
+    virtual const Bookmark& previous();
     virtual void toBack();
     virtual void toFront();
 
   protected:
-    QLinkedListIterator<Okteta::Bookmark> mIterator;
+    QLinkedListIterator<Bookmark> mIterator;
 };
 
 }

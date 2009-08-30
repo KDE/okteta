@@ -27,22 +27,21 @@
 namespace Okteta
 {
 
-PieceTableByteArrayModel::PieceTableByteArrayModel( const char *data, unsigned int size,
-                                                      bool careForMemory )
- : d( new Private(this,data,size,careForMemory) )
+PieceTableByteArrayModel::PieceTableByteArrayModel( const Byte* data, int size, bool careForMemory )
+ : d( new PieceTableByteArrayModelPrivate(this,data,size,careForMemory) )
 {}
 
-PieceTableByteArrayModel::PieceTableByteArrayModel( unsigned int size, char fillByte )
- : d( new Private(this,size,fillByte) )
+PieceTableByteArrayModel::PieceTableByteArrayModel( int size, Byte fillByte )
+ : d( new PieceTableByteArrayModelPrivate(this,size,fillByte) )
 {}
 
 // PieceTableByteArrayModel::PieceTableByteArrayModel( int size, int maxSize )
-//  : d( new Private(this,size,maxSize) )
+//  : d( new PieceTableByteArrayModelPrivate(this,size,maxSize) )
 // {}
 
 
-char PieceTableByteArrayModel::datum( unsigned int offset ) const { return d->datum(offset); }
-int PieceTableByteArrayModel::size()                        const { return d->size(); }
+Byte PieceTableByteArrayModel::byte( Address offset ) const { return d->byte(offset); }
+Size PieceTableByteArrayModel::size()                 const { return d->size(); }
 
 bool PieceTableByteArrayModel::isReadOnly()   const { return d->isReadOnly(); }
 bool PieceTableByteArrayModel::isModified()   const { return d->isModified(); }
@@ -53,8 +52,10 @@ void PieceTableByteArrayModel::setModified( bool modified )       { d->setModifi
 // void PieceTableByteArrayModel::setKeepsMemory( bool keepsMemory ) { d->setKeepsMemory( keepsMemory ); }
 // void PieceTableByteArrayModel::setAutoDelete( bool autoDelete )   { d->setAutoDelete( autoDelete ); }
 
-void PieceTableByteArrayModel::setData( const char *data, unsigned int size, bool careForMemory )
-{ d->setData( data, size, careForMemory ); }
+void PieceTableByteArrayModel::setData( const Byte* data, int size, bool careForMemory )
+{
+    d->setData( data, size, careForMemory );
+}
 
 // char *PieceTableByteArrayModel::data()       const { return d->data(); }
 // int PieceTableByteArrayModel::maxSize()      const { return d->maxSize(); }
@@ -62,34 +63,34 @@ void PieceTableByteArrayModel::setData( const char *data, unsigned int size, boo
 // bool PieceTableByteArrayModel::autoDelete()  const { return d->autoDelete(); }
 
 
-void PieceTableByteArrayModel::setDatum( unsigned int offset, const char datum )
+void PieceTableByteArrayModel::setByte( Address offset, Byte byte )
 {
-    d->setDatum( offset, datum );
+    d->setByte( offset, byte );
 }
 
-int PieceTableByteArrayModel::insert( int at, const char *data, int length )
+Size PieceTableByteArrayModel::insert( Address offset, const Byte* insertData, int insertLength )
 {
-    return d->insert( at, data, length );
+    return d->insert( offset, insertData, insertLength );
 }
 
-int PieceTableByteArrayModel::remove( const KDE::Section& section )
+Size PieceTableByteArrayModel::remove( const AddressRange& removeRange )
 {
-    return d->remove( section );
+    return d->remove( removeRange );
 }
 
-unsigned int PieceTableByteArrayModel::replace( const KDE::Section& before, const char* after, unsigned int afterLength )
+Size PieceTableByteArrayModel::replace( const AddressRange& removeRange, const Byte* insertData, int insertLength )
 {
-    return d->replace( before, after, afterLength );
+    return d->replace( removeRange, insertData, insertLength );
 }
 
-bool PieceTableByteArrayModel::swap( int firstStart, const KDE::Section& secondSection )
+bool PieceTableByteArrayModel::swap( Address firstStart, const AddressRange& secondRange )
 {
-    return d->swap( firstStart, secondSection );
+    return d->swap( firstStart, secondRange );
 }
 
-int PieceTableByteArrayModel::fill( const char fillChar, unsigned int from, int length )
+Size PieceTableByteArrayModel::fill( const Byte fillByte, Address offset, Size fillLength )
 {
-    return d->fill( fillChar, from, length );
+    return d->fill( fillByte, offset, fillLength );
 }
 
 // int PieceTableByteArrayModel::indexOf( const char *searchString, int length, int from ) const
@@ -182,7 +183,7 @@ QByteArray PieceTableByteArrayModel::initialData() const
 void PieceTableByteArrayModel::doChanges( const QList<Okteta::ByteArrayChange>& changes,
                                            int oldVersionIndex, int newVersionIndex )
 {
-    return d->doChanges( changes, oldVersionIndex, newVersionIndex );
+    d->doChanges( changes, oldVersionIndex, newVersionIndex );
 }
 
 

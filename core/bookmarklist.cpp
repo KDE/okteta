@@ -103,9 +103,10 @@ void BookmarkList::setBookmark( unsigned int index, const Bookmark& bookmark )
     }
 }
 
-bool BookmarkList::adjustToReplaced( int offset, int removedLength, int insertedLength )
+bool BookmarkList::adjustToReplaced( Address offset, Size removedLength, Size insertedLength )
 {
     bool result = false;
+
     iterator bIt = begin();
     while( bIt!=end() && bIt->offset() < offset )
         ++bIt;
@@ -116,19 +117,21 @@ bool BookmarkList::adjustToReplaced( int offset, int removedLength, int inserted
         result = true;
     }
     // adjust bookmarks in moved section
-    const int diff = insertedLength - removedLength;
+    const Size diff = insertedLength - removedLength;
     if( diff != 0 )
     for( ; bIt!=end(); ++bIt )
     {
         (*bIt).move( diff );
         result = true;
     }
+
     return result;
 }
 
-bool BookmarkList::adjustToSwapped( int firstPartStart, int secondPartStart, int secondPartLength )
+bool BookmarkList::adjustToSwapped( Address firstPartStart, Address secondPartStart, Size secondPartLength )
 {
     bool result = false;
+
     iterator bIt = begin();
     while( bIt!=end() && bIt->offset() < firstPartStart )
         ++bIt;
@@ -140,8 +143,8 @@ bool BookmarkList::adjustToSwapped( int firstPartStart, int secondPartStart, int
         bIt = erase( bIt );
     }
     // move bookmarks from second to first
-    const int diff = firstPartStart - secondPartStart;
-    const int behindLast = secondPartStart + secondPartLength;
+    const Size diff = firstPartStart - secondPartStart;
+    const Address behindLast = secondPartStart + secondPartLength;
     for( ; bIt!=end() && bIt->offset() < behindLast; ++bIt )
     {
         (*bIt).move( diff );
@@ -164,12 +167,14 @@ bool BookmarkList::adjustToSwapped( int firstPartStart, int secondPartStart, int
 QList<Okteta::Bookmark> BookmarkList::list() const
 {
     QList<Okteta::Bookmark> result;
+
     foreach( const Bookmark &bookmark, *this )
         result.append( bookmark );
+
     return result;
 }
 
-const Bookmark& BookmarkList::bookmark( int offset ) const
+const Bookmark& BookmarkList::bookmark( Address offset ) const
 {
     const ConstIterator endIt = end();
     for( ConstIterator it = begin(); it!=endIt; ++it )
@@ -178,12 +183,14 @@ const Bookmark& BookmarkList::bookmark( int offset ) const
             return *it;
     }
     static const Bookmark* const noBookmark = 0;
+
     return (const Bookmark&)*noBookmark;
 }
 
-bool BookmarkList::contains( int offset ) const
+bool BookmarkList::contains( Address offset ) const
 {
     bool result = false;
+
     const_iterator B = begin();
     for( ; B!=end(); ++B )
     {
@@ -193,6 +200,7 @@ bool BookmarkList::contains( int offset ) const
             break;
         }
     }
+
     return result;
 }
 

@@ -38,7 +38,7 @@ Qca2ByteArrayChecksumAlgorithm::Qca2ByteArrayChecksumAlgorithm( const QString& n
 AbstractByteArrayChecksumParameterSet* Qca2ByteArrayChecksumAlgorithm::parameterSet() { return &mParameterSet; }
 
 bool Qca2ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
-                                                        const Okteta::AbstractByteArrayModel* model, const KDE::Section& section ) const
+                                                        const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const
 {
     QCA::Hash hash( mType );
 
@@ -47,18 +47,18 @@ bool Qca2ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
 
     char buffer[CalculatedByteCountSignalLimit];
     int bufferLength = CalculatedByteCountSignalLimit;
-    int nextBlockEnd = section.start() + CalculatedByteCountSignalLimit;
-    for( int i = section.start(); i<=section.end(); i+=CalculatedByteCountSignalLimit )
+    Okteta::Address nextBlockEnd = range.start() + CalculatedByteCountSignalLimit;
+    for( Okteta::Address i = range.start(); i<=range.end(); i+=CalculatedByteCountSignalLimit )
     {
-        if( section.end() < i+CalculatedByteCountSignalLimit )
-            bufferLength = section.end() - i + 1;
-        model->copyTo( buffer, i, bufferLength );
+        if( range.end() < i+CalculatedByteCountSignalLimit )
+            bufferLength = range.end() - i + 1;
+        model->copyTo( reinterpret_cast<Okteta::Byte*>(buffer), i, bufferLength );
         hash.update( buffer, bufferLength );
 
         if( i >= nextBlockEnd )
         {
             nextBlockEnd += CalculatedByteCountSignalLimit;
-            emit calculatedBytes( section.localIndex(i)+1 );
+            emit calculatedBytes( range.localIndex(i)+1 );
         }
     }
 

@@ -63,12 +63,12 @@ static const QChar     DefaultSubstituteChar =  (char)'.';
 static const QChar     DefaultUndefinedChar =   (char)'?';
 
 ByteArrayRowColumnRenderer::ByteArrayRowColumnRenderer( AbstractColumnStylist* stylist,
-    Okteta::AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges )
+    AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges )
  : AbstractColumnRenderer( stylist ),
    mByteArrayModel( byteArrayModel ),
    mLayout( layout ),
    mRanges( ranges ),
-   mBookmarks( qobject_cast<Okteta::Bookmarkable*>(byteArrayModel) ),
+   mBookmarks( qobject_cast<Bookmarkable*>(byteArrayModel) ),
    mVisibleCodings( DefaultVisibleCodings ),
    mDigitWidth( 0 ),
    mDigitBaseLine( 0 ),
@@ -115,10 +115,10 @@ KPixelY ByteArrayRowColumnRenderer::yOfCodingId( AbstractByteArrayView::CodingTy
 }
 
 
-void ByteArrayRowColumnRenderer::set( Okteta::AbstractByteArrayModel* byteArrayModel )
+void ByteArrayRowColumnRenderer::set( AbstractByteArrayModel* byteArrayModel )
 {
     mByteArrayModel = byteArrayModel;
-    mBookmarks = qobject_cast<Okteta::Bookmarkable*>(byteArrayModel );
+    mBookmarks = qobject_cast<Bookmarkable*>(byteArrayModel );
 }
 
 
@@ -229,7 +229,7 @@ bool ByteArrayRowColumnRenderer::setGroupSpacingWidth( KPixelX groupSpacingWidth
 }
 
 
-void ByteArrayRowColumnRenderer::setValueCodec( Okteta::ValueCoding valueCoding, const Okteta::ValueCodec* valueCodec )
+void ByteArrayRowColumnRenderer::setValueCodec( ValueCoding valueCoding, const ValueCodec* valueCodec )
 {
     mValueCoding = valueCoding;
     mValueCodec = valueCodec;
@@ -264,7 +264,7 @@ void ByteArrayRowColumnRenderer::recalcByteWidth()
 {
     int byteWidth = mValueCodec->encodingWidth() * mDigitWidth;
 
-    if( mValueCoding == Okteta::BinaryCoding )
+    if( mValueCoding == BinaryCoding )
     {
         mBinaryHalfOffset = 4 * mDigitWidth + mBinaryGapWidth;
         byteWidth += mBinaryGapWidth;
@@ -273,9 +273,9 @@ void ByteArrayRowColumnRenderer::recalcByteWidth()
 }
 
 // perhaps sometimes there will be a grammar
-void ByteArrayRowColumnRenderer::renderEditedByte( QPainter* painter, char byte, const QString& editBuffer )
+void ByteArrayRowColumnRenderer::renderEditedByte( QPainter* painter, Byte byte, const QString& editBuffer )
 {
-    const Okteta::Character byteChar = mCharCodec->decode( byte );
+    const Character byteChar = mCharCodec->decode( byte );
 
     const QPalette& palette = stylist()->palette();
     KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::View );
@@ -291,7 +291,7 @@ void ByteArrayRowColumnRenderer::renderEditedByte( QPainter* painter, char byte,
 
 
 void ByteArrayRowColumnRenderer::renderByteText( QPainter* painter,
-                                                 char byte, Okteta::Character byteChar, int codings,
+                                                 Byte byte, Character byteChar, int codings,
                                                  const QColor& color ) const
 {
     int charBaseLine = mDigitBaseLine;
@@ -306,8 +306,8 @@ void ByteArrayRowColumnRenderer::renderByteText( QPainter* painter,
     if( codings & AbstractByteArrayView::CharCodingId )
     {
     // turn into a drawable String
-        const QString text( byteChar.isUndefined() ?                      Okteta::Character(mUndefinedChar) :
-                           !(mShowingNonprinting || byteChar.isPrint()) ? Okteta::Character(mSubstituteChar) :
+        const QString text( byteChar.isUndefined() ?                      Character(mUndefinedChar) :
+                           !(mShowingNonprinting || byteChar.isPrint()) ? Character(mSubstituteChar) :
                                                                           byteChar );
 
         painter->setPen( color );
@@ -319,7 +319,7 @@ void ByteArrayRowColumnRenderer::renderByteText( QPainter* painter,
 void ByteArrayRowColumnRenderer::renderCode( QPainter* painter, const QString& code, const QColor& color ) const
 {
     painter->setPen( color );
-    if( mValueCoding == Okteta::BinaryCoding )
+    if( mValueCoding == BinaryCoding )
     {
         // leave a gap in the middle
         painter->drawText( 0, mDigitBaseLine, code.left(4) );
@@ -555,13 +555,13 @@ void ByteArrayRowColumnRenderer::renderLinePositions( QPainter* painter, int lin
         return;
 
     // check for leading and trailing spaces
-    KDE::Section byteIndizes =
-        KDE::Section::fromWidth( mLayout->indexAtCoord(Coord( linePositions.start(), lineIndex )), linePositions.width() );
+    AddressRange byteIndizes =
+        AddressRange::fromWidth( mLayout->indexAtCoord(Coord( linePositions.start(), lineIndex )), linePositions.width() );
 
     unsigned int selectionFlag = 0;
     unsigned int markingFlag = 0;
-    KDE::Section selection;
-    KDE::Section markedSection;
+    AddressRange selection;
+    AddressRange markedSection;
     bool hasMarking = mRanges->hasMarking();
     bool hasSelection = mRanges->hasSelection();
 
@@ -571,7 +571,7 @@ void ByteArrayRowColumnRenderer::renderLinePositions( QPainter* painter, int lin
     while( linePositions.isValid() )
     {
         KDE::Section positionsPart( linePositions );  // set of linePositions to paint next
-        KDE::Section byteIndizesPart( byteIndizes );      // set of indizes to paint next
+        AddressRange byteIndizesPart( byteIndizes );      // set of indizes to paint next
         // falls markedSection nicht mehr gebuffert und noch zu erwarten
         if( hasMarking && markedSection.endsBefore(byteIndizesPart.start()) )
         {
@@ -628,7 +628,7 @@ void ByteArrayRowColumnRenderer::renderLinePositions( QPainter* painter, int lin
 
 void ByteArrayRowColumnRenderer::renderPlain( QPainter* painter, const KDE::Section& linePositions, int byteIndex )
 {
-    Okteta::BookmarksConstIterator bit;
+    BookmarksConstIterator bit;
     int nextBookmarkOffset = -1;
 
     const bool hasBookmarks = ( mBookmarks != 0 );
@@ -657,8 +657,8 @@ void ByteArrayRowColumnRenderer::renderPlain( QPainter* painter, const KDE::Sect
             nextBookmarkOffset = bit.hasNext() ? bit.next().offset() : -1;//TODO )&& ( bit->offset() <= LastIndex );
         }
 
-        const char byte = mByteArrayModel->datum( byteIndex );
-        const Okteta::Character byteChar = mCharCodec->decode( byte );
+        const Byte byte = mByteArrayModel->byte( byteIndex );
+        const Character byteChar = mCharCodec->decode( byte );
 
         const KColorScheme::ForegroundRole foregroundRole =
             mByteTypeColored ? foregroundRoleForChar(byteChar): KColorScheme::NormalText;
@@ -673,7 +673,7 @@ void ByteArrayRowColumnRenderer::renderPlain( QPainter* painter, const KDE::Sect
 
 void ByteArrayRowColumnRenderer::renderSelection( QPainter* painter, const KDE::Section& linePositions, int byteIndex, int flag )
 {
-    Okteta::BookmarksConstIterator bit;
+    BookmarksConstIterator bit;
     int nextBookmarkOffset = -1;
 
     const bool hasBookmarks = ( mBookmarks != 0 );
@@ -704,8 +704,8 @@ void ByteArrayRowColumnRenderer::renderSelection( QPainter* painter, const KDE::
             nextBookmarkOffset = bit.hasNext() ? bit.next().offset() : -1;//TODO )&& ( bit->offset() <= LastIndex );
         }
 
-        const char byte = mByteArrayModel->datum( byteIndex );
-        const Okteta::Character byteChar = mCharCodec->decode( byte );
+        const Byte byte = mByteArrayModel->byte( byteIndex );
+        const Character byteChar = mCharCodec->decode( byte );
 
         const KColorScheme::ForegroundRole foregroundRole =
             mByteTypeColored ? foregroundRoleForChar(byteChar): KColorScheme::NormalText;
@@ -718,7 +718,7 @@ void ByteArrayRowColumnRenderer::renderSelection( QPainter* painter, const KDE::
 }
 
 
-void ByteArrayRowColumnRenderer::renderMarking( QPainter* painter, const KDE::Section& linePositions, int byteIndex, int flag )
+void ByteArrayRowColumnRenderer::renderMarking( QPainter* painter, const KDE::Section& linePositions, Address byteIndex, int flag )
 {
     const QPalette& palette = stylist()->palette();
 
@@ -732,8 +732,8 @@ void ByteArrayRowColumnRenderer::renderMarking( QPainter* painter, const KDE::Se
 
         // draw the byte
         painter->translate( x, 0 );
-        const char byte = mByteArrayModel->datum( byteIndex );
-        const Okteta::Character byteChar = mCharCodec->decode( byte );
+        const Byte byte = mByteArrayModel->byte( byteIndex );
+        const Character byteChar = mCharCodec->decode( byte );
         renderByteText( painter, byte, byteChar, mVisibleCodings, baseColor );
 
         painter->translate( -x, 0 );
@@ -765,8 +765,8 @@ void ByteArrayRowColumnRenderer::renderRange( QPainter* painter, const QBrush& b
 void ByteArrayRowColumnRenderer::renderByte( QPainter* painter,
                                              int byteIndex, AbstractByteArrayView::CodingTypeId codingId )
 {
-    const char byte = ( byteIndex > -1 ) ? mByteArrayModel->datum( byteIndex ) : EmptyByte;
-    const Okteta::Character byteChar = mCharCodec->decode( byte );
+    const Byte byte = ( byteIndex > -1 ) ? mByteArrayModel->byte( byteIndex ) : EmptyByte;
+    const Character byteChar = mCharCodec->decode( byte );
 
     const QPalette& palette = stylist()->palette();
 
@@ -805,13 +805,13 @@ void ByteArrayRowColumnRenderer::renderByte( QPainter* painter,
 
 // TODO: think about making framestyle a enum of a class ByteArrayColumnCursor
 void ByteArrayRowColumnRenderer::renderFramedByte( QPainter* painter,
-                                                   int byteIndex, AbstractByteArrayView::CodingTypeId codingId,
+                                                   Address byteIndex, AbstractByteArrayView::CodingTypeId codingId,
                                                    FrameStyle frameStyle )
 {
     renderByte( painter, byteIndex, codingId );
 
-    const char byte = ( byteIndex > -1 ) ? mByteArrayModel->datum( byteIndex ) : EmptyByte;
-    const Okteta::Character byteChar = mCharCodec->decode( byte );
+    const Byte byte = ( byteIndex > -1 ) ? mByteArrayModel->byte( byteIndex ) : EmptyByte;
+    const Character byteChar = mCharCodec->decode( byte );
 
     const bool isInSelection = ( byteIndex > -1 && mRanges->selectionIncludes(byteIndex) );
     const KColorScheme::ColorSet colorSet = isInSelection ? KColorScheme::Selection : KColorScheme::View;
@@ -832,11 +832,11 @@ void ByteArrayRowColumnRenderer::renderFramedByte( QPainter* painter,
 }
 
 
-void ByteArrayRowColumnRenderer::renderCursor( QPainter* painter, int byteIndex, AbstractByteArrayView::CodingTypeId codingId )
+void ByteArrayRowColumnRenderer::renderCursor( QPainter* painter, Address byteIndex, AbstractByteArrayView::CodingTypeId codingId )
 {
 Q_UNUSED( codingId )
-    const char byte = ( byteIndex > -1 ) ? mByteArrayModel->datum( byteIndex ) : EmptyByte;
-    const Okteta::Character byteChar = mCharCodec->decode( byte );
+    const Byte byte = ( byteIndex > -1 ) ? mByteArrayModel->byte( byteIndex ) : EmptyByte;
+    const Character byteChar = mCharCodec->decode( byte );
 
     const bool isInSelection = ( byteIndex > -1 && mRanges->selectionIncludes(byteIndex) );
     const KColorScheme::ColorSet colorSet = isInSelection ? KColorScheme::Selection : KColorScheme::View;
@@ -850,27 +850,27 @@ Q_UNUSED( codingId )
 }
 
 
-bool ByteArrayRowColumnRenderer::isSelected( const KDE::Section& section, KDE::Section* _selection,
-                                                  unsigned int* _flag ) const
+bool ByteArrayRowColumnRenderer::isSelected( const AddressRange& range, AddressRange* _selection,
+                                             unsigned int* _flag ) const
 {
-    const KDE::Section* overlappingSelectedSection = mRanges->firstOverlappingSelection( section );
+    const AddressRange* overlappingSelectedSection = mRanges->firstOverlappingSelection( range );
     if( !overlappingSelectedSection )
         return false;
 
-    KDE::Section selection = *overlappingSelectedSection;
+    AddressRange selection = *overlappingSelectedSection;
     unsigned int flag = 0;
 
     // does selection start before asked range?
-    if( selection.startsBefore(section) )
+    if( selection.startsBefore(range) )
     {
-        selection.setStart( section.start() );
+        selection.setStart( range.start() );
         flag |= StartsBefore;
     }
 
     // does selection go on behind asked range?
-    if( selection.endsBehind(section) )
+    if( selection.endsBehind(range) )
     {
-        selection.setEnd( section.end() );
+        selection.setEnd( range.end() );
         flag |= EndsLater;
     }
 
@@ -880,25 +880,25 @@ bool ByteArrayRowColumnRenderer::isSelected( const KDE::Section& section, KDE::S
 }
 
 
-bool ByteArrayRowColumnRenderer::isMarked( const KDE::Section& section, KDE::Section* _markedSection,
+bool ByteArrayRowColumnRenderer::isMarked( const AddressRange& range, AddressRange* _markedSection,
                                                 unsigned int* _flag ) const
 {
-    const KDE::Section* overlappingMarkedSection = mRanges->overlappingMarking( section );
+    const AddressRange* overlappingMarkedSection = mRanges->overlappingMarking( range );
     if( !overlappingMarkedSection )
         return false;
 
     unsigned int flag = 0;
-    KDE::Section markedSection = *overlappingMarkedSection;
+    AddressRange markedSection = *overlappingMarkedSection;
 
-    if( markedSection.startsBefore(section) )
+    if( markedSection.startsBefore(range) )
     {
-        markedSection.setStart( section.start() );
+        markedSection.setStart( range.start() );
         flag |= StartsBefore;
     }
 
-    if( markedSection.endsBehind(section) )
+    if( markedSection.endsBehind(range) )
     {
-        markedSection.setEnd( section.end() );
+        markedSection.setEnd( range.end() );
         flag |= EndsLater;
     }
 

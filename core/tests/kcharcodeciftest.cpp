@@ -29,33 +29,37 @@
 // Qt
 #include <QtTest/QtTest>
 
-using namespace Okteta;
+
+namespace Okteta
+{
 
 static const char QTextCodecWhiteSpace = 63;
 
 
 void KCharCodecIfTest::init()
 {
-  CharCodec = createCodec();
+    mCharCodec = createCodec();
 }
 
 void KCharCodecIfTest::cleanup()
 {
-  deleteCodec( CharCodec );
+    deleteCodec( mCharCodec );
 }
 
 
 void KCharCodecIfTest::testEncodeDecode()
 {
-  unsigned char c = 0;
-  do
-  {
-    ++c;
-    Character UTF8 = CharCodec->decode( c );
-    char r = 0;
-    bool Success = CharCodec->encode( &r, UTF8 );
-    QCOMPARE( (unsigned char)r, c );
-    QVERIFY( Success );
-  }
-  while( c < 255 );
+    Byte c = 0;
+    do
+    {
+        ++c;
+        Character UTF8 = mCharCodec->decode( c );
+        Byte r = 0;
+        bool success = mCharCodec->encode( &r, UTF8 );
+        QCOMPARE( r, c );
+        QVERIFY( success );
+    }
+    while( c < 255 );
+}
+
 }

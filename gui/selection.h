@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -9,7 +9,7 @@
     version 2.1 of the License, or (at your option) version 3, or any
     later version accepted by the membership of KDE e.V. (or its
     successor approved by the membership of KDE e.V.), which shall
-    act as a proxy defined in mSection 6 of version 3 of the license.
+    act as a proxy defined in mRange 6 of version 3 of the license.
 
     This library is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -23,14 +23,14 @@
 #ifndef OKTETA_SELECTION_H
 #define OKTETA_SELECTION_H
 
-// commonlib
-#include <section.h>
+// lib
+#include "addressrange.h"
 
 
 namespace Okteta
 {
 
-/** This class describes a selected section of the buffer.
+/** This class describes a selected range of the buffer.
   * As it is used as selection controlled by
   * mouse and keyboard commands it offers two ways to set its range:
   * - by giving the startposition (of the cursor) of an interactive selection
@@ -47,14 +47,15 @@ class Selection
     /** creates a selection with a given start.
       * @param index index in front of which the selection begins
       */
-    explicit Selection( int index );
+    explicit Selection( Address index );
     /** creates an invalid selection */
     Selection();
+
     ~Selection();
 
   public:
-    Selection &operator=( const Selection &other );
-    Selection &operator=( const KDE::Section &section );
+    Selection& operator=( const Selection& other );
+    Selection& operator=( const AddressRange& range );
 
   public: // modification access
     /** starts the selection.
@@ -62,12 +63,12 @@ class Selection
       * so the initial selection is empty.
       * @param index index in front of which the selection begins
       */
-    void setStart( int index );
+    void setStart( Address index );
     /** sets the end of the current selection.
       * If the end is before the start the selection will reach from the given index 
       * @param index index in front of which the selection ends
       */
-    void setEnd( int index );
+    void setEnd( Address index );
     /** sets the selection to be invalid
       */
     void cancel();
@@ -81,22 +82,22 @@ class Selection
       */
     void reverse();
 
-    void adaptToReplacement( int pos, int removedLength, int insertedLength );
-    void adaptToSwap( int firstOffset, int secondOffset, int secondLength );
+    void adaptToReplacement( Address pos, Size removedLength, Size insertedLength );
+    void adaptToSwap( Address firstOffset, Address secondOffset, Size secondLength );
 
   public: // value access
     /** 
       * @return anchor value
       */
-    int anchor() const;
-    int start() const;
-    int end() const;
-    int nextBeforeStart() const;
-    int nextBehindEnd() const;
+    Address anchor() const;
+    Address start() const;
+    Address end() const;
+    Address nextBeforeStart() const;
+    Address nextBehindEnd() const;
     /** 
-      * @return section
+      * @return range
       */
-    const KDE::Section &section() const;
+    const AddressRange& range() const;
 
 
   public: // logic access
@@ -115,104 +116,104 @@ class Selection
     bool isForward() const;
 
   protected:
-    /** mSection */
-    KDE::Section mSection;
+    /** mRange */
+    AddressRange mRange;
     /** cursor index where the selection starts */
-    int mAnchor;
+    Address mAnchor;
 };
 
 
 inline Selection::Selection() : mAnchor( -1 ) {}
-inline Selection::Selection( int index ) : mAnchor( index )  {}
+inline Selection::Selection( Address index ) : mAnchor( index )  {}
 inline Selection::~Selection() {}
 
-inline Selection &Selection::operator=( const Selection &other )
+inline Selection &Selection::operator=( const Selection& other )
 {
-    mSection = other.mSection;
+    mRange = other.mRange;
     mAnchor = other.mAnchor;
     return *this;
 }
 
-inline Selection &Selection::operator=( const KDE::Section &section )
+inline Selection &Selection::operator=( const AddressRange& range )
 {
-    mSection = section;
-    mAnchor = section.start();
+    mRange = range;
+    mAnchor = range.start();
     return *this;
 }
 
 
-inline void Selection::setStart( int index )
+inline void Selection::setStart( Address index )
 {
     mAnchor = index;
-    mSection.unset();
+    mRange.unset();
 }
 
 
-inline void Selection::setEnd( int index )
+inline void Selection::setEnd( Address index )
 {
     // nothing selected?
     if( index == mAnchor )
-        mSection.unset();
+        mRange.unset();
     // selecting forwards?
     else if( index > mAnchor )
     {
-        mSection.setStart( mAnchor );
-        mSection.setEnd( index-1 );
+        mRange.setStart( mAnchor );
+        mRange.setEnd( index-1 );
     }
     // selecting backwards
     else
     {
-        mSection.setStart( index );
-        mSection.setEnd( mAnchor-1 );
+        mRange.setStart( index );
+        mRange.setEnd( mAnchor-1 );
     }
 }
 
 inline void Selection::reverse()
 {
-    mAnchor = isForward() ? mSection.nextBehindEnd() : mSection.start();
+    mAnchor = isForward() ? mRange.nextBehindEnd() : mRange.start();
 }
 
 inline void Selection::setForward( bool Forward )
 {
-    mAnchor = Forward ? mSection.start() : mSection.nextBehindEnd();
+    mAnchor = Forward ? mRange.start() : mRange.nextBehindEnd();
 }
 
-inline const KDE::Section &Selection::section() const { return mSection; }
-inline int Selection::anchor()              const { return mAnchor; }
-inline int Selection::start()               const { return mSection.start(); }
-inline int Selection::end()                 const { return mSection.end(); }
-inline int Selection::nextBeforeStart()     const { return mSection.nextBeforeStart(); }
-inline int Selection::nextBehindEnd()       const { return mSection.nextBehindEnd(); }
+inline const AddressRange& Selection::range()   const { return mRange; }
+inline Address Selection::anchor()              const { return mAnchor; }
+inline Address Selection::start()               const { return mRange.start(); }
+inline Address Selection::end()                 const { return mRange.end(); }
+inline Address Selection::nextBeforeStart()     const { return mRange.nextBeforeStart(); }
+inline Address Selection::nextBehindEnd()       const { return mRange.nextBehindEnd(); }
 
-inline void Selection::cancel() { mAnchor = -1; mSection.unset(); }
+inline void Selection::cancel() { mAnchor = -1; mRange.unset(); }
 
-inline bool Selection::isValid()     const { return mSection.isValid(); }
+inline bool Selection::isValid()     const { return mRange.isValid(); }
 inline bool Selection::started()     const { return mAnchor != -1; }
-inline bool Selection::justStarted() const { return mAnchor != -1 && mSection.start() == -1; }
-inline bool Selection::isForward()   const { return mAnchor == mSection.start(); }
+inline bool Selection::justStarted() const { return mAnchor != -1 && mRange.start() == -1; }
+inline bool Selection::isForward()   const { return mAnchor == mRange.start(); }
 
-inline void Selection::adaptToReplacement( int pos, int removedLength, int insertedLength )
+inline void Selection::adaptToReplacement( Address pos, Size removedLength, Size insertedLength )
 {
-    mSection.adaptToReplacement( pos, removedLength, insertedLength );
-    mAnchor = isForward() ? mSection.start() : mSection.nextBehindEnd();
+    mRange.adaptToReplacement( pos, removedLength, insertedLength );
+    mAnchor = isForward() ? mRange.start() : mRange.nextBehindEnd();
 }
 
-inline void Selection::adaptToSwap( int firstOffset, int secondOffset, int secondLength )
+inline void Selection::adaptToSwap( Address firstOffset, Address secondOffset, Size secondLength )
 {
     // no intersection?
-    if( mSection.end() < firstOffset || mSection.start() > secondOffset+secondLength-1 )
+    if( mRange.end() < firstOffset || mRange.start() > secondOffset+secondLength-1 )
         return;
 
-    const KDE::Section firstSection( firstOffset, secondOffset-1 );
-    if( firstSection.includes(mSection) )
-        mSection.moveBy( secondLength );
+    const AddressRange firstSection( firstOffset, secondOffset-1 );
+    if( firstSection.includes(mRange) )
+        mRange.moveBy( secondLength );
     else
     {
-        const KDE::Section secondSection = KDE::Section::fromWidth( secondOffset, secondLength );
-        if( secondSection.includes(mSection) )
-            mSection.moveBy( -firstSection.width() );
+        const AddressRange secondRange = AddressRange::fromWidth( secondOffset, secondLength );
+        if( secondRange.includes(mRange) )
+            mRange.moveBy( -firstSection.width() );
         else
-            mSection.unset();
+            mRange.unset();
     }
 }
 

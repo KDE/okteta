@@ -27,12 +27,10 @@
 #include "abstractbytearraycolumnrenderer.h"
 
 
-namespace Okteta {
-class ValueCodec;
-}
-
 namespace Okteta
 {
+class ValueCodec;
+
 
 /** buffer column which displays the numerical values of the bytes
   *
@@ -42,11 +40,11 @@ class OKTETAGUI_EXPORT ValueByteArrayColumnRenderer : public AbstractByteArrayCo
 {
   public:
     ValueByteArrayColumnRenderer( AbstractColumnStylist* stylist,
-        Okteta::AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges );
+        AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges );
     virtual ~ValueByteArrayColumnRenderer();
 
   public:
-    void renderEditedByte( QPainter *painter, char byte, const QString &editBuffer );
+    void renderEditedByte( QPainter* painter, Byte byte, const QString& editBuffer );
 
   public: // modification access
     void setValueCodec( Okteta::ValueCoding valueCoding, const Okteta::ValueCodec* valueCodec );
@@ -61,7 +59,7 @@ class OKTETAGUI_EXPORT ValueByteArrayColumnRenderer : public AbstractByteArrayCo
     KPixelX binaryGapWidth() const;
 
   protected: // AbstractByteArrayColumnRenderer API
-    virtual void renderByteText( QPainter *painter, char byte, Okteta::Character byteChar, const QColor &color ) const;
+    virtual void renderByteText( QPainter* painter, Byte byte, Character byteChar, const QColor& color ) const;
     virtual void recalcByteWidth();
 
   protected:
@@ -69,9 +67,9 @@ class OKTETAGUI_EXPORT ValueByteArrayColumnRenderer : public AbstractByteArrayCo
 
   protected: // settings
     /** */
-    Okteta::ValueCoding mValueCoding;
+    ValueCoding mValueCoding;
     /** */
-    const Okteta::ValueCodec* mValueCodec;
+    const ValueCodec* mValueCodec;
     /** */
     KPixelX mBinaryGapWidth;
 

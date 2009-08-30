@@ -23,17 +23,22 @@
 #ifndef OKTETACORE_TEST_UTIL_FILL_H
 #define OKTETACORE_TEST_UTIL_FILL_H
 
+//
+#include <addressrange.h>
+#include <byte.h>
 
+namespace Okteta
+{
+class AbstractByteArrayModel;
+}
 class QByteArray;
-namespace KDE { class Section; }
-namespace Okteta { class AbstractByteArrayModel; }
 
 
 // some defines
-static const char FirstMarkChar = 2;
-static const char SecondMarkChar = 3;
-static const char PaintChar = 1;
-static const char BlankChar = '\0';
+static const Okteta::Byte FirstMarkChar = 2;
+static const Okteta::Byte SecondMarkChar = 3;
+static const Okteta::Byte PaintChar = 1;
+static const Okteta::Byte BlankChar = '\0';
 
 void textureByteArrayModel( Okteta::AbstractByteArrayModel *ByteArrayModel,
                             unsigned char b = 1, unsigned char e = 255,
@@ -41,7 +46,7 @@ void textureByteArrayModel( Okteta::AbstractByteArrayModel *ByteArrayModel,
 
 void textureByteArrayModel( Okteta::AbstractByteArrayModel *byteArrayModel,
                             unsigned char b, unsigned char e,
-                            const KDE::Section &section );
+                            const Okteta::AddressRange& range );
 
 void textureByteArray( QByteArray *byteArray,
                        unsigned char b = 1, unsigned char e = 255,
@@ -49,6 +54,6 @@ void textureByteArray( QByteArray *byteArray,
 
 void textureByteArray( QByteArray *byteArray,
                        unsigned char b, unsigned char e,
-                       const KDE::Section &section );
+                       const Okteta::AddressRange& range );
 
 #endif

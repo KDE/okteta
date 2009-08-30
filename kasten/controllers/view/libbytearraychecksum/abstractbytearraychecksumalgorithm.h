@@ -23,15 +23,14 @@
 #ifndef ABSTRACTBYTEARRAYCHECKSUMALGORITHM_H
 #define ABSTRACTBYTEARRAYCHECKSUMALGORITHM_H
 
+// Okteta core
+#include <addressrange.h>
 // Qt
 #include <QtCore/QObject>
 
 class AbstractByteArrayChecksumParameterSet;
 namespace Okteta {
 class AbstractByteArrayModel;
-}
-namespace KDE {
-class Section;
 }
 class QString;
 
@@ -48,7 +47,7 @@ class AbstractByteArrayChecksumAlgorithm : public QObject
     virtual ~AbstractByteArrayChecksumAlgorithm();
 
   public: // API to be implemented
-    virtual bool calculateChecksum( QString* result, const Okteta::AbstractByteArrayModel* model, const KDE::Section& section ) const = 0;
+    virtual bool calculateChecksum( QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const = 0;
     /** used by the editor to get write access to the parameters */
     virtual AbstractByteArrayChecksumParameterSet* parameterSet() = 0;
 

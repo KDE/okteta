@@ -44,7 +44,7 @@ int PODData::byteOrder()             const { return mByteOrder; }
 int PODData::size()                  const { return mCurrentSize; }
 
 
-unsigned char* PODData::rawData()    { return mOriginalAligned64Bit.Data; }
+Okteta::Byte* PODData::rawData()    { return mOriginalAligned64Bit.Bytes; }
 
 void PODData::setByteOrder( int byteOrder )
 {

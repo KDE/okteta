@@ -23,9 +23,9 @@
 #ifndef KPIECETABLE_INSERTPIECETABLECHANGE_H
 #define KPIECETABLE_INSERTPIECETABLECHANGE_H
 
-
 // lib
 #include "abstractpiecetablechange.h"
+
 
 namespace KPieceTable
 {
@@ -37,27 +37,31 @@ namespace KPieceTable
 class InsertPieceTableChange : public AbstractPieceTableChange
 {
   public:
-    InsertPieceTableChange( int insertOffset, int insertLength, int storageOffset );
+    InsertPieceTableChange( Address insertOffset, Size insertLength, Address storageOffset );
+
     virtual ~InsertPieceTableChange();
 
   public: // AbstractPieceTableChange API
     virtual int type() const;
     virtual QString description() const;
-    virtual int storageOffset() const;
-    virtual bool merge( const AbstractPieceTableChange *other );
-    virtual KDE::Section apply( PieceTable *pieceTable ) const;
-    virtual KDE::Section revert( PieceTable *pieceTable ) const;
-    virtual KDE::ArrayChangeMetrics metrics() const;
-    virtual int dataSize() const;
+    virtual Address storageOffset() const;
+    virtual bool merge( const AbstractPieceTableChange* other );
+    virtual AddressRange apply( PieceTable* pieceTable ) const;
+    virtual AddressRange revert( PieceTable* pieceTable ) const;
+    virtual ArrayChangeMetrics metrics() const;
+    virtual Size dataSize() const;
 
   protected:
-    int mInsertOffset;
-    int mInsertLength;
-    int mStorageOffset;
+    Address mInsertOffset;
+    Size mInsertLength;
+    Address mStorageOffset;
 };
 
-inline InsertPieceTableChange::InsertPieceTableChange( int insertOffset, int insertLength, int storageOffset )
- : mInsertOffset( insertOffset ), mInsertLength( insertLength ), mStorageOffset( storageOffset )
+
+inline InsertPieceTableChange::InsertPieceTableChange( Address insertOffset, Size insertLength, Address storageOffset )
+  : mInsertOffset( insertOffset ),
+    mInsertLength( insertLength ),
+    mStorageOffset( storageOffset )
 {}
 
 

@@ -13,7 +13,6 @@ include_directories(
 
 set( piecetest_SRCS
   piecetest.cpp
-  ${SUTDIR}/section.cpp
 )
 
 kde4_add_unit_test( piecetest  TESTNAME libpiecetable-piecetest  ${piecetest_SRCS} )
@@ -24,7 +23,6 @@ target_link_libraries( piecetest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
 set( piecetabletest_SRCS
   piecetabletest.cpp
-  ${SUTDIR}/section.cpp
   ${SUTDIR}/piecetable/piecetable.cpp
 )
 
@@ -37,7 +35,6 @@ target_link_libraries( piecetabletest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY}
 set( testpiecetablechangetest_SRCS
   testpiecetablechangetest.cpp
   testpiecetablechange.cpp
-  ${SUTDIR}/section.cpp
   ${SUTDIR}/piecetable/piecetable.cpp
   ${SUTDIR}/piecetable/abstractpiecetablechange.cpp
 )
@@ -54,7 +51,6 @@ target_link_libraries( testpiecetablechangetest  oktetacoretestutil ${KDE4_KDECO
 set( abstractpiecetablechangeiftest_SRCS
   abstractpiecetablechangeiftest.cpp
   testpiecetablechange.cpp
-  ${SUTDIR}/section.cpp
   ${SUTDIR}/piecetable/piecetable.cpp
   ${SUTDIR}/piecetable/abstractpiecetablechange.cpp
 )
@@ -143,7 +139,7 @@ target_link_libraries( swaprangespiecetablechangeabstractpiecetablechangeiftest
 set( grouppiecetablechangeabstractpiecetablechangeiftest_SRCS
   grouppiecetablechangeabstractpiecetablechangeiftest.cpp
   ${abstractpiecetablechangeiftest_SRCS}
-  ${SUTDIR}/sectionlist.cpp
+  ${SUTDIR}/addressrangelist.cpp
   ${SUTDIR}/piecetable/replacepiecetablechange.cpp
   ${SUTDIR}/piecetable/insertpiecetablechange.cpp
   ${SUTDIR}/piecetable/removepiecetablechange.cpp
@@ -163,8 +159,7 @@ target_link_libraries( grouppiecetablechangeabstractpiecetablechangeiftest
 set( grouppiecetablechangetest_SRCS
   grouppiecetablechangetest.cpp
   testpiecetablechange.cpp
-  ${SUTDIR}/section.cpp
-  ${SUTDIR}/sectionlist.cpp
+  ${SUTDIR}/addressrangelist.cpp
   ${SUTDIR}/piecetable/piecetable.cpp
   ${SUTDIR}/piecetable/abstractpiecetablechange.cpp
   ${SUTDIR}/piecetable/insertpiecetablechange.cpp
@@ -186,8 +181,7 @@ target_link_libraries( grouppiecetablechangetest  ${KDE4_KDECORE_LIBS} ${QT_QTTE
 set( piecetablechangehistorytest_SRCS
   piecetablechangehistorytest.cpp
   testpiecetablechange.cpp
-  ${SUTDIR}/section.cpp
-  ${SUTDIR}/sectionlist.cpp
+  ${SUTDIR}/addressrangelist.cpp
   ${SUTDIR}/piecetable/piecetable.cpp
   ${SUTDIR}/piecetable/abstractpiecetablechange.cpp
   ${SUTDIR}/piecetable/insertpiecetablechange.cpp
@@ -209,8 +203,7 @@ target_link_libraries( piecetablechangehistorytest  ${KDE4_KDECORE_LIBS} ${QT_QT
 
 set( revertablepiecetabletest_SRCS
   revertablepiecetabletest.cpp
-  ${SUTDIR}/section.cpp
-  ${SUTDIR}/sectionlist.cpp
+  ${SUTDIR}/addressrangelist.cpp
   ${SUTDIR}/piecetable/piecetable.cpp
   ${SUTDIR}/piecetable/abstractpiecetablechange.cpp
   ${SUTDIR}/piecetable/insertpiecetablechange.cpp

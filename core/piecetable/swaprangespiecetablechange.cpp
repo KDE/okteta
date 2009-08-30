@@ -24,7 +24,7 @@
 
 // lib
 #include "piecetable.h"
-#include <section.h>
+//
 #include <arraychangemetrics.h>
 // KDE
 #include <KLocale>
@@ -40,23 +40,23 @@ QString SwapRangesPieceTableChange::description() const
     return i18nc( "name of the change", "Swap Ranges" );
 }
 
-KDE::Section SwapRangesPieceTableChange::apply( PieceTable *pieceTable ) const
+AddressRange SwapRangesPieceTableChange::apply( PieceTable* pieceTable ) const
 {
-    pieceTable->swap( mFirstStart, mSecondSection );
+    pieceTable->swap( mFirstStart, mSecondRange );
 
-    return KDE::Section( mFirstStart, mSecondSection.end() );
+    return AddressRange( mFirstStart, mSecondRange.end() );
 }
 
-KDE::Section SwapRangesPieceTableChange::revert( PieceTable *pieceTable ) const
+AddressRange SwapRangesPieceTableChange::revert( PieceTable* pieceTable ) const
 {
-    pieceTable->swap( mFirstStart, KDE::Section(mFirstStart+mSecondSection.width(),mSecondSection.end()) );
+    pieceTable->swap( mFirstStart, AddressRange(mFirstStart+mSecondRange.width(),mSecondRange.end()) );
 
-    return KDE::Section( mFirstStart, mSecondSection.end() );
+    return AddressRange( mFirstStart, mSecondRange.end() );
 }
 
-KDE::ArrayChangeMetrics SwapRangesPieceTableChange::metrics() const
+ArrayChangeMetrics SwapRangesPieceTableChange::metrics() const
 {
-    return KDE::ArrayChangeMetrics::asSwapping( mFirstStart, mSecondSection.start(), mSecondSection.width() );
+    return ArrayChangeMetrics::asSwapping( mFirstStart, mSecondRange.start(), mSecondRange.width() );
 }
 
 SwapRangesPieceTableChange::~SwapRangesPieceTableChange() {}

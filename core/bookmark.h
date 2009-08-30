@@ -25,6 +25,8 @@
 
 // lib
 #include "oktetacore_export.h"
+#include "address.h"
+#include "size.h"
 // Qt
 #include <QtCore/QString>
 
@@ -36,37 +38,37 @@ namespace Okteta
 class OKTETACORE_EXPORT Bookmark
 {
   private:
-    static const int InvalidOffset = -1;
+    static const Address InvalidAddress = -1;
 
   public:
-    Bookmark( int offset ); // krazy:exclude=explicit
+    Bookmark( Address offset ); // krazy:exclude=explicit
     Bookmark();
   public:
     bool operator==( const Bookmark &other ) const;
   public:
-    int offset() const;
+    Address offset() const;
     QString name() const;
     bool isValid() const;
   public:
-    void move( int offset );
+    void move( Size offset );
     void setName( const QString& name );
-    void setOffset( int offset );
+    void setOffset( Address offset );
   protected:
-    int mOffset;
+    Address mOffset;
     QString mName;
 };
 
 
-inline Bookmark::Bookmark( int offset ) : mOffset( offset ) {}
-inline Bookmark::Bookmark() : mOffset( InvalidOffset ) {}
-inline bool Bookmark::operator==( const Bookmark &other ) const { return mOffset == other.mOffset; } 
-inline bool Bookmark::isValid() const { return mOffset != InvalidOffset; }
-inline int Bookmark::offset() const { return mOffset; }
+inline Bookmark::Bookmark( Address offset ) : mOffset( offset ) {}
+inline Bookmark::Bookmark() : mOffset( InvalidAddress ) {}
+inline bool Bookmark::operator==( const Bookmark &other ) const { return mOffset == other.mOffset; }
+inline bool Bookmark::isValid() const { return mOffset != InvalidAddress; }
+inline Address Bookmark::offset() const { return mOffset; }
 inline QString Bookmark::name() const { return mName; }
 
-inline void Bookmark::move( int offset ) { mOffset += offset; }
+inline void Bookmark::move( Size offset ) { mOffset += offset; }
 inline void Bookmark::setName( const QString& name ) { mName = name; }
-inline void Bookmark::setOffset( int offset ) { mOffset = offset; }
+inline void Bookmark::setOffset( Address offset ) { mOffset = offset; }
 
 }
 

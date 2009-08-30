@@ -28,7 +28,7 @@
 // Kasten core
 #include <abstracttool.h>
 // Okteta core
-#include <section.h>
+#include <addressrange.h>
 
 namespace Okteta {
 class AbstractByteArrayModel;
@@ -88,7 +88,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT InfoTool : public AbstractTool
     //
     bool mSourceByteArrayModelUptodate;
     // selection source
-    KDE::Section mSourceSelection;
+    Okteta::AddressRange mSourceSelection;
     // source of strings
     Okteta::AbstractByteArrayModel *mSourceByteArrayModel;
 };

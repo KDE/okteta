@@ -23,6 +23,8 @@
 #ifndef OKTETA_BOOKMARKSCONSTITERATORADAPTER_H
 #define OKTETA_BOOKMARKSCONSTITERATORADAPTER_H
 
+// lib
+#include <address.h>
 // Qt
 #include <QtCore/QSharedData>
 
@@ -43,16 +45,16 @@ class BookmarksConstIteratorAdapter : public QSharedData
   public:
     virtual bool hasNext() const = 0;
     virtual bool hasPrevious() const = 0;
-    virtual const Okteta::Bookmark& peekNext() const = 0;
-    virtual const Okteta::Bookmark& peekPrevious() const = 0;
+    virtual const Bookmark& peekNext() const = 0;
+    virtual const Bookmark& peekPrevious() const = 0;
 
   public:
-    virtual bool findNext( const Okteta::Bookmark& bookmark ) = 0;
-    virtual bool findPrevious( const Okteta::Bookmark& bookmark ) = 0;
-    virtual bool findNextFrom( unsigned int offset ) = 0;
-    virtual bool findPreviousFrom( unsigned int offset ) = 0;
-    virtual const Okteta::Bookmark& next() = 0;
-    virtual const Okteta::Bookmark& previous() = 0;
+    virtual bool findNext( const Bookmark& bookmark ) = 0;
+    virtual bool findPrevious( const Bookmark& bookmark ) = 0;
+    virtual bool findNextFrom( Address offset ) = 0;
+    virtual bool findPreviousFrom( Address offset ) = 0;
+    virtual const Bookmark& next() = 0;
+    virtual const Bookmark& previous() = 0;
     virtual void toBack() = 0;
     virtual void toFront() = 0;
 };

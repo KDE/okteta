@@ -23,21 +23,23 @@
 #ifndef KCHARCODECTEST_H
 #define KCHARCODECTEST_H
 
-class KComponentData;
-
 // Qt
 #include <QtCore/QObject>
+
+
+namespace Okteta
+{
 
 class KCharCodecTest : public QObject
 {
   Q_OBJECT
-
-    KComponentData *Instance;
 
   private Q_SLOTS: // test functions
     void initTestCase();
     void cleanupTestCase();
     void testCodecNames();
 };
+
+}
 
 #endif

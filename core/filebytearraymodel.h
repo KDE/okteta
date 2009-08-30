@@ -23,7 +23,6 @@
 #ifndef OKTETA_FILEBYTEARRAYMODEL_H
 #define OKTETA_FILEBYTEARRAYMODEL_H
 
-
 // lib
 #include "abstractbytearraymodel.h"
 
@@ -47,17 +46,17 @@ class OKTETACORE_EXPORT FileByteArrayModel : public AbstractByteArrayModel
     virtual ~FileByteArrayModel();
 
   public: // AbstractByteArrayModel API
-    virtual char datum( unsigned int offset ) const;
-    virtual int size() const;
+    virtual Byte byte( Address offset ) const;
+    virtual Size size() const;
     virtual bool isReadOnly() const;
     virtual bool isModified() const;
 
-    virtual int insert( int at, const char *data, int length );
-    virtual int remove( const KDE::Section& section );
-    virtual unsigned int replace( const KDE::Section& before, const char* after, unsigned int afterLength );
-    virtual bool swap( int firstStart, const KDE::Section& secondSection );
-    virtual int fill( const char fillChar, unsigned int from = 0, int length = -1 );
-    virtual void setDatum( unsigned int offset, const char datum );
+    virtual Size insert( Address offset, const Byte* insertData, int insertLength );
+    virtual Size remove( const AddressRange& removeRange );
+    virtual Size replace( const AddressRange& removeRange, const Byte* insertData, int insertLength );
+    virtual bool swap( Address firstStart, const AddressRange& secondRange );
+    virtual Size fill( const Byte fillByte, Address offset = 0, Size fillLength = -1 );
+    virtual void setByte( Address offset, Byte byte );
 
     virtual void setModified( bool modified = true );
 
@@ -68,7 +67,7 @@ class OKTETACORE_EXPORT FileByteArrayModel : public AbstractByteArrayModel
     bool close();
 
   protected:
-    FileByteArrayModelPrivate * const d;
+    FileByteArrayModelPrivate* const d;
 };
 
 }

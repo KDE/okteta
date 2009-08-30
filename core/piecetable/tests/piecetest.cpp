@@ -27,14 +27,16 @@
 // Qt
 #include <QtTest/QtTest>
 
-using namespace KDE;
-using namespace KPieceTable ;
+
+namespace KPieceTable
+{
 
 // local variables
-static const int Start = 15;
-static const int End = 27;
+static const Address Start = 15;
+static const Address End = 27;
 
-static const int Width = End - Start + 1;
+static const Address Width = End - Start + 1;
+
 
 void PieceTest::testSimpleConstructor()
 {
@@ -44,7 +46,7 @@ void PieceTest::testSimpleConstructor()
 
 void PieceTest::testFullConstructor()
 {
-    const Section storageSection( Start, End );
+    const AddressRange storageSection( Start, End );
     Piece piece( storageSection, Piece::ChangeStorage );
 
     QCOMPARE( piece.start(), Start );
@@ -56,7 +58,7 @@ void PieceTest::testFullConstructor()
 
 void PieceTest::testSplitAt()
 {
-    const Section storageSection( Start, End );
+    const AddressRange storageSection( Start, End );
     Piece piece( storageSection, Piece::ChangeStorage );
 
     // split at start
@@ -77,7 +79,7 @@ void PieceTest::testSplitAt()
     QCOMPARE( splitPiece.storageId(), (int)Piece::ChangeStorage );
 
     // split at mid
-    const int Mid = (Start+End)/2;
+    const Address Mid = (Start+End)/2;
     piece.set( Start, End );
     splitPiece = piece.splitAt( Mid );
     QCOMPARE( piece.start(), Start );
@@ -108,7 +110,7 @@ void PieceTest::testSplitAt()
 
 void PieceTest::testSplitAtLocal()
 {
-    const Section storageSection( Start, End );
+    const AddressRange storageSection( Start, End );
     Piece piece( storageSection, Piece::ChangeStorage );
 
     // split at start
@@ -129,7 +131,7 @@ void PieceTest::testSplitAtLocal()
     QCOMPARE( splitPiece.storageId(), (int)Piece::ChangeStorage );
 
     // split at mid
-    const int Mid = Width/2;
+    const Address Mid = Width/2;
     piece.set( Start, End );
     splitPiece = piece.splitAtLocal( Mid );
     QCOMPARE( piece.start(), Start );
@@ -160,12 +162,12 @@ void PieceTest::testSplitAtLocal()
 
 void PieceTest::testRemove()
 {
-    const int Mid = (Start+End)/2;
-    const Section storageSection( Start, End );
+    const Address Mid = (Start+End)/2;
+    const AddressRange storageSection( Start, End );
     Piece piece( storageSection, Piece::ChangeStorage );
 
     // remove none at start
-    Section RemoveSection( Start, Start-1  );
+    AddressRange RemoveSection( Start, Start-1  );
     Piece splitPiece = piece.remove( RemoveSection );
     QVERIFY( !piece.isValid() );
     QCOMPARE( splitPiece.start(), Start );
@@ -256,12 +258,12 @@ void PieceTest::testRemove()
 
 void PieceTest::testRemoveLocal()
 {
-    const int Mid = Width/2;
-    const Section storageSection( Start, End );
+    const Address Mid = Width/2;
+    const AddressRange storageSection( Start, End );
     Piece piece( storageSection, Piece::ChangeStorage );
 
     // remove none at start
-    Section RemoveSection( 0, 0-1  );
+    AddressRange RemoveSection( 0, 0-1  );
     Piece splitPiece = piece.removeLocal( RemoveSection );
     QVERIFY( !piece.isValid() );
     QCOMPARE( splitPiece.start(), Start );
@@ -350,4 +352,6 @@ void PieceTest::testRemoveLocal()
     QVERIFY( !splitPiece.isValid() );
 }
 
-QTEST_MAIN( PieceTest )
+}
+
+QTEST_MAIN( KPieceTable::PieceTest )

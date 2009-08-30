@@ -38,7 +38,8 @@ namespace Okteta
 
 KEditor::KEditor( ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController *parent )
   : KController( parent ),
-  mCursor( cursor ),  mView( view )
+    mCursor( cursor ),
+    mView( view )
 {
 }
 
@@ -109,20 +110,20 @@ void KEditor::doEditAction( KEditAction action )
     case CharDelete:
         if( !mView->isOverwriteMode() )
         {
-            const int index = mCursor->realIndex();
+            const Address index = mCursor->realIndex();
             if( index < mView->layout()->length() )
-                byteArrayModel->remove( KDE::Section::fromWidth(index,1) );
+                byteArrayModel->remove( AddressRange::fromWidth(index,1) );
         }
         break;
     case WordDelete: // kills data until the start of the next word
         if( !mView->isOverwriteMode() )
         {
-            const int index = mCursor->realIndex();
+            const Address index = mCursor->realIndex();
             if( index < mView->layout()->length() )
             {
-                const Okteta::WordByteArrayService WBS( byteArrayModel, mView->charCodec() );
-                const int end = WBS.indexOfBeforeNextWordStart( index );
-                byteArrayModel->remove( KDE::Section(index,end) );
+                const WordByteArrayService WBS( byteArrayModel, mView->charCodec() );
+                const Address end = WBS.indexOfBeforeNextWordStart( index );
+                byteArrayModel->remove( AddressRange(index,end) );
             }
         }
         break;
@@ -136,9 +137,9 @@ void KEditor::doEditAction( KEditAction action )
         }
         else
         {
-            const int deleteIndex = mCursor->realIndex() - 1;
+            const Address deleteIndex = mCursor->realIndex() - 1;
             if( deleteIndex >= 0 )
-                byteArrayModel->remove( KDE::Section::fromWidth(deleteIndex,1) );
+                byteArrayModel->remove( AddressRange::fromWidth(deleteIndex,1) );
         }
         break;
     case WordBackspace:
@@ -146,10 +147,10 @@ void KEditor::doEditAction( KEditAction action )
             const int leftIndex = mCursor->realIndex() - 1;
             if( leftIndex >= 0 )
             {
-                const Okteta::WordByteArrayService WBS( byteArrayModel, mView->charCodec() );
-                const int wordStart = WBS.indexOfPreviousWordStart( leftIndex );
+                const WordByteArrayService WBS( byteArrayModel, mView->charCodec() );
+                const Address wordStart = WBS.indexOfPreviousWordStart( leftIndex );
                 if( !mView->isOverwriteMode() )
-                    byteArrayModel->remove( KDE::Section(wordStart,leftIndex) );
+                    byteArrayModel->remove( AddressRange(wordStart,leftIndex) );
             }
         }
     }

@@ -73,7 +73,7 @@ class ByteArrayRowViewPrivate : public AbstractByteArrayViewPrivate
     QSize minimumSizeHint() const;
 
   public: // modification access
-    void setByteArrayModel( Okteta::AbstractByteArrayModel* byteArrayModel );
+    void setByteArrayModel( AbstractByteArrayModel* byteArrayModel );
 
   public: // AbstractByteArrayViewPrivate API
     virtual void ensureCursorVisible();
@@ -149,7 +149,7 @@ class ByteArrayRowViewPrivate : public AbstractByteArrayViewPrivate
     virtual void setActiveCoding( AbstractByteArrayView::CodingTypeId codingId );
     virtual void setVisibleCodings( int visibleCodings );
 
-    virtual int indexByPoint( const QPoint& point ) const;
+    virtual Address indexByPoint( const QPoint& point ) const;
 
   protected: // AbstractByteArrayViewPrivate API
     virtual AbstractByteArrayView::CodingTypeId activeCoding() const;

@@ -36,27 +36,29 @@ class PieceList
 {
   public:
     PieceList();
-    explicit PieceList( const Piece &piece );
+    explicit PieceList( const Piece& piece );
+
     ~PieceList();
 
   public:
     int size() const;
     bool isEmpty() const;
-    int totalLength() const;
-    const Piece &at( int i ) const;
+    Size totalLength() const;
+    const Piece& at( int i ) const;
 
   public:
-    void append( const PieceList &other );
-    void append( const Piece &piece );
-    void prepend( const PieceList &other );
+    void append( const PieceList& other );
+    void append( const Piece& piece );
+    void prepend( const PieceList& other );
 
   protected:
     QList<Piece> mList;
-    int mTotalLength;
+    Size mTotalLength;
 };
 
+
 inline PieceList::PieceList() : mTotalLength( 0 ) {}
-inline PieceList::PieceList( const Piece &piece )
+inline PieceList::PieceList( const Piece& piece )
  : mTotalLength( 0 )
 {
     append( piece );
@@ -64,10 +66,10 @@ inline PieceList::PieceList( const Piece &piece )
 
 inline int PieceList::size()               const { return mList.size(); }
 inline bool PieceList::isEmpty()           const { return mList.isEmpty(); }
-inline int PieceList::totalLength()        const { return mTotalLength; }
-inline const Piece &PieceList::at( int i ) const { return mList.at( i ); }
+inline Size PieceList::totalLength()       const { return mTotalLength; }
+inline const Piece& PieceList::at( int i ) const { return mList.at( i ); }
 
-inline void PieceList::append( const Piece &piece )
+inline void PieceList::append( const Piece& piece )
 {
     bool isMerged = false;
     if( !mList.isEmpty() )
@@ -76,7 +78,7 @@ inline void PieceList::append( const Piece &piece )
         mList.append( piece );
     mTotalLength += piece.width();
 }
-inline void PieceList::append( const PieceList &other )
+inline void PieceList::append( const PieceList& other )
 {
     QList<Piece>::ConstIterator it = other.mList.begin();
 
@@ -93,7 +95,7 @@ inline void PieceList::append( const PieceList &other )
 
     mTotalLength += other.mTotalLength;
 }
-inline void PieceList::prepend( const PieceList &other )
+inline void PieceList::prepend( const PieceList& other )
 {
     QList<Piece> otherCopy = other.mList;
     QList<Piece>::Iterator it = mList.begin();

@@ -30,7 +30,6 @@
 #include <QtCore/QByteArray>
 
 
-using namespace KDE;
 using namespace Okteta;
 
 
@@ -39,7 +38,7 @@ void textureByteArrayModel( AbstractByteArrayModel *byteArrayModel,
                             unsigned char b, unsigned char e,
                             unsigned int From, int To )
 {
-    const int size = byteArrayModel->size();
+    const Size size = byteArrayModel->size();
 
     // check
     if( To == -1 || To >= size )
@@ -51,7 +50,7 @@ void textureByteArrayModel( AbstractByteArrayModel *byteArrayModel,
     unsigned char c = b;
     for( int i=From; i<=To; ++i )
     {
-        byteArrayModel->setDatum(i, c );
+        byteArrayModel->setByte(i, c );
         if( c == e )
             c = b;
         else
@@ -62,9 +61,9 @@ void textureByteArrayModel( AbstractByteArrayModel *byteArrayModel,
 
 void textureByteArrayModel( AbstractByteArrayModel *byteArrayModel,
                             unsigned char b, unsigned char e,
-                            const Section &section )
+                            const AddressRange& range )
 {
-    textureByteArrayModel( byteArrayModel, b, e, section.start(), section.end() );
+    textureByteArrayModel( byteArrayModel, b, e, range.start(), range.end() );
 }
 
 
@@ -95,9 +94,9 @@ void textureByteArray( QByteArray *byteArray,
 
 void textureByteArray( QByteArray *byteArray,
                        unsigned char b, unsigned char e,
-                       const Section &section )
+                       const AddressRange& range )
 {
-    textureByteArray( byteArray, b, e, section.start(), section.end() );
+    textureByteArray( byteArray, b, e, range.start(), range.end() );
 }
 
 /*

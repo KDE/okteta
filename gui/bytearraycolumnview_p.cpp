@@ -100,7 +100,7 @@ void ByteArrayColumnViewPrivate::init()
     mInactiveColumn = mValueColumn;
 
     // set char encoding
-    mValueColumn->setValueCodec( (Okteta::ValueCoding)mValueCoding, mValueCodec );
+    mValueColumn->setValueCodec( (ValueCoding)mValueCoding, mValueCodec );
     mValueColumn->setCharCodec( mCharCodec );
     mCharColumn->setCharCodec( mCharCodec );
 
@@ -129,7 +129,7 @@ int ByteArrayColumnViewPrivate::visibleCodings() const
            | (mCharColumn->isVisible() ? AbstractByteArrayView::CharCodingId : 0);
 }
 
-void ByteArrayColumnViewPrivate::setByteArrayModel( Okteta::AbstractByteArrayModel* _byteArrayModel )
+void ByteArrayColumnViewPrivate::setByteArrayModel( AbstractByteArrayModel* _byteArrayModel )
 {
     mValueEditor->reset();
 
@@ -161,7 +161,7 @@ void ByteArrayColumnViewPrivate::setValueCoding( AbstractByteArrayView::ValueCod
 
     AbstractByteArrayViewPrivate::setValueCoding( valueCoding );
 
-    mValueColumn->setValueCodec( (Okteta::ValueCoding)mValueCoding, mValueCodec );
+    mValueColumn->setValueCodec( (ValueCoding)mValueCoding, mValueCodec );
     mValueEditor->adaptToValueCodecChange();
 
     const uint newCodingWidth = mValueCodec->encodingWidth();
@@ -596,7 +596,7 @@ void ByteArrayColumnViewPrivate::placeCursor( const QPoint& point )
 }
 
 
-int ByteArrayColumnViewPrivate::indexByPoint( const QPoint& point ) const
+Address ByteArrayColumnViewPrivate::indexByPoint( const QPoint& point ) const
 {
     Q_Q( const ByteArrayColumnView );
 
@@ -703,7 +703,7 @@ void ByteArrayColumnViewPrivate::createCursorPixmaps()
     // create mCursorPixmaps
     mCursorPixmaps->setSize( mActiveColumn->byteWidth(), q->lineHeight() );
 
-    const int index = mTableCursor->validIndex();
+    const Address index = mTableCursor->validIndex();
 
     QPainter painter;
     painter.begin( &mCursorPixmaps->offPixmap() );
@@ -752,7 +752,7 @@ void ByteArrayColumnViewPrivate::drawActiveCursor( QPainter *painter )
     // paint edited byte?
     if( mValueEditor->isInEditMode() )
     {
-        const int index = mTableCursor->index();
+        const Address index = mTableCursor->index();
 
         if( mBlinkCursorVisible )
             mValueColumn->renderEditedByte( painter, mValueEditor->value(), mValueEditor->valueAsString() );
@@ -778,7 +778,7 @@ void ByteArrayColumnViewPrivate::drawInactiveCursor( QPainter *painter )
         || (!mCursorPaused && !q->hasFocus() && !q->viewport()->hasFocus() && !mDropper->isActive())  )
         return;
 
-    const int index = mTableCursor->validIndex();
+    const Address index = mTableCursor->validIndex();
 
     const int x = mInactiveColumn->xOfLinePosition( mTableCursor->pos() );
     const int y = q->lineHeight() * mTableCursor->line();
@@ -974,7 +974,7 @@ void ByteArrayColumnViewPrivate::mousePressEvent( QMouseEvent* mouseEvent )
             && (mouseEvent->globalPos()-mDoubleClickPoint).manhattanLength() < QApplication::startDragDistance() )
         {
             mTrippleClickTimer->stop();
-            const int indexAtFirstDoubleClickLinePosition = mTableLayout->indexAtFirstLinePosition( mDoubleClickLine );
+            const Address indexAtFirstDoubleClickLinePosition = mTableLayout->indexAtFirstLinePosition( mDoubleClickLine );
             mTableRanges->setSelectionStart( indexAtFirstDoubleClickLinePosition );
             mTableCursor->gotoIndex( indexAtFirstDoubleClickLinePosition );
             mTableCursor->gotoLineEnd();
@@ -1009,7 +1009,7 @@ void ByteArrayColumnViewPrivate::mousePressEvent( QMouseEvent* mouseEvent )
             placeCursor( mousePoint );
             ensureCursorVisible();
 
-            const int realIndex = mTableCursor->realIndex();
+            const Address realIndex = mTableCursor->realIndex();
             if( mTableRanges->selectionStarted() )
             {
                 if( mouseEvent->modifiers() & Qt::SHIFT )
@@ -1096,7 +1096,7 @@ void ByteArrayColumnViewPrivate::mouseReleaseEvent( QMouseEvent* mouseEvent )
     {
         const int line = q->lineAt( releasePoint.y() );
         const int pos = mActiveColumn->linePositionOfX( releasePoint.x() ); // TODO: can we be sure here about the active column?
-        const int index = mTableLayout->indexAtCCoord( Coord(pos,line) ); // TODO: can this be another index than the one of the cursor???
+        const Address index = mTableLayout->indexAtCCoord( Coord(pos,line) ); // TODO: can this be another index than the one of the cursor???
         emit q->clicked( index );
     }
 
@@ -1191,7 +1191,7 @@ void ByteArrayColumnViewPrivate::mouseDoubleClickEvent( QMouseEvent* mouseEvent 
 
     mDoubleClickLine = mTableCursor->line();
 
-    const int index = mTableCursor->validIndex();
+    const Address index = mTableCursor->validIndex();
 
     if( mActiveColumn == mCharColumn )
     {
@@ -1247,9 +1247,9 @@ void ByteArrayColumnViewPrivate::handleMouseMove( const QPoint& point ) // handl
     // do wordwise selection?
     if( mInDoubleClick && mTableRanges->hasFirstWordSelection() )
     {
-        int newIndex = mTableCursor->realIndex();
-        const KDE::Section firstWordSelection = mTableRanges->firstWordSelection();
-        const Okteta::WordByteArrayService WBS( mByteArrayModel, charCodec() );
+        Address newIndex = mTableCursor->realIndex();
+        const AddressRange firstWordSelection = mTableRanges->firstWordSelection();
+        const WordByteArrayService WBS( mByteArrayModel, charCodec() );
         // are we before the selection?
         if( firstWordSelection.startsBehind(newIndex) )
         {

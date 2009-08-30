@@ -28,14 +28,16 @@
 //
 #include <abstractbytearrayfilter.h>
 
+
 class OrByteArrayFilter : public AbstractByteArrayFilter
 {
   public:
     OrByteArrayFilter();
+
     virtual ~OrByteArrayFilter();
 
   public: // AbstractByteArrayFilter API
-    virtual bool filter( char *result, Okteta::AbstractByteArrayModel *model, const KDE::Section &section ) const;
+    virtual bool filter( Okteta::Byte* result, Okteta::AbstractByteArrayModel *model, const Okteta::AddressRange& range ) const;
     virtual AbstractByteArrayFilterParameterSet *parameterSet();
 
   protected:

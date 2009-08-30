@@ -44,7 +44,8 @@ static const char OctetStreamFormatName[] = "application/octet-stream";
 
 
 Dropper::Dropper( AbstractByteArrayView* view )
-  : mByteArrayView( view ), mIsActive( false )
+  : mByteArrayView( view ),
+    mIsActive( false )
 {
 }
 
@@ -146,23 +147,23 @@ void Dropper::handleInternalDrag( QDropEvent* dropEvent )
     // TODO: this should 
 
     // get drag origin
-    KDE::Section selection = mByteArrayView->tableRanges()->removeSelection();
+    AddressRange selection = mByteArrayView->tableRanges()->removeSelection();
 
     ByteArrayTableCursor* tableCursor = mByteArrayView->tableCursor();
-    Okteta::AbstractByteArrayModel* byteArrayModel = mByteArrayView->byteArrayModel();
+    AbstractByteArrayModel* byteArrayModel = mByteArrayView->byteArrayModel();
 
-    int insertIndex = tableCursor->realIndex();
+    Address insertIndex = tableCursor->realIndex();
 
     // is this a move?
     if( dropEvent->proposedAction() == Qt::MoveAction )
     {
         // ignore the copy hold in the event but only move
-        int newCursorIndex;
+        Address newCursorIndex;
         // need to swap?
         if( selection.end() < insertIndex )
         {
             newCursorIndex = insertIndex;
-            const int firstIndex = selection.start();
+            const Address firstIndex = selection.start();
             selection.set( selection.nextBehindEnd(), insertIndex-1 );
             insertIndex = firstIndex;
         }
@@ -173,7 +174,7 @@ void Dropper::handleInternalDrag( QDropEvent* dropEvent )
         if( success )
         {
             tableCursor->gotoCIndex( newCursorIndex );
-            mByteArrayView->tableRanges()->addChangedRange( KDE::Section(insertIndex,selection.end()) );
+            mByteArrayView->tableRanges()->addChangedRange( AddressRange(insertIndex,selection.end()) );
             emit mByteArrayView->cursorPositionChanged( tableCursor->realIndex() );
         }
     }
@@ -189,17 +190,17 @@ void Dropper::handleInternalDrag( QDropEvent* dropEvent )
         {
             if( mByteArrayView->isOverwriteMode() )
             {
-                const int length = mByteArrayView->layout()->length();
+                const Size length = mByteArrayView->layout()->length();
                 if( !tableCursor->isBehind() && length > 0 )
                 {
-                    KDE::Section overwriteRange = KDE::Section::fromWidth( insertIndex, data.size() );
+                    AddressRange overwriteRange = AddressRange::fromWidth( insertIndex, data.size() );
                     overwriteRange.restrictEndTo( length-1 );
                     if( overwriteRange.isValid() )
-                        byteArrayModel->replace( overwriteRange, data.data(), overwriteRange.width() );
+                        byteArrayModel->replace( overwriteRange, reinterpret_cast<const Byte*>(data.constData()), overwriteRange.width() );
                 }
             }
             else
-                byteArrayModel->insert( insertIndex, data.data(), data.size() );
+                byteArrayModel->insert( insertIndex, reinterpret_cast<const Byte*>(data.constData()), data.size() );
         }
     }
 }

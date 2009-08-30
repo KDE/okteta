@@ -77,13 +77,13 @@ class OKTETAKASTENGUI_EXPORT ByteArraySourceCodeStreamEncoder : public AbstractB
     int dataTypesCount() const;
 
   protected: // AbstractByteArrayStreamEncoder API
-    virtual bool encodeDataToStream( QIODevice *device,
+    virtual bool encodeDataToStream( QIODevice* device,
                                      const KByteArrayDisplay* byteArrayView,
-                                     const Okteta::AbstractByteArrayModel *byteArrayModel,
-                                     const KDE::Section &section );
+                                     const Okteta::AbstractByteArrayModel* byteArrayModel,
+                                     const Okteta::AddressRange& range );
 
   protected:
-    QString printFormatted( const Okteta::AbstractByteArrayModel* byteArrayModel, int pos, unsigned int dataSize ) const;
+    QString printFormatted( const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset, unsigned int dataSize ) const;
 
   protected:
     SourceCodeStreamEncoderSettings mSettings;

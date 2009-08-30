@@ -23,18 +23,17 @@
 #ifndef KABSTRACTBYTEARRAYIFTEST_H
 #define KABSTRACTBYTEARRAYIFTEST_H
 
-
+// lib
+#include <addressrange.h>
 // Qt
 #include <QtCore/QObject>
 
 class QSignalSpy;
 
-namespace KDE {
-class Section;
-}
-namespace Okteta {
+
+namespace Okteta
+{
 class AbstractByteArrayModel;
-}
 
 
 class AbstractByteArrayModelIfTest : public QObject
@@ -45,17 +44,17 @@ class AbstractByteArrayModelIfTest : public QObject
     AbstractByteArrayModelIfTest();
 
   protected: // our API
-    virtual Okteta::AbstractByteArrayModel *createByteArrayModel() = 0;
-    virtual void deleteByteArrayModel( Okteta::AbstractByteArrayModel *ByteArrayModel ) = 0;
+    virtual AbstractByteArrayModel* createByteArrayModel() = 0;
+    virtual void deleteByteArrayModel( AbstractByteArrayModel* byteArrayModel ) = 0;
 
   protected:
-    void checkContentsReplaced( int Position, int RemovedLength, int InsertedLength );
-    void checkContentsReplaced( const KDE::Section &RemoveSection, int InsertedLength );
-    void checkContentsSwapped( int firstStart, int secondStart, int secondLength );
-    void checkContentsSwapped( int firstStart, const KDE::Section &secondSection );
+    void checkContentsReplaced( Address Position, Size removedLength, int insertedLength );
+    void checkContentsReplaced( const AddressRange& removeSection, int insertedLength );
+    void checkContentsSwapped( Address firstStart, Address secondStart, Size secondLength );
+    void checkContentsSwapped( Address firstStart, const AddressRange& secondSection );
     void clearSignalSpys();
 
-    struct KTestData *prepareTestInsert();
+    struct KTestData* prepareTestInsert();
 
   private Q_SLOTS: // test functions
     void init();
@@ -79,11 +78,13 @@ class AbstractByteArrayModelIfTest : public QObject
 
   private: // used in all tests
     /** pointer to the model to test */
-    Okteta::AbstractByteArrayModel *ByteArrayModel;
+    AbstractByteArrayModel* mByteArrayModel;
 
-    QSignalSpy *ContentsChangeListSpy;
+    QSignalSpy* ContentsChangeListSpy;
 };
 
-inline AbstractByteArrayModelIfTest::AbstractByteArrayModelIfTest()  : ByteArrayModel( 0 ) {}
+inline AbstractByteArrayModelIfTest::AbstractByteArrayModelIfTest()  : mByteArrayModel( 0 ) {}
+
+}
 
 #endif

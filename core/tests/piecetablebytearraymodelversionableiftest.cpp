@@ -28,10 +28,10 @@
 #include <QtTest/QtTest>
 
 
-static const int ByteArrayModelSize = 60;
-
 namespace Okteta
 {
+static const Size ByteArrayModelSize = 60;
+
 
 QObject *PieceTableByteArrayModelVersionableIfTest::createVersionable()
 {

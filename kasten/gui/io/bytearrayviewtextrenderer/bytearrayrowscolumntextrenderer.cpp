@@ -39,7 +39,7 @@ static const int TRGroupSpacingWidth = 2;
 
 
 ByteArrayRowsColumnTextRenderer::ByteArrayRowsColumnTextRenderer( const Okteta::AbstractByteArrayModel* byteArrayModel,
-        int offset,
+        Okteta::Address offset,
         const Okteta::CoordRange& coordRange,
         int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
         int visibleCodings,
@@ -140,7 +140,7 @@ void ByteArrayRowsColumnTextRenderer::renderLine( QTextStream* stream, bool isSu
             *stream << whiteSpace( t-e );
 
             // print char
-            const Okteta::Character byteChar = mCharCodec->decode( mByteArrayModel->datum(mOffset) );
+            const Okteta::Character byteChar = mCharCodec->decode( mByteArrayModel->byte(mOffset) );
 
             const QChar streamChar = byteChar.isUndefined() ?      Okteta::Character(mUndefinedChar) :
                                     (!byteChar.isPrint()
@@ -163,7 +163,7 @@ void ByteArrayRowsColumnTextRenderer::renderLine( QTextStream* stream, bool isSu
             const uint t = mLinePositions[p];
             // clear spacing
             *stream << whiteSpace( t-e );
-            mValueCodec->encode( E, 0, mByteArrayModel->datum(mOffset) );
+            mValueCodec->encode( E, 0, mByteArrayModel->byte(mOffset) );
             *stream << E;
             e = t + mValueCodec->encodingWidth();
         }

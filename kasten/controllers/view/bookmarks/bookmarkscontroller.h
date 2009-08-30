@@ -27,6 +27,8 @@
 #include "oktetakastencontrollers_export.h"
 // Kasten gui
 #include <abstractxmlguicontroller.h>
+// Okteta core
+#include <address.h>
 // Qt
 #include <QtCore/QList>
 
@@ -71,7 +73,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT BookmarksController : public AbstractXmlGui
   private Q_SLOTS:
     void onBookmarksAdded( const QList<Okteta::Bookmark> &bookmarks );
     void onBookmarksRemoved( const QList<Okteta::Bookmark> &bookmarks );
-    void onCursorPositionChanged( int newPosition );
+    void onCursorPositionChanged( Okteta::Address newPosition );
 
   protected:
     KXMLGUIClient* mGuiClient;

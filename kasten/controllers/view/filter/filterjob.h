@@ -24,7 +24,8 @@
 #define FILTERJOB_H
 
 // Okteta core
-#include <section.h>
+#include <addressrange.h>
+#include <byte.h>
 // Qt
 #include <QtCore/QObject>
 
@@ -43,8 +44,8 @@ class FilterJob : public QObject // not yet: KJob
   Q_OBJECT
 
   public:
-    FilterJob( AbstractByteArrayFilter *byteArrayFilter,
-               char *result, Okteta::AbstractByteArrayModel *model, const KDE::Section &section );
+    FilterJob( AbstractByteArrayFilter* byteArrayFilter,
+               Okteta::Byte* result, Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range );
 
   public:
     bool exec();
@@ -53,17 +54,17 @@ class FilterJob : public QObject // not yet: KJob
     void onFilteredBytes();
 
   protected:
-    AbstractByteArrayFilter *mByteArrayFilter;
+    AbstractByteArrayFilter* mByteArrayFilter;
 
-    char *mResult;
-    Okteta::AbstractByteArrayModel *mModel;
-    const KDE::Section mSection;
+    Okteta::Byte* mResult;
+    Okteta::AbstractByteArrayModel* mModel;
+    const Okteta::AddressRange mRange;
 };
 
 
-inline FilterJob::FilterJob( AbstractByteArrayFilter *byteArrayFilter,
-               char *result, Okteta::AbstractByteArrayModel *model, const KDE::Section &section )
- : mByteArrayFilter( byteArrayFilter ), mResult( result ), mModel( model ), mSection( section )
+inline FilterJob::FilterJob( AbstractByteArrayFilter* byteArrayFilter,
+               Okteta::Byte* result, Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range )
+ : mByteArrayFilter( byteArrayFilter ), mResult( result ), mModel( model ), mRange( range )
 {}
 
 }

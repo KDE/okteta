@@ -29,10 +29,10 @@ namespace Kasten
 KByteArraySelection::KByteArraySelection()
 {}
 
-bool KByteArraySelection::isValid() const { return mSection.isValid(); }
-KDE::Section KByteArraySelection::section() const { return mSection; }
+bool KByteArraySelection::isValid() const { return mRange.isValid(); }
+Okteta::AddressRange KByteArraySelection::range() const { return mRange; }
 
-void KByteArraySelection::setSection( const KDE::Section &section ) { mSection = section; }
+void KByteArraySelection::setRange( const Okteta::AddressRange& range ) { mRange = range; }
 
 KByteArraySelection::~KByteArraySelection() {}
 

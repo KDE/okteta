@@ -114,7 +114,7 @@ void BookmarksController::setTargetModel( AbstractModel* model )
                  SLOT(onBookmarksRemoved( const QList<Okteta::Bookmark>& )) );
         connect( mByteArray, SIGNAL(bookmarksModified( const QList<int>& )),
                  SLOT(updateBookmarks()) );
-        connect( mByteArrayDisplay, SIGNAL( cursorPositionChanged( int )), SLOT( onCursorPositionChanged( int )) );
+        connect( mByteArrayDisplay, SIGNAL( cursorPositionChanged( Okteta::Address )), SLOT( onCursorPositionChanged( Okteta::Address )) );
     }
 
     updateBookmarks();
@@ -198,7 +198,7 @@ Q_UNUSED( bookmarks )
     updateBookmarks();
 }
 
-void BookmarksController::onCursorPositionChanged( int newPosition )
+void BookmarksController::onCursorPositionChanged( Okteta::Address newPosition )
 {
     const int bookmarksCount = mBookmarks->bookmarksCount();
     const bool hasBookmarks = ( bookmarksCount != 0 );

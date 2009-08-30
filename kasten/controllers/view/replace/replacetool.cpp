@@ -136,11 +136,11 @@ void ReplaceTool::replace( KFindDirection direction, bool fromCursor, bool inSel
 {
     mPreviousFound = false;
 
-    int startIndex;
+    Okteta::Address startIndex;
 
     if( inSelection )
     {
-        const KDE::Section selection = mByteArrayDisplay->selection();
+        const Okteta::AddressRange selection = mByteArrayDisplay->selection();
         mReplaceFirstIndex = selection.start();
         mReplaceLastIndex =  selection.end();
         startIndex = selection.start();
@@ -149,7 +149,7 @@ void ReplaceTool::replace( KFindDirection direction, bool fromCursor, bool inSel
     }
     else
     {
-        const int cursorPosition = mByteArrayDisplay->cursorPosition();
+        const Okteta::Address cursorPosition = mByteArrayDisplay->cursorPosition();
         if( fromCursor && (cursorPosition!=0) )
         {
             mReplaceFirstIndex = cursorPosition;
@@ -167,7 +167,7 @@ void ReplaceTool::replace( KFindDirection direction, bool fromCursor, bool inSel
     doReplace( direction, startIndex );
 }
 
-void ReplaceTool::doReplace( KFindDirection direction, int startIndex )
+void ReplaceTool::doReplace( KFindDirection direction, Okteta::Address startIndex )
 {
     QApplication::setOverrideCursor( Qt::WaitCursor );
 
@@ -179,7 +179,7 @@ void ReplaceTool::doReplace( KFindDirection direction, int startIndex )
         const bool isForward = ( direction == FindForward );
         SearchJob* searchJob =
             new SearchJob( mByteArrayModel, mSearchData, startIndex, isForward, mIgnoreCase, mByteArrayDisplay->charCodingName() );
-        const int pos = searchJob->exec();
+        const Okteta::Address pos = searchJob->exec();
 
         if( pos != -1 )
         {
@@ -236,8 +236,9 @@ void ReplaceTool::doReplace( KFindDirection direction, int startIndex )
             if( currentToBeReplaced )
             {
                 ++noOfReplacements;
-                const int inserted = mByteArrayModel->replace( startIndex, mSearchData.size(),
-                                                               mReplaceData.constData(), mReplaceData.size() );
+                const Okteta::Size inserted = mByteArrayModel->replace( startIndex, mSearchData.size(),
+                                                                        reinterpret_cast<const Okteta::Byte*>(mReplaceData.constData()),
+                                                                        mReplaceData.size() );
                 if( isForward )
                     startIndex += inserted;
                 else

@@ -24,7 +24,7 @@
 #define CHECKSUMCALCULATEJOB_H
 
 // Okteta core
-#include <section.h>
+#include <addressrange.h>
 // Qt
 #include <QtCore/QObject>
 
@@ -46,7 +46,7 @@ class ChecksumCalculateJob : public QObject // not yet: KJob
     ChecksumCalculateJob( QString* checksum,
                           const AbstractByteArrayChecksumAlgorithm* algorithm,
                           const Okteta::AbstractByteArrayModel* model,
-                          const KDE::Section& selection );
+                          const Okteta::AddressRange& selection );
 
   public:
     void exec();
@@ -60,14 +60,14 @@ class ChecksumCalculateJob : public QObject // not yet: KJob
     const AbstractByteArrayChecksumAlgorithm* mAlgorithm;
 
     const Okteta::AbstractByteArrayModel* mByteArrayModel;
-    const KDE::Section mSelection;
+    const Okteta::AddressRange mSelection;
 };
 
 
 inline ChecksumCalculateJob::ChecksumCalculateJob( QString* checksum,
                                                    const AbstractByteArrayChecksumAlgorithm* algorithm,
                                                    const Okteta::AbstractByteArrayModel* model,
-                                                   const KDE::Section &selection )
+                                                   const Okteta::AddressRange& selection )
  : mChecksum( checksum ), mAlgorithm( algorithm ), mByteArrayModel( model ), mSelection( selection )
 {}
 

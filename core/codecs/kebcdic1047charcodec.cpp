@@ -28,7 +28,8 @@
 #include <QtCore/QString>
 
 
-namespace Okteta {
+namespace Okteta
+{
 
 static quint16 UnicodeChars[256] =
 {
@@ -105,37 +106,38 @@ static unsigned char EBCDICChars[256] =
 static const char KEBCDIC1047CharCodecName[] = "EBCDIC 1047";
 
 
-bool KEBCDIC1047CharCodec::encode( char *D, const QChar &C ) const
+bool KEBCDIC1047CharCodec::encode( Byte* byte, const QChar& _char ) const
 {
-  int I = C.unicode();
-  // not in range?
-  if( 0x00FF < I )
-    return false;
+    const int unicodeValue = _char.unicode();
+    // not in range?
+    if( 0x00FF < unicodeValue )
+        return false;
 
-  *D = EBCDICChars[I];
-  return true;
+    *byte = EBCDICChars[unicodeValue];
+
+    return true;
 }
 
-Character KEBCDIC1047CharCodec::decode( char Byte ) const
+Character KEBCDIC1047CharCodec::decode( Byte byte ) const
 {
-  return QChar(UnicodeChars[(unsigned char)Byte]);
+    return QChar(UnicodeChars[byte]);
 }
 
-bool KEBCDIC1047CharCodec::canEncode( const QChar &C ) const
+bool KEBCDIC1047CharCodec::canEncode( const QChar& _char ) const
 {
-  return ( C.unicode() <= 0x00FF );
+    return ( _char.unicode() <= 0x00FF );
 }
 
 
 const QString& KEBCDIC1047CharCodec::name() const
 {
-  return codecName();
+    return codecName();
 }
 
 const QString& KEBCDIC1047CharCodec::codecName()
 {
-  static const QString Name( QString::fromLatin1(KEBCDIC1047CharCodecName) );
-  return Name;
+    static const QString Name( QString::fromLatin1(KEBCDIC1047CharCodecName) );
+    return Name;
 }
 
 }

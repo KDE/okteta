@@ -43,7 +43,7 @@ ByteArrayJanusView::ByteArrayJanusView( QWidget* parent )
     setViewModus( ColumnViewId );
 }
 
-void ByteArrayJanusView::setByteArrayModel( Okteta::AbstractByteArrayModel* byteArrayModel )
+void ByteArrayJanusView::setByteArrayModel( AbstractByteArrayModel* byteArrayModel )
 {
     mView->setByteArrayModel( byteArrayModel );
 }
@@ -54,8 +54,8 @@ void ByteArrayJanusView::setViewModus( int viewModus )
         return;
 
     AbstractByteArrayView* newView = ( viewModus == ColumnViewId ) ?
-        (AbstractByteArrayView*)new Okteta::ByteArrayColumnView( 0, this ) :
-        (AbstractByteArrayView*)new Okteta::ByteArrayRowView( this );
+        (AbstractByteArrayView*)new ByteArrayColumnView( 0, this ) :
+        (AbstractByteArrayView*)new ByteArrayRowView( this );
 
     const bool hasFocus = mView ? mView->hasFocus() : false;
     if( mView )
@@ -90,10 +90,10 @@ void ByteArrayJanusView::setViewModus( int viewModus )
     mViewModus = viewModus;
 
     connect( mView, SIGNAL(hasSelectedDataChanged( bool )), SIGNAL(hasSelectedDataChanged( bool )) );
-    connect( mView, SIGNAL(selectionChanged( const KDE::Section& )), SIGNAL(selectionChanged( const KDE::Section& )) );
+    connect( mView, SIGNAL(selectionChanged( const Okteta::AddressRange& )), SIGNAL(selectionChanged( const Okteta::AddressRange& )) );
     connect( mView, SIGNAL(readOnlyChanged( bool )), SIGNAL(readOnlyChanged( bool )) );
     connect( mView, SIGNAL(overwriteModeChanged( bool )), SIGNAL(overwriteModeChanged( bool )) );
-    connect( mView, SIGNAL(cursorPositionChanged( int )), SIGNAL(cursorPositionChanged( int )) );
+    connect( mView, SIGNAL(cursorPositionChanged( Okteta::Address )), SIGNAL(cursorPositionChanged( Okteta::Address )) );
     connect( mView, SIGNAL(valueCodingChanged( int )), SIGNAL(valueCodingChanged( int )) );
     connect( mView, SIGNAL(charCodecChanged( const QString& )), SIGNAL(charCodecChanged( const QString& )) );
     connect( mView, SIGNAL(focusChanged( bool )), SIGNAL(focusChanged( bool )) );
@@ -143,15 +143,15 @@ bool ByteArrayJanusView::canReadData( const QMimeData* data ) const
     return mView->canReadData( data );
 }
 
-void ByteArrayJanusView::setCursorPosition( int cursorPosition )
+void ByteArrayJanusView::setCursorPosition( Address cursorPosition )
 {
     mView->setCursorPosition( cursorPosition );
 }
-void ByteArrayJanusView::setSelectionCursorPosition( int index )
+void ByteArrayJanusView::setSelectionCursorPosition( Address index )
 {
     mView->setSelectionCursorPosition( index );
 }
-int ByteArrayJanusView::cursorPosition() const
+Address ByteArrayJanusView::cursorPosition() const
 {
     return mView->cursorPosition();
 }
@@ -160,11 +160,11 @@ QRect ByteArrayJanusView::cursorRect() const
     return mView->cursorRect();
 }
 
-void ByteArrayJanusView::setStartOffset( int startOffset )
+void ByteArrayJanusView::setStartOffset( Address startOffset )
 {
     mView->setStartOffset( startOffset );
 }
-void ByteArrayJanusView::setFirstLineOffset( int firstLineOffset )
+void ByteArrayJanusView::setFirstLineOffset( Address firstLineOffset )
 {
     mView->setFirstLineOffset( firstLineOffset );
 }
@@ -172,11 +172,11 @@ void ByteArrayJanusView::setNoOfBytesPerLine( int noOfBytesPerLine )
 {
     mView->setNoOfBytesPerLine( noOfBytesPerLine );
 }
-int ByteArrayJanusView::startOffset() const
+Address ByteArrayJanusView::startOffset() const
 {
     return mView->startOffset();
 }
-int ByteArrayJanusView::firstLineOffset() const
+Address ByteArrayJanusView::firstLineOffset() const
 {
     return mView->firstLineOffset();
 }
@@ -198,7 +198,7 @@ QString ByteArrayJanusView::charCodingName() const
 
 void ByteArrayJanusView::setValueCoding( int valueCoding )
 {
-    mView->setValueCoding( (Okteta::AbstractByteArrayView::ValueCoding)valueCoding );
+    mView->setValueCoding( (AbstractByteArrayView::ValueCoding)valueCoding );
 }
 
 void ByteArrayJanusView::setCharCoding( const QString& charCodingName )
@@ -206,12 +206,12 @@ void ByteArrayJanusView::setCharCoding( const QString& charCodingName )
     mView->setCharCoding( charCodingName );
 }
 
-KDE::Section ByteArrayJanusView::selection() const
+AddressRange ByteArrayJanusView::selection() const
 {
     return mView->selection();
 }
 
-void ByteArrayJanusView::setSelection( int start, int end )
+void ByteArrayJanusView::setSelection( Address start, Address end )
 {
     mView->setSelection( start, end );
 }
@@ -258,7 +258,7 @@ void ByteArrayJanusView::toggleOffsetColumn( bool on )
 
 void ByteArrayJanusView::setResizeStyle( int resizeStyle )
 {
-    mView->setResizeStyle( (Okteta::AbstractByteArrayView::ResizeStyle)resizeStyle );
+    mView->setResizeStyle( (AbstractByteArrayView::ResizeStyle)resizeStyle );
 }
 
 void ByteArrayJanusView::setVisibleCodings( int visibleColumns )

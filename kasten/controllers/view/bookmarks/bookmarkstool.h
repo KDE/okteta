@@ -27,6 +27,8 @@
 #include "oktetakastencontrollers_export.h"
 // Kasten core
 #include <abstracttool.h>
+// Okteta core
+#include <address.h>
 
 namespace Okteta {
 class Bookmarkable;
@@ -77,7 +79,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT BookmarksTool : public AbstractTool
     void canCreateBookmarkChanged( bool canCreateBookmark );
 
   protected Q_SLOTS:
-    void onCursorPositionChanged( int newPosition );
+    void onCursorPositionChanged( Okteta::Address newPosition );
     void onBookmarksModified();
 
   protected: // sources

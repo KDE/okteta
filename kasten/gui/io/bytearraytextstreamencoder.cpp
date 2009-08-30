@@ -38,18 +38,20 @@ namespace Kasten
 {
 
 TextStreamEncoderSettings::TextStreamEncoderSettings()
- : codecName(), undefinedChar('?'), substituteChar( '.' )
+  : codecName(),
+    undefinedChar('?'),
+    substituteChar( '.' )
 {}
 
 ByteArrayTextStreamEncoder::ByteArrayTextStreamEncoder()
- : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Plain Text"), QLatin1String("text/plain") )
+ : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Plain Text"), QString::fromLatin1("text/plain") )
 {}
 
 
-bool ByteArrayTextStreamEncoder::encodeDataToStream( QIODevice *device,
+bool ByteArrayTextStreamEncoder::encodeDataToStream( QIODevice* device,
                                                       const KByteArrayDisplay* byteArrayView,
-                                                      const Okteta::AbstractByteArrayModel *byteArrayModel,
-                                                      const KDE::Section &section )
+                                                      const Okteta::AbstractByteArrayModel* byteArrayModel,
+                                                      const Okteta::AddressRange& range )
 {
     bool success = true;
 
@@ -65,9 +67,9 @@ bool ByteArrayTextStreamEncoder::encodeDataToStream( QIODevice *device,
     const QChar tabChar( '\t' );
     const QChar returnChar( '\n' );
 
-    for( int i=section.start(); i<=section.end(); ++i )
+    for( Okteta::Address i=range.start(); i<=range.end(); ++i )
     {
-        const Okteta::Character byteChar = charCodec->decode( byteArrayModel->datum(i) );
+        const Okteta::Character byteChar = charCodec->decode( byteArrayModel->byte(i) );
 
         const QChar streamChar = byteChar.isUndefined() ?      mSettings.undefinedChar :
                                  (!byteChar.isPrint()
@@ -78,6 +80,7 @@ bool ByteArrayTextStreamEncoder::encodeDataToStream( QIODevice *device,
     }
     // clean up
     delete charCodec;
+
     return success;
 }
 

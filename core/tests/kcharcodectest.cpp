@@ -31,18 +31,21 @@
 // Qt
 #include <QtTest/QtTest>
 
-// namespaces
-using namespace Okteta;
+
+namespace Okteta
+{
+
+KComponentData* componentData;
 
 
 void KCharCodecTest::initTestCase()
 {
-  Instance = new KComponentData( "KTextCharCodecTest" );
+    componentData = new KComponentData( "KTextCharCodecTest" );
 }
 
 void KCharCodecTest::cleanupTestCase()
 {
-  delete Instance;
+    delete componentData;
 }
 
 //---------------------------------------------------------------------------- Tests -----
@@ -50,17 +53,16 @@ void KCharCodecTest::cleanupTestCase()
 
 void KCharCodecTest::testCodecNames()
 {
-  QStringList List( CharCodec::codecNames() );
+    const QStringList list( CharCodec::codecNames() );
 
-  for( int i=0; i<List.size(); ++i )
-  {
-    // name exists
-    const QString &Name = List[i];
-    CharCodec* Codec = CharCodec::createCodec( Name );
-    QCOMPARE( Codec->name(), Name );
-    delete Codec;
-  }
+    foreach( const QString& name, list )
+    {
+        CharCodec* codec = CharCodec::createCodec( name );
+        QCOMPARE( codec->name(), name );
+        delete codec;
+    }
 }
 
+}
 
-QTEST_MAIN( KCharCodecTest )
+QTEST_MAIN( Okteta::KCharCodecTest )

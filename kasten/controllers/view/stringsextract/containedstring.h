@@ -23,6 +23,9 @@
 #ifndef CONTAINEDSTRING_H
 #define CONTAINEDSTRING_H
 
+// Okteta core
+#include <address.h>
+#include <size.h>
 // Qt
 #include <QtCore/QString>
 
@@ -30,28 +33,28 @@
 class ContainedString
 {
   public:
-    ContainedString( const QString &string, int offset );
+    ContainedString( const QString &string, Okteta::Address offset );
 
   public:
-    void move( int offset );
+    void move( Okteta::Size offset );
 
   public:
-    const QString &string() const;
-    int offset() const;
+    const QString& string() const;
+    Okteta::Address offset() const;
 
   protected:
     QString mString;
-    int mOffset;
+    Okteta::Address mOffset;
 };
 
 
-inline ContainedString::ContainedString( const QString &string, int offset )
+inline ContainedString::ContainedString( const QString &string, Okteta::Address offset )
  : mString( string ), mOffset( offset )
 {}
 
-inline void ContainedString::move( int offset ) { mOffset += offset; }
+inline void ContainedString::move( Okteta::Size offset ) { mOffset += offset; }
 
-inline const QString &ContainedString::string() const { return mString; }
-inline int ContainedString::offset() const { return mOffset; }
+inline const QString& ContainedString::string()  const { return mString; }
+inline Okteta::Address ContainedString::offset() const { return mOffset; }
 
 #endif

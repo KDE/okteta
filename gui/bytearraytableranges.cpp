@@ -9,7 +9,7 @@
     version 2.1 of the License, or (at your option) version 3, or any
     later version accepted by the membership of KDE e.V. (or its
     successor approved by the membership of KDE e.V.), which shall
-    act as a proxy defined in Section 6 of version 3 of the license.
+    act as a proxy defined in range 6 of version 3 of the license.
 
     This library is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -28,16 +28,12 @@
 #include <arraychangemetricslist.h>
 
 
-namespace Okteta {
-
-ByteArrayTableRanges::ByteArrayTableRanges( ByteArrayTableLayout *L )
- : Modified( false ),
-   Layout( L )
+namespace Okteta
 {
-}
 
-
-ByteArrayTableRanges::~ByteArrayTableRanges()
+ByteArrayTableRanges::ByteArrayTableRanges( ByteArrayTableLayout* layout )
+ : mModified( false ),
+   mLayout( layout )
 {
 }
 
@@ -51,7 +47,7 @@ void ByteArrayTableRanges::reset()
 }
 
 
-void ByteArrayTableRanges::setMarking( const KDE::Section &M )
+void ByteArrayTableRanges::setMarking( const AddressRange& M )
 {
   if( Marking == M )
     return;
@@ -68,34 +64,34 @@ void ByteArrayTableRanges::removeFurtherSelections()
 }
 
 
-void ByteArrayTableRanges::setSelection( const KDE::Section &S )
+void ByteArrayTableRanges::setSelection( const AddressRange& selection )
 {
   bool Changed = mSelection.isValid();
   if( Changed )
-    addChangedRange( mSelection.section() );
-  mSelection = S;
-  addChangedRange( mSelection.section() );
+    addChangedRange( mSelection.range() );
+  mSelection = selection;
+  addChangedRange( mSelection.range() );
 }
 
-void ByteArrayTableRanges::setSelectionStart( int StartIndex )
+void ByteArrayTableRanges::setSelectionStart( Address startIndex )
 {
   bool Changed = mSelection.isValid();
   if( Changed )
-    addChangedRange( mSelection.section() );
+    addChangedRange( mSelection.range() );
 
-  mSelection.setStart( StartIndex );
+  mSelection.setStart( startIndex );
 }
 
 
-void ByteArrayTableRanges::setSelectionEnd( int EndIndex )
+void ByteArrayTableRanges::setSelectionEnd( Address EndIndex )
 {
-  KDE::Section OldSelection = mSelection.section();
+  AddressRange OldSelection = mSelection.range();
   mSelection.setEnd( EndIndex );
 
   // TODO: think about rather building a diff of the sections
   if( !OldSelection.isValid() )
   {
-    addChangedRange( mSelection.section() );
+    addChangedRange( mSelection.range() );
     return;
   }
   if( !mSelection.isValid() )
@@ -104,10 +100,10 @@ void ByteArrayTableRanges::setSelectionEnd( int EndIndex )
     return;
   }
 
-  if( OldSelection == mSelection.section() )
+  if( OldSelection == mSelection.range() )
     return;
-  int CS;
-  int CE;
+  Address CS;
+  Address CE;
   // changes at the end?
   if( mSelection.start() == OldSelection.start() )
   {
@@ -141,7 +137,7 @@ void ByteArrayTableRanges::setSelectionEnd( int EndIndex )
       CE = OldSelection.end();
     }
   }
-  KDE::Section C( CS, CE );
+  AddressRange C( CS, CE );
 
   bool Changed = C.isValid();
   if( Changed )
@@ -150,67 +146,67 @@ void ByteArrayTableRanges::setSelectionEnd( int EndIndex )
 }
 
 
-KDE::Section ByteArrayTableRanges::removeSelection( int id )
+AddressRange ByteArrayTableRanges::removeSelection( int id )
 {
   if( id > 0 )
-    return KDE::Section();
+    return AddressRange();
 
-  KDE::Section Section = mSelection.section();
-  bool Changed = Section.isValid();
+  AddressRange range = mSelection.range();
+  bool Changed = range.isValid();
   if( Changed )
-    addChangedRange( Section );
+    addChangedRange( range );
 
   mSelection.cancel();
   FirstWordSelection.unset();
 
-  return Section;
+  return range;
 }
 
 
-bool ByteArrayTableRanges::overlapsSelection( int FirstIndex, int LastIndex, int *SI, int *EI ) const
+bool ByteArrayTableRanges::overlapsSelection( Address FirstIndex, Address LastIndex, Address* startIndex, Address* endIndex ) const
 {
-  if( mSelection.section().overlaps(KDE::Section(FirstIndex,LastIndex)) )
+  if( mSelection.range().overlaps(AddressRange(FirstIndex,LastIndex)) )
   {
-    *SI = mSelection.start();
-    *EI = mSelection.end();
+    *startIndex = mSelection.start();
+    *endIndex = mSelection.end();
     return true;
   }
   return false;
 }
 
 
-bool ByteArrayTableRanges::overlapsMarking( int FirstIndex, int LastIndex, int *SI, int *EI ) const
+bool ByteArrayTableRanges::overlapsMarking( Address FirstIndex, Address LastIndex, Address* startIndex, Address* endIndex ) const
 {
-  if( Marking.overlaps(KDE::Section(FirstIndex,LastIndex)) )
+  if( Marking.overlaps(AddressRange(FirstIndex,LastIndex)) )
   {
-    *SI = Marking.start();
-    *EI = Marking.end();
+    *startIndex = Marking.start();
+    *endIndex = Marking.end();
     return true;
   }
   return false;
 }
 
 
-const KDE::Section *ByteArrayTableRanges::firstOverlappingSelection( const KDE::Section &Range ) const
+const AddressRange *ByteArrayTableRanges::firstOverlappingSelection( const AddressRange &Range ) const
 {
-  return mSelection.section().overlaps(Range) ? &mSelection.section() : 0;
+  return mSelection.range().overlaps(Range) ? &mSelection.range() : 0;
 }
 
 
-const KDE::Section *ByteArrayTableRanges::overlappingMarking( const KDE::Section &Range ) const
+const AddressRange *ByteArrayTableRanges::overlappingMarking( const AddressRange &Range ) const
 {
   return Marking.overlaps(Range) ? &Marking : 0;
 }
 
 /*
-bool ByteArrayTableRanges::overlapsChanges( int FirstIndex, int LastIndex, int *SI, int *EI ) const
+bool ByteArrayTableRanges::overlapsChanges( Address FirstIndex, Address LastIndex, Address* startIndex, Address* endIndex ) const
 {
   for( CoordRangeList::const_iterator S=ChangedRanges.begin(); S!=ChangedRanges.end(); ++S )
   {
     if( (*S).overlaps(KBuff(FirstIndex,LastIndex)) )
     {
-      *SI = (*S).start();
-      *EI = (*S).end();
+      *startIndex = (*S).start();
+      *endIndex = (*S).end();
       return true;
     }
   }
@@ -218,9 +214,9 @@ bool ByteArrayTableRanges::overlapsChanges( int FirstIndex, int LastIndex, int *
   return false;
 }
 
-bool ByteArrayTableRanges::overlapsChanges( KDE::Section Indizes, KDE::Section *ChangedRange ) const
+bool ByteArrayTableRanges::overlapsChanges( AddressRange Indizes, AddressRange *ChangedRange ) const
 {
-  for( KDE::SectionList::const_iterator S=ChangedRanges.begin(); S!=ChangedRanges.end(); ++S )
+  for( AddressRangeList::const_iterator S=ChangedRanges.begin(); S!=ChangedRanges.end(); ++S )
   {
     if( (*S).overlaps(Indizes) )
     {
@@ -252,32 +248,32 @@ void ByteArrayTableRanges::addChangedOffsetLines( const KDE::Section& changedLin
     if( mChangedOffsetLines.isEmpty() )
     {
         mChangedOffsetLines = changedLines;
-        Modified = true;
+        mModified = true;
     }
     else
         mChangedOffsetLines.extendTo( changedLines );
 }
 
-void ByteArrayTableRanges::addChangedRange( int SI, int EI )
+void ByteArrayTableRanges::addChangedRange( Address startIndex, Address endIndex )
 {
-  addChangedRange( KDE::Section(SI,EI) );
+  addChangedRange( AddressRange(startIndex,endIndex) );
 }
 
 
-void ByteArrayTableRanges::addChangedRange( const KDE::Section &S )
+void ByteArrayTableRanges::addChangedRange( const AddressRange& range )
 {
-// kDebug() << "adding change section "<<S.start()<<","<<S.end();
-  addChangedRange( Layout->coordRangeOfIndizes(S) );
+// kDebug() << "adding change range "<<S.start()<<","<<S.end();
+  addChangedRange( mLayout->coordRangeOfIndizes(range) );
 }
 
 
-void ByteArrayTableRanges::addChangedRange( const CoordRange &NewRange )
+void ByteArrayTableRanges::addChangedRange( const CoordRange& range )
 {
-  ChangedRanges.addCoordRange( NewRange );
+  ChangedRanges.addCoordRange( range );
 // kDebug() << "as range "<<NewRange.start().pos()<<","<<NewRange.start().line()<<"-"
 // <<NewRange.end().pos()<<","<<NewRange.end().line()<<endl;
 
-  Modified = true;
+  mModified = true;
 }
 
 
@@ -295,13 +291,13 @@ void ByteArrayTableRanges::resetChangedRanges()
 {
     mChangedOffsetLines.unset();
   ChangedRanges.clear();
-  Modified = false;
+  mModified = false;
 }
 
 
-void ByteArrayTableRanges::setFirstWordSelection( const KDE::Section &Section )
+void ByteArrayTableRanges::setFirstWordSelection( const AddressRange& range )
 {
-  FirstWordSelection = Section;
+  FirstWordSelection = range;
   setSelection( FirstWordSelection );
 }
 
@@ -317,28 +313,28 @@ void ByteArrayTableRanges::setFirstWordSelection( const KDE::Section &Section )
  }
 
 
-void ByteArrayTableRanges::adaptToChanges( const KDE::ArrayChangeMetricsList& changeList, int oldLength )
+void ByteArrayTableRanges::adaptToChanges( const ArrayChangeMetricsList& changeList, Size oldLength )
 {
-    foreach( const KDE::ArrayChangeMetrics& change, changeList )
+    foreach( const ArrayChangeMetrics& change, changeList )
     {
         //TODO: change parameters to ArrayChangeMetrics
         switch( change.type() )
         {
-        case KDE::ArrayChangeMetrics::Replacement:
+        case ArrayChangeMetrics::Replacement:
         {
             oldLength += change.lengthChange();
-            const int offset = change.offset();
-            const int diff = change.lengthChange();
-            const int behindLast = (diff == 0) ? offset + change.insertLength() :
-                                   (diff < 0) ?  oldLength - diff :
-                                                 oldLength;
+            const Address offset = change.offset();
+            const Size diff = change.lengthChange();
+            const Address behindLast = (diff == 0) ? offset + change.insertLength() :
+                                       (diff < 0) ?  oldLength - diff :
+                                                     oldLength;
             addChangedRange( offset, behindLast-1 );
 
             if( mSelection.isValid() )
                 mSelection.adaptToReplacement( offset, change.removeLength(), change.insertLength() );
             break;
         }
-        case KDE::ArrayChangeMetrics::Swapping:
+        case ArrayChangeMetrics::Swapping:
             addChangedRange( change.offset(), change.secondEnd() );
 
             if( mSelection.isValid() )
@@ -347,6 +343,10 @@ void ByteArrayTableRanges::adaptToChanges( const KDE::ArrayChangeMetricsList& ch
             ;
         }
     }
+}
+
+ByteArrayTableRanges::~ByteArrayTableRanges()
+{
 }
 
 }

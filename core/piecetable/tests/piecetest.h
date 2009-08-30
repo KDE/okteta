@@ -26,6 +26,10 @@
 // Qt
 #include <QtCore/QObject>
 
+
+namespace KPieceTable
+{
+
 class PieceTest : public QObject
 {
   Q_OBJECT
@@ -38,5 +42,7 @@ class PieceTest : public QObject
     void testRemove();
     void testRemoveLocal();
 };
+
+}
 
 #endif

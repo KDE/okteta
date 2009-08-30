@@ -82,7 +82,7 @@ void InfoTool::setTargetModel( AbstractModel* model )
         connect( mByteArrayDisplay,  SIGNAL(valueCodingChanged( int )),
                  mStatisticTableModel, SLOT(setValueCoding( int )) );
         connect( mByteArrayDisplay,  SIGNAL(selectedDataChanged( const Kasten::AbstractModelSelection* )),
-                 SLOT(onSelectionChanged( bool )) );
+                 SLOT(onSelectionChanged()) );
     }
 
     emit statisticDirty( !isStatisticUptodate() );
@@ -116,7 +116,7 @@ void InfoTool::updateStatistic()
 
     QApplication::setOverrideCursor( Qt::WaitCursor );
 
-    const KDE::Section selection = ( mByteArrayDisplay ? mByteArrayDisplay->selection() : KDE::Section() );
+    const Okteta::AddressRange selection = ( mByteArrayDisplay ? mByteArrayDisplay->selection() : Okteta::AddressRange() );
     CreateStatisticJob *createStatisticJob =
         new CreateStatisticJob( mByteArrayModel, selection, mByteCount );
     const int selectionSize = createStatisticJob->exec();
@@ -130,7 +130,7 @@ void InfoTool::updateStatistic()
     mSourceSelection = selection;
     if( mSourceByteArrayModel )
     {
-        connect( mSourceByteArrayModel,  SIGNAL(contentsChanged( const KDE::ArrayChangeMetricsList & )),
+        connect( mSourceByteArrayModel,  SIGNAL(contentsChanged( const Okteta::ArrayChangeMetricsList& )),
                  SLOT(onSourceChanged()) );
         connect( mSourceByteArrayModel,  SIGNAL(destroyed()),
                  SLOT(onSourceDestroyed()) );

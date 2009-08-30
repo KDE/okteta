@@ -29,6 +29,8 @@
 #include <abstractxmlguicontroller.h>
 // Okteta gui
 #include <offsetformat.h>
+// Okteta core
+#include <address.h>
 
 class KComboBox;
 class KSqueezedTextLabel;
@@ -63,7 +65,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewStatusController : public AbstractXmlGu
     void setValueCoding( int valueCoding );
     void setCharCoding( int charCoding );
 
-    void onCursorPositionChanged( int offset );
+    void onCursorPositionChanged( Okteta::Address offset );
     void onSelectedDataChanged( const Kasten::AbstractModelSelection* modelSelection );
     void onValueCodingChanged( int valueCoding );
     void onCharCodecChanged( const QString& charCodecName );
@@ -79,7 +81,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewStatusController : public AbstractXmlGu
     KComboBox* mCharCodingComboBox;
 
     Okteta::OffsetFormat::print mPrintFunction;
-    int mStartOffset;
+    Okteta::Address mStartOffset;
 };
 
 }

@@ -23,6 +23,8 @@
 #ifndef SEARCHJOB_H
 #define SEARCHJOB_H
 
+// Okteta core
+#include <address.h>
 // Qt
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
@@ -41,12 +43,12 @@ class SearchJob : public QObject // not yet: KJob
   Q_OBJECT
 
   public:
-    SearchJob( const Okteta::AbstractByteArrayModel *model,
-               const QByteArray &searchData, int startIndex, bool findForward, bool ignoreCase, const QString& charCodecName );
+    SearchJob( const Okteta::AbstractByteArrayModel* model,
+               const QByteArray& searchData, Okteta::Address startIndex, bool findForward, bool ignoreCase, const QString& charCodecName );
     virtual ~SearchJob();
 
   public:
-    int exec();
+    Okteta::Address exec();
 
   protected:
     int indexOfIgnoreCase();
@@ -56,10 +58,10 @@ class SearchJob : public QObject // not yet: KJob
     void onBytesSearched();
 
   protected:
-    const Okteta::AbstractByteArrayModel *mByteArrayModel;
+    const Okteta::AbstractByteArrayModel* mByteArrayModel;
 
     QByteArray mSearchData;
-    int mStartIndex;
+    Okteta::Address mStartIndex;
     bool mFindForward;
     bool mIgnoreCase;
     const Okteta::CharCodec* mCharCodec;

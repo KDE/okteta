@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,23 +25,20 @@
 
 // lib
 #include "columnsview.h"
-
-namespace Okteta {
-class Bookmark;
-class ValueCodec;
-class CharCodec;
-class AbstractByteArrayModel;
-}
-namespace KDE {
-class ArrayChangeMetricsList;
-class Section;
-}
+// Okteta core
+#include <addressrange.h>
 
 class QMimeData;
 class QByteArray;
 
 namespace Okteta
 {
+class Bookmark;
+class ValueCodec;
+class CharCodec;
+class AbstractByteArrayModel;
+class ArrayChangeMetricsList;
+
 class KController;
 class AbstractWheelController;
 class ByteArrayTableLayout;
@@ -98,12 +95,12 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     bool isReadOnly() const;
 
     /** returns the index of the cursor position */
-    int cursorPosition() const;
+    Address cursorPosition() const;
     /***/
     bool isCursorBehind() const;
 
-    int startOffset() const;
-    int firstLineOffset() const;
+    Address startOffset() const;
+    Address firstLineOffset() const;
     int noOfBytesPerLine() const;
 
     ResizeStyle resizeStyle() const;
@@ -115,7 +112,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
 
     /** returns true if there is a selected range in the array */
     bool hasSelectedData() const;
-    KDE::Section selection() const;
+    AddressRange selection() const;
 
     ValueCoding valueCoding() const;
     /**
@@ -235,9 +232,9 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     /** sets the number of bytes per line, switching the resize style to KDE::NoResize */
     void setNoOfBytesPerLine( int noOfBytesPerLine );
     /** sets absolut offset of the data */
-    void setStartOffset( int startOffset );
+    void setStartOffset( Address startOffset );
     /** sets offset of the char in the upper left corner */
-    void setFirstLineOffset( int firstLineOffset );
+    void setFirstLineOffset( Address firstLineOffset );
 
     /** sets whether on a tab key there should be switched from the char column back to the value column
       * or be switched to the next focusable widget. Default is false
@@ -267,16 +264,16 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
       * @param index 
       * @param isBehind 
       */
-    void setCursorPosition( int index, bool isBehind = false );
-    void setSelectionCursorPosition( int index );
+    void setCursorPosition( Address index, bool isBehind = false );
+    void setSelectionCursorPosition( Address index );
 
     /** de-/selects all data */
     void selectAll( bool select );
 
-    void setSelection( int start, int end );
-    void setSelection( const KDE::Section& selection );
+    void setSelection( Address start, Address end );
+    void setSelection( const AddressRange& selection );
     /** selects word at index, returns true if there is one */
-    bool selectWord( /*unsigned*/ int index /*, Chartype*/ );
+    bool selectWord( /*unsigned*/ Address index /*, Chartype*/ );
     /** scrolls the view as much as needed to have the cursor fully visible */
     void ensureCursorVisible();
     /** puts the cursor in the column at the pos of Point (in absolute coord), does not handle the drawing */
@@ -319,18 +316,18 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
 
   Q_SIGNALS:
     /** Index of the byte that was clicked */
-    void clicked( int index );
+    void clicked( Okteta::Address index );
     /** Index of the byte that was double clicked */
-    void doubleClicked( int index );
+    void doubleClicked( Okteta::Address index );
 
-    void cursorPositionChanged( int index );
+    void cursorPositionChanged( Okteta::Address index );
     /** */
     void overwriteModeChanged( bool newOverwriteMode );
     /** */
     void readOnlyChanged( bool isReadOnly );
     /** selection has changed */
     void hasSelectedDataChanged( bool hasSelectedData );
-    void selectionChanged( const KDE::Section& selection );
+    void selectionChanged( const Okteta::AddressRange& selection );
     /** there is a cut available or not */
     void cutAvailable( bool Really );
     /** there is a copy available or not */
@@ -382,8 +379,8 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     Q_DECLARE_PRIVATE( AbstractByteArrayView )
     Q_PRIVATE_SLOT( d_func(), void adaptController() )
     Q_PRIVATE_SLOT( d_func(), void onByteArrayReadOnlyChange(bool isByteArrayReadOnly) )
-    Q_PRIVATE_SLOT( d_func(), void onContentsChanged( const KDE::ArrayChangeMetricsList &changeList ) )
-    Q_PRIVATE_SLOT( d_func(), void onBookmarksChange( const QList<Okteta::Bookmark> &bookmarks ) )
+    Q_PRIVATE_SLOT( d_func(), void onContentsChanged( const Okteta::ArrayChangeMetricsList& changeList ) )
+    Q_PRIVATE_SLOT( d_func(), void onBookmarksChange( const QList<Okteta::Bookmark>& bookmarks ) )
     Q_PRIVATE_SLOT( d_func(), void onRevertedToVersionIndex( int versionIndex ) )
 };
 

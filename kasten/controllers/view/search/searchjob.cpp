@@ -40,7 +40,7 @@ static const int IgnoreCaseSearchedByteCountSignalLimit = 10000;
 
 
 SearchJob::SearchJob( const Okteta::AbstractByteArrayModel* model,
-                      const QByteArray& searchData, int startIndex, bool findForward, bool ignoreCase, const QString& charCodecName )
+                      const QByteArray& searchData, Okteta::Address startIndex, bool findForward, bool ignoreCase, const QString& charCodecName )
   : mByteArrayModel( model ),
     mSearchData( searchData ),
     mStartIndex( startIndex),
@@ -60,7 +60,7 @@ SearchJob::SearchJob( const Okteta::AbstractByteArrayModel* model,
             if( decodedChar.isUndefined() )
                 continue;
 
-            mCharCodec->encode( &pattern[i], decodedChar.toLower() );
+            mCharCodec->encode( reinterpret_cast<Okteta::Byte*>(&pattern[i]), decodedChar.toLower() );
         }
     }
 }
@@ -72,16 +72,16 @@ int SearchJob::indexOfIgnoreCase()
 
     const char* const pattern = mSearchData.constData();
     const int patternLength = mSearchData.size();
-    const int lastFrom = mByteArrayModel->size() - patternLength;
+    const Okteta::Address lastFrom = mByteArrayModel->size() - patternLength;
 
-    int nextSignalByteCount = mStartIndex + IgnoreCaseSearchedByteCountSignalLimit;
+    Okteta::Address nextSignalByteCount = mStartIndex + IgnoreCaseSearchedByteCountSignalLimit;
 
-    for( int i=mStartIndex; i<=lastFrom ; ++i )
+    for( Okteta::Address i=mStartIndex; i<=lastFrom ; ++i )
     {
         int c = 0;
         for( ; c<patternLength; ++c )
         {
-            char byte = mByteArrayModel->datum( i+c );
+            Okteta::Byte byte = mByteArrayModel->byte( i+c );
 
             // turn to lowercase if possible
             // TODO: optimize, like caching and not reencoding chars without a lower letter
@@ -115,21 +115,21 @@ int SearchJob::lastIndexOfIgnoreCase()
 
     const char* const pattern = mSearchData.constData();
     const int patternLength = mSearchData.size();
-    const int lastFrom = mByteArrayModel->size() - patternLength;
+    const Okteta::Address lastFrom = mByteArrayModel->size() - patternLength;
 
-    const int fromOffset =
+    const Okteta::Address fromOffset =
         ( mStartIndex < 0 ) ?        lastFrom + 1 + mStartIndex :
         ( mStartIndex > lastFrom ) ? lastFrom :
         /* else */                   mStartIndex;
 
-    int nextSignalByteCount = fromOffset - IgnoreCaseSearchedByteCountSignalLimit;
+    Okteta::Address nextSignalByteCount = fromOffset - IgnoreCaseSearchedByteCountSignalLimit;
 
-    for( int i=fromOffset; i>=0 ; --i )
+    for( Okteta::Address i=fromOffset; i>=0 ; --i )
     {
         int c = 0;
         for( ; c<patternLength; ++c )
         {
-            char byte = mByteArrayModel->datum( i+c );
+            Okteta::Byte byte = mByteArrayModel->byte( i+c );
 
             // turn to lowercase if possible
             // TODO: optimize, like caching and not reencoding chars without a lower letter
@@ -157,12 +157,12 @@ int SearchJob::lastIndexOfIgnoreCase()
     return result;
 }
 
-int SearchJob::exec()
+Okteta::Address SearchJob::exec()
 {
     //TODO: what kind of signal could a filter send?
-    connect( mByteArrayModel, SIGNAL(searchedBytes(int)), SLOT(onBytesSearched()) );
+    connect( mByteArrayModel, SIGNAL(searchedBytes(Okteta::Size)), SLOT(onBytesSearched()) );
 
-    const int result = mFindForward ?
+    const Okteta::Address result = mFindForward ?
         ( mIgnoreCase ?
             indexOfIgnoreCase() :
             mByteArrayModel->indexOf( mSearchData, mStartIndex ) ) :

@@ -30,7 +30,7 @@
 // Kasten core
 #include <abstracttool.h>
 // Okteta core
-#include <section.h>
+#include <addressrange.h>
 // Qt
 #include <QtCore/QList>
 
@@ -105,7 +105,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT StringsExtractTool : public AbstractTool
     Okteta::AbstractByteArrayModel *mByteArrayModel;
 
     // selection source
-    KDE::Section mSourceSelection;
+    Okteta::AddressRange mSourceSelection;
     // source of strings
     Okteta::AbstractByteArrayModel *mSourceByteArrayModel;
     // minLength source

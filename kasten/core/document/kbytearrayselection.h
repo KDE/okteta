@@ -28,7 +28,7 @@
 // Kasten core
 #include <abstractmodelselection.h>
 // Okteta core
-#include <section.h>
+#include <addressrange.h>
 
 
 namespace Kasten
@@ -41,14 +41,14 @@ class OKTETAKASTENCORE_EXPORT KByteArraySelection : public AbstractModelSelectio
     virtual ~KByteArraySelection();
 
   public:
-    void setSection( const KDE::Section &section );
+    void setRange( const Okteta::AddressRange& range );
 
   public:
-    KDE::Section section() const;
+    Okteta::AddressRange range() const;
     bool isValid() const;
 
   protected:
-    KDE::Section mSection;
+    Okteta::AddressRange mRange;
 };
 
 }

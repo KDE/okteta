@@ -31,6 +31,7 @@
 #include <abstracttool.h>
 // Okteta core
 #include <oktetacore.h>
+#include <address.h>
 // Qt
 #include <QtCore/QVector>
 
@@ -93,7 +94,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
     void setupDecoder();
 
   protected Q_SLOTS:
-    void onCursorPositionChange( int pos );
+    void onCursorPositionChange( Okteta::Address pos );
     void onContentsChange();
 
     void onCharCodecChange( const QString& codecName );
@@ -102,7 +103,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
   protected: // source
     KByteArrayDisplay* mByteArrayDisplay;
     Okteta::AbstractByteArrayModel* mByteArrayModel;
-    int mCursorIndex;
+    Okteta::Address mCursorIndex;
     Okteta::CharCodec* mCharCodec;
     QChar mUndefinedChar;
 

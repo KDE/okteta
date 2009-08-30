@@ -36,22 +36,23 @@ InvertByteArrayFilter::InvertByteArrayFilter()
 
 AbstractByteArrayFilterParameterSet *InvertByteArrayFilter::parameterSet() { return &mNoParameterSet; }
 
-bool InvertByteArrayFilter::filter( char *result,
-                                    Okteta::AbstractByteArrayModel *model, const KDE::Section &section ) const
+bool InvertByteArrayFilter::filter( Okteta::Byte* result,
+                                    Okteta::AbstractByteArrayModel *model, const Okteta::AddressRange& range ) const
 {
     int r = 0;
-    int m = section.start();
+    Okteta::Address m = range.start();
     int filteredBytesCount = 0;
-    while( m <= section.end() )
+    while( m <= range.end() )
     {
-        result[r++] = ~model->datum( m++ );
+        result[r++] = ~model->byte( m++ );
         ++filteredBytesCount;
         if( filteredBytesCount >= FilteredByteCountSignalLimit )
         {
             filteredBytesCount = 0;
-            emit filteredBytes( m-section.start() );
+            emit filteredBytes( m-range.start() );
         }
     }
+
     return true;
 }
 

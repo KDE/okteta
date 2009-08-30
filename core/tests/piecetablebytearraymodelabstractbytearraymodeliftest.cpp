@@ -28,22 +28,25 @@
 #include <QtTest/QtTest>
 
 
-static const int ByteArrayModelSize = 60;
-
-
-Okteta::AbstractByteArrayModel *PieceTableByteArrayModelKAbstractByteArrayModelIfTest::createByteArrayModel()
+namespace Okteta
 {
-    Okteta::PieceTableByteArrayModel *byteArrayModel = new Okteta::PieceTableByteArrayModel( ByteArrayModelSize );
+
+static const Size ByteArrayModelSize = 60;
+
+
+AbstractByteArrayModel* PieceTableByteArrayModelKAbstractByteArrayModelIfTest::createByteArrayModel()
+{
+    PieceTableByteArrayModel* byteArrayModel = new PieceTableByteArrayModel( ByteArrayModelSize );
     byteArrayModel->setReadOnly( false );
 
     return byteArrayModel;
 }
 
-void PieceTableByteArrayModelKAbstractByteArrayModelIfTest::deleteByteArrayModel(
-       Okteta::AbstractByteArrayModel *byteArrayModel )
+void PieceTableByteArrayModelKAbstractByteArrayModelIfTest::deleteByteArrayModel( AbstractByteArrayModel* byteArrayModel )
 {
     delete byteArrayModel;
 }
 
+}
 
-QTEST_MAIN( PieceTableByteArrayModelKAbstractByteArrayModelIfTest )
+QTEST_MAIN( Okteta::PieceTableByteArrayModelKAbstractByteArrayModelIfTest )

@@ -27,6 +27,8 @@
 #include <kfinddirection.h>
 // Kasten core
 #include <abstracttool.h>
+// Okteta core
+#include <address.h>
 
 namespace Okteta {
 class AbstractByteArrayModel;
@@ -83,7 +85,7 @@ class ReplaceTool : public AbstractTool
     void finished( bool previousFound, int noOfReplacements );
 
   protected:
-    void doReplace( KFindDirection direction, int startIndex );
+    void doReplace( KFindDirection direction, Okteta::Address startIndex );
 
   protected Q_SLOTS:
     void onReadOnlyChanged( bool isReadOnly );
@@ -97,8 +99,8 @@ class ReplaceTool : public AbstractTool
   protected: // status
     bool mPreviousFound :1;
     bool mDoWrap :1;
-    int mReplaceFirstIndex;
-    int mReplaceLastIndex;
+    Okteta::Address mReplaceFirstIndex;
+    Okteta::Address mReplaceLastIndex;
 
   protected: //
     If::ReplaceUserQueryable* mUserQueryAgent;

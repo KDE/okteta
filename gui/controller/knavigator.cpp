@@ -36,7 +36,8 @@ namespace Okteta
 {
 
 KNavigator::KNavigator( AbstractByteArrayView* view, KController* parent )
-  : KController( parent ), mView( view )
+  : KController( parent ),
+    mView( view )
 {
 }
 

@@ -98,7 +98,7 @@ void FilterTool::setTargetModel( AbstractModel* model )
         connect( mByteArrayDisplay, SIGNAL(hasSelectedDataChanged( bool )), SLOT(onApplyableChanged()) );
         connect( mByteArrayDisplay, SIGNAL(readOnlyChanged( bool )),        SLOT(onApplyableChanged()) );
         connect( mByteArrayDisplay, SIGNAL(charCodecChanged( const QString& )),
-                 SIGNAL(charCodecChanged( const QString & )) );
+                 SIGNAL(charCodecChanged( const QString& )) );
     }
 
     onApplyableChanged();
@@ -112,14 +112,14 @@ void FilterTool::filter( int filterId ) const
 
     if( byteArrayFilter )
     {
-        const KDE::Section filteredSection = mByteArrayDisplay->selection();
+        const Okteta::AddressRange filteredSection = mByteArrayDisplay->selection();
 
         QByteArray filterResult;
         filterResult.resize( filteredSection.width() );
 
         QApplication::setOverrideCursor( Qt::WaitCursor );
 
-        FilterJob *filterJob = new FilterJob( byteArrayFilter, filterResult.data(), mByteArrayModel, filteredSection );
+        FilterJob* filterJob = new FilterJob( byteArrayFilter, reinterpret_cast<Okteta::Byte*>(filterResult.data()), mByteArrayModel, filteredSection );
         const bool success = filterJob->exec();
 
         QApplication::restoreOverrideCursor();

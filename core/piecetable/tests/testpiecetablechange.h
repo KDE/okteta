@@ -23,12 +23,12 @@
 #ifndef KPIECETABLE_TESTPIECETABLECHANGE_H
 #define KPIECETABLE_TESTPIECETABLECHANGE_H
 
-
 // lib
 #include <piecetable/abstractpiecetablechange.h>
 #include <piecetable/piece.h>
 // Qt
 #include <QtCore/QString>
+
 
 namespace KPieceTable
 {
@@ -36,18 +36,19 @@ namespace KPieceTable
 class TestPieceTableChange : public AbstractPieceTableChange
 {
   public:
-    TestPieceTableChange( int typeId = -1, const QString &description = QString(),
+    TestPieceTableChange( int typeId = -1, const QString& description = QString(),
                           int position = 0, int storagePosition = 0, int storageId = Piece::ChangeStorage,
                           int replacedStoragePosition = 0, int replacedStorageId = Piece::ChangeStorage );
+
     virtual ~TestPieceTableChange();
 
   public: // AbstractPieceTableChange API
     virtual int type() const;
     virtual QString description() const;
-    virtual bool merge( const AbstractPieceTableChange *other );
-    virtual KDE::Section apply( PieceTable *pieceTable ) const;
-    virtual KDE::Section revert( PieceTable *pieceTable ) const;
-    virtual KDE::ArrayChangeMetrics metrics() const;
+    virtual bool merge( const AbstractPieceTableChange* other );
+    virtual AddressRange apply( PieceTable* pieceTable ) const;
+    virtual AddressRange revert( PieceTable* pieceTable ) const;
+    virtual ArrayChangeMetrics metrics() const;
     virtual int dataSize() const;
 
   protected:
@@ -61,7 +62,7 @@ class TestPieceTableChange : public AbstractPieceTableChange
     int mReplacedStorageId;
 };
 
-inline TestPieceTableChange::TestPieceTableChange( int typeId, const QString &description,
+inline TestPieceTableChange::TestPieceTableChange( int typeId, const QString& description,
                                                    int position, int storagePosition, int storageId,
                                                    int replacedStoragePosition, int replacedStorageId )
  : mTypeId( typeId ), mDescription( description),

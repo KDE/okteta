@@ -67,7 +67,7 @@ class OKTETAGUI_EXPORT ByteArrayRowView : public AbstractByteArrayView
 
     virtual bool isByteTypeColored() const;
 
-    virtual void setByteArrayModel( Okteta::AbstractByteArrayModel* byteArrayModel );
+    virtual void setByteArrayModel( AbstractByteArrayModel* byteArrayModel );
     virtual void toggleOffsetColumn( bool offsetColumnVisible );
     virtual void setByteSpacingWidth( int/*KPixelX*/ byteSpacingWidth ) ;
     virtual void setNoOfGroupedBytes( int noOfGroupedBytes );
@@ -101,7 +101,7 @@ class OKTETAGUI_EXPORT ByteArrayRowView : public AbstractByteArrayView
       * @param Point in viewport coordinate system
       * @return index of the byte that covers the point
       */
-    int indexByPoint(const QPoint& point ) const;
+    Address indexByPoint(const QPoint& point ) const;
 
   public: // modification access
 //    void repaintByte( int row, int column, bool Erase = true );

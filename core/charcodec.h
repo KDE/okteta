@@ -27,6 +27,7 @@
 // lib
 #include "oktetacore.h"
 #include "oktetacore_export.h"
+#include "byte.h"
 
 class QStringList;
 class QChar;
@@ -45,16 +46,16 @@ class OKTETACORE_EXPORT CharCodec
 
   public:
     /** */
-    static CharCodec* createCodec( CharCoding E );
+    static CharCodec* createCodec( CharCoding charCoding );
     /** */
-    static CharCodec* createCodec( const QString &Name );
+    static CharCodec* createCodec( const QString& name );
 
-    static const QStringList &codecNames();
+    static const QStringList& codecNames();
 
   public: // API to be implemented
-    virtual Character decode( char Byte ) const = 0;
-    virtual bool encode( char *D, const QChar &C ) const = 0;
-    virtual bool canEncode( const QChar &C ) const = 0;
+    virtual Character decode( Byte byte ) const = 0;
+    virtual bool encode( Byte* byte, const QChar& _char ) const = 0;
+    virtual bool canEncode( const QChar& _char ) const = 0;
     virtual const QString& name() const = 0;
 };
 

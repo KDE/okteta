@@ -123,18 +123,18 @@ void PrintTool::print()
         byteArrayFrameRenderer->setWidth( width );
         byteArrayFrameRenderer->setHeight( contentHeight );
 
-        KDE::Section section = mByteArrayDisplay->selection();
-        if( !section.isValid() )
-            section.setByWidth( 0, mByteArrayModel->size() );
-        byteArrayFrameRenderer->setByteArrayModel( mByteArrayModel, section.start(), section.width() );
+        Okteta::AddressRange range = mByteArrayDisplay->selection();
+        if( ! range.isValid() )
+            range.setByWidth( 0, mByteArrayModel->size() );
+        byteArrayFrameRenderer->setByteArrayModel( mByteArrayModel, range.start(), range.width() );
 
         // TODO: use noOfBytesPerLine of view, scale resolution down if it does not fit the page
         const int noOfBytesPerLine = mByteArrayDisplay->noOfBytesPerLine();
 //         byteArrayFrameRenderer->setNoOfBytesPerLine( mByteArrayDisplay->noOfBytesPerLine() );
 
-        const int startOffset = mByteArrayDisplay->startOffset() + section.start();
+        const Okteta::Address startOffset = mByteArrayDisplay->startOffset() + range.start();
         const int line = startOffset / noOfBytesPerLine;
-        const int firstLineOffset = mByteArrayDisplay->firstLineOffset() + line*noOfBytesPerLine;
+        const Okteta::Address firstLineOffset = mByteArrayDisplay->firstLineOffset() + line*noOfBytesPerLine;
         byteArrayFrameRenderer->setFirstLineOffset( firstLineOffset );
         byteArrayFrameRenderer->setStartOffset( startOffset );
 
@@ -166,13 +166,14 @@ void PrintTool::print()
 
         QApplication::restoreOverrideCursor();
 
-        if( !success )
+        if( ! success )
         {
             const QString message = i18nc( "@info","Could not print." );
 
             KMessageBox::sorry( 0, message, processTitle );
         }
     }
+
     delete printDialog;
 }
 

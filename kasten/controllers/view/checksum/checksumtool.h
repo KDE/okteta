@@ -29,7 +29,7 @@
 // Kasten core
 #include <abstracttool.h>
 // Okteta core
-#include <section.h>
+#include <addressrange.h>
 
 class AbstractByteArrayChecksumParameterSet;
 class AbstractByteArrayChecksumAlgorithm;
@@ -111,7 +111,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ChecksumTool : public AbstractTool
     Okteta::AbstractByteArrayModel* mByteArrayModel;
 
     int mSourceAlgorithmId;
-    KDE::Section mSourceSelection;
+    Okteta::AddressRange mSourceSelection;
     Okteta::AbstractByteArrayModel* mSourceByteArrayModel;
 };
 

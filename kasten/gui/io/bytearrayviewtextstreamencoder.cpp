@@ -52,14 +52,14 @@ ByteArrayViewTextStreamEncoderSettings::ByteArrayViewTextStreamEncoderSettings()
 {}
 
 ByteArrayViewTextStreamEncoder::ByteArrayViewTextStreamEncoder()
- : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","View in Plain Text"), QLatin1String("text/plain") )
+ : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","View in Plain Text"), QString::fromLatin1("text/plain") )
 {}
 
 
 bool ByteArrayViewTextStreamEncoder::encodeDataToStream( QIODevice *device,
                                                          const KByteArrayDisplay* byteArrayView,
-                                                         const Okteta::AbstractByteArrayModel *byteArrayModel,
-                                                         const KDE::Section &section )
+                                                         const Okteta::AbstractByteArrayModel* byteArrayModel,
+                                                         const Okteta::AddressRange& range )
 {
     bool success = true;
 
@@ -78,7 +78,7 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream( QIODevice *device,
                                         mSettings.startOffset, 0, byteArrayModel->size() );
 
     Okteta::CoordRange coordRange;
-    coordRange.set( layout.coordRangeOfIndizes(section) );
+    coordRange.set( layout.coordRangeOfIndizes(range) );
 
     const int noOfBytesPerLine = byteArrayView->noOfBytesPerLine();
     const int byteSpacingWidth = byteArrayView->byteSpacingWidth();
@@ -98,7 +98,7 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream( QIODevice *device,
     {
         if( visibleByteArrayCodings & Okteta::AbstractByteArrayView::ValueCodingId )
             columnTextRendererList.append(
-                new ValueByteArrayColumnTextRenderer(byteArrayModel,section.start(),coordRange,
+                new ValueByteArrayColumnTextRenderer(byteArrayModel,range.start(),coordRange,
                                                     noOfBytesPerLine, byteSpacingWidth, noOfGroupedBytes,
                                                     mSettings.valueCoding) );
 
@@ -107,7 +107,7 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream( QIODevice *device,
             if( visibleByteArrayCodings & Okteta::AbstractByteArrayView::ValueCodingId )
                 columnTextRendererList.append( new BorderColumnTextRenderer() );
             columnTextRendererList.append(
-                new CharByteArrayColumnTextRenderer(byteArrayModel,section.start(),coordRange,
+                new CharByteArrayColumnTextRenderer(byteArrayModel,range.start(),coordRange,
                                                     noOfBytesPerLine, 0, 0,
                                                     mSettings.codecName,mSettings.substituteChar,mSettings.undefinedChar) );
         }
@@ -115,7 +115,7 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream( QIODevice *device,
     else
     {
             columnTextRendererList.append(
-                new ByteArrayRowsColumnTextRenderer(byteArrayModel,section.start(),coordRange,
+                new ByteArrayRowsColumnTextRenderer(byteArrayModel,range.start(),coordRange,
                                                     noOfBytesPerLine, byteSpacingWidth, noOfGroupedBytes,
                                                     visibleByteArrayCodings,
                                                     mSettings.valueCoding,

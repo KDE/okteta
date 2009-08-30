@@ -24,7 +24,7 @@
 #include "piecetablebytearraymodel.h"
 
 // lib
-#include <sectionlist.h>
+#include <addressrangelist.h>
 
 
 namespace Okteta
@@ -32,7 +32,7 @@ namespace Okteta
 
 static const int InvalidVersionIndex = -1;
 
-PieceTableByteArrayModel::Private::Private( PieceTableByteArrayModel *parent, const char *data, unsigned int size,
+PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate( PieceTableByteArrayModel *parent, const Byte* data, int size,
                                              bool careForMemory )
   : p( parent ),
    mReadOnly( false ),
@@ -46,7 +46,7 @@ PieceTableByteArrayModel::Private::Private( PieceTableByteArrayModel *parent, co
         mInitialData = data;
     else
     {
-        char *dataCopy = new char[size];
+        Byte* dataCopy = new Byte[size];
         memcpy( dataCopy, data, size );
         mInitialData = dataCopy;
     }
@@ -54,12 +54,12 @@ PieceTableByteArrayModel::Private::Private( PieceTableByteArrayModel *parent, co
     mPieceTable.init( size );
 }
 
-PieceTableByteArrayModel::Private::Private( PieceTableByteArrayModel *parent, unsigned int size, char fillByte )
+PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate( PieceTableByteArrayModel *parent, int size, Byte fillByte )
   : p( parent ),
    mReadOnly( false ),
    mAutoDelete( true )
 {
-    char *data = new char[size];
+    Byte* data = new Byte[size];
     memset( data, fillByte, size );
     mInitialData = data;
     mInitialSize = size;
@@ -68,25 +68,25 @@ PieceTableByteArrayModel::Private::Private( PieceTableByteArrayModel *parent, un
 
 
 // TODO: getStorageData needs some caching, optimize for successive access
-char PieceTableByteArrayModel::Private::datum( unsigned int offset ) const
+Byte PieceTableByteArrayModelPrivate::byte( Address offset ) const
 {
     int storageId;
-    int storageOffset;
+    Address storageOffset;
     mPieceTable.getStorageData( &storageId, &storageOffset, offset );
 
-    const char result = ( storageId == KPieceTable::Piece::OriginalStorage ) ?
+    const Byte result = ( storageId == KPieceTable::Piece::OriginalStorage ) ?
                         mInitialData[storageOffset] :
                         mChangesDataStorage[storageOffset];
     return result;
 }
 
-void PieceTableByteArrayModel::Private::setData( const char *data, unsigned int size, bool careForMemory )
+void PieceTableByteArrayModelPrivate::setData( const Byte* data, int size, bool careForMemory )
 {
     if( mAutoDelete )
         delete [] mInitialData;
-    const unsigned int oldSize = mPieceTable.size();
+    const int oldSize = mPieceTable.size();
     const bool wasModifiedBefore = isModified();
-    const QList<Okteta::Bookmark> bookmarks = mBookmarks.list();
+    const QList<Bookmark> bookmarks = mBookmarks.list();
 
     if( data == 0 )
         size = 0;
@@ -95,7 +95,7 @@ void PieceTableByteArrayModel::Private::setData( const char *data, unsigned int 
         mInitialData = data;
     else
     {
-        char *dataCopy = new char[size];
+        Byte* dataCopy = new Byte[size];
         memcpy( dataCopy, data, size );
         mInitialData = dataCopy;
     }
@@ -104,13 +104,13 @@ void PieceTableByteArrayModel::Private::setData( const char *data, unsigned int 
     mBookmarks.clear();
 
     // TODO: how to tell this to the synchronizer?
-    emit p->contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(0,oldSize,size) );
+    emit p->contentsChanged( ArrayChangeMetricsList::oneReplacement(0,oldSize,size) );
     if( wasModifiedBefore ) emit p->modifiedChanged( false );
     if( !bookmarks.empty() ) emit p->bookmarksRemoved( bookmarks );
     emit p->headVersionChanged( mPieceTable.changesCount() );
 }
 
-void PieceTableByteArrayModel::Private::setDatum( unsigned int offset, const char byte )
+void PieceTableByteArrayModelPrivate::setByte( Address offset, Byte byte )
 {
     if( mReadOnly )
         return;
@@ -118,17 +118,17 @@ void PieceTableByteArrayModel::Private::setDatum( unsigned int offset, const cha
     const bool wasModifiedBefore = isModified();
     const bool oldVersionIndex = versionIndex();
 
-    int storageOffset;
+    Address storageOffset;
     const bool newChange = mPieceTable.replaceOne( offset, &storageOffset );
     mChangesDataStorage.append( storageOffset, byte );
 
-    const KDE::ArrayChangeMetrics metrics =
-        KDE::ArrayChangeMetrics::asReplacement( offset, 1, 1 );
+    const ArrayChangeMetrics metrics =
+        ArrayChangeMetrics::asReplacement( offset, 1, 1 );
     const ByteArrayChange modification( metrics, mChangesDataStorage.data(storageOffset,1) );
     QList<Okteta::ByteArrayChange> modificationsList;
     modificationsList.append( modification );
 
-    emit p->contentsChanged( KDE::ArrayChangeMetricsList(metrics) );
+    emit p->contentsChanged( ArrayChangeMetricsList(metrics) );
     emit p->changesDone( modificationsList, oldVersionIndex, versionIndex() );
     if( ! wasModifiedBefore ) emit p->modifiedChanged( true );
     if( newChange )
@@ -138,7 +138,7 @@ void PieceTableByteArrayModel::Private::setDatum( unsigned int offset, const cha
 }
 
 
-int PieceTableByteArrayModel::Private::insert( int offset, const char *insertData, int insertLength )
+Size PieceTableByteArrayModelPrivate::insert( Address offset, const Byte* insertData, int insertLength )
 {
     // correct parameters
     const int oldSize = mPieceTable.size();
@@ -159,39 +159,39 @@ int PieceTableByteArrayModel::Private::insert( int offset, const char *insertDat
 
 
 //TODO: is anyone interested in the removed data? so we need a signal beforeRemoving(section)?
-int PieceTableByteArrayModel::Private::remove( const KDE::Section& _removeSection )
+Size PieceTableByteArrayModelPrivate::remove( const AddressRange& _removeRange )
 {
-    KDE::Section removeSection( _removeSection );
+    AddressRange removeRange( _removeRange );
     // correct parameters
     const int oldSize = mPieceTable.size();
-    removeSection.restrictEndTo( oldSize-1 );
+    removeRange.restrictEndTo( oldSize-1 );
     // check parameters
-    if( removeSection.start() >= oldSize || removeSection.width() == 0 )
+    if( removeRange.start() >= oldSize || removeRange.width() == 0 )
         return 0;
 
     beginChanges();
 
-    doRemoveChange( removeSection );
+    doRemoveChange( removeRange );
 
     endChanges();
 
-    return removeSection.width();
+    return removeRange.width();
 }
 
-unsigned int PieceTableByteArrayModel::Private::replace( const KDE::Section& r, const char* insertData, unsigned int insertLength )
+Size PieceTableByteArrayModelPrivate::replace( const AddressRange& _removeRange, const Byte* insertData, int insertLength )
 {
-    KDE::Section removeSection( r );
+    AddressRange removeRange( _removeRange );
     // correct parameters
     const int oldSize = mPieceTable.size();
-    removeSection.restrictEndTo( oldSize-1 );
+    removeRange.restrictEndTo( oldSize-1 );
     // check parameters
-    if( (removeSection.startsBehind( oldSize-1 ) && removeSection.width()>0)
-        || (removeSection.width()==0 && insertLength==0) )
+    if( (removeRange.startsBehind( oldSize-1 ) && removeRange.width()>0)
+        || (removeRange.width()==0 && insertLength==0) )
         return 0;
 
     beginChanges();
 
-    doReplaceChange( removeSection, insertData, insertLength );
+    doReplaceChange( removeRange, insertData, insertLength );
 
     endChanges();
 
@@ -199,26 +199,26 @@ unsigned int PieceTableByteArrayModel::Private::replace( const KDE::Section& r, 
 }
 
 
-bool PieceTableByteArrayModel::Private::swap( int firstStart, const KDE::Section& second )
+bool PieceTableByteArrayModelPrivate::swap( Address firstStart, const AddressRange& _secondRange )
 {
-    KDE::Section secondSection( second );
+    AddressRange secondRange( _secondRange );
     // correct parameters
-    secondSection.restrictEndTo( mPieceTable.size()-1 );
+    secondRange.restrictEndTo( mPieceTable.size()-1 );
     // check parameters
-    if( secondSection.start() >= mPieceTable.size() || secondSection.width() <= 0
-        || firstStart > mPieceTable.size() || secondSection.start() == firstStart )
+    if( secondRange.start() >= mPieceTable.size() || secondRange.width() <= 0
+        || firstStart > mPieceTable.size() || secondRange.start() == firstStart )
         return false;
 
     beginChanges();
 
-    doSwapChange( firstStart, secondSection );
+    doSwapChange( firstStart, secondRange );
 
     endChanges();
 
     return true;
 }
 
-int PieceTableByteArrayModel::Private::fill( const char fillByte, unsigned int offset, int fillLength )
+Size PieceTableByteArrayModelPrivate::fill( Byte fillByte, Address offset, Size fillLength )
 {
     // correct parameters
     const int lengthToEnd = mPieceTable.size() - offset;
@@ -239,10 +239,10 @@ int PieceTableByteArrayModel::Private::fill( const char fillByte, unsigned int o
     return fillLength;
 }
 
-void PieceTableByteArrayModel::Private::revertToVersionByIndex( int versionIndex )
+void PieceTableByteArrayModelPrivate::revertToVersionByIndex( int versionIndex )
 {
-    KDE::ArrayChangeMetricsList changeList;
-    KDE::SectionList changedRanges;
+    ArrayChangeMetricsList changeList;
+    AddressRangeList changedRanges;
 
     const bool oldModified = isModified();
 
@@ -263,7 +263,7 @@ void PieceTableByteArrayModel::Private::revertToVersionByIndex( int versionIndex
     emit p->revertedToVersionIndex( versionIndex );
 }
 
-void PieceTableByteArrayModel::Private::openGroupedChange( const QString &description )
+void PieceTableByteArrayModelPrivate::openGroupedChange( const QString& description )
 {
     mBeforeGroupedChangeVersionIndex = mPieceTable.appliedChangesCount();
     mPieceTable.openGroupedChange( description );
@@ -271,13 +271,13 @@ void PieceTableByteArrayModel::Private::openGroupedChange( const QString &descri
     emit p->headVersionChanged( mPieceTable.changesCount() );
 }
 
-void PieceTableByteArrayModel::Private::cancelGroupedChange()
+void PieceTableByteArrayModelPrivate::cancelGroupedChange()
 {
     if( mBeforeGroupedChangeVersionIndex != InvalidVersionIndex )
         revertToVersionByIndex( mBeforeGroupedChangeVersionIndex );
 }
 
-void PieceTableByteArrayModel::Private::closeGroupedChange( const QString &description )
+void PieceTableByteArrayModelPrivate::closeGroupedChange( const QString& description )
 {
     mPieceTable.closeGroupedChange( description );
     mBeforeGroupedChangeVersionIndex = InvalidVersionIndex;
@@ -285,18 +285,18 @@ void PieceTableByteArrayModel::Private::closeGroupedChange( const QString &descr
     emit p->headVersionDescriptionChanged( mPieceTable.headChangeDescription() );
 }
 
-QList<ByteArrayChange> PieceTableByteArrayModel::Private::changes( int firstVersionIndex, int lastVersionIndex ) const
+QList<ByteArrayChange> PieceTableByteArrayModelPrivate::changes( int firstVersionIndex, int lastVersionIndex ) const
 {
     QList<ByteArrayChange> result;
 
     for( int i=firstVersionIndex; i<lastVersionIndex; ++i )
     {
-        KDE::ArrayChangeMetrics metrics;
-        int storageOffset;
+        ArrayChangeMetrics metrics;
+        Address storageOffset;
         mPieceTable.getChangeData( &metrics, &storageOffset, i );
 
         QByteArray data;
-        if( metrics.type() == KDE::ArrayChangeMetrics::Replacement )
+        if( metrics.type() == ArrayChangeMetrics::Replacement )
             data = mChangesDataStorage.data( storageOffset, metrics.insertLength() );
         result.append( ByteArrayChange(metrics,data) );
     }
@@ -304,13 +304,13 @@ QList<ByteArrayChange> PieceTableByteArrayModel::Private::changes( int firstVers
     return result;
 }
 
-QByteArray PieceTableByteArrayModel::Private::initialData() const
+QByteArray PieceTableByteArrayModelPrivate::initialData() const
 {
-    return QByteArray( mInitialData, mInitialSize );
+    return QByteArray( reinterpret_cast<const char*>( mInitialData ), mInitialSize );
 }
 
-void PieceTableByteArrayModel::Private::doChanges( const QList<Okteta::ByteArrayChange>& changes,
-                                                    int oldVersionIndex, int newVersionIndex )
+void PieceTableByteArrayModelPrivate::doChanges( const QList<ByteArrayChange>& changes,
+                                                 int oldVersionIndex, int newVersionIndex )
 {
 // kDebug() << this<<" is at "<<versionIndex()<<", should from "<<oldVersionIndex<<" to "<<newVersionIndex;
     // changes already done? TODO: should this check be here?
@@ -325,28 +325,28 @@ void PieceTableByteArrayModel::Private::doChanges( const QList<Okteta::ByteArray
 
     foreach( const ByteArrayChange& change, changes )
     {
-        const KDE::ArrayChangeMetrics& metrics = change.metrics();
+        const ArrayChangeMetrics& metrics = change.metrics();
         switch( metrics.type() )
         {
-        case KDE::ArrayChangeMetrics::Replacement:
+        case ArrayChangeMetrics::Replacement:
         {
             const int oldSize = mPieceTable.size();
-            const KDE::Section removeSection = KDE::Section::fromWidth( metrics.offset(), metrics.removeLength() );
+            const AddressRange removeRange = AddressRange::fromWidth( metrics.offset(), metrics.removeLength() );
             // check parameters
-            if( removeSection.startsBehind(oldSize-1) && (removeSection.width()>0) ) 
+            if( removeRange.startsBehind(oldSize-1) && (removeRange.width()>0) ) 
             {
                 // something is not matching
                 ; // TODO: set flag to undo all changes
             }
 
             const QByteArray& insertData = change.data();
-            doReplaceChange( removeSection, insertData.data(), insertData.size() );
+            doReplaceChange( removeRange, reinterpret_cast<const Byte*>(insertData.constData()), insertData.size() );
             break;
         }
-        case KDE::ArrayChangeMetrics::Swapping:
+        case ArrayChangeMetrics::Swapping:
         {
-            const KDE::Section secondSection( metrics.secondStart(), metrics.secondEnd() );
-            doSwapChange( metrics.offset(), secondSection );
+            const AddressRange secondRange( metrics.secondStart(), metrics.secondEnd() );
+            doSwapChange( metrics.offset(), secondRange );
             break;
         }
         default:
@@ -362,13 +362,13 @@ void PieceTableByteArrayModel::Private::doChanges( const QList<Okteta::ByteArray
     endChanges();
 }
 
-void PieceTableByteArrayModel::Private::beginChanges()
+void PieceTableByteArrayModelPrivate::beginChanges()
 {
     mBeforeChangesVersionIndex = versionIndex();
     mBeforeChangesModified = isModified();
 }
 
-void PieceTableByteArrayModel::Private::endChanges()
+void PieceTableByteArrayModelPrivate::endChanges()
 {
     const int currentVersionIndex = versionIndex();
     const bool newChange = ( mBeforeChangesVersionIndex != currentVersionIndex );
@@ -390,77 +390,77 @@ void PieceTableByteArrayModel::Private::endChanges()
     mBookmarksModified = false;
 }
 
-void PieceTableByteArrayModel::Private::doInsertChange( unsigned int offset,
-                                                         const char* insertData, unsigned int insertLength )
+void PieceTableByteArrayModelPrivate::doInsertChange( Address offset,
+                                                      const Byte* insertData, int insertLength )
 {
-    int storageOffset;
+    Address storageOffset;
     mPieceTable.insert( offset, insertLength, &storageOffset );
-    mChangesDataStorage.append( storageOffset, insertData, insertLength );
+    mChangesDataStorage.append( storageOffset, reinterpret_cast<const char*>(insertData), insertLength );
 
     mBookmarksModified |= mBookmarks.adjustToReplaced( offset, 0, insertLength );
 
-    const KDE::ArrayChangeMetrics metrics = KDE::ArrayChangeMetrics::asReplacement( offset, 0, insertLength );
+    const ArrayChangeMetrics metrics = ArrayChangeMetrics::asReplacement( offset, 0, insertLength );
     const ByteArrayChange change( metrics, mChangesDataStorage.data(storageOffset,insertLength) );
 
     mChangeMetrics.append( metrics );
     mChanges.append( change );
 }
 
-void PieceTableByteArrayModel::Private::doRemoveChange( const KDE::Section& removeSection )
+void PieceTableByteArrayModelPrivate::doRemoveChange( const AddressRange& removeRange )
 {
-    mPieceTable.remove( removeSection );
+    mPieceTable.remove( removeRange );
 
-    mBookmarksModified |= mBookmarks.adjustToReplaced( removeSection.start(), removeSection.width(), 0 );
+    mBookmarksModified |= mBookmarks.adjustToReplaced( removeRange.start(), removeRange.width(), 0 );
 
-    const KDE::ArrayChangeMetrics metrics =
-        KDE::ArrayChangeMetrics::asReplacement( removeSection.start(), removeSection.width(), 0 );
+    const ArrayChangeMetrics metrics =
+        ArrayChangeMetrics::asReplacement( removeRange.start(), removeRange.width(), 0 );
     const ByteArrayChange change( metrics );
 
     mChangeMetrics.append( metrics );
     mChanges.append( change );
 }
 
-void PieceTableByteArrayModel::Private::doReplaceChange( const KDE::Section& removeSection,
-                                                          const char* insertData, unsigned int insertLength )
+void PieceTableByteArrayModelPrivate::doReplaceChange( const AddressRange& removeRange,
+                                                       const Byte* insertData, int insertLength )
 {
-    int storageOffset;
-    mPieceTable.replace( removeSection, insertLength, &storageOffset );
-    mChangesDataStorage.append( storageOffset, insertData, insertLength );
+    Address storageOffset;
+    mPieceTable.replace( removeRange, insertLength, &storageOffset );
+    mChangesDataStorage.append( storageOffset, reinterpret_cast<const char*>(insertData), insertLength );
 
-    mBookmarksModified |= mBookmarks.adjustToReplaced( removeSection.start(), removeSection.width(), insertLength );
+    mBookmarksModified |= mBookmarks.adjustToReplaced( removeRange.start(), removeRange.width(), insertLength );
 
-    const KDE::ArrayChangeMetrics metrics =
-        KDE::ArrayChangeMetrics::asReplacement( removeSection.start(), removeSection.width(), insertLength );
+    const ArrayChangeMetrics metrics =
+        ArrayChangeMetrics::asReplacement( removeRange.start(), removeRange.width(), insertLength );
     const ByteArrayChange change( metrics, mChangesDataStorage.data(storageOffset,insertLength) );
 
     mChangeMetrics.append( metrics );
     mChanges.append( change );
 }
 
-void PieceTableByteArrayModel::Private::doSwapChange( int firstStart, const KDE::Section& secondSection )
+void PieceTableByteArrayModelPrivate::doSwapChange( Address firstStart, const AddressRange& secondRange )
 {
-    mPieceTable.swap( firstStart, secondSection );
+    mPieceTable.swap( firstStart, secondRange );
 
-    mBookmarksModified |= mBookmarks.adjustToSwapped( firstStart, secondSection.start(),secondSection.width() );
+    mBookmarksModified |= mBookmarks.adjustToSwapped( firstStart, secondRange.start(),secondRange.width() );
 
-    const KDE::ArrayChangeMetrics metrics =
-        KDE::ArrayChangeMetrics::asSwapping( firstStart, secondSection.start(), secondSection.width() );
+    const ArrayChangeMetrics metrics =
+        ArrayChangeMetrics::asSwapping( firstStart, secondRange.start(), secondRange.width() );
     const ByteArrayChange change( metrics );
 
     mChangeMetrics.append( metrics );
     mChanges.append( change );
 }
 
-void PieceTableByteArrayModel::Private::doFillChange( unsigned int offset, unsigned int filledLength,
-                                                       const char fillByte, unsigned int fillLength )
+void PieceTableByteArrayModelPrivate::doFillChange( Address offset, Size filledLength,
+                                                    Byte fillByte, int fillLength )
 {
-    int storageOffset;
+    Address storageOffset;
     mPieceTable.replace( offset, filledLength, fillLength, &storageOffset );
 
     mChangesDataStorage.appendFill( storageOffset, fillByte, fillLength );
 
-    const KDE::ArrayChangeMetrics metrics =
-        KDE::ArrayChangeMetrics::asReplacement( offset, fillLength, fillLength );
+    const ArrayChangeMetrics metrics =
+        ArrayChangeMetrics::asReplacement( offset, fillLength, fillLength );
     const ByteArrayChange change( metrics );
 
     mChangeMetrics.append( metrics );
@@ -468,7 +468,7 @@ void PieceTableByteArrayModel::Private::doFillChange( unsigned int offset, unsig
 }
 
 
-PieceTableByteArrayModel::Private::~Private()
+PieceTableByteArrayModelPrivate::~PieceTableByteArrayModelPrivate()
 {
     if( mAutoDelete )
         delete [] mInitialData;

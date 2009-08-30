@@ -30,13 +30,12 @@
 // Qt
 #include <QtTest/QtTest>
 
-using namespace KDE;
 
 namespace KPieceTable
 {
 
-static const int Size = 100;
-static const int ChangeStorageOffset = 23;
+static const Size BaseSize = 100;
+static const Address ChangeStorageOffset = 23;
 
 // ---------------------------------------------------------------- Tests -----
 
@@ -70,17 +69,17 @@ void AbstractPieceTableChangeIfTest::testRevertApply()
 {
     PieceTable pieceTable;
     pieceTable.init( 0 );
-    pieceTable.insert( 0, Size, ChangeStorageOffset );
+    pieceTable.insert( 0, BaseSize, ChangeStorageOffset );
 
     // do change which creates this
     changePieceTable ( &pieceTable );
     mPieceTableChange->revert( &pieceTable );
 
-    QCOMPARE( pieceTable.size(), Size );
-    for( int i=0; i<Size; ++i )
+    QCOMPARE( pieceTable.size(), BaseSize );
+    for( int i=0; i<BaseSize; ++i )
     {
         int storageId;
-        int storageOffset;
+        Address storageOffset;
         bool result = pieceTable.getStorageData( &storageId, &storageOffset, i );
 
         QVERIFY( result );
@@ -92,11 +91,11 @@ void AbstractPieceTableChangeIfTest::testRevertApply()
     mPieceTableChange->apply( &pieceTable );
     mPieceTableChange->revert( &pieceTable );
 
-    QCOMPARE( pieceTable.size(), Size );
-    for( int i=0; i<Size; ++i )
+    QCOMPARE( pieceTable.size(), BaseSize );
+    for( Address i=0; i<BaseSize; ++i )
     {
         int storageId;
-        int storageOffset;
+        Address storageOffset;
         bool result = pieceTable.getStorageData( &storageId, &storageOffset, i );
 
         QVERIFY( result );

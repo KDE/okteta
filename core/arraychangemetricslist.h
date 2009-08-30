@@ -20,35 +20,36 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KDE_ARRAYCHANGEMETRICSLIST_H
-#define KDE_ARRAYCHANGEMETRICSLIST_H
+#ifndef OKTETA_ARRAYCHANGEMETRICSLIST_H
+#define OKTETA_ARRAYCHANGEMETRICSLIST_H
 
 // lib
 #include "arraychangemetrics.h"
 //
 #include <QtCore/QList>
 
-namespace KDE
+
+namespace Okteta
 {
 
 // TODO: do we need the invalid status?
 class ArrayChangeMetricsList : public QList<ArrayChangeMetrics>
 {
   public:
-    static ArrayChangeMetricsList oneReplacement( int offset, int removeLength, int insertLength );
-    static ArrayChangeMetricsList oneSwapping( int firstOffset, int secondOffset, int secondLength );
+    static ArrayChangeMetricsList oneReplacement( Address offset, Size removeLength, Size insertLength );
+    static ArrayChangeMetricsList oneSwapping( Address firstOffset, Size secondOffset, Size secondLength );
 
   public:
     ArrayChangeMetricsList();
     explicit ArrayChangeMetricsList( const ArrayChangeMetrics& metrics );
 };
 
-inline ArrayChangeMetricsList ArrayChangeMetricsList::oneReplacement( int offset, int removeLength, int insertLength )
+inline ArrayChangeMetricsList ArrayChangeMetricsList::oneReplacement( Address offset, Size removeLength, Size insertLength )
 {
     return ArrayChangeMetricsList( ArrayChangeMetrics::asReplacement(offset,removeLength,insertLength) );
 }
 
-inline ArrayChangeMetricsList ArrayChangeMetricsList::oneSwapping( int firstOffset, int secondOffset, int secondLength )
+inline ArrayChangeMetricsList ArrayChangeMetricsList::oneSwapping( Address firstOffset, Size secondOffset, Size secondLength )
 {
     return ArrayChangeMetricsList( ArrayChangeMetrics::asSwapping(firstOffset,secondOffset,secondLength) );
 }

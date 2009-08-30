@@ -36,20 +36,20 @@ BookmarkListConstIteratorAdapter::BookmarkListConstIteratorAdapter( const Bookma
 
 bool BookmarkListConstIteratorAdapter::hasNext() const     { return mIterator.hasNext(); }
 bool BookmarkListConstIteratorAdapter::hasPrevious() const { return mIterator.hasPrevious(); }
-const Okteta::Bookmark& BookmarkListConstIteratorAdapter::peekNext() const     { return mIterator.peekNext(); }
-const Okteta::Bookmark& BookmarkListConstIteratorAdapter::peekPrevious() const { return mIterator.peekPrevious(); }
+const Bookmark& BookmarkListConstIteratorAdapter::peekNext() const     { return mIterator.peekNext(); }
+const Bookmark& BookmarkListConstIteratorAdapter::peekPrevious() const { return mIterator.peekPrevious(); }
 
-bool BookmarkListConstIteratorAdapter::findNext( const Okteta::Bookmark& bookmark )     { return mIterator.findNext( bookmark ); }
-bool BookmarkListConstIteratorAdapter::findPrevious( const Okteta::Bookmark& bookmark ) { return mIterator.findPrevious( bookmark ); }
+bool BookmarkListConstIteratorAdapter::findNext( const Bookmark& bookmark )     { return mIterator.findNext( bookmark ); }
+bool BookmarkListConstIteratorAdapter::findPrevious( const Bookmark& bookmark ) { return mIterator.findPrevious( bookmark ); }
 
-bool BookmarkListConstIteratorAdapter::findNextFrom( unsigned int offset )
+bool BookmarkListConstIteratorAdapter::findNextFrom( Address offset )
 {
     bool result = false;
 
     mIterator.toFront();
     while( mIterator.hasNext() )
     {
-        if( (int)offset <= mIterator.peekNext().offset() )
+        if( offset <= mIterator.peekNext().offset() )
         {
             result = true;
             break;
@@ -60,14 +60,14 @@ bool BookmarkListConstIteratorAdapter::findNextFrom( unsigned int offset )
     return result;
 }
 
-bool BookmarkListConstIteratorAdapter::findPreviousFrom( unsigned int offset )
+bool BookmarkListConstIteratorAdapter::findPreviousFrom( Address offset )
 {
     bool result = false;
 
     mIterator.toBack();
     while( mIterator.hasPrevious() )
     {
-        if( mIterator.peekPrevious().offset() <= (int)offset )
+        if( mIterator.peekPrevious().offset() <= offset )
         {
             result = true;
             break;
@@ -78,8 +78,8 @@ bool BookmarkListConstIteratorAdapter::findPreviousFrom( unsigned int offset )
     return result;
 }
 
-const Okteta::Bookmark& BookmarkListConstIteratorAdapter::next()     { return mIterator.next(); }
-const Okteta::Bookmark& BookmarkListConstIteratorAdapter::previous() { return mIterator.previous(); }
+const Bookmark& BookmarkListConstIteratorAdapter::next()     { return mIterator.next(); }
+const Bookmark& BookmarkListConstIteratorAdapter::previous() { return mIterator.previous(); }
 
 void BookmarkListConstIteratorAdapter::toBack()  { mIterator.toBack(); }
 void BookmarkListConstIteratorAdapter::toFront() { mIterator.toFront(); }

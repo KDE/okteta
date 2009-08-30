@@ -34,10 +34,10 @@ namespace Kasten
 {
 
 CharByteArrayColumnTextRenderer::CharByteArrayColumnTextRenderer(
-        const Okteta::AbstractByteArrayModel *byteArrayModel, int offset,
-        const Okteta::CoordRange &coordRange,
+        const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset,
+        const Okteta::CoordRange& coordRange,
         int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
-        const QString &charCodecName, QChar substituteChar, QChar undefinedChar )
+        const QString& charCodecName, QChar substituteChar, QChar undefinedChar )
  : AbstractByteArrayColumnTextRenderer( byteArrayModel, offset, coordRange,
         noOfBytesPerLine ),
    mCharCodec( Okteta::CharCodec::createCodec(charCodecName) ),
@@ -73,7 +73,7 @@ Q_UNUSED( isSubline )
         *stream << whiteSpace( t-e );
 
         // print char
-        const Okteta::Character byteChar = mCharCodec->decode( mByteArrayModel->datum(mOffset) );
+        const Okteta::Character byteChar = mCharCodec->decode( mByteArrayModel->byte(mOffset) );
 
         const QChar streamChar = byteChar.isUndefined() ?      Okteta::Character(mUndefinedChar) :
                                  (!byteChar.isPrint()

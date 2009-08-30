@@ -36,8 +36,8 @@ AndByteArrayFilter::AndByteArrayFilter()
 
 AbstractByteArrayFilterParameterSet *AndByteArrayFilter::parameterSet() { return &mParameterSet; }
 
-bool AndByteArrayFilter::filter( char *result,
-                                 Okteta::AbstractByteArrayModel *model, const KDE::Section &section ) const
+bool AndByteArrayFilter::filter( Okteta::Byte* result,
+                                 Okteta::AbstractByteArrayModel *model, const Okteta::AddressRange& range ) const
 {
     const QByteArray operand = mParameterSet.operand();
     const int operandSize = operand.size();
@@ -45,39 +45,39 @@ bool AndByteArrayFilter::filter( char *result,
 
     if( mParameterSet.alignAtEnd() )
     {
-        int r = section.width();
-        int m = section.nextBehindEnd();
+        Okteta::Size r = range.width();
+        Okteta::Address m = range.nextBehindEnd();
 
-        while( m > section.start() )
+        while( m > range.start() )
         {
             int o = operandSize;
-            while( m > section.start() && o > 0 )
-                result[(r--)-1] = model->datum( (m--)-1 ) & operand[(o--)-1];
+            while( m > range.start() && o > 0 )
+                result[(r--)-1] = model->byte( (m--)-1 ) & operand[(o--)-1];
 
             filteredBytesCount += (operandSize-o);
             if( filteredBytesCount >= FilteredByteCountSignalLimit )
             {
                 filteredBytesCount = 0;
-                emit filteredBytes( section.end()-m );
+                emit filteredBytes( range.end()-m );
             }
         }
     }
     else
     {
-        int r = 0;
-        int m = section.start();
+        Okteta::Size r = 0;
+        Okteta::Address m = range.start();
 
-        while( m <= section.end() )
+        while( m <= range.end() )
         {
             int o = 0;
-            while( m <= section.end() && o < operandSize )
-                result[r++] = model->datum( m++ ) & operand[o++];
+            while( m <= range.end() && o < operandSize )
+                result[r++] = model->byte( m++ ) & operand[o++];
 
             filteredBytesCount += o;
             if( filteredBytesCount >= FilteredByteCountSignalLimit )
             {
                 filteredBytesCount = 0;
-                emit filteredBytes( m-section.start() );
+                emit filteredBytes( m-range.start() );
             }
         }
     }

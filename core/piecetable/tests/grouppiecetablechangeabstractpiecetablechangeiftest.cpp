@@ -33,39 +33,39 @@
 #include <QtTest/QtTest>
 
 
-static const int ReplacedOldStorageOffset = 80;
-static const int ReplacedStart = 32;
-static const int ReplacedEnd = 78;
-static const int ReplacedWidth = ReplacedEnd-ReplacedStart+1;
-static const int ReplaceLength = 30;
-static const int ReplaceInsertStorageOffset = 67;
-
-static const int InsertOffset = 50;
-static const int InsertLength = 80;
-static const int InsertStorageOffset = 67;
-
-static const int RemovedStart = 40;
-static const int RemovedEnd = 78;
-static const int RemovedWidth = RemovedEnd-RemovedStart+1;
-static const int RemovedOldStorageOffset = 23;
-
-
 namespace KPieceTable
 {
 
+static const Address ReplacedOldStorageOffset = 80;
+static const Address ReplacedStart = 32;
+static const Address ReplacedEnd = 78;
+static const Size ReplacedWidth = ReplacedEnd-ReplacedStart+1;
+static const Size ReplaceLength = 30;
+static const Address ReplaceInsertStorageOffset = 67;
+
+static const Address InsertOffset = 50;
+static const Size InsertLength = 80;
+static const Address InsertStorageOffset = 67;
+
+static const Address RemovedStart = 40;
+static const Address RemovedEnd = 78;
+static const Size RemovedWidth = RemovedEnd-RemovedStart+1;
+static const Address RemovedOldStorageOffset = 23;
+
+
 AbstractPieceTableChange *GroupPieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
 {
-    const Piece replacedPiece( KDE::Section::fromWidth(ReplacedOldStorageOffset,ReplacedWidth), Piece::ChangeStorage );
-    const Piece removedPiece( KDE::Section::fromWidth(RemovedOldStorageOffset,RemovedWidth), Piece::ChangeStorage );
+    const Piece replacedPiece( AddressRange::fromWidth(ReplacedOldStorageOffset,ReplacedWidth), Piece::ChangeStorage );
+    const Piece removedPiece( AddressRange::fromWidth(RemovedOldStorageOffset,RemovedWidth), Piece::ChangeStorage );
 
     ReplacePieceTableChange *replaceChange =
-        new ReplacePieceTableChange( KDE::Section(ReplacedStart,ReplacedEnd),
+        new ReplacePieceTableChange( AddressRange(ReplacedStart,ReplacedEnd),
                                      ReplaceLength, ReplaceInsertStorageOffset,
                                      PieceList(replacedPiece) );
     InsertPieceTableChange *insertChange =
         new InsertPieceTableChange( InsertOffset, InsertLength, InsertStorageOffset );
     RemovePieceTableChange *removeChange =
-        new RemovePieceTableChange( KDE::Section(RemovedStart,RemovedEnd), PieceList(removedPiece) );
+        new RemovePieceTableChange( AddressRange(RemovedStart,RemovedEnd), PieceList(removedPiece) );
 
     GroupPieceTableChange *pieceTableChange =
         new GroupPieceTableChange( 0, QString() );
@@ -78,9 +78,9 @@ AbstractPieceTableChange *GroupPieceTableChangeAbstractPieceTableChangeIfTest::c
 }
 void GroupPieceTableChangeAbstractPieceTableChangeIfTest::changePieceTable( PieceTable *pieceTable )
 {
-    pieceTable->replace( KDE::Section(ReplacedStart,ReplacedEnd), ReplaceLength, ReplaceInsertStorageOffset );
+    pieceTable->replace( AddressRange(ReplacedStart,ReplacedEnd), ReplaceLength, ReplaceInsertStorageOffset );
     pieceTable->insert( InsertOffset, InsertLength, InsertStorageOffset );
-    pieceTable->remove( KDE::Section(RemovedStart,RemovedEnd) );
+    pieceTable->remove( AddressRange(RemovedStart,RemovedEnd) );
 }
 
 void GroupPieceTableChangeAbstractPieceTableChangeIfTest::deletePieceTableChange(

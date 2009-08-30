@@ -34,7 +34,7 @@ namespace Okteta
 {
 
 AbstractByteArrayView::AbstractByteArrayView( AbstractByteArrayViewPrivate* dd, QWidget* parent )
- : ColumnsView( parent ),
+  : ColumnsView( parent ),
     d_ptr( dd )
 {
     Q_D( AbstractByteArrayView );
@@ -119,18 +119,18 @@ int AbstractByteArrayView::noOfBytesPerLine() const
     Q_D( const AbstractByteArrayView );
     return d->noOfBytesPerLine();
 }
-int AbstractByteArrayView::firstLineOffset()  const
+Address AbstractByteArrayView::firstLineOffset()  const
 {
     Q_D( const AbstractByteArrayView );
     return d->firstLineOffset();
 }
-int AbstractByteArrayView::startOffset() const
+Address AbstractByteArrayView::startOffset() const
 {
     Q_D( const AbstractByteArrayView );
     return d->startOffset();
 }
 
-int AbstractByteArrayView::cursorPosition() const
+Address AbstractByteArrayView::cursorPosition() const
 {
     Q_D( const AbstractByteArrayView );
     return d->cursorPosition();
@@ -146,7 +146,7 @@ AbstractByteArrayView::ResizeStyle AbstractByteArrayView::resizeStyle() const
     return d->resizeStyle();
 }
 
-KDE::Section AbstractByteArrayView::selection() const
+AddressRange AbstractByteArrayView::selection() const
 {
     Q_D( const AbstractByteArrayView );
     return d->selection();
@@ -248,13 +248,13 @@ void AbstractByteArrayView::setNoOfBytesPerLine( int noOfBytesPerLine )
 }
 
 
-void AbstractByteArrayView::setStartOffset( int startOffset )
+void AbstractByteArrayView::setStartOffset( Address startOffset )
 {
     Q_D( AbstractByteArrayView );
     d->setStartOffset( startOffset );
 }
 
-void AbstractByteArrayView::setFirstLineOffset( int firstLineOffset )
+void AbstractByteArrayView::setFirstLineOffset( Address firstLineOffset )
 {
     Q_D( AbstractByteArrayView );
     d->setFirstLineOffset( firstLineOffset );
@@ -306,31 +306,31 @@ void AbstractByteArrayView::selectAll( bool select )
     d->selectAll( select );
 }
 
-bool AbstractByteArrayView::selectWord( /*unsigned TODO:change all unneeded signed into unsigned!*/ int index )
+bool AbstractByteArrayView::selectWord( Address index )
 {
     Q_D( AbstractByteArrayView );
     return d->selectWord( index );
 }
 
-void AbstractByteArrayView::setCursorPosition( int index, bool isBehind )
+void AbstractByteArrayView::setCursorPosition( Address index, bool isBehind )
 {
     Q_D( AbstractByteArrayView );
     d->setCursorPosition( index, isBehind );
 }
 
-void AbstractByteArrayView::setSelectionCursorPosition( int index )
+void AbstractByteArrayView::setSelectionCursorPosition( Address index )
 {
     Q_D( AbstractByteArrayView );
     d->setSelectionCursorPosition( index );
 }
 
-void AbstractByteArrayView::setSelection( int start, int end )
+void AbstractByteArrayView::setSelection( Address start, Address end )
 {
     Q_D( AbstractByteArrayView );
-    d->setSelection( KDE::Section(start,end) );
+    d->setSelection( AddressRange(start,end) );
 }
 
-void AbstractByteArrayView::setSelection( const KDE::Section& selection )
+void AbstractByteArrayView::setSelection( const AddressRange& selection )
 {
     Q_D( AbstractByteArrayView );
     d->setSelection( selection );

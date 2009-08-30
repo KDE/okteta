@@ -114,7 +114,7 @@ QValidator::State KByteArrayValidator::validate( QString &string, int &/*pos*/ )
 }
 
 
-QByteArray KByteArrayValidator::toByteArray( const QString &string ) const
+QByteArray KByteArrayValidator::toByteArray( const QString& string ) const
 {
     QByteArray result;
 
@@ -124,7 +124,7 @@ QByteArray KByteArrayValidator::toByteArray( const QString &string ) const
         result.resize( stringLength );
         for( int i=0; i<stringLength; ++i )
         {
-            char byte;
+            Okteta::Byte byte;
             const bool success = mCharCodec->encode( &byte, string[i] );
             result[i] = success ? byte : '?'; // TODO: define unknown symbol
         }
@@ -134,7 +134,7 @@ QByteArray KByteArrayValidator::toByteArray( const QString &string ) const
         int i = 0;
         while( i < stringLength )
         {
-            unsigned char byte;
+            Okteta::Byte byte;
             const int readChars = mValueCodec->decode( &byte, string, i );
             if( readChars > 0 )
             {
@@ -146,6 +146,7 @@ QByteArray KByteArrayValidator::toByteArray( const QString &string ) const
                     ++i;
         }
     }
+
     return result;
 }
 

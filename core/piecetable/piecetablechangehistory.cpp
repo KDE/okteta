@@ -25,8 +25,9 @@
 // lib
 #include "grouppiecetablechange.h"
 //
-#include <sectionlist.h>
+#include <addressrangelist.h>
 #include <arraychangemetricslist.h>
+
 
 namespace KPieceTable
 {
@@ -42,7 +43,7 @@ void PieceTableChangeHistory::clear()
     mAppliedChangesDataSize = 0;
 }
 
-void PieceTableChangeHistory::getChangeData( KDE::ArrayChangeMetrics* metrics, int *storageOffset,
+void PieceTableChangeHistory::getChangeData( ArrayChangeMetrics* metrics, Address* storageOffset,
                                              int versionIndex ) const
 {
     AbstractPieceTableChange *change = mChangeStack.at( versionIndex );
@@ -51,13 +52,13 @@ void PieceTableChangeHistory::getChangeData( KDE::ArrayChangeMetrics* metrics, i
 }
 
 
-void PieceTableChangeHistory::setBeforeCurrentChangeAsBase(bool hide)
+void PieceTableChangeHistory::setBeforeCurrentChangeAsBase( bool hide )
 {
     mBaseBeforeChangeIndex = hide ? -1 : mAppliedChangesCount;
     mTryToMergeAppendedChange = false;
 }
 
-void PieceTableChangeHistory::openGroupedChange(const QString &description)
+void PieceTableChangeHistory::openGroupedChange( const QString& description )
 {
     GroupPieceTableChange *groupChange = new GroupPieceTableChange( mActiveGroupChange, description );
 
@@ -65,7 +66,7 @@ void PieceTableChangeHistory::openGroupedChange(const QString &description)
     mActiveGroupChange = groupChange;
 }
 
-void PieceTableChangeHistory::closeGroupedChange(const QString &description)
+void PieceTableChangeHistory::closeGroupedChange(const QString & description )
 {
     if( mActiveGroupChange != 0 )
     {
@@ -83,7 +84,7 @@ void PieceTableChangeHistory::finishChange()
         mTryToMergeAppendedChange = false;
 }
 
-bool PieceTableChangeHistory::appendChange( AbstractPieceTableChange *change )
+bool PieceTableChangeHistory::appendChange( AbstractPieceTableChange* change )
 {
     // chop unapplied changes
     if( mAppliedChangesCount < mChangeStack.count() )
@@ -93,7 +94,7 @@ bool PieceTableChangeHistory::appendChange( AbstractPieceTableChange *change )
             mBaseBeforeChangeIndex = -1;
         do
         {
-            AbstractPieceTableChange *droppedChange = mChangeStack.pop();
+            AbstractPieceTableChange* droppedChange = mChangeStack.pop();
             delete droppedChange;
         }
         while( mAppliedChangesCount < mChangeStack.count() );
@@ -127,9 +128,9 @@ bool PieceTableChangeHistory::appendChange( AbstractPieceTableChange *change )
 }
 
 
-bool PieceTableChangeHistory::revertBeforeChange( PieceTable *pieceTable, int changeId,
-                                                  KDE::SectionList *changedRanges,
-                                                  KDE::ArrayChangeMetricsList *changeList )
+bool PieceTableChangeHistory::revertBeforeChange( PieceTable* pieceTable, int changeId,
+                                                  AddressRangeList* changedRanges,
+                                                  ArrayChangeMetricsList* changeList )
 {
     int currentChangeId = mAppliedChangesCount;
 
@@ -140,28 +141,27 @@ bool PieceTableChangeHistory::revertBeforeChange( PieceTable *pieceTable, int ch
     while( mActiveGroupChange != 0 )
         mActiveGroupChange = mActiveGroupChange->parent();
 
-
     if( currentChangeId < changeId )
     {
         for( ; currentChangeId<changeId  ; ++currentChangeId )
         {
-            const AbstractPieceTableChange *change = mChangeStack[currentChangeId];
+            const AbstractPieceTableChange* change = mChangeStack[currentChangeId];
 
             if( change->type() == AbstractPieceTableChange::GroupId )
             {
-                const GroupPieceTableChange *groupChange = static_cast<const GroupPieceTableChange *>(change);
-                const KDE::SectionList changedSectionList = groupChange->applyGroup( pieceTable );
-                changedRanges->addSectionList( changedSectionList );
+                const GroupPieceTableChange* groupChange = static_cast<const GroupPieceTableChange*>(change);
+                const AddressRangeList changedRangeList = groupChange->applyGroup( pieceTable );
+                changedRanges->addAddressRangeList( changedRangeList );
 
-                const QList<KDE::ArrayChangeMetrics> changeMetricsList = groupChange->groupMetrics();
+                const QList<ArrayChangeMetrics> changeMetricsList = groupChange->groupMetrics();
                 *changeList += changeMetricsList;
             }
             else
             {
-                const KDE::Section changedSection = change->apply( pieceTable );
-                changedRanges->addSection( changedSection );
+                const AddressRange changedRange = change->apply( pieceTable );
+                changedRanges->addAddressRange( changedRange );
 
-                const KDE::ArrayChangeMetrics changeMetrics = change->metrics();
+                const ArrayChangeMetrics changeMetrics = change->metrics();
                 changeList->append( changeMetrics );
             }
 
@@ -172,23 +172,23 @@ bool PieceTableChangeHistory::revertBeforeChange( PieceTable *pieceTable, int ch
     {
         for( --currentChangeId; changeId<=currentChangeId ; --currentChangeId )
         {
-            const AbstractPieceTableChange *change = mChangeStack[currentChangeId];
+            const AbstractPieceTableChange* change = mChangeStack[currentChangeId];
 
             if( change->type() == AbstractPieceTableChange::GroupId )
             {
-                const GroupPieceTableChange *groupChange = static_cast<const GroupPieceTableChange *>(change);
-                const KDE::SectionList changedSectionList = groupChange->revertGroup( pieceTable );
-                changedRanges->addSectionList( changedSectionList );
+                const GroupPieceTableChange* groupChange = static_cast<const GroupPieceTableChange*>(change);
+                const AddressRangeList changedRangeList = groupChange->revertGroup( pieceTable );
+                changedRanges->addAddressRangeList( changedRangeList );
 
-                const QList<KDE::ArrayChangeMetrics> changeMetricsList = groupChange->groupMetrics( true );
+                const QList<ArrayChangeMetrics> changeMetricsList = groupChange->groupMetrics( true );
                 *changeList += changeMetricsList;
             }
             else
             {
-                const KDE::Section changedSection = change->revert( pieceTable );
-                changedRanges->addSection( changedSection );
+                const AddressRange changedRange = change->revert( pieceTable );
+                changedRanges->addAddressRange( changedRange );
 
-                KDE::ArrayChangeMetrics changeMetrics = change->metrics();
+                ArrayChangeMetrics changeMetrics = change->metrics();
                 changeMetrics.revert();
                 changeList->append( changeMetrics );
             }

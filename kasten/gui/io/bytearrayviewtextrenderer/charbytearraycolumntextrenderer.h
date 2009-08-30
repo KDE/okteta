@@ -39,17 +39,18 @@ namespace Kasten
 class CharByteArrayColumnTextRenderer : public AbstractByteArrayColumnTextRenderer
 {
   public:
-    CharByteArrayColumnTextRenderer( const Okteta::AbstractByteArrayModel *byteArrayModel, int offset,
-        const Okteta::CoordRange &coordRange,
+    CharByteArrayColumnTextRenderer( const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset,
+        const Okteta::CoordRange& coordRange,
         int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
-        const QString &charCodecName, QChar substituteChar, QChar undefinedChar );
+        const QString& charCodecName, QChar substituteChar, QChar undefinedChar );
+
     virtual ~CharByteArrayColumnTextRenderer();
 
   protected: // AbstractByteArrayColumnTextRenderer API
     virtual void renderLine( QTextStream* stream, bool isSubline ) const;
 
   protected:
-    const Okteta::CharCodec *mCharCodec;
+    const Okteta::CharCodec* mCharCodec;
     const QChar mSubstituteChar;
     const QChar mUndefinedChar;
 };

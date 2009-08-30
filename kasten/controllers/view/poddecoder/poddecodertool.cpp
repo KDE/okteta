@@ -91,8 +91,8 @@ void PODDecoderTool::setTargetModel( AbstractModel* model )
     if( mByteArrayModel && mByteArrayDisplay )
     {
         mCursorIndex = mByteArrayDisplay->cursorPosition();
-        connect( mByteArrayDisplay, SIGNAL(cursorPositionChanged( int )), SLOT(onCursorPositionChange( int )) );
-        connect( mByteArrayModel, SIGNAL(contentsChanged( const KDE::ArrayChangeMetricsList& )),
+        connect( mByteArrayDisplay, SIGNAL(cursorPositionChanged( Okteta::Address )), SLOT(onCursorPositionChange( Okteta::Address )) );
+        connect( mByteArrayModel, SIGNAL(contentsChanged( const Okteta::ArrayChangeMetricsList& )),
                  SLOT(onContentsChange()) );
         onCharCodecChange( mByteArrayDisplay->charCodingName() );
         connect( mByteArrayDisplay,  SIGNAL(charCodecChanged( const QString& )),
@@ -181,7 +181,7 @@ void PODDecoderTool::setUndefinedChar( const QChar& undefinedChar )
 }
 #endif
 
-void PODDecoderTool::onCursorPositionChange( int pos )
+void PODDecoderTool::onCursorPositionChange( Okteta::Address pos )
 {
     mCursorIndex = pos;
     updateData();
@@ -226,7 +226,7 @@ void PODDecoderTool::updateData()
 
     const bool hasDataSet = ( dataSize > 0 );
     if( hasDataSet )
-        mByteArrayModel->copyTo( (char*)mPODData.rawData(), mCursorIndex, mPODData.Size );
+        mByteArrayModel->copyTo( mPODData.rawData(), mCursorIndex, mPODData.Size );
 
     const bool hasChanged = mPODData.updateRawData( dataSize );
 

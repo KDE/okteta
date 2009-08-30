@@ -52,8 +52,8 @@
 namespace Okteta
 {
 
-static const int DefaultStartOffset = 0;//5;
-static const int DefaultFirstLineOffset = 0;
+static const Address DefaultStartOffset = 0;//5;
+static const Address DefaultFirstLineOffset = 0;
 static const int DefaultNoOfBytesPerLine =  16;
 
 // zooming is done in steps of font size points
@@ -69,51 +69,51 @@ static const AbstractByteArrayView::ResizeStyle DefaultResizeStyle = AbstractByt
 static const char OctetStreamFormatName[] = "application/octet-stream";
 
 
-class NullModel : public Okteta::AbstractByteArrayModel
+class NullModel : public AbstractByteArrayModel
 {
   public:
     NullModel();
     virtual ~NullModel();
 
   public: // data access API
-    virtual char datum( unsigned int offset ) const;
-    virtual int size() const;
+    virtual Byte byte( Address offset ) const;
+    virtual Size size() const;
 
   public: // state read API
     virtual bool isModified() const;
 
   public: // modification API
-    virtual unsigned int replace( const KDE::Section& removeSection, const char* insertData, unsigned int insertLength );
-    virtual bool swap( int firstStart, const KDE::Section& secondSection );
-    virtual int fill( const char fillChar, unsigned int offset = 0, int fillLength = -1 );
-    virtual void setDatum( unsigned int offset, const char value );
+    virtual Size replace( const AddressRange& removeSection, const Byte* insertData, int insertLength );
+    virtual bool swap( Address firstStart, const AddressRange& secondRange);
+    virtual Size fill( Byte fillByte, Address offset = 0, Size fillLength = -1 );
+    virtual void setByte( Address offset, Byte byte );
     virtual void setModified( bool modified );
 };
 
 NullModel::NullModel() {}
 NullModel::~NullModel() {}
 
-char NullModel::datum( unsigned int offset ) const { Q_UNUSED(offset) return 0; }
-int NullModel::size() const { return 0; }
+Byte NullModel::byte( Address offset ) const { Q_UNUSED(offset) return 0; }
+Size NullModel::size() const { return 0; }
 bool NullModel::isModified() const { return false; }
-unsigned int NullModel::replace( const KDE::Section& removeSection, const char* insertData, unsigned int insertLength )
+Size NullModel::replace( const AddressRange& removeSection, const Byte* insertData, int insertLength )
 {
 Q_UNUSED(removeSection) Q_UNUSED(insertData) Q_UNUSED(insertLength)
     return 0;
 }
-bool NullModel::swap( int firstStart, const KDE::Section& secondSection )
+bool NullModel::swap( Address firstStart, const AddressRange& secondRange )
 {
-Q_UNUSED(firstStart) Q_UNUSED(secondSection)
+Q_UNUSED(firstStart) Q_UNUSED(secondRange)
     return false;
 }
-int NullModel::fill( const char fillChar, unsigned int offset, int fillLength )
+Size NullModel::fill( Byte fillByte, Address offset, Size fillLength )
 {
-Q_UNUSED(fillChar) Q_UNUSED(offset) Q_UNUSED(fillLength)
+Q_UNUSED(fillByte) Q_UNUSED(offset) Q_UNUSED(fillLength)
     return 0;
 }
-void NullModel::setDatum( unsigned int offset, const char value )
+void NullModel::setByte( Address offset, Byte byte )
 {
-Q_UNUSED(offset) Q_UNUSED(value)
+Q_UNUSED(offset) Q_UNUSED(byte)
 }
 void NullModel::setModified( bool modified )
 {
@@ -148,9 +148,9 @@ void AbstractByteArrayViewPrivate::init()
     mTableLayout->setLength( mByteArrayModel->size() );
     mTableLayout->setNoOfLinesPerPage( q->noOfLinesPerPage() );
 
-    mValueCodec = Okteta::ValueCodec::createCodec( (Okteta::ValueCoding)DefaultValueCoding );
+    mValueCodec = ValueCodec::createCodec( (ValueCoding)DefaultValueCoding );
     mValueCoding = DefaultValueCoding;
-    mCharCodec = Okteta::CharCodec::createCodec( (Okteta::CharCoding)DefaultCharCoding );
+    mCharCodec = CharCodec::createCodec( (CharCoding)DefaultCharCoding );
     mCharCoding = DefaultCharCoding;
 
     mTabController = new KTabController( q, 0 );
@@ -163,7 +163,7 @@ void AbstractByteArrayViewPrivate::init()
     setWheelController( mZoomWheelController );
 }
 
-void AbstractByteArrayViewPrivate::setByteArrayModel( Okteta::AbstractByteArrayModel* byteArrayModel )
+void AbstractByteArrayViewPrivate::setByteArrayModel( AbstractByteArrayModel* byteArrayModel )
 {
     Q_Q( AbstractByteArrayView );
 
@@ -183,10 +183,10 @@ void AbstractByteArrayViewPrivate::setByteArrayModel( Okteta::AbstractByteArrayM
 
     q->connect( mByteArrayModel, SIGNAL(readOnlyChanged( bool )),
                 q, SLOT(onByteArrayReadOnlyChange( bool )) );
-    q->connect( mByteArrayModel, SIGNAL(contentsChanged( const KDE::ArrayChangeMetricsList& )),
-                q, SLOT(onContentsChanged( const KDE::ArrayChangeMetricsList& )) );
+    q->connect( mByteArrayModel, SIGNAL(contentsChanged( const Okteta::ArrayChangeMetricsList& )),
+                q, SLOT(onContentsChanged( const Okteta::ArrayChangeMetricsList& )) );
 
-    Okteta::Bookmarkable *bookmarks = qobject_cast<Okteta::Bookmarkable*>( mByteArrayModel );
+    Bookmarkable *bookmarks = qobject_cast<Bookmarkable*>( mByteArrayModel );
     if( bookmarks )
     {
         q->connect( mByteArrayModel, SIGNAL(bookmarksAdded( const QList<Okteta::Bookmark>& )),
@@ -194,7 +194,7 @@ void AbstractByteArrayViewPrivate::setByteArrayModel( Okteta::AbstractByteArrayM
         q->connect( mByteArrayModel, SIGNAL(bookmarksRemoved( const QList<Okteta::Bookmark>& )),
                     q, SLOT(onBookmarksChange(const QList<Okteta::Bookmark>&)) );
     }
-    Okteta::Versionable* versionControl = qobject_cast<Okteta::Versionable*>( mByteArrayModel );
+    Versionable* versionControl = qobject_cast<Versionable*>( mByteArrayModel );
     if( versionControl )
     {
         q->connect( mByteArrayModel, SIGNAL(revertedToVersionIndex( int )),
@@ -308,7 +308,7 @@ void AbstractByteArrayViewPrivate::setZoomLevel( double zoomLevel )
 }
 
 
-void AbstractByteArrayViewPrivate::setStartOffset( int startOffset )
+void AbstractByteArrayViewPrivate::setStartOffset( Address startOffset )
 {
     Q_Q( AbstractByteArrayView );
 
@@ -328,7 +328,7 @@ void AbstractByteArrayViewPrivate::setStartOffset( int startOffset )
     emit q->cursorPositionChanged( cursorPosition() );
 }
 
-void AbstractByteArrayViewPrivate::setFirstLineOffset( int firstLineOffset )
+void AbstractByteArrayViewPrivate::setFirstLineOffset( Address firstLineOffset )
 {
     Q_Q( AbstractByteArrayView );
 
@@ -433,8 +433,8 @@ void AbstractByteArrayViewPrivate::setValueCoding( AbstractByteArrayView::ValueC
     if( mValueCoding == valueCoding )
         return;
 
-    Okteta::ValueCodec* newValueCodec
-        = Okteta::ValueCodec::createCodec( (Okteta::ValueCoding)valueCoding );
+    ValueCodec* newValueCodec
+        = ValueCodec::createCodec( (ValueCoding)valueCoding );
     if( newValueCodec == 0 )
         return;
 
@@ -447,8 +447,8 @@ void AbstractByteArrayViewPrivate::setCharCoding( AbstractByteArrayView::CharCod
     if( mCharCoding == charCoding )
         return;
 
-    Okteta::CharCodec* newCharCodec
-        = Okteta::CharCodec::createCodec( (Okteta::CharCoding)charCoding );
+    CharCodec* newCharCodec
+        = CharCodec::createCodec( (CharCoding)charCoding );
     if( newCharCodec == 0 )
         return;
 
@@ -461,8 +461,8 @@ void AbstractByteArrayViewPrivate::setCharCoding( const QString& charCodingName 
     if( mCharCodec->name() == charCodingName )
         return;
 
-    Okteta::CharCodec *newCharCodec =
-        Okteta::CharCodec::createCodec( charCodingName );
+    CharCodec *newCharCodec =
+        CharCodec::createCodec( charCodingName );
     if( newCharCodec == 0 )
         return;
 
@@ -472,15 +472,16 @@ void AbstractByteArrayViewPrivate::setCharCoding( const QString& charCodingName 
 }
 
 // TODO: make this use select( start, end )
-bool AbstractByteArrayViewPrivate::selectWord( /*unsigned TODO:change all unneeded signed into unsigned!*/ int index )
+bool AbstractByteArrayViewPrivate::selectWord( Address index )
 {
     Q_Q( AbstractByteArrayView );
 
     bool result = false;
+
     if( 0 <= index && index < mTableLayout->length()  )
     {
-        const Okteta::WordByteArrayService WBS( mByteArrayModel, mCharCodec );
-        const KDE::Section wordSection = WBS.wordSection( index );
+        const WordByteArrayService WBS( mByteArrayModel, mCharCodec );
+        const AddressRange wordSection = WBS.wordSection( index );
         if( wordSection.isValid() )
         {
             const bool oldHasSelection = mTableRanges->hasSelection();
@@ -523,7 +524,7 @@ void AbstractByteArrayViewPrivate::selectAll( bool select )
 
     if( select )
     {
-        mTableRanges->setSelection( KDE::Section(0,mTableLayout->length()-1) );
+        mTableRanges->setSelection( AddressRange(0,mTableLayout->length()-1) );
         mTableCursor->gotoEnd();
     }
     else
@@ -545,7 +546,7 @@ void AbstractByteArrayViewPrivate::selectAll( bool select )
 }
 
 
-void AbstractByteArrayViewPrivate::setCursorPosition( int index, bool behind )
+void AbstractByteArrayViewPrivate::setCursorPosition( Address index, bool behind )
 {
     Q_Q( AbstractByteArrayView );
 
@@ -581,7 +582,7 @@ void AbstractByteArrayViewPrivate::setCursorPosition( int index, bool behind )
 
 
 
-void AbstractByteArrayViewPrivate::setSelectionCursorPosition( int index )
+void AbstractByteArrayViewPrivate::setSelectionCursorPosition( Address index )
 {
     Q_Q( AbstractByteArrayView );
 
@@ -607,14 +608,14 @@ void AbstractByteArrayViewPrivate::setSelectionCursorPosition( int index )
 
 
 
-void AbstractByteArrayViewPrivate::setSelection( const KDE::Section& _selection )
+void AbstractByteArrayViewPrivate::setSelection( const AddressRange& _selection )
 {
     Q_Q( AbstractByteArrayView );
 
-    KDE::Section selection( _selection );
+    AddressRange selection( _selection );
     selection.restrictEndTo( mTableLayout->length()-1 );
 
-    const KDE::Section oldSelection = mTableRanges->selection();
+    const AddressRange oldSelection = mTableRanges->selection();
 
     if( ! selection.isValid()
         || selection == oldSelection )
@@ -647,10 +648,10 @@ QByteArray AbstractByteArrayViewPrivate::selectedData() const
     if( !mTableRanges->hasSelection() )
         return QByteArray();
 
-    const KDE::Section selection = mTableRanges->selection();
+    const AddressRange selection = mTableRanges->selection();
     QByteArray data;
     data.resize( selection.width() );
-    byteArrayModel()->copyTo( data.data(), selection.start(), selection.width() );
+    byteArrayModel()->copyTo( reinterpret_cast<Byte*>(data.data()), selection.start(), selection.width() );
     return data;
 }
 
@@ -737,24 +738,24 @@ void AbstractByteArrayViewPrivate::insert( const QByteArray& data )
 
     if( mOverWrite )
     {
-        int lengthOfInserted;
+        Size lengthOfInserted;
         if( mTableRanges->hasSelection() )
         {
             // replacing the selection:
             // we restrict the replacement to the minimum length of selection and input
-            KDE::Section selection = mTableRanges->removeSelection();
+            AddressRange selection = mTableRanges->removeSelection();
             selection.restrictEndByWidth( data.size() );
-            lengthOfInserted = mByteArrayModel->replace( selection, data.data(), selection.width() );
+            lengthOfInserted = mByteArrayModel->replace( selection, reinterpret_cast<const Byte*>(data.constData()), selection.width() );
         }
         else
         {
-            const int length = mTableLayout->length();
+            const Size length = mTableLayout->length();
             if( !isCursorBehind() && length > 0 )
             {
                 // replacing the normal data, at least until the end
-                KDE::Section insertRange = KDE::Section::fromWidth( cursorPosition(), data.size() );
+                AddressRange insertRange = AddressRange::fromWidth( cursorPosition(), data.size() );
                 insertRange.restrictEndTo( length-1 );
-                lengthOfInserted = mByteArrayModel->replace( insertRange, data.data(), insertRange.width() );
+                lengthOfInserted = mByteArrayModel->replace( insertRange, reinterpret_cast<const Byte*>(data.constData()), insertRange.width() );
             }
             else
                 lengthOfInserted = 0;
@@ -773,7 +774,7 @@ void AbstractByteArrayViewPrivate::insert( const QByteArray& data )
         if( mTableRanges->hasSelection() )
         {
             // replacing the selection
-            const KDE::Section selection = mTableRanges->removeSelection();
+            const AddressRange selection = mTableRanges->removeSelection();
             mByteArrayModel->replace( selection, data );
         }
         else
@@ -793,7 +794,7 @@ void AbstractByteArrayViewPrivate::removeSelectedData()
     if( isEffectiveReadOnly() || mOverWrite ) //TODO: || mValueEditor->isInEditMode() )
         return;
 
-    const KDE::Section selection = mTableRanges->removeSelection();
+    const AddressRange selection = mTableRanges->removeSelection();
 
     mByteArrayModel->remove( selection );
 
@@ -877,10 +878,10 @@ bool AbstractByteArrayViewPrivate::event( QEvent* event )
 
         QString toolTip;
 
-        Okteta::Bookmarkable* bookmarks = qobject_cast<Okteta::Bookmarkable*>( mByteArrayModel );
+        Bookmarkable* bookmarks = qobject_cast<Bookmarkable*>( mByteArrayModel );
         if( bookmarks )
         {
-            const int index = indexByPoint( helpEvent->pos() );
+            const Address index = indexByPoint( helpEvent->pos() );
             if( index != -1 )
             {
                 if( bookmarks->containsBookmarkFor(index) )
@@ -973,11 +974,11 @@ void AbstractByteArrayViewPrivate::dropEvent( QDropEvent* dropEvent )
 }
 
 
-void AbstractByteArrayViewPrivate::onBookmarksChange( const QList<Okteta::Bookmark>& bookmarks )
+void AbstractByteArrayViewPrivate::onBookmarksChange( const QList<Bookmark>& bookmarks )
 {
-    foreach( const Okteta::Bookmark& bookmark, bookmarks )
+    foreach( const Bookmark& bookmark, bookmarks )
     {
-        const int position = bookmark.offset();
+        const Address position = bookmark.offset();
         mTableRanges->addChangedRange( position, position );
     }
 
@@ -1002,14 +1003,14 @@ void AbstractByteArrayViewPrivate::onByteArrayReadOnlyChange( bool isByteArrayRe
 }
 
 
-void AbstractByteArrayViewPrivate::onContentsChanged( const KDE::ArrayChangeMetricsList& changeList )
+void AbstractByteArrayViewPrivate::onContentsChanged( const ArrayChangeMetricsList& changeList )
 {
     Q_Q( AbstractByteArrayView );
 
     pauseCursor();
 
     const bool atEnd = mTableCursor->atEnd();
-    const int oldLength = mTableLayout->length(); // TODO: hack for mDataCursor->adaptSelectionToChange
+    const Size oldLength = mTableLayout->length(); // TODO: hack for mDataCursor->adaptSelectionToChange
     // update lengths
     int oldNoOfLines = q->noOfLines();
     mTableLayout->setLength( mByteArrayModel->size() );

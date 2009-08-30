@@ -23,20 +23,21 @@
 #ifndef XORBYTEARRAYFILTER_H
 #define XORBYTEARRAYFILTER_H
 
-
 ////
 #include "operandbytearrayfilterparameterset.h"
 //
 #include <abstractbytearrayfilter.h>
 
+
 class XOrByteArrayFilter : public AbstractByteArrayFilter
 {
   public:
     XOrByteArrayFilter();
+
     virtual ~XOrByteArrayFilter();
 
   public: // AbstractByteArrayFilter API
-    virtual bool filter( char *result, Okteta::AbstractByteArrayModel *model, const KDE::Section &section ) const;
+    virtual bool filter( Okteta::Byte* result, Okteta::AbstractByteArrayModel *model, const Okteta::AddressRange& range ) const;
     virtual AbstractByteArrayFilterParameterSet *parameterSet();
 
   protected:

@@ -23,21 +23,23 @@
 #ifndef BYTEARRAYJANUSVIEW_H
 #define BYTEARRAYJANUSVIEW_H
 
+// Okteta core
+#include <addressrange.h>
 // Qt
 #include <QtGui/QWidget>
 
-namespace Okteta {
-class AbstractByteArrayModel;
-}
 namespace KDE {
 class Section;
 }
 class QHBoxLayout;
 class QMimeData;
 
+
 namespace Okteta
 {
 class AbstractByteArrayView;
+class AbstractByteArrayModel;
+
 
 class ByteArrayJanusView : public QWidget
 {
@@ -51,7 +53,7 @@ class ByteArrayJanusView : public QWidget
     virtual ~ByteArrayJanusView();
 
   public:
-    void setByteArrayModel( Okteta::AbstractByteArrayModel* byteArrayModel );
+    void setByteArrayModel( AbstractByteArrayModel* byteArrayModel );
 
     void setZoomLevel( double Level );
     double zoomLevel() const;
@@ -61,9 +63,9 @@ class ByteArrayJanusView : public QWidget
     bool isReadOnly() const;
 
   public: // cursor API
-    void setCursorPosition( int cursorPosition );
-    void setSelectionCursorPosition( int index );
-    int cursorPosition() const;
+    void setCursorPosition( Address cursorPosition );
+    void setSelectionCursorPosition( Address index );
+    Address cursorPosition() const;
     QRect cursorRect() const;
 
   public: // codings
@@ -73,7 +75,7 @@ class ByteArrayJanusView : public QWidget
     int valueCoding() const;
 
   public:
-    void setSelection( int start, int end );
+    void setSelection( Address start, Address end );
     void selectAll( bool selectAll );
     void removeSelectedData();
     void pasteData( const QMimeData* data );
@@ -81,7 +83,7 @@ class ByteArrayJanusView : public QWidget
     bool hasSelectedData() const;
     QMimeData* selectionAsMimeData() const;
     bool canReadData( const QMimeData* data ) const;
-    KDE::Section selection() const;
+    AddressRange selection() const;
 
   public: // overwrite
     void setOverwriteMode( bool overwriteMode );
@@ -96,11 +98,11 @@ class ByteArrayJanusView : public QWidget
 
   public: // table layout
     void setResizeStyle( int resizeStyle );
-    void setStartOffset( int startOffset );
-    void setFirstLineOffset( int firstLineOffset );
+    void setStartOffset( Address startOffset );
+    void setFirstLineOffset( Address firstLineOffset );
     void setNoOfBytesPerLine( int noOfBytesPerLine );
-    int startOffset() const;
-    int firstLineOffset() const;
+    Address startOffset() const;
+    Address firstLineOffset() const;
     int noOfBytesPerLine() const;
     int resizeStyle() const;
 
@@ -126,8 +128,8 @@ class ByteArrayJanusView : public QWidget
     void readOnlyChanged( bool );
     void overwriteModeChanged( bool overwriteMode );
     void hasSelectedDataChanged( bool hasSelectedData );
-    void selectionChanged( const KDE::Section& selection );
-    void cursorPositionChanged( int cursorPosition );
+    void selectionChanged( const Okteta::AddressRange& selection );
+    void cursorPositionChanged( Okteta::Address cursorPosition );
     void valueCodingChanged( int valueCoding );
     void charCodecChanged( const QString& charCodingName );
     void focusChanged( bool hasFocus );

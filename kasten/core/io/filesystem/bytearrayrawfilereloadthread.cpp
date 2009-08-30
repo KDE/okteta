@@ -41,7 +41,11 @@ namespace Kasten
 
 ByteArrayRawFileReloadThread::ByteArrayRawFileReloadThread( QObject *parent,
     /*KByteArrayDocument *document,*/ const QString &filePath )
- : QThread( parent ), /*mDocument( document ),*/ mFilePath( filePath ), mSuccess( false )
+  : QThread( parent ), /*mDocument( document ),*/
+    mFilePath( filePath ),
+    mSuccess( false ),
+    mData( 0 ),
+    mSize( 0 )
 {
 //     mDocument->content()->moveToThread( this );
 //     mDocument->moveToThread( this );
@@ -55,8 +59,8 @@ void ByteArrayRawFileReloadThread::run()
     mSize = file.size();
 
     // TODO: should the decoder know this?
-    mData = new char[mSize];
-    inStream.readRawData( mData, mSize );
+    mData = new Okteta::Byte[mSize];
+    inStream.readRawData( reinterpret_cast<char*>(mData), mSize );
 
     //registerDiskModifyTime( file ); TODO move into synchronizer
 
@@ -71,7 +75,10 @@ void ByteArrayRawFileReloadThread::run()
 //         byteArray->setData( mData, mSize, false );
     }
     else
+    {
+        mSize = 0;
         delete [] mData;
+    }
 
     emit documentReloaded( mSuccess );
 }

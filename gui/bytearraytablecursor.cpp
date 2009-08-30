@@ -79,16 +79,16 @@ void ByteArrayTableCursor::gotoPreviousByte()
 }
 
 
-void ByteArrayTableCursor::gotoPreviousByte( int indexSteps )
+void ByteArrayTableCursor::gotoPreviousByte( Size indexSteps )
 {
     if( mBehind )
     {
         --indexSteps;
         mBehind = false;
     }
-    const int newIndex = mIndex - indexSteps;
+    const Address newIndex = mIndex - indexSteps;
     // would step before first position?
-    const int firstIndex = mLayout->byteArrayOffset();
+    const Address firstIndex = mLayout->byteArrayOffset();
     if( newIndex < firstIndex )
     {
         if( mIndex > firstIndex )
@@ -101,7 +101,7 @@ void ByteArrayTableCursor::gotoPreviousByte( int indexSteps )
 
 void ByteArrayTableCursor::gotoNextByte()
 {
-    const int lastIndex = mLayout->lastByteArrayOffset();
+    const Address lastIndex = mLayout->lastByteArrayOffset();
 
     if( mIndex < lastIndex )
     {
@@ -114,14 +114,14 @@ void ByteArrayTableCursor::gotoNextByte()
 }
 
 
-void ByteArrayTableCursor::gotoNextByte( int indexSteps ) // TODO: think about consistency with gotoNextByte!!!
+void ByteArrayTableCursor::gotoNextByte( Size indexSteps ) // TODO: think about consistency with gotoNextByte!!!
 {
     if( mBehind )
     {
         ++indexSteps;
         mBehind = false;
     }
-    const int newIndex = mIndex + indexSteps;
+    const Address newIndex = mIndex + indexSteps;
     // would step behind the end?
     if( newIndex > mLayout->lastByteArrayOffset() )
         gotoEnd();
@@ -172,7 +172,7 @@ void ByteArrayTableCursor::gotoDown()
 
 void ByteArrayTableCursor::gotoLineStart()
 {
-    const int oldIndex = mIndex;
+    const Address oldIndex = mIndex;
     mIndex = mLayout->indexAtFirstLinePosition( mCoord.line() );
     mCoord.goLeft( oldIndex-mIndex );
     mBehind = false;
@@ -215,7 +215,7 @@ void ByteArrayTableCursor::gotoEnd()
 }
 
 
-void ByteArrayTableCursor::gotoCIndex( int index )
+void ByteArrayTableCursor::gotoCIndex( Address index )
 {
     if( mLayout->length() > 0 )
     {
@@ -257,7 +257,7 @@ void ByteArrayTableCursor::stepToEnd()
 }
 
 
-void ByteArrayTableCursor::gotoIndex( int index )
+void ByteArrayTableCursor::gotoIndex( Address index )
 {
     mIndex = index;
     mCoord = mLayout->coordOfIndex( mIndex );
@@ -295,7 +295,7 @@ void ByteArrayTableCursor::updateCoord()
 void ByteArrayTableCursor::gotoPageUp()
 {
     const int noOfLinesPerPage = mLayout->noOfLinesPerPage();
-    const int newIndex = mIndex - noOfLinesPerPage * mLayout->noOfBytesPerLine();
+    const Address newIndex = mIndex - noOfLinesPerPage * mLayout->noOfBytesPerLine();
     if( newIndex >= mLayout->byteArrayOffset() )
     {
         mIndex = newIndex;
@@ -315,7 +315,7 @@ void ByteArrayTableCursor::gotoPageUp()
 void ByteArrayTableCursor::gotoPageDown()
 {
     const int noOfLinesPerPage = mLayout->noOfLinesPerPage();
-    const int newIndex = mIndex + noOfLinesPerPage * mLayout->noOfBytesPerLine();
+    const Address newIndex = mIndex + noOfLinesPerPage * mLayout->noOfBytesPerLine();
     if( newIndex <= mLayout->lastByteArrayOffset() )
     {
         mIndex = newIndex;
@@ -326,13 +326,13 @@ void ByteArrayTableCursor::gotoPageDown()
 }
 
 
-int ByteArrayTableCursor::validIndex() const
+Address ByteArrayTableCursor::validIndex() const
 {
     return ( mLayout->byteArrayOffset() <= mIndex && mIndex <= mLayout->lastByteArrayOffset() ) ? mIndex : -1;
 }
 
-int ByteArrayTableCursor::indexAtLineStart() const { return mLayout->indexAtFirstLinePosition( mCoord.line() ); }
-int ByteArrayTableCursor::indexAtLineEnd()   const { return mLayout->indexAtLastLinePosition( mCoord.line() ); }
+Address ByteArrayTableCursor::indexAtLineStart() const { return mLayout->indexAtFirstLinePosition( mCoord.line() ); }
+Address ByteArrayTableCursor::indexAtLineEnd()   const { return mLayout->indexAtLastLinePosition( mCoord.line() ); }
 
 
 bool ByteArrayTableCursor::atStart()     const { return mIndex == mLayout->byteArrayOffset(); }
@@ -344,20 +344,20 @@ bool ByteArrayTableCursor::atLineStart() const { return mLayout->atFirstLinePosi
 bool ByteArrayTableCursor::atLineEnd()   const { return mLayout->atLastLinePosition( mCoord ); }
 
 // TODO: oldLength is a hack, as DataLayout is already updated and used by e.g. gotoCIndex
-void ByteArrayTableCursor::adaptToChanges( const KDE::ArrayChangeMetricsList& changeList, int oldLength )
+void ByteArrayTableCursor::adaptToChanges( const ArrayChangeMetricsList& changeList, Size oldLength )
 {
-    foreach( const KDE::ArrayChangeMetrics& change, changeList )
+    foreach( const ArrayChangeMetrics& change, changeList )
     {
         // cursor affected?
         if( mIndex >= change.offset() )
         {
             switch( change.type() )
             {
-            case KDE::ArrayChangeMetrics::Replacement:
+            case ArrayChangeMetrics::Replacement:
                 oldLength += change.lengthChange();
                 if( oldLength > 0 )
                 {
-                    const int newIndex =
+                    const Address newIndex =
                         // cursor behind the removed section?
                         ( mIndex >= change.offset()+change.removeLength() ) ? mIndex + change.lengthChange() :
                         // cursor at substituted section?
@@ -380,7 +380,7 @@ void ByteArrayTableCursor::adaptToChanges( const KDE::ArrayChangeMetricsList& ch
                     return;
                 }
                 break;
-            case KDE::ArrayChangeMetrics::Swapping:
+            case ArrayChangeMetrics::Swapping:
                 if( mIndex < change.secondStart() )
                 {
                     mIndex += change.secondLength();

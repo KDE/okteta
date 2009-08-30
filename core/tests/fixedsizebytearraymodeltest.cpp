@@ -27,24 +27,23 @@
 // Qt
 #include <QtTest/QtTest>
 
-using namespace KDE;
-using namespace Okteta;
 
-
+namespace Okteta
+{
 
 // test the compare function
 // uses a comparison buffer of the same size
 // changes the first, a middle, and the last char to a greater or smaller char and compares
 void FixedSizeByteArrayModelTest::testCompare()
 {
-  int Size = 60;
+  const Size BaseSize = 60;
   // create a working buffer
-  FixedSizeByteArrayModel Buffer( Size, 'b' );
-  FixedSizeByteArrayModel OtherBuffer( Size );
+  FixedSizeByteArrayModel Buffer( BaseSize, 'b' );
+  FixedSizeByteArrayModel OtherBuffer( BaseSize );
   OtherBuffer.fill( 'b' );
 
-  int Last = Size-1;
-  Section FullRange(0,Last);
+  const Address Last = BaseSize-1;
+  AddressRange FullRange(0,Last);
   // same size and equal
   QCOMPARE( Buffer.compare(OtherBuffer), 0 );
   // same size and last smaller
@@ -54,10 +53,10 @@ void FixedSizeByteArrayModelTest::testCompare()
   Buffer.rawData()[Last] = 'a';
   QVERIFY( Buffer.compare(OtherBuffer) < 0 );
   // same size and middle smaller
-  Buffer.rawData()[Size/2] = 'c';
+  Buffer.rawData()[BaseSize/2] = 'c';
   QVERIFY( Buffer.compare(OtherBuffer) > 0 );
   // same size and middle greater
-  Buffer.rawData()[Size/2] = 'a';
+  Buffer.rawData()[BaseSize/2] = 'a';
   QVERIFY( Buffer.compare(OtherBuffer) < 0 );
   // same size and first smaller
   Buffer.rawData()[0] = 'c';
@@ -74,18 +73,18 @@ void KDataBufferIfTest::testCopy()
 //  char[] TestArray = new char[OtherBuffer->size()];
 //  OtherBuffer->set( 't' );
 //  DataBuffwer
-//  QVERIFY( "copy() from begin",  OtherBuffer->compare(Buffer,Section( 0, CopySize, true ),0) == 0 );
+//  QVERIFY( "copy() from begin",  OtherBuffer->compare(Buffer,AddressRange( 0, CopySize, true ),0) == 0 );
 //  delete [] TestArray;
 
-  int Size = 60;
+  int BaseSize = 60;
   int CopySize = 20;
   // create a working buffer
-  FixedSizeByteArrayModel Buffer( Size, 'b' );
-  FixedSizeByteArrayModel OtherBuffer( Size );
+  FixedSizeByteArrayModel Buffer( BaseSize, 'b' );
+  FixedSizeByteArrayModel OtherBuffer( BaseSize );
   OtherBuffer.fill( 'a' );
 
-  int Last = Size-1;
-  Section FullRange(0,Last);
+  int Last = BaseSize-1;
+  AddressRange FullRange(0,Last);
 
   // copy from
   Buffer.copy( OtherBuffer, 0, CopySize );
@@ -117,6 +116,6 @@ void KDataBufferIfTest::testCopy()
   QVERIFY( "copy() to before end",  OtherBuffer->compare(Buffer,0,CopySize,E) == 0 );
 }
 */
+}
 
-
-QTEST_MAIN( FixedSizeByteArrayModelTest )
+QTEST_MAIN( Okteta::FixedSizeByteArrayModelTest )

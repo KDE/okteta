@@ -38,12 +38,12 @@ ModSum32ByteArrayChecksumAlgorithm::ModSum32ByteArrayChecksumAlgorithm()
 AbstractByteArrayChecksumParameterSet* ModSum32ByteArrayChecksumAlgorithm::parameterSet() { return &mParameterSet; }
 
 bool ModSum32ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
-                                                            const Okteta::AbstractByteArrayModel* model, const KDE::Section& section ) const
+                                                            const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const
 {
     const bool useLittleEndian = ( mParameterSet.endianness() == LittleEndian );
     quint32 modSum = useLittleEndian ?
-        calculateModSumWithLittleEndian( model, section ) :
-        calculateModSumWithBigEndian( model, section );
+        calculateModSumWithLittleEndian( model, range ) :
+        calculateModSumWithBigEndian( model, range );
 
     modSum = ~modSum + 1;
 
@@ -54,65 +54,65 @@ bool ModSum32ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
     return true;
 }
 
-quint32 ModSum32ByteArrayChecksumAlgorithm::calculateModSumWithBigEndian( const Okteta::AbstractByteArrayModel* model, const KDE::Section& section ) const
+quint32 ModSum32ByteArrayChecksumAlgorithm::calculateModSumWithBigEndian( const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const
 {
     quint32 modSum = 0x000000;
-    int nextBlockEnd = section.start() + CalculatedByteCountSignalLimit;
+    Okteta::Address nextBlockEnd = range.start() + CalculatedByteCountSignalLimit;
 
     // TODO: move padding checks into extra code before and after loop
-    for( int i = section.start(); i<=section.end(); ++i )
+    for( Okteta::Address i = range.start(); i<=range.end(); ++i )
     {
-        quint32 value = (quint32)(quint8)( model->datum(i) ) << 24;
+        quint32 value = (quint32)(quint8)( model->byte(i) ) << 24;
         ++i;
-        if( i<=section.end() )
+        if( i<=range.end() )
         {
-            value |= (quint32)(quint8)( model->datum(i) ) << 16;
+            value |= (quint32)(quint8)( model->byte(i) ) << 16;
             ++i;
-            if( i<=section.end() )
+            if( i<=range.end() )
             {
-                value |= (quint32)(quint8)( model->datum(i) ) << 8;
+                value |= (quint32)(quint8)( model->byte(i) ) << 8;
                 ++i;
-                if( i<=section.end() )
-                    value |= (quint32)(quint8)( model->datum(i) );
+                if( i<=range.end() )
+                    value |= (quint32)(quint8)( model->byte(i) );
             }
         }
 
         modSum += value;
 #if 0
-        const uchar value = (crcBits & 0xFF) + model->datum( i );
+        const uchar value = (crcBits & 0xFF) + model->byte( i );
         crcBits >>= 8;
         crcBits ^= lookupTable[value];
 #endif
         if( i >= nextBlockEnd )
         {
             nextBlockEnd += CalculatedByteCountSignalLimit;
-            emit calculatedBytes( section.localIndex(i)+1 );
+            emit calculatedBytes( range.localIndex(i)+1 );
         }
     }
 
     return modSum;
 }
 
-quint32 ModSum32ByteArrayChecksumAlgorithm::calculateModSumWithLittleEndian( const Okteta::AbstractByteArrayModel* model, const KDE::Section& section ) const
+quint32 ModSum32ByteArrayChecksumAlgorithm::calculateModSumWithLittleEndian( const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const
 {
     quint32 modSum = 0x000000;
-    int nextBlockEnd = section.start() + CalculatedByteCountSignalLimit;
+    Okteta::Address nextBlockEnd = range.start() + CalculatedByteCountSignalLimit;
 
     // TODO: move padding checks into extra code before and after loop
-    for( int i = section.start(); i<=section.end(); ++i )
+    for( Okteta::Address i = range.start(); i<=range.end(); ++i )
     {
-        quint32 value = (quint32)(quint8)( model->datum(i) );
+        quint32 value = (quint32)(quint8)( model->byte(i) );
         ++i;
-        if( i<=section.end() )
+        if( i<=range.end() )
         {
-            value |= (quint32)(quint8)( model->datum(i) ) << 8;
+            value |= (quint32)(quint8)( model->byte(i) ) << 8;
             ++i;
-            if( i<=section.end() )
+            if( i<=range.end() )
             {
-                value |= (quint32)(quint8)( model->datum(i) ) << 16;
+                value |= (quint32)(quint8)( model->byte(i) ) << 16;
                 ++i;
-                if( i<=section.end() )
-                    value |= (quint32)(quint8)( model->datum(i) ) << 24;
+                if( i<=range.end() )
+                    value |= (quint32)(quint8)( model->byte(i) ) << 24;
             }
         }
 
@@ -121,7 +121,7 @@ quint32 ModSum32ByteArrayChecksumAlgorithm::calculateModSumWithLittleEndian( con
         if( i >= nextBlockEnd )
         {
             nextBlockEnd += CalculatedByteCountSignalLimit;
-            emit calculatedBytes( section.localIndex(i)+1 );
+            emit calculatedBytes( range.localIndex(i)+1 );
         }
     }
 

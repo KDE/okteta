@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Core library, part of the KDE project.
 
-    Copyright 2003,2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -30,11 +30,11 @@
 namespace Okteta
 {
 
-ByteArrayModel::ByteArrayModel( char *data, unsigned int size, int rawSize, bool keepMemory )
+ByteArrayModel::ByteArrayModel( Byte* data, int size, int rawSize, bool keepMemory )
  : d( new ByteArrayModelPrivate(this,data,size,rawSize,keepMemory) )
 {}
 
-ByteArrayModel::ByteArrayModel( const char *data, unsigned int size )
+ByteArrayModel::ByteArrayModel( const Byte* data, int size )
  : d( new ByteArrayModelPrivate(this,data,size) )
 {}
 
@@ -43,8 +43,8 @@ ByteArrayModel::ByteArrayModel( int size, int maxSize )
 {}
 
 
-char ByteArrayModel::datum( unsigned int offset ) const { return d->datum(offset); }
-int ByteArrayModel::size()                        const { return d->size(); }
+Byte ByteArrayModel::byte( Address offset ) const { return d->byte(offset); }
+Size ByteArrayModel::size()                 const { return d->size(); }
 
 bool ByteArrayModel::isReadOnly()   const { return d->isReadOnly(); }
 bool ByteArrayModel::isModified()   const { return d->isModified(); }
@@ -55,10 +55,12 @@ void ByteArrayModel::setMaxSize( int maxSize )          { d->setMaxSize( maxSize
 void ByteArrayModel::setKeepsMemory( bool keepsMemory ) { d->setKeepsMemory( keepsMemory ); }
 void ByteArrayModel::setAutoDelete( bool autoDelete )   { d->setAutoDelete( autoDelete ); }
 
-void ByteArrayModel::setData( char *data, unsigned int size, int rawSize, bool keepMemory )
-{ d->setData( data, size, rawSize, keepMemory ); }
+void ByteArrayModel::setData( Byte* data, int size, int rawSize, bool keepMemory )
+{
+    d->setData( data, size, rawSize, keepMemory );
+}
 
-char *ByteArrayModel::data()       const { return d->data(); }
+Byte* ByteArrayModel::data()       const { return d->data(); }
 int ByteArrayModel::maxSize()      const { return d->maxSize(); }
 bool ByteArrayModel::keepsMemory() const { return d->keepsMemory(); }
 bool ByteArrayModel::autoDelete()  const { return d->autoDelete(); }
@@ -66,48 +68,48 @@ bool ByteArrayModel::autoDelete()  const { return d->autoDelete(); }
 void ByteArrayModel::signalContentsChanged( int start, int end )
 {
     const int length = end - start + 1;
-    emit contentsChanged( KDE::ArrayChangeMetricsList::oneReplacement(start,length,length) );
+    emit contentsChanged( ArrayChangeMetricsList::oneReplacement(start,length,length) );
 }
 
 
-void ByteArrayModel::setDatum( unsigned int offset, const char datum )
+void ByteArrayModel::setByte( Address offset, Byte byte )
 {
-    d->setDatum( offset, datum );
+    d->setByte( offset, byte );
 }
 
-int ByteArrayModel::insert( int at, const char *data, int length )
+Size ByteArrayModel::insert( Address offset, const Byte* insertData, int insertLength )
 {
-    return d->insert( at, data, length );
+    return d->insert( offset, insertData, insertLength );
 }
 
-int ByteArrayModel::remove( const KDE::Section& section )
+Size ByteArrayModel::remove( const AddressRange& removeRange )
 {
-    return d->remove( section );
+    return d->remove( removeRange );
 }
 
-unsigned int ByteArrayModel::replace( const KDE::Section& before, const char* after, unsigned int afterLength )
+Size ByteArrayModel::replace( const AddressRange& removeRange, const Byte* insertData, int insertLength )
 {
-    return d->replace( before, after, afterLength );
+    return d->replace( removeRange, insertData, insertLength );
 }
 
-bool ByteArrayModel::swap( int firstStart, const KDE::Section& secondSection )
+bool ByteArrayModel::swap( Address firstStart, const AddressRange& secondRange )
 {
-    return d->swap( firstStart, secondSection );
+    return d->swap( firstStart, secondRange );
 }
 
-int ByteArrayModel::fill( const char fillChar, unsigned int from, int length )
+Size ByteArrayModel::fill( const Byte fillByte, Address offset, Size fillLength )
 {
-    return d->fill( fillChar, from, length );
+    return d->fill( fillByte, offset, fillLength );
 }
 
-int ByteArrayModel::indexOf( const char *searchString, int length, int from ) const
+Address ByteArrayModel::indexOf( const Byte* pattern, int patternLength, Address fromOffset ) const
 {
-    return d->indexOf( searchString, length, from );
+    return d->indexOf( pattern, patternLength, fromOffset );
 }
 
-int ByteArrayModel::lastIndexOf( const char *searchString, int length, int from ) const
+Address ByteArrayModel::lastIndexOf( const Byte* pattern, int patternLength, Address fromOffset ) const
 {
-    return d->lastIndexOf( searchString, length, from );
+    return d->lastIndexOf( pattern, patternLength, fromOffset );
 }
 
 void ByteArrayModel::addBookmarks( const QList<Okteta::Bookmark> &bookmarks )

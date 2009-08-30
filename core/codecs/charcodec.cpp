@@ -29,56 +29,57 @@
 #include <QtCore/QStringList>
 
 
-namespace Okteta {
-
-
-const QStringList &CharCodec::codecNames()
+namespace Okteta
 {
-  static QStringList CodecNames;
-  // first call?
-  if( CodecNames.isEmpty() )
-  {
-    CodecNames = KTextCharCodec::codecNames();
-    CodecNames.append( KEBCDIC1047CharCodec::codecName() );
-  }
 
-  return CodecNames;
+const QStringList& CharCodec::codecNames()
+{
+    static QStringList CodecNames;
+    // first call?
+    if( CodecNames.isEmpty() )
+    {
+        CodecNames = KTextCharCodec::codecNames();
+        CodecNames.append( KEBCDIC1047CharCodec::codecName() );
+    }
+
+    return CodecNames;
 }
 
 
-CharCodec *CharCodec::createCodec( const QString &Name )
+CharCodec* CharCodec::createCodec( const QString& name )
 {
-  CharCodec *Codec = 0;
+    CharCodec* result = 0;
 
-  if( KTextCharCodec::codecNames().indexOf(Name) != -1 )
-    Codec = KTextCharCodec::createCodec( Name );
-  else if( KEBCDIC1047CharCodec::codecName() == Name )
-    Codec = KEBCDIC1047CharCodec::create();
+    if( KTextCharCodec::codecNames().indexOf(name) != -1 )
+        result = KTextCharCodec::createCodec( name );
+    else if( KEBCDIC1047CharCodec::codecName() == name )
+        result = KEBCDIC1047CharCodec::create();
 
-  // ensure at least a codec
-  if( Codec == 0 )
-    Codec = KTextCharCodec::createLocalCodec();
+    // ensure at least a codec
+    if( result == 0 )
+        result = KTextCharCodec::createLocalCodec();
 
-  return Codec;
+    return result;
 }
 
 
-CharCodec *CharCodec::createCodec( CharCoding C )
+CharCodec *CharCodec::createCodec( CharCoding charCoding )
 {
-  CharCodec *Codec;
-  if( C == EBCDIC1047Encoding )
-    Codec = KEBCDIC1047CharCodec::create();
-  else if( C == ISO8859_1Encoding )
-    Codec = KTextCharCodec::createCodec( "ISO-8859-1" );
-  // LocalEncoding
-  else
-    Codec = 0;
+  CharCodec* result;
 
-  // ensure at least a codec
-  if( Codec == 0 )
-    Codec = KTextCharCodec::createLocalCodec();
+    if( charCoding == EBCDIC1047Encoding )
+        result = KEBCDIC1047CharCodec::create();
+    else if( charCoding == ISO8859_1Encoding )
+        result = KTextCharCodec::createCodec( "ISO-8859-1" );
+    // LocalEncoding
+    else
+        result = 0;
 
-  return Codec;
+    // ensure at least a codec
+    if( result == 0 )
+        result = KTextCharCodec::createLocalCodec();
+
+  return result;
 }
 
 }

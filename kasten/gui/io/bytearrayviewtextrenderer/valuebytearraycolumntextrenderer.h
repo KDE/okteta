@@ -38,17 +38,18 @@ namespace Kasten
 class ValueByteArrayColumnTextRenderer : public AbstractByteArrayColumnTextRenderer
 {
   public:
-    ValueByteArrayColumnTextRenderer( const Okteta::AbstractByteArrayModel *byteArrayModel, int offset,
-        const Okteta::CoordRange &coordRange,
+    ValueByteArrayColumnTextRenderer( const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset,
+        const Okteta::CoordRange& coordRange,
         int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
         Okteta::ValueCoding valueCoding );
+
     virtual ~ValueByteArrayColumnTextRenderer();
 
   protected: // AbstractByteArrayColumnTextRenderer API
     virtual void renderLine( QTextStream* stream, bool isSubline ) const;
 
   protected:
-    const Okteta::ValueCodec *mValueCodec;
+    const Okteta::ValueCodec* mValueCodec;
 };
 
 }

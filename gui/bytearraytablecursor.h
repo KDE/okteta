@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -26,13 +26,9 @@
 // lib
 #include "coord.h"
 
-namespace KDE {
-class ArrayChangeMetricsList;
-}
-
 namespace Okteta
 {
-
+class ArrayChangeMetricsList;
 class ByteArrayTableLayout;
 
 
@@ -71,7 +67,7 @@ class ByteArrayTableCursor
 
   public: // state value access
     /** the index that is drawn at the actual coord */
-    int index() const;
+    Address index() const;
     /** the pos of the actual coord */
     int pos() const;
     /** the line of the actual coord */
@@ -84,11 +80,11 @@ class ByteArrayTableCursor
       * it's real index is the next one.
       * Attention: this could be outside the data's range if the cursor is behind the last byte!
       */
-    int realIndex() const;
+    Address realIndex() const;
     /** returns the true index if it is valid index that is it is inside the data's range.
       * Otherwise -1 is returned
       */
-    int validIndex() const;
+    Address validIndex() const;
 
     //bool isValid() const;
     /**
@@ -98,14 +94,14 @@ class ByteArrayTableCursor
 
   public: // index calculation service
     /** returns the index at the start of the cursor's line */
-    int indexAtLineStart() const;
+    Address indexAtLineStart() const;
     /** returns the index at the end of the cursor's line */
-    int indexAtLineEnd() const;
+    Address indexAtLineEnd() const;
 
   public: // navigation commands
-    void gotoIndex( int index );
+    void gotoIndex( Address index );
     void gotoCoord( const Coord& coord );
-    void gotoCIndex( int index );
+    void gotoCIndex( Address index );
     void gotoCCoord( const Coord& coord );
     /** sets the index to the real index, i.e. if "behind" one index, sets it to the next.
       * Undefined if the real index is invalid, or on the append pos if not allowed.
@@ -114,8 +110,8 @@ class ByteArrayTableCursor
 
     void gotoPreviousByte();
     void gotoNextByte();
-    void gotoPreviousByte( int indexSteps );
-    void gotoNextByte( int indexSteps );
+    void gotoPreviousByte( Size indexSteps );
+    void gotoNextByte( Size indexSteps );
     void gotoUp();
     void gotoDown();
     void gotoLineStart();
@@ -133,7 +129,7 @@ class ByteArrayTableCursor
     // TODO: make protected again
     void stepBehind();
     void updateCoord();
-    void adaptToChanges( const KDE::ArrayChangeMetricsList& changeList, int oldLength );
+    void adaptToChanges( const ArrayChangeMetricsList& changeList, Size oldLength );
 
   public: // logical state access
     bool atStart() const;
@@ -156,26 +152,26 @@ class ByteArrayTableCursor
     const ByteArrayTableLayout* mLayout;
 
     /** Position in buffer */
-    int mIndex;
+    Address mIndex;
     /** Position and Line */
     Coord mCoord;
 
     /** tells whether the cursor is actually behind the actual position.
       * This is used for selection to the end of a line or of the whole buffer.
       */
-    bool mBehind : 1;
+    bool mBehind :1;
 
     /** tells whether there could be a position behind the end of the layout */
-    bool mAppendPosEnabled : 1;
+    bool mAppendPosEnabled :1;
 };
 
 
-inline int ByteArrayTableCursor::index()          const { return mIndex; }
+inline Address ByteArrayTableCursor::index()      const { return mIndex; }
 inline int ByteArrayTableCursor::pos()            const { return mCoord.pos(); }
 inline int ByteArrayTableCursor::line()           const { return mCoord.line(); }
 inline Coord ByteArrayTableCursor::coord()        const { return mCoord; }
 inline bool ByteArrayTableCursor::isBehind()      const { return mBehind; }
-inline int ByteArrayTableCursor::realIndex()      const { return mBehind ? mIndex + 1 : mIndex; }
+inline Address ByteArrayTableCursor::realIndex()  const { return mBehind ? mIndex + 1 : mIndex; }
 inline bool ByteArrayTableCursor::appendPosEnabled() const { return mAppendPosEnabled; }
 
 inline void ByteArrayTableCursor::stepBehind() { mBehind = true; }

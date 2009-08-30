@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Core library, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,19 +23,20 @@
 #ifndef KPIECETABLE_ABSTRACTPIECETABLECHANGE_H
 #define KPIECETABLE_ABSTRACTPIECETABLECHANGE_H
 
+// lib
+#include "piece.h"
+//
+#include <arraychangemetrics.h>
 
 class QString;
 
-namespace KDE
-{
-class Section;
-class ArrayChangeMetrics;
-}
 
 namespace KPieceTable
 {
 
 class PieceTable;
+
+typedef Okteta::ArrayChangeMetrics ArrayChangeMetrics;
 
 /** class
   *@author Friedrich W. H. Kossebau
@@ -64,17 +65,17 @@ class AbstractPieceTableChange
     virtual QString description() const = 0;
 
     /// returns the storageOffset. Default returns -1.
-    virtual int storageOffset() const;
+    virtual Address storageOffset() const;
 
     /// returns true if successful, false otherwise. Default returns false.
-    virtual bool merge( const AbstractPieceTableChange *other );
+    virtual bool merge( const AbstractPieceTableChange* other );
 
-    virtual KDE::Section apply( PieceTable *pieceTable ) const = 0;
-    virtual KDE::Section revert( PieceTable *pieceTable ) const = 0;
+    virtual AddressRange apply( PieceTable* pieceTable ) const = 0;
+    virtual AddressRange revert( PieceTable* pieceTable ) const = 0;
 
-    virtual KDE::ArrayChangeMetrics metrics() const = 0;
+    virtual ArrayChangeMetrics metrics() const = 0;
     /// returns the size of the added data. Default returns 0.
-    virtual int dataSize() const;
+    virtual Size dataSize() const;
 };
 
 inline AbstractPieceTableChange::~AbstractPieceTableChange() {}

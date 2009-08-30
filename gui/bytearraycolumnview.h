@@ -63,7 +63,7 @@ class OKTETAGUI_EXPORT ByteArrayColumnView : public AbstractByteArrayView
   Q_PROPERTY( QChar SubstituteChar READ substituteChar WRITE setSubstituteChar )
 
   public:
-    explicit ByteArrayColumnView( Okteta::AbstractByteArrayModel* byteArrayModel = 0, QWidget* parent = 0 );
+    explicit ByteArrayColumnView( AbstractByteArrayModel* byteArrayModel = 0, QWidget* parent = 0 );
     virtual ~ByteArrayColumnView();
 
   public: // AbstractByteArrayView API
@@ -82,7 +82,7 @@ class OKTETAGUI_EXPORT ByteArrayColumnView : public AbstractByteArrayView
 
     virtual bool isByteTypeColored() const;
 
-    virtual void setByteArrayModel( Okteta::AbstractByteArrayModel* byteArrayModel );
+    virtual void setByteArrayModel( AbstractByteArrayModel* byteArrayModel );
     virtual void toggleOffsetColumn( bool offsetColumnVisible );
     virtual void setByteSpacingWidth( int/*KPixelX*/ byteSpacingWidth ) ;
     virtual void setNoOfGroupedBytes( int noOfGroupedBytes );
@@ -116,7 +116,7 @@ class OKTETAGUI_EXPORT ByteArrayColumnView : public AbstractByteArrayView
       * @param Point in viewport coordinate system
       * @return index of the byte that covers the point
       */
-    int indexByPoint(const QPoint& point ) const;
+    Address indexByPoint(const QPoint& point ) const;
 
   public: // modification access
 //    void repaintByte( int row, int column, bool Erase = true );
@@ -144,8 +144,8 @@ class OKTETAGUI_EXPORT ByteArrayColumnView : public AbstractByteArrayView
     Q_PRIVATE_SLOT( d_func(), void startDrag() )
 
   private: // Disabling copy constructor and operator= - not useful
-    ByteArrayColumnView( const ByteArrayColumnView & );
-    ByteArrayColumnView &operator=( const ByteArrayColumnView & );
+    ByteArrayColumnView( const ByteArrayColumnView& );
+    ByteArrayColumnView &operator=( const ByteArrayColumnView& );
 };
 
 }

@@ -53,8 +53,8 @@ Q_UNUSED( selection )
 }
 
 
-bool AbstractByteArrayStreamEncoder::encodeToStream( QIODevice *device,
-                                                      AbstractModel* model, const AbstractModelSelection* selection )
+bool AbstractByteArrayStreamEncoder::encodeToStream( QIODevice* device,
+                                                     AbstractModel* model, const AbstractModelSelection* selection )
 {
     const KByteArrayDisplay* byteArrayDisplay = qobject_cast<const KByteArrayDisplay*>( model );
 
@@ -68,10 +68,11 @@ bool AbstractByteArrayStreamEncoder::encodeToStream( QIODevice *device,
     const KByteArraySelection* byteArraySelection =
         selection ? static_cast<const KByteArraySelection*>( selection ) : 0;
 
-    const KDE::Section section = byteArraySelection && byteArraySelection->isValid() ? byteArraySelection->section() :
-                                   KDE::Section::fromWidth( 0, byteArray->size() );
+    const Okteta::AddressRange range = byteArraySelection && byteArraySelection->isValid() ?
+        byteArraySelection->range() :
+        Okteta::AddressRange::fromWidth( 0, byteArray->size() );
 
-    const bool success = encodeDataToStream( device, byteArrayDisplay, byteArray, section );
+    const bool success = encodeDataToStream( device, byteArrayDisplay, byteArray, range );
 
     return success;
 }
@@ -90,16 +91,16 @@ QString AbstractByteArrayStreamEncoder::previewData( AbstractModel* model, const
     const KByteArraySelection* byteArraySelection =
         selection ? static_cast<const KByteArraySelection*>( selection ) : 0;
 
-    KDE::Section section = byteArraySelection && byteArraySelection->isValid() ?
-        byteArraySelection->section() :
-        KDE::Section::fromWidth( 0, byteArray->size() );
-    section.restrictEndByWidth( MaxPreviewSize );
+    Okteta::AddressRange range = byteArraySelection && byteArraySelection->isValid() ?
+        byteArraySelection->range() :
+        Okteta::AddressRange::fromWidth( 0, byteArray->size() );
+    range.restrictEndByWidth( MaxPreviewSize );
 
     QByteArray data;
     QBuffer dataBuffer( &data );
     dataBuffer.open( QIODevice::WriteOnly );
 
-    const bool success = encodeDataToStream( &dataBuffer, byteArrayDisplay, byteArray, section );
+    const bool success = encodeDataToStream( &dataBuffer, byteArrayDisplay, byteArray, range );
     dataBuffer.close();
 
     return success ? QString(data) : QString();

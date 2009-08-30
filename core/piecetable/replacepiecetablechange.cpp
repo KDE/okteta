@@ -25,7 +25,6 @@
 // lib
 #include "piecetable.h"
 //
-#include <section.h>
 #include <arraychangemetrics.h>
 // KDE
 #include <KLocale>
@@ -41,21 +40,22 @@ QString ReplacePieceTableChange::description() const
     return i18nc( "name of the change", "Replace" );
 }
 
-int ReplacePieceTableChange::storageOffset() const { return mStorageOffset; }
+Address ReplacePieceTableChange::storageOffset() const { return mStorageOffset; }
 
 
-bool ReplacePieceTableChange::merge( const AbstractPieceTableChange *other )
+bool ReplacePieceTableChange::merge( const AbstractPieceTableChange* other )
 {
 // TODO: remove me again after synching solved
 // return false;
     bool result = false;
+
     if( other->type() == ReplaceId )
     {
-        const ReplacePieceTableChange *otherReplaceChange = static_cast<const ReplacePieceTableChange *>( other );
+        const ReplacePieceTableChange* otherReplaceChange = static_cast<const ReplacePieceTableChange *>( other );
         // other replaced after?
-        if( mRemoveSection.start()+mInsertLength == otherReplaceChange->mRemoveSection.start() )
+        if( mRemoveRange.start()+mInsertLength == otherReplaceChange->mRemoveRange.start() )
         {
-            mRemoveSection.moveEndBy( otherReplaceChange->mRemoveSection.width() );
+            mRemoveRange.moveEndBy( otherReplaceChange->mRemoveRange.width() );
             mInsertLength += otherReplaceChange->mInsertLength;
             mRemovedPieces.append( otherReplaceChange->mRemovedPieces );
             result = true;
@@ -66,39 +66,39 @@ bool ReplacePieceTableChange::merge( const AbstractPieceTableChange *other )
     return result;
 }
 
-KDE::Section ReplacePieceTableChange::apply( PieceTable *pieceTable ) const
+AddressRange ReplacePieceTableChange::apply( PieceTable* pieceTable ) const
 {
-    const int oldSize = pieceTable->size();
+    const Size oldSize = pieceTable->size();
 
-    pieceTable->replace( mRemoveSection, mInsertLength, mStorageOffset );
+    pieceTable->replace( mRemoveRange, mInsertLength, mStorageOffset );
 
-    const int newSize = pieceTable->size();
-    const int lastChanged = ( newSize == oldSize ) ? mRemoveSection.end() :
-                            ( newSize > oldSize ) ?  newSize - 1 :
-                                                     oldSize - 1;
-    return KDE::Section( mRemoveSection.start(), lastChanged );
+    const Size newSize = pieceTable->size();
+    const Address lastChanged = ( newSize == oldSize ) ? mRemoveRange.end() :
+                                ( newSize > oldSize ) ?  newSize - 1 :
+                                                         oldSize - 1;
+    return AddressRange( mRemoveRange.start(), lastChanged );
 }
 
-KDE::Section ReplacePieceTableChange::revert( PieceTable *pieceTable ) const
+AddressRange ReplacePieceTableChange::revert( PieceTable* pieceTable ) const
 {
-    const int oldSize = pieceTable->size();
+    const Size oldSize = pieceTable->size();
 
-    const KDE::Section insertedSection = KDE::Section::fromWidth( mRemoveSection.start(), mInsertLength );
+    const AddressRange insertedSection = AddressRange::fromWidth( mRemoveRange.start(), mInsertLength );
     pieceTable->replace( insertedSection, mRemovedPieces );
 
-    const int newSize = pieceTable->size();
-    const int lastChanged = ( newSize == oldSize ) ? insertedSection.end() :
-                            ( newSize > oldSize ) ?  newSize - 1 :
-                                                     oldSize - 1;
-    return KDE::Section( mRemoveSection.start(), lastChanged );
+    const Size newSize = pieceTable->size();
+    const Address lastChanged = ( newSize == oldSize ) ? insertedSection.end() :
+                                ( newSize > oldSize ) ?  newSize - 1 :
+                                                         oldSize - 1;
+    return AddressRange( mRemoveRange.start(), lastChanged );
 }
 
-KDE::ArrayChangeMetrics ReplacePieceTableChange::metrics() const
+ArrayChangeMetrics ReplacePieceTableChange::metrics() const
 {
-    return KDE::ArrayChangeMetrics::asReplacement( mRemoveSection.start(), mRemoveSection.width(), mInsertLength );
+    return ArrayChangeMetrics::asReplacement( mRemoveRange.start(), mRemoveRange.width(), mInsertLength );
 }
 
-int ReplacePieceTableChange::dataSize() const { return mInsertLength; }
+Size ReplacePieceTableChange::dataSize() const { return mInsertLength; }
 
 ReplacePieceTableChange::~ReplacePieceTableChange() {}
 

@@ -41,14 +41,14 @@ ValueStreamEncoderSettings::ValueStreamEncoderSettings()
 {}
 
 ByteArrayValueStreamEncoder::ByteArrayValueStreamEncoder()
- : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Values..."), QLatin1String("text/plain") )
+ : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Values..."), QString::fromLatin1("text/plain") )
 {}
 
 
 bool ByteArrayValueStreamEncoder::encodeDataToStream( QIODevice *device,
                                                        const KByteArrayDisplay* byteArrayView,
-                                                       const Okteta::AbstractByteArrayModel *byteArrayModel,
-                                                       const KDE::Section &section )
+                                                       const Okteta::AbstractByteArrayModel* byteArrayModel,
+                                                       const Okteta::AddressRange& range )
 {
     bool success = true;
 
@@ -60,18 +60,18 @@ bool ByteArrayValueStreamEncoder::encodeDataToStream( QIODevice *device,
     // encode
     QTextStream textStream( device );
 
-    Okteta::ValueCodec *valueCodec = Okteta::ValueCodec::createCodec( mSettings.valueCoding );
+    Okteta::ValueCodec* valueCodec = Okteta::ValueCodec::createCodec( mSettings.valueCoding );
 
     // prepare 
     QString valueString;
     valueString.resize( valueCodec->encodingWidth() );
 
-    for( int i=section.start(); i<=section.end(); ++i )
+    for( Okteta::Address i=range.start(); i<=range.end(); ++i )
     {
-        if( i > section.start() )
+        if( i > range.start() )
             textStream << mSettings.separation;
 
-        valueCodec->encode( valueString, 0, byteArrayModel->datum(i) );
+        valueCodec->encode( valueString, 0, byteArrayModel->byte(i) );
 
         textStream << valueString;
     }

@@ -35,7 +35,7 @@ ByteArrayRowView::ByteArrayRowView( QWidget* parent )
     d->init();
 }
 
-void ByteArrayRowView::setByteArrayModel( Okteta::AbstractByteArrayModel* byteArrayModel )
+void ByteArrayRowView::setByteArrayModel( AbstractByteArrayModel* byteArrayModel )
 {
     Q_D( ByteArrayRowView );
     d->setByteArrayModel( byteArrayModel );
@@ -189,7 +189,7 @@ QSize ByteArrayRowView::minimumSizeHint() const
 }
 
 
-int ByteArrayRowView::indexByPoint( const QPoint& point ) const
+Address ByteArrayRowView::indexByPoint( const QPoint& point ) const
 {
     Q_D( const ByteArrayRowView );
     return d->indexByPoint( point );

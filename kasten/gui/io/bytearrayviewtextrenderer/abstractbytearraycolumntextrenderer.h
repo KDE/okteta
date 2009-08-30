@@ -42,13 +42,13 @@ namespace Kasten
 class AbstractByteArrayColumnTextRenderer : public AbstractColumnTextRenderer
 {
   public:
-    AbstractByteArrayColumnTextRenderer( const Okteta::AbstractByteArrayModel *byteArrayModel, int offset,
-        const Okteta::CoordRange &coordRange,
+    AbstractByteArrayColumnTextRenderer( const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset,
+        const Okteta::CoordRange& coordRange,
         int noOfBytesPerLine );
     virtual ~AbstractByteArrayColumnTextRenderer();
 
   public: // AbstractColumnTextRenderer API
-    virtual void renderFirstLine( QTextStream *stream, int lineIndex ) const;
+    virtual void renderFirstLine( QTextStream* stream, int lineIndex ) const;
     virtual void renderNextLine( QTextStream* stream, bool isSubline ) const;
 
   protected: // API to be reimplemented by subclasses
@@ -58,7 +58,7 @@ class AbstractByteArrayColumnTextRenderer : public AbstractColumnTextRenderer
     void setWidths( int byteWidth, int byteSpacingWidth, int noOfGroupedBytes );
 
   protected:
-    const Okteta::AbstractByteArrayModel *mByteArrayModel;
+    const Okteta::AbstractByteArrayModel* mByteArrayModel;
 
     const Okteta::CoordRange mCoordRange;
 
@@ -67,7 +67,7 @@ class AbstractByteArrayColumnTextRenderer : public AbstractColumnTextRenderer
     /** Line to print */
     mutable int mRenderLine;
     /** Data to print */
-    mutable int mOffset;
+    mutable Okteta::Address mOffset;
 
     /** buffered value of how many chars a line needs */
     int mNoOfCharsPerLine;

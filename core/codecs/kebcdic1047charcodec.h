@@ -37,20 +37,20 @@ class KEBCDIC1047CharCodec : public CharCodec
     KEBCDIC1047CharCodec();
 
   public: // CharCodec API
-    virtual Character decode( char Byte ) const;
-    virtual bool encode( char *D, const QChar &C ) const;
-    virtual bool canEncode( const QChar &C ) const;
+    virtual Character decode( Byte byte ) const;
+    virtual bool encode( Byte* byte, const QChar& _char ) const;
+    virtual bool canEncode( const QChar& _char ) const;
     virtual const QString& name() const;
 
   public:
-    static KEBCDIC1047CharCodec *create();
+    static KEBCDIC1047CharCodec* create();
     static const QString& codecName();
 };
 
 
 inline KEBCDIC1047CharCodec::KEBCDIC1047CharCodec() {}
 
-inline KEBCDIC1047CharCodec *KEBCDIC1047CharCodec::create() { return new KEBCDIC1047CharCodec(); }
+inline KEBCDIC1047CharCodec* KEBCDIC1047CharCodec::create() { return new KEBCDIC1047CharCodec(); }
 
 }
 

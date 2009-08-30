@@ -158,7 +158,7 @@ void ViewStatusController::setTargetModel( AbstractModel* model )
         onValueCodingChanged( (int)mByteArrayDisplay->valueCoding() );
         onCharCodecChanged( mByteArrayDisplay->charCodingName() );
 
-        connect( mByteArrayDisplay, SIGNAL(cursorPositionChanged( int )), SLOT(onCursorPositionChanged( int )) );
+        connect( mByteArrayDisplay, SIGNAL(cursorPositionChanged( Okteta::Address )), SLOT(onCursorPositionChanged( Okteta::Address )) );
         connect( mByteArrayDisplay, SIGNAL(selectedDataChanged( const Kasten::AbstractModelSelection* )),
             SLOT(onSelectedDataChanged( const Kasten::AbstractModelSelection* )) );
         connect( mByteArrayDisplay, SIGNAL(overwriteModeChanged( bool )),
@@ -204,7 +204,7 @@ void ViewStatusController::setCharCoding( int charCoding )
 }
 // #endif
 
-void ViewStatusController::onCursorPositionChanged( int offset )
+void ViewStatusController::onCursorPositionChanged( Okteta::Address offset )
 {
     static char codedOffset[Okteta::OffsetFormat::MaxFormatWidth+1];
 
@@ -217,7 +217,7 @@ void ViewStatusController::onCursorPositionChanged( int offset )
 void ViewStatusController::onSelectedDataChanged( const Kasten::AbstractModelSelection* modelSelection )
 {
     const KByteArraySelection* byteArraySelection = static_cast<const KByteArraySelection*>( modelSelection );
-    const KDE::Section selection = byteArraySelection->section();
+    const Okteta::AddressRange selection = byteArraySelection->range();
 
     QString selectionString;
     if( ! selection.isEmpty() )

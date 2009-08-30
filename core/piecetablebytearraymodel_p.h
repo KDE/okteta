@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef OKTETA_PIECETABLEBYTEARRAYMODEL_PRIVATE_H
-#define OKTETA_PIECETABLEBYTEARRAYMODEL_PRIVATE_H
+#ifndef OKTETA_PIECETABLEBYTEARRAYMODEL_P_H
+#define OKTETA_PIECETABLEBYTEARRAYMODEL_P_H
 
 // lib
 #include "piecetablebytearraymodel.h"
@@ -43,31 +43,32 @@ namespace Okteta
   *@author Friedrich W. H. Kossebau
   */
 
-class PieceTableByteArrayModel::Private
+class PieceTableByteArrayModelPrivate
 {
   public:
     /** creates a readonly buffer around the given data */
-    Private( PieceTableByteArrayModel *parent, const char *data, unsigned int size,
+    PieceTableByteArrayModelPrivate( PieceTableByteArrayModel* parent, const Byte* data, int size,
              bool careForMemory = true );
     /** creates a writeable buffer which is deleted at the end */
-    explicit Private( PieceTableByteArrayModel *parent, unsigned int size, char fillByte = '\0' );
-    ~Private();
+    explicit PieceTableByteArrayModelPrivate( PieceTableByteArrayModel* parent, int size, Byte fillByte = '\0' );
+
+    ~PieceTableByteArrayModelPrivate();
 
   public: // AbstractByteArrayModel API
-    char datum( unsigned int offset ) const;
-    int size() const;
+    Byte byte( Address offset ) const;
+    Size size() const;
     bool isReadOnly() const;
     bool isModified() const;
 
-    int insert( int offset, const char *insertData, int insertLength );
-    int remove( const KDE::Section& removeSection );
-    unsigned int replace( const KDE::Section& removeSection, const char* insertData, unsigned int insertLength );
-    bool swap( int firstStart, const KDE::Section& secondSection );
-    int fill( const char fillByte, unsigned int Pos = 0, int fillLength = -1 );
-    void setDatum( unsigned int offset, const char byte );
+    Size insert( Address offset, const Byte* insertData, int insertLength );
+    Size remove( const AddressRange& removeRange );
+    Size replace( const AddressRange& removeRange, const Byte* insertData, int insertLength );
+    bool swap( Address firstStart, const AddressRange& secondRange );
+    Size fill( const Byte fillByte, Address offset = 0, Size fillLength = -1 );
+    void setByte( Address offset, Byte byte );
 
     void setModified( bool modified = true );
-    void setReadOnly( bool readonly = true );
+    void setReadOnly( bool isReadOnly = true );
 
   public: // Versionable API
     int versionIndex() const;
@@ -78,21 +79,21 @@ class PieceTableByteArrayModel::Private
     void revertToVersionByIndex( int versionIndex );
 
   public:
-    void addBookmarks( const QList<Okteta::Bookmark> &bookmarks );
-    void removeBookmarks( const QList<Okteta::Bookmark> &bookmarks );
+    void addBookmarks( const QList<Bookmark>& bookmarks );
+    void removeBookmarks( const QList<Bookmark>& bookmarks );
     void removeAllBookmarks();
-    void setBookmark( unsigned int index, const Okteta::Bookmark& bookmark );
+    void setBookmark( unsigned int index, const Bookmark& bookmark );
 
-    Okteta::BookmarksConstIterator createBookmarksConstIterator() const;
-    const Okteta::Bookmark& bookmarkAt( unsigned int index ) const;
-    const Okteta::Bookmark& bookmarkFor( int offset ) const;
+    BookmarksConstIterator createBookmarksConstIterator() const;
+    const Bookmark& bookmarkAt( unsigned int index ) const;
+    const Bookmark& bookmarkFor( int offset ) const;
     bool containsBookmarkFor( int offset ) const;
     unsigned int bookmarksCount() const;
 
   public: // ChangesDescribable API
-    void openGroupedChange( const QString &description );
+    void openGroupedChange( const QString& description );
     void cancelGroupedChange();
-    void closeGroupedChange( const QString &description );
+    void closeGroupedChange( const QString& description );
 
   public: // ChangeHistory API
     QList<ByteArrayChange> changes( int firstVersionIndex, int lastVersionIndex ) const;
@@ -101,15 +102,15 @@ class PieceTableByteArrayModel::Private
                     int oldVersionIndex, int newVersionIndex );
 
   public:
-    void setData( const char *data, unsigned int size, bool careForMemory = true );
+    void setData( const Byte* data, int size, bool careForMemory = true );
 
   protected:
-    void doInsertChange( unsigned int offset, const char* insertData, unsigned int insertLength );
-    void doRemoveChange( const KDE::Section& removeSection );
-    void doReplaceChange( const KDE::Section& removeSection, const char* insertData, unsigned int insertLength );
-    void doSwapChange( int firstStart, const KDE::Section& secondSection );
-    void doFillChange( unsigned int offset, unsigned int filledLength,
-                       const char fillByte, unsigned int fillLength );
+    void doInsertChange( Address offset, const Byte* insertData, int insertLength );
+    void doRemoveChange( const AddressRange& removeRange );
+    void doReplaceChange( const AddressRange& removeRange, const Byte* insertData, int insertLength );
+    void doSwapChange( Address firstStart, const AddressRange& secondRange );
+    void doFillChange( Address offset, Size filledLength,
+                       Byte fillByte, int fillLength );
 
     void beginChanges();
     void endChanges();
@@ -117,11 +118,11 @@ class PieceTableByteArrayModel::Private
   protected: // data
     PieceTableByteArrayModel *p;
     /**  */
-    bool mReadOnly:1;
+    bool mReadOnly :1;
     /** */
-    bool mAutoDelete:1;
+    bool mAutoDelete :1;
 
-    const char *mInitialData;
+    const Byte* mInitialData;
     int mInitialSize;
     KPieceTable::RevertablePieceTable mPieceTable;
     ChangesDataStorage mChangesDataStorage;
@@ -131,19 +132,19 @@ class PieceTableByteArrayModel::Private
     int mBeforeGroupedChangeVersionIndex;
 
     int mBeforeChangesVersionIndex;
-    KDE::ArrayChangeMetricsList mChangeMetrics;
+    ArrayChangeMetricsList mChangeMetrics;
     QList<ByteArrayChange> mChanges;
     bool mBeforeChangesModified:1;
     bool mBookmarksModified:1;
 };
 
 
-inline int PieceTableByteArrayModel::Private::size() const  { return mPieceTable.size(); }
+inline Size PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::size() const  { return mPieceTable.size(); }
 
-inline bool PieceTableByteArrayModel::Private::isReadOnly()   const { return mReadOnly; }
-inline bool PieceTableByteArrayModel::Private::isModified()   const { return !mPieceTable.isAtBase(); }
+inline bool PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::isReadOnly()   const { return mReadOnly; }
+inline bool PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::isModified()   const { return !mPieceTable.isAtBase(); }
 
-inline void PieceTableByteArrayModel::Private::setReadOnly( bool readOnly )
+inline void PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::setReadOnly( bool readOnly )
 {
     if( mReadOnly != readOnly )
     {
@@ -151,7 +152,7 @@ inline void PieceTableByteArrayModel::Private::setReadOnly( bool readOnly )
         emit p->readOnlyChanged( readOnly );
     }
 }
-inline void PieceTableByteArrayModel::Private::setModified( bool modified )
+inline void PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::setModified( bool modified )
 {
     if( isModified() != modified )
     {
@@ -162,29 +163,29 @@ inline void PieceTableByteArrayModel::Private::setModified( bool modified )
     }
 }
 
-inline int PieceTableByteArrayModel::Private::versionIndex() const { return mPieceTable.appliedChangesCount(); }
-inline int PieceTableByteArrayModel::Private::versionCount() const { return mPieceTable.changesCount()+1; }
-inline QString PieceTableByteArrayModel::Private::versionDescription( int versionIndex ) const
+inline int PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::versionIndex() const { return mPieceTable.appliedChangesCount(); }
+inline int PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::versionCount() const { return mPieceTable.changesCount()+1; }
+inline QString PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::versionDescription( int versionIndex ) const
 { return mPieceTable.changeDescription( versionIndex-1 ); }
 
-inline void PieceTableByteArrayModel::Private::addBookmarks( const QList<Okteta::Bookmark> &bookmarks )
+inline void PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::addBookmarks( const QList<Bookmark> &bookmarks )
 {
     mBookmarks.addBookmarks( bookmarks );
     emit p->bookmarksAdded( bookmarks );
 }
-inline void PieceTableByteArrayModel::Private::removeBookmarks( const QList<Okteta::Bookmark> &bookmarks )
+inline void PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::removeBookmarks( const QList<Bookmark> &bookmarks )
 {
     mBookmarks.removeBookmarks( bookmarks );
     emit p->bookmarksRemoved( bookmarks );
 }
 
-inline void PieceTableByteArrayModel::Private::removeAllBookmarks()
+inline void PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::removeAllBookmarks()
 {
-    const QList<Okteta::Bookmark> bookmarks = mBookmarks.list();
+    const QList<Bookmark> bookmarks = mBookmarks.list();
     mBookmarks.clear();
     emit p->bookmarksRemoved( bookmarks );
 }
-inline void PieceTableByteArrayModel::Private::setBookmark( unsigned int index, const Okteta::Bookmark& bookmark )
+inline void PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::setBookmark( unsigned int index, const Bookmark& bookmark )
 {
     mBookmarks.setBookmark( index, bookmark );
 
@@ -193,21 +194,21 @@ inline void PieceTableByteArrayModel::Private::setBookmark( unsigned int index, 
     emit p->bookmarksModified( changedBookmarkIndizes );
 }
 
-inline Okteta::BookmarksConstIterator PieceTableByteArrayModel::Private::createBookmarksConstIterator() const
+inline BookmarksConstIterator PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::createBookmarksConstIterator() const
 {
     return BookmarksConstIterator( new BookmarkListConstIteratorAdapter(mBookmarks) );
 }
 
-inline const Okteta::Bookmark& PieceTableByteArrayModel::Private::bookmarkAt( unsigned int index ) const
+inline const Bookmark& PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::bookmarkAt( unsigned int index ) const
 {
     return mBookmarks.at( index );
 }
-inline const Okteta::Bookmark& PieceTableByteArrayModel::Private::bookmarkFor( int offset ) const
+inline const Bookmark& PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::bookmarkFor( int offset ) const
 {
     return mBookmarks.bookmark( offset );
 }
-inline bool PieceTableByteArrayModel::Private::containsBookmarkFor( int offset ) const { return mBookmarks.contains( offset ); }
-inline unsigned int PieceTableByteArrayModel::Private::bookmarksCount() const { return mBookmarks.size(); }
+inline bool PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::containsBookmarkFor( int offset ) const { return mBookmarks.contains( offset ); }
+inline unsigned int PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::bookmarksCount() const { return mBookmarks.size(); }
 
 }
 

@@ -22,11 +22,10 @@
 
 #include "grouppiecetablechange.h"
 
-
 // lib
 #include "piecetable.h"
 //
-#include <sectionlist.h>
+#include <addressrangelist.h>
 #include <arraychangemetricslist.h>
 // KDE
 #include <KLocale>
@@ -42,7 +41,7 @@ QString GroupPieceTableChange::description() const
     return mDescription;
 }
 
-bool GroupPieceTableChange::merge( const AbstractPieceTableChange *other )
+bool GroupPieceTableChange::merge( const AbstractPieceTableChange* other )
 {
     bool result = false;
 
@@ -52,28 +51,28 @@ bool GroupPieceTableChange::merge( const AbstractPieceTableChange *other )
     return result;
 }
 
-KDE::Section GroupPieceTableChange::apply( PieceTable *pieceTable ) const
+AddressRange GroupPieceTableChange::apply( PieceTable* pieceTable ) const
 {
 Q_UNUSED( pieceTable )
 //     pieceTable->insert( mInsertOffset, mInsertLength, mStorageOffset );
 
-    return KDE::Section();//( mInsertOffset, pieceTable->size()-1 );
+    return AddressRange();//( mInsertOffset, pieceTable->size()-1 );
 }
 
-KDE::Section GroupPieceTableChange::revert( PieceTable *pieceTable ) const
+AddressRange GroupPieceTableChange::revert( PieceTable* pieceTable ) const
 {
 Q_UNUSED( pieceTable )
 //     const int oldLast = pieceTable->size() - 1;
-//     pieceTable->remove( KDE::Section::fromWidth(mInsertOffset,mInsertLength) );
-    return KDE::Section();//( mInsertOffset, oldLast );
+//     pieceTable->remove( AddressRange::fromWidth(mInsertOffset,mInsertLength) );
+    return AddressRange();//( mInsertOffset, oldLast );
 }
 
-KDE::ArrayChangeMetrics GroupPieceTableChange::metrics() const
+ArrayChangeMetrics GroupPieceTableChange::metrics() const
 {
-    return KDE::ArrayChangeMetrics::asReplacement( 0, 0, 0);
+    return ArrayChangeMetrics::asReplacement( 0, 0, 0);
 }
 
-bool GroupPieceTableChange::appendChange( AbstractPieceTableChange *change )
+bool GroupPieceTableChange::appendChange( AbstractPieceTableChange* change )
 {
 #if 0
     // chop unapplied changes
@@ -110,16 +109,17 @@ bool GroupPieceTableChange::appendChange( AbstractPieceTableChange *change )
 }
 
 
-KDE::SectionList GroupPieceTableChange::applyGroup( PieceTable *pieceTable ) const
+AddressRangeList GroupPieceTableChange::applyGroup( PieceTable* pieceTable ) const
 {
-    KDE::SectionList result;
-    foreach( AbstractPieceTableChange *change, mChangeStack )
+    AddressRangeList result;
+
+    foreach( AbstractPieceTableChange* change, mChangeStack )
     {
         if( change->type() == AbstractPieceTableChange::GroupId )
         {
-            const GroupPieceTableChange *groupChange = static_cast<const GroupPieceTableChange *>(change);
-            const KDE::SectionList changedSectionList = groupChange->applyGroup( pieceTable );
-            result.addSectionList( changedSectionList );
+            const GroupPieceTableChange* groupChange = static_cast<const GroupPieceTableChange*>(change);
+            const AddressRangeList changedRangeList = groupChange->applyGroup( pieceTable );
+            result.addAddressRangeList( changedRangeList );
         }
         else
             result.append( change->apply(pieceTable) );
@@ -128,9 +128,9 @@ KDE::SectionList GroupPieceTableChange::applyGroup( PieceTable *pieceTable ) con
     return result;
 }
 
-KDE::SectionList GroupPieceTableChange::revertGroup( PieceTable *pieceTable ) const
+AddressRangeList GroupPieceTableChange::revertGroup( PieceTable* pieceTable ) const
 {
-    KDE::SectionList result;
+    AddressRangeList result;
 
     QStack<AbstractPieceTableChange*>::ConstIterator it = mChangeStack.end();
     while( it != mChangeStack.begin() )
@@ -139,9 +139,9 @@ KDE::SectionList GroupPieceTableChange::revertGroup( PieceTable *pieceTable ) co
         AbstractPieceTableChange *change = *it;
         if( change->type() == AbstractPieceTableChange::GroupId )
         {
-            const GroupPieceTableChange *groupChange = static_cast<const GroupPieceTableChange *>(change);
-            const KDE::SectionList changedSectionList = groupChange->revertGroup( pieceTable );
-            result.addSectionList( changedSectionList );
+            const GroupPieceTableChange* groupChange = static_cast<const GroupPieceTableChange*>(change);
+            const AddressRangeList changedRangeList = groupChange->revertGroup( pieceTable );
+            result.addAddressRangeList( changedRangeList );
         }
         else
             result.append( change->revert(pieceTable) );
@@ -150,20 +150,21 @@ KDE::SectionList GroupPieceTableChange::revertGroup( PieceTable *pieceTable ) co
     return result;
 }
 
-KDE::ArrayChangeMetricsList GroupPieceTableChange::groupMetrics( bool reverted ) const
+ArrayChangeMetricsList GroupPieceTableChange::groupMetrics( bool reverted ) const
 {
-    KDE::ArrayChangeMetricsList result;
-    foreach( AbstractPieceTableChange *change, mChangeStack )
+    ArrayChangeMetricsList result;
+
+    foreach( AbstractPieceTableChange* change, mChangeStack )
     {
         if( change->type() == AbstractPieceTableChange::GroupId )
         {
-            const GroupPieceTableChange *groupChange = static_cast<const GroupPieceTableChange *>(change);
-            const KDE::ArrayChangeMetricsList metricsList = groupChange->groupMetrics( reverted );
+            const GroupPieceTableChange *groupChange = static_cast<const GroupPieceTableChange*>(change);
+            const ArrayChangeMetricsList metricsList = groupChange->groupMetrics( reverted );
             result += metricsList;
         }
         else
         {
-            KDE::ArrayChangeMetrics changeMetrics = change->metrics();
+            ArrayChangeMetrics changeMetrics = change->metrics();
             if( reverted )
                 changeMetrics.revert();
             result.append( changeMetrics );
@@ -174,14 +175,14 @@ KDE::ArrayChangeMetricsList GroupPieceTableChange::groupMetrics( bool reverted )
 }
 
 
-int GroupPieceTableChange::dataSize() const
+Size GroupPieceTableChange::dataSize() const
 {
     return mAppliedChangesDataSize;
 }
 
 GroupPieceTableChange::~GroupPieceTableChange()
 {
-    while( !mChangeStack.isEmpty() )
+    while( ! mChangeStack.isEmpty() )
          delete mChangeStack.pop();
 }
 

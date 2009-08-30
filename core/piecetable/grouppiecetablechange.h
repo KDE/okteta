@@ -23,53 +23,56 @@
 #ifndef KPIECETABLE_GROUPPIECETABLECHANGE_H
 #define KPIECETABLE_GROUPPIECETABLECHANGE_H
 
-
 // lib
 #include "abstractpiecetablechange.h"
 // Qt
 #include <QtCore/QStack>
 #include <QtCore/QString>
 
-namespace KDE
-{
-class SectionList;
+
+namespace Okteta {
+class AddressRangeList;
 class ArrayChangeMetricsList;
 }
 
 namespace KPieceTable
 {
 
+  typedef Okteta::AddressRangeList AddressRangeList;
+  typedef Okteta::ArrayChangeMetricsList ArrayChangeMetricsList;
+
+
 /** class
   *@author Friedrich W. H. Kossebau
   */
-
 class GroupPieceTableChange : public AbstractPieceTableChange
 {
   public:
-    GroupPieceTableChange( GroupPieceTableChange *parent, const QString &description );
+    GroupPieceTableChange( GroupPieceTableChange* parent, const QString& description );
+
     virtual ~GroupPieceTableChange();
 
   public: // AbstractPieceTableChange API
     virtual int type() const;
     virtual QString description() const;
-    virtual bool merge( const AbstractPieceTableChange *other );
-    virtual KDE::Section apply( PieceTable *pieceTable ) const;
-    virtual KDE::Section revert( PieceTable *pieceTable ) const;
-    virtual KDE::ArrayChangeMetrics metrics() const;
-    virtual int dataSize() const;
+    virtual bool merge( const AbstractPieceTableChange* other );
+    virtual AddressRange apply( PieceTable* pieceTable ) const;
+    virtual AddressRange revert( PieceTable* pieceTable ) const;
+    virtual ArrayChangeMetrics metrics() const;
+    virtual Size dataSize() const;
 
   public:
-    void setDescription( const QString &description );
+    void setDescription( const QString& description );
 
 // TODO: think about a function to compress a group, that is not going to be handled in detail anymore
 // e.g. several replaces of the same byte or an insert and replace of the inserted data
 
 
   public:
-    KDE::SectionList applyGroup( PieceTable *pieceTable ) const;
-    KDE::SectionList revertGroup( PieceTable *pieceTable ) const;
-    KDE::ArrayChangeMetricsList groupMetrics( bool reverted = false ) const;
-    GroupPieceTableChange *parent() const;
+    AddressRangeList applyGroup( PieceTable* pieceTable ) const;
+    AddressRangeList revertGroup( PieceTable* pieceTable ) const;
+    ArrayChangeMetricsList groupMetrics( bool reverted = false ) const;
+    GroupPieceTableChange* parent() const;
 
   public: // TODO: this interface part is shared with PieceTableChangeHistory, try to use this fact
     bool appendChange( AbstractPieceTableChange *change );
@@ -90,31 +93,35 @@ class GroupPieceTableChange : public AbstractPieceTableChange
 
   protected:
     QStack<AbstractPieceTableChange*> mChangeStack;
-    GroupPieceTableChange *mParent;
+    GroupPieceTableChange* mParent;
 
     QString mDescription;
     ///
     int mAppliedChangesCount;
     ///
-    int mAppliedChangesDataSize;
+    Size mAppliedChangesDataSize;
     /// if true, try to merge changes
     bool mTryToMergeAppendedChange;
 };
 
-inline GroupPieceTableChange::GroupPieceTableChange( GroupPieceTableChange *parent, const QString &description )
- : mParent( parent ), mDescription( description ),
-   mAppliedChangesCount( 0 ), mAppliedChangesDataSize( 0 ), mTryToMergeAppendedChange( true )
+
+inline GroupPieceTableChange::GroupPieceTableChange( GroupPieceTableChange* parent, const QString& description )
+  : mParent( parent ),
+    mDescription( description ),
+    mAppliedChangesCount( 0 ),
+    mAppliedChangesDataSize( 0 ),
+    mTryToMergeAppendedChange( true )
 {}
 
-inline void GroupPieceTableChange::setDescription( const QString &description ) { mDescription = description; }
-inline GroupPieceTableChange *GroupPieceTableChange::parent() const { return mParent; }
+inline void GroupPieceTableChange::setDescription( const QString& description ) { mDescription = description; }
+inline GroupPieceTableChange* GroupPieceTableChange::parent() const { return mParent; }
 inline void GroupPieceTableChange::finishChange() { mTryToMergeAppendedChange = false; }
 inline int GroupPieceTableChange::count()                     const { return mChangeStack.count(); }
 inline int GroupPieceTableChange::appliedChangesCount()       const { return mAppliedChangesCount; }
 inline QString GroupPieceTableChange::headChangeDescription() const { return changeDescription( count()-1 ); }
 inline QString GroupPieceTableChange::changeDescription( int changeId ) const
 {
-    const AbstractPieceTableChange *change = mChangeStack.value( changeId );
+    const AbstractPieceTableChange* change = mChangeStack.value( changeId );
 
     return change ? change->description() : QString();
 }

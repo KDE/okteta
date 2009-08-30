@@ -26,6 +26,10 @@
 // Qt
 #include <QtCore/QObject>
 
+
+namespace Okteta
+{
+
 class ByteArrayModelTest : public QObject
 {
   Q_OBJECT
@@ -33,5 +37,7 @@ class ByteArrayModelTest : public QObject
   private Q_SLOTS: // test functions
     void testNothing();
 };
+
+}
 
 #endif

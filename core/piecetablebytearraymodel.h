@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Core library, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -34,6 +34,9 @@
 namespace Okteta
 {
 
+class PieceTableByteArrayModelPrivate;
+
+
 /** 
   *@author Friedrich W. H. Kossebau
   */
@@ -52,8 +55,7 @@ class OKTETACORE_EXPORT PieceTableByteArrayModel : public AbstractByteArrayModel
     Okteta::ChangeHistory
   )
 
-    class Private;
-    friend class Private;
+  friend class PieceTableByteArrayModelPrivate;
 
   public:
 //     PieceTableByteArrayModel( const char *data, unsigned int size );
@@ -63,24 +65,25 @@ class OKTETACORE_EXPORT PieceTableByteArrayModel : public AbstractByteArrayModel
      * @param data
      * @param careForMemory 
      */
-    PieceTableByteArrayModel( const char *data, unsigned int size, bool careForMemory = true );
+    PieceTableByteArrayModel( const Byte* data, int size, bool careForMemory = true );
 //     explicit PieceTableByteArrayModel( const QByteArray &data );
-    explicit PieceTableByteArrayModel( unsigned int size = 0, char fillByte = '\0' );
+    explicit PieceTableByteArrayModel( int size = 0, Byte fillByte = '\0' );
 //     explicit PieceTableByteArrayModel( int size = 0careForMemory, int maxSize = -1 );
+
     virtual ~PieceTableByteArrayModel();
 
   public: // AbstractByteArrayModel API
-    virtual char datum( unsigned int offset ) const;
-    virtual int size() const;
+    virtual Byte byte( Address offset ) const;
+    virtual Size size() const;
     virtual bool isReadOnly() const;
     virtual bool isModified() const;
 
-    virtual int insert( int at, const char *data, int length );
-    virtual int remove( const KDE::Section& section );
-    virtual unsigned int replace( const KDE::Section& before, const char* after, unsigned int afterLength );
-    virtual bool swap( int firstStart, const KDE::Section& secondSection );
-    virtual int fill( const char fillChar, unsigned int from = 0, int length = -1 );
-    virtual void setDatum( unsigned int offset, const char datum );
+    virtual Size insert( Address offset, const Byte* insertData, int insertLength );
+    virtual Size remove( const AddressRange& removeRange );
+    virtual Size replace( const AddressRange& removeRange, const Byte* insertData, int insertLength );
+    virtual bool swap( Address firstStart, const AddressRange& secondRange );
+    virtual Size fill( const Byte fillByte, Address offset = 0, Size fillLength = -1 );
+    virtual void setByte( Address offset, Byte byte );
 
     virtual void setModified( bool modified = true );
     virtual void setReadOnly( bool isReadOnly = true );
@@ -125,7 +128,7 @@ class OKTETACORE_EXPORT PieceTableByteArrayModel : public AbstractByteArrayModel
       */
 //     void setKeepsMemory( bool keepMemory = true );
 //     void setAutoDelete( bool autoDelete = true );
-    void setData( const char *data, unsigned int size, bool careForMemory = true );
+    void setData( const Byte* data, int size, bool careForMemory = true );
 
   public:
 //     char *data() const;
@@ -136,7 +139,7 @@ class OKTETACORE_EXPORT PieceTableByteArrayModel : public AbstractByteArrayModel
 
   Q_SIGNALS: // Versionable signals
     virtual void revertedToVersionIndex( int versionIndex );
-    virtual void headVersionDescriptionChanged( const QString &versionDescription );
+    virtual void headVersionDescriptionChanged( const QString& versionDescription );
     virtual void headVersionChanged( int newHeadVersionIndex );
 
   Q_SIGNALS: // Bookmarkable signals
@@ -150,7 +153,7 @@ class OKTETACORE_EXPORT PieceTableByteArrayModel : public AbstractByteArrayModel
                               int oldVersionIndex, int newVersionIndex );
 
   protected:
-    class Private * const d;
+    PieceTableByteArrayModelPrivate* const d;
 };
 
 }

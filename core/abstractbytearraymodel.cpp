@@ -38,43 +38,44 @@ void AbstractByteArrayModel::setReadOnly( bool isReadOnly )
     Q_UNUSED( isReadOnly )
 }
 
-int AbstractByteArrayModel::insert( int offset, const char *insertData, int insertLength )
+Size AbstractByteArrayModel::insert( Address offset, const Byte* insertData, int insertLength )
 {
     return replace( offset, 0, insertData, insertLength );
 }
 
 
-int AbstractByteArrayModel::remove( const KDE::Section& removeSection )
+Size AbstractByteArrayModel::remove( const AddressRange& removeRange )
 {
-    replace( removeSection, 0, 0 );
-    return removeSection.width(); // TODO: check if this is true
+    replace( removeRange, 0, 0 );
+    return removeRange.width(); // TODO: check if this is true
 }
 
 
-int AbstractByteArrayModel::copyTo( char *dest, const KDE::Section& cS ) const
+Size AbstractByteArrayModel::copyTo( Byte* dest, const AddressRange& _copyRange ) const
 {
-    KDE::Section copySection( cS );
-    copySection.restrictEndTo( size()-1 );
+    AddressRange copyRange( _copyRange );
+    copyRange.restrictEndTo( size()-1 );
 
-    for( int i=copySection.start(); i<=copySection.end(); ++i )
-        *dest++ = datum( i );
+    const Address copyRangeEnd = copyRange.end();
+    for( Address i=copyRange.start(); i<=copyRangeEnd; ++i )
+        *dest++ = byte( i );
 
-    return copySection.width();
+    return copyRange.width();
 }
 
 
-int AbstractByteArrayModel::indexOf( const char *pattern, int patternLength, int fromOffset  ) const
+Address AbstractByteArrayModel::indexOf( const Byte* pattern, int patternLength, Address fromOffset ) const
 {
-    int result = -1;
+    Address result = -1;
 
-    const int lastFrom = size() - patternLength;
-    int nextSignalByteCount = fromOffset + SearchedByteCountSignalLimit;
+    const Address lastFrom = size() - patternLength;
+    Size nextSignalByteCount = fromOffset + SearchedByteCountSignalLimit;
 
-    for( int i=fromOffset; i<=lastFrom ; ++i )
+    for( Address i=fromOffset; i<=lastFrom ; ++i )
     {
         int c = 0;
         for( ; c<patternLength; ++c )
-            if( pattern[c] != datum(i+c) )
+            if( pattern[c] != byte(i+c) )
                 break;
 
         if( nextSignalByteCount <= i )
@@ -93,24 +94,24 @@ int AbstractByteArrayModel::indexOf( const char *pattern, int patternLength, int
     return result;
 }
 
-int AbstractByteArrayModel::lastIndexOf( const char *pattern, int patternLength, int fromOffset ) const
+Address AbstractByteArrayModel::lastIndexOf( const Byte* pattern, int patternLength, Address fromOffset ) const
 {
-    int result = -1;
+    Address result = -1;
 
-    const int lastFrom = size() - patternLength;
+    const Address lastFrom = size() - patternLength;
 
     if( fromOffset < 0 )
         fromOffset = lastFrom + 1 + fromOffset;
     else if( fromOffset > lastFrom )
         fromOffset = lastFrom;
 
-    int nextSignalByteCount = fromOffset - SearchedByteCountSignalLimit;
+    Size nextSignalByteCount = fromOffset - SearchedByteCountSignalLimit;
 
-    for( int i=fromOffset; i>=0 ; --i )
+    for( Address i=fromOffset; i>=0 ; --i )
     {
         int c = 0;
         for( ; c<patternLength; ++c )
-            if( pattern[c] != datum(i+c) )
+            if( pattern[c] != byte(i+c) )
                 break;
 
         if( nextSignalByteCount >= i )

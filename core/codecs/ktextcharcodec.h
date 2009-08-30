@@ -40,31 +40,31 @@ namespace Okteta
 class KTextCharCodec : public CharCodec
 {
   public:
-    static KTextCharCodec *createCodec( const QString &CodeName );
-    static KTextCharCodec *createCodec( CharCoding C );
-    static KTextCharCodec *createLocalCodec();
+    static KTextCharCodec* createCodec( const QString& codeName );
+    static KTextCharCodec* createCodec( CharCoding charCoding );
+    static KTextCharCodec* createLocalCodec();
 
-    static const QStringList &codecNames();
+    static const QStringList& codecNames();
 
   protected:
-    KTextCharCodec( QTextCodec *C );
+    KTextCharCodec( QTextCodec* textCodec );
   public:
     virtual ~KTextCharCodec();
 
   public: // CharCodec API
-    virtual bool encode( char *D, const QChar &C ) const;
-    virtual Character decode( char Byte ) const;
-    virtual bool canEncode( const QChar &C ) const;
+    virtual Character decode( Byte byte ) const;
+    virtual bool encode( Byte* byte, const QChar& _char ) const;
+    virtual bool canEncode( const QChar& _char ) const;
     virtual const QString& name() const;
 
   protected:
-    QTextCodec *Codec;
+    QTextCodec* mCodec;
     /** decodes the chars to unicode */
-    QTextDecoder *Decoder;
+    QTextDecoder* mDecoder;
     /** encodes the chars from unicode */
-    QTextEncoder *Encoder;
+    QTextEncoder* mEncoder;
     /** */
-    mutable QString Name;
+    mutable QString mName;
 };
 
 }

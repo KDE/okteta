@@ -28,7 +28,7 @@
 namespace Okteta
 {
 
-ByteArrayColumnView::ByteArrayColumnView( Okteta::AbstractByteArrayModel* _byteArrayModel, QWidget *parent )
+ByteArrayColumnView::ByteArrayColumnView( AbstractByteArrayModel* _byteArrayModel, QWidget *parent )
  : AbstractByteArrayView( new ByteArrayColumnViewPrivate(this), parent )
 {
     Q_D( ByteArrayColumnView );
@@ -85,7 +85,7 @@ bool ByteArrayColumnView::offsetColumnVisible() const
 }
 
 
-void ByteArrayColumnView::setByteArrayModel( Okteta::AbstractByteArrayModel* _byteArrayModel )
+void ByteArrayColumnView::setByteArrayModel( AbstractByteArrayModel* _byteArrayModel )
 {
     Q_D( ByteArrayColumnView );
     d->setByteArrayModel( _byteArrayModel );
@@ -195,7 +195,7 @@ QSize ByteArrayColumnView::minimumSizeHint() const
 
 
 
-int ByteArrayColumnView::indexByPoint( const QPoint& point ) const
+Address ByteArrayColumnView::indexByPoint( const QPoint& point ) const
 {
     Q_D( const ByteArrayColumnView );
     return d->indexByPoint( point );

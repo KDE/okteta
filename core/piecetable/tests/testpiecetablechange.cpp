@@ -29,7 +29,8 @@
 // Qt
 #include <QtCore/QString>
 
-namespace KPieceTable 
+
+namespace KPieceTable
 {
 
 int TestPieceTableChange::type() const { return mTypeId; }
@@ -39,12 +40,12 @@ QString TestPieceTableChange::description() const
     return mDescription;
 }
 
-bool TestPieceTableChange::merge( const AbstractPieceTableChange *other )
+bool TestPieceTableChange::merge( const AbstractPieceTableChange* other )
 {
     bool result = false;
     if( other->type() == mTypeId )
     {
-        const TestPieceTableChange *otherTestChange = static_cast<const TestPieceTableChange *>( other );
+        const TestPieceTableChange* otherTestChange = static_cast<const TestPieceTableChange*>( other );
         mDescription += otherTestChange->mDescription;
         result = true;
     }
@@ -52,23 +53,23 @@ bool TestPieceTableChange::merge( const AbstractPieceTableChange *other )
     return result;
 }
 
-KDE::Section TestPieceTableChange::apply( PieceTable *pieceTable ) const
+AddressRange TestPieceTableChange::apply( PieceTable* pieceTable ) const
 {
     pieceTable->replaceOne( mPosition, mStoragePosition, mStorageId );
 
-    return KDE::Section( mPosition, mPosition );
+    return AddressRange( mPosition, mPosition );
 }
 
-KDE::Section TestPieceTableChange::revert( PieceTable *pieceTable ) const
+AddressRange TestPieceTableChange::revert( PieceTable* pieceTable ) const
 {
     const Piece replaced = pieceTable->replaceOne( mPosition, mReplacedStoragePosition, mReplacedStorageId );
 
-    return KDE::Section( mPosition, mPosition );
+    return AddressRange( mPosition, mPosition );
 }
 
-KDE::ArrayChangeMetrics TestPieceTableChange::metrics() const
+ArrayChangeMetrics TestPieceTableChange::metrics() const
 {
-    return KDE::ArrayChangeMetrics::asReplacement( mPosition, 1, 1 );
+    return ArrayChangeMetrics::asReplacement( mPosition, 1, 1 );
 }
 
 int TestPieceTableChange::dataSize() const { return 1; }

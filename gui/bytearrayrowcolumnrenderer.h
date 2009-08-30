@@ -35,12 +35,6 @@
 #include <section.h>
 
 
-namespace Okteta {
-class Bookmarkable;
-class CharCodec;
-class ValueCodec;
-}
-
 class QPainter;
 class QColor;
 class QBrush;
@@ -48,11 +42,15 @@ class QBrush;
 namespace Okteta
 {
 
+class Bookmarkable;
+class CharCodec;
+class ValueCodec;
+
 // class KByteArrayView;
 class ByteArrayTableRanges;
 class ByteArrayTableLayout;
 
-const int NoByteFound = -1;
+const Address NoByteFound = -1;
 
 /** base class of all buffer column displayers
   * holds all information about the vertical layout of a buffer column
@@ -67,7 +65,7 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
     enum FrameStyle { Frame, Left, Right };
   public:
     ByteArrayRowColumnRenderer( AbstractColumnStylist* stylist,
-        Okteta::AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges );
+        AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges );
     virtual ~ByteArrayRowColumnRenderer();
 
 
@@ -84,18 +82,18 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
     /** paints a cursor based on the type of the byte.
       * @param byteIndex Index of the byte to paint the cursor for. If -1 a space is used as char.
       */
-    void renderCursor( QPainter* painter, int byteIndex, AbstractByteArrayView::CodingTypeId codingId );
+    void renderCursor( QPainter* painter, Address byteIndex, AbstractByteArrayView::CodingTypeId codingId );
     /** paints the byte with background.
       * @param byteIndex Index of the byte to paint. If -1 only the background is painted.
       */
-    void renderByte( QPainter* painter, int byteIndex, AbstractByteArrayView::CodingTypeId codingId );
+    void renderByte( QPainter* painter, Address byteIndex, AbstractByteArrayView::CodingTypeId codingId );
     /** paints the byte with background and a frame around.
       * @param byteIndex Index of the byte to paint the frame for. If -1 a space is used as char.
       * @param Style the style of the framing
       */
-    void renderFramedByte( QPainter* painter, int byteIndex, AbstractByteArrayView::CodingTypeId codingId, FrameStyle style );
+    void renderFramedByte( QPainter* painter, Address byteIndex, AbstractByteArrayView::CodingTypeId codingId, FrameStyle style );
 
-    void renderEditedByte( QPainter* painter, char byte, const QString& editBuffer );
+    void renderEditedByte( QPainter* painter, Byte byte, const QString& editBuffer );
 
   public: // modification access
     /** sets the spacing in the hex column
@@ -130,13 +128,13 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
       */
     void setMetrics( KPixelX digitWidth, KPixelY digitBaseLine, KPixelY digitHeight );
     /** */
-    void set( Okteta::AbstractByteArrayModel* byteArrayModel );
+    void set( AbstractByteArrayModel* byteArrayModel );
     /** creates new buffer for x-values; to be called on any change of NoOfBytesPerLine or metrics */
     void resetXBuffer();
     /** sets the codec to be used by the char column. */
-    void setCharCodec( const Okteta::CharCodec* charCodec );
+    void setCharCodec( const CharCodec* charCodec );
 
-    void setValueCodec( Okteta::ValueCoding valueCoding, const Okteta::ValueCodec* valueCodec );
+    void setValueCodec( ValueCoding valueCoding, const ValueCodec* valueCodec );
     /** sets the spacing in the middle of a binary byte in the value column
       * @param BinaryGapW spacing in the middle of a binary in pixels
       * returns true if there was a change
@@ -223,15 +221,15 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
 
   protected: // API to be redefined
     void renderByteText( QPainter* painter,
-                         char byte, Okteta::Character charByte, int codings, const QColor& color ) const;
+                         Byte byte, Character charByte, int codings, const QColor& color ) const;
     /** default implementation sets byte width to one digit width */
     void recalcByteWidth();
 
 
   protected:
-    void renderPlain( QPainter* painter, const KDE::Section& linePositions, int byteIndex );
-    void renderSelection( QPainter* painter, const KDE::Section& linePositions, int byteIndex, int flag );
-    void renderMarking( QPainter* painter, const KDE::Section& linePositions, int byteIndex, int flag );
+    void renderPlain( QPainter* painter, const KDE::Section& linePositions, Address byteIndex );
+    void renderSelection( QPainter* painter, const KDE::Section& linePositions, Address byteIndex, int flag );
+    void renderMarking( QPainter* painter, const KDE::Section& linePositions, Address byteIndex, int flag );
     void renderRange( QPainter* painter, const QBrush& brush, const KDE::Section& linePositions, int flag );
     void renderBookmark( QPainter* painter, const QBrush& brush );
 
@@ -239,23 +237,23 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
 
     void recalcX();
 
-    bool isSelected( const KDE::Section& range, KDE::Section* selection, unsigned int* flag ) const;
-    bool isMarked( const KDE::Section& range, KDE::Section* marking, unsigned int* flag ) const;
+    bool isSelected( const AddressRange& range, AddressRange* selection, unsigned int* flag ) const;
+    bool isMarked( const AddressRange& range, AddressRange* marking, unsigned int* flag ) const;
 
     void setByteWidth( int byteWidth );
 
 
   protected:
     /** pointer to the buffer */
-    Okteta::AbstractByteArrayModel* mByteArrayModel;
+    AbstractByteArrayModel* mByteArrayModel;
     /** pointer to the layout */
     const ByteArrayTableLayout* mLayout;
     /** pointer to the ranges */
     ByteArrayTableRanges* mRanges;
     /** */
-    Okteta::Bookmarkable* mBookmarks;
+    Bookmarkable* mBookmarks;
     /** */
-    const Okteta::CharCodec* mCharCodec;
+    const CharCodec* mCharCodec;
 
     int mVisibleCodings;
     /** */
@@ -292,9 +290,9 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
 
   protected: // value specifics
     /** */
-    Okteta::ValueCoding mValueCoding;
+    ValueCoding mValueCoding;
     /** */
-    const Okteta::ValueCodec* mValueCodec;
+    const ValueCodec* mValueCodec;
     /** */
     KPixelX mBinaryGapWidth;
 
@@ -336,7 +334,7 @@ inline KDE::Section ByteArrayRowColumnRenderer::visibleLinePositions() const { r
 
 inline const ByteArrayTableLayout *ByteArrayRowColumnRenderer::layout() const { return mLayout; }
 
-inline void ByteArrayRowColumnRenderer::setCharCodec( const Okteta::CharCodec* charCodec )
+inline void ByteArrayRowColumnRenderer::setCharCodec( const CharCodec* charCodec )
 {
     mCharCodec = charCodec;
 }

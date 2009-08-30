@@ -86,26 +86,27 @@ Crc32ByteArrayChecksumAlgorithm::Crc32ByteArrayChecksumAlgorithm()
 AbstractByteArrayChecksumParameterSet* Crc32ByteArrayChecksumAlgorithm::parameterSet() { return &mParameterSet; }
 
 bool Crc32ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
-                                                       const Okteta::AbstractByteArrayModel* model, const KDE::Section& section ) const
+                                                       const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const
 {
     Crc32LookupTable lookupTable;
     quint32 crcBits = 0xffffffff;
-    int nextBlockEnd = section.start() + CalculatedByteCountSignalLimit;
-    for( int i = section.start(); i<=section.end(); ++i )
+    Okteta::Address nextBlockEnd = range.start() + CalculatedByteCountSignalLimit;
+    for( Okteta::Address i = range.start(); i<=range.end(); ++i )
     {
-        const uchar value = (crcBits & 0xFF) ^ model->datum( i );
+        const uchar value = (crcBits & 0xFF) ^ model->byte( i );
         crcBits >>= 8;
         crcBits ^= lookupTable[value];
 
         if( i >= nextBlockEnd )
         {
             nextBlockEnd += CalculatedByteCountSignalLimit;
-            emit calculatedBytes( section.localIndex(i)+1 );
+            emit calculatedBytes( range.localIndex(i)+1 );
         }
     }
     crcBits ^= 0xffffffff;
 
     *result = QString::fromLatin1("%1").arg( crcBits, 8, 16, QChar::fromLatin1('0') );
+
     return true;
 }
 

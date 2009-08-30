@@ -39,13 +39,13 @@ ModSum8ByteArrayChecksumAlgorithm::ModSum8ByteArrayChecksumAlgorithm()
 AbstractByteArrayChecksumParameterSet* ModSum8ByteArrayChecksumAlgorithm::parameterSet() { return &mParameterSet; }
 
 bool ModSum8ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
-                                                          const Okteta::AbstractByteArrayModel* model, const KDE::Section& section ) const
+                                                          const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const
 {
     quint8 modSum = 0x00;
-    int nextBlockEnd = section.start() + CalculatedByteCountSignalLimit;
-    for( int i = section.start(); i<=section.end(); ++i )
+    Okteta::Address nextBlockEnd = range.start() + CalculatedByteCountSignalLimit;
+    for( Okteta::Address i = range.start(); i<=range.end(); ++i )
     {
-        modSum += (quint8)( model->datum(i) );
+        modSum += (quint8)( model->byte(i) );
 #if 0
         const uchar value = (crcBits & 0xFF) + model->datum( i );
         crcBits >>= 8;
@@ -54,7 +54,7 @@ bool ModSum8ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
         if( i >= nextBlockEnd )
         {
             nextBlockEnd += CalculatedByteCountSignalLimit;
-            emit calculatedBytes( section.localIndex(i)+1 );
+            emit calculatedBytes( range.localIndex(i)+1 );
         }
     }
     modSum = ~modSum + 1;

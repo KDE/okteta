@@ -85,7 +85,7 @@ static bool is8Bit( QTextCodec *Codec )
   return Found;
 }
 
-static QTextCodec *createLatin1()
+static QTextCodec* createLatin1()
 {
   return KGlobal::charsets()->codecForName( EncodingNames[0].Name );
 }
@@ -142,14 +142,14 @@ const QStringList &KTextCharCodec::codecNames()
   return CodecNames;
 }
 
-QString KTextCharCodec::nameOfEncoding( CharCoding C )
+QString KTextCharCodec::nameOfEncoding( CharCoding _char )
 {
   KTextCharCodec *Codec = 0;
 
   const char* N = 0;
   for( unsigned int i=0; i<NoOfEncodings; ++i )
   {
-    if( EncodingNames[i].Encoding == C )
+    if( EncodingNames[i].Encoding == _char )
     {
       N = EncodingNames[i].Name;
       break;
@@ -204,48 +204,51 @@ const QStringList &KTextCharCodec::codecNames()
 }
 
 
-KTextCharCodec::KTextCharCodec( QTextCodec *C )
-  : Codec( C ),
-    Decoder( C->makeDecoder() ),
-    Encoder( C->makeEncoder() )
+KTextCharCodec::KTextCharCodec( QTextCodec* textCodec )
+  : mCodec( textCodec ),
+    mDecoder( textCodec->makeDecoder() ),
+    mEncoder( textCodec->makeEncoder() )
 {}
 
-KTextCharCodec::~KTextCharCodec()
+bool KTextCharCodec::canEncode( const QChar &_char ) const
 {
-  delete Decoder;
-  delete Encoder;
+    return mCodec->canEncode( _char );
 }
 
-bool KTextCharCodec::canEncode( const QChar &C ) const
+bool KTextCharCodec::encode( Byte* byte, const QChar& _char ) const
 {
-  return Codec->canEncode( C );
-}
+    if( !mCodec->canEncode(_char) ) // TODO: do we really need the codec?
+        return false;
 
-bool KTextCharCodec::encode( char *D, const QChar &C ) const
-{
-  if( !Codec->canEncode(C) ) // TODO: do we really need the codec?
-    return false;
-  QByteArray T = Encoder->fromUnicode( QString(C) );
-  if (T.size()) {
-    *D = T[0];
-    return true;
-  } else
-    return false;
+    const QByteArray encoded = mEncoder->fromUnicode( QString(_char) );
+    if( encoded.size() > 0 )
+    {
+        *byte = encoded.at( 0 );
+        return true;
+    } else
+        return false;
 }
 
 
-Character KTextCharCodec::decode( char Byte ) const
+Character KTextCharCodec::decode( Byte byte ) const
 {
-  QString S( Decoder->toUnicode(&Byte,1) );
-  return Character(S.at(0));
+    const QString s( mDecoder->toUnicode(reinterpret_cast<const char*>(&byte),1) );
+    return Character( s.at(0) );
 }
 
 
 const QString& KTextCharCodec::name() const
 {
-  if( Name.isNull() )
-    Name = QString::fromLatin1( Codec->name() );
-  return Name;
+    if( mName.isNull() )
+        mName = QString::fromLatin1( mCodec->name() );
+
+    return mName;
+}
+
+KTextCharCodec::~KTextCharCodec()
+{
+    delete mDecoder;
+    delete mEncoder;
 }
 
 }

@@ -105,7 +105,7 @@ void BookmarksTool::setTargetModel( AbstractModel* model )
                  SLOT(onBookmarksModified()) );
         connect( mByteArray, SIGNAL(bookmarksModified( const QList<int>& )),
                  SIGNAL(bookmarksModified( const QList<int>& )) );
-        connect( mByteArrayDisplay, SIGNAL(cursorPositionChanged( int )), SLOT(onCursorPositionChanged( int )) );
+        connect( mByteArrayDisplay, SIGNAL(cursorPositionChanged( Okteta::Address )), SLOT(onCursorPositionChanged( Okteta::Address )) );
     }
     else
     {
@@ -175,7 +175,7 @@ void BookmarksTool::setBookmarkName( unsigned int bookmarkIndex, const QString& 
     mByteArrayDisplay->widget()->setFocus();
 }
 
-void BookmarksTool::onCursorPositionChanged( int newPosition )
+void BookmarksTool::onCursorPositionChanged( Okteta::Address newPosition )
 {
     const int bookmarksCount = mBookmarks->bookmarksCount();
     const bool hasBookmarks = ( bookmarksCount != 0 );

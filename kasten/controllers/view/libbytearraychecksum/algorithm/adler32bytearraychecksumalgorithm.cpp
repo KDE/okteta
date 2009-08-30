@@ -39,22 +39,22 @@ Adler32ByteArrayChecksumAlgorithm::Adler32ByteArrayChecksumAlgorithm()
 AbstractByteArrayChecksumParameterSet* Adler32ByteArrayChecksumAlgorithm::parameterSet() { return &mParameterSet; }
 
 bool Adler32ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
-                                                           const Okteta::AbstractByteArrayModel* model, const KDE::Section& section ) const
+                                                           const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const
 {
     quint32 a = 1;
     quint32 b = 0;
 
     // TODO: this is the "inefficient but straightforward implementation" from the Wikipedia entry, search for improved
-    int nextBlockEnd = section.start() + CalculatedByteCountSignalLimit;
-    for( int i = section.start(); i<=section.end(); ++i )
+    Okteta::Address nextBlockEnd = range.start() + CalculatedByteCountSignalLimit;
+    for( Okteta::Address i = range.start(); i<=range.end(); ++i )
     {
-        a = (a + model->datum( i )) % MOD_ADLER;
+        a = (a + model->byte( i )) % MOD_ADLER;
         b = (b + a) % MOD_ADLER;
 
         if( i >= nextBlockEnd )
         {
             nextBlockEnd += CalculatedByteCountSignalLimit;
-            emit calculatedBytes( section.localIndex(i)+1 );
+            emit calculatedBytes( range.localIndex(i)+1 );
         }
     }
 

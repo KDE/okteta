@@ -40,46 +40,46 @@ class FixedSizeByteArrayModel : public AbstractByteArrayModel
 {
   public:
     /** creates a readonly buffer around the given data */
-    FixedSizeByteArrayModel( char* data, unsigned int size, char fillUpChar = '\0' );
+    FixedSizeByteArrayModel( Byte* data, int size, Byte fillUpChar = '\0' );
     /** creates a writeable buffer which is deleted at the end */
-    explicit FixedSizeByteArrayModel( unsigned int size, char fillUpChar = '\0' );
+    explicit FixedSizeByteArrayModel( int size, Byte fillUpChar = '\0' );
 
     virtual ~FixedSizeByteArrayModel();
 
   public: // AbstractByteArrayModel API
-    virtual char datum( unsigned int offset ) const;
-    virtual int size() const;
+    virtual Byte byte( Address offset ) const;
+    virtual Size size() const;
     virtual bool isReadOnly() const;
     virtual bool isModified() const;
 
-    virtual int insert( int offset, const char* insertData, int insertLength );
-    virtual int remove( const KDE::Section& removeSection );
-    virtual unsigned int replace( const KDE::Section& removeSection, const char* insertData, unsigned int insertLength );
-    virtual bool swap( int firstStart, const KDE::Section& secondSection );
-    virtual int fill( const char fillChar, unsigned int offset = 0, int fillLength = -1 );
-    virtual void setDatum( unsigned int offset, const char datum );
+    virtual Size insert( Address offset, const Byte* insertData, int insertLength );
+    virtual Size remove( const AddressRange& removeRange );
+    virtual Size replace( const AddressRange& removeRange, const Byte* insertData, int insertLength );
+    virtual bool swap( Address firstStart, const AddressRange& secondRange );
+    virtual Size fill( const Byte fillByte, Address offset = 0, Size fillLength = -1 );
+    virtual void setByte( Address offset, Byte byte );
 
     virtual void setModified( bool modified = true );
     virtual void setReadOnly( bool readOnly = true );
 
   public:
-    int compare( const AbstractByteArrayModel& other, const KDE::Section& range, unsigned int pos = 0 );
-    int compare( const AbstractByteArrayModel& other, int otherPos, int length, unsigned int pos = 0 );
+    int compare( const AbstractByteArrayModel& other, const AddressRange& otherRange, Address offset = 0 );
+    int compare( const AbstractByteArrayModel& other, Address otherOffset, Size otherLength, Address offset = 0 );
     int compare( const AbstractByteArrayModel& other );
 
   public:
-    char* rawData() const;
+    Byte* rawData() const;
 
   protected:
     void reset( unsigned int pos, unsigned int length );
 
   protected:
     /** */
-    char* mData;
+    Byte* mData;
     /***/
-    unsigned int mSize;
+    int mSize;
     /** */
-    char mFillUpChar;
+    Byte mFillUpByte;
     /**  */
     bool mReadOnly :1;
     /** */
@@ -89,8 +89,8 @@ class FixedSizeByteArrayModel : public AbstractByteArrayModel
 };
 
 
-inline char FixedSizeByteArrayModel::datum( unsigned int offset ) const { return mData[offset]; }
-inline int FixedSizeByteArrayModel::size() const  { return mSize; }
+inline Byte FixedSizeByteArrayModel::byte( Address offset ) const { return mData[offset]; }
+inline Size FixedSizeByteArrayModel::size() const  { return mSize; }
 
 inline bool FixedSizeByteArrayModel::isReadOnly()   const { return mReadOnly; }
 inline bool FixedSizeByteArrayModel::isModified()   const { return mModified; }
@@ -99,12 +99,12 @@ inline void FixedSizeByteArrayModel::setReadOnly( bool readOnly )  { mReadOnly =
 inline void FixedSizeByteArrayModel::setModified( bool modified )   { mModified = modified; }
 
 inline int FixedSizeByteArrayModel::compare( const AbstractByteArrayModel& other )
-{ return compare( other, KDE::Section(0,other.size()-1),0 ); }
+{ return compare( other, AddressRange::fromWidth(0,other.size()), 0 ); }
 
-inline int FixedSizeByteArrayModel::compare( const AbstractByteArrayModel& other, int otherPos, int length, unsigned int pos )
-{ return compare( other, KDE::Section::fromWidth(otherPos,length),pos ); }
+inline int FixedSizeByteArrayModel::compare( const AbstractByteArrayModel& other, Address otherOffset, Size otherLength, Address offset )
+{ return compare( other, AddressRange::fromWidth(otherOffset,otherLength), offset ); }
 
-inline char* FixedSizeByteArrayModel::rawData() const { return mData; }
+inline Byte* FixedSizeByteArrayModel::rawData() const { return mData; }
 
 }
 

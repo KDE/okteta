@@ -35,7 +35,7 @@ static const QChar     DefaultUndefinedChar =   (char)'?';
 
 
 CharByteArrayColumnRenderer::CharByteArrayColumnRenderer( AbstractColumnStylist* stylist,
-        Okteta::AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges )
+        AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges )
  : AbstractByteArrayColumnRenderer( stylist, byteArrayModel, layout, ranges ),
    mShowingNonprinting( DefaultShowingNonprinting ),
    mSubstituteChar( DefaultSubstituteChar ),
@@ -45,7 +45,7 @@ CharByteArrayColumnRenderer::CharByteArrayColumnRenderer( AbstractColumnStylist*
 }
 
 
-void CharByteArrayColumnRenderer::renderByteText( QPainter *painter, char byte, Okteta::Character byteChar, const QColor &color ) const
+void CharByteArrayColumnRenderer::renderByteText( QPainter* painter, Byte byte, Character byteChar, const QColor& color ) const
 {
 Q_UNUSED( byte )
 

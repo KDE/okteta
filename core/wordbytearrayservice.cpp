@@ -32,27 +32,28 @@ namespace Okteta
 {
 
 WordByteArrayService::WordByteArrayService( const AbstractByteArrayModel* byteArrayModel, const CharCodec* charCodec )
- : mByteArrayModel( byteArrayModel ), mCharCodec( charCodec )
+  : mByteArrayModel( byteArrayModel ),
+    mCharCodec( charCodec )
 {}
 
-KDE::Section WordByteArrayService::wordSection( unsigned int index ) const
+AddressRange WordByteArrayService::wordSection( Address index ) const
 {
     return isWordChar(index) ?
-            KDE::Section( indexOfWordStart(index), indexOfWordEnd(index) ) :
-            KDE::Section();
+            AddressRange( indexOfWordStart(index), indexOfWordEnd(index) ) :
+            AddressRange();
 }
 
 
-bool WordByteArrayService::isWordChar( unsigned int index ) const
+bool WordByteArrayService::isWordChar( Address index ) const
 {
-    const Character decodedChar = mCharCodec->decode( mByteArrayModel->datum(index) );
+    const Character decodedChar = mCharCodec->decode( mByteArrayModel->byte(index) );
     return !decodedChar.isUndefined() && decodedChar.isLetterOrNumber();
 }
 
 
-int WordByteArrayService::indexOfPreviousWordStart( unsigned int index ) const
+Address WordByteArrayService::indexOfPreviousWordStart( Address index ) const
 {
-    const unsigned int size = mByteArrayModel->size();
+    const Size size = mByteArrayModel->size();
     // already at the start or can the result only be 0?
     if( index == 0 || size < 3 )
         return 0;
@@ -71,13 +72,14 @@ int WordByteArrayService::indexOfPreviousWordStart( unsigned int index ) const
         else if( !lookingForFirstWordChar )
             lookingForFirstWordChar = true;
     }
+
     return 0;
 }
 
 
-int WordByteArrayService::indexOfNextWordStart( unsigned int index ) const
+Address WordByteArrayService::indexOfNextWordStart( Address index ) const
 {
-    const unsigned int size = mByteArrayModel->size();
+    const Size size = mByteArrayModel->size();
     bool lookingForFirstWordChar = false;
     for( ; index<size; ++index )
     {
@@ -95,9 +97,9 @@ int WordByteArrayService::indexOfNextWordStart( unsigned int index ) const
 }
 
 
-int WordByteArrayService::indexOfBeforeNextWordStart( unsigned int index ) const
+Address WordByteArrayService::indexOfBeforeNextWordStart( Address index ) const
 {
-    const unsigned int size = mByteArrayModel->size();
+    const Size size = mByteArrayModel->size();
     bool lookingForFirstWordChar = false;
     for( ; index<size; ++index )
     {
@@ -110,25 +112,27 @@ int WordByteArrayService::indexOfBeforeNextWordStart( unsigned int index ) const
         else if( !lookingForFirstWordChar )
             lookingForFirstWordChar = true;
     }
+
     // if no more word found, go to the end
     return size-1;
 }
 
 
-int WordByteArrayService::indexOfWordStart( unsigned int index ) const
+Address WordByteArrayService::indexOfWordStart( Address index ) const
 {
     for( ; index > 0; --index )
     {
         if( !isWordChar(index-1) )
             return( index );
     }
+
     return 0;
 }
 
 
-int WordByteArrayService::indexOfWordEnd( unsigned int index ) const
+Address WordByteArrayService::indexOfWordEnd( Address index ) const
 {
-    const unsigned int size = mByteArrayModel->size();
+    const Size size = mByteArrayModel->size();
     for( ++index; index<size; ++index )
     {
         if( !isWordChar(index) )
@@ -139,7 +143,7 @@ int WordByteArrayService::indexOfWordEnd( unsigned int index ) const
 }
 
 
-int WordByteArrayService::indexOfLeftWordSelect( unsigned int index ) const
+Address WordByteArrayService::indexOfLeftWordSelect( Address index ) const
 {
     // word at index?
     if( isWordChar(index) )
@@ -155,7 +159,7 @@ int WordByteArrayService::indexOfLeftWordSelect( unsigned int index ) const
     }
     else
     {
-        const unsigned int size = mByteArrayModel->size();
+        const Size size = mByteArrayModel->size();
         // search for word start to the right
         for( ++index; index<size; ++index )
         {
@@ -168,11 +172,11 @@ int WordByteArrayService::indexOfLeftWordSelect( unsigned int index ) const
 }
 
 
-int WordByteArrayService::indexOfRightWordSelect( unsigned int index ) const
+Address WordByteArrayService::indexOfRightWordSelect( Address index ) const
 {
     // TODO: should this check be here or with the caller?
     // the later would need another function to search the previous word end
-    const unsigned int size = mByteArrayModel->size();
+    const Size size = mByteArrayModel->size();
     bool searchToLeft;
     if( index >= size )
     {
@@ -207,18 +211,18 @@ int WordByteArrayService::indexOfRightWordSelect( unsigned int index ) const
 }
 
 /*
-int WordByteArrayService::indexOfBehindWordEnd( unsigned int index ) const
+Address WordByteArrayService::indexOfBehindWordEnd( Address index ) const
 {
   // no word at index?
-  return !::isWordChar(datum(index)) ? indexOfBehindLeftWordEnd(index) : indexOfBehindRightWordEnd(index+1)
+  return !::isWordChar(byte(index)) ? indexOfBehindLeftWordEnd(index) : indexOfBehindRightWordEnd(index+1)
 }
 
 
-int WordByteArrayService::indexOfBehindRightWordEnd( unsigned int index ) const
+Address WordByteArrayService::indexOfBehindRightWordEnd( Address index ) const
 {
   for( ; index<size(); ++index )
 {
-    if( !::isWordChar(datum(index)) )
+    if( !::isWordChar(byte(index)) )
       return index;
 }
   // word reaches the end, so step behind
@@ -226,11 +230,11 @@ int WordByteArrayService::indexOfBehindRightWordEnd( unsigned int index ) const
 }
 
 
-int WordByteArrayService::indexOfBehindLeftWordEnd( unsigned int index ) const
+Address WordByteArrayService::indexOfBehindLeftWordEnd( Address index ) const
 {
   for( --index; index>=0; --index )
 {
-    if( ::isWordChar(datum(index)) )
+    if( ::isWordChar(byte(index)) )
       return index+1;
 }
   // word reaches the end, so step behind
@@ -239,20 +243,20 @@ int WordByteArrayService::indexOfBehindLeftWordEnd( unsigned int index ) const
 */
 
 // TODO: rename WordByteArrayService to TextByteArrayService or TextByteArrayAnalyser
-QString WordByteArrayService::text( unsigned int index, int lastIndex ) const
+QString WordByteArrayService::text( Address index, Address lastIndex ) const
 {
     QString result;
 
-    const int lastValidIndex = mByteArrayModel->size() - 1;
-    const unsigned int behindLastIndex =
+    const Address lastValidIndex = mByteArrayModel->size() - 1;
+    const Address behindLastIndex =
         (( lastIndex < 0 || lastIndex > lastValidIndex ) ? lastValidIndex : lastIndex ) + 1;
 
-    const int maxTextLength = behindLastIndex - index;
+    const Size maxTextLength = behindLastIndex - index;
     result.reserve( maxTextLength );
 
     for( ; index<behindLastIndex; ++index )
     {
-        const Character decodedChar = mCharCodec->decode( mByteArrayModel->datum(index) );
+        const Character decodedChar = mCharCodec->decode( mByteArrayModel->byte(index) );
         // TODO: handle line breaks, separators and spacing, controlled by flags given as parameter
         const bool isTextChar = ( !decodedChar.isUndefined() &&
                                   (decodedChar.isLetterOrNumber() || decodedChar.isSpace() || decodedChar.isPunct()) );

@@ -26,7 +26,7 @@
 // tool
 #include "containedstring.h"
 // Okteta core
-#include <section.h>
+#include <addressrange.h>
 // Qt
 #include <QtCore/QObject>
 #include <QtCore/QList>
@@ -45,18 +45,18 @@ class ExtractStringsJob : public QObject // not yet: KJob
   Q_OBJECT
 
   public:
-    ExtractStringsJob( const Okteta::AbstractByteArrayModel *model,
-                       const KDE::Section &selection,
-                       const Okteta::CharCodec *charCodec,
+    ExtractStringsJob( const Okteta::AbstractByteArrayModel* model,
+                       const Okteta::AddressRange& selection,
+                       const Okteta::CharCodec* charCodec,
                        int minLength,
-                       QList<ContainedString> *containedStringList );
+                       QList<ContainedString>* containedStringList );
 
   public:
     void exec();
 
   protected:
     const Okteta::AbstractByteArrayModel *mByteArrayModel;
-    const KDE::Section mSelection;
+    const Okteta::AddressRange mSelection;
     const Okteta::CharCodec *mCharCodec;
     const int mMinLength;
 
@@ -64,11 +64,11 @@ class ExtractStringsJob : public QObject // not yet: KJob
 };
 
 
-inline ExtractStringsJob::ExtractStringsJob( const Okteta::AbstractByteArrayModel *model,
-                                             const KDE::Section &selection,
-                                             const Okteta::CharCodec *charCodec,
+inline ExtractStringsJob::ExtractStringsJob( const Okteta::AbstractByteArrayModel* model,
+                                             const Okteta::AddressRange& selection,
+                                             const Okteta::CharCodec* charCodec,
                                              int minLength,
-                                             QList<ContainedString> *containedStringList )
+                                             QList<ContainedString>* containedStringList )
  : mByteArrayModel( model ), mSelection( selection ), mCharCodec( charCodec ), mMinLength( minLength ),
    mContainedStringList( containedStringList )
 {}

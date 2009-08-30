@@ -36,16 +36,16 @@ ReverseByteArrayFilter::ReverseByteArrayFilter()
 
 AbstractByteArrayFilterParameterSet *ReverseByteArrayFilter::parameterSet() { return &mParameterSet; }
 
-bool ReverseByteArrayFilter::filter( char *result,
-                                     Okteta::AbstractByteArrayModel *model, const KDE::Section &section ) const
+bool ReverseByteArrayFilter::filter( Okteta::Byte* result,
+                                     Okteta::AbstractByteArrayModel *model, const Okteta::AddressRange& range ) const
 {
-    int r = section.width()-1;
-    int m = section.start();
+    Okteta::Size r = range.width()-1;
+    Okteta::Address m = range.start();
     int filteredBytesCount = 0;
-    while( m <= section.end() )
+    while( m <= range.end() )
     {
-        unsigned char byte = (unsigned char)model->datum( m++ );
-        unsigned char reverseByte;
+        Okteta::Byte byte = model->byte( m++ );
+        Okteta::Byte reverseByte;
         if( mParameterSet.invertsBits() )
         {
             reverseByte = 0;
@@ -63,7 +63,7 @@ bool ReverseByteArrayFilter::filter( char *result,
         if( filteredBytesCount >= FilteredByteCountSignalLimit )
         {
             filteredBytesCount = 0;
-            emit filteredBytes( m-section.start() );
+            emit filteredBytes( m-range.start() );
         }
     }
 

@@ -28,22 +28,22 @@
 class AbstractByteArrayFilter::Private
 {
   public:
-    explicit Private( const QString &name );
+    explicit Private( const QString& name );
   public:
     QString name() const;
 
   protected:
-    QString mName;
+    const QString mName;
 };
 
-AbstractByteArrayFilter::Private::Private( const QString &name )
+inline AbstractByteArrayFilter::Private::Private( const QString& name )
  : mName( name )
 {}
 
 inline QString AbstractByteArrayFilter::Private::name() const { return mName; }
 
 
-AbstractByteArrayFilter::AbstractByteArrayFilter( const QString &name )
+AbstractByteArrayFilter::AbstractByteArrayFilter( const QString& name )
  : d( new Private(name) )
 {}
 
@@ -53,5 +53,3 @@ AbstractByteArrayFilter::~AbstractByteArrayFilter()
 {
     delete d;
 }
-
-#include "abstractbytearrayfilter.moc"

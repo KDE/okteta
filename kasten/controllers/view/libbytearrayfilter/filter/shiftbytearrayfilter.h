@@ -23,7 +23,6 @@
 #ifndef SHIFTBYTEARRAYFILTER_H
 #define SHIFTBYTEARRAYFILTER_H
 
-
 //
 #include "rotatebytearrayfilterparameterset.h"
 //
@@ -34,10 +33,11 @@ class ShiftByteArrayFilter : public AbstractByteArrayFilter
 {
   public:
     ShiftByteArrayFilter();
+
     virtual ~ShiftByteArrayFilter();
 
   public: // AbstractByteArrayFilter API
-    virtual bool filter( char *result, Okteta::AbstractByteArrayModel *model, const KDE::Section &section ) const;
+    virtual bool filter( Okteta::Byte* result, Okteta::AbstractByteArrayModel *model, const Okteta::AddressRange& range ) const;
     virtual AbstractByteArrayFilterParameterSet *parameterSet();
 
   protected:
