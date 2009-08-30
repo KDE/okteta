@@ -26,8 +26,6 @@
 #include "testpiecetablechange.h"
 //
 #include <piecetable/piecetable.h>
-//
-#include <sectionlist.h>
 // Qt
 #include <QtTest/QtTest>
 
