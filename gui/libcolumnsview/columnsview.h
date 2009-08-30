@@ -64,17 +64,17 @@ class OKTETAGUI_EXPORT ColumnsView : public QAbstractScrollArea
 
   public: // pixel-wise sizes
     /** returns the height of each line */
-    KPixelY lineHeight() const;
+    PixelY lineHeight() const;
     /** returns the width of all visible columns together */
-    KPixelX columnsWidth() const;
+    PixelX columnsWidth() const;
     /** returns the height of all lines together */
-    KPixelY columnsHeight() const;
+    PixelY columnsHeight() const;
 
   public: // services
     /** gives the index of the line that would include y in pixel coord.
       * y is not forced to be inside the total height.
       */
-    uint lineAt( KPixelY y ) const;
+    uint lineAt( PixelY y ) const;
     /** gives the index of the first and the last line that would be visible
       * these lines might not contain anything
       */
@@ -82,26 +82,26 @@ class OKTETAGUI_EXPORT ColumnsView : public QAbstractScrollArea
     /** gives the index of the first and the last line that would be visible in the given pixel range
       * these lines might not contain anything
       */
-    KDE::Section visibleLines( const KPixelYs &YPixels ) const;
+    KDE::Section visibleLines( const PixelYs &YPixels ) const;
 
     /** @return visible width of the current view */
-    KPixelX visibleWidth() const;
+    PixelX visibleWidth() const;
     /** @return visible height of the current view */
-    KPixelY visibleHeight() const;
+    PixelY visibleHeight() const;
     /** @return x offset of the current view */
-    KPixelX xOffset() const;
+    PixelX xOffset() const;
     /** @return y offset of the current view */
-    KPixelY yOffset() const;
+    PixelY yOffset() const;
 
     /** @return y offset of the current view */
-    KPixelY yOffsetOfLine( int lineIndex ) const;
+    PixelY yOffsetOfLine( int lineIndex ) const;
 
     /** translates the point to coordinates in the columns */
     QPoint viewportToColumns( const QPoint &point ) const;
 
   public:
     /**  */
-    void setColumnsPos( KPixelX x, KPixelY y );
+    void setColumnsPos( PixelX x, PixelY y );
 
   protected: // QAbstractScrollArea API
     virtual bool event( QEvent *event );
@@ -125,7 +125,7 @@ class OKTETAGUI_EXPORT ColumnsView : public QAbstractScrollArea
       * doesn't update the content size
       * @param NewLineHeight height in pixels
       */
-    virtual void setLineHeight( KPixelY lineHeight );
+    virtual void setLineHeight( PixelY lineHeight );
     /** sets the number of lines
       * doesn't update the content size
       * @param NewNoOfLines new number of lines to display

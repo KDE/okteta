@@ -112,10 +112,10 @@ Okteta::Address ByteArrayFrameRenderer::firstLineOffset()    const { return mLay
 Okteta::Address ByteArrayFrameRenderer::startOffset()        const { return mLayout->startOffset(); }
 ResizeStyle ByteArrayFrameRenderer::resizeStyle()            const { return mResizeStyle; }
 Okteta::ValueCoding ByteArrayFrameRenderer::valueCoding()   const { return mValueCoding; }
-Okteta::KPixelX ByteArrayFrameRenderer::byteSpacingWidth()           const { return mValueColumnRenderer->byteSpacingWidth(); }
+Okteta::PixelX ByteArrayFrameRenderer::byteSpacingWidth()           const { return mValueColumnRenderer->byteSpacingWidth(); }
 int ByteArrayFrameRenderer::noOfGroupedBytes()               const { return mValueColumnRenderer->noOfGroupedBytes(); }
-Okteta::KPixelX ByteArrayFrameRenderer::groupSpacingWidth()          const { return mValueColumnRenderer->groupSpacingWidth(); }
-Okteta::KPixelX ByteArrayFrameRenderer::binaryGapWidth()             const { return mValueColumnRenderer->binaryGapWidth(); }
+Okteta::PixelX ByteArrayFrameRenderer::groupSpacingWidth()          const { return mValueColumnRenderer->groupSpacingWidth(); }
+Okteta::PixelX ByteArrayFrameRenderer::binaryGapWidth()             const { return mValueColumnRenderer->binaryGapWidth(); }
 bool ByteArrayFrameRenderer::showsNonprinting()              const { return mCharColumnRenderer->isShowingNonprinting(); }
 QChar ByteArrayFrameRenderer::substituteChar()               const { return mCharColumnRenderer->substituteChar(); }
 QChar ByteArrayFrameRenderer::undefinedChar()                const { return mCharColumnRenderer->undefinedChar(); }
@@ -193,7 +193,7 @@ void ByteArrayFrameRenderer::setStartOffset( Okteta::Address startOffset )
 }
 
 
-void ByteArrayFrameRenderer::setBufferSpacing( Okteta::KPixelX byteSpacing, int noOfGroupedBytes, Okteta::KPixelX groupSpacing )
+void ByteArrayFrameRenderer::setBufferSpacing( Okteta::PixelX byteSpacing, int noOfGroupedBytes, Okteta::PixelX groupSpacing )
 {
     if( !mValueColumnRenderer->setSpacing(byteSpacing,noOfGroupedBytes,groupSpacing) )
         return;
@@ -224,7 +224,7 @@ void ByteArrayFrameRenderer::setNoOfBytesPerLine( int noOfBytesPerLine )
 }
 
 
-void ByteArrayFrameRenderer::setByteSpacingWidth( Okteta::KPixelX byteSpacingWidth )
+void ByteArrayFrameRenderer::setByteSpacingWidth( Okteta::PixelX byteSpacingWidth )
 {
     if( !mValueColumnRenderer->setByteSpacingWidth(byteSpacingWidth) )
         return;
@@ -239,7 +239,7 @@ void ByteArrayFrameRenderer::setNoOfGroupedBytes( int noOfGroupedBytes )
 }
 
 
-void ByteArrayFrameRenderer::setGroupSpacingWidth( Okteta::KPixelX groupSpacingWidth )
+void ByteArrayFrameRenderer::setGroupSpacingWidth( Okteta::PixelX groupSpacingWidth )
 {
     if( !mValueColumnRenderer->setGroupSpacingWidth(groupSpacingWidth) )
         return;
@@ -247,7 +247,7 @@ void ByteArrayFrameRenderer::setGroupSpacingWidth( Okteta::KPixelX groupSpacingW
 }
 
 
-void ByteArrayFrameRenderer::setBinaryGapWidth( Okteta::KPixelX binaryGapWidth )
+void ByteArrayFrameRenderer::setBinaryGapWidth( Okteta::PixelX binaryGapWidth )
 {
     if( !mValueColumnRenderer->setBinaryGapWidth(binaryGapWidth) )
         return;
@@ -339,8 +339,8 @@ void ByteArrayFrameRenderer::setFont( const QFont& font )
 
     // get new values
     QFontMetrics fontMetrics( font );
-    Okteta::KPixelX digitWidth = fontMetrics.maxWidth();
-    Okteta::KPixelY digitBaseLine = fontMetrics.ascent();
+    Okteta::PixelX digitWidth = fontMetrics.maxWidth();
+    Okteta::PixelY digitBaseLine = fontMetrics.ascent();
 
     setLineHeight( fontMetrics.height() );
 
@@ -432,19 +432,19 @@ QSize ByteArrayFrameRenderer::minimumSizeHint() const
 
 int ByteArrayFrameRenderer::fittingBytesPerLine() const
 {
-    const Okteta::KPixelX nonDataWidth =
+    const Okteta::PixelX nonDataWidth =
         mOffsetColumnRenderer->visibleWidth()
         + mFirstBorderColumnRenderer->visibleWidth()
         + mSecondBorderColumnRenderer->visibleWidth();
 
     // abstract offset and border columns width
-    const Okteta::KPixelX maxDataWidth = width() - nonDataWidth;
+    const Okteta::PixelX maxDataWidth = width() - nonDataWidth;
 
     // prepare needed values
-    const Okteta::KPixelX charByteWidth = mCharColumnRenderer->isVisible() ? mCharColumnRenderer->digitWidth() : 0;
-    const Okteta::KPixelX valueByteWidth = mValueColumnRenderer->isVisible() ? mValueColumnRenderer->byteWidth() : 0;
-    const Okteta::KPixelX valueByteSpacingWidth = mValueColumnRenderer->isVisible() ? mValueColumnRenderer->byteSpacingWidth() : 0;
-    Okteta::KPixelX valueByteGroupSpacingWidth;
+    const Okteta::PixelX charByteWidth = mCharColumnRenderer->isVisible() ? mCharColumnRenderer->digitWidth() : 0;
+    const Okteta::PixelX valueByteWidth = mValueColumnRenderer->isVisible() ? mValueColumnRenderer->byteWidth() : 0;
+    const Okteta::PixelX valueByteSpacingWidth = mValueColumnRenderer->isVisible() ? mValueColumnRenderer->byteSpacingWidth() : 0;
+    Okteta::PixelX valueByteGroupSpacingWidth;
     int noOfGroupedBytes = mValueColumnRenderer->noOfGroupedBytes();
     // no grouping?
     if( noOfGroupedBytes == 0 )
@@ -456,9 +456,9 @@ int ByteArrayFrameRenderer::fittingBytesPerLine() const
     else
         valueByteGroupSpacingWidth = mValueColumnRenderer->isVisible() ? mValueColumnRenderer->groupSpacingWidth() : 0;
 
-    Okteta::KPixelX valueByteGroupWidth =  noOfGroupedBytes * valueByteWidth + (noOfGroupedBytes-1)*valueByteSpacingWidth;
-    Okteta::KPixelX charByteGroupWidth =   noOfGroupedBytes * charByteWidth;
-    Okteta::KPixelX charAndValueGroupWidth = (valueByteGroupWidth + valueByteGroupSpacingWidth) + charByteGroupWidth;
+    Okteta::PixelX valueByteGroupWidth =  noOfGroupedBytes * valueByteWidth + (noOfGroupedBytes-1)*valueByteSpacingWidth;
+    Okteta::PixelX charByteGroupWidth =   noOfGroupedBytes * charByteWidth;
+    Okteta::PixelX charAndValueGroupWidth = (valueByteGroupWidth + valueByteGroupSpacingWidth) + charByteGroupWidth;
 
     // calculate fitting groups per line
 

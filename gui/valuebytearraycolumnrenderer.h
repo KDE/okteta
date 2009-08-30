@@ -52,11 +52,11 @@ class OKTETAGUI_EXPORT ValueByteArrayColumnRenderer : public AbstractByteArrayCo
       * @param BinaryGapW spacing in the middle of a binary in pixels
       * returns true if there was a change
       */
-    bool setBinaryGapWidth( KPixelX binaryGapWidth );
+    bool setBinaryGapWidth( PixelX binaryGapWidth );
 
 
   public: // value access
-    KPixelX binaryGapWidth() const;
+    PixelX binaryGapWidth() const;
 
   protected: // AbstractByteArrayColumnRenderer API
     virtual void renderByteText( QPainter* painter, Byte byte, Character byteChar, const QColor& color ) const;
@@ -71,17 +71,17 @@ class OKTETAGUI_EXPORT ValueByteArrayColumnRenderer : public AbstractByteArrayCo
     /** */
     const ValueCodec* mValueCodec;
     /** */
-    KPixelX mBinaryGapWidth;
+    PixelX mBinaryGapWidth;
 
   protected: // buffered data
     /** buffer to hold the formatted valueCoding */
     mutable QString mDecodedByteText;
     /** calculated: Offset in pixels of the second half of the binary */
-    KPixelX mBinaryHalfOffset;
+    PixelX mBinaryHalfOffset;
 };
 
 
-inline KPixelX ValueByteArrayColumnRenderer::binaryGapWidth()                 const { return mBinaryGapWidth; }
+inline PixelX ValueByteArrayColumnRenderer::binaryGapWidth()                 const { return mBinaryGapWidth; }
 
 }
 

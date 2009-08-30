@@ -70,10 +70,10 @@ class OKTETAGUI_EXPORT ByteArrayColumnView : public AbstractByteArrayView
     virtual bool offsetColumnVisible() const;
 
   // value column
-    virtual int/*KPixelX*/ byteSpacingWidth() const;
+    virtual int/*PixelX*/ byteSpacingWidth() const;
     virtual int noOfGroupedBytes() const;
-    virtual int/*KPixelX*/ groupSpacingWidth() const;
-    virtual int/*KPixelX*/ binaryGapWidth() const;
+    virtual int/*PixelX*/ groupSpacingWidth() const;
+    virtual int/*PixelX*/ binaryGapWidth() const;
 
   // char column
     virtual bool showsNonprinting() const;
@@ -84,11 +84,11 @@ class OKTETAGUI_EXPORT ByteArrayColumnView : public AbstractByteArrayView
 
     virtual void setByteArrayModel( AbstractByteArrayModel* byteArrayModel );
     virtual void toggleOffsetColumn( bool offsetColumnVisible );
-    virtual void setByteSpacingWidth( int/*KPixelX*/ byteSpacingWidth ) ;
+    virtual void setByteSpacingWidth( int/*PixelX*/ byteSpacingWidth ) ;
     virtual void setNoOfGroupedBytes( int noOfGroupedBytes );
-    virtual void setGroupSpacingWidth( int/*KPixelX*/ groupSpacingWidth );
+    virtual void setGroupSpacingWidth( int/*PixelX*/ groupSpacingWidth );
     virtual void setBinaryGapWidth( int binaryGapWidth );
-    virtual void setBufferSpacing( int/*KPixelX*/ byteSpacingWidth, int noOfGroupedBytes = 0, int/*KPixelX*/ groupSpacingWidth = 0 );
+    virtual void setBufferSpacing( int/*PixelX*/ byteSpacingWidth, int noOfGroupedBytes = 0, int/*PixelX*/ groupSpacingWidth = 0 );
     virtual void setValueCoding( ValueCoding valueCoding );
   // char column parameters
     virtual void setShowsNonprinting( bool showsNonprinting = true );

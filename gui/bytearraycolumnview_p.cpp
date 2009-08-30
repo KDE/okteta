@@ -141,7 +141,7 @@ void ByteArrayColumnViewPrivate::setByteArrayModel( AbstractByteArrayModel* _byt
 }
 
 
-void ByteArrayColumnViewPrivate::setBufferSpacing( KPixelX ByteSpacing, int noOfGroupedBytes, KPixelX GroupSpacing )
+void ByteArrayColumnViewPrivate::setBufferSpacing( PixelX ByteSpacing, int noOfGroupedBytes, PixelX GroupSpacing )
 {
     if( !mValueColumn->setSpacing(ByteSpacing,noOfGroupedBytes,GroupSpacing) )
         return;
@@ -176,7 +176,7 @@ void ByteArrayColumnViewPrivate::setValueCoding( AbstractByteArrayView::ValueCod
 }
 
 
-void ByteArrayColumnViewPrivate::setByteSpacingWidth( int/*KPixelX*/ byteSpacingWidth )
+void ByteArrayColumnViewPrivate::setByteSpacingWidth( int/*PixelX*/ byteSpacingWidth )
 {
     if( !mValueColumn->setByteSpacingWidth(byteSpacingWidth) )
         return;
@@ -191,7 +191,7 @@ void ByteArrayColumnViewPrivate::setNoOfGroupedBytes( int noOfGroupedBytes )
 }
 
 
-void ByteArrayColumnViewPrivate::setGroupSpacingWidth( int/*KPixelX*/ groupSpacingWidth )
+void ByteArrayColumnViewPrivate::setGroupSpacingWidth( int/*PixelX*/ groupSpacingWidth )
 {
     if( !mValueColumn->setGroupSpacingWidth(groupSpacingWidth) )
         return;
@@ -199,7 +199,7 @@ void ByteArrayColumnViewPrivate::setGroupSpacingWidth( int/*KPixelX*/ groupSpaci
 }
 
 
-void ByteArrayColumnViewPrivate::setBinaryGapWidth( int/*KPixelX*/ binaryGapWidth )
+void ByteArrayColumnViewPrivate::setBinaryGapWidth( int/*PixelX*/ binaryGapWidth )
 {
     if( !mValueColumn->setBinaryGapWidth(binaryGapWidth) )
         return;
@@ -311,8 +311,8 @@ void ByteArrayColumnViewPrivate::handleFontChange( const QFont& oldFont )
 
     // get new values
     const QFontMetrics newFontMetrics = q->fontMetrics();
-    KPixelX digitWidth = newFontMetrics.maxWidth();
-    KPixelY digitBaseLine = newFontMetrics.ascent();
+    PixelX digitWidth = newFontMetrics.maxWidth();
+    PixelY digitBaseLine = newFontMetrics.ascent();
 
      q->setLineHeight( newFontMetrics.height() );
 
@@ -375,25 +375,25 @@ int ByteArrayColumnViewPrivate::fittingBytesPerLine() const
     Q_Q( const ByteArrayColumnView );
 
     const QSize newSize = q->maximumViewportSize();
-    const KPixelX reservedWidth =
+    const PixelX reservedWidth =
         mOffsetColumn->visibleWidth()
         + mFirstBorderColumn->visibleWidth()
         + mSecondBorderColumn->visibleWidth();
 
     // abstract offset and border columns width
-    const KPixelX fullWidth = newSize.width() - reservedWidth;
+    const PixelX fullWidth = newSize.width() - reservedWidth;
 
     //  // no width left for resizeable columns? TODO: put this in resizeEvent
     //  if( fullWidth < 0 )
     //    return;
 
-    const KPixelY fullHeight = newSize.height();
+    const PixelY fullHeight = newSize.height();
 
     // check influence of dis-/appearing of the vertical scrollbar
     const bool verticalScrollbarIsVisible = q->verticalScrollBar()->isVisible();
-    const KPixelX scrollbarExtent = q->style()->pixelMetric( QStyle::PM_ScrollBarExtent );
+    const PixelX scrollbarExtent = q->style()->pixelMetric( QStyle::PM_ScrollBarExtent );
 
-    KPixelX availableWidth = fullWidth;
+    PixelX availableWidth = fullWidth;
     if( verticalScrollbarIsVisible )
         availableWidth -= scrollbarExtent;
 
@@ -401,11 +401,11 @@ int ByteArrayColumnViewPrivate::fittingBytesPerLine() const
     KMatchTrial matchRun = FirstRun;
 
     // prepare needed values
-    const KPixelX digitWidth = mValueColumn->digitWidth();
-    const KPixelX charByteWidth = mCharColumn->isVisible() ? digitWidth : 0;
-    const KPixelX valueByteWidth = mValueColumn->isVisible() ? mValueColumn->byteWidth() : 0;
-    const KPixelX byteSpacingWidth = mValueColumn->isVisible() ? mValueColumn->byteSpacingWidth() : 0;
-    KPixelX groupSpacingWidth;
+    const PixelX digitWidth = mValueColumn->digitWidth();
+    const PixelX charByteWidth = mCharColumn->isVisible() ? digitWidth : 0;
+    const PixelX valueByteWidth = mValueColumn->isVisible() ? mValueColumn->byteWidth() : 0;
+    const PixelX byteSpacingWidth = mValueColumn->isVisible() ? mValueColumn->byteSpacingWidth() : 0;
+    PixelX groupSpacingWidth;
     int noOfGroupedBytes = mValueColumn->noOfGroupedBytes();
     // no grouping?
     if( noOfGroupedBytes == 0 )
@@ -417,9 +417,9 @@ int ByteArrayColumnViewPrivate::fittingBytesPerLine() const
     else
         groupSpacingWidth = mValueColumn->isVisible() ? mValueColumn->groupSpacingWidth() : 0;
 
-    const KPixelX valueByteGroupWidth =  noOfGroupedBytes * valueByteWidth + (noOfGroupedBytes-1)*byteSpacingWidth;
-    const KPixelX charByteGroupWidth = noOfGroupedBytes * charByteWidth;
-    const KPixelX totalGroupWidth = valueByteGroupWidth + groupSpacingWidth + charByteGroupWidth;
+    const PixelX valueByteGroupWidth =  noOfGroupedBytes * valueByteWidth + (noOfGroupedBytes-1)*byteSpacingWidth;
+    const PixelX charByteGroupWidth = noOfGroupedBytes * charByteWidth;
+    const PixelX totalGroupWidth = valueByteGroupWidth + groupSpacingWidth + charByteGroupWidth;
 
     int fittingBytesPerLine;
     int fittingBytesPerLineWithScrollbar = 0;
@@ -475,7 +475,7 @@ int ByteArrayColumnViewPrivate::fittingBytesPerLine() const
 
         const int newNoOfLines = (mTableLayout->length()+mTableLayout->startOffset()+fittingBytesPerLine-1)
                                  / fittingBytesPerLine;
-        const KPixelY newHeight =  newNoOfLines * q->lineHeight();
+        const PixelY newHeight =  newNoOfLines * q->lineHeight();
 
         if( verticalScrollbarIsVisible )
         {
@@ -717,8 +717,8 @@ void ByteArrayColumnViewPrivate::createCursorPixmaps()
     painter.end();
 
     // calculat the shape
-    KPixelX cursorX;
-    KPixelX cursorW;
+    PixelX cursorX;
+    PixelX cursorW;
     if( isCursorBehind() )
     {
         cursorX = qMax( 0, mCursorPixmaps->onPixmap().width()-InsertCursorWidth );
@@ -804,7 +804,7 @@ void ByteArrayColumnViewPrivate::renderColumns( QPainter* painter, int cx, int c
     // Then it needs to know about inactive, insideByte and the like... well...
     // perhaps subclassing the buffer columns even more, to CharByteArrayColumnRenderer and ValueByteArrayColumnRenderer?
 
-    if( q->visibleLines(KPixelYs::fromWidth(cy,ch)).includes(mTableCursor->line()) )
+    if( q->visibleLines(PixelYs::fromWidth(cy,ch)).includes(mTableCursor->line()) )
     {
         drawActiveCursor( painter );
         drawInactiveCursor( painter );
@@ -816,7 +816,7 @@ void ByteArrayColumnViewPrivate::updateChanged()
     Q_Q( ByteArrayColumnView );
 
     const int xOffset = q->xOffset();
-    const KPixelXs Xs = KPixelXs::fromWidth( xOffset, q->visibleWidth() );
+    const PixelXs Xs = PixelXs::fromWidth( xOffset, q->visibleWidth() );
 
     // do updates in offset column 
     const KDE::Section changedOffsetLines = mTableRanges->changedOffsetLines();
@@ -852,7 +852,7 @@ void ByteArrayColumnViewPrivate::updateChanged()
         // as there might be multiple selections on this line redo until no more is changed
         while( hasChanged(visibleRange,&changedRange) )
         {
-            KPixelY cy = q->yOffsetOfLine( changedRange.start().line() );
+            PixelY cy = q->yOffsetOfLine( changedRange.start().line() );
 
             QListIterator<AbstractByteArrayColumnRenderer*> columnIt( dirtyColumns );
             // only one line?
@@ -861,7 +861,7 @@ void ByteArrayColumnViewPrivate::updateChanged()
                 const KDE::Section changedPositions( changedRange.start().pos(), changedRange.end().pos() );
                 while( columnIt.hasNext() )
                 {
-                    const KPixelXs xPixels = columnIt.next()->xsOfLinePositionsInclSpaces( changedPositions );
+                    const PixelXs xPixels = columnIt.next()->xsOfLinePositionsInclSpaces( changedPositions );
 
                     q->viewport()->update( xPixels.start()-xOffset, cy, xPixels.width(), lineHeight );
                 }
@@ -873,7 +873,7 @@ void ByteArrayColumnViewPrivate::updateChanged()
                 const KDE::Section firstChangedPositions( changedRange.start().pos(), fullPositions.end() );
                 while( columnIt.hasNext() )
                 {
-                    const KPixelXs XPixels = columnIt.next()->xsOfLinePositionsInclSpaces( firstChangedPositions );
+                    const PixelXs XPixels = columnIt.next()->xsOfLinePositionsInclSpaces( firstChangedPositions );
 
                     q->viewport()->update( XPixels.start()-xOffset, cy, XPixels.width(), lineHeight );
                 }
@@ -885,7 +885,7 @@ void ByteArrayColumnViewPrivate::updateChanged()
                     columnIt.toFront();
                     while( columnIt.hasNext() )
                     {
-                        const KPixelXs XPixels = columnIt.next()->xsOfLinePositionsInclSpaces( fullPositions );
+                        const PixelXs XPixels = columnIt.next()->xsOfLinePositionsInclSpaces( fullPositions );
 
                         q->viewport()->update( XPixels.start()-xOffset, cy, XPixels.width(), lineHeight );
                     }
@@ -896,7 +896,7 @@ void ByteArrayColumnViewPrivate::updateChanged()
                 const KDE::Section lastChangedPositions( fullPositions.start(), changedRange.end().pos() );
                 while( columnIt.hasNext() )
                 {
-                    const KPixelXs XPixels = columnIt.next()->xsOfLinePositionsInclSpaces( lastChangedPositions );
+                    const PixelXs XPixels = columnIt.next()->xsOfLinePositionsInclSpaces( lastChangedPositions );
 
                     q->viewport()->update( XPixels.start()-xOffset, cy, XPixels.width(), lineHeight );
                 }
@@ -931,13 +931,13 @@ void ByteArrayColumnViewPrivate::ensureVisible( const AbstractByteArrayColumnRen
     Q_Q( ByteArrayColumnView );
 
     // TODO: add getCursorRect to BufferColumn
-    const KPixelXs cursorXs = KPixelXs::fromWidth( column.xOfLinePosition(coord.pos()),
+    const PixelXs cursorXs = PixelXs::fromWidth( column.xOfLinePosition(coord.pos()),
                                                    column.byteWidth() );
 
-    const KPixelYs cursorYs = KPixelYs::fromWidth( q->lineHeight()*coord.line(), q->lineHeight() );
+    const PixelYs cursorYs = PixelYs::fromWidth( q->lineHeight()*coord.line(), q->lineHeight() );
 
-    const KPixelXs visibleXs = KPixelXs::fromWidth( q->xOffset(), q->visibleWidth() );
-    const KPixelYs visibleYs = KPixelXs::fromWidth( q->yOffset(), q->visibleHeight() );
+    const PixelXs visibleXs = PixelXs::fromWidth( q->xOffset(), q->visibleWidth() );
+    const PixelYs visibleYs = PixelXs::fromWidth( q->yOffset(), q->visibleHeight() );
 
     q->horizontalScrollBar()->setValue( visibleXs.startForInclude(cursorXs) );
     q->verticalScrollBar()->setValue( visibleYs.startForInclude(cursorYs) );

@@ -38,7 +38,7 @@ ByteArrayColumnView::ByteArrayColumnView( AbstractByteArrayModel* _byteArrayMode
     setByteArrayModel( _byteArrayModel );
 }
 
-KPixelX ByteArrayColumnView::byteSpacingWidth() const
+PixelX ByteArrayColumnView::byteSpacingWidth() const
 {
     Q_D( const ByteArrayColumnView );
     return d->byteSpacingWidth();
@@ -48,12 +48,12 @@ int ByteArrayColumnView::noOfGroupedBytes() const
     Q_D( const ByteArrayColumnView );
     return d->noOfGroupedBytes();
 }
-KPixelX ByteArrayColumnView::groupSpacingWidth() const
+PixelX ByteArrayColumnView::groupSpacingWidth() const
 {
     Q_D( const ByteArrayColumnView );
     return d->groupSpacingWidth();
 }
-KPixelX ByteArrayColumnView::binaryGapWidth() const
+PixelX ByteArrayColumnView::binaryGapWidth() const
 {
     Q_D( const ByteArrayColumnView );
     return d->binaryGapWidth();
@@ -91,7 +91,7 @@ void ByteArrayColumnView::setByteArrayModel( AbstractByteArrayModel* _byteArrayM
     d->setByteArrayModel( _byteArrayModel );
 }
 
-void ByteArrayColumnView::setBufferSpacing( /*KPixelX*/int byteSpacing, int noOfGroupedBytes, /*KPixelX*/int groupSpacing )
+void ByteArrayColumnView::setBufferSpacing( /*PixelX*/int byteSpacing, int noOfGroupedBytes, /*PixelX*/int groupSpacing )
 {
     Q_D( ByteArrayColumnView );
     d->setBufferSpacing( byteSpacing, noOfGroupedBytes, groupSpacing );
@@ -104,7 +104,7 @@ void ByteArrayColumnView::setValueCoding( ValueCoding valueCoding )
     d->setValueCoding( valueCoding );
 }
 
-void ByteArrayColumnView::setByteSpacingWidth( int/*KPixelX*/ byteSpacingWidth )
+void ByteArrayColumnView::setByteSpacingWidth( int/*PixelX*/ byteSpacingWidth )
 {
     Q_D( ByteArrayColumnView );
     d->setByteSpacingWidth( byteSpacingWidth );
@@ -117,14 +117,14 @@ void ByteArrayColumnView::setNoOfGroupedBytes( int noOfGroupedBytes )
 }
 
 
-void ByteArrayColumnView::setGroupSpacingWidth( int/*KPixelX*/ groupSpacingWidth )
+void ByteArrayColumnView::setGroupSpacingWidth( int/*PixelX*/ groupSpacingWidth )
 {
     Q_D( ByteArrayColumnView );
     d->setGroupSpacingWidth( groupSpacingWidth );
 }
 
 
-void ByteArrayColumnView::setBinaryGapWidth( int/*KPixelX*/ binaryGapWidth )
+void ByteArrayColumnView::setBinaryGapWidth( int/*PixelX*/ binaryGapWidth )
 {
     Q_D( ByteArrayColumnView );
     d->setBinaryGapWidth( binaryGapWidth );

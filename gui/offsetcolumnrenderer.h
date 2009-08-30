@@ -43,17 +43,17 @@ class OKTETAGUI_EXPORT OffsetColumnRenderer : public AbstractColumnRenderer
     virtual ~OffsetColumnRenderer();
 
   public:  // AbstractColumnRenderer API
-    virtual void renderFirstLine( QPainter *painter, const KPixelXs &Xs, int firstLineIndex );
+    virtual void renderFirstLine( QPainter *painter, const PixelXs &Xs, int firstLineIndex );
     virtual void renderNextLine( QPainter *painter );
-    virtual void renderColumn( QPainter* painter, const KPixelXs& Xs, const KPixelYs& Ys );
-    virtual void renderEmptyColumn( QPainter *painter, const KPixelXs &Xs, const KPixelYs &Ys );
+    virtual void renderColumn( QPainter* painter, const PixelXs& Xs, const PixelYs& Ys );
+    virtual void renderEmptyColumn( QPainter *painter, const PixelXs &Xs, const PixelYs &Ys );
 
   public:
     void setFormat( OffsetFormat::Format format );
     /** sets width of digits and recalculates depend sizes  */
-    void setDigitWidth( KPixelX digitWidth );
+    void setDigitWidth( PixelX digitWidth );
     /** */
-    void setMetrics( KPixelX DW, KPixelY DBL );
+    void setMetrics( PixelX DW, PixelY DBL );
 
   public: // read access
 //     int delta() const;
@@ -67,16 +67,16 @@ class OKTETAGUI_EXPORT OffsetColumnRenderer : public AbstractColumnRenderer
     /** paints full line */
     void renderLine( QPainter *painter, int lineIndex );
     /** */
-    void renderColumnBackground( QPainter* painter, const KPixelXs& Xs, const KPixelYs& Ys );
+    void renderColumnBackground( QPainter* painter, const PixelXs& Xs, const PixelYs& Ys );
 
   protected: // user settings
     ByteArrayTableLayout* mLayout;
 
   protected: // pixel related
     /** */
-    KPixelX mDigitWidth;
+    PixelX mDigitWidth;
     /** */
-    KPixelY mDigitBaseLine;
+    PixelY mDigitBaseLine;
 
   protected: // general layout
     OffsetFormat::Format mFormat;

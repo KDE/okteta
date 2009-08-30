@@ -59,16 +59,16 @@ void OffsetColumnRenderer::renderLine( QPainter* painter, int lineIndex )
     painter->drawText( leftOffsetMargin, mDigitBaseLine, QString().append(mCodedOffset) );
 }
 
-void OffsetColumnRenderer::renderColumnBackground( QPainter* painter, const KPixelXs& _Xs, const KPixelYs& Ys )
+void OffsetColumnRenderer::renderColumnBackground( QPainter* painter, const PixelXs& _Xs, const PixelYs& Ys )
 {
-    KPixelXs Xs( _Xs );
+    PixelXs Xs( _Xs );
     restrictToXSpan( &Xs );
 
     const QBrush& buttonBrush = stylist()->palette().button();
     painter->fillRect( Xs.start(), Ys.start(), Xs.width(), Ys.width(), buttonBrush );
 }
 
-void OffsetColumnRenderer::renderFirstLine( QPainter *painter, const KPixelXs &, int firstLineIndex )
+void OffsetColumnRenderer::renderFirstLine( QPainter *painter, const PixelXs &, int firstLineIndex )
 {
     mRenderLineIndex = firstLineIndex;
     renderLine( painter, mRenderLineIndex++ );
@@ -81,13 +81,13 @@ void OffsetColumnRenderer::renderNextLine( QPainter *painter )
 }
 
 
-void OffsetColumnRenderer::renderColumn( QPainter* painter, const KPixelXs& Xs, const KPixelYs& Ys )
+void OffsetColumnRenderer::renderColumn( QPainter* painter, const PixelXs& Xs, const PixelYs& Ys )
 {
     renderColumnBackground( painter, Xs, Ys );
 }
 
 
-void OffsetColumnRenderer::renderEmptyColumn( QPainter* painter, const KPixelXs& Xs, const KPixelYs& Ys )
+void OffsetColumnRenderer::renderEmptyColumn( QPainter* painter, const PixelXs& Xs, const PixelYs& Ys )
 {
     renderColumnBackground( painter, Xs, Ys );
 }
@@ -106,13 +106,13 @@ void OffsetColumnRenderer::setFormat( OffsetFormat::Format format )
     recalcX();
 }
 
-void OffsetColumnRenderer::setMetrics( KPixelX digitWidth, KPixelY digitBaseLine )
+void OffsetColumnRenderer::setMetrics( PixelX digitWidth, PixelY digitBaseLine )
 {
     mDigitBaseLine = digitBaseLine;
     setDigitWidth( digitWidth );
 }
 
-void OffsetColumnRenderer::setDigitWidth( KPixelX digitWidth )
+void OffsetColumnRenderer::setDigitWidth( PixelX digitWidth )
 {
     // no changes?
     if( mDigitWidth == digitWidth )

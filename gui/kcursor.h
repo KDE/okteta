@@ -44,31 +44,31 @@ class KCursor
 
   public:
     /** sets size of the full cursor */
-    void setSize( KPixelX Width, KPixelY Height );
+    void setSize( PixelX Width, PixelY Height );
     /** sets the shape of the cursor to be drawn */
-    void setShape( KPixelX X, KPixelX W );
+    void setShape( PixelX X, PixelX W );
 
   public: // access
     QPixmap &onPixmap();
     QPixmap &offPixmap();
-    KPixelX cursorX() const;
-    KPixelX cursorW() const;
+    PixelX cursorX() const;
+    PixelX cursorW() const;
 
 
   protected:
     QPixmap OnPixmap;
     QPixmap OffPixmap;
 
-    KPixelX CursorX;
-    KPixelX CursorW;
+    PixelX CursorX;
+    PixelX CursorW;
 };
 
 
 inline QPixmap &KCursor::onPixmap()  { return OnPixmap; }
 inline QPixmap &KCursor::offPixmap() { return OffPixmap; }
 
-inline KPixelX KCursor::cursorX() const { return CursorX; }
-inline KPixelX KCursor::cursorW() const { return CursorW; }
+inline PixelX KCursor::cursorX() const { return CursorX; }
+inline PixelX KCursor::cursorW() const { return CursorW; }
 
 }
 

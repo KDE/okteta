@@ -50,10 +50,10 @@ static const char EmptyByte = ' ';
 
 static const int DefaultVisibleCodings = AbstractByteArrayView::ValueCodingId | AbstractByteArrayView::CharCodingId;
 
-static const KPixelX DefaultCursorWidth = 2;
-static const KPixelX DefaultByteSpacingWidth = 3;
-static const KPixelX DefaultGroupSpacingWidth = 9;
-static const KPixelX DefaultRowSpacingHeight = 0;
+static const PixelX DefaultCursorWidth = 2;
+static const PixelX DefaultByteSpacingWidth = 3;
+static const PixelX DefaultGroupSpacingWidth = 9;
+static const PixelX DefaultRowSpacingHeight = 0;
 static const int DefaultNoOfGroupedBytes = 4;
 
 static const int DefaultBinaryGapWidth = 1;
@@ -89,7 +89,7 @@ ByteArrayRowColumnRenderer::ByteArrayRowColumnRenderer( AbstractColumnStylist* s
 {
 }
 
-AbstractByteArrayView::CodingTypeId ByteArrayRowColumnRenderer::codingIdofY( KPixelY y ) const
+AbstractByteArrayView::CodingTypeId ByteArrayRowColumnRenderer::codingIdofY( PixelY y ) const
 {
     return
         ( mVisibleCodings != AbstractByteArrayView::BothCodingsId ) ?
@@ -99,13 +99,13 @@ AbstractByteArrayView::CodingTypeId ByteArrayRowColumnRenderer::codingIdofY( KPi
             AbstractByteArrayView::CharCodingId;
 }
 
-KPixelY ByteArrayRowColumnRenderer::rowHeight() const
+PixelY ByteArrayRowColumnRenderer::rowHeight() const
 {
     const int noOfCodings = ( mVisibleCodings > 2 ) ? 2 : 1;
     return noOfCodings * mDigitHeight + DefaultRowSpacingHeight;
 }
 
-KPixelY ByteArrayRowColumnRenderer::yOfCodingId( AbstractByteArrayView::CodingTypeId codingId ) const
+PixelY ByteArrayRowColumnRenderer::yOfCodingId( AbstractByteArrayView::CodingTypeId codingId ) const
 {
     int result = ( mVisibleCodings <= 2 ) ?                             0 :
                  ( codingId == AbstractByteArrayView::ValueCodingId ) ? 0 :
@@ -128,8 +128,8 @@ void ByteArrayRowColumnRenderer::resetXBuffer()
     delete [] mLinePosRightPixelX;
 
     mLastLinePos = mLayout->noOfBytesPerLine()-1;
-    mLinePosLeftPixelX =  new KPixelX[mLastLinePos+1];
-    mLinePosRightPixelX = new KPixelX[mLastLinePos+1];
+    mLinePosLeftPixelX =  new PixelX[mLastLinePos+1];
+    mLinePosRightPixelX = new PixelX[mLastLinePos+1];
 
     if( mLinePosLeftPixelX )
         recalcX();
@@ -141,7 +141,7 @@ void ByteArrayRowColumnRenderer::setVisibleCodings( int visibleCodings )
 }
 
 
-void ByteArrayRowColumnRenderer::setMetrics( KPixelX digitWidth, KPixelY digitBaseLine, KPixelY digitHeight )
+void ByteArrayRowColumnRenderer::setMetrics( PixelX digitWidth, PixelY digitBaseLine, PixelY digitHeight )
 {
     mDigitBaseLine = digitBaseLine;
     mDigitHeight = digitHeight;
@@ -149,7 +149,7 @@ void ByteArrayRowColumnRenderer::setMetrics( KPixelX digitWidth, KPixelY digitBa
 }
 
 
-bool ByteArrayRowColumnRenderer::setDigitWidth( KPixelX digitWidth )
+bool ByteArrayRowColumnRenderer::setDigitWidth( PixelX digitWidth )
 {
     // no changes?
     if( mDigitWidth == digitWidth )
@@ -165,7 +165,7 @@ bool ByteArrayRowColumnRenderer::setDigitWidth( KPixelX digitWidth )
 }
 
 
-bool ByteArrayRowColumnRenderer::setSpacing( KPixelX byteSpacingWidth, int NoGB, KPixelX groupSpacingWidth )
+bool ByteArrayRowColumnRenderer::setSpacing( PixelX byteSpacingWidth, int NoGB, PixelX groupSpacingWidth )
 {
     // no changes?
     if( mByteSpacingWidth == byteSpacingWidth && mNoOfGroupedBytes == NoGB && mGroupSpacingWidth == groupSpacingWidth )
@@ -183,7 +183,7 @@ bool ByteArrayRowColumnRenderer::setSpacing( KPixelX byteSpacingWidth, int NoGB,
 }
 
 
-bool ByteArrayRowColumnRenderer::setByteSpacingWidth( KPixelX byteSpacingWidth )
+bool ByteArrayRowColumnRenderer::setByteSpacingWidth( PixelX byteSpacingWidth )
 {
     // no changes?
     if( mByteSpacingWidth == byteSpacingWidth )
@@ -213,7 +213,7 @@ bool ByteArrayRowColumnRenderer::setNoOfGroupedBytes( int NoGB )
 }
 
 
-bool ByteArrayRowColumnRenderer::setGroupSpacingWidth( KPixelX groupSpacingWidth )
+bool ByteArrayRowColumnRenderer::setGroupSpacingWidth( PixelX groupSpacingWidth )
 {
     // no changes?
     if( mGroupSpacingWidth == groupSpacingWidth )
@@ -243,7 +243,7 @@ void ByteArrayRowColumnRenderer::setValueCodec( ValueCoding valueCoding, const V
 }
 
 
-bool ByteArrayRowColumnRenderer::setBinaryGapWidth( KPixelX binaryGapWidth )
+bool ByteArrayRowColumnRenderer::setBinaryGapWidth( PixelX binaryGapWidth )
 {
     // no changes?
     if( mBinaryGapWidth == binaryGapWidth )
@@ -341,10 +341,10 @@ void ByteArrayRowColumnRenderer::recalcX()
 {
     mSpacingTrigger = noOfGroupedBytes() > 0 ? noOfGroupedBytes()-1 : mLastLinePos+1; // last ensures to never trigger the spacing
 
-    KPixelX newWidth = 0;
+    PixelX newWidth = 0;
     int groupedBytes = 0;
-    KPixelX* PX = mLinePosLeftPixelX;
-    KPixelX* PRX = mLinePosRightPixelX;
+    PixelX* PX = mLinePosLeftPixelX;
+    PixelX* PRX = mLinePosRightPixelX;
     int p = 0;
     for( ; p<=mLastLinePos; ++PX, ++PRX, ++p, ++groupedBytes )
     {
@@ -367,7 +367,7 @@ void ByteArrayRowColumnRenderer::recalcX()
 
 // TODO: why are inlined functions not available as symbols when defined before their use
 //TODO: works not precisly for the byte rects but includes spacing and left and right
-/*inline*/ int ByteArrayRowColumnRenderer::linePositionOfX( KPixelX PX ) const
+/*inline*/ int ByteArrayRowColumnRenderer::linePositionOfX( PixelX PX ) const
 {
     if( !mLinePosLeftPixelX )
         return NoByteFound;
@@ -383,7 +383,7 @@ void ByteArrayRowColumnRenderer::recalcX()
 }
 
 
-int ByteArrayRowColumnRenderer::magneticLinePositionOfX( KPixelX PX ) const
+int ByteArrayRowColumnRenderer::magneticLinePositionOfX( PixelX PX ) const
 {
     if( !mLinePosLeftPixelX )
         return NoByteFound;
@@ -404,7 +404,7 @@ int ByteArrayRowColumnRenderer::magneticLinePositionOfX( KPixelX PX ) const
 }
 
 
-KDE::Section ByteArrayRowColumnRenderer::linePositionsOfX( KPixelX PX, KPixelX PW ) const
+KDE::Section ByteArrayRowColumnRenderer::linePositionsOfX( PixelX PX, PixelX PW ) const
 {
     if( !mLinePosLeftPixelX )
         return KDE::Section();
@@ -431,14 +431,14 @@ KDE::Section ByteArrayRowColumnRenderer::linePositionsOfX( KPixelX PX, KPixelX P
     return positions;
 }
 
-KPixelX ByteArrayRowColumnRenderer::xOfLinePosition( int linePosition ) const
+PixelX ByteArrayRowColumnRenderer::xOfLinePosition( int linePosition ) const
 { return x() + (mLinePosLeftPixelX?mLinePosLeftPixelX[linePosition]:0); }
 
-KPixelX ByteArrayRowColumnRenderer::rightXOfLinePosition( int linePosition ) const
+PixelX ByteArrayRowColumnRenderer::rightXOfLinePosition( int linePosition ) const
 { return x() + (mLinePosRightPixelX?mLinePosRightPixelX[linePosition]:0); }
 
 
-int ByteArrayRowColumnRenderer::linePositionOfColumnX( KPixelX PX ) const
+int ByteArrayRowColumnRenderer::linePositionOfColumnX( PixelX PX ) const
 {
     if( !mLinePosLeftPixelX )
         return NoByteFound;
@@ -452,7 +452,7 @@ int ByteArrayRowColumnRenderer::linePositionOfColumnX( KPixelX PX ) const
 }
 
 
-KDE::Section ByteArrayRowColumnRenderer::linePositionsOfColumnXs( KPixelX PX, KPixelX PW ) const
+KDE::Section ByteArrayRowColumnRenderer::linePositionsOfColumnXs( PixelX PX, PixelX PW ) const
 {
     if( !mLinePosLeftPixelX )
         return KDE::Section();
@@ -478,35 +478,35 @@ KDE::Section ByteArrayRowColumnRenderer::linePositionsOfColumnXs( KPixelX PX, KP
 }
 
 
-KPixelX ByteArrayRowColumnRenderer::columnXOfLinePosition( int linePosition ) const
+PixelX ByteArrayRowColumnRenderer::columnXOfLinePosition( int linePosition ) const
 { return mLinePosLeftPixelX ? mLinePosLeftPixelX[linePosition] : 0; }
-KPixelX ByteArrayRowColumnRenderer::columnRightXOfLinePosition( int linePosition ) const
+PixelX ByteArrayRowColumnRenderer::columnRightXOfLinePosition( int linePosition ) const
 { return mLinePosRightPixelX ? mLinePosRightPixelX[linePosition] : 0; }
 
 
-KPixelXs ByteArrayRowColumnRenderer::xsOfLinePositionsInclSpaces( const KDE::Section& linePositions ) const
+PixelXs ByteArrayRowColumnRenderer::xsOfLinePositionsInclSpaces( const KDE::Section& linePositions ) const
 {
     const int x = (linePositions.start()>0) ? rightXOfLinePosition( linePositions.nextBeforeStart() ) + 1 :
                                               xOfLinePosition( linePositions.start() );
     const int rightX = (linePositions.end()<mLastLinePos) ? xOfLinePosition( linePositions.nextBehindEnd() ) - 1 :
                                                             rightXOfLinePosition( linePositions.end() );
-    return KPixelXs( x, rightX );
+    return PixelXs( x, rightX );
 }
 
 
-KPixelXs ByteArrayRowColumnRenderer::columnXsOfLinePositionsInclSpaces( const KDE::Section& linePositions ) const
+PixelXs ByteArrayRowColumnRenderer::columnXsOfLinePositionsInclSpaces( const KDE::Section& linePositions ) const
 {
     const int x = (linePositions.start()>0) ? columnRightXOfLinePosition( linePositions.nextBeforeStart() ) + 1 :
                                               columnXOfLinePosition( linePositions.start() );
     const int rightX = (linePositions.end()<mLastLinePos) ? columnXOfLinePosition( linePositions.nextBehindEnd() ) - 1 :
                                                             columnRightXOfLinePosition( linePositions.end() );
-    return KPixelXs( x, rightX  );
+    return PixelXs( x, rightX  );
 }
 
 
-void ByteArrayRowColumnRenderer::prepareRendering( const KPixelXs& _Xs )
+void ByteArrayRowColumnRenderer::prepareRendering( const PixelXs& _Xs )
 {
-    KPixelXs Xs( _Xs );
+    PixelXs Xs( _Xs );
     restrictToXSpan( &Xs );
     // translate
     Xs.moveBy( -x() );
@@ -520,7 +520,7 @@ void ByteArrayRowColumnRenderer::prepareRendering( const KPixelXs& _Xs )
 }
 
 
-void ByteArrayRowColumnRenderer::renderFirstLine( QPainter* painter, const KPixelXs& Xs, int firstLineIndex )
+void ByteArrayRowColumnRenderer::renderFirstLine( QPainter* painter, const PixelXs& Xs, int firstLineIndex )
 {
     prepareRendering( Xs );
 
@@ -645,7 +645,7 @@ void ByteArrayRowColumnRenderer::renderPlain( QPainter* painter, const KDE::Sect
     // paint all the bytes affected
     for( int linePosition=linePositions.start(); linePosition<=linePositions.end(); ++linePosition,++byteIndex )
     {
-        const KPixelX x = columnXOfLinePosition( linePosition );
+        const PixelX x = columnXOfLinePosition( linePosition );
 
         // draw the byte
         painter->translate( x, 0 );
@@ -692,7 +692,7 @@ void ByteArrayRowColumnRenderer::renderSelection( QPainter* painter, const KDE::
     // paint all the bytes affected
     for( int linePosition=linePositions.start(); linePosition<=linePositions.end(); ++linePosition,++byteIndex )
     {
-        const KPixelX x = columnXOfLinePosition( linePosition );
+        const PixelX x = columnXOfLinePosition( linePosition );
 
         // draw the byte
         painter->translate( x, 0 );
@@ -728,7 +728,7 @@ void ByteArrayRowColumnRenderer::renderMarking( QPainter* painter, const KDE::Se
     // paint all the bytes affected
     for( int p=linePositions.start(); p<=linePositions.end(); ++p,++byteIndex )
     {
-        const KPixelX x = columnXOfLinePosition( p );
+        const PixelX x = columnXOfLinePosition( p );
 
         // draw the byte
         painter->translate( x, 0 );
@@ -750,10 +750,10 @@ void ByteArrayRowColumnRenderer::renderBookmark( QPainter* painter, const QBrush
 
 void ByteArrayRowColumnRenderer::renderRange( QPainter* painter, const QBrush& brush, const KDE::Section& linePositions, int flag )
 {
-    const KPixelX rangeX =
+    const PixelX rangeX =
         ( flag & StartsBefore ) ? columnRightXOfLinePosition( linePositions.nextBeforeStart() ) + 1 :
                                   columnXOfLinePosition( linePositions.start() );
-    const KPixelX rangeW =
+    const PixelX rangeW =
         ( (flag & EndsLater) ? columnXOfLinePosition( linePositions.nextBehindEnd() ) :
                                columnRightXOfLinePosition( linePositions.end() ) + 1  )
         - rangeX;

@@ -45,9 +45,9 @@ class AbstractColumnFrameRendererPrivate
     /** the number of lines which the columnRenderer view has */
     int mNoOfLines;
     /** the height of each line in pixels */
-    Okteta::KPixelY mLineHeight;
+    Okteta::PixelY mLineHeight;
     /** the width of all visible columns together */
-    Okteta::KPixelX mColumnsWidth;
+    Okteta::PixelX mColumnsWidth;
 };
 
 
@@ -81,10 +81,10 @@ AbstractColumnFrameRenderer::AbstractColumnFrameRenderer()
 
 
 int AbstractColumnFrameRenderer::noOfLines()          const { return d->mNoOfLines; }
-Okteta::KPixelY AbstractColumnFrameRenderer::lineHeight()     const { return d->mLineHeight; }
+Okteta::PixelY AbstractColumnFrameRenderer::lineHeight()     const { return d->mLineHeight; }
 
-Okteta::KPixelY AbstractColumnFrameRenderer::columnsHeight() const { return d->mNoOfLines*d->mLineHeight; }
-Okteta::KPixelX AbstractColumnFrameRenderer::columnsWidth()  const { return d->mColumnsWidth; }
+Okteta::PixelY AbstractColumnFrameRenderer::columnsHeight() const { return d->mNoOfLines*d->mLineHeight; }
+Okteta::PixelX AbstractColumnFrameRenderer::columnsWidth()  const { return d->mColumnsWidth; }
 
 void AbstractColumnFrameRenderer::setNoOfLines( int noOfLines )
 {
@@ -95,7 +95,7 @@ void AbstractColumnFrameRenderer::setNoOfLines( int noOfLines )
 }
 
 
-void AbstractColumnFrameRenderer::setLineHeight( Okteta::KPixelY newLineHeight )
+void AbstractColumnFrameRenderer::setLineHeight( Okteta::PixelY newLineHeight )
 {
     if( newLineHeight == d->mLineHeight )
         return;
@@ -153,7 +153,7 @@ void AbstractColumnFrameRenderer::removeColumn( Okteta::AbstractColumnRenderer *
 
 void AbstractColumnFrameRenderer::renderFrame( QPainter *painter, int frameIndex )
 {
-    Okteta::KPixelXs renderedXs = Okteta::KPixelXs::fromWidth( 0, width() );
+    Okteta::PixelXs renderedXs = Okteta::PixelXs::fromWidth( 0, width() );
 
     // content to be shown?
     if( renderedXs.startsBefore(d->mColumnsWidth) )
@@ -173,7 +173,7 @@ void AbstractColumnFrameRenderer::renderFrame( QPainter *painter, int frameIndex
         KDE::Section renderedLines = KDE::Section::fromWidth( baseLine, noOfLinesPerFrame() );
         renderedLines.restrictEndTo( noOfLines()-1 );
 
-        Okteta::KPixelYs renderedYs = Okteta::KPixelYs::fromWidth( 0, renderedLines.width()*d->mLineHeight );
+        Okteta::PixelYs renderedYs = Okteta::PixelYs::fromWidth( 0, renderedLines.width()*d->mLineHeight );
 
         // any lines of any columns to be drawn?
         if( renderedLines.isValid() )
@@ -183,7 +183,7 @@ void AbstractColumnFrameRenderer::renderFrame( QPainter *painter, int frameIndex
             while( fit.hasNext() )
                 fit.next()->renderColumn( painter, renderedXs, renderedYs );
 
-            Okteta::KPixelY cy = 0;
+            Okteta::PixelY cy = 0;
             // starting painting with the first line
             int line = renderedLines.start();
             QListIterator<Okteta::AbstractColumnRenderer*> it( columnRenderers );

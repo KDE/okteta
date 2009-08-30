@@ -63,7 +63,7 @@ void ValueByteArrayColumnRenderer::setValueCodec( ValueCoding valueCoding, const
 }
 
 
-bool ValueByteArrayColumnRenderer::setBinaryGapWidth( KPixelX binaryGapWidth )
+bool ValueByteArrayColumnRenderer::setBinaryGapWidth( PixelX binaryGapWidth )
 {
     // no changes?
     if( mBinaryGapWidth == binaryGapWidth )

@@ -50,9 +50,9 @@ class ColumnsViewPrivate
     /** the number of lines which the column view has */
     int NoOfLines;
     /** the height of each line in pixels */
-    KPixelY LineHeight;
+    PixelY LineHeight;
     /** the width of all visible columns together */
-    KPixelX ColumnsWidth;
+    PixelX ColumnsWidth;
 
   public:
 //    bool Reversed;
@@ -99,35 +99,35 @@ ColumnsView::ColumnsView( /*bool R,*/ QWidget *parent )
 
 
 int ColumnsView::noOfLines()          const { return d->NoOfLines; }
-KPixelY ColumnsView::lineHeight()     const { return d->LineHeight; }
-uint ColumnsView::lineAt( KPixelY y ) const { return (d->LineHeight!=0) ? y / d->LineHeight : 0; }
+PixelY ColumnsView::lineHeight()     const { return d->LineHeight; }
+uint ColumnsView::lineAt( PixelY y ) const { return (d->LineHeight!=0) ? y / d->LineHeight : 0; }
 KDE::Section ColumnsView::visibleLines() const
 {
-    const KPixelYs ySpan = KPixelYs::fromWidth( yOffset(), visibleHeight() );
+    const PixelYs ySpan = PixelYs::fromWidth( yOffset(), visibleHeight() );
     return KDE::Section( lineAt(ySpan.start()), lineAt(ySpan.end()) );
 }
-KDE::Section ColumnsView::visibleLines( const KPixelYs &YPixels ) const
+KDE::Section ColumnsView::visibleLines( const PixelYs &YPixels ) const
 { return KDE::Section( lineAt(YPixels.start()), lineAt(YPixels.end()) ); }
 
-KPixelX ColumnsView::visibleWidth()  const { return viewport()->width(); }
-KPixelY ColumnsView::visibleHeight() const { return viewport()->height(); }
+PixelX ColumnsView::visibleWidth()  const { return viewport()->width(); }
+PixelY ColumnsView::visibleHeight() const { return viewport()->height(); }
 
-KPixelY ColumnsView::columnsHeight() const { return d->NoOfLines*d->LineHeight; }
-KPixelX ColumnsView::columnsWidth()  const { return d->ColumnsWidth; }
+PixelY ColumnsView::columnsHeight() const { return d->NoOfLines*d->LineHeight; }
+PixelX ColumnsView::columnsWidth()  const { return d->ColumnsWidth; }
 
 QPoint ColumnsView::viewportToColumns( const QPoint &P ) const
 { return QPoint(xOffset(),yOffset()) + P; }
 
 
-KPixelX ColumnsView::xOffset() const { return horizontalScrollBar()->value(); }
-KPixelY ColumnsView::yOffset() const { return verticalScrollBar()->value(); }
-KPixelY ColumnsView::yOffsetOfLine( int lineIndex ) const
+PixelX ColumnsView::xOffset() const { return horizontalScrollBar()->value(); }
+PixelY ColumnsView::yOffset() const { return verticalScrollBar()->value(); }
+PixelY ColumnsView::yOffsetOfLine( int lineIndex ) const
 {
     return lineIndex * d->LineHeight - yOffset();
 }
 
 
-void ColumnsView::setColumnsPos( KPixelX x, KPixelY y )
+void ColumnsView::setColumnsPos( PixelX x, PixelY y )
 {
     horizontalScrollBar()->setValue( x );
     verticalScrollBar()->setValue( y );
@@ -145,7 +145,7 @@ void ColumnsView::setNoOfLines( int newNoOfLines )
 }
 
 
-void ColumnsView::setLineHeight( KPixelY newLineHeight )
+void ColumnsView::setLineHeight( PixelY newLineHeight )
 {
     if( newLineHeight == d->LineHeight )
         return;
@@ -203,8 +203,8 @@ void ColumnsView::updateColumn( AbstractColumnRenderer& columnRenderer, const KD
         linesToUpdate.restrictTo( lines );
         if( linesToUpdate.isValid() )
         {
-            const KPixelX x = columnRenderer.x() - xOffset();
-            const KPixelY y = yOffsetOfLine( linesToUpdate.start() );
+            const PixelX x = columnRenderer.x() - xOffset();
+            const PixelY y = yOffsetOfLine( linesToUpdate.start() );
             const int width = columnRenderer.width();
             const int height = d->LineHeight * linesToUpdate.width();
             viewport()->update( x, y, width, height );
@@ -290,12 +290,12 @@ void ColumnsView::paintEvent( QPaintEvent *paintEvent )
 //#include <kdebug.h>
 void ColumnsView::renderColumns( QPainter *painter, int cx, int cy, int cw, int ch )
 {
-    KPixelXs dirtyXs = KPixelXs::fromWidth( cx, cw );
+    PixelXs dirtyXs = PixelXs::fromWidth( cx, cw );
 
     // content to be shown?
     if( dirtyXs.startsBefore(d->ColumnsWidth) )
     {
-        KPixelYs dirtyYs = KPixelYs::fromWidth( cy, ch );
+        PixelYs dirtyYs = PixelYs::fromWidth( cy, ch );
 
         // collect affected columns
         QList<AbstractColumnRenderer*> dirtyColumns;
@@ -321,7 +321,7 @@ void ColumnsView::renderColumns( QPainter *painter, int cx, int cy, int cw, int 
                 while( fit.hasNext() )
                     fit.next()->renderColumn( painter, dirtyXs, dirtyYs );
 
-                KPixelY cy = dirtyLines.start() * d->LineHeight;
+                PixelY cy = dirtyLines.start() * d->LineHeight;
         //kDebug()<<"Dirty lines: "<<dirtyLines.start()<<"-"<<dirtyLines.end();
                 // starting painting with the first line
                 int line = dirtyLines.start();

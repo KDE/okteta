@@ -130,10 +130,10 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     virtual bool offsetColumnVisible() const = 0;
 
   // value column
-    virtual int/*KPixelX*/ byteSpacingWidth() const = 0;
+    virtual int/*PixelX*/ byteSpacingWidth() const = 0;
     virtual int noOfGroupedBytes() const = 0;
-    virtual int/*KPixelX*/ groupSpacingWidth() const = 0;
-    virtual int/*KPixelX*/ binaryGapWidth() const = 0;
+    virtual int/*PixelX*/ groupSpacingWidth() const = 0;
+    virtual int/*PixelX*/ binaryGapWidth() const = 0;
 
   // char column
     /** reports if "non-printing" chars are displayed in the char column
@@ -163,7 +163,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
       * @param BSW spacing between the bytes in pixels
       * default is 3
       */
-    virtual void setByteSpacingWidth( int/*KPixelX*/ byteSpacingWidth ) = 0;
+    virtual void setByteSpacingWidth( int/*PixelX*/ byteSpacingWidth ) = 0;
     /** sets the number of grouped bytes in the value column
       * @param NoGB numbers of grouped bytes, 0 means no grouping
       * default is 4
@@ -173,7 +173,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
       * @param GSW spacing between the groups in pixels
       * default is 9
       */
-    virtual void setGroupSpacingWidth( int/*KPixelX*/ groupSpacingWidth ) = 0;
+    virtual void setGroupSpacingWidth( int/*PixelX*/ groupSpacingWidth ) = 0;
     /** sets the spacing in the middle of a binary byte in the value column
       * @param BinaryGapW spacing in the middle of a binary in pixels
       * returns true if there was a change
@@ -185,7 +185,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
       * @param GroupSpacingWidth spacing between the groups in pixels
       * Default is 4 for NoOfGroupedBytes
       */
-    virtual void setBufferSpacing( int/*KPixelX*/ byteSpacingWidth, int noOfGroupedBytes = 0, int/*KPixelX*/ groupSpacingWidth = 0 ) = 0;
+    virtual void setBufferSpacing( int/*PixelX*/ byteSpacingWidth, int noOfGroupedBytes = 0, int/*PixelX*/ groupSpacingWidth = 0 ) = 0;
     /** sets the format of the value column. Default is KDE::HexadecimalCoding */
     virtual void setValueCoding( ValueCoding valueCoding ) = 0;
   // char column parameters

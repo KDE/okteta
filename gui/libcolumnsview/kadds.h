@@ -24,18 +24,19 @@
 #define OKTETA_KADDS_H
 
 // Okteta core
-#include <section.h>
+#include <numberrange.h>
 
 namespace Okteta
 {
 // some possibly useful additions to KDE
 
 // these are to emphasize that measuring unit is pixel and which direction
-typedef int KPixelX;
-typedef int KPixelY;
+typedef int PixelX;
+typedef int PixelY;
 
-typedef KDE::Section KPixelXs;
-typedef KDE::Section KPixelYs;
+typedef KDE::NumberRange<PixelX> PixelXs;
+typedef KDE::NumberRange<PixelY> PixelYs;
+
 }
 
 #endif

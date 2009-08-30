@@ -62,50 +62,50 @@ class OKTETAGUI_EXPORT AbstractColumnRenderer
       * @param xSpan
       * @param firstLineIndex no of the first of the range of lines to paint
       */
-    virtual void renderFirstLine( QPainter* painter, const KPixelXs& xSpan, int firstLineIndex );
+    virtual void renderFirstLine( QPainter* painter, const PixelXs& xSpan, int firstLineIndex );
     /** the actual painting call for a column's line.
       * The default implementation simply paints the background
       */
     virtual void renderNextLine( QPainter* painter );
 
     /** */
-    virtual void renderColumn( QPainter* painter, const KPixelXs& xSpan, const KPixelYs& ySpan );
+    virtual void renderColumn( QPainter* painter, const PixelXs& xSpan, const PixelYs& ySpan );
     /** */
-    virtual void renderEmptyColumn( QPainter* painter, const KPixelXs& xSpan, const KPixelYs& ySpan );
+    virtual void renderEmptyColumn( QPainter* painter, const PixelXs& xSpan, const PixelYs& ySpan );
 
   public: // modification access
     /** sets starting point of the column */
-    void setX( KPixelX x );
+    void setX( PixelX x );
     /** sets visibily */
     void setVisible( bool isVisible );
     /** buffer actual line height in column */
-    void setLineHeight( KPixelY lineHeight );
+    void setLineHeight( PixelY lineHeight );
 
   public: // value access
     /** */
     AbstractColumnStylist* stylist() const;
     /** left offset x in pixel */
-    KPixelX x() const;
+    PixelX x() const;
     /** total width in pixel */
-    KPixelX width() const;
+    PixelX width() const;
     /** right offset x in pixel */
-    KPixelX rightX() const;
+    PixelX rightX() const;
     /** should Column be displayed? */
     bool isVisible() const;
     /** convenience: returns width if visible else 0 */
-    KPixelX visibleWidth() const;
+    PixelX visibleWidth() const;
     /** */
-    KPixelY lineHeight() const;
+    PixelY lineHeight() const;
 
   public: // functional logic
     /** true if column overlaps with pixels between x-positions x1, x2 */
-    bool overlaps( const KPixelXs& xSpan ) const;
+    bool overlaps( const PixelXs& xSpan ) const;
 
   protected:
     /** sets width of the column */
-    void setWidth( KPixelX width );
+    void setWidth( PixelX width );
     /** */
-    void restrictToXSpan( KPixelXs* xSpan ) const;
+    void restrictToXSpan( PixelXs* xSpan ) const;
     /** */
     void renderBlankLine( QPainter* painter ) const;
 

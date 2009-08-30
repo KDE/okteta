@@ -32,10 +32,10 @@
 namespace Okteta
 {
 
-static const KPixelX BorderMargin = 4;
-static const KPixelX LineWidth = 1;
-static const KPixelX BorderWidth = 2 * BorderMargin + LineWidth;
-static const KPixelX LineX = BorderMargin;
+static const PixelX BorderMargin = 4;
+static const PixelX LineWidth = 1;
+static const PixelX BorderWidth = 2 * BorderMargin + LineWidth;
+static const PixelX LineX = BorderMargin;
 
 
 BorderColumnRenderer::BorderColumnRenderer( AbstractColumnStylist* stylist, bool lineDrawn, bool inEmpty )
@@ -46,14 +46,14 @@ BorderColumnRenderer::BorderColumnRenderer( AbstractColumnStylist* stylist, bool
     setWidth( mLineDrawn ? BorderWidth : BorderMargin );
 }
 
-void BorderColumnRenderer::renderColumn( QPainter* painter, const KPixelXs& Xs, const KPixelYs& Ys )
+void BorderColumnRenderer::renderColumn( QPainter* painter, const PixelXs& Xs, const PixelYs& Ys )
 {
     AbstractColumnRenderer::renderColumn( painter, Xs,Ys );
 
     renderBorderLine( painter, Xs,Ys );
 }
 
-void BorderColumnRenderer::renderEmptyColumn( QPainter *painter, const KPixelXs &Xs, const KPixelYs &Ys )
+void BorderColumnRenderer::renderEmptyColumn( QPainter *painter, const PixelXs &Xs, const PixelYs &Ys )
 {
     AbstractColumnRenderer::renderEmptyColumn( painter, Xs,Ys );
 
@@ -61,9 +61,9 @@ void BorderColumnRenderer::renderEmptyColumn( QPainter *painter, const KPixelXs 
         renderBorderLine( painter, Xs,Ys );
 }
 
-void BorderColumnRenderer::renderBorderLine( QPainter* painter, const KPixelXs& Xs, const KPixelYs& Ys )
+void BorderColumnRenderer::renderBorderLine( QPainter* painter, const PixelXs& Xs, const PixelYs& Ys )
 {
-    const KPixelX viewGlobalLineX = x() + LineX;
+    const PixelX viewGlobalLineX = x() + LineX;
 
     if( mLineDrawn && Xs.includes(viewGlobalLineX) )
     {

@@ -67,15 +67,15 @@ class AbstractColumnFrameRenderer : public AbstractFrameRenderer
 
   public: // pixel-wise sizes
     /** returns the height of each line */
-    Okteta::KPixelY lineHeight() const;
+    Okteta::PixelY lineHeight() const;
     /** returns the width of all visible columns together */
-    Okteta::KPixelX columnsWidth() const;
+    Okteta::PixelX columnsWidth() const;
     /** returns the height of all lines together */
-    Okteta::KPixelY columnsHeight() const;
+    Okteta::PixelY columnsHeight() const;
 
   public:
     /**  */
-    void setColumnsPos( Okteta::KPixelX x, Okteta::KPixelY y );
+    void setColumnsPos( Okteta::PixelX x, Okteta::PixelY y );
 
   protected: // our API
     /** draws area without columns in columns coordinates */
@@ -91,7 +91,7 @@ class AbstractColumnFrameRenderer : public AbstractFrameRenderer
       * doesn't update the content size
       * @param NewLineHeight height in pixels
       */
-    virtual void setLineHeight( Okteta::KPixelY NewLineHeight );
+    virtual void setLineHeight( Okteta::PixelY NewLineHeight );
     /** sets the number of lines
       * doesn't update the content size
       * @param NewNoOfLines new number of lines to display

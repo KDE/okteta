@@ -58,10 +58,10 @@ class ByteArrayColumnViewPrivate : public AbstractByteArrayViewPrivate
     bool offsetColumnVisible() const;
 
   // value column
-    int/*KPixelX*/ byteSpacingWidth() const;
+    int/*PixelX*/ byteSpacingWidth() const;
     int noOfGroupedBytes() const;
-    int/*KPixelX*/ groupSpacingWidth() const;
-    int/*KPixelX*/ binaryGapWidth() const;
+    int/*PixelX*/ groupSpacingWidth() const;
+    int/*PixelX*/ binaryGapWidth() const;
 
   // char column
     bool showsNonprinting() const;
@@ -88,11 +88,11 @@ class ByteArrayColumnViewPrivate : public AbstractByteArrayViewPrivate
     void toggleOffsetColumn( bool offsetColumnVisible );
 
   // value column parameters
-    void setByteSpacingWidth( int/*KPixelX*/ byteSpacingWidth ) ;
+    void setByteSpacingWidth( int/*PixelX*/ byteSpacingWidth ) ;
     void setNoOfGroupedBytes( int noOfGroupedBytes );
-    void setGroupSpacingWidth( int/*KPixelX*/ groupSpacingWidth );
+    void setGroupSpacingWidth( int/*PixelX*/ groupSpacingWidth );
     void setBinaryGapWidth( int binaryGapWidth );
-    void setBufferSpacing( /*KPixelX*/int byteSpacingWidth, int noOfGroupedBytes, /*KPixelX*/int groupSpacingWidth );
+    void setBufferSpacing( /*PixelX*/int byteSpacingWidth, int noOfGroupedBytes, /*PixelX*/int groupSpacingWidth );
     void setValueCoding( AbstractByteArrayView::ValueCoding valueCoding );
   // char column parameters
     void setShowsNonprinting( bool showsNonprinting = true );
@@ -210,10 +210,10 @@ class ByteArrayColumnViewPrivate : public AbstractByteArrayViewPrivate
     bool mBlinkCursorVisible:1;
 };
 
-inline KPixelX ByteArrayColumnViewPrivate::byteSpacingWidth()  const { return mValueColumn->byteSpacingWidth(); }
+inline PixelX ByteArrayColumnViewPrivate::byteSpacingWidth()  const { return mValueColumn->byteSpacingWidth(); }
 inline int ByteArrayColumnViewPrivate::noOfGroupedBytes()      const { return mValueColumn->noOfGroupedBytes(); }
-inline KPixelX ByteArrayColumnViewPrivate::groupSpacingWidth() const { return mValueColumn->groupSpacingWidth(); }
-inline KPixelX ByteArrayColumnViewPrivate::binaryGapWidth()    const { return mValueColumn->binaryGapWidth(); }
+inline PixelX ByteArrayColumnViewPrivate::groupSpacingWidth() const { return mValueColumn->groupSpacingWidth(); }
+inline PixelX ByteArrayColumnViewPrivate::binaryGapWidth()    const { return mValueColumn->binaryGapWidth(); }
 inline bool ByteArrayColumnViewPrivate::showsNonprinting()     const { return mCharColumn->isShowingNonprinting(); }
 inline QChar ByteArrayColumnViewPrivate::substituteChar()      const { return mCharColumn->substituteChar(); }
 inline QChar ByteArrayColumnViewPrivate::undefinedChar()       const { return mCharColumn->undefinedChar(); }

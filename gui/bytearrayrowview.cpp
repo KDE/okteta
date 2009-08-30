@@ -41,7 +41,7 @@ void ByteArrayRowView::setByteArrayModel( AbstractByteArrayModel* byteArrayModel
     d->setByteArrayModel( byteArrayModel );
 }
 
-KPixelX ByteArrayRowView::byteSpacingWidth() const
+PixelX ByteArrayRowView::byteSpacingWidth() const
 {
     Q_D( const ByteArrayRowView );
     return d->byteSpacingWidth();
@@ -51,12 +51,12 @@ int ByteArrayRowView::noOfGroupedBytes() const
     Q_D( const ByteArrayRowView );
     return d->noOfGroupedBytes();
 }
-KPixelX ByteArrayRowView::groupSpacingWidth() const
+PixelX ByteArrayRowView::groupSpacingWidth() const
 {
     Q_D( const ByteArrayRowView );
     return d->groupSpacingWidth();
 }
-KPixelX ByteArrayRowView::binaryGapWidth() const
+PixelX ByteArrayRowView::binaryGapWidth() const
 {
     Q_D( const ByteArrayRowView );
     return d->binaryGapWidth();
@@ -86,7 +86,7 @@ bool ByteArrayRowView::offsetColumnVisible() const
     Q_D( const ByteArrayRowView );
     return d->offsetColumnVisible();
 }
-void ByteArrayRowView::setBufferSpacing( /*KPixelX*/int byteSpacing, int noOfGroupedBytes, /*KPixelX*/int groupSpacing )
+void ByteArrayRowView::setBufferSpacing( /*PixelX*/int byteSpacing, int noOfGroupedBytes, /*PixelX*/int groupSpacing )
 {
     Q_D( ByteArrayRowView );
     d->setBufferSpacing( byteSpacing, noOfGroupedBytes, groupSpacing );
@@ -99,7 +99,7 @@ void ByteArrayRowView::setValueCoding( ValueCoding valueCoding )
     d->setValueCoding( valueCoding );
 }
 
-void ByteArrayRowView::setByteSpacingWidth( int/*KPixelX*/ byteSpacingWidth )
+void ByteArrayRowView::setByteSpacingWidth( int/*PixelX*/ byteSpacingWidth )
 {
     Q_D( ByteArrayRowView );
     d->setByteSpacingWidth( byteSpacingWidth );
@@ -112,14 +112,14 @@ void ByteArrayRowView::setNoOfGroupedBytes( int noOfGroupedBytes )
 }
 
 
-void ByteArrayRowView::setGroupSpacingWidth( int/*KPixelX*/ groupSpacingWidth )
+void ByteArrayRowView::setGroupSpacingWidth( int/*PixelX*/ groupSpacingWidth )
 {
     Q_D( ByteArrayRowView );
     d->setGroupSpacingWidth( groupSpacingWidth );
 }
 
 
-void ByteArrayRowView::setBinaryGapWidth( int/*KPixelX*/ binaryGapWidth )
+void ByteArrayRowView::setBinaryGapWidth( int/*PixelX*/ binaryGapWidth )
 {
     Q_D( ByteArrayRowView );
     d->setBinaryGapWidth( binaryGapWidth );
