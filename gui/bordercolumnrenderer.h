@@ -43,11 +43,11 @@ class OKTETAGUI_EXPORT BorderColumnRenderer : public AbstractColumnRenderer
     virtual ~BorderColumnRenderer();
 
   public: // AbstractColumnRenderer-API
-    virtual void renderColumn( QPainter* painter, const PixelXs& Xs, const PixelYs& Ys );
-    virtual void renderEmptyColumn( QPainter *painter, const PixelXs &Xs, const PixelYs &Ys );
+    virtual void renderColumn( QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys );
+    virtual void renderEmptyColumn( QPainter *painter, const PixelXRange &Xs, const PixelYRange &Ys );
 
   protected:
-    void renderBorderLine( QPainter* painter, const PixelXs& Xs, const PixelYs& Ys );
+    void renderBorderLine( QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys );
 
   protected:
     /** true if we are between two columns and should show a line */

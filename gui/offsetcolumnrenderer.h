@@ -43,10 +43,10 @@ class OKTETAGUI_EXPORT OffsetColumnRenderer : public AbstractColumnRenderer
     virtual ~OffsetColumnRenderer();
 
   public:  // AbstractColumnRenderer API
-    virtual void renderFirstLine( QPainter *painter, const PixelXs &Xs, int firstLineIndex );
+    virtual void renderFirstLine( QPainter *painter, const PixelXRange &Xs, int firstLineIndex );
     virtual void renderNextLine( QPainter *painter );
-    virtual void renderColumn( QPainter* painter, const PixelXs& Xs, const PixelYs& Ys );
-    virtual void renderEmptyColumn( QPainter *painter, const PixelXs &Xs, const PixelYs &Ys );
+    virtual void renderColumn( QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys );
+    virtual void renderEmptyColumn( QPainter *painter, const PixelXRange &Xs, const PixelYRange &Ys );
 
   public:
     void setFormat( OffsetFormat::Format format );
@@ -67,7 +67,7 @@ class OKTETAGUI_EXPORT OffsetColumnRenderer : public AbstractColumnRenderer
     /** paints full line */
     void renderLine( QPainter *painter, int lineIndex );
     /** */
-    void renderColumnBackground( QPainter* painter, const PixelXs& Xs, const PixelYs& Ys );
+    void renderColumnBackground( QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys );
 
   protected: // user settings
     ByteArrayTableLayout* mLayout;

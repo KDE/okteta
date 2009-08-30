@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2003 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -34,8 +34,8 @@ namespace Okteta
 typedef int PixelX;
 typedef int PixelY;
 
-typedef KDE::NumberRange<PixelX> PixelXs;
-typedef KDE::NumberRange<PixelY> PixelYs;
+typedef KDE::NumberRange<PixelX> PixelXRange;
+typedef KDE::NumberRange<PixelY> PixelYRange;
 
 }
 

@@ -70,11 +70,11 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
 
 
   public: // AbstractColumnRenderer API
-    virtual void renderFirstLine( QPainter* painter, const PixelXs& Xs, int firstLineIndex );
+    virtual void renderFirstLine( QPainter* painter, const PixelXRange& Xs, int firstLineIndex );
     virtual void renderNextLine( QPainter* painter );
 
   public:
-    void prepareRendering( const PixelXs &Xs );
+    void prepareRendering( const PixelXRange &Xs );
 
   public:
     //void renderLine( QPainter* painter, int lineIndex );
@@ -183,9 +183,9 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
     /** returns the linePositions that overlap with the x-coords relative to the view */
     KDE::Section visibleLinePositions( PixelX x, PixelX width ) const;
     /** returns the */
-    PixelXs xsOfLinePositionsInclSpaces( const KDE::Section& linePositions ) const;
+    PixelXRange xsOfLinePositionsInclSpaces( const KDE::Section& linePositions ) const;
     /** */
-    PixelXs columnXsOfLinePositionsInclSpaces( const KDE::Section& linePositions ) const;
+    PixelXRange columnXsOfLinePositionsInclSpaces( const KDE::Section& linePositions ) const;
 
     AbstractByteArrayView::CodingTypeId codingIdofY( PixelY y ) const;
     PixelY yOfCodingId( AbstractByteArrayView::CodingTypeId codingId ) const;

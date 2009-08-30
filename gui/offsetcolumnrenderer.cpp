@@ -59,16 +59,16 @@ void OffsetColumnRenderer::renderLine( QPainter* painter, int lineIndex )
     painter->drawText( leftOffsetMargin, mDigitBaseLine, QString().append(mCodedOffset) );
 }
 
-void OffsetColumnRenderer::renderColumnBackground( QPainter* painter, const PixelXs& _Xs, const PixelYs& Ys )
+void OffsetColumnRenderer::renderColumnBackground( QPainter* painter, const PixelXRange& _Xs, const PixelYRange& Ys )
 {
-    PixelXs Xs( _Xs );
+    PixelXRange Xs( _Xs );
     restrictToXSpan( &Xs );
 
     const QBrush& buttonBrush = stylist()->palette().button();
     painter->fillRect( Xs.start(), Ys.start(), Xs.width(), Ys.width(), buttonBrush );
 }
 
-void OffsetColumnRenderer::renderFirstLine( QPainter *painter, const PixelXs &, int firstLineIndex )
+void OffsetColumnRenderer::renderFirstLine( QPainter *painter, const PixelXRange &, int firstLineIndex )
 {
     mRenderLineIndex = firstLineIndex;
     renderLine( painter, mRenderLineIndex++ );
@@ -81,13 +81,13 @@ void OffsetColumnRenderer::renderNextLine( QPainter *painter )
 }
 
 
-void OffsetColumnRenderer::renderColumn( QPainter* painter, const PixelXs& Xs, const PixelYs& Ys )
+void OffsetColumnRenderer::renderColumn( QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys )
 {
     renderColumnBackground( painter, Xs, Ys );
 }
 
 
-void OffsetColumnRenderer::renderEmptyColumn( QPainter* painter, const PixelXs& Xs, const PixelYs& Ys )
+void OffsetColumnRenderer::renderEmptyColumn( QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys )
 {
     renderColumnBackground( painter, Xs, Ys );
 }

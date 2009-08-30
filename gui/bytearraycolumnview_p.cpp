@@ -804,7 +804,7 @@ void ByteArrayColumnViewPrivate::renderColumns( QPainter* painter, int cx, int c
     // Then it needs to know about inactive, insideByte and the like... well...
     // perhaps subclassing the buffer columns even more, to CharByteArrayColumnRenderer and ValueByteArrayColumnRenderer?
 
-    if( q->visibleLines(PixelYs::fromWidth(cy,ch)).includes(mTableCursor->line()) )
+    if( q->visibleLines(PixelYRange::fromWidth(cy,ch)).includes(mTableCursor->line()) )
     {
         drawActiveCursor( painter );
         drawInactiveCursor( painter );
@@ -816,7 +816,7 @@ void ByteArrayColumnViewPrivate::updateChanged()
     Q_Q( ByteArrayColumnView );
 
     const int xOffset = q->xOffset();
-    const PixelXs Xs = PixelXs::fromWidth( xOffset, q->visibleWidth() );
+    const PixelXRange Xs = PixelXRange::fromWidth( xOffset, q->visibleWidth() );
 
     // do updates in offset column 
     const KDE::Section changedOffsetLines = mTableRanges->changedOffsetLines();
@@ -861,7 +861,7 @@ void ByteArrayColumnViewPrivate::updateChanged()
                 const KDE::Section changedPositions( changedRange.start().pos(), changedRange.end().pos() );
                 while( columnIt.hasNext() )
                 {
-                    const PixelXs xPixels = columnIt.next()->xsOfLinePositionsInclSpaces( changedPositions );
+                    const PixelXRange xPixels = columnIt.next()->xsOfLinePositionsInclSpaces( changedPositions );
 
                     q->viewport()->update( xPixels.start()-xOffset, cy, xPixels.width(), lineHeight );
                 }
@@ -873,7 +873,7 @@ void ByteArrayColumnViewPrivate::updateChanged()
                 const KDE::Section firstChangedPositions( changedRange.start().pos(), fullPositions.end() );
                 while( columnIt.hasNext() )
                 {
-                    const PixelXs XPixels = columnIt.next()->xsOfLinePositionsInclSpaces( firstChangedPositions );
+                    const PixelXRange XPixels = columnIt.next()->xsOfLinePositionsInclSpaces( firstChangedPositions );
 
                     q->viewport()->update( XPixels.start()-xOffset, cy, XPixels.width(), lineHeight );
                 }
@@ -885,7 +885,7 @@ void ByteArrayColumnViewPrivate::updateChanged()
                     columnIt.toFront();
                     while( columnIt.hasNext() )
                     {
-                        const PixelXs XPixels = columnIt.next()->xsOfLinePositionsInclSpaces( fullPositions );
+                        const PixelXRange XPixels = columnIt.next()->xsOfLinePositionsInclSpaces( fullPositions );
 
                         q->viewport()->update( XPixels.start()-xOffset, cy, XPixels.width(), lineHeight );
                     }
@@ -896,7 +896,7 @@ void ByteArrayColumnViewPrivate::updateChanged()
                 const KDE::Section lastChangedPositions( fullPositions.start(), changedRange.end().pos() );
                 while( columnIt.hasNext() )
                 {
-                    const PixelXs XPixels = columnIt.next()->xsOfLinePositionsInclSpaces( lastChangedPositions );
+                    const PixelXRange XPixels = columnIt.next()->xsOfLinePositionsInclSpaces( lastChangedPositions );
 
                     q->viewport()->update( XPixels.start()-xOffset, cy, XPixels.width(), lineHeight );
                 }
@@ -931,13 +931,13 @@ void ByteArrayColumnViewPrivate::ensureVisible( const AbstractByteArrayColumnRen
     Q_Q( ByteArrayColumnView );
 
     // TODO: add getCursorRect to BufferColumn
-    const PixelXs cursorXs = PixelXs::fromWidth( column.xOfLinePosition(coord.pos()),
+    const PixelXRange cursorXs = PixelXRange::fromWidth( column.xOfLinePosition(coord.pos()),
                                                    column.byteWidth() );
 
-    const PixelYs cursorYs = PixelYs::fromWidth( q->lineHeight()*coord.line(), q->lineHeight() );
+    const PixelYRange cursorYs = PixelYRange::fromWidth( q->lineHeight()*coord.line(), q->lineHeight() );
 
-    const PixelXs visibleXs = PixelXs::fromWidth( q->xOffset(), q->visibleWidth() );
-    const PixelYs visibleYs = PixelXs::fromWidth( q->yOffset(), q->visibleHeight() );
+    const PixelXRange visibleXs = PixelXRange::fromWidth( q->xOffset(), q->visibleWidth() );
+    const PixelYRange visibleYs = PixelXRange::fromWidth( q->yOffset(), q->visibleHeight() );
 
     q->horizontalScrollBar()->setValue( visibleXs.startForInclude(cursorXs) );
     q->verticalScrollBar()->setValue( visibleYs.startForInclude(cursorYs) );

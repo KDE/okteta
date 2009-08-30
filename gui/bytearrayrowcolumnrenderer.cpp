@@ -484,29 +484,29 @@ PixelX ByteArrayRowColumnRenderer::columnRightXOfLinePosition( int linePosition 
 { return mLinePosRightPixelX ? mLinePosRightPixelX[linePosition] : 0; }
 
 
-PixelXs ByteArrayRowColumnRenderer::xsOfLinePositionsInclSpaces( const KDE::Section& linePositions ) const
+PixelXRange ByteArrayRowColumnRenderer::xsOfLinePositionsInclSpaces( const KDE::Section& linePositions ) const
 {
     const int x = (linePositions.start()>0) ? rightXOfLinePosition( linePositions.nextBeforeStart() ) + 1 :
                                               xOfLinePosition( linePositions.start() );
     const int rightX = (linePositions.end()<mLastLinePos) ? xOfLinePosition( linePositions.nextBehindEnd() ) - 1 :
                                                             rightXOfLinePosition( linePositions.end() );
-    return PixelXs( x, rightX );
+    return PixelXRange( x, rightX );
 }
 
 
-PixelXs ByteArrayRowColumnRenderer::columnXsOfLinePositionsInclSpaces( const KDE::Section& linePositions ) const
+PixelXRange ByteArrayRowColumnRenderer::columnXsOfLinePositionsInclSpaces( const KDE::Section& linePositions ) const
 {
     const int x = (linePositions.start()>0) ? columnRightXOfLinePosition( linePositions.nextBeforeStart() ) + 1 :
                                               columnXOfLinePosition( linePositions.start() );
     const int rightX = (linePositions.end()<mLastLinePos) ? columnXOfLinePosition( linePositions.nextBehindEnd() ) - 1 :
                                                             columnRightXOfLinePosition( linePositions.end() );
-    return PixelXs( x, rightX  );
+    return PixelXRange( x, rightX  );
 }
 
 
-void ByteArrayRowColumnRenderer::prepareRendering( const PixelXs& _Xs )
+void ByteArrayRowColumnRenderer::prepareRendering( const PixelXRange& _Xs )
 {
-    PixelXs Xs( _Xs );
+    PixelXRange Xs( _Xs );
     restrictToXSpan( &Xs );
     // translate
     Xs.moveBy( -x() );
@@ -520,7 +520,7 @@ void ByteArrayRowColumnRenderer::prepareRendering( const PixelXs& _Xs )
 }
 
 
-void ByteArrayRowColumnRenderer::renderFirstLine( QPainter* painter, const PixelXs& Xs, int firstLineIndex )
+void ByteArrayRowColumnRenderer::renderFirstLine( QPainter* painter, const PixelXRange& Xs, int firstLineIndex )
 {
     prepareRendering( Xs );
 

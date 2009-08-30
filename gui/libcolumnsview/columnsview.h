@@ -82,7 +82,7 @@ class OKTETAGUI_EXPORT ColumnsView : public QAbstractScrollArea
     /** gives the index of the first and the last line that would be visible in the given pixel range
       * these lines might not contain anything
       */
-    KDE::Section visibleLines( const PixelYs &YPixels ) const;
+    KDE::Section visibleLines( const PixelYRange &YPixels ) const;
 
     /** @return visible width of the current view */
     PixelX visibleWidth() const;

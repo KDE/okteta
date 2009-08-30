@@ -103,10 +103,10 @@ PixelY ColumnsView::lineHeight()     const { return d->LineHeight; }
 uint ColumnsView::lineAt( PixelY y ) const { return (d->LineHeight!=0) ? y / d->LineHeight : 0; }
 KDE::Section ColumnsView::visibleLines() const
 {
-    const PixelYs ySpan = PixelYs::fromWidth( yOffset(), visibleHeight() );
+    const PixelYRange ySpan = PixelYRange::fromWidth( yOffset(), visibleHeight() );
     return KDE::Section( lineAt(ySpan.start()), lineAt(ySpan.end()) );
 }
-KDE::Section ColumnsView::visibleLines( const PixelYs &YPixels ) const
+KDE::Section ColumnsView::visibleLines( const PixelYRange &YPixels ) const
 { return KDE::Section( lineAt(YPixels.start()), lineAt(YPixels.end()) ); }
 
 PixelX ColumnsView::visibleWidth()  const { return viewport()->width(); }
@@ -290,12 +290,12 @@ void ColumnsView::paintEvent( QPaintEvent *paintEvent )
 //#include <kdebug.h>
 void ColumnsView::renderColumns( QPainter *painter, int cx, int cy, int cw, int ch )
 {
-    PixelXs dirtyXs = PixelXs::fromWidth( cx, cw );
+    PixelXRange dirtyXs = PixelXRange::fromWidth( cx, cw );
 
     // content to be shown?
     if( dirtyXs.startsBefore(d->ColumnsWidth) )
     {
-        PixelYs dirtyYs = PixelYs::fromWidth( cy, ch );
+        PixelYRange dirtyYs = PixelYRange::fromWidth( cy, ch );
 
         // collect affected columns
         QList<AbstractColumnRenderer*> dirtyColumns;

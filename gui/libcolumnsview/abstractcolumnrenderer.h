@@ -62,16 +62,16 @@ class OKTETAGUI_EXPORT AbstractColumnRenderer
       * @param xSpan
       * @param firstLineIndex no of the first of the range of lines to paint
       */
-    virtual void renderFirstLine( QPainter* painter, const PixelXs& xSpan, int firstLineIndex );
+    virtual void renderFirstLine( QPainter* painter, const PixelXRange& xSpan, int firstLineIndex );
     /** the actual painting call for a column's line.
       * The default implementation simply paints the background
       */
     virtual void renderNextLine( QPainter* painter );
 
     /** */
-    virtual void renderColumn( QPainter* painter, const PixelXs& xSpan, const PixelYs& ySpan );
+    virtual void renderColumn( QPainter* painter, const PixelXRange& xSpan, const PixelYRange& ySpan );
     /** */
-    virtual void renderEmptyColumn( QPainter* painter, const PixelXs& xSpan, const PixelYs& ySpan );
+    virtual void renderEmptyColumn( QPainter* painter, const PixelXRange& xSpan, const PixelYRange& ySpan );
 
   public: // modification access
     /** sets starting point of the column */
@@ -99,13 +99,13 @@ class OKTETAGUI_EXPORT AbstractColumnRenderer
 
   public: // functional logic
     /** true if column overlaps with pixels between x-positions x1, x2 */
-    bool overlaps( const PixelXs& xSpan ) const;
+    bool overlaps( const PixelXRange& xSpan ) const;
 
   protected:
     /** sets width of the column */
     void setWidth( PixelX width );
     /** */
-    void restrictToXSpan( PixelXs* xSpan ) const;
+    void restrictToXSpan( PixelXRange* xSpan ) const;
     /** */
     void renderBlankLine( QPainter* painter ) const;
 

@@ -335,29 +335,29 @@ PixelX AbstractByteArrayColumnRenderer::columnRightXOfLinePosition( int linePosi
 { return mLinePosRightPixelX ? mLinePosRightPixelX[linePosition] : 0; }
 
 
-PixelXs AbstractByteArrayColumnRenderer::xsOfLinePositionsInclSpaces( const KDE::Section &linePositions ) const
+PixelXRange AbstractByteArrayColumnRenderer::xsOfLinePositionsInclSpaces( const KDE::Section &linePositions ) const
 {
     const PixelX x = (linePositions.start()>0) ? rightXOfLinePosition( linePositions.nextBeforeStart() ) + 1 :
                                               xOfLinePosition( linePositions.start() );
     const PixelX rightX = (linePositions.end()<mLastLinePos) ? xOfLinePosition( linePositions.nextBehindEnd() ) - 1 :
                                                             rightXOfLinePosition( linePositions.end() );
-    return PixelXs( x, rightX );
+    return PixelXRange( x, rightX );
 }
 
 
-PixelXs AbstractByteArrayColumnRenderer::columnXsOfLinePositionsInclSpaces( const KDE::Section &linePositions ) const
+PixelXRange AbstractByteArrayColumnRenderer::columnXsOfLinePositionsInclSpaces( const KDE::Section &linePositions ) const
 {
     const PixelX x = (linePositions.start()>0) ? columnRightXOfLinePosition( linePositions.nextBeforeStart() ) + 1 :
                                               columnXOfLinePosition( linePositions.start() );
     const PixelX rightX = (linePositions.end()<mLastLinePos) ? columnXOfLinePosition( linePositions.nextBehindEnd() ) - 1 :
                                                             columnRightXOfLinePosition( linePositions.end() );
-    return PixelXs( x, rightX  );
+    return PixelXRange( x, rightX  );
 }
 
 
-void AbstractByteArrayColumnRenderer::prepareRendering( const PixelXs &_Xs )
+void AbstractByteArrayColumnRenderer::prepareRendering( const PixelXRange &_Xs )
 {
-    PixelXs Xs( _Xs );
+    PixelXRange Xs( _Xs );
     restrictToXSpan( &Xs );
     // translate
     Xs.moveBy( -x() );
@@ -371,7 +371,7 @@ void AbstractByteArrayColumnRenderer::prepareRendering( const PixelXs &_Xs )
 }
 
 
-void AbstractByteArrayColumnRenderer::renderFirstLine( QPainter *painter, const PixelXs &Xs, int firstLineIndex )
+void AbstractByteArrayColumnRenderer::renderFirstLine( QPainter *painter, const PixelXRange &Xs, int firstLineIndex )
 {
     prepareRendering( Xs );
 

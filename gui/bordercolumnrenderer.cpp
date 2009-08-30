@@ -46,14 +46,14 @@ BorderColumnRenderer::BorderColumnRenderer( AbstractColumnStylist* stylist, bool
     setWidth( mLineDrawn ? BorderWidth : BorderMargin );
 }
 
-void BorderColumnRenderer::renderColumn( QPainter* painter, const PixelXs& Xs, const PixelYs& Ys )
+void BorderColumnRenderer::renderColumn( QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys )
 {
     AbstractColumnRenderer::renderColumn( painter, Xs,Ys );
 
     renderBorderLine( painter, Xs,Ys );
 }
 
-void BorderColumnRenderer::renderEmptyColumn( QPainter *painter, const PixelXs &Xs, const PixelYs &Ys )
+void BorderColumnRenderer::renderEmptyColumn( QPainter *painter, const PixelXRange &Xs, const PixelYRange &Ys )
 {
     AbstractColumnRenderer::renderEmptyColumn( painter, Xs,Ys );
 
@@ -61,7 +61,7 @@ void BorderColumnRenderer::renderEmptyColumn( QPainter *painter, const PixelXs &
         renderBorderLine( painter, Xs,Ys );
 }
 
-void BorderColumnRenderer::renderBorderLine( QPainter* painter, const PixelXs& Xs, const PixelYs& Ys )
+void BorderColumnRenderer::renderBorderLine( QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys )
 {
     const PixelX viewGlobalLineX = x() + LineX;
 

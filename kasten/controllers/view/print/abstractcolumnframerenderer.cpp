@@ -153,7 +153,7 @@ void AbstractColumnFrameRenderer::removeColumn( Okteta::AbstractColumnRenderer *
 
 void AbstractColumnFrameRenderer::renderFrame( QPainter *painter, int frameIndex )
 {
-    Okteta::PixelXs renderedXs = Okteta::PixelXs::fromWidth( 0, width() );
+    Okteta::PixelXRange renderedXs = Okteta::PixelXRange::fromWidth( 0, width() );
 
     // content to be shown?
     if( renderedXs.startsBefore(d->mColumnsWidth) )
@@ -173,7 +173,7 @@ void AbstractColumnFrameRenderer::renderFrame( QPainter *painter, int frameIndex
         KDE::Section renderedLines = KDE::Section::fromWidth( baseLine, noOfLinesPerFrame() );
         renderedLines.restrictEndTo( noOfLines()-1 );
 
-        Okteta::PixelYs renderedYs = Okteta::PixelYs::fromWidth( 0, renderedLines.width()*d->mLineHeight );
+        Okteta::PixelYRange renderedYs = Okteta::PixelYRange::fromWidth( 0, renderedLines.width()*d->mLineHeight );
 
         // any lines of any columns to be drawn?
         if( renderedLines.isValid() )
