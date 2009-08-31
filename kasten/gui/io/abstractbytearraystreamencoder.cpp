@@ -25,7 +25,7 @@
 // lib
 #include <bytearrayview.h>
 #include <bytearraydocument.h>
-#include <kbytearrayselection.h>
+#include <bytearrayselection.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
 // Qt
@@ -65,8 +65,8 @@ bool AbstractByteArrayStreamEncoder::encodeToStream( QIODevice* device,
 
     const Okteta::AbstractByteArrayModel* byteArray = byteArrayDocument->content();
 
-    const KByteArraySelection* byteArraySelection =
-        selection ? static_cast<const KByteArraySelection*>( selection ) : 0;
+    const ByteArraySelection* byteArraySelection =
+        selection ? static_cast<const ByteArraySelection*>( selection ) : 0;
 
     const Okteta::AddressRange range = byteArraySelection && byteArraySelection->isValid() ?
         byteArraySelection->range() :
@@ -88,8 +88,8 @@ QString AbstractByteArrayStreamEncoder::previewData( AbstractModel* model, const
 
     const Okteta::AbstractByteArrayModel* byteArray = byteArrayDocument->content();
 
-    const KByteArraySelection* byteArraySelection =
-        selection ? static_cast<const KByteArraySelection*>( selection ) : 0;
+    const ByteArraySelection* byteArraySelection =
+        selection ? static_cast<const ByteArraySelection*>( selection ) : 0;
 
     Okteta::AddressRange range = byteArraySelection && byteArraySelection->isValid() ?
         byteArraySelection->range() :

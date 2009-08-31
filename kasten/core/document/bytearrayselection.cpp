@@ -20,37 +20,20 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KBYTEARRAYSELECTION_H
-#define KBYTEARRAYSELECTION_H
-
-// lib
-#include "oktetakastencore_export.h"
-// Kasten core
-#include <abstractmodelselection.h>
-// Okteta core
-#include <addressrange.h>
+#include "bytearrayselection.h"
 
 
 namespace Kasten
 {
 
-class OKTETAKASTENCORE_EXPORT KByteArraySelection : public AbstractModelSelection
-{
-  public:
-    KByteArraySelection();
-    virtual ~KByteArraySelection();
+ByteArraySelection::ByteArraySelection()
+{}
 
-  public:
-    void setRange( const Okteta::AddressRange& range );
+bool ByteArraySelection::isValid() const { return mRange.isValid(); }
+Okteta::AddressRange ByteArraySelection::range() const { return mRange; }
 
-  public:
-    Okteta::AddressRange range() const;
-    bool isValid() const;
+void ByteArraySelection::setRange( const Okteta::AddressRange& range ) { mRange = range; }
 
-  protected:
-    Okteta::AddressRange mRange;
-};
+ByteArraySelection::~ByteArraySelection() {}
 
 }
-
-#endif

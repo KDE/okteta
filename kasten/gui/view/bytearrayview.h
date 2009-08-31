@@ -26,7 +26,7 @@
 // lib
 #include "oktetakastengui_export.h"
 // lib
-#include <kbytearrayselection.h>
+#include <bytearrayselection.h>
 // Kasten gui
 #include <abstractview.h>
 #include <zoomable.h> // TODO: able instead of interface? or else?
@@ -172,7 +172,7 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView,
   protected:
     Okteta::ByteArrayJanusView* mWidget;
     ByteArrayDocument* mDocument;
-    KByteArraySelection mSelection;
+    ByteArraySelection mSelection;
 //     KCursorProxy *mCursorProxy;
 };
 
