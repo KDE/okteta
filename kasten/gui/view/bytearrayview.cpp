@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kbytearraydisplay.h"
+#include "bytearrayview.h"
 
 // lib
 #include "bytearrayjanusview.h"
@@ -34,14 +34,14 @@
 namespace Kasten
 {
 
-KByteArrayDisplay::KByteArrayDisplay( KByteArrayDocument* document )
+ByteArrayView::ByteArrayView( KByteArrayDocument* document )
   : AbstractView( document ),
     mDocument( document )
 {
     init();
 }
 
-KByteArrayDisplay::KByteArrayDisplay( KByteArrayDisplay* other, Qt::Alignment alignment )
+ByteArrayView::ByteArrayView( ByteArrayView* other, Qt::Alignment alignment )
   : AbstractView( static_cast<KByteArrayDocument*>(other->baseModel()) ),
     mDocument( static_cast<KByteArrayDocument*>(other->baseModel()) )
 {
@@ -83,7 +83,7 @@ KByteArrayDisplay::KByteArrayDisplay( KByteArrayDisplay* other, Qt::Alignment al
     mWidget->setViewPos( viewPos );
 }
 
-void KByteArrayDisplay::init()
+void ByteArrayView::init()
 {
     Okteta::AbstractByteArrayModel *content = mDocument->content();
     mWidget = new Okteta::ByteArrayJanusView();
@@ -107,238 +107,238 @@ void KByteArrayDisplay::init()
     connect( mWidget, SIGNAL(focusChanged( bool )), SIGNAL(focusChanged( bool )) );
 }
 
-const AbstractModelSelection* KByteArrayDisplay::modelSelection() const { return &mSelection; }
+const AbstractModelSelection* ByteArrayView::modelSelection() const { return &mSelection; }
 
-QWidget* KByteArrayDisplay::widget()             const { return mWidget; }
-bool KByteArrayDisplay::hasFocus()               const { return mWidget->focusWidget()->hasFocus(); } // TODO: does this work?
+QWidget* ByteArrayView::widget()             const { return mWidget; }
+bool ByteArrayView::hasFocus()               const { return mWidget->focusWidget()->hasFocus(); } // TODO: does this work?
 
-QString KByteArrayDisplay::title()               const { return mDocument->title(); }
-bool KByteArrayDisplay::isModifiable()           const { return true; }
-bool KByteArrayDisplay::isReadOnly()             const { return mWidget->isReadOnly(); }
+QString ByteArrayView::title()               const { return mDocument->title(); }
+bool ByteArrayView::isModifiable()           const { return true; }
+bool ByteArrayView::isReadOnly()             const { return mWidget->isReadOnly(); }
 
 
-void KByteArrayDisplay::setFocus()
+void ByteArrayView::setFocus()
 {
     mWidget->setFocus();
 }
 
-void KByteArrayDisplay::setReadOnly( bool isReadOnly ) { mWidget->setReadOnly( isReadOnly ); }
+void ByteArrayView::setReadOnly( bool isReadOnly ) { mWidget->setReadOnly( isReadOnly ); }
 
-void KByteArrayDisplay::setZoomLevel( double Level )
+void ByteArrayView::setZoomLevel( double Level )
 {
     mWidget->setZoomLevel( Level );
     emit zoomLevelChanged( mWidget->zoomLevel() );
 }
 
-double KByteArrayDisplay::zoomLevel() const
+double ByteArrayView::zoomLevel() const
 {
     return mWidget->zoomLevel();
 }
 
-void KByteArrayDisplay::selectAllData( bool selectAll )
+void ByteArrayView::selectAllData( bool selectAll )
 {
     mWidget->selectAll( selectAll );
 }
 
-bool KByteArrayDisplay::hasSelectedData() const
+bool ByteArrayView::hasSelectedData() const
 {
     return mWidget->hasSelectedData();
 }
 
-QMimeData *KByteArrayDisplay::copySelectedData() const
+QMimeData *ByteArrayView::copySelectedData() const
 {
     return mWidget->selectionAsMimeData();
 }
 
-void KByteArrayDisplay::insertData( const QMimeData *data )
+void ByteArrayView::insertData( const QMimeData *data )
 {
     mWidget->pasteData( data );
 }
 
-QMimeData *KByteArrayDisplay::cutSelectedData()
+QMimeData *ByteArrayView::cutSelectedData()
 {
     QMimeData *result = mWidget->selectionAsMimeData();
     mWidget->removeSelectedData();
     return result;
 }
 
-void KByteArrayDisplay::deleteSelectedData()
+void ByteArrayView::deleteSelectedData()
 {
     mWidget->removeSelectedData();
 }
 
-bool KByteArrayDisplay::canReadData( const QMimeData *data ) const
+bool ByteArrayView::canReadData( const QMimeData *data ) const
 {
     return mWidget->canReadData( data );
 }
 
-void KByteArrayDisplay::onSelectionChanged( const Okteta::AddressRange& selection )
+void ByteArrayView::onSelectionChanged( const Okteta::AddressRange& selection )
 {
     // TODO: how to make sure the signal hasSelectedDataChanged() is not emitted before?
     mSelection.setRange( selection );
     emit selectedDataChanged( &mSelection );
 }
 
-void KByteArrayDisplay::setCursorPosition( Okteta::Address cursorPosition )
+void ByteArrayView::setCursorPosition( Okteta::Address cursorPosition )
 {
     mWidget->setCursorPosition( cursorPosition );
 }
 
-void KByteArrayDisplay::setSelectionCursorPosition( Okteta::Address index )
+void ByteArrayView::setSelectionCursorPosition( Okteta::Address index )
 {
     mWidget->setSelectionCursorPosition( index );
 }
 
-Okteta::Address KByteArrayDisplay::cursorPosition() const
+Okteta::Address ByteArrayView::cursorPosition() const
 {
     return mWidget->cursorPosition();
 }
-QRect KByteArrayDisplay::cursorRect() const
+QRect ByteArrayView::cursorRect() const
 {
     return mWidget->cursorRect();
 }
 
-Okteta::Address KByteArrayDisplay::startOffset() const
+Okteta::Address ByteArrayView::startOffset() const
 {
     return mWidget->startOffset();
 }
-Okteta::Address KByteArrayDisplay::firstLineOffset() const
+Okteta::Address ByteArrayView::firstLineOffset() const
 {
     return mWidget->firstLineOffset();
 }
-int KByteArrayDisplay::noOfBytesPerLine() const
+int ByteArrayView::noOfBytesPerLine() const
 {
     return mWidget->noOfBytesPerLine();
 }
 
 
-int KByteArrayDisplay::valueCoding() const
+int ByteArrayView::valueCoding() const
 {
     return mWidget->valueCoding();
 }
 
-QString KByteArrayDisplay::charCodingName() const
+QString ByteArrayView::charCodingName() const
 {
     return mWidget->charCodingName();
 }
 
-void KByteArrayDisplay::setValueCoding( int valueCoding )
+void ByteArrayView::setValueCoding( int valueCoding )
 {
     mWidget->setValueCoding( (Okteta::AbstractByteArrayView::ValueCoding)valueCoding );
 }
 
-void KByteArrayDisplay::setCharCoding( const QString& charCodingName )
+void ByteArrayView::setCharCoding( const QString& charCodingName )
 {
     mWidget->setCharCoding( charCodingName );
 }
 
 
-Okteta::AddressRange KByteArrayDisplay::selection() const
+Okteta::AddressRange ByteArrayView::selection() const
 {
     return mWidget->selection();
 }
 
-void KByteArrayDisplay::setSelection( Okteta::Address start, Okteta::Address end )
+void ByteArrayView::setSelection( Okteta::Address start, Okteta::Address end )
 {
     mWidget->setSelection( start, end );
 }
 
-void KByteArrayDisplay::insert( const QByteArray& byteArray )
+void ByteArrayView::insert( const QByteArray& byteArray )
 {
     mWidget->insert( byteArray );
 }
 
-bool KByteArrayDisplay::showsNonprinting() const
+bool ByteArrayView::showsNonprinting() const
 {
     return mWidget->showsNonprinting();
 }
 
-bool KByteArrayDisplay::offsetColumnVisible() const
+bool ByteArrayView::offsetColumnVisible() const
 {
     return mWidget->offsetColumnVisible();
 }
 
-int KByteArrayDisplay::resizeStyle() const
+int ByteArrayView::resizeStyle() const
 {
     return (int)mWidget->resizeStyle();
 }
 
-int KByteArrayDisplay::visibleByteArrayCodings() const
+int ByteArrayView::visibleByteArrayCodings() const
 {
     return (int)mWidget->visibleCodings();
 }
 
-bool KByteArrayDisplay::isOverwriteMode() const
+bool ByteArrayView::isOverwriteMode() const
 {
     return mWidget->isOverwriteMode();
 }
 
-void KByteArrayDisplay::setShowsNonprinting( bool on )
+void ByteArrayView::setShowsNonprinting( bool on )
 {
     mWidget->setShowsNonprinting( on );
 }
 
-void KByteArrayDisplay::toggleOffsetColumn( bool on )
+void ByteArrayView::toggleOffsetColumn( bool on )
 {
     mWidget->toggleOffsetColumn( on );
 }
 
-void KByteArrayDisplay::setResizeStyle( int resizeStyle )
+void ByteArrayView::setResizeStyle( int resizeStyle )
 {
     mWidget->setResizeStyle( (Okteta::AbstractByteArrayView::ResizeStyle)resizeStyle );
 }
 
-void KByteArrayDisplay::setVisibleByteArrayCodings( int visibleColumns )
+void ByteArrayView::setVisibleByteArrayCodings( int visibleColumns )
 {
     mWidget->setVisibleCodings( visibleColumns );
 }
 
-QChar KByteArrayDisplay::substituteChar() const
+QChar ByteArrayView::substituteChar() const
 {
     return mWidget->substituteChar();
 }
-QChar KByteArrayDisplay::undefinedChar() const
+QChar ByteArrayView::undefinedChar() const
 {
     return mWidget->undefinedChar();
 }
 
-int KByteArrayDisplay::byteSpacingWidth() const
+int ByteArrayView::byteSpacingWidth() const
 {
     return mWidget->byteSpacingWidth();
 }
-int KByteArrayDisplay::noOfGroupedBytes() const
+int ByteArrayView::noOfGroupedBytes() const
 {
     return mWidget->noOfGroupedBytes();
 }
-int KByteArrayDisplay::groupSpacingWidth() const
+int ByteArrayView::groupSpacingWidth() const
 {
     return mWidget->groupSpacingWidth();
 }
-int KByteArrayDisplay::binaryGapWidth() const
+int ByteArrayView::binaryGapWidth() const
 {
     return mWidget->binaryGapWidth();
 }
 
-bool KByteArrayDisplay::isOverwriteOnly() const
+bool ByteArrayView::isOverwriteOnly() const
 {
     return mWidget->isOverwriteOnly();
 }
 
-void KByteArrayDisplay::setOverwriteMode( bool overwriteMode )
+void ByteArrayView::setOverwriteMode( bool overwriteMode )
 {
     mWidget->setOverwriteMode( overwriteMode );
 }
 
-void KByteArrayDisplay::setViewModus( int viewModus )
+void ByteArrayView::setViewModus( int viewModus )
 {
     mWidget->setViewModus( viewModus );
 }
-int KByteArrayDisplay::viewModus() const
+int ByteArrayView::viewModus() const
 {
     return mWidget->viewModus();
 }
 
-KByteArrayDisplay::~KByteArrayDisplay()
+ByteArrayView::~ByteArrayView()
 {
     delete mWidget;
 }

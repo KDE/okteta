@@ -23,7 +23,7 @@
 #include "viewmodecontroller.h"
 
 // lib
-#include <kbytearraydisplay.h>
+#include <bytearrayview.h>
 // KDE
 #include <KXMLGUIClient>
 #include <KLocale>
@@ -55,7 +55,7 @@ void ViewModeController::setTargetModel( AbstractModel* model )
 {
 //     if( mByteArrayView ) mByteArrayView->disconnect( this );
 
-    mByteArrayView = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
 
     const bool hasView = ( mByteArrayView != 0 );
     if( hasView )

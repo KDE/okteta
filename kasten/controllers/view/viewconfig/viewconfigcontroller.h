@@ -36,7 +36,7 @@ class KToggleAction;
 namespace Kasten
 {
 
-class KByteArrayDisplay;
+class ByteArrayView;
 
 
 class OKTETAKASTENCONTROLLERS_EXPORT ViewConfigController : public AbstractXmlGuiController
@@ -61,7 +61,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewConfigController : public AbstractXmlGu
     void onCharCodecChanged( const QString& charCodecName );
 
   protected:
-    KByteArrayDisplay* mByteArrayDisplay;
+    ByteArrayView* mByteArrayDisplay;
 
     // view menu
     KSelectAction* mCodingAction;

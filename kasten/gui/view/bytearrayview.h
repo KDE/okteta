@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KBYTEARRAYDISPLAY_H
-#define KBYTEARRAYDISPLAY_H
+#ifndef BYTEARRAYVIEW_H
+#define BYTEARRAYVIEW_H
 
 // lib
 #include "oktetakastengui_export.h"
@@ -48,10 +48,10 @@ class KByteArrayDocument;
 class KCursorProxy;
 
 
-class OKTETAKASTENGUI_EXPORT KByteArrayDisplay : public AbstractView,
-                                                 public If::Zoomable,
-                                                 public If::DataSelectable,
-                                                 public If::SelectedDataWriteable
+class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView,
+                                             public If::Zoomable,
+                                             public If::DataSelectable,
+                                             public If::SelectedDataWriteable
 {
   Q_OBJECT
   Q_INTERFACES(
@@ -64,10 +64,10 @@ class OKTETAKASTENGUI_EXPORT KByteArrayDisplay : public AbstractView,
     enum { ColumnViewId = 0, RowViewId };
 
   public:
-    explicit KByteArrayDisplay( KByteArrayDocument* document );
-    explicit KByteArrayDisplay( KByteArrayDisplay* other, Qt::Alignment alignment = 0 );
+    explicit ByteArrayView( KByteArrayDocument* document );
+    explicit ByteArrayView( ByteArrayView* other, Qt::Alignment alignment = 0 );
 
-    virtual ~KByteArrayDisplay();
+    virtual ~ByteArrayView();
 
   public:
 //     KCursorObject *cursor() const;

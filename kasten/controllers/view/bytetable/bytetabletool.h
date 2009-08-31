@@ -37,7 +37,7 @@ namespace Kasten
 {
 
 class ByteTableModel;
-class KByteArrayDisplay;
+class ByteArrayView;
 
 /**
 */
@@ -71,7 +71,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ByteTableTool : public AbstractTool
   protected:
     ByteTableModel *mByteTableModel;
 
-    KByteArrayDisplay* mByteArrayDisplay;
+    ByteArrayView* mByteArrayDisplay;
     Okteta::AbstractByteArrayModel *mByteArrayModel;
 };
 

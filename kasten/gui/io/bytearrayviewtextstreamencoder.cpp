@@ -28,7 +28,7 @@
 #include "bytearrayviewtextrenderer/valuebytearraycolumntextrenderer.h"
 #include "bytearrayviewtextrenderer/charbytearraycolumntextrenderer.h"
 #include "bytearrayviewtextrenderer/bytearrayrowscolumntextrenderer.h"
-#include <kbytearraydisplay.h>
+#include <bytearrayview.h>
 // Okteta gui
 #include <bytearraytablelayout.h>
 #include <abstractbytearrayview.h>
@@ -57,7 +57,7 @@ ByteArrayViewTextStreamEncoder::ByteArrayViewTextStreamEncoder()
 
 
 bool ByteArrayViewTextStreamEncoder::encodeDataToStream( QIODevice *device,
-                                                         const KByteArrayDisplay* byteArrayView,
+                                                         const ByteArrayView* byteArrayView,
                                                          const Okteta::AbstractByteArrayModel* byteArrayModel,
                                                          const Okteta::AddressRange& range )
 {

@@ -41,7 +41,7 @@ class QString;
 namespace Kasten
 {
 
-class KByteArrayDisplay;
+class ByteArrayView;
 
 
 class OKTETAKASTENCONTROLLERS_EXPORT FilterTool : public AbstractTool
@@ -75,7 +75,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT FilterTool : public AbstractTool
     void onApplyableChanged();
 
   protected:
-    KByteArrayDisplay* mByteArrayDisplay;
+    ByteArrayView* mByteArrayDisplay;
     Okteta::AbstractByteArrayModel *mByteArrayModel;
     bool mHasWritable;
 

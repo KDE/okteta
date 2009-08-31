@@ -41,7 +41,7 @@ template <class T> class QList;
 namespace Kasten
 {
 
-class KByteArrayDisplay;
+class ByteArrayView;
 
 
 class OKTETAKASTENCONTROLLERS_EXPORT BookmarksTool : public AbstractTool
@@ -83,7 +83,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT BookmarksTool : public AbstractTool
     void onBookmarksModified();
 
   protected: // sources
-    KByteArrayDisplay* mByteArrayDisplay;
+    ByteArrayView* mByteArrayDisplay;
     Okteta::AbstractByteArrayModel* mByteArray;
     Okteta::Bookmarkable* mBookmarks;
 

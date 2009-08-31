@@ -40,7 +40,7 @@ namespace Kasten
 
 class StatisticTableModel;
 
-class KByteArrayDisplay;
+class ByteArrayView;
 
 
 /**
@@ -82,7 +82,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT InfoTool : public AbstractTool
 
     StatisticTableModel *mStatisticTableModel;
 
-    KByteArrayDisplay* mByteArrayDisplay;
+    ByteArrayView* mByteArrayDisplay;
     Okteta::AbstractByteArrayModel *mByteArrayModel;
 
     //

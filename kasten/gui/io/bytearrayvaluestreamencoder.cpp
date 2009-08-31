@@ -23,7 +23,7 @@
 #include "bytearrayvaluestreamencoder.h"
 
 // lib
-#include <kbytearraydisplay.h>
+#include <bytearrayview.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
 #include <valuecodec.h>
@@ -46,7 +46,7 @@ ByteArrayValueStreamEncoder::ByteArrayValueStreamEncoder()
 
 
 bool ByteArrayValueStreamEncoder::encodeDataToStream( QIODevice *device,
-                                                       const KByteArrayDisplay* byteArrayView,
+                                                       const ByteArrayView* byteArrayView,
                                                        const Okteta::AbstractByteArrayModel* byteArrayModel,
                                                        const Okteta::AddressRange& range )
 {

@@ -41,7 +41,7 @@ namespace Kasten
 namespace If {
 class ReplaceUserQueryable;
 }
-class KByteArrayDisplay;
+class ByteArrayView;
 
 
 // TODO: is queryAgent needed, or should the tool better be a state machine? same with search tool
@@ -106,7 +106,7 @@ class ReplaceTool : public AbstractTool
     If::ReplaceUserQueryable* mUserQueryAgent;
 
   protected: // target
-    KByteArrayDisplay* mByteArrayDisplay;
+    ByteArrayView* mByteArrayDisplay;
     Okteta::AbstractByteArrayModel* mByteArrayModel;
 };
 

@@ -23,7 +23,7 @@
 #include "bytearraytextstreamencoder.h"
 
 // lib
-#include <kbytearraydisplay.h>
+#include <bytearrayview.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
 #include <character.h>
@@ -49,7 +49,7 @@ ByteArrayTextStreamEncoder::ByteArrayTextStreamEncoder()
 
 
 bool ByteArrayTextStreamEncoder::encodeDataToStream( QIODevice* device,
-                                                      const KByteArrayDisplay* byteArrayView,
+                                                      const ByteArrayView* byteArrayView,
                                                       const Okteta::AbstractByteArrayModel* byteArrayModel,
                                                       const Okteta::AddressRange& range )
 {

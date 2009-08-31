@@ -73,7 +73,7 @@ const char* const* ByteArraySourceCodeStreamEncoder::dataTypeNames() const { ret
 int ByteArraySourceCodeStreamEncoder::dataTypesCount() const { return NoOfPrimitiveDataTypes; }
 
 bool ByteArraySourceCodeStreamEncoder::encodeDataToStream( QIODevice* device,
-                                                            const KByteArrayDisplay* byteArrayView,
+                                                            const ByteArrayView* byteArrayView,
                                                             const Okteta::AbstractByteArrayModel* byteArrayModel,
                                                             const Okteta::AddressRange& range )
 {

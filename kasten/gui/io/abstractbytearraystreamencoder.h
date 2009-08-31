@@ -39,7 +39,7 @@ namespace Kasten
 {
 
 // TODO: make display model an interface, so these encoders can stay in core
-class KByteArrayDisplay;
+class ByteArrayView;
 
 
 class OKTETAKASTENGUI_EXPORT AbstractByteArrayStreamEncoder : public AbstractModelStreamEncoder
@@ -62,7 +62,7 @@ class OKTETAKASTENGUI_EXPORT AbstractByteArrayStreamEncoder : public AbstractMod
 
   protected: // API to be implemented
     virtual bool encodeDataToStream( QIODevice *device,
-                                     const KByteArrayDisplay* byteArrayView,
+                                     const ByteArrayView* byteArrayView,
                                      const Okteta::AbstractByteArrayModel* byteArrayModel,
                                      const Okteta::AddressRange& range ) = 0;
 };

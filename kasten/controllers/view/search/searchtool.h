@@ -41,7 +41,7 @@ namespace Kasten
 namespace If {
 class SearchUserQueryable;
 }
-class KByteArrayDisplay;
+class ByteArrayView;
 
 
 class SearchTool : public AbstractTool
@@ -96,7 +96,7 @@ class SearchTool : public AbstractTool
     If::SearchUserQueryable* mUserQueryAgent;
 
   protected: // target
-    KByteArrayDisplay* mByteArrayDisplay;
+    ByteArrayView* mByteArrayDisplay;
     Okteta::AbstractByteArrayModel* mByteArrayModel;
 };
 

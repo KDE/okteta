@@ -35,7 +35,7 @@ class KSelectAction;
 namespace Kasten
 {
 
-class KByteArrayDisplay;
+class ByteArrayView;
 
 
 class OKTETAKASTENCONTROLLERS_EXPORT ViewModeController : public AbstractXmlGuiController
@@ -52,7 +52,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewModeController : public AbstractXmlGuiC
     void setViewMode( int viewMode );
 
   protected:
-    KByteArrayDisplay* mByteArrayView;
+    ByteArrayView* mByteArrayView;
 
     KSelectAction* mViewModeAction;
 };

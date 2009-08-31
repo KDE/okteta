@@ -55,8 +55,8 @@ set( okteta_kastengui_io_SRCS
 
 set( okteta_kastengui_view_SRCS
   view/bytearrayjanusview.cpp
-  view/kbytearraydisplayfactory.cpp
-  view/kbytearraydisplay.cpp
+  view/bytearrayviewfactory.cpp
+  view/bytearrayview.cpp
 )
 
 set( okteta_kastengui_LIB_SRCS
@@ -65,8 +65,8 @@ set( okteta_kastengui_LIB_SRCS
 )
 
 set( okteta_kastengui_view_HDRS
-  view/kbytearraydisplayfactory.h
-  view/kbytearraydisplay.h
+  view/bytearrayviewfactory.h
+  view/bytearrayview.h
 )
 
 set( okteta_kastengui_io_HDRS

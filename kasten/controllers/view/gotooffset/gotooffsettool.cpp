@@ -23,7 +23,7 @@
 #include "gotooffsettool.h"
 
 // lib
-#include <kbytearraydisplay.h>
+#include <bytearrayview.h>
 #include <kbytearraydocument.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
@@ -75,7 +75,7 @@ void GotoOffsetTool::setTargetModel( AbstractModel* model )
     if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
     if( mByteArrayModel ) mByteArrayModel->disconnect( this );
 
-    mByteArrayDisplay = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
+    mByteArrayDisplay = model ? model->findBaseModel<ByteArrayView*>() : 0;
 
     KByteArrayDocument* document =
         mByteArrayDisplay ? qobject_cast<KByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;

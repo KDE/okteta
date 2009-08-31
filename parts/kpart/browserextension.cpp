@@ -26,7 +26,7 @@
 #include "part.h"
 // Okteta Kasten
 #include <print/printcontroller.h>
-#include <kbytearraydisplay.h>
+#include <bytearrayview.h>
 #include <kbytearraydocument.h>
 // Qt
 #include <QtGui/QClipboard>
@@ -70,7 +70,7 @@ void OktetaBrowserExtension::saveState( QDataStream& stream )
 {
     KParts::BrowserExtension::saveState( stream );
 
-    Kasten::KByteArrayDisplay* view = mPart->byteArrayView();
+    Kasten::ByteArrayView* view = mPart->byteArrayView();
 
     stream << (int)view->offsetColumnVisible() << view->visibleByteArrayCodings()
         << (int)view->resizeStyle() << (int)view->valueCoding() 
@@ -105,7 +105,7 @@ void OktetaBrowserExtension::restoreState( QDataStream& stream )
 //            >> activeCoding
            ;
 
-    Kasten::KByteArrayDisplay* view = mPart->byteArrayView();
+    Kasten::ByteArrayView* view = mPart->byteArrayView();
 
     view->toggleOffsetColumn( offsetColumnVisible );
     view->setVisibleByteArrayCodings( visibleCodings );

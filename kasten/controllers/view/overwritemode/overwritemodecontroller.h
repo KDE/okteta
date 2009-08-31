@@ -34,7 +34,7 @@ class KToggleAction;
 namespace Kasten
 {
 
-class KByteArrayDisplay;
+class ByteArrayView;
 
 
 class OKTETAKASTENCONTROLLERS_EXPORT OverwriteModeController : public AbstractXmlGuiController
@@ -51,7 +51,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT OverwriteModeController : public AbstractXm
     void setOverWrite( bool isOverWrite );
 
   protected:
-    KByteArrayDisplay* mByteArrayDisplay;
+    ByteArrayView* mByteArrayDisplay;
 
     KToggleAction *mSetOverWriteAction;
 };

@@ -27,7 +27,7 @@
 #include <KParts/ReadWritePart>
 
 namespace Kasten {
-class KByteArrayDisplay;
+class ByteArrayView;
 class KByteArrayDocument;
 class PrintController;
 class AbstractXmlGuiController;
@@ -72,7 +72,7 @@ class OktetaPart : public KParts::ReadWritePart
     void setupActions( bool browserViewWanted );
 
   protected:
-    Kasten::KByteArrayDisplay* byteArrayView() const;
+    Kasten::ByteArrayView* byteArrayView() const;
 
   protected Q_SLOTS:
     void onDocumentLoaded( Kasten::AbstractDocument* document );
@@ -83,13 +83,13 @@ class OktetaPart : public KParts::ReadWritePart
     QVBoxLayout* mLayout;
 
     Kasten::KByteArrayDocument* mDocument;
-    Kasten::KByteArrayDisplay* mDisplay;
+    Kasten::ByteArrayView* mDisplay;
 
     Kasten::PrintController* mPrintController;
     QList<Kasten::AbstractXmlGuiController*> mControllers;
 };
 
 
-inline Kasten::KByteArrayDisplay* OktetaPart::byteArrayView() const { return mDisplay; }
+inline Kasten::ByteArrayView* OktetaPart::byteArrayView() const { return mDisplay; }
 
 #endif

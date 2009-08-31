@@ -34,7 +34,7 @@ class AbstractByteArrayModel;
 namespace Kasten
 {
 
-class KByteArrayDisplay;
+class ByteArrayView;
 class KByteArrayDocument;
 class AbstractModel;
 
@@ -78,7 +78,7 @@ class PrintTool : public QObject
   protected:
     KByteArrayDocument *mDocument;
 
-    KByteArrayDisplay* mByteArrayDisplay;
+    ByteArrayView* mByteArrayDisplay;
     Okteta::AbstractByteArrayModel *mByteArrayModel;
 };
 

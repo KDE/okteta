@@ -20,36 +20,26 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kbytearraydisplayfactory.h"
+#ifndef KBYTEARRAYDISPLAYFACTORY_H
+#define KBYTEARRAYDISPLAYFACTORY_H
 
 // lib
-#include "kbytearraydisplay.h"
-#include <kbytearraydocument.h>
+#include "oktetakastengui_export.h"
+// Kasten gui
+#include <abstractviewfactory.h>
 
 
 namespace Kasten
 {
 
-AbstractView* KByteArrayDisplayFactory::createViewFor( AbstractDocument* _document )
+class OKTETAKASTENGUI_EXPORT ByteArrayViewFactory : public AbstractViewFactory
 {
-    KByteArrayDisplay* result = 0;
+  public:
+    virtual AbstractView* createViewFor( AbstractDocument* document );
+    virtual AbstractView* createCopyOfView( AbstractView* view, Qt::Alignment alignment );
+};
 
-    KByteArrayDocument* document = static_cast<KByteArrayDocument*>( _document );
-    if( document )
-        result = new KByteArrayDisplay( document );
-
-    return result;
-}
-
-AbstractView* KByteArrayDisplayFactory::createCopyOfView( AbstractView* _view, Qt::Alignment alignment )
-{
-    KByteArrayDisplay* result = 0;
-
-    KByteArrayDisplay* view = qobject_cast<KByteArrayDisplay*>( _view );
-    if( view )
-        result = new KByteArrayDisplay( view, alignment );
-
-    return result;
-}
 
 }
+
+#endif

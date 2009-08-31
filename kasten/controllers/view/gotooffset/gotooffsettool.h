@@ -34,7 +34,7 @@ class AbstractByteArrayModel;
 namespace Kasten
 {
 
-class KByteArrayDisplay;
+class ByteArrayView;
 
 
 /**
@@ -90,7 +90,7 @@ class GotoOffsetTool : public AbstractTool
     bool mIsBackwards;
 
   protected: // target
-    KByteArrayDisplay* mByteArrayDisplay;
+    ByteArrayView* mByteArrayDisplay;
     Okteta::AbstractByteArrayModel* mByteArrayModel;
 };
 

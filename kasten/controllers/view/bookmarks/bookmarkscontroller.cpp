@@ -25,7 +25,7 @@
 // controller
 #include "bookmarkeditpopup.h"
 // lib
-#include <kbytearraydisplay.h>
+#include <bytearrayview.h>
 #include <kbytearraydocument.h>
 // Kasten core
 #include <abstractmodel.h>
@@ -96,7 +96,7 @@ void BookmarksController::setTargetModel( AbstractModel* model )
     if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
     if( mByteArray ) mByteArray->disconnect( this );
 
-    mByteArrayDisplay = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
+    mByteArrayDisplay = model ? model->findBaseModel<ByteArrayView*>() : 0;
 
     KByteArrayDocument* document =
         mByteArrayDisplay ? qobject_cast<KByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;

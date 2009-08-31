@@ -34,7 +34,7 @@ class AbstractByteArrayModel;
 namespace Kasten
 {
 
-class KByteArrayDisplay;
+class ByteArrayView;
 
 
 /**
@@ -92,7 +92,7 @@ class SelectRangeTool : public AbstractTool
     bool mIsEndBackwards :1;
 
   protected: // target
-    KByteArrayDisplay* mByteArrayDisplay;
+    ByteArrayView* mByteArrayDisplay;
     Okteta::AbstractByteArrayModel* mByteArrayModel;
 };
 

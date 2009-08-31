@@ -23,7 +23,7 @@
 #include "viewconfigcontroller.h"
 
 // lib
-#include <kbytearraydisplay.h>
+#include <bytearrayview.h>
 // Okteta core
 #include <charcodec.h>
 // KDE
@@ -98,7 +98,7 @@ void ViewConfigController::setTargetModel( AbstractModel* model )
 {
     if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
 
-    mByteArrayDisplay = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
+    mByteArrayDisplay = model ? model->findBaseModel<ByteArrayView*>() : 0;
 
     const bool hasView = ( mByteArrayDisplay != 0 );
     if( hasView )

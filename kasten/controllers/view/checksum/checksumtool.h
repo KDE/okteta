@@ -45,7 +45,7 @@ class Initializer;
 namespace Kasten
 {
 
-class KByteArrayDisplay;
+class ByteArrayView;
 
 
 class OKTETAKASTENCONTROLLERS_EXPORT ChecksumTool : public AbstractTool
@@ -106,7 +106,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ChecksumTool : public AbstractTool
     int mAlgorithmId;
 
   protected: // sources
-    KByteArrayDisplay* mByteArrayDisplay;
+    ByteArrayView* mByteArrayDisplay;
     // current
     Okteta::AbstractByteArrayModel* mByteArrayModel;
 

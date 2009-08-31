@@ -23,7 +23,7 @@
 #include "overwritemodecontroller.h"
 
 // lib
-#include <kbytearraydisplay.h>
+#include <bytearrayview.h>
 // KDE
 #include <KXMLGUIClient>
 #include <KLocale>
@@ -59,7 +59,7 @@ void OverwriteModeController::setTargetModel( AbstractModel* model )
 {
     if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( mSetOverWriteAction );
 
-    mByteArrayDisplay = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
+    mByteArrayDisplay = model ? model->findBaseModel<ByteArrayView*>() : 0;
 
     if( mByteArrayDisplay )
     {

@@ -41,7 +41,7 @@ class QString;
 namespace Kasten
 {
 
-class KByteArrayDisplay;
+class ByteArrayView;
 class ToggleButton;
 class StatusBar;
 class AbstractModelSelection;
@@ -71,7 +71,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewStatusController : public AbstractXmlGu
     void onCharCodecChanged( const QString& charCodecName );
 
   protected:
-    KByteArrayDisplay* mByteArrayDisplay;
+    ByteArrayView* mByteArrayDisplay;
 
     StatusBar* mStatusBar;
     QLabel* mOffsetLabel;

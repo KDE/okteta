@@ -45,7 +45,7 @@ class QTextCodec;
 namespace Kasten
 {
 
-class KByteArrayDisplay;
+class ByteArrayView;
 
 
 class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
@@ -101,7 +101,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
 //     void onUndefinedCharChanged( const QChar& undefinedChar );
 
   protected: // source
-    KByteArrayDisplay* mByteArrayDisplay;
+    ByteArrayView* mByteArrayDisplay;
     Okteta::AbstractByteArrayModel* mByteArrayModel;
     Okteta::Address mCursorIndex;
     Okteta::CharCodec* mCharCodec;

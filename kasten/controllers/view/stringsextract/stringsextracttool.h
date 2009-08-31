@@ -43,7 +43,7 @@ class CharCodec;
 namespace Kasten
 {
 
-class KByteArrayDisplay;
+class ByteArrayView;
 
 
 /**
@@ -100,7 +100,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT StringsExtractTool : public AbstractTool
     int mMinLength;
 
   protected: // sources
-    KByteArrayDisplay* mByteArrayDisplay;
+    ByteArrayView* mByteArrayDisplay;
     // current
     Okteta::AbstractByteArrayModel *mByteArrayModel;
 

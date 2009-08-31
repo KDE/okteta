@@ -23,7 +23,7 @@
 #include "abstractbytearraystreamencoder.h"
 
 // lib
-#include <kbytearraydisplay.h>
+#include <bytearrayview.h>
 #include <kbytearraydocument.h>
 #include <kbytearrayselection.h>
 // Okteta core
@@ -56,7 +56,7 @@ Q_UNUSED( selection )
 bool AbstractByteArrayStreamEncoder::encodeToStream( QIODevice* device,
                                                      AbstractModel* model, const AbstractModelSelection* selection )
 {
-    const KByteArrayDisplay* byteArrayDisplay = qobject_cast<const KByteArrayDisplay*>( model );
+    const ByteArrayView* byteArrayDisplay = qobject_cast<const ByteArrayView*>( model );
 
     const KByteArrayDocument* byteArrayDocument =
         byteArrayDisplay ? qobject_cast<const KByteArrayDocument*>( byteArrayDisplay->baseModel() ) : 0;
@@ -79,7 +79,7 @@ bool AbstractByteArrayStreamEncoder::encodeToStream( QIODevice* device,
 
 QString AbstractByteArrayStreamEncoder::previewData( AbstractModel* model, const AbstractModelSelection* selection )
 {
-    const KByteArrayDisplay* byteArrayDisplay = qobject_cast<const KByteArrayDisplay*>( model );
+    const ByteArrayView* byteArrayDisplay = qobject_cast<const ByteArrayView*>( model );
 
     const KByteArrayDocument* byteArrayDocument =
         byteArrayDisplay ? qobject_cast<const KByteArrayDocument*>( byteArrayDisplay->baseModel() ) : 0;

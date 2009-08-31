@@ -23,7 +23,7 @@
 #include "viewstatuscontroller.h"
 
 // lib
-#include <kbytearraydisplay.h>
+#include <bytearrayview.h>
 // Kasten ui
 #include <togglebutton.h>
 #include <statusbar.h>
@@ -145,7 +145,7 @@ void ViewStatusController::setTargetModel( AbstractModel* model )
         mByteArrayDisplay->disconnect( mOverwriteModeToggleButton );
     }
 
-    mByteArrayDisplay = model ? model->findBaseModel<KByteArrayDisplay*>() : 0;
+    mByteArrayDisplay = model ? model->findBaseModel<ByteArrayView*>() : 0;
 
     const bool hasView = ( mByteArrayDisplay != 0 );
     if( hasView )

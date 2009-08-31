@@ -37,7 +37,7 @@ class QByteArray;
 namespace Kasten
 {
 
-class KByteArrayDisplay;
+class ByteArrayView;
 class AbstractModel;
 
 
@@ -66,7 +66,7 @@ class InsertPatternTool : public QObject
     void onReadOnlyChanged( bool isReadOnly );
 
   protected:
-    KByteArrayDisplay* mByteArrayDisplay;
+    ByteArrayView* mByteArrayDisplay;
     Okteta::AbstractByteArrayModel *mByteArrayModel;
 };
 

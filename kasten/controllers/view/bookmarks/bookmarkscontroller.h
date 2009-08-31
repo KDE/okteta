@@ -46,7 +46,7 @@ class QAction;
 namespace Kasten
 {
 
-class KByteArrayDisplay;
+class ByteArrayView;
 
 
 class OKTETAKASTENCONTROLLERS_EXPORT BookmarksController : public AbstractXmlGuiController
@@ -77,7 +77,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT BookmarksController : public AbstractXmlGui
 
   protected:
     KXMLGUIClient* mGuiClient;
-    KByteArrayDisplay* mByteArrayDisplay;
+    ByteArrayView* mByteArrayDisplay;
     Okteta::AbstractByteArrayModel *mByteArray;
     Okteta::Bookmarkable *mBookmarks;
 
