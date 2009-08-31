@@ -56,10 +56,10 @@ Q_UNUSED( selection )
 bool AbstractByteArrayStreamEncoder::encodeToStream( QIODevice* device,
                                                      AbstractModel* model, const AbstractModelSelection* selection )
 {
-    const ByteArrayView* byteArrayDisplay = qobject_cast<const ByteArrayView*>( model );
+    const ByteArrayView* byteArrayView = qobject_cast<const ByteArrayView*>( model );
 
     const ByteArrayDocument* byteArrayDocument =
-        byteArrayDisplay ? qobject_cast<const ByteArrayDocument*>( byteArrayDisplay->baseModel() ) : 0;
+        byteArrayView ? qobject_cast<const ByteArrayDocument*>( byteArrayView->baseModel() ) : 0;
     if( byteArrayDocument == 0 )
         return false;
 
@@ -72,17 +72,17 @@ bool AbstractByteArrayStreamEncoder::encodeToStream( QIODevice* device,
         byteArraySelection->range() :
         Okteta::AddressRange::fromWidth( 0, byteArray->size() );
 
-    const bool success = encodeDataToStream( device, byteArrayDisplay, byteArray, range );
+    const bool success = encodeDataToStream( device, byteArrayView, byteArray, range );
 
     return success;
 }
 
 QString AbstractByteArrayStreamEncoder::previewData( AbstractModel* model, const AbstractModelSelection* selection )
 {
-    const ByteArrayView* byteArrayDisplay = qobject_cast<const ByteArrayView*>( model );
+    const ByteArrayView* byteArrayView = qobject_cast<const ByteArrayView*>( model );
 
     const ByteArrayDocument* byteArrayDocument =
-        byteArrayDisplay ? qobject_cast<const ByteArrayDocument*>( byteArrayDisplay->baseModel() ) : 0;
+        byteArrayView ? qobject_cast<const ByteArrayDocument*>( byteArrayView->baseModel() ) : 0;
     if( byteArrayDocument == 0 )
         return QString();
 
@@ -100,7 +100,7 @@ QString AbstractByteArrayStreamEncoder::previewData( AbstractModel* model, const
     QBuffer dataBuffer( &data );
     dataBuffer.open( QIODevice::WriteOnly );
 
-    const bool success = encodeDataToStream( &dataBuffer, byteArrayDisplay, byteArray, range );
+    const bool success = encodeDataToStream( &dataBuffer, byteArrayView, byteArray, range );
     dataBuffer.close();
 
     return success ? QString(data) : QString();
