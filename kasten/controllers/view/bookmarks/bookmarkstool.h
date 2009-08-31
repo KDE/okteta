@@ -83,7 +83,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT BookmarksTool : public AbstractTool
     void onBookmarksModified();
 
   protected: // sources
-    ByteArrayView* mByteArrayDisplay;
+    ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel* mByteArray;
     Okteta::Bookmarkable* mBookmarks;
 

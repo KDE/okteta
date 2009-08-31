@@ -35,7 +35,7 @@ namespace Kasten
 {
 
 OverwriteModeController::OverwriteModeController( KXMLGUIClient* guiClient )
- : mByteArrayDisplay( 0 )
+ : mByteArrayView( 0 )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -57,27 +57,27 @@ OverwriteModeController::OverwriteModeController( KXMLGUIClient* guiClient )
 
 void OverwriteModeController::setTargetModel( AbstractModel* model )
 {
-    if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( mSetOverWriteAction );
+    if( mByteArrayView ) mByteArrayView->disconnect( mSetOverWriteAction );
 
-    mByteArrayDisplay = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
 
-    if( mByteArrayDisplay )
+    if( mByteArrayView )
     {
-        mSetOverWriteAction->setChecked( mByteArrayDisplay->isOverwriteMode() );
+        mSetOverWriteAction->setChecked( mByteArrayView->isOverwriteMode() );
 
-        connect( mByteArrayDisplay, SIGNAL(overwriteModeChanged( bool )),
+        connect( mByteArrayView, SIGNAL(overwriteModeChanged( bool )),
                  mSetOverWriteAction, SLOT(setChecked( bool )) );
         // TODO: catch if isOverwriteOnly changes
     }
 
-    const bool canInsert = mByteArrayDisplay && !mByteArrayDisplay->isOverwriteOnly();
+    const bool canInsert = mByteArrayView && !mByteArrayView->isOverwriteOnly();
     mSetOverWriteAction->setEnabled( canInsert );
 }
 
 
 void OverwriteModeController::setOverWrite( bool isOverWrite )
 {
-    mByteArrayDisplay->setOverwriteMode( isOverWrite );
+    mByteArrayView->setOverwriteMode( isOverWrite );
 }
 
 }

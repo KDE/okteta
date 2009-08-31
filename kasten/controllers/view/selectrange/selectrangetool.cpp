@@ -37,7 +37,7 @@ namespace Kasten
 SelectRangeTool::SelectRangeTool()
   : mTargetStart( 0 ),
     mTargetEnd( -1 ),
-    mByteArrayDisplay( 0 ),
+    mByteArrayView( 0 ),
     mByteArrayModel( 0 )
 {
     setObjectName( "SelectRange" );
@@ -45,20 +45,20 @@ SelectRangeTool::SelectRangeTool()
 
 int SelectRangeTool::currentSelectionStart() const
 {
-    return mByteArrayDisplay ?
-        mByteArrayDisplay->startOffset() + mByteArrayDisplay->selection().start() :
+    return mByteArrayView ?
+        mByteArrayView->startOffset() + mByteArrayView->selection().start() :
         -1;
 }
 int SelectRangeTool::currentSelectionEnd() const
 {
-    return mByteArrayDisplay ?
-        mByteArrayDisplay->startOffset() + mByteArrayDisplay->selection().end() :
+    return mByteArrayView ?
+        mByteArrayView->startOffset() + mByteArrayView->selection().end() :
         -1;
 }
 
 bool SelectRangeTool::isUsable() const
 {
-    return ( mByteArrayDisplay && mByteArrayModel && (mByteArrayModel->size() > 0) );
+    return ( mByteArrayView && mByteArrayModel && (mByteArrayModel->size() > 0) );
 }
 
 bool SelectRangeTool::isApplyable() const
@@ -66,7 +66,7 @@ bool SelectRangeTool::isApplyable() const
     const int start = finalTargetSelectionStart();
     const int end =   finalTargetSelectionEnd();
 
-    return ( mByteArrayDisplay && mByteArrayModel
+    return ( mByteArrayView && mByteArrayModel
              && (start <= end)
              && (0 <= start) && (start < mByteArrayModel->size())
              && (0 <= end) && (end < mByteArrayModel->size()) );
@@ -79,16 +79,16 @@ void SelectRangeTool::setTargetModel( AbstractModel* model )
     const bool oldIsUsable = isUsable();
     const bool oldIsApplyable = isApplyable();
 
-    if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
+    if( mByteArrayView ) mByteArrayView->disconnect( this );
     if( mByteArrayModel ) mByteArrayModel->disconnect( this );
 
-    mByteArrayDisplay = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
 
     ByteArrayDocument* document =
-        mByteArrayDisplay ? qobject_cast<ByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
-    if( mByteArrayDisplay && mByteArrayModel )
+    if( mByteArrayView && mByteArrayModel )
     {
         connect( mByteArrayModel, SIGNAL(contentsChanged( const Okteta::ArrayChangeMetricsList& )),
                  SLOT(onContentsChanged()) );
@@ -153,15 +153,15 @@ void SelectRangeTool::select()
     const int start = finalTargetSelectionStart();
     const int end =   finalTargetSelectionEnd();
 
-    mByteArrayDisplay->setSelection( start, end );
-    mByteArrayDisplay->setFocus();
+    mByteArrayView->setSelection( start, end );
+    mByteArrayView->setFocus();
 }
 
 
 int SelectRangeTool::finalTargetSelectionStart() const
 {
     const int end =
-        (! mByteArrayDisplay) ? -1 :
+        (! mByteArrayView) ? -1 :
         mIsEndRelative && mIsEndBackwards ? mTargetStart - mTargetEnd + 1 :
             mTargetStart;
 
@@ -171,7 +171,7 @@ int SelectRangeTool::finalTargetSelectionStart() const
 int SelectRangeTool::finalTargetSelectionEnd() const
 {
     const int end =
-        (! mByteArrayDisplay) ? -1 :
+        (! mByteArrayView) ? -1 :
         mIsEndRelative ?
             ( mIsEndBackwards ? mTargetStart :
                                 mTargetStart + mTargetEnd - 1 ) :

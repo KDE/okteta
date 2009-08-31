@@ -101,7 +101,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
 //     void onUndefinedCharChanged( const QChar& undefinedChar );
 
   protected: // source
-    ByteArrayView* mByteArrayDisplay;
+    ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel* mByteArrayModel;
     Okteta::Address mCursorIndex;
     Okteta::CharCodec* mCharCodec;

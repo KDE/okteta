@@ -90,7 +90,7 @@ class GotoOffsetTool : public AbstractTool
     bool mIsBackwards;
 
   protected: // target
-    ByteArrayView* mByteArrayDisplay;
+    ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel* mByteArrayModel;
 };
 

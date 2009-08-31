@@ -82,7 +82,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT InfoTool : public AbstractTool
 
     StatisticTableModel *mStatisticTableModel;
 
-    ByteArrayView* mByteArrayDisplay;
+    ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel *mByteArrayModel;
 
     //

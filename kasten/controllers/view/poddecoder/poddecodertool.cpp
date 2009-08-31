@@ -64,7 +64,7 @@ enum PODTypes
 
 
 PODDecoderTool::PODDecoderTool()
- : mByteArrayDisplay( 0 ), mByteArrayModel( 0 ), mCursorIndex( 0 ),
+ : mByteArrayView( 0 ), mByteArrayModel( 0 ), mCursorIndex( 0 ),
    mCharCodec( Okteta::CharCodec::createCodec(Okteta::LocalEncoding) ),
    mUndefinedChar( PrimitivesDefaultUndefinedChar ),
    mUnsignedAsHex( true )
@@ -80,22 +80,22 @@ QString PODDecoderTool::title() const { return i18nc("@title:window", "Decoding 
 
 void PODDecoderTool::setTargetModel( AbstractModel* model )
 {
-    if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
+    if( mByteArrayView ) mByteArrayView->disconnect( this );
     if( mByteArrayModel ) mByteArrayModel->disconnect( this );
 
-    mByteArrayDisplay = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
     ByteArrayDocument *document =
-        mByteArrayDisplay ? qobject_cast<ByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
-    if( mByteArrayModel && mByteArrayDisplay )
+    if( mByteArrayModel && mByteArrayView )
     {
-        mCursorIndex = mByteArrayDisplay->cursorPosition();
-        connect( mByteArrayDisplay, SIGNAL(cursorPositionChanged( Okteta::Address )), SLOT(onCursorPositionChange( Okteta::Address )) );
+        mCursorIndex = mByteArrayView->cursorPosition();
+        connect( mByteArrayView, SIGNAL(cursorPositionChanged( Okteta::Address )), SLOT(onCursorPositionChange( Okteta::Address )) );
         connect( mByteArrayModel, SIGNAL(contentsChanged( const Okteta::ArrayChangeMetricsList& )),
                  SLOT(onContentsChange()) );
-        onCharCodecChange( mByteArrayDisplay->charCodingName() );
-        connect( mByteArrayDisplay,  SIGNAL(charCodecChanged( const QString& )),
+        onCharCodecChange( mByteArrayView->charCodingName() );
+        connect( mByteArrayView,  SIGNAL(charCodecChanged( const QString& )),
                  SLOT(onCharCodecChange( const QString& )) );
     }
 

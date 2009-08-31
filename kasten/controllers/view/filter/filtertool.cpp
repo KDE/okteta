@@ -50,7 +50,7 @@ namespace Kasten
 {
 
 FilterTool::FilterTool()
- : mByteArrayDisplay( 0 ), mByteArrayModel( 0 ), mHasWritable( false )
+ : mByteArrayView( 0 ), mByteArrayModel( 0 ), mHasWritable( false )
 {
     setObjectName( "BinaryFilter" );
 
@@ -68,7 +68,7 @@ QString FilterTool::title() const { return i18nc("@title:window", "Binary Filter
 QList<AbstractByteArrayFilter*> FilterTool::filterList() const { return mFilterList; }
 QString FilterTool::charCodecName() const
 {
-    return mByteArrayDisplay ? mByteArrayDisplay->charCodingName() : QString();
+    return mByteArrayView ? mByteArrayView->charCodingName() : QString();
 }
 
 bool FilterTool::hasWriteable() const { return mHasWritable; }
@@ -82,22 +82,22 @@ AbstractByteArrayFilterParameterSet *FilterTool::parameterSet( int filterId )
 
 void FilterTool::setTargetModel( AbstractModel* model )
 {
-    if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
+    if( mByteArrayView ) mByteArrayView->disconnect( this );
 
-    mByteArrayDisplay = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
 
     ByteArrayDocument *document =
-        mByteArrayDisplay ? qobject_cast<ByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
-    const bool hasByteArray = ( mByteArrayModel && mByteArrayDisplay );
+    const bool hasByteArray = ( mByteArrayModel && mByteArrayView );
     QString newCharCodecName;
     if( hasByteArray )
     {
-        newCharCodecName = mByteArrayDisplay->charCodingName();
-        connect( mByteArrayDisplay, SIGNAL(hasSelectedDataChanged( bool )), SLOT(onApplyableChanged()) );
-        connect( mByteArrayDisplay, SIGNAL(readOnlyChanged( bool )),        SLOT(onApplyableChanged()) );
-        connect( mByteArrayDisplay, SIGNAL(charCodecChanged( const QString& )),
+        newCharCodecName = mByteArrayView->charCodingName();
+        connect( mByteArrayView, SIGNAL(hasSelectedDataChanged( bool )), SLOT(onApplyableChanged()) );
+        connect( mByteArrayView, SIGNAL(readOnlyChanged( bool )),        SLOT(onApplyableChanged()) );
+        connect( mByteArrayView, SIGNAL(charCodecChanged( const QString& )),
                  SIGNAL(charCodecChanged( const QString& )) );
     }
 
@@ -112,7 +112,7 @@ void FilterTool::filter( int filterId ) const
 
     if( byteArrayFilter )
     {
-        const Okteta::AddressRange filteredSection = mByteArrayDisplay->selection();
+        const Okteta::AddressRange filteredSection = mByteArrayView->selection();
 
         QByteArray filterResult;
         filterResult.resize( filteredSection.width() );
@@ -140,8 +140,8 @@ void FilterTool::filter( int filterId ) const
 
 void FilterTool::onApplyableChanged()
 {
-    const bool newHasWriteable = ( mByteArrayModel && mByteArrayDisplay
-                                   && !mByteArrayDisplay->isReadOnly() && mByteArrayDisplay->hasSelectedData() );
+    const bool newHasWriteable = ( mByteArrayModel && mByteArrayView
+                                   && !mByteArrayView->isReadOnly() && mByteArrayView->hasSelectedData() );
     if( newHasWriteable != mHasWritable )
     {
         mHasWritable = newHasWriteable;

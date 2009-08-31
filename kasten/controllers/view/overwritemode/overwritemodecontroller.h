@@ -51,7 +51,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT OverwriteModeController : public AbstractXm
     void setOverWrite( bool isOverWrite );
 
   protected:
-    ByteArrayView* mByteArrayDisplay;
+    ByteArrayView* mByteArrayView;
 
     KToggleAction *mSetOverWriteAction;
 };

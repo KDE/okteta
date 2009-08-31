@@ -71,7 +71,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ByteTableTool : public AbstractTool
   protected:
     ByteTableModel *mByteTableModel;
 
-    ByteArrayView* mByteArrayDisplay;
+    ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel *mByteArrayModel;
 };
 

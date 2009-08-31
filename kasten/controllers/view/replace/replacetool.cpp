@@ -43,7 +43,7 @@ namespace Kasten
 
 ReplaceTool::ReplaceTool()
   : mUserQueryAgent( 0 ),
-    mByteArrayDisplay( 0 ),
+    mByteArrayView( 0 ),
     mByteArrayModel( 0 )
 {
     setObjectName( "Replace" );
@@ -51,35 +51,35 @@ ReplaceTool::ReplaceTool()
 
 bool ReplaceTool::isApplyable() const
 {
-    return ( mByteArrayDisplay && mByteArrayModel && !mByteArrayDisplay->isReadOnly() );
+    return ( mByteArrayView && mByteArrayModel && !mByteArrayView->isReadOnly() );
 //     const int newPosition = finalTargetOffset();
 
-//     return ( mByteArrayDisplay && mByteArrayModel
+//     return ( mByteArrayView && mByteArrayModel
 //              && (0 <= newPosition) && (newPosition <= mByteArrayModel->size()) );
 }
 
 QString ReplaceTool::title() const { return i18nc("@title", "Replace"); }
 
-bool ReplaceTool::hasSelectedData()   const { return mByteArrayDisplay->hasSelectedData(); }
-QString ReplaceTool::charCodingName() const { return mByteArrayDisplay->charCodingName(); }
+bool ReplaceTool::hasSelectedData()   const { return mByteArrayView->hasSelectedData(); }
+QString ReplaceTool::charCodingName() const { return mByteArrayView->charCodingName(); }
 
 
 void ReplaceTool::setTargetModel( AbstractModel* model )
 {
     const bool oldIsApplyable = isApplyable();
 
-    if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
+    if( mByteArrayView ) mByteArrayView->disconnect( this );
     if( mByteArrayModel ) mByteArrayModel->disconnect( this );
 
-    mByteArrayDisplay = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
 
     ByteArrayDocument* document =
-        mByteArrayDisplay ? qobject_cast<ByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
-    if( mByteArrayDisplay && mByteArrayModel )
+    if( mByteArrayView && mByteArrayModel )
     {
-        connect( mByteArrayDisplay, SIGNAL(readOnlyChanged( bool )), SLOT(onReadOnlyChanged( bool )) );
+        connect( mByteArrayView, SIGNAL(readOnlyChanged( bool )), SLOT(onReadOnlyChanged( bool )) );
         // TODO: update isApplyable on cursor movement and size changes
     }
 
@@ -140,7 +140,7 @@ void ReplaceTool::replace( KFindDirection direction, bool fromCursor, bool inSel
 
     if( inSelection )
     {
-        const Okteta::AddressRange selection = mByteArrayDisplay->selection();
+        const Okteta::AddressRange selection = mByteArrayView->selection();
         mReplaceFirstIndex = selection.start();
         mReplaceLastIndex =  selection.end();
         startIndex = selection.start();
@@ -149,7 +149,7 @@ void ReplaceTool::replace( KFindDirection direction, bool fromCursor, bool inSel
     }
     else
     {
-        const Okteta::Address cursorPosition = mByteArrayDisplay->cursorPosition();
+        const Okteta::Address cursorPosition = mByteArrayView->cursorPosition();
         if( fromCursor && (cursorPosition!=0) )
         {
             mReplaceFirstIndex = cursorPosition;
@@ -178,7 +178,7 @@ void ReplaceTool::doReplace( KFindDirection direction, Okteta::Address startInde
         // TODO: support ignorecase
         const bool isForward = ( direction == FindForward );
         SearchJob* searchJob =
-            new SearchJob( mByteArrayModel, mSearchData, startIndex, isForward, mIgnoreCase, mByteArrayDisplay->charCodingName() );
+            new SearchJob( mByteArrayModel, mSearchData, startIndex, isForward, mIgnoreCase, mByteArrayView->charCodingName() );
         const Okteta::Address pos = searchJob->exec();
 
         if( pos != -1 )
@@ -193,13 +193,13 @@ void ReplaceTool::doReplace( KFindDirection direction, Okteta::Address startInde
             {
                 QApplication::restoreOverrideCursor();
 
-                mByteArrayDisplay->setSelection( pos, pos+mSearchData.size()-1 );
+                mByteArrayView->setSelection( pos, pos+mSearchData.size()-1 );
 
                 const ReplaceBehaviour replaceBehaviour = mUserQueryAgent ?
                      mUserQueryAgent->queryReplaceCurrent() :
                      ReplaceAll;
 
-                mByteArrayDisplay->selectAllData( false );
+                mByteArrayView->selectAllData( false );
 
                 switch( replaceBehaviour )
                 {

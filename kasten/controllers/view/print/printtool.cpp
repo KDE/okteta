@@ -51,20 +51,20 @@ namespace Kasten
 {
 
 PrintTool::PrintTool()
- : mDocument( 0 ), mByteArrayDisplay( 0 ), mByteArrayModel( 0 )
+ : mDocument( 0 ), mByteArrayView( 0 ), mByteArrayModel( 0 )
 {
 }
 
 void PrintTool::setTargetModel( AbstractModel* model )
 {
-//     if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
+//     if( mByteArrayView ) mByteArrayView->disconnect( this );
 
-    mByteArrayDisplay = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
 
-    mDocument = mByteArrayDisplay ? qobject_cast<ByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
+    mDocument = mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : 0;
     mByteArrayModel = mDocument ? mDocument->content() : 0;
 
-    const bool hasView = ( mByteArrayDisplay && mByteArrayModel );
+    const bool hasView = ( mByteArrayView && mByteArrayModel );
     emit viewChanged( hasView );
 }
 
@@ -123,31 +123,31 @@ void PrintTool::print()
         byteArrayFrameRenderer->setWidth( width );
         byteArrayFrameRenderer->setHeight( contentHeight );
 
-        Okteta::AddressRange range = mByteArrayDisplay->selection();
+        Okteta::AddressRange range = mByteArrayView->selection();
         if( ! range.isValid() )
             range.setByWidth( 0, mByteArrayModel->size() );
         byteArrayFrameRenderer->setByteArrayModel( mByteArrayModel, range.start(), range.width() );
 
         // TODO: use noOfBytesPerLine of view, scale resolution down if it does not fit the page
-        const int noOfBytesPerLine = mByteArrayDisplay->noOfBytesPerLine();
-//         byteArrayFrameRenderer->setNoOfBytesPerLine( mByteArrayDisplay->noOfBytesPerLine() );
+        const int noOfBytesPerLine = mByteArrayView->noOfBytesPerLine();
+//         byteArrayFrameRenderer->setNoOfBytesPerLine( mByteArrayView->noOfBytesPerLine() );
 
-        const Okteta::Address startOffset = mByteArrayDisplay->startOffset() + range.start();
+        const Okteta::Address startOffset = mByteArrayView->startOffset() + range.start();
         const int line = startOffset / noOfBytesPerLine;
-        const Okteta::Address firstLineOffset = mByteArrayDisplay->firstLineOffset() + line*noOfBytesPerLine;
+        const Okteta::Address firstLineOffset = mByteArrayView->firstLineOffset() + line*noOfBytesPerLine;
         byteArrayFrameRenderer->setFirstLineOffset( firstLineOffset );
         byteArrayFrameRenderer->setStartOffset( startOffset );
 
-        byteArrayFrameRenderer->setCharCoding( mByteArrayDisplay->charCodingName() );
-        byteArrayFrameRenderer->setBufferSpacing( mByteArrayDisplay->byteSpacingWidth(),
-                                                  mByteArrayDisplay->noOfGroupedBytes(),
-                                                  mByteArrayDisplay->groupSpacingWidth() );
-        byteArrayFrameRenderer->setBinaryGapWidth( mByteArrayDisplay->binaryGapWidth() );
+        byteArrayFrameRenderer->setCharCoding( mByteArrayView->charCodingName() );
+        byteArrayFrameRenderer->setBufferSpacing( mByteArrayView->byteSpacingWidth(),
+                                                  mByteArrayView->noOfGroupedBytes(),
+                                                  mByteArrayView->groupSpacingWidth() );
+        byteArrayFrameRenderer->setBinaryGapWidth( mByteArrayView->binaryGapWidth() );
 
-        byteArrayFrameRenderer->setValueCoding( (Okteta::ValueCoding)mByteArrayDisplay->valueCoding() );
-        byteArrayFrameRenderer->setShowsNonprinting( mByteArrayDisplay->showsNonprinting() );
-        byteArrayFrameRenderer->setSubstituteChar( mByteArrayDisplay->substituteChar() );
-        byteArrayFrameRenderer->setUndefinedChar( mByteArrayDisplay->undefinedChar() );
+        byteArrayFrameRenderer->setValueCoding( (Okteta::ValueCoding)mByteArrayView->valueCoding() );
+        byteArrayFrameRenderer->setShowsNonprinting( mByteArrayView->showsNonprinting() );
+        byteArrayFrameRenderer->setSubstituteChar( mByteArrayView->substituteChar() );
+        byteArrayFrameRenderer->setUndefinedChar( mByteArrayView->undefinedChar() );
 
 //     if( !confirmPrintPageNumber( byteArrayFrameRenderer->framesCount()) )
 //         return;

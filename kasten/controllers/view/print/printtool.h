@@ -78,7 +78,7 @@ class PrintTool : public QObject
   protected:
     ByteArrayDocument *mDocument;
 
-    ByteArrayView* mByteArrayDisplay;
+    ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel *mByteArrayModel;
 };
 

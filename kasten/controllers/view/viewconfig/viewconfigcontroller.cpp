@@ -38,7 +38,7 @@ namespace Kasten
 {
 
 ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
- : mByteArrayDisplay( 0 )
+ : mByteArrayView( 0 )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -96,25 +96,25 @@ ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
 
 void ViewConfigController::setTargetModel( AbstractModel* model )
 {
-    if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
+    if( mByteArrayView ) mByteArrayView->disconnect( this );
 
-    mByteArrayDisplay = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
 
-    const bool hasView = ( mByteArrayDisplay != 0 );
+    const bool hasView = ( mByteArrayView != 0 );
     if( hasView )
     {
-        mShowOffsetColumnAction->setChecked( mByteArrayDisplay->offsetColumnVisible() );
-        mShowsNonprintingAction->setChecked( mByteArrayDisplay->showsNonprinting() );
+        mShowOffsetColumnAction->setChecked( mByteArrayView->offsetColumnVisible() );
+        mShowsNonprintingAction->setChecked( mByteArrayView->showsNonprinting() );
 
-        mCodingAction->setCurrentItem( mByteArrayDisplay->valueCoding() );
-        mEncodingAction->setCurrentItem( Okteta::CharCodec::codecNames().indexOf(mByteArrayDisplay->charCodingName()) );
+        mCodingAction->setCurrentItem( mByteArrayView->valueCoding() );
+        mEncodingAction->setCurrentItem( Okteta::CharCodec::codecNames().indexOf(mByteArrayView->charCodingName()) );
 
-        mResizeStyleAction->setCurrentItem( mByteArrayDisplay->resizeStyle() );
+        mResizeStyleAction->setCurrentItem( mByteArrayView->resizeStyle() );
 
-        mToggleColumnsAction->setCurrentItem( mByteArrayDisplay->visibleByteArrayCodings()-1 );
+        mToggleColumnsAction->setCurrentItem( mByteArrayView->visibleByteArrayCodings()-1 );
 
-        connect( mByteArrayDisplay, SIGNAL(valueCodingChanged( int )), SLOT(onValueCodingChanged( int )) );
-        connect( mByteArrayDisplay, SIGNAL(charCodecChanged( const QString& )),
+        connect( mByteArrayView, SIGNAL(valueCodingChanged( int )), SLOT(onValueCodingChanged( int )) );
+        connect( mByteArrayView, SIGNAL(charCodecChanged( const QString& )),
             SLOT(onCharCodecChanged( const QString& )) );
     }
     mCodingAction->setEnabled( hasView );
@@ -128,32 +128,32 @@ void ViewConfigController::setTargetModel( AbstractModel* model )
 
 void ViewConfigController::setValueCoding( int valueCoding )
 {
-    mByteArrayDisplay->setValueCoding( valueCoding );
+    mByteArrayView->setValueCoding( valueCoding );
 }
 
 void ViewConfigController::setShowsNonprinting( bool on )
 {
-    mByteArrayDisplay->setShowsNonprinting( on );
+    mByteArrayView->setShowsNonprinting( on );
 }
 
 void ViewConfigController::toggleOffsetColumn( bool on )
 {
-    mByteArrayDisplay->toggleOffsetColumn( on );
+    mByteArrayView->toggleOffsetColumn( on );
 }
 
 void ViewConfigController::setResizeStyle( int resizeStyle )
 {
-    mByteArrayDisplay->setResizeStyle( resizeStyle );
+    mByteArrayView->setResizeStyle( resizeStyle );
 }
 
 void ViewConfigController::setCharCoding( int charCoding )
 {
-    mByteArrayDisplay->setCharCoding( Okteta::CharCodec::codecNames()[charCoding] );
+    mByteArrayView->setCharCoding( Okteta::CharCodec::codecNames()[charCoding] );
 }
 
 void ViewConfigController::toggleValueCharColumns( int visibleColumns )
 {
-    mByteArrayDisplay->setVisibleByteArrayCodings( visibleColumns+1 );
+    mByteArrayView->setVisibleByteArrayCodings( visibleColumns+1 );
 }
 
 void ViewConfigController::onValueCodingChanged( int valueCoding )

@@ -66,7 +66,7 @@ class InsertPatternTool : public QObject
     void onReadOnlyChanged( bool isReadOnly );
 
   protected:
-    ByteArrayView* mByteArrayDisplay;
+    ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel *mByteArrayModel;
 };
 

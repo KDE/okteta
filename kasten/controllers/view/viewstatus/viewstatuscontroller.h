@@ -71,7 +71,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewStatusController : public AbstractXmlGu
     void onCharCodecChanged( const QString& charCodecName );
 
   protected:
-    ByteArrayView* mByteArrayDisplay;
+    ByteArrayView* mByteArrayView;
 
     StatusBar* mStatusBar;
     QLabel* mOffsetLabel;

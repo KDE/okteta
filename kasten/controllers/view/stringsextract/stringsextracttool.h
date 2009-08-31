@@ -100,7 +100,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT StringsExtractTool : public AbstractTool
     int mMinLength;
 
   protected: // sources
-    ByteArrayView* mByteArrayDisplay;
+    ByteArrayView* mByteArrayView;
     // current
     Okteta::AbstractByteArrayModel *mByteArrayModel;
 

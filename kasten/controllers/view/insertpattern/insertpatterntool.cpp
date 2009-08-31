@@ -38,37 +38,37 @@ namespace Kasten
 {
 
 InsertPatternTool::InsertPatternTool()
- : mByteArrayDisplay( 0 ), mByteArrayModel( 0 )
+ : mByteArrayView( 0 ), mByteArrayModel( 0 )
 {
 }
 
 QString InsertPatternTool::charCodecName() const
 {
-    return mByteArrayDisplay ? mByteArrayDisplay->charCodingName() : QString();
+    return mByteArrayView ? mByteArrayView->charCodingName() : QString();
 }
 
 bool InsertPatternTool::hasWriteable() const
 {
-    return ( mByteArrayDisplay && mByteArrayModel ) ? !mByteArrayDisplay->isReadOnly() : false;
+    return ( mByteArrayView && mByteArrayModel ) ? !mByteArrayView->isReadOnly() : false;
 }
 
 void InsertPatternTool::setTargetModel( AbstractModel* model )
 {
-    if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
+    if( mByteArrayView ) mByteArrayView->disconnect( this );
 
-    mByteArrayDisplay = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
 
     ByteArrayDocument* document =
-        mByteArrayDisplay ? qobject_cast<ByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
-    const bool hasView = ( mByteArrayDisplay && mByteArrayModel );
+    const bool hasView = ( mByteArrayView && mByteArrayModel );
     if( hasView )
     {
-        connect( mByteArrayDisplay, SIGNAL(readOnlyChanged( bool )), SLOT(onReadOnlyChanged( bool )) );
+        connect( mByteArrayView, SIGNAL(readOnlyChanged( bool )), SLOT(onReadOnlyChanged( bool )) );
     }
 
-    const bool isWriteable = ( hasView && !mByteArrayDisplay->isReadOnly() );
+    const bool isWriteable = ( hasView && !mByteArrayView->isReadOnly() );
 
     emit hasWriteableChanged( isWriteable );
 }
@@ -84,14 +84,14 @@ void InsertPatternTool::insertPattern( const QByteArray &pattern, int count )
         memcpy( &insertData.data()[i], pattern.constData(), patternSize );
 
     //TODO: support insert to selection
-//     const KDE::Section selection = mByteArrayDisplay->selection();
+//     const KDE::Section selection = mByteArrayView->selection();
 
     Okteta::ChangesDescribable *changesDescribable =
         qobject_cast<Okteta::ChangesDescribable*>( mByteArrayModel );
 
     if( changesDescribable )
         changesDescribable->openGroupedChange( i18n("Pattern inserted.") );
-    mByteArrayDisplay->insert( insertData );
+    mByteArrayView->insert( insertData );
 //     mByteArrayModel->replace( filteredSection, filterResult );
     if( changesDescribable )
         changesDescribable->closeGroupedChange();

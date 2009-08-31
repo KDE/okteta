@@ -106,7 +106,7 @@ class ReplaceTool : public AbstractTool
     If::ReplaceUserQueryable* mUserQueryAgent;
 
   protected: // target
-    ByteArrayView* mByteArrayDisplay;
+    ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel* mByteArrayModel;
 };
 

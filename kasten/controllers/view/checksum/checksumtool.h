@@ -106,7 +106,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ChecksumTool : public AbstractTool
     int mAlgorithmId;
 
   protected: // sources
-    ByteArrayView* mByteArrayDisplay;
+    ByteArrayView* mByteArrayView;
     // current
     Okteta::AbstractByteArrayModel* mByteArrayModel;
 

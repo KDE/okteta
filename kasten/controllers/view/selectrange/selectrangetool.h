@@ -92,7 +92,7 @@ class SelectRangeTool : public AbstractTool
     bool mIsEndBackwards :1;
 
   protected: // target
-    ByteArrayView* mByteArrayDisplay;
+    ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel* mByteArrayModel;
 };
 

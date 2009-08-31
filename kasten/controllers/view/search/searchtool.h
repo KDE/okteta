@@ -96,7 +96,7 @@ class SearchTool : public AbstractTool
     If::SearchUserQueryable* mUserQueryAgent;
 
   protected: // target
-    ByteArrayView* mByteArrayDisplay;
+    ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel* mByteArrayModel;
 };
 

@@ -46,7 +46,7 @@ namespace Kasten
 {
 
 ViewStatusController::ViewStatusController( StatusBar* statusBar )
- : mByteArrayDisplay( 0 ), mStatusBar( statusBar )
+ : mByteArrayView( 0 ), mStatusBar( statusBar )
 {
     mPrintFunction = Okteta::OffsetFormat::printFunction( Okteta::OffsetFormat::Hexadecimal );
 
@@ -139,32 +139,32 @@ void ViewStatusController::fixWidths()
 
 void ViewStatusController::setTargetModel( AbstractModel* model )
 {
-    if( mByteArrayDisplay )
+    if( mByteArrayView )
     {
-        mByteArrayDisplay->disconnect( this );
-        mByteArrayDisplay->disconnect( mOverwriteModeToggleButton );
+        mByteArrayView->disconnect( this );
+        mByteArrayView->disconnect( mOverwriteModeToggleButton );
     }
 
-    mByteArrayDisplay = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
 
-    const bool hasView = ( mByteArrayDisplay != 0 );
+    const bool hasView = ( mByteArrayView != 0 );
     if( hasView )
     {
-        mStartOffset = mByteArrayDisplay->startOffset();
+        mStartOffset = mByteArrayView->startOffset();
 
-        onCursorPositionChanged( mByteArrayDisplay->cursorPosition() );
-        onSelectedDataChanged( mByteArrayDisplay->modelSelection() );
-        mOverwriteModeToggleButton->setChecked( mByteArrayDisplay->isOverwriteMode() );
-        onValueCodingChanged( (int)mByteArrayDisplay->valueCoding() );
-        onCharCodecChanged( mByteArrayDisplay->charCodingName() );
+        onCursorPositionChanged( mByteArrayView->cursorPosition() );
+        onSelectedDataChanged( mByteArrayView->modelSelection() );
+        mOverwriteModeToggleButton->setChecked( mByteArrayView->isOverwriteMode() );
+        onValueCodingChanged( (int)mByteArrayView->valueCoding() );
+        onCharCodecChanged( mByteArrayView->charCodingName() );
 
-        connect( mByteArrayDisplay, SIGNAL(cursorPositionChanged( Okteta::Address )), SLOT(onCursorPositionChanged( Okteta::Address )) );
-        connect( mByteArrayDisplay, SIGNAL(selectedDataChanged( const Kasten::AbstractModelSelection* )),
+        connect( mByteArrayView, SIGNAL(cursorPositionChanged( Okteta::Address )), SLOT(onCursorPositionChanged( Okteta::Address )) );
+        connect( mByteArrayView, SIGNAL(selectedDataChanged( const Kasten::AbstractModelSelection* )),
             SLOT(onSelectedDataChanged( const Kasten::AbstractModelSelection* )) );
-        connect( mByteArrayDisplay, SIGNAL(overwriteModeChanged( bool )),
+        connect( mByteArrayView, SIGNAL(overwriteModeChanged( bool )),
                  mOverwriteModeToggleButton, SLOT(setChecked( bool )) );
-        connect( mByteArrayDisplay, SIGNAL(valueCodingChanged( int )), SLOT(onValueCodingChanged( int )) );
-        connect( mByteArrayDisplay, SIGNAL(charCodecChanged( const QString& )),
+        connect( mByteArrayView, SIGNAL(valueCodingChanged( int )), SLOT(onValueCodingChanged( int )) );
+        connect( mByteArrayView, SIGNAL(charCodecChanged( const QString& )),
             SLOT(onCharCodecChanged( const QString& )) );
     }
     else
@@ -187,20 +187,20 @@ void ViewStatusController::setTargetModel( AbstractModel* model )
 
 void ViewStatusController::setOverwriteMode( bool overwrite )
 {
-    mByteArrayDisplay->setOverwriteMode( overwrite );
+    mByteArrayView->setOverwriteMode( overwrite );
 }
 
 // #if 0
 void ViewStatusController::setValueCoding( int valueCoding )
 {
-    mByteArrayDisplay->setValueCoding( valueCoding );
-    mByteArrayDisplay->setFocus();
+    mByteArrayView->setValueCoding( valueCoding );
+    mByteArrayView->setFocus();
 }
 
 void ViewStatusController::setCharCoding( int charCoding )
 {
-    mByteArrayDisplay->setCharCoding( Okteta::CharCodec::codecNames()[charCoding] );
-    mByteArrayDisplay->setFocus();
+    mByteArrayView->setCharCoding( Okteta::CharCodec::codecNames()[charCoding] );
+    mByteArrayView->setFocus();
 }
 // #endif
 

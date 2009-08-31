@@ -61,7 +61,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewConfigController : public AbstractXmlGu
     void onCharCodecChanged( const QString& charCodecName );
 
   protected:
-    ByteArrayView* mByteArrayDisplay;
+    ByteArrayView* mByteArrayView;
 
     // view menu
     KSelectAction* mCodingAction;

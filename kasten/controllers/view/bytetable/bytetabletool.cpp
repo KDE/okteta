@@ -41,7 +41,7 @@ namespace Kasten
 
 ByteTableTool::ByteTableTool()
  : mByteTableModel( new ByteTableModel(this) ),
-   mByteArrayDisplay( 0 ), mByteArrayModel( 0 )
+   mByteArrayView( 0 ), mByteArrayModel( 0 )
 {
     setObjectName( "ByteTable" );
 }
@@ -50,34 +50,34 @@ QString ByteTableTool::title() const { return i18nc("@title:window", "Byte Table
 ByteTableModel *ByteTableTool::byteTableModel() const { return mByteTableModel; }
 bool ByteTableTool::hasWriteable() const
 {
-    return ( mByteArrayDisplay && mByteArrayModel ) ? !mByteArrayDisplay->isReadOnly() : false;
+    return ( mByteArrayView && mByteArrayModel ) ? !mByteArrayView->isReadOnly() : false;
 }
 
 
 void ByteTableTool::setTargetModel( AbstractModel* model )
 {
-    if( mByteArrayDisplay )
+    if( mByteArrayView )
     {
-        mByteArrayDisplay->disconnect( mByteTableModel );
-        mByteArrayDisplay->disconnect( this );
+        mByteArrayView->disconnect( mByteTableModel );
+        mByteArrayView->disconnect( this );
     }
 
-    mByteArrayDisplay = model ? qobject_cast<ByteArrayView*>( model ) : 0;
+    mByteArrayView = model ? qobject_cast<ByteArrayView*>( model ) : 0;
 
     ByteArrayDocument* document =
-        mByteArrayDisplay ? qobject_cast<ByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
-    const bool hasView = ( mByteArrayDisplay && mByteArrayModel );
+    const bool hasView = ( mByteArrayView && mByteArrayModel );
     if( hasView )
     {
-        mByteTableModel->setCharCodec( mByteArrayDisplay->charCodingName() );
-        connect( mByteArrayDisplay,  SIGNAL(charCodecChanged( const QString& )),
+        mByteTableModel->setCharCodec( mByteArrayView->charCodingName() );
+        connect( mByteArrayView,  SIGNAL(charCodecChanged( const QString& )),
                  mByteTableModel, SLOT(setCharCodec( const QString& )) );
-        connect( mByteArrayDisplay, SIGNAL(readOnlyChanged( bool )), SLOT(onReadOnlyChanged( bool )) );
+        connect( mByteArrayView, SIGNAL(readOnlyChanged( bool )), SLOT(onReadOnlyChanged( bool )) );
     }
 
-    const bool isWriteable = ( hasView && !mByteArrayDisplay->isReadOnly() );
+    const bool isWriteable = ( hasView && !mByteArrayView->isReadOnly() );
 
     emit hasWriteableChanged( isWriteable );
 }
@@ -91,7 +91,7 @@ void ByteTableTool::insert( unsigned char byte, int count )
 
     if( changesDescribable )
         changesDescribable->openGroupedChange( i18n("Byte inserted.") );
-    mByteArrayDisplay->insert( data );
+    mByteArrayView->insert( data );
     if( changesDescribable )
         changesDescribable->closeGroupedChange();
 // void ByteTableController::fill( const QByteArray &Data )

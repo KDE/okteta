@@ -75,7 +75,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT FilterTool : public AbstractTool
     void onApplyableChanged();
 
   protected:
-    ByteArrayView* mByteArrayDisplay;
+    ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel *mByteArrayModel;
     bool mHasWritable;
 

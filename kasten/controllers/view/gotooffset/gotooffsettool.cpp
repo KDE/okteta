@@ -39,7 +39,7 @@ GotoOffsetTool::GotoOffsetTool()
     mIsRelative( false ),
     mIsSelectionToExtent( false ),
     mIsBackwards( false ),
-    mByteArrayDisplay( 0 ),
+    mByteArrayView( 0 ),
     mByteArrayModel( 0 )
 {
     setObjectName( "GotoOffset" );
@@ -47,21 +47,21 @@ GotoOffsetTool::GotoOffsetTool()
 
 int GotoOffsetTool::currentOffset() const
 {
-    return mByteArrayDisplay ?
-        mByteArrayDisplay->startOffset() + mByteArrayDisplay->cursorPosition() :
+    return mByteArrayView ?
+        mByteArrayView->startOffset() + mByteArrayView->cursorPosition() :
         -1;
 }
 
 bool GotoOffsetTool::isUsable() const
 {
-    return ( mByteArrayDisplay && mByteArrayModel && (mByteArrayModel->size() > 0) );
+    return ( mByteArrayView && mByteArrayModel && (mByteArrayModel->size() > 0) );
 }
 
 bool GotoOffsetTool::isApplyable() const
 {
     const int newPosition = finalTargetOffset();
 
-    return ( mByteArrayDisplay && mByteArrayModel
+    return ( mByteArrayView && mByteArrayModel
              && (0 <= newPosition) && (newPosition <= mByteArrayModel->size()) );
 }
 
@@ -72,16 +72,16 @@ void GotoOffsetTool::setTargetModel( AbstractModel* model )
     const bool oldIsUsable = isUsable();
     const bool oldIsApplyable = isApplyable();
 
-    if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
+    if( mByteArrayView ) mByteArrayView->disconnect( this );
     if( mByteArrayModel ) mByteArrayModel->disconnect( this );
 
-    mByteArrayDisplay = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
 
     ByteArrayDocument* document =
-        mByteArrayDisplay ? qobject_cast<ByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
-    if( mByteArrayDisplay && mByteArrayModel )
+    if( mByteArrayView && mByteArrayModel )
     {
         connect( mByteArrayModel, SIGNAL(contentsChanged( const Okteta::ArrayChangeMetricsList& )),
                  SLOT(onContentsChanged()) );
@@ -146,20 +146,20 @@ void GotoOffsetTool::gotoOffset()
     const int newPosition = finalTargetOffset();
 
     if( mIsSelectionToExtent )
-        mByteArrayDisplay->setSelectionCursorPosition( newPosition );
+        mByteArrayView->setSelectionCursorPosition( newPosition );
     else
-        mByteArrayDisplay->setCursorPosition( newPosition );
-    mByteArrayDisplay->setFocus();
+        mByteArrayView->setCursorPosition( newPosition );
+    mByteArrayView->setFocus();
 }
 
 
 int GotoOffsetTool::finalTargetOffset() const
 {
     const int newPosition =
-        (! mByteArrayDisplay) ? -1 :
+        (! mByteArrayView) ? -1 :
         mIsRelative ?
-            ( mIsBackwards ? mByteArrayDisplay->cursorPosition() - mTargetOffset :
-                             mByteArrayDisplay->cursorPosition() + mTargetOffset ) :
+            ( mIsBackwards ? mByteArrayView->cursorPosition() - mTargetOffset :
+                             mByteArrayView->cursorPosition() + mTargetOffset ) :
             ( mIsBackwards ? mByteArrayModel->size() - mTargetOffset :
                              mTargetOffset );
 

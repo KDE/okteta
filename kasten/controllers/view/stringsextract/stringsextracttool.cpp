@@ -43,20 +43,20 @@ static const int DefaultMinLength = 3;
 StringsExtractTool::StringsExtractTool()
  : mExtractedStringsUptodate( false ), mSourceByteArrayModelUptodate( false ),
    mCharCodec( Okteta::CharCodec::createCodec(Okteta::LocalEncoding) ), mMinLength( DefaultMinLength ),
-   mByteArrayDisplay( 0 ), mByteArrayModel( 0 ), mSourceByteArrayModel( 0 ), mSourceMinLength( 0 )
+   mByteArrayView( 0 ), mByteArrayModel( 0 ), mSourceByteArrayModel( 0 ), mSourceMinLength( 0 )
 {
     setObjectName( "Strings" );
 }
 
 bool StringsExtractTool::isApplyable() const
 {
-    return ( mByteArrayModel && mByteArrayDisplay && mByteArrayDisplay->hasSelectedData() && mMinLength > 0 );
+    return ( mByteArrayModel && mByteArrayView && mByteArrayView->hasSelectedData() && mMinLength > 0 );
 }
 
 bool StringsExtractTool::canHighlightString() const
 {
     return ( mSourceByteArrayModel == mByteArrayModel
-             && mByteArrayDisplay && mSourceByteArrayModelUptodate );
+             && mByteArrayView && mSourceByteArrayModelUptodate );
 }
 
 QString StringsExtractTool::title() const { return i18nc("@title:window of the tool to extract strings", "Strings"); }
@@ -68,22 +68,22 @@ QString StringsExtractTool::title() const { return i18nc("@title:window of the t
 // voll strings, auch mit Leerzeichen
 void StringsExtractTool::setTargetModel( AbstractModel* model )
 {
-    if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
+    if( mByteArrayView ) mByteArrayView->disconnect( this );
 
-    mByteArrayDisplay = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
 
     ByteArrayDocument* document =
-        mByteArrayDisplay ? qobject_cast<ByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
-    if( mByteArrayDisplay && mByteArrayModel )
+    if( mByteArrayView && mByteArrayModel )
     {
-        connect( mByteArrayDisplay,  SIGNAL(charCodecChanged( const QString& )),
+        connect( mByteArrayView,  SIGNAL(charCodecChanged( const QString& )),
                  SLOT(setCharCodec( const QString &)) );
-        connect( mByteArrayDisplay,  SIGNAL(selectedDataChanged( const Kasten::AbstractModelSelection* )),
+        connect( mByteArrayView,  SIGNAL(selectedDataChanged( const Kasten::AbstractModelSelection* )),
                  SLOT(onSelectionChanged()) );
 
-        setCharCodec( mByteArrayDisplay->charCodingName() );
+        setCharCodec( mByteArrayView->charCodingName() );
     }
 
     // TODO: if there is no view, there is nothing to extract.
@@ -114,7 +114,7 @@ void StringsExtractTool::checkUptoDate()
 {
     mExtractedStringsUptodate =
         ( mSourceByteArrayModel == mByteArrayModel
-          && mByteArrayDisplay && mSourceSelection == mByteArrayDisplay->selection()
+          && mByteArrayView && mSourceSelection == mByteArrayView->selection()
           && mSourceMinLength == mMinLength
           && mSourceByteArrayModelUptodate );
 }
@@ -124,8 +124,8 @@ void StringsExtractTool::selectString( int stringId )
     const ContainedString &containedString = mContainedStringList.at(stringId);
     const Okteta::Address offset = containedString.offset();
     const int length = containedString.string().length();
-    mByteArrayDisplay->setSelection( offset, offset+length-1 );
-    mByteArrayDisplay->setFocus();
+    mByteArrayView->setSelection( offset, offset+length-1 );
+    mByteArrayView->setFocus();
 }
 
 void StringsExtractTool::onSelectionChanged()
@@ -160,7 +160,7 @@ void StringsExtractTool::extractStrings()
     QApplication::setOverrideCursor( Qt::WaitCursor );
 
     ExtractStringsJob *extractStringsJob =
-        new ExtractStringsJob( mByteArrayModel, mByteArrayDisplay->selection(), mCharCodec, mMinLength,
+        new ExtractStringsJob( mByteArrayModel, mByteArrayView->selection(), mCharCodec, mMinLength,
                                &mContainedStringList );
     extractStringsJob->exec();
 
@@ -168,7 +168,7 @@ void StringsExtractTool::extractStrings()
 
     // remember new string source
     mSourceByteArrayModel = mByteArrayModel;
-    mSourceSelection = mByteArrayDisplay->selection();
+    mSourceSelection = mByteArrayView->selection();
     mSourceMinLength = mMinLength;
     connect( mSourceByteArrayModel,  SIGNAL(contentsChanged( const Okteta::ArrayChangeMetricsList & )),
              SLOT(onSourceChanged()) );

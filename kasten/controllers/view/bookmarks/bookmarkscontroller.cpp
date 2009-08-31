@@ -58,7 +58,7 @@ static const char BookmarkListActionListId[] = "bookmark_list";
 // TODO: Sortieren nach Offset oder Zeit
 
 BookmarksController::BookmarksController( KXMLGUIClient* guiClient )
- : mGuiClient( guiClient ), mByteArrayDisplay( 0 ), mByteArray( 0 ), mBookmarks( 0 )
+ : mGuiClient( guiClient ), mByteArrayView( 0 ), mByteArray( 0 ), mBookmarks( 0 )
 {
     KActionCollection* actionCollection = mGuiClient->actionCollection();
 
@@ -93,15 +93,15 @@ BookmarksController::BookmarksController( KXMLGUIClient* guiClient )
 
 void BookmarksController::setTargetModel( AbstractModel* model )
 {
-    if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
+    if( mByteArrayView ) mByteArrayView->disconnect( this );
     if( mByteArray ) mByteArray->disconnect( this );
 
-    mByteArrayDisplay = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
 
     ByteArrayDocument* document =
-        mByteArrayDisplay ? qobject_cast<ByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : 0;
     mByteArray = document ? document->content() : 0;
-    mBookmarks = ( mByteArray && mByteArrayDisplay ) ? qobject_cast<Okteta::Bookmarkable*>( mByteArray ) : 0;
+    mBookmarks = ( mByteArray && mByteArrayView ) ? qobject_cast<Okteta::Bookmarkable*>( mByteArray ) : 0;
 
     const bool hasViewWithBookmarks = ( mBookmarks != 0 );
     int bookmarksCount = 0;
@@ -114,14 +114,14 @@ void BookmarksController::setTargetModel( AbstractModel* model )
                  SLOT(onBookmarksRemoved( const QList<Okteta::Bookmark>& )) );
         connect( mByteArray, SIGNAL(bookmarksModified( const QList<int>& )),
                  SLOT(updateBookmarks()) );
-        connect( mByteArrayDisplay, SIGNAL( cursorPositionChanged( Okteta::Address )), SLOT( onCursorPositionChanged( Okteta::Address )) );
+        connect( mByteArrayView, SIGNAL( cursorPositionChanged( Okteta::Address )), SLOT( onCursorPositionChanged( Okteta::Address )) );
     }
 
     updateBookmarks();
 
     const bool hasBookmarks = hasViewWithBookmarks && ( bookmarksCount != 0 );
     if( hasViewWithBookmarks )
-        onCursorPositionChanged( mByteArrayDisplay->cursorPosition() );
+        onCursorPositionChanged( mByteArrayView->cursorPosition() );
     else
     {
         mCreateAction->setEnabled( false );
@@ -141,7 +141,7 @@ void BookmarksController::updateBookmarks()
     if( mBookmarks == 0 )
         return;
 
-    const int startOffset = mByteArrayDisplay->startOffset();
+    const int startOffset = mByteArrayView->startOffset();
     Okteta::OffsetFormat::print printFunction = Okteta::OffsetFormat::printFunction( Okteta::OffsetFormat::Hexadecimal );
 
     char codedOffset[Okteta::OffsetFormat::MaxFormatWidth+1];
@@ -173,7 +173,7 @@ void BookmarksController::updateBookmarks()
 void BookmarksController::onBookmarksAdded( const QList<Okteta::Bookmark> &bookmarks )
 {
 Q_UNUSED( bookmarks )
-    const int currentPosition = mByteArrayDisplay->cursorPosition();
+    const int currentPosition = mByteArrayView->cursorPosition();
     onCursorPositionChanged( currentPosition );
 
     const int bookmarksCount = mBookmarks->bookmarksCount();
@@ -187,7 +187,7 @@ Q_UNUSED( bookmarks )
 void BookmarksController::onBookmarksRemoved( const QList<Okteta::Bookmark> &bookmarks )
 {
 Q_UNUSED( bookmarks )
-    const int currentPosition = mByteArrayDisplay->cursorPosition();
+    const int currentPosition = mByteArrayView->cursorPosition();
     onCursorPositionChanged( currentPosition );
 
     const int bookmarksCount = mBookmarks->bookmarksCount();
@@ -228,10 +228,10 @@ void BookmarksController::onCursorPositionChanged( Okteta::Address newPosition )
 
 void BookmarksController::createBookmark()
 {
-    const int cursorPosition = mByteArrayDisplay->cursorPosition();
+    const int cursorPosition = mByteArrayView->cursorPosition();
 
     // search for text at cursor
-    const Okteta::CharCodec* charCodec = Okteta::CharCodec::createCodec( mByteArrayDisplay->charCodingName() );
+    const Okteta::CharCodec* charCodec = Okteta::CharCodec::createCodec( mByteArrayView->charCodingName() );
     const Okteta::WordByteArrayService textService( mByteArray, charCodec );
     QString bookmarkName = textService.text( cursorPosition, cursorPosition+MaxBookmarkNameSize-1 );
     delete charCodec;
@@ -239,10 +239,10 @@ void BookmarksController::createBookmark()
     if( bookmarkName.isEmpty() )
         bookmarkName = i18nc( "default name of a bookmark", "Bookmark" );// %1").arg( 0 ) ); // TODO: use counter like with new file, globally
 
-    BookmarkEditPopup* bookmarkEditPopup = new BookmarkEditPopup( mByteArrayDisplay->widget() );
-    QPoint popupPoint = mByteArrayDisplay->cursorRect().topLeft();
+    BookmarkEditPopup* bookmarkEditPopup = new BookmarkEditPopup( mByteArrayView->widget() );
+    QPoint popupPoint = mByteArrayView->cursorRect().topLeft();
 //     popupPoint.ry() += mSlider->height() / 2;
-    popupPoint = mByteArrayDisplay->widget()->mapToGlobal( popupPoint );
+    popupPoint = mByteArrayView->widget()->mapToGlobal( popupPoint );
 
     bookmarkEditPopup->setPosition( popupPoint );
     bookmarkEditPopup->setName( bookmarkName );
@@ -262,7 +262,7 @@ void BookmarksController::createBookmark()
 
 void BookmarksController::deleteBookmark()
 {
-    const int cursorPosition = mByteArrayDisplay->cursorPosition();
+    const int cursorPosition = mByteArrayView->cursorPosition();
     QList<Okteta::Bookmark> bookmarks;
     bookmarks.append( cursorPosition );
     mBookmarks->removeBookmarks( bookmarks );
@@ -275,34 +275,34 @@ void BookmarksController::deleteAllBookmarks()
 
 void BookmarksController::gotoNextBookmark()
 {
-    const int currentPosition = mByteArrayDisplay->cursorPosition();
+    const int currentPosition = mByteArrayView->cursorPosition();
 
     Okteta::BookmarksConstIterator bookmarksIterator = mBookmarks->createBookmarksConstIterator();
     const bool hasNext = bookmarksIterator.findNextFrom( currentPosition );
     if( hasNext )
     {
         const int newPosition = bookmarksIterator.next().offset();
-        mByteArrayDisplay->setCursorPosition( newPosition );
+        mByteArrayView->setCursorPosition( newPosition );
     }
 }
 
 void BookmarksController::gotoPreviousBookmark()
 {
-    const int currentPosition = mByteArrayDisplay->cursorPosition();
+    const int currentPosition = mByteArrayView->cursorPosition();
 
     Okteta::BookmarksConstIterator bookmarksIterator = mBookmarks->createBookmarksConstIterator();
     const bool hasPrevious = bookmarksIterator.findPreviousFrom( currentPosition );
     if( hasPrevious )
     {
         const int newPosition = bookmarksIterator.previous().offset();
-        mByteArrayDisplay->setCursorPosition( newPosition );
+        mByteArrayView->setCursorPosition( newPosition );
     }
 }
 
 void BookmarksController::onBookmarkTriggered( QAction* action )
 {
     const int newPosition = action->data().toInt();
-    mByteArrayDisplay->setCursorPosition( newPosition );
+    mByteArrayView->setCursorPosition( newPosition );
 }
 
 

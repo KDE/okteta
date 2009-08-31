@@ -68,7 +68,7 @@ ChecksumTool::ChecksumTool()
     mChecksumUptodate( false ),
     mSourceByteArrayModelUptodate( false ),
     mAlgorithmId( 0 ),
-    mByteArrayDisplay( 0 ), mByteArrayModel( 0 ),
+    mByteArrayView( 0 ), mByteArrayModel( 0 ),
     mSourceAlgorithmId( -1 ),
     mSourceByteArrayModel( 0 )
 {
@@ -104,7 +104,7 @@ QList<AbstractByteArrayChecksumAlgorithm*> ChecksumTool::algorithmList() const {
 
 bool ChecksumTool::isApplyable() const
 {
-    return ( mByteArrayModel && mByteArrayDisplay && mByteArrayDisplay->hasSelectedData() );
+    return ( mByteArrayModel && mByteArrayView && mByteArrayView->hasSelectedData() );
 }
 
 
@@ -120,17 +120,17 @@ AbstractByteArrayChecksumParameterSet* ChecksumTool::parameterSet()
 
 void ChecksumTool::setTargetModel( AbstractModel* model )
 {
-    if( mByteArrayDisplay ) mByteArrayDisplay->disconnect( this );
+    if( mByteArrayView ) mByteArrayView->disconnect( this );
 
-    mByteArrayDisplay = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
 
     ByteArrayDocument* document =
-        mByteArrayDisplay ? qobject_cast<ByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
-    if( mByteArrayDisplay && mByteArrayModel )
+    if( mByteArrayView && mByteArrayModel )
     {
-        connect( mByteArrayDisplay,  SIGNAL(selectedDataChanged( const Kasten::AbstractModelSelection* )),
+        connect( mByteArrayView,  SIGNAL(selectedDataChanged( const Kasten::AbstractModelSelection* )),
                  SLOT(onSelectionChanged()) );
     }
 
@@ -146,7 +146,7 @@ void ChecksumTool::checkUptoDate()
 {
     mChecksumUptodate =
         ( mSourceByteArrayModel == mByteArrayModel
-          && mByteArrayDisplay && mSourceSelection == mByteArrayDisplay->selection()
+          && mByteArrayView && mSourceSelection == mByteArrayView->selection()
           && mSourceAlgorithmId == mAlgorithmId
           && mSourceByteArrayModelUptodate );
 }
@@ -164,7 +164,7 @@ void ChecksumTool::calculateChecksum()
         QApplication::setOverrideCursor( Qt::WaitCursor );
 
         ChecksumCalculateJob* checksumCalculateJob =
-            new ChecksumCalculateJob( &mCheckSum, algorithm, mByteArrayModel, mByteArrayDisplay->selection() );
+            new ChecksumCalculateJob( &mCheckSum, algorithm, mByteArrayModel, mByteArrayView->selection() );
         checksumCalculateJob->exec();
 
         QApplication::restoreOverrideCursor();
@@ -172,7 +172,7 @@ void ChecksumTool::calculateChecksum()
         // remember checksum source
         mSourceAlgorithmId = mAlgorithmId;
         mSourceByteArrayModel = mByteArrayModel;
-        mSourceSelection = mByteArrayDisplay->selection();
+        mSourceSelection = mByteArrayView->selection();
         connect( mSourceByteArrayModel,  SIGNAL(contentsChanged( const Okteta::ArrayChangeMetricsList& )),
                  SLOT(onSourceChanged()) );
         connect( mSourceByteArrayModel,  SIGNAL(destroyed()),

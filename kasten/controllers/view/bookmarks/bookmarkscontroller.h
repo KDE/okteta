@@ -77,7 +77,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT BookmarksController : public AbstractXmlGui
 
   protected:
     KXMLGUIClient* mGuiClient;
-    ByteArrayView* mByteArrayDisplay;
+    ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel *mByteArray;
     Okteta::Bookmarkable *mBookmarks;
 
