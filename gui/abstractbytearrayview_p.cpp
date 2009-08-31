@@ -835,7 +835,10 @@ void AbstractByteArrayViewPrivate::updateViewByWidth()
     q->viewport()->update();
 
     mTableCursor->updateCoord();
-    ensureCursorVisible();
+    // TODO: see for what actions if would be usable to have ensureCursorVisible()
+    // TODO: think about adding action "showCursor"/"show FocusItem" to menu
+    // disabled as this prevents splitting views with aligned areas from working
+    // ensureCursorVisible();
 
     unpauseCursor();
     emit q->cursorPositionChanged( cursorPosition() );
