@@ -131,7 +131,7 @@ OktetaPart::OktetaPart( QObject* parent,
     // TODO: BrowserExtension might rely on existing objects (session snap while loadJob),
     // so this hack just creates some dummies
     mDocument = new Kasten::ByteArrayDocument( QString() );
-    mDisplay = new Kasten::ByteArrayView( mDocument );
+    mByteArrayView = new Kasten::ByteArrayView( mDocument );
 
     if( modus == BrowserViewModus )
         new OktetaBrowserExtension( this );
@@ -177,7 +177,7 @@ void OktetaPart::onDocumentLoaded( Kasten::AbstractDocument* document )
 {
     if( document )
     {
-        delete mDisplay;
+        delete mByteArrayView;
         delete mDocument;
 
         mDocument = static_cast<Kasten::ByteArrayDocument*>( document );
@@ -185,17 +185,17 @@ void OktetaPart::onDocumentLoaded( Kasten::AbstractDocument* document )
         connect( mDocument, SIGNAL(syncStatesChanged( Kasten::AbstractDocument::SyncStates )),
                  SLOT(onModified( int )) );
 
-        mDisplay = new Kasten::ByteArrayView( mDocument );
-//     mDisplay->setNoOfBytesPerLine( 16 );
-        mDisplay->setShowsNonprinting( false );
-        connect( mDisplay, SIGNAL(hasSelectedDataChanged( bool )), SIGNAL(hasSelectedDataChanged( bool )) );
+        mByteArrayView = new Kasten::ByteArrayView( mDocument );
+//     mByteArrayView->setNoOfBytesPerLine( 16 );
+        mByteArrayView->setShowsNonprinting( false );
+        connect( mByteArrayView, SIGNAL(hasSelectedDataChanged( bool )), SIGNAL(hasSelectedDataChanged( bool )) );
 
-        QWidget* displayWidget = mDisplay->widget();
+        QWidget* displayWidget = mByteArrayView->widget();
         mLayout->addWidget( displayWidget );
         mLayout->parentWidget()->setFocusProxy( displayWidget );
 
         foreach( Kasten::AbstractXmlGuiController* controller, mControllers )
-            controller->setTargetModel( mDisplay );
+            controller->setTargetModel( mByteArrayView );
 
         setModified( false );
     }
@@ -213,6 +213,6 @@ void OktetaPart::onModified( int states )
 OktetaPart::~OktetaPart()
 {
     qDeleteAll( mControllers );
-    delete mDisplay;
+    delete mByteArrayView;
     delete mDocument;
 }

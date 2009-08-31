@@ -83,13 +83,13 @@ class OktetaPart : public KParts::ReadWritePart
     QVBoxLayout* mLayout;
 
     Kasten::ByteArrayDocument* mDocument;
-    Kasten::ByteArrayView* mDisplay;
+    Kasten::ByteArrayView* mByteArrayView;
 
     Kasten::PrintController* mPrintController;
     QList<Kasten::AbstractXmlGuiController*> mControllers;
 };
 
 
-inline Kasten::ByteArrayView* OktetaPart::byteArrayView() const { return mDisplay; }
+inline Kasten::ByteArrayView* OktetaPart::byteArrayView() const { return mByteArrayView; }
 
 #endif
