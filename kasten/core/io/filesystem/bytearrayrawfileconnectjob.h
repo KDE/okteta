@@ -30,7 +30,7 @@
 namespace Kasten
 {
 
-class KByteArrayRawFileSynchronizer;
+class ByteArrayRawFileSynchronizer;
 class ByteArrayDocument;
 // class ByteArrayRawFileWriteThread;
 
@@ -39,7 +39,7 @@ class ByteArrayRawFileConnectJob : public AbstractFileSystemConnectJob
   Q_OBJECT
 
   public:
-    ByteArrayRawFileConnectJob( KByteArrayRawFileSynchronizer *synchronizer, AbstractDocument* document,
+    ByteArrayRawFileConnectJob( ByteArrayRawFileSynchronizer *synchronizer, AbstractDocument* document,
                                 const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
     virtual ~ByteArrayRawFileConnectJob();
 

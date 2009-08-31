@@ -28,7 +28,7 @@
 // Okteta Kasten
 #include <bytearraydocument.h>
 #include <bytearrayview.h>
-#include <filesystem/kbytearrayrawfilesynchronizerfactory.h>
+#include <filesystem/bytearrayrawfilesynchronizerfactory.h>
 #include <overwriteonly/overwriteonlycontroller.h>
 #include <overwritemode/overwritemodecontroller.h>
 #include <insertpattern/insertpatterncontroller.h>
@@ -149,7 +149,7 @@ void OktetaPart::setReadWrite( bool readWrite )
 
 bool OktetaPart::openFile()
 {
-    Kasten::KByteArrayRawFileSynchronizerFactory* synchronizerFactory = new Kasten::KByteArrayRawFileSynchronizerFactory();
+    Kasten::ByteArrayRawFileSynchronizerFactory* synchronizerFactory = new Kasten::ByteArrayRawFileSynchronizerFactory();
     Kasten::AbstractModelSynchronizer* synchronizer = synchronizerFactory->createSynchronizer();
 
     Kasten::AbstractLoadJob* loadJob = synchronizer->startLoad( localFilePath() );

@@ -77,7 +77,7 @@ OktetaPartFactory::OktetaPartFactory()
 //                                    << new ByteArrayValuesStreamEncoderConfigEditorFactory();
 
 //     mDocumentManager->codecManager()->setEncoders( encoderList );
-//     mDocumentManager->syncManager()->setDocumentSynchronizerFactory( new KByteArrayRawFileSynchronizerFactory() );
+//     mDocumentManager->syncManager()->setDocumentSynchronizerFactory( new ByteArrayRawFileSynchronizerFactory() );
 
 //     mViewManager->codecViewManager()->setEncoderConfigEditorFactories( encoderConfigEditorFactoryList );
 }

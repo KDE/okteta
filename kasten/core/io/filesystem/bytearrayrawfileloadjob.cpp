@@ -24,7 +24,7 @@
 #include "bytearrayrawfileloadjob.h"
 
 // lib
-#include "kbytearrayrawfilesynchronizer.h"
+#include "bytearrayrawfilesynchronizer.h"
 #include "bytearrayrawfileloadthread.h"
 #include "bytearraydocument.h"
 // Qt
@@ -36,7 +36,7 @@
 namespace Kasten
 {
 
-ByteArrayRawFileLoadJob::ByteArrayRawFileLoadJob( KByteArrayRawFileSynchronizer *synchronizer, const KUrl &url )
+ByteArrayRawFileLoadJob::ByteArrayRawFileLoadJob( ByteArrayRawFileSynchronizer *synchronizer, const KUrl &url )
  : AbstractFileSystemLoadJob( synchronizer, url )
 {}
 
@@ -48,7 +48,7 @@ void ByteArrayRawFileLoadJob::startLoadFromFile()
         QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
 
     ByteArrayDocument *document = loadThread->document();
-    qobject_cast<KByteArrayRawFileSynchronizer*>(synchronizer())->setDocument( document );
+    qobject_cast<ByteArrayRawFileSynchronizer*>(synchronizer())->setDocument( document );
 
     delete loadThread;
 

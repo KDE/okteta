@@ -20,33 +20,33 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KBYTEARRAYRAWFILESYNCHRONIZERFACTORY_H
-#define KBYTEARRAYRAWFILESYNCHRONIZERFACTORY_H
+#include "bytearrayrawfilesynchronizerfactory.h"
 
 // lib
-#include "oktetakastencore_export.h"
-// Kasten core
-#include <abstractmodelsynchronizerfactory.h>
+#include "bytearrayrawfilesynchronizer.h"
+#include "bytearraydocument.h"
+// KDE
+#include <KUrl>
+// Qt
+#include <QtCore/QLatin1String>
 
 
 namespace Kasten
 {
 
-class OKTETAKASTENCORE_EXPORT KByteArrayRawFileSynchronizerFactory : public AbstractModelSynchronizerFactory
+ByteArrayRawFileSynchronizerFactory::ByteArrayRawFileSynchronizerFactory() {}
+
+// could be set to base class as value, is only one object per factory at runtime
+// and settable in desktop file
+QString ByteArrayRawFileSynchronizerFactory::supportedWorkType() const { return QLatin1String("ByteArrayDocument");}
+QString ByteArrayRawFileSynchronizerFactory::supportedRemoteType() const { return QLatin1String("application/octet-stream");}
+
+
+AbstractModelSynchronizer* ByteArrayRawFileSynchronizerFactory::createSynchronizer() const
 {
-  Q_OBJECT
-
-  public:
-    KByteArrayRawFileSynchronizerFactory();
-    virtual ~KByteArrayRawFileSynchronizerFactory();
-
-  public: // AbstractModelSynchronizerFactory API
-    virtual AbstractModelSynchronizer* createSynchronizer() const;
-
-    virtual QString supportedWorkType() const;
-    virtual QString supportedRemoteType() const;
-};
-
+    return new ByteArrayRawFileSynchronizer();
 }
 
-#endif
+ByteArrayRawFileSynchronizerFactory::~ByteArrayRawFileSynchronizerFactory() {}
+
+}

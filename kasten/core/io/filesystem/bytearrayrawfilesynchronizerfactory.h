@@ -20,32 +20,33 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KBYTEARRAYRAWFILESYNCHRONIZERTEST_H
-#define KBYTEARRAYRAWFILESYNCHRONIZERTEST_H
+#ifndef BYTEARRAYRAWFILESYNCHRONIZERFACTORY_H
+#define BYTEARRAYRAWFILESYNCHRONIZERFACTORY_H
 
-// Qt
-#include <QtCore/QObject>
+// lib
+#include "oktetakastencore_export.h"
+// Kasten core
+#include <abstractmodelsynchronizerfactory.h>
 
-class TestFileSystem;
 
+namespace Kasten
+{
 
-class KByteArrayRawFileSynchronizerFactoryTest : public QObject
+class OKTETAKASTENCORE_EXPORT ByteArrayRawFileSynchronizerFactory : public AbstractModelSynchronizerFactory
 {
   Q_OBJECT
 
-  private Q_SLOTS:
-    void initTestCase();
-    void cleanupTestCase();
+  public:
+    ByteArrayRawFileSynchronizerFactory();
+    virtual ~ByteArrayRawFileSynchronizerFactory();
 
-  private Q_SLOTS: // test functions
-    void testCreate();
-#if 0
-    void testLoadFromUrl();
-  private: // not working tests
-    void testLoadFromNotExistingUrl();
-#endif
-  private:
-    TestFileSystem *mFileSystem;
+  public: // AbstractModelSynchronizerFactory API
+    virtual AbstractModelSynchronizer* createSynchronizer() const;
+
+    virtual QString supportedWorkType() const;
+    virtual QString supportedRemoteType() const;
 };
+
+}
 
 #endif

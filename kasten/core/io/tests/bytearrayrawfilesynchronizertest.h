@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KBYTEARRAYRAWFILESYNCHRONIZERTEST_H
-#define KBYTEARRAYRAWFILESYNCHRONIZERTEST_H
+#ifndef BYTEARRAYRAWFILESYNCHRONIZERTEST_H
+#define BYTEARRAYRAWFILESYNCHRONIZERTEST_H
 
 // Qt
 #include <QtCore/QObject>
@@ -34,7 +34,7 @@ class TestFileSystem;
 namespace Kasten
 {
 
-class KByteArrayRawFileSynchronizerTest : public QObject
+class ByteArrayRawFileSynchronizerTest : public QObject
 {
   Q_OBJECT
 

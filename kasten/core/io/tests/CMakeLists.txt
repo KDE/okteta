@@ -36,19 +36,19 @@ set( oktetakastenio_LIB_SRCS
 kde4_add_library( oktetakastenio  STATIC ${oktetakastenio_LIB_SRCS} )
 
 
-########### kbytearrayrawfilesynchronizertest ###############
+########### bytearrayrawfilesynchronizertest ###############
 
-set( kbytearrayrawfilesynchronizertest_SRCS
-  kbytearrayrawfilesynchronizertest.cpp
+set( bytearrayrawfilesynchronizertest_SRCS
+  bytearrayrawfilesynchronizertest.cpp
   ${SUTDIR}/../document/bytearraydocument.cpp
-  ${SUTDIR}/filesystem/kbytearrayrawfilesynchronizer.cpp
+  ${SUTDIR}/filesystem/bytearrayrawfilesynchronizer.cpp
 )
 
-kde4_add_unit_test( kbytearrayrawfilesynchronizertest
-  TESTNAME oktetakasten-io-kbytearrayrawfilesynchronizertest
-  ${kbytearrayrawfilesynchronizertest_SRCS}
+kde4_add_unit_test( bytearrayrawfilesynchronizertest
+  TESTNAME oktetakasten-io-bytearrayrawfilesynchronizertest
+  ${bytearrayrawfilesynchronizertest_SRCS}
 )
-target_link_libraries( kbytearrayrawfilesynchronizertest
+target_link_libraries( bytearrayrawfilesynchronizertest
   oktetakastenio
   kastencore
   kastencoretestutil
@@ -58,20 +58,20 @@ target_link_libraries( kbytearrayrawfilesynchronizertest
   ${QT_QTTEST_LIBRARY}
 )
 
-########### kbytearrayrawfilesynchronizerfactorytest ###############
+########### bytearrayrawfilesynchronizerfactorytest ###############
 
-set( kbytearrayrawfilesynchronizerfactorytest_SRCS
-  kbytearrayrawfilesynchronizerfactorytest.cpp
+set( bytearrayrawfilesynchronizerfactorytest_SRCS
+  bytearrayrawfilesynchronizerfactorytest.cpp
   ${SUTDIR}/../document/bytearraydocument.cpp
-  ${SUTDIR}/filesystem/kbytearrayrawfilesynchronizer.cpp
-  ${SUTDIR}/filesystem/kbytearrayrawfilesynchronizerfactory.cpp
+  ${SUTDIR}/filesystem/bytearrayrawfilesynchronizer.cpp
+  ${SUTDIR}/filesystem/bytearrayrawfilesynchronizerfactory.cpp
 )
 
-kde4_add_unit_test( kbytearrayrawfilesynchronizerfactorytest
-  TESTNAME oktetakasten-io-kbytearrayrawfilesynchronizerfactorytest
-  ${kbytearrayrawfilesynchronizerfactorytest_SRCS}
+kde4_add_unit_test( bytearrayrawfilesynchronizerfactorytest
+  TESTNAME oktetakasten-io-bytearrayrawfilesynchronizerfactorytest
+  ${bytearrayrawfilesynchronizerfactorytest_SRCS}
 )
-target_link_libraries( kbytearrayrawfilesynchronizerfactorytest
+target_link_libraries( bytearrayrawfilesynchronizerfactorytest
   oktetakastenio
   kastencore
   kastencoretestutil

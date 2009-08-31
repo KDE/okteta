@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kbytearrayrawfilesynchronizerfactorytest.h"
+#include "bytearrayrawfilesynchronizerfactorytest.h"
 
 // test object
-#include <kbytearrayrawfilesynchronizerfactory.h>
+#include <bytearrayrawfilesynchronizerfactory.h>
 // lib
 #include <bytearraydocument.h>
 // test utils
@@ -42,7 +42,7 @@
 #include <QtCore/QDataStream>
 
 
-static const char TestDirectory[] = "kbytearrayrawfilesynchronizertest";
+static const char TestDirectory[] = "bytearrayrawfilesynchronizertest";
 static const char TestFileName[] = "test.data";
 static const char NotExistingUrl[] = "notexisting://";
 static const char FileProtocolName[] = "file://";
@@ -50,7 +50,7 @@ static const int TestDataSize = 50;
 static const char TestDataChar = 0;
 
 
-void KByteArrayRawFileSynchronizerFactoryTest::initTestCase()
+void ByteArrayRawFileSynchronizerFactoryTest::initTestCase()
 {
     QByteArray byteArray( TestDataSize, TestDataChar );
     ::textureByteArray( &byteArray );
@@ -71,13 +71,13 @@ void KByteArrayRawFileSynchronizerFactoryTest::initTestCase()
 //     QFile::copy(QString::fromLatin1(KDESRCDIR) + QLatin1String("/Paris"), mDataDir + QLatin1String("/Europe/Paris"));
 }
 
-void KByteArrayRawFileSynchronizerFactoryTest::cleanupTestCase()
+void ByteArrayRawFileSynchronizerFactoryTest::cleanupTestCase()
 {
     delete mFileSystem;
 }
 
 #if 0
-void KByteArrayRawFileSynchronizerFactoryTest::init()
+void ByteArrayRawFileSynchronizerFactoryTest::init()
 {
     ByteArrayModel = createByteArrayModel();
 
@@ -85,19 +85,19 @@ void KByteArrayRawFileSynchronizerFactoryTest::init()
 }
 #endif
 
-void KByteArrayRawFileSynchronizerFactoryTest::testCreate()
+void ByteArrayRawFileSynchronizerFactoryTest::testCreate()
 {
-    Kasten::KByteArrayRawFileSynchronizerFactory *factory = new Kasten::KByteArrayRawFileSynchronizerFactory();
+    Kasten::ByteArrayRawFileSynchronizerFactory *factory = new Kasten::ByteArrayRawFileSynchronizerFactory();
 
     QVERIFY( factory != 0 );
 
     delete factory;
 }
 #if 0
-void KByteArrayRawFileSynchronizerFactoryTest::testLoadFromUrl()
+void ByteArrayRawFileSynchronizerFactoryTest::testLoadFromUrl()
 {
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( FileProtocolName );
-    Kasten::KByteArrayRawFileSynchronizerFactory *factory = new Kasten::KByteArrayRawFileSynchronizerFactory();
+    Kasten::ByteArrayRawFileSynchronizerFactory *factory = new Kasten::ByteArrayRawFileSynchronizerFactory();
     AbstractDocument* document = factory->loadNewDocument( fileUrl );
 
     ByteArrayDocument *byteArrayDocument = qobject_cast<ByteArrayDocument *>( document );
@@ -114,11 +114,11 @@ void KByteArrayRawFileSynchronizerFactoryTest::testLoadFromUrl()
     delete factory;
 }
 
-void KByteArrayRawFileSynchronizerFactoryTest::testLoadFromNotExistingUrl()
+void ByteArrayRawFileSynchronizerFactoryTest::testLoadFromNotExistingUrl()
 {
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(NotExistingUrl) );
 
-    Kasten::KByteArrayRawFileSynchronizerFactory *factory = new Kasten::KByteArrayRawFileSynchronizerFactory();
+    Kasten::ByteArrayRawFileSynchronizerFactory *factory = new Kasten::ByteArrayRawFileSynchronizerFactory();
     AbstractDocument* document = factory->loadNewDocument( fileUrl );
 
     QVERIFY( document == 0 );
@@ -127,7 +127,7 @@ void KByteArrayRawFileSynchronizerFactoryTest::testLoadFromNotExistingUrl()
 }
 #endif
 #if 0
-void KByteArrayRawFileSynchronizerFactoryTest::testSaveToFile()
+void ByteArrayRawFileSynchronizerFactoryTest::testSaveToFile()
 {
     const QString filePath = mFileSystem->createFilePath( QLatin1String(TestFileName) );
 
@@ -157,4 +157,4 @@ TODO: save mit path als Parameter? Oder separat setzen? Wie Kopie speichern?
 }
 #endif
 
-QTEST_KDEMAIN_CORE( KByteArrayRawFileSynchronizerFactoryTest )
+QTEST_KDEMAIN_CORE( ByteArrayRawFileSynchronizerFactoryTest )

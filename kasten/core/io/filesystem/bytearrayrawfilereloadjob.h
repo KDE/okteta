@@ -30,7 +30,7 @@
 namespace Kasten
 {
 
-class KByteArrayRawFileSynchronizer;
+class ByteArrayRawFileSynchronizer;
 class ByteArrayRawFileReloadThread;
 
 class ByteArrayRawFileReloadJob : public AbstractFileSystemSyncFromRemoteJob
@@ -38,7 +38,7 @@ class ByteArrayRawFileReloadJob : public AbstractFileSystemSyncFromRemoteJob
   Q_OBJECT
 
   public:
-    ByteArrayRawFileReloadJob( KByteArrayRawFileSynchronizer *synchronizer );
+    ByteArrayRawFileReloadJob( ByteArrayRawFileSynchronizer *synchronizer );
     virtual ~ByteArrayRawFileReloadJob();
 
   protected: // AbstractFileSystemSyncFromRemoteJob API

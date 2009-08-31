@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kbytearrayrawfilesynchronizer.h"
+#include "bytearrayrawfilesynchronizer.h"
 
 // lib
 #include "bytearrayrawfileloadjob.h"
@@ -43,44 +43,44 @@
 namespace Kasten
 {
 
-KByteArrayRawFileSynchronizer::KByteArrayRawFileSynchronizer()
+ByteArrayRawFileSynchronizer::ByteArrayRawFileSynchronizer()
  : mDocument( 0 )
 {
     connect( this, SIGNAL(urlChanged(const KUrl&)), SLOT(onUrlChange( const KUrl & )) );
 }
 
-AbstractDocument* KByteArrayRawFileSynchronizer::document() const { return mDocument; }
+AbstractDocument* ByteArrayRawFileSynchronizer::document() const { return mDocument; }
 
-void KByteArrayRawFileSynchronizer::startOffering( AbstractDocument* document ) { Q_UNUSED(document) }
+void ByteArrayRawFileSynchronizer::startOffering( AbstractDocument* document ) { Q_UNUSED(document) }
 
-AbstractLoadJob *KByteArrayRawFileSynchronizer::startLoad( const KUrl &url )
+AbstractLoadJob *ByteArrayRawFileSynchronizer::startLoad( const KUrl &url )
 {
     return new ByteArrayRawFileLoadJob( this, url );
 }
 
-AbstractSyncToRemoteJob *KByteArrayRawFileSynchronizer::startSyncToRemote()
+AbstractSyncToRemoteJob *ByteArrayRawFileSynchronizer::startSyncToRemote()
 {
     return new ByteArrayRawFileWriteJob( this );
 }
 
-AbstractSyncFromRemoteJob *KByteArrayRawFileSynchronizer::startSyncFromRemote()
+AbstractSyncFromRemoteJob *ByteArrayRawFileSynchronizer::startSyncFromRemote()
 {
     return new ByteArrayRawFileReloadJob( this );
 }
 
-AbstractSyncWithRemoteJob *KByteArrayRawFileSynchronizer::startSyncWithRemote( const KUrl &url, AbstractModelSynchronizer::ConnectOption option  )
+AbstractSyncWithRemoteJob *ByteArrayRawFileSynchronizer::startSyncWithRemote( const KUrl &url, AbstractModelSynchronizer::ConnectOption option  )
 {
     return new ByteArrayRawFileWriteToJob( this, url, option );
 }
 
-AbstractConnectJob *KByteArrayRawFileSynchronizer::startConnect( AbstractDocument* document,
+AbstractConnectJob *ByteArrayRawFileSynchronizer::startConnect( AbstractDocument* document,
                                               const KUrl& url, AbstractModelSynchronizer::ConnectOption option )
 {
     return new ByteArrayRawFileConnectJob( this, document, url, option );
 }
 
 
-void KByteArrayRawFileSynchronizer::onUrlChange( const KUrl &url )
+void ByteArrayRawFileSynchronizer::onUrlChange( const KUrl &url )
 {
     mDocument->setTitle( url.fileName() );
 }

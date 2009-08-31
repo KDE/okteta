@@ -24,7 +24,7 @@
 #include "bytearrayrawfileconnectjob.h"
 
 // lib
-#include "kbytearrayrawfilesynchronizer.h"
+#include "bytearrayrawfilesynchronizer.h"
 #include "bytearrayrawfilewritethread.h"
 #include "bytearraydocument.h"
 // Qt
@@ -36,7 +36,7 @@
 namespace Kasten
 {
 
-ByteArrayRawFileConnectJob::ByteArrayRawFileConnectJob( KByteArrayRawFileSynchronizer *synchronizer,
+ByteArrayRawFileConnectJob::ByteArrayRawFileConnectJob( ByteArrayRawFileSynchronizer *synchronizer,
                                                         AbstractDocument* document,
                                                         const KUrl &url,
                                                         AbstractModelSynchronizer::ConnectOption option )
@@ -52,7 +52,7 @@ void ByteArrayRawFileConnectJob::startConnectWithFile()
     while( !writeThread->wait(100) )
         QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
 
-    qobject_cast<KByteArrayRawFileSynchronizer*>(synchronizer())->setDocument( byteArrayDocument );
+    qobject_cast<ByteArrayRawFileSynchronizer*>(synchronizer())->setDocument( byteArrayDocument );
     const bool success = writeThread->success();
     delete writeThread;
 

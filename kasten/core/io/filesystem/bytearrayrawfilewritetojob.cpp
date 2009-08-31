@@ -24,7 +24,7 @@
 #include "bytearrayrawfilewritetojob.h"
 
 // lib
-#include "kbytearrayrawfilesynchronizer.h"
+#include "bytearrayrawfilesynchronizer.h"
 #include "bytearrayrawfilewritethread.h"
 #include "bytearraydocument.h"
 // Qt
@@ -36,7 +36,7 @@
 namespace Kasten
 {
 
-ByteArrayRawFileWriteToJob::ByteArrayRawFileWriteToJob( KByteArrayRawFileSynchronizer *synchronizer,
+ByteArrayRawFileWriteToJob::ByteArrayRawFileWriteToJob( ByteArrayRawFileSynchronizer *synchronizer,
                                          const KUrl& url, AbstractModelSynchronizer::ConnectOption option )
  : AbstractFileSystemSyncWithRemoteJob( synchronizer, url, option )
 {}

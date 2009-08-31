@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KBYTEARRAYRAWFILESYNCHRONIZER_H
-#define KBYTEARRAYRAWFILESYNCHRONIZER_H
+#ifndef BYTEARRAYRAWFILESYNCHRONIZER_H
+#define BYTEARRAYRAWFILESYNCHRONIZER_H
 
 // lib
 #include "oktetakastencore_export.h"
@@ -34,7 +34,7 @@ namespace Kasten
 
 class ByteArrayDocument;
 
-class OKTETAKASTENCORE_EXPORT KByteArrayRawFileSynchronizer : public AbstractModelFileSystemSynchronizer
+class OKTETAKASTENCORE_EXPORT ByteArrayRawFileSynchronizer : public AbstractModelFileSystemSynchronizer
 {
     Q_OBJECT
 
@@ -42,7 +42,7 @@ class OKTETAKASTENCORE_EXPORT KByteArrayRawFileSynchronizer : public AbstractMod
   friend class ByteArrayRawFileConnectJob;
 
   public:
-    KByteArrayRawFileSynchronizer();
+    ByteArrayRawFileSynchronizer();
 
   public: // AbstractModelSynchronizer API
     virtual void startOffering( AbstractDocument* document );
@@ -66,7 +66,7 @@ class OKTETAKASTENCORE_EXPORT KByteArrayRawFileSynchronizer : public AbstractMod
 };
 
 
-inline void KByteArrayRawFileSynchronizer::setDocument( ByteArrayDocument *document ) { mDocument = document; }
+inline void ByteArrayRawFileSynchronizer::setDocument( ByteArrayDocument *document ) { mDocument = document; }
 
 }
 

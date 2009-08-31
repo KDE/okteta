@@ -20,33 +20,32 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kbytearrayrawfilesynchronizerfactory.h"
+#ifndef BYTEARRAYRAWFILESYNCHRONIZERTEST_H
+#define BYTEARRAYRAWFILESYNCHRONIZERTEST_H
 
-// lib
-#include "kbytearrayrawfilesynchronizer.h"
-#include "bytearraydocument.h"
-// KDE
-#include <KUrl>
 // Qt
-#include <QtCore/QLatin1String>
+#include <QtCore/QObject>
+
+class TestFileSystem;
 
 
-namespace Kasten
+class ByteArrayRawFileSynchronizerFactoryTest : public QObject
 {
+  Q_OBJECT
 
-KByteArrayRawFileSynchronizerFactory::KByteArrayRawFileSynchronizerFactory() {}
+  private Q_SLOTS:
+    void initTestCase();
+    void cleanupTestCase();
 
-// could be set to base class as value, is only one object per factory at runtime
-// and settable in desktop file
-QString KByteArrayRawFileSynchronizerFactory::supportedWorkType() const { return QLatin1String("ByteArrayDocument");}
-QString KByteArrayRawFileSynchronizerFactory::supportedRemoteType() const { return QLatin1String("application/octet-stream");}
+  private Q_SLOTS: // test functions
+    void testCreate();
+#if 0
+    void testLoadFromUrl();
+  private: // not working tests
+    void testLoadFromNotExistingUrl();
+#endif
+  private:
+    TestFileSystem *mFileSystem;
+};
 
-
-AbstractModelSynchronizer* KByteArrayRawFileSynchronizerFactory::createSynchronizer() const
-{
-    return new KByteArrayRawFileSynchronizer();
-}
-
-KByteArrayRawFileSynchronizerFactory::~KByteArrayRawFileSynchronizerFactory() {}
-
-}
+#endif

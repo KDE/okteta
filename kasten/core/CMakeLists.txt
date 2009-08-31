@@ -26,8 +26,8 @@ set( okteta_kastencore_io_filesystem_SRCS
   io/filesystem/bytearrayrawfilewritejob.cpp
   io/filesystem/bytearrayrawfilereloadjob.cpp
   io/filesystem/bytearrayrawfilewritetojob.cpp
-  io/filesystem/kbytearrayrawfilesynchronizer.cpp
-  io/filesystem/kbytearrayrawfilesynchronizerfactory.cpp
+  io/filesystem/bytearrayrawfilesynchronizer.cpp
+  io/filesystem/bytearrayrawfilesynchronizerfactory.cpp
 )
 
 
@@ -45,8 +45,8 @@ set( oktete_kastencore_LIB_HDRS
   document/bytearrayselection.h
   document/bytearraydocument.h
   document/bytearraydocumentfactory.h
-  io/filesystem/kbytearrayrawfilesynchronizer.h
-  io/filesystem/kbytearrayrawfilesynchronizerfactory.h
+  io/filesystem/bytearrayrawfilesynchronizer.h
+  io/filesystem/bytearrayrawfilesynchronizerfactory.h
 )
 
 kde4_add_library( oktetakastencore  SHARED ${okteta_kastencore_LIB_SRCS} )

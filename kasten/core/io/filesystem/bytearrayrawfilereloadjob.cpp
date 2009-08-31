@@ -24,7 +24,7 @@
 #include "bytearrayrawfilereloadjob.h"
 
 // lib
-#include "kbytearrayrawfilesynchronizer.h"
+#include "bytearrayrawfilesynchronizer.h"
 #include "bytearrayrawfilereloadthread.h"
 #include "bytearraydocument.h"
 // Okteta core
@@ -38,7 +38,7 @@
 namespace Kasten
 {
 
-ByteArrayRawFileReloadJob::ByteArrayRawFileReloadJob( KByteArrayRawFileSynchronizer *synchronizer )
+ByteArrayRawFileReloadJob::ByteArrayRawFileReloadJob( ByteArrayRawFileSynchronizer *synchronizer )
  : AbstractFileSystemSyncFromRemoteJob( synchronizer )
 {}
 

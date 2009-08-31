@@ -30,7 +30,7 @@
 namespace Kasten
 {
 
-class KByteArrayRawFileSynchronizer;
+class ByteArrayRawFileSynchronizer;
 class ByteArrayRawFileWriteThread;
 
 class ByteArrayRawFileWriteJob : public AbstractFileSystemSyncToRemoteJob
@@ -38,7 +38,7 @@ class ByteArrayRawFileWriteJob : public AbstractFileSystemSyncToRemoteJob
   Q_OBJECT
 
   public:
-    ByteArrayRawFileWriteJob( KByteArrayRawFileSynchronizer *synchronizer );
+    ByteArrayRawFileWriteJob( ByteArrayRawFileSynchronizer *synchronizer );
     virtual ~ByteArrayRawFileWriteJob();
 
   protected: // AbstractFileSystemSyncToRemoteJob API
