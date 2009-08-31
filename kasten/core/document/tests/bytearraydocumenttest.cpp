@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kbytearraydocumenttest.h"
+#include "bytearraydocumenttest.h"
 
 // test object
-#include <kbytearraydocument.h>
+#include <bytearraydocument.h>
 // Okteta core
 #include <piecetablebytearraymodel.h>
 // Qt
@@ -38,9 +38,9 @@ namespace Kasten
 static const char Title[] = "title";
 
 
-void KByteArrayDocumentTest::testCreateNew()
+void ByteArrayDocumentTest::testCreateNew()
 {
-    KByteArrayDocument *document = new KByteArrayDocument("New created for test.");
+    ByteArrayDocument* document = new ByteArrayDocument("New created for test.");
 
     QVERIFY( document != 0 );
     QVERIFY( !document->hasLocalChanges() );
@@ -53,9 +53,9 @@ void KByteArrayDocumentTest::testCreateNew()
     delete document;
 }
 
-void KByteArrayDocumentTest::testSetTitle()
+void ByteArrayDocumentTest::testSetTitle()
 {
-    KByteArrayDocument *document = new KByteArrayDocument("New created for test.");
+    ByteArrayDocument* document = new ByteArrayDocument("New created for test.");
     QSignalSpy* titleChangeSpy =  new QSignalSpy( document, SIGNAL(titleChanged( const QString& )) );
 
     const QLatin1String title( Title );
@@ -72,4 +72,4 @@ void KByteArrayDocumentTest::testSetTitle()
 
 }
 
-QTEST_MAIN( Kasten::KByteArrayDocumentTest )
+QTEST_MAIN( Kasten::ByteArrayDocumentTest )

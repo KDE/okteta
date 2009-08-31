@@ -26,7 +26,7 @@
 // lib
 #include "kbytearrayrawfilesynchronizer.h"
 #include "bytearrayrawfileloadthread.h"
-#include "kbytearraydocument.h"
+#include "bytearraydocument.h"
 // Qt
 #include <QtGui/QApplication>
 #include <QtCore/QDataStream>
@@ -47,7 +47,7 @@ void ByteArrayRawFileLoadJob::startLoadFromFile()
     while( !loadThread->wait(100) )
         QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
 
-    KByteArrayDocument *document = loadThread->document();
+    ByteArrayDocument *document = loadThread->document();
     qobject_cast<KByteArrayRawFileSynchronizer*>(synchronizer())->setDocument( document );
 
     delete loadThread;

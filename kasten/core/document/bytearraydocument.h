@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KBYTEARRAYDOCUMENT_H
-#define KBYTEARRAYDOCUMENT_H
+#ifndef BYTEARRAYDOCUMENT_H
+#define BYTEARRAYDOCUMENT_H
 
 // lib
 #include "oktetakastencore_export.h"
@@ -43,9 +43,9 @@ class PieceTableByteArrayModel;
 namespace Kasten
 {
 
-class OKTETAKASTENCORE_EXPORT KByteArrayDocument : public AbstractDocument,
-                                                   public If::Versionable,
-                                                   public If::UserListable//,
+class OKTETAKASTENCORE_EXPORT ByteArrayDocument : public AbstractDocument,
+                                                  public If::Versionable,
+                                                  public If::UserListable//,
 //                                                    public If::ByteArray
 {
   Q_OBJECT
@@ -56,9 +56,9 @@ class OKTETAKASTENCORE_EXPORT KByteArrayDocument : public AbstractDocument,
   )
 
   public:
-    explicit KByteArrayDocument( const QString &initDescription );
-    KByteArrayDocument( Okteta::PieceTableByteArrayModel *byteArray, const QString &initDescription );
-    virtual ~KByteArrayDocument();
+    explicit ByteArrayDocument( const QString &initDescription );
+    ByteArrayDocument( Okteta::PieceTableByteArrayModel *byteArray, const QString &initDescription );
+    virtual ~ByteArrayDocument();
 
   public: // AbstractModel API
     virtual QString title() const;

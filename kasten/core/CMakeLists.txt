@@ -12,8 +12,8 @@ include_directories(
 )
 
 set( okteta_kastencore_document_SRCS
-  document/kbytearraydocumentfactory.cpp
-  document/kbytearraydocument.cpp
+  document/bytearraydocumentfactory.cpp
+  document/bytearraydocument.cpp
   document/kbytearrayselection.cpp
 )
 
@@ -43,8 +43,8 @@ set( okteta_kastencore_LIB_SRCS
 set( oktete_kastencore_LIB_HDRS
   oktetakastencore_export.h
   document/kbytearrayselection.h
-  document/kbytearraydocument.h
-  document/kbytearraydocumentfactory.h
+  document/bytearraydocument.h
+  document/bytearraydocumentfactory.h
   io/filesystem/kbytearrayrawfilesynchronizer.h
   io/filesystem/kbytearrayrawfilesynchronizerfactory.h
 )

@@ -28,7 +28,7 @@
 #include "bytearrayrawfilewritejob.h"
 #include "bytearrayrawfilereloadjob.h"
 #include "bytearrayrawfilewritetojob.h"
-#include "kbytearraydocument.h"
+#include "bytearraydocument.h"
 // Okteta core
 #include <piecetablebytearraymodel.h>
 // KDE

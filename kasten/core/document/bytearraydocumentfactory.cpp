@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,24 +20,36 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KBYTEARRAYDOCUMENTTEST_H
-#define KBYTEARRAYDOCUMENTTEST_H
+#include "bytearraydocumentfactory.h"
 
-// Qt
-#include <QtCore/QObject>
+// lib
+#include "bytearraydocument.h"
+// Kasten core
+#include <person.h>
+// KDE
+#include <KLocale>
+
 
 namespace Kasten
 {
 
-class KByteArrayDocumentTest : public QObject
+static int newByteArrayDocumentCounter = 0;
+
+
+AbstractDocument* ByteArrayDocumentFactory::create()
 {
-  Q_OBJECT
+    ByteArrayDocument* document = new ByteArrayDocument( i18nc("The byte array was new created.","New created.") );
 
-  private Q_SLOTS: // test functions
-    void testCreateNew();
-    void testSetTitle();
-};
+    ++newByteArrayDocumentCounter;
 
+    // TODO: use document->typeName() ?
+    document->setTitle(
+        i18ncp("numbered title for a created document without a filename",
+               "[New Byte Array]","[New Byte Array %1]",newByteArrayDocumentCounter) );
+
+    document->setOwner( Person::createEgo() );
+
+    return document;
 }
 
-#endif
+}

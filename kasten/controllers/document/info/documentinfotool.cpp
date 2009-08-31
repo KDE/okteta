@@ -23,7 +23,7 @@
 #include "documentinfotool.h"
 
 // lib
-#include <kbytearraydocument.h>
+#include <bytearraydocument.h>
 // Kasten core
 #include <documentsyncmanager.h>
 #include <abstractmodelsynchronizer.h>
@@ -102,7 +102,7 @@ void DocumentInfoTool::setTargetModel( AbstractModel* model )
     if( mDocument ) mDocument->disconnect( this );
     if( mByteArrayModel ) mByteArrayModel->disconnect( this );
 
-    mDocument = model ? model->findBaseModel<KByteArrayDocument*>() : 0;
+    mDocument = model ? model->findBaseModel<ByteArrayDocument*>() : 0;
     mByteArrayModel = mDocument ? mDocument->content() : 0;
 
     const bool hasDocument = ( mDocument != 0 );

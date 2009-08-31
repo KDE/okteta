@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,21 +20,24 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KBYTEARRAYDOCUMENTFACTORYTEST_H
-#define KBYTEARRAYDOCUMENTFACTORYTEST_H
+#ifndef BYTEARRAYDOCUMENTFACTORY_H
+#define BYTEARRAYDOCUMENTFACTORY_H
 
-// Qt
-#include <QtCore/QObject>
+// lib
+#include "oktetakastencore_export.h"
+// Kasten core
+#include <abstractdocumentfactory.h>
+
 
 namespace Kasten
 {
 
-class KByteArrayDocumentFactoryTest : public QObject
+class OKTETAKASTENCORE_EXPORT ByteArrayDocumentFactory : public AbstractDocumentFactory
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  private Q_SLOTS: // test functions
-    void testCreate();
+  public: // AbstractDocumentFactory API
+    virtual AbstractDocument* create();
 };
 
 }

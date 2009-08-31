@@ -25,7 +25,7 @@
 // test object
 #include <kbytearrayrawfilesynchronizerfactory.h>
 // lib
-#include <kbytearraydocument.h>
+#include <bytearraydocument.h>
 // test utils
 #include <util/filesystem.h>
 #include <util/fill.h>
@@ -100,7 +100,7 @@ void KByteArrayRawFileSynchronizerFactoryTest::testLoadFromUrl()
     Kasten::KByteArrayRawFileSynchronizerFactory *factory = new Kasten::KByteArrayRawFileSynchronizerFactory();
     AbstractDocument* document = factory->loadNewDocument( fileUrl );
 
-    KByteArrayDocument *byteArrayDocument = qobject_cast<KByteArrayDocument *>( document );
+    ByteArrayDocument *byteArrayDocument = qobject_cast<ByteArrayDocument *>( document );
 
     QVERIFY( document != 0 );
     QVERIFY( byteArrayDocument != 0 );
@@ -132,7 +132,7 @@ void KByteArrayRawFileSynchronizerFactoryTest::testSaveToFile()
     const QString filePath = mFileSystem->createFilePath( QLatin1String(TestFileName) );
 
 
-    KByteArrayDocument *document = new KByteArrayDocument();
+    ByteArrayDocument *document = new ByteArrayDocument();
     Okteta::PieceTableByteArrayModel *byteArray = document->content();
 
     // fill array
@@ -144,7 +144,7 @@ void KByteArrayRawFileSynchronizerFactoryTest::testSaveToFile()
 TODO: save mit path als Parameter? Oder separat setzen? Wie Kopie speichern?
 
     // load into other and...
-    KByteArrayDocument *otherDocument = new KByteArrayDocument( filePath );
+    ByteArrayDocument *otherDocument = new ByteArrayDocument( filePath );
 
     QVERIFY( document != 0 );
 

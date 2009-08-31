@@ -26,7 +26,7 @@
 #include "bookmarkeditpopup.h"
 // lib
 #include <bytearrayview.h>
-#include <kbytearraydocument.h>
+#include <bytearraydocument.h>
 // Kasten core
 #include <abstractmodel.h>
 // Okteta gui
@@ -98,8 +98,8 @@ void BookmarksController::setTargetModel( AbstractModel* model )
 
     mByteArrayDisplay = model ? model->findBaseModel<ByteArrayView*>() : 0;
 
-    KByteArrayDocument* document =
-        mByteArrayDisplay ? qobject_cast<KByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
+    ByteArrayDocument* document =
+        mByteArrayDisplay ? qobject_cast<ByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
     mByteArray = document ? document->content() : 0;
     mBookmarks = ( mByteArray && mByteArrayDisplay ) ? qobject_cast<Okteta::Bookmarkable*>( mByteArray ) : 0;
 

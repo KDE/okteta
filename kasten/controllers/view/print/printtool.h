@@ -35,7 +35,7 @@ namespace Kasten
 {
 
 class ByteArrayView;
-class KByteArrayDocument;
+class ByteArrayDocument;
 class AbstractModel;
 
 
@@ -76,7 +76,7 @@ class PrintTool : public QObject
     void viewChanged( bool hasView );
 
   protected:
-    KByteArrayDocument *mDocument;
+    ByteArrayDocument *mDocument;
 
     ByteArrayView* mByteArrayDisplay;
     Okteta::AbstractByteArrayModel *mByteArrayModel;

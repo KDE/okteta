@@ -34,7 +34,7 @@ class QString;
 namespace Kasten
 {
 
-class KByteArrayDocument;
+class ByteArrayDocument;
 
 
 class ByteArrayRawFileReloadThread : public QThread
@@ -42,7 +42,7 @@ class ByteArrayRawFileReloadThread : public QThread
   Q_OBJECT
   public:
     ByteArrayRawFileReloadThread( QObject *parent,
-                                  /*KByteArrayDocument *document, */const QString &filePath );
+                                  /*ByteArrayDocument *document, */const QString &filePath );
     virtual ~ByteArrayRawFileReloadThread();
 
   public: // QThread API
@@ -57,7 +57,7 @@ class ByteArrayRawFileReloadThread : public QThread
     void documentReloaded( bool success );
 
   protected:
-//     KByteArrayDocument *mDocument;
+//     ByteArrayDocument *mDocument;
     const QString mFilePath;
 
     bool mSuccess;

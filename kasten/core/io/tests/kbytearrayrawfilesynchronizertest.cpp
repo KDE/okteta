@@ -26,7 +26,7 @@
 // test object
 #include <kbytearrayrawfilesynchronizer.h>
 // lib
-#include <kbytearraydocument.h>
+#include <bytearraydocument.h>
 // test utils
 #include <util/filesystem.h>
 #include <util/fill.h>
@@ -103,7 +103,7 @@ void KByteArrayRawFileSynchronizerTest::testLoadFromUrl()
     synchronizer->startLoad( fileUrl )->exec();
     AbstractDocument* document = synchronizer->document();
 
-    KByteArrayDocument* byteArrayDocument = qobject_cast<KByteArrayDocument*>( document );
+    ByteArrayDocument* byteArrayDocument = qobject_cast<ByteArrayDocument*>( document );
 
     QVERIFY( document != 0 );
     QVERIFY( byteArrayDocument != 0 );
@@ -132,7 +132,7 @@ void KByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
 {
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( FileProtocolName );
 
-    KByteArrayDocument* document = new Kasten::KByteArrayDocument("New created for test.");
+    ByteArrayDocument* document = new Kasten::ByteArrayDocument("New created for test.");
     Okteta::PieceTableByteArrayModel* byteArray =
         qobject_cast<Okteta::PieceTableByteArrayModel*>( document->content() );
 
@@ -147,7 +147,7 @@ void KByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
     QCOMPARE( synchronizer->document(), document );
 
 //     // load into other and...
-//     KByteArrayDocument* otherDocument = new KByteArrayDocument( filePath );
+//     ByteArrayDocument* otherDocument = new ByteArrayDocument( filePath );
 
 //     QVERIFY( document != 0 );
 

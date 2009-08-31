@@ -26,7 +26,7 @@
 #include "partfactory.h"
 #include "browserextension.h"
 // Okteta Kasten
-#include <kbytearraydocument.h>
+#include <bytearraydocument.h>
 #include <bytearrayview.h>
 #include <filesystem/kbytearrayrawfilesynchronizerfactory.h>
 #include <overwriteonly/overwriteonlycontroller.h>
@@ -130,7 +130,7 @@ OktetaPart::OktetaPart( QObject* parent,
 
     // TODO: BrowserExtension might rely on existing objects (session snap while loadJob),
     // so this hack just creates some dummies
-    mDocument = new Kasten::KByteArrayDocument( QString() );
+    mDocument = new Kasten::ByteArrayDocument( QString() );
     mDisplay = new Kasten::ByteArrayView( mDocument );
 
     if( modus == BrowserViewModus )
@@ -180,7 +180,7 @@ void OktetaPart::onDocumentLoaded( Kasten::AbstractDocument* document )
         delete mDisplay;
         delete mDocument;
 
-        mDocument = static_cast<Kasten::KByteArrayDocument*>( document );
+        mDocument = static_cast<Kasten::ByteArrayDocument*>( document );
         mDocument->setReadOnly( mModus != ReadWriteModus );
         connect( mDocument, SIGNAL(syncStatesChanged( Kasten::AbstractDocument::SyncStates )),
                  SLOT(onModified( int )) );

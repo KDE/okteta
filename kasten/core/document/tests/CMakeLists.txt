@@ -17,18 +17,18 @@ include_directories(
   ${SUTDIR}/../../../libs/kasten/core/tests
 )
 
-########### kbytearraydocumenttest ###############
+########### bytearraydocumenttest ###############
 
-set( kbytearraydocumenttest_SRCS
-  kbytearraydocumenttest.cpp
-  ${SUTDIR}/kbytearraydocument.cpp
+set( bytearraydocumenttest_SRCS
+  bytearraydocumenttest.cpp
+  ${SUTDIR}/bytearraydocument.cpp
 )
 
-kde4_add_unit_test( kbytearraydocumenttest
-  TESTNAME oktetakasten-document-kbytearraydocumenttest
-  ${kbytearraydocumenttest_SRCS}
+kde4_add_unit_test( bytearraydocumenttest
+  TESTNAME oktetakasten-document-bytearraydocumenttest
+  ${bytearraydocumenttest_SRCS}
 )
-target_link_libraries( kbytearraydocumenttest
+target_link_libraries( bytearraydocumenttest
   kastencore
   testoktetacore
   ${KDE4_KIO_LIBS}
@@ -36,19 +36,19 @@ target_link_libraries( kbytearraydocumenttest
 )
 
 
-########### kbytearraydocumentfactorytest ###############
+########### bytearraydocumentfactorytest ###############
 
-set( kbytearraydocumentfactorytest_SRCS
-  kbytearraydocumentfactorytest.cpp
-  ${SUTDIR}/kbytearraydocument.cpp
-  ${SUTDIR}/kbytearraydocumentfactory.cpp
+set( bytearraydocumentfactorytest_SRCS
+  bytearraydocumentfactorytest.cpp
+  ${SUTDIR}/bytearraydocument.cpp
+  ${SUTDIR}/bytearraydocumentfactory.cpp
 )
 
-kde4_add_unit_test( kbytearraydocumentfactorytest
-  TESTNAME oktetakasten-document-kbytearraydocumentfactorytest
-  ${kbytearraydocumentfactorytest_SRCS}
+kde4_add_unit_test( bytearraydocumentfactorytest
+  TESTNAME oktetakasten-document-bytearraydocumentfactorytest
+  ${bytearraydocumentfactorytest_SRCS}
 )
-target_link_libraries( kbytearraydocumentfactorytest
+target_link_libraries( bytearraydocumentfactorytest
   kastencore
   oktetacoretestutil
   testoktetacore

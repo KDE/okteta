@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,36 +20,34 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kbytearraydocumentfactory.h"
+#include "bytearraydocumentfactorytest.h"
 
+// test object
+#include <bytearraydocumentfactory.h>
 // lib
-#include "kbytearraydocument.h"
-// Kasten core
-#include <person.h>
+#include <bytearraydocument.h>
 // KDE
-#include <KLocale>
+#include <qtest_kde.h>
 
 
 namespace Kasten
 {
 
-static int newByteArrayDocumentCounter = 0;
-
-
-AbstractDocument* KByteArrayDocumentFactory::create()
+void ByteArrayDocumentFactoryTest::testCreate()
 {
-    KByteArrayDocument *document = new KByteArrayDocument( i18nc("The byte array was new created.","New created.") );
+    ByteArrayDocumentFactory* factory = new ByteArrayDocumentFactory();
 
-    ++newByteArrayDocumentCounter;
+    AbstractDocument* document = factory->create();
+    ByteArrayDocument* byteArrayDocument = qobject_cast<ByteArrayDocument*>( document );
 
-    // TODO: use document->typeName() ?
-    document->setTitle(
-        i18ncp("numbered title for a created document without a filename",
-               "[New Byte Array]","[New Byte Array %1]",newByteArrayDocumentCounter) );
+    QVERIFY( document != 0 );
+    QVERIFY( byteArrayDocument != 0 );
+    QCOMPARE( document->hasLocalChanges(), false );
 
-    document->setOwner( Person::createEgo() );
-
-    return document;
+    delete document;
+    delete factory;
 }
 
 }
+
+QTEST_KDEMAIN_CORE( Kasten::ByteArrayDocumentFactoryTest )

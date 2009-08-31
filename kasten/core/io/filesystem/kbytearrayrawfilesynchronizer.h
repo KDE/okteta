@@ -32,7 +32,7 @@
 namespace Kasten
 {
 
-class KByteArrayDocument;
+class ByteArrayDocument;
 
 class OKTETAKASTENCORE_EXPORT KByteArrayRawFileSynchronizer : public AbstractModelFileSystemSynchronizer
 {
@@ -56,17 +56,17 @@ class OKTETAKASTENCORE_EXPORT KByteArrayRawFileSynchronizer : public AbstractMod
     virtual AbstractDocument* document() const;
 
   protected:
-    void setDocument( KByteArrayDocument *document );
+    void setDocument( ByteArrayDocument *document );
 
   protected Q_SLOTS:
     void onUrlChange( const KUrl &url );
 
   protected:
-    KByteArrayDocument *mDocument;
+    ByteArrayDocument *mDocument;
 };
 
 
-inline void KByteArrayRawFileSynchronizer::setDocument( KByteArrayDocument *document ) { mDocument = document; }
+inline void KByteArrayRawFileSynchronizer::setDocument( ByteArrayDocument *document ) { mDocument = document; }
 
 }
 

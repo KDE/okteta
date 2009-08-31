@@ -23,7 +23,7 @@
 #include "bytearrayrawfilewritethread.h"
 
 // lib
-#include "kbytearraydocument.h"
+#include "bytearraydocument.h"
 // Okteta core
 #include <piecetablebytearraymodel.h>
 // KDE

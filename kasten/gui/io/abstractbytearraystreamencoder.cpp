@@ -24,7 +24,7 @@
 
 // lib
 #include <bytearrayview.h>
-#include <kbytearraydocument.h>
+#include <bytearraydocument.h>
 #include <kbytearrayselection.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
@@ -47,7 +47,7 @@ QString AbstractByteArrayStreamEncoder::modelTypeName( AbstractModel* model, con
 {
 Q_UNUSED( selection )
 
-    const KByteArrayDocument* byteArrayDocument = model->findBaseModel<const KByteArrayDocument*>();
+    const ByteArrayDocument* byteArrayDocument = model->findBaseModel<const ByteArrayDocument*>();
 
     return ( byteArrayDocument == 0 ) ? QString() : byteArrayDocument->typeName();
 }
@@ -58,8 +58,8 @@ bool AbstractByteArrayStreamEncoder::encodeToStream( QIODevice* device,
 {
     const ByteArrayView* byteArrayDisplay = qobject_cast<const ByteArrayView*>( model );
 
-    const KByteArrayDocument* byteArrayDocument =
-        byteArrayDisplay ? qobject_cast<const KByteArrayDocument*>( byteArrayDisplay->baseModel() ) : 0;
+    const ByteArrayDocument* byteArrayDocument =
+        byteArrayDisplay ? qobject_cast<const ByteArrayDocument*>( byteArrayDisplay->baseModel() ) : 0;
     if( byteArrayDocument == 0 )
         return false;
 
@@ -81,8 +81,8 @@ QString AbstractByteArrayStreamEncoder::previewData( AbstractModel* model, const
 {
     const ByteArrayView* byteArrayDisplay = qobject_cast<const ByteArrayView*>( model );
 
-    const KByteArrayDocument* byteArrayDocument =
-        byteArrayDisplay ? qobject_cast<const KByteArrayDocument*>( byteArrayDisplay->baseModel() ) : 0;
+    const ByteArrayDocument* byteArrayDocument =
+        byteArrayDisplay ? qobject_cast<const ByteArrayDocument*>( byteArrayDisplay->baseModel() ) : 0;
     if( byteArrayDocument == 0 )
         return QString();
 

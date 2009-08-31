@@ -28,7 +28,7 @@
 
 namespace Kasten {
 class ByteArrayView;
-class KByteArrayDocument;
+class ByteArrayDocument;
 class PrintController;
 class AbstractXmlGuiController;
 class AbstractDocument;
@@ -82,7 +82,7 @@ class OktetaPart : public KParts::ReadWritePart
     const Modus mModus;
     QVBoxLayout* mLayout;
 
-    Kasten::KByteArrayDocument* mDocument;
+    Kasten::ByteArrayDocument* mDocument;
     Kasten::ByteArrayView* mDisplay;
 
     Kasten::PrintController* mPrintController;

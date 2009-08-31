@@ -26,7 +26,7 @@
 #include "bytetablemodel.h"
 // lib
 #include <bytearrayview.h>
-#include <kbytearraydocument.h>
+#include <bytearraydocument.h>
 // Okteta core
 #include <character.h>
 #include <charcodec.h>
@@ -64,8 +64,8 @@ void ByteTableTool::setTargetModel( AbstractModel* model )
 
     mByteArrayDisplay = model ? qobject_cast<ByteArrayView*>( model ) : 0;
 
-    KByteArrayDocument* document =
-        mByteArrayDisplay ? qobject_cast<KByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
+    ByteArrayDocument* document =
+        mByteArrayDisplay ? qobject_cast<ByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
     const bool hasView = ( mByteArrayDisplay && mByteArrayModel );

@@ -35,7 +35,7 @@
 #include <abstractbytearrayfilter.h>
 // lib
 #include <bytearrayview.h>
-#include <kbytearraydocument.h>
+#include <bytearraydocument.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
 #include <changesdescribable.h>
@@ -86,8 +86,8 @@ void FilterTool::setTargetModel( AbstractModel* model )
 
     mByteArrayDisplay = model ? model->findBaseModel<ByteArrayView*>() : 0;
 
-    KByteArrayDocument *document =
-        mByteArrayDisplay ? qobject_cast<KByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
+    ByteArrayDocument *document =
+        mByteArrayDisplay ? qobject_cast<ByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
     const bool hasByteArray = ( mByteArrayModel && mByteArrayDisplay );

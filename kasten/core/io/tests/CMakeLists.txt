@@ -40,7 +40,7 @@ kde4_add_library( oktetakastenio  STATIC ${oktetakastenio_LIB_SRCS} )
 
 set( kbytearrayrawfilesynchronizertest_SRCS
   kbytearrayrawfilesynchronizertest.cpp
-  ${SUTDIR}/../document/kbytearraydocument.cpp
+  ${SUTDIR}/../document/bytearraydocument.cpp
   ${SUTDIR}/filesystem/kbytearrayrawfilesynchronizer.cpp
 )
 
@@ -62,7 +62,7 @@ target_link_libraries( kbytearrayrawfilesynchronizertest
 
 set( kbytearrayrawfilesynchronizerfactorytest_SRCS
   kbytearrayrawfilesynchronizerfactorytest.cpp
-  ${SUTDIR}/../document/kbytearraydocument.cpp
+  ${SUTDIR}/../document/bytearraydocument.cpp
   ${SUTDIR}/filesystem/kbytearrayrawfilesynchronizer.cpp
   ${SUTDIR}/filesystem/kbytearrayrawfilesynchronizerfactory.cpp
 )

@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kbytearraydocument.h"
+#include "bytearraydocument.h"
 
 //
 #include <person.h>
@@ -36,7 +36,7 @@
 namespace Kasten
 {
 
-KByteArrayDocument::KByteArrayDocument( const QString &initDescription )
+ByteArrayDocument::ByteArrayDocument( const QString &initDescription )
 : mByteArray( new Okteta::PieceTableByteArrayModel() ),
   mInitDescription( initDescription )
 {
@@ -48,7 +48,7 @@ KByteArrayDocument::KByteArrayDocument( const QString &initDescription )
              SLOT(onHeadVersionDescriptionChanged( const QString& )) );
 }
 
-KByteArrayDocument::KByteArrayDocument( Okteta::PieceTableByteArrayModel *byteArray, const QString &initDescription )
+ByteArrayDocument::ByteArrayDocument( Okteta::PieceTableByteArrayModel *byteArray, const QString &initDescription )
 : mByteArray( byteArray ),
   mInitDescription( initDescription )
 {
@@ -60,7 +60,7 @@ KByteArrayDocument::KByteArrayDocument( Okteta::PieceTableByteArrayModel *byteAr
              SLOT(onHeadVersionDescriptionChanged( const QString& )) );
 }
 #if 0
-KByteArrayDocument::KByteArrayDocument( const QString &filePath )
+ByteArrayDocument::ByteArrayDocument( const QString &filePath )
 : mByteArray( new Okteta::ByteArrayModel() )
 {
     if( load(filePath) )
@@ -69,65 +69,65 @@ KByteArrayDocument::KByteArrayDocument( const QString &filePath )
     }
 }
 #endif
-Okteta::AbstractByteArrayModel* KByteArrayDocument::content() const { return mByteArray; }
+Okteta::AbstractByteArrayModel* ByteArrayDocument::content() const { return mByteArray; }
 
-QString KByteArrayDocument::title() const { return mTitle; }
-QString KByteArrayDocument::mimeType() const { return QLatin1String("KByteArrayDocument"); }
-QString KByteArrayDocument::typeName() const { return i18nc( "name of the data type", "Byte Array" ); }
+QString ByteArrayDocument::title() const { return mTitle; }
+QString ByteArrayDocument::mimeType() const { return QLatin1String("ByteArrayDocument"); }
+QString ByteArrayDocument::typeName() const { return i18nc( "name of the data type", "Byte Array" ); }
 
-bool KByteArrayDocument::isModifiable() const { return true; }
-bool KByteArrayDocument::isReadOnly()   const { return mByteArray->isReadOnly(); }
-void KByteArrayDocument::setReadOnly( bool isReadOnly ) { mByteArray->setReadOnly( isReadOnly ); }
+bool ByteArrayDocument::isModifiable() const { return true; }
+bool ByteArrayDocument::isReadOnly()   const { return mByteArray->isReadOnly(); }
+void ByteArrayDocument::setReadOnly( bool isReadOnly ) { mByteArray->setReadOnly( isReadOnly ); }
 
-AbstractDocument::SyncStates KByteArrayDocument::syncStates() const
+AbstractDocument::SyncStates ByteArrayDocument::syncStates() const
 {
     return mByteArray->isModified() ? LocalHasChanges : InSync;
 }
 
-void KByteArrayDocument::setTitle( const QString &title )
+void ByteArrayDocument::setTitle( const QString &title )
 {
     mTitle = title;
     emit titleChanged( mTitle );
 }
 
 
-int KByteArrayDocument::versionIndex() const { return mByteArray->versionIndex(); }
-int KByteArrayDocument::versionCount() const { return mByteArray->versionCount(); }
-DocumentVersionData KByteArrayDocument::versionData( int versionIndex ) const
+int ByteArrayDocument::versionIndex() const { return mByteArray->versionIndex(); }
+int ByteArrayDocument::versionCount() const { return mByteArray->versionCount(); }
+DocumentVersionData ByteArrayDocument::versionData( int versionIndex ) const
 {
     const QString changeComment = ( versionIndex == 0 ) ? mInitDescription : mByteArray->versionDescription(versionIndex);
     return DocumentVersionData( versionIndex, changeComment );
 }
 
-void KByteArrayDocument::revertToVersionByIndex( int versionIndex ) { mByteArray->revertToVersionByIndex( versionIndex ); }
+void ByteArrayDocument::revertToVersionByIndex( int versionIndex ) { mByteArray->revertToVersionByIndex( versionIndex ); }
 
-void KByteArrayDocument::onModelModified( bool newState )
+void ByteArrayDocument::onModelModified( bool newState )
 {
     emit syncStatesChanged( newState ? LocalHasChanges : InSync );
 }
 
-void KByteArrayDocument::onHeadVersionDescriptionChanged( const QString &newDescription )
+void ByteArrayDocument::onHeadVersionDescriptionChanged( const QString &newDescription )
 {
     const DocumentVersionData data( mByteArray->versionIndex(), newDescription );
     emit headVersionDataChanged( data );
 }
 
-Person KByteArrayDocument::owner() const
+Person ByteArrayDocument::owner() const
 {
     return mUserList.size()>0 ? mUserList.at( 0 ) : Person();
 }
 
-QList<Person> KByteArrayDocument::userList() const
+QList<Person> ByteArrayDocument::userList() const
 {
     return mUserList;
 }
 
-void KByteArrayDocument::setOwner( const Person& owner )
+void ByteArrayDocument::setOwner( const Person& owner )
 {
     mUserList.append( owner );
 }
 
-void KByteArrayDocument::addUsers( const QList<Person>& users )
+void ByteArrayDocument::addUsers( const QList<Person>& users )
 {
     foreach( const Person& user, users )
         mUserList.append( user );
@@ -135,7 +135,7 @@ void KByteArrayDocument::addUsers( const QList<Person>& users )
     emit usersAdded( users );
 }
 
-void KByteArrayDocument::removeUsers( const QList<Person>& users )
+void ByteArrayDocument::removeUsers( const QList<Person>& users )
 {
     foreach( const Person& user, users )
         mUserList.removeOne( user );
@@ -143,7 +143,7 @@ void KByteArrayDocument::removeUsers( const QList<Person>& users )
     emit usersRemoved( users );
 }
 
-KByteArrayDocument::~KByteArrayDocument()
+ByteArrayDocument::~ByteArrayDocument()
 {
     delete mByteArray;
 }

@@ -32,7 +32,7 @@ class QString;
 namespace Kasten
 {
 
-class KByteArrayDocument;
+class ByteArrayDocument;
 
 
 class ByteArrayRawFileLoadThread : public QThread
@@ -47,15 +47,15 @@ class ByteArrayRawFileLoadThread : public QThread
     virtual void run();
 
   public:
-    KByteArrayDocument *document() const;
+    ByteArrayDocument *document() const;
 
   Q_SIGNALS:
-    void documentRead( KByteArrayDocument *document );
+    void documentRead( ByteArrayDocument *document );
 
   protected:
     const QString mFilePath;
 
-    KByteArrayDocument *mDocument;
+    ByteArrayDocument *mDocument;
 };
 
 
@@ -63,7 +63,7 @@ inline ByteArrayRawFileLoadThread::ByteArrayRawFileLoadThread( QObject *parent, 
  : QThread( parent ), mFilePath( filePath ), mDocument( 0 )
 {}
 
-inline KByteArrayDocument *ByteArrayRawFileLoadThread::document() const { return mDocument; }
+inline ByteArrayDocument *ByteArrayRawFileLoadThread::document() const { return mDocument; }
 
 }
 

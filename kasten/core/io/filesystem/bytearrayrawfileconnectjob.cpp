@@ -26,7 +26,7 @@
 // lib
 #include "kbytearrayrawfilesynchronizer.h"
 #include "bytearrayrawfilewritethread.h"
-#include "kbytearraydocument.h"
+#include "bytearraydocument.h"
 // Qt
 #include <QtGui/QApplication>
 #include <QtCore/QDataStream>
@@ -46,7 +46,7 @@ ByteArrayRawFileConnectJob::ByteArrayRawFileConnectJob( KByteArrayRawFileSynchro
 
 void ByteArrayRawFileConnectJob::startConnectWithFile()
 {
-    KByteArrayDocument *byteArrayDocument = qobject_cast<KByteArrayDocument*>( document() );
+    ByteArrayDocument *byteArrayDocument = qobject_cast<ByteArrayDocument*>( document() );
     ByteArrayRawFileWriteThread *writeThread = new ByteArrayRawFileWriteThread( this, byteArrayDocument, workFilePath() );
     writeThread->start();
     while( !writeThread->wait(100) )

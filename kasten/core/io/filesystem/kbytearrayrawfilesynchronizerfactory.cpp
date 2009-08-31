@@ -24,7 +24,7 @@
 
 // lib
 #include "kbytearrayrawfilesynchronizer.h"
-#include "kbytearraydocument.h"
+#include "bytearraydocument.h"
 // KDE
 #include <KUrl>
 // Qt
@@ -38,7 +38,7 @@ KByteArrayRawFileSynchronizerFactory::KByteArrayRawFileSynchronizerFactory() {}
 
 // could be set to base class as value, is only one object per factory at runtime
 // and settable in desktop file
-QString KByteArrayRawFileSynchronizerFactory::supportedWorkType() const { return QLatin1String("KByteArrayDocument");}
+QString KByteArrayRawFileSynchronizerFactory::supportedWorkType() const { return QLatin1String("ByteArrayDocument");}
 QString KByteArrayRawFileSynchronizerFactory::supportedRemoteType() const { return QLatin1String("application/octet-stream");}
 
 

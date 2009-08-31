@@ -20,34 +20,24 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kbytearraydocumentfactorytest.h"
+#ifndef BYTEARRAYDOCUMENTFACTORYTEST_H
+#define BYTEARRAYDOCUMENTFACTORYTEST_H
 
-// test object
-#include <kbytearraydocumentfactory.h>
-// lib
-#include <kbytearraydocument.h>
-// KDE
-#include <qtest_kde.h>
+// Qt
+#include <QtCore/QObject>
 
 
 namespace Kasten
 {
 
-void KByteArrayDocumentFactoryTest::testCreate()
+class ByteArrayDocumentFactoryTest : public QObject
 {
-    KByteArrayDocumentFactory *factory = new KByteArrayDocumentFactory();
+  Q_OBJECT
 
-    AbstractDocument* document = factory->create();
-    KByteArrayDocument *byteArrayDocument = qobject_cast<KByteArrayDocument *>( document );
-
-    QVERIFY( document != 0 );
-    QVERIFY( byteArrayDocument != 0 );
-    QCOMPARE( document->hasLocalChanges(), false );
-
-    delete document;
-    delete factory;
-}
+  private Q_SLOTS: // test functions
+    void testCreate();
+};
 
 }
 
-QTEST_KDEMAIN_CORE( Kasten::KByteArrayDocumentFactoryTest )
+#endif

@@ -26,7 +26,7 @@
 // lib
 #include "kbytearrayrawfilesynchronizer.h"
 #include "bytearrayrawfilereloadthread.h"
-#include "kbytearraydocument.h"
+#include "bytearraydocument.h"
 // Okteta core
 #include <piecetablebytearraymodel.h>
 // Qt
@@ -44,7 +44,7 @@ ByteArrayRawFileReloadJob::ByteArrayRawFileReloadJob( KByteArrayRawFileSynchroni
 
 void ByteArrayRawFileReloadJob::startReadFromFile()
 {
-    KByteArrayDocument *document = qobject_cast<KByteArrayDocument*>( synchronizer()->document() );
+    ByteArrayDocument *document = qobject_cast<ByteArrayDocument*>( synchronizer()->document() );
     ByteArrayRawFileReloadThread *reloadThread = new ByteArrayRawFileReloadThread( this, /*document, */workFilePath() );
     reloadThread->start();
     while( !reloadThread->wait(100) )

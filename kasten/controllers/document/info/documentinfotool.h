@@ -40,7 +40,7 @@ class QString;
 namespace Kasten
 {
 
-class KByteArrayDocument;
+class ByteArrayDocument;
 class AbstractModelSynchronizer;
 class DocumentSyncManager;
 
@@ -78,7 +78,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT DocumentInfoTool : public AbstractTool
     void onSynchronized();
 
   protected:
-    KByteArrayDocument* mDocument;
+    ByteArrayDocument* mDocument;
     Okteta::AbstractByteArrayModel *mByteArrayModel;
 
     AbstractModelSynchronizer* mSynchronizer;

@@ -23,7 +23,7 @@
 #include "bytearrayrawfileloadthread.h"
 
 // lib
-#include "kbytearraydocument.h"
+#include "bytearraydocument.h"
 // Kasten core
 #include <person.h>
 // Okteta core
@@ -64,7 +64,7 @@ void ByteArrayRawFileLoadThread::run()
 //         *success = streamIsOk ? 0 : 1;
     if( streamIsOk )
     {
-        mDocument = new KByteArrayDocument( byteArray, i18nc("destination of the byte array", "Loaded from file.") );
+        mDocument = new ByteArrayDocument( byteArray, i18nc("destination of the byte array", "Loaded from file.") );
         mDocument->setOwner( Person::createEgo() );
         // TODO: make PieceTableByteArrayModel a child by constructor argument parent
         byteArray->moveToThread( QApplication::instance()->thread() );

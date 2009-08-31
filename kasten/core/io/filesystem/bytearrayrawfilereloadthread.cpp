@@ -23,7 +23,7 @@
 #include "bytearrayrawfilereloadthread.h"
 
 // lib
-#include "kbytearraydocument.h"
+#include "bytearraydocument.h"
 // Okteta core
 #include <piecetablebytearraymodel.h>
 // KDE
@@ -40,7 +40,7 @@ namespace Kasten
 {
 
 ByteArrayRawFileReloadThread::ByteArrayRawFileReloadThread( QObject *parent,
-    /*KByteArrayDocument *document,*/ const QString &filePath )
+    /*ByteArrayDocument *document,*/ const QString &filePath )
   : QThread( parent ), /*mDocument( document ),*/
     mFilePath( filePath ),
     mSuccess( false ),

@@ -32,7 +32,7 @@ class QString;
 namespace Kasten
 {
 
-class KByteArrayDocument;
+class ByteArrayDocument;
 
 
 class ByteArrayRawFileWriteThread : public QThread
@@ -40,7 +40,7 @@ class ByteArrayRawFileWriteThread : public QThread
   Q_OBJECT
   public:
     ByteArrayRawFileWriteThread( QObject *parent,
-                                 KByteArrayDocument *document, const QString &filePath );
+                                 ByteArrayDocument *document, const QString &filePath );
     virtual ~ByteArrayRawFileWriteThread();
 
   public: // QThread API
@@ -53,7 +53,7 @@ class ByteArrayRawFileWriteThread : public QThread
     void documentWritten( bool success );
 
   protected:
-    KByteArrayDocument *mDocument;
+    ByteArrayDocument *mDocument;
     const QString mFilePath;
 
     bool mSuccess;
@@ -61,7 +61,7 @@ class ByteArrayRawFileWriteThread : public QThread
 
 
 inline ByteArrayRawFileWriteThread::ByteArrayRawFileWriteThread( QObject *parent,
-    KByteArrayDocument *document, const QString &filePath )
+    ByteArrayDocument *document, const QString &filePath )
  : QThread( parent ), mDocument( document ), mFilePath( filePath ), mSuccess( false )
 {}
 

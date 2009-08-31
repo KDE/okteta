@@ -24,7 +24,7 @@
 
 // lib
 #include "bytearrayjanusview.h"
-#include <kbytearraydocument.h>
+#include <bytearraydocument.h>
 // Okteta gui
 #include <abstractbytearrayview.h>
 // Okteta core
@@ -34,7 +34,7 @@
 namespace Kasten
 {
 
-ByteArrayView::ByteArrayView( KByteArrayDocument* document )
+ByteArrayView::ByteArrayView( ByteArrayDocument* document )
   : AbstractView( document ),
     mDocument( document )
 {
@@ -42,8 +42,8 @@ ByteArrayView::ByteArrayView( KByteArrayDocument* document )
 }
 
 ByteArrayView::ByteArrayView( ByteArrayView* other, Qt::Alignment alignment )
-  : AbstractView( static_cast<KByteArrayDocument*>(other->baseModel()) ),
-    mDocument( static_cast<KByteArrayDocument*>(other->baseModel()) )
+  : AbstractView( static_cast<ByteArrayDocument*>(other->baseModel()) ),
+    mDocument( static_cast<ByteArrayDocument*>(other->baseModel()) )
 {
     init();
 

@@ -25,7 +25,7 @@
 // program
 #include "mainwindow.h"
 // Okteta Kasten
-#include <kbytearraydocumentfactory.h>
+#include <bytearraydocumentfactory.h>
 #include <bytearrayviewfactory.h>
 #include <filesystem/kbytearrayrawfilesynchronizerfactory.h>
 #include <bytearraysourcecodestreamencoderconfigeditorfactory.h>
@@ -91,7 +91,7 @@ int OktetaProgram::execute()
                                    << new ByteArrayValuesStreamEncoderConfigEditorFactory();
 
     mDocumentManager->codecManager()->setEncoders( encoderList );
-    mDocumentManager->createManager()->setDocumentFactory( new KByteArrayDocumentFactory() );
+    mDocumentManager->createManager()->setDocumentFactory( new ByteArrayDocumentFactory() );
     mDocumentManager->syncManager()->setDocumentSynchronizerFactory( new KByteArrayRawFileSynchronizerFactory() );
 
     mViewManager->setViewFactory( new ByteArrayViewFactory() );

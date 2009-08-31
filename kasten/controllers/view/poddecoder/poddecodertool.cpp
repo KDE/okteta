@@ -23,7 +23,7 @@
 #include "poddecodertool.h"
 
 // lib
-#include <kbytearraydocument.h>
+#include <bytearraydocument.h>
 #include <bytearrayview.h>
 // Okteta core
 #include <character.h>
@@ -84,8 +84,8 @@ void PODDecoderTool::setTargetModel( AbstractModel* model )
     if( mByteArrayModel ) mByteArrayModel->disconnect( this );
 
     mByteArrayDisplay = model ? model->findBaseModel<ByteArrayView*>() : 0;
-    KByteArrayDocument *document =
-        mByteArrayDisplay ? qobject_cast<KByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
+    ByteArrayDocument *document =
+        mByteArrayDisplay ? qobject_cast<ByteArrayDocument*>( mByteArrayDisplay->baseModel() ) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
     if( mByteArrayModel && mByteArrayDisplay )

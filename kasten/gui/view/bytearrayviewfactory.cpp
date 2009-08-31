@@ -24,7 +24,7 @@
 
 // lib
 #include "bytearrayview.h"
-#include <kbytearraydocument.h>
+#include <bytearraydocument.h>
 
 
 namespace Kasten
@@ -34,7 +34,7 @@ AbstractView* ByteArrayViewFactory::createViewFor( AbstractDocument* _document )
 {
     ByteArrayView* result = 0;
 
-    KByteArrayDocument* document = static_cast<KByteArrayDocument*>( _document );
+    ByteArrayDocument* document = static_cast<ByteArrayDocument*>( _document );
     if( document )
         result = new ByteArrayView( document );
 

@@ -44,7 +44,7 @@ class QRect;
 namespace Kasten
 {
 
-class KByteArrayDocument;
+class ByteArrayDocument;
 class KCursorProxy;
 
 
@@ -64,7 +64,7 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView,
     enum { ColumnViewId = 0, RowViewId };
 
   public:
-    explicit ByteArrayView( KByteArrayDocument* document );
+    explicit ByteArrayView( ByteArrayDocument* document );
     explicit ByteArrayView( ByteArrayView* other, Qt::Alignment alignment = 0 );
 
     virtual ~ByteArrayView();
@@ -171,7 +171,7 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView,
 
   protected:
     Okteta::ByteArrayJanusView* mWidget;
-    KByteArrayDocument* mDocument;
+    ByteArrayDocument* mDocument;
     KByteArraySelection mSelection;
 //     KCursorProxy *mCursorProxy;
 };
