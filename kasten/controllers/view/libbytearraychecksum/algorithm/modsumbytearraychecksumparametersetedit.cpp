@@ -28,24 +28,30 @@
 #include <KLocale>
 #include <KComboBox>
 // Qt
-#include <QtGui/QLayout>
+#include <QtGui/QFormLayout>
 
 
 ModSumByteArrayChecksumParameterSetEdit::ModSumByteArrayChecksumParameterSetEdit( QWidget* parent )
   : AbstractByteArrayChecksumParameterSetEdit( parent )
 {
-    QVBoxLayout* baseLayout = new QVBoxLayout( this );
+    QFormLayout* baseLayout = new QFormLayout( this );
     baseLayout->setMargin( 0 );
 
-    // TODO KDE4.4: add label
-    mEndiannessComboBox = new KComboBox( this );
-    mEndiannessComboBox->addItem( i18nc("@item:inlistbox","Little-endian") ); // add first for index
-    mEndiannessComboBox->addItem( i18nc("@item:inlistbox","Big-endian") );    // add second for index
-    connect( mEndiannessComboBox, SIGNAL(activated( int )),
+    mByteOrderComboBox = new KComboBox( this );
+    mByteOrderComboBox->addItem( i18nc("@item:inlistbox","Little-endian") ); // add first for index
+    mByteOrderComboBox->addItem( i18nc("@item:inlistbox","Big-endian") );    // add second for index
+    connect( mByteOrderComboBox, SIGNAL(activated( int )),
              SIGNAL(valuesChanged()) );
 
-    baseLayout->addWidget( mEndiannessComboBox );
-    baseLayout->addStretch( 10 );
+    const QString byteOrderLabelText =
+         i18nc( "@label:listbox byte order to use for decoding the bytes into integer values",
+                "Byte Order:" );
+    const QString groupSizeToolTip =
+        i18nc( "@info:tooltip",
+               "The byte order to use for decoding the bytes into integer values." );
+    mByteOrderComboBox->setToolTip( groupSizeToolTip );
+
+    baseLayout->addRow( byteOrderLabelText, mByteOrderComboBox );
 }
 
 bool ModSumByteArrayChecksumParameterSetEdit::isValid() const { return true; }
@@ -55,7 +61,7 @@ void ModSumByteArrayChecksumParameterSetEdit::setParameterSet( const AbstractByt
     const ModSumByteArrayChecksumParameterSet* modSumParameterSet =
         static_cast<const ModSumByteArrayChecksumParameterSet *>( parameterSet );
 
-    mEndiannessComboBox->setCurrentIndex( modSumParameterSet->endianness() );
+    mByteOrderComboBox->setCurrentIndex( modSumParameterSet->endianness() );
 }
 
 void ModSumByteArrayChecksumParameterSetEdit::getParameterSet( AbstractByteArrayChecksumParameterSet* parameterSet ) const
@@ -63,7 +69,7 @@ void ModSumByteArrayChecksumParameterSetEdit::getParameterSet( AbstractByteArray
     ModSumByteArrayChecksumParameterSet* modSumParameterSet =
         static_cast<ModSumByteArrayChecksumParameterSet *>( parameterSet );
 
-    modSumParameterSet->setEndianness( static_cast<Endianness>( mEndiannessComboBox->currentIndex() ) );
+    modSumParameterSet->setEndianness( static_cast<Endianness>( mByteOrderComboBox->currentIndex() ) );
 }
 
 

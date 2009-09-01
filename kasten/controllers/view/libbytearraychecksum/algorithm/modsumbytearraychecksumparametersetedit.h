@@ -43,7 +43,7 @@ class ModSumByteArrayChecksumParameterSetEdit : public AbstractByteArrayChecksum
     virtual bool isValid() const;
 
   protected:
-    KComboBox* mEndiannessComboBox;
+    KComboBox* mByteOrderComboBox;
 };
 
 #endif
