@@ -54,6 +54,10 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
     topLineLayout->addWidget( label );
 
     mSizeLabel = new QLabel( this );
+    const QString sizeToolTip =
+        i18nc( "@info:tooltip",
+               "The number of the bytes the statistic was done for." );
+    mSizeLabel->setToolTip( sizeToolTip );
     topLineLayout->addWidget( mSizeLabel, 10 );
     connect( mTool->statisticTableModel(), SIGNAL(sizeChanged( int )), SLOT(setByteArraySize( int )) );
 
@@ -62,9 +66,10 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
     const KGuiItem updateGuiItem(
         i18nc("@action:button update the statistic of the byte frequency","&Update"),
         "view-refresh",
-        i18nc("@info:tooltip","Updates the byte frequency statistics."),
+        i18nc("@info:tooltip","Updates the byte frequency statistic for the bytes in the selected range."),
         i18nc("@info:whatsthis",
-              "If you press the <interface>Update</interface> button, the byte frequency statistics are updated.") );
+              "If you press the <interface>Update</interface> button,"
+              " the byte frequency statistic is updated for the bytes in the selected range.") );
     mUpdateButton = new KPushButton( updateGuiItem, this );
     mUpdateButton->setEnabled( mTool->isApplyable() );
     connect( mTool, SIGNAL(isApplyableChanged(bool)), mUpdateButton, SLOT( setEnabled(bool )) );
