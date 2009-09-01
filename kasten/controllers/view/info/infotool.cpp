@@ -139,6 +139,8 @@ void InfoTool::updateStatistic()
     mSourceByteArrayModelUptodate = true;
     emit statisticDirty( false );
     emit isApplyableChanged( false );
+
+    mByteArrayView->setFocus();
 }
 
 InfoTool::~InfoTool() {}
