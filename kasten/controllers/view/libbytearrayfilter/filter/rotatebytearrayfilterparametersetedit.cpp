@@ -28,49 +28,45 @@
 #include <KLocale>
 #include <KIntNumInput>
 // Qt
-#include <QtGui/QLayout>
+#include <QtGui/QFormLayout>
 #include <QtGui/QLabel>
 
 
 RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit( QWidget* parent )
  : AbstractByteArrayFilterParameterSetEdit( parent )
 {
-    QVBoxLayout *baseLayout = new QVBoxLayout( this );
+    QFormLayout* baseLayout = new QFormLayout( this );
     baseLayout->setMargin( 0 );
 
     mGroupSizeEdit = new KIntNumInput( this );
     mGroupSizeEdit->setRange( 1, INT_MAX );
     mGroupSizeEdit->setSuffix( ki18np(" byte"," bytes") );
 
-    QLabel *label = new QLabel( i18nc("@label:spinbox number of bytes the rotation is done within",
-                                      "&Group size"),
-                                this );
-    label->setBuddy( mGroupSizeEdit );
+    const QString groupSizeLabelText =
+         i18nc( "@label:spinbox number of bytes the rotation is done within",
+                "&Group size:" );
     const QString groupSizeWhatsThis =
         i18nc( "@info:whatsthis",
                "Control the number of bytes within which each rotation is made." );
-    label->setWhatsThis( groupSizeWhatsThis );
     mGroupSizeEdit->setWhatsThis( groupSizeWhatsThis );
 
-    baseLayout->addWidget( label );
-    baseLayout->addWidget( mGroupSizeEdit );
+    baseLayout->addRow( groupSizeLabelText, mGroupSizeEdit );
 
     mMoveBitWidthEdit = new KIntNumInput( this );
     mMoveBitWidthEdit->setRange( INT_MIN, INT_MAX );
     mMoveBitWidthEdit->setSuffix( ki18np(" bit"," bits") );
     connect( mMoveBitWidthEdit, SIGNAL(valueChanged( int )), SLOT(onValueChanged( int )) );
 
-    label = new QLabel( i18nc("@label:spinbox width (in number of bits) the bits are moved","S&hift width"), this );
-    label->setBuddy( mMoveBitWidthEdit );
+    const QString moveBitWidthLabelText =
+        i18nc( "@label:spinbox width (in number of bits) the bits are moved",
+               "S&hift width:" );
     const QString moveBitWidthWhatsThis =
         i18nc( "@info:whatsthis",
                "Control the width of the shift. Positive numbers move the bits to the right, negative to the left." );
-    label->setWhatsThis( moveBitWidthWhatsThis );
-    mMoveBitWidthEdit->setWhatsThis( moveBitWidthWhatsThis );
 
-    baseLayout->addWidget( label );
-    baseLayout->addWidget( mMoveBitWidthEdit );
-    baseLayout->addStretch( 10 );
+    baseLayout->addRow( moveBitWidthLabelText, mMoveBitWidthEdit );
+
+//     baseLayout->addStretch( 10 );
 }
 
 bool RotateByteArrayFilterParameterSetEdit::isValid() const { return mMoveBitWidthEdit->value() != 0; }
