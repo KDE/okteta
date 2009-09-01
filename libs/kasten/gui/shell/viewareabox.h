@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TABBEDVIEWSBOX_H
-#define TABBEDVIEWSBOX_H
+#ifndef VIEWAREABOX_H
+#define VIEWAREABOX_H
 
 // Qt
 #include <QtGui/QWidget>
