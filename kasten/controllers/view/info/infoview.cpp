@@ -57,6 +57,7 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
     const QString sizeToolTip =
         i18nc( "@info:tooltip",
                "The number of the bytes the statistic was done for." );
+    label->setToolTip( sizeToolTip );
     mSizeLabel->setToolTip( sizeToolTip );
     topLineLayout->addWidget( mSizeLabel, 10 );
     connect( mTool->statisticTableModel(), SIGNAL(sizeChanged( int )), SLOT(setByteArraySize( int )) );
