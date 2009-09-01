@@ -42,11 +42,15 @@ RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit( QW
     mGroupSizeEdit->setSuffix( ki18np(" byte"," bytes") );
 
     const QString groupSizeLabelText =
-         i18nc( "@label:spinbox number of bytes the rotation is done within",
+         i18nc( "@label:spinbox number of bytes the movement is done within",
                 "&Group size:" );
+    const QString groupSizeToolTip =
+        i18nc( "@info:tooltip",
+               "The number of bytes within which each movement is made." );
+    mGroupSizeEdit->setToolTip( groupSizeToolTip );
     const QString groupSizeWhatsThis =
         i18nc( "@info:whatsthis",
-               "Control the number of bytes within which each rotation is made." );
+               "Control the number of bytes within which each movement is made." );
     mGroupSizeEdit->setWhatsThis( groupSizeWhatsThis );
 
     baseLayout->addRow( groupSizeLabelText, mGroupSizeEdit );
@@ -59,9 +63,14 @@ RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit( QW
     const QString moveBitWidthLabelText =
         i18nc( "@label:spinbox width (in number of bits) the bits are moved",
                "S&hift width:" );
+    const QString moveBitWidthToolTip =
+        i18nc( "@info:tooltip",
+               "The width of the shift. Positive numbers move the bits to the right, negative to the left." );
+    mMoveBitWidthEdit->setToolTip( moveBitWidthToolTip );
     const QString moveBitWidthWhatsThis =
         i18nc( "@info:whatsthis",
                "Control the width of the shift. Positive numbers move the bits to the right, negative to the left." );
+    mMoveBitWidthEdit->setWhatsThis( moveBitWidthWhatsThis );
 
     baseLayout->addRow( moveBitWidthLabelText, mMoveBitWidthEdit );
 }
