@@ -55,7 +55,7 @@ class PODTableView : public QWidget
     PODTableModel* mPODTableModel;
 
     QTreeView* mPODTableView;
-    KComboBox* mEndianSelection;
+    KComboBox* mByteOrderSelection;
     QCheckBox* mUnsignedAsHexCheck;
 };
 

@@ -70,13 +70,17 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
     QBoxLayout *settingsLayout = new QHBoxLayout();
     settingsLayout->setMargin( 0 );
 
-    mEndianSelection = new KComboBox( this );
-    mEndianSelection->addItem( i18nc("@item:inlistbox","Little-endian") ); // add first for index
-    mEndianSelection->addItem( i18nc("@item:inlistbox","Big-endian") );    // add second for index
-    mEndianSelection->setCurrentIndex( mTool->byteOrder() );
-    connect( mEndianSelection, SIGNAL(activated( int )),
+    mByteOrderSelection = new KComboBox( this );
+    mByteOrderSelection->addItem( i18nc("@item:inlistbox","Little-endian") ); // add first for index
+    mByteOrderSelection->addItem( i18nc("@item:inlistbox","Big-endian") );    // add second for index
+    mByteOrderSelection->setCurrentIndex( mTool->byteOrder() );
+    connect( mByteOrderSelection, SIGNAL(activated( int )),
              mTool, SLOT(setByteOrder( int )));
-    settingsLayout->addWidget( mEndianSelection );
+    const QString byteOrderToolTip =
+        i18nc( "@info:tooltip",
+               "The byte order to use for decoding the bytes." );
+    mByteOrderSelection->setToolTip( byteOrderToolTip );
+    settingsLayout->addWidget( mByteOrderSelection );
 
     QLabel* unsignedAsHexLabel = new QLabel( i18nc("@option:check","Unsigned as hexadecimal:"), this );
     settingsLayout->addWidget( unsignedAsHexLabel );
@@ -86,6 +90,11 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
     connect( mUnsignedAsHexCheck, SIGNAL(toggled( bool )),
              mTool, SLOT(setUnsignedAsHex( bool )) );
     unsignedAsHexLabel->setBuddy( mUnsignedAsHexCheck );
+    const QString unsignedAsHexToolTip =
+        i18nc( "@info:tooltip",
+               "Sets whether the values of the unsigned integer types are shown as hexadecimal instead of as decimal." );
+    unsignedAsHexLabel->setToolTip( unsignedAsHexToolTip );
+    mUnsignedAsHexCheck->setToolTip( unsignedAsHexToolTip );
     settingsLayout->addWidget( mUnsignedAsHexCheck );
     settingsLayout->addStretch();
 
