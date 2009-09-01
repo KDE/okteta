@@ -186,7 +186,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
       * Default is 4 for NoOfGroupedBytes
       */
     virtual void setBufferSpacing( int/*PixelX*/ byteSpacingWidth, int noOfGroupedBytes = 0, int/*PixelX*/ groupSpacingWidth = 0 ) = 0;
-    /** sets the format of the value column. Default is KDE::HexadecimalCoding */
+    /** sets the format of the value column. Default is Okteta::HexadecimalCoding */
     virtual void setValueCoding( ValueCoding valueCoding ) = 0;
   // char column parameters
     /** sets whether control chars or "non-printing" chars should be displayed in the char column
@@ -204,10 +204,10 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
      * returns true if there was a change
      */
     virtual void setUndefinedChar( QChar undefinedChar ) = 0;
-    /** sets the encoding of the char column. Default is KDE::LocalEncoding.
+    /** sets the encoding of the char column. Default is Okteta::LocalEncoding.
       * If the encoding is not available the format will not be changed. */
     virtual void setCharCoding( CharCoding charCoding ) = 0;
-    /** sets the encoding of the char column. Default is KDE::LocalEncoding.
+    /** sets the encoding of the char column. Default is Okteta::LocalEncoding.
       * If the encoding is not available the format will not be changed.
       * @param Encoding name of the encoding
       */
@@ -218,7 +218,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     /** sets whether the data should be treated modified or not */
     void setModified( bool modified );
 
-    /** sets the resizestyle for the value column. Default is KDE::FullSizeUsage */
+    /** sets the resizestyle for the value column. Default is Okteta::FullSizeUsage */
     void setResizeStyle( ResizeStyle resizeStyle );
     /** sets whether the widget is readonly or not, Default is true.
       * If the databuffer which is worked on can't be written the widget stays readonly
@@ -229,7 +229,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     /** sets whether the widget is in overwrite mode or not. Default is true. */
     void setOverwriteMode( bool overwriteMode );
 
-    /** sets the number of bytes per line, switching the resize style to KDE::NoResize */
+    /** sets the number of bytes per line, switching the resize style to Okteta::NoResize */
     void setNoOfBytesPerLine( int noOfBytesPerLine );
     /** sets absolut offset of the data */
     void setStartOffset( Address startOffset );
