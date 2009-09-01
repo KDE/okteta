@@ -65,6 +65,7 @@ CopyAsDialog::CopyAsDialog( AbstractModelStreamEncoderConfigEditor* configEditor
     editorLabel->setFont( font );
     editorPageLayout->addWidget( editorLabel );
     editorPageLayout->addWidget( mConfigEditor );
+    editorPageLayout->addStretch();
 
     splitter->addWidget( editorPage );
     splitter->setCollapsible( 0, false );
