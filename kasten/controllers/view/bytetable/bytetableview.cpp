@@ -73,7 +73,7 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
     mInsertCountEdit = new KIntNumInput( this );
     mInsertCountEdit->setRange( 1, INT_MAX );
     mInsertCountEdit->setValue( 1 );
-    mInsertCountEdit->setSuffix( ki18np("byte","bytes") );
+    mInsertCountEdit->setSuffix( ki18np(" byte"," bytes") );
     label->setBuddy( mInsertCountEdit );
     insertLayout->addWidget( mInsertCountEdit );
     const QString insertCountToolTip =
