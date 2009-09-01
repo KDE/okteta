@@ -26,10 +26,10 @@
 #include "rotatebytearrayfilterparameterset.h"
 // KDE
 #include <KLocale>
+#include <KIntNumInput>
 // Qt
 #include <QtGui/QLayout>
 #include <QtGui/QLabel>
-#include <QtGui/QSpinBox>
 
 
 RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit( QWidget* parent )
@@ -38,48 +38,50 @@ RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit( QW
     QVBoxLayout *baseLayout = new QVBoxLayout( this );
     baseLayout->setMargin( 0 );
 
-    mGroupSizeSpinBox = new QSpinBox( this );
-    mGroupSizeSpinBox->setRange( 1, INT_MAX );
+    mGroupSizeEdit = new KIntNumInput( this );
+    mGroupSizeEdit->setRange( 1, INT_MAX );
+    mGroupSizeEdit->setSuffix( ki18np(" byte"," bytes") );
 
     QLabel *label = new QLabel( i18nc("@label:spinbox number of bytes the rotation is done within",
-                                      "&Group size [bytes]"),
+                                      "&Group size"),
                                 this );
-    label->setBuddy( mGroupSizeSpinBox );
+    label->setBuddy( mGroupSizeEdit );
     const QString groupSizeWhatsThis =
         i18nc( "@info:whatsthis",
                "Control the number of bytes within which each rotation is made." );
     label->setWhatsThis( groupSizeWhatsThis );
-    mGroupSizeSpinBox->setWhatsThis( groupSizeWhatsThis );
+    mGroupSizeEdit->setWhatsThis( groupSizeWhatsThis );
 
     baseLayout->addWidget( label );
-    baseLayout->addWidget( mGroupSizeSpinBox );
+    baseLayout->addWidget( mGroupSizeEdit );
 
-    mMoveBitWidthSpinBox = new QSpinBox( this );
-    mMoveBitWidthSpinBox->setRange( INT_MIN, INT_MAX );
-    connect( mMoveBitWidthSpinBox, SIGNAL(valueChanged( int )), SLOT(onValueChanged( int )) );
+    mMoveBitWidthEdit = new KIntNumInput( this );
+    mMoveBitWidthEdit->setRange( INT_MIN, INT_MAX );
+    mMoveBitWidthEdit->setSuffix( ki18np(" bit"," bits") );
+    connect( mMoveBitWidthEdit, SIGNAL(valueChanged( int )), SLOT(onValueChanged( int )) );
 
-    label = new QLabel( i18nc("@label:spinbox","S&hift width [bits]"), this );
-    label->setBuddy( mMoveBitWidthSpinBox );
+    label = new QLabel( i18nc("@label:spinbox width (in number of bits) the bits are moved","S&hift width"), this );
+    label->setBuddy( mMoveBitWidthEdit );
     const QString moveBitWidthWhatsThis =
         i18nc( "@info:whatsthis",
                "Control the width of the shift. Positive numbers move the bits to the right, negative to the left." );
     label->setWhatsThis( moveBitWidthWhatsThis );
-    mMoveBitWidthSpinBox->setWhatsThis( moveBitWidthWhatsThis );
+    mMoveBitWidthEdit->setWhatsThis( moveBitWidthWhatsThis );
 
     baseLayout->addWidget( label );
-    baseLayout->addWidget( mMoveBitWidthSpinBox );
+    baseLayout->addWidget( mMoveBitWidthEdit );
     baseLayout->addStretch( 10 );
 }
 
-bool RotateByteArrayFilterParameterSetEdit::isValid() const { return mMoveBitWidthSpinBox->value() != 0; }
+bool RotateByteArrayFilterParameterSetEdit::isValid() const { return mMoveBitWidthEdit->value() != 0; }
 
 void RotateByteArrayFilterParameterSetEdit::setValues( const AbstractByteArrayFilterParameterSet *parameterSet )
 {
     const RotateByteArrayFilterParameterSet *rotateParameterSet =
         static_cast<const RotateByteArrayFilterParameterSet *>( parameterSet );
 
-    mGroupSizeSpinBox->setValue( rotateParameterSet->groupSize() );
-    mMoveBitWidthSpinBox->setValue( rotateParameterSet->moveBitWidth() );
+    mGroupSizeEdit->setValue( rotateParameterSet->groupSize() );
+    mMoveBitWidthEdit->setValue( rotateParameterSet->moveBitWidth() );
 }
 
 void RotateByteArrayFilterParameterSetEdit::getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const
@@ -87,8 +89,8 @@ void RotateByteArrayFilterParameterSetEdit::getParameterSet( AbstractByteArrayFi
     RotateByteArrayFilterParameterSet *rotateParameterSet =
         static_cast<RotateByteArrayFilterParameterSet *>( parameterSet );
 
-    rotateParameterSet->setGroupSize( mGroupSizeSpinBox->value() );
-    rotateParameterSet->setMoveBitWidth( mMoveBitWidthSpinBox->value() );
+    rotateParameterSet->setGroupSize( mGroupSizeEdit->value() );
+    rotateParameterSet->setMoveBitWidth( mMoveBitWidthEdit->value() );
 }
 
 
