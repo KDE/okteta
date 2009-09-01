@@ -31,37 +31,46 @@
 // Qt
 #include <QtGui/QLabel>
 #include <QtGui/QCheckBox>
-#include <QtGui/QLayout>
+#include <QtGui/QFormLayout>
 
 
 OperandByteArrayFilterParameterSetEdit::OperandByteArrayFilterParameterSetEdit( QWidget* parent )
  : AbstractByteArrayFilterParameterSetEdit( parent )
 {
-    QVBoxLayout *baseLayout = new QVBoxLayout( this );
+    QFormLayout *baseLayout = new QFormLayout( this );
     baseLayout->setMargin( 0 );
 
-    QLabel *label = new QLabel( i18nc("@label:textbox operand to the arithmetic filter function","Operand:"), this );
+    const QString operandLabelText =
+        i18nc( "@label:textbox operand to the arithmetic filter function",
+               "Operand:" );
     mOperandEdit = new KByteArrayLineEdit( this );
     connect( mOperandEdit, SIGNAL(dataChanged(const QByteArray&)), SLOT(onInputChanged(const QByteArray&)) );
-    label->setBuddy( mOperandEdit );
+    const QString operandToolTip =
+        i18nc( "@info:tooltip",
+               "The operand to do the operation with." );
     const QString operandWhatsThis =
         i18nc( "@info:whatsthis",
                "Enter an operand, or select a previous operand from the list." );
-    label->setWhatsThis( operandWhatsThis );
+    mOperandEdit->setToolTip( operandToolTip );
     mOperandEdit->setWhatsThis( operandWhatsThis );
 
-    baseLayout->addWidget( label );
-    baseLayout->addWidget( mOperandEdit );
+    baseLayout->addRow( operandLabelText, mOperandEdit );
 
-    mAlignAtEndCheckBox = new QCheckBox( i18nc("@option:check","Align at end"), this );
+    const QString alignAtEndLabelText =
+        i18nc( "@option:check",
+                "Align at end:" );
+    mAlignAtEndCheckBox = new QCheckBox( this );
     mAlignAtEndCheckBox->setChecked( false );
+    const QString alignToolTip =
+        i18nc( "@info:tooltip",
+               "Sets if the operation will be aligned to the end of the data instead of to the begin." );
     const QString alignWhatsThis =
         i18nc( "@info:whatsthis",
-               "If set, the last operand will be aligned to the end of the data." );
+               "If set, the operation will be aligned to the end of the data." );
+    mAlignAtEndCheckBox->setToolTip( alignToolTip );
     mAlignAtEndCheckBox->setWhatsThis( alignWhatsThis );
 
-    baseLayout->addWidget( mAlignAtEndCheckBox );
-    baseLayout->addStretch( 10 );
+    baseLayout->addRow( alignAtEndLabelText, mAlignAtEndCheckBox );
 }
 
 bool OperandByteArrayFilterParameterSetEdit::isValid() const { return !mOperandEdit->data().isEmpty(); }
