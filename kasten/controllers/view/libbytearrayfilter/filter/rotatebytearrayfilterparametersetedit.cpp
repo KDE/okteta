@@ -29,7 +29,6 @@
 #include <KIntNumInput>
 // Qt
 #include <QtGui/QFormLayout>
-#include <QtGui/QLabel>
 
 
 RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit( QWidget* parent )
@@ -65,8 +64,6 @@ RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit( QW
                "Control the width of the shift. Positive numbers move the bits to the right, negative to the left." );
 
     baseLayout->addRow( moveBitWidthLabelText, mMoveBitWidthEdit );
-
-//     baseLayout->addStretch( 10 );
 }
 
 bool RotateByteArrayFilterParameterSetEdit::isValid() const { return mMoveBitWidthEdit->value() != 0; }
