@@ -28,23 +28,26 @@
 #include <KLocale>
 // Qt
 #include <QtGui/QCheckBox>
-#include <QtGui/QLayout>
+#include <QtGui/QFormLayout>
 
 
 ReverseByteArrayFilterParameterSetEdit::ReverseByteArrayFilterParameterSetEdit( QWidget* parent )
  : AbstractByteArrayFilterParameterSetEdit( parent )
 {
-    QVBoxLayout *baseLayout = new QVBoxLayout( this );
+    QFormLayout* baseLayout = new QFormLayout( this );
     baseLayout->setMargin( 0 );
 
-    mInvertsBitsCheckBox = new QCheckBox( i18nc("@option:check","Also reverse bits"), this );
+    const QString invertsBitsLabelText =
+        i18nc( "@option:check",
+               "Reverse also bits:" );
+    mInvertsBitsCheckBox = new QCheckBox( this );
     mInvertsBitsCheckBox->setChecked( false );
     const QString alignWhatsThis =
-        i18nc( "@info:whatsthis", "If set, the bits are arranged in reverse order as well." );
+        i18nc( "@info:whatsthis",
+               "If set, the bits are arranged in reverse order as well." );
     mInvertsBitsCheckBox->setWhatsThis( alignWhatsThis );
 
-    baseLayout->addWidget( mInvertsBitsCheckBox );
-    baseLayout->addStretch( 10 );
+    baseLayout->addRow( invertsBitsLabelText, mInvertsBitsCheckBox );
 }
 
 void ReverseByteArrayFilterParameterSetEdit::setValues( const AbstractByteArrayFilterParameterSet *parameterSet )
