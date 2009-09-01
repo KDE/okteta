@@ -90,8 +90,16 @@ void ByteTableTool::insert( unsigned char byte, int count )
         qobject_cast<Okteta::ChangesDescribable*>( mByteArrayModel );
 
     if( changesDescribable )
-        changesDescribable->openGroupedChange( i18n("Byte inserted.") );
+    {
+        // TODO: how to note the byte? charcoding might change...
+        const QString changeDescription =
+            i18np( "Inserted 1 Byte","Inserted %1 Bytes", count );
+
+        changesDescribable->openGroupedChange( changeDescription );
+    }
+
     mByteArrayView->insert( data );
+
     if( changesDescribable )
         changesDescribable->closeGroupedChange();
 // void ByteTableController::fill( const QByteArray &Data )
