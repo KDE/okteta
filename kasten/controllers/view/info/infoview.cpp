@@ -48,9 +48,16 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
     QVBoxLayout *baseLayout = new QVBoxLayout( this );
     baseLayout->setMargin( 0 );
 
-    QHBoxLayout *updateLayout = new QHBoxLayout();
+    QHBoxLayout* topLineLayout = new QHBoxLayout();
 
-    updateLayout->addStretch();
+    QLabel *label = new QLabel( i18nc("@label size of selected bytes","Size:"), this );
+    topLineLayout->addWidget( label );
+
+    mSizeLabel = new QLabel( this );
+    topLineLayout->addWidget( mSizeLabel, 10 );
+    connect( mTool->statisticTableModel(), SIGNAL(sizeChanged( int )), SLOT(setByteArraySize( int )) );
+
+    topLineLayout->addStretch();
 
     const KGuiItem updateGuiItem(
         i18nc("@action:button update the statistic of the byte frequency","&Update"),
@@ -62,19 +69,9 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
     mUpdateButton->setEnabled( mTool->isApplyable() );
     connect( mTool, SIGNAL(isApplyableChanged(bool)), mUpdateButton, SLOT( setEnabled(bool )) );
     connect( mUpdateButton, SIGNAL(clicked(bool)), mTool, SLOT(updateStatistic()) ); 
-    updateLayout->addWidget( mUpdateButton );
+    topLineLayout->addWidget( mUpdateButton );
 
-    baseLayout->addLayout( updateLayout );
-
-    QHBoxLayout *sizeLayout = new QHBoxLayout();
-
-    QLabel *label = new QLabel( i18nc("@label size of selected bytes","Size:"), this );
-    sizeLayout->addWidget( label );
-
-    mSizeLabel = new QLabel( this );
-    sizeLayout->addWidget( mSizeLabel, 10 );
-    baseLayout->addLayout( sizeLayout );
-    connect( mTool->statisticTableModel(), SIGNAL(sizeChanged( int )), SLOT(setByteArraySize( int )) );
+    baseLayout->addLayout( topLineLayout );
 
     mStatisticTableView = new QTreeView( this );
     mStatisticTableView->setObjectName( "StatisticTable" );
