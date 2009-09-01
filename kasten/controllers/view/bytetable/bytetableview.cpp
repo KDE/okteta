@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -33,7 +33,7 @@
 // Qt
 #include <QtGui/QLabel>
 #include <QtGui/QLayout>
-#include <QtGui/QSpinBox>
+#include <KIntNumInput>
 #include <QtGui/QHeaderView>
 #include <QtGui/QTreeView>
 
@@ -67,19 +67,31 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
 
     QHBoxLayout *insertLayout = new QHBoxLayout();
 
-    QLabel *label = new QLabel( i18nc("@label:spinbox","Number of bytes:"), this );
-    label->setFixedWidth( label->sizeHint().width() );
+    QLabel *label = new QLabel( i18nc("@label:spinbox number of bytes to insert","Number:"), this );
     insertLayout->addWidget( label );
 
-    mInsertCountSpinBox = new QSpinBox( this );
-//     mInsertCountSpinBox->setMinimumWidth( mInsertCountSpinBox->fontMetrics().maxWidth()*4 );
-    mInsertCountSpinBox->setRange( 1, INT_MAX );
-    mInsertCountSpinBox->setValue( 1 );
-    insertLayout->addWidget( mInsertCountSpinBox );
+    mInsertCountEdit = new KIntNumInput( this );
+    mInsertCountEdit->setRange( 1, INT_MAX );
+    mInsertCountEdit->setValue( 1 );
+    mInsertCountEdit->setSuffix( ki18np("byte","bytes") );
+    label->setBuddy( mInsertCountEdit );
+    insertLayout->addWidget( mInsertCountEdit );
+    const QString insertCountToolTip =
+        i18nc( "@info:tooltip",
+               "The number with which the currently selected byte will be inserted." );
+    label->setToolTip( insertCountToolTip );
+    mInsertCountEdit->setToolTip( insertCountToolTip );
+
+    insertLayout->addStretch();
+
     mInsertButton = new KPushButton( KStandardGuiItem::insert(), this );
     mInsertButton->setEnabled( mTool->hasWriteable() );
     connect( mTool, SIGNAL(hasWriteableChanged(bool)), mInsertButton, SLOT( setEnabled(bool )) );
-    connect( mInsertButton, SIGNAL(clicked(bool)), SLOT(onInsertClicked()) ); 
+    connect( mInsertButton, SIGNAL(clicked(bool)), SLOT(onInsertClicked()) );
+    const QString insertButtonToolTip =
+        i18nc( "@info:tooltip",
+               "Inserts the currently selected byte with the given number." );
+    mInsertButton->setToolTip( insertButtonToolTip );
     insertLayout->addWidget( mInsertButton );
 
     baseLayout->addLayout( insertLayout );
@@ -92,13 +104,13 @@ void ByteTableView::onDoubleClicked( const QModelIndex &index )
         return;
 
     const unsigned char byte = index.row();
-    mTool->insert( byte, mInsertCountSpinBox->value() );
+    mTool->insert( byte, mInsertCountEdit->value() );
 }
 
 void ByteTableView::onInsertClicked()
 {
     const unsigned char byte = mByteTableView->currentIndex().row();
-    mTool->insert( byte, mInsertCountSpinBox->value() );
+    mTool->insert( byte, mInsertCountEdit->value() );
 }
 
 ByteTableView::~ByteTableView() {}

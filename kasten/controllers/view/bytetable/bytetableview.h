@@ -27,7 +27,7 @@
 #include <QtGui/QWidget>
 
 class KPushButton;
-class QSpinBox;
+class KIntNumInput;
 class QTreeView;
 class QModelIndex;
 
@@ -55,7 +55,8 @@ class ByteTableView : public QWidget
 
   private:
     ByteTableTool *mTool;
-    QSpinBox  *mInsertCountSpinBox;
+
+    KIntNumInput* mInsertCountEdit;
     QTreeView *mByteTableView;
     KPushButton *mInsertButton;
 };
