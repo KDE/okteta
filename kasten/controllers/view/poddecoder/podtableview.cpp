@@ -74,15 +74,20 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
     mEndianSelection->addItem( i18nc("@item:inlistbox","Little-endian") ); // add first for index
     mEndianSelection->addItem( i18nc("@item:inlistbox","Big-endian") );    // add second for index
     mEndianSelection->setCurrentIndex( mTool->byteOrder() );
-    settingsLayout->addWidget( mEndianSelection, 0, Qt::AlignVCenter );
     connect( mEndianSelection, SIGNAL(activated( int )),
              mTool, SLOT(setByteOrder( int )));
+    settingsLayout->addWidget( mEndianSelection );
 
-    mUnsignedAsHexCheck = new QCheckBox( i18nc("@option:check","Unsigned as hexadecimal"), this );
+    QLabel* unsignedAsHexLabel = new QLabel( i18nc("@option:check","Unsigned as hexadecimal:"), this );
+    settingsLayout->addWidget( unsignedAsHexLabel );
+
+    mUnsignedAsHexCheck = new QCheckBox( this );
     mUnsignedAsHexCheck->setChecked( mTool->isUnsignedAsHex() );
-    settingsLayout->addWidget( mUnsignedAsHexCheck, 10, Qt::AlignVCenter );
     connect( mUnsignedAsHexCheck, SIGNAL(toggled( bool )),
              mTool, SLOT(setUnsignedAsHex( bool )) );
+    unsignedAsHexLabel->setBuddy( mUnsignedAsHexCheck );
+    settingsLayout->addWidget( mUnsignedAsHexCheck );
+    settingsLayout->addStretch();
 
     baseLayout->addLayout( settingsLayout );
 }
