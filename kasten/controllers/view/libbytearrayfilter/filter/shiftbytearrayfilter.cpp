@@ -29,7 +29,7 @@
 // Qt
 #include <QtCore/QtGlobal>
 
-
+// TODO: add option which bit (0/1) to insert
 static const int ShiftBitsPerByte = 8;
 
 ShiftByteArrayFilter::ShiftByteArrayFilter()
