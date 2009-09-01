@@ -119,7 +119,7 @@ void DocumentInfoTool::setTargetModel( AbstractModel* model )
                  SIGNAL(documentTitleChanged( const QString & )) );
         connect( mDocument, SIGNAL(synchronizerChanged( Kasten::AbstractModelSynchronizer* )),
                  SLOT(onSynchronizerChanged( Kasten::AbstractModelSynchronizer* )) );
-        connect( mByteArrayModel, SIGNAL(contentsChanged( const Kasten::ArrayChangeMetricsList& )),
+        connect( mByteArrayModel, SIGNAL(contentsChanged( const Okteta::ArrayChangeMetricsList& )),
                  SLOT(onContentsChanged()) );
     }
 
