@@ -30,7 +30,7 @@
 #include <KIntNumInput>
 #include <KComboBox>
 // Qt
-#include <QtGui/QLayout>
+#include <QtGui/QFormLayout>
 #include <QtGui/QLabel>
 #include <QtGui/QCheckBox>
 
@@ -44,33 +44,34 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
 {
     mSettings = mEncoder->settings();
 
-    QGridLayout* pageLayout = new QGridLayout( this ); // unknown rows
+    QFormLayout* pageLayout = new QFormLayout( this );
     pageLayout->setMargin( 0 );
-    pageLayout->setColumnStretch( 0, 0 );
-    pageLayout->setColumnStretch( 1, 0 );
 
     // variable name
-    QLabel* label = new QLabel( i18nc("@label:textbox name of the created variable","Name of variable:"), this );
-    pageLayout->addWidget( label, 0, 0, Qt::AlignRight);
+    const QString variableNameLabel =
+        i18nc( "@label:textbox name of the created variable",
+               "Name of variable:" );
 
     mVariableNameEdit = new KLineEdit( this );
     mVariableNameEdit->setText( mSettings.variableName );
     connect( mVariableNameEdit, SIGNAL(textChanged( const QString& )), SLOT(onSettingsChanged()) );
-    pageLayout->addWidget( mVariableNameEdit, 0, 1);
+    pageLayout->addRow( variableNameLabel, mVariableNameEdit );
 
     // items per line
-    label = new QLabel( i18nc("@label:textbox to define after how many items the list is wrapped","Items per line:"), this );
-    pageLayout->addWidget( label, 1, 0, Qt::AlignRight);
+    const QString itemsPerLineLabel =
+        i18nc( "@label:textbox to define after how many items the list is wrapped",
+               "Items per line:" );
 
     mItemsPerLineEdit = new KIntNumInput( this );
     mItemsPerLineEdit->setMinimum( 1 );
     mItemsPerLineEdit->setValue( mSettings.elementsPerLine );
     connect( mItemsPerLineEdit, SIGNAL(valueChanged( int )), SLOT(onSettingsChanged()) );
-    pageLayout->addWidget( mItemsPerLineEdit, 1, 1);
+    pageLayout->addRow( itemsPerLineLabel, mItemsPerLineEdit );
 
     // data type
-    label = new QLabel( i18nc("@label:listbox the type of the data: char, integer, etc.","Data type:"), this );
-    pageLayout->addWidget( label, 2, 0, Qt::AlignRight);
+    const QString dataTypeLabel =
+        i18nc( "@label:listbox the type of the data: char, integer, etc.",
+               "Data type:" );
 
     mDataTypeSelect = new KComboBox( this );
     const char* const* dataTypeNames = mEncoder->dataTypeNames();
@@ -81,21 +82,18 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
     mDataTypeSelect->addItems( dataTypeNameStrings );
     mDataTypeSelect->setCurrentIndex( mSettings.dataType );
     connect( mDataTypeSelect, SIGNAL(activated(int)), SLOT(onSettingsChanged()) );
-    pageLayout->addWidget( mDataTypeSelect, 2, 1);
+    pageLayout->addRow( dataTypeLabel, mDataTypeSelect );
 
     // unsigned as hexadezimal
-    label = new QLabel( i18nc("@option:check Encode the values in hexadecimal instead of decimal, "
-                              "if the datatype has the property Unsigned",
-                              "Unsigned as hexadecimal:"), this );
-    pageLayout->addWidget( label, 3, 0, Qt::AlignRight);
+    const QString unsignedAsHexadecimalLabel =
+        i18nc( "@option:check Encode the values in hexadecimal instead of decimal, "
+               "if the datatype has the property Unsigned",
+               "Unsigned as hexadecimal:" );
 
     mUnsignedAsHexadecimalCheck = new QCheckBox( this );
     mUnsignedAsHexadecimalCheck->setChecked( mSettings.unsignedAsHexadecimal );
     connect( mUnsignedAsHexadecimalCheck, SIGNAL(toggled( bool )), SLOT(onSettingsChanged()) );
-    pageLayout->addWidget( mUnsignedAsHexadecimalCheck, 3, 1);
-
-    // finish
-    pageLayout->setRowStretch( 4, 10 );
+    pageLayout->addRow( unsignedAsHexadecimalLabel, mUnsignedAsHexadecimalCheck );
 }
 
 QString ByteArraySourceCodeStreamEncoderConfigEditor::name() const
