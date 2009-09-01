@@ -29,7 +29,6 @@
 // KDE
 #include <KLocale>
 // Qt
-#include <QtGui/QLabel>
 #include <QtGui/QCheckBox>
 #include <QtGui/QFormLayout>
 
