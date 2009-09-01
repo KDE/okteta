@@ -107,6 +107,7 @@ void ByteTableTool::insert( unsigned char byte, int count )
 //     if( HexEdit && ByteArray )
 //         ByteArray->insert( HexEdit->cursorPosition(), Data );
 // }
+    mByteArrayView->setFocus();
 }
 
 void ByteTableTool::onReadOnlyChanged( bool isReadOnly )
