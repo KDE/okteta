@@ -60,10 +60,14 @@ FilterView::FilterView( FilterTool *tool, QWidget* parent )
              SLOT(onOperationChange(int)) );
 
     label->setBuddy( mOperationComboBox );
-    const QString numberWhatsThis =
+    const QString operationToolTip =
+        i18nc("@info:tooltip","The operation to use for the filter.");
+    label->setToolTip( operationToolTip );
+    mOperationComboBox->setToolTip( operationToolTip );
+    const QString operationWhatsThis =
         i18nc("@info:whatsthis","Select the operation to use for the filter.");
-    label->setWhatsThis( numberWhatsThis );
-    mOperationComboBox->setWhatsThis( numberWhatsThis );
+    label->setWhatsThis( operationWhatsThis );
+    mOperationComboBox->setWhatsThis( operationWhatsThis );
 
     operationLayout->addWidget( label );
     operationLayout->addWidget( mOperationComboBox, 10 );
@@ -84,10 +88,10 @@ FilterView::FilterView( FilterTool *tool, QWidget* parent )
     QHBoxLayout *buttonLayout = new QHBoxLayout();
     buttonLayout->addStretch( 10 );
     mFilterButton = new KPushButton( KGuiItem(i18nc("@action:button","&Filter"), "system-run",
-                      i18nc("@info:tooltip","Executes the filter."),
+                      i18nc("@info:tooltip","Executes the filter for the bytes in the selected range."),
                       i18nc("@info:whatsthis",
                             "If you press the <interface>Filter</interface> button, the operation you selected "
-                            "above is executed on the document with the given options.")), this );
+                            "above is executed for the bytes in the selected range with the given options.")), this );
     mFilterButton->setEnabled( mTool->hasWriteable() );
     connect( mTool, SIGNAL(hasWriteableChanged( bool )), SLOT(onHasWriteableChanged( bool )) );
     connect( mTool, SIGNAL(charCodecChanged( const QString & )), SLOT(onCharCodecChanged( const QString & )) );
