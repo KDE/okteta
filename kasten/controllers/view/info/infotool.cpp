@@ -140,7 +140,8 @@ void InfoTool::updateStatistic()
     emit statisticDirty( false );
     emit isApplyableChanged( false );
 
-    mByteArrayView->setFocus();
+    if( mByteArrayView )
+        mByteArrayView->setFocus();
 }
 
 InfoTool::~InfoTool() {}
