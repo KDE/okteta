@@ -21,6 +21,12 @@ core:
 gui:
   sources of the basic gui library of Okteta
 
+includes:
+  headers of the basic libraries of Okteta
+
+kasten:
+  Okteta elements for the Kasten framework (currently found in libs/kasten)
+
 parts:
   collection of modules based on the Okteta libraries
 
@@ -31,7 +37,7 @@ parts/kpart:
   sources of the implementation of a KReadOnlyPart
 
 program:
-  a standalone hex editor program, based on libkakao and the Okteta libraries
+  a standalone hex editor program, based on Kasten and the Okteta Kasten elements
 
 libs:
-  neutral utility libs and frameworks
+  neutral utility libs and frameworks, useful outside Okteta
