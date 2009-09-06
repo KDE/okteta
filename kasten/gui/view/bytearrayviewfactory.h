@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYDISPLAYFACTORY_H
-#define BYTEARRAYDISPLAYFACTORY_H
+#ifndef BYTEARRAYVIEWFACTORY_H
+#define BYTEARRAYVIEWFACTORY_H
 
 // lib
 #include "oktetakastengui_export.h"
