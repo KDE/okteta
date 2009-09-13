@@ -29,7 +29,7 @@
 
 
 class ByteArrayRowViewDesignerFactory : public QObject,
-                                           public QDesignerCustomWidgetInterface
+                                        public QDesignerCustomWidgetInterface
 {
   Q_OBJECT
   Q_INTERFACES(
