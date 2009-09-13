@@ -1,0 +1,14 @@
+Okteta Qt Designer plugin
+=========================
+
+part of the Okteta project, a part of the KDE project.
+
+Copyright: 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+
+Author/Maintainer: Friedrich W. H. Kossebau <kossebau@kde.org>
+
+
+description:
+-----------
+The Okteta Qt Designer plugin adds support for the widgets from the Okteta gui library.
+So developers are able to use these widgets in UI files.

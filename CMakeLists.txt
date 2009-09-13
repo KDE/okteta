@@ -9,4 +9,5 @@ add_subdirectory( includes )
 add_subdirectory( kasten )
 
 add_subdirectory( parts )
+add_subdirectory( designer )
 add_subdirectory( program )

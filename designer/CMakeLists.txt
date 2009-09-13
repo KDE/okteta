@@ -1,0 +1,28 @@
+project( oktetadesignerplugin )
+
+set( OKTETA_REL_DIR .. )
+
+include_directories(
+  ${OKTETA_REL_DIR}/core
+  ${OKTETA_REL_DIR}/gui/libcolumnsview
+  ${OKTETA_REL_DIR}/gui
+)
+
+set( oktetadesignerplugin_SRCS
+  bytearraycolumnviewdesignerfactory.cpp
+  bytearrayrowviewdesignerfactory.cpp
+  oktetawidgetdesignerfactorycollection.cpp
+  main.cpp
+)
+
+
+kde4_add_plugin( oktetadesignerplugin  ${oktetadesignerplugin_SRCS} )
+
+target_link_libraries( oktetadesignerplugin
+  oktetagui
+#   oktetacore
+  ${QT_QTGUI_LIBRARY}
+  ${QT_QTCORE_LIBRARY}
+)
+
+install( TARGETS oktetadesignerplugin  DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer )

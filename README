@@ -24,6 +24,9 @@ gui:
 includes:
   headers of the basic libraries of Okteta
 
+designer:
+  plugin for Qt Designer to add support for widgets from the Okteta gui library
+
 kasten:
   Okteta elements for the Kasten framework (currently found in libs/kasten)
 
