@@ -424,7 +424,8 @@ void AbstractByteArrayView::fontChange( const QFont& oldFont )
 
 QSize AbstractByteArrayView::sizeHint() const
 {
-    return QSize( columnsWidth(), columnsHeight() );
+    // TODO: calculate a sensible hint based on dynamic layout settings
+    return QSize( 400, 120 );// QSize( columnsWidth(), columnsHeight() );
 }
 
 void AbstractByteArrayView::finishByteEdit()
