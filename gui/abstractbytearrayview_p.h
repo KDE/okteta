@@ -198,7 +198,7 @@ class AbstractByteArrayViewPrivate
 
   protected: // API to be implemented
     virtual AbstractByteArrayView::CodingTypeId activeCoding() const = 0;
-    virtual int visibleCodings() const = 0;
+    virtual AbstractByteArrayView::CodingTypes visibleCodings() const = 0;
     virtual int fittingBytesPerLine() const = 0;
     /** recalcs all dependant values with the actual NoOfBytesPerLine  */
     virtual void adjustToLayoutNoOfBytesPerLine() = 0;

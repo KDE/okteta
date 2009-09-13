@@ -111,7 +111,7 @@ void ByteArrayRowViewPrivate::init()
     q->setAcceptDrops( true );
 }
 
-int ByteArrayRowViewPrivate::visibleCodings()                          const { return mByteArrayColumn->visibleCodings(); }
+AbstractByteArrayView::CodingTypes ByteArrayRowViewPrivate::visibleCodings() const { return mByteArrayColumn->visibleCodings(); }
 ByteArrayRowView::CodingTypeId ByteArrayRowViewPrivate::activeCoding() const { return mActiveCoding; }
 
 void ByteArrayRowViewPrivate::setByteArrayModel( AbstractByteArrayModel* _byteArrayModel )
@@ -497,7 +497,7 @@ void ByteArrayRowViewPrivate::setVisibleCodings( int newCodings )
     const int oldCodings = visibleCodings();
 
     // no changes or no column selected?
-    if( newCodings == oldCodings || !(newCodings&AbstractByteArrayView::BothCodingsId) )
+    if( newCodings == oldCodings || !(newCodings&AbstractByteArrayView::ValueAndCharCodings) )
         return;
 
     mByteArrayColumn->setVisibleCodings( newCodings );

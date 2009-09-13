@@ -48,7 +48,8 @@ static const unsigned int StartsBefore = 1;
 static const unsigned int EndsLater = 2;
 static const Byte EmptyByte = ' ';
 
-static const int DefaultVisibleCodings = AbstractByteArrayView::ValueCodingId | AbstractByteArrayView::CharCodingId;
+static const AbstractByteArrayView::CodingTypes DefaultVisibleCodings =
+    (AbstractByteArrayView::CodingTypes)( AbstractByteArrayView::ValueCodingId | AbstractByteArrayView::CharCodingId );
 
 static const PixelX DefaultCursorWidth = 2;
 static const PixelX DefaultByteSpacingWidth = 3;
@@ -92,7 +93,7 @@ ByteArrayRowColumnRenderer::ByteArrayRowColumnRenderer( AbstractColumnStylist* s
 AbstractByteArrayView::CodingTypeId ByteArrayRowColumnRenderer::codingIdofY( PixelY y ) const
 {
     return
-        ( mVisibleCodings != AbstractByteArrayView::BothCodingsId ) ?
+        ( mVisibleCodings != AbstractByteArrayView::ValueAndCharCodings ) ?
             (AbstractByteArrayView::CodingTypeId)mVisibleCodings :
         ( y < mDigitHeight ) ?
             AbstractByteArrayView::ValueCodingId :
@@ -137,7 +138,7 @@ void ByteArrayRowColumnRenderer::resetXBuffer()
 
 void ByteArrayRowColumnRenderer::setVisibleCodings( int visibleCodings )
 {
-    mVisibleCodings = visibleCodings;
+    mVisibleCodings = (AbstractByteArrayView::CodingTypes)( visibleCodings );
 }
 
 

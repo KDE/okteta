@@ -153,7 +153,7 @@ class ByteArrayRowViewPrivate : public AbstractByteArrayViewPrivate
 
   protected: // AbstractByteArrayViewPrivate API
     virtual AbstractByteArrayView::CodingTypeId activeCoding() const;
-    virtual int visibleCodings() const;
+    virtual AbstractByteArrayView::CodingTypes visibleCodings() const;
     virtual int fittingBytesPerLine() const;
     virtual void adjustToLayoutNoOfBytesPerLine();
     virtual void updateChanged();

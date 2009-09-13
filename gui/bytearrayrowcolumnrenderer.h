@@ -215,7 +215,7 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
     const ByteArrayTableLayout* layout() const;
     bool isByteTypeColored() const;
 
-    int visibleCodings() const;
+    AbstractByteArrayView::CodingTypes visibleCodings() const;
 
 
   protected: // API to be redefined
@@ -254,7 +254,7 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
     /** */
     const CharCodec* mCharCodec;
 
-    int mVisibleCodings;
+    AbstractByteArrayView::CodingTypes mVisibleCodings;
     /** */
     PixelX mDigitWidth;
     /** */
@@ -317,7 +317,7 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
     int mSpacingTrigger;
 };
 
-inline int ByteArrayRowColumnRenderer::visibleCodings() const { return mVisibleCodings; }
+inline AbstractByteArrayView::CodingTypes ByteArrayRowColumnRenderer::visibleCodings() const { return mVisibleCodings; }
 
 
 inline PixelX ByteArrayRowColumnRenderer::byteWidth()         const { return mByteWidth; }

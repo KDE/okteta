@@ -123,10 +123,12 @@ AbstractByteArrayView::CodingTypeId ByteArrayColumnViewPrivate::activeCoding() c
     return isValueColumnActive ? AbstractByteArrayView::ValueCodingId : AbstractByteArrayView::CharCodingId;
 }
 
-int ByteArrayColumnViewPrivate::visibleCodings() const
+AbstractByteArrayView::CodingTypes ByteArrayColumnViewPrivate::visibleCodings() const
 {
-    return (mValueColumn->isVisible() ? AbstractByteArrayView::ValueCodingId : 0)
-           | (mCharColumn->isVisible() ? AbstractByteArrayView::CharCodingId : 0);
+    // TODO: try to improve this code
+    return (AbstractByteArrayView::CodingTypes)
+        ( (mValueColumn->isVisible() ? AbstractByteArrayView::ValueCodingId : 0)
+          | (mCharColumn->isVisible() ? AbstractByteArrayView::CharCodingId : 0) );
 }
 
 void ByteArrayColumnViewPrivate::setByteArrayModel( AbstractByteArrayModel* _byteArrayModel )
@@ -523,12 +525,12 @@ void ByteArrayColumnViewPrivate::setVisibleCodings( int newColumns )
     const int oldColumns = visibleCodings();
 
     // no changes or no column selected?
-    if( newColumns == oldColumns || !(newColumns&AbstractByteArrayView::BothCodingsId) )
+    if( newColumns == oldColumns || !(newColumns&AbstractByteArrayView::ValueAndCharCodings) )
         return;
 
     mValueColumn->setVisible( AbstractByteArrayView::ValueCodingId & newColumns );
     mCharColumn->setVisible( AbstractByteArrayView::CharCodingId & newColumns );
-    mSecondBorderColumn->setVisible( newColumns == AbstractByteArrayView::BothCodingsId );
+    mSecondBorderColumn->setVisible( newColumns == AbstractByteArrayView::ValueAndCharCodings );
 
     // active column not visible anymore?
     if( !mActiveColumn->isVisible() )

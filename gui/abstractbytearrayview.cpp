@@ -266,7 +266,7 @@ void AbstractByteArrayView::setReadOnly( bool readOnly )
     d->setReadOnly( readOnly );
 }
 
-int AbstractByteArrayView::visibleCodings() const
+AbstractByteArrayView::CodingTypes AbstractByteArrayView::visibleCodings() const
 {
     Q_D( const AbstractByteArrayView );
     return d->visibleCodings();

@@ -72,8 +72,8 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
   Q_PROPERTY( int NoOfBytesPerLine READ noOfBytesPerLine WRITE setNoOfBytesPerLine )
   Q_PROPERTY( int StartOffset READ startOffset WRITE setStartOffset )
   Q_PROPERTY( int FirstLineOffset READ firstLineOffset WRITE setFirstLineOffset )
-  Q_PROPERTY( int VisibleCodings READ visibleCodings WRITE setVisibleCodings )
-  Q_ENUMS( ValueCoding CharCoding ResizeStyle )
+  Q_PROPERTY( CodingTypes VisibleCodings READ visibleCodings WRITE setVisibleCodings )
+  Q_ENUMS( ValueCoding CharCoding ResizeStyle CodingTypes )
 
   public:
     enum ValueCoding { HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, MaxCodingId=0xFFFF };
@@ -81,7 +81,8 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
                      StartOfOwnEncoding=0x8000, MaxEncodingId=0xFFFF };
     enum ResizeStyle { NoResize=0, LockGrouping=1, FullSizeUsage=2, MaxResizeStyleId=0xFF };
 
-    enum CodingTypeId { NoCodingId=0, ValueCodingId=1, CharCodingId=2, BothCodingsId=ValueCodingId|CharCodingId };
+    enum CodingTypeId { NoCodingId=0, ValueCodingId=1, CharCodingId=2 };
+    enum CodingTypes { OnlyValueCoding = ValueCodingId, OnlyCharCoding = CharCodingId, ValueAndCharCodings=ValueCodingId|CharCodingId };
 
   public:
     virtual ~AbstractByteArrayView();
@@ -107,7 +108,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
 
     bool tabChangesFocus() const;
 
-    int visibleCodings() const;
+    CodingTypes visibleCodings() const;
     CodingTypeId activeCoding() const;
 
     /** returns true if there is a selected range in the array */
