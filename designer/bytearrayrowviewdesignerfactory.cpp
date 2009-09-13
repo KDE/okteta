@@ -38,7 +38,7 @@ QWidget* ByteArrayRowViewDesignerFactory::createWidget( QWidget* parent )
 {
     // TODO: why does this constructor differ from the column one?
     Okteta::ByteArrayRowView* widget = new Okteta::ByteArrayRowView( /*0, */parent );
-    widget->setByteArrayModel( getFillerByteArrayModel() );
+    widget->setByteArrayModel( createFillerByteArrayModel(widget) );
     return widget;
 }
 

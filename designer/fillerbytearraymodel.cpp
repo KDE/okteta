@@ -23,7 +23,7 @@
 #include "fillerbytearraymodel.h"
 
 // Okteta core
-#include <bytearraymodel.h>
+#include <piecetablebytearraymodel.h>
 
 
 static const unsigned char fillerData[] =
@@ -48,17 +48,10 @@ static const unsigned char fillerData[] =
 static const int fillerDataSize = sizeof(fillerData) / sizeof(fillerData[0]);
 
 
-// TODO: clean up on exit of QtDesigner
-static Okteta::ByteArrayModel* fillerByteArrayModel = 0;
-
-Okteta::AbstractByteArrayModel* getFillerByteArrayModel()
+Okteta::AbstractByteArrayModel* createFillerByteArrayModel( QObject* parent )
 {
-    if( fillerByteArrayModel == 0 )
-    {
-        // TODO: instead create models per request/view which can be edited in the preview
-        // needs support for the parent system by the bytearray models
-        fillerByteArrayModel = new Okteta::ByteArrayModel( fillerData, fillerDataSize );
-    }
+    Okteta::PieceTableByteArrayModel* fillerByteArrayModel =
+        new Okteta::PieceTableByteArrayModel( fillerData, fillerDataSize, false, parent );
 
     return fillerByteArrayModel;
 }

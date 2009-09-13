@@ -37,7 +37,7 @@ ByteArrayColumnViewDesignerFactory::ByteArrayColumnViewDesignerFactory( QObject*
 QWidget* ByteArrayColumnViewDesignerFactory::createWidget( QWidget* parent )
 {
     Okteta::ByteArrayColumnView* widget = new Okteta::ByteArrayColumnView( 0, parent );
-    widget->setByteArrayModel( getFillerByteArrayModel() );
+    widget->setByteArrayModel( createFillerByteArrayModel(widget) );
     return widget;
 }
 
