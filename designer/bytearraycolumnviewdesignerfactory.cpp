@@ -22,6 +22,8 @@
 
 #include "bytearraycolumnviewdesignerfactory.h"
 
+// plugin
+#include "fillerbytearraymodel.h"
 // Okteta gui
 #include <bytearraycolumnview.h>
 
@@ -34,7 +36,9 @@ ByteArrayColumnViewDesignerFactory::ByteArrayColumnViewDesignerFactory( QObject*
 
 QWidget* ByteArrayColumnViewDesignerFactory::createWidget( QWidget* parent )
 {
-    return new Okteta::ByteArrayColumnView( 0, parent );
+    Okteta::ByteArrayColumnView* widget = new Okteta::ByteArrayColumnView( 0, parent );
+    widget->setByteArrayModel( getFillerByteArrayModel() );
+    return widget;
 }
 
 QString ByteArrayColumnViewDesignerFactory::group() const

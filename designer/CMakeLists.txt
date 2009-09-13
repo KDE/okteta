@@ -12,6 +12,7 @@ set( oktetadesignerplugin_SRCS
   bytearraycolumnviewdesignerfactory.cpp
   bytearrayrowviewdesignerfactory.cpp
   oktetawidgetdesignerfactorycollection.cpp
+  fillerbytearraymodel.cpp
   main.cpp
 )
 
@@ -20,7 +21,7 @@ kde4_add_plugin( oktetadesignerplugin  ${oktetadesignerplugin_SRCS} )
 
 target_link_libraries( oktetadesignerplugin
   oktetagui
-#   oktetacore
+  oktetacore
   ${QT_QTGUI_LIBRARY}
   ${QT_QTCORE_LIBRARY}
 )

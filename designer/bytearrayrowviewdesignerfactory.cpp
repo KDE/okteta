@@ -22,10 +22,10 @@
 
 #include "bytearrayrowviewdesignerfactory.h"
 
+// plugin
+#include "fillerbytearraymodel.h"
 // Okteta gui
 #include <bytearrayrowview.h>
-// Qt
-#include <QtCore/QtPlugin>
 
 
 // TODO: add translations for visible names
@@ -37,7 +37,9 @@ ByteArrayRowViewDesignerFactory::ByteArrayRowViewDesignerFactory( QObject* paren
 QWidget* ByteArrayRowViewDesignerFactory::createWidget( QWidget* parent )
 {
     // TODO: why does this constructor differ from the column one?
-    return new Okteta::ByteArrayRowView( /*0, */parent );
+    Okteta::ByteArrayRowView* widget = new Okteta::ByteArrayRowView( /*0, */parent );
+    widget->setByteArrayModel( getFillerByteArrayModel() );
+    return widget;
 }
 
 QString ByteArrayRowViewDesignerFactory::group() const
