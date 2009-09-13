@@ -68,19 +68,19 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
   //Q_PROPERTY( bool hasSelectedData READ hasSelectedData )
   //Q_PROPERTY( QByteArray SelectedData READ selectedData )
   Q_PROPERTY( bool TabChangesFocus READ tabChangesFocus WRITE setTabChangesFocus )
-  Q_PROPERTY( ResizeStyle ResizeStyle READ resizeStyle WRITE setResizeStyle )
+  Q_PROPERTY( LayoutStyle LayoutStyle READ layoutStyle WRITE setLayoutStyle )
   Q_PROPERTY( int NoOfBytesPerLine READ noOfBytesPerLine WRITE setNoOfBytesPerLine )
   Q_PROPERTY( int StartOffset READ startOffset WRITE setStartOffset )
   Q_PROPERTY( int FirstLineOffset READ firstLineOffset WRITE setFirstLineOffset )
   Q_PROPERTY( bool OffsetColumnVisible READ offsetColumnVisible WRITE toggleOffsetColumn )
   Q_PROPERTY( CodingTypes VisibleCodings READ visibleCodings WRITE setVisibleCodings )
-  Q_ENUMS( ValueCoding CharCoding ResizeStyle CodingTypes )
+  Q_ENUMS( ValueCoding CharCoding LayoutStyle CodingTypes )
 
   public:
     enum ValueCoding { HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, MaxCodingId=0xFFFF };
     enum CharCoding { LocalEncoding=0, ISO8859_1Encoding=1, EBCDIC1047Encoding=2,
                      StartOfOwnEncoding=0x8000, MaxEncodingId=0xFFFF };
-    enum ResizeStyle { NoResize=0, LockGrouping=1, FullSizeUsage=2, MaxResizeStyleId=0xFF };
+    enum LayoutStyle { FixedLayoutStyle=0, WrapOnlyByteGroupsLayoutStyle=1, FullSizeLayoutStyle=2, LastUserLayout=0xFF };
 
     enum CodingTypeId { NoCodingId=0, ValueCodingId=1, CharCodingId=2 };
     enum CodingTypes { OnlyValueCoding = ValueCodingId, OnlyCharCoding = CharCodingId, ValueAndCharCodings=ValueCodingId|CharCodingId };
@@ -105,7 +105,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     Address firstLineOffset() const;
     int noOfBytesPerLine() const;
 
-    ResizeStyle resizeStyle() const;
+    LayoutStyle layoutStyle() const;
 
     bool tabChangesFocus() const;
 
@@ -220,8 +220,8 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     /** sets whether the data should be treated modified or not */
     void setModified( bool modified );
 
-    /** sets the resizestyle for the value column. Default is Okteta::FullSizeUsage */
-    void setResizeStyle( ResizeStyle resizeStyle );
+    /** sets the resizestyle for the value column. Default is Okteta::FullSizeLayoutStyle */
+    void setLayoutStyle( LayoutStyle layoutStyle );
     /** sets whether the widget is readonly or not, Default is true.
       * If the databuffer which is worked on can't be written the widget stays readonly
       */
@@ -231,7 +231,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     /** sets whether the widget is in overwrite mode or not. Default is true. */
     void setOverwriteMode( bool overwriteMode );
 
-    /** sets the number of bytes per line, switching the resize style to Okteta::NoResize */
+    /** sets the number of bytes per line, switching the resize style to Okteta::FixedLayoutStyle */
     void setNoOfBytesPerLine( int noOfBytesPerLine );
     /** sets absolut offset of the data */
     void setStartOffset( Address startOffset );

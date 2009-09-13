@@ -53,7 +53,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewConfigController : public AbstractXmlGu
     void setValueCoding( int valueCoding );
     void setCharCoding( int valueCoding );
     void setShowsNonprinting( bool on );
-    void setResizeStyle( int resizeStyle );
+    void setLayoutStyle( int layoutStyle );
     void toggleOffsetColumn( bool on );
     void toggleValueCharColumns( int visibleColunms );
 

@@ -49,7 +49,7 @@
 static const Okteta::Address DefaultStartOffset = 0;
 static const Okteta::Address DefaultFirstLineOffset = 0;
 static const int DefaultNoOfBytesPerLine =  16;
-static const ResizeStyle DefaultResizeStyle = FullSizeUsage;
+static const LayoutStyle DefaultResizeStyle = FullSizeLayoutStyle;
 static const Okteta::ValueCoding DefaultValueCoding =  Okteta::HexadecimalCoding;
 static const Okteta::CharCoding DefaultCharCoding = Okteta::LocalEncoding;
 
@@ -109,7 +109,7 @@ Okteta::Size ByteArrayFrameRenderer::length()                            const {
 int ByteArrayFrameRenderer::noOfBytesPerLine()               const { return mLayout->noOfBytesPerLine(); }
 Okteta::Address ByteArrayFrameRenderer::firstLineOffset()    const { return mLayout->firstLineOffset(); }
 Okteta::Address ByteArrayFrameRenderer::startOffset()        const { return mLayout->startOffset(); }
-ResizeStyle ByteArrayFrameRenderer::resizeStyle()            const { return mResizeStyle; }
+LayoutStyle ByteArrayFrameRenderer::layoutStyle()            const { return mResizeStyle; }
 Okteta::ValueCoding ByteArrayFrameRenderer::valueCoding()   const { return mValueCoding; }
 Okteta::PixelX ByteArrayFrameRenderer::byteSpacingWidth()           const { return mValueColumnRenderer->byteSpacingWidth(); }
 int ByteArrayFrameRenderer::noOfGroupedBytes()               const { return mValueColumnRenderer->noOfGroupedBytes(); }
@@ -201,7 +201,7 @@ void ByteArrayFrameRenderer::setBufferSpacing( Okteta::PixelX byteSpacing, int n
 }
 
 
-void ByteArrayFrameRenderer::setResizeStyle( ResizeStyle style )
+void ByteArrayFrameRenderer::setLayoutStyle( LayoutStyle style )
 {
     if( mResizeStyle == style )
         return;
@@ -215,7 +215,7 @@ void ByteArrayFrameRenderer::setResizeStyle( ResizeStyle style )
 void ByteArrayFrameRenderer::setNoOfBytesPerLine( int noOfBytesPerLine )
 {
     // if the number is explicitly set we expect a wish for no automatic resize
-    mResizeStyle = NoResize;
+    mResizeStyle = FixedLayoutStyle;
 
     if( !mLayout->setNoOfBytesPerLine(noOfBytesPerLine) )
         return;
@@ -372,7 +372,7 @@ void ByteArrayFrameRenderer::adjustToWidth()
 void ByteArrayFrameRenderer::adjustLayoutToSize()
 {
     // check whether there is a change with the numbers of fitting bytes per line
-    if( mResizeStyle != NoResize )
+    if( mResizeStyle != FixedLayoutStyle )
     {
         const int bytesPerLine = fittingBytesPerLine();
 
@@ -470,7 +470,7 @@ int ByteArrayFrameRenderer::fittingBytesPerLine() const
     int fittingBytesPerLine = noOfGroupedBytes * fittingGroupsPerLine;
 
     // groups can be splitted and not only full groups are requested?
-    if( noOfGroupedBytes > 1 && mResizeStyle == FullSizeUsage )
+    if( noOfGroupedBytes > 1 && mResizeStyle == FullSizeLayoutStyle )
     {
         const int leftDataWidth = maxDataWidth - fittingGroupsPerLine * charAndValueGroupWidth;
 

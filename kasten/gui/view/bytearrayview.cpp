@@ -59,7 +59,7 @@ ByteArrayView::ByteArrayView( ByteArrayView* other, Qt::Alignment alignment )
     mWidget->setFirstLineOffset( other->firstLineOffset() );
     mWidget->setNoOfBytesPerLine( other->noOfBytesPerLine() );
     // TODO: this can lead to different layouts due to possible one-pixel difference in width!
-    setResizeStyle( other->resizeStyle() );
+    setLayoutStyle( other->layoutStyle() );
     const Okteta::AddressRange selection = other->selection();
     setSelection( selection.start(), selection.end() );
     setZoomLevel( other->zoomLevel() );
@@ -258,9 +258,9 @@ bool ByteArrayView::offsetColumnVisible() const
     return mWidget->offsetColumnVisible();
 }
 
-int ByteArrayView::resizeStyle() const
+int ByteArrayView::layoutStyle() const
 {
-    return (int)mWidget->resizeStyle();
+    return (int)mWidget->layoutStyle();
 }
 
 int ByteArrayView::visibleByteArrayCodings() const
@@ -283,9 +283,9 @@ void ByteArrayView::toggleOffsetColumn( bool on )
     mWidget->toggleOffsetColumn( on );
 }
 
-void ByteArrayView::setResizeStyle( int resizeStyle )
+void ByteArrayView::setLayoutStyle( int layoutStyle )
 {
-    mWidget->setResizeStyle( (Okteta::AbstractByteArrayView::ResizeStyle)resizeStyle );
+    mWidget->setLayoutStyle( (Okteta::AbstractByteArrayView::LayoutStyle)layoutStyle );
 }
 
 void ByteArrayView::setVisibleByteArrayCodings( int visibleColumns )

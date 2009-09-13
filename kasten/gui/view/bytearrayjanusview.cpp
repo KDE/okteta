@@ -73,7 +73,7 @@ void ByteArrayJanusView::setViewModus( int viewModus )
         newView->setStartOffset( mView->startOffset() );
         newView->setFirstLineOffset( mView->firstLineOffset() );
         newView->setNoOfBytesPerLine( mView->noOfBytesPerLine() );
-        newView->setResizeStyle( mView->resizeStyle() );
+        newView->setLayoutStyle( mView->layoutStyle() );
         newView->setCursorPosition( mView->cursorPosition() );
         newView->setSelection( mView->selection() );
 
@@ -231,9 +231,9 @@ bool ByteArrayJanusView::offsetColumnVisible() const
     return mView->offsetColumnVisible();
 }
 
-int ByteArrayJanusView::resizeStyle() const
+int ByteArrayJanusView::layoutStyle() const
 {
-    return (int)mView->resizeStyle();
+    return (int)mView->layoutStyle();
 }
 
 int ByteArrayJanusView::visibleCodings() const
@@ -256,9 +256,9 @@ void ByteArrayJanusView::toggleOffsetColumn( bool on )
     mView->toggleOffsetColumn( on );
 }
 
-void ByteArrayJanusView::setResizeStyle( int resizeStyle )
+void ByteArrayJanusView::setLayoutStyle( int layoutStyle )
 {
-    mView->setResizeStyle( (AbstractByteArrayView::ResizeStyle)resizeStyle );
+    mView->setLayoutStyle( (AbstractByteArrayView::LayoutStyle)layoutStyle );
 }
 
 void ByteArrayJanusView::setVisibleCodings( int visibleColumns )

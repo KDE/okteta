@@ -94,14 +94,14 @@ class ByteArrayJanusView : public QWidget
     int visibleCodings() const;
 
   public: // table layout
-    void setResizeStyle( int resizeStyle );
+    void setLayoutStyle( int layoutStyle );
     void setStartOffset( Address startOffset );
     void setFirstLineOffset( Address firstLineOffset );
     void setNoOfBytesPerLine( int noOfBytesPerLine );
     Address startOffset() const;
     Address firstLineOffset() const;
     int noOfBytesPerLine() const;
-    int resizeStyle() const;
+    int layoutStyle() const;
 
   public: // layout settings
     void setShowsNonprinting( bool showsNonprinting = true );

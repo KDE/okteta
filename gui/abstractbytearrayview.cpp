@@ -140,10 +140,10 @@ bool AbstractByteArrayView::isCursorBehind() const
     Q_D( const AbstractByteArrayView );
     return d->isCursorBehind();
 }
-AbstractByteArrayView::ResizeStyle AbstractByteArrayView::resizeStyle() const
+AbstractByteArrayView::LayoutStyle AbstractByteArrayView::layoutStyle() const
 {
     Q_D( const AbstractByteArrayView );
-    return d->resizeStyle();
+    return d->layoutStyle();
 }
 
 AddressRange AbstractByteArrayView::selection() const
@@ -235,10 +235,10 @@ void AbstractByteArrayView::setOverwriteOnly( bool overwriteOnly )
     d->setOverwriteOnly( overwriteOnly );
 }
 
-void AbstractByteArrayView::setResizeStyle( ResizeStyle resizeStyle )
+void AbstractByteArrayView::setLayoutStyle( LayoutStyle layoutStyle )
 {
     Q_D( AbstractByteArrayView );
-    d->setResizeStyle( resizeStyle );
+    d->setLayoutStyle( layoutStyle );
 }
 
 void AbstractByteArrayView::setNoOfBytesPerLine( int noOfBytesPerLine )

@@ -64,7 +64,7 @@ static const int MaxFontPointSize = 128;
 static const AbstractByteArrayView::ValueCoding DefaultValueCoding =  AbstractByteArrayView::HexadecimalCoding;
 static const AbstractByteArrayView::CharCoding DefaultCharCoding = AbstractByteArrayView::LocalEncoding;
 
-static const AbstractByteArrayView::ResizeStyle DefaultResizeStyle = AbstractByteArrayView::FullSizeUsage;
+static const AbstractByteArrayView::LayoutStyle DefaultResizeStyle = AbstractByteArrayView::FullSizeLayoutStyle;
 
 static const char OctetStreamFormatName[] = "application/octet-stream";
 
@@ -348,21 +348,21 @@ void AbstractByteArrayViewPrivate::setFirstLineOffset( Address firstLineOffset )
     emit q->cursorPositionChanged( cursorPosition() );
 }
 
-void AbstractByteArrayViewPrivate::setResizeStyle( AbstractByteArrayView::ResizeStyle resizeStyle )
+void AbstractByteArrayViewPrivate::setLayoutStyle( AbstractByteArrayView::LayoutStyle layoutStyle )
 {
-    const bool isChanged = ( mResizeStyle != resizeStyle );
+    const bool isChanged = ( mResizeStyle != layoutStyle );
 
     if( !isChanged )
         return;
 
-    mResizeStyle = resizeStyle;
+    mResizeStyle = layoutStyle;
     updateViewByWidth();
 }
 
 void AbstractByteArrayViewPrivate::setNoOfBytesPerLine( int noOfBytesPerLine )
 {
     // if the number is explicitly set we expect a wish for no automatic resize
-    setResizeStyle( AbstractByteArrayView::NoResize );
+    setLayoutStyle( AbstractByteArrayView::FixedLayoutStyle );
 
     if( !mTableLayout->setNoOfBytesPerLine(noOfBytesPerLine) )
         return;
@@ -850,7 +850,7 @@ void AbstractByteArrayViewPrivate::adjustLayoutToSize()
     Q_Q( AbstractByteArrayView );
 
     // check whether there is a change with the numbers of fitting bytes per line
-    if( mResizeStyle != AbstractByteArrayView::NoResize )
+    if( mResizeStyle != AbstractByteArrayView::FixedLayoutStyle )
     {
         // changes?
         if( mTableLayout->setNoOfBytesPerLine(fittingBytesPerLine()) )
@@ -910,7 +910,7 @@ void AbstractByteArrayViewPrivate::resizeEvent( QResizeEvent* resizeEvent )
 {
     Q_Q( AbstractByteArrayView );
 
-    if( mResizeStyle != AbstractByteArrayView::NoResize )
+    if( mResizeStyle != AbstractByteArrayView::FixedLayoutStyle )
     {
         // changes?
         if( mTableLayout->setNoOfBytesPerLine(fittingBytesPerLine()) )

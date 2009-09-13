@@ -73,7 +73,7 @@ void OktetaBrowserExtension::saveState( QDataStream& stream )
     Kasten::ByteArrayView* view = mPart->byteArrayView();
 
     stream << (int)view->offsetColumnVisible() << view->visibleByteArrayCodings()
-        << (int)view->resizeStyle() << (int)view->valueCoding() 
+        << (int)view->layoutStyle() << (int)view->valueCoding() 
         << view->charCodingName() << (int)view->showsNonprinting()
 //         << view->xOffset() << view->yOffset()
         << view->cursorPosition()
@@ -89,7 +89,7 @@ void OktetaBrowserExtension::restoreState( QDataStream& stream )
 
     int offsetColumnVisible;
     int visibleCodings;
-    int resizeStyle;
+    int layoutStyle;
     int valueCoding;
     QString charCodingName;
     int showsNonprinting;
@@ -98,7 +98,7 @@ void OktetaBrowserExtension::restoreState( QDataStream& stream )
 //     int cursorBehind;
 //     int activeCoding;
 
-    stream >> offsetColumnVisible >> visibleCodings >> resizeStyle >> valueCoding >> charCodingName >> showsNonprinting
+    stream >> offsetColumnVisible >> visibleCodings >> layoutStyle >> valueCoding >> charCodingName >> showsNonprinting
 //            >> x >> y
            >> position
 //            >> cursorBehind
@@ -109,7 +109,7 @@ void OktetaBrowserExtension::restoreState( QDataStream& stream )
 
     view->toggleOffsetColumn( offsetColumnVisible );
     view->setVisibleByteArrayCodings( visibleCodings );
-    view->setResizeStyle( resizeStyle );
+    view->setLayoutStyle( layoutStyle );
     view->setValueCoding( valueCoding );
     view->setCharCoding( charCodingName );
     view->setShowsNonprinting( showsNonprinting );

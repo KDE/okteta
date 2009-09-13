@@ -142,11 +142,11 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView,
     int visibleByteArrayCodings() const;
 
   public: // table layout
-    void setResizeStyle( int resizeStyle );
+    void setLayoutStyle( int layoutStyle );
     Okteta::Address startOffset() const;
     Okteta::Address firstLineOffset() const;
     int noOfBytesPerLine() const;
-    int resizeStyle() const;
+    int layoutStyle() const;
 
   public: // layout settings
     void setShowsNonprinting( bool showsNonprinting = true );

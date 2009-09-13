@@ -48,7 +48,7 @@ class CharCodec;
 }
 
 
-enum ResizeStyle { NoResize=0, LockGrouping=1, FullSizeUsage=2, MaxResizeStyleId=0xFF };
+enum LayoutStyle { FixedLayoutStyle=0, WrapOnlyByteGroupsLayoutStyle=1, FullSizeLayoutStyle=2, LastUserLayout=0xFF };
 
 
 class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
@@ -86,7 +86,7 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
     int noOfBytesPerLine() const;
     Okteta::Address firstLineOffset() const;
     Okteta::Address startOffset() const;
-    ResizeStyle resizeStyle() const;
+    LayoutStyle layoutStyle() const;
     Okteta::ValueCoding valueCoding() const;
     Okteta::PixelX byteSpacingWidth() const;
     int noOfGroupedBytes() const;
@@ -110,7 +110,7 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
     void setStartOffset( Okteta::Address startOffset );
     void setBufferSpacing( Okteta::PixelX byteSpacing, int noOfGroupedBytes, Okteta::PixelX groupSpacing );
     void setValueCoding( Okteta::ValueCoding valueCoding );
-    void setResizeStyle( ResizeStyle style );
+    void setLayoutStyle( LayoutStyle style );
     void setNoOfBytesPerLine( int noOfBytesPerLine );
     void setByteSpacingWidth( Okteta::PixelX byteSpacingWidth );
     void setNoOfGroupedBytes( int noOfGroupedBytes );
@@ -167,7 +167,7 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
     Okteta::CharCoding mCharCoding;
 
   protected: // parameters
-    ResizeStyle mResizeStyle;
+    LayoutStyle mResizeStyle;
 };
 
 #endif

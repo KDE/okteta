@@ -413,7 +413,7 @@ int ByteArrayRowViewPrivate::fittingBytesPerLine() const
         fittingBytesPerLine = noOfGroupedBytes * fittingGroupsPerLine;
 
         // not only full groups?
-        if( mResizeStyle == AbstractByteArrayView::FullSizeUsage && noOfGroupedBytes > 1 )
+        if( mResizeStyle == AbstractByteArrayView::FullSizeLayoutStyle && noOfGroupedBytes > 1 )
         {
 
             if( fittingGroupsPerLine > 0 )

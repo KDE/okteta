@@ -96,7 +96,7 @@ void KByteArrayEdit::setCoding( KCoding C )
 
 void KByteArrayEdit::setResizeStyle( KResizeStyle Style )
 {
-    View->setResizeStyle( (Okteta::ByteArrayColumnView::ResizeStyle) Style );
+    View->setLayoutStyle( (Okteta::AbstractByteArrayView::LayoutStyle) Style );
 }
 int KByteArrayEdit::noOfBytesPerLine() const
 {
@@ -105,7 +105,7 @@ int KByteArrayEdit::noOfBytesPerLine() const
 
 KByteArrayEdit::KResizeStyle KByteArrayEdit::resizeStyle() const
 {
-    return (KResizeStyle)View->resizeStyle();
+    return (KResizeStyle)View->layoutStyle();
 }
 void KByteArrayEdit::setNoOfBytesPerLine( int NoCpL )
 {

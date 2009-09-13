@@ -74,7 +74,7 @@ ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
     list.append( i18nc("@item:inmenu  The layout will adapt to the size and fit in as much bytes per line as possible.",
                        "&On") );
     mResizeStyleAction->setItems( list );
-    connect( mResizeStyleAction, SIGNAL(triggered(int)), SLOT(setResizeStyle(int)) );
+    connect( mResizeStyleAction, SIGNAL(triggered(int)), SLOT(setLayoutStyle(int)) );
 
     mShowOffsetColumnAction = actionCollection->add<KToggleAction>( "view_lineoffset" );
     mShowOffsetColumnAction->setText( i18nc("@option:check","Show &Line Offset") );
@@ -109,7 +109,7 @@ void ViewConfigController::setTargetModel( AbstractModel* model )
         mCodingAction->setCurrentItem( mByteArrayView->valueCoding() );
         mEncodingAction->setCurrentItem( Okteta::CharCodec::codecNames().indexOf(mByteArrayView->charCodingName()) );
 
-        mResizeStyleAction->setCurrentItem( mByteArrayView->resizeStyle() );
+        mResizeStyleAction->setCurrentItem( mByteArrayView->layoutStyle() );
 
         mToggleColumnsAction->setCurrentItem( mByteArrayView->visibleByteArrayCodings()-1 );
 
@@ -141,9 +141,9 @@ void ViewConfigController::toggleOffsetColumn( bool on )
     mByteArrayView->toggleOffsetColumn( on );
 }
 
-void ViewConfigController::setResizeStyle( int resizeStyle )
+void ViewConfigController::setLayoutStyle( int layoutStyle )
 {
-    mByteArrayView->setResizeStyle( resizeStyle );
+    mByteArrayView->setLayoutStyle( layoutStyle );
 }
 
 void ViewConfigController::setCharCoding( int charCoding )

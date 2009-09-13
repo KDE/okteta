@@ -73,7 +73,7 @@ class AbstractByteArrayViewPrivate
     Address startOffset() const;
     Address firstLineOffset() const;
 
-    AbstractByteArrayView::ResizeStyle resizeStyle() const;
+    AbstractByteArrayView::LayoutStyle layoutStyle() const;
 
     bool tabChangesFocus() const;
 
@@ -114,7 +114,7 @@ class AbstractByteArrayViewPrivate
     void setValueCoding( AbstractByteArrayView::ValueCoding valueCoding );
     void setCharCoding( AbstractByteArrayView::CharCoding charCoding );
     void setCharCoding( const QString& charCodingName );
-    void setResizeStyle( AbstractByteArrayView::ResizeStyle resizeStyle );
+    void setLayoutStyle( AbstractByteArrayView::LayoutStyle layoutStyle );
     void setNoOfBytesPerLine( int noOfBytesPerLine );
     void setStartOffset( Address startOffset );
     void setFirstLineOffset( Address firstLineOffset );
@@ -261,7 +261,7 @@ class AbstractByteArrayViewPrivate
     /** */
     AbstractByteArrayView::CharCoding mCharCoding;
     /** style of resizing */
-    AbstractByteArrayView::ResizeStyle mResizeStyle;
+    AbstractByteArrayView::LayoutStyle mResizeStyle;
 
   protected: // 
     AbstractByteArrayView* const q_ptr;
@@ -291,7 +291,7 @@ inline AbstractByteArrayView::CharCoding AbstractByteArrayViewPrivate::charCodin
     return (AbstractByteArrayView::CharCoding)mCharCoding;
 }
 inline const QString& AbstractByteArrayViewPrivate::charCodingName() const { return mCharCodec->name(); }
-inline AbstractByteArrayView::ResizeStyle AbstractByteArrayViewPrivate::resizeStyle() const { return mResizeStyle; }
+inline AbstractByteArrayView::LayoutStyle AbstractByteArrayViewPrivate::layoutStyle() const { return mResizeStyle; }
 inline Address AbstractByteArrayViewPrivate::cursorPosition()   const { return mTableCursor->realIndex(); }
 inline bool AbstractByteArrayViewPrivate::isCursorBehind()  const { return mTableCursor->isBehind(); }
 inline bool AbstractByteArrayViewPrivate::isModified()      const { return mByteArrayModel->isModified(); }
