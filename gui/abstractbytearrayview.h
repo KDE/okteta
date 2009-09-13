@@ -72,6 +72,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
   Q_PROPERTY( int NoOfBytesPerLine READ noOfBytesPerLine WRITE setNoOfBytesPerLine )
   Q_PROPERTY( int StartOffset READ startOffset WRITE setStartOffset )
   Q_PROPERTY( int FirstLineOffset READ firstLineOffset WRITE setFirstLineOffset )
+  Q_PROPERTY( bool OffsetColumnVisible READ offsetColumnVisible WRITE toggleOffsetColumn )
   Q_PROPERTY( CodingTypes VisibleCodings READ visibleCodings WRITE setVisibleCodings )
   Q_ENUMS( ValueCoding CharCoding ResizeStyle CodingTypes )
 
