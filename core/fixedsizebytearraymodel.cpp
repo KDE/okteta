@@ -31,8 +31,9 @@
 namespace Okteta
 {
 
-FixedSizeByteArrayModel::FixedSizeByteArrayModel( Byte* data, int size, Byte fillUpByte )
-  : mData( data ),
+FixedSizeByteArrayModel::FixedSizeByteArrayModel( Byte* data, int size, Byte fillUpByte, QObject* parent )
+  : AbstractByteArrayModel( parent ),
+    mData( data ),
     mSize( size ),
     mFillUpByte( fillUpByte ),
     mReadOnly( true ),
@@ -41,8 +42,9 @@ FixedSizeByteArrayModel::FixedSizeByteArrayModel( Byte* data, int size, Byte fil
 {
 }
 
-FixedSizeByteArrayModel::FixedSizeByteArrayModel( int size, Byte fillUpByte )
-  : mData( new Byte[size] ),
+FixedSizeByteArrayModel::FixedSizeByteArrayModel( int size, Byte fillUpByte, QObject* parent )
+  : AbstractByteArrayModel( parent ),
+    mData( new Byte[size] ),
     mSize( size ),
     mFillUpByte( fillUpByte ),
     mReadOnly( false ),

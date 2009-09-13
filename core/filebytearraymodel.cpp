@@ -31,8 +31,9 @@
 namespace Okteta
 {
 
-FileByteArrayModel::FileByteArrayModel( int pageNumber, int pageSize )
- : d( new FileByteArrayModelPrivate(pageNumber,pageSize) )
+FileByteArrayModel::FileByteArrayModel( int pageNumber, int pageSize, QObject* parent )
+  : AbstractByteArrayModel( parent ),
+    d( new FileByteArrayModelPrivate(pageNumber,pageSize) )
 {
 }
 

@@ -30,16 +30,19 @@
 namespace Okteta
 {
 
-ByteArrayModel::ByteArrayModel( Byte* data, int size, int rawSize, bool keepMemory )
- : d( new ByteArrayModelPrivate(this,data,size,rawSize,keepMemory) )
+ByteArrayModel::ByteArrayModel( Byte* data, int size, int rawSize, bool keepMemory, QObject* parent )
+  : AbstractByteArrayModel( parent ),
+    d( new ByteArrayModelPrivate(this,data,size,rawSize,keepMemory) )
 {}
 
-ByteArrayModel::ByteArrayModel( const Byte* data, int size )
- : d( new ByteArrayModelPrivate(this,data,size) )
+ByteArrayModel::ByteArrayModel( const Byte* data, int size, QObject* parent )
+  : AbstractByteArrayModel( parent ),
+    d( new ByteArrayModelPrivate(this,data,size) )
 {}
 
-ByteArrayModel::ByteArrayModel( int size, int maxSize )
- : d( new ByteArrayModelPrivate(this,size,maxSize) )
+ByteArrayModel::ByteArrayModel( int size, int maxSize, QObject* parent )
+  : AbstractByteArrayModel( parent ),
+    d( new ByteArrayModelPrivate(this,size,maxSize) )
 {}
 
 

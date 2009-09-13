@@ -40,9 +40,9 @@ class FixedSizeByteArrayModel : public AbstractByteArrayModel
 {
   public:
     /** creates a readonly buffer around the given data */
-    FixedSizeByteArrayModel( Byte* data, int size, Byte fillUpChar = '\0' );
+    FixedSizeByteArrayModel( Byte* data, int size, Byte fillUpChar = '\0', QObject* parent = 0 );
     /** creates a writeable buffer which is deleted at the end */
-    explicit FixedSizeByteArrayModel( int size, Byte fillUpChar = '\0' );
+    explicit FixedSizeByteArrayModel( int size, Byte fillUpChar = '\0', QObject* parent = 0 );
 
     virtual ~FixedSizeByteArrayModel();
 

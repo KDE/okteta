@@ -49,9 +49,9 @@ class OKTETACORE_EXPORT ByteArrayModel : public AbstractByteArrayModel,
   friend class ByteArrayModelPrivate;
 
   public:
-    ByteArrayModel( Byte* data, int size, int rawSize = -1, bool keepsMemory = true );
-    ByteArrayModel( const Byte* data, int size );
-    explicit ByteArrayModel( int size = 0, int maxSize = -1 );
+    ByteArrayModel( Byte* data, int size, int rawSize = -1, bool keepsMemory = true, QObject* parent = 0 );
+    ByteArrayModel( const Byte* data, int size, QObject* parent = 0 );
+    explicit ByteArrayModel( int size = 0, int maxSize = -1, QObject* parent = 0 );
 
     virtual ~ByteArrayModel();
 

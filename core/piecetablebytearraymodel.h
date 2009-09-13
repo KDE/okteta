@@ -65,9 +65,9 @@ class OKTETACORE_EXPORT PieceTableByteArrayModel : public AbstractByteArrayModel
      * @param data
      * @param careForMemory 
      */
-    PieceTableByteArrayModel( const Byte* data, int size, bool careForMemory = true );
+    PieceTableByteArrayModel( const Byte* data, int size, bool careForMemory = true, QObject* parent = 0 );
 //     explicit PieceTableByteArrayModel( const QByteArray &data );
-    explicit PieceTableByteArrayModel( int size = 0, Byte fillByte = '\0' );
+    explicit PieceTableByteArrayModel( int size = 0, Byte fillByte = '\0', QObject* parent = 0 );
 //     explicit PieceTableByteArrayModel( int size = 0careForMemory, int maxSize = -1 );
 
     virtual ~PieceTableByteArrayModel();

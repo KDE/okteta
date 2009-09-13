@@ -27,12 +27,14 @@
 namespace Okteta
 {
 
-PieceTableByteArrayModel::PieceTableByteArrayModel( const Byte* data, int size, bool careForMemory )
- : d( new PieceTableByteArrayModelPrivate(this,data,size,careForMemory) )
+PieceTableByteArrayModel::PieceTableByteArrayModel( const Byte* data, int size, bool careForMemory, QObject* parent )
+  : AbstractByteArrayModel( parent ),
+    d( new PieceTableByteArrayModelPrivate(this,data,size,careForMemory) )
 {}
 
-PieceTableByteArrayModel::PieceTableByteArrayModel( int size, Byte fillByte )
- : d( new PieceTableByteArrayModelPrivate(this,size,fillByte) )
+PieceTableByteArrayModel::PieceTableByteArrayModel( int size, Byte fillByte, QObject* parent )
+  : AbstractByteArrayModel( parent ),
+    d( new PieceTableByteArrayModelPrivate(this,size,fillByte) )
 {}
 
 // PieceTableByteArrayModel::PieceTableByteArrayModel( int size, int maxSize )
