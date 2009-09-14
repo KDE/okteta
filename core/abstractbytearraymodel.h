@@ -185,8 +185,8 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
      * @param fillLength number of bytes to fill. If Length is -1, the buffer is filled till the end.
      * @return number of filled bytes
      */
-    virtual Size fill( const Byte fillByte, Address offset = 0, Size fillLength = -1 ) = 0;
-    Size fill( const Byte fillChar, const AddressRange& fillRange );
+    virtual Size fill( Byte fillByte, Address offset = 0, Size fillLength = -1 ) = 0;
+    Size fill( Byte fillChar, const AddressRange& fillRange );
 
     /** sets a single byte
      * if the offset is not valid the behaviour is undefined

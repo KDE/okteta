@@ -90,7 +90,7 @@ bool PieceTableByteArrayModel::swap( Address firstStart, const AddressRange& sec
     return d->swap( firstStart, secondRange );
 }
 
-Size PieceTableByteArrayModel::fill( const Byte fillByte, Address offset, Size fillLength )
+Size PieceTableByteArrayModel::fill( Byte fillByte, Address offset, Size fillLength )
 {
     return d->fill( fillByte, offset, fillLength );
 }

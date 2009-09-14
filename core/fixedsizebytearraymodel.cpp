@@ -248,7 +248,7 @@ bool FixedSizeByteArrayModel::swap( Address firstStart, const AddressRange& _sec
 }
 
 
-Size FixedSizeByteArrayModel::fill( const Byte fillByte, Address offset, Size fillLength )
+Size FixedSizeByteArrayModel::fill( Byte fillByte, Address offset, Size fillLength )
 {
     // nothing to fill
     if( offset >= mSize )

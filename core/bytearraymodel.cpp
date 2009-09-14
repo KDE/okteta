@@ -100,7 +100,7 @@ bool ByteArrayModel::swap( Address firstStart, const AddressRange& secondRange )
     return d->swap( firstStart, secondRange );
 }
 
-Size ByteArrayModel::fill( const Byte fillByte, Address offset, Size fillLength )
+Size ByteArrayModel::fill( Byte fillByte, Address offset, Size fillLength )
 {
     return d->fill( fillByte, offset, fillLength );
 }

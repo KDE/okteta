@@ -64,7 +64,7 @@ class PieceTableByteArrayModelPrivate
     Size remove( const AddressRange& removeRange );
     Size replace( const AddressRange& removeRange, const Byte* insertData, int insertLength );
     bool swap( Address firstStart, const AddressRange& secondRange );
-    Size fill( const Byte fillByte, Address offset = 0, Size fillLength = -1 );
+    Size fill( Byte fillByte, Address offset = 0, Size fillLength = -1 );
     void setByte( Address offset, Byte byte );
 
     void setModified( bool modified = true );

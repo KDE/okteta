@@ -320,7 +320,7 @@ bool ByteArrayModelPrivate::swap( Address firstStart, const AddressRange& _secon
 }
 
 
-Size ByteArrayModelPrivate::fill( const Byte fillByte, Address offset, Size fillLength )
+Size ByteArrayModelPrivate::fill( Byte fillByte, Address offset, Size fillLength )
 {
     if( mReadOnly )
         return 0;

@@ -65,7 +65,7 @@ class OKTETACORE_EXPORT ByteArrayModel : public AbstractByteArrayModel,
     virtual Size remove( const AddressRange& removeRange );
     virtual Size replace( const AddressRange& removeRange, const Byte* insertData, int insertLength );
     virtual bool swap( Address firstStart, const AddressRange& secondRange );
-    virtual Size fill( const Byte fillByte, Address offset = 0, Size fillLength = -1 );
+    virtual Size fill( Byte fillByte, Address offset = 0, Size fillLength = -1 );
     virtual void setByte( Address offset, Byte byte );
 
     virtual void setModified( bool modified = true );
