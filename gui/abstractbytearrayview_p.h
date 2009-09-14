@@ -154,6 +154,7 @@ class AbstractByteArrayViewPrivate
     void dragMoveEvent( QDragMoveEvent* dragMoveEvent );
     void dragLeaveEvent( QDragLeaveEvent* dragLeaveEvent );
     void dropEvent( QDropEvent* dropEvent );
+    bool viewportEvent( QEvent* event );
 
   public: // slots
     void onContentsChanged( const ArrayChangeMetricsList& changeList );

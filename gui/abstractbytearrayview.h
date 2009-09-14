@@ -367,6 +367,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
 
   protected: // QAbstractScrollArea API
     virtual void wheelEvent( QWheelEvent *e );
+    virtual bool viewportEvent( QEvent* event );
 
   protected: // ColumnsView API
     virtual void setNoOfLines( int newNoOfLines );

@@ -527,6 +527,13 @@ void AbstractByteArrayView::dropEvent( QDropEvent* dropEvent )
     d->dropEvent( dropEvent );
 }
 
+bool AbstractByteArrayView::viewportEvent( QEvent* event )
+{
+    Q_D( AbstractByteArrayView );
+    return d->viewportEvent( event );
+}
+
+
 AbstractByteArrayView::~AbstractByteArrayView()
 {
     delete d_ptr;

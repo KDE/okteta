@@ -875,7 +875,15 @@ bool AbstractByteArrayViewPrivate::event( QEvent* event )
                 return true;
         }
     }
-    else if( event->type() == QEvent::ToolTip )
+
+    return q->ColumnsView::event( event );
+}
+
+bool AbstractByteArrayViewPrivate::viewportEvent( QEvent* event )
+{
+    Q_Q( AbstractByteArrayView );
+
+    if( event->type() == QEvent::ToolTip )
     {
         QHelpEvent* helpEvent = static_cast<QHelpEvent*>( event );
 
@@ -884,7 +892,7 @@ bool AbstractByteArrayViewPrivate::event( QEvent* event )
         Bookmarkable* bookmarks = qobject_cast<Bookmarkable*>( mByteArrayModel );
         if( bookmarks )
         {
-            const Address index = indexByPoint( helpEvent->pos() );
+            const Address index = indexByPoint( q->viewportToColumns(helpEvent->pos()) );
             if( index != -1 )
             {
                 if( bookmarks->containsBookmarkFor(index) )
@@ -903,7 +911,7 @@ bool AbstractByteArrayViewPrivate::event( QEvent* event )
         return true;
      }
 
-    return q->ColumnsView::event( event );
+    return q->ColumnsView::viewportEvent( event );
 }
 
 void AbstractByteArrayViewPrivate::resizeEvent( QResizeEvent* resizeEvent )
