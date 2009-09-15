@@ -195,6 +195,12 @@ Fixed after 0.3.0:
 ------------------
 * possibly outdated offcursor bitmap was painted if view is unfocused
 
+Fixed after 0.3.1:
+------------------
+* tooltip for bookmark was not calculated by view offset, instead always from 0,0
+* removed unneeded prefix lib from the OktetaPart
+* show more digits for float and double data types in pod table, as much as decimal precision is given
+
 Done for 0.4:
 -------------
 * added a framework for inline dialogs
@@ -207,14 +213,22 @@ Done for 0.4:
 * made all three modules of Kasten dynamic libraries and install header to ${}/kasten
 * made the Okteta Kastem modules dynamic libraries, too, including public headers in ${}/kasten
 * turned OktetaPart to use the Kasten classes
-* removed unneeded prefix lib from the OktetaPart
 * turned OktetaPart into a KParts::ReadWritePart
 * added Close All action
 * added MultiViewArea and a split controller
+* added a modified flag for the status bar
+* turned Section into template<N,S>NumberRange
+* added simple data types like Byte, ByteSize, Address, AddressRange, Line, LinePosition, LineRange, LinePositionRange
+* renamed Kasten::KByteArrayDisplay to Kasten::ByteArrayView, and some Kasten::KByteArray* classes to Kasten::ByteArray*
+* changed some parameter views to use QFormLayout
+* added/improved tooltips to/for all tool views
+* QtDesigner plugin for ByteArray*View
+* renamed ResizeStyle to LayoutStyle in API
 
 Next to work on:
 ----------------------------------
 Important:
+* get maxEnums out of Designer combobox
 * implement find whole words only!
 * improve resize of status bar with priority-based limiting of shown items, use perhaps SqueezedLabel for Selection
 * width calculation for resize seems to need to include some margins
@@ -225,6 +239,7 @@ Less important:
 * some more unit tests
 * fix wrong font width calculation for offset and selection in statusbar
 * do not show Paste from clipboard if not possible (at end or overwrite at line end), also for other tools
+* do not show Cut if in Overwrite mode
 * cursor does not get redone on color change
 * on tripple click turn into selecting just whole lines if button kept pressed
 * ask artists for own icon
@@ -232,8 +247,17 @@ Less important:
 
 Later on:
 ---------
+* add StackedViews
+* think about making the ByteArray* things interface only to the AbstractModel
+  for this improve template functions findDocument with multiple interfaces given
 * make offset 64-Bit, in the whole Api, best by using own datatype/define/typedef
+* try to merge both bytearray views into one
 * add dialogplugins to DocumentSyncManager for the interaction
+* show parameter field disabled, if there are no parameters
+* selecting an operation/algorithm should move focus to parameter field (cmp. format input)
+  or execute button if there are no parameters
+* catch Enter/Return for tool views and execute current command
+* move search ignoreCase and whole words into ByteArrayService, and reenable Whole words only in Search Tool
 * make status bar tools more flat, e.g. see how the zoom tool of KOffice is done
 * for close all and exit make a collective list of unsaved in one dialog instead of single requests
 * add border to BookmarkEditPopup, perhaps like that of QMenu
@@ -256,6 +280,7 @@ See "Insert", is generated as well as from a source, so perhaps join there?
       <ActionList name="paste_as_list" />
     </Menu>
 * Make tabs click proxies
+* make tabs movable between areas (like QDockWidgets)
 * Better handling of file errors:
   exact problem descriptions,
   options to solve problem (e.g. make file readable)
@@ -306,6 +331,7 @@ See "Insert", is generated as well as from a source, so perhaps join there?
   so a click on the offset status would trigger the goto tool
   (or better do in-place/by-model editing, e.g. offset status would mean editing number?)
 * all KDE inputs should show state with colors (invalid, okay)
+* think about how per-user focus can be done
 
 Future plans:
 -------------
