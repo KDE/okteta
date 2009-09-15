@@ -3,21 +3,20 @@
 
 <MenuBar>
   <Menu name="file">
-    <Action name="export" append="save_merge" />
+    <Action name="export" /><!--TODO: non-standard, needs group to add to-->
   </Menu>
   <Menu name="edit">
-    <Action name="copy_as" append="edit_paste_merge" />
+    <Action name="copy_as" /><!--TODO: non-standard, needs group to add to-->
     <Separator/>
     <Action name="edit_select_all"/>
     <Action name="edit_deselect"/>
-    <MergeLocal name="edit_select_merge"/>
-    <Action name="edit_select" append="edit_select_merge" />
+    <Action name="edit_select" /><!--TODO: non-standard, needs group to add to-->
     <Separator/>
     <Action name="edit_find"/>
     <Action name="edit_find_next"/>
     <Action name="edit_find_prev"/>
     <Separator/>
-    <Action name="goto_offset" />
+    <Action name="goto_offset" /><!--TODO: non-standard, needs group to add to-->
   </Menu>
   <Menu name="view">
     <Separator/>
