@@ -287,12 +287,12 @@ void PODDecoderTool::updateData()
 
     // float 32 bit
     const QString float32Bit = (P32Bit == 0) ? EmptyString :
-                                               QString::number(*(float*)P32Bit,'e');
+                                               QString::number(*(float*)P32Bit,'e',8);
     mDecoderValueList[Float32BitId] = float32Bit;
 
     // float 64 bit
     const QString double64Bit = (P64Bit == 0) ? EmptyString :
-                                                QString::number(*(double*)P64Bit,'e');
+                                                QString::number(*(double*)P64Bit,'e',16);
     mDecoderValueList[Float64BitId] = double64Bit;
 
     const int numBits = 0;//mBitWidthSelection->currentIndex();
