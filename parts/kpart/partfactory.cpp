@@ -88,6 +88,6 @@ const KComponentData &OktetaPartFactory::componentData()
 }
 
 
-K_EXPORT_COMPONENT_FACTORY( liboktetapart, OktetaPartFactory )
+K_EXPORT_COMPONENT_FACTORY( oktetapart, OktetaPartFactory )
 
 #include "partfactory.moc"
