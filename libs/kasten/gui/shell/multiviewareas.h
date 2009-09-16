@@ -81,9 +81,9 @@ class KASTENGUI_EXPORT MultiViewAreas : public AbstractGroupedViews,
     virtual int viewAreasCount() const;
 
   Q_SIGNALS: // If::ViewAreaSplitable API
-    void viewAreasAdded( const QList<Kasten::AbstractViewArea*>& viewAreas );
-    void viewAreasRemoved( const QList<Kasten::AbstractViewArea*>& viewAreas );
-    void viewAreaFocusChanged( Kasten::AbstractViewArea* viewArea );
+    virtual void viewAreasAdded( const QList<Kasten::AbstractViewArea*>& viewAreas );
+    virtual void viewAreasRemoved( const QList<Kasten::AbstractViewArea*>& viewAreas );
+    virtual void viewAreaFocusChanged( Kasten::AbstractViewArea* viewArea );
 
   Q_SIGNALS:
     void dragMove( const QDragMoveEvent* event, bool& accepted );
