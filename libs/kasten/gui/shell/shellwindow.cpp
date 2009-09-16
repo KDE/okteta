@@ -250,6 +250,14 @@ void ShellWindow::onToolVisibilityChanged( bool isVisible )
 
 ShellWindow::~ShellWindow()
 {
+    // we have to explicitely reset any inline tool view before first deleting all tools
+    // and then the grouped views, because on destruction of the inline tool view it
+    // operates on the tool, which then has been no longer ->crash
+    // The other option would be to first delete the view, but for reasons if do not
+    // remember currently I prefer the destruction in this order
+    // TODO: make this call unneeded
+    mGroupedViews->setCurrentToolInlineView( 0 );
+
     qDeleteAll( mControllers );
     qDeleteAll( mTools );
 
