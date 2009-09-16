@@ -92,12 +92,12 @@ class OKTETAKASTENCORE_EXPORT ByteArrayDocument : public AbstractDocument,
     void removeUsers( const QList<Person>& users );
 
   Q_SIGNALS: // If::Versionable
-    virtual void revertedToVersionIndex( int versionIndex );
-    virtual void headVersionDataChanged( const Kasten::DocumentVersionData &versionData );
-    virtual void headVersionChanged( int newHeadVersionIndex );
+    void revertedToVersionIndex( int versionIndex );
+    void headVersionDataChanged( const Kasten::DocumentVersionData &versionData );
+    void headVersionChanged( int newHeadVersionIndex );
   Q_SIGNALS: // If::UserListable
-    virtual void usersAdded( const QList<Person>& newUserList );
-    virtual void usersRemoved( const QList<Person>& newUserList );
+    void usersAdded( const QList<Person>& newUserList );
+    void usersRemoved( const QList<Person>& newUserList );
 
   protected Q_SLOTS:
     void onModelModified( bool newState );

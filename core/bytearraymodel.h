@@ -87,10 +87,10 @@ class OKTETACORE_EXPORT ByteArrayModel : public AbstractByteArrayModel,
     virtual unsigned int bookmarksCount() const;
 
   Q_SIGNALS: // Okteta::Bookmarkable API
-    virtual void bookmarksAdded( const QList<Okteta::Bookmark> &bookmarks );
-    virtual void bookmarksRemoved( const QList<Okteta::Bookmark> &bookmarks );
-    virtual void bookmarksModified( bool modified );
-    virtual void bookmarksModified( const QList<int>& indizes );
+    void bookmarksAdded( const QList<Okteta::Bookmark> &bookmarks );
+    void bookmarksRemoved( const QList<Okteta::Bookmark> &bookmarks );
+    void bookmarksModified( bool modified );
+    void bookmarksModified( const QList<int>& indizes );
 
   public:
     void setMaxSize( int maxSize );
