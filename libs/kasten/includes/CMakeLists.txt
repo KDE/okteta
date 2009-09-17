@@ -68,6 +68,7 @@ set( kastengui_CamelCase_HDRS
 
   DummyView
   AbstractLinePopup
+  AbstractToolWidget
   StatusBar
   ToggleButton
 
