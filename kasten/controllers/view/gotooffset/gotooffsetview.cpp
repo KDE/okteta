@@ -59,7 +59,8 @@ static const QStringList& formatStrings()
 
 
 GotoOffsetView::GotoOffsetView( GotoOffsetTool* tool, QWidget* parent )
- : QWidget( parent ), mTool( tool )
+  : AbstractToolWidget( parent ),
+    mTool( tool )
 {
     QHBoxLayout* baseLayout = new QHBoxLayout( this );
     baseLayout->setMargin( 0 );
@@ -140,6 +141,7 @@ GotoOffsetView::GotoOffsetView( GotoOffsetTool* tool, QWidget* parent )
                             "on your option, by the offset you entered above.") );
     mGotoButton = new KPushButton( gotoGuiItem, this );
     connect( mGotoButton, SIGNAL(clicked(bool)), SLOT(onGotoButtonClicked()) );
+    addButton( mGotoButton, AbstractToolWidget::Default );
     baseLayout->addWidget( mGotoButton );
     baseLayout->setAlignment( mGotoButton, Qt::AlignTop );
 

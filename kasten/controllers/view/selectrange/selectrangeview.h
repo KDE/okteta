@@ -23,8 +23,8 @@
 #ifndef SELECTRANGEVIEW_H
 #define SELECTRANGEVIEW_H
 
-// Qt
-#include <QtGui/QWidget>
+// Kasten gui
+#include <abstracttoolwidget.h>
 
 class KByteArrayValidator;
 
@@ -40,7 +40,7 @@ namespace Kasten
 class SelectRangeTool;
 
 
-class SelectRangeView : public QWidget
+class SelectRangeView : public AbstractToolWidget
 {
   Q_OBJECT
 

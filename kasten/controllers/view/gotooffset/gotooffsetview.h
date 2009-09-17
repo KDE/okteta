@@ -23,8 +23,8 @@
 #ifndef GOTOOFFSETVIEW_H
 #define GOTOOFFSETVIEW_H
 
-// Qt
-#include <QtGui/QWidget>
+// Kasten gui
+#include <abstracttoolwidget.h>
 
 class KByteArrayValidator;
 
@@ -39,7 +39,7 @@ namespace Kasten
 class GotoOffsetTool;
 
 
-class GotoOffsetView : public QWidget
+class GotoOffsetView : public AbstractToolWidget
 {
   Q_OBJECT
 

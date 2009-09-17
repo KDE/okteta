@@ -59,7 +59,8 @@ static const QStringList& formatStrings()
 
 
 SelectRangeView::SelectRangeView( SelectRangeTool* tool, QWidget* parent )
- : QWidget( parent ), mTool( tool )
+  : AbstractToolWidget( parent ),
+    mTool( tool )
 {
     QHBoxLayout* baseLayout = new QHBoxLayout( this );
     baseLayout->setMargin( 0 );
@@ -176,6 +177,7 @@ SelectRangeView::SelectRangeView( SelectRangeTool* tool, QWidget* parent )
                             "on your option, by the offset you entered above.") );
     mSelectButton = new KPushButton( selectGuiItem, this );
     connect( mSelectButton, SIGNAL(clicked(bool)), SLOT(onSelectButtonClicked()) );
+    addButton( mSelectButton, AbstractToolWidget::Default );
     baseLayout->addWidget( mSelectButton );
     baseLayout->setAlignment( mSelectButton, Qt::AlignTop );
 
