@@ -136,6 +136,8 @@ void FilterTool::filter( int filterId ) const
                 changesDescribable->closeGroupedChange();
         }
     }
+
+    mByteArrayView->setFocus();
 }
 
 void FilterTool::onApplyableChanged()
