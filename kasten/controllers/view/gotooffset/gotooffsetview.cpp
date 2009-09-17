@@ -129,7 +129,6 @@ GotoOffsetView::GotoOffsetView( GotoOffsetTool* tool, QWidget* parent )
 
     optionsLayout->addLayout( upperOptionsLayout );
     optionsLayout->addWidget( mExtendSelectionCheckBox );
-    optionsLayout->addStretch();
 
     baseLayout->addLayout( optionsLayout );
 
