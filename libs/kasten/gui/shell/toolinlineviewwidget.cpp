@@ -41,6 +41,7 @@ ToolInlineViewWidget::ToolInlineViewWidget( AbstractToolInlineView* view, QWidge
     QHBoxLayout* layout = new QHBoxLayout( this );
     layout->addWidget( view->widget(), 10 ); //TODO: find out why this takes ownership of widget to this
 
+    //TODO: use style buttons instead, like QDockWidget
     QToolButton* closeButton = new QToolButton( this );
     closeButton->setAutoRaise( true );
     closeButton->setIcon( KIcon("dialog-close") );
@@ -55,7 +56,7 @@ AbstractToolInlineView* ToolInlineViewWidget::view() const { return mView; }
 
 ToolInlineViewWidget::~ToolInlineViewWidget()
 {
-    // TODO: crashes on close of the program if view is still open
+    // TODO: crashes on close of the program if view is still open, because the view is already deleted
     layout()->removeWidget( mView->widget() );
     mView->widget()->setParent( 0 );
 }

@@ -36,7 +36,7 @@ namespace Kasten
 
 class AbstractToolWidgetPrivate;
 
-// TODO: this could also be implemented by some magic where the childWidgets are
+// TODO: this could also be implemented by some magic where the childWidgets are scanned for toolbuttons
 
 class KASTENGUI_EXPORT AbstractToolWidget : public QWidget
 {
@@ -51,6 +51,7 @@ class KASTENGUI_EXPORT AbstractToolWidget : public QWidget
     virtual ~AbstractToolWidget();
 
   public:
+    // TODO: think about making this a factory template, similar to KActionCollection::addAction
     void addButton( QPushButton* button, DefaultType defaultType = AutoDefault );
 
   private:
