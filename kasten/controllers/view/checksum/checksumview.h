@@ -23,8 +23,8 @@
 #ifndef CHECKSUMVIEW_H
 #define CHECKSUMVIEW_H
 
-// Qt
-#include <QtGui/QWidget>
+// Kasten gui
+#include <abstracttoolwidget.h>
 
 class AbstractByteArrayChecksumParameterSet;
 
@@ -41,7 +41,7 @@ namespace Kasten
 class ChecksumTool;
 
 
-class ChecksumView : public QWidget
+class ChecksumView : public AbstractToolWidget
 {
   Q_OBJECT
 

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,8 +23,8 @@
 #ifndef FILTERVIEW_H
 #define FILTERVIEW_H
 
-// Qt
-#include <QtGui/QWidget>
+// Kasten gui
+#include <abstracttoolwidget.h>
 
 class AbstractByteArrayFilterParameterSet;
 
@@ -41,7 +41,7 @@ namespace Kasten
 class FilterTool;
 
 
-class FilterView : public QWidget
+class FilterView : public AbstractToolWidget
 {
   Q_OBJECT
 

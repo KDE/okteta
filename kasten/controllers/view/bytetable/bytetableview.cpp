@@ -42,7 +42,8 @@ namespace Kasten
 {
 
 ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
- : QWidget( parent ), mTool( tool )
+  : AbstractToolWidget( parent ),
+    mTool( tool )
 {
     QVBoxLayout *baseLayout = new QVBoxLayout( this );
     baseLayout->setMargin( 0 );
@@ -92,6 +93,7 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
         i18nc( "@info:tooltip",
                "Inserts the byte currently selected in the table with the given number." );
     mInsertButton->setToolTip( insertButtonToolTip );
+    addButton( mInsertButton, AbstractToolWidget::Default );
     insertLayout->addWidget( mInsertButton );
 
     baseLayout->addLayout( insertLayout );

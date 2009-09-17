@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -47,7 +47,8 @@ namespace Kasten
 {
 
 FilterView::FilterView( FilterTool *tool, QWidget* parent )
-  : QWidget( parent ), mTool( tool )
+  : AbstractToolWidget( parent ),
+    mTool( tool )
 {
     QVBoxLayout *baseLayout = new QVBoxLayout( this );
     baseLayout->setMargin( 0 );
@@ -96,6 +97,7 @@ FilterView::FilterView( FilterTool *tool, QWidget* parent )
     connect( mTool, SIGNAL(hasWriteableChanged( bool )), SLOT(onHasWriteableChanged( bool )) );
     connect( mTool, SIGNAL(charCodecChanged( const QString & )), SLOT(onCharCodecChanged( const QString & )) );
     connect( mFilterButton, SIGNAL(clicked( bool )), SLOT(onFilterClicked()) );
+    addButton( mFilterButton, AbstractToolWidget::Default );
     buttonLayout->addWidget( mFilterButton );
     baseLayout->addLayout( buttonLayout );
     baseLayout->addStretch( 10 );

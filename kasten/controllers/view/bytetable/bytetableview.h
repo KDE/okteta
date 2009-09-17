@@ -23,8 +23,8 @@
 #ifndef BYTETABLEVIEW_H
 #define BYTETABLEVIEW_H
 
-// Qt
-#include <QtGui/QWidget>
+// Kasten gui
+#include <abstracttoolwidget.h>
 
 class KPushButton;
 class KIntNumInput;
@@ -38,7 +38,7 @@ namespace Kasten
 class ByteTableTool;
 
 
-class ByteTableView : public QWidget
+class ByteTableView : public AbstractToolWidget
 {
   Q_OBJECT
 

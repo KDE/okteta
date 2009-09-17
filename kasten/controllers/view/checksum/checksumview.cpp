@@ -50,7 +50,8 @@ namespace Kasten
 {
 
 ChecksumView::ChecksumView( ChecksumTool* tool, QWidget* parent )
- : QWidget( parent ), mTool( tool )
+  : AbstractToolWidget( parent ),
+    mTool( tool )
 {
     QVBoxLayout* baseLayout = new QVBoxLayout( this );
     baseLayout->setMargin( 0 );
@@ -93,6 +94,7 @@ ChecksumView::ChecksumView( ChecksumTool* tool, QWidget* parent )
     mCalculateButton = new KPushButton( updateGuiItem, this );
     mCalculateButton->setEnabled( mTool->isApplyable() );
     connect( mCalculateButton, SIGNAL(clicked(bool)), SLOT(onCalculateClicked()) );
+    addButton( mCalculateButton, AbstractToolWidget::Default );
     calculateLayout->addWidget( mCalculateButton );
     baseLayout->addLayout( calculateLayout );
 
