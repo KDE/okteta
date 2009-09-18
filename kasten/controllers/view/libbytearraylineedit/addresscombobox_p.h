@@ -25,7 +25,7 @@
 
 // lib
 #include "addresscombobox.h"
-#include "kbytearrayvalidator.h"
+#include "addressvalidator.h"
 // KDE
 #include <KComboBox>
 // Qt
@@ -59,7 +59,7 @@ class AddressComboBoxPrivate
     KComboBox* mValueComboBox;
 
     QString mValue[2];
-    KByteArrayValidator* mValidator;
+    AddressValidator* mValidator;
 };
 
 
