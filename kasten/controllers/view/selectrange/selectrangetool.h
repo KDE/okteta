@@ -23,6 +23,8 @@
 #ifndef SELECTRANGETOOL_H
 #define SELECTRANGETOOL_H
 
+// Okteta core
+#include <address.h>
 // Kasten core
 #include <abstracttool.h>
 
@@ -65,8 +67,8 @@ class SelectRangeTool : public AbstractTool
     bool isApplyable() const; // candidate for AbstractTool API
 
   public Q_SLOTS: // settings
-    void setTargetStart( int start );
-    void setTargetEnd( int end );
+    void setTargetStart( Okteta::Address start );
+    void setTargetEnd( Okteta::Address end );
     void setIsEndRelative( bool isEndRelative );
     void setIsEndBackwards( bool isEndBackwards );
 

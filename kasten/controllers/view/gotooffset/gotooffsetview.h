@@ -26,12 +26,14 @@
 // Kasten gui
 #include <abstracttoolwidget.h>
 
-class KByteArrayValidator;
+namespace Okteta {
+class AddressComboBox;
+}
 
-class KComboBox;
 class KPushButton;
 
 class QCheckBox;
+
 
 namespace Kasten
 {
@@ -51,8 +53,6 @@ class GotoOffsetView : public AbstractToolWidget
     GotoOffsetTool* tool() const;
 
   public Q_SLOTS: // gui
-    void onSelectorChanged( int index );
-    void onOffsetChanged( const QString& text );
     void onGotoButtonClicked();
 
   public Q_SLOTS: // tool
@@ -61,15 +61,11 @@ class GotoOffsetView : public AbstractToolWidget
   private:
     GotoOffsetTool* mTool;
 
-    KComboBox* mFormatSelector;
-    KComboBox* mOffsetEdit;
+    Okteta::AddressComboBox* mAddressEdit;
     KPushButton* mGotoButton;
     QCheckBox* mAtCursorCheckBox;
     QCheckBox* mExtendSelectionCheckBox;
     QCheckBox* mBackwardsCheckBox;
-
-    QString mOffsetString[2];
-    KByteArrayValidator* mOffsetValidator;
 };
 
 

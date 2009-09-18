@@ -96,7 +96,7 @@ void GotoOffsetTool::setTargetModel( AbstractModel* model )
         emit isApplyableChanged( newIsApplyable );
 }
 
-void GotoOffsetTool::setTargetOffset( int targetOffset )
+void GotoOffsetTool::setTargetOffset( Okteta::Address targetOffset )
 {
     const bool oldIsApplyable = isApplyable();
 

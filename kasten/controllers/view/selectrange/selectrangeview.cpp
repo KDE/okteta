@@ -25,38 +25,19 @@
 // tool
 #include "selectrangetool.h"
 // lib
-#include <kbytearrayvalidator.h>
+#include <addresscombobox.h>
 // KDE
-#include <KComboBox>
 #include <KPushButton>
-#include <KLineEdit>
 #include <KGuiItem>
 #include <KLocale>
 // Qt
 #include <QtGui/QCheckBox>
 #include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QGroupBox>
-#include <QtGui/QAbstractItemView>
 #include <QtGui/QLayout>
 
 
 namespace Kasten
 {
-
-static const int MinimumStringLength = 1;
-
-static const QStringList& formatStrings()
-{
-    static QStringList list;
-    if( list.isEmpty() )
-    {
-        list.append( i18nc( "@item:inlistbox coding of offset in the hexadecimal format", "Hexadecimal" ) );
-        list.append( i18nc( "@item:inlistbox coding of offset in the decimal format",     "Decimal" )     );
-    }
-    return list;
-}
-
 
 SelectRangeView::SelectRangeView( SelectRangeTool* tool, QWidget* parent )
   : AbstractToolWidget( parent ),
@@ -65,86 +46,47 @@ SelectRangeView::SelectRangeView( SelectRangeTool* tool, QWidget* parent )
     QHBoxLayout* baseLayout = new QHBoxLayout( this );
     baseLayout->setMargin( 0 );
 
+    // offsets
+    QVBoxLayout* offsetLayout = new QVBoxLayout();
+    offsetLayout->setMargin( 0 );
+
     // start offset
-    QGridLayout* startOffsetLayout = new QGridLayout();
+    QHBoxLayout* startOffsetLayout = new QHBoxLayout();
     startOffsetLayout->setMargin( 0 );
-    startOffsetLayout->setColumnStretch( 0, 0 );
-    startOffsetLayout->setColumnStretch( 1, 0 );
 
-    QLabel* label = new QLabel( i18nc("@label:listbox","Format:"), this );
-    mStartFormatSelector = new KComboBox( this );
-    mStartFormatSelector->addItems( formatStrings() );
-    connect( mStartFormatSelector, SIGNAL(activated(int)), SLOT(onStartSelectorChanged(int)) );
-    label->setBuddy( mStartFormatSelector );
-
-    startOffsetLayout->addWidget( label, 0, 0, Qt::AlignRight);
-    startOffsetLayout->addWidget( mStartFormatSelector, 0, 1);
-
-    label = new QLabel( i18nc("@label:listbox","Start offset:"), this );
-    mStartEdit = new KComboBox( this );
-    mStartEdit->setEditable( true );
-    mStartEdit->setMaxCount( 10 );
-    mStartEdit->setInsertPolicy( KComboBox::InsertAtTop );
-    connect( mStartEdit, SIGNAL(editTextChanged(const QString&)), SLOT(onStartChanged(const QString&)) );
-    QAbstractItemView* formatComboBoxListView = mStartFormatSelector->view();
-    connect( formatComboBoxListView, SIGNAL(activated( const QModelIndex& )),
-             mStartEdit, SLOT(setFocus()) );
-    // TODO: is a workaround for Qt 4.5.1 which doesn't emit activated() for mouse clicks
-    connect( formatComboBoxListView, SIGNAL(pressed( const QModelIndex& )),
-             mStartEdit, SLOT(setFocus()) );
-    mStartValidator = new KByteArrayValidator( mStartEdit, KByteArrayValidator::HexadecimalCoding );
-    mStartEdit->setValidator( mStartValidator );
+    QLabel* label = new QLabel( i18nc("@label:listbox","Start offset:"), this );
+    mStartEdit = new Okteta::AddressComboBox( this );
+    connect( mStartEdit, SIGNAL(addressChanged( Okteta::Address )), mTool, SLOT(setTargetStart( Okteta::Address )) );
     label->setBuddy( mStartEdit );
     const QString startInputWhatsThis =
         i18nc( "@info:whatsthis","Enter an offset to go to, or select a previous offset from the list." );
     label->setWhatsThis( startInputWhatsThis );
     mStartEdit->setWhatsThis( startInputWhatsThis );
 
-    startOffsetLayout->addWidget( label, 1, 0, Qt::AlignRight);
-    startOffsetLayout->addWidget( mStartEdit, 1, 1);
+    startOffsetLayout->addWidget( label );
+    startOffsetLayout->addWidget( mStartEdit );
     setFocusProxy( mStartEdit ); // TODO: see how KDialog does it, e.g. see if there is already a focuswidget as child
 
-    baseLayout->addLayout( startOffsetLayout );
+    offsetLayout->addLayout( startOffsetLayout );
 
     // end offset
-    QGridLayout* endOffsetLayout = new QGridLayout();
+    QHBoxLayout* endOffsetLayout = new QHBoxLayout();
     endOffsetLayout->setMargin( 0 );
-    endOffsetLayout->setColumnStretch( 0, 0 );
-    endOffsetLayout->setColumnStretch( 1, 0 );
-
-    label = new QLabel( i18nc("@label:listbox","Format:"), this );
-    mEndFormatSelector = new KComboBox( this );
-    mEndFormatSelector->addItems( formatStrings() );
-    connect( mEndFormatSelector, SIGNAL(activated(int)), SLOT(onEndSelectorChanged(int)) );
-    label->setBuddy( mEndFormatSelector );
-
-    endOffsetLayout->addWidget( label, 0, 0, Qt::AlignRight);
-    endOffsetLayout->addWidget( mEndFormatSelector, 0, 1);
 
     label = new QLabel( i18nc("@label:listbox","End offset:"), this );
-    mEndEdit = new KComboBox( this );
-    mEndEdit->setEditable( true );
-    mEndEdit->setMaxCount( 10 );
-    mEndEdit->setInsertPolicy( KComboBox::InsertAtTop );
-    connect( mEndEdit, SIGNAL(editTextChanged(const QString&)), SLOT(onEndChanged(const QString&)) );
-    formatComboBoxListView = mEndFormatSelector->view();
-    connect( formatComboBoxListView, SIGNAL(activated( const QModelIndex& )),
-             mEndEdit, SLOT(setFocus()) );
-    // TODO: is a workaround for Qt 4.5.1 which doesn't emit activated() for mouse clicks
-    connect( formatComboBoxListView, SIGNAL(pressed( const QModelIndex& )),
-             mEndEdit, SLOT(setFocus()) );
-    mEndValidator = new KByteArrayValidator( mEndEdit, KByteArrayValidator::HexadecimalCoding );
-    mEndEdit->setValidator( mEndValidator );
+    mEndEdit = new Okteta::AddressComboBox( this );
+    connect( mEndEdit, SIGNAL(addressChanged( Okteta::Address )), mTool, SLOT(setTargetEnd( Okteta::Address )) );
     label->setBuddy( mEndEdit );
     const QString endInputWhatsThis =
         i18nc( "@info:whatsthis","Enter an offset to go to, or select a previous offset from the list." );
     label->setWhatsThis( endInputWhatsThis );
     mEndEdit->setWhatsThis( endInputWhatsThis );
 
-    endOffsetLayout->addWidget( label, 1, 0, Qt::AlignRight);
-    endOffsetLayout->addWidget( mEndEdit, 1, 1);
+    endOffsetLayout->addWidget( label );
+    endOffsetLayout->addWidget( mEndEdit );
 
-    baseLayout->addLayout( endOffsetLayout );
+    offsetLayout->addLayout( endOffsetLayout );
+    baseLayout->addLayout( offsetLayout );
 
     // options
     QVBoxLayout* optionsLayout = new QVBoxLayout();
@@ -183,16 +125,13 @@ SelectRangeView::SelectRangeView( SelectRangeTool* tool, QWidget* parent )
 
     baseLayout->addStretch();
 
-    setTabOrder( mStartFormatSelector, mStartEdit );
-    setTabOrder( mEndFormatSelector, mEndEdit );
+    setTabOrder( mStartEdit, mEndEdit );
     setTabOrder( mEndEdit, mRelativeCheckBox );
     setTabOrder( mRelativeCheckBox, mBackwardsCheckBox );
     setTabOrder( mBackwardsCheckBox, mSelectButton );
 
     connect( mTool, SIGNAL(isApplyableChanged( bool )), SLOT( onApplyableChanged( bool )) );
 
-    onStartSelectorChanged( mStartFormatSelector->currentIndex() );
-    onEndSelectorChanged( mEndFormatSelector->currentIndex() );
     onApplyableChanged( mTool->isApplyable() );
 }
 
@@ -204,44 +143,12 @@ void SelectRangeView::onApplyableChanged( bool isApplyable )
     mSelectButton->setEnabled( isApplyable );
 }
 
-void SelectRangeView::onStartSelectorChanged( int index )
-{
-    mStartValidator->setCodec( static_cast<KByteArrayValidator::Coding>(index) );
-    mStartEdit->lineEdit()->setText( mStartString[ index ] );
-}
-
-void SelectRangeView::onEndSelectorChanged( int index )
-{
-    mEndValidator->setCodec( static_cast<KByteArrayValidator::Coding>(index) );
-    mEndEdit->lineEdit()->setText( mEndString[ index ] );
-}
-
-void SelectRangeView::onStartChanged( const QString& text )
-{
-    const int formatIndex = mStartFormatSelector->currentIndex();
-    mStartString[formatIndex] = text;
-
-    const int isHexadecimal = ( formatIndex == 0 );
-    const int base = isHexadecimal ? 16 : 10;
-    const int offset = mStartEdit->currentText().toInt( 0, base );
-
-    mTool->setTargetStart( offset );
-}
-
-void SelectRangeView::onEndChanged( const QString& text )
-{
-    const int formatIndex = mEndFormatSelector->currentIndex();
-    mEndString[formatIndex] = text;
-
-    const int isHexadecimal = ( formatIndex == 0 );
-    const int base = isHexadecimal ? 16 : 10;
-    const int offset = mEndEdit->currentText().toInt( 0, base );
-
-    mTool->setTargetEnd( offset );
-}
-
 void SelectRangeView::onSelectButtonClicked()
 {
+    // TODO: collect recently used offsets in tool instead?
+    mStartEdit->addAddress();
+    mEndEdit->addAddress();
+
     mTool->select();
 //     emit toolUsed();
 }

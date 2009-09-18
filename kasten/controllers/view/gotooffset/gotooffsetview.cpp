@@ -25,38 +25,19 @@
 // tool
 #include "gotooffsettool.h"
 // lib
-#include <kbytearrayvalidator.h>
+#include <addresscombobox.h>
 // KDE
-#include <KComboBox>
 #include <KPushButton>
-#include <KLineEdit>
 #include <KGuiItem>
 #include <KLocale>
 // Qt
 #include <QtGui/QCheckBox>
 #include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QGroupBox>
-#include <QtGui/QAbstractItemView>
 #include <QtGui/QLayout>
 
 
 namespace Kasten
 {
-
-static const int MinimumStringLength = 1;
-
-static const QStringList& formatStrings()
-{
-    static QStringList list;
-    if( list.isEmpty() )
-    {
-        list.append( i18nc( "@item:inlistbox coding of offset in the hexadecimal format", "Hexadecimal" ) );
-        list.append( i18nc( "@item:inlistbox coding of offset in the decimal format",     "Decimal" )     );
-    }
-    return list;
-}
-
 
 GotoOffsetView::GotoOffsetView( GotoOffsetTool* tool, QWidget* parent )
   : AbstractToolWidget( parent ),
@@ -66,45 +47,25 @@ GotoOffsetView::GotoOffsetView( GotoOffsetTool* tool, QWidget* parent )
     baseLayout->setMargin( 0 );
 
     // offset
-    QGridLayout* offsetLayout = new QGridLayout();
+    QHBoxLayout* offsetLayout = new QHBoxLayout();
     offsetLayout->setMargin( 0 );
-    offsetLayout->setColumnStretch( 0, 0 );
-    offsetLayout->setColumnStretch( 1, 0 );
 
-    QLabel* label = new QLabel( i18nc("@label:listbox","Fo&rmat:"), this );
-    mFormatSelector = new KComboBox( this );
-    mFormatSelector->addItems( formatStrings() );
-    connect( mFormatSelector, SIGNAL(activated(int)), SLOT(onSelectorChanged(int)) );
-    label->setBuddy( mFormatSelector );
-
-    offsetLayout->addWidget( label, 0, 0, Qt::AlignRight);
-    offsetLayout->addWidget( mFormatSelector, 0, 1);
-
-    label = new QLabel( i18nc("@label:listbox","O&ffset:"), this );
-    mOffsetEdit = new KComboBox( this );
-    mOffsetEdit->setEditable( true );
-    mOffsetEdit->setMaxCount( 10 );
-    mOffsetEdit->setInsertPolicy( KComboBox::InsertAtTop );
-    connect( mOffsetEdit, SIGNAL(editTextChanged(const QString&)), SLOT(onOffsetChanged(const QString&)) );
-    QAbstractItemView* formatComboBoxListView = mFormatSelector->view();
-    connect( formatComboBoxListView, SIGNAL(activated( const QModelIndex& )),
-             mOffsetEdit, SLOT(setFocus()) );
-    // TODO: is a workaround for Qt 4.5.1 which doesn't emit activated() for mouse clicks
-    connect( formatComboBoxListView, SIGNAL(pressed( const QModelIndex& )),
-             mOffsetEdit, SLOT(setFocus()) );
-    mOffsetValidator = new KByteArrayValidator( mOffsetEdit, KByteArrayValidator::HexadecimalCoding );
-    mOffsetEdit->setValidator( mOffsetValidator );
-    label->setBuddy( mOffsetEdit );
+    QLabel* label = new QLabel( i18nc("@label:listbox","O&ffset:"), this );
+    mAddressEdit = new Okteta::AddressComboBox( this );
+    connect( mAddressEdit, SIGNAL(addressChanged( Okteta::Address )), mTool, SLOT(setTargetOffset( Okteta::Address )) );
+    label->setBuddy( mAddressEdit );
     const QString inputWhatsThis =
         i18nc( "@info:whatsthis","Enter an offset to go to, or select a previous offset from the list." );
     label->setWhatsThis( inputWhatsThis );
-    mOffsetEdit->setWhatsThis( inputWhatsThis );
+    mAddressEdit->setWhatsThis( inputWhatsThis );
 
-    offsetLayout->addWidget( label, 1, 0, Qt::AlignRight);
-    offsetLayout->addWidget( mOffsetEdit, 1, 1);
+    offsetLayout->addWidget( label );
+    offsetLayout->addWidget( mAddressEdit );
 
     baseLayout->addLayout( offsetLayout );
-    setFocusProxy( mOffsetEdit ); // TODO: see how KDialog does it, e.g. see if there is already a focuswidget as child
+    baseLayout->setAlignment( offsetLayout, Qt::AlignTop );
+
+    setFocusProxy( mAddressEdit ); // TODO: see how KDialog does it, e.g. see if there is already a focuswidget as child
 
     // options
     QVBoxLayout* optionsLayout = new QVBoxLayout();
@@ -147,15 +108,13 @@ GotoOffsetView::GotoOffsetView( GotoOffsetTool* tool, QWidget* parent )
 
     baseLayout->addStretch();
 
-    setTabOrder( mFormatSelector, mOffsetEdit );
-    setTabOrder( mOffsetEdit, mAtCursorCheckBox );
+    setTabOrder( mAddressEdit, mAtCursorCheckBox );
     setTabOrder( mAtCursorCheckBox, mBackwardsCheckBox );
     setTabOrder( mBackwardsCheckBox, mExtendSelectionCheckBox );
     setTabOrder( mExtendSelectionCheckBox, mGotoButton );
 
     connect( mTool, SIGNAL(isApplyableChanged( bool )), SLOT( onApplyableChanged( bool )) );
 
-    onSelectorChanged( mFormatSelector->currentIndex() );
     onApplyableChanged( mTool->isApplyable() );
 }
 
@@ -167,26 +126,12 @@ void GotoOffsetView::onApplyableChanged( bool isApplyable )
     mGotoButton->setEnabled( isApplyable );
 }
 
-void GotoOffsetView::onSelectorChanged( int index )
-{
-    mOffsetValidator->setCodec( static_cast<KByteArrayValidator::Coding>(index) );
-    mOffsetEdit->lineEdit()->setText( mOffsetString[ index ] );
-}
-
-void GotoOffsetView::onOffsetChanged( const QString& text )
-{
-    const int formatIndex = mFormatSelector->currentIndex();
-    mOffsetString[formatIndex] = text;
-
-    const int isHexadecimal = ( formatIndex == 0 );
-    const int base = isHexadecimal ? 16 : 10;
-    const int offset = mOffsetEdit->currentText().toInt( 0, base );
-
-    mTool->setTargetOffset( offset );
-}
 
 void GotoOffsetView::onGotoButtonClicked()
 {
+    // TODO: collect recently used offset in tool instead?
+    mAddressEdit->addAddress();
+
     mTool->gotoOffset();
 //     emit toolUsed();
 }

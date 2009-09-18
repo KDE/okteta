@@ -103,7 +103,7 @@ void SelectRangeTool::setTargetModel( AbstractModel* model )
         emit isApplyableChanged( newIsApplyable );
 }
 
-void SelectRangeTool::setTargetStart( int start )
+void SelectRangeTool::setTargetStart( Okteta::Address start )
 {
     const bool oldIsApplyable = isApplyable();
 
@@ -114,7 +114,7 @@ void SelectRangeTool::setTargetStart( int start )
         emit isApplyableChanged( newIsApplyable );
 }
 
-void SelectRangeTool::setTargetEnd( int end )
+void SelectRangeTool::setTargetEnd( Okteta::Address end )
 {
     const bool oldIsApplyable = isApplyable();
 

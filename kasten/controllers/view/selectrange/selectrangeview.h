@@ -26,9 +26,10 @@
 // Kasten gui
 #include <abstracttoolwidget.h>
 
-class KByteArrayValidator;
+namespace Okteta {
+class AddressComboBox;
+}
 
-class KComboBox;
 class KPushButton;
 
 class QCheckBox;
@@ -52,10 +53,6 @@ class SelectRangeView : public AbstractToolWidget
     SelectRangeTool* tool() const;
 
   public Q_SLOTS: // gui
-    void onStartSelectorChanged( int index );
-    void onEndSelectorChanged( int index );
-    void onStartChanged( const QString& text );
-    void onEndChanged( const QString& text );
     void onSelectButtonClicked();
 
   public Q_SLOTS: // tool
@@ -64,18 +61,11 @@ class SelectRangeView : public AbstractToolWidget
   private:
     SelectRangeTool* mTool;
 
-    KComboBox* mStartFormatSelector;
-    KComboBox* mStartEdit;
-    KComboBox* mEndFormatSelector;
-    KComboBox* mEndEdit;
+    Okteta::AddressComboBox* mStartEdit;
+    Okteta::AddressComboBox* mEndEdit;
     QCheckBox* mRelativeCheckBox;
     QCheckBox* mBackwardsCheckBox;
     KPushButton* mSelectButton;
-
-    QString mStartString[2];
-    QString mEndString[2];
-    KByteArrayValidator* mStartValidator;
-    KByteArrayValidator* mEndValidator;
 };
 
 

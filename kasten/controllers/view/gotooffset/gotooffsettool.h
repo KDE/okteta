@@ -23,6 +23,8 @@
 #ifndef GOTOOFFSETTOOL_H
 #define GOTOOFFSETTOOL_H
 
+// Okteta core
+#include <address.h>
 // Kasten core
 #include <abstracttool.h>
 
@@ -64,7 +66,7 @@ class GotoOffsetTool : public AbstractTool
     bool isApplyable() const; // candidate for AbstractTool API
 
   public Q_SLOTS: // settings
-    void setTargetOffset( int targetOffset );
+    void setTargetOffset( Okteta::Address targetOffset );
     void setIsRelative( bool isRelative );
     void setIsSelectionToExtent( bool isSelectionToExtent );
     void setIsBackwards( bool isBackwards );
