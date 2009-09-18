@@ -93,7 +93,7 @@ void AddressComboBoxPrivate::onFormatChanged( int index )
     Q_Q( AddressComboBox );
 
     mValidator->setCodec( static_cast<AddressValidator::Coding>(index) );
-    mValueComboBox->lineEdit()->setText( mValue[index] );
+    mValueComboBox->setEditText( mValue[index] );
 
     emit q->formatChanged( index );
 }
