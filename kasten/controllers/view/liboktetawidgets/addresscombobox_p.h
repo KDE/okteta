@@ -58,6 +58,7 @@ class AddressComboBoxPrivate
     KComboBox* mFormatComboBox;
     KComboBox* mValueComboBox;
 
+    // TODO: think about what to do on format change, these values are no longer doing it
     QString mValue[2];
     AddressValidator* mValidator;
 };
