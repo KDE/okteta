@@ -93,6 +93,8 @@ set( BYTEARRAYLINEEDIT_LIB_SRCS
   view/libbytearraylineedit/kbytearrayvalidator.cpp
   view/libbytearraylineedit/bytearraycombobox_p.cpp
   view/libbytearraylineedit/bytearraycombobox.cpp
+  view/libbytearraylineedit/addresscombobox_p.cpp
+  view/libbytearraylineedit/addresscombobox.cpp
 )
 set( FINDDIALOG_LIB_SRCS
   view/libfinddialog/kabstractfinddialog.cpp
