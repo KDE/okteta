@@ -29,11 +29,11 @@
 // KDE
 #include <KComboBox>
 // Qt
-#include <QtCore/QByteArray>
 #include <QtCore/QString>
 
-class KLineEdit;
 
+namespace Okteta
+{
 
 class AddressComboBoxPrivate
 {
@@ -41,7 +41,7 @@ class AddressComboBoxPrivate
     explicit AddressComboBoxPrivate( AddressComboBox* parent );
 
   public:
-    qint32 address() const;
+    Address address() const;
     int format() const;
 
   public:
@@ -67,13 +67,15 @@ inline AddressComboBoxPrivate::AddressComboBoxPrivate( AddressComboBox* parent )
   : q_ptr( parent )
 {}
 
-inline qint32 AddressComboBoxPrivate::address() const
+inline Address AddressComboBoxPrivate::address() const
 {
     return mValidator->toAddress( mValue[mFormatComboBox->currentIndex()] );
 }
 inline int AddressComboBoxPrivate::format() const
 {
     return mFormatComboBox->currentIndex();
+}
+
 }
 
 #endif

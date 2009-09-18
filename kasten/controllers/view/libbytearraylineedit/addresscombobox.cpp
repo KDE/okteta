@@ -25,6 +25,9 @@
 #include "addresscombobox.moc"
 
 
+namespace Okteta
+{
+
 AddressComboBox::AddressComboBox( QWidget* parent )
   : QWidget( parent ),
     d_ptr( new AddressComboBoxPrivate(this) )
@@ -35,7 +38,7 @@ AddressComboBox::AddressComboBox( QWidget* parent )
 }
 
 
-qint32 AddressComboBox::address() const
+Address AddressComboBox::address() const
 {
     Q_D( const AddressComboBox );
 
@@ -60,4 +63,6 @@ void AddressComboBox::addAddress()
 AddressComboBox::~AddressComboBox()
 {
     delete d_ptr;
+}
+
 }

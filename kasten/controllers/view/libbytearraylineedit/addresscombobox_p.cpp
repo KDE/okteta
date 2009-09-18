@@ -33,7 +33,8 @@
 #include <QtGui/QAbstractItemView>
 
 
-static const int MinimumStringLength = 1;
+namespace Okteta
+{
 
 static const QStringList& formatStrings()
 {
@@ -41,7 +42,7 @@ static const QStringList& formatStrings()
     if( list.isEmpty() )
     {
         list.append( i18nc( "@item:inlistbox coding of offset in the hexadecimal format", "Hex" ) );
-        list.append( i18nc( "@item:inlistbox coding of offset in the decimal format",     "Dec" )     );
+        list.append( i18nc( "@item:inlistbox coding of offset in the decimal format",     "Dec" ) );
     }
     return list;
 }
@@ -106,4 +107,6 @@ void AddressComboBoxPrivate::onValueChanged( const QString& value )
     mValue[formatIndex] = value;
 
     emit q->addressChanged( mValidator->toAddress(value) );
+}
+
 }

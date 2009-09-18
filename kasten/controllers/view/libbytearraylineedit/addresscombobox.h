@@ -23,13 +23,19 @@
 #ifndef ADDRESSCOMBOBOX_H
 #define ADDRESSCOMBOBOX_H
 
+// Okteta core
+#include <address.h>
 // Qt
 #include <QtGui/QWidget>
 
-class AddressComboBoxPrivate;
 class QString;
 class QByteArray;
 
+
+namespace Okteta
+{
+
+class AddressComboBoxPrivate;
 
 class AddressComboBox : public QWidget
 {
@@ -49,11 +55,11 @@ class AddressComboBox : public QWidget
     void addAddress();
 
   public: // get
-    qint32 address() const;
+    Address address() const;
     int format() const;
 
   Q_SIGNALS:
-    void addressChanged( qint32 address );
+    void addressChanged( Okteta::Address address );
     void formatChanged( int index );
 
   protected:
@@ -63,5 +69,7 @@ class AddressComboBox : public QWidget
     Q_PRIVATE_SLOT( d_func(), void onFormatChanged( int index ) )
     Q_PRIVATE_SLOT( d_func(), void onValueChanged( const QString& value ) )
 };
+
+}
 
 #endif
