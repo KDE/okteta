@@ -23,8 +23,6 @@
 #include "bytearraycombobox_p.h"
 #include "bytearraycombobox.h"
 
-// lib
-#include "kbytearrayvalidator.h"
 // KDE
 #include <KLineEdit>
 // Qt
