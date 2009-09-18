@@ -26,9 +26,13 @@
 // Qt
 #include <QtGui/QWidget>
 
-class ByteArrayComboBoxPrivate;
 class QString;
 class QByteArray;
+
+
+namespace Okteta
+{
+class ByteArrayComboBoxPrivate;
 
 
 class ByteArrayComboBox : public QWidget
@@ -62,5 +66,7 @@ class ByteArrayComboBox : public QWidget
     Q_PRIVATE_SLOT( d_func(), void onFormatChanged( int index ) )
     Q_PRIVATE_SLOT( d_func(), void onDataChanged( const QString& data ) )
 };
+
+}
 
 #endif

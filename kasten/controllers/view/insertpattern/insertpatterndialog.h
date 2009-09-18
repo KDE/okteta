@@ -29,8 +29,9 @@
 #include <QtCore/QByteArray>
 #include <QtCore/QString>
 
+namespace Okteta {
 class ByteArrayComboBox;
-
+}
 class QSpinBox;
 
 
@@ -63,7 +64,7 @@ class InsertPatternDialog : public KDialog
     bool mHasWriteable;
 
     QSpinBox *mNumberSpinBox;
-    ByteArrayComboBox *mPatternEdit;
+    Okteta::ByteArrayComboBox* mPatternEdit;
 };
 
 }

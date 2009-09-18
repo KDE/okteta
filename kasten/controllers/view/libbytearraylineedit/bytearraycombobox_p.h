@@ -25,7 +25,7 @@
 
 // lib
 #include "bytearraycombobox.h"
-#include "kbytearrayvalidator.h"
+#include "bytearrayvalidator.h"
 // KDE
 #include <KComboBox>
 // Qt
@@ -34,6 +34,8 @@
 
 class KLineEdit;
 
+namespace Okteta
+{
 
 class ByteArrayComboBoxPrivate
 {
@@ -58,8 +60,8 @@ class ByteArrayComboBoxPrivate
     KComboBox* mFormatComboBox;
     KLineEdit* mDataEdit;
 
-    QString mData[KByteArrayValidator::CodecNumber];
-    KByteArrayValidator* mValidator;
+    QString mData[ByteArrayValidator::CodecNumber];
+    ByteArrayValidator* mValidator;
 };
 
 
@@ -74,6 +76,8 @@ inline QByteArray ByteArrayComboBoxPrivate::data() const
 inline int ByteArrayComboBoxPrivate::format() const
 {
     return mFormatComboBox->currentIndex();
+}
+
 }
 
 #endif

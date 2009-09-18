@@ -56,7 +56,7 @@ class KReplaceDialog : public KAbstractFindDialog
     virtual void showEvent( QShowEvent* showEvent );
 
   private:
-    ByteArrayComboBox *ReplaceDataEdit;
+    Okteta::ByteArrayComboBox* ReplaceDataEdit;
     QCheckBox *PromptCheckBox;
 
     ReplaceTool* mTool;

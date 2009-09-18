@@ -64,7 +64,7 @@ InsertPatternDialog::InsertPatternDialog( QWidget* parent )
     QVBoxLayout *patternLayout = new QVBoxLayout;
 
     QLabel *label = new QLabel( i18nc("@label:textbox","Pattern:"), insertBox );
-    mPatternEdit = new ByteArrayComboBox( insertBox );
+    mPatternEdit = new Okteta::ByteArrayComboBox( insertBox );
     connect( mPatternEdit, SIGNAL(dataChanged(const QByteArray&)), SLOT(onInputChanged(const QByteArray&)) );
     label->setBuddy( mPatternEdit );
     const QString inputWhatsThis =

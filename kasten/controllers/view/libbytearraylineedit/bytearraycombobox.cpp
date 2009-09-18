@@ -25,6 +25,9 @@
 #include "bytearraycombobox.moc"
 
 
+namespace Okteta
+{
+
 ByteArrayComboBox::ByteArrayComboBox( QWidget* parent )
   : QWidget( parent ),
     d_ptr( new ByteArrayComboBoxPrivate(this) )
@@ -58,4 +61,6 @@ int ByteArrayComboBox::format() const
 ByteArrayComboBox::~ByteArrayComboBox()
 {
     delete d_ptr;
+}
+
 }

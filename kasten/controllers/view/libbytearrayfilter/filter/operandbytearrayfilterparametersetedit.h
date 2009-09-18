@@ -26,7 +26,9 @@
 // lib
 #include "abstractbytearrayfilterparametersetedit.h"
 
+namespace Okteta {
 class ByteArrayComboBox;
+}
 class QCheckBox;
 
 
@@ -48,7 +50,7 @@ class OperandByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterPar
     void onInputChanged( const QByteArray &data );
 
   protected:
-    ByteArrayComboBox *mOperandEdit;
+    Okteta::ByteArrayComboBox *mOperandEdit;
     QCheckBox *mAlignAtEndCheckBox;
 };
 

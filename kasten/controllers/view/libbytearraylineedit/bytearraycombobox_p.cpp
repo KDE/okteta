@@ -30,6 +30,9 @@
 #include <QtGui/QAbstractItemView>
 
 
+namespace Okteta
+{
+
 void ByteArrayComboBoxPrivate::init()
 {
     Q_Q( ByteArrayComboBox );
@@ -39,7 +42,7 @@ void ByteArrayComboBoxPrivate::init()
     baseLayout->setSpacing( 0 );
 
     mFormatComboBox = new KComboBox( q );
-    mFormatComboBox->addItems( KByteArrayValidator::codecNames() );
+    mFormatComboBox->addItems( ByteArrayValidator::codecNames() );
     q->connect( mFormatComboBox, SIGNAL(activated(int)), SLOT(onFormatChanged(int)) );
 
     mDataEdit = new KLineEdit( q );
@@ -51,7 +54,7 @@ void ByteArrayComboBoxPrivate::init()
     // TODO: is a workaround for Qt 4.5.1 which doesn't emit activated() for mouse clicks
     QObject::connect( formatComboBoxListView, SIGNAL(pressed( const QModelIndex& )),
              mDataEdit, SLOT(setFocus()) );
-    mValidator = new KByteArrayValidator( mDataEdit );
+    mValidator = new ByteArrayValidator( mDataEdit );
     mDataEdit->setValidator( mValidator );
 
     baseLayout->addWidget( mFormatComboBox );
@@ -64,14 +67,14 @@ void ByteArrayComboBoxPrivate::init()
 void ByteArrayComboBoxPrivate::setCharCodec( const QString& charCodecName )
 {
     // update the char string
-    const QByteArray currentData = mValidator->toByteArray( mData[KByteArrayValidator::CharCoding] );
+    const QByteArray currentData = mValidator->toByteArray( mData[ByteArrayValidator::CharCoding] );
 
     mValidator->setCharCodec( charCodecName );
 
     const QString dataString = mValidator->toString( currentData );
-    mData[KByteArrayValidator::CharCoding] = dataString;
+    mData[ByteArrayValidator::CharCoding] = dataString;
 
-    const bool isCharVisible = ( mFormatComboBox->currentIndex() == KByteArrayValidator::CharCoding );
+    const bool isCharVisible = ( mFormatComboBox->currentIndex() == ByteArrayValidator::CharCoding );
 
     if( isCharVisible )
         mDataEdit->setText( dataString );
@@ -82,7 +85,7 @@ void ByteArrayComboBoxPrivate::onFormatChanged( int index )
 {
     Q_Q( ByteArrayComboBox );
 
-    mValidator->setCodec( (KByteArrayValidator::Coding)index );
+    mValidator->setCodec( (ByteArrayValidator::Coding)index );
     mDataEdit->setText( mData[index] );
 
     emit q->formatChanged( index );
@@ -95,4 +98,6 @@ void ByteArrayComboBoxPrivate::onDataChanged( const QString& data )
     mData[mFormatComboBox->currentIndex()] = data;
 
     emit q->dataChanged( mValidator->toByteArray(data) );
+}
+
 }

@@ -32,7 +32,9 @@
 #include <QtCore/QByteArray>
 #include <QtCore/QString>
 
+namespace Okteta {
 class ByteArrayComboBox;
+}
 
 class QGroupBox;
 class QCheckBox;
@@ -74,7 +76,7 @@ class KAbstractFindDialog : public KDialog
     void onSearchDataFormatChanged( int Format );
 
   private:
-    ByteArrayComboBox *SearchDataEdit;
+    Okteta::ByteArrayComboBox* SearchDataEdit;
     QCheckBox *BackwardsCheckBox;
     QCheckBox *AtCursorCheckBox;
     QCheckBox *SelectedCheckBox;
