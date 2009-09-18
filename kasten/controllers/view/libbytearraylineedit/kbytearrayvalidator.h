@@ -61,6 +61,7 @@ class KByteArrayValidator : public QValidator
 
   public:
     QByteArray toByteArray( const QString &source ) const;
+    qint32 toAddress( const QString& source ) const;
     QString toString( const QByteArray &source ) const;
 
   private:

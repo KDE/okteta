@@ -32,17 +32,20 @@
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 
+// TODO: using Okteta, also use namespace and s/qint32/Address/
 
 const QStringList &KByteArrayValidator::codecNames()
 {
     static QStringList list;
     if( list.isEmpty() )
     {
-        list.append( i18nc("@item:inlistbox coding of the bytes as values in the hexadecimal format","Hexadecimal")  );
-        list.append( i18nc("@item:inlistbox coding of the bytes as values in the decimal format",    "Decimal")      );
-        list.append( i18nc("@item:inlistbox coding of the bytes as values in the octal format",      "Octal")        );
-        list.append( i18nc("@item:inlistbox coding of the bytes as values in the binary format",     "Binary")       );
-        list.append( i18nc("@item:inlistbox coding of the bytes as characters with the values",      "Character(s)") );
+//         list.append( i18nc("@item:inlistbox guessing the coding of the bytes by the input",      "Auto") );
+        list.append( i18nc("@item:inlistbox coding of the bytes as values in the hexadecimal format","Hex")  );
+        list.append( i18nc("@item:inlistbox coding of the bytes as values in the decimal format",    "Dec")      );
+        list.append( i18nc("@item:inlistbox coding of the bytes as values in the octal format",      "Oct")        );
+        list.append( i18nc("@item:inlistbox coding of the bytes as values in the binary format",     "Bin")       );
+        list.append( i18nc("@item:inlistbox coding of the bytes as characters with the values",      "Char") );
+//         list.append( i18nc("@item:inlistbox coding of the bytes as utf-8 characters with the values",      "Utf-8") );
     }
     return list;
 }
@@ -151,6 +154,14 @@ QByteArray KByteArrayValidator::toByteArray( const QString& string ) const
 }
 
 
+qint32 KByteArrayValidator::toAddress( const QString& source ) const
+{
+    const int isHexadecimal = ( mCodecId == HexadecimalCoding );
+    const int base = isHexadecimal ? 16 : 10;
+    const int address = source.toInt( 0, base );
+
+    return address;
+}
 
 QString KByteArrayValidator::toString( const QByteArray &byteArray ) const
 {
