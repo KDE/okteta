@@ -23,8 +23,6 @@
 #include "addresscombobox_p.h"
 #include "addresscombobox.h"
 
-// lib
-#include "kbytearrayvalidator.h"
 // KDE
 #include <KLocale>
 // Qt
@@ -41,6 +39,7 @@ static const QStringList& formatStrings()
     static QStringList list;
     if( list.isEmpty() )
     {
+//         list.append( i18nc("@item:inlistbox guessing the format of the address by the input",      "Auto") );
         list.append( i18nc( "@item:inlistbox coding of offset in the hexadecimal format", "Hex" ) );
         list.append( i18nc( "@item:inlistbox coding of offset in the decimal format",     "Dec" ) );
     }
@@ -71,7 +70,7 @@ void AddressComboBoxPrivate::init()
     // TODO: is a workaround for Qt 4.5.1 which doesn't emit activated() for mouse clicks
     QObject::connect( formatComboBoxListView, SIGNAL(pressed( const QModelIndex& )),
              mValueComboBox, SLOT(setFocus()) );
-    mValidator = new KByteArrayValidator( mValueComboBox, KByteArrayValidator::HexadecimalCoding );
+    mValidator = new AddressValidator( mValueComboBox, AddressValidator::HexadecimalCoding );
     mValueComboBox->setValidator( mValidator );
 
     baseLayout->addWidget( mFormatComboBox );
@@ -93,7 +92,7 @@ void AddressComboBoxPrivate::onFormatChanged( int index )
 {
     Q_Q( AddressComboBox );
 
-    mValidator->setCodec( static_cast<KByteArrayValidator::Coding>(index) );
+    mValidator->setCodec( static_cast<AddressValidator::Coding>(index) );
     mValueComboBox->lineEdit()->setText( mValue[index] );
 
     emit q->formatChanged( index );
