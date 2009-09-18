@@ -34,8 +34,9 @@ void ByteArrayComboBoxPrivate::init()
 {
     Q_Q( ByteArrayComboBox );
 
-    QVBoxLayout *baseLayout = new QVBoxLayout( q );
+    QHBoxLayout *baseLayout = new QHBoxLayout( q );
     baseLayout->setMargin( 0 );
+    baseLayout->setSpacing( 0 );
 
     mFormatComboBox = new KComboBox( q );
     mFormatComboBox->addItems( KByteArrayValidator::codecNames() );
