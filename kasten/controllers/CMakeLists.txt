@@ -90,7 +90,7 @@ set( CHECKSUMCONTROLLER_SRCS
   view/checksum/checksumtoolview.cpp
 )
 set( BYTEARRAYLINEEDIT_LIB_SRCS
-  view/libbytearraylineedit/kbytearrayvalidator.cpp
+  view/libbytearraylineedit/bytearrayvalidator.cpp
   view/libbytearraylineedit/bytearraycombobox_p.cpp
   view/libbytearraylineedit/bytearraycombobox.cpp
   view/libbytearraylineedit/addressvalidator.cpp

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2006 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,22 +20,22 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KBYTEARRAYVALIDATOR_H
-#define KBYTEARRAYVALIDATOR_H
-
+#ifndef BYTEARRAYVALIDATOR_H
+#define BYTEARRAYVALIDATOR_H
 
 // Okteta core
 #include <oktetacore.h>
 // Qt
 #include <QtGui/QValidator>
 
-namespace Okteta {
+
+namespace Okteta
+{
 class ValueCodec;
 class CharCodec;
-}
 
 
-class KByteArrayValidator : public QValidator
+class ByteArrayValidator : public QValidator
 {
   Q_OBJECT
 
@@ -43,26 +43,25 @@ class KByteArrayValidator : public QValidator
     // matching Okteta::ValueCoding
     enum Coding { InvalidCoding = -1, HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, CharCoding=4 };
 
-    static const QStringList &codecNames();
+    static const QStringList& codecNames();
     static const int CodecNumber = 5;
 
   public:
-    explicit KByteArrayValidator( QObject *parent, Coding codecId = CharCoding, int charCodecId = Okteta::LocalEncoding );
-    virtual ~KByteArrayValidator();
+    explicit ByteArrayValidator( QObject* parent, Coding codecId = CharCoding, int charCodecId = Okteta::LocalEncoding );
+    virtual ~ByteArrayValidator();
 
   public: // QValidator API
-    virtual QValidator::State validate( QString &input, int &pos ) const;
+    virtual QValidator::State validate( QString& input, int& pos ) const;
 
   public:
     /// sets one of the value codecs or any char codec
     void setCodec( Coding codecId );
     /// sets the char codec to use
-    void setCharCodec( const QString &charCodecName );
+    void setCharCodec( const QString& charCodecName );
 
   public:
-    QByteArray toByteArray( const QString &source ) const;
-    qint32 toAddress( const QString& source ) const;
-    QString toString( const QByteArray &source ) const;
+    QByteArray toByteArray( const QString& source ) const;
+    QString toString( const QByteArray& source ) const;
 
   private:
     /**
@@ -74,8 +73,10 @@ class KByteArrayValidator : public QValidator
 //     QString zeroExtend( const QString &src, int destLen ) const;
 
     Coding mCodecId;
-    Okteta::ValueCodec *mValueCodec;
-    Okteta::CharCodec *mCharCodec;
+    ValueCodec* mValueCodec;
+    CharCodec* mCharCodec;
 };
+
+}
 
 #endif

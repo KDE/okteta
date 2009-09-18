@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2006 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kbytearrayvalidator.h"
+#include "bytearrayvalidator.h"
 
 // Okteta core
 #include <valuecodec.h>
@@ -32,9 +32,11 @@
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 
-// TODO: using Okteta, also use namespace and s/qint32/Address/
 
-const QStringList &KByteArrayValidator::codecNames()
+namespace Okteta
+{
+
+const QStringList& ByteArrayValidator::codecNames()
 {
     static QStringList list;
     if( list.isEmpty() )
@@ -51,25 +53,27 @@ const QStringList &KByteArrayValidator::codecNames()
 }
 
 
-KByteArrayValidator::KByteArrayValidator( QObject *parent, Coding codecId, int charCodecId )
- : QValidator( parent ), mCodecId( InvalidCoding ),
-   mValueCodec( 0 ), mCharCodec( Okteta::CharCodec::createCodec(Okteta::LocalEncoding) )
+ByteArrayValidator::ByteArrayValidator( QObject* parent, Coding codecId, int charCodecId )
+  : QValidator( parent ),
+    mCodecId( InvalidCoding ),
+    mValueCodec( 0 ),
+    mCharCodec( CharCodec::createCodec(Okteta::LocalEncoding) )
 {
 Q_UNUSED(charCodecId)
     setCodec( codecId );
 }
 
 
-void KByteArrayValidator::setCharCodec( const QString &charCodecName )
+void ByteArrayValidator::setCharCodec( const QString& charCodecName )
 {
     if( charCodecName == mCharCodec->name() )
         return;
 
     delete mCharCodec;
-    mCharCodec = Okteta::CharCodec::createCodec( charCodecName );
+    mCharCodec = CharCodec::createCodec( charCodecName );
 }
 
-void KByteArrayValidator::setCodec( Coding codecId )
+void ByteArrayValidator::setCodec( Coding codecId )
 {
     if( codecId == mCodecId )
         return;
@@ -79,12 +83,14 @@ void KByteArrayValidator::setCodec( Coding codecId )
     if( mCodecId != CharCoding )
     {
         delete mValueCodec;
-        mValueCodec = Okteta::ValueCodec::createCodec( (Okteta::ValueCoding)mCodecId );
+        mValueCodec = ValueCodec::createCodec( (Okteta::ValueCoding)mCodecId );
     }
 }
 
-QValidator::State KByteArrayValidator::validate( QString &string, int &/*pos*/ ) const
+QValidator::State ByteArrayValidator::validate( QString& string, int& pos ) const
 {
+    Q_UNUSED( pos )
+
     State result = QValidator::Acceptable;
 
     const int stringLength = string.length();
@@ -117,7 +123,7 @@ QValidator::State KByteArrayValidator::validate( QString &string, int &/*pos*/ )
 }
 
 
-QByteArray KByteArrayValidator::toByteArray( const QString& string ) const
+QByteArray ByteArrayValidator::toByteArray( const QString& string ) const
 {
     QByteArray result;
 
@@ -127,7 +133,7 @@ QByteArray KByteArrayValidator::toByteArray( const QString& string ) const
         result.resize( stringLength );
         for( int i=0; i<stringLength; ++i )
         {
-            Okteta::Byte byte;
+            Byte byte;
             const bool success = mCharCodec->encode( &byte, string[i] );
             result[i] = success ? byte : '?'; // TODO: define unknown symbol
         }
@@ -137,7 +143,7 @@ QByteArray KByteArrayValidator::toByteArray( const QString& string ) const
         int i = 0;
         while( i < stringLength )
         {
-            Okteta::Byte byte;
+            Byte byte;
             const int readChars = mValueCodec->decode( &byte, string, i );
             if( readChars > 0 )
             {
@@ -154,16 +160,7 @@ QByteArray KByteArrayValidator::toByteArray( const QString& string ) const
 }
 
 
-qint32 KByteArrayValidator::toAddress( const QString& source ) const
-{
-    const int isHexadecimal = ( mCodecId == HexadecimalCoding );
-    const int base = isHexadecimal ? 16 : 10;
-    const int address = source.toInt( 0, base );
-
-    return address;
-}
-
-QString KByteArrayValidator::toString( const QByteArray &byteArray ) const
+QString ByteArrayValidator::toString( const QByteArray& byteArray ) const
 {
     QString result;
 
@@ -173,7 +170,7 @@ QString KByteArrayValidator::toString( const QByteArray &byteArray ) const
         result.resize( byteArraySize );
         for( int i=0; i<byteArraySize; ++i )
         {
-            Okteta::Character c = mCharCodec->decode( byteArray[i] );
+            Character c = mCharCodec->decode( byteArray[i] );
             result[i] = c.isUndefined() ? QChar('?') : c; // TODO: define unknown symbol
         }
     }
@@ -189,8 +186,10 @@ QString KByteArrayValidator::toString( const QByteArray &byteArray ) const
 }
 
 
-KByteArrayValidator::~KByteArrayValidator()
+ByteArrayValidator::~ByteArrayValidator()
 {
     delete mValueCodec;
     delete mCharCodec;
+}
+
 }
