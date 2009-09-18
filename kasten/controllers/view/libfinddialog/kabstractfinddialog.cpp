@@ -23,7 +23,7 @@
 #include "kabstractfinddialog.h"
 
 // lib
-#include <kbytearraylineedit.h>
+#include <bytearraycombobox.h>
 // Okteta core
 #include <oktetacore.h>
 // KDE
@@ -67,7 +67,7 @@ void KAbstractFindDialog::setupFindBox()
     QVBoxLayout *findBoxLayout = new QVBoxLayout;
 
     QLabel *bytesLabel = new QLabel( i18nc("@label:textbox","Byte string to f&ind:"), findBox );
-    SearchDataEdit = new KByteArrayLineEdit( findBox );
+    SearchDataEdit = new ByteArrayComboBox( findBox );
     connect( SearchDataEdit, SIGNAL(dataChanged(const QByteArray&)), SLOT(onSearchDataChanged(const QByteArray&)) );
     connect( SearchDataEdit, SIGNAL(formatChanged(int)), SLOT(onSearchDataFormatChanged(int)) );
     bytesLabel->setBuddy( SearchDataEdit );
@@ -137,7 +137,7 @@ bool KAbstractFindDialog::inSelection()           const { return SelectedCheckBo
 KFindDirection KAbstractFindDialog::direction() const { return BackwardsCheckBox->isChecked() ? FindBackward : FindForward; }
 bool KAbstractFindDialog::ignoreCase()            const
 {
-    return ( SearchDataEdit->format() == KByteArrayLineEdit::CharCoding ) && ! CaseSensitiveCheckBox->isChecked();
+    return ( SearchDataEdit->format() == ByteArrayComboBox::CharCoding ) && ! CaseSensitiveCheckBox->isChecked();
 }
 
 QByteArray KAbstractFindDialog::data()  const
@@ -162,7 +162,7 @@ void KAbstractFindDialog::setCharCodec( const QString &codecName )
 
 void KAbstractFindDialog::onSearchDataFormatChanged( int index )
 {
-    const bool isCharCoding = ( index == KByteArrayLineEdit::CharCoding );
+    const bool isCharCoding = ( index == ByteArrayComboBox::CharCoding );
     CaseSensitiveCheckBox->setEnabled( isCharCoding );
     WholeWordsCheckBox->setEnabled( false );//isCharCoding ); TODO: not implemented!
 }

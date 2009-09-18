@@ -25,7 +25,7 @@
 // controller
 #include "replacetool.h"
 //  lib
-#include <kbytearraylineedit.h>
+#include <bytearraycombobox.h>
 // KDE
 #include <KGlobal>
 #include <KLocale>
@@ -62,7 +62,7 @@ KReplaceDialog::KReplaceDialog( ReplaceTool* tool, QWidget* parent )
     QVBoxLayout *ReplaceBoxLayout = new QVBoxLayout;
 
     QLabel *EditLabel = new QLabel( i18nc("@label:textbox","Replacing bytes:"), ReplaceBox );
-    ReplaceDataEdit = new KByteArrayLineEdit( ReplaceBox );
+    ReplaceDataEdit = new ByteArrayComboBox( ReplaceBox );
     EditLabel->setBuddy( ReplaceDataEdit );
     const QString ReplaceDataEditWhatsThis =
         i18nc("@info:whatsthis","Enter a pattern to replace with, or select a previous pattern from the list.");

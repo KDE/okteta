@@ -32,7 +32,7 @@
 #include <QtCore/QByteArray>
 #include <QtCore/QString>
 
-class KByteArrayLineEdit;
+class ByteArrayComboBox;
 
 class QGroupBox;
 class QCheckBox;
@@ -74,7 +74,7 @@ class KAbstractFindDialog : public KDialog
     void onSearchDataFormatChanged( int Format );
 
   private:
-    KByteArrayLineEdit *SearchDataEdit;
+    ByteArrayComboBox *SearchDataEdit;
     QCheckBox *BackwardsCheckBox;
     QCheckBox *AtCursorCheckBox;
     QCheckBox *SelectedCheckBox;

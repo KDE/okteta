@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,52 +20,42 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INSERTPATTERNDIALOG_H
-#define INSERTPATTERNDIALOG_H
-
-// KDE
-#include <KDialog>
-// Qt
-#include <QtCore/QByteArray>
-#include <QtCore/QString>
-
-class ByteArrayComboBox;
-
-class QSpinBox;
+#include "bytearraycombobox.h"
+#include "bytearraycombobox_p.h"
+#include "bytearraycombobox.moc"
 
 
-namespace Kasten
+ByteArrayComboBox::ByteArrayComboBox( QWidget* parent )
+  : QWidget( parent ),
+    d_ptr( new ByteArrayComboBoxPrivate(this) )
 {
+    Q_D( ByteArrayComboBox );
 
-class InsertPatternDialog : public KDialog
-{
-  Q_OBJECT
-
-  public:
-    explicit InsertPatternDialog( QWidget* parent = 0 );
-    virtual ~InsertPatternDialog();
-
-  public: // set
-    void setCharCodec( const QString &codecName );
-    void setHasWriteable( bool hasWriteable );
-
-  public: // get 
-    QByteArray pattern() const;
-    int number() const;
-
-  protected:
-    virtual void showEvent( QShowEvent *event );
-
-  private Q_SLOTS:
-    void onInputChanged( const QByteArray &data );
-
-  private:
-    bool mHasWriteable;
-
-    QSpinBox *mNumberSpinBox;
-    ByteArrayComboBox *mPatternEdit;
-};
-
+    d->init();
 }
 
-#endif
+void ByteArrayComboBox::setCharCodec( const QString& charCodecName )
+{
+    Q_D( ByteArrayComboBox );
+
+    d->setCharCodec( charCodecName );
+}
+
+QByteArray ByteArrayComboBox::data() const
+{
+    Q_D( const ByteArrayComboBox );
+
+    return d->data();
+}
+
+int ByteArrayComboBox::format() const
+{
+    Q_D( const ByteArrayComboBox );
+
+    return d->format();
+}
+
+ByteArrayComboBox::~ByteArrayComboBox()
+{
+    delete d_ptr;
+}

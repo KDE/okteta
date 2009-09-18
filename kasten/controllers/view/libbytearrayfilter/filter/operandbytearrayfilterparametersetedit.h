@@ -23,12 +23,12 @@
 #ifndef OPERANDBYTEARRAYFILTERPARAMETERSETEDIT_H
 #define OPERANDBYTEARRAYFILTERPARAMETERSETEDIT_H
 
-
 // lib
 #include "abstractbytearrayfilterparametersetedit.h"
 
-class KByteArrayLineEdit;
+class ByteArrayComboBox;
 class QCheckBox;
+
 
 class OperandByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterParameterSetEdit
 {
@@ -48,7 +48,7 @@ class OperandByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterPar
     void onInputChanged( const QByteArray &data );
 
   protected:
-    KByteArrayLineEdit *mOperandEdit;
+    ByteArrayComboBox *mOperandEdit;
     QCheckBox *mAlignAtEndCheckBox;
 };
 

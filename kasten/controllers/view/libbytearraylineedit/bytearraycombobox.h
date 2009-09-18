@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2006 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,22 +20,19 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KBYTEARRAYLINEEDIT_H
-#define KBYTEARRAYLINEEDIT_H
-
+#ifndef BYTEARRAYCOMBOBOX_H
+#define BYTEARRAYCOMBOBOX_H
 
 // Qt
-#include <QtCore/QByteArray>
-#include <QtCore/QString>
 #include <QtGui/QWidget>
 
-class KByteArrayLineEditPrivate;
+class ByteArrayComboBoxPrivate;
+class QString;
+class QByteArray;
 
 
-class KByteArrayLineEdit : public QWidget
+class ByteArrayComboBox : public QWidget
 {
-  friend class KByteArrayLineEditPrivate;
-
   Q_OBJECT
 
   public:
@@ -44,26 +41,26 @@ class KByteArrayLineEdit : public QWidget
     enum Coding { InvalidCoding = -1, HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, CharCoding=4 };
 
   public:
-    explicit KByteArrayLineEdit( QWidget* parent = 0 );
-    virtual ~KByteArrayLineEdit();
+    explicit ByteArrayComboBox( QWidget* parent = 0 );
+    virtual ~ByteArrayComboBox();
 
   public: // set
-    void setCharCodec( const QString &charCodecName );
+    void setCharCodec( const QString& charCodecName );
 
-  public: // get 
+  public: // get
     QByteArray data() const;
     int format() const;
 
   Q_SIGNALS:
-    void dataChanged( const QByteArray &data );
+    void dataChanged( const QByteArray& data );
     void formatChanged( int index );
 
-  private Q_SLOTS:
-    void onFormatChanged( int index );
-    void onDataChanged( const QString &data );
-
+  protected:
+    ByteArrayComboBoxPrivate* const d_ptr;
   private:
-    KByteArrayLineEditPrivate * const d;
+    Q_DECLARE_PRIVATE( ByteArrayComboBox )
+    Q_PRIVATE_SLOT( d_func(), void onFormatChanged( int index ) )
+    Q_PRIVATE_SLOT( d_func(), void onDataChanged( const QString& data ) )
 };
 
 #endif

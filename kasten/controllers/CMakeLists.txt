@@ -91,7 +91,8 @@ set( CHECKSUMCONTROLLER_SRCS
 )
 set( BYTEARRAYLINEEDIT_LIB_SRCS
   view/libbytearraylineedit/kbytearrayvalidator.cpp
-  view/libbytearraylineedit/kbytearraylineedit.cpp
+  view/libbytearraylineedit/bytearraycombobox_p.cpp
+  view/libbytearraylineedit/bytearraycombobox.cpp
 )
 set( FINDDIALOG_LIB_SRCS
   view/libfinddialog/kabstractfinddialog.cpp

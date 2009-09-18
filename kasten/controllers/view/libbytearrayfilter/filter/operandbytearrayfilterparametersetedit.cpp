@@ -25,7 +25,7 @@
 //
 #include "operandbytearrayfilterparameterset.h"
 // lib
-#include <kbytearraylineedit.h>
+#include <bytearraycombobox.h>
 // KDE
 #include <KLocale>
 // Qt
@@ -42,7 +42,7 @@ OperandByteArrayFilterParameterSetEdit::OperandByteArrayFilterParameterSetEdit( 
     const QString operandLabelText =
         i18nc( "@label:textbox operand to the arithmetic filter function",
                "Operand:" );
-    mOperandEdit = new KByteArrayLineEdit( this );
+    mOperandEdit = new ByteArrayComboBox( this );
     connect( mOperandEdit, SIGNAL(dataChanged(const QByteArray&)), SLOT(onInputChanged(const QByteArray&)) );
     const QString operandToolTip =
         i18nc( "@info:tooltip",
