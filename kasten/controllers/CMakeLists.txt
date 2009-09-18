@@ -18,7 +18,7 @@ include_directories(
   ${KASTEN_REL_DIR}/core/entity
   ${KASTEN_REL_DIR}/core/io
   ${KASTEN_REL_DIR}/core/system
-  view/libbytearraylineedit
+  view/liboktetawidgets
   view/libbytearraychecksum
   view/libbytearrayfilter
   view/libfinddialog
@@ -89,13 +89,13 @@ set( CHECKSUMCONTROLLER_SRCS
   view/checksum/checksumview.cpp
   view/checksum/checksumtoolview.cpp
 )
-set( BYTEARRAYLINEEDIT_LIB_SRCS
-  view/libbytearraylineedit/bytearrayvalidator.cpp
-  view/libbytearraylineedit/bytearraycombobox_p.cpp
-  view/libbytearraylineedit/bytearraycombobox.cpp
-  view/libbytearraylineedit/addressvalidator.cpp
-  view/libbytearraylineedit/addresscombobox_p.cpp
-  view/libbytearraylineedit/addresscombobox.cpp
+set( oktetawidgets_LIB_SRCS
+  view/liboktetawidgets/bytearrayvalidator.cpp
+  view/liboktetawidgets/bytearraycombobox_p.cpp
+  view/liboktetawidgets/bytearraycombobox.cpp
+  view/liboktetawidgets/addressvalidator.cpp
+  view/liboktetawidgets/addresscombobox_p.cpp
+  view/liboktetawidgets/addresscombobox.cpp
 )
 set( FINDDIALOG_LIB_SRCS
   view/libfinddialog/kabstractfinddialog.cpp
@@ -205,7 +205,7 @@ set( OKTETA_KASTEN_CONTROLLERS_SRCS
 #   ${OVERWRITEONLYCONTROLLER_SRCS}
   ${OVERWRITEMODECONTROLLER_SRCS}
   ${DOCUMENTINFOCONTROLLER_SRCS}
-  ${BYTEARRAYLINEEDIT_LIB_SRCS}
+  ${oktetawidgets_LIB_SRCS}
   ${PODDECODERCONTROLLER_SRCS}
   ${LIBCHECKSUM_SRCS}
   ${CHECKSUMCONTROLLER_SRCS}
