@@ -73,15 +73,22 @@ QValidator::State AddressValidator::validate( QString& string, int& pos ) const
 }
 
 
-Okteta::Address AddressValidator::toAddress( const QString& source ) const
+Address AddressValidator::toAddress( const QString& string ) const
 {
     const int isHexadecimal = ( mCodecId == HexadecimalCoding );
     const int base = isHexadecimal ? 16 : 10;
-    const Okteta::Address address = source.toInt( 0, base );
+    const Okteta::Address address = string.toInt( 0, base );
 
     return address;
 }
 
+QString AddressValidator::toString( Address address ) const
+{
+    const int isHexadecimal = ( mCodecId == HexadecimalCoding );
+    const int base = isHexadecimal ? 16 : 10;
+    const QString string = QString::number( address, base );
+    return string;
+}
 
 AddressValidator::~AddressValidator()
 {

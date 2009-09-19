@@ -56,7 +56,8 @@ class AddressValidator : public QValidator
     void setCodec( Coding codecId );
 
   public:
-    Okteta::Address toAddress( const QString& source ) const;
+    Address toAddress( const QString& string ) const;
+    QString toString( Address address ) const;
 
   private:
     Coding mCodecId;
