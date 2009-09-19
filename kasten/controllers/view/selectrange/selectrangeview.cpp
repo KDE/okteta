@@ -146,8 +146,8 @@ void SelectRangeView::onApplyableChanged( bool isApplyable )
 void SelectRangeView::onSelectButtonClicked()
 {
     // TODO: collect recently used offsets in tool instead?
-    mStartEdit->addAddress();
-    mEndEdit->addAddress();
+    mStartEdit->rememberCurrentAddress();
+    mEndEdit->rememberCurrentAddress();
 
     mTool->select();
 //     emit toolUsed();

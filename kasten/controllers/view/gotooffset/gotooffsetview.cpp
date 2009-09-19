@@ -130,7 +130,7 @@ void GotoOffsetView::onApplyableChanged( bool isApplyable )
 void GotoOffsetView::onGotoButtonClicked()
 {
     // TODO: collect recently used offset in tool instead?
-    mAddressEdit->addAddress();
+    mAddressEdit->rememberCurrentAddress();
 
     mTool->gotoOffset();
 //     emit toolUsed();
