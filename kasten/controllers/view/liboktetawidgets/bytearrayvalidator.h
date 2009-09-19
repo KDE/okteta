@@ -48,6 +48,7 @@ class ByteArrayValidator : public QValidator
 
   public:
     explicit ByteArrayValidator( QObject* parent, Coding codecId = CharCoding, int charCodecId = Okteta::LocalEncoding );
+
     virtual ~ByteArrayValidator();
 
   public: // QValidator API
@@ -60,8 +61,8 @@ class ByteArrayValidator : public QValidator
     void setCharCodec( const QString& charCodecName );
 
   public:
-    QByteArray toByteArray( const QString& source ) const;
-    QString toString( const QByteArray& source ) const;
+    QByteArray toByteArray( const QString& string ) const;
+    QString toString( const QByteArray& byteArray ) const;
 
   private:
     /**
