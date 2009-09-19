@@ -45,6 +45,9 @@ class AbstractByteArrayFilterParameterSetEdit : public QWidget
     virtual void getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const = 0;
     /// default returns true
     virtual bool isValid() const;
+    /// default is a noop
+    virtual void rememberCurrentSettings();
+
 
   Q_SIGNALS:
     void validityChanged( bool isValid );

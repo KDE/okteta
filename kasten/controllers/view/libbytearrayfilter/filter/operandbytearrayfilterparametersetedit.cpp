@@ -43,7 +43,7 @@ OperandByteArrayFilterParameterSetEdit::OperandByteArrayFilterParameterSetEdit( 
         i18nc( "@label:textbox operand to the arithmetic filter function",
                "Operand:" );
     mOperandEdit = new Okteta::ByteArrayComboBox( this );
-    connect( mOperandEdit, SIGNAL(dataChanged(const QByteArray&)), SLOT(onInputChanged(const QByteArray&)) );
+    connect( mOperandEdit, SIGNAL(byteArrayChanged(const QByteArray&)), SLOT(onInputChanged(const QByteArray&)) );
     const QString operandToolTip =
         i18nc( "@info:tooltip",
                "The operand to do the operation with." );
@@ -72,7 +72,7 @@ OperandByteArrayFilterParameterSetEdit::OperandByteArrayFilterParameterSetEdit( 
     baseLayout->addRow( alignAtEndLabelText, mAlignAtEndCheckBox );
 }
 
-bool OperandByteArrayFilterParameterSetEdit::isValid() const { return !mOperandEdit->data().isEmpty(); }
+bool OperandByteArrayFilterParameterSetEdit::isValid() const { return !mOperandEdit->byteArray().isEmpty(); }
 
 void OperandByteArrayFilterParameterSetEdit::setValues( const AbstractByteArrayFilterParameterSet *parameterSet )
 {
@@ -93,9 +93,14 @@ void OperandByteArrayFilterParameterSetEdit::getParameterSet( AbstractByteArrayF
     OperandByteArrayFilterParameterSet *operandParameterSet =
         static_cast<OperandByteArrayFilterParameterSet *>( parameterSet );
 
-    operandParameterSet->setOperand( mOperandEdit->data() );
+    operandParameterSet->setOperand( mOperandEdit->byteArray() );
     operandParameterSet->setOperandFormat( mOperandEdit->format() );
     operandParameterSet->setAlignAtEnd( mAlignAtEndCheckBox->isChecked() );
+}
+
+void OperandByteArrayFilterParameterSetEdit::rememberCurrentSettings()
+{
+    mOperandEdit->rememberCurrentByteArray();
 }
 
 void OperandByteArrayFilterParameterSetEdit::onInputChanged( const QByteArray &data )

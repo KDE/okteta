@@ -45,6 +45,7 @@ class OperandByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterPar
     virtual void setCharCodec( const QString &charCodecName );
     virtual void getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const;
     virtual bool isValid() const;
+    virtual void rememberCurrentSettings();
 
   protected Q_SLOTS:
     void onInputChanged( const QByteArray &data );
