@@ -83,6 +83,7 @@ void InsertPatternController::onActionTriggered()
 void InsertPatternController::onOkClicked()
 {
     mInsertPatternDialog->hide();
+    mInsertPatternDialog->rememberCurrentSettings();
 
     const QByteArray pattern = mInsertPatternDialog->pattern();
     const int patternNumber = mInsertPatternDialog->number();

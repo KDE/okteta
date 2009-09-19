@@ -68,7 +68,7 @@ void KAbstractFindDialog::setupFindBox()
 
     QLabel *bytesLabel = new QLabel( i18nc("@label:textbox","Byte string to f&ind:"), findBox );
     SearchDataEdit = new Okteta::ByteArrayComboBox( findBox );
-    connect( SearchDataEdit, SIGNAL(dataChanged(const QByteArray&)), SLOT(onSearchDataChanged(const QByteArray&)) );
+    connect( SearchDataEdit, SIGNAL(byteArrayChanged(const QByteArray&)), SLOT(onSearchDataChanged(const QByteArray&)) );
     connect( SearchDataEdit, SIGNAL(formatChanged(int)), SLOT(onSearchDataFormatChanged(int)) );
     bytesLabel->setBuddy( SearchDataEdit );
     const QString inputWhatsThis =
@@ -142,7 +142,7 @@ bool KAbstractFindDialog::ignoreCase()            const
 
 QByteArray KAbstractFindDialog::data()  const
 {
-    return SearchDataEdit->data();
+    return SearchDataEdit->byteArray();
 }
 
 void KAbstractFindDialog::setDirection( KFindDirection Direction )
@@ -158,6 +158,11 @@ void KAbstractFindDialog::setInSelection( bool InSelection )
 void KAbstractFindDialog::setCharCodec( const QString &codecName )
 {
     SearchDataEdit->setCharCodec( codecName );
+}
+
+void KAbstractFindDialog::rememberCurrentSettings()
+{
+    SearchDataEdit->rememberCurrentByteArray();
 }
 
 void KAbstractFindDialog::onSearchDataFormatChanged( int index )

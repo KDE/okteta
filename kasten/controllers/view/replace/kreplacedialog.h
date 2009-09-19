@@ -49,11 +49,14 @@ class KReplaceDialog : public KAbstractFindDialog
     QByteArray replaceData() const;
     bool prompt() const;
 
+  protected: // QWidget API
+    virtual void showEvent( QShowEvent* showEvent );
+
   protected: // KDialog API
     virtual void slotButtonClicked( int button );
 
-  protected: // QWidget API
-    virtual void showEvent( QShowEvent* showEvent );
+  protected: // KAbstractFindDialog API
+    virtual void rememberCurrentSettings();
 
   private:
     Okteta::ByteArrayComboBox* ReplaceDataEdit;

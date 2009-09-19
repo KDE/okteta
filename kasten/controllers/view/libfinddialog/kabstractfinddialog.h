@@ -71,6 +71,9 @@ class KAbstractFindDialog : public KDialog
     void setupOperationBox( QGroupBox *operationBox = 0 );
     void setupCheckBoxes( QCheckBox *optionCheckBox = 0 );
 
+  protected:
+    virtual void rememberCurrentSettings();
+
   private Q_SLOTS:
     void onSearchDataChanged( const QByteArray &ata );
     void onSearchDataFormatChanged( int Format );

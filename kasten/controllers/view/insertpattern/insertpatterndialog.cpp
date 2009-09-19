@@ -65,7 +65,7 @@ InsertPatternDialog::InsertPatternDialog( QWidget* parent )
 
     QLabel *label = new QLabel( i18nc("@label:textbox","Pattern:"), insertBox );
     mPatternEdit = new Okteta::ByteArrayComboBox( insertBox );
-    connect( mPatternEdit, SIGNAL(dataChanged(const QByteArray&)), SLOT(onInputChanged(const QByteArray&)) );
+    connect( mPatternEdit, SIGNAL(byteArrayChanged(const QByteArray&)), SLOT(onInputChanged(const QByteArray&)) );
     label->setBuddy( mPatternEdit );
     const QString inputWhatsThis =
         i18nc( "@info:whatsthis", "Enter a pattern to search for, or select a previous pattern from the list." );
@@ -108,15 +108,19 @@ void InsertPatternDialog::setHasWriteable( bool hasWriteable )
 {
     mHasWriteable = hasWriteable;
 
-    enableButtonOk( mHasWriteable && !mPatternEdit->data().isEmpty() );
+    enableButtonOk( mHasWriteable && !mPatternEdit->byteArray().isEmpty() );
 }
 
+void InsertPatternDialog::rememberCurrentSettings()
+{
+    mPatternEdit->rememberCurrentByteArray();
+}
 
 int InsertPatternDialog::number() const { return mNumberSpinBox->value(); }
 
 QByteArray InsertPatternDialog::pattern() const
 {
-    return mPatternEdit->data();
+    return mPatternEdit->byteArray();
 }
 
 

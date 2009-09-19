@@ -88,7 +88,7 @@ KReplaceDialog::KReplaceDialog( ReplaceTool* tool, QWidget* parent )
 
 QByteArray KReplaceDialog::replaceData()  const
 {
-    return ReplaceDataEdit->data();
+    return ReplaceDataEdit->byteArray();
 }
 
 bool KReplaceDialog::prompt() const
@@ -111,6 +111,8 @@ void KReplaceDialog::slotButtonClicked( int button )
     {
         hide();
 
+        rememberCurrentSettings();
+
         mTool->setSearchData( data() );
         mTool->setReplaceData( replaceData() );
         mTool->setIgnoreCase( ignoreCase() );
@@ -126,6 +128,13 @@ void KReplaceDialog::showEvent( QShowEvent* showEvent )
 
     setInSelection( mTool->hasSelectedData() );
     setCharCodec( mTool->charCodingName() );
+}
+
+void KReplaceDialog::rememberCurrentSettings()
+{
+    KAbstractFindDialog::rememberCurrentSettings();
+
+    ReplaceDataEdit->rememberCurrentByteArray();
 }
 
 KReplaceDialog::~KReplaceDialog() {}

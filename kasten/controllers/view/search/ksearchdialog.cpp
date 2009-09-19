@@ -61,6 +61,8 @@ void KSearchDialog::slotButtonClicked( int button )
     {
         hide();
 
+        rememberCurrentSettings();
+
         mTool->setSearchData( data() );
         mTool->setIgnoreCase( ignoreCase() );
 

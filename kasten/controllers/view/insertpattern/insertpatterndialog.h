@@ -50,6 +50,8 @@ class InsertPatternDialog : public KDialog
     void setCharCodec( const QString &codecName );
     void setHasWriteable( bool hasWriteable );
 
+    void rememberCurrentSettings();
+
   public: // get 
     QByteArray pattern() const;
     int number() const;
