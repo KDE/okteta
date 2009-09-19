@@ -139,12 +139,12 @@ class PieceTableByteArrayModelPrivate
 };
 
 
-inline Size PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::size() const  { return mPieceTable.size(); }
+inline Size PieceTableByteArrayModelPrivate::size() const  { return mPieceTable.size(); }
 
-inline bool PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::isReadOnly()   const { return mReadOnly; }
-inline bool PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::isModified()   const { return !mPieceTable.isAtBase(); }
+inline bool PieceTableByteArrayModelPrivate::isReadOnly()   const { return mReadOnly; }
+inline bool PieceTableByteArrayModelPrivate::isModified()   const { return !mPieceTable.isAtBase(); }
 
-inline void PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::setReadOnly( bool readOnly )
+inline void PieceTableByteArrayModelPrivate::setReadOnly( bool readOnly )
 {
     if( mReadOnly != readOnly )
     {
@@ -152,7 +152,7 @@ inline void PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::se
         emit p->readOnlyChanged( readOnly );
     }
 }
-inline void PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::setModified( bool modified )
+inline void PieceTableByteArrayModelPrivate::setModified( bool modified )
 {
     if( isModified() != modified )
     {
@@ -163,29 +163,29 @@ inline void PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::se
     }
 }
 
-inline int PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::versionIndex() const { return mPieceTable.appliedChangesCount(); }
-inline int PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::versionCount() const { return mPieceTable.changesCount()+1; }
-inline QString PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::versionDescription( int versionIndex ) const
+inline int PieceTableByteArrayModelPrivate::versionIndex() const { return mPieceTable.appliedChangesCount(); }
+inline int PieceTableByteArrayModelPrivate::versionCount() const { return mPieceTable.changesCount()+1; }
+inline QString PieceTableByteArrayModelPrivate::versionDescription( int versionIndex ) const
 { return mPieceTable.changeDescription( versionIndex-1 ); }
 
-inline void PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::addBookmarks( const QList<Bookmark> &bookmarks )
+inline void PieceTableByteArrayModelPrivate::addBookmarks( const QList<Bookmark> &bookmarks )
 {
     mBookmarks.addBookmarks( bookmarks );
     emit p->bookmarksAdded( bookmarks );
 }
-inline void PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::removeBookmarks( const QList<Bookmark> &bookmarks )
+inline void PieceTableByteArrayModelPrivate::removeBookmarks( const QList<Bookmark> &bookmarks )
 {
     mBookmarks.removeBookmarks( bookmarks );
     emit p->bookmarksRemoved( bookmarks );
 }
 
-inline void PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::removeAllBookmarks()
+inline void PieceTableByteArrayModelPrivate::removeAllBookmarks()
 {
     const QList<Bookmark> bookmarks = mBookmarks.list();
     mBookmarks.clear();
     emit p->bookmarksRemoved( bookmarks );
 }
-inline void PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::setBookmark( unsigned int index, const Bookmark& bookmark )
+inline void PieceTableByteArrayModelPrivate::setBookmark( unsigned int index, const Bookmark& bookmark )
 {
     mBookmarks.setBookmark( index, bookmark );
 
@@ -194,21 +194,21 @@ inline void PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::se
     emit p->bookmarksModified( changedBookmarkIndizes );
 }
 
-inline BookmarksConstIterator PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::createBookmarksConstIterator() const
+inline BookmarksConstIterator PieceTableByteArrayModelPrivate::createBookmarksConstIterator() const
 {
     return BookmarksConstIterator( new BookmarkListConstIteratorAdapter(mBookmarks) );
 }
 
-inline const Bookmark& PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::bookmarkAt( unsigned int index ) const
+inline const Bookmark& PieceTableByteArrayModelPrivate::bookmarkAt( unsigned int index ) const
 {
     return mBookmarks.at( index );
 }
-inline const Bookmark& PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::bookmarkFor( int offset ) const
+inline const Bookmark& PieceTableByteArrayModelPrivate::bookmarkFor( int offset ) const
 {
     return mBookmarks.bookmark( offset );
 }
-inline bool PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::containsBookmarkFor( int offset ) const { return mBookmarks.contains( offset ); }
-inline unsigned int PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate::bookmarksCount() const { return mBookmarks.size(); }
+inline bool PieceTableByteArrayModelPrivate::containsBookmarkFor( int offset ) const { return mBookmarks.contains( offset ); }
+inline unsigned int PieceTableByteArrayModelPrivate::bookmarksCount() const { return mBookmarks.size(); }
 
 }
 
