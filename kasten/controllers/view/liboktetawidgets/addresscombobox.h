@@ -52,7 +52,7 @@ class AddressComboBox : public QWidget
     virtual ~AddressComboBox();
 
   public: // set
-    void addAddress();
+    void rememberCurrentAddress();
 
   public: // get
     Address address() const;
@@ -67,7 +67,8 @@ class AddressComboBox : public QWidget
   private:
     Q_DECLARE_PRIVATE( AddressComboBox )
     Q_PRIVATE_SLOT( d_func(), void onFormatChanged( int index ) )
-    Q_PRIVATE_SLOT( d_func(), void onValueChanged( const QString& value ) )
+    Q_PRIVATE_SLOT( d_func(), void onValueEdited( const QString& value ) )
+    Q_PRIVATE_SLOT( d_func(), void onValueActivated( int index ) )
 };
 
 }

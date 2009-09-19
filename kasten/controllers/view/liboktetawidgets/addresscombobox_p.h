@@ -28,8 +28,6 @@
 #include "addressvalidator.h"
 // KDE
 #include <KComboBox>
-// Qt
-#include <QtCore/QString>
 
 
 namespace Okteta
@@ -46,10 +44,11 @@ class AddressComboBoxPrivate
 
   public:
     void init();
-    void addAddress();
+    void rememberCurrentAddress();
 
     void onFormatChanged( int index );
-    void onValueChanged( const QString& value );
+    void onValueEdited( const QString& value );
+    void onValueActivated( int index );
 
   protected:
     AddressComboBox* const q_ptr;
@@ -58,8 +57,6 @@ class AddressComboBoxPrivate
     KComboBox* mFormatComboBox;
     KComboBox* mValueComboBox;
 
-    // TODO: think about what to do on format change, these values are no longer doing it
-    QString mValue[2];
     AddressValidator* mValidator;
 };
 
@@ -70,7 +67,7 @@ inline AddressComboBoxPrivate::AddressComboBoxPrivate( AddressComboBox* parent )
 
 inline Address AddressComboBoxPrivate::address() const
 {
-    return mValidator->toAddress( mValue[mFormatComboBox->currentIndex()] );
+    return mValidator->toAddress( mValueComboBox->currentText() );
 }
 inline int AddressComboBoxPrivate::format() const
 {

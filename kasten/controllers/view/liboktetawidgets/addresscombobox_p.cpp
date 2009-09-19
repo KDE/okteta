@@ -31,6 +31,11 @@
 #include <QtGui/QAbstractItemView>
 
 
+/*
+Problem: what to do if the format is changed for which the current string is not valid?
+Solution: we always convert the string to the new format, so there is never such a situation
+*/
+
 namespace Okteta
 {
 
@@ -56,14 +61,15 @@ void AddressComboBoxPrivate::init()
 
     mFormatComboBox = new KComboBox( q );
     mFormatComboBox->addItems( formatStrings() );
-    q->connect( mFormatComboBox, SIGNAL(activated(int)), SLOT(onFormatChanged(int)) );
+    q->connect( mFormatComboBox, SIGNAL(activated( int )), SLOT(onFormatChanged( int )) );
 
     mValueComboBox = new KComboBox( q );
     mValueComboBox->setEditable( true );
     mValueComboBox->setMaxCount( 10 );
     mValueComboBox->setInsertPolicy( KComboBox::InsertAtTop );
+    mValueComboBox->setDuplicatesEnabled( false );
     q->setFocusProxy( mValueComboBox );
-    q->connect( mValueComboBox, SIGNAL(editTextChanged(const QString&)), SLOT(onValueChanged(const QString&)) );
+    q->connect( mValueComboBox->lineEdit(), SIGNAL(textEdited( const QString& )), SLOT(onValueEdited( const QString& )) );
     QAbstractItemView* formatComboBoxListView = mFormatComboBox->view();
     QObject::connect( formatComboBoxListView, SIGNAL(activated( const QModelIndex& )),
              mValueComboBox, SLOT(setFocus()) );
@@ -72,6 +78,7 @@ void AddressComboBoxPrivate::init()
              mValueComboBox, SLOT(setFocus()) );
     mValidator = new AddressValidator( mValueComboBox, AddressValidator::HexadecimalCoding );
     mValueComboBox->setValidator( mValidator );
+    q->connect( mValueComboBox, SIGNAL(activated( int )), SLOT(onValueActivated( int )) );
 
     baseLayout->addWidget( mFormatComboBox );
     baseLayout->addWidget( mValueComboBox );
@@ -81,10 +88,9 @@ void AddressComboBoxPrivate::init()
 }
 
 
-void AddressComboBoxPrivate::addAddress()
+void AddressComboBoxPrivate::rememberCurrentAddress()
 {
-    // TODO: mark format
-    mValueComboBox->addItem( mValueComboBox->currentText() );
+    mValueComboBox->insertItem( -1, mValueComboBox->currentText(), mFormatComboBox->currentIndex() );
 }
 
 
@@ -92,20 +98,53 @@ void AddressComboBoxPrivate::onFormatChanged( int index )
 {
     Q_Q( AddressComboBox );
 
+    const QString currentValueText = mValueComboBox->currentText();
+    const bool isCurrentValueTextEmpty = currentValueText.isEmpty();
+    const Address address = isCurrentValueTextEmpty ? -1 : mValidator->toAddress( currentValueText );
+
     mValidator->setCodec( static_cast<AddressValidator::Coding>(index) );
-    mValueComboBox->setEditText( mValue[index] );
+
+    if( ! isCurrentValueTextEmpty )
+    {
+        const QString convertedValueText = mValidator->toString( address );
+        mValueComboBox->setEditText( convertedValueText );
+    }
 
     emit q->formatChanged( index );
 }
 
-void AddressComboBoxPrivate::onValueChanged( const QString& value )
+void AddressComboBoxPrivate::onValueEdited( const QString& value )
 {
     Q_Q( AddressComboBox );
 
-    const int formatIndex = mFormatComboBox->currentIndex();
-    mValue[formatIndex] = value;
+    const Address address = mValidator->toAddress( value );
 
-    emit q->addressChanged( mValidator->toAddress(value) );
+    emit q->addressChanged( address );
+}
+
+void AddressComboBoxPrivate::onValueActivated( int index )
+{
+    Q_Q( AddressComboBox );
+
+    if( index != -1 )
+    {
+        const int oldFormatIndex = mFormatComboBox->currentIndex();
+        const int itemFormatIndex = mValueComboBox->itemData( index ).toInt();
+
+        const bool isOtherFormat = ( oldFormatIndex != itemFormatIndex );
+        if( isOtherFormat )
+        {
+            mFormatComboBox->setCurrentIndex( itemFormatIndex );
+            mValidator->setCodec( static_cast<AddressValidator::Coding>(itemFormatIndex) );
+
+        }
+        const QString currentValueText = mValueComboBox->currentText();
+        const Address address = mValidator->toAddress( currentValueText );
+
+        emit q->addressChanged( address );
+        if( isOtherFormat )
+            emit q->formatChanged( itemFormatIndex );
+    }
 }
 
 }

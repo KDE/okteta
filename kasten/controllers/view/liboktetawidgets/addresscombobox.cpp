@@ -53,11 +53,11 @@ int AddressComboBox::format() const
 }
 
 
-void AddressComboBox::addAddress()
+void AddressComboBox::rememberCurrentAddress()
 {
     Q_D( AddressComboBox );
 
-    d->addAddress();
+    d->rememberCurrentAddress();
 }
 
 AddressComboBox::~AddressComboBox()
