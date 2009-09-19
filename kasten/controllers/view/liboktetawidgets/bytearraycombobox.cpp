@@ -44,11 +44,19 @@ void ByteArrayComboBox::setCharCodec( const QString& charCodecName )
     d->setCharCodec( charCodecName );
 }
 
-QByteArray ByteArrayComboBox::data() const
+void ByteArrayComboBox::rememberCurrentByteArray()
+{
+    Q_D( ByteArrayComboBox );
+
+    d->rememberCurrentByteArray();
+}
+
+
+QByteArray ByteArrayComboBox::byteArray() const
 {
     Q_D( const ByteArrayComboBox );
 
-    return d->data();
+    return d->byteArray();
 }
 
 int ByteArrayComboBox::format() const

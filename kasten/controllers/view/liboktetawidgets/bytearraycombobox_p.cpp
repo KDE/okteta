@@ -23,10 +23,9 @@
 #include "bytearraycombobox_p.h"
 #include "bytearraycombobox.h"
 
-// KDE
-#include <KLineEdit>
 // Qt
 #include <QtGui/QLayout>
+#include <QtGui/QLineEdit>
 #include <QtGui/QAbstractItemView>
 
 
@@ -43,23 +42,28 @@ void ByteArrayComboBoxPrivate::init()
 
     mFormatComboBox = new KComboBox( q );
     mFormatComboBox->addItems( ByteArrayValidator::codecNames() );
-    q->connect( mFormatComboBox, SIGNAL(activated(int)), SLOT(onFormatChanged(int)) );
+    q->connect( mFormatComboBox, SIGNAL(activated( int )), SLOT(onFormatChanged( int )) );
 
-    mDataEdit = new KLineEdit( q );
-    q->setFocusProxy( mDataEdit );
-    q->connect( mDataEdit, SIGNAL(textChanged(const QString&)), SLOT(onDataChanged(const QString&)) );
+    mValueComboBox = new KComboBox( q );
+    mValueComboBox->setEditable( true );
+    mValueComboBox->setMaxCount( 10 );
+    mValueComboBox->setInsertPolicy( KComboBox::InsertAtTop );
+    mValueComboBox->setDuplicatesEnabled( false );
+    q->setFocusProxy( mValueComboBox );
+    q->connect( mValueComboBox->lineEdit(), SIGNAL(textEdited( const QString& )), SLOT(onValueEdited( const QString& )) );
     QAbstractItemView* formatComboBoxListView = mFormatComboBox->view();
     QObject::connect( formatComboBoxListView, SIGNAL(activated( const QModelIndex& )),
-             mDataEdit, SLOT(setFocus()) );
+             mValueComboBox, SLOT(setFocus()) );
     // TODO: is a workaround for Qt 4.5.1 which doesn't emit activated() for mouse clicks
     QObject::connect( formatComboBoxListView, SIGNAL(pressed( const QModelIndex& )),
-             mDataEdit, SLOT(setFocus()) );
-    mValidator = new ByteArrayValidator( mDataEdit );
-    mDataEdit->setValidator( mValidator );
+             mValueComboBox, SLOT(setFocus()) );
+    mValidator = new ByteArrayValidator( mValueComboBox );
+    mValueComboBox->setValidator( mValidator );
+    q->connect( mValueComboBox, SIGNAL(activated( int )), SLOT(onValueActivated( int )) );
 
     baseLayout->addWidget( mFormatComboBox );
-    baseLayout->addWidget( mDataEdit );
-    q->setTabOrder( mFormatComboBox, mDataEdit );
+    baseLayout->addWidget( mValueComboBox, 1 );
+    q->setTabOrder( mFormatComboBox, mValueComboBox );
 
     onFormatChanged( mFormatComboBox->currentIndex() );
 }
@@ -67,17 +71,22 @@ void ByteArrayComboBoxPrivate::init()
 void ByteArrayComboBoxPrivate::setCharCodec( const QString& charCodecName )
 {
     // update the char string
-    const QByteArray currentData = mValidator->toByteArray( mData[ByteArrayValidator::CharCoding] );
+    const QString currentValueText = mValueComboBox->currentText();
+    const QByteArray currentByteArray = mValidator->toByteArray( currentValueText );
 
     mValidator->setCharCodec( charCodecName );
 
-    const QString dataString = mValidator->toString( currentData );
-    mData[ByteArrayValidator::CharCoding] = dataString;
+    const QString dataString = mValidator->toString( currentByteArray );
 
     const bool isCharVisible = ( mFormatComboBox->currentIndex() == ByteArrayValidator::CharCoding );
 
     if( isCharVisible )
-        mDataEdit->setText( dataString );
+        mValueComboBox->setEditText( dataString );
+}
+
+void ByteArrayComboBoxPrivate::rememberCurrentByteArray()
+{
+    mValueComboBox->insertItem( -1, mValueComboBox->currentText(), mFormatComboBox->currentIndex() );
 }
 
 
@@ -85,19 +94,53 @@ void ByteArrayComboBoxPrivate::onFormatChanged( int index )
 {
     Q_Q( ByteArrayComboBox );
 
-    mValidator->setCodec( (ByteArrayValidator::Coding)index );
-    mDataEdit->setText( mData[index] );
+    const QString currentValueText = mValueComboBox->currentText();
+    const bool isCurrentValueTextEmpty = currentValueText.isEmpty();
+    const QByteArray byteArray = isCurrentValueTextEmpty ? QByteArray() : mValidator->toByteArray( currentValueText );
+
+    mValidator->setCodec( static_cast<ByteArrayValidator::Coding>(index) );
+
+    if( ! isCurrentValueTextEmpty )
+    {
+        const QString convertedValueText = mValidator->toString( byteArray );
+        mValueComboBox->setEditText( convertedValueText );
+    }
 
     emit q->formatChanged( index );
 }
 
-void ByteArrayComboBoxPrivate::onDataChanged( const QString& data )
+void ByteArrayComboBoxPrivate::onValueEdited( const QString& value )
 {
     Q_Q( ByteArrayComboBox );
 
-    mData[mFormatComboBox->currentIndex()] = data;
+    const QByteArray byteArray = mValidator->toByteArray( value );
 
-    emit q->dataChanged( mValidator->toByteArray(data) );
+    emit q->byteArrayChanged( byteArray );
+}
+
+void ByteArrayComboBoxPrivate::onValueActivated( int index )
+{
+    Q_Q( ByteArrayComboBox );
+
+    if( index != -1 )
+    {
+        const int oldFormatIndex = mFormatComboBox->currentIndex();
+        const int itemFormatIndex = mValueComboBox->itemData( index ).toInt();
+        const bool isOtherFormat = ( oldFormatIndex != itemFormatIndex );
+
+        if( isOtherFormat )
+        {
+            mFormatComboBox->setCurrentIndex( itemFormatIndex );
+            mValidator->setCodec( static_cast<ByteArrayValidator::Coding>(itemFormatIndex) );
+
+        }
+        const QString currentValueText = mValueComboBox->currentText();
+        const QByteArray byteArray = mValidator->toByteArray( currentValueText );
+
+        emit q->byteArrayChanged( byteArray );
+        if( isOtherFormat )
+            emit q->formatChanged( itemFormatIndex );
+    }
 }
 
 }

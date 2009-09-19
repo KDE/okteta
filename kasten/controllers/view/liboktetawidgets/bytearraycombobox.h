@@ -50,13 +50,14 @@ class ByteArrayComboBox : public QWidget
 
   public: // set
     void setCharCodec( const QString& charCodecName );
+    void rememberCurrentByteArray();
 
   public: // get
-    QByteArray data() const;
+    QByteArray byteArray() const;
     int format() const;
 
   Q_SIGNALS:
-    void dataChanged( const QByteArray& data );
+    void byteArrayChanged( const QByteArray& byteArray );
     void formatChanged( int index );
 
   protected:
@@ -64,7 +65,8 @@ class ByteArrayComboBox : public QWidget
   private:
     Q_DECLARE_PRIVATE( ByteArrayComboBox )
     Q_PRIVATE_SLOT( d_func(), void onFormatChanged( int index ) )
-    Q_PRIVATE_SLOT( d_func(), void onDataChanged( const QString& data ) )
+    Q_PRIVATE_SLOT( d_func(), void onValueEdited( const QString& value ) )
+    Q_PRIVATE_SLOT( d_func(), void onValueActivated( int index ) )
 };
 
 }

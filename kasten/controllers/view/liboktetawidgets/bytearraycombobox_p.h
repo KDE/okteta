@@ -30,9 +30,7 @@
 #include <KComboBox>
 // Qt
 #include <QtCore/QByteArray>
-#include <QtCore/QString>
 
-class KLineEdit;
 
 namespace Okteta
 {
@@ -43,24 +41,25 @@ class ByteArrayComboBoxPrivate
     explicit ByteArrayComboBoxPrivate( ByteArrayComboBox* parent );
 
   public:
-    QByteArray data() const;
+    QByteArray byteArray() const;
     int format() const;
 
   public:
     void init();
     void setCharCodec( const QString& charCodecName );
+    void rememberCurrentByteArray();
 
     void onFormatChanged( int index );
-    void onDataChanged( const QString &data );
+    void onValueEdited( const QString& value );
+    void onValueActivated( int index );
 
   protected:
     ByteArrayComboBox* const q_ptr;
     Q_DECLARE_PUBLIC( ByteArrayComboBox )
 
     KComboBox* mFormatComboBox;
-    KLineEdit* mDataEdit;
+    KComboBox* mValueComboBox;
 
-    QString mData[ByteArrayValidator::CodecNumber];
     ByteArrayValidator* mValidator;
 };
 
@@ -69,9 +68,9 @@ inline ByteArrayComboBoxPrivate::ByteArrayComboBoxPrivate( ByteArrayComboBox* pa
   : q_ptr( parent )
 {}
 
-inline QByteArray ByteArrayComboBoxPrivate::data() const
+inline QByteArray ByteArrayComboBoxPrivate::byteArray() const
 {
-    return mValidator->toByteArray( mData[mFormatComboBox->currentIndex()] );
+    return mValidator->toByteArray( mValueComboBox->currentText() );
 }
 inline int ByteArrayComboBoxPrivate::format() const
 {
