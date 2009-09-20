@@ -23,6 +23,8 @@
 #include "bytearraycombobox_p.h"
 #include "bytearraycombobox.h"
 
+// KDE
+#include <KLocale>
 // Qt
 #include <QtGui/QLayout>
 #include <QtGui/QLineEdit>
@@ -31,6 +33,23 @@
 
 namespace Okteta
 {
+
+const QStringList& formatNames()
+{
+    static QStringList list;
+    if( list.isEmpty() )
+    {
+//         list.append( i18nc("@item:inlistbox guessing the coding of the bytes by the input",      "Auto") );
+        list.append( i18nc("@item:inlistbox coding of the bytes as values in the hexadecimal format","Hex")  );
+        list.append( i18nc("@item:inlistbox coding of the bytes as values in the decimal format",    "Dec")      );
+        list.append( i18nc("@item:inlistbox coding of the bytes as values in the octal format",      "Oct")        );
+        list.append( i18nc("@item:inlistbox coding of the bytes as values in the binary format",     "Bin")       );
+        list.append( i18nc("@item:inlistbox coding of the bytes as characters with the values",      "Char") );
+//         list.append( i18nc("@item:inlistbox coding of the bytes as utf-8 characters with the values",      "Utf-8") );
+    }
+    return list;
+}
+
 
 void ByteArrayComboBoxPrivate::init()
 {
@@ -41,7 +60,7 @@ void ByteArrayComboBoxPrivate::init()
     baseLayout->setSpacing( 0 );
 
     mFormatComboBox = new KComboBox( q );
-    mFormatComboBox->addItems( ByteArrayValidator::codecNames() );
+    mFormatComboBox->addItems( formatNames() );
     q->connect( mFormatComboBox, SIGNAL(activated( int )), SLOT(onFormatChanged( int )) );
 
     mValueComboBox = new KComboBox( q );

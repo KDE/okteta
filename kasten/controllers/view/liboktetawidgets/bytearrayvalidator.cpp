@@ -26,32 +26,10 @@
 #include <valuecodec.h>
 #include <character.h>
 #include <charcodec.h>
-// KDE
-#include <KLocale>
-// Qt
-#include <QtCore/QString>
-#include <QtCore/QStringList>
 
 
 namespace Okteta
 {
-
-const QStringList& ByteArrayValidator::codecNames()
-{
-    static QStringList list;
-    if( list.isEmpty() )
-    {
-//         list.append( i18nc("@item:inlistbox guessing the coding of the bytes by the input",      "Auto") );
-        list.append( i18nc("@item:inlistbox coding of the bytes as values in the hexadecimal format","Hex")  );
-        list.append( i18nc("@item:inlistbox coding of the bytes as values in the decimal format",    "Dec")      );
-        list.append( i18nc("@item:inlistbox coding of the bytes as values in the octal format",      "Oct")        );
-        list.append( i18nc("@item:inlistbox coding of the bytes as values in the binary format",     "Bin")       );
-        list.append( i18nc("@item:inlistbox coding of the bytes as characters with the values",      "Char") );
-//         list.append( i18nc("@item:inlistbox coding of the bytes as utf-8 characters with the values",      "Utf-8") );
-    }
-    return list;
-}
-
 
 ByteArrayValidator::ByteArrayValidator( QObject* parent, Coding codecId, int charCodecId )
   : QValidator( parent ),
