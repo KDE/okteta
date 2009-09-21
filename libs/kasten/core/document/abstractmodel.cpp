@@ -28,7 +28,7 @@ namespace Kasten
 {
 
 AbstractModel::AbstractModel( AbstractModel* baseModel )
- : d( new Private(this,baseModel) )
+  : d( new AbstractModelPrivate(this,baseModel) )
 {}
 
 bool AbstractModel::isModifiable()        const { return false; }

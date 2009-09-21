@@ -20,7 +20,6 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #ifndef ABSTRACTMODEL_P_H
 #define ABSTRACTMODEL_P_H
 
@@ -30,13 +29,16 @@
 namespace Kasten
 {
 
-class AbstractModel::Private
+class AbstractModelPrivate
 {
   public:
-      explicit Private( AbstractModel* parent, AbstractModel* baseModel );
-      ~Private();
+      AbstractModelPrivate( AbstractModel* parent, AbstractModel* baseModel );
+
+      ~AbstractModelPrivate();
+
   public:
     AbstractModel* baseModel() const;
+
   public:
     void setBaseModel( AbstractModel* baseModel );
 
@@ -45,13 +47,16 @@ class AbstractModel::Private
      AbstractModel* mBaseModel;
 };
 
-inline AbstractModel::Private::Private( AbstractModel* parent, AbstractModel* baseModel )
- : d( parent ), mBaseModel( baseModel ) {}
 
-inline AbstractModel* AbstractModel::Private::baseModel() const { return mBaseModel; }
-inline void AbstractModel::Private::setBaseModel( AbstractModel* baseModel ) { mBaseModel = baseModel; }
+inline AbstractModelPrivate::AbstractModelPrivate( AbstractModel* parent, AbstractModel* baseModel )
+  : d( parent ),
+    mBaseModel( baseModel )
+{}
 
-inline AbstractModel::Private::~Private() {}
+inline AbstractModel* AbstractModelPrivate::baseModel() const { return mBaseModel; }
+inline void AbstractModelPrivate::setBaseModel( AbstractModel* baseModel ) { mBaseModel = baseModel; }
+
+inline AbstractModelPrivate::~AbstractModelPrivate() {}
 
 }
 

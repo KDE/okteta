@@ -33,11 +33,15 @@ class QString;
 
 namespace Kasten
 {
+class AbstractModelPrivate;
+
 
 // TODO: reasons not to name it AbstractObjectModel, but just as it is
 class KASTENCORE_EXPORT AbstractModel : public QObject
 {
     Q_OBJECT
+
+  friend class AbstractModelPrivate;
 
   protected:
     AbstractModel( AbstractModel* baseModel = 0 );
@@ -80,8 +84,7 @@ class KASTENCORE_EXPORT AbstractModel : public QObject
     void setBaseModel( AbstractModel* baseModel );
 
   protected:
-    class Private;
-    Private * const d;
+    AbstractModelPrivate* const d;
 };
 
 
