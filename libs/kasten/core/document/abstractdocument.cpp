@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -21,70 +21,14 @@
 */
 
 #include "abstractdocument.h"
-
-// lib
-#include "abstractmodelsynchronizer.h"
+#include "abstractdocument_p.h"
 
 
 namespace Kasten
 {
 
-class AbstractDocument::Private
-{
-  public:
-      explicit Private( AbstractDocument* parent );
-      ~Private();
-  public:
-    void setId( const QString& id );
-    QString id() const;
-    void setSynchronizer( AbstractModelSynchronizer* synchronizer );
-    void setLiveSynchronizer( AbstractModelSynchronizer* synchronizer );
-    AbstractModelSynchronizer* synchronizer() const;
-    AbstractModelSynchronizer* liveSynchronizer() const;
-  protected:
-    AbstractDocument* d;
-    QString mId;
-    AbstractModelSynchronizer* mSynchronizer; // TODO: should this be here, with public setters and getters?
-    AbstractModelSynchronizer* mLiveSynchronizer; // TODO: should this be here, with public setters and getters?
-};
-
-inline AbstractDocument::Private::Private( AbstractDocument* parent )
-: d( parent ), mSynchronizer( 0 ), mLiveSynchronizer( 0 ) {}
-inline QString AbstractDocument::Private::id() const { return mId; }
-inline void AbstractDocument::Private::setId( const QString& id ) { mId = id; }
-
-inline AbstractModelSynchronizer* AbstractDocument::Private::synchronizer() const { return mSynchronizer; }
-inline void AbstractDocument::Private::setSynchronizer( AbstractModelSynchronizer* synchronizer )
-{
-    // plugging the same more than once?
-    if( mSynchronizer == synchronizer )
-        return;
-
-    delete mSynchronizer;
-    mSynchronizer = synchronizer;
-    emit d->synchronizerChanged( synchronizer );
-}
-inline AbstractModelSynchronizer* AbstractDocument::Private::liveSynchronizer() const { return mLiveSynchronizer; }
-inline void AbstractDocument::Private::setLiveSynchronizer( AbstractModelSynchronizer* synchronizer )
-{
-    // plugging the same more than once?
-    if( mLiveSynchronizer == synchronizer )
-        return;
-
-    delete mLiveSynchronizer;
-    mLiveSynchronizer = synchronizer;
-    emit d->liveSynchronizerChanged( synchronizer );
-}
-inline AbstractDocument::Private::~Private()
-{
-    delete mSynchronizer;
-    delete mLiveSynchronizer;
-}
-
-
-
 AbstractDocument::AbstractDocument()
- : d( new Private(this) )
+  : d( new AbstractDocumentPrivate(this) )
 {}
 
 QString AbstractDocument::id() const { return d->id(); }

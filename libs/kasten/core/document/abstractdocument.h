@@ -23,7 +23,6 @@
 #ifndef ABSTRACTDOCUMENT_H
 #define ABSTRACTDOCUMENT_H
 
-
 // lib
 #include "kastencore_export.h"
 // lib
@@ -32,8 +31,10 @@
 
 namespace Kasten
 {
-
 class AbstractModelSynchronizer;
+
+class AbstractDocumentPrivate;
+
 
 // TODO: store creation time? And time of last modification or access?
 // last both might be too much overhead, unless modification and access are grained enough
@@ -47,6 +48,7 @@ class KASTENCORE_EXPORT AbstractDocument : public AbstractModel
 
   friend class AbstractModelSynchronizer;
   friend class DocumentManager;
+  friend class AbstractDocumentPrivate;
 
   public:
     //TODO: some things are a tristate, is it the right thing to embed them here?
@@ -96,9 +98,9 @@ class KASTENCORE_EXPORT AbstractDocument : public AbstractModel
     void setId( const QString& id );
 
   protected:
-    class Private;
-    Private* const d;
+    AbstractDocumentPrivate* const d;
 };
+
 
 Q_DECLARE_OPERATORS_FOR_FLAGS( AbstractDocument::SyncStates )
 
