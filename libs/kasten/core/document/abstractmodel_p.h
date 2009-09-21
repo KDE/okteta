@@ -32,7 +32,7 @@ namespace Kasten
 class AbstractModelPrivate
 {
   public:
-      AbstractModelPrivate( AbstractModel* parent, AbstractModel* baseModel );
+      AbstractModelPrivate( AbstractModel* parent, AbstractModel* baseModel = 0 );
 
       ~AbstractModelPrivate();
 
@@ -43,13 +43,16 @@ class AbstractModelPrivate
     void setBaseModel( AbstractModel* baseModel );
 
   protected:
-     AbstractModel* d;
-     AbstractModel* mBaseModel;
+    AbstractModel* const q_ptr;
+    Q_DECLARE_PUBLIC( AbstractModel )
+
+  protected:
+    AbstractModel* mBaseModel;
 };
 
 
 inline AbstractModelPrivate::AbstractModelPrivate( AbstractModel* parent, AbstractModel* baseModel )
-  : d( parent ),
+  : q_ptr( parent ),
     mBaseModel( baseModel )
 {}
 

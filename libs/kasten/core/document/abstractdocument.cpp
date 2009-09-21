@@ -28,22 +28,51 @@ namespace Kasten
 {
 
 AbstractDocument::AbstractDocument()
-  : d( new AbstractDocumentPrivate(this) )
+  : AbstractModel( new AbstractDocumentPrivate(this) )
 {}
 
-QString AbstractDocument::id() const { return d->id(); }
-AbstractModelSynchronizer* AbstractDocument::synchronizer() const { return d->synchronizer(); }
-AbstractModelSynchronizer* AbstractDocument::liveSynchronizer() const { return d->liveSynchronizer(); }
+QString AbstractDocument::id() const
+{
+    Q_D( const AbstractDocument );
 
-void AbstractDocument::setId( const QString& id ) { d->setId(id); }
-void AbstractDocument::setSynchronizer( AbstractModelSynchronizer* synchronizer ) { d->setSynchronizer(synchronizer); }
-void AbstractDocument::setLiveSynchronizer( AbstractModelSynchronizer* synchronizer ) { d->setLiveSynchronizer(synchronizer); }
+    return d->id();
+}
+AbstractModelSynchronizer* AbstractDocument::synchronizer() const
+{
+    Q_D( const AbstractDocument );
+
+    return d->synchronizer();
+}
+AbstractModelSynchronizer* AbstractDocument::liveSynchronizer() const
+{
+    Q_D( const AbstractDocument );
+
+    return d->liveSynchronizer();
+}
+
+void AbstractDocument::setId( const QString& id )
+{
+    Q_D( AbstractDocument );
+
+    d->setId(id);
+}
+void AbstractDocument::setSynchronizer( AbstractModelSynchronizer* synchronizer )
+{
+    Q_D( AbstractDocument );
+
+    d->setSynchronizer(synchronizer);
+}
+void AbstractDocument::setLiveSynchronizer( AbstractModelSynchronizer* synchronizer )
+{
+    Q_D( AbstractDocument );
+
+    d->setLiveSynchronizer(synchronizer);
+}
 
 bool AbstractDocument::hasLocalChanges() const { return syncStates().testFlag(LocalHasChanges) ; }
 
 AbstractDocument::~AbstractDocument()
 {
-    delete d;
 }
 
 }

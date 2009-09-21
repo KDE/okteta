@@ -32,7 +32,6 @@
 namespace Kasten
 {
 class AbstractModelSynchronizer;
-
 class AbstractDocumentPrivate;
 
 
@@ -48,7 +47,6 @@ class KASTENCORE_EXPORT AbstractDocument : public AbstractModel
 
   friend class AbstractModelSynchronizer;
   friend class DocumentManager;
-  friend class AbstractDocumentPrivate;
 
   public:
     //TODO: some things are a tristate, is it the right thing to embed them here?
@@ -66,6 +64,7 @@ class KASTENCORE_EXPORT AbstractDocument : public AbstractModel
 
   protected:
     AbstractDocument();
+
   public:
     virtual ~AbstractDocument();
 
@@ -98,7 +97,7 @@ class KASTENCORE_EXPORT AbstractDocument : public AbstractModel
     void setId( const QString& id );
 
   protected:
-    AbstractDocumentPrivate* const d;
+    Q_DECLARE_PRIVATE( AbstractDocument )
 };
 
 

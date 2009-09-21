@@ -41,10 +41,10 @@ class KASTENCORE_EXPORT AbstractModel : public QObject
 {
     Q_OBJECT
 
-  friend class AbstractModelPrivate;
-
   protected:
-    AbstractModel( AbstractModel* baseModel = 0 );
+    explicit AbstractModel( AbstractModel* baseModel = 0 );
+    explicit AbstractModel( AbstractModelPrivate* d );
+
   public:
     virtual ~AbstractModel();
 
@@ -84,7 +84,8 @@ class KASTENCORE_EXPORT AbstractModel : public QObject
     void setBaseModel( AbstractModel* baseModel );
 
   protected:
-    AbstractModelPrivate* const d;
+    AbstractModelPrivate* const d_ptr;
+    Q_DECLARE_PRIVATE( AbstractModel )
 };
 
 

@@ -23,6 +23,7 @@
 #ifndef ABSTRACTDOCUMENT_P_H
 #define ABSTRACTDOCUMENT_P_H
 
+#include "abstractmodel_p.h"
 #include "abstractdocument.h"
 
 // lib
@@ -32,7 +33,7 @@
 namespace Kasten
 {
 
-class AbstractDocumentPrivate
+class AbstractDocumentPrivate : public AbstractModelPrivate
 {
   public:
       explicit AbstractDocumentPrivate( AbstractDocument* parent );
@@ -50,7 +51,9 @@ class AbstractDocumentPrivate
     void setLiveSynchronizer( AbstractModelSynchronizer* synchronizer );
 
   protected:
-    AbstractDocument* d;
+    Q_DECLARE_PUBLIC( AbstractDocument )
+
+  protected:
     QString mId;
     AbstractModelSynchronizer* mSynchronizer; // TODO: should this be here, with public setters and getters?
     AbstractModelSynchronizer* mLiveSynchronizer; // TODO: should this be here, with public setters and getters?
@@ -58,7 +61,7 @@ class AbstractDocumentPrivate
 
 
 inline AbstractDocumentPrivate::AbstractDocumentPrivate( AbstractDocument* parent )
-  : d( parent ),
+  : AbstractModelPrivate( parent ),
     mSynchronizer( 0 ),
     mLiveSynchronizer( 0 )
 {}
@@ -68,24 +71,28 @@ inline void AbstractDocumentPrivate::setId( const QString& id ) { mId = id; }
 inline AbstractModelSynchronizer* AbstractDocumentPrivate::synchronizer() const { return mSynchronizer; }
 inline void AbstractDocumentPrivate::setSynchronizer( AbstractModelSynchronizer* synchronizer )
 {
+    Q_Q( AbstractDocument );
+
     // plugging the same more than once?
     if( mSynchronizer == synchronizer )
         return;
 
     delete mSynchronizer;
     mSynchronizer = synchronizer;
-    emit d->synchronizerChanged( synchronizer );
+    emit q->synchronizerChanged( synchronizer );
 }
 inline AbstractModelSynchronizer* AbstractDocumentPrivate::liveSynchronizer() const { return mLiveSynchronizer; }
 inline void AbstractDocumentPrivate::setLiveSynchronizer( AbstractModelSynchronizer* synchronizer )
 {
+    Q_Q( AbstractDocument );
+
     // plugging the same more than once?
     if( mLiveSynchronizer == synchronizer )
         return;
 
     delete mLiveSynchronizer;
     mLiveSynchronizer = synchronizer;
-    emit d->liveSynchronizerChanged( synchronizer );
+    emit q->liveSynchronizerChanged( synchronizer );
 }
 
 inline AbstractDocumentPrivate::~AbstractDocumentPrivate()
