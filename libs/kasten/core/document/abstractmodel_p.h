@@ -32,7 +32,7 @@ namespace Kasten
 class AbstractModelPrivate
 {
   public:
-      AbstractModelPrivate( AbstractModel* parent, AbstractModel* baseModel = 0 );
+      explicit AbstractModelPrivate( AbstractModel* parent, AbstractModel* baseModel = 0 );
 
       ~AbstractModelPrivate();
 
