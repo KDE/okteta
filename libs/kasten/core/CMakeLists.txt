@@ -53,6 +53,7 @@ set( KASTEN_CORE_IO_FILESYSTEM_SRCS
   io/filesystem/abstractfilesystemexportjob.cpp
   io/filesystem/modelencoderfilesystemexportjob.cpp
   io/filesystem/modelencoderfilesystemexporter.cpp
+  io/filesystem/abstractmodelfilesystemsynchronizer_p.cpp
   io/filesystem/abstractmodelfilesystemsynchronizer.cpp
 )
 

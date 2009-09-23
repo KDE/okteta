@@ -20,28 +20,53 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractmodelfilesystemsynchronizer.h"
-#include "abstractmodelfilesystemsynchronizer_p.h"
-#include "abstractmodelfilesystemsynchronizer.moc"
+#ifndef ABSTRACTMODELSYNCHRONIZER_P_H
+#define ABSTRACTMODELSYNCHRONIZER_P_H
 
-// lib
-#include <abstractdocument.h>
+#include "abstractmodelsynchronizer.h"
+
+// KDE
+#include <KUrl>
 
 
 namespace Kasten
 {
 
-AbstractModelFileSystemSynchronizer::AbstractModelFileSystemSynchronizer( AbstractModelFileSystemSynchronizerPrivate* d )
-  : AbstractModelSynchronizer( d )
+class AbstractModelSynchronizerPrivate
+{
+  public:
+    explicit AbstractModelSynchronizerPrivate( AbstractModelSynchronizer* parent );
+
+  public:
+    const KUrl& url() const;
+
+  public:
+    void setUrl( const KUrl& url );
+
+  protected:
+    AbstractModelSynchronizer* const q_ptr;
+    Q_DECLARE_PUBLIC( AbstractModelSynchronizer )
+
+  protected:
+    KUrl mUrl;
+};
+
+
+inline AbstractModelSynchronizerPrivate::AbstractModelSynchronizerPrivate( AbstractModelSynchronizer* parent )
+  : q_ptr( parent )
 {
 }
 
-AbstractModelFileSystemSynchronizer::AbstractModelFileSystemSynchronizer()
-  : AbstractModelSynchronizer( new AbstractModelFileSystemSynchronizerPrivate(this) )
-{}
+inline const KUrl& AbstractModelSynchronizerPrivate::url() const { return mUrl; }
 
-AbstractModelFileSystemSynchronizer::~AbstractModelFileSystemSynchronizer()
+inline void AbstractModelSynchronizerPrivate::setUrl( const KUrl& url)
 {
+    Q_Q( AbstractModelSynchronizer );
+
+    mUrl = url;
+    emit q->urlChanged( url );
 }
 
 }
+
+#endif

@@ -20,28 +20,39 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
+#ifndef ABSTRACTMODELFILESYSTEMSYNCHRONIZER_P_H
+#define ABSTRACTMODELFILESYSTEMSYNCHRONIZER_P_H
+
 #include "abstractmodelfilesystemsynchronizer.h"
-#include "abstractmodelfilesystemsynchronizer_p.h"
-#include "abstractmodelfilesystemsynchronizer.moc"
 
 // lib
-#include <abstractdocument.h>
+#include <abstractmodelsynchronizer_p.h>
 
 
 namespace Kasten
 {
 
-AbstractModelFileSystemSynchronizer::AbstractModelFileSystemSynchronizer( AbstractModelFileSystemSynchronizerPrivate* d )
-  : AbstractModelSynchronizer( d )
+class AbstractModelFileSystemSynchronizerPrivate : public AbstractModelSynchronizerPrivate
+{
+  public:
+    explicit AbstractModelFileSystemSynchronizerPrivate( AbstractModelFileSystemSynchronizer* parent );
+
+    virtual ~AbstractModelFileSystemSynchronizerPrivate();
+
+  public:
+    void onFileDirty( const QString& fileName );
+    void onFileCreated( const QString& fileName );
+    void onFileDeleted( const QString& fileName );
+
+  protected:
+};
+
+
+inline AbstractModelFileSystemSynchronizerPrivate::AbstractModelFileSystemSynchronizerPrivate( AbstractModelFileSystemSynchronizer* parent )
+  : AbstractModelSynchronizerPrivate( parent )
 {
 }
 
-AbstractModelFileSystemSynchronizer::AbstractModelFileSystemSynchronizer()
-  : AbstractModelSynchronizer( new AbstractModelFileSystemSynchronizerPrivate(this) )
-{}
-
-AbstractModelFileSystemSynchronizer::~AbstractModelFileSystemSynchronizer()
-{
 }
 
-}
+#endif

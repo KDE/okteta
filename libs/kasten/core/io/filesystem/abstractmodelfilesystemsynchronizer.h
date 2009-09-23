@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -29,6 +29,8 @@
 
 namespace Kasten
 {
+class AbstractModelFileSystemSynchronizerPrivate;
+
 
 class KASTENCORE_EXPORT AbstractModelFileSystemSynchronizer : public AbstractModelSynchronizer
 {
@@ -39,20 +41,23 @@ class KASTENCORE_EXPORT AbstractModelFileSystemSynchronizer : public AbstractMod
   friend class AbstractFileSystemSyncWithRemoteJob;
   friend class AbstractFileSystemSyncToRemoteJob;
 
+  protected:
+    explicit AbstractModelFileSystemSynchronizer( AbstractModelFileSystemSynchronizerPrivate* d );
+
   public:
     AbstractModelFileSystemSynchronizer();
+
     virtual ~AbstractModelFileSystemSynchronizer();
 
 // TODO: virtual void onFileModified( FileChange );
 // enum FileChange { FileDirty, FileCreated, FileDeleted );
-  protected Q_SLOTS:
-    void onFileDirty( const QString &filePath );
-    void onFileCreated( const QString &filePath );
-    void onFileDeleted( const QString &filePath );
+  protected:
+    Q_PRIVATE_SLOT( d_func(), void onFileDirty( const QString& filePath ) )
+    Q_PRIVATE_SLOT( d_func(), void onFileCreated( const QString& filePath ) )
+    Q_PRIVATE_SLOT( d_func(), void onFileDeleted( const QString& filePath ) )
 
   protected:
-    class Private;
-    Private * const d;
+    Q_DECLARE_PRIVATE( AbstractModelFileSystemSynchronizer )
 };
 
 }

@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -41,6 +41,8 @@ class AbstractSyncFromRemoteJob;
 class AbstractSyncWithRemoteJob;
 class AbstractDocument;
 
+class AbstractModelSynchronizerPrivate;
+
 // TODO: better names? Active Translator? 
 // synchronizers are created by factory functions (like plugins)
 
@@ -68,6 +70,8 @@ class KASTENCORE_EXPORT AbstractModelSynchronizer : public QObject
     };
   protected:
     AbstractModelSynchronizer();
+    explicit AbstractModelSynchronizer( AbstractModelSynchronizerPrivate* d );
+
   public:
     virtual ~AbstractModelSynchronizer();
 
@@ -115,8 +119,8 @@ class KASTENCORE_EXPORT AbstractModelSynchronizer : public QObject
     void setUrl( const KUrl &url );
 
   protected:
-    class Private;
-    Private * const d;
+    AbstractModelSynchronizerPrivate* const d_ptr;
+    Q_DECLARE_PRIVATE( AbstractModelSynchronizer )
 };
 
 }

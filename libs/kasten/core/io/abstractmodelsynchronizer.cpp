@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -21,41 +21,40 @@
 */
 
 #include "abstractmodelsynchronizer.h"
-
-// KDE
-#include <KUrl>
+#include "abstractmodelsynchronizer_p.h"
+#include "abstractmodelsynchronizer.moc"
 
 
 namespace Kasten
 {
 
-class AbstractModelSynchronizer::Private
+AbstractModelSynchronizer::AbstractModelSynchronizer( AbstractModelSynchronizerPrivate* d )
+  : d_ptr( d )
 {
-  public:
-    KUrl url() const;
-    void setUrl( const KUrl &url );
-  protected:
-    KUrl mUrl;
-};
-
-inline KUrl AbstractModelSynchronizer::Private::url() const { return mUrl; }
-inline void AbstractModelSynchronizer::Private::setUrl( const KUrl &url) { mUrl = url; }
-
+}
 
 AbstractModelSynchronizer::AbstractModelSynchronizer()
-: d( new Private() )
-{}
+  : d_ptr( new AbstractModelSynchronizerPrivate(this) )
+{
+}
 
-KUrl AbstractModelSynchronizer::url() const { return d->url(); }
+KUrl AbstractModelSynchronizer::url() const
+{
+    Q_D( const AbstractModelSynchronizer );
+
+    return d->url();
+}
+
 void AbstractModelSynchronizer::setUrl( const KUrl &url )
 {
+    Q_D( AbstractModelSynchronizer );
+
     d->setUrl( url );
-    emit urlChanged( url );
 }
 
 AbstractModelSynchronizer::~AbstractModelSynchronizer()
 {
-    delete d;
+    delete d_ptr;
 }
 
 }

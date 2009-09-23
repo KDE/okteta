@@ -20,28 +20,43 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "abstractmodelfilesystemsynchronizer.h"
 #include "abstractmodelfilesystemsynchronizer_p.h"
-#include "abstractmodelfilesystemsynchronizer.moc"
 
-// lib
-#include <abstractdocument.h>
+// KDE
+#include <KIO/NetAccess>
+#include <KTemporaryFile>
+#include <KLocale>
+#include <KMessageBox>
+#include <KDirWatch>
 
 
 namespace Kasten
 {
 
-AbstractModelFileSystemSynchronizer::AbstractModelFileSystemSynchronizer( AbstractModelFileSystemSynchronizerPrivate* d )
-  : AbstractModelSynchronizer( d )
+void AbstractModelFileSystemSynchronizerPrivate::onFileDirty( const QString& fileName )
 {
+  Q_UNUSED( fileName )
+//     if( url().url() == fileName )
+//         document()->setRemoteHasChanges(); TODO: needs a control interface? 
 }
 
-AbstractModelFileSystemSynchronizer::AbstractModelFileSystemSynchronizer()
-  : AbstractModelSynchronizer( new AbstractModelFileSystemSynchronizerPrivate(this) )
-{}
-
-AbstractModelFileSystemSynchronizer::~AbstractModelFileSystemSynchronizer()
+void AbstractModelFileSystemSynchronizerPrivate::onFileCreated( const QString& fileName )
 {
+  Q_UNUSED( fileName )
+  //TODO: could happen after a delete, what to do?
+}
+
+void AbstractModelFileSystemSynchronizerPrivate::onFileDeleted( const QString& fileName )
+{
+  Q_UNUSED( fileName )
+//     if( url().url() == fileName )
+//         document()->setRemoteHasChanges(); TODO: needs a control interface? 
+}
+
+AbstractModelFileSystemSynchronizerPrivate::~AbstractModelFileSystemSynchronizerPrivate()
+{
+    if( url().isLocalFile() )
+        KDirWatch::self()->removeFile( url().path() );
 }
 
 }
