@@ -34,7 +34,7 @@ class AbstractModelPrivate
   public:
       explicit AbstractModelPrivate( AbstractModel* parent, AbstractModel* baseModel = 0 );
 
-      ~AbstractModelPrivate();
+      virtual ~AbstractModelPrivate();
 
   public:
     AbstractModel* baseModel() const;
