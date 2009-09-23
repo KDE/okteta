@@ -37,6 +37,8 @@ class AbstractModelSynchronizerPrivate
   public:
     explicit AbstractModelSynchronizerPrivate( AbstractModelSynchronizer* parent );
 
+    virtual ~AbstractModelSynchronizerPrivate();
+
   public:
     const KUrl& url() const;
 
@@ -56,6 +58,8 @@ inline AbstractModelSynchronizerPrivate::AbstractModelSynchronizerPrivate( Abstr
   : q_ptr( parent )
 {
 }
+
+inline AbstractModelSynchronizerPrivate::~AbstractModelSynchronizerPrivate() {}
 
 inline const KUrl& AbstractModelSynchronizerPrivate::url() const { return mUrl; }
 
