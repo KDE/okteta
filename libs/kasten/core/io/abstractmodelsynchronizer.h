@@ -69,10 +69,11 @@ class KASTENCORE_EXPORT AbstractModelSynchronizer : public QObject
       ReplaceLocal = 2
     };
   protected:
-    AbstractModelSynchronizer();
     explicit AbstractModelSynchronizer( AbstractModelSynchronizerPrivate* d );
 
   public:
+    AbstractModelSynchronizer();
+
     virtual ~AbstractModelSynchronizer();
 
   public:
@@ -119,8 +120,9 @@ class KASTENCORE_EXPORT AbstractModelSynchronizer : public QObject
     void setUrl( const KUrl &url );
 
   protected:
-    AbstractModelSynchronizerPrivate* const d_ptr;
     Q_DECLARE_PRIVATE( AbstractModelSynchronizer )
+  protected:
+    AbstractModelSynchronizerPrivate* const d_ptr;
 };
 
 }

@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -34,13 +34,16 @@ namespace Kasten
 
 class AbstractModelFileSystemSynchronizer;
 
+class AbstractFileSystemLoadJobPrivate;
+
 
 class KASTENCORE_EXPORT AbstractFileSystemLoadJob : public AbstractLoadJob
 {
   Q_OBJECT
 
   public:
-    AbstractFileSystemLoadJob( AbstractModelFileSystemSynchronizer* synchronizer, const KUrl &url );
+    AbstractFileSystemLoadJob( AbstractModelFileSystemSynchronizer* synchronizer, const KUrl& url );
+
     virtual ~AbstractFileSystemLoadJob();
 
   public: // KJob API
@@ -52,17 +55,16 @@ class KASTENCORE_EXPORT AbstractFileSystemLoadJob : public AbstractLoadJob
   protected: // API to be implemented
     virtual void startLoadFromFile() = 0;
 
-  protected Q_SLOTS:
-    void load();
-
   protected:
     AbstractModelFileSystemSynchronizer* synchronizer() const;
     QString workFilePath() const;
     QWidget* widget() const;
 
   protected:
-    class Private;
-    Private * const d;
+    Q_PRIVATE_SLOT( d_func(), void load() )
+
+  protected:
+    Q_DECLARE_PRIVATE( AbstractFileSystemLoadJob )
 };
 
 }

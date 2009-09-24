@@ -29,13 +29,14 @@
 #include <KMessageBox>
 #include <KDirWatch>
 
-
+#include <KDebug>
 namespace Kasten
 {
 
 void AbstractModelFileSystemSynchronizerPrivate::onFileDirty( const QString& fileName )
 {
   Q_UNUSED( fileName )
+kDebug()<<fileName;
 //     if( url().url() == fileName )
 //         document()->setRemoteHasChanges(); TODO: needs a control interface? 
 }
@@ -43,12 +44,14 @@ void AbstractModelFileSystemSynchronizerPrivate::onFileDirty( const QString& fil
 void AbstractModelFileSystemSynchronizerPrivate::onFileCreated( const QString& fileName )
 {
   Q_UNUSED( fileName )
+kDebug()<<fileName;
   //TODO: could happen after a delete, what to do?
 }
 
 void AbstractModelFileSystemSynchronizerPrivate::onFileDeleted( const QString& fileName )
 {
   Q_UNUSED( fileName )
+kDebug()<<fileName;
 //     if( url().url() == fileName )
 //         document()->setRemoteHasChanges(); TODO: needs a control interface? 
 }

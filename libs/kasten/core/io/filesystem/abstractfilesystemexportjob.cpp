@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -21,120 +21,67 @@
 */
 
 #include "abstractfilesystemexportjob.h"
-
-// KDE
-#include <KIO/NetAccess>
-#include <KTemporaryFile>
-#include <KLocale>
-// Qt
-#include <QtCore/QTimer>
+#include "abstractfilesystemexportjob_p.h"
+#include "abstractfilesystemexportjob.moc"
 
 
 namespace Kasten
 {
 
-class AbstractFileSystemExportJob::Private
-{
-  public:
-    Private( AbstractModel* model, const AbstractModelSelection* selection, const KUrl &url );
-  public:
-    void prepareWorkFile();
-    void removeWorkFile();
-  public:
-    AbstractModel* model() const;
-    const AbstractModelSelection* selection() const;
-    const KUrl &url() const;
-    QString workFilePath() const;
-    QWidget* widget() const;
-  protected:
-    AbstractModel* mModel;
-    const AbstractModelSelection* mSelection;
-    const KUrl mUrl;
-    KTemporaryFile *mTemporaryFile;
-    QString mWorkFilePath;
-    QWidget* mWidget;
-};
-
-inline AbstractFileSystemExportJob::Private::Private( AbstractModel* model, const AbstractModelSelection* selection,
-                                 const KUrl &url)
- : mModel( model ), mSelection( selection ), mUrl( url ), mTemporaryFile( 0 ), mWidget( 0 )
-{}
-inline AbstractModel* AbstractFileSystemExportJob::Private::model()                    const { return mModel; }
-inline const AbstractModelSelection* AbstractFileSystemExportJob::Private::selection() const { return mSelection; }
-inline const KUrl &AbstractFileSystemExportJob::Private::url()                         const { return mUrl; }
-inline QString AbstractFileSystemExportJob::Private::workFilePath()                    const { return mWorkFilePath; }
-inline QWidget* AbstractFileSystemExportJob::Private::widget()                         const { return mWidget; }
-
-inline void AbstractFileSystemExportJob::Private::prepareWorkFile()
-{
-    if( mUrl.isLocalFile() )
-        mWorkFilePath = mUrl.path();
-    else
-    {
-        mTemporaryFile = new KTemporaryFile;
-        mTemporaryFile->open();
-        mWorkFilePath = mTemporaryFile->fileName();
-    }
-}
-inline void AbstractFileSystemExportJob::Private::removeWorkFile()
-{
-    delete mTemporaryFile;
-}
-
-
 AbstractFileSystemExportJob::AbstractFileSystemExportJob( AbstractModel* model, const AbstractModelSelection* selection,
-                                 const KUrl &url )
-: d( new Private(model,selection,url) )
+                                 const KUrl& url )
+  : AbstractExportJob( new AbstractFileSystemExportJobPrivate(this,model,selection,url) )
 {
 }
 
-AbstractModel* AbstractFileSystemExportJob::model() const { return d->model(); }
-const AbstractModelSelection* AbstractFileSystemExportJob::selection() const { return d->selection(); }
-QString AbstractFileSystemExportJob::workFilePath() const { return d->workFilePath(); }
-QWidget* AbstractFileSystemExportJob::widget() const { return d->widget(); }
+AbstractFileSystemExportJob::AbstractFileSystemExportJob( AbstractFileSystemExportJobPrivate* d )
+  : AbstractExportJob( d )
+{
+}
+
+AbstractModel* AbstractFileSystemExportJob::model() const
+{
+    Q_D( const AbstractFileSystemExportJob );
+
+    return d->model();
+}
+const AbstractModelSelection* AbstractFileSystemExportJob::selection() const
+{
+    Q_D( const AbstractFileSystemExportJob );
+
+    return d->selection();
+}
+QString AbstractFileSystemExportJob::workFilePath() const
+{
+    Q_D( const AbstractFileSystemExportJob );
+
+    return d->workFilePath();
+}
+QWidget* AbstractFileSystemExportJob::widget() const
+{
+    Q_D( const AbstractFileSystemExportJob );
+
+    return d->widget();
+}
 
 
 void AbstractFileSystemExportJob::start()
 {
-    QTimer::singleShot( 0, this, SLOT(exportToFile()) );
-}
+    Q_D( AbstractFileSystemExportJob );
 
-void AbstractFileSystemExportJob::exportToFile()
-{
-    d->prepareWorkFile();
-
-    startExportToFile();
+    d->start();
 }
 
 void AbstractFileSystemExportJob::completeExport( bool success )
 {
-    if( success )
-    {
-        if( !d->url().isLocalFile() )
-        {
-            success = KIO::NetAccess::upload( d->workFilePath(), d->url(), d->widget() );
-            if( !success )
-            {
-                setError( KilledJobError );
-                setErrorText( KIO::NetAccess::lastErrorString() );
-            }
-        }
-    }
-    else
-    {
-        setError( KilledJobError );
-        setErrorText( i18nc("@info","Problem while saving to local filesystem.") );
-    }
+    Q_D( AbstractFileSystemExportJob );
 
-    d->removeWorkFile();
-
-    emitResult();
+    d->completeExport( success );
 }
 
 
 AbstractFileSystemExportJob::~AbstractFileSystemExportJob()
 {
-    delete d;
 }
 
 }

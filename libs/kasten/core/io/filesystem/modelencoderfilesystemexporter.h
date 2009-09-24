@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -26,10 +26,13 @@
 // lib
 #include "abstractmodelexporter.h"
 
+
 namespace Kasten
 {
 
 class AbstractModelStreamEncoder;
+
+class ModelEncoderFileSystemExporterPrivate;
 
 
 class KASTENCORE_EXPORT ModelEncoderFileSystemExporter : public AbstractModelExporter
@@ -38,6 +41,7 @@ class KASTENCORE_EXPORT ModelEncoderFileSystemExporter : public AbstractModelExp
 
   public:
     explicit ModelEncoderFileSystemExporter( AbstractModelStreamEncoder* encoder );
+
     virtual ~ModelEncoderFileSystemExporter();
 
   public:
@@ -49,11 +53,8 @@ class KASTENCORE_EXPORT ModelEncoderFileSystemExporter : public AbstractModelExp
     virtual QString modelTypeName( AbstractModel* model, const AbstractModelSelection* selection ) const;
 
   protected:
-    AbstractModelStreamEncoder*  const mEncoder;
+    Q_DECLARE_PRIVATE( ModelEncoderFileSystemExporter )
 };
-
-
-inline AbstractModelStreamEncoder* ModelEncoderFileSystemExporter::encoder() const { return mEncoder; }
 
 }
 

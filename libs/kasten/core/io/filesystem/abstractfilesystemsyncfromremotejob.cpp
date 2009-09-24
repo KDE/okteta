@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -21,113 +21,53 @@
 */
 
 #include "abstractfilesystemsyncfromremotejob.h"
-
-// library
-#include "abstractmodelfilesystemsynchronizer.h"
-#include <abstractdocument.h>
-// KDE
-#include <KIO/NetAccess>
-#include <KTemporaryFile>
-#include <KLocale>
-#include <KMessageBox>
-#include <KDirWatch>
-// Qt
-#include <QtCore/QTimer>
+#include "abstractfilesystemsyncfromremotejob_p.h"
+#include "abstractfilesystemsyncfromremotejob.moc"
 
 
 namespace Kasten
 {
 
-class AbstractFileSystemSyncFromRemoteJob::Private
-{
-  public:
-    Private( AbstractModelFileSystemSynchronizer* synchronizer );
-
-  public:
-    void setWorkFilePath( const QString &workFilePath );
-
-  public:
-    KUrl url() const;
-    QString workFilePath() const;
-    QWidget* widget() const;
-    AbstractModelFileSystemSynchronizer* synchronizer() const;
-
-  protected:
-    AbstractModelFileSystemSynchronizer* mSynchronizer;
-    QString mWorkFilePath;
-};
-
-AbstractFileSystemSyncFromRemoteJob::Private::Private( AbstractModelFileSystemSynchronizer* synchronizer )
- : mSynchronizer( synchronizer )
-{}
-
-inline KUrl AbstractFileSystemSyncFromRemoteJob::Private::url()      const { return mSynchronizer->url(); }
-inline QString AbstractFileSystemSyncFromRemoteJob::Private::workFilePath() const { return mWorkFilePath; }
-// TODO: setup a notification system
-inline QWidget* AbstractFileSystemSyncFromRemoteJob::Private::widget()      const { return 0; }
-inline AbstractModelFileSystemSynchronizer* AbstractFileSystemSyncFromRemoteJob::Private::synchronizer() const
-{
-    return mSynchronizer;
-}
-
-inline void AbstractFileSystemSyncFromRemoteJob::Private::setWorkFilePath( const QString &workFilePath )
-{
-    mWorkFilePath = workFilePath;
-}
-
-
-
 AbstractFileSystemSyncFromRemoteJob::AbstractFileSystemSyncFromRemoteJob( AbstractModelFileSystemSynchronizer* synchronizer )
- : d( new Private(synchronizer) )
-{}
+  : AbstractSyncFromRemoteJob( new AbstractFileSystemSyncFromRemoteJobPrivate(this,synchronizer) )
+{
+}
 
 AbstractModelFileSystemSynchronizer* AbstractFileSystemSyncFromRemoteJob::synchronizer() const
 {
+    Q_D( const AbstractFileSystemSyncFromRemoteJob );
+
     return d->synchronizer();
 }
-QString AbstractFileSystemSyncFromRemoteJob::workFilePath() const { return d->workFilePath(); }
-QWidget* AbstractFileSystemSyncFromRemoteJob::widget() const { return d->widget(); }
+QString AbstractFileSystemSyncFromRemoteJob::workFilePath() const
+{
+    Q_D( const AbstractFileSystemSyncFromRemoteJob );
+
+    return d->workFilePath();
+}
+QWidget* AbstractFileSystemSyncFromRemoteJob::widget() const
+{
+    Q_D( const AbstractFileSystemSyncFromRemoteJob );
+
+    return d->widget();
+}
 
 void AbstractFileSystemSyncFromRemoteJob::start()
 {
-    QTimer::singleShot( 0, this, SLOT(syncFromRemote()) );
-}
+    Q_D( AbstractFileSystemSyncFromRemoteJob );
 
-void AbstractFileSystemSyncFromRemoteJob::syncFromRemote()
-{
-    QString workFilePath;
-    // TODO: see if this could be used asynchronously instead
-    if( KIO::NetAccess::download(d->url().url(),workFilePath,d->widget()) )
-    {
-        d->setWorkFilePath( workFilePath );
-        startReadFromFile();
-    }
-    else
-    {
-        setError( KilledJobError );
-        setErrorText( KIO::NetAccess::lastErrorString() );
-        emitResult();
-    }
+    d->start();
 }
-
 
 void AbstractFileSystemSyncFromRemoteJob::completeRead( bool success )
 {
-    if( !success )
-    {
-        setError( KilledJobError );
-        setErrorText( i18nc("@info","Problem while loading from local filesystem.") );
-    }
+    Q_D( AbstractFileSystemSyncFromRemoteJob );
 
-    KIO::NetAccess::removeTempFile( d->workFilePath() );
-
-    emitResult();
+    d->completeRead( success );
 }
-
 
 AbstractFileSystemSyncFromRemoteJob::~AbstractFileSystemSyncFromRemoteJob()
 {
-    delete d;
 }
 
 }

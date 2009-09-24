@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -35,15 +35,20 @@ namespace Kasten
 class AbstractModel;
 class AbstractModelSelection;
 
+class AbstractFileSystemExportJobPrivate;
+
 
 class KASTENCORE_EXPORT AbstractFileSystemExportJob : public AbstractExportJob
 {
   Q_OBJECT
 
   protected:
+    AbstractFileSystemExportJob( AbstractFileSystemExportJobPrivate* d );
+
+  public:
     AbstractFileSystemExportJob( AbstractModel* model, const AbstractModelSelection* selection,
                                  const KUrl &url );
-  public:
+
     virtual ~AbstractFileSystemExportJob();
 
   public: // KJob API
@@ -61,12 +66,11 @@ class KASTENCORE_EXPORT AbstractFileSystemExportJob : public AbstractExportJob
     QString workFilePath() const;
     QWidget* widget() const;
 
-  protected Q_SLOTS:
-    void exportToFile();
+  protected:
+    Q_PRIVATE_SLOT( d_func(), void exportToFile() )
 
   protected:
-    class Private;
-    Private * const d;
+    Q_DECLARE_PRIVATE( AbstractFileSystemExportJob )
 };
 
 }

@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -32,21 +32,23 @@
 namespace Kasten
 {
 
+class AbstractSyncWithRemoteJobPrivate;
+
+
 class KASTENCORE_EXPORT AbstractSyncWithRemoteJob : public KJob
 {
   Q_OBJECT
 
+  protected:
+    explicit AbstractSyncWithRemoteJob( AbstractSyncWithRemoteJobPrivate* d );
+
   public:
     AbstractSyncWithRemoteJob();
+
     virtual ~AbstractSyncWithRemoteJob();
 
-  public:
-
   protected:
-
-  protected:
-    class Private;
-    Private * const d;
+    AbstractSyncWithRemoteJobPrivate* const d_ptr;
 };
 
 }

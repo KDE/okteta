@@ -20,51 +20,57 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTEXPORTJOB_H
-#define ABSTRACTEXPORTJOB_H
+#ifndef ABSTRACTLOADJOB_P_H
+#define ABSTRACTLOADJOB_P_H
 
 // lib
-#include "kastencore_export.h"
-// KDE
-#include <KJob>
+#include "abstractloadjob.h"
 
 
 namespace Kasten
 {
 
-class AbstractDocument;
-
-class AbstractExportJobPrivate;
-
-
-class KASTENCORE_EXPORT AbstractExportJob : public KJob
+class AbstractLoadJobPrivate
 {
-  Q_OBJECT
-
-  protected:
-    explicit AbstractExportJob( AbstractExportJobPrivate* d );
-
   public:
-    AbstractExportJob();
+    explicit AbstractLoadJobPrivate( AbstractLoadJob* parent );
 
-    virtual ~AbstractExportJob();
+    virtual ~AbstractLoadJobPrivate();
 
   public:
     AbstractDocument* document() const;
 
-  Q_SIGNALS:
-    void documentLoaded( Kasten::AbstractDocument* document );
+  public:
+    void setDocument( AbstractDocument* document );
 
   protected:
-    // emits documentLoaded()
-    // TODO: or better name property LoadedDocument?
-    virtual void setDocument( AbstractDocument* document );
+    Q_DECLARE_PUBLIC( AbstractLoadJob )
+  protected:
+    AbstractLoadJob* const q_ptr;
 
-  protected:
-    Q_DECLARE_PRIVATE( AbstractExportJob )
-  protected:
-    AbstractExportJobPrivate* const d_ptr;
+    AbstractDocument* mDocument;
 };
+
+
+inline AbstractLoadJobPrivate::AbstractLoadJobPrivate( AbstractLoadJob* parent )
+  : q_ptr( parent ),
+    mDocument( 0 )
+{}
+inline AbstractLoadJobPrivate::~AbstractLoadJobPrivate() {}
+
+inline AbstractDocument* AbstractLoadJobPrivate::document() const { return mDocument; }
+inline void AbstractLoadJobPrivate::setDocument( AbstractDocument* document )
+{
+    Q_Q( AbstractLoadJob );
+
+    if( document )
+    {
+        mDocument = document;
+        emit q->documentLoaded( document );
+    }
+
+    q->emitResult();
+}
 
 }
 

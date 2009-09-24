@@ -20,51 +20,47 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTEXPORTJOB_H
-#define ABSTRACTEXPORTJOB_H
+#ifndef ABSTRACTMODELEXPORTER_P_H
+#define ABSTRACTMODELEXPORTER_P_H
 
-// lib
-#include "kastencore_export.h"
-// KDE
-#include <KJob>
+#include "abstractmodelexporter.h"
 
 
 namespace Kasten
 {
 
-class AbstractDocument;
-
-class AbstractExportJobPrivate;
-
-
-class KASTENCORE_EXPORT AbstractExportJob : public KJob
+class AbstractModelExporterPrivate
 {
-  Q_OBJECT
+  public:
+    AbstractModelExporterPrivate( AbstractModelExporter* parent,
+                                  const QString& remoteTypeName, const QString& remoteMimeType );
 
-  protected:
-    explicit AbstractExportJob( AbstractExportJobPrivate* d );
+    virtual ~AbstractModelExporterPrivate();
 
   public:
-    AbstractExportJob();
-
-    virtual ~AbstractExportJob();
-
-  public:
-    AbstractDocument* document() const;
-
-  Q_SIGNALS:
-    void documentLoaded( Kasten::AbstractDocument* document );
+    const QString& remoteTypeName() const;
+    const QString& remoteMimeType() const;
 
   protected:
-    // emits documentLoaded()
-    // TODO: or better name property LoadedDocument?
-    virtual void setDocument( AbstractDocument* document );
+    AbstractModelExporter* const q_ptr;
 
-  protected:
-    Q_DECLARE_PRIVATE( AbstractExportJob )
-  protected:
-    AbstractExportJobPrivate* const d_ptr;
+    const QString mRemoteTypeName;
+    const QString mRemoteMimeType;
 };
+
+
+inline AbstractModelExporterPrivate::AbstractModelExporterPrivate( AbstractModelExporter* parent,
+    const QString& remoteTypeName, const QString& remoteMimeType )
+  : q_ptr( parent ),
+    mRemoteTypeName( remoteTypeName ),
+    mRemoteMimeType( remoteMimeType )
+{}
+
+inline AbstractModelExporterPrivate::~AbstractModelExporterPrivate()
+{}
+
+inline const QString& AbstractModelExporterPrivate::remoteTypeName() const { return mRemoteTypeName; }
+inline const QString& AbstractModelExporterPrivate::remoteMimeType() const { return mRemoteMimeType; }
 
 }
 

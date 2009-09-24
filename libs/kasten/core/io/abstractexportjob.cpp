@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -21,49 +21,37 @@
 */
 
 #include "abstractexportjob.h"
+#include "abstractexportjob_p.h"
 
 
 namespace Kasten
 {
 
-class AbstractExportJob::Private
-{
-  public:
-    Private();
-
-  public:
-    AbstractDocument* document() const;
-    void setDocument( AbstractDocument* document );
-
-  protected:
-    AbstractDocument* mDocument;
-};
-
-AbstractExportJob::Private::Private()
- : mDocument( 0 )
+AbstractExportJob::AbstractExportJob( AbstractExportJobPrivate* d )
+  : d_ptr( d )
 {}
-
-
-inline AbstractDocument* AbstractExportJob::Private::document() const { return mDocument; }
-inline void AbstractExportJob::Private::setDocument( AbstractDocument* document ) { mDocument = document; }
-
 
 AbstractExportJob::AbstractExportJob()
- : d( new Private() )
+  : d_ptr( new AbstractExportJobPrivate(this) )
 {}
 
-AbstractDocument* AbstractExportJob::document() const { return d->document(); }
+AbstractDocument* AbstractExportJob::document() const
+{
+    Q_D( const AbstractExportJob );
+
+    return d->document();
+}
 
 void AbstractExportJob::setDocument( AbstractDocument* document )
 {
+    Q_D( AbstractExportJob );
+
     d->setDocument( document );
-    emit documentLoaded( document );
-    emitResult();
 }
 
 AbstractExportJob::~AbstractExportJob()
 {
-    delete d;
+    delete d_ptr;
 }
 
 }

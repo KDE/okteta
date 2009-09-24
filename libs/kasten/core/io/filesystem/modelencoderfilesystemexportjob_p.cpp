@@ -20,52 +20,41 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTEXPORTJOB_H
-#define ABSTRACTEXPORTJOB_H
+#include "modelencoderfilesystemexportjob_p.h"
 
 // lib
-#include "kastencore_export.h"
-// KDE
-#include <KJob>
+#include "modelstreamencodethread.h"
+// Qt
+#include <QtGui/QApplication>
+#include <QtCore/QFile>
 
 
 namespace Kasten
 {
 
-class AbstractDocument;
-
-class AbstractExportJobPrivate;
-
-
-class KASTENCORE_EXPORT AbstractExportJob : public KJob
+void ModelEncoderFileSystemExportJobPrivate::startExportToFile()
 {
-  Q_OBJECT
+    Q_Q( ModelEncoderFileSystemExportJob );
 
-  protected:
-    explicit AbstractExportJob( AbstractExportJobPrivate* d );
+    startExportToFile();
 
-  public:
-    AbstractExportJob();
+    QFile file( workFilePath() );
+    if( ! file.open(QIODevice::WriteOnly) )
+    {
+        q->completeExport( false );
+        return;
+    }
 
-    virtual ~AbstractExportJob();
+    ModelStreamEncodeThread* exportThread =
+        new ModelStreamEncodeThread( q, &file, model(), selection(), mEncoder );
+    exportThread->start();
+    while( ! exportThread->wait(100) )
+        QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
 
-  public:
-    AbstractDocument* document() const;
+    const bool success = exportThread->success();
+    delete exportThread;
 
-  Q_SIGNALS:
-    void documentLoaded( Kasten::AbstractDocument* document );
-
-  protected:
-    // emits documentLoaded()
-    // TODO: or better name property LoadedDocument?
-    virtual void setDocument( AbstractDocument* document );
-
-  protected:
-    Q_DECLARE_PRIVATE( AbstractExportJob )
-  protected:
-    AbstractExportJobPrivate* const d_ptr;
-};
-
+    q->completeExport( success );
 }
 
-#endif
+}

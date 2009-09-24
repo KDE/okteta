@@ -22,7 +22,6 @@
 
 #include "abstractmodelsynchronizer.h"
 #include "abstractmodelsynchronizer_p.h"
-#include "abstractmodelsynchronizer.moc"
 
 
 namespace Kasten

@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -38,6 +38,9 @@ namespace Kasten
 class AbstractModel;
 class AbstractModelSelection;
 
+class AbstractModelStreamEncoderPrivate;
+
+
 // TODO: General synchronizer would load matching encoder and decoder
 // manually defined by desktopfile
 
@@ -49,12 +52,15 @@ class KASTENCORE_EXPORT AbstractModelStreamEncoder : public QObject
     Q_OBJECT
 
   protected:
-    AbstractModelStreamEncoder( const QString &remoteTypeName, const QString &remoteMimeType );
+    AbstractModelStreamEncoder( AbstractModelStreamEncoderPrivate* d );
+
   public:
+    AbstractModelStreamEncoder( const QString& remoteTypeName, const QString& remoteMimeType );
+
     virtual ~AbstractModelStreamEncoder();
 
   public: // API to be implemented
-    virtual bool encodeToStream( QIODevice *device, AbstractModel* model, const AbstractModelSelection* selection ) = 0;
+    virtual bool encodeToStream( QIODevice* device, AbstractModel* model, const AbstractModelSelection* selection ) = 0;
     virtual QString modelTypeName( AbstractModel* model, const AbstractModelSelection* selection ) const = 0;
 
   public:
@@ -62,8 +68,9 @@ class KASTENCORE_EXPORT AbstractModelStreamEncoder : public QObject
     QString remoteMimeType() const;
 
   protected:
-    const QString mRemoteTypeName;
-    const QString mRemoteMimeType;
+    Q_DECLARE_PRIVATE( AbstractModelStreamEncoder )
+  protected:
+    AbstractModelStreamEncoderPrivate* const d_ptr;
 };
 
 }

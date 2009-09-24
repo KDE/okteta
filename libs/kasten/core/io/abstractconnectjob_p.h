@@ -20,51 +20,33 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTEXPORTJOB_H
-#define ABSTRACTEXPORTJOB_H
+#ifndef ABSTRACTCONNECTJOB_P_H
+#define ABSTRACTCONNECTJOB_P_H
 
-// lib
-#include "kastencore_export.h"
-// KDE
-#include <KJob>
+#include "abstractconnectjob.h"
 
 
 namespace Kasten
 {
 
-class AbstractDocument;
-
-class AbstractExportJobPrivate;
-
-
-class KASTENCORE_EXPORT AbstractExportJob : public KJob
+class AbstractConnectJobPrivate
 {
-  Q_OBJECT
-
-  protected:
-    explicit AbstractExportJob( AbstractExportJobPrivate* d );
-
   public:
-    AbstractExportJob();
+    explicit AbstractConnectJobPrivate( AbstractConnectJob* parent );
 
-    virtual ~AbstractExportJob();
-
-  public:
-    AbstractDocument* document() const;
-
-  Q_SIGNALS:
-    void documentLoaded( Kasten::AbstractDocument* document );
+    virtual ~AbstractConnectJobPrivate();
 
   protected:
-    // emits documentLoaded()
-    // TODO: or better name property LoadedDocument?
-    virtual void setDocument( AbstractDocument* document );
-
-  protected:
-    Q_DECLARE_PRIVATE( AbstractExportJob )
-  protected:
-    AbstractExportJobPrivate* const d_ptr;
+    AbstractConnectJob* const q_ptr;
 };
+
+
+inline AbstractConnectJobPrivate::AbstractConnectJobPrivate( AbstractConnectJob* parent )
+  : q_ptr( parent )
+{}
+
+inline AbstractConnectJobPrivate::~AbstractConnectJobPrivate()
+{}
 
 }
 

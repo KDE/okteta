@@ -36,10 +36,10 @@ class KASTENCORE_EXPORT AbstractModelFileSystemSynchronizer : public AbstractMod
 {
   Q_OBJECT
 
-  friend class AbstractFileSystemLoadJob;
-  friend class AbstractFileSystemConnectJob;
-  friend class AbstractFileSystemSyncWithRemoteJob;
-  friend class AbstractFileSystemSyncToRemoteJob;
+  friend class AbstractFileSystemLoadJobPrivate;
+  friend class AbstractFileSystemConnectJobPrivate;
+  friend class AbstractFileSystemSyncWithRemoteJobPrivate;
+  friend class AbstractFileSystemSyncToRemoteJobPrivate;
 
   protected:
     explicit AbstractModelFileSystemSynchronizer( AbstractModelFileSystemSynchronizerPrivate* d );

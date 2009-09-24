@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -39,19 +39,24 @@ class AbstractModel;
 class AbstractModelSelection;
 class AbstractExportJob;
 
+class AbstractModelExporterPrivate;
+
 
 class KASTENCORE_EXPORT AbstractModelExporter : public QObject
 {
   Q_OBJECT
 
   protected:
-    AbstractModelExporter( const QString &remoteTypeName, const QString &remoteMimeType );
+    AbstractModelExporter( AbstractModelExporterPrivate* d );
+
   public:
+    AbstractModelExporter( const QString& remoteTypeName, const QString& remoteMimeType );
+
     virtual ~AbstractModelExporter();
 
   public: // API to be implemented
     virtual AbstractExportJob* startExport( AbstractModel* model, const AbstractModelSelection* selection,
-                                            const KUrl &url ) = 0;
+                                            const KUrl& url ) = 0;
     virtual QString modelTypeName( AbstractModel* model, const AbstractModelSelection* selection ) const = 0;
 
   public:
@@ -59,8 +64,9 @@ class KASTENCORE_EXPORT AbstractModelExporter : public QObject
     QString remoteMimeType() const;
 
   protected:
-    class Private;
-    Private * const d;
+    Q_DECLARE_PRIVATE( AbstractModelExporter )
+  protected:
+    AbstractModelExporterPrivate* const d_ptr;
 };
 
 }

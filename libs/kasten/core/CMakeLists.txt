@@ -45,12 +45,19 @@ set( KASTEN_CORE_IO_SRCS
 )
 
 set( KASTEN_CORE_IO_FILESYSTEM_SRCS
+  io/filesystem/abstractfilesystemloadjob_p.cpp
   io/filesystem/abstractfilesystemloadjob.cpp
+  io/filesystem/abstractfilesystemsynctoremotejob_p.cpp
   io/filesystem/abstractfilesystemsynctoremotejob.cpp
+  io/filesystem/abstractfilesystemsyncfromremotejob_p.cpp
   io/filesystem/abstractfilesystemsyncfromremotejob.cpp
+  io/filesystem/abstractfilesystemsyncwithremotejob_p.cpp
   io/filesystem/abstractfilesystemsyncwithremotejob.cpp
+  io/filesystem/abstractfilesystemconnectjob_p.cpp
   io/filesystem/abstractfilesystemconnectjob.cpp
+  io/filesystem/abstractfilesystemexportjob_p.cpp
   io/filesystem/abstractfilesystemexportjob.cpp
+  io/filesystem/modelencoderfilesystemexportjob_p.cpp
   io/filesystem/modelencoderfilesystemexportjob.cpp
   io/filesystem/modelencoderfilesystemexporter.cpp
   io/filesystem/abstractmodelfilesystemsynchronizer_p.cpp

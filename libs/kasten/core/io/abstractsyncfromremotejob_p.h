@@ -20,51 +20,33 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTEXPORTJOB_H
-#define ABSTRACTEXPORTJOB_H
+#ifndef ABSTRACTSYNCFROMREMOTEJOB_P_H
+#define ABSTRACTSYNCFROMREMOTEJOB_P_H
 
-// lib
-#include "kastencore_export.h"
-// KDE
-#include <KJob>
+#include "abstractsyncfromremotejob.h"
 
 
 namespace Kasten
 {
 
-class AbstractDocument;
-
-class AbstractExportJobPrivate;
-
-
-class KASTENCORE_EXPORT AbstractExportJob : public KJob
+class AbstractSyncFromRemoteJobPrivate
 {
-  Q_OBJECT
-
-  protected:
-    explicit AbstractExportJob( AbstractExportJobPrivate* d );
-
   public:
-    AbstractExportJob();
+    explicit AbstractSyncFromRemoteJobPrivate( AbstractSyncFromRemoteJob* parent );
 
-    virtual ~AbstractExportJob();
-
-  public:
-    AbstractDocument* document() const;
-
-  Q_SIGNALS:
-    void documentLoaded( Kasten::AbstractDocument* document );
+    virtual ~AbstractSyncFromRemoteJobPrivate();
 
   protected:
-    // emits documentLoaded()
-    // TODO: or better name property LoadedDocument?
-    virtual void setDocument( AbstractDocument* document );
-
-  protected:
-    Q_DECLARE_PRIVATE( AbstractExportJob )
-  protected:
-    AbstractExportJobPrivate* const d_ptr;
+    AbstractSyncFromRemoteJob* const q_ptr;
 };
+
+
+inline AbstractSyncFromRemoteJobPrivate::AbstractSyncFromRemoteJobPrivate( AbstractSyncFromRemoteJob* parent )
+  : q_ptr( parent )
+{}
+
+inline AbstractSyncFromRemoteJobPrivate::~AbstractSyncFromRemoteJobPrivate()
+{}
 
 }
 

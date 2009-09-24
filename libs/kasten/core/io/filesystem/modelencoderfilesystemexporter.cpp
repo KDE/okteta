@@ -21,29 +21,38 @@
 */
 
 #include "modelencoderfilesystemexporter.h"
-
-// lib
-#include "modelencoderfilesystemexportjob.h"
-#include <abstractmodelstreamencoder.h>
+#include "modelencoderfilesystemexporter_p.h"
 
 
 namespace Kasten
 {
 
 ModelEncoderFileSystemExporter::ModelEncoderFileSystemExporter( AbstractModelStreamEncoder* encoder )
-: AbstractModelExporter(encoder->remoteTypeName(),encoder->remoteMimeType()), mEncoder( encoder )
-{}
+  : AbstractModelExporter( new ModelEncoderFileSystemExporterPrivate(this,encoder->remoteTypeName(),encoder->remoteMimeType(),encoder) )
+{
+}
+
+AbstractModelStreamEncoder* ModelEncoderFileSystemExporter::encoder() const
+{
+    Q_D( const ModelEncoderFileSystemExporter );
+
+    return d->encoder();
+}
 
 AbstractExportJob* ModelEncoderFileSystemExporter::startExport( AbstractModel* model,
                                                                 const AbstractModelSelection* selection,
-                                                                const KUrl &url )
+                                                                const KUrl& url )
 {
-    return new ModelEncoderFileSystemExportJob( model, selection, url, mEncoder );
+    Q_D( ModelEncoderFileSystemExporter );
+
+    return d->startExport( model, selection, url );
 }
 
 QString ModelEncoderFileSystemExporter::modelTypeName( AbstractModel* model, const AbstractModelSelection* selection ) const
 {
-    return mEncoder->modelTypeName( model, selection );
+    Q_D( const ModelEncoderFileSystemExporter );
+
+    return d->modelTypeName( model, selection );
 }
 
 ModelEncoderFileSystemExporter::~ModelEncoderFileSystemExporter() {}

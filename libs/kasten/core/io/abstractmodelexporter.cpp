@@ -21,40 +21,39 @@
 */
 
 #include "abstractmodelexporter.h"
+#include "abstractmodelexporter_p.h"
 
 
 namespace Kasten
 {
 
-class AbstractModelExporter::Private
+AbstractModelExporter::AbstractModelExporter( AbstractModelExporterPrivate* d )
+  : d_ptr( d )
 {
-  public:
-    Private( const QString &remoteTypeName, const QString &remoteMimeType );
-  public:
-    QString remoteTypeName() const;
-    QString remoteMimeType() const;
-  protected:
-    const QString mRemoteTypeName;
-    const QString mRemoteMimeType;
-};
-
-inline AbstractModelExporter::Private::Private( const QString &remoteTypeName, const QString &remoteMimeType )
-: mRemoteTypeName( remoteTypeName ), mRemoteMimeType( remoteMimeType )
-{}
-
-inline QString AbstractModelExporter::Private::remoteTypeName() const { return mRemoteTypeName; }
-inline QString AbstractModelExporter::Private::remoteMimeType() const { return mRemoteMimeType; }
+}
 
 AbstractModelExporter::AbstractModelExporter( const QString &remoteTypeName, const QString &remoteMimeType )
-: d( new Private(remoteTypeName,remoteMimeType) )
-{}
+  : d_ptr( new AbstractModelExporterPrivate(this,remoteTypeName,remoteMimeType) )
+{
+}
 
-QString AbstractModelExporter::remoteTypeName() const { return d->remoteTypeName(); }
-QString AbstractModelExporter::remoteMimeType() const { return d->remoteMimeType(); }
+QString AbstractModelExporter::remoteTypeName() const
+{
+    Q_D( const AbstractModelExporter );
+
+    return d->remoteTypeName();
+}
+
+QString AbstractModelExporter::remoteMimeType() const
+{
+    Q_D( const AbstractModelExporter );
+
+    return d->remoteMimeType();
+}
 
 AbstractModelExporter::~AbstractModelExporter()
 {
-    delete d;
+    delete d_ptr;
 }
 
 }

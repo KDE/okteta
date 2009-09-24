@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -21,53 +21,39 @@
 */
 
 #include "abstractloadjob.h"
+#include "abstractloadjob_p.h"
 
 
 namespace Kasten
 {
 
-class AbstractLoadJob::Private
+AbstractLoadJob::AbstractLoadJob( AbstractLoadJobPrivate* d )
+  : d_ptr( d )
 {
-  public:
-    Private();
-
-  public:
-    AbstractDocument* document() const;
-    void setDocument( AbstractDocument* document );
-
-  protected:
-    AbstractDocument* mDocument;
-};
-
-AbstractLoadJob::Private::Private()
- : mDocument( 0 )
-{}
-
-
-inline AbstractDocument* AbstractLoadJob::Private::document() const { return mDocument; }
-inline void AbstractLoadJob::Private::setDocument( AbstractDocument* document ) { mDocument = document; }
-
+}
 
 AbstractLoadJob::AbstractLoadJob()
- : d( new Private() )
-{}
+  : d_ptr( new AbstractLoadJobPrivate(this) )
+{
+}
 
-AbstractDocument* AbstractLoadJob::document() const { return d->document(); }
+AbstractDocument* AbstractLoadJob::document() const
+{
+    Q_D( const AbstractLoadJob );
+
+    return d->document();
+}
 
 void AbstractLoadJob::setDocument( AbstractDocument* document )
 {
-    if( document )
-    {
-        d->setDocument( document );
-        emit documentLoaded( document );
-    }
+    Q_D( AbstractLoadJob );
 
-    emitResult();
+    d->setDocument( document );
 }
 
 AbstractLoadJob::~AbstractLoadJob()
 {
-    delete d;
+    delete d_ptr;
 }
 
 }

@@ -20,52 +20,49 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTEXPORTJOB_H
-#define ABSTRACTEXPORTJOB_H
+#include "abstractfilesystemsyncfromremotejob_p.h"
 
-// lib
-#include "kastencore_export.h"
+// library
+#include "abstractmodelfilesystemsynchronizer.h"
 // KDE
-#include <KJob>
+#include <KIO/NetAccess>
+#include <KLocale>
 
 
 namespace Kasten
 {
 
-class AbstractDocument;
-
-class AbstractExportJobPrivate;
-
-
-class KASTENCORE_EXPORT AbstractExportJob : public KJob
+void AbstractFileSystemSyncFromRemoteJobPrivate::syncFromRemote()
 {
-  Q_OBJECT
+    Q_Q( AbstractFileSystemSyncFromRemoteJob );
 
-  protected:
-    explicit AbstractExportJob( AbstractExportJobPrivate* d );
-
-  public:
-    AbstractExportJob();
-
-    virtual ~AbstractExportJob();
-
-  public:
-    AbstractDocument* document() const;
-
-  Q_SIGNALS:
-    void documentLoaded( Kasten::AbstractDocument* document );
-
-  protected:
-    // emits documentLoaded()
-    // TODO: or better name property LoadedDocument?
-    virtual void setDocument( AbstractDocument* document );
-
-  protected:
-    Q_DECLARE_PRIVATE( AbstractExportJob )
-  protected:
-    AbstractExportJobPrivate* const d_ptr;
-};
-
+    // TODO: see if this could be used asynchronously instead
+    const bool success = KIO::NetAccess::download( mSynchronizer->url().url(), mWorkFilePath, widget() );
+    if( success )
+    {
+        q->startReadFromFile();
+    }
+    else
+    {
+        q->setError( KJob::KilledJobError );
+        q->setErrorText( KIO::NetAccess::lastErrorString() );
+        q->emitResult();
+    }
 }
 
-#endif
+void AbstractFileSystemSyncFromRemoteJobPrivate::completeRead( bool success )
+{
+    Q_Q( AbstractFileSystemSyncFromRemoteJob );
+
+    if( ! success )
+    {
+        q->setError( KJob::KilledJobError );
+        q->setErrorText( i18nc("@info","Problem while loading from local filesystem.") );
+    }
+
+    KIO::NetAccess::removeTempFile( mWorkFilePath );
+
+    q->emitResult();
+}
+
+}

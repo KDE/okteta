@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -21,201 +21,61 @@
 */
 
 #include "abstractfilesystemconnectjob.h"
-
-// library
-#include "abstractmodelfilesystemsynchronizer.h"
-#include <abstractdocument.h>
-// KDE
-#include <KIO/NetAccess>
-#include <KTemporaryFile>
-#include <KLocale>
-#include <KDirWatch>
-// Qt
-#include <QtCore/QTimer>
+#include "abstractfilesystemconnectjob_p.h"
+#include "abstractfilesystemconnectjob.moc"
 
 
 namespace Kasten
 {
 
-class AbstractFileSystemConnectJob::Private
-{
-  public:
-    Private( AbstractModelFileSystemSynchronizer* synchronizer, AbstractDocument* document,
-             const KUrl &url, AbstractModelSynchronizer::ConnectOption option );
-
-  public:
-    void setTemporaryFile( KTemporaryFile *temporaryFile );
-    void setWorkFilePath( const QString &workFilePath );
-
-  public:
-    AbstractDocument* document() const;
-    KUrl url() const;
-    AbstractModelSynchronizer::ConnectOption option() const;
-    KTemporaryFile *temporaryFile() const;
-    QString workFilePath() const;
-    QWidget* widget() const;
-    AbstractModelFileSystemSynchronizer* synchronizer() const;
-
-  protected:
-    AbstractModelFileSystemSynchronizer* mSynchronizer;
-    AbstractDocument* mDocument;
-    const KUrl mUrl;
-    const AbstractModelSynchronizer::ConnectOption mOption;
-    KTemporaryFile *mTemporaryFile;
-    QString mWorkFilePath;
-};
-
-AbstractFileSystemConnectJob::Private::Private( AbstractModelFileSystemSynchronizer* synchronizer,
-                                                AbstractDocument* document,
-                                                const KUrl &url, AbstractModelSynchronizer::ConnectOption option )
- : mSynchronizer( synchronizer ), mDocument( document ), mUrl( url ), mOption( option ), mTemporaryFile( 0 )
-{}
-
-AbstractModelFileSystemSynchronizer* AbstractFileSystemConnectJob::Private::synchronizer() const
-{
-    return mSynchronizer;
-}
-inline AbstractDocument* AbstractFileSystemConnectJob::Private::document()   const { return mDocument; }
-inline KUrl AbstractFileSystemConnectJob::Private::url()               const { return mUrl; }
-inline KTemporaryFile *AbstractFileSystemConnectJob::Private::temporaryFile() const { return mTemporaryFile; }
-inline QString AbstractFileSystemConnectJob::Private::workFilePath()          const { return mWorkFilePath; }
-// TODO: setup a notification system
-inline QWidget* AbstractFileSystemConnectJob::Private::widget()               const { return 0; }
-inline AbstractModelSynchronizer::ConnectOption AbstractFileSystemConnectJob::Private::option() const
-{
-    return mOption;
-}
-
-inline void AbstractFileSystemConnectJob::Private::setTemporaryFile( KTemporaryFile *temporaryFile )
-{
-    mTemporaryFile = temporaryFile;
-}
-
-inline void AbstractFileSystemConnectJob::Private::setWorkFilePath( const QString &workFilePath )
-{
-    mWorkFilePath = workFilePath;
-}
-
-
 AbstractFileSystemConnectJob::AbstractFileSystemConnectJob( AbstractModelFileSystemSynchronizer* synchronizer,
                                                             AbstractDocument* document,
-                                                      const KUrl &url, AbstractModelSynchronizer::ConnectOption option )
- : d( new Private(synchronizer,document,url,option) )
-{}
+                                                            const KUrl& url, AbstractModelSynchronizer::ConnectOption option )
+  : AbstractConnectJob( new AbstractFileSystemConnectJobPrivate(this,synchronizer,document,url,option) )
+{
+}
 
 AbstractModelFileSystemSynchronizer* AbstractFileSystemConnectJob::synchronizer() const
 {
+    Q_D( const AbstractFileSystemConnectJob );
+
     return d->synchronizer();
 }
-AbstractDocument* AbstractFileSystemConnectJob::document()   const { return d->document(); }
-QString AbstractFileSystemConnectJob::workFilePath() const { return d->workFilePath(); }
-QWidget* AbstractFileSystemConnectJob::widget() const { return d->widget(); }
+AbstractDocument* AbstractFileSystemConnectJob::document() const
+{
+    Q_D( const AbstractFileSystemConnectJob );
+
+    return d->document();
+}
+QString AbstractFileSystemConnectJob::workFilePath() const
+{
+    Q_D( const AbstractFileSystemConnectJob );
+
+    return d->workFilePath();
+}
+QWidget* AbstractFileSystemConnectJob::widget() const
+{
+    Q_D( const AbstractFileSystemConnectJob );
+
+    return d->widget();
+}
 
 void AbstractFileSystemConnectJob::start()
 {
-    QTimer::singleShot( 0, this, SLOT(connectWithFile()) );
-}
+    Q_D( AbstractFileSystemConnectJob );
 
-void AbstractFileSystemConnectJob::connectWithFile()
-{
-// Comment: here we play tricks to reuse the temporary file
-// KIO::NetAccess::removeTempFile only removes tempfiles created by KIO::NetAccess::download
-// So if replaceRemote and workFilePath is temporaryFile both don't conflict -> no problem (now)
-
-    QString workFilePath;
-
-    const KUrl newUrl = d->url();
-    bool isWorkFileOk;
-    if( d->option() == AbstractModelSynchronizer::ReplaceRemote )
-    {
-        if( newUrl.isLocalFile() )
-            workFilePath = newUrl.path();
-        else
-        {
-            KTemporaryFile *temporaryFile = new KTemporaryFile;
-            temporaryFile->open();
-            workFilePath = temporaryFile->fileName();
-            d->setTemporaryFile( temporaryFile );
-        }
-        isWorkFileOk = true;
-    }
-    else
-        isWorkFileOk = KIO::NetAccess::download( newUrl.url(), workFilePath, d->widget() );
-
-    if( isWorkFileOk )
-    {
-        d->setWorkFilePath( workFilePath );
-        startConnectWithFile();
-    }
-    else
-    {
-        setError( KilledJobError );
-        setErrorText( KIO::NetAccess::lastErrorString() );
-        // TODO: should we rather skip setDocument in the API?
-        emitResult();
-    }
+    d->start();
 }
 
 void AbstractFileSystemConnectJob::complete( bool success )
 {
-    AbstractModelFileSystemSynchronizer* synchronizer = d->synchronizer();
-    if( success )
-    {
-        KDirWatch *dirWatch = KDirWatch::self();
-        const KUrl newUrl = d->url();
-        const KUrl oldUrl = synchronizer->url();
-        // care for old url
-        if( oldUrl.isLocalFile() )
-        {
-            dirWatch->disconnect( synchronizer );
-            dirWatch->removeFile( oldUrl.path() );
-        }
+    Q_D( AbstractFileSystemConnectJob );
 
-        if( !newUrl.isLocalFile() )
-        {
-            const bool uploaded = KIO::NetAccess::upload( workFilePath(), newUrl, d->widget() );
-            if( !uploaded )
-            {
-                setError( KilledJobError );
-                setErrorText( KIO::NetAccess::lastErrorString() );
-            }
-        }
-        else
-        {
-            connect( dirWatch, SIGNAL(dirty( const QString & )),
-                     synchronizer, SLOT(onFileDirty( const QString & )) );
-
-            connect( dirWatch, SIGNAL(created( const QString & )),
-                     synchronizer, SLOT(onFileCreated( const QString & )) );
-
-            connect( dirWatch, SIGNAL(deleted( const QString & )),
-                     synchronizer, SLOT(onFileDeleted( const QString & )) );
-            dirWatch->addFile( workFilePath() );
-        }
-        synchronizer->setUrl( newUrl );
-        // TODO; in path of both constructor by url and synchWithRemote
-        // only needed for the first, so constructor writers can forget about this
-        // for now we just check in setSynchronizer that new != old before deleting old
-        d->document()->setSynchronizer( synchronizer );
-    }
-    else
-    {
-        delete synchronizer;
-        // TODO: these reports should go to a notification system, for log or popup
-        setError( KilledJobError );
-        setErrorText( i18nc("@info","Problem while synching with local filesystem.") );
-    }
-
-    KIO::NetAccess::removeTempFile( d->workFilePath() );
-    delete d->temporaryFile();
-
-    emitResult();
+    d->complete( success );
 }
-
 
 AbstractFileSystemConnectJob::~AbstractFileSystemConnectJob()
 {
-    delete d;
 }
 
 }

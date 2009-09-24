@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -21,19 +21,40 @@
 */
 
 #include "abstractmodelstreamencoder.h"
+#include "abstractmodelstreamencoder_p.h"
 
 
 namespace Kasten
 {
 
-AbstractModelStreamEncoder::AbstractModelStreamEncoder( const QString &remoteTypeName,
-                                                        const QString &remoteMimeType )
-: mRemoteTypeName( remoteTypeName ), mRemoteMimeType( remoteMimeType )
-{}
+AbstractModelStreamEncoder::AbstractModelStreamEncoder( AbstractModelStreamEncoderPrivate* d )
+  : d_ptr( d )
+{
+}
 
-QString AbstractModelStreamEncoder::remoteTypeName() const { return mRemoteTypeName; }
-QString AbstractModelStreamEncoder::remoteMimeType() const { return mRemoteMimeType; }
+AbstractModelStreamEncoder::AbstractModelStreamEncoder( const QString& remoteTypeName,
+                                                        const QString& remoteMimeType )
+  : d_ptr( new AbstractModelStreamEncoderPrivate(this,remoteTypeName,remoteMimeType) )
+{
+}
 
-AbstractModelStreamEncoder::~AbstractModelStreamEncoder() {}
+QString AbstractModelStreamEncoder::remoteTypeName() const
+{
+    Q_D( const AbstractModelStreamEncoder );
+
+    return d->remoteTypeName();
+}
+
+QString AbstractModelStreamEncoder::remoteMimeType() const
+{
+    Q_D( const AbstractModelStreamEncoder );
+
+    return d->remoteMimeType();
+}
+
+AbstractModelStreamEncoder::~AbstractModelStreamEncoder()
+{
+    delete d_ptr;
+}
 
 }

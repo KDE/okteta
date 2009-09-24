@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -34,13 +34,16 @@ namespace Kasten
 
 class AbstractModelFileSystemSynchronizer;
 
+class AbstractFileSystemSyncToRemoteJobPrivate;
+
 
 class KASTENCORE_EXPORT AbstractFileSystemSyncToRemoteJob : public AbstractSyncToRemoteJob
 {
   Q_OBJECT
 
   public:
-    AbstractFileSystemSyncToRemoteJob( AbstractModelFileSystemSynchronizer* synchronizer );
+    explicit AbstractFileSystemSyncToRemoteJob( AbstractModelFileSystemSynchronizer* synchronizer );
+
     virtual ~AbstractFileSystemSyncToRemoteJob();
 
   public: // KJob API
@@ -57,12 +60,11 @@ class KASTENCORE_EXPORT AbstractFileSystemSyncToRemoteJob : public AbstractSyncT
   protected:
     void completeWrite( bool success );
 
-  protected Q_SLOTS:
-    void syncToRemote();
+  protected:
+    Q_PRIVATE_SLOT( d_func(), void syncToRemote() )
 
   protected:
-    class Private;
-    Private * const d;
+    Q_DECLARE_PRIVATE( AbstractFileSystemSyncToRemoteJob )
 };
 
 }

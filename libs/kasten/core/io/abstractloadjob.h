@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -34,13 +34,19 @@ namespace Kasten
 
 class AbstractDocument;
 
+class AbstractLoadJobPrivate;
+
 
 class KASTENCORE_EXPORT AbstractLoadJob : public KJob
 {
   Q_OBJECT
 
+  protected:
+    explicit AbstractLoadJob( AbstractLoadJobPrivate* d );
+
   public:
     AbstractLoadJob();
+
     virtual ~AbstractLoadJob();
 
   public:
@@ -55,8 +61,9 @@ class KASTENCORE_EXPORT AbstractLoadJob : public KJob
     virtual void setDocument( AbstractDocument* document );
 
   protected:
-    class Private;
-    Private * const d;
+    Q_DECLARE_PRIVATE( AbstractLoadJob )
+  protected:
+    AbstractLoadJobPrivate* const d_ptr;
 };
 
 }
