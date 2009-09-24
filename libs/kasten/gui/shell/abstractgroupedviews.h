@@ -64,6 +64,9 @@ class KASTENGUI_EXPORT AbstractGroupedViews : public AbstractViewArea
     // closing the view is requested
     void closeRequest( const QList<Kasten::AbstractView*>& views );
     void viewFocusChanged( Kasten::AbstractView* view );
+
+  protected:
+    Q_DECLARE_PRIVATE( AbstractGroupedViews )
 };
 
 }

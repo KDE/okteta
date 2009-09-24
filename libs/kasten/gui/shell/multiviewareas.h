@@ -23,22 +23,21 @@
 #ifndef MULTIVIEWAREAS_H
 #define MULTIVIEWAREAS_H
 
-
 // lib
 #include "abstractgroupedviews.h"
 #include "viewareasplitable.h"
 #include "toolinlineviewable.h"
 
-class KTabWidget;
 class QDragMoveEvent;
 class QDropEvent;
-class QSplitter;
 
 
 namespace Kasten
 {
 
 class TabbedViews;
+
+class MultiViewAreasPrivate;
 
 
 class KASTENGUI_EXPORT MultiViewAreas : public AbstractGroupedViews,
@@ -92,17 +91,14 @@ class KASTENGUI_EXPORT MultiViewAreas : public AbstractGroupedViews,
   protected:
     int indexOf( AbstractView* view ) const;
 
-  protected Q_SLOTS:
-    void onViewsRemoved();
-    void onViewAreaFocusChanged( bool hasFocus );
+  protected:
+    Q_PRIVATE_SLOT( d_func(), void onViewsRemoved() )
+    Q_PRIVATE_SLOT( d_func(), void onViewAreaFocusChanged( bool hasFocus ) )
 
   protected:
-    QList<TabbedViews*> mViewAreaList;
-    QSplitter* mMainSplitter;
-
-    TabbedViews* mCurrentViewArea;
-    TabbedViews* mCurrentInlineToolViewArea;
+    Q_DECLARE_PRIVATE( MultiViewAreas )
 };
 
 }
+
 #endif

@@ -62,7 +62,8 @@ class KASTENGUI_EXPORT AbstractViewArea : public QObject
     void focusChanged( bool hasFocus );
 
   protected:
-    AbstractViewAreaPrivate* const d;
+    AbstractViewAreaPrivate* const d_ptr;
+    Q_DECLARE_PRIVATE( AbstractViewArea )
 };
 
 }

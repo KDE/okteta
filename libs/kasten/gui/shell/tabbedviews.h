@@ -23,12 +23,10 @@
 #ifndef TABBEDVIEWS_H
 #define TABBEDVIEWS_H
 
-
 // lib
 #include "abstractgroupedviews.h"
 #include "toolinlineviewable.h"
 
-class KTabWidget;
 class QDragMoveEvent;
 class QDropEvent;
 
@@ -38,6 +36,8 @@ namespace Kasten
 
 class ViewAreaBox;
 
+class TabbedViewsPrivate;
+
 
 class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews,
                                      public If::ToolInlineViewable
@@ -46,6 +46,9 @@ class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews,
   Q_INTERFACES(
     Kasten::If::ToolInlineViewable
   )
+
+  protected:
+    explicit TabbedViews( TabbedViewsPrivate* d );
 
   public:
     TabbedViews();
@@ -60,11 +63,11 @@ class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews,
   public: // AbstractGroupedViews API
     virtual void addViews( const QList<AbstractView*>& views );
     virtual void removeViews( const QList<AbstractView*>& views );
-    virtual void setViewFocus( AbstractView *view );
+    virtual void setViewFocus( AbstractView* view );
 
     virtual QList<AbstractView*> viewList() const;
     virtual int viewCount() const;
-    virtual AbstractView *viewFocus() const;
+    virtual AbstractView* viewFocus() const;
 
   public: // If::ToolInlineViewable API
     virtual void setCurrentToolInlineView( AbstractToolInlineView* view );
@@ -76,18 +79,15 @@ class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews,
     void dragMove( const QDragMoveEvent* event, bool& accepted );
     void drop( QDropEvent* event );
 
-  private Q_SLOTS:
-    void onCurrentChanged( int index );
-    void onCloseRequest( QWidget* widget );
-    void onTitleChanged( const QString &newTitle );
-//     void onModifiedChanged( Kasten::AbstractDocument::SyncStates newStates );
-    void onViewFocusChanged( bool focusChanged );
+  protected:
+    Q_PRIVATE_SLOT( d_func(), void onCurrentChanged( int index ) )
+    Q_PRIVATE_SLOT( d_func(), void onCloseRequest( QWidget* widget ) )
+    Q_PRIVATE_SLOT( d_func(), void onTitleChanged( const QString& title ) )
+//     Q_PRIVATE_SLOT( d_func(), void onModifiedChanged( Kasten::AbstractDocument::SyncStates newStates ) )
+    Q_PRIVATE_SLOT( d_func(), void onViewFocusChanged( bool focusChanged ) )
 
   protected:
-    ViewAreaBox* mViewAreaBox;
-    KTabWidget* mTabWidget;
-
-    AbstractView* mCurrentView;
+    Q_DECLARE_PRIVATE( TabbedViews )
 };
 
 }

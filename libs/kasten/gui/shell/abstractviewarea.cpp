@@ -31,17 +31,17 @@ namespace Kasten
 {
 
 AbstractViewArea::AbstractViewArea()
-  : d( new AbstractViewAreaPrivate(this) )
+  : d_ptr( new AbstractViewAreaPrivate(this) )
 {}
 
-AbstractViewArea::AbstractViewArea( AbstractViewAreaPrivate* _d )
-  : d( _d )
-{}
-
+AbstractViewArea::AbstractViewArea( AbstractViewAreaPrivate* d )
+  : d_ptr( d )
+{
+}
 
 AbstractViewArea::~AbstractViewArea()
 {
-    delete d;
+    delete d_ptr;
 }
 
 }

@@ -69,7 +69,9 @@ set( kastengui_shell_SRCS
   shell/abstractviewarea.cpp
   shell/abstractgroupedviews.cpp
   shell/viewareabox.cpp
+  shell/tabbedviews_p.cpp
   shell/tabbedviews.cpp
+  shell/multiviewareas_p.cpp
   shell/multiviewareas.cpp
   shell/shellwindow.cpp
   shell/statusbar.cpp

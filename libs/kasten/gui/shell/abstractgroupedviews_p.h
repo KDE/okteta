@@ -26,8 +26,6 @@
 // lib
 #include "abstractgroupedviews.h"
 #include "abstractviewarea_p.h"
-// Qt
-#include <Qt>
 
 
 namespace Kasten
@@ -36,14 +34,18 @@ namespace Kasten
 class AbstractGroupedViewsPrivate : public AbstractViewAreaPrivate
 {
   public:
-    explicit AbstractGroupedViewsPrivate( AbstractGroupedViews* viewArea );
+    explicit AbstractGroupedViewsPrivate( AbstractGroupedViews* parent );
+
+    virtual ~AbstractGroupedViewsPrivate();
 };
 
 
-inline AbstractGroupedViewsPrivate::AbstractGroupedViewsPrivate( AbstractGroupedViews* viewArea )
-  : AbstractViewAreaPrivate( viewArea )
+inline AbstractGroupedViewsPrivate::AbstractGroupedViewsPrivate( AbstractGroupedViews* parent )
+  : AbstractViewAreaPrivate( parent )
 {
 }
+
+inline AbstractGroupedViewsPrivate::~AbstractGroupedViewsPrivate() {}
 
 }
 

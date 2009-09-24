@@ -36,10 +36,20 @@ class AbstractViewAreaPrivate
 {
   public:
     explicit AbstractViewAreaPrivate( AbstractViewArea* viewArea );
+
+    virtual ~AbstractViewAreaPrivate();
+
+  protected:
+    AbstractViewArea* const q_ptr;
 };
 
 
-inline AbstractViewAreaPrivate::AbstractViewAreaPrivate( AbstractViewArea* viewArea ) { Q_UNUSED(viewArea) }
+inline AbstractViewAreaPrivate::AbstractViewAreaPrivate( AbstractViewArea* parent )
+  : q_ptr( parent )
+{
+}
+
+inline AbstractViewAreaPrivate::~AbstractViewAreaPrivate() {}
 
 }
 

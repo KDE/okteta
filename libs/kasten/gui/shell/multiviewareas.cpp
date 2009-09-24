@@ -21,324 +21,136 @@
 */
 
 #include "multiviewareas.h"
+#include "multiviewareas_p.h"
+#include "multiviewareas.moc"
 
-// lib
-#include "tabbedviews.h"
-#include "viewbox.h"
-#include "toolinlineviewwidget.h"
-#include <abstracttoolinlineview.h>
-#include <abstractdocument.h>
-#include <abstractview.h>
-// KDE
-#include <KGlobalSettings>
-// Qt
-#include <QtGui/QSplitter>
 
-#include <KDebug>
 namespace Kasten
 {
 // TODO: catch area focues change!
 MultiViewAreas::MultiViewAreas()
-  : mCurrentInlineToolViewArea( 0 )
+  : AbstractGroupedViews( new MultiViewAreasPrivate(this) )
 {
-    mMainSplitter = new QSplitter();
+    Q_D( MultiViewAreas );
 
-    // create start view area
-    TabbedViews* viewArea = new TabbedViews();
-    connect( viewArea, SIGNAL(focusChanged( bool )),
-             SLOT(onViewAreaFocusChanged( bool )) );
-    connect( viewArea, SIGNAL(viewFocusChanged( Kasten::AbstractView* )),
-             SIGNAL(viewFocusChanged( Kasten::AbstractView* )) );
-    connect( viewArea, SIGNAL(closeRequest( const QList<Kasten::AbstractView*>& )),
-             SIGNAL(closeRequest( const QList<Kasten::AbstractView*>& )) );
-    connect( viewArea, SIGNAL(removing( const QList<Kasten::AbstractView*>& )),
-             SLOT(onViewsRemoved()) );
-    mViewAreaList.append( viewArea );
-    mCurrentViewArea = viewArea;
-
-    mMainSplitter->setOpaqueResize( KGlobalSettings::opaqueResize() );
-    mMainSplitter->addWidget( viewArea->widget() );
+    d->init();
 }
 
 QList<AbstractView*> MultiViewAreas::viewList() const
 {
-    QList<AbstractView*> result;
+    Q_D( const MultiViewAreas );
 
-    foreach( TabbedViews* viewArea, mViewAreaList )
-        result.append( viewArea->viewList() );
-
-    return result;
+    return d->viewList();
 }
+
 int MultiViewAreas::viewCount() const
 {
-    int result = 0;
+    Q_D( const MultiViewAreas );
 
-    foreach( TabbedViews* viewArea, mViewAreaList )
-        result += viewArea->viewCount();
-
-    return result;
+    return d->viewCount();
 }
 
 int MultiViewAreas::indexOf( AbstractView* view ) const
 {
-    int result = -1;
+    Q_D( const MultiViewAreas );
 
-    int globalBaseIndex = 0;
-    foreach( TabbedViews* viewArea, mViewAreaList )
-    {
-        const int localIndexOf = viewArea->indexOf( view );
-        if( localIndexOf != -1 )
-        {
-            result = globalBaseIndex + localIndexOf;
-            break;
-        }
-        globalBaseIndex += viewArea->viewCount();
-    }
-
-    return result;
+    return d->indexOf( view );
 }
 
-QWidget* MultiViewAreas::widget() const { return mMainSplitter; }
-bool MultiViewAreas::hasFocus() const { return mCurrentViewArea->hasFocus(); }
+QWidget* MultiViewAreas::widget() const
+{
+    Q_D( const MultiViewAreas );
+
+    return d->widget();
+}
+
+bool MultiViewAreas::hasFocus() const
+{
+    Q_D( const MultiViewAreas );
+
+    return d->hasFocus();
+}
 
 AbstractView* MultiViewAreas::viewFocus() const
 {
-    return mCurrentViewArea->viewFocus();
+    Q_D( const MultiViewAreas );
+
+    return d->viewFocus();
 }
 
 AbstractViewArea* MultiViewAreas::viewAreaFocus() const
 {
-    return mCurrentViewArea;
+    Q_D( const MultiViewAreas );
+
+    return d->viewAreaFocus();
 }
 
-int MultiViewAreas::viewAreasCount() const { return mViewAreaList.count(); }
+int MultiViewAreas::viewAreasCount() const
+{
+    Q_D( const MultiViewAreas );
+
+    return d->viewAreasCount(); }
 
 
 void MultiViewAreas::setFocus()
 {
-    mCurrentViewArea->setFocus();
+    Q_D( MultiViewAreas );
+
+    d->setFocus();
 }
 
 void MultiViewAreas::addViews( const QList<AbstractView*>& views )
 {
-    mCurrentViewArea->addViews( views );
+    Q_D( MultiViewAreas );
 
-    emit added( views );
+    d->addViews( views );
 }
 
 void MultiViewAreas::removeViews( const QList<AbstractView*>& views )
 {
-    // TODO: possible to just send the views of the given area?
-    foreach( TabbedViews* viewArea, mViewAreaList )
-        viewArea->removeViews( views );
+    Q_D( MultiViewAreas );
 
-    // TODO: above might trigger removal of areas before, is this a problem?
-    emit removing( views );
+    d->removeViews( views );
 }
-
 
 void MultiViewAreas::setCurrentToolInlineView( AbstractToolInlineView* view )
 {
-    if( mCurrentInlineToolViewArea && mCurrentInlineToolViewArea != mCurrentViewArea )
-        mCurrentInlineToolViewArea->setCurrentToolInlineView( 0 );
-kDebug()<<"war:"<<mCurrentInlineToolViewArea<<"wird:"<<mCurrentViewArea;
-    mCurrentInlineToolViewArea = mCurrentViewArea;
+    Q_D( MultiViewAreas );
 
-    mCurrentViewArea->setCurrentToolInlineView( view );
+    d->setCurrentToolInlineView( view );
 }
 
-void MultiViewAreas::setViewFocus( AbstractView *view )
+void MultiViewAreas::setViewFocus( AbstractView* view )
 {
-    // TODO: makes this more efficient!
-    foreach( TabbedViews* viewArea, mViewAreaList )
-    {
-        const int localIndex = viewArea->indexOf( view );
-        if( localIndex != -1 )
-        {
-            viewArea->setViewFocus( view );
-            break;
-        }
-    }
+    Q_D( MultiViewAreas );
+
+    d->setViewFocus( view );
 }
 
- //TODO: this method could be removed, as it is the same as _viewArea->setFocus(), or?
-void MultiViewAreas::setViewAreaFocus( AbstractViewArea* _viewArea )
+ //TODO: this method could be removed, as it is the same as viewArea->setFocus(), or?
+void MultiViewAreas::setViewAreaFocus( AbstractViewArea* viewArea )
 {
-    TabbedViews* viewArea = static_cast<TabbedViews*>( _viewArea );
-    if( viewArea == mCurrentViewArea )
-        return;
+    Q_D( MultiViewAreas );
 
-    if( mViewAreaList.contains(viewArea) )
-        viewArea->setFocus();
+    d->setViewAreaFocus( viewArea );
 }
 
-AbstractViewArea* MultiViewAreas::splitViewArea( AbstractViewArea* _viewArea, Qt::Orientation orientation )
+AbstractViewArea* MultiViewAreas::splitViewArea( AbstractViewArea* viewArea, Qt::Orientation orientation )
 {
-    TabbedViews* firstViewArea = static_cast<TabbedViews*>( _viewArea );
-    QWidget* firstViewAreaWidget = firstViewArea->widget();
-    QSplitter* baseSplitter = static_cast<QSplitter*>( firstViewAreaWidget->parentWidget() );
+    Q_D( MultiViewAreas );
 
-    QSplitter* splitter;
-    if( baseSplitter->count() == 1 ) // only valid with mMainSplitter
-        splitter = baseSplitter;
-    else
-    {
-        const QList<int> baseSplitterSizes = baseSplitter->sizes();
-        const int index = baseSplitter->indexOf( firstViewAreaWidget );
-        splitter = new QSplitter( baseSplitter );
-        // TODO: react on opaqueResize change
-        splitter->setOpaqueResize( KGlobalSettings::opaqueResize() );
-        baseSplitter->insertWidget( index, splitter );
-        splitter->addWidget( firstViewAreaWidget );
-        baseSplitter->setSizes( baseSplitterSizes );
-    }
-
-    TabbedViews* secondViewArea = new TabbedViews();
-    connect( secondViewArea, SIGNAL(focusChanged( bool )),
-             SLOT(onViewAreaFocusChanged( bool )) );
-    connect( secondViewArea, SIGNAL(viewFocusChanged( Kasten::AbstractView* )),
-             SIGNAL(viewFocusChanged( Kasten::AbstractView* )) );
-    connect( secondViewArea, SIGNAL(closeRequest( const QList<Kasten::AbstractView*>& )),
-             SIGNAL(closeRequest( const QList<Kasten::AbstractView*>& )) );
-    connect( secondViewArea, SIGNAL(removing( const QList<Kasten::AbstractView*>& )),
-             SLOT(onViewsRemoved()) );
-    mViewAreaList.append( secondViewArea );
-    mCurrentViewArea = secondViewArea;
-
-    splitter->setOrientation( orientation == Qt::Horizontal ? Qt::Vertical : Qt::Horizontal );
-    splitter->addWidget( secondViewArea->widget() );
-    // set to equal sizes
-    QList<int> splitterSizes = splitter->sizes();
-    // TODO: check if there are more, style-dependent spaces
-    const int equalSize = ( splitterSizes[0] + splitterSizes[1] - splitter->handleWidth() ) / 2;
-    splitterSizes[1] = splitterSizes[0] = equalSize;
-    splitter->setSizes( splitterSizes );
-
-    QList<AbstractViewArea*> viewAreas;
-    viewAreas.append( secondViewArea );
-    emit viewAreasAdded( viewAreas );
-    emit viewAreaFocusChanged( secondViewArea );
-
-    return secondViewArea;
+    return d->splitViewArea( viewArea, orientation );
 }
 
-void MultiViewAreas::closeViewArea( AbstractViewArea* _viewArea )
+void MultiViewAreas::closeViewArea( AbstractViewArea* viewArea )
 {
-    TabbedViews* viewArea = static_cast<TabbedViews*>( _viewArea );
+    Q_D( MultiViewAreas );
 
-    const QList<AbstractView*> views = viewArea->viewList();
-
-    emit closeRequest( views );
+    d->closeViewArea( viewArea );
 }
-
-void MultiViewAreas::onViewsRemoved()
-{
-    // keep a minimum of one area
-    if( mViewAreaList.count() < 2 )
-        return;
-
-    TabbedViews* viewArea = qobject_cast<TabbedViews*>( sender() );
-
-    if( viewArea->viewCount() == 0 )
-    {
-        QWidget* viewAreaWidget = viewArea->widget();
-        QSplitter* baseSplitter = static_cast<QSplitter*>( viewAreaWidget->parentWidget() );
-
-        const int index = baseSplitter->indexOf( viewAreaWidget );
-        const int otherIndex = 1 - index;
-
-        QWidget* otherWidget = baseSplitter->widget( otherIndex );
-        // do not delete the main splitter
-        if( baseSplitter != mMainSplitter )
-        {
-            QSplitter* baseOfBaseSplitter = static_cast<QSplitter*>( baseSplitter->parentWidget() );
-
-            const QList<int> baseOfBaseSplitterSizes = baseOfBaseSplitter->sizes();
-            const int indexOfBaseSplitter = baseOfBaseSplitter->indexOf( baseSplitter );
-            baseOfBaseSplitter->insertWidget( indexOfBaseSplitter, otherWidget );
-            viewAreaWidget->setParent( 0 );
-            delete baseSplitter;
-            baseOfBaseSplitter->setSizes( baseOfBaseSplitterSizes );
-        }
-
-        mViewAreaList.removeOne( viewArea );
-
-        if( mCurrentInlineToolViewArea == viewArea )
-            mCurrentInlineToolViewArea = 0;
-
-        if( mCurrentViewArea == viewArea )
-        {
-            // search for the previous widget which is the next or the previous, using index
-            while( true )
-            {
-                QSplitter* splitter = qobject_cast<QSplitter*>( otherWidget );
-                if( splitter )
-                    otherWidget = splitter->widget( index );
-                else
-                    break;
-            }
-
-            foreach( TabbedViews* viewArea, mViewAreaList )
-            {
-                if( viewArea->widget() == otherWidget )
-                {
-                    viewArea->setFocus();
-                    break;
-                }
-            }
-        }
-
-        QList<AbstractViewArea*> viewAreas;
-        viewAreas.append( viewArea );
-        emit viewAreasRemoved( viewAreas );
-
-        delete viewArea;
-    }
-}
-
-void MultiViewAreas::onViewAreaFocusChanged( bool hasFocus )
-{
-    TabbedViews* viewArea = qobject_cast<TabbedViews *>( sender() );
-kDebug()<<viewArea<<hasFocus;
-    if( mCurrentViewArea == viewArea )
-        return;
-
-    if( mCurrentInlineToolViewArea && mCurrentInlineToolViewArea == mCurrentViewArea )
-        mCurrentInlineToolViewArea->setCurrentToolInlineView( 0 );
-
-    // TODO: care for ! hasFocus?
-    if( hasFocus )
-    {
-        mCurrentViewArea = viewArea;
-
-        emit viewAreaFocusChanged( viewArea );
-        emit viewFocusChanged( viewArea->viewFocus() );
-    }
-}
-
-#if 0
-void MultiViewAreas::onModifiedChanged( AbstractDocument::SyncStates newStates )
-{
-Q_UNUSED( newStates )
-    AbstractView* view = qobject_cast<AbstractView *>( sender() );
-    if( view )
-    {
-        const int index = indexOf( view );
-        if( index != -1 )
-        {
-//             mViewsTab->setIcon( index, newTitle ); //modificationSymbol
-            if( index == mViewsTab->currentIndex() )
-                setCaption( view->title(), view->document()->hasLocalChanges() );
-        }
-    }
-
-}
-#endif
 
 MultiViewAreas::~MultiViewAreas()
 {
-    qDeleteAll( mViewAreaList );
-    delete mMainSplitter;
 }
 
 }
