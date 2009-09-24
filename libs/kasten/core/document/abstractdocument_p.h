@@ -41,7 +41,7 @@ class AbstractDocumentPrivate : public AbstractModelPrivate
       ~AbstractDocumentPrivate();
 
   public:
-    QString id() const;
+    const QString& id() const;
     AbstractModelSynchronizer* synchronizer() const;
     AbstractModelSynchronizer* liveSynchronizer() const;
 
@@ -65,7 +65,7 @@ inline AbstractDocumentPrivate::AbstractDocumentPrivate( AbstractDocument* paren
     mSynchronizer( 0 ),
     mLiveSynchronizer( 0 )
 {}
-inline QString AbstractDocumentPrivate::id() const { return mId; }
+inline const QString& AbstractDocumentPrivate::id() const { return mId; }
 inline void AbstractDocumentPrivate::setId( const QString& id ) { mId = id; }
 
 inline AbstractModelSynchronizer* AbstractDocumentPrivate::synchronizer() const { return mSynchronizer; }
