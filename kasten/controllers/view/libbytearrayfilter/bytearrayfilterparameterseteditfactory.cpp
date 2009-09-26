@@ -33,13 +33,13 @@ AbstractByteArrayFilterParameterSetEdit* ByteArrayFilterParameterSetEditFactory:
 {
     AbstractByteArrayFilterParameterSetEdit* result;
 
-    if( qstrcmp(id,"Operand") == 0 )
+    if( qstrcmp(id,OperandByteArrayFilterParameterSetEdit::Id) == 0 )
         result = new OperandByteArrayFilterParameterSetEdit();
-    else if( qstrcmp(id,"Reverse") == 0 )
+    else if( qstrcmp(id,ReverseByteArrayFilterParameterSetEdit::Id) == 0 )
         result = new ReverseByteArrayFilterParameterSetEdit();
-    else if( qstrcmp(id,"Rotate") == 0 )
+    else if( qstrcmp(id,RotateByteArrayFilterParameterSetEdit::Id) == 0 )
         result = new RotateByteArrayFilterParameterSetEdit();
-    else //if( qstrcmp(id,"None") == 0 ) TODO: default should be a message "Not found"
+    else //if( qstrcmp(id,NoByteArrayFilterParameterSetEdit::Id) == 0 ) TODO: default should be a message "Not found"
         result = new NoByteArrayFilterParameterSetEdit();
 
     return result;
