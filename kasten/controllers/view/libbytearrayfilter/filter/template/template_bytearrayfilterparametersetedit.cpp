@@ -117,5 +117,4 @@ void Template_ByteArrayFilterParameterSetEdit::onLevelChanged( int value )
 }
 //// ADAPT(end)
 
-Template_ByteArrayFilterParameterSetEdit::~Template_ByteArrayFilterParameterSetEdit()
-{}
+Template_ByteArrayFilterParameterSetEdit::~Template_ByteArrayFilterParameterSetEdit() {}

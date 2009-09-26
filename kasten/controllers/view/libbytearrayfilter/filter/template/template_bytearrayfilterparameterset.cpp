@@ -45,6 +45,4 @@ void Template_ByteArrayFilterParameterSet::setLevel( unsigned int level ) { mLev
 //// ADAPT(end)
 
 
-Template_ByteArrayFilterParameterSet::~Template_ByteArrayFilterParameterSet()
-{
-}
+Template_ByteArrayFilterParameterSet::~Template_ByteArrayFilterParameterSet() {}
