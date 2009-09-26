@@ -1,0 +1,42 @@
+Okteta and the framework Kasten is designed in a very modular way, with a lot
+of interfaces. So it should be easily extendable. While there isn't yet a real
+plugin system, new plugins/modules can be simply added directly in the code for now.
+
+Find below a list of places where Okteta can be extended:
+
+= Basic Okteta libraries ======================
+
+_AbstractByteArrayModel___
+Not yet documented
+
+_CharCodec/ValueCodec___
+Not yet documented
+
+
+= Okteta Kasten elements ======================
+
+_Binary Filter___
+See kasten/controllers/view/libbytearrayfilter/README.developers
+
+_Checksum/Hashsum___
+Not yet documented
+
+_Encoder (for Export)___
+Not yet documented
+
+
+= Kasten framework ============================
+
+_AbstractModel/AbstractDocument/AbstractSynchronizer___
+Not yet documented
+
+_AbstractView___
+Not yet documented
+
+_AbstractXmlGuiController___
+Not yet documented
+
+_AbstractTool/AbstractTool(Inline)View___
+Not yet documented
+
+and some more...
