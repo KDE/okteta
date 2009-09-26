@@ -12,17 +12,37 @@ Overview
 This directory holds the files of the Okteta project. This project is about
 viewing and editing of data on the byte level.
 
+It is divided in three parts:
+* basic Okteta libraries
+* Okteta elements for Kasten
+* End-user products
+
+The basic Okteta libraries, liboktetacore and liboktetagui, contain the classic
+simple Qt/KDE widgets/classes others want to reuse in their code by linking to
+these libraries. Additionally there is a Qt Designer plugin for the two
+Okteta widgets from liboktetagui. This part is spread over the subdirs
+core, gui, includes, and designer.
+
+The Okteta elements for Kasten are specific Okteta classes for building programs and parts
+with the Kasten framework. The elements are divided into the libraries liboktetakastencore,
+liboktetakastengui, and liboktetakastencontroller, all found in the subdir kasten.
+The basic framework Kasten itself is currently found at the subdirectory libs/kasten/.
+
+The end-user products are the stand-alone program also named Okteta, a KPart useable
+e.g. for Konqueror/KDevelop, and a module implementing the service type KHexEdit/KBytesEdit
+as defined by some kdelibs interfaces. These are in the subdirs program and parts.
+
 
 What to find in which subdirectory:
 --------------------------------
 core:
-  sources of the basic core library of Okteta
+  sources of the basic core library of Okteta, liboktetacore
 
 gui:
-  sources of the basic gui library of Okteta
+  sources of the basic gui library of Okteta, liboktetagui
 
 includes:
-  headers of the basic libraries of Okteta
+  CamelCase headers of the basic libraries of Okteta
 
 designer:
   plugin for Qt Designer to add support for widgets from the Okteta gui library
@@ -37,10 +57,10 @@ parts/kbytesedit:
   sources of the implementation for the service type KHexEdit/KBytesEdit
 
 parts/kpart:
-  sources of the implementation of a KReadOnlyPart
+  sources of the implementation of a KPart::ReadWritePart
 
 program:
   a standalone hex editor program, based on Kasten and the Okteta Kasten elements
 
 libs:
-  neutral utility libs and frameworks, useful outside Okteta
+  neutral utility libs and frameworks, e.g. Kasten, useful outside Okteta
