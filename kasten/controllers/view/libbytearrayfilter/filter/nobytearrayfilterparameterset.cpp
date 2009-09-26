@@ -29,7 +29,7 @@
 NoByteArrayFilterParameterSet::NoByteArrayFilterParameterSet()
 {}
 
-QString NoByteArrayFilterParameterSet::id() const { return "None"; }
+const char* NoByteArrayFilterParameterSet::id() const { return "None"; }
 
 NoByteArrayFilterParameterSet::~NoByteArrayFilterParameterSet()
 {

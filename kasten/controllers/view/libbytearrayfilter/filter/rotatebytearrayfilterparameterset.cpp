@@ -28,7 +28,7 @@
 RotateByteArrayFilterParameterSet::RotateByteArrayFilterParameterSet()
 {}
 
-QString RotateByteArrayFilterParameterSet::id() const { return "Rotate"; }
+const char* RotateByteArrayFilterParameterSet::id() const { return "Rotate"; }
 
 int RotateByteArrayFilterParameterSet::groupSize() const { return mGroupSize; }
 int RotateByteArrayFilterParameterSet::moveBitWidth() const { return mMoveBitWidth; }

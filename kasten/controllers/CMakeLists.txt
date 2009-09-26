@@ -134,6 +134,8 @@ set( LIBFILTER_SRCS
   view/libbytearrayfilter/abstractbytearrayfilter.cpp
   view/libbytearrayfilter/abstractbytearrayfilterparameterset.cpp
   view/libbytearrayfilter/abstractbytearrayfilterparametersetedit.cpp
+  view/libbytearrayfilter/bytearrayfilterfactory.cpp
+  view/libbytearrayfilter/bytearrayfilterparameterseteditfactory.cpp
   view/libbytearrayfilter/filter/nobytearrayfilterparameterset.cpp
   view/libbytearrayfilter/filter/operandbytearrayfilterparameterset.cpp
   view/libbytearrayfilter/filter/reversebytearrayfilterparameterset.cpp

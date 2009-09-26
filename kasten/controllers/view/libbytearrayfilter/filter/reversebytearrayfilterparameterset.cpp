@@ -28,7 +28,7 @@
 
 ReverseByteArrayFilterParameterSet::ReverseByteArrayFilterParameterSet() {}
 
-QString ReverseByteArrayFilterParameterSet::id() const { return "Reverse"; }
+const char* ReverseByteArrayFilterParameterSet::id() const { return "Reverse"; }
 
 bool ReverseByteArrayFilterParameterSet::invertsBits() const { return mInvertsBits; }
 

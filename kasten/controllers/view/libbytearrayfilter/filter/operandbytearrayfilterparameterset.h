@@ -36,7 +36,7 @@ class OperandByteArrayFilterParameterSet : public AbstractByteArrayFilterParamet
     virtual ~OperandByteArrayFilterParameterSet();
 
   public: // AbstractByteArrayFilterParameterSet API
-    virtual QString id() const;
+    virtual const char* id() const;
 
   public:
     void setOperand( const QByteArray &operand );

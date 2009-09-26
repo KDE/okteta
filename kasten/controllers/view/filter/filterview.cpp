@@ -25,10 +25,8 @@
 // 
 #include "filtertool.h"
 // filter
-#include <filter/nobytearrayfilterparametersetedit.h>
-#include <filter/operandbytearrayfilterparametersetedit.h>
-#include <filter/reversebytearrayfilterparametersetedit.h>
-#include <filter/rotatebytearrayfilterparametersetedit.h>
+#include <bytearrayfilterparameterseteditfactory.h>
+#include <abstractbytearrayfilterparametersetedit.h>
 #include <abstractbytearrayfilterparameterset.h>
 #include <abstractbytearrayfilter.h>
 // KDE
@@ -41,6 +39,7 @@
 #include <QtGui/QLayout>
 #include <QtGui/QStackedWidget>
 #include <QtGui/QGroupBox>
+#include <QtGui/QAbstractItemView>
 
 
 namespace Kasten
@@ -102,6 +101,15 @@ FilterView::FilterView( FilterTool *tool, QWidget* parent )
     baseLayout->addLayout( buttonLayout );
     baseLayout->addStretch( 10 );
 
+    // automatically set focus to the parameters if a operation has been selected
+    QAbstractItemView* operationComboBoxListView = mOperationComboBox->view();
+    QObject::connect( operationComboBoxListView, SIGNAL(activated( const QModelIndex& )),
+             mParameterSetEditStack, SLOT(setFocus()) );
+    // TODO: is a workaround for Qt 4.5.1 which doesn't emit activated() for mouse clicks
+    QObject::connect( operationComboBoxListView, SIGNAL(pressed( const QModelIndex& )),
+             mParameterSetEditStack, SLOT(setFocus()) );
+    // TODO: goto filter button if there are no parameters
+
     addFilters();
 }
 
@@ -113,16 +121,10 @@ void FilterView::addFilters()
     {
         mOperationComboBox->addItem( filter->name() );
 
-        AbstractByteArrayFilterParameterSetEdit* parameterEdit;
-        const QString parameterSetId = filter->parameterSet()->id();
-        if( parameterSetId == "Operand" )
-            parameterEdit = new OperandByteArrayFilterParameterSetEdit();
-        else if( parameterSetId == "Reverse" )
-            parameterEdit = new ReverseByteArrayFilterParameterSetEdit();
-        else if( parameterSetId == "Rotate" )
-            parameterEdit = new RotateByteArrayFilterParameterSetEdit();
-        else //if( parameterSetId == "None" ) TODO: default should be a message "Not found"
-            parameterEdit = new NoByteArrayFilterParameterSetEdit();
+        const char* parameterSetId = filter->parameterSet()->id();
+        AbstractByteArrayFilterParameterSetEdit* parameterEdit =
+            ByteArrayFilterParameterSetEditFactory::createEdit( parameterSetId );
+
         mParameterSetEditStack->addWidget( parameterEdit );
     }
 
@@ -140,6 +142,11 @@ void FilterView::getParameterSet( AbstractByteArrayFilterParameterSet *parameter
 void FilterView::onFilterClicked()
 {
     const int filterId = mOperationComboBox->currentIndex();
+
+    AbstractByteArrayFilterParameterSetEdit* parametersetEdit =
+        qobject_cast<AbstractByteArrayFilterParameterSetEdit*>( mParameterSetEditStack->currentWidget() );
+    if( parametersetEdit )
+        parametersetEdit->rememberCurrentSettings();
 
     AbstractByteArrayFilterParameterSet *parameterSet = mTool->parameterSet( filterId );
     if( parameterSet )

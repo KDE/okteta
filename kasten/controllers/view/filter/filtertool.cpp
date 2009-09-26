@@ -25,13 +25,7 @@
 // tool
 #include "filterjob.h"
 // filter
-#include <filter/andbytearrayfilter.h>
-#include <filter/orbytearrayfilter.h>
-#include <filter/xorbytearrayfilter.h>
-#include <filter/invertbytearrayfilter.h>
-#include <filter/reversebytearrayfilter.h>
-#include <filter/rotatebytearrayfilter.h>
-#include <filter/shiftbytearrayfilter.h>
+#include <bytearrayfilterfactory.h>
 #include <abstractbytearrayfilter.h>
 // lib
 #include <bytearrayview.h>
@@ -54,14 +48,7 @@ FilterTool::FilterTool()
 {
     setObjectName( "BinaryFilter" );
 
-    mFilterList
-        << new AndByteArrayFilter()
-        << new OrByteArrayFilter()
-        << new XOrByteArrayFilter()
-        << new InvertByteArrayFilter()
-        << new ReverseByteArrayFilter()
-        << new RotateByteArrayFilter()
-        << new ShiftByteArrayFilter();
+    mFilterList = ByteArrayFilterFactory::createFilters();
 }
 
 QString FilterTool::title() const { return i18nc("@title:window", "Binary Filter"); }

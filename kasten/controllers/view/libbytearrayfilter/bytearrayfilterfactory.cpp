@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,30 +20,30 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef REVERSEBYTEARRAYFILTERPARAMETERSET_H
-#define REVERSEBYTEARRAYFILTERPARAMETERSET_H
+#include "bytearrayfilterfactory.h"
 
 // lib
-#include "abstractbytearrayfilterparameterset.h"
+#include "filter/andbytearrayfilter.h"
+#include "filter/orbytearrayfilter.h"
+#include "filter/xorbytearrayfilter.h"
+#include "filter/invertbytearrayfilter.h"
+#include "filter/reversebytearrayfilter.h"
+#include "filter/rotatebytearrayfilter.h"
+#include "filter/shiftbytearrayfilter.h"
 
 
-class ReverseByteArrayFilterParameterSet : public AbstractByteArrayFilterParameterSet
+QList<AbstractByteArrayFilter*> ByteArrayFilterFactory::createFilters()
 {
-  public:
-    ReverseByteArrayFilterParameterSet();
-    virtual ~ReverseByteArrayFilterParameterSet();
+    QList<AbstractByteArrayFilter*> result;
 
-  public: // AbstractByteArrayFilterParameterSet API
-    virtual const char* id() const;
+    result
+        << new AndByteArrayFilter()
+        << new OrByteArrayFilter()
+        << new XOrByteArrayFilter()
+        << new InvertByteArrayFilter()
+        << new ReverseByteArrayFilter()
+        << new RotateByteArrayFilter()
+        << new ShiftByteArrayFilter();
 
-  public:
-    void setInvertsBits( bool invertsBits );
-
-  public:
-    bool invertsBits() const;
-
-  protected:
-    bool mInvertsBits;
-};
-
-#endif
+    return result;
+}

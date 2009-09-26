@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,30 +20,20 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef REVERSEBYTEARRAYFILTERPARAMETERSET_H
-#define REVERSEBYTEARRAYFILTERPARAMETERSET_H
+#ifndef BYTEARRAYFILTERFACTORY_H
+#define BYTEARRAYFILTERFACTORY_H
 
-// lib
-#include "abstractbytearrayfilterparameterset.h"
+class AbstractByteArrayFilter;
+template<class T> class QList;
 
 
-class ReverseByteArrayFilterParameterSet : public AbstractByteArrayFilterParameterSet
+class ByteArrayFilterFactory
 {
-  public:
-    ReverseByteArrayFilterParameterSet();
-    virtual ~ReverseByteArrayFilterParameterSet();
-
-  public: // AbstractByteArrayFilterParameterSet API
-    virtual const char* id() const;
-
-  public:
-    void setInvertsBits( bool invertsBits );
-
-  public:
-    bool invertsBits() const;
-
   protected:
-    bool mInvertsBits;
+    ByteArrayFilterFactory();
+  public:
+    static QList<AbstractByteArrayFilter*> createFilters();
+
 };
 
 #endif

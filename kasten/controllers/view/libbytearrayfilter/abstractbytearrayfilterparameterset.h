@@ -23,7 +23,6 @@
 #ifndef ABSTRACTBYTEARRAYFILTERPARAMETERSET_H
 #define ABSTRACTBYTEARRAYFILTERPARAMETERSET_H
 
-class QString;
 
 class AbstractByteArrayFilterParameterSet
 {
@@ -33,7 +32,7 @@ class AbstractByteArrayFilterParameterSet
     virtual ~AbstractByteArrayFilterParameterSet();
 
   public:
-    virtual QString id() const = 0;
+    virtual const char* id() const = 0;
 
   protected:
     class Private;

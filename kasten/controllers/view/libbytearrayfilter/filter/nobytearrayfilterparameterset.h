@@ -33,7 +33,7 @@ class NoByteArrayFilterParameterSet : public AbstractByteArrayFilterParameterSet
     virtual ~NoByteArrayFilterParameterSet();
 
   public: // AbstractByteArrayFilterParameterSet API
-    virtual QString id() const;
+    virtual const char* id() const;
 };
 
 #endif
