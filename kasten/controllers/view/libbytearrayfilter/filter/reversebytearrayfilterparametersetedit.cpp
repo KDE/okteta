@@ -31,6 +31,9 @@
 #include <QtGui/QFormLayout>
 
 
+const char* const ReverseByteArrayFilterParameterSetEdit::Id = "Reverse";
+
+
 ReverseByteArrayFilterParameterSetEdit::ReverseByteArrayFilterParameterSetEdit( QWidget* parent )
  : AbstractByteArrayFilterParameterSetEdit( parent )
 {

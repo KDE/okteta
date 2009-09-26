@@ -23,15 +23,18 @@
 #ifndef REVERSEBYTEARRAYFILTERPARAMETERSETEDIT_H
 #define REVERSEBYTEARRAYFILTERPARAMETERSETEDIT_H
 
-
 // lib
 #include "abstractbytearrayfilterparametersetedit.h"
 
 class QCheckBox;
 
+
 class ReverseByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterParameterSetEdit
 {
   Q_OBJECT
+
+  public:
+    static const char* const Id;
 
   public:
     explicit ReverseByteArrayFilterParameterSetEdit( QWidget* parent = 0 );

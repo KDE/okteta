@@ -37,6 +37,9 @@ class OperandByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterPar
   Q_OBJECT
 
   public:
+    static const char* const Id;
+
+  public:
     explicit OperandByteArrayFilterParameterSetEdit( QWidget* parent = 0 );
     virtual ~OperandByteArrayFilterParameterSetEdit();
 

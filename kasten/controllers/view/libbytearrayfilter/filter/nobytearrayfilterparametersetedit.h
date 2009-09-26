@@ -23,12 +23,15 @@
 #ifndef NOBYTEARRAYFILTERPARAMETERSETEDIT_H
 #define NOBYTEARRAYFILTERPARAMETERSETEDIT_H
 
-
 // lib
 #include "abstractbytearrayfilterparametersetedit.h"
 
+
 class NoByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterParameterSetEdit
 {
+  public:
+    static const char* const Id;
+
   public:
     explicit NoByteArrayFilterParameterSetEdit( QWidget* parent = 0 );
     virtual ~NoByteArrayFilterParameterSetEdit();
