@@ -43,9 +43,9 @@ bool Template_ByteArrayFilter::filter( Okteta::Byte* result,
     int nextBlockEnd = FilteredByteCountSignalLimit;
     while( m <= range.end() )
     {
-        // example code turns all bytes larger than level into 1, the others to 0
+        // example code turns all bytes larger than level into 255, the others to 0
         const Okteta::Byte byte = model->byte( m++ );
-        const Okteta::Byte resultByte = ( byte > level ) ? 1 : 0;
+        const Okteta::Byte resultByte = ( byte > level ) ? 255 : 0;
         result[r++] = resultByte;
 
         if( r >= nextBlockEnd )
@@ -59,6 +59,4 @@ bool Template_ByteArrayFilter::filter( Okteta::Byte* result,
     return true;
 }
 
-Template_ByteArrayFilter::~Template_ByteArrayFilter()
-{
-}
+Template_ByteArrayFilter::~Template_ByteArrayFilter() {}
