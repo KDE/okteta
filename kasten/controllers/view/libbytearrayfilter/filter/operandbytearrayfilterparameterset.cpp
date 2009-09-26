@@ -22,9 +22,6 @@
 
 #include "operandbytearrayfilterparameterset.h"
 
-// Qt
-#include <QtCore/QString>
-
 
 OperandByteArrayFilterParameterSet::OperandByteArrayFilterParameterSet()
 {}

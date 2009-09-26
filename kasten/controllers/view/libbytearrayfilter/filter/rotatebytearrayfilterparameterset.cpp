@@ -22,8 +22,6 @@
 
 #include "rotatebytearrayfilterparameterset.h"
 
-// Qt
-#include <QtCore/QString>
 
 RotateByteArrayFilterParameterSet::RotateByteArrayFilterParameterSet()
 {}

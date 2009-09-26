@@ -22,9 +22,6 @@
 
 #include "nobytearrayfilterparameterset.h"
 
-// Qt
-#include <QtCore/QString>
-
 
 NoByteArrayFilterParameterSet::NoByteArrayFilterParameterSet()
 {}

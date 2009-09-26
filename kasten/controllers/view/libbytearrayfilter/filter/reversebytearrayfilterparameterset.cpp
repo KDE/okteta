@@ -22,9 +22,6 @@
 
 #include "reversebytearrayfilterparameterset.h"
 
-// Qt
-#include <QtCore/QString>
-
 
 ReverseByteArrayFilterParameterSet::ReverseByteArrayFilterParameterSet() {}
 
