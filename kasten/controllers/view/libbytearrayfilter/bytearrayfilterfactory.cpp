@@ -30,6 +30,11 @@
 #include "filter/reversebytearrayfilter.h"
 #include "filter/rotatebytearrayfilter.h"
 #include "filter/shiftbytearrayfilter.h"
+// NEWFILTER(start)
+// Here add the name of your header file of your filter,
+// e.g.
+// #include "filter/my_bytearrayfilter.h"
+// NEWFILTER(end)
 
 
 QList<AbstractByteArrayFilter*> ByteArrayFilterFactory::createFilters()
@@ -44,6 +49,12 @@ QList<AbstractByteArrayFilter*> ByteArrayFilterFactory::createFilters()
         << new ReverseByteArrayFilter()
         << new RotateByteArrayFilter()
         << new ShiftByteArrayFilter();
+// NEWFILTER(start)
+// Here add the creation of an object of your filter class and add it to the list,
+// e.g.
+//     result
+//         << new My_ByteArrayFilter();
+// NEWFILTER(end)
 
     return result;
 }

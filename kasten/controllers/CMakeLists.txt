@@ -140,6 +140,11 @@ set( LIBFILTER_SRCS
   view/libbytearrayfilter/filter/operandbytearrayfilterparameterset.cpp
   view/libbytearrayfilter/filter/reversebytearrayfilterparameterset.cpp
   view/libbytearrayfilter/filter/rotatebytearrayfilterparameterset.cpp
+## NEWFILTERPARAMETERSET(start)
+## Here add the names of your source files of your filter parameter set,
+## e.g.
+##  view/libbytearrayfilter/filter/mybytearrayfilterparameterset.cpp
+## NEWFILTERPARAMETERSET(end)
   view/libbytearrayfilter/filter/andbytearrayfilter.cpp
   view/libbytearrayfilter/filter/orbytearrayfilter.cpp
   view/libbytearrayfilter/filter/xorbytearrayfilter.cpp
@@ -147,10 +152,20 @@ set( LIBFILTER_SRCS
   view/libbytearrayfilter/filter/reversebytearrayfilter.cpp
   view/libbytearrayfilter/filter/rotatebytearrayfilter.cpp
   view/libbytearrayfilter/filter/shiftbytearrayfilter.cpp
+## NEWFILTER(start)
+## Here add the names of your source files of your filter,
+## e.g.
+##   view/libbytearrayfilter/filter/mybytearrayfilter.cpp
+## NEWFILTER(end)
   view/libbytearrayfilter/filter/nobytearrayfilterparametersetedit.cpp
   view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp
   view/libbytearrayfilter/filter/reversebytearrayfilterparametersetedit.cpp
   view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp
+## NEWFILTERPARAMETERSET(start)
+## Here add the names of your source files of your widget to edit the filter parameter set,
+## e.g.
+##   view/libbytearrayfilter/filter/mybytearrayfilterparametersetedit.cpp
+## NEWFILTERPARAMETERSET(end)
 )
 set( FILTERCONTROLLER_SRCS
   view/filter/filterjob.cpp
@@ -284,3 +299,23 @@ set_target_properties( oktetakastencontrollers  PROPERTIES VERSION ${GENERIC_LIB
 install( TARGETS oktetakastencontrollers  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${oktete_kastencore_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )
+
+
+
+if( KASTEN_BUILD_TEMPLATES )
+include_directories(
+  view/libbytearrayfilter/filter
+)
+set( libfilter_templates_SRCS
+  view/libbytearrayfilter/filter/template/template_bytearrayfilter.cpp
+  view/libbytearrayfilter/filter/template/template_bytearrayfilterparameterset.cpp
+  view/libbytearrayfilter/filter/template/template_bytearrayfilterparametersetedit.cpp
+)
+
+set( okteta_kastencontrollers_templates_SRCS
+  ${libfilter_templates_SRCS}
+)
+
+kde4_add_library( oktetakastencontrollertemplates  STATIC ${okteta_kastencontrollers_templates_SRCS} )
+
+endif( KASTEN_BUILD_TEMPLATES )
