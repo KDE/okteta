@@ -1,5 +1,8 @@
 project( okteta )
 
+set( KASTEN_BUILD_EXAMPLES  NOT SKIPEXAMPLES )
+set( KASTEN_BUILD_TEMPLATES NOT SKIPTEMPLATES )
+
 add_subdirectory( libs )
 
 add_subdirectory( core )
