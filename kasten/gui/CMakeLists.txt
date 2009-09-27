@@ -51,6 +51,8 @@ set( okteta_kastengui_io_SRCS
   ${okteta_sourcecode_streamencoder_SRCS}
   ${okteta_textrenderer_SRCS}
   io/bytearrayviewtextstreamencoder.cpp
+  io/bytearraystreamencoderfactory.cpp
+  io/bytearraystreamencoderconfigeditorfactoryfactory.cpp
 )
 
 set( okteta_kastengui_view_SRCS

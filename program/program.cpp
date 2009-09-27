@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta program, part of the KDE project.
 
-    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -28,12 +28,8 @@
 #include <bytearraydocumentfactory.h>
 #include <bytearrayviewfactory.h>
 #include <filesystem/bytearrayrawfilesynchronizerfactory.h>
-#include <bytearraysourcecodestreamencoderconfigeditorfactory.h>
-#include <bytearrayvaluesstreamencoderconfigeditorfactory.h>
-#include <bytearraytextstreamencoder.h>
-#include <bytearrayvaluestreamencoder.h>
-#include <bytearraysourcecodestreamencoder.h>
-#include <bytearrayviewtextstreamencoder.h>
+#include <bytearraystreamencoderconfigeditorfactoryfactory.h>
+#include <bytearraystreamencoderfactory.h>
 // Kasten gui
 #include <viewmanager.h>
 #include <modelcodecviewmanager.h>
@@ -80,15 +76,11 @@ int OktetaProgram::execute()
     KGlobal::locale()->insertCatalog( "libkasten" );
     KGlobal::locale()->insertCatalog( "liboktetakasten" );
 
-    QList<AbstractModelStreamEncoder*> encoderList;
-    encoderList << new ByteArrayValueStreamEncoder()
-                << new ByteArrayTextStreamEncoder()
-                << new ByteArraySourceCodeStreamEncoder()
-                << new ByteArrayViewTextStreamEncoder();
+    const QList<AbstractModelStreamEncoder*> encoderList =
+        ByteArrayStreamEncoderFactory::createStreamEncoders();
 
-    QList<AbstractModelStreamEncoderConfigEditorFactory*> encoderConfigEditorFactoryList;
-    encoderConfigEditorFactoryList << new ByteArraySourceCodeStreamEncoderConfigEditorFactory()
-                                   << new ByteArrayValuesStreamEncoderConfigEditorFactory();
+    const QList<AbstractModelStreamEncoderConfigEditorFactory*> encoderConfigEditorFactoryList =
+        ByteArrayStreamEncoderConfigEditorFactoryFactory::createFactorys();
 
     mDocumentManager->codecManager()->setEncoders( encoderList );
     mDocumentManager->createManager()->setDocumentFactory( new ByteArrayDocumentFactory() );

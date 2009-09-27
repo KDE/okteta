@@ -32,7 +32,7 @@
 namespace Kasten
 {
 
-class OKTETAKASTENGUI_EXPORT ByteArraySourceCodeStreamEncoderConfigEditorFactory : public AbstractModelStreamEncoderConfigEditorFactory
+class ByteArraySourceCodeStreamEncoderConfigEditorFactory : public AbstractModelStreamEncoderConfigEditorFactory
 {
   public:
     ByteArraySourceCodeStreamEncoderConfigEditorFactory();

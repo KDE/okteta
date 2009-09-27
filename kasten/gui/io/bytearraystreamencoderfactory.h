@@ -1,7 +1,7 @@
 /*
-    This file is part of the Kasten Framework, part of the KDE project.
+    This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,26 +20,27 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYVALUESSTREAMENCODERCONFIGEDITORFACTORY_H
-#define BYTEARRAYVALUESSTREAMENCODERCONFIGEDITORFACTORY_H
+#ifndef BYTEARRAYSTREAMENCODERFACTORY_H
+#define BYTEARRAYSTREAMENCODERFACTORY_H
 
 // lib
 #include "oktetakastengui_export.h"
-// Okteta gui
-#include <abstractmodelstreamencoderconfigeditorfactory.h>
+
+template<class T> class QList;
 
 
 namespace Kasten
 {
+class AbstractModelStreamEncoder;
 
-class ByteArrayValuesStreamEncoderConfigEditorFactory : public AbstractModelStreamEncoderConfigEditorFactory
+
+class OKTETAKASTENGUI_EXPORT ByteArrayStreamEncoderFactory
 {
+  private:
+    ByteArrayStreamEncoderFactory();
   public:
-    ByteArrayValuesStreamEncoderConfigEditorFactory();
-    virtual ~ByteArrayValuesStreamEncoderConfigEditorFactory();
+    static QList<AbstractModelStreamEncoder*> createStreamEncoders();
 
-  public:
-    virtual AbstractModelStreamEncoderConfigEditor* tryCreateConfigEditor( AbstractModelStreamEncoder* encoder ) const;
 };
 
 }

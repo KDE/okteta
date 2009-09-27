@@ -39,7 +39,7 @@ class AbstractModelSelection;
 class AbstractModel;
 
 
-class OKTETAKASTENGUI_EXPORT ByteArrayTextStreamEncoderPreview : public AbstractSelectionView
+class ByteArrayTextStreamEncoderPreview : public AbstractSelectionView
 {
   Q_OBJECT
 
