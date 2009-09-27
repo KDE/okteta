@@ -64,7 +64,7 @@ void ModelCodecManager::setWidget( QWidget* widget )
     mWidget = widget;
 }
 
-void ModelCodecManager::setEncoders( QList<AbstractModelStreamEncoder*>& encoderList )
+void ModelCodecManager::setEncoders( const QList<AbstractModelStreamEncoder*>& encoderList )
 {
     mEncoderList = encoderList;
 
@@ -75,7 +75,7 @@ void ModelCodecManager::setEncoders( QList<AbstractModelStreamEncoder*>& encoder
         mExporterList << new ModelEncoderFileSystemExporter( encoder );
 }
 
-void ModelCodecManager::setDecoders( QList<AbstractModelStreamDecoder*>& decoderList )
+void ModelCodecManager::setDecoders( const QList<AbstractModelStreamDecoder*>& decoderList )
 {
     mDecoderList = decoderList;
 }
