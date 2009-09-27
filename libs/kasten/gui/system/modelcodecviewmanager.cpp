@@ -37,7 +37,7 @@ namespace Kasten
 
 ModelCodecViewManager::ModelCodecViewManager() {}
 
-void ModelCodecViewManager::setEncoderConfigEditorFactories( QList<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList )
+void ModelCodecViewManager::setEncoderConfigEditorFactories( const QList<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList )
 {
     mEncoderFactoryList = factoryList;
 
@@ -48,7 +48,7 @@ void ModelCodecViewManager::setEncoderConfigEditorFactories( QList<AbstractModel
         mExporterFactoryList << new ModelEncoderFileSystemExporterConfigEditorFactory( factory );
 }
 
-void ModelCodecViewManager::setExporterConfigEditorFactories( QList<AbstractModelExporterConfigEditorFactory*>& factoryList )
+void ModelCodecViewManager::setExporterConfigEditorFactories( const QList<AbstractModelExporterConfigEditorFactory*>& factoryList )
 {
     mExporterFactoryList = factoryList;
 }
