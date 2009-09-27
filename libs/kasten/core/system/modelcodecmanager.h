@@ -67,8 +67,8 @@ class KASTENCORE_EXPORT ModelCodecManager : public QObject
     QList<AbstractModelExporter*> exporterList( AbstractModel* model, const AbstractModelSelection* selection ) const;
 
   public:
-    void setEncoders( QList<AbstractModelStreamEncoder*> &encoderList );
-    void setDecoders( QList<AbstractModelStreamDecoder*> &decoderList );
+    void setEncoders( const QList<AbstractModelStreamEncoder*>& encoderList );
+    void setDecoders( const QList<AbstractModelStreamDecoder*>& decoderList );
     void setWidget( QWidget* widget );
 
   protected:
