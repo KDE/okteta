@@ -36,7 +36,8 @@ KByteArrayEdit::KByteArrayEdit( QWidget *parent, const QStringList & )
   : QWidget( parent )
 {
     Model = new Okteta::ByteArrayModel;
-    View = new Okteta::ByteArrayColumnView( Model, this );
+    View = new Okteta::ByteArrayColumnView( this );
+    View->setByteArrayModel( Model );
 
     QHBoxLayout* Layout = new QHBoxLayout( this );
     Layout->addWidget( View );

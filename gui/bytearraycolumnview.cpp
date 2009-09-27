@@ -28,14 +28,12 @@
 namespace Okteta
 {
 
-ByteArrayColumnView::ByteArrayColumnView( AbstractByteArrayModel* _byteArrayModel, QWidget *parent )
+ByteArrayColumnView::ByteArrayColumnView( QWidget* parent )
  : AbstractByteArrayView( new ByteArrayColumnViewPrivate(this), parent )
 {
     Q_D( ByteArrayColumnView );
 
     d->init();
-
-    setByteArrayModel( _byteArrayModel );
 }
 
 PixelX ByteArrayColumnView::byteSpacingWidth() const

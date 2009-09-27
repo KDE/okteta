@@ -63,7 +63,7 @@ class OKTETAGUI_EXPORT ByteArrayColumnView : public AbstractByteArrayView
   Q_PROPERTY( QChar SubstituteChar READ substituteChar WRITE setSubstituteChar )
 
   public:
-    explicit ByteArrayColumnView( AbstractByteArrayModel* byteArrayModel = 0, QWidget* parent = 0 );
+    explicit ByteArrayColumnView( QWidget* parent = 0 );
     virtual ~ByteArrayColumnView();
 
   public: // AbstractByteArrayView API

@@ -36,8 +36,7 @@ ByteArrayRowViewDesignerFactory::ByteArrayRowViewDesignerFactory( QObject* paren
 
 QWidget* ByteArrayRowViewDesignerFactory::createWidget( QWidget* parent )
 {
-    // TODO: why does this constructor differ from the column one?
-    Okteta::ByteArrayRowView* widget = new Okteta::ByteArrayRowView( /*0, */parent );
+    Okteta::ByteArrayRowView* widget = new Okteta::ByteArrayRowView( parent );
     widget->setByteArrayModel( createFillerByteArrayModel(widget) );
     return widget;
 }
@@ -54,7 +53,7 @@ QIcon ByteArrayRowViewDesignerFactory::icon() const
 
 QString ByteArrayRowViewDesignerFactory::includeFile() const
 {
-    return QString::fromLatin1("KDE/Okteta/ByteArrayRowView");
+    return QString::fromLatin1("bytearrayrowview.h");
 }
 
 QString ByteArrayRowViewDesignerFactory::toolTip() const

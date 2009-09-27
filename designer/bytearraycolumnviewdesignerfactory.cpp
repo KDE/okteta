@@ -36,7 +36,7 @@ ByteArrayColumnViewDesignerFactory::ByteArrayColumnViewDesignerFactory( QObject*
 
 QWidget* ByteArrayColumnViewDesignerFactory::createWidget( QWidget* parent )
 {
-    Okteta::ByteArrayColumnView* widget = new Okteta::ByteArrayColumnView( 0, parent );
+    Okteta::ByteArrayColumnView* widget = new Okteta::ByteArrayColumnView( parent );
     widget->setByteArrayModel( createFillerByteArrayModel(widget) );
     return widget;
 }
@@ -53,7 +53,7 @@ QIcon ByteArrayColumnViewDesignerFactory::icon() const
 
 QString ByteArrayColumnViewDesignerFactory::includeFile() const
 {
-    return QString::fromLatin1("KDE/Okteta/ByteArrayColumnView");
+    return QString::fromLatin1("bytearraycolumnview.h");
 }
 
 QString ByteArrayColumnViewDesignerFactory::toolTip() const

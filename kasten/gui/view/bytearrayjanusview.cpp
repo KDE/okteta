@@ -54,7 +54,7 @@ void ByteArrayJanusView::setViewModus( int viewModus )
         return;
 
     AbstractByteArrayView* newView = ( viewModus == ColumnViewId ) ?
-        (AbstractByteArrayView*)new ByteArrayColumnView( 0, this ) :
+        (AbstractByteArrayView*)new ByteArrayColumnView( this ) :
         (AbstractByteArrayView*)new ByteArrayRowView( this );
 
     const bool hasFocus = mView ? mView->hasFocus() : false;
