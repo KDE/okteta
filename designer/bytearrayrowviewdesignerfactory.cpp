@@ -53,7 +53,7 @@ QIcon ByteArrayRowViewDesignerFactory::icon() const
 
 QString ByteArrayRowViewDesignerFactory::includeFile() const
 {
-    return QString::fromLatin1("bytearrayrowview.h");
+    return QString::fromLatin1("okteta/bytearrayrowview.h");
 }
 
 QString ByteArrayRowViewDesignerFactory::toolTip() const
