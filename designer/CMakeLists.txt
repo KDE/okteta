@@ -27,3 +27,8 @@ target_link_libraries( oktetadesignerplugin
 )
 
 install( TARGETS oktetadesignerplugin  DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer )
+
+
+if( OKTETA_BUILD_EXAMPLES )
+add_subdirectory( examples )
+endif( OKTETA_BUILD_EXAMPLES )

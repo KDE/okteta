@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Example_Widget</class>
+ <widget class="QWidget" name="Example_Widget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>411</width>
+    <height>561</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Example widget</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="Okteta::ByteArrayColumnView" name="mByteArrayColumnView">
+     <property name="NoOfBytesPerLine">
+      <number>8</number>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="Okteta::ByteArrayRowView" name="mByteArrayRowView">
+     <property name="NoOfBytesPerLine">
+      <number>8</number>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Okteta::ByteArrayColumnView</class>
+   <extends>QFrame</extends>
+   <header>KDE/Okteta/ByteArrayColumnView</header>
+  </customwidget>
+  <customwidget>
+   <class>Okteta::ByteArrayRowView</class>
+   <extends>QFrame</extends>
+   <header>KDE/Okteta/ByteArrayRowView</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
