@@ -302,7 +302,7 @@ install( FILES ${oktete_kastencore_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR
 
 
 
-if( KASTEN_BUILD_TEMPLATES )
+if( KASTEN_BUILD_INTERNAL_TEMPLATES )
 include_directories(
   view/libbytearrayfilter/filter
 )
@@ -318,4 +318,4 @@ set( okteta_kastencontrollers_templates_SRCS
 
 kde4_add_library( oktetakastencontrollertemplates  STATIC ${okteta_kastencontrollers_templates_SRCS} )
 
-endif( KASTEN_BUILD_TEMPLATES )
+endif( KASTEN_BUILD_INTERNAL_TEMPLATES )
