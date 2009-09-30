@@ -32,6 +32,8 @@ AbstractByteArrayFilterParameterSet* Template_ByteArrayFilter::parameterSet() { 
 bool Template_ByteArrayFilter::filter( Okteta::Byte* result,
                                        Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const
 {
+    bool success = true;
+
 //// ADAPT(start)
 //// modify the following code to write the filtered bytes into the array pointed to by result
 //// The array is as large as range and not initialized to a value.
@@ -56,7 +58,7 @@ bool Template_ByteArrayFilter::filter( Okteta::Byte* result,
     }
 //// ADAPT(end)
 
-    return true;
+    return success;
 }
 
 Template_ByteArrayFilter::~Template_ByteArrayFilter() {}
