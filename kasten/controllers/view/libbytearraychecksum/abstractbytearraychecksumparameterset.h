@@ -23,8 +23,6 @@
 #ifndef ABSTRACTBYTEARRAYCHECKSUMPARAMETERSET_H
 #define ABSTRACTBYTEARRAYCHECKSUMPARAMETERSET_H
 
-class QString;
-
 
 class AbstractByteArrayChecksumParameterSet
 {
@@ -34,7 +32,7 @@ class AbstractByteArrayChecksumParameterSet
     virtual ~AbstractByteArrayChecksumParameterSet();
 
   public:
-    virtual QString id() const = 0;
+    virtual const char* id() const = 0;
 
   protected:
     class Private;
