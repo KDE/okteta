@@ -129,6 +129,8 @@ set( INSERTPATTERNCONTROLLER_SRCS
   view/insertpattern/insertpatterntool.cpp
   view/insertpattern/insertpatterndialog.cpp
   view/insertpattern/insertpatterncontroller.cpp
+  view/insertpattern/insertsequencetool.cpp
+  view/insertpattern/insertsequencecontroller.cpp
 )
 set( LIBFILTER_SRCS
   view/libbytearrayfilter/abstractbytearrayfilter.cpp
@@ -267,6 +269,7 @@ set( okteta_kastencontrollers_LIB_HDRS
   view/filter/filtertool.h
   view/filter/filtertoolview.h
   view/selectrange/selectrangecontroller.h
+  view/insertpattern/insertsequencecontroller.h
   view/insertpattern/insertpatterncontroller.h
   view/replace/replacecontroller.h
   view/viewstatus/viewstatuscontroller.h
