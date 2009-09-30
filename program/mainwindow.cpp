@@ -52,6 +52,7 @@
 #include <overwriteonly/overwriteonlycontroller.h>
 #include <overwritemode/overwritemodecontroller.h>
 #include <insertpattern/insertpatterncontroller.h>
+#include <insertpattern/insertsequencecontroller.h>
 #include <gotooffset/gotooffsetcontroller.h>
 #include <selectrange/selectrangecontroller.h>
 #include <search/searchcontroller.h>
@@ -167,6 +168,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new GotoOffsetController(mGroupedViews,this) );
     addXmlGuiController( new SelectRangeController(mGroupedViews,this) );
     addXmlGuiController( new InsertPatternController(this) );
+    addXmlGuiController( new InsertSequenceController(this) );
     addXmlGuiController( new BookmarksController(this) );
     addXmlGuiController( new PrintController(this) );
     addXmlGuiController( new ViewConfigController(this) );

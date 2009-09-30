@@ -25,6 +25,7 @@
     <Menu name="insert" append="edit_paste_merge">
       <text context="@title:menu">Insert</text>
       <Action name="insert_pattern" />
+      <Action name="insert_sequence" />
       <Action name="insert_file" />
     </Menu>
     <Action name="edit_select" append="edit_select_merge" />

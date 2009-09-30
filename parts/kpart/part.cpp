@@ -32,6 +32,7 @@
 #include <overwriteonly/overwriteonlycontroller.h>
 #include <overwritemode/overwritemodecontroller.h>
 #include <insertpattern/insertpatterncontroller.h>
+#include <insertpattern/insertsequencecontroller.h>
 #include <gotooffset/gotooffsetcontroller.h>
 #include <selectrange/selectrangecontroller.h>
 #include <search/searchcontroller.h>
@@ -108,6 +109,8 @@ OktetaPart::OktetaPart( QObject* parent,
 //     mControllers.append( new Kasten::SelectRangeController(mGroupedViews,this) );
     if( modus == ReadWriteModus )
         mControllers.append( new Kasten::InsertPatternController(this) );
+    if( modus == ReadWriteModus )
+        mControllers.append( new Kasten::InsertSequenceController(this) );
 //     mControllers.append( new Kasten::BookmarksController(this) );
     mPrintController = new Kasten::PrintController( this );
     mControllers.append( mPrintController );
