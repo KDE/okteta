@@ -35,9 +35,9 @@
 #include "algorithm/qca2bytearraychecksumalgorithm.h"
 #endif
 // NEWCHECKSUM(start)
-// Here add the name of your header file of your filter,
+// Here add the name of your header file of your checksum algorithm,
 // e.g.
-// #include "filter/my_bytearrayfilter.h"
+// #include "algorithm/mybytearraychecksumalgorithm.h"
 // NEWCHECKSUM(end)
 // KDE
 #include <KLocale>
@@ -67,10 +67,10 @@ QList<AbstractByteArrayChecksumAlgorithm*> ByteArrayChecksumAlgorithmFactory::cr
         << new Adler32ByteArrayChecksumAlgorithm()
         << new Crc32ByteArrayChecksumAlgorithm();
 // NEWCHECKSUM(start)
-// Here add the creation of an object of your checksum class and add it to the list,
+// Here add the creation of an object of your checksum algorithm class and add it to the list,
 // e.g.
 //     result
-//         << new My_ByteArrayChecksumAlgorithm();
+//         << new MyByteArrayChecksumAlgorithm();
 // NEWCHECKSUM(end)
 
 #ifdef HAVE_QCA2

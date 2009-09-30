@@ -25,11 +25,11 @@
 // lib
 #include "algorithm/modsumbytearraychecksumparametersetedit.h"
 #include "algorithm/nobytearraychecksumparametersetedit.h"
-//// NEWFILTERPARAMETERSET(start)
+//// NEWCHECKSUMPARAMETERSET(start)
 //// Here add the name of your header file of your edit widget for the parameterset,
 //// e.g.
-//// #include "filter/my_bytearrayfilterparametersetedit.h"
-//// NEWFILTERPARAMETERSET(end)
+//// #include "algorithm/mybytearraychecksumparametersetedit.h"
+//// NEWCHECKSUMPARAMETERSET(end)
 
 
 AbstractByteArrayChecksumParameterSetEdit* ByteArrayChecksumParameterSetEditFactory::createEdit( const char* id )
@@ -38,13 +38,13 @@ AbstractByteArrayChecksumParameterSetEdit* ByteArrayChecksumParameterSetEditFact
 
     if( qstrcmp(id,ModSumByteArrayChecksumParameterSetEdit::Id) == 0 )
         result = new ModSumByteArrayChecksumParameterSetEdit();
-//// NEWFILTERPARAMETERSET(start)
+//// NEWCHECKSUMPARAMETERSET(start)
 //// Here add the check for the id of your parameter set
-//// and if it matches the creation of the widget
+//// and, if it matches, the creation of the widget
 //// e.g.
-////     else if( qstrcmp(id,My_ByteArrayFilterParameterSetEdit::Id) == 0 )
-////         result = new My_ByteArrayFilterParameterSetEdit();
-//// NEWFILTERPARAMETERSET(end)
+////     else if( qstrcmp(id,MyByteArrayChecksumParameterSetEdit::Id) == 0 )
+////         result = new MyByteArrayChecksumParameterSetEdit();
+//// NEWCHECKSUMPARAMETERSET(end)
     else //if( qstrcmp(id,NoByteArrayChecksumParameterSetEdit::Id) == 0 ) TODO: default should be a message "Not found"
         result = new NoByteArrayChecksumParameterSetEdit();
 
