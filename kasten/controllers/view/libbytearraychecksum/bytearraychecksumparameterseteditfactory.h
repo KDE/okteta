@@ -20,21 +20,18 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef NOBYTEARRAYCHECKSUMPARAMETERSET_H
-#define NOBYTEARRAYCHECKSUMPARAMETERSET_H
+#ifndef BYTEARRAYCHECKSUMPARAMETERSETEDITFACTORY_H
+#define BYTEARRAYCHECKSUMPARAMETERSETEDITFACTORY_H
 
-// lib
-#include "abstractbytearraychecksumparameterset.h"
+class AbstractByteArrayChecksumParameterSetEdit;
 
 
-class NoByteArrayChecksumParameterSet : public AbstractByteArrayChecksumParameterSet
+class ByteArrayChecksumParameterSetEditFactory
 {
+  protected:
+    ByteArrayChecksumParameterSetEditFactory();
   public:
-    NoByteArrayChecksumParameterSet();
-    virtual ~NoByteArrayChecksumParameterSet();
-
-  public: // AbstractByteArrayChecksumParameterSet API
-    virtual const char* id() const;
+    static AbstractByteArrayChecksumParameterSetEdit* createEdit( const char* id );
 };
 
 #endif

@@ -22,14 +22,11 @@
 
 #include "nobytearraychecksumparameterset.h"
 
-// Qt
-#include <QtCore/QString>
-
 
 NoByteArrayChecksumParameterSet::NoByteArrayChecksumParameterSet()
 {}
 
-QString NoByteArrayChecksumParameterSet::id() const { return QString::fromLatin1("None"); }
+const char* NoByteArrayChecksumParameterSet::id() const { return "None"; }
 
 NoByteArrayChecksumParameterSet::~NoByteArrayChecksumParameterSet()
 {

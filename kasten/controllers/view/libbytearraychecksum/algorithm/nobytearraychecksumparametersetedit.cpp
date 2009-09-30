@@ -23,6 +23,9 @@
 #include "nobytearraychecksumparametersetedit.h"
 
 
+const char* const NoByteArrayChecksumParameterSetEdit::Id = "None";
+
+
 NoByteArrayChecksumParameterSetEdit::NoByteArrayChecksumParameterSetEdit( QWidget* parent )
  : AbstractByteArrayChecksumParameterSetEdit( parent )
 {}

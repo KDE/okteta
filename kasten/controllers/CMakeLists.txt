@@ -71,14 +71,16 @@ set( LIBCHECKSUM_SRCS
   view/libbytearraychecksum/abstractbytearraychecksumalgorithm.cpp
   view/libbytearraychecksum/abstractbytearraychecksumparameterset.cpp
   view/libbytearraychecksum/abstractbytearraychecksumparametersetedit.cpp
-  view/libbytearraychecksum/algorithm/nobytearraychecksumparameterset.cpp
-  view/libbytearraychecksum/algorithm/nobytearraychecksumparametersetedit.cpp
+  view/libbytearraychecksum/bytearraychecksumalgorithmfactory.cpp
+  view/libbytearraychecksum/bytearraychecksumparameterseteditfactory.cpp
   view/libbytearraychecksum/algorithm/crc32bytearraychecksumalgorithm.cpp
   view/libbytearraychecksum/algorithm/adler32bytearraychecksumalgorithm.cpp
   view/libbytearraychecksum/algorithm/modsum8bytearraychecksumalgorithm.cpp
   view/libbytearraychecksum/algorithm/modsum16bytearraychecksumalgorithm.cpp
   view/libbytearraychecksum/algorithm/modsum32bytearraychecksumalgorithm.cpp
   view/libbytearraychecksum/algorithm/modsum64bytearraychecksumalgorithm.cpp
+  view/libbytearraychecksum/algorithm/nobytearraychecksumparameterset.cpp
+  view/libbytearraychecksum/algorithm/nobytearraychecksumparametersetedit.cpp
   view/libbytearraychecksum/algorithm/modsumbytearraychecksumparameterset.cpp
   view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp
   ${QCA2CHECKSUM_SRCS}

@@ -30,6 +30,9 @@
 class NoByteArrayChecksumParameterSetEdit : public AbstractByteArrayChecksumParameterSetEdit
 {
   public:
+    static const char* const Id;
+
+  public:
     explicit NoByteArrayChecksumParameterSetEdit( QWidget* parent = 0 );
     virtual ~NoByteArrayChecksumParameterSetEdit();
 

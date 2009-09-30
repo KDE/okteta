@@ -22,15 +22,12 @@
 
 #include "modsumbytearraychecksumparameterset.h"
 
-// Qt
-#include <QtCore/QString>
-
 
 ModSumByteArrayChecksumParameterSet::ModSumByteArrayChecksumParameterSet()
   : mEndianness( ThisMachineEndianness )
 {}
 
-QString ModSumByteArrayChecksumParameterSet::id() const { return QString::fromLatin1("ModSum"); }
+const char* ModSumByteArrayChecksumParameterSet::id() const { return "ModSum"; }
 
 Endianness ModSumByteArrayChecksumParameterSet::endianness() const { return mEndianness; }
 

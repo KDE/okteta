@@ -35,7 +35,7 @@ class ModSumByteArrayChecksumParameterSet : public AbstractByteArrayChecksumPara
     virtual ~ModSumByteArrayChecksumParameterSet();
 
   public: // AbstractByteArrayChecksumParameterSet API
-    virtual QString id() const;
+    virtual const char* id() const;
 
   public:
     void setEndianness( Endianness endianness );

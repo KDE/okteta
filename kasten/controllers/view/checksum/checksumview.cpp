@@ -25,8 +25,7 @@
 // tool
 #include "checksumtool.h"
 // lib
-#include <algorithm/modsumbytearraychecksumparametersetedit.h>
-#include <algorithm/nobytearraychecksumparametersetedit.h>
+#include <bytearraychecksumparameterseteditfactory.h>
 #include <abstractbytearraychecksumparametersetedit.h>
 #include <abstractbytearraychecksumparameterset.h>
 #include <abstractbytearraychecksumalgorithm.h>
@@ -44,6 +43,7 @@
 #include <QtGui/QLayout>
 #include <QtGui/QClipboard>
 #include <QtGui/QApplication>
+#include <QtGui/QAbstractItemView>
 
 
 namespace Kasten
@@ -109,6 +109,15 @@ ChecksumView::ChecksumView( ChecksumTool* tool, QWidget* parent )
     connect( mTool, SIGNAL(uptodateChanged( bool )), SLOT(onChecksumUptodateChanged( bool )) );
     connect( mTool, SIGNAL(isApplyableChanged( bool )), SLOT(onApplyableChanged( bool )) );
 
+    // automatically set focus to the parameters if a operation has been selected
+    QAbstractItemView* algorithmComboBoxListView = mAlgorithmComboBox->view();
+    QObject::connect( algorithmComboBoxListView, SIGNAL(activated( const QModelIndex& )),
+             mParameterSetEditStack, SLOT(setFocus()) );
+    // TODO: is a workaround for Qt 4.5.1 which doesn't emit activated() for mouse clicks
+    QObject::connect( algorithmComboBoxListView, SIGNAL(pressed( const QModelIndex& )),
+             mParameterSetEditStack, SLOT(setFocus()) );
+    // TODO: goto filter button if there are no parameters
+
     addAlgorithms();
 }
 
@@ -120,19 +129,10 @@ void ChecksumView::addAlgorithms()
     {
         mAlgorithmComboBox->addItem( algorithm->name() );
 
-        AbstractByteArrayChecksumParameterSetEdit* parameterEdit;
-        const QString parameterSetId = algorithm->parameterSet()->id();
+        const char* const parameterSetId = algorithm->parameterSet()->id();
+        AbstractByteArrayChecksumParameterSetEdit* parameterEdit =
+            ByteArrayChecksumParameterSetEditFactory::createEdit( parameterSetId );
 
-        if( parameterSetId == "ModSum" )
-            parameterEdit = new ModSumByteArrayChecksumParameterSetEdit();
-#if 0
-        else if( parameterSetId == "Reverse" )
-            parameterEdit = new ReverseByteArrayFilterParameterSetEdit();
-        else if( parameterSetId == "Rotate" )
-            parameterEdit = new RotateByteArrayFilterParameterSetEdit();
-#endif
-        else //if( parameterSetId == "None" ) TODO: default should be a message "Not found"
-            parameterEdit = new NoByteArrayChecksumParameterSetEdit();
         mParameterSetEditStack->addWidget( parameterEdit );
     }
 

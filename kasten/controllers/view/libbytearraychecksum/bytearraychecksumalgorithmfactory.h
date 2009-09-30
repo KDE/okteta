@@ -20,21 +20,20 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef NOBYTEARRAYCHECKSUMPARAMETERSET_H
-#define NOBYTEARRAYCHECKSUMPARAMETERSET_H
+#ifndef BYTEARRAYCHECKSUMALGORITHMFACTORY_H
+#define BYTEARRAYCHECKSUMALGORITHMFACTORY_H
 
-// lib
-#include "abstractbytearraychecksumparameterset.h"
+class AbstractByteArrayChecksumAlgorithm;
+template<class T> class QList;
 
 
-class NoByteArrayChecksumParameterSet : public AbstractByteArrayChecksumParameterSet
+class ByteArrayChecksumAlgorithmFactory
 {
+  protected:
+    ByteArrayChecksumAlgorithmFactory();
   public:
-    NoByteArrayChecksumParameterSet();
-    virtual ~NoByteArrayChecksumParameterSet();
+    static QList<AbstractByteArrayChecksumAlgorithm*> createAlgorithms();
 
-  public: // AbstractByteArrayChecksumParameterSet API
-    virtual const char* id() const;
 };
 
 #endif
