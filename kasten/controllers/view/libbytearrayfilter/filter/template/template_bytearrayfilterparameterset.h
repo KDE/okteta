@@ -11,7 +11,7 @@
 //// e.g. "MYBYTEARRAYFILTERWITHPARAMETERSET_H"
 #ifndef TEMPLATE_BYTEARRAYFILTERWITHPARAMETERSET_H
 #define TEMPLATE_BYTEARRAYFILTERWITHPARAMETERSET_H
-// ADAPT(end)
+//// ADAPT(end)
 
 // lib
 #include <abstractbytearrayfilterparameterset.h>
@@ -21,7 +21,7 @@
 //// rename the class name from Template_ByteArrayFilterParameterSet to a proper name, both here and in the .cpp file
 //// e.g. MyByteArrayFilterParameterSet
 class Template_ByteArrayFilterParameterSet : public AbstractByteArrayFilterParameterSet
-// ADAPT(end)
+//// ADAPT(end)
 {
   public:
     Template_ByteArrayFilterParameterSet();

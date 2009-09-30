@@ -11,7 +11,7 @@
 //// e.g. "MYBYTEARRAYFILTERWITHPARAMETERSETEDIT_H"
 #ifndef TEMPLATE_BYTEARRAYFILTERPARAMETERSETEDIT_H
 #define TEMPLATE_BYTEARRAYFILTERPARAMETERSETEDIT_H
-// ADAPT(end)
+//// ADAPT(end)
 
 // lib
 #include <abstractbytearrayfilterparametersetedit.h>
@@ -19,14 +19,14 @@
 //// ADAPT(start)
 //// add here all needed headers and forward declarations for the members of the widget
 class KIntNumInput;
-// ADAPT(end)
+//// ADAPT(end)
 
 
 //// ADAPT(start)
 //// rename the class name from Template_ByteArrayFilterParameterSetEdit to a proper name, both here and in the .cpp file
 //// e.g. MyByteArrayFilterParameterSetEdit
 class Template_ByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterParameterSetEdit
-// ADAPT(end)
+//// ADAPT(end)
 {
   Q_OBJECT
 
@@ -45,14 +45,14 @@ class Template_ByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterP
 //// if the values in the widget can reach invalid states, which should not be used for the parameters,
 //// keep the declaration of "isValid()", otherwise remove the next line
     virtual bool isValid() const;
-// ADAPT(end)
+//// ADAPT(end)
 
 //// ADAPT(start)
 //// define slots to catch changes in the values to check if the current state is valid or not
 //// not needed if there cannot be invalid states
   protected Q_SLOTS:
     void onLevelChanged( int value );
-// ADAPT(end)
+//// ADAPT(end)
 
 //// ADAPT(start)
 //// here list the UI elements as usual
@@ -60,7 +60,7 @@ class Template_ByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterP
     KIntNumInput* mLevelEdit;
 
     bool mIsValid :1;
-// ADAPT(end)
+//// ADAPT(end)
 };
 
 #endif
