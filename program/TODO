@@ -224,6 +224,13 @@ Done for 0.4:
 * added/improved tooltips to/for all tool views
 * QtDesigner plugin for ByteArray*View
 * renamed ResizeStyle to LayoutStyle in API
+* added AbstractToolWidget
+* splitted KByteArrayLineEdit into Okteta::ByteArrayComboBox and Okteta::AddressComboBox and added a history function (thus combobox)
+* added shared pimpl class to AbstractModel, AbstractModelSynchronizer, AbstractViewArea and their respective subclasses
+* added shared pimpl class to Abstract*Job, AbstractModelStreamEncoder, AbstractModelExporter and their respective subclasses
+* added insert tool for full byte sequence 0-255
+* added templates for binary filters
+* added templates for checksum/hashsum algorithm
 
 Next to work on:
 ----------------------------------
@@ -234,7 +241,7 @@ Important:
 * width calculation for resize seems to need to include some margins
 * QActionGroups are cleared on setupGui, e.g. if toolbar gets edited
 * search previous does not work in a row, as the cursor is exactly after a full match
-* find/replace dialogs need to handle change charcodec, but what to do with than invalid characters already entered?
+* find/replace dialogs and ByteArrayComboBox need to handle change charcodec, but what to do with than invalid characters already entered?
 Less important:
 * some more unit tests
 * fix wrong font width calculation for offset and selection in statusbar
@@ -248,9 +255,12 @@ Less important:
 Later on:
 ---------
 * add StackedViews
+* turn Insert/Sequence Pattern tools into one with generator plugins
 * think about making the ByteArray* things interface only to the AbstractModel
   for this improve template functions findDocument with multiple interfaces given
 * make offset 64-Bit, in the whole Api, best by using own datatype/define/typedef
+* add change description factory, as always attaching complete rendered strings to a change bloats memory, also breaks on language change
+* fix all the mouse pointer changes in the bytearray views
 * try to merge both bytearray views into one
 * add dialogplugins to DocumentSyncManager for the interaction
 * show parameter field disabled, if there are no parameters
