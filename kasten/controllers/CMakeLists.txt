@@ -79,10 +79,22 @@ set( LIBCHECKSUM_SRCS
   view/libbytearraychecksum/algorithm/modsum16bytearraychecksumalgorithm.cpp
   view/libbytearraychecksum/algorithm/modsum32bytearraychecksumalgorithm.cpp
   view/libbytearraychecksum/algorithm/modsum64bytearraychecksumalgorithm.cpp
+## NEWCHECKSUM(start)
+## Here add the names of your source files of your checksum algorithm,
+## e.g.
+##   view/libbytearraychecksum/algorithm/mybytearraychecksumalgorithm.cpp
+## NEWCHECKSUM(end)
   view/libbytearraychecksum/algorithm/nobytearraychecksumparameterset.cpp
   view/libbytearraychecksum/algorithm/nobytearraychecksumparametersetedit.cpp
   view/libbytearraychecksum/algorithm/modsumbytearraychecksumparameterset.cpp
   view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp
+## NEWCHECKSUMPARAMETERSET(start)
+## Here add the names of your source files of your checksum parameter set and
+## of the widget to edit the checksum parameter set,
+## e.g.
+##   view/libbytearraychecksum/algorithm/mybytearraychecksumparameterset.cpp
+##   view/libbytearraychecksum/algorithm/mybytearraychecksumparametersetedit.cpp
+## NEWCHECKSUMPARAMETERSET(end)
   ${QCA2CHECKSUM_SRCS}
 )
 set( CHECKSUMCONTROLLER_SRCS
@@ -310,15 +322,22 @@ install( FILES ${oktete_kastencore_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR
 if( KASTEN_BUILD_INTERNAL_TEMPLATES )
 include_directories(
   view/libbytearrayfilter/filter
+  view/libbytearraychecksum/algorithm
 )
 set( libfilter_templates_SRCS
   view/libbytearrayfilter/filter/template/template_bytearrayfilter.cpp
   view/libbytearrayfilter/filter/template/template_bytearrayfilterparameterset.cpp
   view/libbytearrayfilter/filter/template/template_bytearrayfilterparametersetedit.cpp
 )
+set( libchecksum_templates_SRCS
+  view/libbytearraychecksum/algorithm/template/template_bytearraychecksumalgorithm.cpp
+  view/libbytearraychecksum/algorithm/template/template_bytearraychecksumparameterset.cpp
+  view/libbytearraychecksum/algorithm/template/template_bytearraychecksumparametersetedit.cpp
+)
 
 set( okteta_kastencontrollers_templates_SRCS
   ${libfilter_templates_SRCS}
+  ${libchecksum_templates_SRCS}
 )
 
 kde4_add_library( oktetakastencontrollertemplates  STATIC ${okteta_kastencontrollers_templates_SRCS} )

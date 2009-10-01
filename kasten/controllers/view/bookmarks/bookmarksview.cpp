@@ -31,6 +31,8 @@
 #include <KPushButton>
 #include <KLocale>
 #include <KGuiItem>
+#include <KToolBar>
+#include <KActionCollection>
 // Qt
 #include <QtGui/QLayout>
 #include <QtGui/QTreeView>
@@ -41,14 +43,23 @@ namespace Kasten
 {
 
 BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
- : QWidget( parent ), mTool( tool )
+  : QWidget( parent ),
+    mTool( tool )
 {
     mBookmarkListModel = new BookmarkListModel( mTool, this );
     connect( mBookmarkListModel, SIGNAL(modelReset()),
              SLOT(onBookmarkSelectionChanged()) );
 
-    QVBoxLayout *baseLayout = new QVBoxLayout( this );
+    QVBoxLayout* baseLayout = new QVBoxLayout( this );
     baseLayout->setMargin( 0 );
+
+    // tool bar
+    KToolBar* toolbar = new KToolBar( this );
+    toolbar->setMovable( false );
+    toolbar->setToolButtonStyle( Qt::ToolButtonIconOnly );
+    toolbar->setIconDimensions( 16 );
+    toolbar->setContextMenuPolicy( Qt::NoContextMenu );
+    baseLayout->addWidget( toolbar );
 
     mBookmarkListView = new QTreeView( this );
     mBookmarkListView->setObjectName( "BookmarkListView" );
@@ -68,6 +79,9 @@ BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
     baseLayout->addWidget( mBookmarkListView, 10 );
 
     // actions
+    KActionCollection* actionCollection = new KActionCollection( this );
+
+
     QHBoxLayout* actionsLayout = new QHBoxLayout();
 
     const KGuiItem createBookmarkGuiItem( QString()/*i18n("C&opy")*/, "bookmark-new",
