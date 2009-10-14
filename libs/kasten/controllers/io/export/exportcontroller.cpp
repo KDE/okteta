@@ -49,7 +49,7 @@ namespace Kasten
 {
 
 ExportController::ExportController( ViewManager* viewManager, DocumentManager* documentManager, KXMLGUIClient* guiClient )
- : mViewManager( viewManager ), mDocumentManager( documentManager ), mGuiClient( guiClient ), mModel( 0 )
+ : mViewManager( viewManager ), mDocumentManager( documentManager ), mModel( 0 )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 

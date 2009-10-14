@@ -60,7 +60,6 @@ class KASTENCONTROLLERS_EXPORT CopyAsController : public AbstractXmlGuiControlle
   protected:
     ViewManager* mViewManager;
     DocumentManager* mDocumentManager;
-    KXMLGUIClient *mGuiClient;
 
     AbstractModel* mModel;
     If::DataSelectable *mSelectionControl;
