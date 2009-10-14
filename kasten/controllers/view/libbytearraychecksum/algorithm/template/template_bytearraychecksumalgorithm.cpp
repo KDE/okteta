@@ -7,8 +7,8 @@
 */
 
 //// ADAPT(start)
-//// rename "template_bytearrayfilter.h" to the name of the header of your filter,
-//// e.g. "mybytearrayfilter.h"
+//// rename "template_bytearraychecksumalgorithm.h" to the name of the header of your checksum algorithm,
+//// e.g. "mybytearraychecksumalgorithm.h"
 #include "template_bytearraychecksumalgorithm.h"
 //// ADAPT(end)
 
@@ -21,8 +21,8 @@
 Template_ByteArrayChecksumAlgorithm::Template_ByteArrayChecksumAlgorithm()
   : AbstractByteArrayChecksumAlgorithm(
 //// ADAPT(start)
-//// change "TEMPLATE OPERATION ON" to a short and descriptive name of the operation of this filter, also in upper case
-     i18nc("name of the checksum algorithm", "Adler-32") )
+//// change "TEMPLATE" to a short and descriptive name of the checksum algorithm
+     i18nc("name of the checksum algorithm", "Template") )
 //// ADAPT(end)
 {}
 
