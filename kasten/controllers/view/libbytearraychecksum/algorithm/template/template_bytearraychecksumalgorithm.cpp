@@ -40,7 +40,6 @@ bool Template_ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
 
     int sum = 0;
 
-    // TODO: this is the "inefficient but straightforward implementation" from the Wikipedia entry, search for improved
     Okteta::Address nextBlockEnd = range.start() + CalculatedByteCountSignalLimit;
     for( Okteta::Address i = range.start(); i<=range.end(); ++i )
     {
