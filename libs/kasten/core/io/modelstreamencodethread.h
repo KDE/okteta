@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MODELSTREAMENCODETHREAD_U
-#define MODELSTREAMENCODETHREAD_U
+#ifndef MODELSTREAMENCODETHREAD_H
+#define MODELSTREAMENCODETHREAD_H
 
 // lib
 #include "kastencore_export.h"
