@@ -51,7 +51,7 @@ class Template_ByteArrayChecksumParameterSetEdit : public AbstractByteArrayCheck
 //// define slots to catch changes in the values to check if the current state is valid or not
 //// not needed if there cannot be invalid states
   protected Q_SLOTS:
-    void onLevelChanged( int value );
+    void onBitNumberChanged( int value );
 //// ADAPT(end)
 
 //// ADAPT(start)

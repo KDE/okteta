@@ -52,18 +52,18 @@ Template_ByteArrayChecksumParameterSetEdit::Template_ByteArrayChecksumParameterS
     mBitNumberEdit->setRange( 0, 8 );
     // start with the invalid number
     mBitNumberEdit->setValue( 0 );
-    connect( mBitNumberEdit, SIGNAL(valueChanged( int )), SLOT(onLevelChanged( int )) );
+    connect( mBitNumberEdit, SIGNAL(valueChanged( int )), SLOT(onBitNumberChanged( int )) );
 
     const QString levelLabelText =
-         i18nc( "@label:spinbox decimal value up to which bytes are set to 0",
-                "Level:" );
+         i18nc( "@label:spinbox number of the bit to use",
+                "Number of bit:" );
     const QString levelToolTip =
         i18nc( "@info:tooltip",
-               "The decimal value up to which the bytes are set to x00. Bytes above this value are set to x01." );
+               "The number of the bit to use for the parity calculation. 1 means the LSB, 8 the MSB." );
     mBitNumberEdit->setToolTip( levelToolTip );
     const QString levelWhatsThis =
         i18nc( "@info:whatsthis",
-               "Control the value which decides how the bytes are ending up. And more explanation." );
+               "Select the bit which should be used for the parity calculation. And more explanation." );
     mBitNumberEdit->setWhatsThis( levelWhatsThis );
 
     baseLayout->addRow( levelLabelText, mBitNumberEdit );
@@ -104,7 +104,7 @@ void Template_ByteArrayChecksumParameterSetEdit::getParameterSet( AbstractByteAr
 //// ADAPT(start)
 //// define the slots to catch changes in the values to check if the current state is valid or not
 //// not needed if there cannot be invalid states
-void Template_ByteArrayChecksumParameterSetEdit::onLevelChanged( int value )
+void Template_ByteArrayChecksumParameterSetEdit::onBitNumberChanged( int value )
 {
     const bool isValid = ( value != 0 );
 
