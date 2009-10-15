@@ -29,7 +29,9 @@
 #include <bytearrayviewfactory.h>
 #include <filesystem/bytearrayrawfilesynchronizerfactory.h>
 #include <bytearraystreamencoderconfigeditorfactoryfactory.h>
+#include <bytearraydatageneratorconfigeditorfactoryfactory.h>
 #include <bytearraystreamencoderfactory.h>
+#include <bytearraydatageneratorfactory.h>
 // Kasten gui
 #include <viewmanager.h>
 #include <modelcodecviewmanager.h>
@@ -79,15 +81,23 @@ int OktetaProgram::execute()
     const QList<AbstractModelStreamEncoder*> encoderList =
         ByteArrayStreamEncoderFactory::createStreamEncoders();
 
+    const QList<AbstractModelDataGenerator*> generatorList =
+        ByteArrayDataGeneratorFactory::createDataGenerators();
+
     const QList<AbstractModelStreamEncoderConfigEditorFactory*> encoderConfigEditorFactoryList =
         ByteArrayStreamEncoderConfigEditorFactoryFactory::createFactorys();
 
+    const QList<AbstractModelDataGeneratorConfigEditorFactory*> generatorConfigEditorFactoryList =
+        ByteArrayDataGeneratorConfigEditorFactoryFactory::createFactorys();
+
     mDocumentManager->codecManager()->setEncoders( encoderList );
+    mDocumentManager->codecManager()->setGenerators( generatorList );
     mDocumentManager->createManager()->setDocumentFactory( new ByteArrayDocumentFactory() );
     mDocumentManager->syncManager()->setDocumentSynchronizerFactory( new ByteArrayRawFileSynchronizerFactory() );
 
     mViewManager->setViewFactory( new ByteArrayViewFactory() );
     mViewManager->codecViewManager()->setEncoderConfigEditorFactories( encoderConfigEditorFactoryList );
+    mViewManager->codecViewManager()->setGeneratorConfigEditorFactories( generatorConfigEditorFactoryList );
 
     // started by session management?
     if( programCore.isSessionRestored() )

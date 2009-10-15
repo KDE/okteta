@@ -31,8 +31,6 @@
 #include <filesystem/bytearrayrawfilesynchronizerfactory.h>
 #include <overwriteonly/overwriteonlycontroller.h>
 #include <overwritemode/overwritemodecontroller.h>
-#include <insertpattern/insertpatterncontroller.h>
-#include <insertpattern/insertsequencecontroller.h>
 #include <gotooffset/gotooffsetcontroller.h>
 #include <selectrange/selectrangecontroller.h>
 #include <search/searchcontroller.h>
@@ -50,6 +48,7 @@
 // #include <document/readonly/readonlybarcontroller.h>
 // #include <io/synchronize/synchronizecontroller.h>
 #include <io/clipboard/clipboardcontroller.h>
+#include <io/insert/insertcontroller.h>
 #include <io/copyas/copyascontroller.h>
 #include <io/export/exportcontroller.h>
 #include <view/version/versioncontroller.h>
@@ -99,6 +98,8 @@ OktetaPart::OktetaPart( QObject* parent,
     mControllers.append( new Kasten::SelectController(this) );
     if( modus != BrowserViewModus )
         mControllers.append( new Kasten::ClipboardController(this) );
+//     if( modus != BrowserViewModus )
+//         mControllers.append( new Kasten::InsertController(mProgram->viewManager(),mProgram->documentManager(),this) );
 //     mControllers.append( new Kasten::CopyAsController(mProgram->viewManager(),mProgram->documentManager(),this) );
     if( modus == ReadWriteModus )
         mControllers.append( new Kasten::OverwriteModeController(this) );
@@ -107,10 +108,6 @@ OktetaPart::OktetaPart( QObject* parent,
         mControllers.append( new Kasten::ReplaceController(this,widget) );
 //     mControllers.append( new Kasten::GotoOffsetController(mGroupedViews,this) );
 //     mControllers.append( new Kasten::SelectRangeController(mGroupedViews,this) );
-    if( modus == ReadWriteModus )
-        mControllers.append( new Kasten::InsertPatternController(this) );
-    if( modus == ReadWriteModus )
-        mControllers.append( new Kasten::InsertSequenceController(this) );
 //     mControllers.append( new Kasten::BookmarksController(this) );
     mPrintController = new Kasten::PrintController( this );
     mControllers.append( mPrintController );

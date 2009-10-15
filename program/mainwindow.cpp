@@ -51,8 +51,6 @@
 // controllers
 #include <overwriteonly/overwriteonlycontroller.h>
 #include <overwritemode/overwritemodecontroller.h>
-#include <insertpattern/insertpatterncontroller.h>
-#include <insertpattern/insertsequencecontroller.h>
 #include <gotooffset/gotooffsetcontroller.h>
 #include <selectrange/selectrangecontroller.h>
 #include <search/searchcontroller.h>
@@ -72,6 +70,7 @@
 #include <io/setremote/setremotecontroller.h>
 #include <io/synchronize/synchronizecontroller.h>
 #include <io/clipboard/clipboardcontroller.h>
+#include <io/insert/insertcontroller.h>
 #include <io/copyas/copyascontroller.h>
 #include <io/export/exportcontroller.h>
 #include <view/version/versioncontroller.h>
@@ -152,6 +151,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new ZoomController(this) );
     addXmlGuiController( new SelectController(this) );
     addXmlGuiController( new ClipboardController(this) );
+    addXmlGuiController( new InsertController(mProgram->viewManager(),mProgram->documentManager(),this) );
     addXmlGuiController( new CopyAsController(mProgram->viewManager(),mProgram->documentManager(),this) );
 
     addTool( new FileSystemBrowserToolView(new FileSystemBrowserTool( mProgram->documentManager() )) );
@@ -167,8 +167,6 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new ReplaceController(this,this) );
     addXmlGuiController( new GotoOffsetController(mGroupedViews,this) );
     addXmlGuiController( new SelectRangeController(mGroupedViews,this) );
-    addXmlGuiController( new InsertPatternController(this) );
-    addXmlGuiController( new InsertSequenceController(this) );
     addXmlGuiController( new BookmarksController(this) );
     addXmlGuiController( new PrintController(this) );
     addXmlGuiController( new ViewConfigController(this) );

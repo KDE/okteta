@@ -22,12 +22,7 @@
   </Menu>
   <Menu name="edit">
     <Action name="copy_as" append="edit_paste_merge" />
-    <Menu name="insert" append="edit_paste_merge">
-      <text context="@title:menu">Insert</text>
-      <Action name="insert_pattern" />
-      <Action name="insert_sequence" />
-      <Action name="insert_file" />
-    </Menu>
+    <Action name="insert" append="edit_paste_merge" />
     <Action name="edit_select" append="edit_select_merge" />
     <Separator append="edit_select_merge" />
     <Action name="set_overwrite" append="edit_select_merge" />

@@ -26,7 +26,9 @@
 #include "part.h"
 // Okteta Kasten
 #include <bytearraystreamencoderconfigeditorfactoryfactory.h>
+#include <bytearraydatageneratorconfigeditorfactoryfactory.h>
 #include <bytearraystreamencoderfactory.h>
+#include <bytearraydatageneratorfactory.h>
 // KDE
 #include <KComponentData>
 #include <KAboutData>
@@ -64,13 +66,21 @@ OktetaPartFactory::OktetaPartFactory()
 //     const QList<AbstractModelStreamEncoder*> encoderList =
 //         ByteArrayStreamEncoderFactory::createStreamEncoders();
 
+//     const QList<AbstractModelDataGenerator*> generatorList =
+//         ByteArrayDataGeneratorFactory::createDataGenerators();
+
 //     const QList<AbstractModelStreamEncoderConfigEditorFactory*> encoderConfigEditorFactoryList =
 //         ByteArrayStreamEncoderConfigEditorFactoryFactory::createFactorys();
 
+//     const QList<AbstractModelDataGeneratorConfigEditorFactory*> generatorConfigEditorFactoryList =
+//         ByteArrayDataGeneratorConfigEditorFactoryFactory::createFactorys();
+
 //     mDocumentManager->codecManager()->setEncoders( encoderList );
+//     mDocumentManager->codecManager()->setGenerators( generatorList );
 //     mDocumentManager->syncManager()->setDocumentSynchronizerFactory( new ByteArrayRawFileSynchronizerFactory() );
 
 //     mViewManager->codecViewManager()->setEncoderConfigEditorFactories( encoderConfigEditorFactoryList );
+//     mViewManager->codecViewManager()->setGeneratorConfigEditorFactories( generatorConfigEditorFactoryList );
 }
 
 
