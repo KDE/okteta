@@ -15,6 +15,7 @@ set( kastencore_CamelCase_HDRS
   AbstractConnectJob
   AbstractLoadJob
   AbstractModelStreamEncoder
+  AbstractModelDataGenerator
   AbstractModelExporter
   AbstractExportJob
 
@@ -28,6 +29,7 @@ set( kastencore_CamelCase_HDRS
   ModelEncoderFileSystemExporter
   ModelEncoderFileSystemExportJob
   ModelStreamEncodeThread
+  ModelDataGenerateThread
 
   DocumentVersionData
   Person
@@ -51,6 +53,8 @@ set( kastengui_CamelCase_HDRS
   AbstractXmlGuiController
   AbstractModelStreamEncoderConfigEditor
   AbstractModelStreamEncoderConfigEditorFactory
+  AbstractModelDataGeneratorConfigEditor
+  AbstractModelDataGeneratorConfigEditorFactory
   AbstractModelExporterConfigEditor
   AbstractModelExporterConfigEditorFactory
   ModelEncoderFileSystemExporterConfigEditor
