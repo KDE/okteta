@@ -43,14 +43,18 @@ set( okteta_sourcecode_streamencoder_SRCS
   io/bytearraysourcecodestreamencoder.cpp
 )
 
+set( okteta_viewtext_streamencoder_SRCS
+  ${okteta_textrenderer_SRCS}
+  io/bytearrayviewtextstreamencoder.cpp
+)
+
 set( okteta_kastengui_io_SRCS
   io/abstractbytearraystreamencoder.cpp
   io/bytearraytextstreamencoderpreview.cpp
   ${okteta_values_streamencoder_SRCS}
   io/bytearraytextstreamencoder.cpp
   ${okteta_sourcecode_streamencoder_SRCS}
-  ${okteta_textrenderer_SRCS}
-  io/bytearrayviewtextstreamencoder.cpp
+  ${okteta_viewtext_streamencoder_SRCS}
   io/bytearraystreamencoderfactory.cpp
   io/bytearraystreamencoderconfigeditorfactoryfactory.cpp
 )
