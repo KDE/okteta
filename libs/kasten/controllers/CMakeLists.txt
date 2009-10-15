@@ -79,6 +79,10 @@ set( SELECTCONTROLLER_SRCS
 set( CLIPBOARDCONTROLLER_SRCS
   io/clipboard/clipboardcontroller.cpp
 )
+set( insertcontroller_SRCS
+  io/insert/insertdialog.cpp
+  io/insert/insertcontroller.cpp
+)
 set( COPYASCONTROLLER_SRCS
   io/copyas/copyasdialog.cpp
   io/copyas/copyascontroller.cpp
@@ -131,6 +135,7 @@ set( kastencontroller_LIB_SRCS
   ${SYNCHRONIZECONTROLLER_SRCS}
   ${SELECTCONTROLLER_SRCS}
   ${CLIPBOARDCONTROLLER_SRCS}
+  ${insertcontroller_SRCS}
   ${COPYASCONTROLLER_SRCS}
   ${EXPORTCONTROLLER_SRCS}
   ${QUITCONTROLLER_SRCS}
