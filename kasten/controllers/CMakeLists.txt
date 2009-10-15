@@ -139,13 +139,6 @@ set( REPLACECONTROLLER_SRCS
   view/replace/replacetool.cpp
   view/replace/replacecontroller.cpp
 )
-set( INSERTPATTERNCONTROLLER_SRCS
-  view/insertpattern/insertpatterntool.cpp
-  view/insertpattern/insertpatterndialog.cpp
-  view/insertpattern/insertpatterncontroller.cpp
-  view/insertpattern/insertsequencetool.cpp
-  view/insertpattern/insertsequencecontroller.cpp
-)
 set( LIBFILTER_SRCS
   view/libbytearrayfilter/abstractbytearrayfilter.cpp
   view/libbytearrayfilter/abstractbytearrayfilterparameterset.cpp
@@ -250,7 +243,6 @@ set( OKTETA_KASTEN_CONTROLLERS_SRCS
   ${REPLACECONTROLLER_SRCS}
   ${LIBFILTER_SRCS}
   ${FILTERCONTROLLER_SRCS}
-  ${INSERTPATTERNCONTROLLER_SRCS}
   ${GOTOOFFSETCONTROLLER_SRCS}
   ${SELECTRANGECONTROLLER_SRCS}
   ${PRINTCONTROLLER_SRCS}
