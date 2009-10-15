@@ -48,7 +48,7 @@ set( okteta_viewtext_streamencoder_SRCS
   io/bytearrayviewtextstreamencoder.cpp
 )
 
-set( okteta_kastengui_io_SRCS
+set( okteta_streamencoder_SRCS
   io/abstractbytearraystreamencoder.cpp
   io/bytearraytextstreamencoderpreview.cpp
   ${okteta_values_streamencoder_SRCS}
@@ -57,6 +57,28 @@ set( okteta_kastengui_io_SRCS
   ${okteta_viewtext_streamencoder_SRCS}
   io/bytearraystreamencoderfactory.cpp
   io/bytearraystreamencoderconfigeditorfactoryfactory.cpp
+)
+
+set( okteta_pattern_datagenerator_SRCS
+  io/bytearraypatterngeneratorconfigeditor.cpp
+  io/bytearraypatterngeneratorconfigeditorfactory.cpp
+  io/bytearraypatterngenerator.cpp
+)
+
+set( okteta_sequence_datagenerator_SRCS
+  io/bytearraysequencegenerator.cpp
+)
+
+set( okteta_datagenerator_SRCS
+  ${okteta_pattern_datagenerator_SRCS}
+  ${okteta_sequence_datagenerator_SRCS}
+  io/bytearraydatageneratorfactory.cpp
+  io/bytearraydatageneratorconfigeditorfactoryfactory.cpp
+)
+
+set( okteta_kastengui_io_SRCS
+  ${okteta_streamencoder_SRCS}
+  ${okteta_datagenerator_SRCS}
 )
 
 set( okteta_kastengui_view_SRCS
