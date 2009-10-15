@@ -2,6 +2,7 @@ set( KASTEN_REL_DIR ../../libs/kasten )
 set( OKTETA_REL_DIR ../.. )
 
 include_directories(
+  io
   view
   ../core
   ../core/document
@@ -46,6 +47,12 @@ set( okteta_sourcecode_streamencoder_SRCS
 set( okteta_viewtext_streamencoder_SRCS
   ${okteta_textrenderer_SRCS}
   io/bytearrayviewtextstreamencoder.cpp
+)
+
+set( okteta_pattern_datagenerator_SRCS
+#   io/bytearrayvaluesstreamencoderconfigeditor.cpp
+#   io/bytearrayvaluesstreamencoderconfigeditorfactory.cpp
+  io/bytearraypatterngenerator.cpp
 )
 
 set( okteta_kastengui_io_SRCS
@@ -109,3 +116,20 @@ set_target_properties( oktetakastengui  PROPERTIES VERSION ${GENERIC_LIB_VERSION
 install( TARGETS oktetakastengui  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${oktete_kastengui_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )
+
+
+if( KASTEN_BUILD_INTERNAL_TEMPLATES )
+
+set( okteta_kastengui_io_templates_SRCS
+  io/template/bytearray_template_streamencoder.cpp
+  io/template/bytearray_template_streamencoderconfigeditor.cpp
+  io/template/bytearray_template_streamencoderconfigeditorfactory.cpp
+)
+
+set( okteta_kastengui_templates_SRCS
+  ${okteta_kastengui_io_templates_SRCS}
+)
+
+kde4_add_library( oktetakastenguitemplates  STATIC ${okteta_kastengui_templates_SRCS} )
+
+endif( KASTEN_BUILD_INTERNAL_TEMPLATES )
