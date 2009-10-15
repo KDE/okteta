@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -40,6 +40,7 @@ class AbstractModel;
 class AbstractModelSelection;
 class AbstractModelStreamEncoder;
 class AbstractModelStreamDecoder;
+class AbstractModelDataGenerator;
 class AbstractModelExporter;
 class DocumentManager;
 
@@ -63,12 +64,14 @@ class KASTENCORE_EXPORT ModelCodecManager : public QObject
   public:
     QList<AbstractModelStreamEncoder*> encoderList( AbstractModel* model, const AbstractModelSelection* selection ) const;
     QList<AbstractModelStreamDecoder*> decoderList() const;
+    QList<AbstractModelDataGenerator*> generatorList() const;
 
     QList<AbstractModelExporter*> exporterList( AbstractModel* model, const AbstractModelSelection* selection ) const;
 
   public:
     void setEncoders( const QList<AbstractModelStreamEncoder*>& encoderList );
     void setDecoders( const QList<AbstractModelStreamDecoder*>& decoderList );
+    void setGenerators( const QList<AbstractModelDataGenerator*>& generatorList );
     void setWidget( QWidget* widget );
 
   protected:
@@ -80,6 +83,7 @@ class KASTENCORE_EXPORT ModelCodecManager : public QObject
     // temporary hack: hard coded codecs for byte arrays
     QList<AbstractModelStreamEncoder*> mEncoderList;
     QList<AbstractModelStreamDecoder*> mDecoderList;
+    QList<AbstractModelDataGenerator*> mGeneratorList;
     QList<AbstractModelExporter*> mExporterList;
 };
 

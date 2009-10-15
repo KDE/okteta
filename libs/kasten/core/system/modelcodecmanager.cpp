@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -26,6 +26,7 @@
 #include "modelencoderfilesystemexporter.h"
 #include "abstractmodelstreamencoder.h"
 // #include "abstractmodelstreamdecoder.h"
+#include "abstractmodeldatagenerator.h"
 #include "jobmanager.h"
 #include "documentmanager.h"
 #include "abstractexportjob.h"
@@ -51,6 +52,9 @@ Q_UNUSED( selection )
 
 QList<AbstractModelStreamDecoder*>
 ModelCodecManager::decoderList() const { return mDecoderList; }
+
+QList<AbstractModelDataGenerator*>
+ModelCodecManager::generatorList() const { return mGeneratorList; }
 
 QList<AbstractModelExporter*>
 ModelCodecManager::exporterList( AbstractModel* model, const AbstractModelSelection* selection ) const
@@ -78,6 +82,11 @@ void ModelCodecManager::setEncoders( const QList<AbstractModelStreamEncoder*>& e
 void ModelCodecManager::setDecoders( const QList<AbstractModelStreamDecoder*>& decoderList )
 {
     mDecoderList = decoderList;
+}
+
+void ModelCodecManager::setGenerators( const QList<AbstractModelDataGenerator*>& generatorList )
+{
+    mGeneratorList = generatorList;
 }
 
 void ModelCodecManager::encodeToStream( AbstractModelStreamEncoder* encoder,
@@ -142,6 +151,7 @@ ModelCodecManager::~ModelCodecManager()
     qDeleteAll( mExporterList );
     qDeleteAll( mEncoderList );
 //     qDeleteAll( mDecoderList );
+    qDeleteAll( mGeneratorList );
 }
 
 }

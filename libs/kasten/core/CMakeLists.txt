@@ -39,6 +39,8 @@ set( KASTEN_CORE_IO_SRCS
   io/abstractmodelstreamencoder.cpp
   io/abstractexportjob.cpp
   io/abstractmodelexporter.cpp
+  io/modeldatageneratethread.cpp
+  io/abstractmodeldatagenerator.cpp
   io/modelstreamencodethread.cpp
   io/abstractmodelsynchronizer.cpp
   io/abstractmodelsynchronizerfactory.cpp
@@ -107,9 +109,11 @@ set( kastencore_LIB_HDRS
   io/abstractsyncfromremotejob.h
   io/abstractconnectjob.h
   io/abstractmodelstreamencoder.h
+  io/abstractmodeldatagenerator.h
   io/abstractexportjob.h
   io/abstractmodelexporter.h
   io/modelstreamencodethread.h
+  io/modeldatageneratethread.h
   io/abstractloadjob.h
   io/abstractmodelsynchronizerfactory.h
   system/jobmanager.h
