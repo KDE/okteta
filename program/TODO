@@ -2,6 +2,8 @@ Unimplemented Feature of KHexEdit:
 ----------------------------------
 
 + <Action name="paste_into_new_file" />
++ <Action name="insert_file" />
+
 + Zugriffsrechte (Größe)
 + Transcoder
 + bitstream (navigating on bit-level)
@@ -231,6 +233,8 @@ Done for 0.4:
 * added insert tool for full byte sequence 0-255
 * added templates for binary filters
 * added templates for checksum/hashsum algorithm
+* added AbstractModelDataGenerator + config + controller
+* ported InsertPatternController and InsertSequenceController to AbstractModelDataGenerator
 
 Next to work on:
 ----------------------------------
@@ -266,7 +270,6 @@ Later on:
 * show parameter field disabled, if there are no parameters
 * selecting an operation/algorithm should move focus to parameter field (cmp. format input)
   or execute button if there are no parameters
-* catch Enter/Return for tool views and execute current command
 * move search ignoreCase and whole words into ByteArrayService, and reenable Whole words only in Search Tool
 * make status bar tools more flat, e.g. see how the zoom tool of KOffice is done
 * for close all and exit make a collective list of unsaved in one dialog instead of single requests
@@ -276,7 +279,9 @@ Later on:
 * see how the cursor and the value editor could be turned into tool+view
 * fix info and string docker (all with update function) to just work on update, react to change of data origin
 * add option for offset and char comments to Source code encoder (cmp #163204)
-* Support for Drop, both Import into and Open
+* Support for Drop, both Import into and Open, also not just url, but also data
+* "New" can also use generator and clipboard
+* snippets tool which can be used to put data aside (variant of clipboard)
 * rework import and paste as:
     <!Menu name="import" append="open_merge">
       <text context="@title:menu">Import</text>
@@ -332,6 +337,9 @@ See "Insert", is generated as well as from a source, so perhaps join there?
 * make bookmarks program-wide, switch doc if needed.
 * add bookmark tool
 * hovering drag over bookmark in tool should select it
+* a "painting" cursor tool which stamps a pattern, chosen from a selection
+* option to paint background of color dependent on value (0-white, 255-black)
+* overview with pixels for bytes each in color of bytetext
 * store bookmarks for usage on further opening, similar to Okular's memory
 * bookmarks to load vs. bookmarks/marked regions in loaded documents? lokal vs. global perhaps? search inside.
 * in-place saving instead of new-and-delete-old (ZFS Snpashots work blockbased, so only changed blocks get snapshotted)
