@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -41,6 +41,9 @@ class AbstractModelStreamEncoder;
 class AbstractModelExporterConfigEditorFactory;
 class AbstractModelExporterConfigEditor;
 class AbstractModelExporter;
+class AbstractModelDataGeneratorConfigEditorFactory;
+class AbstractModelDataGeneratorConfigEditor;
+class AbstractModelDataGenerator;
 class ViewManager;
 
 
@@ -55,14 +58,17 @@ class KASTENGUI_EXPORT ModelCodecViewManager : public QObject
   public:
     AbstractModelStreamEncoderConfigEditor* createConfigEditor( AbstractModelStreamEncoder* encoder ) const;
     AbstractModelExporterConfigEditor* createConfigEditor( AbstractModelExporter* exporter ) const;
+    AbstractModelDataGeneratorConfigEditor* createConfigEditor( AbstractModelDataGenerator* generator ) const;
 
   public:
     void setEncoderConfigEditorFactories( const QList<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList );
     void setExporterConfigEditorFactories( const QList<AbstractModelExporterConfigEditorFactory*>& factoryList );
+    void setGeneratorConfigEditorFactories( const QList<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList );
 
   protected:
     QList<AbstractModelStreamEncoderConfigEditorFactory*> mEncoderFactoryList;
     QList<AbstractModelExporterConfigEditorFactory*> mExporterFactoryList;
+    QList<AbstractModelDataGeneratorConfigEditorFactory*> mGeneratorFactoryList;
 };
 
 }

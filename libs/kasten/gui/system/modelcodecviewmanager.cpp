@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -30,6 +30,9 @@
 #include <abstractmodelexporterconfigeditorfactory.h>
 #include <abstractmodelexporterconfigeditor.h>
 #include <abstractmodelexporter.h>
+#include <abstractmodeldatageneratorconfigeditorfactory.h>
+#include <abstractmodeldatageneratorconfigeditor.h>
+#include <abstractmodeldatagenerator.h>
 
 
 namespace Kasten
@@ -53,6 +56,11 @@ void ModelCodecViewManager::setExporterConfigEditorFactories( const QList<Abstra
     mExporterFactoryList = factoryList;
 }
 
+void ModelCodecViewManager::setGeneratorConfigEditorFactories( const QList<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList )
+{
+    mGeneratorFactoryList = factoryList;
+}
+
 AbstractModelStreamEncoderConfigEditor* ModelCodecViewManager::createConfigEditor( AbstractModelStreamEncoder* encoder ) const
 {
     AbstractModelStreamEncoderConfigEditor* result = 0;
@@ -74,6 +82,20 @@ AbstractModelExporterConfigEditor* ModelCodecViewManager::createConfigEditor( Ab
     foreach( const AbstractModelExporterConfigEditorFactory* factory, mExporterFactoryList )
     {
         result = factory->tryCreateConfigEditor( exporter );
+        if( result )
+            break;
+    }
+
+    return result;
+}
+
+AbstractModelDataGeneratorConfigEditor* ModelCodecViewManager::createConfigEditor( AbstractModelDataGenerator* generator ) const
+{
+    AbstractModelDataGeneratorConfigEditor* result = 0;
+
+    foreach( const AbstractModelDataGeneratorConfigEditorFactory* factory, mGeneratorFactoryList )
+    {
+        result = factory->tryCreateConfigEditor( generator );
         if( result )
             break;
     }

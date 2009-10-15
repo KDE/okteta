@@ -37,6 +37,7 @@ set( kastengui_io_configeditor_SRCS
   io/filesystem/modelencoderfilesystemexporterconfigeditor.cpp
   io/abstractmodelstreamencoderconfigeditor.cpp
   io/abstractmodelexporterconfigeditor.cpp
+  io/abstractmodeldatageneratorconfigeditor.cpp
 )
 set( kastengui_io_SRCS
   ${kastengui_io_configeditor_SRCS}
@@ -46,8 +47,10 @@ set( kastengui_io_HDRS
   io/filesystem/modelencoderfilesystemexporterconfigeditorfactory.h
   io/abstractmodelstreamencoderconfigeditor.h
   io/abstractmodelexporterconfigeditor.h
-  io/abstractmodelexporterconfigeditorfactory.h
+  io/abstractmodeldatageneratorconfigeditor.h
   io/abstractmodelstreamencoderconfigeditorfactory.h
+  io/abstractmodelexporterconfigeditorfactory.h
+  io/abstractmodeldatageneratorconfigeditorfactory.h
 )
 
 
