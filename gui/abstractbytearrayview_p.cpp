@@ -673,7 +673,7 @@ void AbstractByteArrayViewPrivate::paste()
 
 void AbstractByteArrayViewPrivate::pasteData( const QMimeData* data )
 {
-    if( !data )
+    if( ! data || data->formats().isEmpty() )
         return;
 
     // if there is a octet stream, use it, otherwise take the dump of the format
