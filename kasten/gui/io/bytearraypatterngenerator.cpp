@@ -35,7 +35,7 @@ static const char PatternMimeType[] = "application/octet-stream";
 
 
 ByteArrayPatternGeneratorSettings::ByteArrayPatternGeneratorSettings()
-  : pattern("test"), count( 1 )
+  : pattern( 1, 0 ), count( 1 )
 {
 }
 
