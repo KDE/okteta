@@ -24,21 +24,72 @@
 
 // lib
 #include "bytearraydocument.h"
+// Okteta core
+#include <piecetablebytearraymodel.h>
 // Kasten core
 #include <person.h>
 // KDE
 #include <KLocale>
+// Qt
+#include <QtCore/QMimeData>
 
 
 namespace Kasten
 {
 
 static int newByteArrayDocumentCounter = 0;
+static const char OctetStreamFormatName[] = "application/octet-stream";
 
+bool ByteArrayDocumentFactory::canCreateFromData( const QMimeData* mimeData )
+{
+    Q_UNUSED( mimeData );
+
+    // we currently take everything, see createFromData()
+    return true;
+}
 
 AbstractDocument* ByteArrayDocumentFactory::create()
 {
     ByteArrayDocument* document = new ByteArrayDocument( i18nc("The byte array was new created.","New created.") );
+
+    ++newByteArrayDocumentCounter;
+
+    // TODO: use document->typeName() ?
+    document->setTitle(
+        i18ncp("numbered title for a created document without a filename",
+               "[New Byte Array]","[New Byte Array %1]",newByteArrayDocumentCounter) );
+
+    document->setOwner( Person::createEgo() );
+
+    return document;
+}
+
+AbstractDocument* ByteArrayDocumentFactory::createFromData( const QMimeData* mimeData )
+{
+    if( ! mimeData || mimeData->formats().isEmpty() )
+        return create();
+
+    // SYNC: with abstractbytearrayview_p.cpp
+    // if there is a octet stream, use it, otherwise take the dump of the format
+    // with the highest priority
+    // TODO: this may not be, what is expected, think about it, if we just
+    // take byte array descriptions, like encodings in chars or values
+    // would need the movement of the encoders into the core library
+    const QString octetStreamFormatName = QString::fromLatin1( OctetStreamFormatName );
+    const QString dataFormatName = ( mimeData->hasFormat(octetStreamFormatName) ) ?
+        octetStreamFormatName :
+        mimeData->formats()[0];
+
+    // TODO: bytearray gets a copy, than passes it as deep copy to the model, just to delete its own
+    // make the model use the internal copy, e.g. by adding a QByteArray variant to the PieceTableByteArrayModel constructor
+    const QByteArray data = mimeData->data( dataFormatName );
+
+    Okteta::PieceTableByteArrayModel* byteArray =
+        new Okteta::PieceTableByteArrayModel( (const Okteta::Byte*)data.constData(), data.size(), false );
+//     byteArray->setModified( false ); TODO: needed?
+
+    // TODO: pass name of generator
+    ByteArrayDocument* document = new ByteArrayDocument( byteArray, i18nc("origin of the byte array", "Created from data.") );
 
     ++newByteArrayDocumentCounter;
 
