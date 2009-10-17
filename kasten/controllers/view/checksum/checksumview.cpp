@@ -86,7 +86,7 @@ ChecksumView::ChecksumView( ChecksumTool* tool, QWidget* parent )
     QHBoxLayout* calculateLayout = new QHBoxLayout();
 
     calculateLayout->addStretch();
-    const KGuiItem updateGuiItem( i18nc("@action:button calculate the checksum","&Calculate"), "system-run",
+    const KGuiItem updateGuiItem( i18nc("@action:button calculate the checksum","&Calculate"), "run-build",
                       i18nc("@info:tooltip","Calculate the checksum for the bytes in the selected range."),
                       i18nc("@info:whatsthis",
                             "If you press the <interface>Calculate</interface> button, the list will be updated "

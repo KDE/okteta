@@ -87,7 +87,7 @@ FilterView::FilterView( FilterTool *tool, QWidget* parent )
     // filter button
     QHBoxLayout *buttonLayout = new QHBoxLayout();
     buttonLayout->addStretch( 10 );
-    mFilterButton = new KPushButton( KGuiItem(i18nc("@action:button","&Filter"), "system-run",
+    mFilterButton = new KPushButton( KGuiItem(i18nc("@action:button","&Filter"), "run-build",
                       i18nc("@info:tooltip","Executes the filter for the bytes in the selected range."),
                       i18nc("@info:whatsthis",
                             "If you press the <interface>Filter</interface> button, the operation you selected "
