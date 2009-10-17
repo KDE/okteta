@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2006,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,9 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYCOMBOBOX_H
-#define BYTEARRAYCOMBOBOX_H
+#ifndef ADDRESSCOMBOBOX_H
+#define ADDRESSCOMBOBOX_H
 
+// lib
+#include "oktetakastengui_export.h"
+// Okteta core
+#include <address.h>
 // Qt
 #include <QtGui/QWidget>
 
@@ -32,38 +36,38 @@ class QByteArray;
 
 namespace Okteta
 {
-class ByteArrayComboBoxPrivate;
 
+class AddressComboBoxPrivate;
 
-class ByteArrayComboBox : public QWidget
+class OKTETAKASTENGUI_EXPORT AddressComboBox : public QWidget
 {
   Q_OBJECT
 
   public:
     // TODO: same as in kbytearrayvalidator.h, we need a global enum containing both value and char codings...
     // matching Okteta::ValueCoding
+    // TODO: turn into flags, so the codings to be used can be defined
     enum Coding { InvalidCoding = -1, HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, CharCoding=4 };
 
   public:
-    explicit ByteArrayComboBox( QWidget* parent = 0 );
-    virtual ~ByteArrayComboBox();
+    explicit AddressComboBox( QWidget* parent = 0 );
+    virtual ~AddressComboBox();
 
   public: // set
-    void setCharCodec( const QString& charCodecName );
-    void rememberCurrentByteArray();
+    void rememberCurrentAddress();
 
   public: // get
-    QByteArray byteArray() const;
+    Address address() const;
     int format() const;
 
   Q_SIGNALS:
-    void byteArrayChanged( const QByteArray& byteArray );
+    void addressChanged( Okteta::Address address );
     void formatChanged( int index );
 
   protected:
-    ByteArrayComboBoxPrivate* const d_ptr;
+    AddressComboBoxPrivate* const d_ptr;
   private:
-    Q_DECLARE_PRIVATE( ByteArrayComboBox )
+    Q_DECLARE_PRIVATE( AddressComboBox )
     Q_PRIVATE_SLOT( d_func(), void onFormatChanged( int index ) )
     Q_PRIVATE_SLOT( d_func(), void onValueEdited( const QString& value ) )
     Q_PRIVATE_SLOT( d_func(), void onValueActivated( int index ) )

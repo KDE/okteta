@@ -3,6 +3,7 @@ set( OKTETA_REL_DIR ../.. )
 
 include_directories(
   view
+  liboktetawidgets
   ../core
   ../core/document
   ${KASTEN_REL_DIR}/gui
@@ -20,6 +21,15 @@ include_directories(
 # if(KDE4_BUILD_TESTS)
 #   add_subdirectory(tests)
 # endif(KDE4_BUILD_TESTS)
+
+set( oktetawidgets_LIB_SRCS
+  liboktetawidgets/bytearrayvalidator.cpp
+  liboktetawidgets/bytearraycombobox_p.cpp
+  liboktetawidgets/bytearraycombobox.cpp
+  liboktetawidgets/addressvalidator.cpp
+  liboktetawidgets/addresscombobox_p.cpp
+  liboktetawidgets/addresscombobox.cpp
+)
 
 set( okteta_textrenderer_SRCS
   io/bytearrayviewtextrenderer/abstractcolumntextrenderer.cpp
@@ -88,6 +98,7 @@ set( okteta_kastengui_view_SRCS
 )
 
 set( okteta_kastengui_LIB_SRCS
+  ${oktetawidgets_LIB_SRCS}
   ${okteta_kastengui_view_SRCS}
   ${okteta_kastengui_io_SRCS}
 )
