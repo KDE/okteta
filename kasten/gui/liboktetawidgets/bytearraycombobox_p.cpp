@@ -87,6 +87,11 @@ void ByteArrayComboBoxPrivate::init()
     onFormatChanged( mFormatComboBox->currentIndex() );
 }
 
+void ByteArrayComboBoxPrivate::setByteArray( const QByteArray& byteArray )
+{
+    mValueComboBox->setEditText( mValidator->toString(byteArray) );
+}
+
 void ByteArrayComboBoxPrivate::setCharCodec( const QString& charCodecName )
 {
     // update the char string

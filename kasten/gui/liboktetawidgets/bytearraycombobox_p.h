@@ -46,6 +46,7 @@ class ByteArrayComboBoxPrivate
 
   public:
     void init();
+    void setByteArray( const QByteArray& byteArray );
     void setCharCodec( const QString& charCodecName );
     void rememberCurrentByteArray();
 

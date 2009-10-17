@@ -37,6 +37,13 @@ ByteArrayComboBox::ByteArrayComboBox( QWidget* parent )
     d->init();
 }
 
+void ByteArrayComboBox::setByteArray( const QByteArray& byteArray )
+{
+    Q_D( ByteArrayComboBox );
+
+    d->setByteArray( byteArray );
+}
+
 void ByteArrayComboBox::setCharCodec( const QString& charCodecName )
 {
     Q_D( ByteArrayComboBox );

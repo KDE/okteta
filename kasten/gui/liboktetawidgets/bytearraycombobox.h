@@ -51,6 +51,7 @@ class OKTETAKASTENGUI_EXPORT ByteArrayComboBox : public QWidget
     virtual ~ByteArrayComboBox();
 
   public: // set
+    void setByteArray( const QByteArray& byteArray );
     void setCharCodec( const QString& charCodecName );
     void rememberCurrentByteArray();
 
