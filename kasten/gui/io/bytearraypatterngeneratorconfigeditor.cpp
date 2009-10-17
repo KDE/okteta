@@ -48,6 +48,7 @@ ByteArrayPatternGeneratorConfigEditor::ByteArrayPatternGeneratorConfigEditor( By
         i18nc( "@label:textbox",
                "Pattern:" );
     mPatternEdit = new Okteta::ByteArrayComboBox( this );
+    mPatternEdit->setByteArray( mSettings.pattern );
     connect( mPatternEdit, SIGNAL(byteArrayChanged( const QByteArray& )), SLOT(onSettingsChanged()) );
     connect( mPatternEdit, SIGNAL(byteArrayChanged( const QByteArray& )), SLOT(onPatternChanged( const QByteArray& )) );
     const QString inputWhatsThis =
