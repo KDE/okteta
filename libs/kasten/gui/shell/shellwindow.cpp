@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -33,6 +33,7 @@
 #include <toolviewdockwidget.h>
 // Kasten core
 #include <documentmanager.h>
+#include <documentcreatemanager.h>
 #include <documentsyncmanager.h>
 #include <abstractdocument.h>
 // KDE
@@ -123,7 +124,7 @@ void ShellWindow::onTitleChanged( const QString &newTitle )
     AbstractView* view = qobject_cast<AbstractView *>( sender() );
     if( view )
     {
-	AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
+        AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
         setCaption( newTitle, document->hasLocalChanges() );
     }
 }
@@ -134,7 +135,7 @@ Q_UNUSED( newStates )
     AbstractView* view = qobject_cast<AbstractView *>( sender() );
     if( view )
     {
-	AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
+        AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
         setCaption( view->title(), document->hasLocalChanges() );
     }
 }
@@ -223,19 +224,27 @@ void ShellWindow::onCloseRequest( const QList<Kasten::AbstractView*>& views )
 
 void ShellWindow::onDragMoveEvent( const QDragMoveEvent* event, bool& accept )
 {
-    accept = KUrl::List::canDecode( event->mimeData() );
+    const QMimeData* mimeData = event->mimeData();
+
+    accept = KUrl::List::canDecode( mimeData )
+             || mDocumentManager->createManager()->canCreateNewFromData( mimeData );
 }
 
 void ShellWindow::onDropEvent( QDropEvent* event )
 {
-    const KUrl::List urls = KUrl::List::fromMimeData( event->mimeData() );
-    if( !urls.isEmpty() )
+    const QMimeData* mimeData = event->mimeData();
+
+    const KUrl::List urls = KUrl::List::fromMimeData( mimeData );
+
+    if( ! urls.isEmpty() )
     {
         DocumentSyncManager* syncManager = mDocumentManager->syncManager();
 
         foreach( const KUrl& url, urls )
             syncManager->load( url );
     }
+    else
+        mDocumentManager->createManager()->createNewFromData( mimeData );
 }
 
 void ShellWindow::onToolVisibilityChanged( bool isVisible )
