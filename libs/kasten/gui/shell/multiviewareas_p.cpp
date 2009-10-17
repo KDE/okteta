@@ -58,6 +58,11 @@ void MultiViewAreasPrivate::init()
                 SIGNAL(closeRequest( const QList<Kasten::AbstractView*>& )) );
     q->connect( viewArea, SIGNAL(removing( const QList<Kasten::AbstractView*>& )),
                 SLOT(onViewsRemoved()) );
+    q->connect( viewArea, SIGNAL(dragMove( const QDragMoveEvent*, bool& )),
+                SIGNAL(dragMove( const QDragMoveEvent*, bool& )) );
+    q->connect( viewArea, SIGNAL(drop( QDropEvent* )),
+                SIGNAL(drop( QDropEvent* )) );
+
     mViewAreaList.append( viewArea );
     mCurrentViewArea = viewArea;
 
@@ -98,6 +103,10 @@ AbstractViewArea* MultiViewAreasPrivate::splitViewArea( AbstractViewArea* _viewA
                 SIGNAL(closeRequest( const QList<Kasten::AbstractView*>& )) );
     q->connect( secondViewArea, SIGNAL(removing( const QList<Kasten::AbstractView*>& )),
                 SLOT(onViewsRemoved()) );
+    q->connect( secondViewArea, SIGNAL(dragMove( const QDragMoveEvent*, bool& )),
+                SIGNAL(dragMove( const QDragMoveEvent*, bool& )) );
+    q->connect( secondViewArea, SIGNAL(drop( QDropEvent* )),
+                SIGNAL(drop( QDropEvent* )) );
     mViewAreaList.append( secondViewArea );
     mCurrentViewArea = secondViewArea;
 
