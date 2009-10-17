@@ -234,11 +234,15 @@ Done for 0.4:
 * added templates for binary filters
 * added templates for checksum/hashsum algorithm
 * added AbstractModelDataGenerator + config + controller
-* ported InsertPatternController and InsertSequenceController to AbstractModelDataGenerator
+* ported InsertPatternController and InsertSequenceController to AbstractModelDataGenerator and added general InsertController
+* added ability to AbstractDocumentFactory to create from QMimeData
+* extended CreatorController to also create new document from clipboard and generators
+* new: on drop of data to shell that is not a url list create a new byte array from it
 
 Next to work on:
 ----------------------------------
 Important:
+* set new created from content to Modified, as input/data might be lost (depends on generator, take into account)
 * get maxEnums out of Designer combobox
 * implement find whole words only!
 * improve resize of status bar with priority-based limiting of shown items, use perhaps SqueezedLabel for Selection
@@ -255,6 +259,7 @@ Less important:
 * on tripple click turn into selecting just whole lines if button kept pressed
 * ask artists for own icon
 * scroll on drag in first and last line
+* warn on "revert to disk"
 
 Later on:
 ---------
@@ -350,6 +355,7 @@ See "Insert", is generated as well as from a source, so perhaps join there?
   (or better do in-place/by-model editing, e.g. offset status would mean editing number?)
 * all KDE inputs should show state with colors (invalid, okay)
 * think about how per-user focus can be done
+* show local information in window if we have focus, otherwise use KNotification
 
 Future plans:
 -------------
