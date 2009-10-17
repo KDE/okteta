@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -68,11 +68,12 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
     label->setBuddy( mMinLengthSpinBox );
     updateLayout->addWidget( mMinLengthSpinBox );
 
-    const KGuiItem updateGuiItem( i18nc("@action:button update the list of strings extracted","&Update"), "view-refresh",
-                      i18nc("@info:tooltip","Update the list of strings contained in the selected range."),
+    const KGuiItem updateGuiItem( i18nc("@action:button extract the strings from the byte array","&Extract"), "document-export",
+                      i18nc("@info:tooltip","Finds the strings contained in the selected range and lists them in the view below."),
                       i18nc("@info:whatsthis",
-                            "If you press the <interface>Update</interface> button, the list will be updated "
-                            "to all strings which are contained in the selected range and have the set minimum length.") );
+                            "If you press the <interface>Extract</interface> button, "
+                            "the selected range is searched for all strings which have the set minimum length. "
+                            "This strings found will be listed in the view below.") );
     mUpdateButton = new KPushButton( updateGuiItem, this );
     mUpdateButton->setEnabled( mTool->isApplyable() );
     connect( mUpdateButton, SIGNAL(clicked(bool)), mTool, SLOT(extractStrings()) );
