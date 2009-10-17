@@ -42,7 +42,7 @@ QList<AbstractModelDataGenerator*> ByteArrayDataGeneratorFactory::createDataGene
     QList<AbstractModelDataGenerator*> result;
 
     result
-//         << new ByteArrayPatternGenerator()
+        << new ByteArrayPatternGenerator()
         << new ByteArraySequenceGenerator();
 //// NEWBYTEARRAYDATAGENERATOR(start)
 //// Here add the creation of an object of your streamencoder class and add it to the list,
