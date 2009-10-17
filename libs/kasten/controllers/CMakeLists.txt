@@ -25,6 +25,7 @@ set( SETREMOTECONTROLLER_SRCS
   io/setremote/setremotecontroller.cpp
 )
 set( CREATORCONTROLLER_SRCS
+  documentsystem/creator/createdialog.cpp
   documentsystem/creator/creatorcontroller.cpp
 )
 set( LOADERCONTROLLER_SRCS

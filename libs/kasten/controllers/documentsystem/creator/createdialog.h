@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,43 +20,30 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CREATORCONTROLLER_H
-#define CREATORCONTROLLER_H
+#ifndef CREATEDIALOG_H
+#define CREATEDIALOG_H
 
-// lib
-#include "kastencontrollers_export.h"
-// Kasten gui
-#include <abstractxmlguicontroller.h>
-
-class KXMLGUIClient;
+// KDE
+#include <KDialog>
 
 
 namespace Kasten
 {
 
-class ViewManager;
-class DocumentManager;
+class AbstractModelDataGeneratorConfigEditor;
 
 
-class KASTENCONTROLLERS_EXPORT CreatorController : public AbstractXmlGuiController
+class CreateDialog : public KDialog
 {
   Q_OBJECT
 
   public:
-    CreatorController( ViewManager* viewManager, DocumentManager* documentManager, KXMLGUIClient* guiClient );
-    ~CreatorController();
+    explicit CreateDialog( AbstractModelDataGeneratorConfigEditor* configEditor, QWidget* parent = 0 );
 
-  public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+    virtual ~CreateDialog();
 
-  public Q_SLOTS:
-    void onNewActionTriggered();
-    void onNewFromClipboardActionTriggered();
-    void onNewFromGeneratorActionTriggered();
-
-  protected:
-    ViewManager* mViewManager;
-    DocumentManager* mDocumentManager;
+  private:
+    AbstractModelDataGeneratorConfigEditor* mConfigEditor;
 };
 
 }
