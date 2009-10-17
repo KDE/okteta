@@ -706,14 +706,15 @@ void AbstractByteArrayViewPrivate::pasteData( const QMimeData* data )
     if( ! data || data->formats().isEmpty() )
         return;
 
+    // SYNC: with bytearraydocumentfactory.cpp
     // if there is a octet stream, use it, otherwise take the dump of the format
     // with the highest priority
     // TODO: this may not be, what is expected, think about it, if we just
     // take byte array descriptions, like encodings in chars or values
     // would need the movement of the encoders into the core library
-    const QLatin1String octetStreamFormatName( OctetStreamFormatName );
+    const QString octetStreamFormatName = QString::fromLatin1( OctetStreamFormatName );
     const QString dataFormatName = ( data->hasFormat(octetStreamFormatName) ) ?
-        QString( octetStreamFormatName ) :
+        octetStreamFormatName :
         data->formats()[0];
 
     const QByteArray byteArray = data->data( dataFormatName );
