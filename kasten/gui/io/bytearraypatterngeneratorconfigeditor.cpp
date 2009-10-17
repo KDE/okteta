@@ -23,7 +23,7 @@
 #include "bytearraypatterngeneratorconfigeditor.h"
 
 // lib
-// #include <bytearraycombobox.h>
+#include <bytearraycombobox.h>
 // KDE
 #include <KLocale>
 #include <KIntNumInput>
@@ -43,22 +43,19 @@ ByteArrayPatternGeneratorConfigEditor::ByteArrayPatternGeneratorConfigEditor( By
     QFormLayout* pageLayout = new QFormLayout( this );
     pageLayout->setMargin( 0 );
 
-#if 0
     // pattern
     const QString patternEditLabel =
         i18nc( "@label:textbox",
                "Pattern:" );
     mPatternEdit = new Okteta::ByteArrayComboBox( this );
-    connect( mNumberInput, SIGNAL(valueChanged( int )), SLOT(onSettingsChanged()) );
+    connect( mPatternEdit, SIGNAL(byteArrayChanged( const QByteArray& )), SLOT(onSettingsChanged()) );
     connect( mPatternEdit, SIGNAL(byteArrayChanged( const QByteArray& )), SLOT(onPatternChanged( const QByteArray& )) );
     const QString inputWhatsThis =
         i18nc( "@info:whatsthis",
                "Enter a pattern to search for, or select a previous pattern from the list." );
     mPatternEdit->setWhatsThis( inputWhatsThis );
-    patternLayout->addWidget( mPatternEdit );
 
     pageLayout->addRow( patternEditLabel, mPatternEdit );
-#endif
 
     // number
     const QString numberInputLabel =
@@ -93,7 +90,7 @@ void InsertPatternDialog::setCharCodec( const QString& codecName )
 
 void ByteArrayPatternGeneratorConfigEditor::onSettingsChanged()
 {
-//     mSettings.pattern = mPatternEdit->byteArray();
+    mSettings.pattern = mPatternEdit->byteArray();
     mSettings.count = mNumberInput->value();
 
     mGenerator->setSettings( mSettings );
