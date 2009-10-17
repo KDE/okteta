@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2007, 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -33,6 +33,13 @@ namespace Kasten
 DocumentCreateManager::DocumentCreateManager( DocumentManager* manager )
  : mManager( manager ), mFactory( 0 ) {}
 
+
+bool DocumentCreateManager::canCreateNewFromData( const QMimeData* mimeData ) const
+{
+    return mFactory->canCreateFromData( mimeData );
+}
+
+
 void DocumentCreateManager::setWidget( QWidget* widget )
 {
     mWidget = widget;
@@ -47,6 +54,13 @@ void DocumentCreateManager::setDocumentFactory( AbstractDocumentFactory* factory
 void DocumentCreateManager::createNew()
 {
     AbstractDocument* document = mFactory->create();
+    if( document )
+        mManager->addDocument( document );
+}
+
+void DocumentCreateManager::createNewFromData( const QMimeData* mimeData )
+{
+    AbstractDocument* document = mFactory->createFromData( mimeData );
     if( document )
         mManager->addDocument( document );
 }

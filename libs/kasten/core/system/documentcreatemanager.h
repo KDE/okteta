@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -29,6 +29,7 @@
 #include <QtCore/QObject>
 
 class QWidget;
+class QMimeData;
 
 
 namespace Kasten
@@ -47,7 +48,11 @@ class KASTENCORE_EXPORT DocumentCreateManager : public QObject
     virtual ~DocumentCreateManager();
 
   public:
+    bool canCreateNewFromData( const QMimeData* mimeData ) const;
+
+  public:
     void createNew();
+    void createNewFromData( const QMimeData* mimeData );
 
   public:
     void setDocumentFactory( AbstractDocumentFactory* factory );
