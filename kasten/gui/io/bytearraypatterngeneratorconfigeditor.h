@@ -25,7 +25,7 @@
 
 // lib
 #include "bytearraypatterngenerator.h"
-// Qt
+// Kasten gui
 #include <abstractmodeldatageneratorconfigeditor.h>
 
 namespace Okteta {
@@ -43,6 +43,7 @@ class ByteArrayPatternGeneratorConfigEditor : public AbstractModelDataGeneratorC
 
   public:
     explicit ByteArrayPatternGeneratorConfigEditor( ByteArrayPatternGenerator* generator, QWidget* parent = 0 );
+
     virtual ~ByteArrayPatternGeneratorConfigEditor();
 
   public: // AbstractModelDataGeneratorConfigEditor API

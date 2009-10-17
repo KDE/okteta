@@ -25,7 +25,7 @@
 
 // lib
 #include "oktetakastengui_export.h"
-// Okteta gui
+// Kasten gui
 #include <abstractmodeldatageneratorconfigeditorfactory.h>
 
 
