@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,8 @@
 // Qt
 #include <QtCore/QObject>
 
+class QMimeData;
+
 
 namespace Kasten
 {
@@ -43,7 +45,12 @@ class KASTENCORE_EXPORT AbstractDocumentFactory : public QObject
     virtual ~AbstractDocumentFactory();
 
   public: // API to be implemented
+    /// default returns false
+    virtual bool canCreateFromData( const QMimeData* mimeData );
+
     virtual AbstractDocument* create() = 0;
+    /// default returns 0
+    virtual AbstractDocument* createFromData( const QMimeData* mimeData );
 };
 
 }
