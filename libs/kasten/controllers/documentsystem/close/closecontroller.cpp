@@ -37,7 +37,8 @@ namespace Kasten
 {
 
 CloseController::CloseController( DocumentManager* documentManager, KXMLGUIClient* guiClient )
-  : mDocumentManager( documentManager )
+  : mDocumentManager( documentManager ),
+    mDocument( 0 )
 {
     connect( mDocumentManager, SIGNAL(added( const QList<Kasten::AbstractDocument*>& )),
              SLOT(onDocumentsChanged()) );
@@ -58,7 +59,9 @@ CloseController::CloseController( DocumentManager* documentManager, KXMLGUIClien
     mCloseAllOtherAction->setIcon( KIcon("window-close") );
     connect( mCloseAllOtherAction, SIGNAL(triggered( bool )), SLOT(closeAllOther()) );
 
-    setTargetModel( 0 );
+    mCloseAction->setEnabled( false );
+    mCloseAllAction->setEnabled( false );
+    mCloseAllOtherAction->setEnabled( false );
 }
 
 void CloseController::setTargetModel( AbstractModel* model )
