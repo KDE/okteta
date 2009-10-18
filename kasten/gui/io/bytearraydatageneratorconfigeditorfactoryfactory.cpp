@@ -24,10 +24,11 @@
 
 // lib
 #include "bytearraypatterngeneratorconfigeditorfactory.h"
+#include "bytearrayrandomdatageneratorconfigeditorfactory.h"
 //// NEWBYTEARRAYDATAGENERATORCONFIGEDITORFACTORY(start)
-//// Here add the name of your header file of your streamencoder,
+//// Here add the name of your header file of your configeditorfactory,
 //// e.g.
-//// #include "my_bytearraystreamencoder.h"
+//// #include "my_bytearraydatageneratorconfigeditorfactory.h"
 //// NEWBYTEARRAYDATAGENERATORCONFIGEDITORFACTORY(end)
 // Qt
 #include <QtCore/QList>
@@ -41,9 +42,10 @@ QList<AbstractModelDataGeneratorConfigEditorFactory*> ByteArrayDataGeneratorConf
     QList<AbstractModelDataGeneratorConfigEditorFactory*> result;
 
     result
-        << new ByteArrayPatternGeneratorConfigEditorFactory();
+        << new ByteArrayPatternGeneratorConfigEditorFactory()
+        << new ByteArrayRandomDataGeneratorConfigEditorFactory();
 //// NEWBYTEARRAYDATAGENERATORCONFIGEDITORFACTORY(start)
-//// Here add the creation of an object of your streamencoder class and add it to the list,
+//// Here add the creation of an object of your configeditorfactory class and add it to the list,
 //// e.g.
 ////     result
 ////         << new My_ByteArrayDataGeneratorConfigEditorFactory();

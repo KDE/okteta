@@ -75,11 +75,18 @@ set( okteta_pattern_datagenerator_SRCS
   io/bytearraypatterngenerator.cpp
 )
 
+set( okteta_randomdata_datagenerator_SRCS
+  io/bytearrayrandomdatageneratorconfigeditor.cpp
+  io/bytearrayrandomdatageneratorconfigeditorfactory.cpp
+  io/bytearrayrandomdatagenerator.cpp
+)
+
 set( okteta_sequence_datagenerator_SRCS
   io/bytearraysequencegenerator.cpp
 )
 
 set( okteta_datagenerator_SRCS
+  ${okteta_randomdata_datagenerator_SRCS}
   ${okteta_pattern_datagenerator_SRCS}
   ${okteta_sequence_datagenerator_SRCS}
   io/bytearraydatageneratorfactory.cpp

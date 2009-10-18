@@ -1,5 +1,5 @@
 /*
-    This file is part of the Okteta Kasten module, part of the KDE project.
+    This file is part of the Kasten Framework, part of the KDE project.
 
     Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
@@ -20,40 +20,45 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearraydatageneratorfactory.h"
+#ifndef BYTEARRAYRANDOMDATAGENERATORCONFIGEDITOR_H
+#define BYTEARRAYRANDOMDATAGENERATORCONFIGEDITOR_H
 
 // lib
-#include "bytearraypatterngenerator.h"
 #include "bytearrayrandomdatagenerator.h"
-#include "bytearraysequencegenerator.h"
-//// NEWBYTEARRAYDATAGENERATOR(start)
-//// Here add the name of your header file of your datagenerator,
-//// e.g.
-//// #include "my_bytearraydatagenerator.h"
-//// NEWBYTEARRAYDATAGENERATOR(end)
-// Qt
-#include <QtCore/QList>
+// Kasten gui
+#include <abstractmodeldatageneratorconfigeditor.h>
+
+class KIntNumInput;
 
 
 namespace Kasten
 {
 
-QList<AbstractModelDataGenerator*> ByteArrayDataGeneratorFactory::createDataGenerators()
+class ByteArrayRandomDataGeneratorConfigEditor : public AbstractModelDataGeneratorConfigEditor
 {
-    QList<AbstractModelDataGenerator*> result;
+  Q_OBJECT
 
-    result
-        << new ByteArrayPatternGenerator()
-        << new ByteArrayRandomDataGenerator()
-        << new ByteArraySequenceGenerator();
-//// NEWBYTEARRAYDATAGENERATOR(start)
-//// Here add the creation of an object of your datagenerator class and add it to the list,
-//// e.g.
-////     result
-////         << new My_ByteArrayDataGenerator();
-//// NEWBYTEARRAYDATAGENERATOR(end)
+  public:
+    explicit ByteArrayRandomDataGeneratorConfigEditor( ByteArrayRandomDataGenerator* generator, QWidget* parent = 0 );
 
-    return result;
+    virtual ~ByteArrayRandomDataGeneratorConfigEditor();
+
+  public: // AbstractModelDataGeneratorConfigEditor API
+    virtual QString name() const;
+
+  public:
+    void rememberCurrentSettings();
+
+  protected Q_SLOTS:
+    void onSettingsChanged();
+
+  protected:
+    ByteArrayRandomDataGenerator* mGenerator;
+    ByteArrayRandomDataGeneratorSettings mSettings;
+
+    KIntNumInput* mSizeInput;
+};
+
 }
 
-}
+#endif
