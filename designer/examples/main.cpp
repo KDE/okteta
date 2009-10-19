@@ -1,3 +1,11 @@
+/*
+    This file is part of the Okteta project, part of the KDE project.
+
+    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+
+    Public domain.
+*/
+
 //// include the generated header from the UI file
 // ui
 #include "ui_example_widget.h"
