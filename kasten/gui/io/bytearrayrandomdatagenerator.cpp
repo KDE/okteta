@@ -47,7 +47,7 @@ ByteArrayRandomDataGeneratorSettings::ByteArrayRandomDataGeneratorSettings()
 
 //TODO: support insert to selection, cmp. fill in painting program
 // there are two kinds of generated datam fixed size (e.g. sequence) and endless size?
-// perhaps by option fill selection? or a seperate menu entry fill, which only works on selections?
+// perhaps by option fill selection? or a separate menu entry fill, which only works on selections?
 
 ByteArrayRandomDataGenerator::ByteArrayRandomDataGenerator()
   : AbstractModelDataGenerator(
