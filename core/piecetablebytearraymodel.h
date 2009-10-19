@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Core library, part of the KDE project.
 
-    Copyright 2008,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -58,17 +58,8 @@ class OKTETACORE_EXPORT PieceTableByteArrayModel : public AbstractByteArrayModel
   friend class PieceTableByteArrayModelPrivate;
 
   public:
-//     PieceTableByteArrayModel( const char *data, unsigned int size );
-//     PieceTableByteArrayModel( char *D, unsigned int size );
-    /**
-     * makes a deep copy if careForMemory is false
-     * @param data
-     * @param careForMemory 
-     */
-    PieceTableByteArrayModel( const Byte* data, int size, bool careForMemory = true, QObject* parent = 0 );
-//     explicit PieceTableByteArrayModel( const QByteArray &data );
+    explicit PieceTableByteArrayModel( const QByteArray& data, QObject* parent = 0 );
     explicit PieceTableByteArrayModel( int size = 0, Byte fillByte = '\0', QObject* parent = 0 );
-//     explicit PieceTableByteArrayModel( int size = 0careForMemory, int maxSize = -1 );
 
     virtual ~PieceTableByteArrayModel();
 
@@ -123,19 +114,7 @@ class OKTETACORE_EXPORT PieceTableByteArrayModel : public AbstractByteArrayModel
                             int oldVersionIndex, int newVersionIndex );
 
   public:
-//     void setMaxSize( int MS );
-    /** sets whether the memory given by setData or in the constructor should be kept on resize
-      */
-//     void setKeepsMemory( bool keepMemory = true );
-//     void setAutoDelete( bool autoDelete = true );
-    void setData( const Byte* data, int size, bool careForMemory = true );
-
-  public:
-//     char *data() const;
-//     int maxSize() const;
-    /** returns whether the memory of the byte array is kept on resize */
-//     bool keepsMemory() const;
-//     bool autoDelete() const;
+    void setData( const QByteArray& data );
 
   Q_SIGNALS: // Versionable signals
     virtual void revertedToVersionIndex( int versionIndex );

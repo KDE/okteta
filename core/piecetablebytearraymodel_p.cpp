@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Core library, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -32,37 +32,19 @@ namespace Okteta
 
 static const int InvalidVersionIndex = -1;
 
-PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate( PieceTableByteArrayModel *parent, const Byte* data, int size,
-                                             bool careForMemory )
+PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate( PieceTableByteArrayModel* parent, const QByteArray& data )
   : p( parent ),
-   mReadOnly( false ),
-   mAutoDelete( true ),
-   mBeforeGroupedChangeVersionIndex( InvalidVersionIndex ),
-   mBookmarksModified( false )
+    mReadOnly( false ),
+    mInitialData( data )
 {
-    if( data == 0 )
-        size = 0;
-    if( careForMemory )
-        mInitialData = data;
-    else
-    {
-        Byte* dataCopy = new Byte[size];
-        memcpy( dataCopy, data, size );
-        mInitialData = dataCopy;
-    }
-    mInitialSize = size;
-    mPieceTable.init( size );
+    mPieceTable.init( data.size() );
 }
 
 PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate( PieceTableByteArrayModel *parent, int size, Byte fillByte )
   : p( parent ),
-   mReadOnly( false ),
-   mAutoDelete( true )
+    mReadOnly( false ),
+    mInitialData( size, fillByte )
 {
-    Byte* data = new Byte[size];
-    memset( data, fillByte, size );
-    mInitialData = data;
-    mInitialSize = size;
     mPieceTable.init( size );
 }
 
@@ -80,31 +62,19 @@ Byte PieceTableByteArrayModelPrivate::byte( Address offset ) const
     return result;
 }
 
-void PieceTableByteArrayModelPrivate::setData( const Byte* data, int size, bool careForMemory )
+void PieceTableByteArrayModelPrivate::setData( const QByteArray& data )
 {
-    if( mAutoDelete )
-        delete [] mInitialData;
     const int oldSize = mPieceTable.size();
     const bool wasModifiedBefore = isModified();
     const QList<Bookmark> bookmarks = mBookmarks.list();
 
-    if( data == 0 )
-        size = 0;
-
-    if( careForMemory )
-        mInitialData = data;
-    else
-    {
-        Byte* dataCopy = new Byte[size];
-        memcpy( dataCopy, data, size );
-        mInitialData = dataCopy;
-    }
-    mPieceTable.init( size );
+    mInitialData = data;
+    mPieceTable.init( data.size() );
     mChangesDataStorage.clear();
     mBookmarks.clear();
 
     // TODO: how to tell this to the synchronizer?
-    emit p->contentsChanged( ArrayChangeMetricsList::oneReplacement(0,oldSize,size) );
+    emit p->contentsChanged( ArrayChangeMetricsList::oneReplacement(0,oldSize,data.size()) );
     if( wasModifiedBefore ) emit p->modifiedChanged( false );
     if( !bookmarks.empty() ) emit p->bookmarksRemoved( bookmarks );
     emit p->headVersionChanged( mPieceTable.changesCount() );
@@ -304,11 +274,6 @@ QList<ByteArrayChange> PieceTableByteArrayModelPrivate::changes( int firstVersio
     return result;
 }
 
-QByteArray PieceTableByteArrayModelPrivate::initialData() const
-{
-    return QByteArray( reinterpret_cast<const char*>( mInitialData ), mInitialSize );
-}
-
 void PieceTableByteArrayModelPrivate::doChanges( const QList<ByteArrayChange>& changes,
                                                  int oldVersionIndex, int newVersionIndex )
 {
@@ -470,8 +435,6 @@ void PieceTableByteArrayModelPrivate::doFillChange( Address offset, Size filledL
 
 PieceTableByteArrayModelPrivate::~PieceTableByteArrayModelPrivate()
 {
-    if( mAutoDelete )
-        delete [] mInitialData;
 }
 
 }

@@ -43,9 +43,7 @@ ByteArrayRawFileReloadThread::ByteArrayRawFileReloadThread( QObject *parent,
     /*ByteArrayDocument *document,*/ const QString &filePath )
   : QThread( parent ), /*mDocument( document ),*/
     mFilePath( filePath ),
-    mSuccess( false ),
-    mData( 0 ),
-    mSize( 0 )
+    mSuccess( false )
 {
 //     mDocument->content()->moveToThread( this );
 //     mDocument->moveToThread( this );
@@ -56,11 +54,11 @@ void ByteArrayRawFileReloadThread::run()
     QFile file( mFilePath );
     file.open( QIODevice::ReadOnly );
     QDataStream inStream( &file );
-    mSize = file.size();
+    const int fileSize = file.size();
 
-    // TODO: should the decoder know this?
-    mData = new Okteta::Byte[mSize];
-    inStream.readRawData( reinterpret_cast<char*>(mData), mSize );
+    QByteArray data;
+    data.resize( fileSize );
+    inStream.readRawData( data.data(), fileSize );
 
     //registerDiskModifyTime( file ); TODO move into synchronizer
 
@@ -76,8 +74,6 @@ void ByteArrayRawFileReloadThread::run()
     }
     else
     {
-        mSize = 0;
-        delete [] mData;
     }
 
     emit documentReloaded( mSuccess );

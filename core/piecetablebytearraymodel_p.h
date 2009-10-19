@@ -37,18 +37,11 @@
 namespace Okteta
 {
 
-/** base class for all mInitialData buffers that are used to display
-  * TODO: think about a way to inform KHexEdit that there has been
-  * a change in the buffer outside. what kind of changes are possible?
-  *@author Friedrich W. H. Kossebau
-  */
-
 class PieceTableByteArrayModelPrivate
 {
   public:
-    /** creates a readonly buffer around the given data */
-    PieceTableByteArrayModelPrivate( PieceTableByteArrayModel* parent, const Byte* data, int size,
-             bool careForMemory = true );
+    /**  */
+    explicit PieceTableByteArrayModelPrivate( PieceTableByteArrayModel* parent, const QByteArray& data );
     /** creates a writeable buffer which is deleted at the end */
     explicit PieceTableByteArrayModelPrivate( PieceTableByteArrayModel* parent, int size, Byte fillByte = '\0' );
 
@@ -97,12 +90,12 @@ class PieceTableByteArrayModelPrivate
 
   public: // ChangeHistory API
     QList<ByteArrayChange> changes( int firstVersionIndex, int lastVersionIndex ) const;
-    QByteArray initialData() const;
+    const QByteArray& initialData() const;
     void doChanges( const QList<Okteta::ByteArrayChange>& changes,
                     int oldVersionIndex, int newVersionIndex );
 
   public:
-    void setData( const Byte* data, int size, bool careForMemory = true );
+    void setData( const QByteArray& data );
 
   protected:
     void doInsertChange( Address offset, const Byte* insertData, int insertLength );
@@ -119,11 +112,8 @@ class PieceTableByteArrayModelPrivate
     PieceTableByteArrayModel *p;
     /**  */
     bool mReadOnly :1;
-    /** */
-    bool mAutoDelete :1;
 
-    const Byte* mInitialData;
-    int mInitialSize;
+    QByteArray mInitialData;
     KPieceTable::RevertablePieceTable mPieceTable;
     ChangesDataStorage mChangesDataStorage;
     /** */
@@ -139,6 +129,7 @@ class PieceTableByteArrayModelPrivate
 };
 
 
+inline const QByteArray& PieceTableByteArrayModelPrivate::initialData() const { return mInitialData; }
 inline Size PieceTableByteArrayModelPrivate::size() const  { return mPieceTable.size(); }
 
 inline bool PieceTableByteArrayModelPrivate::isReadOnly()   const { return mReadOnly; }

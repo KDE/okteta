@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Core library, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -26,20 +26,17 @@
 
 namespace Okteta
 {
+// TODO: a wrapper to a raw data, plus a function to dump the current version to the original data
 
-PieceTableByteArrayModel::PieceTableByteArrayModel( const Byte* data, int size, bool careForMemory, QObject* parent )
+PieceTableByteArrayModel::PieceTableByteArrayModel( const QByteArray& data, QObject* parent )
   : AbstractByteArrayModel( parent ),
-    d( new PieceTableByteArrayModelPrivate(this,data,size,careForMemory) )
+    d( new PieceTableByteArrayModelPrivate(this,data) )
 {}
 
 PieceTableByteArrayModel::PieceTableByteArrayModel( int size, Byte fillByte, QObject* parent )
   : AbstractByteArrayModel( parent ),
     d( new PieceTableByteArrayModelPrivate(this,size,fillByte) )
 {}
-
-// PieceTableByteArrayModel::PieceTableByteArrayModel( int size, int maxSize )
-//  : d( new PieceTableByteArrayModelPrivate(this,size,maxSize) )
-// {}
 
 
 Byte PieceTableByteArrayModel::byte( Address offset ) const { return d->byte(offset); }
@@ -50,20 +47,11 @@ bool PieceTableByteArrayModel::isModified()   const { return d->isModified(); }
 
 void PieceTableByteArrayModel::setReadOnly( bool readOnly )       { d->setReadOnly( readOnly ); }
 void PieceTableByteArrayModel::setModified( bool modified )       { d->setModified( modified ); }
-// void PieceTableByteArrayModel::setMaxSize( int maxSize )          { d->setMaxSize( maxSize ); }
-// void PieceTableByteArrayModel::setKeepsMemory( bool keepsMemory ) { d->setKeepsMemory( keepsMemory ); }
-// void PieceTableByteArrayModel::setAutoDelete( bool autoDelete )   { d->setAutoDelete( autoDelete ); }
 
-void PieceTableByteArrayModel::setData( const Byte* data, int size, bool careForMemory )
+void PieceTableByteArrayModel::setData( const QByteArray& data )
 {
-    d->setData( data, size, careForMemory );
+    d->setData( data );
 }
-
-// char *PieceTableByteArrayModel::data()       const { return d->data(); }
-// int PieceTableByteArrayModel::maxSize()      const { return d->maxSize(); }
-// bool PieceTableByteArrayModel::keepsMemory() const { return d->keepsMemory(); }
-// bool PieceTableByteArrayModel::autoDelete()  const { return d->autoDelete(); }
-
 
 void PieceTableByteArrayModel::setByte( Address offset, Byte byte )
 {

@@ -51,9 +51,11 @@ void ByteArrayRawFileLoadThread::run()
     // TODO: should the decoder know this?
     // it is in the api now (constructor)
 
-    Okteta::Byte* data = new Okteta::Byte[fileSize];
-    inStream.readRawData( reinterpret_cast<char*>(data), fileSize );
-    Okteta::PieceTableByteArrayModel *byteArray = new Okteta::PieceTableByteArrayModel( data, fileSize );
+    QByteArray data;
+    data.resize( fileSize );
+    inStream.readRawData( data.data(), fileSize );
+
+    Okteta::PieceTableByteArrayModel* byteArray = new Okteta::PieceTableByteArrayModel( data );
 
     byteArray->setModified( false );
 

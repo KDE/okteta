@@ -24,7 +24,7 @@
 
 //// some static data so the bytearray model is not empty on start
 //// and the widgets not just white after the start of the example program :)
-static const unsigned char exampleInitialData[] =
+static const char exampleInitialData[] =
     "This is some data for the Okteta byte array widgets:"
     "\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0A\x0B\x0C\x0D\x0E\x0F"
     "\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1A\x1B\x1C\x1D\x1E\x1F"
@@ -70,7 +70,7 @@ Widget::Widget( QWidget* parent )
 
     //// create the bytearray
     mByteArrayModel =
-        new Okteta::PieceTableByteArrayModel( exampleInitialData, exampleInitialDataSize, false, this );
+        new Okteta::PieceTableByteArrayModel( QByteArray::fromRawData(exampleInitialData,exampleInitialDataSize), this );
 
     //// then set it to the bytearray view
     //// the same bytearray object can be set to multiple views

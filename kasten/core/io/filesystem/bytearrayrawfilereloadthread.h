@@ -23,9 +23,8 @@
 #ifndef BYTEARRAYRAWFILERELOADTHREAD_H
 #define BYTEARRAYRAWFILERELOADTHREAD_H
 
-// Okteta core
-#include <byte.h>
 // Qt
+#include <QtCore/QByteArray>
 #include <QtCore/QThread>
 
 class QString;
@@ -50,8 +49,7 @@ class ByteArrayRawFileReloadThread : public QThread
 
   public:
     bool success() const;
-    Okteta::Byte* data() const;
-    int size() const;
+    const QByteArray& data() const;
 
   Q_SIGNALS:
     void documentReloaded( bool success );
@@ -61,14 +59,12 @@ class ByteArrayRawFileReloadThread : public QThread
     const QString mFilePath;
 
     bool mSuccess;
-    Okteta::Byte* mData;
-    int mSize;
+    QByteArray mData;
 };
 
 
-inline bool ByteArrayRawFileReloadThread::success() const { return mSuccess; }
-inline Okteta::Byte* ByteArrayRawFileReloadThread::data()   const { return mData; }
-inline int ByteArrayRawFileReloadThread::size()     const { return mSize; }
+inline bool ByteArrayRawFileReloadThread::success()           const { return mSuccess; }
+inline const QByteArray& ByteArrayRawFileReloadThread::data() const { return mData; }
 
 }
 

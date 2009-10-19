@@ -31,8 +31,6 @@
 #include <piecetablebytearraymodel.h>
 // Qt
 #include <QtGui/QApplication>
-#include <QtCore/QDataStream>
-#include <QtCore/QFile>
 
 
 namespace Kasten
@@ -55,7 +53,7 @@ void ByteArrayRawFileReloadJob::startReadFromFile()
     if( success )
     {
         Okteta::PieceTableByteArrayModel *byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>( document->content() );
-        byteArray->setData( reloadThread->data(), reloadThread->size(), false );
+        byteArray->setData( reloadThread->data() );
     }
     delete reloadThread;
 

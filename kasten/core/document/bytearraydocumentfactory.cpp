@@ -80,12 +80,10 @@ AbstractDocument* ByteArrayDocumentFactory::createFromData( const QMimeData* mim
         octetStreamFormatName :
         mimeData->formats()[0];
 
-    // TODO: bytearray gets a copy, than passes it as deep copy to the model, just to delete its own
-    // make the model use the internal copy, e.g. by adding a QByteArray variant to the PieceTableByteArrayModel constructor
     const QByteArray data = mimeData->data( dataFormatName );
 
     Okteta::PieceTableByteArrayModel* byteArray =
-        new Okteta::PieceTableByteArrayModel( (const Okteta::Byte*)data.constData(), data.size(), false );
+        new Okteta::PieceTableByteArrayModel( data );
 //     byteArray->setModified( false ); TODO: needed?
 
     // TODO: pass name of generator

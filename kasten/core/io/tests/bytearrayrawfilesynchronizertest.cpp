@@ -139,7 +139,7 @@ void ByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
     // fill array
     QByteArray testData( TestDataSize, TestDataChar );
     ::textureByteArray( &testData );
-    byteArray->setData( reinterpret_cast<const Okteta::Byte*>(testData.constData()), testData.size(), false );
+    byteArray->setData( testData );
 
     // save
     ByteArrayRawFileSynchronizer* synchronizer = new ByteArrayRawFileSynchronizer();
