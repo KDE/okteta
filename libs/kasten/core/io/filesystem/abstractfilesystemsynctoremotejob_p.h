@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTFILESYSTEMSYNCWITHREMOTEJOB_P_H
-#define ABSTRACTFILESYSTEMSYNCWITHREMOTEJOB_P_H
+#ifndef ABSTRACTFILESYSTEMSYNCTOREMOTEJOB_P_H
+#define ABSTRACTFILESYSTEMSYNCTOREMOTEJOB_P_H
 
 #include "abstractfilesystemsynctoremotejob.h"
 #include <abstractsynctoremotejob_p.h>
