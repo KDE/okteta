@@ -27,6 +27,7 @@
 #include "bytearrayvaluestreamencoder.h"
 #include "bytearraysourcecodestreamencoder.h"
 #include "bytearrayviewtextstreamencoder.h"
+#include "bytearraybase64streamencoder.h"
 //// NEWBYTEARRAYSTREAMENCODER(start)
 //// Here add the name of your header file of your streamencoder,
 //// e.g.
@@ -46,6 +47,7 @@ QList<AbstractModelStreamEncoder*> ByteArrayStreamEncoderFactory::createStreamEn
     result
         << new ByteArrayValueStreamEncoder()
         << new ByteArrayTextStreamEncoder()
+        << new ByteArrayBase64StreamEncoder()
         << new ByteArraySourceCodeStreamEncoder()
         << new ByteArrayViewTextStreamEncoder();
 //// NEWBYTEARRAYSTREAMENCODER(start)
