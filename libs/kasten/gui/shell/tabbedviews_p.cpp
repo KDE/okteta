@@ -47,6 +47,7 @@ void TabbedViewsPrivate::init()
     mViewAreaBox = new ViewAreaBox( mTabWidget );
 
     q->connect( mTabWidget, SIGNAL(closeRequest( QWidget* )), SLOT(onCloseRequest( QWidget* )) );
+    q->connect( mTabWidget, SIGNAL(mouseMiddleClick( QWidget* )), SLOT(onCloseRequest( QWidget* )) );
     q->connect( mTabWidget, SIGNAL(currentChanged( int )), SLOT(onCurrentChanged( int )) );
     q->connect( mTabWidget, SIGNAL(testCanDecode( const QDragMoveEvent* , bool& )),
                 SIGNAL(dragMove( const QDragMoveEvent* , bool& )) );
