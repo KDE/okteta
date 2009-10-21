@@ -22,8 +22,6 @@
 
 #include "searchjob.h"
 
-// filter
-#include <abstractbytearrayfilter.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
 #include <charcodec.h>
