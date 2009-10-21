@@ -29,6 +29,8 @@
 // Qt
 #include <QtGui/QDragMoveEvent>
 #include <QtGui/QDropEvent>
+#include <QtGui/QApplication>
+#include <QtGui/QClipboard>
 
 
 namespace Kasten
@@ -51,6 +53,7 @@ void TabbedViewsPrivate::init()
 
     q->connect( mTabWidget, SIGNAL(closeRequest( QWidget* )), SLOT(onCloseRequest( QWidget* )) );
     q->connect( mTabWidget, SIGNAL(mouseMiddleClick( QWidget* )), SLOT(onCloseRequest( QWidget* )) );
+    q->connect( mTabWidget, SIGNAL(mouseMiddleClick()), SLOT(onMouseMiddleClick()) );
     q->connect( mTabWidget, SIGNAL(currentChanged( int )), SLOT(onCurrentChanged( int )) );
     q->connect( mTabWidget, SIGNAL(testCanDecode( const QDragMoveEvent*, bool& )),
                 SLOT(onDragMoveEvent( const QDragMoveEvent*, bool& )) );
@@ -253,6 +256,15 @@ void TabbedViewsPrivate::onViewFocusChanged( bool hasFocus )
 // kDebug()<<view<<view->title()<<hasFocus;
 
     emit q->focusChanged( hasFocus );
+}
+
+void TabbedViewsPrivate::onMouseMiddleClick()
+{
+    Q_Q( TabbedViews );
+
+    const QMimeData* mimeData = QApplication::clipboard()->mimeData( QClipboard::Selection );
+
+    emit q->dataDropped( mimeData );
 }
 
 void TabbedViewsPrivate::onDragMoveEvent( const QDragMoveEvent* event, bool& accepted )
