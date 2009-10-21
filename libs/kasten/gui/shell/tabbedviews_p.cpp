@@ -26,6 +26,9 @@
 #include "toolinlineviewwidget.h"
 #include <abstracttoolinlineview.h>
 #include <abstractdocument.h>
+// Qt
+#include <QtGui/QDragMoveEvent>
+#include <QtGui/QDropEvent>
 
 
 namespace Kasten
@@ -49,10 +52,10 @@ void TabbedViewsPrivate::init()
     q->connect( mTabWidget, SIGNAL(closeRequest( QWidget* )), SLOT(onCloseRequest( QWidget* )) );
     q->connect( mTabWidget, SIGNAL(mouseMiddleClick( QWidget* )), SLOT(onCloseRequest( QWidget* )) );
     q->connect( mTabWidget, SIGNAL(currentChanged( int )), SLOT(onCurrentChanged( int )) );
-    q->connect( mTabWidget, SIGNAL(testCanDecode( const QDragMoveEvent* , bool& )),
-                SIGNAL(dragMove( const QDragMoveEvent* , bool& )) );
+    q->connect( mTabWidget, SIGNAL(testCanDecode( const QDragMoveEvent*, bool& )),
+                SLOT(onDragMoveEvent( const QDragMoveEvent*, bool& )) );
     q->connect( mTabWidget, SIGNAL(receivedDropEvent( QDropEvent* )),
-                SIGNAL(drop( QDropEvent* )) );
+                SLOT(onDropEvent( QDropEvent* )) );
 }
 
 QList<AbstractView*> TabbedViewsPrivate::viewList() const
@@ -252,6 +255,23 @@ void TabbedViewsPrivate::onViewFocusChanged( bool hasFocus )
     emit q->focusChanged( hasFocus );
 }
 
+void TabbedViewsPrivate::onDragMoveEvent( const QDragMoveEvent* event, bool& accepted )
+{
+    Q_Q( TabbedViews );
+
+    const QMimeData* mimeData = event->mimeData();
+
+    emit q->dataOffered( mimeData, accepted );
+}
+
+void TabbedViewsPrivate::onDropEvent( QDropEvent* event )
+{
+    Q_Q( TabbedViews );
+
+    const QMimeData* mimeData = event->mimeData();
+
+    emit q->dataDropped( mimeData );
+}
 
 TabbedViewsPrivate::~TabbedViewsPrivate()
 {

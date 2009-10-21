@@ -23,7 +23,6 @@
 #ifndef SHELLWINDOW_H
 #define SHELLWINDOW_H
 
-
 // Kasten gui
 #include "kastengui_export.h"
 #include "widgetsdockable.h"
@@ -34,8 +33,7 @@
 // Qt
 #include <QtCore/QList>
 
-class QDragMoveEvent;
-class QDropEvent;
+class QMimeData;
 
 
 namespace Kasten
@@ -78,8 +76,8 @@ class KASTENGUI_EXPORT ShellWindow : public KXmlGuiWindow,
     void onFocusRequested( Kasten::AbstractDocument* document );
     void onToolVisibilityChanged( bool isVisible );
     void onCloseRequest( const QList<Kasten::AbstractView*>& views );
-    void onDragMoveEvent( const QDragMoveEvent* event, bool& accept );
-    void onDropEvent( QDropEvent* event );
+    void onDataOffered( const QMimeData* mimeData, bool& accept );
+    void onDataDropped( const QMimeData* mimeData );
 
   protected:
     MultiViewAreas* mGroupedViews;

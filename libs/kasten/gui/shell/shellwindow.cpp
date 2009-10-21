@@ -40,8 +40,6 @@
 #include <KUrl>
 // Qt
 #include <QtGui/QDockWidget>
-#include <QtGui/QDragMoveEvent>
-#include <QtGui/QDropEvent>
 #include <QtCore/QHash>
 
 
@@ -73,10 +71,10 @@ ShellWindow::ShellWindow( DocumentManager* documentManager, ViewManager* viewMan
              SLOT(onViewFocusChanged( Kasten::AbstractView* )) );
     connect( mGroupedViews, SIGNAL(closeRequest( const QList<Kasten::AbstractView*>& )),
              SLOT(onCloseRequest( const QList<Kasten::AbstractView*>& )) );
-    connect( mGroupedViews, SIGNAL(dragMove( const QDragMoveEvent*, bool& )),
-             SLOT(onDragMoveEvent( const QDragMoveEvent*, bool& )) );
-    connect( mGroupedViews, SIGNAL(drop( QDropEvent* )),
-             SLOT(onDropEvent( QDropEvent* )) );
+    connect( mGroupedViews, SIGNAL(dataOffered( const QMimeData*, bool& )),
+             SLOT(onDataOffered( const QMimeData*, bool& )) );
+    connect( mGroupedViews, SIGNAL(dataDropped( const QMimeData* )),
+             SLOT(onDataDropped( const QMimeData* )) );
 }
 
 QList<ToolViewDockWidget*> ShellWindow::dockWidgets() const { return mDockWidgets; }
@@ -222,18 +220,14 @@ void ShellWindow::onCloseRequest( const QList<Kasten::AbstractView*>& views )
     }
 }
 
-void ShellWindow::onDragMoveEvent( const QDragMoveEvent* event, bool& accept )
+void ShellWindow::onDataOffered( const QMimeData* mimeData, bool& accept )
 {
-    const QMimeData* mimeData = event->mimeData();
-
     accept = KUrl::List::canDecode( mimeData )
              || mDocumentManager->createManager()->canCreateNewFromData( mimeData );
 }
 
-void ShellWindow::onDropEvent( QDropEvent* event )
+void ShellWindow::onDataDropped( const QMimeData* mimeData )
 {
-    const QMimeData* mimeData = event->mimeData();
-
     const KUrl::List urls = KUrl::List::fromMimeData( mimeData );
 
     if( ! urls.isEmpty() )

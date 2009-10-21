@@ -72,6 +72,8 @@ class TabbedViewsPrivate : public AbstractGroupedViewsPrivate
     void onTitleChanged( const QString &newTitle );
 //     void onModifiedChanged( Kasten::AbstractDocument::SyncStates newStates );
     void onViewFocusChanged( bool focusChanged );
+    void onDragMoveEvent( const QDragMoveEvent* event, bool& accept );
+    void onDropEvent( QDropEvent* event );
 
   protected:
     Q_DECLARE_PUBLIC( TabbedViews )

@@ -28,8 +28,7 @@
 #include "viewareasplitable.h"
 #include "toolinlineviewable.h"
 
-class QDragMoveEvent;
-class QDropEvent;
+class QMimeData;
 
 
 namespace Kasten
@@ -85,8 +84,8 @@ class KASTENGUI_EXPORT MultiViewAreas : public AbstractGroupedViews,
     virtual void viewAreaFocusChanged( Kasten::AbstractViewArea* viewArea );
 
   Q_SIGNALS:
-    void dragMove( const QDragMoveEvent* event, bool& accepted );
-    void drop( QDropEvent* event );
+    void dataOffered( const QMimeData* mimeData, bool& accepted );
+    void dataDropped( const QMimeData* mimeData );
 
   protected:
     int indexOf( AbstractView* view ) const;
