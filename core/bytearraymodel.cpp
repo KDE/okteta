@@ -105,16 +105,6 @@ Size ByteArrayModel::fill( Byte fillByte, Address offset, Size fillLength )
     return d->fill( fillByte, offset, fillLength );
 }
 
-Address ByteArrayModel::indexOf( const Byte* pattern, int patternLength, Address fromOffset ) const
-{
-    return d->indexOf( pattern, patternLength, fromOffset );
-}
-
-Address ByteArrayModel::lastIndexOf( const Byte* pattern, int patternLength, Address fromOffset ) const
-{
-    return d->lastIndexOf( pattern, patternLength, fromOffset );
-}
-
 void ByteArrayModel::addBookmarks( const QList<Okteta::Bookmark> &bookmarks )
 {
     d->addBookmarks( bookmarks );

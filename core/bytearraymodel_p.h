@@ -60,9 +60,6 @@ class ByteArrayModelPrivate
 
     void setModified( bool modified = true );
 
-    Address indexOf( const Byte* pattern, int patternLength, Address fromOffset = 0 ) const;
-    Address lastIndexOf( const Byte* pattern, int patternLength, Address fromOffset = -1 ) const;
-
   public:
     void setReadOnly( bool readOnly = true );
     void setMaxSize( int maxSize );

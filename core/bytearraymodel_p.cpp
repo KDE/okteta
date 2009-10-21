@@ -348,52 +348,6 @@ Size ByteArrayModelPrivate::fill( Byte fillByte, Address offset, Size fillLength
 }
 
 
-Address ByteArrayModelPrivate::indexOf( const Byte* pattern, int patternLength, Address fromOffset ) const
-{
-    Address result = -1;
-
-    const Address lastFrom = mSize - patternLength;
-
-    for( Address i=fromOffset; i<=lastFrom ; ++i )
-    {
-        int c = memcmp( &mData[i], pattern, patternLength );
-
-        if( c == 0 )
-        {
-            result = i;
-            break;
-        }
-    }
-
-    return result;
-}
-
-Address ByteArrayModelPrivate::lastIndexOf( const Byte* pattern, int patternLength, Address fromOffset ) const
-{
-    Address result = -1;
-
-    const Address lastFrom = size() - patternLength;
-
-    if( fromOffset < 0 )
-        fromOffset = lastFrom + 1 + fromOffset;
-    else if( fromOffset > lastFrom )
-        fromOffset = lastFrom;
-
-    for( Address i=fromOffset; i>=0 ; --i )
-    {
-        int c = memcmp( &mData[i], pattern, patternLength );
-
-        if( c == 0 )
-        {
-            result = i;
-            break;
-        }
-    }
-
-    return result;
-}
-
-
 int ByteArrayModelPrivate::addSize( int addSize, int splitPosition, bool saveUpperPart )
 {
     if( mReadOnly )

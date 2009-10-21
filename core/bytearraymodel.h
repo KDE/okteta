@@ -71,9 +71,6 @@ class OKTETACORE_EXPORT ByteArrayModel : public AbstractByteArrayModel,
     virtual void setModified( bool modified = true );
     virtual void setReadOnly( bool isReadOnly = true );
 
-    virtual Address indexOf( const Byte* pattern, int patternLength, Address fromOffset = 0 ) const;
-    virtual Address lastIndexOf( const Byte* pattern, int patternLength, Address fromOffset = -1 ) const;
-
   public: // Okteta::Bookmarkable API
     virtual void addBookmarks( const QList<Okteta::Bookmark> &bookmarks );
     virtual void removeBookmarks( const QList<Okteta::Bookmark> &bookmarks );
