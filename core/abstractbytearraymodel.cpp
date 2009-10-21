@@ -22,6 +22,10 @@
 
 #include "abstractbytearraymodel.h"
 
+// lib
+#include "charcodec.h"
+#include "character.h"
+
 
 namespace Okteta
 {
@@ -131,6 +135,119 @@ Address AbstractByteArrayModel::lastIndexOf( const Byte* pattern, int patternLen
 
     return result;
 }
+
+static QByteArray toLower( const QByteArray& _pattern, const CharCodec* charCodec )
+{
+    QByteArray result( _pattern );
+
+    const int patternLength = result.size();
+    char* pattern = result.data();
+    for( int i = 0; i<patternLength; ++i )
+    {
+        const Character decodedChar = charCodec->decode( pattern[i] );
+
+        if( decodedChar.isUndefined() )
+            continue;
+
+        charCodec->encode( reinterpret_cast<Byte*>(&pattern[i]), decodedChar.toLower() );
+    }
+
+    return result;
+}
+
+Address AbstractByteArrayModel::indexOfIgnoreCase( const CharCodec* charCodec, const QByteArray& _pattern, Address fromOffset ) const
+{
+    Address result = -1;
+
+    const QByteArray lowerPattern = toLower( _pattern, charCodec );
+    const char* const pattern = lowerPattern.constData();
+    const int patternLength = lowerPattern.size();
+    const Address lastFrom = size() - patternLength;
+
+    Address nextSignalByteCount = fromOffset + SearchedByteCountSignalLimit;
+
+    for( Address i=fromOffset; i<=lastFrom ; ++i )
+    {
+        int c = 0;
+        for( ; c<patternLength; ++c )
+        {
+            Byte _byte = byte( i+c );
+
+            // turn to lowercase if possible
+            // TODO: optimize, like caching and not reencoding chars without a lower letter
+            const Okteta::Character decodedChar = charCodec->decode( _byte );
+            if( ! decodedChar.isUndefined() )
+                charCodec->encode( &_byte, decodedChar.toLower() );
+
+            if( _byte != pattern[c]  )
+                break;
+        }
+
+        if( nextSignalByteCount <= i )
+        {
+            nextSignalByteCount += SearchedByteCountSignalLimit;
+            searchedBytes( i-fromOffset+1 );
+        }
+
+        if( c == patternLength )
+        {
+            result = i;
+            break;
+        }
+    }
+
+    return result;
+}
+
+Address AbstractByteArrayModel::lastIndexOfIgnoreCase( const CharCodec* charCodec, const QByteArray& _pattern, Address fromOffset ) const
+{
+    Address result = -1;
+
+    const QByteArray lowerPattern = toLower( _pattern, charCodec );
+    const char* const pattern = lowerPattern.constData();
+    const int patternLength = lowerPattern.size();
+    const Address lastFrom = size() - patternLength;
+
+    if( fromOffset < 0 )
+        fromOffset = lastFrom + 1 + fromOffset;
+    else if( fromOffset > lastFrom )
+        fromOffset = lastFrom;
+
+    Address nextSignalByteCount = fromOffset - SearchedByteCountSignalLimit;
+
+    for( Address i=fromOffset; i>=0 ; --i )
+    {
+        int c = 0;
+        for( ; c<patternLength; ++c )
+        {
+            Byte _byte = byte( i+c );
+
+            // turn to lowercase if possible
+            // TODO: optimize, like caching and not reencoding chars without a lower letter
+            const Okteta::Character decodedChar = charCodec->decode( _byte );
+            if( ! decodedChar.isUndefined() )
+                charCodec->encode( &_byte, decodedChar.toLower() );
+
+            if( _byte != pattern[c]  )
+                break;
+        }
+
+        if( nextSignalByteCount >= i )
+        {
+            nextSignalByteCount -= SearchedByteCountSignalLimit;
+            searchedBytes( i-fromOffset+1 );
+        }
+
+        if( c == patternLength )
+        {
+            result = i;
+            break;
+        }
+    }
+
+    return result;
+}
+
 
 AbstractByteArrayModel::~AbstractByteArrayModel() {}
 

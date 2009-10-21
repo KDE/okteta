@@ -37,6 +37,7 @@ namespace Okteta
 {
 
 class ArrayChangeMetricsList;
+class CharCodec;
 
 
 /** could it be useful to hide the data access behind an iterator? *
@@ -228,6 +229,8 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
       */
     virtual Address indexOf( const Byte* pattern, int patternLength, Address fromOffset = 0 ) const;
     Address indexOf( const QByteArray& pattern, Address fromOffset = 0 ) const;
+    Address indexOfIgnoreCase( const CharCodec* charCodec, const QByteArray& pattern, Address fromOffset = 0 ) const;
+
     /** searches for a given data string
       * The section limits the data within which the key has to be found
       * If the end of the section is lower than the start the search continues at the start???
@@ -245,6 +248,7 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
       */
     virtual Address lastIndexOf( const Byte* pattern, int patternLength, Address fromOffset = -1 ) const;
     Address lastIndexOf( const QByteArray& pattern, Address fromOffset = -1 ) const;
+    Address lastIndexOfIgnoreCase( const CharCodec* charCodec, const QByteArray& pattern, Address fromOffset = -1 ) const;
 
 /*     virtual int find( const QString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */
 
