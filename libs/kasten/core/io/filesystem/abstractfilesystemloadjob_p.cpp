@@ -64,7 +64,7 @@ void AbstractFileSystemLoadJobPrivate::setDocument( AbstractDocument* document )
         mSynchronizer->setUrl( mUrl );
         if( mUrl.isLocalFile() )
         {
-            KDirWatch* dirWatch = KDirWatch::self();
+            KDirWatch* dirWatch = new KDirWatch( mSynchronizer );
             QObject::connect( dirWatch, SIGNAL(dirty( const QString& )),
                      mSynchronizer, SLOT(onFileDirty( const QString& )) );
 

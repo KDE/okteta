@@ -27,7 +27,6 @@
 #include <KTemporaryFile>
 #include <KLocale>
 #include <KMessageBox>
-#include <KDirWatch>
 
 #include <KDebug>
 namespace Kasten
@@ -58,8 +57,6 @@ kDebug()<<fileName;
 
 AbstractModelFileSystemSynchronizerPrivate::~AbstractModelFileSystemSynchronizerPrivate()
 {
-    if( url().isLocalFile() )
-        KDirWatch::self()->removeFile( url().path() );
 }
 
 }
