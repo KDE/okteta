@@ -74,7 +74,6 @@ class KASTENCORE_EXPORT AbstractDocument : public AbstractModel
     virtual QString mimeType() const = 0;
 
     virtual SyncStates syncStates() const = 0;
-// virtual QVariant data ( const QModelIndex & index, int role = Qt::DisplayRole ) const = 0
 
   public:
     void setSynchronizer( AbstractModelSynchronizer* synchronizer );
