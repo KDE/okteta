@@ -238,11 +238,16 @@ Done for 0.4:
 * added ability to AbstractDocumentFactory to create from QMimeData
 * extended CreatorController to also create new document from clipboard and generators
 * new: on drop of data to shell that is not a url list create a new byte array from it
+* changed  PieceTableByteArrayModel to use QByteArray for the initial data instead of char* and int and home-made memory management
+* added Base64 encoder
+* middle click on tab now triggers a request to close it
+* paste on empty shell or next to tabs is treated like a drop of selection clipboard
 
 Next to work on:
 ----------------------------------
 Important:
 * set new created from content to Modified, as input/data might be lost (depends on generator, take into account)
+* generator editors need to remember used settings
 * get maxEnums out of Designer combobox
 * implement find whole words only!
 * improve resize of status bar with priority-based limiting of shown items, use perhaps SqueezedLabel for Selection
@@ -250,6 +255,7 @@ Important:
 * QActionGroups are cleared on setupGui, e.g. if toolbar gets edited
 * search previous does not work in a row, as the cursor is exactly after a full match
 * find/replace dialogs and ByteArrayComboBox need to handle change charcodec, but what to do with than invalid characters already entered?
+* see if internal d'n'd not by view but by document
 Less important:
 * some more unit tests
 * fix wrong font width calculation for offset and selection in statusbar
@@ -316,6 +322,7 @@ See "Insert", is generated as well as from a source, so perhaps join there?
 * session support: full storing and restoring of view/model state
 * add support for more commandline options
 * complete work on input controllers for the bytearray view
+* add some generic virtual QVariant data( const QModelIndex& index, int role ) const to AbstractModel
 * rename AbstractDocument into AbstractObjectModel
 * add AbstractTool, ToolManager and ToolManagerControl
 * make controllers with one action generic, turn into tool&view
