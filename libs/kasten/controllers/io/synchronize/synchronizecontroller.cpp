@@ -33,6 +33,7 @@
 #include <KAction>
 #include <KStandardAction>
 #include <KXMLGUIClient>
+#include <KLocale>
 
 
 namespace Kasten
@@ -43,8 +44,13 @@ SynchronizeController::SynchronizeController( KXMLGUIClient* guiClient )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mSaveAction   = KStandardAction::save(   this, SLOT(save()),   actionCollection );
-    mReloadAction = KStandardAction::revert( this, SLOT(reload()), actionCollection );
+    mSaveAction = KStandardAction::save( this, SLOT(save()), actionCollection );
+
+    mReloadAction = actionCollection->addAction( "file_reload" );
+    mReloadAction->setText( i18nc("@title:menu","Reloa&d") );
+    mReloadAction->setIcon( KIcon("view-refresh") );
+    mReloadAction->setShortcuts( KStandardShortcut::reload() );
+    connect( mReloadAction, SIGNAL(triggered( bool )), SLOT(reload()) );
 
     setTargetModel( 0 );
 }
