@@ -39,6 +39,7 @@ namespace Kasten
 
 class AbstractModelSynchronizer;
 class AbstractModelFileSystemSynchronizer;
+class DocumentSyncManager;
 
 
 class KASTENCONTROLLERS_EXPORT SynchronizeController : public AbstractXmlGuiController
@@ -46,7 +47,7 @@ class KASTENCONTROLLERS_EXPORT SynchronizeController : public AbstractXmlGuiCont
   Q_OBJECT
 
   public:
-    explicit SynchronizeController( KXMLGUIClient* guiClient );
+    SynchronizeController( DocumentSyncManager* syncManager, KXMLGUIClient* guiClient );
 
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
@@ -60,6 +61,7 @@ class KASTENCONTROLLERS_EXPORT SynchronizeController : public AbstractXmlGuiCont
     void onSyncStatesChanged( Kasten::AbstractDocument::SyncStates newStates );
 
   protected:
+    DocumentSyncManager* mSyncManager;
     AbstractDocument* mDocument;
     AbstractModelFileSystemSynchronizer* mSynchronizer;
 

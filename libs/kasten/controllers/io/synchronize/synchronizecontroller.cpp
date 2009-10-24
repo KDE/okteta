@@ -23,8 +23,8 @@
 #include "synchronizecontroller.h"
 
 // Kasten core
+#include <documentsyncmanager.h>
 #include <abstractsynctoremotejob.h>
-#include <abstractsyncfromremotejob.h>
 #include <abstractmodelfilesystemsynchronizer.h>
 #include <jobmanager.h>
 // KDE
@@ -39,8 +39,10 @@
 namespace Kasten
 {
 
-SynchronizeController::SynchronizeController( KXMLGUIClient* guiClient )
-: mDocument( 0 ), mSynchronizer( 0 )
+SynchronizeController::SynchronizeController( DocumentSyncManager* syncManager, KXMLGUIClient* guiClient )
+  : mSyncManager( syncManager ),
+    mDocument( 0 ),
+    mSynchronizer( 0 )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -77,8 +79,7 @@ void SynchronizeController::save()
 
 void SynchronizeController::reload()
 {
-    AbstractSyncFromRemoteJob *syncJob = mDocument->synchronizer()->startSyncFromRemote();
-    JobManager::executeJob( syncJob );
+    mSyncManager->reload( mDocument );
 }
 
 void SynchronizeController::onSynchronizerChange( AbstractModelSynchronizer* newSynchronizer )

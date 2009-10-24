@@ -8,7 +8,7 @@
     published by the Free Software Foundation; either version 2 of
     the License or (at your option) version 3 or any later version
     accepted by the membership of KDE e.V. (or its successor approved
-    by the membership of KDE e.V.), which shall act as a proxy 
+    by the membership of KDE e.V.), which shall act as a proxy
     defined in Section 14 of version 3 of the license.
 
     This program is distributed in the hope that it will be useful,
@@ -41,6 +41,8 @@
 #include <bytetable/bytetabletool.h>
 #include <bookmarks/bookmarkstoolview.h>
 #include <bookmarks/bookmarkstool.h>
+#include <structview/structtoolview.h>
+#include <structview/structtool.h>
 // Kasten tools
 #include <document/versionview/versionviewtoolview.h>
 #include <document/versionview/versionviewtool.h>
@@ -138,7 +140,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new CreatorController(mProgram->viewManager(),mProgram->documentManager(),this) );
     addXmlGuiController( new LoaderController(mProgram->documentManager()->syncManager(),this) );
     addXmlGuiController( new SetRemoteController(mProgram->documentManager()->syncManager(),this) );
-    addXmlGuiController( new SynchronizeController(this) );
+    addXmlGuiController( new SynchronizeController(mProgram->documentManager()->syncManager(),this) );
     addXmlGuiController( new ExportController(mProgram->viewManager(),mProgram->documentManager(),this) );
     addXmlGuiController( new CloseController(mProgram->documentManager(),this) );
     addXmlGuiController( new VersionController(this) );
@@ -185,6 +187,7 @@ void OktetaMainWindow::setupControllers()
     addTool( new ByteTableToolView(new ByteTableTool()) );
     addTool( new InfoToolView(new InfoTool()) );
     addTool( new PODDecoderToolView(new PODDecoderTool()) );
+    addTool( new StructToolView(new StructTool()) );
     addTool( new BookmarksToolView(new BookmarksTool()) );
 }
 
