@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -22,31 +22,21 @@
 
 #include "bytearrayrawfilereloadthread.h"
 
-// lib
-#include "bytearraydocument.h"
 // Okteta core
 #include <piecetablebytearraymodel.h>
-// KDE
-#include <KUrl>
-#include <KLocale>
 // Qt
-#include <QtGui/QApplication>
 #include <QtCore/QDataStream>
 #include <QtCore/QFile>
-#include <QtCore/QString>
 
 
 namespace Kasten
 {
 
-ByteArrayRawFileReloadThread::ByteArrayRawFileReloadThread( QObject *parent,
-    /*ByteArrayDocument *document,*/ const QString &filePath )
-  : QThread( parent ), /*mDocument( document ),*/
+ByteArrayRawFileReloadThread::ByteArrayRawFileReloadThread( QObject* parent, const QString& filePath )
+  : QThread( parent ),
     mFilePath( filePath ),
     mSuccess( false )
 {
-//     mDocument->content()->moveToThread( this );
-//     mDocument->moveToThread( this );
 }
 
 void ByteArrayRawFileReloadThread::run()
@@ -56,25 +46,12 @@ void ByteArrayRawFileReloadThread::run()
     QDataStream inStream( &file );
     const int fileSize = file.size();
 
-    QByteArray data;
-    data.resize( fileSize );
-    inStream.readRawData( data.data(), fileSize );
+    mData.resize( fileSize );
+    inStream.readRawData( mData.data(), fileSize );
 
     //registerDiskModifyTime( file ); TODO move into synchronizer
 
     mSuccess = ( inStream.status() == QDataStream::Ok );
-//     if( success )
-//         *success = streamIsOk ? 0 : 1;
-//     mDocument->content()->moveToThread( QApplication::instance()->thread() );
-//     mDocument->moveToThread( QApplication::instance()->thread() );
-    if( mSuccess )
-    {
-//         Okteta::PieceTableByteArrayModel *byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>( mDocument->content() );
-//         byteArray->setData( mData, mSize, false );
-    }
-    else
-    {
-    }
 
     emit documentReloaded( mSuccess );
 }
