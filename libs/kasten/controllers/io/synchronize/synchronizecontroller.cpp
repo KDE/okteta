@@ -24,9 +24,7 @@
 
 // Kasten core
 #include <documentsyncmanager.h>
-#include <abstractsynctoremotejob.h>
 #include <abstractmodelfilesystemsynchronizer.h>
-#include <jobmanager.h>
 // KDE
 #include <KUrl>
 #include <KActionCollection>
@@ -73,8 +71,7 @@ void SynchronizeController::setTargetModel( AbstractModel* model )
 
 void SynchronizeController::save()
 {
-    AbstractSyncToRemoteJob *syncJob = mDocument->synchronizer()->startSyncToRemote();
-    JobManager::executeJob( syncJob );
+    mSyncManager->save( mDocument );
 }
 
 void SynchronizeController::reload()
