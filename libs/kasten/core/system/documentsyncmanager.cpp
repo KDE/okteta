@@ -261,6 +261,13 @@ void DocumentSyncManager::reload( AbstractDocument* document )
     JobManager::executeJob( syncJob, mWidget );
 }
 
+void DocumentSyncManager::save( AbstractDocument* document )
+{
+    AbstractModelSynchronizer* synchronizer = document->synchronizer();
+    AbstractSyncToRemoteJob* syncJob = synchronizer->startSyncToRemote();
+    JobManager::executeJob( syncJob );
+}
+
 void DocumentSyncManager::onDocumentLoaded( AbstractDocument* document )
 {
     if( document )

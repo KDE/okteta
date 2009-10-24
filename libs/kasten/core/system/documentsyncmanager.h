@@ -56,6 +56,7 @@ class KASTENCORE_EXPORT DocumentSyncManager : public QObject
     bool setSynchronizer( AbstractDocument* document );
     bool canClose( AbstractDocument* document );
     void reload( AbstractDocument* document );
+    void save( AbstractDocument* document );
 
   public:
     bool hasSynchronizerForLocal( const QString &mimeType ) const;
