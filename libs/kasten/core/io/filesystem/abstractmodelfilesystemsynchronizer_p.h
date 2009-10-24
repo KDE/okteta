@@ -45,6 +45,7 @@ class AbstractModelFileSystemSynchronizerPrivate : public AbstractModelSynchroni
     void onFileDeleted( const QString& fileName );
 
   protected:
+    Q_DECLARE_PUBLIC( AbstractModelFileSystemSynchronizer )
 };
 
 

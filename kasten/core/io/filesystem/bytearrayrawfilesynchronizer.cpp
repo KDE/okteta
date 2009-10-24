@@ -79,6 +79,10 @@ AbstractConnectJob *ByteArrayRawFileSynchronizer::startConnect( AbstractDocument
     return new ByteArrayRawFileConnectJob( this, document, url, option );
 }
 
+void ByteArrayRawFileSynchronizer::handleFileChange( FileChange change )
+{
+Q_UNUSED( change )
+}
 
 void ByteArrayRawFileSynchronizer::onUrlChange( const KUrl &url )
 {

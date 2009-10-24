@@ -22,37 +22,37 @@
 
 #include "abstractmodelfilesystemsynchronizer_p.h"
 
-// KDE
-#include <KIO/NetAccess>
-#include <KTemporaryFile>
-#include <KLocale>
-#include <KMessageBox>
-
 #include <KDebug>
+
 namespace Kasten
 {
 
 void AbstractModelFileSystemSynchronizerPrivate::onFileDirty( const QString& fileName )
 {
-  Q_UNUSED( fileName )
+    Q_UNUSED( fileName )
+    Q_Q( AbstractModelFileSystemSynchronizer );
+
+    q->handleFileChange( AbstractModelFileSystemSynchronizer::FileDirty );
 kDebug()<<fileName;
-//     if( url().url() == fileName )
-//         document()->setRemoteHasChanges(); TODO: needs a control interface? 
 }
 
 void AbstractModelFileSystemSynchronizerPrivate::onFileCreated( const QString& fileName )
 {
-  Q_UNUSED( fileName )
-kDebug()<<fileName;
+    Q_UNUSED( fileName )
+    Q_Q( AbstractModelFileSystemSynchronizer );
+
   //TODO: could happen after a delete, what to do?
+    q->handleFileChange( AbstractModelFileSystemSynchronizer::FileCreated );
+kDebug()<<fileName;
 }
 
 void AbstractModelFileSystemSynchronizerPrivate::onFileDeleted( const QString& fileName )
 {
-  Q_UNUSED( fileName )
+    Q_UNUSED( fileName )
+    Q_Q( AbstractModelFileSystemSynchronizer );
+
+    q->handleFileChange( AbstractModelFileSystemSynchronizer::FileDeleted );
 kDebug()<<fileName;
-//     if( url().url() == fileName )
-//         document()->setRemoteHasChanges(); TODO: needs a control interface? 
 }
 
 AbstractModelFileSystemSynchronizerPrivate::~AbstractModelFileSystemSynchronizerPrivate()

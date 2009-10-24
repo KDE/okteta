@@ -58,6 +58,9 @@ class OKTETAKASTENCORE_EXPORT ByteArrayRawFileSynchronizer : public AbstractMode
   protected:
     void setDocument( ByteArrayDocument *document );
 
+  protected: // AbstractModelFileSystemSynchronizer API
+    virtual void handleFileChange( FileChange change );
+
   protected Q_SLOTS:
     void onUrlChange( const KUrl &url );
 
