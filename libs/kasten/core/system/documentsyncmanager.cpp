@@ -29,6 +29,7 @@
 #include <abstractconnectjob.h>
 #include <abstractsynctoremotejob.h>
 #include <abstractsyncwithremotejob.h>
+#include <abstractsyncfromremotejob.h>
 #include <abstractmodelsynchronizerfactory.h>
 // KDE
 #include <KIO/NetAccess>
@@ -238,6 +239,28 @@ bool DocumentSyncManager::canClose( AbstractDocument* document )
     return canClose;
 }
 
+void DocumentSyncManager::reload( AbstractDocument* document )
+{
+    AbstractModelSynchronizer* synchronizer = document->synchronizer();
+
+    if( document->hasLocalChanges() )
+    {
+        const QString processTitle = i18nc( "@title:window", "Reload" );
+
+        const QString message = i18nc( "@info \"%title\" has been modified.",
+            "There are unsaved modifications to <filename>%1</filename>. "
+            "They will be lost if you reload the document.<nl/>"
+            "Do you want to discard them?", document->title() );
+            const int answer = KMessageBox::warningContinueCancel( mWidget, message, processTitle,
+                                                                   KStandardGuiItem::discard() );
+        if( answer == KMessageBox::Cancel )
+            return;
+    }
+
+    AbstractSyncFromRemoteJob* syncJob = synchronizer->startSyncFromRemote();
+    JobManager::executeJob( syncJob, mWidget );
+}
+
 void DocumentSyncManager::onDocumentLoaded( AbstractDocument* document )
 {
     if( document )
@@ -246,10 +269,12 @@ void DocumentSyncManager::onDocumentLoaded( AbstractDocument* document )
 
 void DocumentSyncManager::onDocumentsAdded( const QList<Kasten::AbstractDocument*>& documents )
 {
+    Q_UNUSED( documents )
 }
 
 void DocumentSyncManager::onDocumentsClosing( const QList<Kasten::AbstractDocument*>& documents )
 {
+    Q_UNUSED( documents )
 }
 
 
