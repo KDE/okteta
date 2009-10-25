@@ -41,8 +41,6 @@
 #include <bytetable/bytetabletool.h>
 #include <bookmarks/bookmarkstoolview.h>
 #include <bookmarks/bookmarkstool.h>
-#include <structview/structtoolview.h>
-#include <structview/structtool.h>
 // Kasten tools
 #include <document/versionview/versionviewtoolview.h>
 #include <document/versionview/versionviewtool.h>
@@ -187,7 +185,6 @@ void OktetaMainWindow::setupControllers()
     addTool( new ByteTableToolView(new ByteTableTool()) );
     addTool( new InfoToolView(new InfoTool()) );
     addTool( new PODDecoderToolView(new PODDecoderTool()) );
-    addTool( new StructToolView(new StructTool()) );
     addTool( new BookmarksToolView(new BookmarksTool()) );
 }
 
