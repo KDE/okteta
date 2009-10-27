@@ -28,7 +28,9 @@
 // KDE
 #include <KIO/NetAccess>
 #include <KLocale>
-#include <KDirWatch>
+// Qt
+#include <QtCore/QFileInfo>
+#include <QtCore/QDateTime>
 
 
 namespace Kasten
@@ -39,16 +41,20 @@ void AbstractFileSystemLoadJobPrivate::load()
     Q_Q( AbstractFileSystemLoadJob );
 
     // TODO: see if this could be used asynchronously instead
-    const bool success = KIO::NetAccess::download( mUrl.url(), mWorkFilePath, widget() );
+    bool isWorkFileOk = KIO::NetAccess::download( mUrl.url(), mWorkFilePath, widget() );
 
-    if( success )
+    if( isWorkFileOk )
     {
-        q->startLoadFromFile();
+        mFile = new QFile( mWorkFilePath );
+        isWorkFileOk = mFile->open( QIODevice::ReadOnly );
     }
+
+    if( isWorkFileOk )
+        q->startLoadFromFile();
     else
     {
         q->setError( KJob::KilledJobError );
-        q->setErrorText( KIO::NetAccess::lastErrorString() );
+        q->setErrorText( mFile ? mFile->errorString() : KIO::NetAccess::lastErrorString() );
         // TODO: should we rather skip setDocument in the API?
         q->AbstractLoadJob::setDocument( 0 );
     }
@@ -61,20 +67,18 @@ void AbstractFileSystemLoadJobPrivate::setDocument( AbstractDocument* document )
 
     if( document )
     {
+        mFile->close(); // TODO: when is new time written, on close?
+
+        // TODO: reading the fileinfo here separated from the content reading without a lock
+        // asks for a race-condition to happen where the file is modified in between
+        // TODO: how to handle remote+temp?
+        QFileInfo fileInfo( *mFile );
+        mSynchronizer->setFileDateTimeOnSync( fileInfo.lastModified() );
+
         mSynchronizer->setUrl( mUrl );
         if( mUrl.isLocalFile() )
-        {
-            KDirWatch* dirWatch = new KDirWatch( mSynchronizer );
-            QObject::connect( dirWatch, SIGNAL(dirty( const QString& )),
-                     mSynchronizer, SLOT(onFileDirty( const QString& )) );
+            mSynchronizer->startFileWatching();
 
-            QObject::connect( dirWatch, SIGNAL(created( const QString& )),
-                     mSynchronizer, SLOT(onFileCreated( const QString& )) );
-
-            QObject::connect( dirWatch, SIGNAL(deleted( const QString& )),
-                     mSynchronizer, SLOT(onFileDeleted( const QString& )) );
-            dirWatch->addFile( mUrl.path() );
-        }
         document->setSynchronizer( mSynchronizer );
     }
     else
@@ -85,6 +89,7 @@ void AbstractFileSystemLoadJobPrivate::setDocument( AbstractDocument* document )
         q->setErrorText( i18nc("@info","Problem while loading from local filesystem.") );
     }
 
+    delete mFile;
     KIO::NetAccess::removeTempFile( mWorkFilePath );
 
     q->AbstractLoadJob::setDocument( document );

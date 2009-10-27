@@ -86,6 +86,7 @@ class OKTETAKASTENCORE_EXPORT ByteArrayDocument : public AbstractDocument,
 
   public:
     void setTitle( const QString &title );
+    void setRemoteState( AbstractDocument::SyncState remoteState );
 
     void setOwner( const Person& owner );
     void addUsers( const QList<Person>& users );
@@ -110,6 +111,7 @@ class OKTETAKASTENCORE_EXPORT ByteArrayDocument : public AbstractDocument,
 
     const QString mInitDescription;
 
+    SyncState mRemoteState;
     QList<Person> mUserList;
 };
 

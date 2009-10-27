@@ -27,6 +27,9 @@
 // KDE
 #include <KIO/NetAccess>
 #include <KLocale>
+// Qt
+#include <QtCore/QFileInfo>
+#include <QtCore/QDateTime>
 
 
 namespace Kasten
@@ -36,16 +39,23 @@ void AbstractFileSystemSyncFromRemoteJobPrivate::syncFromRemote()
 {
     Q_Q( AbstractFileSystemSyncFromRemoteJob );
 
+    const KUrl url = mSynchronizer->url();
+
     // TODO: see if this could be used asynchronously instead
-    const bool success = KIO::NetAccess::download( mSynchronizer->url().url(), mWorkFilePath, widget() );
-    if( success )
+    bool isWorkFileOk = KIO::NetAccess::download( url.url(), mWorkFilePath, widget() );
+    if( isWorkFileOk )
     {
-        q->startReadFromFile();
+        mFile = new QFile( mWorkFilePath );
+        isWorkFileOk = mFile->open( QIODevice::ReadOnly );
     }
+
+    if( isWorkFileOk )
+        q->startReadFromFile();
     else
     {
         q->setError( KJob::KilledJobError );
-        q->setErrorText( KIO::NetAccess::lastErrorString() );
+        q->setErrorText( mFile ? mFile->errorString() : KIO::NetAccess::lastErrorString() );
+        delete mFile;
         q->emitResult();
     }
 }
@@ -54,12 +64,18 @@ void AbstractFileSystemSyncFromRemoteJobPrivate::completeRead( bool success )
 {
     Q_Q( AbstractFileSystemSyncFromRemoteJob );
 
-    if( ! success )
+    if( success )
+    {
+        QFileInfo fileInfo( mWorkFilePath );
+        mSynchronizer->setFileDateTimeOnSync( fileInfo.lastModified() );
+    }
+    else
     {
         q->setError( KJob::KilledJobError );
         q->setErrorText( i18nc("@info","Problem while loading from local filesystem.") );
     }
 
+    delete mFile;
     KIO::NetAccess::removeTempFile( mWorkFilePath );
 
     q->emitResult();

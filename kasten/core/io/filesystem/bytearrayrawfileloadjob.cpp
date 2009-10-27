@@ -29,8 +29,6 @@
 #include "bytearraydocument.h"
 // Qt
 #include <QtGui/QApplication>
-#include <QtCore/QDataStream>
-#include <QtCore/QFile>
 
 
 namespace Kasten
@@ -42,7 +40,7 @@ ByteArrayRawFileLoadJob::ByteArrayRawFileLoadJob( ByteArrayRawFileSynchronizer *
 
 void ByteArrayRawFileLoadJob::startLoadFromFile()
 {
-    ByteArrayRawFileLoadThread *loadThread = new ByteArrayRawFileLoadThread( this, workFilePath() );
+    ByteArrayRawFileLoadThread *loadThread = new ByteArrayRawFileLoadThread( this, file() );
     loadThread->start();
     while( !loadThread->wait(100) )
         QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );

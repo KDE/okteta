@@ -39,11 +39,11 @@ AbstractModelFileSystemSynchronizer* AbstractFileSystemSyncWithRemoteJob::synchr
 
     return d->synchronizer();
 }
-QString AbstractFileSystemSyncWithRemoteJob::workFilePath() const
+QFile* AbstractFileSystemSyncWithRemoteJob::file() const
 {
     Q_D( const AbstractFileSystemSyncWithRemoteJob );
 
-    return d->workFilePath();
+    return d->file();
 }
 QWidget* AbstractFileSystemSyncWithRemoteJob::widget() const
 {

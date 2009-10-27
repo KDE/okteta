@@ -33,11 +33,6 @@
 #include <piecetablebytearraymodel.h>
 // KDE
 #include <KUrl>
-#include <KLocale>
-// Qt
-#include <QtGui/QApplication>
-#include <QtCore/QDataStream>
-#include <QtCore/QFile>
 
 
 namespace Kasten
@@ -82,6 +77,7 @@ AbstractConnectJob *ByteArrayRawFileSynchronizer::startConnect( AbstractDocument
 void ByteArrayRawFileSynchronizer::handleFileChange( FileChange change )
 {
 Q_UNUSED( change )
+    mDocument->setRemoteState( AbstractDocument::RemoteHasChanges );
 }
 
 void ByteArrayRawFileSynchronizer::onUrlChange( const KUrl &url )

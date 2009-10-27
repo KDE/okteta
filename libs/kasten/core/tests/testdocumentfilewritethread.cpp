@@ -36,10 +36,7 @@ void TestDocumentFileWriteThread::run()
 {
     const QByteArray *byteArray = mDocument->data();
 
-    QFile file( mFilePath );
-    file.open( QIODevice::WriteOnly );
-
-    QDataStream outStream( &file );
+    QDataStream outStream( mFile );
     outStream.writeRawData( mHeader.data(), mHeader.size() );
     outStream.writeRawData( byteArray->data(), byteArray->size() );
 

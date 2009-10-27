@@ -25,7 +25,8 @@
 
 // Qt
 #include <QtCore/QThread>
-#include <QtCore/QString>
+
+class QFile;
 
 
 namespace Kasten
@@ -38,7 +39,7 @@ class TestDocumentFileLoadThread : public QThread
   Q_OBJECT
   public:
     TestDocumentFileLoadThread( QObject *parent, const QByteArray &header,
-                                const QString &filePath );
+                                QFile* file );
     virtual ~TestDocumentFileLoadThread();
 
   public: // QThread API
@@ -51,15 +52,15 @@ class TestDocumentFileLoadThread : public QThread
     void documentRead( TestDocument* document );
 
   protected:
-    const QString mFilePath;
+    QFile* mFile;
     const QByteArray mHeader;
 
     TestDocument* mDocument;
 };
 
 
-inline TestDocumentFileLoadThread::TestDocumentFileLoadThread( QObject *parent, const QByteArray &header, const QString &filePath )
- : QThread( parent ), mFilePath( filePath ), mHeader( header ), mDocument( 0 )
+inline TestDocumentFileLoadThread::TestDocumentFileLoadThread( QObject *parent, const QByteArray &header, QFile* file )
+ : QThread( parent ), mFile( file ), mHeader( header ), mDocument( 0 )
 {}
 
 inline TestDocument* TestDocumentFileLoadThread::document() const { return mDocument; }

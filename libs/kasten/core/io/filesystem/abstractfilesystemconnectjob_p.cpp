@@ -28,9 +28,11 @@
 // KDE
 #include <KIO/NetAccess>
 #include <KLocale>
-#include <KDirWatch>
+// Qt
+#include <QtCore/QFileInfo>
+#include <QtCore/QDateTime>
 
-
+#include <KDebug>
 namespace Kasten
 {
 
@@ -46,26 +48,39 @@ void AbstractFileSystemConnectJobPrivate::connectWithFile()
     if( mOption == AbstractModelSynchronizer::ReplaceRemote )
     {
         if( mUrl.isLocalFile() )
+        {
             mWorkFilePath = mUrl.path();
+            mFile = new QFile( mWorkFilePath );
+            isWorkFileOk = mFile->open( QIODevice::WriteOnly );
+
+            mSynchronizer->stopFileWatching();
+        }
         else
         {
-            mTemporaryFile = new KTemporaryFile;
-            mTemporaryFile->open();
-            mWorkFilePath = mTemporaryFile->fileName();
+            KTemporaryFile* temporaryFile = new KTemporaryFile;
+            isWorkFileOk = temporaryFile->open();
+
+            mWorkFilePath = temporaryFile->fileName();
+            mFile = temporaryFile;
         }
-        isWorkFileOk = true;
     }
     else
-        isWorkFileOk = KIO::NetAccess::download( mUrl.url(), mWorkFilePath, widget() );
-
-    if( isWorkFileOk )
     {
-        q->startConnectWithFile();
+        isWorkFileOk = KIO::NetAccess::download( mUrl.url(), mWorkFilePath, widget() );
+        if( isWorkFileOk )
+        {
+            mFile = new QFile( mWorkFilePath );
+            isWorkFileOk = mFile->open( QIODevice::ReadOnly );
+        }
     }
+kDebug()<< mFile<<isWorkFileOk;
+    if( isWorkFileOk )
+        q->startConnectWithFile();
     else
     {
         q->setError( KJob::KilledJobError );
-        q->setErrorText( KIO::NetAccess::lastErrorString() );
+        q->setErrorText( mFile ? mFile->errorString() : KIO::NetAccess::lastErrorString() );
+        delete mFile;
         // TODO: should we rather skip setDocument in the API?
         q->emitResult();
     }
@@ -77,14 +92,11 @@ void AbstractFileSystemConnectJobPrivate::complete( bool success )
 
     if( success )
     {
-        KDirWatch* dirWatch = KDirWatch::self();
-        const KUrl oldUrl = mSynchronizer->url();
-        // care for old url
-        if( oldUrl.isLocalFile() )
-        {
-            dirWatch->disconnect( mSynchronizer );
-            dirWatch->removeFile( oldUrl.path() );
-        }
+        mFile->close(); // TODO: when is new time written, on close?
+        QFileInfo fileInfo( *mFile );
+        mSynchronizer->setFileDateTimeOnSync( fileInfo.lastModified() );
+
+        mSynchronizer->setUrl( mUrl );
 
         if( ! mUrl.isLocalFile() )
         {
@@ -96,18 +108,8 @@ void AbstractFileSystemConnectJobPrivate::complete( bool success )
             }
         }
         else
-        {
-            QObject::connect( dirWatch, SIGNAL(dirty( const QString& )),
-                              mSynchronizer, SLOT(onFileDirty( const QString& )) );
+            mSynchronizer->startFileWatching();
 
-            QObject::connect( dirWatch, SIGNAL(created( const QString& )),
-                              mSynchronizer, SLOT(onFileCreated( const QString& )) );
-
-            QObject::connect( dirWatch, SIGNAL(deleted( const QString& )),
-                              mSynchronizer, SLOT(onFileDeleted( const QString& )) );
-            dirWatch->addFile( mWorkFilePath );
-        }
-        mSynchronizer->setUrl( mUrl );
         // TODO; in path of both constructor by url and synchWithRemote
         // only needed for the first, so constructor writers can forget about this
         // for now we just check in setSynchronizer that new != old before deleting old
@@ -121,8 +123,8 @@ void AbstractFileSystemConnectJobPrivate::complete( bool success )
         q->setErrorText( i18nc("@info","Problem while synching with local filesystem.") );
     }
 
+    delete mFile;
     KIO::NetAccess::removeTempFile( mWorkFilePath );
-    delete mTemporaryFile;
 
     q->emitResult();
 }

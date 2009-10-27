@@ -29,13 +29,11 @@
 // Okteta core
 #include <piecetablebytearraymodel.h>
 // KDE
-#include <KUrl>
 #include <KLocale>
 // Qt
 #include <QtGui/QApplication>
 #include <QtCore/QDataStream>
 #include <QtCore/QFile>
-#include <QtCore/QString>
 
 
 namespace Kasten
@@ -43,10 +41,8 @@ namespace Kasten
 
 void ByteArrayRawFileLoadThread::run()
 {
-    QFile file( mFilePath );
-    file.open( QIODevice::ReadOnly );
-    QDataStream inStream( &file );
-    int fileSize = file.size();
+    QDataStream inStream( mFile );
+    int fileSize = mFile->size();
 
     // TODO: should the decoder know this?
     // it is in the api now (constructor)

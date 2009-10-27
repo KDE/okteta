@@ -41,11 +41,11 @@ AbstractModelFileSystemSynchronizer* AbstractFileSystemLoadJob::synchronizer() c
     return d->synchronizer();
 }
 
-QString AbstractFileSystemLoadJob::workFilePath() const
+QFile* AbstractFileSystemLoadJob::file() const
 {
     Q_D( const AbstractFileSystemLoadJob );
 
-    return d->workFilePath();
+    return d->file();
 }
 
 QWidget* AbstractFileSystemLoadJob::widget() const

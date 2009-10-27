@@ -22,10 +22,57 @@
 
 #include "abstractmodelfilesystemsynchronizer_p.h"
 
+// KDE
+#include <KDirWatch>
+
 #include <KDebug>
 
 namespace Kasten
 {
+
+void AbstractModelFileSystemSynchronizerPrivate::startFileWatching()
+{
+    Q_Q( AbstractModelFileSystemSynchronizer );
+
+    if( ! mDirWatch )
+    {
+        mDirWatch = new KDirWatch( q );
+        QObject::connect( mDirWatch, SIGNAL(dirty( const QString& )),
+            q, SLOT(onFileDirty( const QString& )) );
+
+        QObject::connect( mDirWatch, SIGNAL(created( const QString& )),
+            q, SLOT(onFileCreated( const QString& )) );
+
+        QObject::connect( mDirWatch, SIGNAL(deleted( const QString& )),
+            q, SLOT(onFileDeleted( const QString& )) );
+    }
+
+    mDirWatch->addFile( mUrl.path() );
+}
+
+void AbstractModelFileSystemSynchronizerPrivate::stopFileWatching()
+{
+    if( ! mDirWatch )
+        return;
+
+    mDirWatch->removeFile( mUrl.path() );
+}
+
+void AbstractModelFileSystemSynchronizerPrivate::pauseFileWatching()
+{
+    if( ! mDirWatch )
+        return;
+
+    mDirWatch->stopScan();
+}
+
+void AbstractModelFileSystemSynchronizerPrivate::unpauseFileWatching()
+{
+    if( ! mDirWatch )
+        return;
+
+    mDirWatch->startScan();
+}
 
 void AbstractModelFileSystemSynchronizerPrivate::onFileDirty( const QString& fileName )
 {

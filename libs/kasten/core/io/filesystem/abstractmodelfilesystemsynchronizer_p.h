@@ -27,6 +27,8 @@
 
 // lib
 #include <abstractmodelsynchronizer_p.h>
+// Qt
+#include <QtCore/QDateTime>
 
 
 namespace Kasten
@@ -40,9 +42,20 @@ class AbstractModelFileSystemSynchronizerPrivate : public AbstractModelSynchroni
     virtual ~AbstractModelFileSystemSynchronizerPrivate();
 
   public:
+    void setFileDateTimeOnSync( const QDateTime& fileDateTime );
+    void startFileWatching();
+    void stopFileWatching();
+    void pauseFileWatching();
+    void unpauseFileWatching();
+
+  public:
     void onFileDirty( const QString& fileName );
     void onFileCreated( const QString& fileName );
     void onFileDeleted( const QString& fileName );
+
+  protected:
+    QDateTime mFileDateTime;
+    mutable KDirWatch* mDirWatch;
 
   protected:
     Q_DECLARE_PUBLIC( AbstractModelFileSystemSynchronizer )
@@ -50,8 +63,14 @@ class AbstractModelFileSystemSynchronizerPrivate : public AbstractModelSynchroni
 
 
 inline AbstractModelFileSystemSynchronizerPrivate::AbstractModelFileSystemSynchronizerPrivate( AbstractModelFileSystemSynchronizer* parent )
-  : AbstractModelSynchronizerPrivate( parent )
+  : AbstractModelSynchronizerPrivate( parent ),
+    mDirWatch( 0 )
 {
+}
+
+inline void AbstractModelFileSystemSynchronizerPrivate::setFileDateTimeOnSync( const QDateTime& fileDateTime )
+{
+    mFileDateTime = fileDateTime;
 }
 
 }

@@ -54,7 +54,7 @@ class KASTENCORE_EXPORT AbstractFileSystemConnectJobPrivate : public AbstractCon
   public:
     AbstractModelFileSystemSynchronizer* synchronizer() const;
     AbstractDocument* document() const;
-    const QString& workFilePath() const;
+    QFile* file() const;
     QWidget* widget() const;
 
   public:
@@ -68,7 +68,7 @@ class KASTENCORE_EXPORT AbstractFileSystemConnectJobPrivate : public AbstractCon
     AbstractDocument* const mDocument;
     const KUrl mUrl;
     const AbstractModelSynchronizer::ConnectOption mOption;
-    KTemporaryFile* mTemporaryFile;
+    QFile* mFile;
     QString mWorkFilePath;
 };
 
@@ -81,7 +81,7 @@ inline AbstractFileSystemConnectJobPrivate::AbstractFileSystemConnectJobPrivate(
     mDocument( document ),
     mUrl( url ),
     mOption( option ),
-    mTemporaryFile( 0 )
+    mFile( 0 )
 {}
 
 inline AbstractFileSystemConnectJobPrivate::~AbstractFileSystemConnectJobPrivate() {}
@@ -91,7 +91,7 @@ inline AbstractModelFileSystemSynchronizer* AbstractFileSystemConnectJobPrivate:
     return mSynchronizer;
 }
 inline AbstractDocument* AbstractFileSystemConnectJobPrivate::document()   const { return mDocument; }
-inline const QString& AbstractFileSystemConnectJobPrivate::workFilePath()  const { return mWorkFilePath; }
+inline QFile* AbstractFileSystemConnectJobPrivate::file()                  const { return mFile; }
 // TODO: setup a notification system
 inline QWidget* AbstractFileSystemConnectJobPrivate::widget()              const { return 0; }
 

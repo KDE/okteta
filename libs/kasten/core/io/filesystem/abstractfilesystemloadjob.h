@@ -28,6 +28,8 @@
 
 class KUrl;
 class QWidget;
+class QFile;
+
 
 namespace Kasten
 {
@@ -57,7 +59,7 @@ class KASTENCORE_EXPORT AbstractFileSystemLoadJob : public AbstractLoadJob
 
   protected:
     AbstractModelFileSystemSynchronizer* synchronizer() const;
-    QString workFilePath() const;
+    QFile* file() const;
     QWidget* widget() const;
 
   protected:

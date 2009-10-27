@@ -26,6 +26,9 @@
 // lib
 #include <abstractmodelsynchronizer.h>
 
+class KDirWatch;
+class QDateTime;
+
 
 namespace Kasten
 {
@@ -38,6 +41,7 @@ class KASTENCORE_EXPORT AbstractModelFileSystemSynchronizer : public AbstractMod
 
   friend class AbstractFileSystemLoadJobPrivate;
   friend class AbstractFileSystemConnectJobPrivate;
+  friend class AbstractFileSystemSyncFromRemoteJobPrivate;
   friend class AbstractFileSystemSyncWithRemoteJobPrivate;
   friend class AbstractFileSystemSyncToRemoteJobPrivate;
 
@@ -54,6 +58,16 @@ class KASTENCORE_EXPORT AbstractModelFileSystemSynchronizer : public AbstractMod
 
   protected: // API to be implemented
     virtual void handleFileChange( FileChange change ) = 0;
+
+  protected:
+//     QDataTime lastModifed() const;
+
+  protected:
+    void setFileDateTimeOnSync( const QDateTime& fileDateTime );
+    void startFileWatching();
+    void stopFileWatching();
+    void pauseFileWatching();
+    void unpauseFileWatching();
 
   protected:
     Q_PRIVATE_SLOT( d_func(), void onFileDirty( const QString& filePath ) )

@@ -51,7 +51,7 @@ class KASTENCORE_EXPORT AbstractFileSystemSyncFromRemoteJobPrivate : public Abst
 
   public:
     AbstractModelFileSystemSynchronizer* synchronizer() const;
-    const QString& workFilePath() const;
+    QFile* file() const;
     QWidget* widget() const;
 
   public:
@@ -65,21 +65,23 @@ class KASTENCORE_EXPORT AbstractFileSystemSyncFromRemoteJobPrivate : public Abst
   protected:
     AbstractModelFileSystemSynchronizer* mSynchronizer;
     QString mWorkFilePath;
+    QFile* mFile;
 };
 
 
 inline AbstractFileSystemSyncFromRemoteJobPrivate::AbstractFileSystemSyncFromRemoteJobPrivate( AbstractFileSystemSyncFromRemoteJob* parent,
     AbstractModelFileSystemSynchronizer* synchronizer )
   : AbstractSyncFromRemoteJobPrivate( parent ),
-    mSynchronizer( synchronizer )
+    mSynchronizer( synchronizer ),
+    mFile( 0 )
 {
 }
 
 inline AbstractFileSystemSyncFromRemoteJobPrivate::~AbstractFileSystemSyncFromRemoteJobPrivate() {}
 
-inline const QString& AbstractFileSystemSyncFromRemoteJobPrivate::workFilePath() const { return mWorkFilePath; }
+inline QFile* AbstractFileSystemSyncFromRemoteJobPrivate::file()     const { return mFile; }
 // TODO: setup a notification system
-inline QWidget* AbstractFileSystemSyncFromRemoteJobPrivate::widget()      const { return 0; }
+inline QWidget* AbstractFileSystemSyncFromRemoteJobPrivate::widget() const { return 0; }
 inline AbstractModelFileSystemSynchronizer* AbstractFileSystemSyncFromRemoteJobPrivate::synchronizer() const
 {
     return mSynchronizer;

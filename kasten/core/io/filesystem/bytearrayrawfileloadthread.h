@@ -26,7 +26,7 @@
 // Qt
 #include <QtCore/QThread>
 
-class QString;
+class QFile;
 
 
 namespace Kasten
@@ -39,31 +39,33 @@ class ByteArrayRawFileLoadThread : public QThread
 {
   Q_OBJECT
   public:
-    ByteArrayRawFileLoadThread( QObject *parent,
-                                const QString &filePath );
+    ByteArrayRawFileLoadThread( QObject* parent,
+                                QFile* file );
     virtual ~ByteArrayRawFileLoadThread();
 
   public: // QThread API
     virtual void run();
 
   public:
-    ByteArrayDocument *document() const;
+    ByteArrayDocument* document() const;
 
   Q_SIGNALS:
-    void documentRead( ByteArrayDocument *document );
+    void documentRead( ByteArrayDocument* document );
 
   protected:
-    const QString mFilePath;
+    QFile* mFile;
 
-    ByteArrayDocument *mDocument;
+    ByteArrayDocument* mDocument;
 };
 
 
-inline ByteArrayRawFileLoadThread::ByteArrayRawFileLoadThread( QObject *parent, const QString &filePath )
- : QThread( parent ), mFilePath( filePath ), mDocument( 0 )
+inline ByteArrayRawFileLoadThread::ByteArrayRawFileLoadThread( QObject* parent, QFile* file )
+  : QThread( parent ),
+    mFile( file ),
+    mDocument( 0 )
 {}
 
-inline ByteArrayDocument *ByteArrayRawFileLoadThread::document() const { return mDocument; }
+inline ByteArrayDocument* ByteArrayRawFileLoadThread::document() const { return mDocument; }
 
 }
 

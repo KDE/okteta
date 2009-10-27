@@ -29,8 +29,6 @@
 #include "testdocument.h"
 // Qt
 #include <QtGui/QApplication>
-#include <QtCore/QDataStream>
-#include <QtCore/QFile>
 
 
 namespace Kasten
@@ -45,7 +43,7 @@ void TestDocumentFileWriteToJob::startSyncWithRemote()
 {
     TestDocumentFileSynchronizer *testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>( synchronizer() );
     TestDocument* document = qobject_cast<TestDocument*>( synchronizer()->document() );
-    TestDocumentFileWriteThread *writeThread = new TestDocumentFileWriteThread( this, testSynchronizer->header(), document, workFilePath() );
+    TestDocumentFileWriteThread *writeThread = new TestDocumentFileWriteThread( this, testSynchronizer->header(), document, file() );
     writeThread->start();
     while( !writeThread->wait(100) )
         QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );

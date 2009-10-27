@@ -27,7 +27,7 @@
 #include <QtCore/QByteArray>
 #include <QtCore/QThread>
 
-class QString;
+class QFile;
 
 
 namespace Kasten
@@ -38,7 +38,7 @@ class TestDocumentFileReloadThread : public QThread
   Q_OBJECT
   public:
     TestDocumentFileReloadThread( QObject *parent, const QByteArray &header,
-                                  /*TestDocument* document, */const QString &filePath );
+                                  /*TestDocument* document, */QFile* file );
     virtual ~TestDocumentFileReloadThread();
 
   public: // QThread API
@@ -54,7 +54,7 @@ class TestDocumentFileReloadThread : public QThread
   protected:
 //     TestDocument* mDocument;
     const QByteArray mHeader;
-    const QString mFilePath;
+    QFile* mFile;
 
     bool mSuccess;
     QByteArray mByteArray;

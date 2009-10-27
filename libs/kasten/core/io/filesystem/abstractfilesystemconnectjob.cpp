@@ -47,11 +47,11 @@ AbstractDocument* AbstractFileSystemConnectJob::document() const
 
     return d->document();
 }
-QString AbstractFileSystemConnectJob::workFilePath() const
+QFile* AbstractFileSystemConnectJob::file() const
 {
     Q_D( const AbstractFileSystemConnectJob );
 
-    return d->workFilePath();
+    return d->file();
 }
 QWidget* AbstractFileSystemConnectJob::widget() const
 {

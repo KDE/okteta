@@ -58,6 +58,9 @@ class TestDocumentFileSynchronizer : public AbstractModelFileSystemSynchronizer
   public:
     const QByteArray &header() const;
 
+  protected: // AbstractModelFileSystemSynchronizer API
+    virtual void handleFileChange( FileChange change );
+
   protected:
     void setDocument( TestDocument* document );
 

@@ -37,8 +37,9 @@ namespace Kasten
 {
 
 ByteArrayDocument::ByteArrayDocument( const QString &initDescription )
-: mByteArray( new Okteta::PieceTableByteArrayModel() ),
-  mInitDescription( initDescription )
+  : mByteArray( new Okteta::PieceTableByteArrayModel() ),
+    mInitDescription( initDescription ),
+    mRemoteState( InSync )
 {
     connect( mByteArray, SIGNAL(modifiedChanged( bool )), SLOT(onModelModified( bool )) );
     connect( mByteArray, SIGNAL(readOnlyChanged( bool )), SIGNAL(readOnlyChanged( bool )) );
@@ -49,8 +50,9 @@ ByteArrayDocument::ByteArrayDocument( const QString &initDescription )
 }
 
 ByteArrayDocument::ByteArrayDocument( Okteta::PieceTableByteArrayModel *byteArray, const QString &initDescription )
-: mByteArray( byteArray ),
-  mInitDescription( initDescription )
+  : mByteArray( byteArray ),
+    mInitDescription( initDescription ),
+    mRemoteState( InSync )
 {
     connect( mByteArray, SIGNAL(modifiedChanged( bool )), SLOT(onModelModified( bool )) );
     connect( mByteArray, SIGNAL(readOnlyChanged( bool )), SIGNAL(readOnlyChanged( bool )) );
@@ -81,13 +83,23 @@ void ByteArrayDocument::setReadOnly( bool isReadOnly ) { mByteArray->setReadOnly
 
 AbstractDocument::SyncStates ByteArrayDocument::syncStates() const
 {
-    return mByteArray->isModified() ? LocalHasChanges : InSync;
+    return mRemoteState | (mByteArray->isModified() ? LocalHasChanges : InSync);
 }
 
 void ByteArrayDocument::setTitle( const QString &title )
 {
     mTitle = title;
     emit titleChanged( mTitle );
+}
+
+void ByteArrayDocument::setRemoteState( AbstractDocument::SyncState remoteState )
+{
+    if( mRemoteState == remoteState )
+        return;
+
+    mRemoteState = remoteState;
+
+    emit syncStatesChanged( syncStates() );
 }
 
 
@@ -101,9 +113,9 @@ DocumentVersionData ByteArrayDocument::versionData( int versionIndex ) const
 
 void ByteArrayDocument::revertToVersionByIndex( int versionIndex ) { mByteArray->revertToVersionByIndex( versionIndex ); }
 
-void ByteArrayDocument::onModelModified( bool newState )
+void ByteArrayDocument::onModelModified( bool isModified )
 {
-    emit syncStatesChanged( newState ? LocalHasChanges : InSync );
+    emit syncStatesChanged( mRemoteState | (isModified ? LocalHasChanges : InSync) );
 }
 
 void ByteArrayDocument::onHeadVersionDescriptionChanged( const QString &newDescription )

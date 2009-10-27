@@ -27,7 +27,6 @@
 #include "abstractfilesystemsyncwithremotejob.h"
 #include <abstractsyncwithremotejob_p.h>
 // KDE
-#include <KTemporaryFile>
 #include <KUrl>
 // Qt
 #include <QtCore/QTimer>
@@ -50,7 +49,7 @@ class KASTENCORE_EXPORT AbstractFileSystemSyncWithRemoteJobPrivate : public Abst
 
   protected:
     AbstractModelFileSystemSynchronizer* synchronizer() const;
-    const QString& workFilePath() const;
+    QFile* file() const;
     QWidget* widget() const;
 
   protected:
@@ -66,7 +65,7 @@ class KASTENCORE_EXPORT AbstractFileSystemSyncWithRemoteJobPrivate : public Abst
     AbstractModelFileSystemSynchronizer* const mSynchronizer;
     const KUrl mUrl;
     const AbstractModelSynchronizer::ConnectOption mOption;
-    KTemporaryFile* mTemporaryFile;
+    QFile* mFile;
     QString mWorkFilePath;
 };
 
@@ -78,14 +77,14 @@ inline AbstractFileSystemSyncWithRemoteJobPrivate::AbstractFileSystemSyncWithRem
     mSynchronizer( synchronizer ),
     mUrl( url ),
     mOption( option ),
-    mTemporaryFile( 0 )
+    mFile( 0 )
 {}
 
 inline AbstractFileSystemSyncWithRemoteJobPrivate::~AbstractFileSystemSyncWithRemoteJobPrivate() {}
 
-inline const QString& AbstractFileSystemSyncWithRemoteJobPrivate::workFilePath() const { return mWorkFilePath; }
+inline QFile* AbstractFileSystemSyncWithRemoteJobPrivate::file()     const { return mFile; }
 // TODO: setup a notification system
-inline QWidget* AbstractFileSystemSyncWithRemoteJobPrivate::widget()      const { return 0; }
+inline QWidget* AbstractFileSystemSyncWithRemoteJobPrivate::widget() const { return 0; }
 inline AbstractModelFileSystemSynchronizer* AbstractFileSystemSyncWithRemoteJobPrivate::synchronizer() const
 {
     return mSynchronizer;

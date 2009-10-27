@@ -43,7 +43,7 @@ ByteArrayRawFileReloadJob::ByteArrayRawFileReloadJob( ByteArrayRawFileSynchroniz
 void ByteArrayRawFileReloadJob::startReadFromFile()
 {
     ByteArrayDocument *document = qobject_cast<ByteArrayDocument*>( synchronizer()->document() );
-    ByteArrayRawFileReloadThread *reloadThread = new ByteArrayRawFileReloadThread( this, /*document, */workFilePath() );
+    ByteArrayRawFileReloadThread* reloadThread = new ByteArrayRawFileReloadThread( this, /*document, */file() );
     reloadThread->start();
     while( !reloadThread->wait(100) )
         QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
@@ -54,6 +54,7 @@ void ByteArrayRawFileReloadJob::startReadFromFile()
     {
         Okteta::PieceTableByteArrayModel *byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>( document->content() );
         byteArray->setData( reloadThread->data() );
+        document->setRemoteState( AbstractDocument::InSync );
     }
     delete reloadThread;
 

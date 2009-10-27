@@ -29,8 +29,6 @@
 #include "testdocument.h"
 // Qt
 #include <QtGui/QApplication>
-#include <QtCore/QDataStream>
-#include <QtCore/QFile>
 
 
 namespace Kasten
@@ -49,7 +47,7 @@ void TestDocumentFileConnectJob::startConnectWithFile()
     TestDocumentFileSynchronizer *testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>( synchronizer() );
     TestDocument* testDocument = qobject_cast<TestDocument*>( document() );
     TestDocumentFileWriteThread *writeThread =
-        new TestDocumentFileWriteThread( this, testSynchronizer->header(), testDocument, workFilePath() );
+        new TestDocumentFileWriteThread( this, testSynchronizer->header(), testDocument, file() );
 
     writeThread->start();
     while( !writeThread->wait(100) )

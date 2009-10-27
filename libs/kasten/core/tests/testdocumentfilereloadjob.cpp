@@ -29,8 +29,6 @@
 #include "testdocument.h"
 // Qt
 #include <QtGui/QApplication>
-#include <QtCore/QDataStream>
-#include <QtCore/QFile>
 
 
 namespace Kasten
@@ -45,7 +43,7 @@ void TestDocumentFileReloadJob::startReadFromFile()
     TestDocumentFileSynchronizer *testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>( synchronizer() );
     TestDocument* document = qobject_cast<TestDocument*>( synchronizer()->document() );
     TestDocumentFileReloadThread *reloadThread =
-        new TestDocumentFileReloadThread( this, testSynchronizer->header(), /*document, */workFilePath() );
+        new TestDocumentFileReloadThread( this, testSynchronizer->header(), /*document, */file() );
     reloadThread->start();
     while( !reloadThread->wait(100) )
         QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );

@@ -25,7 +25,9 @@
 // KDE
 #include <KIO/NetAccess>
 #include <KLocale>
-
+// Qt
+#include <QtCore/QFileInfo>
+#include <QtCore/QDateTime>
 
 namespace Kasten
 {
@@ -34,9 +36,35 @@ void AbstractFileSystemSyncToRemoteJobPrivate::syncToRemote()
 {
     Q_Q( AbstractFileSystemSyncToRemoteJob );
 
-    prepareWorkFile();
+    bool isWorkFileOk;
+    const KUrl url = mSynchronizer->url();
 
-    q->startWriteToFile();
+    if( url.isLocalFile() )
+    {
+        mWorkFilePath = url.path();
+        mFile = new QFile( mWorkFilePath );
+        isWorkFileOk = mFile->open( QIODevice::WriteOnly );
+
+        mSynchronizer->pauseFileWatching();
+    }
+    else
+    {
+        KTemporaryFile* temporaryFile = new KTemporaryFile;
+        isWorkFileOk = temporaryFile->open();
+
+        mWorkFilePath = temporaryFile->fileName();
+        mFile = temporaryFile;
+    }
+
+    if( isWorkFileOk )
+        q->startWriteToFile();
+    else
+    {
+        q->setError( KJob::KilledJobError );
+        q->setErrorText( mFile->errorString() );
+        delete mFile;
+        q->emitResult();
+    }
 }
 
 void AbstractFileSystemSyncToRemoteJobPrivate::completeWrite( bool success )
@@ -45,6 +73,10 @@ void AbstractFileSystemSyncToRemoteJobPrivate::completeWrite( bool success )
 
     if( success )
     {
+        mFile->close(); // TODO: when is new time written, on close?
+        QFileInfo fileInfo( *mFile );
+        mSynchronizer->setFileDateTimeOnSync( fileInfo.lastModified() );
+
         const KUrl url = mSynchronizer->url();
 
         if( ! url.isLocalFile() )
@@ -56,6 +88,9 @@ void AbstractFileSystemSyncToRemoteJobPrivate::completeWrite( bool success )
                 q->setErrorText( KIO::NetAccess::lastErrorString() );
             }
         }
+        else
+            mSynchronizer->unpauseFileWatching();
+
         // TODO: right place? And we did only push, not synchronize! Is a hack to get DocumentInfoTool working
         if( success )
             emit mSynchronizer->synchronized();
@@ -66,7 +101,7 @@ void AbstractFileSystemSyncToRemoteJobPrivate::completeWrite( bool success )
         q->setErrorText( i18nc("@info","Problem while saving to local filesystem.") );
     }
 
-    removeWorkFile();
+    delete mFile;
 
     q->emitResult();
 }

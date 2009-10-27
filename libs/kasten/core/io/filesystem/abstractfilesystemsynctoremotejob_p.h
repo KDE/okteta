@@ -49,15 +49,11 @@ class AbstractFileSystemSyncToRemoteJobPrivate : public AbstractSyncToRemoteJobP
 
   public:
     AbstractModelFileSystemSynchronizer* synchronizer() const;
-    const QString& workFilePath() const;
+    QFile* file() const;
     QWidget* widget() const;
 
   public:
     void completeWrite( bool success );
-
-  public:
-    void prepareWorkFile();
-    void removeWorkFile();
 
   public: // slots
     void syncToRemote();
@@ -67,7 +63,7 @@ class AbstractFileSystemSyncToRemoteJobPrivate : public AbstractSyncToRemoteJobP
 
   protected:
     AbstractModelFileSystemSynchronizer* const mSynchronizer;
-    KTemporaryFile* mTemporaryFile;
+    QFile* mFile;
     QString mWorkFilePath;
 };
 
@@ -76,12 +72,12 @@ inline AbstractFileSystemSyncToRemoteJobPrivate::AbstractFileSystemSyncToRemoteJ
     AbstractModelFileSystemSynchronizer* synchronizer )
   : AbstractSyncToRemoteJobPrivate( parent ),
     mSynchronizer( synchronizer ),
-    mTemporaryFile( 0 )
+    mFile( 0 )
 {}
 
-inline const QString& AbstractFileSystemSyncToRemoteJobPrivate::workFilePath() const { return mWorkFilePath; }
+inline QFile* AbstractFileSystemSyncToRemoteJobPrivate::file()     const { return mFile; }
 // TODO: setup a notification system
-inline QWidget* AbstractFileSystemSyncToRemoteJobPrivate::widget()             const { return 0; }
+inline QWidget* AbstractFileSystemSyncToRemoteJobPrivate::widget() const { return 0; }
 inline AbstractModelFileSystemSynchronizer* AbstractFileSystemSyncToRemoteJobPrivate::synchronizer() const
 {
     return mSynchronizer;
@@ -94,24 +90,6 @@ inline void AbstractFileSystemSyncToRemoteJobPrivate::start()
     QTimer::singleShot( 0, q, SLOT(syncToRemote()) );
 }
 
-inline void AbstractFileSystemSyncToRemoteJobPrivate::prepareWorkFile()
-{
-    const KUrl url = mSynchronizer->url();
-
-    if( url.isLocalFile() )
-        mWorkFilePath = url.path();
-    else
-    {
-        mTemporaryFile = new KTemporaryFile;
-        mTemporaryFile->open();
-        mWorkFilePath = mTemporaryFile->fileName();
-    }
-}
-
-inline void AbstractFileSystemSyncToRemoteJobPrivate::removeWorkFile()
-{
-    delete mTemporaryFile;
-}
 
 }
 

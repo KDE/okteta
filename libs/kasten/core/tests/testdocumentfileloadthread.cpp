@@ -39,10 +39,8 @@ namespace Kasten
 
 void TestDocumentFileLoadThread::run()
 {
-    QFile file( mFilePath );
-    file.open( QIODevice::ReadOnly );
-    QDataStream inStream( &file );
-    const int fileSize = file.size();
+    QDataStream inStream( mFile );
+    const int fileSize = mFile->size();
 
     // test header
     const int headerSize = mHeader.size();

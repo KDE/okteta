@@ -32,24 +32,20 @@
 namespace Kasten
 {
 
-ByteArrayRawFileReloadThread::ByteArrayRawFileReloadThread( QObject* parent, const QString& filePath )
+ByteArrayRawFileReloadThread::ByteArrayRawFileReloadThread( QObject* parent, QFile* file )
   : QThread( parent ),
-    mFilePath( filePath ),
+    mFile( file ),
     mSuccess( false )
 {
 }
 
 void ByteArrayRawFileReloadThread::run()
 {
-    QFile file( mFilePath );
-    file.open( QIODevice::ReadOnly );
-    QDataStream inStream( &file );
-    const int fileSize = file.size();
+    QDataStream inStream( mFile );
+    const int fileSize = mFile->size();
 
     mData.resize( fileSize );
     inStream.readRawData( mData.data(), fileSize );
-
-    //registerDiskModifyTime( file ); TODO move into synchronizer
 
     mSuccess = ( inStream.status() == QDataStream::Ok );
 

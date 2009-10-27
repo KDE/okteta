@@ -40,6 +40,41 @@ AbstractModelFileSystemSynchronizer::AbstractModelFileSystemSynchronizer()
   : AbstractModelSynchronizer( new AbstractModelFileSystemSynchronizerPrivate(this) )
 {}
 
+void AbstractModelFileSystemSynchronizer::setFileDateTimeOnSync( const QDateTime& fileDateTime )
+{
+    Q_D( AbstractModelFileSystemSynchronizer );
+
+    d->setFileDateTimeOnSync( fileDateTime );
+}
+
+void AbstractModelFileSystemSynchronizer::startFileWatching()
+{
+    Q_D( AbstractModelFileSystemSynchronizer );
+
+    d->startFileWatching();
+}
+
+void AbstractModelFileSystemSynchronizer::stopFileWatching()
+{
+    Q_D( AbstractModelFileSystemSynchronizer );
+
+    d->stopFileWatching();
+}
+
+void AbstractModelFileSystemSynchronizer::pauseFileWatching()
+{
+    Q_D( AbstractModelFileSystemSynchronizer );
+
+    d->pauseFileWatching();
+}
+
+void AbstractModelFileSystemSynchronizer::unpauseFileWatching()
+{
+    Q_D( AbstractModelFileSystemSynchronizer );
+
+    d->unpauseFileWatching();
+}
+
 AbstractModelFileSystemSynchronizer::~AbstractModelFileSystemSynchronizer()
 {
 }

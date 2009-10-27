@@ -27,7 +27,7 @@
 #include <QtCore/QByteArray>
 #include <QtCore/QThread>
 
-class QString;
+class QFile;
 
 
 namespace Kasten
@@ -41,7 +41,7 @@ class TestDocumentFileWriteThread : public QThread
   Q_OBJECT
   public:
     TestDocumentFileWriteThread( QObject *parent, const QByteArray &header,
-                                 TestDocument* document, const QString &filePath );
+                                 TestDocument* document, QFile* file );
     virtual ~TestDocumentFileWriteThread();
 
   public: // QThread API
@@ -56,15 +56,15 @@ class TestDocumentFileWriteThread : public QThread
   protected:
     const QByteArray mHeader;
     const TestDocument* mDocument;
-    const QString mFilePath;
+    QFile* mFile;
 
     bool mSuccess;
 };
 
 
 inline TestDocumentFileWriteThread::TestDocumentFileWriteThread( QObject *parent, const QByteArray &header,
-    TestDocument* document, const QString &filePath )
- : QThread( parent ), mHeader( header ), mDocument( document ), mFilePath( filePath ), mSuccess( false )
+    TestDocument* document, QFile* file )
+ : QThread( parent ), mHeader( header ), mDocument( document ), mFile( file ), mSuccess( false )
 {}
 
 inline bool TestDocumentFileWriteThread::success() const { return mSuccess; }

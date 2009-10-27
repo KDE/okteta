@@ -50,7 +50,7 @@ class AbstractFileSystemLoadJobPrivate : public AbstractLoadJobPrivate
 
   public:
     AbstractModelFileSystemSynchronizer* synchronizer() const;
-    const QString& workFilePath() const;
+    QFile* file() const;
     QWidget* widget() const;
 
   public: // slots
@@ -62,6 +62,7 @@ class AbstractFileSystemLoadJobPrivate : public AbstractLoadJobPrivate
   protected:
     AbstractModelFileSystemSynchronizer* const mSynchronizer;
     const KUrl mUrl;
+    QFile* mFile;
     QString mWorkFilePath;
 };
 
@@ -70,7 +71,8 @@ inline AbstractFileSystemLoadJobPrivate::AbstractFileSystemLoadJobPrivate( Abstr
     AbstractModelFileSystemSynchronizer* synchronizer, const KUrl& url )
   : AbstractLoadJobPrivate( parent ),
     mSynchronizer( synchronizer ),
-    mUrl( url )
+    mUrl( url ),
+    mFile( 0 )
 {}
 
 inline AbstractFileSystemLoadJobPrivate::~AbstractFileSystemLoadJobPrivate() {}
@@ -79,9 +81,9 @@ inline AbstractModelFileSystemSynchronizer* AbstractFileSystemLoadJobPrivate::sy
 {
     return mSynchronizer;
 }
-inline const QString& AbstractFileSystemLoadJobPrivate::workFilePath() const { return mWorkFilePath; }
+inline QFile* AbstractFileSystemLoadJobPrivate::file()     const { return mFile; }
 // TODO: setup a notification system
-inline QWidget* AbstractFileSystemLoadJobPrivate::widget()             const { return 0; }
+inline QWidget* AbstractFileSystemLoadJobPrivate::widget() const { return 0; }
 
 inline void AbstractFileSystemLoadJobPrivate::start()
 {

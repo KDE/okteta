@@ -29,8 +29,6 @@
 #include "bytearraydocument.h"
 // Qt
 #include <QtGui/QApplication>
-#include <QtCore/QDataStream>
-#include <QtCore/QFile>
 
 
 namespace Kasten
@@ -43,7 +41,7 @@ ByteArrayRawFileWriteJob::ByteArrayRawFileWriteJob( ByteArrayRawFileSynchronizer
 void ByteArrayRawFileWriteJob::startWriteToFile()
 {
     ByteArrayDocument *document = qobject_cast<ByteArrayDocument*>( synchronizer()->document() );
-    ByteArrayRawFileWriteThread *writeThread = new ByteArrayRawFileWriteThread( this, document, workFilePath() );
+    ByteArrayRawFileWriteThread* writeThread = new ByteArrayRawFileWriteThread( this, document, file() );
     writeThread->start();
     while( !writeThread->wait(100) )
         QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
@@ -51,6 +49,8 @@ void ByteArrayRawFileWriteJob::startWriteToFile()
     const bool success = writeThread->success();
     delete writeThread;
 
+    if( success )
+        document->setRemoteState( AbstractDocument::InSync );
     completeWrite( success );
 }
 

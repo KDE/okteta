@@ -27,6 +27,7 @@
 #include <abstractsyncfromremotejob.h>
 
 class QWidget;
+class QFile;
 
 
 namespace Kasten
@@ -54,7 +55,7 @@ class KASTENCORE_EXPORT AbstractFileSystemSyncFromRemoteJob : public AbstractSyn
 
   protected:
     AbstractModelFileSystemSynchronizer* synchronizer() const;
-    QString workFilePath() const;
+    QFile* file() const;
     QWidget* widget() const;
 
   protected:

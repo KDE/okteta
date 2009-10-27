@@ -31,15 +31,14 @@
 #include <QtGui/QApplication>
 #include <QtCore/QDataStream>
 #include <QtCore/QFile>
-#include <QtCore/QString>
 
 
 namespace Kasten
 {
 
 TestDocumentFileReloadThread::TestDocumentFileReloadThread( QObject *parent, const QByteArray &header,
-    /*TestDocument* document,*/ const QString &filePath )
- : QThread( parent ), /*mDocument( document ),*/ mHeader( header), mFilePath( filePath ), mSuccess( false )
+    /*TestDocument* document,*/ QFile* file )
+ : QThread( parent ), /*mDocument( document ),*/ mHeader( header), mFile( file ), mSuccess( false )
 {
 //     mDocument->content()->moveToThread( this );
 //     mDocument->moveToThread( this );
@@ -47,10 +46,8 @@ TestDocumentFileReloadThread::TestDocumentFileReloadThread( QObject *parent, con
 
 void TestDocumentFileReloadThread::run()
 {
-    QFile file( mFilePath );
-    file.open( QIODevice::ReadOnly );
-    QDataStream inStream( &file );
-    const int fileSize = file.size();
+    QDataStream inStream( mFile );
+    const int fileSize = mFile->size();
 
     // test header
     const int headerSize = mHeader.size();
@@ -63,8 +60,6 @@ void TestDocumentFileReloadThread::run()
         mByteArray = QByteArray( fileSize, ' ' );
 
         inStream.readRawData( mByteArray.data(), fileSize );
-
-        //registerDiskModifyTime( file ); TODO move into synchronizer
 
         mSuccess = ( inStream.status() == QDataStream::Ok );
     }

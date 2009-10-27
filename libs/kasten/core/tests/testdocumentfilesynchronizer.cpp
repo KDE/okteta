@@ -31,10 +31,6 @@
 #include "testdocument.h"
 // KDE
 #include <KUrl>
-// Qt
-#include <QtCore/QByteArray>
-#include <QtCore/QDataStream>
-#include <QtCore/QFile>
 
 
 namespace Kasten
@@ -74,6 +70,12 @@ AbstractConnectJob *TestDocumentFileSynchronizer::startConnect( AbstractDocument
                                               const KUrl &url, AbstractModelSynchronizer::ConnectOption option )
 {
     return new TestDocumentFileConnectJob( this, document, url, option );
+}
+
+void TestDocumentFileSynchronizer::handleFileChange( FileChange change )
+{
+Q_UNUSED( change )
+//     mDocument->setRemoteState( AbstractDocument::RemoteHasChanges );
 }
 
 }

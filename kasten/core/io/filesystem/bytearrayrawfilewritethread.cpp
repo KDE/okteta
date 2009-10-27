@@ -26,14 +26,9 @@
 #include "bytearraydocument.h"
 // Okteta core
 #include <piecetablebytearraymodel.h>
-// KDE
-#include <KUrl>
-#include <KLocale>
 // Qt
-#include <QtGui/QApplication>
 #include <QtCore/QDataStream>
 #include <QtCore/QFile>
-#include <QtCore/QString>
 
 
 namespace Kasten
@@ -43,29 +38,21 @@ void ByteArrayRawFileWriteThread::run()
 {
     Okteta::PieceTableByteArrayModel *byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>( mDocument->content() );
 
-    QFile file( mFilePath );
-    if( file.open(QIODevice::WriteOnly) )
-    {
-        QDataStream outStream( &file );
+    QDataStream outStream( mFile );
 
     //TODO: this was
 //     outStream.writeRawData( byteArray->data(), byteArray->size() );
     // make it quicker again by writing spans -> spaniterator
 
-        for( int i = 0; i<byteArray->size(); ++i )
-        {
-            const Okteta::Byte byte = byteArray->byte(i);
-            outStream.writeRawData( reinterpret_cast<const char*>(&byte), 1 );
-        }
-
-        byteArray->setModified( false );
-
-        //registerDiskModifyTime( file );TODO move into synchronizer
-
-        mSuccess = ( outStream.status() == QDataStream::Ok );
+    for( int i = 0; i<byteArray->size(); ++i )
+    {
+        const Okteta::Byte byte = byteArray->byte(i);
+        outStream.writeRawData( reinterpret_cast<const char*>(&byte), 1 );
     }
-    else
-        mSuccess = false;
+
+    byteArray->setModified( false );
+
+    mSuccess = ( outStream.status() == QDataStream::Ok );
 
     emit documentWritten( mSuccess );
 }
