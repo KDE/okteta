@@ -47,7 +47,8 @@ ByteArrayPatternGeneratorSettings::ByteArrayPatternGeneratorSettings()
 ByteArrayPatternGenerator::ByteArrayPatternGenerator()
   : AbstractModelDataGenerator(
         i18nc("name of the generated data", "Pattern..."),
-        QString::fromLatin1(PatternMimeType) )
+        QString::fromLatin1(PatternMimeType),
+        DynamicGeneration )
 {}
 
 

@@ -33,8 +33,8 @@ AbstractModelDataGenerator::AbstractModelDataGenerator( AbstractModelDataGenerat
 }
 
 AbstractModelDataGenerator::AbstractModelDataGenerator( const QString& typeName,
-                                                        const QString& mimeType )
-  : d_ptr( new AbstractModelDataGeneratorPrivate(this,typeName,mimeType) )
+                                                        const QString& mimeType, Flags flags )
+  : d_ptr( new AbstractModelDataGeneratorPrivate(this,typeName,mimeType,flags) )
 {
 }
 
@@ -50,6 +50,13 @@ QString AbstractModelDataGenerator::mimeType() const
     Q_D( const AbstractModelDataGenerator );
 
     return d->mimeType();
+}
+
+AbstractModelDataGenerator::Flags AbstractModelDataGenerator::flags() const
+{
+    Q_D( const AbstractModelDataGenerator );
+
+    return d->flags();
 }
 
 AbstractModelDataGenerator::~AbstractModelDataGenerator()

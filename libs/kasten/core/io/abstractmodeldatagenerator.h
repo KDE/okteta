@@ -40,13 +40,16 @@ class AbstractModelDataGeneratorPrivate;
 
 class KASTENCORE_EXPORT AbstractModelDataGenerator : public QObject
 {
-    Q_OBJECT
+  Q_OBJECT
+
+  public:
+    enum Flags { StaticGeneration, DynamicGeneration };
 
   protected:
     AbstractModelDataGenerator( AbstractModelDataGeneratorPrivate* d );
 
   public:
-    AbstractModelDataGenerator( const QString& typeName, const QString& mimeType );
+    AbstractModelDataGenerator( const QString& typeName, const QString& mimeType, Flags flags );
 
     virtual ~AbstractModelDataGenerator();
 
@@ -56,6 +59,7 @@ class KASTENCORE_EXPORT AbstractModelDataGenerator : public QObject
   public:
     QString typeName() const;
     QString mimeType() const;
+    Flags flags() const;
 
   protected:
     Q_DECLARE_PRIVATE( AbstractModelDataGenerator )

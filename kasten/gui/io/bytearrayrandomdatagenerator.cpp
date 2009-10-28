@@ -52,7 +52,8 @@ ByteArrayRandomDataGeneratorSettings::ByteArrayRandomDataGeneratorSettings()
 ByteArrayRandomDataGenerator::ByteArrayRandomDataGenerator()
   : AbstractModelDataGenerator(
         i18nc("name of the generated data", "Random Data..."),
-        QString::fromLatin1(RandomDataMimeType) )
+        QString::fromLatin1(RandomDataMimeType),
+        DynamicGeneration )
 {}
 
 

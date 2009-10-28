@@ -33,27 +33,31 @@ class AbstractModelDataGeneratorPrivate
 {
   public:
     explicit AbstractModelDataGeneratorPrivate( AbstractModelDataGenerator* parent,
-                                                  const QString& typeName, const QString& mimeType );
+                                                const QString& typeName, const QString& mimeType,
+                                                AbstractModelDataGenerator::Flags flags );
 
     virtual ~AbstractModelDataGeneratorPrivate();
 
   public:
     const QString& typeName() const;
     const QString& mimeType() const;
+    AbstractModelDataGenerator::Flags flags() const;
 
   protected:
     AbstractModelDataGenerator* const q_ptr;
 
     const QString mTypeName;
     const QString mMimeType;
+    AbstractModelDataGenerator::Flags mFlags;
 };
 
 
 inline AbstractModelDataGeneratorPrivate::AbstractModelDataGeneratorPrivate( AbstractModelDataGenerator* parent,
-    const QString& typeName, const QString& mimeType )
+    const QString& typeName, const QString& mimeType, AbstractModelDataGenerator::Flags flags )
   : q_ptr( parent ),
     mTypeName( typeName ),
-    mMimeType( mimeType )
+    mMimeType( mimeType ),
+    mFlags( flags )
 {}
 
 inline AbstractModelDataGeneratorPrivate::~AbstractModelDataGeneratorPrivate()
@@ -61,6 +65,7 @@ inline AbstractModelDataGeneratorPrivate::~AbstractModelDataGeneratorPrivate()
 
 inline const QString& AbstractModelDataGeneratorPrivate::typeName() const { return mTypeName; }
 inline const QString& AbstractModelDataGeneratorPrivate::mimeType() const { return mMimeType; }
+inline AbstractModelDataGenerator::Flags AbstractModelDataGeneratorPrivate::flags() const { return mFlags; }
 
 }
 

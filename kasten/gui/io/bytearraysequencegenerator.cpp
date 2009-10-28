@@ -49,7 +49,8 @@ ByteArraySequenceGeneratorSettings::ByteArraySequenceGeneratorSettings()
 ByteArraySequenceGenerator::ByteArraySequenceGenerator()
   : AbstractModelDataGenerator(
         i18nc("name of the generated data", "Sequence"),
-        QString::fromLatin1(SequenceMimeType) )
+        QString::fromLatin1(SequenceMimeType),
+        StaticGeneration )
 {}
 
 
