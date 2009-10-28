@@ -124,7 +124,7 @@ void CreatorController::onNewFromClipboardActionTriggered()
 {
     const QMimeData* mimeData = QApplication::clipboard()->mimeData( QClipboard::Clipboard );
 
-    mDocumentManager->createManager()->createNewFromData( mimeData );
+    mDocumentManager->createManager()->createNewFromData( mimeData, true );
 }
 
 void CreatorController::onNewFromGeneratorActionTriggered()
@@ -156,7 +156,8 @@ void CreatorController::onNewFromGeneratorActionTriggered()
 
     delete generateThread;
 
-    mDocumentManager->createManager()->createNewFromData( mimeData );
+    const bool setModified = ( generator->flags() & AbstractModelDataGenerator::DynamicGeneration );
+    mDocumentManager->createManager()->createNewFromData( mimeData, setModified );
 
     QApplication::restoreOverrideCursor();
 }

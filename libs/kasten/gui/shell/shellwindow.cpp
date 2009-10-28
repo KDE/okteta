@@ -238,7 +238,7 @@ void ShellWindow::onDataDropped( const QMimeData* mimeData )
             syncManager->load( url );
     }
     else
-        mDocumentManager->createManager()->createNewFromData( mimeData );
+        mDocumentManager->createManager()->createNewFromData( mimeData, true );
 }
 
 void ShellWindow::onToolVisibilityChanged( bool isVisible )

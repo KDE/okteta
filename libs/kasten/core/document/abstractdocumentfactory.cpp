@@ -33,9 +33,10 @@ bool AbstractDocumentFactory::canCreateFromData( const QMimeData* mimeData )
     return false;
 }
 
-AbstractDocument* AbstractDocumentFactory::createFromData( const QMimeData* mimeData )
+AbstractDocument* AbstractDocumentFactory::createFromData( const QMimeData* mimeData, bool setModified )
 {
     Q_UNUSED( mimeData );
+    Q_UNUSED( setModified );
 
     return 0;
 }

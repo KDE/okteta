@@ -64,7 +64,7 @@ AbstractDocument* ByteArrayDocumentFactory::create()
     return document;
 }
 
-AbstractDocument* ByteArrayDocumentFactory::createFromData( const QMimeData* mimeData )
+AbstractDocument* ByteArrayDocumentFactory::createFromData( const QMimeData* mimeData, bool setModified )
 {
     if( ! mimeData || mimeData->formats().isEmpty() )
         return create();
@@ -84,7 +84,7 @@ AbstractDocument* ByteArrayDocumentFactory::createFromData( const QMimeData* mim
 
     Okteta::PieceTableByteArrayModel* byteArray =
         new Okteta::PieceTableByteArrayModel( data );
-//     byteArray->setModified( false ); TODO: needed?
+    byteArray->setModified( setModified );
 
     // TODO: pass name of generator
     ByteArrayDocument* document = new ByteArrayDocument( byteArray, i18nc("origin of the byte array", "Created from data.") );

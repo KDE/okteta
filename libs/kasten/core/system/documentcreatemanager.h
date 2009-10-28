@@ -52,7 +52,7 @@ class KASTENCORE_EXPORT DocumentCreateManager : public QObject
 
   public:
     void createNew();
-    void createNewFromData( const QMimeData* mimeData );
+    void createNewFromData( const QMimeData* mimeData, bool setModified );
 
   public:
     void setDocumentFactory( AbstractDocumentFactory* factory );

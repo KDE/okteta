@@ -58,9 +58,9 @@ void DocumentCreateManager::createNew()
         mManager->addDocument( document );
 }
 
-void DocumentCreateManager::createNewFromData( const QMimeData* mimeData )
+void DocumentCreateManager::createNewFromData( const QMimeData* mimeData, bool setModified )
 {
-    AbstractDocument* document = mFactory->createFromData( mimeData );
+    AbstractDocument* document = mFactory->createFromData( mimeData, setModified );
     if( document )
         mManager->addDocument( document );
 }

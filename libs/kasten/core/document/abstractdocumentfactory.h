@@ -50,7 +50,7 @@ class KASTENCORE_EXPORT AbstractDocumentFactory : public QObject
 
     virtual AbstractDocument* create() = 0;
     /// default returns 0
-    virtual AbstractDocument* createFromData( const QMimeData* mimeData );
+    virtual AbstractDocument* createFromData( const QMimeData* mimeData, bool setModified );
 };
 
 }
