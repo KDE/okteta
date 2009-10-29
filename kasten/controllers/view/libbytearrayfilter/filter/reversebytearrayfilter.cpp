@@ -30,7 +30,7 @@
 
 ReverseByteArrayFilter::ReverseByteArrayFilter()
  : AbstractByteArrayFilter(
-     i18nc("name of the filter; it changes the order of the bytes/bits to backwards",
+     i18nc("name of the filter; it changes the order of the bytes/bits to backwards, so ABCD becomes DCBA",
            "REVERSE data") )
 {}
 
