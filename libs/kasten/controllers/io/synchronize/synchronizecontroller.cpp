@@ -91,7 +91,8 @@ void SynchronizeController::onSynchronizerChange( AbstractModelSynchronizer* new
         const AbstractDocument::LocalSyncState localSyncState = mDocument->localSyncState();
         const AbstractDocument::RemoteSyncState remoteSyncState = mDocument->remoteSyncState();
         canSync = ( localSyncState == AbstractDocument::LocalHasChanges )
-                  || ( remoteSyncState == AbstractDocument::RemoteHasChanges );
+                  || ( remoteSyncState == AbstractDocument::RemoteHasChanges )
+                  || ( remoteSyncState == AbstractDocument::RemoteUnknown );
 
         connect( mDocument, SIGNAL(localSyncStateChanged( Kasten::AbstractDocument::LocalSyncState )),
                             SLOT(onSyncStateChanged()) );
@@ -108,7 +109,8 @@ void SynchronizeController::onSyncStateChanged()
     const AbstractDocument::LocalSyncState localSyncState = mDocument->localSyncState();
     const AbstractDocument::RemoteSyncState remoteSyncState = mDocument->remoteSyncState();
     const bool canSync = ( localSyncState == AbstractDocument::LocalHasChanges )
-                         || ( remoteSyncState == AbstractDocument::RemoteHasChanges );
+                  || ( remoteSyncState == AbstractDocument::RemoteHasChanges )
+                  || ( remoteSyncState == AbstractDocument::RemoteUnknown );
 
     mSaveAction->setEnabled( canSync );
     mReloadAction->setEnabled( canSync );
