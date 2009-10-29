@@ -51,25 +51,25 @@ void ModifiedBarController::setTargetModel( AbstractModel* model )
 
     mDocument = model ? model->findBaseModel<AbstractDocument*>() : 0;
 
-    AbstractDocument::SyncStates syncStates;
+    AbstractDocument::LocalSyncState syncState;
     if( mDocument )
     {
-        syncStates = mDocument->syncStates();
-        connect( mDocument, SIGNAL(syncStatesChanged( Kasten::AbstractDocument::SyncStates )),
-                 SLOT(onSyncStatesChanged( Kasten::AbstractDocument::SyncStates )) );
+        syncState = mDocument->localSyncState();
+        connect( mDocument, SIGNAL(localSyncStateChanged( Kasten::AbstractDocument::LocalSyncState )),
+                 SLOT(onLocalSyncStateChanged( Kasten::AbstractDocument::LocalSyncState )) );
     }
     else
-        syncStates = AbstractDocument::InSync;
+        syncState = AbstractDocument::LocalInSync;
 
-    onSyncStatesChanged( syncStates );
+    onLocalSyncStateChanged( syncState );
     mModifiedLabel->setEnabled( mDocument );
 }
 
 
-void ModifiedBarController::onSyncStatesChanged( Kasten::AbstractDocument::SyncStates syncStates )
+void ModifiedBarController::onLocalSyncStateChanged( Kasten::AbstractDocument::LocalSyncState syncState )
 {
     // TODO: handle changed on remote
-    const bool isModified = (syncStates & AbstractDocument::LocalHasChanges );
+    const bool isModified = (syncState == AbstractDocument::LocalHasChanges );
 
     // TODO: depend an statusbar height
     mModifiedLabel->setPixmap( isModified ? KIcon("document-save").pixmap(16) : QPixmap() );

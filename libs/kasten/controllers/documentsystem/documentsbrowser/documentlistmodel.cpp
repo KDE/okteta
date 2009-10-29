@@ -89,10 +89,26 @@ QVariant DocumentListModel::data( const QModelIndex& index, int role ) const
                 if( document == mDocumentsTool->focussedDocument() )
                     result = KIcon( "arrow-right" );
                 break;
-            case ModifiedColumnId:
-                if( document->syncStates() != AbstractDocument::InSync )
+            case LocalStateColumnId:
+                if( document->localSyncState() == AbstractDocument::LocalHasChanges )
                     result = KIcon( "document-save" );
                 break;
+            case RemoteStateColumnId:
+            {
+                // TODO: use static map, syncState int -> iconname
+                const AbstractDocument::RemoteSyncState remoteSyncState = document->remoteSyncState();
+                if( remoteSyncState == AbstractDocument::RemoteHasChanges )
+                    result = KIcon( "document-save" );
+                else if( remoteSyncState == AbstractDocument::RemoteNotSet )
+                    result = KIcon( "document-new" );
+                else if( remoteSyncState == AbstractDocument::RemoteDeleted )
+                    result = KIcon( "edit-delete" );
+                else if( remoteSyncState == AbstractDocument::RemoteUnknown )
+                    result = KIcon( "flag-yellow" );
+                else if( remoteSyncState == AbstractDocument::RemoteUnreachable )
+                    result = KIcon( "network-disconnect" );
+                break;
+            }
             default:
                 ;
         }
@@ -108,7 +124,7 @@ QVariant DocumentListModel::headerData( int section, Qt::Orientation orientation
     if( role == Qt::DisplayRole )
     {
         const QString titel =
-//             section == ModifiedColumnId ?  i18nc("@title:column Id of the version",         "Id") :
+//             section == LocalStateColumnId ?  i18nc("@title:column Id of the version",         "Id") :
             section == TitleColumnId ?     i18nc("@title:column description of the change", "Title") :
             QString();
         result = titel;
@@ -116,7 +132,7 @@ QVariant DocumentListModel::headerData( int section, Qt::Orientation orientation
     else if( role == Qt::ToolTipRole )
     {
         const QString titel =
-//             section == ModifiedColumnId ?                i18nc("@info:tooltip","Id of the version") :
+//             section == LocalStateColumnId ?                i18nc("@info:tooltip","Id of the version") :
             section == TitleColumnId ? i18nc("@info:tooltip","Title of the document") :
             QString();
         result = titel;
@@ -145,8 +161,12 @@ Q_UNUSED( document )
 void DocumentListModel::onDocumentsAdded( const QList<Kasten::AbstractDocument*>& documents )
 {
     foreach( AbstractDocument* document, documents )
-        connect( document, SIGNAL(syncStatesChanged( Kasten::AbstractDocument::SyncStates )),
+    {
+        connect( document, SIGNAL(localSyncStateChanged( Kasten::AbstractDocument::LocalSyncState )),
                  SLOT(onSyncStatesChanged()) );
+        connect( document, SIGNAL(remoteSyncStateChanged( Kasten::AbstractDocument::RemoteSyncState )),
+                 SLOT(onSyncStatesChanged()) );
+    }
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
     reset();
 }

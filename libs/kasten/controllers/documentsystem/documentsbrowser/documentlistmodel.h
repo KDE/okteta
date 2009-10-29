@@ -42,9 +42,10 @@ class DocumentListModel : public QAbstractTableModel
     enum ColumnIds
     {
         CurrentColumnId = 0,
-        ModifiedColumnId = 1,
-        TitleColumnId = 2,
-        NoOfColumnIds = 3 // TODO: what pattern is usually used to mark number of ids?
+        LocalStateColumnId = 1,
+        RemoteStateColumnId = 2,
+        TitleColumnId = 3,
+        NoOfColumnIds = 4 // TODO: what pattern is usually used to mark number of ids?
     };
 
   public:

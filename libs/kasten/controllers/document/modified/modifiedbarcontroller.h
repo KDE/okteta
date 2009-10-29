@@ -51,7 +51,7 @@ class KASTENCONTROLLERS_EXPORT ModifiedBarController : public AbstractXmlGuiCont
     virtual void setTargetModel( AbstractModel* model );
 
   protected Q_SLOTS: // action slots
-    void onSyncStatesChanged( Kasten::AbstractDocument::SyncStates syncStates );
+    void onLocalSyncStateChanged( Kasten::AbstractDocument::LocalSyncState syncState );
 
   protected:
     AbstractDocument* mDocument;

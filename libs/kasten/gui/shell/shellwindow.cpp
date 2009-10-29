@@ -123,19 +123,16 @@ void ShellWindow::onTitleChanged( const QString &newTitle )
     if( view )
     {
         AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
-        setCaption( newTitle, document->hasLocalChanges() );
+        setCaption( newTitle, document->localSyncState() == AbstractDocument::LocalHasChanges );
     }
 }
 
-void ShellWindow::onSyncStatesChanged( AbstractDocument::SyncStates newStates )
+void ShellWindow::onLocalSyncStateChanged( AbstractDocument::LocalSyncState newState )
 {
-Q_UNUSED( newStates )
+Q_UNUSED( newState )
     AbstractView* view = qobject_cast<AbstractView *>( sender() );
     if( view )
-    {
-        AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
-        setCaption( view->title(), document->hasLocalChanges() );
-    }
+        setCaption( view->title(), newState == AbstractDocument::LocalHasChanges );
 }
 
 void ShellWindow::onViewFocusChanged( AbstractView *view )
@@ -148,14 +145,14 @@ void ShellWindow::onViewFocusChanged( AbstractView *view )
     const QString title = view ? view->title() : QString();
     AbstractDocument* document = view ? view->findBaseModel<AbstractDocument*>() : 0;
 
-    const bool changes = document ? document->hasLocalChanges() : false;
+    const bool changes = document ? document->localSyncState() == AbstractDocument::LocalHasChanges : false;
     setCaption( title, changes );
 
     if( view )
     {
         connect( view, SIGNAL(titleChanged( QString )), SLOT(onTitleChanged( QString )) );
-        connect( view, SIGNAL(syncStatesChanged( Kasten::AbstractDocument::SyncStates )),
-                       SLOT(onSyncStatesChanged( Kasten::AbstractDocument::SyncStates )) );
+        connect( view, SIGNAL(localSyncStateChanged( Kasten::AbstractDocument::LocalSyncState )),
+                       SLOT(onLocalSyncStateChanged( Kasten::AbstractDocument::LocalSyncState )) );
     }
 }
 

@@ -69,8 +69,6 @@ void AbstractDocument::setLiveSynchronizer( AbstractModelSynchronizer* synchroni
     d->setLiveSynchronizer(synchronizer);
 }
 
-bool AbstractDocument::hasLocalChanges() const { return syncStates().testFlag(LocalHasChanges) ; }
-
 AbstractDocument::~AbstractDocument()
 {
 }

@@ -39,7 +39,7 @@ namespace Kasten
 ByteArrayDocument::ByteArrayDocument( const QString &initDescription )
   : mByteArray( new Okteta::PieceTableByteArrayModel() ),
     mInitDescription( initDescription ),
-    mRemoteState( InSync )
+    mRemoteState( RemoteNotSet )
 {
     connect( mByteArray, SIGNAL(modifiedChanged( bool )), SLOT(onModelModified( bool )) );
     connect( mByteArray, SIGNAL(readOnlyChanged( bool )), SIGNAL(readOnlyChanged( bool )) );
@@ -52,7 +52,7 @@ ByteArrayDocument::ByteArrayDocument( const QString &initDescription )
 ByteArrayDocument::ByteArrayDocument( Okteta::PieceTableByteArrayModel *byteArray, const QString &initDescription )
   : mByteArray( byteArray ),
     mInitDescription( initDescription ),
-    mRemoteState( InSync )
+    mRemoteState( RemoteNotSet )
 {
     connect( mByteArray, SIGNAL(modifiedChanged( bool )), SLOT(onModelModified( bool )) );
     connect( mByteArray, SIGNAL(readOnlyChanged( bool )), SIGNAL(readOnlyChanged( bool )) );
@@ -81,9 +81,14 @@ bool ByteArrayDocument::isModifiable() const { return true; }
 bool ByteArrayDocument::isReadOnly()   const { return mByteArray->isReadOnly(); }
 void ByteArrayDocument::setReadOnly( bool isReadOnly ) { mByteArray->setReadOnly( isReadOnly ); }
 
-AbstractDocument::SyncStates ByteArrayDocument::syncStates() const
+AbstractDocument::LocalSyncState ByteArrayDocument::localSyncState() const
 {
-    return mRemoteState | (mByteArray->isModified() ? LocalHasChanges : InSync);
+    return (mByteArray->isModified() ? LocalHasChanges : LocalInSync);
+}
+
+AbstractDocument::RemoteSyncState ByteArrayDocument::remoteSyncState() const
+{
+    return mRemoteState;
 }
 
 void ByteArrayDocument::setTitle( const QString &title )
@@ -92,14 +97,14 @@ void ByteArrayDocument::setTitle( const QString &title )
     emit titleChanged( mTitle );
 }
 
-void ByteArrayDocument::setRemoteState( AbstractDocument::SyncState remoteState )
+void ByteArrayDocument::setRemoteState( AbstractDocument::RemoteSyncState remoteState )
 {
     if( mRemoteState == remoteState )
         return;
 
     mRemoteState = remoteState;
 
-    emit syncStatesChanged( syncStates() );
+    emit remoteSyncStateChanged( mRemoteState );
 }
 
 
@@ -115,7 +120,7 @@ void ByteArrayDocument::revertToVersionByIndex( int versionIndex ) { mByteArray-
 
 void ByteArrayDocument::onModelModified( bool isModified )
 {
-    emit syncStatesChanged( mRemoteState | (isModified ? LocalHasChanges : InSync) );
+    emit localSyncStateChanged( (isModified ? LocalHasChanges : LocalInSync) );
 }
 
 void ByteArrayDocument::onHeadVersionDescriptionChanged( const QString &newDescription )

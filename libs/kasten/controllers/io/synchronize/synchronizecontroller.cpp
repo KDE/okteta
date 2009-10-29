@@ -84,26 +84,34 @@ void SynchronizeController::onSynchronizerChange( AbstractModelSynchronizer* new
     mSynchronizer = qobject_cast<AbstractModelFileSystemSynchronizer*>( newSynchronizer );
     // TODO: Storable interface should be used by Synchronizer 
     // synchronizer should report about possible activities
-    bool outOfSync = true;
-    bool hasUrl = false;
+    // TODO: check for access rights, may not write
+    bool canSync = false;
     if( mSynchronizer )
     {
-        hasUrl = !mSynchronizer->url().isEmpty();
-        outOfSync = hasUrl && ( mDocument->syncStates() != AbstractDocument::InSync );
-        connect( mDocument, SIGNAL(syncStatesChanged( Kasten::AbstractDocument::SyncStates )),
-                            SLOT(onSyncStatesChanged( Kasten::AbstractDocument::SyncStates )) );
+        const AbstractDocument::LocalSyncState localSyncState = mDocument->localSyncState();
+        const AbstractDocument::RemoteSyncState remoteSyncState = mDocument->remoteSyncState();
+        canSync = ( localSyncState == AbstractDocument::LocalHasChanges )
+                  || ( remoteSyncState == AbstractDocument::RemoteHasChanges );
+
+        connect( mDocument, SIGNAL(localSyncStateChanged( Kasten::AbstractDocument::LocalSyncState )),
+                            SLOT(onSyncStateChanged()) );
+        connect( mDocument, SIGNAL(remoteSyncStateChanged( Kasten::AbstractDocument::RemoteSyncState )),
+                            SLOT(onSyncStateChanged()) );
     }
 
-    mSaveAction->setEnabled( mSynchronizer && outOfSync );
-    mReloadAction->setEnabled( mSynchronizer && outOfSync );
+    mSaveAction->setEnabled( canSync );
+    mReloadAction->setEnabled( canSync );
 }
 
-void SynchronizeController::onSyncStatesChanged( AbstractDocument::SyncStates newStates )
+void SynchronizeController::onSyncStateChanged()
 {
-    const bool hasUrl = !mSynchronizer->url().isEmpty();
-    const bool outOfSync = hasUrl && ( newStates != AbstractDocument::InSync );
-    mSaveAction->setEnabled( outOfSync );
-    mReloadAction->setEnabled( outOfSync );
+    const AbstractDocument::LocalSyncState localSyncState = mDocument->localSyncState();
+    const AbstractDocument::RemoteSyncState remoteSyncState = mDocument->remoteSyncState();
+    const bool canSync = ( localSyncState == AbstractDocument::LocalHasChanges )
+                         || ( remoteSyncState == AbstractDocument::RemoteHasChanges );
+
+    mSaveAction->setEnabled( canSync );
+    mReloadAction->setEnabled( canSync );
 }
 
 }

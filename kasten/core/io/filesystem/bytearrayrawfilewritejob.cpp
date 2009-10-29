@@ -50,7 +50,7 @@ void ByteArrayRawFileWriteJob::startWriteToFile()
     delete writeThread;
 
     if( success )
-        document->setRemoteState( AbstractDocument::InSync );
+        document->setRemoteState( AbstractDocument::RemoteInSync );
     completeWrite( success );
 }
 

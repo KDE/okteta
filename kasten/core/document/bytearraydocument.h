@@ -69,7 +69,8 @@ class OKTETAKASTENCORE_EXPORT ByteArrayDocument : public AbstractDocument,
   public: // AbstractDocument API
     virtual QString typeName() const;
     virtual QString mimeType() const;
-    virtual SyncStates syncStates() const;
+    virtual LocalSyncState localSyncState() const;
+    virtual RemoteSyncState remoteSyncState() const;
 
   public: // If::Versionable
     virtual int versionIndex() const;
@@ -86,7 +87,7 @@ class OKTETAKASTENCORE_EXPORT ByteArrayDocument : public AbstractDocument,
 
   public:
     void setTitle( const QString &title );
-    void setRemoteState( AbstractDocument::SyncState remoteState );
+    void setRemoteState( AbstractDocument::RemoteSyncState remoteState );
 
     void setOwner( const Person& owner );
     void addUsers( const QList<Person>& users );
@@ -111,7 +112,7 @@ class OKTETAKASTENCORE_EXPORT ByteArrayDocument : public AbstractDocument,
 
     const QString mInitDescription;
 
-    SyncState mRemoteState;
+    RemoteSyncState mRemoteState;
     QList<Person> mUserList;
 };
 

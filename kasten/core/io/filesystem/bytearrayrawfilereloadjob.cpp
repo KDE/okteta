@@ -54,7 +54,7 @@ void ByteArrayRawFileReloadJob::startReadFromFile()
     {
         Okteta::PieceTableByteArrayModel *byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>( document->content() );
         byteArray->setData( reloadThread->data() );
-        document->setRemoteState( AbstractDocument::InSync );
+        document->setRemoteState( AbstractDocument::RemoteInSync );
     }
     delete reloadThread;
 

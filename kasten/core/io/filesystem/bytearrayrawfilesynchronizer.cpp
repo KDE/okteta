@@ -76,8 +76,11 @@ AbstractConnectJob *ByteArrayRawFileSynchronizer::startConnect( AbstractDocument
 
 void ByteArrayRawFileSynchronizer::handleFileChange( FileChange change )
 {
-Q_UNUSED( change )
-    mDocument->setRemoteState( AbstractDocument::RemoteHasChanges );
+    static const AbstractDocument::RemoteSyncState fileChangeToRemoteStateMap[] =
+    { AbstractDocument::RemoteHasChanges, AbstractDocument::RemoteDeleted, AbstractDocument::RemoteHasChanges };
+
+    const AbstractDocument::RemoteSyncState remoteState = fileChangeToRemoteStateMap[(int)change];
+    mDocument->setRemoteState( remoteState );
 }
 
 void ByteArrayRawFileSynchronizer::onUrlChange( const KUrl &url )

@@ -55,7 +55,7 @@ void ByteArrayRawFileConnectJob::startConnectWithFile()
     delete writeThread;
 
     if( success )
-        byteArrayDocument->setRemoteState( AbstractDocument::InSync );
+        byteArrayDocument->setRemoteState( AbstractDocument::RemoteInSync );
     complete( success );
 }
 

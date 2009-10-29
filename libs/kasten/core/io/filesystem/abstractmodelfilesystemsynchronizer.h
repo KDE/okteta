@@ -46,7 +46,7 @@ class KASTENCORE_EXPORT AbstractModelFileSystemSynchronizer : public AbstractMod
   friend class AbstractFileSystemSyncToRemoteJobPrivate;
 
   protected:
-    enum FileChange { FileDirty, FileCreated, FileDeleted };
+    enum FileChange { FileDirty, FileDeleted, FileCreated };
 
   protected:
     explicit AbstractModelFileSystemSynchronizer( AbstractModelFileSystemSynchronizerPrivate* d );

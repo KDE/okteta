@@ -196,7 +196,7 @@ bool DocumentSyncManager::canClose( AbstractDocument* document )
 {
     bool canClose = true;
 
-    if( document->hasLocalChanges() )
+    if( document->localSyncState() == AbstractDocument::LocalHasChanges )
     {
         AbstractModelSynchronizer* synchronizer = document->synchronizer();
         const bool couldSynchronize = hasSynchronizerForLocal( document->mimeType() );
@@ -243,7 +243,7 @@ void DocumentSyncManager::reload( AbstractDocument* document )
 {
     AbstractModelSynchronizer* synchronizer = document->synchronizer();
 
-    if( document->hasLocalChanges() )
+    if( document->localSyncState() == AbstractDocument::LocalHasChanges )
     {
         const QString processTitle = i18nc( "@title:window", "Reload" );
 

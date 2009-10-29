@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -58,7 +58,7 @@ class KASTENCONTROLLERS_EXPORT SynchronizeController : public AbstractXmlGuiCont
 
   private Q_SLOTS:
     void onSynchronizerChange( Kasten::AbstractModelSynchronizer* newSynchronizer );
-    void onSyncStatesChanged( Kasten::AbstractDocument::SyncStates newStates );
+    void onSyncStateChanged();
 
   protected:
     DocumentSyncManager* mSyncManager;

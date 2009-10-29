@@ -71,7 +71,7 @@ class KASTENGUI_EXPORT ShellWindow : public KXmlGuiWindow,
 
   private Q_SLOTS:
     void onTitleChanged( const QString &newTitle );
-    void onSyncStatesChanged( Kasten::AbstractDocument::SyncStates newStates );
+    void onLocalSyncStateChanged( Kasten::AbstractDocument::LocalSyncState newState );
     void onViewFocusChanged( Kasten::AbstractView* view );
     void onFocusRequested( Kasten::AbstractDocument* document );
     void onToolVisibilityChanged( bool isVisible );
