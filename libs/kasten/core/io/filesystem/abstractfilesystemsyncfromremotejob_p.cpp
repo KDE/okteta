@@ -26,7 +26,6 @@
 #include "abstractmodelfilesystemsynchronizer.h"
 // KDE
 #include <KIO/NetAccess>
-#include <KLocale>
 // Qt
 #include <QtCore/QFileInfo>
 #include <QtCore/QDateTime>

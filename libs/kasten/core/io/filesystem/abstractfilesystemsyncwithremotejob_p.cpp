@@ -27,7 +27,6 @@
 #include <abstractdocument.h>
 // KDE
 #include <KIO/NetAccess>
-#include <KLocale>
 #include <KTemporaryFile>
 // Qt
 #include <QtCore/QFileInfo>
