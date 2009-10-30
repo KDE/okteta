@@ -40,6 +40,20 @@ AbstractModelFileSystemSynchronizer::AbstractModelFileSystemSynchronizer()
   : AbstractModelSynchronizer( new AbstractModelFileSystemSynchronizerPrivate(this) )
 {}
 
+RemoteSyncState AbstractModelFileSystemSynchronizer::remoteSyncState() const
+{
+    Q_D( const AbstractModelFileSystemSynchronizer );
+
+    return d->remoteSyncState();
+}
+
+void AbstractModelFileSystemSynchronizer::setRemoteState( RemoteSyncState remoteState )
+{
+    Q_D( AbstractModelFileSystemSynchronizer );
+
+    d->setRemoteState( remoteState );
+}
+
 void AbstractModelFileSystemSynchronizer::setFileDateTimeOnSync( const QDateTime& fileDateTime )
 {
     Q_D( AbstractModelFileSystemSynchronizer );

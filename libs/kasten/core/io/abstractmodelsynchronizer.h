@@ -25,6 +25,7 @@
 
 // lib
 #include "kastencore_export.h"
+#include "kastencore.h"
 // Qt
 #include <QtCore/QObject>
 
@@ -109,12 +110,14 @@ class KASTENCORE_EXPORT AbstractModelSynchronizer : public QObject
 //     virtual bool deleteDocument();
 
     virtual AbstractDocument* document() const = 0;
+    virtual RemoteSyncState remoteSyncState() const = 0;
 
   Q_SIGNALS:
     void urlChanged( const KUrl &url );
     void dataPulled( int ) const;
     void dataPushed( int ) const;
     void synchronized();
+    void remoteSyncStateChanged( Kasten::RemoteSyncState newState );
 
   protected: // get
     void setUrl( const KUrl &url );

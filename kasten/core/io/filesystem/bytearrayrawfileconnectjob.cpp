@@ -54,8 +54,6 @@ void ByteArrayRawFileConnectJob::startConnectWithFile()
     const bool success = writeThread->success();
     delete writeThread;
 
-    if( success )
-        byteArrayDocument->setRemoteState( RemoteInSync );
     complete( success );
 }
 

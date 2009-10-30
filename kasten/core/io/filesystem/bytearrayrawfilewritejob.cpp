@@ -49,8 +49,6 @@ void ByteArrayRawFileWriteJob::startWriteToFile()
     const bool success = writeThread->success();
     delete writeThread;
 
-    if( success )
-        document->setRemoteState( RemoteInSync );
     completeWrite( success );
 }
 

@@ -42,6 +42,10 @@ class AbstractModelFileSystemSynchronizerPrivate : public AbstractModelSynchroni
     virtual ~AbstractModelFileSystemSynchronizerPrivate();
 
   public:
+    RemoteSyncState remoteSyncState() const;
+
+  public:
+    void setRemoteState( RemoteSyncState remoteState );
     void setFileDateTimeOnSync( const QDateTime& fileDateTime );
     void startFileWatching();
     void stopFileWatching();
@@ -55,6 +59,7 @@ class AbstractModelFileSystemSynchronizerPrivate : public AbstractModelSynchroni
 
   protected:
     QDateTime mFileDateTime;
+    RemoteSyncState mRemoteState;
     mutable KDirWatch* mDirWatch;
 
   protected:
@@ -64,10 +69,21 @@ class AbstractModelFileSystemSynchronizerPrivate : public AbstractModelSynchroni
 
 inline AbstractModelFileSystemSynchronizerPrivate::AbstractModelFileSystemSynchronizerPrivate( AbstractModelFileSystemSynchronizer* parent )
   : AbstractModelSynchronizerPrivate( parent ),
+    mRemoteState( RemoteUnknown ),
     mDirWatch( 0 )
 {
 }
+inline RemoteSyncState AbstractModelFileSystemSynchronizerPrivate::remoteSyncState() const { return mRemoteState; }
+inline void AbstractModelFileSystemSynchronizerPrivate::setRemoteState( RemoteSyncState remoteState )
+{
+    Q_Q( AbstractModelFileSystemSynchronizer );
 
+    if( mRemoteState == remoteState )
+        return;
+
+    mRemoteState = remoteState;
+    emit q->remoteSyncStateChanged( remoteState );
+}
 inline void AbstractModelFileSystemSynchronizerPrivate::setFileDateTimeOnSync( const QDateTime& fileDateTime )
 {
     mFileDateTime = fileDateTime;

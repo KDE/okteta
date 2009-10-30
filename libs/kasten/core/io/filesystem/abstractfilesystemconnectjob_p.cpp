@@ -106,9 +106,14 @@ void AbstractFileSystemConnectJobPrivate::complete( bool success )
                 q->setError( KJob::KilledJobError );
                 q->setErrorText( KIO::NetAccess::lastErrorString() );
             }
+            else
+                mSynchronizer->setRemoteState( RemoteUnknown );
         }
         else
+        {
             mSynchronizer->startFileWatching();
+            mSynchronizer->setRemoteState( RemoteInSync );
+        }
 
         // TODO; in path of both constructor by url and synchWithRemote
         // only needed for the first, so constructor writers can forget about this

@@ -79,8 +79,8 @@ void AbstractModelFileSystemSynchronizerPrivate::onFileDirty( const QString& fil
     Q_UNUSED( fileName )
     Q_Q( AbstractModelFileSystemSynchronizer );
 
-    q->handleFileChange( AbstractModelFileSystemSynchronizer::FileDirty );
 kDebug()<<fileName;
+    setRemoteState( RemoteHasChanges );
 }
 
 void AbstractModelFileSystemSynchronizerPrivate::onFileCreated( const QString& fileName )
@@ -88,9 +88,9 @@ void AbstractModelFileSystemSynchronizerPrivate::onFileCreated( const QString& f
     Q_UNUSED( fileName )
     Q_Q( AbstractModelFileSystemSynchronizer );
 
-  //TODO: could happen after a delete, what to do?
-    q->handleFileChange( AbstractModelFileSystemSynchronizer::FileCreated );
 kDebug()<<fileName;
+  //TODO: could happen after a delete, what to do?
+    setRemoteState( RemoteHasChanges );
 }
 
 void AbstractModelFileSystemSynchronizerPrivate::onFileDeleted( const QString& fileName )
@@ -98,8 +98,8 @@ void AbstractModelFileSystemSynchronizerPrivate::onFileDeleted( const QString& f
     Q_UNUSED( fileName )
     Q_Q( AbstractModelFileSystemSynchronizer );
 
-    q->handleFileChange( AbstractModelFileSystemSynchronizer::FileDeleted );
 kDebug()<<fileName;
+    setRemoteState( RemoteDeleted );
 }
 
 AbstractModelFileSystemSynchronizerPrivate::~AbstractModelFileSystemSynchronizerPrivate()

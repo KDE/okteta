@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -70,7 +70,6 @@ class OKTETAKASTENCORE_EXPORT ByteArrayDocument : public AbstractDocument,
     virtual QString typeName() const;
     virtual QString mimeType() const;
     virtual LocalSyncState localSyncState() const;
-    virtual RemoteSyncState remoteSyncState() const;
 
   public: // If::Versionable
     virtual int versionIndex() const;
@@ -87,7 +86,6 @@ class OKTETAKASTENCORE_EXPORT ByteArrayDocument : public AbstractDocument,
 
   public:
     void setTitle( const QString &title );
-    void setRemoteState( RemoteSyncState remoteState );
 
     void setOwner( const Person& owner );
     void addUsers( const QList<Person>& users );
@@ -112,7 +110,6 @@ class OKTETAKASTENCORE_EXPORT ByteArrayDocument : public AbstractDocument,
 
     const QString mInitDescription;
 
-    RemoteSyncState mRemoteState;
     QList<Person> mUserList;
 };
 

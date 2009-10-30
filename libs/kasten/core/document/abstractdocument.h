@@ -59,7 +59,7 @@ class KASTENCORE_EXPORT AbstractDocument : public AbstractModel
     virtual QString mimeType() const = 0;
 
     virtual LocalSyncState localSyncState() const = 0;
-    virtual RemoteSyncState remoteSyncState() const = 0;
+    virtual RemoteSyncState remoteSyncState() const;
 
   public:
     void setSynchronizer( AbstractModelSynchronizer* synchronizer );

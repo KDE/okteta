@@ -46,9 +46,6 @@ class KASTENCORE_EXPORT AbstractModelFileSystemSynchronizer : public AbstractMod
   friend class AbstractFileSystemSyncToRemoteJobPrivate;
 
   protected:
-    enum FileChange { FileDirty, FileDeleted, FileCreated };
-
-  protected:
     explicit AbstractModelFileSystemSynchronizer( AbstractModelFileSystemSynchronizerPrivate* d );
 
   public:
@@ -56,13 +53,14 @@ class KASTENCORE_EXPORT AbstractModelFileSystemSynchronizer : public AbstractMod
 
     virtual ~AbstractModelFileSystemSynchronizer();
 
-  protected: // API to be implemented
-    virtual void handleFileChange( FileChange change ) = 0;
+  public: // AbstractModelSynchronizer API
+    virtual RemoteSyncState remoteSyncState() const;
 
   protected:
 //     QDataTime lastModifed() const;
 
   protected:
+    void setRemoteState( RemoteSyncState remoteState );
     void setFileDateTimeOnSync( const QDateTime& fileDateTime );
     void startFileWatching();
     void stopFileWatching();

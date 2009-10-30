@@ -31,6 +31,12 @@ AbstractDocument::AbstractDocument()
   : AbstractModel( new AbstractDocumentPrivate(this) )
 {}
 
+RemoteSyncState AbstractDocument::remoteSyncState() const
+{
+    Q_D( const AbstractDocument );
+
+    return d->remoteSyncState();
+}
 QString AbstractDocument::id() const
 {
     Q_D( const AbstractDocument );

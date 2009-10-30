@@ -41,6 +41,9 @@ class AbstractDocumentPrivate : public AbstractModelPrivate
       ~AbstractDocumentPrivate();
 
   public:
+    RemoteSyncState remoteSyncState() const;
+
+  public:
     const QString& id() const;
     AbstractModelSynchronizer* synchronizer() const;
     AbstractModelSynchronizer* liveSynchronizer() const;
@@ -65,6 +68,11 @@ inline AbstractDocumentPrivate::AbstractDocumentPrivate( AbstractDocument* paren
     mSynchronizer( 0 ),
     mLiveSynchronizer( 0 )
 {}
+inline RemoteSyncState AbstractDocumentPrivate::remoteSyncState() const
+{
+    return mSynchronizer ? mSynchronizer->remoteSyncState() : RemoteNotSet;
+}
+
 inline const QString& AbstractDocumentPrivate::id() const { return mId; }
 inline void AbstractDocumentPrivate::setId( const QString& id ) { mId = id; }
 
@@ -79,6 +87,8 @@ inline void AbstractDocumentPrivate::setSynchronizer( AbstractModelSynchronizer*
 
     delete mSynchronizer;
     mSynchronizer = synchronizer;
+    q->connect( mSynchronizer, SIGNAL(remoteSyncStateChanged( Kasten::RemoteSyncState )),
+                q, SIGNAL(remoteSyncStateChanged( Kasten::RemoteSyncState )) );
     emit q->synchronizerChanged( synchronizer );
 }
 inline AbstractModelSynchronizer* AbstractDocumentPrivate::liveSynchronizer() const { return mLiveSynchronizer; }

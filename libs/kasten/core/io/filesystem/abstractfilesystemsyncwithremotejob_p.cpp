@@ -107,14 +107,20 @@ void AbstractFileSystemSyncWithRemoteJobPrivate::completeSync( bool success )
                 q->setError( KJob::KilledJobError );
                 q->setErrorText( KIO::NetAccess::lastErrorString() );
             }
+            else
+                mSynchronizer->setRemoteState( RemoteUnknown );
         }
         else
+        {
             mSynchronizer->startFileWatching();
+            mSynchronizer->setRemoteState( RemoteInSync );
+        }
+
     }
     else
     {
         q->setError( KJob::KilledJobError );
-        q->setErrorText( i18nc("@info","Problem while synching with local filesystem.") );
+        q->setErrorText( mFile->errorString() );
     }
 
     delete mFile;

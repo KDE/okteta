@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -38,8 +38,7 @@ namespace Kasten
 
 ByteArrayDocument::ByteArrayDocument( const QString &initDescription )
   : mByteArray( new Okteta::PieceTableByteArrayModel() ),
-    mInitDescription( initDescription ),
-    mRemoteState( RemoteNotSet )
+    mInitDescription( initDescription )
 {
     connect( mByteArray, SIGNAL(modifiedChanged( bool )), SLOT(onModelModified( bool )) );
     connect( mByteArray, SIGNAL(readOnlyChanged( bool )), SIGNAL(readOnlyChanged( bool )) );
@@ -51,8 +50,7 @@ ByteArrayDocument::ByteArrayDocument( const QString &initDescription )
 
 ByteArrayDocument::ByteArrayDocument( Okteta::PieceTableByteArrayModel *byteArray, const QString &initDescription )
   : mByteArray( byteArray ),
-    mInitDescription( initDescription ),
-    mRemoteState( RemoteNotSet )
+    mInitDescription( initDescription )
 {
     connect( mByteArray, SIGNAL(modifiedChanged( bool )), SLOT(onModelModified( bool )) );
     connect( mByteArray, SIGNAL(readOnlyChanged( bool )), SIGNAL(readOnlyChanged( bool )) );
@@ -86,25 +84,10 @@ LocalSyncState ByteArrayDocument::localSyncState() const
     return (mByteArray->isModified() ? LocalHasChanges : LocalInSync);
 }
 
-RemoteSyncState ByteArrayDocument::remoteSyncState() const
-{
-    return mRemoteState;
-}
-
 void ByteArrayDocument::setTitle( const QString &title )
 {
     mTitle = title;
     emit titleChanged( mTitle );
-}
-
-void ByteArrayDocument::setRemoteState( RemoteSyncState remoteState )
-{
-    if( mRemoteState == remoteState )
-        return;
-
-    mRemoteState = remoteState;
-
-    emit remoteSyncStateChanged( mRemoteState );
 }
 
 

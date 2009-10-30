@@ -78,8 +78,9 @@ void AbstractFileSystemSyncToRemoteJobPrivate::completeWrite( bool success )
         mSynchronizer->setFileDateTimeOnSync( fileInfo.lastModified() );
 
         const KUrl url = mSynchronizer->url();
+        const bool isLocalFile = url.isLocalFile();
 
-        if( ! url.isLocalFile() )
+        if( ! isLocalFile )
         {
             success = KIO::NetAccess::upload( mWorkFilePath, url, widget() );
             if( ! success )
@@ -87,9 +88,14 @@ void AbstractFileSystemSyncToRemoteJobPrivate::completeWrite( bool success )
                 q->setError( KJob::KilledJobError );
                 q->setErrorText( KIO::NetAccess::lastErrorString() );
             }
+            else
+                mSynchronizer->setRemoteState( RemoteUnknown );
         }
         else
+        {
             mSynchronizer->unpauseFileWatching();
+            mSynchronizer->setRemoteState( RemoteInSync );
+        }
 
         // TODO: right place? And we did only push, not synchronize! Is a hack to get DocumentInfoTool working
         if( success )
@@ -98,7 +104,7 @@ void AbstractFileSystemSyncToRemoteJobPrivate::completeWrite( bool success )
     else
     {
         q->setError( KJob::KilledJobError );
-        q->setErrorText( i18nc("@info","Problem while saving to local filesystem.") );
+        q->setErrorText( mFile->errorString() );
     }
 
     delete mFile;

@@ -66,13 +66,17 @@ void AbstractFileSystemSyncFromRemoteJobPrivate::completeRead( bool success )
 
     if( success )
     {
+        const KUrl url = mSynchronizer->url();
+        const bool isLocalFile = url.isLocalFile();
+
         QFileInfo fileInfo( mWorkFilePath );
         mSynchronizer->setFileDateTimeOnSync( fileInfo.lastModified() );
+        mSynchronizer->setRemoteState( isLocalFile ? RemoteInSync : RemoteUnknown );
     }
     else
     {
         q->setError( KJob::KilledJobError );
-        q->setErrorText( i18nc("@info","Problem while loading from local filesystem.") );
+        q->setErrorText( mFile->errorString() );
     }
 
     delete mFile;

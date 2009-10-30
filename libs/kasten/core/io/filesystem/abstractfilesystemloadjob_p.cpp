@@ -67,6 +67,7 @@ void AbstractFileSystemLoadJobPrivate::setDocument( AbstractDocument* document )
 
     if( document )
     {
+        const bool isLocalFile = mUrl.isLocalFile();
         mFile->close(); // TODO: when is new time written, on close?
 
         // TODO: reading the fileinfo here separated from the content reading without a lock
@@ -74,10 +75,10 @@ void AbstractFileSystemLoadJobPrivate::setDocument( AbstractDocument* document )
         // TODO: how to handle remote+temp?
         QFileInfo fileInfo( *mFile );
         mSynchronizer->setFileDateTimeOnSync( fileInfo.lastModified() );
-
         mSynchronizer->setUrl( mUrl );
-        if( mUrl.isLocalFile() )
+        if( isLocalFile )
             mSynchronizer->startFileWatching();
+        mSynchronizer->setRemoteState( isLocalFile ? RemoteInSync : RemoteUnknown );
 
         document->setSynchronizer( mSynchronizer );
     }

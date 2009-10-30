@@ -74,15 +74,6 @@ AbstractConnectJob *ByteArrayRawFileSynchronizer::startConnect( AbstractDocument
     return new ByteArrayRawFileConnectJob( this, document, url, option );
 }
 
-void ByteArrayRawFileSynchronizer::handleFileChange( FileChange change )
-{
-    static const RemoteSyncState fileChangeToRemoteStateMap[] =
-    { RemoteHasChanges, RemoteDeleted, RemoteHasChanges };
-
-    const RemoteSyncState remoteState = fileChangeToRemoteStateMap[(int)change];
-    mDocument->setRemoteState( remoteState );
-}
-
 void ByteArrayRawFileSynchronizer::onUrlChange( const KUrl &url )
 {
     mDocument->setTitle( url.fileName() );
