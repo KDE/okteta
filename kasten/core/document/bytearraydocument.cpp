@@ -29,8 +29,6 @@
 // KDE
 #include <KLocale>
 #include <KIcon>
-// Qt
-#include <QtCore/QLatin1String>
 
 
 namespace Kasten
@@ -72,7 +70,7 @@ ByteArrayDocument::ByteArrayDocument( const QString &filePath )
 Okteta::AbstractByteArrayModel* ByteArrayDocument::content() const { return mByteArray; }
 
 QString ByteArrayDocument::title() const { return mTitle; }
-QString ByteArrayDocument::mimeType() const { return QLatin1String("ByteArrayDocument"); }
+QString ByteArrayDocument::mimeType() const { return QString::fromLatin1("ByteArrayDocument"); }
 QString ByteArrayDocument::typeName() const { return i18nc( "name of the data type", "Byte Array" ); }
 
 bool ByteArrayDocument::isModifiable() const { return true; }
