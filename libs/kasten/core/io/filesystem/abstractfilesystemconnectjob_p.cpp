@@ -32,7 +32,7 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QDateTime>
 
-#include <KDebug>
+
 namespace Kasten
 {
 
@@ -73,7 +73,7 @@ void AbstractFileSystemConnectJobPrivate::connectWithFile()
             isWorkFileOk = mFile->open( QIODevice::ReadOnly );
         }
     }
-kDebug()<< mFile<<isWorkFileOk;
+
     if( isWorkFileOk )
         q->startConnectWithFile();
     else
