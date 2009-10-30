@@ -125,7 +125,7 @@ void AbstractFileSystemConnectJobPrivate::complete( bool success )
         delete mSynchronizer;
         // TODO: these reports should go to a notification system, for log or popup
         q->setError( KJob::KilledJobError );
-        q->setErrorText( i18nc("@info","Problem while synching with local filesystem.") );
+        q->setErrorText( mFile->errorString() );
     }
 
     delete mFile;
