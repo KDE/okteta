@@ -27,7 +27,6 @@
 #include <abstractdocument.h>
 // KDE
 #include <KIO/NetAccess>
-#include <KLocale>
 // Qt
 #include <QtCore/QFileInfo>
 #include <QtCore/QDateTime>
@@ -87,7 +86,7 @@ void AbstractFileSystemLoadJobPrivate::setDocument( AbstractDocument* document )
         delete mSynchronizer;
         // TODO: these reports should go to a notification system, for log or popup
         q->setError( KJob::KilledJobError );
-        q->setErrorText( i18nc("@info","Problem while loading from local filesystem.") );
+        q->setErrorText( mFile->errorString() );
     }
 
     delete mFile;
