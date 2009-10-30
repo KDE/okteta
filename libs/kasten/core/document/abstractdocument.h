@@ -25,6 +25,7 @@
 
 // lib
 #include "kastencore_export.h"
+#include "kastencore.h"
 // lib
 #include "abstractmodel.h"
 
@@ -41,33 +42,10 @@ class AbstractDocumentPrivate;
 // we would end with a in-memory file/document system, why not?
 class KASTENCORE_EXPORT AbstractDocument : public AbstractModel
 {
-    Q_OBJECT
-    Q_PROPERTY( LocalSyncState localSyncState READ localSyncState )
-    Q_PROPERTY( RemoteSyncState remoteSyncState READ remoteSyncState )
-    Q_ENUMS( LocalSyncState RemoteSyncState )
+  Q_OBJECT
 
   friend class AbstractModelSynchronizer;
   friend class DocumentManager;
-
-  public:
-    //TODO: reuse terms from vcs
-    enum LocalSyncState
-    {
-        LocalInSync = 0, //TODO: find better name
-        LocalHasChanges
-    };
-    //TODO: where to store access rights to remote?
-    enum RemoteSyncState
-    {
-        RemoteInSync = 0, //TODO: find better name
-        RemoteHasChanges,
-        RemoteNotSet,
-        RemoteDeleted,
-        // TODO: which KIO slaves are not supported by kdirwatch?
-        RemoteUnknown,
-        /// unknown, e.g. because connection not available/lost
-        RemoteUnreachable
-    };
 
   protected:
     AbstractDocument();
@@ -95,8 +73,8 @@ class KASTENCORE_EXPORT AbstractDocument : public AbstractModel
   Q_SIGNALS:
     // TODO: should be signal the diff? how to say then remote is in synch again?
     // could be done by pairs of flags instead of notset = isnot
-    void localSyncStateChanged( Kasten::AbstractDocument::LocalSyncState newState );
-    void remoteSyncStateChanged( Kasten::AbstractDocument::RemoteSyncState newState );
+    void localSyncStateChanged( Kasten::LocalSyncState newState );
+    void remoteSyncStateChanged( Kasten::RemoteSyncState newState );
     void synchronizerChanged( Kasten::AbstractModelSynchronizer* newSynchronizer );
     void liveSynchronizerChanged( Kasten::AbstractModelSynchronizer* newSynchronizer );
 

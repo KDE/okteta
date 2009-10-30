@@ -88,15 +88,15 @@ void SynchronizeController::onSynchronizerChange( AbstractModelSynchronizer* new
     bool canSync = false;
     if( mSynchronizer )
     {
-        const AbstractDocument::LocalSyncState localSyncState = mDocument->localSyncState();
-        const AbstractDocument::RemoteSyncState remoteSyncState = mDocument->remoteSyncState();
-        canSync = ( localSyncState == AbstractDocument::LocalHasChanges )
-                  || ( remoteSyncState == AbstractDocument::RemoteHasChanges )
-                  || ( remoteSyncState == AbstractDocument::RemoteUnknown );
+        const LocalSyncState localSyncState = mDocument->localSyncState();
+        const RemoteSyncState remoteSyncState = mDocument->remoteSyncState();
+        canSync = ( localSyncState == LocalHasChanges )
+                  || ( remoteSyncState == RemoteHasChanges )
+                  || ( remoteSyncState == RemoteUnknown );
 
-        connect( mDocument, SIGNAL(localSyncStateChanged( Kasten::AbstractDocument::LocalSyncState )),
+        connect( mDocument, SIGNAL(localSyncStateChanged( Kasten::LocalSyncState )),
                             SLOT(onSyncStateChanged()) );
-        connect( mDocument, SIGNAL(remoteSyncStateChanged( Kasten::AbstractDocument::RemoteSyncState )),
+        connect( mDocument, SIGNAL(remoteSyncStateChanged( Kasten::RemoteSyncState )),
                             SLOT(onSyncStateChanged()) );
     }
 
@@ -106,11 +106,11 @@ void SynchronizeController::onSynchronizerChange( AbstractModelSynchronizer* new
 
 void SynchronizeController::onSyncStateChanged()
 {
-    const AbstractDocument::LocalSyncState localSyncState = mDocument->localSyncState();
-    const AbstractDocument::RemoteSyncState remoteSyncState = mDocument->remoteSyncState();
-    const bool canSync = ( localSyncState == AbstractDocument::LocalHasChanges )
-                  || ( remoteSyncState == AbstractDocument::RemoteHasChanges )
-                  || ( remoteSyncState == AbstractDocument::RemoteUnknown );
+    const LocalSyncState localSyncState = mDocument->localSyncState();
+    const RemoteSyncState remoteSyncState = mDocument->remoteSyncState();
+    const bool canSync = ( localSyncState == LocalHasChanges )
+                  || ( remoteSyncState == RemoteHasChanges )
+                  || ( remoteSyncState == RemoteUnknown );
 
     mSaveAction->setEnabled( canSync );
     mReloadAction->setEnabled( canSync );

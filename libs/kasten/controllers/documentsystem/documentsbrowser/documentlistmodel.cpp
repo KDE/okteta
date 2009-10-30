@@ -90,22 +90,22 @@ QVariant DocumentListModel::data( const QModelIndex& index, int role ) const
                     result = KIcon( "arrow-right" );
                 break;
             case LocalStateColumnId:
-                if( document->localSyncState() == AbstractDocument::LocalHasChanges )
+                if( document->localSyncState() == LocalHasChanges )
                     result = KIcon( "document-save" );
                 break;
             case RemoteStateColumnId:
             {
                 // TODO: use static map, syncState int -> iconname
-                const AbstractDocument::RemoteSyncState remoteSyncState = document->remoteSyncState();
-                if( remoteSyncState == AbstractDocument::RemoteHasChanges )
+                const RemoteSyncState remoteSyncState = document->remoteSyncState();
+                if( remoteSyncState == RemoteHasChanges )
                     result = KIcon( "document-save" );
-                else if( remoteSyncState == AbstractDocument::RemoteNotSet )
+                else if( remoteSyncState == RemoteNotSet )
                     result = KIcon( "document-new" );
-                else if( remoteSyncState == AbstractDocument::RemoteDeleted )
+                else if( remoteSyncState == RemoteDeleted )
                     result = KIcon( "edit-delete" );
-                else if( remoteSyncState == AbstractDocument::RemoteUnknown )
+                else if( remoteSyncState == RemoteUnknown )
                     result = KIcon( "flag-yellow" );
-                else if( remoteSyncState == AbstractDocument::RemoteUnreachable )
+                else if( remoteSyncState == RemoteUnreachable )
                     result = KIcon( "network-disconnect" );
                 break;
             }
@@ -162,9 +162,9 @@ void DocumentListModel::onDocumentsAdded( const QList<Kasten::AbstractDocument*>
 {
     foreach( AbstractDocument* document, documents )
     {
-        connect( document, SIGNAL(localSyncStateChanged( Kasten::AbstractDocument::LocalSyncState )),
+        connect( document, SIGNAL(localSyncStateChanged( Kasten::LocalSyncState )),
                  SLOT(onSyncStatesChanged()) );
-        connect( document, SIGNAL(remoteSyncStateChanged( Kasten::AbstractDocument::RemoteSyncState )),
+        connect( document, SIGNAL(remoteSyncStateChanged( Kasten::RemoteSyncState )),
                  SLOT(onSyncStatesChanged()) );
     }
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns

@@ -84,6 +84,7 @@ set( kastencore_LIB_SRCS
 
 set( kastencore_LIB_HDRS
   kastencore_export.h
+  kastencore.h
   document/abstractmodel.h
   document/abstractmodelselection.h
   document/abstractdocument.h

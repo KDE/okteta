@@ -95,10 +95,10 @@ void ByteArrayView::init()
 
     // propagate signals
     connect( mDocument, SIGNAL(titleChanged( QString )), SIGNAL(titleChanged( QString )) );
-    connect( mDocument, SIGNAL(localSyncStateChanged( Kasten::AbstractDocument::LocalSyncState )),
-                        SIGNAL(localSyncStateChanged( Kasten::AbstractDocument::LocalSyncState )) );
-    connect( mDocument, SIGNAL(remoteSyncStateChanged( Kasten::AbstractDocument::RemoteSyncState )),
-                        SIGNAL(remoteSyncStateChanged( Kasten::AbstractDocument::RemoteSyncState )) );
+    connect( mDocument, SIGNAL(localSyncStateChanged( Kasten::LocalSyncState )),
+                        SIGNAL(localSyncStateChanged( Kasten::LocalSyncState )) );
+    connect( mDocument, SIGNAL(remoteSyncStateChanged( Kasten::RemoteSyncState )),
+                        SIGNAL(remoteSyncStateChanged( Kasten::RemoteSyncState )) );
     connect( mWidget, SIGNAL(hasSelectedDataChanged( bool )), SIGNAL(hasSelectedDataChanged( bool )) );
     connect( mWidget, SIGNAL(readOnlyChanged( bool )), SIGNAL(readOnlyChanged( bool )) );
     connect( mWidget, SIGNAL(overwriteModeChanged( bool )), SIGNAL(overwriteModeChanged( bool )) );

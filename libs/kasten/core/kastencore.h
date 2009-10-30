@@ -1,5 +1,5 @@
 /*
-    This file is part of the Okteta Kasten module, part of the KDE project.
+    This file is part of the Kasten Framework, part of the KDE project.
 
     Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
@@ -20,45 +20,29 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MODIFIEDBARCONTROLLER_H
-#define MODIFIEDBARCONTROLLER_H
-
-// lib
-#include "kastencontrollers_export.h"
-// Kasten gui
-#include <abstractxmlguicontroller.h>
-// Kasten core
-#include <abstractdocument.h>
-
-class QLabel;
-
+#ifndef KASTENCORE_H
+#define KASTENCORE_H
 
 namespace Kasten
 {
-
-class AbstractDocument;
-class StatusBar;
-
-
-class KASTENCONTROLLERS_EXPORT ModifiedBarController : public AbstractXmlGuiController
-{
-  Q_OBJECT
-
-  public:
-    explicit ModifiedBarController( StatusBar* statusBar );
-
-  public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
-
-  protected Q_SLOTS: // action slots
-    void onLocalSyncStateChanged( Kasten::LocalSyncState syncState );
-
-  protected:
-    AbstractDocument* mDocument;
-
-    QLabel* mModifiedLabel;
-};
-
+    //TODO: reuse terms from vcs
+    enum LocalSyncState
+    {
+        LocalInSync = 0, //TODO: find better name
+        LocalHasChanges
+    };
+    //TODO: where to store access rights to remote?
+    enum RemoteSyncState
+    {
+        RemoteInSync = 0, //TODO: find better name
+        RemoteHasChanges,
+        RemoteNotSet,
+        RemoteDeleted,
+        // TODO: which KIO slaves are not supported by kdirwatch?
+        RemoteUnknown,
+        /// unknown, e.g. because connection not available/lost
+        RemoteUnreachable
+    };
 }
 
 #endif

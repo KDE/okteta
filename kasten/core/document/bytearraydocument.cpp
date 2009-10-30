@@ -81,12 +81,12 @@ bool ByteArrayDocument::isModifiable() const { return true; }
 bool ByteArrayDocument::isReadOnly()   const { return mByteArray->isReadOnly(); }
 void ByteArrayDocument::setReadOnly( bool isReadOnly ) { mByteArray->setReadOnly( isReadOnly ); }
 
-AbstractDocument::LocalSyncState ByteArrayDocument::localSyncState() const
+LocalSyncState ByteArrayDocument::localSyncState() const
 {
     return (mByteArray->isModified() ? LocalHasChanges : LocalInSync);
 }
 
-AbstractDocument::RemoteSyncState ByteArrayDocument::remoteSyncState() const
+RemoteSyncState ByteArrayDocument::remoteSyncState() const
 {
     return mRemoteState;
 }
@@ -97,7 +97,7 @@ void ByteArrayDocument::setTitle( const QString &title )
     emit titleChanged( mTitle );
 }
 
-void ByteArrayDocument::setRemoteState( AbstractDocument::RemoteSyncState remoteState )
+void ByteArrayDocument::setRemoteState( RemoteSyncState remoteState )
 {
     if( mRemoteState == remoteState )
         return;

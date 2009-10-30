@@ -52,8 +52,8 @@ class KASTENGUI_EXPORT AbstractView : public AbstractModel
   Q_SIGNALS:
     // TODO: should be signal the diff? how to say then remote is in synch again?
     // TODO: this signal should be part of AbstractModel?
-    void localSyncStateChanged( Kasten::AbstractDocument::LocalSyncState newState );
-    void remoteSyncStateChanged( Kasten::AbstractDocument::RemoteSyncState newState );
+    void localSyncStateChanged( Kasten::LocalSyncState newState );
+    void remoteSyncStateChanged( Kasten::RemoteSyncState newState );
     // view has focus in the window
     void focusChanged( bool hasFocus );
 };
