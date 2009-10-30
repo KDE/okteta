@@ -57,16 +57,7 @@ ByteArrayDocument::ByteArrayDocument( Okteta::PieceTableByteArrayModel *byteArra
     connect( mByteArray, SIGNAL(headVersionDescriptionChanged( const QString& )),
              SLOT(onHeadVersionDescriptionChanged( const QString& )) );
 }
-#if 0
-ByteArrayDocument::ByteArrayDocument( const QString &filePath )
-: mByteArray( new Okteta::ByteArrayModel() )
-{
-    if( load(filePath) )
-    {
-        mLocalFilePath = filePath;
-    }
-}
-#endif
+
 Okteta::AbstractByteArrayModel* ByteArrayDocument::content() const { return mByteArray; }
 
 QString ByteArrayDocument::title() const { return mTitle; }
