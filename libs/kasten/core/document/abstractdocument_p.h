@@ -85,11 +85,17 @@ inline void AbstractDocumentPrivate::setSynchronizer( AbstractModelSynchronizer*
     if( mSynchronizer == synchronizer )
         return;
 
+    const Kasten::RemoteSyncState oldRemoteState = mSynchronizer->remoteSyncState();
+    const Kasten::RemoteSyncState newRemoteState = synchronizer->remoteSyncState();
+
     delete mSynchronizer;
     mSynchronizer = synchronizer;
     q->connect( mSynchronizer, SIGNAL(remoteSyncStateChanged( Kasten::RemoteSyncState )),
                 q, SIGNAL(remoteSyncStateChanged( Kasten::RemoteSyncState )) );
+
     emit q->synchronizerChanged( synchronizer );
+    if( oldRemoteState != newRemoteState )
+        emit q->remoteSyncStateChanged( newRemoteState );
 }
 inline AbstractModelSynchronizer* AbstractDocumentPrivate::liveSynchronizer() const { return mLiveSynchronizer; }
 inline void AbstractDocumentPrivate::setLiveSynchronizer( AbstractModelSynchronizer* synchronizer )
