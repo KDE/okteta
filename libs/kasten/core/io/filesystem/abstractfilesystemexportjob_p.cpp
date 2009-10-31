@@ -24,7 +24,6 @@
 
 // KDE
 #include <KIO/NetAccess>
-#include <KLocale>
 #include <KTemporaryFile>
 
 
