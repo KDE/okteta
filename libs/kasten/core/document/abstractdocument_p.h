@@ -85,7 +85,7 @@ inline void AbstractDocumentPrivate::setSynchronizer( AbstractModelSynchronizer*
     if( mSynchronizer == synchronizer )
         return;
 
-    const Kasten::RemoteSyncState oldRemoteState = mSynchronizer->remoteSyncState();
+    const Kasten::RemoteSyncState oldRemoteState = remoteSyncState();
     const Kasten::RemoteSyncState newRemoteState = synchronizer->remoteSyncState();
 
     delete mSynchronizer;
