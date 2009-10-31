@@ -25,10 +25,43 @@
 // KDE
 #include <KIO/NetAccess>
 #include <KLocale>
+#include <KTemporaryFile>
 
 
 namespace Kasten
 {
+
+void AbstractFileSystemExportJobPrivate::exportToFile()
+{
+    Q_Q( AbstractFileSystemExportJob );
+
+    bool isWorkFileOk;
+    if( mUrl.isLocalFile() )
+    {
+        mWorkFilePath = mUrl.path();
+        mFile = new QFile( mWorkFilePath );
+        isWorkFileOk = mFile->open( QIODevice::WriteOnly );
+    }
+    else
+    {
+        KTemporaryFile* temporaryFile = new KTemporaryFile;
+        isWorkFileOk = temporaryFile->open();
+
+        mWorkFilePath = temporaryFile->fileName();
+        mFile = temporaryFile;
+    }
+
+    if( isWorkFileOk )
+        q->startExportToFile();
+    else
+    {
+        q->setError( KJob::KilledJobError );
+        q->setErrorText( mFile ? mFile->errorString() : KIO::NetAccess::lastErrorString() );
+        delete mFile;
+
+        q->completeExport( false );
+    }
+}
 
 void AbstractFileSystemExportJobPrivate::completeExport( bool success )
 {
@@ -49,10 +82,10 @@ void AbstractFileSystemExportJobPrivate::completeExport( bool success )
     else
     {
         q->setError( KJob::KilledJobError );
-        q->setErrorText( i18nc("@info","Problem while saving to local filesystem.") );
+        q->setErrorText( mFile->errorString() );
     }
 
-    removeWorkFile();
+    delete mFile;
 
     q->emitResult();
 }

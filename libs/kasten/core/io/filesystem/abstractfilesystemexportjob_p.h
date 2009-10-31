@@ -28,7 +28,6 @@
 #include <abstractexportjob_p.h>
 // KDE
 #include <KUrl>
-#include <KTemporaryFile>
 // Qt
 #include <QtCore/QTimer>
 
@@ -53,12 +52,8 @@ class AbstractFileSystemExportJobPrivate : public AbstractExportJobPrivate
   public:
     AbstractModel* model() const;
     const AbstractModelSelection* selection() const;
-    const QString& workFilePath() const;
+    QFile* file() const;
     QWidget* widget() const;
-
-  public:
-    void prepareWorkFile();
-    void removeWorkFile();
 
   public: // slot
     void exportToFile();
@@ -70,7 +65,7 @@ class AbstractFileSystemExportJobPrivate : public AbstractExportJobPrivate
     AbstractModel* const mModel;
     const AbstractModelSelection* const mSelection;
     const KUrl mUrl;
-    KTemporaryFile* mTemporaryFile;
+    QFile* mFile;
     QString mWorkFilePath;
     QWidget* mWidget;
 };
@@ -83,7 +78,7 @@ inline AbstractFileSystemExportJobPrivate::AbstractFileSystemExportJobPrivate( A
     mModel( model ),
     mSelection( selection ),
     mUrl( url ),
-    mTemporaryFile( 0 ),
+    mFile( 0 ),
     mWidget( 0 )
 {}
 
@@ -91,7 +86,7 @@ inline AbstractFileSystemExportJobPrivate::~AbstractFileSystemExportJobPrivate()
 
 inline AbstractModel* AbstractFileSystemExportJobPrivate::model()                    const { return mModel; }
 inline const AbstractModelSelection* AbstractFileSystemExportJobPrivate::selection() const { return mSelection; }
-inline const QString& AbstractFileSystemExportJobPrivate::workFilePath()             const { return mWorkFilePath; }
+inline QFile* AbstractFileSystemExportJobPrivate::file()                             const { return mFile; }
 inline QWidget* AbstractFileSystemExportJobPrivate::widget()                         const { return mWidget; }
 
 
@@ -100,31 +95,6 @@ inline void AbstractFileSystemExportJobPrivate::start()
     Q_Q( AbstractFileSystemExportJob );
 
     QTimer::singleShot( 0, q, SLOT(exportToFile()) );
-}
-
-inline void AbstractFileSystemExportJobPrivate::exportToFile()
-{
-    Q_Q( AbstractFileSystemExportJob );
-
-    prepareWorkFile();
-
-    q->startExportToFile();
-}
-
-inline void AbstractFileSystemExportJobPrivate::prepareWorkFile()
-{
-    if( mUrl.isLocalFile() )
-        mWorkFilePath = mUrl.path();
-    else
-    {
-        mTemporaryFile = new KTemporaryFile;
-        mTemporaryFile->open();
-        mWorkFilePath = mTemporaryFile->fileName();
-    }
-}
-inline void AbstractFileSystemExportJobPrivate::removeWorkFile()
-{
-    delete mTemporaryFile;
 }
 
 }

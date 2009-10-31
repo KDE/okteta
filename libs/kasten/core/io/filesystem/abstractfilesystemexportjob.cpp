@@ -51,11 +51,11 @@ const AbstractModelSelection* AbstractFileSystemExportJob::selection() const
 
     return d->selection();
 }
-QString AbstractFileSystemExportJob::workFilePath() const
+QFile* AbstractFileSystemExportJob::file() const
 {
     Q_D( const AbstractFileSystemExportJob );
 
-    return d->workFilePath();
+    return d->file();
 }
 QWidget* AbstractFileSystemExportJob::widget() const
 {

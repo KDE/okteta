@@ -36,17 +36,8 @@ void ModelEncoderFileSystemExportJobPrivate::startExportToFile()
 {
     Q_Q( ModelEncoderFileSystemExportJob );
 
-    startExportToFile();
-
-    QFile file( workFilePath() );
-    if( ! file.open(QIODevice::WriteOnly) )
-    {
-        q->completeExport( false );
-        return;
-    }
-
     ModelStreamEncodeThread* exportThread =
-        new ModelStreamEncodeThread( q, &file, model(), selection(), mEncoder );
+        new ModelStreamEncodeThread( q, file(), model(), selection(), mEncoder );
     exportThread->start();
     while( ! exportThread->wait(100) )
         QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );

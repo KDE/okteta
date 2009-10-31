@@ -27,6 +27,7 @@
 #include <abstractexportjob.h>
 
 class KUrl;
+class QFile;
 
 
 namespace Kasten
@@ -63,7 +64,7 @@ class KASTENCORE_EXPORT AbstractFileSystemExportJob : public AbstractExportJob
   protected:
     AbstractModel* model() const;
     const AbstractModelSelection* selection() const;
-    QString workFilePath() const;
+    QFile* file() const;
     QWidget* widget() const;
 
   protected:
