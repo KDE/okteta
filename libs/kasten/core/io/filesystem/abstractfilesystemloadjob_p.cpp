@@ -77,6 +77,8 @@ void AbstractFileSystemLoadJobPrivate::setDocument( AbstractDocument* document )
         mSynchronizer->setUrl( mUrl );
         if( isLocalFile )
             mSynchronizer->startFileWatching();
+        else
+            mSynchronizer->startNetworkWatching();
         mSynchronizer->setRemoteState( isLocalFile ? RemoteInSync : RemoteUnknown );
 
         document->setSynchronizer( mSynchronizer );

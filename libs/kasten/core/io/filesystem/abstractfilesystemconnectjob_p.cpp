@@ -51,8 +51,6 @@ void AbstractFileSystemConnectJobPrivate::connectWithFile()
             mWorkFilePath = mUrl.path();
             mFile = new QFile( mWorkFilePath );
             isWorkFileOk = mFile->open( QIODevice::WriteOnly );
-
-            mSynchronizer->stopFileWatching();
         }
         else
         {
@@ -106,7 +104,10 @@ void AbstractFileSystemConnectJobPrivate::complete( bool success )
                 q->setErrorText( KIO::NetAccess::lastErrorString() );
             }
             else
+            {
+                mSynchronizer->startNetworkWatching();
                 mSynchronizer->setRemoteState( RemoteUnknown );
+            }
         }
         else
         {

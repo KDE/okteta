@@ -47,15 +47,21 @@ class AbstractModelFileSystemSynchronizerPrivate : public AbstractModelSynchroni
   public:
     void setRemoteState( RemoteSyncState remoteState );
     void setFileDateTimeOnSync( const QDateTime& fileDateTime );
+
     void startFileWatching();
     void stopFileWatching();
     void pauseFileWatching();
     void unpauseFileWatching();
 
+    void startNetworkWatching();
+    void stopNetworkWatching();
+
   public:
     void onFileDirty( const QString& fileName );
     void onFileCreated( const QString& fileName );
     void onFileDeleted( const QString& fileName );
+    void onNetworkConnect();
+    void onNetworkDisconnect();
 
   protected:
     QDateTime mFileDateTime;
@@ -74,6 +80,7 @@ inline AbstractModelFileSystemSynchronizerPrivate::AbstractModelFileSystemSynchr
 {
 }
 inline RemoteSyncState AbstractModelFileSystemSynchronizerPrivate::remoteSyncState() const { return mRemoteState; }
+
 inline void AbstractModelFileSystemSynchronizerPrivate::setRemoteState( RemoteSyncState remoteState )
 {
     Q_Q( AbstractModelFileSystemSynchronizer );

@@ -24,6 +24,7 @@
 
 // KDE
 #include <KDirWatch>
+#include <Solid/Networking>
 
 #include <KDebug>
 
@@ -74,11 +75,25 @@ void AbstractModelFileSystemSynchronizerPrivate::unpauseFileWatching()
     mDirWatch->startScan();
 }
 
+void AbstractModelFileSystemSynchronizerPrivate::startNetworkWatching()
+{
+    Q_Q( AbstractModelFileSystemSynchronizer );
+
+    Solid::Networking::Notifier* networkingNotifier = Solid::Networking::notifier();
+    q->connect( networkingNotifier, SIGNAL(shouldConnect()), SLOT(onNetworkConnect()) );
+    q->connect( networkingNotifier, SIGNAL(shouldDisconnect()), SLOT(onNetworkDisconnect()) );
+}
+void AbstractModelFileSystemSynchronizerPrivate::stopNetworkWatching()
+{
+    Q_Q( AbstractModelFileSystemSynchronizer );
+
+    Solid::Networking::Notifier* networkingNotifier = Solid::Networking::notifier();
+    networkingNotifier->disconnect( q );
+}
+
 void AbstractModelFileSystemSynchronizerPrivate::onFileDirty( const QString& fileName )
 {
     Q_UNUSED( fileName )
-    Q_Q( AbstractModelFileSystemSynchronizer );
-
 kDebug()<<fileName;
     setRemoteState( RemoteHasChanges );
 }
@@ -86,8 +101,6 @@ kDebug()<<fileName;
 void AbstractModelFileSystemSynchronizerPrivate::onFileCreated( const QString& fileName )
 {
     Q_UNUSED( fileName )
-    Q_Q( AbstractModelFileSystemSynchronizer );
-
 kDebug()<<fileName;
   //TODO: could happen after a delete, what to do?
     setRemoteState( RemoteHasChanges );
@@ -96,10 +109,20 @@ kDebug()<<fileName;
 void AbstractModelFileSystemSynchronizerPrivate::onFileDeleted( const QString& fileName )
 {
     Q_UNUSED( fileName )
-    Q_Q( AbstractModelFileSystemSynchronizer );
-
 kDebug()<<fileName;
     setRemoteState( RemoteDeleted );
+}
+
+void AbstractModelFileSystemSynchronizerPrivate::onNetworkConnect()
+{
+kDebug();
+    setRemoteState( RemoteUnknown );
+}
+
+void AbstractModelFileSystemSynchronizerPrivate::onNetworkDisconnect()
+{
+kDebug();
+    setRemoteState( RemoteUnreachable );
 }
 
 AbstractModelFileSystemSynchronizerPrivate::~AbstractModelFileSystemSynchronizerPrivate()

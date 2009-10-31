@@ -51,8 +51,6 @@ void AbstractFileSystemSyncWithRemoteJobPrivate::syncWithRemote()
             mWorkFilePath = mUrl.path();
             mFile = new QFile( mWorkFilePath );
             isWorkFileOk = mFile->open( QIODevice::WriteOnly );
-
-            mSynchronizer->stopFileWatching();
         }
         else
         {
@@ -74,7 +72,15 @@ void AbstractFileSystemSyncWithRemoteJobPrivate::syncWithRemote()
     }
 
     if( isWorkFileOk )
+    {
+        const KUrl oldUrl = mSynchronizer->url();
+        if( oldUrl.isLocalFile() )
+            mSynchronizer->stopFileWatching();
+        else
+            mSynchronizer->stopNetworkWatching();
+
         q->startSyncWithRemote();
+    }
     else
     {
         q->setError( KJob::KilledJobError );
@@ -107,7 +113,10 @@ void AbstractFileSystemSyncWithRemoteJobPrivate::completeSync( bool success )
                 q->setErrorText( KIO::NetAccess::lastErrorString() );
             }
             else
+            {
+                mSynchronizer->startNetworkWatching();
                 mSynchronizer->setRemoteState( RemoteUnknown );
+            }
         }
         else
         {

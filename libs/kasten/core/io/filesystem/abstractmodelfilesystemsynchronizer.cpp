@@ -89,6 +89,20 @@ void AbstractModelFileSystemSynchronizer::unpauseFileWatching()
     d->unpauseFileWatching();
 }
 
+void AbstractModelFileSystemSynchronizer::startNetworkWatching()
+{
+    Q_D( AbstractModelFileSystemSynchronizer );
+
+    d->startNetworkWatching();
+}
+
+void AbstractModelFileSystemSynchronizer::stopNetworkWatching()
+{
+    Q_D( AbstractModelFileSystemSynchronizer );
+
+    d->stopNetworkWatching();
+}
+
 AbstractModelFileSystemSynchronizer::~AbstractModelFileSystemSynchronizer()
 {
 }

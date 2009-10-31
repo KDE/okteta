@@ -127,6 +127,7 @@ set( kastencore_LIB_HDRS
 kde4_add_library( kastencore SHARED ${kastencore_LIB_SRCS} )
 target_link_libraries( kastencore
   ${KDE4_KIO_LIBS}
+  ${KDE4_SOLID_LIBS}
 )
 set_target_properties( kastencore  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 

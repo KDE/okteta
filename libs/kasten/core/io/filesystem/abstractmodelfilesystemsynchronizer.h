@@ -62,15 +62,21 @@ class KASTENCORE_EXPORT AbstractModelFileSystemSynchronizer : public AbstractMod
   protected:
     void setRemoteState( RemoteSyncState remoteState );
     void setFileDateTimeOnSync( const QDateTime& fileDateTime );
+
     void startFileWatching();
     void stopFileWatching();
     void pauseFileWatching();
     void unpauseFileWatching();
 
+    void startNetworkWatching();
+    void stopNetworkWatching();
+
   protected:
     Q_PRIVATE_SLOT( d_func(), void onFileDirty( const QString& filePath ) )
     Q_PRIVATE_SLOT( d_func(), void onFileCreated( const QString& filePath ) )
     Q_PRIVATE_SLOT( d_func(), void onFileDeleted( const QString& filePath ) )
+    Q_PRIVATE_SLOT( d_func(), void onNetworkConnect() )
+    Q_PRIVATE_SLOT( d_func(), void onNetworkDisconnect() )
 
   protected:
     Q_DECLARE_PRIVATE( AbstractModelFileSystemSynchronizer )
