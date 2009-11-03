@@ -22,35 +22,35 @@
 
 #include "testdocument.h"
 
-// Qt
-#include <QtCore/QLatin1String>
-
 
 namespace Kasten
 {
 
 TestDocument::TestDocument()
+  : mLocalSyncState( LocalInSync )
 {
 }
 TestDocument::TestDocument( const QByteArray &data )
- : mData( data )
+  : mData( data ),
+    mLocalSyncState( LocalInSync )
 {
 }
 
-QString TestDocument::mimeType() const { return QLatin1String("TestDocument"); }
-QString TestDocument::typeName() const { return QLatin1String("Test Document"); }
+QString TestDocument::mimeType() const { return QString::fromLatin1("TestDocument"); }
+QString TestDocument::typeName() const { return QString::fromLatin1("Test Document"); }
 QString TestDocument::title() const { return mTitle; }
-TestDocument::SyncStates TestDocument::syncStates() const { return mSyncStates; }
+LocalSyncState TestDocument::localSyncState() const { return mLocalSyncState; }
 const QByteArray* TestDocument::data() const { return &mData; }
+
 void TestDocument::setData( const QByteArray& data )
 {
-    const SyncStates oldSyncStates = mSyncStates;
+    const LocalSyncState oldLocalSyncState = mLocalSyncState;
 
     mData = data;
 
-    mSyncStates |= LocalHasChanges;
-    if( oldSyncStates != mSyncStates )
-        emit syncStatesChanged( mSyncStates );
+    mLocalSyncState = LocalHasChanges;
+    if( oldLocalSyncState != mLocalSyncState )
+        emit localSyncStateChanged( mLocalSyncState );
 }
 
 void TestDocument::setTitle( const QString &title )
@@ -61,12 +61,12 @@ void TestDocument::setTitle( const QString &title )
         emit titleChanged( title );
     }
  }
-void TestDocument::setSyncStates( SyncStates syncStates )
+void TestDocument::setLocalSyncState( LocalSyncState localSyncState )
 {
-    if( mSyncStates != syncStates )
+    if( mLocalSyncState != localSyncState )
     {
-        mSyncStates = syncStates;
-        emit syncStatesChanged( syncStates );
+        mLocalSyncState = localSyncState;
+        emit localSyncStateChanged( localSyncState );
     }
 }
 

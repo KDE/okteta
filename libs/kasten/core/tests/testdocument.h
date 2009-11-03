@@ -46,7 +46,7 @@ class TestDocument : public AbstractDocument
     virtual QString title() const;
     virtual QString typeName() const;
     virtual QString mimeType() const;
-    virtual SyncStates syncStates() const;
+    virtual LocalSyncState localSyncState() const;
 
   public:
     const QByteArray *data() const;
@@ -54,12 +54,12 @@ class TestDocument : public AbstractDocument
 
   public: // instruction functions
     void setTitle( const QString &title );
-    void setSyncStates( SyncStates syncStates );
+    void setLocalSyncState( LocalSyncState syncState );
 
   protected:
     QString mTitle;
     QByteArray mData;
-    SyncStates mSyncStates;
+    LocalSyncState mLocalSyncState;
 };
 
 }

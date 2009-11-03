@@ -109,7 +109,7 @@ void ByteArrayRawFileSynchronizerTest::testLoadFromUrl()
     QVERIFY( byteArrayDocument != 0 );
     QVERIFY( document->synchronizer() != 0 );
     QCOMPARE( document->synchronizer()->document(), document );
-    QCOMPARE( document->hasLocalChanges(), false );
+    QCOMPARE( document->localSyncState(), Kasten::LocalInSync );
 
     QCOMPARE( document->synchronizer()->url(), fileUrl );
 

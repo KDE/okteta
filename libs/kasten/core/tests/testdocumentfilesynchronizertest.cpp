@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -120,7 +120,7 @@ void TestDocumentFileSynchronizerTest::testLoadFromFile()
     QVERIFY( testDocument != 0 );
     QVERIFY( document->synchronizer() != 0 );
     QCOMPARE( document->synchronizer()->document(), document );
-    QCOMPARE( document->hasLocalChanges(), false );
+    QCOMPARE( document->localSyncState(), Kasten::LocalInSync );
     QCOMPARE( *testDocument->data(), testData );
     QCOMPARE( document->synchronizer()->url(), fileUrl );
 

@@ -72,10 +72,4 @@ AbstractConnectJob *TestDocumentFileSynchronizer::startConnect( AbstractDocument
     return new TestDocumentFileConnectJob( this, document, url, option );
 }
 
-void TestDocumentFileSynchronizer::handleFileChange( FileChange change )
-{
-Q_UNUSED( change )
-//     mDocument->setRemoteState( AbstractDocument::RemoteHasChanges );
-}
-
 }

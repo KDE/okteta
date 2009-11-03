@@ -38,14 +38,14 @@ class TestDocumentTest : public QObject
 
   private:
     void checkTitleChanged( QSignalSpy* titleChangedSpy, const QString &title );
-    void checkSyncStatesChanged( QSignalSpy* changedSpy, Kasten::AbstractDocument::SyncStates states );
+    void checkLocalSyncStateChanged( QSignalSpy* changedSpy, Kasten::LocalSyncState localSyncState );
 
   private Q_SLOTS: // test functions
     void testPlainConstructor();
     void testDataConstructor();
     void testChangeData();
     void testSetTitle();
-    void testSetSyncStates();
+    void testSetLocalSyncState();
 
 };
 
