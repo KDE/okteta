@@ -83,6 +83,7 @@ class ByteArrayJanusView : public QWidget
     AddressRange selection() const;
 
     void setMarking( const AddressRange& marking );
+    void ensureVisible( const AddressRange& range );
 
   public: // overwrite
     void setOverwriteMode( bool overwriteMode );

@@ -295,9 +295,11 @@ void ByteArrayView::setVisibleByteArrayCodings( int visibleColumns )
     mWidget->setVisibleCodings( visibleColumns );
 }
 
-void ByteArrayView::setMarking( const Okteta::AddressRange& range )
+void ByteArrayView::setMarking( const Okteta::AddressRange& range, bool ensureVisible )
 {
     mWidget->setMarking( range );
+    if( ensureVisible )
+        mWidget->ensureVisible( range );
 }
 
 

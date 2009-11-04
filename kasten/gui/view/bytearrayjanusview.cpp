@@ -222,6 +222,11 @@ void ByteArrayJanusView::setMarking( const AddressRange& marking )
     mView->setMarking( marking );
 }
 
+void ByteArrayJanusView::ensureVisible( const AddressRange& range )
+{
+    mView->ensureVisible( range );
+}
+
 void ByteArrayJanusView::insert( const QByteArray& byteArray )
 {
     mView->insert( byteArray );
