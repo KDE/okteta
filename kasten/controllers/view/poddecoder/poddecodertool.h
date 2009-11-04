@@ -66,7 +66,8 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
 
   public:
     PODDecoderTool();
-    ~PODDecoderTool();
+
+    virtual ~PODDecoderTool();
 
   public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
@@ -81,6 +82,10 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
 
     bool isUnsignedAsHex() const;
     int byteOrder() const;
+
+  public:
+    void markPOD( int podId );
+    void unmarkPOD();
 
   public Q_SLOTS:
     void setUnsignedAsHex( bool unsignedAsHex );
@@ -114,6 +119,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
     PODData mPODData;
     QVector<QString> mDecoderNameList;
     QVector<QString> mDecoderValueList;
+    QVector<int> mDecoderByteLengthList;
     QTextCodec* mUtf8Codec;
 };
 

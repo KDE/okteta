@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -61,6 +61,24 @@ enum PODTypes
     PODTypeCount
 };
 
+static const int DefaultPODTypeSize[] =
+{
+    1,
+    1,
+    1,
+    1,
+    1,
+    2,
+    2,
+    4,
+    4,
+    8,
+    8,
+    4,
+    8,
+    1,
+    0
+};
 
 
 PODDecoderTool::PODDecoderTool()
@@ -107,6 +125,7 @@ void PODDecoderTool::setupDecoder()
 {
     mDecoderNameList.resize( PODTypeCount );
     mDecoderValueList.resize( PODTypeCount );
+    mDecoderByteLengthList.resize( PODTypeCount );
 
     mDecoderNameList[BinaryId] =
         i18nc("@label:textbox encoding of one byte as value in the binary format",     "Binary 8-bit:");
@@ -142,6 +161,9 @@ void PODDecoderTool::setupDecoder()
     mDecoderNameList[UTF16Id] =
         i18nc("@label:textbox","UTF-16:");
 #endif
+
+    for( int i=0; i<PODTypeCount; ++i )
+        mDecoderByteLengthList[i] = DefaultPODTypeSize[i];
 }
 
 void PODDecoderTool::setUnsignedAsHex( bool unsignedAsHex )
@@ -353,16 +375,19 @@ void PODDecoderTool::updateData()
 
     QString utf8;
     bool isUtf8 = false;
+    int byteCount = 0;
     for( int i=1; i<=maxUtf8DataSize; ++i )
     {
         utf8 = mUtf8Codec->toUnicode( data, i );
         if( utf8.size() == 1 && utf8[0] != replacementChar )
         {
             isUtf8 = true;
+            byteCount = i;
             break;
         }
     }
     mDecoderValueList[UTF8Id] = isUtf8 ? utf8 : EmptyString;
+    mDecoderByteLengthList[UTF8Id] = byteCount;
 
 #if 0
     // UTF-16
@@ -373,6 +398,21 @@ void PODDecoderTool::updateData()
 
     // TODO: only emit for those strings that changed
     emit dataChanged();
+}
+
+
+void PODDecoderTool::markPOD( int podId )
+{
+    const int length = mDecoderByteLengthList[podId];
+    const Okteta::AddressRange markingRange = Okteta::AddressRange::fromWidth( mCursorIndex, length );
+    mByteArrayView->setMarking( markingRange, true );
+}
+
+void PODDecoderTool::unmarkPOD()
+{
+// TODO: marked region is property of document, not view?
+    if( mByteArrayView )
+        mByteArrayView->setMarking( Okteta::AddressRange() );
 }
 
 PODDecoderTool::~PODDecoderTool()

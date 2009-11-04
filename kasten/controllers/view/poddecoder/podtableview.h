@@ -29,6 +29,7 @@
 class KComboBox;
 class QTreeView;
 class QCheckBox;
+class QModelIndex;
 
 
 namespace Kasten
@@ -48,6 +49,12 @@ class PODTableView : public QWidget
 
   public:
     PODDecoderTool* tool() const;
+
+  public: // QObject API
+    virtual bool eventFilter( QObject* object, QEvent* event );
+
+  protected Q_SLOTS:
+    void onCurrentRowChanged( const QModelIndex& current, const QModelIndex& previous );
 
   protected:
     PODDecoderTool* mTool;
