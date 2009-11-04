@@ -675,27 +675,25 @@ QRect ByteArrayColumnViewPrivate::cursorRect() const
 {
     Q_Q( const ByteArrayColumnView );
 
-    const int x = mActiveColumn->xOfLinePosition( mTableCursor->pos() ) - q->xOffset();
-    const int y = q->lineHeight() * mTableCursor->line() - q->yOffset();
-    const int w = mActiveColumn->byteWidth();
-    const int h = q->lineHeight();
-    const QPoint viewportPoint( x, y );
-    const QPoint point = q->viewport()->mapToParent( viewportPoint ); // TODO: seems still missing some offset
-    const QSize size( w, h );
+    QRect cursorRect = mActiveColumn->byteRect( mTableCursor->coord() );
+    const QPoint viewportPoint( cursorRect.x() - q->xOffset(), cursorRect.y() - q->yOffset() );
+    const QPoint globalPoint = q->viewport()->mapToParent( viewportPoint ); // TODO: seems still missing some offset
+    cursorRect.setTopLeft( globalPoint );
 
-    const QRect result( point, size );
-    return result;
+    return cursorRect;
 }
 
 void ByteArrayColumnViewPrivate::updateCursor( const AbstractByteArrayColumnRenderer& column )
 {
     Q_Q( ByteArrayColumnView );
 
-    const int x = column.xOfLinePosition( mTableCursor->pos() ) - q->xOffset();
-    const int y = q->lineHeight() * mTableCursor->line() - q->yOffset();
-    const int w = column.byteWidth();
+    if( ! column.isVisible() )
+        return;
 
-    q->viewport()->update( x,y, w,q->lineHeight() );
+    QRect cursorRect = column.byteRect( mTableCursor->coord() );
+    cursorRect.translate( -q->xOffset(), - q->yOffset() );
+
+    q->viewport()->update( cursorRect );
 }
 
 void ByteArrayColumnViewPrivate::createCursorPixmaps()
@@ -915,15 +913,8 @@ void ByteArrayColumnViewPrivate::updateChanged()
 }
 
 
-
 void ByteArrayColumnViewPrivate::ensureCursorVisible()
 {
-//   // Not visible or the user is dragging the window, so don't position to caret yet
-//   if ( !isVisible() || isHorizontalSliderPressed() || isVerticalSliderPressed() )
-//   {
-//     d->ensureCursorVisibleInShowEvent = true;
-//     return;
-//   }
   //static const int Margin = 10;
     ensureVisible( *mActiveColumn, mTableCursor->coord() );
 }
@@ -932,11 +923,11 @@ void ByteArrayColumnViewPrivate::ensureVisible( const AbstractByteArrayColumnRen
 {
     Q_Q( ByteArrayColumnView );
 
-    // TODO: add getCursorRect to BufferColumn
-    const PixelXRange cursorXs = PixelXRange::fromWidth( column.xOfLinePosition(coord.pos()),
-                                                   column.byteWidth() );
+    const QRect byteRect = column.byteRect( coord );
 
-    const PixelYRange cursorYs = PixelYRange::fromWidth( q->lineHeight()*coord.line(), q->lineHeight() );
+    const PixelXRange cursorXs = PixelXRange::fromWidth( byteRect.x(), byteRect.width() );
+
+    const PixelYRange cursorYs = PixelYRange::fromWidth( byteRect.y(), byteRect.height() );
 
     const PixelXRange visibleXs = PixelXRange::fromWidth( q->xOffset(), q->visibleWidth() );
     const PixelYRange visibleYs = PixelXRange::fromWidth( q->yOffset(), q->visibleHeight() );

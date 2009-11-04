@@ -33,14 +33,15 @@
 #include "abstractbytearraymodel.h"
 #include "character.h"
 
-
 class QPainter;
 class QColor;
 class QBrush;
+class QRect;
+
 
 namespace Okteta
 {
-
+class Coord;
 class Bookmarkable;
 class CharCodec;
 class ValueCodec;
@@ -185,6 +186,9 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
     PixelXRange xsOfLinePositionsInclSpaces( const LinePositionRange& linePositions ) const;
     /** */
     PixelXRange columnXsOfLinePositionsInclSpaces( const LinePositionRange& linePositions ) const;
+
+    QRect byteRect( const Coord& coord ) const;
+    QRect byteRect( const Coord& coord, AbstractByteArrayView::CodingTypeId codingId ) const;
 
     AbstractByteArrayView::CodingTypeId codingIdofY( PixelY y ) const;
     PixelY yOfCodingId( AbstractByteArrayView::CodingTypeId codingId ) const;

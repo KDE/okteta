@@ -122,7 +122,7 @@ class ByteArrayRowViewPrivate : public AbstractByteArrayViewPrivate
     /** draws the blinking cursor or removes it */
     void drawActiveCursor( QPainter* painter );
     void drawInactiveCursor( QPainter* painter );
-    void updateCursor( const ByteArrayRowColumnRenderer& column );
+    void updateCursor( const ByteArrayRowColumnRenderer& column, AbstractByteArrayView::CodingTypeId codingId );
 
   protected: // partial operations
     void handleMouseMove( const QPoint& point );

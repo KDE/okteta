@@ -589,7 +589,7 @@ void ByteArrayRowViewPrivate::blinkCursor()
 
     // switch the cursor state
     mBlinkCursorVisible = !mBlinkCursorVisible;
-    updateCursor( *mByteArrayColumn );
+    updateCursor( *mByteArrayColumn, mActiveCoding );
 }
 
 
@@ -617,7 +617,8 @@ void ByteArrayRowViewPrivate::updateCursors()
     createCursorPixmaps();
 
     mBlinkCursorVisible = true;
-    updateCursor( *mByteArrayColumn );
+    updateCursor( *mByteArrayColumn, mActiveCoding );
+    updateCursor( *mByteArrayColumn, mInactiveCoding );
 }
 
 
@@ -634,36 +635,35 @@ void ByteArrayRowViewPrivate::pauseCursor()
     mCursorPaused = true;
 
     mBlinkCursorVisible = false;
-    updateCursor( *mByteArrayColumn );
+    updateCursor( *mByteArrayColumn, mActiveCoding );
+    updateCursor( *mByteArrayColumn, mInactiveCoding );
 }
 
 QRect ByteArrayRowViewPrivate::cursorRect() const
 {
     Q_Q( const ByteArrayRowView );
 
-    const int x = mByteArrayColumn->xOfLinePosition( mTableCursor->pos() ) - q->xOffset();
-    const int y = q->lineHeight() * mTableCursor->line()
-                  + mByteArrayColumn->yOfCodingId( mActiveCoding ) - q->yOffset();
-    const int w = mByteArrayColumn->byteWidth();
-    const int h = q->lineHeight();
-    const QPoint viewportPoint( x, y );
-    const QPoint point = q->viewport()->mapToParent( viewportPoint ); // TODO: seems still missing some offset
-    const QSize size( w, h );
+    QRect cursorRect = mByteArrayColumn->byteRect( mTableCursor->coord(), mActiveCoding );
+    const QPoint viewportPoint( cursorRect.x() - q->xOffset(), cursorRect.y() - q->yOffset() );
+    const QPoint globalPoint = q->viewport()->mapToParent( viewportPoint ); // TODO: seems still missing some offset
+    cursorRect.setTopLeft( globalPoint );
 
-    const QRect result( point, size );
-    return result;
+    return cursorRect;
 }
 
 // TODO: should be movable to base class
-void ByteArrayRowViewPrivate::updateCursor( const ByteArrayRowColumnRenderer& column )
+void ByteArrayRowViewPrivate::updateCursor( const ByteArrayRowColumnRenderer& column, AbstractByteArrayView::CodingTypeId codingId )
 {
     Q_Q( ByteArrayRowView );
 
-    const int x = column.xOfLinePosition( mTableCursor->pos() ) - q->xOffset();
-    const int y = q->lineHeight() * mTableCursor->line() - q->yOffset();
-    const int w = column.byteWidth();
+    const bool isCodingVisible = ( column.visibleCodings() & codingId );
+    if( ! isCodingVisible )
+        return;
 
-    q->viewport()->update( x,y, w,q->lineHeight() );
+    QRect cursorRect = column.byteRect( mTableCursor->coord(), codingId );
+    cursorRect.translate( -q->xOffset(), - q->yOffset() );
+
+    q->viewport()->update( cursorRect );
 }
 
 void ByteArrayRowViewPrivate::createCursorPixmaps()

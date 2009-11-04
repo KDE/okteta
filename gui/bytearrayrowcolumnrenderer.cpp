@@ -509,6 +509,34 @@ PixelXRange ByteArrayRowColumnRenderer::columnXsOfLinePositionsInclSpaces( const
 }
 
 
+QRect ByteArrayRowColumnRenderer::byteRect( const Coord& coord ) const
+{
+    const int x = xOfLinePosition( coord.pos() );
+    const int y = lineHeight() * coord.line();
+    const int w = mByteWidth;
+    const int h = lineHeight();
+    const QPoint point( x, y );
+    const QSize size( w, h );
+
+    const QRect result( point, size );
+    return result;
+}
+
+
+QRect ByteArrayRowColumnRenderer::byteRect( const Coord& coord, AbstractByteArrayView::CodingTypeId codingId ) const
+{
+    const int x = xOfLinePosition( coord.pos() );
+    const int y = lineHeight() * coord.line() + yOfCodingId( codingId );
+    const int w = mByteWidth;
+    const int h = mDigitHeight;
+    const QPoint point( x, y );
+    const QSize size( w, h );
+
+    const QRect result( point, size );
+    return result;
+}
+
+
 void ByteArrayRowColumnRenderer::prepareRendering( const PixelXRange& _Xs )
 {
     PixelXRange Xs( _Xs );

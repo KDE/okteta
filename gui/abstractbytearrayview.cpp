@@ -362,7 +362,6 @@ void AbstractByteArrayView::ensureCursorVisible()
     d->ensureCursorVisible();
 }
 
-
 void AbstractByteArrayView::placeCursor( const QPoint& point )
 {
     Q_D( AbstractByteArrayView );
