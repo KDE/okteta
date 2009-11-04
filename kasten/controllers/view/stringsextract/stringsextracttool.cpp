@@ -41,9 +41,15 @@ namespace Kasten
 static const int DefaultMinLength = 3;
 
 StringsExtractTool::StringsExtractTool()
- : mExtractedStringsUptodate( false ), mSourceByteArrayModelUptodate( false ),
-   mCharCodec( Okteta::CharCodec::createCodec(Okteta::LocalEncoding) ), mMinLength( DefaultMinLength ),
-   mByteArrayView( 0 ), mByteArrayModel( 0 ), mSourceByteArrayModel( 0 ), mSourceMinLength( 0 )
+  : mExtractedStringsUptodate( false ),
+    mSourceByteArrayModelUptodate( false ),
+    mCharCodec( Okteta::CharCodec::createCodec(Okteta::LocalEncoding) ),
+    mMinLength( DefaultMinLength ),
+    mByteArrayView( 0 ),
+    mByteArrayModel( 0 ),
+    mSourceByteArrayView( 0 ),
+    mSourceByteArrayModel( 0 ),
+    mSourceMinLength( 0 )
 {
     setObjectName( "Strings" );
 }
@@ -119,21 +125,27 @@ void StringsExtractTool::checkUptoDate()
           && mSourceByteArrayModelUptodate );
 }
 
-void StringsExtractTool::selectString( int stringId )
+void StringsExtractTool::markString( int stringId )
 {
-    const ContainedString &containedString = mContainedStringList.at(stringId);
+    if( mSourceByteArrayView != mByteArrayView )
+    {
+        if( mSourceByteArrayView ) mSourceByteArrayView->disconnect( this );
+        mSourceByteArrayView = mByteArrayView;
+        connect( mSourceByteArrayView,  SIGNAL(destroyed()),
+                 SLOT(onSourceViewDestroyed()) );
+    }
+    const ContainedString &containedString = mContainedStringList.at( stringId );
     const Okteta::Address offset = containedString.offset();
     const int length = containedString.string().length();
-    const Okteta::AddressRange markingRange = Okteta::AddressRange::fromWidth(offset,length);
-    mByteArrayView->setMarking( markingRange, true );
-//     mByteArrayView->setFocus();
+    const Okteta::AddressRange markingRange = Okteta::AddressRange::fromWidth( offset, length );
+    mSourceByteArrayView->setMarking( markingRange, true );
 }
 
-void StringsExtractTool::deselectString()
+void StringsExtractTool::unmarkString()
 {
 // TODO: marked region is property of document, not view?
-    if( mByteArrayView )
-    mByteArrayView->setMarking( Okteta::AddressRange() );
+    if( mSourceByteArrayView )
+        mSourceByteArrayView->setMarking( Okteta::AddressRange() );
 }
 
 void StringsExtractTool::onSelectionChanged()
@@ -156,6 +168,11 @@ void StringsExtractTool::onSourceDestroyed()
 {
     mSourceByteArrayModel = 0;
     onSourceChanged();
+}
+
+void StringsExtractTool::onSourceViewDestroyed()
+{
+    mSourceByteArrayView = 0;
 }
 
 

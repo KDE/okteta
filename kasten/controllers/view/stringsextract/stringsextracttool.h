@@ -72,8 +72,8 @@ class OKTETAKASTENCONTROLLERS_EXPORT StringsExtractTool : public AbstractTool
   public Q_SLOTS: // settings
     void setCharCodec( const QString &codecName );
     void setMinLength( int minLength );
-    void selectString( int stringId );
-    void deselectString();
+    void markString( int stringId );
+    void unmarkString();
 
   public Q_SLOTS: // actions
     void extractStrings();
@@ -90,6 +90,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT StringsExtractTool : public AbstractTool
     void onSelectionChanged();
     void onSourceChanged();
     void onSourceDestroyed();
+    void onSourceViewDestroyed();
 
   protected: // created data
     QList<ContainedString> mContainedStringList;
@@ -105,6 +106,8 @@ class OKTETAKASTENCONTROLLERS_EXPORT StringsExtractTool : public AbstractTool
     // current
     Okteta::AbstractByteArrayModel *mByteArrayModel;
 
+    // marked view
+    ByteArrayView* mSourceByteArrayView;
     // selection source
     Okteta::AddressRange mSourceSelection;
     // source of strings

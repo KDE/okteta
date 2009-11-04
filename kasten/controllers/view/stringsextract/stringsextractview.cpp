@@ -179,7 +179,7 @@ bool StringsExtractView::eventFilter( QObject* object, QEvent* event )
             const Qt::FocusReason focusReason = focusEvent->reason();
             if( focusReason != Qt::ActiveWindowFocusReason
                 && focusReason != Qt::PopupFocusReason )
-                mTool->deselectString();
+                mTool->unmarkString();
         }
     }
 
@@ -249,7 +249,7 @@ void StringsExtractView::onStringSelectionChanged()
 void StringsExtractView::onStringDoubleClicked( const QModelIndex &index )
 {
     if( mTool->canHighlightString() )
-        mTool->selectString( mSortFilterProxyModel->mapToSource(index).row() );
+        mTool->markString( mSortFilterProxyModel->mapToSource(index).row() );
 }
 
 StringsExtractView::~StringsExtractView() {}
