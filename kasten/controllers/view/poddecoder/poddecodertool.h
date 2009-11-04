@@ -101,6 +101,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
   protected Q_SLOTS:
     void onCursorPositionChange( Okteta::Address pos );
     void onContentsChange();
+    void onSourceViewDestroyed();
 
     void onCharCodecChange( const QString& codecName );
 //     void onUndefinedCharChanged( const QChar& undefinedChar );
@@ -109,6 +110,9 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
     ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel* mByteArrayModel;
     Okteta::Address mCursorIndex;
+
+    ByteArrayView* mSourceByteArrayView;
+
     Okteta::CharCodec* mCharCodec;
     QChar mUndefinedChar;
 

@@ -82,10 +82,13 @@ static const int DefaultPODTypeSize[] =
 
 
 PODDecoderTool::PODDecoderTool()
- : mByteArrayView( 0 ), mByteArrayModel( 0 ), mCursorIndex( 0 ),
-   mCharCodec( Okteta::CharCodec::createCodec(Okteta::LocalEncoding) ),
-   mUndefinedChar( PrimitivesDefaultUndefinedChar ),
-   mUnsignedAsHex( true )
+  : mByteArrayView( 0 ),
+    mByteArrayModel( 0 ),
+    mCursorIndex( 0 ),
+    mSourceByteArrayView( 0 ),
+    mCharCodec( Okteta::CharCodec::createCodec(Okteta::LocalEncoding) ),
+    mUndefinedChar( PrimitivesDefaultUndefinedChar ),
+    mUnsignedAsHex( true )
 {
     setObjectName( "PODDecoder" );
 
@@ -403,16 +406,28 @@ void PODDecoderTool::updateData()
 
 void PODDecoderTool::markPOD( int podId )
 {
+    if( mSourceByteArrayView != mByteArrayView )
+    {
+        if( mSourceByteArrayView ) mSourceByteArrayView->disconnect( this );
+        mSourceByteArrayView = mByteArrayView;
+        connect( mSourceByteArrayView,  SIGNAL(destroyed()),
+                 SLOT(onSourceViewDestroyed()) );
+    }
     const int length = mDecoderByteLengthList[podId];
     const Okteta::AddressRange markingRange = Okteta::AddressRange::fromWidth( mCursorIndex, length );
-    mByteArrayView->setMarking( markingRange, true );
+    mSourceByteArrayView->setMarking( markingRange, true );
 }
 
 void PODDecoderTool::unmarkPOD()
 {
 // TODO: marked region is property of document, not view?
-    if( mByteArrayView )
-        mByteArrayView->setMarking( Okteta::AddressRange() );
+    if( mSourceByteArrayView )
+        mSourceByteArrayView->setMarking( Okteta::AddressRange() );
+}
+
+void PODDecoderTool::onSourceViewDestroyed()
+{
+    mSourceByteArrayView = 0;
 }
 
 PODDecoderTool::~PODDecoderTool()
