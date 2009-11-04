@@ -356,6 +356,13 @@ void AbstractByteArrayView::setMarking( const AddressRange& marking )
 }
 
 
+void AbstractByteArrayView::ensureVisible( const AddressRange& range, bool ensureStartVisible )
+{
+    Q_D( AbstractByteArrayView );
+    d->ensureVisible( range, ensureStartVisible );
+}
+
+
 void AbstractByteArrayView::ensureCursorVisible()
 {
     Q_D( AbstractByteArrayView );

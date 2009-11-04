@@ -873,34 +873,34 @@ void ByteArrayRowViewPrivate::updateChanged()
 }
 
 
-
 void ByteArrayRowViewPrivate::ensureCursorVisible()
 {
-//   // Not visible or the user is dragging the window, so don't position to caret yet
-//   if ( !isVisible() || isHorizontalSliderPressed() || isVerticalSliderPressed() )
-//   {
-//     d->ensureCursorVisibleInShowEvent = true;
-//     return;
-//   }
-  //static const int Margin = 10;
     ensureVisible( *mByteArrayColumn, mTableCursor->coord() );
+}
+
+void ByteArrayRowViewPrivate::ensureVisible( const AddressRange& range, bool ensureStartVisible )
+{
+    const CoordRange coords = mTableLayout->coordRangeOfIndizes( range );
+
+    // TODO: this is a make-it-work-hack, better do a smart calculation
+    ensureVisible( *mByteArrayColumn, ensureStartVisible ? coords.end() : coords.start() );
+    ensureVisible( *mByteArrayColumn, ensureStartVisible ? coords.start() : coords.end() );
 }
 
 void ByteArrayRowViewPrivate::ensureVisible( const ByteArrayRowColumnRenderer& column, const Coord& coord )
 {
     Q_Q( ByteArrayRowView );
 
-    // TODO: add getCursorRect to BufferColumn
-    const PixelXRange cursorXs = PixelXRange::fromWidth( column.xOfLinePosition(coord.pos()),
-                                                   column.byteWidth() );
+    const QRect byteRect = column.byteRect( coord );
 
-    const PixelYRange cursorYs = PixelYRange::fromWidth( q->lineHeight()*coord.line(), q->lineHeight() );
+    const PixelXRange byteXs = PixelXRange::fromWidth( byteRect.x(), byteRect.width() );
+    const PixelYRange byteYs = PixelYRange::fromWidth( byteRect.y(), byteRect.height() );
 
     const PixelXRange visibleXs = PixelXRange::fromWidth( q->xOffset(), q->visibleWidth() );
     const PixelYRange visibleYs = PixelXRange::fromWidth( q->yOffset(), q->visibleHeight() );
 
-    q->horizontalScrollBar()->setValue( visibleXs.startForInclude(cursorXs) );
-    q->verticalScrollBar()->setValue( visibleYs.startForInclude(cursorYs) );
+    q->horizontalScrollBar()->setValue( visibleXs.startForInclude(byteXs) );
+    q->verticalScrollBar()->setValue( visibleYs.startForInclude(byteYs) );
 }
 
 

@@ -76,6 +76,7 @@ class ByteArrayRowViewPrivate : public AbstractByteArrayViewPrivate
     void setByteArrayModel( AbstractByteArrayModel* byteArrayModel );
 
   public: // AbstractByteArrayViewPrivate API
+    virtual void ensureVisible( const AddressRange& range, bool ensureStartVisible );
     virtual void ensureCursorVisible();
     virtual void placeCursor( const QPoint& point );
     virtual QRect cursorRect() const;

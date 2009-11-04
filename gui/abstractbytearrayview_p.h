@@ -146,6 +146,7 @@ class AbstractByteArrayViewPrivate
     void setSelectionCursorPosition( Address index );
 
   public: // API to be implemented
+    virtual void ensureVisible( const AddressRange& range, bool ensureStartVisible ) = 0;
     virtual void ensureCursorVisible() = 0;
     virtual void placeCursor( const QPoint& point ) = 0;
     virtual QRect cursorRect() const = 0;

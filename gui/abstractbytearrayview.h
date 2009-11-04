@@ -282,6 +282,10 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     void setMarking( Address start, Address end );
     void setMarking( const AddressRange& marking );
 
+    /**
+     * @param ensureStartVisible if true , otherwise the end
+     */
+    void ensureVisible( const AddressRange& range, bool ensureStartVisible = false );
     /** scrolls the view as much as needed to have the cursor fully visible */
     void ensureCursorVisible();
     /** puts the cursor in the column at the pos of Point (in absolute coord), does not handle the drawing */

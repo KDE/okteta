@@ -913,9 +913,17 @@ void ByteArrayColumnViewPrivate::updateChanged()
 }
 
 
+void ByteArrayColumnViewPrivate::ensureVisible( const AddressRange& range, bool ensureStartVisible )
+{
+    const CoordRange coords = mTableLayout->coordRangeOfIndizes( range );
+
+    // TODO: this is a make-it-work-hack, better do a smart calculation
+    ensureVisible( *mActiveColumn, ensureStartVisible ? coords.end() : coords.start() );
+    ensureVisible( *mActiveColumn, ensureStartVisible ? coords.start() : coords.end() );
+}
+
 void ByteArrayColumnViewPrivate::ensureCursorVisible()
 {
-  //static const int Margin = 10;
     ensureVisible( *mActiveColumn, mTableCursor->coord() );
 }
 
@@ -925,15 +933,14 @@ void ByteArrayColumnViewPrivate::ensureVisible( const AbstractByteArrayColumnRen
 
     const QRect byteRect = column.byteRect( coord );
 
-    const PixelXRange cursorXs = PixelXRange::fromWidth( byteRect.x(), byteRect.width() );
-
-    const PixelYRange cursorYs = PixelYRange::fromWidth( byteRect.y(), byteRect.height() );
+    const PixelXRange byteXs = PixelXRange::fromWidth( byteRect.x(), byteRect.width() );
+    const PixelYRange byteYs = PixelYRange::fromWidth( byteRect.y(), byteRect.height() );
 
     const PixelXRange visibleXs = PixelXRange::fromWidth( q->xOffset(), q->visibleWidth() );
     const PixelYRange visibleYs = PixelXRange::fromWidth( q->yOffset(), q->visibleHeight() );
 
-    q->horizontalScrollBar()->setValue( visibleXs.startForInclude(cursorXs) );
-    q->verticalScrollBar()->setValue( visibleYs.startForInclude(cursorYs) );
+    q->horizontalScrollBar()->setValue( visibleXs.startForInclude(byteXs) );
+    q->verticalScrollBar()->setValue( visibleYs.startForInclude(byteYs) );
 }
 
 
