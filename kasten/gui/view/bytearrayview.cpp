@@ -295,6 +295,12 @@ void ByteArrayView::setVisibleByteArrayCodings( int visibleColumns )
     mWidget->setVisibleCodings( visibleColumns );
 }
 
+void ByteArrayView::setMarking( const Okteta::AddressRange& range )
+{
+    mWidget->setMarking( range );
+}
+
+
 QChar ByteArrayView::substituteChar() const
 {
     return mWidget->substituteChar();

@@ -76,6 +76,7 @@ void ByteArrayJanusView::setViewModus( int viewModus )
         newView->setLayoutStyle( mView->layoutStyle() );
         newView->setCursorPosition( mView->cursorPosition() );
         newView->setSelection( mView->selection() );
+        newView->setMarking( mView->marking() );
 
         mLayout->removeWidget( mView );
         delete mView;
@@ -214,6 +215,11 @@ AddressRange ByteArrayJanusView::selection() const
 void ByteArrayJanusView::setSelection( Address start, Address end )
 {
     mView->setSelection( start, end );
+}
+
+void ByteArrayJanusView::setMarking( const AddressRange& marking )
+{
+    mView->setMarking( marking );
 }
 
 void ByteArrayJanusView::insert( const QByteArray& byteArray )

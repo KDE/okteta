@@ -138,6 +138,7 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView,
   public: // elements
     void toggleOffsetColumn( bool visible );
     void setVisibleByteArrayCodings( int columns );
+    void setMarking( const Okteta::AddressRange& range );
     bool offsetColumnVisible() const;
     int visibleByteArrayCodings() const;
 

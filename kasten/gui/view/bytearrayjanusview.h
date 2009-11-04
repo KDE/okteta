@@ -82,6 +82,8 @@ class ByteArrayJanusView : public QWidget
     bool canReadData( const QMimeData* data ) const;
     AddressRange selection() const;
 
+    void setMarking( const AddressRange& marking );
+
   public: // overwrite
     void setOverwriteMode( bool overwriteMode );
     bool isOverwriteMode() const;
