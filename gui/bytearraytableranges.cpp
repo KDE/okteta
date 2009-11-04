@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -42,18 +42,25 @@ void ByteArrayTableRanges::reset()
 {
   mSelection.cancel();
   FirstWordSelection.unset();
-  Marking.unset();
+  mMarking.unset();
   ChangedRanges.clear();
 }
 
 
-void ByteArrayTableRanges::setMarking( const AddressRange& M )
+void ByteArrayTableRanges::setMarking( const AddressRange& marking )
 {
-  if( Marking == M )
-    return;
+    if( mMarking == marking )
+        return;
 
-  Marking = M;
-  addChangedRange( M );
+    const bool hadMarking = mMarking.isValid();
+    if( hadMarking )
+        addChangedRange( mMarking );
+
+    mMarking = marking;
+
+    const bool hasNewMarking = mMarking.isValid();
+    if( hasNewMarking )
+        addChangedRange( mMarking );
 }
 
 
@@ -177,10 +184,10 @@ bool ByteArrayTableRanges::overlapsSelection( Address FirstIndex, Address LastIn
 
 bool ByteArrayTableRanges::overlapsMarking( Address FirstIndex, Address LastIndex, Address* startIndex, Address* endIndex ) const
 {
-  if( Marking.overlaps(AddressRange(FirstIndex,LastIndex)) )
+  if( mMarking.overlaps(AddressRange(FirstIndex,LastIndex)) )
   {
-    *startIndex = Marking.start();
-    *endIndex = Marking.end();
+    *startIndex = mMarking.start();
+    *endIndex = mMarking.end();
     return true;
   }
   return false;
@@ -195,7 +202,7 @@ const AddressRange *ByteArrayTableRanges::firstOverlappingSelection( const Addre
 
 const AddressRange *ByteArrayTableRanges::overlappingMarking( const AddressRange &Range ) const
 {
-  return Marking.overlaps(Range) ? &Marking : 0;
+  return mMarking.overlaps(Range) ? &mMarking : 0;
 }
 
 /*
@@ -275,17 +282,6 @@ void ByteArrayTableRanges::addChangedRange( const CoordRange& range )
 
   mModified = true;
 }
-
-
-void ByteArrayTableRanges::removeMarking()
-{
-  bool Changed = Marking.isValid();
-  if( Changed )
-    addChangedRange( Marking );
-
-  Marking.unset();
-}
-
 
 void ByteArrayTableRanges::resetChangedRanges()
 {

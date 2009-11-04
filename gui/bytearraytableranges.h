@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2003,2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -49,7 +49,7 @@ class OKTETAGUI_EXPORT ByteArrayTableRanges
     ~ByteArrayTableRanges();
 
   public: // modifcation access
-    void setMarking( const AddressRange& M );
+    void setMarking( const AddressRange& marking );
     void setSelectionStart( Address startIndex );
     void setSelectionEnd( Address startIndex );
     void setSelection( const AddressRange& selection );
@@ -58,8 +58,6 @@ class OKTETAGUI_EXPORT ByteArrayTableRanges
     /** */
     void ensureWordSelectionForward( bool Forward );
 
-    /** removes marking and returns true if something changed */
-    void removeMarking();
     /** removes selection with id and returns it */
     AddressRange removeSelection( int id = 0 );
     /** removes all but the standard selection and returns true if something changed */
@@ -85,6 +83,7 @@ class OKTETAGUI_EXPORT ByteArrayTableRanges
     AddressRange selection() const;
     AddressRange firstWordSelection() const;
     Size selectionLength() const;
+    AddressRange marking() const;
     bool isModified() const;
     LineRange changedOffsetLines() const;
 
@@ -109,7 +108,7 @@ class OKTETAGUI_EXPORT ByteArrayTableRanges
     /** true if something changed */
     bool mModified;
 
-    AddressRange Marking;
+    AddressRange mMarking;
     Selection mSelection;
     /** memories first selected word on wordwise selection */
     AddressRange FirstWordSelection;
@@ -130,6 +129,7 @@ inline Address ByteArrayTableRanges::selectionEnd()    const { return mSelection
 inline AddressRange ByteArrayTableRanges::selection()  const { return mSelection.range(); }
 inline AddressRange ByteArrayTableRanges::firstWordSelection()  const { return FirstWordSelection; }
 inline Size ByteArrayTableRanges::selectionLength()    const { return mSelection.range().width(); }
+inline AddressRange ByteArrayTableRanges::marking()    const { return mMarking; }
 inline bool ByteArrayTableRanges::isModified()         const { return mModified; }
 inline LineRange ByteArrayTableRanges::changedOffsetLines() const { return mChangedOffsetLines; }
 
@@ -137,9 +137,9 @@ inline bool ByteArrayTableRanges::hasSelection()             const { return mSel
 inline bool ByteArrayTableRanges::selectionStarted()         const { return mSelection.started(); }
 inline bool ByteArrayTableRanges::selectionJustStarted()     const { return mSelection.justStarted(); }
 inline bool ByteArrayTableRanges::hasFirstWordSelection()    const { return FirstWordSelection.isValid(); }
-inline bool ByteArrayTableRanges::hasMarking()               const { return Marking.isValid(); }
+inline bool ByteArrayTableRanges::hasMarking()               const { return mMarking.isValid(); }
 inline bool ByteArrayTableRanges::selectionIncludes( Address index ) const { return mSelection.range().includes( index ); }
-inline bool ByteArrayTableRanges::markingIncludes( Address index )   const { return Marking.includes( index ); }
+inline bool ByteArrayTableRanges::markingIncludes( Address index )   const { return mMarking.includes( index ); }
 
 inline void ByteArrayTableRanges::setModified( bool M )           { mModified = M; }
 

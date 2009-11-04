@@ -471,6 +471,22 @@ void AbstractByteArrayViewPrivate::setCharCoding( const QString& charCodingName 
     mCharCoding = AbstractByteArrayView::LocalEncoding; // TODO: add encoding no to every known codec
 }
 
+void AbstractByteArrayViewPrivate::setMarking( const AddressRange& _marking )
+{
+    AddressRange marking( _marking );
+    marking.restrictEndTo( mTableLayout->length()-1 );
+
+    const AddressRange oldMarking = mTableRanges->marking();
+
+    if( marking == oldMarking )
+        return;
+
+    mTableRanges->setMarking( marking );
+
+    updateChanged();
+}
+
+
 // TODO: make this use select( start, end )
 bool AbstractByteArrayViewPrivate::selectWord( Address index )
 {

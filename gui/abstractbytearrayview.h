@@ -116,6 +116,8 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     bool hasSelectedData() const;
     AddressRange selection() const;
 
+    AddressRange marking() const;
+
     ValueCoding valueCoding() const;
     /**
       * @return encoding used for the chars
@@ -276,6 +278,10 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     void setSelection( const AddressRange& selection );
     /** selects word at index, returns true if there is one */
     bool selectWord( /*unsigned*/ Address index /*, Chartype*/ );
+
+    void setMarking( Address start, Address end );
+    void setMarking( const AddressRange& marking );
+
     /** scrolls the view as much as needed to have the cursor fully visible */
     void ensureCursorVisible();
     /** puts the cursor in the column at the pos of Point (in absolute coord), does not handle the drawing */

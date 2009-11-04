@@ -168,6 +168,12 @@ QMimeData* AbstractByteArrayView::selectionAsMimeData() const
     return d->selectionAsMimeData();
 }
 
+AddressRange AbstractByteArrayView::marking() const
+{
+    Q_D( const AbstractByteArrayView );
+    return d->marking();
+}
+
 
 void AbstractByteArrayView::pasteData( const QMimeData* data )
 {
@@ -334,6 +340,19 @@ void AbstractByteArrayView::setSelection( const AddressRange& selection )
 {
     Q_D( AbstractByteArrayView );
     d->setSelection( selection );
+}
+
+
+void AbstractByteArrayView::setMarking( Address start, Address end )
+{
+    Q_D( AbstractByteArrayView );
+    d->setMarking( AddressRange(start,end) );
+}
+
+void AbstractByteArrayView::setMarking( const AddressRange& marking )
+{
+    Q_D( AbstractByteArrayView );
+    d->setMarking( marking );
 }
 
 

@@ -82,6 +82,8 @@ class AbstractByteArrayViewPrivate
     QByteArray selectedData() const;
     QMimeData* selectionAsMimeData() const;
 
+    AddressRange marking() const;
+
     KController* controller() const;
     AbstractWheelController* wheelController() const;
 
@@ -121,6 +123,9 @@ class AbstractByteArrayViewPrivate
     void setModified( bool modified );
 
     void setTabChangesFocus( bool tabChangesFocus = true );
+
+    void setMarking( Address start, Address end );
+    void setMarking( const AddressRange& marking );
 
   public: // zooming
     void zoomIn( int pointInc );
@@ -302,6 +307,8 @@ inline Address AbstractByteArrayViewPrivate::startOffset()      const { return m
 
 inline AddressRange AbstractByteArrayViewPrivate::selection() const { return mTableRanges->selection(); }
 inline bool AbstractByteArrayViewPrivate::hasSelectedData()    const { return mTableRanges->hasSelection(); }
+
+inline AddressRange AbstractByteArrayViewPrivate::marking() const { return mTableRanges->marking(); }
 
 inline bool AbstractByteArrayViewPrivate::tabChangesFocus()      const { return mTabController->tabChangesFocus(); }
 inline bool AbstractByteArrayViewPrivate::isByteEditorActive()   const { return mValueEditor->isInEditMode(); }
