@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -124,8 +124,16 @@ void StringsExtractTool::selectString( int stringId )
     const ContainedString &containedString = mContainedStringList.at(stringId);
     const Okteta::Address offset = containedString.offset();
     const int length = containedString.string().length();
-    mByteArrayView->setSelection( offset, offset+length-1 );
-    mByteArrayView->setFocus();
+    const Okteta::AddressRange markingRange = Okteta::AddressRange::fromWidth(offset,length);
+    mByteArrayView->setMarking( markingRange, true );
+//     mByteArrayView->setFocus();
+}
+
+void StringsExtractTool::deselectString()
+{
+// TODO: marked region is property of document, not view?
+    if( mByteArrayView )
+    mByteArrayView->setMarking( Okteta::AddressRange() );
 }
 
 void StringsExtractTool::onSelectionChanged()

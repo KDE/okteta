@@ -54,6 +54,9 @@ class StringsExtractView : public QWidget
   public:
     StringsExtractTool *tool() const;
 
+  public: // QObject API
+    virtual bool eventFilter( QObject* object, QEvent* event );
+
   public Q_SLOTS: // gui
 //     void setDirty( bool dirty );
     void onStringDoubleClicked( const QModelIndex &index );

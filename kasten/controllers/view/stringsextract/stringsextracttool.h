@@ -73,6 +73,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT StringsExtractTool : public AbstractTool
     void setCharCodec( const QString &codecName );
     void setMinLength( int minLength );
     void selectString( int stringId );
+    void deselectString();
 
   public Q_SLOTS: // actions
     void extractStrings();

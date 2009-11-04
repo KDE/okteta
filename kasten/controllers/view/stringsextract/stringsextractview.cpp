@@ -40,6 +40,7 @@
 #include <QtGui/QTreeView>
 #include <QtGui/QClipboard>
 #include <QtGui/QApplication>
+#include <QtGui/QFocusEvent>
 
 
 namespace Kasten
@@ -115,6 +116,7 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
     mContainedStringTableView->setSelectionMode( QAbstractItemView::ExtendedSelection );
     mContainedStringTableView->setSortingEnabled( true );
     mContainedStringTableView->setFont( KGlobalSettings::fixedFont() );
+    mContainedStringTableView->installEventFilter( this );
     QHeaderView* header = mContainedStringTableView->header();
     header->setFont( font() );
     header->setResizeMode( QHeaderView::ResizeToContents );
@@ -142,7 +144,7 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
 
     actionsLayout->addStretch();
 
-    const KGuiItem gotoGuiItem( i18n("&Go to"), "go-jump",
+    const KGuiItem gotoGuiItem( i18n("&Show"), "go-jump",
                       i18nc("@info:tooltip","Shows the selected string in the view."),
                       i18nc("@info:whatsthis",
                             "If you press the <interface>Go to</interface> button, the string which was last "
@@ -166,6 +168,23 @@ void StringsExtractView::setDirty( bool dirty )
     mUpdateButton->setToolTip( dirty ? i18nc("@info:tooltip","Warning: Byte Array has been modified since last update.") : QString() );
 }
 #endif
+
+bool StringsExtractView::eventFilter( QObject* object, QEvent* event )
+{
+    if( object == mContainedStringTableView )
+    {
+        if( event->type() == QEvent::FocusOut )
+        {
+            QFocusEvent* focusEvent = static_cast<QFocusEvent*>( event );
+            const Qt::FocusReason focusReason = focusEvent->reason();
+            if( focusReason != Qt::ActiveWindowFocusReason
+                && focusReason != Qt::PopupFocusReason )
+                mTool->deselectString();
+        }
+    }
+
+    return QWidget::eventFilter( object, event );
+}
 
 void StringsExtractView::onStringsUptodateChanged( bool stringsUptodate )
 {
@@ -192,7 +211,11 @@ void StringsExtractView::onGotoButtonClicked()
 {
     const QModelIndex index = mContainedStringTableView->selectionModel()->currentIndex();
     if( index.isValid() )
+    {
+        // TODO: hack: as currently the marking is only undone if the focus leaves the listview it needs to be moved there before
+        mContainedStringTableView->setFocus();
         onStringDoubleClicked( index );
+    }
 }
 
 void StringsExtractView::onCopyButtonClicked()
