@@ -328,6 +328,8 @@ void ByteArrayTableRanges::adaptToChanges( const ArrayChangeMetricsList& changeL
 
             if( mSelection.isValid() )
                 mSelection.adaptToReplacement( offset, change.removeLength(), change.insertLength() );
+            if( mMarking.isValid() )
+                mMarking.adaptToReplacement( offset, change.removeLength(), change.insertLength() );
             break;
         }
         case ArrayChangeMetrics::Swapping:
@@ -335,6 +337,9 @@ void ByteArrayTableRanges::adaptToChanges( const ArrayChangeMetricsList& changeL
 
             if( mSelection.isValid() )
                 mSelection.adaptToSwap( change.offset(), change.secondStart(), change.secondLength() );
+            // TODO:
+//             if( mMarking.isValid() )
+//                 mMarking.adaptToSwap( change.offset(), change.secondStart(), change.secondLength() );
         default:
             ;
         }
