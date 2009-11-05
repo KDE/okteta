@@ -426,9 +426,10 @@ void AbstractByteArrayColumnRenderer::renderLinePositions( QPainter* painter, Li
 
     // Go through the lines TODO: handle first and last line more effeciently
     // check for leading and trailing spaces
-    const int firstLinePosition = mLayout->firstLinePosition( Coord( _linePositions.start(), lineIndex) );
-    const int lastLinePosition = mLayout->lastLinePosition(   Coord( _linePositions.end(),   lineIndex) );
-    LinePositionRange linePositions( firstLinePosition, lastLinePosition );
+    const LinePositionRange existingLinePositions = mLayout->linePositions( lineIndex );
+
+    LinePositionRange linePositions = _linePositions;
+    linePositions.restrictTo( existingLinePositions );
 
     // check for leading and trailing spaces
     AddressRange byteIndizes =
@@ -460,8 +461,8 @@ void AbstractByteArrayColumnRenderer::renderLinePositions( QPainter* painter, Li
             byteIndizesPart.setEnd( markedRange.end() );
             positionsPart.setEndByWidth( markedRange.width() );
 
-            if( positionsPart.start() == firstLinePosition ) markingFlag &= ~StartsBefore;
-            if( positionsPart.end() == lastLinePosition )    markingFlag &= ~EndsLater;
+            if( positionsPart.start() == existingLinePositions.start() ) markingFlag &= ~StartsBefore;
+            if( positionsPart.end() == existingLinePositions.end() )     markingFlag &= ~EndsLater;
 
             renderMarking( painter, positionsPart, byteIndizesPart.start(), markingFlag );
         }
@@ -477,8 +478,8 @@ void AbstractByteArrayColumnRenderer::renderLinePositions( QPainter* painter, Li
 
             if( hasMarkingBeforeSelectionEnd )
                 selectionFlag |= EndsLater;
-            if( positionsPart.start() == firstLinePosition ) selectionFlag &= ~StartsBefore;
-            if( positionsPart.end() == lastLinePosition )    selectionFlag &= ~EndsLater;
+            if( positionsPart.start() == existingLinePositions.start() ) selectionFlag &= ~StartsBefore;
+            if( positionsPart.end() == existingLinePositions.end() )     selectionFlag &= ~EndsLater;
 
             renderSelection( painter, positionsPart, byteIndizesPart.start(), selectionFlag );
         }
