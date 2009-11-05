@@ -590,8 +590,9 @@ void ByteArrayRowColumnRenderer::renderLinePositions( QPainter* painter, Line li
 
     // Go through the lines TODO: handle first and last line more effeciently
     // check for leading and trailing spaces
-    LinePositionRange linePositions( mLayout->firstLinePosition(Coord( _linePositions.start(), lineIndex )),
-                                     mLayout->lastLinePosition( Coord( _linePositions.end(),   lineIndex )) );
+    const int firstLinePosition = mLayout->firstLinePosition( Coord( _linePositions.start(), lineIndex) );
+    const int lastLinePosition = mLayout->lastLinePosition(   Coord( _linePositions.end(),   lineIndex) );
+    LinePositionRange linePositions( firstLinePosition, lastLinePosition );
 
     // check for leading and trailing spaces
     AddressRange byteIndizes =
@@ -623,8 +624,8 @@ void ByteArrayRowColumnRenderer::renderLinePositions( QPainter* painter, Line li
             byteIndizesPart.setEnd( markedRange.end() );
             positionsPart.setEndByWidth( markedRange.width() );
 
-            if( positionsPart.start() == mLayout->firstLinePosition(lineIndex)) markingFlag &= ~StartsBefore;
-            if( positionsPart.end() == mLayout->lastLinePosition(lineIndex) )   markingFlag &= ~EndsLater;
+            if( positionsPart.start() == firstLinePosition ) markingFlag &= ~StartsBefore;
+            if( positionsPart.end() == lastLinePosition )   markingFlag &= ~EndsLater;
 
             renderMarking( painter, positionsPart, byteIndizesPart.start(), markingFlag );
         }
@@ -640,8 +641,8 @@ void ByteArrayRowColumnRenderer::renderLinePositions( QPainter* painter, Line li
 
             if( hasMarkingBeforeSelectionEnd )
                 selectionFlag |= EndsLater;
-            if( positionsPart.start() == mLayout->firstLinePosition(lineIndex) ) selectionFlag &= ~StartsBefore;
-            if( positionsPart.end() == mLayout->lastLinePosition(lineIndex) )    selectionFlag &= ~EndsLater;
+            if( positionsPart.start() == firstLinePosition ) selectionFlag &= ~StartsBefore;
+            if( positionsPart.end() == lastLinePosition )    selectionFlag &= ~EndsLater;
 
             renderSelection( painter, positionsPart, byteIndizesPart.start(), selectionFlag );
         }
@@ -657,6 +658,7 @@ void ByteArrayRowColumnRenderer::renderLinePositions( QPainter* painter, Line li
 
             renderPlain( painter, positionsPart, byteIndizesPart.start() );
         }
+
         byteIndizes.setStartNextBehind( byteIndizesPart );
         linePositions.setStartNextBehind( positionsPart );
     }
