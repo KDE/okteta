@@ -322,7 +322,7 @@ LinePositionRange AbstractByteArrayColumnRenderer::linePositionsOfColumnXs( Pixe
             const LinePosition endPos = p;
             positions.setEnd( p );
             for( p=0; p<=endPos; ++p )
-                if( mLinePosRightPixelX[p] > pixelX )
+                if( mLinePosRightPixelX[p] >= pixelX )
                 {
                     positions.setStart( p );
                     break;
