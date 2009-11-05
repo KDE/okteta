@@ -360,7 +360,7 @@ void ByteArrayRowColumnRenderer::recalcX()
             groupedBytes = -1;
         }
         else
-        newWidth += mByteSpacingWidth;
+            newWidth += mByteSpacingWidth;
     }
     setWidth( mLinePosRightPixelX[mLastLinePos]+1 );
 }
@@ -458,21 +458,22 @@ LinePosition ByteArrayRowColumnRenderer::linePositionOfColumnX( PixelX PX ) cons
 }
 
 
-LinePositionRange ByteArrayRowColumnRenderer::linePositionsOfColumnXs( PixelX PX, PixelX PW ) const
+LinePositionRange ByteArrayRowColumnRenderer::linePositionsOfColumnXs( PixelX pixelX, PixelX pixelWidth ) const
 {
-    if( !mLinePosLeftPixelX )
+    if( ! mLinePosLeftPixelX )
         return LinePositionRange();
 
-    const PixelX PRX = PX + PW - 1;
+    const PixelX rightPixelX = pixelX + pixelWidth - 1;
 
     LinePositionRange positions;
     // search backwards for the first byte that is equalleft to x
     for( LinePosition p=mLastLinePos; p>=0; --p )
-        if( mLinePosLeftPixelX[p] <= PRX )
+        if( mLinePosLeftPixelX[p] <= rightPixelX )
         {
+            const LinePosition endPos = p;
             positions.setEnd( p );
-            for( ; p>=0; --p )
-                if( mLinePosLeftPixelX[p] <= PX )
+            for( p=0; p<=endPos; ++p )
+                if( mLinePosRightPixelX[p] > pixelX )
                 {
                     positions.setStart( p );
                     break;
@@ -625,7 +626,7 @@ void ByteArrayRowColumnRenderer::renderLinePositions( QPainter* painter, Line li
             positionsPart.setEndByWidth( markedRange.width() );
 
             if( positionsPart.start() == firstLinePosition ) markingFlag &= ~StartsBefore;
-            if( positionsPart.end() == lastLinePosition )   markingFlag &= ~EndsLater;
+            if( positionsPart.end() == lastLinePosition )    markingFlag &= ~EndsLater;
 
             renderMarking( painter, positionsPart, byteIndizesPart.start(), markingFlag );
         }
