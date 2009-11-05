@@ -139,7 +139,7 @@ void ByteArrayTableCursor::gotoUp()
         if( mCoord.isPriorInLineThan(mLayout->startCoord()) )
         {
             mIndex = mLayout->byteArrayOffset();
-            mCoord.setPos( mLayout->startLinePosition() );
+            mCoord.setPos( mLayout->firstStartLinePosition() );
             mBehind = false;
         }
         else

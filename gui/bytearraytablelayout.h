@@ -83,12 +83,12 @@ class OKTETAGUI_EXPORT ByteArrayTableLayout
 
   public: // calculated values
     Line startLine() const;
-    LinePosition startLinePosition() const;
+    LinePosition firstStartLinePosition() const;
     /** returns the coord of the start */
     Coord startCoord() const;
 
     Line finalLine() const;
-    LinePosition finalLinePosition() const;
+    LinePosition lastFinalLinePosition() const;
     /** returns the coord of the end */
     Coord finalCoord() const;
 
@@ -213,8 +213,8 @@ inline Address ByteArrayTableLayout::lastByteArrayOffset() const { return mLastB
 
 inline Coord ByteArrayTableLayout::finalCoord()               const { return mCoordRange.end(); }
 inline Coord ByteArrayTableLayout::startCoord()               const { return mCoordRange.start(); }
-inline LinePosition ByteArrayTableLayout::startLinePosition() const { return startCoord().pos(); }
-inline LinePosition ByteArrayTableLayout::finalLinePosition() const { return finalCoord().pos(); }
+inline LinePosition ByteArrayTableLayout::firstStartLinePosition() const { return startCoord().pos(); }
+inline LinePosition ByteArrayTableLayout::lastFinalLinePosition() const { return finalCoord().pos(); }
 inline Line ByteArrayTableLayout::startLine()                 const { return startCoord().line(); }
 inline Line ByteArrayTableLayout::finalLine()                 const { return finalCoord().line(); }
 inline LineSize ByteArrayTableLayout::noOfLinesPerPage()      const { return mNoOfLinesPerPage; }
