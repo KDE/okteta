@@ -75,8 +75,8 @@ class OKTETAGUI_EXPORT AbstractByteArrayColumnRenderer : public AbstractColumnRe
     void prepareRendering( const PixelXRange& Xs );
 
   public:
-    //void renderLine( QPainter *painter, int lineIndex );
-    void renderLinePositions( QPainter *painter, Line lineIndex, const LineRange& linePositions );
+    //void renderLine( QPainter* painter, int lineIndex );
+    void renderLinePositions( QPainter* painter, Line lineIndex, const LineRange& linePositions );
     /** paints a cursor based on the type of the byte.
       * @param byteIndex Index of the byte to paint the cursor for. If -1 a space is used as char.
       */
@@ -125,7 +125,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayColumnRenderer : public AbstractColumnRe
       */
     void setMetrics( PixelX digitWidth, PixelY digitBaseLine );
     /** */
-    void set( AbstractByteArrayModel *byteArrayModel );
+    void set( AbstractByteArrayModel* byteArrayModel );
     /** creates new buffer for x-values; to be called on any change of NoOfBytesPerLine or metrics */
     void resetXBuffer();
     /** sets the codec to be used by the char column. */
@@ -186,7 +186,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayColumnRenderer : public AbstractColumnRe
     void renderPlain( QPainter* painter, const LinePositionRange& linePositions, Address byteIndex );
     void renderSelection( QPainter* painter, const LinePositionRange& linePositions, Address byteIndex, int flag );
     void renderMarking( QPainter* painter, const LinePositionRange& linePositions, Address byteIndex, int flag );
-    void renderRange( QPainter* painter, const QBrush &brush, const LinePositionRange& linePositions, int flag );
+    void renderRange( QPainter* painter, const QBrush& brush, const LinePositionRange& linePositions, int flag );
     void renderBookmark( QPainter* painter, const QBrush& brush );
 
     void recalcX();
@@ -231,8 +231,8 @@ class OKTETAGUI_EXPORT AbstractByteArrayColumnRenderer : public AbstractColumnRe
     /** pointer to array with buffered linePositions (relative to column position)
       * a spacing gets assigned to the left byte -> ...c|c|c |c|c...
       */
-    PixelX *mLinePosLeftPixelX;
-    PixelX *mLinePosRightPixelX;
+    PixelX* mLinePosLeftPixelX;
+    PixelX* mLinePosRightPixelX;
     /** index of right position */
     LinePosition mLastLinePos;
 
@@ -260,7 +260,7 @@ inline LinePosition AbstractByteArrayColumnRenderer::firstLinePos() const { retu
 inline LinePosition AbstractByteArrayColumnRenderer::lastLinePos()  const { return mRenderLinePositions.end(); }
 inline LinePositionRange AbstractByteArrayColumnRenderer::visibleLinePositions() const { return mRenderLinePositions; }
 
-inline const ByteArrayTableLayout *AbstractByteArrayColumnRenderer::layout() const { return mLayout; }
+inline const ByteArrayTableLayout* AbstractByteArrayColumnRenderer::layout() const { return mLayout; }
 
 inline void AbstractByteArrayColumnRenderer::setCharCodec( const CharCodec* charCodec )
 {

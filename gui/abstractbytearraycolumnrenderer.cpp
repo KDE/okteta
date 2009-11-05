@@ -73,7 +73,7 @@ AbstractByteArrayColumnRenderer::AbstractByteArrayColumnRenderer( AbstractColumn
 }
 
 
-void AbstractByteArrayColumnRenderer::set( AbstractByteArrayModel *byteArrayModel )
+void AbstractByteArrayColumnRenderer::set( AbstractByteArrayModel* byteArrayModel )
 {
     mByteArrayModel = byteArrayModel;
     mBookmarks = qobject_cast<Bookmarkable*>(byteArrayModel );
@@ -193,8 +193,8 @@ void AbstractByteArrayColumnRenderer::recalcX()
 
     PixelX newWidth = 0;
     int groupedBytes = 0;
-    PixelX *PX = mLinePosLeftPixelX;
-    PixelX *PRX = mLinePosRightPixelX;
+    PixelX* PX = mLinePosLeftPixelX;
+    PixelX* PRX = mLinePosRightPixelX;
     LinePosition p = 0;
     for( ; p<=mLastLinePos; ++PX, ++PRX, ++p, ++groupedBytes )
     {
@@ -373,7 +373,7 @@ QRect AbstractByteArrayColumnRenderer::byteRect( const Coord& coord ) const
 }
 
 
-void AbstractByteArrayColumnRenderer::prepareRendering( const PixelXRange &_Xs )
+void AbstractByteArrayColumnRenderer::prepareRendering( const PixelXRange& _Xs )
 {
     PixelXRange Xs( _Xs );
     restrictToXSpan( &Xs );
@@ -389,7 +389,7 @@ void AbstractByteArrayColumnRenderer::prepareRendering( const PixelXRange &_Xs )
 }
 
 
-void AbstractByteArrayColumnRenderer::renderFirstLine( QPainter *painter, const PixelXRange &Xs, Line firstLineIndex )
+void AbstractByteArrayColumnRenderer::renderFirstLine( QPainter* painter, const PixelXRange& Xs, Line firstLineIndex )
 {
     prepareRendering( Xs );
 
@@ -399,13 +399,13 @@ void AbstractByteArrayColumnRenderer::renderFirstLine( QPainter *painter, const 
 }
 
 
-void AbstractByteArrayColumnRenderer::renderNextLine( QPainter *painter )
+void AbstractByteArrayColumnRenderer::renderNextLine( QPainter* painter )
 {
     renderLinePositions( painter, mRenderLine++, mRenderLinePositions );
 }
 
 
-void AbstractByteArrayColumnRenderer::renderLinePositions( QPainter *painter, Line lineIndex, const LinePositionRange& _linePositions )
+void AbstractByteArrayColumnRenderer::renderLinePositions( QPainter* painter, Line lineIndex, const LinePositionRange& _linePositions )
 {
     // clear background
     const unsigned int blankFlag =
@@ -421,7 +421,7 @@ void AbstractByteArrayColumnRenderer::renderLinePositions( QPainter *painter, Li
     // Go through the lines TODO: handle first and last line more effeciently
     // check for leading and trailing spaces
     LinePositionRange linePositions( mLayout->firstLinePosition(Coord( _linePositions.start(), lineIndex )),
-                                 mLayout->lastLinePosition( Coord( _linePositions.end(),   lineIndex )) );
+                                     mLayout->lastLinePosition( Coord( _linePositions.end(),   lineIndex )) );
 
     // check for leading and trailing spaces
     AddressRange byteIndizes =
@@ -493,7 +493,7 @@ void AbstractByteArrayColumnRenderer::renderLinePositions( QPainter *painter, Li
 }
 
 
-void AbstractByteArrayColumnRenderer::renderPlain( QPainter *painter, const LinePositionRange& linePositions, Address byteIndex )
+void AbstractByteArrayColumnRenderer::renderPlain( QPainter* painter, const LinePositionRange& linePositions, Address byteIndex )
 {
     BookmarksConstIterator bit;
     Address nextBookmarkOffset = -1;
@@ -502,7 +502,7 @@ void AbstractByteArrayColumnRenderer::renderPlain( QPainter *painter, const Line
     if( hasBookmarks )
     {
         bit = mBookmarks->createBookmarksConstIterator();
-        if( bit.findNextFrom( byteIndex) )
+        if( bit.findNextFrom(byteIndex) )
             nextBookmarkOffset = bit.next().offset();
     }
 
@@ -530,7 +530,7 @@ void AbstractByteArrayColumnRenderer::renderPlain( QPainter *painter, const Line
         const KColorScheme::ForegroundRole foregroundRole =
             mByteTypeColored ? foregroundRoleForChar(byteChar): KColorScheme::NormalText;
         const QBrush brush = colorScheme.foreground( foregroundRole );
-        const QColor &charColor = brush.color();// palette.text().color();//colorForChar(byteChar)
+        const QColor& charColor = brush.color();// palette.text().color();//colorForChar(byteChar)
         renderByteText( painter, byte, byteChar, charColor );
 
         painter->translate( -x, 0 );
@@ -538,7 +538,7 @@ void AbstractByteArrayColumnRenderer::renderPlain( QPainter *painter, const Line
 }
 
 
-void AbstractByteArrayColumnRenderer::renderSelection( QPainter *painter, const LinePositionRange& linePositions, Address byteIndex, int flag )
+void AbstractByteArrayColumnRenderer::renderSelection( QPainter* painter, const LinePositionRange& linePositions, Address byteIndex, int flag )
 {
     BookmarksConstIterator bit;
     Address nextBookmarkOffset = -1;
@@ -557,7 +557,7 @@ void AbstractByteArrayColumnRenderer::renderSelection( QPainter *painter, const 
     renderRange( painter, colorScheme.background(), linePositions, flag );
 
     // paint all the bytes affected
-    for( LinePosition linePosition = linePositions.start(); linePosition<=linePositions.end(); ++linePosition,++byteIndex )
+    for( LinePosition linePosition=linePositions.start(); linePosition<=linePositions.end(); ++linePosition,++byteIndex )
     {
         const PixelX x = columnXOfLinePosition( linePosition );
 
@@ -577,7 +577,7 @@ void AbstractByteArrayColumnRenderer::renderSelection( QPainter *painter, const 
         const KColorScheme::ForegroundRole foregroundRole =
             mByteTypeColored ? foregroundRoleForChar(byteChar): KColorScheme::NormalText;
         const QBrush brush = colorScheme.foreground( foregroundRole );
-        const QColor &charColor = brush.color();
+        const QColor& charColor = brush.color();
         renderByteText( painter, byte, byteChar, charColor );
 
         painter->translate( -x, 0 );
@@ -585,7 +585,7 @@ void AbstractByteArrayColumnRenderer::renderSelection( QPainter *painter, const 
 }
 
 
-void AbstractByteArrayColumnRenderer::renderMarking( QPainter *painter, const LinePositionRange& linePositions, Address byteIndex, int flag )
+void AbstractByteArrayColumnRenderer::renderMarking( QPainter* painter, const LinePositionRange& linePositions, Address byteIndex, int flag )
 {
     const QPalette& palette = stylist()->palette();
 
@@ -593,7 +593,7 @@ void AbstractByteArrayColumnRenderer::renderMarking( QPainter *painter, const Li
 
     const QColor& baseColor = palette.base().color();
     // paint all the bytes affected
-    for( LinePosition p = linePositions.start(); p <= linePositions.end(); ++p,++byteIndex )
+    for( LinePosition p=linePositions.start(); p <= linePositions.end(); ++p,++byteIndex )
     {
         const PixelX x = columnXOfLinePosition( p );
 
@@ -608,14 +608,14 @@ void AbstractByteArrayColumnRenderer::renderMarking( QPainter *painter, const Li
 }
 
 
-void AbstractByteArrayColumnRenderer::renderBookmark( QPainter *painter, const QBrush &brush )
+void AbstractByteArrayColumnRenderer::renderBookmark( QPainter* painter, const QBrush& brush )
 {
     // TODO: think about how bookmarks should really be rendered
     painter->fillRect( 1,1, mByteWidth-2,lineHeight()-2, brush );
 }
 
 
-void AbstractByteArrayColumnRenderer::renderRange( QPainter *painter, const QBrush &brush, const LinePositionRange& linePositions, int flag )
+void AbstractByteArrayColumnRenderer::renderRange( QPainter* painter, const QBrush& brush, const LinePositionRange& linePositions, int flag )
 {
     const PixelX rangeX =
         ( flag & StartsBefore ) ? columnRightXOfLinePosition( linePositions.nextBeforeStart() ) + 1 :
@@ -629,7 +629,7 @@ void AbstractByteArrayColumnRenderer::renderRange( QPainter *painter, const QBru
 }
 
 
-void AbstractByteArrayColumnRenderer::renderByte( QPainter *painter, Address byteIndex )
+void AbstractByteArrayColumnRenderer::renderByte( QPainter* painter, Address byteIndex )
 {
     const Byte byte = ( byteIndex > -1 ) ? mByteArrayModel->byte( byteIndex ) : EmptyByte;
     const Character byteChar = mCharCodec->decode( byte );
@@ -660,14 +660,14 @@ void AbstractByteArrayColumnRenderer::renderByte( QPainter *painter, Address byt
         const KColorScheme::ForegroundRole foregroundRole =
             mByteTypeColored ? foregroundRoleForChar(byteChar): KColorScheme::NormalText;
         const QBrush brush = colorScheme.foreground( foregroundRole );
-        const QColor &charColor = brush.color();
+        const QColor& charColor = brush.color();
 
         renderByteText( painter, byte, byteChar, charColor );
     }
 }
 
 // TODO: think about making framestyle a enum of a class ByteArrayColumnCursor
-void AbstractByteArrayColumnRenderer::renderFramedByte( QPainter *painter, Address byteIndex, FrameStyle frameStyle )
+void AbstractByteArrayColumnRenderer::renderFramedByte( QPainter* painter, Address byteIndex, FrameStyle frameStyle )
 {
     renderByte( painter, byteIndex );
 
@@ -682,7 +682,7 @@ void AbstractByteArrayColumnRenderer::renderFramedByte( QPainter *painter, Addre
     const KColorScheme::ForegroundRole foregroundRole =
         mByteTypeColored ? foregroundRoleForChar(byteChar): KColorScheme::NormalText;
     const QBrush brush = colorScheme.foreground( foregroundRole );
-    const QColor &charColor = brush.color();
+    const QColor& charColor = brush.color();
     painter->setPen( charColor );
     if( frameStyle == Frame )
         painter->drawRect( 0,0, mByteWidth-1,lineHeight()-1 );
@@ -693,7 +693,7 @@ void AbstractByteArrayColumnRenderer::renderFramedByte( QPainter *painter, Addre
 }
 
 
-void AbstractByteArrayColumnRenderer::renderCursor( QPainter *painter, Address byteIndex )
+void AbstractByteArrayColumnRenderer::renderCursor( QPainter* painter, Address byteIndex )
 {
     const Byte byte = ( byteIndex > -1 ) ? mByteArrayModel->byte( byteIndex ) : EmptyByte;
     const Character byteChar = mCharCodec->decode( byte );
