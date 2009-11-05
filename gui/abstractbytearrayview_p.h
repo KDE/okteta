@@ -177,7 +177,7 @@ class AbstractByteArrayViewPrivate
     void finishByteEditor();
 
   protected:
-    bool hasChanged( const CoordRange& visibleRange, CoordRange* changedRange ) const;
+    bool getNextChangedRange( CoordRange* changedRange, const CoordRange& visibleRange ) const;
     bool isByteEditorActive() const;
 
   protected: // 

@@ -820,7 +820,7 @@ void AbstractByteArrayViewPrivate::removeSelectedData()
   //emit q->selectionChanged( -1, -1 );
 }
 
-bool AbstractByteArrayViewPrivate::hasChanged( const CoordRange& visibleRange, CoordRange* changedRange ) const
+bool AbstractByteArrayViewPrivate::getNextChangedRange( CoordRange* changedRange, const CoordRange& visibleRange ) const
 {
     const bool result = mTableRanges->overlapsChanges( visibleRange, changedRange );
 

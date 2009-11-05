@@ -853,7 +853,7 @@ void ByteArrayColumnViewPrivate::updateChanged()
         const int lineHeight = q->lineHeight();
         CoordRange changedRange;
         // as there might be multiple selections on this line redo until no more is changed
-        while( hasChanged(visibleRange,&changedRange) )
+        while( getNextChangedRange(&changedRange,visibleRange) )
         {
             PixelY cy = q->yOffsetOfLine( changedRange.start().line() );
 
