@@ -639,6 +639,7 @@ void ByteArrayRowViewPrivate::pauseCursor()
     updateCursor( *mByteArrayColumn, mInactiveCoding );
 }
 
+
 QRect ByteArrayRowViewPrivate::cursorRect() const
 {
     Q_Q( const ByteArrayRowView );

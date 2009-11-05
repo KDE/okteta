@@ -313,17 +313,18 @@ void ByteArrayColumnViewPrivate::handleFontChange( const QFont& oldFont )
 
     // get new values
     const QFontMetrics newFontMetrics = q->fontMetrics();
-    PixelX digitWidth = newFontMetrics.maxWidth();
-    PixelY digitBaseLine = newFontMetrics.ascent();
-
-     q->setLineHeight( newFontMetrics.height() );
-
-    // update all dependant structures
-    mTableLayout->setNoOfLinesPerPage( q->noOfLinesPerPage() );
+    const PixelX digitWidth = newFontMetrics.maxWidth();
+    const PixelY digitBaseLine = newFontMetrics.ascent();
+    const PixelY digitHeight = newFontMetrics.height();
 
     mOffsetColumn->setMetrics( digitWidth, digitBaseLine );
     mValueColumn->setMetrics( digitWidth, digitBaseLine );
     mCharColumn->setMetrics( digitWidth, digitBaseLine );
+
+    q->setLineHeight( digitHeight );
+
+    // update all dependant structures
+    mTableLayout->setNoOfLinesPerPage( q->noOfLinesPerPage() );
 
     updateViewByWidth();
 }
@@ -591,7 +592,9 @@ void ByteArrayColumnViewPrivate::placeCursor( const QPoint& point )
     adaptController();
 
     // get coord of click and whether this click was closer to the end of the pos
-    const Coord coord( mActiveColumn->magneticLinePositionOfX(point.x()), q->lineAt(point.y()) );
+    const int linePosition = mActiveColumn->magneticLinePositionOfX( point.x() );
+    const int lineIndex = q->lineAt( point.y() );
+    const Coord coord( linePosition, lineIndex );
 
     mTableCursor->gotoCCoord( coord );
     emit q->cursorPositionChanged( cursorPosition() );
@@ -913,6 +916,11 @@ void ByteArrayColumnViewPrivate::updateChanged()
 }
 
 
+void ByteArrayColumnViewPrivate::ensureCursorVisible()
+{
+    ensureVisible( *mActiveColumn, mTableCursor->coord() );
+}
+
 void ByteArrayColumnViewPrivate::ensureVisible( const AddressRange& range, bool ensureStartVisible )
 {
     const CoordRange coords = mTableLayout->coordRangeOfIndizes( range );
@@ -920,11 +928,6 @@ void ByteArrayColumnViewPrivate::ensureVisible( const AddressRange& range, bool 
     // TODO: this is a make-it-work-hack, better do a smart calculation
     ensureVisible( *mActiveColumn, ensureStartVisible ? coords.end() : coords.start() );
     ensureVisible( *mActiveColumn, ensureStartVisible ? coords.start() : coords.end() );
-}
-
-void ByteArrayColumnViewPrivate::ensureCursorVisible()
-{
-    ensureVisible( *mActiveColumn, mTableCursor->coord() );
 }
 
 void ByteArrayColumnViewPrivate::ensureVisible( const AbstractByteArrayColumnRenderer& column, const Coord& coord )
