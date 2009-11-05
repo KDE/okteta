@@ -191,8 +191,8 @@ class OKTETAGUI_EXPORT AbstractByteArrayColumnRenderer : public AbstractColumnRe
 
     void recalcX();
 
-    bool isSelected( const AddressRange& range, AddressRange* selection, unsigned int* flag ) const;
-    bool isMarked( const AddressRange& range, AddressRange* markedSection, unsigned int* flag ) const;
+    bool getNextSelectedAddressRange( AddressRange* selectedRange, unsigned int* flag, const AddressRange& range ) const;
+    bool getNextMarkedAddressRange( AddressRange* markedRange, unsigned int* flag, const AddressRange& range ) const;
 
     void setByteWidth( int byteWidth );
 

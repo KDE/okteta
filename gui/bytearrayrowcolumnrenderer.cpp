@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -578,14 +578,14 @@ void ByteArrayRowColumnRenderer::renderLinePositions( QPainter* painter, Line li
 
     renderRange( painter, backgroundBrush, _linePositions, blankFlag );
 
+    // no bytes to paint?
+    if( !mLayout->hasContent(lineIndex) )
+        return;
+
     // Go through the lines TODO: handle first and last line more effeciently
     // check for leading and trailing spaces
     LinePositionRange linePositions( mLayout->firstLinePosition(Coord( _linePositions.start(), lineIndex )),
                                      mLayout->lastLinePosition( Coord( _linePositions.end(),   lineIndex )) );
-
-    // no bytes to paint?
-    if( !mLayout->hasContent(lineIndex) )
-        return;
 
     // check for leading and trailing spaces
     AddressRange byteIndizes =
@@ -593,8 +593,8 @@ void ByteArrayRowColumnRenderer::renderLinePositions( QPainter* painter, Line li
 
     unsigned int selectionFlag = 0;
     unsigned int markingFlag = 0;
-    AddressRange selection;
-    AddressRange markedSection;
+    AddressRange selectedRange;
+    AddressRange markedRange;
     bool hasMarking = mRanges->hasMarking();
     bool hasSelection = mRanges->hasSelection();
 
@@ -603,42 +603,39 @@ void ByteArrayRowColumnRenderer::renderLinePositions( QPainter* painter, Line li
 //         <<" for byteIndizes "<<byteIndizes.start()<<"-"<<byteIndizes.start()<<endl;
     while( linePositions.isValid() )
     {
-        LinePositionRange positionsPart( linePositions );  // set of linePositions to paint next
-        AddressRange byteIndizesPart( byteIndizes );      // set of indizes to paint next
-        // falls markedSection nicht mehr gebuffert und noch zu erwarten
-        if( hasMarking && markedSection.endsBefore(byteIndizesPart.start()) )
-        {
-            // erhebe nächste Markierung im Bereich
-            hasMarking = isMarked( byteIndizesPart, &markedSection, &markingFlag );
-        }
-        // falls selection nicht mehr gebuffert und noch zu erwarten
-        if( hasSelection && selection.endsBefore(byteIndizesPart.start()) )
-        {
-            // erhebe nächste selection im Bereich
-            hasSelection = isSelected( byteIndizesPart, &selection, &selectionFlag );
-        }
+        LinePositionRange positionsPart = linePositions;  // set of linePositions to paint next
+        AddressRange byteIndizesPart = byteIndizes;      // set of indizes to paint next
 
-        if( markedSection.start() == byteIndizesPart.start() )
+        if( hasMarking && markedRange.endsBefore(byteIndizesPart) )
+            hasMarking = getNextMarkedAddressRange( &markedRange, &markingFlag, byteIndizesPart );
+
+        if( hasSelection && selectedRange.endsBefore(byteIndizesPart) )
+            hasSelection = getNextSelectedAddressRange( &selectedRange, &selectionFlag, byteIndizesPart );
+
+        if( byteIndizesPart.start() == markedRange.start() )
         {
-            byteIndizesPart.setEnd( markedSection.end() );
-            positionsPart.setEndByWidth( markedSection.width() );
-            if( positionsPart.end() == mLayout->lastLinePosition(lineIndex) )   markingFlag &= ~EndsLater;
+            byteIndizesPart.setEnd( markedRange.end() );
+            positionsPart.setEndByWidth( markedRange.width() );
+
             if( positionsPart.start() == mLayout->firstLinePosition(lineIndex)) markingFlag &= ~StartsBefore;
+            if( positionsPart.end() == mLayout->lastLinePosition(lineIndex) )   markingFlag &= ~EndsLater;
+
             renderMarking( painter, positionsPart, byteIndizesPart.start(), markingFlag );
         }
-        else if( selection.includes(byteIndizesPart.start()) )
+        else if( selectedRange.includes(byteIndizesPart.start()) )
         {
-            if( selection.startsBehind(byteIndizesPart.start()) )
+            if( selectedRange.startsBefore(byteIndizesPart) )
                 selectionFlag |= StartsBefore;
-            bool MarkingBeforeEnd = hasMarking && markedSection.start() <= selection.end();
 
-            byteIndizesPart.setEnd( MarkingBeforeEnd ? markedSection.nextBeforeStart() : selection.end() );
+            const bool hasMarkingBeforeSelectionEnd = ( hasMarking && markedRange.start() <= selectedRange.end() );
+
+            byteIndizesPart.setEnd( hasMarkingBeforeSelectionEnd ? markedRange.nextBeforeStart() : selectedRange.end() );
             positionsPart.setEndByWidth( byteIndizesPart.width() );
 
-            if( MarkingBeforeEnd )
+            if( hasMarkingBeforeSelectionEnd )
                 selectionFlag |= EndsLater;
-            if( positionsPart.end() == mLayout->lastLinePosition(lineIndex) )    selectionFlag &= ~EndsLater;
             if( positionsPart.start() == mLayout->firstLinePosition(lineIndex) ) selectionFlag &= ~StartsBefore;
+            if( positionsPart.end() == mLayout->lastLinePosition(lineIndex) )    selectionFlag &= ~EndsLater;
 
             renderSelection( painter, positionsPart, byteIndizesPart.start(), selectionFlag );
         }
@@ -646,11 +643,12 @@ void ByteArrayRowColumnRenderer::renderLinePositions( QPainter* painter, Line li
         {
             // calc end of plain text
             if( hasMarking )
-                byteIndizesPart.setEnd( markedSection.nextBeforeStart() );
+                byteIndizesPart.setEnd( markedRange.nextBeforeStart() );
             if( hasSelection )
-                byteIndizesPart.restrictEndTo( selection.nextBeforeStart() );
+                byteIndizesPart.restrictEndTo( selectedRange.nextBeforeStart() );
 
             positionsPart.setEndByWidth( byteIndizesPart.width() );
+
             renderPlain( painter, positionsPart, byteIndizesPart.start() );
         }
         byteIndizes.setStartNextBehind( byteIndizesPart );
@@ -883,59 +881,59 @@ Q_UNUSED( codingId )
 }
 
 
-bool ByteArrayRowColumnRenderer::isSelected( const AddressRange& range, AddressRange* _selection,
-                                             unsigned int* _flag ) const
+bool ByteArrayRowColumnRenderer::getNextSelectedAddressRange( AddressRange* _selection, unsigned int* _flag,
+                                                              const AddressRange& range ) const
 {
     const AddressRange* overlappingSelectedSection = mRanges->firstOverlappingSelection( range );
     if( !overlappingSelectedSection )
         return false;
 
-    AddressRange selection = *overlappingSelectedSection;
+    AddressRange selectedRange = *overlappingSelectedSection;
     unsigned int flag = 0;
 
-    // does selection start before asked range?
-    if( selection.startsBefore(range) )
+    // does selectedRange start before asked range?
+    if( selectedRange.startsBefore(range) )
     {
-        selection.setStart( range.start() );
+        selectedRange.setStart( range.start() );
         flag |= StartsBefore;
     }
 
-    // does selection go on behind asked range?
-    if( selection.endsBehind(range) )
+    // does selectedRange go on behind asked range?
+    if( selectedRange.endsBehind(range) )
     {
-        selection.setEnd( range.end() );
+        selectedRange.setEnd( range.end() );
         flag |= EndsLater;
     }
 
-    *_selection = selection;
+    *_selection = selectedRange;
     *_flag = flag;
     return true;
 }
 
 
-bool ByteArrayRowColumnRenderer::isMarked( const AddressRange& range, AddressRange* _markedSection,
-                                                unsigned int* _flag ) const
+bool ByteArrayRowColumnRenderer::getNextMarkedAddressRange( AddressRange* _markedSection, unsigned int* _flag,
+                                                            const AddressRange& range ) const
 {
     const AddressRange* overlappingMarkedSection = mRanges->overlappingMarking( range );
     if( !overlappingMarkedSection )
         return false;
 
     unsigned int flag = 0;
-    AddressRange markedSection = *overlappingMarkedSection;
+    AddressRange markedRange = *overlappingMarkedSection;
 
-    if( markedSection.startsBefore(range) )
+    if( markedRange.startsBefore(range) )
     {
-        markedSection.setStart( range.start() );
+        markedRange.setStart( range.start() );
         flag |= StartsBefore;
     }
 
-    if( markedSection.endsBehind(range) )
+    if( markedRange.endsBehind(range) )
     {
-        markedSection.setEnd( range.end() );
+        markedRange.setEnd( range.end() );
         flag |= EndsLater;
     }
 
-    *_markedSection = markedSection;
+    *_markedSection = markedRange;
     *_flag = flag;
     return true;
 }
