@@ -694,7 +694,7 @@ void ByteArrayColumnViewPrivate::updateCursor( const AbstractByteArrayColumnRend
         return;
 
     QRect cursorRect = column.byteRect( mTableCursor->coord() );
-    cursorRect.translate( -q->xOffset(), - q->yOffset() );
+    cursorRect.translate( -q->xOffset(), -q->yOffset() );
 
     q->viewport()->update( cursorRect );
 }
