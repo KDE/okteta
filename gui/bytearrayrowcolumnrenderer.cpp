@@ -376,7 +376,7 @@ void ByteArrayRowColumnRenderer::recalcX()
     // translate
     PX -= x();
     // search backwards for the first byte that is equalleft to x
-    for( LinePosition p = mLastLinePos; p>=0; --p )
+    for( LinePosition p=mLastLinePos; p>=0; --p )
         if( mLinePosLeftPixelX[p] <= PX )
             return p;
 
@@ -432,14 +432,15 @@ LinePositionRange ByteArrayRowColumnRenderer::linePositionsOfX( PixelX PX, Pixel
     return positions;
 }
 
+
 PixelX ByteArrayRowColumnRenderer::xOfLinePosition( LinePosition linePosition ) const
 {
-    return x() + (mLinePosLeftPixelX?mLinePosLeftPixelX[linePosition]:0);
+    return x() + ( mLinePosLeftPixelX ? mLinePosLeftPixelX[linePosition] : 0 );
 }
 
 PixelX ByteArrayRowColumnRenderer::rightXOfLinePosition( LinePosition linePosition ) const
 {
-    return x() + (mLinePosRightPixelX?mLinePosRightPixelX[linePosition]:0);
+    return x() + ( mLinePosRightPixelX ? mLinePosRightPixelX[linePosition] : 0 );
 }
 
 
@@ -484,9 +485,14 @@ LinePositionRange ByteArrayRowColumnRenderer::linePositionsOfColumnXs( PixelX PX
 
 
 PixelX ByteArrayRowColumnRenderer::columnXOfLinePosition( LinePosition linePosition ) const
-{ return mLinePosLeftPixelX ? mLinePosLeftPixelX[linePosition] : 0; }
+{
+    return mLinePosLeftPixelX ? mLinePosLeftPixelX[linePosition] : 0;
+}
+
 PixelX ByteArrayRowColumnRenderer::columnRightXOfLinePosition( LinePosition linePosition ) const
-{ return mLinePosRightPixelX ? mLinePosRightPixelX[linePosition] : 0; }
+{
+    return mLinePosRightPixelX ? mLinePosRightPixelX[linePosition] : 0;
+}
 
 
 PixelXRange ByteArrayRowColumnRenderer::xsOfLinePositionsInclSpaces( const LinePositionRange& linePositions ) const

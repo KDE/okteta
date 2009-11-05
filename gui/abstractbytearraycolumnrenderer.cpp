@@ -192,7 +192,7 @@ void AbstractByteArrayColumnRenderer::recalcX()
     mSpacingTrigger = noOfGroupedBytes() > 0 ? noOfGroupedBytes()-1 : mLastLinePos+1; // last ensures to never trigger the spacing
 
     PixelX newWidth = 0;
-    int groupedBytes = 0;
+    Size groupedBytes = 0;
     PixelX* PX = mLinePosLeftPixelX;
     PixelX* PRX = mLinePosRightPixelX;
     LinePosition p = 0;
@@ -265,7 +265,7 @@ LinePositionRange AbstractByteArrayColumnRenderer::linePositionsOfX( PixelX PX, 
 
     LinePositionRange positions;
     // search backwards for the first byte that is equalleft to x
-    for( LinePosition p = mLastLinePos; p>=0; --p )
+    for( LinePosition p=mLastLinePos; p>=0; --p )
         if( mLinePosLeftPixelX[p] <= PRX )
         {
             positions.setEnd( p );
@@ -283,10 +283,14 @@ LinePositionRange AbstractByteArrayColumnRenderer::linePositionsOfX( PixelX PX, 
 
 
 PixelX AbstractByteArrayColumnRenderer::xOfLinePosition( LinePosition linePosition ) const
-{ return x() + (mLinePosLeftPixelX?mLinePosLeftPixelX[linePosition]:0); }
+{
+    return x() + ( mLinePosLeftPixelX ? mLinePosLeftPixelX[linePosition] : 0 );
+}
 
 PixelX AbstractByteArrayColumnRenderer::rightXOfLinePosition( LinePosition linePosition ) const
-{ return x() + (mLinePosRightPixelX?mLinePosRightPixelX[linePosition]:0); }
+{
+    return x() + ( mLinePosRightPixelX ? mLinePosRightPixelX[linePosition] : 0 );
+}
 
 
 LinePosition AbstractByteArrayColumnRenderer::linePositionOfColumnX( PixelX PX ) const
@@ -312,7 +316,7 @@ LinePositionRange AbstractByteArrayColumnRenderer::linePositionsOfColumnXs( Pixe
 
     LinePositionRange positions;
     // search backwards for the first byte that is equalleft to x
-    for( LinePosition p = mLastLinePos; p>=0; --p )
+    for( LinePosition p=mLastLinePos; p>=0; --p )
         if( mLinePosLeftPixelX[p] <= PRX )
         {
             positions.setEnd( p );
@@ -333,6 +337,7 @@ PixelX AbstractByteArrayColumnRenderer::columnXOfLinePosition( LinePosition line
 {
     return mLinePosLeftPixelX ? mLinePosLeftPixelX[linePosition] : 0;
 }
+
 PixelX AbstractByteArrayColumnRenderer::columnRightXOfLinePosition( LinePosition linePosition ) const
 {
     return mLinePosRightPixelX ? mLinePosRightPixelX[linePosition] : 0;
@@ -342,9 +347,9 @@ PixelX AbstractByteArrayColumnRenderer::columnRightXOfLinePosition( LinePosition
 PixelXRange AbstractByteArrayColumnRenderer::xsOfLinePositionsInclSpaces( const LinePositionRange& linePositions ) const
 {
     const PixelX x = (linePositions.start()>0) ? rightXOfLinePosition( linePositions.nextBeforeStart() ) + 1 :
-                                              xOfLinePosition( linePositions.start() );
+                                                 xOfLinePosition( linePositions.start() );
     const PixelX rightX = (linePositions.end()<mLastLinePos) ? xOfLinePosition( linePositions.nextBehindEnd() ) - 1 :
-                                                            rightXOfLinePosition( linePositions.end() );
+                                                               rightXOfLinePosition( linePositions.end() );
     return PixelXRange( x, rightX );
 }
 
@@ -352,9 +357,9 @@ PixelXRange AbstractByteArrayColumnRenderer::xsOfLinePositionsInclSpaces( const 
 PixelXRange AbstractByteArrayColumnRenderer::columnXsOfLinePositionsInclSpaces( const LinePositionRange& linePositions ) const
 {
     const PixelX x = (linePositions.start()>0) ? columnRightXOfLinePosition( linePositions.nextBeforeStart() ) + 1 :
-                                              columnXOfLinePosition( linePositions.start() );
+                                                 columnXOfLinePosition( linePositions.start() );
     const PixelX rightX = (linePositions.end()<mLastLinePos) ? columnXOfLinePosition( linePositions.nextBehindEnd() ) - 1 :
-                                                            columnRightXOfLinePosition( linePositions.end() );
+                                                               columnRightXOfLinePosition( linePositions.end() );
     return PixelXRange( x, rightX  );
 }
 
@@ -593,7 +598,7 @@ void AbstractByteArrayColumnRenderer::renderMarking( QPainter* painter, const Li
 
     const QColor& baseColor = palette.base().color();
     // paint all the bytes affected
-    for( LinePosition p=linePositions.start(); p <= linePositions.end(); ++p,++byteIndex )
+    for( LinePosition p=linePositions.start(); p<=linePositions.end(); ++p,++byteIndex )
     {
         const PixelX x = columnXOfLinePosition( p );
 
