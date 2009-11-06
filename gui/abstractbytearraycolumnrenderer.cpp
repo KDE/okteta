@@ -430,6 +430,7 @@ void AbstractByteArrayColumnRenderer::renderLinePositions( QPainter* painter, Li
 
     LinePositionRange linePositions = _linePositions;
     linePositions.restrictTo( existingLinePositions );
+    const int firstLinePosition = linePositions.start();
 
     // check for leading and trailing spaces
     AddressRange byteIndizes =
@@ -462,7 +463,14 @@ void AbstractByteArrayColumnRenderer::renderLinePositions( QPainter* painter, Li
             positionsPart.setEndByWidth( markedRange.width() );
 
             if( positionsPart.start() == existingLinePositions.start() ) markingFlag &= ~StartsBefore;
+            // TODO: hack: needed because otherwise the spacing will be plain
+            else if( positionsPart.start() == firstLinePosition && selectedRange.includes(byteIndizesPart.start()) )
+                renderSelectionSpaceBehind( painter, firstLinePosition );
+
             if( positionsPart.end() == existingLinePositions.end() )     markingFlag &= ~EndsLater;
+            // TODO: hack: needed because otherwise the spacing will be plain
+            else if( positionsPart.end() == linePositions.end() && selectedRange.includes(byteIndizesPart.end()) )
+                renderSelectionSpaceBehind( painter, positionsPart.end() );
 
             renderMarking( painter, positionsPart, byteIndizesPart.start(), markingFlag );
         }
@@ -593,6 +601,14 @@ void AbstractByteArrayColumnRenderer::renderSelection( QPainter* painter, const 
     }
 }
 
+void AbstractByteArrayColumnRenderer::renderSelectionSpaceBehind( QPainter* painter, LinePosition linePosition )
+{
+    const QPalette& palette = stylist()->palette();
+    KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::Selection );
+
+    renderSpaceBehind( painter, colorScheme.background(), linePosition );
+}
+
 
 void AbstractByteArrayColumnRenderer::renderMarking( QPainter* painter, const LinePositionRange& linePositions, Address byteIndex, int flag )
 {
@@ -633,6 +649,14 @@ void AbstractByteArrayColumnRenderer::renderRange( QPainter* painter, const QBru
         ( (flag & EndsLater) ? columnXOfLinePosition( linePositions.nextBehindEnd() ) :
                                columnRightXOfLinePosition( linePositions.end() ) + 1  )
         - rangeX;
+
+    painter->fillRect( rangeX,0, rangeW,lineHeight(), brush );
+}
+
+void AbstractByteArrayColumnRenderer::renderSpaceBehind( QPainter* painter, const QBrush& brush, LinePosition linePosition )
+{
+    const PixelX rangeX = columnRightXOfLinePosition( linePosition ) + 1;
+    const PixelX rangeW = columnXOfLinePosition( linePosition+1 ) - rangeX;
 
     painter->fillRect( rangeX,0, rangeW,lineHeight(), brush );
 }

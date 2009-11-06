@@ -234,6 +234,8 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
     void renderSelection( QPainter* painter, const LinePositionRange& linePositions, Address byteIndex, int flag );
     void renderMarking( QPainter* painter, const LinePositionRange& linePositions, Address byteIndex, int flag );
     void renderRange( QPainter* painter, const QBrush& brush, const LinePositionRange& linePositions, int flag );
+    void renderSelectionSpaceBehind( QPainter* painter, LinePosition linePosition );
+    void renderSpaceBehind( QPainter* painter, const QBrush& brush, LinePosition linePosition );
     void renderBookmark( QPainter* painter, const QBrush& brush );
 
     void renderCode( QPainter* painter, const QString& code, const QColor& color ) const;
