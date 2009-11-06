@@ -630,7 +630,7 @@ void ByteArrayRowColumnRenderer::renderLinePositions( QPainter* painter, Line li
             if( positionsPart.start() == existingLinePositions.start() ) markingFlag &= ~StartsBefore;
             // TODO: hack: needed because otherwise the spacing will be plain
             else if( positionsPart.start() == firstLinePosition && selectedRange.includes(byteIndizesPart.start()) )
-                renderSelectionSpaceBehind( painter, firstLinePosition );
+                renderSelectionSpaceBehind( painter, firstLinePosition-1 );
 
             if( positionsPart.end() == existingLinePositions.end() )     markingFlag &= ~EndsLater;
             // TODO: hack: needed because otherwise the spacing will be plain
