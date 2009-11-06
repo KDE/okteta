@@ -127,10 +127,6 @@ class ByteArrayRowViewPrivate : public AbstractByteArrayViewPrivate
 
   protected: // partial operations
     void handleMouseMove( const QPoint& point );
-    /** sets ChangedRange to the range of VisibleRange that is actually changed
-      * @return true if there was a change within the visible range
-      */
-    void handleInternalDrag( QDropEvent* dropEvent );
     void handleFontChange( const QFont& oldFont );
 
   protected:
