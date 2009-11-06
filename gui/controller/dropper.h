@@ -55,7 +55,7 @@ class Dropper
     bool isActive() const;
 
   protected:
-    void handleInternalDrag( QDropEvent* dropEvent );
+    void handleInternalDrag( QDropEvent* dropEvent, AbstractByteArrayView* sourceByteArrayView );
 
   protected:
     AbstractByteArrayView* mByteArrayView;

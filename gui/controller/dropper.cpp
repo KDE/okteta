@@ -129,8 +129,10 @@ bool Dropper::handleDropEvent( QDropEvent* dropEvent )
         mIsActive = false;
 
         // is this an internal dnd?
-        if( dropEvent->source() == mByteArrayView )
-            handleInternalDrag( dropEvent );
+        AbstractByteArrayView* sourceByteArrayView = qobject_cast<AbstractByteArrayView*>( dropEvent->source() );
+        if( sourceByteArrayView
+            && sourceByteArrayView->byteArrayModel() == mByteArrayView->byteArrayModel() )
+            handleInternalDrag( dropEvent, sourceByteArrayView );
         else
         {
         //mByteArrayView->tableRanges()->removeSelection();
@@ -142,12 +144,10 @@ bool Dropper::handleDropEvent( QDropEvent* dropEvent )
 }
 
 
-void Dropper::handleInternalDrag( QDropEvent* dropEvent )
+void Dropper::handleInternalDrag( QDropEvent* dropEvent, AbstractByteArrayView* sourceByteArrayView )
 {
-    // TODO: this should 
-
     // get drag origin
-    AddressRange selection = mByteArrayView->tableRanges()->removeSelection();
+    AddressRange selection = sourceByteArrayView->tableRanges()->removeSelection();
 
     ByteArrayTableCursor* tableCursor = mByteArrayView->tableCursor();
     AbstractByteArrayModel* byteArrayModel = mByteArrayView->byteArrayModel();
@@ -174,7 +174,6 @@ void Dropper::handleInternalDrag( QDropEvent* dropEvent )
         if( success )
         {
             tableCursor->gotoCIndex( newCursorIndex );
-            mByteArrayView->tableRanges()->addChangedRange( AddressRange(insertIndex,selection.end()) );
             emit mByteArrayView->cursorPositionChanged( tableCursor->realIndex() );
         }
     }
