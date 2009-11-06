@@ -110,7 +110,20 @@ bool PODTableView::eventFilter( QObject* object, QEvent* event )
 {
     if( object == mPODTableView )
     {
-        if( event->type() == QEvent::FocusOut )
+        if( event->type() == QEvent::FocusIn )
+        {
+            QFocusEvent* focusEvent = static_cast<QFocusEvent*>( event );
+            const Qt::FocusReason focusReason = focusEvent->reason();
+            if( focusReason != Qt::ActiveWindowFocusReason
+                && focusReason != Qt::PopupFocusReason )
+            {
+                const QModelIndex current = mPODTableView->selectionModel()->currentIndex();
+                const int podId = current.row();
+                if( current.isValid() && ! mTool->valueAsString(podId).isEmpty() )
+                    mTool->markPOD( podId );
+            }
+        }
+        else if( event->type() == QEvent::FocusOut )
         {
             QFocusEvent* focusEvent = static_cast<QFocusEvent*>( event );
             const Qt::FocusReason focusReason = focusEvent->reason();
