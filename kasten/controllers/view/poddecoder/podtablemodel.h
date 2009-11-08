@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -50,13 +50,15 @@ class PODTableModel : public QAbstractTableModel
     explicit PODTableModel( PODDecoderTool* tool, QObject* parent = 0 );
     virtual ~PODTableModel();
 
-  public: // QAbstractTableModel API
+  public: // QAbstractItemModel API
     virtual int rowCount( const QModelIndex& parent ) const;
     virtual int columnCount( const QModelIndex& parent ) const;
     virtual QVariant data( const QModelIndex& index, int role ) const;
     virtual Qt::ItemFlags flags( const QModelIndex& index ) const;
     virtual QModelIndex buddy( const QModelIndex& index ) const;
     virtual QVariant headerData( int section, Qt::Orientation orientation, int role ) const;
+
+    virtual bool setData(const QModelIndex& index, const QVariant& value, int role );
 
   public Q_SLOTS:
     void onDataChanged();

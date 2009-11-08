@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -76,10 +76,10 @@ QVariant PODTableModel::data( const QModelIndex& index, int role ) const
             }
             case ValueId:
             {
-                QString valueString = mTool->valueAsString( podId );
-                if( valueString.isEmpty() )
-                    valueString = mEmptyNote;
-                result = valueString;
+                QVariant value = mTool->value( podId );
+                if( value.isNull() )
+                    value = mEmptyNote;
+                result = value;
                 break;
             }
             default:
@@ -92,7 +92,7 @@ QVariant PODTableModel::data( const QModelIndex& index, int role ) const
         const int podId = index.row();
         const int column = index.column();
         if( column == ValueId )
-            result = mTool->valueAsString( podId );
+            result = mTool->value( podId );
         break;
     }
     case Qt::TextAlignmentRole:
@@ -107,8 +107,8 @@ QVariant PODTableModel::data( const QModelIndex& index, int role ) const
         const int column = index.column();
         if( column == ValueId )
         {
-            QString valueString = mTool->valueAsString( podId );
-            if( valueString.isEmpty() )
+            const QVariant value = mTool->value( podId );
+            if( value.isNull() )
             {
                 const QPalette &palette = KApplication::kApplication()->palette();
                 const KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::View );
@@ -174,6 +174,24 @@ QVariant PODTableModel::headerData( int section, Qt::Orientation orientation, in
     }
     else
         result = QAbstractTableModel::headerData( section, orientation, role );
+
+    return result;
+}
+
+bool PODTableModel::setData( const QModelIndex& index, const QVariant& value, int role )
+{
+    bool result;
+
+    if( index.isValid() && role == Qt::EditRole )
+    {
+        const int podId = index.row();
+
+        mTool->setValue( value.toString(), podId );
+
+        result = true;
+    }
+    else
+        result = false;
 
     return result;
 }

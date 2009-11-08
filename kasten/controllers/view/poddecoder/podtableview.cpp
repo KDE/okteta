@@ -119,7 +119,7 @@ bool PODTableView::eventFilter( QObject* object, QEvent* event )
             {
                 const QModelIndex current = mPODTableView->selectionModel()->currentIndex();
                 const int podId = current.row();
-                if( current.isValid() && ! mTool->valueAsString(podId).isEmpty() )
+                if( current.isValid() && ! mTool->value(podId).isNull() )
                     mTool->markPOD( podId );
             }
         }
@@ -141,7 +141,7 @@ void PODTableView::onCurrentRowChanged( const QModelIndex& current, const QModel
     Q_UNUSED( previous )
 
     const int podId = current.row();
-    if( current.isValid() && ! mTool->valueAsString(podId).isEmpty() )
+    if( current.isValid() && ! mTool->value(podId).isNull() )
         mTool->markPOD( podId );
     else
         mTool->unmarkPOD();

@@ -107,6 +107,21 @@ set( FINDDIALOG_LIB_SRCS
   view/libfinddialog/kabstractfinddialog.cpp
 )
 set( PODDECODERCONTROLLER_SRCS
+  view/poddecoder/typecodecs/binary8codec.cpp
+  view/poddecoder/typecodecs/octal8codec.cpp
+  view/poddecoder/typecodecs/hexadecimal8codec.cpp
+  view/poddecoder/typecodecs/uint8codec.cpp
+  view/poddecoder/typecodecs/uint16codec.cpp
+  view/poddecoder/typecodecs/uint32codec.cpp
+  view/poddecoder/typecodecs/uint64codec.cpp
+  view/poddecoder/typecodecs/sint8codec.cpp
+  view/poddecoder/typecodecs/sint16codec.cpp
+  view/poddecoder/typecodecs/sint32codec.cpp
+  view/poddecoder/typecodecs/sint64codec.cpp
+  view/poddecoder/typecodecs/float32codec.cpp
+  view/poddecoder/typecodecs/float64codec.cpp
+  view/poddecoder/typecodecs/char8codec.cpp
+  view/poddecoder/typecodecs/utf8codec.cpp
   view/poddecoder/poddata.cpp
   view/poddecoder/poddecodertool.cpp
   view/poddecoder/podtablemodel.cpp

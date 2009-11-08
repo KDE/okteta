@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -36,10 +36,10 @@
 #include <QtCore/QVector>
 
 namespace Okteta {
+class AbstractTypeCodec;
 class CharCodec;
 class AbstractByteArrayModel;
 }
-class QTextCodec;
 
 
 namespace Kasten
@@ -53,13 +53,6 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
   Q_OBJECT
 
   public:
-    // TODO: add PDP endianess
-    enum ByteOrder
-    {
-        LittleEndianOrder = 0, // Intel, Alpha, ...
-        BigEndianOrder =    1 // Sun, Motorola, ...
-    };
-
     static const int MaxPODSize = sizeof(double);
     // ensure strict alignment for double as needed on some architectures (e.g. PA-RISC)
     typedef union { unsigned char Data[MaxPODSize]; double Dummy; } Aligned64Bit;
@@ -76,14 +69,15 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
     virtual void setTargetModel( AbstractModel* model );
 
   public:
-    QString valueAsString( int podId ) const;
+    QVariant value( int podId ) const;
     QString nameOfPOD( int podId ) const;
     int podCount() const;
 
     bool isUnsignedAsHex() const;
-    int byteOrder() const;
+    Okteta::ByteOrder byteOrder() const;
 
   public:
+    void setValue( const QVariant& value, int podId );
     void markPOD( int podId );
     void unmarkPOD();
 
@@ -113,23 +107,21 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
 
     ByteArrayView* mSourceByteArrayView;
 
+    QVector<Okteta::AbstractTypeCodec*> mTypeCodecs;
     Okteta::CharCodec* mCharCodec;
-    QChar mUndefinedChar;
 
   protected: // settings
-    bool mUnsignedAsHex;
+    bool mUnsignedAsHex :1;
 
   protected: // decoded data
-    PODData mPODData;
-    QVector<QString> mDecoderNameList;
-    QVector<QString> mDecoderValueList;
-    QVector<int> mDecoderByteLengthList;
-    QTextCodec* mUtf8Codec;
+    Okteta::PODData mPODData;
+    QVector<QVariant> mDecodedValueList;
+    QVector<int> mDecodedValueByteCountList;
 };
 
 
 inline bool PODDecoderTool::isUnsignedAsHex() const { return mUnsignedAsHex; }
-inline int PODDecoderTool::byteOrder()        const { return mPODData.byteOrder(); }
+inline Okteta::ByteOrder PODDecoderTool::byteOrder() const { return mPODData.byteOrder(); }
 
 }
 

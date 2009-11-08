@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,56 +25,54 @@
 
 // Okteta core
 #include <byte.h>
-// Qt
-#include <QtCore/Qt>
+#include <oktetacore.h>
 
+
+namespace Okteta
+{
 
 class PODData
 {
   public:
-    // TODO: add PDP endianess
-    enum ByteOrder
-    {
-        LittleEndianOrder = 0, // Intel, Alpha, ...
-        BigEndianOrder =    1 // Sun, Motorola, ...
-    };
-    static const ByteOrder ThisMachineEndianOrder =
-#if Q_BYTE_ORDER == Q_LITTLE_ENDIAN
-    LittleEndianOrder;
-#else
-    BigEndianOrder;
-#endif
     static const int Size = sizeof(double);
 
   public:
     PODData();
 
   public:
-    void setByteOrder( int byteOrder );
+    void setByteOrder( ByteOrder byteOrder );
     bool updateRawData( int size );
-    Okteta::Byte* rawData();
+    Byte* rawData();
 
   public:
-    const unsigned char* originalData() const;
-    const unsigned char* endianessSetData() const;
-    int byteOrder() const;
+    const Byte* originalData() const;
+    const Byte* byteOrderSetData() const;
+    ByteOrder byteOrder() const;
 
     unsigned long bitValue( int noOfBitsToRead ) const;
-    void pointers( const void **P8Bit, const void **P16Bit, const void **P32Bit, const void **P64Bit ) const;
-    void pointer( const void** P, int byteCount ) const;
+    void getPointers( const void** P8Bit, const void** P16Bit, const void** P32Bit, const void** P64Bit ) const;
+    const void* pointer( int byteCount ) const;
     int size() const;
 
   protected:
     // ensure strict alignment for double as needed on some architectures (e.g. PA-RISC)
-    typedef union { unsigned char Data[Size]; double Dummy; Okteta::Byte Bytes[Size]; } Aligned64Bit;
+    typedef union
+    {
+        double mDummy;
+        Byte mBytes[Size];
+    } Aligned64Bit;
 
   protected:
-    unsigned char* mCurrentOriginalData;
-    unsigned char* mCurrentEndiannessSetData;
+    Byte* mCurrentOriginalData;
+    Byte* mCurrentEndiannessSetData;
+
     Aligned64Bit mOriginalAligned64Bit;
-    Aligned64Bit mEndiannessSetAligned64Bit;
+    Aligned64Bit mByteOrderSetAligned64Bit;
+
     int mCurrentSize;
-    int mByteOrder;
+    ByteOrder mByteOrder;
 };
+
+}
 
 #endif
