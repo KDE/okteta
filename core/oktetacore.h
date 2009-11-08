@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Core library, part of the KDE project.
 
-    Copyright 2003 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -22,6 +22,9 @@
 
 #ifndef OKTETACORE_H
 #define OKTETACORE_H
+
+// Qt
+#include <QtCore/Qt>
 
 // here we collect all general data
 // let's see how much it gets ;)
@@ -97,6 +100,20 @@ namespace Okteta
     /** this should enable extension without breaking binary compatibility */
     MaxEncodingId=0xFFFF
   };
+
+    // TODO: add PDP endianess
+    enum ByteOrder
+    {
+        LittleEndian = 0,
+        BigEndian =    1
+    };
+    static const ByteOrder thisMachineByteOrder =
+#if Q_BYTE_ORDER == Q_LITTLE_ENDIAN
+        LittleEndian;
+#else
+        BigEndian;
+#endif
+
 }
 
 #endif
