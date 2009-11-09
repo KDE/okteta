@@ -75,6 +75,7 @@ void KValueEditor::cancelEdit()
     Okteta::ChangesDescribable *changesDescribable =
         qobject_cast<Okteta::ChangesDescribable*>( byteArrayModel );
 
+    // TODO: if !changesDescribable the changes need to be undone, too
     if( changesDescribable )
         changesDescribable->cancelGroupedChange();
 }
