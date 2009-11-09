@@ -217,9 +217,9 @@ bool KDocumentSyncManager::canClose( KAbstractDocument *document )
                 if( synchronizer )
                 {
                     AbstractSyncToRemoteJob *syncJob = synchronizer->startSyncToRemote();
-                    const bool syncFailed = JobManager::executeJob( syncJob, mWidget );
+                    const bool isSynced = JobManager::executeJob( syncJob, mWidget );
 
-                    canClose = !syncFailed;
+                    canClose = isSynced;
                 }
                 else
                     canClose = setSynchronizer( document );
