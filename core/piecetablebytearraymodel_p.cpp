@@ -235,9 +235,11 @@ void PieceTableByteArrayModelPrivate::revertToVersionByIndex( int versionIndex )
 
 void PieceTableByteArrayModelPrivate::openGroupedChange( const QString& description )
 {
+    const bool isModifiedBefore = isModified();
     mBeforeGroupedChangeVersionIndex = mPieceTable.appliedChangesCount();
     mPieceTable.openGroupedChange( description );
 
+    if( ! isModifiedBefore ) emit p->modifiedChanged( true );
     emit p->headVersionChanged( mPieceTable.changesCount() );
 }
 
