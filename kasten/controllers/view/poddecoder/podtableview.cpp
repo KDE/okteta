@@ -24,6 +24,7 @@
 
 // controller
 #include "podtablemodel.h"
+#include "poddelegate.h"
 #include "poddecodertool.h"
 // KDE
 #include <KComboBox>
@@ -55,6 +56,7 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
     mPODTableView->setItemsExpandable( false );
     mPODTableView->setUniformRowHeights( true );
     mPODTableView->setAllColumnsShowFocus( true );
+    mPODTableView->setItemDelegate( new PODDelegate(mTool) );
 //     mPODTableView->setEditTriggers( QAbstractItemView::AllEditTriggers );
     mPODTableView->setDragEnabled( true );
     mPODTableView->setSortingEnabled( false );

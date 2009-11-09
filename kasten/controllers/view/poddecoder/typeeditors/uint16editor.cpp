@@ -20,33 +20,30 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef HEXADECIMALABLE_H
-#define HEXADECIMALABLE_H
+#include "uint16editor.h"
 
-namespace Okteta
+// C++
+#include <limits>
+
+
+UInt16Editor::UInt16Editor( QWidget* parent )
+  : QSpinBox( parent )
 {
+    const quint16 int16Max = std::numeric_limits<quint16>::max();
+    const quint16 int16Min = std::numeric_limits<quint16>::min();
 
-class Hexadecimalable
-{
-  protected:
-    Hexadecimalable();
-
-  public:
-    bool asHex() const;
-
-  public:
-    void setAsHex( bool asHex );
-
-  protected:
-    bool mAsHex :1;
-};
-
-
-inline Hexadecimalable::Hexadecimalable() : mAsHex( true ) {}
-
-inline bool Hexadecimalable::asHex() const { return mAsHex; }
-inline void Hexadecimalable::setAsHex( bool asHex ) { mAsHex = asHex; }
-
+    setRange( int16Min, int16Max );
 }
 
-#endif
+void UInt16Editor::setData( UInt16 data )
+{
+    setValue( data.value );
+}
+
+UInt16 UInt16Editor::data() const
+{
+//     interpretText();
+    return value();
+}
+
+UInt16Editor::~UInt16Editor() {}

@@ -25,13 +25,12 @@
 
 // tool
 #include "../abstracttypecodec.h"
-#include "../hexadecimalable.h"
 
 
 namespace Okteta
 {
 
-class UInt64Codec : public AbstractTypeCodec, public Hexadecimalable
+class UInt64Codec : public AbstractTypeCodec
 {
   public:
     UInt64Codec();

@@ -20,37 +20,30 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "uint8codec.h"
+#include "uint64editor.h"
 
-// tool
-#include "../types/uint8.h"
-#include "../poddata.h"
-// KDE
-#include <KLocale>
+// C++
+#include <limits>
 
 
-namespace Okteta
+UInt64Editor::UInt64Editor( QWidget* parent )
+  : QLineEdit( parent )
 {
+//     const quint64 int64Max = std::numeric_limits<quint64>::max();
+//     const quint64 int64Min = std::numeric_limits<quint64>::min();
 
-UInt8Codec::UInt8Codec()
-  : AbstractTypeCodec( i18nc("@label:textbox","Unsigned 8-bit") )
-{}
-
-QVariant UInt8Codec::value( const PODData& data, int* byteCount ) const
-{
-    const quint8* pointer = (quint8*)data.pointer( 1 );
-
-    *byteCount = pointer ? 1 : 0;
-    return pointer ? QVariant::fromValue<UInt8>( UInt8(*pointer) ) : QVariant();
+//     setRange( int64Min, int64Max );
 }
 
-QByteArray UInt8Codec::valueToBytes( const QVariant& value ) const
+void UInt64Editor::setData( UInt64 data )
 {
-    const quint8 number = value.value<UInt8>().value;
-
-    return QByteArray( (const char*)&number, sizeof(quint8) );
+    setText( data.toString(false) );
 }
 
-UInt8Codec::~UInt8Codec() {}
-
+UInt64 UInt64Editor::data() const
+{
+//     interpretText();
+    return text().toULongLong();
 }
+
+UInt64Editor::~UInt64Editor() {}

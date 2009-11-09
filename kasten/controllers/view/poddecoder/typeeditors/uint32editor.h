@@ -20,37 +20,28 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "uint8codec.h"
+#ifndef UINT32EDITOR_H
+#define UINT32EDITOR_H
 
-// tool
-#include "../types/uint8.h"
-#include "../poddata.h"
-// KDE
-#include <KLocale>
+// lib
+#include "../types/uint32.h"
+// Qt
+#include <QtGui/QLineEdit>
 
 
-namespace Okteta
+class UInt32Editor : public QLineEdit
 {
+  Q_OBJECT
+  Q_PROPERTY( UInt32 data READ data WRITE setData USER true )
 
-UInt8Codec::UInt8Codec()
-  : AbstractTypeCodec( i18nc("@label:textbox","Unsigned 8-bit") )
-{}
+  public:
+    explicit UInt32Editor( QWidget* parent );
 
-QVariant UInt8Codec::value( const PODData& data, int* byteCount ) const
-{
-    const quint8* pointer = (quint8*)data.pointer( 1 );
+    virtual ~UInt32Editor();
 
-    *byteCount = pointer ? 1 : 0;
-    return pointer ? QVariant::fromValue<UInt8>( UInt8(*pointer) ) : QVariant();
-}
+  public:
+    void setData( UInt32 data );
+    UInt32 data() const;
+};
 
-QByteArray UInt8Codec::valueToBytes( const QVariant& value ) const
-{
-    const quint8 number = value.value<UInt8>().value;
-
-    return QByteArray( (const char*)&number, sizeof(quint8) );
-}
-
-UInt8Codec::~UInt8Codec() {}
-
-}
+#endif

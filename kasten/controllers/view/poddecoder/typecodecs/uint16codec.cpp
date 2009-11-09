@@ -23,6 +23,7 @@
 #include "uint16codec.h"
 
 // tool
+#include "../types/uint16.h"
 #include "../poddata.h"
 // KDE
 #include <KLocale>
@@ -40,18 +41,14 @@ QVariant UInt16Codec::value( const PODData& data, int* byteCount ) const
     const quint16* pointer = (quint16*)data.pointer( 2 );
 
     *byteCount = pointer ? 2 : 0;
-    return ( pointer == 0 ) ? QString() :
-           mAsHex ?           QString::fromLatin1( "0x%1" ).arg( *pointer, 4, 16, QChar::fromLatin1('0') ) :
-                              QString::number( *pointer );
+    return pointer ? QVariant::fromValue<UInt16>( UInt16(*pointer) ) : QVariant();
 }
 
 QByteArray UInt16Codec::valueToBytes( const QVariant& value ) const
 {
-    bool ok;
+    const quint16 number = value.value<UInt16>().value;
 
-    const quint16 number = value.toString().toUShort( &ok, mAsHex ? 16 : 10 );
-
-    return ok ? QByteArray( (const char*)&number, sizeof(quint16) ) : QByteArray();
+    return QByteArray( (const char*)&number, sizeof(quint16) );
 }
 
 UInt16Codec::~UInt16Codec() {}

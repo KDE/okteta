@@ -23,6 +23,7 @@
 #include "float64codec.h"
 
 // tool
+#include "../types/float64.h"
 #include "../poddata.h"
 // KDE
 #include <KLocale>
@@ -40,16 +41,14 @@ QVariant Float64Codec::value( const PODData& data, int* byteCount ) const
     const double* pointer = (double*)data.pointer( 8 );
 
     *byteCount = pointer ? 8 : 0;
-    return pointer ? QString::number( *pointer, 'e', 16 ) : QString();
+    return pointer ? QVariant::fromValue<Float64>( Float64(*pointer) ) : QVariant();
 }
 
 QByteArray Float64Codec::valueToBytes( const QVariant& value ) const
 {
-    bool ok;
+    const double number = value.value<Float64>().value;
 
-    const double number = value.toString().toDouble( &ok );
-
-    return ok ? QByteArray( (const char*)&number, sizeof(double) ) : QByteArray();
+    return QByteArray( (const char*)&number, sizeof(double) );
 }
 
 Float64Codec::~Float64Codec() {}

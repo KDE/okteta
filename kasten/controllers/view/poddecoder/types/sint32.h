@@ -20,37 +20,33 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "uint8codec.h"
+#ifndef SINT32_H
+#define SINT32_H
 
-// tool
-#include "../types/uint8.h"
-#include "../poddata.h"
-// KDE
-#include <KLocale>
+// Qt
+#include <QtCore/QMetaType>
+#include <QtCore/QString>
 
 
-namespace Okteta
+struct SInt32
 {
+  public:
+    SInt32( qint32 v );
+    SInt32();
 
-UInt8Codec::UInt8Codec()
-  : AbstractTypeCodec( i18nc("@label:textbox","Unsigned 8-bit") )
-{}
+  public:
+    QString toString() const;
 
-QVariant UInt8Codec::value( const PODData& data, int* byteCount ) const
-{
-    const quint8* pointer = (quint8*)data.pointer( 1 );
+  public:
+    qint32 value;
+};
 
-    *byteCount = pointer ? 1 : 0;
-    return pointer ? QVariant::fromValue<UInt8>( UInt8(*pointer) ) : QVariant();
-}
 
-QByteArray UInt8Codec::valueToBytes( const QVariant& value ) const
-{
-    const quint8 number = value.value<UInt8>().value;
+inline SInt32::SInt32() : value( 0 ) {}
+inline SInt32::SInt32( qint32 v ) : value( v ) {}
 
-    return QByteArray( (const char*)&number, sizeof(quint8) );
-}
+inline QString SInt32::toString() const { return QString::number( value ); }
 
-UInt8Codec::~UInt8Codec() {}
+Q_DECLARE_METATYPE( SInt32 )
 
-}
+#endif

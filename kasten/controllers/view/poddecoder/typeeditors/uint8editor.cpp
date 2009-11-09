@@ -20,37 +20,30 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "uint8codec.h"
+#include "uint8editor.h"
 
-// tool
-#include "../types/uint8.h"
-#include "../poddata.h"
-// KDE
-#include <KLocale>
+// C++
+#include <limits>
 
 
-namespace Okteta
+UInt8Editor::UInt8Editor( QWidget* parent )
+  : QSpinBox( parent )
 {
+    const quint8 int8Max = std::numeric_limits<quint8>::max();
+    const quint8 int8Min = std::numeric_limits<quint8>::min();
 
-UInt8Codec::UInt8Codec()
-  : AbstractTypeCodec( i18nc("@label:textbox","Unsigned 8-bit") )
-{}
-
-QVariant UInt8Codec::value( const PODData& data, int* byteCount ) const
-{
-    const quint8* pointer = (quint8*)data.pointer( 1 );
-
-    *byteCount = pointer ? 1 : 0;
-    return pointer ? QVariant::fromValue<UInt8>( UInt8(*pointer) ) : QVariant();
+    setRange( int8Min, int8Max );
 }
 
-QByteArray UInt8Codec::valueToBytes( const QVariant& value ) const
+void UInt8Editor::setData( UInt8 data )
 {
-    const quint8 number = value.value<UInt8>().value;
-
-    return QByteArray( (const char*)&number, sizeof(quint8) );
+    setValue( data.value );
 }
 
-UInt8Codec::~UInt8Codec() {}
-
+UInt8 UInt8Editor::data() const
+{
+//     interpretText();
+    return value();
 }
+
+UInt8Editor::~UInt8Editor() {}

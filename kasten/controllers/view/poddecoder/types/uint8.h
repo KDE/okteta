@@ -20,37 +20,38 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "uint8codec.h"
+#ifndef UINT8_H
+#define UINT8_H
 
-// tool
-#include "../types/uint8.h"
-#include "../poddata.h"
-// KDE
-#include <KLocale>
+// Qt
+#include <QtCore/QMetaType>
+#include <QtCore/QString>
 
 
-namespace Okteta
+struct UInt8
 {
+  public:
+    UInt8( quint8 v );
+    UInt8();
 
-UInt8Codec::UInt8Codec()
-  : AbstractTypeCodec( i18nc("@label:textbox","Unsigned 8-bit") )
-{}
+  public:
+    QString toString( bool asHex ) const;
 
-QVariant UInt8Codec::value( const PODData& data, int* byteCount ) const
+  public:
+    quint8 value;
+};
+
+
+inline UInt8::UInt8() : value( 0 ) {}
+inline UInt8::UInt8( quint8 v ) : value( v ) {}
+
+inline QString UInt8::toString( bool asHex ) const
 {
-    const quint8* pointer = (quint8*)data.pointer( 1 );
-
-    *byteCount = pointer ? 1 : 0;
-    return pointer ? QVariant::fromValue<UInt8>( UInt8(*pointer) ) : QVariant();
+    return asHex ? QString::fromLatin1( "0x%1" ).arg( value, 2, 16, QChar::fromLatin1('0') ) :
+                   QString::number( value );
 }
 
-QByteArray UInt8Codec::valueToBytes( const QVariant& value ) const
-{
-    const quint8 number = value.value<UInt8>().value;
 
-    return QByteArray( (const char*)&number, sizeof(quint8) );
-}
+Q_DECLARE_METATYPE( UInt8 )
 
-UInt8Codec::~UInt8Codec() {}
-
-}
+#endif

@@ -20,37 +20,36 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "uint8codec.h"
+#include "float32editor.h"
 
-// tool
-#include "../types/uint8.h"
-#include "../poddata.h"
-// KDE
-#include <KLocale>
+// Qt
+#include <QtGui/QDoubleValidator>
+// C++
+#include <limits>
 
 
-namespace Okteta
+Float32Editor::Float32Editor( QWidget* parent )
+  : QLineEdit( parent )
 {
+    const float floatMax = std::numeric_limits<float>::max();
+    const float floatMin = std::numeric_limits<float>::min();
 
-UInt8Codec::UInt8Codec()
-  : AbstractTypeCodec( i18nc("@label:textbox","Unsigned 8-bit") )
-{}
+    QDoubleValidator* validator = new QDoubleValidator( this );
+    validator->setNotation( QDoubleValidator::ScientificNotation );
+    validator->setRange( floatMin, floatMax );
 
-QVariant UInt8Codec::value( const PODData& data, int* byteCount ) const
-{
-    const quint8* pointer = (quint8*)data.pointer( 1 );
-
-    *byteCount = pointer ? 1 : 0;
-    return pointer ? QVariant::fromValue<UInt8>( UInt8(*pointer) ) : QVariant();
+    setValidator( validator );
 }
 
-QByteArray UInt8Codec::valueToBytes( const QVariant& value ) const
+void Float32Editor::setData( Float32 data )
 {
-    const quint8 number = value.value<UInt8>().value;
-
-    return QByteArray( (const char*)&number, sizeof(quint8) );
+    setText( data.toString() );
 }
 
-UInt8Codec::~UInt8Codec() {}
-
+Float32 Float32Editor::data() const
+{
+//     interpretText();
+    return text().toFloat();
 }
+
+Float32Editor::~Float32Editor() {}

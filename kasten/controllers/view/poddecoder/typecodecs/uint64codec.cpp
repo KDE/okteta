@@ -23,6 +23,7 @@
 #include "uint64codec.h"
 
 // tool
+#include "../types/uint64.h"
 #include "../poddata.h"
 // KDE
 #include <KLocale>
@@ -40,18 +41,14 @@ QVariant UInt64Codec::value( const PODData& data, int* byteCount ) const
     const quint64* pointer = (quint64*)data.pointer( 8 );
 
     *byteCount = pointer ? 8 : 0;
-    return ( pointer == 0 ) ? QString() :
-           mAsHex ?           QString::fromLatin1( "0x%1" ).arg( *pointer, 16, 16, QChar::fromLatin1('0') ) :
-                              QString::number( *pointer );
+    return pointer ? QVariant::fromValue<UInt64>( UInt64(*pointer) ) : QVariant();
 }
 
 QByteArray UInt64Codec::valueToBytes( const QVariant& value ) const
 {
-    bool ok;
+    const quint64 number = value.value<UInt64>().value;
 
-    const quint64 number = value.toString().toULongLong( &ok, mAsHex ? 16 : 10 );
-
-    return ok ? QByteArray( (const char*)&number, sizeof(quint64) ) : QByteArray();
+    return QByteArray( (const char*)&number, sizeof(quint64) );
 }
 
 UInt64Codec::~UInt64Codec() {}

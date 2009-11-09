@@ -44,6 +44,7 @@
 // Okteta core
 #include <charcodec.h>
 #include <abstractbytearraymodel.h>
+#include <changesdescribable.h>
 // KDE
 #include <KLocale>
 
@@ -147,12 +148,6 @@ void PODDecoderTool::setUnsignedAsHex( bool unsignedAsHex )
         return;
 
     mUnsignedAsHex = unsignedAsHex;
-    foreach( Okteta::AbstractTypeCodec* codec, mTypeCodecs )
-    {
-        Okteta::Hexadecimalable* hexadecimalable = dynamic_cast<Okteta::Hexadecimalable*>( codec );
-        if( hexadecimalable )
-            hexadecimalable->setAsHex( mUnsignedAsHex );
-    }
 
     updateData();
 }
@@ -205,9 +200,10 @@ QVariant PODDecoderTool::value( int podId ) const
 }
 
 
-void PODDecoderTool::setValue( const QVariant& value, int podId )
+void PODDecoderTool::setData( const QVariant& data, int podId )
 {
-    QByteArray bytes = mTypeCodecs[podId]->valueToBytes( value );
+    Okteta::AbstractTypeCodec* typeCodec = mTypeCodecs[podId];
+    QByteArray bytes = typeCodec->valueToBytes( data );
 
     const int bytesSize = bytes.size();
     if( bytesSize == 0 )
@@ -226,9 +222,15 @@ void PODDecoderTool::setValue( const QVariant& value, int podId )
         }
     }
 
-    // TODO: mark as change by pod tool
-    mByteArrayModel->replace( Okteta::AddressRange::fromWidth(mCursorIndex,bytesSize), bytes );
+    Okteta::ChangesDescribable* changesDescribable =
+        qobject_cast<Okteta::ChangesDescribable*>( mByteArrayModel );
+
+    if( changesDescribable )
+        changesDescribable->openGroupedChange( i18nc("Edited as %datatype","Edited as %1", typeCodec->name()) );
     // TODO: what to do for types with dynamic size, like UTF-8? Might leave bytes out, or overwrite news ones
+    mByteArrayModel->replace( Okteta::AddressRange::fromWidth(mCursorIndex,bytesSize), bytes );
+    if( changesDescribable )
+        changesDescribable->closeGroupedChange();
 }
 
 void PODDecoderTool::updateData()

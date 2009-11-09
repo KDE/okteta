@@ -23,6 +23,7 @@
 #include "utf8codec.h"
 
 // tool
+#include "../types/utf8.h"
 #include "../poddata.h"
 // KDE
 #include <KLocale>
@@ -63,7 +64,7 @@ QVariant Utf8Codec::value( const PODData& data, int* byteCount ) const
         }
     }
 
-    return isUtf8 ? utf8 : QString();
+    return isUtf8 ? QVariant::fromValue<Utf8>( Utf8(utf8[0]) ) : QVariant();
 }
 
 QByteArray Utf8Codec::valueToBytes( const QVariant& value ) const

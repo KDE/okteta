@@ -20,37 +20,28 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "uint8codec.h"
+#ifndef SINT64EDITOR_H
+#define SINT64EDITOR_H
 
-// tool
-#include "../types/uint8.h"
-#include "../poddata.h"
-// KDE
-#include <KLocale>
+// lib
+#include "../types/sint64.h"
+// Qt
+#include <QtGui/QLineEdit>
 
 
-namespace Okteta
+class SInt64Editor : public QLineEdit
 {
+  Q_OBJECT
+  Q_PROPERTY( SInt64 data READ data WRITE setData USER true )
 
-UInt8Codec::UInt8Codec()
-  : AbstractTypeCodec( i18nc("@label:textbox","Unsigned 8-bit") )
-{}
+  public:
+    explicit SInt64Editor( QWidget* parent );
 
-QVariant UInt8Codec::value( const PODData& data, int* byteCount ) const
-{
-    const quint8* pointer = (quint8*)data.pointer( 1 );
+    virtual ~SInt64Editor();
 
-    *byteCount = pointer ? 1 : 0;
-    return pointer ? QVariant::fromValue<UInt8>( UInt8(*pointer) ) : QVariant();
-}
+  public:
+    void setData( SInt64 data );
+    SInt64 data() const;
+};
 
-QByteArray UInt8Codec::valueToBytes( const QVariant& value ) const
-{
-    const quint8 number = value.value<UInt8>().value;
-
-    return QByteArray( (const char*)&number, sizeof(quint8) );
-}
-
-UInt8Codec::~UInt8Codec() {}
-
-}
+#endif

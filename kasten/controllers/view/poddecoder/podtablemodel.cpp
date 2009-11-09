@@ -178,7 +178,7 @@ QVariant PODTableModel::headerData( int section, Qt::Orientation orientation, in
     return result;
 }
 
-bool PODTableModel::setData( const QModelIndex& index, const QVariant& value, int role )
+bool PODTableModel::setData( const QModelIndex& index, const QVariant& data, int role )
 {
     bool result;
 
@@ -186,7 +186,7 @@ bool PODTableModel::setData( const QModelIndex& index, const QVariant& value, in
     {
         const int podId = index.row();
 
-        mTool->setValue( value.toString(), podId );
+        mTool->setData( data, podId );
 
         result = true;
     }

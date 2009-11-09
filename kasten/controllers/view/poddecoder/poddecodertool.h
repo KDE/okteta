@@ -75,9 +75,10 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
 
     bool isUnsignedAsHex() const;
     Okteta::ByteOrder byteOrder() const;
+    Okteta::CharCodec* charCodec() const;
 
   public:
-    void setValue( const QVariant& value, int podId );
+    void setData( const QVariant& data, int podId );
     void markPOD( int podId );
     void unmarkPOD();
 
@@ -122,6 +123,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
 
 inline bool PODDecoderTool::isUnsignedAsHex() const { return mUnsignedAsHex; }
 inline Okteta::ByteOrder PODDecoderTool::byteOrder() const { return mPODData.byteOrder(); }
+inline Okteta::CharCodec* PODDecoderTool::charCodec() const { return mCharCodec; }
 
 }
 

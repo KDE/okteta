@@ -122,9 +122,25 @@ set( PODDECODERCONTROLLER_SRCS
   view/poddecoder/typecodecs/float64codec.cpp
   view/poddecoder/typecodecs/char8codec.cpp
   view/poddecoder/typecodecs/utf8codec.cpp
+  view/poddecoder/typeeditors/binary8editor.cpp
+  view/poddecoder/typeeditors/octal8editor.cpp
+  view/poddecoder/typeeditors/hexadecimal8editor.cpp
+  view/poddecoder/typeeditors/uint8editor.cpp
+  view/poddecoder/typeeditors/uint16editor.cpp
+  view/poddecoder/typeeditors/uint32editor.cpp
+  view/poddecoder/typeeditors/uint64editor.cpp
+  view/poddecoder/typeeditors/sint8editor.cpp
+  view/poddecoder/typeeditors/sint16editor.cpp
+  view/poddecoder/typeeditors/sint32editor.cpp
+  view/poddecoder/typeeditors/sint64editor.cpp
+  view/poddecoder/typeeditors/float32editor.cpp
+  view/poddecoder/typeeditors/float64editor.cpp
+  view/poddecoder/typeeditors/char8editor.cpp
+  view/poddecoder/typeeditors/utf8editor.cpp
   view/poddecoder/poddata.cpp
   view/poddecoder/poddecodertool.cpp
   view/poddecoder/podtablemodel.cpp
+  view/poddecoder/poddelegate.cpp
   view/poddecoder/podtableview.cpp
   view/poddecoder/poddecodertoolview.cpp
 )

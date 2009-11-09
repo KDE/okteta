@@ -23,6 +23,7 @@
 #include "sint32codec.h"
 
 // tool
+#include "../types/sint32.h"
 #include "../poddata.h"
 // KDE
 #include <KLocale>
@@ -40,16 +41,14 @@ QVariant SInt32Codec::value( const PODData& data, int* byteCount ) const
     const qint32* pointer = (qint32*)data.pointer( 4 );
 
     *byteCount = pointer ? 4 : 0;
-    return pointer ? QString::number( *pointer ) : QString();
+    return pointer ? QVariant::fromValue<SInt32>( SInt32(*pointer) ) : QVariant();
 }
 
 QByteArray SInt32Codec::valueToBytes( const QVariant& value ) const
 {
-    bool ok;
+    const qint32 number = value.value<SInt32>().value;
 
-    const qint32 number = value.toString().toInt( &ok );
-
-    return ok ? QByteArray( (const char*)&number, sizeof(qint32) ) : QByteArray();
+    return QByteArray( (const char*)&number, sizeof(qint32) );
 }
 
 SInt32Codec::~SInt32Codec() {}
