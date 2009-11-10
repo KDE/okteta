@@ -42,6 +42,10 @@ class Binary8Editor : public QSpinBox
   public:
     void setData( Binary8 data );
     Binary8 data() const;
+
+  protected: // QSpinBox API
+    virtual QString textFromValue( int value ) const;
+    virtual int valueFromText( const QString& text ) const;
 };
 
 #endif

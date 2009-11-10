@@ -42,6 +42,10 @@ class Hexadecimal8Editor : public QSpinBox
   public:
     void setData( Hexadecimal8 data );
     Hexadecimal8 data() const;
+
+  protected: // QSpinBox API
+    virtual QString textFromValue( int value ) const;
+    virtual int valueFromText( const QString& text ) const;
 };
 
 #endif

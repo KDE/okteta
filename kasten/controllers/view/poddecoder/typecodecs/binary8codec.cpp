@@ -23,6 +23,7 @@
 #include "binary8codec.h"
 
 // tool
+#include "../types/binary8.h"
 #include "../poddata.h"
 // KDE
 #include <KLocale>
@@ -40,16 +41,14 @@ QVariant Binary8Codec::value( const PODData& data, int* byteCount ) const
     const unsigned char* pointer = (unsigned char*)data.pointer( 1 );
 
     *byteCount = pointer ? 1 : 0;
-    return pointer ? QString::fromLatin1( "%1" ).arg( *pointer, 8, 2, QChar::fromLatin1('0') ) : QString();
+    return pointer ? QVariant::fromValue<Binary8>( Binary8(*pointer) ) : QVariant();
 }
 
 QByteArray Binary8Codec::valueToBytes( const QVariant& value ) const
 {
-    bool ok;
+    const quint8 number = value.value<Binary8>().value;
 
-    const quint8 number = value.toString().toUShort( &ok, 2 );
-
-    return ok ? QByteArray( (const char*)&number, sizeof(quint8) ) : QByteArray();
+    return QByteArray( (const char*)&number, sizeof(quint8) );
 }
 
 Binary8Codec::~Binary8Codec() {}

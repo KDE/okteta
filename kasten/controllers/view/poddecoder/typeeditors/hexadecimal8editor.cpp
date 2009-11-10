@@ -22,6 +22,10 @@
 
 #include "hexadecimal8editor.h"
 
+// KDE
+#include <KIntValidator>
+// Qt
+#include <QtGui/QLineEdit>
 // C++
 #include <limits>
 
@@ -33,6 +37,8 @@ Hexadecimal8Editor::Hexadecimal8Editor( QWidget* parent )
     const quint8 int8Min = std::numeric_limits<quint8>::min();
 
     setRange( int8Min, int8Max );
+
+    lineEdit()->setValidator( new KIntValidator(this,16) );
 }
 
 void Hexadecimal8Editor::setData( Hexadecimal8 data )
@@ -44,6 +50,16 @@ Hexadecimal8 Hexadecimal8Editor::data() const
 {
 //     interpretText();
     return value();
+}
+
+QString Hexadecimal8Editor::textFromValue( int value ) const
+{
+    return QString::number( value, 16 );
+}
+
+int Hexadecimal8Editor::valueFromText( const QString& text ) const
+{
+    return text.toInt( 0, 16 );
 }
 
 Hexadecimal8Editor::~Hexadecimal8Editor() {}

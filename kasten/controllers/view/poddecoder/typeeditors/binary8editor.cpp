@@ -22,6 +22,10 @@
 
 #include "binary8editor.h"
 
+// KDE
+#include <KIntValidator>
+// Qt
+#include <QtGui/QLineEdit>
 // C++
 #include <limits>
 
@@ -33,6 +37,8 @@ Binary8Editor::Binary8Editor( QWidget* parent )
     const quint8 int8Min = std::numeric_limits<quint8>::min();
 
     setRange( int8Min, int8Max );
+
+    lineEdit()->setValidator( new KIntValidator(this,2) );
 }
 
 void Binary8Editor::setData( Binary8 data )
@@ -44,6 +50,16 @@ Binary8 Binary8Editor::data() const
 {
 //     interpretText();
     return value();
+}
+
+QString Binary8Editor::textFromValue( int value ) const
+{
+    return QString::number( value, 2 );
+}
+
+int Binary8Editor::valueFromText( const QString& text ) const
+{
+    return text.toInt( 0, 2 );
 }
 
 Binary8Editor::~Binary8Editor() {}

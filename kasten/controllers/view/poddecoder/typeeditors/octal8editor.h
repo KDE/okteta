@@ -42,6 +42,10 @@ class Octal8Editor : public QSpinBox
   public:
     void setData( Octal8 data );
     Octal8 data() const;
+
+  protected: // QSpinBox API
+    virtual QString textFromValue( int value ) const;
+    virtual int valueFromText( const QString& text ) const;
 };
 
 #endif

@@ -23,6 +23,7 @@
 #include "hexadecimal8codec.h"
 
 // tool
+#include "../types/hexadecimal8.h"
 #include "../poddata.h"
 // KDE
 #include <KLocale>
@@ -40,16 +41,14 @@ QVariant Hexadecimal8Codec::value( const PODData& data, int* byteCount ) const
     const unsigned char* pointer = (unsigned char*)data.pointer( 1 );
 
     *byteCount = pointer ? 1 : 0;
-    return pointer ? QString::fromLatin1( "%1" ).arg( *pointer, 2, 16, QChar::fromLatin1('0') ) : QString();
+    return pointer ? QVariant::fromValue<Hexadecimal8>( Hexadecimal8(*pointer) ) : QVariant();
 }
 
 QByteArray Hexadecimal8Codec::valueToBytes( const QVariant& value ) const
 {
-    bool ok;
+    const quint8 number = value.value<Hexadecimal8>().value;
 
-    const quint8 number = value.toString().toUShort( &ok, 16 );
-
-    return ok ? QByteArray( (const char*)&number, sizeof(quint8) ) : QByteArray();
+    return QByteArray( (const char*)&number, sizeof(quint8) );
 }
 
 Hexadecimal8Codec::~Hexadecimal8Codec() {}
