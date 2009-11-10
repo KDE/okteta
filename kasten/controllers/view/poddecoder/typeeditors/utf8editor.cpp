@@ -22,11 +22,39 @@
 
 #include "utf8editor.h"
 
+// Qt
+#include <QtGui/QValidator>
+
+
+class Utf8CharValidator : public QValidator
+{
+  public:
+    explicit Utf8CharValidator( QObject* parent = 0 );
+
+    virtual ~Utf8CharValidator();
+
+  public: // QValidator API
+    virtual QValidator::State validate( QString& input, int& pos ) const;
+};
+
+inline Utf8CharValidator::Utf8CharValidator( QObject* parent ) : QValidator( parent ) {}
+
+
+QValidator::State Utf8CharValidator::validate( QString& input, int& pos ) const
+{
+    Q_UNUSED( pos )
+
+    const int stringLength = input.length();
+    return ( stringLength == 0 ) ? QValidator::Intermediate : QValidator::Acceptable;
+}
+
+Utf8CharValidator::~Utf8CharValidator() {}
+
 
 Utf8Editor::Utf8Editor( QWidget* parent )
   : QLineEdit( parent )
 {
-    // TODO: add validator which makes empty text invalid
+    setValidator( new Utf8CharValidator(this) );
     setMaxLength( 1 );
 }
 
