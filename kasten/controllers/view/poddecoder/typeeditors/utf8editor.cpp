@@ -22,29 +22,23 @@
 
 #include "utf8editor.h"
 
-// C++
-#include <limits>
-
 
 Utf8Editor::Utf8Editor( QWidget* parent )
   : QLineEdit( parent )
 {
-//     const qint8 int8Max = std::numeric_limits<qint8>::max();
-//     const qint8 int8Min = std::numeric_limits<qint8>::min();
-
-//     setRange( int8Min, int8Max );
+    // TODO: add validator which makes empty text invalid
+    setMaxLength( 1 );
 }
 
 void Utf8Editor::setData( Utf8 data )
 {
-//     setValue( data.value );
+    setText( data.value );
 }
 
 Utf8 Utf8Editor::data() const
 {
-    // TODO
-//     interpretText();
-    return Utf8();//value();
+    const QString t = text();
+    return Utf8( t.isEmpty() ? QChar(0) : t[0] );
 }
 
 Utf8Editor::~Utf8Editor() {}

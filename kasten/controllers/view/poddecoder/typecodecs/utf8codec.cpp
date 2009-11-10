@@ -69,14 +69,9 @@ QVariant Utf8Codec::value( const PODData& data, int* byteCount ) const
 
 QByteArray Utf8Codec::valueToBytes( const QVariant& value ) const
 {
-    QByteArray result;
+    const QChar valueChar = value.value<Utf8>().value;
 
-    const QString string = value.toString().left( 1 );
-    bool success = ! string.isEmpty();
-    if( success )
-        result = mUtf8Codec->fromUnicode( string );
-
-    return result;
+    return mUtf8Codec->fromUnicode( valueChar );
 }
 
 Utf8Codec::~Utf8Codec() {}
