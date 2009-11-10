@@ -267,7 +267,7 @@ void PieceTableByteArrayModel::Private::openGroupedChange( const QString &descri
     mBeforeGroupedChangeVersionIndex = mPieceTable.appliedChangesCount();
     mPieceTable.openGroupedChange( description );
 
-    if( ! isModifiedBefore ) emit p->modifiedChanged( true );
+    if( ! isModifiedBefore ) emit p->modificationChanged( true );
     emit p->headVersionChanged( mPieceTable.changesCount() );
 }
 
