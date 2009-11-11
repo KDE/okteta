@@ -76,105 +76,105 @@ QWidget* PODDelegate::createEditor( QWidget* parent, const QStyleOptionViewItem&
     {
         Binary8Editor* editor = new Binary8Editor( parent );
         connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onBinary8EditorDone()) );
+                 SLOT(onEditorDone()) );
         result = editor;
     }
     else if( data.canConvert<Octal8>() )
     {
         Octal8Editor* editor = new Octal8Editor( parent );
         connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onOctal8EditorDone()) );
+                 SLOT(onEditorDone()) );
         result = editor;
     }
     else if( data.canConvert<Hexadecimal8>() )
     {
         Hexadecimal8Editor* editor = new Hexadecimal8Editor( parent );
         connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onHexadecimal8EditorDone()) );
+                 SLOT(onEditorDone()) );
         result = editor;
     }
     else if( data.canConvert<SInt8>() )
     {
         SInt8Editor* editor = new SInt8Editor( parent );
         connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onSInt8EditorDone()) );
+                 SLOT(onEditorDone()) );
         result = editor;
     }
     else if( data.canConvert<SInt16>() )
     {
         SInt16Editor* editor = new SInt16Editor( parent );
         connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onSInt16EditorDone()) );
+                 SLOT(onEditorDone()) );
         result = editor;
     }
     else if( data.canConvert<SInt32>() )
     {
         SInt32Editor* editor = new SInt32Editor( parent );
         connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onSInt32EditorDone()) );
+                 SLOT(onEditorDone()) );
         result = editor;
     }
     else if( data.canConvert<SInt64>() )
     {
         SInt64Editor* editor = new SInt64Editor( parent );
         connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onSInt64EditorDone()) );
+                 SLOT(onEditorDone()) );
         result = editor;
     }
     else if( data.canConvert<UInt8>() )
     {
         UInt8Editor* editor = new UInt8Editor( parent );
         connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onUInt8EditorDone()) );
+                 SLOT(onEditorDone()) );
         result = editor;
     }
     else if( data.canConvert<UInt16>() )
     {
         UInt16Editor* editor = new UInt16Editor( parent );
         connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onUInt16EditorDone()) );
+                 SLOT(onEditorDone()) );
         result = editor;
     }
     else if( data.canConvert<UInt32>() )
     {
         UInt32Editor* editor = new UInt32Editor( parent );
         connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onUInt32EditorDone()) );
+                 SLOT(onEditorDone()) );
         result = editor;
     }
     else if( data.canConvert<UInt64>() )
     {
         UInt64Editor* editor = new UInt64Editor( parent );
         connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onUInt64EditorDone()) );
+                 SLOT(onEditorDone()) );
         result = editor;
     }
     else if( data.canConvert<Float32>() )
     {
         Float32Editor* editor = new Float32Editor( parent );
         connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onFloat32EditorDone()) );
+                 SLOT(onEditorDone()) );
         result = editor;
     }
     else if( data.canConvert<Float64>() )
     {
         Float64Editor* editor = new Float64Editor( parent );
         connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onFloat64EditorDone()) );
+                 SLOT(onEditorDone()) );
         result = editor;
     }
     else if( data.canConvert<Char8>() )
     {
         Char8Editor* editor = new Char8Editor( mTool->charCodec(), parent );
         connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onChar8EditorDone()) );
+                 SLOT(onEditorDone()) );
         result = editor;
     }
     else if( data.canConvert<Utf8>() )
     {
         Utf8Editor* editor = new Utf8Editor( parent );
         connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onUtf8EditorDone()) );
+                 SLOT(onEditorDone()) );
         result = editor;
     }
     else
@@ -454,124 +454,12 @@ QString PODDelegate::displayText( const QVariant& data, const QLocale& locale ) 
 //      editor->setGeometry(option.rect);
 // }
 
-void PODDelegate::onBinary8EditorDone()
+void PODDelegate::onEditorDone()
 {
-    Binary8Editor* binary8Editor = qobject_cast<Binary8Editor*>( sender() );
+    QWidget* editor = qobject_cast<QWidget*>( sender() );
 
-    emit commitData( binary8Editor );
-    emit closeEditor( binary8Editor );
-}
-
-void PODDelegate::onOctal8EditorDone()
-{
-    Octal8Editor* octal8Editor = qobject_cast<Octal8Editor*>( sender() );
-
-    emit commitData( octal8Editor );
-    emit closeEditor( octal8Editor );
-}
-
-void PODDelegate::onHexadecimal8EditorDone()
-{
-    Hexadecimal8Editor* hexadecimal8Editor = qobject_cast<Hexadecimal8Editor*>( sender() );
-
-    emit commitData( hexadecimal8Editor );
-    emit closeEditor( hexadecimal8Editor );
-}
-
-void PODDelegate::onSInt8EditorDone()
-{
-    SInt8Editor* sInt8Editor = qobject_cast<SInt8Editor*>( sender() );
-
-    emit commitData( sInt8Editor );
-    emit closeEditor( sInt8Editor );
-}
-
-void PODDelegate::onSInt16EditorDone()
-{
-    SInt16Editor* sInt16Editor = qobject_cast<SInt16Editor*>( sender() );
-
-    emit commitData( sInt16Editor );
-    emit closeEditor( sInt16Editor );
-}
-
-void PODDelegate::onSInt32EditorDone()
-{
-    SInt32Editor* sInt32Editor = qobject_cast<SInt32Editor*>( sender() );
-
-    emit commitData( sInt32Editor );
-    emit closeEditor( sInt32Editor );
-}
-
-void PODDelegate::onSInt64EditorDone()
-{
-    SInt64Editor* sInt64Editor = qobject_cast<SInt64Editor*>( sender() );
-
-    emit commitData( sInt64Editor );
-    emit closeEditor( sInt64Editor );
-}
-
-void PODDelegate::onUInt8EditorDone()
-{
-    UInt8Editor* uInt8Editor = qobject_cast<UInt8Editor*>( sender() );
-
-    emit commitData( uInt8Editor );
-    emit closeEditor( uInt8Editor );
-}
-
-void PODDelegate::onUInt16EditorDone()
-{
-    UInt16Editor* uInt16Editor = qobject_cast<UInt16Editor*>( sender() );
-
-    emit commitData( uInt16Editor );
-    emit closeEditor( uInt16Editor );
-}
-
-void PODDelegate::onUInt32EditorDone()
-{
-    UInt32Editor* uInt32Editor = qobject_cast<UInt32Editor*>( sender() );
-
-    emit commitData( uInt32Editor );
-    emit closeEditor( uInt32Editor );
-}
-
-void PODDelegate::onUInt64EditorDone()
-{
-    UInt64Editor* uInt64Editor = qobject_cast<UInt64Editor*>( sender() );
-
-    emit commitData( uInt64Editor );
-    emit closeEditor( uInt64Editor );
-}
-
-void PODDelegate::onFloat32EditorDone()
-{
-    Float32Editor* float32Editor = qobject_cast<Float32Editor*>( sender() );
-
-    emit commitData( float32Editor );
-    emit closeEditor( float32Editor );
-}
-
-void PODDelegate::onFloat64EditorDone()
-{
-    Float64Editor* float64Editor = qobject_cast<Float64Editor*>( sender() );
-
-    emit commitData( float64Editor );
-    emit closeEditor( float64Editor );
-}
-
-void PODDelegate::onChar8EditorDone()
-{
-    Char8Editor* char8Editor = qobject_cast<Char8Editor*>( sender() );
-
-    emit commitData( char8Editor );
-    emit closeEditor( char8Editor );
-}
-
-void PODDelegate::onUtf8EditorDone()
-{
-    Utf8Editor* utf8Editor = qobject_cast<Utf8Editor*>( sender() );
-
-    emit commitData( utf8Editor );
-    emit closeEditor( utf8Editor );
+    emit commitData( editor );
+    emit closeEditor( editor );
 }
 
 PODDelegate::~PODDelegate() {}

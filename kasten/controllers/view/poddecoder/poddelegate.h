@@ -55,21 +55,7 @@ class PODDelegate : public QStyledItemDelegate
     virtual QString displayText( const QVariant& value, const QLocale& locale ) const;
 
   protected Q_SLOTS:
-    void onBinary8EditorDone();
-    void onOctal8EditorDone();
-    void onHexadecimal8EditorDone();
-    void onSInt8EditorDone();
-    void onSInt16EditorDone();
-    void onSInt32EditorDone();
-    void onSInt64EditorDone();
-    void onUInt8EditorDone();
-    void onUInt16EditorDone();
-    void onUInt32EditorDone();
-    void onUInt64EditorDone();
-    void onFloat32EditorDone();
-    void onFloat64EditorDone();
-    void onChar8EditorDone();
-    void onUtf8EditorDone();
+    void onEditorDone();
 
   protected:
     PODDecoderTool* mTool;
