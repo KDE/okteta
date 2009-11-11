@@ -77,7 +77,7 @@ QValidator::State ByteArrayValidator::validate( QString& string, int& pos ) cons
         for( int i=0; i<stringLength; ++i )
         {
             const QChar c = string.at( i );
-            if( !mCharCodec->canEncode(c) && !c.isSpace() )
+            if( !mCharCodec->canEncode(c) )
             {
                 result = QValidator::Invalid;
                 break;
