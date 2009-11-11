@@ -28,6 +28,9 @@
 // Qt
 #include <QtGui/QLineEdit>
 
+namespace Okteta {
+class CharCodec;
+}
 
 class Char8Editor : public QLineEdit
 {
@@ -35,7 +38,7 @@ class Char8Editor : public QLineEdit
   Q_PROPERTY( Char8 data READ data WRITE setData USER true )
 
   public:
-    explicit Char8Editor( QWidget* parent );
+    Char8Editor( Okteta::CharCodec* charCodec, QWidget* parent );
 
     virtual ~Char8Editor();
 

@@ -22,22 +22,70 @@
 
 #include "char8editor.h"
 
+// Okteta core
+#include <valuecodec.h>
+#include <character.h>
+#include <charcodec.h>
+// Qt
+#include <QtGui/QValidator>
 
 
-Char8Editor::Char8Editor( QWidget* parent )
+class Char8Validator : public QValidator
+{
+  public:
+    Char8Validator( Okteta::CharCodec* charCodec, QObject* parent = 0 );
+
+    virtual ~Char8Validator();
+
+  public: // QValidator API
+    virtual QValidator::State validate( QString& input, int& pos ) const;
+
+  protected:
+    Okteta::CharCodec* mCharCodec;
+};
+
+inline Char8Validator::Char8Validator( Okteta::CharCodec* charCodec, QObject* parent )
+  : QValidator( parent ),
+    mCharCodec( charCodec )
+{}
+
+
+QValidator::State Char8Validator::validate( QString& input, int& pos ) const
+{
+    Q_UNUSED( pos )
+
+    State result;
+
+    const int stringLength = input.length();
+    if( stringLength == 0 )
+        result = QValidator::Intermediate;
+    else
+    {
+        const QChar c = input.at( 0 );
+
+        result = mCharCodec->canEncode( c ) ? QValidator::Acceptable : QValidator::Invalid;
+    }
+
+    return result;
+}
+
+Char8Validator::~Char8Validator() {}
+
+
+Char8Editor::Char8Editor( Okteta::CharCodec* charCodec, QWidget* parent )
   : QLineEdit( parent )
 {
+    setValidator( new Char8Validator(charCodec,this) );
+    setMaxLength( 1 );
 }
 
 void Char8Editor::setData( Char8 data )
 {
-    setText( data.character );
+    setText( data.character.isUndefined() ? QString() : QString(data.character) );
 }
 
 Char8 Char8Editor::data() const
 {
-    // TODO:
-//     interpretText();
     const QString t = text();
     return Char8( t.isEmpty() ? QChar(0) : t[0] );
 }

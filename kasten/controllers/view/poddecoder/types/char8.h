@@ -37,7 +37,7 @@ struct Char8
     Char8();
 
   public:
-    QString toString() const;
+    QString toString( /** TODO: undefinedChar */) const;
 
   public:
     Okteta::Character character;
@@ -47,7 +47,11 @@ struct Char8
 inline Char8::Char8() : character( QChar(0) ) {}
 inline Char8::Char8( Okteta::Character c ) : character( c ) {}
 
-inline QString Char8::toString() const { return QString( character ); }
+inline QString Char8::toString() const
+{
+    static const unsigned char DefaultUndefinedChar = '?';
+    return QString( character.isUndefined() ? QChar(DefaultUndefinedChar) : (QChar)character );
+}
 
 Q_DECLARE_METATYPE( Char8 )
 

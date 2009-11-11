@@ -23,6 +23,7 @@
 #include "char8codec.h"
 
 // tool
+#include "../types/char8.h"
 #include "../poddata.h"
 // Okteta core
 #include <charcodec.h>
@@ -33,13 +34,10 @@
 
 namespace Okteta
 {
-static const unsigned char PrimitivesDefaultUndefinedChar = '?';
-
 
 Char8Codec::Char8Codec( CharCodec* charCodec )
   : AbstractTypeCodec( i18nc("@label:textbox encoding of one byte as character","Character 8-bit") ),
-    mCharCodec( charCodec ),
-    mUndefinedChar( PrimitivesDefaultUndefinedChar )
+    mCharCodec( charCodec )
 {}
 
 QVariant Char8Codec::value( const PODData& data, int* byteCount ) const
@@ -47,12 +45,12 @@ QVariant Char8Codec::value( const PODData& data, int* byteCount ) const
     const unsigned char* pointer = (unsigned char*)data.pointer( 1 );
 
     *byteCount = pointer ? 1 : 0;
-    QString result;
+    QVariant result;
     if( pointer )
     {
         const Okteta::Character decodedChar = mCharCodec->decode( *pointer );
 
-        result = QString( decodedChar.isUndefined() ? mUndefinedChar : (QChar)decodedChar );
+        result = QVariant::fromValue<Char8>( Char8(decodedChar) );
     }
 
     return result;
@@ -60,29 +58,16 @@ QVariant Char8Codec::value( const PODData& data, int* byteCount ) const
 
 QByteArray Char8Codec::valueToBytes( const QVariant& value ) const
 {
-    bool success;
+    const Okteta::Character character = value.value<Char8>().character;
+
+    bool success = ( ! character.isUndefined() );
     Okteta::Byte byte;
 
-    // value.toChar() fails
-    const QString string = value.toString();
-    success = ! string.isEmpty();
     if( success )
-        success = mCharCodec->encode( &byte, string[0] );
+        success = mCharCodec->encode( &byte, character );
 
     return success ? QByteArray( 1, byte ) : QByteArray();
 }
-
-#if 0
-void Char8Codec::setUndefinedChar( const QChar& undefinedChar )
-{
-    if( mUndefinedChar == undefinedChar )
-        return;
-
-    mUndefinedChar = undefinedChar;
-    onDataChange();
-}
-#endif
-
 
 Char8Codec::~Char8Codec() {}
 

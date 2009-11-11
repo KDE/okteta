@@ -165,7 +165,7 @@ QWidget* PODDelegate::createEditor( QWidget* parent, const QStyleOptionViewItem&
     }
     else if( data.canConvert<Char8>() )
     {
-        Char8Editor* editor = new Char8Editor( parent );
+        Char8Editor* editor = new Char8Editor( mTool->charCodec(), parent );
         connect( editor, SIGNAL(editingFinished()),
                  SLOT(onChar8EditorDone()) );
         result = editor;
