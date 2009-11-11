@@ -68,6 +68,8 @@ class PODDelegate : public QStyledItemDelegate
     void onUInt64EditorDone();
     void onFloat32EditorDone();
     void onFloat64EditorDone();
+    void onChar8EditorDone();
+    void onUtf8EditorDone();
 
   protected:
     PODDecoderTool* mTool;

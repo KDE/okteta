@@ -558,6 +558,22 @@ void PODDelegate::onFloat64EditorDone()
     emit closeEditor( float64Editor );
 }
 
+void PODDelegate::onChar8EditorDone()
+{
+    Char8Editor* char8Editor = qobject_cast<Char8Editor*>( sender() );
+
+    emit commitData( char8Editor );
+    emit closeEditor( char8Editor );
+}
+
+void PODDelegate::onUtf8EditorDone()
+{
+    Utf8Editor* utf8Editor = qobject_cast<Utf8Editor*>( sender() );
+
+    emit commitData( utf8Editor );
+    emit closeEditor( utf8Editor );
+}
+
 PODDelegate::~PODDelegate() {}
 
 }
