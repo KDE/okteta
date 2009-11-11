@@ -23,7 +23,6 @@
 #include "char8editor.h"
 
 // Okteta core
-#include <valuecodec.h>
 #include <character.h>
 #include <charcodec.h>
 // Qt
