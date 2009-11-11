@@ -45,7 +45,10 @@ struct Binary8
 inline Binary8::Binary8() : value( 0 ) {}
 inline Binary8::Binary8( quint8 v ) : value( v ) {}
 
-inline QString Binary8::toString() const { return QString::fromLatin1( "%1" ).arg( value, 8, 2, QChar::fromLatin1('0') ); }
+inline QString Binary8::toString() const
+{
+    return QString::fromLatin1( "%1" ).arg( value, 8, 2, QChar::fromLatin1('0') );
+}
 
 Q_DECLARE_METATYPE( Binary8 )
 

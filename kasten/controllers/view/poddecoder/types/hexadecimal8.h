@@ -45,7 +45,10 @@ struct Hexadecimal8
 inline Hexadecimal8::Hexadecimal8() : value( 0 ) {}
 inline Hexadecimal8::Hexadecimal8( quint8 v ) : value( v ) {}
 
-inline QString Hexadecimal8::toString() const { return QString::fromLatin1( "%1" ).arg( value, 2, 16, QChar::fromLatin1('0') ); }
+inline QString Hexadecimal8::toString() const
+{
+    return QString::fromLatin1( "%1" ).arg( value, 2, 16, QChar::fromLatin1('0') );
+}
 
 Q_DECLARE_METATYPE( Hexadecimal8 )
 
