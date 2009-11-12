@@ -39,6 +39,7 @@
 #include "typecodecs/char8codec.h"
 #include "typecodecs/utf8codec.h"
 #include "abstracttypecodec.h"
+#include "abstractdifferentsizedialog.h"
 #include <bytearraydocument.h>
 #include <bytearrayview.h>
 // Okteta core
@@ -80,6 +81,7 @@ PODDecoderTool::PODDecoderTool()
     mCursorIndex( 0 ),
     mSourceByteArrayView( 0 ),
     mCharCodec( Okteta::CharCodec::createCodec(Okteta::LocalEncoding) ),
+    mDifferentSizeDialog( 0 ),
     mUnsignedAsHex( true )
 {
     setObjectName( "PODDecoder" );
@@ -140,6 +142,11 @@ void PODDecoderTool::setupDecoder()
 
     mDecodedValueList.resize( PODTypeCount );
     mDecodedValueByteCountList.resize( PODTypeCount );
+}
+
+void PODDecoderTool::setDifferentSizeDialog( AbstractDifferentSizeDialog* differentSizeDialog )
+{
+    mDifferentSizeDialog = differentSizeDialog;
 }
 
 void PODDecoderTool::setUnsignedAsHex( bool unsignedAsHex )
@@ -222,12 +229,21 @@ void PODDecoderTool::setData( const QVariant& data, int podId )
         }
     }
 
+    const int oldValueSize = mDecodedValueByteCountList[podId];
+    if( bytesSize != oldValueSize )
+    {
+        const int sizeLeft = mByteArrayModel->size() - mCursorIndex;
+        const AbstractDifferentSizeDialog::Answer answer =
+            mDifferentSizeDialog ? mDifferentSizeDialog->query( bytesSize, oldValueSize, sizeLeft ) : AbstractDifferentSizeDialog::DoNothing;
+        if( answer == AbstractDifferentSizeDialog::DoNothing )
+            return;
+    }
+
     Okteta::ChangesDescribable* changesDescribable =
         qobject_cast<Okteta::ChangesDescribable*>( mByteArrayModel );
 
     if( changesDescribable )
         changesDescribable->openGroupedChange( i18nc("Edited as %datatype","Edited as %1", typeCodec->name()) );
-    // TODO: what to do for types with dynamic size, like UTF-8? Might leave bytes out, or overwrite news ones
     mByteArrayModel->replace( Okteta::AddressRange::fromWidth(mCursorIndex,bytesSize), bytes );
     if( changesDescribable )
         changesDescribable->closeGroupedChange();

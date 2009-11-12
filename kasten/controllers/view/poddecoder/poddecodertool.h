@@ -44,7 +44,7 @@ class AbstractByteArrayModel;
 
 namespace Kasten
 {
-
+class AbstractDifferentSizeDialog;
 class ByteArrayView;
 
 
@@ -82,6 +82,8 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
     void markPOD( int podId );
     void unmarkPOD();
 
+    void setDifferentSizeDialog( AbstractDifferentSizeDialog* differentSizeDialog );
+
   public Q_SLOTS:
     void setUnsignedAsHex( bool unsignedAsHex );
     void setByteOrder( int byteOrder );
@@ -110,6 +112,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
 
     QVector<Okteta::AbstractTypeCodec*> mTypeCodecs;
     Okteta::CharCodec* mCharCodec;
+    AbstractDifferentSizeDialog* mDifferentSizeDialog;
 
   protected: // settings
     bool mUnsignedAsHex :1;
