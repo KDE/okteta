@@ -51,6 +51,11 @@ QByteArray SInt64Codec::valueToBytes( const QVariant& value ) const
     return QByteArray( (const char*)&number, sizeof(qint64) );
 }
 
+bool SInt64Codec::areEqual( const QVariant& value, QVariant& otherValue ) const
+{
+    return ( value.value<SInt64>().value == otherValue.value<SInt64>().value );
+}
+
 SInt64Codec::~SInt64Codec() {}
 
 }

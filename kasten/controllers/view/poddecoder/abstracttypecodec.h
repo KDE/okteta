@@ -47,6 +47,8 @@ class AbstractTypeCodec
     virtual QVariant value( const PODData& data, int* byteCount ) const = 0;
     virtual QByteArray valueToBytes( const QVariant& value ) const = 0;
 
+    virtual bool areEqual( const QVariant& value, QVariant& otherValue ) const = 0;
+
   public:
     const QString& name() const;
 

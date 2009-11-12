@@ -40,6 +40,8 @@ class UInt16Codec : public AbstractTypeCodec
   public: // AbstractTypeCodec API
     virtual QVariant value( const PODData& data, int* byteCount ) const;
     virtual QByteArray valueToBytes( const QVariant& value ) const;
+
+    virtual bool areEqual( const QVariant& value, QVariant& otherValue ) const;
 };
 
 }

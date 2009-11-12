@@ -51,6 +51,11 @@ QByteArray Octal8Codec::valueToBytes( const QVariant& value ) const
     return QByteArray( (const char*)&number, sizeof(quint8) );
 }
 
+bool Octal8Codec::areEqual( const QVariant& value, QVariant& otherValue ) const
+{
+    return ( value.value<Octal8>().value == otherValue.value<Octal8>().value );
+}
+
 Octal8Codec::~Octal8Codec() {}
 
 }

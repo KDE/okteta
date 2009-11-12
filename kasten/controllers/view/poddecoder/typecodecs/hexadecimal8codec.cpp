@@ -51,6 +51,11 @@ QByteArray Hexadecimal8Codec::valueToBytes( const QVariant& value ) const
     return QByteArray( (const char*)&number, sizeof(quint8) );
 }
 
+bool Hexadecimal8Codec::areEqual( const QVariant& value, QVariant& otherValue ) const
+{
+    return ( value.value<Hexadecimal8>().value == otherValue.value<Hexadecimal8>().value );
+}
+
 Hexadecimal8Codec::~Hexadecimal8Codec() {}
 
 }

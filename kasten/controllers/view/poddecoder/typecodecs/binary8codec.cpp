@@ -51,6 +51,11 @@ QByteArray Binary8Codec::valueToBytes( const QVariant& value ) const
     return QByteArray( (const char*)&number, sizeof(quint8) );
 }
 
+bool Binary8Codec::areEqual( const QVariant& value, QVariant& otherValue ) const
+{
+    return ( value.value<Binary8>().value == otherValue.value<Binary8>().value );
+}
+
 Binary8Codec::~Binary8Codec() {}
 
 }

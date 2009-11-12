@@ -69,6 +69,11 @@ QByteArray Char8Codec::valueToBytes( const QVariant& value ) const
     return success ? QByteArray( 1, byte ) : QByteArray();
 }
 
+bool Char8Codec::areEqual( const QVariant& value, QVariant& otherValue ) const
+{
+    return ( value.value<Char8>().character == otherValue.value<Char8>().character );
+}
+
 Char8Codec::~Char8Codec() {}
 
 }

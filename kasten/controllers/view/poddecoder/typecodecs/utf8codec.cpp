@@ -74,6 +74,11 @@ QByteArray Utf8Codec::valueToBytes( const QVariant& value ) const
     return mUtf8Codec->fromUnicode( valueChar );
 }
 
+bool Utf8Codec::areEqual( const QVariant& value, QVariant& otherValue ) const
+{
+    return ( value.value<Utf8>().value == otherValue.value<Utf8>().value );
+}
+
 Utf8Codec::~Utf8Codec() {}
 
 }
