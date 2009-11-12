@@ -72,6 +72,7 @@ class OKTETACORE_EXPORT ValueCodec
      * @param byte data to encode
      */
     virtual void encode( QString& digits, unsigned int pos, Byte byte ) const = 0;
+    // TODO: make this QString* digits
     /**
      * encodes the byte and writes the result to digits, no leading 0s
      * @param digits
@@ -79,6 +80,7 @@ class OKTETACORE_EXPORT ValueCodec
      * @param byte data to encode
      */
     virtual void encodeShort( QString& digits, unsigned int pos, Byte byte ) const = 0;
+    // TODO: make this QString* digits
 
     /**
      * encodes the byte and writes the result to digits, no leading 0s
@@ -108,8 +110,14 @@ class OKTETACORE_EXPORT ValueCodec
 
 
   public:
-    /** */
-    unsigned int decode( Byte* byte, const QString& digits, unsigned int pos ) const;
+    /**
+     * tries to decode the digits in the text into a byte
+     * @param byte pointer to the variable to store the result in
+     * @param text string to turn into the value
+     * @param pos offset in the text to start with decoding
+     * @return used chars of the string for the decoding, beginning with pos
+     */
+    unsigned int decode( Byte* byte, const QString& text, unsigned int pos = 0 ) const;
 };
 
 
