@@ -89,10 +89,12 @@ QVariant PODTableModel::data( const QModelIndex& index, int role ) const
     }
     case Qt::EditRole:
     {
-        const int podId = index.row();
         const int column = index.column();
         if( column == ValueId )
+        {
+            const int podId = index.row();
             result = mTool->value( podId );
+        }
         break;
     }
     case Qt::TextAlignmentRole:
@@ -103,11 +105,12 @@ QVariant PODTableModel::data( const QModelIndex& index, int role ) const
     }
     case Qt::ForegroundRole:
     {
-        const int podId = index.row();
         const int column = index.column();
         if( column == ValueId )
         {
+            const int podId = index.row();
             const QVariant value = mTool->value( podId );
+
             if( value.isNull() )
             {
                 const QPalette &palette = KApplication::kApplication()->palette();
@@ -128,7 +131,14 @@ Qt::ItemFlags PODTableModel::flags( const QModelIndex& index ) const
     Qt::ItemFlags result = QAbstractTableModel::flags( index );
     const int column = index.column();
     if( column == ValueId )
-        result |= Qt::ItemIsEditable;
+    {
+        const int podId = index.row();
+        const QVariant value = mTool->value( podId );
+
+        // TODO: this check does not match types with dynamic byte length, e.g. utf-8!
+        if( ! value.isNull() )
+            result |= Qt::ItemIsEditable;
+    }
 
     return result;
 }
