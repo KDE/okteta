@@ -57,7 +57,7 @@ unsigned int ValueCodec::decode( unsigned char *byte, const QString &digits, uns
         d = left;
 
     unsigned char result = 0;
-    do
+    while( d > 0 )
     {
         if( !appendDigit(&result,digits.at(pos).toLatin1()) )
             break;
@@ -65,7 +65,6 @@ unsigned int ValueCodec::decode( unsigned char *byte, const QString &digits, uns
         ++pos;
         --d;
     }
-    while( d > 0 );
 
     *byte = result;
     return pos - oldPos;
