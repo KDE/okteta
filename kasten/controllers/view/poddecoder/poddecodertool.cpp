@@ -49,7 +49,7 @@
 // KDE
 #include <KLocale>
 
-
+#include <KDebug>
 namespace Kasten
 {
 
@@ -210,6 +210,14 @@ QVariant PODDecoderTool::value( int podId ) const
 void PODDecoderTool::setData( const QVariant& data, int podId )
 {
     Okteta::AbstractTypeCodec* typeCodec = mTypeCodecs[podId];
+
+    // QVariant::operator=() only compares values' addresses for custom types,
+    // so the comparison for values needs to be done by someone with knowledge about the type.
+    const bool isUnchangedValue = typeCodec->areEqual( data, mDecodedValueList[podId] );
+
+    if( isUnchangedValue )
+        return;
+
     QByteArray bytes = typeCodec->valueToBytes( data );
 
     const int bytesSize = bytes.size();
