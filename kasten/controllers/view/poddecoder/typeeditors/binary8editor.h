@@ -25,11 +25,10 @@
 
 // lib
 #include "../types/binary8.h"
-// Qt
-#include <QtGui/QSpinBox>
+#include "abstractvalue8editor.h"
 
 
-class Binary8Editor : public QSpinBox
+class Binary8Editor : public AbstractValue8Editor
 {
   Q_OBJECT
   Q_PROPERTY( Binary8 data READ data WRITE setData USER true )
@@ -42,10 +41,6 @@ class Binary8Editor : public QSpinBox
   public:
     void setData( Binary8 data );
     Binary8 data() const;
-
-  protected: // QSpinBox API
-    virtual QString textFromValue( int value ) const;
-    virtual int valueFromText( const QString& text ) const;
 };
 
 #endif

@@ -122,6 +122,7 @@ set( PODDECODERCONTROLLER_SRCS
   view/poddecoder/typecodecs/float64codec.cpp
   view/poddecoder/typecodecs/char8codec.cpp
   view/poddecoder/typecodecs/utf8codec.cpp
+  view/poddecoder/typeeditors/abstractvalue8editor.cpp
   view/poddecoder/typeeditors/binary8editor.cpp
   view/poddecoder/typeeditors/octal8editor.cpp
   view/poddecoder/typeeditors/hexadecimal8editor.cpp

@@ -25,11 +25,10 @@
 
 // lib
 #include "../types/hexadecimal8.h"
-// Qt
-#include <QtGui/QSpinBox>
+#include "abstractvalue8editor.h"
 
 
-class Hexadecimal8Editor : public QSpinBox
+class Hexadecimal8Editor : public AbstractValue8Editor
 {
   Q_OBJECT
   Q_PROPERTY( Hexadecimal8 data READ data WRITE setData USER true )
@@ -42,10 +41,6 @@ class Hexadecimal8Editor : public QSpinBox
   public:
     void setData( Hexadecimal8 data );
     Hexadecimal8 data() const;
-
-  protected: // QSpinBox API
-    virtual QString textFromValue( int value ) const;
-    virtual int valueFromText( const QString& text ) const;
 };
 
 #endif

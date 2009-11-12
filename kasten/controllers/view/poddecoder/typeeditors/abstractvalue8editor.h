@@ -20,22 +20,38 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "hexadecimal8editor.h"
+#ifndef ABSTRACTVALUE8EDITOR_H
+#define ABSTRACTVALUE8EDITOR_H
 
+// lib
+#include "../types/binary8.h"
+// OKteta core
+#include <oktetacore.h>
+// Qt
+#include <QtGui/QSpinBox>
 
-Hexadecimal8Editor::Hexadecimal8Editor( QWidget* parent )
-  : AbstractValue8Editor( Okteta::HexadecimalCoding, parent )
-{
+namespace Okteta {
+class ValueCodec;
 }
 
-void Hexadecimal8Editor::setData( Hexadecimal8 data )
-{
-    setValue( data.value );
-}
 
-Hexadecimal8 Hexadecimal8Editor::data() const
+class AbstractValue8Editor : public QSpinBox
 {
-    return value();
-}
+  Q_OBJECT
 
-Hexadecimal8Editor::~Hexadecimal8Editor() {}
+  public:
+    explicit AbstractValue8Editor( Okteta::ValueCoding valueCoding, QWidget* parent = 0 );
+
+    virtual ~AbstractValue8Editor();
+
+  protected: // QSpinBox API
+    virtual QString textFromValue( int value ) const;
+    virtual int valueFromText( const QString& text ) const;
+
+    virtual QValidator::State validate( QString& text, int& pos ) const;
+
+  protected:
+    Okteta::ValueCodec* mValueCodec;
+};
+
+#endif

@@ -25,11 +25,10 @@
 
 // lib
 #include "../types/octal8.h"
-// Qt
-#include <QtGui/QSpinBox>
+#include "abstractvalue8editor.h"
 
 
-class Octal8Editor : public QSpinBox
+class Octal8Editor : public AbstractValue8Editor
 {
   Q_OBJECT
   Q_PROPERTY( Octal8 data READ data WRITE setData USER true )
@@ -42,10 +41,6 @@ class Octal8Editor : public QSpinBox
   public:
     void setData( Octal8 data );
     Octal8 data() const;
-
-  protected: // QSpinBox API
-    virtual QString textFromValue( int value ) const;
-    virtual int valueFromText( const QString& text ) const;
 };
 
 #endif
