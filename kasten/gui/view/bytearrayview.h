@@ -87,7 +87,7 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView,
     virtual void setZoomLevel( double Level );
     virtual double zoomLevel() const;
   Q_SIGNALS:
-    virtual void zoomLevelChanged( double Level );
+    /*virtual*/ void zoomLevelChanged( double Level );
 
   public: // If::DataSelectable API
     virtual void selectAllData( bool selectAll );
@@ -96,8 +96,8 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView,
     virtual const AbstractModelSelection* modelSelection() const;
 //     virtual void setSelection();
   Q_SIGNALS:
-    virtual void hasSelectedDataChanged( bool hasSelectedData );
-    virtual void selectedDataChanged( const Kasten::AbstractModelSelection* modelSelection );
+    /*virtual*/ void hasSelectedDataChanged( bool hasSelectedData );
+    /*virtual*/ void selectedDataChanged( const Kasten::AbstractModelSelection* modelSelection );
 
   public: // If::SelectedDataWriteable API
     virtual void insertData( const QMimeData *data );

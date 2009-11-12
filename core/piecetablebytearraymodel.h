@@ -117,19 +117,19 @@ class OKTETACORE_EXPORT PieceTableByteArrayModel : public AbstractByteArrayModel
     void setData( const QByteArray& data );
 
   Q_SIGNALS: // Versionable signals
-    virtual void revertedToVersionIndex( int versionIndex );
-    virtual void headVersionDescriptionChanged( const QString& versionDescription );
-    virtual void headVersionChanged( int newHeadVersionIndex );
+    /*virtual*/ void revertedToVersionIndex( int versionIndex );
+    /*virtual*/ void headVersionDescriptionChanged( const QString& versionDescription );
+    /*virtual*/ void headVersionChanged( int newHeadVersionIndex );
 
   Q_SIGNALS: // Bookmarkable signals
-    virtual void bookmarksAdded( const QList<Okteta::Bookmark> &bookmarks );
-    virtual void bookmarksRemoved( const QList<Okteta::Bookmark> &bookmarks );
-    virtual void bookmarksModified( bool modified );
-    virtual void bookmarksModified( const QList<int>& indizes );
+    /*virtual*/ void bookmarksAdded( const QList<Okteta::Bookmark> &bookmarks );
+    /*virtual*/ void bookmarksRemoved( const QList<Okteta::Bookmark> &bookmarks );
+    /*virtual*/ void bookmarksModified( bool modified );
+    /*virtual*/ void bookmarksModified( const QList<int>& indizes );
 
   Q_SIGNALS: // ChangeHistory signals
-    virtual void changesDone( const QList<Okteta::ByteArrayChange>& changes,
-                              int oldVersionIndex, int newVersionIndex );
+    /*virtual*/ void changesDone( const QList<Okteta::ByteArrayChange>& changes,
+                                  int oldVersionIndex, int newVersionIndex );
 
   protected:
     PieceTableByteArrayModelPrivate* const d;
