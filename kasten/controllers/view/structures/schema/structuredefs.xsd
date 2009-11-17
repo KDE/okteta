@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="unqualified" attributeFormDefault="unqualified">
+  <xsd:complexType name="DataInformation" abstract="true">
+    <xsd:attribute name="name" type="xsd:string"></xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="DataInformationWithChildren" abstract="true">
+    <xsd:complexContent>
+      <xsd:extension base="DataInformation">
+        <xsd:choice maxOccurs="unbounded" minOccurs="1">
+          <xsd:element ref="array"></xsd:element>
+          <xsd:element ref="primitive"></xsd:element>
+          <xsd:element ref="struct"></xsd:element>
+          <xsd:element ref="union"></xsd:element>
+        </xsd:choice>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="Primitive">
+    <xsd:complexContent>
+      <xsd:extension base="DataInformation">
+        <xsd:attribute ref="type"></xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="Array">
+    <xsd:complexContent>
+      <xsd:extension base="DataInformationWithChildren">
+          <xsd:attribute name="length" type="xsd:unsignedInt"></xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="Union">
+    <xsd:complexContent>
+      <xsd:extension base="DataInformationWithChildren"></xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:attribute name="type">
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="collapse"></xsd:whiteSpace>
+        <xsd:enumeration value="Char"></xsd:enumeration>
+        <xsd:enumeration value="Int8"></xsd:enumeration>
+        <xsd:enumeration value="UInt8"></xsd:enumeration>
+        <xsd:enumeration value="Int16"></xsd:enumeration>
+        <xsd:enumeration value="UInt16"></xsd:enumeration>
+        <xsd:enumeration value="Int32"></xsd:enumeration>
+        <xsd:enumeration value="UInt32"></xsd:enumeration>
+        <xsd:enumeration value="Int64"></xsd:enumeration>
+        <xsd:enumeration value="UInt64"></xsd:enumeration>
+        <xsd:enumeration value="Float"></xsd:enumeration>
+        <xsd:enumeration value="Double"></xsd:enumeration>
+        <xsd:enumeration value="Bool8"></xsd:enumeration>
+        <xsd:enumeration value="Bool16"></xsd:enumeration>
+        <xsd:enumeration value="Bool32"></xsd:enumeration>
+        <xsd:enumeration value="Bool64"></xsd:enumeration>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:attribute>
+  <xsd:complexType name="Structure">
+    <xsd:complexContent>
+      <xsd:extension base="DataInformationWithChildren"></xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="struct" type="Structure"></xsd:element>
+  <xsd:element name="union" type="Union"></xsd:element>
+  <xsd:element name="primitive" type="Primitive"></xsd:element>
+  <xsd:element name="array" type="Array"></xsd:element>
+  <xsd:element name="data">
+    <xsd:complexType>
+      <xsd:sequence maxOccurs="unbounded" minOccurs="1">
+        <xsd:choice maxOccurs="1" minOccurs="1">
+          <xsd:element ref="array"></xsd:element>
+          <xsd:element ref="primitive"></xsd:element>
+          <xsd:element ref="struct"></xsd:element>
+          <xsd:element ref="union"></xsd:element>
+          <xsd:element name="include">
+            <xsd:complexType>
+              <xsd:attribute name="file" type="xsd:string"></xsd:attribute>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

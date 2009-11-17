@@ -228,6 +228,44 @@ set( BOOKMARKSTOOL_SRCS
   view/bookmarks/bookmarksview.cpp
   view/bookmarks/bookmarkstoolview.cpp
 )
+set( STRUCTVIEW_SRCS
+  view/structures/structtool.cpp
+  view/structures/structtreemodel.cpp
+  view/structures/structview.cpp
+  view/structures/structtoolview.cpp
+  view/structures/structviewitemdelegate.cpp
+  view/structures/settings/structviewdisplaysettingswidget.cpp
+  view/structures/settings/structviewpathsettingswidget.cpp
+  view/structures/datatypes/chardatainformation.cpp
+  view/structures/datatypes/datainformation.cpp
+  view/structures/datatypes/datainformationgroup.cpp
+  view/structures/datatypes/datainformationwithchildren.cpp
+  view/structures/datatypes/doubledatainformation.cpp
+  view/structures/datatypes/floatdatainformation.cpp
+  view/structures/datatypes/bool8datainformation.cpp
+  view/structures/datatypes/bool16datainformation.cpp
+  view/structures/datatypes/bool32datainformation.cpp
+  view/structures/datatypes/bool64datainformation.cpp
+  view/structures/datatypes/int8datainformation.cpp
+  view/structures/datatypes/int16datainformation.cpp
+  view/structures/datatypes/int32datainformation.cpp
+  view/structures/datatypes/int64datainformation.cpp
+  view/structures/datatypes/uint8datainformation.cpp
+  view/structures/datatypes/uint16datainformation.cpp
+  view/structures/datatypes/uint32datainformation.cpp
+  view/structures/datatypes/uint64datainformation.cpp
+  view/structures/datatypes/primitivedatainformation.cpp
+  view/structures/datatypes/signedprimitivedatainformation.cpp
+  view/structures/datatypes/staticlengtharraydatainformation.cpp
+  view/structures/datatypes/structuredatainformation.cpp
+  view/structures/datatypes/uniondatainformation.cpp
+  view/structures/datatypes/unsignedprimitivedatainformation.cpp
+)
+
+kde4_add_kcfg_files(STRUCTVIEW_SRCS GENERATE_MOC view/structures/settings/structviewpreferences.kcfgc)
+kde4_add_ui_files(STRUCTVIEW_SRCS view/structures/settings/structviewdisplaysettingswidget.ui)
+kde4_add_ui_files(STRUCTVIEW_SRCS view/structures/settings/structviewpathsettingswidget.ui)
+
 set( LIBFRAMESPRINT_SRCS
   ${LIBFRAMESPRINT_REL_DIR}/abstractframerenderer.cpp
   ${LIBFRAMESPRINT_REL_DIR}/framestopaperprinter.cpp
@@ -274,6 +312,7 @@ set( OKTETA_KASTEN_CONTROLLERS_SRCS
   ${VIEWCONFIGCONTROLLER_SRCS}
   ${VIEWSTATUSCONTROLLER_SRCS}
   ${VIEWMODECONTROLLER_SRCS}
+  ${STRUCTVIEW_SRCS}
 )
 
 set( okteta_kastencontrollers_LIB_HDRS
@@ -305,6 +344,8 @@ set( okteta_kastencontrollers_LIB_HDRS
   view/stringsextract/stringsextracttool.h
   view/stringsextract/stringsextracttoolview.h
   view/search/searchcontroller.h
+  view/structures/structtool.h
+  view/structures/structtoolview.h
   document/info/documentinfotoolview.h
   document/info/documentinfotool.h
   document/overwriteonly/overwriteonlycontroller.h

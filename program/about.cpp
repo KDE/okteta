@@ -8,7 +8,7 @@
     published by the Free Software Foundation; either version 2 of
     the License or (at your option) version 3 or any later version
     accepted by the membership of KDE e.V. (or its successor approved
-    by the membership of KDE e.V.), which shall act as a proxy 
+    by the membership of KDE e.V.), which shall act as a proxy
     defined in Section 14 of version 3 of the license.
 
     This program is distributed in the hope that it will be useful,
@@ -32,6 +32,7 @@ static const char ProgramVersion[] =     "0.3.90";
 static const char ProgramHomepage[] =    "http://utils.kde.org/projects/okteta";
 // Author
 static const char FWHKEmailAddress[] =   "kossebau@kde.org";
+static const char AREmailAddress[] =   "alex.richardson@gmx.de";
 
 
 OktetaAboutData::OktetaAboutData()
@@ -48,4 +49,7 @@ OktetaAboutData::OktetaAboutData()
     addAuthor( ki18n("Friedrich W. H. Kossebau"), // name
                ki18n("Author"), // task
                FWHKEmailAddress );
+    addCredit( ki18nc("Author","Alexander Richardson"),// name
+               ki18nc("Task description","Structure viewer/editor"), // task
+               AREmailAddress );
 }
