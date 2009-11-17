@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../structuredefs.xsd">
+  <include file="test_2.osd" />
+  <struct name="test">
+    <array name="signature" length="4">
+      <primitive type="Int8" />
+    </array>
+    <struct name="dimensions">
+      <primitive name="x" type="Int32" />
+      <primitive name="y" type="Int32" />
+      <primitive name="width" type="UInt8" />
+      <primitive name="height" type="UInt8" />
+    </struct>
+    <array name="string" length="30">
+      <primitive type="Char" />
+    </array>
+    <array name="zoomFactors" length="3">
+      <primitive type="Bool16" />
+    </array>
+  </struct>
+  <union name="someUnion">
+    <primitive name="aByte" type="Int8" />
+    <primitive name="aUbyte" type="UInt8" />
+    <primitive name="aChar" type="Char" />
+    <primitive name="aInt" type="Int32" />
+    <primitive name="aFloat" type="Float" />
+    <array name="someChars" length="9">
+      <primitive type="Char" />
+    </array>
+    <struct name="aStruct">
+      <primitive name="byte1" type="Int8" />
+      <primitive name="byte2" type="Int8" />
+      <primitive name="int1" type="Int32" />
+      <primitive name="int2" type="Int32" />
+    </struct>
+  </union>
+  <primitive name="someFloat" type="Float" />
+  <array name="someFloars" length="5">
+    <primitive type="Float" />
+  </array>
+  <array name="someLongs" length="2">
+    <primitive type="UInt64" />
+  </array>
+</data>
