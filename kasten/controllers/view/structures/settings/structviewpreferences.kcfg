@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+	http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+  <kcfgfile name="oktetastructview2rc" />
+  <group name="ValueDisplay">
+    <entry name="UnsignedDisplayBase" type="Enum">
+      <label>The base to use when converting unsigned numbers to a string.</label>
+      <choices>
+        <choice name="Binary" />
+        <choice name="Decimal" />
+        <choice name="Hexadecimal" />
+      </choices>
+      <default>Hexadecimal</default> <!-- TODO make decimal default -->
+    </entry>
+    <entry name="SignedDisplayBase" type="Enum">
+      <label>The base to use when converting signed numbers to a string.</label>
+      <choices>
+        <choice name="Binary" />
+        <choice name="Decimal" />
+        <choice name="Hexadecimal" />
+      </choices>
+      <default>Hexadecimal</default> <!-- TODO make decimal default -->
+    </entry>
+    <entry name="CharDisplayBase" type="Enum">
+      <label>The base to use when converting characters to a value string.</label>
+      <choices>
+        <choice name="Binary" />
+        <choice name="Decimal" />
+        <choice name="Hexadecimal" />
+      </choices>
+      <default>Hexadecimal</default> <!-- TODO make decimal default -->
+    </entry>
+    <entry name="ShowCharNumericalValue" type="Bool">
+      <label>Whether to show the numerical value of chars</label>
+      <default>true</default>
+    </entry>
+    <entry name="LocaleAwareFloatFormatting" type="Bool">
+      <label>Whether to format floating point values according to the current locale</label>
+      <default>false</default>
+    </entry>
+    <entry name="LocaleAwareDecimalFormatting" type="Bool">
+      <label>Whether to format integer values according to the current locale</label>
+      <tooltip>If true, integers being displayed in decimal format will be formatted according to the current locale settings</tooltip>
+      <default>false</default>
+    </entry>
+    <entry name="FloatPrecision" type="Int">
+      <label>The precision used for converting floating-point numbers to strings
+       (number of decimal digits)</label>
+      <default>3</default>
+      <min>-1</min>
+      <max>100</max> <!-- program hangs if QString::number() is called with very high precison -->
+    </entry>
+  </group>
+  <group name="StructureSettings">
+    <entry name="StructureDefFiles" type="PathList">
+      <default></default>
+      <label>The loaded structure files</label>
+    </entry>
+      <entry name="ByteOrder" type="Enum">
+      <choices>
+      <choice name="LittleEndian"></choice>
+      <choice name="BigEndian"></choice>
+      </choices>
+      <default>LittleEndian</default>
+      <label>The loaded structure files</label>
+    </entry>
+  </group>
+</kcfg>
