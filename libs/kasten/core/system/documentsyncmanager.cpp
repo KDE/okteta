@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -31,10 +31,11 @@
 #include <abstractsyncwithremotejob.h>
 #include <abstractsyncfromremotejob.h>
 #include <abstractmodelsynchronizerfactory.h>
+#include "abstractoverwritedialog.h"
+#include "abstractsavediscarddialog.h"
 // KDE
 #include <KIO/NetAccess>
 #include <KFileDialog>
-#include <KMessageBox>
 #include <KLocale>
 // Qt
 #include <QtGui/QApplication>
@@ -47,12 +48,26 @@ static const char AllFileNamesFilter[] = "*";  // krazy:exclude=doublequote_char
 
 
 DocumentSyncManager::DocumentSyncManager( DocumentManager* manager )
- : mManager( manager ), mWidget( 0 ), mSynchronizerFactory( 0 )
+  : mManager( manager ),
+    mWidget( 0 ),
+    mSynchronizerFactory( 0 ),
+    mSaveDiscardDialog( 0 ),
+    mOverwriteDialog( 0 )
 {}
 
 void DocumentSyncManager::setWidget( QWidget* widget )
 {
     mWidget = widget;
+}
+
+void DocumentSyncManager::setSaveDiscardDialog( AbstractSaveDiscardDialog* saveDiscardDialog )
+{
+    mSaveDiscardDialog = saveDiscardDialog;
+}
+
+void DocumentSyncManager::setOverwriteDialog( AbstractOverwriteDialog* overwriteDialog )
+{
+    mOverwriteDialog = overwriteDialog;
 }
 
 bool DocumentSyncManager::hasSynchronizerForLocal( const QString &workDocumentType ) const
@@ -132,14 +147,12 @@ bool DocumentSyncManager::setSynchronizer( AbstractDocument* document )
                     // TODO: replace "file" with synchronizer->storageTypeName() or such
                     // TODO: offer "Synchronize" as alternative, if supported, see below
                     // ask synchronizer for capabilities, as some can only overwrite
-                    const QString message =
-                        i18nc( "@info",
-                               "There is already a file at<nl/><filename>%1</filename>.<nl/>"
-                               "Overwrite?", newUrl.url() );
-                    int answer = KMessageBox::warningYesNoCancel( mWidget, message, processTitle, KStandardGuiItem::overwrite(), KStandardGuiItem::back() );
-                    if( answer == KMessageBox::Cancel )
+                    const Answer answer =
+                        mOverwriteDialog ? mOverwriteDialog->queryOverwrite( newUrl, processTitle ) : Cancel;
+
+                    if( answer == Cancel )
                         break;
-                    if( answer == KMessageBox::No )
+                    if( answer == PreviousQuestion )
                         continue;
                 }
 
@@ -205,12 +218,10 @@ bool DocumentSyncManager::canClose( AbstractDocument* document )
 
         if( synchronizer || couldSynchronize )
         {
-            const QString message = i18nc( "@info \"%title\" has been modified.",
-                "<filename>%1</filename> has been modified.<nl/>"
-                "Do you want to save your changes or discard them?", document->title() );
-            const int answer = KMessageBox::warningYesNoCancel( mWidget, message, processTitle,
-                                                                KStandardGuiItem::save(), KStandardGuiItem::discard() );
-            if( answer == KMessageBox::Yes )
+            const Answer answer =
+                mSaveDiscardDialog ? mSaveDiscardDialog->querySaveDiscard( document, processTitle ) : Cancel;
+
+            if( answer == Save )
             {
                 if( synchronizer )
                 {
@@ -223,16 +234,14 @@ bool DocumentSyncManager::canClose( AbstractDocument* document )
                     canClose = setSynchronizer( document );
             }
             else
-                canClose = ( answer == KMessageBox::No );
+                canClose = ( answer == Discard );
         }
         else
         {
-            const QString message = i18nc( "@info \"%title\" has been modified.",
-                "<filename>%1</filename> has been modified.<nl/>"
-                "Do you want to discard your changes?", document->title() );
-            const int answer = KMessageBox::warningContinueCancel( mWidget, message, processTitle,
-                                                                   KStandardGuiItem::discard() );
-            canClose = ( answer == KMessageBox::Continue );
+            const Answer answer =
+                mSaveDiscardDialog ? mSaveDiscardDialog->queryDiscard( document, processTitle ) : Cancel;
+
+            canClose = ( answer == Discard );
         }
     }
 
@@ -247,13 +256,10 @@ void DocumentSyncManager::reload( AbstractDocument* document )
     {
         const QString processTitle = i18nc( "@title:window", "Reload" );
 
-        const QString message = i18nc( "@info \"%title\" has been modified.",
-            "There are unsaved modifications to <filename>%1</filename>. "
-            "They will be lost if you reload the document.<nl/>"
-            "Do you want to discard them?", document->title() );
-            const int answer = KMessageBox::warningContinueCancel( mWidget, message, processTitle,
-                                                                   KStandardGuiItem::discard() );
-        if( answer == KMessageBox::Cancel )
+        const Answer answer =
+            mSaveDiscardDialog ? mSaveDiscardDialog->queryDiscardOnReload( document, processTitle ) : Cancel;
+
+        if( answer == Cancel )
             return;
     }
 

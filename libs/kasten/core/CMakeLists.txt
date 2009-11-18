@@ -67,6 +67,7 @@ set( KASTEN_CORE_IO_FILESYSTEM_SRCS
 )
 
 set( KASTEN_CORE_SYSTEM_SRCS
+  system/dialoghandler.cpp
   system/jobmanager.cpp
   system/documentmanager.cpp
   system/documentcreatemanager.cpp

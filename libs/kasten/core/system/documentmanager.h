@@ -40,6 +40,8 @@ namespace Kasten
 class DocumentCreateManager; //TODO: temporary
 class DocumentSyncManager; //TODO: temporary
 class ModelCodecManager; //TODO: temporary
+class DialogHandler; //TODO: temporary
+
 
 class KASTENCORE_EXPORT DocumentManager : public QObject
 {
@@ -67,6 +69,8 @@ class KASTENCORE_EXPORT DocumentManager : public QObject
     bool canCloseAllOther( AbstractDocument* document );
 
     void requestFocus( AbstractDocument* document );
+
+    void setWidget( QWidget* widget );
 
   public:
     QList<AbstractDocument*> documents() const;
@@ -104,6 +108,7 @@ class KASTENCORE_EXPORT DocumentManager : public QObject
     DocumentCreateManager* mCreateManager;
     DocumentSyncManager* mSyncManager;
     ModelCodecManager* mCodecManager;
+    DialogHandler* mDialogHandler;
 };
 
 

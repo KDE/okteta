@@ -32,6 +32,7 @@
 #include "documentcreatemanager.h"
 #include "documentsyncmanager.h"
 #include "modelcodecmanager.h"
+#include "dialoghandler.h"
 
 
 namespace Kasten
@@ -41,10 +42,16 @@ static int lastDocumentId = 0;
 
 
 DocumentManager::DocumentManager()
- : mCreateManager( new DocumentCreateManager(this) ),
-   mSyncManager( new DocumentSyncManager(this) ),
-   mCodecManager( new ModelCodecManager(this) )
-{}
+  : mCreateManager( new DocumentCreateManager(this) ),
+    mSyncManager( new DocumentSyncManager(this) ),
+    mCodecManager( new ModelCodecManager(this) ),
+    mDialogHandler( new DialogHandler() )
+{
+
+    mSyncManager->setOverwriteDialog( mDialogHandler );
+    mSyncManager->setSaveDiscardDialog( mDialogHandler );
+    mCodecManager->setOverwriteDialog( mDialogHandler );
+}
 
 QList<AbstractDocument*> DocumentManager::documents() const { return mList; }
 
@@ -205,6 +212,14 @@ void DocumentManager::requestFocus( AbstractDocument* document )
     emit focusRequested( document );
 }
 
+void DocumentManager::setWidget( QWidget* widget )
+{
+    mDialogHandler->setWidget( widget );
+    mCreateManager->setWidget( widget );
+    mSyncManager->setWidget( widget );
+    mCodecManager->setWidget( widget );
+}
+
 DocumentManager::~DocumentManager()
 {
     // TODO: emit signal here, too?
@@ -213,6 +228,7 @@ DocumentManager::~DocumentManager()
     delete mCreateManager;
     delete mSyncManager;
     delete mCodecManager;
+    delete mDialogHandler;
 } //TODO: destroy all documents?
 
 }

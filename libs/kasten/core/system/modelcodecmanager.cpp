@@ -27,13 +27,13 @@
 #include "abstractmodelstreamencoder.h"
 // #include "abstractmodelstreamdecoder.h"
 #include "abstractmodeldatagenerator.h"
+#include "abstractoverwritedialog.h"
 #include "jobmanager.h"
 #include "documentmanager.h"
 #include "abstractexportjob.h"
 // KDE
 #include <KIO/NetAccess>
 #include <KFileDialog>
-#include <KMessageBox>
 #include <KLocale>
 
 
@@ -41,7 +41,10 @@ namespace Kasten
 {
 
 ModelCodecManager::ModelCodecManager( DocumentManager* manager )
- : mManager( manager ), mWidget( 0 ) {}
+  : mManager( manager ),
+    mOverwriteDialog( 0 )
+{
+}
 
 QList<AbstractModelStreamEncoder*>
 ModelCodecManager::encoderList( AbstractModel* model, const AbstractModelSelection* selection ) const
@@ -66,6 +69,11 @@ Q_UNUSED( selection )
 void ModelCodecManager::setWidget( QWidget* widget )
 {
     mWidget = widget;
+}
+
+void ModelCodecManager::setOverwriteDialog( AbstractOverwriteDialog* overwriteDialog )
+{
+    mOverwriteDialog = overwriteDialog;
 }
 
 void ModelCodecManager::setEncoders( const QList<AbstractModelStreamEncoder*>& encoderList )
@@ -109,7 +117,7 @@ void ModelCodecManager::exportDocument( AbstractModelExporter* exporter,
         i18nc( "@title:window", "Export" );
     do
     {
-        KUrl exportUrl = KFileDialog::getSaveUrl( /*mWorkingUrl.url()*/QString(), QString(), mWidget, dialogTitle );
+        const KUrl exportUrl = KFileDialog::getSaveUrl( /*mWorkingUrl.url()*/QString(), QString(), mWidget, dialogTitle );
 
         if( !exportUrl.isEmpty() )
         {
@@ -121,16 +129,11 @@ void ModelCodecManager::exportDocument( AbstractModelExporter* exporter,
 //                     const bool otherFileLoaded = mManager->documentByUrl( exportUrl );
                 // TODO: replace "file" with synchronizer->storageTypeName() or such
                 // TODO: offer "Synchronize" as alternative, if supported, see below
-                const QString message =
-                    i18nc( "@info",
-                            "There is already a file at<nl/><filename>%1</filename>.<nl/>"
-                            "Overwrite?", exportUrl.url() );
-                const int answer = KMessageBox::warningYesNoCancel( mWidget, message, dialogTitle,
-                                                                    KStandardGuiItem::overwrite(),
-                                                                    KStandardGuiItem::back() );
-                if( answer == KMessageBox::Cancel )
+                const Answer answer =
+                    mOverwriteDialog ? mOverwriteDialog->queryOverwrite( exportUrl, dialogTitle ) : Cancel;
+                if( answer == Cancel )
                     break;
-                if( answer == KMessageBox::No )
+                if( answer == PreviousQuestion )
                     continue;
             }
 

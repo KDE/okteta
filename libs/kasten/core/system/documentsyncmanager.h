@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -39,6 +39,8 @@ namespace Kasten
 class AbstractDocument;
 class AbstractModelSynchronizerFactory;
 class DocumentManager;
+class AbstractSaveDiscardDialog;
+class AbstractOverwriteDialog;
 
 
 class KASTENCORE_EXPORT DocumentSyncManager : public QObject
@@ -65,6 +67,8 @@ class KASTENCORE_EXPORT DocumentSyncManager : public QObject
   public:
     void setDocumentSynchronizerFactory( AbstractModelSynchronizerFactory* synchronizerFactory );
     void setWidget( QWidget* widget );
+    void setSaveDiscardDialog( AbstractSaveDiscardDialog* saveDiscardDialog );
+    void setOverwriteDialog( AbstractOverwriteDialog* overwriteDialog );
 
   Q_SIGNALS:
     void urlUsed( const KUrl &url );
@@ -83,6 +87,9 @@ class KASTENCORE_EXPORT DocumentSyncManager : public QObject
 
     // temporary hack: hard coded factories for byte arrays
     AbstractModelSynchronizerFactory* mSynchronizerFactory;
+
+    AbstractSaveDiscardDialog* mSaveDiscardDialog;
+    AbstractOverwriteDialog* mOverwriteDialog;
 };
 
 }
