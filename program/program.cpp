@@ -130,6 +130,7 @@ int OktetaProgram::execute()
             }
         }
 
+        mDocumentManager->setWidget( mainWindow );
         mainWindow->show();
 
         arguments->clear();
