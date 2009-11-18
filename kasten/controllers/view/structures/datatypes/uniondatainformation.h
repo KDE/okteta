@@ -48,6 +48,12 @@ public:
     /** add another field to this union */
     UnionDataInformation& operator<<(DataInformation* field);
     static UnionDataInformation* fromXML(QDomElement& xmlElem);
+protected:
+    virtual Okteta::Size offset(unsigned int index) const
+    {
+        Q_UNUSED(index)
+        return 0;
+    }
 };
 
 #endif /* UNIONDATAINFORMATION_H_ */

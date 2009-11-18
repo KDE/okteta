@@ -29,12 +29,12 @@ class PrimitiveDataInformation: public DataInformation
 {
 Q_OBJECT
 public:
-    Q_PROPERTY(bool valid READ isValid())
+Q_PROPERTY(bool valid READ isValid())
 
 protected:
-    AllPrimitiveTypes mValue;   //TODO abstract into subclasses -> more flexibility
-    PrimitiveDataType mType;    //TODO unnecessary?
-    bool mIsValid :1    ;
+    AllPrimitiveTypes mValue; //TODO abstract into subclasses -> more flexibility
+    PrimitiveDataType mType; //TODO unnecessary?
+    bool mIsValid :1;
     /** get the appropriate base for QString::number from StructDisplaySettings */
     PrimitiveDataInformation(const PrimitiveDataInformation& d);
 public:
@@ -49,9 +49,7 @@ public:
     static QString getValueString(AllPrimitiveTypes value, PrimitiveDataType type,
             int base);
     virtual DataInformation* clone() const = 0;
-    //    {
-    //        return new PrimitiveDataInformation(*this);
-    //    }
+
     virtual inline int getSize() const = 0;
     virtual inline QString getTypeName() const = 0;
     virtual inline bool isValid() const
@@ -69,6 +67,11 @@ public:
 protected:
     void setModelData(AllPrimitiveTypes value, Okteta::AbstractByteArrayModel *out,
             ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining);
+    virtual Okteta::Size offset(unsigned int index) const
+    {
+        Q_UNUSED(index)
+        return 0;
+    }
 public:
     QVariant data(int column, int role) const;
     virtual Okteta::Size readData(Okteta::AbstractByteArrayModel* input,

@@ -341,11 +341,12 @@ void StructTool::mark(const QModelIndex& idx)
     DataInformation* data = static_cast<DataInformation*> (idx.internalPointer());
     if (!data)
         return;
-    volatile int length = data->getSize() / 8;
-    volatile int maxLen = mByteArrayModel->size() -mCursorIndex;
+    int length = data->getSize() / 8;
+    int maxLen = mByteArrayModel->size() - mCursorIndex;
     length = qMin(length, maxLen);
+    Okteta::Address startOffset = mCursorIndex + data->positionRelativeToParent();
     const Okteta::AddressRange markingRange = Okteta::AddressRange::fromWidth(
-            mCursorIndex, length);
+            startOffset, length);
     mByteArrayView->setMarking(markingRange, true);
 }
 void StructTool::unmark(/*const QModelIndex& idx*/)

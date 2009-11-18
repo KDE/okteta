@@ -99,6 +99,9 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     mByteOrderSelection->setToolTip(settingsTooltip);
     connect(mSettingsButton, SIGNAL(pressed()), this, SLOT(openSettingsDlg()));
     settingsLayout->addWidget(mSettingsButton);
+    connect(mStructTreeView->selectionModel(),
+            SIGNAL(currentRowChanged( const QModelIndex&, const QModelIndex& )),
+            SLOT(onCurrentRowChanged( const QModelIndex&, const QModelIndex& )));
 }
 void StructView::openSettingsDlg()
 {
@@ -144,6 +147,8 @@ bool StructView::eventFilter(QObject* object, QEvent* event)
                 kDebug() << "current index: " << current;
                 if (current.isValid())
                     mTool->mark(current);
+                else
+                    mTool->unmark();
             }
         }
         else if (event->type() == QEvent::FocusOut)
@@ -157,6 +162,16 @@ bool StructView::eventFilter(QObject* object, QEvent* event)
     }
     return QWidget::eventFilter(object, event);
 }
+
+void StructView::onCurrentRowChanged( const QModelIndex& current, const QModelIndex& previous )
+{
+    Q_UNUSED( previous )
+    if( current.isValid())
+        mTool->mark(current);
+    else
+        mTool->unmark();
+}
+
 
 StructView::~StructView()
 {

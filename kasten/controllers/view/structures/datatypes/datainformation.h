@@ -90,7 +90,7 @@ public:
     {
         return objectName();
     }
-
+    virtual Okteta::Size positionRelativeToParent() const;
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const
     {
         Q_UNUSED(column)
@@ -123,7 +123,9 @@ public:
     virtual Okteta::Size
     readData(Okteta::AbstractByteArrayModel *input, ByteOrder byteOrder,
             Okteta::Address address, Okteta::Size remaining) =0;
+protected:
     static DataInformation* parseNode(QDomNode& n);
+    virtual Okteta::Size offset(unsigned int index) const = 0;
 Q_SIGNALS:
     void dataChanged();
 protected Q_SLOTS:

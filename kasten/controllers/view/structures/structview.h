@@ -58,6 +58,7 @@ protected:
     StructViewItemDelegate* mDelegate;
 protected Q_SLOTS:
     void openSettingsDlg();
+    void onCurrentRowChanged( const QModelIndex& current, const QModelIndex& previous );
 };
 
 inline StructTool* StructView::tool() const

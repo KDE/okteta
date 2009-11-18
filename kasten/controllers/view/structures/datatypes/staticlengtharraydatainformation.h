@@ -50,8 +50,9 @@ public:
     virtual Okteta::Size readData(Okteta::AbstractByteArrayModel* input,
             ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining);
 
-public:
     static StaticLengthArrayDataInformation* fromXML(QDomElement& xmlElem);
+protected:
+    virtual Okteta::Size offset(unsigned int index) const;
 };
 
 #endif /* STATICLENGTHARRAYDATAINFORMATION_H_ */

@@ -77,7 +77,6 @@ StaticLengthArrayDataInformation::~StaticLengthArrayDataInformation()
 {
 }
 
-
 StaticLengthArrayDataInformation*
 StaticLengthArrayDataInformation::fromXML(QDomElement& xmlElem)
 {
@@ -113,3 +112,17 @@ StaticLengthArrayDataInformation::fromXML(QDomElement& xmlElem)
     delete subElem; //control not taken over by constructor
     return retVal;
 }
+
+Okteta::Size StaticLengthArrayDataInformation::offset(unsigned int index) const
+{
+    if (index >= childCount() || index < 0)
+        return 0;
+    Okteta::Size offset = 0;
+    //sum size of elements up to index
+    for (int i = 0; i < index; ++i)
+    {
+        offset += childAt(i)->getSize() / 8;
+    }
+    return offset;
+}
+

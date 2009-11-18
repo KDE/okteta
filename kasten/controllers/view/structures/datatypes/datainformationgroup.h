@@ -53,6 +53,12 @@ public:
         appendChild(child);
         return *this;
     }
+protected:
+    virtual Okteta::Size offset(unsigned int index) const
+    {
+        Q_UNUSED(index)
+        return 0;
+    }
 };
 
 #endif /* DATAINFORMATIONGROUP_H_ */
