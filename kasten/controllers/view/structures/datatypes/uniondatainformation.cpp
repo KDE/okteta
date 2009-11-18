@@ -117,8 +117,9 @@ QVariant DataInformationWithChildren::data(int column, int role) const
     }
     else if (role == Qt::ToolTipRole)
     {
-        return i18n("Name: %1\nValue: %2\n\nType: %3\nSize: %4 (%5 children)", getName(),
-                getValueString(), getTypeName(), getSizeString(), childCount());
+        return i18np("Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 child)",
+                     "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)",
+                     childCount(), getName(), getValueString(), getTypeName(), getSizeString());
     }
     else
         return QVariant();
