@@ -151,6 +151,8 @@ bool BookmarkListModel::setData( const QModelIndex& index, const QVariant& value
 //             emit dataChanged( index, index );
             result = true;
         }
+        else
+            result = false;
     }
     else
         result = QAbstractItemModel::setData( index, value, role );
