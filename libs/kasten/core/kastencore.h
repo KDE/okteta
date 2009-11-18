@@ -43,6 +43,20 @@ namespace Kasten
         /// unknown, e.g. because connection not available/lost
         RemoteUnreachable
     };
+
+    enum Answer
+    {
+        Cancel = 0,
+        Ok,
+        Yes,
+        No,
+        Continue,
+        PreviousQuestion,
+        NextQuestion,
+        Save,
+        Overwrite,
+        Discard,
+    };
 }
 
 #endif
