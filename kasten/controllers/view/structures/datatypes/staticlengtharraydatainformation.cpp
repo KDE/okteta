@@ -115,11 +115,11 @@ StaticLengthArrayDataInformation::fromXML(QDomElement& xmlElem)
 
 Okteta::Size StaticLengthArrayDataInformation::offset(unsigned int index) const
 {
-    if (index >= childCount() || index < 0)
+    if (index >= childCount())
         return 0;
     Okteta::Size offset = 0;
     //sum size of elements up to index
-    for (int i = 0; i < index; ++i)
+    for (unsigned int i = 0; i < index; ++i)
     {
         offset += childAt(i)->getSize() / 8;
     }
