@@ -32,7 +32,7 @@
 #include <KLocale>
 #include <KGuiItem>
 #include <KToolBar>
-#include <KActionCollection>
+// #include <KActionCollection>
 // Qt
 #include <QtGui/QLayout>
 #include <QtGui/QTreeView>
@@ -78,8 +78,8 @@ BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
 
     baseLayout->addWidget( mBookmarkListView, 10 );
 
-    // actions
-    KActionCollection* actionCollection = new KActionCollection( this );
+    // actions TODO: make this view work like the filebrowser?
+//     KActionCollection* actionCollection = new KActionCollection( this );
 
 
     QHBoxLayout* actionsLayout = new QHBoxLayout();
