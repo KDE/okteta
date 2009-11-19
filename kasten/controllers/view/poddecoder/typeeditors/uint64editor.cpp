@@ -22,28 +22,20 @@
 
 #include "uint64editor.h"
 
-// C++
-#include <limits>
-
 
 UInt64Editor::UInt64Editor( QWidget* parent )
-  : QLineEdit( parent )
+  : UIntSpinBox( parent )
 {
-//     const quint64 int64Max = std::numeric_limits<quint64>::max();
-//     const quint64 int64Min = std::numeric_limits<quint64>::min();
-
-//     setRange( int64Min, int64Max );
 }
 
 void UInt64Editor::setData( UInt64 data )
 {
-    setText( data.toString(false) );
+    setValue( data.value );
 }
 
 UInt64 UInt64Editor::data() const
 {
-//     interpretText();
-    return text().toULongLong();
+    return value();
 }
 
 UInt64Editor::~UInt64Editor() {}

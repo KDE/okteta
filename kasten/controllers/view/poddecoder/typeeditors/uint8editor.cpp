@@ -27,12 +27,11 @@
 
 
 UInt8Editor::UInt8Editor( QWidget* parent )
-  : QSpinBox( parent )
+  : UIntSpinBox( parent )
 {
     const quint8 int8Max = std::numeric_limits<quint8>::max();
-    const quint8 int8Min = std::numeric_limits<quint8>::min();
 
-    setRange( int8Min, int8Max );
+    setMaximum( int8Max );
 }
 
 void UInt8Editor::setData( UInt8 data )
@@ -42,7 +41,6 @@ void UInt8Editor::setData( UInt8 data )
 
 UInt8 UInt8Editor::data() const
 {
-//     interpretText();
     return value();
 }
 

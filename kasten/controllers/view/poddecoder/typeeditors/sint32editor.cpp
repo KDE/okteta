@@ -27,7 +27,7 @@
 
 
 SInt32Editor::SInt32Editor( QWidget* parent )
-  : QSpinBox( parent )
+  : SIntSpinBox( parent )
 {
     const qint32 int32Max = std::numeric_limits<qint32>::max();
     const qint32 int32Min = std::numeric_limits<qint32>::min();
@@ -42,7 +42,6 @@ void SInt32Editor::setData( SInt32 data )
 
 SInt32 SInt32Editor::data() const
 {
-//     interpretText();
     return value();
 }
 

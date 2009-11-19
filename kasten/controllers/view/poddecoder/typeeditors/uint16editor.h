@@ -25,11 +25,10 @@
 
 // lib
 #include "../types/uint16.h"
-// Qt
-#include <QtGui/QSpinBox>
+#include "uintspinbox.h"
 
 
-class UInt16Editor : public QSpinBox
+class UInt16Editor : public UIntSpinBox
 {
   Q_OBJECT
   Q_PROPERTY( UInt16 data READ data WRITE setData USER true )

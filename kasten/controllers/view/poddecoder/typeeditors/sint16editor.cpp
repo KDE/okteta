@@ -27,7 +27,7 @@
 
 
 SInt16Editor::SInt16Editor( QWidget* parent )
-  : QSpinBox( parent )
+  : SIntSpinBox( parent )
 {
     const qint16 int16Max = std::numeric_limits<qint16>::max();
     const qint16 int16Min = std::numeric_limits<qint16>::min();
@@ -42,7 +42,6 @@ void SInt16Editor::setData( SInt16 data )
 
 SInt16 SInt16Editor::data() const
 {
-//     interpretText();
     return value();
 }
 

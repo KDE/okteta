@@ -27,12 +27,11 @@
 
 
 UInt16Editor::UInt16Editor( QWidget* parent )
-  : QSpinBox( parent )
+  : UIntSpinBox( parent )
 {
     const quint16 int16Max = std::numeric_limits<quint16>::max();
-    const quint16 int16Min = std::numeric_limits<quint16>::min();
 
-    setRange( int16Min, int16Max );
+    setMaximum( int16Max );
 }
 
 void UInt16Editor::setData( UInt16 data )
@@ -42,7 +41,6 @@ void UInt16Editor::setData( UInt16 data )
 
 UInt16 UInt16Editor::data() const
 {
-//     interpretText();
     return value();
 }
 

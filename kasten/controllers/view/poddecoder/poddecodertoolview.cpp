@@ -33,6 +33,7 @@ namespace Kasten
 PODDecoderToolView::PODDecoderToolView( PODDecoderTool *tool )
  : mWidget( new PODTableView(tool) )
 {
+//     tool->setDifferentSizeDialog( this );
 }
 
 QWidget* PODDecoderToolView::widget()    const { return mWidget; }

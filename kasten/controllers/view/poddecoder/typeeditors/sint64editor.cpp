@@ -22,28 +22,20 @@
 
 #include "sint64editor.h"
 
-// C++
-#include <limits>
-
 
 SInt64Editor::SInt64Editor( QWidget* parent )
-  : QLineEdit( parent )
+  : SIntSpinBox( parent )
 {
-//     const qint64 int64Max = std::numeric_limits<qint64>::max();
-//     const qint64 int64Min = std::numeric_limits<qint64>::min();
-
-//     setRange( int64Min, int64Max );
 }
 
 void SInt64Editor::setData( SInt64 data )
 {
-    setText( data.toString() );
+    setValue( data.value );
 }
 
 SInt64 SInt64Editor::data() const
 {
-//     interpretText();
-    return text().toLongLong();
+    return value();
 }
 
 SInt64Editor::~SInt64Editor() {}

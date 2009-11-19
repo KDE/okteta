@@ -25,11 +25,10 @@
 
 // lib
 #include "../types/sint16.h"
-// Qt
-#include <QtGui/QSpinBox>
+#include "sintspinbox.h"
 
 
-class SInt16Editor : public QSpinBox
+class SInt16Editor : public SIntSpinBox
 {
   Q_OBJECT
   Q_PROPERTY( SInt16 data READ data WRITE setData USER true )

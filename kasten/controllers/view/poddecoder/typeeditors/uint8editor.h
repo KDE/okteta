@@ -25,11 +25,10 @@
 
 // lib
 #include "../types/uint8.h"
-// Qt
-#include <QtGui/QSpinBox>
+#include "uintspinbox.h"
 
 
-class UInt8Editor : public QSpinBox
+class UInt8Editor : public UIntSpinBox
 {
   Q_OBJECT
   Q_PROPERTY( UInt8 data READ data WRITE setData USER true )

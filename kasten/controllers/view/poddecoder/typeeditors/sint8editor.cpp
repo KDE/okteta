@@ -27,7 +27,7 @@
 
 
 SInt8Editor::SInt8Editor( QWidget* parent )
-  : QSpinBox( parent )
+  : SIntSpinBox( parent )
 {
     const qint8 int8Max = std::numeric_limits<qint8>::max();
     const qint8 int8Min = std::numeric_limits<qint8>::min();
@@ -42,7 +42,6 @@ void SInt8Editor::setData( SInt8 data )
 
 SInt8 SInt8Editor::data() const
 {
-//     interpretText();
     return value();
 }
 

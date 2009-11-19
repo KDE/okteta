@@ -25,11 +25,10 @@
 
 // lib
 #include "../types/sint64.h"
-// Qt
-#include <QtGui/QLineEdit>
+#include "sintspinbox.h"
 
 
-class SInt64Editor : public QLineEdit
+class SInt64Editor : public SIntSpinBox
 {
   Q_OBJECT
   Q_PROPERTY( SInt64 data READ data WRITE setData USER true )

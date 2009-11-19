@@ -126,6 +126,8 @@ set( PODDECODERCONTROLLER_SRCS
   view/poddecoder/typeeditors/binary8editor.cpp
   view/poddecoder/typeeditors/octal8editor.cpp
   view/poddecoder/typeeditors/hexadecimal8editor.cpp
+  view/poddecoder/typeeditors/uintspinbox.cpp
+  view/poddecoder/typeeditors/sintspinbox.cpp
   view/poddecoder/typeeditors/uint8editor.cpp
   view/poddecoder/typeeditors/uint16editor.cpp
   view/poddecoder/typeeditors/uint32editor.cpp

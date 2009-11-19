@@ -25,11 +25,10 @@
 
 // lib
 #include "../types/uint32.h"
-// Qt
-#include <QtGui/QLineEdit>
+#include "uintspinbox.h"
 
 
-class UInt32Editor : public QLineEdit
+class UInt32Editor : public UIntSpinBox
 {
   Q_OBJECT
   Q_PROPERTY( UInt32 data READ data WRITE setData USER true )

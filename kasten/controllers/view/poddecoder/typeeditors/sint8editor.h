@@ -25,11 +25,10 @@
 
 // lib
 #include "../types/sint8.h"
-// Qt
-#include <QtGui/QSpinBox>
+#include "sintspinbox.h"
 
 
-class SInt8Editor : public QSpinBox
+class SInt8Editor : public SIntSpinBox
 {
   Q_OBJECT
   Q_PROPERTY( SInt8 data READ data WRITE setData USER true )

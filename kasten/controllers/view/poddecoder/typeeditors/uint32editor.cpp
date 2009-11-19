@@ -27,24 +27,21 @@
 
 
 UInt32Editor::UInt32Editor( QWidget* parent )
-  : QLineEdit( parent )
+  : UIntSpinBox( parent )
 {
-//     const quint32 int32Max = std::numeric_limits<quint32>::max();
-//     const quint32 int32Min = std::numeric_limits<quint32>::min();
+    const quint32 int32Max = std::numeric_limits<quint32>::max();
 
-//     setRange( int32Min, int32Max );
+    setMaximum( int32Max );
 }
 
 void UInt32Editor::setData( UInt32 data )
 {
-    // TODO
-    setText( data.toString(false) );
+    setValue( data.value );
 }
 
 UInt32 UInt32Editor::data() const
 {
-//     interpretText();
-    return text().toULong();
+    return value();
 }
 
 UInt32Editor::~UInt32Editor() {}
