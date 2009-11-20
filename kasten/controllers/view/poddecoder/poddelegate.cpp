@@ -124,6 +124,7 @@ QWidget* PODDelegate::createEditor( QWidget* parent, const QStyleOptionViewItem&
     else if( data.canConvert<UInt8>() )
     {
         UInt8Editor* editor = new UInt8Editor( parent );
+        editor->setAsHex( mTool->isUnsignedAsHex() );
         connect( editor, SIGNAL(editingFinished()),
                  SLOT(onEditorDone()) );
         result = editor;
@@ -131,6 +132,7 @@ QWidget* PODDelegate::createEditor( QWidget* parent, const QStyleOptionViewItem&
     else if( data.canConvert<UInt16>() )
     {
         UInt16Editor* editor = new UInt16Editor( parent );
+        editor->setAsHex( mTool->isUnsignedAsHex() );
         connect( editor, SIGNAL(editingFinished()),
                  SLOT(onEditorDone()) );
         result = editor;
@@ -138,6 +140,7 @@ QWidget* PODDelegate::createEditor( QWidget* parent, const QStyleOptionViewItem&
     else if( data.canConvert<UInt32>() )
     {
         UInt32Editor* editor = new UInt32Editor( parent );
+        editor->setAsHex( mTool->isUnsignedAsHex() );
         connect( editor, SIGNAL(editingFinished()),
                  SLOT(onEditorDone()) );
         result = editor;
@@ -145,6 +148,7 @@ QWidget* PODDelegate::createEditor( QWidget* parent, const QStyleOptionViewItem&
     else if( data.canConvert<UInt64>() )
     {
         UInt64Editor* editor = new UInt64Editor( parent );
+        editor->setAsHex( mTool->isUnsignedAsHex() );
         connect( editor, SIGNAL(editingFinished()),
                  SLOT(onEditorDone()) );
         result = editor;

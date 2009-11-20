@@ -32,7 +32,8 @@ QValidator::State UIntSpinBox::validate( QString& input, int& pos ) const
 
     QValidator::State result;
 
-    if( input.isEmpty() )
+    if( input.isEmpty()
+        || mPrefix.startsWith(input) )
     {
         mValue = 0;
         result = QValidator::Intermediate;
@@ -40,7 +41,7 @@ QValidator::State UIntSpinBox::validate( QString& input, int& pos ) const
     else
     {
         bool ok;
-        quint64 newValue = input.toULongLong( &ok );
+        quint64 newValue = input.toULongLong( &ok, mBase );
         if( !ok
             || (newValue > mMaximum) )
             result = QValidator::Invalid;
@@ -96,6 +97,6 @@ QAbstractSpinBox::StepEnabled UIntSpinBox::stepEnabled() const
 
 void UIntSpinBox::updateEditLine() const
 {
-    const QString text = QString::number( mValue );
+    const QString text = mPrefix + QString::number( mValue, mBase );
     lineEdit()->setText( text );
 }

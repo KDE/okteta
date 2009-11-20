@@ -39,15 +39,12 @@ class UIntSpinBox : public QAbstractSpinBox
   public:
     quint64 value() const;
 
-//     QString prefix() const;
-//     QString cleanText() const;
-
     quint64 maximum() const;
 
   public:
     void setValue( quint64 value );
 
-//     void setPrefix( const QString& prefix );
+    void setAsHex( bool asHex );
 
     void setMaximum( quint64 max );
 
@@ -61,7 +58,8 @@ class UIntSpinBox : public QAbstractSpinBox
     void updateEditLine() const;
 
   protected:
-//     QString mPrefix;
+    QString mPrefix;
+    int mBase;
 
     mutable quint64 mValue;
 
@@ -71,6 +69,7 @@ class UIntSpinBox : public QAbstractSpinBox
 
 inline UIntSpinBox::UIntSpinBox( QWidget *parent )
   : QAbstractSpinBox( parent ),
+    mBase( 10 ),
     mValue( 0 ),
     mMaximum( std::numeric_limits<quint64>::max() )
 {
@@ -105,6 +104,12 @@ inline void UIntSpinBox::setValue( quint64 value )
     mValue = value;
 
     updateEditLine();
+}
+
+inline void UIntSpinBox::setAsHex( bool asHex )
+{
+    mBase = asHex ? 16 : 10;
+    mPrefix = asHex ? QString::fromLatin1( "0x" ) : QString();
 }
 
 inline UIntSpinBox::~UIntSpinBox() {}
