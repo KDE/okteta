@@ -236,6 +236,8 @@ set( STRUCTVIEW_SRCS
   view/structures/structview.cpp
   view/structures/structtoolview.cpp
   view/structures/structviewitemdelegate.cpp
+  view/structures/structuredefinitionfile.cpp
+  view/structures/settings/structureaddremovewidget.cpp
   view/structures/settings/structviewdisplaysettingswidget.cpp
   view/structures/settings/structviewpathsettingswidget.cpp
   view/structures/datatypes/chardatainformation.cpp

@@ -31,6 +31,7 @@
 #include "structviewpreferences.h"
 #include "settings/structviewdisplaysettingswidget.h"
 #include "settings/structviewpathsettingswidget.h"
+#include "settings/structureaddremovewidget.h"
 // KDE
 #include <KComboBox>
 #include <KLocale>
@@ -53,7 +54,10 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     QBoxLayout* baseLayout = new QVBoxLayout(this);
     setLayout(baseLayout);
     baseLayout->setMargin(0);
-
+    mAddRemoveButton = new KPushButton(KIcon("configure"), i18nc("@action:button",
+            "Add/Remove structures"), this);
+    baseLayout->addWidget(mAddRemoveButton);
+    connect(mAddRemoveButton, SIGNAL(pressed()), SLOT(openAddRemoveDialogue()));
     // table
     mStructTreeModel = new StructTreeModel(mTool, this);
     mStructTreeView = new QTreeView(this);
@@ -85,7 +89,8 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     mByteOrderSelection->addItem(i18nc("@item:inlistbox", "Little-endian")); // add first for index
     mByteOrderSelection->addItem(i18nc("@item:inlistbox", "Big-endian")); // add second for index
     mByteOrderSelection->setCurrentIndex(mTool->byteOrder());
-    connect(mByteOrderSelection, SIGNAL(activated( int )), mTool, SLOT(setByteOrder(int)));
+    connect(mByteOrderSelection, SIGNAL(activated( int )), mTool,
+            SLOT(setByteOrder(int)));
     const QString byteOrderToolTip = i18nc("@info:tooltip",
             "The byte order used to decode the values.");
     mByteOrderSelection->setToolTip(byteOrderToolTip);
@@ -103,7 +108,8 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
             SIGNAL(currentRowChanged( const QModelIndex&, const QModelIndex& )),
             SLOT(onCurrentRowChanged( const QModelIndex&, const QModelIndex& )));
 }
-void StructView::openSettingsDlg()
+
+void StructView::openSettingsDlg(int page)
 {
     //An instance of your dialog could be already created and could be cached,
     //in which case you want to display the cached dialog instead of creating
@@ -116,9 +122,20 @@ void StructView::openSettingsDlg()
             StructViewPreferences::self());
     QWidget* displaySettings = new StructViewDisplaySettingsWidget();
     QWidget* pathSettings = new StructViewPathSettingsWidget();
-
-    dialog->addPage(displaySettings, i18n("Display settings"), QString("configure"));
-    dialog->addPage(pathSettings, i18n("Paths"), QString("folder"));
+    QWidget* loadedStructuresSettings = new StructureAddRemoveWidget(mTool, this);
+    KPageWidgetItem* displ = dialog->addPage(displaySettings, i18n(
+            "Display settings"), QString("configure"));
+    KPageWidgetItem* paths = dialog->addPage(pathSettings, i18n("Paths"), QString(
+            "folder"));
+    QWidget* structsWidget = new QWidget();
+    {
+        QVBoxLayout* layout = new QVBoxLayout();
+        loadedStructuresSettings->setObjectName("kcfg_LoadedStructures");
+        layout->addWidget(loadedStructuresSettings);
+        structsWidget->setLayout(layout);
+    }
+    KPageWidgetItem* structs = dialog->addPage(structsWidget, i18n(
+            "Loaded structures", QString("configure")));
 
     //User edited the configuration - update your local copies of the
     //configuration data
@@ -126,13 +143,26 @@ void StructView::openSettingsDlg()
     connect(dialog, SIGNAL(settingsChanged(const QString&)), mTool,
             SLOT(loadStructDefFiles())); //FIXME once kconfig_compiler
     //generates signals, only connect only the path changed signal
+    connect(dialog, SIGNAL(settingsChanged(const QString&)), mTool,
+            SLOT(setSelectedStructuresInView()));
 
+    if (page == 0)
+        dialog->setCurrentPage(displ);
+    else if (page == 1)
+        dialog->setCurrentPage(paths);
+    else if (page == 2)
+        dialog->setCurrentPage(structs);
     dialog->show();
+}
+
+void StructView::openAddRemoveDialogue()
+{
+    openSettingsDlg(2); //2 is structures add/remove
+    //XXX maybe use enum for safety
 }
 
 bool StructView::eventFilter(QObject* object, QEvent* event)
 {
-    //FIXME why is this not being called??!
     if (object == mStructTreeView)
     {
         if (event->type() == QEvent::FocusIn)
@@ -163,15 +193,15 @@ bool StructView::eventFilter(QObject* object, QEvent* event)
     return QWidget::eventFilter(object, event);
 }
 
-void StructView::onCurrentRowChanged( const QModelIndex& current, const QModelIndex& previous )
+void StructView::onCurrentRowChanged(const QModelIndex& current,
+        const QModelIndex& previous)
 {
     Q_UNUSED( previous )
-    if( current.isValid())
+    if (current.isValid())
         mTool->mark(current);
     else
         mTool->unmark();
 }
-
 
 StructView::~StructView()
 {
@@ -180,6 +210,7 @@ StructView::~StructView()
     delete mSettingsButton;
     delete mStructTreeView;
     delete mDelegate;
+    delete mAddRemoveButton;
     //don't delete tool. it causes segfault
 }
 }

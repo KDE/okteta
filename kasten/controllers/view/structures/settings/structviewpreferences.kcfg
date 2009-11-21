@@ -2,10 +2,11 @@
 <kcfg xmlns="http://www.kde.org/standards/kcfg/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
 	http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
-  <kcfgfile name="oktetastructview2rc" />
+  <kcfgfile name="oktetastructuresrc" />
   <group name="ValueDisplay">
     <entry name="UnsignedDisplayBase" type="Enum">
-      <label>The base to use when converting unsigned numbers to a string.</label>
+      <label>Unsigned values display</label>
+      <tooltip context="@info:tooltip">The base to use when converting unsigned numbers to a string.</tooltip>
       <choices>
         <choice name="Binary" />
         <choice name="Decimal" />
@@ -57,13 +58,16 @@
       <default></default>
       <label>The loaded structure files</label>
     </entry>
-      <entry name="ByteOrder" type="Enum">
+    <entry name="ByteOrder" type="Enum">
       <choices>
-      <choice name="LittleEndian"></choice>
-      <choice name="BigEndian"></choice>
+        <choice name="LittleEndian"></choice>
+        <choice name="BigEndian"></choice>
       </choices>
       <default>LittleEndian</default>
       <label>The loaded structure files</label>
+    </entry>
+    <entry name="LoadedStructures" type="StringList">
+      <default></default>
     </entry>
   </group>
 </kcfg>

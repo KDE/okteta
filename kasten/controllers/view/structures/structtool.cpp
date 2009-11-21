@@ -22,7 +22,7 @@
  */
 
 #include "structtool.h"
-
+#include "structuredefinitionfile.h"
 // lib
 #include <bytearraydocument.h>
 #include <bytearrayview.h>
@@ -35,17 +35,11 @@
 #include <KDebug>
 #include <KGlobal>
 #include <KStandardDirs>
-//Qt
-#include <QDir>
-#include <QFile>
-//data types
-#include "datatypes/structuredatainformation.h"
-#include "datatypes/uniondatainformation.h"
-#include "datatypes/primitivedatainformation.h"
-#include "datatypes/staticlengtharraydatainformation.h"
 
 namespace Kasten
 {
+const QDir StructTool::defsDir = KGlobal::dirs()->locateLocal("data",
+        "okteta/structures/", true);
 StructTool::StructTool() :
             mByteArrayView(0),
             mByteArrayModel(0),
@@ -64,7 +58,8 @@ StructTool::StructTool() :
 
 StructTool::~StructTool()
 {
-    qDeleteAll(this->mData);
+    qDeleteAll(mData);
+    qDeleteAll(mLoadedDefs);
     //	delete mCharCodec;
     StructViewPreferences::self()->writeConfig();
 }
@@ -91,8 +86,9 @@ void StructTool::setTargetModel(AbstractModel* model)
         mByteArrayModel->disconnect(this);
 
     mByteArrayView = model ? model->findBaseModel<ByteArrayView*> () : 0;
-    ByteArrayDocument *document = mByteArrayView ? qobject_cast<ByteArrayDocument*> (
-            mByteArrayView->baseModel()) : 0;
+    ByteArrayDocument *document =
+            mByteArrayView ? qobject_cast<ByteArrayDocument*> (
+                    mByteArrayView->baseModel()) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
     if (mByteArrayModel && mByteArrayView)
@@ -135,8 +131,8 @@ void StructTool::setByteOrder(int order)
         setByteOrder(StructViewPreferences::EnumByteOrder::LittleEndian);
     else if (order == StructViewPreferences::EnumByteOrder::BigEndian)
         setByteOrder(StructViewPreferences::EnumByteOrder::BigEndian);
-    else
-        kWarning() << "§invalid byte order set:" << order;
+        else
+        kWarning() << "invalid byte order set:" << order;
 }
 
 void StructTool::onContentsChange()
@@ -155,8 +151,8 @@ bool StructTool::setData(const QVariant& value, int role, DataInformation* item)
     int remaining = qMax(mByteArrayModel->size() - mCursorIndex, 0);
     for (int i = 0; i < mData.size(); ++i)
     {
-        if (mData[i]->setData(value, item, mByteArrayModel, mByteOrder, mCursorIndex,
-                remaining))
+        if (mData[i]->setData(value, item, mByteArrayModel, mByteOrder,
+                mCursorIndex, remaining))
             return true;
     }
     return false;
@@ -229,115 +225,107 @@ void StructTool::loadStructDefFiles()
     QStringList filelist = StructViewPreferences::structureDefFiles();
     if (filelist == mLoadedFiles)
         return;
-    //just empty list, don't bother with rest of method
-    qDeleteAll(mData);
-    mData.clear();
-    emit
-    dataChanged();
-    emit
-    dataCleared();
-    QString defaultDir = KGlobal::dirs()->locateLocal("data", "okteta/structures/", true);
-    kDebug() << defaultDir;
-    //FIXME already loaded files behavour is not correct
+    //FIXME already loaded files behaviour is not correct
     QStringList includedFiles = mLoadedFiles;
     foreach(QString fileName,filelist)
         {
-            QFileInfo fileInfo(fileName);
-            if (!fileInfo.isAbsolute())
-                fileInfo = QFileInfo(defaultDir + fileName);
-
-            DataInformationGroup* loadedData = loadXML(fileInfo, includedFiles);
-            if (loadedData)
-                addChildItem(loadedData);
+            fileName = QDir::cleanPath(fileName);
+            QString relPath = defsDir.relativeFilePath(fileName);
+            if (!mLoadedDefs.contains(relPath))
+            {
+                addStructDef(relPath);
+            }
         }
-    //	emit dataChanged();
     updateData();
     mLoadedFiles = filelist;
+    setSelectedStructuresInView();
 }
 
-DataInformationGroup* StructTool::loadXML(QFileInfo& fileInfo, QStringList& includedFiles)
+void StructTool::addStructDef(const QString& relPath)
 {
-    QString absoluteFilePath = fileInfo.absoluteFilePath();
-    if (includedFiles.contains(absoluteFilePath))
-        includedFiles.append(absoluteFilePath);
-    QFile file(absoluteFilePath);
-    QDomDocument doc;
-    if (!file.open(QIODevice::ReadOnly))
-        return NULL;
-    int errorLine, errorColumn;
-    QString errorMsg;
-    if (!doc.setContent(&file, false, &errorMsg, &errorLine, &errorColumn))
-    {
-        file.close();
-        kWarning() << "DataInformation::loadFromXML(): error reading file:\n" << errorMsg
-                << "\n error line=" << errorLine << " error column=" << errorColumn;
-        return NULL;
-    }
-    file.close();
-    DataInformationGroup* group = new DataInformationGroup(fileInfo.fileName(), NULL);
-    // print out the element names of all elements that are direct children
-    // of the outermost element.
-    QDomElement docElem = doc.documentElement();
-    kDebug() << "root elem tag: " << docElem.tagName();
-    QDomNode n = docElem.firstChild();
-    while (!n.isNull())
-    {
-        QDomElement elem = n.toElement(); // try to convert the node to an element.
-        DataInformation* data = NULL;
-        if (!elem.isNull())
-        {
-            //			kDebug() << "element tag: " << elem.tagName();
-            //e is element
-            if (elem.tagName() == "include")
-            {
-                parseIncludeNode(elem, fileInfo, includedFiles);
-            }
-            else if (elem.tagName() == "struct")
-                data = StructureDataInformation::fromXML(elem);
-            else if (elem.tagName() == "array")
-                data = StaticLengthArrayDataInformation::fromXML(elem);
-            else if (elem.tagName() == "primitive")
-                data = PrimitiveDataInformation::fromXML(elem);
-            else if (elem.tagName() == "union")
-                data = UnionDataInformation::fromXML(elem);
-            //			kDebug() << "end of tag: " << elem.tagName();
-        }
-
-        if (data)
-            *group << data;
-        n = n.nextSibling();
-    }
-    return group;
+    kDebug() << "add struct def " << relPath;
+    QFileInfo fileInfo(defsDir, relPath);
+    StructureDefinitionFile* def = new StructureDefinitionFile(fileInfo);
+    def->parse(); //TODO lazy loading
+    mLoadedDefs.insert(relPath, def);
+    manageIncludes(def);
 }
 
-void StructTool::parseIncludeNode(const QDomElement& elem, const QFileInfo& fileInfo,
-        QStringList& includedFiles)
+void StructTool::manageIncludes(const StructureDefinitionFile* def)
 {
-    QString includeFile = elem.attribute("file", QString::null);
-    if (!includeFile.isNull())
+    QStringList includedFiles = def->includedFiles();
+    if (includedFiles.length() == 0)
+        return;
+    kDebug() << "included files: " << def->includedFiles();
+    QDir defDir = def->path().dir();
+    //add included files structures
+    for (int i = 0; i < includedFiles.length(); ++i)
     {
-        kDebug() << "including file: " << includeFile;
-        QFileInfo includeFileInfo(includeFile);
-        if (includeFileInfo.isRelative())
-            includeFileInfo = QFileInfo(fileInfo.absolutePath() + '/' + includeFile);
-
-        //if contains this file, file was already included
-        if (!includedFiles.contains(includeFile))
+        QString inclPath = includedFiles.at(i);
+        kDebug() << "include path: " << inclPath;
+        //XXX maybe more lazy loading
+        //check if included file is already loaded
+        QString relPath =
+                defsDir.relativeFilePath(defDir.absoluteFilePath(inclPath));
+        kDebug() << "rel path = " << relPath;
+        relPath = QDir::cleanPath(relPath);
+        kDebug() << "rel path = " << relPath;
+        if (mLoadedDefs.contains(relPath))
         {
-            includedFiles.append(includeFile);
-            DataInformationGroup* loadedIncludeData = loadXML(includeFileInfo,
-                    includedFiles);
-            if (loadedIncludeData)
-                addChildItem(loadedIncludeData);
+            kDebug() << "included file already loaded: " << relPath;
         }
         else
         {
-            kDebug() << "included file is already loaded";
+            QFileInfo test(defsDir, relPath);
+
+            if (test.exists()) // only load if file exists
+                addStructDef(relPath);
+            else
+            {
+                kDebug() << "included file does not exist: " << relPath;
+            }
         }
     }
 }
+
+void StructTool::setSelectedStructuresInView()
+{
+    qDeleteAll(mData);
+    mData.clear();
+    emit
+    dataCleared();
+
+    QRegExp regex("'(.+)':'(.+)'");
+    QStringList loadedStructs = StructViewPreferences::loadedStructures();
+    kDebug() << "loadedStructs " << loadedStructs;
+    foreach(QString s,loadedStructs)
+        {
+            int pos = regex.indexIn(s);
+            if (pos > -1)
+            {
+                QString path = regex.cap(1);
+                QString name = regex.cap(2);
+//                kDebug() << "path=" << path << " name=" << name;
+                StructureDefinitionFile* def = mLoadedDefs.value(path);
+                if (!def)
+                    continue;
+                DataInformation* data = def->getStructure(name);
+                if (data)
+                    addChildItem(data);
+            }
+        } emit
+    dataChanged();
+    updateData();
+
+}
+
 void StructTool::mark(const QModelIndex& idx)
 {
+    if (!mByteArrayModel || !mByteArrayView)
+    {
+        kDebug() << "model or view == NULL";
+        return;
+    }
     DataInformation* data = static_cast<DataInformation*> (idx.internalPointer());
     if (!data)
         return;

@@ -5,3 +5,4 @@ Namespace=Kasten
 Singleton=true
 Mutators=true
 ItemAccessors=true
+SetUserTexts=true

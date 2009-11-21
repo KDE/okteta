@@ -28,7 +28,7 @@ class StructViewDisplaySettingsWidget: public QWidget
 {
 Q_OBJECT
 public:
-    StructViewDisplaySettingsWidget();
+    explicit StructViewDisplaySettingsWidget();
     ~StructViewDisplaySettingsWidget();
 private:
     Ui_StructViewSettings ui;

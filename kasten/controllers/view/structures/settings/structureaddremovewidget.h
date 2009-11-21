@@ -2,7 +2,6 @@
  *   This file is part of the Okteta Kasten module, part of the KDE project.
  *
  *   Copyright 2009 Alex Richardson <alex.richardson@gmx.de>
- *   Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -20,53 +19,53 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
+#ifndef STRUCTUREADDREMOVEWIDGET_H
+#define STRUCTUREADDREMOVEWIDGET_H
 
-#ifndef STRUCTVIEW_H_
-#define STRUCTVIEW_H_
 #include <QtGui/QWidget>
-#include "structviewitemdelegate.h"
-#include <QEvent>
-class KComboBox;
-class QTreeView;
+
 class KPushButton;
+class QLabel;
+class QTreeWidget;
+class KListWidget;
 
 namespace Kasten
 {
 class StructTool;
-class StructTreeModel;
-
-class StructView: public QWidget
+}
+class StructureAddRemoveWidget: public QWidget
 {
 Q_OBJECT
 
+    Q_PROPERTY(QStringList values READ values() USER true)
+    QLabel* mTree1Label;
+    QTreeWidget* mTreeAvailable;
+
+    QLabel* mTree2Label;
+    QTreeWidget* mTreeSelected;
+
+    KPushButton* mRightButton;
+    KPushButton* mLeftButton;
+
+    KPushButton* mUpButton;
+    KPushButton* mDownButton;
+
+    QStringList mValues;
 public:
-    explicit StructView(StructTool* tool, QWidget* parent = 0);
-    virtual ~StructView();
-
-public:
-    StructTool* tool() const;
-    virtual bool eventFilter(QObject* object, QEvent* event);
-
-protected:
-    StructTool* mTool;
-
-    StructTreeModel* mStructTreeModel;
-
-    QTreeView* mStructTreeView;
-    KComboBox* mByteOrderSelection;
-    KPushButton* mSettingsButton;
-    KPushButton* mAddRemoveButton;
-    StructViewItemDelegate* mDelegate;
-protected Q_SLOTS:
-    void openSettingsDlg(int page = 0);
-    void openAddRemoveDialogue();
-    void onCurrentRowChanged( const QModelIndex& current, const QModelIndex& previous );
+    explicit StructureAddRemoveWidget(Kasten::StructTool* tool, QWidget* parent = 0);
+    ~StructureAddRemoveWidget();
+    QStringList values() const
+    {
+        return mValues;
+    }
+Q_SIGNALS:
+    void changed(const QStringList& newValues);
+private Q_SLOTS:
+    void moveLeft();
+    void moveRight();
+    void moveUp();
+    void moveDown();
+private:
+    void syncData();
 };
-
-inline StructTool* StructView::tool() const
-{
-    return mTool;
-}
-
-}
-#endif /* STRUCTVIEW_H_ */
+#endif // STRUCTUREADDREMOVEWIDGET_H

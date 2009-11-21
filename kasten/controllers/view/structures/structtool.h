@@ -38,6 +38,7 @@
 #include <QModelIndex>
 #include <QFileInfo>
 #include <QStringList>
+#include <QDir>
 
 namespace Okteta
 {
@@ -48,6 +49,7 @@ class AbstractByteArrayModel;
 namespace Kasten
 {
 class ByteArrayView;
+class StructureDefinitionFile;
 
 class OKTETAKASTENCONTROLLERS_EXPORT StructTool: public AbstractTool
 {
@@ -57,7 +59,7 @@ public:
     virtual ~StructTool();
 public:
     // AbstractTool API
-    //     virtual AbstractModel* targetModel() const;
+    // virtual AbstractModel* targetModel() const;
     virtual QString title() const;
     virtual void setTargetModel(AbstractModel* model);
 
@@ -72,24 +74,23 @@ public:
         return DataInformation::COLUMN_COUNT;
     }
     bool setData(const QVariant& value, int role, DataInformation* item);
-    Qt::ItemFlags flags(int column, DataInformation* data) const
+    inline const QList<StructureDefinitionFile*> loadedDefs()
     {
-        return data->flags(column, mByteArrayModel != NULL);
+        return mLoadedDefs.values();
     }
-public Q_SLOTS:
-    void setByteOrder(int order);
-
-Q_SIGNALS: // changes to the setting currently not signalled, because only controlled by view
+Q_SIGNALS: // changes to the setting currently not signaled, because only controlled by view
     void dataChanged();
     void dataCleared();
     void byteOrderChanged();
 
 public Q_SLOTS:
+    void setByteOrder(int order);
     void mark(const QModelIndex& idx);
     void unmark(/*const QModelIndex& idx*/);
     void updateData();
     void addChildItem(DataInformation* child);
     void loadStructDefFiles();
+    void setSelectedStructuresInView();
 
 protected Q_SLOTS:
     void onCursorPositionChange(Okteta::Address pos);
@@ -97,7 +98,7 @@ protected Q_SLOTS:
     //	void onCharCodecChange(const QString& codecName);
     void onChildItemDataChanged()
     {
-        //		kDebug() << "StructTool::onChildItemDataChanged()";
+        //		kDebug() << "childDataChanged";
         emit dataChanged();
     }
 
@@ -108,23 +109,23 @@ protected:
     Okteta::Address mCursorIndex;
     //	Okteta::CharCodec* mCharCodec;
 
-protected:
     // settings
     StructViewPreferences::EnumByteOrder::type mByteOrder;
     QStringList mLoadedFiles;
-    QList<DataInformationGroup*> mLoadedDefs;
+    QMap<QString, StructureDefinitionFile*> mLoadedDefs;
     QList<DataInformation*> mData;
-
-    DataInformationGroup* loadXML(QFileInfo& file, QStringList& includedFiles);
-    void parseIncludeNode(const QDomElement& elem, const QFileInfo& fileInfo,
-            QStringList& includedFiles);
-    // decoded data
-
-    //interface for model
+    void manageIncludes(const StructureDefinitionFile* def);
+    void addStructDef(const QString& relPath);
 public:
+    static const QDir defsDir;
+    //interface for model
     QVariant headerData(int column, int role);
     int childCount() const;
     DataInformation* childAt(int idx) const;
+    Qt::ItemFlags flags(int column, DataInformation* data) const
+    {
+        return data->flags(column, mByteArrayModel != NULL);
+    }
     //	QTextCodec* mUtf8Codec; //XXX add utf8 strings sometime
 };
 }

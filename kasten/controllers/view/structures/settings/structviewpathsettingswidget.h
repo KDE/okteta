@@ -28,9 +28,8 @@
 class StructViewPathSettingsWidget: public QWidget
 {
 Q_OBJECT
-
 public:
-    StructViewPathSettingsWidget(QWidget *parent = 0);
+    explicit StructViewPathSettingsWidget(QWidget *parent = 0);
     ~StructViewPathSettingsWidget();
 
 private:
