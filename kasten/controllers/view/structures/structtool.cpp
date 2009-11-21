@@ -70,6 +70,7 @@ void StructTool::setByteOrder(StructViewPreferences::EnumByteOrder::type order)
         emit byteOrderChanged();
         StructViewPreferences::setByteOrder(order);
         mByteOrder = order;
+        updateData();
     }
 }
 QString StructTool::title() const
@@ -160,7 +161,7 @@ bool StructTool::setData(const QVariant& value, int role, DataInformation* item)
 
 void StructTool::updateData()
 {
-    kDebug() << "updateData()";
+//    kDebug() << "updateData()";
     int remaining;
     if (mByteArrayModel)
     {
