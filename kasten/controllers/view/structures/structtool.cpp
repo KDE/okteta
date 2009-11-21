@@ -61,7 +61,6 @@ StructTool::~StructTool()
     qDeleteAll(mData);
     qDeleteAll(mLoadedDefs);
     //	delete mCharCodec;
-    StructViewPreferences::self()->writeConfig();
 }
 void StructTool::setByteOrder(StructViewPreferences::EnumByteOrder::type order)
 {
