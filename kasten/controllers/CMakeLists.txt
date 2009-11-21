@@ -242,7 +242,6 @@ set( STRUCTVIEW_SRCS
   view/structures/settings/structviewpathsettingswidget.cpp
   view/structures/datatypes/chardatainformation.cpp
   view/structures/datatypes/datainformation.cpp
-  view/structures/datatypes/datainformationgroup.cpp
   view/structures/datatypes/datainformationwithchildren.cpp
   view/structures/datatypes/doubledatainformation.cpp
   view/structures/datatypes/floatdatainformation.cpp
