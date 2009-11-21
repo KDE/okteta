@@ -27,7 +27,6 @@
 #include "bool32datainformation.h"
 #include "bool64datainformation.h"
 #include "chardatainformation.h"
-#include "datainformationgroup.h"
 #include "doubledatainformation.h"
 #include "floatdatainformation.h"
 #include "int8datainformation.h"

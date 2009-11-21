@@ -25,9 +25,9 @@
 #include "uniondatainformation.h"
 #include "primitivedatainformation.h"
 #include "staticlengtharraydatainformation.h"
-#include "datainformationgroup.h"
 
-DataInformation::DataInformation(const QString& name, int index, DataInformation* parent) :
+DataInformation::DataInformation(const QString& name, int index,
+        DataInformation* parent) :
     QObject(parent), mIndex(index)
 {
     setObjectName(name);
@@ -81,9 +81,9 @@ DataInformation* DataInformation::parseNode(QDomNode& n)
 }
 Okteta::Size DataInformation::positionRelativeToParent() const
 {
-    DataInformation* par = static_cast<DataInformation*>(parent());
-    if (!par || dynamic_cast<DataInformationGroup*>(par)) {
-        //TODO remove datainformationgroup
+    DataInformation* par = static_cast<DataInformation*> (parent());
+    if (!par)
+    {
         return 0;
     }
     return par->offset(this->mIndex) + par->positionRelativeToParent();

@@ -29,7 +29,6 @@
 // tool
 #include "structviewpreferences.h"
 #include "datatypes/datainformation.h"
-#include "datatypes/datainformationgroup.h"
 // Kasten core
 #include <abstracttool.h>
 // Okteta core
