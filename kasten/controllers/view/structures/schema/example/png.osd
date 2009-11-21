@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../structuredefs.xsd">
+  <struct name="pngHeader">
+    <array name="signature" length="12">
+      <primitive name="val" type="Char" />
+    </array>
+    <struct name="ImageHeader">
+      <array name="signature" length="4">
+        <primitive name="val" type="Char" />
+      </array>
+      <primitive name="width" type="UInt32" />
+      <primitive name="height" type="UInt32" />
+      <primitive name="bitDepth" type="UInt8" />
+      <primitive name="colourType" type="UInt8" />
+      <primitive name="compressionMethod" type="UInt8" />
+      <primitive name="filterMethod" type="UInt8" />
+      <primitive name="interlaceMethod" type="UInt8" />
+    </struct>
+  </struct>
+</data>

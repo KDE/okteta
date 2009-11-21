@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../structuredefs.xsd">
+  <struct name="dynTest">
+    <primitive name="length" type="UInt8"/>
+    <array name="signature" length="length">
+      <primitive name="val" type="Char" />
+    </array>
+  </struct>
+</data>
