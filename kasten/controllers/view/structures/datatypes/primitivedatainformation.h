@@ -41,8 +41,8 @@ public:
     PrimitiveDataInformation(QString name, PrimitiveDataType type, int index = -1,
             DataInformation* parent = NULL);
     virtual ~PrimitiveDataInformation();
-    static PrimitiveDataInformation* newInstance(QString name, PrimitiveDataType type,
-            int index = -1, DataInformation* parent = NULL);
+    static PrimitiveDataInformation* newInstance(QString name,
+            PrimitiveDataType type, int index = -1, DataInformation* parent = NULL);
     //    static int getStringConversionBase(PrimitiveDataType type);
     //    static QString getTypeName(PrimitiveDataType type);
     //    static int getSize(PrimitiveDataType type);
@@ -64,6 +64,10 @@ public:
             Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
             Okteta::Address address, Okteta::Size remaining);
     virtual QString getValueString() const = 0;
+    AllPrimitiveTypes value() const
+    {
+        return mValue;
+    }
 protected:
     void setModelData(AllPrimitiveTypes value, Okteta::AbstractByteArrayModel *out,
             ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining);

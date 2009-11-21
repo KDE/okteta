@@ -19,31 +19,36 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef STATICLENGTHARRAYDATAINFORMATION_H_
-#define STATICLENGTHARRAYDATAINFORMATION_H_
+
+#ifndef DYNAMICLENGHTARRAYDATAINFORMATION_H_
+#define DYNAMICLENGHTARRAYDATAINFORMATION_H_
+
 #include "abstractarraydatainformation.h"
 
-class StaticLengthArrayDataInformation: public AbstractArrayDataInformation
+//TODO merge dynamic and static length
+class DynamicLengthArrayDataInformation: public AbstractArrayDataInformation
 {
 Q_OBJECT
 protected:
-    StaticLengthArrayDataInformation(const StaticLengthArrayDataInformation& d);
+    DynamicLengthArrayDataInformation(const DynamicLengthArrayDataInformation& d);
 public:
     /** creates a new array with static length.
      *  children is used as the base type of the array and is cloned length times.
      *
      *  length should be > 0
      */
-    StaticLengthArrayDataInformation(QString name, unsigned int length,
+    DynamicLengthArrayDataInformation(QString name, const QString& lengthStr,
             const DataInformation& childItem, int index = -1,
             DataInformation* parent = NULL);
-    virtual ~StaticLengthArrayDataInformation();
-    DATAINFORMATION_CLONE( StaticLengthArray)
-public:
-    Okteta::Size readData(Okteta::AbstractByteArrayModel* input,
+    virtual ~DynamicLengthArrayDataInformation();
+    DATAINFORMATION_CLONE(DynamicLengthArray)
+
+    virtual Okteta::Size readData(Okteta::AbstractByteArrayModel* input,
             ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining);
 private:
-    unsigned int mArrayLength;
+    int calculateLength();
+    void resizeChildren();
+    QString mLengthString;
+    DataInformation* mChildType;
 };
-
-#endif /* STATICLENGTHARRAYDATAINFORMATION_H_ */
+#endif /* DYNAMICLENGHTARRAYDATAINFORMATION_H_ */

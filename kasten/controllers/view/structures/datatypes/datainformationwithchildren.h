@@ -41,8 +41,8 @@ public:
     {
         return mChildren;
     }
-    DataInformationWithChildren(QString& name, int index = -1, DataInformation* parent =
-            NULL);
+    DataInformationWithChildren(QString& name, int index = -1,
+            DataInformation* parent = NULL);
     virtual ~DataInformationWithChildren();
     virtual QVariant data(int, int) const;
 
@@ -59,6 +59,8 @@ public:
     {
         return mChildren.size();
     }
+    virtual QList<const DataInformation*> findChildrenWithName(const QString& name,
+            const DataInformation* const upTo) const;
 };
 
 #endif /* DATAINFORMATIONWITHCHILDREN_H_ */

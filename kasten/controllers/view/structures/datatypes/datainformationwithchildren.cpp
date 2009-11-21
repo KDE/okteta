@@ -41,9 +41,9 @@ DataInformation* DataInformationWithChildren::childAt(unsigned int idx) const
     return mChildren[idx];
 }
 
-bool DataInformationWithChildren::setData(const QVariant& value, DataInformation* inf,
-        Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
-        Okteta::Address address, Okteta::Size remaining)
+bool DataInformationWithChildren::setData(const QVariant& value,
+        DataInformation* inf, Okteta::AbstractByteArrayModel *out,
+        ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining)
 {
     if (this == inf)
         return true; //do nothing since this is not editable
@@ -93,3 +93,29 @@ bool DataInformationWithChildren::isValid() const
     }
     return true;
 }
+QList<const DataInformation*> DataInformationWithChildren::findChildrenWithName(
+        const QString& name, const DataInformation* const upTo) const
+{
+    QList<const DataInformation*> retList;
+    if (parent())
+    {
+        DataInformationWithChildren* par =
+                static_cast<DataInformationWithChildren*> (parent());
+        if (par)
+            retList.append(par->findChildrenWithName(name, this));
+    }
+    for (int i = 0; i < childCount(); ++i)
+    {
+        DataInformation* data = childAt(i);
+        if (data == upTo)
+            break;
+        if (data->getName() == name)
+            retList.append(data);
+        DataInformationWithChildren* dataWithChildren =
+                dynamic_cast<DataInformationWithChildren*> (data);
+        if (dataWithChildren)
+            retList.append(dataWithChildren->findChildrenWithName(name, NULL));
+    }
+    return retList;
+}
+

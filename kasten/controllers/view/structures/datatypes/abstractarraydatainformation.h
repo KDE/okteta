@@ -19,31 +19,33 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef STATICLENGTHARRAYDATAINFORMATION_H_
-#define STATICLENGTHARRAYDATAINFORMATION_H_
-#include "abstractarraydatainformation.h"
 
-class StaticLengthArrayDataInformation: public AbstractArrayDataInformation
+#ifndef ABSTRACTARRAYDATAINFORMATION_H_
+#define ABSTRACTARRAYDATAINFORMATION_H_
+#include "datainformationwithchildren.h"
+
+class AbstractArrayDataInformation: public DataInformationWithChildren
 {
 Q_OBJECT
 protected:
-    StaticLengthArrayDataInformation(const StaticLengthArrayDataInformation& d);
+    AbstractArrayDataInformation(const AbstractArrayDataInformation& d);
 public:
     /** creates a new array with static length.
      *  children is used as the base type of the array and is cloned length times.
      *
      *  length should be > 0
      */
-    StaticLengthArrayDataInformation(QString name, unsigned int length,
-            const DataInformation& childItem, int index = -1,
+    AbstractArrayDataInformation(QString name, int index = -1,
             DataInformation* parent = NULL);
-    virtual ~StaticLengthArrayDataInformation();
-    DATAINFORMATION_CLONE( StaticLengthArray)
+    virtual ~AbstractArrayDataInformation();
 public:
-    Okteta::Size readData(Okteta::AbstractByteArrayModel* input,
-            ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining);
-private:
-    unsigned int mArrayLength;
-};
+    QString getTypeName() const;
+    virtual int getSize() const;
+    virtual Okteta::Size readData(Okteta::AbstractByteArrayModel* input,
+            ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining) = 0;
 
-#endif /* STATICLENGTHARRAYDATAINFORMATION_H_ */
+    static AbstractArrayDataInformation* fromXML(QDomElement& xmlElem);
+protected:
+    virtual Okteta::Size offset(unsigned int index) const;
+};
+#endif /* ABSTRACTARRAYDATAINFORMATION_H_ */
