@@ -133,6 +133,7 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(Kasten::StructTool* tool,
             }
         }
     mTreeAvailable->addTopLevelItems(availableItems);
+    syncData();
 }
 
 StructureAddRemoveWidget::~StructureAddRemoveWidget()
