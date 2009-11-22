@@ -21,7 +21,7 @@
  */
 #include "abstractarraydatainformation.h"
 #include "primitivedatainformation.h"
-#include "dynamiclenghtarraydatainformation.h"
+#include "dynamiclengtharraydatainformation.h"
 #include "staticlengtharraydatainformation.h"
 
 QString AbstractArrayDataInformation::getTypeName() const
