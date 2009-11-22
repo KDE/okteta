@@ -259,7 +259,9 @@ set( STRUCTVIEW_SRCS
   view/structures/datatypes/uint64datainformation.cpp
   view/structures/datatypes/primitivedatainformation.cpp
   view/structures/datatypes/signedprimitivedatainformation.cpp
+  view/structures/datatypes/abstractarraydatainformation.cpp
   view/structures/datatypes/staticlengtharraydatainformation.cpp
+  view/structures/datatypes/dynamiclenghtarraydatainformation.cpp
   view/structures/datatypes/structuredatainformation.cpp
   view/structures/datatypes/uniondatainformation.cpp
   view/structures/datatypes/unsignedprimitivedatainformation.cpp
