@@ -101,7 +101,7 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     KIcon settings = KIcon("configure");
     mSettingsButton = new KPushButton(settings, i18n("Settings"), this);
     const QString settingsTooltip = i18nc("@info:tooltip", "Open settings.");
-    mByteOrderSelection->setToolTip(settingsTooltip);
+    mSettingsButton->setToolTip(settingsTooltip);
     connect(mSettingsButton, SIGNAL(pressed()), this, SLOT(openSettingsDlg()));
     settingsLayout->addWidget(mSettingsButton);
     connect(mStructTreeView->selectionModel(),
@@ -135,7 +135,7 @@ void StructView::openSettingsDlg(int page)
         structsWidget->setLayout(layout);
     }
     KPageWidgetItem* structs = dialog->addPage(structsWidget, i18n(
-            "Loaded structures", QString("configure")));
+            "Loaded structures"), QString("configure"));
 
     //User edited the configuration - update your local copies of the
     //configuration data
