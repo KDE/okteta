@@ -20,7 +20,7 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "dynamiclenghtarraydatainformation.h"
+#include "dynamiclengtharraydatainformation.h"
 #include "primitivedatainformation.h"
 
 void DynamicLengthArrayDataInformation::resizeChildren()
