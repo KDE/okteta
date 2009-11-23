@@ -138,17 +138,6 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(Kasten::StructTool* tool,
 
 StructureAddRemoveWidget::~StructureAddRemoveWidget()
 {
-    delete mTree1Label;
-    delete mTreeAvailable;
-
-    delete mTree2Label;
-    delete mTreeSelected;
-
-    delete mRightButton;
-    delete mLeftButton;
-
-    delete mUpButton;
-    delete mDownButton;
 }
 
 void StructureAddRemoveWidget::moveLeft()
