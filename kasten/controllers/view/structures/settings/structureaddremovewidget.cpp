@@ -39,7 +39,7 @@
 using namespace Kasten;
 StructureAddRemoveWidget::StructureAddRemoveWidget(Kasten::StructTool* tool,
         QWidget* parent) :
-    QWidget(parent)
+    QWidget(parent), mTool(tool)
 {
     KConfigDialogManager::changedMap()->insert("StructureAddRemoveWidget",
             SIGNAL(changed(const QStringList&)));
@@ -207,4 +207,42 @@ void StructureAddRemoveWidget::syncData()
     mValues = strings;
     kDebug() << "changed: " << mValues;
     emit changed(mValues);
+}
+void StructureAddRemoveWidget::updateAvailable()
+{
+    //rebuild available tree
+    mTreeAvailable->clear();
+    const QList<StructureDefinitionFile*> loadedDefs = mTool->loadedDefs();
+    QList<QTreeWidgetItem*> availableItems;
+    foreach(const StructureDefinitionFile* def,loadedDefs)
+        {
+            QString relPath = StructTool::defsDir.relativeFilePath(
+                    def->path().absoluteFilePath());
+            QTreeWidgetItem* item = new QTreeWidgetItem(mTreeAvailable,
+                    QStringList() << def->title() << relPath);
+            foreach(const DataInformation* data,def->structures())
+                {
+                    QTreeWidgetItem* subItem = new QTreeWidgetItem(item,
+                            QStringList() << data->getName() << relPath);
+                    item->addChild(subItem);
+                }
+            availableItems.append(item);
+        }
+    //remove any structs that references not loaded files
+    QStringList paths = mTool->loadedFiles();
+    bool changed = false;
+    for (int i = 0; i < mTreeSelected->topLevelItemCount(); ++i)
+    {
+        QTreeWidgetItem* item = mTreeSelected->topLevelItem(i);
+        if (!paths.contains(item->text(1)))
+        {
+            kDebug() << "removed item: " << QString("\'%1\':\'%2\'").arg(item->text(
+                    1)).arg(item->text(0));
+            delete mTreeSelected->takeTopLevelItem(
+                    mTreeSelected->indexOfTopLevelItem(item));
+            changed = true;
+        }
+    }
+    if (changed)
+        syncData();
 }

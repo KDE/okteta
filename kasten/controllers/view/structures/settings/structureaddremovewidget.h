@@ -60,6 +60,8 @@ public:
     }
 Q_SIGNALS:
     void changed(const QStringList& newValues);
+public Q_SLOTS:
+    void updateAvailable();
 private Q_SLOTS:
     void moveLeft();
     void moveRight();
@@ -67,5 +69,6 @@ private Q_SLOTS:
     void moveDown();
 private:
     void syncData();
+    const Kasten::StructTool* mTool;
 };
 #endif // STRUCTUREADDREMOVEWIDGET_H

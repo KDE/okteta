@@ -144,6 +144,8 @@ void StructView::openSettingsDlg(int page)
             SLOT(loadStructDefFiles()));
     connect(dialog, SIGNAL(settingsChanged(const QString&)), mTool,
             SLOT(setSelectedStructuresInView()));
+    connect(dialog, SIGNAL(settingsChanged(const QString&)),
+            loadedStructuresSettings, SLOT(updateAvailable()));
     //TODO kconfig_compiler signals not working (or am I doing it wrong?)
     if (page == 0)
         dialog->setCurrentPage(displ);
