@@ -19,8 +19,8 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef STRUCTVIEWSETTINGS_H_
-#define STRUCTVIEWSETTINGS_H_
+#ifndef STRUCTVIEWDISPLAYSETTINGSWIDGET_H_
+#define STRUCTVIEWDISPLAYSETTINGSWIDGET_H_
 #include "ui_structviewdisplaysettingswidget.h"
 #include <QtGui/QWidget>
 
@@ -34,4 +34,4 @@ private:
     Ui_StructViewSettings ui;
 };
 
-#endif /* STRUCTVIEWSETTINGS_H_ */
+#endif /* STRUCTVIEWDISPLAYSETTINGSWIDGET_H_ */

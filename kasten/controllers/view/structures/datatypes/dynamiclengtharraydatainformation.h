@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DYNAMICLENGHTARRAYDATAINFORMATION_H_
-#define DYNAMICLENGHTARRAYDATAINFORMATION_H_
+#ifndef DYNAMICLENGTHARRAYDATAINFORMATION_H_
+#define DYNAMICLENGTHARRAYDATAINFORMATION_H_
 
 #include "abstractarraydatainformation.h"
 
@@ -51,4 +51,4 @@ private:
     QString mLengthString;
     DataInformation* mChildType;
 };
-#endif /* DYNAMICLENGHTARRAYDATAINFORMATION_H_ */
+#endif /* DYNAMICLENGTHARRAYDATAINFORMATION_H_ */
