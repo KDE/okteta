@@ -32,7 +32,7 @@
 class UIntSpinBox : public QAbstractSpinBox
 {
   public:
-    explicit UIntSpinBox( QWidget* parent = 0 );
+    explicit UIntSpinBox( QWidget* parent = 0, int base = 10 );
 
     virtual ~UIntSpinBox();
 
@@ -44,9 +44,9 @@ class UIntSpinBox : public QAbstractSpinBox
   public:
     void setValue( quint64 value );
 
-    void setAsHex( bool asHex );
-
     void setMaximum( quint64 max );
+
+    void setBase(int base);
 
   protected: // QAbstractSpinBox API
     virtual QValidator::State validate( QString& input, int& pos ) const;
@@ -67,9 +67,9 @@ class UIntSpinBox : public QAbstractSpinBox
 };
 
 
-inline UIntSpinBox::UIntSpinBox( QWidget *parent )
+inline UIntSpinBox::UIntSpinBox( QWidget *parent,int base )
   : QAbstractSpinBox( parent ),
-    mBase( 10 ),
+    mBase( base ),
     mValue( 0 ),
     mMaximum( std::numeric_limits<quint64>::max() )
 {
@@ -106,10 +106,15 @@ inline void UIntSpinBox::setValue( quint64 value )
     updateEditLine();
 }
 
-inline void UIntSpinBox::setAsHex( bool asHex )
+inline void UIntSpinBox::setBase(int base)
 {
-    mBase = asHex ? 16 : 10;
-    mPrefix = asHex ? QString::fromLatin1( "0x" ) : QString();
+    mBase = qBound(2,base,36);
+    if (base  == 16)
+        mPrefix = QString::fromLatin1( "0x" );
+    if (base == 8)
+        mPrefix = QString::fromLatin1( "0o" );
+    if (base == 2)
+        mPrefix = QString::fromLatin1( "0b" );
 }
 
 inline UIntSpinBox::~UIntSpinBox() {}

@@ -32,7 +32,7 @@
 class SIntSpinBox : public QAbstractSpinBox
 {
   public:
-    explicit SIntSpinBox( QWidget* parent = 0 );
+    explicit SIntSpinBox( QWidget* parent = 0, quint8 base = 10 );
 
     virtual ~SIntSpinBox();
 
@@ -44,6 +44,7 @@ class SIntSpinBox : public QAbstractSpinBox
 
     void setRange( qint64 minimum, qint64 maximum );
 
+    void setBase(int base);
   protected: // QAbstractSpinBox API
     virtual QValidator::State validate( QString& input, int& pos ) const;
     virtual void stepBy( int steps );
@@ -58,14 +59,18 @@ class SIntSpinBox : public QAbstractSpinBox
 
     qint64 mMinimum;
     qint64 mMaximum;
+    quint8 mBase;
+
+    QString mPrefix;
 };
 
 
-inline SIntSpinBox::SIntSpinBox( QWidget *parent )
+inline SIntSpinBox::SIntSpinBox( QWidget *parent, quint8 base)
   : QAbstractSpinBox( parent ),
     mValue( 0 ),
     mMinimum( std::numeric_limits<qint64>::min() ),
-    mMaximum( std::numeric_limits<qint64>::max() )
+    mMaximum( std::numeric_limits<qint64>::max() ),
+    mBase(base)
 {
 }
 
@@ -103,6 +108,17 @@ inline void SIntSpinBox::setRange( qint64 minimum, qint64 maximum )
 
         updateEditLine();
     }
+}
+
+inline void SIntSpinBox::setBase(int base)
+{
+    mBase = qBound(2,base,36);
+    if (base  == 16)
+        mPrefix = QString::fromLatin1( "0x" );
+    if (base == 8)
+        mPrefix = QString::fromLatin1( "0o" );
+    if (base == 2)
+        mPrefix = QString::fromLatin1( "0b" );
 }
 
 inline SIntSpinBox::~SIntSpinBox() {}

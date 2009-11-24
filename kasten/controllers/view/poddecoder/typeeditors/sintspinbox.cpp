@@ -98,6 +98,6 @@ QAbstractSpinBox::StepEnabled SIntSpinBox::stepEnabled() const
 
 void SIntSpinBox::updateEditLine() const
 {
-    const QString text = QString::number( mValue );
+    const QString text = QString::number( mValue, mBase );
     lineEdit()->setText( text );
 }
