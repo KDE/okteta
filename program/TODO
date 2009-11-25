@@ -1,7 +1,6 @@
 Unimplemented Feature of KHexEdit:
 ----------------------------------
 
-+ <Action name="paste_into_new_file" />
 + <Action name="insert_file" />
 
 + Zugriffsrechte (Größe)
@@ -203,6 +202,12 @@ Fixed after 0.3.1:
 * removed unneeded prefix lib from the OktetaPart
 * show more digits for float and double data types in pod table, as much as decimal precision is given
 
+Fixed after 0.3.2:
+------------------
+* do not crash if inserting from empty clipboard
+* doing a edit in the value column did not trigger the modifiedChanged signal
+* on a close of modified documents the behaviour for the success of the save was inverted
+
 Done for 0.4:
 -------------
 * added a framework for inline dialogs
@@ -242,11 +247,18 @@ Done for 0.4:
 * added Base64 encoder
 * middle click on tab now triggers a request to close it
 * paste on empty shell or next to tabs is treated like a drop of selection clipboard
+* renamed Revert to Disk to Reload (disk might have changed)
+* Warn on "Reload from disk" if there are modifications to the working copy
+* splitted SyncState into LocalSyncState and RemoteSyncState
+* (re-)added Marking to the ByteArrayViews
+* Strings tool now marks the strings instead of selecting it
+* POD-Table marks the bytes used for the currently selected type
+* added separate handler for dialogs with user to Kasten Core
+* store bookmarks in separate global XBEL file
 
 Next to work on:
 ----------------------------------
 Important:
-* set new created from content to Modified, as input/data might be lost (depends on generator, take into account)
 * generator editors need to remember used settings
 * get maxEnums out of Designer combobox
 * implement find whole words only!
@@ -255,7 +267,7 @@ Important:
 * QActionGroups are cleared on setupGui, e.g. if toolbar gets edited
 * search previous does not work in a row, as the cursor is exactly after a full match
 * find/replace dialogs and ByteArrayComboBox need to handle change charcodec, but what to do with than invalid characters already entered?
-* see if internal d'n'd not by view but by document
+* fix input of non-arabic digits
 Less important:
 * some more unit tests
 * fix wrong font width calculation for offset and selection in statusbar
@@ -265,12 +277,10 @@ Less important:
 * on tripple click turn into selecting just whole lines if button kept pressed
 * ask artists for own icon
 * scroll on drag in first and last line
-* warn on "revert to disk"
 
 Later on:
 ---------
 * add StackedViews
-* turn Insert/Sequence Pattern tools into one with generator plugins
 * think about making the ByteArray* things interface only to the AbstractModel
   for this improve template functions findDocument with multiple interfaces given
 * make offset 64-Bit, in the whole Api, best by using own datatype/define/typedef
@@ -343,7 +353,7 @@ See "Insert", is generated as well as from a source, so perhaps join there?
   similar to page modi of Okular (so page=section)
 * make all jobs (searching, filter operations, ...) cancellable, e.g. using ESC
 * add versions to view model, to be synched with the data model (if created later, create prior versions on demand)
-* make status bar entries non-readonly, e.g. for offset->goto, readonly, codings, selection,...
+* make status bar entries non-readonly, e.g. for offset->goto, selection,...
 * add Modified state symbol for Readonly to statusbar
 * search for other ideas in Inkscape
 * make bookmarks program-wide, switch doc if needed.
