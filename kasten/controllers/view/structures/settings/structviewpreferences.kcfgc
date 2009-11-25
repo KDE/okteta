@@ -6,3 +6,4 @@ Singleton=true
 Mutators=true
 ItemAccessors=true
 SetUserTexts=true
+UseEnumTypes=true

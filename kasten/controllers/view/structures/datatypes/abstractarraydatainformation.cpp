@@ -56,51 +56,6 @@ AbstractArrayDataInformation::~AbstractArrayDataInformation()
 {
 }
 
-AbstractArrayDataInformation*
-AbstractArrayDataInformation::fromXML(QDomElement& xmlElem)
-{
-    QString name = xmlElem.attribute("name", i18n("<invalid name>"));
-    DataInformation* subElem = NULL;
-    QDomNode node = xmlElem.firstChild();
-    subElem = parseNode(node);
-    if (!subElem)
-    {
-        kWarning() << "AbstractArrayDataInformation::fromXML():"
-            " could not parse subelement type";
-        return NULL;
-    }
-    QString lengthStr = xmlElem.attribute("length", QString::null);
-    if (lengthStr.isNull())
-    {
-        kWarning() << "StaticLengthPrimitiveArrayDataInformation::fromXML():"
-            " no length attribute defined";
-        delete subElem;
-        return NULL;
-    }
-    AbstractArrayDataInformation* retVal;
-    bool okay = true;
-    int length = lengthStr.toInt(&okay, 10); //TODO dynamic length
-    if (!okay)
-    {
-        kDebug()
-                << "error parsing length string -> is dynamic length array. Length string="
-                << lengthStr;
-        retVal = new DynamicLengthArrayDataInformation(name, lengthStr, *subElem);
-    }
-    else if (length >= 0)
-    {
-        retVal = new StaticLengthArrayDataInformation(name, length, *subElem);
-    }
-    else
-    {
-        kWarning() << "could not parse length string:" << lengthStr;
-        delete subElem;
-        return NULL;
-    }
-    delete subElem; //control not taken over by constructor
-    return retVal;
-}
-
 Okteta::Size AbstractArrayDataInformation::offset(unsigned int index) const
 {
     if (index >= childCount())

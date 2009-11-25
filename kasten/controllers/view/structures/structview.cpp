@@ -31,6 +31,7 @@
 #include "structviewpreferences.h"
 #include "settings/structviewdisplaysettingswidget.h"
 #include "settings/structviewpathsettingswidget.h"
+#include "settings/structuresmanagerview.h"
 #include "settings/structureaddremovewidget.h"
 // KDE
 #include <KComboBox>
@@ -122,6 +123,7 @@ void StructView::openSettingsDlg(int page)
             StructViewPreferences::self());
     QWidget* displaySettings = new StructViewDisplaySettingsWidget();
     QWidget* pathSettings = new StructViewPathSettingsWidget();
+    QWidget* structureSettings = new StructuresManagerView(mTool->manager(), this);
     QWidget* loadedStructuresSettings = new StructureAddRemoveWidget(mTool, this);
     KPageWidgetItem* displ = dialog->addPage(displaySettings, i18n(
             "Display settings"), QString("configure"));
@@ -136,6 +138,8 @@ void StructView::openSettingsDlg(int page)
     }
     KPageWidgetItem* structs = dialog->addPage(structsWidget, i18n(
             "Loaded structures"), QString("configure"));
+
+    dialog->addPage(structureSettings, i18n("Structures"), QString("folder"));
 
     //User edited the configuration - update your local copies of the
     //configuration data

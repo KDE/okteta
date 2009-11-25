@@ -49,8 +49,11 @@ public:
     static QString getValueString(AllPrimitiveTypes value, PrimitiveDataType type,
             int base);
     virtual DataInformation* clone() const = 0;
-
-    virtual inline int getSize() const = 0;
+    virtual PrimitiveDataType type() const
+    {
+        return mType;
+    }
+    virtual int getSize() const = 0;
     virtual inline QString getTypeName() const = 0;
     virtual inline bool isValid() const
     {

@@ -24,11 +24,21 @@
 
 #include <QString>
 #include <QList>
+#include <QDir>
 #include <QStringList>
+#include <QDomNodeList>
 #include <QFileInfo>
-
+#include <KPluginInfo>
+#include "datatypes/enumdefinition.h"
 class DataInformation;
 class QDomElement;
+
+class AbstractArrayDataInformation;
+class PrimitiveDataInformation;
+class UnionDataInformation;
+class StructureDataInformation;
+class EnumDataInformation;
+
 namespace Kasten
 {
 /**
@@ -41,40 +51,50 @@ public:
      * When using this constructor the method parse() must be called
      * before this class is usable (to allow lazy initialisation).
      */
-    StructureDefinitionFile(const QFileInfo& path);
-    //FIXME copy constructor
+    StructureDefinitionFile(QFileInfo file, KPluginInfo info);
     StructureDefinitionFile(StructureDefinitionFile& f);
-    StructureDefinitionFile(QString title, QString description, QString author,
-            QList<DataInformation*> topLevelStructures, QString absPath);
     virtual ~StructureDefinitionFile();
+
     void parse();
-    //    const QList<const DataInformation*> structures() const
-    //    {
-    //        return mTopLevelStructures;
-    //    }
     QList<DataInformation*> structures() const;
     DataInformation* getStructure(QString& name) const;
-    QString title() const;
-    QString description() const;
-    QString author() const;
-    QFileInfo path() const
+    const KPluginInfo& info() const
     {
-        return mPath;
+        return mPluginInfo;
     }
-    /** a QList with the absolute paths to the included files */
+    const QDir dir() const
+    {
+        return mDir;
+    }
+    const QString absPath() const
+    {
+        return mFileInfo.absoluteFilePath();
+    }
+    /** a QList with the relative paths to the included files */
     QStringList includedFiles() const;
-
+    const QList<EnumDefinition::Ptr> enums() const
+    {
+        return mEnums;
+    }
 private:
-    void parseIncludeNode(QDomElement& elem);
+    AbstractArrayDataInformation* arrayFromXML(const QDomElement& node) const;
+    PrimitiveDataInformation* primitiveFromXML(const QDomElement& node) const;
+    UnionDataInformation* unionFromXML(const QDomElement& node) const;
+    StructureDataInformation* structFromXML(const QDomElement& node) const;
+    EnumDataInformation* enumFromXML(const QDomElement& node) const;
+    DataInformation* parseNode(const QDomNode& node) const;
 
-    QFileInfo mPath;
-    QString mTitle;
-    QString mDescription;
-    QString mAuthor;
+    void parseIncludeNodes(QDomNodeList& elems);
+    void parseEnumDefNodes(QDomNodeList& elems);
+
+    KPluginInfo mPluginInfo;
+    QFileInfo mFileInfo;
+    QDir mDir;
     QList<const DataInformation*> mTopLevelStructures;
-    QStringList mIncludedFiles;
-    bool mValidAndLoaded :1;
-    //TODO enum definitions
+    QStringList mIncludedFiles; //TODO use QList<Structuredefinitionfile> instead, why bother about a few extra bytes of mem
+    bool mValid :1;
+    bool mLoaded :1;
+    QList<EnumDefinition::Ptr> mEnums;
 };
 }
 #endif /* STRUCTUREDEFINITIONFILE_H_ */

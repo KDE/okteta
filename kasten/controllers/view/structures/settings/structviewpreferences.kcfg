@@ -15,7 +15,7 @@
       <default>Hexadecimal</default> <!-- TODO make decimal default -->
     </entry>
     <entry name="SignedDisplayBase" type="Enum">
-      <label>The base to use when converting signed numbers to a string.</label>
+      <tooltip context="@info:tooltip">The base to use when converting signed numbers to a string.</tooltip>
       <choices>
         <choice name="Binary" />
         <choice name="Decimal" />
@@ -24,7 +24,7 @@
       <default>Hexadecimal</default> <!-- TODO make decimal default -->
     </entry>
     <entry name="CharDisplayBase" type="Enum">
-      <label>The base to use when converting characters to a value string.</label>
+      <tooltip context="@info:tooltip">The base to use when converting characters to a value string.</tooltip>
       <choices>
         <choice name="Binary" />
         <choice name="Decimal" />
@@ -33,38 +33,36 @@
       <default>Hexadecimal</default> <!-- TODO make decimal default -->
     </entry>
     <entry name="ShowCharNumericalValue" type="Bool">
-      <label>Whether to show the numerical value of chars</label>
+      <tooltip context="@info:tooltip">Whether to show the numerical value of chars</tooltip>
       <default>true</default>
     </entry>
     <entry name="LocaleAwareFloatFormatting" type="Bool">
-      <label>Whether to format floating point values according to the current locale</label>
+      <tooltip context="@info:tooltip">Whether to format floating point values according to the current locale</tooltip>
       <default>false</default>
     </entry>
     <entry name="LocaleAwareDecimalFormatting" type="Bool">
-      <label>Whether to format integer values according to the current locale</label>
-      <tooltip>If true, integers being displayed in decimal format will be formatted according to the current locale settings</tooltip>
+      <tooltip context="@info:tooltip">If true, integers being displayed in decimal format will be formatted according to the current locale settings</tooltip>
+      <whatsthis>Whether to format integer values according to the current locale</whatsthis>
       <default>false</default>
     </entry>
     <entry name="FloatPrecision" type="Int">
-      <label>The precision used for converting floating-point numbers to strings
-       (number of decimal digits)</label>
+      <tooltip context="@info:tooltip">The precision used for converting floating-point numbers to strings (number of decimal digits)</tooltip>
       <default>3</default>
       <min>-1</min>
-      <max>100</max> <!-- program hangs if QString::number() is called with very high precison -->
+      <!-- program hangs if QString::number() is called with very high precison -->
+      <max>100</max>
     </entry>
   </group>
   <group name="StructureSettings">
     <entry name="StructureDefFiles" type="PathList">
       <default></default>
-      <label>The loaded structure files</label>
     </entry>
     <entry name="ByteOrder" type="Enum">
       <choices>
-        <choice name="LittleEndian"></choice>
-        <choice name="BigEndian"></choice>
+        <choice name="LittleEndian" />
+        <choice name="BigEndian" />
       </choices>
       <default>LittleEndian</default>
-      <label>The loaded structure files</label>
     </entry>
     <entry name="LoadedStructures" type="StringList">
       <default></default>

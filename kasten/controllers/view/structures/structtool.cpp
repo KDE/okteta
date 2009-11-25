@@ -23,6 +23,7 @@
 
 #include "structtool.h"
 #include "structuredefinitionfile.h"
+#include "structuresmanager.h"
 // lib
 #include <bytearraydocument.h>
 #include <bytearrayview.h>
@@ -38,19 +39,17 @@
 
 namespace Kasten
 {
-const QDir StructTool::defsDir = KGlobal::dirs()->locateLocal("data",
-        "okteta/structures/", true);
+
 StructTool::StructTool() :
-            mByteArrayView(0),
-            mByteArrayModel(0),
-            mCursorIndex(0),
-            //			mCharCodec(Okteta::CharCodec::createCodec(Okteta::LocalEncoding)),
-            mByteOrder(
-                    (StructViewPreferences::EnumByteOrder::type) StructViewPreferences::byteOrder())
+    mByteArrayView(0), mByteArrayModel(0), mCursorIndex(0),
+    //			mCharCodec(Okteta::CharCodec::createCodec(Okteta::LocalEncoding)),
+            mByteOrder(StructViewPreferences::byteOrder()), mManager(
+                    new StructuresManager())
 {
     //leave mLoadedFiles empty for now, since otherwise loading slot will not work
     setObjectName("StructTool");
-    loadStructDefFiles();
+    mManager->loadStructDefFiles();
+    setSelectedStructuresInView();
     //	mUtf8Codec = QTextCodec::codecForName("UTF-8");
 
     connect(this, SIGNAL(byteOrderChanged()), this, SLOT(updateData()));
@@ -59,7 +58,6 @@ StructTool::StructTool() :
 StructTool::~StructTool()
 {
     qDeleteAll(mData);
-    qDeleteAll(mLoadedDefs);
     //	delete mCharCodec;
 }
 void StructTool::setByteOrder(StructViewPreferences::EnumByteOrder::type order)
@@ -160,7 +158,7 @@ bool StructTool::setData(const QVariant& value, int role, DataInformation* item)
 
 void StructTool::updateData()
 {
-//    kDebug() << "updateData()";
+    //    kDebug() << "updateData()";
     int remaining;
     if (mByteArrayModel)
     {
@@ -222,73 +220,6 @@ void StructTool::addChildItem(DataInformation* child)
 
     }
 }
-void StructTool::loadStructDefFiles()
-{
-    QStringList filelist = StructViewPreferences::structureDefFiles();
-    if (filelist == mLoadedFiles)
-        return;
-    //FIXME already loaded files behaviour is not correct
-    QStringList includedFiles = mLoadedFiles;
-    foreach(QString fileName,filelist)
-        {
-            fileName = QDir::cleanPath(fileName);
-            QString relPath = defsDir.relativeFilePath(fileName);
-            if (!mLoadedDefs.contains(relPath))
-            {
-                addStructDef(relPath);
-            }
-        }
-    updateData();
-    mLoadedFiles = filelist;
-    setSelectedStructuresInView();
-}
-
-void StructTool::addStructDef(const QString& relPath)
-{
-    kDebug() << "add struct def " << relPath;
-    QFileInfo fileInfo(defsDir, relPath);
-    StructureDefinitionFile* def = new StructureDefinitionFile(fileInfo);
-    def->parse(); //TODO lazy loading
-    mLoadedDefs.insert(relPath, def);
-    manageIncludes(def);
-}
-
-void StructTool::manageIncludes(const StructureDefinitionFile* def)
-{
-    QStringList includedFiles = def->includedFiles();
-    if (includedFiles.length() == 0)
-        return;
-    kDebug() << "included files: " << def->includedFiles();
-    QDir defDir = def->path().dir();
-    //add included files structures
-    for (int i = 0; i < includedFiles.length(); ++i)
-    {
-        QString inclPath = includedFiles.at(i);
-        kDebug() << "include path: " << inclPath;
-        //XXX maybe more lazy loading
-        //check if included file is already loaded
-        QString relPath =
-                defsDir.relativeFilePath(defDir.absoluteFilePath(inclPath));
-        kDebug() << "rel path = " << relPath;
-        relPath = QDir::cleanPath(relPath);
-        kDebug() << "rel path = " << relPath;
-        if (mLoadedDefs.contains(relPath))
-        {
-            kDebug() << "included file already loaded: " << relPath;
-        }
-        else
-        {
-            QFileInfo test(defsDir, relPath);
-
-            if (test.exists()) // only load if file exists
-                addStructDef(relPath);
-            else
-            {
-                kDebug() << "included file does not exist: " << relPath;
-            }
-        }
-    }
-}
 
 void StructTool::setSelectedStructuresInView()
 {
@@ -307,8 +238,8 @@ void StructTool::setSelectedStructuresInView()
             {
                 QString path = regex.cap(1);
                 QString name = regex.cap(2);
-//                kDebug() << "path=" << path << " name=" << name;
-                StructureDefinitionFile* def = mLoadedDefs.value(path);
+                //                kDebug() << "path=" << path << " name=" << name;
+                StructureDefinitionFile* def = mManager->value(path);
                 if (!def)
                     continue;
                 DataInformation* data = def->getStructure(name);

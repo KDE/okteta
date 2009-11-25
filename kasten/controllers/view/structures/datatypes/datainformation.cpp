@@ -54,31 +54,7 @@ QString DataInformation::getSizeString() const
     //  return KGlobal::locale()->formatByteSize(getSize() / 8);
 
 }
-DataInformation* DataInformation::parseNode(QDomNode& n)
-{
-    QDomElement elem = n.toElement(); // try to convert the node to an element.
-    DataInformation* data = NULL;
-    if (!elem.isNull())
-    {
-        //      kDebug() << "element tag: " << elem.tagName();
-        //e is element
-        if (elem.tagName() == "struct")
-            data = StructureDataInformation::fromXML(elem);
-        else if (elem.tagName() == "array")
-            data = StaticLengthArrayDataInformation::fromXML(elem);
-        //TODO var length array
-        else if (elem.tagName() == "primitive")
-            data = PrimitiveDataInformation::fromXML(elem);
-        else if (elem.tagName() == "union")
-            data = UnionDataInformation::fromXML(elem);
-        //FIXME finish these
-        //          if (elem.tagName() == "enum")
-        //              list.append(EnumDataInformation::fromXML(elem));
-        //      kDebug() << "end of tag: " << elem.tagName();
 
-    }
-    return data;
-}
 Okteta::Size DataInformation::positionRelativeToParent() const
 {
     DataInformation* par = static_cast<DataInformation*> (parent());

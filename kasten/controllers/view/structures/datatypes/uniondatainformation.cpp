@@ -126,18 +126,3 @@ QVariant DataInformationWithChildren::data(int column, int role) const
     else
         return QVariant();
 }
-
-UnionDataInformation* UnionDataInformation::fromXML(QDomElement& xmlElem)
-{
-    QString name = xmlElem.attribute("name", i18n("<invalid name>"));
-    UnionDataInformation* un = new UnionDataInformation(name);
-    QDomNode node = xmlElem.firstChild();
-    while (!node.isNull())
-    {
-        DataInformation* data = parseNode(node);
-        if (data)
-            un->addDataTypeToUnion(data);
-        node = node.nextSibling();
-    }
-    return un;
-}

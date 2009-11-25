@@ -77,21 +77,6 @@ StructureDataInformation::StructureDataInformation(const StructureDataInformatio
 {
 }
 
-StructureDataInformation* StructureDataInformation::fromXML(QDomElement& xmlElem)
-{
-    QString name = xmlElem.attribute("name", i18n("<invalid name>"));
-    StructureDataInformation* stru = new StructureDataInformation(name);
-    QDomNode node = xmlElem.firstChild();
-    while (!node.isNull())
-    {
-        DataInformation* data = parseNode(node);
-        if (data)
-            stru->addDataTypeToStruct(data);
-        node = node.nextSibling();
-    }
-    return stru;
-}
-
 Okteta::Size StructureDataInformation::offset(unsigned int index) const
 {
     if (index >= childCount())

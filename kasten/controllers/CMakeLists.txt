@@ -231,6 +231,7 @@ set( BOOKMARKSTOOL_SRCS
   view/bookmarks/bookmarkstoolview.cpp
 )
 set( STRUCTVIEW_SRCS
+  view/structures/structuresmanager.cpp
   view/structures/structtool.cpp
   view/structures/structtreemodel.cpp
   view/structures/structview.cpp
@@ -240,6 +241,7 @@ set( STRUCTVIEW_SRCS
   view/structures/settings/structureaddremovewidget.cpp
   view/structures/settings/structviewdisplaysettingswidget.cpp
   view/structures/settings/structviewpathsettingswidget.cpp
+  view/structures/settings/structuresmanagerview.cpp
   view/structures/datatypes/chardatainformation.cpp
   view/structures/datatypes/datainformation.cpp
   view/structures/datatypes/datainformationwithchildren.cpp
@@ -257,6 +259,8 @@ set( STRUCTVIEW_SRCS
   view/structures/datatypes/uint16datainformation.cpp
   view/structures/datatypes/uint32datainformation.cpp
   view/structures/datatypes/uint64datainformation.cpp
+  view/structures/datatypes/enumdatainformation.cpp
+  view/structures/datatypes/enumdefinition.cpp
   view/structures/datatypes/primitivedatainformation.cpp
   view/structures/datatypes/signedprimitivedatainformation.cpp
   view/structures/datatypes/abstractarraydatainformation.cpp
@@ -270,6 +274,7 @@ set( STRUCTVIEW_SRCS
 kde4_add_kcfg_files(STRUCTVIEW_SRCS GENERATE_MOC view/structures/settings/structviewpreferences.kcfgc)
 kde4_add_ui_files(STRUCTVIEW_SRCS view/structures/settings/structviewdisplaysettingswidget.ui)
 kde4_add_ui_files(STRUCTVIEW_SRCS view/structures/settings/structviewpathsettingswidget.ui)
+kde4_add_ui_files(STRUCTVIEW_SRCS view/structures/settings/structuresmanagerview.ui)
 
 set( LIBFRAMESPRINT_SRCS
   ${LIBFRAMESPRINT_REL_DIR}/abstractframerenderer.cpp
@@ -367,6 +372,8 @@ target_link_libraries( oktetakastencontrollers
   oktetacore
   ${KDE4_KIO_LIBS}
   ${KDE4_KDEUI_LIBS}
+  ${KDE4_KUTILS_LIBS}
+  ${KDE4_KNEWSTUFF2_LIBS}
 )
 if( QCA2_FOUND )
   target_link_libraries( oktetakastencontrollers ${QCA2_LIBRARIES} )
@@ -377,6 +384,7 @@ set_target_properties( oktetakastencontrollers  PROPERTIES VERSION ${GENERIC_LIB
 install( TARGETS oktetakastencontrollers  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${oktete_kastencore_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )
+install( FILES view/structures/kns/structures.knsrc  DESTINATION  ${CONFIG_INSTALL_DIR} )
 
 
 

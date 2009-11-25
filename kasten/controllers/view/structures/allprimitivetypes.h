@@ -121,13 +121,16 @@ union AllPrimitiveTypes
             allBytes[i] = array.at(i);
         }
     }
-    bool operator!=(AllPrimitiveTypes& other)
+    bool operator!=(AllPrimitiveTypes other)
     {
         return ulongValue != other.ulongValue;
     }
     inline QByteArray toQByteArray() const
     {
         return QByteArray((const char*) allBytes, 8);
+    }
+    inline bool operator<(AllPrimitiveTypes other) const {
+        return this->ulongValue < other.ulongValue;
     }
 };
 #endif /* ALLPRIMITIVETYPES_H_ */

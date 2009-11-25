@@ -22,6 +22,7 @@
 #include "structureaddremovewidget.h"
 #include "structviewpreferences.h"
 #include "../structtool.h"
+#include "../structuresmanager.h"
 #include "../structuredefinitionfile.h"
 
 #include <KArrowButton>
@@ -98,14 +99,15 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(Kasten::StructTool* tool,
     connect(mUpButton, SIGNAL(pressed()), SLOT(moveUp()));
     connect(mDownButton, SIGNAL(pressed()), SLOT(moveDown()));
 
-    const QList<StructureDefinitionFile*> loadedDefs = tool->loadedDefs();
+    const QList<StructureDefinitionFile*> loadedDefs =
+            mTool->manager().structureDefs();
     QList<QTreeWidgetItem*> availableItems;
     foreach(const StructureDefinitionFile* def,loadedDefs)
         {
-            QString relPath = StructTool::defsDir.relativeFilePath(
-                    def->path().absoluteFilePath());
+            QString relPath = StructuresManager::defsDir.relativeFilePath(
+                    def->dir().absoluteFilePath(def->info().name() + ".osd"));
             QTreeWidgetItem* item = new QTreeWidgetItem(mTreeAvailable,
-                    QStringList() << def->title() << relPath);
+                    QStringList() << def->info().pluginName() << relPath);
             foreach(const DataInformation* data,def->structures())
                 {
                     QTreeWidgetItem* subItem = new QTreeWidgetItem(item,
@@ -118,14 +120,14 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(Kasten::StructTool* tool,
     //already loaded defs:
     QRegExp regex("'(.+)':'(.+)'");
     QStringList loadedStructs = StructViewPreferences::loadedStructures();
-    foreach(QString s,loadedStructs)
+    foreach(const QString& s,loadedStructs)
         {
             int pos = regex.indexIn(s);
             if (pos > -1)
             {
                 QString path = regex.cap(1);
                 QString structName = regex.cap(2);
-//                kDebug() << "path=" << path << " name=" << structName;
+                //                kDebug() << "path=" << path << " name=" << structName;
                 QTreeWidgetItem* item = new QTreeWidgetItem(mTreeSelected,
                         QStringList() << structName << path);
                 mTreeSelected->addTopLevelItem(item);
@@ -157,7 +159,7 @@ void StructureAddRemoveWidget::moveRight()
 {
     QList<QTreeWidgetItem*> selected = mTreeAvailable->selectedItems();
     bool changed = false;
-    foreach(QTreeWidgetItem* item,selected)
+    foreach(const QTreeWidgetItem* item,selected)
         {
             if (!item->parent())
                 continue; //maybe sometime add all subitems
@@ -201,14 +203,17 @@ void StructureAddRemoveWidget::updateAvailable()
 {
     //rebuild available tree
     mTreeAvailable->clear();
-    const QList<StructureDefinitionFile*> loadedDefs = mTool->loadedDefs();
+    const QList<StructureDefinitionFile*> loadedDefs =
+            mTool->manager().structureDefs();
     QList<QTreeWidgetItem*> availableItems;
     foreach(const StructureDefinitionFile* def,loadedDefs)
         {
-            QString relPath = StructTool::defsDir.relativeFilePath(
-                    def->path().absoluteFilePath());
+            QString relPath = mTool->manager().relativeFilePath(def->absPath());
+            //if not valid is included file -> always show
+            if (def->info().isValid() && !def->info().isPluginEnabled())
+                continue;
             QTreeWidgetItem* item = new QTreeWidgetItem(mTreeAvailable,
-                    QStringList() << def->title() << relPath);
+                    QStringList() << def->info().pluginName() << relPath);
             foreach(const DataInformation* data,def->structures())
                 {
                     QTreeWidgetItem* subItem = new QTreeWidgetItem(item,
@@ -218,7 +223,7 @@ void StructureAddRemoveWidget::updateAvailable()
             availableItems.append(item);
         }
     //remove any structs that references not loaded files
-    QStringList paths = mTool->loadedFiles();
+    QStringList paths = mTool->manager().loadedFiles();
     bool changed = false;
     for (int i = 0; i < mTreeSelected->topLevelItemCount(); ++i)
     {

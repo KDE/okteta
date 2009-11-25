@@ -307,8 +307,8 @@ PrimitiveDataInformation* PrimitiveDataInformation::newInstance(QString name,
 PrimitiveDataInformation* PrimitiveDataInformation::fromXML(QDomElement& xmlElem)
 {
     QString name = xmlElem.attribute("name", i18n("<invalid name>"));
-    QString typeStr = xmlElem.attribute("type", QString::null);
-    if (typeStr.isNull())
+    QString typeStr = xmlElem.attribute("type", QString());
+    if (typeStr.isEmpty())
     {
         kWarning() << "PrimitiveDataInformation::fromXML(): no type attribute defined";
         return NULL;

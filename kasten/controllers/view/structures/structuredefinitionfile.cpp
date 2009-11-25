@@ -22,21 +22,26 @@
 #include "structuredefinitionfile.h"
 
 #include <QFile>
+#include <QDir>
 #include <QDomNode>
-#include <KDebug>
 #include <QStringList>
+
+#include <KDebug>
 
 #include "datatypes/structuredatainformation.h"
 #include "datatypes/uniondatainformation.h"
 #include "datatypes/staticlengtharraydatainformation.h"
+#include "datatypes/dynamiclengtharraydatainformation.h"
 #include "datatypes/primitivedatainformation.h"
+#include "datatypes/enumdatainformation.h"
 
 namespace Kasten
 {
-StructureDefinitionFile::StructureDefinitionFile(const QFileInfo& path) :
-    mPath(path), mValidAndLoaded(false)
+StructureDefinitionFile::StructureDefinitionFile(QFileInfo file, KPluginInfo info) :
+    mPluginInfo(info), mFileInfo(file), mValid(false), mLoaded(false)
 {
-    mTitle = path.baseName();
+    mDir = mFileInfo.dir();
+    kDebug() << "foof";
 }
 
 StructureDefinitionFile::~StructureDefinitionFile()
@@ -45,9 +50,8 @@ StructureDefinitionFile::~StructureDefinitionFile()
 }
 
 StructureDefinitionFile::StructureDefinitionFile(StructureDefinitionFile& f) :
-    mPath(f.mPath), mTitle(f.mTitle), mDescription(f.mDescription), mAuthor(
-            f.mAuthor), mIncludedFiles(f.mIncludedFiles), mValidAndLoaded(
-            f.mValidAndLoaded)
+    mPluginInfo(f.mPluginInfo), mFileInfo(f.mFileInfo), mIncludedFiles(
+            f.mIncludedFiles), mValid(f.mValid), mLoaded(f.mLoaded)
 {
     int len = f.mTopLevelStructures.length();
     for (int i = 0; i < len; ++i)
@@ -56,22 +60,77 @@ StructureDefinitionFile::StructureDefinitionFile(StructureDefinitionFile& f) :
     }
 }
 
-void StructureDefinitionFile::parseIncludeNode(QDomElement& elem)
+void StructureDefinitionFile::parseIncludeNodes(QDomNodeList& elems)
 {
-    QString includeFile = elem.attribute("file", QString::null);
-    if (!includeFile.isNull())
+    for (uint i = 0; i < elems.length(); i++)
     {
-        kDebug() << "including file: " << includeFile;
-        //if contains this file, file was already included
-        if (!mIncludedFiles.contains(includeFile))
+        QDomElement elem = elems.at(i).toElement();
+        if (elem.isNull())
+            continue;
+        QString includeFile = elem.attribute("file", QString::null);
+        if (!includeFile.isNull())
         {
-            mIncludedFiles.append(includeFile);
-        }
-        else
-        {
-            kDebug() << "included file is already loaded";
+            kDebug() << "including file: " << includeFile;
+            //if contains this file, file was already included
+            if (!mIncludedFiles.contains(includeFile))
+            {
+                mIncludedFiles.append(includeFile);
+            }
+            else
+            {
+                kDebug() << "included file is already loaded";
+            }
         }
     }
+}
+
+void StructureDefinitionFile::parseEnumDefNodes(QDomNodeList& elems)
+{
+    for (uint i = 0; i < elems.length(); i++)
+    {
+        QDomElement elem = elems.at(i).toElement();
+        if (elem.isNull())
+            continue;
+        QMap<AllPrimitiveTypes, QString> defs;
+        QString enumName = elem.attribute("name", i18n("<no name specified>"));
+        QString typeStr = elem.attribute("type", QString::null);
+        if (typeStr.isNull())
+        {
+            kWarning() << "no type attribute defined -> skipping this enum";
+            continue;
+        }
+        PrimitiveDataType type = PrimitiveDataInformation::typeStringToType(typeStr);
+        //handle all entries
+        QDomNodeList children = elem.elementsByTagName("entry");
+        for (uint j = 0; j < children.length(); j++)
+        {
+            QDomElement child = children.at(j).toElement();
+            if (child.isNull())
+                continue;
+            QString name = child.attribute("name", i18n("<no name specified>"));
+            bool okay = false;
+            QString valStr = child.attribute("value", QString());
+            qlonglong val = valStr.toLongLong(&okay, 10); //TODO hex literals
+            if (!okay || valStr.isEmpty())
+            {
+                kWarning() << "failed to parse value attribute (name=" << name
+                        << ")";
+                continue;
+            }
+            else
+            {
+                defs.insert(val, name);
+            }
+        }
+        //now add this enum to the list of enums
+        if (defs.size() != 0)
+        {
+            EnumDefinition::Ptr enumDef = EnumDefinition::Ptr(new EnumDefinition(
+                    defs, enumName, type));
+            mEnums.append(enumDef);
+        }
+    }
+    kDebug() << "foo";
 }
 QList<DataInformation*> StructureDefinitionFile::structures() const
 {
@@ -85,16 +144,19 @@ QList<DataInformation*> StructureDefinitionFile::structures() const
 
 void StructureDefinitionFile::parse()
 {
-    if (mValidAndLoaded)
+    if (mLoaded)
     {
         kDebug() << "Already loaded -> will return";
         return;
     }
-    QFile file(mPath.absoluteFilePath());
+    mLoaded = true;
+    QFile file(mFileInfo.absoluteFilePath());
     QDomDocument doc;
     if (!file.open(QIODevice::ReadOnly))
     {
-        kWarning() << "could not open file " << mPath.absoluteFilePath();
+        kWarning() << "could not open file " << mFileInfo.dir().absoluteFilePath(
+                mPluginInfo.name().endsWith(".osd") ? mPluginInfo.name()
+                        : mPluginInfo.name() + ".osd");
         return;
     }
     int errorLine, errorColumn;
@@ -110,10 +172,17 @@ void StructureDefinitionFile::parse()
     file.close();
     QDomElement docElem = doc.documentElement();
     //    kDebug() << "root elem tag: " << docElem.tagName();
+    //first find all enum definitons and includes:
+    QDomNodeList enumDefs = docElem.elementsByTagName("enumDef");
+    parseEnumDefNodes(enumDefs);
+    QDomNodeList includeElems = docElem.elementsByTagName("include");
+    parseIncludeNodes(includeElems);
+
     QDomNode n = docElem.firstChild();
     QDomNodeList list = docElem.childNodes();
-    while (!n.isNull())
+    for (uint i = 0; i < list.length(); ++i)
     {
+        const QDomNode& n = list.at(i);
         QDomElement elem = n.toElement(); // try to convert the node to an element.
         DataInformation* data = NULL;
         if (!elem.isNull())
@@ -121,27 +190,22 @@ void StructureDefinitionFile::parse()
             kDebug() << "element tag: " << elem.tagName();
             //e is element
             QString tag = elem.tagName();
-            if (tag == "include")
-            {
-                parseIncludeNode(elem);
-                n = n.nextSibling();
+            if (tag == "enumDef" || tag == "include")
                 continue;
-            }
-            else if (tag == "struct")
-                data = StructureDataInformation::fromXML(elem);
+            if (tag == "struct")
+                data = structFromXML(elem);
             else if (tag == "array")
-                data = StaticLengthArrayDataInformation::fromXML(elem);
+                data = arrayFromXML(elem);
             else if (tag == "primitive")
-                data = PrimitiveDataInformation::fromXML(elem);
+                data = primitiveFromXML(elem);
             else if (tag == "union")
-                data = UnionDataInformation::fromXML(elem);
-            else if (tag == "title")
-                mTitle = elem.text();
-            else if (tag == "description")
-                mDescription = elem.text();
-            else if (tag == "author")
-                mAuthor = elem.text();
-            //          kDebug() << "end of tag: " << tag;
+                data = unionFromXML(elem);
+            else if (tag == "enum")
+            {
+                kDebug() << "loading enum";
+                data = enumFromXML(elem);
+                kDebug() << "enum loaded: " << data;
+            }
         }
 
         if (data)
@@ -152,49 +216,188 @@ void StructureDefinitionFile::parse()
         {
             kDebug() << "data == NULL -> could not parse node " << elem.tagName();
         }
-        n = n.nextSibling();
     }
-    mValidAndLoaded = true;
-    if (mTitle.isEmpty())
-    {
-        mTitle = mPath.baseName();
-    }
+    mLoaded = true;
+    mValid = true;
     return;
 }
 DataInformation* StructureDefinitionFile::getStructure(QString& name) const
 {
-    if (!mValidAndLoaded)
+    if (!mLoaded)
         kError() << "member accessed before file was parsed";
+    if (!mValid)
+        kError() << "reading data from invalid file";
     foreach(const DataInformation* data,mTopLevelStructures)
         {
-            if (data->getName() == name) {
+            if (data->getName() == name)
+            {
                 return data->clone();
             }
         }
     return NULL; // not found
 }
-QString StructureDefinitionFile::title() const
-{
-    if (!mValidAndLoaded)
-        kError() << "member accessed before file was parsed";
-    return mTitle;
-}
-QString StructureDefinitionFile::description() const
-{
-    if (!mValidAndLoaded)
-        kError() << "member accessed before file was parsed";
-    return mDescription;
-}
-QString StructureDefinitionFile::author() const
-{
-    if (!mValidAndLoaded)
-        kError() << "member accessed before file was parsed";
-    return mAuthor;
-}
+
 QStringList StructureDefinitionFile::includedFiles() const
 {
-    if (!mValidAndLoaded)
+    if (!mLoaded)
         kError() << "member accessed before file was parsed";
+    if (!mValid)
+        kError() << "reading data from invalid file";
     return mIncludedFiles;
 }
+
+//Datatypes
+
+AbstractArrayDataInformation*
+StructureDefinitionFile::arrayFromXML(const QDomElement& xmlElem) const
+{
+    QString name = xmlElem.attribute("name", i18n("<invalid name>"));
+    DataInformation* subElem = NULL;
+    QDomNode node = xmlElem.firstChild();
+    subElem = parseNode(node);
+    if (!subElem)
+    {
+        kWarning() << "AbstractArrayDataInformation::fromXML():"
+            " could not parse subelement type";
+        return NULL;
+    }
+    QString lengthStr = xmlElem.attribute("length", QString::null);
+    if (lengthStr.isNull())
+    {
+        kWarning() << "StaticLengthPrimitiveArrayDataInformation::fromXML():"
+            " no length attribute defined";
+        delete subElem;
+        return NULL;
+    }
+    AbstractArrayDataInformation* retVal;
+    bool okay = true;
+    int length = lengthStr.toInt(&okay, 10); //TODO dynamic length
+    if (!okay)
+    {
+        kDebug()
+                << "error parsing length string -> is dynamic length array. Length string="
+                << lengthStr;
+        retVal = new DynamicLengthArrayDataInformation(name, lengthStr, *subElem);
+    }
+    else if (length >= 0)
+    {
+        retVal = new StaticLengthArrayDataInformation(name, length, *subElem);
+    }
+    else
+    {
+        kWarning() << "could not parse length string:" << lengthStr;
+        delete subElem;
+        return NULL;
+    }
+    delete subElem; //control not taken over by constructor
+    return retVal;
+}
+
+PrimitiveDataInformation* StructureDefinitionFile::primitiveFromXML(
+        const QDomElement& xmlElem) const
+{
+    QString name = xmlElem.attribute("name", i18n("<invalid name>"));
+    QString typeStr = xmlElem.attribute("type", QString());
+    if (typeStr.isEmpty())
+    {
+        kWarning()
+                << "PrimitiveDataInformation::fromXML(): no type attribute defined";
+        return NULL;
+    }
+    PrimitiveDataType type = PrimitiveDataInformation::typeStringToType(typeStr);
+    return PrimitiveDataInformation::newInstance(name, type);
+}
+
+UnionDataInformation* StructureDefinitionFile::unionFromXML(
+        const QDomElement& xmlElem) const
+{
+    QString name = xmlElem.attribute("name", i18n("<invalid name>"));
+    UnionDataInformation* un = new UnionDataInformation(name);
+    QDomNode node = xmlElem.firstChild();
+    while (!node.isNull())
+    {
+        DataInformation* data = parseNode(node);
+        if (data)
+            un->addDataTypeToUnion(data);
+        node = node.nextSibling();
+    }
+    return un;
+}
+
+StructureDataInformation* StructureDefinitionFile::structFromXML(
+        const QDomElement& xmlElem) const
+{
+    QString name = xmlElem.attribute("name", i18n("<invalid name>"));
+    StructureDataInformation* stru = new StructureDataInformation(name);
+    QDomNode node = xmlElem.firstChild();
+    while (!node.isNull())
+    {
+        DataInformation* data = parseNode(node);
+        if (data)
+            stru->addDataTypeToStruct(data);
+        node = node.nextSibling();
+    }
+    return stru;
+}
+
+EnumDataInformation* StructureDefinitionFile::enumFromXML(const QDomElement& xmlElem) const
+{
+    kDebug() << "loading enum";
+    QString name = xmlElem.attribute("name", i18n("<invalid name>"));
+    QString typeStr = xmlElem.attribute("type", QString());
+    if (typeStr.isEmpty())
+    {
+        kWarning() << "no type attribute defined";
+        return NULL;
+    }
+    QString enumName = xmlElem.attribute("enum", QString());
+    if (enumName.isEmpty())
+    {
+        kWarning() << "no enum attribute defined";
+        return NULL;
+    }
+    EnumDefinition::Ptr def = EnumDefinition::find(enumName, mEnums);
+    if (!def)
+    {
+        kWarning() << "no enum with name " << enumName << "found.";
+        return NULL;
+    }
+    PrimitiveDataType type = PrimitiveDataInformation::typeStringToType(typeStr);
+    PrimitiveDataInformation* prim = PrimitiveDataInformation::newInstance(name,
+            type);
+    if (!prim)
+    {
+        kWarning() << "primitive type is null!!";
+        return NULL;
+    }
+    EnumDataInformation* enumd = new EnumDataInformation(name, prim, def);
+    if (!enumd)
+        kDebug() << "enum def is NULL!!!";
+    return enumd;
+}
+
+DataInformation* StructureDefinitionFile::parseNode(const QDomNode& n) const
+{
+    QDomElement elem = n.toElement(); // try to convert the node to an element.
+    DataInformation* data = NULL;
+    if (!elem.isNull())
+    {
+        //      kDebug() << "element tag: " << elem.tagName();
+        //e is element
+        if (elem.tagName() == "struct")
+            data = structFromXML(elem);
+        else if (elem.tagName() == "array")
+            data = arrayFromXML(elem);
+        //TODO var length array
+        else if (elem.tagName() == "primitive")
+            data = primitiveFromXML(elem);
+        else if (elem.tagName() == "union")
+            data = unionFromXML(elem);
+        if (elem.tagName() == "enum")
+            data = enumFromXML(elem);
+
+    }
+    return data;
+}
+
 }

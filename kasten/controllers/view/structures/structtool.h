@@ -37,7 +37,6 @@
 #include <QModelIndex>
 #include <QFileInfo>
 #include <QStringList>
-#include <QDir>
 
 namespace Okteta
 {
@@ -49,6 +48,7 @@ namespace Kasten
 {
 class ByteArrayView;
 class StructureDefinitionFile;
+class StructuresManager;
 
 class OKTETAKASTENCONTROLLERS_EXPORT StructTool: public AbstractTool
 {
@@ -73,13 +73,8 @@ public:
         return DataInformation::COLUMN_COUNT;
     }
     bool setData(const QVariant& value, int role, DataInformation* item);
-    inline const QList<StructureDefinitionFile*> loadedDefs() const
-    {
-        return mLoadedDefs.values();
-    }
-    inline const QStringList loadedFiles() const
-    {
-        return mLoadedDefs.keys();
+    inline StructuresManager& manager() const {
+        return *mManager;
     }
 Q_SIGNALS: // changes to the setting currently not signaled, because only controlled by view
     void dataChanged();
@@ -92,7 +87,6 @@ public Q_SLOTS:
     void unmark(/*const QModelIndex& idx*/);
     void updateData();
     void addChildItem(DataInformation* child);
-    void loadStructDefFiles();
     void setSelectedStructuresInView();
 
 protected Q_SLOTS:
@@ -101,7 +95,6 @@ protected Q_SLOTS:
     //	void onCharCodecChange(const QString& codecName);
     void onChildItemDataChanged()
     {
-        //		kDebug() << "childDataChanged";
         emit dataChanged();
     }
 
@@ -114,13 +107,9 @@ protected:
 
     // settings
     StructViewPreferences::EnumByteOrder::type mByteOrder;
-    QStringList mLoadedFiles;
-    QMap<QString, StructureDefinitionFile*> mLoadedDefs;
+    StructuresManager* mManager;
     QList<DataInformation*> mData;
-    void manageIncludes(const StructureDefinitionFile* def);
-    void addStructDef(const QString& relPath);
 public:
-    static const QDir defsDir;
     //interface for model
     QVariant headerData(int column, int role);
     int childCount() const;
