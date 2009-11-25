@@ -29,10 +29,8 @@
 // KDE
 #include <KGlobal>
 #include <KLocale>
-#include <KMessageBox>
 // Qt
 #include <QtGui/QCheckBox>
-#include <QtGui/QLineEdit>
 #include <QtGui/QGroupBox>
 #include <QtGui/QLayout>
 
@@ -181,8 +179,6 @@ void KAbstractFindDialog::showEvent( QShowEvent *showEvent )
 }
 
 
-KAbstractFindDialog::~KAbstractFindDialog()
-{
-}
+KAbstractFindDialog::~KAbstractFindDialog() {}
 
 }

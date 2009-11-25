@@ -31,8 +31,6 @@
 #include <KLocale>
 // Qt
 #include <QtGui/QCheckBox>
-#include <QtGui/QComboBox>
-#include <QtGui/QLineEdit>
 #include <QtGui/QGroupBox>
 #include <QtGui/QLayout>
 
