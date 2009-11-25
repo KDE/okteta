@@ -55,11 +55,10 @@ protected:
     QTreeView* mStructTreeView;
     KComboBox* mByteOrderSelection;
     KPushButton* mSettingsButton;
-    KPushButton* mAddRemoveButton;
     StructViewItemDelegate* mDelegate;
+
 protected Q_SLOTS:
     void openSettingsDlg(int page = 0);
-    void openAddRemoveDialogue();
     void onCurrentRowChanged( const QModelIndex& current, const QModelIndex& previous );
 };
 

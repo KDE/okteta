@@ -55,10 +55,6 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     QBoxLayout* baseLayout = new QVBoxLayout(this);
     setLayout(baseLayout);
     baseLayout->setMargin(0);
-    mAddRemoveButton = new KPushButton(KIcon("configure"), i18nc("@action:button",
-            "Add/Remove structures"), this);
-    baseLayout->addWidget(mAddRemoveButton);
-    connect(mAddRemoveButton, SIGNAL(pressed()), SLOT(openAddRemoveDialogue()));
     // table
     mStructTreeModel = new StructTreeModel(mTool, this);
     mStructTreeView = new QTreeView(this);
@@ -160,12 +156,6 @@ void StructView::openSettingsDlg(int page)
     dialog->show();
 }
 
-void StructView::openAddRemoveDialogue()
-{
-    openSettingsDlg(2); //2 is structures add/remove
-    //XXX maybe use enum for safety
-}
-
 bool StructView::eventFilter(QObject* object, QEvent* event)
 {
     if (object == mStructTreeView)
@@ -215,7 +205,6 @@ StructView::~StructView()
     delete mSettingsButton;
     delete mStructTreeView;
     delete mDelegate;
-    delete mAddRemoveButton;
     //don't delete tool. it causes segfault
 }
 }
