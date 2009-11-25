@@ -59,6 +59,7 @@ class KASTENCORE_EXPORT AbstractFileSystemLoadJob : public AbstractLoadJob
 
   protected:
     AbstractModelFileSystemSynchronizer* synchronizer() const;
+    KUrl url() const;
     QFile* file() const;
     QWidget* widget() const;
 

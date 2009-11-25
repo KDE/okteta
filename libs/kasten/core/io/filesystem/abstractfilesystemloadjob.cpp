@@ -41,6 +41,13 @@ AbstractModelFileSystemSynchronizer* AbstractFileSystemLoadJob::synchronizer() c
     return d->synchronizer();
 }
 
+KUrl AbstractFileSystemLoadJob::url() const
+{
+    Q_D( const AbstractFileSystemLoadJob );
+
+    return d->url();
+}
+
 QFile* AbstractFileSystemLoadJob::file() const
 {
     Q_D( const AbstractFileSystemLoadJob );

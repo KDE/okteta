@@ -50,6 +50,7 @@ class AbstractFileSystemLoadJobPrivate : public AbstractLoadJobPrivate
 
   public:
     AbstractModelFileSystemSynchronizer* synchronizer() const;
+    const KUrl& url() const;
     QFile* file() const;
     QWidget* widget() const;
 
@@ -81,6 +82,8 @@ inline AbstractModelFileSystemSynchronizer* AbstractFileSystemLoadJobPrivate::sy
 {
     return mSynchronizer;
 }
+inline const KUrl& AbstractFileSystemLoadJobPrivate::url() const { return mUrl; }
+
 inline QFile* AbstractFileSystemLoadJobPrivate::file()     const { return mFile; }
 // TODO: setup a notification system
 inline QWidget* AbstractFileSystemLoadJobPrivate::widget() const { return 0; }
