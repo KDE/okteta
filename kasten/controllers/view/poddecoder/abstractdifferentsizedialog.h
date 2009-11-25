@@ -23,8 +23,8 @@
 #ifndef ABSTRACTDIFFERENTSIZEDIALOG_H
 #define ABSTRACTDIFFERENTSIZEDIALOG_H
 
-// Qt
-#include <QtCore/QString>
+// Kasten core
+#include <kastencore.h>
 
 
 namespace Kasten
@@ -32,9 +32,6 @@ namespace Kasten
 
 class AbstractDifferentSizeDialog
 {
-  public:
-    enum Answer { DoNothing, AdaptSize, Overwrite };
-
   protected:
     AbstractDifferentSizeDialog();
 
@@ -42,7 +39,7 @@ class AbstractDifferentSizeDialog
     virtual ~AbstractDifferentSizeDialog();
 
   public: // API to be implemented
-    virtual Answer query( int newValueSize, int oldValueSize, int sizeLeft ) const = 0;
+    virtual Answer query( int newValueSize, int oldValueSize, int sizeLeft ) = 0;
 };
 
 

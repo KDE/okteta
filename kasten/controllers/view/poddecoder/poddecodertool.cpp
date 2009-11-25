@@ -238,13 +238,17 @@ void PODDecoderTool::setData( const QVariant& data, int podId )
     }
 
     const int oldValueSize = mDecodedValueByteCountList[podId];
+    int removedBytesSize = bytesSize;
     if( bytesSize != oldValueSize )
     {
         const int sizeLeft = mByteArrayModel->size() - mCursorIndex;
-        const AbstractDifferentSizeDialog::Answer answer =
-            mDifferentSizeDialog ? mDifferentSizeDialog->query( bytesSize, oldValueSize, sizeLeft ) : AbstractDifferentSizeDialog::DoNothing;
-        if( answer == AbstractDifferentSizeDialog::DoNothing )
+        const Answer answer =
+            mDifferentSizeDialog ? mDifferentSizeDialog->query( bytesSize, oldValueSize, sizeLeft ) : Cancel;
+        if( answer == Cancel )
             return;
+
+        if( answer == AdaptSize )
+            removedBytesSize = oldValueSize;
     }
 
     Okteta::ChangesDescribable* changesDescribable =
@@ -252,7 +256,7 @@ void PODDecoderTool::setData( const QVariant& data, int podId )
 
     if( changesDescribable )
         changesDescribable->openGroupedChange( i18nc("Edited as %datatype","Edited as %1", typeCodec->name()) );
-    mByteArrayModel->replace( Okteta::AddressRange::fromWidth(mCursorIndex,bytesSize), bytes );
+    mByteArrayModel->replace( Okteta::AddressRange::fromWidth(mCursorIndex,removedBytesSize), bytes );
     if( changesDescribable )
         changesDescribable->closeGroupedChange();
 }

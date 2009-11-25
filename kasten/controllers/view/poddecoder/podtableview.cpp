@@ -29,6 +29,7 @@
 // KDE
 #include <KComboBox>
 #include <KLocale>
+#include <KMessageBox>
 // Qt
 #include <QtGui/QLabel>
 #include <QtGui/QLayout>
@@ -106,6 +107,48 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
     settingsLayout->addStretch();
 
     baseLayout->addLayout( settingsLayout );
+
+    mTool->setDifferentSizeDialog( this );
+}
+
+Answer PODTableView::query( int newValueSize, int oldValueSize, int sizeLeft )
+{
+    Q_UNUSED( sizeLeft );
+
+    Answer answer;
+
+    int messageBoxAnswer;
+    if( newValueSize < oldValueSize )
+    {
+        const QString message =
+            i18nc( "@info",
+                    "The new value needs <emphasis>less</emphasis> bytes (%1 instead of %2).<nl/>"
+                    "Keep the unused bytes or remove them?", newValueSize, oldValueSize );
+
+        const KGuiItem keepGuiItem( i18nc("@action:button keep the unused bytes","&Keep"), 0,
+                                    i18nc("@info:tooltip",
+                                          "Keep the unsed bytes with their old values.") );
+
+        messageBoxAnswer = KMessageBox::warningYesNoCancel( this, message, mTool->title(),
+                                                            keepGuiItem,
+                                                            KStandardGuiItem::remove() );
+    }
+    else
+    {
+        const QString message =
+            i18nc( "@info",
+                    "The new value needs <emphasis>more</emphasis> bytes (%1 instead of %2).<nl/>"
+                    "Overwrite the following bytes or insert new ones as needed?", newValueSize, oldValueSize );
+
+        messageBoxAnswer = KMessageBox::warningYesNoCancel( this, message, mTool->title(),
+                                                            KStandardGuiItem::overwrite(),
+                                                            KStandardGuiItem::insert() );
+    }
+
+    answer = (messageBoxAnswer == KMessageBox::Yes) ? Overwrite :
+             (messageBoxAnswer == KMessageBox::No) ?  AdaptSize :
+                                                      Cancel;
+    return answer;
 }
 
 bool PODTableView::eventFilter( QObject* object, QEvent* event )

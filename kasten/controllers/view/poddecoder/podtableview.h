@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,6 +23,8 @@
 #ifndef PODTABLEVIEW_H
 #define PODTABLEVIEW_H
 
+// lib
+#include "abstractdifferentsizedialog.h"
 // Qt
 #include <QtGui/QWidget>
 
@@ -39,7 +41,7 @@ class PODTableModel;
 class PODDecoderTool;
 
 
-class PODTableView : public QWidget
+class PODTableView : public QWidget, public AbstractDifferentSizeDialog
 {
   Q_OBJECT
 
@@ -52,6 +54,9 @@ class PODTableView : public QWidget
 
   public: // QObject API
     virtual bool eventFilter( QObject* object, QEvent* event );
+
+  public: // AbstractDifferentSizeDialog API
+    virtual Answer query( int newValueSize, int oldValueSize, int sizeLeft );
 
   protected Q_SLOTS:
     void onCurrentRowChanged( const QModelIndex& current, const QModelIndex& previous );
