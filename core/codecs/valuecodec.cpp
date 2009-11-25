@@ -59,7 +59,7 @@ unsigned int ValueCodec::decode( unsigned char *byte, const QString &digits, uns
     unsigned char result = 0;
     while( d > 0 )
     {
-        if( !appendDigit(&result,digits.at(pos).toLatin1()) )
+        if( !appendDigit(&result,digits.at(pos).toLatin1()) ) // TODO: use QChar.digitValue()
             break;
 
         ++pos;
