@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,15 +20,17 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #include "bytearrayrawfilereloadjob.h"
 
 // lib
+#include "externalbookmarkstorage.h"
 #include "bytearrayrawfilesynchronizer.h"
 #include "bytearrayrawfilereloadthread.h"
 #include "bytearraydocument.h"
 // Okteta core
 #include <piecetablebytearraymodel.h>
+// KDE
+#include <KUrl>
 // Qt
 #include <QtGui/QApplication>
 
@@ -54,6 +56,8 @@ void ByteArrayRawFileReloadJob::startReadFromFile()
     {
         Okteta::PieceTableByteArrayModel *byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>( document->content() );
         byteArray->setData( reloadThread->data() );
+
+        ExternalBookmarkStorage().readBookmarks( document, synchronizer()->url() );
     }
     delete reloadThread;
 

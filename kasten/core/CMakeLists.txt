@@ -18,6 +18,7 @@ set( okteta_kastencore_document_SRCS
 )
 
 set( okteta_kastencore_io_filesystem_SRCS
+  io/filesystem/externalbookmarkstorage.cpp
   io/filesystem/bytearrayrawfileloadthread.cpp
   io/filesystem/bytearrayrawfilereloadthread.cpp
   io/filesystem/bytearrayrawfilewritethread.cpp
