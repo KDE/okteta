@@ -32,7 +32,6 @@
 #include <KMessageBox>
 // Qt
 #include <QtGui/QCheckBox>
-#include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
 #include <QtGui/QGroupBox>
 #include <QtGui/QLayout>
@@ -66,17 +65,14 @@ void KAbstractFindDialog::setupFindBox()
 
     QVBoxLayout *findBoxLayout = new QVBoxLayout;
 
-    QLabel *bytesLabel = new QLabel( i18nc("@label:textbox","Byte string to f&ind:"), findBox );
     SearchDataEdit = new Okteta::ByteArrayComboBox( findBox );
     connect( SearchDataEdit, SIGNAL(byteArrayChanged(const QByteArray&)), SLOT(onSearchDataChanged(const QByteArray&)) );
     connect( SearchDataEdit, SIGNAL(formatChanged(int)), SLOT(onSearchDataFormatChanged(int)) );
-    bytesLabel->setBuddy( SearchDataEdit );
-    const QString inputWhatsThis =
-        i18nc("@info:whatsthis","Enter a pattern to search for, or select a previous pattern from the list.");
-    bytesLabel->setWhatsThis( inputWhatsThis );
-    SearchDataEdit->setWhatsThis( inputWhatsThis );
+    const QString toolTip =
+        i18nc("@info:tooltip",
+              "Enter the bytes to search for, or select bytes previously searched for from the list.");
+    SearchDataEdit->setToolTip( toolTip );
 
-    findBoxLayout->addWidget( bytesLabel );
     findBoxLayout->addWidget( SearchDataEdit );
     findBox->setLayout( findBoxLayout );
 }

@@ -32,7 +32,6 @@
 // Qt
 #include <QtGui/QCheckBox>
 #include <QtGui/QComboBox>
-#include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
 #include <QtGui/QGroupBox>
 #include <QtGui/QLayout>
@@ -57,19 +56,16 @@ KReplaceDialog::KReplaceDialog( ReplaceTool* tool, QWidget* parent )
     setupFindBox();
 
     // replace term
-    QGroupBox *ReplaceBox = new QGroupBox( i18nc("@title:group","Replace By"), mainWidget() );
+    QGroupBox *ReplaceBox = new QGroupBox( i18nc("@title:group","Replace With"), mainWidget() );
 
     QVBoxLayout *ReplaceBoxLayout = new QVBoxLayout;
 
-    QLabel *EditLabel = new QLabel( i18nc("@label:textbox","Replacing bytes:"), ReplaceBox );
     ReplaceDataEdit = new Okteta::ByteArrayComboBox( ReplaceBox );
-    EditLabel->setBuddy( ReplaceDataEdit );
-    const QString ReplaceDataEditWhatsThis =
-        i18nc("@info:whatsthis","Enter a pattern to replace with, or select a previous pattern from the list.");
-    EditLabel->setWhatsThis( ReplaceDataEditWhatsThis );
-    ReplaceDataEdit->setWhatsThis( ReplaceDataEditWhatsThis );
+    const QString toolTip =
+        i18nc("@info:tooltip",
+              "Enter the bytes to replace with, or select bytes previously replaced with from the list.");
+    ReplaceDataEdit->setToolTip( toolTip );
 
-    ReplaceBoxLayout->addWidget( EditLabel );
     ReplaceBoxLayout->addWidget( ReplaceDataEdit );
 
     ReplaceBox->setLayout( ReplaceBoxLayout );
