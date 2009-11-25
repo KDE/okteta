@@ -83,7 +83,6 @@ public:
     QVariant data(int column, int role) const;
     virtual Okteta::Size readData(Okteta::AbstractByteArrayModel* input,
             ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining);
-    static PrimitiveDataInformation* fromXML(QDomElement& xmlElem);
     static PrimitiveDataType typeStringToType(QString& typeStr);
 
 };

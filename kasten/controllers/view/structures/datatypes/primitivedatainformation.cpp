@@ -303,21 +303,6 @@ PrimitiveDataInformation* PrimitiveDataInformation::newInstance(QString name,
     }
 }
 
-//XXX add type check to the elemt parsers? (check elem tagname)
-PrimitiveDataInformation* PrimitiveDataInformation::fromXML(QDomElement& xmlElem)
-{
-    QString name = xmlElem.attribute("name", i18n("<invalid name>"));
-    QString typeStr = xmlElem.attribute("type", QString());
-    if (typeStr.isEmpty())
-    {
-        kWarning() << "PrimitiveDataInformation::fromXML(): no type attribute defined";
-        return NULL;
-    }
-    PrimitiveDataType type = PrimitiveDataInformation::typeStringToType(typeStr);
-    return PrimitiveDataInformation::newInstance(name, type);
-}
-
-
 //int PrimitiveDataInformation::getStringConversionBase(PrimitiveDataType type)
 //{
 //    int enumVal = 0;

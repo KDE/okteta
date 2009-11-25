@@ -44,7 +44,6 @@ public:
     virtual Okteta::Size readData(Okteta::AbstractByteArrayModel* input,
             ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining) = 0;
 
-    static AbstractArrayDataInformation* fromXML(QDomElement& xmlElem);
 protected:
     virtual Okteta::Size offset(unsigned int index) const;
 };

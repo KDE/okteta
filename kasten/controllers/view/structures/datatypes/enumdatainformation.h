@@ -46,8 +46,6 @@ public:
     {
         return mValue->displayBase();
     }
-    static EnumDataInformation* fromXML(QDomElement& xmlElem, QList<
-            EnumDefinition::Ptr>& defs);
     Okteta::Size readData(Okteta::AbstractByteArrayModel* input,
             ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining);
     bool setData(const QVariant& value, DataInformation* inf,

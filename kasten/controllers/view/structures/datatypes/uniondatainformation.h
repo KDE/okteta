@@ -47,7 +47,6 @@ public:
             Okteta::Address address, Okteta::Size remaining);
     /** add another field to this union */
     UnionDataInformation& operator<<(DataInformation* field);
-    static UnionDataInformation* fromXML(QDomElement& xmlElem);
 protected:
     virtual Okteta::Size offset(unsigned int index) const
     {

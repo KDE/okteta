@@ -45,7 +45,6 @@ public:
             ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining);
     /** add another field to this struct */
     StructureDataInformation& operator<<(DataInformation* field);
-    static StructureDataInformation* fromXML(QDomElement& xmlElem);
 protected:
     Okteta::Size offset(unsigned int index) const;
 };
