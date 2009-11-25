@@ -46,7 +46,7 @@ StructuresManagerView::StructuresManagerView( Kasten::StructuresManager* manager
   : QWidget(parent),
     mManager(manager)
 {
-    QHBoxLayout* pageLayout = new QHBoxLayout();
+    QHBoxLayout* pageLayout = new QHBoxLayout( this );
 
     mStructuresSelector = new KPluginSelector( this );
     pageLayout->addWidget( mStructuresSelector );
