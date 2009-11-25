@@ -41,7 +41,7 @@ class ByteArrayValidator : public QValidator
 
   public:
     // matching Okteta::ValueCoding
-    enum Coding { InvalidCoding = -1, HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, CharCoding=4 };
+    enum Coding { InvalidCoding = -1, HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, CharCoding=4, Utf8Coding=5 };
 
   public:
     explicit ByteArrayValidator( QObject* parent, Coding codecId = CharCoding, int charCodecId = Okteta::LocalEncoding );

@@ -58,7 +58,8 @@ void ByteArrayValidator::setCodec( Coding codecId )
 
     mCodecId = codecId;
 
-    if( mCodecId != CharCoding )
+    if( mCodecId != CharCoding
+        && mCodecId != Utf8Coding )
     {
         delete mValueCodec;
         mValueCodec = ValueCodec::createCodec( (Okteta::ValueCoding)mCodecId );
@@ -72,6 +73,7 @@ QValidator::State ByteArrayValidator::validate( QString& string, int& pos ) cons
     State result = QValidator::Acceptable;
 
     const int stringLength = string.length();
+
     if( mCodecId == CharCoding )
     {
         for( int i=0; i<stringLength; ++i )
@@ -84,7 +86,7 @@ QValidator::State ByteArrayValidator::validate( QString& string, int& pos ) cons
             }
         }
     }
-    else
+    else if( mCodecId != Utf8Coding )
     {
         for( int i=0; i<stringLength; ++i )
         {
@@ -116,6 +118,8 @@ QByteArray ByteArrayValidator::toByteArray( const QString& string ) const
             result[i] = success ? byte : '?'; // TODO: define unknown symbol
         }
     }
+    else if( mCodecId == Utf8Coding )
+        result = string.toUtf8();
     else
     {
         int i = 0;
@@ -143,7 +147,9 @@ QString ByteArrayValidator::toString( const QByteArray& byteArray ) const
     QString result;
 
     const int byteArraySize = byteArray.size();
-    if( mCodecId == CharCoding )
+    if( mCodecId == Utf8Coding )
+        result = QString::fromUtf8( byteArray.constData(), byteArraySize );
+    else if( mCodecId == CharCoding )
     {
         result.resize( byteArraySize );
         for( int i=0; i<byteArraySize; ++i )

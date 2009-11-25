@@ -45,7 +45,7 @@ const QStringList& formatNames()
         list.append( i18nc("@item:inlistbox coding of the bytes as values in the octal format",      "Oct")        );
         list.append( i18nc("@item:inlistbox coding of the bytes as values in the binary format",     "Bin")       );
         list.append( i18nc("@item:inlistbox coding of the bytes as characters with the values",      "Char") );
-//         list.append( i18nc("@item:inlistbox coding of the bytes as utf-8 characters with the values",      "Utf-8") );
+        list.append( i18nc("@item:inlistbox coding of the bytes as UTF-8 characters with the values",      "UTF-8") );
     }
     return list;
 }
