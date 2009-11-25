@@ -100,6 +100,8 @@ QVariant PrimitiveDataInformation::data(int column, int role) const
             return getName();
         }
         else if (column == 1)
+            return getTypeName();
+        else if (column == 2)
             return getValueString();
         else
             return QVariant();
@@ -198,7 +200,7 @@ void PrimitiveDataInformation::setModelData(AllPrimitiveTypes value,
 
 Qt::ItemFlags PrimitiveDataInformation::flags(int column, bool fileLoaded) const
 {
-    if (column == 1 && fileLoaded)
+    if (column == 2 && fileLoaded)
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable;
     else
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled;

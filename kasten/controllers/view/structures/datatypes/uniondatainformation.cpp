@@ -111,6 +111,8 @@ QVariant DataInformationWithChildren::data(int column, int role) const
             return getName();
         }
         else if (column == 1)
+            return getTypeName();
+        else if (column == 2)
             return getValueString(); //empty QString
         else
             return QVariant();

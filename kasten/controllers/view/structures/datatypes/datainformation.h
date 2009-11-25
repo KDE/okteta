@@ -77,7 +77,7 @@ public:
      *  column 0 is name
      *  column 1 is value
      */
-    static const int COLUMN_COUNT = 2;
+    static const int COLUMN_COUNT = 3;
 
     virtual DataInformation* childAt(unsigned int) const
     {
@@ -95,7 +95,6 @@ public:
     {
         Q_UNUSED(column)
         Q_UNUSED(fileLoaded);
-        //TODO editable for certain columns
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
     }
 
