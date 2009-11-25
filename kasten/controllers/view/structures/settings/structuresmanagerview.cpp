@@ -54,7 +54,7 @@ StructuresManagerView::StructuresManagerView(Kasten::StructuresManager& manager,
             SLOT(onExportStructureClicked()));
     connect(ui.removeStructureButton, SIGNAL(clicked()),
             SLOT(onRemoveStructureClicked()));
-    connect(ui.applyChanges, SIGNAL(clicked()), SLOT(onapplyChangesClicked()));
+    connect(ui.applyChanges, SIGNAL(clicked()), SLOT(onApplyChangesClicked()));
 
     mStructuresSelector = new KPluginSelector(this);
     ui.selectArea->layout()->addWidget(mStructuresSelector);
