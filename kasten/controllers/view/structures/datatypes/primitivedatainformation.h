@@ -59,7 +59,7 @@ public:
     {
         return mIsValid;
     }
-    virtual inline int displayBase() const = 0;
+    virtual int displayBase() const = 0;
     QVariant primitiveValue() const;
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
     /** @return true if data was changed */

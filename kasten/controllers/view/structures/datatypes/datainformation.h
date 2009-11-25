@@ -32,9 +32,6 @@
 #include <abstractbytearraymodel.h>
 //structview
 #include "structviewpreferences.h"
-//XML
-#include <QtXml/QDomElement>
-#include <QFileInfo>
 //KDE
 #include <KLocale>
 #include <KGlobal>

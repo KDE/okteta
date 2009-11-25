@@ -104,7 +104,7 @@ QList<const DataInformation*> DataInformationWithChildren::findChildrenWithName(
         if (par)
             retList.append(par->findChildrenWithName(name, this));
     }
-    for (int i = 0; i < childCount(); ++i)
+    for (uint i = 0; i < childCount(); ++i)
     {
         DataInformation* data = childAt(i);
         if (data == upTo)
