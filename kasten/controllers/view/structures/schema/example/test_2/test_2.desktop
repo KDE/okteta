@@ -1,0 +1,17 @@
+[Desktop Entry]
+Encoding=UTF-8
+Icon=arrow-up
+Type=Service
+ServiceTypes=KPluginInfo
+
+Name=Another simple test
+Comment=A few more test structures
+
+X-KDE-PluginInfo-Author=Alex Richardson
+X-KDE-PluginInfo-Email=alex.richardson@gmx.de
+X-KDE-PluginInfo-Name=test_2
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=http://www.plugin.org/
+X-KDE-PluginInfo-Category=structure
+X-KDE-PluginInfo-License=LGPL
+X-KDE-PluginInfo-EnabledByDefault=false

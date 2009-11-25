@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../structuredefs.xsd">
+  <enumDef name="numbers" type="UInt8">
+    <entry name="ONE" value="1" />
+    <entry name="TWO" value="2" />
+    <entry name="THREE" value="3" />
+    <entry name="FOUR" value="4" />
+  </enumDef>
+  <array length="4" name="enums">
+    <enum name="number" enum="numbers" type="UInt8" />
+  </array>
+</data>

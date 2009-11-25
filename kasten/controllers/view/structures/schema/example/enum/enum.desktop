@@ -1,0 +1,17 @@
+[Desktop Entry]
+Encoding=UTF-8
+Icon=arrow-up
+Type=Service
+ServiceTypes=KPluginInfo
+
+Name=Testing enums
+Comment=A test structure for enums
+
+X-KDE-PluginInfo-Author=Alex Richardson
+X-KDE-PluginInfo-Email=alex.richardson@gmx.de
+X-KDE-PluginInfo-Name=enum
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=http://www.test.org/
+X-KDE-PluginInfo-Category=structure
+X-KDE-PluginInfo-License=LGPL
+X-KDE-PluginInfo-EnabledByDefault=false

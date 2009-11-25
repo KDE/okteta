@@ -1,0 +1,17 @@
+[Desktop Entry]
+Encoding=UTF-8
+Icon=image
+Type=Service
+ServiceTypes=KPluginInfo
+
+Name=PNG file header
+Comment=A test structure containing the PNG file header (file must be set to big-endian)
+
+X-KDE-PluginInfo-Author=Alex Richardson
+X-KDE-PluginInfo-Email=alex.richardson@gmx.de
+X-KDE-PluginInfo-Name=png
+X-KDE-PluginInfo-Version=1.0
+#X-KDE-PluginInfo-Website=http://www.plugin.org/
+X-KDE-PluginInfo-Category=structure
+X-KDE-PluginInfo-License=LGPL
+X-KDE-PluginInfo-EnabledByDefault=false
