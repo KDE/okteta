@@ -18,9 +18,10 @@
 
  You should have received a copy of the GNU Lesser General Public
  License along with this library. If not, see <http://www.gnu.org/licenses/>.
- */
+*/
 
 #include "structuresmanagerview.h"
+
 #include "structviewpreferences.h"
 #include "../structuresmanager.h"
 // KDE
@@ -31,41 +32,69 @@
 #include <KMessageBox>
 #include <KPluginSelector>
 #include <KPluginInfo>
+#include <KPushButton>
 // Qt
 #include <QtGui/QListWidgetItem>
+#include <QtGui/QLayout>
 
 #include <KDebug>
 
 static const int FileNameRole = Qt::UserRole;
 
-StructuresManagerView::StructuresManagerView(Kasten::StructuresManager& manager,
-        QWidget* parent) :
-    QWidget(parent), mManager(manager)
+StructuresManagerView::StructuresManagerView( Kasten::StructuresManager* manager,
+        QWidget* parent)
+  : QWidget(parent),
+    mManager(manager)
 {
-    ui.setupUi(this);
+    QHBoxLayout* pageLayout = new QHBoxLayout();
 
-    ui.getNewStructuresButton->setIcon(KIcon("get-hot-new-stuff"));
+    mStructuresSelector = new KPluginSelector( this );
+    pageLayout->addWidget( mStructuresSelector );
 
-    connect(ui.getNewStructuresButton, SIGNAL(clicked()),
-            SLOT(onGetNewStructuresClicked()));
-    connect(ui.importStructuresButton, SIGNAL(clicked()),
-            SLOT(onImportStructuresClicked()));
-    connect(ui.exportStructureButton, SIGNAL(clicked()),
-            SLOT(onExportStructureClicked()));
-    connect(ui.removeStructureButton, SIGNAL(clicked()),
-            SLOT(onRemoveStructureClicked()));
-    connect(ui.applyChanges, SIGNAL(clicked()), SLOT(onApplyChangesClicked()));
+    QVBoxLayout* buttonsLayout = new QVBoxLayout();
 
-    mStructuresSelector = new KPluginSelector(this);
-    ui.selectArea->layout()->addWidget(mStructuresSelector);
+    mGetNewStructuresButton = new KPushButton( KIcon("get-hot-new-stuff"), i18n("Get New Structures..."), this );
+    connect( mGetNewStructuresButton, SIGNAL(clicked()),
+             SLOT(onGetNewStructuresClicked()) );
+
+    buttonsLayout->addWidget( mGetNewStructuresButton );
+
+    mImportStructuresButton = new KPushButton( i18n("Import Structures..."), this );
+    connect( mImportStructuresButton, SIGNAL(clicked()),
+             SLOT(onImportStructuresClicked()) );
+
+    buttonsLayout->addWidget( mImportStructuresButton );
+
+    mExportStructureButton = new KPushButton( i18n("Export Structure..."), this );
+    connect( mExportStructureButton, SIGNAL(clicked()),
+             SLOT(onExportStructureClicked()) );
+
+    buttonsLayout->addWidget( mExportStructureButton );
+
+    mRemoveStructureButton = new KPushButton( i18n("Remove Structure"), this );
+    connect( mRemoveStructureButton, SIGNAL(clicked()),
+             SLOT(onRemoveStructureClicked()) );
+
+    buttonsLayout->addWidget( mRemoveStructureButton );
+
+    mApplyChangesButton = new KPushButton( i18n("Apply Changes"), this );
+    connect( mApplyChangesButton, SIGNAL(clicked()),
+             SLOT(onApplyChangesClicked()) );
+
+    buttonsLayout->addWidget( mApplyChangesButton );
+    buttonsLayout->addStretch();
+
+    pageLayout->addLayout( buttonsLayout );
+
+
     KPluginInfo::List plugins;
-    foreach(const Kasten::StructureDefinitionFile* def,manager.structureDefs())
-        {
-            plugins.append(def->info());
-        }
+    foreach( const Kasten::StructureDefinitionFile* def, manager->structureDefs() )
+        plugins.append( def->info() );
+
     mStructuresSelector->addPlugins(plugins, KPluginSelector::ReadConfigFile, i18n(
-            "Structure Definitions"), QString("structure"), mManager.config());
-    mStructuresSelector->load();}
+            "Structure Definitions"), QString("structure"), mManager->config());
+    mStructuresSelector->load();
+}
 
 void StructuresManagerView::onGetNewStructuresClicked()
 {
@@ -76,7 +105,7 @@ void StructuresManagerView::onGetNewStructuresClicked()
 
         if (!entries.isEmpty())
         {
-            mManager.reloadPaths();
+            mManager->reloadPaths();
         }
     }
 }

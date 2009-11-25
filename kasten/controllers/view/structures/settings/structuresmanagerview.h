@@ -23,36 +23,45 @@
 #ifndef STRUCTURESMANAGERVIEW_H
 #define STRUCTURESMANAGERVIEW_H
 
-// lib
-#include "ui_structuresmanagerview.h"
 // Qt
 #include <QtGui/QWidget>
 
+class KPushButton;
 class KPluginSelector;
-namespace Kasten
-{
+
+namespace Kasten {
 class StructuresManager;
 }
+
+
 class StructuresManagerView: public QWidget
 {
-Q_OBJECT
+  Q_OBJECT
 
-public:
-    explicit StructuresManagerView(Kasten::StructuresManager& manager,
-            QWidget* parent = 0);
+  public:
+    explicit StructuresManagerView( Kasten::StructuresManager* manager,
+            QWidget* parent = 0 );
 
     virtual ~StructuresManagerView();
 
-protected Q_SLOTS:
+  protected Q_SLOTS:
     void onGetNewStructuresClicked();
     void onImportStructuresClicked();
     void onExportStructureClicked();
     void onRemoveStructureClicked();
     void onApplyChangesClicked();
-private:
-    Ui_StructuresManagerView ui;
+
+  private:
+    Kasten::StructuresManager* mManager;
+
+    KPushButton* mGetNewStructuresButton;
+    KPushButton* mImportStructuresButton;
+    KPushButton* mExportStructureButton;
+    KPushButton* mRemoveStructureButton;
+    KPushButton* mApplyChangesButton;
+
     KPluginSelector* mStructuresSelector;
-    Kasten::StructuresManager& mManager;
+
     void updatePluginsList(Kasten::StructuresManager & manager);
 };
 

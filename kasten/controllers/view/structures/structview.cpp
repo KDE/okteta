@@ -117,7 +117,7 @@ void StructView::openSettingsDlg(int page)
     KConfigDialog* dialog = new KConfigDialog(this, "Structure Viewer Settings",
             StructViewPreferences::self());
     QWidget* displaySettings = new StructViewDisplaySettingsWidget();
-    QWidget* structureSettings = new StructuresManagerView(mTool->manager(), this);
+    QWidget* structureSettings = new StructuresManagerView(&mTool->manager(), this);
     QWidget* loadedStructuresSettings = new StructureAddRemoveWidget(mTool, this);
     KPageWidgetItem* displ = dialog->addPage(displaySettings, i18n(
             "Display settings"), QString("configure"));

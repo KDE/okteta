@@ -272,7 +272,6 @@ set( STRUCTVIEW_SRCS
 
 kde4_add_kcfg_files(STRUCTVIEW_SRCS GENERATE_MOC view/structures/settings/structviewpreferences.kcfgc)
 kde4_add_ui_files(STRUCTVIEW_SRCS view/structures/settings/structviewdisplaysettingswidget.ui)
-kde4_add_ui_files(STRUCTVIEW_SRCS view/structures/settings/structuresmanagerview.ui)
 
 set( LIBFRAMESPRINT_SRCS
   ${LIBFRAMESPRINT_REL_DIR}/abstractframerenderer.cpp
