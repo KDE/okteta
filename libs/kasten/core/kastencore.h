@@ -55,7 +55,7 @@ namespace Kasten
         NextQuestion,
         Save,
         Overwrite,
-        Discard,
+        Discard
     };
 }
 
