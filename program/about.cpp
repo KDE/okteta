@@ -49,7 +49,7 @@ OktetaAboutData::OktetaAboutData()
     addAuthor( ki18n("Friedrich W. H. Kossebau"), // name
                ki18n("Author"), // task
                FWHKEmailAddress );
-    addCredit( ki18nc("Author","Alexander Richardson"),// name
-               ki18nc("Task description","Structure viewer/editor"), // task
+    addAuthor( ki18nc("Author","Alexander Richardson"),// name
+               ki18nc("Task description","Structures tool"), // task
                AREmailAddress );
 }
