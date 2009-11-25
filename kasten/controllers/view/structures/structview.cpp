@@ -30,7 +30,6 @@
 //settings
 #include "structviewpreferences.h"
 #include "settings/structviewdisplaysettingswidget.h"
-#include "settings/structviewpathsettingswidget.h"
 #include "settings/structuresmanagerview.h"
 #include "settings/structureaddremovewidget.h"
 // KDE
