@@ -118,13 +118,10 @@ void StructView::openSettingsDlg(int page)
     KConfigDialog* dialog = new KConfigDialog(this, "Structure Viewer Settings",
             StructViewPreferences::self());
     QWidget* displaySettings = new StructViewDisplaySettingsWidget();
-    QWidget* pathSettings = new StructViewPathSettingsWidget();
     QWidget* structureSettings = new StructuresManagerView(mTool->manager(), this);
     QWidget* loadedStructuresSettings = new StructureAddRemoveWidget(mTool, this);
     KPageWidgetItem* displ = dialog->addPage(displaySettings, i18n(
             "Display settings"), QString("configure"));
-    KPageWidgetItem* paths = dialog->addPage(pathSettings, i18n("Paths"), QString(
-            "folder"));
     QWidget* structsWidget = new QWidget();
     {
         QVBoxLayout* layout = new QVBoxLayout();
@@ -150,8 +147,6 @@ void StructView::openSettingsDlg(int page)
     if (page == 0)
         dialog->setCurrentPage(displ);
     else if (page == 1)
-        dialog->setCurrentPage(paths);
-    else if (page == 2)
         dialog->setCurrentPage(structs);
     dialog->show();
 }
