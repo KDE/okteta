@@ -37,7 +37,7 @@ QString CharDataInformation::getValueString() const
             num = "0x" + num;
         if (Kasten::StructViewPreferences::localeAwareDecimalFormatting() && base == 10)
             num = KGlobal::locale()->formatNumber(num, false, 0);
-        charStr += " (" + num + ")";
+        charStr += " (" + num + ')';
     }
     return charStr;
 }
