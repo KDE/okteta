@@ -67,7 +67,7 @@ void StructureDefinitionFile::parseIncludeNodes(QDomNodeList& elems)
         QDomElement elem = elems.at(i).toElement();
         if (elem.isNull())
             continue;
-        QString includeFile = elem.attribute("file", QString::null);
+        QString includeFile = elem.attribute("file");
         if (!includeFile.isNull())
         {
             kDebug() << "including file: " << includeFile;
@@ -93,7 +93,7 @@ void StructureDefinitionFile::parseEnumDefNodes(QDomNodeList& elems)
             continue;
         QMap<AllPrimitiveTypes, QString> defs;
         QString enumName = elem.attribute("name", i18n("<no name specified>"));
-        QString typeStr = elem.attribute("type", QString::null);
+        QString typeStr = elem.attribute("type");
         if (typeStr.isNull())
         {
             kWarning() << "no type attribute defined -> skipping this enum";
@@ -261,7 +261,7 @@ StructureDefinitionFile::arrayFromXML(const QDomElement& xmlElem) const
             " could not parse subelement type";
         return NULL;
     }
-    QString lengthStr = xmlElem.attribute("length", QString::null);
+    QString lengthStr = xmlElem.attribute("length");
     if (lengthStr.isNull())
     {
         kWarning() << "StaticLengthPrimitiveArrayDataInformation::fromXML():"
