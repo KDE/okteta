@@ -158,6 +158,7 @@ void StructuresManagerView::onApplyChangesClicked()
 {
     mStructuresSelector->save();
     kDebug() << "saved";
+    emit applyButtonClicked();
     return;
 }
 void StructuresManagerView::onRemoveStructureClicked()

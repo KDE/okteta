@@ -29,29 +29,30 @@
 class KPushButton;
 class KPluginSelector;
 
-namespace Kasten {
+namespace Kasten
+{
 class StructuresManager;
 }
 
-
 class StructuresManagerView: public QWidget
 {
-  Q_OBJECT
+Q_OBJECT
 
-  public:
-    explicit StructuresManagerView( Kasten::StructuresManager* manager,
-            QWidget* parent = 0 );
+public:
+    explicit StructuresManagerView(Kasten::StructuresManager* manager,
+            QWidget* parent = 0);
 
     virtual ~StructuresManagerView();
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
     void onGetNewStructuresClicked();
     void onImportStructuresClicked();
     void onExportStructureClicked();
     void onRemoveStructureClicked();
     void onApplyChangesClicked();
-
-  private:
+Q_SIGNALS:
+    void applyButtonClicked();
+private:
     Kasten::StructuresManager* mManager;
 
     KPushButton* mGetNewStructuresButton;

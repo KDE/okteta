@@ -119,8 +119,8 @@ void StructView::openSettingsDlg(int page)
     QWidget* displaySettings = new StructViewDisplaySettingsWidget();
     QWidget* structureSettings = new StructuresManagerView(&mTool->manager(), this);
     QWidget* loadedStructuresSettings = new StructureAddRemoveWidget(mTool, this);
-    KPageWidgetItem* displ = dialog->addPage(displaySettings, i18n(
-            "Type Display"), QString("configure"));
+    KPageWidgetItem* displ = dialog->addPage(displaySettings, i18n("Type Display"),
+            QString("configure"));
     QWidget* structsWidget = new QWidget();
     {
         QVBoxLayout* layout = new QVBoxLayout();
@@ -128,14 +128,16 @@ void StructView::openSettingsDlg(int page)
         layout->addWidget(loadedStructuresSettings);
         structsWidget->setLayout(layout);
     }
-    KPageWidgetItem* structs =
-        dialog->addPage(structsWidget, i18n("Used structures"), "configure" );
+    KPageWidgetItem* structs = dialog->addPage(structsWidget,
+            i18n("Used structures"), "configure");
 
-    dialog->addPage(structureSettings, i18n("Structures management"), "folder" );
+    dialog->addPage(structureSettings, i18n("Structures management"), "folder");
 
     //User edited the configuration - update your local copies of the
     //configuration data
     connect(dialog, SIGNAL(settingsChanged(const QString&)), this, SLOT(update()));
+    connect(structureSettings, SIGNAL(applyButtonClicked()),
+            loadedStructuresSettings, SLOT(updateAvailable()));
     connect(dialog, SIGNAL(settingsChanged(const QString&)), mTool,
             SLOT(loadStructDefFiles()));
     connect(dialog, SIGNAL(settingsChanged(const QString&)), mTool,
