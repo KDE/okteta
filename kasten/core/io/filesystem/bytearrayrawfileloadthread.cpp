@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -41,38 +41,36 @@ namespace Kasten
 
 void ByteArrayRawFileLoadThread::run()
 {
-    QDataStream inStream( mFile );
-    int fileSize = mFile->size();
+    qint64 fileSize = mFile->size();
 
-    // TODO: should the decoder know this?
-    // it is in the api now (constructor)
-
+    // allocate working memory
     QByteArray data;
     data.resize( fileSize );
-    inStream.readRawData( data.data(), fileSize );
+    bool success = ( data.size() == fileSize );
 
-    Okteta::PieceTableByteArrayModel* byteArray = new Okteta::PieceTableByteArrayModel( data );
-
-    byteArray->setModified( false );
-
-    //registerDiskModifyTime( file ); TODO move into synchronizer
-
-    const bool streamIsOk = ( inStream.status() == QDataStream::Ok );
-//     if( success )
-//         *success = streamIsOk ? 0 : 1;
-    if( streamIsOk )
+    if( success )
     {
-        mDocument = new ByteArrayDocument( byteArray, i18nc("destination of the byte array", "Loaded from file.") );
-        mDocument->setOwner( Person::createEgo() );
-        // TODO: make PieceTableByteArrayModel a child by constructor argument parent
-        byteArray->moveToThread( QApplication::instance()->thread() );
-        mDocument->moveToThread( QApplication::instance()->thread() );
+        QDataStream inStream( mFile );
+        inStream.readRawData( data.data(), fileSize );
+
+        success = ( inStream.status() == QDataStream::Ok );
+
+        if( success )
+        {
+            Okteta::PieceTableByteArrayModel* byteArray = new Okteta::PieceTableByteArrayModel( data );
+            byteArray->setModified( false );
+
+            mDocument = new ByteArrayDocument( byteArray, i18nc("destination of the byte array", "Loaded from file.") );
+            mDocument->setOwner( Person::createEgo() );
+            // TODO: make PieceTableByteArrayModel a child by constructor argument parent
+            byteArray->moveToThread( QApplication::instance()->thread() );
+            mDocument->moveToThread( QApplication::instance()->thread() );
+        }
     }
-    else
-    {
+    // TODO: else report file too large
+
+    if( ! success )
         mDocument = 0;
-        delete byteArray;
-    }
 
     emit documentRead( mDocument );
 }

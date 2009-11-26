@@ -41,13 +41,19 @@ ByteArrayRawFileReloadThread::ByteArrayRawFileReloadThread( QObject* parent, QFi
 
 void ByteArrayRawFileReloadThread::run()
 {
-    QDataStream inStream( mFile );
-    const int fileSize = mFile->size();
+    const qint64 fileSize = mFile->size();
 
     mData.resize( fileSize );
-    inStream.readRawData( mData.data(), fileSize );
+    mSuccess = ( mData.size() == fileSize );
 
-    mSuccess = ( inStream.status() == QDataStream::Ok );
+    if( mSuccess )
+    {
+        QDataStream inStream( mFile );
+        inStream.readRawData( mData.data(), fileSize );
+
+        mSuccess = ( inStream.status() == QDataStream::Ok );
+    }
+    // TODO: else report file too large
 
     emit documentReloaded( mSuccess );
 }
