@@ -49,7 +49,7 @@ namespace Kasten
 {
 
 StructView::StructView(StructTool* tool, QWidget* parent) :
-    QWidget(parent), mTool(tool), mDelegate(new StructViewItemDelegate())
+    QWidget(parent), mTool(tool), mDelegate(new StructViewItemDelegate(this))
 {
     QBoxLayout* baseLayout = new QVBoxLayout(this);
     setLayout(baseLayout);
@@ -197,11 +197,5 @@ void StructView::onCurrentRowChanged(const QModelIndex& current,
 
 StructView::~StructView()
 {
-    delete mStructTreeModel;
-    delete mByteOrderSelection;
-    delete mSettingsButton;
-    delete mStructTreeView;
-    delete mDelegate;
-    //don't delete tool. it causes segfault
 }
 }
