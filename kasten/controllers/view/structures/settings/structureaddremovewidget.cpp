@@ -53,7 +53,7 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(Kasten::StructTool* tool,
     baseLayout = new QHBoxLayout();
 
     tree1Layout = new QVBoxLayout();
-    mTree1Label = new QLabel(i18nc("@info:label", "Available structures:"), this);
+    mTree1Label = new QLabel(i18nc("@info:label", "Installed structures:"), this);
     tree1Layout->addWidget(mTree1Label);
     mTreeAvailable = new QTreeWidget(this);
     mTreeAvailable->setHeaderHidden(true);
@@ -63,7 +63,7 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(Kasten::StructTool* tool,
     tree1Layout->addWidget(mTreeAvailable);
 
     tree2Layout = new QVBoxLayout();
-    mTree2Label = new QLabel(i18nc("@info:label", "Selected structures:"), this);
+    mTree2Label = new QLabel(i18nc("@info:label", "Used structures:"), this);
     tree2Layout->addWidget(mTree2Label);
     mTreeSelected = new QTreeWidget(this);
     mTreeSelected->setHeaderHidden(true);
@@ -74,17 +74,17 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(Kasten::StructTool* tool,
 
     leftRightLayout = new QVBoxLayout();
     leftRightLayout->addStretch();
-    mRightButton = new KPushButton(KIcon("arrow-right"), "", this);
+    mRightButton = new KPushButton(KIcon("arrow-right"), 0, this);
     leftRightLayout->addWidget(mRightButton);
-    mLeftButton = new KPushButton(KIcon("arrow-left"), "", this);
+    mLeftButton = new KPushButton(KIcon("arrow-left"), 0, this);
     leftRightLayout->addWidget(mLeftButton);
     leftRightLayout->addStretch();
 
     upDownLayout = new QVBoxLayout();
     upDownLayout->addStretch();
-    mUpButton = new KPushButton(KIcon("arrow-up"), "", this);
+    mUpButton = new KPushButton(KIcon("arrow-up"), 0, this);
     upDownLayout->addWidget(mUpButton);
-    mDownButton = new KPushButton(KIcon("arrow-down"), "", this);
+    mDownButton = new KPushButton(KIcon("arrow-down"), 0, this);
     upDownLayout->addWidget(mDownButton);
     upDownLayout->addStretch();
 
