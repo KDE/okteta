@@ -225,13 +225,12 @@ void StructTool::setSelectedStructuresInView()
 {
     qDeleteAll(mData);
     mData.clear();
-    emit
-    dataCleared();
+    emit dataCleared();
 
     QRegExp regex("'(.+)':'(.+)'");
     QStringList loadedStructs = StructViewPreferences::loadedStructures();
     kDebug() << "loadedStructs " << loadedStructs;
-    foreach(QString s,loadedStructs)
+    foreach(const QString& s,loadedStructs)
         {
             int pos = regex.indexIn(s);
             if (pos > -1)
@@ -246,8 +245,8 @@ void StructTool::setSelectedStructuresInView()
                 if (data)
                     addChildItem(data);
             }
-        } emit
-    dataChanged();
+        }
+    emit dataChanged();
     updateData();
 
 }
