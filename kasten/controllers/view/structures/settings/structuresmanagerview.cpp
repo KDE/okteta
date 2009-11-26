@@ -46,36 +46,36 @@ StructuresManagerView::StructuresManagerView( Kasten::StructuresManager* manager
   : QWidget(parent),
     mManager(manager)
 {
-    QHBoxLayout* pageLayout = new QHBoxLayout( this );
+    QVBoxLayout* pageLayout = new QVBoxLayout( this );
 
     mStructuresSelector = new KPluginSelector( this );
     pageLayout->addWidget( mStructuresSelector );
 
     QVBoxLayout* buttonsLayout = new QVBoxLayout();
 
-    mGetNewStructuresButton = new KPushButton( KIcon("get-hot-new-stuff"), i18n("Get New Structures..."), this );
-    connect( mGetNewStructuresButton, SIGNAL(clicked()),
-             SLOT(onGetNewStructuresClicked()) );
-
-    buttonsLayout->addWidget( mGetNewStructuresButton );
-
-    mImportStructuresButton = new KPushButton( i18n("Import Structures..."), this );
-    connect( mImportStructuresButton, SIGNAL(clicked()),
-             SLOT(onImportStructuresClicked()) );
-
-    buttonsLayout->addWidget( mImportStructuresButton );
-
-    mExportStructureButton = new KPushButton( i18n("Export Structure..."), this );
-    connect( mExportStructureButton, SIGNAL(clicked()),
-             SLOT(onExportStructureClicked()) );
-
-    buttonsLayout->addWidget( mExportStructureButton );
-
-    mRemoveStructureButton = new KPushButton( i18n("Remove Structure"), this );
-    connect( mRemoveStructureButton, SIGNAL(clicked()),
-             SLOT(onRemoveStructureClicked()) );
-
-    buttonsLayout->addWidget( mRemoveStructureButton );
+//    mGetNewStructuresButton = new KPushButton( KIcon("get-hot-new-stuff"), i18n("Get New Structures..."), this );
+//    connect( mGetNewStructuresButton, SIGNAL(clicked()),
+//             SLOT(onGetNewStructuresClicked()) );
+//
+//    buttonsLayout->addWidget( mGetNewStructuresButton );
+//
+//    mImportStructuresButton = new KPushButton( i18n("Import Structures..."), this );
+//    connect( mImportStructuresButton, SIGNAL(clicked()),
+//             SLOT(onImportStructuresClicked()) );
+//
+//    buttonsLayout->addWidget( mImportStructuresButton );
+//
+//    mExportStructureButton = new KPushButton( i18n("Export Structure..."), this );
+//    connect( mExportStructureButton, SIGNAL(clicked()),
+//             SLOT(onExportStructureClicked()) );
+//
+//    buttonsLayout->addWidget( mExportStructureButton );
+//
+//    mRemoveStructureButton = new KPushButton( i18n("Remove Structure"), this );
+//    connect( mRemoveStructureButton, SIGNAL(clicked()),
+//             SLOT(onRemoveStructureClicked()) );
+//
+//    buttonsLayout->addWidget( mRemoveStructureButton );
 
     mApplyChangesButton = new KPushButton( i18n("Apply Changes"), this );
     connect( mApplyChangesButton, SIGNAL(clicked()),

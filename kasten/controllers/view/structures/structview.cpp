@@ -117,7 +117,7 @@ void StructView::openSettingsDlg(int page)
     KConfigDialog* dialog = new KConfigDialog(this, "Structures Tool Settings",
             StructViewPreferences::self());
     QWidget* displaySettings = new StructViewDisplaySettingsWidget();
-//     QWidget* structureSettings = new StructuresManagerView(&mTool->manager(), this);
+    QWidget* structureSettings = new StructuresManagerView(&mTool->manager(), this);
     QWidget* loadedStructuresSettings = new StructureAddRemoveWidget(mTool, this);
     KPageWidgetItem* displ = dialog->addPage(displaySettings, i18n("Value Display"),
             QString("configure"));
@@ -131,13 +131,13 @@ void StructView::openSettingsDlg(int page)
     KPageWidgetItem* structs = dialog->addPage(structsWidget,
             i18n("Structures"), "configure");
 
-//     dialog->addPage(structureSettings, i18n("Structures management"), "folder");
+     dialog->addPage(structureSettings, i18n("Structures management"), "folder");
 
     //User edited the configuration - update your local copies of the
     //configuration data
     connect(dialog, SIGNAL(settingsChanged(const QString&)), this, SLOT(update()));
-//     connect(structureSettings, SIGNAL(applyButtonClicked()),
-//             loadedStructuresSettings, SLOT(updateAvailable()));
+     connect(structureSettings, SIGNAL(applyButtonClicked()),
+            loadedStructuresSettings, SLOT(updateAvailable()));
     connect(dialog, SIGNAL(settingsChanged(const QString&)), mTool,
             SLOT(loadStructDefFiles()));
     connect(dialog, SIGNAL(settingsChanged(const QString&)), mTool,
