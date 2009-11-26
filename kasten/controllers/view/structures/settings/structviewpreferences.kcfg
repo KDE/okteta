@@ -49,7 +49,7 @@
       <tooltip context="@info:tooltip">The precision used for converting floating-point numbers to strings (number of decimal digits)</tooltip>
       <default>3</default>
       <min>-1</min>
-      <!-- program hangs if QString::number() is called with very high precison -->
+      <!-- program hangs if QString::number() is called with very high precision -->
       <max>100</max>
     </entry>
   </group>
