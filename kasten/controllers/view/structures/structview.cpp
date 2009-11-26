@@ -110,17 +110,17 @@ void StructView::openSettingsDlg(int page)
     //An instance of your dialog could be already created and could be cached,
     //in which case you want to display the cached dialog instead of creating
     //another one
-    if (KConfigDialog::showDialog("Structure Viewer Settings"))
+    if (KConfigDialog::showDialog("Structures Tool Settings"))
         return;
 
     //KConfigDialog didn't find an instance of this dialog, so lets create it :
-    KConfigDialog* dialog = new KConfigDialog(this, "Structure Viewer Settings",
+    KConfigDialog* dialog = new KConfigDialog(this, "Structures Tool Settings",
             StructViewPreferences::self());
     QWidget* displaySettings = new StructViewDisplaySettingsWidget();
     QWidget* structureSettings = new StructuresManagerView(&mTool->manager(), this);
     QWidget* loadedStructuresSettings = new StructureAddRemoveWidget(mTool, this);
     KPageWidgetItem* displ = dialog->addPage(displaySettings, i18n(
-            "Display settings"), QString("configure"));
+            "Type Display"), QString("configure"));
     QWidget* structsWidget = new QWidget();
     {
         QVBoxLayout* layout = new QVBoxLayout();
@@ -128,10 +128,10 @@ void StructView::openSettingsDlg(int page)
         layout->addWidget(loadedStructuresSettings);
         structsWidget->setLayout(layout);
     }
-    KPageWidgetItem* structs = dialog->addPage(structsWidget, i18n(
-            "Loaded structures"), QString("configure"));
+    KPageWidgetItem* structs =
+        dialog->addPage(structsWidget, i18n("Used structures"), "configure" );
 
-    dialog->addPage(structureSettings, i18n("Structures"), QString("folder"));
+    dialog->addPage(structureSettings, i18n("Structures management"), "folder" );
 
     //User edited the configuration - update your local copies of the
     //configuration data
@@ -147,6 +147,7 @@ void StructView::openSettingsDlg(int page)
         dialog->setCurrentPage(displ);
     else if (page == 1)
         dialog->setCurrentPage(structs);
+
     dialog->show();
 }
 
