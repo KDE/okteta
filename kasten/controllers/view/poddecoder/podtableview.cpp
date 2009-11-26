@@ -122,7 +122,7 @@ Answer PODTableView::query( int newValueSize, int oldValueSize, int sizeLeft )
     {
         const QString message =
             i18nc( "@info",
-                    "The new value needs <emphasis>less</emphasis> bytes (%1 instead of %2).<nl/>"
+                    "The new value needs <emphasis>fewer</emphasis> bytes (%1 instead of %2).<nl/>"
                     "Keep the unused bytes or remove them?", newValueSize, oldValueSize );
 
         const KGuiItem keepGuiItem( i18nc("@action:button keep the unused bytes","&Keep"), 0,
