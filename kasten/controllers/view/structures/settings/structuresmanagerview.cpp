@@ -131,27 +131,28 @@ void StructuresManagerView::onImportStructuresClicked()
 
 void StructuresManagerView::onExportStructureClicked()
 {
-    //TODO Not working ATM
-    //    if (currentItem != 0)
-    //    {
-    //        const KUrl saveUrl = KFileDialog::getSaveUrl(KUrl(), i18n(
-    //                "*.osd|Okteta structure definition files (*.osd)"), this, i18nc(
-    //                "@title:window Do export the structure definition",
-    //                "Export Structure Definition"));
-    //
-    //        if (!saveUrl.isEmpty())
-    //        {
-    //            const QString fileName = currentItem->data(FileNameRole).toString();
-    //            const QString filePath = KGlobal::dirs()->findResource("data",
-    //                    "okteta/structures/" + fileName + ".osd");
-    //            kDebug() << fileName << filePath << saveUrl;
-    //            const bool success = KIO::NetAccess::upload(filePath, saveUrl, this);
-    //
-    //            if (!success)
-    //                KMessageBox::error(this, KIO::NetAccess::lastErrorString(), i18n(
-    //                        "Error"));
-    //        }
-    //    }
+    return;
+//     TODO Not working ATM
+//        if (currentItem != 0)
+       {
+           const KUrl saveUrl = KFileDialog::getSaveUrl(KUrl(), i18n(
+                   "*.osd|Okteta structure definition files (*.osd)"), this, i18nc(
+                   "@title:window Do export the structure definition",
+                   "Export Structure Definition"));
+
+           if (!saveUrl.isEmpty())
+           {
+               const QString fileName;// = currentItem->data(FileNameRole).toString();
+               const QString filePath = KGlobal::dirs()->findResource("data",
+                       "okteta/structures/" + fileName + ".osd");
+               kDebug() << fileName << filePath << saveUrl;
+               const bool success = KIO::NetAccess::upload(filePath, saveUrl, this);
+
+               if (!success)
+                   KMessageBox::error(this, KIO::NetAccess::lastErrorString(), i18n(
+                           "Error"));
+           }
+       }
 }
 void StructuresManagerView::onApplyChangesClicked()
 {
@@ -164,23 +165,23 @@ void StructuresManagerView::onRemoveStructureClicked()
     mStructuresSelector->save();
     kDebug() << "saved";
     return;
-    //    QListWidgetItem* currentItem = ui.structuresView->currentItem();
-    //    if (currentItem != 0)
-    //    {
-    //        const QString fileName = currentItem->data(FileNameRole).toString();
-    //        const QString filePath = KGlobal::dirs()->findResource("data",
-    //                "okteta/structures/" + fileName + ".osd");
-    //        const bool success = KIO::NetAccess::del(filePath, this); // TODO: why netaccess?
-    //        if (success)
-    //            //             delete schemeList->takeItem( schemeList->currentRow() );
-    //            ;
-    //        else
-    //            KMessageBox::error(
-    //                    this,
-    //                    i18n(
-    //                            "You do not have permission to delete that structure definition."),
-    //                    i18n("Error"));
-    //    }
+//     QListWidgetItem* currentItem = ui.structuresView->currentItem();
+//     if (currentItem != 0)
+    {
+        const QString fileName;// = currentItem->data(FileNameRole).toString();
+        const QString filePath = KGlobal::dirs()->findResource("data",
+                "okteta/structures/" + fileName + ".osd");
+        const bool success = KIO::NetAccess::del(filePath, this); // TODO: why netaccess?
+        if (success)
+            //             delete schemeList->takeItem( schemeList->currentRow() );
+            ;
+        else
+            KMessageBox::error(
+                    this,
+                    i18n(
+                            "You do not have permission to delete that structure definition."),
+                    i18n("Error"));
+    }
 }
 
 StructuresManagerView::~StructuresManagerView()
