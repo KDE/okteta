@@ -5,6 +5,7 @@ set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/.. )
 # make sure to not use KDE_EXPORT or KDE_IMPORT because we link statically
 # against a small part of the libs
 add_definitions(-DOKTETACORE_EXPORT=)
+add_definitions(-DOKTETAKASTENCORE_EXPORT=)
 set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 
 
@@ -42,6 +43,7 @@ set( bytearrayrawfilesynchronizertest_SRCS
   bytearrayrawfilesynchronizertest.cpp
   ${SUTDIR}/../document/bytearraydocument.cpp
   ${SUTDIR}/filesystem/bytearrayrawfilesynchronizer.cpp
+  ${SUTDIR}/filesystem/externalbookmarkstorage.cpp
 )
 
 kde4_add_unit_test( bytearrayrawfilesynchronizertest
@@ -63,6 +65,7 @@ target_link_libraries( bytearrayrawfilesynchronizertest
 set( bytearrayrawfilesynchronizerfactorytest_SRCS
   bytearrayrawfilesynchronizerfactorytest.cpp
   ${SUTDIR}/../document/bytearraydocument.cpp
+  ${SUTDIR}/filesystem/externalbookmarkstorage.cpp
   ${SUTDIR}/filesystem/bytearrayrawfilesynchronizer.cpp
   ${SUTDIR}/filesystem/bytearrayrawfilesynchronizerfactory.cpp
 )
