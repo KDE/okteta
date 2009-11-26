@@ -41,7 +41,7 @@ namespace Kasten
 
 void ByteArrayRawFileLoadThread::run()
 {
-    qint64 fileSize = mFile->size();
+    const qint64 fileSize = mFile->size();
 
     // allocate working memory
     QByteArray data;
@@ -66,8 +66,11 @@ void ByteArrayRawFileLoadThread::run()
             byteArray->moveToThread( QApplication::instance()->thread() );
             mDocument->moveToThread( QApplication::instance()->thread() );
         }
+        else
+            mErrorString = mFile->errorString();
     }
-    // TODO: else report file too large
+    else
+        mErrorString = i18n( "There is not enough working memory to load this file." );
 
     if( ! success )
         mDocument = 0;

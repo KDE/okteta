@@ -86,9 +86,6 @@ void AbstractFileSystemLoadJobPrivate::setDocument( AbstractDocument* document )
     else
     {
         delete mSynchronizer;
-        // TODO: these reports should go to a notification system, for log or popup
-        q->setError( KJob::KilledJobError );
-        q->setErrorText( mFile->errorString() );
     }
 
     delete mFile;

@@ -47,13 +47,19 @@ void ByteArrayRawFileLoadJob::startLoadFromFile()
     while( !loadThread->wait(100) )
         QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
 
-    ByteArrayDocument *document = loadThread->document();
+    ByteArrayDocument* document = loadThread->document();
     qobject_cast<ByteArrayRawFileSynchronizer*>(synchronizer())->setDocument( document );
-
-    delete loadThread;
 
     if( document )
         ExternalBookmarkStorage().readBookmarks( document, url() );
+    else
+    {
+        // TODO: these reports should go to a notification system, for log or popup
+        setError( KJob::KilledJobError );
+        setErrorText( loadThread->errorString() );
+    }
+
+    delete loadThread;
 
     setDocument( document );
 }

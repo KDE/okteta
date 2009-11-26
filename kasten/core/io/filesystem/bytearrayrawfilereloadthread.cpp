@@ -24,6 +24,8 @@
 
 // Okteta core
 #include <piecetablebytearraymodel.h>
+// KDE
+#include <KLocale>
 // Qt
 #include <QtCore/QDataStream>
 #include <QtCore/QFile>
@@ -52,8 +54,12 @@ void ByteArrayRawFileReloadThread::run()
         inStream.readRawData( mData.data(), fileSize );
 
         mSuccess = ( inStream.status() == QDataStream::Ok );
+
+        if( ! mSuccess )
+            mErrorString = mFile->errorString();
     }
-    // TODO: else report file too large
+    else
+        mErrorString = i18n( "There is not enough working memory to load this file." );
 
     emit documentReloaded( mSuccess );
 }

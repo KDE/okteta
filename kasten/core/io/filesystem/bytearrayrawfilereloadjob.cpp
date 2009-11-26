@@ -59,6 +59,12 @@ void ByteArrayRawFileReloadJob::startReadFromFile()
 
         ExternalBookmarkStorage().readBookmarks( document, synchronizer()->url() );
     }
+    else
+    {
+        setError( KJob::KilledJobError );
+        setErrorText( reloadThread->errorString() );
+    }
+
     delete reloadThread;
 
     completeRead( success );

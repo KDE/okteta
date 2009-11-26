@@ -72,11 +72,6 @@ void AbstractFileSystemSyncFromRemoteJobPrivate::completeRead( bool success )
         mSynchronizer->setFileDateTimeOnSync( fileInfo.lastModified() );
         mSynchronizer->setRemoteState( isLocalFile ? RemoteInSync : RemoteUnknown );
     }
-    else
-    {
-        q->setError( KJob::KilledJobError );
-        q->setErrorText( mFile->errorString() );
-    }
 
     delete mFile;
     KIO::NetAccess::removeTempFile( mWorkFilePath );

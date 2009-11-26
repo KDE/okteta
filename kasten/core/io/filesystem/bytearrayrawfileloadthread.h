@@ -49,6 +49,8 @@ class ByteArrayRawFileLoadThread : public QThread
   public:
     ByteArrayDocument* document() const;
 
+    const QString& errorString() const;
+
   Q_SIGNALS:
     void documentRead( ByteArrayDocument* document );
 
@@ -56,6 +58,7 @@ class ByteArrayRawFileLoadThread : public QThread
     QFile* mFile;
 
     ByteArrayDocument* mDocument;
+    QString mErrorString;
 };
 
 
@@ -66,6 +69,7 @@ inline ByteArrayRawFileLoadThread::ByteArrayRawFileLoadThread( QObject* parent, 
 {}
 
 inline ByteArrayDocument* ByteArrayRawFileLoadThread::document() const { return mDocument; }
+inline const QString& ByteArrayRawFileLoadThread::errorString()  const { return mErrorString; }
 
 }
 

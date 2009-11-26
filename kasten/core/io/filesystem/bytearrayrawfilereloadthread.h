@@ -47,6 +47,8 @@ class ByteArrayRawFileReloadThread : public QThread
 
   public:
     bool success() const;
+    const QString& errorString() const;
+
     const QByteArray& data() const;
 
   Q_SIGNALS:
@@ -56,12 +58,15 @@ class ByteArrayRawFileReloadThread : public QThread
     QFile* mFile;
 
     bool mSuccess;
+    QString mErrorString;
+
     QByteArray mData;
 };
 
 
-inline bool ByteArrayRawFileReloadThread::success()           const { return mSuccess; }
-inline const QByteArray& ByteArrayRawFileReloadThread::data() const { return mData; }
+inline bool ByteArrayRawFileReloadThread::success()                const { return mSuccess; }
+inline const QString& ByteArrayRawFileReloadThread::errorString()  const { return mErrorString; }
+inline const QByteArray& ByteArrayRawFileReloadThread::data()      const { return mData; }
 
 }
 
