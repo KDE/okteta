@@ -36,9 +36,9 @@ protected:
     PrimitiveDataType mType; //TODO unnecessary?
     bool mIsValid :1;
     /** get the appropriate base for QString::number from StructDisplaySettings */
-    PrimitiveDataInformation(const PrimitiveDataInformation& d);
+    explicit PrimitiveDataInformation(const PrimitiveDataInformation& d);
 public:
-    PrimitiveDataInformation(QString name, PrimitiveDataType type, int index = -1,
+    explicit PrimitiveDataInformation(QString name, PrimitiveDataType type, int index = -1,
             DataInformation* parent = NULL);
     virtual ~PrimitiveDataInformation();
     static PrimitiveDataInformation* newInstance(QString name,

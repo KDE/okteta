@@ -28,9 +28,9 @@ class UnionDataInformation: public DataInformationWithChildren
 {
 Q_OBJECT
 protected:
-    UnionDataInformation(const UnionDataInformation& d);
+    explicit UnionDataInformation(const UnionDataInformation& d);
 public:
-    UnionDataInformation(QString name, int index = -1, DataInformation* parent = NULL);
+    explicit UnionDataInformation(QString name, int index = -1, DataInformation* parent = NULL);
     virtual ~UnionDataInformation();
     DATAINFORMATION_CLONE(Union)
 

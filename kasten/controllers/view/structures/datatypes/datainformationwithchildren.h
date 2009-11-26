@@ -32,7 +32,7 @@ public:
     virtual bool isValid() const;
 protected:
     QList<DataInformation*> mChildren;
-    DataInformationWithChildren(const DataInformationWithChildren& d);
+    explicit DataInformationWithChildren(const DataInformationWithChildren& d);
     void appendChild(DataInformation* child); //not part of public API (no adding to array)
 public:
     //just for debugging
@@ -41,7 +41,7 @@ public:
     {
         return mChildren;
     }
-    DataInformationWithChildren(QString& name, int index = -1,
+    explicit DataInformationWithChildren(QString& name, int index = -1,
             DataInformation* parent = NULL);
     virtual ~DataInformationWithChildren();
     virtual QVariant data(int, int) const;

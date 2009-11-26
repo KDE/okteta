@@ -28,14 +28,14 @@ class AbstractArrayDataInformation: public DataInformationWithChildren
 {
 Q_OBJECT
 protected:
-    AbstractArrayDataInformation(const AbstractArrayDataInformation& d);
+    explicit AbstractArrayDataInformation(const AbstractArrayDataInformation& d);
 public:
     /** creates a new array with static length.
      *  children is used as the base type of the array and is cloned length times.
      *
      *  length should be > 0
      */
-    AbstractArrayDataInformation(QString name, int index = -1,
+    explicit AbstractArrayDataInformation(QString name, int index = -1,
             DataInformation* parent = NULL);
     virtual ~AbstractArrayDataInformation();
 public:

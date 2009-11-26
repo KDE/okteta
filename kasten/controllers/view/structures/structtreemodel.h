@@ -35,7 +35,7 @@ class StructTreeModel: public QAbstractItemModel
 Q_OBJECT
 public:
     //TODO add insertRow functionality
-    StructTreeModel(StructTool* tool, QObject* parent = NULL);
+    explicit StructTreeModel(StructTool* tool, QObject* parent = NULL);
     virtual ~StructTreeModel();
     QVariant data(const QModelIndex& index, int role) const;
     Qt::ItemFlags flags(const QModelIndex& index) const;

@@ -29,9 +29,9 @@ class StructureDataInformation: public DataInformationWithChildren
 {
 Q_OBJECT
 protected:
-    StructureDataInformation(const StructureDataInformation& d);
+    explicit StructureDataInformation(const StructureDataInformation& d);
 public:
-            StructureDataInformation(QString name, int index = -1,
+    explicit StructureDataInformation(QString name, int index = -1,
                     DataInformation* parent = NULL);
     virtual ~StructureDataInformation();
     DATAINFORMATION_CLONE(Structure)
