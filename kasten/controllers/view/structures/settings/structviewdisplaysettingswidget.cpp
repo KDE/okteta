@@ -25,6 +25,7 @@ StructViewDisplaySettingsWidget::StructViewDisplaySettingsWidget() :
     QWidget(NULL)
 {
     ui.setupUi(this);
+    ui.kcfg_CharDisplayBase->setEnabled(ui.kcfg_ShowCharNumericalValue->isChecked());
 }
 StructViewDisplaySettingsWidget::~StructViewDisplaySettingsWidget()
 {
