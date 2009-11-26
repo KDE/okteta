@@ -35,7 +35,7 @@
 namespace Kasten
 {
 
-class StructuresManager: QObject
+class StructuresManager: public QObject
 {
 Q_OBJECT
 public:
@@ -72,16 +72,21 @@ public:
     {
         return mLoadedFiles;
     }
-    static const QDir defsDir;
     inline QString relativeFilePath(QString absPath) const
     {
-        return defsDir.relativeFilePath(absPath);
+        return mDefsDir.relativeFilePath(absPath);
     }
+    inline const QDir& defsDir() const
+    {
+        return mDefsDir;
+    }
+
 protected:
 
     void manageIncludes(const StructureDefinitionFile* def);
     void addStructDef(const QString& relPath);
 private:
+    const QDir mDefsDir;
     QMap<QString, StructureDefinitionFile*> mDefs;
     QStringList mLoadedFiles;
     KSharedConfig::Ptr mConfig;

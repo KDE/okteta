@@ -104,7 +104,7 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(Kasten::StructTool* tool,
     QList<QTreeWidgetItem*> availableItems;
     foreach(const StructureDefinitionFile* def,loadedDefs)
         {
-            QString relPath = StructuresManager::defsDir.relativeFilePath(
+            QString relPath = tool->manager().defsDir().relativeFilePath(
                     def->dir().absoluteFilePath(def->info().name() + ".osd"));
             QTreeWidgetItem* item = new QTreeWidgetItem(mTreeAvailable,
                     QStringList() << def->info().pluginName() << relPath);
