@@ -127,7 +127,7 @@ Answer PODTableView::query( int newValueSize, int oldValueSize, int sizeLeft )
 
         const KGuiItem keepGuiItem( i18nc("@action:button keep the unused bytes","&Keep"), 0,
                                     i18nc("@info:tooltip",
-                                          "Keep the unsed bytes with their old values.") );
+                                          "Keep the unused bytes with their old values.") );
 
         messageBoxAnswer = KMessageBox::warningYesNoCancel( this, message, mTool->title(),
                                                             keepGuiItem,
