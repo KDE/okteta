@@ -19,7 +19,7 @@
      <item row="1" column="0">
       <widget class="QLabel" name="unsigned_label">
        <property name="text">
-        <string>Unsigned values display</string>
+        <string>Unsigned values:</string>
        </property>
       </widget>
      </item>
@@ -45,7 +45,7 @@
      <item row="2" column="0">
       <widget class="QLabel" name="signed_label">
        <property name="text">
-        <string>Signed values display</string>
+        <string>Signed values:</string>
        </property>
       </widget>
      </item>
@@ -71,7 +71,7 @@
      <item row="0" column="0">
       <widget class="QCheckBox" name="kcfg_LocaleAwareDecimalFormatting">
        <property name="text">
-        <string>Locale aware integer formatting</string>
+        <string>Locale-aware integer formatting</string>
        </property>
       </widget>
      </item>
@@ -92,7 +92,7 @@
      <item row="1" column="0">
       <widget class="QLabel" name="char_label">
        <property name="text">
-        <string>Character value display</string>
+        <string>Character value:</string>
        </property>
       </widget>
      </item>
@@ -122,14 +122,14 @@
      <item row="0" column="0" colspan="2">
       <widget class="QCheckBox" name="kcfg_LocaleAwareFloatFormatting">
        <property name="text">
-        <string>Locale-aware float formatting</string>
+        <string>Locale-aware floating-point formatting</string>
        </property>
       </widget>
      </item>
      <item row="1" column="0">
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Floating-point display precision</string>
+        <string>Floating-point precision:</string>
        </property>
       </widget>
      </item>
