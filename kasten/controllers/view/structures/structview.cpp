@@ -119,7 +119,7 @@ void StructView::openSettingsDlg(int page)
     QWidget* displaySettings = new StructViewDisplaySettingsWidget();
     QWidget* structureSettings = new StructuresManagerView(&mTool->manager(), this);
     QWidget* loadedStructuresSettings = new StructureAddRemoveWidget(mTool, this);
-    KPageWidgetItem* displ = dialog->addPage(displaySettings, i18n("Type Display"),
+    KPageWidgetItem* displ = dialog->addPage(displaySettings, i18n("Value Display"),
             QString("configure"));
     QWidget* structsWidget = new QWidget();
     {
