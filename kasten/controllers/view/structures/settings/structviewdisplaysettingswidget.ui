@@ -71,7 +71,7 @@
      <item row="0" column="0">
       <widget class="QCheckBox" name="kcfg_LocaleAwareDecimalFormatting">
        <property name="text">
-        <string>Locale-aware integer formatting</string>
+        <string>Use locale-aware integer formatting</string>
        </property>
       </widget>
      </item>
@@ -122,7 +122,7 @@
      <item row="0" column="0" colspan="2">
       <widget class="QCheckBox" name="kcfg_LocaleAwareFloatFormatting">
        <property name="text">
-        <string>Locale-aware floating-point formatting</string>
+        <string>Use locale-aware floating-point formatting</string>
        </property>
       </widget>
      </item>
