@@ -99,23 +99,7 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(Kasten::StructTool* tool,
     connect(mUpButton, SIGNAL(pressed()), SLOT(moveUp()));
     connect(mDownButton, SIGNAL(pressed()), SLOT(moveDown()));
 
-    const QList<StructureDefinitionFile*> loadedDefs =
-            mTool->manager().structureDefs();
-    QList<QTreeWidgetItem*> availableItems;
-    foreach(const StructureDefinitionFile* def,loadedDefs)
-        {
-            QString relPath = tool->manager().defsDir().relativeFilePath(
-                    def->dir().absoluteFilePath(def->info().name() + ".osd"));
-            QTreeWidgetItem* item = new QTreeWidgetItem(mTreeAvailable,
-                    QStringList() << def->info().pluginName() << relPath);
-            foreach(const DataInformation* data,def->structures())
-                {
-                    QTreeWidgetItem* subItem = new QTreeWidgetItem(item,
-                            QStringList() << data->getName() << relPath);
-                    item->addChild(subItem);
-                }
-            availableItems.append(item);
-        }
+    buildAvailableList();
 
     //already loaded defs:
     QRegExp regex("'(.+)':'(.+)'");
@@ -134,7 +118,6 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(Kasten::StructTool* tool,
                 // ...
             }
         }
-    mTreeAvailable->addTopLevelItems(availableItems);
     syncData();
 }
 
@@ -142,6 +125,33 @@ StructureAddRemoveWidget::~StructureAddRemoveWidget()
 {
 }
 
+void StructureAddRemoveWidget::buildAvailableList()
+{
+    const QList<StructureDefinitionFile*> loadedDefs =
+            mTool->manager().structureDefs();
+    foreach (StructureDefinitionFile* sDef,loadedDefs)
+        {
+            kDebug() << "loaded file " << sDef->absPath();
+        }
+    QList<QTreeWidgetItem*> availableItems;
+    foreach(const StructureDefinitionFile* def,loadedDefs)
+        {
+            QString relPath = mTool->manager().relativeFilePath(def->absPath());
+            if (def->info().isValid() && !def->info().isPluginEnabled())
+                continue;
+            QTreeWidgetItem* item = new QTreeWidgetItem(mTreeAvailable,
+                    QStringList() << def->info().pluginName() << relPath);
+            foreach(const DataInformation* data,def->structures())
+                {
+                    QTreeWidgetItem* subItem = new QTreeWidgetItem(item,
+                            QStringList() << data->getName() << relPath);
+                    item->addChild(subItem);
+                }
+            availableItems.append(item);
+        }
+    mTreeAvailable->addTopLevelItems(availableItems);
+
+}
 void StructureAddRemoveWidget::moveLeft()
 {
     QList<QTreeWidgetItem*> selected = mTreeSelected->selectedItems();
@@ -203,25 +213,8 @@ void StructureAddRemoveWidget::updateAvailable()
 {
     //rebuild available tree
     mTreeAvailable->clear();
-    const QList<StructureDefinitionFile*> loadedDefs =
-            mTool->manager().structureDefs();
-    QList<QTreeWidgetItem*> availableItems;
-    foreach(const StructureDefinitionFile* def,loadedDefs)
-        {
-            QString relPath = mTool->manager().relativeFilePath(def->absPath());
-            //if not valid is included file -> always show
-            if (def->info().isValid() && !def->info().isPluginEnabled())
-                continue;
-            QTreeWidgetItem* item = new QTreeWidgetItem(mTreeAvailable,
-                    QStringList() << def->info().pluginName() << relPath);
-            foreach(const DataInformation* data,def->structures())
-                {
-                    QTreeWidgetItem* subItem = new QTreeWidgetItem(item,
-                            QStringList() << data->getName() << relPath);
-                    item->addChild(subItem);
-                }
-            availableItems.append(item);
-        }
+    buildAvailableList();
+
     //remove any structs that references not loaded files
     QStringList paths = mTool->manager().loadedFiles();
     bool changed = false;
