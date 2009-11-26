@@ -20,6 +20,9 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
+#ifndef DIALOGHANDLER_H
+#define DIALOGHANDLER_H
+
 // Kasten core
 #include <abstractoverwritedialog.h>
 #include <abstractsavediscarddialog.h>
@@ -59,3 +62,5 @@ inline DialogHandler::~DialogHandler() {}
 inline void DialogHandler::setWidget( QWidget* widget ) { mWidget = widget; }
 
 }
+
+#endif

@@ -20,6 +20,9 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
+#ifndef ABSTRACTSAVEDISCARDDIALOG_H
+#define ABSTRACTSAVEDISCARDDIALOG_H
+
 // lib
 #include <kastencore.h>
 
@@ -46,3 +49,5 @@ class AbstractSaveDiscardDialog
 inline AbstractSaveDiscardDialog::~AbstractSaveDiscardDialog() {}
 
 }
+
+#endif

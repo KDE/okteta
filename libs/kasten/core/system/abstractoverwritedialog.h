@@ -20,6 +20,9 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
+#ifndef ABSTRACTOVERWRITEDIALOG_H
+#define ABSTRACTOVERWRITEDIALOG_H
+
 // lib
 #include <kastencore.h>
 
@@ -43,3 +46,5 @@ class AbstractOverwriteDialog
 inline AbstractOverwriteDialog::~AbstractOverwriteDialog() {}
 
 }
+
+#endif
