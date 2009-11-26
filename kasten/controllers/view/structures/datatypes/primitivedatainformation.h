@@ -54,7 +54,7 @@ public:
         return mType;
     }
     virtual int getSize() const = 0;
-    virtual inline QString getTypeName() const = 0;
+    virtual QString getTypeName() const = 0;
     virtual inline bool isValid() const
     {
         return mIsValid;
