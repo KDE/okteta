@@ -179,20 +179,49 @@ void StructureAddRemoveWidget::moveRight()
             mTreeSelected->addTopLevelItem(moveOver);
             changed = true;
         }
-    kDebug() << "";
     if (changed)
         syncData();
 
 }
 void StructureAddRemoveWidget::moveUp()
 {
-    kDebug() << "TODO stub";
-
+    QList<QTreeWidgetItem*> selected = mTreeSelected->selectedItems();
+    bool changed = false;
+    int firstIndex = -1;
+    foreach(QTreeWidgetItem* item,selected)
+        {
+            int idx = mTreeSelected->indexOfTopLevelItem(item);
+            int newIdx = qMax(0, idx - 1);
+            mTreeSelected ->insertTopLevelItem(newIdx,
+                    mTreeSelected->takeTopLevelItem(idx));
+            //only first index
+            firstIndex = firstIndex == -1 ? newIdx : firstIndex;
+        }
+    if (changed)
+        syncData();
+    if (firstIndex != -1)
+        mTreeSelected->setCurrentItem(mTreeSelected->topLevelItem(firstIndex));
 }
 void StructureAddRemoveWidget::moveDown()
 {
-    kDebug() << "TODO stub";
-
+    kDebug() << "";
+    QList<QTreeWidgetItem*> selected = mTreeSelected->selectedItems();
+    bool changed = false;
+    int firstIndex = -1;
+    int maxItmCount = mTreeSelected->topLevelItemCount();
+    foreach(QTreeWidgetItem* item,selected)
+        {
+            int idx = mTreeSelected->indexOfTopLevelItem(item);
+            int newIdx = qMin(idx + 1, maxItmCount - 1);
+            mTreeSelected ->insertTopLevelItem(newIdx,
+                    mTreeSelected->takeTopLevelItem(idx));
+            //only first index
+            firstIndex = firstIndex == -1 ? newIdx : firstIndex;
+        }
+    if (changed)
+        syncData();
+    if (firstIndex != -1)
+        mTreeSelected->setCurrentItem(mTreeSelected->topLevelItem(firstIndex));
 }
 void StructureAddRemoveWidget::syncData()
 {
