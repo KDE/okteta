@@ -23,7 +23,7 @@
 #include "enumdatainformation.h"
 
 EnumDataInformation::EnumDataInformation(QString name,
-        PrimitiveDataInformation* type, QSharedDataPointer<EnumDefinition> enumDef,
+        PrimitiveDataInformation* type, EnumDefinition::Ptr enumDef,
         int index, DataInformation* parent) :
     PrimitiveDataInformation(name, type->type(), index, parent), mEnum(enumDef),
             mValue(type)

@@ -356,12 +356,13 @@ EnumDataInformation* StructureDefinitionFile::enumFromXML(const QDomElement& xml
         kWarning() << "no enum attribute defined";
         return NULL;
     }
-    EnumDefinition::Ptr def = EnumDefinition::find(enumName, mEnums);
-    if (!def)
+    EnumDefinition::Ptr def = findEnum(enumName);
+    if (def.constData() == NULL)
     {
         kWarning() << "no enum with name " << enumName << "found.";
         return NULL;
     }
+    kDebug() << def->name();
     PrimitiveDataType type = PrimitiveDataInformation::typeStringToType(typeStr);
     PrimitiveDataInformation* prim = PrimitiveDataInformation::newInstance(name,
             type);
@@ -395,9 +396,21 @@ DataInformation* StructureDefinitionFile::parseNode(const QDomNode& n) const
             data = unionFromXML(elem);
         if (elem.tagName() == "enum")
             data = enumFromXML(elem);
-
     }
     return data;
 }
-
+EnumDefinition::Ptr StructureDefinitionFile::findEnum(const QString& defName) const
+{
+    for (int i = 0; i < mEnums.length(); ++i)
+    {
+        const EnumDefinition::Ptr def = mEnums.at(i);
+        if (def->name() == defName)
+        {
+            kDebug() << "found at index: " << i;
+            return def;
+        }
+    }
+    kDebug() << "enum " << defName << "not found in enums list";
+    return EnumDefinition::Ptr(NULL);
+}
 }

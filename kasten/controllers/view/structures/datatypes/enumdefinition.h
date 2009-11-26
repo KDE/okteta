@@ -33,7 +33,7 @@
 class EnumDefinition: public QSharedData
 {
 public:
-    typedef QSharedDataPointer<EnumDefinition> Ptr;
+    typedef QSharedDataPointer<const EnumDefinition> Ptr;
     EnumDefinition(const QMap<AllPrimitiveTypes, QString> values, QString name,
             PrimitiveDataType type) :
         QSharedData(), mName(name), mValues(values), mType(type)
@@ -63,19 +63,6 @@ public:
     const QString& name() const
     {
         return mName;
-    }
-    static EnumDefinition::Ptr find(const QString& defName, const QList<
-            EnumDefinition::Ptr>& list)
-    {
-        for (int i = 0; i < list.length(); ++i)
-        {
-            EnumDefinition::Ptr def = list.at(i);
-            if (def->name() == defName)
-            {
-                return def;
-            }
-        }
-        return EnumDefinition::Ptr(NULL);
     }
 protected:
     const QString mName;

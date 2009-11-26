@@ -83,6 +83,7 @@ private:
     StructureDataInformation* structFromXML(const QDomElement& node) const;
     EnumDataInformation* enumFromXML(const QDomElement& node) const;
     DataInformation* parseNode(const QDomNode& node) const;
+    EnumDefinition::Ptr findEnum(const QString& defName) const;
 
     void parseIncludeNodes(QDomNodeList& elems);
     void parseEnumDefNodes(QDomNodeList& elems);

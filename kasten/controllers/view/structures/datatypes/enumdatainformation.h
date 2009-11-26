@@ -52,7 +52,7 @@ public:
             Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
             Okteta::Address address, Okteta::Size remaining);
 private:
-    QSharedDataPointer<EnumDefinition> mEnum;
+    EnumDefinition::Ptr mEnum;
     PrimitiveDataInformation* mValue; //to allow different enum sizes
 };
 
