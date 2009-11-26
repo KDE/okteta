@@ -34,8 +34,8 @@ namespace Kasten
 StructuresManager::~StructuresManager()
 {
 }
-StructuresManager::StructuresManager()
-  : mDefsDir( KGlobal::dirs()->locateLocal("data", "okteta/structures/", true) )
+StructuresManager::StructuresManager() :
+    mDefsDir(KGlobal::dirs()->locateLocal("data", "okteta/structures/", true))
 {
     mConfig = KSharedConfig::openConfig("oktetastructuresrc",
             KSharedConfig::FullConfig, "config");
@@ -69,23 +69,17 @@ void StructuresManager::reloadPaths()
             QFileInfo fileInfo(mDefsDir, relPath);
             StructureDefinitionFile* def = new StructureDefinitionFile(fileInfo,
                     info);
+            if (info.isValid() && info.isPluginEnabled())
+            {
+                mLoadedFiles.append(relPath);
+            }
             def->parse(); //TODO lazy loading
             mDefs.insert(relPath, def);
             manageIncludes(def);
-
         }
+    kDebug() << "loaded defs";
 }
-//
-//
-//void StructuresManager::addStructDef(KPluginInfo info, const QFileInfo file)
-//{
-//    kDebug() << "add struct def " << file.absoluteFilePath();
-//    StructureDefinitionFile* def = new StructureDefinitionFile(file, info);
-//    QString relPath = defsDir.relativeFilePath(file.absoluteFilePath());
-//    def->parse(); //TODO lazy loading
-//    mDefs.insert(relPath, def);
-//    manageIncludes(def);
-//}
+
 //
 //void StructuresManager::manageIncludes(const StructureDefinitionFile* def)
 //{
@@ -123,10 +117,8 @@ void StructuresManager::reloadPaths()
 //        }
 //    }
 //}
-//void StructuresManager::loadStructDefFiles()
-//{
-//    reloadPaths();
-//}
+
+
 void StructuresManager::loadStructDefFiles()
 {
     reloadPaths();
@@ -139,8 +131,12 @@ void StructuresManager::addStructDef(const QString& relPath)
     StructureDefinitionFile* def = new StructureDefinitionFile(fileInfo,
             KPluginInfo());
     def->parse(); //TODO lazy loading
-    mDefs.insert(relPath, def);
-    manageIncludes(def);
+    if (!mDefs.contains(relPath))
+    {
+        mLoadedFiles.append(relPath);
+        mDefs.insert(relPath, def);
+        manageIncludes(def);
+    }
 }
 
 void StructuresManager::manageIncludes(const StructureDefinitionFile* def)
@@ -157,8 +153,8 @@ void StructuresManager::manageIncludes(const StructureDefinitionFile* def)
         kDebug() << "include path: " << inclPath;
         //XXX maybe more lazy loading
         //check if included file is already loaded
-        QString relPath =
-                mDefsDir.relativeFilePath(defDir.absoluteFilePath(inclPath));
+        QString relPath = mDefsDir.relativeFilePath(
+                defDir.absoluteFilePath(inclPath));
         kDebug() << "rel path = " << relPath;
         relPath = QDir::cleanPath(relPath);
         kDebug() << "rel path = " << relPath;

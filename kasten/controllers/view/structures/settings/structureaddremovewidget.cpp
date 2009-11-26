@@ -209,6 +209,7 @@ void StructureAddRemoveWidget::syncData()
     kDebug() << "changed: " << mValues;
     emit changed(mValues);
 }
+
 void StructureAddRemoveWidget::updateAvailable()
 {
     //rebuild available tree
@@ -216,8 +217,19 @@ void StructureAddRemoveWidget::updateAvailable()
     buildAvailableList();
 
     //remove any structs that references not loaded files
-    QStringList paths = mTool->manager().loadedFiles();
+    QStringList paths;
+    const QList<StructureDefinitionFile*> loadedDefs =
+            mTool->manager().structureDefs();
+    foreach(const StructureDefinitionFile* def,loadedDefs)
+        {
+            QString relPath = mTool->manager().relativeFilePath(def->absPath());
+            if (def->info().isValid() && !def->info().isPluginEnabled())
+                continue;
+            paths << relPath;
+        }
     bool changed = false;
+    QList<QTreeWidgetItem*> toRemove;
+    kDebug() << "paths = " << paths;
     for (int i = 0; i < mTreeSelected->topLevelItemCount(); ++i)
     {
         QTreeWidgetItem* item = mTreeSelected->topLevelItem(i);
@@ -225,11 +237,23 @@ void StructureAddRemoveWidget::updateAvailable()
         {
             kDebug() << "removed item: " << QString("\'%1\':\'%2\'").arg(item->text(
                     1)).arg(item->text(0));
-            delete mTreeSelected->takeTopLevelItem(
-                    mTreeSelected->indexOfTopLevelItem(item));
+
             changed = true;
+            toRemove.append(item);
+        }
+        else
+        {
+            kDebug() << "item " << QString("\'%1\':\'%2\'").arg(item->text(1)).arg(
+                    item->text(0)) << "still okay";
         }
     }
+    foreach(QTreeWidgetItem* itm,toRemove)
+        {
+            kDebug() << "item " << QString("\'%1\':\'%2\'").arg(itm->text(1)).arg(
+                    itm->text(0)) << "removed";
+            delete mTreeSelected->takeTopLevelItem(
+                    mTreeSelected->indexOfTopLevelItem(itm));
+        }
     if (changed)
         syncData();
 }
