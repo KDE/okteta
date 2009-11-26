@@ -54,9 +54,6 @@
     </entry>
   </group>
   <group name="StructureSettings">
-    <entry name="StructureDefFiles" type="PathList">
-      <default></default>
-    </entry>
     <entry name="ByteOrder" type="Enum">
       <choices>
         <choice name="LittleEndian" />
