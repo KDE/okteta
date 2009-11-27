@@ -23,6 +23,7 @@
 #define INT64DATAINFORMATION_H_
 
 #include "signedprimitivedatainformation.h"
+#include "../poddecoder/typeeditors/sint64editor.h"
 
 class Int64DataInformation: public SignedPrimitiveDataInformation
 {
@@ -40,6 +41,11 @@ public:
     DATAINFORMATION_CLONE(Int64)
     virtual QString getValueString() const;
 
+    virtual void setWidgetData(QWidget* w) const;
+
+    inline QWidget* createEditWidget(QWidget* parent) const {
+        return new SInt64Editor(parent);
+    }
 };
 
 #endif /* INT64DATAINFORMATION_H_ */

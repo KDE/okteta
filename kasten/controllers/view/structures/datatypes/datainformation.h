@@ -26,6 +26,8 @@
 #include <QString>
 #include <QList>
 #include <QObject>
+#include <QWidget>
+
 //Okteta
 #include <size.h>
 #include <address.h>
@@ -115,6 +117,12 @@ public:
     virtual QString getTypeName() const =0;
     /** by default just returns an empty QString */
     virtual QString getValueString() const;
+
+    /** create a QWidget for the QItemDelegate */
+    virtual QWidget* createEditWidget(QWidget* parent) const;
+    /** get the needed data from the widget */
+    virtual QVariant dataFromWidget(const QWidget* w) const;
+    virtual void setWidgetData(QWidget* w) const;
     /** reads the necessary data and returns the number of bytes read */
     virtual Okteta::Size
     readData(Okteta::AbstractByteArrayModel *input, ByteOrder byteOrder,

@@ -45,6 +45,8 @@ public:
         }
         return 10; //safe default value
     }
+    virtual QVariant dataFromWidget(const QWidget* w) const;
+    virtual void setWidgetData(QWidget* w) const;
 };
 
 #endif /* UNSIGNEDPRIMITIVEDATAINFORMATION_H_ */

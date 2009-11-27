@@ -21,6 +21,7 @@
  */
 
 #include "structviewitemdelegate.h"
+#include "datatypes/datainformation.h"
 #include <QLineEdit>
 #include <KDebug>
 
@@ -33,28 +34,36 @@ StructViewItemDelegate::~StructViewItemDelegate()
 {
 }
 
-void StructViewItemDelegate::setModelData(QWidget * editor, QAbstractItemModel * model,
-        const QModelIndex & index) const
+QWidget * StructViewItemDelegate::createEditor(QWidget * parent,
+        const QStyleOptionViewItem & option, const QModelIndex & index) const
 {
-    QLineEdit* lineedit = dynamic_cast<QLineEdit*> (editor);
-    if (lineedit)
-    {
-        model->setData(index, lineedit->text(), Qt::EditRole);
-    }
-    else
-        kDebug() << "dyn cast failed -> wrong edit widget";
+    Q_UNUSED(option)
+    if (!index.isValid())
+        return new QWidget();
+    DataInformation* data = static_cast<DataInformation*> (index.internalPointer());
+    QWidget* ret = data->createEditWidget(parent);
+    ret->setFocusPolicy(Qt::WheelFocus);
+    return ret;
 }
 
-void StructViewItemDelegate::setEditorData(QWidget * editor, const QModelIndex & index) const
+void StructViewItemDelegate::setModelData(QWidget * editor,
+        QAbstractItemModel * model, const QModelIndex & index) const
 {
-    QLineEdit* lineedit = dynamic_cast<QLineEdit*> (editor);
-    if (lineedit)
-    {
-        lineedit->clear();
-        lineedit->setText(index.data(Qt::EditRole).toString());
-    }
-    else
-        kDebug() << "dyn cast failed -> wrong edit widget";
+    if (!index.isValid())
+        return;
+    DataInformation* data = static_cast<DataInformation*> (index.internalPointer());
+    QVariant value = data->dataFromWidget(editor);
+    model->setData(index, value, Qt::EditRole);
+}
+
+void StructViewItemDelegate::setEditorData(QWidget * editor,
+        const QModelIndex & index) const
+{
+
+    if (!index.isValid())
+        return;
+    DataInformation* data = static_cast<DataInformation*> (index.internalPointer());
+    data->setWidgetData(editor);
 }
 QString StructViewItemDelegate::displayText(const QVariant & value, const QLocale&) const
 {

@@ -23,6 +23,7 @@
 #define INT16DATAINFORMATION_H_
 
 #include "signedprimitivedatainformation.h"
+#include "../poddecoder/typeeditors/sint16editor.h"
 
 class Int16DataInformation: public SignedPrimitiveDataInformation
 {
@@ -41,5 +42,9 @@ public:
 
     virtual QString getValueString() const;
 
+    inline QWidget* createEditWidget(QWidget* parent) const {
+        return new SInt16Editor(parent);
+    }
+    virtual void setWidgetData(QWidget* w) const;
 };
 #endif /* INT16DATAINFORMATION_H_ */

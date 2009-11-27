@@ -23,6 +23,7 @@
 #define BOOL64DATAINFORMATION_H_
 
 #include "unsignedprimitivedatainformation.h"
+#include "../poddecoder/typeeditors/uint64editor.h"
 
 class Bool64DataInformation: public UnsignedPrimitiveDataInformation
 {
@@ -39,6 +40,11 @@ public:
     }
     DATAINFORMATION_CLONE(Bool64)
     virtual QString getValueString() const;
+
+    inline QWidget* createEditWidget(QWidget* parent) const
+    {
+        return new UInt64Editor(parent);
+    }
 };
 
 #endif /* BOOL64DATAINFORMATION_H_ */

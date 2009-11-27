@@ -23,6 +23,7 @@
 #define INT32DATAINFORMATION_H_
 
 #include "signedprimitivedatainformation.h"
+#include "../poddecoder/typeeditors/sint32editor.h"
 
 class Int32DataInformation: public SignedPrimitiveDataInformation
 {
@@ -40,6 +41,11 @@ public:
     DATAINFORMATION_CLONE(Int32)
     virtual QString getValueString() const;
 
+    virtual void setWidgetData(QWidget* w) const;
+
+    inline QWidget* createEditWidget(QWidget* parent) const {
+        return new SInt32Editor(parent);
+    }
 };
 
 #endif /* INT32DATAINFORMATION_H_ */

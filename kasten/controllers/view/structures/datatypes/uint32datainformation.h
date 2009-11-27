@@ -23,6 +23,8 @@
 #define UINT32DATAINFORMATION_H_
 
 #include "unsignedprimitivedatainformation.h"
+#include "../poddecoder/typeeditors/uint32editor.h"
+
 
 class UInt32DataInformation: public UnsignedPrimitiveDataInformation
 {
@@ -39,6 +41,9 @@ public:
     DATAINFORMATION_CLONE(UInt32)
     virtual QString getValueString() const;
 
+    inline QWidget* createEditWidget(QWidget* parent) const {
+        return new UInt32Editor(parent);
+    }
 };
 
 #endif /* UINT32DATAINFORMATION_H_ */

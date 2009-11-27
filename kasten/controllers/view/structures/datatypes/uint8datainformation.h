@@ -23,6 +23,8 @@
 #define UINT8DATAINFORMATION_H_
 
 #include "unsignedprimitivedatainformation.h"
+#include "../poddecoder/typeeditors/uint8editor.h"
+
 
 class UInt8DataInformation: public UnsignedPrimitiveDataInformation
 {
@@ -37,8 +39,12 @@ public:
         return i18nc("Data type", "unsigned byte");
     }
     DATAINFORMATION_CLONE(UInt8)
+
     virtual QString getValueString() const;
 
+    inline QWidget* createEditWidget(QWidget* parent) const {
+        return new UInt8Editor(parent);
+    }
 };
 
 #endif /* UINT8DATAINFORMATION_H_ */

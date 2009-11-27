@@ -33,3 +33,10 @@ QString Int64DataInformation::getValueString() const
         num = KGlobal::locale()->formatNumber(num, false, 0);
     return num;
 }
+
+void Int64DataInformation::setWidgetData(QWidget* w) const
+{
+    SIntSpinBox* spin = dynamic_cast<SIntSpinBox*> (w);
+    if (spin)
+        spin->setValue(this->value().longValue);
+}

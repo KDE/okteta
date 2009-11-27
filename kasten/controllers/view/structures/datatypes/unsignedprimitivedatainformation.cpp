@@ -20,3 +20,19 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "unsignedprimitivedatainformation.h"
+#include "../poddecoder/typeeditors/uintspinbox.h"
+
+QVariant UnsignedPrimitiveDataInformation::dataFromWidget(const QWidget* w) const
+{
+    const UIntSpinBox* spin = dynamic_cast<const UIntSpinBox*> (w);
+    if (spin)
+        return spin->value();
+    else
+        return QVariant();
+}
+
+void UnsignedPrimitiveDataInformation::setWidgetData(QWidget* w) const {
+    UIntSpinBox* spin = dynamic_cast<UIntSpinBox*> (w);
+    if (spin)
+        spin->setValue(this->value().ulongValue);
+}

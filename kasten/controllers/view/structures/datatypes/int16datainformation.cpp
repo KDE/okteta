@@ -34,3 +34,10 @@ QString Int16DataInformation::getValueString() const
         num = KGlobal::locale()->formatNumber(num, false, 0);
     return num;
 }
+
+void Int16DataInformation::setWidgetData(QWidget* w) const
+{
+    SIntSpinBox* spin = dynamic_cast<SIntSpinBox*> (w);
+    if (spin)
+        spin->setValue(this->value().shortValue);
+}

@@ -41,12 +41,14 @@ public:
         {
             return 10;
         }
-        if (base == Kasten::StructViewPreferences::EnumSignedDisplayBase::Hexadecimal)
+        if (base
+                == Kasten::StructViewPreferences::EnumSignedDisplayBase::Hexadecimal)
         {
             return 16;
         }
         return 10; //safe default value
     }
+    virtual QVariant dataFromWidget(const QWidget* w) const;
 };
 
 #endif /* SIGNEDPRIMITIVEDATAINFORMATION_H_ */

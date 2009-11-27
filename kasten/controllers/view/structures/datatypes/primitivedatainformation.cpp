@@ -38,7 +38,6 @@
 #include "uint32datainformation.h"
 #include "uint64datainformation.h"
 
-
 PrimitiveDataType PrimitiveDataInformation::typeStringToType(QString& typeStr)
 {
     typeStr = typeStr.trimmed();
@@ -78,14 +77,10 @@ PrimitiveDataType PrimitiveDataInformation::typeStringToType(QString& typeStr)
     return Type_NotPrimitive; //just return a default value
 }
 
-
-
 QVariant PrimitiveDataInformation::primitiveValue() const
 {
     return mValue.toQByteArray();
 }
-
-
 
 QVariant PrimitiveDataInformation::data(int column, int role) const
 {
@@ -122,11 +117,7 @@ bool PrimitiveDataInformation::setData(const QVariant& value, DataInformation* i
     //FIXME move to the correct subclasses, switches are evil
     if (this != inf)
         return false;
-    if (value.type() != QVariant::String)
-    {
-        kDebug() << "not a string!";
-        return true; //do nothing
-    }
+
     QString str = value.toString();
 
 #define SETDATA(arg,method,cast)    newVal= AllPrimitiveTypes(cast method); \
@@ -150,29 +141,29 @@ bool PrimitiveDataInformation::setData(const QVariant& value, DataInformation* i
     case Type_Char:
         SETDATA(byteValue,str.toShort(&ok,base),(qint8))
     case Type_Int8:
-        SETDATA(byteValue,str.toShort(&ok,base),(qint8))
+        SETDATA(byteValue,value.toInt(&ok),(qint8))
     case Type_UInt8:
-        SETDATA(ubyteValue,str.toUShort(&ok,base),(quint8))
+        SETDATA(ubyteValue,value.toUInt(&ok),(quint8))
     case Type_Int16:
-        SETDATA(shortValue,str.toShort(&ok,base),(qint16))
+        SETDATA(shortValue,value.toInt(&ok),(qint16))
     case Type_UInt16:
-        SETDATA(ushortValue,str.toUShort(&ok,base),(quint16))
+        SETDATA(ushortValue,value.toUInt(&ok),(quint16))
     case Type_Int32:
-        SETDATA(intValue,str.toInt(&ok,base),(qint32))
+        SETDATA(intValue,value.toInt(&ok),(qint32))
     case Type_UInt32:
-        SETDATA(uintValue,str.toUInt(&ok,base),(quint32))
+        SETDATA(uintValue,value.toUInt(&ok),(quint32))
     case Type_Int64:
-        SETDATA(longValue,str.toLongLong(&ok,base),(qint64))
+        SETDATA(longValue,value.toLongLong(&ok),(qint64))
     case Type_UInt64:
-        SETDATA(ulongValue,str.toLongLong(&ok,base),(quint64))
+        SETDATA(ulongValue,value.toULongLong(&ok),(quint64))
     case Type_Bool8:
-        SETDATA(ubyteValue,str.toUShort(&ok,base),(quint8))
+        SETDATA(ubyteValue,value.toUInt(&ok),(quint8))
     case Type_Bool16:
-        SETDATA(ushortValue,str.toUShort(&ok,base),(quint16))
+        SETDATA(ushortValue,value.toUInt(&ok),(quint16))
     case Type_Bool32:
-        SETDATA(uintValue,str.toUInt(&ok,base),(quint32))
+        SETDATA(uintValue,value.toUInt(&ok),(quint32))
     case Type_Bool64:
-        SETDATA(ulongValue,str.toLongLong(&ok,base),(quint64))
+        SETDATA(ulongValue,value.toULongLong(&ok),(quint64))
     default:
         break;
     }
@@ -206,8 +197,9 @@ Qt::ItemFlags PrimitiveDataInformation::flags(int column, bool fileLoaded) const
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
 }
 
-Okteta::Size PrimitiveDataInformation::readData(Okteta::AbstractByteArrayModel* input,
-        ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining)
+Okteta::Size PrimitiveDataInformation::readData(
+        Okteta::AbstractByteArrayModel* input, ByteOrder byteOrder,
+        Okteta::Address address, Okteta::Size remaining)
 {
     int bytes = getSize() / 8;
     if (remaining < bytes)
@@ -221,8 +213,8 @@ Okteta::Size PrimitiveDataInformation::readData(Okteta::AbstractByteArrayModel* 
     //always use unsigned value
     for (int i = 0; i < bytes; i++)
     {
-        int index = (byteOrder == ByteOrderEnumClass::LittleEndian) ? i : ((bytes - 1)
-                - i);
+        int index = (byteOrder == ByteOrderEnumClass::LittleEndian) ? i : ((bytes
+                - 1) - i);
         Okteta::Byte readByte = input->byte(address + i);
         if (mValue.allBytes[index] != readByte)
         {
@@ -242,8 +234,8 @@ Okteta::Size PrimitiveDataInformation::readData(Okteta::AbstractByteArrayModel* 
     return bytes;
 }
 
-PrimitiveDataInformation::PrimitiveDataInformation(QString name, PrimitiveDataType type,
-        int index, DataInformation* parent) :
+PrimitiveDataInformation::PrimitiveDataInformation(QString name,
+        PrimitiveDataType type, int index, DataInformation* parent) :
     DataInformation(name, index, parent), mType(type), mIsValid(false)
 {
     if (type == Type_NotPrimitive)

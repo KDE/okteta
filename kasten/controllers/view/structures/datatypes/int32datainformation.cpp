@@ -39,3 +39,9 @@ QString Int32DataInformation::getValueString() const
     return num;
 }
 
+void Int32DataInformation::setWidgetData(QWidget* w) const
+{
+    SIntSpinBox* spin = dynamic_cast<SIntSpinBox*> (w);
+    if (spin)
+        spin->setValue(this->value().intValue);
+}

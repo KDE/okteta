@@ -20,6 +20,7 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "signedprimitivedatainformation.h"
+#include "../poddecoder/typeeditors/sintspinbox.h"
 
 QString SignedPrimitiveDataInformation::correctSignedValue(QString& num, int base) const
 {
@@ -32,4 +33,13 @@ QString SignedPrimitiveDataInformation::correctSignedValue(QString& num, int bas
         return num.right(getSize());
     }
     return num;
+}
+
+QVariant SignedPrimitiveDataInformation::dataFromWidget(const QWidget* w) const
+{
+    const SIntSpinBox* spin = dynamic_cast<const SIntSpinBox*> (w);
+    if (spin)
+        return spin->value();
+    else
+        return QVariant();
 }
