@@ -5,7 +5,17 @@ Type=Service
 ServiceTypes=KPluginInfo
 
 Name=Simple test
+Name[en_GB]=Simple test
+Name[es]=Prueba sencilla
+Name[sv]=Enkel test
+Name[uk]=Простий тест
+Name[x-test]=xxSimple testxx
 Comment=A few test structures
+Comment[en_GB]=A few test structures
+Comment[es]=Más estructuras de prueba
+Comment[sv]=Några teststrukturer
+Comment[uk]=Декілька тестових структур
+Comment[x-test]=xxA few test structuresxx
 
 X-KDE-PluginInfo-Author=Alex Richardson
 X-KDE-PluginInfo-Email=alex.richardson@gmx.de
