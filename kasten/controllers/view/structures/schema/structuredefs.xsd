@@ -31,7 +31,7 @@
   <xsd:complexType name="Array">
     <xsd:complexContent>
       <xsd:extension base="DataInformationWithChildren">
-          <xsd:attribute name="length" type="xsd:unsignedInt"></xsd:attribute>
+          <xsd:attribute name="length" type="xsd:string"></xsd:attribute>
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
