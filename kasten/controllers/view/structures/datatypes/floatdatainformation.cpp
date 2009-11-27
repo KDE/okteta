@@ -20,6 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "floatdatainformation.h"
+#include <limits>
+#include <KDoubleNumInput>
 
 QString FloatDataInformation::getValueString() const
 {
@@ -37,4 +39,27 @@ QString FloatDataInformation::getValueString() const
                 Kasten::StructViewPreferences::floatPrecision());
     }
     return number;
+}
+
+QWidget* FloatDataInformation::createEditWidget(QWidget* parent) const
+{
+    KDoubleNumInput* ret = new KDoubleNumInput(parent);
+    ret->setMinimum(std::numeric_limits<float>::min());
+    ret->setMaximum(std::numeric_limits<float>::max());
+    return ret;
+}
+
+QVariant FloatDataInformation::dataFromWidget(const QWidget* w) const
+{
+    const KDoubleNumInput* spin = dynamic_cast<const KDoubleNumInput*> (w);
+    if (spin)
+        return spin->value();
+    return QVariant();
+}
+
+void FloatDataInformation::setWidgetData(QWidget* w) const
+{
+    KDoubleNumInput* spin = dynamic_cast<KDoubleNumInput*> (w);
+    if (spin)
+        spin->setValue((double) this->value().floatValue);
 }

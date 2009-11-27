@@ -23,8 +23,8 @@
 #include "enumdatainformation.h"
 
 EnumDataInformation::EnumDataInformation(QString name,
-        PrimitiveDataInformation* type, EnumDefinition::Ptr enumDef,
-        int index, DataInformation* parent) :
+        PrimitiveDataInformation* type, EnumDefinition::Ptr enumDef, int index,
+        DataInformation* parent) :
     PrimitiveDataInformation(name, type->type(), index, parent), mEnum(enumDef),
             mValue(type)
 {
@@ -80,3 +80,17 @@ Okteta::Size EnumDataInformation::readData(Okteta::AbstractByteArrayModel* input
     return mValue->readData(input, byteOrder, address, remaining);
 }
 
+QWidget* EnumDataInformation::createEditWidget(QWidget* parent) const
+{
+    return mValue->createEditWidget(parent);
+}
+
+QVariant EnumDataInformation::dataFromWidget(const QWidget* w) const
+{
+    return mValue->dataFromWidget(w);
+}
+
+void EnumDataInformation::setWidgetData(QWidget* w) const
+{
+    mValue->setWidgetData(w);
+}

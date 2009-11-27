@@ -20,6 +20,7 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "datainformationwithchildren.h"
+#include <KLineEdit>
 
 void DataInformationWithChildren::appendChild(DataInformation* child)
 {
@@ -119,3 +120,18 @@ QList<const DataInformation*> DataInformationWithChildren::findChildrenWithName(
     return retList;
 }
 
+QWidget* DataInformationWithChildren::createEditWidget(QWidget* parent) const
+{
+    return new KLineEdit(parent);
+}
+
+QVariant DataInformationWithChildren::dataFromWidget(const QWidget* w) const
+{
+    Q_UNUSED(w);
+    return QVariant();
+}
+
+void DataInformationWithChildren::setWidgetData(QWidget* w) const
+{
+    Q_UNUSED(w)
+}

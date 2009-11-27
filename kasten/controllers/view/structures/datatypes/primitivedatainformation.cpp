@@ -135,11 +135,15 @@ bool PrimitiveDataInformation::setData(const QVariant& value, DataInformation* i
     switch (mType)
     {
     case Type_Float:
-        SETDATA(floatValue,str.toFloat(&ok),(float))
+//#if QT_VERSION >= 0x040600
+//        SETDATA(floatValue,value.toFloat(&ok),(float))
+//#else
+        SETDATA(floatValue,value.toDouble(&ok),(float))
+//#endif
     case Type_Double:
-        SETDATA(doubleValue,str.toDouble(&ok),(double))
+        SETDATA(doubleValue,value.toDouble(&ok),(double))
     case Type_Char:
-        SETDATA(byteValue,str.toShort(&ok,base),(qint8))
+        SETDATA(byteValue,value.toInt(&ok),(qint8))
     case Type_Int8:
         SETDATA(byteValue,value.toInt(&ok),(qint8))
     case Type_UInt8:

@@ -51,6 +51,11 @@ public:
     bool setData(const QVariant& value, DataInformation* inf,
             Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
             Okteta::Address address, Okteta::Size remaining);
+
+    virtual QWidget* createEditWidget(QWidget* parent) const;
+    virtual QVariant dataFromWidget(const QWidget* w) const;
+    virtual void setWidgetData(QWidget* w) const;
+
 private:
     EnumDefinition::Ptr mEnum;
     PrimitiveDataInformation* mValue; //to allow different enum sizes

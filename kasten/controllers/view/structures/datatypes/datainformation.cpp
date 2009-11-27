@@ -65,20 +65,3 @@ Okteta::Size DataInformation::positionRelativeToParent() const
     }
     return par->offset(this->mIndex) + par->positionRelativeToParent();
 }
-
-QWidget* DataInformation::createEditWidget(QWidget* parent) const
-{
-    return new KLineEdit(parent);
-}
-
-QVariant DataInformation::dataFromWidget(const QWidget* w) const
-{
-    Q_UNUSED(w);
-    return QVariant();
-}
-
-void DataInformation::setWidgetData(QWidget* w) const
-{
-    Q_UNUSED(w)
-}
-

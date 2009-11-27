@@ -61,6 +61,11 @@ public:
     }
     virtual QList<const DataInformation*> findChildrenWithName(const QString& name,
             const DataInformation* const upTo) const;
+
+    virtual QWidget* createEditWidget(QWidget* parent) const;
+    /** get the needed data from the widget */
+    virtual QVariant dataFromWidget(const QWidget* w) const;
+    virtual void setWidgetData(QWidget* w) const;
 };
 
 #endif /* DATAINFORMATIONWITHCHILDREN_H_ */
