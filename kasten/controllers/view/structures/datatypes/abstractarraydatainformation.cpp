@@ -37,7 +37,7 @@ QString AbstractArrayDataInformation::getTypeName() const
                 childCount());
     }
     return i18nc("subelem type then array name and length", "%1[%2] (%3)",
-            data->getName(), childCount(), data->getTypeName(), data->getName());
+            data->getName(), childCount(), data->getTypeName());
 }
 
 AbstractArrayDataInformation::AbstractArrayDataInformation(QString name, int index,
