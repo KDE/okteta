@@ -131,7 +131,7 @@ void StructView::openSettingsDlg(int page)
     KPageWidgetItem* structs = dialog->addPage(structsWidget,
             i18n("Structures"), "configure");
 
-     dialog->addPage(structureSettings, i18n("Structures management"), "folder");
+     dialog->addPage(structureSettings, i18n("Structures management"), "preferences-plugin");
 
     //User edited the configuration - update your local copies of the
     //configuration data
