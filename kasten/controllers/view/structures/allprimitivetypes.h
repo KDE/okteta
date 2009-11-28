@@ -129,7 +129,8 @@ union AllPrimitiveTypes
     {
         return QByteArray((const char*) allBytes, 8);
     }
-    inline bool operator<(AllPrimitiveTypes other) const {
+    inline bool operator<(AllPrimitiveTypes other) const
+    {
         return this->ulongValue < other.ulongValue;
     }
 };

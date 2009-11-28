@@ -40,7 +40,8 @@ public:
     DATAINFORMATION_CLONE(UInt64)
     virtual QString getValueString() const;
 
-    inline QWidget* createEditWidget(QWidget* parent) const {
+    inline QWidget* createEditWidget(QWidget* parent) const
+    {
         return new UInt64Editor(parent);
     }
 };

@@ -38,8 +38,8 @@ protected:
     /** get the appropriate base for QString::number from StructDisplaySettings */
     explicit PrimitiveDataInformation(const PrimitiveDataInformation& d);
 public:
-    explicit PrimitiveDataInformation(QString name, PrimitiveDataType type, int index = -1,
-            DataInformation* parent = NULL);
+    explicit PrimitiveDataInformation(QString name, PrimitiveDataType type,
+            int index = -1, DataInformation* parent = NULL);
     virtual ~PrimitiveDataInformation();
     static PrimitiveDataInformation* newInstance(QString name,
             PrimitiveDataType type, int index = -1, DataInformation* parent = NULL);

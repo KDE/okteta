@@ -36,7 +36,8 @@ QString Bool8DataInformation::getValueString() const
         QString num = QString::number(val, base);
         if (base == 16)
             num = "0x" + num;
-        if (Kasten::StructViewPreferences::localeAwareDecimalFormatting() && base == 10)
+        if (Kasten::StructViewPreferences::localeAwareDecimalFormatting() && base
+                == 10)
             num = KGlobal::locale()->formatNumber(num, false, 0);
         return i18nc("boolean value with actual value", "true (%1)", num);
     }

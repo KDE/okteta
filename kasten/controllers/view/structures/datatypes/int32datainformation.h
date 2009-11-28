@@ -43,7 +43,8 @@ public:
 
     virtual void setWidgetData(QWidget* w) const;
 
-    inline QWidget* createEditWidget(QWidget* parent) const {
+    inline QWidget* createEditWidget(QWidget* parent) const
+    {
         return new SInt32Editor(parent);
     }
 };

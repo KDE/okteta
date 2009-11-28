@@ -31,7 +31,8 @@ QVariant UnsignedPrimitiveDataInformation::dataFromWidget(const QWidget* w) cons
         return QVariant();
 }
 
-void UnsignedPrimitiveDataInformation::setWidgetData(QWidget* w) const {
+void UnsignedPrimitiveDataInformation::setWidgetData(QWidget* w) const
+{
     UIntSpinBox* spin = dynamic_cast<UIntSpinBox*> (w);
     if (spin)
         spin->setValue(this->value().ulongValue);

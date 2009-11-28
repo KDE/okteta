@@ -36,8 +36,9 @@ int StructureDataInformation::getSize() const
     return size;
 }
 
-Okteta::Size StructureDataInformation::readData(Okteta::AbstractByteArrayModel* input,
-        ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining)
+Okteta::Size StructureDataInformation::readData(
+        Okteta::AbstractByteArrayModel* input, ByteOrder byteOrder,
+        Okteta::Address address, Okteta::Size remaining)
 {
     Okteta::Size readBytes = 0;
     for (int i = 0; i < mChildren.size(); i++)
@@ -53,7 +54,8 @@ void StructureDataInformation::addDataTypeToStruct(DataInformation* field)
     appendChild(field);
 }
 
-StructureDataInformation& StructureDataInformation::operator<<(DataInformation* field)
+StructureDataInformation& StructureDataInformation::operator<<(
+        DataInformation* field)
 {
     if (field)
     {

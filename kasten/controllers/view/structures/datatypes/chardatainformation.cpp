@@ -55,7 +55,8 @@ QVariant CharDataInformation::dataFromWidget(const QWidget* w) const
     if (edit)
     {
         QString text = edit->text();
-        if (text.length() == 0) {
+        if (text.length() == 0)
+        {
             return QVariant();
         }
         if (text.length() == 1)
@@ -77,14 +78,17 @@ QVariant CharDataInformation::dataFromWidget(const QWidget* w) const
                 else
                     return QVariant();
             }
-            else if (text.at(1) == 'n') {
-                return (quint8)'\n'; //newline
+            else if (text.at(1) == 'n')
+            {
+                return (quint8) '\n'; //newline
             }
-            else if (text.at(1) == 't') {
-                return (quint8)'\t'; //tab
+            else if (text.at(1) == 't')
+            {
+                return (quint8) '\t'; //tab
             }
-            else if (text.at(1) == 'r') {
-                return (quint8)'\r'; //cr
+            else if (text.at(1) == 'r')
+            {
+                return (quint8) '\r'; //cr
             }
             else
             {

@@ -24,7 +24,7 @@
 StaticLengthArrayDataInformation::StaticLengthArrayDataInformation(QString name,
         unsigned int length, const DataInformation& children, int index,
         DataInformation* parent) :
-    AbstractArrayDataInformation(name, index, parent),mArrayLength(length)
+    AbstractArrayDataInformation(name, index, parent), mArrayLength(length)
 {
     //  kDebug() << "name: " << name;
     //  kDebug() << "childname: " << children.getName();
@@ -39,7 +39,7 @@ StaticLengthArrayDataInformation::StaticLengthArrayDataInformation(QString name,
 
 StaticLengthArrayDataInformation::StaticLengthArrayDataInformation(
         const StaticLengthArrayDataInformation& d) :
-    AbstractArrayDataInformation(d),mArrayLength(d.mArrayLength)
+    AbstractArrayDataInformation(d), mArrayLength(d.mArrayLength)
 {
 }
 

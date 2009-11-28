@@ -30,7 +30,8 @@ Q_OBJECT
 protected:
     explicit UnionDataInformation(const UnionDataInformation& d);
 public:
-    explicit UnionDataInformation(QString name, int index = -1, DataInformation* parent = NULL);
+    explicit UnionDataInformation(QString name, int index = -1,
+            DataInformation* parent = NULL);
     virtual ~UnionDataInformation();
     DATAINFORMATION_CLONE(Union)
 

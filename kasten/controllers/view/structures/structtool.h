@@ -73,7 +73,8 @@ public:
         return DataInformation::COLUMN_COUNT;
     }
     bool setData(const QVariant& value, int role, DataInformation* item);
-    inline StructuresManager& manager() const {
+    inline StructuresManager& manager() const
+    {
         return *mManager;
     }
 Q_SIGNALS: // changes to the setting currently not signaled, because only controlled by view

@@ -42,7 +42,8 @@ public:
 
     virtual QString getValueString() const;
 
-    inline QWidget* createEditWidget(QWidget* parent) const {
+    inline QWidget* createEditWidget(QWidget* parent) const
+    {
         return new SInt16Editor(parent);
     }
     virtual void setWidgetData(QWidget* w) const;

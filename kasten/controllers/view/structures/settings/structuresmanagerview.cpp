@@ -18,7 +18,7 @@
 
  You should have received a copy of the GNU Lesser General Public
  License along with this library. If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #include "structuresmanagerview.h"
 
@@ -41,55 +41,52 @@
 
 static const int FileNameRole = Qt::UserRole;
 
-StructuresManagerView::StructuresManagerView( Kasten::StructuresManager* manager,
-        QWidget* parent)
-  : QWidget(parent),
-    mManager(manager)
+StructuresManagerView::StructuresManagerView(Kasten::StructuresManager* manager,
+        QWidget* parent) :
+    QWidget(parent), mManager(manager)
 {
-    QVBoxLayout* pageLayout = new QVBoxLayout( this );
+    QVBoxLayout* pageLayout = new QVBoxLayout(this);
 
-    mStructuresSelector = new KPluginSelector( this );
-    pageLayout->addWidget( mStructuresSelector );
+    mStructuresSelector = new KPluginSelector(this);
+    pageLayout->addWidget(mStructuresSelector);
 
     QVBoxLayout* buttonsLayout = new QVBoxLayout();
 
-//    mGetNewStructuresButton = new KPushButton( KIcon("get-hot-new-stuff"), i18n("Get New Structures..."), this );
-//    connect( mGetNewStructuresButton, SIGNAL(clicked()),
-//             SLOT(onGetNewStructuresClicked()) );
-//
-//    buttonsLayout->addWidget( mGetNewStructuresButton );
-//
-//    mImportStructuresButton = new KPushButton( i18n("Import Structures..."), this );
-//    connect( mImportStructuresButton, SIGNAL(clicked()),
-//             SLOT(onImportStructuresClicked()) );
-//
-//    buttonsLayout->addWidget( mImportStructuresButton );
-//
-//    mExportStructureButton = new KPushButton( i18n("Export Structure..."), this );
-//    connect( mExportStructureButton, SIGNAL(clicked()),
-//             SLOT(onExportStructureClicked()) );
-//
-//    buttonsLayout->addWidget( mExportStructureButton );
-//
-//    mRemoveStructureButton = new KPushButton( i18n("Remove Structure"), this );
-//    connect( mRemoveStructureButton, SIGNAL(clicked()),
-//             SLOT(onRemoveStructureClicked()) );
-//
-//    buttonsLayout->addWidget( mRemoveStructureButton );
+    //    mGetNewStructuresButton = new KPushButton( KIcon("get-hot-new-stuff"), i18n("Get New Structures..."), this );
+    //    connect( mGetNewStructuresButton, SIGNAL(clicked()),
+    //             SLOT(onGetNewStructuresClicked()) );
+    //
+    //    buttonsLayout->addWidget( mGetNewStructuresButton );
+    //
+    //    mImportStructuresButton = new KPushButton( i18n("Import Structures..."), this );
+    //    connect( mImportStructuresButton, SIGNAL(clicked()),
+    //             SLOT(onImportStructuresClicked()) );
+    //
+    //    buttonsLayout->addWidget( mImportStructuresButton );
+    //
+    //    mExportStructureButton = new KPushButton( i18n("Export Structure..."), this );
+    //    connect( mExportStructureButton, SIGNAL(clicked()),
+    //             SLOT(onExportStructureClicked()) );
+    //
+    //    buttonsLayout->addWidget( mExportStructureButton );
+    //
+    //    mRemoveStructureButton = new KPushButton( i18n("Remove Structure"), this );
+    //    connect( mRemoveStructureButton, SIGNAL(clicked()),
+    //             SLOT(onRemoveStructureClicked()) );
+    //
+    //    buttonsLayout->addWidget( mRemoveStructureButton );
 
-    mApplyChangesButton = new KPushButton( i18n("Apply Changes"), this );
-    connect( mApplyChangesButton, SIGNAL(clicked()),
-             SLOT(onApplyChangesClicked()) );
+    mApplyChangesButton = new KPushButton(i18n("Apply Changes"), this);
+    connect(mApplyChangesButton, SIGNAL(clicked()), SLOT(onApplyChangesClicked()));
 
-    buttonsLayout->addWidget( mApplyChangesButton );
-//    buttonsLayout->addStretch();
+    buttonsLayout->addWidget(mApplyChangesButton);
+    //    buttonsLayout->addStretch();
 
-    pageLayout->addLayout( buttonsLayout );
-
+    pageLayout->addLayout(buttonsLayout);
 
     KPluginInfo::List plugins;
     foreach( const Kasten::StructureDefinitionFile* def, manager->structureDefs() )
-        plugins.append( def->info() );
+            plugins.append(def->info());
 
     mStructuresSelector->addPlugins(plugins, KPluginSelector::ReadConfigFile, i18n(
             "Structure Definitions"), QString("structure"), mManager->config());
@@ -132,33 +129,34 @@ void StructuresManagerView::onImportStructuresClicked()
 void StructuresManagerView::onExportStructureClicked()
 {
     return;
-//     TODO Not working ATM
-//        if (currentItem != 0)
-       {
-           const KUrl saveUrl = KFileDialog::getSaveUrl(KUrl(), i18n(
-                   "*.osd|Okteta structure definition files (*.osd)"), this, i18nc(
-                   "@title:window Do export the structure definition",
-                   "Export Structure Definition"));
+    //     TODO Not working ATM
+    //        if (currentItem != 0)
+    {
+        const KUrl saveUrl = KFileDialog::getSaveUrl(KUrl(), i18n(
+                "*.osd|Okteta structure definition files (*.osd)"), this, i18nc(
+                "@title:window Do export the structure definition",
+                "Export Structure Definition"));
 
-           if (!saveUrl.isEmpty())
-           {
-               const QString fileName;// = currentItem->data(FileNameRole).toString();
-               const QString filePath = KGlobal::dirs()->findResource("data",
-                       "okteta/structures/" + fileName + ".osd");
-               kDebug() << fileName << filePath << saveUrl;
-               const bool success = KIO::NetAccess::upload(filePath, saveUrl, this);
+        if (!saveUrl.isEmpty())
+        {
+            const QString fileName;// = currentItem->data(FileNameRole).toString();
+            const QString filePath = KGlobal::dirs()->findResource("data",
+                    "okteta/structures/" + fileName + ".osd");
+            kDebug() << fileName << filePath << saveUrl;
+            const bool success = KIO::NetAccess::upload(filePath, saveUrl, this);
 
-               if (!success)
-                   KMessageBox::error(this, KIO::NetAccess::lastErrorString(), i18n(
-                           "Error"));
-           }
-       }
+            if (!success)
+                KMessageBox::error(this, KIO::NetAccess::lastErrorString(), i18n(
+                        "Error"));
+        }
+    }
 }
 void StructuresManagerView::onApplyChangesClicked()
 {
     mStructuresSelector->save();
     kDebug() << "saved";
-    emit applyButtonClicked();
+    emit
+    applyButtonClicked();
     return;
 }
 void StructuresManagerView::onRemoveStructureClicked()
@@ -166,8 +164,8 @@ void StructuresManagerView::onRemoveStructureClicked()
     mStructuresSelector->save();
     kDebug() << "saved";
     return;
-//     QListWidgetItem* currentItem = ui.structuresView->currentItem();
-//     if (currentItem != 0)
+    //     QListWidgetItem* currentItem = ui.structuresView->currentItem();
+    //     if (currentItem != 0)
     {
         const QString fileName;// = currentItem->data(FileNameRole).toString();
         const QString filePath = KGlobal::dirs()->findResource("data",

@@ -128,15 +128,14 @@ void StructView::openSettingsDlg(int page)
         layout->addWidget(loadedStructuresSettings);
         structsWidget->setLayout(layout);
     }
-    KPageWidgetItem* structs = dialog->addPage(structsWidget,
-            i18n("Structures"), "configure");
-
-     dialog->addPage(structureSettings, i18n("Structures management"), "preferences-plugin");
-
+    KPageWidgetItem* structs = dialog->addPage(structsWidget, i18n("Structures"),
+            "configure");
+    dialog->addPage(structureSettings, i18n("Structures management"),
+            "preferences-plugin");
     //User edited the configuration - update your local copies of the
     //configuration data
     connect(dialog, SIGNAL(settingsChanged(const QString&)), this, SLOT(update()));
-     connect(structureSettings, SIGNAL(applyButtonClicked()),
+    connect(structureSettings, SIGNAL(applyButtonClicked()),
             loadedStructuresSettings, SLOT(updateAvailable()));
     connect(dialog, SIGNAL(settingsChanged(const QString&)), mTool,
             SLOT(loadStructDefFiles()));

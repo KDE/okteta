@@ -46,8 +46,8 @@ Okteta::Size UnionDataInformation::readData(Okteta::AbstractByteArrayModel* inpu
     {
         //union -> size of biggest element
         //always start at beginning again
-        readBytes = qMax(readBytes, mChildren[i]->readData(input, byteOrder, address,
-                remaining));
+        readBytes = qMax(readBytes, mChildren[i]->readData(input, byteOrder,
+                address, remaining));
     }
     return readBytes;
 }
@@ -120,8 +120,9 @@ QVariant DataInformationWithChildren::data(int column, int role) const
     else if (role == Qt::ToolTipRole)
     {
         return i18np("Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 child)",
-                     "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)",
-                     childCount(), getName(), getValueString(), getTypeName(), getSizeString());
+                "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)",
+                childCount(), getName(), getValueString(), getTypeName(),
+                getSizeString());
     }
     else
         return QVariant();

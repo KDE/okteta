@@ -39,7 +39,8 @@ public:
         {
             return 10;
         }
-        if (base == Kasten::StructViewPreferences::EnumUnsignedDisplayBase::Hexadecimal)
+        if (base
+                == Kasten::StructViewPreferences::EnumUnsignedDisplayBase::Hexadecimal)
         {
             return 16;
         }

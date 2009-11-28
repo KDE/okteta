@@ -49,7 +49,8 @@ QVariant StructTreeModel::data(const QModelIndex& index, int role) const
     DataInformation *item = static_cast<DataInformation*> (index.internalPointer());
     return item->data(index.column(), role);
 }
-bool StructTreeModel::setData(const QModelIndex& index, const QVariant& value, int role)
+bool StructTreeModel::setData(const QModelIndex& index, const QVariant& value,
+        int role)
 {
     if (!index.isValid())
         return false;
@@ -65,7 +66,8 @@ Qt::ItemFlags StructTreeModel::flags(const QModelIndex& index) const
     DataInformation *item = static_cast<DataInformation*> (index.internalPointer());
     return mTool->flags(index.column(), item);
 }
-QVariant StructTreeModel::headerData(int section, Qt::Orientation orientation, int role) const
+QVariant StructTreeModel::headerData(int section, Qt::Orientation orientation,
+        int role) const
 {
     if (orientation == Qt::Horizontal)
     {
@@ -100,8 +102,10 @@ QModelIndex StructTreeModel::parent(const QModelIndex& index) const
     if (!index.isValid())
         return QModelIndex();
 
-    DataInformation *childItem = static_cast<DataInformation*> (index.internalPointer());
-    DataInformation *parentItem = static_cast<DataInformation*> (childItem->parent());
+    DataInformation *childItem =
+            static_cast<DataInformation*> (index.internalPointer());
+    DataInformation *parentItem =
+            static_cast<DataInformation*> (childItem->parent());
 
     if (!parentItem)
         return QModelIndex();

@@ -98,8 +98,8 @@ void StructTool::setTargetModel(AbstractModel* model)
                 SIGNAL(contentsChanged( const Okteta::ArrayChangeMetricsList& )),
                 SLOT(onContentsChange()));
         //		onCharCodecChange(mByteArrayView->charCodingName());
-//         connect(mByteArrayView, SIGNAL(charCodecChanged( const QString& )),
-//                 SLOT(onCharCodecChange( const QString& )));
+        //         connect(mByteArrayView, SIGNAL(charCodecChanged( const QString& )),
+        //                 SLOT(onCharCodecChange( const QString& )));
     }
 
     updateData();
