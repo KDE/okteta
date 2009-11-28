@@ -44,8 +44,11 @@ public:
 
     inline QWidget* createEditWidget(QWidget* parent) const
     {
-        return new SInt16Editor(parent);
+        SInt16Editor* ret = new SInt16Editor(parent);
+        ret->setBase(displayBase());
+        return ret;
     }
+
     virtual void setWidgetData(QWidget* w) const;
 };
 #endif /* INT16DATAINFORMATION_H_ */

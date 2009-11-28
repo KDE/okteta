@@ -42,7 +42,9 @@ public:
 
     inline QWidget* createEditWidget(QWidget* parent) const
     {
-        return new UInt32Editor(parent);
+        UInt32Editor* ret = new UInt32Editor(parent);
+        ret->setBase(displayBase());
+        return ret;
     }
 };
 

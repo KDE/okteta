@@ -43,7 +43,9 @@ public:
 
     inline QWidget* createEditWidget(QWidget* parent) const
     {
-        return new UInt64Editor(parent);
+        UInt64Editor* ret = new UInt64Editor(parent);
+        ret->setBase(displayBase());
+        return ret;
     }
 };
 

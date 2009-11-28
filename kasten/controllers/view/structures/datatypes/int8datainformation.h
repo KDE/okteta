@@ -44,7 +44,9 @@ public:
 
     inline QWidget* createEditWidget(QWidget* parent) const
     {
-        return new SInt8Editor(parent);
+        SInt8Editor* ret = new SInt8Editor(parent);
+        ret->setBase(displayBase());
+        return ret;
     }
 };
 

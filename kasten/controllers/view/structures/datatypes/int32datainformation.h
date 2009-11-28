@@ -45,7 +45,9 @@ public:
 
     inline QWidget* createEditWidget(QWidget* parent) const
     {
-        return new SInt32Editor(parent);
+        SInt32Editor* ret = new SInt32Editor(parent);
+        ret->setBase(displayBase());
+        return ret;
     }
 };
 

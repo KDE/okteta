@@ -43,7 +43,9 @@ public:
 
     inline QWidget* createEditWidget(QWidget* parent) const
     {
-        return new UInt16Editor(parent);
+        UInt16Editor* ret = new UInt16Editor(parent);
+        ret->setBase(displayBase());
+        return ret;
     }
 };
 

@@ -43,7 +43,9 @@ public:
 
     inline QWidget* createEditWidget(QWidget* parent) const
     {
-        return new UInt8Editor(parent);
+        UInt8Editor* ret = new UInt8Editor(parent);
+        ret->setBase(displayBase());
+        return ret;
     }
 };
 
