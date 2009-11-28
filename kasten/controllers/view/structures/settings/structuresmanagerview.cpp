@@ -82,7 +82,7 @@ StructuresManagerView::StructuresManagerView( Kasten::StructuresManager* manager
              SLOT(onApplyChangesClicked()) );
 
     buttonsLayout->addWidget( mApplyChangesButton );
-    buttonsLayout->addStretch();
+//    buttonsLayout->addStretch();
 
     pageLayout->addLayout( buttonsLayout );
 
