@@ -73,7 +73,7 @@ class Selection
       */
     void cancel();
     /** sets the anchor to the start or the end.
-      * @param if true to the start, otherwise to the end
+      * @param forward true to the start, otherwise to the end
       * If the selection has not started the behaviour is undefined.
       */
     void setForward( bool forward = true );

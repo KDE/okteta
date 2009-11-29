@@ -116,12 +116,12 @@ class OKTETAGUI_EXPORT ColumnsView : public QAbstractScrollArea
   protected: //
     /** sets height of all lines and propagates this information to all columns
       * doesn't update the content size
-      * @param NewLineHeight height in pixels
+      * @param lineHeight height in pixels
       */
     virtual void setLineHeight( PixelY lineHeight );
     /** sets the number of lines
       * doesn't update the content size
-      * @param NewNoOfLines new number of lines to display
+      * @param noOfLines new number of lines to display
       */
     virtual void setNoOfLines( LineSize noOfLines );
 

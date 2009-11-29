@@ -52,13 +52,13 @@ class CoordRange : public KDE::KBaseCoordRange
 {
   public:
     /** 
-      * @param SC start coord
-      * @param EC end coord
+      * @param start start coord
+      * @param end end coord
       */
     CoordRange( const Coord& start, const Coord& end );
     /** 
-      * @param Pos start and end pos
-      * @param Lines start and end line
+      * @param posRange start and end pos
+      * @param lineRange start and end line
       */
     CoordRange( const LinePositionRange& posRange, const LineRange& lineRange );
     CoordRange();
@@ -73,7 +73,7 @@ class CoordRange : public KDE::KBaseCoordRange
   public:
     /** calculates the number of coords that are covered if a line has the given length.
       * If the range is invalid the behaviour is undefined.
-      * @param LineLength 
+      * @param lineWidth 
       * @return the number of points covered if a line has a length of LineLength.
       */
     Size width( LinePositionSize lineWidth ) const;
@@ -84,7 +84,7 @@ class CoordRange : public KDE::KBaseCoordRange
     LineSize lines() const;
     /** tests if the given line is included by the range. 
       * If the range is invalid or the line < 0 the behaviour is undefined.      
-      * @param Line index of line
+      * @param line index of line
       * @return @c true if Line is included, otherwise @c false
       */
     bool includesLine( Line line ) const;

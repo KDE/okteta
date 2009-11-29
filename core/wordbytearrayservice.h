@@ -53,7 +53,6 @@ class OKTETACORE_EXPORT WordByteArrayService
       * if no other nonwordchar preceds this is 0;
       * If the byte at the given index is already a nonword char the given index is returned.
       * @param index index to start with
-      * @param CharType
       * @return index of the first char of the current word or the given index if there is none
       */
     Address indexOfWordStart( Address index ) const;
@@ -62,7 +61,6 @@ class OKTETACORE_EXPORT WordByteArrayService
       * If the byte at the given index is already a nonword char the given index is returned.
       * if no other nonwordchar follows, that of the last byte;
       * @param index index to start with
-      * @param CharType
       * @return index of the last char of the current word or the given index if there is none
       */
     Address indexOfWordEnd( Address index ) const;
@@ -70,7 +68,6 @@ class OKTETACORE_EXPORT WordByteArrayService
       * If the byte at the given index is already a nonword char the given index is returned.
       * if no other nonwordchar follows that of behind the last byte;
       * @param index index to start with
-      * @param CharType
       * @return index of the first char after the current word or the given index if there is none
       */
     Address indexOfRightWordSelect( Address index ) const;
@@ -78,7 +75,6 @@ class OKTETACORE_EXPORT WordByteArrayService
       * If the byte at the given index is already a nonword char the given index is returned.
       * if no other nonwordchar follows that of behind the last byte;
       * @param index index to start with
-      * @param CharType
       * @return index of the first char after the current word or the given index if there is none
       */
 //    Address indexOfBehindLeftWordEnd( Address index ) const;
@@ -86,7 +82,6 @@ class OKTETACORE_EXPORT WordByteArrayService
       * If the byte at the given index is already a nonword char the given index is returned.
       * if no other nonwordchar follows that of behind the last byte;
       * @param index index to start with
-      * @param CharType
       * @return index of the first char after the current word or the given index if there is none
       */
 //    Address indexOfBehindRightWordEnd( Address index ) const;
@@ -94,28 +89,24 @@ class OKTETACORE_EXPORT WordByteArrayService
       * if no further word is found 0 is returned.
       * if the index is out of range the behaviour is undefined.
       * @param index
-      * @param CharType
       * @return index of the next previous word start or 0
       */
     Address indexOfPreviousWordStart( Address index ) const;
     /** searches for the start of the next word not including the given index.
       * if there isn't a next word the index behind end is returned
       * @param index
-      * @param CharType
       * @return index of the start of the next word or behind end
       */
     Address indexOfNextWordStart( Address index ) const;
     /** searches for the start of the next word not including the given index.
       * if there isn't a next word the index of the end is returned
       * @param index index to start with
-      * @param CharType
       * @return index of the last nonword char before the next word or the last index
       */
     Address indexOfBeforeNextWordStart( Address index ) const;
 
     /** if index is out of range the behaviour is undefined
       * @param index
-      * @param CharType
       * @return @c true if the byte at position i is a char of type CharType 
       */
     bool isWordChar( Address index ) const;
@@ -123,7 +114,6 @@ class OKTETACORE_EXPORT WordByteArrayService
     /** returns the section with a word around index.
       * if there is no word the section is empty
       * @param index
-      * @param CharType
       * @return the section with a word around index.
       */
     AddressRange wordSection( Address index ) const;

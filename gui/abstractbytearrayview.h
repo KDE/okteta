@@ -164,29 +164,29 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
   // setting parameters
   // value column parameters
     /** sets the spacing between the bytes in the value column
-      * @param BSW spacing between the bytes in pixels
+      * @param byteSpacingWidth spacing between the bytes in pixels
       * default is 3
       */
     virtual void setByteSpacingWidth( int/*PixelX*/ byteSpacingWidth ) = 0;
     /** sets the number of grouped bytes in the value column
-      * @param NoGB numbers of grouped bytes, 0 means no grouping
+      * @param noOfGroupedBytes numbers of grouped bytes, 0 means no grouping
       * default is 4
       */
     virtual void setNoOfGroupedBytes( int noOfGroupedBytes ) = 0;
     /** sets the spacing between the groups of bytes in the value column
-      * @param GSW spacing between the groups in pixels
+      * @param groupSpacingWidth spacing between the groups in pixels
       * default is 9
       */
     virtual void setGroupSpacingWidth( int/*PixelX*/ groupSpacingWidth ) = 0;
     /** sets the spacing in the middle of a binary byte in the value column
-      * @param BinaryGapW spacing in the middle of a binary in pixels
+      * @param binaryGapWidth spacing in the middle of a binary in pixels
       * returns true if there was a change
       */
     virtual void setBinaryGapWidth( int binaryGapWidth ) = 0;
     /** sets the spacing in the value column
-      * @param ByteSpacingWidth spacing between the bytes in pixels
-      * @param NoOfGroupedBytes numbers of grouped bytes, 0 means no grouping
-      * @param GroupSpacingWidth spacing between the groups in pixels
+      * @param byteSpacingWidth spacing between the bytes in pixels
+      * @param noOfGroupedBytes numbers of grouped bytes, 0 means no grouping
+      * @param groupSpacingWidth spacing between the groups in pixels
       * Default is 4 for NoOfGroupedBytes
       */
     virtual void setBufferSpacing( int/*PixelX*/ byteSpacingWidth, int noOfGroupedBytes = 0, int/*PixelX*/ groupSpacingWidth = 0 ) = 0;
@@ -196,7 +196,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     /** sets whether control chars or "non-printing" chars should be displayed in the char column
       * with their corresponding character. Currently this simply means all chars with value <32,
       * as known from the ASCII.
-      * @param SU
+      * @param showsNonprinting
       * returns true if there was a change
       */
     virtual void setShowsNonprinting( bool showsNonprinting = true ) = 0;
@@ -213,7 +213,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     virtual void setCharCoding( CharCoding charCoding ) = 0;
     /** sets the encoding of the char column. Default is Okteta::LocalEncoding.
       * If the encoding is not available the format will not be changed.
-      * @param Encoding name of the encoding
+      * @param charCodingName name of the encoding
       */
     virtual void setCharCoding( const QString& charCodingName ) = 0;
     virtual void setByteTypeColored( bool isColored ) = 0;

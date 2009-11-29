@@ -87,7 +87,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayColumnRenderer : public AbstractColumnRe
     void renderByte( QPainter* painter, Address byteIndex );
     /** paints the byte with background and a frame around.
       * @param byteIndex Index of the byte to paint the frame for. If -1 a space is used as char.
-      * @param Style the style of the framing
+      * @param style the style of the framing
       */
     void renderFramedByte( QPainter* painter, Address byteIndex, FrameStyle style );
 
@@ -106,12 +106,12 @@ class OKTETAGUI_EXPORT AbstractByteArrayColumnRenderer : public AbstractColumnRe
       */
     bool setByteSpacingWidth( PixelX byteSpacingWidth );
     /** sets the number of grouped bytes in the hex column
-      * @param NewNoOfGroupedBytes numbers of grouped bytes, 0 means no grouping
+      * @param noOfGroupedBytes numbers of grouped bytes, 0 means no grouping
       * returns true if there was a change
       */
     bool setNoOfGroupedBytes( int noOfGroupedBytes );
     /** sets the spacing between the groups of bytes in the hex column
-      * @param GroupSpacingW spacing between the groups in pixels
+      * @param groupSpacingWidth spacing between the groups in pixels
       * returns true if there was a change
       */
     bool setGroupSpacingWidth( PixelX groupSpacingWidth );

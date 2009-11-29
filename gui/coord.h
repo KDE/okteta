@@ -100,7 +100,7 @@ class Coord
 
   public:
     /** set the coord by calculating it for an index with a given line width
-     * @param Index index in the buffer
+     * @param index index in the buffer
      * @param lineWidth given line width
      */
     void setByIndexNWidth( Address index, LinePositionSize lineWidth );
@@ -116,7 +116,7 @@ class Coord
     /** moves the coord a given number of positions to the left. 
      * If the coord is invalid the result is undefined or the position smaller than the given number 
      * the behaviour is undefined.
-     * @param P number of positions
+     * @param positions number of positions
      */
     void goLeft( LinePositionSize positions );
     /** moves the coord one position to the left, or if the position is already at the line start
@@ -127,7 +127,7 @@ class Coord
     /** moves the coord one position to the right. If the coord is invalid the result is undefined. */
     void goRight();
     /** moves the coord a given number of positions to the right. If the coord is invalid the result is undefined.
-     * @param P number of positions
+     * @param positions number of positions
      */
     void goRight( LinePositionSize positions );
     /** moves the coord one position to the right, or if the position has already reached or passed maxPos 
@@ -151,7 +151,7 @@ class Coord
     /** sets the position to the given pos or 
       * if the line is the same as that of the given coord to the position of that. 
       * If one or more of the coords is invalid the behaviour is undefined.
-      * @param lines last position in normal line
+      * @param lastPos last position in normal line
       * @param other a possible line end coord
       */
     void goLineEnd( LinePosition lastPos, const Coord& other );

@@ -70,7 +70,7 @@ class RevertablePieceTable
     /**
      * closes the current change, so any following operation will not be tried to merge
      * currently it also closes any opened groups
-     * @param 
+     * @param changeId
      * @param changedRanges 
      * @param changeList
      */

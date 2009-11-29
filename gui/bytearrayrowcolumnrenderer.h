@@ -89,7 +89,7 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
     void renderByte( QPainter* painter, Address byteIndex, AbstractByteArrayView::CodingTypeId codingId );
     /** paints the byte with background and a frame around.
       * @param byteIndex Index of the byte to paint the frame for. If -1 a space is used as char.
-      * @param Style the style of the framing
+      * @param style the style of the framing
       */
     void renderFramedByte( QPainter* painter, Address byteIndex, AbstractByteArrayView::CodingTypeId codingId, FrameStyle style );
 
@@ -109,12 +109,12 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
       */
     bool setByteSpacingWidth( PixelX byteSpacingWidth );
     /** sets the number of grouped bytes in the hex column
-      * @param NewNoOfGroupedBytes numbers of grouped bytes, 0 means no grouping
+      * @param noOfGroupedBytes numbers of grouped bytes, 0 means no grouping
       * returns true if there was a change
       */
     bool setNoOfGroupedBytes( Size noOfGroupedBytes );
     /** sets the spacing between the groups of bytes in the hex column
-      * @param GroupSpacingW spacing between the groups in pixels
+      * @param groupSpacingWidth spacing between the groups in pixels
       * returns true if there was a change
       */
     bool setGroupSpacingWidth( PixelX groupSpacingWidth );
@@ -136,7 +136,7 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
 
     void setValueCodec( ValueCoding valueCoding, const ValueCodec* valueCodec );
     /** sets the spacing in the middle of a binary byte in the value column
-      * @param BinaryGapW spacing in the middle of a binary in pixels
+      * @param binaryGapWidth spacing in the middle of a binary in pixels
       * returns true if there was a change
       */
     bool setBinaryGapWidth( PixelX binaryGapWidth );

@@ -150,7 +150,7 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
     Size insert( Address offset, const QByteArray& insertData );
 
     /** removes beginning with position as much as possible
-      * @param removeSection
+      * @param removeRange
       * @return length of removed data
       */
     virtual Size remove( const AddressRange& removeRange );
@@ -158,7 +158,7 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
     Size remove( Address offset, Size removeLength );
 
     /** replaces as much as possible
-      * @param removeSection
+      * @param removeRange
       * @param insertData
       * @param insertLength
       * @return length of inserted data
@@ -192,7 +192,7 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
     /** sets a single byte
      * if the offset is not valid the behaviour is undefined
      * @param offset offset of the datum requested
-     * @param value new byte value
+     * @param byte new byte value
      */
     virtual void setByte( Address offset, Byte byte ) = 0;
 
@@ -241,7 +241,7 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
       */
 //     virtual int indexOf( const char*KeyData, int Length, const Section &Section ) const { return -1; }//= 0;
     /** searches backward beginning with byte at Pos.
-      * @param 
+      * @param pattern
       * @param patternLength length of search string
       * @param fromOffset the position to start the search. If -1 the search starts at the end.
       * @return index of the first  or -1

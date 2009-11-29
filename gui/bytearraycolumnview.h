@@ -113,7 +113,7 @@ class OKTETAGUI_EXPORT ByteArrayColumnView : public AbstractByteArrayView
       */
 //     int fittingBytesPerLine() const;
     /** detects the index of the byte at the given point
-      * @param Point in viewport coordinate system
+      * @param point in viewport coordinate system
       * @return index of the byte that covers the point
       */
     Address indexByPoint(const QPoint& point ) const;

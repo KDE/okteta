@@ -49,7 +49,7 @@ class OKTETAGUI_EXPORT ValueByteArrayColumnRenderer : public AbstractByteArrayCo
   public: // modification access
     void setValueCodec( ValueCoding valueCoding, const ValueCodec* valueCodec );
     /** sets the spacing in the middle of a binary byte in the value column
-      * @param BinaryGapW spacing in the middle of a binary in pixels
+      * @param binaryGapWidth spacing in the middle of a binary in pixels
       * returns true if there was a change
       */
     bool setBinaryGapWidth( PixelX binaryGapWidth );
