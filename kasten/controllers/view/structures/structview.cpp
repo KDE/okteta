@@ -121,7 +121,15 @@ void StructView::openSettingsDlg(int page)
     QWidget* loadedStructuresSettings = new StructureAddRemoveWidget(mTool, this);
     KPageWidgetItem* displ = dialog->addPage(displaySettings, i18n("Value Display"),
             QString("configure"));
-    KPageWidgetItem* structs = dialog->addPage(loadedStructuresSettings, i18n("Structures"),
+    //wrapper QWidget needed so that preferences are saved
+    QWidget* structsWidget = new QWidget();
+    {
+        QVBoxLayout* layout = new QVBoxLayout();
+        loadedStructuresSettings->setObjectName("kcfg_LoadedStructures");
+        layout->addWidget(loadedStructuresSettings);
+        structsWidget->setLayout(layout);
+    }
+    KPageWidgetItem* structs = dialog->addPage(structsWidget, i18n("Structures"),
             "configure");
     KPageWidgetItem* management = dialog->addPage(structureSettings, i18n("Structures management"),
             "preferences-plugin");
