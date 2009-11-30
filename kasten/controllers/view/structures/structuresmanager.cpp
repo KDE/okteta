@@ -118,12 +118,6 @@ void StructuresManager::reloadPaths()
 //    }
 //}
 
-
-void StructuresManager::loadStructDefFiles()
-{
-    reloadPaths();
-}
-
 void StructuresManager::addStructDef(const QString& relPath)
 {
     kDebug() << "add struct def " << relPath;

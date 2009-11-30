@@ -48,7 +48,7 @@ StructTool::StructTool() :
 {
     //leave mLoadedFiles empty for now, since otherwise loading slot will not work
     setObjectName("StructTool");
-    mManager->loadStructDefFiles();
+    mManager->reloadPaths();
     setSelectedStructuresInView();
     //	mUtf8Codec = QTextCodec::codecForName("UTF-8");
 

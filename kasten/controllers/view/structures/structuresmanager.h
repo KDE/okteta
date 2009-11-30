@@ -46,7 +46,6 @@ public:
 public Q_SLOTS:
     void update();
     void reloadPaths();
-    void loadStructDefFiles();
 public:
     inline const QStringList paths() const
     {
