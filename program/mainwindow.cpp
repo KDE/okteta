@@ -187,7 +187,7 @@ void OktetaMainWindow::setupControllers()
     addTool( new ByteTableToolView(new ByteTableTool()) );
     addTool( new InfoToolView(new InfoTool()) );
     addTool( new PODDecoderToolView(new PODDecoderTool()) );
-    addTool( new StructToolView(new StructTool()) );
+//     addTool( new StructToolView(new StructTool()) );
     addTool( new BookmarksToolView(new BookmarksTool()) );
 }
 
