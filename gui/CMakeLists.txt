@@ -96,7 +96,7 @@ set_target_properties( oktetagui  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVE
 
 install( TARGETS oktetagui  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-install( FILES ${oktetagui_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/okteta  COMPONENT Devel )
+# install( FILES ${oktetagui_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/okteta  COMPONENT Devel )
 
 
 add_subdirectory( test )

@@ -185,4 +185,4 @@ set_target_properties( kastencontrollers  PROPERTIES VERSION ${GENERIC_LIB_VERSI
 
 install( TARGETS kastencontrollers  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-install( FILES ${kastencontrollers_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )
+# install( FILES ${kastencontrollers_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )

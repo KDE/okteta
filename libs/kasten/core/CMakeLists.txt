@@ -134,4 +134,4 @@ set_target_properties( kastencore  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOV
 
 install( TARGETS kastencore  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-install( FILES ${kastencore_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )
+# install( FILES ${kastencore_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )
