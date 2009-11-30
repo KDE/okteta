@@ -26,6 +26,7 @@
 // controller
 #include "structtreemodel.h"
 #include "structtool.h"
+#include "structuresmanager.h"
 #include "structviewitemdelegate.h"
 //settings
 #include "structviewpreferences.h"
@@ -138,7 +139,7 @@ void StructView::openSettingsDlg(int page)
     connect(dialog, SIGNAL(settingsChanged(const QString&)), this, SLOT(update()));
     connect(structureSettings, SIGNAL(applyButtonClicked()),
             loadedStructuresSettings, SLOT(updateAvailable()));
-    connect(dialog, SIGNAL(settingsChanged(const QString&)), mTool,
+    connect(dialog, SIGNAL(settingsChanged(const QString&)), mTool->manager(),
             SLOT(loadStructDefFiles()));
     connect(dialog, SIGNAL(settingsChanged(const QString&)), mTool,
             SLOT(setSelectedStructuresInView()));
