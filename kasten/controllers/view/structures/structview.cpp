@@ -123,7 +123,7 @@ void StructView::openSettingsDlg(int page)
             QString("configure"));
     KPageWidgetItem* structs = dialog->addPage(loadedStructuresSettings, i18n("Structures"),
             "configure");
-    dialog->addPage(structureSettings, i18n("Structures management"),
+    KPageWidgetItem* management = dialog->addPage(structureSettings, i18n("Structures management"),
             "preferences-plugin");
     //User edited the configuration - update your local copies of the
     //configuration data
@@ -141,6 +141,8 @@ void StructView::openSettingsDlg(int page)
         dialog->setCurrentPage(displ);
     else if (page == 1)
         dialog->setCurrentPage(structs);
+    else if (page == 2)
+        dialog->setCurrentPage(management);
 
     dialog->show();
 }
