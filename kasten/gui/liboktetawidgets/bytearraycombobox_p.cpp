@@ -77,14 +77,16 @@ void ByteArrayComboBoxPrivate::init()
     QObject::connect( formatComboBoxListView, SIGNAL(pressed( const QModelIndex& )),
              mValueComboBox, SLOT(setFocus()) );
     mValidator = new ByteArrayValidator( mValueComboBox );
+    const ByteArrayValidator::Coding coding =
+        static_cast<ByteArrayValidator::Coding>( mFormatComboBox->currentIndex() );
+    mValidator->setCodec( coding );
+
     mValueComboBox->setValidator( mValidator );
     q->connect( mValueComboBox, SIGNAL(activated( int )), SLOT(onValueActivated( int )) );
 
     baseLayout->addWidget( mFormatComboBox );
     baseLayout->addWidget( mValueComboBox, 1 );
     q->setTabOrder( mFormatComboBox, mValueComboBox );
-
-    onFormatChanged( mFormatComboBox->currentIndex() );
 }
 
 void ByteArrayComboBoxPrivate::setByteArray( const QByteArray& byteArray )
