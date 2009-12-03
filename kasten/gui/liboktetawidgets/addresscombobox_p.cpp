@@ -77,14 +77,15 @@ void AddressComboBoxPrivate::init()
     QObject::connect( formatComboBoxListView, SIGNAL(pressed( const QModelIndex& )),
              mValueComboBox, SLOT(setFocus()) );
     mValidator = new AddressValidator( mValueComboBox, AddressValidator::HexadecimalCoding );
+    const AddressValidator::Coding coding =
+        static_cast<AddressValidator::Coding>( mFormatComboBox->currentIndex() );
+    mValidator->setCodec( coding );
     mValueComboBox->setValidator( mValidator );
     q->connect( mValueComboBox, SIGNAL(activated( int )), SLOT(onValueActivated( int )) );
 
     baseLayout->addWidget( mFormatComboBox );
     baseLayout->addWidget( mValueComboBox );
     q->setTabOrder( mFormatComboBox, mValueComboBox );
-
-    onFormatChanged( mFormatComboBox->currentIndex() );
 }
 
 
