@@ -94,18 +94,23 @@ void ByteArrayComboBoxPrivate::setByteArray( const QByteArray& byteArray )
 
 void ByteArrayComboBoxPrivate::setCharCodec( const QString& charCodecName )
 {
-    // update the char string
-    const QString currentValueText = mValueComboBox->currentText();
-    const QByteArray currentByteArray = mValidator->toByteArray( currentValueText );
+    const bool isChar8Visible = ( mFormatComboBox->currentIndex() == ByteArrayValidator::CharCoding );
+
+    // update the char string if shown
+    QByteArray currentByteArray;
+    if( isChar8Visible )
+    {
+        const QString currentChar8String = mValueComboBox->currentText();
+        currentByteArray = mValidator->toByteArray( currentChar8String );
+    }
 
     mValidator->setCharCodec( charCodecName );
 
-    const QString dataString = mValidator->toString( currentByteArray );
-
-    const bool isCharVisible = ( mFormatComboBox->currentIndex() == ByteArrayValidator::CharCoding );
-
-    if( isCharVisible )
-        mValueComboBox->setEditText( dataString );
+    if( isChar8Visible )
+    {
+        const QString char8String = mValidator->toString( currentByteArray );
+        mValueComboBox->setEditText( char8String );
+    }
 }
 
 void ByteArrayComboBoxPrivate::rememberCurrentByteArray()
