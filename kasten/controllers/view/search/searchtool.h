@@ -78,6 +78,8 @@ class SearchTool : public AbstractTool
 
   Q_SIGNALS:
     void isApplyableChanged( bool isApplyable );  // candidate for AbstractTool API
+    void charCodecChanged( const QString& codecName );
+
     void dataNotFound();
 
   protected:

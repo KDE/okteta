@@ -78,6 +78,8 @@ void SearchTool::setTargetModel( AbstractModel* model )
 
     if( mByteArrayView && mByteArrayModel )
     {
+        connect( mByteArrayView,  SIGNAL(charCodecChanged( const QString& )),
+                 SIGNAL(charCodecChanged( const QString& )) );
         // TODO: update isApplyable on cursor movement and size changes
     }
 
