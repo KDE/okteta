@@ -50,6 +50,10 @@ KSearchDialog::KSearchDialog( SearchTool* tool, QWidget* parent )
 
     enableButtonOk( false );
     setModal( false );
+
+    setCharCodec( mTool->charCodingName() );
+    connect( mTool,  SIGNAL(charCodecChanged( const QString& )),
+             SLOT(setCharCodec( const QString& )) );
 }
 
 
@@ -75,7 +79,6 @@ void KSearchDialog::showEvent( QShowEvent* showEvent )
     KAbstractFindDialog::showEvent( showEvent );
 
     setInSelection( mTool->hasSelectedData() );
-    setCharCodec( mTool->charCodingName() );
 }
 
 KSearchDialog::~KSearchDialog() {}
