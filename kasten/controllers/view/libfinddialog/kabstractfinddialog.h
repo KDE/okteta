@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,6 @@
 
 #ifndef KABSTRACTFINDDIALOG_H
 #define KABSTRACTFINDDIALOG_H
-
 
 // lib
 #include "kfinddirection.h"
@@ -54,7 +53,6 @@ class KAbstractFindDialog : public KDialog
   public: // set
     void setDirection( KFindDirection Direction );
     void setInSelection( bool InSelection );
-    void setCharCodec( const QString &codecName );
 
   public: // get 
     QByteArray data() const;
@@ -62,6 +60,9 @@ class KAbstractFindDialog : public KDialog
     bool inSelection() const;
     bool ignoreCase() const;
     KFindDirection direction() const;
+
+  public Q_SLOTS:
+    void setCharCodec( const QString& codecName );
 
   protected: // QWidget API
     virtual void showEvent( QShowEvent *e );
