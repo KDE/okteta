@@ -66,7 +66,7 @@ void ByteArrayComboBoxPrivate::init()
     mValueComboBox = new KComboBox( q );
     mValueComboBox->setEditable( true );
     mValueComboBox->setMaxCount( 10 );
-    mValueComboBox->setInsertPolicy( KComboBox::InsertAtTop );
+    mValueComboBox->setInsertPolicy( QComboBox::NoInsert );
     mValueComboBox->setDuplicatesEnabled( false );
     q->setFocusProxy( mValueComboBox );
     q->connect( mValueComboBox->lineEdit(), SIGNAL(textEdited( const QString& )), SLOT(onValueEdited( const QString& )) );
