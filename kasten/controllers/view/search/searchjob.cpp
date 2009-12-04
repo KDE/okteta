@@ -36,12 +36,13 @@ static const int MaxEventProcessTimeInMS = 100;
 
 
 SearchJob::SearchJob( const Okteta::AbstractByteArrayModel* model,
-                      const QByteArray& searchData, Okteta::Address startIndex, bool findForward, bool ignoreCase, const QString& charCodecName )
+                      const QByteArray& searchData, Okteta::Address startIndex,
+                      bool findForward, Qt::CaseSensitivity caseSensitivity, const QString& charCodecName )
   : mByteArrayModel( model ),
     mSearchData( searchData ),
     mStartIndex( startIndex),
     mFindForward( findForward ),
-    mIgnoreCase( ignoreCase ),
+    mCaseSensitivity( caseSensitivity ),
     mCharCodec( Okteta::CharCodec::createCodec(charCodecName) )
 {
 }
@@ -53,10 +54,10 @@ Okteta::Address SearchJob::exec()
     connect( mByteArrayModel, SIGNAL(searchedBytes(Okteta::Size)), SLOT(onBytesSearched()) );
 
     const Okteta::Address result = mFindForward ?
-        ( mIgnoreCase ?
+        ( mCaseSensitivity == Qt::CaseInsensitive ?
             mByteArrayModel->indexOfIgnoreCase( mCharCodec, mSearchData, mStartIndex ) :
             mByteArrayModel->indexOf( mSearchData, mStartIndex ) ) :
-        ( mIgnoreCase ?
+        ( mCaseSensitivity == Qt::CaseInsensitive ?
             mByteArrayModel->lastIndexOfIgnoreCase( mCharCodec, mSearchData, mStartIndex-mSearchData.size()+1 ) :
             mByteArrayModel->lastIndexOf( mSearchData, mStartIndex-mSearchData.size()+1 ) );
 

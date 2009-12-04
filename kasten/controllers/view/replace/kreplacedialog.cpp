@@ -109,7 +109,7 @@ void KReplaceDialog::slotButtonClicked( int button )
 
         mTool->setSearchData( data() );
         mTool->setReplaceData( replaceData() );
-        mTool->setIgnoreCase( ignoreCase() );
+        mTool->setCaseSensitivity( caseSensitivity() );
         mTool->setDoPrompt( prompt() );
 
         mTool->replace( direction(), fromCursor(), inSelection() );

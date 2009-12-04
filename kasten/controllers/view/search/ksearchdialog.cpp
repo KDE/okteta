@@ -68,7 +68,7 @@ void KSearchDialog::slotButtonClicked( int button )
         rememberCurrentSettings();
 
         mTool->setSearchData( data() );
-        mTool->setIgnoreCase( ignoreCase() );
+        mTool->setCaseSensitivity( caseSensitivity() );
 
         mTool->search( direction(), fromCursor(), inSelection() );
     }

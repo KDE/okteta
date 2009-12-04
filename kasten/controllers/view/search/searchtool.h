@@ -60,7 +60,7 @@ class SearchTool : public AbstractTool
 
   public: // status
     QByteArray searchData() const;
-//     bool ignoreCase() const;
+//     Qt::CaseSensitivity caseSensitivity() const;
     bool hasSelectedData() const;
     QString charCodingName() const;
 
@@ -74,7 +74,7 @@ class SearchTool : public AbstractTool
 
   public Q_SLOTS: // settings
     void setSearchData( const QByteArray& searchData );
-    void setIgnoreCase( int ignoreCase );
+    void setCaseSensitivity( Qt::CaseSensitivity caseSensitivity );
 
   Q_SIGNALS:
     void isApplyableChanged( bool isApplyable );  // candidate for AbstractTool API
@@ -87,10 +87,10 @@ class SearchTool : public AbstractTool
 
   protected: // settings
     QByteArray mSearchData;
-    bool mIgnoreCase;
+    Qt::CaseSensitivity mCaseSensitivity;
 
   protected: // status
-    bool mPreviousFound;
+    bool mPreviousFound :1;
     Okteta::Address mSearchFirstIndex;
     Okteta::Address mSearchLastIndex;
 
@@ -104,7 +104,7 @@ class SearchTool : public AbstractTool
 
 
 inline QByteArray SearchTool::searchData() const { return mSearchData; }
-// inline bool SearchTool::ignoreCase()       const { return mIgnoreCase; }
+// inline Qt::CaseSensitivity SearchTool::caseSensitivity()       const { return mCaseSensitivity; }
 
 }
 

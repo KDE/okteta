@@ -62,7 +62,7 @@ class ReplaceTool : public AbstractTool
   public: // status
     QByteArray searchData() const;
     QByteArray replaceData() const;
-//     bool ignoreCase() const;
+//     Qt::CaseSensitivity caseSensitivity() const;
     bool hasSelectedData() const;
     QString charCodingName() const;
 
@@ -77,7 +77,7 @@ class ReplaceTool : public AbstractTool
   public Q_SLOTS: // settings
     void setSearchData( const QByteArray& searchData );
     void setReplaceData( const QByteArray& replaceData );
-    void setIgnoreCase( int ignoreCase );
+    void setCaseSensitivity( Qt::CaseSensitivity caseSensitivity );
     void setDoPrompt( int doPrompt );
 
   Q_SIGNALS:
@@ -93,7 +93,7 @@ class ReplaceTool : public AbstractTool
   protected: // settings
     QByteArray mSearchData;
     QByteArray mReplaceData;
-    bool mIgnoreCase :1;
+    Qt::CaseSensitivity mCaseSensitivity;
     bool mDoPrompt :1;
 
   protected: // status
@@ -113,7 +113,7 @@ class ReplaceTool : public AbstractTool
 
 inline QByteArray ReplaceTool::searchData() const { return mSearchData; }
 inline QByteArray ReplaceTool::replaceData() const { return mReplaceData; }
-// inline bool ReplaceTool::ignoreCase()       const { return mIgnoreCase; }
+// inline Qt::CaseSensitivity ReplaceTool::caseSensitivity() const { return mCaseSensitivity; }
 
 }
 

@@ -42,7 +42,8 @@ namespace Kasten
 {
 
 ReplaceTool::ReplaceTool()
-  : mUserQueryAgent( 0 ),
+  : mCaseSensitivity( Qt::CaseSensitive ),
+    mUserQueryAgent( 0 ),
     mByteArrayView( 0 ),
     mByteArrayModel( 0 )
 {
@@ -116,11 +117,11 @@ void ReplaceTool::setReplaceData( const QByteArray& replaceData )
 //         emit isApplyableChanged( newIsApplyable );
 }
 
-void ReplaceTool::setIgnoreCase( int ignoreCase )
+void ReplaceTool::setCaseSensitivity( Qt::CaseSensitivity caseSensitivity )
 {
 //     const bool oldIsApplyable = isApplyable();
 
-    mIgnoreCase = ignoreCase;
+    mCaseSensitivity = caseSensitivity;
 
 //     const bool newIsApplyable = isApplyable();
 //     if( oldIsApplyable != newIsApplyable )
@@ -178,7 +179,7 @@ void ReplaceTool::doReplace( KFindDirection direction, Okteta::Address startInde
         // TODO: support ignorecase
         const bool isForward = ( direction == FindForward );
         SearchJob* searchJob =
-            new SearchJob( mByteArrayModel, mSearchData, startIndex, isForward, mIgnoreCase, mByteArrayView->charCodingName() );
+            new SearchJob( mByteArrayModel, mSearchData, startIndex, isForward, mCaseSensitivity, mByteArrayView->charCodingName() );
         const Okteta::Address pos = searchJob->exec();
 
         if( pos != -1 )

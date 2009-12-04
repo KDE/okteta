@@ -41,7 +41,7 @@ namespace Kasten
 {
 
 SearchTool::SearchTool()
-  : mIgnoreCase( true ),
+  : mCaseSensitivity( Qt::CaseSensitive ),
     mUserQueryAgent( 0 ),
     mByteArrayView( 0 ),
     mByteArrayModel( 0 )
@@ -105,11 +105,11 @@ void SearchTool::setSearchData( const QByteArray& searchData )
 //         emit isApplyableChanged( newIsApplyable );
 }
 
-void SearchTool::setIgnoreCase( int ignoreCase )
+void SearchTool::setCaseSensitivity( Qt::CaseSensitivity caseSensitivity )
 {
 //     const bool oldIsApplyable = isApplyable();
 
-    mIgnoreCase = ignoreCase;
+    mCaseSensitivity = caseSensitivity;
 
 //     const bool newIsApplyable = isApplyable();
 //     if( oldIsApplyable != newIsApplyable )
@@ -160,7 +160,7 @@ void SearchTool::doSearch( KFindDirection direction, Okteta::Address startIndex 
 
         const bool isForward = ( direction == FindForward );
         SearchJob* searchJob =
-            new SearchJob( mByteArrayModel, mSearchData, startIndex, isForward, mIgnoreCase, mByteArrayView->charCodingName() );
+            new SearchJob( mByteArrayModel, mSearchData, startIndex, isForward, mCaseSensitivity, mByteArrayView->charCodingName() );
         const Okteta::Address pos = searchJob->exec();
 
         QApplication::restoreOverrideCursor();

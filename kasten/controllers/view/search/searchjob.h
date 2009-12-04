@@ -44,7 +44,8 @@ class SearchJob : public QObject // not yet: KJob
 
   public:
     SearchJob( const Okteta::AbstractByteArrayModel* model,
-               const QByteArray& searchData, Okteta::Address startIndex, bool findForward, bool ignoreCase, const QString& charCodecName );
+               const QByteArray& searchData, Okteta::Address startIndex,
+               bool findForward, Qt::CaseSensitivity caseSensitivity, const QString& charCodecName );
     virtual ~SearchJob();
 
   public:
@@ -63,7 +64,7 @@ class SearchJob : public QObject // not yet: KJob
     QByteArray mSearchData;
     Okteta::Address mStartIndex;
     bool mFindForward;
-    bool mIgnoreCase;
+    Qt::CaseSensitivity mCaseSensitivity;
     const Okteta::CharCodec* mCharCodec;
 };
 

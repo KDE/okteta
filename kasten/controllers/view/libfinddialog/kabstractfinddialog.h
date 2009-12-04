@@ -58,7 +58,7 @@ class KAbstractFindDialog : public KDialog
     QByteArray data() const;
     bool fromCursor() const;
     bool inSelection() const;
-    bool ignoreCase() const;
+    Qt::CaseSensitivity caseSensitivity() const;
     KFindDirection direction() const;
 
   public Q_SLOTS:
