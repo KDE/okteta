@@ -164,7 +164,7 @@ Address AbstractByteArrayModel::indexOfCaseInsensitive( const CharCodec* charCod
     Address result = -1;
 
     const QByteArray lowerPattern = toLower( _pattern, charCodec );
-    const char* const pattern = lowerPattern.constData();
+    const Byte* const pattern = reinterpret_cast<const Byte*>( lowerPattern.constData() );
     const int patternLength = lowerPattern.size();
     const Address lastOffset = size() - 1;
     const Address lastFrom = qMin(lastOffset, toOffset) - patternLength + 1;
@@ -209,7 +209,7 @@ Address AbstractByteArrayModel::lastIndexOfCaseInsensitive( const CharCodec* cha
     Address result = -1;
 
     const QByteArray lowerPattern = toLower( _pattern, charCodec );
-    const char* const pattern = lowerPattern.constData();
+    const Byte* const pattern = reinterpret_cast<const Byte*>( lowerPattern.constData() );
     const int patternLength = lowerPattern.size();
     const Address lastFrom = size() - patternLength;
 
