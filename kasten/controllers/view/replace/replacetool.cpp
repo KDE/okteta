@@ -176,10 +176,13 @@ void ReplaceTool::doReplace( KFindDirection direction, Okteta::Address startInde
 
     while( true )
     {
-        // TODO: support ignorecase
         const bool isForward = ( direction == FindForward );
+        Okteta::Address endIndex = mDoWrap ?
+            ( isForward ? mByteArrayModel->size()-1 : 0 ) :
+            ( isForward ? mReplaceLastIndex : mReplaceFirstIndex );
+
         SearchJob* searchJob =
-            new SearchJob( mByteArrayModel, mSearchData, startIndex, isForward, mCaseSensitivity, mByteArrayView->charCodingName() );
+            new SearchJob( mByteArrayModel, mSearchData, startIndex, endIndex, mCaseSensitivity, mByteArrayView->charCodingName() );
         const Okteta::Address pos = searchJob->exec();
 
         if( pos != -1 )

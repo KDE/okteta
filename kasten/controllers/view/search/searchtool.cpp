@@ -120,15 +120,11 @@ void SearchTool::search( KFindDirection direction, bool fromCursor, bool inSelec
 {
     mPreviousFound = false;
 
-    Okteta::Address startIndex;
-
     if( inSelection )
     {
         const Okteta::AddressRange selection = mByteArrayView->selection();
         mSearchFirstIndex = selection.start();
         mSearchLastIndex =  selection.end();
-        startIndex = selection.start();
-        direction = FindForward; // TODO: why only forward?
     }
     else
     {
@@ -143,24 +139,27 @@ void SearchTool::search( KFindDirection direction, bool fromCursor, bool inSelec
             mSearchFirstIndex = 0;
             mSearchLastIndex =  mByteArrayModel->size() - 1;
         }
-        // TODO: should start at last 
-        startIndex = (direction==FindForward) ? mSearchFirstIndex : mSearchLastIndex/*-mSearchData.size()*/;
     }
 
-    doSearch( direction, startIndex );
+    doSearch( direction );
 }
 
-void SearchTool::doSearch( KFindDirection direction, Okteta::Address startIndex )
+void SearchTool::doSearch( KFindDirection direction )
 {
+    // TODO: should start at last
+    Okteta::Address startIndex = (direction==FindForward) ? mSearchFirstIndex : mSearchLastIndex/*-mSearchData.size()*/;
     bool wrapEnabled = (direction==FindForward) ? (mSearchLastIndex<startIndex) : (startIndex<mSearchFirstIndex);
 
     while( true )
     {
         QApplication::setOverrideCursor( Qt::WaitCursor );
 
-        const bool isForward = ( direction == FindForward );
+        Okteta::Address endIndex = wrapEnabled ?
+            ( (direction==FindForward) ? mByteArrayModel->size()-1 : 0 ) :
+            ( (direction==FindForward) ? mSearchLastIndex : mSearchFirstIndex );
+
         SearchJob* searchJob =
-            new SearchJob( mByteArrayModel, mSearchData, startIndex, isForward, mCaseSensitivity, mByteArrayView->charCodingName() );
+            new SearchJob( mByteArrayModel, mSearchData, startIndex, endIndex, mCaseSensitivity, mByteArrayView->charCodingName() );
         const Okteta::Address pos = searchJob->exec();
 
         QApplication::restoreOverrideCursor();

@@ -36,12 +36,13 @@ static const int MaxEventProcessTimeInMS = 100;
 
 
 SearchJob::SearchJob( const Okteta::AbstractByteArrayModel* model,
-                      const QByteArray& searchData, Okteta::Address startIndex,
-                      bool findForward, Qt::CaseSensitivity caseSensitivity, const QString& charCodecName )
+                      const QByteArray& searchData,
+                      Okteta::Address startIndex, Okteta::Address endIndex,
+                      Qt::CaseSensitivity caseSensitivity, const QString& charCodecName )
   : mByteArrayModel( model ),
     mSearchData( searchData ),
     mStartIndex( startIndex),
-    mFindForward( findForward ),
+    mEndIndex( endIndex ),
     mCaseSensitivity( caseSensitivity ),
     mCharCodec( Okteta::CharCodec::createCodec(charCodecName) )
 {
@@ -53,13 +54,22 @@ Okteta::Address SearchJob::exec()
     //TODO: what kind of signal could a filter send?
     connect( mByteArrayModel, SIGNAL(searchedBytes(Okteta::Size)), SLOT(onBytesSearched()) );
 
-    const Okteta::Address result = mFindForward ?
-        ( mCaseSensitivity == Qt::CaseInsensitive ?
-            mByteArrayModel->indexOfCaseInsensitive( mCharCodec, mSearchData, mStartIndex ) :
-            mByteArrayModel->indexOf( mSearchData, mStartIndex ) ) :
-        ( mCaseSensitivity == Qt::CaseInsensitive ?
-            mByteArrayModel->lastIndexOfCaseInsensitive( mCharCodec, mSearchData, mStartIndex-mSearchData.size()+1 ) :
-            mByteArrayModel->lastIndexOf( mSearchData, mStartIndex-mSearchData.size()+1 ) );
+    Okteta::Address result;
+
+    const bool searchForward = (mStartIndex < mEndIndex );
+    if( searchForward )
+    {
+        result = ( mCaseSensitivity == Qt::CaseSensitive )?
+                mByteArrayModel->indexOf( mSearchData, mStartIndex, mEndIndex ) :
+                mByteArrayModel->indexOfCaseInsensitive( mCharCodec, mSearchData, mStartIndex, mEndIndex );
+    }
+    else
+    {
+        const Okteta::Address lastFromIndex = mStartIndex - mSearchData.size() + 1;
+        result = ( mCaseSensitivity == Qt::CaseSensitive ) ?
+            mByteArrayModel->lastIndexOf( mSearchData, lastFromIndex, mEndIndex ) :
+            mByteArrayModel->lastIndexOfCaseInsensitive( mCharCodec, mSearchData, lastFromIndex, mEndIndex );
+    }
 
     deleteLater(); // TODO: could be reused on next search
 

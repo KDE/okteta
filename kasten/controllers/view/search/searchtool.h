@@ -83,7 +83,7 @@ class SearchTool : public AbstractTool
     void dataNotFound();
 
   protected:
-    void doSearch( KFindDirection direction, Okteta::Address startIndex );
+    void doSearch( KFindDirection direction );
 
   protected: // settings
     QByteArray mSearchData;
