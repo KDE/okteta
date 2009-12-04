@@ -229,7 +229,7 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
       */
     virtual Address indexOf( const Byte* pattern, int patternLength, Address fromOffset = 0, Address toOffset = -1 ) const;
     Address indexOf( const QByteArray& pattern, Address fromOffset = 0, Address toOffset = -1 ) const;
-    Address indexOfIgnoreCase( const CharCodec* charCodec, const QByteArray& pattern, Address fromOffset = 0, Address toOffset = -1 ) const;
+    Address indexOfCaseInsensitive( const CharCodec* charCodec, const QByteArray& pattern, Address fromOffset = 0, Address toOffset = -1 ) const;
 
     /** searches for a given data string
       * The section limits the data within which the key has to be found
@@ -248,7 +248,7 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
       */
     virtual Address lastIndexOf( const Byte* pattern, int patternLength, Address fromOffset = -1, Address toOffset = 0 ) const;
     Address lastIndexOf( const QByteArray& pattern, Address fromOffset = -1, Address toOffset = 0 ) const;
-    Address lastIndexOfIgnoreCase( const CharCodec* charCodec, const QByteArray& pattern, Address fromOffset = -1, Address toOffset = 0 ) const;
+    Address lastIndexOfCaseInsensitive( const CharCodec* charCodec, const QByteArray& pattern, Address fromOffset = -1, Address toOffset = 0 ) const;
 
 /*     virtual int find( const QString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */
 

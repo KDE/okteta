@@ -55,10 +55,10 @@ Okteta::Address SearchJob::exec()
 
     const Okteta::Address result = mFindForward ?
         ( mCaseSensitivity == Qt::CaseInsensitive ?
-            mByteArrayModel->indexOfIgnoreCase( mCharCodec, mSearchData, mStartIndex ) :
+            mByteArrayModel->indexOfCaseInsensitive( mCharCodec, mSearchData, mStartIndex ) :
             mByteArrayModel->indexOf( mSearchData, mStartIndex ) ) :
         ( mCaseSensitivity == Qt::CaseInsensitive ?
-            mByteArrayModel->lastIndexOfIgnoreCase( mCharCodec, mSearchData, mStartIndex-mSearchData.size()+1 ) :
+            mByteArrayModel->lastIndexOfCaseInsensitive( mCharCodec, mSearchData, mStartIndex-mSearchData.size()+1 ) :
             mByteArrayModel->lastIndexOf( mSearchData, mStartIndex-mSearchData.size()+1 ) );
 
     deleteLater(); // TODO: could be reused on next search

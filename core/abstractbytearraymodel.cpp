@@ -159,7 +159,7 @@ static QByteArray toLower( const QByteArray& _pattern, const CharCodec* charCode
     return result;
 }
 
-Address AbstractByteArrayModel::indexOfIgnoreCase( const CharCodec* charCodec, const QByteArray& _pattern, Address fromOffset, Address toOffset ) const
+Address AbstractByteArrayModel::indexOfCaseInsensitive( const CharCodec* charCodec, const QByteArray& _pattern, Address fromOffset, Address toOffset ) const
 {
     Address result = -1;
 
@@ -204,7 +204,7 @@ Address AbstractByteArrayModel::indexOfIgnoreCase( const CharCodec* charCodec, c
     return result;
 }
 
-Address AbstractByteArrayModel::lastIndexOfIgnoreCase( const CharCodec* charCodec, const QByteArray& _pattern, Address fromOffset, Address toOffset ) const
+Address AbstractByteArrayModel::lastIndexOfCaseInsensitive( const CharCodec* charCodec, const QByteArray& _pattern, Address fromOffset, Address toOffset ) const
 {
     Address result = -1;
 
