@@ -70,11 +70,12 @@ Size AbstractByteArrayModel::copyTo( Byte* dest, const AddressRange& _copyRange 
 }
 
 
-Address AbstractByteArrayModel::indexOf( const Byte* pattern, int patternLength, Address fromOffset ) const
+Address AbstractByteArrayModel::indexOf( const Byte* pattern, int patternLength, Address fromOffset, Address toOffset ) const
 {
     Address result = -1;
 
-    const Address lastFrom = size() - patternLength;
+    const Address lastOffset = size() - 1;
+    const Address lastFrom = qMin(lastOffset, toOffset) - patternLength + 1;
     Size nextSignalByteCount = fromOffset + SearchedByteCountSignalLimit;
 
     for( Address i=fromOffset; i<=lastFrom ; ++i )
@@ -100,7 +101,7 @@ Address AbstractByteArrayModel::indexOf( const Byte* pattern, int patternLength,
     return result;
 }
 
-Address AbstractByteArrayModel::lastIndexOf( const Byte* pattern, int patternLength, Address fromOffset ) const
+Address AbstractByteArrayModel::lastIndexOf( const Byte* pattern, int patternLength, Address fromOffset, Address toOffset ) const
 {
     Address result = -1;
 
@@ -111,9 +112,12 @@ Address AbstractByteArrayModel::lastIndexOf( const Byte* pattern, int patternLen
     else if( fromOffset > lastFrom )
         fromOffset = lastFrom;
 
+    if( toOffset < 0 )
+        toOffset = 0;
+
     Size nextSignalByteCount = fromOffset - SearchedByteCountSignalLimit;
 
-    for( Address i=fromOffset; i>=0 ; --i )
+    for( Address i=fromOffset; i>=toOffset ; --i )
     {
         int c = 0;
         for( ; c<patternLength; ++c )
@@ -155,14 +159,15 @@ static QByteArray toLower( const QByteArray& _pattern, const CharCodec* charCode
     return result;
 }
 
-Address AbstractByteArrayModel::indexOfIgnoreCase( const CharCodec* charCodec, const QByteArray& _pattern, Address fromOffset ) const
+Address AbstractByteArrayModel::indexOfIgnoreCase( const CharCodec* charCodec, const QByteArray& _pattern, Address fromOffset, Address toOffset ) const
 {
     Address result = -1;
 
     const QByteArray lowerPattern = toLower( _pattern, charCodec );
     const char* const pattern = lowerPattern.constData();
     const int patternLength = lowerPattern.size();
-    const Address lastFrom = size() - patternLength;
+    const Address lastOffset = size() - 1;
+    const Address lastFrom = qMin(lastOffset, toOffset) - patternLength + 1;
 
     Address nextSignalByteCount = fromOffset + SearchedByteCountSignalLimit;
 
@@ -199,7 +204,7 @@ Address AbstractByteArrayModel::indexOfIgnoreCase( const CharCodec* charCodec, c
     return result;
 }
 
-Address AbstractByteArrayModel::lastIndexOfIgnoreCase( const CharCodec* charCodec, const QByteArray& _pattern, Address fromOffset ) const
+Address AbstractByteArrayModel::lastIndexOfIgnoreCase( const CharCodec* charCodec, const QByteArray& _pattern, Address fromOffset, Address toOffset ) const
 {
     Address result = -1;
 
@@ -213,9 +218,12 @@ Address AbstractByteArrayModel::lastIndexOfIgnoreCase( const CharCodec* charCode
     else if( fromOffset > lastFrom )
         fromOffset = lastFrom;
 
+    if( toOffset < 0 )
+        toOffset = 0;
+
     Address nextSignalByteCount = fromOffset - SearchedByteCountSignalLimit;
 
-    for( Address i=fromOffset; i>=0 ; --i )
+    for( Address i=fromOffset; i>=toOffset ; --i )
     {
         int c = 0;
         for( ; c<patternLength; ++c )

@@ -227,9 +227,9 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
       * @param fromOffset the position to start the search
       * @return index of the first  or -1
       */
-    virtual Address indexOf( const Byte* pattern, int patternLength, Address fromOffset = 0 ) const;
-    Address indexOf( const QByteArray& pattern, Address fromOffset = 0 ) const;
-    Address indexOfIgnoreCase( const CharCodec* charCodec, const QByteArray& pattern, Address fromOffset = 0 ) const;
+    virtual Address indexOf( const Byte* pattern, int patternLength, Address fromOffset = 0, Address toOffset = -1 ) const;
+    Address indexOf( const QByteArray& pattern, Address fromOffset = 0, Address toOffset = -1 ) const;
+    Address indexOfIgnoreCase( const CharCodec* charCodec, const QByteArray& pattern, Address fromOffset = 0, Address toOffset = -1 ) const;
 
     /** searches for a given data string
       * The section limits the data within which the key has to be found
@@ -246,9 +246,9 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
       * @param fromOffset the position to start the search. If -1 the search starts at the end.
       * @return index of the first  or -1
       */
-    virtual Address lastIndexOf( const Byte* pattern, int patternLength, Address fromOffset = -1 ) const;
-    Address lastIndexOf( const QByteArray& pattern, Address fromOffset = -1 ) const;
-    Address lastIndexOfIgnoreCase( const CharCodec* charCodec, const QByteArray& pattern, Address fromOffset = -1 ) const;
+    virtual Address lastIndexOf( const Byte* pattern, int patternLength, Address fromOffset = -1, Address toOffset = 0 ) const;
+    Address lastIndexOf( const QByteArray& pattern, Address fromOffset = -1, Address toOffset = 0 ) const;
+    Address lastIndexOfIgnoreCase( const CharCodec* charCodec, const QByteArray& pattern, Address fromOffset = -1, Address toOffset = 0 ) const;
 
 /*     virtual int find( const QString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */
 
@@ -283,11 +283,11 @@ inline Size AbstractByteArrayModel::fill( const Byte fillChar, const AddressRang
 inline Size AbstractByteArrayModel::copyTo( Byte* dest, Address offset, Size copyLength ) const
 { return copyTo( dest, AddressRange::fromWidth(offset,copyLength) ); }
 
-inline Address AbstractByteArrayModel::indexOf( const QByteArray& pattern, Address fromOffset ) const
-{ return indexOf( reinterpret_cast<const Byte*>(pattern.constData()), pattern.size(), fromOffset ); }
+inline Address AbstractByteArrayModel::indexOf( const QByteArray& pattern, Address fromOffset, Address toOffset ) const
+{ return indexOf( reinterpret_cast<const Byte*>(pattern.constData()), pattern.size(), fromOffset, toOffset ); }
 
-inline Address AbstractByteArrayModel::lastIndexOf( const QByteArray& pattern, Address fromOffset ) const
-{ return lastIndexOf( reinterpret_cast<const Byte*>(pattern.constData()), pattern.size(), fromOffset ); }
+inline Address AbstractByteArrayModel::lastIndexOf( const QByteArray& pattern, Address fromOffset, Address toOffset ) const
+{ return lastIndexOf( reinterpret_cast<const Byte*>(pattern.constData()), pattern.size(), fromOffset, toOffset ); }
 
 }
 
