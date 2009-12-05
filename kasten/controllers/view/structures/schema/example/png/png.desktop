@@ -16,6 +16,7 @@ Name[pt]=Cabeçalho do ficheiro PNG
 Name[sv]=PNG-filhuvud
 Name[uk]=Заголовок файла PNG
 Name[x-test]=xxPNG file headerxx
+Name[zh_TW]=PNG 檔案標頭
 Comment=A test structure containing the PNG file header (file must be set to big-endian)
 Comment[da]=En teststruktur som indeholder PNG-fil-headeren (filen skal være sat til big-endian)
 Comment[en_GB]=A test structure containing the PNG file header (file must be set to big-endian)
@@ -28,6 +29,7 @@ Comment[pt]=Uma estrutura de testes que contém o cabeçalho de um ficheiro PNG 
 Comment[sv]=En teststruktur som innehåller PNG-filhuvudet (filen måste vara inställt till big endian)
 Comment[uk]=Тестова структура, що містить заголовок файла PNG (порядок байтів у файлі має бути зворотним)
 Comment[x-test]=xxA test structure containing the PNG file header (file must be set to big-endian)xx
+Comment[zh_TW]=包含 PNG 檔頭的測試結構（檔案必須設定為高位元優先）
 
 X-KDE-PluginInfo-Author=Alex Richardson
 X-KDE-PluginInfo-Email=alex.richardson@gmx.de

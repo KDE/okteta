@@ -16,6 +16,7 @@ Name[pt]=Teste simples
 Name[sv]=Enkel test
 Name[uk]=Простий тест
 Name[x-test]=xxSimple testxx
+Name[zh_TW]=簡單測試
 Comment=A few test structures
 Comment[da]=Nogle få teststrukturer
 Comment[en_GB]=A few test structures
@@ -28,6 +29,7 @@ Comment[pt]=Algumas estruturas de testes
 Comment[sv]=Några teststrukturer
 Comment[uk]=Декілька тестових структур
 Comment[x-test]=xxA few test structuresxx
+Comment[zh_TW]=一些測試結構
 
 X-KDE-PluginInfo-Author=Alex Richardson
 X-KDE-PluginInfo-Email=alex.richardson@gmx.de
