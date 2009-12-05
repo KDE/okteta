@@ -41,6 +41,8 @@ QWidget * StructViewItemDelegate::createEditor(QWidget * parent,
     if (!index.isValid())
         return new QWidget();
     DataInformation* data = static_cast<DataInformation*> (index.internalPointer());
+    if (!data)
+        return NULL;
     QWidget* ret = data->createEditWidget(parent);
     ret->setFocusPolicy(Qt::WheelFocus);
     return ret;
@@ -65,8 +67,20 @@ void StructViewItemDelegate::setEditorData(QWidget * editor,
     DataInformation* data = static_cast<DataInformation*> (index.internalPointer());
     data->setWidgetData(editor);
 }
-QString StructViewItemDelegate::displayText(const QVariant & value, const QLocale&) const
-{
-    return value.toString();
-}
 
+QSize StructViewItemDelegate::sizeHint(const QStyleOptionViewItem & option,
+        const QModelIndex & index) const
+{
+    Q_UNUSED(option)
+    if (!index.isValid()) {
+        kDebug() << "invalid index";
+        return QSize();
+    }
+    DataInformation* data = static_cast<DataInformation*> (index.internalPointer());
+    if (!data) {
+        kDebug() << "data == NULL";
+        return QSize();
+    }
+    QWidget* ret = data->createEditWidget(NULL);
+    return ret->sizeHint();
+}

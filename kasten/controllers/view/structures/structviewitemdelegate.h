@@ -35,8 +35,8 @@ public:
     virtual void setEditorData(QWidget * editor, const QModelIndex & index) const;
     virtual QWidget * createEditor(QWidget * parent,
             const QStyleOptionViewItem & option, const QModelIndex & index) const;
-    QString displayText(const QVariant & value, const QLocale & locale) const;
-
+    virtual QSize sizeHint(const QStyleOptionViewItem & option,
+            const QModelIndex & index) const;
 };
 
 #endif /* STRUCTVIEWITEMDELEGATE_H_ */
