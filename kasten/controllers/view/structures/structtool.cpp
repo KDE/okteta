@@ -118,7 +118,6 @@ void StructTool::onCursorPositionChange(Okteta::Address pos)
     if (mCursorIndex != pos)
     {
         mCursorIndex = pos;
-        kDebug("cursor pos changed -> updating data");
         updateData();
     }
 }
@@ -158,7 +157,6 @@ bool StructTool::setData(const QVariant& value, int role, DataInformation* item)
 
 void StructTool::updateData()
 {
-    //    kDebug() << "updateData()";
     int remaining;
     if (mByteArrayModel)
     {
