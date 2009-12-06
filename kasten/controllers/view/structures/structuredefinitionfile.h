@@ -76,6 +76,14 @@ public:
     {
         return mEnums;
     }
+    bool isLoaded()
+    {
+        return mLoaded;
+    }
+    bool isValid()
+    {
+        return mValid;
+    }
 private:
     AbstractArrayDataInformation* arrayFromXML(const QDomElement& node) const;
     PrimitiveDataInformation* primitiveFromXML(const QDomElement& node) const;
