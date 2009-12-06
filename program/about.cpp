@@ -28,11 +28,11 @@
 
 // Program
 static const char ProgramId[] =          "okteta";
-static const char ProgramVersion[] =     "0.3.90";
+static const char ProgramVersion[] =     "0.3.91";
 static const char ProgramHomepage[] =    "http://utils.kde.org/projects/okteta";
 // Author
 static const char FWHKEmailAddress[] =   "kossebau@kde.org";
-static const char AREmailAddress[] =   "alex.richardson@gmx.de";
+static const char AREmailAddress[] =     "alex.richardson@gmx.de";
 
 
 OktetaAboutData::OktetaAboutData()
