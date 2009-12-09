@@ -52,7 +52,7 @@ Utf8CharValidator::~Utf8CharValidator() {}
 
 
 Utf8Editor::Utf8Editor( QWidget* parent )
-  : QLineEdit( parent )
+  : KLineEdit( parent )
 {
     setValidator( new Utf8CharValidator(this) );
     setMaxLength( 1 );

@@ -25,11 +25,11 @@
 
 // lib
 #include "../types/float32.h"
-// Qt
-#include <QtGui/QLineEdit>
+// KDE
+#include <KLineEdit>
 
 
-class Float32Editor : public QLineEdit
+class Float32Editor : public KLineEdit
 {
   Q_OBJECT
   Q_PROPERTY( Float32 data READ data WRITE setData USER true )

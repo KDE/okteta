@@ -29,7 +29,7 @@
 
 
 Float32Editor::Float32Editor( QWidget* parent )
-  : QLineEdit( parent )
+  : KLineEdit( parent )
 {
     const float floatMax = std::numeric_limits<float>::max();
     const float floatMin = std::numeric_limits<float>::min();

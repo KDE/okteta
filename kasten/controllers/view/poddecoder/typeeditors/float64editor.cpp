@@ -27,7 +27,7 @@
 
 
 Float64Editor::Float64Editor( QWidget* parent )
-  : QLineEdit( parent )
+  : KLineEdit( parent )
 {
     KDoubleValidator* validator = new KDoubleValidator( this );
     validator->setNotation( QDoubleValidator::ScientificNotation );
