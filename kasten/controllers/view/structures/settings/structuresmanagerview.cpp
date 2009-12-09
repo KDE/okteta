@@ -2,6 +2,7 @@
  This file is part of the Okteta Kasten module, part of the KDE project.
 
  Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+ Copyright 2009 Alex Richardson <alex.richardson@gmx.de>
 
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -27,7 +28,7 @@
 // KDE
 #include <KFileDialog>
 #include <KStandardDirs>
-#include <KNS/Engine>
+// #include <KNS/Engine>
 #include <KIO/NetAccess>
 #include <KMessageBox>
 #include <KPluginSelector>
@@ -93,6 +94,7 @@ StructuresManagerView::StructuresManagerView(Kasten::StructuresManager* manager,
     mStructuresSelector->load();
 }
 
+#if 0
 void StructuresManagerView::onGetNewStructuresClicked()
 {
     KNS::Engine engine(this);
@@ -151,14 +153,7 @@ void StructuresManagerView::onExportStructureClicked()
         }
     }
 }
-void StructuresManagerView::onApplyChangesClicked()
-{
-    mStructuresSelector->save();
-    kDebug() << "saved";
-    emit
-    applyButtonClicked();
-    return;
-}
+
 void StructuresManagerView::onRemoveStructureClicked()
 {
     mStructuresSelector->save();
@@ -181,6 +176,16 @@ void StructuresManagerView::onRemoveStructureClicked()
                             "You do not have permission to delete that structure definition."),
                     i18n("Error"));
     }
+}
+#endif
+
+void StructuresManagerView::onApplyChangesClicked()
+{
+    mStructuresSelector->save();
+    kDebug() << "saved";
+    emit
+    applyButtonClicked();
+    return;
 }
 
 StructuresManagerView::~StructuresManagerView()

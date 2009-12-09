@@ -2,6 +2,7 @@
  This file is part of the Okteta Kasten module, part of the KDE project.
 
  Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+ Copyright 2009 Alex Richardson <alex.richardson@gmx.de>
 
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -45,25 +46,23 @@ public:
     virtual ~StructuresManagerView();
 
 protected Q_SLOTS:
-    void onGetNewStructuresClicked();
-    void onImportStructuresClicked();
-    void onExportStructureClicked();
-    void onRemoveStructureClicked();
+//     void onGetNewStructuresClicked();
+//     void onImportStructuresClicked();
+//     void onExportStructureClicked();
+//     void onRemoveStructureClicked();
     void onApplyChangesClicked();
 Q_SIGNALS:
     void applyButtonClicked();
 private:
     Kasten::StructuresManager* mManager;
 
-    KPushButton* mGetNewStructuresButton;
-    KPushButton* mImportStructuresButton;
-    KPushButton* mExportStructureButton;
-    KPushButton* mRemoveStructureButton;
+//     KPushButton* mGetNewStructuresButton;
+//     KPushButton* mImportStructuresButton;
+//     KPushButton* mExportStructureButton;
+//     KPushButton* mRemoveStructureButton;
     KPushButton* mApplyChangesButton;
 
     KPluginSelector* mStructuresSelector;
-
-    void updatePluginsList(Kasten::StructuresManager & manager);
 };
 
 #endif
