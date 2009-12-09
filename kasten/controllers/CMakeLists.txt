@@ -370,7 +370,7 @@ target_link_libraries( oktetakastencontrollers
   ${KDE4_KIO_LIBS}
   ${KDE4_KDEUI_LIBS}
   ${KDE4_KUTILS_LIBS}
-  ${KDE4_KNEWSTUFF2_LIBS}
+#   ${KDE4_KNEWSTUFF2_LIBS}
 )
 if( QCA2_FOUND )
   target_link_libraries( oktetakastencontrollers ${QCA2_LIBRARIES} )
