@@ -469,7 +469,7 @@ int ByteArrayFrameRenderer::fittingBytesPerLine() const
     // calculate the fitting bytes per line by groups
     int fittingBytesPerLine = noOfGroupedBytes * fittingGroupsPerLine;
 
-    // groups can be splitted and not only full groups are requested?
+    // groups can be split and not only full groups are requested?
     if( noOfGroupedBytes > 1 && mResizeStyle == FullSizeLayoutStyle )
     {
         const int leftDataWidth = maxDataWidth - fittingGroupsPerLine * charAndValueGroupWidth;
