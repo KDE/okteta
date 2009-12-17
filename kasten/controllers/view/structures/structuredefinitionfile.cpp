@@ -155,7 +155,7 @@ void StructureDefinitionFile::parse()
     if (!file.open(QIODevice::ReadOnly))
     {
         kWarning() << "could not open file " << mFileInfo.dir().absoluteFilePath(
-                mPluginInfo.name().endsWith(".osd") ? mPluginInfo.name()
+                mPluginInfo.name().endsWith(QLatin1String(".osd")) ? mPluginInfo.name()
                         : mPluginInfo.name() + ".osd");
         return;
     }
