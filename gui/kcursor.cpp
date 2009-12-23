@@ -23,6 +23,9 @@
 #include "kcursor.h"
 
 
+// Will remove this again very soon, Alex
+#warning This warning is just for testing LABELS in cmake/cdash
+
 namespace Okteta {
 
 KCursor::KCursor()

@@ -20,6 +20,7 @@ set( selectiontest_SRCS
 kde4_add_unit_test( selectiontest  TESTNAME libokteta-gui-selectiontest  ${selectiontest_SRCS} )
 target_link_libraries( selectiontest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
+set_tests_properties(libokteta-gui-selectiontest PROPERTIES LABELS OktetaLabel)
 
 ########### coordtest ###############
 

@@ -68,6 +68,8 @@ set( oktetagui_LIB_SRCS
   ${bytearrayrowview_SRCS}
 )
 
+set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/kcursor.cpp PROPERTIES LABELS OktetaLabel)
+
 set( oktetagui_LIB_HDRS
   ${libcolumnsview_HDRS}
   oktetagui_export.h
@@ -92,7 +94,10 @@ set( oktetagui_LIB_HDRS
 
 kde4_add_library( oktetagui  SHARED ${oktetagui_LIB_SRCS} )
 target_link_libraries( oktetagui  oktetacore ${KDE4_KDEUI_LIBS} )
-set_target_properties( oktetagui  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+set_target_properties( oktetagui  PROPERTIES VERSION ${GENERIC_LIB_VERSION} 
+                                             SOVERSION ${GENERIC_LIB_SOVERSION} 
+                                             LABELS OktetaLabel
+                     )
 
 install( TARGETS oktetagui  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
