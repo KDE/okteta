@@ -5,6 +5,7 @@ Type=Service
 ServiceTypes=KPluginInfo
 
 Name=Testing dynamic length arrays
+Name[ca]=Proves de matrius de longitud dinàmica
 Name[da]=Test af arrays med dynamisk længde
 Name[en_GB]=Testing dynamic length arrays
 Name[es]=Prueba de arrays de longitud dinámica
@@ -22,6 +23,7 @@ Name[x-test]=xxTesting dynamic length arraysxx
 Name[zh_CN]=测试动态长度数组
 Name[zh_TW]=測試動態長度陣列
 Comment=A test structure for dynamic arrays
+Comment[ca]=Un estructura de proves per a matrius dinàmiques
 Comment[da]=En teststruktur til dynamiske arrays
 Comment[en_GB]=A test structure for dynamic arrays
 Comment[es]=Una estructura de pruebas para arrays dinámicos
