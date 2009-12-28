@@ -25,8 +25,10 @@
 // C
 #include <stdio.h>
 
+#ifdef __GNUC__
 // Will remove this again very soon, Alex
 #warning This warning is just for testing LABELS in cmake/cdash
+#endif
 
 namespace Okteta {
 
