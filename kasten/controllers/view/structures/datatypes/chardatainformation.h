@@ -26,7 +26,7 @@
 
 class CharDataInformation: public PrimitiveDataInformation
 {
-PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTURUCTORS(Char,Primitive)
+PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Char,Primitive)
 public:
     virtual inline int displayBase() const
     {

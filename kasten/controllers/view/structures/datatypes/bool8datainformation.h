@@ -27,7 +27,7 @@
 
 class Bool8DataInformation: public UnsignedPrimitiveDataInformation
 {
-PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTURUCTORS(Bool8,UnsignedPrimitive)
+PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Bool8,UnsignedPrimitive)
 public:
     inline int getSize() const
     {

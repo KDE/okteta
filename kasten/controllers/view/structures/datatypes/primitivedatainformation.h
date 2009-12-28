@@ -86,7 +86,7 @@ public:
     static PrimitiveDataType typeStringToType(QString& typeStr);
 
 };
-#define PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTURUCTORS(type,superType) public: \
+#define PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(type,superType) public: \
         type##DataInformation(QString name, PrimitiveDataType dataType,\
                 int index = -1, DataInformation* parent = NULL) :\
                 superType##DataInformation(name, dataType, index, parent) {}\

@@ -27,7 +27,7 @@
 
 class UInt8DataInformation: public UnsignedPrimitiveDataInformation
 {
-PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTURUCTORS(UInt8,UnsignedPrimitive)
+PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(UInt8,UnsignedPrimitive)
 public:
     inline int getSize() const
     {

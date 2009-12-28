@@ -27,7 +27,7 @@
 
 class Int32DataInformation: public SignedPrimitiveDataInformation
 {
-PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTURUCTORS(Int32,SignedPrimitive)
+PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Int32,SignedPrimitive)
 
 public:
     inline int getSize() const

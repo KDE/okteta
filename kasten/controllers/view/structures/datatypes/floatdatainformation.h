@@ -26,7 +26,7 @@
 
 class FloatDataInformation: public PrimitiveDataInformation
 {
-PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTURUCTORS(Float,Primitive)
+PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Float,Primitive)
 public:
     inline int displayBase() const
     {

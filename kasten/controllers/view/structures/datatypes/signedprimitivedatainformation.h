@@ -26,7 +26,7 @@
 
 class SignedPrimitiveDataInformation: public PrimitiveDataInformation
 {
-PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTURUCTORS(SignedPrimitive,Primitive)
+PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(SignedPrimitive,Primitive)
 protected:
     QString correctSignedValue(QString& num, int base) const;
 public:

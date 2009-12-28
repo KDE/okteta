@@ -27,7 +27,7 @@
 
 class UInt16DataInformation: public UnsignedPrimitiveDataInformation
 {
-PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTURUCTORS(UInt16,UnsignedPrimitive)
+PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(UInt16,UnsignedPrimitive)
 public:
     inline int getSize() const
     {

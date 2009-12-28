@@ -26,7 +26,7 @@
 
 class DoubleDataInformation: public PrimitiveDataInformation
 {
-PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTURUCTORS(Double,Primitive)
+PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Double,Primitive)
 public:
     inline int displayBase() const
     {
