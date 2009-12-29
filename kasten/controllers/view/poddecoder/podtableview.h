@@ -69,6 +69,8 @@ class PODTableView : public QWidget, public AbstractDifferentSizeDialog
     QTreeView* mPODTableView;
     KComboBox* mByteOrderSelection;
     QCheckBox* mUnsignedAsHexCheck;
+
+    QWidget* mPODTableViewFocusChild;
 };
 
 

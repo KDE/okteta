@@ -43,7 +43,9 @@ namespace Kasten
 {
 
 PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
- : QWidget( parent ), mTool( tool )
+  : QWidget( parent ),
+    mTool( tool ),
+    mPODTableViewFocusChild( 0 )
 {
     QBoxLayout* baseLayout = new QVBoxLayout( this );
     baseLayout->setMargin( 0 );
@@ -58,7 +60,7 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
     mPODTableView->setUniformRowHeights( true );
     mPODTableView->setAllColumnsShowFocus( true );
     mPODTableView->setItemDelegate( new PODDelegate(mTool) );
-//     mPODTableView->setEditTriggers( QAbstractItemView::AllEditTriggers );
+    mPODTableView->setEditTriggers( QAbstractItemView::EditKeyPressed | QAbstractItemView::DoubleClicked );
     mPODTableView->setDragEnabled( true );
     mPODTableView->setSortingEnabled( false );
     mPODTableView->setModel( mPODTableModel );
@@ -66,8 +68,6 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
     QHeaderView* header = mPODTableView->header();
     header->setResizeMode( QHeaderView::ResizeToContents );
     header->setStretchLastSection( false );
-//     connect( mPODTableView, SIGNAL(doubleClicked( const QModelIndex& )),
-//              SLOT(onDoubleClicked( const QModelIndex& )) );
     connect( mPODTableView->selectionModel(),
              SIGNAL(currentRowChanged( const QModelIndex&, const QModelIndex& )),
              SLOT(onCurrentRowChanged( const QModelIndex&, const QModelIndex& )) );
@@ -174,7 +174,28 @@ bool PODTableView::eventFilter( QObject* object, QEvent* event )
             const Qt::FocusReason focusReason = focusEvent->reason();
             if( focusReason != Qt::ActiveWindowFocusReason
                 && focusReason != Qt::PopupFocusReason )
+            {
+                QWidget* tableViewFocusWidget = mPODTableView->focusWidget();
+                const bool subChildHasFocus = ( tableViewFocusWidget != mPODTableView );
+                if( subChildHasFocus )
+                {
+                    mPODTableViewFocusChild = tableViewFocusWidget;
+                    mPODTableViewFocusChild->installEventFilter( this );
+                }
+                else
+                    mTool->unmarkPOD();
+            }
+        }
+    }
+    else if( object == mPODTableViewFocusChild )
+    {
+        // TODO: it is only assumed the edit widget will be removed if it loses the focus
+        if( event->type() == QEvent::FocusOut )
+        {
+            if( ! mPODTableView->hasFocus() )
                 mTool->unmarkPOD();
+            mPODTableViewFocusChild->removeEventFilter( this );
+            mPODTableViewFocusChild = 0;
         }
     }
 
