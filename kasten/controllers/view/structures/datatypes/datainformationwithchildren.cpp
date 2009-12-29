@@ -20,6 +20,7 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "datainformationwithchildren.h"
+#include "staticlengtharraydatainformation.h"
 #include <KLineEdit>
 
 void DataInformationWithChildren::appendChild(DataInformation* child)
@@ -134,4 +135,34 @@ QVariant DataInformationWithChildren::dataFromWidget(const QWidget* w) const
 void DataInformationWithChildren::setWidgetData(QWidget* w) const
 {
     Q_UNUSED(w)
+}
+
+QVariant DataInformationWithChildren::data(int column, int role) const
+{
+    if (role == Qt::DisplayRole)
+    {
+        if (column == 0)
+        {
+            if (dynamic_cast<StaticLengthArrayDataInformation*> (parent()))
+            {
+                return QString("[%1]").arg(mIndex);
+            }
+            return getName();
+        }
+        else if (column == 1)
+            return getTypeName();
+        else if (column == 2)
+            return getValueString(); //empty QString
+        else
+            return QVariant();
+    }
+    else if (role == Qt::ToolTipRole)
+    {
+        return i18np("Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 child)",
+                "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)",
+                childCount(), getName(), getValueString(), getTypeName(),
+                getSizeString());
+    }
+    else
+        return QVariant();
 }

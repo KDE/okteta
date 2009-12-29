@@ -20,7 +20,7 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "uniondatainformation.h"
-#include "staticlengtharraydatainformation.h"
+
 
 QString UnionDataInformation::getTypeName() const
 {
@@ -96,34 +96,4 @@ UnionDataInformation::UnionDataInformation(QString name, int index,
 UnionDataInformation::UnionDataInformation(const UnionDataInformation& d) :
     DataInformationWithChildren(d)
 {
-}
-
-QVariant DataInformationWithChildren::data(int column, int role) const
-{
-    if (role == Qt::DisplayRole)
-    {
-        if (column == 0)
-        {
-            if (dynamic_cast<StaticLengthArrayDataInformation*> (parent()))
-            {
-                return QString("[%1]").arg(mIndex);
-            }
-            return getName();
-        }
-        else if (column == 1)
-            return getTypeName();
-        else if (column == 2)
-            return getValueString(); //empty QString
-        else
-            return QVariant();
-    }
-    else if (role == Qt::ToolTipRole)
-    {
-        return i18np("Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 child)",
-                "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)",
-                childCount(), getName(), getValueString(), getTypeName(),
-                getSizeString());
-    }
-    else
-        return QVariant();
 }
