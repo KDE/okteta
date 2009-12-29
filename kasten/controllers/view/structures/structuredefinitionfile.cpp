@@ -178,7 +178,6 @@ void StructureDefinitionFile::parse()
     QDomNodeList includeElems = docElem.elementsByTagName("include");
     parseIncludeNodes(includeElems);
 
-    QDomNode n = docElem.firstChild();
     QDomNodeList list = docElem.childNodes();
     for (uint i = 0; i < list.length(); ++i)
     {
