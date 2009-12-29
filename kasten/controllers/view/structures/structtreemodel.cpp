@@ -47,7 +47,22 @@ QVariant StructTreeModel::data(const QModelIndex& index, int role) const
         return QVariant();
 
     DataInformation *item = static_cast<DataInformation*> (index.internalPointer());
-    return item->data(index.column(), role);
+    const int column = index.column();
+    if (role == Qt::FontRole)
+    {
+        if (column == 0 && item->parent() == 0 )
+        {
+            // TODO: ideally here we would not take the default application font
+            // (as given by QFont()) but the default of the view
+            QFont font;
+            font.setBold( true );
+            return font;
+        }
+        else
+            return QVariant();
+    }
+    else
+        return item->data(column, role);
 }
 bool StructTreeModel::setData(const QModelIndex& index, const QVariant& value,
         int role)
