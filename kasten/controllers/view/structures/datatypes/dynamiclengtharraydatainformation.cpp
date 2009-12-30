@@ -25,10 +25,10 @@
 
 void DynamicLengthArrayDataInformation::resizeChildren()
 {
-    kDebug() << "old childcount: " << childCount();
+    //kDebug() << "old childcount: " << childCount();
     int l = qMax(0, calculateLength());
     unsigned int len = (unsigned) (l);
-    kDebug() << "len: " << len;
+    //kDebug() << "len: " << len;
     if (len > childCount())
     {
         for (uint i = childCount(); i < len; ++i)
@@ -46,6 +46,7 @@ void DynamicLengthArrayDataInformation::resizeChildren()
             delete mChildren.takeAt(i);
         }
     }
+    //kDebug() << "new childcount: " << childCount();
 }
 
 Okteta::Size DynamicLengthArrayDataInformation::readData(
@@ -54,7 +55,6 @@ Okteta::Size DynamicLengthArrayDataInformation::readData(
 {
     Okteta::Size readBytes = 0;
     resizeChildren();
-    kDebug() << "new childcount: " << childCount();
     for (unsigned int i = 0; i < childCount(); i++)
     {
         readBytes += childAt(i)->readData(input, byteOrder, address + readBytes,
