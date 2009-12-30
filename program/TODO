@@ -254,11 +254,20 @@ Done for 0.4:
 * Strings tool now marks the strings instead of selecting it
 * POD-Table marks the bytes used for the currently selected type
 * added separate handler for dialogs with user to Kasten Core
-* store bookmarks in separate global XBEL file
+
+Fixed after 0.4 Beta 1:
+-----------------------
+* bytearray lineedit mixed up the used coding
+
+Fixed after 0.4 Beta 2:
+-----------------------
+* if value in POD table is edited, marking of the bytes does no longer disappear
+* disabled storing of bookmarks in separate global XBEL file again, needs more thinking
 
 Next to work on:
 ----------------------------------
 Important:
+* querying of changed byte range for pod editing
 * generator editors need to remember used settings
 * get maxEnums out of Designer combobox
 * implement find whole words only!
@@ -280,6 +289,8 @@ Less important:
 
 Later on:
 ---------
+* DecodingTable/Structure tool: differ between invalid value and unavailable
+* bookmarks storing
 * add StackedViews
 * think about making the ByteArray* things interface only to the AbstractModel
   for this improve template functions findDocument with multiple interfaces given
