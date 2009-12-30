@@ -23,7 +23,7 @@
 #include "bytearrayrawfileloadjob.h"
 
 // lib
-#include "externalbookmarkstorage.h"
+// #include "externalbookmarkstorage.h"
 #include "bytearrayrawfilesynchronizer.h"
 #include "bytearrayrawfileloadthread.h"
 #include "bytearraydocument.h"
@@ -51,7 +51,8 @@ void ByteArrayRawFileLoadJob::startLoadFromFile()
     qobject_cast<ByteArrayRawFileSynchronizer*>(synchronizer())->setDocument( document );
 
     if( document )
-        ExternalBookmarkStorage().readBookmarks( document, url() );
+//         ExternalBookmarkStorage().readBookmarks( document, url() );
+        {}
     else
     {
         // TODO: these reports should go to a notification system, for log or popup

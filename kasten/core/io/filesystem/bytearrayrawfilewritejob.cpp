@@ -23,7 +23,7 @@
 #include "bytearrayrawfilewritejob.h"
 
 // lib
-#include "externalbookmarkstorage.h"
+// #include "externalbookmarkstorage.h"
 #include "bytearrayrawfilesynchronizer.h"
 #include "bytearrayrawfilewritethread.h"
 #include "bytearraydocument.h"
@@ -51,8 +51,8 @@ void ByteArrayRawFileWriteJob::startWriteToFile()
     const bool success = writeThread->success();
     delete writeThread;
 
-    if( success )
-        ExternalBookmarkStorage().writeBookmarks( document, synchronizer()->url() );
+//     if( success )
+//         ExternalBookmarkStorage().writeBookmarks( document, synchronizer()->url() );
 
     completeWrite( success );
 }

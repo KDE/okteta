@@ -23,7 +23,7 @@
 #include "bytearrayrawfilereloadjob.h"
 
 // lib
-#include "externalbookmarkstorage.h"
+// #include "externalbookmarkstorage.h"
 #include "bytearrayrawfilesynchronizer.h"
 #include "bytearrayrawfilereloadthread.h"
 #include "bytearraydocument.h"
@@ -57,7 +57,7 @@ void ByteArrayRawFileReloadJob::startReadFromFile()
         Okteta::PieceTableByteArrayModel *byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>( document->content() );
         byteArray->setData( reloadThread->data() );
 
-        ExternalBookmarkStorage().readBookmarks( document, synchronizer()->url() );
+//         ExternalBookmarkStorage().readBookmarks( document, synchronizer()->url() );
     }
     else
     {
