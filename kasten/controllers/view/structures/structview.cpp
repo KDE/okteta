@@ -50,7 +50,7 @@ namespace Kasten
 {
 
 StructView::StructView(StructTool* tool, QWidget* parent) :
-    QWidget(parent), mTool(tool), mDelegate(new StructViewItemDelegate(this))
+    QWidget(parent), mTool(tool), mDelegate(new StructViewItemDelegate(this)), mStructTreeViewFocusChild(0)
 {
     QBoxLayout* baseLayout = new QVBoxLayout(this);
     setLayout(baseLayout);
@@ -180,9 +180,31 @@ bool StructView::eventFilter(QObject* object, QEvent* event)
             const Qt::FocusReason focusReason = focusEvent->reason();
             if (focusReason != Qt::ActiveWindowFocusReason && focusReason
                     != Qt::PopupFocusReason)
-                mTool->unmark();
+            {
+                QWidget* treeViewFocusWidget = mStructTreeView->focusWidget();
+                const bool subChildHasFocus = ( treeViewFocusWidget != mStructTreeView );
+                if( subChildHasFocus )
+                {
+                    mStructTreeViewFocusChild = treeViewFocusWidget;
+                    mStructTreeViewFocusChild->installEventFilter( this );
+                }
+                else
+                    mTool->unmark();
+            }
         }
     }
+    else if( object == mStructTreeViewFocusChild )
+    {
+        // TODO: it is only assumed the edit widget will be removed if it loses the focus
+        if( event->type() == QEvent::FocusOut )
+        {
+            if( ! mStructTreeView->hasFocus() )
+                mTool->unmark();
+            mStructTreeViewFocusChild->removeEventFilter( this );
+            mStructTreeViewFocusChild = 0;
+        }
+    }
+
     return QWidget::eventFilter(object, event);
 }
 

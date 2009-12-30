@@ -57,6 +57,8 @@ protected:
     KPushButton* mSettingsButton;
     StructViewItemDelegate* mDelegate;
 
+    QWidget* mStructTreeViewFocusChild;
+
 protected Q_SLOTS:
     void openSettingsDlg(int page = 0);
     void
