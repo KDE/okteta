@@ -117,6 +117,8 @@ public:
     DataInformation* childAt(int idx) const;
     Qt::ItemFlags flags(int column, DataInformation* data) const
     {
+        if (!data)
+            return 0; // just return something in case data is null
         return data->flags(column, mByteArrayModel != NULL);
     }
     //	QTextCodec* mUtf8Codec; //XXX add utf8 strings sometime

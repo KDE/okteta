@@ -47,6 +47,11 @@ QVariant StructTreeModel::data(const QModelIndex& index, int role) const
         return QVariant();
 
     DataInformation *item = static_cast<DataInformation*> (index.internalPointer());
+    if (!item)
+    {
+        kDebug() << "item is NULL";
+        return QVariant();
+    }
     const int column = index.column();
     if (role == Qt::FontRole)
     {
@@ -71,9 +76,12 @@ bool StructTreeModel::setData(const QModelIndex& index, const QVariant& value,
         return false;
 
     DataInformation *item = static_cast<DataInformation*> (index.internalPointer());
+    if (!item)
+        return false;
     bool change = mTool->setData(value, role, item);
     return change;
 }
+
 Qt::ItemFlags StructTreeModel::flags(const QModelIndex& index) const
 {
     if (!index.isValid())
@@ -81,6 +89,7 @@ Qt::ItemFlags StructTreeModel::flags(const QModelIndex& index) const
     DataInformation *item = static_cast<DataInformation*> (index.internalPointer());
     return mTool->flags(index.column(), item);
 }
+
 QVariant StructTreeModel::headerData(int section, Qt::Orientation orientation,
         int role) const
 {
@@ -104,6 +113,11 @@ QModelIndex StructTreeModel::index(int row, int column, const QModelIndex &paren
     {
         DataInformation* parentItem =
                 static_cast<DataInformation*> (parent.internalPointer());
+        if (!parentItem)
+        {
+            kDebug() << "parent item is NULL";
+            return QModelIndex();
+        }
         childItem = parentItem->childAt(row);
     }
     if (childItem)
@@ -119,9 +133,13 @@ QModelIndex StructTreeModel::parent(const QModelIndex& index) const
 
     DataInformation *childItem =
             static_cast<DataInformation*> (index.internalPointer());
+    if (!childItem)
+    {
+        kDebug() << "childitem == NULL";
+        return QModelIndex();
+    }
     DataInformation *parentItem =
             static_cast<DataInformation*> (childItem->parent());
-
     if (!parentItem)
         return QModelIndex();
 
@@ -134,6 +152,11 @@ int StructTreeModel::rowCount(const QModelIndex& parent) const
         return mTool->childCount();
     DataInformation* parentItem =
             static_cast<DataInformation*> (parent.internalPointer());
+    if (!parentItem)
+    {
+        kDebug() << "parentItem is NULL";
+        return mTool->childCount();
+    }
     return parentItem->childCount();
 }
 
