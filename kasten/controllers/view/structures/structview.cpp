@@ -160,37 +160,25 @@ bool StructView::eventFilter(QObject* object, QEvent* event)
     {
         if (event->type() == QEvent::FocusIn)
         {
-            QFocusEvent* focusEvent = static_cast<QFocusEvent*> (event);
-            const Qt::FocusReason focusReason = focusEvent->reason();
-            if (focusReason != Qt::ActiveWindowFocusReason && focusReason
-                    != Qt::PopupFocusReason)
-            {
-                const QModelIndex current =
-                        mStructTreeView->selectionModel()->currentIndex();
-                kDebug() << "current index: " << current;
-                if (current.isValid())
-                    mTool->mark(current);
-                else
-                    mTool->unmark();
-            }
+            const QModelIndex current =
+                    mStructTreeView->selectionModel()->currentIndex();
+            kDebug() << "current index: " << current;
+            if (current.isValid())
+                mTool->mark(current);
+            else
+                mTool->unmark();
         }
         else if (event->type() == QEvent::FocusOut)
         {
-            QFocusEvent* focusEvent = static_cast<QFocusEvent*> (event);
-            const Qt::FocusReason focusReason = focusEvent->reason();
-            if (focusReason != Qt::ActiveWindowFocusReason && focusReason
-                    != Qt::PopupFocusReason)
+            QWidget* treeViewFocusWidget = mStructTreeView->focusWidget();
+            const bool subChildHasFocus = ( treeViewFocusWidget != mStructTreeView );
+            if( subChildHasFocus )
             {
-                QWidget* treeViewFocusWidget = mStructTreeView->focusWidget();
-                const bool subChildHasFocus = ( treeViewFocusWidget != mStructTreeView );
-                if( subChildHasFocus )
-                {
-                    mStructTreeViewFocusChild = treeViewFocusWidget;
-                    mStructTreeViewFocusChild->installEventFilter( this );
-                }
-                else
-                    mTool->unmark();
+                mStructTreeViewFocusChild = treeViewFocusWidget;
+                mStructTreeViewFocusChild->installEventFilter( this );
             }
+            else
+                mTool->unmark();
         }
     }
     else if( object == mStructTreeViewFocusChild )

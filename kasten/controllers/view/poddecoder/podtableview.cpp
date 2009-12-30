@@ -38,7 +38,7 @@
 #include <QtGui/QHeaderView>
 #include <QtGui/QFocusEvent>
 
-
+#include <KDebug>
 namespace Kasten
 {
 
@@ -157,34 +157,22 @@ bool PODTableView::eventFilter( QObject* object, QEvent* event )
     {
         if( event->type() == QEvent::FocusIn )
         {
-            QFocusEvent* focusEvent = static_cast<QFocusEvent*>( event );
-            const Qt::FocusReason focusReason = focusEvent->reason();
-            if( focusReason != Qt::ActiveWindowFocusReason
-                && focusReason != Qt::PopupFocusReason )
-            {
-                const QModelIndex current = mPODTableView->selectionModel()->currentIndex();
-                const int podId = current.row();
-                if( current.isValid() && ! mTool->value(podId).isNull() )
-                    mTool->markPOD( podId );
-            }
+            const QModelIndex current = mPODTableView->selectionModel()->currentIndex();
+            const int podId = current.row();
+            if( current.isValid() && ! mTool->value(podId).isNull() )
+                mTool->markPOD( podId );
         }
         else if( event->type() == QEvent::FocusOut )
         {
-            QFocusEvent* focusEvent = static_cast<QFocusEvent*>( event );
-            const Qt::FocusReason focusReason = focusEvent->reason();
-            if( focusReason != Qt::ActiveWindowFocusReason
-                && focusReason != Qt::PopupFocusReason )
+            QWidget* tableViewFocusWidget = mPODTableView->focusWidget();
+            const bool subChildHasFocus = ( tableViewFocusWidget != mPODTableView );
+            if( subChildHasFocus )
             {
-                QWidget* tableViewFocusWidget = mPODTableView->focusWidget();
-                const bool subChildHasFocus = ( tableViewFocusWidget != mPODTableView );
-                if( subChildHasFocus )
-                {
-                    mPODTableViewFocusChild = tableViewFocusWidget;
-                    mPODTableViewFocusChild->installEventFilter( this );
-                }
-                else
-                    mTool->unmarkPOD();
+                mPODTableViewFocusChild = tableViewFocusWidget;
+                mPODTableViewFocusChild->installEventFilter( this );
             }
+            else
+                mTool->unmarkPOD();
         }
     }
     else if( object == mPODTableViewFocusChild )
