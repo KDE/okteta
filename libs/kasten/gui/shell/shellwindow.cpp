@@ -259,6 +259,7 @@ ShellWindow::~ShellWindow()
     mGroupedViews->setCurrentToolInlineView( 0 );
 
     qDeleteAll( mControllers );
+    qDeleteAll( mDockWidgets );
     qDeleteAll( mTools );
 
     delete mGroupedViews;
