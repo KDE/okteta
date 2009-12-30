@@ -39,12 +39,11 @@ void DynamicLengthArrayDataInformation::resizeChildren()
             appendChild(arrayElem);
         }
     }
-    else if (len < childCount()) //TODO maybe keep some cached
+    else if (len < mChildren.length()) //TODO maybe keep some cached
     {
-        for (uint i = len; i < childCount(); ++i)
+        for (int i = len; i != mChildren.length();)
         {
-            delete mChildren.at(i);
-            mChildren.removeAt(i);
+            delete mChildren.takeAt(i);
         }
     }
 }
@@ -94,7 +93,7 @@ int DynamicLengthArrayDataInformation::calculateLength()
     QList<const DataInformation*> refs = findChildrenWithName(mLengthString, this);
     if (refs.length() == 0)
     {
-        kDebug() << "ref not found";
+        kDebug() << "referenced size field not found";
         return 0;
     }
     for (int i = 0; i < refs.length(); ++i)
@@ -107,7 +106,7 @@ int DynamicLengthArrayDataInformation::calculateLength()
             if (!prim->isValid())
             {
                 kDebug() << "primitive type is not valid";
-                return 0;
+                continue;
             }
             else
             {
