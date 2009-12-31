@@ -31,6 +31,7 @@ void DynamicLengthArrayDataInformation::resizeChildren()
     //kDebug() << "len: " << len;
     if (len > childCount())
     {
+        emit childCountChange(childCount(),len);
         for (uint i = childCount(); i < len; ++i)
         {
             DataInformation* arrayElem = mChildType->clone();
@@ -41,10 +42,12 @@ void DynamicLengthArrayDataInformation::resizeChildren()
     }
     else if (len < mChildren.length()) //TODO maybe keep some cached
     {
+        emit childCountChange(childCount(),len);
         for (int i = len; i != mChildren.length();)
         {
             delete mChildren.takeAt(i);
         }
+        emit dataChanged();
     }
     //kDebug() << "new childcount: " << childCount();
 }

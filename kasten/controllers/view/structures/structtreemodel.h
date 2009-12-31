@@ -59,6 +59,7 @@ public Q_SLOTS:
     {
         reset();
     }
+    void onDataInformationChildCountChange(int oldCount,int newCount);
 private:
     StructTool* mTool;
 public:

@@ -50,5 +50,7 @@ private:
     void resizeChildren();
     QString mLengthString;
     DataInformation* mChildType;
+Q_SIGNALS:
+    void childCountChange(int oldCount,int newCount);
 };
 #endif /* DYNAMICLENGTHARRAYDATAINFORMATION_H_ */

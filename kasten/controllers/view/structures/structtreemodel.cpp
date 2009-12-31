@@ -22,6 +22,8 @@
 
 #include "structtreemodel.h"
 #include "structtool.h"
+#include "datatypes/dynamiclengtharraydatainformation.h"
+
 namespace Kasten
 {
 StructTreeModel::StructTreeModel(StructTool* tool, QObject *parent) :
@@ -33,6 +35,13 @@ StructTreeModel::StructTreeModel(StructTool* tool, QObject *parent) :
 
 StructTreeModel::~StructTreeModel()
 {
+}
+void StructTreeModel::onDataInformationChildCountChange(int oldCount, int newCount)
+{
+    Q_UNUSED(oldCount)
+    Q_UNUSED(newCount)
+    reset(); // TODO terribly inefficient, but i can't think of a better solution to prevent
+    //crash on child count change
 }
 
 int StructTreeModel::columnCount(const QModelIndex& parent) const
@@ -55,12 +64,12 @@ QVariant StructTreeModel::data(const QModelIndex& index, int role) const
     const int column = index.column();
     if (role == Qt::FontRole)
     {
-        if (column == 0 && item->parent() == 0 )
+        if (column == 0 && item->parent() == 0)
         {
             // TODO: ideally here we would not take the default application font
             // (as given by QFont()) but the default of the view
             QFont font;
-            font.setBold( true );
+            font.setBold(true);
             return font;
         }
         else
@@ -121,7 +130,14 @@ QModelIndex StructTreeModel::index(int row, int column, const QModelIndex &paren
         childItem = parentItem->childAt(row);
     }
     if (childItem)
+    {
+        if (dynamic_cast<DynamicLengthArrayDataInformation*> (childItem))
+        {
+            connect(childItem, SIGNAL(childCountChange(int,int)), this,
+                    SLOT(onDataInformationChildCountChange(int,int)));
+        }
         return createIndex(row, column, childItem);
+    }
     else
         return QModelIndex();
 }
@@ -143,6 +159,11 @@ QModelIndex StructTreeModel::parent(const QModelIndex& index) const
     if (!parentItem)
         return QModelIndex();
 
+    if (dynamic_cast<DynamicLengthArrayDataInformation*> (parentItem))
+    {
+        connect(parentItem, SIGNAL(childCountChange(int,int)), this,
+                SLOT(onDataInformationChildCountChange(int,int)));
+    }
     return createIndex(parentItem->row(), 0, parentItem);
 }
 
