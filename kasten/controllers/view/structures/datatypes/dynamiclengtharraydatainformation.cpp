@@ -47,7 +47,6 @@ void DynamicLengthArrayDataInformation::resizeChildren()
         {
             delete mChildren.takeAt(i);
         }
-        emit dataChanged();
     }
     //kDebug() << "new childcount: " << childCount();
 }
