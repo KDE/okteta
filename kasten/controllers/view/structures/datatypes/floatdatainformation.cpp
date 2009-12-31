@@ -53,7 +53,13 @@ QVariant FloatDataInformation::dataFromWidget(const QWidget* w) const
 {
     const KDoubleNumInput* spin = dynamic_cast<const KDoubleNumInput*> (w);
     if (spin)
+    {
+#if QT_VERSION >= 0x040600
+        return ((float) spin->value());
+#else
         return spin->value();
+#endif
+    }
     return QVariant();
 }
 
