@@ -192,14 +192,6 @@ QSize ByteArrayColumnView::minimumSizeHint() const
 }
 
 
-
-Address ByteArrayColumnView::indexByPoint( const QPoint& point ) const
-{
-    Q_D( const ByteArrayColumnView );
-    return d->indexByPoint( point );
-}
-
-
 void ByteArrayColumnView::updateCursors()
 {
     Q_D( ByteArrayColumnView );

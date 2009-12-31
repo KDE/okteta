@@ -453,6 +453,13 @@ QSize AbstractByteArrayView::sizeHint() const
     return QSize( 400, 120 );// QSize( columnsWidth(), columnsHeight() );
 }
 
+Address AbstractByteArrayView::indexByPoint( const QPoint& point ) const
+{
+    Q_D( const AbstractByteArrayView );
+    return d->indexByPoint( point );
+}
+
+
 void AbstractByteArrayView::finishByteEdit()
 {
     Q_D( AbstractByteArrayView );

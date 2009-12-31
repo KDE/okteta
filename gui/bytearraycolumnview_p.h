@@ -84,6 +84,7 @@ class ByteArrayColumnViewPrivate : public AbstractByteArrayViewPrivate
     virtual void ensureCursorVisible();
     virtual void placeCursor( const QPoint& point );
     virtual QRect cursorRect() const;
+    virtual Address indexByPoint( const QPoint& point ) const;
 
   public:
     void toggleOffsetColumn( bool offsetColumnVisible );
@@ -148,8 +149,6 @@ class ByteArrayColumnViewPrivate : public AbstractByteArrayViewPrivate
 
     virtual void setActiveCoding( AbstractByteArrayView::CodingTypeId codingId );
     virtual void setVisibleCodings( int visibleCodings );
-
-    virtual Address indexByPoint( const QPoint& point ) const;
 
   protected: // AbstractByteArrayViewPrivate API
     virtual AbstractByteArrayView::CodingTypeId activeCoding() const;

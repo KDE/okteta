@@ -325,6 +325,12 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
   public: // QWidget API
     virtual QSize sizeHint() const;
 
+  public: // logic value service
+    /** detects the index of the byte at the given point
+      * @param point in viewport coordinate system
+      * @return index of the byte that covers the point
+      */
+    Address indexByPoint( const QPoint& point ) const;
 
   Q_SIGNALS:
     /** Index of the byte that was clicked */

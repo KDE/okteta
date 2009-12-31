@@ -150,6 +150,7 @@ class AbstractByteArrayViewPrivate
     virtual void ensureCursorVisible() = 0;
     virtual void placeCursor( const QPoint& point ) = 0;
     virtual QRect cursorRect() const = 0;
+    virtual Address indexByPoint( const QPoint& point ) const = 0;
 
   public: // events
     bool event( QEvent* event );
@@ -200,8 +201,6 @@ class AbstractByteArrayViewPrivate
 
     virtual void setActiveCoding( AbstractByteArrayView::CodingTypeId codingId ) = 0;
     virtual void setVisibleCodings( int visibleCodings ) = 0;
-
-    virtual Address indexByPoint( const QPoint& point ) const = 0;
 
   protected: // API to be implemented
     virtual AbstractByteArrayView::CodingTypeId activeCoding() const = 0;

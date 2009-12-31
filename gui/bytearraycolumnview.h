@@ -112,11 +112,6 @@ class OKTETAGUI_EXPORT ByteArrayColumnView : public AbstractByteArrayView
       * @return number of bytes per line that fit into a widget with the given size
       */
 //     int fittingBytesPerLine() const;
-    /** detects the index of the byte at the given point
-      * @param point in viewport coordinate system
-      * @return index of the byte that covers the point
-      */
-    Address indexByPoint(const QPoint& point ) const;
 
   public: // modification access
 //    void repaintByte( int row, int column, bool Erase = true );
