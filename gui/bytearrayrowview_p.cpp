@@ -1273,9 +1273,13 @@ void ByteArrayRowViewPrivate::startDrag()
     Qt::DropAction dropAction = drag->exec( request );
 
     if( dropAction == Qt::MoveAction )
+    {
+        AbstractByteArrayView* targetByteArrayView = qobject_cast<AbstractByteArrayView*>( drag->target() );
         // Not inside this widget itself?
-        if( drag->target() != q )
+        if( ! targetByteArrayView
+            || targetByteArrayView->byteArrayModel() != q->byteArrayModel() )
             removeSelectedData();
+    }
 }
 
 ByteArrayRowViewPrivate::~ByteArrayRowViewPrivate()
