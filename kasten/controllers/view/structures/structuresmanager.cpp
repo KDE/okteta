@@ -33,6 +33,7 @@ namespace Kasten
 
 StructuresManager::~StructuresManager()
 {
+    qDeleteAll(mDefs);
 }
 StructuresManager::StructuresManager() :
     mDefsDir(KGlobal::dirs()->locateLocal("data", "okteta/structures/", true))
