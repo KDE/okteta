@@ -52,7 +52,7 @@ bool KByteArrayValueStreamEncoder::encodeDataToStream( QIODevice *device,
     // settings
     mSettings.undefinedChar = byteArrayView->undefinedChar();
     mSettings.substituteChar = byteArrayView->substituteChar();
-//     mSettings.valueCoding = (KHECore::ValueCoding)byteArrayView->valueCoding();
+    mSettings.valueCoding = (KHECore::ValueCoding)byteArrayView->valueCoding();
 
     // encode
     QTextStream textStream( device );
