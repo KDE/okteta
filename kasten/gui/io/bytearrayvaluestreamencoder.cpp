@@ -55,7 +55,7 @@ bool ByteArrayValueStreamEncoder::encodeDataToStream( QIODevice *device,
     // settings
     mSettings.undefinedChar = byteArrayView->undefinedChar();
     mSettings.substituteChar = byteArrayView->substituteChar();
-//     mSettings.valueCoding = (Okteta::ValueCoding)byteArrayView->valueCoding();
+    mSettings.valueCoding = (Okteta::ValueCoding)byteArrayView->valueCoding();
 
     // encode
     QTextStream textStream( device );
