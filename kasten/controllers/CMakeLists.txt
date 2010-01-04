@@ -344,8 +344,6 @@ set( okteta_kastencontrollers_LIB_HDRS
   view/filter/filtertool.h
   view/filter/filtertoolview.h
   view/selectrange/selectrangecontroller.h
-  view/insertpattern/insertsequencecontroller.h
-  view/insertpattern/insertpatterncontroller.h
   view/replace/replacecontroller.h
   view/viewstatus/viewstatuscontroller.h
   view/stringsextract/stringsextracttool.h
