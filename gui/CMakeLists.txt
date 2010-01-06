@@ -14,6 +14,10 @@ set( libcontroller_SRCS
   controller/knavigator.cpp
   controller/ktabcontroller.cpp
   controller/kvalueeditor.cpp
+  controller/abstractmousecontroller.cpp
+  controller/mousenavigator.cpp
+  controller/mousepaster.cpp
+#   controller/dragger.cpp
   controller/abstractwheelcontroller.cpp
   controller/zoomwheelcontroller.cpp
   controller/dropper.cpp

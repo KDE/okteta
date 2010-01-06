@@ -27,6 +27,8 @@
 #include "controller/knavigator.h"
 #include "controller/kchareditor.h"
 #include "controller/dropper.h"
+#include "controller/mousenavigator.h"
+#include "controller/mousepaster.h"
 #include "controller/zoomwheelcontroller.h"
 // Okteta core
 #include <valuecodec.h>
@@ -43,7 +45,9 @@
 #include <QtGui/QDragMoveEvent>
 #include <QtGui/QDragLeaveEvent>
 #include <QtGui/QDropEvent>
+#include <QtGui/QMouseEvent>
 #include <QtGui/QApplication>
+#include <QtGui/QClipboard>
 #include <QtGui/QToolTip>
 #include <QtCore/QMimeData>
 #include <QtCore/QByteArray>
@@ -134,7 +138,6 @@ AbstractByteArrayViewPrivate::AbstractByteArrayViewPrivate( AbstractByteArrayVie
    mCursorPaused( false ),
 //    mDefaultFontSize( p->font().pointSize() ), crashes in font()
    mZoomLevel( 1.0 ),
-   mClipboardMode( QClipboard::Clipboard ),
    mResizeStyle( DefaultResizeStyle ),
    q_ptr( parent )
 {
@@ -157,6 +160,11 @@ void AbstractByteArrayViewPrivate::init()
     mNavigator = new KNavigator( q, mTabController );
     mValueEditor = new KValueEditor( mTableCursor, q, mNavigator );
     mCharEditor = new KCharEditor( mTableCursor, q, mNavigator );
+
+    mMousePaster = new MousePaster( q, 0 );
+    mMouseNavigator = new MouseNavigator( q, mMousePaster );
+    mMouseController = mMouseNavigator;
+
     mZoomWheelController = new ZoomWheelController( q, 0 );
     mDropper = new Dropper( q );
 
@@ -682,7 +690,7 @@ QMimeData* AbstractByteArrayViewPrivate::selectionAsMimeData() const
     return mimeData;
 }
 
-void AbstractByteArrayViewPrivate::cut()
+void AbstractByteArrayViewPrivate::cutToClipboard( QClipboard::Mode mode )
 {
     if( isEffectiveReadOnly() || mOverWrite )
         return;
@@ -691,28 +699,33 @@ void AbstractByteArrayViewPrivate::cut()
     if( !cutData )
         return;
 
-    QApplication::clipboard()->setMimeData( cutData, mClipboardMode );
+    QApplication::clipboard()->setMimeData( cutData, mode );
 
     removeSelectedData();
 }
 
-
-void AbstractByteArrayViewPrivate::copy()
+void AbstractByteArrayViewPrivate::copyToClipboard( QClipboard::Mode mode ) const
 {
     QMimeData* cutData = selectionAsMimeData();
     if( !cutData )
         return;
 
-    QApplication::clipboard()->setMimeData( cutData, mClipboardMode );
+//     if( mode == QClipboard::Selection )
+//         q->disconnect( QApplication::clipboard(), SIGNAL(selectionChanged()) );
+
+    QApplication::clipboard()->setMimeData( cutData, mode );
+
+    //TODO: why did we do this? And why does the disconnect above not work?
+    // got connected multiple times after a few selections by mouse
+//         connect( QApplication::clipboard(), SIGNAL(selectionChanged()), SLOT(clipboardChanged()) );
 }
 
-
-void AbstractByteArrayViewPrivate::paste()
+void AbstractByteArrayViewPrivate::pasteFromClipboard( QClipboard::Mode mode )
 {
     if( isEffectiveReadOnly() )
         return;
 
-    const QMimeData* data = QApplication::clipboard()->mimeData( mClipboardMode );
+    const QMimeData* data = QApplication::clipboard()->mimeData( mode );
     pasteData( data );
 }
 
@@ -876,6 +889,48 @@ void AbstractByteArrayViewPrivate::adjustLayoutToSize()
 
     q->setNoOfLines( mTableLayout->noOfLines() );
 }
+
+void AbstractByteArrayViewPrivate::mousePressEvent( QMouseEvent* mouseEvent )
+{
+    Q_Q( AbstractByteArrayView );
+
+    if( mMouseController->handleMousePressEvent(mouseEvent) )
+        mouseEvent->accept();
+    else
+        q->ColumnsView::mousePressEvent( mouseEvent );
+}
+
+void AbstractByteArrayViewPrivate::mouseMoveEvent( QMouseEvent *mouseEvent )
+{
+    Q_Q( AbstractByteArrayView );
+
+    if( mMouseController->handleMouseMoveEvent(mouseEvent) )
+        mouseEvent->accept();
+    else
+        q->ColumnsView::mouseMoveEvent( mouseEvent );
+}
+
+void AbstractByteArrayViewPrivate::mouseReleaseEvent( QMouseEvent* mouseEvent )
+{
+    Q_Q( AbstractByteArrayView );
+
+    if( mMouseController->handleMouseReleaseEvent(mouseEvent) )
+        mouseEvent->accept();
+    else
+        q->ColumnsView::mouseReleaseEvent( mouseEvent );
+}
+
+// gets called after press and release instead of a plain press event (?)
+void AbstractByteArrayViewPrivate::mouseDoubleClickEvent( QMouseEvent* mouseEvent )
+{
+    Q_Q( AbstractByteArrayView );
+
+    if( mMouseController->handleMouseDoubleClickEvent(mouseEvent) )
+        mouseEvent->accept();
+    else
+        q->ColumnsView::mouseDoubleClickEvent( mouseEvent );
+}
+
 
 bool AbstractByteArrayViewPrivate::event( QEvent* event )
 {
@@ -1082,6 +1137,9 @@ AbstractByteArrayViewPrivate::~AbstractByteArrayViewPrivate()
     delete mDropper;
 
     delete mZoomWheelController;
+
+    delete mMousePaster;
+    delete mMouseNavigator;
 
     delete mCharEditor;
     delete mValueEditor;

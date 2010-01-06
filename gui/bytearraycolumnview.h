@@ -118,13 +118,6 @@ class OKTETAGUI_EXPORT ByteArrayColumnView : public AbstractByteArrayView
 //    void updateByte( int row, int column );
 //    void ensureByteVisible( int row, int column );
 
-  protected: // QAbstractScrollArea API
-    virtual void mousePressEvent( QMouseEvent* mousePressEvent );
-    virtual void mouseReleaseEvent( QMouseEvent* mouseReleaseEvent );
-    virtual void mouseMoveEvent( QMouseEvent* mouseMoveEvent );
-    virtual void mouseDoubleClickEvent( QMouseEvent* mouseDoubleClickEvent );
-//    virtual void contextMenuEvent( QContextMenuEvent* contextMenuEvent );
-
   protected:
     void updateCursors();
 
@@ -134,9 +127,7 @@ class OKTETAGUI_EXPORT ByteArrayColumnView : public AbstractByteArrayView
   private:
     Q_DECLARE_PRIVATE( ByteArrayColumnView )
     Q_PRIVATE_SLOT( d_func(), void blinkCursor() )
-    Q_PRIVATE_SLOT( d_func(), void autoScrollTimerDone() )
 //     Q_PRIVATE_SLOT( d_func(), void clipboardChanged() )
-    Q_PRIVATE_SLOT( d_func(), void startDrag() )
 
   private: // Disabling copy constructor and operator= - not useful
     ByteArrayColumnView( const ByteArrayColumnView& );

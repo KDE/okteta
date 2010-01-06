@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -34,7 +34,6 @@
 #include <abstractbytearraymodel.h>
 #include <valuecodec.h>
 #include <charcodec.h>
-#include <wordbytearrayservice.h>
 // KDE
 #include <KGlobalSettings>
 // Qt
@@ -42,9 +41,7 @@
 #include <QtGui/QStyle>
 #include <QtGui/QPainter>
 #include <QtGui/QCursor>
-#include <QtGui/QClipboard>
 #include <QtGui/QScrollBar>
-#include <QtGui/QMouseEvent>
 #include <QtCore/QListIterator>
 #include <QtCore/QTimer>
 
@@ -56,13 +53,9 @@ static const int InsertCursorWidth = 2;
 
 
 ByteArrayRowViewPrivate::ByteArrayRowViewPrivate( ByteArrayRowView* parent )
-: AbstractByteArrayViewPrivate( parent ),
-   mCursorPixmaps( new KCursor() ),
-   mMousePressed( false ),
-   mInDoubleClick( false ),
-   mInDnD( false ),
-   mDragStartPossible( false ),
-   mBlinkCursorVisible( false )
+  : AbstractByteArrayViewPrivate( parent ),
+    mCursorPixmaps( new KCursor() ),
+    mBlinkCursorVisible( false )
 {
 }
 
@@ -71,9 +64,6 @@ void ByteArrayRowViewPrivate::init()
    Q_Q( ByteArrayRowView );
 
     mCursorBlinkTimer = new QTimer( q );
-    mScrollTimer = new QTimer( q );
-    mDragStartTimer = new QTimer( q );
-    mTrippleClickTimer = new QTimer( q );
 
     mStylist = new WidgetColumnStylist( q );
 
@@ -103,10 +93,6 @@ void ByteArrayRowViewPrivate::init()
     q->setFont( KGlobalSettings::fixedFont() );
 
     q->connect( mCursorBlinkTimer, SIGNAL(timeout()), q, SLOT(blinkCursor()) );
-    q->connect( mScrollTimer,      SIGNAL(timeout()), q, SLOT(autoScrollTimerDone()) );
-    q->connect( mDragStartTimer,   SIGNAL(timeout()), q, SLOT(startDrag()) );
-    mDragStartTimer->setSingleShot( true );
-    mTrippleClickTimer->setSingleShot( true );
 
     q->setAcceptDrops( true );
 }
@@ -916,371 +902,6 @@ void ByteArrayRowViewPrivate::clipboardChanged()
 }
 #endif
 
-void ByteArrayRowViewPrivate::mousePressEvent( QMouseEvent* mouseEvent )
-{
-    Q_Q( ByteArrayRowView );
-
-    const bool oldHasSelection = mTableRanges->hasSelection();
-
-    pauseCursor();
-    mValueEditor->finishEdit();
-
-    // care about a left button press?
-    if( mouseEvent->button() == Qt::LeftButton )
-    {
-        mMousePressed = true;
-
-        // select whole line?
-        if( mTrippleClickTimer->isActive()
-            && (mouseEvent->globalPos()-mDoubleClickPoint).manhattanLength() < QApplication::startDragDistance() )
-        {
-            mTrippleClickTimer->stop();
-            const Address indexAtFirstDoubleClickLinePosition = mTableLayout->indexAtFirstLinePosition( mDoubleClickLine );
-            mTableRanges->setSelectionStart( indexAtFirstDoubleClickLinePosition );
-            mTableCursor->gotoIndex( indexAtFirstDoubleClickLinePosition );
-            mTableCursor->gotoLineEnd();
-            mTableRanges->setSelectionEnd( cursorPosition() );
-            updateChanged();
-
-            unpauseCursor();
-
-            const bool newHasSelection = mTableRanges->hasSelection();
-            emit q->cursorPositionChanged( cursorPosition() );
-            emit q->selectionChanged( mTableRanges->selection() );
-            if( oldHasSelection != newHasSelection )
-            {
-                if( !mOverWrite ) emit q->cutAvailable( newHasSelection );
-                emit q->copyAvailable( newHasSelection );
-                emit q->hasSelectedDataChanged( newHasSelection );
-            }
-            return;
-        }
-
-        const QPoint mousePoint = q->viewportToColumns( mouseEvent->pos() );
-
-        // start of a drag perhaps?
-        if( mTableRanges->hasSelection() && mTableRanges->selectionIncludes(indexByPoint( mousePoint )) )
-        {
-            mDragStartPossible = true;
-            mDragStartTimer->start( QApplication::startDragTime() );
-            mDragStartPoint = mousePoint;
-        }
-        else
-        {
-            placeCursor( mousePoint );
-            ensureCursorVisible();
-
-            const Address realIndex = mTableCursor->realIndex();
-            if( mTableRanges->selectionStarted() )
-            {
-                if( mouseEvent->modifiers() & Qt::SHIFT )
-                    mTableRanges->setSelectionEnd( realIndex );
-                else
-                {
-                    mTableRanges->removeSelection();
-                    mTableRanges->setSelectionStart( realIndex );
-                }
-            }
-            else // start of a new selection possible
-            {
-                mTableRanges->setSelectionStart( realIndex );
-
-                if( !isEffectiveReadOnly() && (mouseEvent->modifiers()&Qt::SHIFT) ) // TODO: why only for readwrite?
-                    mTableRanges->setSelectionEnd( realIndex );
-            }
-
-            mTableRanges->removeFurtherSelections();
-        }
-    }
-    else if( mouseEvent->button() == Qt::MidButton )
-        mTableRanges->removeSelection();
-
-    if( mTableRanges->isModified() )
-    {
-        updateChanged();
-        q->viewport()->setCursor( isEffectiveReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor );
-    }
-
-    unpauseCursor();
-
-    const bool newHasSelection = mTableRanges->hasSelection();
-    emit q->selectionChanged( mTableRanges->selection() );
-    if( oldHasSelection != newHasSelection )
-    {
-        if( !mOverWrite ) emit q->cutAvailable( newHasSelection );
-        emit q->copyAvailable( newHasSelection );
-        emit q->hasSelectedDataChanged( newHasSelection );
-    }
-}
-
-
-void ByteArrayRowViewPrivate::mouseMoveEvent( QMouseEvent *mouseEvent )
-{
-    Q_Q( ByteArrayRowView );
-
-    const QPoint movePoint = q->viewportToColumns( mouseEvent->pos() );
-
-    if( mMousePressed )
-    {
-        if( mDragStartPossible )
-        {
-            mDragStartTimer->stop();
-            // moved enough for a drag?
-            if( (movePoint-mDragStartPoint).manhattanLength() > QApplication::startDragDistance() )
-                startDrag();
-            if( !isEffectiveReadOnly() )
-                q->viewport()->setCursor( Qt::IBeamCursor );
-            return;
-        }
-        // selecting
-        handleMouseMove( movePoint );
-    }
-    else if( !isEffectiveReadOnly() )
-    {
-        // visual feedback for possible dragging
-        const bool InSelection =
-            mTableRanges->hasSelection() && mTableRanges->selectionIncludes( indexByPoint(movePoint) );
-        q->viewport()->setCursor( InSelection?Qt::ArrowCursor:Qt::IBeamCursor );
-    }
-}
-
-
-void ByteArrayRowViewPrivate::mouseReleaseEvent( QMouseEvent* mouseEvent )
-{
-    Q_Q( ByteArrayRowView );
-
-    const bool oldHasSelection = mTableRanges->hasSelection();
-    const QPoint releasePoint = q->viewportToColumns( mouseEvent->pos() );
-
-    // this is not the release of a doubleclick so we need to process it?
-    if( !mInDoubleClick )
-    {
-        const int line = q->lineAt( releasePoint.y() );
-        const int pos = mByteArrayColumn->linePositionOfX( releasePoint.x() ); // TODO: can we be sure here about the active column?
-        const Address index = mTableLayout->indexAtCCoord( Coord(pos,line) ); // TODO: can this be another index than the one of the cursor???
-        emit q->clicked( index );
-    }
-
-    if( mMousePressed )
-    {
-        mMousePressed = false;
-
-        if( mScrollTimer->isActive() )
-            mScrollTimer->stop();
-
-        // was only click inside selection, nothing dragged?
-        if( mDragStartPossible )
-        {
-            selectAll( false );
-            mDragStartTimer->stop();
-            mDragStartPossible = false;
-
-            placeCursor( mDragStartPoint );
-            ensureCursorVisible();
-
-            unpauseCursor();
-        }
-        // was end of selection operation?
-        else if( mTableRanges->hasSelection() )
-        {
-            if( QApplication::clipboard()->supportsSelection() )
-            {
-                mClipboardMode = QClipboard::Selection;
-                q->disconnect( QApplication::clipboard(), SIGNAL(selectionChanged()) );
-
-                copy();
-
-                //TODO: why did we do this? And why does the disconnect above not work?
-                // got connected multiple times after a few selections by mouse
-        //         connect( QApplication::clipboard(), SIGNAL(selectionChanged()), SLOT(clipboardChanged()) );
-                mClipboardMode = QClipboard::Clipboard;
-            }
-        }
-    }
-    // middle mouse button paste?
-    else if( mouseEvent->button() == Qt::MidButton && !isEffectiveReadOnly() )
-    {
-        pauseCursor();
-        mValueEditor->finishEdit();
-
-        placeCursor( releasePoint );
-
-        // replace no selection?
-        if( mTableRanges->hasSelection() && !mTableRanges->selectionIncludes(mTableCursor->index()) )
-            mTableRanges->removeSelection();
-
-        mClipboardMode = QClipboard::Selection;
-        paste();
-        mClipboardMode = QClipboard::Clipboard;
-
-        // ensure selection changes to be drawn TODO: create a insert/pasteAtCursor that leaves out drawing
-        updateChanged();
-
-        ensureCursorVisible();
-        unpauseCursor();
-    }
-
-    emit q->cursorPositionChanged( cursorPosition() );
-
-    mInDoubleClick = false;
-
-    if( mTableRanges->selectionJustStarted() )
-        mTableRanges->removeSelection();
-
-    const bool newHasSelection = mTableRanges->hasSelection();
-    emit q->selectionChanged( mTableRanges->selection() );
-    if( oldHasSelection != newHasSelection )
-    {
-        if( !mOverWrite ) emit q->cutAvailable( newHasSelection );
-        emit q->copyAvailable( newHasSelection );
-        emit q->hasSelectedDataChanged( newHasSelection );
-    }
-}
-
-
-// gets called after press and release instead of a plain press event (?)
-void ByteArrayRowViewPrivate::mouseDoubleClickEvent( QMouseEvent* mouseEvent )
-{
-    Q_Q( ByteArrayRowView );
-
-    // we are only interested in LMB doubleclicks
-    if( mouseEvent->button() != Qt::LeftButton )
-    {
-        mouseEvent->ignore();
-        return;
-    }
-
-    mDoubleClickLine = mTableCursor->line();
-
-    const Address index = mTableCursor->validIndex();
-
-    if( mActiveCoding == AbstractByteArrayView::CharCodingId )
-    {
-        selectWord( index );
-
-        // as we already have a doubleclick maybe it is a tripple click
-        mTrippleClickTimer->start( qApp->doubleClickInterval() );
-        mDoubleClickPoint = mouseEvent->globalPos();
-    }
-    //  else
-    //    mValueEditor->goInsideByte(); TODO: make this possible again
-
-    mInDoubleClick = true; //
-    mMousePressed = true;
-
-    emit q->doubleClicked( index );
-}
-
-
-void ByteArrayRowViewPrivate::autoScrollTimerDone()
-{
-    Q_Q( ByteArrayRowView );
-
-    if( mMousePressed )
-        handleMouseMove( q->viewportToColumns(q->viewport()->mapFromGlobal( QCursor::pos() )) );
-}
-
-
-void ByteArrayRowViewPrivate::handleMouseMove( const QPoint& point ) // handles the move of the mouse with pressed buttons
-{
-    Q_Q( ByteArrayRowView );
-
-    const bool oldHasSelection = mTableRanges->hasSelection();
-    const int yOffset = q->yOffset();
-    const int behindLastYOffset = yOffset + q->visibleHeight();
-    // scrolltimer but inside of viewport?
-    if( mScrollTimer->isActive() )
-    {
-        if( yOffset <= point.y() && point.y() < behindLastYOffset )
-            mScrollTimer->stop();
-    }
-    // no scrolltimer and outside of viewport?
-    else
-    {
-        if( point.y() < yOffset || behindLastYOffset <= point.y() )
-            mScrollTimer->start( DefaultScrollTimerPeriod );
-    }
-    pauseCursor();
-
-    placeCursor( point );
-    ensureCursorVisible();
-
-    // do wordwise selection?
-    if( mInDoubleClick && mTableRanges->hasFirstWordSelection() )
-    {
-        Address newIndex = mTableCursor->realIndex();
-        const AddressRange firstWordSelection = mTableRanges->firstWordSelection();
-        const WordByteArrayService WBS( mByteArrayModel, charCodec() );
-        // are we before the selection?
-        if( firstWordSelection.startsBehind(newIndex) )
-        {
-            mTableRanges->ensureWordSelectionForward( false );
-            newIndex = WBS.indexOfLeftWordSelect( newIndex );
-        }
-        // or behind?
-        else if( firstWordSelection.endsBefore(newIndex) )
-        {
-            mTableRanges->ensureWordSelectionForward( true );
-            newIndex = WBS.indexOfRightWordSelect( newIndex );
-        }
-        // or inside?
-        else
-        {
-            mTableRanges->ensureWordSelectionForward( true );
-            newIndex = firstWordSelection.nextBehindEnd();
-        }
-
-        mTableCursor->gotoIndex( newIndex );
-    }
-
-    if( mTableRanges->selectionStarted() )
-        mTableRanges->setSelectionEnd( cursorPosition() );
-
-    updateChanged();
-
-    unpauseCursor();
-
-    const bool newHasSelection = mTableRanges->hasSelection();
-    emit q->cursorPositionChanged( cursorPosition() );
-    emit q->selectionChanged( mTableRanges->selection() );
-    if( oldHasSelection != newHasSelection )
-    {
-        if( !mOverWrite ) emit q->cutAvailable( newHasSelection );
-        emit q->copyAvailable( newHasSelection );
-        emit q->hasSelectedDataChanged( newHasSelection );
-    }
-}
-
-
-void ByteArrayRowViewPrivate::startDrag()
-{
-    Q_Q( ByteArrayRowView );
-
-    // reset states
-    mMousePressed = false;
-    mInDoubleClick = false;
-    mDragStartPossible = false;
-
-    // create data
-    QMimeData *dragData = selectionAsMimeData();
-    if( !dragData )
-        return;
-
-    QDrag *drag = new QDrag( q );
-    drag->setMimeData( dragData );
-
-    Qt::DropActions request = (isEffectiveReadOnly()||mOverWrite) ? Qt::CopyAction : Qt::CopyAction|Qt::MoveAction;
-    Qt::DropAction dropAction = drag->exec( request );
-
-    if( dropAction == Qt::MoveAction )
-    {
-        AbstractByteArrayView* targetByteArrayView = qobject_cast<AbstractByteArrayView*>( drag->target() );
-        // Not inside this widget itself?
-        if( ! targetByteArrayView
-            || targetByteArrayView->byteArrayModel() != q->byteArrayModel() )
-            removeSelectedData();
-    }
-}
 
 ByteArrayRowViewPrivate::~ByteArrayRowViewPrivate()
 {

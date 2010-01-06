@@ -27,6 +27,8 @@
 #include "columnsview.h"
 // Okteta core
 #include "addressrange.h"
+// Qt
+#include <QtGui/QClipboard>
 
 class QMimeData;
 class QByteArray;
@@ -58,6 +60,9 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
   friend class KValueEditor;
   friend class KCharEditor;
   friend class Dropper;
+  friend class MouseNavigator;
+  friend class MousePaster;
+  friend class Dragger;
 
   Q_OBJECT
   Q_PROPERTY( bool OverwriteMode READ isOverwriteMode WRITE setOverwriteMode )
@@ -360,6 +365,8 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     void finishByteEdit();
     void emitSelectionSignals();
     void updateChanged();
+    void copyToClipboard( QClipboard::Mode mode ) const;
+    void pasteFromClipboard( QClipboard::Mode mode );
 
   protected:
     const Okteta::ValueCodec* valueCodec() const;
@@ -370,6 +377,10 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
 
   protected: // QWidget API
     virtual void keyPressEvent( QKeyEvent* keyEvent );
+    virtual void mousePressEvent( QMouseEvent* mousePressEvent );
+    virtual void mouseReleaseEvent( QMouseEvent* mouseReleaseEvent );
+    virtual void mouseMoveEvent( QMouseEvent* mouseMoveEvent );
+    virtual void mouseDoubleClickEvent( QMouseEvent* mouseDoubleClickEvent );
     /// reimplemented to catch Tab and BackTab keys, which otherwise gets stolen
     virtual bool event( QEvent* event );
     virtual void showEvent( QShowEvent* showEvent );
@@ -380,6 +391,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     virtual void dragMoveEvent( QDragMoveEvent* dragMoveEvent) ;
     virtual void dragLeaveEvent( QDragLeaveEvent* dragLeaveEvent );
     virtual void dropEvent( QDropEvent* dropEvent );
+//    virtual void contextMenuEvent( QContextMenuEvent* contextMenuEvent );
 
   protected: // QAbstractScrollArea API
     virtual void wheelEvent( QWheelEvent *e );

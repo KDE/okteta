@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -101,21 +101,11 @@ class ByteArrayRowViewPrivate : public AbstractByteArrayViewPrivate
     void setCharCoding( const QString& charCodingName );
     void setByteTypeColored( bool isColored );
 
-  public: // events
-    void mousePressEvent( QMouseEvent* mousePressEvent );
-    void mouseReleaseEvent( QMouseEvent* mouseReleaseEvent );
-    void mouseMoveEvent( QMouseEvent* mouseMoveEvent );
-    void mouseDoubleClickEvent( QMouseEvent* mouseDoubleClickEvent );
-
   public: // slots
     /** gets called by the cursor blink timer */
     void blinkCursor();
-    /** gets called by the scroll timer (for mouse selection) */
-    void autoScrollTimerDone();
     /** */
     void clipboardChanged();
-    /** */
-    void startDrag();
 
   protected: // drawing related operations
     /** recreates the cursor pixmaps and paints active and inactive cursors if doable */
@@ -127,7 +117,6 @@ class ByteArrayRowViewPrivate : public AbstractByteArrayViewPrivate
     void updateCursor( const ByteArrayRowColumnRenderer& column, AbstractByteArrayView::CodingTypeId codingId );
 
   protected: // partial operations
-    void handleMouseMove( const QPoint& point );
     void handleFontChange( const QFont& oldFont );
 
   protected:
@@ -167,34 +156,10 @@ class ByteArrayRowViewPrivate : public AbstractByteArrayViewPrivate
   protected:
     /** Timer that controls the blinking of the cursor */
     QTimer* mCursorBlinkTimer;
-    /** Timer that triggers ensureCursorVisible function calls */
-    QTimer* mScrollTimer;
-/*     QTimer *ChangeIntervalTimer, */
-    /** Timer to start a drag */
-    QTimer* mDragStartTimer;
-    /** timer to measure whether the time between a double click and the following counts for a tripleclick */
-    QTimer* mTrippleClickTimer;
-
     /** object to store the blinking cursor pixmaps */
     KCursor* mCursorPixmaps;
 
-  protected:
-    /** point at which the current double click happended (used by TrippleClick) */
-    QPoint mDoubleClickPoint;
-    /** line in which the current double click happended (used by TrippleClick) */
-    int mDoubleClickLine;
-    /** point at which the current dragging started */
-    QPoint mDragStartPoint;
-
   protected: // parameters
-    /** flag if a mouse button is pressed */
-    bool mMousePressed:1;
-    /** flag if a double click is happening */
-    bool mInDoubleClick:1;
-    /** flag if a Drag'n'Drop is happening */
-    bool mInDnD:1;
-    /** flag if a drag might have started */
-    bool mDragStartPossible:1;
     /** flag if the cursor is visible */
     bool mBlinkCursorVisible:1;
 };

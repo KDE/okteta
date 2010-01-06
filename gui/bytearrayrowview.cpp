@@ -203,35 +203,6 @@ void ByteArrayRowView::renderColumns( QPainter* painter, int cx, int cy, int cw,
 }
 
 
-void ByteArrayRowView::mousePressEvent( QMouseEvent* mouseEvent )
-{
-    Q_D( ByteArrayRowView );
-    d->mousePressEvent( mouseEvent );
-}
-
-
-void ByteArrayRowView::mouseMoveEvent( QMouseEvent* mouseEvent )
-{
-    Q_D( ByteArrayRowView );
-    d->mouseMoveEvent( mouseEvent );
-}
-
-
-void ByteArrayRowView::mouseReleaseEvent( QMouseEvent* mouseEvent )
-{
-    Q_D( ByteArrayRowView );
-    d->mouseReleaseEvent( mouseEvent );
-}
-
-
-// gets called after press and release instead of a plain press event (?)
-void ByteArrayRowView::mouseDoubleClickEvent( QMouseEvent* mouseEvent )
-{
-    Q_D( ByteArrayRowView );
-    d->mouseDoubleClickEvent( mouseEvent );
-}
-
-
 ByteArrayRowView::~ByteArrayRowView()
 {
 }

@@ -33,8 +33,6 @@
 // Okteta core
 #include <abstractbytearraymodel.h>
 #include <charcodec.h>
-// Qt
-#include <QtGui/QClipboard>
 
 
 namespace Okteta
@@ -43,6 +41,10 @@ class KNavigator;
 class KCharEditor;
 
 class Dropper;
+
+class AbstractMouseController;
+class MouseNavigator;
+class MousePaster;
 
 class ZoomWheelController;
 
@@ -163,6 +165,11 @@ class AbstractByteArrayViewPrivate
     void dropEvent( QDropEvent* dropEvent );
     bool viewportEvent( QEvent* event );
 
+    void mousePressEvent( QMouseEvent* mousePressEvent );
+    void mouseReleaseEvent( QMouseEvent* mouseReleaseEvent );
+    void mouseMoveEvent( QMouseEvent* mouseMoveEvent );
+    void mouseDoubleClickEvent( QMouseEvent* mouseDoubleClickEvent );
+
   public: // slots
     void onContentsChanged( const ArrayChangeMetricsList& changeList );
     void onBookmarksChange( const QList<Bookmark>& bookmarks );
@@ -188,9 +195,9 @@ class AbstractByteArrayViewPrivate
     bool canReadData( const QMimeData* data ) const;
 
   protected: // clipboard interaction
-    void copy();
-    void cut();
-    void paste();
+    void cutToClipboard( QClipboard::Mode mode = QClipboard::Clipboard );
+    void copyToClipboard( QClipboard::Mode mode = QClipboard::Clipboard ) const;
+    void pasteFromClipboard( QClipboard::Mode mode = QClipboard::Clipboard );
 
   protected: // API to be implemented
   // cursor control
@@ -216,6 +223,7 @@ class AbstractByteArrayViewPrivate
 
     /** the current input controller */
     KController* mController;
+    AbstractMouseController* mMouseController;
     AbstractWheelController* mWheelController;
 
     /** holds the logical layout */
@@ -237,6 +245,9 @@ class AbstractByteArrayViewPrivate
 
     Dropper* mDropper;
 
+    MouseNavigator* mMouseNavigator;
+    MousePaster* mMousePaster;
+
     ZoomWheelController* mZoomWheelController;
 
   protected:
@@ -254,8 +265,6 @@ class AbstractByteArrayViewPrivate
     /** font size as set by user (used for zooming) */
     int mDefaultFontSize;
     double mZoomLevel;
-    /** */
-    QClipboard::Mode mClipboardMode;
 
     // parameters
     /** */

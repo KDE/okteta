@@ -1,0 +1,53 @@
+Keyboard-Controller is simpler than the Mouse-Controller:
+The KController::handleKeyPress(keyEvent) is a stateless method which passes
+the input event in a priority chain of controllers until one accepts it.
+The controller may only depend on the state of the view, but not on previous input.
+(This may change in the future with VI-like control)
+
+Mouse-Controller is different, as it is usually a series of inputs which defines
+a command. And several commands may share part of the start sequence.
+
+Which complicates things as there may be reactions already on the first input, like
+a UI-button state change (down) on the press-down of a mouse button. So should
+only those share the start which share the reaction, or should the first dominate the reaction?
+What about extending with a new controller? Can the same start be solved by shared base-classes?
+
+Also in the case of an unknown input sequence the latest input has to be restated
+as the first in a next row.
+
+So the algorithm might be:
+
+Reset all controllers to active
+
+For input
+  if all active
+    try is two
+  end if
+  for try of two
+    for all active controllers
+      pass input
+      if controller done
+        set input taken
+        reset all controllers
+        break
+      else if controller rejected
+        set controller inactive
+      else // if controller 
+        set input taken
+    end for
+    if input not taken
+      if try is first
+        reset all controllers
+      else
+        break
+    end if
+  end try
+end for
+
+Example:
+LMB Click to set cursor
+LMB click to set selection
+LMB Click to mark word - starts by doubleclickpress
+LMB Click to mark words by moving the cursor - starts also by doubleclickpress
+LMB Click to drag
+some share e.g. autoscroll-timer

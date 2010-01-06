@@ -190,19 +190,19 @@ bool AbstractByteArrayView::canReadData( const QMimeData* data ) const
 void AbstractByteArrayView::cut()
 {
     Q_D( AbstractByteArrayView );
-    d->cut();
+    d->cutToClipboard();
 }
 
 void AbstractByteArrayView::copy()
 {
     Q_D( AbstractByteArrayView );
-    d->copy();
+    d->copyToClipboard();
 }
 
 void AbstractByteArrayView::paste()
 {
     Q_D( AbstractByteArrayView );
-    d->paste();
+    d->pasteFromClipboard();
 }
 
 void AbstractByteArrayView::insert( const QByteArray& data )
@@ -484,6 +484,18 @@ void AbstractByteArrayView::updateChanged()
     d->updateChanged();
 }
 
+void AbstractByteArrayView::copyToClipboard( QClipboard::Mode mode ) const
+{
+    Q_D( const AbstractByteArrayView );
+    d->copyToClipboard( mode );
+}
+
+void AbstractByteArrayView::pasteFromClipboard( QClipboard::Mode mode )
+{
+    Q_D( AbstractByteArrayView );
+    d->pasteFromClipboard( mode );
+}
+
 QRect AbstractByteArrayView::cursorRect() const
 {
     Q_D( const AbstractByteArrayView );
@@ -529,6 +541,34 @@ void AbstractByteArrayView::keyPressEvent( QKeyEvent* keyEvent )
     Q_D( AbstractByteArrayView );
     if( !d->controller()->handleKeyPress(keyEvent) )
         ColumnsView::keyPressEvent( keyEvent );
+}
+
+void AbstractByteArrayView::mousePressEvent( QMouseEvent* mouseEvent )
+{
+    Q_D( AbstractByteArrayView );
+    d->mousePressEvent( mouseEvent );
+}
+
+
+void AbstractByteArrayView::mouseMoveEvent( QMouseEvent* mouseEvent )
+{
+    Q_D( AbstractByteArrayView );
+    d->mouseMoveEvent( mouseEvent );
+}
+
+
+void AbstractByteArrayView::mouseReleaseEvent( QMouseEvent* mouseEvent )
+{
+    Q_D( AbstractByteArrayView );
+    d->mouseReleaseEvent( mouseEvent );
+}
+
+
+// gets called after press and release instead of a plain press event (?)
+void AbstractByteArrayView::mouseDoubleClickEvent( QMouseEvent* mouseEvent )
+{
+    Q_D( AbstractByteArrayView );
+    d->mouseDoubleClickEvent( mouseEvent );
 }
 
 void AbstractByteArrayView::wheelEvent( QWheelEvent* wheelEvent )

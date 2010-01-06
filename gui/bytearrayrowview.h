@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -103,13 +103,6 @@ class OKTETAGUI_EXPORT ByteArrayRowView : public AbstractByteArrayView
 //    void updateByte( int row, int column );
 //    void ensureByteVisible( int row, int column );
 
-  protected: // QAbstractScrollArea API
-    virtual void mousePressEvent( QMouseEvent* mousePressEvent );
-    virtual void mouseReleaseEvent( QMouseEvent* mouseReleaseEvent );
-    virtual void mouseMoveEvent( QMouseEvent* mouseMoveEvent );
-    virtual void mouseDoubleClickEvent( QMouseEvent* mouseDoubleClickEvent );
-//    virtual void contextMenuEvent( QContextMenuEvent* contextMenuEvent );
-
   protected:
     void updateCursors();
 
@@ -119,9 +112,7 @@ class OKTETAGUI_EXPORT ByteArrayRowView : public AbstractByteArrayView
   private:
     Q_DECLARE_PRIVATE( ByteArrayRowView )
     Q_PRIVATE_SLOT( d_func(), void blinkCursor() )
-    Q_PRIVATE_SLOT( d_func(), void autoScrollTimerDone() )
 //     Q_PRIVATE_SLOT( d_func(), void clipboardChanged() )
-    Q_PRIVATE_SLOT( d_func(), void startDrag() )
 };
 
 }
