@@ -52,8 +52,6 @@ class OKTETAGUI_EXPORT ByteArrayRowView : public AbstractByteArrayView
     virtual ~ByteArrayRowView();
 
   public: // AbstractByteArrayView API
-    virtual bool offsetColumnVisible() const;
-
   // value column
     virtual int/*PixelX*/ byteSpacingWidth() const;
     virtual int noOfGroupedBytes() const;

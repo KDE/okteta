@@ -117,6 +117,8 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     CodingTypes visibleCodings() const;
     CodingTypeId activeCoding() const;
 
+    bool offsetColumnVisible() const;
+
     /** returns true if there is a selected range in the array */
     bool hasSelectedData() const;
     AddressRange selection() const;
@@ -136,8 +138,6 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     double zoomLevel() const;
 
   public: // value access API
-    virtual bool offsetColumnVisible() const = 0;
-
   // value column
     virtual int/*PixelX*/ byteSpacingWidth() const = 0;
     virtual int noOfGroupedBytes() const = 0;

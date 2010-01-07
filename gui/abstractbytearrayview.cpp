@@ -146,6 +146,12 @@ AbstractByteArrayView::LayoutStyle AbstractByteArrayView::layoutStyle() const
     return d->layoutStyle();
 }
 
+bool AbstractByteArrayView::offsetColumnVisible() const
+{
+    Q_D( const AbstractByteArrayView );
+    return d->offsetColumnVisible();
+}
+
 AddressRange AbstractByteArrayView::selection() const
 {
     Q_D( const AbstractByteArrayView );

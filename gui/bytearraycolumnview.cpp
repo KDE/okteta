@@ -76,11 +76,6 @@ bool ByteArrayColumnView::isByteTypeColored() const
     Q_D( const ByteArrayColumnView );
     return d->isByteTypeColored();
 }
-bool ByteArrayColumnView::offsetColumnVisible() const
-{
-    Q_D( const ByteArrayColumnView );
-    return d->offsetColumnVisible();
-}
 
 
 void ByteArrayColumnView::setByteArrayModel( AbstractByteArrayModel* _byteArrayModel )

@@ -81,11 +81,6 @@ bool ByteArrayRowView::isByteTypeColored() const
     Q_D( const ByteArrayRowView );
     return d->isByteTypeColored();
 }
-bool ByteArrayRowView::offsetColumnVisible() const
-{
-    Q_D( const ByteArrayRowView );
-    return d->offsetColumnVisible();
-}
 void ByteArrayRowView::setBufferSpacing( /*PixelX*/int byteSpacing, int noOfGroupedBytes, /*PixelX*/int groupSpacing )
 {
     Q_D( ByteArrayRowView );
