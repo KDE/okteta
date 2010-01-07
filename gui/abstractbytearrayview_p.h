@@ -181,6 +181,7 @@ class AbstractByteArrayViewPrivate
     void onBookmarksChange( const QList<Bookmark>& bookmarks );
     void onRevertedToVersionIndex( int versionIndex );
     void onByteArrayReadOnlyChange( bool isByteArrayReadOnly );
+//     void onClipboardChanged();
 
   protected:
     /** handles screen update in case of a change to any of the width sizes

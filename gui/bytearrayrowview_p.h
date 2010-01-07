@@ -97,10 +97,6 @@ class ByteArrayRowViewPrivate : public AbstractByteArrayViewPrivate
     void setCharCoding( const QString& charCodingName );
     void setByteTypeColored( bool isColored );
 
-  public: // slots
-    /** */
-    void clipboardChanged();
-
   protected: // drawing related operations
     /** recreates the cursor pixmaps and paints active and inactive cursors if doable */
     void createCursorPixmaps();

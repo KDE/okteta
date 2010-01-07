@@ -414,6 +414,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     Q_PRIVATE_SLOT( d_func(), void onContentsChanged( const Okteta::ArrayChangeMetricsList& changeList ) )
     Q_PRIVATE_SLOT( d_func(), void onBookmarksChange( const QList<Okteta::Bookmark>& bookmarks ) )
     Q_PRIVATE_SLOT( d_func(), void onRevertedToVersionIndex( int versionIndex ) )
+//     Q_PRIVATE_SLOT( d_func(), void onClipboardChanged() )
 };
 
 }

@@ -899,17 +899,6 @@ void ByteArrayColumnViewPrivate::ensureVisible( const AbstractByteArrayColumnRen
 }
 
 
-#if 0
-void ByteArrayColumnViewPrivate::clipboardChanged()
-{
-    Q_Q( ByteArrayColumnView );
-
-    // don't listen to selection changes
-    q->disconnect( QApplication::clipboard(), SIGNAL(selectionChanged()) );
-    selectAll( false );
-}
-#endif
-
 ByteArrayColumnViewPrivate::~ByteArrayColumnViewPrivate()
 {
 }

@@ -1172,6 +1172,18 @@ void AbstractByteArrayViewPrivate::onContentsChanged( const ArrayChangeMetricsLi
     emit q->cursorPositionChanged( cursorPosition() );
 }
 
+
+#if 0
+void AbstractByteArrayViewPrivate::onClipboardChanged()
+{
+    Q_Q( AbstractByteArrayView );
+
+    // don't listen to selection changes
+    q->disconnect( QApplication::clipboard(), SIGNAL(selectionChanged()) );
+    selectAll( false );
+}
+#endif
+
 AbstractByteArrayViewPrivate::~AbstractByteArrayViewPrivate()
 {
     delete mDropper;
