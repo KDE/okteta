@@ -205,12 +205,15 @@ class AbstractByteArrayViewPrivate
     void copyToClipboard( QClipboard::Mode mode = QClipboard::Clipboard ) const;
     void pasteFromClipboard( QClipboard::Mode mode = QClipboard::Clipboard );
 
+  protected: // cursor control
+    void startCursor();
+    void stopCursor();
+    void unpauseCursor();
+
   protected: // API to be implemented
   // cursor control
-    virtual void startCursor() = 0;
-    virtual void stopCursor() = 0;
     virtual void pauseCursor() = 0;
-    virtual void unpauseCursor() = 0;
+    virtual void updateCursors() = 0;
 
     virtual void setActiveCoding( AbstractByteArrayView::CodingTypeId codingId ) = 0;
     virtual void setVisibleCodings( int visibleCodings ) = 0;

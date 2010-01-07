@@ -606,25 +606,6 @@ void ByteArrayColumnViewPrivate::blinkCursor()
 }
 
 
-void ByteArrayColumnViewPrivate::startCursor()
-{
-    mCursorPaused = false;
-
-    updateCursors();
-
-    mCursorBlinkTimer->start( QApplication::cursorFlashTime()/2 );
-}
-
-
-void ByteArrayColumnViewPrivate::unpauseCursor()
-{
-    mCursorPaused = false;
-
-    if( mCursorBlinkTimer->isActive() )
-        updateCursors();
-}
-
-
 void ByteArrayColumnViewPrivate::updateCursors()
 {
     createCursorPixmaps();
@@ -632,14 +613,6 @@ void ByteArrayColumnViewPrivate::updateCursors()
     mBlinkCursorVisible = true;
     updateCursor( *mActiveColumn );
     updateCursor( *mInactiveColumn );
-}
-
-
-void ByteArrayColumnViewPrivate::stopCursor()
-{
-    mCursorBlinkTimer->stop();
-
-    pauseCursor();
 }
 
 

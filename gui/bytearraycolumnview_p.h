@@ -106,7 +106,6 @@ class ByteArrayColumnViewPrivate : public AbstractByteArrayViewPrivate
 
   protected: // drawing related operations
     /** recreates the cursor pixmaps and paints active and inactive cursors if doable */
-    void updateCursors();
     void createCursorPixmaps();
     /** draws the blinking cursor or removes it */
     void drawActiveCursor( QPainter* painter );
@@ -125,10 +124,8 @@ class ByteArrayColumnViewPrivate : public AbstractByteArrayViewPrivate
 
   protected: // AbstractByteArrayViewPrivate API
   // cursor control
-    virtual void startCursor();
-    virtual void stopCursor();
     virtual void pauseCursor();
-    virtual void unpauseCursor();
+    virtual void updateCursors();
 
     virtual void setActiveCoding( AbstractByteArrayView::CodingTypeId codingId );
     virtual void setVisibleCodings( int visibleCodings );

@@ -903,6 +903,33 @@ void AbstractByteArrayViewPrivate::adjustLayoutToSize()
     q->setNoOfLines( mTableLayout->noOfLines() );
 }
 
+void AbstractByteArrayViewPrivate::startCursor()
+{
+    mCursorPaused = false;
+
+    updateCursors();
+
+    mCursorBlinkTimer->start( QApplication::cursorFlashTime()/2 );
+}
+
+
+void AbstractByteArrayViewPrivate::stopCursor()
+{
+    mCursorBlinkTimer->stop();
+
+    pauseCursor();
+}
+
+
+void AbstractByteArrayViewPrivate::unpauseCursor()
+{
+    mCursorPaused = false;
+
+    if( mCursorBlinkTimer->isActive() )
+        updateCursors();
+}
+
+
 void AbstractByteArrayViewPrivate::mousePressEvent( QMouseEvent* mouseEvent )
 {
     Q_Q( AbstractByteArrayView );

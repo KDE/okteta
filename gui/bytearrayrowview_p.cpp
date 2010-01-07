@@ -569,25 +569,6 @@ void ByteArrayRowViewPrivate::blinkCursor()
 }
 
 
-void ByteArrayRowViewPrivate::startCursor()
-{
-    mCursorPaused = false;
-
-    updateCursors();
-
-    mCursorBlinkTimer->start( QApplication::cursorFlashTime()/2 );
-}
-
-
-void ByteArrayRowViewPrivate::unpauseCursor()
-{
-    mCursorPaused = false;
-
-    if( mCursorBlinkTimer->isActive() )
-        updateCursors();
-}
-
-
 void ByteArrayRowViewPrivate::updateCursors()
 {
     createCursorPixmaps();
@@ -595,14 +576,6 @@ void ByteArrayRowViewPrivate::updateCursors()
     mBlinkCursorVisible = true;
     updateCursor( *mByteArrayColumn, mActiveCoding );
     updateCursor( *mByteArrayColumn, mInactiveCoding );
-}
-
-
-void ByteArrayRowViewPrivate::stopCursor()
-{
-    mCursorBlinkTimer->stop();
-
-    pauseCursor();
 }
 
 
