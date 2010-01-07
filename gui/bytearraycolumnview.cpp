@@ -181,13 +181,6 @@ QSize ByteArrayColumnView::minimumSizeHint() const
 }
 
 
-void ByteArrayColumnView::updateCursors()
-{
-    Q_D( ByteArrayColumnView );
-    d->updateCursors();
-}
-
-
 void ByteArrayColumnView::renderColumns( QPainter* painter, int cx, int cy, int cw, int ch )
 {
     Q_D( ByteArrayColumnView );

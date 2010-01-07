@@ -178,13 +178,6 @@ QSize ByteArrayRowView::minimumSizeHint() const
 }
 
 
-void ByteArrayRowView::updateCursors()
-{
-    Q_D( ByteArrayRowView );
-    d->updateCursors();
-}
-
-
 void ByteArrayRowView::renderColumns( QPainter* painter, int cx, int cy, int cw, int ch )
 {
     Q_D( ByteArrayRowView );

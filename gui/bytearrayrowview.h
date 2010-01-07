@@ -100,9 +100,6 @@ class OKTETAGUI_EXPORT ByteArrayRowView : public AbstractByteArrayView
 //    void updateByte( int row, int column );
 //    void ensureByteVisible( int row, int column );
 
-  protected:
-    void updateCursors();
-
   protected: // Q_SLOTS QWidget API
     virtual void fontChange( const QFont& oldFont );
 
