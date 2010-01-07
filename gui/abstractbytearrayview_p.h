@@ -48,6 +48,8 @@ class MousePaster;
 
 class ZoomWheelController;
 
+class WidgetColumnStylist;
+
 
 class AbstractByteArrayViewPrivate
 {
@@ -249,6 +251,8 @@ class AbstractByteArrayViewPrivate
     MousePaster* mMousePaster;
 
     ZoomWheelController* mZoomWheelController;
+
+    WidgetColumnStylist* mStylist;
 
   protected:
     /** flag whether the widget is set to readonly. Cannot override the databuffer's setting, of course. */

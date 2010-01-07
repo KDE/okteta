@@ -67,8 +67,6 @@ void ByteArrayColumnViewPrivate::init()
 
     mCursorBlinkTimer = new QTimer( q );
 
-    mStylist = new WidgetColumnStylist( q );
-
     // creating the columns in the needed order
     mOffsetColumn =
         new OffsetColumnRenderer( mStylist, mTableLayout, OffsetFormat::Hexadecimal );
@@ -949,7 +947,6 @@ void ByteArrayColumnViewPrivate::clipboardChanged()
 ByteArrayColumnViewPrivate::~ByteArrayColumnViewPrivate()
 {
     delete mCursorPixmaps;
-    delete mStylist;
 }
 
 }

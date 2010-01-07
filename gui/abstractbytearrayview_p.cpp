@@ -30,6 +30,7 @@
 #include "controller/mousenavigator.h"
 #include "controller/mousepaster.h"
 #include "controller/zoomwheelcontroller.h"
+#include "widgetcolumnstylist.h"
 // Okteta core
 #include <valuecodec.h>
 #include <bookmarkable.h>
@@ -150,6 +151,8 @@ void AbstractByteArrayViewPrivate::init()
     // initialize layout
     mTableLayout->setLength( mByteArrayModel->size() );
     mTableLayout->setNoOfLinesPerPage( q->noOfLinesPerPage() );
+
+    mStylist = new WidgetColumnStylist( q );
 
     mValueCodec = ValueCodec::createCodec( (ValueCoding)DefaultValueCoding );
     mValueCoding = DefaultValueCoding;
@@ -1145,6 +1148,8 @@ AbstractByteArrayViewPrivate::~AbstractByteArrayViewPrivate()
     delete mValueEditor;
     delete mNavigator;
     delete mTabController;
+
+    delete mStylist;
 
     delete mTableRanges;
     delete mTableCursor;

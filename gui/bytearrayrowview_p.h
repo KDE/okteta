@@ -35,7 +35,6 @@ class QTimer;
 namespace Okteta
 {
 class BorderColumnRenderer;
-class WidgetColumnStylist;
 
 class KCursor;
 
@@ -150,8 +149,6 @@ class ByteArrayRowViewPrivate : public AbstractByteArrayViewPrivate
 
     ByteArrayRowView::CodingTypeId mActiveCoding;
     ByteArrayRowView::CodingTypeId mInactiveCoding;
-
-    WidgetColumnStylist* mStylist;
 
   protected:
     /** Timer that controls the blinking of the cursor */
