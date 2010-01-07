@@ -29,23 +29,12 @@
 
 namespace Okteta
 {
-class KValueEditor;
-
 class ByteArrayRowViewPrivate;
+
 
 class OKTETAGUI_EXPORT ByteArrayRowView : public AbstractByteArrayView
 {
   Q_OBJECT
-  Q_PROPERTY( bool ByteTypeColored READ isByteTypeColored WRITE setByteTypeColored )
-  // value column
-  Q_PROPERTY( ValueCoding Coding READ valueCoding WRITE setValueCoding )
-  Q_PROPERTY( int ByteSpacingWidth READ byteSpacingWidth WRITE setByteSpacingWidth )
-  Q_PROPERTY( int NoOfGroupedBytes READ noOfGroupedBytes WRITE setNoOfGroupedBytes )
-  Q_PROPERTY( int GroupSpacingWidth READ groupSpacingWidth WRITE setGroupSpacingWidth )
-  Q_PROPERTY( int BinaryGapWidth READ binaryGapWidth WRITE setBinaryGapWidth )
-  // char column
-  Q_PROPERTY( bool ShowNonprinting READ showsNonprinting WRITE setShowsNonprinting )
-  Q_PROPERTY( QChar SubstituteChar READ substituteChar WRITE setSubstituteChar )
 
   public:
     explicit ByteArrayRowView( QWidget* parent = 0 );
@@ -105,7 +94,6 @@ class OKTETAGUI_EXPORT ByteArrayRowView : public AbstractByteArrayView
 
   private:
     Q_DECLARE_PRIVATE( ByteArrayRowView )
-//     Q_PRIVATE_SLOT( d_func(), void clipboardChanged() )
 };
 
 }

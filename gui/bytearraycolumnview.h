@@ -29,9 +29,6 @@
 
 namespace Okteta
 {
-class KValueEditor;
-
-
 class ByteArrayColumnViewPrivate;
 
 /** the main widget
@@ -51,16 +48,6 @@ class ByteArrayColumnViewPrivate;
 class OKTETAGUI_EXPORT ByteArrayColumnView : public AbstractByteArrayView
 {
   Q_OBJECT
-  Q_PROPERTY( bool ByteTypeColored READ isByteTypeColored WRITE setByteTypeColored )
-  // value column
-  Q_PROPERTY( ValueCoding Coding READ valueCoding WRITE setValueCoding )
-  Q_PROPERTY( int ByteSpacingWidth READ byteSpacingWidth WRITE setByteSpacingWidth )
-  Q_PROPERTY( int NoOfGroupedBytes READ noOfGroupedBytes WRITE setNoOfGroupedBytes )
-  Q_PROPERTY( int GroupSpacingWidth READ groupSpacingWidth WRITE setGroupSpacingWidth )
-  Q_PROPERTY( int BinaryGapWidth READ binaryGapWidth WRITE setBinaryGapWidth )
-  // char column
-  Q_PROPERTY( bool ShowNonprinting READ showsNonprinting WRITE setShowsNonprinting )
-  Q_PROPERTY( QChar SubstituteChar READ substituteChar WRITE setSubstituteChar )
 
   public:
     explicit ByteArrayColumnView( QWidget* parent = 0 );

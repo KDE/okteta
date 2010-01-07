@@ -81,6 +81,17 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
   Q_PROPERTY( CodingTypes VisibleCodings READ visibleCodings WRITE setVisibleCodings )
   Q_ENUMS( ValueCoding CharCoding LayoutStyle CodingTypes )
 
+  Q_PROPERTY( bool ByteTypeColored READ isByteTypeColored WRITE setByteTypeColored )
+  // value column
+  Q_PROPERTY( ValueCoding Coding READ valueCoding WRITE setValueCoding )
+  Q_PROPERTY( int ByteSpacingWidth READ byteSpacingWidth WRITE setByteSpacingWidth )
+  Q_PROPERTY( int NoOfGroupedBytes READ noOfGroupedBytes WRITE setNoOfGroupedBytes )
+  Q_PROPERTY( int GroupSpacingWidth READ groupSpacingWidth WRITE setGroupSpacingWidth )
+  Q_PROPERTY( int BinaryGapWidth READ binaryGapWidth WRITE setBinaryGapWidth )
+  // char column
+  Q_PROPERTY( bool ShowNonprinting READ showsNonprinting WRITE setShowsNonprinting )
+  Q_PROPERTY( QChar SubstituteChar READ substituteChar WRITE setSubstituteChar )
+
   public:
     enum ValueCoding { HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, MaxCodingId=0xFFFF };
     enum CharCoding { LocalEncoding=0, ISO8859_1Encoding=1, EBCDIC1047Encoding=2,
