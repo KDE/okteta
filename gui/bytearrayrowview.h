@@ -111,7 +111,6 @@ class OKTETAGUI_EXPORT ByteArrayRowView : public AbstractByteArrayView
 
   private:
     Q_DECLARE_PRIVATE( ByteArrayRowView )
-    Q_PRIVATE_SLOT( d_func(), void blinkCursor() )
 //     Q_PRIVATE_SLOT( d_func(), void clipboardChanged() )
 };
 

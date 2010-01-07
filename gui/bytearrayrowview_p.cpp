@@ -48,22 +48,17 @@
 
 namespace Okteta
 {
-static const int DefaultScrollTimerPeriod = 100;
 static const int InsertCursorWidth = 2;
 
 
 ByteArrayRowViewPrivate::ByteArrayRowViewPrivate( ByteArrayRowView* parent )
-  : AbstractByteArrayViewPrivate( parent ),
-    mCursorPixmaps( new KCursor() ),
-    mBlinkCursorVisible( false )
+  : AbstractByteArrayViewPrivate( parent )
 {
 }
 
 void ByteArrayRowViewPrivate::init()
 {
    Q_Q( ByteArrayRowView );
-
-    mCursorBlinkTimer = new QTimer( q );
 
     // creating the columns in the needed order
     mOffsetColumn =
@@ -88,11 +83,8 @@ void ByteArrayRowViewPrivate::init()
 
     adaptController();
 
+    // do here not in base class, as handleFontChange needs this init run before
     q->setFont( KGlobalSettings::fixedFont() );
-
-    q->connect( mCursorBlinkTimer, SIGNAL(timeout()), q, SLOT(blinkCursor()) );
-
-    q->setAcceptDrops( true );
 }
 
 AbstractByteArrayView::CodingTypes ByteArrayRowViewPrivate::visibleCodings() const { return mByteArrayColumn->visibleCodings(); }

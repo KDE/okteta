@@ -30,14 +30,10 @@
 #include "charbytearraycolumnrenderer.h"
 #include "offsetcolumnrenderer.h"
 
-class QTimer;
-
 
 namespace Okteta
 {
 class BorderColumnRenderer;
-
-class KCursor;
 
 class Coord;
 
@@ -84,6 +80,7 @@ class ByteArrayColumnViewPrivate : public AbstractByteArrayViewPrivate
     virtual void placeCursor( const QPoint& point );
     virtual QRect cursorRect() const;
     virtual Address indexByPoint( const QPoint& point ) const;
+    virtual void blinkCursor();
 
   public:
     void toggleOffsetColumn( bool offsetColumnVisible );
@@ -104,8 +101,6 @@ class ByteArrayColumnViewPrivate : public AbstractByteArrayViewPrivate
     void setByteTypeColored( bool isColored );
 
   public: // slots
-    /** gets called by the cursor blink timer */
-    void blinkCursor();
     /** */
     void clipboardChanged();
 
@@ -156,18 +151,8 @@ class ByteArrayColumnViewPrivate : public AbstractByteArrayViewPrivate
     AbstractByteArrayColumnRenderer* mActiveColumn;
     /** points to the column without keyboard focus (if there is) */
     AbstractByteArrayColumnRenderer* mInactiveColumn;
-
-  protected:
-    /** Timer that controls the blinking of the cursor */
-    QTimer* mCursorBlinkTimer;
-
-    /** object to store the blinking cursor pixmaps */
-    KCursor* mCursorPixmaps;
-
-  protected:
-    /** flag if the cursor is visible */
-    bool mBlinkCursorVisible:1;
 };
+
 
 inline PixelX ByteArrayColumnViewPrivate::byteSpacingWidth()  const { return mValueColumn->byteSpacingWidth(); }
 inline int ByteArrayColumnViewPrivate::noOfGroupedBytes()      const { return mValueColumn->noOfGroupedBytes(); }

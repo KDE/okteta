@@ -31,6 +31,7 @@
 #include "controller/mousepaster.h"
 #include "controller/zoomwheelcontroller.h"
 #include "widgetcolumnstylist.h"
+#include "kcursor.h"
 // Okteta core
 #include <valuecodec.h>
 #include <bookmarkable.h>
@@ -52,6 +53,7 @@
 #include <QtGui/QToolTip>
 #include <QtCore/QMimeData>
 #include <QtCore/QByteArray>
+#include <QtCore/QTimer>
 
 
 namespace Okteta
@@ -132,11 +134,13 @@ AbstractByteArrayViewPrivate::AbstractByteArrayViewPrivate( AbstractByteArrayVie
    mTableLayout( new ByteArrayTableLayout(DefaultNoOfBytesPerLine,DefaultFirstLineOffset,DefaultStartOffset,0,0) ),
    mTableCursor( new ByteArrayTableCursor(mTableLayout) ),
    mTableRanges( new ByteArrayTableRanges(mTableLayout) ),
+   mCursorPixmaps( new KCursor() ),
    mReadOnly( false ),
    mOverWriteOnly( false ),
    mOverWrite( true ),
    mInZooming( false ),
    mCursorPaused( false ),
+   mBlinkCursorVisible( false ),
 //    mDefaultFontSize( p->font().pointSize() ), crashes in font()
    mZoomLevel( 1.0 ),
    mResizeStyle( DefaultResizeStyle ),
@@ -172,6 +176,12 @@ void AbstractByteArrayViewPrivate::init()
     mDropper = new Dropper( q );
 
     setWheelController( mZoomWheelController );
+
+    mCursorBlinkTimer = new QTimer( q );
+
+    q->connect( mCursorBlinkTimer, SIGNAL(timeout()), q, SLOT(blinkCursor()) );
+
+    q->setAcceptDrops( true );
 }
 
 void AbstractByteArrayViewPrivate::setByteArrayModel( AbstractByteArrayModel* byteArrayModel )

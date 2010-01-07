@@ -126,7 +126,6 @@ class OKTETAGUI_EXPORT ByteArrayColumnView : public AbstractByteArrayView
 
   private:
     Q_DECLARE_PRIVATE( ByteArrayColumnView )
-    Q_PRIVATE_SLOT( d_func(), void blinkCursor() )
 //     Q_PRIVATE_SLOT( d_func(), void clipboardChanged() )
 
   private: // Disabling copy constructor and operator= - not useful

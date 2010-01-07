@@ -55,17 +55,13 @@ static const int InsertCursorWidth = 2;
 
 
 ByteArrayColumnViewPrivate::ByteArrayColumnViewPrivate( ByteArrayColumnView* parent )
-  : AbstractByteArrayViewPrivate( parent ),
-    mCursorPixmaps( new KCursor() ),
-    mBlinkCursorVisible( false )
+  : AbstractByteArrayViewPrivate( parent )
 {
 }
 
 void ByteArrayColumnViewPrivate::init()
 {
     Q_Q( ByteArrayColumnView );
-
-    mCursorBlinkTimer = new QTimer( q );
 
     // creating the columns in the needed order
     mOffsetColumn =
@@ -96,11 +92,8 @@ void ByteArrayColumnViewPrivate::init()
 
     adaptController();
 
+    // do here not in base class, as handleFontChange needs this init run before
     q->setFont( KGlobalSettings::fixedFont() );
-
-    q->connect( mCursorBlinkTimer, SIGNAL(timeout()), q, SLOT(blinkCursor()) );
-
-    q->setAcceptDrops( true );
 }
 
 AbstractByteArrayView::CodingTypeId ByteArrayColumnViewPrivate::activeCoding() const

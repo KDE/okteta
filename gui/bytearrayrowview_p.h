@@ -29,14 +29,10 @@
 #include "bytearrayrowcolumnrenderer.h"
 #include "offsetcolumnrenderer.h"
 
-class QTimer;
-
 
 namespace Okteta
 {
 class BorderColumnRenderer;
-
-class KCursor;
 
 class Coord;
 
@@ -149,17 +145,8 @@ class ByteArrayRowViewPrivate : public AbstractByteArrayViewPrivate
 
     ByteArrayRowView::CodingTypeId mActiveCoding;
     ByteArrayRowView::CodingTypeId mInactiveCoding;
-
-  protected:
-    /** Timer that controls the blinking of the cursor */
-    QTimer* mCursorBlinkTimer;
-    /** object to store the blinking cursor pixmaps */
-    KCursor* mCursorPixmaps;
-
-  protected: // parameters
-    /** flag if the cursor is visible */
-    bool mBlinkCursorVisible:1;
 };
+
 
 inline PixelX ByteArrayRowViewPrivate::byteSpacingWidth()  const { return mByteArrayColumn->byteSpacingWidth(); }
 inline int ByteArrayRowViewPrivate::noOfGroupedBytes()      const { return mByteArrayColumn->noOfGroupedBytes(); }

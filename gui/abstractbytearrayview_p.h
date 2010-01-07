@@ -34,6 +34,8 @@
 #include <abstractbytearraymodel.h>
 #include <charcodec.h>
 
+class QTimer;
+
 
 namespace Okteta
 {
@@ -49,6 +51,7 @@ class MousePaster;
 class ZoomWheelController;
 
 class WidgetColumnStylist;
+class KCursor;
 
 
 class AbstractByteArrayViewPrivate
@@ -155,6 +158,7 @@ class AbstractByteArrayViewPrivate
     virtual void placeCursor( const QPoint& point ) = 0;
     virtual QRect cursorRect() const = 0;
     virtual Address indexByPoint( const QPoint& point ) const = 0;
+    virtual void blinkCursor() = 0;
 
   public: // events
     bool event( QEvent* event );
@@ -255,6 +259,13 @@ class AbstractByteArrayViewPrivate
     WidgetColumnStylist* mStylist;
 
   protected:
+    /** Timer that controls the blinking of the cursor */
+    QTimer* mCursorBlinkTimer;
+
+    /** object to store the blinking cursor pixmaps */
+    KCursor* mCursorPixmaps;
+
+  protected:
     /** flag whether the widget is set to readonly. Cannot override the databuffer's setting, of course. */
     bool mReadOnly:1;
     /** flag if only overwrite is allowed */
@@ -265,6 +276,8 @@ class AbstractByteArrayViewPrivate
     bool mInZooming:1;
     /** flag if the cursor should be invisible */
     bool mCursorPaused:1;
+    /** flag if the cursor is visible */
+    bool mBlinkCursorVisible:1;
 
     /** font size as set by user (used for zooming) */
     int mDefaultFontSize;
