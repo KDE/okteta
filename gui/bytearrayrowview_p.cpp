@@ -868,7 +868,6 @@ void ByteArrayRowViewPrivate::clipboardChanged()
 
 ByteArrayRowViewPrivate::~ByteArrayRowViewPrivate()
 {
-    delete mCursorPixmaps;
 }
 
 }

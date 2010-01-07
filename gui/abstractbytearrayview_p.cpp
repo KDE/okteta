@@ -1193,6 +1193,8 @@ AbstractByteArrayViewPrivate::~AbstractByteArrayViewPrivate()
     delete mTableLayout;
     delete mValueCodec;
     delete mCharCodec;
+
+    delete mCursorPixmaps;
 }
 
 }
