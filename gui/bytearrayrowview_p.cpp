@@ -52,15 +52,11 @@ void ByteArrayRowViewPrivate::init()
    Q_Q( ByteArrayRowView );
 
     // creating the columns in the needed order
-    mOffsetColumn =
-        new OffsetColumnRenderer( mStylist, mTableLayout, OffsetFormat::Hexadecimal );
-    mBorderColumn =
-        new BorderColumnRenderer( mStylist, false );
     mByteArrayColumn =
         new ByteArrayRowColumnRenderer( mStylist, mByteArrayModel, mTableLayout, mTableRanges );
 
     q->addColumn( mOffsetColumn );
-    q->addColumn( mBorderColumn );
+    q->addColumn( mOffsetBorderColumn );
     q->addColumn( mByteArrayColumn );
 
     // select the active column
@@ -284,19 +280,6 @@ void ByteArrayRowViewPrivate::adjustToLayoutNoOfBytesPerLine()
 }
 
 
-void ByteArrayRowViewPrivate::toggleOffsetColumn( bool showOffsetColumn )
-{
-    const bool isVisible = mOffsetColumn->isVisible();
-    // no change?
-    if( isVisible == showOffsetColumn )
-        return;
-
-    mOffsetColumn->setVisible( showOffsetColumn );
-
-    updateViewByWidth();
-}
-
-
 QSize ByteArrayRowViewPrivate::minimumSizeHint() const
 {
     Q_Q( const ByteArrayRowView );
@@ -304,7 +287,7 @@ QSize ByteArrayRowViewPrivate::minimumSizeHint() const
     // TODO: better minimal width (visibility!)
     const int minWidth =
         mOffsetColumn->visibleWidth()
-        + mBorderColumn->visibleWidth()
+        + mOffsetBorderColumn->visibleWidth()
         + mByteArrayColumn->byteWidth();
     const int minHeight =
         q->lineHeight()
@@ -321,7 +304,7 @@ int ByteArrayRowViewPrivate::fittingBytesPerLine() const
     const QSize newSize = q->maximumViewportSize();
     const PixelX reservedWidth =
         mOffsetColumn->visibleWidth()
-        + mBorderColumn->visibleWidth();
+        + mOffsetBorderColumn->visibleWidth();
 
     // abstract offset and border columns width
     const PixelX fullWidth = newSize.width() - reservedWidth;

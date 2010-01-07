@@ -31,6 +31,7 @@
 #include "controller/zoomwheelcontroller.h"
 #include "widgetcolumnstylist.h"
 #include "kcursor.h"
+#include "bordercolumnrenderer.h"
 // Okteta core
 #include <valuecodec.h>
 #include <bookmarkable.h>
@@ -152,6 +153,11 @@ void AbstractByteArrayViewPrivate::init()
 
     mStylist = new WidgetColumnStylist( q );
 
+    mOffsetColumn =
+        new OffsetColumnRenderer( mStylist, mTableLayout, OffsetFormat::Hexadecimal );
+    mOffsetBorderColumn =
+        new BorderColumnRenderer( mStylist, false );
+
     mValueCodec = ValueCodec::createCodec( (ValueCoding)DefaultValueCoding );
     mValueCoding = DefaultValueCoding;
     mCharCodec = CharCodec::createCodec( (CharCoding)DefaultCharCoding );
@@ -224,6 +230,20 @@ void AbstractByteArrayViewPrivate::setByteArrayModel( AbstractByteArrayModel* by
 
     emit q->cursorPositionChanged( cursorPosition() );
 }
+
+
+void AbstractByteArrayViewPrivate::toggleOffsetColumn( bool showOffsetColumn )
+{
+    const bool isVisible = mOffsetColumn->isVisible();
+    // no change?
+    if( isVisible == showOffsetColumn )
+        return;
+
+    mOffsetColumn->setVisible( showOffsetColumn );
+
+    updateViewByWidth();
+}
+
 
 void AbstractByteArrayViewPrivate::fontChange( const QFont& oldFont )
 {

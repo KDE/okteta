@@ -163,9 +163,6 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
   public:
     virtual void setByteArrayModel( Okteta::AbstractByteArrayModel* byteArrayModel );
 
-    /** switches the Offset column on/off */
-    virtual void toggleOffsetColumn( bool offsetColumnVisible ) = 0;
-
   // setting parameters
   // value column parameters
     /** sets the spacing between the bytes in the value column
@@ -254,6 +251,9 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     void setActiveCoding( CodingTypeId codingId );
     /** */
     void setVisibleCodings( int visibleCodings );
+
+    /** switches the Offset column on/off */
+    void toggleOffsetColumn( bool offsetColumnVisible );
 
   public:
     /** 

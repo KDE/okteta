@@ -28,13 +28,10 @@
 #include "abstractbytearrayview_p.h"
 #include "valuebytearraycolumnrenderer.h"
 #include "charbytearraycolumnrenderer.h"
-#include "offsetcolumnrenderer.h"
 
 
 namespace Okteta
 {
-class BorderColumnRenderer;
-
 class Coord;
 
 
@@ -50,8 +47,6 @@ class ByteArrayColumnViewPrivate : public AbstractByteArrayViewPrivate
     void init();
 
   public:
-    bool offsetColumnVisible() const;
-
   // value column
     int/*PixelX*/ byteSpacingWidth() const;
     int noOfGroupedBytes() const;
@@ -83,8 +78,6 @@ class ByteArrayColumnViewPrivate : public AbstractByteArrayViewPrivate
     virtual void blinkCursor();
 
   public:
-    void toggleOffsetColumn( bool offsetColumnVisible );
-
   // value column parameters
     void setByteSpacingWidth( int/*PixelX*/ byteSpacingWidth ) ;
     void setNoOfGroupedBytes( int noOfGroupedBytes );
@@ -134,10 +127,8 @@ class ByteArrayColumnViewPrivate : public AbstractByteArrayViewPrivate
     virtual void updateChanged();
 
   protected:
-    OffsetColumnRenderer*         mOffsetColumn;
-    BorderColumnRenderer*         mFirstBorderColumn;
     ValueByteArrayColumnRenderer* mValueColumn;
-    BorderColumnRenderer*         mSecondBorderColumn;
+    BorderColumnRenderer*         mMiddleBorderColumn;
     CharByteArrayColumnRenderer*  mCharColumn;
 
     /** points to the column with keyboard focus */
@@ -155,7 +146,6 @@ inline bool ByteArrayColumnViewPrivate::showsNonprinting()     const { return mC
 inline QChar ByteArrayColumnViewPrivate::substituteChar()      const { return mCharColumn->substituteChar(); }
 inline QChar ByteArrayColumnViewPrivate::undefinedChar()       const { return mCharColumn->undefinedChar(); }
 inline bool ByteArrayColumnViewPrivate::isByteTypeColored()    const { return mValueColumn->isByteTypeColored(); }
-inline bool ByteArrayColumnViewPrivate::offsetColumnVisible()  const { return mOffsetColumn->isVisible(); }
 
 }
 

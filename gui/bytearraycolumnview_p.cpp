@@ -52,21 +52,17 @@ void ByteArrayColumnViewPrivate::init()
     Q_Q( ByteArrayColumnView );
 
     // creating the columns in the needed order
-    mOffsetColumn =
-        new OffsetColumnRenderer( mStylist, mTableLayout, OffsetFormat::Hexadecimal );
-    mFirstBorderColumn =
-        new BorderColumnRenderer( mStylist, false );
     mValueColumn =
         new ValueByteArrayColumnRenderer( mStylist, mByteArrayModel, mTableLayout, mTableRanges );
-    mSecondBorderColumn =
+    mMiddleBorderColumn =
         new BorderColumnRenderer( mStylist, true );
     mCharColumn =
         new CharByteArrayColumnRenderer( mStylist, mByteArrayModel, mTableLayout, mTableRanges );
 
     q->addColumn( mOffsetColumn );
-    q->addColumn( mFirstBorderColumn );
+    q->addColumn( mOffsetBorderColumn );
     q->addColumn( mValueColumn );
-    q->addColumn( mSecondBorderColumn );
+    q->addColumn( mMiddleBorderColumn );
     q->addColumn( mCharColumn );
 
     // select the active column
@@ -308,19 +304,6 @@ void ByteArrayColumnViewPrivate::adjustToLayoutNoOfBytesPerLine()
 }
 
 
-void ByteArrayColumnViewPrivate::toggleOffsetColumn( bool showOffsetColumn )
-{
-    const bool isVisible = mOffsetColumn->isVisible();
-    // no change?
-    if( isVisible == showOffsetColumn )
-        return;
-
-    mOffsetColumn->setVisible( showOffsetColumn );
-
-    updateViewByWidth();
-}
-
-
 QSize ByteArrayColumnViewPrivate::minimumSizeHint() const
 {
     Q_Q( const ByteArrayColumnView );
@@ -328,8 +311,8 @@ QSize ByteArrayColumnViewPrivate::minimumSizeHint() const
     // TODO: better minimal width (visibility!)
     const int minWidth =
         mOffsetColumn->visibleWidth()
-        + mFirstBorderColumn->visibleWidth()
-        + mSecondBorderColumn->visibleWidth()
+        + mOffsetBorderColumn->visibleWidth()
+        + mMiddleBorderColumn->visibleWidth()
         + mValueColumn->byteWidth()
         + mCharColumn->byteWidth();
     const int minHeight =
@@ -347,8 +330,8 @@ int ByteArrayColumnViewPrivate::fittingBytesPerLine() const
     const QSize newSize = q->maximumViewportSize();
     const PixelX reservedWidth =
         mOffsetColumn->visibleWidth()
-        + mFirstBorderColumn->visibleWidth()
-        + mSecondBorderColumn->visibleWidth();
+        + mOffsetBorderColumn->visibleWidth()
+        + mMiddleBorderColumn->visibleWidth();
 
     // abstract offset and border columns width
     const PixelX fullWidth = newSize.width() - reservedWidth;
@@ -498,7 +481,7 @@ void ByteArrayColumnViewPrivate::setVisibleCodings( int newColumns )
 
     mValueColumn->setVisible( AbstractByteArrayView::ValueCodingId & newColumns );
     mCharColumn->setVisible( AbstractByteArrayView::CharCodingId & newColumns );
-    mSecondBorderColumn->setVisible( newColumns == AbstractByteArrayView::ValueAndCharCodings );
+    mMiddleBorderColumn->setVisible( newColumns == AbstractByteArrayView::ValueAndCharCodings );
 
     // active column not visible anymore?
     if( !mActiveColumn->isVisible() )

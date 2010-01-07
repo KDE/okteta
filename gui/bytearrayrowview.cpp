@@ -174,12 +174,6 @@ void ByteArrayRowView::fontChange( const QFont& oldFont )
     d->handleFontChange( oldFont );
 }
 
-void ByteArrayRowView::toggleOffsetColumn( bool showOffsetColumn )
-{
-    Q_D( ByteArrayRowView );
-    d->toggleOffsetColumn( showOffsetColumn );
-}
-
 
 QSize ByteArrayRowView::minimumSizeHint() const
 {

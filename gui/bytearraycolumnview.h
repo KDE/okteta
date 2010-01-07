@@ -83,7 +83,6 @@ class OKTETAGUI_EXPORT ByteArrayColumnView : public AbstractByteArrayView
     virtual bool isByteTypeColored() const;
 
     virtual void setByteArrayModel( AbstractByteArrayModel* byteArrayModel );
-    virtual void toggleOffsetColumn( bool offsetColumnVisible );
     virtual void setByteSpacingWidth( int/*PixelX*/ byteSpacingWidth ) ;
     virtual void setNoOfGroupedBytes( int noOfGroupedBytes );
     virtual void setGroupSpacingWidth( int/*PixelX*/ groupSpacingWidth );

@@ -305,6 +305,12 @@ void AbstractByteArrayView::setTabChangesFocus( bool tabChangesFocus )
     d->setTabChangesFocus( tabChangesFocus );
 }
 
+void AbstractByteArrayView::toggleOffsetColumn( bool showOffsetColumn )
+{
+    Q_D( AbstractByteArrayView );
+    d->toggleOffsetColumn( showOffsetColumn );
+}
+
 
 void AbstractByteArrayView::selectAll( bool select )
 {

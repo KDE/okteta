@@ -30,6 +30,7 @@
 #include "bytearraytablelayout.h"
 #include "controller/kvalueeditor.h"
 #include "controller/ktabcontroller.h"
+#include "offsetcolumnrenderer.h"
 // Okteta core
 #include <abstractbytearraymodel.h>
 #include <charcodec.h>
@@ -52,6 +53,7 @@ class ZoomWheelController;
 
 class WidgetColumnStylist;
 class KCursor;
+class BorderColumnRenderer;
 
 
 class AbstractByteArrayViewPrivate
@@ -75,6 +77,8 @@ class AbstractByteArrayViewPrivate
     Address cursorPosition() const;
     /***/
     bool isCursorBehind() const;
+
+    bool offsetColumnVisible() const;
 
     int noOfBytesPerLine() const;
     Address startOffset() const;
@@ -133,6 +137,8 @@ class AbstractByteArrayViewPrivate
 
     void setMarking( Address start, Address end );
     void setMarking( const AddressRange& marking );
+
+    void toggleOffsetColumn( bool offsetColumnVisible );
 
   public: // zooming
     void zoomIn( int pointInc );
@@ -243,6 +249,9 @@ class AbstractByteArrayViewPrivate
     /** */
     ByteArrayTableRanges* mTableRanges;
 
+    OffsetColumnRenderer* mOffsetColumn;
+    BorderColumnRenderer* mOffsetBorderColumn;
+
   protected:
     /** */
     KTabController* mTabController;
@@ -344,6 +353,7 @@ inline bool AbstractByteArrayViewPrivate::tabChangesFocus()      const { return 
 inline bool AbstractByteArrayViewPrivate::isByteEditorActive()   const { return mValueEditor->isInEditMode(); }
 inline KValueEditor* AbstractByteArrayViewPrivate::valueEditor() const { return mValueEditor; }
 inline Dropper* AbstractByteArrayViewPrivate::dropper()          const { return mDropper; }
+inline bool AbstractByteArrayViewPrivate::offsetColumnVisible()  const { return mOffsetColumn->isVisible(); }
 
 inline void AbstractByteArrayViewPrivate::finishByteEditor()
 {

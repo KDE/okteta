@@ -177,12 +177,6 @@ void ByteArrayColumnView::fontChange( const QFont& oldFont )
     d->handleFontChange( oldFont );
 }
 
-void ByteArrayColumnView::toggleOffsetColumn( bool showOffsetColumn )
-{
-    Q_D( ByteArrayColumnView );
-    d->toggleOffsetColumn( showOffsetColumn );
-}
-
 
 QSize ByteArrayColumnView::minimumSizeHint() const
 {
