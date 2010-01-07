@@ -23,7 +23,6 @@
 #include "abstractbytearrayview_p.h"
 
 // lib
-#include "controller/ktabcontroller.h"
 #include "controller/knavigator.h"
 #include "controller/kchareditor.h"
 #include "controller/dropper.h"
@@ -37,22 +36,17 @@
 #include <bookmarkable.h>
 #include <versionable.h>
 #include <wordbytearrayservice.h>
-#include <arraychangemetricslist.h>
 #include <bookmark.h>
 // KDE
 #include <KGlobal>
 // Qt
-#include <QtGui/QKeyEvent>
 #include <QtGui/QDragEnterEvent>
 #include <QtGui/QDragMoveEvent>
 #include <QtGui/QDragLeaveEvent>
 #include <QtGui/QDropEvent>
-#include <QtGui/QMouseEvent>
 #include <QtGui/QApplication>
-#include <QtGui/QClipboard>
 #include <QtGui/QToolTip>
 #include <QtCore/QMimeData>
-#include <QtCore/QByteArray>
 #include <QtCore/QTimer>
 
 

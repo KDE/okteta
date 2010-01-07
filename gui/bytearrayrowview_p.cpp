@@ -25,25 +25,16 @@
 // lib
 #include "bordercolumnrenderer.h"
 #include "widgetcolumnstylist.h"
-#include "bytearraytableranges.h"
-#include "bytearraytablelayout.h"
-#include "controller/kvalueeditor.h"
 #include "controller/dropper.h"
 #include "kcursor.h"
 // Okteta core
-#include <abstractbytearraymodel.h>
 #include <valuecodec.h>
-#include <charcodec.h>
 // KDE
 #include <KGlobalSettings>
 // Qt
-#include <QtGui/QApplication>
 #include <QtGui/QStyle>
 #include <QtGui/QPainter>
-#include <QtGui/QCursor>
 #include <QtGui/QScrollBar>
-#include <QtCore/QListIterator>
-#include <QtCore/QTimer>
 
 
 namespace Okteta
