@@ -76,6 +76,7 @@ class ByteArrayRowViewPrivate : public AbstractByteArrayViewPrivate
     virtual void placeCursor( const QPoint& point );
     virtual QRect cursorRect() const;
     virtual Address indexByPoint( const QPoint& point ) const;
+    virtual void blinkCursor();
 
   public:
     void toggleOffsetColumn( bool offsetColumnVisible );
@@ -97,8 +98,6 @@ class ByteArrayRowViewPrivate : public AbstractByteArrayViewPrivate
     void setByteTypeColored( bool isColored );
 
   public: // slots
-    /** gets called by the cursor blink timer */
-    void blinkCursor();
     /** */
     void clipboardChanged();
 
