@@ -28,7 +28,7 @@
 
 namespace Okteta {
 
-void KDecimalByteCodec::encode( QString &Digits, unsigned int Pos, unsigned char Char ) const
+void KDecimalByteCodec::encode( QString &Digits, unsigned int Pos, Byte Char ) const
 {
   unsigned char C = Char / 100;
   Digits[Pos++] = '0'+C;
@@ -40,7 +40,7 @@ void KDecimalByteCodec::encode( QString &Digits, unsigned int Pos, unsigned char
 }
 
 
-void KDecimalByteCodec::encodeShort( QString &Digits, unsigned int Pos, unsigned char Char ) const
+void KDecimalByteCodec::encodeShort( QString &Digits, unsigned int Pos, Byte Char ) const
 {
   unsigned char C;
   if( (C = Char / 100) )

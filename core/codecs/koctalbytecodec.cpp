@@ -28,7 +28,7 @@
 
 namespace Okteta {
 
-void KOctalByteCodec::encode( QString &Digits, unsigned int Pos, unsigned char Char ) const
+void KOctalByteCodec::encode( QString &Digits, unsigned int Pos, Byte Char ) const
 {
   Digits[Pos++] = '0'+(Char>>6);
   Digits[Pos++] = '0'+((Char>>3)&0x07);
@@ -36,7 +36,7 @@ void KOctalByteCodec::encode( QString &Digits, unsigned int Pos, unsigned char C
 }
 
 
-void KOctalByteCodec::encodeShort( QString &Digits, unsigned int Pos, unsigned char Char ) const
+void KOctalByteCodec::encodeShort( QString &Digits, unsigned int Pos, Byte Char ) const
 {
   unsigned char C;
   if( (C = (Char>>6)&0x07) )

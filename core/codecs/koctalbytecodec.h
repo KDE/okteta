@@ -39,11 +39,11 @@ class KOctalByteCodec : public ValueCodec
     virtual unsigned int encodingWidth() const { return 3; }
     virtual unsigned char digitsFilledLimit() const { return 64; }
 
-    virtual void encode( QString &Digits, unsigned  int Pos, const unsigned char Char ) const;
-    virtual void encodeShort( QString &Digits, unsigned  int Pos, const unsigned char Char ) const;
-    virtual bool appendDigit( unsigned char *Byte, const unsigned char Digit ) const;
+    virtual void encode( QString &Digits, unsigned  int Pos, Byte Char ) const;
+    virtual void encodeShort( QString &Digits, unsigned  int Pos, Byte Char ) const;
+    virtual bool appendDigit( unsigned char *Byte, unsigned char Digit ) const;
     virtual void removeLastDigit( unsigned char *Byte ) const;
-    virtual bool isValidDigit( const unsigned char Digit ) const;
+    virtual bool isValidDigit( unsigned char Digit ) const;
     virtual bool turnToValue( unsigned char *Digit ) const;
 };
 

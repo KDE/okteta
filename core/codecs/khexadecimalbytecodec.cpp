@@ -46,13 +46,13 @@ bool KHexadecimalByteCodec::setSmallDigits( bool S )
 bool KHexadecimalByteCodec::smallDigits() const { return Digit != BigDigit; }
 
 
-void KHexadecimalByteCodec::encode( QString &Digits, unsigned int Pos, unsigned char Char ) const
+void KHexadecimalByteCodec::encode( QString &Digits, unsigned int Pos, Byte Char ) const
 {
   Digits[Pos++] = Digit[Char>>4];
   Digits[Pos] = Digit[Char&0x0F];
 }
 
-void KHexadecimalByteCodec::encodeShort( QString &Digits, unsigned int Pos, unsigned char Char ) const
+void KHexadecimalByteCodec::encodeShort( QString &Digits, unsigned int Pos, Byte Char ) const
 {
   unsigned char C;
   if( (C = (Char>>4)) )
