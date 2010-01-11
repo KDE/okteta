@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -49,7 +49,7 @@
 // KDE
 #include <KLocale>
 
-#include <KDebug>
+
 namespace Kasten
 {
 
@@ -79,7 +79,7 @@ PODDecoderTool::PODDecoderTool()
   : mByteArrayView( 0 ),
     mByteArrayModel( 0 ),
     mCursorIndex( 0 ),
-    mSourceByteArrayView( 0 ),
+    mIsPodMarked( false ),
     mCharCodec( Okteta::CharCodec::createCodec(Okteta::LocalEncoding) ),
     mDifferentSizeDialog( 0 ),
     mUnsignedAsHex( true )
@@ -93,7 +93,12 @@ QString PODDecoderTool::title() const { return i18nc("@title:window", "Decoding 
 
 void PODDecoderTool::setTargetModel( AbstractModel* model )
 {
-    if( mByteArrayView ) mByteArrayView->disconnect( this );
+    if( mByteArrayView )
+    {
+        mByteArrayView->disconnect( this );
+        if( mIsPodMarked )
+            unmarkPOD();
+    }
     if( mByteArrayModel ) mByteArrayModel->disconnect( this );
 
     mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
@@ -299,29 +304,19 @@ void PODDecoderTool::updateData()
 
 void PODDecoderTool::markPOD( int podId )
 {
-    if( mSourceByteArrayView != mByteArrayView )
-    {
-        if( mSourceByteArrayView ) mSourceByteArrayView->disconnect( this );
-        mSourceByteArrayView = mByteArrayView;
-        connect( mSourceByteArrayView,  SIGNAL(destroyed()),
-                 SLOT(onSourceViewDestroyed()) );
-    }
     const int length = mDecodedValueByteCountList[podId];
     const Okteta::AddressRange markingRange = Okteta::AddressRange::fromWidth( mCursorIndex, length );
-    mSourceByteArrayView->setMarking( markingRange, true );
+    mByteArrayView->setMarking( markingRange, true );
+    mIsPodMarked = true;
 }
 
 void PODDecoderTool::unmarkPOD()
 {
 // TODO: marked region is property of document, not view?
-    if( mSourceByteArrayView )
-        mSourceByteArrayView->setMarking( Okteta::AddressRange() );
+    mByteArrayView->setMarking( Okteta::AddressRange() );
+    mIsPodMarked = false;
 }
 
-void PODDecoderTool::onSourceViewDestroyed()
-{
-    mSourceByteArrayView = 0;
-}
 
 PODDecoderTool::~PODDecoderTool()
 {

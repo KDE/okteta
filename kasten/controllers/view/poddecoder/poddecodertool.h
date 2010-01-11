@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -98,7 +98,6 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
   protected Q_SLOTS:
     void onCursorPositionChange( Okteta::Address pos );
     void onContentsChange();
-    void onSourceViewDestroyed();
 
     void onCharCodecChange( const QString& codecName );
 //     void onUndefinedCharChanged( const QChar& undefinedChar );
@@ -108,7 +107,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
     Okteta::AbstractByteArrayModel* mByteArrayModel;
     Okteta::Address mCursorIndex;
 
-    ByteArrayView* mSourceByteArrayView;
+    bool mIsPodMarked :1;
 
     QVector<Okteta::AbstractTypeCodec*> mTypeCodecs;
     Okteta::CharCodec* mCharCodec;
