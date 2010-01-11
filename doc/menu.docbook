@@ -15,7 +15,19 @@
     <guimenu>File</guimenu>
     <guimenuitem>New</guimenuitem>
     </menuchoice></term>
-    <listitem><para><action>Creates a new byte array.</action></para></listitem>
+    <listitem><para><action>Create a new byte array...</action></para>
+    <itemizedlist>
+    <listitem><para><guimenuitem>Empty</guimenuitem>: ... as Empty one.</para>
+    </listitem>
+    <listitem><para><guimenuitem>From Clipboard</guimenuitem>: ... by the current
+    content of the clipboard.</para></listitem>
+    <listitem><para><guimenuitem>Pattern...</guimenuitem>: ... with a given pattern.</para>
+    </listitem>
+    <listitem><para><guimenuitem>Random Data...</guimenuitem>: ...with random data.</para></listitem>
+    <listitem><para><guimenuitem>Sequence</guimenuitem>: ... with all the bytes
+    from 0 to 255.</para></listitem>
+    </itemizedlist>
+    </listitem>
     </varlistentry>
 
     <varlistentry>
@@ -58,7 +70,7 @@
     <guimenu>File</guimenu>
     <guimenuitem>Save</guimenuitem>
     </menuchoice></term>
-    <listitem><para><action>Save byte array to a file.</action></para></listitem>
+    <listitem><para><action>Save byte array to the assigned file.</action></para></listitem>
     </varlistentry>
 
     <varlistentry>
@@ -80,6 +92,8 @@
     </listitem>
     <listitem><para><guimenuitem>Plain Text</guimenuitem>: ... encoded as characters.
     </para></listitem>
+    <listitem><para><guimenuitem>Base64</guimenuitem>: ... encoded in the Base64
+    format.</para></listitem>
     <listitem><para><guimenuitem>C array</guimenuitem>: ... defined as
     an array in the programming language C.</para></listitem>
     <listitem><para><guimenuitem>View in Plain Text</guimenuitem>: ... as in the data view with offset, byte values and characters. </para></listitem>
@@ -90,10 +104,10 @@
     <varlistentry>
     <term><menuchoice>
     <guimenu>File</guimenu>
-    <guimenuitem>Revert</guimenuitem>
+    <guimenuitem>Reload</guimenuitem>
     </menuchoice></term>
-    <listitem><para><action>Revert all changes and reset the edited byte array to the content of the
-    file.</action></para></listitem>
+    <listitem><para><action>Discards all changes and reloads the byte array from
+    the file.</action></para></listitem>
     </varlistentry>
 
     <varlistentry>
@@ -179,6 +193,28 @@
     <varlistentry>
     <term><menuchoice>
     <shortcut>
+    <keycombo action="simul">&Ctrl;<keycap>W</keycap></keycombo>
+    </shortcut>
+    <guimenu>File</guimenu>
+    <guimenuitem>Close All</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Close all byte arrays.</action></para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Ctrl;<keycap>W</keycap></keycombo>
+    </shortcut>
+    <guimenu>File</guimenu>
+    <guimenuitem>Close All Other</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Close all besides the current byte array.</action></para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
     <keycombo action="simul">&Ctrl;<keycap>Q</keycap></keycombo>
     </shortcut>
     <guimenu>File</guimenu>
@@ -192,10 +228,10 @@
 
 <sect1 id="edit-menu">
 <title><guimenu>Edit</guimenu> Menu</title>
-<para>Currently in &kde; 4.1 copy and cut send data to the clipboard with the
+<para>Currently in &kde; 4.4 simple copy and cut send data to the clipboard with the
 mimetype "application/octetstream", &klipper; is not able to display this data.
 And almost all other applications cannot handle this, too, as this is
-simply raw data.</para>
+simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</para>
 <variablelist>
     <varlistentry>
     <term><menuchoice>
@@ -266,6 +302,8 @@ simply raw data.</para>
     </listitem>
     <listitem><para><guimenuitem>Plain Text</guimenuitem>: ... encoded as characters.
     </para></listitem>
+    <listitem><para><guimenuitem>Base64</guimenuitem>: ... encoded in the Base64
+    format.</para></listitem>
     <listitem><para><guimenuitem>C array</guimenuitem>: ... defined as
     an array in the programming language C.</para></listitem>
     <listitem><para><guimenuitem>View in Plain Text</guimenuitem>: ... as in the data view with offset, byte values and characters. </para></listitem>
@@ -298,6 +336,18 @@ simply raw data.</para>
     <varlistentry>
     <term><menuchoice>
     <shortcut>
+    <keycombo action="simul">&Ctrl;<keycap>E</keycap></keycombo>
+    </shortcut>
+    <guimenu>Edit</guimenu>
+    <guimenuitem>Select Range...</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Opens an embedded dialog to enter the range to
+    select.</action></para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
     <keycombo action="simul">&Ctrl;<keycap>F</keycap></keycombo>
     </shortcut>
     <guimenu>Edit</guimenu>
@@ -307,6 +357,21 @@ simply raw data.</para>
     Hexadecimal, decimal, octal, binary or text patterns can be searched for.</para>
     <para>Options in the dialog box allow you to specify the starting point,
     direction and range of the search.</para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul"><keycap>Ins</keycap></keycombo>
+    </shortcut>
+    <guimenu>Edit</guimenu>
+    <guimenuitem>Overwrite Mode</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Switch between Insert mode and Overwrite mode</action>.
+    </para>
+    <note><para>Overwrite mode is implemented to be very strict, it is not possible to
+    change the size of the data (no appending or removing of bytes).</para></note>
+    </listitem>
     </varlistentry>
 
     <varlistentry>
@@ -347,21 +412,6 @@ simply raw data.</para>
     </menuchoice></term>
     <listitem><para><action>Replace</action> the find pattern with a different
     pattern.</para></listitem>
-    </varlistentry>
-
-    <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul"><keycap>Ins</keycap></keycombo>
-    </shortcut>
-    <guimenu>Edit</guimenu>
-    <guimenuitem>Overwrite Mode</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Switch between Insert mode and Overwrite mode</action>.
-    </para>
-    <note><para>Overwrite mode is implemented to be very strict, it is not possible to 
-    change the size of the data (no appending or removing of bytes).</para></note>
-    </listitem>
     </varlistentry>
 
     <varlistentry>
@@ -502,19 +552,19 @@ simply raw data.</para>
     <varlistentry>
     <term><menuchoice>
     <guimenu>View</guimenu>
-    <guisubmenu>Resize Style</guisubmenu><!-- TODO: better terms and phrasing! -->
+    <guisubmenu>Dynamic Layout</guisubmenu>
     </menuchoice></term>
     <listitem><para><action>Set the rules for the layout of the data display.</action>
     This defines how many bytes are displayed per line, depending on the width of the
     view. Possible rules are:</para>
     <itemizedlist>
-    <listitem><para><guimenuitem>No Resize</guimenuitem>: The layout is fixed to the
-    current and not adapted on the change of the view size.</para>
+    <listitem><para><guimenuitem>Off</guimenuitem>: The layout is fixed to the
+    current number of bytes per line and not adapted on the change of the view size.</para>
     </listitem>
-    <listitem><para><guimenuitem>Lock Groups</guimenuitem>: Puts as many bytes
+    <listitem><para><guimenuitem>Wrap only complete byte groups</guimenuitem>: Puts as many bytes
     per line as possible, as long as groups of bytes are complete.
     </para></listitem>
-    <listitem><para><guimenuitem>Full Size Usage</guimenuitem>: Same as previous,
+    <listitem><para><guimenuitem>On</guimenuitem>: Same as previous,
     but allows also uncomplete groups of bytes.</para></listitem>
     </itemizedlist>
     </listitem>
@@ -534,6 +584,41 @@ simply raw data.</para>
     interpretation of a byte is directly shown under the value interpretation.</para></listitem>
     </itemizedlist>
     </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Ctrl;&Shift;<keycap>T</keycap></keycombo>
+    </shortcut>
+    <guimenu>View</guimenu>
+    <guimenuitem>Split Horizontal</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Split the view area with the currently focussed view
+    into two parts and add a copy of the current view to the new, lower area.</action></para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Ctrl;&Shift;<keycap>L</keycap></keycombo>
+    </shortcut>
+    <guimenu>View</guimenu>
+    <guimenuitem>Split Vertically</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Split the view area with the currently focussed view
+    into two parts and add a copy of the current view to the new, right area.</action></para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Ctrl;&Shift;<keycap>L</keycap></keycombo>
+    </shortcut>
+    <guimenu>View</guimenu>
+    <guimenuitem>Close View Area</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Close the view area with the currently focussed view.</action></para></listitem>
     </varlistentry>
 
     <varlistentry>

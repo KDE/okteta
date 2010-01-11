@@ -32,7 +32,7 @@
 </authorgroup>
 
 <copyright>
-<year>2008</year>
+<year>2008, 2010</year>
 <holder>&Friedrich.Kossebau;</holder>
 </copyright>
 
@@ -41,12 +41,15 @@
 <date>2008-08-02</date>
 <releaseinfo>0.20</releaseinfo>
 
-<abstract><para>&kappname; is a hex editor for the &kde;
-environment.</para></abstract>
+<abstract>
+  <para>&kappname; is an editor for the raw data of files. This type of program
+  is also called hex editor or binary editor.</para>
+</abstract>
 
 <keywordset>
 <keyword>KDE</keyword>
 <keyword>Okteta</keyword>
+<keyword>view</keyword>
 <keyword>edit</keyword>
 <keyword>bytes</keyword>
 <keyword>binary</keyword>
@@ -69,10 +72,10 @@ environment.</para></abstract>
     </para>
 
     <!--List all the copyright holders here-->
-    <para>Program Copyright 2007-2008 &Friedrich.Kossebau;
+    <para>Program Copyright 2006-2010 &Friedrich.Kossebau;
     &Friedrich.Kossebau.email;</para>
 
-    <para>Documentation Copyright 2008 &Friedrich.Kossebau;
+    <para>Documentation Copyright 2008,2010 &Friedrich.Kossebau;
     &Friedrich.Kossebau.email;</para>
 
     <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
