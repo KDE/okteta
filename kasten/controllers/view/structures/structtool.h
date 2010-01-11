@@ -77,10 +77,11 @@ public:
     {
         return mManager;
     }
-Q_SIGNALS: // changes to the setting currently not signaled, because only controlled by view
+Q_SIGNALS: // changes to the settings currently not signaled, because only controlled by view
     void dataChanged();
     void dataCleared();
     void byteOrderChanged();
+    void cursorIndexChanged();
 
 public Q_SLOTS:
     void setByteOrder(int order);
