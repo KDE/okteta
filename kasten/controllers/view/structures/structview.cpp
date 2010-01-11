@@ -50,7 +50,8 @@ namespace Kasten
 {
 
 StructView::StructView(StructTool* tool, QWidget* parent) :
-    QWidget(parent), mTool(tool), mDelegate(new StructViewItemDelegate(this)), mStructTreeViewFocusChild(0)
+    QWidget(parent), mTool(tool), mDelegate(new StructViewItemDelegate(this)),
+            mStructTreeViewFocusChild(0)
 {
     QBoxLayout* baseLayout = new QVBoxLayout(this);
     setLayout(baseLayout);
@@ -104,6 +105,14 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     connect(mStructTreeView->selectionModel(),
             SIGNAL(currentRowChanged( const QModelIndex&, const QModelIndex& )),
             SLOT(onCurrentRowChanged( const QModelIndex&, const QModelIndex& )));
+    connect(mTool, SIGNAL(cursorIndexChanged()), SLOT(onCursorIndexChange()));
+}
+
+void StructView::onCursorIndexChange()
+{
+    QModelIndex idx = mStructTreeView->currentIndex();
+    if (idx.isValid())
+        mTool->mark(idx);
 }
 
 void StructView::openSettingsDlg(int page)
@@ -132,8 +141,8 @@ void StructView::openSettingsDlg(int page)
     }
     KPageWidgetItem* structs = dialog->addPage(structsWidget, i18n("Structures"),
             "configure");
-    KPageWidgetItem* management = dialog->addPage(structureSettings, i18n("Structures management"),
-            "preferences-plugin");
+    KPageWidgetItem* management = dialog->addPage(structureSettings, i18n(
+            "Structures management"), "preferences-plugin");
     //User edited the configuration - update your local copies of the
     //configuration data
     connect(dialog, SIGNAL(settingsChanged(const QString&)), this, SLOT(update()));
@@ -171,24 +180,24 @@ bool StructView::eventFilter(QObject* object, QEvent* event)
         else if (event->type() == QEvent::FocusOut)
         {
             QWidget* treeViewFocusWidget = mStructTreeView->focusWidget();
-            const bool subChildHasFocus = ( treeViewFocusWidget != mStructTreeView );
-            if( subChildHasFocus )
+            const bool subChildHasFocus = (treeViewFocusWidget != mStructTreeView);
+            if (subChildHasFocus)
             {
                 mStructTreeViewFocusChild = treeViewFocusWidget;
-                mStructTreeViewFocusChild->installEventFilter( this );
+                mStructTreeViewFocusChild->installEventFilter(this);
             }
             else
                 mTool->unmark();
         }
     }
-    else if( object == mStructTreeViewFocusChild )
+    else if (object == mStructTreeViewFocusChild)
     {
         // TODO: it is only assumed the edit widget will be removed if it loses the focus
-        if( event->type() == QEvent::FocusOut )
+        if (event->type() == QEvent::FocusOut)
         {
-            if( ! mStructTreeView->hasFocus() )
+            if (!mStructTreeView->hasFocus())
                 mTool->unmark();
-            mStructTreeViewFocusChild->removeEventFilter( this );
+            mStructTreeViewFocusChild->removeEventFilter(this);
             mStructTreeViewFocusChild = 0;
         }
     }

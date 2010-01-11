@@ -119,6 +119,7 @@ void StructTool::onCursorPositionChange(Okteta::Address pos)
     {
         mCursorIndex = pos;
         updateData();
+        emit cursorIndexChanged();
     }
 }
 
