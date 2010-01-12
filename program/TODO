@@ -263,6 +263,15 @@ Fixed after 0.4 Beta 2:
 -----------------------
 * if value in POD table is edited, marking of the bytes does no longer disappear
 * disabled storing of bookmarks in separate global XBEL file again, needs more thinking
+* current coding from the view was not used in the Values stream encoder
+
+Fixed after 0.4 RC 1:
+---------------------
+* Decoding Table tool crashed the program if the last view marked was removed in the background
+
+Done for 0.5:
+-------------
+* moved mouse input handling into own controller classes
 
 Next to work on:
 ----------------------------------
