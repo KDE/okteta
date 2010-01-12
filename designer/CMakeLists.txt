@@ -26,7 +26,7 @@ target_link_libraries( oktetadesignerplugin
   ${QT_QTCORE_LIBRARY}
 )
 
-# install( TARGETS oktetadesignerplugin  DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer )
+install( TARGETS oktetadesignerplugin  DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer )
 
 
 if( OKTETA_BUILD_EXAMPLES )

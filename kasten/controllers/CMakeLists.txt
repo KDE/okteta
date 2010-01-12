@@ -378,7 +378,7 @@ set_target_properties( oktetakastencontrollers  PROPERTIES VERSION ${GENERIC_LIB
 
 install( TARGETS oktetakastencontrollers  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-# install( FILES ${oktete_kastencore_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )
+install( FILES ${oktete_kastencore_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )
 # install( FILES view/structures/kns/structures.knsrc  DESTINATION  ${CONFIG_INSTALL_DIR} )
 
 

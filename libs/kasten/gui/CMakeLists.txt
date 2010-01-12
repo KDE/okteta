@@ -143,4 +143,4 @@ set_target_properties( kastengui  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVE
 
 install( TARGETS kastengui  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-# install( FILES ${kastengui_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )
+install( FILES ${kastengui_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )

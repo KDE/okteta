@@ -61,7 +61,7 @@ set_target_properties( oktetakastencore  PROPERTIES VERSION ${GENERIC_LIB_VERSIO
 
 install( TARGETS oktetakastencore  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-# install( FILES ${oktete_kastencore_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )
+install( FILES ${oktete_kastencore_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )
 
 
 if(KDE4_BUILD_TESTS)

@@ -149,4 +149,4 @@ set_target_properties( oktetakastengui  PROPERTIES VERSION ${GENERIC_LIB_VERSION
 
 install( TARGETS oktetakastengui  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-# install( FILES ${oktete_kastengui_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )
+install( FILES ${oktete_kastengui_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )

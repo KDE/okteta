@@ -87,7 +87,7 @@ set_target_properties( oktetacore  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOV
 
 install( TARGETS oktetacore  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-# install( FILES ${oktetacore_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/okteta  COMPONENT Devel )
+install( FILES ${oktetacore_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/okteta  COMPONENT Devel )
 
 
 add_subdirectory( piecetable/tests )
