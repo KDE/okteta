@@ -21,7 +21,7 @@
 <book lang="&language;">
 
 <bookinfo>
-<title>The &kappname; Handbook</title>
+<title>The &okteta; Handbook</title>
 
 <authorgroup>
     <author>
@@ -50,7 +50,7 @@
 <releaseinfo>0.3.92</releaseinfo>
 
 <abstract>
-  <para>&kappname; is an editor for the raw data of files. This type of program
+  <para>&okteta; is an editor for the raw data of files. This type of program
   is also called hex editor or binary editor.</para>
 </abstract>
 
@@ -76,7 +76,7 @@
     <title>Credits and License</title>
 
     <para>
-    &kappname;
+    &okteta;
     </para>
 
     <!--List all the copyright holders here-->
@@ -99,7 +99,7 @@
     <title>Installation</title>
 
     <sect1 id="getting-kapp">
-        <title>How to obtain &kappname;</title>
+        <title>How to obtain &okteta;</title>
         &install.intro.documentation;
     </sect1>
 

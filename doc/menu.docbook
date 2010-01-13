@@ -220,7 +220,7 @@
     <guimenu>File</guimenu>
     <guimenuitem>Quit</guimenuitem>
     </menuchoice></term>
-    <listitem><para><action>Close the</action> &kappname;
+    <listitem><para><action>Close the</action> &okteta;
     window.</para></listitem>
     </varlistentry>
 </variablelist>

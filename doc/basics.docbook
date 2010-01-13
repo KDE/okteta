@@ -2,7 +2,7 @@
 <title>Basics</title>
 
 <sect1 id="starting-basics">
-<title>Starting &kappname;</title>
+<title>Starting &okteta;</title>
 
     <para>Type <userinput><command>okteta</command></userinput> at a command
     prompt or select <guimenuitem>Hex Editor</guimenuitem> from the
@@ -13,7 +13,7 @@
     options are available, and can be listed by entering
     <userinput><command>okteta</command> <option>--help</option></userinput>.</para>
 
-    <para>Command line options specific to &kappname; are:</para>
+    <para>Command line options specific to &okteta; are:</para>
 
     <para><option><replaceable>&lt;&URL;(s)&gt;</replaceable></option> - open
     file(s) from the specified &URL;(s)</para> 
@@ -26,7 +26,7 @@
 <sect1 id="usage-basics">
 <title>Usage</title>
 
-    <para>The main &kappname; window has the following components:
+    <para>The main &okteta; window has the following components:
     a menu bar, a toolbar, a status bar, one or several sidebars with tools, and
     the main view with the tabbed data views.</para>
 
