@@ -2,7 +2,7 @@
 
 <chapter id="tools">
   <title>Tools</title>
-<!-- 
+<!--
 <sect1 id="tools-filesystem">
 <title>Filesystem</title>
 <para>to be written</para>
@@ -25,7 +25,7 @@
     <para>The view displays some information about the current file,
     including its type, the location of storage and the size.</para>
   </sect1>
-  <!-- 
+  <!--
   <sect1 id="tools-checksum">
   <title>Checksum</title>
   <para>to be written</para>
@@ -69,7 +69,7 @@
     at the cursor, interpreted as common simple data types like Integer or Float.</para>
   </sect1>
   <sect1 id="tools-structures">
-  
+
     <title>Structures Tool</title>
 
     <sect2>
@@ -86,8 +86,8 @@
 
     <sect2>
       <title>Installing structures</title>
-      <para>Currently there is no way to automatically install such a structure definition,
-           it must be installed manually by copying the files such a structure definition
+      <para>Currently there is no way to automatically install a structure definition,
+           it must be installed manually by copying the files of a structure definition
            to the appropriate directory. A structure definition consists of a .osd
            file describing the structure and a .desktop file containing metadata about that structure
            such as author, homepage and license. These two files must be copied to a new subdirectory of
@@ -130,7 +130,7 @@
           &lt;/data&gt;
           </markup></screen>
           which is fairly similar to the C/C++ definition.
-          The type attribute can be any of the following:</para> 
+          The type attribute can be any of the following:</para>
           <simplelist><member>Char</member>
           <member>Int8</member>
           <member>UInt8</member>
@@ -172,16 +172,16 @@
           These fields should all be pretty much self-explanatory, execpt for "X-KDE-PluginInfo-Name" which must always have the name of the .osd file
           as the value (without the .osd suffix), because otherwise the structure will not be usable by okteta. Now copy these files to the appropriate directory
           and it will be usuable in okteta
-          
+
         </para>
       </sect3>
       <sect3>
         <title>More complex structures</title>
-        <para>	
+        <para>
         Next we create a more complex structure which we will call complex and save in a file called complex.osd.
         This structure will contain two arrays (one with fixed length and one where the length is determined at runtime)
         as well as a nested structure and a union.
-        
+
         <screen><markup>
           &lt;?xml version="1.0" encoding="UTF-8"?&gt;
           &lt;data&gt;
@@ -193,7 +193,7 @@
                 &lt;/array&gt;
               &lt;/union&gt;
               &lt;struct name="nested"&gt;
-                &lt;array name="string" length="size"&gt; // references the field size above
+                &lt;array name="string" length="size"&gt; &lt;!-- references the field size above --&gt;
                   &lt;primitive type="Char" /&gt;
                 &lt;/array&gt;
               &lt;/struct&gt;
@@ -223,6 +223,7 @@
         <para>
           A few example structure definitions can be found <ulink url="http://websvn.kde.org/trunk/KDE/kdeutils/okteta/kasten/controllers/view/structures/schema/example/">here.</ulink>
           This include for example the file header for PNG files.
+          An XML schema describing the structure of the .osd file can be found  <ulink url="http://websvn.kde.org/trunk/KDE/kdeutils/okteta/kasten/controllers/view/structures/schema/">here.</ulink>
           If more information is needed feel free to contact me <email>alex.richardson@gmx.de</email>.
         </para>
       </sect3>
@@ -234,5 +235,5 @@
 <para>to be written</para>
 </sect1>
 -->
- 
+
 </chapter>
