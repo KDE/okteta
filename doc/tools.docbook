@@ -2,17 +2,19 @@
 
 <chapter id="tools">
   <title>Tools</title>
-<!--
+
 <sect1 id="tools-filesystem">
 <title>Filesystem</title>
-<para>to be written</para>
+<para>This view offers an embedded file browser which
+ also allows you to open selected files.</para>
 </sect1>
 
 <sect1 id="tools-documents">
 <title>Documents</title>
-<para>to be written</para>
+<para>This view shows all currently open Documents and has markers to show which document
+ is currently active and which documents have changed and therefore need saving</para>
 </sect1>
--->
+
 <!-- not in released version????
 <sect1 id="tools-versions">
 <title>Versions</title>
@@ -25,12 +27,13 @@
     <para>The view displays some information about the current file,
     including its type, the location of storage and the size.</para>
   </sect1>
-  <!--
+
   <sect1 id="tools-checksum">
   <title>Checksum</title>
-  <para>to be written</para>
+  <para>This view allows calculating various checksums for the
+   currently selected range in the document</para>
   </sect1>
-  -->
+
   <sect1 id="tools-filter">
     <title>Binary Filter</title>
     <para>The filter performs binary operations on the selected bytes.
@@ -117,7 +120,7 @@
             int anInt;
           };
           </screen>
-          The first step to create this structure so it can be used by the structures tool is creating the 
+          The first step to create this structure so it can be used by the structures tool is creating the
           <literal role="extension">.osd</literal> file
           which we will call <filename>simplestruct.osd</filename>.
           The structure would be expressed as such in an <literal role="extension">.osd</literal> file (which is just a plain &XML; file):
@@ -170,8 +173,8 @@
           X-KDE-PluginInfo-License=LGPL
           X-KDE-PluginInfo-EnabledByDefault=false
           </screen>
-          These fields should all be pretty much self-explanatory, execpt for <literal>X-KDE-PluginInfo-Name</literal> 
-          which must always have the name of the .osd file as the value (without the .osd suffix), 
+          These fields should all be pretty much self-explanatory, execpt for <literal>X-KDE-PluginInfo-Name</literal>
+          which must always have the name of the .osd file as the value (without the .osd suffix),
           because otherwise the structure will not be usable by &okteta;. Now copy these files to the appropriate directory
           and it will be usuable in &okteta;.
         </para>
@@ -230,11 +233,14 @@
       </sect3>
     </sect2>
   </sect1>
-<!--
+
 <sect1 id="tools-bookmarks">
 <title>Bookmarks</title>
-<para>to be written</para>
+<para>This view allows saving of offsets in any open file, so it can be revisited later.
+<note><para> Bookmarks are currently not saved for the next session, so make sure to keep &okteta;
+ open while the bookmark is still needed.</para></note>
+</para>
 </sect1>
--->
+
 
 </chapter>
