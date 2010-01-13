@@ -1,7 +1,8 @@
-<chapter id="tools">
-<title>Tools</title>
+<?xml version='1.0' encoding='UTF-8'?>
 
-<!-- only in 4.3>
+<chapter id="tools">
+  <title>Tools</title>
+<!-- 
 <sect1 id="tools-filesystem">
 <title>Filesystem</title>
 <para>to be written</para>
@@ -11,62 +12,227 @@
 <title>Documents</title>
 <para>to be written</para>
 </sect1>
-<-->
-
-<sect1 id="tools-fileinfo">
-<title>File Info</title>
-<para>The view displays some information about the current file,
-    including its type, the location of storage and the size.</para>
-</sect1>
-
-<sect1 id="tools-filter">
-<title>Binary Filter</title>
-    <para>The filter performs binary operations on the selected bytes.
-    After choosing the operation (AND, OR, ROTATE..) the parameters,
-    if any, can be set in the box below. The filter is executed on the use
-    of the <guibutton>Filter</guibutton> button.</para>
-</sect1>
-
-<sect1 id="tools-strings">
-<title>Strings</title>
-    <para>This tool locates the strings in the selected bytes. 
-    After choosing the minimum string length, the strings are grepped for
-    on the use of the <guibutton>Update</guibutton> button.
-    The list of the strings displayed can be narrowed by entering a
-    filter term.
-   </para>
-</sect1>
-
-<sect1 id="tools-bytetable">
-<title>Byte Table</title>
-
-    <para>The table lists all possible byte values, both as character and
-    numerical value.</para>
-    <para>The selected value can be inserted at the cursor position for a
-    defined number of bytes. This can be achieved by using the <guibutton>Insert</guibutton>
-    button or double-clicking the line in the table.</para>
-</sect1>
-
-<sect1 id="tools-statistics">
-<title>Statistics</title>
-    <para>The view displays a statistic for the selected bytes.
-    The statistic gives the frequency of the occurrence of each byte value
-    in the selection.
-    It can be brought uptodate by using the <guibutton>Update</guibutton>
-    button.</para>
-</sect1>
-
-<sect1 id="tools-decodingtable">
-<title>Decoding Table</title>
-
-    <para>The table displays the value of the byte or the bytes starting
-    at the cursor, interpreted as common simple data types like Integer or Float.</para>
-</sect1>
-
-<!-- not in released version
+-->
+<!-- not in released version????
 <sect1 id="tools-versions">
 <title>Versions</title>
 <para>to be written</para>
 </sect1>
 -->
+
+<sect1 id="tools-fileinfo">
+    <title>File Info</title>
+    <para>The view displays some information about the current file,
+    including its type, the location of storage and the size.</para>
+  </sect1>
+  <!-- 
+  <sect1 id="tools-checksum">
+  <title>Checksum</title>
+  <para>to be written</para>
+  </sect1>
+  -->
+  <sect1 id="tools-filter">
+    <title>Binary Filter</title>
+    <para>The filter performs binary operations on the selected bytes.
+    After choosing the operation (AND, OR, ROTATE..) the parameters,
+    if any, can be set in the box below. The filter is executed on the use
+    of the <guibutton>Filter</guibutton> button.</para>
+  </sect1>
+  <sect1 id="tools-strings">
+    <title>Strings</title>
+    <para>This tool locates the strings in the selected bytes.
+    After choosing the minimum string length, the strings are grepped for
+    on the use of the <guibutton>Update</guibutton> button.
+    The list of the strings displayed can be narrowed by entering a
+    filter term.
+   </para>
+  </sect1>
+  <sect1 id="tools-bytetable">
+    <title>Byte Table</title>
+    <para>The table lists all possible byte values, both as character and
+    numerical value.</para>
+    <para>The selected value can be inserted at the cursor position for a
+    defined number of bytes. This can be achieved by using the <guibutton>Insert</guibutton>
+    button or double-clicking the line in the table.</para>
+  </sect1>
+  <sect1 id="tools-statistics">
+    <title>Statistics</title>
+    <para>The view displays a statistic for the selected bytes.
+    The statistic gives the frequency of the occurrence of each byte value
+    in the selection.
+    It can be brought uptodate by using the <guibutton>Update</guibutton>
+    button.</para>
+  </sect1>
+  <sect1 id="tools-decodingtable">
+    <title>Decoding Table</title>
+    <para>The table displays the value of the byte or the bytes starting
+    at the cursor, interpreted as common simple data types like Integer or Float.</para>
+  </sect1>
+  <sect1 id="tools-structures">
+  
+    <title>Structures Tool</title>
+
+    <sect2>
+      <title>General</title>
+      <para>The Structures Tool gives an overview of more or less complex data structures,
+     including arrays, structures, unions, primitive types and enum values.
+     <!-- explain/link what these types are? probably not, since most user will be programmers? -->
+     Various options, like the style (decimal, hexadecimal or binary) in which values are displayed. Moreover it is possible to choose
+      which structure definitions get loaded and which structures are shown in the view can be reached by pressing the
+     <guibutton>Settings</guibutton> button. These structures must be defined by an Okteta structure
+      definition file (which is a XML file). Once such a structure definition has been installed,
+       it may be selected and used.</para>
+    </sect2>
+
+    <sect2>
+      <title>Installing structures</title>
+      <para>Currently there is no way to automatically install such a structure definition,
+           it must be installed manually by copying the files such a structure definition
+           to the appropriate directory. A structure definition consists of a .osd
+           file describing the structure and a .desktop file containing metadata about that structure
+           such as author, homepage and license. These two files must be copied to a new subdirectory of
+            <emphasis role="italic">~/.kde/share/apps/okteta/structures/</emphasis> (if it doesn&apos;t exist yet create it first)
+      </para>
+    </sect2>
+
+    <sect2>
+      <title>Using new structures</title>
+      <para>
+      After these two files have been copied to correct directory, say <emphasis role="italic">~/.kde/share/apps/okteta/structures/simplestruct/</emphasis> (see the example for creating new structures)
+      start okteta and then open the struct view settings. There select the &quot;Structures Management&quot; tab(tab okay?) and make sure the wanted structure is checked. Then
+      press &quot;Apply Changes&quot; open the &quot;Structures&quot; tab and make sure the desired element is on the right-hand side
+    </para>
+    </sect2>
+
+    <sect2>
+      <title>Creating your own structures</title>
+
+      <sect3>
+        <title>A first structure</title>
+        <para>
+          To start we create a very simple test structure containing only integral data types (one char and one 32 bit int), which would be expressed in C/C++ as:
+          <screen>
+          struct simple {
+            char aChar;
+            int anInt;
+          };
+          </screen>
+          The first step to create this structure so it can be used by the structures tool is creating the .osd file
+          which we will call "simplestruct.osd".
+          The structure would be expressed as such in an .osd file (which is just a plain XML file):
+          <screen><markup>
+          &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+          &lt;data&gt;
+            &lt;struct name="simple"&gt;
+              &lt;primitive name="aChar" type="Char"/&gt;
+              &lt;primitive name="anInt" type="Int32"/&gt;
+            &lt;/struct&gt;
+          &lt;/data&gt;
+          </markup></screen>
+          which is fairly similar to the C/C++ definition.
+          The type attribute can be any of the following:</para> 
+          <simplelist><member>Char</member>
+          <member>Int8</member>
+          <member>UInt8</member>
+          <member>Int16</member>
+          <member>UInt16</member>
+          <member>Int32</member>
+          <member>UInt32</member>
+          <member>Int64</member>
+          <member>UInt64</member>
+          <member>Float</member>
+          <member>Double</member>
+          <member>Bool8</member>
+          <member>Bool16</member>
+          <member>Bool32</member>
+          <member>Bool64</member>
+          </simplelist>
+          <para>
+          The next step is to create the .desktop file for the metadata, which is just a set of key-value pairs. This should be named simplestruct.desktop
+          In this example it looks as such:
+          <screen>
+          [Desktop Entry]
+          Encoding=UTF-8
+          Icon=arrow-up
+          Type=Service
+          ServiceTypes=KPluginInfo
+
+          Name=Simple test structure
+          Comment=A very simple test structure containing only two items
+
+          X-KDE-PluginInfo-Author=Alex Richardson
+          X-KDE-PluginInfo-Email=alex.richardson@gmx.de
+          X-KDE-PluginInfo-Name=simplestruct
+          X-KDE-PluginInfo-Version=1.0
+          X-KDE-PluginInfo-Website=http://www.plugin.org/
+          X-KDE-PluginInfo-Category=structure
+          X-KDE-PluginInfo-License=LGPL
+          X-KDE-PluginInfo-EnabledByDefault=false
+          </screen>
+          These fields should all be pretty much self-explanatory, execpt for "X-KDE-PluginInfo-Name" which must always have the name of the .osd file
+          as the value (without the .osd suffix), because otherwise the structure will not be usable by okteta. Now copy these files to the appropriate directory
+          and it will be usuable in okteta
+          
+        </para>
+      </sect3>
+      <sect3>
+        <title>More complex structures</title>
+        <para>	
+        Next we create a more complex structure which we will call complex and save in a file called complex.osd.
+        This structure will contain two arrays (one with fixed length and one where the length is determined at runtime)
+        as well as a nested structure and a union.
+        
+        <screen><markup>
+          &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+          &lt;data&gt;
+            &lt;struct name="complex"&gt;
+              &lt;primitive name="size" type="UInt8" /&gt;
+              &lt;union name="aUnion"&gt;
+                &lt;array name="fourBytes" length="4"&gt;
+                  &lt;primitive type="Int8" /&gt;
+                &lt;/array&gt;
+              &lt;/union&gt;
+              &lt;struct name="nested"&gt;
+                &lt;array name="string" length="size"&gt; // references the field size above
+                  &lt;primitive type="Char" /&gt;
+                &lt;/array&gt;
+              &lt;/struct&gt;
+            &lt;/struct&gt;
+          &lt;/data&gt;
+          </markup></screen>
+          This would correspond to the following in pseudo C/C++
+          <screen>
+          struct complex {
+            uint8_t size;
+            union aUnion {
+              int8_t fourBytes[4];
+            };
+            struct nested {
+              char string[size] //not valid C++, references value of the uint8 size
+            };
+          };
+          </screen>
+	  </para>
+          <note><para> You can obviously only have dynamic length arrays reference fields before the array.</para></note>
+          <para>
+          Next we create the complex.desktop file just as above (make sure you set X-KDE-PluginInfo-Name correctly) and then install both files.
+          </para>
+      </sect3>
+      <sect3>
+        <title>Further information</title>
+        <para>
+          A few example structure definitions can be found <ulink url="http://websvn.kde.org/trunk/KDE/kdeutils/okteta/kasten/controllers/view/structures/schema/example/">here.</ulink>
+          This include for example the file header for PNG files.
+          If more information is needed feel free to contact me <email>alex.richardson@gmx.de</email>.
+        </para>
+      </sect3>
+    </sect2>
+  </sect1>
+<!--
+<sect1 id="tools-bookmarks">
+<title>Bookmarks</title>
+<para>to be written</para>
+</sect1>
+-->
+ 
 </chapter>

@@ -442,8 +442,7 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     </menuchoice></term>
     <listitem><para><action>Insert a specified string of bytes at the cursor.</action></para>
     <para>Options in the dialog box allow you to specify the number of insertion of the pattern
-    and it's format (<guilabel>Hexadecimal</guilabel>, <guilabel>Decimal</guilabel>,
-    <guilabel>Octal</guilabel>, <guilabel>Binary</guilabel> or <guilabel>Character(s)</guilabel>).</para>
+    and it's format (Hexadecimal, Decimal, Octal, Binary, Character(s) or UTF-8).</para>
     <!--para>If <guilabel>Repeat pattern</guilabel> is checked, the specified pattern
     will be inserted repeatedly to reach the length set in
     <guilabel>Size</guilabel>.</para--></listitem>

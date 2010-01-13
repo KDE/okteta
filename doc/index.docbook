@@ -38,8 +38,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2008-08-02</date>
-<releaseinfo>0.20</releaseinfo>
+<date>2010-01-12</date>
+<releaseinfo>0.3.92</releaseinfo>
 
 <abstract>
   <para>&kappname; is an editor for the raw data of files. This type of program

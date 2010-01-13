@@ -6,7 +6,8 @@
 
     <para>Type <userinput><command>okteta</command></userinput> at a command
     prompt or select <guimenuitem>Hex Editor</guimenuitem> from the
-    <menuchoice><guisubmenu>Applications</guisubmenu><guisubmenu>Utilities</guisubmenu></menuchoice> group in the &kmenu;.</para>
+    <menuchoice><guisubmenu>Applications</guisubmenu><guisubmenu>Utilities</guisubmenu>
+    </menuchoice> group in the application launcher.</para>
 
     <para>The standard &Qt; and &kde; command line
     options are available, and can be listed by entering
