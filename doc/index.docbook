@@ -10,6 +10,9 @@
   <!ENTITY Friedrich.Kossebau
 "<personname><firstname>Friedrich W. H.</firstname><surname>Kossebau</surname></personname>">
   <!ENTITY Friedrich.Kossebau.email "<email>kossebau@kde.org</email>">
+  <!ENTITY Alex.Richardson
+"<personname><firstname>Alex</firstname><surname>Richardson</surname></personname>">
+  <!ENTITY Alex.Richardson.email "<email>alex.richardson@gmx.de</email>">
   <!ENTITY package "kdeutils">
   <!ENTITY % English "INCLUDE">
   <!ENTITY % addindex "IGNORE">
@@ -22,11 +25,16 @@
 
 <authorgroup>
     <author>
-    <firstname>Friedrich W. H.</firstname>
-    <surname>Kossebau</surname>
-    <affiliation>
-    <address>&Friedrich.Kossebau.email;</address>
-    </affiliation>
+      <firstname>Friedrich W. H.</firstname><surname>Kossebau</surname>
+      <affiliation>
+        <address>&Friedrich.Kossebau.email;</address>
+      </affiliation>
+    </author>
+    <author>
+      <firstname>Alex</firstname><surname>Richardson</surname>
+      <affiliation>
+        <address>&Alex.Richardson.email;</address>
+      </affiliation>
     </author>
 <!-- TRANS:ROLES_OF_TRANSLATORS -->
 </authorgroup>
