@@ -79,8 +79,8 @@
      <!-- explain/link what these types are? probably not, since most user will be programmers? -->
      Various options, like the style (decimal, hexadecimal or binary) in which values are displayed. Moreover it is possible to choose
       which structure definitions get loaded and which structures are shown in the view can be reached by pressing the
-     <guibutton>Settings</guibutton> button. These structures must be defined by an Okteta structure
-      definition file (which is a XML file). Once such a structure definition has been installed,
+     <guibutton>Settings</guibutton> button. These structures must be defined by an &okteta; structure
+      definition file (which is a &XML; file). Once such a structure definition has been installed,
        it may be selected and used.</para>
     </sect2>
 
@@ -88,19 +88,19 @@
       <title>Installing structures</title>
       <para>Currently there is no way to automatically install a structure definition,
            it must be installed manually by copying the files of a structure definition
-           to the appropriate directory. A structure definition consists of a .osd
+           to the appropriate directory. A structure definition consists of a <literal role="extension">.osd</literal>
            file describing the structure and a .desktop file containing metadata about that structure
            such as author, homepage and license. These two files must be copied to a new subdirectory of
-            <emphasis role="italic">~/.kde/share/apps/okteta/structures/</emphasis> (if it doesn&apos;t exist yet create it first)
+            <filename class="directory">~/.kde/share/apps/okteta/structures/</filename> (if it does not exist yet create it first)
       </para>
     </sect2>
 
     <sect2>
       <title>Using new structures</title>
       <para>
-      After these two files have been copied to correct directory, say <emphasis role="italic">~/.kde/share/apps/okteta/structures/simplestruct/</emphasis> (see the example for creating new structures)
-      start okteta and then open the struct view settings. There select the &quot;Structures Management&quot; tab(tab okay?) and make sure the wanted structure is checked. Then
-      press &quot;Apply Changes&quot; open the &quot;Structures&quot; tab and make sure the desired element is on the right-hand side
+      After these two files have been copied to correct directory, say <filename class="directory"> ~/.kde/share/apps/okteta/structures/simplestruct/</filename> (see the example for creating new structures)
+      start &okteta; and then open the struct view settings. There select the <guilabel>Structures Management</guilabel> tab and make sure the wanted structure is checked. Then
+      press <guibutton>Apply Changes</guibutton>, open the <guilabel>Structures</guilabel> tab and make sure the desired element is on the right-hand side.
     </para>
     </sect2>
 
@@ -117,9 +117,10 @@
             int anInt;
           };
           </screen>
-          The first step to create this structure so it can be used by the structures tool is creating the .osd file
-          which we will call "simplestruct.osd".
-          The structure would be expressed as such in an .osd file (which is just a plain XML file):
+          The first step to create this structure so it can be used by the structures tool is creating the 
+          <literal role="extension">.osd</literal> file
+          which we will call <filename>simplestruct.osd</filename>.
+          The structure would be expressed as such in an <literal role="extension">.osd</literal> file (which is just a plain &XML; file):
           <screen><markup>
           &lt;?xml version="1.0" encoding="UTF-8"?&gt;
           &lt;data&gt;
@@ -148,7 +149,7 @@
           <member>Bool64</member>
           </simplelist>
           <para>
-          The next step is to create the .desktop file for the metadata, which is just a set of key-value pairs. This should be named simplestruct.desktop
+          The next step is to create the .desktop file for the metadata, which is just a set of key-value pairs. This should be named <filename>simplestruct.desktop</filename>.
           In this example it looks as such:
           <screen>
           [Desktop Entry]
@@ -169,10 +170,10 @@
           X-KDE-PluginInfo-License=LGPL
           X-KDE-PluginInfo-EnabledByDefault=false
           </screen>
-          These fields should all be pretty much self-explanatory, execpt for "X-KDE-PluginInfo-Name" which must always have the name of the .osd file
-          as the value (without the .osd suffix), because otherwise the structure will not be usable by okteta. Now copy these files to the appropriate directory
-          and it will be usuable in okteta
-
+          These fields should all be pretty much self-explanatory, execpt for <literal>X-KDE-PluginInfo-Name</literal> 
+          which must always have the name of the .osd file as the value (without the .osd suffix), 
+          because otherwise the structure will not be usable by &okteta;. Now copy these files to the appropriate directory
+          and it will be usuable in &okteta;.
         </para>
       </sect3>
       <sect3>
@@ -215,7 +216,7 @@
 	  </para>
           <note><para> You can obviously only have dynamic length arrays reference fields before the array.</para></note>
           <para>
-          Next we create the complex.desktop file just as above (make sure you set X-KDE-PluginInfo-Name correctly) and then install both files.
+          Next we create the <filename>complex.desktop</filename> file just as above (make sure you set <literal>X-KDE-PluginInfo-Name</literal> correctly) and then install both files.
           </para>
       </sect3>
       <sect3>
@@ -223,7 +224,7 @@
         <para>
           A few example structure definitions can be found <ulink url="http://websvn.kde.org/trunk/KDE/kdeutils/okteta/kasten/controllers/view/structures/schema/example/">here.</ulink>
           This include for example the file header for PNG files.
-          An XML schema describing the structure of the .osd file can be found  <ulink url="http://websvn.kde.org/trunk/KDE/kdeutils/okteta/kasten/controllers/view/structures/schema/">here.</ulink>
+          An &XML; schema describing the structure of the <literal role="extension">.osd</literal> file can be found  <ulink url="http://websvn.kde.org/trunk/KDE/kdeutils/okteta/kasten/controllers/view/structures/schema/">here.</ulink>
           If more information is needed feel free to contact me <email>alex.richardson@gmx.de</email>.
         </para>
       </sect3>
