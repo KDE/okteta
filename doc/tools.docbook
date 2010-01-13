@@ -3,6 +3,9 @@
 <chapter id="tools">
   <title>Tools</title>
 
+<!-- The tool Versions is not part of released versions,
+just used for development, so no need to document it. -->
+
 <sect1 id="tools-filesystem">
 <title>Filesystem</title>
 <para>This view offers an embedded file browser which
@@ -14,13 +17,6 @@
 <para>This view shows all currently open Documents and has markers to show which document
  is currently active and which documents have changed and therefore need saving</para>
 </sect1>
-
-<!-- not in released version????
-<sect1 id="tools-versions">
-<title>Versions</title>
-<para>to be written</para>
-</sect1>
--->
 
 <sect1 id="tools-fileinfo">
     <title>File Info</title>
