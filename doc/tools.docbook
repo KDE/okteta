@@ -67,6 +67,7 @@ just used for development, so no need to document it. -->
     <para>The table displays the value of the byte or the bytes starting
     at the cursor, interpreted as common simple data types like Integer or Float.</para>
   </sect1>
+
   <sect1 id="tools-structures">
 
     <title>Structures Tool</title>
@@ -88,16 +89,16 @@ just used for development, so no need to document it. -->
       <para>Currently there is no way to automatically install a structure definition,
            it must be installed manually by copying the files of a structure definition
            to the appropriate directory. A structure definition consists of a <literal role="extension">.osd</literal>
-           file describing the structure and a .desktop file containing metadata about that structure
+           file describing the structure and a <literal role="extension">.desktop</literal> file containing metadata about that structure
            such as author, homepage and license. These two files must be copied to a new subdirectory of
-            <filename class="directory">~/.kde/share/apps/okteta/structures/</filename> (if it does not exist yet create it first)
+            <filename class="directory">`kde4-config --localprefix`share/apps/okteta/structures/</filename> (if it does not exist yet create it first)
       </para>
     </sect2>
 
     <sect2>
       <title>Using new structures</title>
       <para>
-      After these two files have been copied to correct directory, say <filename class="directory"> ~/.kde/share/apps/okteta/structures/simplestruct/</filename> (see the example for creating new structures)
+      After these two files have been copied to correct directory, say <filename class="directory">`kde4-config --localprefix`share/apps/okteta/structures/simplestruct/</filename> (see the example for creating new structures)
       start &okteta; and then open the struct view settings. There select the <guilabel>Structures Management</guilabel> tab and make sure the wanted structure is checked. Then
       press <guibutton>Apply Changes</guibutton>, open the <guilabel>Structures</guilabel> tab and make sure the desired element is on the right-hand side.
     </para>
@@ -148,7 +149,7 @@ just used for development, so no need to document it. -->
           <member>Bool64</member>
           </simplelist>
           <para>
-          The next step is to create the .desktop file for the metadata, which is just a set of key-value pairs. This should be named <filename>simplestruct.desktop</filename>.
+          The next step is to create the <literal role="extension">.desktop</literal> file for the metadata, which is just a set of key-value pairs. This should be named <filename>simplestruct.desktop</filename>.
           In this example it looks as such:
           <screen>
           [Desktop Entry]
@@ -170,7 +171,7 @@ just used for development, so no need to document it. -->
           X-KDE-PluginInfo-EnabledByDefault=false
           </screen>
           These fields should all be pretty much self-explanatory, execpt for <literal>X-KDE-PluginInfo-Name</literal>
-          which must always have the name of the .osd file as the value (without the .osd suffix),
+          which must always have the name of the <literal role="extension">.osd</literal> file as the value (without the <literal role="extension">.osd</literal> suffix),
           because otherwise the structure will not be usable by &okteta;. Now copy these files to the appropriate directory
           and it will be usuable in &okteta;.
         </para>
@@ -178,7 +179,7 @@ just used for development, so no need to document it. -->
       <sect3>
         <title>More complex structures</title>
         <para>
-        Next we create a more complex structure which we will call complex and save in a file called complex.osd.
+        Next we create a more complex structure which we will call complex and save in a file called <filename>complex.osd</filename>.
         This structure will contain two arrays (one with fixed length and one where the length is determined at runtime)
         as well as a nested structure and a union.
 
@@ -224,7 +225,7 @@ just used for development, so no need to document it. -->
           A few example structure definitions can be found <ulink url="http://websvn.kde.org/trunk/KDE/kdeutils/okteta/kasten/controllers/view/structures/schema/example/">here.</ulink>
           This include for example the file header for PNG files.
           An &XML; schema describing the structure of the <literal role="extension">.osd</literal> file can be found  <ulink url="http://websvn.kde.org/trunk/KDE/kdeutils/okteta/kasten/controllers/view/structures/schema/">here.</ulink>
-          If more information is needed feel free to contact me <email>alex.richardson@gmx.de</email>.
+          If more information is needed feel free to contact me at <email>alex.richardson@gmx.de</email>.
         </para>
       </sect3>
     </sect2>
