@@ -2,18 +2,18 @@
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
   <!ENTITY okteta "<application>Okteta</application>">
   <!ENTITY kappname "&okteta;" >
+  <!ENTITY package "kdeutils">
   <!ENTITY introduction SYSTEM "introduction.docbook">
   <!ENTITY basics SYSTEM "basics.docbook">
   <!ENTITY nutshell SYSTEM "nutshell.docbook">
   <!ENTITY menu SYSTEM "menu.docbook">
   <!ENTITY tools SYSTEM "tools.docbook">
   <!ENTITY Friedrich.Kossebau
-"<personname><firstname>Friedrich W. H.</firstname><surname>Kossebau</surname></personname>">
+"<personname><firstname>Friedrich</firstname><othername>W. H.</othername><surname>Kossebau</surname></personname>">
   <!ENTITY Friedrich.Kossebau.email "<email>kossebau@kde.org</email>">
   <!ENTITY Alex.Richardson
 "<personname><firstname>Alex</firstname><surname>Richardson</surname></personname>">
   <!ENTITY Alex.Richardson.email "<email>alex.richardson@gmx.de</email>">
-  <!ENTITY package "kdeutils">
   <!ENTITY % English "INCLUDE">
   <!ENTITY % addindex "IGNORE">
 ]>
