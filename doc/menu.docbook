@@ -647,7 +647,9 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     <para>Multiple bookmarks can be set for a single byte array. Each byte array
     has its own set of bookmarks, and the appropriate set is displayed at the
     bottom of the <guimenu>Bookmarks</guimenu> menu. Choose a bookmark
-    from the menu to move the cursor and the view to it.</para>
+    from the menu to move the cursor and the view to it.
+    <note><para>Bookmarks are currently only transient and not saved if you
+    close a byte array or the whole program.</para></note></para>
 
 <variablelist>
     <varlistentry>
