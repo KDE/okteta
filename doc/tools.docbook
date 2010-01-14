@@ -124,12 +124,12 @@ just used for development, so no need to document it. -->
     <sect2>
       <title>General</title>
 
-      <para>The Structures tool enables investigating and editing of byte arrays
+      <para>The Structures tool enables analysing and editing of byte arrays
       based on user-creatable structure definitions, which can be built from
       arrays, unions, primitive types and enum values.</para>
      <!-- explain/link what these types are? probably not, since most user will be programmers? -->
       <para>It has an own settings dialog, which can be reached by using the
-      <guibutton>Settings</guibutton> button. There various options can be
+      <guibutton>Settings</guibutton> button. There are various options that can be
       configured, like the style (decimal, hexadecimal or binary) in which the
       values are displayed. Moreover it is possible to choose which structure
       definitions get loaded and which structures are shown in the view.</para>
@@ -139,7 +139,7 @@ just used for development, so no need to document it. -->
       metadata about that structure description file, such as author, homepage
       and license.</para>
       <para>Currently there is no built-in support for creating, editing or
-      installing structure definitions, so this must be done manually like
+      installing structure definitions, so this must be done manually as
       described in the next sections.</para>
     </sect2>
 
@@ -303,7 +303,7 @@ just used for development, so no need to document it. -->
           reference fields before the array.</para></note>
           <para>Next we create the <filename>complex.desktop</filename> file just as
           in the example before (make sure you set <literal>X-KDE-PluginInfo-Name</literal>
-          correctly) and also follow it for installing both files.</para>
+          correctly) and also do the same to install both files.</para>
       </sect3>
       <sect3>
         <title>Further information</title>
