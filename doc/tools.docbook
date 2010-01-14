@@ -6,69 +6,118 @@
 <!-- The tool Versions is not part of released versions,
 just used for development, so no need to document it. -->
 
-<sect1 id="tools-filesystem">
-<title>Filesystem</title>
-<para>This view offers an embedded file browser which
- also allows you to open selected files.</para>
-</sect1>
+<sect1 id="tools-overview">
 
-<sect1 id="tools-documents">
-<title>Documents</title>
-<para>This view shows all currently open Documents and has markers to show which document
- is currently active and which documents have changed and therefore need saving</para>
-</sect1>
+  <title>Overview</title>
+  <para>&okteta; brings some tools, some to analyze and manipulate the byte arrays
+  and some with more general purpose. These tools can be activated or deactivated from
+  the <guimenu>Tools</guimenu> entry in the menu bar. Each tool has a small view,
+  which docks either in one of the sidebars or freely floats as a window. You
+  can dock, undock, rearrange and also stack the tool views with the mouse, by
+  pressing the &LMB; on the title bar of a tool view, moving it as you like and
+  releasing the &LMB; to complete the action, otherwise cancel it by pressing
+  the &Esc; key.</para>
 
-<sect1 id="tools-fileinfo">
-    <title>File Info</title>
-    <para>The view displays some information about the current file,
-    including its type, the location of storage and the size.</para>
-  </sect1>
-
-  <sect1 id="tools-checksum">
-  <title>Checksum</title>
-  <para>This view allows calculating various checksums for the
-   currently selected range in the document</para>
-  </sect1>
-
-  <sect1 id="tools-filter">
-    <title>Binary Filter</title>
-    <para>The filter performs binary operations on the selected bytes.
-    After choosing the operation (AND, OR, ROTATE..) the parameters,
-    if any, can be set in the box below. The filter is executed on the use
-    of the <guibutton>Filter</guibutton> button.</para>
-  </sect1>
-  <sect1 id="tools-strings">
-    <title>Strings</title>
-    <para>This tool locates the strings in the selected bytes.
-    After choosing the minimum string length, the strings are grepped for
-    on the use of the <guibutton>Update</guibutton> button.
-    The list of the strings displayed can be narrowed by entering a
-    filter term.
-   </para>
-  </sect1>
-  <sect1 id="tools-bytetable">
-    <title>Byte Table</title>
-    <para>The table lists all possible byte values, both as character and
+<sect2>
+  <title>Analyzers and Manipulators</title>
+<variablelist>
+  <varlistentry>
+    <term>Byte Table</term>
+    <listitem><para>The table lists all possible byte values, both as character and
     numerical value.</para>
     <para>The selected value can be inserted at the cursor position for a
     defined number of bytes. This can be achieved by using the <guibutton>Insert</guibutton>
-    button or double-clicking the line in the table.</para>
-  </sect1>
-  <sect1 id="tools-statistics">
-    <title>Statistics</title>
-    <para>The view displays a statistic for the selected bytes.
+    button or double-clicking the line in the table.</para></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Binary Filter</term>
+    <listitem><para>The filter performs binary operations on the selected bytes.
+    After choosing the operation (AND, OR, ROTATE..) the parameters,
+    if any, can be set in the box below. The filter is executed on the use
+    of the <guibutton>Filter</guibutton> button.</para></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Strings</term>
+    <listitem><para>This tool locates the strings in the selected bytes.
+    After choosing the minimum string length, the strings are grepped for
+    on the use of the <guibutton>Extract</guibutton> button.
+    The list of the strings displayed can be narrowed by entering a
+    filter term.</para></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Statistics</term>
+    <listitem><para>This tool builds a statistic for the selected bytes.
     The statistic gives the frequency of the occurrence of each byte value
     in the selection.
-    It can be brought uptodate by using the <guibutton>Update</guibutton>
-    button.</para>
-  </sect1>
-  <sect1 id="tools-decodingtable">
-    <title>Decoding Table</title>
-    <para>The table displays the value of the byte or the bytes starting
-    at the cursor, interpreted as common simple data types like Integer or Float.</para>
-  </sect1>
+    It can be calculated by using the <guibutton>Build</guibutton>
+    button.</para></listitem>
+  </varlistentry>
 
-  <sect1 id="tools-structures">
+  <varlistentry>
+    <term>Checksum</term>
+    <listitem><para>This tool calculates various checksums or hashsums for the
+    selected bytes. After choosing the algorithm and setting the parameter, if
+    any, the sum is computed on the use of the <guibutton>Calculate</guibutton>
+    button.</para></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Decoding Table</term>
+    <listitem><para>The table displays the values of the byte or the bytes
+    starting at the cursor for some common simple data types like Integer or
+    Float, but also UTF-8. Double-clicking on a line in the table opens an
+    editor, so the value can be edited and changed.</para></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Structures</term>
+    <listitem><para>This tool enables investigating and editing of byte arrays
+    based on user-creatable structure definitions. Detailed instructions are in
+    an own <link linkend="tools-structures">section</link>.</para></listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+  <title>General tools</title>
+<variablelist>
+  <varlistentry>
+    <term>Filesystem</term>
+    <listitem><para>This tool offers an embedded file browser which
+    can be used to select files to open.</para></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Documents</term>
+    <listitem><para>This tool shows all currently created or loaded files.
+    Symbols mark the file with the currently active view and also show which
+    files have unsaved changes or which storage copy has been modified by
+    another program.</para></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Bookmarks</term>
+    <listitem><para>This tool can be used to manage the bookmark, alternatively
+    to the <link linkend="bookmarks-menu"><guimenu>Bookmarks</guimenu> menu</link>.
+    <note><para>Bookmarks are currently only transient and not saved if you
+    close a byte array or the whole program.</para></note></para></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>File Info</term>
+    <listitem><para>This tool displays some information about the current file,
+    including its type, the location of storage and the size.</para></listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+</sect1>
+
+
+<sect1 id="tools-structures">
 
     <title>Structures Tool</title>
 
@@ -229,15 +278,6 @@ just used for development, so no need to document it. -->
         </para>
       </sect3>
     </sect2>
-  </sect1>
-
-<sect1 id="tools-bookmarks">
-<title>Bookmarks</title>
-<para>This view allows saving of offsets in any open file, so it can be revisited later.
-<note><para> Bookmarks are currently not saved for the next session, so make sure to keep &okteta;
- open while the bookmark is still needed.</para></note>
-</para>
 </sect1>
-
 
 </chapter>
