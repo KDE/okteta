@@ -171,16 +171,16 @@ just used for development, so no need to document it. -->
     <sect2>
       <title>Sharing structure definitions</title>
       <para>For common structures you may not need to create a definition yourself,
-      but instead can reuse one somebody else is sharing in places like
+      but instead can reuse an already existing definition from places like
       <ulink url="http://kde-files.org/index.php?xcontentmode=691">kde-files.org</ulink>.</para>
       <para>You also may want to share a definition yourself. To do so, create a
       file archive (e.g. a zipped tar archive, <literal role="extension">.tgz</literal>)
-      from just the subdirectory containing the <literal role="extension">.osd</literal>
+      containing just the subdirectory containing the <literal role="extension">.osd</literal>
       file and the <literal role="extension">.desktop</literal> file. From the
       example in the last section this would be the subdirectory
-      <filename class="directory">ExampleStructure</filename>. With this format
-      future versions of the Structure tool will be able to provide automatical
-      download and install of these definitions.</para>
+      <filename class="directory">ExampleStructure</filename>.
+      If you adhere to this format future versions of the structure tool
+      will be able to provide automatical download and install of these definitions.</para>
     </sect2>
 
     <sect2>
