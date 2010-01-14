@@ -148,7 +148,8 @@ just used for development, so no need to document it. -->
 
       <para>The Structures tool looks for structure descriptions in the
       subdirectory <filename class="directory">share/apps/okteta/structures/</filename>
-      of the user's directory for program data (find that by executing `kde4-config --localprefix`).
+      of the user's directory for program data (find that by executing
+      <literal>kde4-config --localprefix</literal>).
       You may need to create this directory if there are not any structure
       definitions installed yet.</para>
       <para>In that subdirectory there is an own subdirectory for each structure
@@ -179,7 +180,7 @@ just used for development, so no need to document it. -->
       file and the <literal role="extension">.desktop</literal> file. From the
       example in the last section this would be the subdirectory
       <filename class="directory">ExampleStructure</filename>.
-      If you adhere to this format future versions of the structure tool
+      If you adhere to this format future versions of the Structure tool
       will be able to provide automatical download and install of these definitions.</para>
     </sect2>
 
