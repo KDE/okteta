@@ -4,7 +4,7 @@
 <para>Note that most menu commands also have a keyboard shortcut.</para>
 
 <sect1 id="file-menu">
-<title><guimenu>File</guimenu> Menu</title>
+<title>File Menu</title>
 
 <variablelist>
     <varlistentry>
@@ -227,7 +227,7 @@
 </sect1>
 
 <sect1 id="edit-menu">
-<title><guimenu>Edit</guimenu> Menu</title>
+<title>Edit Menu</title>
 <para>Currently in &kde; 4.4 simple copy and cut send data to the clipboard with the
 mimetype "application/octetstream", &klipper; is not able to display this data.
 And almost all other applications cannot handle this, too, as this is
@@ -455,7 +455,7 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
 </sect1>
 
 <sect1 id="view-menu">
-<title><guimenu>View</guimenu> Menu</title>
+<title>View Menu</title>
 
 <variablelist>
 
@@ -635,14 +635,14 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
 </sect1>
 
 <sect1 id="windows-menu">
-<title><guimenu>Windows</guimenu> Menu</title>
+<title>Windows Menu</title>
 
     <para>Provides a list of the current views. Select the active window.</para>
 
 </sect1>
 
 <sect1 id="bookmarks-menu">
-<title><guimenu>Bookmarks</guimenu> Menu</title>
+<title>Bookmarks Menu</title>
 
     <para>Multiple bookmarks can be set for a single byte array. Each byte array
     has its own set of bookmarks, and the appropriate set is displayed at the
@@ -758,7 +758,7 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
 </sect1>
 
 <sect1 id="help-menu">
-<title><guimenu>Help</guimenu> Menu</title>
+<title>Help Menu</title>
 
     &help.menu.documentation;
 
