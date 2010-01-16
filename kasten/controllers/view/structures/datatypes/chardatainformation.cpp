@@ -112,7 +112,8 @@ void CharDataInformation::setWidgetData(QWidget* w) const
     if (edit)
     {
         QChar qchar = mValue.ubyteValue;
-        if (qchar.isPrint())
-            qchar = qchar.isPrint() ? qchar : QChar(QChar::ReplacementCharacter);
+        if (! qchar.isPrint())
+            qchar = QChar(QChar::ReplacementCharacter);
+        edit->setText( qchar );
     }
 }
