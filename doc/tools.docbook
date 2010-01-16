@@ -149,7 +149,7 @@ just used for development, so no need to document it. -->
       <para>The Structures tool looks for structure descriptions in the
       subdirectory <filename class="directory">share/apps/okteta/structures/</filename>
       of the user's directory for program data (find that by executing
-      <userinput><command>kde4-config</command><option>--localprefix</option></userinput>).
+      <userinput><command>kde4-config</command> <option>--localprefix</option></userinput>).
       You may need to create this directory if there are not any structure
       definitions installed yet.</para>
       <para>In that subdirectory there is an own subdirectory for each structure
