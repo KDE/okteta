@@ -176,7 +176,7 @@ just used for development, so no need to document it. -->
       <ulink url="http://kde-files.org/index.php?xcontentmode=691">kde-files.org</ulink>.</para>
       <para>You also may want to share a definition yourself. To do so, create a
       file archive (e.g. a zipped tar archive, <literal role="extension">.tgz</literal>)
-      containing just the subdirectory containing the <literal role="extension">.osd</literal>
+      containing just the subdirectory with the <literal role="extension">.osd</literal>
       file and the <literal role="extension">.desktop</literal> file. From the
       example in the last section this would be the subdirectory
       <filename class="directory">ExampleStructure</filename>.
