@@ -39,6 +39,7 @@ Comment[es]=Una estructura de pruebas que contiene la cabecera de un archivo PNG
 Comment[et]=PNG-faili päist sisaldav teststruktuur (fail peab olema jämedaotsaline)
 Comment[fr]=Une structure de test contenant l'en-tête de fichier PNG (le fichier doit être défini comme « big-endian »).
 Comment[gl]=Unha estrutura de probas que contén a cabeceira de ficheiro PNG (o ficheiro debe configurarse como big-endian)
+Comment[hr]=Testna struktura koja sadrži zaglavlje PNG-datoteke (datoteka mora biti postavljena na big-endian)
 Comment[hu]=PNG-fejlécet tartalmazó tesztstruktúra (a fájlnak BE bájtsorrendűnek kell lennie)
 Comment[lv]=Pārbaudes struktūra, kas satur PNG galveni (failam jābūt big-endian)
 Comment[nb]=En teststruktur som inneholder PNG filhodet (filen må v ære satt til big-endian)
