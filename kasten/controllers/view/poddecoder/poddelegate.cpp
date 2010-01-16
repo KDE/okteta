@@ -48,7 +48,8 @@ namespace Kasten
 
 PODDelegate::PODDelegate( PODDecoderTool* tool, QObject* parent )
   : QStyledItemDelegate( parent ),
-    mTool( tool )
+    mTool( tool ),
+    mEditor( 0 )
 {
     qRegisterMetaType<Binary8>();
     qRegisterMetaType<Octal8>();
@@ -65,8 +66,11 @@ PODDelegate::PODDelegate( PODDecoderTool* tool, QObject* parent )
     qRegisterMetaType<Float64>();
     qRegisterMetaType<Char8>();
     qRegisterMetaType<Utf8>();
+
+    connect( mTool, SIGNAL(readOnlyChanged( bool )), SLOT(onReadOnlyChanged( bool )) );
 }
 
+// make sure only editors are created which have a readOnly property
 QWidget* PODDelegate::createEditor( QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index ) const
 {
     QWidget* result;
@@ -184,6 +188,9 @@ QWidget* PODDelegate::createEditor( QWidget* parent, const QStyleOptionViewItem&
     else
         result = QStyledItemDelegate::createEditor( parent, option, index );
 
+    mEditor = result;
+    onReadOnlyChanged( mTool->isReadOnly() );
+
     return result;
 }
 
@@ -287,6 +294,9 @@ void PODDelegate::setEditorData( QWidget* editor, const QModelIndex& index ) con
 
 void PODDelegate::setModelData( QWidget* editor, QAbstractItemModel* model, const QModelIndex& index ) const
 {
+    if( mTool->isReadOnly() )
+        return;
+
     QVariant data = index.data();
 
     if( data.canConvert<Binary8>() )
@@ -461,9 +471,16 @@ QString PODDelegate::displayText( const QVariant& data, const QLocale& locale ) 
 void PODDelegate::onEditorDone()
 {
     QWidget* editor = qobject_cast<QWidget*>( sender() );
-
+    mEditor = 0;
     emit commitData( editor );
     emit closeEditor( editor );
+}
+
+void PODDelegate::onReadOnlyChanged( bool isReadOnly ) const
+{
+    if( mEditor )
+        // going by property is slower, but saves writing this call for every widget
+        mEditor->setProperty( "readOnly", isReadOnly );
 }
 
 PODDelegate::~PODDelegate() {}

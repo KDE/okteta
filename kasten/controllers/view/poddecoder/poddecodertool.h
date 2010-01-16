@@ -69,6 +69,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
     virtual void setTargetModel( AbstractModel* model );
 
   public:
+    bool isReadOnly() const;
     QVariant value( int podId ) const;
     QString nameOfPOD( int podId ) const;
     int podCount() const;
@@ -88,7 +89,8 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
     void setUnsignedAsHex( bool unsignedAsHex );
     void setByteOrder( int byteOrder );
 
-  Q_SIGNALS: // changtes to the setting currently not signalled, because only controlled by view
+  Q_SIGNALS: // changes to the setting currently not signalled, because only controlled by view
+    void readOnlyChanged( bool isReadOnly );
     void dataChanged();
 
   protected:
@@ -98,6 +100,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
   protected Q_SLOTS:
     void onCursorPositionChange( Okteta::Address pos );
     void onContentsChange();
+    void onReadOnlyChanged();
 
     void onCharCodecChange( const QString& codecName );
 //     void onUndefinedCharChanged( const QChar& undefinedChar );
@@ -107,6 +110,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
     Okteta::AbstractByteArrayModel* mByteArrayModel;
     Okteta::Address mCursorIndex;
 
+    bool mReadOnly :1;
     bool mIsPodMarked :1;
 
     QVector<Okteta::AbstractTypeCodec*> mTypeCodecs;
