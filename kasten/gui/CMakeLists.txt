@@ -64,6 +64,7 @@ set( okteta_streamencoder_SRCS
   ${okteta_values_streamencoder_SRCS}
   io/bytearraytextstreamencoder.cpp
   io/bytearraybase64streamencoder.cpp
+  io/bytearrayuuencodingstreamencoder.cpp
   ${okteta_sourcecode_streamencoder_SRCS}
   ${okteta_viewtext_streamencoder_SRCS}
   io/bytearraystreamencoderfactory.cpp
