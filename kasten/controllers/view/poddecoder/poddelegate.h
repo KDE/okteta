@@ -56,9 +56,12 @@ class PODDelegate : public QStyledItemDelegate
 
   protected Q_SLOTS:
     void onEditorDone();
+    void onReadOnlyChanged( bool isReadOnly ) const;
 
   protected:
     PODDecoderTool* mTool;
+
+    mutable QWidget* mEditor;
 };
 
 }

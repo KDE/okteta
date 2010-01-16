@@ -79,6 +79,7 @@ PODDecoderTool::PODDecoderTool()
   : mByteArrayView( 0 ),
     mByteArrayModel( 0 ),
     mCursorIndex( 0 ),
+    mReadOnly( true ),
     mIsPodMarked( false ),
     mCharCodec( Okteta::CharCodec::createCodec(Okteta::LocalEncoding) ),
     mDifferentSizeDialog( 0 ),
@@ -90,6 +91,7 @@ PODDecoderTool::PODDecoderTool()
 }
 
 QString PODDecoderTool::title() const { return i18nc("@title:window", "Decoding Table"); }
+bool PODDecoderTool::isReadOnly() const { return mReadOnly; }
 
 void PODDecoderTool::setTargetModel( AbstractModel* model )
 {
@@ -112,12 +114,15 @@ void PODDecoderTool::setTargetModel( AbstractModel* model )
         connect( mByteArrayView, SIGNAL(cursorPositionChanged( Okteta::Address )), SLOT(onCursorPositionChange( Okteta::Address )) );
         connect( mByteArrayModel, SIGNAL(contentsChanged( const Okteta::ArrayChangeMetricsList& )),
                  SLOT(onContentsChange()) );
-        onCharCodecChange( mByteArrayView->charCodingName() );
         connect( mByteArrayView,  SIGNAL(charCodecChanged( const QString& )),
                  SLOT(onCharCodecChange( const QString& )) );
+        connect( mByteArrayView, SIGNAL(readOnlyChanged( bool )),
+                 SLOT(onReadOnlyChanged()) );
+        onCharCodecChange( mByteArrayView->charCodingName() );
     }
 
     updateData();
+    onReadOnlyChanged();
 }
 
 
@@ -317,6 +322,16 @@ void PODDecoderTool::unmarkPOD()
     mIsPodMarked = false;
 }
 
+void PODDecoderTool::onReadOnlyChanged()
+{
+    const bool newReadOnly = ( (! mByteArrayModel) || (! mByteArrayView)
+                               || mByteArrayView->isReadOnly() );
+    if( newReadOnly != mReadOnly )
+    {
+        mReadOnly = newReadOnly;
+        emit readOnlyChanged( newReadOnly );
+    }
+}
 
 PODDecoderTool::~PODDecoderTool()
 {
