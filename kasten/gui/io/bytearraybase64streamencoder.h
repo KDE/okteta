@@ -33,6 +33,7 @@
 
 namespace Kasten
 {
+extern const char base64EncodeMap[64];
 
 class ByteArrayBase64StreamEncoder : public AbstractByteArrayStreamEncoder
 {
