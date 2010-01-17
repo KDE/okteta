@@ -81,7 +81,7 @@ UuencodingStreamEncoderSettings::UuencodingStreamEncoderSettings()
 {}
 
 ByteArrayUuEncodingStreamEncoder::ByteArrayUuEncodingStreamEncoder()
-  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","UU Encoding..."), QString::fromLatin1("text/plain") )
+  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Uuencoding..."), QString::fromLatin1("text/plain") )
 {}
 
 
