@@ -45,7 +45,7 @@ ByteArrayUuencodingStreamEncoderConfigEditor::ByteArrayUuencodingStreamEncoderCo
     QFormLayout* pageLayout = new QFormLayout( this );
     pageLayout->setMargin( 0 );
 
-    // separation string
+    // internal file name
     const QString fileNameLabel =
         i18nc( "@label:textbox file name internally given to the encoded data",
                "Internal name of file:" );
