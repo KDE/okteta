@@ -22,6 +22,8 @@
 
 #include "bytearrayuuencodingstreamencoder.h"
 
+// lib
+#include "bytearraybase64streamencoder.h"
 // Okteta core
 #include <abstractbytearraymodel.h>
 // KDE
@@ -42,7 +44,36 @@ static const char zeroSubstituteChar = '`';
 
 enum InputByteIndex { FirstByte, SecondByte, ThirdByte };
 
-static inline char uumapByte( char byte ) { return (byte > 0) ? (byte + 32) : zeroSubstituteChar; }
+static inline char uumapByteClassic( char byte ) { return (byte > 0) ? (byte + 32) : zeroSubstituteChar; }
+static inline char uumapByteBase64( char byte )  { return base64EncodeMap[(int)byte]; }
+
+struct UumapEncodeData
+{
+    char (*mapByte)( char );
+    const char* header;
+    const char* footer;
+    const char* twoBytePad;
+    const char* oneBytePad;
+    bool hasLength;
+};
+
+static const UumapEncodeData classicUumapEncodeData =
+{
+    &uumapByteClassic,
+    "begin",
+    "\n`\nend\n",
+    "``","`",
+    true
+};
+
+static const UumapEncodeData base64UumapEncodeData =
+{
+    &uumapByteBase64,
+    "begin-base64",
+    "\n====\n",
+    "==","=",
+    false
+};
 
 
 ByteArrayUuEncodingStreamEncoder::ByteArrayUuEncodingStreamEncoder()
@@ -68,12 +99,18 @@ bool ByteArrayUuEncodingStreamEncoder::encodeDataToStream( QIODevice* device,
     int inputGroupsPerLine = 0;
     unsigned char bitsFromLastByte;
 
+    const UumapEncodeData* encodeData = &base64UumapEncodeData;
+
     // header
-    textStream << "begin 644 " << fileName;
+    textStream << encodeData->header << " 644 " << fileName;
 
     const int firstLineLength = qMin( range.width(), inputLineLength );
     if( firstLineLength > 0 )
-        textStream << '\n' << uumapByte( firstLineLength );
+    {
+        textStream << '\n';
+        if( encodeData->hasLength )
+            textStream << encodeData->mapByte( firstLineLength );
+    }
 
     for( Okteta::Address i=range.start(); i<=range.end(); ++i )
     {
@@ -83,30 +120,32 @@ bool ByteArrayUuEncodingStreamEncoder::encodeDataToStream( QIODevice* device,
         {
         case FirstByte:
             // bits 7..2
-            textStream << uumapByte( byte >> 2 );
+            textStream << encodeData->mapByte( byte >> 2 );
             // bits 1..0 -> 5..4 for next
             bitsFromLastByte = (byte & 0x3) << 4;
             inputByteIndex = SecondByte;
             break;
         case SecondByte:
             // from last and bits 7..4 as 3..0 from this
-            textStream << uumapByte( bitsFromLastByte | byte >> 4 );
+            textStream << encodeData->mapByte( bitsFromLastByte | byte >> 4 );
             // bits 3..0 -> 5..2 for next
             bitsFromLastByte = (byte & 0xf) << 2;
             inputByteIndex = ThirdByte;
             break;
         case ThirdByte:
             // from last and bits 7..6 as 1..0 from this
-            textStream << uumapByte( bitsFromLastByte | byte >> 6 );
+            textStream << encodeData->mapByte( bitsFromLastByte | byte >> 6 );
             // bits 5..0
-            textStream << uumapByte( byte & 0x3F );
+            textStream << encodeData->mapByte( byte & 0x3F );
             inputByteIndex = FirstByte;
             ++inputGroupsPerLine;
             if( inputGroupsPerLine >= maxInputGroupsPerLine && i<range.end() )
             {
                 const int remainsCount = range.end() - i;
                 const int nextLineLength = qMin( remainsCount, inputLineLength );
-                textStream << '\n' << uumapByte( nextLineLength );
+                textStream << '\n';
+                if( encodeData->hasLength )
+                    textStream << encodeData->mapByte( nextLineLength );
                 inputGroupsPerLine = 0;
             }
             break;
@@ -114,11 +153,11 @@ bool ByteArrayUuEncodingStreamEncoder::encodeDataToStream( QIODevice* device,
     }
     const bool hasBitsLeft = ( inputByteIndex != FirstByte );
     if( hasBitsLeft )
-        textStream << uumapByte(bitsFromLastByte)
+        textStream << encodeData->mapByte(bitsFromLastByte)
                    // padding
-                   << (inputByteIndex==SecondByte?"``":"`");
+                   << (inputByteIndex==SecondByte ? encodeData->twoBytePad : encodeData->oneBytePad);
     // footer
-    textStream << "\n`\nend\n";
+    textStream << encodeData->footer;
 
     return success;
 }
