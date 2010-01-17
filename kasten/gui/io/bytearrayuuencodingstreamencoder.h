@@ -34,6 +34,16 @@
 namespace Kasten
 {
 
+class UuencodingStreamEncoderSettings
+{
+  public:
+    UuencodingStreamEncoderSettings();
+  public:
+    QString fileName;
+    bool historicalMode;
+};
+
+
 class ByteArrayUuEncodingStreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
@@ -42,12 +52,27 @@ class ByteArrayUuEncodingStreamEncoder : public AbstractByteArrayStreamEncoder
     ByteArrayUuEncodingStreamEncoder();
     virtual ~ByteArrayUuEncodingStreamEncoder();
 
+  public:
+    UuencodingStreamEncoderSettings settings() const;
+    void setSettings( const UuencodingStreamEncoderSettings& settings );
+
   protected: // AbstractByteArrayStreamEncoder API
     virtual bool encodeDataToStream( QIODevice* device,
                                      const ByteArrayView* byteArrayView,
                                      const Okteta::AbstractByteArrayModel* byteArrayModel,
                                      const Okteta::AddressRange& range );
+
+  protected:
+    UuencodingStreamEncoderSettings mSettings;
 };
+
+
+inline UuencodingStreamEncoderSettings ByteArrayUuEncodingStreamEncoder::settings() const { return mSettings; }
+inline void ByteArrayUuEncodingStreamEncoder::setSettings( const UuencodingStreamEncoderSettings& settings )
+{
+    mSettings = settings;
+    emit settingsChanged();
+}
 
 }
 

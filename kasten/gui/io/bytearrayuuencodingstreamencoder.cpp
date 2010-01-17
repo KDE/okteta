@@ -44,7 +44,7 @@ static const char zeroSubstituteChar = '`';
 
 enum InputByteIndex { FirstByte, SecondByte, ThirdByte };
 
-static inline char uumapByteClassic( char byte ) { return (byte > 0) ? (byte + 32) : zeroSubstituteChar; }
+static inline char uumapByteHistorical( char byte ) { return (byte > 0) ? (byte + 32) : zeroSubstituteChar; }
 static inline char uumapByteBase64( char byte )  { return base64EncodeMap[(int)byte]; }
 
 struct UumapEncodeData
@@ -57,9 +57,9 @@ struct UumapEncodeData
     bool hasLength;
 };
 
-static const UumapEncodeData classicUumapEncodeData =
+static const UumapEncodeData historicalUumapEncodeData =
 {
-    &uumapByteClassic,
+    &uumapByteHistorical,
     "begin",
     "\n`\nend\n",
     "``","`",
@@ -76,8 +76,12 @@ static const UumapEncodeData base64UumapEncodeData =
 };
 
 
+UuencodingStreamEncoderSettings::UuencodingStreamEncoderSettings()
+ : fileName( QString::fromLatin1("okteta-export")), historicalMode( false )
+{}
+
 ByteArrayUuEncodingStreamEncoder::ByteArrayUuEncodingStreamEncoder()
-  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","UU Encoding"), QString::fromLatin1("text/plain") )
+  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","UU Encoding..."), QString::fromLatin1("text/plain") )
 {}
 
 
@@ -94,15 +98,15 @@ bool ByteArrayUuEncodingStreamEncoder::encodeDataToStream( QIODevice* device,
     QTextStream textStream( device );
 
     // prepare
-    static const char fileName[] = "okteta-export";
     InputByteIndex inputByteIndex = FirstByte;
     int inputGroupsPerLine = 0;
     unsigned char bitsFromLastByte;
 
-    const UumapEncodeData* encodeData = &base64UumapEncodeData;
+    const UumapEncodeData* encodeData =
+        mSettings.historicalMode ? &historicalUumapEncodeData : &base64UumapEncodeData;
 
     // header
-    textStream << encodeData->header << " 644 " << fileName;
+    textStream << encodeData->header << " 644 " << mSettings.fileName.toAscii();
 
     const int firstLineLength = qMin( range.width(), inputLineLength );
     if( firstLineLength > 0 )

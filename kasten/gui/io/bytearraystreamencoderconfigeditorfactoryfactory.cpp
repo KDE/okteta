@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,6 +25,7 @@
 // lib
 #include "bytearraysourcecodestreamencoderconfigeditorfactory.h"
 #include "bytearrayvaluesstreamencoderconfigeditorfactory.h"
+#include "bytearrayuuencodingstreamencoderconfigeditorfactory.h"
 //// NEWBYTEARRAYSTREAMENCODERCONFIGEDITORFACTORY(start)
 //// Here add the name of your header file of your streamencoder,
 //// e.g.
@@ -43,7 +44,8 @@ QList<AbstractModelStreamEncoderConfigEditorFactory*> ByteArrayStreamEncoderConf
 
     result
         << new ByteArraySourceCodeStreamEncoderConfigEditorFactory()
-        << new ByteArrayValuesStreamEncoderConfigEditorFactory();
+        << new ByteArrayValuesStreamEncoderConfigEditorFactory()
+        << new ByteArrayUuencodingStreamEncoderConfigEditorFactory();
 //// NEWBYTEARRAYSTREAMENCODERCONFIGEDITORFACTORY(start)
 //// Here add the creation of an object of your streamencoder class and add it to the list,
 //// e.g.
