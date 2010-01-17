@@ -38,8 +38,8 @@ ByteArrayUuencodingStreamEncoderConfigEditorFactory::ByteArrayUuencodingStreamEn
 AbstractModelStreamEncoderConfigEditor* ByteArrayUuencodingStreamEncoderConfigEditorFactory::tryCreateConfigEditor( AbstractModelStreamEncoder* encoder ) const
 {
     AbstractModelStreamEncoderConfigEditor* result = 0;
-    ByteArrayUuEncodingStreamEncoder* uuencodingStreamEncoder =
-        qobject_cast<ByteArrayUuEncodingStreamEncoder*>( encoder );
+    ByteArrayUuencodingStreamEncoder* uuencodingStreamEncoder =
+        qobject_cast<ByteArrayUuencodingStreamEncoder*>( encoder );
 
     if( uuencodingStreamEncoder )
         result = new ByteArrayUuencodingStreamEncoderConfigEditor( uuencodingStreamEncoder );

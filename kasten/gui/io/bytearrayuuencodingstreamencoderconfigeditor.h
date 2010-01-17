@@ -40,7 +40,7 @@ class ByteArrayUuencodingStreamEncoderConfigEditor : public AbstractModelStreamE
   Q_OBJECT
 
   public:
-    explicit ByteArrayUuencodingStreamEncoderConfigEditor( ByteArrayUuEncodingStreamEncoder* encoder, QWidget* parent = 0 );
+    explicit ByteArrayUuencodingStreamEncoderConfigEditor( ByteArrayUuencodingStreamEncoder* encoder, QWidget* parent = 0 );
     virtual ~ByteArrayUuencodingStreamEncoderConfigEditor();
 
   public: // AbstractModelStreamEncoderConfigEditor API
@@ -51,7 +51,7 @@ class ByteArrayUuencodingStreamEncoderConfigEditor : public AbstractModelStreamE
     void onSettingsChanged();
 
   protected:
-    ByteArrayUuEncodingStreamEncoder* mEncoder;
+    ByteArrayUuencodingStreamEncoder* mEncoder;
     UuencodingStreamEncoderSettings mSettings;
 
     KComboBox* mEncodingSelect;

@@ -104,12 +104,12 @@ UuencodingStreamEncoderSettings::UuencodingStreamEncoderSettings()
  : fileName( QString::fromLatin1("okteta-export")), algorithmId( Base64Id )
 {}
 
-ByteArrayUuEncodingStreamEncoder::ByteArrayUuEncodingStreamEncoder()
+ByteArrayUuencodingStreamEncoder::ByteArrayUuencodingStreamEncoder()
   : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Uuencoding..."), QString::fromLatin1("text/plain") )
 {}
 
 
-bool ByteArrayUuEncodingStreamEncoder::encodeDataToStream( QIODevice* device,
+bool ByteArrayUuencodingStreamEncoder::encodeDataToStream( QIODevice* device,
                                                            const ByteArrayView* byteArrayView,
                                                            const Okteta::AbstractByteArrayModel* byteArrayModel,
                                                            const Okteta::AddressRange& range )
@@ -194,6 +194,6 @@ bool ByteArrayUuEncodingStreamEncoder::encodeDataToStream( QIODevice* device,
     return success;
 }
 
-ByteArrayUuEncodingStreamEncoder::~ByteArrayUuEncodingStreamEncoder() {}
+ByteArrayUuencodingStreamEncoder::~ByteArrayUuencodingStreamEncoder() {}
 
 }

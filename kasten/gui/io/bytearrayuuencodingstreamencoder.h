@@ -47,13 +47,13 @@ class UuencodingStreamEncoderSettings
 };
 
 
-class ByteArrayUuEncodingStreamEncoder : public AbstractByteArrayStreamEncoder
+class ByteArrayUuencodingStreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
 
   public:
-    ByteArrayUuEncodingStreamEncoder();
-    virtual ~ByteArrayUuEncodingStreamEncoder();
+    ByteArrayUuencodingStreamEncoder();
+    virtual ~ByteArrayUuencodingStreamEncoder();
 
   public:
     UuencodingStreamEncoderSettings settings() const;
@@ -70,8 +70,8 @@ class ByteArrayUuEncodingStreamEncoder : public AbstractByteArrayStreamEncoder
 };
 
 
-inline UuencodingStreamEncoderSettings ByteArrayUuEncodingStreamEncoder::settings() const { return mSettings; }
-inline void ByteArrayUuEncodingStreamEncoder::setSettings( const UuencodingStreamEncoderSettings& settings )
+inline UuencodingStreamEncoderSettings ByteArrayUuencodingStreamEncoder::settings() const { return mSettings; }
+inline void ByteArrayUuencodingStreamEncoder::setSettings( const UuencodingStreamEncoderSettings& settings )
 {
     mSettings = settings;
     emit settingsChanged();

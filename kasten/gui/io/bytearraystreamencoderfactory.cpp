@@ -51,7 +51,7 @@ QList<AbstractModelStreamEncoder*> ByteArrayStreamEncoderFactory::createStreamEn
         << new ByteArrayTextStreamEncoder()
         << new ByteArrayBase64StreamEncoder()
         << new ByteArrayBase32StreamEncoder()
-        << new ByteArrayUuEncodingStreamEncoder()
+        << new ByteArrayUuencodingStreamEncoder()
         << new ByteArraySourceCodeStreamEncoder()
         << new ByteArrayViewTextStreamEncoder();
 //// NEWBYTEARRAYSTREAMENCODER(start)
