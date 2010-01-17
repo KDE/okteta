@@ -35,17 +35,28 @@
 namespace Kasten
 {
 
+static const char xxencodeMap[64] =
+{
+    '+', '-', '0', '1', '2', '3', '4', '5',
+    '6', '7', '8', '9', 'A', 'B', 'C', 'D',
+    'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
+    'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+    'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b',
+    'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+    'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+    's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+};
+
 static const int defaultInputLineLength = 45;
 static const int inputLineLength = defaultInputLineLength;
 static const int inputGroupLength = 3;
 static const int maxInputGroupsPerLine = inputLineLength/inputGroupLength;
 
-static const char zeroSubstituteChar = '`';
-
 enum InputByteIndex { FirstByte, SecondByte, ThirdByte };
 
-static inline char uumapByteHistorical( char byte ) { return (byte > 0) ? (byte + 32) : zeroSubstituteChar; }
-static inline char uumapByteBase64( char byte )  { return base64EncodeMap[(int)byte]; }
+static inline char uumapByteHistorical( char byte ) { return (byte > 0) ? (byte + 32) : '`'; }
+static inline char xxmapByte( char byte )           { return xxencodeMap[(int)byte]; }
+static inline char uumapByteBase64( char byte )     { return base64EncodeMap[(int)byte]; }
 
 struct UumapEncodeData
 {
@@ -66,6 +77,15 @@ static const UumapEncodeData historicalUumapEncodeData =
     true
 };
 
+static const UumapEncodeData xxmapEncodeData =
+{
+    &xxmapByte,
+    "begin",
+    "\n+\nend\n",
+    "++","+",
+    true
+};
+
 static const UumapEncodeData base64UumapEncodeData =
 {
     &uumapByteBase64,
@@ -77,7 +97,7 @@ static const UumapEncodeData base64UumapEncodeData =
 
 
 UuencodingStreamEncoderSettings::UuencodingStreamEncoderSettings()
- : fileName( QString::fromLatin1("okteta-export")), historicalMode( false )
+ : fileName( QString::fromLatin1("okteta-export")), algorithmId( Base64Id )
 {}
 
 ByteArrayUuEncodingStreamEncoder::ByteArrayUuEncodingStreamEncoder()
@@ -103,7 +123,12 @@ bool ByteArrayUuEncodingStreamEncoder::encodeDataToStream( QIODevice* device,
     unsigned char bitsFromLastByte;
 
     const UumapEncodeData* encodeData =
-        mSettings.historicalMode ? &historicalUumapEncodeData : &base64UumapEncodeData;
+        (mSettings.algorithmId == UuencodingStreamEncoderSettings::HistoricalId ) ?
+            &historicalUumapEncodeData :
+        (mSettings.algorithmId == UuencodingStreamEncoderSettings::XxencodingId ) ?
+            &xxmapEncodeData :
+        /* else */
+            &base64UumapEncodeData;
 
     // header
     textStream << encodeData->header << " 644 " << mSettings.fileName.toAscii();

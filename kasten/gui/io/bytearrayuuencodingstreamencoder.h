@@ -37,10 +37,13 @@ namespace Kasten
 class UuencodingStreamEncoderSettings
 {
   public:
+    enum AlgorithmId { HistoricalId = 0, XxencodingId = 1, Base64Id = 2 };
+
+  public:
     UuencodingStreamEncoderSettings();
   public:
     QString fileName;
-    bool historicalMode;
+    AlgorithmId algorithmId;
 };
 
 

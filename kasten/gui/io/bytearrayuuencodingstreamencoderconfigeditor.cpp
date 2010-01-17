@@ -35,9 +35,6 @@
 
 namespace Kasten
 {
-static const int base64Index = 0;
-static const int historicalIndex = 1;
-
 
 ByteArrayUuencodingStreamEncoderConfigEditor::ByteArrayUuencodingStreamEncoderConfigEditor( ByteArrayUuEncodingStreamEncoder* encoder, QWidget* parent )
  : AbstractModelStreamEncoderConfigEditor( parent ),
@@ -65,12 +62,14 @@ ByteArrayUuencodingStreamEncoderConfigEditor::ByteArrayUuencodingStreamEncoderCo
 
     mEncodingSelect = new KComboBox( this );
     QStringList list;
-    list.append( i18nc("@item:inmenu Doing the uuencoding using the base64 algorithm",
-                       "Base64") );
     list.append( i18nc("@item:inmenu Doing the uuencoding using the historical algorithm",
                        "Historical") );
+    list.append( i18nc("@item:inmenu Doing the uuencoding using the xxencoding algorithm",
+                       "Xxencoding") );
+    list.append( i18nc("@item:inmenu Doing the uuencoding using the base64 algorithm",
+                       "Base64") );
     mEncodingSelect->addItems( list );
-    mEncodingSelect->setCurrentIndex( mSettings.historicalMode ? historicalIndex : base64Index );
+    mEncodingSelect->setCurrentIndex( mSettings.algorithmId );
     connect( mEncodingSelect, SIGNAL(activated(int)), SLOT(onSettingsChanged()) );
     pageLayout->addRow( encodingTypeLabel, mEncodingSelect );
 }
@@ -88,7 +87,7 @@ AbstractSelectionView* ByteArrayUuencodingStreamEncoderConfigEditor::createPrevi
 
 void ByteArrayUuencodingStreamEncoderConfigEditor::onSettingsChanged()
 {
-    mSettings.historicalMode = ( mEncodingSelect->currentIndex() == historicalIndex );
+    mSettings.algorithmId = (UuencodingStreamEncoderSettings::AlgorithmId) mEncodingSelect->currentIndex();
     mSettings.fileName = mFileNameEdit->text();
 
     mEncoder->setSettings( mSettings );
