@@ -77,6 +77,7 @@ set( okteta_streamencoder_SRCS
   io/bytearraytextstreamencoder.cpp
   io/bytearraybase64streamencoder.cpp
   ${okteta_base32_streamencoder_SRCS}
+  io/bytearraybase85streamencoder.cpp
   ${okteta_uuencoding_streamencoder_SRCS}
   ${okteta_sourcecode_streamencoder_SRCS}
   ${okteta_viewtext_streamencoder_SRCS}

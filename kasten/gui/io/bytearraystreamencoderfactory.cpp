@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -29,6 +29,7 @@
 #include "bytearrayviewtextstreamencoder.h"
 #include "bytearraybase64streamencoder.h"
 #include "bytearraybase32streamencoder.h"
+#include "bytearraybase85streamencoder.h"
 #include "bytearrayuuencodingstreamencoder.h"
 //// NEWBYTEARRAYSTREAMENCODER(start)
 //// Here add the name of your header file of your streamencoder,
@@ -51,6 +52,7 @@ QList<AbstractModelStreamEncoder*> ByteArrayStreamEncoderFactory::createStreamEn
         << new ByteArrayTextStreamEncoder()
         << new ByteArrayBase64StreamEncoder()
         << new ByteArrayBase32StreamEncoder()
+        << new ByteArrayBase85StreamEncoder()
         << new ByteArrayUuencodingStreamEncoder()
         << new ByteArraySourceCodeStreamEncoder()
         << new ByteArrayViewTextStreamEncoder();
