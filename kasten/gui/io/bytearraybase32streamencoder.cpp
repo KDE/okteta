@@ -33,7 +33,7 @@
 namespace Kasten
 {
 
-static const char base32EncodeMap[32] =
+static const char base32ClassicEncodeMap[32] =
 {
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
     'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
@@ -41,15 +41,14 @@ static const char base32EncodeMap[32] =
     'Y', 'Z', '2', '3', '4', '5', '6', '7'
 };
 
-#if 0
 static const char base32HexEncodeMap[32] =
 {
-    '0', '1', '2', '3', '4', '5', '6', '7'
+    '0', '1', '2', '3', '4', '5', '6', '7',
     '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
     'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
     'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V'
 };
-#endif
+
 static const int inputGroupLength = 5;
 
 static const int outputLineLength = 76;
@@ -70,8 +69,12 @@ static inline const char* base32Padding( InputByteIndex index )
     return base32PaddingData[(int)(index) - 1];
 }
 
+Base32StreamEncoderSettings::Base32StreamEncoderSettings()
+ : algorithmId( ClassicId )
+{}
+
 ByteArrayBase32StreamEncoder::ByteArrayBase32StreamEncoder()
-  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Base32"), QString::fromLatin1("text/plain") )
+  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Base32..."), QString::fromLatin1("text/plain") )
 {}
 
 
@@ -88,6 +91,11 @@ bool ByteArrayBase32StreamEncoder::encodeDataToStream( QIODevice* device,
     QTextStream textStream( device );
 
     // prepare
+    const char* const base32EncodeMap =
+        (mSettings.algorithmId == Base32StreamEncoderSettings::ClassicId) ?
+            base32ClassicEncodeMap :
+            base32HexEncodeMap;
+
     InputByteIndex inputByteIndex = FirstByte;
     int outputGroupsPerLine = 0;
     unsigned char bitsFromLastByte;

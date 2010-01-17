@@ -34,6 +34,18 @@
 namespace Kasten
 {
 
+class Base32StreamEncoderSettings
+{
+  public:
+    enum AlgorithmId { ClassicId = 0, HexId = 1 };
+
+  public:
+    Base32StreamEncoderSettings();
+  public:
+    AlgorithmId algorithmId;
+};
+
+
 class ByteArrayBase32StreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
@@ -42,12 +54,27 @@ class ByteArrayBase32StreamEncoder : public AbstractByteArrayStreamEncoder
     ByteArrayBase32StreamEncoder();
     virtual ~ByteArrayBase32StreamEncoder();
 
+  public:
+    Base32StreamEncoderSettings settings() const;
+    void setSettings( const Base32StreamEncoderSettings& settings );
+
   protected: // AbstractByteArrayStreamEncoder API
     virtual bool encodeDataToStream( QIODevice* device,
                                      const ByteArrayView* byteArrayView,
                                      const Okteta::AbstractByteArrayModel* byteArrayModel,
                                      const Okteta::AddressRange& range );
+
+  protected:
+    Base32StreamEncoderSettings mSettings;
 };
+
+
+inline Base32StreamEncoderSettings ByteArrayBase32StreamEncoder::settings() const { return mSettings; }
+inline void ByteArrayBase32StreamEncoder::setSettings( const Base32StreamEncoderSettings& settings )
+{
+    mSettings = settings;
+    emit settingsChanged();
+}
 
 }
 
