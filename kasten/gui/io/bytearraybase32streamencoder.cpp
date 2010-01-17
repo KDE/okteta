@@ -28,7 +28,6 @@
 #include <KLocale>
 // Qt
 #include <QtCore/QTextStream>
-#include <sys/stat.h>
 
 
 namespace Kasten
