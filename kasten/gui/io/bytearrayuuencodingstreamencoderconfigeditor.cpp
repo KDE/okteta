@@ -57,16 +57,16 @@ ByteArrayUuencodingStreamEncoderConfigEditor::ByteArrayUuencodingStreamEncoderCo
 
     // data type
     const QString encodingTypeLabel =
-        i18nc( "@label:listbox the type of the algorithm: historical or Base64.",
-               "Algorithm:" );
+        i18nc( "@label:listbox the type of the used encoding: historical, xxencoding or Base64.",
+               "Encoding:" );
 
     mEncodingSelect = new KComboBox( this );
     QStringList list;
-    list.append( i18nc("@item:inmenu Doing the uuencoding using the historical algorithm",
+    list.append( i18nc("@item:inmenu Doing the uuencoding using the historical encoding",
                        "Historical") );
-    list.append( i18nc("@item:inmenu Doing the uuencoding using the xxencoding algorithm",
+    list.append( i18nc("@item:inmenu Doing the uuencoding using the xxencoding encoding",
                        "Xxencoding") );
-    list.append( i18nc("@item:inmenu Doing the uuencoding using the base64 algorithm",
+    list.append( i18nc("@item:inmenu Doing the uuencoding using the base64 encoding",
                        "Base64") );
     mEncodingSelect->addItems( list );
     mEncodingSelect->setCurrentIndex( mSettings.algorithmId );
