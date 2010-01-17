@@ -53,6 +53,16 @@ static const int maxOutputGroupsPerLine = outputLineLength/outputGroupLength;
 
 enum InputByteIndex { FirstByte, SecondByte, ThirdByte };
 
+static const char* const base64PaddingData[2] =
+{
+    "==",
+    "="
+};
+static inline const char* base64Padding( InputByteIndex index )
+{
+    return base64PaddingData[(int)(index) - 1];
+}
+
 
 ByteArrayBase64StreamEncoder::ByteArrayBase64StreamEncoder()
   : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Base64"), QString::fromLatin1("text/plain") )
@@ -114,8 +124,7 @@ bool ByteArrayBase64StreamEncoder::encodeDataToStream( QIODevice* device,
     const bool hasBitsLeft = ( inputByteIndex != FirstByte );
     if( hasBitsLeft )
         textStream << base64EncodeMap[bitsFromLastByte]
-                   // padding
-                   << (inputByteIndex==SecondByte?"==":"=");
+                   << base64Padding(inputByteIndex);
 
     return success;
 }

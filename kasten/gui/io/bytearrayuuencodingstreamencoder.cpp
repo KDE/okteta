@@ -63,9 +63,13 @@ struct UumapEncodeData
     char (*mapByte)( char );
     const char* header;
     const char* footer;
-    const char* twoBytePad;
-    const char* oneBytePad;
+    const char* paddingData[2];
     bool hasLength;
+
+    inline const char* padding( InputByteIndex index ) const
+    {
+        return paddingData[(int)(index) - 1];
+    }
 };
 
 static const UumapEncodeData historicalUumapEncodeData =
@@ -73,7 +77,7 @@ static const UumapEncodeData historicalUumapEncodeData =
     &uumapByteHistorical,
     "begin",
     "\n`\nend\n",
-    "``","`",
+    {"``","`"},
     true
 };
 
@@ -82,7 +86,7 @@ static const UumapEncodeData xxmapEncodeData =
     &xxmapByte,
     "begin",
     "\n+\nend\n",
-    "++","+",
+    {"++","+"},
     true
 };
 
@@ -91,7 +95,7 @@ static const UumapEncodeData base64UumapEncodeData =
     &uumapByteBase64,
     "begin-base64",
     "\n====\n",
-    "==","=",
+    {"==","="},
     false
 };
 
@@ -183,8 +187,7 @@ bool ByteArrayUuEncodingStreamEncoder::encodeDataToStream( QIODevice* device,
     const bool hasBitsLeft = ( inputByteIndex != FirstByte );
     if( hasBitsLeft )
         textStream << encodeData->mapByte(bitsFromLastByte)
-                   // padding
-                   << (inputByteIndex==SecondByte ? encodeData->twoBytePad : encodeData->oneBytePad);
+                   << encodeData->padding(inputByteIndex);
     // footer
     textStream << encodeData->footer;
 

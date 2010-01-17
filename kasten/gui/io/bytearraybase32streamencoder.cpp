@@ -28,6 +28,7 @@
 #include <KLocale>
 // Qt
 #include <QtCore/QTextStream>
+#include <sys/stat.h>
 
 
 namespace Kasten
@@ -58,6 +59,17 @@ static const int maxOutputGroupsPerLine = outputLineLength/outputGroupLength;
 
 enum InputByteIndex { FirstByte, SecondByte, ThirdByte, FourthByte, FifthByte };
 
+static const char* const base32PaddingData[4] =
+{
+    "======",
+    "====",
+    "===",
+    "="
+};
+static inline const char* base32Padding( InputByteIndex index )
+{
+    return base32PaddingData[(int)(index) - 1];
+}
 
 ByteArrayBase32StreamEncoder::ByteArrayBase32StreamEncoder()
   : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Base32"), QString::fromLatin1("text/plain") )
@@ -137,11 +149,7 @@ bool ByteArrayBase32StreamEncoder::encodeDataToStream( QIODevice* device,
     const bool hasBitsLeft = ( inputByteIndex != FirstByte );
     if( hasBitsLeft )
         textStream << base32EncodeMap[bitsFromLastByte]
-                   // padding
-                   << (inputByteIndex==SecondByte ? "======" :
-                       inputByteIndex==ThirdByte ?  "====" :
-                       inputByteIndex==FourthByte ? "===" :
-                       /* FifthByte ? */            "=");
+                   << base32Padding(inputByteIndex);
 
     return success;
 }
