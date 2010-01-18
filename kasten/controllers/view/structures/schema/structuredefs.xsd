@@ -120,4 +120,22 @@
       <xsd:attribute name="name" type="xsd:string"></xsd:attribute>
     </xsd:complexType>
     <xsd:element name="enumDef" type="EnumDefinition"></xsd:element>
+
+    <xsd:complexType name="Bitfield">
+      <xsd:complexContent>
+        <xsd:extension base="DataInformation">
+          <xsd:attribute name="width" type="xsd:int"></xsd:attribute>
+          <xsd:attribute name="type">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:whiteSpace value="collapse"></xsd:whiteSpace>
+                <xsd:enumeration value="bool"></xsd:enumeration>
+                <xsd:enumeration value="signed"></xsd:enumeration>
+                <xsd:enumeration value="unsigned"></xsd:enumeration>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
 </xsd:schema>
