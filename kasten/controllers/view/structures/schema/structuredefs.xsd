@@ -13,6 +13,7 @@
           <xsd:element ref="struct"></xsd:element>
           <xsd:element ref="union"></xsd:element>
           <xsd:element ref="enum"></xsd:element>
+          <xsd:element ref="bitfield"></xsd:element>
         </xsd:choice>
       </xsd:extension>
     </xsd:complexContent>
@@ -80,7 +81,8 @@
           <xsd:element ref="struct"></xsd:element>
           <xsd:element ref="union"></xsd:element>
           <xsd:element ref="enum"></xsd:element>
-                    <xsd:element ref="enumDef"></xsd:element>
+          <xsd:element ref="enumDef"></xsd:element>
+                    <xsd:element ref="bitfield"></xsd:element>
                     <xsd:element name="include">
             <xsd:complexType>
               <xsd:attribute name="file" type="xsd:string"></xsd:attribute>
@@ -138,4 +140,6 @@
         </xsd:extension>
       </xsd:complexContent>
     </xsd:complexType>
+
+    <xsd:element name="bitfield" type="Bitfield"></xsd:element>
 </xsd:schema>
