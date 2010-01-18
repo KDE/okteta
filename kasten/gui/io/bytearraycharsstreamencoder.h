@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYTEXTSTREAMENCODER_H
-#define BYTEARRAYTEXTSTREAMENCODER_H
+#ifndef BYTEARRAYCHARSSTREAMENCODER_H
+#define BYTEARRAYCHARSSTREAMENCODER_H
 
 // lib
 #include "abstractbytearraystreamencoder.h"
@@ -32,10 +32,10 @@
 namespace Kasten
 {
 
-class TextStreamEncoderSettings
+class CharsStreamEncoderSettings
 {
   public:
-    TextStreamEncoderSettings();
+    CharsStreamEncoderSettings();
   public:
     QString codecName;
     QChar undefinedChar;
@@ -43,13 +43,13 @@ class TextStreamEncoderSettings
 };
 
 // TODO: this could rather be one of the default cop
-class ByteArrayTextStreamEncoder : public AbstractByteArrayStreamEncoder
+class ByteArrayCharsStreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
 
   public:
-    ByteArrayTextStreamEncoder();
-    virtual ~ByteArrayTextStreamEncoder();
+    ByteArrayCharsStreamEncoder();
+    virtual ~ByteArrayCharsStreamEncoder();
 
   protected: // AbstractByteArrayStreamEncoder API
     virtual bool encodeDataToStream( QIODevice* device,
@@ -58,7 +58,7 @@ class ByteArrayTextStreamEncoder : public AbstractByteArrayStreamEncoder
                                      const Okteta::AddressRange& range );
 
   protected:
-    TextStreamEncoderSettings mSettings;
+    CharsStreamEncoderSettings mSettings;
 };
 
 }

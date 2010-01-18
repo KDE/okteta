@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearraytextstreamencoder.h"
+#include "bytearraycharsstreamencoder.h"
 
 // lib
 #include <bytearrayview.h>
@@ -37,18 +37,18 @@
 namespace Kasten
 {
 
-TextStreamEncoderSettings::TextStreamEncoderSettings()
+CharsStreamEncoderSettings::CharsStreamEncoderSettings()
   : codecName(),
     undefinedChar('?'),
     substituteChar( '.' )
 {}
 
-ByteArrayTextStreamEncoder::ByteArrayTextStreamEncoder()
- : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Plain Text"), QString::fromLatin1("text/plain") )
+ByteArrayCharsStreamEncoder::ByteArrayCharsStreamEncoder()
+ : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Characters"), QString::fromLatin1("text/plain") )
 {}
 
 
-bool ByteArrayTextStreamEncoder::encodeDataToStream( QIODevice* device,
+bool ByteArrayCharsStreamEncoder::encodeDataToStream( QIODevice* device,
                                                       const ByteArrayView* byteArrayView,
                                                       const Okteta::AbstractByteArrayModel* byteArrayModel,
                                                       const Okteta::AddressRange& range )
@@ -84,6 +84,6 @@ bool ByteArrayTextStreamEncoder::encodeDataToStream( QIODevice* device,
     return success;
 }
 
-ByteArrayTextStreamEncoder::~ByteArrayTextStreamEncoder() {}
+ByteArrayCharsStreamEncoder::~ByteArrayCharsStreamEncoder() {}
 
 }

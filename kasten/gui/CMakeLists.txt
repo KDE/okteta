@@ -74,7 +74,7 @@ set( okteta_streamencoder_SRCS
   io/abstractbytearraystreamencoder.cpp
   io/bytearraytextstreamencoderpreview.cpp
   ${okteta_values_streamencoder_SRCS}
-  io/bytearraytextstreamencoder.cpp
+  io/bytearraycharsstreamencoder.cpp
   io/bytearraybase64streamencoder.cpp
   ${okteta_base32_streamencoder_SRCS}
   io/bytearraybase85streamencoder.cpp
@@ -134,7 +134,7 @@ set( okteta_kastengui_view_HDRS
 set( okteta_kastengui_io_HDRS
   io/bytearrayviewtextstreamencoder.h
   io/bytearraysourcecodestreamencoder.h
-  io/bytearraytextstreamencoder.h
+  io/bytearraycharsstreamencoder.h
   io/bytearrayvaluesstreamencoder.h
   io/bytearrayvaluesstreamencoderconfigeditor.h
   io/bytearraysourcecodestreamencoderconfigeditor.h
