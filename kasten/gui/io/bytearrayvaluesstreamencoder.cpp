@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayvaluestreamencoder.h"
+#include "bytearrayvaluesstreamencoder.h"
 
 // lib
 #include <bytearrayview.h>
@@ -36,16 +36,16 @@
 namespace Kasten
 {
 
-ValueStreamEncoderSettings::ValueStreamEncoderSettings()
+ValuesStreamEncoderSettings::ValuesStreamEncoderSettings()
  : valueCoding( Okteta::HexadecimalCoding), separation( QLatin1String(" ") )
 {}
 
-ByteArrayValueStreamEncoder::ByteArrayValueStreamEncoder()
+ByteArrayValuesStreamEncoder::ByteArrayValuesStreamEncoder()
  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Values..."), QString::fromLatin1("text/plain") )
 {}
 
 
-bool ByteArrayValueStreamEncoder::encodeDataToStream( QIODevice *device,
+bool ByteArrayValuesStreamEncoder::encodeDataToStream( QIODevice *device,
                                                        const ByteArrayView* byteArrayView,
                                                        const Okteta::AbstractByteArrayModel* byteArrayModel,
                                                        const Okteta::AddressRange& range )
@@ -81,6 +81,6 @@ bool ByteArrayValueStreamEncoder::encodeDataToStream( QIODevice *device,
     return success;
 }
 
-ByteArrayValueStreamEncoder::~ByteArrayValueStreamEncoder() {}
+ByteArrayValuesStreamEncoder::~ByteArrayValuesStreamEncoder() {}
 
 }

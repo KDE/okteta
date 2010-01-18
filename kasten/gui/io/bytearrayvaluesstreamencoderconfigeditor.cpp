@@ -36,7 +36,7 @@
 namespace Kasten
 {
 
-ByteArrayValuesStreamEncoderConfigEditor::ByteArrayValuesStreamEncoderConfigEditor( ByteArrayValueStreamEncoder* encoder, QWidget* parent )
+ByteArrayValuesStreamEncoderConfigEditor::ByteArrayValuesStreamEncoderConfigEditor( ByteArrayValuesStreamEncoder* encoder, QWidget* parent )
  : AbstractModelStreamEncoderConfigEditor( parent ),
    mEncoder( encoder )
 {

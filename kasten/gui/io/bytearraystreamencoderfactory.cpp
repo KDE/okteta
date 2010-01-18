@@ -24,7 +24,7 @@
 
 // lib
 #include "bytearraytextstreamencoder.h"
-#include "bytearrayvaluestreamencoder.h"
+#include "bytearrayvaluesstreamencoder.h"
 #include "bytearraysourcecodestreamencoder.h"
 #include "bytearrayviewtextstreamencoder.h"
 #include "bytearraybase64streamencoder.h"
@@ -48,7 +48,7 @@ QList<AbstractModelStreamEncoder*> ByteArrayStreamEncoderFactory::createStreamEn
     QList<AbstractModelStreamEncoder*> result;
 
     result
-        << new ByteArrayValueStreamEncoder()
+        << new ByteArrayValuesStreamEncoder()
         << new ByteArrayTextStreamEncoder()
         << new ByteArrayBase64StreamEncoder()
         << new ByteArrayBase32StreamEncoder()

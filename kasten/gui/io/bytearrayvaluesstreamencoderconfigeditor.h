@@ -24,7 +24,7 @@
 #define BYTEARRAYVALUESSTREAMENCODERCONFIGEDITOR_H
 
 // lib
-#include "bytearrayvaluestreamencoder.h"
+#include "bytearrayvaluesstreamencoder.h"
 // Qt
 #include <abstractmodelstreamencoderconfigeditor.h>
 
@@ -40,7 +40,7 @@ class ByteArrayValuesStreamEncoderConfigEditor : public AbstractModelStreamEncod
   Q_OBJECT
 
   public:
-    explicit ByteArrayValuesStreamEncoderConfigEditor( ByteArrayValueStreamEncoder* encoder, QWidget* parent = 0 );
+    explicit ByteArrayValuesStreamEncoderConfigEditor( ByteArrayValuesStreamEncoder* encoder, QWidget* parent = 0 );
     virtual ~ByteArrayValuesStreamEncoderConfigEditor();
 
   public: // AbstractModelStreamEncoderConfigEditor API
@@ -51,8 +51,8 @@ class ByteArrayValuesStreamEncoderConfigEditor : public AbstractModelStreamEncod
     void onSettingsChanged();
 
   protected:
-    ByteArrayValueStreamEncoder* mEncoder;
-    ValueStreamEncoderSettings mSettings;
+    ByteArrayValuesStreamEncoder* mEncoder;
+    ValuesStreamEncoderSettings mSettings;
 
 //     KComboBox* mValueCodingSelect;
     KLineEdit* mSeparationEdit;
