@@ -44,7 +44,7 @@ set( okteta_textrenderer_SRCS
 set( okteta_values_streamencoder_SRCS
   io/bytearrayvaluesstreamencoderconfigeditor.cpp
   io/bytearrayvaluesstreamencoderconfigeditorfactory.cpp
-  io/bytearrayvaluestreamencoder.cpp
+  io/bytearrayvaluesstreamencoder.cpp
 )
 
 set( okteta_base32_streamencoder_SRCS
@@ -135,7 +135,7 @@ set( okteta_kastengui_io_HDRS
   io/bytearrayviewtextstreamencoder.h
   io/bytearraysourcecodestreamencoder.h
   io/bytearraytextstreamencoder.h
-  io/bytearrayvaluestreamencoder.h
+  io/bytearrayvaluesstreamencoder.h
   io/bytearrayvaluesstreamencoderconfigeditor.h
   io/bytearraysourcecodestreamencoderconfigeditor.h
   io/bytearraysourcecodestreamencoderconfigeditorfactory.h
