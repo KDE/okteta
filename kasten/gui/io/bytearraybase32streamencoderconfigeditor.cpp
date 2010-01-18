@@ -46,7 +46,7 @@ ByteArrayBase32StreamEncoderConfigEditor::ByteArrayBase32StreamEncoderConfigEdit
 
     // data type
     const QString encodingTypeLabel =
-        i18nc( "@label:listbox the type of the used encoding: Classic or Base32hex.",
+        i18nc( "@label:listbox the type of the used encoding: Classic, Base32hex or z-base-32.",
                "Encoding:" );
 
     mEncodingSelect = new KComboBox( this );
@@ -55,6 +55,8 @@ ByteArrayBase32StreamEncoderConfigEditor::ByteArrayBase32StreamEncoderConfigEdit
                        "Classic") );
     list.append( i18nc("@item:inmenu Doing the base32 using the Base32hex encoding",
                        "Base32hex") );
+    list.append( i18nc("@item:inmenu Doing the base32 using the z-base-32 encoding",
+                       "z-base-32") );
     mEncodingSelect->addItems( list );
     mEncodingSelect->setCurrentIndex( mSettings.algorithmId );
     connect( mEncodingSelect, SIGNAL(activated(int)), SLOT(onSettingsChanged()) );

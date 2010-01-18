@@ -37,7 +37,7 @@ namespace Kasten
 class Base32StreamEncoderSettings
 {
   public:
-    enum AlgorithmId { ClassicId = 0, HexId = 1 };
+    enum AlgorithmId { ClassicId = 0, HexId = 1, ZHexId = 2 };
 
   public:
     Base32StreamEncoderSettings();

@@ -33,6 +33,14 @@
 namespace Kasten
 {
 
+static const int inputGroupLength = 5;
+
+static const int outputLineLength = 76;
+static const int outputGroupLength = 8;
+static const int maxOutputGroupsPerLine = outputLineLength/outputGroupLength;
+
+enum InputByteIndex { FirstByte = 0, SecondByte, ThirdByte, FourthByte, FifthByte };
+
 static const char base32ClassicEncodeMap[32] =
 {
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
@@ -40,7 +48,6 @@ static const char base32ClassicEncodeMap[32] =
     'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
     'Y', 'Z', '2', '3', '4', '5', '6', '7'
 };
-
 static const char base32HexEncodeMap[32] =
 {
     '0', '1', '2', '3', '4', '5', '6', '7',
@@ -48,14 +55,13 @@ static const char base32HexEncodeMap[32] =
     'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
     'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V'
 };
-
-static const int inputGroupLength = 5;
-
-static const int outputLineLength = 76;
-static const int outputGroupLength = 8;
-static const int maxOutputGroupsPerLine = outputLineLength/outputGroupLength;
-
-enum InputByteIndex { FirstByte, SecondByte, ThirdByte, FourthByte, FifthByte };
+static const char base32ZHexEncodeMap[32] =
+{
+    'y', 'b', 'n', 'd', 'r', 'f', 'g', '8',
+    'e', 'j', 'k', 'm', 'c', 'p', 'q', 'x',
+    'o', 't', '1', 'u', 'w', 'i', 's', 'z',
+    'a', '3', '4', '5', 'h', '7', '6', '9'
+};
 
 static const char* const base32PaddingData[4] =
 {
@@ -64,10 +70,32 @@ static const char* const base32PaddingData[4] =
     "===",
     "="
 };
+
 static inline const char* base32Padding( InputByteIndex index )
 {
-    return base32PaddingData[(int)(index) - 1];
+    return base32PaddingData[index - 1];
 }
+static inline const char* noPadding( InputByteIndex index )
+{
+    Q_UNUSED(index);
+
+    return "";
+}
+
+struct Base32EncodingData
+{
+    const char* const encodeMap;
+    const char* (*padding)( InputByteIndex );
+};
+
+static const Base32EncodingData
+base32EncodingData[3] =
+{
+    {base32ClassicEncodeMap, &base32Padding},
+    {base32HexEncodeMap, &base32Padding},
+    {base32ZHexEncodeMap, &noPadding}
+};
+
 
 Base32StreamEncoderSettings::Base32StreamEncoderSettings()
  : algorithmId( ClassicId )
@@ -91,10 +119,8 @@ bool ByteArrayBase32StreamEncoder::encodeDataToStream( QIODevice* device,
     QTextStream textStream( device );
 
     // prepare
-    const char* const base32EncodeMap =
-        (mSettings.algorithmId == Base32StreamEncoderSettings::ClassicId) ?
-            base32ClassicEncodeMap :
-            base32HexEncodeMap;
+    const char* const base32EncodeMap = base32EncodingData[mSettings.algorithmId].encodeMap;
+    const char* (*base32Padding)( InputByteIndex ) = base32EncodingData[mSettings.algorithmId].padding;
 
     InputByteIndex inputByteIndex = FirstByte;
     int outputGroupsPerLine = 0;
