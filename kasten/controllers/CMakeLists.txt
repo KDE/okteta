@@ -268,6 +268,10 @@ set( STRUCTVIEW_SRCS
   view/structures/datatypes/structuredatainformation.cpp
   view/structures/datatypes/uniondatainformation.cpp
   view/structures/datatypes/unsignedprimitivedatainformation.cpp
+  view/structures/datatypes/abstractbitfielddatainformation.cpp
+  view/structures/datatypes/boolbitfielddatainformation.cpp
+  view/structures/datatypes/signedbitfielddatainformation.cpp
+  view/structures/datatypes/unsignedbitfielddatainformation.cpp
 )
 
 kde4_add_kcfg_files(STRUCTVIEW_SRCS GENERATE_MOC view/structures/settings/structviewpreferences.kcfgc)
