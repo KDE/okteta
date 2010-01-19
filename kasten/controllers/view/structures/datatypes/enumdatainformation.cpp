@@ -31,14 +31,14 @@ EnumDataInformation::EnumDataInformation(QString name,
     if (mType != mEnum->type())
         kWarning() << "incompatible types in definition and value: "
                 << enumDef->type() << "and " << mType;
-    connect(mValue,SIGNAL(dataChanged()),SLOT(onChildDataChanged()));
+    connect(mValue, SIGNAL(dataChanged()), SLOT(onChildDataChanged()));
 }
 
 EnumDataInformation::EnumDataInformation(const EnumDataInformation& e) :
     PrimitiveDataInformation(e), mEnum(e.mEnum)
 {
     mValue = static_cast<PrimitiveDataInformation*> (e.mValue->clone());
-    connect(mValue,SIGNAL(dataChanged()),SLOT(onChildDataChanged()));
+    connect(mValue, SIGNAL(dataChanged()), SLOT(onChildDataChanged()));
 }
 
 EnumDataInformation::~EnumDataInformation()
@@ -72,18 +72,20 @@ QString EnumDataInformation::getTypeString() const
 
 bool EnumDataInformation::setData(const QVariant& value, DataInformation* inf,
         Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
-        Okteta::Address address, Okteta::Size remaining)
+        Okteta::Address address, Okteta::Size remaining, quint8* bitOffset)
 {
     if (this != inf)
         return false;
     //correct object -> use mValue so PrimitiveDataInformation::setData() returns true
-    bool ret = mValue->setData(value, mValue, out, byteOrder, address, remaining);
+    bool ret = mValue->setData(value, mValue, out, byteOrder, address, remaining,
+            bitOffset);
     return ret;
 }
 Okteta::Size EnumDataInformation::readData(Okteta::AbstractByteArrayModel* input,
-        ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining)
+        ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining,
+        quint8* bitOffset)
 {
-    return mValue->readData(input, byteOrder, address, remaining);
+    return mValue->readData(input, byteOrder, address, remaining, bitOffset);
 }
 
 QWidget* EnumDataInformation::createEditWidget(QWidget* parent) const

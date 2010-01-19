@@ -45,7 +45,8 @@ DataInformation* DataInformationWithChildren::childAt(unsigned int idx) const
 
 bool DataInformationWithChildren::setData(const QVariant& value,
         DataInformation* inf, Okteta::AbstractByteArrayModel *out,
-        ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining)
+        ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining,
+        quint8* bitOffset)
 {
     if (this == inf)
         return true; //do nothing since this is not editable
@@ -53,7 +54,7 @@ bool DataInformationWithChildren::setData(const QVariant& value,
     for (int i = 0; i < mChildren.size(); i++)
     {
         if (mChildren[i]->setData(value, inf, out, byteOrder, address + readBytes,
-                remaining - readBytes))
+                remaining - readBytes, bitOffset))
             return true; //found -> done job
         readBytes += mChildren[i]->getSize() / 8;
 

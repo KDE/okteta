@@ -34,6 +34,7 @@ class DataInformation;
 class QDomElement;
 
 class AbstractArrayDataInformation;
+class AbstractBitfieldDataInformation;
 class PrimitiveDataInformation;
 class UnionDataInformation;
 class StructureDataInformation;
@@ -87,6 +88,7 @@ public:
 private:
     AbstractArrayDataInformation* arrayFromXML(const QDomElement& node) const;
     PrimitiveDataInformation* primitiveFromXML(const QDomElement& node) const;
+    AbstractBitfieldDataInformation* bitfieldFromXML(const QDomElement& xmlElem) const;
     UnionDataInformation* unionFromXML(const QDomElement& node) const;
     StructureDataInformation* structFromXML(const QDomElement& node) const;
     EnumDataInformation* enumFromXML(const QDomElement& node) const;

@@ -26,6 +26,7 @@
 
 class DoubleDataInformation: public PrimitiveDataInformation
 {
+Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Double,Primitive)
 public:
     inline int displayBase() const

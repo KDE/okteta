@@ -41,8 +41,6 @@ public:
 public:
     QString getTypeName() const;
     virtual int getSize() const;
-    virtual Okteta::Size readData(Okteta::AbstractByteArrayModel* input,
-            ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining) = 0;
 
 protected:
     virtual Okteta::Size offset(unsigned int index) const;

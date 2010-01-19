@@ -75,5 +75,10 @@ int AbstractArrayDataInformation::getSize() const
     {
         size += childAt(i)->getSize();
     }
+    if (size % 8 != 0)
+    {
+        //last element is a bitfield -> add padding
+        size = size + (8 - size % 8);
+    }
     return size;
 }

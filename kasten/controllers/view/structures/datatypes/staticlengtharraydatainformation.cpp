@@ -49,13 +49,19 @@ StaticLengthArrayDataInformation::~StaticLengthArrayDataInformation()
 
 Okteta::Size StaticLengthArrayDataInformation::readData(
         Okteta::AbstractByteArrayModel* input, ByteOrder byteOrder,
-        Okteta::Address address, Okteta::Size remaining)
+        Okteta::Address address, Okteta::Size remaining, quint8* bitOffset)
 {
     Okteta::Size readBytes = 0;
     for (unsigned int i = 0; i < mArrayLength; i++)
     {
         readBytes += childAt(i)->readData(input, byteOrder, address + readBytes,
-                remaining - readBytes);
+                remaining - readBytes, bitOffset);
+    }
+    if (*bitOffset != 0)
+    {
+        //last element is a bitfield -> add padding
+    	*bitOffset = 0;
+        readBytes++;
     }
     return readBytes;
 }

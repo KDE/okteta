@@ -27,6 +27,7 @@
 
 class Int8DataInformation: public SignedPrimitiveDataInformation
 {
+Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Int8,SignedPrimitive)
 public:
     inline int getSize() const

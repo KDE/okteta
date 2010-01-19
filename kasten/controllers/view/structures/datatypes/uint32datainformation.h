@@ -27,6 +27,7 @@
 
 class UInt32DataInformation: public UnsignedPrimitiveDataInformation
 {
+Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(UInt32,UnsignedPrimitive)
 public:
     inline int getSize() const

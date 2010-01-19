@@ -20,7 +20,7 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "structuredatainformation.h"
-
+#include "abstractbitfielddatainformation.h"
 QString StructureDataInformation::getTypeName() const
 {
     return i18nc("data type in C/C++", "struct");
@@ -29,22 +29,51 @@ QString StructureDataInformation::getTypeName() const
 int StructureDataInformation::getSize() const
 {
     int size = 0;
+    bool lastChildWasBitfield = false;
     for (int i = 0; i < mChildren.size(); i++)
     {
-        size += mChildren[i]->getSize();
+        const DataInformation* data = mChildren.at(i);
+        bool isBitfield =
+                dynamic_cast<const AbstractBitfieldDataInformation*> (data) != 0;
+        if (lastChildWasBitfield)
+        {
+            if (!isBitfield)
+            {
+                uint padding = 8 - (size % 8);
+                size += padding;
+                //this element is not a bitfield -> add padding;
+                lastChildWasBitfield = false;
+            }
+            else
+            {
+                lastChildWasBitfield = true;
+            }
+            size += data->getSize();
+        }
+    }
+    if (lastChildWasBitfield)
+    {
+        //add padding at end of structure (align to next byte)
+        uint padding = 8 - (size % 8);
+        size += padding;
     }
     return size;
 }
 
 Okteta::Size StructureDataInformation::readData(
         Okteta::AbstractByteArrayModel* input, ByteOrder byteOrder,
-        Okteta::Address address, Okteta::Size remaining)
+        Okteta::Address address, Okteta::Size remaining, quint8* bitOffset)
 {
     Okteta::Size readBytes = 0;
     for (int i = 0; i < mChildren.size(); i++)
     {
         readBytes += mChildren[i]->readData(input, byteOrder, address + readBytes,
-                remaining - readBytes);
+                remaining - readBytes, bitOffset);
+    }
+    if (readBytes % 8 != 0)
+    {
+        //last element is a bitfield -> add padding
+        readBytes = readBytes + (8 - readBytes % 8);
     }
     return readBytes;
 }

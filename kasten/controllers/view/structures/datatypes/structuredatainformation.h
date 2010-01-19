@@ -42,7 +42,7 @@ public:
     QString getTypeName() const;
     int getSize() const;
     virtual Okteta::Size readData(Okteta::AbstractByteArrayModel* input,
-            ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining);
+            ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining, quint8* bitOffset);
     /** add another field to this struct */
     StructureDataInformation& operator<<(DataInformation* field);
 protected:

@@ -19,33 +19,41 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef BOOL32DATAINFORMATION_H_
-#define BOOL32DATAINFORMATION_H_
+#ifndef BOOLBITFIELDDATAINFORMATION_H_
+#define BOOLBITFIELDDATAINFORMATION_H_
 
-#include "unsignedprimitivedatainformation.h"
-#include "../poddecoder/typeeditors/uint32editor.h"
+#include "abstractbitfielddatainformation.h"
+#include "../poddecoder/typeeditors/uintspinbox.h"
 
-class Bool32DataInformation: public UnsignedPrimitiveDataInformation
+class BoolBitfieldDataInformation: public AbstractBitfieldDataInformation
 {
 Q_OBJECT
-PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Bool32,UnsignedPrimitive)
 public:
-    inline int getSize() const
+    BoolBitfieldDataInformation(QString name, PrimitiveDataType dataType,
+            uint width, int index = -1, DataInformation* parent = 0) :
+        AbstractBitfieldDataInformation(name, dataType, width, index, parent)
     {
-        return 32;
     }
+    virtual ~BoolBitfieldDataInformation()
+    {
+    }
+protected:
+    BoolBitfieldDataInformation(const BoolBitfieldDataInformation& d) :
+        AbstractBitfieldDataInformation(d)
+    {
+    }
+public:
     inline QString getTypeName() const
     {
-        return i18nc("Data type", "bool (4 bytes)");
+        return i18nc("Data type", "boolean bitfield");
     }
-    DATAINFORMATION_CLONE(Bool32)
+    DATAINFORMATION_CLONE(BoolBitfield)
     virtual QString getValueString() const;
-    inline QWidget* createEditWidget(QWidget* parent) const
-    {
-        UInt32Editor* ret = new UInt32Editor(parent);
-        ret->setBase(displayBase());
-        return ret;
-    }
+
+    virtual QWidget* createEditWidget(QWidget* parent) const;
+    virtual QVariant dataFromWidget(const QWidget* w) const;
+    virtual void setWidgetData(QWidget* w) const;
+    int displayBase() const;
 };
 
-#endif /* BOOL32DATAINFORMATION_H_ */
+#endif /* BOOLBITFIELDDATAINFORMATION_H_ */

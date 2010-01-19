@@ -42,7 +42,8 @@ enum PrimitiveDataType
     Type_UInt64,
     Type_Bool64,
     Type_Float,
-    Type_Double
+    Type_Double,
+    Type_Bitfield
 };
 union AllPrimitiveTypes
 {

@@ -109,7 +109,7 @@ public:
     }
     virtual bool setData(const QVariant& value, DataInformation* inf,
             Okteta::AbstractByteArrayModel *input, ByteOrder byteOrder,
-            Okteta::Address address, Okteta::Size remaining) = 0;
+            Okteta::Address address, Okteta::Size remaining,quint8* bitOffset) = 0;
     /** get the necessary data (for the model) */
     virtual QVariant data(int column, int role) const =0;
     /** The size of this DataInformation type in bits (to allow bitfields in future) */
@@ -126,8 +126,12 @@ public:
     /** reads the necessary data and returns the number of bytes read */
     virtual Okteta::Size
     readData(Okteta::AbstractByteArrayModel *input, ByteOrder byteOrder,
-            Okteta::Address address, Okteta::Size remaining) =0;
+            Okteta::Address address, Okteta::Size remaining,quint8* bitOffset) =0;
 protected:
+    /**
+     *  the offset of child number 'index' compared to the beginning of the structure
+     *  (unless this DataInformation has children, obviously 0)
+     */
     virtual Okteta::Size offset(unsigned int index) const = 0;
 Q_SIGNALS:
     void dataChanged();

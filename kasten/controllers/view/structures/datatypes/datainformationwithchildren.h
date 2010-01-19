@@ -53,7 +53,7 @@ public:
     }
     virtual bool setData(const QVariant &value, DataInformation* inf,
             Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
-            Okteta::Address address, Okteta::Size remaining);
+            Okteta::Address address, Okteta::Size remaining, quint8* bitOffset);
 
     virtual inline unsigned int childCount() const
     {

@@ -19,35 +19,42 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef BOOL64DATAINFORMATION_H_
-#define BOOL64DATAINFORMATION_H_
+#ifndef SIGNEDBITFIELDDATAINFORMATION_H_
+#define SIGNEDBITFIELDDATAINFORMATION_H_
 
-#include "unsignedprimitivedatainformation.h"
-#include "../poddecoder/typeeditors/uint64editor.h"
+#include "abstractbitfielddatainformation.h"
+#include "../poddecoder/typeeditors/sintspinbox.h"
 
-class Bool64DataInformation: public UnsignedPrimitiveDataInformation
+class SignedBitfieldDataInformation: public AbstractBitfieldDataInformation
 {
 Q_OBJECT
-PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Bool64,UnsignedPrimitive)
-
 public:
-    inline int getSize() const
+    SignedBitfieldDataInformation(QString name, PrimitiveDataType dataType,
+            uint width, int index = -1, DataInformation* parent = 0) :
+        AbstractBitfieldDataInformation(name, dataType, width, index, parent)
     {
-        return 64;
     }
+    virtual ~SignedBitfieldDataInformation()
+    {
+    }
+protected:
+    SignedBitfieldDataInformation(const SignedBitfieldDataInformation& d) :
+        AbstractBitfieldDataInformation(d)
+    {
+    }
+private:
+public:
     inline QString getTypeName() const
     {
-        return i18nc("Data type", "bool (8 bytes)");
+        return i18nc("Data type", "signed bitfield");
     }
-    DATAINFORMATION_CLONE(Bool64)
+    DATAINFORMATION_CLONE(SignedBitfield)
     virtual QString getValueString() const;
 
-    inline QWidget* createEditWidget(QWidget* parent) const
-    {
-        UInt64Editor* ret = new UInt64Editor(parent);
-        ret->setBase(displayBase());
-        return ret;
-    }
+    virtual QWidget* createEditWidget(QWidget* parent) const;
+    virtual QVariant dataFromWidget(const QWidget* w) const;
+    virtual void setWidgetData(QWidget* w) const;
+    int displayBase() const;
 };
 
-#endif /* BOOL64DATAINFORMATION_H_ */
+#endif /* SIGNEDBITFIELDDATAINFORMATION_H_ */

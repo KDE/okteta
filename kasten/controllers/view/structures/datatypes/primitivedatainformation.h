@@ -65,7 +65,7 @@ public:
     /** @return true if data was changed */
     virtual bool setData(const QVariant &value, DataInformation* inf,
             Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
-            Okteta::Address address, Okteta::Size remaining);
+            Okteta::Address address, Okteta::Size remaining, quint8* bitOffset);
     virtual QString getValueString() const = 0;
     AllPrimitiveTypes value() const
     {
@@ -74,6 +74,7 @@ public:
 protected:
     void setModelData(AllPrimitiveTypes value, Okteta::AbstractByteArrayModel *out,
             ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining);
+
     virtual Okteta::Size offset(unsigned int index) const
     {
         Q_UNUSED(index)
@@ -82,7 +83,8 @@ protected:
 public:
     QVariant data(int column, int role) const;
     virtual Okteta::Size readData(Okteta::AbstractByteArrayModel* input,
-            ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining);
+            ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining,
+            quint8* bitOffset);
     static PrimitiveDataType typeStringToType(QString& typeStr);
 
 };

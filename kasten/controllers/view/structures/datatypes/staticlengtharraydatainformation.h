@@ -38,10 +38,10 @@ public:
             const DataInformation& childItem, int index = -1,
             DataInformation* parent = NULL);
     virtual ~StaticLengthArrayDataInformation();
-    DATAINFORMATION_CLONE( StaticLengthArray)
+    DATAINFORMATION_CLONE(StaticLengthArray)
 public:
     Okteta::Size readData(Okteta::AbstractByteArrayModel* input,
-            ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining);
+            ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining, quint8* bitOffset);
 private:
     unsigned int mArrayLength;
 };

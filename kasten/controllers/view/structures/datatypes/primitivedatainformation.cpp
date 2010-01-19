@@ -77,7 +77,7 @@ PrimitiveDataType PrimitiveDataInformation::typeStringToType(QString& typeStr)
     return Type_NotPrimitive; //just return a default value
 }
 
-QVariant PrimitiveDataInformation::primitiveValue() const
+QVariant PrimitiveDataInformation::primitiveValue() const //XXX: unused, remove?
 {
     return mValue.toQByteArray();
 }
@@ -112,13 +112,21 @@ QVariant PrimitiveDataInformation::data(int column, int role) const
 
 bool PrimitiveDataInformation::setData(const QVariant& value, DataInformation* inf,
         Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
-        Okteta::Address address, Okteta::Size remaining)
+        Okteta::Address address, Okteta::Size remaining,quint8* bitOffset)
 {
     //FIXME move to the correct subclasses, switches are evil
     if (this != inf)
         return false;
 
-    QString str = value.toString();
+    if (*bitOffset != 0) {
+        // we just move on to next byte, only bitfields should handle this
+        remaining--;
+        address++;
+        //now bit offset is 0 again
+        *bitOffset = 0;
+        //TODO handle bit-offsets for primitive types? Probably not since one
+        //can just use a e.g. 8-bit bitfield. Only problem are chars and floats
+    }
 
 #define SETDATA(arg,method,cast)    newVal= AllPrimitiveTypes(cast method); \
     if (mValue != newVal && ok) \
@@ -168,6 +176,7 @@ bool PrimitiveDataInformation::setData(const QVariant& value, DataInformation* i
     case Type_Bool64:
         SETDATA(ulongValue,value.toULongLong(&ok),(quint64))
     default:
+        kError() << "called with invalid type";
         break;
     }
     return true;
@@ -202,8 +211,17 @@ Qt::ItemFlags PrimitiveDataInformation::flags(int column, bool fileLoaded) const
 
 Okteta::Size PrimitiveDataInformation::readData(
         Okteta::AbstractByteArrayModel* input, ByteOrder byteOrder,
-        Okteta::Address address, Okteta::Size remaining)
+        Okteta::Address address, Okteta::Size remaining,quint8* bitOffset)
 {
+    if (*bitOffset != 0) {
+        // we just move on to next byte, only bitfields should handle this
+        remaining--;
+        address++;
+        //now bit offset is 0 again
+        *bitOffset = 0;
+        //TODO handle bit-offsets for primitive types? Probably not since one
+        //can just use a e.g. 8-bit bitfield. Only problem are chars and floats
+    }
     int bytes = getSize() / 8;
     if (remaining < bytes)
     {

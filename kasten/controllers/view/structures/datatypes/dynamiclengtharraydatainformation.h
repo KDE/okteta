@@ -44,7 +44,7 @@ public:
     DATAINFORMATION_CLONE(DynamicLengthArray)
 
     virtual Okteta::Size readData(Okteta::AbstractByteArrayModel* input,
-            ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining);
+            ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining, quint8* bitOffset);
 private:
     int calculateLength();
     void resizeChildren();

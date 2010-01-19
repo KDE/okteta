@@ -34,6 +34,9 @@
 #include "datatypes/dynamiclengtharraydatainformation.h"
 #include "datatypes/primitivedatainformation.h"
 #include "datatypes/enumdatainformation.h"
+#include "datatypes/boolbitfielddatainformation.h"
+#include "datatypes/unsignedbitfielddatainformation.h"
+#include "datatypes/signedbitfielddatainformation.h"
 
 namespace Kasten
 {
@@ -154,8 +157,9 @@ void StructureDefinitionFile::parse()
     QDomDocument doc;
     if (!file.open(QIODevice::ReadOnly))
     {
-        kWarning() << "could not open file " << mFileInfo.dir().absoluteFilePath(
-                mPluginInfo.name().endsWith(QLatin1String(".osd")) ? mPluginInfo.name()
+        kWarning() << "could not open file "
+                << mFileInfo.dir().absoluteFilePath(mPluginInfo.name().endsWith(
+                        QLatin1String(".osd")) ? mPluginInfo.name()
                         : mPluginInfo.name() + ".osd");
         return;
     }
@@ -191,20 +195,8 @@ void StructureDefinitionFile::parse()
             QString tag = elem.tagName();
             if (tag == "enumDef" || tag == "include")
                 continue;
-            if (tag == "struct")
-                data = structFromXML(elem);
-            else if (tag == "array")
-                data = arrayFromXML(elem);
-            else if (tag == "primitive")
-                data = primitiveFromXML(elem);
-            else if (tag == "union")
-                data = unionFromXML(elem);
-            else if (tag == "enum")
-            {
-                kDebug() << "loading enum";
-                data = enumFromXML(elem);
-                kDebug() << "enum loaded: " << data;
-            }
+            else
+                data = parseNode(elem);
         }
 
         if (data)
@@ -307,6 +299,34 @@ PrimitiveDataInformation* StructureDefinitionFile::primitiveFromXML(
     return PrimitiveDataInformation::newInstance(name, type);
 }
 
+AbstractBitfieldDataInformation* StructureDefinitionFile::bitfieldFromXML(
+        const QDomElement& xmlElem) const
+{
+    kDebug() << "loading bitfield";
+    QString name = xmlElem.attribute("name", i18n("<invalid name>"));
+    QString typeStr = xmlElem.attribute("type", QString());
+    QString widthStr = xmlElem.attribute("width", QString());
+    bool okay = false;
+    uint width = widthStr.toUInt(&okay,10);
+    if (width == 0 || !okay)
+    {
+        kWarning() << "invalid width specified (width must be > 0)";
+        return NULL;
+    }
+    if (typeStr == "bool")
+        return new BoolBitfieldDataInformation(name, Type_Bitfield, width);
+    if (typeStr == "unsigned")
+        return new UnsignedBitfieldDataInformation(name, Type_Bitfield, width);
+    if (typeStr == "signed")
+        return new SignedBitfieldDataInformation(name, Type_Bitfield, width);
+    else
+    {
+        kWarning() << "no (or invalid) type attribute defined,"
+            " defaulting to unsigned";
+        return new UnsignedBitfieldDataInformation(name, Type_Bitfield, width);
+    }
+}
+
 UnionDataInformation* StructureDefinitionFile::unionFromXML(
         const QDomElement& xmlElem) const
 {
@@ -341,7 +361,6 @@ StructureDataInformation* StructureDefinitionFile::structFromXML(
 
 EnumDataInformation* StructureDefinitionFile::enumFromXML(const QDomElement& xmlElem) const
 {
-    kDebug() << "loading enum";
     QString name = xmlElem.attribute("name", i18n("<invalid name>"));
     QString typeStr = xmlElem.attribute("type", QString());
     if (typeStr.isEmpty())
@@ -388,7 +407,8 @@ DataInformation* StructureDefinitionFile::parseNode(const QDomNode& n) const
             data = structFromXML(elem);
         else if (elem.tagName() == "array")
             data = arrayFromXML(elem);
-        //TODO var length array
+        else if (elem.tagName() == "bitfield")
+            data = bitfieldFromXML(elem);
         else if (elem.tagName() == "primitive")
             data = primitiveFromXML(elem);
         else if (elem.tagName() == "union")

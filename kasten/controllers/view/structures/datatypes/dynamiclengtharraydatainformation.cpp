@@ -31,7 +31,7 @@ void DynamicLengthArrayDataInformation::resizeChildren()
     //kDebug() << "len: " << len;
     if (len > childCount())
     {
-        emit childCountChange(childCount(),len);
+        emit childCountChange(childCount(), len);
         for (uint i = childCount(); i < len; ++i)
         {
             DataInformation* arrayElem = mChildType->clone();
@@ -42,7 +42,7 @@ void DynamicLengthArrayDataInformation::resizeChildren()
     }
     else if (len < mChildren.length()) //TODO maybe keep some cached
     {
-        emit childCountChange(childCount(),len);
+        emit childCountChange(childCount(), len);
         for (int i = len; i != mChildren.length();)
         {
             delete mChildren.takeAt(i);
@@ -53,14 +53,20 @@ void DynamicLengthArrayDataInformation::resizeChildren()
 
 Okteta::Size DynamicLengthArrayDataInformation::readData(
         Okteta::AbstractByteArrayModel* input, ByteOrder byteOrder,
-        Okteta::Address address, Okteta::Size remaining)
+        Okteta::Address address, Okteta::Size remaining, quint8* bitOffset)
 {
     Okteta::Size readBytes = 0;
     resizeChildren();
     for (unsigned int i = 0; i < childCount(); i++)
     {
         readBytes += childAt(i)->readData(input, byteOrder, address + readBytes,
-                remaining - readBytes);
+                remaining - readBytes, bitOffset);
+    }
+    if (*bitOffset != 0)
+    {
+        //last element is a bitfield -> add padding
+        *bitOffset = 0;
+        readBytes++;
     }
     return readBytes;
 }

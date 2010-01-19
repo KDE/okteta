@@ -145,12 +145,12 @@ bool StructTool::setData(const QVariant& value, int role, DataInformation* item)
         return false;
     if (role != Qt::EditRole)
         return false;
-
+    QScopedPointer<quint8> bitOffset(new quint8(0));
     int remaining = qMax(mByteArrayModel->size() - mCursorIndex, 0);
     for (int i = 0; i < mData.size(); ++i)
     {
         if (mData[i]->setData(value, item, mByteArrayModel, mByteOrder,
-                mCursorIndex, remaining))
+                mCursorIndex, remaining, bitOffset.data()))
             return true;
     }
     return false;
@@ -168,10 +168,12 @@ void StructTool::updateData()
 
     if (remaining != 0)
     {
+        QScopedPointer<quint8> bitOffset(new quint8(0));
         for (int i = 0; i < mData.size(); i++)
         {
             DataInformation* dat = mData.at(i);
-            dat->readData(mByteArrayModel, mByteOrder, mCursorIndex, remaining);
+            dat->readData(mByteArrayModel, mByteOrder, mCursorIndex, remaining,
+                    bitOffset.data());
         }
     }
 }

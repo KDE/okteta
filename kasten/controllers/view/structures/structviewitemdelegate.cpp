@@ -72,15 +72,17 @@ QSize StructViewItemDelegate::sizeHint(const QStyleOptionViewItem & option,
         const QModelIndex & index) const
 {
     Q_UNUSED(option)
-    if (!index.isValid()) {
+    if (!index.isValid())
+    {
         kDebug() << "invalid index";
         return QSize();
     }
     DataInformation* data = static_cast<DataInformation*> (index.internalPointer());
-    if (!data) {
+    if (!data)
+    {
         kDebug() << "data == NULL";
         return QSize();
     }
     QWidget* ret = data->createEditWidget(NULL);
-    return ret->sizeHint();
+    return ret->minimumSizeHint();
 }

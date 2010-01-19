@@ -21,7 +21,6 @@
  */
 #include "uniondatainformation.h"
 
-
 QString UnionDataInformation::getTypeName() const
 {
     return i18nc("data type in C/C++", "union");
@@ -35,11 +34,17 @@ int UnionDataInformation::getSize() const
     {
         size = qMax(size, mChildren[i]->getSize());
     }
+    if (size % 8 != 0)
+    {
+        //biggest element is a bitfield -> add padding
+        size = size + (8 - size % 8);
+    }
     return size;
 }
 
 Okteta::Size UnionDataInformation::readData(Okteta::AbstractByteArrayModel* input,
-        ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining)
+        ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining,
+        quint8* bitOffset)
 {
     Okteta::Size readBytes = 0;
     for (int i = 0; i < mChildren.size(); i++)
@@ -47,23 +52,29 @@ Okteta::Size UnionDataInformation::readData(Okteta::AbstractByteArrayModel* inpu
         //union -> size of biggest element
         //always start at beginning again
         readBytes = qMax(readBytes, mChildren[i]->readData(input, byteOrder,
-                address, remaining));
+                address, remaining, bitOffset));
+    }
+    if (readBytes % 8 != 0)
+    {
+        //biggest element is a bitfield -> add padding
+        readBytes = readBytes + (8 - readBytes % 8);
     }
     return readBytes;
 }
 
 bool UnionDataInformation::setData(const QVariant& value, DataInformation* inf,
         Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
-        Okteta::Address address, Okteta::Size remaining)
+        Okteta::Address address, Okteta::Size remaining, quint8* bitOffset)
 {
     if (this == inf)
     {
-        kDebug() << "not editable item";
+        kDebug() << "non-editable item";
         return true; //do nothing since this is not editable
     }
     for (int i = 0; i < mChildren.size(); i++)
     {
-        if (mChildren[i]->setData(value, inf, out, byteOrder, address, remaining))
+        if (mChildren[i]->setData(value, inf, out, byteOrder, address, remaining,
+                bitOffset))
             return true; //found -> done job
     }
     return false;

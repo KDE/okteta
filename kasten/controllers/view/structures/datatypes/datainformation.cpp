@@ -58,6 +58,7 @@ QString DataInformation::getSizeString() const
 
 Okteta::Size DataInformation::positionRelativeToParent() const
 {
+    //FIXME this needs updating to support bitfield marking, also offset() updating
     DataInformation* par = static_cast<DataInformation*> (parent());
     if (!par)
     {

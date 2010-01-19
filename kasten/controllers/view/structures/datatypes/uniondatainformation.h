@@ -42,10 +42,10 @@ public:
     QString getTypeName() const;
     int getSize() const;
     virtual Okteta::Size readData(Okteta::AbstractByteArrayModel* input,
-            ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining);
+            ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining, quint8* bitOffset);
     virtual bool setData(const QVariant& value, DataInformation* inf,
             Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
-            Okteta::Address address, Okteta::Size remaining);
+            Okteta::Address address, Okteta::Size remaining, quint8* bitOffset);
     /** add another field to this union */
     UnionDataInformation& operator<<(DataInformation* field);
 protected:

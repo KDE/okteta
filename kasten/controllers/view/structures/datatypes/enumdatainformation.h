@@ -47,10 +47,11 @@ public:
         return mValue->displayBase();
     }
     Okteta::Size readData(Okteta::AbstractByteArrayModel* input,
-            ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining);
+            ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining,
+            quint8* bitOffset);
     bool setData(const QVariant& value, DataInformation* inf,
             Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
-            Okteta::Address address, Okteta::Size remaining);
+            Okteta::Address address, Okteta::Size remaining, quint8* bitOffset);
 
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
