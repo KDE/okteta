@@ -1,7 +1,7 @@
 <chapter id="introduction">
 <title>Introduction</title>
 
-<para>&okteta; is an editor for the raw data of files.</para>
+<para>&okteta; is a simple editor for the raw data of files.</para>
 
 <para>The data is displayed in two variants: as the numeric values of the bytes
 and as the character assigned to the values. Values and characters can be shown
