@@ -50,7 +50,7 @@
 <releaseinfo>0.4.0</releaseinfo>
 
 <abstract>
-  <para>&okteta; is an editor for the raw data of files. This type of program
+  <para>&okteta; is a simple editor for the raw data of files. This type of program
   is also called hex editor or binary editor.</para>
 </abstract>
 
