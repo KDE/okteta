@@ -5,9 +5,10 @@
     <bitfield name="flag1" type="bool" width="1"/>
     <bitfield name="flag2" type="bool" width="1"/>
     <bitfield name="flag3" type="bool" width="1"/>
+    <bitfield name="longerValue" type="unsigned" width="17"/>
     <!-- now there should be padding -->
     <primitive type="Char" name="charAfterPadding"/>
-    <bitfield name="unsignedVal" type="unsigned" width="4"/>
+    <bitfield name="unsignedVal" type="unsigned" width="10"/>
     <bitfield name="unsignedVal2" type="unsigned" width="5"/>
     <!-- now there should be padding -->
     <primitive type="Char" name="charAfterPadding2"/>

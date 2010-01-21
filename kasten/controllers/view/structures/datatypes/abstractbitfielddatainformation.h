@@ -79,5 +79,25 @@ public:
     virtual QWidget* createEditWidget(QWidget* parent) const = 0;
     virtual QVariant dataFromWidget(const QWidget* w) const = 0;
     virtual void setWidgetData(QWidget* w) const = 0;
+    virtual Qt::ItemFlags flags(int column, bool fileLoaded) const
+    {
+        if (column == 2 && fileLoaded)
+            return Qt::ItemIsSelectable | Qt::ItemIsEnabled /*| Qt::ItemIsEditable*/;
+            //FIXME uncomment once editing works
+        else
+            return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+    }
+private:
+    AllPrimitiveTypes readDataLittleEndian(Okteta::AbstractByteArrayModel* input,
+            Okteta::Address address, quint8* bitOffset);
+    void setDataLittleEndian(const QVariant &value, DataInformation* inf,
+            Okteta::AbstractByteArrayModel *out, Okteta::Address address,
+            quint8* bitOffset);
+    AllPrimitiveTypes readDataBigEndian(Okteta::AbstractByteArrayModel* input,
+            Okteta::Address address, quint8* bitOffset);
+    void setDataBigEndian(const QVariant &value, DataInformation* inf,
+            Okteta::AbstractByteArrayModel *out, Okteta::Address address,
+            quint8* bitOffset);
+
 };
 #endif /* ABSTRACTBITFIELDDATAINFORMATION_H_ */
