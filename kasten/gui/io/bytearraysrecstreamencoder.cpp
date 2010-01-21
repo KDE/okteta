@@ -22,13 +22,16 @@
 
 #include "bytearraysrecstreamencoder.h"
 
+// lib
+#include <bytearrayview.h>
+// Okteta gui
+#include <bytearraytablelayout.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
 // KDE
 #include <KLocale>
 // Qt
 #include <QtCore/QTextStream>
-#include <sys/stat.h>
 
 
 namespace Kasten
@@ -150,9 +153,9 @@ ByteArraySRecStreamEncoder::ByteArraySRecStreamEncoder()
 
 
 bool ByteArraySRecStreamEncoder::encodeDataToStream( QIODevice* device,
-                                                       const ByteArrayView* byteArrayView,
-                                                       const Okteta::AbstractByteArrayModel* byteArrayModel,
-                                                       const Okteta::AddressRange& range )
+                                                     const ByteArrayView* byteArrayView,
+                                                     const Okteta::AbstractByteArrayModel* byteArrayModel,
+                                                     const Okteta::AddressRange& range )
 {
     Q_UNUSED( byteArrayView );
 
@@ -162,16 +165,25 @@ bool ByteArraySRecStreamEncoder::encodeDataToStream( QIODevice* device,
     QTextStream textStream( device );
 
     // prepare
+    static const int maxLineLength = 64 / 2;
     static const int countByteSize = 1;
     static const int dataAddressSize = 4;
-    static const int maxDataPerLineCount = 16; // where from?
-    static const int maxLineLength = 64 / 2;
+     // TODO: depends on actually used address size
+    static const int maxDataPerLineCount = maxLineLength - countByteSize - dataAddressSize;
 
-    unsigned char line[maxLineLength]; // countbyte + 2-4 byte addr +
+    const Okteta::ByteArrayTableLayout layout( byteArrayView->noOfBytesPerLine(),
+                                               byteArrayView->firstLineOffset(),
+                                               byteArrayView->startOffset(), 0, byteArrayModel->size() );
+
+    const Okteta::Coord startCoord = layout.coordOfIndex( range.start() );
+    const int lastLinePosition = layout.lastLinePosition( startCoord.line() );
+    const int dataPerLineCount = qMin( byteArrayView->noOfBytesPerLine(), maxDataPerLineCount );
+    unsigned char line[maxLineLength];
     unsigned char* lineData = &line[addressLineOffset+dataAddressSize];
     Okteta::Address lineOffset = range.start();
+    const int firstDataEnd = lastLinePosition - startCoord.pos() + 1;
     int d = 0;
-    int nextDataEnd = qMin( range.width(), maxDataPerLineCount );
+    int nextDataEnd = qMin( firstDataEnd, dataPerLineCount );
     int recordCount = 0;
 
     // header
@@ -195,7 +207,7 @@ bool ByteArraySRecStreamEncoder::encodeDataToStream( QIODevice* device,
             ++recordCount;
             lineOffset = i;
             d = 0;
-            nextDataEnd = qMin( range.end()-i+1, maxDataPerLineCount );
+            nextDataEnd = qMin( range.end()-i+1, dataPerLineCount );
         }
     }
 
