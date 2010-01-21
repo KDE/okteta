@@ -91,6 +91,7 @@ static inline void streamLine( QTextStream& textStream, RecordType recordType,
 }
 
 
+static
 void streamBlockHeader( QTextStream& textStream, unsigned char* line,
                         const char* moduleName = 0, const char* description = 0,
                         quint8 version = 0, quint8 revision = 0 )
@@ -115,6 +116,7 @@ void streamBlockHeader( QTextStream& textStream, unsigned char* line,
     streamLine( textStream, BlockHeader, line );
 }
 
+static
 void streamRecordCount( QTextStream& textStream, unsigned char* line,
                         quint16 recordCount )
 {
@@ -136,6 +138,7 @@ void streamRecordCount( QTextStream& textStream, unsigned char* line,
 // ﬁcation encountered in the object module input will be used. There is no code/
 // data ﬁeld.
 
+static
 void streamBlockEnd( QTextStream& textStream, unsigned char* line,
                      quint32 startAddress = 0 ) // TODO: make address
 {
