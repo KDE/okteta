@@ -40,7 +40,7 @@ void DynamicLengthArrayDataInformation::resizeChildren()
             appendChild(arrayElem);
         }
     }
-    else if (len < mChildren.length()) //TODO maybe keep some cached
+    else if (len < childCount()) //TODO maybe keep some cached
     {
         emit childCountChange(childCount(), len);
         for (int i = len; i != mChildren.length();)
