@@ -46,7 +46,8 @@ enum RecordType { BlockHeader=0, DataSequence2B=1, DataSequence3B=2, DataSequenc
 static const char startCode = 'S';
 
 static const int byteCountLineOffset = 0;
-static const int addressLineOffset = 1;
+static const int byteCountLineSize = 1;
+static const int addressLineOffset = byteCountLineOffset + byteCountLineSize;
 
 static const char hexDigits[16] =
     { '0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F' };
@@ -78,7 +79,7 @@ static inline void streamLine( QTextStream& textStream, RecordType recordType,
 
     textStream << startCode << charOfRecordType(recordType);
 
-    uint length = line[0];
+    const uint length = line[0];
     for( uint i = 0; i < length; ++i )
     {
         const unsigned char byte = line[i];
@@ -92,26 +93,27 @@ static inline void streamLine( QTextStream& textStream, RecordType recordType,
 
 
 static
-void streamBlockHeader( QTextStream& textStream, unsigned char* line,
-                        const char* moduleName = 0, const char* description = 0,
-                        quint8 version = 0, quint8 revision = 0 )
+void streamBlockHeader( QTextStream& textStream, unsigned char* line )
+//                         const char* moduleName = 0, const char* description = 0,
+//                         quint8 version = 0, quint8 revision = 0 )
 {
     // cmp. http://linux.die.net/man/5/srec
     // WP says: vendor specific data rather than program data
-    static const int moduleNameLineOffset = 3;
-    static const int moduleNameLength = 10;
-    static const int versionLineOffset = moduleNameLineOffset + moduleNameLength;
-    static const int versionLength = 1;
-    static const int revisionLineOffset = versionLineOffset + versionLength;
-    static const int revisionLength = 1;
-    static const int descriptionLineOffset = revisionLineOffset + revisionLength;
-    static const int descriptionLength = 18;
+//     static const int moduleNameLineOffset = 3;
+//     static const int moduleNameLength = 10;
+//     static const int versionLineOffset = moduleNameLineOffset + moduleNameLength;
+//     static const int versionLength = 1;
+//     static const int revisionLineOffset = versionLineOffset + versionLength;
+//     static const int revisionLength = 1;
+//     static const int descriptionLineOffset = revisionLineOffset + revisionLength;
+//     static const int descriptionLength = 18;
+    static const int headerByteCount = 3;
 
     line[addressLineOffset] = 0; // address unused
     line[addressLineOffset+1] = 0; // address unused
 
     // leave data empty for now
-    line[byteCountLineOffset] = 3;//recordCountByteCount;
+    line[byteCountLineOffset] = headerByteCount;
 
     streamLine( textStream, BlockHeader, line );
 }
@@ -169,10 +171,10 @@ bool ByteArraySRecStreamEncoder::encodeDataToStream( QIODevice* device,
 
     // prepare
     static const int maxLineLength = 64 / 2;
-    static const int countByteSize = 1;
-    static const int dataAddressSize = 4;
+    static const int addressLineSize = 4;
      // TODO: depends on actually used address size
-    static const int maxDataPerLineCount = maxLineLength - countByteSize - dataAddressSize;
+    static const int maxDataPerLineCount = maxLineLength - byteCountLineSize - addressLineSize;
+    static const int dataLineOffset = addressLineOffset + addressLineSize;
 
     const Okteta::ByteArrayTableLayout layout( byteArrayView->noOfBytesPerLine(),
                                                byteArrayView->firstLineOffset(),
@@ -181,12 +183,14 @@ bool ByteArraySRecStreamEncoder::encodeDataToStream( QIODevice* device,
     const Okteta::Coord startCoord = layout.coordOfIndex( range.start() );
     const int lastLinePosition = layout.lastLinePosition( startCoord.line() );
     const int dataPerLineCount = qMin( byteArrayView->noOfBytesPerLine(), maxDataPerLineCount );
+
     unsigned char line[maxLineLength];
-    unsigned char* lineData = &line[addressLineOffset+dataAddressSize];
-    Okteta::Address lineOffset = range.start();
+
+    unsigned char* const lineData = &line[dataLineOffset];
     const int firstDataEnd = lastLinePosition - startCoord.pos() + 1;
     int d = 0;
     int nextDataEnd = qMin( firstDataEnd, dataPerLineCount );
+    Okteta::Address recordOffset = range.start();
     int recordCount = 0;
 
     // header
@@ -202,13 +206,13 @@ bool ByteArraySRecStreamEncoder::encodeDataToStream( QIODevice* device,
         ++i;
         if( d == nextDataEnd )
         {
-            line[byteCountLineOffset] = d + 1 + dataAddressSize;
-            writeBigEndian( &line[addressLineOffset], lineOffset, dataAddressSize );
+            line[byteCountLineOffset] = d + 1 + addressLineSize;
+            writeBigEndian( &line[addressLineOffset], recordOffset, addressLineSize );
 
             streamLine( textStream, DataSequence4B, line );
 
             ++recordCount;
-            lineOffset = i;
+            recordOffset = i;
             d = 0;
             nextDataEnd = qMin( range.end()-i+1, dataPerLineCount );
         }
