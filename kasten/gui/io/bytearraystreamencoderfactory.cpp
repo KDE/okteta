@@ -32,6 +32,7 @@
 #include "bytearraybase85streamencoder.h"
 #include "bytearrayuuencodingstreamencoder.h"
 #include "bytearraysrecstreamencoder.h"
+#include "bytearrayihexstreamencoder.h"
 //// NEWBYTEARRAYSTREAMENCODER(start)
 //// Here add the name of your header file of your streamencoder,
 //// e.g.
@@ -55,6 +56,7 @@ QList<AbstractModelStreamEncoder*> ByteArrayStreamEncoderFactory::createStreamEn
         << new ByteArrayBase32StreamEncoder()
         << new ByteArrayBase85StreamEncoder()
         << new ByteArrayUuencodingStreamEncoder()
+        << new ByteArrayIHexStreamEncoder()
         << new ByteArraySRecStreamEncoder()
         << new ByteArraySourceCodeStreamEncoder()
         << new ByteArrayViewTextStreamEncoder();
