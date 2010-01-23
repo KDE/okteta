@@ -105,17 +105,16 @@ static inline void streamLine( QTextStream& textStream,
 #if 0
 static
 void streamExtendedSegmentAddress( QTextStream& textStream, unsigned char* line,
-                                   quint16 segmentAddress = 0 )
+                                   quint16 upperSegmentBaseAddress = 0 )
 {
     static const int nullAddress = 0;
-    static const int segmentAddressSize = 2;
+    static const int upperSegmentBaseAddressSize = 2;
 
-    line[byteCountLineOffset] = segmentAddressSize;
+    line[byteCountLineOffset] = upperSegmentBaseAddressSize;
     writeBigEndian( &line[addressLineOffset], nullAddress, addressLineSize );
     line[recordTypeLineOffset] = ExtendedSegmentAddressRecord;
-    // storing address as bigendian for now
-    line[dataLineOffset] = segmentAddress >> 8;
-    line[dataLineOffset+1] = segmentAddress;
+    line[dataLineOffset] = upperSegmentBaseAddress >> 8;
+    line[dataLineOffset+1] = upperSegmentBaseAddress;
 
     streamLine( textStream, line );
 }
@@ -123,17 +122,16 @@ void streamExtendedSegmentAddress( QTextStream& textStream, unsigned char* line,
 
 static
 void streamExtendedLinearAddress( QTextStream& textStream, unsigned char* line,
-                                  quint16 upperAddress )
+                                  quint16 upperLinearBaseAddress )
 {
     static const int nullAddress = 0;
-    static const int upperAddressSize = 2;
+    static const int upperLinearBaseAddressSize = 2;
 
-    line[byteCountLineOffset] = upperAddressSize;
+    line[byteCountLineOffset] = upperLinearBaseAddressSize;
     writeBigEndian( &line[addressLineOffset], nullAddress, addressLineSize );
     line[recordTypeLineOffset] = ExtendedLinearAddressRecord;
-    // storing address as bigendian for now
-    line[dataLineOffset] = upperAddress >> 8;
-    line[dataLineOffset+1] = upperAddress;
+    line[dataLineOffset] = upperLinearBaseAddress >> 8;
+    line[dataLineOffset+1] = upperLinearBaseAddress;
 
     streamLine( textStream, line );
 }
