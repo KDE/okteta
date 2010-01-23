@@ -23,7 +23,7 @@
 #include "bytearrayuuencodingstreamencoder.h"
 
 // lib
-#include "bytearraybase64streamencoder.h"
+#include "../base64/bytearraybase64streamencoder.h"
 // Okteta core
 #include <abstractbytearraymodel.h>
 // KDE

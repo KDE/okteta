@@ -23,10 +23,10 @@
 #include "bytearraystreamencoderconfigeditorfactoryfactory.h"
 
 // lib
-#include "bytearraysourcecodestreamencoderconfigeditorfactory.h"
-#include "bytearrayvaluesstreamencoderconfigeditorfactory.h"
-#include "bytearraybase32streamencoderconfigeditorfactory.h"
-#include "bytearrayuuencodingstreamencoderconfigeditorfactory.h"
+#include "streamencoder/sourcecode//bytearraysourcecodestreamencoderconfigeditorfactory.h"
+#include "streamencoder/values/bytearrayvaluesstreamencoderconfigeditorfactory.h"
+#include "streamencoder/base32/bytearraybase32streamencoderconfigeditorfactory.h"
+#include "streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditorfactory.h"
 //// NEWBYTEARRAYSTREAMENCODERCONFIGEDITORFACTORY(start)
 //// Here add the name of your header file of your streamencoder,
 //// e.g.

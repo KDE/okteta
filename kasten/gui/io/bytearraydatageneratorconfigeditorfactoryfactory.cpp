@@ -23,8 +23,8 @@
 #include "bytearraydatageneratorconfigeditorfactoryfactory.h"
 
 // lib
-#include "bytearraypatterngeneratorconfigeditorfactory.h"
-#include "bytearrayrandomdatageneratorconfigeditorfactory.h"
+#include "generator/pattern/bytearraypatterngeneratorconfigeditorfactory.h"
+#include "generator/randomdata/bytearrayrandomdatageneratorconfigeditorfactory.h"
 //// NEWBYTEARRAYDATAGENERATORCONFIGEDITORFACTORY(start)
 //// Here add the name of your header file of your configeditorfactory,
 //// e.g.

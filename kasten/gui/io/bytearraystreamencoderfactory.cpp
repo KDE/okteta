@@ -23,16 +23,16 @@
 #include "bytearraystreamencoderfactory.h"
 
 // lib
-#include "bytearraycharsstreamencoder.h"
-#include "bytearrayvaluesstreamencoder.h"
-#include "bytearraysourcecodestreamencoder.h"
-#include "bytearrayviewtextstreamencoder.h"
-#include "bytearraybase64streamencoder.h"
-#include "bytearraybase32streamencoder.h"
-#include "bytearraybase85streamencoder.h"
-#include "bytearrayuuencodingstreamencoder.h"
-#include "bytearraysrecstreamencoder.h"
-#include "bytearrayihexstreamencoder.h"
+#include "streamencoder/chars/bytearraycharsstreamencoder.h"
+#include "streamencoder/values/bytearrayvaluesstreamencoder.h"
+#include "streamencoder/sourcecode/bytearraysourcecodestreamencoder.h"
+#include "streamencoder/viewtext/bytearrayviewtextstreamencoder.h"
+#include "streamencoder/base64/bytearraybase64streamencoder.h"
+#include "streamencoder/base32/bytearraybase32streamencoder.h"
+#include "streamencoder/base85/bytearraybase85streamencoder.h"
+#include "streamencoder/uuencoding/bytearrayuuencodingstreamencoder.h"
+#include "streamencoder/srec/bytearraysrecstreamencoder.h"
+#include "streamencoder/ihex/bytearrayihexstreamencoder.h"
 //// NEWBYTEARRAYSTREAMENCODER(start)
 //// Here add the name of your header file of your streamencoder,
 //// e.g.

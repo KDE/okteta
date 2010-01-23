@@ -3,6 +3,7 @@ set( OKTETA_REL_DIR ../.. )
 
 include_directories(
   view
+  io/streamencoder
   liboktetawidgets
   ../core
   ../core/document
@@ -31,56 +32,52 @@ set( oktetawidgets_LIB_SRCS
   liboktetawidgets/addresscombobox.cpp
 )
 
-set( okteta_textrenderer_SRCS
-  io/bytearrayviewtextrenderer/abstractcolumntextrenderer.cpp
-  io/bytearrayviewtextrenderer/offsetcolumntextrenderer.cpp
-  io/bytearrayviewtextrenderer/bordercolumntextrenderer.cpp
-  io/bytearrayviewtextrenderer/abstractbytearraycolumntextrenderer.cpp
-  io/bytearrayviewtextrenderer/valuebytearraycolumntextrenderer.cpp
-  io/bytearrayviewtextrenderer/charbytearraycolumntextrenderer.cpp
-  io/bytearrayviewtextrenderer/bytearrayrowscolumntextrenderer.cpp
-)
-
 set( okteta_values_streamencoder_SRCS
-  io/bytearrayvaluesstreamencoderconfigeditor.cpp
-  io/bytearrayvaluesstreamencoderconfigeditorfactory.cpp
-  io/bytearrayvaluesstreamencoder.cpp
+  io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp
+  io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditorfactory.cpp
+  io/streamencoder/values/bytearrayvaluesstreamencoder.cpp
 )
 
 set( okteta_base32_streamencoder_SRCS
-  io/bytearraybase32streamencoderconfigeditor.cpp
-  io/bytearraybase32streamencoderconfigeditorfactory.cpp
-  io/bytearraybase32streamencoder.cpp
+  io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp
+  io/streamencoder/base32/bytearraybase32streamencoderconfigeditorfactory.cpp
+  io/streamencoder/base32/bytearraybase32streamencoder.cpp
 )
 
 set( okteta_uuencoding_streamencoder_SRCS
-  io/bytearrayuuencodingstreamencoderconfigeditor.cpp
-  io/bytearrayuuencodingstreamencoderconfigeditorfactory.cpp
-  io/bytearrayuuencodingstreamencoder.cpp
+  io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp
+  io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditorfactory.cpp
+  io/streamencoder/uuencoding/bytearrayuuencodingstreamencoder.cpp
 )
 
 set( okteta_sourcecode_streamencoder_SRCS
-  io/bytearraysourcecodestreamencoderconfigeditor.cpp
-  io/bytearraysourcecodestreamencoderconfigeditorfactory.cpp
-  io/bytearraysourcecodestreamencoder.cpp
+  io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditor.cpp
+  io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditorfactory.cpp
+  io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp
 )
 
 set( okteta_viewtext_streamencoder_SRCS
-  ${okteta_textrenderer_SRCS}
-  io/bytearrayviewtextstreamencoder.cpp
+  io/streamencoder/viewtext/abstractcolumntextrenderer.cpp
+  io/streamencoder/viewtext/offsetcolumntextrenderer.cpp
+  io/streamencoder/viewtext/bordercolumntextrenderer.cpp
+  io/streamencoder/viewtext/abstractbytearraycolumntextrenderer.cpp
+  io/streamencoder/viewtext/valuebytearraycolumntextrenderer.cpp
+  io/streamencoder/viewtext/charbytearraycolumntextrenderer.cpp
+  io/streamencoder/viewtext/bytearrayrowscolumntextrenderer.cpp
+  io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp
 )
 
 set( okteta_streamencoder_SRCS
-  io/abstractbytearraystreamencoder.cpp
-  io/bytearraytextstreamencoderpreview.cpp
+  io/streamencoder/abstractbytearraystreamencoder.cpp
+  io/streamencoder/bytearraytextstreamencoderpreview.cpp
   ${okteta_values_streamencoder_SRCS}
-  io/bytearraycharsstreamencoder.cpp
-  io/bytearraybase64streamencoder.cpp
+  io/streamencoder/chars/bytearraycharsstreamencoder.cpp
+  io/streamencoder/base64/bytearraybase64streamencoder.cpp
   ${okteta_base32_streamencoder_SRCS}
-  io/bytearraybase85streamencoder.cpp
+  io/streamencoder/base85/bytearraybase85streamencoder.cpp
   ${okteta_uuencoding_streamencoder_SRCS}
-  io/bytearraysrecstreamencoder.cpp
-  io/bytearrayihexstreamencoder.cpp
+  io/streamencoder/srec/bytearraysrecstreamencoder.cpp
+  io/streamencoder/ihex/bytearrayihexstreamencoder.cpp
   ${okteta_sourcecode_streamencoder_SRCS}
   ${okteta_viewtext_streamencoder_SRCS}
   io/bytearraystreamencoderfactory.cpp
@@ -88,19 +85,19 @@ set( okteta_streamencoder_SRCS
 )
 
 set( okteta_pattern_datagenerator_SRCS
-  io/bytearraypatterngeneratorconfigeditor.cpp
-  io/bytearraypatterngeneratorconfigeditorfactory.cpp
-  io/bytearraypatterngenerator.cpp
+  io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp
+  io/generator/pattern/bytearraypatterngeneratorconfigeditorfactory.cpp
+  io/generator/pattern/bytearraypatterngenerator.cpp
 )
 
 set( okteta_randomdata_datagenerator_SRCS
-  io/bytearrayrandomdatageneratorconfigeditor.cpp
-  io/bytearrayrandomdatageneratorconfigeditorfactory.cpp
-  io/bytearrayrandomdatagenerator.cpp
+  io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp
+  io/generator/randomdata/bytearrayrandomdatageneratorconfigeditorfactory.cpp
+  io/generator/randomdata/bytearrayrandomdatagenerator.cpp
 )
 
 set( okteta_sequence_datagenerator_SRCS
-  io/bytearraysequencegenerator.cpp
+  io/generator/sequence/bytearraysequencegenerator.cpp
 )
 
 set( okteta_datagenerator_SRCS
@@ -134,16 +131,16 @@ set( okteta_kastengui_view_HDRS
 )
 
 set( okteta_kastengui_io_HDRS
-  io/bytearrayviewtextstreamencoder.h
-  io/bytearraysourcecodestreamencoder.h
-  io/bytearraycharsstreamencoder.h
-  io/bytearrayvaluesstreamencoder.h
-  io/bytearrayvaluesstreamencoderconfigeditor.h
-  io/bytearraysourcecodestreamencoderconfigeditor.h
-  io/bytearraysourcecodestreamencoderconfigeditorfactory.h
-  io/bytearrayvaluesstreamencoderconfigeditorfactory.h
-  io/abstractbytearraystreamencoder.h
-  io/bytearraytextstreamencoderpreview.h
+  io/streamencoder/viewtext/bytearrayviewtextstreamencoder.h
+  io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.h
+  io/streamencoder/chars/bytearraycharsstreamencoder.h
+  io/streamencoder/values/bytearrayvaluesstreamencoder.h
+  io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.h
+  io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditor.h
+  io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditorfactory.h
+  io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditorfactory.h
+  io/streamencoder/abstractbytearraystreamencoder.h
+  io/streamencoder/bytearraytextstreamencoderpreview.h
 )
 
 set( oktete_kastengui_LIB_HDRS

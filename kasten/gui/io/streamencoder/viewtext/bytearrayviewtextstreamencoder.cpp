@@ -23,11 +23,11 @@
 #include "bytearrayviewtextstreamencoder.h"
 
 // lib
-#include "bytearrayviewtextrenderer/offsetcolumntextrenderer.h"
-#include "bytearrayviewtextrenderer/bordercolumntextrenderer.h"
-#include "bytearrayviewtextrenderer/valuebytearraycolumntextrenderer.h"
-#include "bytearrayviewtextrenderer/charbytearraycolumntextrenderer.h"
-#include "bytearrayviewtextrenderer/bytearrayrowscolumntextrenderer.h"
+#include "offsetcolumntextrenderer.h"
+#include "bordercolumntextrenderer.h"
+#include "valuebytearraycolumntextrenderer.h"
+#include "charbytearraycolumntextrenderer.h"
+#include "bytearrayrowscolumntextrenderer.h"
 #include <bytearrayview.h>
 // Okteta gui
 #include <bytearraytablelayout.h>

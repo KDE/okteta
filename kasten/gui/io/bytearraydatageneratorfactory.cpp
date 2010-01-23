@@ -23,9 +23,9 @@
 #include "bytearraydatageneratorfactory.h"
 
 // lib
-#include "bytearraypatterngenerator.h"
-#include "bytearrayrandomdatagenerator.h"
-#include "bytearraysequencegenerator.h"
+#include "generator/pattern/bytearraypatterngenerator.h"
+#include "generator/randomdata/bytearrayrandomdatagenerator.h"
+#include "generator/sequence/bytearraysequencegenerator.h"
 //// NEWBYTEARRAYDATAGENERATOR(start)
 //// Here add the name of your header file of your datagenerator,
 //// e.g.
