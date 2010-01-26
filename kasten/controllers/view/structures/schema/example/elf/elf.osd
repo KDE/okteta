@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <enumDef name="ObjectTypeEnum" type="UInt16">
+        <entry name="unknown" value="0" />
+        <entry name="relocatable" value="1" />
+        <entry name="executable" value="2" />
+        <entry name="shared object" value="3" />
+        <entry name="core file" value="4" />
+    </enumDef>
+    <enumDef name="ArchitectureEnum" type="UInt16">
+        <entry value="0" name="No machine" />
+        <entry value="1" name="AT&amp;T WE 32100" />
+        <entry value="2" name="SUN SPARC" />
+        <entry value="3" name="Intel 80386" />
+        <entry value="4" name="Motorola m68k family" />
+        <entry value="5" name="Motorola m88k family" />
+        <entry value="7" name="Intel 80860" />
+        <entry value="8" name="MIPS R3000 big-endian" />
+        <entry value="9" name="IBM System/370" />
+        <entry value="10" name="MIPS R3000 little-endian" />
+        <entry value="15" name="HPPA" />
+        <entry value="17" name="Fujitsu VPP500" />
+        <entry value="18" name="Sun's v8plus" />
+        <entry value="19" name="Intel 80960" />
+        <entry value="20" name="PowerPC" />
+        <entry value="21" name="PowerPC 64-bit" />
+        <entry value="22" name="IBM S390" />
+        <entry value="36" name="NEC V800 series" />
+        <entry value="37" name="Fujitsu FR20" />
+        <entry value="38" name="TRW RH-32" />
+        <entry value="39" name="Motorola RCE" />
+        <entry value="40" name="ARM" />
+        <entry value="41" name="Digital Alpha" />
+        <entry value="42" name="Hitachi SH" />
+        <entry value="43" name="SPARC v9 64-bit" />
+        <entry value="44" name="Siemens Tricore" />
+        <entry value="45" name="Argonaut RISC Core" />
+        <entry value="46" name="Hitachi H8/300" />
+        <entry value="47" name="Hitachi H8/300H" />
+        <entry value="48" name="Hitachi H8S" />
+        <entry value="49" name="Hitachi H8/500" />
+        <entry value="50" name="Intel Merced" />
+        <entry value="51" name="Stanford MIPS-X" />
+        <entry value="52" name="Motorola Coldfire" />
+        <entry value="53" name="Motorola M68HC12" />
+        <entry value="54" name="Fujitsu MMA Multimedia Accelerator" />
+        <entry value="55" name="Siemens PCP" />
+        <entry value="56" name="Sony nCPU embeeded RISC" />
+        <entry value="57" name="Denso NDR1 microprocessor" />
+        <entry value="58" name="Motorola Start*Core processor" />
+        <entry value="59" name="Toyota ME16 processor" />
+        <entry value="60" name="STMicroelectronic ST100 processor" />
+        <entry value="61" name="Advanced Logic Corp. Tinyj emb.fam" />
+        <entry value="62" name="AMD x86-64 architecture" />
+        <entry value="63" name="Sony DSP Processor" />
+        <entry value="66" name="Siemens FX66 microcontroller" />
+        <entry value="67" name="STMicroelectronics ST9+ 8/16 mc" />
+    </enumDef>
+    <enumDef name="ClassEnum" type="UInt8">
+        <entry value="0" name="None" />
+        <entry value="1" name="32 bit" />
+        <entry value="2" name="64 bit" />
+    </enumDef>
+    <enumDef name="EndianessEnum" type="UInt8">
+        <entry value="0" name="None" />
+        <entry value="1" name="little endian" />
+        <entry value="2" name="big endian" />
+    </enumDef>
+    <enumDef name="ABIEnum" type="UInt8">
+        <entry value="0" name="UNIX System V ABI" />
+        <entry value="1" name="HP-UX" />
+        <entry value="2" name="NetBSD" />
+        <entry value="3" name="Linux" />
+        <entry value="6" name="Sun Solaris" />
+        <entry value="7" name="IBM AIX" />
+        <entry value="8" name="SGI Irix" />
+        <entry value="9" name="FreeBSD" />
+        <entry value="10" name="Compaq TRU64 UNIX" />
+        <entry value="11" name="Novell Modesto" />
+        <entry value="12" name="OpenBSD" />
+        <entry value="97" name="ARM" />
+        <entry value="255" name="Standalone (embedded) application" />
+    </enumDef>
+    <struct name="Elf32_Ehdr">
+        <struct name="ident">
+            <array name="magic" length="4">
+                <primitive name="magic" type="Char" />
+            </array>
+            <enum name="arch class" enum="ClassEnum" type="UInt8" />
+            <enum name="endianess" enum="EndianessEnum" type="UInt8" />
+            <primitive name="version" type="UInt8" />
+            <enum name="ABI" enum="ABIEnum" type="UInt8" />
+            <primitive name="ABI version" type="UInt8" />
+            <array name="padding" length="7" >
+                <primitive name="padding" type="UInt8" />
+            </array>
+        </struct>
+        <enum name="ObjectType" enum="ObjectTypeEnum" type="UInt16"/>
+        <enum name="Architecture" enum="ArchitectureEnum" type="UInt16"/>
+        <primitive name="Version" type="UInt32"/>
+        <primitive name="EntryAddr" type="UInt32"/>
+        <primitive name="PHOffset" type="UInt32"/>
+        <primitive name="SHOffset" type="UInt32"/>
+        <primitive name="Flags" type="UInt32"/>
+        <primitive name="HeaderSize" type="UInt16"/>
+        <primitive name="PHSize" type="UInt16"/>
+        <primitive name="PHCount" type="UInt16"/>
+        <primitive name="SHSize" type="UInt16"/>
+        <primitive name="SHCount" type="UInt16"/>
+        <primitive name="SHStringIndex" type="UInt16"/>
+    </struct>
+    <struct name="Elf64_Ehdr">
+        <struct name="ident">
+            <array name="magic" length="4">
+                <primitive name="magic" type="Char" />
+            </array>
+            <enum name="arch class" enum="ClassEnum" type="Char" />
+            <enum name="endianess" enum="EndianessEnum" type="Char" />
+            <primitive name="version" type="Char" />
+            <enum name="ABI" enum="ABIEnum" type="Char" />
+            <primitive name="ABI version" type="Char" />
+            <array name="padding" length="7" >
+                <primitive name="padding" type="Char" />
+            </array>
+        </struct>
+        <enum name="ObjectType" enum="ObjectTypeEnum" type="UInt16"/>
+        <enum name="Architecture" enum="ArchitectureEnum" type="UInt16"/>
+        <primitive name="Version" type="UInt32"/>
+        <primitive name="EntryAddr" type="UInt64"/>
+        <primitive name="PHOffset" type="UInt64"/>
+        <primitive name="SHOffset" type="UInt64"/>
+        <primitive name="Flags" type="UInt32"/>
+        <primitive name="HeaderSize" type="UInt16"/>
+        <primitive name="PHSize" type="UInt16"/>
+        <primitive name="PHCount" type="UInt16"/>
+        <primitive name="SHSize" type="UInt16"/>
+        <primitive name="SHCount" type="UInt16"/>
+        <primitive name="SHStringIndex" type="UInt16"/>
+    </struct>
+</data>
