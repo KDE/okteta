@@ -56,17 +56,17 @@
         <entry value="66" name="Siemens FX66 microcontroller" />
         <entry value="67" name="STMicroelectronics ST9+ 8/16 mc" />
     </enumDef>
-    <enumDef name="ClassEnum" type="Char">
+    <enumDef name="ClassEnum" type="UInt8">
         <entry value="0" name="None" />
         <entry value="1" name="32 bit" />
         <entry value="2" name="64 bit" />
     </enumDef>
-    <enumDef name="EndianessEnum" type="Char">
+    <enumDef name="EndianessEnum" type="UInt8">
         <entry value="0" name="None" />
         <entry value="1" name="little endian" />
         <entry value="2" name="big endian" />
     </enumDef>
-    <enumDef name="ABIEnum" type="Char">
+    <enumDef name="ABIEnum" type="UInt8">
         <entry value="0" name="UNIX System V ABI" />
         <entry value="1" name="HP-UX" />
         <entry value="2" name="NetBSD" />
@@ -86,13 +86,13 @@
             <array name="magic" length="4">
                 <primitive name="magic" type="Char" />
             </array>
-            <enum name="arch class" enum="ClassEnum" type="Char" />
-            <enum name="endianess" enum="EndianessEnum" type="Char" />
-            <primitive name="version" type="Char" />
-            <enum name="ABI" enum="ABIEnum" type="Char" />
-            <primitive name="ABI version" type="Char" />
+            <enum name="arch class" enum="ClassEnum" type="UInt8" />
+            <enum name="endianess" enum="EndianessEnum" type="UInt8" />
+            <primitive name="version" type="UInt8" />
+            <enum name="ABI" enum="ABIEnum" type="UInt8" />
+            <primitive name="ABI version" type="UInt8" />
             <array name="padding" length="7" >
-                <primitive name="padding" type="Char" />
+                <primitive name="padding" type="UInt8" />
             </array>
         </struct>
         <enum name="ObjectType" enum="ObjectTypeEnum" type="UInt16"/>
