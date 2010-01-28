@@ -5,7 +5,17 @@ Type=Service
 ServiceTypes=KPluginInfo
 
 Name=ELF structure
+Name[ca]=Estructura ELF
+Name[en_GB]=ELF structure
+Name[pt]=Estrutura ELF
+Name[pt_BR]=Estrutura ELF
+Name[uk]=Структура ELF
 Comment=Structure for Executable Linking Format (ELF)
+Comment[ca]=Estructura per a «Executable Linking Format» (ELF)
+Comment[en_GB]=Structure for Executable Linking Format (ELF)
+Comment[pt]=Estrutura do Formato de Ligação de Executáveis (ELF)
+Comment[pt_BR]=Estrutura para o ELF (Executable Linking Format)
+Comment[uk]=Структура файлів у форматі Executable Linking Format (ELF)
 
 X-KDE-PluginInfo-Author=Harald Fernengel
 X-KDE-PluginInfo-Email=harry@kdevelop.org
