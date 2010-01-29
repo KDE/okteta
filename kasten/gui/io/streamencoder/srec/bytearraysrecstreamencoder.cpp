@@ -37,6 +37,10 @@
 namespace Kasten
 {
 
+SRecStreamEncoderSettings::SRecStreamEncoderSettings()
+ : addressSizeId( FourBytesId )
+{}
+
 static const int outputLineLength = 78;
 static const int maxOutputBytesPerLine = outputLineLength;
 
@@ -92,7 +96,7 @@ static inline void streamLine( QTextStream& textStream, RecordType recordType,
 }
 
 
-static
+static inline
 void streamBlockHeader( QTextStream& textStream, unsigned char* line )
 //                         const char* moduleName = 0, const char* description = 0,
 //                         quint8 version = 0, quint8 revision = 0 )
@@ -118,7 +122,7 @@ void streamBlockHeader( QTextStream& textStream, unsigned char* line )
     streamLine( textStream, BlockHeader, line );
 }
 
-static
+static inline
 void streamRecordCount( QTextStream& textStream, unsigned char* line,
                         quint16 recordCount )
 {
@@ -140,20 +144,21 @@ void streamRecordCount( QTextStream& textStream, unsigned char* line,
 // ﬁcation encountered in the object module input will be used. There is no code/
 // data ﬁeld.
 
-static
+static inline
 void streamBlockEnd( QTextStream& textStream, unsigned char* line,
-                     quint32 startAddress = 0 ) // TODO: make address
+                     RecordType recordType, quint32 startAddress = 0 ) // TODO: make address
 {
     static const int blockEndByteCount = 5;
 
     line[byteCountLineOffset] = blockEndByteCount;
     writeBigEndian( &line[addressLineOffset], startAddress, 4 );
 
-    streamLine( textStream, EndOfBlock4B, line );
+    streamLine( textStream, recordType, line );
 }
 
+
 ByteArraySRecStreamEncoder::ByteArraySRecStreamEncoder()
-  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","S-Record"), QString::fromLatin1("text/plain") )
+  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","S-Record..."), QString::fromLatin1("text/plain") )
 {}
 
 
@@ -171,10 +176,9 @@ bool ByteArraySRecStreamEncoder::encodeDataToStream( QIODevice* device,
 
     // prepare
     static const int maxLineLength = 64 / 2;
-    static const int addressLineSize = 4;
-     // TODO: depends on actually used address size
-    static const int maxDataPerLineCount = maxLineLength - byteCountLineSize - addressLineSize;
-    static const int dataLineOffset = addressLineOffset + addressLineSize;
+    const int addressLineSize = 4 - mSettings.addressSizeId;
+    const int maxDataPerLineCount = maxLineLength - byteCountLineSize - addressLineSize;
+    const int dataLineOffset = addressLineOffset + addressLineSize;
 
     const Okteta::ByteArrayTableLayout layout( byteArrayView->noOfBytesPerLine(),
                                                byteArrayView->firstLineOffset(),
@@ -183,6 +187,10 @@ bool ByteArraySRecStreamEncoder::encodeDataToStream( QIODevice* device,
     const Okteta::Coord startCoord = layout.coordOfIndex( range.start() );
     const int lastLinePosition = layout.lastLinePosition( startCoord.line() );
     const int dataPerLineCount = qMin( byteArrayView->noOfBytesPerLine(), maxDataPerLineCount );
+    const RecordType dataSequenceType =
+        static_cast<RecordType>( DataSequence4B - mSettings.addressSizeId );
+    const RecordType endOfBlockType =
+        static_cast<RecordType>( EndOfBlock4B + mSettings.addressSizeId );
 
     unsigned char line[maxLineLength];
 
@@ -209,7 +217,7 @@ bool ByteArraySRecStreamEncoder::encodeDataToStream( QIODevice* device,
             line[byteCountLineOffset] = d + 1 + addressLineSize;
             writeBigEndian( &line[addressLineOffset], recordOffset, addressLineSize );
 
-            streamLine( textStream, DataSequence4B, line );
+            streamLine( textStream, dataSequenceType, line );
 
             ++recordCount;
             recordOffset = i;
@@ -220,7 +228,7 @@ bool ByteArraySRecStreamEncoder::encodeDataToStream( QIODevice* device,
 
     // footer
     streamRecordCount( textStream, line, recordCount );
-    streamBlockEnd( textStream, line );
+    streamBlockEnd( textStream, line, endOfBlockType );
 
     return success;
 }

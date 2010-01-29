@@ -34,6 +34,18 @@
 namespace Kasten
 {
 
+class SRecStreamEncoderSettings
+{
+  public:
+    enum AddressSizeId { FourBytesId = 0, ThreeBytesId = 1, TwoBytesId = 2 };
+
+  public:
+    SRecStreamEncoderSettings();
+  public:
+    AddressSizeId addressSizeId;
+};
+
+
 class ByteArraySRecStreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
@@ -42,12 +54,27 @@ class ByteArraySRecStreamEncoder : public AbstractByteArrayStreamEncoder
     ByteArraySRecStreamEncoder();
     virtual ~ByteArraySRecStreamEncoder();
 
+  public:
+    SRecStreamEncoderSettings settings() const;
+    void setSettings( const SRecStreamEncoderSettings& settings );
+
   protected: // AbstractByteArrayStreamEncoder API
     virtual bool encodeDataToStream( QIODevice* device,
                                      const ByteArrayView* byteArrayView,
                                      const Okteta::AbstractByteArrayModel* byteArrayModel,
                                      const Okteta::AddressRange& range );
+
+  protected:
+    SRecStreamEncoderSettings mSettings;
 };
+
+
+inline SRecStreamEncoderSettings ByteArraySRecStreamEncoder::settings() const { return mSettings; }
+inline void ByteArraySRecStreamEncoder::setSettings( const SRecStreamEncoderSettings& settings )
+{
+    mSettings = settings;
+    emit settingsChanged();
+}
 
 }
 
