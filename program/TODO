@@ -268,14 +268,21 @@ Fixed after 0.4 Beta 2:
 Fixed after 0.4 RC 1:
 ---------------------
 * Decoding Table tool crashed the program if the last view marked was removed in the background
+* set editors in Decoding Table to readonly if view is readonly
+* opening editor for char type in Structure tool didn't use existing value
 
 Done for 0.5:
 -------------
 * moved mouse input handling into own controller classes
+* added streamencoder for Base32 (classic, Base32Hex, z-base-32)
+* added streamencoder for Base85 (Ascii85 for now)
+* added streamencoder for Uuencoding (historical, Base64, Xxencoding)
+* added streamencoder for S-Record
 
 Next to work on:
 ----------------------------------
 Important:
+* find good promotion terms, like "Okteta, Queen of Bytes", "Rules your Bytes", perhaps Chess-connected (array)
 * querying of changed byte range for pod editing
 * generator editors need to remember used settings
 * get maxEnums out of Designer combobox
@@ -286,6 +293,7 @@ Important:
 * search previous does not work in a row, as the cursor is exactly after a full match
 * find/replace dialogs and ByteArrayComboBox need to handle change charcodec, but what to do with than invalid characters already entered?
 * fix input of non-arabic digits
+* query which mimetype in QMimeData to use, if octetstream not available but several
 Less important:
 * some more unit tests
 * fix wrong font width calculation for offset and selection in statusbar
@@ -301,6 +309,7 @@ Later on:
 * DecodingTable/Structure tool: differ between invalid value and unavailable
 * bookmarks storing
 * add StackedViews
+* max size of bytearrays (e.g. 8.bit, 16-bit, 32-bit, 64-bit), also defines shown offset width
 * think about making the ByteArray* things interface only to the AbstractModel
   for this improve template functions findDocument with multiple interfaces given
 * make offset 64-Bit, in the whole Api, best by using own datatype/define/typedef
@@ -393,6 +402,11 @@ See "Insert", is generated as well as from a source, so perhaps join there?
 * all KDE inputs should show state with colors (invalid, okay)
 * think about how per-user focus can be done
 * show local information in window if we have focus, otherwise use KNotification
+* multisection bytearrays
+* move data to a new base address
+* checksum calculation and insertion/appending
+* byte order swapping
+* splitting data files
 
 Future plans:
 -------------
