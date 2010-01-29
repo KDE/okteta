@@ -126,10 +126,11 @@ static inline
 void streamRecordCount( QTextStream& textStream, unsigned char* line,
                         quint16 recordCount )
 {
-    static const int recordCountByteCount = 3;
+    static const int recordCountLineSize = 2;
+    static const int recordCountByteCount = byteCountLineSize + recordCountLineSize;
 
     line[byteCountLineOffset] = recordCountByteCount;
-    writeBigEndian( &line[addressLineOffset], recordCount, 2 );
+    writeBigEndian( &line[addressLineOffset], recordCount, recordCountLineSize );
 
     streamLine( textStream, RecordCount, line );
 }
@@ -144,14 +145,16 @@ void streamRecordCount( QTextStream& textStream, unsigned char* line,
 // ﬁcation encountered in the object module input will be used. There is no code/
 // data ﬁeld.
 
+// TODO: recordType is not limited to valid values, also brings recalculation of addressLineSize
 static inline
 void streamBlockEnd( QTextStream& textStream, unsigned char* line,
                      RecordType recordType, quint32 startAddress = 0 ) // TODO: make address
 {
-    static const int blockEndByteCount = 5;
+    const int addressLineSize = 11 - recordType;
+    const int blockEndByteCount = byteCountLineSize + addressLineSize;
 
     line[byteCountLineOffset] = blockEndByteCount;
-    writeBigEndian( &line[addressLineOffset], startAddress, 4 );
+    writeBigEndian( &line[addressLineOffset], startAddress, addressLineSize );
 
     streamLine( textStream, recordType, line );
 }
