@@ -63,7 +63,7 @@
 #include <QtCore/QList>
 
 
-static const char* UIFileName[] =
+static const char* const UIFileName[] =
 {
     "oktetapartreadonlyui.rc",
     "oktetapartbrowserui.rc",
