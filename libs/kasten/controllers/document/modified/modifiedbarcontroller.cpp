@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -37,9 +37,13 @@ namespace Kasten
 ModifiedBarController::ModifiedBarController( StatusBar* statusBar )
   : mDocument( 0 )
 {
-    mModifiedLabel = new QLabel( statusBar );
-    mModifiedLabel->setAlignment( Qt::AlignCenter );
-    statusBar->addWidget( mModifiedLabel );
+    mLocalStateLabel = new QLabel( statusBar );
+    mLocalStateLabel->setAlignment( Qt::AlignCenter );
+    statusBar->addWidget( mLocalStateLabel );
+
+    mRemoteStateLabel = new QLabel( statusBar );
+    mRemoteStateLabel->setAlignment( Qt::AlignCenter );
+    statusBar->addWidget( mRemoteStateLabel );
 
     setTargetModel( 0 );
 }
@@ -51,33 +55,56 @@ void ModifiedBarController::setTargetModel( AbstractModel* model )
 
     mDocument = model ? model->findBaseModel<AbstractDocument*>() : 0;
 
-    LocalSyncState syncState;
+    LocalSyncState localState;
+    RemoteSyncState remoteState;
     if( mDocument )
     {
-        syncState = mDocument->localSyncState();
+        localState = mDocument->localSyncState();
+        remoteState = mDocument->remoteSyncState();
         connect( mDocument, SIGNAL(localSyncStateChanged( Kasten::LocalSyncState )),
                  SLOT(onLocalSyncStateChanged( Kasten::LocalSyncState )) );
+        connect( mDocument, SIGNAL(remoteSyncStateChanged( Kasten::RemoteSyncState )),
+                 SLOT(onRemoteSyncStateChanged( Kasten::RemoteSyncState )) );
     }
     else
-        syncState = LocalInSync;
-
-    onLocalSyncStateChanged( syncState );
-    mModifiedLabel->setEnabled( mDocument );
+    {
+        localState = LocalInSync;
+        remoteState = RemoteInSync;
+    }
+    onLocalSyncStateChanged( localState );
+    onRemoteSyncStateChanged( remoteState );
+    mLocalStateLabel->setEnabled( mDocument );
+    mRemoteStateLabel->setEnabled( mDocument );
 }
 
 
-void ModifiedBarController::onLocalSyncStateChanged( Kasten::LocalSyncState syncState )
+void ModifiedBarController::onLocalSyncStateChanged( Kasten::LocalSyncState localSyncState )
 {
-    // TODO: handle changed on remote
-    const bool isModified = (syncState == LocalHasChanges );
+    const bool isModified = (localSyncState == LocalHasChanges );
 
     // TODO: depend an statusbar height
-    mModifiedLabel->setPixmap( isModified ? KIcon("document-save").pixmap(16) : QPixmap() );
+    mLocalStateLabel->setPixmap( isModified ? KIcon("document-save").pixmap(16) : QPixmap() );
 
-    mModifiedLabel->setToolTip( isModified ?
+    mLocalStateLabel->setToolTip( isModified ?
         i18nc( "@tooltip the document is modified", "Modified." ) :
         i18nc( "@tooltip the document is not modified", "Not modified." ) );
 
+}
+
+void ModifiedBarController::onRemoteSyncStateChanged( Kasten::RemoteSyncState remoteSyncState )
+{
+    const char* const iconName =
+        ( remoteSyncState == RemoteHasChanges ) ?  "document-save" :
+        ( remoteSyncState == RemoteNotSet ) ?      "document-new" :
+        ( remoteSyncState == RemoteDeleted ) ?     "edit-delete" :
+        ( remoteSyncState == RemoteUnknown ) ?     "flag-yellow" :
+        ( remoteSyncState == RemoteUnreachable ) ? "network-disconnect" :
+        /* else */                                 0;
+
+    // TODO: depend an statusbar height
+    mRemoteStateLabel->setPixmap( iconName ? KIcon(iconName).pixmap(16) : QPixmap() );
+
+    // TODO: tooltips
 }
 
 }

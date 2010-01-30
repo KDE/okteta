@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -51,12 +51,14 @@ class KASTENCONTROLLERS_EXPORT ModifiedBarController : public AbstractXmlGuiCont
     virtual void setTargetModel( AbstractModel* model );
 
   protected Q_SLOTS: // action slots
-    void onLocalSyncStateChanged( Kasten::LocalSyncState syncState );
+    void onLocalSyncStateChanged( Kasten::LocalSyncState localSyncState );
+    void onRemoteSyncStateChanged( Kasten::RemoteSyncState remoteSyncState );
 
   protected:
     AbstractDocument* mDocument;
 
-    QLabel* mModifiedLabel;
+    QLabel* mLocalStateLabel;
+    QLabel* mRemoteStateLabel;
 };
 
 }
