@@ -6,6 +6,8 @@ ServiceTypes=KPluginInfo
 
 Name=ELF structure
 Name[ca]=Estructura ELF
+Name[ca@valencia]=Estructura ELF
+Name[da]=ELF-struktur
 Name[en_GB]=ELF structure
 Name[es]=Estructura ELF
 Name[et]=ELF struktuur
@@ -16,6 +18,8 @@ Name[uk]=Структура ELF
 Name[zh_TW]=ELF 結構
 Comment=Structure for Executable Linking Format (ELF)
 Comment[ca]=Estructura per a «Executable Linking Format» (ELF)
+Comment[ca@valencia]=Estructura per a «Executable Linking Format» (ELF)
+Comment[da]=Struktur af Executable Linking Format (ELF)
 Comment[en_GB]=Structure for Executable Linking Format (ELF)
 Comment[es]=Estructura para el formato ejecutable y enlazable (ELF)
 Comment[et]=Täidetava ja lingitava failivormingu (ELF) struktuur
