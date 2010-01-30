@@ -37,6 +37,10 @@
 namespace Kasten
 {
 
+IHexStreamEncoderSettings::IHexStreamEncoderSettings()
+ : addressSizeId( Bits32Id )
+{}
+
 static const int outputLineLength = 78;
 static const int maxOutputBytesPerLine = outputLineLength;
 
@@ -102,10 +106,9 @@ static inline void streamLine( QTextStream& textStream,
     textStream << checksum << '\n';
 }
 
-#if 0
-static
+static inline
 void streamExtendedSegmentAddress( QTextStream& textStream, unsigned char* line,
-                                   quint16 upperSegmentBaseAddress = 0 )
+                                   quint16 upperSegmentBaseAddress )
 {
     static const int nullAddress = 0;
     static const int upperSegmentBaseAddressSize = 2;
@@ -118,9 +121,8 @@ void streamExtendedSegmentAddress( QTextStream& textStream, unsigned char* line,
 
     streamLine( textStream, line );
 }
-#endif
 
-static
+static inline
 void streamExtendedLinearAddress( QTextStream& textStream, unsigned char* line,
                                   quint16 upperLinearBaseAddress )
 {
@@ -136,7 +138,7 @@ void streamExtendedLinearAddress( QTextStream& textStream, unsigned char* line,
     streamLine( textStream, line );
 }
 
-static
+static inline
 void streamEndOfFile( QTextStream& textStream, unsigned char* line,
                       quint16 startAddress = 0 )
 {
@@ -149,8 +151,9 @@ void streamEndOfFile( QTextStream& textStream, unsigned char* line,
     streamLine( textStream, line );
 }
 
+
 ByteArrayIHexStreamEncoder::ByteArrayIHexStreamEncoder()
-  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Intel Hex"), QString::fromLatin1("text/plain") )
+  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Intel Hex..."), QString::fromLatin1("text/plain") )
 {}
 
 
@@ -167,7 +170,7 @@ bool ByteArrayIHexStreamEncoder::encodeDataToStream( QIODevice* device,
     QTextStream textStream( device );
 
     // prepare
-    static const int maxDataPerLineCount = 32;
+    static const int maxDataPerLineCount = 255;
     static const int maxLineLength =
         maxDataPerLineCount + byteCountLineSize + addressLineSize + recordTypeLineSize;
 
@@ -188,8 +191,16 @@ bool ByteArrayIHexStreamEncoder::encodeDataToStream( QIODevice* device,
                             qMin(firstDataEnd,nextUpperAddressChangeDataEnd) );
 
     // data
-    const quint16 upperAddress = (range.start() >> 16);
-    streamExtendedLinearAddress( textStream, line, upperAddress );
+    if( mSettings.addressSizeId == IHexStreamEncoderSettings::Bits32Id )
+    {
+        const quint16 upperLinearBaseAddress = (range.start() >> 16);
+        streamExtendedLinearAddress( textStream, line, upperLinearBaseAddress );
+    }
+    else if( mSettings.addressSizeId == IHexStreamEncoderSettings::Bits16Id )
+    {
+        const quint16 upperSegmentBaseAddress = (range.start() >> 4) & 0xF000;
+        streamExtendedSegmentAddress( textStream, line, upperSegmentBaseAddress );
+    }
     Okteta::Address i = range.start();
     while( i <= range.end() )
     {
@@ -210,8 +221,16 @@ bool ByteArrayIHexStreamEncoder::encodeDataToStream( QIODevice* device,
 
             if( d == nextUpperAddressChangeDataEnd )
             {
-                const quint16 upperAddress = (i >> 16);
-                streamExtendedLinearAddress( textStream, line, upperAddress );
+                if( mSettings.addressSizeId == IHexStreamEncoderSettings::Bits32Id )
+                {
+                    const quint16 upperLinearBaseAddress = (i >> 16);
+                    streamExtendedLinearAddress( textStream, line, upperLinearBaseAddress );
+                }
+                else if( mSettings.addressSizeId == IHexStreamEncoderSettings::Bits16Id )
+                {
+                    const quint16 upperSegmentBaseAddress = (i >> 4) & 0xF000;
+                    streamExtendedSegmentAddress( textStream, line, upperSegmentBaseAddress );
+                }
             }
             nextUpperAddressChangeDataEnd = 0x10000 - (i & 0xFFFF);
             nextDataEnd = qMin( dataPerLineCount,

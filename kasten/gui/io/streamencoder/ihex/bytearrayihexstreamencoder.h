@@ -34,6 +34,18 @@
 namespace Kasten
 {
 
+class IHexStreamEncoderSettings
+{
+  public:
+    enum AddressSizeId { Bits32Id = 0, Bits16Id = 1, Bits8Id = 2 };
+
+  public:
+    IHexStreamEncoderSettings();
+  public:
+    AddressSizeId addressSizeId;
+};
+
+
 class ByteArrayIHexStreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
@@ -42,12 +54,27 @@ class ByteArrayIHexStreamEncoder : public AbstractByteArrayStreamEncoder
     ByteArrayIHexStreamEncoder();
     virtual ~ByteArrayIHexStreamEncoder();
 
+  public:
+    IHexStreamEncoderSettings settings() const;
+    void setSettings( const IHexStreamEncoderSettings& settings );
+
   protected: // AbstractByteArrayStreamEncoder API
     virtual bool encodeDataToStream( QIODevice* device,
                                      const ByteArrayView* byteArrayView,
                                      const Okteta::AbstractByteArrayModel* byteArrayModel,
                                      const Okteta::AddressRange& range );
+
+  protected:
+    IHexStreamEncoderSettings mSettings;
 };
+
+
+inline IHexStreamEncoderSettings ByteArrayIHexStreamEncoder::settings() const { return mSettings; }
+inline void ByteArrayIHexStreamEncoder::setSettings( const IHexStreamEncoderSettings& settings )
+{
+    mSettings = settings;
+    emit settingsChanged();
+}
 
 }
 

@@ -62,6 +62,12 @@ set( okteta_srec_streamencoder_SRCS
   io/streamencoder/srec/bytearraysrecstreamencoder.cpp
 )
 
+set( okteta_ihex_streamencoder_SRCS
+  io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp
+  io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditorfactory.cpp
+  io/streamencoder/ihex/bytearrayihexstreamencoder.cpp
+)
+
 set( okteta_viewtext_streamencoder_SRCS
   io/streamencoder/viewtext/abstractcolumntextrenderer.cpp
   io/streamencoder/viewtext/offsetcolumntextrenderer.cpp
@@ -83,7 +89,7 @@ set( okteta_streamencoder_SRCS
   io/streamencoder/base85/bytearraybase85streamencoder.cpp
   ${okteta_uuencoding_streamencoder_SRCS}
   ${okteta_srec_streamencoder_SRCS}
-  io/streamencoder/ihex/bytearrayihexstreamencoder.cpp
+  ${okteta_ihex_streamencoder_SRCS}
   ${okteta_sourcecode_streamencoder_SRCS}
   ${okteta_viewtext_streamencoder_SRCS}
   io/bytearraystreamencoderfactory.cpp

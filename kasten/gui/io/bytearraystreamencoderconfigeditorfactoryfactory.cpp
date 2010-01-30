@@ -28,6 +28,7 @@
 #include "streamencoder/base32/bytearraybase32streamencoderconfigeditorfactory.h"
 #include "streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditorfactory.h"
 #include "streamencoder/srec/bytearraysrecstreamencoderconfigeditorfactory.h"
+#include "streamencoder/ihex/bytearrayihexstreamencoderconfigeditorfactory.h"
 //// NEWBYTEARRAYSTREAMENCODERCONFIGEDITORFACTORY(start)
 //// Here add the name of your header file of your streamencoder,
 //// e.g.
@@ -49,6 +50,7 @@ QList<AbstractModelStreamEncoderConfigEditorFactory*> ByteArrayStreamEncoderConf
         << new ByteArrayValuesStreamEncoderConfigEditorFactory()
         << new ByteArrayBase32StreamEncoderConfigEditorFactory()
         << new ByteArraySRecStreamEncoderConfigEditorFactory()
+        << new ByteArrayIHexStreamEncoderConfigEditorFactory()
         << new ByteArrayUuencodingStreamEncoderConfigEditorFactory();
 //// NEWBYTEARRAYSTREAMENCODERCONFIGEDITORFACTORY(start)
 //// Here add the creation of an object of your streamencoder class and add it to the list,
