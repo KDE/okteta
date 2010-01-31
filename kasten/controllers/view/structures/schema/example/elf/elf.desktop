@@ -5,7 +5,7 @@ Type=Service
 ServiceTypes=KPluginInfo
 
 Name=ELF structure
-Comment=Structure for Executable Linking Format (ELF)
+Comment=Structure for Executable and Linkable Format (ELF)
 
 X-KDE-PluginInfo-Author=Harald Fernengel
 X-KDE-PluginInfo-Email=harry@kdevelop.org
