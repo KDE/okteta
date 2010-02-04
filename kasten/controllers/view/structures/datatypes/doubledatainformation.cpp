@@ -22,7 +22,7 @@
 #include "doubledatainformation.h"
 #include <KDoubleNumInput>
 
-QString DoubleDataInformation::getValueString() const
+QString DoubleDataInformation::valueString() const
 {
     if (!mIsValid)
         return i18nc("invalid value (out of range)", "<invalid>");

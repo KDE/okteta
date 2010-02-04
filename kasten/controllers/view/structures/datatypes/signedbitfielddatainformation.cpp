@@ -39,7 +39,7 @@ int SignedBitfieldDataInformation::displayBase() const
     return 10; //safe default value
 }
 
-QString SignedBitfieldDataInformation::getValueString() const
+QString SignedBitfieldDataInformation::valueString() const
 {
     //FIXME shift so that it is negative
     if (!mIsValid)

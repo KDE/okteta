@@ -24,7 +24,7 @@
 #include "dynamiclengtharraydatainformation.h"
 #include "staticlengtharraydatainformation.h"
 
-QString AbstractArrayDataInformation::getTypeName() const
+QString AbstractArrayDataInformation::typeName() const
 {
     if (!hasChildren())
         return i18n("Empty array");
@@ -33,11 +33,11 @@ QString AbstractArrayDataInformation::getTypeName() const
     if (dynamic_cast<PrimitiveDataInformation*> (data))
     {
         //don't show name of child
-        return i18nc("array type then length", "%1[%2]", data->getTypeName(),
+        return i18nc("array type then length", "%1[%2]", data->typeName(),
                 childCount());
     }
     return i18nc("subelem type then array name and length", "%1[%2] (%3)",
-            data->getName(), childCount(), data->getTypeName());
+            data->name(), childCount(), data->typeName());
 }
 
 AbstractArrayDataInformation::AbstractArrayDataInformation(QString name, int index,
@@ -64,16 +64,16 @@ Okteta::Size AbstractArrayDataInformation::offset(unsigned int index) const
     //sum size of elements up to index
     for (unsigned int i = 0; i < index; ++i)
     {
-        offset += childAt(i)->getSize() / 8;
+        offset += childAt(i)->size() / 8;
     }
     return offset;
 }
-int AbstractArrayDataInformation::getSize() const
+int AbstractArrayDataInformation::size() const
 {
     int size = 0;
     for (unsigned int i = 0; i < childCount(); ++i)
     {
-        size += childAt(i)->getSize();
+        size += childAt(i)->size();
     }
     if (size % 8 != 0)
     {

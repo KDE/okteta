@@ -22,7 +22,7 @@
 #include "chardatainformation.h"
 #include <KLineEdit>
 
-QString CharDataInformation::getValueString() const
+QString CharDataInformation::valueString() const
 {
     if (!mIsValid)
         return i18nc("invalid value (out of range)", "<invalid>");

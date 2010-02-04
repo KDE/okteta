@@ -21,12 +21,12 @@
  */
 #include "structuredatainformation.h"
 #include "abstractbitfielddatainformation.h"
-QString StructureDataInformation::getTypeName() const
+QString StructureDataInformation::typeName() const
 {
     return i18nc("data type in C/C++", "struct");
 }
 
-int StructureDataInformation::getSize() const
+int StructureDataInformation::size() const
 {
     int size = 0;
     bool lastChildWasBitfield = false;
@@ -48,7 +48,7 @@ int StructureDataInformation::getSize() const
             {
                 lastChildWasBitfield = true;
             }
-            size += data->getSize();
+            size += data->size();
         }
     }
     if (lastChildWasBitfield)
@@ -116,7 +116,7 @@ Okteta::Size StructureDataInformation::offset(unsigned int index) const
     //sum size of elements up to index
     for (unsigned int i = 0; i < index; ++i)
     {
-        offset += childAt(i)->getSize() / 8;
+        offset += childAt(i)->size() / 8;
     }
     return offset;
 }

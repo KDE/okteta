@@ -92,19 +92,19 @@ QVariant PrimitiveDataInformation::data(int column, int role) const
                     dynamic_cast<StaticLengthArrayDataInformation*> (parent());
             if (par)
                 return QString("[%1]").arg(mIndex);
-            return getName();
+            return name();
         }
         else if (column == 1)
-            return getTypeName();
+            return typeName();
         else if (column == 2)
-            return getValueString();
+            return valueString();
         else
             return QVariant();
     }
     else if (role == Qt::ToolTipRole)
     {
-        return i18n("Name: %1\nValue: %2\n\nType: %3\nSize: %4", getName(),
-                getValueString(), getTypeName(), getSizeString());
+        return i18n("Name: %1\nValue: %2\n\nType: %3\nSize: %4", name(),
+                valueString(), typeName(), sizeString());
     }
     else
         return QVariant();
@@ -186,17 +186,17 @@ void PrimitiveDataInformation::setModelData(AllPrimitiveTypes value,
         Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
         Okteta::Address address, Okteta::Size remaining)
 {
-    int size = getSize() / 8;
-    if (remaining < size)
+    int sizeInBytes = size() / 8;
+    if (remaining < sizeInBytes)
     {
         mValue.ulongValue = 0;
         mIsValid = false;
         return;
     }
-    for (int i = 0; i < size; ++i)
+    for (int i = 0; i < sizeInBytes; ++i)
     {
         int index = (byteOrder == ByteOrderEnumClass::LittleEndian) ? i
-                : ((size - 1) - i);
+                : ((sizeInBytes - 1) - i);
         out->setByte(address + i, value.allBytes[index]);
     }
 }
@@ -222,7 +222,7 @@ Okteta::Size PrimitiveDataInformation::readData(
         //TODO handle bit-offsets for primitive types? Probably not since one
         //can just use a e.g. 8-bit bitfield. Only problem are chars and floats
     }
-    int bytes = getSize() / 8;
+    int bytes = size() / 8;
     if (remaining < bytes)
     {
         mValue.ulongValue = 0;
@@ -371,7 +371,7 @@ PrimitiveDataInformation* PrimitiveDataInformation::newInstance(QString name,
 //    return 10;
 //}
 
-//QString PrimitiveDataInformation::getValueString() const
+//QString PrimitiveDataInformation::valueString() const
 //{
 //    if (!mIsValid)
 //    {
@@ -379,10 +379,10 @@ PrimitiveDataInformation* PrimitiveDataInformation::newInstance(QString name,
 //    }
 //    QString number;
 //    int base = getStringConversionBase(mType);
-//    return PrimitiveDataInformation::getValueString(mValue, mType, base);
+//    return PrimitiveDataInformation::valueString(mValue, mType, base);
 //}
 
-//QString PrimitiveDataInformation::getValueString(AllPrimitiveTypes value,
+//QString PrimitiveDataInformation::valueString(AllPrimitiveTypes value,
 //        PrimitiveDataType type, int base)
 //{
 //    QString number;
@@ -445,10 +445,10 @@ PrimitiveDataInformation* PrimitiveDataInformation::newInstance(QString name,
 //    }
 //    if (base == 16)
 //    {
-//        if ((getSize(type) / 4) > number.length())
+//        if ((size(type) / 4) > number.length())
 //        {
 //            //2 digits per byte in hex
-//            number = number.right((getSize(type) / 4));
+//            number = number.right((size(type) / 4));
 //        }
 //        number = "0x" + number;
 //    }
@@ -488,7 +488,7 @@ PrimitiveDataInformation* PrimitiveDataInformation::newInstance(QString name,
 //    return number;
 //}
 
-//int PrimitiveDataInformation::getSize(PrimitiveDataType type)
+//int PrimitiveDataInformation::size(PrimitiveDataType type)
 //{
 //    int bytes;
 //    switch (type)
@@ -522,7 +522,7 @@ PrimitiveDataInformation* PrimitiveDataInformation::newInstance(QString name,
 //    return bytes * 8;
 //}
 
-//QString PrimitiveDataInformation::getTypeName(PrimitiveDataType type)
+//QString PrimitiveDataInformation::typeName(PrimitiveDataType type)
 //{
 //    switch (type)
 //    {

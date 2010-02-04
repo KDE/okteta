@@ -44,12 +44,12 @@ protected:
     }
 private:
 public:
-    inline QString getTypeName() const
+    inline QString typeName() const
     {
         return i18nc("Data type", "signed bitfield");
     }
     DATAINFORMATION_CLONE(SignedBitfield)
-    virtual QString getValueString() const;
+    virtual QString valueString() const;
 
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;

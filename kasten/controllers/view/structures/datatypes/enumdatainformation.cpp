@@ -51,23 +51,23 @@ QVariant EnumDataInformation::primitiveValue() const
     return mValue->primitiveValue();
 }
 
-QString EnumDataInformation::getValueString() const
+QString EnumDataInformation::valueString() const
 {
     QString enumVal = mEnum->value(mValue->value());
     if (!enumVal.isEmpty())
     {
-        return i18n("%1 (%2)", enumVal, mValue->getValueString());
+        return i18n("%1 (%2)", enumVal, mValue->valueString());
     }
     else
-        return i18n("%1 (value not in enum)", mValue->getValueString());
+        return i18n("%1 (value not in enum)", mValue->valueString());
 }
-QString EnumDataInformation::getTypeName() const
+QString EnumDataInformation::typeName() const
 {
     return "enum";
 }
 QString EnumDataInformation::getTypeString() const
 {
-    return i18n("enum (%1)", mValue->getTypeName());
+    return i18n("enum (%1)", mValue->typeName());
 }
 
 bool EnumDataInformation::setData(const QVariant& value, DataInformation* inf,

@@ -39,8 +39,8 @@ public Q_SLOTS:
     void addDataTypeToUnion(DataInformation* dataInformation);
 public:
     //implement the DataInformation pure virtual functions
-    QString getTypeName() const;
-    int getSize() const;
+    QString typeName() const;
+    int size() const;
     virtual Okteta::Size readData(Okteta::AbstractByteArrayModel* input,
             ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining, quint8* bitOffset);
     virtual bool setData(const QVariant& value, DataInformation* inf,

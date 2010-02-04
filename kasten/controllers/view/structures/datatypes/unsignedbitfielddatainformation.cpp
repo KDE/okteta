@@ -39,7 +39,7 @@ int UnsignedBitfieldDataInformation::displayBase() const
     return 10; //safe default value
 }
 
-QString UnsignedBitfieldDataInformation::getValueString() const
+QString UnsignedBitfieldDataInformation::valueString() const
 {
     if (!mIsValid)
         return i18nc("invalid value (out of range)", "<invalid>");

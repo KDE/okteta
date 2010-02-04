@@ -220,7 +220,7 @@ DataInformation* StructureDefinitionFile::getStructure(QString& name) const
         kError() << "reading data from invalid file";
     foreach(const DataInformation* data,mTopLevelStructures)
         {
-            if (data->getName() == name)
+            if (data->name() == name)
             {
                 return data->clone();
             }

@@ -21,7 +21,7 @@
  */
 #include "int32datainformation.h"
 
-QString Int32DataInformation::getValueString() const
+QString Int32DataInformation::valueString() const
 {
     if (!mIsValid)
         return i18nc("invalid value (out of range)", "<invalid>");

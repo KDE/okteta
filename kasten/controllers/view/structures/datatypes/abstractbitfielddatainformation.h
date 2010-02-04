@@ -48,9 +48,9 @@ public:
     {
         return mWidth;
     }
-    virtual QString getSizeString() const;
+    virtual QString sizeString() const;
 
-    inline int getSize() const
+    inline int size() const
     {
         return width();
     }
@@ -65,7 +65,7 @@ public:
          * return ret;
          */
     }
-    inline QString getTypeName() const
+    virtual QString typeName() const
     {
         return i18ncp("Data type", "bitfield (%1 bit wide)",
                 "bitfield (%1 bits wide)", width());

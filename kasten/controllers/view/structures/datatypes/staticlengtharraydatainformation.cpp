@@ -27,7 +27,7 @@ StaticLengthArrayDataInformation::StaticLengthArrayDataInformation(QString name,
     AbstractArrayDataInformation(name, index, parent), mArrayLength(length)
 {
     //  kDebug() << "name: " << name;
-    //  kDebug() << "childname: " << children.getName();
+    //  kDebug() << "childname: " << children.name();
     for (unsigned int i = 0; i < length; i++)
     {
         DataInformation* arrayElem = children.clone();

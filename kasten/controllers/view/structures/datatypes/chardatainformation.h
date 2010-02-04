@@ -46,16 +46,16 @@ public:
         }
         return 10; //safe default value
     }
-    inline int getSize() const
+    inline int size() const
     {
         return 8;
     }
-    inline QString getTypeName() const
+    inline QString typeName() const
     {
         return i18nc("Data type", "char");
     }
     DATAINFORMATION_CLONE(Char)
-    virtual QString getValueString() const;
+    virtual QString valueString() const;
 
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;

@@ -144,7 +144,7 @@ void StructureAddRemoveWidget::buildAvailableList()
             foreach(const DataInformation* data,def->structures())
                 {
                     QTreeWidgetItem* subItem = new QTreeWidgetItem(item,
-                            QStringList() << data->getName() << relPath);
+                            QStringList() << data->name() << relPath);
                     item->addChild(subItem);
                 }
             availableItems.append(item);

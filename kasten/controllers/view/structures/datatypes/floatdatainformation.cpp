@@ -23,7 +23,7 @@
 #include <limits>
 #include <KDoubleNumInput>
 
-QString FloatDataInformation::getValueString() const
+QString FloatDataInformation::valueString() const
 {
     if (!mIsValid)
         return i18nc("invalid value (out of range)", "<invalid>");

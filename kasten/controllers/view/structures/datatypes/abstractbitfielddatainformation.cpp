@@ -288,7 +288,7 @@ void AbstractBitfieldDataInformation::setDataBigEndian(const QVariant &value,
 
 }
 
-QString AbstractBitfieldDataInformation::getSizeString() const
+QString AbstractBitfieldDataInformation::sizeString() const
 {
     return i18np("%1 bit", "%1 bits", width());
 }

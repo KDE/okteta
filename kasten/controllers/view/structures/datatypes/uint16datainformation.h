@@ -30,16 +30,16 @@ class UInt16DataInformation: public UnsignedPrimitiveDataInformation
 Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(UInt16,UnsignedPrimitive)
 public:
-    inline int getSize() const
+    inline int size() const
     {
         return 16;
     }
-    inline QString getTypeName() const
+    inline QString typeName() const
     {
         return i18nc("Data type", "unsigned short");
     }
     DATAINFORMATION_CLONE(UInt16)
-    virtual QString getValueString() const;
+    virtual QString valueString() const;
 
     inline QWidget* createEditWidget(QWidget* parent) const
     {

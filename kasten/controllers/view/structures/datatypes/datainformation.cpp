@@ -44,15 +44,15 @@ DataInformation::~DataInformation()
 {
 }
 
-QString DataInformation::getValueString() const
+QString DataInformation::valueString() const
 {
     return QString();
 }
 
-QString DataInformation::getSizeString() const
+QString DataInformation::sizeString() const
 {
-    return i18np("1 byte", "%1 bytes", getSize() / 8);
-    //  return KGlobal::locale()->formatByteSize(getSize() / 8);
+    return i18np("1 byte", "%1 bytes", size() / 8);
+    //  return KGlobal::locale()->formatByteSize(size() / 8);
 
 }
 

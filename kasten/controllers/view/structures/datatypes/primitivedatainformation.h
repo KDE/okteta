@@ -44,8 +44,8 @@ public:
     static PrimitiveDataInformation* newInstance(QString name,
             PrimitiveDataType type, int index = -1, DataInformation* parent = NULL);
     //    static int getStringConversionBase(PrimitiveDataType type);
-    //    static QString getTypeName(PrimitiveDataType type);
-    //    static int getSize(PrimitiveDataType type);
+    //    static QString typeName(PrimitiveDataType type);
+    //    static int size(PrimitiveDataType type);
     static QString getValueString(AllPrimitiveTypes value, PrimitiveDataType type,
             int base);
     virtual DataInformation* clone() const = 0;
@@ -53,8 +53,8 @@ public:
     {
         return mType;
     }
-    virtual int getSize() const = 0;
-    virtual QString getTypeName() const = 0;
+    virtual int size() const = 0;
+    virtual QString typeName() const = 0;
     virtual inline bool isValid() const
     {
         return mIsValid;
@@ -66,7 +66,7 @@ public:
     virtual bool setData(const QVariant &value, DataInformation* inf,
             Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
             Okteta::Address address, Okteta::Size remaining, quint8* bitOffset);
-    virtual QString getValueString() const = 0;
+    virtual QString valueString() const = 0;
     AllPrimitiveTypes value() const
     {
         return mValue;

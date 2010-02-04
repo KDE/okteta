@@ -21,7 +21,7 @@
  */
 #include "uint16datainformation.h"
 
-QString UInt16DataInformation::getValueString() const
+QString UInt16DataInformation::valueString() const
 {
     if (!mIsValid)
         return i18nc("invalid value (out of range)", "<invalid>");

@@ -33,16 +33,16 @@ public:
     {
         return 10;
     }
-    inline int getSize() const
+    inline int size() const
     {
         return 64;
     }
-    inline QString getTypeName() const
+    inline QString typeName() const
     {
         return i18nc("Data type", "double");
     }
     DATAINFORMATION_CLONE(Double)
-    virtual QString getValueString() const;
+    virtual QString valueString() const;
 
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;

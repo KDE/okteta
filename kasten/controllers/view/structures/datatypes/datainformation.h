@@ -84,8 +84,8 @@ public:
     }
 
     /** needs to be virtual for bitfields */
-    virtual QString getSizeString() const;
-    inline QString getName() const
+    virtual QString sizeString() const;
+    inline QString name() const
     {
         return objectName();
     }
@@ -113,10 +113,10 @@ public:
     /** get the necessary data (for the model) */
     virtual QVariant data(int column, int role) const =0;
     /** The size of this DataInformation type in bits (to allow bitfields in future) */
-    virtual int getSize() const =0;
-    virtual QString getTypeName() const =0;
+    virtual int size() const =0;
+    virtual QString typeName() const =0;
     /** by default just returns an empty QString */
-    virtual QString getValueString() const;
+    virtual QString valueString() const;
 
     /** create a QWidget for the QItemDelegate */
     virtual QWidget* createEditWidget(QWidget* parent) const = 0;

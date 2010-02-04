@@ -30,17 +30,17 @@ class Int16DataInformation: public SignedPrimitiveDataInformation
 Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Int16,SignedPrimitive)
 public:
-    inline int getSize() const
+    inline int size() const
     {
         return 16;
     }
-    inline QString getTypeName() const
+    inline QString typeName() const
     {
         return i18nc("Data type", "short");
     }
     DATAINFORMATION_CLONE(Int16)
 
-    virtual QString getValueString() const;
+    virtual QString valueString() const;
 
     inline QWidget* createEditWidget(QWidget* parent) const
     {

@@ -21,7 +21,7 @@
  */
 #include "int8datainformation.h"
 
-QString Int8DataInformation::getValueString() const
+QString Int8DataInformation::valueString() const
 {
     if (!mIsValid)
         return i18nc("invalid value (out of range)", "<invalid>");

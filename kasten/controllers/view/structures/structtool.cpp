@@ -262,7 +262,7 @@ void StructTool::mark(const QModelIndex& idx)
     DataInformation* data = static_cast<DataInformation*> (idx.internalPointer());
     if (!data)
         return;
-    int length = data->getSize() / 8;
+    int length = data->size() / 8;
     int maxLen = mByteArrayModel->size() - mCursorIndex;
     length = qMin(length, maxLen);
     Okteta::Address startOffset = mCursorIndex + data->positionRelativeToParent();

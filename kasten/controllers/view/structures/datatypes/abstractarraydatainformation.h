@@ -39,8 +39,8 @@ public:
             DataInformation* parent = NULL);
     virtual ~AbstractArrayDataInformation();
 public:
-    QString getTypeName() const;
-    virtual int getSize() const;
+    virtual QString typeName() const;
+    virtual int size() const;
 
 protected:
     virtual Okteta::Size offset(unsigned int index) const;

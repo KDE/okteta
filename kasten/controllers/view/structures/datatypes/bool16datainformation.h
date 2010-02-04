@@ -31,16 +31,16 @@ Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Bool16,UnsignedPrimitive)
 
 public:
-    inline int getSize() const
+    inline int size() const
     {
         return 16;
     }
-    inline QString getTypeName() const
+    inline QString typeName() const
     {
         return i18nc("Data type", "bool (2 bytes)");
     }
     DATAINFORMATION_CLONE(Bool16)
-    virtual QString getValueString() const;
+    virtual QString valueString() const;
 
     inline QWidget* createEditWidget(QWidget* parent) const
     {

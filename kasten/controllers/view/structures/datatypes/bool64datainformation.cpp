@@ -21,7 +21,7 @@
  */
 #include "bool64datainformation.h"
 
-QString Bool64DataInformation::getValueString() const
+QString Bool64DataInformation::valueString() const
 {
     if (!mIsValid)
         return i18nc("invalid value (out of range)", "<invalid>");

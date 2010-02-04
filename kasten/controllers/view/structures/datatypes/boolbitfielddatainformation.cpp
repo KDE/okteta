@@ -39,7 +39,7 @@ int BoolBitfieldDataInformation::displayBase() const
     return 10; //safe default value
 }
 
-QString BoolBitfieldDataInformation::getValueString() const
+QString BoolBitfieldDataInformation::valueString() const
 {
     if (!mIsValid)
         return i18nc("invalid value (out of range)", "<invalid>");

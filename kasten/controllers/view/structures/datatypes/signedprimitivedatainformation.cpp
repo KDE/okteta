@@ -26,11 +26,11 @@ QString SignedPrimitiveDataInformation::correctSignedValue(QString& num, int bas
 {
     if (base == 16)
     {
-        return num.right(getSize() / 4);
+        return num.right(size() / 4);
     }
     if (base == 2)
     {
-        return num.right(getSize());
+        return num.right(size());
     }
     return num;
 }

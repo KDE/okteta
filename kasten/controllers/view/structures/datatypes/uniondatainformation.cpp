@@ -21,18 +21,18 @@
  */
 #include "uniondatainformation.h"
 
-QString UnionDataInformation::getTypeName() const
+QString UnionDataInformation::typeName() const
 {
     return i18nc("data type in C/C++", "union");
 }
 
-int UnionDataInformation::getSize() const
+int UnionDataInformation::size() const
 {
     //since this is a union retur size of biggest element
     int size = 0;
     for (int i = 0; i < mChildren.size(); i++)
     {
-        size = qMax(size, mChildren[i]->getSize());
+        size = qMax(size, mChildren[i]->size());
     }
     if (size % 8 != 0)
     {

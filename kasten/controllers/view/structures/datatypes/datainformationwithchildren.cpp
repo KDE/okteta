@@ -56,7 +56,7 @@ bool DataInformationWithChildren::setData(const QVariant& value,
         if (mChildren[i]->setData(value, inf, out, byteOrder, address + readBytes,
                 remaining - readBytes, bitOffset))
             return true; //found -> done job
-        readBytes += mChildren[i]->getSize() / 8;
+        readBytes += mChildren[i]->size() / 8;
 
     }
     return false;
@@ -112,7 +112,7 @@ QList<const DataInformation*> DataInformationWithChildren::findChildrenWithName(
         DataInformation* data = childAt(i);
         if (data == upTo)
             break;
-        if (data->getName() == name)
+        if (data->name() == name)
             retList.append(data);
         DataInformationWithChildren* dataWithChildren =
                 dynamic_cast<DataInformationWithChildren*> (data);
@@ -148,12 +148,12 @@ QVariant DataInformationWithChildren::data(int column, int role) const
             {
                 return QString("[%1]").arg(mIndex);
             }
-            return getName();
+            return name();
         }
         else if (column == 1)
-            return getTypeName();
+            return typeName();
         else if (column == 2)
-            return getValueString(); //empty QString
+            return valueString(); //empty QString
         else
             return QVariant();
     }
@@ -161,8 +161,8 @@ QVariant DataInformationWithChildren::data(int column, int role) const
     {
         return i18np("Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 child)",
                 "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)",
-                childCount(), getName(), getValueString(), getTypeName(),
-                getSizeString());
+                childCount(), name(), valueString(), typeName(),
+                sizeString());
     }
     else
         return QVariant();

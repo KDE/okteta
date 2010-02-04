@@ -31,16 +31,16 @@ Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Int64,SignedPrimitive)
 
 public:
-    inline int getSize() const
+    inline int size() const
     {
         return 64;
     }
-    inline QString getTypeName() const
+    inline QString typeName() const
     {
         return i18nc("Data type", "long");
     }
     DATAINFORMATION_CLONE(Int64)
-    virtual QString getValueString() const;
+    virtual QString valueString() const;
 
     virtual void setWidgetData(QWidget* w) const;
 

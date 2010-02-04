@@ -34,13 +34,13 @@ public:
     EnumDataInformation(const EnumDataInformation& e);
     DATAINFORMATION_CLONE(Enum)
     virtual ~EnumDataInformation();
-    QString getValueString() const;
+    QString valueString() const;
     QString getTypeString() const;
-    QString getTypeName() const;
+    QString typeName() const;
     QVariant primitiveValue() const;
-    inline int getSize() const
+    inline int size() const
     {
-        return mValue->getSize();
+        return mValue->size();
     }
     inline int displayBase() const
     {

@@ -21,7 +21,7 @@
  */
 #include "bool16datainformation.h"
 
-QString Bool16DataInformation::getValueString() const
+QString Bool16DataInformation::valueString() const
 {
     if (!mIsValid)
         return i18nc("invalid value (out of range)", "<invalid>");

@@ -21,7 +21,7 @@
  */
 #include "bool8datainformation.h"
 
-QString Bool8DataInformation::getValueString() const
+QString Bool8DataInformation::valueString() const
 {
     if (!mIsValid)
         return i18nc("invalid value (out of range)", "<invalid>");
