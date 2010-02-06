@@ -5,6 +5,8 @@ Type=Service
 ServiceTypes=KPluginInfo
 
 Name=Bitfields test
+Name[uk]=Перевірка полів бітів
+Name[x-test]=xxBitfields testxx
 
 X-KDE-PluginInfo-Author=Alex Richardson
 X-KDE-PluginInfo-Email=alex.richardson@gmx.de
