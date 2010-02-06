@@ -103,6 +103,7 @@
 
     <varlistentry>
     <term><menuchoice>
+    <shortcut><keycap>F5</keycap></shortcut>
     <guimenu>File</guimenu>
     <guimenuitem>Reload</guimenuitem>
     </menuchoice></term>
@@ -166,7 +167,7 @@
     <variablelist>
 
     <varlistentry>
-    <term><guilabel>Read only</guilabel></term>
+    <term><guilabel>Set Read-only</guilabel></term>
     <listitem><para>When set, changes may not be made to the loaded
     byte array.</para></listitem>
     </varlistentry>
@@ -192,9 +193,6 @@
 
     <varlistentry>
     <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;<keycap>W</keycap></keycombo>
-    </shortcut>
     <guimenu>File</guimenu>
     <guimenuitem>Close All</guimenuitem>
     </menuchoice></term>
@@ -203,9 +201,6 @@
 
     <varlistentry>
     <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;<keycap>W</keycap></keycombo>
-    </shortcut>
     <guimenu>File</guimenu>
     <guimenuitem>Close All Other</guimenuitem>
     </menuchoice></term>
@@ -313,6 +308,28 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
 
     <varlistentry>
     <term><menuchoice>
+    <guimenu>Edit</guimenu>
+    <guisubmenu>Insert</guisubmenu>
+    </menuchoice></term>
+    <listitem>
+    <variablelist>
+    <varlistentry>
+    <term><menuchoice>
+    <guimenuitem>Insert Pattern...</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Insert a specified string of bytes at the cursor.</action></para>
+    <para>Options in the dialog box allow you to specify the number of insertion of the pattern
+    and it's format (Hexadecimal, Decimal, Octal, Binary, Character(s) or UTF-8).</para>
+    <!--para>If <guilabel>Repeat pattern</guilabel> is checked, the specified pattern
+    will be inserted repeatedly to reach the length set in
+    <guilabel>Size</guilabel>.</para--></listitem>
+    </varlistentry>
+    </variablelist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
     <shortcut>
     <keycombo action="simul">&Ctrl;<keycap>A</keycap></keycombo>
     </shortcut>
@@ -348,20 +365,6 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     <varlistentry>
     <term><menuchoice>
     <shortcut>
-    <keycombo action="simul">&Ctrl;<keycap>F</keycap></keycombo>
-    </shortcut>
-    <guimenu>Edit</guimenu>
-    <guimenuitem>Find...</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Find a specified pattern in the document.</action>
-    Hexadecimal, decimal, octal, binary or text patterns can be searched for.</para>
-    <para>Options in the dialog box allow you to specify the starting point,
-    direction and range of the search.</para></listitem>
-    </varlistentry>
-
-    <varlistentry>
-    <term><menuchoice>
-    <shortcut>
     <keycombo action="simul"><keycap>Ins</keycap></keycombo>
     </shortcut>
     <guimenu>Edit</guimenu>
@@ -372,6 +375,20 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     <note><para>Overwrite mode is implemented to be very strict, it is not possible to
     change the size of the data (no appending or removing of bytes).</para></note>
     </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Ctrl;<keycap>F</keycap></keycombo>
+    </shortcut>
+    <guimenu>Edit</guimenu>
+    <guimenuitem>Find...</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Find a specified pattern in the document.</action>
+    Hexadecimal, decimal, octal, binary or text patterns can be searched for.</para>
+    <para>Options in the dialog box allow you to specify the starting point,
+    direction and range of the search.</para></listitem>
     </varlistentry>
 
     <varlistentry>
@@ -424,31 +441,6 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     </menuchoice></term>
     <listitem><para><action>Move the cursor to a specified
     offset.</action></para></listitem>
-    </varlistentry>
-
-    <varlistentry>
-    <term><menuchoice>
-    <guimenu>Edit</guimenu>
-    <guisubmenu>Insert</guisubmenu>
-    </menuchoice></term>
-    <listitem>
-    <variablelist>
-    <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;<keycap>Ins</keycap></keycombo>
-    </shortcut>
-    <guimenuitem>Insert Pattern...</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Insert a specified string of bytes at the cursor.</action></para>
-    <para>Options in the dialog box allow you to specify the number of insertion of the pattern
-    and it's format (Hexadecimal, Decimal, Octal, Binary, Character(s) or UTF-8).</para>
-    <!--para>If <guilabel>Repeat pattern</guilabel> is checked, the specified pattern
-    will be inserted repeatedly to reach the length set in
-    <guilabel>Size</guilabel>.</para--></listitem>
-    </varlistentry>
-    </variablelist>
-    </listitem>
     </varlistentry>
 
 </variablelist>
@@ -686,18 +678,6 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     <varlistentry>
     <term><menuchoice>
     <shortcut>
-    <keycombo action="simul">&Alt;<keycap>Down</keycap></keycombo>
-    </shortcut>
-    <guimenu>Bookmarks</guimenu>
-    <guimenuitem>Goto Next Bookmark</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Move the cursor to the next
-    bookmark.</action></para></listitem>
-    </varlistentry>
-
-    <varlistentry>
-    <term><menuchoice>
-    <shortcut>
     <keycombo action="simul">&Alt;<keycap>Up</keycap></keycombo>
     </shortcut>
     <guimenu>Bookmarks</guimenu>
@@ -706,6 +686,19 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     <listitem><para><action>Move the cursor to the previous
     bookmark.</action></para></listitem>
     </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Alt;<keycap>Down</keycap></keycombo>
+    </shortcut>
+    <guimenu>Bookmarks</guimenu>
+    <guimenuitem>Go to Next Bookmark</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Move the cursor to the next
+    bookmark.</action></para></listitem>
+    </varlistentry>
+
 </variablelist>
 </sect1>
 
