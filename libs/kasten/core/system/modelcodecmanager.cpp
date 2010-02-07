@@ -34,6 +34,7 @@
 // KDE
 #include <KIO/NetAccess>
 #include <KFileDialog>
+#include <KPushButton>
 #include <KLocale>
 
 
@@ -117,7 +118,23 @@ void ModelCodecManager::exportDocument( AbstractModelExporter* exporter,
         i18nc( "@title:window", "Export" );
     do
     {
-        const KUrl exportUrl = KFileDialog::getSaveUrl( /*mWorkingUrl.url()*/QString(), QString(), mWidget, dialogTitle );
+        KFileDialog exportFileDialog( /*mWorkingUrl.url()*/KUrl(), QString(), mWidget );
+
+        exportFileDialog.setOperationMode( KFileDialog::Saving );
+        exportFileDialog.setMode( KFile::File );
+        const QStringList mimeTypes = QStringList() << exporter->remoteMimeType();
+        exportFileDialog.setMimeFilter( mimeTypes );
+        exportFileDialog.setCaption( dialogTitle );
+        const KGuiItem exportGuiItem( i18nc("@action:button",
+                                            "&Export"),
+                                      "document-export",
+                                      i18nc("@info:tooltip",
+                                            "Export the data into the file with the entered name.") );
+        exportFileDialog.okButton()->setGuiItem( exportGuiItem );
+
+        exportFileDialog.exec();
+
+        const KUrl exportUrl = exportFileDialog.selectedUrl();
 
         if( !exportUrl.isEmpty() )
         {
