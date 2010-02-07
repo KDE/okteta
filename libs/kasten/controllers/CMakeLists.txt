@@ -45,6 +45,11 @@ set( DOCUMENTSBROWSERCONTROLLER_SRCS
   documentsystem/documentsbrowser/documentsview.cpp
   documentsystem/documentsbrowser/documentstoolview.cpp
 )
+set( TERMINALCONTROLLER_SRCS
+  document/terminal/terminaltool.cpp
+  document/terminal/terminalview.cpp
+  document/terminal/terminaltoolview.cpp
+)
 set( MODIFIEDBARCONTROLLER_SRCS
   document/modified/modifiedbarcontroller.cpp
 )
@@ -119,6 +124,7 @@ set( kastencontroller_LIB_SRCS
   ${CLOSECONTROLLER_SRCS}
   ${FILESYSTEMBROWSERCONTROLLER_SRCS}
   ${DOCUMENTSBROWSERCONTROLLER_SRCS}
+  ${TERMINALCONTROLLER_SRCS}
   ${VERSIONCONTROLLER_SRCS}
   ${VERSIONVIEWCONTROLLER_SRCS}
   ${MODIFIEDBARCONTROLLER_SRCS}
@@ -179,6 +185,7 @@ target_link_libraries( kastencontrollers
   kastengui
   kastencore
   ${KDE4_KIO_LIBS}
+  ${KDE4_KPARTS_LIBS}
   ${KDE4_KFILE_LIBS}
 )
 set_target_properties( kastencontrollers  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta program, part of the KDE project.
 
-    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -50,6 +50,8 @@
 #include <documentsystem/filesystembrowser/filesystembrowsertool.h>
 #include <documentsystem/documentsbrowser/documentstoolview.h>
 #include <documentsystem/documentsbrowser/documentstool.h>
+#include <document/terminal/terminaltoolview.h>
+#include <document/terminal/terminaltool.h>
 // controllers
 #include <overwriteonly/overwriteonlycontroller.h>
 #include <overwritemode/overwritemodecontroller.h>
@@ -158,6 +160,7 @@ void OktetaMainWindow::setupControllers()
 
     addTool( new FileSystemBrowserToolView(new FileSystemBrowserTool( mProgram->documentManager() )) );
     addTool( new DocumentsToolView(new DocumentsTool( mProgram->documentManager() )) );
+    addTool( new TerminalToolView(new TerminalTool( mProgram->documentManager() )) );
 #ifndef NDEBUG
     addTool( new VersionViewToolView(new VersionViewTool()) );
 #endif
