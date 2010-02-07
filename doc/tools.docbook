@@ -100,7 +100,7 @@ just used for development, so no need to document it. -->
 
   <varlistentry>
     <term>Bookmarks</term>
-    <listitem><para>This tool can be used to manage the bookmark, alternatively
+    <listitem><para>This tool can be used to manage the bookmarks, alternatively
     to the <link linkend="bookmarks-menu"><guimenu>Bookmarks</guimenu> menu</link>.
     <note><para>Bookmarks are currently only transient and not saved if you
     close a byte array or the whole program.</para></note></para></listitem>
