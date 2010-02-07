@@ -251,7 +251,7 @@ void PODDecoderTool::setData( const QVariant& data, int podId )
     int removedBytesSize = bytesSize;
     if( bytesSize != oldValueSize )
     {
-        const int sizeLeft = mByteArrayModel->size() - mCursorIndex;
+//         const int sizeLeft = mByteArrayModel->size() - mCursorIndex;
         const Answer answer = Cancel; // TODO: non-persistent editor closes on new dialog -> crash after dialog
 //             mDifferentSizeDialog ? mDifferentSizeDialog->query( bytesSize, oldValueSize, sizeLeft ) : Cancel;
         if( answer == Cancel )
