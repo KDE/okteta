@@ -5,6 +5,7 @@ Type=Service
 ServiceTypes=KPluginInfo
 
 Name=Bitfields test
+Name[sv]=Bitfälttest
 Name[uk]=Перевірка полів бітів
 Name[x-test]=xxBitfields testxx
 
