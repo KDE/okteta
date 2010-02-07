@@ -106,7 +106,7 @@ void FileSystemBrowserView::setDirOperatorUrl( const KUrl& url )
 
 void FileSystemBrowserView::setNavigatorUrl( const KUrl& url )
 {
-    mUrlNavigator->setUrl( url );
+    mUrlNavigator->setLocationUrl( url );
 }
 
 void FileSystemBrowserView::syncCurrentDocumentDirectory()
