@@ -26,7 +26,6 @@
 // Qt
 #include <QtGui/QWidget>
 
-
 class KDirOperator;
 class KUrlNavigator;
 class KUrl;

@@ -28,9 +28,6 @@
 // Kasten gui
 #include <abstracttoolview.h>
 
-class KDirOperator;
-class KUrlNavigator;
-
 
 namespace Kasten
 {
