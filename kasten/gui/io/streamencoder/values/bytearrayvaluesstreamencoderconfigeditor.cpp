@@ -77,11 +77,6 @@ ByteArrayValuesStreamEncoderConfigEditor::ByteArrayValuesStreamEncoderConfigEdit
     pageLayout->setRowStretch( 2, 10 );
 }
 
-QString ByteArrayValuesStreamEncoderConfigEditor::name() const
-{
-    return i18nc("@item name of the encoding result","Values");
-}
-
 
 AbstractSelectionView* ByteArrayValuesStreamEncoderConfigEditor::createPreviewView() const
 {

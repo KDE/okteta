@@ -44,11 +44,6 @@ bool ModelEncoderFileSystemExporterConfigEditor::isValid() const
     return mEncoderConfigEditor->isValid();
 }
 
-QString ModelEncoderFileSystemExporterConfigEditor::name() const
-{
-    return mEncoderConfigEditor->name();
-}
-
 AbstractSelectionView* ModelEncoderFileSystemExporterConfigEditor::createPreviewView() const
 {
     return mEncoderConfigEditor->createPreviewView();

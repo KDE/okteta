@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008,2010 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -49,8 +49,6 @@ class KASTENGUI_EXPORT AbstractModelStreamEncoderConfigEditor : public QWidget
     virtual bool isValid() const;
     /// default returns none
     virtual AbstractSelectionView* createPreviewView() const;
-
-    virtual QString name() const = 0;
 
   Q_SIGNALS:
     void validityChanged( bool isValid );

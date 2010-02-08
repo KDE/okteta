@@ -45,7 +45,6 @@ class ByteArrayUuencodingStreamEncoderConfigEditor : public AbstractModelStreamE
 
   public: // AbstractModelStreamEncoderConfigEditor API
     virtual AbstractSelectionView* createPreviewView() const;
-    virtual QString name() const;
 
   protected Q_SLOTS:
     void onSettingsChanged();

@@ -63,12 +63,6 @@ ByteArrayBase32StreamEncoderConfigEditor::ByteArrayBase32StreamEncoderConfigEdit
     pageLayout->addRow( encodingTypeLabel, mEncodingSelect );
 }
 
-QString ByteArrayBase32StreamEncoderConfigEditor::name() const
-{
-    return i18nc("@item name of the encoding result","Base32");
-}
-
-
 AbstractSelectionView* ByteArrayBase32StreamEncoderConfigEditor::createPreviewView() const
 {
     return new ByteArrayTextStreamEncoderPreview( mEncoder );

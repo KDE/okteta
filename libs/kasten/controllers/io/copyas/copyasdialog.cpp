@@ -39,7 +39,9 @@
 namespace Kasten
 {
 
-CopyAsDialog::CopyAsDialog( AbstractModelStreamEncoderConfigEditor* configEditor, QWidget* parent )
+CopyAsDialog::CopyAsDialog( const QString& remoteTypeName,
+                            AbstractModelStreamEncoderConfigEditor* configEditor,
+                            QWidget* parent )
   : KDialog( parent ),
     mConfigEditor( configEditor )
 {
@@ -59,7 +61,7 @@ CopyAsDialog::CopyAsDialog( AbstractModelStreamEncoderConfigEditor* configEditor
     // config editor
     QWidget* editorPage = new QWidget( splitter );
     QVBoxLayout* editorPageLayout = new QVBoxLayout( editorPage );
-    QLabel* editorLabel = new QLabel( mConfigEditor->name() );
+    QLabel* editorLabel = new QLabel( remoteTypeName );
     QFont font = editorLabel->font();
     font.setBold( true );
     editorLabel->setFont( font );

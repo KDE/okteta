@@ -25,9 +25,6 @@
 
 // KDE
 #include <KDialog>
-// Qt
-#include <QtCore/QByteArray>
-#include <QtCore/QString>
 
 
 namespace Kasten
@@ -44,7 +41,9 @@ class CopyAsDialog : public KDialog
   Q_OBJECT
 
   public:
-    explicit CopyAsDialog( AbstractModelStreamEncoderConfigEditor* configEditor, QWidget* parent = 0 );
+    CopyAsDialog( const QString& remoteTypeName, AbstractModelStreamEncoderConfigEditor* configEditor,
+                  QWidget* parent = 0 );
+
     virtual ~CopyAsDialog();
 
   public:

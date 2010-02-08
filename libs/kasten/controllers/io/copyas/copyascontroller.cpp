@@ -128,7 +128,7 @@ void CopyAsController::onActionTriggered( QAction *action )
 
     if( configEditor )
     {
-        CopyAsDialog* dialog = new CopyAsDialog( configEditor );
+        CopyAsDialog* dialog = new CopyAsDialog( encoder->remoteTypeName(), configEditor );
         dialog->setData( mModel, selection );
         if( !dialog->exec() )
             return;

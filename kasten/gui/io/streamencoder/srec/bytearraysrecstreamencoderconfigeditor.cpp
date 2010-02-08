@@ -63,12 +63,6 @@ ByteArraySRecStreamEncoderConfigEditor::ByteArraySRecStreamEncoderConfigEditor( 
     pageLayout->addRow( addressSizeLabel, mAddressSizeSelect );
 }
 
-QString ByteArraySRecStreamEncoderConfigEditor::name() const
-{
-    return i18nc("@item name of the encoding result","S-Record");
-}
-
-
 AbstractSelectionView* ByteArraySRecStreamEncoderConfigEditor::createPreviewView() const
 {
     return new ByteArrayTextStreamEncoderPreview( mEncoder );

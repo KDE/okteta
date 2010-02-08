@@ -65,11 +65,6 @@ ByteArrayIHexStreamEncoderConfigEditor::ByteArrayIHexStreamEncoderConfigEditor( 
     pageLayout->addRow( addressSizeLabel, mAddressSizeSelect );
 }
 
-QString ByteArrayIHexStreamEncoderConfigEditor::name() const
-{
-    return i18nc("@item name of the encoding result","Intel Hex");
-}
-
 
 AbstractSelectionView* ByteArrayIHexStreamEncoderConfigEditor::createPreviewView() const
 {

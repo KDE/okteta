@@ -95,11 +95,6 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
     pageLayout->addRow( unsignedAsHexadecimalLabel, mUnsignedAsHexadecimalCheck );
 }
 
-QString ByteArraySourceCodeStreamEncoderConfigEditor::name() const
-{
-    return i18nc("@item name of the encoding result","C Array");
-}
-
 bool ByteArraySourceCodeStreamEncoderConfigEditor::isValid() const
 {
     return true; // TODO: warn if not all selected bytes are used due to the data type length

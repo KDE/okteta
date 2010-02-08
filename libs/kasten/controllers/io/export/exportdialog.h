@@ -25,9 +25,6 @@
 
 // KDE
 #include <KDialog>
-// Qt
-#include <QtCore/QByteArray>
-#include <QtCore/QString>
 
 
 namespace Kasten
@@ -44,7 +41,9 @@ class ExportDialog : public KDialog
   Q_OBJECT
 
   public:
-    explicit ExportDialog( AbstractModelExporterConfigEditor* configEditor, QWidget* parent = 0 );
+    ExportDialog( const QString& remoteTypeName, AbstractModelExporterConfigEditor* configEditor,
+                  QWidget* parent = 0 );
+
     virtual ~ExportDialog();
 
   public:

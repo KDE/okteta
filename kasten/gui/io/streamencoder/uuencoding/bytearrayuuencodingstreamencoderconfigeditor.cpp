@@ -74,12 +74,6 @@ ByteArrayUuencodingStreamEncoderConfigEditor::ByteArrayUuencodingStreamEncoderCo
     pageLayout->addRow( encodingTypeLabel, mEncodingSelect );
 }
 
-QString ByteArrayUuencodingStreamEncoderConfigEditor::name() const
-{
-    return i18nc("@item name of the encoding result","Uuencoding");
-}
-
-
 AbstractSelectionView* ByteArrayUuencodingStreamEncoderConfigEditor::createPreviewView() const
 {
     return new ByteArrayTextStreamEncoderPreview( mEncoder );

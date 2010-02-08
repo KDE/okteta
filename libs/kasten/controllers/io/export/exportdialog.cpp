@@ -38,7 +38,9 @@
 namespace Kasten
 {
 
-ExportDialog::ExportDialog( AbstractModelExporterConfigEditor* configEditor, QWidget* parent )
+ExportDialog::ExportDialog( const QString& remoteTypeName,
+                            AbstractModelExporterConfigEditor* configEditor,
+                            QWidget* parent )
   : KDialog( parent ),
     mConfigEditor( configEditor )
 {
@@ -58,7 +60,7 @@ ExportDialog::ExportDialog( AbstractModelExporterConfigEditor* configEditor, QWi
     // config editor
     QWidget* editorPage = new QWidget( splitter );
     QVBoxLayout* editorPageLayout = new QVBoxLayout( editorPage );
-    QLabel* editorLabel = new QLabel( mConfigEditor->name() );
+    QLabel* editorLabel = new QLabel( remoteTypeName );
     QFont font = editorLabel->font();
     font.setBold( true );
     editorLabel->setFont( font );

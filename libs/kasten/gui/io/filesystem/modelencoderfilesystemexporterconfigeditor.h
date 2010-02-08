@@ -44,7 +44,6 @@ class KASTENGUI_EXPORT ModelEncoderFileSystemExporterConfigEditor : public Abstr
   public: // AbstractModelExporterConfigEditor API
     virtual bool isValid() const;
     virtual AbstractSelectionView* createPreviewView() const;
-    virtual QString name() const;
 
   protected:
     AbstractModelStreamEncoderConfigEditor* mEncoderConfigEditor;
