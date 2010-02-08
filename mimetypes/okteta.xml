@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+It comes with ABSOLUTELY NO WARRANTY, to the extent permitted by law. You may
+redistribute copies of update-mime-database under the terms of the GNU General
+Public License. For more information about these matters, see the file named
+COPYING.
+-->
+<!--
+Notes:
+- the mime types in this file are valid with the version 0.40 of the
+  shared-mime-info package.
+- the "fdo #xxxxx" are the wish in the freedesktop.org bug database to include
+  the mime type there.
+-->
+
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="text/x-srecord">
+    <sub-class-of type="text/plain"/>
+    <generic-icon name="text-x-hex"/>
+    <comment>Motorola S-Records</comment>
+    <magic priority="50">
+      <match offset="0" value="S0" type="string">
+        <match offset="4" value="0000" type="string"/>
+      </match>
+    </magic>
+    <glob pattern="*.srec"/>
+<!-- Should these be stand-alone mimetypes?  -->
+    <glob pattern="*.s19"/>
+    <glob pattern="*.s28"/>
+    <glob pattern="*.s37"/>
+  </mime-type>
+
+  <mime-type type="text/x-ihex">
+    <sub-class-of type="text/plain"/>
+    <generic-icon name="text-x-hex"/>
+<!--     <generic-icon name="application-octet-stream"/> -->
+    <comment>Intel Hex file</comment>
+<!--  Intel MCS-86 Object is alternative name?  -->
+    <magic priority="50">
+      <match type="string" offset="0" value=":">
+<!--         <match type="string" offset="from end, how to do?" value=":00000001FF"/> -->
+      </match>
+    </magic>
+    <glob pattern="*.hex"/>
+  </mime-type>
+
+  <mime-type type="text/x-base64">
+    <sub-class-of type="text/plain"/>
+    <generic-icon name="text-x-hex"/>
+    <comment>Base64</comment>
+    <glob pattern="*.base64"/>
+  </mime-type>
+
+  <mime-type type="text/x-base32">
+    <sub-class-of type="text/plain"/>
+    <generic-icon name="text-x-hex"/>
+    <comment>Base32</comment>
+    <glob pattern="*.base32"/>
+  </mime-type>
+
+  <mime-type type="text/x-ascii85">
+    <sub-class-of type="text/plain"/>
+    <generic-icon name="text-x-hex"/>
+    <comment>Ascii85</comment>
+    <glob pattern="*.ascii85"/>
+  </mime-type>
+
+  <mime-type type="text/x-uue">
+    <sub-class-of type="text/plain"/>
+    <generic-icon name="text-x-hex"/>
+    <comment>Uuencoding</comment>
+    <glob pattern="*.uue"/>
+  </mime-type>
+
+</mime-info>

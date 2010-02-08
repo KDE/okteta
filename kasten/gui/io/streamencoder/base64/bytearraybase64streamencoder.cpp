@@ -65,7 +65,7 @@ static inline const char* base64Padding( InputByteIndex index )
 
 
 ByteArrayBase64StreamEncoder::ByteArrayBase64StreamEncoder()
-  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Base64"), QString::fromLatin1("text/plain") )
+  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Base64"), QString::fromLatin1("text/x-base64") )
 {}
 
 

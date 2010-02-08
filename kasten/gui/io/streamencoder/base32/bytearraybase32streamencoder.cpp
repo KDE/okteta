@@ -102,7 +102,7 @@ Base32StreamEncoderSettings::Base32StreamEncoderSettings()
 {}
 
 ByteArrayBase32StreamEncoder::ByteArrayBase32StreamEncoder()
-  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Base32..."), QString::fromLatin1("text/plain") )
+  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Base32..."), QString::fromLatin1("text/x-base32") )
 {}
 
 

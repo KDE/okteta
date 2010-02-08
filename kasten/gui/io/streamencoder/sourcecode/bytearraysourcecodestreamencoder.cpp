@@ -66,7 +66,7 @@ SourceCodeStreamEncoderSettings::SourceCodeStreamEncoderSettings()
 
 
 ByteArraySourceCodeStreamEncoder::ByteArraySourceCodeStreamEncoder()
- : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","C Array..."), QString::fromLatin1("text/plain") )
+ : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","C Array..."), QString::fromLatin1("text/x-csrc") )
 {}
 
 const char* const* ByteArraySourceCodeStreamEncoder::dataTypeNames() const { return PrimitiveDataTypeName; }

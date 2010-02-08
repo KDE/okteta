@@ -39,8 +39,8 @@ static const int MaxPreviewSize = 100;
 
 
 AbstractByteArrayStreamEncoder::AbstractByteArrayStreamEncoder( const QString &remoteTypeName,
-                                                                  const QString &remoteMimeType )
- : AbstractModelStreamEncoder( remoteTypeName, remoteMimeType )
+                                                                const QString &remoteMimeType )
+ : AbstractModelStreamEncoder( remoteTypeName, remoteMimeType, QString::fromLatin1("text/plain") )
 {}
 
 QString AbstractByteArrayStreamEncoder::modelTypeName( AbstractModel* model, const AbstractModelSelection* selection ) const
