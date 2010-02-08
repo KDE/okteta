@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007,2009-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -55,7 +55,8 @@ class KASTENCORE_EXPORT AbstractModelStreamEncoder : public QObject
     AbstractModelStreamEncoder( AbstractModelStreamEncoderPrivate* d );
 
   public:
-    AbstractModelStreamEncoder( const QString& remoteTypeName, const QString& remoteMimeType );
+    AbstractModelStreamEncoder( const QString& remoteTypeName, const QString& remoteMimeType,
+                                const QString& remoteClipboardMimeType = QString() );
 
     virtual ~AbstractModelStreamEncoder();
 
@@ -66,6 +67,8 @@ class KASTENCORE_EXPORT AbstractModelStreamEncoder : public QObject
   public:
     QString remoteTypeName() const;
     QString remoteMimeType() const;
+    // the clipboard does not yet understand mimetype inheritance
+    QString remoteClipboardMimeType() const;
 
   protected:
     Q_DECLARE_PRIVATE( AbstractModelStreamEncoder )

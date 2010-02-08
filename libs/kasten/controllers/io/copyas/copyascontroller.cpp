@@ -151,7 +151,7 @@ void CopyAsController::onActionTriggered( QAction *action )
     exportDataBuffer.close();
 
     QMimeData *mimeData = new QMimeData;
-    mimeData->setData( encoder->remoteMimeType(), exportData );
+    mimeData->setData( encoder->remoteClipboardMimeType(), exportData );
     QApplication::clipboard()->setMimeData( mimeData, QClipboard::Clipboard );
 
     QApplication::restoreOverrideCursor();

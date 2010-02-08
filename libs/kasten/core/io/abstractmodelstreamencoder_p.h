@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007,2009-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -33,27 +33,31 @@ class AbstractModelStreamEncoderPrivate
 {
   public:
     explicit AbstractModelStreamEncoderPrivate( AbstractModelStreamEncoder* parent,
-                                                const QString& remoteTypeName, const QString& remoteMimeType );
+                                                const QString& remoteTypeName, const QString& remoteMimeType,
+                                                const QString& remoteClipboardMimeType );
 
     virtual ~AbstractModelStreamEncoderPrivate();
 
   public:
     const QString& remoteTypeName() const;
     const QString& remoteMimeType() const;
+    const QString& remoteClipboardMimeType() const;
 
   protected:
     AbstractModelStreamEncoder* const q_ptr;
 
     const QString mRemoteTypeName;
     const QString mRemoteMimeType;
+    const QString mRemoteClipboardMimeType;
 };
 
 
 inline AbstractModelStreamEncoderPrivate::AbstractModelStreamEncoderPrivate( AbstractModelStreamEncoder* parent,
-    const QString& remoteTypeName, const QString& remoteMimeType )
+    const QString& remoteTypeName, const QString& remoteMimeType, const QString& remoteClipboardMimeType )
   : q_ptr( parent ),
     mRemoteTypeName( remoteTypeName ),
-    mRemoteMimeType( remoteMimeType )
+    mRemoteMimeType( remoteMimeType ),
+    mRemoteClipboardMimeType( remoteClipboardMimeType.isEmpty() ? remoteMimeType : remoteClipboardMimeType )
 {}
 
 inline AbstractModelStreamEncoderPrivate::~AbstractModelStreamEncoderPrivate()
@@ -61,6 +65,8 @@ inline AbstractModelStreamEncoderPrivate::~AbstractModelStreamEncoderPrivate()
 
 inline const QString& AbstractModelStreamEncoderPrivate::remoteTypeName() const { return mRemoteTypeName; }
 inline const QString& AbstractModelStreamEncoderPrivate::remoteMimeType() const { return mRemoteMimeType; }
+inline const QString& AbstractModelStreamEncoderPrivate::remoteClipboardMimeType() const
+{ return mRemoteClipboardMimeType; }
 
 }
 
