@@ -74,8 +74,7 @@ CopyAsDialog::CopyAsDialog( AbstractModelStreamEncoderConfigEditor* configEditor
 
     if( mPreviewView )
     {
-        // preview TODO: hack! This preview title does not now anything about bytes and the bytearraytreamencoder preview
-        QGroupBox* previewBox = new QGroupBox( i18nc("@title:group","Preview (max. first 100 bytes)"), this );
+        QGroupBox* previewBox = new QGroupBox( i18nc("@title:group","Preview"), this );
         splitter->addWidget( previewBox );
 
         QHBoxLayout* previewBoxLayout = new QHBoxLayout( previewBox );

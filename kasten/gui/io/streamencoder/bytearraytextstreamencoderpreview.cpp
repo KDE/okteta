@@ -27,6 +27,7 @@
 // KDE
 #include <KTextEdit>
 #include <KGlobalSettings>
+#include <KLocale>
 
 
 namespace Kasten
@@ -39,6 +40,7 @@ ByteArrayTextStreamEncoderPreview::ByteArrayTextStreamEncoderPreview( AbstractBy
     mWidget->setReadOnly( true );
     mWidget->setLineWrapMode( QTextEdit::NoWrap );
     mWidget->setFont( KGlobalSettings::fixedFont() );
+    mWidget->setToolTip( i18n("The preview uses maximal the first 100 bytes.") );
 
     connect( mEncoder, SIGNAL(settingsChanged()), SLOT(update()) );
 }
