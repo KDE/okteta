@@ -82,7 +82,7 @@ void TerminalView::createTerminalPart()
             currentUrl = QDir::homePath();
         onCurrentUrlChanged( currentUrl );
     }
-};
+}
 
 void TerminalView::onCurrentUrlChanged( const KUrl& currentUrl )
 {
