@@ -277,7 +277,11 @@ Done for 0.5:
 * added streamencoder for Base32 (classic, Base32Hex, z-base-32)
 * added streamencoder for Base85 (Ascii85 for now)
 * added streamencoder for Uuencoding (historical, Base64, Xxencoding)
-* added streamencoder for S-Record
+* added streamencoder for S-Record (16,24,32-bit address size)
+* added streamencoder for Intel Hex
+* added Terminal tool
+* added property remoteClipboardMimeType to AbstractModelStreamEncoder (clipboard does not know inheritance)
+* export dialog uses remoteMimeType for selecting the file to export to
 
 Next to work on:
 ----------------------------------
@@ -308,7 +312,9 @@ Later on:
 ---------
 * DecodingTable/Structure tool: differ between invalid value and unavailable
 * bookmarks storing
-* add StackedViews
+* stream encoders/generators/etc. should have access to the data if parameters depend on current data
+* extend Export method to set default file extension and list filter
+* add StackedViews and two-view-only layout
 * max size of bytearrays (e.g. 8.bit, 16-bit, 32-bit, 64-bit), also defines shown offset width
 * think about making the ByteArray* things interface only to the AbstractModel
   for this improve template functions findDocument with multiple interfaces given
@@ -330,7 +336,6 @@ Later on:
 * fix info and string docker (all with update function) to just work on update, react to change of data origin
 * add option for offset and char comments to Source code encoder (cmp #163204)
 * Support for Drop, both Import into and Open, also not just url, but also data
-* "New" can also use generator and clipboard
 * snippets tool which can be used to put data aside (variant of clipboard)
 * rework import and paste as:
     <!Menu name="import" append="open_merge">
@@ -351,13 +356,13 @@ See "Insert", is generated as well as from a source, so perhaps join there?
   options to solve problem (e.g. make file readable)
 * add proper support for blocking processes like printing, string search, loading or filter:
   show progress, allow cancelling, block only related model
-* input of offset or data should detect type by prefixes like 0x or such, by new variant Auto.
+* input of offset or data should detect type by prefixes like 0x or such,
+  by new variant Auto, e.g. for search/replace/goto
 * test handling of readonly files
 * more explicit titels for undo/redo actions (range, data), also paste, drag, and cut
 * add support for memory mapped files (includes enabling overwrite controller again)
 * think about turning insert pattern & Co. into a tool
 * add close button-on-hovering to Documents browser, also make unsynced button clickable
-* add utf-8 input variant to search/replace, also enable auto-detect-modus
 * session support: full storing and restoring of view/model state
 * add support for more commandline options
 * complete work on input controllers for the bytearray view
@@ -383,13 +388,11 @@ See "Insert", is generated as well as from a source, so perhaps join there?
 * make all jobs (searching, filter operations, ...) cancellable, e.g. using ESC
 * add versions to view model, to be synched with the data model (if created later, create prior versions on demand)
 * make status bar entries non-readonly, e.g. for offset->goto, selection,...
-* add Modified state symbol for Readonly to statusbar
 * search for other ideas in Inkscape
 * make bookmarks program-wide, switch doc if needed.
-* add bookmark tool
 * hovering drag over bookmark in tool should select it
 * a "painting" cursor tool which stamps a pattern, chosen from a selection
-* option to paint background of color dependent on value (0-white, 255-black)
+* option to paint foreground/background of color dependent on value (0-white, 255-black)
 * overview with pixels for bytes each in color of bytetext
 * store bookmarks for usage on further opening, similar to Okular's memory
 * bookmarks to load vs. bookmarks/marked regions in loaded documents? lokal vs. global perhaps? search inside.
