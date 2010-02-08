@@ -31,6 +31,7 @@ Name[x-test]=xxELF structurexx
 Name[zh_TW]=ELF 結構
 Comment=Structure for Executable and Linkable Format (ELF)
 Comment[de]=Struktur für das „Executable and Linkable Format“ (ELF)
+Comment[en_GB]=Structure for Executable and Linkable Format (ELF)
 Comment[es]=Estructura para el formato ejecutable y enlazable (ELF)
 Comment[sv]=Struktur för formatet Executable and Linkable Format (ELF)
 Comment[uk]=Структура файлів у форматі Executable and Linkable Format (ELF)
