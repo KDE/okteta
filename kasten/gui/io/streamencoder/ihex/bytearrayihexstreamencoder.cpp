@@ -153,7 +153,7 @@ void streamEndOfFile( QTextStream& textStream, unsigned char* line,
 
 
 ByteArrayIHexStreamEncoder::ByteArrayIHexStreamEncoder()
-  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Intel Hex..."), QString::fromLatin1("text/x-ihex") )
+  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Intel Hex"), QString::fromLatin1("text/x-ihex") )
 {}
 
 

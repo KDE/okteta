@@ -161,7 +161,7 @@ void streamBlockEnd( QTextStream& textStream, unsigned char* line,
 
 
 ByteArraySRecStreamEncoder::ByteArraySRecStreamEncoder()
-  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","S-Record..."), QString::fromLatin1("text/x-srecord") )
+  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","S-Record"), QString::fromLatin1("text/x-srecord") )
 {}
 
 

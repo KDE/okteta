@@ -105,7 +105,7 @@ UuencodingStreamEncoderSettings::UuencodingStreamEncoderSettings()
 {}
 
 ByteArrayUuencodingStreamEncoder::ByteArrayUuencodingStreamEncoder()
-  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Uuencoding..."), QString::fromLatin1("text/x-uue") )
+  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Uuencoding"), QString::fromLatin1("text/x-uue") )
 {}
 
 
