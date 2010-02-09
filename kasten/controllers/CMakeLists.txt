@@ -36,6 +36,7 @@ macro_bool_to_01( QCA2_FOUND  HAVE_QCA2 )
 configure_file( config-qca2.h.cmake  ${CMAKE_CURRENT_BINARY_DIR}/config-qca2.h )
 
 set( DOCUMENTINFOCONTROLLER_SRCS
+  document/info/bytearraymodeliodevice.cpp
   document/info/documentinfotool.cpp
   document/info/documentinfoview.cpp
   document/info/documentinfotoolview.cpp

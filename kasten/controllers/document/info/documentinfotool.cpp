@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008,2010 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,6 +23,7 @@
 #include "documentinfotool.h"
 
 // lib
+#include "bytearraymodeliodevice.h"
 #include <bytearraydocument.h>
 // Kasten core
 #include <documentsyncmanager.h>
@@ -34,16 +35,27 @@
 #include <KUrl>
 // Qt
 #include <QtGui/QApplication>
+#include <QtCore/QTimer>
 
 
 namespace Kasten
 {
+static const int mimeTypeUpdateTimeInterval = 500; // msec
+
 
 DocumentInfoTool::DocumentInfoTool( DocumentSyncManager* syncManager )
- : mDocument( 0 ), mByteArrayModel( 0 ), mSynchronizer( 0 ),
-    mDocumentSyncManager( syncManager )
+  : mDocument( 0 ),
+    mByteArrayModel( 0 ),
+    mSynchronizer( 0 ),
+    mDocumentSyncManager( syncManager ),
+    mMimeTypeUpdateTimer( new QTimer(this) ),
+    mMimeType( 0 )
 {
     setObjectName( "DocumentInfo" );
+
+    mMimeTypeUpdateTimer->setInterval( mimeTypeUpdateTimeInterval );
+    mMimeTypeUpdateTimer->setSingleShot( true );
+    connect( mMimeTypeUpdateTimer, SIGNAL(timeout()), SLOT(updateMimeType()) );
 }
 
 //TODO: file or document or ...?
@@ -52,31 +64,7 @@ QString DocumentInfoTool::documentTitle() const
 {
     return mDocument ? mDocument->title() : QString();
 }
-KMimeType::Ptr DocumentInfoTool::mimeType() const
-{
-    KMimeType::Ptr result;
-    if( mDocument )
-    {
-#if 0
-we have to create a QIODevice for AbstractByteArrayModel and 
-do delayed tests for the mimetype on changes and cache the result.
 
-While KMimeType does not support QIODevices this code can be reused:
-KMimeType::Ptr KMimeType::findByContent( const QByteArray &data, int *accuracy )
-{
-    QBuffer buffer(const_cast<QByteArray *>(&data));
-    buffer.open(QIODevice::ReadOnly);
-    QByteArray cache;
-    return KMimeTypeFactory::self()->findFromContent(
-        &buffer, KMimeTypeFactory::AllRules, accuracy, cache );
-}
-#endif
-
-        const KUrl url = mDocumentSyncManager->urlOf( mDocument );
-        result = KMimeType::findByUrl( url, 0, true );
-    }
-    return result;
-}
 QString DocumentInfoTool::location() const
 {
     QString result;
@@ -87,6 +75,7 @@ QString DocumentInfoTool::location() const
     }
     return result;
 }
+
 int DocumentInfoTool::documentSize() const
 {
     int documentSize = -1;
@@ -129,8 +118,36 @@ void DocumentInfoTool::setTargetModel( AbstractModel* model )
     emit documentSizeChanged( documentSize );
 }
 
+// TODO: should this be done in a worker thread, to not block the UI?
+void DocumentInfoTool::updateMimeType()
+{
+    KMimeType::Ptr currentMimeType;
+
+    if( mDocument )
+    {
+        // TODO: also get file mode, if available, for findByNameAndContent()
+        const QString filename = mDocumentSyncManager->urlOf( mDocument ).fileName();
+
+        Okteta::ByteArrayModelIoDevice byteArrayModelIoDevice( mByteArrayModel );
+        currentMimeType = filename.isEmpty() ?
+            KMimeType::findByContent( &byteArrayModelIoDevice ) :
+            KMimeType::findByNameAndContent( filename, &byteArrayModelIoDevice );
+    }
+
+// TODO: KMimeType has no operator !=
+//     if( *mMimeType != *currentMimeType )
+    {
+        mMimeType = currentMimeType;
+        emit documentMimeTypeChanged( currentMimeType );
+    }
+}
+
+
 void DocumentInfoTool::onContentsChanged()
 {
+    if( ! mMimeTypeUpdateTimer->isActive() )
+        mMimeTypeUpdateTimer->start();
+
     emit documentSizeChanged( mByteArrayModel->size() );
 }
 
@@ -156,12 +173,13 @@ void DocumentInfoTool::onUrlChanged( const KUrl& url )
     Q_UNUSED( url );
 
     emit locationChanged( location() );
-    emit documentMimeTypeChanged( mimeType() );
+    onSynchronized();
 }
 
 void DocumentInfoTool::onSynchronized()
 {
-    emit documentMimeTypeChanged( mimeType() );
+    if( ! mMimeTypeUpdateTimer->isActive() )
+        mMimeTypeUpdateTimer->start();
 }
 
 DocumentInfoTool::~DocumentInfoTool() {}

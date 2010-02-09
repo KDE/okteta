@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008,2010 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -35,6 +35,7 @@ class AbstractByteArrayModel;
 }
 class KUrl;
 class QString;
+class QTimer;
 
 
 namespace Kasten
@@ -72,6 +73,8 @@ class OKTETAKASTENCONTROLLERS_EXPORT DocumentInfoTool : public AbstractTool
     void documentSizeChanged( int newSize );
 
   protected Q_SLOTS:
+    void updateMimeType();
+
     void onContentsChanged();
     void onSynchronizerChanged( Kasten::AbstractModelSynchronizer* synchronizer );
     void onUrlChanged( const KUrl& url );
@@ -84,7 +87,13 @@ class OKTETAKASTENCONTROLLERS_EXPORT DocumentInfoTool : public AbstractTool
     AbstractModelSynchronizer* mSynchronizer;
 
     DocumentSyncManager* mDocumentSyncManager;
+
+    QTimer* mMimeTypeUpdateTimer;
+    KMimeType::Ptr mMimeType;
 };
+
+
+inline KMimeType::Ptr DocumentInfoTool::mimeType() const { return mMimeType; }
 
 }
 
