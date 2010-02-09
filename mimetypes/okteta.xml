@@ -14,11 +14,12 @@ Notes:
 -->
 
 <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+
   <mime-type type="text/x-srecord">
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
     <comment>Motorola S-Records</comment>
-    <magic priority="50">
+    <magic priority="70">
       <match offset="0" value="S0" type="string">
         <match offset="4" value="0000" type="string"/>
       </match>
@@ -34,42 +35,51 @@ Notes:
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
 <!--     <generic-icon name="application-octet-stream"/> -->
-    <comment>Intel Hex file</comment>
+    <comment>Intel hexadecimal object file</comment>
 <!--  Intel MCS-86 Object is alternative name?  -->
-    <magic priority="50">
+    <magic priority="70">
       <match type="string" offset="0" value=":">
 <!--         <match type="string" offset="from end, how to do?" value=":00000001FF"/> -->
       </match>
     </magic>
     <glob pattern="*.hex"/>
+    <glob pattern="*.ihex"/>
   </mime-type>
 
-  <mime-type type="text/x-base64">
+  <mime-type type="application/base64">
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
-    <comment>Base64</comment>
+    <comment>Base64 encoded data</comment>
     <glob pattern="*.base64"/>
+    <glob pattern="*.b64"/>
   </mime-type>
 
   <mime-type type="text/x-base32">
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
-    <comment>Base32</comment>
+    <comment>Base32 encoded data</comment>
     <glob pattern="*.base32"/>
   </mime-type>
 
   <mime-type type="text/x-ascii85">
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
-    <comment>Ascii85</comment>
+    <comment>Ascii85 encoded data</comment>
+    <magic priority="50">
+      <match type="string" offset="0" value="$lt;~">
+    </magic>
     <glob pattern="*.ascii85"/>
   </mime-type>
 
-  <mime-type type="text/x-uue">
+  <mime-type type="text/x-uuencode">
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
-    <comment>Uuencoding</comment>
+    <comment>Uuencoded file</comment>
+    <magic priority="50">
+      <match type="string" offset="0" value="begin">
+      <match type="string" offset="0" value="begin-base64">
+    </magic>
     <glob pattern="*.uue"/>
+    <glob pattern="*.uu"/>
   </mime-type>
-
 </mime-info>
