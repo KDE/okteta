@@ -92,6 +92,7 @@ Notes:
     </magic>
     <glob pattern="*.uue"/>
     <glob pattern="*.uu"/>
+    <glob pattern="*.enc"/>
   </mime-type>
 
   <mime-type type="text/x-xxencode">
