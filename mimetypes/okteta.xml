@@ -61,6 +61,17 @@ Notes:
     <glob pattern="*.base32"/>
   </mime-type>
 
+  <mime-type type="application/btoa">
+    <sub-class-of type="text/plain"/>
+    <generic-icon name="text-x-hex"/>
+    <comment>Btoa Encoded File</comment>
+    <magic priority="50">
+      <match type="string" offset="0" value="xbtoa Begin"/>
+    </magic>
+    <glob pattern="*.b2a"/>
+    <glob pattern="*.btoa"/>
+  </mime-type>
+
   <mime-type type="text/x-ascii85">
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
