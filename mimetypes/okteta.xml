@@ -66,7 +66,7 @@ Notes:
     <generic-icon name="text-x-hex"/>
     <comment>Ascii85 encoded data</comment>
     <magic priority="50">
-      <match type="string" offset="0" value="$lt;~">
+      <match type="string" offset="0" value="$lt;~"/>
     </magic>
     <glob pattern="*.ascii85"/>
   </mime-type>
@@ -76,8 +76,8 @@ Notes:
     <generic-icon name="text-x-hex"/>
     <comment>Uuencoded file</comment>
     <magic priority="50">
-      <match type="string" offset="0" value="begin">
-      <match type="string" offset="0" value="begin-base64">
+      <match type="string" offset="0" value="begin"/>
+      <match type="string" offset="0" value="begin-base64"/>
     </magic>
     <glob pattern="*.uue"/>
     <glob pattern="*.uu"/>
@@ -88,7 +88,7 @@ Notes:
     <generic-icon name="text-x-hex"/>
     <comment>Xxencoded file</comment>
     <magic priority="50">
-      <match type="string" offset="0" value="begin">
+      <match type="string" offset="0" value="begin"/>
     </magic>
     <glob pattern="*.xxe"/>
   </mime-type>
