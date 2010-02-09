@@ -82,4 +82,14 @@ Notes:
     <glob pattern="*.uue"/>
     <glob pattern="*.uu"/>
   </mime-type>
+
+  <mime-type type="text/x-xxencode">
+    <sub-class-of type="text/plain"/>
+    <generic-icon name="text-x-hex"/>
+    <comment>Xxencoded file</comment>
+    <magic priority="50">
+      <match type="string" offset="0" value="begin">
+    </magic>
+    <glob pattern="*.xxe"/>
+  </mime-type>
 </mime-info>
