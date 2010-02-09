@@ -2,15 +2,18 @@
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
   <!ENTITY okteta "<application>Okteta</application>">
   <!ENTITY kappname "&okteta;" >
+  <!ENTITY package "kdeutils">
   <!ENTITY introduction SYSTEM "introduction.docbook">
   <!ENTITY basics SYSTEM "basics.docbook">
   <!ENTITY nutshell SYSTEM "nutshell.docbook">
   <!ENTITY menu SYSTEM "menu.docbook">
   <!ENTITY tools SYSTEM "tools.docbook">
   <!ENTITY Friedrich.Kossebau
-"<personname><firstname>Friedrich W. H.</firstname><surname>Kossebau</surname></personname>">
+"<personname><firstname>Friedrich</firstname><othername>W. H.</othername><surname>Kossebau</surname></personname>">
   <!ENTITY Friedrich.Kossebau.email "<email>kossebau@kde.org</email>">
-  <!ENTITY package "kdeutils">
+  <!ENTITY Alex.Richardson
+"<personname><firstname>Alex</firstname><surname>Richardson</surname></personname>">
+  <!ENTITY Alex.Richardson.email "<email>alex.richardson@gmx.de</email>">
   <!ENTITY % English "INCLUDE">
   <!ENTITY % addindex "IGNORE">
 ]>
@@ -18,41 +21,52 @@
 <book lang="&language;">
 
 <bookinfo>
-<title>The &kappname; Handbook</title>
+<title>The &okteta; Handbook</title>
 
 <authorgroup>
     <author>
-    <firstname>Friedrich W. H.</firstname>
-    <surname>Kossebau</surname>
-    <affiliation>
-    <address>&Friedrich.Kossebau.email;</address>
-    </affiliation>
+      <firstname>Friedrich</firstname><othername>W. H.</othername><surname>Kossebau</surname>
+      <affiliation>
+        <address>&Friedrich.Kossebau.email;</address>
+      </affiliation>
+    </author>
+    <author>
+      <firstname>Alex</firstname><surname>Richardson</surname>
+      <affiliation>
+        <address>&Alex.Richardson.email;</address>
+      </affiliation>
     </author>
 <!-- TRANS:ROLES_OF_TRANSLATORS -->
 </authorgroup>
 
 <copyright>
-<year>2008</year>
+<year>2008, 2010</year>
 <holder>&Friedrich.Kossebau;</holder>
 </copyright>
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2008-08-02</date>
-<releaseinfo>0.20</releaseinfo>
+<date>2010-01-12</date>
+<releaseinfo>0.4.0</releaseinfo>
 
-<abstract><para>&kappname; is a hex editor for the &kde;
-environment.</para></abstract>
+<abstract>
+  <para>&okteta; is a simple editor for the raw data of files. This type of program
+  is also called hex editor or binary editor.</para>
+</abstract>
 
 <keywordset>
 <keyword>KDE</keyword>
+<keyword>kdeutils</keyword>
 <keyword>Okteta</keyword>
+<keyword>view</keyword>
 <keyword>edit</keyword>
+<keyword>bits</keyword>
 <keyword>bytes</keyword>
 <keyword>binary</keyword>
 <keyword>octal</keyword>
 <keyword>hexadecimal</keyword>
 <keyword>hex editor</keyword>
+<keyword>raw data</keyword>
 </keywordset>
 </bookinfo>
 
@@ -65,14 +79,14 @@ environment.</para></abstract>
     <title>Credits and License</title>
 
     <para>
-    &kappname;
+    &okteta;
     </para>
 
     <!--List all the copyright holders here-->
-    <para>Program Copyright 2007-2008 &Friedrich.Kossebau;
+    <para>Program Copyright 2006-2010 &Friedrich.Kossebau;
     &Friedrich.Kossebau.email;</para>
 
-    <para>Documentation Copyright 2008 &Friedrich.Kossebau;
+    <para>Documentation Copyright 2008,2010 &Friedrich.Kossebau;
     &Friedrich.Kossebau.email;</para>
 
     <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
@@ -88,7 +102,7 @@ environment.</para></abstract>
     <title>Installation</title>
 
     <sect1 id="getting-kapp">
-        <title>How to obtain &kappname;</title>
+        <title>How to obtain &okteta;</title>
         &install.intro.documentation;
     </sect1>
 

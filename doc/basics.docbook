@@ -2,17 +2,18 @@
 <title>Basics</title>
 
 <sect1 id="starting-basics">
-<title>Starting &kappname;</title>
+<title>Starting &okteta;</title>
 
     <para>Type <userinput><command>okteta</command></userinput> at a command
     prompt or select <guimenuitem>Hex Editor</guimenuitem> from the
-    <menuchoice><guisubmenu>Applications</guisubmenu><guisubmenu>Utilities</guisubmenu></menuchoice> group in the &kmenu;.</para>
+    <menuchoice><guisubmenu>Applications</guisubmenu><guisubmenu>Utilities</guisubmenu>
+    </menuchoice> group in the application launcher.</para>
 
     <para>The standard &Qt; and &kde; command line
     options are available, and can be listed by entering
     <userinput><command>okteta</command> <option>--help</option></userinput>.</para>
 
-    <para>Command line options specific to &kappname; are:</para>
+    <para>Command line options specific to &okteta; are:</para>
 
     <para><option><replaceable>&lt;&URL;(s)&gt;</replaceable></option> - open
     file(s) from the specified &URL;(s)</para> 
@@ -25,28 +26,37 @@
 <sect1 id="usage-basics">
 <title>Usage</title>
 
-    <para>The main &kappname; window has the following components:
-    a menu bar, a toolbar, a data view and a sidebar with tools.</para>
+    <para>The main &okteta; window has the following components:
+    a menu bar, a toolbar, a status bar, one or several sidebars with tools, and
+    the main view with the tabbed data views.</para>
 
-    <para>When a file is opened or a new byte array is created, the bytes are
-    displayed in the traditional view with two columns: one with the numeric
-    values and one with the assigned characters. On the left side the offset of
-    the lines are shown.</para>
+    <para>When a file is opened or a new byte array is created, the bytes
+    contained are listed consecutively in lines with a given number of bytes
+    per line. They are displayed in two variants: as the numeric values of the
+    bytes and as the characters assigned to the values. Values and characters
+    can be shown either separated in two columns or next to each other with the
+    value on top of the character. On the left side the offsets of the first
+    byte in each line are shown.</para>
 
-    <para>The data can be edited, cut, copied, pasted, dragged
-    and dropped much as text can be in a text editor. A cursor marks
-    the current position. Pressing the <keycap>Insert</keycap> key toggles between
-    overwrite and insert modes. All operations can be done both in the
-    value column and the character column.</para>
+    <para>The handling is similar to that of most text editors:
+    the data can be edited, cut, copied, pasted, dragged and dropped much as
+    text in these can. A cursor marks the current position. Pressing the
+    <keycap>Insert</keycap> key toggles between the overwrite and insert modes.
+    The overwrite mode is stricter than in text editors, as it doesn't allow any
+    operation which changes the size of the byte array.</para>
 
-    <note><para>&okteta; displays two linked cursors in the byte column and in the character column.
-    Depending on the active column, indicated by a blinking cursor, you can enter
-    only characters in the character column and byte values in the byte column.</para></note>
+    <para>Other than in text editors the content is displayed in two variants.
+    Only one of these is active with regard to new input. There are two linked
+    cursors shown for the value and the character display, the cursor of
+    the active one is blinking. With the characters active, characters can be
+    entered as known from text editors. With the values active, typing a digit
+    will open a minimal editor to enter the rest of the value.</para>
 
     <para>The search dialog allows the user to search for a specific string of
-    bytes, definable as hexadecimal, decimal, octal, binary, or text.</para>
+    bytes, definable as values (hexadecimal, decimal, octal, binary) or text
+    (current 8-bit encoding or UTF-8).</para>
 
-    <para>Multiple byte arrays can be open at the same time but only one can be
+    <para>Multiple byte arrays can be open at the same time, but only one can be
     active. Use the <guimenu>Windows</guimenu> menu to select which byte array will
     be active.</para>
 </sect1>
