@@ -392,6 +392,12 @@ set( elf_structure_FILES
 )
 install( FILES ${elf_structure_FILES}  DESTINATION  ${DATA_INSTALL_DIR}/okteta/structures/elf )
 
+set( png_structure_FILES
+  view/structures/schema/example/png/png.desktop
+  view/structures/schema/example/png/png.osd
+)
+install( FILES ${png_structure_FILES}  DESTINATION  ${DATA_INSTALL_DIR}/okteta/structures/png )
+
 
 if( KASTEN_BUILD_INTERNAL_TEMPLATES )
 include_directories(
