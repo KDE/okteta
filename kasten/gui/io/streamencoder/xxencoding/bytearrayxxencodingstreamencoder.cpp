@@ -20,10 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayuuencodingstreamencoder.h"
+#include "bytearrayxxencodingstreamencoder.h"
 
-// lib
-#include "../base64/bytearraybase64streamencoder.h"
 // Okteta core
 #include <abstractbytearraymodel.h>
 // KDE
@@ -35,6 +33,18 @@
 namespace Kasten
 {
 
+static const char xxencodeMap[64] =
+{
+    '+', '-', '0', '1', '2', '3', '4', '5',
+    '6', '7', '8', '9', 'A', 'B', 'C', 'D',
+    'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
+    'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+    'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b',
+    'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+    'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+    's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+};
+
 static const int defaultInputLineLength = 45;
 static const int inputLineLength = defaultInputLineLength;
 static const int inputGroupLength = 3;
@@ -42,57 +52,34 @@ static const int maxInputGroupsPerLine = inputLineLength/inputGroupLength;
 
 enum InputByteIndex { FirstByte, SecondByte, ThirdByte };
 
-static inline char uumapByteHistorical( char byte ) { return (byte > 0) ? (byte + 32) : '`'; }
-static inline char uumapByteBase64( char byte )     { return base64EncodeMap[(int)byte]; }
+static inline char xxmapByte( char byte )           { return xxencodeMap[(int)byte]; }
 
-struct UumapEncodeData
+static inline const char* xxpadding( InputByteIndex index )
 {
-    char (*mapByte)( char );
-    const char* header;
-    const char* footer;
-    const char* paddingData[2];
-    bool hasLength;
+    const char* const paddingData[2] = {"++","+"};
 
-    inline const char* padding( InputByteIndex index ) const
-    {
-        return paddingData[(int)(index) - 1];
-    }
-};
-
-static const UumapEncodeData historicalUumapEncodeData =
-{
-    &uumapByteHistorical,
-    "begin",
-    "\n`\nend\n",
-    {"``","`"},
-    true
-};
-
-static const UumapEncodeData base64UumapEncodeData =
-{
-    &uumapByteBase64,
-    "begin-base64",
-    "\n====\n",
-    {"==","="},
-    false
-};
+    return paddingData[index - 1];
+}
 
 
-UuencodingStreamEncoderSettings::UuencodingStreamEncoderSettings()
- : fileName( QString::fromLatin1("okteta-export")), algorithmId( Base64Id )
+XxencodingStreamEncoderSettings::XxencodingStreamEncoderSettings()
+ : fileName( QString::fromLatin1("okteta-export"))
 {}
 
-ByteArrayUuencodingStreamEncoder::ByteArrayUuencodingStreamEncoder()
-  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Uuencoding"), QString::fromLatin1("text/x-uuencode") )
+ByteArrayXxencodingStreamEncoder::ByteArrayXxencodingStreamEncoder()
+  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Xxencoding"), QString::fromLatin1("text/x-xxencode") )
 {}
 
-
-bool ByteArrayUuencodingStreamEncoder::encodeDataToStream( QIODevice* device,
+// TODO: make this algorithm shared with ByteArrayUuencodingStreamEncoder again
+bool ByteArrayXxencodingStreamEncoder::encodeDataToStream( QIODevice* device,
                                                            const ByteArrayView* byteArrayView,
                                                            const Okteta::AbstractByteArrayModel* byteArrayModel,
                                                            const Okteta::AddressRange& range )
 {
     Q_UNUSED( byteArrayView );
+
+    const char header[] = "begin";
+    const char footer[] = "\n+\nend\n";
 
     bool success = true;
 
@@ -104,21 +91,14 @@ bool ByteArrayUuencodingStreamEncoder::encodeDataToStream( QIODevice* device,
     int inputGroupsPerLine = 0;
     unsigned char bitsFromLastByte;
 
-    const UumapEncodeData* encodeData =
-        (mSettings.algorithmId == UuencodingStreamEncoderSettings::HistoricalId ) ?
-            &historicalUumapEncodeData :
-        /* else */
-            &base64UumapEncodeData;
-
     // header
-    textStream << encodeData->header << " 644 " << mSettings.fileName.toAscii();
+    textStream << header << " 644 " << mSettings.fileName.toAscii();
 
     const int firstLineLength = qMin( range.width(), inputLineLength );
     if( firstLineLength > 0 )
     {
         textStream << '\n';
-        if( encodeData->hasLength )
-            textStream << encodeData->mapByte( firstLineLength );
+        textStream << xxmapByte( firstLineLength );
     }
 
     for( Okteta::Address i=range.start(); i<=range.end(); ++i )
@@ -129,23 +109,23 @@ bool ByteArrayUuencodingStreamEncoder::encodeDataToStream( QIODevice* device,
         {
         case FirstByte:
             // bits 7..2
-            textStream << encodeData->mapByte( byte >> 2 );
+            textStream << xxmapByte( byte >> 2 );
             // bits 1..0 -> 5..4 for next
             bitsFromLastByte = (byte & 0x3) << 4;
             inputByteIndex = SecondByte;
             break;
         case SecondByte:
             // from last and bits 7..4 as 3..0 from this
-            textStream << encodeData->mapByte( bitsFromLastByte | byte >> 4 );
+            textStream << xxmapByte( bitsFromLastByte | byte >> 4 );
             // bits 3..0 -> 5..2 for next
             bitsFromLastByte = (byte & 0xf) << 2;
             inputByteIndex = ThirdByte;
             break;
         case ThirdByte:
             // from last and bits 7..6 as 1..0 from this
-            textStream << encodeData->mapByte( bitsFromLastByte | byte >> 6 );
+            textStream << xxmapByte( bitsFromLastByte | byte >> 6 );
             // bits 5..0
-            textStream << encodeData->mapByte( byte & 0x3F );
+            textStream << xxmapByte( byte & 0x3F );
             inputByteIndex = FirstByte;
             ++inputGroupsPerLine;
             if( inputGroupsPerLine >= maxInputGroupsPerLine && i<range.end() )
@@ -153,8 +133,7 @@ bool ByteArrayUuencodingStreamEncoder::encodeDataToStream( QIODevice* device,
                 const int remainsCount = range.end() - i;
                 const int nextLineLength = qMin( remainsCount, inputLineLength );
                 textStream << '\n';
-                if( encodeData->hasLength )
-                    textStream << encodeData->mapByte( nextLineLength );
+                textStream << xxmapByte( nextLineLength );
                 inputGroupsPerLine = 0;
             }
             break;
@@ -162,14 +141,14 @@ bool ByteArrayUuencodingStreamEncoder::encodeDataToStream( QIODevice* device,
     }
     const bool hasBitsLeft = ( inputByteIndex != FirstByte );
     if( hasBitsLeft )
-        textStream << encodeData->mapByte(bitsFromLastByte)
-                   << encodeData->padding(inputByteIndex);
+        textStream << xxmapByte(bitsFromLastByte)
+                   << xxpadding(inputByteIndex);
     // footer
-    textStream << encodeData->footer;
+    textStream << footer;
 
     return success;
 }
 
-ByteArrayUuencodingStreamEncoder::~ByteArrayUuencodingStreamEncoder() {}
+ByteArrayXxencodingStreamEncoder::~ByteArrayXxencodingStreamEncoder() {}
 
 }

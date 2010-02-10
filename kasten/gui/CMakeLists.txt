@@ -50,6 +50,12 @@ set( okteta_uuencoding_streamencoder_SRCS
   io/streamencoder/uuencoding/bytearrayuuencodingstreamencoder.cpp
 )
 
+set( okteta_xxencoding_streamencoder_SRCS
+  io/streamencoder/xxencoding/bytearrayxxencodingstreamencoderconfigeditor.cpp
+  io/streamencoder/xxencoding/bytearrayxxencodingstreamencoderconfigeditorfactory.cpp
+  io/streamencoder/xxencoding/bytearrayxxencodingstreamencoder.cpp
+)
+
 set( okteta_sourcecode_streamencoder_SRCS
   io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditor.cpp
   io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditorfactory.cpp
@@ -88,6 +94,7 @@ set( okteta_streamencoder_SRCS
   ${okteta_base32_streamencoder_SRCS}
   io/streamencoder/base85/bytearraybase85streamencoder.cpp
   ${okteta_uuencoding_streamencoder_SRCS}
+  ${okteta_xxencoding_streamencoder_SRCS}
   ${okteta_srec_streamencoder_SRCS}
   ${okteta_ihex_streamencoder_SRCS}
   ${okteta_sourcecode_streamencoder_SRCS}

@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYUUENCODINGSTREAMENCODER_H
-#define BYTEARRAYUUENCODINGSTREAMENCODER_H
+#ifndef BYTEARRAYXXENCODINGSTREAMENCODER_H
+#define BYTEARRAYXXENCODINGSTREAMENCODER_H
 
 // lib
 #include "abstractbytearraystreamencoder.h"
@@ -34,30 +34,26 @@
 namespace Kasten
 {
 
-class UuencodingStreamEncoderSettings
+class XxencodingStreamEncoderSettings
 {
   public:
-    enum AlgorithmId { HistoricalId = 0, Base64Id = 1 };
-
-  public:
-    UuencodingStreamEncoderSettings();
+    XxencodingStreamEncoderSettings();
   public:
     QString fileName;
-    AlgorithmId algorithmId;
 };
 
 
-class ByteArrayUuencodingStreamEncoder : public AbstractByteArrayStreamEncoder
+class ByteArrayXxencodingStreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
 
   public:
-    ByteArrayUuencodingStreamEncoder();
-    virtual ~ByteArrayUuencodingStreamEncoder();
+    ByteArrayXxencodingStreamEncoder();
+    virtual ~ByteArrayXxencodingStreamEncoder();
 
   public:
-    UuencodingStreamEncoderSettings settings() const;
-    void setSettings( const UuencodingStreamEncoderSettings& settings );
+    XxencodingStreamEncoderSettings settings() const;
+    void setSettings( const XxencodingStreamEncoderSettings& settings );
 
   protected: // AbstractByteArrayStreamEncoder API
     virtual bool encodeDataToStream( QIODevice* device,
@@ -66,12 +62,12 @@ class ByteArrayUuencodingStreamEncoder : public AbstractByteArrayStreamEncoder
                                      const Okteta::AddressRange& range );
 
   protected:
-    UuencodingStreamEncoderSettings mSettings;
+    XxencodingStreamEncoderSettings mSettings;
 };
 
 
-inline UuencodingStreamEncoderSettings ByteArrayUuencodingStreamEncoder::settings() const { return mSettings; }
-inline void ByteArrayUuencodingStreamEncoder::setSettings( const UuencodingStreamEncoderSettings& settings )
+inline XxencodingStreamEncoderSettings ByteArrayXxencodingStreamEncoder::settings() const { return mSettings; }
+inline void ByteArrayXxencodingStreamEncoder::setSettings( const XxencodingStreamEncoderSettings& settings )
 {
     mSettings = settings;
     emit settingsChanged();

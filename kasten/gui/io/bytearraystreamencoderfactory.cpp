@@ -31,6 +31,7 @@
 #include "streamencoder/base32/bytearraybase32streamencoder.h"
 #include "streamencoder/base85/bytearraybase85streamencoder.h"
 #include "streamencoder/uuencoding/bytearrayuuencodingstreamencoder.h"
+#include "streamencoder/xxencoding/bytearrayxxencodingstreamencoder.h"
 #include "streamencoder/srec/bytearraysrecstreamencoder.h"
 #include "streamencoder/ihex/bytearrayihexstreamencoder.h"
 //// NEWBYTEARRAYSTREAMENCODER(start)
@@ -56,6 +57,7 @@ QList<AbstractModelStreamEncoder*> ByteArrayStreamEncoderFactory::createStreamEn
         << new ByteArrayBase32StreamEncoder()
         << new ByteArrayBase85StreamEncoder()
         << new ByteArrayUuencodingStreamEncoder()
+        << new ByteArrayXxencodingStreamEncoder()
         << new ByteArrayIHexStreamEncoder()
         << new ByteArraySRecStreamEncoder()
         << new ByteArraySourceCodeStreamEncoder()

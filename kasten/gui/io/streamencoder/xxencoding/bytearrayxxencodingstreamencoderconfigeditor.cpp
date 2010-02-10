@@ -20,14 +20,13 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytearrayuuencodingstreamencoderconfigeditor.h"
+#include "bytearrayxxencodingstreamencoderconfigeditor.h"
 
 // lib
 #include "bytearraytextstreamencoderpreview.h"
 // KDE
 #include <KLocale>
 #include <KLineEdit>
-#include <KComboBox>
 // Qt
 #include <QtGui/QFormLayout>
 #include <QtGui/QLabel>
@@ -36,7 +35,7 @@
 namespace Kasten
 {
 
-ByteArrayUuencodingStreamEncoderConfigEditor::ByteArrayUuencodingStreamEncoderConfigEditor( ByteArrayUuencodingStreamEncoder* encoder, QWidget* parent )
+ByteArrayXxencodingStreamEncoderConfigEditor::ByteArrayXxencodingStreamEncoderConfigEditor( ByteArrayXxencodingStreamEncoder* encoder, QWidget* parent )
  : AbstractModelStreamEncoderConfigEditor( parent ),
    mEncoder( encoder )
 {
@@ -54,38 +53,21 @@ ByteArrayUuencodingStreamEncoderConfigEditor::ByteArrayUuencodingStreamEncoderCo
     mFileNameEdit->setText( mSettings.fileName );
     connect( mFileNameEdit, SIGNAL(textChanged( const QString& )), SLOT(onSettingsChanged()) );
     pageLayout->addRow( fileNameLabel, mFileNameEdit );
-
-    // data type
-    const QString encodingTypeLabel =
-        i18nc( "@label:listbox the type of the used encoding: historical or Base64.",
-               "Encoding:" );
-
-    mEncodingSelect = new KComboBox( this );
-    QStringList list;
-    list.append( i18nc("@item:inmenu Doing the uuencoding using the historical encoding",
-                       "Historical") );
-    list.append( i18nc("@item:inmenu Doing the uuencoding using the base64 encoding",
-                       "Base64") );
-    mEncodingSelect->addItems( list );
-    mEncodingSelect->setCurrentIndex( mSettings.algorithmId );
-    connect( mEncodingSelect, SIGNAL(activated(int)), SLOT(onSettingsChanged()) );
-    pageLayout->addRow( encodingTypeLabel, mEncodingSelect );
 }
 
-AbstractSelectionView* ByteArrayUuencodingStreamEncoderConfigEditor::createPreviewView() const
+AbstractSelectionView* ByteArrayXxencodingStreamEncoderConfigEditor::createPreviewView() const
 {
     return new ByteArrayTextStreamEncoderPreview( mEncoder );
 }
 
-void ByteArrayUuencodingStreamEncoderConfigEditor::onSettingsChanged()
+void ByteArrayXxencodingStreamEncoderConfigEditor::onSettingsChanged()
 {
-    mSettings.algorithmId = (UuencodingStreamEncoderSettings::AlgorithmId) mEncodingSelect->currentIndex();
     mSettings.fileName = mFileNameEdit->text();
 
     mEncoder->setSettings( mSettings );
 }
 
-ByteArrayUuencodingStreamEncoderConfigEditor::~ByteArrayUuencodingStreamEncoderConfigEditor()
+ByteArrayXxencodingStreamEncoderConfigEditor::~ByteArrayXxencodingStreamEncoderConfigEditor()
 {
 }
 
