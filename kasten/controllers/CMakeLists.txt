@@ -386,6 +386,11 @@ install( TARGETS oktetakastencontrollers  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 install( FILES ${oktete_kastencore_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )
 # install( FILES view/structures/kns/structures.knsrc  DESTINATION  ${CONFIG_INSTALL_DIR} )
 
+set( elf_structure_FILES
+  view/structures/schema/example/elf/elf.desktop
+  view/structures/schema/example/elf/elf.osd
+)
+install( FILES ${elf_structure_FILES}  DESTINATION  ${DATA_INSTALL_DIR}/okteta/structures/elf )
 
 
 if( KASTEN_BUILD_INTERNAL_TEMPLATES )
