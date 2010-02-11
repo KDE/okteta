@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -31,6 +31,7 @@
 class KXMLGUIClient;
 class KSelectAction;
 class KToggleAction;
+class KAction;
 
 
 namespace Kasten
@@ -53,6 +54,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewConfigController : public AbstractXmlGu
     void setValueCoding( int valueCoding );
     void setCharCoding( int valueCoding );
     void setShowsNonprinting( bool on );
+    void setBytesPerLine();
     void setLayoutStyle( int layoutStyle );
     void toggleOffsetColumn( bool on );
     void toggleValueCharColumns( int visibleColunms );
@@ -67,7 +69,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewConfigController : public AbstractXmlGu
     KSelectAction* mCodingAction;
     KSelectAction* mEncodingAction;
     KToggleAction* mShowsNonprintingAction;
-    // settings menu
+    KAction* mSetBytesPerLineAction;
     KSelectAction* mResizeStyleAction;
     KToggleAction* mShowOffsetColumnAction;
     KSelectAction* mToggleColumnsAction;

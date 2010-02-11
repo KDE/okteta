@@ -293,6 +293,7 @@ set( PRINTCONTROLLER_SRCS
   view/print/bytearrayframerenderer.cpp
 )
 set( VIEWCONFIGCONTROLLER_SRCS
+  view/viewconfig/bytesperlinedialog.cpp
   view/viewconfig/viewconfigcontroller.cpp
 )
 set( VIEWSTATUSCONTROLLER_SRCS

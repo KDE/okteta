@@ -38,6 +38,7 @@
     <Action name="view_valuecoding" />
     <Action name="view_charencoding" />
     <Separator/>
+    <Action name="view_bytesperline" />
     <Action name="resizestyle" />
     <Action name="viewmode" />
     <Separator/>

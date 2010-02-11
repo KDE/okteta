@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,6 +23,7 @@
 #include "viewconfigcontroller.h"
 
 // lib
+#include "bytesperlinedialog.h"
 #include <bytearrayview.h>
 // Okteta core
 #include <charcodec.h>
@@ -62,6 +63,11 @@ ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
     mShowsNonprintingAction = actionCollection->add<KToggleAction>( "view_showsnonprinting" );
     mShowsNonprintingAction->setText( i18nc("@option:check","Show &Non-printing Chars") );
     connect( mShowsNonprintingAction, SIGNAL(triggered(bool)), SLOT(setShowsNonprinting(bool)) );
+
+    // bytes per line
+    mSetBytesPerLineAction = actionCollection->addAction( "view_bytesperline" );
+    mSetBytesPerLineAction->setText( i18nc("@action:inmenu","Set Bytes per Line...") );
+    connect( mSetBytesPerLineAction, SIGNAL(triggered(bool) ), SLOT(setBytesPerLine()) );
 
     // resize style
     mResizeStyleAction = actionCollection->add<KSelectAction>( "resizestyle" );
@@ -120,6 +126,7 @@ void ViewConfigController::setTargetModel( AbstractModel* model )
     mCodingAction->setEnabled( hasView );
     mEncodingAction->setEnabled( hasView );
     mShowsNonprintingAction->setEnabled( hasView );
+    mSetBytesPerLineAction->setEnabled( hasView );
     mResizeStyleAction->setEnabled( hasView );
     mShowOffsetColumnAction->setEnabled( hasView );
     mToggleColumnsAction->setEnabled( hasView );
@@ -139,6 +146,18 @@ void ViewConfigController::setShowsNonprinting( bool on )
 void ViewConfigController::toggleOffsetColumn( bool on )
 {
     mByteArrayView->toggleOffsetColumn( on );
+}
+
+void ViewConfigController::setBytesPerLine()
+{
+    BytesPerLineDialog dialog;
+    dialog.setBytesPerLine( mByteArrayView->noOfBytesPerLine() );
+    dialog.setGroupedBytesCount( mByteArrayView->noOfGroupedBytes() );
+    if( dialog.exec() )
+    {
+        mByteArrayView->setNoOfBytesPerLine( dialog.bytesPerLine() );
+        mByteArrayView->setNoOfGroupedBytes( dialog.groupedBytesCount() );
+    }
 }
 
 void ViewConfigController::setLayoutStyle( int layoutStyle )
