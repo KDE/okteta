@@ -157,6 +157,9 @@ void ViewConfigController::setBytesPerLine()
     {
         mByteArrayView->setNoOfBytesPerLine( dialog.bytesPerLine() );
         mByteArrayView->setNoOfGroupedBytes( dialog.groupedBytesCount() );
+
+        // TODO: change should be signalled and the action listen to that
+        mResizeStyleAction->setCurrentItem( mByteArrayView->layoutStyle() );
     }
 }
 
