@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -280,6 +280,11 @@ void ByteArrayView::setShowsNonprinting( bool on )
     mWidget->setShowsNonprinting( on );
 }
 
+void ByteArrayView::setNoOfGroupedBytes( int noOfGroupedBytes )
+{
+    mWidget->setNoOfGroupedBytes( noOfGroupedBytes );
+}
+
 void ByteArrayView::toggleOffsetColumn( bool on )
 {
     mWidget->toggleOffsetColumn( on );
@@ -288,6 +293,11 @@ void ByteArrayView::toggleOffsetColumn( bool on )
 void ByteArrayView::setLayoutStyle( int layoutStyle )
 {
     mWidget->setLayoutStyle( (Okteta::AbstractByteArrayView::LayoutStyle)layoutStyle );
+}
+
+void ByteArrayView::setNoOfBytesPerLine( int noOfBytesPerLine )
+{
+    mWidget->setNoOfBytesPerLine( noOfBytesPerLine );
 }
 
 void ByteArrayView::setVisibleByteArrayCodings( int visibleColumns )
