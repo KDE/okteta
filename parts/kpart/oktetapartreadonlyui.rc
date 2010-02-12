@@ -34,6 +34,8 @@
     <Action name="view_valuecoding" group="view_operations" />
     <Action name="view_charencoding" group="view_operations" />
     <Separator group="view_operations" />
+    <Action name="view_bytesperline" group="view_operations" />
+    <Action name="view_bytespergroup" group="view_operations" />
     <Action name="resizestyle" group="view_operations" />
     <Action name="viewmode" group="view_operations" />
   </Menu>
