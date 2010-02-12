@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "bytesperlinedialog.h"
+#include "bytespergroupdialog.h"
 
 // KDE
 #include <KIntNumInput>
@@ -32,7 +32,7 @@
 namespace Kasten
 {
 
-BytesPerLineDialog::BytesPerLineDialog( QWidget* parent )
+BytesPerGroupDialog::BytesPerGroupDialog( QWidget* parent )
   : KDialog( parent )
 {
     QWidget* page = new QWidget( this );
@@ -41,27 +41,30 @@ BytesPerLineDialog::BytesPerLineDialog( QWidget* parent )
     QFormLayout* pageLayout = new QFormLayout( page );
     pageLayout->setMargin( 0 );
 
-    mBytesPerLineEdit = new KIntNumInput( this );
-    mBytesPerLineEdit->setRange( 1, INT_MAX );
-    mBytesPerLineEdit->setSuffix( ki18np(" byte"," bytes") );
-    const QString bytesPerLineLabel =
-        i18nc( "@label:spinbox number of bytes which are shown per line",
-                "Per Line:" );
-    pageLayout->addRow( bytesPerLineLabel, mBytesPerLineEdit );
+    mGroupedBytesCountEdit = new KIntNumInput( this );
+    mGroupedBytesCountEdit->setRange( 0, INT_MAX );
+    mGroupedBytesCountEdit->setSuffix( ki18np(" byte"," bytes") );
+    const QString noGroupingText = i18nc( "",
+                                          "No grouping." );
+    mGroupedBytesCountEdit->setSpecialValueText( noGroupingText );
+    const QString groupedBytesCountLabel =
+        i18nc( "@label:spinbox number of bytes which are grouped",
+               "Per Group:" );
+    pageLayout->addRow( groupedBytesCountLabel, mGroupedBytesCountEdit );
 
     const QString caption =
-        i18nc("@title:window","Bytes per Line");
+        i18nc("@title:window","Bytes per Group");
     setCaption( caption );
     setButtons( Ok | Cancel );
 }
 
-int BytesPerLineDialog::bytesPerLine()      const { return mBytesPerLineEdit->value(); }
+int BytesPerGroupDialog::groupedBytesCount() const { return mGroupedBytesCountEdit->value(); }
 
-void BytesPerLineDialog::setBytesPerLine( int bytesPerLine )
+void BytesPerGroupDialog::setGroupedBytesCount( int groupedBytesCount )
 {
-    mBytesPerLineEdit->setValue( bytesPerLine );
+    mGroupedBytesCountEdit->setValue( groupedBytesCount );
 }
 
-BytesPerLineDialog::~BytesPerLineDialog() {}
+BytesPerGroupDialog::~BytesPerGroupDialog() {}
 
 }

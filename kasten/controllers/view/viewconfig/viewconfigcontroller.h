@@ -55,6 +55,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewConfigController : public AbstractXmlGu
     void setCharCoding( int valueCoding );
     void setShowsNonprinting( bool on );
     void setBytesPerLine();
+    void setBytesPerGroup();
     void setLayoutStyle( int layoutStyle );
     void toggleOffsetColumn( bool on );
     void toggleValueCharColumns( int visibleColunms );
@@ -70,6 +71,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewConfigController : public AbstractXmlGu
     KSelectAction* mEncodingAction;
     KToggleAction* mShowsNonprintingAction;
     KAction* mSetBytesPerLineAction;
+    KAction* mSetBytesPerGroupAction;
     KSelectAction* mResizeStyleAction;
     KToggleAction* mShowOffsetColumnAction;
     KSelectAction* mToggleColumnsAction;

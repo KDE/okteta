@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTESPERLINEDIALOG_H
-#define BYTESPERLINEDIALOG_H
+#ifndef BYTESPERGROUPDIALOG_H
+#define BYTESPERGROUPDIALOG_H
 
 // KDE
 #include <KDialog>
@@ -32,21 +32,21 @@ class KIntNumInput;
 namespace Kasten
 {
 
-class BytesPerLineDialog : public KDialog
+class BytesPerGroupDialog : public KDialog
 {
   public:
-    explicit BytesPerLineDialog( QWidget* parent = 0 );
+    explicit BytesPerGroupDialog( QWidget* parent = 0 );
 
-    virtual ~BytesPerLineDialog();
-
-  public:
-    void setBytesPerLine( int bytesPerLine );
+    virtual ~BytesPerGroupDialog();
 
   public:
-    int bytesPerLine() const;
+    void setGroupedBytesCount( int groupedBytesCount );
+
+  public:
+    int groupedBytesCount() const;
 
   protected:
-    KIntNumInput* mBytesPerLineEdit;
+    KIntNumInput* mGroupedBytesCountEdit;
 };
 
 }

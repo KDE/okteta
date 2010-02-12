@@ -24,6 +24,7 @@
 
 // lib
 #include "bytesperlinedialog.h"
+#include "bytespergroupdialog.h"
 #include <bytearrayview.h>
 // Okteta core
 #include <charcodec.h>
@@ -68,6 +69,11 @@ ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
     mSetBytesPerLineAction = actionCollection->addAction( "view_bytesperline" );
     mSetBytesPerLineAction->setText( i18nc("@action:inmenu","Set Bytes per Line...") );
     connect( mSetBytesPerLineAction, SIGNAL(triggered(bool) ), SLOT(setBytesPerLine()) );
+
+    // byte groups size
+    mSetBytesPerGroupAction = actionCollection->addAction( "view_bytespergroup" );
+    mSetBytesPerGroupAction->setText( i18nc("@action:inmenu","Set Bytes per Group...") );
+    connect( mSetBytesPerGroupAction, SIGNAL(triggered(bool) ), SLOT(setBytesPerGroup()) );
 
     // resize style
     mResizeStyleAction = actionCollection->add<KSelectAction>( "resizestyle" );
@@ -152,15 +158,21 @@ void ViewConfigController::setBytesPerLine()
 {
     BytesPerLineDialog dialog;
     dialog.setBytesPerLine( mByteArrayView->noOfBytesPerLine() );
-    dialog.setGroupedBytesCount( mByteArrayView->noOfGroupedBytes() );
     if( dialog.exec() )
     {
         mByteArrayView->setNoOfBytesPerLine( dialog.bytesPerLine() );
-        mByteArrayView->setNoOfGroupedBytes( dialog.groupedBytesCount() );
 
         // TODO: change should be signalled and the action listen to that
         mResizeStyleAction->setCurrentItem( mByteArrayView->layoutStyle() );
     }
+}
+
+void ViewConfigController::setBytesPerGroup()
+{
+    BytesPerGroupDialog dialog;
+    dialog.setGroupedBytesCount( mByteArrayView->noOfGroupedBytes() );
+    if( dialog.exec() )
+        mByteArrayView->setNoOfGroupedBytes( dialog.groupedBytesCount() );
 }
 
 void ViewConfigController::setLayoutStyle( int layoutStyle )

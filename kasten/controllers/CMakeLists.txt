@@ -294,6 +294,7 @@ set( PRINTCONTROLLER_SRCS
 )
 set( VIEWCONFIGCONTROLLER_SRCS
   view/viewconfig/bytesperlinedialog.cpp
+  view/viewconfig/bytespergroupdialog.cpp
   view/viewconfig/viewconfigcontroller.cpp
 )
 set( VIEWSTATUSCONTROLLER_SRCS
