@@ -73,6 +73,7 @@ void ByteArrayJanusView::setViewModus( int viewModus )
         newView->setStartOffset( mView->startOffset() );
         newView->setFirstLineOffset( mView->firstLineOffset() );
         newView->setNoOfBytesPerLine( mView->noOfBytesPerLine() );
+        newView->setNoOfGroupedBytes( mView->noOfGroupedBytes() );
         newView->setLayoutStyle( mView->layoutStyle() );
         newView->setCursorPosition( mView->cursorPosition() );
         newView->setSelection( mView->selection() );
