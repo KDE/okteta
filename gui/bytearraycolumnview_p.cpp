@@ -363,9 +363,9 @@ int ByteArrayColumnViewPrivate::fittingBytesPerLine() const
     // no grouping?
     if( noOfGroupedBytes == 0 )
     {
-        // faking grouping by 1
+        // fake no grouping by grouping with 1 and using byteSpacingWidth
         noOfGroupedBytes = 1;
-        groupSpacingWidth = 0;
+        groupSpacingWidth = mValueColumn->isVisible() ? byteSpacingWidth : 0;
     }
     else
         groupSpacingWidth = mValueColumn->isVisible() ? mValueColumn->groupSpacingWidth() : 0;

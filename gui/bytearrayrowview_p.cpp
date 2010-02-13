@@ -334,9 +334,9 @@ int ByteArrayRowViewPrivate::fittingBytesPerLine() const
     // no grouping?
     if( noOfGroupedBytes == 0 )
     {
-        // faking grouping by 1
+        // fake no grouping by grouping with 1 and using byteSpacingWidth
         noOfGroupedBytes = 1;
-        groupSpacingWidth = 0;
+        groupSpacingWidth = byteSpacingWidth;
     }
     else
         groupSpacingWidth = mByteArrayColumn->groupSpacingWidth();
