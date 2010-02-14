@@ -84,7 +84,6 @@ OktetaPart::OktetaPart( QObject* parent,
     mLayout->setMargin( 0 );
 
     setWidget( widget );
-    setAutoDeleteWidget( true );
 
     setXMLFile( UIFileName[modus] );
 
