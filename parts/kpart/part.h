@@ -23,6 +23,8 @@
 #ifndef OKTETAPART_H
 #define OKTETAPART_H
 
+// Kasten
+#include <kastencore.h>
 // KDE
 #include <KParts/ReadWritePart>
 
@@ -76,7 +78,7 @@ class OktetaPart : public KParts::ReadWritePart
 
   protected Q_SLOTS:
     void onDocumentLoaded( Kasten::AbstractDocument* document );
-    void onModified( int states );
+    void onModified( Kasten::LocalSyncState state );
 
   private:
     const Modus mModus;
