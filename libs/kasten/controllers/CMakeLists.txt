@@ -163,6 +163,7 @@ set( kastencontrollers_LIB_HDRS
   documentsystem/filesystembrowser/filesystembrowsertoolview.h
   documentsystem/filesystembrowser/filesystembrowsertool.h
   io/export/exportcontroller.h
+  io/insert/insertcontroller.h
   io/setremote/setremotecontroller.h
   io/copyas/copyascontroller.h
   io/clipboard/clipboardcontroller.h
