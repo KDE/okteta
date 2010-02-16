@@ -339,6 +339,7 @@ set( okteta_kastencontrollers_LIB_HDRS
   view/poddecoder/poddecodertool.h
   view/poddecoder/poddecodertoolview.h
   view/viewconfig/viewconfigcontroller.h
+  view/gotooffset/gotooffsetcontroller.h
   view/gotooffset/gotooffsettool.h
   view/gotooffset/gotooffsettoolview.h
   view/viewmode/viewmodecontroller.h
@@ -351,11 +352,14 @@ set( okteta_kastencontrollers_LIB_HDRS
   view/filter/filtertool.h
   view/filter/filtertoolview.h
   view/selectrange/selectrangecontroller.h
+  view/libfinddialog/kfinddirection.h
   view/replace/replacecontroller.h
+  view/replace/replaceuserqueryable.h
   view/viewstatus/viewstatuscontroller.h
   view/stringsextract/stringsextracttool.h
   view/stringsextract/stringsextracttoolview.h
   view/search/searchcontroller.h
+  view/search/searchuserqueryable.h
   view/structures/structtool.h
   view/structures/structtoolview.h
   document/info/documentinfotoolview.h
@@ -385,7 +389,7 @@ set_target_properties( oktetakastencontrollers  PROPERTIES VERSION ${GENERIC_LIB
 
 install( TARGETS oktetakastencontrollers  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-install( FILES ${oktete_kastencore_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )
+install( FILES ${okteta_kastencontrollers_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )
 # install( FILES view/structures/kns/structures.knsrc  DESTINATION  ${CONFIG_INSTALL_DIR} )
 
 set( elf_structure_FILES
