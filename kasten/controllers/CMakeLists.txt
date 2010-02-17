@@ -53,6 +53,8 @@ set( INFOCONTROLLER_SRCS
   view/info/infotool.cpp
   view/info/infoview.cpp
   view/info/infotoolview.cpp
+  view/info/infotoolfactory.cpp
+  view/info/infotoolviewfactory.cpp
 )
 set( STRINGSEXTRACTCONTROLLER_SRCS
   view/stringsextract/extractstringsjob.cpp
@@ -60,6 +62,8 @@ set( STRINGSEXTRACTCONTROLLER_SRCS
   view/stringsextract/containedstringtablemodel.cpp
   view/stringsextract/stringsextractview.cpp
   view/stringsextract/stringsextracttoolview.cpp
+  view/stringsextract/stringsextracttoolfactory.cpp
+  view/stringsextract/stringsextracttoolviewfactory.cpp
 )
 
 if( QCA2_FOUND )
@@ -103,6 +107,8 @@ set( CHECKSUMCONTROLLER_SRCS
   view/checksum/checksumtool.cpp
   view/checksum/checksumview.cpp
   view/checksum/checksumtoolview.cpp
+  view/checksum/checksumtoolfactory.cpp
+  view/checksum/checksumtoolviewfactory.cpp
 )
 set( FINDDIALOG_LIB_SRCS
   view/libfinddialog/kabstractfinddialog.cpp
@@ -147,12 +153,16 @@ set( PODDECODERCONTROLLER_SRCS
   view/poddecoder/poddelegate.cpp
   view/poddecoder/podtableview.cpp
   view/poddecoder/poddecodertoolview.cpp
+  view/poddecoder/poddecodertoolfactory.cpp
+  view/poddecoder/poddecodertoolviewfactory.cpp
 )
 set( BYTETABLECONTROLLER_SRCS
   view/bytetable/bytetablemodel.cpp
   view/bytetable/bytetabletool.cpp
   view/bytetable/bytetableview.cpp
   view/bytetable/bytetabletoolview.cpp
+  view/bytetable/bytetabletoolfactory.cpp
+  view/bytetable/bytetabletoolviewfactory.cpp
 )
 set( SEARCHCONTROLLER_SRCS
   view/search/ksearchdialog.cpp
@@ -208,6 +218,8 @@ set( FILTERCONTROLLER_SRCS
   view/filter/filtertool.cpp
   view/filter/filterview.cpp
   view/filter/filtertoolview.cpp
+  view/filter/filtertoolfactory.cpp
+  view/filter/filtertoolviewfactory.cpp
 )
 set( GOTOOFFSETCONTROLLER_SRCS
   view/gotooffset/gotooffsettool.cpp
@@ -230,8 +242,12 @@ set( BOOKMARKSTOOL_SRCS
   view/bookmarks/bookmarkstool.cpp
   view/bookmarks/bookmarksview.cpp
   view/bookmarks/bookmarkstoolview.cpp
+  view/bookmarks/bookmarkstoolfactory.cpp
+  view/bookmarks/bookmarkstoolviewfactory.cpp
 )
 set( STRUCTVIEW_SRCS
+  view/structures/structurestoolfactory.cpp
+  view/structures/structurestoolviewfactory.cpp
   view/structures/structuresmanager.cpp
   view/structures/structtool.cpp
   view/structures/structtreemodel.cpp
@@ -332,12 +348,16 @@ set( OKTETA_KASTEN_CONTROLLERS_SRCS
 set( okteta_kastencontrollers_LIB_HDRS
   oktetakastencontrollers_export.h
   view/print/printcontroller.h
-  view/bookmarks/bookmarkstoolview.h
   view/bookmarks/bookmarkscontroller.h
   view/bookmarks/bookmarkstool.h
+  view/bookmarks/bookmarkstoolview.h
+  view/bookmarks/bookmarkstoolfactory.h
+  view/bookmarks/bookmarkstoolviewfactory.h
   view/overwritemode/overwritemodecontroller.h
   view/poddecoder/poddecodertool.h
   view/poddecoder/poddecodertoolview.h
+  view/poddecoder/poddecodertoolfactory.h
+  view/poddecoder/poddecodertoolviewfactory.h
   view/viewconfig/viewconfigcontroller.h
   view/gotooffset/gotooffsetcontroller.h
   view/gotooffset/gotooffsettool.h
@@ -345,12 +365,20 @@ set( okteta_kastencontrollers_LIB_HDRS
   view/viewmode/viewmodecontroller.h
   view/checksum/checksumtool.h
   view/checksum/checksumtoolview.h
-  view/info/infotoolview.h
+  view/checksum/checksumtoolfactory.h
+  view/checksum/checksumtoolviewfactory.h
   view/info/infotool.h
-  view/bytetable/bytetabletoolview.h
+  view/info/infotoolview.h
+  view/info/infotoolfactory.h
+  view/info/infotoolviewfactory.h
   view/bytetable/bytetabletool.h
+  view/bytetable/bytetabletoolview.h
+  view/bytetable/bytetabletoolfactory.h
+  view/bytetable/bytetabletoolviewfactory.h
   view/filter/filtertool.h
   view/filter/filtertoolview.h
+  view/filter/filtertoolfactory.h
+  view/filter/filtertoolviewfactory.h
   view/selectrange/selectrangecontroller.h
   view/libfinddialog/kfinddirection.h
   view/replace/replacecontroller.h
@@ -358,10 +386,14 @@ set( okteta_kastencontrollers_LIB_HDRS
   view/viewstatus/viewstatuscontroller.h
   view/stringsextract/stringsextracttool.h
   view/stringsextract/stringsextracttoolview.h
+  view/stringsextract/stringsextracttoolfactory.h
+  view/stringsextract/stringsextracttoolviewfactory.h
   view/search/searchcontroller.h
   view/search/searchuserqueryable.h
   view/structures/structtool.h
   view/structures/structtoolview.h
+  view/structures/structurestoolfactory.h
+  view/structures/structurestoolviewfactory.h
   document/info/documentinfotoolview.h
   document/info/documentinfotool.h
   document/overwriteonly/overwriteonlycontroller.h
