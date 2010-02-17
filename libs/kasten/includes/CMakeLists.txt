@@ -4,6 +4,7 @@ set( kastencore_CamelCase_HDRS
   AbstractDocument
   AbstractDocumentFactory
   AbstractTool
+  AbstractToolFactory
   UserListable
   Versionable
 
@@ -46,6 +47,7 @@ set( kastengui_CamelCase_HDRS
   AbstractViewFactory
   AbstractSelectionView
   AbstractToolView
+  AbstractToolViewFactory
   DataSelectable
   SelectedDataWriteable
   Zoomable

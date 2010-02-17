@@ -28,6 +28,7 @@ set( kastengui_view_HDRS
   view/abstractview.h
   view/abstractselectionview.h
   view/abstracttoolview.h
+  view/abstracttoolviewfactory.h
   view/dataselectable.h
   view/zoomable.h
 )

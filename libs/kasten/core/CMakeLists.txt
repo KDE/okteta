@@ -91,6 +91,7 @@ set( kastencore_LIB_HDRS
   document/abstractdocument.h
   document/abstractdocumentfactory.h
   document/abstracttool.h
+  document/abstracttoolfactory.h
   document/documentversiondata.h
   document/documentversionid.h
   document/versionable.h
