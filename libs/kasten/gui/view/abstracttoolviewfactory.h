@@ -23,9 +23,6 @@
 #ifndef ABSTRACTTOOLVIEWFACTORY_H
 #define ABSTRACTTOOLVIEWFACTORY_H
 
-// lib
-#include "kastengui_export.h"
-
 
 namespace Kasten
 {
@@ -33,7 +30,7 @@ class AbstractToolView;
 class AbstractTool;
 
 
-class KASTENGUI_EXPORT AbstractToolViewFactory
+class AbstractToolViewFactory
 {
   public:
     virtual ~AbstractToolViewFactory();

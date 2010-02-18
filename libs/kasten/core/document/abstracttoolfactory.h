@@ -23,9 +23,6 @@
 #ifndef ABSTRACTTOOLFACTORY_H
 #define ABSTRACTTOOLFACTORY_H
 
-// lib
-#include "kastencore_export.h"
-
 
 namespace Kasten
 {
@@ -33,7 +30,7 @@ namespace Kasten
 class AbstractTool;
 
 
-class KASTENCORE_EXPORT AbstractToolFactory
+class AbstractToolFactory
 {
   public:
     virtual ~AbstractToolFactory();
