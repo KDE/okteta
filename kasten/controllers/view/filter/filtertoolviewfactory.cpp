@@ -25,11 +25,19 @@
 // lib
 #include "filtertoolview.h"
 #include "filtertool.h"
+// KDE
+#include <KLocale>
+
 
 namespace Kasten
 {
 
 FilterToolViewFactory::FilterToolViewFactory() {}
+
+QString FilterToolViewFactory::iconName() const { return QString::fromLatin1("okteta"); }
+QString FilterToolViewFactory::title()       const { return i18nc("@title:window", "Binary Filter"); }
+QString FilterToolViewFactory:: id()      const { return QString::fromLatin1("org.kde.okteta.FilterToolView"); }
+SidePosition FilterToolViewFactory::defaultPosition() const { return BottomSidePosition; }
 
 AbstractToolView* FilterToolViewFactory::create( AbstractTool* tool )
 {

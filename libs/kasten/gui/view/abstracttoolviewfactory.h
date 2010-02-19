@@ -23,6 +23,7 @@
 #ifndef ABSTRACTTOOLVIEWFACTORY_H
 #define ABSTRACTTOOLVIEWFACTORY_H
 
+#include "kastengui.h"
 
 namespace Kasten
 {
@@ -37,6 +38,12 @@ class AbstractToolViewFactory
 
   public: // API to be implemented
     virtual AbstractToolView* create( AbstractTool* tool ) = 0;
+
+    // TODO: find out of iconName an id can be QByteArray
+    virtual QString iconName() const = 0;
+    virtual QString title() const = 0;
+    virtual QString id() const = 0;
+    virtual SidePosition defaultPosition() const = 0;
 };
 
 

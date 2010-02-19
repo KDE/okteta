@@ -25,12 +25,18 @@
 // lib
 #include "structtoolview.h"
 #include "structtool.h"
-
+// KDE
+#include <KLocale>
 
 namespace Kasten
 {
 
 StructuresToolViewFactory::StructuresToolViewFactory() {}
+
+QString StructuresToolViewFactory::iconName() const { return QString::fromLatin1("okteta"); }
+QString StructuresToolViewFactory::title()    const { return i18nc("@title:window", "Structures"); }
+QString StructuresToolViewFactory::id()       const { return QString::fromLatin1("org.kde.okteta.StructuresToolView"); }
+SidePosition StructuresToolViewFactory::defaultPosition() const { return RightSidePosition; }
 
 AbstractToolView* StructuresToolViewFactory::create( AbstractTool* tool )
 {

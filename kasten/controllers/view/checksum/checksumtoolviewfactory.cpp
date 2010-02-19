@@ -25,11 +25,19 @@
 // lib
 #include "checksumtoolview.h"
 #include "checksumtool.h"
+// KDE
+#include <KLocale>
+
 
 namespace Kasten
 {
 
 ChecksumToolViewFactory::ChecksumToolViewFactory() {}
+
+QString ChecksumToolViewFactory::iconName() const { return QString::fromLatin1("accessories-calculator"); }
+QString ChecksumToolViewFactory::title()       const { return i18nc("@title:window of the tool to calculate checksums", "Checksum"); }
+QString ChecksumToolViewFactory:: id()      const { return QString::fromLatin1("org.kde.okteta.ChecksumToolView"); }
+SidePosition ChecksumToolViewFactory::defaultPosition() const { return BottomSidePosition; }
 
 AbstractToolView* ChecksumToolViewFactory::create( AbstractTool* tool )
 {

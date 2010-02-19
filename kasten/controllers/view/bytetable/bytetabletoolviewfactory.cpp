@@ -25,11 +25,19 @@
 // lib
 #include "bytetabletoolview.h"
 #include "bytetabletool.h"
+// KDE
+#include <KLocale>
+
 
 namespace Kasten
 {
 
 ByteTableToolViewFactory::ByteTableToolViewFactory() {}
+
+QString ByteTableToolViewFactory::iconName() const { return "table"; }
+QString ByteTableToolViewFactory::title()       const { return i18nc("@title:window", "Byte Table"); }
+QString ByteTableToolViewFactory::id()       const { return "org.kde.okteta.ByteTableToolView"; }
+SidePosition ByteTableToolViewFactory::defaultPosition() const { return RightSidePosition; }
 
 AbstractToolView* ByteTableToolViewFactory::create( AbstractTool* tool )
 {

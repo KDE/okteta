@@ -40,6 +40,11 @@ class OKTETAKASTENCONTROLLERS_EXPORT InfoToolViewFactory : public AbstractToolVi
 
   public: // AbstractToolViewFactory API
     virtual AbstractToolView* create( AbstractTool* tool );
+
+    virtual QString iconName() const;
+    virtual QString title() const;
+    virtual QString id() const;
+    virtual SidePosition defaultPosition() const;
 };
 
 }

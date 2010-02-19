@@ -25,11 +25,19 @@
 // lib
 #include "poddecodertoolview.h"
 #include "poddecodertool.h"
+// KDE
+#include <KLocale>
+
 
 namespace Kasten
 {
 
 PodDecoderToolViewFactory::PodDecoderToolViewFactory() {}
+
+QString PodDecoderToolViewFactory::iconName() const { return QString::fromLatin1("okteta"); }
+QString PodDecoderToolViewFactory::title()       const { return i18nc("@title:window", "Decoding Table"); }
+QString PodDecoderToolViewFactory::id()       const { return QString::fromLatin1("org.kde.okteta.PodDecoderToolView"); }
+SidePosition PodDecoderToolViewFactory::defaultPosition() const { return RightSidePosition; }
 
 AbstractToolView* PodDecoderToolViewFactory::create( AbstractTool* tool )
 {

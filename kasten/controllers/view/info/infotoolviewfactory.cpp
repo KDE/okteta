@@ -25,11 +25,19 @@
 // lib
 #include "infotoolview.h"
 #include "infotool.h"
+// KDE
+#include <KLocale>
+
 
 namespace Kasten
 {
 
 InfoToolViewFactory::InfoToolViewFactory() {}
+
+QString InfoToolViewFactory::iconName() const { return QString::fromLatin1("okteta"); }
+QString InfoToolViewFactory::title()       const { return i18nc("@title:window", "Statistics"); }
+QString InfoToolViewFactory::id()       const { return QString::fromLatin1("org.kde.okteta.StatisticsToolView"); }
+SidePosition InfoToolViewFactory::defaultPosition() const { return RightSidePosition; }
 
 AbstractToolView* InfoToolViewFactory::create( AbstractTool* tool )
 {

@@ -25,11 +25,19 @@
 // lib
 #include "bookmarkstoolview.h"
 #include "bookmarkstool.h"
+// KDE
+#include <KLocale>
+
 
 namespace Kasten
 {
 
 BookmarksToolViewFactory::BookmarksToolViewFactory() {}
+
+QString BookmarksToolViewFactory::iconName() const { return QString::fromLatin1("bookmarks"); }
+QString BookmarksToolViewFactory::title()       const { return i18nc("@title:window", "Bookmarks"); }
+QString BookmarksToolViewFactory::id()       const { return QString::fromLatin1("org.kde.okteta.BookmarksToolView"); }
+SidePosition BookmarksToolViewFactory::defaultPosition() const { return LeftSidePosition; }
 
 AbstractToolView* BookmarksToolViewFactory::create( AbstractTool* tool )
 {
