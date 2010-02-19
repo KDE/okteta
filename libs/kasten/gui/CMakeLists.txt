@@ -127,6 +127,7 @@ set( kastengui_LIB_SRCS
 
 set( kastengui_LIB_HDRS
   kastengui_export.h
+  kastengui.h
   ${kastengui_view_HDRS}
   ${kastengui_io_HDRS}
   ${kastengui_system_HDRS}
