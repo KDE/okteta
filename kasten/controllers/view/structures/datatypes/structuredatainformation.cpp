@@ -33,23 +33,21 @@ int StructureDataInformation::size() const
     for (int i = 0; i < mChildren.size(); i++)
     {
         const DataInformation* data = mChildren.at(i);
+
         bool isBitfield =
-                dynamic_cast<const AbstractBitfieldDataInformation*> (data) != 0;
-        if (lastChildWasBitfield)
+            dynamic_cast<const AbstractBitfieldDataInformation*> (data) != 0;
+        if (isBitfield)
         {
-            if (!isBitfield)
-            {
-                uint padding = 8 - (size % 8);
-                size += padding;
-                //this element is not a bitfield -> add padding;
-                lastChildWasBitfield = false;
-            }
-            else
-            {
-                lastChildWasBitfield = true;
-            }
-            size += data->size();
+            lastChildWasBitfield = true;
         }
+        else if (lastChildWasBitfield)
+        {
+            uint padding = 8 - (size % 8);
+            size += padding;
+            //this element is not a bitfield -> add padding;
+            lastChildWasBitfield = false;
+        }
+        size += data->size();
     }
     if (lastChildWasBitfield)
     {
