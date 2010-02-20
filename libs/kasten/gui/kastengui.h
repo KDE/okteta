@@ -24,7 +24,7 @@
 #define KASTENGUI_H
 
 // Qt
-#include <Qt/qglobal.h>
+#include <QtCore/QFlags>
 
 
 namespace Kasten
