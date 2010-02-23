@@ -21,6 +21,8 @@
  */
 #include "boolbitfielddatainformation.h"
 
+#include <KComboBox>
+
 int BoolBitfieldDataInformation::displayBase() const
 {
     int base = Kasten::StructViewPreferences::unsignedDisplayBase();
@@ -63,6 +65,15 @@ QString BoolBitfieldDataInformation::valueString() const
 
 QWidget* BoolBitfieldDataInformation::createEditWidget(QWidget* parent) const
 {
+    if (width() == 1)
+    {
+        //just a simple combobox
+        KComboBox* box = new KComboBox(false, parent);
+        box->addItem(i18nc("boolean value", "false"));
+        box->addItem(i18nc("boolean value", "true"));
+        box->setCurrentIndex(mValue.ubyteValue ? 1 : 0);
+        return box;
+    }
     UIntSpinBox* ret = new UIntSpinBox(parent);
     ret->setBase(displayBase());
     ret->setMaximum(mask());
@@ -71,6 +82,11 @@ QWidget* BoolBitfieldDataInformation::createEditWidget(QWidget* parent) const
 
 QVariant BoolBitfieldDataInformation::dataFromWidget(const QWidget* w) const
 {
+    if (width() == 1)
+    {
+        const KComboBox* box = static_cast<const KComboBox*> (w);
+        return box->currentIndex();
+    }
     const UIntSpinBox* spin = dynamic_cast<const UIntSpinBox*> (w);
     if (spin)
         return spin->value();
