@@ -20,13 +20,19 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "abstractbitfielddatainformation.h"
+
+//FIXME this code really needs unit tests!
 bool AbstractBitfieldDataInformation::setData(const QVariant &value,
         DataInformation* inf, Okteta::AbstractByteArrayModel *out,
         ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining,
         quint8* bitOffset)
 {
     if (this != inf)
+    {
+        //make sure bitOffset is always incremented
+        *bitOffset = (*bitOffset + width()) % 8;
         return false;
+    }
     if ((unsigned) (remaining * 8) - *bitOffset < width())
     {
         mIsValid = false;
@@ -39,108 +45,19 @@ bool AbstractBitfieldDataInformation::setData(const QVariant &value,
     if (val.ulongValue != mValue.ulongValue)
         emit dataChanged();
     mValue = val;
-    //set model data:
-    kError() << "not implemented yet";
-#if 0
-    if (width() < (unsigned) (8 - *bitOffset))
+
+    if (byteOrder == ByteOrderEnumClass::LittleEndian)
     {
-        quint8 readValue;
-        if (byteOrder == ByteOrderEnumClass::LittleEndian)
-        {
-            //fits completely
-            quint8 lowerMask = (1 << *bitOffset) - 1;
-            quint8 higherMask = ~((1 << (*bitOffset + width())) - 1);
-            quint8 completeMask = lowerMask | higherMask;
-            //completeMask maskes the value -> negate it to clear all the bytes
-            readValue = out->byte(address);
-            readValue &= ~completeMask;
-            //fill in our bytes
-            readValue |= val.ubyteValue << *bitOffset;
-        }
-        else
-        {
-            //big endian and fits completely
-            quint8 lowerMask = (1 << (8 - (width() + *bitOffset))) - 1;
-            quint8 higherMask = 0xff << (8 - *bitOffset);
-            quint8 completeMask = lowerMask | higherMask;
-            //completeMask maskes the value -> negate it to clear all the bytes
-            readValue = out->byte(address);
-            readValue &= ~completeMask;
-            //fill in our bytes
-            readValue |= val.ubyteValue << (8 - (*bitOffset + width()));
-        }
-        out->setByte(address, readValue);
+        setDataLittleEndian(val, out, address, bitOffset);
+    }
+    else if (byteOrder == ByteOrderEnumClass::BigEndian)
+    {
+        setDataBigEndian(val, out, address, bitOffset);
     }
     else
     {
-        for (uint i = 0; i < width(); i += 8)
-        {
-            if (byteOrder == ByteOrderEnumClass::LittleEndian)
-            {
-                if (*bitOffset != 0)
-                {
-                    if (byteOrder == ByteOrderEnumClass::LittleEndian)
-                    {
-                        int remainingBits = width() - i;
-                        Q_ASSERT(*bitOffset < 8);
-                        quint8 thisByte = out->byte(address);
-                        int remainingBitsInThisByte = 8 - *bitOffset;
-                        if (remainingBits < remainingBitsInThisByte)
-                        {
-                            //leave the top values:
-                            int theMask = (1 << remainingBitsInThisByte) - 1;
-                            quint8 topMask = ~((1 << (8 - (remainingBitsInThisByte
-                                                            - remainingBits))) - 1);
-                            theMask |= topMask;
-                            thisByte &= theMask;
-                        }
-                        else
-                        thisByte &= (1 << *bitOffset) - 1; //clear top bits in currentValue
-                        quint64 mask = (1 << remainingBitsInThisByte) - 1;
-                        mask <<= i; //shift mask to match the current byte
-                        quint64 maskedVal = val.ulongValue & mask;
-                        maskedVal >>= i; //move back to lowest byte
-                        quint8 bitfieldValuesOfCurrentByte = maskedVal << *bitOffset; //and shift to correct position
-                        thisByte |= bitfieldValuesOfCurrentByte;
-                        out->setByte(address + (i / 8), thisByte);
-                    }
-                    else
-                    {
-                        // big endian
-                        int remainingBits = width() - i;
-                        Q_ASSERT(*bitOffset < 8);
-                        quint8 thisByte = out->byte(address);
-                        int remainingBitsInThisByte = 8 - *bitOffset;
-                        //clear the lowest bits
-                        if (remainingBits < remainingBitsInThisByte)
-                        {
-                            quint8 theMask = 0xff << remainingBitsInThisByte;
-                            quint8 otherMask = ((1 << remainingBits) - 1)
-                            << (remainingBitsInThisByte - remainingBits);//leave the lowest bits
-                            theMask |= otherMask;
-                            thisByte &= theMask;
-                        }
-                        else
-                        thisByte &= ((unsigned) 0xff << remainingBitsInThisByte); //clear lowest bits in currentValue
-                        quint64 mask = (1 << remainingBitsInThisByte) - 1;
-                        mask <<= i; //shift mask to match the current byte
-                        quint64 maskedVal = val.ulongValue & mask;
-                        maskedVal >>= i; //move back to lowest byte
-                        quint8 bitfieldValuesOfCurrentByte = maskedVal >> *bitOffset; //and shift to correct position
-                        thisByte |= bitfieldValuesOfCurrentByte;
-                        out->setByte(address + (i / 8), thisByte);
-                    }
-                }
-                else
-                {
-                    //no bit offset
-                    quint8 thisByte = (val.ulongValue & mask()) >> i;
-                    out->setByte(address + (i / 8), thisByte);
-                }
-            }
-        }
+        kWarning() << "invalid byte order";
     }
-#endif
     *bitOffset = (*bitOffset + width()) % 8;
     mIsValid = true;
     return true;
@@ -183,7 +100,7 @@ Okteta::Size AbstractBitfieldDataInformation::readData(
 }
 
 AllPrimitiveTypes AbstractBitfieldDataInformation::readDataLittleEndian(
-        Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+        const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
         quint8* bitOffset)
 {
     //maybe compiler can't optimise all that dereferencing away, also saves typing a few chars
@@ -225,7 +142,7 @@ AllPrimitiveTypes AbstractBitfieldDataInformation::readDataLittleEndian(
 }
 
 AllPrimitiveTypes AbstractBitfieldDataInformation::readDataBigEndian(
-        Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+        const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
         quint8* bitOffset)
 {
     //maybe compiler can't optimise all that dereferencing away, also saves typing a few chars
@@ -272,20 +189,105 @@ AllPrimitiveTypes AbstractBitfieldDataInformation::readDataBigEndian(
     return val;
 }
 
-void AbstractBitfieldDataInformation::setDataLittleEndian(const QVariant &value,
-        DataInformation* inf, Okteta::AbstractByteArrayModel *out,
+void AbstractBitfieldDataInformation::setDataLittleEndian(
+        const AllPrimitiveTypes val, Okteta::AbstractByteArrayModel *out,
         Okteta::Address address, quint8* bitOffset)
 {
-    //FIXME stub
-
+    //maybe compiler can't optimise all that dereferencing away, also saves typing a few chars
+    quint8 bo = *bitOffset;
+    if (width() <= (unsigned) (8 - bo))
+    {
+        //fits completely
+        quint8 lowerMask = (1 << bo) - 1; //all lower bits are 1
+        quint8 higherMask = 0xff << (bo + width()); // all higher bits are 1
+        quint8 completeMask = lowerMask | higherMask; //region in the middle is 0
+        quint8 readByte = out->byte(address);
+        quint8 maskedByte = readByte & completeMask;
+        quint8 addedVal = val.ubyteValue << bo;
+        quint8 newVal = maskedByte | addedVal;
+        out->setByte(address, newVal);
+    }
+    else
+    {
+        quint8 firstByteMask = (1 << bo) - 1;
+        quint8 firstByte = out->byte(address);
+        quint8 firstByteMasked = firstByte & firstByteMask;
+        quint8 firstAddedVal = (val.ubyteValue << bo);
+        quint8 firstByteWithValAdded = firstByteMasked | firstAddedVal;
+        out->setByte(address, firstByteWithValAdded);
+        //if spans more than this one byte continue
+        for (uint i = 8; i < width() + bo; i += 8)
+        {
+            quint8 readVal = out->byte(address + (i / 8));
+            quint8 currentByte = val.ulongValue >> (i - bo);
+            if (width() + bo <= i + 8)
+            {
+                //this is last byte needed, possibly cut off bottom
+                quint8 missingBits = (width() + bo) % 8;
+                quint8 mask = 0xff << missingBits;
+                readVal &= mask; //remove the bottom values
+                quint8 newValue = currentByte;
+                readVal |= newValue;
+                out->setByte(address + (i / 8), readVal);
+            }
+            else
+            {
+                //otherwise we need full byte -> nothing to do
+                out->setByte(address + (i / 8), currentByte);
+            }
+        }
+    }
 }
 
-void AbstractBitfieldDataInformation::setDataBigEndian(const QVariant &value,
-        DataInformation* inf, Okteta::AbstractByteArrayModel *out,
-        Okteta::Address address, quint8* bitOffset)
+void AbstractBitfieldDataInformation::setDataBigEndian(const AllPrimitiveTypes val,
+        Okteta::AbstractByteArrayModel *out, Okteta::Address address,
+        quint8* bitOffset)
 {
-    //FIXME stub
-
+    //maybe compiler can't optimise all that dereferencing away, also saves typing a few chars
+    quint8 bo = *bitOffset;
+    if (width() <= (unsigned) (8 - bo))
+    {
+        //fits completely
+        quint8 lowerMask = 0xff >> (bo + width()); //all lower bits are 1
+        quint8 higherMask = 0xff << (8 - bo); // all higher bits are 1
+        quint8 completeMask = lowerMask | higherMask; //region in the middle is 0
+        quint8 readByte = out->byte(address);
+        quint8 maskedByte = readByte & completeMask;
+        quint8 addedVal = val.ubyteValue << (8 - bo - 1); //move to missing area
+        maskedByte |= addedVal;
+        out->setByte(address, maskedByte);
+    }
+    else
+    {
+        quint8 missingBits = (width() + bo) % 8;
+        quint8 lastAddress = address + ((bo + width()) / 8) - (missingBits > 0 ? 0 : 1);
+        quint8 lastByte = out->byte(lastAddress);
+        quint8 lastByteMask = (1 << missingBits) - 1;
+        quint8 lastByteMasked = lastByte & lastByteMask; //remove the top values
+        quint8 lastByteAddedVal = val.ubyteValue << (8 - missingBits);
+        quint8 lastByteWithValAdded = lastByteMasked | lastByteAddedVal;
+        out->setByte(lastAddress, lastByteWithValAdded);
+        for (int currAddress = lastAddress - 1; currAddress >= address; currAddress--)
+        {
+            quint8 currentByte = out->byte(currAddress);
+            if (currAddress == address)
+            {
+                //last byte to read
+                quint8 firstByteMask = 0xff << (8 - bo);
+                quint8 firstByteMasked = currentByte & firstByteMask;
+                quint8 highestByte = val.ulongValue >> (bo + width() - 8);
+                quint8 firstByteWithValAdded = firstByteMasked | highestByte;
+                out->setByte(address, firstByteWithValAdded);
+            }
+            else
+            {
+                int bytesNotToShift = 1 + (lastAddress - address) - (lastAddress - currAddress);
+                quint8 thisByteShifted = val.ulongValue >> (bo + width() - (8
+                        * bytesNotToShift));
+                out->setByte(currAddress, thisByteShifted);
+            }
+        }
+    }
 }
 
 QString AbstractBitfieldDataInformation::sizeString() const

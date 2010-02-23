@@ -82,20 +82,19 @@ public:
     virtual Qt::ItemFlags flags(int column, bool fileLoaded) const
     {
         if (column == 2 && fileLoaded)
-            return Qt::ItemIsSelectable | Qt::ItemIsEnabled /*| Qt::ItemIsEditable*/;
-            //FIXME uncomment once editing works
+            return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable;
         else
             return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
     }
 private:
-    AllPrimitiveTypes readDataLittleEndian(Okteta::AbstractByteArrayModel* input,
+    AllPrimitiveTypes readDataLittleEndian(const Okteta::AbstractByteArrayModel* input,
             Okteta::Address address, quint8* bitOffset);
-    void setDataLittleEndian(const QVariant &value, DataInformation* inf,
+    void setDataLittleEndian(const AllPrimitiveTypes val,
             Okteta::AbstractByteArrayModel *out, Okteta::Address address,
             quint8* bitOffset);
-    AllPrimitiveTypes readDataBigEndian(Okteta::AbstractByteArrayModel* input,
+    AllPrimitiveTypes readDataBigEndian(const Okteta::AbstractByteArrayModel* input,
             Okteta::Address address, quint8* bitOffset);
-    void setDataBigEndian(const QVariant &value, DataInformation* inf,
+    void setDataBigEndian(const AllPrimitiveTypes val,
             Okteta::AbstractByteArrayModel *out, Okteta::Address address,
             quint8* bitOffset);
 
