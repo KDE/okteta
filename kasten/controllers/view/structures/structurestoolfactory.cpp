@@ -25,17 +25,20 @@
 // lib
 #include "structtool.h"
 
-
 namespace Kasten
 {
 
-StructuresToolFactory::StructuresToolFactory() {}
+StructuresToolFactory::StructuresToolFactory()
+{
+}
 
 AbstractTool* StructuresToolFactory::create()
 {
     return new StructTool();
 }
 
-StructuresToolFactory::~StructuresToolFactory() {}
+StructuresToolFactory::~StructuresToolFactory()
+{
+}
 
 }

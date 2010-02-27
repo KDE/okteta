@@ -246,6 +246,7 @@ set( BOOKMARKSTOOL_SRCS
   view/bookmarks/bookmarkstoolviewfactory.cpp
 )
 set( STRUCTVIEW_SRCS
+  view/structures/allprimitivetypes.cpp
   view/structures/structurestoolfactory.cpp
   view/structures/structurestoolviewfactory.cpp
   view/structures/structuresmanager.cpp

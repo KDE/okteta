@@ -25,6 +25,18 @@
 #include <QtGlobal>
 #include <QByteArray>
 
+#include <size.h>
+#include <address.h>
+
+#include "structviewpreferences.h"
+
+namespace Okteta
+{
+class AbstractByteArrayModel;
+}
+typedef Kasten::StructViewPreferences::EnumByteOrder::type ByteOrder;
+typedef Kasten::StructViewPreferences::EnumByteOrder ByteOrderEnumClass;
+
 enum PrimitiveDataType
 {
     Type_NotPrimitive = -1,
@@ -45,6 +57,9 @@ enum PrimitiveDataType
     Type_Double,
     Type_Bitfield
 };
+
+/** This union holds the value of one primitive datatype. Maximum size of a datatype is currently 64 bits.
+ *  It has methods for reading and writing from @c Okteta::AbstractByteArrayModel */
 union AllPrimitiveTypes
 {
     qint64 longValue;
@@ -134,5 +149,60 @@ union AllPrimitiveTypes
     {
         return this->ulongValue < other.ulongValue;
     }
+    /** Writes given number of bits to @p out.
+     *  If the value of this union is not equal to @p newValue it is set to @p newValue.
+     *  @p bitOffset is changed in this method so it does not have to be handled later.
+     *  There is no need to write an optimised version of this method for reading complete bytes
+     *  since this is already handled internally.
+     *
+     *  On failure value of this union is set to @c 0.
+     *
+     *  @param bitCount the number of bits to read
+     *  @param newValue the new value of this union
+     *  @param out the byte array the value is read from
+     *  @param byteOrder the byteOrder used for reading values
+     *  @param address the address in @p input
+     *  @param remaining number of bytes remaining in @p input
+     *  @param bitOffset the bit to start at in the first byte
+     *  @return @c true on success, @c false otherwise
+     */
+    bool writeBits(const quint8 bitCount, const AllPrimitiveTypes newValue,
+            Okteta::AbstractByteArrayModel* out, const ByteOrder byteOrder,
+            const Okteta::Address address, const Okteta::Size remaining,
+            quint8* const bitOffset);
+    /** Reads given number of bits from @p input and sets value of this union to
+     *  the new value.
+     *  @p bitOffset is changed in this method so it does not have to be handled later.
+     *  There is no need to write an optimised version of this method for reading complete bytes
+     *  since this is already handled internally.
+     *
+     *  On failure value of this union is set to @c 0.
+     *
+     *  @param bitCount the number of bits to read
+     *  @param input the byte array the value is read from
+     *  @param byteOrder the byteOrder used for reading values
+     *  @param address the address in @p input
+     *  @param remaining number of bytes remaining in @p input
+     *  @param bitOffset the bit to start at in the first byte
+     *  @return @c true on success, @c false otherwise
+     */
+    bool readBits(const quint8 bitCount,
+            const Okteta::AbstractByteArrayModel* input, const ByteOrder byteOrder,
+            const Okteta::Address address, const Okteta::Size remaining,
+            quint8* const bitOffset);
+private:
+    void readDataLittleEndian(const quint8 bitCount,
+            const Okteta::AbstractByteArrayModel* input,
+            const Okteta::Address address, const quint8 bo);
+    void writeDataLittleEndian(const quint8 bitCount,
+            Okteta::AbstractByteArrayModel *out, const Okteta::Address address,
+            const quint8 bo) const;
+
+    void readDataBigEndian(const quint8 bitCount,
+            const Okteta::AbstractByteArrayModel* input,
+            const Okteta::Address address, const quint8 bo);
+    void writeDataBigEndian(const quint8 bitCount,
+            Okteta::AbstractByteArrayModel *out, Okteta::Address address,
+            const quint8 bo) const;
 };
 #endif /* ALLPRIMITIVETYPES_H_ */
