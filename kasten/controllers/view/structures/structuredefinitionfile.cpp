@@ -243,9 +243,8 @@ AbstractArrayDataInformation*
 StructureDefinitionFile::arrayFromXML(const QDomElement& xmlElem) const
 {
     QString name = xmlElem.attribute("name", i18n("<invalid name>"));
-    DataInformation* subElem = NULL;
     QDomNode node = xmlElem.firstChild();
-    subElem = parseNode(node);
+    QScopedPointer<DataInformation> subElem(parseNode(node));
     if (!subElem)
     {
         kWarning() << "AbstractArrayDataInformation::fromXML():"
@@ -257,7 +256,6 @@ StructureDefinitionFile::arrayFromXML(const QDomElement& xmlElem) const
     {
         kWarning() << "StaticLengthPrimitiveArrayDataInformation::fromXML():"
             " no length attribute defined";
-        delete subElem;
         return NULL;
     }
     AbstractArrayDataInformation* retVal;
@@ -277,10 +275,8 @@ StructureDefinitionFile::arrayFromXML(const QDomElement& xmlElem) const
     else
     {
         kWarning() << "could not parse length string:" << lengthStr;
-        delete subElem;
         return NULL;
     }
-    delete subElem; //control not taken over by constructor
     return retVal;
 }
 
