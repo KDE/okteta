@@ -74,6 +74,8 @@ bool AllPrimitiveTypes::readBits(const quint8 bitCount,
         *bitOffset = 0;
         return false;
     }
+    //set to zero before reading
+    ulongValue = 0;
     if (byteOrder == ByteOrderEnumClass::LittleEndian)
     {
         readDataLittleEndian(bitCount, input, address, *bitOffset);
@@ -88,14 +90,6 @@ bool AllPrimitiveTypes::readBits(const quint8 bitCount,
         ulongValue = 0;
         return false;
     }
-#if 0
-    //FIXME do in callee
-    if (val.ulongValue != mValue.ulongValue)
-    {
-        emit dataChanged();
-        mValue = val;
-    }
-#endif
     *bitOffset = (*bitOffset + bitCount) % 8;
     return true;
 }
@@ -124,7 +118,7 @@ void AllPrimitiveTypes::readDataLittleEndian(const quint8 bitCount,
         for (uint i = 8; i < bitCount + bo; i += 8)
         {
             quint8 readVal = input->byte(address + (i / 8));
-            if (bitCount + bo <= i + 8)
+            if (bitCount + bo < i + 8)
             {
                 //this is last byte needed, possibly cut off top values
                 quint8 missingBits = (bitCount + bo) % 8;
@@ -132,7 +126,8 @@ void AllPrimitiveTypes::readDataLittleEndian(const quint8 bitCount,
                 readVal &= mask; //mask the top few bits
             }
             //otherwise we need full byte -> nothing to do
-            quint64 shiftedVal = readVal << i;
+            //needs cast since otherwise compiler decides to use 32 bit int and top 32 bits get lost
+            quint64 shiftedVal = (quint64)readVal << i;
             ulongValue |= shiftedVal >> bo; //move to correct byte
         }
     }
@@ -156,26 +151,28 @@ void AllPrimitiveTypes::readDataBigEndian(const quint8 bitCount,
     {
         quint8 firstByteMask = 0xff >> bo;
         quint8 firstByte = input->byte(address);
-        quint8 firstByteMasked = firstByte & firstByteMask;
+        //needs quint64 since otherwise compiler decides to use 32 bit int when shifting and top 32 bits get lost
+        quint64 firstByteMasked = firstByte & firstByteMask;
         quint64 firstByteShifted = firstByteMasked << (bo + bitCount - 8);
         ulongValue = firstByteShifted;
         //if spans more than this one byte continue
         for (uint i = 8; i < bitCount + bo; i += 8)
         {
             quint8 readVal = input->byte(address + (i / 8));
-            if (bitCount + bo <= i + 8)
+            if (bitCount + bo < i + 8)
             {
                 //this is last byte needed, possibly cut off lower values
                 quint8 missingBits = (bo + bitCount) % 8;
                 quint8 mask = 0xff << (8 - missingBits);
                 quint8 maskedVal = readVal & mask; //cut off lower bits
                 quint8 shiftedVal = maskedVal >> (8 - missingBits);
-                ubyteValue |= shiftedVal;
+                ulongValue |= shiftedVal;
             }
             else
             {
                 //otherwise we need full byte -> nothing to do
-                quint64 shiftedVal = readVal << ((bo + bitCount) - (8 + i)); //move to correct byte
+                //needs cast since otherwise compiler decides to use 32 bit int and top 32 bits get lost
+                quint64 shiftedVal = (quint64)readVal << ((bo + bitCount) - (8 + i)); //move to correct byte
                 ulongValue |= shiftedVal;
             }
         }
