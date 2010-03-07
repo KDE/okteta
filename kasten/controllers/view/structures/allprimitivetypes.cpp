@@ -246,6 +246,7 @@ void AllPrimitiveTypes::writeDataBigEndian(const quint8 bitCount,
     else
     {
         quint8 missingBits = (bitCount + bo) % 8;
+        missingBits = (missingBits == 0 ? 8 : missingBits);
         quint8 lastAddress = address + ((bo + bitCount) / 8) - (missingBits > 0 ? 0
                 : 1);
         quint8 lastByte = out->byte(lastAddress);
