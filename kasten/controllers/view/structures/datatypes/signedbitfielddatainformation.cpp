@@ -45,12 +45,21 @@ QString SignedBitfieldDataInformation::valueString() const
     if (!mIsValid)
         return i18nc("invalid value (out of range)", "<invalid>");
     int base = displayBase();
-    quint64 val = mValue.ulongValue & mask();
+    qint64 val = mValue.ulongValue & mask();
+
+    //check if is negative (only when decimal):
+    if (val & (1 << (width() - 1)) && base == 10)
+    {
+        //sign bit is set -> make value negative
+        quint64 fill = 0xffffffff;
+        fill <<= width();
+        val |= fill;
+    }
     QString num = QString::number(val, base);
     if (base == 16)
         num = "0x" + num;
     if (Kasten::StructViewPreferences::localeAwareDecimalFormatting() && base == 10)
-        num = KGlobal::locale()->formatNumber(num, false, 0);
+        num = KGlobal::locale()->formatNumber(num, false);
     return num;
 }
 
