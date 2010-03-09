@@ -31,7 +31,6 @@
 //Okteta
 #include <size.h>
 #include <address.h>
-#include <abstractbytearraymodel.h>
 //structview
 #include "structviewpreferences.h"
 //KDE
@@ -42,10 +41,10 @@
         return new type##DataInformation(*this); \
     }
 
-//namespace Okteta
-//{
-//class AbstractByteArrayModel;
-//}
+namespace Okteta
+{
+class AbstractByteArrayModel;
+}
 
 typedef Kasten::StructViewPreferences::EnumByteOrder::type ByteOrder;
 typedef Kasten::StructViewPreferences::EnumByteOrder ByteOrderEnumClass;
@@ -63,64 +62,42 @@ public:
     virtual DataInformation* clone() const = 0;
     DataInformation(const QString& name, int index, DataInformation* parent = NULL);
     virtual ~DataInformation();
-    /** true for unions and structs and arrays*/
-    bool hasChildren() const
-    {
-        return false;
-    }
-    virtual unsigned int childCount() const
-    {
-        return 0;
-    }
     /**
      *  column 0 is name
      *  column 1 is value
      */
     static const int COLUMN_COUNT = 3;
 
-    virtual DataInformation* childAt(unsigned int) const
-    {
-        return NULL;
-    }
-
-    /** needs to be virtual for bitfields */
-    virtual QString sizeString() const;
-    inline QString name() const
-    {
-        return objectName();
-    }
+    //methods for children:
+    /** true for unions and structs and arrays*/
+    virtual bool hasChildren() const;
+    virtual unsigned int childCount() const;
+    virtual DataInformation* childAt(unsigned int) const;
     virtual Okteta::Size positionRelativeToParent() const;
-    virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const
-    {
-        Q_UNUSED(column)
-        Q_UNUSED(fileLoaded);
-        return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
-    }
+    virtual void setIndex(int newIndex);
 
-    int row()
-    {
-        //        if (mIndex == -1)
-        //            kWarning("DataInformation::row(): mIndex == -1");
-        return mIndex;
-    }
-    void setIndex(int newIndex)
-    {
-        mIndex = newIndex;
-    }
+    //for the model:
+    virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
+    int row() const;
     /** get the necessary data (for the model) */
-    virtual QVariant data(int column, int role) const =0;
+    virtual QVariant data(int column, int role) const = 0;
     /** The size of this DataInformation type in bits (to allow bitfields in future) */
-    virtual int size() const =0;
-    virtual QString typeName() const =0;
+    virtual QString typeName() const = 0;
     /** by default just returns an empty QString */
     virtual QString valueString() const;
+    inline QString name() const;
+    /** needs to be virtual for bitfields */
+    virtual QString sizeString() const;
 
+    //delegate functions:
     /** create a QWidget for the QItemDelegate */
     virtual QWidget* createEditWidget(QWidget* parent) const = 0;
     /** get the needed data from the widget */
     virtual QVariant dataFromWidget(const QWidget* w) const = 0;
     virtual void setWidgetData(QWidget* w) const = 0;
 
+    //reading and writing
+    virtual int size() const = 0;
     /** Reads the necessary data from @p input and returns the number of bytes read
      *
      * @param input the byte array to read from
@@ -157,16 +134,45 @@ protected:
      *  the offset of child number 'index' compared to the beginning of the structure
      *  (unless this DataInformation has children, obviously 0)
      */
-    virtual Okteta::Size offset(unsigned int index) const = 0;
+    virtual Okteta::Size offset(unsigned int index) const = 0; //TODO adjust to bitfields
 Q_SIGNALS:
     void dataChanged();
-protected Q_SLOTS:
-    void onChildDataChanged()
-    {
-        emit dataChanged();
-    }
 protected:
     int mIndex;
 };
 
+//inline functions
+inline int DataInformation::row() const
+{
+    //if (mIndex == -1)
+    //    kWarning("DataInformation::row(): mIndex == -1");
+    return mIndex;
+}
+
+inline Qt::ItemFlags DataInformation::flags(int column, bool fileLoaded) const
+{
+    Q_UNUSED(column)
+    Q_UNUSED(fileLoaded);
+    return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+}
+
+inline QString DataInformation::name() const
+{
+    return objectName();
+}
+
+inline DataInformation* DataInformation::childAt(unsigned int) const
+{
+    return NULL;
+}
+
+inline bool DataInformation::hasChildren() const
+{
+    return false;
+}
+
+inline unsigned int DataInformation::childCount() const
+{
+    return 0;
+}
 #endif /* DATAINFORMATION_H_ */

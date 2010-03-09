@@ -44,30 +44,41 @@ public:
     {
     }
 
-    const QMap<AllPrimitiveTypes, QString>& values() const
-    {
-        return mValues;
-    }
-    const AllPrimitiveTypes key(QString& value) const
-    {
-        return mValues.key(value);
-    }
-    const QString value(AllPrimitiveTypes key) const
-    {
-        return mValues.value(key);
-    }
-    PrimitiveDataType type() const
-    {
-        return mType;
-    }
-    const QString& name() const
-    {
-        return mName;
-    }
+    const QMap<AllPrimitiveTypes, QString>& values() const;
+    const AllPrimitiveTypes key(QString& value) const;
+    const QString value(AllPrimitiveTypes key) const;
+    PrimitiveDataType type() const;
+    const QString& name() const;
 protected:
     const QString mName;
     const QMap<AllPrimitiveTypes, QString> mValues;
     const PrimitiveDataType mType;
 };
+
+
+inline const QMap<AllPrimitiveTypes, QString>& EnumDefinition::values() const
+{
+    return mValues;
+}
+
+inline const AllPrimitiveTypes EnumDefinition::key(QString& value) const
+{
+    return mValues.key(value);
+}
+
+inline const QString EnumDefinition::value(AllPrimitiveTypes key) const
+{
+    return mValues.value(key);
+}
+
+inline PrimitiveDataType EnumDefinition::type() const
+{
+    return mType;
+}
+
+inline const QString& EnumDefinition::name() const
+{
+    return mName;
+}
 
 #endif /* ENUMDEFINITION_H_ */

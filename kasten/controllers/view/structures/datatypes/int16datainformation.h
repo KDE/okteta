@@ -29,26 +29,27 @@ class Int16DataInformation: public SignedPrimitiveDataInformation
 {
 Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Int16,SignedPrimitive)
+
 public:
-    inline int size() const
-    {
-        return 16;
-    }
-    inline QString typeName() const
-    {
-        return i18nc("Data type", "short");
-    }
     DATAINFORMATION_CLONE(Int16)
 
+    int size() const;
+    QString typeName() const;
     virtual QString valueString() const;
 
-    inline QWidget* createEditWidget(QWidget* parent) const
-    {
-        SInt16Editor* ret = new SInt16Editor(parent);
-        ret->setBase(displayBase());
-        return ret;
-    }
-
     virtual void setWidgetData(QWidget* w) const;
+    virtual QWidget* createEditWidget(QWidget* parent) const;
 };
+
+
+inline int Int16DataInformation::size() const
+{
+    return 16;
+}
+
+inline QString Int16DataInformation::typeName() const
+{
+    return i18nc("Data type", "short");
+}
+
 #endif /* INT16DATAINFORMATION_H_ */

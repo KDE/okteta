@@ -31,24 +31,8 @@ PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(SignedPrimitive,Primitive)
 protected:
     QString correctSignedValue(QString& num, int base) const;
 public:
-    virtual inline int displayBase() const
-    {
-        int base = Kasten::StructViewPreferences::signedDisplayBase();
-        if (base == Kasten::StructViewPreferences::EnumSignedDisplayBase::Binary)
-        {
-            return 2;
-        }
-        if (base == Kasten::StructViewPreferences::EnumSignedDisplayBase::Decimal)
-        {
-            return 10;
-        }
-        if (base
-                == Kasten::StructViewPreferences::EnumSignedDisplayBase::Hexadecimal)
-        {
-            return 16;
-        }
-        return 10; //safe default value
-    }
+    virtual int displayBase() const;
+
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const;
 

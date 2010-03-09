@@ -31,25 +31,25 @@ Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Int64,SignedPrimitive)
 
 public:
-    inline int size() const
-    {
-        return 64;
-    }
-    inline QString typeName() const
-    {
-        return i18nc("Data type", "long");
-    }
     DATAINFORMATION_CLONE(Int64)
+
+    int size() const;
+    QString typeName() const;
     virtual QString valueString() const;
 
-    virtual void setWidgetData(QWidget* w) const;
-
-    inline QWidget* createEditWidget(QWidget* parent) const
-    {
-        SInt64Editor* ret = new SInt64Editor(parent);
-        ret->setBase(displayBase());
-        return ret;
-    }
+    void setWidgetData(QWidget* w) const;
+    virtual QWidget* createEditWidget(QWidget* parent) const;
 };
+
+
+inline int Int64DataInformation::size() const
+{
+    return 64;
+}
+
+inline QString Int64DataInformation::typeName() const
+{
+    return i18nc("Data type", "long");
+}
 
 #endif /* INT64DATAINFORMATION_H_ */

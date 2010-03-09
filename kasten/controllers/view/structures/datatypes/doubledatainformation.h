@@ -29,19 +29,12 @@ class DoubleDataInformation: public PrimitiveDataInformation
 Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Double,Primitive)
 public:
-    inline int displayBase() const
-    {
-        return 10;
-    }
-    inline int size() const
-    {
-        return 64;
-    }
-    inline QString typeName() const
-    {
-        return i18nc("Data type", "double");
-    }
     DATAINFORMATION_CLONE(Double)
+
+    int displayBase() const;
+    int size() const;
+    QString typeName() const;
+
     virtual QString valueString() const;
 
     virtual QWidget* createEditWidget(QWidget* parent) const;
@@ -49,5 +42,22 @@ public:
     virtual void setWidgetData(QWidget* w) const;
     virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const;
 };
+
+
+inline int DoubleDataInformation::displayBase() const
+{
+    return 10;
+}
+
+inline int DoubleDataInformation::size() const
+{
+    return 64;
+}
+
+inline QString DoubleDataInformation::typeName() const
+{
+    return i18nc("Data type", "double");
+}
+
 
 #endif /* DOUBLEDATAINFORMATION_H_ */

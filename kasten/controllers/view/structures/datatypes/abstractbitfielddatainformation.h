@@ -44,43 +44,48 @@ protected:
 private:
     unsigned mWidth :7; //cannot be more than 64 since a quint64 is used for storage
 public:
-    inline uint width() const
-    {
-        return mWidth;
-    }
+    uint width() const;
+    virtual int size() const;
+    quint64 mask() const;
+
     virtual QString sizeString() const;
+    virtual QString typeName() const;
+    virtual AllPrimitiveTypes
+            qVariantToAllPrimitiveTypes(const QVariant& value) const;
 
-    inline int size() const
-    {
-        return width();
-    }
-    inline quint64 mask() const
-    {
-        /* same as:
-         *
-         * quint64 ret = 0;
-         * for (int i = 0; i < width(); i++)
-         *     ret |= 1 << i;
-         * return ret;
-         */
-        return (1 << width()) - 1;
-    }
-    virtual QString typeName() const
-    {
-        return i18ncp("Data type", "bitfield (%1 bit wide)",
-                "bitfield (%1 bits wide)", width());
-    }
-    virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const;
-
-    virtual QWidget* createEditWidget(QWidget* parent) const = 0;
-    virtual QVariant dataFromWidget(const QWidget* w) const = 0;
-    virtual void setWidgetData(QWidget* w) const = 0;
-    virtual Qt::ItemFlags flags(int column, bool fileLoaded) const
-    {
-        if (column == 2 && fileLoaded)
-            return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable;
-        else
-            return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
-    }
+    virtual Qt::ItemFlags flags(int column, bool fileLoaded) const;
 };
+
+
+inline Qt::ItemFlags AbstractBitfieldDataInformation::flags(int column,
+        bool fileLoaded) const
+{
+    if (column == 2 && fileLoaded)
+        return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable;
+    else
+        return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+}
+
+inline quint64 AbstractBitfieldDataInformation::mask() const
+{
+    /* same as:
+     *
+     * quint64 ret = 0;
+     * for (int i = 0; i < width(); i++)
+     *     ret |= 1 << i;
+     * return ret;
+     */
+    return (1 << width()) - 1;
+}
+
+inline int AbstractBitfieldDataInformation::size() const
+{
+    return width();
+}
+
+inline uint AbstractBitfieldDataInformation::width() const
+{
+    return mWidth;
+}
+
 #endif /* ABSTRACTBITFIELDDATAINFORMATION_H_ */

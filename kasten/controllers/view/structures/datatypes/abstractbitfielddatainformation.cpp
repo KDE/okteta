@@ -30,9 +30,15 @@ AllPrimitiveTypes AbstractBitfieldDataInformation::qVariantToAllPrimitiveTypes(
         const QVariant& value) const
 {
     if (!value.isValid())
-        kDebug() << "invalid QVariant passed.";
+        kDebug()
+            << "invalid QVariant passed.";
 
     //This is fine since all the values are unsigned
     return AllPrimitiveTypes(value.toULongLong());
 }
 
+QString AbstractBitfieldDataInformation::typeName() const
+{
+    return i18ncp("Data type", "bitfield (%1 bit wide)", "bitfield (%1 bits wide)",
+            width());
+}

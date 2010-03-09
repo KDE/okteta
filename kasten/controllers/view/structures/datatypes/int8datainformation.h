@@ -30,25 +30,24 @@ class Int8DataInformation: public SignedPrimitiveDataInformation
 Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Int8,SignedPrimitive)
 public:
-    inline int size() const
-    {
-        return 8;
-    }
-    inline QString typeName() const
-    {
-        return i18nc("Data type", "byte");
-    }
     DATAINFORMATION_CLONE(Int8)
+
+    int size() const;
+    QString typeName() const;
     virtual QString valueString() const;
 
     virtual void setWidgetData(QWidget* w) const;
-
-    inline QWidget* createEditWidget(QWidget* parent) const
-    {
-        SInt8Editor* ret = new SInt8Editor(parent);
-        ret->setBase(displayBase());
-        return ret;
-    }
+    virtual QWidget* createEditWidget(QWidget* parent) const;
 };
+
+inline int Int8DataInformation::size() const
+{
+    return 8;
+}
+
+inline QString Int8DataInformation::typeName() const
+{
+    return i18nc("Data type", "byte");
+}
 
 #endif /* INT8DATAINFORMATION_H_ */

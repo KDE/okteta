@@ -128,3 +128,20 @@ AllPrimitiveTypes CharDataInformation::qVariantToAllPrimitiveTypes(
     return AllPrimitiveTypes(value.toUInt());
 }
 
+int CharDataInformation::displayBase() const
+{
+    int base = Kasten::StructViewPreferences::charDisplayBase();
+    if (base == Kasten::StructViewPreferences::EnumCharDisplayBase::Binary)
+    {
+        return 2;
+    }
+    if (base == Kasten::StructViewPreferences::EnumCharDisplayBase::Decimal)
+    {
+        return 10;
+    }
+    if (base == Kasten::StructViewPreferences::EnumCharDisplayBase::Hexadecimal)
+    {
+        return 16;
+    }
+    return 10; //safe default value
+}

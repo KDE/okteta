@@ -32,7 +32,7 @@ StaticLengthArrayDataInformation::StaticLengthArrayDataInformation(QString name,
     {
         DataInformation* arrayElem = children.clone();
         QObject::connect(arrayElem, SIGNAL(dataChanged()), this,
-                SLOT(onChildDataChanged()));
+                SIGNAL(dataChanged()));
         appendChild(arrayElem);
     }
 }

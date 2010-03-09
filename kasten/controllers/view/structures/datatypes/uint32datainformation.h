@@ -30,23 +30,24 @@ class UInt32DataInformation: public UnsignedPrimitiveDataInformation
 Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(UInt32,UnsignedPrimitive)
 public:
-    inline int size() const
-    {
-        return 32;
-    }
-    inline QString typeName() const
-    {
-        return i18nc("Data type", "unsigned int");
-    }
     DATAINFORMATION_CLONE(UInt32)
+
+    int size() const;
+    QString typeName() const;
     virtual QString valueString() const;
 
-    inline QWidget* createEditWidget(QWidget* parent) const
-    {
-        UInt32Editor* ret = new UInt32Editor(parent);
-        ret->setBase(displayBase());
-        return ret;
-    }
+    QWidget* createEditWidget(QWidget* parent) const;
 };
+
+
+inline int UInt32DataInformation::size() const
+{
+    return 32;
+}
+
+inline QString UInt32DataInformation::typeName() const
+{
+    return i18nc("Data type", "unsigned int");
+}
 
 #endif /* UINT32DATAINFORMATION_H_ */

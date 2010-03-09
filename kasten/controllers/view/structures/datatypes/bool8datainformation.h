@@ -30,23 +30,23 @@ class Bool8DataInformation: public UnsignedPrimitiveDataInformation
 Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Bool8,UnsignedPrimitive)
 public:
-    inline int size() const
-    {
-        return 8;
-    }
-    inline QString typeName() const
-    {
-        return i18nc("Data type", "bool (1 byte)");
-    }
     DATAINFORMATION_CLONE(Bool8)
+
+    int size() const;
+    QString typeName() const;
     virtual QString valueString() const;
 
-    inline QWidget* createEditWidget(QWidget* parent) const
-    {
-        UInt8Editor* ret = new UInt8Editor(parent);
-        ret->setBase(displayBase());
-        return ret;
-    }
+    QWidget* createEditWidget(QWidget* parent) const;
 };
+
+
+inline int Bool8DataInformation::size() const
+{
+    return 8;
+}
+inline QString Bool8DataInformation::typeName() const
+{
+    return i18nc("Data type", "bool (1 byte)");
+}
 
 #endif /* BOOL8DATAINFORMATION_H_ */

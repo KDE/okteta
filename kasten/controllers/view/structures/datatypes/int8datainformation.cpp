@@ -41,3 +41,10 @@ void Int8DataInformation::setWidgetData(QWidget* w) const
     if (spin)
         spin->setValue(this->value().byteValue);
 }
+
+QWidget* Int8DataInformation::createEditWidget(QWidget* parent) const
+{
+    SInt8Editor* ret = new SInt8Editor(parent);
+    ret->setBase(displayBase());
+    return ret;
+}

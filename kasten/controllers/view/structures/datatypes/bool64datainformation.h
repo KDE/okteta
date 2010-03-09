@@ -31,23 +31,23 @@ Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Bool64,UnsignedPrimitive)
 
 public:
-    inline int size() const
-    {
-        return 64;
-    }
-    inline QString typeName() const
-    {
-        return i18nc("Data type", "bool (8 bytes)");
-    }
     DATAINFORMATION_CLONE(Bool64)
+
+    int size() const;
+    QString typeName() const;
     virtual QString valueString() const;
 
-    inline QWidget* createEditWidget(QWidget* parent) const
-    {
-        UInt64Editor* ret = new UInt64Editor(parent);
-        ret->setBase(displayBase());
-        return ret;
-    }
+    QWidget* createEditWidget(QWidget* parent) const;
 };
+
+inline QString Bool64DataInformation::typeName() const
+{
+    return i18nc("Data type", "bool (8 bytes)");
+}
+
+inline int Bool64DataInformation::size() const
+{
+    return 64;
+}
 
 #endif /* BOOL64DATAINFORMATION_H_ */

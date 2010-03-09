@@ -41,3 +41,10 @@ void Int16DataInformation::setWidgetData(QWidget* w) const
     if (spin)
         spin->setValue(this->value().shortValue);
 }
+
+QWidget* Int16DataInformation::createEditWidget(QWidget* parent) const
+{
+    SInt16Editor* ret = new SInt16Editor(parent);
+    ret->setBase(displayBase());
+    return ret;
+}

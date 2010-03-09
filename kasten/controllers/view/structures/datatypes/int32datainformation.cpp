@@ -45,3 +45,10 @@ void Int32DataInformation::setWidgetData(QWidget* w) const
     if (spin)
         spin->setValue(this->value().intValue);
 }
+
+QWidget* Int32DataInformation::createEditWidget(QWidget* parent) const
+{
+    SInt32Editor* ret = new SInt32Editor(parent);
+    ret->setBase(displayBase());
+    return ret;
+}

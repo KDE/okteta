@@ -31,14 +31,14 @@ EnumDataInformation::EnumDataInformation(QString name,
     if (mType != mEnum->type())
         kWarning() << "incompatible types in definition and value: "
                 << enumDef->type() << "and " << mType;
-    connect(mValue, SIGNAL(dataChanged()), SLOT(onChildDataChanged()));
+    connect(mValue, SIGNAL(dataChanged()), SIGNAL(dataChanged()));
 }
 
 EnumDataInformation::EnumDataInformation(const EnumDataInformation& e) :
     PrimitiveDataInformation(e), mEnum(e.mEnum)
 {
     mValue = static_cast<PrimitiveDataInformation*> (e.mValue->clone());
-    connect(mValue, SIGNAL(dataChanged()), SLOT(onChildDataChanged()));
+    connect(mValue, SIGNAL(dataChanged()), this, SIGNAL(dataChanged()));
 }
 
 EnumDataInformation::~EnumDataInformation()

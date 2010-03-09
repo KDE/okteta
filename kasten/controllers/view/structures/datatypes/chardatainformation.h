@@ -29,32 +29,11 @@ class CharDataInformation: public PrimitiveDataInformation
 Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Char,Primitive)
 public:
-    virtual inline int displayBase() const
-    {
-        int base = Kasten::StructViewPreferences::charDisplayBase();
-        if (base == Kasten::StructViewPreferences::EnumCharDisplayBase::Binary)
-        {
-            return 2;
-        }
-        if (base == Kasten::StructViewPreferences::EnumCharDisplayBase::Decimal)
-        {
-            return 10;
-        }
-        if (base == Kasten::StructViewPreferences::EnumCharDisplayBase::Hexadecimal)
-        {
-            return 16;
-        }
-        return 10; //safe default value
-    }
-    inline int size() const
-    {
-        return 8;
-    }
-    inline QString typeName() const
-    {
-        return i18nc("Data type", "char");
-    }
     DATAINFORMATION_CLONE(Char)
+
+    virtual int displayBase() const;
+    virtual int size() const;
+    virtual QString typeName() const;
     virtual QString valueString() const;
     virtual AllPrimitiveTypes
             qVariantToAllPrimitiveTypes(const QVariant& value) const;
@@ -63,5 +42,15 @@ public:
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
 };
+
+
+inline int CharDataInformation::size() const
+{
+    return 8;
+}
+inline QString CharDataInformation::typeName() const
+{
+    return i18nc("Data type", "char");
+}
 
 #endif /* CHARDATAINFORMATION_H_ */

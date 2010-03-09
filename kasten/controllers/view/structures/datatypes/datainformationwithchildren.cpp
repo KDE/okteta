@@ -30,7 +30,7 @@ void DataInformationWithChildren::appendChild(DataInformation* child)
         child->setIndex(mChildren.size());
         child->setParent(this);
         mChildren.append(child);
-        connect(child, SIGNAL(dataChanged()), this, SLOT(onChildDataChanged()));
+        connect(child, SIGNAL(dataChanged()), this, SIGNAL(dataChanged()));
     }
 }
 
@@ -103,7 +103,7 @@ DataInformationWithChildren::DataInformationWithChildren(
             DataInformation * child = dat->clone();
             child->setParent(this);
             QObject::connect(child, SIGNAL(dataChanged()), this,
-                    SLOT(onChildDataChanged()));
+                    SIGNAL(dataChanged()));
             mChildren.append(child);
         }
 }

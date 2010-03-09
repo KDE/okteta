@@ -30,22 +30,23 @@ class Bool32DataInformation: public UnsignedPrimitiveDataInformation
 Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Bool32,UnsignedPrimitive)
 public:
-    inline int size() const
-    {
-        return 32;
-    }
-    inline QString typeName() const
-    {
-        return i18nc("Data type", "bool (4 bytes)");
-    }
     DATAINFORMATION_CLONE(Bool32)
+
+    int size() const;
+    QString typeName() const;
     virtual QString valueString() const;
-    inline QWidget* createEditWidget(QWidget* parent) const
-    {
-        UInt32Editor* ret = new UInt32Editor(parent);
-        ret->setBase(displayBase());
-        return ret;
-    }
+    QWidget* createEditWidget(QWidget* parent) const;
 };
+
+
+inline QString Bool32DataInformation::typeName() const
+{
+    return i18nc("Data type", "bool (4 bytes)");
+}
+
+inline int Bool32DataInformation::size() const
+{
+    return 32;
+}
 
 #endif /* BOOL32DATAINFORMATION_H_ */

@@ -37,33 +37,26 @@ protected:
 public:
     //just for debugging
     Q_PROPERTY(QList<DataInformation*> mChildren READ children())
-    QList<DataInformation*> children() const
-    {
-        return mChildren;
-    }
+
+    QList<DataInformation*> children() const;
     explicit DataInformationWithChildren(QString& name, int index = -1,
             DataInformation* parent = NULL);
     virtual ~DataInformationWithChildren();
+
     virtual QVariant data(int, int) const;
 
-    virtual DataInformation* childAt(unsigned int index) const;
-    virtual inline bool hasChildren() const
-    {
-        return childCount() != 0;
-    }
+    /** this is valid for structs and arrays, union has an own implementation */
     virtual bool setData(const QVariant& value, DataInformation* inf,
             Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
             Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset);
-
     /** this is valid for structs and arrays, union has an own implementation */
     virtual qint64
     readData(Okteta::AbstractByteArrayModel *input, ByteOrder byteOrder,
             Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset);
 
-    virtual inline unsigned int childCount() const
-    {
-        return mChildren.size();
-    }
+    virtual DataInformation* childAt(unsigned int index) const;
+    virtual bool hasChildren() const;
+    virtual unsigned int childCount() const;
     virtual QList<const DataInformation*> findChildrenWithName(const QString& name,
             const DataInformation* const upTo) const;
 
@@ -72,5 +65,21 @@ public:
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
 };
+
+
+inline QList<DataInformation*> DataInformationWithChildren::children() const
+{
+    return mChildren;
+}
+
+inline bool DataInformationWithChildren::hasChildren() const
+{
+    return childCount() != 0;
+}
+
+inline unsigned int DataInformationWithChildren::childCount() const
+{
+    return mChildren.size();
+}
 
 #endif /* DATAINFORMATIONWITHCHILDREN_H_ */

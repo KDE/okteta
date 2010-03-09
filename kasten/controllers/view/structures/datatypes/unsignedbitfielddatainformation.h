@@ -43,11 +43,9 @@ protected:
     {
     }
 public:
-    inline QString typeName() const
-    {
-        return i18nc("Data type", "unsigned bitfield");
-    }
     DATAINFORMATION_CLONE(UnsignedBitfield)
+
+    QString typeName() const;
     virtual QString valueString() const;
 
     virtual QWidget* createEditWidget(QWidget* parent) const;
@@ -55,5 +53,10 @@ public:
     virtual void setWidgetData(QWidget* w) const;
     int displayBase() const;
 };
+
+inline QString UnsignedBitfieldDataInformation::typeName() const
+{
+    return i18nc("Data type", "unsigned bitfield");
+}
 
 #endif /* UNSIGNEDBITFIELDDATAINFORMATION_H_ */

@@ -42,3 +42,10 @@ QString Bool64DataInformation::valueString() const
         return i18nc("boolean value with actual value", "true (%1)", num);
     }
 }
+
+QWidget* Bool64DataInformation::createEditWidget(QWidget* parent) const
+{
+    UInt64Editor* ret = new UInt64Editor(parent);
+    ret->setBase(displayBase());
+    return ret;
+}

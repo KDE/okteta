@@ -30,23 +30,24 @@ class UInt64DataInformation: public UnsignedPrimitiveDataInformation
 Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(UInt64,UnsignedPrimitive)
 public:
-    inline int size() const
-    {
-        return 64;
-    }
-    inline QString typeName() const
-    {
-        return i18nc("Data type", "unsigned long");
-    }
     DATAINFORMATION_CLONE(UInt64)
+
+    int size() const;
+    QString typeName() const;
     virtual QString valueString() const;
 
-    inline QWidget* createEditWidget(QWidget* parent) const
-    {
-        UInt64Editor* ret = new UInt64Editor(parent);
-        ret->setBase(displayBase());
-        return ret;
-    }
+    QWidget* createEditWidget(QWidget* parent) const;
 };
+
+
+inline int UInt64DataInformation::size() const
+{
+    return 64;
+}
+
+inline QString UInt64DataInformation::typeName() const
+{
+    return i18nc("Data type", "unsigned long");
+}
 
 #endif /* UINT64DATAINFORMATION_H_ */

@@ -47,3 +47,22 @@ AllPrimitiveTypes UnsignedPrimitiveDataInformation::qVariantToAllPrimitiveTypes(
     //This is fine since all the values are unsigned
     return AllPrimitiveTypes(value.toULongLong());
 }
+
+int UnsignedPrimitiveDataInformation::displayBase() const
+{
+    int base = Kasten::StructViewPreferences::unsignedDisplayBase();
+    if (base == Kasten::StructViewPreferences::EnumUnsignedDisplayBase::Binary)
+    {
+        return 2;
+    }
+    if (base == Kasten::StructViewPreferences::EnumUnsignedDisplayBase::Decimal)
+    {
+        return 10;
+    }
+    if (base
+            == Kasten::StructViewPreferences::EnumUnsignedDisplayBase::Hexadecimal)
+    {
+        return 16;
+    }
+    return 10; //safe default value
+}

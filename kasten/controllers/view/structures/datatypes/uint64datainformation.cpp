@@ -33,3 +33,10 @@ QString UInt64DataInformation::valueString() const
         num = KGlobal::locale()->formatNumber(num, false, 0);
     return num;
 }
+
+QWidget* UInt64DataInformation::createEditWidget(QWidget* parent) const
+{
+    UInt64Editor* ret = new UInt64Editor(parent);
+    ret->setBase(displayBase());
+    return ret;
+}

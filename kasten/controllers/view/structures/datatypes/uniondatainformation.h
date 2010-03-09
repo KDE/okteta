@@ -50,11 +50,13 @@ public:
     /** add another field to this union */
     UnionDataInformation& operator<<(DataInformation* field);
 protected:
-    virtual Okteta::Size offset(unsigned int index) const
-    {
-        Q_UNUSED(index)
-        return 0;
-    }
+    virtual Okteta::Size offset(unsigned int index) const;
 };
+
+inline Okteta::Size UnionDataInformation::offset(unsigned int index) const
+{
+    Q_UNUSED(index)
+    return 0;
+}
 
 #endif /* UNIONDATAINFORMATION_H_ */

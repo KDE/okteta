@@ -66,3 +66,8 @@ Okteta::Size DataInformation::positionRelativeToParent() const
     }
     return par->offset(this->mIndex) + par->positionRelativeToParent();
 }
+
+void DataInformation::setIndex(int newIndex)
+{
+    mIndex = newIndex;
+}

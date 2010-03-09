@@ -42,3 +42,10 @@ QString Bool8DataInformation::valueString() const
         return i18nc("boolean value with actual value", "true (%1)", num);
     }
 }
+
+QWidget* Bool8DataInformation::createEditWidget(QWidget* parent) const
+{
+    UInt8Editor* ret = new UInt8Editor(parent);
+    ret->setBase(displayBase());
+    return ret;
+}

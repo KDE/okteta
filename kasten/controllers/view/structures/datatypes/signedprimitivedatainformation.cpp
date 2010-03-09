@@ -40,7 +40,7 @@ QVariant SignedPrimitiveDataInformation::dataFromWidget(const QWidget* w) const
     const SIntSpinBox* spin = dynamic_cast<const SIntSpinBox*> (w);
     //always save the value as an unsigned value to allow safe converting
     if (spin)
-        return (quint64)spin->value();
+        return (quint64) spin->value();
     else
         return QVariant();
 }
@@ -49,8 +49,27 @@ AllPrimitiveTypes SignedPrimitiveDataInformation::qVariantToAllPrimitiveTypes(
         const QVariant& value) const
 {
     if (!value.isValid())
-        kDebug() << "invalid QVariant passed.";
+        kDebug()
+            << "invalid QVariant passed.";
 
     //This is fine since all the values are unsigned
     return AllPrimitiveTypes(value.toULongLong());
+}
+
+int SignedPrimitiveDataInformation::displayBase() const
+{
+    int base = Kasten::StructViewPreferences::signedDisplayBase();
+    if (base == Kasten::StructViewPreferences::EnumSignedDisplayBase::Binary)
+    {
+        return 2;
+    }
+    if (base == Kasten::StructViewPreferences::EnumSignedDisplayBase::Decimal)
+    {
+        return 10;
+    }
+    if (base == Kasten::StructViewPreferences::EnumSignedDisplayBase::Hexadecimal)
+    {
+        return 16;
+    }
+    return 10; //safe default value
 }

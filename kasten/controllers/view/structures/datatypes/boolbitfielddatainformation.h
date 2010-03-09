@@ -43,11 +43,9 @@ protected:
     {
     }
 public:
-    inline QString typeName() const
-    {
-        return i18nc("Data type", "boolean bitfield");
-    }
     DATAINFORMATION_CLONE(BoolBitfield)
+
+    QString typeName() const;
     virtual QString valueString() const;
 
     virtual QWidget* createEditWidget(QWidget* parent) const;
@@ -55,5 +53,11 @@ public:
     virtual void setWidgetData(QWidget* w) const;
     int displayBase() const;
 };
+
+
+inline QString BoolBitfieldDataInformation::typeName() const
+{
+    return i18nc("Data type", "boolean bitfield");
+}
 
 #endif /* BOOLBITFIELDDATAINFORMATION_H_ */

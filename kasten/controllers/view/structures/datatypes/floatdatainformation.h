@@ -29,20 +29,12 @@ class FloatDataInformation: public PrimitiveDataInformation
 Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Float,Primitive)
 public:
-    inline int displayBase() const
-    {
-        return 10;
-    }
-    inline int size() const
-    {
-        return 32;
-    }
-    inline QString typeName() const
-    {
-        return i18nc("Data type", "float");
-    }
     DATAINFORMATION_CLONE(Float)
-    virtual QString valueString() const;
+
+    int displayBase() const;
+    int size() const;
+    QString typeName() const;
+    QString valueString() const;
 
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
@@ -50,5 +42,21 @@ public:
     virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const;
 
 };
+
+
+inline int FloatDataInformation::displayBase() const
+{
+    return 10;
+}
+
+inline int FloatDataInformation::size() const
+{
+    return 32;
+}
+
+inline QString FloatDataInformation::typeName() const
+{
+    return i18nc("Data type", "float");
+}
 
 #endif /* FLOATDATAINFORMATION_H_ */

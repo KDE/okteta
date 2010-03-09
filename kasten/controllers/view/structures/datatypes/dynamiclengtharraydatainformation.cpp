@@ -36,7 +36,7 @@ void DynamicLengthArrayDataInformation::resizeChildren()
         {
             DataInformation* arrayElem = mChildType->clone();
             QObject::connect(arrayElem, SIGNAL(dataChanged()), this,
-                    SLOT(onChildDataChanged()));
+                    SIGNAL(dataChanged()));
             appendChild(arrayElem);
         }
     }

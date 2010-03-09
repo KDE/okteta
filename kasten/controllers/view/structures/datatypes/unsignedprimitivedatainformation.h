@@ -29,24 +29,7 @@ class UnsignedPrimitiveDataInformation: public PrimitiveDataInformation
 Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(UnsignedPrimitive,Primitive)
 public:
-    virtual inline int displayBase() const
-    {
-        int base = Kasten::StructViewPreferences::unsignedDisplayBase();
-        if (base == Kasten::StructViewPreferences::EnumUnsignedDisplayBase::Binary)
-        {
-            return 2;
-        }
-        if (base == Kasten::StructViewPreferences::EnumUnsignedDisplayBase::Decimal)
-        {
-            return 10;
-        }
-        if (base
-                == Kasten::StructViewPreferences::EnumUnsignedDisplayBase::Hexadecimal)
-        {
-            return 16;
-        }
-        return 10; //safe default value
-    }
+    virtual int displayBase() const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
     virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const;

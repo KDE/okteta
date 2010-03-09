@@ -42,3 +42,10 @@ QString Bool32DataInformation::valueString() const
         return i18nc("boolean value with actual value", "true (%1)", num);
     }
 }
+
+QWidget* Bool32DataInformation::createEditWidget(QWidget* parent) const
+{
+    UInt32Editor* ret = new UInt32Editor(parent);
+    ret->setBase(displayBase());
+    return ret;
+}

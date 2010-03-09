@@ -30,24 +30,25 @@ class UInt8DataInformation: public UnsignedPrimitiveDataInformation
 Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(UInt8,UnsignedPrimitive)
 public:
-    inline int size() const
-    {
-        return 8;
-    }
-    inline QString typeName() const
-    {
-        return i18nc("Data type", "unsigned byte");
-    }
     DATAINFORMATION_CLONE(UInt8)
+
+    int size() const;
+    QString typeName() const;
 
     virtual QString valueString() const;
 
-    inline QWidget* createEditWidget(QWidget* parent) const
-    {
-        UInt8Editor* ret = new UInt8Editor(parent);
-        ret->setBase(displayBase());
-        return ret;
-    }
+    virtual QWidget* createEditWidget(QWidget* parent) const;
 };
+
+
+inline int UInt8DataInformation::size() const
+{
+    return 8;
+}
+
+inline QString UInt8DataInformation::typeName() const
+{
+    return i18nc("Data type", "unsigned byte");
+}
 
 #endif /* UINT8DATAINFORMATION_H_ */

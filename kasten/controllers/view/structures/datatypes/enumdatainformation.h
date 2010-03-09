@@ -39,14 +39,10 @@ public:
     QString getTypeString() const;
     QString typeName() const;
     QVariant primitiveValue() const;
-    inline int size() const
-    {
-        return mValue->size();
-    }
-    inline int displayBase() const
-    {
-        return mValue->displayBase();
-    }
+
+    int size() const;
+    int displayBase() const;
+
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input,
             ByteOrder byteOrder, Okteta::Address address, quint64 remaining,
             quint8* bitOffset);
@@ -63,5 +59,16 @@ protected:
     EnumDefinition::Ptr mEnum;
     PrimitiveDataInformation* mValue; //to allow different enum sizes
 };
+
+
+inline int EnumDataInformation::size() const
+{
+    return mValue->size();
+}
+
+inline int EnumDataInformation::displayBase() const
+{
+    return mValue->displayBase();
+}
 
 #endif /* ENUMDATAINFORMATION_H_ */

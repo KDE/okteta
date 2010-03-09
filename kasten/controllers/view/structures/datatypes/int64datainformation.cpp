@@ -40,3 +40,10 @@ void Int64DataInformation::setWidgetData(QWidget* w) const
     if (spin)
         spin->setValue(this->value().longValue);
 }
+
+QWidget* Int64DataInformation::createEditWidget(QWidget* parent) const
+{
+    SInt64Editor* ret = new SInt64Editor(parent);
+    ret->setBase(displayBase());
+    return ret;
+}
