@@ -45,6 +45,7 @@ public:
 
     virtual QVariant data(int, int) const;
 
+    virtual int size() const;
     /** this is valid for structs and arrays, union has an own implementation */
     virtual bool setData(const QVariant& value, DataInformation* inf,
             Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
@@ -59,6 +60,7 @@ public:
     virtual unsigned int childCount() const;
     virtual QList<const DataInformation*> findChildrenWithName(const QString& name,
             const DataInformation* const upTo) const;
+    quint64 offset(unsigned int index) const;
 
     virtual QWidget* createEditWidget(QWidget* parent) const;
     /** get the needed data from the widget */

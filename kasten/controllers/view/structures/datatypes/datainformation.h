@@ -73,8 +73,8 @@ public:
     virtual bool hasChildren() const;
     virtual unsigned int childCount() const;
     virtual DataInformation* childAt(unsigned int) const;
-    virtual Okteta::Size positionRelativeToParent() const;
     virtual void setIndex(int newIndex);
+    virtual quint64 positionRelativeToParent() const;
 
     //for the model:
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
@@ -94,6 +94,7 @@ public:
     virtual QWidget* createEditWidget(QWidget* parent) const = 0;
     /** get the needed data from the widget */
     virtual QVariant dataFromWidget(const QWidget* w) const = 0;
+    /** initialize the delegate widget with the correct data */
     virtual void setWidgetData(QWidget* w) const = 0;
 
     //reading and writing
@@ -131,10 +132,12 @@ public:
             Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset) = 0;
 protected:
     /**
-     *  the offset of child number 'index' compared to the beginning of the structure
-     *  (unless this DataInformation has children, obviously 0)
+     *  the offset of child number @p index compared to the beginning of the structure
+     *  in bits.
+     *  @param index the index of the child
+     *  @return 0 unless this DataInformation has children
      */
-    virtual Okteta::Size offset(unsigned int index) const = 0; //TODO adjust to bitfields
+    virtual quint64 offset(unsigned int index) const = 0;
 Q_SIGNALS:
     void dataChanged();
 protected:

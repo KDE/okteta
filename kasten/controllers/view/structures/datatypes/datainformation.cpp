@@ -51,14 +51,24 @@ QString DataInformation::valueString() const
 
 QString DataInformation::sizeString() const
 {
-    return i18np("1 byte", "%1 bytes", size() / 8);
-    //  return KGlobal::locale()->formatByteSize(size() / 8);
-
+    if (size() % 8 == 0) //no bits remaining
+    {
+        return i18np("1 byte", "%1 bytes", size() / 8);
+    }
+    else
+    {
+        //XXX: is this correct?
+        //maybe this is better?
+        //QString bytes = i18np("1 byte", "%1 bytes", size() / 8);
+        //QString bits = i18np("1 bit", "%1 bits", size() % 8);
+        //return i18nc("number of bytes, then number of bits", "%1 %2", bytes, bits);
+        return i18np("1 byte 1 bit", "%1 bytes %2 bits", size() / 8, size() % 8);
+    }
 }
 
-Okteta::Size DataInformation::positionRelativeToParent() const
+quint64 DataInformation::positionRelativeToParent() const
 {
-    //FIXME this needs updating to support bitfield marking, also offset() updating
+    //FIXME this needs updating to support bitfield marking
     DataInformation* par = static_cast<DataInformation*> (parent());
     if (!par)
     {

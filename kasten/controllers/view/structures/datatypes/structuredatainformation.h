@@ -40,11 +40,8 @@ public Q_SLOTS:
 public:
     //implement the DataInformation pure virtual functions
     QString typeName() const;
-    int size() const;
     /** add another field to this struct */
     StructureDataInformation& operator<<(DataInformation* field);
-protected:
-    Okteta::Size offset(unsigned int index) const;
 };
 
 #endif /* STRUCTUREDATAINFORMATION_H_ */

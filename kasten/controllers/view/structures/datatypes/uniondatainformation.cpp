@@ -32,12 +32,7 @@ int UnionDataInformation::size() const
     int size = 0;
     for (int i = 0; i < mChildren.size(); i++)
     {
-        size = qMax(size, mChildren[i]->size());
-    }
-    if (size % 8 != 0)
-    {
-        //biggest element is a bitfield -> add padding
-        size = size + (8 - size % 8);
+        size = qMax(size, mChildren.at(i)->size());
     }
     return size;
 }

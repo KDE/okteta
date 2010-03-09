@@ -26,38 +26,6 @@ QString StructureDataInformation::typeName() const
     return i18nc("data type in C/C++", "struct");
 }
 
-int StructureDataInformation::size() const
-{
-    int size = 0;
-    bool lastChildWasBitfield = false;
-    for (int i = 0; i < mChildren.size(); i++)
-    {
-        const DataInformation* data = mChildren.at(i);
-
-        bool isBitfield =
-                dynamic_cast<const AbstractBitfieldDataInformation*> (data) != 0;
-        if (isBitfield)
-        {
-            lastChildWasBitfield = true;
-        }
-        else if (lastChildWasBitfield)
-        {
-            uint padding = 8 - (size % 8);
-            size += padding;
-            //this element is not a bitfield -> add padding;
-            lastChildWasBitfield = false;
-        }
-        size += data->size();
-    }
-    if (lastChildWasBitfield)
-    {
-        //add padding at end of structure (align to next byte)
-        uint padding = 8 - (size % 8);
-        size += padding;
-    }
-    return size;
-}
-
 void StructureDataInformation::addDataTypeToStruct(DataInformation* field)
 {
     appendChild(field);
@@ -87,17 +55,3 @@ StructureDataInformation::StructureDataInformation(const StructureDataInformatio
     DataInformationWithChildren(d)
 {
 }
-
-Okteta::Size StructureDataInformation::offset(unsigned int index) const
-{
-    if (index >= childCount())
-        return 0;
-    Okteta::Size offset = 0;
-    //sum size of elements up to index
-    for (unsigned int i = 0; i < index; ++i)
-    {
-        offset += childAt(i)->size() / 8;
-    }
-    return offset;
-}
-

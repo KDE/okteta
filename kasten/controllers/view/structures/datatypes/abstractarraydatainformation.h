@@ -40,9 +40,5 @@ public:
     virtual ~AbstractArrayDataInformation();
 public:
     virtual QString typeName() const;
-    virtual int size() const;
-
-protected:
-    virtual Okteta::Size offset(unsigned int index) const;
 };
 #endif /* ABSTRACTARRAYDATAINFORMATION_H_ */

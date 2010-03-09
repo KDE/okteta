@@ -55,30 +55,3 @@ AbstractArrayDataInformation::AbstractArrayDataInformation(
 AbstractArrayDataInformation::~AbstractArrayDataInformation()
 {
 }
-
-Okteta::Size AbstractArrayDataInformation::offset(unsigned int index) const
-{
-    if (index >= childCount())
-        return 0;
-    Okteta::Size offset = 0;
-    //sum size of elements up to index
-    for (unsigned int i = 0; i < index; ++i)
-    {
-        offset += childAt(i)->size() / 8;
-    }
-    return offset;
-}
-int AbstractArrayDataInformation::size() const
-{
-    int size = 0;
-    for (unsigned int i = 0; i < childCount(); ++i)
-    {
-        size += childAt(i)->size();
-    }
-    if (size % 8 != 0)
-    {
-        //last element is a bitfield -> add padding
-        size = size + (8 - size % 8);
-    }
-    return size;
-}

@@ -40,7 +40,7 @@ public Q_SLOTS:
 public:
     //implement the DataInformation pure virtual functions
     QString typeName() const;
-    int size() const;
+    virtual int size() const;
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input,
             ByteOrder byteOrder, Okteta::Address address, quint64 bitsRemaining,
             quint8* bitOffset);
@@ -50,10 +50,11 @@ public:
     /** add another field to this union */
     UnionDataInformation& operator<<(DataInformation* field);
 protected:
-    virtual Okteta::Size offset(unsigned int index) const;
+    quint64 offset(unsigned int index) const;
 };
 
-inline Okteta::Size UnionDataInformation::offset(unsigned int index) const
+
+inline quint64 UnionDataInformation::offset(unsigned int index) const
 {
     Q_UNUSED(index)
     return 0;

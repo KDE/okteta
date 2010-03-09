@@ -281,11 +281,13 @@ void StructTool::mark(const QModelIndex& idx)
     int length = data->size() / 8;
     int maxLen = mByteArrayModel->size() - mCursorIndex;
     length = qMin(length, maxLen);
-    Okteta::Address startOffset = mCursorIndex + data->positionRelativeToParent();
+    //FIXME support marking of partial bytes
+    Okteta::Address startOffset = mCursorIndex + data->positionRelativeToParent() / 8;
     const Okteta::AddressRange markingRange = Okteta::AddressRange::fromWidth(
             startOffset, length);
     mByteArrayView->setMarking(markingRange, true);
 }
+
 void StructTool::unmark(/*const QModelIndex& idx*/)
 {
     if (mByteArrayView)

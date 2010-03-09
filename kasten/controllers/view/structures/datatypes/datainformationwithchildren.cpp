@@ -188,3 +188,27 @@ QVariant DataInformationWithChildren::data(int column, int role) const
     else
         return QVariant();
 }
+
+int DataInformationWithChildren::size() const
+{
+    int size = 0;
+    for (unsigned int i = 0; i < childCount(); ++i)
+    {
+        size += childAt(i)->size();
+    }
+    return size;
+}
+
+quint64 DataInformationWithChildren::offset(unsigned int index) const
+{
+    if (index >= childCount())
+        return 0;
+    quint64 offset = 0;
+    //sum size of elements up to index
+    for (unsigned int i = 0; i < index; ++i)
+    {
+        offset += childAt(i)->size();
+    }
+    return offset;
+}
+

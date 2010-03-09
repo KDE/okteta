@@ -132,21 +132,6 @@ bool PrimitiveDataInformation::setData(const QVariant& value, DataInformation* i
     if (oldVal != mValue || wasValid != mIsValid)
         emit dataChanged();
     return true;
-#if 0 //optimised for full bytes -> move to apt.cpp
-    int sizeInBytes = size() / 8;
-    if (bitsRemaining < sizeInBytes)
-    {
-        mValue.ulongValue = 0;
-        mIsValid = false;
-        return;
-    }
-    for (int i = 0; i < sizeInBytes; ++i)
-    {
-        int index = (byteOrder == ByteOrderEnumClass::LittleEndian) ? i
-        : ((sizeInBytes - 1) - i);
-        out->setByte(address + i, value.allBytes[index]);
-    }
-#endif
 }
 
 Qt::ItemFlags PrimitiveDataInformation::flags(int column, bool fileLoaded) const
@@ -177,49 +162,6 @@ qint64 PrimitiveDataInformation::readData(Okteta::AbstractByteArrayModel *input,
         emit dataChanged();
 
     return size();
-#if 0 //optimised for full bytes -> move to apt.cpp
-    if (*bitOffset != 0)
-    {
-        // we just move on to next byte, only bitfields should handle this
-        remaining--;
-        address++;
-        //now bit offset is 0 again
-        *bitOffset = 0;
-        //TODO handle bit-offsets for primitive types? Probably not since one
-        //can just use a e.g. 8-bit bitfield. Only problem are chars and floats
-    }
-    int bytes = size() / 8;
-    if (remaining < bytes)
-    {
-        mValue.ulongValue = 0;
-        mIsValid = false;
-        //use all the remaining bytes
-        return remaining < 0 ? 0 : remaining;
-    }
-    bool changed = false;
-    //always use unsigned value
-    for (int i = 0; i < bytes; i++)
-    {
-        int index = (byteOrder == ByteOrderEnumClass::LittleEndian) ? i : ((bytes
-                        - 1) - i);
-        Okteta::Byte readByte = input->byte(address + i);
-        if (mValue.allBytes[index] != readByte)
-        {
-            mValue.allBytes[index] = readByte;
-            changed = true;
-        }
-    }
-    //fill remaining bytes with 0
-    for (unsigned int i = bytes; i < sizeof(qint64); i++)
-    {
-        mValue.allBytes[i] = 0;
-    }
-
-    if (changed)
-    emit dataChanged();
-    mIsValid = true;
-    return bytes;
-#endif
 }
 
 PrimitiveDataInformation::PrimitiveDataInformation(QString name,

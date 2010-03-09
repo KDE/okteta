@@ -60,9 +60,9 @@ qint64 DynamicLengthArrayDataInformation::readData(
     quint64 readBits = 0;
     for (int i = 0; i < mChildren.size(); i++)
     {
-        quint64 currentReadBits = mChildren[i]->readData(input, byteOrder, address
+        qint64 currentReadBits = mChildren[i]->readData(input, byteOrder, address
                 + readBytes, bitsRemaining - readBits, bitOffset);
-        if (currentReadBits == -1)
+        if (currentReadBits < 0)
             return -1;
         readBits += currentReadBits;
         readBytes = (readBits + *bitOffset) / 8;

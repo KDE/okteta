@@ -80,13 +80,15 @@ public:
     QVariant data(int column, int role) const;
     static PrimitiveDataType typeStringToType(QString& typeStr);
 protected:
-    virtual Okteta::Size offset(unsigned int index) const
-    {
-        Q_UNUSED(index)
-        return 0;
-    }
-
+    virtual quint64 offset(unsigned int index) const;
 };
+
+inline quint64 PrimitiveDataInformation::offset(unsigned int index) const
+{
+    Q_UNUSED(index)
+    return 0;
+}
+
 #define PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(type,superType) public: \
         type##DataInformation(QString name, PrimitiveDataType dataType,\
                 int index = -1, DataInformation* parent = NULL) :\
