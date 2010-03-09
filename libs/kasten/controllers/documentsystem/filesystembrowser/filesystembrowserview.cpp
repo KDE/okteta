@@ -31,6 +31,7 @@
 #include <KActionCollection>
 #include <KToolBar>
 #include <KLocale>
+#include <kdeversion.h>
 // Qt
 #include <QtGui/QLayout>
 #include <QtCore/QDir>
@@ -106,7 +107,11 @@ void FileSystemBrowserView::setDirOperatorUrl( const KUrl& url )
 
 void FileSystemBrowserView::setNavigatorUrl( const KUrl& url )
 {
+#if KDE_VERSION >= KDE_MAKE_VERSION( 4, 4, 50 )
     mUrlNavigator->setLocationUrl( url );
+#else
+    mUrlNavigator->setUrl( url );
+#endif
 }
 
 void FileSystemBrowserView::syncCurrentDocumentDirectory()
