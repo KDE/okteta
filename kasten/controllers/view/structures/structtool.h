@@ -111,6 +111,7 @@ protected:
     StructViewPreferences::EnumByteOrder::type mByteOrder;
     StructuresManager* mManager;
     QList<DataInformation*> mData;
+    bool mWritingData;
 public:
     //interface for model
     QVariant headerData(int column, int role);

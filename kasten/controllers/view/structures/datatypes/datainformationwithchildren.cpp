@@ -45,21 +45,42 @@ DataInformation* DataInformationWithChildren::childAt(unsigned int idx) const
 
 bool DataInformationWithChildren::setData(const QVariant& value,
         DataInformation* inf, Okteta::AbstractByteArrayModel *out,
-        ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining,
+        ByteOrder byteOrder, Okteta::Address address, quint64 bitsRemaining,
         quint8* bitOffset)
 {
     if (this == inf)
         return true; //do nothing since this is not editable
-    Okteta::Size readBytes = 0;
+    quint64 readBits = 0;
+    uint readBytes = 0;
     for (int i = 0; i < mChildren.size(); i++)
     {
+
         if (mChildren[i]->setData(value, inf, out, byteOrder, address + readBytes,
-                remaining - readBytes, bitOffset))
+                bitsRemaining - readBits, bitOffset))
             return true; //found -> done job
-        readBytes += mChildren[i]->size() / 8;
+        readBits += mChildren[i]->size();
+        readBytes = (readBits + *bitOffset) / 8;
 
     }
     return false;
+}
+
+qint64 DataInformationWithChildren::readData(Okteta::AbstractByteArrayModel *input,
+        ByteOrder byteOrder, Okteta::Address address, quint64 bitsRemaining,
+        quint8* bitOffset)
+{
+    uint readBytes = 0;
+    qint64 readBits = 0;
+    for (int i = 0; i < mChildren.size(); i++)
+    {
+        qint64 currentReadBits = mChildren[i]->readData(input, byteOrder, address
+                + readBytes, bitsRemaining - readBits, bitOffset);
+        if (currentReadBits == -1)
+            return -1;
+        readBits += currentReadBits;
+        readBytes = (readBits + *bitOffset) / 8;
+    }
+    return readBits;
 }
 
 DataInformationWithChildren::~DataInformationWithChildren()
@@ -96,6 +117,7 @@ bool DataInformationWithChildren::isValid() const
     }
     return true;
 }
+
 QList<const DataInformation*> DataInformationWithChildren::findChildrenWithName(
         const QString& name, const DataInformation* const upTo) const
 {
@@ -161,8 +183,7 @@ QVariant DataInformationWithChildren::data(int column, int role) const
     {
         return i18np("Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 child)",
                 "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)",
-                childCount(), name(), valueString(), typeName(),
-                sizeString());
+                childCount(), name(), valueString(), typeName(), sizeString());
     }
     else
         return QVariant();

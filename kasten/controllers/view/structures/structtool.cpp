@@ -41,10 +41,9 @@ namespace Kasten
 {
 
 StructTool::StructTool() :
-    mByteArrayView(0), mByteArrayModel(0), mCursorIndex(0),
-    //			mCharCodec(Okteta::CharCodec::createCodec(Okteta::LocalEncoding)),
-            mByteOrder(StructViewPreferences::byteOrder()), mManager(
-                    new StructuresManager())
+    mByteArrayView(0), mByteArrayModel(0), mCursorIndex(0), mByteOrder(
+            StructViewPreferences::byteOrder()), mManager(new StructuresManager()),
+            mWritingData(false)
 {
     //leave mLoadedFiles empty for now, since otherwise loading slot will not work
     setObjectName("StructTool");
@@ -145,35 +144,49 @@ bool StructTool::setData(const QVariant& value, int role, DataInformation* item)
         return false;
     if (role != Qt::EditRole)
         return false;
+    mWritingData = true;
+    bool found = false;
     QScopedPointer<quint8> bitOffset(new quint8(0));
     int remaining = qMax(mByteArrayModel->size() - mCursorIndex, 0);
     for (int i = 0; i < mData.size(); ++i)
     {
         if (mData[i]->setData(value, item, mByteArrayModel, mByteOrder,
                 mCursorIndex, remaining, bitOffset.data()))
-            return true;
+        {
+            found = true;
+            break;
+        }
     }
-    return false;
+    mWritingData = false; //finished
+    //XXX: this is inefficient, best would be to only update the changed value
+    updateData(); //update once after writing
+    return found;
 }
 
 void StructTool::updateData()
 {
-    int remaining;
+    if (mWritingData)
+    {
+        kWarning() << "currently writing data, won't update";
+        return;
+    }
+    quint64 remainingBits;
     if (mByteArrayModel)
     {
-        remaining = qMax(mByteArrayModel->size() - mCursorIndex, 0);
+        remainingBits = qMax(mByteArrayModel->size() - mCursorIndex, 0) * 8;
     }
     else
-        remaining = 0;
+        remainingBits = 0;
 
-    if (remaining != 0)
+    if (remainingBits != 0)
     {
         QScopedPointer<quint8> bitOffset(new quint8(0));
         for (int i = 0; i < mData.size(); i++)
         {
             DataInformation* dat = mData.at(i);
-            dat->readData(mByteArrayModel, mByteOrder, mCursorIndex, remaining,
+            dat->readData(mByteArrayModel, mByteOrder, mCursorIndex, remainingBits,
                     bitOffset.data());
+            *bitOffset = 0; //start at beginning again
         }
     }
 }
@@ -226,11 +239,13 @@ void StructTool::setSelectedStructuresInView()
 {
     qDeleteAll(mData);
     mData.clear();
-    emit dataCleared();
+    emit
+    dataCleared();
 
     QRegExp regex("'(.+)':'(.+)'");
     QStringList loadedStructs = StructViewPreferences::loadedStructures();
-    kDebug() << "loadedStructs " << loadedStructs;
+    kDebug()
+        << "loadedStructs " << loadedStructs;
     foreach(const QString& s,loadedStructs)
         {
             int pos = regex.indexIn(s);
@@ -246,8 +261,8 @@ void StructTool::setSelectedStructuresInView()
                 if (data)
                     addChildItem(data);
             }
-        }
-    emit dataChanged();
+        } emit
+    dataChanged();
     updateData();
 
 }
@@ -256,7 +271,8 @@ void StructTool::mark(const QModelIndex& idx)
 {
     if (!mByteArrayModel || !mByteArrayView)
     {
-        kDebug() << "model or view == NULL";
+        kDebug()
+            << "model or view == NULL";
         return;
     }
     DataInformation* data = static_cast<DataInformation*> (idx.internalPointer());

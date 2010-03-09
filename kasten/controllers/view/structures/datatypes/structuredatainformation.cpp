@@ -35,7 +35,7 @@ int StructureDataInformation::size() const
         const DataInformation* data = mChildren.at(i);
 
         bool isBitfield =
-            dynamic_cast<const AbstractBitfieldDataInformation*> (data) != 0;
+                dynamic_cast<const AbstractBitfieldDataInformation*> (data) != 0;
         if (isBitfield)
         {
             lastChildWasBitfield = true;
@@ -56,24 +56,6 @@ int StructureDataInformation::size() const
         size += padding;
     }
     return size;
-}
-
-Okteta::Size StructureDataInformation::readData(
-        Okteta::AbstractByteArrayModel* input, ByteOrder byteOrder,
-        Okteta::Address address, Okteta::Size remaining, quint8* bitOffset)
-{
-    Okteta::Size readBytes = 0;
-    for (int i = 0; i < mChildren.size(); i++)
-    {
-        readBytes += mChildren[i]->readData(input, byteOrder, address + readBytes,
-                remaining - readBytes, bitOffset);
-    }
-    if (readBytes % 8 != 0)
-    {
-        //last element is a bitfield -> add padding
-        readBytes = readBytes + (8 - readBytes % 8);
-    }
-    return readBytes;
 }
 
 void StructureDataInformation::addDataTypeToStruct(DataInformation* field)

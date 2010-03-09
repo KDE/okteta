@@ -56,7 +56,6 @@ public:
     }
     inline quint64 mask() const
     {
-        return (1 << width()) - 1;
         /* same as:
          *
          * quint64 ret = 0;
@@ -64,18 +63,15 @@ public:
          *     ret |= 1 << i;
          * return ret;
          */
+        return (1 << width()) - 1;
     }
     virtual QString typeName() const
     {
         return i18ncp("Data type", "bitfield (%1 bit wide)",
                 "bitfield (%1 bits wide)", width());
     }
-    virtual bool setData(const QVariant &value, DataInformation* inf,
-            Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
-            Okteta::Address address, Okteta::Size remaining, quint8* bitOffset);
-    virtual Okteta::Size readData(Okteta::AbstractByteArrayModel* input,
-            ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining,
-            quint8* bitOffset);
+    virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const;
+
     virtual QWidget* createEditWidget(QWidget* parent) const = 0;
     virtual QVariant dataFromWidget(const QWidget* w) const = 0;
     virtual void setWidgetData(QWidget* w) const = 0;
@@ -86,17 +82,5 @@ public:
         else
             return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
     }
-private:
-    AllPrimitiveTypes readDataLittleEndian(const Okteta::AbstractByteArrayModel* input,
-            Okteta::Address address, quint8* bitOffset);
-    void setDataLittleEndian(const AllPrimitiveTypes val,
-            Okteta::AbstractByteArrayModel *out, Okteta::Address address,
-            quint8* bitOffset);
-    AllPrimitiveTypes readDataBigEndian(const Okteta::AbstractByteArrayModel* input,
-            Okteta::Address address, quint8* bitOffset);
-    void setDataBigEndian(const AllPrimitiveTypes val,
-            Okteta::AbstractByteArrayModel *out, Okteta::Address address,
-            quint8* bitOffset);
-
 };
 #endif /* ABSTRACTBITFIELDDATAINFORMATION_H_ */

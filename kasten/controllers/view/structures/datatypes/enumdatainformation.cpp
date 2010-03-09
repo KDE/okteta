@@ -72,20 +72,20 @@ QString EnumDataInformation::getTypeString() const
 
 bool EnumDataInformation::setData(const QVariant& value, DataInformation* inf,
         Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
-        Okteta::Address address, Okteta::Size remaining, quint8* bitOffset)
+        Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
 {
     if (this != inf)
         return false;
     //correct object -> use mValue so PrimitiveDataInformation::setData() returns true
-    bool ret = mValue->setData(value, mValue, out, byteOrder, address, remaining,
+    bool ret = mValue->setData(value, mValue, out, byteOrder, address, bitsRemaining,
             bitOffset);
     return ret;
 }
-Okteta::Size EnumDataInformation::readData(Okteta::AbstractByteArrayModel* input,
-        ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining,
+qint64 EnumDataInformation::readData(Okteta::AbstractByteArrayModel* input,
+        ByteOrder byteOrder, Okteta::Address address, quint64 bitsRemaining,
         quint8* bitOffset)
 {
-    return mValue->readData(input, byteOrder, address, remaining, bitOffset);
+    return mValue->readData(input, byteOrder, address, bitsRemaining, bitOffset);
 }
 
 QWidget* EnumDataInformation::createEditWidget(QWidget* parent) const
@@ -102,3 +102,10 @@ void EnumDataInformation::setWidgetData(QWidget* w) const
 {
     mValue->setWidgetData(w);
 }
+
+AllPrimitiveTypes EnumDataInformation::qVariantToAllPrimitiveTypes(
+        const QVariant& value) const
+{
+    return mValue->qVariantToAllPrimitiveTypes(value);
+}
+

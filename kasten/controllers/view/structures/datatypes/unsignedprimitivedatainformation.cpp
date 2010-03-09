@@ -37,3 +37,13 @@ void UnsignedPrimitiveDataInformation::setWidgetData(QWidget* w) const
     if (spin)
         spin->setValue(this->value().ulongValue);
 }
+
+AllPrimitiveTypes UnsignedPrimitiveDataInformation::qVariantToAllPrimitiveTypes(
+        const QVariant& value) const
+{
+    if (!value.isValid())
+        kDebug() << "invalid QVariant passed.";
+
+    //This is fine since all the values are unsigned
+    return AllPrimitiveTypes(value.toULongLong());
+}

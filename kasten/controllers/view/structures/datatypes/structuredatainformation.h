@@ -41,8 +41,6 @@ public:
     //implement the DataInformation pure virtual functions
     QString typeName() const;
     int size() const;
-    virtual Okteta::Size readData(Okteta::AbstractByteArrayModel* input,
-            ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining, quint8* bitOffset);
     /** add another field to this struct */
     StructureDataInformation& operator<<(DataInformation* field);
 protected:

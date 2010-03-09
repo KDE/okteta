@@ -117,3 +117,14 @@ void CharDataInformation::setWidgetData(QWidget* w) const
         edit->setText( qchar );
     }
 }
+
+AllPrimitiveTypes CharDataInformation::qVariantToAllPrimitiveTypes(
+        const QVariant& value) const
+{
+    if (!value.isValid())
+        kDebug() << "invalid QVariant passed.";
+
+    //This is fine since all the values are unsigned
+    return AllPrimitiveTypes(value.toUInt());
+}
+

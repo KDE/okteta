@@ -107,9 +107,6 @@ public:
     {
         mIndex = newIndex;
     }
-    virtual bool setData(const QVariant& value, DataInformation* inf,
-            Okteta::AbstractByteArrayModel *input, ByteOrder byteOrder,
-            Okteta::Address address, Okteta::Size remaining,quint8* bitOffset) = 0;
     /** get the necessary data (for the model) */
     virtual QVariant data(int column, int role) const =0;
     /** The size of this DataInformation type in bits (to allow bitfields in future) */
@@ -123,10 +120,38 @@ public:
     /** get the needed data from the widget */
     virtual QVariant dataFromWidget(const QWidget* w) const = 0;
     virtual void setWidgetData(QWidget* w) const = 0;
-    /** reads the necessary data and returns the number of bytes read */
-    virtual Okteta::Size
+
+    /** Reads the necessary data from @p input and returns the number of bytes read
+     *
+     * @param input the byte array to read from
+     * @param byteOrder the byte order used to read the data (big/little endian)
+     * @param address the starting offset to read from
+     * @param bitsRemaining the number of bits remaining in @p out
+     * @param bitOffset the bits that have already been read from the current byte
+     *        (should be modified in this method)
+     *
+     * @return the number of bits read or @c -1 if none were read
+     */
+    virtual qint64
     readData(Okteta::AbstractByteArrayModel *input, ByteOrder byteOrder,
-            Okteta::Address address, Okteta::Size remaining,quint8* bitOffset) =0;
+            Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset) =0;
+    /** Writes the current data contained in this object to out.
+     *
+     *  If @code @p inf != this @endcode this method must do nothing and return false.
+     *
+     *  @param value a @link QVariant object holding the new data to write
+     *  @param inf the object that should currently write the data
+     *  @param out the byte array the value is read from
+     *  @param byteOrder the byteOrder used for reading values
+     *  @param address the address in @p out
+     *  @param bitsRemaining number of bits remaining in @p input
+     *  @param bitOffset the bit to start at in the first byte
+     *
+     *  @return @c true on success, @c false otherwise
+     */
+    virtual bool setData(const QVariant& value, DataInformation* inf,
+            Okteta::AbstractByteArrayModel *input, ByteOrder byteOrder,
+            Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset) = 0;
 protected:
     /**
      *  the offset of child number 'index' compared to the beginning of the structure

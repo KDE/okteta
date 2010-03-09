@@ -56,6 +56,8 @@ public:
     }
     DATAINFORMATION_CLONE(Char)
     virtual QString valueString() const;
+    virtual AllPrimitiveTypes
+            qVariantToAllPrimitiveTypes(const QVariant& value) const;
 
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;

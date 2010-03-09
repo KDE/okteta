@@ -50,6 +50,8 @@ public:
         return 10; //safe default value
     }
     virtual QVariant dataFromWidget(const QWidget* w) const;
+    virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const;
+
 };
 
 #endif /* SIGNEDPRIMITIVEDATAINFORMATION_H_ */

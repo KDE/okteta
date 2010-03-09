@@ -34,6 +34,7 @@ public:
     EnumDataInformation(const EnumDataInformation& e);
     DATAINFORMATION_CLONE(Enum)
     virtual ~EnumDataInformation();
+
     QString valueString() const;
     QString getTypeString() const;
     QString typeName() const;
@@ -46,18 +47,19 @@ public:
     {
         return mValue->displayBase();
     }
-    Okteta::Size readData(Okteta::AbstractByteArrayModel* input,
-            ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining,
+    virtual qint64 readData(Okteta::AbstractByteArrayModel* input,
+            ByteOrder byteOrder, Okteta::Address address, quint64 remaining,
             quint8* bitOffset);
-    bool setData(const QVariant& value, DataInformation* inf,
+    virtual bool setData(const QVariant& value, DataInformation* inf,
             Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
-            Okteta::Address address, Okteta::Size remaining, quint8* bitOffset);
+            Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset);
 
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
-
-private:
+    virtual AllPrimitiveTypes
+            qVariantToAllPrimitiveTypes(const QVariant& value) const;
+protected:
     EnumDefinition::Ptr mEnum;
     PrimitiveDataInformation* mValue; //to allow different enum sizes
 };

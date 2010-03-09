@@ -29,11 +29,11 @@
 bool AllPrimitiveTypes::writeBits(const quint8 bitCount,
         const AllPrimitiveTypes newValue, Okteta::AbstractByteArrayModel* out,
         const ByteOrder byteOrder, const Okteta::Address address,
-        const Okteta::Size remaining, quint8* const bitOffset)
+        const quint64 bitsRemaining, quint8* const bitOffset)
 {
     Q_ASSERT(*bitOffset < 8);
     Q_ASSERT(bitCount <= 64);
-    if ((unsigned) (remaining * 8) - *bitOffset < bitCount)
+    if (bitsRemaining < bitCount)
     {
         ulongValue = 0;
         *bitOffset = 0;
@@ -45,11 +45,11 @@ bool AllPrimitiveTypes::writeBits(const quint8 bitCount,
 
     if (byteOrder == ByteOrderEnumClass::LittleEndian)
     {
-        writeDataLittleEndian(bitCount, out, address, *bitOffset);
+        writeDataLittleEndian(bitCount, newValue, out, address, *bitOffset);
     }
     else if (byteOrder == ByteOrderEnumClass::BigEndian)
     {
-        writeDataBigEndian(bitCount, out, address, *bitOffset);
+        writeDataBigEndian(bitCount, newValue, out, address, *bitOffset);
     }
     else
     {
@@ -63,12 +63,12 @@ bool AllPrimitiveTypes::writeBits(const quint8 bitCount,
 
 bool AllPrimitiveTypes::readBits(const quint8 bitCount,
         const Okteta::AbstractByteArrayModel* input, const ByteOrder byteOrder,
-        const Okteta::Address address, const Okteta::Size remaining,
+        const Okteta::Address address, const quint64 bitsRemaining,
         quint8* const bitOffset)
 {
     Q_ASSERT(bitCount <= 64);
     Q_ASSERT(*bitOffset < 8);
-    if ((unsigned) (remaining * 8) - *bitOffset < bitCount)
+    if (bitsRemaining < bitCount)
     {
         ulongValue = 0;
         *bitOffset = 0;
@@ -101,18 +101,18 @@ void AllPrimitiveTypes::readDataLittleEndian(const quint8 bitCount,
     if (bitCount <= (unsigned) (8 - bo))
     {
         //fits completely
-        quint8 lowerMask = 0xff << bo; //all lower bits are 0
-        quint8 higherMask = 0xff >> (8 - (bo + bitCount)); // all higher bits are 0
-        quint8 completeMask = lowerMask & higherMask; //region in the middle
-        quint8 readByte = input->byte(address);
-        quint8 maskedByte = readByte & completeMask;
+        const quint8 lowerMask = 0xff << bo; //all lower bits are 0
+        const quint8 higherMask = 0xff >> (8 - (bo + bitCount)); // all higher bits are 0
+        const quint8 completeMask = lowerMask & higherMask; //region in the middle
+        const quint8 readByte = input->byte(address);
+        const quint8 maskedByte = readByte & completeMask;
         ubyteValue = maskedByte >> bo;
     }
     else
     {
-        quint8 firstByteMask = 0xff << bo;
-        quint8 firstByte = input->byte(address);
-        quint8 firstByteMasked = firstByte & firstByteMask;
+        const quint8 firstByteMask = 0xff << bo;
+        const quint8 firstByte = input->byte(address);
+        const quint8 firstByteMasked = firstByte & firstByteMask;
         ubyteValue = firstByteMasked >> bo;
         //if spans more than this one byte continue
         for (uint i = 8; i < bitCount + bo; i += 8)
@@ -121,13 +121,13 @@ void AllPrimitiveTypes::readDataLittleEndian(const quint8 bitCount,
             if (bitCount + bo < i + 8)
             {
                 //this is last byte needed, possibly cut off top values
-                quint8 missingBits = (bitCount + bo) % 8;
-                quint8 mask = (1 << missingBits) - 1;
+                const quint8 missingBits = (bitCount + bo) % 8;
+                const quint8 mask = (1 << missingBits) - 1;
                 readVal &= mask; //mask the top few bits
             }
             //otherwise we need full byte -> nothing to do
             //needs cast since otherwise compiler decides to use 32 bit int and top 32 bits get lost
-            quint64 shiftedVal = (quint64)readVal << i;
+            const quint64 shiftedVal = (quint64) readVal << i;
             ulongValue |= shiftedVal >> bo; //move to correct byte
         }
     }
@@ -139,21 +139,21 @@ void AllPrimitiveTypes::readDataBigEndian(const quint8 bitCount,
 {
     if (bitCount <= (unsigned) (8 - bo))
     {
-        quint8 lowerMask = 0xff << (8 - (bo + bitCount));
-        quint8 higherMask = 0xff >> bo;
-        quint8 completeMask = lowerMask & higherMask;
+        const quint8 lowerMask = 0xff << (8 - (bo + bitCount));
+        const quint8 higherMask = 0xff >> bo;
+        const quint8 completeMask = lowerMask & higherMask;
         //completeMask maskes the value -> negate it to clear all the bytes
-        quint8 readByte = input->byte(address);
-        quint8 maskedByte = readByte & completeMask;
+        const quint8 readByte = input->byte(address);
+        const quint8 maskedByte = readByte & completeMask;
         ubyteValue = maskedByte >> (8 - (bo + bitCount));
     }
     else
     {
-        quint8 firstByteMask = 0xff >> bo;
-        quint8 firstByte = input->byte(address);
+        const quint8 firstByteMask = 0xff >> bo;
+        const quint8 firstByte = input->byte(address);
         //needs quint64 since otherwise compiler decides to use 32 bit int when shifting and top 32 bits get lost
-        quint64 firstByteMasked = firstByte & firstByteMask;
-        quint64 firstByteShifted = firstByteMasked << (bo + bitCount - 8);
+        const quint64 firstByteMasked = firstByte & firstByteMask;
+        const quint64 firstByteShifted = firstByteMasked << (bo + bitCount - 8);
         ulongValue = firstByteShifted;
         //if spans more than this one byte continue
         for (uint i = 8; i < bitCount + bo; i += 8)
@@ -162,17 +162,18 @@ void AllPrimitiveTypes::readDataBigEndian(const quint8 bitCount,
             if (bitCount + bo < i + 8)
             {
                 //this is last byte needed, possibly cut off lower values
-                quint8 missingBits = (bo + bitCount) % 8;
-                quint8 mask = 0xff << (8 - missingBits);
-                quint8 maskedVal = readVal & mask; //cut off lower bits
-                quint8 shiftedVal = maskedVal >> (8 - missingBits);
+                const quint8 missingBits = (bo + bitCount) % 8;
+                const quint8 mask = 0xff << (8 - missingBits);
+                const quint8 maskedVal = readVal & mask; //cut off lower bits
+                const quint8 shiftedVal = maskedVal >> (8 - missingBits);
                 ulongValue |= shiftedVal;
             }
             else
             {
                 //otherwise we need full byte -> nothing to do
                 //needs cast since otherwise compiler decides to use 32 bit int and top 32 bits get lost
-                quint64 shiftedVal = (quint64)readVal << ((bo + bitCount) - (8 + i)); //move to correct byte
+                const quint64 shiftedVal = (quint64) readVal << ((bo + bitCount)
+                        - (8 + i)); //move to correct byte
                 ulongValue |= shiftedVal;
             }
         }
@@ -180,43 +181,42 @@ void AllPrimitiveTypes::readDataBigEndian(const quint8 bitCount,
 }
 
 void AllPrimitiveTypes::writeDataLittleEndian(const quint8 bitCount,
-        Okteta::AbstractByteArrayModel *out, const Okteta::Address address,
-        const quint8 bo) const
+        const AllPrimitiveTypes newValue, Okteta::AbstractByteArrayModel *out,
+        const Okteta::Address address, const quint8 bo) const
 {
     if (bitCount <= (unsigned) (8 - bo))
     {
         //fits completely
-        quint8 lowerMask = (1 << bo) - 1; //all lower bits are 1
-        quint8 higherMask = 0xff << (bo + bitCount); // all higher bits are 1
-        quint8 completeMask = lowerMask | higherMask; //region in the middle is 0
-        quint8 readByte = out->byte(address);
-        quint8 maskedByte = readByte & completeMask;
-        quint8 addedVal = ubyteValue << bo;
-        quint8 newVal = maskedByte | addedVal;
+        const quint8 lowerMask = (1 << bo) - 1; //all lower bits are 1
+        const quint8 higherMask = 0xff << (bo + bitCount); // all higher bits are 1
+        const quint8 completeMask = lowerMask | higherMask; //region in the middle is 0
+        const quint8 readByte = out->byte(address);
+        const quint8 maskedByte = readByte & completeMask;
+        const quint8 addedVal = newValue.ubyteValue << bo;
+        const quint8 newVal = maskedByte | addedVal;
         out->setByte(address, newVal);
     }
     else
     {
-        quint8 firstByteMask = (1 << bo) - 1;
-        quint8 firstByte = out->byte(address);
-        quint8 firstByteMasked = firstByte & firstByteMask;
-        quint8 firstAddedVal = (ubyteValue << bo);
-        quint8 firstByteWithValAdded = firstByteMasked | firstAddedVal;
+        const quint8 firstByteMask = (1 << bo) - 1;
+        const quint8 firstByte = out->byte(address);
+        const quint8 firstByteMasked = firstByte & firstByteMask;
+        const quint8 firstAddedVal = (newValue.ubyteValue << bo);
+        const quint8 firstByteWithValAdded = firstByteMasked | firstAddedVal;
         out->setByte(address, firstByteWithValAdded);
         //if spans more than this one byte continue
         for (uint i = 8; i < bitCount + bo; i += 8)
         {
-            quint8 readVal = out->byte(address + (i / 8));
-            quint8 currentByte = ulongValue >> (i - bo);
-            if (bitCount + bo <= i + 8)
+            const quint8 currentByte = newValue.ulongValue >> (i - bo);
+            if (bitCount + bo < i + 8)
             {
+                const quint8 readVal = out->byte(address + (i / 8));
                 //this is last byte needed, possibly cut off bottom
-                quint8 missingBits = (bitCount + bo) % 8;
-                quint8 mask = 0xff << missingBits;
-                readVal &= mask; //remove the bottom values
-                quint8 newValue = currentByte;
-                readVal |= newValue;
-                out->setByte(address + (i / 8), readVal);
+                const quint8 missingBits = (bitCount + bo) % 8;
+                const quint8 mask = 0xff << missingBits;
+                const quint8 readValMasked = readVal & mask; //remove the bottom values
+                const quint8 resultingVal = readValMasked | currentByte;
+                out->setByte(address + (i / 8), resultingVal);
             }
             else
             {
@@ -228,50 +228,50 @@ void AllPrimitiveTypes::writeDataLittleEndian(const quint8 bitCount,
 }
 
 void AllPrimitiveTypes::writeDataBigEndian(const quint8 bitCount,
-        Okteta::AbstractByteArrayModel *out, Okteta::Address address,
-        const quint8 bo) const
+        const AllPrimitiveTypes newValue, Okteta::AbstractByteArrayModel *out,
+        const Okteta::Address address, const quint8 bo) const
 {
     if (bitCount <= (unsigned) (8 - bo))
     {
         //fits completely
-        quint8 lowerMask = 0xff >> (bo + bitCount); //all lower bits are 1
-        quint8 higherMask = 0xff << (8 - bo); // all higher bits are 1
-        quint8 completeMask = lowerMask | higherMask; //region in the middle is 0
-        quint8 readByte = out->byte(address);
-        quint8 maskedByte = readByte & completeMask;
-        quint8 addedVal = ubyteValue << (8 - bo - 1); //move to missing area
-        maskedByte |= addedVal;
-        out->setByte(address, maskedByte);
+        const quint8 lowerMask = 0xff >> (bo + bitCount); //all lower bits are 1
+        const quint8 higherMask = 0xff << (8 - bo); // all higher bits are 1
+        const quint8 completeMask = lowerMask | higherMask; //region in the middle is 0
+        const quint8 readByte = out->byte(address);
+        const quint8 maskedByte = readByte & completeMask;
+        const quint8 addedVal = newValue.ubyteValue << (8 - bo - 1); //move to missing area
+        const quint8 maskedByteWithValueAdded = maskedByte | addedVal;
+        out->setByte(address, maskedByteWithValueAdded);
     }
     else
     {
         quint8 missingBits = (bitCount + bo) % 8;
         missingBits = (missingBits == 0 ? 8 : missingBits);
-        quint8 lastAddress = address + ((bo + bitCount) / 8) - (missingBits > 0 ? 0
-                : 1);
-        quint8 lastByte = out->byte(lastAddress);
-        quint8 lastByteMask = (1 << missingBits) - 1;
-        quint8 lastByteMasked = lastByte & lastByteMask; //remove the top values
-        quint8 lastByteAddedVal = ubyteValue << (8 - missingBits);
-        quint8 lastByteWithValAdded = lastByteMasked | lastByteAddedVal;
+        const quint8 lastAddress = address + ((bo + bitCount) / 8) - (missingBits
+                > 0 ? 0 : 1);
+        const quint8 lastByte = out->byte(lastAddress);
+        const quint8 lastByteMask = (1 << missingBits) - 1;
+        const quint8 lastByteMasked = lastByte & lastByteMask; //remove the top values
+        const quint8 lastByteAddedVal = newValue.ubyteValue << (8 - missingBits);
+        const quint8 lastByteWithValAdded = lastByteMasked | lastByteAddedVal;
         out->setByte(lastAddress, lastByteWithValAdded);
         for (int currAddress = lastAddress - 1; currAddress >= address; currAddress--)
         {
-            quint8 currentByte = out->byte(currAddress);
+            const quint8 currentByte = out->byte(currAddress);
             if (currAddress == address)
             {
                 //last byte to read
-                quint8 firstByteMask = 0xff << (8 - bo);
-                quint8 firstByteMasked = currentByte & firstByteMask;
-                quint8 highestByte = ulongValue >> (bo + bitCount - 8);
-                quint8 firstByteWithValAdded = firstByteMasked | highestByte;
+                const quint8 firstByteMask = 0xff << (8 - bo);
+                const quint8 firstByteMasked = currentByte & firstByteMask;
+                const quint8 highestByte = newValue.ulongValue >> (bo + bitCount - 8);
+                const quint8 firstByteWithValAdded = firstByteMasked | highestByte;
                 out->setByte(address, firstByteWithValAdded);
             }
             else
             {
-                int bytesNotToShift = 1 + (lastAddress - address) - (lastAddress
-                        - currAddress);
-                quint8 thisByteShifted = ulongValue >> (bo + bitCount - (8
+                const int bytesNotToShift = 1 + (lastAddress - address)
+                        - (lastAddress - currAddress);
+                const quint8 thisByteShifted = newValue.ulongValue >> (bo + bitCount - (8
                         * bytesNotToShift));
                 out->setByte(currAddress, thisByteShifted);
             }

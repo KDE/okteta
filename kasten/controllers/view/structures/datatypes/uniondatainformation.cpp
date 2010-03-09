@@ -42,40 +42,47 @@ int UnionDataInformation::size() const
     return size;
 }
 
-Okteta::Size UnionDataInformation::readData(Okteta::AbstractByteArrayModel* input,
-        ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining,
+qint64 UnionDataInformation::readData(Okteta::AbstractByteArrayModel *input,
+        ByteOrder byteOrder, Okteta::Address address, quint64 bitsRemaining,
         quint8* bitOffset)
 {
-    Okteta::Size readBytes = 0;
+    qint64 readBits = 0;
+    quint8 originalBitOffset = *bitOffset;
+    quint8 correctBitOffset = originalBitOffset;
     for (int i = 0; i < mChildren.size(); i++)
     {
-        //union -> size of biggest element
-        //always start at beginning again
-        readBytes = qMax(readBytes, mChildren[i]->readData(input, byteOrder,
-                address, remaining, bitOffset));
+        //bit offset always has to be reset to original value
+        qint64 currentReadBits = mChildren[i]->readData(input, byteOrder, address,
+                bitsRemaining, bitOffset);
+        if (currentReadBits == -1)
+            return -1;
+        if (currentReadBits > readBits) {
+            readBits = correctBitOffset;
+            correctBitOffset = *bitOffset;
+        }
+        *bitOffset = originalBitOffset; // start at beginning
     }
-    if (readBytes % 8 != 0)
-    {
-        //biggest element is a bitfield -> add padding
-        readBytes = readBytes + (8 - readBytes % 8);
-    }
-    return readBytes;
+    return readBits;
 }
 
-bool UnionDataInformation::setData(const QVariant& value, DataInformation* inf,
-        Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
-        Okteta::Address address, Okteta::Size remaining, quint8* bitOffset)
+bool UnionDataInformation::setData(const QVariant& value,
+        DataInformation* inf, Okteta::AbstractByteArrayModel *out,
+        ByteOrder byteOrder, Okteta::Address address, quint64 bitsRemaining,
+        quint8* bitOffset)
 {
     if (this == inf)
-    {
-        kDebug() << "non-editable item";
         return true; //do nothing since this is not editable
-    }
+    quint64 readBits = 0;
+    uint readBytes = 0;
     for (int i = 0; i < mChildren.size(); i++)
     {
-        if (mChildren[i]->setData(value, inf, out, byteOrder, address, remaining,
-                bitOffset))
+        if (mChildren[i]->setData(value, inf, out, byteOrder, address + readBytes,
+                bitsRemaining - readBits, bitOffset))
             return true; //found -> done job
+
+        //useless since only one write anyway?
+        readBits += mChildren[i]->size();
+        readBytes = (readBits + *bitOffset) / 8;
     }
     return false;
 }

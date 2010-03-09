@@ -51,26 +51,24 @@ void DynamicLengthArrayDataInformation::resizeChildren()
     //kDebug() << "new childcount: " << childCount();
 }
 
-Okteta::Size DynamicLengthArrayDataInformation::readData(
-        Okteta::AbstractByteArrayModel* input, ByteOrder byteOrder,
-        Okteta::Address address, Okteta::Size remaining, quint8* bitOffset)
+qint64 DynamicLengthArrayDataInformation::readData(
+        Okteta::AbstractByteArrayModel *input, ByteOrder byteOrder,
+        Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
 {
-    Okteta::Size readBytes = 0;
     resizeChildren();
-    for (unsigned int i = 0; i < childCount(); i++)
+    uint readBytes = 0;
+    quint64 readBits = 0;
+    for (int i = 0; i < mChildren.size(); i++)
     {
-        readBytes += childAt(i)->readData(input, byteOrder, address + readBytes,
-                remaining - readBytes, bitOffset);
+        quint64 currentReadBits = mChildren[i]->readData(input, byteOrder, address
+                + readBytes, bitsRemaining - readBits, bitOffset);
+        if (currentReadBits == -1)
+            return -1;
+        readBits += currentReadBits;
+        readBytes = (readBits + *bitOffset) / 8;
     }
-    if (*bitOffset != 0)
-    {
-        //last element is a bitfield -> add padding
-        *bitOffset = 0;
-        readBytes++;
-    }
-    return readBytes;
+    return readBits;
 }
-
 DynamicLengthArrayDataInformation::DynamicLengthArrayDataInformation(QString name,
         const QString& lengthStr, const DataInformation& children, int index,
         DataInformation* parent) :
@@ -101,7 +99,8 @@ int DynamicLengthArrayDataInformation::calculateLength()
     QList<const DataInformation*> refs = findChildrenWithName(mLengthString, this);
     if (refs.length() == 0)
     {
-        kDebug() << "referenced size field not found";
+        kDebug()
+            << "referenced size field not found";
         return 0;
     }
     for (int i = 0; i < refs.length(); ++i)
@@ -113,7 +112,8 @@ int DynamicLengthArrayDataInformation::calculateLength()
         {
             if (!prim->isValid())
             {
-                kDebug() << "primitive type is not valid";
+                kDebug()
+                    << "primitive type is not valid";
                 continue;
             }
             else

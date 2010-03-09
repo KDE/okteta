@@ -43,14 +43,15 @@ public:
     virtual ~DynamicLengthArrayDataInformation();
     DATAINFORMATION_CLONE(DynamicLengthArray)
 
-    virtual Okteta::Size readData(Okteta::AbstractByteArrayModel* input,
-            ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining, quint8* bitOffset);
+    virtual qint64
+    readData(Okteta::AbstractByteArrayModel *input, ByteOrder byteOrder,
+            Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset);
 private:
     int calculateLength();
     void resizeChildren();
     QString mLengthString;
     DataInformation* mChildType;
 Q_SIGNALS:
-    void childCountChange(int oldCount,int newCount);
+    void childCountChange(int oldCount, int newCount);
 };
 #endif /* DYNAMICLENGTHARRAYDATAINFORMATION_H_ */

@@ -60,3 +60,9 @@ void DoubleDataInformation::setWidgetData(QWidget* w) const
     if (spin)
         spin->setValue((double) this->value().floatValue);
 }
+
+AllPrimitiveTypes DoubleDataInformation::qVariantToAllPrimitiveTypes(const QVariant& value) const
+{
+    return AllPrimitiveTypes(value.toDouble());
+}
+

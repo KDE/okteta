@@ -69,3 +69,8 @@ void FloatDataInformation::setWidgetData(QWidget* w) const
     if (spin)
         spin->setValue((double) this->value().floatValue);
 }
+
+AllPrimitiveTypes FloatDataInformation::qVariantToAllPrimitiveTypes(const QVariant& value) const
+{
+    return AllPrimitiveTypes(value.toFloat());
+}

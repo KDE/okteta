@@ -41,11 +41,12 @@ public:
     //implement the DataInformation pure virtual functions
     QString typeName() const;
     int size() const;
-    virtual Okteta::Size readData(Okteta::AbstractByteArrayModel* input,
-            ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining, quint8* bitOffset);
+    virtual qint64 readData(Okteta::AbstractByteArrayModel* input,
+            ByteOrder byteOrder, Okteta::Address address, quint64 bitsRemaining,
+            quint8* bitOffset);
     virtual bool setData(const QVariant& value, DataInformation* inf,
             Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
-            Okteta::Address address, Okteta::Size remaining, quint8* bitOffset);
+            Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset);
     /** add another field to this union */
     UnionDataInformation& operator<<(DataInformation* field);
 protected:

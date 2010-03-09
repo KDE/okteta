@@ -49,6 +49,8 @@ public:
     }
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
+    virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const;
+
 };
 
 #endif /* UNSIGNEDPRIMITIVEDATAINFORMATION_H_ */

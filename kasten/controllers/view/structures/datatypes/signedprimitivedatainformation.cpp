@@ -38,8 +38,19 @@ QString SignedPrimitiveDataInformation::correctSignedValue(QString& num, int bas
 QVariant SignedPrimitiveDataInformation::dataFromWidget(const QWidget* w) const
 {
     const SIntSpinBox* spin = dynamic_cast<const SIntSpinBox*> (w);
+    //always save the value as an unsigned value to allow safe converting
     if (spin)
-        return spin->value();
+        return (quint64)spin->value();
     else
         return QVariant();
+}
+
+AllPrimitiveTypes SignedPrimitiveDataInformation::qVariantToAllPrimitiveTypes(
+        const QVariant& value) const
+{
+    if (!value.isValid())
+        kDebug() << "invalid QVariant passed.";
+
+    //This is fine since all the values are unsigned
+    return AllPrimitiveTypes(value.toULongLong());
 }

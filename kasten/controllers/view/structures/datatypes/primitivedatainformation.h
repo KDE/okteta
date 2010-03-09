@@ -62,30 +62,29 @@ public:
     virtual int displayBase() const = 0;
     QVariant primitiveValue() const;
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
-    /** @return true if data was changed */
-    virtual bool setData(const QVariant &value, DataInformation* inf,
+
+    virtual bool setData(const QVariant& value, DataInformation* inf,
             Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
-            Okteta::Address address, Okteta::Size remaining, quint8* bitOffset);
+            Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset);
+    virtual qint64
+    readData(Okteta::AbstractByteArrayModel *input, ByteOrder byteOrder,
+            Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset);
+//FIXME const
     virtual QString valueString() const = 0;
     AllPrimitiveTypes value() const
     {
         return mValue;
     }
+    virtual AllPrimitiveTypes
+            qVariantToAllPrimitiveTypes(const QVariant& value) const = 0;
+    QVariant data(int column, int role) const;
+    static PrimitiveDataType typeStringToType(QString& typeStr);
 protected:
-    void setModelData(AllPrimitiveTypes value, Okteta::AbstractByteArrayModel *out,
-            ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining);
-
     virtual Okteta::Size offset(unsigned int index) const
     {
         Q_UNUSED(index)
         return 0;
     }
-public:
-    QVariant data(int column, int role) const;
-    virtual Okteta::Size readData(Okteta::AbstractByteArrayModel* input,
-            ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining,
-            quint8* bitOffset);
-    static PrimitiveDataType typeStringToType(QString& typeStr);
 
 };
 #define PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(type,superType) public: \

@@ -112,82 +112,29 @@ QVariant PrimitiveDataInformation::data(int column, int role) const
 
 bool PrimitiveDataInformation::setData(const QVariant& value, DataInformation* inf,
         Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
-        Okteta::Address address, Okteta::Size remaining,quint8* bitOffset)
+        Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
 {
-    //FIXME move to the correct subclasses, switches are evil
     if (this != inf)
-        return false;
-
-    if (*bitOffset != 0) {
-        // we just move on to next byte, only bitfields should handle this
-        remaining--;
-        address++;
-        //now bit offset is 0 again
-        *bitOffset = 0;
-        //TODO handle bit-offsets for primitive types? Probably not since one
-        //can just use a e.g. 8-bit bitfield. Only problem are chars and floats
-    }
-
-#define SETDATA(arg,method,cast)    newVal= AllPrimitiveTypes(cast method); \
-    if (mValue != newVal && ok) \
-    {   \
-        mValue.arg = newVal.arg;    \
-        setModelData(newVal,out,byteOrder,address,remaining); \
-        emit dataChanged(); \
-    } \
-    break;
-
-    bool ok = false;
-    AllPrimitiveTypes newVal;
-    switch (mType)
     {
-    case Type_Float:
-        #if QT_VERSION >= 0x040600
-                SETDATA(floatValue,value.toFloat(&ok),(float))
-        #else
-                SETDATA(floatValue,value.toDouble(&ok),(float))
-        #endif
-    case Type_Double:
-        SETDATA(doubleValue,value.toDouble(&ok),(double))
-    case Type_Char:
-        SETDATA(byteValue,value.toInt(&ok),(qint8))
-    case Type_Int8:
-        SETDATA(byteValue,value.toInt(&ok),(qint8))
-    case Type_UInt8:
-        SETDATA(ubyteValue,value.toUInt(&ok),(quint8))
-    case Type_Int16:
-        SETDATA(shortValue,value.toInt(&ok),(qint16))
-    case Type_UInt16:
-        SETDATA(ushortValue,value.toUInt(&ok),(quint16))
-    case Type_Int32:
-        SETDATA(intValue,value.toInt(&ok),(qint32))
-    case Type_UInt32:
-        SETDATA(uintValue,value.toUInt(&ok),(quint32))
-    case Type_Int64:
-        SETDATA(longValue,value.toLongLong(&ok),(qint64))
-    case Type_UInt64:
-        SETDATA(ulongValue,value.toULongLong(&ok),(quint64))
-    case Type_Bool8:
-        SETDATA(ubyteValue,value.toUInt(&ok),(quint8))
-    case Type_Bool16:
-        SETDATA(ushortValue,value.toUInt(&ok),(quint16))
-    case Type_Bool32:
-        SETDATA(uintValue,value.toUInt(&ok),(quint32))
-    case Type_Bool64:
-        SETDATA(ulongValue,value.toULongLong(&ok),(quint64))
-    default:
-        kError() << "called with invalid type";
-        break;
+        //make sure bitOffset is always incremented
+        *bitOffset = (*bitOffset + size()) % 8;
+        return false;
     }
-    return true;
-}
+    AllPrimitiveTypes oldVal(mValue);
+    bool wasValid = mIsValid;
+    // this is implemented in the subclasses
+    AllPrimitiveTypes newVal = qVariantToAllPrimitiveTypes(value);
 
-void PrimitiveDataInformation::setModelData(AllPrimitiveTypes value,
-        Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
-        Okteta::Address address, Okteta::Size remaining)
-{
+    //this handles remaining < size() for us
+    mIsValid = mValue.writeBits(size(), newVal, out, byteOrder, address, bitsRemaining,
+            bitOffset);
+
+    if (oldVal != mValue || wasValid != mIsValid)
+        emit dataChanged();
+    return true;
+#if 0 //optimised for full bytes -> move to apt.cpp
     int sizeInBytes = size() / 8;
-    if (remaining < sizeInBytes)
+    if (bitsRemaining < sizeInBytes)
     {
         mValue.ulongValue = 0;
         mIsValid = false;
@@ -196,9 +143,10 @@ void PrimitiveDataInformation::setModelData(AllPrimitiveTypes value,
     for (int i = 0; i < sizeInBytes; ++i)
     {
         int index = (byteOrder == ByteOrderEnumClass::LittleEndian) ? i
-                : ((sizeInBytes - 1) - i);
+        : ((sizeInBytes - 1) - i);
         out->setByte(address + i, value.allBytes[index]);
     }
+#endif
 }
 
 Qt::ItemFlags PrimitiveDataInformation::flags(int column, bool fileLoaded) const
@@ -209,11 +157,29 @@ Qt::ItemFlags PrimitiveDataInformation::flags(int column, bool fileLoaded) const
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
 }
 
-Okteta::Size PrimitiveDataInformation::readData(
-        Okteta::AbstractByteArrayModel* input, ByteOrder byteOrder,
-        Okteta::Address address, Okteta::Size remaining,quint8* bitOffset)
+qint64 PrimitiveDataInformation::readData(Okteta::AbstractByteArrayModel *input,
+        ByteOrder byteOrder, Okteta::Address address, quint64 bitsRemaining,
+        quint8* bitOffset)
 {
-    if (*bitOffset != 0) {
+    if (bitsRemaining < size())
+    {
+        mIsValid = false;
+        mValue = 0;
+        return -1;
+    }
+    bool wasValid = mIsValid;
+    AllPrimitiveTypes oldVal(mValue);
+
+    mIsValid = mValue.readBits(size(), input, byteOrder, address, bitsRemaining,
+            bitOffset);
+
+    if (oldVal != mValue || wasValid != mIsValid)
+        emit dataChanged();
+
+    return size();
+#if 0 //optimised for full bytes -> move to apt.cpp
+    if (*bitOffset != 0)
+    {
         // we just move on to next byte, only bitfields should handle this
         remaining--;
         address++;
@@ -235,7 +201,7 @@ Okteta::Size PrimitiveDataInformation::readData(
     for (int i = 0; i < bytes; i++)
     {
         int index = (byteOrder == ByteOrderEnumClass::LittleEndian) ? i : ((bytes
-                - 1) - i);
+                        - 1) - i);
         Okteta::Byte readByte = input->byte(address + i);
         if (mValue.allBytes[index] != readByte)
         {
@@ -250,9 +216,10 @@ Okteta::Size PrimitiveDataInformation::readData(
     }
 
     if (changed)
-        emit dataChanged();
+    emit dataChanged();
     mIsValid = true;
     return bytes;
+#endif
 }
 
 PrimitiveDataInformation::PrimitiveDataInformation(QString name,

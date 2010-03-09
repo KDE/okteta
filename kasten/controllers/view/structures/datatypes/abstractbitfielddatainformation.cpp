@@ -21,49 +21,18 @@
  */
 #include "abstractbitfielddatainformation.h"
 
-//FIXME this code really needs unit tests!
-bool AbstractBitfieldDataInformation::setData(const QVariant& value,
-        DataInformation* inf, Okteta::AbstractByteArrayModel *out,
-        ByteOrder byteOrder, Okteta::Address address, Okteta::Size remaining,
-        quint8* bitOffset)
-{
-    if (this != inf)
-    {
-        //make sure bitOffset is always incremented
-        *bitOffset = (*bitOffset + width()) % 8;
-        return false;
-    }
-    AllPrimitiveTypes oldVal(mValue);
-    AllPrimitiveTypes newVal(value.toULongLong());
-    mIsValid = mValue.writeBits(width(), newVal, out, byteOrder, address, remaining,
-            bitOffset);
-    if (oldVal != mValue)
-        emit dataChanged();
-    mIsValid = true;
-    return true;
-}
-
-Okteta::Size AbstractBitfieldDataInformation::readData(
-        Okteta::AbstractByteArrayModel* input, ByteOrder byteOrder,
-        Okteta::Address address, Okteta::Size remaining, quint8* bitOffset)
-{
-    if ((unsigned) (remaining * 8) - *bitOffset < width())
-    {
-        mIsValid = false;
-        mValue = 0;
-        return true;
-    }
-    int usedBits = *bitOffset + width();
-    AllPrimitiveTypes oldVal(mValue);
-    mIsValid = mValue.readBits(width(),input,byteOrder,address,remaining,bitOffset);
-    if (oldVal != mValue.ulongValue)
-    {
-        emit dataChanged();
-    }
-    return usedBits / 8; //TODO the return value needs updating in method signature
-}
-
 QString AbstractBitfieldDataInformation::sizeString() const
 {
     return i18np("%1 bit", "%1 bits", width());
 }
+
+AllPrimitiveTypes AbstractBitfieldDataInformation::qVariantToAllPrimitiveTypes(
+        const QVariant& value) const
+{
+    if (!value.isValid())
+        kDebug() << "invalid QVariant passed.";
+
+    //This is fine since all the values are unsigned
+    return AllPrimitiveTypes(value.toULongLong());
+}
+

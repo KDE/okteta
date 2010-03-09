@@ -161,14 +161,14 @@ union AllPrimitiveTypes
      *  @param newValue the new value of this union
      *  @param out the byte array the value is read from
      *  @param byteOrder the byteOrder used for reading values
-     *  @param address the address in @p input
+     *  @param address the address in @p out
      *  @param remaining number of bytes remaining in @p input
      *  @param bitOffset the bit to start at in the first byte
      *  @return @c true on success, @c false otherwise
      */
     bool writeBits(const quint8 bitCount, const AllPrimitiveTypes newValue,
             Okteta::AbstractByteArrayModel* out, const ByteOrder byteOrder,
-            const Okteta::Address address, const Okteta::Size remaining,
+            const Okteta::Address address, const quint64 bitsRemaining,
             quint8* const bitOffset);
     /** Reads given number of bits from @p input and sets value of this union to
      *  the new value.
@@ -182,27 +182,28 @@ union AllPrimitiveTypes
      *  @param input the byte array the value is read from
      *  @param byteOrder the byteOrder used for reading values
      *  @param address the address in @p input
-     *  @param remaining number of bytes remaining in @p input
+     *  @param bitsRemaining number of bytes remaining in @p input
      *  @param bitOffset the bit to start at in the first byte
      *  @return @c true on success, @c false otherwise
      */
     bool readBits(const quint8 bitCount,
             const Okteta::AbstractByteArrayModel* input, const ByteOrder byteOrder,
-            const Okteta::Address address, const Okteta::Size remaining,
+            const Okteta::Address address, const quint64 bitsRemaining,
             quint8* const bitOffset);
+
 private:
     void readDataLittleEndian(const quint8 bitCount,
             const Okteta::AbstractByteArrayModel* input,
             const Okteta::Address address, const quint8 bo);
     void writeDataLittleEndian(const quint8 bitCount,
-            Okteta::AbstractByteArrayModel *out, const Okteta::Address address,
-            const quint8 bo) const;
+            const AllPrimitiveTypes newValue, Okteta::AbstractByteArrayModel *out,
+            const Okteta::Address address, const quint8 bo) const;
 
     void readDataBigEndian(const quint8 bitCount,
             const Okteta::AbstractByteArrayModel* input,
             const Okteta::Address address, const quint8 bo);
-    void writeDataBigEndian(const quint8 bitCount,
-            Okteta::AbstractByteArrayModel *out, Okteta::Address address,
+    void writeDataBigEndian(const quint8 bitCount, const AllPrimitiveTypes newValue,
+            Okteta::AbstractByteArrayModel *out, const Okteta::Address address,
             const quint8 bo) const;
 };
 #endif /* ALLPRIMITIVETYPES_H_ */
