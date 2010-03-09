@@ -43,21 +43,29 @@ bool AllPrimitiveTypes::writeBits(const quint8 bitCount,
     if (ulongValue != newValue.ulongValue)
         ulongValue = newValue.ulongValue;
 
-    if (byteOrder == ByteOrderEnumClass::LittleEndian)
+    if (bitCount % 8 == 0 && *bitOffset == 0)
     {
-        writeDataLittleEndian(bitCount, newValue, out, address, *bitOffset);
-    }
-    else if (byteOrder == ByteOrderEnumClass::BigEndian)
-    {
-        writeDataBigEndian(bitCount, newValue, out, address, *bitOffset);
+        //only writing full bytes
+        writeFullBytes(bitCount / 8, newValue, out, byteOrder, address);
     }
     else
     {
-        kWarning() << "invalid byte order";
-        ulongValue = 0;
-        return false;
+        if (byteOrder == ByteOrderEnumClass::LittleEndian)
+        {
+            writeDataLittleEndian(bitCount, newValue, out, address, *bitOffset);
+        }
+        else if (byteOrder == ByteOrderEnumClass::BigEndian)
+        {
+            writeDataBigEndian(bitCount, newValue, out, address, *bitOffset);
+        }
+        else
+        {
+            kWarning() << "invalid byte order";
+            ulongValue = 0;
+            return false;
+        }
+        *bitOffset = (*bitOffset + bitCount) % 8;
     }
-    *bitOffset = (*bitOffset + bitCount) % 8;
     return true;
 }
 
@@ -76,21 +84,29 @@ bool AllPrimitiveTypes::readBits(const quint8 bitCount,
     }
     //set to zero before reading
     ulongValue = 0;
-    if (byteOrder == ByteOrderEnumClass::LittleEndian)
+    if (bitCount % 8 == 0 && *bitOffset == 0)
     {
-        readDataLittleEndian(bitCount, input, address, *bitOffset);
-    }
-    else if (byteOrder == ByteOrderEnumClass::BigEndian)
-    {
-        readDataBigEndian(bitCount, input, address, *bitOffset);
+        //only reading full bytes
+        readFullBytes(bitCount / 8, input, byteOrder, address);
     }
     else
     {
-        kWarning() << "invalid byte order specified.";
-        ulongValue = 0;
-        return false;
+        if (byteOrder == ByteOrderEnumClass::LittleEndian)
+        {
+            readDataLittleEndian(bitCount, input, address, *bitOffset);
+        }
+        else if (byteOrder == ByteOrderEnumClass::BigEndian)
+        {
+            readDataBigEndian(bitCount, input, address, *bitOffset);
+        }
+        else
+        {
+            kWarning() << "invalid byte order specified.";
+            ulongValue = 0;
+            return false;
+        }
+        *bitOffset = (*bitOffset + bitCount) % 8;
     }
-    *bitOffset = (*bitOffset + bitCount) % 8;
     return true;
 }
 
@@ -263,7 +279,8 @@ void AllPrimitiveTypes::writeDataBigEndian(const quint8 bitCount,
                 //last byte to read
                 const quint8 firstByteMask = 0xff << (8 - bo);
                 const quint8 firstByteMasked = currentByte & firstByteMask;
-                const quint8 highestByte = newValue.ulongValue >> (bo + bitCount - 8);
+                const quint8 highestByte = newValue.ulongValue
+                        >> (bo + bitCount - 8);
                 const quint8 firstByteWithValAdded = firstByteMasked | highestByte;
                 out->setByte(address, firstByteWithValAdded);
             }
@@ -271,10 +288,36 @@ void AllPrimitiveTypes::writeDataBigEndian(const quint8 bitCount,
             {
                 const int bytesNotToShift = 1 + (lastAddress - address)
                         - (lastAddress - currAddress);
-                const quint8 thisByteShifted = newValue.ulongValue >> (bo + bitCount - (8
-                        * bytesNotToShift));
+                const quint8 thisByteShifted = newValue.ulongValue >> (bo + bitCount
+                        - (8 * bytesNotToShift));
                 out->setByte(currAddress, thisByteShifted);
             }
         }
+    }
+}
+
+void AllPrimitiveTypes::readFullBytes(const quint8 byteCount,
+        const Okteta::AbstractByteArrayModel* input, const ByteOrder byteOrder,
+        const Okteta::Address address)
+{
+    //always use unsigned value
+    for (int i = 0; i < byteCount; i++)
+    {
+        int index = (byteOrder == ByteOrderEnumClass::LittleEndian) ? i
+                : ((byteCount - 1) - i);
+        Okteta::Byte readByte = input->byte(address + i);
+        allBytes[index] = readByte;
+    }
+}
+
+void AllPrimitiveTypes::writeFullBytes(const quint8 byteCount,
+        const AllPrimitiveTypes newValue, Okteta::AbstractByteArrayModel* out,
+        const ByteOrder byteOrder, const Okteta::Address address)
+{
+    for (int i = 0; i < byteCount; ++i)
+    {
+        int index = (byteOrder == ByteOrderEnumClass::LittleEndian) ? i
+                : ((byteCount - 1) - i);
+        out->setByte(address + i, newValue.allBytes[index]);
     }
 }

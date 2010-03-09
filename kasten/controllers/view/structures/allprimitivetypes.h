@@ -205,5 +205,13 @@ private:
     void writeDataBigEndian(const quint8 bitCount, const AllPrimitiveTypes newValue,
             Okteta::AbstractByteArrayModel *out, const Okteta::Address address,
             const quint8 bo) const;
+
+    //optimised methods for reading/writing full bytes
+    void readFullBytes(const quint8 byteCount,
+            const Okteta::AbstractByteArrayModel* input, const ByteOrder byteOrder,
+            const Okteta::Address address);
+    void writeFullBytes(const quint8 byteCount, const AllPrimitiveTypes newValue,
+            Okteta::AbstractByteArrayModel* out, const ByteOrder byteOrder,
+            const Okteta::Address address);
 };
 #endif /* ALLPRIMITIVETYPES_H_ */
