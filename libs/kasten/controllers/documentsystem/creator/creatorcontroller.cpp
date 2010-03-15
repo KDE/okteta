@@ -76,7 +76,7 @@ CreatorController::CreatorController( ViewManager* viewManager, DocumentManager*
     connect( newEmptyDocumentAction, SIGNAL(triggered( bool )), SLOT(onNewActionTriggered()) );
 
     QAction* newFromClipboardDocumentAction =
-        new QAction( KIcon("edit-paste"), i18nc("@title:menu create a new document from data in the the clipboard", "From Clipboard" ), this );
+        new QAction( KIcon("edit-paste"), i18nc("@title:menu create a new document from data in the clipboard", "From Clipboard" ), this );
     connect( newFromClipboardDocumentAction, SIGNAL(triggered( bool )), SLOT(onNewFromClipboardActionTriggered()) );
 
     newMenuAction->addAction( newEmptyDocumentAction );
