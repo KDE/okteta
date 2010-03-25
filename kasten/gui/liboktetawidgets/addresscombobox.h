@@ -59,9 +59,12 @@ class OKTETAKASTENGUI_EXPORT AddressComboBox : public QWidget
   public: // get
     Address address() const;
     int format() const;
+    /** Is actually of type AddressValidator::AddressType */
+    int addressType() const;
 
   Q_SIGNALS:
     void addressChanged( Okteta::Address address );
+    void addressTypeChanged( int newAddressType );
     void formatChanged( int index );
 
   protected:

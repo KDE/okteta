@@ -26,6 +26,7 @@
 #include "gotooffsettool.h"
 // lib
 #include <addresscombobox.h>
+#include "../../../gui/liboktetawidgets/addressvalidator.h"
 // KDE
 #include <KPushButton>
 #include <KGuiItem>
@@ -115,6 +116,10 @@ GotoOffsetView::GotoOffsetView( GotoOffsetTool* tool, QWidget* parent )
 
     connect( mTool, SIGNAL(isApplyableChanged( bool )), SLOT( onApplyableChanged( bool )) );
 
+    connect( mAddressEdit, SIGNAL(formatChanged( int )),SLOT(onFormatChanged( int )) );
+    connect( mAddressEdit, SIGNAL(addressTypeChanged( int )),
+            SLOT(onAddressTypeChanged( int )) );
+
     onApplyableChanged( mTool->isApplyable() );
 }
 
@@ -136,6 +141,49 @@ void GotoOffsetView::onGotoButtonClicked()
 //     emit toolUsed();
 }
 
+void GotoOffsetView::onAddressTypeChanged( int newType )
+{
+    switch ( (Okteta::AddressValidator::AddressType)newType ) {
+    case Okteta::AddressValidator::InvalidAddressType:
+        //invalid resets the checkboxes
+        mAtCursorCheckBox->setChecked( false );
+        mBackwardsCheckBox->setChecked( false );
+        break;
+    case Okteta::AddressValidator::AbsoluteAddress:
+        mAtCursorCheckBox->setChecked( false );
+        mBackwardsCheckBox->setChecked( false );
+        break;
+    case Okteta::AddressValidator::RelativeForwards:
+        mAtCursorCheckBox->setChecked( true );
+        mBackwardsCheckBox->setChecked( false );
+        break;
+    case Okteta::AddressValidator::RelativeBackwards:
+        mAtCursorCheckBox->setChecked( true );
+        mBackwardsCheckBox->setChecked( true );
+        break;
+    default:
+        break;
+    }
+    //fix goto button sometimes being wrongly dis-/enabled:
+    mGotoButton->setEnabled( newType != Okteta::AddressValidator::InvalidAddressType
+            && mTool->isApplyable() );
+
+}
+
+void GotoOffsetView::onFormatChanged(int index)
+{
+    //TODO: make sure Expr is always at index 2
+    if (index == 2) //expression
+    {
+        mAtCursorCheckBox->setEnabled(false);
+        mBackwardsCheckBox->setEnabled(false);
+    }
+    else
+    {
+        mAtCursorCheckBox->setEnabled(true);
+        mBackwardsCheckBox->setEnabled(true);
+    }
+}
 
 GotoOffsetView::~GotoOffsetView() {}
 

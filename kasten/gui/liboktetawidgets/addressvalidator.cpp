@@ -26,8 +26,12 @@
 #include <valuecodec.h>
 // KDE
 #include <KLocale>
+#include <KDebug>
 // Qt
 #include <QtCore/QString>
+#include <QtCore/QRegExp>
+#include <QtScript/QScriptEngine>
+#include <QtScript/QScriptValue>
 
 
 namespace Okteta
@@ -43,50 +47,119 @@ AddressValidator::AddressValidator( QObject* parent, Coding codecId )
 
 void AddressValidator::setCodec( Coding codecId )
 {
-    if( codecId == mCodecId )
+    if ( codecId == mCodecId )
         return;
 
     mCodecId = codecId;
-
     delete mValueCodec;
     mValueCodec = ValueCodec::createCodec( (Okteta::ValueCoding)mCodecId );
 }
+
+const QRegExp AddressValidator::expressionRegex = QRegExp("[0-9a-fx\\+/\\s\\-\\*]+",
+        Qt::CaseInsensitive, QRegExp::RegExp2); //FIXME this is way too simple, only there to test
 
 QValidator::State AddressValidator::validate( QString& string, int& pos ) const
 {
     Q_UNUSED( pos )
 
     State result = QValidator::Acceptable;
-
-    const int stringLength = string.length();
-    for( int i=0; i<stringLength; ++i )
+    if ( mCodecId == ExpressionCoding )
     {
-        const QChar c = string.at( i );
-        if( !mValueCodec->isValidDigit(c.toLatin1()) && !c.isSpace() )
-        {
+        string = string.trimmed();
+        if ( !expressionRegex.exactMatch( string ) )
             result = QValidator::Invalid;
-            break;
+        //only prefix has been typed:
+        if ( string == "+" || string == "-" )
+            result = QValidator::Intermediate;
+        if ( string.endsWith( 'x' ) ) // 0x at end
+            result = QValidator::Intermediate;
+    }
+    else
+    {
+        const int stringLength = string.length();
+        for( int i=0; i<stringLength; ++i )
+        {
+            const QChar c = string.at( i );
+            if( !mValueCodec->isValidDigit( c.toLatin1() ) && !c.isSpace() )
+            {
+                result = QValidator::Invalid;
+                break;
+            }
         }
     }
-
+    if ( string.isEmpty() )
+        result = QValidator::Intermediate;
     return result;
 }
 
-
-Address AddressValidator::toAddress( const QString& string ) const
+Address AddressValidator::toAddress(const QString& string, AddressType* type) const
 {
-    const int isHexadecimal = ( mCodecId == HexadecimalCoding );
-    const int base = isHexadecimal ? 16 : 10;
-    const Okteta::Address address = string.toInt( 0, base );
+    Address address;
+    QString expression = string.trimmed();
+    if (type) // allow passing null
+        *type = calculateAddressType(expression);
 
+    if ( expression.startsWith( '-' ) || expression.startsWith( '+' ) )
+        expression = expression.mid( 1 );
+
+    if ( mCodecId == ExpressionCoding )
+    {
+        QScriptEngine evaluator;
+        QScriptValue val = evaluator.evaluate( expression );
+        address = val.toInt32();
+        kDebug() << "expression \"" << expression << "\" evaluated to: " << address;
+        if ( evaluator.hasUncaughtException() )
+        {
+            kWarning() << "evaluation error: "
+                    << evaluator.uncaughtExceptionBacktrace();
+            if (type)
+                *type = InvalidAddressType;
+        }
+    }
+    else
+    {
+        const bool isHexadecimal = ( mCodecId == HexadecimalCoding );
+        const int base = isHexadecimal ? 16 : 10;
+        address = expression.toInt( 0, base );
+    }
     return address;
 }
 
-QString AddressValidator::toString( Address address ) const
+AddressValidator::AddressType AddressValidator::calculateAddressType( const QString& string ) const
 {
+    AddressType result;
+    QString expression = string.trimmed();
+    if ( expression.startsWith( '+' ) )
+    {
+        expression = expression.mid( 1 );
+        result = RelativeForwards;
+    }
+    else if ( expression.startsWith( '-' ) )
+    {
+        expression = expression.mid( 1 );
+        result = RelativeBackwards;
+    }
+    else
+    {
+        result = AbsoluteAddress;
+    }
+    return result;
+}
+
+QString AddressValidator::toString( Address address, const AddressType* addressType ) const
+{
+    //ExpressionCoding just uses base 10 so no need to adjust this code
     const int isHexadecimal = ( mCodecId == HexadecimalCoding );
     const int base = isHexadecimal ? 16 : 10;
-    const QString string = QString::number( address, base );
+    QString string = QString::number( address, base );
+
+    if (addressType)
+    {
+        if ( *addressType == RelativeForwards )
+            string = string.prepend( '+' );
+        else if ( *addressType == RelativeBackwards )
+            string = string.prepend( '-' );
+    }
     return string;
 }
 

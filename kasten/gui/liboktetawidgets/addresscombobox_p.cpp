@@ -47,6 +47,7 @@ static const QStringList& formatStrings()
 //         list.append( i18nc("@item:inlistbox guessing the format of the address by the input",      "Auto") );
         list.append( i18nc( "@item:inlistbox coding of offset in the hexadecimal format", "Hex" ) );
         list.append( i18nc( "@item:inlistbox coding of offset in the decimal format",     "Dec" ) );
+        list.append( i18nc( "@item:inlistbox coding of offset in the expression format",     "Expr" ) );
     }
     return list;
 }
@@ -82,16 +83,16 @@ void AddressComboBoxPrivate::init()
     mValidator->setCodec( coding );
     mValueComboBox->setValidator( mValidator );
     q->connect( mValueComboBox, SIGNAL(activated( int )), SLOT(onValueActivated( int )) );
-
     baseLayout->addWidget( mFormatComboBox );
     baseLayout->addWidget( mValueComboBox );
     q->setTabOrder( mFormatComboBox, mValueComboBox );
 }
 
-
 void AddressComboBoxPrivate::rememberCurrentAddress()
 {
-    mValueComboBox->insertItem( -1, mValueComboBox->currentText(), mFormatComboBox->currentIndex() );
+    //don't insert same value multiple times in a row
+    if ( mValueComboBox->itemText(0) != mValueComboBox->currentText() )
+        mValueComboBox->insertItem( -1, mValueComboBox->currentText(), mFormatComboBox->currentIndex() );
 }
 
 
@@ -101,13 +102,16 @@ void AddressComboBoxPrivate::onFormatChanged( int index )
 
     const QString currentValueText = mValueComboBox->currentText();
     const bool isCurrentValueTextEmpty = currentValueText.isEmpty();
-    const Address address = isCurrentValueTextEmpty ? -1 : mValidator->toAddress( currentValueText );
+
+    AddressValidator::AddressType type;
+    const Address address = isCurrentValueTextEmpty ? -1 : mValidator->toAddress( currentValueText, &type );
+    setAddressType( type );
 
     mValidator->setCodec( static_cast<AddressValidator::Coding>(index) );
 
     if( ! isCurrentValueTextEmpty )
     {
-        const QString convertedValueText = mValidator->toString( address );
+        const QString convertedValueText = mValidator->toString( address, &lastAddressType );
         mValueComboBox->setEditText( convertedValueText );
     }
 
@@ -118,7 +122,9 @@ void AddressComboBoxPrivate::onValueEdited( const QString& value )
 {
     Q_Q( AddressComboBox );
 
-    const Address address = mValidator->toAddress( value );
+    AddressValidator::AddressType type;
+    const Address address = mValidator->toAddress( value, &type );
+    setAddressType( type );
 
     emit q->addressChanged( address );
 }
@@ -140,7 +146,10 @@ void AddressComboBoxPrivate::onValueActivated( int index )
 
         }
         const QString currentValueText = mValueComboBox->currentText();
-        const Address address = mValidator->toAddress( currentValueText );
+
+        AddressValidator::AddressType type;
+        const Address address = mValidator->toAddress( currentValueText, &type );
+        setAddressType( type );
 
         emit q->addressChanged( address );
         if( isOtherFormat )

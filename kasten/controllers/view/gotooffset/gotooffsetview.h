@@ -54,6 +54,8 @@ class GotoOffsetView : public AbstractToolWidget
 
   public Q_SLOTS: // gui
     void onGotoButtonClicked();
+    void onFormatChanged( int index );
+    void onAddressTypeChanged( int newType );
 
   public Q_SLOTS: // tool
     void onApplyableChanged( bool isApplyable );

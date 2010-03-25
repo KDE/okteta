@@ -177,7 +177,9 @@ target_link_libraries( oktetakastengui
   oktetagui
   oktetacore
   ${KDE4_KDEUI_LIBS}
+  ${QT_QTSCRIPT_LIBRARY}
 )
+#TODO should probably first check if QtScript is available??
 set_target_properties( oktetakastengui  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 
 install( TARGETS oktetakastengui  ${INSTALL_TARGETS_DEFAULT_ARGS} )

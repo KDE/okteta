@@ -42,7 +42,9 @@ class AddressValidator : public QValidator
 
   public:
     // matching Okteta::ValueCoding
-    enum Coding { InvalidCoding = -1, HexadecimalCoding=0, DecimalCoding=1 };
+    enum Coding { InvalidCoding = -1, HexadecimalCoding=0, DecimalCoding=1, ExpressionCoding=2 };
+    //XXX shouldn't this better be in address.h? Sometime later maybe
+    enum AddressType { InvalidAddressType = -1, AbsoluteAddress = 0, RelativeForwards, RelativeBackwards};
 
   public:
     explicit AddressValidator( QObject* parent, Coding codecId = HexadecimalCoding );
@@ -52,16 +54,22 @@ class AddressValidator : public QValidator
     virtual QValidator::State validate( QString& input, int& pos ) const;
 
   public:
-    /// sets one of the value codecs or any char codec
+    AddressType addressType() const;
+    /** Sets one of the value codecs or any char codec */
     void setCodec( Coding codecId );
 
   public:
-    Address toAddress( const QString& string ) const;
-    QString toString( Address address ) const;
+    Address toAddress( const QString& string, AddressType* type ) const;
+    QString toString( Address address, const AddressType* addressType ) const;
+
+  private:
+    AddressType calculateAddressType( const QString& string ) const;
 
   private:
     Coding mCodecId;
     ValueCodec* mValueCodec;
+
+    static const QRegExp expressionRegex;
 };
 
 }

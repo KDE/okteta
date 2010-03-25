@@ -45,6 +45,13 @@ Address AddressComboBox::address() const
     return d->address();
 }
 
+int AddressComboBox::addressType() const
+{
+    Q_D( const AddressComboBox );
+
+    return d->lastAddressType;
+}
+
 int AddressComboBox::format() const
 {
     Q_D( const AddressComboBox );
