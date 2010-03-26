@@ -26,7 +26,7 @@
 #include "gotooffsettool.h"
 // lib
 #include <addresscombobox.h>
-#include "../../../gui/liboktetawidgets/addressvalidator.h"
+#include <addressvalidator.h>
 // KDE
 #include <KPushButton>
 #include <KGuiItem>
