@@ -84,7 +84,7 @@ void AddressComboBoxPrivate::init()
     mValueComboBox->setValidator( mValidator );
     q->connect( mValueComboBox, SIGNAL(activated( int )), SLOT(onValueActivated( int )) );
     baseLayout->addWidget( mFormatComboBox );
-    baseLayout->addWidget( mValueComboBox );
+    baseLayout->addWidget( mValueComboBox, 1 );
     q->setTabOrder( mFormatComboBox, mValueComboBox );
 }
 

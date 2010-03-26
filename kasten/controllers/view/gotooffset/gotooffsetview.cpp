@@ -61,9 +61,9 @@ GotoOffsetView::GotoOffsetView( GotoOffsetTool* tool, QWidget* parent )
     mAddressEdit->setWhatsThis( inputWhatsThis );
 
     offsetLayout->addWidget( label );
-    offsetLayout->addWidget( mAddressEdit );
+    offsetLayout->addWidget( mAddressEdit, 1 );
 
-    baseLayout->addLayout( offsetLayout );
+    baseLayout->addLayout( offsetLayout, 1 );
     baseLayout->setAlignment( offsetLayout, Qt::AlignTop );
 
     setFocusProxy( mAddressEdit ); // TODO: see how KDialog does it, e.g. see if there is already a focuswidget as child
@@ -106,8 +106,6 @@ GotoOffsetView::GotoOffsetView( GotoOffsetTool* tool, QWidget* parent )
     addButton( mGotoButton, AbstractToolWidget::Default );
     baseLayout->addWidget( mGotoButton );
     baseLayout->setAlignment( mGotoButton, Qt::AlignTop );
-
-    baseLayout->addStretch();
 
     setTabOrder( mAddressEdit, mAtCursorCheckBox );
     setTabOrder( mAtCursorCheckBox, mBackwardsCheckBox );
