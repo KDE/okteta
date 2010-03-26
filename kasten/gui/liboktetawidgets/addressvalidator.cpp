@@ -69,9 +69,9 @@ QValidator::State AddressValidator::validate( QString& string, int& pos ) const
         if ( !expressionRegex.exactMatch( string ) )
             result = QValidator::Invalid;
         //only prefix has been typed:
-        if ( string == "+" || string == "-" )
-            result = QValidator::Intermediate;
-        if ( string.endsWith( 'x' ) ) // 0x at end
+        if( string == QLatin1String("+")
+            || string == QLatin1String("-")
+            || string.endsWith( 'x' ) ) // 0x at end
             result = QValidator::Intermediate;
     }
     else
