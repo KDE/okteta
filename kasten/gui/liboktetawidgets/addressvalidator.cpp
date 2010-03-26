@@ -100,7 +100,7 @@ Address AddressValidator::toAddress(const QString& string, AddressType* type) co
         *type = calculateAddressType(expression);
 
     if ( expression.startsWith( '-' ) || expression.startsWith( '+' ) )
-        expression = expression.mid( 1 );
+        expression.remove( 0, 1 );
 
     if ( mCodecId == ExpressionCoding )
     {
@@ -131,12 +131,12 @@ AddressValidator::AddressType AddressValidator::calculateAddressType( const QStr
     QString expression = string.trimmed();
     if ( expression.startsWith( '+' ) )
     {
-        expression = expression.mid( 1 );
+        expression.remove( 0, 1 );
         result = RelativeForwards;
     }
     else if ( expression.startsWith( '-' ) )
     {
-        expression = expression.mid( 1 );
+        expression.remove( 0, 1 );
         result = RelativeBackwards;
     }
     else
