@@ -47,10 +47,11 @@ AddressValidator::AddressValidator( QObject* parent, Coding codecId )
 
 void AddressValidator::setCodec( Coding codecId )
 {
-    if ( codecId == mCodecId )
+    if( codecId == mCodecId )
         return;
 
     mCodecId = codecId;
+
     delete mValueCodec;
     mValueCodec = ValueCodec::createCodec( (Okteta::ValueCoding)mCodecId );
 }
@@ -63,15 +64,15 @@ QValidator::State AddressValidator::validate( QString& string, int& pos ) const
     Q_UNUSED( pos )
 
     State result = QValidator::Acceptable;
-    if ( mCodecId == ExpressionCoding )
+    if( mCodecId == ExpressionCoding )
     {
         string = string.trimmed();
-        if ( !expressionRegex.exactMatch( string ) )
+        if( ! expressionRegex.exactMatch(string) )
             result = QValidator::Invalid;
         //only prefix has been typed:
         if( string == QLatin1String("+")
             || string == QLatin1String("-")
-            || string.endsWith( 'x' ) ) // 0x at end
+            || string.endsWith('x') ) // 0x at end
             result = QValidator::Intermediate;
     }
     else
@@ -87,7 +88,7 @@ QValidator::State AddressValidator::validate( QString& string, int& pos ) const
             }
         }
     }
-    if ( string.isEmpty() )
+    if( string.isEmpty() )
         result = QValidator::Intermediate;
     return result;
 }
@@ -96,13 +97,13 @@ Address AddressValidator::toAddress(const QString& string, AddressType* type) co
 {
     Address address;
     QString expression = string.trimmed();
-    if (type) // allow passing null
-        *type = calculateAddressType(expression);
+    if( type ) // allow passing null
+        *type = calculateAddressType( expression );
 
-    if ( expression.startsWith( '-' ) || expression.startsWith( '+' ) )
+    if( expression.startsWith('-') || expression.startsWith('+') )
         expression.remove( 0, 1 );
 
-    if ( mCodecId == ExpressionCoding )
+    if( mCodecId == ExpressionCoding )
     {
         QScriptEngine evaluator;
         QScriptValue val = evaluator.evaluate( expression );
@@ -122,27 +123,28 @@ Address AddressValidator::toAddress(const QString& string, AddressType* type) co
         const int base = isHexadecimal ? 16 : 10;
         address = expression.toInt( 0, base );
     }
+
     return address;
 }
 
 AddressValidator::AddressType AddressValidator::calculateAddressType( const QString& string ) const
 {
     AddressType result;
+
     QString expression = string.trimmed();
-    if ( expression.startsWith( '+' ) )
+    if( expression.startsWith('+') )
     {
         expression.remove( 0, 1 );
         result = RelativeForwards;
     }
-    else if ( expression.startsWith( '-' ) )
+    else if( expression.startsWith('-') )
     {
         expression.remove( 0, 1 );
         result = RelativeBackwards;
     }
     else
-    {
         result = AbsoluteAddress;
-    }
+
     return result;
 }
 
@@ -151,15 +153,17 @@ QString AddressValidator::toString( Address address, const AddressType* addressT
     //ExpressionCoding just uses base 10 so no need to adjust this code
     const int isHexadecimal = ( mCodecId == HexadecimalCoding );
     const int base = isHexadecimal ? 16 : 10;
+
     QString string = QString::number( address, base );
 
     if (addressType)
     {
         if ( *addressType == RelativeForwards )
-            string = string.prepend( '+' );
+            string.prepend( '+' );
         else if ( *addressType == RelativeBackwards )
-            string = string.prepend( '-' );
+            string.prepend( '-' );
     }
+
     return string;
 }
 
