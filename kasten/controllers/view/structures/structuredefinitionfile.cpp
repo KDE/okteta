@@ -41,7 +41,7 @@
 namespace Kasten
 {
 StructureDefinitionFile::StructureDefinitionFile(QFileInfo file, KPluginInfo info) :
-    mPluginInfo(info), mFileInfo(file), mValid(false), mLoaded(false)
+    mPluginInfo(info), mFileInfo(file), mValid(true), mLoaded(false)
 {
     mDir = mFileInfo.dir();
     kDebug() << "foof";
@@ -53,8 +53,7 @@ StructureDefinitionFile::~StructureDefinitionFile()
 }
 
 StructureDefinitionFile::StructureDefinitionFile(StructureDefinitionFile& f) :
-    mPluginInfo(f.mPluginInfo), mFileInfo(f.mFileInfo), mIncludedFiles(
-            f.mIncludedFiles), mValid(f.mValid), mLoaded(f.mLoaded)
+    mPluginInfo(f.mPluginInfo), mFileInfo(f.mFileInfo), mValid(f.mValid), mLoaded(f.mLoaded)
 {
     int len = f.mTopLevelStructures.length();
     for (int i = 0; i < len; ++i)
@@ -63,6 +62,7 @@ StructureDefinitionFile::StructureDefinitionFile(StructureDefinitionFile& f) :
     }
 }
 
+#if 0
 void StructureDefinitionFile::parseIncludeNodes(QDomNodeList& elems)
 {
     for (uint i = 0; i < elems.length(); i++)
@@ -86,6 +86,7 @@ void StructureDefinitionFile::parseIncludeNodes(QDomNodeList& elems)
         }
     }
 }
+#endif
 
 void StructureDefinitionFile::parseEnumDefNodes(QDomNodeList& elems)
 {
@@ -179,8 +180,6 @@ void StructureDefinitionFile::parse()
     //first find all enum definitons and includes:
     QDomNodeList enumDefs = docElem.elementsByTagName("enumDef");
     parseEnumDefNodes(enumDefs);
-    QDomNodeList includeElems = docElem.elementsByTagName("include");
-    parseIncludeNodes(includeElems);
 
     QDomNodeList list = docElem.childNodes();
     for (uint i = 0; i < list.length(); ++i)
@@ -212,7 +211,7 @@ void StructureDefinitionFile::parse()
     mValid = true;
     return;
 }
-DataInformation* StructureDefinitionFile::getStructure(QString& name) const
+DataInformation* StructureDefinitionFile::structure(QString& name) const
 {
     if (!mLoaded)
         kError() << "member accessed before file was parsed";
@@ -226,15 +225,6 @@ DataInformation* StructureDefinitionFile::getStructure(QString& name) const
             }
         }
     return NULL; // not found
-}
-
-QStringList StructureDefinitionFile::includedFiles() const
-{
-    if (!mLoaded)
-        kError() << "member accessed before file was parsed";
-    if (!mValid)
-        kError() << "reading data from invalid file";
-    return mIncludedFiles;
 }
 
 //Datatypes

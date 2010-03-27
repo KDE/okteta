@@ -43,10 +43,6 @@ StructuresManager::StructuresManager() :
     reloadPaths();
 }
 
-void StructuresManager::update()
-{
-}
-
 void StructuresManager::reloadPaths()
 {
     qDeleteAll(mDefs);
@@ -57,117 +53,26 @@ void StructuresManager::reloadPaths()
                     | KStandardDirs::NoDuplicates);
     KPluginInfo::List plugins = KPluginInfo::fromFiles(paths, mConfig->group(
             "Plugins"));
-    foreach(KPluginInfo info,plugins)
+    foreach(const KPluginInfo& info, plugins)
         {
-            //            if (!info.isPluginEnabled())
-            //                continue;
             QFileInfo desktopPath = QFileInfo(info.entryPath());
             QFileInfo osdPath = QFileInfo(desktopPath.dir(), info.pluginName()
                     + ".osd");
             QString relPath = mDefsDir.relativeFilePath(osdPath.absoluteFilePath());
-            //            addStructDef(info, file);
-            kDebug() << "add struct def " << relPath;
-            QFileInfo fileInfo(mDefsDir, relPath);
-            StructureDefinitionFile* def = new StructureDefinitionFile(fileInfo,
-                    info);
-            if (info.isValid() && info.isPluginEnabled())
-            {
-                mLoadedFiles.append(relPath);
-            }
-            def->parse(); //TODO lazy loading
-            mDefs.insert(relPath, def);
-            manageIncludes(def);
+            addStructDef(relPath, info);
         }
-    kDebug() << "loaded defs";
 }
 
-//
-//void StructuresManager::manageIncludes(const StructureDefinitionFile* def)
-//{
-//    QStringList includedFiles = def->includedFiles();
-//    if (includedFiles.length() == 0)
-//        return;
-//    kDebug() << "included files: " << def->includedFiles();
-//    QDir defDir = QDir(def->dir().absolutePath());
-//    //add included files structures
-//    for (int i = 0; i < includedFiles.length(); ++i)
-//    {
-//        QString inclPath = includedFiles.at(i);
-//        kDebug() << "include path: " << inclPath;
-//        //XXX maybe more lazy loading
-//        //check if included file is already loaded
-//        QString relPath =
-//                defsDir.relativeFilePath(defDir.absoluteFilePath(inclPath));
-//        kDebug() << "rel path = " << relPath;
-//        relPath = QDir::cleanPath(relPath);
-//        kDebug() << "rel path = " << relPath;
-//        if (mDefs.contains(relPath))
-//        {
-//            kDebug() << "included file already loaded: " << relPath;
-//        }
-//        else
-//        {
-//            QFileInfo test(defsDir, relPath);
-//
-//            if (test.exists()) // only load if file exists
-//                addStructDef(KPluginInfo(), QFileInfo(relPath));
-//            else
-//            {
-//                kDebug() << "included file does not exist: " << relPath;
-//            }
-//        }
-//    }
-//}
-
-void StructuresManager::addStructDef(const QString& relPath)
+void StructuresManager::addStructDef(const QString& relPath, const KPluginInfo& info)
 {
-    kDebug() << "add struct def " << relPath;
+
     QFileInfo fileInfo(mDefsDir, relPath);
-    StructureDefinitionFile* def = new StructureDefinitionFile(fileInfo,
-            KPluginInfo());
-    def->parse(); //TODO lazy loading
+    StructureDefinitionFile* def = new StructureDefinitionFile(fileInfo, info);
     if (!mDefs.contains(relPath))
+        mDefs.insert(relPath, def);
+    if (info.isValid() && info.isPluginEnabled())
     {
         mLoadedFiles.append(relPath);
-        mDefs.insert(relPath, def);
-        manageIncludes(def);
-    }
-}
-
-void StructuresManager::manageIncludes(const StructureDefinitionFile* def)
-{
-    QStringList includedFiles = def->includedFiles();
-    if (includedFiles.length() == 0)
-        return;
-    kDebug() << "included files: " << def->includedFiles();
-    QDir defDir = def->dir();
-    //add included files structures
-    for (int i = 0; i < includedFiles.length(); ++i)
-    {
-        QString inclPath = includedFiles.at(i);
-        kDebug() << "include path: " << inclPath;
-        //XXX maybe more lazy loading
-        //check if included file is already loaded
-        QString relPath = mDefsDir.relativeFilePath(
-                defDir.absoluteFilePath(inclPath));
-        kDebug() << "rel path = " << relPath;
-        relPath = QDir::cleanPath(relPath);
-        kDebug() << "rel path = " << relPath;
-        if (mDefs.contains(relPath))
-        {
-            kDebug() << "included file already loaded: " << relPath;
-        }
-        else
-        {
-            QFileInfo test(mDefsDir, relPath);
-
-            if (test.exists()) // only load if file exists
-                addStructDef(relPath);
-            else
-            {
-                kDebug() << "included file does not exist: " << relPath;
-            }
-        }
     }
 }
 

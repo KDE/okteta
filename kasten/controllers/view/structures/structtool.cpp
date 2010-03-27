@@ -257,11 +257,16 @@ void StructTool::setSelectedStructuresInView()
                 StructureDefinitionFile* def = mManager->value(path);
                 if (!def)
                     continue;
-                DataInformation* data = def->getStructure(name);
+                if (!def->isLoaded())
+                    def->parse();
+                if (!def->isValid())
+                    continue;
+                //should be valid now
+                DataInformation* data = def->structure(name);
                 if (data)
                     addChildItem(data);
             }
-        } emit
+        }emit
     dataChanged();
     updateData();
 

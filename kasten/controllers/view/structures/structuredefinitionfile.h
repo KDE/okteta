@@ -58,7 +58,7 @@ public:
 
     void parse();
     QList<DataInformation*> structures() const;
-    DataInformation* getStructure(QString& name) const;
+    DataInformation* structure(QString& name) const;
     const KPluginInfo& info() const
     {
         return mPluginInfo;
@@ -71,17 +71,15 @@ public:
     {
         return mFileInfo.absoluteFilePath();
     }
-    /** a QList with the relative paths to the included files */
-    QStringList includedFiles() const;
     const QList<EnumDefinition::Ptr> enums() const
     {
         return mEnums;
     }
-    bool isLoaded()
+    bool isLoaded() const
     {
         return mLoaded;
     }
-    bool isValid()
+    bool isValid() const
     {
         return mValid;
     }
@@ -95,14 +93,13 @@ private:
     DataInformation* parseNode(const QDomNode& node) const;
     EnumDefinition::Ptr findEnum(const QString& defName) const;
 
-    void parseIncludeNodes(QDomNodeList& elems);
+//    void parseIncludeNodes(QDomNodeList& elems);
     void parseEnumDefNodes(QDomNodeList& elems);
 
     KPluginInfo mPluginInfo;
     QFileInfo mFileInfo;
     QDir mDir;
     QList<const DataInformation*> mTopLevelStructures;
-    QStringList mIncludedFiles; //TODO use QList<Structuredefinitionfile> instead, why bother about a few extra bytes of mem
     bool mValid :1;
     bool mLoaded :1;
     QList<EnumDefinition::Ptr> mEnums;

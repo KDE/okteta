@@ -40,11 +40,9 @@ class StructuresManager: public QObject
 Q_OBJECT
 public:
     explicit StructuresManager();
-
     virtual ~StructuresManager();
 
 public Q_SLOTS:
-    void update();
     void reloadPaths();
 public:
     inline const QStringList paths() const
@@ -81,9 +79,8 @@ public:
     }
 
 protected:
+    void addStructDef(const QString& relPath, const KPluginInfo& info);
 
-    void manageIncludes(const StructureDefinitionFile* def);
-    void addStructDef(const QString& relPath);
 private:
     const QDir mDefsDir;
     QMap<QString, StructureDefinitionFile*> mDefs;
