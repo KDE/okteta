@@ -51,29 +51,34 @@ void StructuresManager::reloadPaths()
     QStringList paths = KGlobal::dirs()->findAllResources("data",
             "okteta/structures/*/*.desktop", KStandardDirs::Recursive
                     | KStandardDirs::NoDuplicates);
+    kDebug() << "found structures: " << paths;
     KPluginInfo::List plugins = KPluginInfo::fromFiles(paths, mConfig->group(
             "Plugins"));
     foreach(const KPluginInfo& info, plugins)
         {
             QFileInfo desktopPath = QFileInfo(info.entryPath());
-            QFileInfo osdPath = QFileInfo(desktopPath.dir(), info.pluginName()
-                    + ".osd");
-            QString relPath = mDefsDir.relativeFilePath(osdPath.absoluteFilePath());
-            addStructDef(relPath, info);
+            addStructDef(info);
         }
 }
 
-void StructuresManager::addStructDef(const QString& relPath, const KPluginInfo& info)
+void StructuresManager::addStructDef(const KPluginInfo& info)
 {
 
-    QFileInfo fileInfo(mDefsDir, relPath);
-    StructureDefinitionFile* def = new StructureDefinitionFile(fileInfo, info);
-    if (!mDefs.contains(relPath))
-        mDefs.insert(relPath, def);
-    if (info.isValid() && info.isPluginEnabled())
+    StructureDefinitionFile* def = new StructureDefinitionFile(info);
+    QString pluginName = info.pluginName();
+    if (!mDefs.contains(pluginName))
+        mDefs.insert(pluginName, def);
+}
+
+StructureDefinitionFile* StructuresManager::definition(QString& pluginName)
+{
+    if (!mDefs.contains(pluginName))
     {
-        mLoadedFiles.append(relPath);
+        kWarning() << "could not find structuredefinitionFile with name="
+                << pluginName;
+        return NULL;
     }
+    return mDefs.value(pluginName);
 }
 
 }

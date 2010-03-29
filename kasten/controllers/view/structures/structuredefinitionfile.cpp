@@ -27,24 +27,38 @@
 #include <QStringList>
 
 #include <KDebug>
+#include "datatypes/topleveldatainformation.h"
 
-#include "datatypes/structuredatainformation.h"
-#include "datatypes/uniondatainformation.h"
-#include "datatypes/staticlengtharraydatainformation.h"
-#include "datatypes/dynamiclengtharraydatainformation.h"
-#include "datatypes/primitivedatainformation.h"
-#include "datatypes/enumdatainformation.h"
-#include "datatypes/boolbitfielddatainformation.h"
-#include "datatypes/unsignedbitfielddatainformation.h"
-#include "datatypes/signedbitfielddatainformation.h"
+#include "parsers/abstractstructureparser.h"
+#include "parsers/osdparser.h"
+#include "parsers/scriptfileparser.h"
 
 namespace Kasten
 {
-StructureDefinitionFile::StructureDefinitionFile(QFileInfo file, KPluginInfo info) :
-    mPluginInfo(info), mFileInfo(file), mValid(true), mLoaded(false)
+StructureDefinitionFile::StructureDefinitionFile(KPluginInfo info) :
+    mPluginInfo(info), mValid(true), mStructureNamesParsed(false),
+            mStructuresParsedCompletely(false)
 {
-    mDir = mFileInfo.dir();
-    kDebug() << "foof";
+    QFileInfo tmp(info.entryPath());
+    mDir = tmp.dir();
+
+    QString category = info.category();
+    if (category == "structure/js")
+        mParser = new ScriptFileParser(this);
+    else if (category == "structure")
+        mParser = new OsdParser(this);
+    else
+    {
+        //no valid parser found:
+        mValid = false;
+
+        mStructuresParsedCompletely = true;
+        mStructureNamesParsed = true;
+        //now all methods will just return an empty list
+        kWarning() << "no valid parser found for plugin category '" << category
+                << "'";
+    }
+
 }
 
 StructureDefinitionFile::~StructureDefinitionFile()
@@ -53,369 +67,163 @@ StructureDefinitionFile::~StructureDefinitionFile()
 }
 
 StructureDefinitionFile::StructureDefinitionFile(StructureDefinitionFile& f) :
-    mPluginInfo(f.mPluginInfo), mFileInfo(f.mFileInfo), mValid(f.mValid), mLoaded(f.mLoaded)
+    mPluginInfo(f.mPluginInfo), mDir(f.mDir), mValid(f.mValid),
+            mStructureNamesParsed(f.mStructureNamesParsed),
+            mStructuresParsedCompletely(f.mStructuresParsedCompletely)
 {
     int len = f.mTopLevelStructures.length();
     for (int i = 0; i < len; ++i)
     {
-        mTopLevelStructures.append(f.mTopLevelStructures.at(i)->clone());
+        mTopLevelStructures.append(
+                static_cast<TopLevelDataInformation*> (f.mTopLevelStructures.at(i)->clone()));
     }
 }
 
-#if 0
-void StructureDefinitionFile::parseIncludeNodes(QDomNodeList& elems)
+QList<TopLevelDataInformation*> StructureDefinitionFile::structures()
 {
-    for (uint i = 0; i < elems.length(); i++)
+    if (!mStructuresParsedCompletely && mParser)
     {
-        QDomElement elem = elems.at(i).toElement();
-        if (elem.isNull())
-            continue;
-        QString includeFile = elem.attribute("file");
-        if (!includeFile.isNull())
-        {
-            kDebug() << "including file: " << includeFile;
-            //if contains this file, file was already included
-            if (!mIncludedFiles.contains(includeFile))
-            {
-                mIncludedFiles.append(includeFile);
-            }
-            else
-            {
-                kDebug() << "included file is already loaded";
-            }
-        }
+        mTopLevelStructures = mParser->parseStructures();
+        if (!mStructureNamesParsed) //also parse the names, they should be there already anyway, so there is no overhead
+            mStructureNames = mParser->parseStructureNames();
+        if (!mEnumsParsed)
+            mEnums = mParser->parseEnums();
+        //is parsed completely now -> delete parser
+        delete mParser;
+        mParser = 0;
+        mStructureNamesParsed = true;
+        mStructuresParsedCompletely = true;
+        mEnumsParsed = true;
     }
-}
-#endif
-
-void StructureDefinitionFile::parseEnumDefNodes(QDomNodeList& elems)
-{
-    for (uint i = 0; i < elems.length(); i++)
-    {
-        QDomElement elem = elems.at(i).toElement();
-        if (elem.isNull())
-            continue;
-        QMap<AllPrimitiveTypes, QString> defs;
-        QString enumName = elem.attribute("name", i18n("<no name specified>"));
-        QString typeStr = elem.attribute("type");
-        if (typeStr.isNull())
+    //return copy
+    QList<TopLevelDataInformation*> ret;
+    foreach(const TopLevelDataInformation* data, mTopLevelStructures)
         {
-            kWarning() << "no type attribute defined -> skipping this enum";
-            continue;
+            ret.append(static_cast<TopLevelDataInformation*> (data->clone()));
         }
-        PrimitiveDataType type = PrimitiveDataInformation::typeStringToType(typeStr);
-        //handle all entries
-        QDomNodeList children = elem.elementsByTagName("entry");
-        for (uint j = 0; j < children.length(); j++)
-        {
-            QDomElement child = children.at(j).toElement();
-            if (child.isNull())
-                continue;
-            QString name = child.attribute("name", i18n("<no name specified>"));
-            bool okay = false;
-            QString valStr = child.attribute("value", QString());
-            qlonglong val = valStr.toLongLong(&okay, 10); //TODO hex literals
-            if (!okay || valStr.isEmpty())
-            {
-                kWarning() << "failed to parse value attribute (name=" << name
-                        << ")";
-                continue;
-            }
-            else
-            {
-                defs.insert(val, name);
-            }
-        }
-        //now add this enum to the list of enums
-        if (defs.size() != 0)
-        {
-            EnumDefinition::Ptr enumDef = EnumDefinition::Ptr(new EnumDefinition(
-                    defs, enumName, type));
-            mEnums.append(enumDef);
-        }
-    }
-    kDebug() << "foo";
-}
-QList<DataInformation*> StructureDefinitionFile::structures() const
-{
-    QList<DataInformation*> list;
-    foreach(const DataInformation* data,mTopLevelStructures)
-        {
-            list.append(data->clone());
-        }
-    return list;
+    return ret;
 }
 
-void StructureDefinitionFile::parse()
+TopLevelDataInformation* StructureDefinitionFile::structure(QString& name)
 {
-    if (mLoaded)
-    {
-        kDebug() << "Already loaded -> will return";
-        return;
-    }
-    mLoaded = true;
-    QFile file(mFileInfo.absoluteFilePath());
-    QDomDocument doc;
-    if (!file.open(QIODevice::ReadOnly))
-    {
-        kWarning() << "could not open file "
-                << mFileInfo.dir().absoluteFilePath(mPluginInfo.name().endsWith(
-                        QLatin1String(".osd")) ? mPluginInfo.name()
-                        : mPluginInfo.name() + ".osd");
-        return;
-    }
-    int errorLine, errorColumn;
-    QString errorMsg;
-    if (!doc.setContent(&file, false, &errorMsg, &errorLine, &errorColumn))
-    {
-        file.close();
-        kWarning() << "DataInformation::loadFromXML(): error reading file:\n"
-                << errorMsg << "\n error line=" << errorLine << " error column="
-                << errorColumn;
-        return;
-    }
-    file.close();
-    QDomElement docElem = doc.documentElement();
-    //    kDebug() << "root elem tag: " << docElem.tagName();
-    //first find all enum definitons and includes:
-    QDomNodeList enumDefs = docElem.elementsByTagName("enumDef");
-    parseEnumDefNodes(enumDefs);
-
-    QDomNodeList list = docElem.childNodes();
-    for (uint i = 0; i < list.length(); ++i)
-    {
-        const QDomNode& n = list.at(i);
-        QDomElement elem = n.toElement(); // try to convert the node to an element.
-        DataInformation* data = NULL;
-        if (!elem.isNull())
-        {
-            kDebug() << "element tag: " << elem.tagName();
-            //e is element
-            QString tag = elem.tagName();
-            if (tag == "enumDef" || tag == "include")
-                continue;
-            else
-                data = parseNode(elem);
-        }
-
-        if (data)
-        {
-            mTopLevelStructures.append(data);
-        }
-        else
-        {
-            kDebug() << "data == NULL -> could not parse node " << elem.tagName();
-        }
-    }
-    mLoaded = true;
-    mValid = true;
-    return;
-}
-DataInformation* StructureDefinitionFile::structure(QString& name) const
-{
-    if (!mLoaded)
-        kError() << "member accessed before file was parsed";
     if (!mValid)
-        kError() << "reading data from invalid file";
-    foreach(const DataInformation* data,mTopLevelStructures)
+        kError() << "invalid file -> can't find structure";
+    else if (!mStructuresParsedCompletely)
+    {
+        if (mParser)
+        {
+            mTopLevelStructures = mParser->parseStructures();
+            if (!mEnumsParsed)
+                mEnums = mParser->parseEnums();
+            if (!mStructureNamesParsed)
+            {
+                foreach(const TopLevelDataInformation* data, mTopLevelStructures)
+                    {
+                        mStructureNames << data->name();
+                    }
+            }
+            mStructureNamesParsed = true;
+            mEnumsParsed = true;
+            mStructuresParsedCompletely = true;
+            delete mParser;
+            mParser = NULL;
+        }
+    }
+    foreach(const TopLevelDataInformation* data,mTopLevelStructures)
         {
             if (data->name() == name)
             {
-                return data->clone();
+                return static_cast<TopLevelDataInformation*> (data->clone());
             }
         }
+    kWarning() << "could not find structure with name " << name;
     return NULL; // not found
 }
 
-//Datatypes
-
-AbstractArrayDataInformation*
-StructureDefinitionFile::arrayFromXML(const QDomElement& xmlElem) const
+const QList<EnumDefinition::Ptr> StructureDefinitionFile::enums()
 {
-    QString name = xmlElem.attribute("name", i18n("<invalid name>"));
-    QDomNode node = xmlElem.firstChild();
-    QScopedPointer<DataInformation> subElem(parseNode(node));
-    if (!subElem)
+    if (!mEnumsParsed)
     {
-        kWarning() << "AbstractArrayDataInformation::fromXML():"
-            " could not parse subelement type";
-        return NULL;
-    }
-    QString lengthStr = xmlElem.attribute("length");
-    if (lengthStr.isNull())
-    {
-        kWarning() << "StaticLengthPrimitiveArrayDataInformation::fromXML():"
-            " no length attribute defined";
-        return NULL;
-    }
-    AbstractArrayDataInformation* retVal;
-    bool okay = true;
-    int length = lengthStr.toInt(&okay, 10); //TODO dynamic length
-    if (!okay)
-    {
-        kDebug()
-                << "error parsing length string -> is dynamic length array. Length string="
-                << lengthStr;
-        retVal = new DynamicLengthArrayDataInformation(name, lengthStr, *subElem);
-    }
-    else if (length >= 0)
-    {
-        retVal = new StaticLengthArrayDataInformation(name, length, *subElem);
-    }
-    else
-    {
-        kWarning() << "could not parse length string:" << lengthStr;
-        return NULL;
-    }
-    return retVal;
-}
-
-PrimitiveDataInformation* StructureDefinitionFile::primitiveFromXML(
-        const QDomElement& xmlElem) const
-{
-    QString name = xmlElem.attribute("name", i18n("<invalid name>"));
-    QString typeStr = xmlElem.attribute("type", QString());
-    if (typeStr.isEmpty())
-    {
-        kWarning()
-                << "PrimitiveDataInformation::fromXML(): no type attribute defined";
-        return NULL;
-    }
-    PrimitiveDataType type = PrimitiveDataInformation::typeStringToType(typeStr);
-    return PrimitiveDataInformation::newInstance(name, type);
-}
-
-AbstractBitfieldDataInformation* StructureDefinitionFile::bitfieldFromXML(
-        const QDomElement& xmlElem) const
-{
-    kDebug() << "loading bitfield";
-    QString name = xmlElem.attribute("name", i18n("<invalid name>"));
-    QString typeStr = xmlElem.attribute("type", QString());
-    QString widthStr = xmlElem.attribute("width", QString());
-    bool okay = false;
-    uint width = widthStr.toUInt(&okay,10);
-    if (width == 0 || !okay)
-    {
-        kWarning() << "invalid width specified (width must be > 0)";
-        return NULL;
-    }
-    if (typeStr == "bool")
-        return new BoolBitfieldDataInformation(name, Type_Bitfield, width);
-    if (typeStr == "unsigned")
-        return new UnsignedBitfieldDataInformation(name, Type_Bitfield, width);
-    if (typeStr == "signed")
-        return new SignedBitfieldDataInformation(name, Type_Bitfield, width);
-    else
-    {
-        kWarning() << "no (or invalid) type attribute defined,"
-            " defaulting to unsigned";
-        return new UnsignedBitfieldDataInformation(name, Type_Bitfield, width);
-    }
-}
-
-UnionDataInformation* StructureDefinitionFile::unionFromXML(
-        const QDomElement& xmlElem) const
-{
-    QString name = xmlElem.attribute("name", i18n("<invalid name>"));
-    UnionDataInformation* un = new UnionDataInformation(name);
-    QDomNode node = xmlElem.firstChild();
-    while (!node.isNull())
-    {
-        DataInformation* data = parseNode(node);
-        if (data)
-            un->addDataTypeToUnion(data);
-        node = node.nextSibling();
-    }
-    return un;
-}
-
-StructureDataInformation* StructureDefinitionFile::structFromXML(
-        const QDomElement& xmlElem) const
-{
-    QString name = xmlElem.attribute("name", i18n("<invalid name>"));
-    StructureDataInformation* stru = new StructureDataInformation(name);
-    QDomNode node = xmlElem.firstChild();
-    while (!node.isNull())
-    {
-        DataInformation* data = parseNode(node);
-        if (data)
-            stru->addDataTypeToStruct(data);
-        node = node.nextSibling();
-    }
-    return stru;
-}
-
-EnumDataInformation* StructureDefinitionFile::enumFromXML(const QDomElement& xmlElem) const
-{
-    QString name = xmlElem.attribute("name", i18n("<invalid name>"));
-    QString typeStr = xmlElem.attribute("type", QString());
-    if (typeStr.isEmpty())
-    {
-        kWarning() << "no type attribute defined";
-        return NULL;
-    }
-    QString enumName = xmlElem.attribute("enum", QString());
-    if (enumName.isEmpty())
-    {
-        kWarning() << "no enum attribute defined";
-        return NULL;
-    }
-    EnumDefinition::Ptr def = findEnum(enumName);
-    if (def.constData() == NULL)
-    {
-        kWarning() << "no enum with name " << enumName << "found.";
-        return NULL;
-    }
-    kDebug() << def->name();
-    PrimitiveDataType type = PrimitiveDataInformation::typeStringToType(typeStr);
-    PrimitiveDataInformation* prim = PrimitiveDataInformation::newInstance(name,
-            type);
-    if (!prim)
-    {
-        kWarning() << "primitive type is null!!";
-        return NULL;
-    }
-    EnumDataInformation* enumd = new EnumDataInformation(name, prim, def);
-    if (!enumd)
-        kDebug() << "enum def is NULL!!!";
-    return enumd;
-}
-
-DataInformation* StructureDefinitionFile::parseNode(const QDomNode& n) const
-{
-    QDomElement elem = n.toElement(); // try to convert the node to an element.
-    DataInformation* data = NULL;
-    if (!elem.isNull())
-    {
-        //      kDebug() << "element tag: " << elem.tagName();
-        //e is element
-        if (elem.tagName() == "struct")
-            data = structFromXML(elem);
-        else if (elem.tagName() == "array")
-            data = arrayFromXML(elem);
-        else if (elem.tagName() == "bitfield")
-            data = bitfieldFromXML(elem);
-        else if (elem.tagName() == "primitive")
-            data = primitiveFromXML(elem);
-        else if (elem.tagName() == "union")
-            data = unionFromXML(elem);
-        if (elem.tagName() == "enum")
-            data = enumFromXML(elem);
-    }
-    return data;
-}
-EnumDefinition::Ptr StructureDefinitionFile::findEnum(const QString& defName) const
-{
-    for (int i = 0; i < mEnums.length(); ++i)
-    {
-        const EnumDefinition::Ptr def = mEnums.at(i);
-        if (def->name() == defName)
+        if (mParser)
         {
-            kDebug() << "found at index: " << i;
-            return def;
+            mEnums = mParser->parseEnums();
+            if (mParser->isFullyParsed()) //was it necessary to completely parse to get enums?
+
+            {
+                //no point retaining in memory, has been parsed, assign all values now
+                if (!mStructureNamesParsed)
+                    mStructureNames = mParser->parseStructureNames();
+                if (!mStructuresParsedCompletely)
+                    mTopLevelStructures = mParser->parseStructures();
+                mStructureNamesParsed = true;
+                mStructuresParsedCompletely = true;
+                delete mParser;
+                mParser = NULL; //so it can be safely deleted again later
+            }
         }
+        mEnumsParsed = true;
     }
-    kDebug() << "enum " << defName << "not found in enums list";
-    return EnumDefinition::Ptr(NULL);
+    return mEnums;
 }
+
+const QStringList StructureDefinitionFile::structureNames()
+{
+    if (!mStructureNamesParsed)
+    {
+        //should be kept in sync with structuresCount()
+        if (mParser)
+        {
+            mStructureNames = mParser->parseStructureNames();
+            if (mParser->isFullyParsed()) //was it necessary to completely parse to get enums?
+
+            {
+                //no point retaining in memory, has been parsed, assign all values now
+                if (!mEnumsParsed)
+                    mEnums = mParser->parseEnums();
+                if (!mStructuresParsedCompletely)
+                    mTopLevelStructures = mParser->parseStructures();
+                mEnumsParsed = true;
+                mStructuresParsedCompletely = true;
+                delete mParser;
+                mParser = NULL; //so it can be safely deleted again later
+            }
+        }
+        mStructureNamesParsed = true;
+    }
+    return mStructureNames;
+}
+
+uint StructureDefinitionFile::structuresCount()
+{
+    //get structure names and then return name cound
+    if (!mStructureNamesParsed)
+    {
+        //should be kept in sync with structureNames()
+        if (mParser)
+        {
+            mStructureNames = mParser->parseStructureNames();
+            if (mParser->isFullyParsed()) //was it necessary to completely parse to get enums?
+
+            {
+                //no point retaining in memory, has been parsed, assign all values now
+                if (!mEnumsParsed)
+                    mEnums = mParser->parseEnums();
+                if (!mStructuresParsedCompletely)
+                    mTopLevelStructures = mParser->parseStructures();
+                mEnumsParsed = true;
+                mStructuresParsedCompletely = true;
+                delete mParser;
+                mParser = NULL; //so it can be safely deleted again later
+            }
+        }
+        mStructureNamesParsed = true;
+    }
+    return mStructureNames.length();
+}
+
+QString StructureDefinitionFile::absolutePath() const
+{
+    return mDir.absolutePath();
+}
+
 }

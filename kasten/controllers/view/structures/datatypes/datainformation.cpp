@@ -26,6 +26,7 @@
 #include "uniondatainformation.h"
 #include "primitivedatainformation.h"
 #include "staticlengtharraydatainformation.h"
+#include "topleveldatainformation.h"
 
 DataInformation::DataInformation(const QString& name, int index,
         DataInformation* parent) :
@@ -77,4 +78,12 @@ quint64 DataInformation::positionRelativeToParent() const
 void DataInformation::setIndex(int newIndex)
 {
     mIndex = newIndex;
+}
+
+TopLevelDataInformation* DataInformation::topLevelDataInformation()
+{
+    DataInformation* par = static_cast<DataInformation*>(parent());
+    if (par)
+        return par->topLevelDataInformation();
+    return NULL;
 }

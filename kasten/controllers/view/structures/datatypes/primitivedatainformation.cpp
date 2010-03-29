@@ -88,8 +88,8 @@ QVariant PrimitiveDataInformation::data(int column, int role) const
     {
         if (column == 0)
         {
-            StaticLengthArrayDataInformation* par =
-                    dynamic_cast<StaticLengthArrayDataInformation*> (parent());
+            AbstractArrayDataInformation* par =
+                    dynamic_cast<AbstractArrayDataInformation*> (parent());
             if (par)
                 return QString("[%1]").arg(mIndex);
             return name();
@@ -146,7 +146,7 @@ qint64 PrimitiveDataInformation::readData(Okteta::AbstractByteArrayModel *input,
         ByteOrder byteOrder, Okteta::Address address, quint64 bitsRemaining,
         quint8* bitOffset)
 {
-    if (bitsRemaining < size())
+    if (bitsRemaining < size()) //TODO make size() unsigned
     {
         mIsValid = false;
         mValue = 0;

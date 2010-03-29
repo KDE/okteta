@@ -23,6 +23,7 @@
 #include "structtreemodel.h"
 #include "structtool.h"
 #include "datatypes/dynamiclengtharraydatainformation.h"
+#include "datatypes/topleveldatainformation.h"
 
 namespace Kasten
 {
@@ -55,16 +56,18 @@ QVariant StructTreeModel::data(const QModelIndex& index, int role) const
     if (!index.isValid())
         return QVariant();
 
-    DataInformation *item = static_cast<DataInformation*> (index.internalPointer());
+    DataInformation* item = static_cast<DataInformation*> (index.internalPointer());
     if (!item)
     {
-        kDebug() << "item is NULL";
+        kDebug()
+            << "item is NULL";
         return QVariant();
     }
     const int column = index.column();
     if (role == Qt::FontRole)
     {
-        if (column == 0 && item->parent() == 0)
+        if (column == 0 && (item->parent() == 0
+                || dynamic_cast<TopLevelDataInformation*> (item->parent())))
         {
             // TODO: ideally here we would not take the default application font
             // (as given by QFont()) but the default of the view
@@ -84,7 +87,7 @@ bool StructTreeModel::setData(const QModelIndex& index, const QVariant& value,
     if (!index.isValid())
         return false;
 
-    DataInformation *item = static_cast<DataInformation*> (index.internalPointer());
+    DataInformation* item = static_cast<DataInformation*> (index.internalPointer());
     if (!item)
         return false;
     bool change = mTool->setData(value, role, item);
@@ -114,7 +117,7 @@ QModelIndex StructTreeModel::index(int row, int column, const QModelIndex &paren
     if (!hasIndex(row, column, parent))
         return QModelIndex();
 
-    DataInformation *childItem;
+    DataInformation* childItem;
 
     if (!parent.isValid())
         childItem = mTool->childAt(row);
@@ -124,14 +127,15 @@ QModelIndex StructTreeModel::index(int row, int column, const QModelIndex &paren
                 static_cast<DataInformation*> (parent.internalPointer());
         if (!parentItem)
         {
-            kDebug() << "parent item is NULL";
+            kDebug()
+                << "parent item is NULL";
             return QModelIndex();
         }
         childItem = parentItem->childAt(row);
     }
     if (childItem)
     {
-        if (dynamic_cast<DynamicLengthArrayDataInformation*> (childItem))
+        if (childItem->isDynamicArray())
         {
             connect(childItem, SIGNAL(childCountChange(int,int)), this,
                     SLOT(onDataInformationChildCountChange(int,int)));
@@ -151,20 +155,26 @@ QModelIndex StructTreeModel::parent(const QModelIndex& index) const
             static_cast<DataInformation*> (index.internalPointer());
     if (!childItem)
     {
-        kDebug() << "childitem == NULL";
+        kDebug()
+            << "childitem == NULL";
         return QModelIndex();
     }
-    DataInformation *parentItem =
-            static_cast<DataInformation*> (childItem->parent());
-    if (!parentItem)
+    if (!childItem->parent())
         return QModelIndex();
 
-    if (dynamic_cast<DynamicLengthArrayDataInformation*> (parentItem))
+    DataInformation* parent =
+            dynamic_cast<TopLevelDataInformation*> (childItem->parent()) ? NULL
+                    : static_cast<DataInformation*> (childItem->parent());
+
+    if (!parent)
+        return QModelIndex();
+
+    if (childItem->isDynamicArray())
     {
-        connect(parentItem, SIGNAL(childCountChange(int,int)), this,
+        connect(parent, SIGNAL(childCountChange(int,int)), this,
                 SLOT(onDataInformationChildCountChange(int,int)));
     }
-    return createIndex(parentItem->row(), 0, parentItem);
+    return createIndex(parent->row(), 0, parent);
 }
 
 int StructTreeModel::rowCount(const QModelIndex& parent) const
@@ -175,7 +185,8 @@ int StructTreeModel::rowCount(const QModelIndex& parent) const
             static_cast<DataInformation*> (parent.internalPointer());
     if (!parentItem)
     {
-        kDebug() << "parentItem is NULL";
+        kDebug()
+            << "parentItem is NULL";
         return mTool->childCount();
     }
     return parentItem->childCount();

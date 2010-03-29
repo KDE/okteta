@@ -290,6 +290,14 @@ set( STRUCTVIEW_SRCS
   view/structures/datatypes/boolbitfielddatainformation.cpp
   view/structures/datatypes/signedbitfielddatainformation.cpp
   view/structures/datatypes/unsignedbitfielddatainformation.cpp
+  view/structures/datatypes/topleveldatainformation.cpp
+  view/structures/script/scriptengineinitializer.cpp
+  view/structures/script/scripthandler.cpp
+  view/structures/script/scriptvalueconverter.cpp
+  view/structures/script/scriptutils.cpp
+  view/structures/parsers/abstractstructureparser.cpp
+  view/structures/parsers/osdparser.cpp
+  view/structures/parsers/scriptfileparser.cpp
 )
 
 kde4_add_kcfg_files(STRUCTVIEW_SRCS GENERATE_MOC view/structures/settings/structviewpreferences.kcfgc)
@@ -415,7 +423,7 @@ target_link_libraries( oktetakastencontrollers
 #   ${KDE4_KNEWSTUFF2_LIBS}
 )
 if( QCA2_FOUND )
-  target_link_libraries( oktetakastencontrollers ${QCA2_LIBRARIES} )
+  target_link_libraries( oktetakastencontrollers ${QCA2_LIBRARIES} ${QT_QTSCRIPT_LIBRARY} ${QT_QTSCRIPTTOOLS_LIBRARY} )
 endif( QCA2_FOUND )
 
 set_target_properties( oktetakastencontrollers  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )

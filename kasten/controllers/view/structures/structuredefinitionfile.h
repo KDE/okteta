@@ -29,19 +29,15 @@
 #include <QDomNodeList>
 #include <QFileInfo>
 #include <KPluginInfo>
-#include "datatypes/enumdefinition.h"
-class DataInformation;
-class QDomElement;
 
-class AbstractArrayDataInformation;
-class AbstractBitfieldDataInformation;
-class PrimitiveDataInformation;
-class UnionDataInformation;
-class StructureDataInformation;
-class EnumDataInformation;
+#include "datatypes/enumdefinition.h"
+
+class TopLevelDataInformation;
+class AbstractStructureParser;
 
 namespace Kasten
 {
+//FIXME remove enums(), should not be needed
 /**
  *  This class takes care of all the XML parsing and stores the result.
  */
@@ -49,60 +45,81 @@ class StructureDefinitionFile
 {
 public:
     /**
-     * When using this constructor the method parse() must be called
-     * before this class is usable (to allow lazy initialisation).
+     * This class uses lazy parsing
+     * @param info the information about this structure definition
+     *      (passed by value so nothing bad can happen)
      */
-    StructureDefinitionFile(QFileInfo file, KPluginInfo info);
+    StructureDefinitionFile(KPluginInfo info);
     StructureDefinitionFile(StructureDefinitionFile& f);
     virtual ~StructureDefinitionFile();
 
-    void parse();
-    QList<DataInformation*> structures() const;
-    DataInformation* structure(QString& name) const;
-    const KPluginInfo& info() const
-    {
-        return mPluginInfo;
-    }
-    const QDir dir() const
-    {
-        return mDir;
-    }
-    const QString absPath() const
-    {
-        return mFileInfo.absoluteFilePath();
-    }
-    const QList<EnumDefinition::Ptr> enums() const
-    {
-        return mEnums;
-    }
-    bool isLoaded() const
-    {
-        return mLoaded;
-    }
-    bool isValid() const
-    {
-        return mValid;
-    }
+    QList<TopLevelDataInformation*> structures();
+    /** this is all that is needed for the StructureAddRemoveWidget,
+     *  should allow improving performance compared to before.
+     *  This method is not const, since it may cause parsing when called the first time
+     */
+    const QStringList structureNames();
+    uint structuresCount();
+    TopLevelDataInformation* structure(QString& name);
+    const QList<EnumDefinition::Ptr> enums();
+
+    const KPluginInfo& pluginInfo() const;
+    const QDir dir() const;
+    /** @return the absolute path to the directory containing the structure definition */
+    QString absolutePath() const;
+
+    bool isParsed() const;
+    bool isParsedCompletely() const;
+    bool isValid() const;
+    bool areEnumsParsed() const;
 private:
-    AbstractArrayDataInformation* arrayFromXML(const QDomElement& node) const;
-    PrimitiveDataInformation* primitiveFromXML(const QDomElement& node) const;
-    AbstractBitfieldDataInformation* bitfieldFromXML(const QDomElement& xmlElem) const;
-    UnionDataInformation* unionFromXML(const QDomElement& node) const;
-    StructureDataInformation* structFromXML(const QDomElement& node) const;
-    EnumDataInformation* enumFromXML(const QDomElement& node) const;
-    DataInformation* parseNode(const QDomNode& node) const;
-    EnumDefinition::Ptr findEnum(const QString& defName) const;
-
-//    void parseIncludeNodes(QDomNodeList& elems);
-    void parseEnumDefNodes(QDomNodeList& elems);
-
     KPluginInfo mPluginInfo;
-    QFileInfo mFileInfo;
+    /** the directory the plugin is saved in */
     QDir mDir;
-    QList<const DataInformation*> mTopLevelStructures;
-    bool mValid :1;
-    bool mLoaded :1;
+    QList<const TopLevelDataInformation*> mTopLevelStructures;
     QList<EnumDefinition::Ptr> mEnums;
+    QStringList mStructureNames;
+
+    AbstractStructureParser* mParser;
+    bool mValid :1;
+    /** when true basic parsing finished (names of structures found)
+     * , i.e. mStructureNames has been filled */
+    bool mStructureNamesParsed :1;
+    /** when true complete parsing finished, i.e. mTopLevelStructures has been filled */
+    bool mStructuresParsedCompletely :1;
+    bool mEnumsParsed :1;
 };
+
+inline const KPluginInfo& StructureDefinitionFile::pluginInfo() const
+{
+    return mPluginInfo;
 }
+
+inline const QDir StructureDefinitionFile::dir() const
+{
+    return mDir;
+}
+
+inline bool StructureDefinitionFile::isValid() const
+{
+    return mValid;
+}
+
+inline bool StructureDefinitionFile::isParsed() const
+{
+    return mStructureNamesParsed;
+}
+
+inline bool StructureDefinitionFile::isParsedCompletely() const
+{
+    return mStructuresParsedCompletely;
+}
+
+inline bool StructureDefinitionFile::areEnumsParsed() const
+{
+    return mEnumsParsed;
+}
+
+} //namespace Kasten
+
 #endif /* STRUCTUREDEFINITIONFILE_H_ */

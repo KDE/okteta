@@ -59,16 +59,7 @@ public:
     {
         return mConfig;
     }
-    inline StructureDefinitionFile* value(QString& relPath)
-    {
-        if (!mDefs.contains(relPath))
-            return NULL;
-        return mDefs.value(relPath);
-    }
-    inline QStringList loadedFiles() const
-    {
-        return mLoadedFiles;
-    }
+    StructureDefinitionFile* definition(QString& pluginName);
     inline QString relativeFilePath(QString absPath) const
     {
         return mDefsDir.relativeFilePath(absPath);
@@ -79,7 +70,7 @@ public:
     }
 
 protected:
-    void addStructDef(const QString& relPath, const KPluginInfo& info);
+    void addStructDef(const KPluginInfo& info);
 
 private:
     const QDir mDefsDir;

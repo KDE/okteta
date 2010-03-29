@@ -37,6 +37,9 @@
 #include <KGlobal>
 #include <KStandardDirs>
 
+#include "script/scripthandler.h"
+#include "datatypes/topleveldatainformation.h"
+
 namespace Kasten
 {
 
@@ -183,10 +186,10 @@ void StructTool::updateData()
         QScopedPointer<quint8> bitOffset(new quint8(0));
         for (int i = 0; i < mData.size(); i++)
         {
-            DataInformation* dat = mData.at(i);
+            TopLevelDataInformation* dat = mData.at(i);
             dat->readData(mByteArrayModel, mByteOrder, mCursorIndex, remainingBits,
                     bitOffset.data());
-            *bitOffset = 0; //start at beginning again
+            *bitOffset= 0; //start at beginning again
         }
     }
 }
@@ -214,16 +217,18 @@ int StructTool::childCount() const
 {
     return mData.size();
 }
+
 DataInformation* StructTool::childAt(int idx) const
 {
     if (idx >= mData.size() || idx < 0)
     {
         return NULL;
     }
-    return mData[idx];
+    //dont expose the topLevelDataInformation, since this may cause crashes
+    return mData.at(idx)->actualDataInformation();
 }
 
-void StructTool::addChildItem(DataInformation* child)
+void StructTool::addChildItem(TopLevelDataInformation* child)
 {
     if (child)
     {
@@ -251,18 +256,16 @@ void StructTool::setSelectedStructuresInView()
             int pos = regex.indexIn(s);
             if (pos > -1)
             {
-                QString path = regex.cap(1);
+                QString pluginName = regex.cap(1);
                 QString name = regex.cap(2);
-                //                kDebug() << "path=" << path << " name=" << name;
-                StructureDefinitionFile* def = mManager->value(path);
+//                kDebug() << "pluginName=" << path << " structureName=" << name;
+                StructureDefinitionFile* def = mManager->definition(pluginName);
                 if (!def)
                     continue;
-                if (!def->isLoaded())
-                    def->parse();
                 if (!def->isValid())
                     continue;
                 //should be valid now
-                DataInformation* data = def->structure(name);
+                TopLevelDataInformation* data = def->structure(name);
                 if (data)
                     addChildItem(data);
             }

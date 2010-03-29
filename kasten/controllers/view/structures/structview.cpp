@@ -171,7 +171,8 @@ bool StructView::eventFilter(QObject* object, QEvent* event)
         {
             const QModelIndex current =
                     mStructTreeView->selectionModel()->currentIndex();
-            kDebug() << "current index: " << current;
+            kDebug()
+                << "current index: " << current;
             if (current.isValid())
                 mTool->mark(current);
             else

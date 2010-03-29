@@ -21,6 +21,7 @@
  */
 #include "datainformationwithchildren.h"
 #include "staticlengtharraydatainformation.h"
+#include "topleveldatainformation.h"
 #include <KLineEdit>
 
 void DataInformationWithChildren::appendChild(DataInformation* child)
@@ -122,7 +123,7 @@ QList<const DataInformation*> DataInformationWithChildren::findChildrenWithName(
         const QString& name, const DataInformation* const upTo) const
 {
     QList<const DataInformation*> retList;
-    if (parent())
+    if (parent() && !dynamic_cast<TopLevelDataInformation*>(parent()))
     {
         DataInformationWithChildren* par =
                 static_cast<DataInformationWithChildren*> (parent());
@@ -166,7 +167,7 @@ QVariant DataInformationWithChildren::data(int column, int role) const
     {
         if (column == 0)
         {
-            if (dynamic_cast<StaticLengthArrayDataInformation*> (parent()))
+            if (dynamic_cast<AbstractArrayDataInformation*> (parent()))
             {
                 return QString("[%1]").arg(mIndex);
             }

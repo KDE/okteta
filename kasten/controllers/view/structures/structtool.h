@@ -88,7 +88,7 @@ public Q_SLOTS:
     void mark(const QModelIndex& idx);
     void unmark(/*const QModelIndex& idx*/);
     void updateData();
-    void addChildItem(DataInformation* child);
+    void addChildItem(TopLevelDataInformation* child);
     void setSelectedStructuresInView();
 
 protected Q_SLOTS:
@@ -110,7 +110,7 @@ protected:
     // settings
     StructViewPreferences::EnumByteOrder::type mByteOrder;
     StructuresManager* mManager;
-    QList<DataInformation*> mData;
+    QList<TopLevelDataInformation*> mData;
     bool mWritingData;
 public:
     //interface for model

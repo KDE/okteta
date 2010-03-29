@@ -86,12 +86,23 @@ StructuresManagerView::StructuresManagerView(Kasten::StructuresManager* manager,
     pageLayout->addLayout(buttonsLayout);
 
     KPluginInfo::List plugins;
-    foreach( const Kasten::StructureDefinitionFile* def, manager->structureDefs() )
-            plugins.append(def->info());
+    KPluginInfo::List dynamicPlugins;
+    foreach(const Kasten::StructureDefinitionFile* def, manager->structureDefs())
+        {
+            KPluginInfo info = def->pluginInfo();
+            if (info.category() == QLatin1String("structure"))
+                plugins.append(info);
+            else if (info.category() == QLatin1String("structure/js"))
+                dynamicPlugins.append(info);
+        }
 
     mStructuresSelector->addPlugins(plugins, KPluginSelector::ReadConfigFile, i18n(
             "Structure Definitions"), QString("structure"), mManager->config());
+    mStructuresSelector->addPlugins(dynamicPlugins, KPluginSelector::ReadConfigFile, i18n(
+            "Dynamic Structure Definitions"), QString("structure/js"),
+            mManager->config());
     mStructuresSelector->load();
+    mStructuresSelector->updatePluginsState();
 }
 
 #if 0
@@ -112,20 +123,20 @@ void StructuresManagerView::onGetNewStructuresClicked()
 void StructuresManagerView::onImportStructuresClicked()
 {
     const KUrl::List urls = KFileDialog::getOpenUrls(KUrl(), i18n(
-            "*.osd|Okteta structure definition files (*.osd)"), this, i18nc(
-            "@title:window Do import the structure definitions",
-            "Import Structure Definitions"));
+                    "*.osd|Okteta structure definition files (*.osd)"), this, i18nc(
+                    "@title:window Do import the structure definitions",
+                    "Import Structure Definitions"));
     foreach( const KUrl& url, urls )
-        {
-            // TODO: use Structure Manager
-            // TODO: possibly untar or uncompress it
-            // open it
+    {
+        // TODO: use Structure Manager
+        // TODO: possibly untar or uncompress it
+        // open it
 
-            // load the scheme
-            //         load url.path();
-            //         if okay
-            //             save
-        }
+        // load the scheme
+        //         load url.path();
+        //         if okay
+        //             save
+    }
 }
 
 void StructuresManagerView::onExportStructureClicked()
@@ -133,11 +144,12 @@ void StructuresManagerView::onExportStructureClicked()
     return;
     //     TODO Not working ATM
     //        if (currentItem != 0)
+
     {
         const KUrl saveUrl = KFileDialog::getSaveUrl(KUrl(), i18n(
-                "*.osd|Okteta structure definition files (*.osd)"), this, i18nc(
-                "@title:window Do export the structure definition",
-                "Export Structure Definition"));
+                        "*.osd|Okteta structure definition files (*.osd)"), this, i18nc(
+                        "@title:window Do export the structure definition",
+                        "Export Structure Definition"));
 
         if (!saveUrl.isEmpty())
         {
@@ -148,8 +160,8 @@ void StructuresManagerView::onExportStructureClicked()
             const bool success = KIO::NetAccess::upload(filePath, saveUrl, this);
 
             if (!success)
-                KMessageBox::error(this, KIO::NetAccess::lastErrorString(), i18n(
-                        "Error"));
+            KMessageBox::error(this, KIO::NetAccess::lastErrorString(), i18n(
+                            "Error"));
         }
     }
 }
@@ -161,20 +173,21 @@ void StructuresManagerView::onRemoveStructureClicked()
     return;
     //     QListWidgetItem* currentItem = ui.structuresView->currentItem();
     //     if (currentItem != 0)
+
     {
         const QString fileName;// = currentItem->data(FileNameRole).toString();
         const QString filePath = KGlobal::dirs()->findResource("data",
                 "okteta/structures/" + fileName + ".osd");
         const bool success = KIO::NetAccess::del(filePath, this); // TODO: why netaccess?
         if (success)
-            //             delete schemeList->takeItem( schemeList->currentRow() );
-            ;
+        //             delete schemeList->takeItem( schemeList->currentRow() );
+        ;
         else
-            KMessageBox::error(
-                    this,
-                    i18n(
-                            "You do not have permission to delete that structure definition."),
-                    i18n("Error"));
+        KMessageBox::error(
+                this,
+                i18n(
+                        "You do not have permission to delete that structure definition."),
+                i18n("Error"));
     }
 }
 #endif
@@ -182,7 +195,8 @@ void StructuresManagerView::onRemoveStructureClicked()
 void StructuresManagerView::onApplyChangesClicked()
 {
     mStructuresSelector->save();
-    kDebug() << "saved";
+    kDebug()
+        << "saved";
     emit
     applyButtonClicked();
     return;

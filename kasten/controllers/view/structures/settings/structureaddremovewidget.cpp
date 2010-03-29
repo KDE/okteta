@@ -69,7 +69,7 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(Kasten::StructTool* tool,
     mTreeSelected->setHeaderHidden(true);
     mTreeSelected->setSelectionMode(QAbstractItemView::ExtendedSelection);
     mTreeSelected->setColumnCount(2);
-    mTreeSelected->setColumnHidden(1, true);
+    mTreeSelected->setColumnHidden(1, false);
     tree2Layout->addWidget(mTreeSelected);
 
     leftRightLayout = new QVBoxLayout();
@@ -104,18 +104,17 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(Kasten::StructTool* tool,
     //already loaded defs:
     QRegExp regex("'(.+)':'(.+)'");
     QStringList loadedStructs = StructViewPreferences::loadedStructures();
-    foreach(const QString& s,loadedStructs)
+    foreach(const QString& s, loadedStructs)
         {
             int pos = regex.indexIn(s);
             if (pos > -1)
             {
-                QString path = regex.cap(1);
+                QString pluginName = regex.cap(1);
                 QString structName = regex.cap(2);
-                //                kDebug() << "path=" << path << " name=" << structName;
+
                 QTreeWidgetItem* item = new QTreeWidgetItem(mTreeSelected,
-                        QStringList() << structName << path);
+                        QStringList() << structName << pluginName);
                 mTreeSelected->addTopLevelItem(item);
-                // ...
             }
         }
     syncData();
@@ -129,26 +128,20 @@ void StructureAddRemoveWidget::buildAvailableList()
 {
     const QList<StructureDefinitionFile*> loadedDefs =
             mTool->manager()->structureDefs();
-    foreach (StructureDefinitionFile* sDef,loadedDefs)
-        {
-            kDebug() << "loaded file " << sDef->absPath();
-        }
     QList<QTreeWidgetItem*> availableItems;
     foreach(StructureDefinitionFile* def,loadedDefs)
         {
-            if (!def->isLoaded())
-                def->parse();
             if (!def->isValid())
                 continue;
-            QString relPath = mTool->manager()->relativeFilePath(def->absPath());
-            if (!def->info().isPluginEnabled())
+            QString pluginName = def->pluginInfo().pluginName();
+            if (!def->pluginInfo().isPluginEnabled())
                 continue;
             QTreeWidgetItem* item = new QTreeWidgetItem(mTreeAvailable,
-                    QStringList() << def->info().pluginName() << relPath);
-            foreach(const DataInformation* data,def->structures())
+                    QStringList() << def->pluginInfo().pluginName() << pluginName);
+            foreach(const QString& name,def->structureNames())
                 {
                     QTreeWidgetItem* subItem = new QTreeWidgetItem(item,
-                            QStringList() << data->name() << relPath);
+                            QStringList() << name << pluginName);
                     item->addChild(subItem);
                 }
             availableItems.append(item);
@@ -178,7 +171,7 @@ void StructureAddRemoveWidget::moveRight()
             if (!item->parent())
                 continue; //maybe sometime add all subitems
             QTreeWidgetItem* moveOver = new QTreeWidgetItem(mTreeSelected,
-                    QStringList() << item->text(0) << item->parent()->text(1));
+                    QStringList() << item->text(0) << item->text(1));
             //item name then parent name then path
             mTreeSelected->addTopLevelItem(moveOver);
             changed = true;
@@ -208,7 +201,6 @@ void StructureAddRemoveWidget::moveUp()
 }
 void StructureAddRemoveWidget::moveDown()
 {
-    kDebug() << "";
     QList<QTreeWidgetItem*> selected = mTreeSelected->selectedItems();
     bool changed = false;
     int firstIndex = -1;
@@ -237,9 +229,11 @@ void StructureAddRemoveWidget::syncData()
                 item->text(0));
         strings.append(dataStr);
     }
-    kDebug() << "items to set: " << strings;
+    kDebug()
+        << "items to set: " << strings;
     mValues = strings;
-    kDebug() << "changed: " << mValues;
+    kDebug()
+        << "changed: " << mValues;
     emit changed(mValues);
 }
 
@@ -250,40 +244,45 @@ void StructureAddRemoveWidget::updateAvailable()
     buildAvailableList();
 
     //remove any structs that references not loaded files
-    QStringList paths;
+    QStringList plugins;
     const QList<StructureDefinitionFile*> loadedDefs =
             mTool->manager()->structureDefs();
-    foreach(const StructureDefinitionFile* def,loadedDefs)
+    foreach(const StructureDefinitionFile* def, loadedDefs)
         {
-            QString relPath = mTool->manager()->relativeFilePath(def->absPath());
-            if (def->info().isValid() && !def->info().isPluginEnabled())
+            QString pluginName = def->pluginInfo().pluginName();
+            if (def->pluginInfo().isValid() && !def->pluginInfo().isPluginEnabled())
                 continue;
-            paths << relPath;
+            plugins << pluginName;
         }
     bool changed = false;
     QList<QTreeWidgetItem*> toRemove;
-    kDebug() << "paths = " << paths;
+    kDebug()
+        << "paths = " << plugins;
     for (int i = 0; i < mTreeSelected->topLevelItemCount(); ++i)
     {
         QTreeWidgetItem* item = mTreeSelected->topLevelItem(i);
-        if (!paths.contains(item->text(1)))
+        //text(1) is plugin name
+        if (!plugins.contains(item->text(1)))
         {
-            kDebug() << "removed item: " << QString("\'%1\':\'%2\'").arg(item->text(
-                    1)).arg(item->text(0));
+            kDebug()
+                << "removed item: " << QString("\'%1\':\'%2\'").arg(item->text(1),
+                        item->text(0));
 
             changed = true;
             toRemove.append(item);
         }
         else
         {
-            kDebug() << "item " << QString("\'%1\':\'%2\'").arg(item->text(1)).arg(
-                    item->text(0)) << "still okay";
+            kDebug()
+                << "item " << QString("\'%1\':\'%2\'").arg(item->text(1),
+                        item->text(0)) << "still loaded -> keep";
         }
     }
     foreach(QTreeWidgetItem* itm,toRemove)
         {
-            kDebug() << "item " << QString("\'%1\':\'%2\'").arg(itm->text(1)).arg(
-                    itm->text(0)) << "removed";
+            kDebug()
+                << "item " << QString("\'%1\':\'%2\'").arg(itm->text(1),
+                        itm->text(0)) << "removed";
             delete mTreeSelected->takeTopLevelItem(
                     mTreeSelected->indexOfTopLevelItem(itm));
         }

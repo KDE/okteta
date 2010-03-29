@@ -46,6 +46,8 @@ namespace Okteta
 class AbstractByteArrayModel;
 }
 
+class TopLevelDataInformation;
+
 typedef Kasten::StructViewPreferences::EnumByteOrder::type ByteOrder;
 typedef Kasten::StructViewPreferences::EnumByteOrder ByteOrderEnumClass;
 
@@ -85,7 +87,7 @@ public:
     virtual QString typeName() const = 0;
     /** by default just returns an empty QString */
     virtual QString valueString() const;
-    inline QString name() const;
+    virtual QString name() const;
     /** needs to be virtual for bitfields */
     virtual QString sizeString() const;
 
@@ -130,6 +132,11 @@ public:
     virtual bool setData(const QVariant& value, DataInformation* inf,
             Okteta::AbstractByteArrayModel *input, ByteOrder byteOrder,
             Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset) = 0;
+
+    virtual bool isDynamicArray() const;
+    // this method cannot be const since the final return value is a this-pointer
+    virtual TopLevelDataInformation* topLevelDataInformation();
+
 protected:
     /**
      *  the offset of child number @p index compared to the beginning of the structure
@@ -140,6 +147,7 @@ protected:
     virtual quint64 offset(unsigned int index) const = 0;
 Q_SIGNALS:
     void dataChanged();
+    void childCountChange(int oldCount, int newCount);
 protected:
     int mIndex;
 };
@@ -178,4 +186,10 @@ inline unsigned int DataInformation::childCount() const
 {
     return 0;
 }
+
+inline bool DataInformation::isDynamicArray() const
+{
+    return false;
+}
+
 #endif /* DATAINFORMATION_H_ */
