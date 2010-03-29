@@ -57,13 +57,9 @@ QString DataInformation::sizeString() const
     }
     else
     {
-        //XXX: is this correct?
-        //maybe this is better?
-        //coles: yes, it is
         QString bytes = i18np("1 byte", "%1 bytes", size() / 8);
         QString bits = i18np("1 bit", "%1 bits", size() % 8);
         return i18nc("number of bytes, then number of bits", "%1 %2", bytes, bits);
-        //return i18np("1 byte 1 bit", "%1 bytes %2 bits", size() / 8, size() % 8);
     }
 }
 
