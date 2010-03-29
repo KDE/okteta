@@ -134,10 +134,14 @@ void StructureAddRemoveWidget::buildAvailableList()
             kDebug() << "loaded file " << sDef->absPath();
         }
     QList<QTreeWidgetItem*> availableItems;
-    foreach(const StructureDefinitionFile* def,loadedDefs)
+    foreach(StructureDefinitionFile* def,loadedDefs)
         {
+            if (!def->isLoaded())
+                def->parse();
+            if (!def->isValid())
+                continue;
             QString relPath = mTool->manager()->relativeFilePath(def->absPath());
-            if (def->info().isValid() && !def->info().isPluginEnabled())
+            if (!def->info().isPluginEnabled())
                 continue;
             QTreeWidgetItem* item = new QTreeWidgetItem(mTreeAvailable,
                     QStringList() << def->info().pluginName() << relPath);
