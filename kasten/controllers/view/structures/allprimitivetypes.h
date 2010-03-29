@@ -37,6 +37,7 @@ class AbstractByteArrayModel;
 typedef Kasten::StructViewPreferences::EnumByteOrder::type ByteOrder;
 typedef Kasten::StructViewPreferences::EnumByteOrder ByteOrderEnumClass;
 
+//TODO remove sometime
 enum PrimitiveDataType
 {
     Type_NotPrimitive = -1,
@@ -137,9 +138,13 @@ union AllPrimitiveTypes
             allBytes[i] = array.at(i);
         }
     }
-    bool operator!=(AllPrimitiveTypes other)
+    inline bool operator!=(AllPrimitiveTypes other) const
     {
         return ulongValue != other.ulongValue;
+    }
+    inline bool operator==(AllPrimitiveTypes other) const
+    {
+        return ulongValue == other.ulongValue;
     }
     inline QByteArray toQByteArray() const
     {
