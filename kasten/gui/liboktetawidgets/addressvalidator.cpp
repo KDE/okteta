@@ -148,7 +148,7 @@ AddressValidator::AddressType AddressValidator::calculateAddressType( const QStr
     return result;
 }
 
-QString AddressValidator::toString( Address address, const AddressType* addressType ) const
+QString AddressValidator::toString( Address address, AddressType addressType ) const
 {
     //ExpressionCoding just uses base 10 so no need to adjust this code
     const int isHexadecimal = ( mCodecId == HexadecimalCoding );
@@ -156,13 +156,10 @@ QString AddressValidator::toString( Address address, const AddressType* addressT
 
     QString string = QString::number( address, base );
 
-    if (addressType)
-    {
-        if ( *addressType == RelativeForwards )
-            string.prepend( '+' );
-        else if ( *addressType == RelativeBackwards )
-            string.prepend( '-' );
-    }
+    if( addressType == RelativeForwards )
+        string.prepend( '+' );
+    else if( addressType == RelativeBackwards )
+        string.prepend( '-' );
 
     return string;
 }

@@ -60,7 +60,7 @@ class AddressValidator : public QValidator
 
   public:
     Address toAddress( const QString& string, AddressType* type = 0 ) const;
-    QString toString( Address address, const AddressType* addressType ) const;
+    QString toString( Address address, AddressType addressType ) const;
 
   private:
     AddressType calculateAddressType( const QString& string ) const;
