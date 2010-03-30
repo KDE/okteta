@@ -53,7 +53,12 @@ GotoOffsetView::GotoOffsetView( GotoOffsetTool* tool, QWidget* parent )
 
     QLabel* label = new QLabel( i18nc("@label:listbox","O&ffset:"), this );
     mAddressEdit = new Okteta::AddressComboBox( this );
-    connect( mAddressEdit, SIGNAL(addressChanged( Okteta::Address )), mTool, SLOT(setTargetOffset( Okteta::Address )) );
+    connect( mAddressEdit, SIGNAL(addressChanged( Okteta::Address )),
+             mTool, SLOT(setTargetOffset( Okteta::Address )) );
+    connect( mAddressEdit, SIGNAL(formatChanged( int )),
+             SLOT(onFormatChanged( int )) );
+    connect( mAddressEdit, SIGNAL(addressTypeChanged( int )),
+             SLOT(onAddressTypeChanged( int )) );
     label->setBuddy( mAddressEdit );
     const QString inputWhatsThis =
         i18nc( "@info:whatsthis","Enter an offset to go to, or select a previous offset from the list." );
@@ -114,10 +119,6 @@ GotoOffsetView::GotoOffsetView( GotoOffsetTool* tool, QWidget* parent )
 
     connect( mTool, SIGNAL(isApplyableChanged( bool )), SLOT( onApplyableChanged( bool )) );
 
-    connect( mAddressEdit, SIGNAL(formatChanged( int )),SLOT(onFormatChanged( int )) );
-    connect( mAddressEdit, SIGNAL(addressTypeChanged( int )),
-            SLOT(onAddressTypeChanged( int )) );
-
     onApplyableChanged( mTool->isApplyable() );
 }
 
@@ -139,36 +140,39 @@ void GotoOffsetView::onGotoButtonClicked()
 //     emit toolUsed();
 }
 
-void GotoOffsetView::onAddressTypeChanged( int newType )
+void GotoOffsetView::onAddressTypeChanged( int addressType )
 {
-    switch ( (Okteta::AddressValidator::AddressType)newType ) {
-    case Okteta::AddressValidator::InvalidAddressType:
-        //invalid resets the checkboxes
-        mAtCursorCheckBox->setChecked( false );
-        mBackwardsCheckBox->setChecked( false );
-        break;
-    case Okteta::AddressValidator::AbsoluteAddress:
-        mAtCursorCheckBox->setChecked( false );
-        mBackwardsCheckBox->setChecked( false );
-        break;
-    case Okteta::AddressValidator::RelativeForwards:
-        mAtCursorCheckBox->setChecked( true );
-        mBackwardsCheckBox->setChecked( false );
-        break;
-    case Okteta::AddressValidator::RelativeBackwards:
-        mAtCursorCheckBox->setChecked( true );
-        mBackwardsCheckBox->setChecked( true );
-        break;
-    default:
-        break;
-    }
-    //fix goto button sometimes being wrongly dis-/enabled:
-    mGotoButton->setEnabled( newType != Okteta::AddressValidator::InvalidAddressType
-            && mTool->isApplyable() );
+    const bool isNotExpression = (mAddressEdit->format() != 2);
+    if( isNotExpression
+        || addressType == Okteta::AddressValidator::InvalidAddressType )
+        return;
 
+    bool fromCursor;
+    bool backwards;
+
+    if( addressType == Okteta::AddressValidator::AbsoluteAddress )
+    {
+        fromCursor = false;
+        backwards = false; // TODO: there is no way yet for: absolute from end
+    }
+    else if( addressType == Okteta::AddressValidator::RelativeForwards )
+    {
+        fromCursor = true;
+        backwards = false;
+    }
+    else if( addressType == Okteta::AddressValidator::RelativeBackwards )
+    {
+        fromCursor = true;
+        backwards = true;
+    }
+
+    mAtCursorCheckBox->setChecked( fromCursor );
+    mTool->setIsRelative( fromCursor );
+    mBackwardsCheckBox->setChecked( backwards );
+    mTool->setIsBackwards( backwards );
 }
 
-void GotoOffsetView::onFormatChanged(int formatIndex)
+void GotoOffsetView::onFormatChanged( int formatIndex )
 {
     //TODO: make sure Expr is always at index 2
     const bool isNotExpression = (formatIndex != 2);
