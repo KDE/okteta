@@ -69,8 +69,7 @@ inline AddressComboBoxPrivate::AddressComboBoxPrivate( AddressComboBox* parent )
 
 inline Address AddressComboBoxPrivate::address() const
 {
-    Address addr = mValidator->toAddress( mValueComboBox->currentText(), NULL );
-    return addr;
+    return mValidator->toAddress( mValueComboBox->currentText() );
 }
 inline int AddressComboBoxPrivate::format() const
 {
