@@ -93,28 +93,38 @@ QValidator::State AddressValidator::validate( QString& string, int& pos ) const
     return result;
 }
 
-Address AddressValidator::toAddress(const QString& string, AddressType* type) const
+Address AddressValidator::toAddress( const QString& string, AddressType* addressType) const
 {
     Address address;
-    QString expression = string.trimmed();
-    if( type ) // allow passing null
-        *type = calculateAddressType( expression );
 
-    if( expression.startsWith('-') || expression.startsWith('+') )
-        expression.remove( 0, 1 );
+    QString expression = string.trimmed();
+
+    if( addressType )
+    {
+        const AddressType type =
+            expression.startsWith('+') ? RelativeForwards :
+            expression.startsWith('-') ? RelativeBackwards :
+            /* else */                   AbsoluteAddress;
+
+        if( type != AbsoluteAddress )
+            expression.remove( 0, 1 );
+
+        *addressType = type;
+    }
 
     if( mCodecId == ExpressionCoding )
     {
         QScriptEngine evaluator;
-        QScriptValue val = evaluator.evaluate( expression );
-        address = val.toInt32();
-        kDebug() << "expression \"" << expression << "\" evaluated to: " << address;
-        if ( evaluator.hasUncaughtException() )
+        QScriptValue value = evaluator.evaluate( expression );
+        address = value.toInt32();
+kDebug() << "expression \"" << expression << "\" evaluated to: " << address;
+
+        if( evaluator.hasUncaughtException() )
         {
             kWarning() << "evaluation error: "
                     << evaluator.uncaughtExceptionBacktrace();
-            if (type)
-                *type = InvalidAddressType;
+            if( addressType )
+                *addressType = InvalidAddressType;
         }
     }
     else
@@ -127,26 +137,6 @@ Address AddressValidator::toAddress(const QString& string, AddressType* type) co
     return address;
 }
 
-AddressValidator::AddressType AddressValidator::calculateAddressType( const QString& string ) const
-{
-    AddressType result;
-
-    QString expression = string.trimmed();
-    if( expression.startsWith('+') )
-    {
-        expression.remove( 0, 1 );
-        result = RelativeForwards;
-    }
-    else if( expression.startsWith('-') )
-    {
-        expression.remove( 0, 1 );
-        result = RelativeBackwards;
-    }
-    else
-        result = AbsoluteAddress;
-
-    return result;
-}
 
 QString AddressValidator::toString( Address address, AddressType addressType ) const
 {

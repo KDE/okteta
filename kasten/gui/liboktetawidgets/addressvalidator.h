@@ -63,9 +63,6 @@ class AddressValidator : public QValidator
     QString toString( Address address, AddressType addressType ) const;
 
   private:
-    AddressType calculateAddressType( const QString& string ) const;
-
-  private:
     Coding mCodecId;
     ValueCodec* mValueCodec;
 
