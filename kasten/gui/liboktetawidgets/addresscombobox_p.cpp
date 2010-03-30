@@ -96,17 +96,24 @@ void AddressComboBoxPrivate::rememberCurrentAddress()
 }
 
 
-void AddressComboBoxPrivate::onFormatChanged( int index )
+void AddressComboBoxPrivate::onFormatChanged( int formatIndex )
 {
     Q_Q( AddressComboBox );
 
     const QString currentValueText = mValueComboBox->currentText();
     const bool isCurrentValueTextEmpty = currentValueText.isEmpty();
 
-    AddressValidator::AddressType addressType = mAddressType;
-    const Address address = isCurrentValueTextEmpty ? -1 : mValidator->toAddress( currentValueText, &addressType );
+    AddressValidator::AddressType addressType;
+    Address address;
+    if( isCurrentValueTextEmpty )
+    {
+        address = -1;
+        addressType = mAddressType;
+    }
+    else
+        address = mValidator->toAddress( currentValueText, &addressType );
 
-    mValidator->setCodec( static_cast<AddressValidator::Coding>(index) );
+    mValidator->setCodec( static_cast<AddressValidator::Coding>(formatIndex) );
 
     if( ! isCurrentValueTextEmpty )
     {
@@ -119,7 +126,7 @@ void AddressComboBoxPrivate::onFormatChanged( int index )
         mAddressType = addressType;
         emit q->addressTypeChanged( mAddressType );
     }
-    emit q->formatChanged( index );
+    emit q->formatChanged( formatIndex );
 }
 
 void AddressComboBoxPrivate::onValueEdited( const QString& value )
