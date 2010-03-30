@@ -49,7 +49,7 @@ int AddressComboBox::addressType() const
 {
     Q_D( const AddressComboBox );
 
-    return d->lastAddressType;
+    return d->addressType();
 }
 
 int AddressComboBox::format() const

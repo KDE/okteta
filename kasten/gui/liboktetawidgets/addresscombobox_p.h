@@ -41,6 +41,7 @@ class AddressComboBoxPrivate
   public:
     Address address() const;
     int format() const;
+    AddressValidator::AddressType addressType() const;
 
   public:
     void init();
@@ -58,7 +59,7 @@ class AddressComboBoxPrivate
 
     KComboBox* mFormatComboBox;
     KComboBox* mValueComboBox;
-    AddressValidator::AddressType lastAddressType;
+    AddressValidator::AddressType mAddressType;
     AddressValidator* mValidator;
 };
 
@@ -75,14 +76,19 @@ inline int AddressComboBoxPrivate::format() const
 {
     return mFormatComboBox->currentIndex();
 }
+inline AddressValidator::AddressType AddressComboBoxPrivate::addressType() const
+{
+    return mAddressType;
+}
 
-inline void AddressComboBoxPrivate::setAddressType(AddressValidator::AddressType type) {
-    if (lastAddressType != type)
-    {
-        Q_Q(AddressComboBox);
-        emit q->addressTypeChanged( type );
-        lastAddressType = type;
-    }
+inline void AddressComboBoxPrivate::setAddressType( AddressValidator::AddressType addressType)
+{
+    if( mAddressType == addressType )
+        return;
+
+    Q_Q(AddressComboBox);
+    mAddressType = addressType;
+    emit q->addressTypeChanged( addressType );
 }
 
 }

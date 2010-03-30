@@ -111,7 +111,7 @@ void AddressComboBoxPrivate::onFormatChanged( int index )
 
     if( ! isCurrentValueTextEmpty )
     {
-        const QString convertedValueText = mValidator->toString( address, &lastAddressType );
+        const QString convertedValueText = mValidator->toString( address, &mAddressType );
         mValueComboBox->setEditText( convertedValueText );
     }
 
