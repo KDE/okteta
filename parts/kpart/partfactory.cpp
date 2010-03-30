@@ -39,7 +39,7 @@
 static const char PartId[] =          "oktetapart";
 static const char PartName[] =        I18N_NOOP("OktetaPart");
 static const char PartDescription[] = I18N_NOOP("Embedded hex editor");
-static const char PartVersion[] =     "0.5.0";
+static const char PartVersion[] =     "0.5.3";
 static const char PartCopyright[] =   "2003-2010 Friedrich W. H. Kossebau";
 // Author
 static const char FWHKName[] =         "Friedrich W. H. Kossebau";
