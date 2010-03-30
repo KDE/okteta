@@ -168,19 +168,13 @@ void GotoOffsetView::onAddressTypeChanged( int newType )
 
 }
 
-void GotoOffsetView::onFormatChanged(int index)
+void GotoOffsetView::onFormatChanged(int formatIndex)
 {
     //TODO: make sure Expr is always at index 2
-    if (index == 2) //expression
-    {
-        mAtCursorCheckBox->setEnabled(false);
-        mBackwardsCheckBox->setEnabled(false);
-    }
-    else
-    {
-        mAtCursorCheckBox->setEnabled(true);
-        mBackwardsCheckBox->setEnabled(true);
-    }
+    const bool isNotExpression = (formatIndex != 2);
+
+    mAtCursorCheckBox->setEnabled( isNotExpression );
+    mBackwardsCheckBox->setEnabled( isNotExpression );
 }
 
 GotoOffsetView::~GotoOffsetView() {}
