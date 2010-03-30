@@ -117,7 +117,7 @@ Address AddressValidator::toAddress( const QString& string, AddressType* address
         QScriptEngine evaluator;
         QScriptValue value = evaluator.evaluate( expression );
         address = value.toInt32();
-kDebug() << "expression \"" << expression << "\" evaluated to: " << address;
+kDebug() << "expression " << expression << " evaluated to: " << address;
 
         if( evaluator.hasUncaughtException() )
         {
