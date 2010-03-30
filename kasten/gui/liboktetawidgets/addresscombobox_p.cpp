@@ -103,9 +103,8 @@ void AddressComboBoxPrivate::onFormatChanged( int index )
     const QString currentValueText = mValueComboBox->currentText();
     const bool isCurrentValueTextEmpty = currentValueText.isEmpty();
 
-    AddressValidator::AddressType type;
-    const Address address = isCurrentValueTextEmpty ? -1 : mValidator->toAddress( currentValueText, &type );
-    setAddressType( type );
+    AddressValidator::AddressType addressType = mAddressType;
+    const Address address = isCurrentValueTextEmpty ? -1 : mValidator->toAddress( currentValueText, &addressType );
 
     mValidator->setCodec( static_cast<AddressValidator::Coding>(index) );
 
@@ -115,6 +114,11 @@ void AddressComboBoxPrivate::onFormatChanged( int index )
         mValueComboBox->setEditText( convertedValueText );
     }
 
+    if( mAddressType != addressType )
+    {
+        mAddressType = addressType;
+        emit q->addressTypeChanged( mAddressType );
+    }
     emit q->formatChanged( index );
 }
 
@@ -122,10 +126,14 @@ void AddressComboBoxPrivate::onValueEdited( const QString& value )
 {
     Q_Q( AddressComboBox );
 
-    AddressValidator::AddressType type;
-    const Address address = mValidator->toAddress( value, &type );
-    setAddressType( type );
+    AddressValidator::AddressType addressType;
+    const Address address = mValidator->toAddress( value, &addressType );
 
+    if( mAddressType != addressType )
+    {
+        mAddressType = addressType;
+        emit q->addressTypeChanged( mAddressType );
+    }
     emit q->addressChanged( address );
 }
 
@@ -147,10 +155,14 @@ void AddressComboBoxPrivate::onValueActivated( int index )
         }
         const QString currentValueText = mValueComboBox->currentText();
 
-        AddressValidator::AddressType type;
-        const Address address = mValidator->toAddress( currentValueText, &type );
-        setAddressType( type );
+        AddressValidator::AddressType addressType;
+        const Address address = mValidator->toAddress( currentValueText, &addressType );
 
+        if( mAddressType != addressType )
+        {
+            mAddressType = addressType;
+            emit q->addressTypeChanged( mAddressType );
+        }
         emit q->addressChanged( address );
         if( isOtherFormat )
             emit q->formatChanged( itemFormatIndex );

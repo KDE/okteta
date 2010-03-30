@@ -47,8 +47,6 @@ class AddressComboBoxPrivate
     void init();
     void rememberCurrentAddress();
 
-    void setAddressType(AddressValidator::AddressType type);
-
     void onFormatChanged( int index );
     void onValueEdited( const QString& value );
     void onValueActivated( int index );
@@ -79,16 +77,6 @@ inline int AddressComboBoxPrivate::format() const
 inline AddressValidator::AddressType AddressComboBoxPrivate::addressType() const
 {
     return mAddressType;
-}
-
-inline void AddressComboBoxPrivate::setAddressType( AddressValidator::AddressType addressType)
-{
-    if( mAddressType == addressType )
-        return;
-
-    Q_Q(AddressComboBox);
-    mAddressType = addressType;
-    emit q->addressTypeChanged( addressType );
 }
 
 }
