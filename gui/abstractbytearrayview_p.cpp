@@ -1134,7 +1134,8 @@ void AbstractByteArrayViewPrivate::onBookmarksChange( const QList<Bookmark>& boo
 void AbstractByteArrayViewPrivate::onRevertedToVersionIndex( int versionIndex )
 {
 Q_UNUSED( versionIndex )
-    finishByteEditor();
+    // TODO: only call this if needed
+    cancelByteEditor();
 }
 
 void AbstractByteArrayViewPrivate::onByteArrayReadOnlyChange( bool isByteArrayReadOnly )

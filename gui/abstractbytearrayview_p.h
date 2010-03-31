@@ -195,6 +195,7 @@ class AbstractByteArrayViewPrivate
     void updateViewByWidth();
     void adjustLayoutToSize();
     void adaptController();
+    void cancelByteEditor();
     void finishByteEditor();
 
   protected:
@@ -355,6 +356,10 @@ inline KValueEditor* AbstractByteArrayViewPrivate::valueEditor() const { return 
 inline Dropper* AbstractByteArrayViewPrivate::dropper()          const { return mDropper; }
 inline bool AbstractByteArrayViewPrivate::offsetColumnVisible()  const { return mOffsetColumn->isVisible(); }
 
+inline void AbstractByteArrayViewPrivate::cancelByteEditor()
+{
+    mValueEditor->cancelEdit( false );
+}
 inline void AbstractByteArrayViewPrivate::finishByteEditor()
 {
     mValueEditor->finishEdit();
