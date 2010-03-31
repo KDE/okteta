@@ -77,7 +77,8 @@ void PieceTableByteArrayModelPrivate::setData( const QByteArray& data )
     emit p->contentsChanged( ArrayChangeMetricsList::oneReplacement(0,oldSize,data.size()) );
     if( wasModifiedBefore ) emit p->modifiedChanged( false );
     if( !bookmarks.empty() ) emit p->bookmarksRemoved( bookmarks );
-    emit p->headVersionChanged( mPieceTable.changesCount() );
+    emit p->headVersionChanged( 0 );
+    emit p->revertedToVersionIndex( 0 );
 }
 
 void PieceTableByteArrayModelPrivate::setByte( Address offset, Byte byte )
