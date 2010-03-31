@@ -65,19 +65,24 @@ void KValueEditor::startEdit( const QString &description )
     mInEditMode = true;
 }
 
-void KValueEditor::cancelEdit()
+void KValueEditor::cancelEdit( bool undoChanges )
 {
-    Q_ASSERT( mInEditMode );
+//     Q_ASSERT( mInEditMode );
+    if( !mInEditMode )
+        return;
 
     mInEditMode = false;
 
-    Okteta::AbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
-    Okteta::ChangesDescribable *changesDescribable =
-        qobject_cast<Okteta::ChangesDescribable*>( byteArrayModel );
+    if( undoChanges )
+    {
+        Okteta::AbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
+        Okteta::ChangesDescribable* changesDescribable =
+            qobject_cast<Okteta::ChangesDescribable*>( byteArrayModel );
 
-    // TODO: if !changesDescribable the changes need to be undone, too
-    if( changesDescribable )
-        changesDescribable->cancelGroupedChange();
+        // TODO: if !changesDescribable the changes need to be undone, too
+        if( changesDescribable )
+            changesDescribable->cancelGroupedChange();
+    }
 }
 
 void KValueEditor::finishEdit()

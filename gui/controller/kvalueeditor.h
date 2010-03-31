@@ -55,6 +55,7 @@ class KValueEditor: public KEditor
 
     void adaptToValueCodecChange();
     void finishEdit();
+    void cancelEdit( bool undoChanges = true );
 
   public:
     bool isInEditMode() const;
@@ -63,7 +64,6 @@ class KValueEditor: public KEditor
 
   protected:
     void startEdit( const QString &description );
-    void cancelEdit();
     /**
      * executes keyboard Action \a Action. This is normally called by a key event handler.
      * @param action action to be done
