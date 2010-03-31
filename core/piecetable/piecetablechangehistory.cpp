@@ -41,6 +41,8 @@ void PieceTableChangeHistory::clear()
     mAppliedChangesCount = 0;
     mBaseBeforeChangeIndex = 0;
     mAppliedChangesDataSize = 0;
+
+    mActiveGroupChange = 0;
 }
 
 void PieceTableChangeHistory::getChangeData( ArrayChangeMetrics* metrics, Address* storageOffset,
