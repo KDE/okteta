@@ -420,10 +420,12 @@ target_link_libraries( oktetakastencontrollers
   ${KDE4_KIO_LIBS}
   ${KDE4_KDEUI_LIBS}
   ${KDE4_KUTILS_LIBS}
+  ${QT_QTSCRIPT_LIBRARY}
+  ${QT_QTSCRIPTTOOLS_LIBRARY}
 #   ${KDE4_KNEWSTUFF2_LIBS}
 )
 if( QCA2_FOUND )
-  target_link_libraries( oktetakastencontrollers ${QCA2_LIBRARIES} ${QT_QTSCRIPT_LIBRARY} ${QT_QTSCRIPTTOOLS_LIBRARY} )
+  target_link_libraries( oktetakastencontrollers ${QCA2_LIBRARIES} )
 endif( QCA2_FOUND )
 
 set_target_properties( oktetakastencontrollers  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
