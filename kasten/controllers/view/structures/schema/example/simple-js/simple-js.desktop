@@ -11,6 +11,7 @@ Name[pt]=Teste de JavaScript
 Name[pt_BR]=Teste de JavaScript
 Name[sv]=Javascript-test
 Name[uk]=Тест JavaScript
+Name[x-test]=xxJavaScript testxx
 Comment=Just testing structures defined in JS
 Comment[en_GB]=Just testing structures defined in JS
 Comment[es]=Prueba de estructuras definidas en JS
@@ -18,6 +19,7 @@ Comment[pt]=Estruturas de testes definidas em JavaScript
 Comment[pt_BR]=Apenas testando as estruturas definidas no JS
 Comment[sv]=Bara test av strukturer definierade med Javascript
 Comment[uk]=Проста перевірка структур, визначених у JS
+Comment[x-test]=xxJust testing structures defined in JSxx
 
 X-KDE-PluginInfo-Author=Alex Richardson
 X-KDE-PluginInfo-Email=alex.richardson@gmx.de
