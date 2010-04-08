@@ -134,6 +134,8 @@ private:
      *  <br>
      *  Otherwise just returns the primitive type, i.e. @code "int64" @endcode
      */
+
+private: //the toString functions
     static QScriptValue primitiveToString(QScriptContext* ctx, QScriptEngine* eng);
     /** A toString() implementation for bitfields
      *
@@ -180,6 +182,10 @@ private:
     static QScriptValue structToString(QScriptContext* ctx, QScriptEngine* eng);
 
     static QScriptValue unionOrStructToCPPString(QScriptContext* ctx, QScriptEngine* eng);
+private:
+    static QScriptValue primitiveConstructor(QScriptContext* ctx, QScriptEngine* eng, const QLatin1String type);
+    static const QString typePropertyString;
+    static const QString toStringPropertyString;
 };
 
 #endif /* SCRIPTENGINEINITIALIZER_H_ */

@@ -27,40 +27,103 @@
 #include <QtScript/QScriptValueIterator>
 
 #include <KDebug>
-/** generates a method for creating a new script object of that type */
-#define SCRIPT_NEW_PRIMITIVE(primType) \
-QScriptValue ScriptEngineInitializer::scriptNew##primType (QScriptContext* ctx, QScriptEngine* eng)\
-{\
-    Q_UNUSED(ctx)\
-    QScriptValue object;\
-    if (ctx->isCalledAsConstructor())\
-         object = ctx->thisObject();\
-    else\
-        object = eng->newObject();\
-    object.setProperty("type", #primType);\
-    object.setProperty("toString", eng->newFunction(primitiveToString));\
-    return object;\
-}\
 
-SCRIPT_NEW_PRIMITIVE(UInt8)
-SCRIPT_NEW_PRIMITIVE(UInt16)
-SCRIPT_NEW_PRIMITIVE(UInt32)
-SCRIPT_NEW_PRIMITIVE(UInt64)
+const QString ScriptEngineInitializer::typePropertyString("type");
+const QString ScriptEngineInitializer::toStringPropertyString("toString");
 
-SCRIPT_NEW_PRIMITIVE(Int8)
-SCRIPT_NEW_PRIMITIVE(Int16)
-SCRIPT_NEW_PRIMITIVE(Int32)
-SCRIPT_NEW_PRIMITIVE(Int64)
+/** create a new primitive of type @p type */
+QScriptValue ScriptEngineInitializer::primitiveConstructor(QScriptContext* ctx,
+        QScriptEngine* eng, const QLatin1String type)
+{
+    QScriptValue object;
+    if (ctx->isCalledAsConstructor())
+        object = ctx->thisObject();
+    else
+        object = eng->newObject();
+    object.setProperty(typePropertyString, type);
+    object.setProperty(toStringPropertyString, eng->newFunction(primitiveToString));
+    return object;
+}
 
-SCRIPT_NEW_PRIMITIVE(Bool8)
-SCRIPT_NEW_PRIMITIVE(Bool16)
-SCRIPT_NEW_PRIMITIVE(Bool32)
-SCRIPT_NEW_PRIMITIVE(Bool64)
+QScriptValue ScriptEngineInitializer::scriptNewUInt8(QScriptContext* ctx,
+        QScriptEngine* eng)
+{
+    return primitiveConstructor(ctx, eng, QLatin1String("UInt8"));
+}
+QScriptValue ScriptEngineInitializer::scriptNewUInt16(QScriptContext* ctx,
+        QScriptEngine* eng)
+{
+    return primitiveConstructor(ctx, eng, QLatin1String("UInt16"));
+}
+QScriptValue ScriptEngineInitializer::scriptNewUInt32(QScriptContext* ctx,
+        QScriptEngine* eng)
+{
+    return primitiveConstructor(ctx, eng, QLatin1String("UInt32"));
+}
+QScriptValue ScriptEngineInitializer::scriptNewUInt64(QScriptContext* ctx,
+        QScriptEngine* eng)
+{
+    return primitiveConstructor(ctx, eng, QLatin1String("UInt64"));
+}
 
-SCRIPT_NEW_PRIMITIVE(Float)
-SCRIPT_NEW_PRIMITIVE(Double)
+QScriptValue ScriptEngineInitializer::scriptNewInt8(QScriptContext* ctx,
+        QScriptEngine* eng)
+{
+    return primitiveConstructor(ctx, eng, QLatin1String("Int8"));
+}
+QScriptValue ScriptEngineInitializer::scriptNewInt16(QScriptContext* ctx,
+        QScriptEngine* eng)
+{
+    return primitiveConstructor(ctx, eng, QLatin1String("Int16"));
+}
+QScriptValue ScriptEngineInitializer::scriptNewInt32(QScriptContext* ctx,
+        QScriptEngine* eng)
+{
+    return primitiveConstructor(ctx, eng, QLatin1String("Int32"));
+}
+QScriptValue ScriptEngineInitializer::scriptNewInt64(QScriptContext* ctx,
+        QScriptEngine* eng)
+{
+    return primitiveConstructor(ctx, eng, QLatin1String("Int64"));
+}
 
-SCRIPT_NEW_PRIMITIVE(Char)
+QScriptValue ScriptEngineInitializer::scriptNewBool8(QScriptContext* ctx,
+        QScriptEngine* eng)
+{
+    return primitiveConstructor(ctx, eng, QLatin1String("Bool8"));
+}
+QScriptValue ScriptEngineInitializer::scriptNewBool16(QScriptContext* ctx,
+        QScriptEngine* eng)
+{
+    return primitiveConstructor(ctx, eng, QLatin1String("Bool16"));
+}
+QScriptValue ScriptEngineInitializer::scriptNewBool32(QScriptContext* ctx,
+        QScriptEngine* eng)
+{
+    return primitiveConstructor(ctx, eng, QLatin1String("Bool32"));
+}
+QScriptValue ScriptEngineInitializer::scriptNewBool64(QScriptContext* ctx,
+        QScriptEngine* eng)
+{
+    return primitiveConstructor(ctx, eng, QLatin1String("Bool64"));
+}
+
+QScriptValue ScriptEngineInitializer::scriptNewFloat(QScriptContext* ctx,
+        QScriptEngine* eng)
+{
+    return primitiveConstructor(ctx, eng, QLatin1String("Float"));
+}
+QScriptValue ScriptEngineInitializer::scriptNewDouble(QScriptContext* ctx,
+        QScriptEngine* eng)
+{
+    return primitiveConstructor(ctx, eng, QLatin1String("Double"));
+}
+
+QScriptValue ScriptEngineInitializer::scriptNewChar(QScriptContext* ctx,
+        QScriptEngine* eng)
+{
+    return primitiveConstructor(ctx, eng, QLatin1String("Char"));
+}
 
 QScriptValue ScriptEngineInitializer::scriptNewBitfield(QScriptContext* ctx,
         QScriptEngine* eng)
@@ -86,11 +149,11 @@ QScriptValue ScriptEngineInitializer::scriptNewBitfield(QScriptContext* ctx,
     else
         object = eng->newObject();
 
-    object.setProperty("type", "bitfield");
+    object.setProperty(typePropertyString, "bitfield");
     //has been validated, so it must contain valid values
     object.setProperty("bitfieldType", typeArg.isEmpty() ? "signed" : typeArg);
     object.setProperty("width", ctx->argument(1));
-    object.setProperty("toString", eng->newFunction(bitfieldToString));
+    object.setProperty(toStringPropertyString, eng->newFunction(bitfieldToString));
     return object;
 }
 
@@ -113,9 +176,9 @@ QScriptValue ScriptEngineInitializer::scriptNewStruct(QScriptContext* ctx,
     else
         object = eng->newObject();
 
-    object.setProperty("type", "struct");
+    object.setProperty(typePropertyString, "struct");
     object.setProperty("children", children);
-    object.setProperty("toString", eng->newFunction(structToString));
+    object.setProperty(toStringPropertyString, eng->newFunction(structToString));
     return object;
 }
 
@@ -137,9 +200,9 @@ QScriptValue ScriptEngineInitializer::scriptNewUnion(QScriptContext* ctx,
     else
         object = eng->newObject();
 
-    object.setProperty("type", "union");
+    object.setProperty(typePropertyString, "union");
     object.setProperty("children", children);
-    object.setProperty("toString", eng->newFunction(unionToString));
+    object.setProperty(toStringPropertyString, eng->newFunction(unionToString));
     return object;
 }
 
@@ -165,10 +228,10 @@ QScriptValue ScriptEngineInitializer::scriptNewArray(QScriptContext* ctx,
     else
         object = eng->newObject();
 
-    object.setProperty("type", "array");
+    object.setProperty(typePropertyString, "array");
     object.setProperty("childType", childType);
     object.setProperty("length", length);
-    object.setProperty("toString", eng->newFunction(arrayToString));
+    object.setProperty(toStringPropertyString, eng->newFunction(arrayToString));
     return object;
 }
 
@@ -177,7 +240,7 @@ QScriptValue ScriptEngineInitializer::primitiveToString(QScriptContext* ctx,
         QScriptEngine* eng)
 {
     Q_UNUSED(eng)
-    QString type = ctx->thisObject().property("type").toString().toLower();
+    QString type = ctx->thisObject().property(typePropertyString).toString().toLower();
     if (ctx->argumentCount() == 1)
     {
         //name passed as parameter -> C/C++ string
@@ -225,7 +288,7 @@ QScriptValue ScriptEngineInitializer::arrayToString(QScriptContext* ctx,
              *          char c;
              *       } val[13];
              */
-            QScriptValue toString = childType.property("toString");
+            QScriptValue toString = childType.property(toStringPropertyString);
             if (!toString.isFunction())
                 return QString::fromLatin1("%1 %2[%3];").arg(type, name, length);
             QScriptValueList args;
@@ -247,7 +310,7 @@ QScriptValue ScriptEngineInitializer::unionOrStructToCPPString(QScriptContext* c
         QScriptEngine* eng)
 {
     Q_UNUSED(eng)
-    QString type = ctx->thisObject().property("type").toString(); // "union" or "struct"
+    QString type = ctx->thisObject().property(typePropertyString).toString(); // "union" or "struct"
     QScriptValue children = ctx->thisObject().property("children");
     QString name = ctx->argument(0).toString();
     int indentationLevel = 1;
@@ -274,7 +337,7 @@ QScriptValue ScriptEngineInitializer::unionOrStructToCPPString(QScriptContext* c
                 & QScriptValue::SkipInEnumeration)
             continue;
 
-        QScriptValue toString = val.property("toString");
+        QScriptValue toString = val.property(toStringPropertyString);
         if (!toString.isFunction())
             continue;
 
@@ -282,7 +345,7 @@ QScriptValue ScriptEngineInitializer::unionOrStructToCPPString(QScriptContext* c
         arg << name;
 
         //value is a union/struct  -> increase indentation level
-        QString valType = val.property("type").toString();
+        QString valType = val.property(typePropertyString).toString();
         if (valType == "union" || valType == "struct" || valType == "array")
             arg << indentationLevel + 1;
 
