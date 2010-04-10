@@ -53,6 +53,7 @@ class StructuresManager;
 class OKTETAKASTENCONTROLLERS_EXPORT StructTool: public AbstractTool
 {
 Q_OBJECT
+Q_DISABLE_COPY(StructTool)
 public:
     StructTool();
     virtual ~StructTool();

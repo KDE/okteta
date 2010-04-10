@@ -37,6 +37,7 @@ class EnumDataInformation;
 
 class ScriptValueConverter
 {
+    Q_DISABLE_COPY(ScriptValueConverter)
 public:
     ScriptValueConverter(QScriptValue& value, QString name);
     virtual ~ScriptValueConverter();
@@ -45,12 +46,12 @@ private:
     QScriptValue& mValue;
     const QString mName;
 private:
-    DataInformation
-            * toDataInformation(QScriptValue& value, QString name) const;
+    DataInformation*
+    toDataInformation(QScriptValue& value, QString name) const;
 
     AbstractArrayDataInformation* toArray(QScriptValue& value, QString& name) const;
-    AbstractBitfieldDataInformation
-    * toBitfield(QScriptValue& value, QString& name) const;
+    AbstractBitfieldDataInformation*
+    toBitfield(QScriptValue& value, QString& name) const;
     PrimitiveDataInformation* toPrimitive(QScriptValue& value, QString& name) const;
     StructureDataInformation* toStruct(QScriptValue& value, QString& name) const;
     UnionDataInformation* toUnion(QScriptValue& value, QString& name) const;

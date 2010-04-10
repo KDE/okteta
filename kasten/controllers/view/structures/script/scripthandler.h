@@ -37,6 +37,7 @@ class DataInformation;
 class ScriptHandler : public QObject, public QSharedData
 {
     Q_OBJECT
+    Q_DISABLE_COPY(ScriptHandler)
 public:
     ScriptHandler(QString scriptFile, QString name);
     virtual ~ScriptHandler();

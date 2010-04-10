@@ -47,6 +47,8 @@ public:
 
 protected:
     const Kasten::StructureDefinitionFile* const mDef;
+private:
+    Q_DISABLE_COPY(AbstractStructureParser)
 };
 
 #endif /* ABSTRACTSTRUCTUREPARSER_H_ */
