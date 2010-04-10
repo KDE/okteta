@@ -98,16 +98,38 @@ void DataInformation::setAdditionalData(AdditionalData* data)
     mAdditionalData = data;
 }
 
-Q_INVOKABLE void DataInformation::setValidationError(QString errorMessage)
+QString DataInformation::validationError() const
 {
-    validated(false);
     if (!mAdditionalData)
-        return;
+        return QString();
+    return mAdditionalData->validationError();
+}
+
+void DataInformation::setValidationError(QString errorMessage)
+{
+    setValidationSuccessful(false);
+    if (!mAdditionalData)
+        mAdditionalData = new AdditionalData();
     mAdditionalData->setValidationError(errorMessage);
 }
-Q_INVOKABLE void DataInformation::validated(bool success)
+
+bool DataInformation::validationSuccessful() const
 {
-    setValidationSuccessful(success);
+    return mValidationSuccessful;
+}
+
+void DataInformation::setValidationSuccessful(bool successful)
+{
+    mValidationSuccessful = successful;
     setHasBeenValidated(true);
 }
 
+bool DataInformation::hasBeenValidated() const
+{
+    return mHasBeenValidated;
+}
+
+void DataInformation::setHasBeenValidated(bool hasBeen)
+{
+    mHasBeenValidated = hasBeen;
+}

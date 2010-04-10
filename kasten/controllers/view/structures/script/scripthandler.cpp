@@ -145,7 +145,7 @@ void ScriptHandler::validateData(DataInformation* data)
         }
         if (result.isBool() || result.isBoolean())
         {
-            data->validated(result.toBool());
+            data->setValidationSuccessful(result.toBool());
         }
     }
     else

@@ -61,10 +61,10 @@ class DataInformation: public QObject
 {
 Q_OBJECT
 public:
-    Q_PROPERTY(bool hasBeenValidated READ hasBeenValidated() WRITE setHasBeenValidated)
-    Q_PROPERTY(bool validationSuccessful READ validationSuccessful() WRITE setValidationSuccessful)
+    //    Q_PROPERTY(bool hasBeenValidated READ hasBeenValidated() WRITE setHasBeenValidated)
+    Q_PROPERTY(bool valid READ validationSuccessful() WRITE setValidationSuccessful)
     Q_PROPERTY(bool wasAbleToRead READ wasAbleToRead())
-    Q_PROPERTY(AdditionalData* additionalData READ additionalData())
+    Q_PROPERTY(QString validationError READ validationError() WRITE setValidationError)
 
     virtual bool wasAbleToRead() const = 0;
 protected:
@@ -147,12 +147,12 @@ public:
     virtual TopLevelDataInformation* topLevelDataInformation();
 
     void setAdditionalData(AdditionalData* data);
-    AdditionalData* additionalData() const;Q_INVOKABLE
-    void setValidationError(QString errorMessage);Q_INVOKABLE
-    void validated(bool success = true);
+    AdditionalData* additionalData() const;
+    QString validationError() const;
+    void setValidationError(QString errorMessage);
 
     bool validationSuccessful() const;
-    void setValidationSuccessful(bool validationSuccessful);
+    void setValidationSuccessful(bool validationSuccessful = true);
     bool hasBeenValidated() const;
     void setHasBeenValidated(bool hasBeen);
 
@@ -219,21 +219,4 @@ inline AdditionalData* DataInformation::additionalData() const
     return mAdditionalData;
 }
 
-inline bool DataInformation::validationSuccessful() const
-{
-    return mValidationSuccessful;
-}
-inline void DataInformation::setValidationSuccessful(bool successful)
-{
-    mValidationSuccessful = successful;
-}
-
-inline bool DataInformation::hasBeenValidated() const
-{
-    return mHasBeenValidated;
-}
-inline void DataInformation::setHasBeenValidated(bool hasBeen)
-{
-    mHasBeenValidated = hasBeen;
-}
 #endif /* DATAINFORMATION_H_ */

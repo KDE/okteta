@@ -1,7 +1,7 @@
 
 function validate1() {
     //always invalid
-    this.setValidationError("something's wrong here")
+    this.validationError = "something's wrong here"
 	return false;
 }
 function updateMember4() {
