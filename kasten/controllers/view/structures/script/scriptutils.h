@@ -23,8 +23,52 @@
 #ifndef SCRIPTUTILS_H_
 #define SCRIPTUTILS_H_
 
-#include <QtScript/QScriptValue>
+#include <QtCore/QObject>
+#include <QtCore/QAtomicPointer>
 
-void dumpQScriptValue(QScriptValue& val, const char* file, int line);
+#include <QtScript/QScriptValue>
+#include <QtScript/QScriptContext>
+#include <QtScript/QScriptEngine>
+#include "../allprimitivetypes.h"
+
+#include <KGlobal>
+
+class ScriptUtils: public QObject
+{
+Q_OBJECT
+public:
+    ScriptUtils(QObject* parent = NULL) :
+        QObject(parent)
+    {
+    }
+    ~ScriptUtils()
+    {
+    }
+    static ScriptUtils* object();
+
+    void dumpQScriptValue(QScriptValue& val, const char* file, int line);
+
+    void wrapAllPrimitiveTypes(QScriptValue& val, AllPrimitiveTypes allPrim,
+            PrimitiveDataType actualType);
+
+    static QScriptValue allPrimitivesToString(QScriptContext* ctx,
+            QScriptEngine* eng);
+
+    void logScriptError(const QString& message, QScriptValue errorObject);
+    void logScriptError(const QString& message)
+    {
+        logScriptError(message, QScriptValue());
+    }
+    void logScriptError(QStringList errorMessages)
+    {
+        foreach(const QString& msg, errorMessages)
+            {
+                logScriptError(msg);
+            }
+    }
+signals:
+    void scriptError(QString msg, QString errToString = QString());
+public:
+};
 
 #endif /* SCRIPTUTILS_H_ */

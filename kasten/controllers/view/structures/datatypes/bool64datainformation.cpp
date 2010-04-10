@@ -23,7 +23,7 @@
 
 QString Bool64DataInformation::valueString() const
 {
-    if (!mIsValid)
+    if (!mWasAbleToRead)
         return i18nc("invalid value (out of range)", "<invalid>");
     int base = displayBase();
     quint64 val = mValue.ulongValue;

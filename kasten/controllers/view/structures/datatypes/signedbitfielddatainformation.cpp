@@ -42,7 +42,7 @@ int SignedBitfieldDataInformation::displayBase() const
 QString SignedBitfieldDataInformation::valueString() const
 {
     //FIXME shift so that it is negative
-    if (!mIsValid)
+    if (!mWasAbleToRead)
         return i18nc("invalid value (out of range)", "<invalid>");
     int base = displayBase();
     qint64 val = mValue.ulongValue & mask();

@@ -27,9 +27,10 @@
 //QtScript
 #include <QtScript/QScriptEngine>
 
-TopLevelDataInformation::TopLevelDataInformation(const DataInformation* data,
+TopLevelDataInformation::TopLevelDataInformation(const DataInformation& data,
         QFileInfo structureFile, bool dynamic, QString name) :
-    DataInformation(name, 0), mScriptHandler(NULL), mStructureFile(structureFile),            mWasAbleToParse (true)
+    DataInformation(name, 0), mData(NULL), mScriptHandler(NULL), mStructureFile(
+            structureFile), mWasAbleToParse(true)
 {
 
     if (dynamic)
@@ -40,7 +41,6 @@ TopLevelDataInformation::TopLevelDataInformation(const DataInformation* data,
         if (!mData)
         {
             //just a dummy, this object should be deleted anyway
-            mWasAbleToParse = false;
             mData = PrimitiveDataInformation::newInstance(
                     "failed_to_load__this_is_a_dummy", Type_Int32, 0, this);
             mWasAbleToParse = false;
@@ -48,8 +48,15 @@ TopLevelDataInformation::TopLevelDataInformation(const DataInformation* data,
     }
     else
     {
-        mData = data->clone();
+        mData = data.clone();
     }
+    setObjectName(mData->name());
+    mData->setParent(this);
+}
+TopLevelDataInformation::TopLevelDataInformation(const TopLevelDataInformation& d) :
+    DataInformation(d), mData(d.mData->clone()), mScriptHandler(d.mScriptHandler), mStructureFile(
+            d.mStructureFile), mWasAbleToParse(d.mWasAbleToParse)
+{
     setObjectName(mData->name());
     mData->setParent(this);
 }
@@ -82,3 +89,23 @@ TopLevelDataInformation* TopLevelDataInformation::topLevelDataInformation()
     return this;
 }
 
+void TopLevelDataInformation::validate()
+{
+    kDebug()
+        << "validation of structure " << name() << "requested";
+    if (mScriptHandler)
+        mScriptHandler->validateData(mData);
+    else
+    {
+        kDebug()
+            << "no handler available -> cannot validate structure " << name();
+    }
+
+}
+
+QScriptEngine* TopLevelDataInformation::scriptEngine() const
+{
+    if (!mScriptHandler)
+        return NULL;
+    return mScriptHandler->engine();
+}

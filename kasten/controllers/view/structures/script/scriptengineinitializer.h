@@ -184,6 +184,8 @@ private: //the toString functions
     static QScriptValue unionOrStructToCPPString(QScriptContext* ctx, QScriptEngine* eng);
 private:
     static QScriptValue primitiveConstructor(QScriptContext* ctx, QScriptEngine* eng, const QLatin1String type);
+    static void addValidationFunction(QScriptContext* ctx, QScriptEngine* eng, QScriptValue& val, int argIndex);
+    static void addUpdateFunction(QScriptContext* ctx, QScriptEngine* eng, QScriptValue& val, int argIndex);
     static const QString typePropertyString;
     static const QString toStringPropertyString;
 };

@@ -23,6 +23,7 @@
 #include "staticlengtharraydatainformation.h"
 #include "topleveldatainformation.h"
 #include <KLineEdit>
+#include <KIcon>
 
 void DataInformationWithChildren::appendChild(DataInformation* child)
 {
@@ -99,21 +100,21 @@ DataInformationWithChildren::DataInformationWithChildren(
         const DataInformationWithChildren& d) :
     DataInformation(d)
 {
-    foreach(DataInformation* dat,d.mChildren)
-        {
-            DataInformation * child = dat->clone();
-            child->setParent(this);
-            QObject::connect(child, SIGNAL(dataChanged()), this,
-                    SIGNAL(dataChanged()));
-            mChildren.append(child);
-        }
+    for (int i = 0; i < d.mChildren.size(); ++i)
+    {
+        const DataInformation* dat = d.mChildren.at(i);
+        DataInformation* child = dat->clone();
+        child->setParent(this);
+        QObject::connect(child, SIGNAL(dataChanged()), this, SIGNAL(dataChanged()));
+        mChildren.append(child);
+    }
 }
 
-bool DataInformationWithChildren::isValid() const
+bool DataInformationWithChildren::wasAbleToRead() const
 {
     for (int i = 0; i < mChildren.size(); ++i)
     {
-        if (!mChildren.at(i)->isValid())
+        if (!mChildren.at(i)->wasAbleToRead())
             return false; //if one is invalid, whole structure is invalid (out of range)
     }
     return true;
@@ -123,7 +124,7 @@ QList<const DataInformation*> DataInformationWithChildren::findChildrenWithName(
         const QString& name, const DataInformation* const upTo) const
 {
     QList<const DataInformation*> retList;
-    if (parent() && !dynamic_cast<TopLevelDataInformation*>(parent()))
+    if (parent() && !dynamic_cast<TopLevelDataInformation*> (parent()))
     {
         DataInformationWithChildren* par =
                 static_cast<DataInformationWithChildren*> (parent());
@@ -182,12 +183,34 @@ QVariant DataInformationWithChildren::data(int column, int role) const
     }
     else if (role == Qt::ToolTipRole)
     {
-        return i18np("Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 child)",
-                "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)",
-                childCount(), name(), valueString(), typeName(), sizeString());
+        if (mHasBeenValidated && !mValidationSuccessful)
+        {
+            QString validationError;
+            if (additionalData() && !additionalData()->validationError().isEmpty())
+                validationError = i18nc("not all values in this structure"
+                    " are as they should be", "Validation failed: \"%1\"",
+                        additionalData()->validationError());
+            else
+                validationError = i18nc("not all values in this structure"
+                    " are as they should be", "Validation failed.");
+
+            return i18np(
+                    "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 child)\n\n %6",
+                    "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)\n\n %6",
+                    childCount(), name(), valueString(), typeName(), sizeString(),
+                    validationError);
+        }
+        else
+            return i18np("Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 child)",
+                    "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)",
+                    childCount(), name(), valueString(), typeName(), sizeString());
     }
-    else
-        return QVariant();
+    else if (role == Qt::DecorationRole && column == 0)
+    {
+        if (mHasBeenValidated && !mValidationSuccessful)
+            return KIcon("dialog-warning"); //XXX is this the best way to display a validation error
+    }
+    return QVariant();
 }
 
 int DataInformationWithChildren::size() const

@@ -37,6 +37,11 @@
 #include "uint16datainformation.h"
 #include "uint32datainformation.h"
 #include "uint64datainformation.h"
+#include "topleveldatainformation.h"
+#include "../script/scriptutils.h"
+
+#include <QtScript/QScriptEngine>
+#include <KIcon>
 
 PrimitiveDataType PrimitiveDataInformation::typeStringToType(QString& typeStr)
 {
@@ -103,11 +108,37 @@ QVariant PrimitiveDataInformation::data(int column, int role) const
     }
     else if (role == Qt::ToolTipRole)
     {
-        return i18n("Name: %1\nValue: %2\n\nType: %3\nSize: %4", name(),
-                valueString(), typeName(), sizeString());
+        if (mHasBeenValidated && !mValidationSuccessful)
+        {
+            QString validationError;
+            if (additionalData() && !additionalData()->validationError().isEmpty())
+                validationError = i18nc("not all values in this structure"
+                    " are as they should be", "Validation failed: \"%1\"",
+                        additionalData()->validationError());
+            else
+                validationError = i18nc("not all values in this structure"
+                    " are as they should be", "Validation failed.");
+
+            return i18n("Name: %1\nValue: %2\n\nType: %3\nSize: %4\n\n%5", name(),
+                    valueString(), typeName(), sizeString(), validationError);
+        }
+        else
+            return i18n("Name: %1\nValue: %2\n\nType: %3\nSize: %4", name(),
+                    valueString(), typeName(), sizeString());
     }
-    else
-        return QVariant();
+    //TODO status tip is not displayed ??
+    //    else if (role == Qt::StatusTipRole)
+    //    {
+    //        if (mHasBeenValidated && !mValidationSuccessful)
+    //            return i18nc("not all values in this structure are as they should be",
+    //                    "Validation failed.");
+    //    }
+    else if (role == Qt::DecorationRole && column == 0)
+    {
+        if (mHasBeenValidated && !mValidationSuccessful)
+            return KIcon("dialog-warning"); //XXX is this the best way to display a validation error
+    }
+    return QVariant();
 }
 
 bool PrimitiveDataInformation::setData(const QVariant& value, DataInformation* inf,
@@ -121,15 +152,15 @@ bool PrimitiveDataInformation::setData(const QVariant& value, DataInformation* i
         return false;
     }
     AllPrimitiveTypes oldVal(mValue);
-    bool wasValid = mIsValid;
+    bool wasValid = mWasAbleToRead;
     // this is implemented in the subclasses
     AllPrimitiveTypes newVal = qVariantToAllPrimitiveTypes(value);
 
     //this handles remaining < size() for us
-    mIsValid = mValue.writeBits(size(), newVal, out, byteOrder, address, bitsRemaining,
-            bitOffset);
+    mWasAbleToRead = mValue.writeBits(size(), newVal, out, byteOrder, address,
+            bitsRemaining, bitOffset);
 
-    if (oldVal != mValue || wasValid != mIsValid)
+    if (oldVal != mValue || wasValid != mWasAbleToRead)
         emit dataChanged();
     return true;
 }
@@ -148,17 +179,17 @@ qint64 PrimitiveDataInformation::readData(Okteta::AbstractByteArrayModel *input,
 {
     if (bitsRemaining < size()) //TODO make size() unsigned
     {
-        mIsValid = false;
+        mWasAbleToRead = false;
         mValue = 0;
         return -1;
     }
-    bool wasValid = mIsValid;
+    bool wasValid = mWasAbleToRead;
     AllPrimitiveTypes oldVal(mValue);
 
-    mIsValid = mValue.readBits(size(), input, byteOrder, address, bitsRemaining,
-            bitOffset);
+    mWasAbleToRead = mValue.readBits(size(), input, byteOrder, address,
+            bitsRemaining, bitOffset);
 
-    if (oldVal != mValue || wasValid != mIsValid)
+    if (oldVal != mValue || wasValid != mWasAbleToRead)
         emit dataChanged();
 
     return size();
@@ -166,7 +197,7 @@ qint64 PrimitiveDataInformation::readData(Okteta::AbstractByteArrayModel *input,
 
 PrimitiveDataInformation::PrimitiveDataInformation(QString name,
         PrimitiveDataType type, int index, DataInformation* parent) :
-    DataInformation(name, index, parent), mType(type), mIsValid(false)
+    DataInformation(name, index, parent), mType(type), mWasAbleToRead(false)
 {
     if (type == Type_NotPrimitive)
     {
@@ -177,7 +208,7 @@ PrimitiveDataInformation::PrimitiveDataInformation(QString name,
 }
 
 PrimitiveDataInformation::PrimitiveDataInformation(const PrimitiveDataInformation& d) :
-    DataInformation(d), mType(d.mType), mIsValid(false)
+    DataInformation(d), mType(d.mType), mWasAbleToRead(false)
 {
 }
 
@@ -225,247 +256,12 @@ PrimitiveDataInformation* PrimitiveDataInformation::newInstance(QString name,
     }
 }
 
-//int PrimitiveDataInformation::getStringConversionBase(PrimitiveDataType type)
-//{
-//    int enumVal = 0;
-//    switch (type)
-//    {
-//    case Bool8:
-//    case Bool16:
-//    case Bool32:
-//    case Bool64:
-//    case UInt8:
-//    case UInt16:
-//    case UInt32:
-//    case UInt64:
-//        enumVal = Kasten::StructViewPreferences::unsignedDisplayBase();
-//        if (enumVal == StructViewPreferences::EnumUnsignedDisplayBase::Binary)
-//            return 2;
-//        if (enumVal == StructViewPreferences::EnumUnsignedDisplayBase::Decimal)
-//            return 10;
-//        if (enumVal == StructViewPreferences::EnumUnsignedDisplayBase::Hexadecimal)
-//            return 16;
-//        break;
-//    case Int8:
-//    case Int16:
-//    case Int32:
-//    case Int64:
-//        enumVal = Kasten::StructViewPreferences::signedDisplayBase();
-//        if (enumVal == StructViewPreferences::EnumSignedDisplayBase::Binary)
-//            return 2;
-//        if (enumVal == StructViewPreferences::EnumSignedDisplayBase::Decimal)
-//            return 10;
-//        if (enumVal == StructViewPreferences::EnumSignedDisplayBase::Hexadecimal)
-//            return 16;
-//        break;
-//
-//    case Char:
-//        enumVal = Kasten::StructViewPreferences::charDisplayBase();
-//        if (enumVal == StructViewPreferences::EnumCharDisplayBase::Binary)
-//            return 2;
-//        if (enumVal == StructViewPreferences::EnumCharDisplayBase::Decimal)
-//            return 10;
-//        if (enumVal == StructViewPreferences::EnumCharDisplayBase::Hexadecimal)
-//            return 16;
-//        break;
-//    case Float:
-//    case Double:
-//        //just return -1, it won't be read anyway.
-//        return -1;
-//    default:
-//        break;
-//    }
-//    kWarning() << "PrimitiveDataInformation::getStringConversionBase():"
-//        " no match found (type=" << type << ", enumVal=" << enumVal << ")";
-//    return 10;
-//}
-
-//QString PrimitiveDataInformation::valueString() const
-//{
-//    if (!mIsValid)
-//    {
-//        return i18nc("invalid value (out of range)", "<invalid>");
-//    }
-//    QString number;
-//    int base = getStringConversionBase(mType);
-//    return PrimitiveDataInformation::valueString(mValue, mType, base);
-//}
-
-//QString PrimitiveDataInformation::valueString(AllPrimitiveTypes value,
-//        PrimitiveDataType type, int base)
-//{
-//    QString number;
-//    switch (type)
-//    {
-//    case Int8:
-//        number = QString::number(value.byteValue, base);
-//        break;
-//    case Int16:
-//        number = QString::number(value.shortValue, base);
-//        break;
-//    case Int32:
-//        number = QString::number(value.intValue, base);
-//        break;
-//    case Int64:
-//        number = QString::number(value.longValue, base);
-//        break;
-//    case Bool8:
-//    case UInt8:
-//        number = QString::number(value.ubyteValue, base);
-//        break;
-//    case Bool16:
-//    case UInt16:
-//        number = QString::number(value.ushortValue, base);
-//        break;
-//    case Bool32:
-//    case UInt32:
-//        number = QString::number(value.uintValue, base);
-//        break;
-//    case Bool64:
-//    case UInt64:
-//        number = QString::number(value.ulongValue, base);
-//        break;
-//    case Char:
-//        number = QString::number(value.ubyteValue, base);
-//        break;
-//    case Float:
-//        if (Kasten::StructViewPreferences::localeAwareFloatFormatting())
-//        {
-//            number = KGlobal::locale()->formatNumber(value.floatValue,
-//                    Kasten::StructViewPreferences::floatPrecision());
-//        }
-//        else
-//            number = QString::number(value.floatValue, 'g',
-//                    Kasten::StructViewPreferences::floatPrecision());
-//        break;
-//    case Double:
-//        if (Kasten::StructViewPreferences::localeAwareFloatFormatting())
-//        {
-//            number = KGlobal::locale()->formatNumber(value.doubleValue,
-//                    Kasten::StructViewPreferences::floatPrecision());
-//        }
-//        else
-//            number = QString::number(value.doubleValue, 'g',
-//                    Kasten::StructViewPreferences::floatPrecision());
-//        break;
-//    default:
-//        kWarning("default case reached, should never happen");
-//        number = QString();
-//    }
-//    if (base == 16)
-//    {
-//        if ((size(type) / 4) > number.length())
-//        {
-//            //2 digits per byte in hex
-//            number = number.right((size(type) / 4));
-//        }
-//        number = "0x" + number;
-//    }
-//
-//    if (type == Char)
-//    {
-//        //TODO char codec
-//        QChar qchar = value.ubyteValue;
-//        qchar = qchar.isPrint() ? qchar : QChar((char) QChar::ReplacementCharacter);
-//        QString charStr = '\'' + qchar + '\'';
-//        if (Kasten::StructViewPreferences::showCharNumericalValue())
-//            charStr += " (" + number + ")";
-//        return charStr;
-//    }
-//    if (type == Bool8 || type == Bool16 || type == Bool32 || type == Bool64)
-//    {
-//        //other bytes are zero, so just compare ulongvalue
-//        QString boolStr;
-//        if (value.ulongValue == 0)
-//            boolStr = i18nc("value of boolean data type", "false");
-//        else if (value.ulongValue == 1)
-//            boolStr = i18nc("value of boolean data type", "true");
-//        else
-//        {
-//            boolStr = i18nc("value of boolean data type with value", "true (%1)");
-//            boolStr = boolStr.arg(number);
-//        }
-//        return boolStr;
-//    }
-//    //otherwise just return number (float and double)
-//    if (StructViewPreferences::localeAwareDecimalFormatting() && base == 10)
-//    {
-//        //FIXME is this safe? it seems the value is converted to a double and then formatted
-//        return KGlobal::locale()->formatNumber(number, false, 0);
-//    }
-//    //float and double:
-//    return number;
-//}
-
-//int PrimitiveDataInformation::size(PrimitiveDataType type)
-//{
-//    int bytes;
-//    switch (type)
-//    {
-//    case Int8:
-//    case UInt8:
-//    case Bool8:
-//    case Char:
-//        bytes = 1;
-//        break;
-//    case Bool16:
-//    case Int16:
-//    case UInt16:
-//        bytes = 2;
-//        break;
-//    case Bool32:
-//    case Float:
-//    case Int32:
-//    case UInt32:
-//        bytes = 4;
-//        break;
-//    case Bool64:
-//    case Double:
-//    case Int64:
-//    case UInt64:
-//        bytes = 8;
-//        break;
-//    default:
-//        bytes = 0;
-//    }
-//    return bytes * 8;
-//}
-
-//QString PrimitiveDataInformation::typeName(PrimitiveDataType type)
-//{
-//    switch (type)
-//    {
-//    case Int8:
-//        return i18nc("data type", "byte");
-//    case Int16:
-//        return i18nc("data type", "short");
-//    case Int32:
-//        return i18nc("data type", "int");
-//    case Int64:
-//        return i18nc("data type", "long");
-//    case UInt8:
-//        return i18nc("data type", "unsigned byte");
-//    case UInt16:
-//        return i18nc("data type", "unsigned short");
-//    case UInt32:
-//        return i18nc("data type", "unsigned int");
-//    case UInt64:
-//        return i18nc("data type", "unsigned long");
-//    case Char:
-//        return i18nc("data type", "char");
-//    case Float:
-//        return i18nc("data type", "float");
-//    case Double:
-//        return i18nc("data type", "double");
-//    case Bool8:
-//        return i18nc("data type", "bool (1 byte)");
-//    case Bool16:
-//        return i18nc("data type", "bool (2 bytes)");
-//    case Bool32:
-//        return i18nc("data type", "bool (4 bytes)");
-//    case Bool64:
-//        return i18nc("data type", "bool (8 bytes)");
-//    default:
-//        return QString();
-//    }
-//}
+QScriptValue PrimitiveDataInformation::scriptValue()
+{
+    QScriptEngine* engine = topLevelDataInformation()->scriptEngine();
+    if (!engine)
+        return QScriptValue();
+    QScriptValue wrapObj = engine->newObject();
+    ScriptUtils::object()->wrapAllPrimitiveTypes(wrapObj, mValue, mType);
+    return wrapObj;
+}

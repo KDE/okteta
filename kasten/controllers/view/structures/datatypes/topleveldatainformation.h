@@ -25,6 +25,7 @@
 #include "datainformation.h"
 
 #include <QtCore/QFileInfo>
+#include <QtCore/QExplicitlySharedDataPointer>
 
 class QScriptEngine;
 class ScriptHandler;
@@ -34,13 +35,13 @@ class TopLevelDataInformation: public DataInformation
 Q_OBJECT
 public:
     /** creates a new TopLevelDataInformation object wrapping the existing DataInformation @p data.
-     *  Make sure data is NEVER null! (otherwise this program will crash)
      *  @param data the object to wrap
      *  @param scriptFile the file which contains the file this object was initialized from
      *  @param dynamic whether the wrapped object is a dynamic structure definition (i.e. one using QtScript)
      */
-    TopLevelDataInformation(const DataInformation* data, QFileInfo structureFile,
+    TopLevelDataInformation(const DataInformation& data, QFileInfo structureFile,
             bool dynamic = false, QString name = QString());
+    TopLevelDataInformation(const TopLevelDataInformation& d);
     virtual ~TopLevelDataInformation();
     DATAINFORMATION_CLONE(TopLevel)
 
@@ -66,9 +67,11 @@ public:
             Okteta::AbstractByteArrayModel *input, ByteOrder byteOrder,
             Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset);
     virtual int size() const;
-    virtual bool isValid() const;
+    virtual bool wasAbleToRead() const;
     virtual bool isDynamicArray() const;
     virtual TopLevelDataInformation* topLevelDataInformation();
+    void validate();
+    QScriptEngine* scriptEngine() const;
 
     DataInformation* actualDataInformation();
     bool wasAbleToParse() const;
@@ -80,7 +83,7 @@ public:
 
 private:
     DataInformation* mData;
-    ScriptHandler* mScriptHandler;
+    QExplicitlySharedDataPointer<ScriptHandler> mScriptHandler;
     QFileInfo mStructureFile;
     bool mWasAbleToParse :1;
 };
@@ -90,9 +93,9 @@ inline int TopLevelDataInformation::size() const
 {
     return mData->size();
 }
-inline bool TopLevelDataInformation::isValid() const
+inline bool TopLevelDataInformation::wasAbleToRead() const
 {
-    return mData->isValid();
+    return mData->wasAbleToRead();
 }
 inline bool TopLevelDataInformation::hasChildren() const
 {

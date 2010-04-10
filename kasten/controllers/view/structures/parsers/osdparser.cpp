@@ -126,18 +126,17 @@ QList<const TopLevelDataInformation*> OsdParser::parseStructures()
     {
         const QDomNode& n = list.at(i);
         QDomElement elem = n.toElement(); // try to convert the node to an element.
-        DataInformation* data = NULL;
-        if (!elem.isNull())
-        {
-            kDebug()
-                << "element tag: " << elem.tagName();
-            //e is element
-            QString tag = elem.tagName();
-            data = parseNode(elem);
-        }
+        if (elem.isNull())
+            continue;
+
+        //e is element
+        kDebug()
+            << "element tag: " << elem.tagName();
+        QString tag = elem.tagName();
+        QScopedPointer<DataInformation> data(parseNode(elem));
         if (data)
         {
-            TopLevelDataInformation* topData = new TopLevelDataInformation(data,
+            TopLevelDataInformation* topData = new TopLevelDataInformation(*data,
                     fileInfo);
             structures.append(topData);
         }

@@ -39,8 +39,6 @@ public:
             DataInformation* parent = NULL);
     virtual ~StaticLengthArrayDataInformation();
     DATAINFORMATION_CLONE(StaticLengthArray)
-private:
-    unsigned int mArrayLength;
 };
 
 #endif /* STATICLENGTHARRAYDATAINFORMATION_H_ */

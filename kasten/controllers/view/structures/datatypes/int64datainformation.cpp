@@ -23,7 +23,7 @@
 
 QString Int64DataInformation::valueString() const
 {
-    if (!mIsValid)
+    if (!mWasAbleToRead)
         return i18nc("invalid value (out of range)", "<invalid>");
     int base = displayBase();
     QString num = QString::number(mValue.longValue, base);

@@ -24,7 +24,7 @@
 
 QString CharDataInformation::valueString() const
 {
-    if (!mIsValid)
+    if (!mWasAbleToRead)
         return i18nc("invalid value (out of range)", "<invalid>");
     //TODO char codec
     QChar qchar(mValue.ubyteValue, 0);

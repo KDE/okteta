@@ -27,6 +27,8 @@
 class AbstractArrayDataInformation: public DataInformationWithChildren
 {
 Q_OBJECT
+
+Q_PROPERTY(int length READ length())
 protected:
     explicit AbstractArrayDataInformation(const AbstractArrayDataInformation& d);
 public:
@@ -35,10 +37,31 @@ public:
      *
      *  length should be > 0
      */
-    explicit AbstractArrayDataInformation(QString name, int index = -1,
+    explicit AbstractArrayDataInformation(QString name,
+            const DataInformation& childType, uint length, int index = -1,
             DataInformation* parent = NULL);
     virtual ~AbstractArrayDataInformation();
 public:
     virtual QString typeName() const;
+    virtual bool isDynamicArray() const;
+    int length();
+    const DataInformation* childType() const;
+
+    Q_INVOKABLE
+    void setArrayLength(uint newLength);Q_INVOKABLE
+    void setArrayType(QScriptValue type);
+protected:
+    DataInformation* mChildType;
 };
+
+inline int AbstractArrayDataInformation::length()
+{
+    return childCount();
+}
+
+inline const DataInformation* AbstractArrayDataInformation::childType() const
+{
+    return mChildType;
+}
+
 #endif /* ABSTRACTARRAYDATAINFORMATION_H_ */

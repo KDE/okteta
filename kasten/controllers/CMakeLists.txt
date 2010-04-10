@@ -291,6 +291,7 @@ set( STRUCTVIEW_SRCS
   view/structures/datatypes/signedbitfielddatainformation.cpp
   view/structures/datatypes/unsignedbitfielddatainformation.cpp
   view/structures/datatypes/topleveldatainformation.cpp
+  view/structures/datatypes/additionaldata.cpp
   view/structures/script/scriptengineinitializer.cpp
   view/structures/script/scripthandler.cpp
   view/structures/script/scriptvalueconverter.cpp
@@ -299,7 +300,10 @@ set( STRUCTVIEW_SRCS
   view/structures/parsers/osdparser.cpp
   view/structures/parsers/scriptfileparser.cpp
 )
-
+configure_file( config-structtool.h.cmake  ${CMAKE_CURRENT_BINARY_DIR}/config-structtool.h )
+if ( OKTETA_DEBUG_SCRIPT )
+    message( STATUS "Okteta will be compiled with script debugging enabled" )
+endif( OKTETA_DEBUG_SCRIPT )
 kde4_add_kcfg_files(STRUCTVIEW_SRCS GENERATE_MOC view/structures/settings/structviewpreferences.kcfgc)
 kde4_add_ui_files(STRUCTVIEW_SRCS view/structures/settings/structviewdisplaysettingswidget.ui)
 

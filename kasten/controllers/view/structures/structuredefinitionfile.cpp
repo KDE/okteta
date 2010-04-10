@@ -37,7 +37,7 @@ namespace Kasten
 {
 StructureDefinitionFile::StructureDefinitionFile(KPluginInfo info) :
     mPluginInfo(info), mValid(true), mStructureNamesParsed(false),
-            mStructuresParsedCompletely(false)
+            mStructuresParsedCompletely(false), mEnumsParsed(false)
 {
     QFileInfo tmp(info.entryPath());
     mDir = tmp.dir();
@@ -64,12 +64,13 @@ StructureDefinitionFile::StructureDefinitionFile(KPluginInfo info) :
 StructureDefinitionFile::~StructureDefinitionFile()
 {
     qDeleteAll(mTopLevelStructures);
+    delete mParser;
 }
 
 StructureDefinitionFile::StructureDefinitionFile(StructureDefinitionFile& f) :
     mPluginInfo(f.mPluginInfo), mDir(f.mDir), mValid(f.mValid),
             mStructureNamesParsed(f.mStructureNamesParsed),
-            mStructuresParsedCompletely(f.mStructuresParsedCompletely)
+            mStructuresParsedCompletely(f.mStructuresParsedCompletely), mStructureNames(f.mStructureNames)
 {
     int len = f.mTopLevelStructures.length();
     for (int i = 0; i < len; ++i)

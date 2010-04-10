@@ -61,6 +61,7 @@ StructTool::~StructTool()
 {
     qDeleteAll(mData);
     //	delete mCharCodec;
+    delete mManager;
 }
 void StructTool::setByteOrder(StructViewPreferences::EnumByteOrder::type order)
 {
@@ -189,7 +190,7 @@ void StructTool::updateData()
             TopLevelDataInformation* dat = mData.at(i);
             dat->readData(mByteArrayModel, mByteOrder, mCursorIndex, remainingBits,
                     bitOffset.data());
-            *bitOffset= 0; //start at beginning again
+            *bitOffset = 0; //start at beginning again
         }
     }
 }
@@ -258,7 +259,7 @@ void StructTool::setSelectedStructuresInView()
             {
                 QString pluginName = regex.cap(1);
                 QString name = regex.cap(2);
-//                kDebug() << "pluginName=" << path << " structureName=" << name;
+                //                kDebug() << "pluginName=" << path << " structureName=" << name;
                 StructureDefinitionFile* def = mManager->definition(pluginName);
                 if (!def)
                     continue;
@@ -290,7 +291,8 @@ void StructTool::mark(const QModelIndex& idx)
     int maxLen = mByteArrayModel->size() - mCursorIndex;
     length = qMin(length, maxLen);
     //FIXME support marking of partial bytes
-    Okteta::Address startOffset = mCursorIndex + data->positionRelativeToParent() / 8;
+    Okteta::Address startOffset = mCursorIndex + data->positionRelativeToParent()
+            / 8;
     const Okteta::AddressRange markingRange = Okteta::AddressRange::fromWidth(
             startOffset, length);
     mByteArrayView->setMarking(markingRange, true);
@@ -300,6 +302,14 @@ void StructTool::unmark(/*const QModelIndex& idx*/)
 {
     if (mByteArrayView)
         mByteArrayView->setMarking(Okteta::AddressRange());
+}
+
+void StructTool::validateAllStructures()
+{
+    foreach(TopLevelDataInformation* data, mData)
+        {
+            data->validate();
+        }
 }
 
 }

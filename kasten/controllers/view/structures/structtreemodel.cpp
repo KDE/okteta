@@ -22,7 +22,7 @@
 
 #include "structtreemodel.h"
 #include "structtool.h"
-#include "datatypes/dynamiclengtharraydatainformation.h"
+#include "datatypes/datainformationwithchildren.h"
 #include "datatypes/topleveldatainformation.h"
 
 namespace Kasten
@@ -135,8 +135,9 @@ QModelIndex StructTreeModel::index(int row, int column, const QModelIndex &paren
     }
     if (childItem)
     {
-        if (childItem->isDynamicArray())
+        if (dynamic_cast<DataInformationWithChildren*>(childItem))
         {
+            //assume that all items with children can change their childCount
             connect(childItem, SIGNAL(childCountChange(int,int)), this,
                     SLOT(onDataInformationChildCountChange(int,int)));
         }
@@ -169,8 +170,9 @@ QModelIndex StructTreeModel::parent(const QModelIndex& index) const
     if (!parent)
         return QModelIndex();
 
-    if (childItem->isDynamicArray())
+    if (dynamic_cast<DataInformationWithChildren*>(childItem))
     {
+        //assume that all items with children can change their childCount
         connect(parent, SIGNAL(childCountChange(int,int)), this,
                 SLOT(onDataInformationChildCountChange(int,int)));
     }

@@ -22,7 +22,8 @@
 
 #include "structviewitemdelegate.h"
 #include "datatypes/datainformation.h"
-#include <QLineEdit>
+#include <QtGui/QLineEdit>
+#include <QtCore/QScopedPointer>
 #include <KDebug>
 
 StructViewItemDelegate::StructViewItemDelegate(QObject * parent) :
@@ -85,6 +86,6 @@ QSize StructViewItemDelegate::sizeHint(const QStyleOptionViewItem & option,
             << "data == NULL";
         return QSize();
     }
-    QWidget* ret = data->createEditWidget(NULL);
+    QScopedPointer<QWidget> ret(data->createEditWidget(NULL));
     return ret->minimumSizeHint();
 }

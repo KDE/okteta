@@ -28,27 +28,7 @@ void DynamicLengthArrayDataInformation::resizeChildren()
     //kDebug() << "old childcount: " << childCount();
     int l = qMax(0, calculateLength());
     unsigned int len = (unsigned) (l);
-    //kDebug() << "len: " << len;
-    if (len > childCount())
-    {
-        emit childCountChange(childCount(), len);
-        for (uint i = childCount(); i < len; ++i)
-        {
-            DataInformation* arrayElem = mChildType->clone();
-            QObject::connect(arrayElem, SIGNAL(dataChanged()), this,
-                    SIGNAL(dataChanged()));
-            appendChild(arrayElem);
-        }
-    }
-    else if (len < childCount()) //TODO maybe keep some cached
-    {
-        emit childCountChange(childCount(), len);
-        for (int i = len; i != mChildren.length();)
-        {
-            delete mChildren.takeAt(i);
-        }
-    }
-    //kDebug() << "new childcount: " << childCount();
+    setArrayLength(len);
 }
 
 qint64 DynamicLengthArrayDataInformation::readData(
@@ -72,16 +52,15 @@ qint64 DynamicLengthArrayDataInformation::readData(
 DynamicLengthArrayDataInformation::DynamicLengthArrayDataInformation(QString name,
         const QString& lengthStr, const DataInformation& children, int index,
         DataInformation* parent) :
-    AbstractArrayDataInformation(name, index, parent), mLengthString(lengthStr),
-            mChildType(children.clone())
+    AbstractArrayDataInformation(name, children, 0, index, parent), mLengthString(
+            lengthStr)
 {
     resizeChildren();
 }
 
 DynamicLengthArrayDataInformation::DynamicLengthArrayDataInformation(
         const DynamicLengthArrayDataInformation& d) :
-    AbstractArrayDataInformation(d), mLengthString(d.mLengthString), mChildType(
-            d.mChildType->clone())
+    AbstractArrayDataInformation(d), mLengthString(d.mLengthString)
 {
 }
 
@@ -110,7 +89,7 @@ int DynamicLengthArrayDataInformation::calculateLength()
                 dynamic_cast<const PrimitiveDataInformation*> (data);
         if (prim)
         {
-            if (!prim->isValid())
+            if (!prim->wasAbleToRead())
             {
                 kDebug()
                     << "primitive type is not valid";
@@ -118,7 +97,7 @@ int DynamicLengthArrayDataInformation::calculateLength()
             }
             else
             {
-                return prim->value().longValue;
+                return prim->value().ulongValue;
             }
         }
     }

@@ -26,9 +26,12 @@
 #include <QtGui/QWidget>
 #include "structviewitemdelegate.h"
 #include <QEvent>
+#include "config-structtool.h"
+
 class KComboBox;
 class QTreeView;
 class KPushButton;
+class KTextEdit;
 
 namespace Kasten
 {
@@ -54,17 +57,22 @@ protected:
 
     QTreeView* mStructTreeView;
     KComboBox* mByteOrderSelection;
+    KPushButton* mValidateButton;
     KPushButton* mSettingsButton;
     StructViewItemDelegate* mDelegate;
 
     QWidget* mStructTreeViewFocusChild;
+#ifdef OKTETA_DEBUG_SCRIPT
+    KTextEdit* mScriptErrors;
+#endif
 
 protected Q_SLOTS:
     void openSettingsDlg(int page = 0);
     void
-            onCurrentRowChanged(const QModelIndex& current,
-                    const QModelIndex& previous);
+    onCurrentRowChanged(const QModelIndex& current, const QModelIndex& previous);
     void onCursorIndexChange();
+
+    void logScriptError(QString msg, QString err);
 };
 
 inline StructTool* StructView::tool() const

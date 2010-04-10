@@ -31,11 +31,16 @@
 //Okteta
 #include <size.h>
 #include <address.h>
-//structview
+
 #include "structviewpreferences.h"
+#include "additionaldata.h"
+
 //KDE
 #include <KLocale>
 #include <KGlobal>
+
+//Qt
+#include <QtScript/QScriptValue>
 
 #define DATAINFORMATION_CLONE(type) virtual inline DataInformation* clone() const {\
         return new type##DataInformation(*this); \
@@ -56,8 +61,12 @@ class DataInformation: public QObject
 {
 Q_OBJECT
 public:
-    //    Q_PROPERTY(bool valid READ isValid() STORED false)
-    virtual bool isValid() const = 0;
+    Q_PROPERTY(bool hasBeenValidated READ hasBeenValidated() WRITE setHasBeenValidated)
+    Q_PROPERTY(bool validationSuccessful READ validationSuccessful() WRITE setValidationSuccessful)
+    Q_PROPERTY(bool wasAbleToRead READ wasAbleToRead())
+    Q_PROPERTY(AdditionalData* additionalData READ additionalData())
+
+    virtual bool wasAbleToRead() const = 0;
 protected:
     DataInformation(const DataInformation&);
 public:
@@ -137,6 +146,16 @@ public:
     // this method cannot be const since the final return value is a this-pointer
     virtual TopLevelDataInformation* topLevelDataInformation();
 
+    void setAdditionalData(AdditionalData* data);
+    AdditionalData* additionalData() const;Q_INVOKABLE
+    void setValidationError(QString errorMessage);Q_INVOKABLE
+    void validated(bool success = true);
+
+    bool validationSuccessful() const;
+    void setValidationSuccessful(bool validationSuccessful);
+    bool hasBeenValidated() const;
+    void setHasBeenValidated(bool hasBeen);
+
 protected:
     /**
      *  the offset of child number @p index compared to the beginning of the structure
@@ -150,6 +169,9 @@ Q_SIGNALS:
     void childCountChange(int oldCount, int newCount);
 protected:
     int mIndex;
+    AdditionalData* mAdditionalData;
+    bool mValidationSuccessful :1;
+    bool mHasBeenValidated :1;
 };
 
 //inline functions
@@ -192,4 +214,26 @@ inline bool DataInformation::isDynamicArray() const
     return false;
 }
 
+inline AdditionalData* DataInformation::additionalData() const
+{
+    return mAdditionalData;
+}
+
+inline bool DataInformation::validationSuccessful() const
+{
+    return mValidationSuccessful;
+}
+inline void DataInformation::setValidationSuccessful(bool successful)
+{
+    mValidationSuccessful = successful;
+}
+
+inline bool DataInformation::hasBeenValidated() const
+{
+    return mHasBeenValidated;
+}
+inline void DataInformation::setHasBeenValidated(bool hasBeen)
+{
+    mHasBeenValidated = hasBeen;
+}
 #endif /* DATAINFORMATION_H_ */

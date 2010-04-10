@@ -25,7 +25,7 @@
 
 QString FloatDataInformation::valueString() const
 {
-    if (!mIsValid)
+    if (!mWasAbleToRead)
         return i18nc("invalid value (out of range)", "<invalid>");
     QString number;
     if (Kasten::StructViewPreferences::localeAwareFloatFormatting())

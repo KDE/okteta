@@ -24,17 +24,18 @@
 
 #include "datainformation.h"
 #include "../allprimitivetypes.h"
+#include <QtScript/QScriptValue>
 
 class PrimitiveDataInformation: public DataInformation
 {
 Q_OBJECT
-public:
-Q_PROPERTY(bool valid READ isValid())
+Q_PROPERTY(QScriptValue value READ scriptValue())
 
+public:
 protected:
     AllPrimitiveTypes mValue; //TODO abstract into subclasses -> more flexibility
     PrimitiveDataType mType; //TODO unnecessary?
-    bool mIsValid :1;
+    bool mWasAbleToRead :1;
     /** get the appropriate base for QString::number from StructDisplaySettings */
     explicit PrimitiveDataInformation(const PrimitiveDataInformation& d);
 public:
@@ -55,9 +56,9 @@ public:
     }
     virtual int size() const = 0;
     virtual QString typeName() const = 0;
-    virtual inline bool isValid() const
+    virtual inline bool wasAbleToRead() const
     {
-        return mIsValid;
+        return mWasAbleToRead;
     }
     virtual int displayBase() const = 0;
     QVariant primitiveValue() const;
@@ -79,6 +80,7 @@ public:
             qVariantToAllPrimitiveTypes(const QVariant& value) const = 0;
     QVariant data(int column, int role) const;
     static PrimitiveDataType typeStringToType(QString& typeStr);
+    virtual QScriptValue scriptValue();
 protected:
     virtual quint64 offset(unsigned int index) const;
 };

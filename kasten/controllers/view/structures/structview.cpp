@@ -33,11 +33,18 @@
 #include "settings/structviewdisplaysettingswidget.h"
 #include "settings/structuresmanagerview.h"
 #include "settings/structureaddremovewidget.h"
+
+#include "script/scriptutils.h"
+
 // KDE
 #include <KComboBox>
 #include <KLocale>
 #include <KConfigDialog>
 #include <KPushButton>
+
+#ifdef OKTETA_DEBUG_SCRIPT
+#include <KTextEdit>
+#endif
 // Qt
 #include <QtGui/QLabel>
 #include <QtGui/QLayout>
@@ -96,6 +103,15 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     settingsLayout->addStretch();
     baseLayout->addLayout(settingsLayout);
 
+    KIcon validateIcon = KIcon("document-sign");
+    mValidateButton = new KPushButton(validateIcon, i18n("Validate"), this);
+    const QString validationToolTip = i18nc("@info:tooltip",
+            "Validate all structures.");
+    mValidateButton->setToolTip(validationToolTip);
+    connect(mValidateButton, SIGNAL(clicked()), mTool,
+            SLOT(validateAllStructures()));
+    settingsLayout->addWidget(mValidateButton);
+
     KIcon settings = KIcon("configure");
     mSettingsButton = new KPushButton(settings, i18n("Settings"), this);
     const QString settingsTooltip = i18nc("@info:tooltip", "Open settings.");
@@ -106,6 +122,14 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
             SIGNAL(currentRowChanged( const QModelIndex&, const QModelIndex& )),
             SLOT(onCurrentRowChanged( const QModelIndex&, const QModelIndex& )));
     connect(mTool, SIGNAL(cursorIndexChanged()), SLOT(onCursorIndexChange()));
+
+#ifdef OKTETA_DEBUG_SCRIPT
+    connect(ScriptUtils::object(), SIGNAL(scriptError(QString, QString)), this,
+            SLOT(logScriptError(QString, QString)));
+
+    mScriptErrors = new KTextEdit(this);
+    baseLayout->addWidget(mScriptErrors);
+#endif
 }
 
 void StructView::onCursorIndexChange()
@@ -219,4 +243,15 @@ void StructView::onCurrentRowChanged(const QModelIndex& current,
 StructView::~StructView()
 {
 }
+
+void StructView::logScriptError(QString msg, QString err)
+{
+#ifdef OKTETA_DEBUG_SCRIPT
+#warning "Script debugging is enabled"
+    //FIXME add the preferences
+    kWarning() << "Script error occurred:" << msg << "  " << err;
+    mScriptErrors->append(QTime::currentTime().toString() + ":" + msg + " " + err);
+#endif
+}
+
 }

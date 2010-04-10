@@ -35,11 +35,11 @@
 #include "../datatypes/unsignedbitfielddatainformation.h"
 #include "../datatypes/signedbitfielddatainformation.h"
 #include "../datatypes/primitivedatainformation.h"
+#include "../datatypes/additionaldata.h"
 #include "scriptutils.h"
 
-ScriptValueConverter::ScriptValueConverter(QScriptValue& value,
-        QScriptEngine& engine, QString name) :
-    mValue(value), mEngine(engine), mName(name)
+ScriptValueConverter::ScriptValueConverter(QScriptValue& value, QString name) :
+    mValue(value), mName(name)
 {
 }
 
@@ -52,7 +52,7 @@ DataInformation* ScriptValueConverter::convert()
     QScriptValue evaluatedVal;
     if (mValue.isFunction())
     {
-        QScriptValue thisObj = mEngine.newObject();
+        QScriptValue thisObj = mValue.engine()->newObject();
         QScriptValueList args;
         evaluatedVal = mValue.call(thisObj, args);
     }
@@ -61,10 +61,10 @@ DataInformation* ScriptValueConverter::convert()
         evaluatedVal = mValue;
     else
     {
-        kWarning() << "value is neither function nor object";
+        ScriptUtils::object()->logScriptError("value is neither function nor object");
         return NULL;
     }
-    //    dumpQScriptValue(evaluatedVal,__FILE__,__LINE__);
+    //    ScriptUtils::object()->dumpQScriptValue(evaluatedVal,__FILE__,__LINE__);
     return toDataInformation(evaluatedVal, mName); //could be NULL
 }
 DataInformation* ScriptValueConverter::toDataInformation(QScriptValue& value,
@@ -99,7 +99,18 @@ DataInformation* ScriptValueConverter::toDataInformation(QScriptValue& value,
 
     else
         returnVal = toPrimitive(value, name);
-
+    if (returnVal)
+    {
+        //successfully parsed -> add the validate and update functions to the additional data
+        QScriptValue updateFunc = value.property("updateFunc");
+        QScriptValue validationFunc = value.property("validationFunc");
+        AdditionalData* aData = new AdditionalData();
+        if (updateFunc.isFunction())
+            aData->setUpdateFunction(new QScriptValue(updateFunc));
+        if (validationFunc.isFunction())
+            aData->setValidationFunction(new QScriptValue(validationFunc));
+        returnVal->setAdditionalData(aData);
+    }
     return returnVal;
 }
 
@@ -110,7 +121,7 @@ AbstractArrayDataInformation * ScriptValueConverter::toArray(QScriptValue& value
     int length = value.property("length").toInt32();
     if (length <= 0)
     {
-        kWarning() << "array length <= 0 -> return NULL";
+        ScriptUtils::object()->logScriptError("array length <= 0 -> return NULL");
         return NULL;
     }
     QScriptValue childType = value.property("childType");
@@ -118,7 +129,8 @@ AbstractArrayDataInformation * ScriptValueConverter::toArray(QScriptValue& value
             childType.property("type").toString()));
     if (!arrayType)
     {
-        kWarning() << "could not parse array type -> return NULL";
+        ScriptUtils::object()->logScriptError(
+                "could not parse array type -> return NULL");
         return NULL;
     }
 
@@ -133,7 +145,8 @@ AbstractBitfieldDataInformation* ScriptValueConverter::toBitfield(
     int width = value.property("width").toInt32();
     if (width <= 0)
     {
-        kWarning() << "bitfield has a length of <= 0 -> return NULL";
+        ScriptUtils::object()->logScriptError(
+                "bitfield has a length of <= 0 -> return NULL");
         return NULL;
     }
     QString bitfieldType = value.property("bitfieldType").toString();
@@ -146,7 +159,8 @@ AbstractBitfieldDataInformation* ScriptValueConverter::toBitfield(
     else if (bitfieldType.toLower() == QLatin1String("bool"))
         return new BoolBitfieldDataInformation(name, Type_Bitfield, width);
 
-    kWarning() << "invalid bitfield type specified:" << bitfieldType;
+    ScriptUtils::object()->logScriptError("invalid bitfield type specified:"
+            + bitfieldType);
     return NULL;
 }
 
@@ -158,7 +172,8 @@ PrimitiveDataInformation * ScriptValueConverter::toPrimitive(QScriptValue& value
             typeString);
     if (primitiveType == Type_NotPrimitive)
     {
-        kWarning() << "unrecognised type: '" << typeString << "' -> return NULL";
+        ScriptUtils::object()->logScriptError("unrecognised type: '" + typeString
+                + "' -> return NULL");
         return NULL;
     }
     return PrimitiveDataInformation::newInstance(name, primitiveType);
@@ -183,8 +198,8 @@ StructureDataInformation* ScriptValueConverter::toStruct(QScriptValue& value,
     }
     if (fields.length() == 0)
     {
-        kWarning() << "no children were found in element '" << name
-                << "' -> return NULL";
+        ScriptUtils::object()->logScriptError("no children were found in element '"
+                + name + "' -> return NULL");
         return NULL;
     }
 
@@ -216,8 +231,8 @@ UnionDataInformation* ScriptValueConverter::toUnion(QScriptValue& value,
     }
     if (fields.length() == 0)
     {
-        kWarning() << "no children were found in element '" << name
-                << "' -> return NULL";
+        ScriptUtils::object()->logScriptError("no children were found in element '"
+                + name + "' -> return NULL");
         return NULL;
     }
 

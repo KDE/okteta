@@ -1,9 +1,18 @@
 
+function validate1() {
+    //always invalid
+    this.setValidationError("something's wrong here")
+	return false;
+}
+function updateMember4() {
+    //do nothing for now
+    print("doing nothing")
+}
 /** initializer function: returns an object representing the new structure */
 function init() {
 	var obj = struct({
 		/* equivalent to writing member1 : new uint32() */
-		member1 : uint32(),
+		member1 : uint32(validate1,function() { print(1);}),
 		/* Following in C++:
 		 * union member2 {
 		 *	float aFloat;
@@ -23,7 +32,7 @@ function init() {
 		member4 : array(struct({
 				    a : char(),
 				    b: char()
-			    }), 10),
+			    }), 10, null, updateMember4),
 		/** bool member5 : 1; */
 		member5 : bitfield("bool",1),
 	});

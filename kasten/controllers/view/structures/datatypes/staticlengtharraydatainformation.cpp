@@ -24,22 +24,13 @@
 StaticLengthArrayDataInformation::StaticLengthArrayDataInformation(QString name,
         unsigned int length, const DataInformation& children, int index,
         DataInformation* parent) :
-    AbstractArrayDataInformation(name, index, parent), mArrayLength(length)
+    AbstractArrayDataInformation(name, children, length, index, parent)
 {
-    //  kDebug() << "name: " << name;
-    //  kDebug() << "childname: " << children.name();
-    for (unsigned int i = 0; i < length; i++)
-    {
-        DataInformation* arrayElem = children.clone();
-        QObject::connect(arrayElem, SIGNAL(dataChanged()), this,
-                SIGNAL(dataChanged()));
-        appendChild(arrayElem);
-    }
 }
 
 StaticLengthArrayDataInformation::StaticLengthArrayDataInformation(
         const StaticLengthArrayDataInformation& d) :
-    AbstractArrayDataInformation(d), mArrayLength(d.mArrayLength)
+    AbstractArrayDataInformation(d)
 {
 }
 

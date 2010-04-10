@@ -25,6 +25,7 @@
 
 #include "abstractarraydatainformation.h"
 
+/** deprecated, the scripted version is much more powerful */
 //TODO merge dynamic and static length
 class DynamicLengthArrayDataInformation: public AbstractArrayDataInformation
 {
@@ -51,7 +52,6 @@ private:
     int calculateLength();
     void resizeChildren();
     QString mLengthString;
-    DataInformation* mChildType;
 };
 
 inline bool DynamicLengthArrayDataInformation::isDynamicArray() const

@@ -90,6 +90,7 @@ public Q_SLOTS:
     void updateData();
     void addChildItem(TopLevelDataInformation* child);
     void setSelectedStructuresInView();
+    void validateAllStructures();
 
 protected Q_SLOTS:
     void onCursorPositionChange(Okteta::Address pos);

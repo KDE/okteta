@@ -20,37 +20,32 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SCRIPTHANDLER_H_
-#define SCRIPTHANDLER_H_
+#ifndef ADDITIONALDATA_H_
+#define ADDITIONALDATA_H_
 
-#include <QtCore/QObject>
-#include <QtCore/QString>
-#include <QtCore/QSharedData>
+#include <QtScript/QScriptValue>
 
-#include <QtScript/QScriptEngine>
-#include <QtScriptTools/QScriptEngineDebugger>
-
-#include "config-structtool.h"
-
-class DataInformation;
-
-class ScriptHandler : public QObject, public QSharedData
+/** Additional data which is held as a pointer by the *DataInformation classes
+ *  to reduce memory consumption, since this will not always be needed */
+class AdditionalData
 {
-    Q_OBJECT
 public:
-    ScriptHandler(QString scriptFile, QString name);
-    virtual ~ScriptHandler();
-    DataInformation* initialDataInformationFromScript();
-    void validateData(DataInformation* data);
-    QScriptEngine* engine();
-protected:
-    bool init();
-    QScriptEngine mEngine;
-    QString mFile;
-    QString mName;
-#ifdef OKTETA_DEBUG_SCRIPT
-    QScriptEngineDebugger* mDebugger;
-#endif
+    AdditionalData(QScriptValue* validate = NULL, QScriptValue* update = NULL);
+    AdditionalData(const AdditionalData& data);
+    virtual ~AdditionalData();
+private:
+    /** the function called when new data is read, to update the structure */
+    QScriptValue* mUpdateFunction;
+    /** this function is called after all data has been read to validate the structure */
+    QScriptValue* mValidationFunction;
+    QString mValidationError;
+public:
+    QScriptValue* updateFunction() const;
+    void setUpdateFunction(QScriptValue* func);
+    QScriptValue* validationFunction() const;
+    void setValidationFunction(QScriptValue* func);
+    QString validationError() const;
+    void setValidationError(QString error);
 };
 
-#endif /* SCRIPTHANDLER_H_ */
+#endif /* ADDITIONALDATA_H_ */

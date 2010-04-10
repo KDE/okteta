@@ -30,19 +30,24 @@
 
 DataInformation::DataInformation(const QString& name, int index,
         DataInformation* parent) :
-    QObject(parent), mIndex(index)
+    QObject(parent), mIndex(index), mAdditionalData(NULL), mValidationSuccessful(
+            false), mHasBeenValidated(false)
 {
     setObjectName(name);
 }
 
 DataInformation::DataInformation(const DataInformation& d) :
-    QObject(NULL), mIndex(d.mIndex)
+    QObject(NULL), mIndex(d.mIndex), mHasBeenValidated(d.mHasBeenValidated),
+            mValidationSuccessful(d.mValidationSuccessful), mAdditionalData(NULL)
 {
     setObjectName(d.objectName());
+    if (d.mAdditionalData)
+        mAdditionalData = new AdditionalData(*(d.mAdditionalData));
 }
 
 DataInformation::~DataInformation()
 {
+    delete mAdditionalData;
 }
 
 QString DataInformation::valueString() const
@@ -82,8 +87,27 @@ void DataInformation::setIndex(int newIndex)
 
 TopLevelDataInformation* DataInformation::topLevelDataInformation()
 {
-    DataInformation* par = static_cast<DataInformation*>(parent());
+    DataInformation* par = static_cast<DataInformation*> (parent());
     if (par)
         return par->topLevelDataInformation();
     return NULL;
 }
+
+void DataInformation::setAdditionalData(AdditionalData* data)
+{
+    mAdditionalData = data;
+}
+
+Q_INVOKABLE void DataInformation::setValidationError(QString errorMessage)
+{
+    validated(false);
+    if (!mAdditionalData)
+        return;
+    mAdditionalData->setValidationError(errorMessage);
+}
+Q_INVOKABLE void DataInformation::validated(bool success)
+{
+    setValidationSuccessful(success);
+    setHasBeenValidated(true);
+}
+

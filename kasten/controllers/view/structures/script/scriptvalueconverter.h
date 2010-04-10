@@ -38,12 +38,11 @@ class EnumDataInformation;
 class ScriptValueConverter
 {
 public:
-    ScriptValueConverter(QScriptValue& value, QScriptEngine& engine, QString name);
+    ScriptValueConverter(QScriptValue& value, QString name);
     virtual ~ScriptValueConverter();
     DataInformation* convert();
 private:
     QScriptValue& mValue;
-    QScriptEngine& mEngine;
     const QString mName;
 private:
     DataInformation

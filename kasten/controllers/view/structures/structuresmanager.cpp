@@ -68,6 +68,8 @@ void StructuresManager::addStructDef(const KPluginInfo& info)
     QString pluginName = info.pluginName();
     if (!mDefs.contains(pluginName))
         mDefs.insert(pluginName, def);
+    else
+        delete def;
 }
 
 StructureDefinitionFile* StructuresManager::definition(QString& pluginName)

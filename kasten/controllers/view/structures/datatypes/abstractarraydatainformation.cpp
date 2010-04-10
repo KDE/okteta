@@ -40,18 +40,67 @@ QString AbstractArrayDataInformation::typeName() const
             data->name(), childCount(), data->typeName());
 }
 
-AbstractArrayDataInformation::AbstractArrayDataInformation(QString name, int index,
+AbstractArrayDataInformation::AbstractArrayDataInformation(QString name,
+        const DataInformation& childType, uint length, int index,
         DataInformation* parent) :
-    DataInformationWithChildren(name, index, parent)
+DataInformationWithChildren(name, index, parent), mChildType(0)
 {
+    mChildType = childType.clone();
+    for (unsigned int i = 0; i < length; i++)
+    {
+        DataInformation* arrayElem = childType.clone();
+        QObject::connect(arrayElem, SIGNAL(dataChanged()), this,
+                SIGNAL(dataChanged()));
+        appendChild(arrayElem);
+    }
 }
 
 AbstractArrayDataInformation::AbstractArrayDataInformation(
         const AbstractArrayDataInformation& d) :
-    DataInformationWithChildren(d)
+    DataInformationWithChildren(d), mChildType(0)
 {
+    if (d.mChildType)
+        mChildType = d.mChildType->clone();
+}
+
+bool AbstractArrayDataInformation::isDynamicArray() const
+{
+    //if this array has an update function it must be dynamic
+    return mAdditionalData->updateFunction() != NULL;
+}
+
+void AbstractArrayDataInformation::setArrayLength(uint newLength)
+{
+    //kDebug() << "old childcount: " << childCount();
+
+    //kDebug() << "newLength: " << newLength;
+    if (newLength > childCount())
+    {
+        emit childCountChange(childCount(), newLength);
+        for (uint i = childCount(); i < newLength; ++i)
+        {
+            DataInformation* arrayElem = mChildType->clone();
+            QObject::connect(arrayElem, SIGNAL(dataChanged()), this,
+                    SIGNAL(dataChanged()));
+            appendChild(arrayElem);
+        }
+    }
+    else if (newLength < childCount()) //TODO maybe keep some cached
+    {
+        emit childCountChange(childCount(), newLength);
+        for (int i = newLength; i != mChildren.length();)
+        {
+            delete mChildren.takeAt(i);
+        }
+    }
+}
+
+void AbstractArrayDataInformation::setArrayType(QScriptValue type)
+{
+    //FIXME stub
 }
 
 AbstractArrayDataInformation::~AbstractArrayDataInformation()
 {
+    delete mChildType;
 }

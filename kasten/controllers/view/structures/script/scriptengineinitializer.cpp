@@ -21,6 +21,7 @@
  */
 
 #include "scriptengineinitializer.h"
+#include "scriptutils.h"
 #include <QtCore/QStringList>
 #include <QtScript/QScriptEngine>
 #include <QtScript/QScriptContext>
@@ -42,6 +43,13 @@ QScriptValue ScriptEngineInitializer::primitiveConstructor(QScriptContext* ctx,
         object = eng->newObject();
     object.setProperty(typePropertyString, type);
     object.setProperty(toStringPropertyString, eng->newFunction(primitiveToString));
+
+    //add validation and update function
+    if (ctx->argumentCount() > 0)
+        addValidationFunction(ctx, eng, object, 0);
+    if (ctx->argumentCount() > 1)
+        addUpdateFunction(ctx, eng, object, 1);
+
     return object;
 }
 
@@ -131,8 +139,8 @@ QScriptValue ScriptEngineInitializer::scriptNewBitfield(QScriptContext* ctx,
     //arg1 is type
     //arg2 is width
     //check arguments first
-    if (ctx->argumentCount() != 2)
-        return ctx->throwError("bitfield initializer takes exactly two arguments.");
+    if (ctx->argumentCount() < 2)
+        return ctx->throwError("bitfield initializer takes at least two arguments.");
     if (!ctx->argument(1).isNumber())
         return ctx->throwError(QScriptContext::TypeError,
                 "bitfield(): second argument is not a number");
@@ -154,6 +162,13 @@ QScriptValue ScriptEngineInitializer::scriptNewBitfield(QScriptContext* ctx,
     object.setProperty("bitfieldType", typeArg.isEmpty() ? "signed" : typeArg);
     object.setProperty("width", ctx->argument(1));
     object.setProperty(toStringPropertyString, eng->newFunction(bitfieldToString));
+
+    //add validation and update function
+    if (ctx->argumentCount() > 2)
+        addValidationFunction(ctx, eng, object, 2);
+    if (ctx->argumentCount() > 3)
+        addUpdateFunction(ctx, eng, object, 3);
+
     return object;
 }
 
@@ -162,8 +177,8 @@ QScriptValue ScriptEngineInitializer::scriptNewStruct(QScriptContext* ctx,
         QScriptEngine* eng)
 {
     //takes one argument, the children
-    if (ctx->argumentCount() != 1)
-        return ctx->throwError("struct initializer takes exactly one arguments.");
+    if (ctx->argumentCount() < 1)
+        return ctx->throwError("struct initializer takes at least one argument.");
     QScriptValue children = ctx->argument(0);
     if (!children.isObject())
         return ctx->throwError(QScriptContext::TypeError,
@@ -179,6 +194,13 @@ QScriptValue ScriptEngineInitializer::scriptNewStruct(QScriptContext* ctx,
     object.setProperty(typePropertyString, "struct");
     object.setProperty("children", children);
     object.setProperty(toStringPropertyString, eng->newFunction(structToString));
+
+    //add validation and update function
+    if (ctx->argumentCount() > 1)
+        addValidationFunction(ctx, eng, object, 1);
+    if (ctx->argumentCount() > 2)
+        addUpdateFunction(ctx, eng, object, 2);
+
     return object;
 }
 
@@ -186,8 +208,8 @@ QScriptValue ScriptEngineInitializer::scriptNewUnion(QScriptContext* ctx,
         QScriptEngine* eng)
 {
     //takes one argument, the children
-    if (ctx->argumentCount() != 1)
-        return ctx->throwError("union initializer takes exactly one arguments.");
+    if (ctx->argumentCount() < 1)
+        return ctx->throwError("union initializer takes at least one argument.");
     QScriptValue children = ctx->argument(0);
     if (!children.isObject())
         return ctx->throwError(QScriptContext::TypeError,
@@ -203,6 +225,13 @@ QScriptValue ScriptEngineInitializer::scriptNewUnion(QScriptContext* ctx,
     object.setProperty(typePropertyString, "union");
     object.setProperty("children", children);
     object.setProperty(toStringPropertyString, eng->newFunction(unionToString));
+
+    //add validation and update function
+    if (ctx->argumentCount() > 1)
+        addValidationFunction(ctx, eng, object, 1);
+    if (ctx->argumentCount() > 2)
+        addUpdateFunction(ctx, eng, object, 2);
+
     return object;
 }
 
@@ -210,8 +239,8 @@ QScriptValue ScriptEngineInitializer::scriptNewArray(QScriptContext* ctx,
         QScriptEngine* eng)
 {
     //arg 1 is child type, arg2 is length
-    if (ctx->argumentCount() != 2)
-        return ctx->throwError("array initializer takes exactly two arguments.");
+    if (ctx->argumentCount() < 2)
+        return ctx->throwError("array initializer takes at least two arguments.");
     QScriptValue childType = ctx->argument(0);
     if (!childType.isObject())
         return ctx->throwError(QScriptContext::TypeError,
@@ -232,6 +261,13 @@ QScriptValue ScriptEngineInitializer::scriptNewArray(QScriptContext* ctx,
     object.setProperty("childType", childType);
     object.setProperty("length", length);
     object.setProperty(toStringPropertyString, eng->newFunction(arrayToString));
+
+    //add validation and update function
+    if (ctx->argumentCount() > 2)
+        addValidationFunction(ctx, eng, object, 2);
+    if (ctx->argumentCount() > 3)
+        addUpdateFunction(ctx, eng, object, 3);
+
     return object;
 }
 
@@ -240,7 +276,8 @@ QScriptValue ScriptEngineInitializer::primitiveToString(QScriptContext* ctx,
         QScriptEngine* eng)
 {
     Q_UNUSED(eng)
-    QString type = ctx->thisObject().property(typePropertyString).toString().toLower();
+    QString type =
+            ctx->thisObject().property(typePropertyString).toString().toLower();
     if (ctx->argumentCount() == 1)
     {
         //name passed as parameter -> C/C++ string
@@ -355,7 +392,7 @@ QScriptValue ScriptEngineInitializer::unionOrStructToCPPString(QScriptContext* c
 
     completeString += QString(qMax(0, indentationLevel - 1), '\t') + "};";
     if (eng->hasUncaughtException())
-        kWarning() << eng->uncaughtExceptionBacktrace();
+        ScriptUtils::object()->logScriptError(eng->uncaughtExceptionBacktrace());
     return completeString;
 }
 
@@ -379,8 +416,48 @@ QScriptValue ScriptEngineInitializer::structToString(QScriptContext* ctx,
         return "struct";
 }
 
+void addFunctionAsMemberProperty(QScriptContext* ctx, QScriptEngine* eng,
+        QScriptValue& val, int argIndex, QString propertyName)
+{
+    Q_UNUSED(eng)
+    if (ctx->argumentCount() <= argIndex)
+    {
+        val = ctx->throwError("not enough arguments passed: needs at least"
+                + QString::number(argIndex));
+        return;
+    }
+    QScriptValue func = ctx->argument(argIndex);
+    if (func.isNull())
+    {
+        //do not add it to the script value
+        return;
+    }
+    if (!func.isFunction())
+    {
+        val = ctx->throwError(QScriptContext::TypeError, QString(
+                "argument %1 is not a function").arg(argIndex));
+        return;
+    }
+    // argument is valid -> set the property
+    val.setProperty(propertyName, func);
+}
+
+void ScriptEngineInitializer::addValidationFunction(QScriptContext* ctx,
+        QScriptEngine* eng, QScriptValue& val, int argIndex)
+{
+    addFunctionAsMemberProperty(ctx, eng, val, argIndex, "validationFunc");
+}
+
+void ScriptEngineInitializer::addUpdateFunction(QScriptContext* ctx,
+        QScriptEngine* eng, QScriptValue& val, int argIndex)
+{
+    addFunctionAsMemberProperty(ctx, eng, val, argIndex, "updateFunc");
+}
+
 void ScriptEngineInitializer::addFuctionsToScriptEngine(QScriptEngine& engine)
 {
+
+    //TODO use the  prototype to set the toString function
     engine.globalObject().setProperty("uint8", engine.newFunction(scriptNewUInt8));
     engine.globalObject().setProperty("uint16", engine.newFunction(scriptNewUInt16));
     engine.globalObject().setProperty("uint32", engine.newFunction(scriptNewUInt32));
