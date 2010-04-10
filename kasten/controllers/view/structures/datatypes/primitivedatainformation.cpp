@@ -135,8 +135,10 @@ QVariant PrimitiveDataInformation::data(int column, int role) const
     //    }
     else if (role == Qt::DecorationRole && column == 0)
     {
-        if (mHasBeenValidated && !mValidationSuccessful)
-            return KIcon("dialog-warning"); //XXX is this the best way to display a validation error
+        //XXX better icons?
+        if (mHasBeenValidated)
+            return mValidationSuccessful ? KIcon("task-complete") : KIcon(
+                    "dialog-warning");
     }
     return QVariant();
 }

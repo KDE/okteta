@@ -4,6 +4,10 @@ function validate1() {
     this.validationError = "something's wrong here"
 	return false;
 }
+function validate2() {
+    //always valid
+    this.valid = true;
+}
 function updateMember4() {
     //do nothing for now
     print("doing nothing")
@@ -12,7 +16,7 @@ function updateMember4() {
 function init() {
 	var obj = struct({
 		/* equivalent to writing member1 : new uint32() */
-		member1 : uint32(validate1,function() { print(1);}),
+		member1 : uint32(validate1),
 		/* Following in C++:
 		 * union member2 {
 		 *	float aFloat;
@@ -27,7 +31,7 @@ function init() {
 			unsignedInt : uint32(),
 			bitField : bitfield("unsigned",10),
 			}),
-		member3 : double(),
+		member3 : double(validate2),
 		/* C++: struct {char a; charb;} member4[10] */
 		member4 : array(struct({
 				    a : char(),
