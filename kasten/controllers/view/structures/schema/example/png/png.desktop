@@ -7,6 +7,7 @@ ServiceTypes=KPluginInfo
 Name=PNG file header
 Name[ca]=Capçalera de fitxer PNG
 Name[ca@valencia]=Capçalera de fitxer PNG
+Name[cs]=Hlavička souboru PNG
 Name[da]=PNG-fil-header
 Name[de]=PNG-Dateikopf
 Name[en_GB]=PNG file header
