@@ -128,7 +128,7 @@ void ScriptHandler::validateData(DataInformation* data)
         QScriptValueList args;
         args << mainStruct;
         QScriptValue result = additionalData->validationFunction()->call(thisObject,
-                mainStruct);
+                args);
         if (result.isError())
         {
             ScriptUtils::object()->logScriptError("error occurred while "

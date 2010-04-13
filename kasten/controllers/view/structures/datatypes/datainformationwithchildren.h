@@ -23,10 +23,13 @@
 #define DATAINFORMATIONWITHCHILDREN_H_
 
 #include "datainformation.h"
+#include <QtScript/QScriptValue>
 
 class DataInformationWithChildren: public DataInformation
 {
 Q_OBJECT
+    Q_PROPERTY(int childCount READ childCount())
+    Q_PROPERTY(QScriptValue children READ childrenAsScriptValue())
 public:
     virtual bool wasAbleToRead() const;
 protected:
@@ -34,9 +37,6 @@ protected:
     explicit DataInformationWithChildren(const DataInformationWithChildren& d);
     void appendChild(DataInformation* child); //not part of public API (no adding to array)
 public:
-    Q_PROPERTY(int childCount READ childCount())
-    //just for debugging
-    Q_PROPERTY(QObjectList children READ childrenAsQObjects())
 
     QList<DataInformation*> children() const;
     explicit DataInformationWithChildren(QString& name, int index = -1,
@@ -66,26 +66,19 @@ public:
     /** get the needed data from the widget */
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
-    QObjectList childrenAsQObjects() const;
-
     virtual void resetValidationState();
     //for QtScript
     //TODO uncomment
-    //Q_INVOKABLE void setChildren(QScriptValue children);
+//    Q_INVOKABLE void setChildren(QScriptValue children);
+    /** returns an object that holds the children, accessable as obj["childName"] */
+    virtual QScriptValue childrenAsScriptValue() const;
+    /** alternate way to access children: obj.child("childName") */
+    Q_INVOKABLE QScriptValue child(QString name) const;
 };
 
 inline QList<DataInformation*> DataInformationWithChildren::children() const
 {
     return mChildren;
-}
-inline QObjectList DataInformationWithChildren::childrenAsQObjects() const
-{
-    QObjectList list;
-    foreach(DataInformation* data, mChildren)
-        {
-            list.append(data);
-        }
-    return list;
 }
 inline bool DataInformationWithChildren::hasChildren() const
 {

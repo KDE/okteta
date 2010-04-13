@@ -29,15 +29,9 @@
 class PrimitiveDataInformation: public DataInformation
 {
 Q_OBJECT
+
 Q_PROPERTY(QScriptValue value READ scriptValue())
 
-public:
-protected:
-    AllPrimitiveTypes mValue; //TODO abstract into subclasses -> more flexibility
-    PrimitiveDataType mType; //TODO unnecessary?
-    bool mWasAbleToRead :1;
-    /** get the appropriate base for QString::number from StructDisplaySettings */
-    explicit PrimitiveDataInformation(const PrimitiveDataInformation& d);
 public:
     explicit PrimitiveDataInformation(QString name, PrimitiveDataType type,
             int index = -1, DataInformation* parent = NULL);
@@ -83,6 +77,12 @@ public:
     virtual QScriptValue scriptValue();
 protected:
     virtual quint64 offset(unsigned int index) const;
+protected:
+    AllPrimitiveTypes mValue;
+    PrimitiveDataType mType; //TODO unnecessary?
+    bool mWasAbleToRead :1;
+    /** get the appropriate base for QString::number from StructDisplaySettings */
+    explicit PrimitiveDataInformation(const PrimitiveDataInformation& d);
 };
 
 inline quint64 PrimitiveDataInformation::offset(unsigned int index) const

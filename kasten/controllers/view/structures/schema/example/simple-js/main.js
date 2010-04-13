@@ -4,9 +4,11 @@ function validate1() {
     this.validationError = "something's wrong here"
 	return false;
 }
-function validate2() {
+function validate2(mainStruct) {
     //always valid
     this.valid = true;
+    //possible but not nice thing to do
+    mainStruct.child("member2").children["aFloat"].valid = true;
 }
 function updateMember4() {
     //do nothing for now

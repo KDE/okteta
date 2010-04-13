@@ -24,6 +24,7 @@
 #include "topleveldatainformation.h"
 #include <KLineEdit>
 #include <KIcon>
+#include <QtScript/QScriptEngine>
 
 void DataInformationWithChildren::appendChild(DataInformation* child)
 {
@@ -249,3 +250,38 @@ void DataInformationWithChildren::resetValidationState()
             child->resetValidationState();
         }
 }
+
+QScriptValue DataInformationWithChildren::childrenAsScriptValue() const
+{
+    QScriptEngine* engine = topLevelDataInformation()->scriptEngine();
+    QScriptValue childrenScriptVal = engine->newObject();
+    for (uint i = 0; i < childCount(); ++i)
+    {
+        //just append all children as a property
+        DataInformation* data = mChildren.at(i);
+        QScriptValue childObj = engine->newQObject(data, QScriptEngine::QtOwnership,
+                QScriptEngine::ExcludeDeleteLater);
+        childrenScriptVal.setProperty(data->name(), childObj, QScriptValue::ReadOnly
+                | QScriptValue::Undeletable);
+    }
+    return childrenScriptVal;
+}
+
+QScriptValue DataInformationWithChildren::child(QString name) const
+{
+    for (uint i = 0; i < childCount(); ++i)
+    {
+        //just append all children as a property
+        DataInformation* data = mChildren.at(i);
+        if (data->name() == name)
+        {
+            QScriptEngine* engine = topLevelDataInformation()->scriptEngine();
+            QScriptValue childObj = engine->newQObject(data,
+                    QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
+            return childObj;
+        }
+    }
+    //not found -> return invalid value
+    return QScriptValue(QScriptValue::NullValue);
+}
+
