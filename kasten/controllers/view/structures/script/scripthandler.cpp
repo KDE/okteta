@@ -123,7 +123,7 @@ void ScriptHandler::validateData(DataInformation* data)
         QScriptValue thisObject = mEngine.newQObject(data,
                 QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
         QScriptValue mainStruct = mEngine.newQObject(
-                data->topLevelDataInformation()->actualDataInformation(),
+                data->mainStructure(),
                 QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
         QScriptValueList args;
         args << mainStruct;

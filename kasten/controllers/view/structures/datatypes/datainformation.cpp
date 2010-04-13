@@ -30,15 +30,15 @@
 
 DataInformation::DataInformation(const QString& name, int index,
         DataInformation* parent) :
-    QObject(parent), mIndex(index), mAdditionalData(NULL), mValidationSuccessful(
-            false), mHasBeenValidated(false)
+    QObject(parent), mIndex(index), mValidationSuccessful(false), mHasBeenValidated(
+            false), mAdditionalData(NULL)
 {
     setObjectName(name);
 }
 
 DataInformation::DataInformation(const DataInformation& d) :
-    QObject(NULL), mIndex(d.mIndex), mHasBeenValidated(d.mHasBeenValidated),
-            mValidationSuccessful(d.mValidationSuccessful), mAdditionalData(NULL)
+    QObject(NULL), mIndex(d.mIndex), mValidationSuccessful(d.mValidationSuccessful),
+            mHasBeenValidated(d.mHasBeenValidated), mAdditionalData(NULL)
 {
     setObjectName(d.objectName());
     if (d.mAdditionalData)
@@ -72,7 +72,7 @@ QString DataInformation::sizeString() const
 quint64 DataInformation::positionRelativeToParent() const
 {
     //FIXME this needs updating to support bitfield marking
-    DataInformation* par = static_cast<DataInformation*> (parent());
+    DataInformation* par = dynamic_cast<DataInformation*> (parent());
     if (!par)
     {
         return 0;
@@ -85,12 +85,29 @@ void DataInformation::setIndex(int newIndex)
     mIndex = newIndex;
 }
 
-TopLevelDataInformation* DataInformation::topLevelDataInformation()
+TopLevelDataInformation* DataInformation::topLevelDataInformation() const
 {
-    DataInformation* par = static_cast<DataInformation*> (parent());
+    DataInformation* par = dynamic_cast<DataInformation*> (parent());
     if (par)
         return par->topLevelDataInformation();
+    else
+    {
+        TopLevelDataInformation* top =
+                dynamic_cast<TopLevelDataInformation*> (parent());
+        if (top)
+            return top;
+    }
     return NULL;
+}
+
+DataInformation* DataInformation::mainStructure()
+{
+    DataInformation* par = dynamic_cast<DataInformation*> (parent());
+    if (par)
+        return par->mainStructure();
+    else
+        return this;
+
 }
 
 void DataInformation::setAdditionalData(AdditionalData* data)
@@ -132,4 +149,12 @@ bool DataInformation::hasBeenValidated() const
 void DataInformation::setHasBeenValidated(bool hasBeen)
 {
     mHasBeenValidated = hasBeen;
+}
+
+void DataInformation::resetValidationState()
+{
+    mHasBeenValidated = false;
+    mValidationSuccessful = false;
+    if (mAdditionalData)
+        mAdditionalData->setValidationError(QString());
 }

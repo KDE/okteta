@@ -127,7 +127,7 @@ QList<const DataInformation*> DataInformationWithChildren::findChildrenWithName(
     if (parent() && !dynamic_cast<TopLevelDataInformation*> (parent()))
     {
         DataInformationWithChildren* par =
-                static_cast<DataInformationWithChildren*> (parent());
+                dynamic_cast<DataInformationWithChildren*> (parent());
         if (par)
             retList.append(par->findChildrenWithName(name, this));
     }
@@ -238,3 +238,14 @@ quint64 DataInformationWithChildren::offset(unsigned int index) const
     return offset;
 }
 
+void DataInformationWithChildren::resetValidationState()
+{
+    mHasBeenValidated = false;
+    mValidationSuccessful = false;
+    if (mAdditionalData)
+        mAdditionalData->setValidationError(QString());
+    foreach (DataInformation* child, mChildren)
+        {
+            child->resetValidationState();
+        }
+}

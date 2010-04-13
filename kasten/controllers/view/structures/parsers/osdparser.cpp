@@ -133,10 +133,10 @@ QList<const TopLevelDataInformation*> OsdParser::parseStructures()
         kDebug()
             << "element tag: " << elem.tagName();
         QString tag = elem.tagName();
-        QScopedPointer<DataInformation> data(parseNode(elem));
+        DataInformation* data = parseNode(elem);
         if (data)
         {
-            TopLevelDataInformation* topData = new TopLevelDataInformation(*data,
+            TopLevelDataInformation* topData = new TopLevelDataInformation(data,
                     fileInfo);
             structures.append(topData);
         }
@@ -144,6 +144,7 @@ QList<const TopLevelDataInformation*> OsdParser::parseStructures()
         {
             kDebug()
                 << "data == NULL -> could not parse node " << elem.tagName();
+            delete data;
         }
     }
     mFullyParsed = true; //however if this method is called again the result will not be cached

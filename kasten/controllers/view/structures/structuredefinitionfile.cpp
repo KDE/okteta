@@ -68,15 +68,14 @@ StructureDefinitionFile::~StructureDefinitionFile()
 }
 
 StructureDefinitionFile::StructureDefinitionFile(StructureDefinitionFile& f) :
-    mPluginInfo(f.mPluginInfo), mDir(f.mDir), mValid(f.mValid),
-            mStructureNamesParsed(f.mStructureNamesParsed),
-            mStructuresParsedCompletely(f.mStructuresParsedCompletely), mStructureNames(f.mStructureNames)
+    mPluginInfo(f.mPluginInfo), mDir(f.mDir), mStructureNames(f.mStructureNames),
+            mValid(f.mValid), mStructureNamesParsed(f.mStructureNamesParsed),
+            mStructuresParsedCompletely(f.mStructuresParsedCompletely)
 {
     int len = f.mTopLevelStructures.length();
     for (int i = 0; i < len; ++i)
     {
-        mTopLevelStructures.append(
-                static_cast<TopLevelDataInformation*> (f.mTopLevelStructures.at(i)->clone()));
+        mTopLevelStructures.append(f.mTopLevelStructures.at(i)->clone());
     }
 }
 
@@ -100,11 +99,12 @@ QList<TopLevelDataInformation*> StructureDefinitionFile::structures()
     QList<TopLevelDataInformation*> ret;
     foreach(const TopLevelDataInformation* data, mTopLevelStructures)
         {
-            ret.append(static_cast<TopLevelDataInformation*> (data->clone()));
+            ret.append(data->clone());
         }
     return ret;
 }
 
+//TODO QSharedDataPointer instead?
 TopLevelDataInformation* StructureDefinitionFile::structure(QString& name)
 {
     if (!mValid)
@@ -120,7 +120,7 @@ TopLevelDataInformation* StructureDefinitionFile::structure(QString& name)
             {
                 foreach(const TopLevelDataInformation* data, mTopLevelStructures)
                     {
-                        mStructureNames << data->name();
+                        mStructureNames << data->actualDataInformation()->name();
                     }
             }
             mStructureNamesParsed = true;
@@ -132,9 +132,9 @@ TopLevelDataInformation* StructureDefinitionFile::structure(QString& name)
     }
     foreach(const TopLevelDataInformation* data,mTopLevelStructures)
         {
-            if (data->name() == name)
+            if (data->actualDataInformation()->name() == name)
             {
-                return static_cast<TopLevelDataInformation*> (data->clone());
+                return data->clone();
             }
         }
     kWarning() << "could not find structure with name " << name;

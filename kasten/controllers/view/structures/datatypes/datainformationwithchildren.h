@@ -68,6 +68,7 @@ public:
     virtual void setWidgetData(QWidget* w) const;
     QObjectList childrenAsQObjects() const;
 
+    virtual void resetValidationState();
     //for QtScript
     //TODO uncomment
     //Q_INVOKABLE void setChildren(QScriptValue children);

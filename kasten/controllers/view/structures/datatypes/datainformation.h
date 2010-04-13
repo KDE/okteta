@@ -143,8 +143,8 @@ public:
             Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset) = 0;
 
     virtual bool isDynamicArray() const;
-    // this method cannot be const since the final return value is a this-pointer
-    virtual TopLevelDataInformation* topLevelDataInformation();
+    TopLevelDataInformation* topLevelDataInformation() const;
+    DataInformation* mainStructure();
 
     void setAdditionalData(AdditionalData* data);
     AdditionalData* additionalData() const;
@@ -155,6 +155,8 @@ public:
     void setValidationSuccessful(bool validationSuccessful = true);
     bool hasBeenValidated() const;
     void setHasBeenValidated(bool hasBeen);
+
+    virtual void resetValidationState(); //virtual for datainformationwithchildren
 
 protected:
     /**
@@ -169,9 +171,9 @@ Q_SIGNALS:
     void childCountChange(int oldCount, int newCount);
 protected:
     int mIndex;
-    AdditionalData* mAdditionalData;
     bool mValidationSuccessful :1;
     bool mHasBeenValidated :1;
+    AdditionalData* mAdditionalData;
 };
 
 //inline functions

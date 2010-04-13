@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, part of the KDE project.
  *
- *   Copyright 2009 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2009, 2010 Alex Richardson <alex.richardson@gmx.de>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -39,8 +39,8 @@ StructTreeModel::~StructTreeModel()
 }
 void StructTreeModel::onDataInformationChildCountChange(int oldCount, int newCount)
 {
-    Q_UNUSED(oldCount)
-    Q_UNUSED(newCount)
+    kDebug()
+        << "data information childcount changed: " << oldCount << " to " << newCount;
     reset(); // TODO terribly inefficient, but i can't think of a better solution to prevent
     //crash on child count change
 }
@@ -57,12 +57,6 @@ QVariant StructTreeModel::data(const QModelIndex& index, int role) const
         return QVariant();
 
     DataInformation* item = static_cast<DataInformation*> (index.internalPointer());
-    if (!item)
-    {
-        kDebug()
-            << "item is NULL";
-        return QVariant();
-    }
     const int column = index.column();
     if (role == Qt::FontRole)
     {
@@ -87,9 +81,14 @@ bool StructTreeModel::setData(const QModelIndex& index, const QVariant& value,
     if (!index.isValid())
         return false;
 
-    DataInformation* item = static_cast<DataInformation*> (index.internalPointer());
-    if (!item)
+    if (!index.internalPointer())
+    {
+        kDebug()
+            << "item == NULL";
         return false;
+    }
+
+    DataInformation* item = static_cast<DataInformation*> (index.internalPointer());
     bool change = mTool->setData(value, role, item);
     return change;
 }
@@ -117,7 +116,7 @@ QModelIndex StructTreeModel::index(int row, int column, const QModelIndex &paren
     if (!hasIndex(row, column, parent))
         return QModelIndex();
 
-    DataInformation* childItem;
+    DataInformation* childItem = NULL;
 
     if (!parent.isValid())
         childItem = mTool->childAt(row);
@@ -125,17 +124,11 @@ QModelIndex StructTreeModel::index(int row, int column, const QModelIndex &paren
     {
         DataInformation* parentItem =
                 static_cast<DataInformation*> (parent.internalPointer());
-        if (!parentItem)
-        {
-            kDebug()
-                << "parent item is NULL";
-            return QModelIndex();
-        }
         childItem = parentItem->childAt(row);
     }
     if (childItem)
     {
-        if (dynamic_cast<DataInformationWithChildren*>(childItem))
+        if (dynamic_cast<DataInformationWithChildren*> (childItem))
         {
             //assume that all items with children can change their childCount
             connect(childItem, SIGNAL(childCountChange(int,int)), this,
@@ -154,28 +147,32 @@ QModelIndex StructTreeModel::parent(const QModelIndex& index) const
 
     DataInformation *childItem =
             static_cast<DataInformation*> (index.internalPointer());
-    if (!childItem)
-    {
-        kDebug()
-            << "childitem == NULL";
-        return QModelIndex();
-    }
+
     if (!childItem->parent())
         return QModelIndex();
 
-    DataInformation* parent =
-            dynamic_cast<TopLevelDataInformation*> (childItem->parent()) ? NULL
-                    : static_cast<DataInformation*> (childItem->parent());
+    QObject* parentObj = static_cast<QObject*> (childItem->parent());
 
-    if (!parent)
+    if (!parentObj)
         return QModelIndex();
-
-    if (dynamic_cast<DataInformationWithChildren*>(childItem))
+    if (dynamic_cast<TopLevelDataInformation*> (parentObj))
     {
-        //assume that all items with children can change their childCount
-        connect(parent, SIGNAL(childCountChange(int,int)), this,
-                SLOT(onDataInformationChildCountChange(int,int)));
+        //parent is a TopLevelDataInformation -> not valid
+        return QModelIndex();
     }
+
+    // not null, not topleveldatainformation-> must be dataninformation
+    DataInformation* parent = static_cast<DataInformation*>(parentObj);
+
+//    if (dynamic_cast<DataInformationWithChildren*> (parent)) //should be always true
+//    {
+//        //assume that all items with children can change their childCount
+//        connect(parent, SIGNAL(childCountChange(int,int)), this,
+//                SLOT(onDataInformationChildCountChange(int,int)));
+//    }
+//    else
+//        kFatal() << "logic error";
+
     return createIndex(parent->row(), 0, parent);
 }
 

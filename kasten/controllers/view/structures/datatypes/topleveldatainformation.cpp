@@ -27,9 +27,9 @@
 //QtScript
 #include <QtScript/QScriptEngine>
 
-TopLevelDataInformation::TopLevelDataInformation(const DataInformation& data,
+TopLevelDataInformation::TopLevelDataInformation(DataInformation* data,
         QFileInfo structureFile, bool dynamic, QString name) :
-    DataInformation(name, 0), mData(NULL), mScriptHandler(NULL), mStructureFile(
+    QObject(), mData(data), mScriptHandler(NULL), mStructureFile(
             structureFile), mWasAbleToParse(true)
 {
 
@@ -42,20 +42,19 @@ TopLevelDataInformation::TopLevelDataInformation(const DataInformation& data,
         {
             //just a dummy, this object should be deleted anyway
             mData = PrimitiveDataInformation::newInstance(
-                    "failed_to_load__this_is_a_dummy", Type_Int32, 0, this);
+                    "failed_to_load__this_is_a_dummy", Type_Int32, 0);
             mWasAbleToParse = false;
         }
     }
-    else
-    {
-        mData = data.clone();
-    }
+    if (!mData)
+        kError() << "mData == NULL!";
+
     setObjectName(mData->name());
     mData->setParent(this);
 }
 TopLevelDataInformation::TopLevelDataInformation(const TopLevelDataInformation& d) :
-    DataInformation(d), mData(d.mData->clone()), mScriptHandler(d.mScriptHandler), mStructureFile(
-            d.mStructureFile), mWasAbleToParse(d.mWasAbleToParse)
+    QObject(), mData(d.mData->clone()), mScriptHandler(d.mScriptHandler),
+            mStructureFile(d.mStructureFile), mWasAbleToParse(d.mWasAbleToParse)
 {
     setObjectName(mData->name());
     mData->setParent(this);
@@ -65,40 +64,16 @@ TopLevelDataInformation::~TopLevelDataInformation()
 {
 }
 
-bool TopLevelDataInformation::setData(const QVariant& value, DataInformation* inf,
-        Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
-        Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
-{
-    if (this != inf)
-        return false;
-    //correct object -> use mValue so PrimitiveDataInformation::setData() returns true
-    bool ret = mData->setData(value, mData, out, byteOrder, address, bitsRemaining,
-            bitOffset);
-    return ret;
-}
-
-qint64 TopLevelDataInformation::readData(Okteta::AbstractByteArrayModel* input,
-        ByteOrder byteOrder, Okteta::Address address, quint64 bitsRemaining,
-        quint8* bitOffset)
-{
-    return mData->readData(input, byteOrder, address, bitsRemaining, bitOffset);
-}
-
-TopLevelDataInformation* TopLevelDataInformation::topLevelDataInformation()
-{
-    return this;
-}
-
 void TopLevelDataInformation::validate()
 {
     kDebug()
-        << "validation of structure " << name() << "requested";
+        << "validation of structure " << mData->name() << "requested";
     if (mScriptHandler)
         mScriptHandler->validateData(mData);
     else
     {
         kDebug()
-            << "no handler available -> cannot validate structure " << name();
+            << "no handler available -> cannot validate structure " << mData->name();
     }
 
 }
@@ -109,3 +84,9 @@ QScriptEngine* TopLevelDataInformation::scriptEngine() const
         return NULL;
     return mScriptHandler->engine();
 }
+
+void TopLevelDataInformation::resetValidationState()
+{
+    mData->resetValidationState();
+}
+

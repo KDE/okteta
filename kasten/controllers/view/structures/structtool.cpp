@@ -59,7 +59,6 @@ StructTool::StructTool() :
 
 StructTool::~StructTool()
 {
-    qDeleteAll(mData);
     //	delete mCharCodec;
     delete mManager;
 }
@@ -154,8 +153,8 @@ bool StructTool::setData(const QVariant& value, int role, DataInformation* item)
     int remaining = qMax(mByteArrayModel->size() - mCursorIndex, 0);
     for (int i = 0; i < mData.size(); ++i)
     {
-        if (mData[i]->setData(value, item, mByteArrayModel, mByteOrder,
-                mCursorIndex, remaining, bitOffset.data()))
+        if (mData[i]->actualDataInformation()->setData(value, item, mByteArrayModel,
+                mByteOrder, mCursorIndex, remaining, bitOffset.data()))
         {
             found = true;
             break;
@@ -188,8 +187,9 @@ void StructTool::updateData()
         for (int i = 0; i < mData.size(); i++)
         {
             TopLevelDataInformation* dat = mData.at(i);
-            dat->readData(mByteArrayModel, mByteOrder, mCursorIndex, remainingBits,
-                    bitOffset.data());
+            dat->resetValidationState(); //reading new data -> validation state is old
+            dat->actualDataInformation()->readData(mByteArrayModel, mByteOrder,
+                    mCursorIndex, remainingBits, bitOffset.data());
             *bitOffset = 0; //start at beginning again
         }
     }
@@ -233,10 +233,11 @@ void StructTool::addChildItem(TopLevelDataInformation* child)
 {
     if (child)
     {
-        child->setIndex(mData.size());
-        child->setParent(NULL);
+        child->actualDataInformation()->setIndex(mData.size());
+        child->setParent(this);
         mData.append(child);
-        connect(child, SIGNAL(dataChanged()), this, SLOT(onChildItemDataChanged()));
+        connect(child->actualDataInformation(), SIGNAL(dataChanged()), this,
+                SLOT(onChildItemDataChanged()));
 
     }
 }
@@ -296,6 +297,8 @@ void StructTool::mark(const QModelIndex& idx)
     const Okteta::AddressRange markingRange = Okteta::AddressRange::fromWidth(
             startOffset, length);
     mByteArrayView->setMarking(markingRange, true);
+//    kDebug()
+//        << "marking range " << markingRange.start() << " to  " << markingRange.end();
 }
 
 void StructTool::unmark(/*const QModelIndex& idx*/)

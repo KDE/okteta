@@ -24,7 +24,6 @@
 
 #include "../structuredefinitionfile.h"
 #include "../datatypes/topleveldatainformation.h"
-#include "../datatypes/int32datainformation.h"
 
 ScriptFileParser::ScriptFileParser(const Kasten::StructureDefinitionFile* const def) :
     AbstractStructureParser(def), mParsedCompletely(false)
@@ -43,11 +42,9 @@ QStringList ScriptFileParser::parseStructureNames()
 QList<const TopLevelDataInformation*> ScriptFileParser::parseStructures()
 {
     QList<const TopLevelDataInformation*> ret;
-    Int32DataInformation* dummyDataInf = new Int32DataInformation("dummy", Type_Int32);
-    TopLevelDataInformation* topData = new TopLevelDataInformation(*dummyDataInf, QFileInfo(
+    TopLevelDataInformation* topData = new TopLevelDataInformation(NULL, QFileInfo(
             mDef->dir().absoluteFilePath("main.js")), true,
             mDef->pluginInfo().pluginName());
-    delete dummyDataInf;
     if (topData->wasAbleToParse())
         ret << topData;
     else
