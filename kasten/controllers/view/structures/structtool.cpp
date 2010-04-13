@@ -225,7 +225,7 @@ DataInformation* StructTool::childAt(int idx) const
     {
         return NULL;
     }
-    //dont expose the topLevelDataInformation, since this may cause crashes
+    //don't expose the topLevelDataInformation, since this may cause crashes
     return mData.at(idx)->actualDataInformation();
 }
 

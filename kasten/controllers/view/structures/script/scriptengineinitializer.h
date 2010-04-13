@@ -40,6 +40,9 @@ class QScriptContext;
  *      member4 : bitfield("unsigned", 12),
  * })
  * @endcode
+ * @note
+ * All constructor functions may take additional 2 parameters,
+ * the first being a validation function, the second an update function.
  */
 class ScriptEngineInitializer
 {

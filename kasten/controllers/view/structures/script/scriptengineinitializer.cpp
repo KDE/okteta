@@ -148,7 +148,7 @@ QScriptValue ScriptEngineInitializer::scriptNewBitfield(QScriptContext* ctx,
     if (typeArg != "bool" && typeArg != "unsigned" && typeArg != "signed"
             && !typeArg.isEmpty())
         return ctx->throwError("type must be 'bool', 'unsigned' 'signed'"
-            " or '', actual value was '" + typeArg + "'");
+            " or '', actual value was '" + typeArg + '\'');
 
     //all arguments are valid
     QScriptValue object;
