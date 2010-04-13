@@ -43,38 +43,38 @@
 #include <QtScript/QScriptEngine>
 #include <KIcon>
 
-PrimitiveDataType PrimitiveDataInformation::typeStringToType(QString& typeStr)
+PrimitiveDataType PrimitiveDataInformation::typeStringToType(QString& string)
 {
-    typeStr = typeStr.trimmed();
-    if (typeStr == "Bool8")
+    QString typeStr = string.trimmed().toLower();
+    if (typeStr == "bool8")
         return Type_Bool8;
-    if (typeStr == "Bool16")
+    if (typeStr == "bool16")
         return Type_Bool16;
-    if (typeStr == "Bool32")
+    if (typeStr == "bool32")
         return Type_Bool32;
-    if (typeStr == "Bool64")
+    if (typeStr == "bool64")
         return Type_Bool64;
-    if (typeStr == "Int8")
+    if (typeStr == "int8")
         return Type_Int8;
-    if (typeStr == "UInt8")
+    if (typeStr == "uint8")
         return Type_UInt8;
-    if (typeStr == "Int16")
+    if (typeStr == "int16")
         return Type_Int16;
-    if (typeStr == "UInt16")
+    if (typeStr == "uint16")
         return Type_UInt16;
-    if (typeStr == "Int32")
+    if (typeStr == "int32")
         return Type_Int32;
-    if (typeStr == "UInt32")
+    if (typeStr == "uint32")
         return Type_UInt32;
-    if (typeStr == "Int64")
+    if (typeStr == "int64")
         return Type_Int64;
-    if (typeStr == "UInt64")
+    if (typeStr == "uint64")
         return Type_UInt64;
-    if (typeStr == "Char")
+    if (typeStr == "char")
         return Type_Char;
-    if (typeStr == "Float")
+    if (typeStr == "float")
         return Type_Float;
-    if (typeStr == "Double")
+    if (typeStr == "double")
         return Type_Double;
 
     kWarning() << "PrimitiveDataInformation::typeStringToType(): could not find"
