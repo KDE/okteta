@@ -49,6 +49,9 @@ class ScriptEngineInitializer
 public:
     static void addFuctionsToScriptEngine(QScriptEngine& engine);
 private:
+    /** create a new enum:
+     *  first parameter is the type, second parameter is a list of name - value pairs */
+    static QScriptValue scriptNewEnum(QScriptContext* ctx, QScriptEngine* eng);
     /** this script constructors/initializer takes no parameters */
     static QScriptValue scriptNewUInt8(QScriptContext* ctx, QScriptEngine* eng);
     /** this script constructors/initializer takes no parameters */
@@ -138,7 +141,8 @@ private:
      *  Otherwise just returns the primitive type, i.e. @code "int64" @endcode
      */
 
-private: //the toString functions
+private:
+    //the toString functions
     static QScriptValue primitiveToString(QScriptContext* ctx, QScriptEngine* eng);
     /** A toString() implementation for bitfields
      *
@@ -183,12 +187,16 @@ private: //the toString functions
      *   Otherwise just returns the type, which is @c "struct"
      */
     static QScriptValue structToString(QScriptContext* ctx, QScriptEngine* eng);
-
-    static QScriptValue unionOrStructToCPPString(QScriptContext* ctx, QScriptEngine* eng);
+    static QScriptValue enumToString(QScriptContext* ctx, QScriptEngine* eng);
+    static QScriptValue unionOrStructToCPPString(QScriptContext* ctx,
+            QScriptEngine* eng);
 private:
-    static QScriptValue primitiveConstructor(QScriptContext* ctx, QScriptEngine* eng, const QLatin1String type);
-    static void addValidationFunction(QScriptContext* ctx, QScriptEngine* eng, QScriptValue& val, int argIndex);
-    static void addUpdateFunction(QScriptContext* ctx, QScriptEngine* eng, QScriptValue& val, int argIndex);
+    static QScriptValue primitiveConstructor(QScriptContext* ctx,
+            QScriptEngine* eng, const QLatin1String type);
+    static void addValidationFunction(QScriptContext* ctx, QScriptEngine* eng,
+            QScriptValue& val, int argIndex);
+    static void addUpdateFunction(QScriptContext* ctx, QScriptEngine* eng,
+            QScriptValue& val, int argIndex);
     static const QString typePropertyString;
     static const QString toStringPropertyString;
 };

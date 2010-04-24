@@ -21,6 +21,7 @@
  */
 
 #include "topleveldatainformation.h"
+#include "datainformationwithchildren.h"
 #include "../script/scripthandler.h"
 #include "primitivedatainformation.h"
 #include "../allprimitivetypes.h"
@@ -29,8 +30,8 @@
 
 TopLevelDataInformation::TopLevelDataInformation(DataInformation* data,
         QFileInfo structureFile, bool dynamic, QString name) :
-    QObject(), mData(data), mScriptHandler(NULL), mStructureFile(
-            structureFile), mWasAbleToParse(true)
+    QObject(), mData(data), mScriptHandler(NULL), mStructureFile(structureFile),
+            mWasAbleToParse(true)
 {
 
     if (dynamic)
@@ -69,7 +70,13 @@ void TopLevelDataInformation::validate()
     kDebug()
         << "validation of structure " << mData->name() << "requested";
     if (mScriptHandler)
+    {
         mScriptHandler->validateData(mData);
+        DataInformationWithChildren* data =
+                dynamic_cast<DataInformationWithChildren*> (mData);
+        if (data)
+            data->calculateValidationState(); //set validation state based on children
+    }
     else
     {
         kDebug()

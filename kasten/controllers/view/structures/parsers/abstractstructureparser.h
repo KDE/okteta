@@ -43,7 +43,6 @@ public:
     virtual QStringList parseStructureNames() = 0;
     virtual QList<const TopLevelDataInformation*> parseStructures() = 0;
     virtual bool isFullyParsed() = 0;
-    virtual QList<EnumDefinition::Ptr> parseEnums() = 0;
 
 protected:
     const Kasten::StructureDefinitionFile* const mDef;

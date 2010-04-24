@@ -61,9 +61,3 @@ bool ScriptFileParser::isFullyParsed()
 {
     return mParsedCompletely;
 }
-
-QList<EnumDefinition::Ptr> ScriptFileParser::parseEnums()
-{
-    //FIXME stub, no better implementation useful now
-    return QList<EnumDefinition::Ptr> ();
-}

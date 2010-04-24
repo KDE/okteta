@@ -28,6 +28,7 @@ class EnumDataInformation: public PrimitiveDataInformation
 {
 Q_OBJECT
 public:
+    /** this object takes ownership of @p type */
     EnumDataInformation(QString name, PrimitiveDataInformation* type,
             EnumDefinition::Ptr enumDef, int index = -1, DataInformation* parent =
                     NULL);
@@ -35,13 +36,13 @@ public:
     DATAINFORMATION_CLONE(Enum)
     virtual ~EnumDataInformation();
 
-    QString valueString() const;
-    QString getTypeString() const;
-    QString typeName() const;
-    QVariant primitiveValue() const;
+    virtual QString valueString() const;
+    virtual QString getTypeString() const;
+    virtual QString typeName() const;
+    virtual QVariant primitiveValue() const;
 
-    int size() const;
-    int displayBase() const;
+    virtual int size() const;
+    virtual int displayBase() const;
 
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input,
             ByteOrder byteOrder, Okteta::Address address, quint64 remaining,
@@ -54,12 +55,11 @@ public:
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
     virtual AllPrimitiveTypes
-            qVariantToAllPrimitiveTypes(const QVariant& value) const;
+    qVariantToAllPrimitiveTypes(const QVariant& value) const;
 protected:
     EnumDefinition::Ptr mEnum;
     PrimitiveDataInformation* mValue; //to allow different enum sizes
 };
-
 
 inline int EnumDataInformation::size() const
 {

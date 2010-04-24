@@ -37,7 +37,7 @@ namespace Kasten
 {
 StructureDefinitionFile::StructureDefinitionFile(KPluginInfo info) :
     mPluginInfo(info), mValid(true), mStructureNamesParsed(false),
-            mStructuresParsedCompletely(false), mEnumsParsed(false)
+            mStructuresParsedCompletely(false)
 {
     QFileInfo tmp(info.entryPath());
     mDir = tmp.dir();
@@ -86,14 +86,11 @@ QList<TopLevelDataInformation*> StructureDefinitionFile::structures()
         mTopLevelStructures = mParser->parseStructures();
         if (!mStructureNamesParsed) //also parse the names, they should be there already anyway, so there is no overhead
             mStructureNames = mParser->parseStructureNames();
-        if (!mEnumsParsed)
-            mEnums = mParser->parseEnums();
         //is parsed completely now -> delete parser
         delete mParser;
         mParser = 0;
         mStructureNamesParsed = true;
         mStructuresParsedCompletely = true;
-        mEnumsParsed = true;
     }
     //return copy
     QList<TopLevelDataInformation*> ret;
@@ -114,8 +111,6 @@ TopLevelDataInformation* StructureDefinitionFile::structure(QString& name)
         if (mParser)
         {
             mTopLevelStructures = mParser->parseStructures();
-            if (!mEnumsParsed)
-                mEnums = mParser->parseEnums();
             if (!mStructureNamesParsed)
             {
                 foreach(const TopLevelDataInformation* data, mTopLevelStructures)
@@ -124,7 +119,6 @@ TopLevelDataInformation* StructureDefinitionFile::structure(QString& name)
                     }
             }
             mStructureNamesParsed = true;
-            mEnumsParsed = true;
             mStructuresParsedCompletely = true;
             delete mParser;
             mParser = NULL;
@@ -141,32 +135,6 @@ TopLevelDataInformation* StructureDefinitionFile::structure(QString& name)
     return NULL; // not found
 }
 
-const QList<EnumDefinition::Ptr> StructureDefinitionFile::enums()
-{
-    if (!mEnumsParsed)
-    {
-        if (mParser)
-        {
-            mEnums = mParser->parseEnums();
-            if (mParser->isFullyParsed()) //was it necessary to completely parse to get enums?
-
-            {
-                //no point retaining in memory, has been parsed, assign all values now
-                if (!mStructureNamesParsed)
-                    mStructureNames = mParser->parseStructureNames();
-                if (!mStructuresParsedCompletely)
-                    mTopLevelStructures = mParser->parseStructures();
-                mStructureNamesParsed = true;
-                mStructuresParsedCompletely = true;
-                delete mParser;
-                mParser = NULL; //so it can be safely deleted again later
-            }
-        }
-        mEnumsParsed = true;
-    }
-    return mEnums;
-}
-
 const QStringList StructureDefinitionFile::structureNames()
 {
     if (!mStructureNamesParsed)
@@ -179,11 +147,8 @@ const QStringList StructureDefinitionFile::structureNames()
 
             {
                 //no point retaining in memory, has been parsed, assign all values now
-                if (!mEnumsParsed)
-                    mEnums = mParser->parseEnums();
                 if (!mStructuresParsedCompletely)
                     mTopLevelStructures = mParser->parseStructures();
-                mEnumsParsed = true;
                 mStructuresParsedCompletely = true;
                 delete mParser;
                 mParser = NULL; //so it can be safely deleted again later
@@ -207,11 +172,8 @@ uint StructureDefinitionFile::structuresCount()
 
             {
                 //no point retaining in memory, has been parsed, assign all values now
-                if (!mEnumsParsed)
-                    mEnums = mParser->parseEnums();
                 if (!mStructuresParsedCompletely)
                     mTopLevelStructures = mParser->parseStructures();
-                mEnumsParsed = true;
                 mStructuresParsedCompletely = true;
                 delete mParser;
                 mParser = NULL; //so it can be safely deleted again later

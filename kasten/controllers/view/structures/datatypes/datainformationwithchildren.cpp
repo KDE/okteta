@@ -254,7 +254,7 @@ void DataInformationWithChildren::resetValidationState()
 QScriptValue DataInformationWithChildren::childrenAsScriptValue() const
 {
     QScriptEngine* engine = topLevelDataInformation()->scriptEngine();
-    QScriptValue childrenScriptVal = engine->newObject();
+    QScriptValue childrenScriptVal = engine->newArray(childCount());
     for (uint i = 0; i < childCount(); ++i)
     {
         //just append all children as a property
@@ -262,6 +262,9 @@ QScriptValue DataInformationWithChildren::childrenAsScriptValue() const
         QScriptValue childObj = engine->newQObject(data, QScriptEngine::QtOwnership,
                 QScriptEngine::ExcludeDeleteLater);
         childrenScriptVal.setProperty(data->name(), childObj, QScriptValue::ReadOnly
+                | QScriptValue::Undeletable);
+        //allow array access
+        childrenScriptVal.setProperty(i, childObj, QScriptValue::ReadOnly
                 | QScriptValue::Undeletable);
     }
     return childrenScriptVal;
@@ -285,3 +288,33 @@ QScriptValue DataInformationWithChildren::child(QString name) const
     return QScriptValue(QScriptValue::NullValue);
 }
 
+void DataInformationWithChildren::calculateValidationState()
+{
+    if (hasChildren())
+    {
+        bool hasValidatedChildren = false;
+        bool allChildrenValid = true;
+        for (uint i = 0; i < childCount(); ++i)
+        {
+            DataInformation* child = childAt(i);
+            DataInformationWithChildren* childWithChildren =
+                    dynamic_cast<DataInformationWithChildren*> (child);
+            if (childWithChildren)
+                childWithChildren->calculateValidationState();
+            //first make sure the child item validation state has been set
+            if (child->hasBeenValidated())
+            {
+                hasValidatedChildren = true;
+                if (!child->validationSuccessful())
+                {
+                    allChildrenValid = false;
+                    break; //one is invalid -> whole structure is invalid
+                }
+            }
+        }
+        if (hasValidatedChildren)
+        {
+            setValidationSuccessful(allChildrenValid);
+        }
+    }
+}

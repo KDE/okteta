@@ -46,19 +46,20 @@ public:
     virtual QStringList parseStructureNames();
     virtual QList<const TopLevelDataInformation*> parseStructures();
     virtual bool isFullyParsed();
-    virtual QList<EnumDefinition::Ptr> parseEnums();
 
 private:
-    AbstractArrayDataInformation* arrayFromXML(const QDomElement& node) const;
-    PrimitiveDataInformation* primitiveFromXML(const QDomElement& node) const;
-    AbstractBitfieldDataInformation
-    * bitfieldFromXML(const QDomElement& xmlElem) const;
-    UnionDataInformation* unionFromXML(const QDomElement& node) const;
-    StructureDataInformation* structFromXML(const QDomElement& node) const;
-    EnumDataInformation* enumFromXML(const QDomElement& node) const;
+    void parseEnums();
 
-    DataInformation* parseNode(const QDomNode& node) const;
-    EnumDefinition::Ptr findEnum(const QString& defName) const;
+    AbstractArrayDataInformation* arrayFromXML(const QDomElement& node);
+    PrimitiveDataInformation* primitiveFromXML(const QDomElement& node);
+    AbstractBitfieldDataInformation
+    * bitfieldFromXML(const QDomElement& xmlElem);
+    UnionDataInformation* unionFromXML(const QDomElement& node);
+    StructureDataInformation* structFromXML(const QDomElement& node);
+    EnumDataInformation* enumFromXML(const QDomElement& node);
+
+    DataInformation* parseNode(const QDomNode& node);
+    EnumDefinition::Ptr findEnum(const QString& defName);
 
     //    void parseIncludeNodes(QDomNodeList& elems);
     void parseEnumDefNodes(QDomNodeList& elems);

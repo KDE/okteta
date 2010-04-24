@@ -148,34 +148,6 @@ void ScriptHandler::validateData(DataInformation* data)
             data->setValidationSuccessful(result.toBool());
         }
     }
-    else
-    {
-        //if has children, this structure is valid if none of the children is invalid
-        if (data->hasChildren())
-        {
-            bool hasValidatedChildren = false;
-            bool allChildrenValid = true;
-            for (uint i = 0; i < data->childCount(); ++i)
-            {
-                DataInformation* child = data->childAt(i);
-                if (child->hasBeenValidated())
-                {
-                    hasValidatedChildren = true;
-                    if (!child->validationSuccessful())
-                    {
-                        allChildrenValid = false;
-                        break; //one is invalid -> whole structure is invalid
-                    }
-                }
-            }
-            if (hasValidatedChildren)
-            {
-                data->setHasBeenValidated(true);
-                data->setValidationSuccessful(allChildrenValid);
-            }
-        }
-    }
-
 }
 
 QScriptEngine* ScriptHandler::engine()

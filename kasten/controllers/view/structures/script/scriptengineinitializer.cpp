@@ -22,6 +22,7 @@
 
 #include "scriptengineinitializer.h"
 #include "scriptutils.h"
+#include "../datatypes/primitivedatainformation.h"
 #include <QtCore/QStringList>
 #include <QtScript/QScriptEngine>
 #include <QtScript/QScriptContext>
@@ -271,7 +272,62 @@ QScriptValue ScriptEngineInitializer::scriptNewArray(QScriptContext* ctx,
     return object;
 }
 
+QScriptValue ScriptEngineInitializer::scriptNewEnum(QScriptContext* ctx,
+        QScriptEngine* eng)
+{
+    if (ctx->argumentCount() < 3)
+        return ctx->throwError("enum initializer takes at least three arguments.");
+    QScriptValue name = ctx->argument(0);
+    if (!name.isString())
+        return ctx->throwError(QScriptContext::TypeError,
+                "enum(): enum name (argument 1) is not a string");
+
+    QScriptValue enumType = ctx->argument(1);
+    if (enumType.isString())
+        /* do nothing */;
+    else if (enumType.isObject())
+        enumType = enumType.property(typePropertyString);
+    else
+        return ctx->throwError(QScriptContext::TypeError,
+                "enum(): enum type (argument 2) is not a valid string or object");
+
+    QString enumTypeString = enumType.toString();
+    PrimitiveDataType pdt = PrimitiveDataInformation::typeStringToType(
+            enumTypeString);
+    if (pdt == Type_NotPrimitive)
+        return ctx->throwError("enum(): enum type string'" + enumTypeString
+                + "' is not a valid type");
+
+    QScriptValue enumValues = ctx->argument(2);
+    if (!enumValues.isObject())
+        return ctx->throwError(QScriptContext::TypeError,
+                "enum(): enum definition argument is not an object");
+
+    //all arguments are valid
+    QScriptValue object;
+    if (ctx->isCalledAsConstructor())
+        object = ctx->thisObject();
+    else
+        object = eng->newObject();
+
+    object.setProperty(typePropertyString, "enum");
+    object.setProperty("enumType", enumType);
+    object.setProperty("enumValues", enumValues);
+    object.setProperty("enumName", name);
+    object.setProperty(toStringPropertyString, eng->newFunction(enumToString));
+
+    //add validation and update function
+    if (ctx->argumentCount() > 3)
+        addValidationFunction(ctx, eng, object, 3);
+    if (ctx->argumentCount() > 4)
+        addUpdateFunction(ctx, eng, object, 4);
+
+    return object;
+}
+
 //toString functions
+
+
 QScriptValue ScriptEngineInitializer::primitiveToString(QScriptContext* ctx,
         QScriptEngine* eng)
 {
@@ -416,6 +472,30 @@ QScriptValue ScriptEngineInitializer::structToString(QScriptContext* ctx,
         return "struct";
 }
 
+QScriptValue ScriptEngineInitializer::enumToString(QScriptContext* ctx,
+        QScriptEngine* eng)
+{
+    Q_UNUSED(eng)
+    QString enumType = ctx->thisObject().property("enumType").toString();
+    QString enumName = ctx->thisObject().property("enumName").toString();
+    if (ctx->argumentCount() > 0)
+    {
+        //as c++
+        QString name = ctx->argument(0).toString();
+        return enumName + " /* " + enumType + " */ " + name + ';';
+    }
+    //otherwise we also list all values
+    QString result = "enum " + enumName + ":\n";
+    QScriptValue children = ctx->thisObject().property("enumValues");
+    QScriptValueIterator iter(children);
+    while (iter.hasNext())
+    {
+        iter.next();
+        result.append(iter.name() + " = " + iter.value().toString() + "\n");
+    }
+    return result;
+}
+
 void addFunctionAsMemberProperty(QScriptContext* ctx, QScriptEngine* eng,
         QScriptValue& val, int argIndex, QString propertyName)
 {
@@ -484,4 +564,6 @@ void ScriptEngineInitializer::addFuctionsToScriptEngine(QScriptEngine& engine)
     engine.globalObject().setProperty("array", engine.newFunction(scriptNewArray));
     engine.globalObject().setProperty("struct", engine.newFunction(scriptNewStruct));
     engine.globalObject().setProperty("union", engine.newFunction(scriptNewUnion));
+    //XXX: if I use enunm QtScript gives me syntax errors, I thought enum was not a keyword in JS
+    engine.globalObject().setProperty("enumeration", engine.newFunction(scriptNewEnum));
 }

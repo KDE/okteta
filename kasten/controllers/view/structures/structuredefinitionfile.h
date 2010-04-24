@@ -37,7 +37,6 @@ class AbstractStructureParser;
 
 namespace Kasten
 {
-//FIXME remove enums(), should not be needed
 /**
  *  This class takes care of all the XML parsing and stores the result.
  */
@@ -61,7 +60,6 @@ public:
     const QStringList structureNames();
     uint structuresCount();
     TopLevelDataInformation* structure(QString& name);
-    const QList<EnumDefinition::Ptr> enums();
 
     const KPluginInfo& pluginInfo() const;
     const QDir dir() const;
@@ -71,13 +69,11 @@ public:
     bool isParsed() const;
     bool isParsedCompletely() const;
     bool isValid() const;
-    bool areEnumsParsed() const;
 private:
     KPluginInfo mPluginInfo;
     /** the directory the plugin is saved in */
     QDir mDir;
     QList<const TopLevelDataInformation*> mTopLevelStructures;
-    QList<EnumDefinition::Ptr> mEnums;
     QStringList mStructureNames;
 
     AbstractStructureParser* mParser;
@@ -87,7 +83,6 @@ private:
     bool mStructureNamesParsed :1;
     /** when true complete parsing finished, i.e. mTopLevelStructures has been filled */
     bool mStructuresParsedCompletely :1;
-    bool mEnumsParsed :1;
 };
 
 inline const KPluginInfo& StructureDefinitionFile::pluginInfo() const
@@ -113,11 +108,6 @@ inline bool StructureDefinitionFile::isParsed() const
 inline bool StructureDefinitionFile::isParsedCompletely() const
 {
     return mStructuresParsedCompletely;
-}
-
-inline bool StructureDefinitionFile::areEnumsParsed() const
-{
-    return mEnumsParsed;
 }
 
 } //namespace Kasten

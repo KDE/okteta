@@ -31,6 +31,7 @@
 #include "../datatypes/uniondatainformation.h"
 #include "../datatypes/structuredatainformation.h"
 #include "../datatypes/enumdatainformation.h"
+#include "../datatypes/enumdefinition.h"
 #include "../datatypes/boolbitfielddatainformation.h"
 #include "../datatypes/unsignedbitfielddatainformation.h"
 #include "../datatypes/signedbitfielddatainformation.h"
@@ -56,14 +57,14 @@ DataInformation* ScriptValueConverter::convert()
         QScriptValueList args;
         evaluatedVal = mValue.call(thisObj, args);
     }
-
-    else if (mValue.isObject())
+    else if (mValue.isObject()) //this must be called second since any function is also an object
         evaluatedVal = mValue;
     else
     {
         ScriptUtils::object()->logScriptError("value is neither function nor object");
         return NULL;
     }
+        //FIXME evaluate all -> make this return QLIst<DataInformation*>
     //    ScriptUtils::object()->dumpQScriptValue(evaluatedVal,__FILE__,__LINE__);
     return toDataInformation(evaluatedVal, mName); //could be NULL
 }
@@ -91,14 +92,13 @@ DataInformation* ScriptValueConverter::toDataInformation(QScriptValue& value,
     else if (type == QLatin1String("bitfield"))
         returnVal = toBitfield(value, name);
 
-    //    else if (type == QLatin1String("enum"))
-    //        returnVal = toEnum(value, valueName);
-    //TODO enums, they aren't implemented yet
+    else if (type == QLatin1String("enum"))
+        returnVal = toEnum(value, name);
 
     //now it can only be a primitive type or something invalid
-
     else
         returnVal = toPrimitive(value, name);
+
     if (returnVal)
     {
         //successfully parsed -> add the validate and update functions to the additional data
@@ -245,5 +245,35 @@ UnionDataInformation* ScriptValueConverter::toUnion(QScriptValue& value,
     return unionInf;
 }
 
-//    EnumDataInformation* ScriptValueConverter::toEnum(QScriptValue& value, QString& name) const{}
+EnumDataInformation* ScriptValueConverter::toEnum(QScriptValue& value, QString& name) const
+{
+    QMap<AllPrimitiveTypes, QString> enumValues;
+    QScriptValueIterator it(value.property("enumValues"));
+    while (it.hasNext())
+    {
+        it.next();
+        QScriptValue val = it.value();
+        if (val.isNumber())
+        {
+            enumValues.insert(val.toUInt32(), it.name());
+        }
+    }
+    QString typeString = value.property("enumType").toString();
+    PrimitiveDataType primitiveType = PrimitiveDataInformation::typeStringToType(
+            typeString);
+    if (primitiveType == Type_NotPrimitive)
+    {
+        ScriptUtils::object()->logScriptError("unrecognised enum type: '"
+                + typeString + "' -> return NULL");
+        return NULL;
+    }
+    QString enumName = value.property("enumName").toString();
+    EnumDefinition::Ptr def(new EnumDefinition(enumValues, enumName, primitiveType));
+    PrimitiveDataInformation* primData = PrimitiveDataInformation::newInstance(name,
+            primitiveType);
+    if (primData)
+        return new EnumDataInformation(name, primData, def);
+    else
+        return NULL;
+}
 

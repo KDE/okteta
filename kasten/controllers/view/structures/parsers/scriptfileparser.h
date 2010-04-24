@@ -34,7 +34,6 @@ public:
     virtual QStringList parseStructureNames();
     virtual QList<const TopLevelDataInformation*> parseStructures();
     virtual bool isFullyParsed();
-    virtual QList<EnumDefinition::Ptr> parseEnums();
 private:
     bool mParsedCompletely :1;
 };

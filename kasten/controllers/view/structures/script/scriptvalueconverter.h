@@ -56,7 +56,7 @@ private:
     StructureDataInformation* toStruct(QScriptValue& value, QString& name) const;
     UnionDataInformation* toUnion(QScriptValue& value, QString& name) const;
 
-    //    EnumDataInformation* toEnum(QScriptValue& value, QString name) const;
+    EnumDataInformation* toEnum(QScriptValue& value, QString& name) const;
 };
 
 #endif /* SCRIPTVALUECONVERTER_H_ */
