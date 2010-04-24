@@ -1,0 +1,61 @@
+[Desktop Entry]
+Encoding=UTF-8
+Icon=application-x-executable
+Type=Service
+ServiceTypes=KPluginInfo
+
+#An implementation of the elf file header written in javascript (based on Harald Fernegels elf.osd)
+
+Name=ELF structure
+Name[ca]=Estructura ELF
+Name[ca@valencia]=Estructura ELF
+Name[da]=ELF-struktur
+Name[de]=ELF-Struktur
+Name[en_GB]=ELF structure
+Name[es]=Estructura ELF
+Name[et]=ELF struktuur
+Name[eu]=ELF egitura
+Name[fr]=Structure ELF
+Name[gl]=Estrutura ELF
+Name[hr]=ELF struktura
+Name[hu]=ELF struktúra
+Name[it]=Struttura ELF
+Name[nb]=ELF-struktur
+Name[nds]=ELF-Struktuur
+Name[nl]=ELF-structuur
+Name[pt]=Estrutura ELF
+Name[pt_BR]=Estrutura ELF
+Name[sk]=ELF štruktúra
+Name[sr]=ЕЛФ структура
+Name[sr@ijekavian]=ЕЛФ структура
+Name[sr@ijekavianlatin]=ELF struktura
+Name[sr@latin]=ELF struktura
+Name[sv]=ELF-struktur
+Name[uk]=Структура ELF
+Name[x-test]=xxELF structurexx
+Name[zh_TW]=ELF 結構
+Comment=Structure for Executable and Linkable Format (ELF)
+Comment[de]=Struktur für das „Executable and Linkable Format“ (ELF)
+Comment[en_GB]=Structure for Executable and Linkable Format (ELF)
+Comment[es]=Estructura para el formato ejecutable y enlazable (ELF)
+Comment[et]=Täidetava ja lingitava failivormingu (ELF) struktuur
+Comment[hu]=Struktúra végrehajtható és linkelhető formátum számára (ELF)
+Comment[nb]=Struktur for Executable Linkable Format (ELF)
+Comment[pt]=Estrutura do Formato de Ligação de Executáveis (ELF)
+Comment[pt_BR]=Estrutura para o ELF (Executable and Linkable Format)
+Comment[sr]=Структура за формат повезивања извршних (ЕЛФ)
+Comment[sr@ijekavian]=Структура за формат повезивања извршних (ЕЛФ)
+Comment[sr@ijekavianlatin]=Struktura za format povezivanja izvršnih (ELF)
+Comment[sr@latin]=Struktura za format povezivanja izvršnih (ELF)
+Comment[sv]=Struktur för formatet Executable and Linkable Format (ELF)
+Comment[uk]=Структура файлів у форматі Executable and Linkable Format (ELF)
+Comment[x-test]=xxStructure for Executable and Linkable Format (ELF)xx
+
+X-KDE-PluginInfo-Author=Alex Richardson
+X-KDE-PluginInfo-Email=alex.richardson@gmx.de
+X-KDE-PluginInfo-Name=elf-js
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=http://www.kde.org/
+X-KDE-PluginInfo-Category=structure/js
+X-KDE-PluginInfo-License=LGPL
+X-KDE-PluginInfo-EnabledByDefault=false
