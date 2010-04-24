@@ -309,6 +309,9 @@ void StructTool::unmark(/*const QModelIndex& idx*/)
 
 void StructTool::validateAllStructures()
 {
+	if (!mByteArrayModel)
+		return; //no point validating
+	//TODO it would be nicer if the button was grayed out while no model exists
     foreach(TopLevelDataInformation* data, mData)
         {
             data->validate();
