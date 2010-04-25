@@ -126,7 +126,7 @@ QScriptValue ScriptUtils::allPrimitivesToString(QScriptContext* ctx,
         QScriptEngine* eng)
 {
     Q_UNUSED(eng)
-    QString type = ctx->thisObject().property("__type__").toString();
+    QString type = ctx->thisObject().property("type").toString();
     return ctx->thisObject().property(type).toString();
 }
 
