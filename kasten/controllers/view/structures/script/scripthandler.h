@@ -43,6 +43,7 @@ public:
     virtual ~ScriptHandler();
     DataInformation* initialDataInformationFromScript();
     void validateData(DataInformation* data);
+    void updateDataInformation(DataInformation* data);
     QScriptEngine* engine();
 protected:
     bool init();

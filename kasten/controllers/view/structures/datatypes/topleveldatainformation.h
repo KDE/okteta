@@ -45,6 +45,7 @@ public:
     TopLevelDataInformation* clone() const;
 public:
     void validate();
+    void updateElement(DataInformation* elem);
     QScriptEngine* scriptEngine() const;
 
     DataInformation* actualDataInformation() const;

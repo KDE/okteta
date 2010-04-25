@@ -97,3 +97,10 @@ void TopLevelDataInformation::resetValidationState()
     mData->resetValidationState();
 }
 
+void TopLevelDataInformation::updateElement(DataInformation* elem) {
+	if (!elem || !mScriptHandler)
+		return;
+	mScriptHandler->updateDataInformation(elem);
+
+}
+

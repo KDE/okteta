@@ -31,14 +31,15 @@
 DataInformation::DataInformation(const QString& name, int index,
         DataInformation* parent) :
     QObject(parent), mIndex(index), mValidationSuccessful(false), mHasBeenValidated(
-            false), mAdditionalData(NULL)
+            false), mWasAbleToRead(false), mAdditionalData(NULL)
 {
     setObjectName(name);
 }
 
 DataInformation::DataInformation(const DataInformation& d) :
     QObject(NULL), mIndex(d.mIndex), mValidationSuccessful(d.mValidationSuccessful),
-            mHasBeenValidated(d.mHasBeenValidated), mAdditionalData(NULL)
+            mHasBeenValidated(d.mHasBeenValidated),
+            mWasAbleToRead(d.mWasAbleToRead), mAdditionalData(NULL)
 {
     setObjectName(d.objectName());
     if (d.mAdditionalData)
@@ -158,3 +159,12 @@ void DataInformation::resetValidationState()
     if (mAdditionalData)
         mAdditionalData->setValidationError(QString());
 }
+void DataInformation::beginRead()
+{
+    for (uint i = 0; i < childCount(); ++i)
+    {
+        childAt(i)->beginRead();
+    }
+    mWasAbleToRead = false;
+}
+

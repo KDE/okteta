@@ -30,8 +30,6 @@ class DataInformationWithChildren: public DataInformation
 Q_OBJECT
     Q_PROPERTY(int childCount READ childCount())
     Q_PROPERTY(QScriptValue children READ childrenAsScriptValue())
-public:
-    virtual bool wasAbleToRead() const;
 protected:
     QList<DataInformation*> mChildren;
     explicit DataInformationWithChildren(const DataInformationWithChildren& d);

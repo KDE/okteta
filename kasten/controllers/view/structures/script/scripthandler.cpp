@@ -122,8 +122,7 @@ void ScriptHandler::validateData(DataInformation* data)
 
         QScriptValue thisObject = mEngine.newQObject(data,
                 QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
-        QScriptValue mainStruct = mEngine.newQObject(
-                data->mainStructure(),
+        QScriptValue mainStruct = mEngine.newQObject(data->mainStructure(),
                 QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
         QScriptValueList args;
         args << mainStruct;
@@ -146,6 +145,45 @@ void ScriptHandler::validateData(DataInformation* data)
         if (result.isBool() || result.isBoolean())
         {
             data->setValidationSuccessful(result.toBool());
+        }
+    }
+}
+void ScriptHandler::updateDataInformation(DataInformation* data)
+{
+    if (!data)
+        return;
+
+    //check if has a validation function:
+    AdditionalData* additionalData = data->additionalData();
+    if (additionalData && additionalData->updateFunction())
+    {
+        //value exists, we assume it has been checked to be a function
+#ifdef OKTETA_DEBUG_SCRIPT
+        mDebugger->attachTo(&mEngine);
+        mDebugger->action(QScriptEngineDebugger::InterruptAction)->trigger();
+        kDebug()
+            << "validating element: " << data->name();
+#endif
+
+        QScriptValue thisObject = mEngine.newQObject(data,
+                QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
+        QScriptValue mainStruct = mEngine.newQObject(data->mainStructure(),
+                QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
+        QScriptValueList args;
+        args << mainStruct;
+        QScriptValue result = additionalData->updateFunction()->call(thisObject,
+                args);
+        if (result.isError())
+        {
+            ScriptUtils::object()->logScriptError("error occurred while "
+                "updating element " + data->name(), result);
+        }
+        if (mEngine.hasUncaughtException())
+        {
+            ScriptUtils::object()->logScriptError(
+                    mEngine.uncaughtExceptionBacktrace());
+            data->setValidationError("Error occurred in updating: "
+                    + result.toString());
         }
     }
 }

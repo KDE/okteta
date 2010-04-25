@@ -20,6 +20,7 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "uniondatainformation.h"
+#include "topleveldatainformation.h"
 
 QString UnionDataInformation::typeName() const
 {
@@ -41,6 +42,9 @@ qint64 UnionDataInformation::readData(Okteta::AbstractByteArrayModel *input,
         ByteOrder byteOrder, Okteta::Address address, quint64 bitsRemaining,
         quint8* bitOffset)
 {
+    //first of all update the structure:
+    topLevelDataInformation()->updateElement(this);
+
     qint64 readBits = 0;
     quint8 originalBitOffset = *bitOffset;
     quint8 correctBitOffset = originalBitOffset;
@@ -50,20 +54,25 @@ qint64 UnionDataInformation::readData(Okteta::AbstractByteArrayModel *input,
         qint64 currentReadBits = mChildren[i]->readData(input, byteOrder, address,
                 bitsRemaining, bitOffset);
         if (currentReadBits == -1)
+        {
+            //could not read one element -> whole structure could not be read
+            mWasAbleToRead = false;
             return -1;
-        if (currentReadBits > readBits) {
+        }
+        if (currentReadBits > readBits)
+        {
             readBits = correctBitOffset;
             correctBitOffset = *bitOffset;
         }
         *bitOffset = originalBitOffset; // start at beginning
     }
+    mWasAbleToRead = false;
     return readBits;
 }
 
-bool UnionDataInformation::setData(const QVariant& value,
-        DataInformation* inf, Okteta::AbstractByteArrayModel *out,
-        ByteOrder byteOrder, Okteta::Address address, quint64 bitsRemaining,
-        quint8* bitOffset)
+bool UnionDataInformation::setData(const QVariant& value, DataInformation* inf,
+        Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
+        Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
 {
     if (this == inf)
         return true; //do nothing since this is not editable

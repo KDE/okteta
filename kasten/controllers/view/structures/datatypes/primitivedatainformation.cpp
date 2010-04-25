@@ -199,7 +199,7 @@ qint64 PrimitiveDataInformation::readData(Okteta::AbstractByteArrayModel *input,
 
 PrimitiveDataInformation::PrimitiveDataInformation(QString name,
         PrimitiveDataType type, int index, DataInformation* parent) :
-    DataInformation(name, index, parent), mType(type), mWasAbleToRead(false)
+    DataInformation(name, index, parent), mType(type)
 {
     if (type == Type_NotPrimitive)
     {
@@ -210,7 +210,7 @@ PrimitiveDataInformation::PrimitiveDataInformation(QString name,
 }
 
 PrimitiveDataInformation::PrimitiveDataInformation(const PrimitiveDataInformation& d) :
-    DataInformation(d), mType(d.mType), mWasAbleToRead(false)
+    DataInformation(d), mType(d.mType)
 {
 }
 
@@ -260,10 +260,13 @@ PrimitiveDataInformation* PrimitiveDataInformation::newInstance(QString name,
 
 QScriptValue PrimitiveDataInformation::scriptValue()
 {
-    QScriptEngine* engine = topLevelDataInformation()->scriptEngine();
-    if (!engine)
+    QScriptEngine* eng = engine();
+    if (!eng)
         return QScriptValue();
-    QScriptValue wrapObj = engine->newObject();
+    if (!mWasAbleToRead)
+        return context()->throwError("Attempting to read value from element"
+            " that has not been read yet");
+    QScriptValue wrapObj = eng->newObject();
     ScriptUtils::object()->wrapAllPrimitiveTypes(wrapObj, mValue, mType);
     return wrapObj;
 }

@@ -72,6 +72,9 @@ qint64 DataInformationWithChildren::readData(Okteta::AbstractByteArrayModel *inp
         ByteOrder byteOrder, Okteta::Address address, quint64 bitsRemaining,
         quint8* bitOffset)
 {
+    //first of all update the structure:
+    topLevelDataInformation()->updateElement(this);
+
     uint readBytes = 0;
     qint64 readBits = 0;
     for (int i = 0; i < mChildren.size(); i++)
@@ -79,10 +82,15 @@ qint64 DataInformationWithChildren::readData(Okteta::AbstractByteArrayModel *inp
         qint64 currentReadBits = mChildren[i]->readData(input, byteOrder, address
                 + readBytes, bitsRemaining - readBits, bitOffset);
         if (currentReadBits == -1)
+        {
+            mWasAbleToRead = false;
+            //could not read one element -> whole structure could not be read
             return -1;
+        }
         readBits += currentReadBits;
         readBytes = (readBits + *bitOffset) / 8;
     }
+    mWasAbleToRead = true;
     return readBits;
 }
 
@@ -109,16 +117,6 @@ DataInformationWithChildren::DataInformationWithChildren(
         QObject::connect(child, SIGNAL(dataChanged()), this, SIGNAL(dataChanged()));
         mChildren.append(child);
     }
-}
-
-bool DataInformationWithChildren::wasAbleToRead() const
-{
-    for (int i = 0; i < mChildren.size(); ++i)
-    {
-        if (!mChildren.at(i)->wasAbleToRead())
-            return false; //if one is invalid, whole structure is invalid (out of range)
-    }
-    return true;
 }
 
 QList<const DataInformation*> DataInformationWithChildren::findChildrenWithName(

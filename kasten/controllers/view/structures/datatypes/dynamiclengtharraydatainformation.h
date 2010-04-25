@@ -24,7 +24,7 @@
 #define DYNAMICLENGTHARRAYDATAINFORMATION_H_
 
 #include "abstractarraydatainformation.h"
-
+//FIXME remove sometime
 /** deprecated, the scripted version is much more powerful */
 //TODO merge dynamic and static length
 class DynamicLengthArrayDataInformation: public AbstractArrayDataInformation

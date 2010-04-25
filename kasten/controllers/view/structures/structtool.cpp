@@ -183,10 +183,12 @@ void StructTool::updateData()
 
     if (remainingBits != 0)
     {
+
         QScopedPointer<quint8> bitOffset(new quint8(0));
         for (int i = 0; i < mData.size(); i++)
         {
             TopLevelDataInformation* dat = mData.at(i);
+            dat->actualDataInformation()->beginRead(); //before reading set wasAbleToRead to false
             dat->resetValidationState(); //reading new data -> validation state is old
             dat->actualDataInformation()->readData(mByteArrayModel, mByteOrder,
                     mCursorIndex, remainingBits, bitOffset.data());
@@ -297,8 +299,8 @@ void StructTool::mark(const QModelIndex& idx)
     const Okteta::AddressRange markingRange = Okteta::AddressRange::fromWidth(
             startOffset, length);
     mByteArrayView->setMarking(markingRange, true);
-//    kDebug()
-//        << "marking range " << markingRange.start() << " to  " << markingRange.end();
+    //    kDebug()
+    //        << "marking range " << markingRange.start() << " to  " << markingRange.end();
 }
 
 void StructTool::unmark(/*const QModelIndex& idx*/)
@@ -309,9 +311,9 @@ void StructTool::unmark(/*const QModelIndex& idx*/)
 
 void StructTool::validateAllStructures()
 {
-	if (!mByteArrayModel)
-		return; //no point validating
-	//TODO it would be nicer if the button was grayed out while no model exists
+    if (!mByteArrayModel)
+        return; //no point validating
+    //TODO it would be nicer if the button was grayed out while no model exists
     foreach(TopLevelDataInformation* data, mData)
         {
             data->validate();

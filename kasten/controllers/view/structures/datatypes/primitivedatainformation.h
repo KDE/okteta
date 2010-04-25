@@ -25,8 +25,9 @@
 #include "datainformation.h"
 #include "../allprimitivetypes.h"
 #include <QtScript/QScriptValue>
+#include <QtScript/QScriptable>
 
-class PrimitiveDataInformation: public DataInformation
+class PrimitiveDataInformation: public DataInformation, public QScriptable
 {
 Q_OBJECT
 
@@ -50,10 +51,6 @@ public:
     }
     virtual int size() const = 0;
     virtual QString typeName() const = 0;
-    virtual inline bool wasAbleToRead() const
-    {
-        return mWasAbleToRead;
-    }
     virtual int displayBase() const = 0;
     QVariant primitiveValue() const;
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
@@ -80,7 +77,6 @@ protected:
 protected:
     AllPrimitiveTypes mValue;
     PrimitiveDataType mType; //TODO unnecessary?
-    bool mWasAbleToRead :1;
     /** get the appropriate base for QString::number from StructDisplaySettings */
     explicit PrimitiveDataInformation(const PrimitiveDataInformation& d);
 };

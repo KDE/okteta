@@ -66,7 +66,6 @@ public:
     Q_PROPERTY(bool wasAbleToRead READ wasAbleToRead())
     Q_PROPERTY(QString validationError READ validationError() WRITE setValidationError)
 
-    virtual bool wasAbleToRead() const = 0;
 protected:
     DataInformation(const DataInformation&);
 public:
@@ -124,6 +123,9 @@ public:
     virtual qint64
     readData(Okteta::AbstractByteArrayModel *input, ByteOrder byteOrder,
             Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset) =0;
+    /** sets mWasAbleToRead to false for all children and this object.
+     *  Gets called once before the reading of the whole structure starts. */
+    void beginRead();
     /** Writes the current data contained in this object to out.
      *
      *  If @code @p inf != this @endcode this method must do nothing and return false.
@@ -157,7 +159,7 @@ public:
     void setHasBeenValidated(bool hasBeen);
 
     virtual void resetValidationState(); //virtual for datainformationwithchildren
-
+    bool wasAbleToRead() const;
 protected:
     /**
      *  the offset of child number @p index compared to the beginning of the structure
@@ -173,6 +175,7 @@ protected:
     int mIndex;
     bool mValidationSuccessful :1;
     bool mHasBeenValidated :1;
+    bool mWasAbleToRead :1;
     AdditionalData* mAdditionalData;
 };
 
@@ -220,5 +223,8 @@ inline AdditionalData* DataInformation::additionalData() const
 {
     return mAdditionalData;
 }
-
+inline bool DataInformation::wasAbleToRead() const
+{
+    return mWasAbleToRead;
+}
 #endif /* DATAINFORMATION_H_ */

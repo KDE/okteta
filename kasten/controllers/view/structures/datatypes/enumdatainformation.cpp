@@ -21,6 +21,7 @@
  */
 
 #include "enumdatainformation.h"
+#include "topleveldatainformation.h"
 
 EnumDataInformation::EnumDataInformation(QString name,
         PrimitiveDataInformation* type, EnumDefinition::Ptr enumDef, int index,
@@ -77,14 +78,16 @@ bool EnumDataInformation::setData(const QVariant& value, DataInformation* inf,
     if (this != inf)
         return false;
     //correct object -> use mValue so PrimitiveDataInformation::setData() returns true
-    bool ret = mValue->setData(value, mValue, out, byteOrder, address, bitsRemaining,
-            bitOffset);
+    bool ret = mValue->setData(value, mValue, out, byteOrder, address,
+            bitsRemaining, bitOffset);
     return ret;
 }
 qint64 EnumDataInformation::readData(Okteta::AbstractByteArrayModel* input,
         ByteOrder byteOrder, Okteta::Address address, quint64 bitsRemaining,
         quint8* bitOffset)
 {
+    //update enum first (it is possible to change the enum definition this enum uses
+    topLevelDataInformation()->updateElement(this);
     return mValue->readData(input, byteOrder, address, bitsRemaining, bitOffset);
 }
 
