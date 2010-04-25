@@ -48,9 +48,6 @@ QScriptValue ScriptEngineInitializer::primitiveConstructor(QScriptContext* ctx,
     //add validation and update function
     if (ctx->argumentCount() > 0)
         addValidationFunction(ctx, eng, object, 0);
-    if (ctx->argumentCount() > 1)
-        addUpdateFunction(ctx, eng, object, 1);
-
     return object;
 }
 
