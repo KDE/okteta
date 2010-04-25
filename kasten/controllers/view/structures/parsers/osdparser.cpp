@@ -32,6 +32,8 @@
 #include "../datatypes/signedbitfielddatainformation.h"
 #include "../datatypes/topleveldatainformation.h"
 
+#include "../datatypes/primitivefactory.h"
+
 #include "../structuredefinitionfile.h"
 
 #include <QtCore/QFile>
@@ -220,8 +222,7 @@ PrimitiveDataInformation* OsdParser::primitiveFromXML(const QDomElement& xmlElem
                 << "PrimitiveDataInformation::fromXML(): no type attribute defined";
         return NULL;
     }
-    PrimitiveDataType type = PrimitiveDataInformation::typeStringToType(typeStr);
-    return PrimitiveDataInformation::newInstance(name, type);
+    return PrimitiveFactory::newInstance(name, typeStr);
 }
 
 AbstractBitfieldDataInformation* OsdParser::bitfieldFromXML(
@@ -309,9 +310,8 @@ EnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem)
     }
     kDebug()
         << def->name();
-    PrimitiveDataType type = PrimitiveDataInformation::typeStringToType(typeStr);
-    PrimitiveDataInformation* prim = PrimitiveDataInformation::newInstance(name,
-            type);
+    PrimitiveDataInformation* prim = PrimitiveFactory::newInstance(name,
+            typeStr);
     if (!prim)
     {
         kWarning() << "primitive type is null!!";
@@ -380,7 +380,7 @@ void OsdParser::parseEnumDefNodes(QDomNodeList& elems)
             kWarning() << "no type attribute defined -> skipping this enum";
             continue;
         }
-        PrimitiveDataType type = PrimitiveDataInformation::typeStringToType(typeStr);
+        PrimitiveDataType type = PrimitiveFactory::typeStringToType(typeStr);
         //handle all entries
         QDomNodeList children = elem.elementsByTagName("entry");
         for (uint j = 0; j < children.length(); j++)

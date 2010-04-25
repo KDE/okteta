@@ -23,7 +23,7 @@
 #include "topleveldatainformation.h"
 #include "datainformationwithchildren.h"
 #include "../script/scripthandler.h"
-#include "primitivedatainformation.h"
+#include "primitivefactory.h"
 #include "../allprimitivetypes.h"
 //QtScript
 #include <QtScript/QScriptEngine>
@@ -42,7 +42,7 @@ TopLevelDataInformation::TopLevelDataInformation(DataInformation* data,
         if (!mData)
         {
             //just a dummy, this object should be deleted anyway
-            mData = PrimitiveDataInformation::newInstance(
+            mData = PrimitiveFactory::newInstance(
                     "failed_to_load__this_is_a_dummy", Type_Int32, 0);
             mWasAbleToParse = false;
         }

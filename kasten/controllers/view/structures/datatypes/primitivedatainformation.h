@@ -37,18 +37,8 @@ public:
     explicit PrimitiveDataInformation(QString name, PrimitiveDataType type,
             int index = -1, DataInformation* parent = NULL);
     virtual ~PrimitiveDataInformation();
-    static PrimitiveDataInformation* newInstance(QString name,
-            PrimitiveDataType type, int index = -1, DataInformation* parent = NULL);
-    //    static int getStringConversionBase(PrimitiveDataType type);
-    //    static QString typeName(PrimitiveDataType type);
-    //    static int size(PrimitiveDataType type);
-    static QString getValueString(AllPrimitiveTypes value, PrimitiveDataType type,
-            int base);
     virtual DataInformation* clone() const = 0;
-    virtual PrimitiveDataType type() const
-    {
-        return mType;
-    }
+    virtual PrimitiveDataType type() const;
     virtual int size() const = 0;
     virtual QString typeName() const = 0;
     virtual int displayBase() const = 0;
@@ -61,23 +51,18 @@ public:
     virtual qint64
     readData(Okteta::AbstractByteArrayModel *input, ByteOrder byteOrder,
             Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset);
-//FIXME const
     virtual QString valueString() const = 0;
-    AllPrimitiveTypes value() const
-    {
-        return mValue;
-    }
+    AllPrimitiveTypes value() const;
+
     virtual AllPrimitiveTypes
             qVariantToAllPrimitiveTypes(const QVariant& value) const = 0;
     QVariant data(int column, int role) const;
-    static PrimitiveDataType typeStringToType(QString& typeStr);
     virtual QScriptValue scriptValue();
 protected:
     virtual quint64 offset(unsigned int index) const;
 protected:
     AllPrimitiveTypes mValue;
     PrimitiveDataType mType; //TODO unnecessary?
-    /** get the appropriate base for QString::number from StructDisplaySettings */
     explicit PrimitiveDataInformation(const PrimitiveDataInformation& d);
 };
 
@@ -85,6 +70,16 @@ inline quint64 PrimitiveDataInformation::offset(unsigned int index) const
 {
     Q_UNUSED(index)
     return 0;
+}
+
+inline PrimitiveDataType PrimitiveDataInformation::type() const
+{
+    return mType;
+}
+
+inline AllPrimitiveTypes PrimitiveDataInformation::value() const
+{
+    return mValue;
 }
 
 #define PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(type,superType) public: \

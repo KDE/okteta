@@ -22,7 +22,7 @@
 
 #include "scriptengineinitializer.h"
 #include "scriptutils.h"
-#include "../datatypes/primitivedatainformation.h"
+#include "../datatypes/primitivefactory.h"
 #include <QtCore/QStringList>
 #include <QtScript/QScriptEngine>
 #include <QtScript/QScriptContext>
@@ -289,7 +289,7 @@ QScriptValue ScriptEngineInitializer::scriptNewEnum(QScriptContext* ctx,
                 "enum(): enum type (argument 2) is not a valid string or object");
 
     QString enumTypeString = enumType.toString();
-    PrimitiveDataType pdt = PrimitiveDataInformation::typeStringToType(
+    PrimitiveDataType pdt = PrimitiveFactory::typeStringToType(
             enumTypeString);
     if (pdt == Type_NotPrimitive)
         return ctx->throwError("enum(): enum type string'" + enumTypeString

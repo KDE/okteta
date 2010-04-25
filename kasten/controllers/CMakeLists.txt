@@ -292,6 +292,7 @@ set( STRUCTVIEW_SRCS
   view/structures/datatypes/unsignedbitfielddatainformation.cpp
   view/structures/datatypes/topleveldatainformation.cpp
   view/structures/datatypes/additionaldata.cpp
+  view/structures/datatypes/primitivefactory.cpp
   view/structures/script/scriptengineinitializer.cpp
   view/structures/script/scripthandler.cpp
   view/structures/script/scriptvalueconverter.cpp

@@ -35,7 +35,7 @@
 #include "../datatypes/boolbitfielddatainformation.h"
 #include "../datatypes/unsignedbitfielddatainformation.h"
 #include "../datatypes/signedbitfielddatainformation.h"
-#include "../datatypes/primitivedatainformation.h"
+#include "../datatypes/primitivefactory.h"
 #include "../datatypes/additionaldata.h"
 #include "scriptutils.h"
 
@@ -168,7 +168,7 @@ PrimitiveDataInformation * ScriptValueConverter::toPrimitive(QScriptValue& value
         QString& name) const
 {
     QString typeString = value.property("type").toString();
-    PrimitiveDataType primitiveType = PrimitiveDataInformation::typeStringToType(
+    PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(
             typeString);
     if (primitiveType == Type_NotPrimitive)
     {
@@ -176,7 +176,7 @@ PrimitiveDataInformation * ScriptValueConverter::toPrimitive(QScriptValue& value
                 + "' -> return NULL");
         return NULL;
     }
-    return PrimitiveDataInformation::newInstance(name, primitiveType);
+    return PrimitiveFactory::newInstance(name, primitiveType);
 }
 
 StructureDataInformation* ScriptValueConverter::toStruct(QScriptValue& value,
@@ -259,7 +259,7 @@ EnumDataInformation* ScriptValueConverter::toEnum(QScriptValue& value, QString& 
         }
     }
     QString typeString = value.property("enumType").toString();
-    PrimitiveDataType primitiveType = PrimitiveDataInformation::typeStringToType(
+    PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(
             typeString);
     if (primitiveType == Type_NotPrimitive)
     {
@@ -269,7 +269,7 @@ EnumDataInformation* ScriptValueConverter::toEnum(QScriptValue& value, QString& 
     }
     QString enumName = value.property("enumName").toString();
     EnumDefinition::Ptr def(new EnumDefinition(enumValues, enumName, primitiveType));
-    PrimitiveDataInformation* primData = PrimitiveDataInformation::newInstance(name,
+    PrimitiveDataInformation* primData = PrimitiveFactory::newInstance(name,
             primitiveType);
     if (primData)
         return new EnumDataInformation(name, primData, def);

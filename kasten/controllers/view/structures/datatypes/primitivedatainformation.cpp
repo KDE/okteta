@@ -21,66 +21,12 @@
  */
 #include "primitivedatainformation.h"
 #include "datainformation.h"
-#include "staticlengtharraydatainformation.h"
-#include "bool8datainformation.h"
-#include "bool16datainformation.h"
-#include "bool32datainformation.h"
-#include "bool64datainformation.h"
-#include "chardatainformation.h"
-#include "doubledatainformation.h"
-#include "floatdatainformation.h"
-#include "int8datainformation.h"
-#include "int16datainformation.h"
-#include "int32datainformation.h"
-#include "int64datainformation.h"
-#include "uint8datainformation.h"
-#include "uint16datainformation.h"
-#include "uint32datainformation.h"
-#include "uint64datainformation.h"
+#include "abstractarraydatainformation.h"
 #include "topleveldatainformation.h"
 #include "../script/scriptutils.h"
 
 #include <QtScript/QScriptEngine>
 #include <KIcon>
-
-PrimitiveDataType PrimitiveDataInformation::typeStringToType(QString& string)
-{
-    QString typeStr = string.trimmed().toLower();
-    if (typeStr == "bool8")
-        return Type_Bool8;
-    if (typeStr == "bool16")
-        return Type_Bool16;
-    if (typeStr == "bool32")
-        return Type_Bool32;
-    if (typeStr == "bool64")
-        return Type_Bool64;
-    if (typeStr == "int8")
-        return Type_Int8;
-    if (typeStr == "uint8")
-        return Type_UInt8;
-    if (typeStr == "int16")
-        return Type_Int16;
-    if (typeStr == "uint16")
-        return Type_UInt16;
-    if (typeStr == "int32")
-        return Type_Int32;
-    if (typeStr == "uint32")
-        return Type_UInt32;
-    if (typeStr == "int64")
-        return Type_Int64;
-    if (typeStr == "uint64")
-        return Type_UInt64;
-    if (typeStr == "char")
-        return Type_Char;
-    if (typeStr == "float")
-        return Type_Float;
-    if (typeStr == "double")
-        return Type_Double;
-
-    kWarning() << "PrimitiveDataInformation::typeStringToType(): could not find"
-        " correct value (typeStr=" << typeStr << ")";
-    return Type_NotPrimitive; //just return a default value
-}
 
 QVariant PrimitiveDataInformation::primitiveValue() const //XXX: unused, remove?
 {
@@ -210,7 +156,7 @@ PrimitiveDataInformation::PrimitiveDataInformation(QString name,
 }
 
 PrimitiveDataInformation::PrimitiveDataInformation(const PrimitiveDataInformation& d) :
-    DataInformation(d), mType(d.mType)
+    QScriptable(), DataInformation(d), mType(d.mType)
 {
 }
 
@@ -218,45 +164,7 @@ PrimitiveDataInformation::~PrimitiveDataInformation()
 {
 }
 
-PrimitiveDataInformation* PrimitiveDataInformation::newInstance(QString name,
-        PrimitiveDataType type, int index, DataInformation* parent)
-{
-    switch (type)
-    {
-    case Type_Char:
-        return new CharDataInformation(name, type, index, parent);
-    case Type_Int8:
-        return new Int8DataInformation(name, type, index, parent);
-    case Type_Int16:
-        return new Int16DataInformation(name, type, index, parent);
-    case Type_Int32:
-        return new Int32DataInformation(name, type, index, parent);
-    case Type_Int64:
-        return new Int64DataInformation(name, type, index, parent);
-    case Type_UInt8:
-        return new UInt8DataInformation(name, type, index, parent);
-    case Type_UInt16:
-        return new UInt16DataInformation(name, type, index, parent);
-    case Type_UInt32:
-        return new UInt32DataInformation(name, type, index, parent);
-    case Type_UInt64:
-        return new UInt64DataInformation(name, type, index, parent);
-    case Type_Bool8:
-        return new Bool8DataInformation(name, type, index, parent);
-    case Type_Bool16:
-        return new Bool16DataInformation(name, type, index, parent);
-    case Type_Bool32:
-        return new Bool32DataInformation(name, type, index, parent);
-    case Type_Bool64:
-        return new Bool64DataInformation(name, type, index, parent);
-    case Type_Float:
-        return new FloatDataInformation(name, type, index, parent);
-    case Type_Double:
-        return new DoubleDataInformation(name, type, index, parent);
-    default:
-        return NULL;
-    }
-}
+
 
 QScriptValue PrimitiveDataInformation::scriptValue()
 {
