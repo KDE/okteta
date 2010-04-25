@@ -1,0 +1,16 @@
+[Desktop Entry]
+Encoding=UTF-8
+Icon=code-context
+Type=Service
+ServiceTypes=KPluginInfo
+
+Name=Testing dynamic length arrays (JS). Do not translate, it's a waste of time
+Comment=A test structure for dynamic arrays (JS). Do not translate, it's a waste of time
+
+X-KDE-PluginInfo-Author=Alex Richardson
+X-KDE-PluginInfo-Email=alex.richardson@gmx.de
+X-KDE-PluginInfo-Name=dynamic-array
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Category=structure/js
+X-KDE-PluginInfo-License=LGPL
+X-KDE-PluginInfo-EnabledByDefault=false
