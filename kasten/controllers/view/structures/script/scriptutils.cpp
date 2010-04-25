@@ -103,7 +103,7 @@ void ScriptUtils::wrapAllPrimitiveTypes(QScriptValue& val,
     default:
         break;
     }
-    val.setProperty("__type__", type);
+    val.setProperty("type", type);
     val.setProperty("char", QString(QLatin1Char(allPrim.ubyteValue)));
     val.setProperty("int8", allPrim.byteValue);
     val.setProperty("uint8", allPrim.ubyteValue);
@@ -111,9 +111,10 @@ void ScriptUtils::wrapAllPrimitiveTypes(QScriptValue& val,
     val.setProperty("uint16", allPrim.ushortValue);
     val.setProperty("int32", allPrim.intValue);
     val.setProperty("uint32", allPrim.uintValue);
-    //XXX QtScript has no support for 64 bit ints, cast to double or to 32 bit??
-    val.setProperty("int64", (qsreal) allPrim.longValue);
-    val.setProperty("uint64", (qsreal) allPrim.ulongValue);
+    //QtScript has no support for 64 bit ints, add another value which contains the higher 32 bits
+    //XXX any better solution for this?
+    val.setProperty("int64high32bits", qint32(allPrim.ulongValue >> 32));
+    val.setProperty("uint64high32bits", quint32(allPrim.ulongValue >> 32));
 
     val.setProperty("float", allPrim.floatValue);
     val.setProperty("double", allPrim.doubleValue);
