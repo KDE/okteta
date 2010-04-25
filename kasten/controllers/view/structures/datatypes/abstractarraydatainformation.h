@@ -28,7 +28,7 @@ class AbstractArrayDataInformation: public DataInformationWithChildren
 {
 Q_OBJECT
 
-Q_PROPERTY(int length READ length())
+Q_PROPERTY(int length READ length WRITE setArrayLength)
 protected:
     explicit AbstractArrayDataInformation(const AbstractArrayDataInformation& d);
 public:
@@ -48,7 +48,7 @@ public:
     const DataInformation* childType() const;
 
     Q_INVOKABLE
-    void setArrayLength(uint newLength);Q_INVOKABLE
+    void setArrayLength(int newLength);Q_INVOKABLE
     void setArrayType(QScriptValue type);
 protected:
     DataInformation* mChildType;

@@ -43,7 +43,7 @@ QString AbstractArrayDataInformation::typeName() const
 AbstractArrayDataInformation::AbstractArrayDataInformation(QString name,
         const DataInformation& childType, uint length, int index,
         DataInformation* parent) :
-DataInformationWithChildren(name, index, parent), mChildType(0)
+    DataInformationWithChildren(name, index, parent), mChildType(0)
 {
     mChildType = childType.clone();
     for (unsigned int i = 0; i < length; i++)
@@ -69,11 +69,19 @@ bool AbstractArrayDataInformation::isDynamicArray() const
     return mAdditionalData->updateFunction() != NULL;
 }
 
-void AbstractArrayDataInformation::setArrayLength(uint newLength)
+void AbstractArrayDataInformation::setArrayLength(int newLength)
 {
     //kDebug() << "old childcount: " << childCount();
 
     //kDebug() << "newLength: " << newLength;
+    if (newLength < 0)
+        return;
+    if (newLength > 1000000)
+    {
+        kWarning() << "attempting to set the length of the array" << name() << "to "
+                << newLength << " which would use too much memory";
+        return;
+    }
     if (newLength > childCount())
     {
         emit childCountChange(childCount(), newLength);
