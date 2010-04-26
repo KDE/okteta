@@ -38,7 +38,7 @@
 ScriptHandler::ScriptHandler(QString scriptFile, QString name) :
     mFile(scriptFile), mName(name)
 #ifdef OKTETA_DEBUG_SCRIPT
-            , mDebugger(new QScriptEngineDebugger())
+, mDebugger(new QScriptEngineDebugger())
 #endif
 {
     init();
@@ -117,7 +117,7 @@ void ScriptHandler::validateData(DataInformation* data)
         mDebugger->attachTo(&mEngine);
         mDebugger->action(QScriptEngineDebugger::InterruptAction)->trigger();
         kDebug()
-            << "validating element: " << data->name();
+        << "validating element: " << data->name();
 #endif
 
         QScriptValue thisObject = mEngine.newQObject(data,
@@ -162,7 +162,7 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
         mDebugger->attachTo(&mEngine);
         mDebugger->action(QScriptEngineDebugger::InterruptAction)->trigger();
         kDebug()
-            << "validating element: " << data->name();
+        << "updating element: " << data->name();
 #endif
 
         QScriptValue thisObject = mEngine.newQObject(data,
@@ -182,8 +182,8 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
         {
             ScriptUtils::object()->logScriptError(
                     mEngine.uncaughtExceptionBacktrace());
-            data->setValidationError("Error occurred in updating: "
-                    + result.toString());
+            ScriptUtils::object()->logScriptError("error occurred while "
+                "updating element " + data->name(), result);
         }
     }
 }
