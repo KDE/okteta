@@ -304,6 +304,8 @@ set( STRUCTVIEW_SRCS
 configure_file( config-structtool.h.cmake  ${CMAKE_CURRENT_BINARY_DIR}/config-structtool.h )
 if ( OKTETA_DEBUG_SCRIPT )
     message( STATUS "Okteta will be compiled with script debugging enabled" )
+else( OKTETA_DEBUG_SCRIPT )
+    message( STATUS "Okteta will be compiled without script debugging. (-DOKTETA_DEBUG_SCRIPT=1 to enable)" )
 endif( OKTETA_DEBUG_SCRIPT )
 kde4_add_kcfg_files(STRUCTVIEW_SRCS GENERATE_MOC view/structures/settings/structviewpreferences.kcfgc)
 kde4_add_ui_files(STRUCTVIEW_SRCS view/structures/settings/structviewdisplaysettingswidget.ui)
