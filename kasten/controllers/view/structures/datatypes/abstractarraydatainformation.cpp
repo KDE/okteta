@@ -77,7 +77,7 @@ QScriptValue AbstractArrayDataInformation::setArrayLength(int newLength)
 {
     //kDebug() << "old childcount: " << childCount();
 
-    //kDebug() << "newLength: " << newLength;
+    //arrays with length zero are useless -> minumum is 1 (prevents integer underflow later
     if (newLength < 0)
         return context() ? context()->throwError(
                 "new Array length is less than zero: " + QString::number(newLength))
@@ -90,25 +90,27 @@ QScriptValue AbstractArrayDataInformation::setArrayLength(int newLength)
         return context() ? context()->throwError("new Array length is to large: "
                 + QString::number(newLength)) : QScriptValue();
     }
-    if (newLength > childCount()) //compiler warning can be ignored
+    int oldLength = childCount();
+    if (newLength > oldLength)
     {
-        emit childCountChange(childCount(), newLength);
-        for (int i = childCount(); i < newLength; ++i)
+        emit childrenAboutToBeInserted(this, qMax(0, oldLength - 1), newLength - 1);
+        for (int i = oldLength; i < newLength; ++i)
         {
             DataInformation* arrayElem = mChildType->clone();
             QObject::connect(arrayElem, SIGNAL(dataChanged()), this,
                     SIGNAL(dataChanged()));
             appendChild(arrayElem);
         }
+        emit childrenInserted(this, qMax(0, oldLength - 1), newLength - 1);
     }
-    //compiler warning can be ignored
-    else if (newLength < childCount()) //TODO maybe keep some cached
+    else if (newLength < oldLength) //XXX maybe keep some cached
     {
-        emit childCountChange(childCount(), newLength);
+        emit childrenAboutToBeRemoved(this, newLength, oldLength - 1);
         for (int i = newLength; i != mChildren.length();)
         {
             delete mChildren.takeAt(i);
         }
+        emit childrenRemoved(this, newLength, oldLength - 1);
     }
     return true; //success
 }
@@ -141,22 +143,27 @@ QScriptValue AbstractArrayDataInformation::setArrayType(QScriptValue type)
     //TODO optimise by checking if newChildType is the same as old child type (only for primitives)
     //childType is valid -> begin changing the children to the new type
     uint len = childCount();
+    if (len == 0)
+        return true; //do nothing, prevent integer underflow
     emit
-    childCountChange(len, 0);
+    childrenAboutToBeRemoved(this, 0, len - 1);
     qDeleteAll(mChildren);
     mChildren.clear(); //qDeleteAll only uses delete operator, we have to remove from list manually
+    childrenRemoved(this, 0, len - 1);
 
     mChildType = newChildType;
     mChildType->setParent(this);
 
+    emit
+    childrenAboutToBeInserted(this, 0, len - 1);
     for (uint i = 0; i < len; i++)
     {
         DataInformation* arrayElem = newChildType->clone();
         QObject::connect(arrayElem, SIGNAL(dataChanged()), this,
                 SIGNAL(dataChanged()));
         appendChild(arrayElem);
-    } emit
-    childCountChange(0, len);
+    }emit
+    childrenInserted(this, 0, len - 1);
     return true; //success
 }
 

@@ -171,7 +171,15 @@ protected:
     virtual quint64 offset(unsigned int index) const = 0;
 Q_SIGNALS:
     void dataChanged();
-    void childCountChange(int oldCount, int newCount);
+    // sender as parameter, so no cast is needed, also makes it safer since QObject::sender() may be risky
+    /** items are inserted before @p startIndex */
+    void childrenAboutToBeInserted(QObject* sender, uint startIndex, uint endIndex);
+    /** items are inserted before @p startIndex */
+    void childrenInserted(const QObject* sender, uint startIndex, uint endIndex);
+    /** items are removed before @p startIndex */
+    void childrenAboutToBeRemoved(QObject* sender, uint startIndex, uint endIndex);
+    /** items are inserted before @p startIndex */
+    void childrenRemoved(const QObject* sender, uint startIndex, uint endIndex);
 protected:
     int mIndex;
     bool mValidationSuccessful :1;

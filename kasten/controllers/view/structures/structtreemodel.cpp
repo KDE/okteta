@@ -37,12 +37,45 @@ StructTreeModel::StructTreeModel(StructTool* tool, QObject *parent) :
 StructTreeModel::~StructTreeModel()
 {
 }
-void StructTreeModel::onDataInformationChildCountChange(int oldCount, int newCount)
+
+void StructTreeModel::onChildrenRemoved(const QObject* sender, uint startIndex,
+        uint endIndex)
 {
     kDebug()
-        << "data information childcount changed: " << oldCount << " to " << newCount;
-    reset(); // TODO terribly inefficient, but i can't think of a better solution to prevent
-    //crash on child count change
+        << "data information " << sender->objectName() << ": removed " << (endIndex
+                - startIndex + 1) << " children starting at offset " << startIndex;
+    emit endRemoveRows();
+}
+
+void StructTreeModel::onChildrenInserted(const QObject* sender, uint startIndex,
+        uint endIndex)
+{
+    kDebug()
+        << "data information " << sender->objectName() << ": inserted " << (endIndex
+                - startIndex + 1) << " children at offset " << startIndex;
+    emit endInsertRows();
+}
+
+void StructTreeModel::onChildrenAboutToBeRemoved(QObject* sender, uint startIndex,
+        uint endIndex)
+{
+    kDebug()
+        << "data information " << sender->objectName()
+                << ": about to remove children:" << startIndex << " to " << endIndex;
+    QModelIndex idx = findItemInModel(sender);
+    Q_ASSERT(idx.isValid());
+    emit beginRemoveRows(idx, startIndex, endIndex);
+}
+
+void StructTreeModel::onChildrenAboutToBeInserted(QObject* sender, uint startIndex,
+        uint endIndex)
+{
+    kDebug()
+        << "data information " << sender->objectName()
+                << ": about to insert children:" << startIndex << " to " << endIndex;
+    QModelIndex idx = findItemInModel(sender);
+    Q_ASSERT(idx.isValid());
+    emit beginInsertRows(idx, startIndex, endIndex);
 }
 
 int StructTreeModel::columnCount(const QModelIndex& parent) const
@@ -90,6 +123,10 @@ bool StructTreeModel::setData(const QModelIndex& index, const QVariant& value,
 
     DataInformation* item = static_cast<DataInformation*> (index.internalPointer());
     bool change = mTool->setData(value, role, item);
+    if (change)
+    {
+        emit dataChanged(index, index);
+    }
     return change;
 }
 
@@ -130,9 +167,34 @@ QModelIndex StructTreeModel::index(int row, int column, const QModelIndex &paren
     {
         if (dynamic_cast<DataInformationWithChildren*> (childItem))
         {
+            DataInformationWithChildren* chldItm =
+                    static_cast<DataInformationWithChildren*> (childItem);
             //assume that all items with children can change their childCount
-            connect(childItem, SIGNAL(childCountChange(int,int)), this,
-                    SLOT(onDataInformationChildCountChange(int,int)));
+            if (!mItemsWithSignalConnected.contains(chldItm))
+            {
+                kDebug()
+                    << "connecting '" << childItem->name()
+                            << "'s childCountChanged signal to model";
+                //only connect once
+                mItemsWithSignalConnected.append(chldItm);
+                connect(childItem, SIGNAL(destroyed(QObject*)),
+                        SLOT(removeItemFromSignalsList(QObject*))); //remove after was deleted
+
+                connect(childItem,
+                        SIGNAL(childrenAboutToBeRemoved(QObject*, uint, uint)),
+                        this, SLOT(onChildrenAboutToBeRemoved(QObject*, uint, uint)));
+                connect(childItem,
+                        SIGNAL(childrenAboutToBeInserted(QObject*, uint, uint)),
+                        this,
+                        SLOT(onChildrenAboutToBeInserted(QObject*, uint, uint)));
+                //also connect the done signals
+                connect(childItem,
+                        SIGNAL(childrenRemoved(const QObject*, uint, uint)), this,
+                        SLOT(onChildrenRemoved(const QObject*, uint, uint)));
+                connect(childItem,
+                        SIGNAL(childrenInserted(const QObject*, uint, uint)), this,
+                        SLOT(onChildrenInserted(const QObject*, uint, uint)));
+            }
         }
         return createIndex(row, column, childItem);
     }
@@ -162,17 +224,7 @@ QModelIndex StructTreeModel::parent(const QModelIndex& index) const
     }
 
     // not null, not topleveldatainformation-> must be dataninformation
-    DataInformation* parent = static_cast<DataInformation*>(parentObj);
-
-//    if (dynamic_cast<DataInformationWithChildren*> (parent)) //should be always true
-//    {
-//        //assume that all items with children can change their childCount
-//        connect(parent, SIGNAL(childCountChange(int,int)), this,
-//                SLOT(onDataInformationChildCountChange(int,int)));
-//    }
-//    else
-//        kFatal() << "logic error";
-
+    DataInformation* parent = static_cast<DataInformation*> (parentObj);
     return createIndex(parent->row(), 0, parent);
 }
 
@@ -189,6 +241,86 @@ int StructTreeModel::rowCount(const QModelIndex& parent) const
         return mTool->childCount();
     }
     return parentItem->childCount();
+}
+
+bool StructTreeModel::hasChildren(const QModelIndex& parent) const
+{
+    if (!parent.isValid())
+        return mTool->childCount() > 0;
+    DataInformation* parentItem =
+            static_cast<DataInformation*> (parent.internalPointer());
+    if (!parentItem)
+        return false;
+    else
+        return parentItem->childCount() > 0;
+}
+
+void StructTreeModel::removeItemFromSignalsList(QObject* obj)
+{
+    //obj has been deleted -> remove from list
+    mItemsWithSignalConnected.removeAll(
+            dynamic_cast<DataInformationWithChildren*> (obj));
+}
+
+QModelIndex StructTreeModel::findItemInModel(QObject* obj) const
+{
+    DataInformation* data = dynamic_cast<DataInformation*> (obj);
+    if (!data)
+        return QModelIndex(); //invalid object
+    //first check if is one of the top level items
+    DataInformation* mainStructure = data->mainStructure();
+
+    QModelIndex currentIndex;
+    //find the top level QModelIndex one of the top level items:
+    for (int i = 0; i < mTool->childCount(); ++i)
+    {
+        if (mainStructure == mTool->childAt(i))
+        {
+            currentIndex = index(i, 0, QModelIndex()); //QModelIndex() since is top level item
+            break;
+        }
+    }
+    Q_ASSERT(currentIndex.isValid());
+    if (data == mainStructure) //this is the topLevel index
+        return currentIndex;
+
+    QList<DataInformation*> parents;
+    parents << mainStructure;
+    DataInformation* currentParent = data;
+
+    //populate parents list first
+    while (currentParent && currentParent != mainStructure)
+    {
+        parents.insert(1, currentParent);
+        currentParent = dynamic_cast<DataInformation*> (currentParent->parent());
+        // in case currentParent is not a DataInformation,loop will end too
+    }
+
+    currentParent = mainStructure;
+    //iterate over the list now
+    //start at one since currentIndex points to mainStructure already
+    for (int i = 1; i < parents.length(); ++i)
+    {
+        DataInformation* parentToFind = parents.at(i);
+        bool found = false;
+        for (uint j = 0; j < currentParent->childCount(); ++j)
+        {
+            if (parentToFind == currentParent->childAt(j))
+            {
+                QModelIndex parentIndex(currentIndex);
+                currentIndex = index(j, 0, parentIndex);
+                Q_ASSERT(currentIndex.isValid());
+                found = true;
+                break;
+            }
+        }
+        Q_ASSERT(found);
+        if (parentToFind == data)
+            return currentIndex;
+        currentParent = parentToFind;
+    }
+    //not found
+    return QModelIndex();
 }
 
 }

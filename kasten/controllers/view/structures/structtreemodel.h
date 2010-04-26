@@ -26,6 +26,8 @@
 #include <QAbstractItemModel>
 
 class DataInformation;
+class DataInformationWithChildren;
+
 namespace Kasten
 {
 class StructTool;
@@ -50,6 +52,9 @@ public:
     bool
             setData(const QModelIndex& index, const QVariant& value, int role =
                     Qt::EditRole);
+    virtual bool hasChildren(const QModelIndex& parent = QModelIndex()) const;
+private:
+    QModelIndex findItemInModel(QObject* obj) const;
 public Q_SLOTS:
     void onToolDataChange()
     {
@@ -59,9 +64,17 @@ public Q_SLOTS:
     {
         reset();
     }
-    void onDataInformationChildCountChange(int oldCount, int newCount);
+private Q_SLOTS:
+    void onChildrenAboutToBeRemoved(QObject* sender, uint startIndex,
+            uint endIndex);
+    void onChildrenAboutToBeInserted(QObject* sender, uint startIndex,
+            uint endIndex);
+    void onChildrenRemoved(const QObject* sender, uint startIndex, uint endIndex);
+    void onChildrenInserted(const QObject* sender, uint startIndex, uint endIndex);
+    void removeItemFromSignalsList(QObject* obj);
 private:
     StructTool* mTool;
+    mutable /* very ugly hack! */ QList<DataInformationWithChildren*> mItemsWithSignalConnected;
 public:
 
 };
