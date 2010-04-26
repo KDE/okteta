@@ -23,6 +23,11 @@
 #include "enumdatainformation.h"
 #include "topleveldatainformation.h"
 
+#include "../script/scriptutils.h"
+#include <QtScript/QScriptContext>
+#include <QtScript/QScriptEngine>
+#include <KDebug>
+
 EnumDataInformation::EnumDataInformation(QString name,
         PrimitiveDataInformation* type, EnumDefinition::Ptr enumDef, int index,
         DataInformation* parent) :
@@ -88,7 +93,10 @@ qint64 EnumDataInformation::readData(Okteta::AbstractByteArrayModel* input,
 {
     //update enum first (it is possible to change the enum definition this enum uses
     topLevelDataInformation()->updateElement(this);
-    return mValue->readData(input, byteOrder, address, bitsRemaining, bitOffset);
+    qint64 retVal = mValue->readData(input, byteOrder, address, bitsRemaining,
+            bitOffset);
+    mWasAbleToRead = retVal >= 0; //not able to read if mValue->readData returns -1
+    return retVal;
 }
 
 QWidget* EnumDataInformation::createEditWidget(QWidget* parent) const
@@ -112,3 +120,22 @@ AllPrimitiveTypes EnumDataInformation::qVariantToAllPrimitiveTypes(
     return mValue->qVariantToAllPrimitiveTypes(value);
 }
 
+QScriptValue EnumDataInformation::scriptValue() const
+{
+    //XXX for some reason forwarding to mValue does not work, instead just copy the code
+    QScriptEngine* eng = engine();
+    if (!eng)
+        return QScriptValue();
+    if (!mWasAbleToRead)
+    {
+        if (context())
+            return context()->throwError("Attempting to read value from element"
+                " that has not been read yet: " + name());
+        else
+            return QScriptValue("fail");
+    }
+    QScriptValue wrapObj = eng->newObject();
+    ScriptUtils::object()->wrapAllPrimitiveTypes(wrapObj, mValue->value(),
+            mValue->type());
+    return wrapObj;
+}

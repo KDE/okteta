@@ -24,11 +24,14 @@
 #define ABSTRACTARRAYDATAINFORMATION_H_
 #include "datainformationwithchildren.h"
 
+#include <QtScript/QScriptValue>
+
 class AbstractArrayDataInformation: public DataInformationWithChildren
 {
 Q_OBJECT
 
 Q_PROPERTY(int length READ length WRITE setArrayLength)
+Q_PROPERTY(QScriptValue childType READ childType)
 protected:
     explicit AbstractArrayDataInformation(const AbstractArrayDataInformation& d);
 public:
@@ -45,11 +48,13 @@ public:
     virtual QString typeName() const;
     virtual bool isDynamicArray() const;
     int length();
-    const DataInformation* childType() const;
+    const DataInformation* newChildType() const;
 
     Q_INVOKABLE
-    void setArrayLength(int newLength);Q_INVOKABLE
-    void setArrayType(QScriptValue type);
+    QScriptValue setArrayLength(int newLength);Q_INVOKABLE
+    QScriptValue setArrayType(QScriptValue type);
+    QScriptValue childType() const;
+
 protected:
     DataInformation* mChildType;
 };
@@ -59,7 +64,7 @@ inline int AbstractArrayDataInformation::length()
     return childCount();
 }
 
-inline const DataInformation* AbstractArrayDataInformation::childType() const
+inline const DataInformation* AbstractArrayDataInformation::newChildType() const
 {
     return mChildType;
 }

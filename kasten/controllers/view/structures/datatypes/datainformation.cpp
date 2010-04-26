@@ -37,7 +37,7 @@ DataInformation::DataInformation(const QString& name, int index,
 }
 
 DataInformation::DataInformation(const DataInformation& d) :
-    QObject(NULL), mIndex(d.mIndex), mValidationSuccessful(d.mValidationSuccessful),
+    QObject(NULL), QScriptable(), mIndex(d.mIndex), mValidationSuccessful(d.mValidationSuccessful),
             mHasBeenValidated(d.mHasBeenValidated),
             mWasAbleToRead(d.mWasAbleToRead), mAdditionalData(NULL)
 {

@@ -56,6 +56,9 @@ public:
     virtual void setWidgetData(QWidget* w) const;
     virtual AllPrimitiveTypes
     qVariantToAllPrimitiveTypes(const QVariant& value) const;
+
+    virtual QScriptValue scriptValue() const;
+
 protected:
     EnumDefinition::Ptr mEnum;
     PrimitiveDataInformation* mValue; //to allow different enum sizes

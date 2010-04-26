@@ -41,6 +41,7 @@
 
 //Qt
 #include <QtScript/QScriptValue>
+#include <QtScript/QScriptable>
 
 #define DATAINFORMATION_CLONE(type) virtual inline DataInformation* clone() const {\
         return new type##DataInformation(*this); \
@@ -57,7 +58,7 @@ typedef Kasten::StructViewPreferences::EnumByteOrder::type ByteOrder;
 typedef Kasten::StructViewPreferences::EnumByteOrder ByteOrderEnumClass;
 
 /** Interface that must be implemented by all datatypes */
-class DataInformation: public QObject
+class DataInformation: public QObject, public QScriptable
 {
 Q_OBJECT
 public:

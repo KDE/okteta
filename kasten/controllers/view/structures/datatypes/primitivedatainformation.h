@@ -25,9 +25,8 @@
 #include "datainformation.h"
 #include "../allprimitivetypes.h"
 #include <QtScript/QScriptValue>
-#include <QtScript/QScriptable>
 
-class PrimitiveDataInformation: public DataInformation, public QScriptable
+class PrimitiveDataInformation: public DataInformation
 {
 Q_OBJECT
 
@@ -55,9 +54,9 @@ public:
     AllPrimitiveTypes value() const;
 
     virtual AllPrimitiveTypes
-            qVariantToAllPrimitiveTypes(const QVariant& value) const = 0;
+    qVariantToAllPrimitiveTypes(const QVariant& value) const = 0;
     QVariant data(int column, int role) const;
-    virtual QScriptValue scriptValue();
+    virtual QScriptValue scriptValue() const;
 protected:
     virtual quint64 offset(unsigned int index) const;
 protected:

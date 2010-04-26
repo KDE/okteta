@@ -21,8 +21,10 @@
  */
 #include "abstractarraydatainformation.h"
 #include "primitivedatainformation.h"
-#include "dynamiclengtharraydatainformation.h"
-#include "staticlengtharraydatainformation.h"
+#include "primitivefactory.h"
+#include "../script/scriptvalueconverter.h"
+
+#include <QtScript/QScriptContext>
 
 QString AbstractArrayDataInformation::typeName() const
 {
@@ -46,6 +48,7 @@ AbstractArrayDataInformation::AbstractArrayDataInformation(QString name,
     DataInformationWithChildren(name, index, parent), mChildType(0)
 {
     mChildType = childType.clone();
+    mChildType->setParent(this);
     for (unsigned int i = 0; i < length; i++)
     {
         DataInformation* arrayElem = childType.clone();
@@ -61,6 +64,7 @@ AbstractArrayDataInformation::AbstractArrayDataInformation(
 {
     if (d.mChildType)
         mChildType = d.mChildType->clone();
+    mChildType->setParent(this);
 }
 
 bool AbstractArrayDataInformation::isDynamicArray() const
@@ -69,23 +73,27 @@ bool AbstractArrayDataInformation::isDynamicArray() const
     return mAdditionalData->updateFunction() != NULL;
 }
 
-void AbstractArrayDataInformation::setArrayLength(int newLength)
+QScriptValue AbstractArrayDataInformation::setArrayLength(int newLength)
 {
     //kDebug() << "old childcount: " << childCount();
 
     //kDebug() << "newLength: " << newLength;
     if (newLength < 0)
-        return;
+        return context() ? context()->throwError(
+                "new Array length is less than zero: " + QString::number(newLength))
+                : QScriptValue();
     if (newLength > 1000000)
     {
         kWarning() << "attempting to set the length of the array" << name() << "to "
                 << newLength << " which would use too much memory";
-        return;
+
+        return context() ? context()->throwError("new Array length is to large: "
+                + QString::number(newLength)) : QScriptValue();
     }
-    if (newLength > childCount())
+    if (newLength > childCount()) //compiler warning can be ignored
     {
         emit childCountChange(childCount(), newLength);
-        for (uint i = childCount(); i < newLength; ++i)
+        for (int i = childCount(); i < newLength; ++i)
         {
             DataInformation* arrayElem = mChildType->clone();
             QObject::connect(arrayElem, SIGNAL(dataChanged()), this,
@@ -93,6 +101,7 @@ void AbstractArrayDataInformation::setArrayLength(int newLength)
             appendChild(arrayElem);
         }
     }
+    //compiler warning can be ignored
     else if (newLength < childCount()) //TODO maybe keep some cached
     {
         emit childCountChange(childCount(), newLength);
@@ -101,14 +110,63 @@ void AbstractArrayDataInformation::setArrayLength(int newLength)
             delete mChildren.takeAt(i);
         }
     }
+    return true; //success
 }
 
-void AbstractArrayDataInformation::setArrayType(QScriptValue type)
+QScriptValue AbstractArrayDataInformation::setArrayType(QScriptValue type)
 {
-    //FIXME stub
+    DataInformation* newChildType = NULL;
+
+    //allow type just being a string (it must be a primitive type string)
+    if (type.isString())
+    {
+        newChildType = PrimitiveFactory::newInstance("dummy", type.toString());
+    }
+
+    //now just use ScriptValueConverter to see if type is a valid object
+    else
+    {
+        ScriptValueConverter conv(type, "dummy");
+        newChildType = conv.convert();
+    }
+    //return if conversion failed
+    if (!newChildType)
+    {
+        if (context())
+            return context()->throwError("String '" + type.toString()
+                    + "' is not a valid identifier for a primitive data type");
+        else
+            return QScriptValue();
+    }
+    //TODO optimise by checking if newChildType is the same as old child type (only for primitives)
+    //childType is valid -> begin changing the children to the new type
+    uint len = childCount();
+    emit
+    childCountChange(len, 0);
+    qDeleteAll(mChildren);
+    mChildren.clear(); //qDeleteAll only uses delete operator, we have to remove from list manually
+
+    mChildType = newChildType;
+    mChildType->setParent(this);
+
+    for (uint i = 0; i < len; i++)
+    {
+        DataInformation* arrayElem = newChildType->clone();
+        QObject::connect(arrayElem, SIGNAL(dataChanged()), this,
+                SIGNAL(dataChanged()));
+        appendChild(arrayElem);
+    } emit
+    childCountChange(0, len);
+    return true; //success
+}
+
+QScriptValue AbstractArrayDataInformation::childType() const
+{
+    if (mChildType)
+        return mChildType->typeName().toLower();
+    return QString();
 }
 
 AbstractArrayDataInformation::~AbstractArrayDataInformation()
 {
-    delete mChildType;
 }

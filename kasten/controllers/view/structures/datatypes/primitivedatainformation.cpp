@@ -156,7 +156,7 @@ PrimitiveDataInformation::PrimitiveDataInformation(QString name,
 }
 
 PrimitiveDataInformation::PrimitiveDataInformation(const PrimitiveDataInformation& d) :
-    QScriptable(), DataInformation(d), mType(d.mType)
+    DataInformation(d), mType(d.mType)
 {
 }
 
@@ -164,16 +164,19 @@ PrimitiveDataInformation::~PrimitiveDataInformation()
 {
 }
 
-
-
-QScriptValue PrimitiveDataInformation::scriptValue()
+QScriptValue PrimitiveDataInformation::scriptValue() const
 {
     QScriptEngine* eng = engine();
     if (!eng)
         return QScriptValue();
     if (!mWasAbleToRead)
-        return context()->throwError("Attempting to read value from element"
-            " that has not been read yet");
+    {
+        if (context())
+            return context()->throwError("Attempting to read value from element"
+                " that has not been read yet: " + name());
+        else
+            return QScriptValue("fail");
+    }
     QScriptValue wrapObj = eng->newObject();
     ScriptUtils::object()->wrapAllPrimitiveTypes(wrapObj, mValue, mType);
     return wrapObj;
