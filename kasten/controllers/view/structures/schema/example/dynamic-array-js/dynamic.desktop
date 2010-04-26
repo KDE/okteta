@@ -5,7 +5,9 @@ Type=Service
 ServiceTypes=KPluginInfo
 
 Name=Testing dynamic length arrays (JS). Do not translate, it's a waste of time
+Name[x-test]=xxTesting dynamic length arrays (JS). Do not translate, it's a waste of timexx
 Comment=A test structure for dynamic arrays (JS). Do not translate, it's a waste of time
+Comment[x-test]=xxA test structure for dynamic arrays (JS). Do not translate, it's a waste of timexx
 
 X-KDE-PluginInfo-Author=Alex Richardson
 X-KDE-PluginInfo-Email=alex.richardson@gmx.de
