@@ -44,7 +44,7 @@ class OKTETACORE_EXPORT ArrayChangeMetrics
     static const Address InvalidAddress = -1;
 
   public:
-    enum Type { /*Insertion, Removal,*/ Replacement, Swapping/*, Filling, Setting*/ };
+    enum Type { /*Insertion, Removal,*/ Replacement, Swapping/*, Filling, Setting*/, Invalid };
 
   public:
     static ArrayChangeMetrics asReplacement( Address offset, Size removeLength, Size insertLength );
@@ -111,7 +111,7 @@ inline ArrayChangeMetrics ArrayChangeMetrics::asSwapping( Address firstOffset, A
 inline ArrayChangeMetrics::ArrayChangeMetrics( Type type, Address offset, qint32 secondArgument, qint32 thirdArgument )
  : mType( type ), mOffset( offset ), mSecondArgument( secondArgument ), mThirdArgument( thirdArgument )
 {}
-inline ArrayChangeMetrics::ArrayChangeMetrics() : mOffset( InvalidAddress ), mSecondArgument( 0 ), mThirdArgument( 0 ) {}
+inline ArrayChangeMetrics::ArrayChangeMetrics() : mType(Invalid) ,mOffset( InvalidAddress ), mSecondArgument( 0 ), mThirdArgument( 0 ) {}
 inline bool ArrayChangeMetrics::operator==( const ArrayChangeMetrics& other ) const
 {
     return mType == other.mType
