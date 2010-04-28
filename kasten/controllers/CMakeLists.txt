@@ -429,7 +429,7 @@ target_link_libraries( oktetakastencontrollers
   ${KDE4_KUTILS_LIBS}
   ${QT_QTSCRIPT_LIBRARY}
   ${QT_QTSCRIPTTOOLS_LIBRARY}
-#   ${KDE4_KNEWSTUFF2_LIBS}
+  ${KDE4_KNEWSTUFF3_LIBS}
 )
 if( QCA2_FOUND )
   target_link_libraries( oktetakastencontrollers ${QCA2_LIBRARIES} )
@@ -440,7 +440,7 @@ set_target_properties( oktetakastencontrollers  PROPERTIES VERSION ${GENERIC_LIB
 install( TARGETS oktetakastencontrollers  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${okteta_kastencontrollers_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )
-# install( FILES view/structures/kns/structures.knsrc  DESTINATION  ${CONFIG_INSTALL_DIR} )
+install( FILES view/structures/kns/okteta-structures.knsrc  DESTINATION  ${CONFIG_INSTALL_DIR} )
 
 set( elf_structure_FILES
   view/structures/schema/example/elf/elf.desktop
