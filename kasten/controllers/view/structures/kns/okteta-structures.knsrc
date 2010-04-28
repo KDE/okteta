@@ -6,7 +6,7 @@ ProvidersUrl=http://download.kde.org/khotnewstuff/oktetastructuredefinitions-pro
 # optional:
 Uncompress=archive
 # One of the following 4:
-TargetDir=okteta/structures2
+TargetDir=okteta/structures
 # InstallPath=
 # StandardResource=
 # AbsoluteInstallPath=
