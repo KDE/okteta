@@ -28,15 +28,17 @@
 // KDE
 #include <KFileDialog>
 #include <KStandardDirs>
-// #include <KNS/Engine>
 #include <KIO/NetAccess>
 #include <KMessageBox>
 #include <KPluginSelector>
 #include <KPluginInfo>
 #include <KPushButton>
+//KNS
+#include <KNS3/KNewStuffButton>
 // Qt
 #include <QtGui/QListWidgetItem>
 #include <QtGui/QLayout>
+#include <QtGui/QSizePolicy>
 
 #include <KDebug>
 
@@ -44,20 +46,37 @@ static const int FileNameRole = Qt::UserRole;
 
 StructuresManagerView::StructuresManagerView(Kasten::StructuresManager* manager,
         QWidget* parent) :
-    QWidget(parent), mManager(manager)
+    QWidget(parent), mManager(manager), mRebuildingPluginsList(false)
 {
     QVBoxLayout* pageLayout = new QVBoxLayout(this);
 
     mStructuresSelector = new KPluginSelector(this);
+    connect(mStructuresSelector, SIGNAL(changed(bool)),
+            SLOT(onPluginSelectorChange(bool)));
     pageLayout->addWidget(mStructuresSelector);
 
-    QVBoxLayout* buttonsLayout = new QVBoxLayout();
+    QHBoxLayout* buttonsLayout = new QHBoxLayout();
 
-    //    mGetNewStructuresButton = new KPushButton( KIcon("get-hot-new-stuff"), i18n("Get New Structures..."), this );
-    //    connect( mGetNewStructuresButton, SIGNAL(clicked()),
-    //             SLOT(onGetNewStructuresClicked()) );
+    //    mApplyChangesButton = new KPushButton(KIcon("dialog-ok-apply"), i18n(
+    //            "Apply Changes"), this);
+    //    connect(mApplyChangesButton, SIGNAL(clicked()), SLOT(onApplyChangesClicked()));
+    //    buttonsLayout->addWidget(mApplyChangesButton, 0, Qt::AlignCenter);
+
+    mGetNewStructuresButton = new KNS3::Button(i18n("Get New Structures..."),
+            "okteta-structures.knsrc", this);
+    connect(mGetNewStructuresButton,
+            SIGNAL(dialogFinished(const KNS3::Entry::List&)),
+            SLOT(onGetNewStructuresClicked(const KNS3::Entry::List&)));
+
+    buttonsLayout->addWidget(mGetNewStructuresButton);
+
+    //    mUpdateStructuresButton = new KPushButton(KIcon("system-software-update"), i18n(
+    //            "Check for updates"), this);
+    //    connect(mGetNewStructuresButton, SIGNAL(clicked()),
+    //            SLOT(onUpdateStructuresClicked()));
     //
-    //    buttonsLayout->addWidget( mGetNewStructuresButton );
+    //    buttonsLayout->addWidget(mUpdateStructuresButton);
+
     //
     //    mImportStructuresButton = new KPushButton( i18n("Import Structures..."), this );
     //    connect( mImportStructuresButton, SIGNAL(clicked()),
@@ -77,49 +96,60 @@ StructuresManagerView::StructuresManagerView(Kasten::StructuresManager* manager,
     //
     //    buttonsLayout->addWidget( mRemoveStructureButton );
 
-    mApplyChangesButton = new KPushButton(i18n("Apply Changes"), this);
-    connect(mApplyChangesButton, SIGNAL(clicked()), SLOT(onApplyChangesClicked()));
-
-    buttonsLayout->addWidget(mApplyChangesButton);
     //    buttonsLayout->addStretch();
 
     pageLayout->addLayout(buttonsLayout);
 
-    KPluginInfo::List plugins;
-    KPluginInfo::List dynamicPlugins;
-    foreach(const Kasten::StructureDefinitionFile* def, manager->structureDefs())
-        {
-            KPluginInfo info = def->pluginInfo();
-            if (info.category() == QLatin1String("structure"))
-                plugins.append(info);
-            else if (info.category() == QLatin1String("structure/js"))
-                dynamicPlugins.append(info);
-        }
-
-    mStructuresSelector->addPlugins(plugins, KPluginSelector::ReadConfigFile, i18n(
-            "Structure Definitions"), QString("structure"), mManager->config());
-    mStructuresSelector->addPlugins(dynamicPlugins, KPluginSelector::ReadConfigFile, i18n(
-            "Dynamic Structure Definitions"), QString("structure/js"),
-            mManager->config());
-    mStructuresSelector->load();
-    mStructuresSelector->updatePluginsState();
+    rebuildPluginSelectorEntries();
+    setLayout(pageLayout);
 }
 
-#if 0
-void StructuresManagerView::onGetNewStructuresClicked()
+void StructuresManagerView::onGetNewStructuresClicked(
+        const KNS3::Entry::List& changedEntries)
 {
-    KNS::Engine engine(this);
-    if (engine.init("structures.knsrc"))
-    {
-        const KNS::Entry::List entries = engine.downloadDialogModal(this);
-
-        if (!entries.isEmpty())
+    foreach (const KNS3::Entry& e, changedEntries)
         {
-            mManager->reloadPaths();
+            kDebug()
+                << "Changed Entry: " << e.name();
+            if (e.status() == KNS3::Entry::Installed)
+            {
+                //new element installed
+                kDebug()
+                    << "installed files:" << e.installedFiles();
+            }
+            if (e.status() == KNS3::Entry::Deleted)
+            {
+                //new element installed
+                kDebug()
+                    << "deleted files:" << e.uninstalledFiles();
+            }
         }
+    if (!changedEntries.isEmpty())
+    {
+        kDebug()
+            << "installed structures changed ->"
+                " rebuilding list of installed structures";
+        mManager->reloadPaths();
+        rebuildPluginSelectorEntries();
     }
 }
 
+void StructuresManagerView::onPluginSelectorChange(bool change)
+{
+    if (mRebuildingPluginsList)
+        return;
+    kDebug()
+        << "pluginselector changed: " << change;
+    if (!change)
+        return;
+    mStructuresSelector->save();
+    emit selectedPluginsChanged();
+}
+#if 0
+void StructuresManagerView::onUpdateStructuresClicked()
+{
+    //XXX: implement
+}
 void StructuresManagerView::onImportStructuresClicked()
 {
     const KUrl::List urls = KFileDialog::getOpenUrls(KUrl(), i18n(
@@ -192,14 +222,39 @@ void StructuresManagerView::onRemoveStructureClicked()
 }
 #endif
 
-void StructuresManagerView::onApplyChangesClicked()
+void StructuresManagerView::rebuildPluginSelectorEntries()
 {
-    mStructuresSelector->save();
-    kDebug()
-        << "saved";
-    emit
-    applyButtonClicked();
-    return;
+    mRebuildingPluginsList = true;
+    KPluginInfo::List plugins;
+    KPluginInfo::List dynamicPlugins;
+    foreach(const Kasten::StructureDefinitionFile* def, mManager->structureDefs())
+        {
+            KPluginInfo info = def->pluginInfo();
+            if (info.category() == QLatin1String("structure"))
+                plugins.append(info);
+            else if (info.category() == QLatin1String("structure/js"))
+                dynamicPlugins.append(info);
+        }
+
+    //XXX is there any way to clear the plugins selector?
+    layout()->removeWidget(mStructuresSelector);
+    layout()->removeWidget(mGetNewStructuresButton);
+    delete mStructuresSelector;
+    mStructuresSelector = new KPluginSelector(this);
+    connect(mStructuresSelector, SIGNAL(changed(bool)),
+            SLOT(onPluginSelectorChange(bool)));
+    layout()->addWidget(mStructuresSelector);
+    layout()->addWidget(mGetNewStructuresButton);
+
+
+    mStructuresSelector->addPlugins(plugins, KPluginSelector::ReadConfigFile, i18n(
+            "Structure Definitions"), QString("structure"), mManager->config());
+    mStructuresSelector->addPlugins(dynamicPlugins, KPluginSelector::ReadConfigFile,
+            i18n("Dynamic Structure Definitions"), QString("structure/js"),
+            mManager->config());
+    mStructuresSelector->load();
+    mStructuresSelector->updatePluginsState();
+    mRebuildingPluginsList = false;
 }
 
 StructuresManagerView::~StructuresManagerView()

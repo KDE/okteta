@@ -170,7 +170,7 @@ void StructView::openSettingsDlg(int page)
     //User edited the configuration - update your local copies of the
     //configuration data
     connect(dialog, SIGNAL(settingsChanged(const QString&)), this, SLOT(update()));
-    connect(structureSettings, SIGNAL(applyButtonClicked()),
+    connect(structureSettings, SIGNAL(selectedPluginsChanged()),
             loadedStructuresSettings, SLOT(updateAvailable()));
     connect(dialog, SIGNAL(settingsChanged(const QString&)), mTool,
             SLOT(setSelectedStructuresInView()));

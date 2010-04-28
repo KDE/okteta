@@ -1,0 +1,18 @@
+[KNewStuff3]
+ProvidersUrl=http://download.kde.org/khotnewstuff/oktetastructuredefinitions-providers.xml
+#ProvidersUrl=file:///home/alex/devel/knewstuff/okteta-structure-providers.xml
+# optional:
+# InstallationCommand=
+# optional:
+Uncompress=archive
+# One of the following 4:
+TargetDir=okteta/structures2
+# InstallPath=
+# StandardResource=
+# AbsoluteInstallPath=
+# The following 4 are read, but not used:
+CustomName=
+CachePolicy=
+ChecksumPolicy=
+SignaturePolicy=
+Scope=

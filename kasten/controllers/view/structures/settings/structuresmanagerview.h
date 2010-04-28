@@ -26,10 +26,15 @@
 
 // Qt
 #include <QtGui/QWidget>
+#include <KNS3/Entry>
 
 class KPushButton;
 class KPluginSelector;
 
+namespace KNS3
+{
+class Button;
+}
 namespace Kasten
 {
 class StructuresManager;
@@ -46,23 +51,30 @@ public:
     virtual ~StructuresManagerView();
 
 protected Q_SLOTS:
-//     void onGetNewStructuresClicked();
-//     void onImportStructuresClicked();
-//     void onExportStructureClicked();
-//     void onRemoveStructureClicked();
-    void onApplyChangesClicked();
+    void onGetNewStructuresClicked(const KNS3::Entry::List& changedEntries);
+    //    void onUpdateStructuresClicked();
+    //TODO import
+    //     void onImportStructuresClicked();
+    //     void onExportStructureClicked();
+    //     void onRemoveStructureClicked();
+    void onPluginSelectorChange(bool change);
 Q_SIGNALS:
-    void applyButtonClicked();
+    void selectedPluginsChanged();
+private:
+    void rebuildPluginSelectorEntries();
 private:
     Kasten::StructuresManager* mManager;
 
-//     KPushButton* mGetNewStructuresButton;
-//     KPushButton* mImportStructuresButton;
-//     KPushButton* mExportStructureButton;
-//     KPushButton* mRemoveStructureButton;
+    KNS3::Button* mGetNewStructuresButton;
+    //    KPushButton* mUpdateStructuresButton;
+    //     KPushButton* mImportStructuresButton;
+    //     KPushButton* mExportStructureButton;
+    //     KPushButton* mRemoveStructureButton;
     KPushButton* mApplyChangesButton;
 
     KPluginSelector* mStructuresSelector;
+    bool mRebuildingPluginsList :1;
+
 };
 
 #endif
