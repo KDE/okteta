@@ -204,11 +204,11 @@ QVariant StructTool::headerData(int column, int role)
     {
         switch (column)
         {
-        case 0:
+        case DataInformation::ColumnName:
             return i18nc("name of a data structure", "Name");
-        case 1:
+        case DataInformation::ColumnType:
             return i18nc("type of a data structure", "Type");
-        case 2:
+        case DataInformation::ColumnValue:
             return i18nc("value of a data structure (primitive type)", "Value");
         default:
             return QVariant();

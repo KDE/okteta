@@ -37,7 +37,7 @@ QVariant PrimitiveDataInformation::data(int column, int role) const
 {
     if (role == Qt::DisplayRole)
     {
-        if (column == 0)
+        if (column == ColumnName)
         {
             AbstractArrayDataInformation* par =
                     dynamic_cast<AbstractArrayDataInformation*> (parent());
@@ -45,9 +45,9 @@ QVariant PrimitiveDataInformation::data(int column, int role) const
                 return QString("[%1]").arg(mIndex);
             return name();
         }
-        else if (column == 1)
+        else if (column == ColumnType)
             return typeName();
-        else if (column == 2)
+        else if (column == ColumnValue)
             return valueString();
         else
             return QVariant();
@@ -79,7 +79,7 @@ QVariant PrimitiveDataInformation::data(int column, int role) const
     //            return i18nc("not all values in this structure are as they should be",
     //                    "Validation failed.");
     //    }
-    else if (role == Qt::DecorationRole && column == 0)
+    else if (role == Qt::DecorationRole && column == ColumnName)
     {
         //XXX better icons?
         if (mHasBeenValidated)

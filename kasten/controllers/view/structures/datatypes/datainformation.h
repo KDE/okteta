@@ -63,9 +63,9 @@ class DataInformation: public QObject, public QScriptable
 Q_OBJECT
 public:
     //    Q_PROPERTY(bool hasBeenValidated READ hasBeenValidated() WRITE setHasBeenValidated)
-    Q_PROPERTY(bool valid READ validationSuccessful() WRITE setValidationSuccessful)
-    Q_PROPERTY(bool wasAbleToRead READ wasAbleToRead())
-    Q_PROPERTY(QString validationError READ validationError() WRITE setValidationError)
+Q_PROPERTY(bool valid READ validationSuccessful() WRITE setValidationSuccessful)
+Q_PROPERTY(bool wasAbleToRead READ wasAbleToRead())
+Q_PROPERTY(QString validationError READ validationError() WRITE setValidationError)
 
 protected:
     DataInformation(const DataInformation&);
@@ -73,11 +73,11 @@ public:
     virtual DataInformation* clone() const = 0;
     DataInformation(const QString& name, int index, DataInformation* parent = NULL);
     virtual ~DataInformation();
-    /**
-     *  column 0 is name
-     *  column 1 is value
-     */
-    static const int COLUMN_COUNT = 3;
+
+    enum Columns
+    {
+        ColumnName = 0, ColumnType, ColumnValue, COLUMN_COUNT
+    };
 
     //methods for children:
     /** true for unions and structs and arrays*/
@@ -91,9 +91,11 @@ public:
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
     int row() const;
     /** get the necessary data (for the model) */
-    virtual QVariant data(int column, int role) const = 0;
+    virtual QVariant data(int column, int role) const
+    = 0;
     /** The size of this DataInformation type in bits (to allow bitfields in future) */
-    virtual QString typeName() const = 0;
+    virtual QString typeName() const
+    = 0;
     /** by default just returns an empty QString */
     virtual QString valueString() const;
     virtual QString name() const;
@@ -102,14 +104,18 @@ public:
 
     //delegate functions:
     /** create a QWidget for the QItemDelegate */
-    virtual QWidget* createEditWidget(QWidget* parent) const = 0;
+    virtual QWidget* createEditWidget(QWidget* parent) const
+    = 0;
     /** get the needed data from the widget */
-    virtual QVariant dataFromWidget(const QWidget* w) const = 0;
+    virtual QVariant dataFromWidget(const QWidget* w) const
+    = 0;
     /** initialize the delegate widget with the correct data */
-    virtual void setWidgetData(QWidget* w) const = 0;
+    virtual void setWidgetData(QWidget* w) const
+    = 0;
 
     //reading and writing
-    virtual int size() const = 0;
+    virtual int size() const
+    = 0;
     /** Reads the necessary data from @p input and returns the number of bytes read
      *
      * @param input the byte array to read from
@@ -123,7 +129,8 @@ public:
      */
     virtual qint64
     readData(Okteta::AbstractByteArrayModel *input, ByteOrder byteOrder,
-            Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset) =0;
+            Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
+    =0;
     /** sets mWasAbleToRead to false for all children and this object.
      *  Gets called once before the reading of the whole structure starts. */
     void beginRead();
@@ -143,7 +150,8 @@ public:
      */
     virtual bool setData(const QVariant& value, DataInformation* inf,
             Okteta::AbstractByteArrayModel *input, ByteOrder byteOrder,
-            Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset) = 0;
+            Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
+    = 0;
 
     virtual bool isDynamicArray() const;
     TopLevelDataInformation* topLevelDataInformation() const;

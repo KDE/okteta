@@ -165,7 +165,7 @@ QVariant DataInformationWithChildren::data(int column, int role) const
 {
     if (role == Qt::DisplayRole)
     {
-        if (column == 0)
+        if (column == ColumnName)
         {
             if (dynamic_cast<AbstractArrayDataInformation*> (parent()))
             {
@@ -173,9 +173,9 @@ QVariant DataInformationWithChildren::data(int column, int role) const
             }
             return name();
         }
-        else if (column == 1)
+        else if (column == ColumnType)
             return typeName();
-        else if (column == 2)
+        else if (column == ColumnValue)
             return valueString(); //empty QString
         else
             return QVariant();
@@ -204,7 +204,7 @@ QVariant DataInformationWithChildren::data(int column, int role) const
                     "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)",
                     childCount(), name(), valueString(), typeName(), sizeString());
     }
-    else if (role == Qt::DecorationRole && column == 0)
+    else if (role == Qt::DecorationRole && column == ColumnName)
     {
         //XXX better icons?
         if (mHasBeenValidated)
