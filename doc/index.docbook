@@ -1083,7 +1083,7 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     <varlistentry>
     <term><menuchoice>
     <shortcut>
-    <keycombo action="simul">&Ctrl;&Shift;<keycap>L</keycap></keycombo>
+    <keycombo action="simul">&Ctrl;&Shift;<keycap>R</keycap></keycombo>
     </shortcut>
     <guimenu>View</guimenu>
     <guimenuitem>Close View Area</guimenuitem>
