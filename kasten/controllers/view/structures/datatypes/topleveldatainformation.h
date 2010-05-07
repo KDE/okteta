@@ -24,8 +24,16 @@
 
 #include "datainformation.h"
 
+#include <QtCore/QMap>
 #include <QtCore/QFileInfo>
 #include <QtCore/QExplicitlySharedDataPointer>
+
+#include <arraychangemetricslist.h>
+
+namespace Okteta
+{
+class AbstractByteArrayModel;
+} // namespace Okteta
 
 class QScriptEngine;
 class ScriptHandler;
@@ -45,21 +53,45 @@ public:
     TopLevelDataInformation* clone() const;
 public:
     void validate();
+    /** Reads the necessary data from @p input
+     *
+     * @param input the byte array to read from
+     * @param byteOrder the byte order used to read the data (big/little endian), may be overridden by child structures
+     * @param address the starting offset to read from, or if an offset is locked, the locked offset
+     * @param changesList the list with changes to @input, so that it is possible to check whether reading is neccessary
+     *      This parameter is only useful if the structure was locked to a specific position.
+     */
+    void read(Okteta::AbstractByteArrayModel* input, ByteOrder byteOrder,
+            Okteta::Address address,
+            const Okteta::ArrayChangeMetricsList& changesList =
+                    Okteta::ArrayChangeMetricsList());
     void updateElement(DataInformation* elem);
     QScriptEngine* scriptEngine() const;
 
     DataInformation* actualDataInformation() const;
     bool wasAbleToParse() const;
-
-
+    void lockPositionToOffset(Okteta::Address offset,
+            const Okteta::AbstractByteArrayModel* model);
+    void unlockPosition(const Okteta::AbstractByteArrayModel* model);
+    bool isLockedFor(const Okteta::AbstractByteArrayModel* model) const;
+private:
+    bool isReadingNecessary(const Okteta::ArrayChangeMetricsList& changesList,
+            Okteta::Address address);
 public Q_SLOTS:
     void resetValidationState();
+    void removeByteArrayModelFromList(QObject* model);
     //the new methods of topLevelDataInformation
 
 private:
     DataInformation* mData;
     QExplicitlySharedDataPointer<ScriptHandler> mScriptHandler;
     QFileInfo mStructureFile;
+    /** Save the position this structure is locked to for each ByteArrayModel
+     * QObject::destroyed() has to be connected to slot removeByteArrayModel()
+     *  so that no dangling pointers remain
+     *  Keys are the models and values are a pointer so that NULL can indicate that it is not locked.
+     */
+    QMap<const Okteta::AbstractByteArrayModel*, quint64*> mLockedPositions;
     bool mWasAbleToParse :1;
 };
 

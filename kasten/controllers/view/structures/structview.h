@@ -60,7 +60,7 @@ protected:
     KPushButton* mValidateButton;
     KPushButton* mSettingsButton;
     StructViewItemDelegate* mDelegate;
-
+    KPushButton* mLockStructureButton;
     QWidget* mStructTreeViewFocusChild;
 #ifdef OKTETA_DEBUG_SCRIPT
     KTextEdit* mScriptErrors;
@@ -71,7 +71,8 @@ protected Q_SLOTS:
     void
     onCurrentRowChanged(const QModelIndex& current, const QModelIndex& previous);
     void onCursorIndexChange();
-
+    void lockCurrentStructure(bool lock);
+    void setLockButtonStated(bool structureLocked);
     void logScriptError(QString msg, QString err);
 };
 

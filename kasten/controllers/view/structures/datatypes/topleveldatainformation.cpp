@@ -25,6 +25,8 @@
 #include "../script/scripthandler.h"
 #include "primitivefactory.h"
 #include "../allprimitivetypes.h"
+
+#include <abstractbytearraymodel.h>
 //QtScript
 #include <QtScript/QScriptEngine>
 
@@ -42,8 +44,8 @@ TopLevelDataInformation::TopLevelDataInformation(DataInformation* data,
         if (!mData)
         {
             //just a dummy, this object should be deleted anyway
-            mData = PrimitiveFactory::newInstance(
-                    "failed_to_load__this_is_a_dummy", Type_Int32, 0);
+            mData = PrimitiveFactory::newInstance("failed_to_load__this_is_a_dummy",
+                    Type_Int32, 0);
             mWasAbleToParse = false;
         }
     }
@@ -97,10 +99,121 @@ void TopLevelDataInformation::resetValidationState()
     mData->resetValidationState();
 }
 
-void TopLevelDataInformation::updateElement(DataInformation* elem) {
-	if (!elem || !mScriptHandler)
-		return;
-	mScriptHandler->updateDataInformation(elem);
+void TopLevelDataInformation::updateElement(DataInformation* elem)
+{
+    if (!elem || !mScriptHandler)
+        return;
+    mScriptHandler->updateDataInformation(elem);
 
+}
+
+void TopLevelDataInformation::read(Okteta::AbstractByteArrayModel* input,
+        ByteOrder byteOrder, Okteta::Address address,
+        const Okteta::ArrayChangeMetricsList& changesList)
+{
+    //first of all check if start offset is locked
+    if (mLockedPositions.contains(input))
+    {
+
+        //use the saved offset
+        address = *mLockedPositions.value(input);
+        //we read from the locked position, so now check whether it is neccessary to update
+        bool updateNeccessary = isReadingNecessary(changesList, address);
+
+        if (!updateNeccessary)
+            return;
+    }
+    quint64 remainingBits = (input->size() - address) * 8;
+    quint8* bitOffset = new quint8(0);
+    mData->beginRead(); //before reading set wasAbleToRead to false
+    mData->resetValidationState(); //reading new data -> validation state is old
+    mData->readData(input, byteOrder, address, remainingBits, bitOffset);
+    delete bitOffset;
+
+}
+bool TopLevelDataInformation::isReadingNecessary(
+        const Okteta::ArrayChangeMetricsList& changesList, Okteta::Address address)
+{
+    for (int i = 0; i < changesList.length(); ++i)
+    {
+        const Okteta::ArrayChangeMetrics& change = changesList.at(i);
+        if (change.type() == Okteta::ArrayChangeMetrics::Replacement)
+        {
+            Okteta::Address structureSizeInBytes = (mData->size() / 8)
+                    + (mData->size() % 8 == 0 ? 0 : 1);
+
+            //handle it for replacements
+            //TODO insertions and deletions: move structureStart?
+            if (change.lengthChange() == 0)
+            {
+                //only need to check if anything inside structure was changed
+                if (change.offset() > address + structureSizeInBytes)
+                {
+                    //change is after structure, no need to update anything
+                    continue;
+                }
+                //check if change is before structure
+                else if (change.offset() + change.insertLength() < address)
+                {
+                    //only values before start changed -> reading is unnecessary
+                    continue;
+                }
+                else
+                {
+                    //change affects this structure
+                    return true;
+                }
+            }
+            else if (change.type() == Okteta::ArrayChangeMetrics::Swapping)
+            {
+
+            }
+            else
+            {
+                kFatal() << "logic error, this should never be reached";
+            }
+        }
+    }
+//    kDebug()
+//        << "it was not necessary to update values";
+    return true; //just return true for all other cases
+    //TODO implement checks for other cases
+}
+
+void TopLevelDataInformation::lockPositionToOffset(Okteta::Address offset,
+        const Okteta::AbstractByteArrayModel* model)
+{
+    mLockedPositions.insert(model, new quint64(offset));
+    kDebug()
+        << "Locking start offset in model " << model << "to position " << offset;
+    //remove when deleted
+    connect(model, SIGNAL(destroyed(QObject*)),
+            SLOT(removeByteArrayModelFromList(QObject*)));
+}
+
+void TopLevelDataInformation::unlockPosition(
+        const Okteta::AbstractByteArrayModel* model)
+{
+
+    kDebug()
+        << "removing lock at position " << *(mLockedPositions.value(model))
+                << ", model =" << (void*) model;
+    //just remove from map
+    delete mLockedPositions.take(model);
+    mLockedPositions.remove(model);
+}
+
+void TopLevelDataInformation::removeByteArrayModelFromList(QObject* obj)
+{
+    const Okteta::AbstractByteArrayModel* model =
+            static_cast<Okteta::AbstractByteArrayModel*> (obj);
+    delete mLockedPositions.take(model);
+    mLockedPositions.remove(model);
+}
+
+bool TopLevelDataInformation::isLockedFor(
+        const Okteta::AbstractByteArrayModel* model) const
+{
+    return mLockedPositions.contains(model);
 }
 

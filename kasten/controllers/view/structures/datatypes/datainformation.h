@@ -114,8 +114,9 @@ public:
     = 0;
 
     //reading and writing
-    virtual int size() const
-    = 0;
+    /** the size in bits of this element */
+    virtual int size() const = 0;
+    
     /** Reads the necessary data from @p input and returns the number of bytes read
      *
      * @param input the byte array to read from

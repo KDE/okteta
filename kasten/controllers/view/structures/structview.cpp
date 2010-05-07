@@ -100,7 +100,6 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
             "The byte order used to decode the values.");
     mByteOrderSelection->setToolTip(byteOrderToolTip);
     settingsLayout->addWidget(mByteOrderSelection);
-    settingsLayout->addStretch();
     baseLayout->addLayout(settingsLayout);
 
     KIcon validateIcon = KIcon("document-sign");
@@ -108,25 +107,36 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     const QString validationToolTip = i18nc("@info:tooltip",
             "Validate all structures.");
     mValidateButton->setToolTip(validationToolTip);
-    connect(mValidateButton, SIGNAL(clicked()), mTool,
-            SLOT(validateAllStructures()));
+    connect(mValidateButton, SIGNAL(clicked()), mTool, SLOT(validateAllStructures()));
     settingsLayout->addWidget(mValidateButton);
 
+    mLockStructureButton = new KPushButton(KIcon("object-locked"), i18nc(
+            "@action:pushbutton", "Lock structure"), this);
+    mLockStructureButton->setToolTip(i18nc("@info:tooltip",
+            "Lock selected structure to current offset."));
+    connect(mLockStructureButton, SIGNAL(toggled(bool)), this,
+            SLOT(lockCurrentStructure(bool)));
+    mLockStructureButton->setCheckable(true);
+    settingsLayout->addWidget(mLockStructureButton);
+
+    settingsLayout->addStretch(); //stretch before the settings button
     KIcon settings = KIcon("configure");
     mSettingsButton = new KPushButton(settings, i18n("Settings"), this);
     const QString settingsTooltip = i18nc("@info:tooltip", "Open settings.");
     mSettingsButton->setToolTip(settingsTooltip);
     connect(mSettingsButton, SIGNAL(pressed()), this, SLOT(openSettingsDlg()));
     settingsLayout->addWidget(mSettingsButton);
+
     connect(mStructTreeView->selectionModel(),
             SIGNAL(currentRowChanged( const QModelIndex&, const QModelIndex& )),
             SLOT(onCurrentRowChanged( const QModelIndex&, const QModelIndex& )));
+
     connect(mTool, SIGNAL(cursorIndexChanged()), SLOT(onCursorIndexChange()));
 
-#ifdef OKTETA_DEBUG_SCRIPT
     connect(ScriptUtils::object(), SIGNAL(scriptError(QString, QString)), this,
             SLOT(logScriptError(QString, QString)));
-
+#ifdef OKTETA_DEBUG_SCRIPT
+    //TODO maybe not compile-time option but runtime option
     mScriptErrors = new KTextEdit(this);
     baseLayout->addWidget(mScriptErrors);
 #endif
@@ -195,12 +205,14 @@ bool StructView::eventFilter(QObject* object, QEvent* event)
         {
             const QModelIndex current =
                     mStructTreeView->selectionModel()->currentIndex();
-            kDebug()
-                << "current index: " << current;
+
             if (current.isValid())
                 mTool->mark(current);
             else
                 mTool->unmark();
+
+            //set state of lock button
+            setLockButtonStated(mTool->isStructureLocked(current));
         }
         else if (event->type() == QEvent::FocusOut)
         {
@@ -251,7 +263,51 @@ void StructView::logScriptError(QString msg, QString err)
     //FIXME add the preferences
     kWarning() << "Script error occurred:" << msg << "  " << err;
     mScriptErrors->append(QTime::currentTime().toString() + ":" + msg + " " + err);
+#else
+    Q_UNUSED(msg)
+    Q_UNUSED(err)
 #endif
+}
+
+void StructView::lockCurrentStructure(bool lock)
+{
+    setLockButtonStated(lock);
+    const QModelIndex current = mStructTreeView->selectionModel()->currentIndex();
+    if (!current.isValid())
+    {
+        kWarning() << "invalid index " << current << " -> returning";
+    }
+
+    if (lock)
+    {
+        mTool->lockStructure(current);
+    }
+    else
+    {
+        mTool->unlockStructure(current);
+    }
+}
+
+void StructView::setLockButtonStated(bool structureLocked)
+{
+    if (structureLocked)
+    {
+        mLockStructureButton ->setIcon(KIcon("object-unlocked"));
+        mLockStructureButton->setText(
+                i18nc("@action:pushbutton", "Unlock structure"));
+        mLockStructureButton->setToolTip(i18nc("@info:tooltip",
+                "Unlock selected structure, i.e. the start offset is"
+                    " always set to the current cursor position."));
+    }
+    else
+    {
+        mLockStructureButton->setIcon(KIcon("object-locked"));
+        mLockStructureButton->setText(i18nc("@action:pushbutton", "Lock structure"));
+        mLockStructureButton->setToolTip(i18nc("@info:tooltip",
+                "Lock selected structure to current offset."));
+        //TODO unlock the structure
+    }
+
 }
 
 }

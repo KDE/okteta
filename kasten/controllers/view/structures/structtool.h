@@ -28,16 +28,18 @@
 #include "oktetakastencontrollers_export.h"
 // tool
 #include "structviewpreferences.h"
-#include "datatypes/datainformation.h"
 // Kasten core
 #include <abstracttool.h>
 // Okteta core
 #include <address.h>
+#include <arraychangemetricslist.h>
 //Qt
 #include <QModelIndex>
 #include <QFileInfo>
 #include <QStringList>
 
+class DataInformation;
+class TopLevelDataInformation;
 namespace Okteta
 {
 class CharCodec;
@@ -69,15 +71,16 @@ public:
         return mByteOrder;
     }
     void setByteOrder(StructViewPreferences::EnumByteOrder::type order);
-    inline int columnCount()
-    {
-        return DataInformation::COLUMN_COUNT;
-    }
+    int columnCount() const;
     bool setData(const QVariant& value, int role, DataInformation* item);
+    Okteta::AbstractByteArrayModel* byteArrayModel() const;
     inline StructuresManager* manager() const
     {
         return mManager;
     }
+    void lockStructure(QModelIndex idx);
+    void unlockStructure(QModelIndex idx);
+    bool isStructureLocked(QModelIndex idx) const;
 Q_SIGNALS: // changes to the settings currently not signaled, because only controlled by view
     void dataChanged();
     void dataCleared();
@@ -88,14 +91,15 @@ public Q_SLOTS:
     void setByteOrder(int order);
     void mark(const QModelIndex& idx);
     void unmark(/*const QModelIndex& idx*/);
-    void updateData();
+    void updateData(const Okteta::ArrayChangeMetricsList& list =
+            Okteta::ArrayChangeMetricsList());
     void addChildItem(TopLevelDataInformation* child);
     void setSelectedStructuresInView();
     void validateAllStructures();
 
 protected Q_SLOTS:
     void onCursorPositionChange(Okteta::Address pos);
-    void onContentsChange();
+    void onContentsChange(const Okteta::ArrayChangeMetricsList&);
     //	void onCharCodecChange(const QString& codecName);
     void onChildItemDataChanged()
     {
@@ -119,13 +123,14 @@ public:
     QVariant headerData(int column, int role);
     int childCount() const;
     DataInformation* childAt(int idx) const;
-    Qt::ItemFlags flags(int column, DataInformation* data) const
-    {
-        if (!data)
-            return 0; // just return something in case data is null
-        return data->flags(column, mByteArrayModel != NULL);
-    }
+    Qt::ItemFlags flags(int column, DataInformation* data) const;
     //	QTextCodec* mUtf8Codec; //XXX add utf8 strings sometime
 };
+
+inline Okteta::AbstractByteArrayModel* StructTool::byteArrayModel() const
+{
+    return mByteArrayModel;
+}
+
 }
 #endif /* STRUCTTOOL_H_ */

@@ -38,7 +38,9 @@
 #include <KStandardDirs>
 
 #include "script/scripthandler.h"
+
 #include "datatypes/topleveldatainformation.h"
+#include "datatypes/datainformation.h"
 
 namespace Kasten
 {
@@ -98,7 +100,7 @@ void StructTool::setTargetModel(AbstractModel* model)
                 SLOT(onCursorPositionChange( Okteta::Address )));
         connect(mByteArrayModel,
                 SIGNAL(contentsChanged( const Okteta::ArrayChangeMetricsList& )),
-                SLOT(onContentsChange()));
+                SLOT(onContentsChange( const Okteta::ArrayChangeMetricsList&)));
         //		onCharCodecChange(mByteArrayView->charCodingName());
         //         connect(mByteArrayView, SIGNAL(charCodecChanged( const QString& )),
         //                 SLOT(onCharCodecChange( const QString& )));
@@ -135,10 +137,9 @@ void StructTool::setByteOrder(int order)
         kWarning() << "invalid byte order set:" << order;
 }
 
-void StructTool::onContentsChange()
+void StructTool::onContentsChange(const Okteta::ArrayChangeMetricsList& list)
 {
-    // TODO: only update if affected
-    updateData();
+    updateData(list);
 }
 
 bool StructTool::setData(const QVariant& value, int role, DataInformation* item)
@@ -166,34 +167,20 @@ bool StructTool::setData(const QVariant& value, int role, DataInformation* item)
     return found;
 }
 
-void StructTool::updateData()
+void StructTool::updateData(const Okteta::ArrayChangeMetricsList& list)
 {
     if (mWritingData)
     {
         kWarning() << "currently writing data, won't update";
         return;
     }
-    quint64 remainingBits;
-    if (mByteArrayModel)
-    {
-        remainingBits = qMax(mByteArrayModel->size() - mCursorIndex, 0) * 8;
-    }
-    else
-        remainingBits = 0;
+    if (!mByteArrayModel)
+        return;
 
-    if (remainingBits != 0)
+    for (int i = 0; i < mData.size(); i++)
     {
-
-        QScopedPointer<quint8> bitOffset(new quint8(0));
-        for (int i = 0; i < mData.size(); i++)
-        {
-            TopLevelDataInformation* dat = mData.at(i);
-            dat->actualDataInformation()->beginRead(); //before reading set wasAbleToRead to false
-            dat->resetValidationState(); //reading new data -> validation state is old
-            dat->actualDataInformation()->readData(mByteArrayModel, mByteOrder,
-                    mCursorIndex, remainingBits, bitOffset.data());
-            *bitOffset = 0; //start at beginning again
-        }
+        TopLevelDataInformation* dat = mData.at(i);
+        dat->read(mByteArrayModel, mByteOrder, mCursorIndex, list);
     }
 }
 
@@ -318,6 +305,55 @@ void StructTool::validateAllStructures()
         {
             data->validate();
         }
+}
+
+int StructTool::columnCount() const
+{
+    return DataInformation::COLUMN_COUNT;
+}
+
+Qt::ItemFlags StructTool::flags(int column, DataInformation* data) const
+{
+    if (!data)
+        return 0; // just return something in case data is null
+    return data->flags(column, mByteArrayModel != NULL);
+}
+
+void StructTool::lockStructure(QModelIndex idx)
+{
+    if (!idx.isValid() || !idx.internalPointer())
+        return;
+    DataInformation* data = static_cast<DataInformation*> (idx.internalPointer());
+    TopLevelDataInformation* top = data->topLevelDataInformation();
+    Q_ASSERT(top);
+    if (top)
+        top->lockPositionToOffset(mCursorIndex, mByteArrayModel);
+}
+void StructTool::unlockStructure(QModelIndex idx)
+{
+    if (!idx.isValid() || !idx.internalPointer())
+        return;
+    DataInformation* data = static_cast<DataInformation*> (idx.internalPointer());
+    TopLevelDataInformation* top = data->topLevelDataInformation();
+    Q_ASSERT(top);
+    if (top)
+    {
+        top->unlockPosition(mByteArrayModel);
+        //now read from the current position:
+        top->read(mByteArrayModel, mByteOrder, mCursorIndex);
+    }
+}
+
+bool StructTool::isStructureLocked(QModelIndex idx) const
+{
+    if (!idx.isValid() || !idx.internalPointer())
+        return false;
+    DataInformation* data = static_cast<DataInformation*> (idx.internalPointer());
+    TopLevelDataInformation* top = data->topLevelDataInformation();
+    Q_ASSERT(top);
+    if (top)
+        return top->isLockedFor(mByteArrayModel);
+    return false;
 }
 
 }
