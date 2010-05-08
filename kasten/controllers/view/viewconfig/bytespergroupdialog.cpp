@@ -44,7 +44,7 @@ BytesPerGroupDialog::BytesPerGroupDialog( QWidget* parent )
     mGroupedBytesCountEdit = new KIntNumInput( this );
     mGroupedBytesCountEdit->setRange( 0, INT_MAX );
     mGroupedBytesCountEdit->setSuffix( ki18np(" byte"," bytes") );
-    const QString noGroupingText = i18nc( "",
+    const QString noGroupingText = i18nc( "@label",
                                           "No grouping." );
     mGroupedBytesCountEdit->setSpecialValueText( noGroupingText );
     const QString groupedBytesCountLabel =
