@@ -110,13 +110,11 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     connect(mValidateButton, SIGNAL(clicked()), mTool, SLOT(validateAllStructures()));
     settingsLayout->addWidget(mValidateButton);
 
-    mLockStructureButton = new KPushButton(KIcon("object-locked"), i18nc(
-            "@action:pushbutton", "Lock structure"), this);
-    mLockStructureButton->setToolTip(i18nc("@info:tooltip",
-            "Lock selected structure to current offset."));
+    mLockStructureButton = new KPushButton(this);
+    mLockStructureButton->setCheckable(true);
+    setLockButtonStated(false);
     connect(mLockStructureButton, SIGNAL(toggled(bool)), this,
             SLOT(lockCurrentStructure(bool)));
-    mLockStructureButton->setCheckable(true);
     settingsLayout->addWidget(mLockStructureButton);
 
     settingsLayout->addStretch(); //stretch before the settings button
@@ -292,20 +290,20 @@ void StructView::setLockButtonStated(bool structureLocked)
 {
     if (structureLocked)
     {
-        mLockStructureButton ->setIcon(KIcon("object-unlocked"));
-        mLockStructureButton->setText(
-                i18nc("@action:pushbutton", "Unlock structure"));
+        mLockStructureButton->setIcon(KIcon("object-unlocked"));
+        mLockStructureButton->setText(i18nc("@action:pushbutton"
+            " unlock the starting offset of the current structure", "Unlock"));
         mLockStructureButton->setToolTip(i18nc("@info:tooltip",
-                "Unlock selected structure, i.e. the start offset is"
+                "Unlock selected structure, i.e. the starting offset is"
                     " always set to the current cursor position."));
     }
     else
     {
         mLockStructureButton->setIcon(KIcon("object-locked"));
-        mLockStructureButton->setText(i18nc("@action:pushbutton", "Lock structure"));
+        mLockStructureButton->setText(i18nc("@action:pushbutton"
+            " unlock the starting offset of the current structure", "Lock"));
         mLockStructureButton->setToolTip(i18nc("@info:tooltip",
                 "Lock selected structure to current offset."));
-        //TODO unlock the structure
     }
 
 }
