@@ -105,7 +105,7 @@ void StructTool::setTargetModel(AbstractModel* model)
         //         connect(mByteArrayView, SIGNAL(charCodecChanged( const QString& )),
         //                 SLOT(onCharCodecChange( const QString& )));
     }
-
+    emit byteArrayModelChanged(mByteArrayModel != NULL);
     updateData();
 }
 //void StructTool::onCharCodecChange(const QString& codecName)
@@ -321,6 +321,8 @@ Qt::ItemFlags StructTool::flags(int column, DataInformation* data) const
 
 void StructTool::lockStructure(QModelIndex idx)
 {
+    if (!mByteArrayModel) //no point without ByteArrayModel
+        return;
     if (!idx.isValid() || !idx.internalPointer())
         return;
     DataInformation* data = static_cast<DataInformation*> (idx.internalPointer());
@@ -331,6 +333,8 @@ void StructTool::lockStructure(QModelIndex idx)
 }
 void StructTool::unlockStructure(QModelIndex idx)
 {
+    if (!mByteArrayModel) //no point without ByteArrayModel
+        return;
     if (!idx.isValid() || !idx.internalPointer())
         return;
     DataInformation* data = static_cast<DataInformation*> (idx.internalPointer());
@@ -346,6 +350,8 @@ void StructTool::unlockStructure(QModelIndex idx)
 
 bool StructTool::isStructureLocked(QModelIndex idx) const
 {
+    if (!mByteArrayModel) //no point without ByteArrayModel
+        return false;
     if (!idx.isValid() || !idx.internalPointer())
         return false;
     DataInformation* data = static_cast<DataInformation*> (idx.internalPointer());
@@ -353,6 +359,20 @@ bool StructTool::isStructureLocked(QModelIndex idx) const
     Q_ASSERT(top);
     if (top)
         return top->isLockedFor(mByteArrayModel);
+    return false;
+}
+
+bool StructTool::canStructureBeLocked(QModelIndex idx) const
+{
+    if (!mByteArrayModel) //no point without ByteArrayModel
+        return false;
+    if (!idx.isValid() || !idx.internalPointer())
+        return false;
+    DataInformation* data = static_cast<DataInformation*> (idx.internalPointer());
+    TopLevelDataInformation* top = data->topLevelDataInformation();
+    Q_ASSERT(top);
+    if (top)
+        return true;
     return false;
 }
 

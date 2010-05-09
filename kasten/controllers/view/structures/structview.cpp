@@ -107,14 +107,21 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     const QString validationToolTip = i18nc("@info:tooltip",
             "Validate all structures.");
     mValidateButton->setToolTip(validationToolTip);
+    mValidateButton->setEnabled(false); //no point validating without file open
     connect(mValidateButton, SIGNAL(clicked()), mTool, SLOT(validateAllStructures()));
+    connect(mTool, SIGNAL(byteArrayModelChanged(bool)), mValidateButton,
+            SLOT(setEnabled(bool))); //disable validate button if model is invalid
+    //TODO also disable the button if the structure has no validatable members
     settingsLayout->addWidget(mValidateButton);
 
     mLockStructureButton = new KPushButton(this);
     mLockStructureButton->setCheckable(true);
     setLockButtonStated(false);
+    mLockStructureButton->setEnabled(false); //won't work at beginning
     connect(mLockStructureButton, SIGNAL(toggled(bool)), this,
             SLOT(lockCurrentStructure(bool)));
+    connect(mTool, SIGNAL(byteArrayModelChanged(bool)), mLockStructureButton,
+            SLOT(setEnabled(bool))); //disable lock button if model is invalid
     settingsLayout->addWidget(mLockStructureButton);
 
     settingsLayout->addStretch(); //stretch before the settings button
@@ -211,6 +218,11 @@ bool StructView::eventFilter(QObject* object, QEvent* event)
 
             //set state of lock button
             setLockButtonStated(mTool->isStructureLocked(current));
+            if (mTool->canStructureBeLocked(current))
+                mLockStructureButton->setEnabled(true);
+            else
+                //can't lock, so just disable button
+                mLockStructureButton->setEnabled(false);
         }
         else if (event->type() == QEvent::FocusOut)
         {

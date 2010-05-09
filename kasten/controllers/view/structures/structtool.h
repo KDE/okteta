@@ -81,11 +81,14 @@ public:
     void lockStructure(QModelIndex idx);
     void unlockStructure(QModelIndex idx);
     bool isStructureLocked(QModelIndex idx) const;
+    /** check if there is any ByteArrayModel available to lock the structure */
+    bool canStructureBeLocked(QModelIndex idx) const;
 Q_SIGNALS: // changes to the settings currently not signaled, because only controlled by view
     void dataChanged();
     void dataCleared();
     void byteOrderChanged();
     void cursorIndexChanged();
+    void byteArrayModelChanged(bool modelIsValid);
 
 public Q_SLOTS:
     void setByteOrder(int order);
