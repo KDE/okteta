@@ -22,6 +22,8 @@
 #include "datainformationwithchildren.h"
 #include "staticlengtharraydatainformation.h"
 #include "topleveldatainformation.h"
+#include "../script/scriptvalueconverter.h"
+#include "../script/scriptutils.h"
 #include <KLineEdit>
 #include <KIcon>
 #include <QtScript/QScriptEngine>
@@ -96,7 +98,7 @@ qint64 DataInformationWithChildren::readData(Okteta::AbstractByteArrayModel *inp
 
 DataInformationWithChildren::~DataInformationWithChildren()
 {
-    qDeleteAll(mChildren);
+//    qDeleteAll(mChildren); // no need since this is set to their parent
 }
 
 DataInformationWithChildren::DataInformationWithChildren(QString& name, int index,
@@ -316,3 +318,28 @@ void DataInformationWithChildren::calculateValidationState()
         }
     }
 }
+
+void DataInformationWithChildren::setChildren(QScriptValue children)
+{
+    if (children.isNull() || children.isUndefined())
+        ScriptUtils::object()->logScriptError("attempting to set children of "
+                + name() + "to null. This must be and error in the script.");
+    ScriptValueConverter conv(children, name());
+    DataInformation* convertedVal = conv.convert();
+
+    if (!convertedVal)
+        ScriptUtils::object()->logScriptError("Parsing of children failed"
+            " in setChildren(), please check script for errors");
+    //is valid now
+    qDeleteAll(mChildren);
+    mChildren.clear();
+    for (int i = 0; i < convertedVal->childCount(); ++i)
+    {
+        DataInformation* child = convertedVal->childAt(i);
+        appendChild(child);
+    }
+    if (convertedVal->childCount() < 1)
+        ScriptUtils::object()->logScriptError("Value from setChildren for " + name()
+                + " has no children, please check script for errors");
+}
+

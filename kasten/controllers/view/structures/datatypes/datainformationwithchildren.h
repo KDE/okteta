@@ -67,8 +67,7 @@ public:
     virtual void resetValidationState();
     virtual void calculateValidationState(); //only in DataInformationWithChildren
     //for QtScript
-    //TODO uncomment
-//    Q_INVOKABLE void setChildren(QScriptValue children);
+    Q_INVOKABLE void setChildren(QScriptValue children);
     /** returns an object that holds the children, accessable as obj["childName"] */
     virtual QScriptValue childrenAsScriptValue() const;
     /** alternate way to access children: obj.child("childName") */
