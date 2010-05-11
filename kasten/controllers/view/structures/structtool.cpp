@@ -96,16 +96,16 @@ void StructTool::setTargetModel(AbstractModel* model)
     if (mByteArrayModel && mByteArrayView)
     {
         mCursorIndex = mByteArrayView->cursorPosition();
-        connect(mByteArrayView, SIGNAL(cursorPositionChanged( Okteta::Address )),
-                SLOT(onCursorPositionChange( Okteta::Address )));
+        connect(mByteArrayView, SIGNAL(cursorPositionChanged(Okteta::Address)),
+                SLOT(onCursorPositionChange(Okteta::Address)));
         connect(mByteArrayModel,
-                SIGNAL(contentsChanged( const Okteta::ArrayChangeMetricsList& )),
-                SLOT(onContentsChange( const Okteta::ArrayChangeMetricsList&)));
+                SIGNAL(contentsChanged(const Okteta::ArrayChangeMetricsList&)),
+                SLOT(onContentsChange(const Okteta::ArrayChangeMetricsList&)));
         //		onCharCodecChange(mByteArrayView->charCodingName());
         //         connect(mByteArrayView, SIGNAL(charCodecChanged( const QString& )),
         //                 SLOT(onCharCodecChange( const QString& )));
-    }
-    emit byteArrayModelChanged(mByteArrayModel != NULL);
+    }emit
+    byteArrayModelChanged(mByteArrayModel != NULL);
     updateData();
 }
 //void StructTool::onCharCodecChange(const QString& codecName)
@@ -133,8 +133,10 @@ void StructTool::setByteOrder(int order)
         setByteOrder(StructViewPreferences::EnumByteOrder::LittleEndian);
     else if (order == StructViewPreferences::EnumByteOrder::BigEndian)
         setByteOrder(StructViewPreferences::EnumByteOrder::BigEndian);
-        else
+    else
+    {
         kWarning() << "invalid byte order set:" << order;
+    }
 }
 
 void StructTool::onContentsChange(const Okteta::ArrayChangeMetricsList& list)
