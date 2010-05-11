@@ -174,8 +174,8 @@ bool TopLevelDataInformation::isReadingNecessary(
             }
         }
     }
-//    kDebug()
-//        << "it was not necessary to update values";
+    //    kDebug()
+    //        << "it was not necessary to update values";
     return true; //just return true for all other cases
     //TODO implement checks for other cases
 }
@@ -215,5 +215,11 @@ bool TopLevelDataInformation::isLockedFor(
         const Okteta::AbstractByteArrayModel* model) const
 {
     return mLockedPositions.contains(model);
+}
+quint64 TopLevelDataInformation::lockPositionFor(const Okteta::AbstractByteArrayModel* model) const
+{
+    if (!mLockedPositions.contains(model))
+        return 0; //XXX nullptr instead??
+    return *mLockedPositions.value(model);
 }
 

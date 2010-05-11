@@ -282,8 +282,21 @@ void StructTool::mark(const QModelIndex& idx)
     int length = data->size() / 8;
     int maxLen = mByteArrayModel->size() - mCursorIndex;
     length = qMin(length, maxLen);
+    Q_CHECK_PTR(data->topLevelDataInformation());
+    Okteta::Address baseAddress;
+    if (data->topLevelDataInformation()->isLockedFor(mByteArrayModel))
+    {
+        baseAddress = data->topLevelDataInformation()->lockPositionFor(
+                mByteArrayModel);
+    }
+    else
+    {
+        //not locked
+        baseAddress = mCursorIndex;
+    }
+
     //FIXME support marking of partial bytes
-    Okteta::Address startOffset = mCursorIndex + data->positionRelativeToParent()
+    Okteta::Address startOffset = baseAddress + data->positionRelativeToParent()
             / 8;
     const Okteta::AddressRange markingRange = Okteta::AddressRange::fromWidth(
             startOffset, length);

@@ -74,6 +74,7 @@ public:
             const Okteta::AbstractByteArrayModel* model);
     void unlockPosition(const Okteta::AbstractByteArrayModel* model);
     bool isLockedFor(const Okteta::AbstractByteArrayModel* model) const;
+    quint64 lockPositionFor(const Okteta::AbstractByteArrayModel* model) const;
 private:
     bool isReadingNecessary(const Okteta::ArrayChangeMetricsList& changesList,
             Okteta::Address address);
