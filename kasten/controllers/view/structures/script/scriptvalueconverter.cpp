@@ -78,7 +78,7 @@ DataInformation* ScriptValueConverter::toDataInformation(QScriptValue& value,
     if (name.isEmpty())
         name = i18n("<no name specified>");
 
-    QString type = value.property("type").toString();
+    QString type = value.property("type").toString().toLower(); //to lower just to be safe
 
     if (type == QLatin1String("array"))
         returnVal = toArray(value, name);
