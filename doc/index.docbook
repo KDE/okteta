@@ -3,11 +3,6 @@
   <!ENTITY okteta "<application>Okteta</application>">
   <!ENTITY kappname "&okteta;" >
   <!ENTITY package "kdeutils">
-  <!ENTITY introduction SYSTEM "introduction.docbook">
-  <!ENTITY basics SYSTEM "basics.docbook">
-  <!ENTITY nutshell SYSTEM "nutshell.docbook">
-  <!ENTITY menu SYSTEM "menu.docbook">
-  <!ENTITY tools SYSTEM "tools.docbook">
   <!ENTITY Friedrich.Kossebau
 "<personname><firstname>Friedrich</firstname><othername>W. H.</othername><surname>Kossebau</surname></personname>">
   <!ENTITY Friedrich.Kossebau.email "<email>kossebau@kde.org</email>">
@@ -258,7 +253,7 @@ just used for development, so no need to document it. -->
   <varlistentry>
     <term>Bookmarks</term>
     <listitem><para>This tool can be used to manage the bookmarks, alternatively
-    to the <link linkend="bookmarks-menu"><guimenu>Bookmarks</guimenu> menu</link>.
+    to the <link linkend="bookmarks-menu"><guimenu>Bookmarks</guimenu></link> menu.
     <note><para>Bookmarks are currently only transient and not saved if you
     close a byte array or the whole program.</para></note></para></listitem>
   </varlistentry>
@@ -281,7 +276,7 @@ just used for development, so no need to document it. -->
     <sect2>
       <title>General</title>
 
-      <para>The Structures tool enables analysing and editing of byte arrays
+      <para>The Structures tool enables analyzing and editing of byte arrays
       based on user-creatable structure definitions, which can be built from
       arrays, unions, primitive types and enum values.</para>
      <!-- explain/link what these types are? probably not, since most user will be programmers? -->
@@ -322,7 +317,7 @@ just used for development, so no need to document it. -->
       and open the settings dialog of the Structure tool. There select the
       <guilabel>Structures Management</guilabel> tab and make sure the relevant
       structure definition is checked. Then use the button <guibutton>Apply
-      Changes</guibutton>, switch to the <guilabel>Structures</guilabel> tab and
+      </guibutton>, switch to the <guilabel>Structures</guilabel> tab and
       make sure the desired element is listed on the right-hand side.</para>
     </sect2>
 
@@ -1035,7 +1030,7 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     per line as possible, as long as groups of bytes are complete.
     </para></listitem>
     <listitem><para><guimenuitem>On</guimenuitem>: Same as previous,
-    but allows also uncomplete groups of bytes.</para></listitem>
+    but allows also incomplete groups of bytes.</para></listitem>
     </itemizedlist>
     </listitem>
     </varlistentry>
@@ -1064,7 +1059,7 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     <guimenu>View</guimenu>
     <guimenuitem>Split Horizontal</guimenuitem>
     </menuchoice></term>
-    <listitem><para><action>Split the view area with the currently focussed view
+    <listitem><para><action>Split the view area with the currently focused view
     into two parts and add a copy of the current view to the new, lower area.</action></para></listitem>
     </varlistentry>
 
@@ -1076,7 +1071,7 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     <guimenu>View</guimenu>
     <guimenuitem>Split Vertically</guimenuitem>
     </menuchoice></term>
-    <listitem><para><action>Split the view area with the currently focussed view
+    <listitem><para><action>Split the view area with the currently focused view
     into two parts and add a copy of the current view to the new, right area.</action></para></listitem>
     </varlistentry>
 
@@ -1088,7 +1083,7 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     <guimenu>View</guimenu>
     <guimenuitem>Close View Area</guimenuitem>
     </menuchoice></term>
-    <listitem><para><action>Close the view area with the currently focussed view.</action></para></listitem>
+    <listitem><para><action>Close the view area with the currently focused view.</action></para></listitem>
     </varlistentry>
 
     <varlistentry>
@@ -1182,14 +1177,14 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
 </sect1>
 
 <sect1 id="tools-menu">
-<title><guimenu>Tools</guimenu> Menu</title>
+<title>Tools Menu</title>
 
     <para>Provides a list of installed tools. Toggle the display of each tools
     on or off. A detailed description of each tool you find in the <link linkend="tools">Tools</link> section.</para>
 </sect1>
 
 <sect1 id="settings-menu">
-<title><guimenu>Settings</guimenu> Menu</title>
+<title>Settings Menu</title>
 
 <variablelist>
     <varlistentry>
