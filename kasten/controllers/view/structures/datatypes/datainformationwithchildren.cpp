@@ -341,5 +341,6 @@ void DataInformationWithChildren::setChildren(QScriptValue children)
     if (convertedVal->childCount() < 1)
         ScriptUtils::object()->logScriptError("Value from setChildren for " + name()
                 + " has no children, please check script for errors");
+    kDebug() << "setting children of " + name();
 }
 

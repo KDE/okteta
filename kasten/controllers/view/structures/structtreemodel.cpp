@@ -172,9 +172,9 @@ QModelIndex StructTreeModel::index(int row, int column, const QModelIndex &paren
             //assume that all items with children can change their childCount
             if (!mItemsWithSignalConnected.contains(chldItm))
             {
-                kDebug()
-                    << "connecting '" << childItem->name()
-                            << "'s childCountChanged signal to model";
+//                kDebug()
+//                    << "connecting '" << childItem->name()
+//                            << "'s childCountChanged signal to model";
                 //only connect once
                 mItemsWithSignalConnected.append(chldItm);
                 connect(childItem, SIGNAL(destroyed(QObject*)),
