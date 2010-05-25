@@ -443,14 +443,14 @@ install( FILES ${okteta_kastencontrollers_LIB_HDRS}  DESTINATION  ${INCLUDE_INST
 install( FILES view/structures/kns/okteta-structures.knsrc  DESTINATION  ${CONFIG_INSTALL_DIR} )
 
 set( elf_structure_FILES
-  view/structures/schema/example/elf/elf.desktop
-  view/structures/schema/example/elf/elf.osd
+  view/structures/examples/elf/elf.desktop
+  view/structures/examples/elf/elf.osd
 )
 install( FILES ${elf_structure_FILES}  DESTINATION  ${DATA_INSTALL_DIR}/okteta/structures/elf )
 
 set( png_structure_FILES
-  view/structures/schema/example/png/png.desktop
-  view/structures/schema/example/png/png.osd
+  view/structures/examples/png/png.desktop
+  view/structures/examples/png/png.osd
 )
 install( FILES ${png_structure_FILES}  DESTINATION  ${DATA_INSTALL_DIR}/okteta/structures/png )
 
