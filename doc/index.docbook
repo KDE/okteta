@@ -525,7 +525,7 @@ just used for development, so no need to document it. -->
         <title>Further information</title>
         <para>
           A few example structure definitions can be found <ulink url="http://websvn.kde.org/branches/KDE/4.5/kdeutils/okteta/kasten/controllers/view/structures/examples/">here.</ulink>
-          This include for example the file header for PNG files.
+          This includes for example the file header for PNG files and the ELF file header.
           An &XML; schema describing the structure of the <literal role="extension">.osd</literal> file can be found  <ulink url="http://websvn.kde.org/branches/KDE/4.5/kdeutils/okteta/kasten/controllers/view/structures/schema/">here.</ulink>
           If more information is needed feel free to contact me at &Alex.Richardson.email;
         </para>
