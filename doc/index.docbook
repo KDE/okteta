@@ -426,18 +426,18 @@ just used for development, so no need to document it. -->
           which is fairly similar to the C/C++ definition.
           The type attribute of the primitive tag can be any of the following:
           <itemizedlist>
-          <listitem>Char</listitem>
-          <listitem>Int8, Int16, Int32 or Int64</listitem>
-          <listitem>UInt8, UInt16, UInt32 or UInt64</listitem>
-          <listitem>Bool8, Bool16, Bool32 or Bool64</listitem>
-          <listitem>Float</listitem>
-          <listitem>Double</listitem>
+          <listitem><para>Char</para></listitem>
+          <listitem><para>Int8, Int16, Int32 or Int64</para></listitem>
+          <listitem><para>UInt8, UInt16, UInt32 or UInt64</para></listitem>
+          <listitem><para>Bool8, Bool16, Bool32 or Bool64</para></listitem>
+          <listitem><para>Float</para></listitem>
+          <listitem><para>Double</para></listitem>
           </itemizedlist>
           </para>
           <para>The bitfield tag has two attributes (apart from the name attribute which all tags have):
-          The width attribute tells &okteta; how many bits are used by this bitfield. <note>Always remember
+          The width attribute tells &okteta; how many bits are used by this bitfield. <note><para>Always remember
           to add padding, since otherwise the next primitive will start in the middle of a byte. Obviously
-          padding is not necessary if you want this behaviour.</note>
+          padding is not necessary if you want this behaviour.</para></note>
           The other attribute is the type attribute which can be either <literal>bool</literal>,
           <literal>unsigned</literal> or <literal>signed</literal>.
           </para>
@@ -465,12 +465,12 @@ just used for development, so no need to document it. -->
         <para>
         The following functions can be called to create a primitive type:
         <itemizedlist>
-          <listitem>char()</listitem>
-          <listitem>int8(), int16(), int32() or int64()</listitem>
-          <listitem>uint8(), uint16(), uint32() or uint64()</listitem>
-          <listitem>bool8(), bool16(), bool32() or bool64()</listitem>
-          <listitem>float()</listitem>
-          <listitem>double()</listitem>
+          <listitem><para>char()</para></listitem>
+          <listitem><para>int8(), int16(), int32() or int64()</para></listitem>
+          <listitem><para>uint8(), uint16(), uint32() or uint64()</para></listitem>
+          <listitem><para>bool8(), bool16(), bool32() or bool64()</para></listitem>
+          <listitem><para>float()</para></listitem>
+          <listitem><para>double()</para></listitem>
         </itemizedlist>
         The bitfield function takes two parameters, the first being a string consisting of
         <literal>bool</literal>, <literal>signed</literal> or <literal>unsigned</literal>. The second parameter is an integer which sets the width in bits.
