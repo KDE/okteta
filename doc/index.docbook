@@ -390,10 +390,10 @@ just used for development, so no need to document it. -->
         </calloutlist>
 
           These fields should all be pretty much self-explanatory, except for
-          <literal>X-KDE-PluginInfo-Name</literal>. The value of this field must match the name of the directory containing the file as well as the name of the <literal role="extension">.desktop file</literal>. When creating &XML; structure definitions the name of the <literal role="extension">.osd</literal> file must also match the name. </para>
+          <literal>X-KDE-PluginInfo-Name</literal>. The value of this field must match the name of the directory containing the file as well as the name of the <literal role="extension">.desktop</literal> file. When creating &XML; structure definitions the name of the <literal role="extension">.osd</literal> file must also match the name. </para>
 
         <para>In this example we would have a directory named <filename>simplestruct</filename>
-        containing the files <filename>simplestruct.desktop</filename>. When defining structures in &XML;
+        containing the file <filename>simplestruct.desktop</filename>. When defining structures in &XML;
         the directory would also contain a file named <filename>simplestruct.osd</filename>. Using JavaScript we would have a file named <filename>main.js</filename> instead.</para>
       </sect3>
       <sect3>
