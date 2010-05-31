@@ -318,7 +318,7 @@ just used for development, so no need to document it. -->
           definition, which contains both the <literal role="extension">.desktop</literal>
           file and the <literal role="extension">.osd</literal> or
           <filename>main.js</filename> file of that definition.</para>
-          <para>E.g. with the program data directory <filename class="directory">.kde</filename>
+          <para>For example, with the program data directory <filename class="directory">.kde</filename>
           and a structure definition named ExampleStructure there is the directory
           <filename class="directory">.kde/share/apps/okteta/structures/ExampleStructure</filename>,
           which contains a file <filename>ExampleStructure.desktop</filename> and a
@@ -328,7 +328,7 @@ just used for development, so no need to document it. -->
         <title>Using the newly installed structures</title>
         <para>After having installed a new structure definition you need to restart &okteta;
         before you can use it.
-        Once Okteta has started, open the settings dialog of the Structures tool. There select the
+        Once &okteta; has started, open the settings dialog of the Structures tool. There select the
         <guilabel>Structures Management</guilabel> tab and make sure the relevant
         structure definition is checked. Then switch to the <guilabel>Structures</guilabel> tab and
         make sure the desired element is listed on the right-hand side.</para>
@@ -341,11 +341,11 @@ just used for development, so no need to document it. -->
       but instead can reuse an already existing definition from places like
       <ulink url="http://kde-files.org/index.php?xcontentmode=691">kde-files.org</ulink>.</para>
       <para>You also may want to share a definition yourself. To do so, create a
-      file archive (e.g. a zipped tar archive, <literal role="extension">.tar.gz</literal>)
+      file archive (&eg; a zipped tar archive, <literal role="extension">.tar.gz</literal>)
       containing just the subdirectory with the <literal role="extension">.desktop</literal> 
       file and the structure definition file. Looking at the example in the last section this
       would be the directory <filename class="directory">ExampleStructure</filename> with all its contents.
-      Using this format for sharing the structure definitions allows installing them inside Okteta and
+      Using this format for sharing the structure definitions allows installing them inside &okteta; and
       requires no manual installation.</para>
     </sect2>
 
@@ -437,18 +437,18 @@ just used for development, so no need to document it. -->
           <para>The bitfield tag has two attributes (apart from the name attribute which all tags have):
           The width attribute tells &okteta; how many bits are used by this bitfield. <note><para>Always remember
           to add padding, since otherwise the next primitive will start in the middle of a byte. Obviously
-          padding is not necessary if you want this behaviour.</para></note>
+          padding is not necessary if you want this behavior.</para></note>
           The other attribute is the type attribute which can be either <literal>bool</literal>,
           <literal>unsigned</literal> or <literal>signed</literal>.
           </para>
           <para>Now create a directory <filename class="directory">simplestruct</filename>
-          inside the structure installation directory (see maually installing structure definitions) <!-- markup TODO-->
+          inside the structure installation directory (see manually installing structure definitions) <!-- markup TODO-->
           and copy the two files to this directory. Now you can restart &okteta; and use the new structure.</para>
       </sect3>
       <sect3>
         <title>The same structure in JavaScript</title>
         <para>
-        To implement the structure above in JavaScript, create a file named <filename>main.js</filename> istead of <filename>simplestruct.osd</filename>.
+        To implement the structure above in JavaScript, create a file named <filename>main.js</filename> instead of <filename>simplestruct.osd</filename>.
         The contents of that file should be:
         <screen>
         function init() {
