@@ -9,6 +9,7 @@ ServiceTypes=KPluginInfo
 Name=ELF structure
 Name[ca]=Estructura ELF
 Name[ca@valencia]=Estructura ELF
+Name[cs]=Struktura ELF
 Name[da]=ELF-struktur
 Name[de]=ELF-Struktur
 Name[en_GB]=ELF structure
