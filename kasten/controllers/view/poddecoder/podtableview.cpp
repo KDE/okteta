@@ -159,7 +159,7 @@ bool PODTableView::eventFilter( QObject* object, QEvent* event )
         {
             const QModelIndex current = mPODTableView->selectionModel()->currentIndex();
             const int podId = current.row();
-            if( current.isValid() && ! mTool->value(podId).isNull() )
+            if( current.isValid() && mTool->isApplyable() && ! mTool->value(podId).isNull() )
                 mTool->markPOD( podId );
         }
         else if( event->type() == QEvent::FocusOut )
@@ -171,7 +171,7 @@ bool PODTableView::eventFilter( QObject* object, QEvent* event )
                 mPODTableViewFocusChild = tableViewFocusWidget;
                 mPODTableViewFocusChild->installEventFilter( this );
             }
-            else
+            else if( mTool->isApplyable() )
                 mTool->unmarkPOD();
         }
     }
@@ -180,7 +180,7 @@ bool PODTableView::eventFilter( QObject* object, QEvent* event )
         // TODO: it is only assumed the edit widget will be removed if it loses the focus
         if( event->type() == QEvent::FocusOut )
         {
-            if( ! mPODTableView->hasFocus() )
+            if( ! mPODTableView->hasFocus() && mTool->isApplyable() )
                 mTool->unmarkPOD();
             mPODTableViewFocusChild->removeEventFilter( this );
             mPODTableViewFocusChild = 0;
@@ -193,6 +193,9 @@ bool PODTableView::eventFilter( QObject* object, QEvent* event )
 void PODTableView::onCurrentRowChanged( const QModelIndex& current, const QModelIndex& previous )
 {
     Q_UNUSED( previous )
+
+    if( ! mTool->isApplyable() )
+        return;
 
     const int podId = current.row();
     if( current.isValid() && ! mTool->value(podId).isNull() )

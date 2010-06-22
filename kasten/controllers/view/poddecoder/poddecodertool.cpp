@@ -92,9 +92,12 @@ PODDecoderTool::PODDecoderTool()
 
 QString PODDecoderTool::title() const { return i18nc("@title:window", "Decoding Table"); }
 bool PODDecoderTool::isReadOnly() const { return mReadOnly; }
+bool PODDecoderTool::isApplyable() const { return (mByteArrayModel != 0); }
 
 void PODDecoderTool::setTargetModel( AbstractModel* model )
 {
+    const bool oldIsApplyable = isApplyable();
+
     if( mByteArrayView )
     {
         mByteArrayView->disconnect( this );
@@ -123,6 +126,9 @@ void PODDecoderTool::setTargetModel( AbstractModel* model )
 
     updateData();
     onReadOnlyChanged();
+    const bool newIsApplyable = isApplyable();
+    if( oldIsApplyable != newIsApplyable )
+        emit isApplyableChanged( newIsApplyable );
 }
 
 
