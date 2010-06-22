@@ -69,6 +69,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
     virtual void setTargetModel( AbstractModel* model );
 
   public:
+    bool isApplyable() const; // candidate for AbstractTool API
     bool isReadOnly() const;
     QVariant value( int podId ) const;
     QString nameOfPOD( int podId ) const;
@@ -90,6 +91,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
     void setByteOrder( int byteOrder );
 
   Q_SIGNALS: // changes to the setting currently not signalled, because only controlled by view
+    void isApplyableChanged( bool isApplyable );  // candidate for AbstractTool API
     void readOnlyChanged( bool isReadOnly );
     void dataChanged();
 
