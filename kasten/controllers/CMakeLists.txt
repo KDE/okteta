@@ -453,6 +453,7 @@ set( png_structure_FILES
   view/structures/examples/png/png.osd
 )
 install( FILES ${png_structure_FILES}  DESTINATION  ${DATA_INSTALL_DIR}/okteta/structures/png )
+install( FILES view/structures/settings/structviewpreferences.kcfg  DESTINATION  ${KCFG_INSTALL_DIR} )
 
 
 if( KASTEN_BUILD_INTERNAL_TEMPLATES )
