@@ -72,6 +72,7 @@ public:
     virtual QScriptValue childrenAsScriptValue() const;
     /** alternate way to access children: obj.child("childName") */
     Q_INVOKABLE QScriptValue child(QString name) const;
+    Q_INVOKABLE QScriptValue at(uint index) const;
 };
 
 inline QList<DataInformation*> DataInformationWithChildren::children() const

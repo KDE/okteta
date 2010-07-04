@@ -104,6 +104,8 @@ TopLevelDataInformation* DataInformation::topLevelDataInformation() const
 DataInformation* DataInformation::mainStructure()
 {
     DataInformation* par = dynamic_cast<DataInformation*> (parent());
+    //the cast fails if the parent is a TopLevelDataInformation
+    //, so we can tell when the top has been reached
     if (par)
         return par->mainStructure();
     else

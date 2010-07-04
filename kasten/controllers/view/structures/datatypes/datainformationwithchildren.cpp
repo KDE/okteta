@@ -276,9 +276,9 @@ QScriptValue DataInformationWithChildren::child(QString name) const
     {
         //just append all children as a property
         DataInformation* data = mChildren.at(i);
+        QScriptEngine* engine = topLevelDataInformation()->scriptEngine();
         if (data->name() == name)
         {
-            QScriptEngine* engine = topLevelDataInformation()->scriptEngine();
             QScriptValue childObj = engine->newQObject(data,
                     QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
             return childObj;
@@ -317,6 +317,16 @@ void DataInformationWithChildren::calculateValidationState()
             setValidationSuccessful(allChildrenValid);
         }
     }
+}
+
+QScriptValue DataInformationWithChildren::at(uint index) const
+{
+    if (index >= childCount())
+        return QScriptValue();
+    QScriptEngine* engine = topLevelDataInformation()->scriptEngine();
+    QScriptValue childObj = engine->newQObject(childAt(index),
+            QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
+    return childObj;
 }
 
 void DataInformationWithChildren::setChildren(QScriptValue children)
