@@ -82,7 +82,7 @@ QScriptValue AbstractArrayDataInformation::setArrayLength(int newLength)
         return context() ? context()->throwError(
                 "new Array length is less than zero: " + QString::number(newLength))
                 : QScriptValue();
-    if (newLength > 1000000)
+    if (newLength > 100000)
     {
         kWarning() << "attempting to set the length of the array" << name() << "to "
                 << newLength << " which would use too much memory";
