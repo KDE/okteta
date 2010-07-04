@@ -98,7 +98,7 @@ qint64 DataInformationWithChildren::readData(Okteta::AbstractByteArrayModel *inp
 
 DataInformationWithChildren::~DataInformationWithChildren()
 {
-//    qDeleteAll(mChildren); // no need since this is set to their parent
+    //    qDeleteAll(mChildren); // no need since this is set to their parent
 }
 
 DataInformationWithChildren::DataInformationWithChildren(QString& name, int index,
@@ -328,19 +328,32 @@ void DataInformationWithChildren::setChildren(QScriptValue children)
     DataInformation* convertedVal = conv.convert();
 
     if (!convertedVal)
+    {
         ScriptUtils::object()->logScriptError("Parsing of children failed"
             " in setChildren(), please check script for errors");
+        return;
+    }
     //is valid now
+    //childcount changed to 0
+    emit childrenAboutToBeRemoved(this, 0, childCount() - 1);
     qDeleteAll(mChildren);
     mChildren.clear();
-    for (int i = 0; i < convertedVal->childCount(); ++i)
-    {
-        DataInformation* child = convertedVal->childAt(i);
-        appendChild(child);
-    }
+    emit childrenRemoved(this, 0, childCount() - 1);
     if (convertedVal->childCount() < 1)
         ScriptUtils::object()->logScriptError("Value from setChildren for " + name()
                 + " has no children, please check script for errors");
-    kDebug() << "setting children of " + name();
+    else
+    {
+        emit childrenAboutToBeInserted(this, 0, convertedVal->childCount() - 1);
+        for (int i = 0; i < convertedVal->childCount(); ++i)
+        {
+            DataInformation* child = convertedVal->childAt(i);
+            appendChild(child);
+        }
+        emit childrenInserted(this, 0, convertedVal->childCount() - 1);
+    }
+    kDebug()
+        << "setting children of " + name();
+    delete convertedVal;
 }
 
