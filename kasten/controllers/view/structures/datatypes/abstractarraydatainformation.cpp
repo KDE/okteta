@@ -82,7 +82,7 @@ QScriptValue AbstractArrayDataInformation::setArrayLength(int newLength)
         return context() ? context()->throwError(
                 "new Array length is less than zero: " + QString::number(newLength))
                 : QScriptValue();
-    if (newLength > 1000000)
+    if (newLength > 100000)
     {
         kWarning() << "attempting to set the length of the array" << name() << "to "
                 << newLength << " which would use too much memory";
@@ -93,7 +93,7 @@ QScriptValue AbstractArrayDataInformation::setArrayLength(int newLength)
     int oldLength = childCount();
     if (newLength > oldLength)
     {
-        emit childrenAboutToBeInserted(this, qMax(0, oldLength - 1), newLength - 1);
+        emit childrenAboutToBeInserted(this, oldLength, newLength - 1);
         for (int i = oldLength; i < newLength; ++i)
         {
             DataInformation* arrayElem = mChildType->clone();
@@ -101,7 +101,7 @@ QScriptValue AbstractArrayDataInformation::setArrayLength(int newLength)
                     SIGNAL(dataChanged()));
             appendChild(arrayElem);
         }
-        emit childrenInserted(this, qMax(0, oldLength - 1), newLength - 1);
+        emit childrenInserted(this, oldLength, newLength - 1);
     }
     else if (newLength < oldLength) //XXX maybe keep some cached
     {
