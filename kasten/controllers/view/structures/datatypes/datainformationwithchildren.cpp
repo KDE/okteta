@@ -355,7 +355,7 @@ void DataInformationWithChildren::setChildren(QScriptValue children)
     else
     {
         emit childrenAboutToBeInserted(this, 0, convertedVal->childCount() - 1);
-        for (int i = 0; i < convertedVal->childCount(); ++i)
+        for (uint i = 0; i < convertedVal->childCount(); ++i)
         {
             DataInformation* child = convertedVal->childAt(i);
             appendChild(child);
