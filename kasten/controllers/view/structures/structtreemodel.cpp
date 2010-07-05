@@ -42,8 +42,8 @@ void StructTreeModel::onChildrenRemoved(const QObject* sender, uint startIndex,
         uint endIndex)
 {
     kDebug()
-    << "data information " << sender->objectName() << ": removed " << (endIndex
-            - startIndex + 1) << " children starting at offset " << startIndex;
+        << "data information " << sender->objectName() << ": removed " << (endIndex
+                - startIndex + 1) << " children starting at offset " << startIndex;
     emit endRemoveRows();
 }
 
@@ -51,8 +51,8 @@ void StructTreeModel::onChildrenInserted(const QObject* sender, uint startIndex,
         uint endIndex)
 {
     kDebug()
-    << "data information " << sender->objectName() << ": inserted " << (endIndex
-            - startIndex + 1) << " children at offset " << startIndex;
+        << "data information " << sender->objectName() << ": inserted " << (endIndex
+                - startIndex + 1) << " children at offset " << startIndex;
     emit endInsertRows();
 }
 
@@ -60,8 +60,8 @@ void StructTreeModel::onChildrenAboutToBeRemoved(QObject* sender, uint startInde
         uint endIndex)
 {
     kDebug()
-    << "data information " << sender->objectName()
-    << ": about to remove children:" << startIndex << " to " << endIndex;
+        << "data information " << sender->objectName()
+                << ": about to remove children:" << startIndex << " to " << endIndex;
     QModelIndex idx = findItemInModel(sender);
     Q_ASSERT(idx.isValid());
     emit beginRemoveRows(idx, startIndex, endIndex);
@@ -71,8 +71,8 @@ void StructTreeModel::onChildrenAboutToBeInserted(QObject* sender, uint startInd
         uint endIndex)
 {
     kDebug()
-    << "data information " << sender->objectName()
-    << ": about to insert children:" << startIndex << " to " << endIndex;
+        << "data information " << sender->objectName()
+                << ": about to insert children:" << startIndex << " to " << endIndex;
     QModelIndex idx = findItemInModel(sender);
     Q_ASSERT(idx.isValid());
     emit beginInsertRows(idx, startIndex, endIndex);
@@ -117,7 +117,7 @@ bool StructTreeModel::setData(const QModelIndex& index, const QVariant& value,
     if (!index.internalPointer())
     {
         kDebug()
-        << "item == NULL";
+            << "item == NULL";
         return false;
     }
 
@@ -159,6 +159,8 @@ QModelIndex StructTreeModel::index(int row, int column, const QModelIndex &paren
         childItem = mTool->childAt(row);
     else
     {
+        if (parent.column() != 0)
+            return QModelIndex();
         DataInformation* parentItem =
                 static_cast<DataInformation*> (parent.internalPointer());
         childItem = parentItem->childAt(row);
@@ -232,12 +234,14 @@ int StructTreeModel::rowCount(const QModelIndex& parent) const
 {
     if (!parent.isValid())
         return mTool->childCount();
+    if (parent.column() != 0)
+        return 0;
     DataInformation* parentItem =
             static_cast<DataInformation*> (parent.internalPointer());
     if (!parentItem)
     {
         kDebug()
-        << "parentItem is NULL";
+            << "parentItem is NULL";
         return mTool->childCount();
     }
     return parentItem->childCount();
