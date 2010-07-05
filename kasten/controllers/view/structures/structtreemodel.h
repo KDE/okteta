@@ -23,7 +23,8 @@
 #ifndef STRUCTTREEMODEL_H_
 #define STRUCTTREEMODEL_H_
 
-#include <QAbstractItemModel>
+#include <QtCore/QAbstractItemModel>
+#include <QtCore/QSet>
 
 class DataInformation;
 class DataInformationWithChildren;
@@ -74,7 +75,7 @@ private Q_SLOTS:
     void removeItemFromSignalsList(QObject* obj);
 private:
     StructTool* mTool;
-    mutable /* very ugly hack! */ QList<DataInformationWithChildren*> mItemsWithSignalConnected;
+    mutable /* very ugly hack! */ QSet<DataInformationWithChildren*> mItemsWithSignalConnected;
 public:
 
 };

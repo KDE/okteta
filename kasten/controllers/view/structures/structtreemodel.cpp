@@ -159,6 +159,8 @@ QModelIndex StructTreeModel::index(int row, int column, const QModelIndex &paren
         childItem = mTool->childAt(row);
     else
     {
+        if (parent.column() != 0)
+            return QModelIndex();
         DataInformation* parentItem =
                 static_cast<DataInformation*> (parent.internalPointer());
         childItem = parentItem->childAt(row);
@@ -172,11 +174,11 @@ QModelIndex StructTreeModel::index(int row, int column, const QModelIndex &paren
             //assume that all items with children can change their childCount
             if (!mItemsWithSignalConnected.contains(chldItm))
             {
-//                kDebug()
-//                    << "connecting '" << childItem->name()
-//                            << "'s childCountChanged signal to model";
+                //                kDebug()
+                //                    << "connecting '" << childItem->name()
+                //                            << "'s childCountChanged signal to model";
                 //only connect once
-                mItemsWithSignalConnected.append(chldItm);
+                mItemsWithSignalConnected.insert(chldItm);
                 connect(childItem, SIGNAL(destroyed(QObject*)),
                         SLOT(removeItemFromSignalsList(QObject*))); //remove after was deleted
 
@@ -232,6 +234,8 @@ int StructTreeModel::rowCount(const QModelIndex& parent) const
 {
     if (!parent.isValid())
         return mTool->childCount();
+    if (parent.column() != 0)
+        return 0;
     DataInformation* parentItem =
             static_cast<DataInformation*> (parent.internalPointer());
     if (!parentItem)
@@ -258,7 +262,7 @@ bool StructTreeModel::hasChildren(const QModelIndex& parent) const
 void StructTreeModel::removeItemFromSignalsList(QObject* obj)
 {
     //obj has been deleted -> remove from list
-    mItemsWithSignalConnected.removeAll(
+    mItemsWithSignalConnected.remove(
             dynamic_cast<DataInformationWithChildren*> (obj));
 }
 
