@@ -3,6 +3,10 @@ Encoding=UTF-8
 Version=1.0
 
 Name=Okteta Mobile
+Name[pt]=Okteta Móvel
+Name[pt_BR]=Okteta Móvel
+Name[sv]=Okteta för mobil
+Name[uk]=Okteta для мобільних пристроїв
 Name[x-test]=xxOkteta Mobilexx
 
 Exec=okteta-mobile
