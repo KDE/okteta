@@ -1,6 +1,6 @@
 project( oktetamobileprogram )
 
-# set( OKTETAKASTEN_REL_DIR ../kasten )
+set( OKTETAKASTEN_REL_DIR ../../kasten )
 set( KASTEN_REL_DIR ../../libs/kasten )
 set( OKTETA_REL_DIR ../.. )
 
@@ -35,8 +35,8 @@ include_directories(
 
 set( okteta_SRCS
   main.cpp
-#   program.cpp
-#   about.cpp
+  program.cpp
+  about.cpp
 #   mainwindow.cpp
 )
 

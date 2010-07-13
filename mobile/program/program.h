@@ -20,15 +20,45 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#ifndef OKTETAPROGRAM_H
+#define OKTETAPROGRAM_H
+
 // program
-#include "program.h"
+#include "about.h"
 
 
-int main( int argc, char* argv[] )
+namespace Kasten
 {
-    Kasten::OktetaProgram program( argc, argv );
 
-    const int result = program.execute();
+class DocumentManager;
+// class ViewManager;
 
-    return result;
+
+class OktetaProgram
+{
+  public:
+    OktetaProgram( int argc, char *argv[] );
+    ~OktetaProgram();
+
+  public:
+    int execute();
+    void quit();
+
+  public:
+    DocumentManager* documentManager();
+//     ViewManager* viewManager();
+
+  protected:
+    OktetaAboutData mAboutData;
+
+    DocumentManager* mDocumentManager;
+//     ViewManager* mViewManager;
+};
+
+
+inline DocumentManager* OktetaProgram::documentManager() { return mDocumentManager; }
+// inline ViewManager* OktetaProgram::viewManager()         { return mViewManager; }
+
 }
+
+#endif

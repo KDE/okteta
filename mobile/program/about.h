@@ -8,7 +8,7 @@
     published by the Free Software Foundation; either version 2 of
     the License or (at your option) version 3 or any later version
     accepted by the membership of KDE e.V. (or its successor approved
-    by the membership of KDE e.V.), which shall act as a proxy 
+    by the membership of KDE e.V.), which shall act as a proxy
     defined in Section 14 of version 3 of the license.
 
     This program is distributed in the hope that it will be useful,
@@ -20,15 +20,17 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// program
-#include "program.h"
+#ifndef OKTETAABOUT_H
+#define OKTETAABOUT_H
+
+// KDE
+#include <KAboutData>
 
 
-int main( int argc, char* argv[] )
+class OktetaAboutData : public KAboutData
 {
-    Kasten::OktetaProgram program( argc, argv );
+public:
+    OktetaAboutData();
+};
 
-    const int result = program.execute();
-
-    return result;
-}
+#endif
