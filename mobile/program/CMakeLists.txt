@@ -1,6 +1,7 @@
 project( oktetamobileprogram )
 
 set( OKTETAKASTEN_REL_DIR ../../kasten )
+set( MOBILEKASTEN_REL_DIR ../kasten )
 set( KASTEN_REL_DIR ../../libs/kasten )
 set( OKTETA_REL_DIR ../.. )
 
@@ -16,7 +17,9 @@ include_directories(
   ${OKTETAKASTEN_REL_DIR}/core
   ${OKTETAKASTEN_REL_DIR}/core/io
   ${OKTETAKASTEN_REL_DIR}/core/document
-  ${KASTEN_REL_DIR}/controllers
+  ${MOBILEKASTEN_REL_DIR}/gui
+  ${MOBILEKASTEN_REL_DIR}/gui/shell
+#   ${KASTEN_REL_DIR}/controllers
 #   ${KASTEN_REL_DIR}/gui
 #   ${KASTEN_REL_DIR}/gui/view
 #   ${KASTEN_REL_DIR}/gui/io
@@ -37,7 +40,7 @@ set( okteta_SRCS
   main.cpp
   program.cpp
   about.cpp
-#   mainwindow.cpp
+  mainwindow.cpp
 )
 
 kde4_add_executable( okteta-mobile  ${okteta_SRCS} )
@@ -46,6 +49,7 @@ target_link_libraries( okteta-mobile
   oktetakastencontrollers
 #   oktetakastengui
   oktetakastencore
+  mobilekastengui
   kastencontrollers
 #   kastengui
   kastencore

@@ -23,7 +23,7 @@
 #include "program.h"
 
 // program
-// #include "mainwindow.h"
+#include "mainwindow.h"
 // Okteta Kasten
 #include <bytearraydocumentfactory.h>
 // #include <bytearrayviewfactory.h>
@@ -107,7 +107,7 @@ int OktetaProgram::execute()
     else
     {
         // no session.. just start up normally
-//         OktetaMainWindow *mainWindow = new OktetaMainWindow( this );
+        OktetaMainWindow *mainWindow = new OktetaMainWindow( this );
 
         KCmdLineArgs *arguments = KCmdLineArgs::parsedArgs();
 
@@ -130,8 +130,8 @@ int OktetaProgram::execute()
             }
         }
 
-//         mDocumentManager->setWidget( mainWindow );
-//         mainWindow->show();
+        mDocumentManager->setWidget( mainWindow );
+        mainWindow->show();
 
         arguments->clear();
     }
