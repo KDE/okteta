@@ -11,6 +11,7 @@ Name[pt_BR]=Okteta Móvel
 Name[sv]=Okteta för mobil
 Name[uk]=Okteta для мобільних пристроїв
 Name[x-test]=xxOkteta Mobilexx
+Name[zh_CN]=Okteta Mobile
 Name[zh_TW]=Okteta Mobile
 
 Exec=okteta-mobile
