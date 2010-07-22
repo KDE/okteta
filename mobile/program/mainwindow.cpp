@@ -1,5 +1,5 @@
 /*
-    This file is part of the Okteta program, part of the KDE project.
+    This file is part of the Okteta Mobile program, part of the KDE project.
 
     Copyright 2006-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
 
@@ -24,82 +24,72 @@
 
 // program
 #include "program.h"
-#if 0
 // tools
-#include <stringsextract/stringsextracttoolview.h>
-#include <stringsextract/stringsextracttool.h>
-#include <info/infotoolview.h>
-#include <info/infotool.h>
-#include <filter/filtertoolview.h>
-#include <filter/filtertool.h>
-#include <checksum/checksumtoolview.h>
-#include <checksum/checksumtool.h>
-#include <info/documentinfotoolview.h>
-#include <info/documentinfotool.h>
-#include <poddecoder/poddecodertoolview.h>
-#include <poddecoder/poddecodertool.h>
-#include <bytetable/bytetabletoolview.h>
-#include <bytetable/bytetabletool.h>
-#include <bookmarks/bookmarkstoolview.h>
-#include <bookmarks/bookmarkstool.h>
-#include <structures/structtoolview.h>
-#include <structures/structtool.h>
+// #include <stringsextract/stringsextracttoolview.h>
+// #include <stringsextract/stringsextracttool.h>
+// #include <info/infotoolview.h>
+// #include <info/infotool.h>
+// #include <filter/filtertoolview.h>
+// #include <filter/filtertool.h>
+// #include <checksum/checksumtoolview.h>
+// #include <checksum/checksumtool.h>
+// #include <info/documentinfotoolview.h>
+// #include <info/documentinfotool.h>
+// #include <poddecoder/poddecodertoolview.h>
+// #include <poddecoder/poddecodertool.h>
+// #include <bytetable/bytetabletoolview.h>
+// #include <bytetable/bytetabletool.h>
+// #include <bookmarks/bookmarkstoolview.h>
+// #include <bookmarks/bookmarkstool.h>
+// #include <structures/structtoolview.h>
+// #include <structures/structtool.h>
 // Kasten tools
-#include <document/versionview/versionviewtoolview.h>
-#include <document/versionview/versionviewtool.h>
-#include <documentsystem/filesystembrowser/filesystembrowsertoolview.h>
-#include <documentsystem/filesystembrowser/filesystembrowsertool.h>
-#include <documentsystem/documentsbrowser/documentstoolview.h>
-#include <documentsystem/documentsbrowser/documentstool.h>
-#include <document/terminal/terminaltoolview.h>
-#include <document/terminal/terminaltool.h>
+// #include <document/versionview/versionviewtoolview.h>
+// #include <document/versionview/versionviewtool.h>
 // controllers
-#include <overwriteonly/overwriteonlycontroller.h>
-#include <overwritemode/overwritemodecontroller.h>
-#include <gotooffset/gotooffsetcontroller.h>
-#include <selectrange/selectrangecontroller.h>
-#include <search/searchcontroller.h>
-#include <replace/replacecontroller.h>
-#include <bookmarks/bookmarkscontroller.h>
-#include <print/printcontroller.h>
-#include <viewconfig/viewconfigcontroller.h>
-#include <viewmode/viewmodecontroller.h>
-#include <viewstatus/viewstatuscontroller.h>
-// Kasten controllers
-#include <document/modified/modifiedbarcontroller.h>
-#include <document/readonly/readonlycontroller.h>
-#include <document/readonly/readonlybarcontroller.h>
-#include <documentsystem/creator/creatorcontroller.h>
-#include <documentsystem/loader/loadercontroller.h>
-#include <documentsystem/close/closecontroller.h>
-#include <io/setremote/setremotecontroller.h>
-#include <io/synchronize/synchronizecontroller.h>
-#include <io/clipboard/clipboardcontroller.h>
-#include <io/insert/insertcontroller.h>
-#include <io/copyas/copyascontroller.h>
-#include <io/export/exportcontroller.h>
-#include <view/version/versioncontroller.h>
-#include <view/zoom/zoomcontroller.h>
-#include <view/zoom/zoombarcontroller.h>
-#include <view/select/selectcontroller.h>
-#include <shellwindow/switchview/switchviewcontroller.h>
-#include <shellwindow/viewlistmenu/viewlistmenucontroller.h>
-#include <shellwindow/viewareasplit/viewareasplitcontroller.h>
-#include <shellwindow/toollistmenu/toollistmenucontroller.h>
-#include <shellwindow/fullscreen/fullscreencontroller.h>
+// #include <overwriteonly/overwriteonlycontroller.h>
+// #include <overwritemode/overwritemodecontroller.h>
+// #include <gotooffset/gotooffsetcontroller.h>
+// #include <selectrange/selectrangecontroller.h>
+// #include <search/searchcontroller.h>
+// #include <replace/replacecontroller.h>
+// #include <bookmarks/bookmarkscontroller.h>
+// #include <print/printcontroller.h>
+// #include <viewconfig/viewconfigcontroller.h>
+// #include <viewmode/viewmodecontroller.h>
+// #include <viewstatus/viewstatuscontroller.h>
+// Mobile Kasten controllers
+// #include <document/readonly/readonlycontroller.h>
+// #include <documentsystem/creator/creatorcontroller.h>
+#include <documentsystem/loader/loaderactioncontroller.h>
+// #include <documentsystem/close/closecontroller.h>
+// #include <io/setremote/setremotecontroller.h>
+// #include <io/synchronize/synchronizecontroller.h>
+// #include <io/clipboard/clipboardcontroller.h>
+// #include <io/insert/insertcontroller.h>
+// #include <io/copyas/copyascontroller.h>
+// #include <io/export/exportcontroller.h>
+// #include <view/version/versioncontroller.h>
+// #include <view/zoom/zoomcontroller.h>
+// #include <view/zoom/zoombarcontroller.h>
+// #include <view/select/selectcontroller.h>
+// #include <shellwindow/switchview/switchviewcontroller.h>
+// #include <shellwindow/viewlistmenu/viewlistmenucontroller.h>
+// #include <shellwindow/viewareasplit/viewareasplitcontroller.h>
+// #include <shellwindow/toollistmenu/toollistmenucontroller.h>
+// #include <shellwindow/fullscreen/fullscreencontroller.h>
 /*#include <viewsystem/close/closecontroller.h>*/
-#include <program/quit/quitcontroller.h>
 // Kasten gui
-#include <viewmanager.h>
-#include <tabbedviews.h>
-#include <multiviewareas.h>
-#include <statusbar.h>
-#endif
+// #include <viewmanager.h>
+// #include <tabbedviews.h>
+// #include <multiviewareas.h>
+// #include <statusbar.h>
 // Kasten core
 // #include <documentcreatemanager.h>
 // #include <documentsyncmanager.h>
 #include <documentmanager.h>
 // KDE
+#include <KMenuBar>
 #include <KGlobal>
 #include <KConfigGroup>
 
@@ -116,7 +106,7 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram *program )
 
 //     setStatusBar( new Kasten::StatusBar(this) );
 
-//     setupControllers();
+    setupControllers();
 //     setupGUI();
 
     // all controllers which use plugActionList have to do so after(!) setupGUI() or their entries will be removed
@@ -127,10 +117,10 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram *program )
 
 void OktetaMainWindow::setupControllers()
 {
-#if 0
     // general, part of Kasten
-    addXmlGuiController( new CreatorController(mProgram->viewManager(),mProgram->documentManager(),this) );
-    addXmlGuiController( new LoaderController(mProgram->documentManager()->syncManager(),this) );
+//     addXmlGuiController( new CreatorController(mProgram->viewManager(),mProgram->documentManager(),this) );
+    addActionController( new LoaderActionController(mProgram->documentManager()->syncManager(),menuBar()) );
+#if 0
     addXmlGuiController( new SetRemoteController(mProgram->documentManager()->syncManager(),this) );
     addXmlGuiController( new SynchronizeController(mProgram->documentManager()->syncManager(),this) );
     addXmlGuiController( new ExportController(mProgram->viewManager(),mProgram->documentManager(),this) );

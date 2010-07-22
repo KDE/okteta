@@ -140,6 +140,9 @@ int OktetaProgram::execute()
 }
 
 
+
+// shell is not a window, but unvisible, has one view window in reserve at start, quits if last viewwindow is closed
+// problem: how to do tool/controller sharing between viewwindows? 
 void OktetaProgram::quit()
 {
     kapp->quit();
