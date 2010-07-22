@@ -108,9 +108,11 @@ set( kastengui_controller_widgets_SRCS
 )
 set( kastengui_controller_SRCS
   ${kastengui_controller_widgets_SRCS}
+  controller/abstractcontroller.cpp
   controller/abstractxmlguicontroller.cpp
 )
 set( kastengui_controller_HDRS
+  controller/abstractcontroller.h
   controller/abstractxmlguicontroller.h
   controller/abstractlinepopup.h
   controller/togglebutton.h

@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2006,2008,2010 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2010 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,23 +20,15 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABSTRACTXMLGUICONTROLLER_H
-#define ABSTRACTXMLGUICONTROLLER_H
-
-// lib
 #include "abstractcontroller.h"
+
 
 namespace Kasten
 {
 
-class KASTENGUI_EXPORT AbstractXmlGuiController : public AbstractController
+void AbstractController::setTargetModel( AbstractModel* model )
 {
-  Q_OBJECT
-
-  public: // API to be implemented
-//    void plug( KXMLGUIClient* guiClient );
-};
-
+    Q_UNUSED(model)
 }
 
-#endif
+}
