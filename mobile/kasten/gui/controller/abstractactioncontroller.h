@@ -20,44 +20,22 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MOBILESHELLWINDOW_H
-#define MOBILESHELLWINDOW_H
+#ifndef ABSTRACTACTIONCONTROLLER_H
+#define ABSTRACTACTIONCONTROLLER_H
 
-// Kasten gui
+// lib
 #include "mobilekastengui_export.h"
-// KDE
-#include <KMainWindow>
-// Qt
-#include <QtCore/QList>
-
+// Kasten
+#include <abstractcontroller.h>
 
 namespace Kasten
 {
-class DocumentManager;
-class AbstractActionController;
-class AbstractDocument;
 
-
-class MOBILEKASTENGUI_EXPORT MobileShellWindow : public KMainWindow
+class MOBILEKASTENGUI_EXPORT AbstractActionController : public AbstractController
 {
-   Q_OBJECT
+  Q_OBJECT
 
-  public:
-    explicit MobileShellWindow( DocumentManager* documentManager/*, ViewManager *viewManager*/ );
-    virtual ~MobileShellWindow();
-
-  protected:
-    void addActionController( AbstractActionController* controller );
-
-  protected: // KMainWindow API
-    virtual bool queryClose();
-
-  protected:
-    DocumentManager* mDocumentManager;
-
-    AbstractDocument* mDocument;
-    
-    QList<AbstractActionController*> mControllers;
+  public: // API to be implemented
 };
 
 }

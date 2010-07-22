@@ -22,13 +22,45 @@
 
 #include "mobileshellwindow.h"
 
+// Kasten core
+#include <documentmanager.h>
+
+
 namespace Kasten
 {
 
 MobileShellWindow::MobileShellWindow( DocumentManager* documentManager/*, ViewManager *viewManager*/ )
-  : KMainWindow()
+  : KMainWindow(),
+    mDocumentManager( documentManager ),
+    mDocument( 0 )
 {
 }
+
+#if 0
+void ShellWindow::updateControllers( AbstractView* view )
+{
+    foreach( AbstractXmlGuiController* controller, mControllers )
+        controller->setTargetModel( view );
+
+    foreach( ToolViewDockWidget* dockWidget, mDockWidgets )
+    {
+        if( dockWidget->isShown() )
+            dockWidget->toolView()->tool()->setTargetModel( view );
+    }
+}
+#endif
+
+void MobileShellWindow::addActionController( AbstractActionController* controller )
+{
+    mControllers.append( controller );
+}
+
+bool MobileShellWindow::queryClose()
+{
+    // TODO: query the document manager or query the view manager?
+    return (! mDocument) || mDocumentManager->canClose(mDocument);
+}
+
 
 MobileShellWindow::~MobileShellWindow() {}
 

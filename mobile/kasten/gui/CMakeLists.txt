@@ -1,12 +1,14 @@
 add_definitions( -DKDE_DEFAULT_DEBUG_AREA=1804 )
 
-set( KASTEN_REL_DIR ../../../../kasten )
+set( KASTEN_REL_DIR ../../../libs/kasten )
 
 include_directories(
   ${KASTEN_REL_DIR}/core
   ${KASTEN_REL_DIR}/core/document
   ${KASTEN_REL_DIR}/core/io
   ${KASTEN_REL_DIR}/core/system
+  ${KASTEN_REL_DIR}/gui
+  ${KASTEN_REL_DIR}/gui/controller
 #   view
 #   io
 #   system
@@ -22,19 +24,28 @@ set( mobilekastengui_shell_HDRS
   shell/mobileshellwindow.h
 )
 
+set( mobilekastengui_controller_SRCS
+  controller/abstractactioncontroller.cpp
+)
+set( mobilekastengui_controller_HDRS
+  controller/abstractactioncontroller.h
+)
 
 set( mobilekastengui_LIB_SRCS
   ${mobilekastengui_shell_SRCS}
+  ${mobilekastengui_controller_SRCS}
 )
 
 set( mobilekastengui_LIB_HDRS
   mobilekastengui_export.h
   ${mobilekastengui_shell_HDRS}
+  ${mobilekastengui_controller_HDRS}
 )
 
 
 kde4_add_library( mobilekastengui SHARED ${mobilekastengui_LIB_SRCS} )
 target_link_libraries( mobilekastengui
+  kastengui
   kastencore
   ${KDE4_KDEUI_LIBS}
 )
