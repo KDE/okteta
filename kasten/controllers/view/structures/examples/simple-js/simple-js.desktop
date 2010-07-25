@@ -5,6 +5,7 @@ Type=Service
 ServiceTypes=KPluginInfo
 
 Name=JavaScript test
+Name[ar]=JavaScript test
 Name[ca]=Prova del JavaScript
 Name[ca@valencia]=Prova del JavaScript
 Name[cs]=Test JavaScriptu
@@ -40,6 +41,7 @@ Name[x-test]=xxJavaScript testxx
 Name[zh_CN]=JavaScript 测试
 Name[zh_TW]=JavaScript 測試
 Comment=Just testing structures defined in JS
+Comment[ar]=Just testing structures defined in JS
 Comment[ca]=Per a provar estructures definides en JS
 Comment[ca@valencia]=Per a provar estructures definides en JS
 Comment[da]=Tester bare struktur defineret i JS

@@ -5,6 +5,7 @@ Type=Service
 ServiceTypes=KPluginInfo
 
 Name=ELF structure
+Name[ar]=بنية ELF 
 Name[ca]=Estructura ELF
 Name[ca@valencia]=Estructura ELF
 Name[cs]=Struktura ELF
@@ -43,6 +44,7 @@ Name[x-test]=xxELF structurexx
 Name[zh_CN]=ELF 结构
 Name[zh_TW]=ELF 結構
 Comment=Structure for Executable and Linkable Format (ELF)
+Comment[ar]=بنية لتنسيق التنفيذي و المربوط (ELF)
 Comment[ca]=Estructura per a «Executable and Linkable Format» (ELF)
 Comment[ca@valencia]=Estructura per a «Executable and Linkable Format» (ELF)
 Comment[da]=Struktur af Executable Linking Format (ELF)
