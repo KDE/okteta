@@ -32,6 +32,7 @@ Name[sv]=Testar fält med dynamisk längd (JS). Översätt inte, det är bortkas
 Name[tr]=Dinamik uzunluklu diziler (JS) test ediliyor.
 Name[uk]=Тестування масивів зі змінною розмірністю (JS). Не перекладайте.
 Name[x-test]=xxTesting dynamic length arrays (JS). Do not translate, it's a waste of timexx
+Name[zh_CN]=测试变长数组(JS)
 Name[zh_TW]=Testing dynamic length arrays (JS). Do not translate, it's a waste of time
 Comment=A test structure for dynamic arrays (JS). Do not translate, it's a waste of time
 Comment[ar]=A test structure for dynamic arrays (JS). Do not translate, it's a waste of time
@@ -61,6 +62,7 @@ Comment[sv]=En teststruktur för dynamiska fält (JS). Översätt inte, det är 
 Comment[tr]=Dinamik uzunluklu diziler (JS) için test.
 Comment[uk]=Тестова структура для динамічних масивів (JS). Не перекладайте.
 Comment[x-test]=xxA test structure for dynamic arrays (JS). Do not translate, it's a waste of timexx
+Comment[zh_CN]=动态数组的测试结构(JS)
 Comment[zh_TW]=A test structure for dynamic arrays (JS). Do not translate, it's a waste of time
 
 X-KDE-PluginInfo-Author=Alex Richardson
