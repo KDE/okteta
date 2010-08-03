@@ -384,7 +384,7 @@ just used for development, so no need to document it. -->
         </screen>
         <calloutlist>
           <callout arearefs="icon">
-          <para>The icon displayed in &okteta; for this structure. Can be anything found by executing
+          <para>The icon displayed in &okteta; for this structure can be anything found by executing
           <userinput><command>kdialog</command> <option>--geticon</option></userinput> or a path to an icon</para>
           </callout>
         </calloutlist>
