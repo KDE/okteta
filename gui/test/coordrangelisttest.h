@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KSECTIONLISTTEST_H
-#define KSECTIONLISTTEST_H
+#ifndef COORDRANGELISTTEST_H
+#define COORDRANGELISTTEST_H
 
 // Qt
 #include <QtCore/QObject>

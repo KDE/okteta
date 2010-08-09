@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FIXEDSIZEBUFFERTEST_H
-#define FIXEDSIZEBUFFERTEST_H
+#ifndef FIXEDSIZEBYTEARRAYMODELTEST_H
+#define FIXEDSIZEBYTEARRAYMODELTEST_H
 
 // Qt
 #include <QtCore/QObject>

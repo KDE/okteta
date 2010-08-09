@@ -30,7 +30,7 @@
 #include <QtScript/QScriptEngine>
 #include <QtScriptTools/QScriptEngineDebugger>
 
-#include "config-structtool.h"
+#include <config-structtool.h>
 
 class DataInformation;
 

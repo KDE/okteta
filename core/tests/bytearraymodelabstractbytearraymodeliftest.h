@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BYTEARRAYMODELKABSTRACTBYTEARRAYMODELIFTEST_H
-#define BYTEARRAYMODELKABSTRACTBYTEARRAYMODELIFTEST_H
+#ifndef BYTEARRAYMODELABSTRACTBYTEARRAYMODELIFTEST_H
+#define BYTEARRAYMODELABSTRACTBYTEARRAYMODELIFTEST_H
 
 // test
 #include "abstractbytearraymodeliftest.h"

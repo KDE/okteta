@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KBOOKMARKTEST_H
-#define KBOOKMARKTEST_H
+#ifndef BOOKMARKLISTTEST_H
+#define BOOKMARKLISTTEST_H
 
 // Qt
 #include <QtCore/QObject>

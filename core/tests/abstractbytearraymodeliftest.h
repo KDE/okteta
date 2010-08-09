@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KABSTRACTBYTEARRAYIFTEST_H
-#define KABSTRACTBYTEARRAYIFTEST_H
+#ifndef ABSTRACTBYTEARRAYIFTEST_H
+#define ABSTRACTBYTEARRAYIFTEST_H
 
 // lib
 #include <addressrange.h>
