@@ -38,7 +38,9 @@ SelectRangeTool::SelectRangeTool()
   : mTargetStart( 0 ),
     mTargetEnd( -1 ),
     mByteArrayView( 0 ),
-    mByteArrayModel( 0 )
+    mByteArrayModel( 0 ),
+    mIsEndBackwards( 0 ),
+    mIsEndRelative( 0 )
 {
     setObjectName( "SelectRange" );
 }

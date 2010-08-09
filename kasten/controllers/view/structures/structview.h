@@ -25,13 +25,13 @@
 #define STRUCTVIEW_H_
 #include <QtGui/QWidget>
 #include "structviewitemdelegate.h"
-#include <QEvent>
-#include "config-structtool.h"
+#include <config-structtool.h>
 
 class KComboBox;
 class QTreeView;
 class KPushButton;
 class KTextEdit;
+//class ModelTest;
 
 namespace Kasten
 {
@@ -54,6 +54,7 @@ protected:
     StructTool* mTool;
 
     StructTreeModel* mStructTreeModel;
+//    ModelTest* mModeltest;
 
     QTreeView* mStructTreeView;
     KComboBox* mByteOrderSelection;
