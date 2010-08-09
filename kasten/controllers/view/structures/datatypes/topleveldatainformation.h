@@ -58,7 +58,7 @@ public:
      * @param input the byte array to read from
      * @param byteOrder the byte order used to read the data (big/little endian), may be overridden by child structures
      * @param address the starting offset to read from, or if an offset is locked, the locked offset
-     * @param changesList the list with changes to @input, so that it is possible to check whether reading is neccessary
+     * @param changesList the list with changes to @input, so that it is possible to check whether reading is necessary
      *      This parameter is only useful if the structure was locked to a specific position.
      */
     void read(Okteta::AbstractByteArrayModel* input, ByteOrder byteOrder,

@@ -488,7 +488,7 @@ QScriptValue ScriptEngineInitializer::enumToString(QScriptContext* ctx,
     while (iter.hasNext())
     {
         iter.next();
-        result.append(iter.name() + " = " + iter.value().toString() + "\n");
+        result.append(iter.name() + " = " + iter.value().toString() + '\n');
     }
     return result;
 }

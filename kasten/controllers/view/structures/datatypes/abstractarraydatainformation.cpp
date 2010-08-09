@@ -75,9 +75,9 @@ bool AbstractArrayDataInformation::isDynamicArray() const
 
 QScriptValue AbstractArrayDataInformation::setArrayLength(int newLength)
 {
-    //kDebug() << "old childcount: " << childCount();
+    //kDebug() << "old child count: " << childCount();
 
-    //arrays with length zero are useless -> minumum is 1 (prevents integer underflow later
+    //arrays with length zero are useless -> minimum is 1 (prevents integer underflow later
     if (newLength < 0)
         return context() ? context()->throwError(
                 "new Array length is less than zero: " + QString::number(newLength))

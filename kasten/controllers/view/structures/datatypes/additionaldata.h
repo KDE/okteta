@@ -30,7 +30,7 @@
 class AdditionalData
 {
 public:
-    AdditionalData(QScriptValue* validate = NULL, QScriptValue* update = NULL);
+    explicit AdditionalData(QScriptValue* validate = NULL, QScriptValue* update = NULL);
     AdditionalData(const AdditionalData& data);
     virtual ~AdditionalData();
 private:

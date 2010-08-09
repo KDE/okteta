@@ -275,7 +275,7 @@ void StructView::logScriptError(QString msg, QString err)
 #warning "Script debugging is enabled"
     //FIXME add the preferences
     kWarning() << "Script error occurred:" << msg << "  " << err;
-    mScriptErrors->append(QTime::currentTime().toString() + ":" + msg + " " + err);
+    mScriptErrors->append(QTime::currentTime().toString() + ':' + msg + " " + err);
 #else
     Q_UNUSED(msg)
     Q_UNUSED(err)

@@ -117,7 +117,7 @@ void TopLevelDataInformation::read(Okteta::AbstractByteArrayModel* input,
 
         //use the saved offset
         address = *mLockedPositions.value(input);
-        //we read from the locked position, so now check whether it is neccessary to update
+        //we read from the locked position, so now check whether it is necessary to update
         bool updateNeccessary = isReadingNecessary(changesList, address);
 
         if (!updateNeccessary)
