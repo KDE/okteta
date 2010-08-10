@@ -37,10 +37,10 @@ namespace Kasten
 SelectRangeTool::SelectRangeTool()
   : mTargetStart( 0 ),
     mTargetEnd( -1 ),
+    mIsEndRelative( false ),
+    mIsEndBackwards( false ),
     mByteArrayView( 0 ),
-    mByteArrayModel( 0 ),
-    mIsEndBackwards( 0 ),
-    mIsEndRelative( 0 )
+    mByteArrayModel( 0 )
 {
     setObjectName( "SelectRange" );
 }
