@@ -133,6 +133,7 @@ void ViewConfigController::setTargetModel( AbstractModel* model )
     mEncodingAction->setEnabled( hasView );
     mShowsNonprintingAction->setEnabled( hasView );
     mSetBytesPerLineAction->setEnabled( hasView );
+    mSetBytesPerGroupAction->setEnabled( hasView );
     mResizeStyleAction->setEnabled( hasView );
     mShowOffsetColumnAction->setEnabled( hasView );
     mToggleColumnsAction->setEnabled( hasView );
