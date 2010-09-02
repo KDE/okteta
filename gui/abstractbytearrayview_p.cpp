@@ -38,8 +38,6 @@
 #include <versionable.h>
 #include <wordbytearrayservice.h>
 #include <bookmark.h>
-// KDE
-#include <KGlobal>
 // Qt
 #include <QtGui/QDragEnterEvent>
 #include <QtGui/QDragMoveEvent>
@@ -122,10 +120,10 @@ void NullModel::setModified( bool modified )
 Q_UNUSED(modified)
 }
 
-K_GLOBAL_STATIC( NullModel, nullModel )
+Q_GLOBAL_STATIC(NullModel, nullModel)
 
 AbstractByteArrayViewPrivate::AbstractByteArrayViewPrivate( AbstractByteArrayView* parent )
- : mByteArrayModel( nullModel ),
+ : mByteArrayModel( nullModel() ),
    mTableLayout( new ByteArrayTableLayout(DefaultNoOfBytesPerLine,DefaultFirstLineOffset,DefaultStartOffset,0,0) ),
    mTableCursor( new ByteArrayTableCursor(mTableLayout) ),
    mTableRanges( new ByteArrayTableRanges(mTableLayout) ),
@@ -191,7 +189,7 @@ void AbstractByteArrayViewPrivate::setByteArrayModel( AbstractByteArrayModel* by
     mByteArrayModel->disconnect( q );
     mCursorPaused = true;
 
-    mByteArrayModel = byteArrayModel ? byteArrayModel : nullModel;
+    mByteArrayModel = byteArrayModel ? byteArrayModel : nullModel();
 
     // affected:
     // length -> no of lines -> width
