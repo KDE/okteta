@@ -35,7 +35,7 @@ namespace Kasten
 ByteTableToolViewFactory::ByteTableToolViewFactory() {}
 
 QString ByteTableToolViewFactory::iconName() const { return "table"; }
-QString ByteTableToolViewFactory::title()       const { return i18nc("@title:window", "Byte Table"); }
+QString ByteTableToolViewFactory::title()    const { return i18nc("@title:window", "Value/Char Table"); }
 QString ByteTableToolViewFactory::id()       const { return "org.kde.okteta.ByteTableToolView"; }
 SidePosition ByteTableToolViewFactory::defaultPosition() const { return RightSidePosition; }
 

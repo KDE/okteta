@@ -46,7 +46,7 @@ ByteTableTool::ByteTableTool()
     setObjectName( "ByteTable" );
 }
 
-QString ByteTableTool::title() const { return i18nc("@title:window", "Byte Table"); }
+QString ByteTableTool::title() const { return i18nc("@title:window", "Value/Char Table"); }
 ByteTableModel *ByteTableTool::byteTableModel() const { return mByteTableModel; }
 bool ByteTableTool::hasWriteable() const
 {
