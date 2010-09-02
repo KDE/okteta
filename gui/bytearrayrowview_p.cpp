@@ -29,8 +29,6 @@
 #include "kcursor.h"
 // Okteta core
 #include <valuecodec.h>
-// KDE
-#include <KGlobalSettings>
 // Qt
 #include <QtGui/QStyle>
 #include <QtGui/QPainter>
@@ -71,8 +69,10 @@ void ByteArrayRowViewPrivate::init()
 
     adaptController();
 
-    // do here not in base class, as handleFontChange needs this init run before
-    q->setFont( KGlobalSettings::fixedFont() );
+    // do here, not in base class, as changeEvent(fontEvent) needs this init run before
+    QFont fixedFont( QLatin1String("fixed") );
+    fixedFont.setFixedPitch( true );
+    q->setFont( fixedFont );
 }
 
 AbstractByteArrayView::CodingTypes ByteArrayRowViewPrivate::visibleCodings() const { return mByteArrayColumn->visibleCodings(); }
