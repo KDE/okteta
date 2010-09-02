@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -99,7 +99,7 @@ class ByteArrayRowViewPrivate : public AbstractByteArrayViewPrivate
     void updateCursor( const ByteArrayRowColumnRenderer& column, AbstractByteArrayView::CodingTypeId codingId );
 
   protected: // partial operations
-    void handleFontChange( const QFont& oldFont );
+    void changeEvent( QEvent* event );
 
   protected:
     /** recalcs a layout due to the resize style that fits into the view size

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2003,2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2007-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -35,6 +35,7 @@
 #include <QtGui/QStyle>
 #include <QtGui/QPainter>
 #include <QtGui/QScrollBar>
+#include <QtCore/QEvent>
 
 
 namespace Okteta
@@ -268,11 +269,16 @@ void ByteArrayColumnViewPrivate::setByteTypeColored( bool isColored )
 }
 
 
-void ByteArrayColumnViewPrivate::handleFontChange( const QFont& oldFont )
+void ByteArrayColumnViewPrivate::changeEvent( QEvent* event )
 {
     Q_Q( ByteArrayColumnView );
 
-    q->AbstractByteArrayView::fontChange( oldFont );
+    // make sure base class deals with this event first,
+    // as some values which are used here are updated there
+    q->AbstractByteArrayView::changeEvent( event );
+
+    if( event->type() != QEvent::FontChange )
+        return;
 
     // get new values
     const QFontMetrics newFontMetrics = q->fontMetrics();

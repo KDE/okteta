@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -160,13 +160,11 @@ void ByteArrayRowView::setByteTypeColored( bool isColored )
 }
 
 
-void ByteArrayRowView::fontChange( const QFont& oldFont )
+void ByteArrayRowView::changeEvent( QEvent* event )
 {
     Q_D( ByteArrayRowView );
 
-    AbstractByteArrayView::fontChange( oldFont );
-
-    d->handleFontChange( oldFont );
+    d->changeEvent( event );
 }
 
 

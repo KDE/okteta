@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Gui library, part of the KDE project.
 
-    Copyright 2003,2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2007-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -103,7 +103,7 @@ class OKTETAGUI_EXPORT ByteArrayColumnView : public AbstractByteArrayView
 //    void ensureByteVisible( int row, int column );
 
   protected: // Q_SLOTS QWidget API
-    virtual void fontChange( const QFont& oldFont );
+    virtual void changeEvent( QEvent* event );
 
   private:
     Q_DECLARE_PRIVATE( ByteArrayColumnView )
