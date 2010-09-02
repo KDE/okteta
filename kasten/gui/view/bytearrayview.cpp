@@ -29,6 +29,8 @@
 #include <abstractbytearrayview.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
+// KDE
+#include <KGlobalSettings>
 
 
 namespace Kasten
@@ -89,8 +91,11 @@ void ByteArrayView::init()
     mWidget = new Okteta::ByteArrayJanusView();
     mWidget->setByteArrayModel( content );
 
-    const bool useOverwriteAsDefault = ( content->size() > 0 );
+    connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
+             SLOT(setFontByGlobalSettings()) );
+    setFontByGlobalSettings();
 
+    const bool useOverwriteAsDefault = ( content->size() > 0 );
     mWidget->setOverwriteMode( useOverwriteAsDefault );
 
     // propagate signals
@@ -356,6 +361,11 @@ void ByteArrayView::setViewModus( int viewModus )
 int ByteArrayView::viewModus() const
 {
     return mWidget->viewModus();
+}
+
+void ByteArrayView::setFontByGlobalSettings()
+{
+    mWidget->setFont( KGlobalSettings::fixedFont() );
 }
 
 ByteArrayView::~ByteArrayView()

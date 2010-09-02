@@ -170,6 +170,8 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView,
     void init();
 
   protected Q_SLOTS:
+    void setFontByGlobalSettings();
+
     void onSelectionChanged( const Okteta::AddressRange& selection );
 
   protected:
