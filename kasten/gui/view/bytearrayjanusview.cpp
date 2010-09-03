@@ -28,6 +28,7 @@
 // Qt
 #include <QtGui/QLayout>
 #include <QtGui/QScrollBar>
+#include <QtCore/QEvent>
 
 
 namespace Okteta
@@ -331,6 +332,17 @@ QRect ByteArrayJanusView::viewRect() const
         QPoint(mView->horizontalScrollBar()->value(), mView->verticalScrollBar()->value()),
         mView->viewport()->size() );
     return result;
+}
+
+void ByteArrayJanusView::changeEvent( QEvent* event )
+{
+    QWidget::changeEvent( event );
+    // workaround for wrong API in AbstractByteArrayView:
+    // fontChange() from Qt3 API was not ported to changeEvent( QEvent*) in Qt4
+    // can't fix directly in AbstractByteArrayView API, due to BC reasons for public libs (of Okteta 0.5)
+    // the old font which was passed as argument is not used, so creating a dummy font here is okay
+    if( event->type() == QEvent::FontChange )
+        mView->fontChange( QFont() );
 }
 
 ByteArrayJanusView::~ByteArrayJanusView()

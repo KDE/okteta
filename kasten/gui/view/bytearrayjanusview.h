@@ -135,6 +135,9 @@ class ByteArrayJanusView : public QWidget
     void charCodecChanged( const QString& charCodingName );
     void focusChanged( bool hasFocus );
 
+  protected: // Q_SLOTS QWidget API
+    virtual void changeEvent( QEvent* event );
+
   private:
     AbstractByteArrayView* mView;
     int mViewModus;
