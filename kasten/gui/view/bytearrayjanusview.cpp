@@ -25,6 +25,8 @@
 // Okteta gui
 #include <bytearraycolumnview.h>
 #include <bytearrayrowview.h>
+// KDE
+#include <KGlobalSettings>
 // Qt
 #include <QtGui/QLayout>
 #include <QtGui/QScrollBar>
@@ -42,6 +44,9 @@ ByteArrayJanusView::ByteArrayJanusView( QWidget* parent )
     mLayout = new QHBoxLayout( this );
     mLayout->setMargin( 0 );
     setViewModus( ColumnViewId );
+
+    connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
+             SLOT(setFontByGlobalSettings()) );
 }
 
 void ByteArrayJanusView::setByteArrayModel( AbstractByteArrayModel* byteArrayModel )
@@ -343,6 +348,13 @@ void ByteArrayJanusView::changeEvent( QEvent* event )
     // the old font which was passed as argument is not used, so creating a dummy font here is okay
     if( event->type() == QEvent::FontChange )
         mView->fontChange( QFont() );
+}
+
+void ByteArrayJanusView::setFontByGlobalSettings()
+{
+    const QFont fixedFont = KGlobalSettings::fixedFont();
+    setFont( fixedFont );
+    mView->setFont( fixedFont );
 }
 
 ByteArrayJanusView::~ByteArrayJanusView()

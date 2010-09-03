@@ -138,6 +138,9 @@ class ByteArrayJanusView : public QWidget
   protected: // Q_SLOTS QWidget API
     virtual void changeEvent( QEvent* event );
 
+  protected Q_SLOTS:
+    void setFontByGlobalSettings();
+
   private:
     AbstractByteArrayView* mView;
     int mViewModus;
