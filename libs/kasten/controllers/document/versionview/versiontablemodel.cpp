@@ -69,14 +69,12 @@ void VersionTableModel::setModel( AbstractModel* model, If::Versionable* version
 
 int VersionTableModel::rowCount( const QModelIndex &parent ) const
 {
-Q_UNUSED( parent )
-    return mVersionControl ? mVersionControl->versionCount() : 0;;
+    return (! parent.isValid() && mVersionControl ) ? mVersionControl->versionCount() : 0;
 }
 
 int VersionTableModel::columnCount( const QModelIndex &parent ) const
 {
-Q_UNUSED( parent )
-    return NoOfColumnIds;
+    return (! parent.isValid()) ? NoOfColumnIds : 0;
 }
 
 QVariant VersionTableModel::data( const QModelIndex &index, int role ) const

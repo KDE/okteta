@@ -73,14 +73,12 @@ void ByteTableModel::setCharCodec( const QString &codeName )
 
 int ByteTableModel::rowCount( const QModelIndex &parent ) const
 {
-Q_UNUSED( parent )
-    return ByteSetSize;
+    return (! parent.isValid()) ? ByteSetSize : 0;
 }
 
 int ByteTableModel::columnCount( const QModelIndex &parent ) const
 {
-Q_UNUSED( parent )
-    return NoOfIds;
+    return (! parent.isValid()) ? NoOfIds : 0;
 }
 
 QVariant ByteTableModel::data( const QModelIndex &index, int role ) const

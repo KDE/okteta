@@ -94,14 +94,12 @@ void StatisticTableModel::setCharCodec( const QString &codeName )
 
 int StatisticTableModel::rowCount( const QModelIndex &parent ) const
 {
-Q_UNUSED( parent )
-    return StatisticsByteSetSize;
+    return (! parent.isValid()) ? StatisticsByteSetSize : 0;
 }
 
 int StatisticTableModel::columnCount( const QModelIndex &parent ) const
 {
-Q_UNUSED( parent )
-    return NoOfIds;
+    return (! parent.isValid()) ? NoOfIds : 0;
 }
 
 QVariant StatisticTableModel::data( const QModelIndex &index, int role ) const
