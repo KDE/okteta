@@ -48,14 +48,12 @@ void PODTableModel::onDataChanged()
 
 int PODTableModel::rowCount( const QModelIndex& parent ) const
 {
-Q_UNUSED( parent )
-    return mTool->podCount();
+    return (! parent.isValid()) ? mTool->podCount() : 0;
 }
 
 int PODTableModel::columnCount( const QModelIndex& parent ) const
 {
-Q_UNUSED( parent )
-    return NoOfColumnIds;
+    return (! parent.isValid()) ? NoOfColumnIds : 0;
 }
 
 QVariant PODTableModel::data( const QModelIndex& index, int role ) const

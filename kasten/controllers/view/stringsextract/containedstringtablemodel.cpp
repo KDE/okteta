@@ -41,14 +41,12 @@ void ContainedStringTableModel::update()
 
 int ContainedStringTableModel::rowCount( const QModelIndex &parent ) const
 {
-Q_UNUSED( parent )
-    return mContainedStringList->size();
+    return (! parent.isValid()) ? mContainedStringList->size() : 0;
 }
 
 int ContainedStringTableModel::columnCount( const QModelIndex &parent ) const
 {
-Q_UNUSED( parent )
-    return NoOfColumnIds;
+    return (! parent.isValid()) ? NoOfColumnIds : 0;
 }
 
 QVariant ContainedStringTableModel::data( const QModelIndex &index, int role ) const

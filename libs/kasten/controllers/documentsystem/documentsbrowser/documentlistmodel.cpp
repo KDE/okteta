@@ -48,14 +48,12 @@ DocumentListModel::DocumentListModel( DocumentsTool* documentsTool, QObject* par
 
 int DocumentListModel::rowCount( const QModelIndex& parent ) const
 {
-Q_UNUSED( parent )
-    return mDocumentsTool->documents().size();
+    return (! parent.isValid()) ? mDocumentsTool->documents().size() : 0;
 }
 
 int DocumentListModel::columnCount( const QModelIndex& parent ) const
 {
-Q_UNUSED( parent )
-    return NoOfColumnIds;
+    return (! parent.isValid()) ? NoOfColumnIds : 0;
 }
 
 QVariant DocumentListModel::data( const QModelIndex& index, int role ) const

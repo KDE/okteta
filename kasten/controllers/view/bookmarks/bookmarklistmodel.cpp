@@ -50,14 +50,12 @@ BookmarkListModel::BookmarkListModel( BookmarksTool* tool, QObject* parent )
 
 int BookmarkListModel::rowCount( const QModelIndex& parent ) const
 {
-Q_UNUSED( parent )
-    return mTool->bookmarksCount();
+    return (! parent.isValid()) ? mTool->bookmarksCount() : 0;
 }
 
 int BookmarkListModel::columnCount( const QModelIndex& parent ) const
 {
-Q_UNUSED( parent )
-    return NoOfColumnIds;
+    return (! parent.isValid()) ? NoOfColumnIds : 0;
 }
 
 QVariant BookmarkListModel::data( const QModelIndex& index, int role ) const
