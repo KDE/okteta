@@ -365,7 +365,7 @@ int ByteArrayView::viewModus() const
 
 void ByteArrayView::setFontByGlobalSettings()
 {
-    mWidget->setFont( KGlobalSettings::fixedFont() );
+    mWidget->propagateFont( KGlobalSettings::fixedFont() );
 }
 
 ByteArrayView::~ByteArrayView()

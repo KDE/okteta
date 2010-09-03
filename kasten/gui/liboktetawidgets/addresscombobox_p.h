@@ -63,7 +63,8 @@ class AddressComboBoxPrivate
 
 
 inline AddressComboBoxPrivate::AddressComboBoxPrivate( AddressComboBox* parent )
-  : q_ptr( parent )
+  : q_ptr( parent ),
+    mAddressType( AddressValidator::AbsoluteAddress )
 {}
 
 inline Address AddressComboBoxPrivate::address() const

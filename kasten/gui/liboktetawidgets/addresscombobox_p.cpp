@@ -30,7 +30,7 @@
 #include <QtGui/QLineEdit>
 #include <QtGui/QAbstractItemView>
 
-
+#include <KDebug>
 /*
 Problem: what to do if the format is changed for which the current string is not valid?
 Solution: we always convert the string to the new format, so there is never such a situation
@@ -119,6 +119,7 @@ void AddressComboBoxPrivate::onFormatChanged( int formatIndex )
     {
         const QString convertedValueText = mValidator->toString( address, addressType );
         mValueComboBox->setEditText( convertedValueText );
+kDebug()<<address<<addressType<<convertedValueText;
     }
 
     if( mAddressType != addressType )

@@ -125,6 +125,10 @@ class ByteArrayJanusView : public QWidget
     void setViewPos( const QPoint& pos );
     QRect viewRect() const;
 
+    // needed, as the zooming logic currently changes the font for the real view,
+    // so decouples from font change propagation
+    void propagateFont( const QFont &font );
+
   Q_SIGNALS:
     void readOnlyChanged( bool );
     void overwriteModeChanged( bool overwriteMode );

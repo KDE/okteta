@@ -333,6 +333,12 @@ QRect ByteArrayJanusView::viewRect() const
     return result;
 }
 
+void ByteArrayJanusView::propagateFont( const QFont &font )
+{
+    setFont( font );
+    mView->setFont( font );
+}
+
 ByteArrayJanusView::~ByteArrayJanusView()
 {
 }
