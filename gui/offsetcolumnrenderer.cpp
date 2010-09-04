@@ -29,6 +29,7 @@
 // Qt
 #include <QtGui/QPainter>
 #include <QtGui/QPalette>
+#include <QtGui/QFontMetrics>
 
 
 namespace Okteta
@@ -121,6 +122,21 @@ void OffsetColumnRenderer::setDigitWidth( PixelX digitWidth )
     mDigitWidth = digitWidth;
 
     recalcX();
+}
+
+void OffsetColumnRenderer::setFontMetrics( const QFontMetrics& fontMetrics )
+{
+    mDigitBaseLine = fontMetrics.ascent();
+
+    // use 0 as reference offset, using a fixed font should always yield same width
+    printFunction()( mCodedOffset, 0 );
+    const int newOffsetTextWidth = fontMetrics.width( QLatin1String(mCodedOffset) );
+
+    // fake digitWidth if someone elses uses it, at least close to real one
+    mDigitWidth = ((double)(newOffsetTextWidth+1))/mCodingWidth + 1;
+
+    // directly set width
+    setWidth( newOffsetTextWidth + leftOffsetMargin + rightOffsetMargin );
 }
 
 void OffsetColumnRenderer::recalcX()

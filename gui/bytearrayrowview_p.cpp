@@ -256,7 +256,7 @@ void ByteArrayRowViewPrivate::handleFontChange( const QFont& oldFont )
     const PixelY digitBaseLine = newFontMetrics.ascent();
     const PixelY digitHeight = newFontMetrics.height();
 
-    mOffsetColumn->setMetrics( digitWidth, digitBaseLine );
+    mOffsetColumn->setFontMetrics( newFontMetrics );
     mByteArrayColumn->setMetrics( digitWidth, digitBaseLine, digitHeight );
 
     const int rowHeight = mByteArrayColumn->rowHeight();

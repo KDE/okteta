@@ -280,7 +280,7 @@ void ByteArrayColumnViewPrivate::handleFontChange( const QFont& oldFont )
     const PixelY digitBaseLine = newFontMetrics.ascent();
     const PixelY digitHeight = newFontMetrics.height();
 
-    mOffsetColumn->setMetrics( digitWidth, digitBaseLine );
+    mOffsetColumn->setFontMetrics( newFontMetrics );
     mValueColumn->setMetrics( digitWidth, digitBaseLine );
     mCharColumn->setMetrics( digitWidth, digitBaseLine );
 

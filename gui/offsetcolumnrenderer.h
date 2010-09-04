@@ -28,6 +28,8 @@
 #include "abstractcolumnrenderer.h"
 #include "line.h"
 
+class QFontMetrics;
+
 
 namespace Okteta
 {
@@ -51,10 +53,14 @@ class OKTETAGUI_EXPORT OffsetColumnRenderer : public AbstractColumnRenderer
 
   public:
     void setFormat( OffsetFormat::Format format );
-    /** sets width of digits and recalculates depend sizes  */
-    void setDigitWidth( PixelX digitWidth );
-    /** */
-    void setMetrics( PixelX DW, PixelY DBL );
+    /** sets width of digits and recalculates depend sizes.
+     * Problem is that this wrongly assumes each digit uses full pixels
+     * (in fact is rounded float value).
+     */
+    KDE_DEPRECATED void setDigitWidth( PixelX digitWidth );
+    KDE_DEPRECATED void setMetrics( PixelX DW, PixelY DBL );
+    /** sets width of offset text and recalculates depend sizes */
+    void setFontMetrics( const QFontMetrics& fontMetrics );
 
   public: // read access
 //     int delta() const;

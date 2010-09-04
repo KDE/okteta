@@ -346,7 +346,7 @@ void ByteArrayFrameRenderer::setFont( const QFont& font )
     // update all dependant structures
     mLayout->setNoOfLinesPerPage( noOfLinesPerFrame() );
 
-    mOffsetColumnRenderer->setMetrics( digitWidth, digitBaseLine );
+    mOffsetColumnRenderer->setFontMetrics( fontMetrics );
     mValueColumnRenderer->setMetrics( digitWidth, digitBaseLine );
     mCharColumnRenderer->setMetrics( digitWidth, digitBaseLine );
 
