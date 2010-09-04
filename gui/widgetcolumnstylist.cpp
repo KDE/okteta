@@ -35,9 +35,9 @@ WidgetColumnStylist::WidgetColumnStylist( QWidget* parent )
 {
 }
 
-const QPalette& WidgetColumnStylist::palette()
+const QPalette& WidgetColumnStylist::palette() const
 {
-    Q_D( WidgetColumnStylist );
+    Q_D( const WidgetColumnStylist );
 
     return d->widget()->palette();
 }

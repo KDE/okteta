@@ -42,7 +42,7 @@ class OKTETAGUI_EXPORT AbstractColumnStylist
     virtual ~AbstractColumnStylist();
 
   public: // API to be reimplemented in the subclasses
-    virtual const QPalette& palette() = 0;
+    virtual const QPalette& palette() const = 0;
 
   protected:
     explicit AbstractColumnStylist( AbstractColumnStylistPrivate* d );

@@ -42,7 +42,7 @@ class OKTETAGUI_EXPORT WidgetColumnStylist : public AbstractColumnStylist
     virtual ~WidgetColumnStylist();
 
   public: // AbstractColumnStylist API
-    virtual const QPalette& palette();
+    virtual const QPalette& palette() const;
 
   protected:
     Q_DECLARE_PRIVATE( WidgetColumnStylist )

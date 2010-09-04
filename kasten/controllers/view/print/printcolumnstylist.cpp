@@ -35,7 +35,7 @@ PrintColumnStylist::PrintColumnStylist()
 {
 }
 
-const QPalette& PrintColumnStylist::palette()
+const QPalette& PrintColumnStylist::palette() const
 {
     return mPalette;
 }
