@@ -86,7 +86,6 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
     mStatisticTableView->setUniformRowHeights( true );
     mStatisticTableView->setAllColumnsShowFocus( true );
     mStatisticTableView->setSortingEnabled( true );
-    mStatisticTableView->setFont( KGlobalSettings::fixedFont() );
     QHeaderView* header = mStatisticTableView->header();
     header->setFont( font() );
     header->setResizeMode( QHeaderView::ResizeToContents );
@@ -98,6 +97,9 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
     mStatisticTableView->setModel( proxyModel );
     mStatisticTableView->sortByColumn( StatisticTableModel::CountId, Qt::DescendingOrder );
     connect( mTool->statisticTableModel(), SIGNAL(headerChanged()), SLOT(updateHeader()) );
+    connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
+             SLOT(setFixedFontByGlobalSettings()) );
+    setFixedFontByGlobalSettings();
 
     baseLayout->addWidget( mStatisticTableView, 10 );
 
@@ -118,6 +120,11 @@ void InfoView::setByteArraySize( int size )
         i18np( "1 byte", "%1 bytes", size );
 
     mSizeLabel->setText( sizeText );
+}
+
+void InfoView::setFixedFontByGlobalSettings()
+{
+    mStatisticTableView->setFont( KGlobalSettings::fixedFont() );
 }
 
 InfoView::~InfoView() {}

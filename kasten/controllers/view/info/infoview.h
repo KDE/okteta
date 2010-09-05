@@ -52,6 +52,9 @@ class InfoView : public QWidget
     void updateHeader();
     void setByteArraySize( int size );
 
+  protected Q_SLOTS:
+    void setFixedFontByGlobalSettings();
+
   private:
     InfoTool *mTool;
 

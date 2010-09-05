@@ -54,6 +54,9 @@ class ByteArrayTextStreamEncoderPreview : public AbstractSelectionView
   public Q_SLOTS:
     void update();
 
+  protected Q_SLOTS:
+    void setFixedFontByGlobalSettings();
+
   protected:
     AbstractByteArrayStreamEncoder* const mEncoder;
 

@@ -69,6 +69,9 @@ class StringsExtractView : public QWidget
     void onApplyableChanged( bool isApplyable );
     void onCanHighlightStringChanged( bool isSelectable );
 
+  protected Q_SLOTS:
+    void setFixedFontByGlobalSettings();
+
   private:
     StringsExtractTool *mTool;
 
