@@ -115,7 +115,6 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
     mContainedStringTableView->setAllColumnsShowFocus( true );
     mContainedStringTableView->setSelectionMode( QAbstractItemView::ExtendedSelection );
     mContainedStringTableView->setSortingEnabled( true );
-    mContainedStringTableView->setFont( KGlobalSettings::fixedFont() );
     mContainedStringTableView->installEventFilter( this );
     QHeaderView* header = mContainedStringTableView->header();
     header->setFont( font() );
@@ -127,6 +126,9 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
     connect( mContainedStringTableView->selectionModel(),
              SIGNAL(selectionChanged( const QItemSelection &, const QItemSelection & )),
              SLOT(onStringSelectionChanged()) );
+    connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
+             SLOT(setFixedFontByGlobalSettings()) );
+    setFixedFontByGlobalSettings();
 
     baseLayout->addWidget( mContainedStringTableView, 10 );
 
@@ -184,6 +186,11 @@ bool StringsExtractView::eventFilter( QObject* object, QEvent* event )
     }
 
     return QWidget::eventFilter( object, event );
+}
+
+void StringsExtractView::setFixedFontByGlobalSettings()
+{
+    mContainedStringTableView->setFont( KGlobalSettings::fixedFont() );
 }
 
 void StringsExtractView::onStringsUptodateChanged( bool stringsUptodate )

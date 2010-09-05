@@ -42,6 +42,10 @@ ByteArrayTextStreamEncoderPreview::ByteArrayTextStreamEncoderPreview( AbstractBy
     mWidget->setFont( KGlobalSettings::fixedFont() );
     mWidget->setToolTip( i18n("The preview uses maximal the first 100 bytes.") );
 
+    connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
+             SLOT(setFixedFontByGlobalSettings()) );
+    setFixedFontByGlobalSettings();
+
     connect( mEncoder, SIGNAL(settingsChanged()), SLOT(update()) );
 }
 
@@ -60,6 +64,11 @@ void ByteArrayTextStreamEncoderPreview::update()
 {
     if( mModel )
         mWidget->setText( mEncoder->previewData(mModel,mSelection) );
+}
+
+void ByteArrayTextStreamEncoderPreview::setFixedFontByGlobalSettings()
+{
+    mWidget->setFont( KGlobalSettings::fixedFont() );
 }
 
 ByteArrayTextStreamEncoderPreview::~ByteArrayTextStreamEncoderPreview()

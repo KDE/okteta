@@ -55,7 +55,6 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
     mByteTableView->setUniformRowHeights( true );
     mByteTableView->setAllColumnsShowFocus( true );
     mByteTableView->setSortingEnabled( false );
-    mByteTableView->setFont( KGlobalSettings::fixedFont() );
     QHeaderView* header = mByteTableView->header();
     header->setFont( font() );
     header->setResizeMode( QHeaderView::ResizeToContents );
@@ -63,6 +62,9 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
     mByteTableView->setModel( mTool->byteTableModel() );
     connect( mByteTableView, SIGNAL(doubleClicked( const QModelIndex& )),
              SLOT(onDoubleClicked( const QModelIndex& )) );
+    connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
+             SLOT(setFixedFontByGlobalSettings()) );
+    setFixedFontByGlobalSettings();
 
     baseLayout->addWidget( mByteTableView, 10 );
 
@@ -99,6 +101,10 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
     baseLayout->addLayout( insertLayout );
 }
 
+void ByteTableView::setFixedFontByGlobalSettings()
+{
+    mByteTableView->setFont( KGlobalSettings::fixedFont() );
+}
 
 void ByteTableView::onDoubleClicked( const QModelIndex &index )
 {
