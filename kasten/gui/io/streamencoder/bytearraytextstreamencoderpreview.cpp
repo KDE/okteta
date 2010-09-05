@@ -39,7 +39,6 @@ ByteArrayTextStreamEncoderPreview::ByteArrayTextStreamEncoderPreview( AbstractBy
     mWidget = new KTextEdit(); // TODO: use Kate for syntax highlighting
     mWidget->setReadOnly( true );
     mWidget->setLineWrapMode( QTextEdit::NoWrap );
-    mWidget->setFont( KGlobalSettings::fixedFont() );
     mWidget->setToolTip( i18n("The preview uses maximal the first 100 bytes.") );
 
     connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
