@@ -23,12 +23,13 @@
 #include "offsetcolumnrenderer.h"
 
 // lib
-#include <abstractcolumnstylist.h>
-// lib
 #include "bytearraytablelayout.h"
+// lib
+#include <abstractcolumnstylist.h>
 // Qt
 #include <QtGui/QPainter>
 #include <QtGui/QPalette>
+#include <QtGui/QFontMetrics>
 
 
 namespace Okteta
@@ -42,7 +43,7 @@ OffsetColumnRenderer::OffsetColumnRenderer( AbstractColumnStylist* stylist,
     ByteArrayTableLayout* layout, OffsetFormat::Format format )
  : AbstractColumnRenderer( stylist ),
    mLayout( layout ),
-   mDigitWidth( 0 ),
+   mOffsetTextWidth( 0 ),
    mDigitBaseLine( 0 ),
    mFormat( OffsetFormat::None )
 {
@@ -100,25 +101,24 @@ void OffsetColumnRenderer::setFormat( OffsetFormat::Format format )
 
     mFormat = format;
 
-    mCodingWidth = OffsetFormat::codingWidth( mFormat );
     PrintFunction = OffsetFormat::printFunction( mFormat );
 
+    // TODO: without QFontMetrics this will fail. do we need to keep one around?
     recalcX();
 }
 
-void OffsetColumnRenderer::setMetrics( PixelX digitWidth, PixelY digitBaseLine )
+void OffsetColumnRenderer::setFontMetrics( const QFontMetrics& fontMetrics )
 {
-    mDigitBaseLine = digitBaseLine;
-    setDigitWidth( digitWidth );
-}
+    mDigitBaseLine = fontMetrics.ascent();
 
-void OffsetColumnRenderer::setDigitWidth( PixelX digitWidth )
-{
-    // no changes?
-    if( mDigitWidth == digitWidth )
+    // use 0 as reference, using a fixed font should always yield same width
+    printFunction()( mCodedOffset, 0 );
+    const int newOffsetTextWidth = fontMetrics.width( QLatin1String(mCodedOffset) );
+
+    if( newOffsetTextWidth == mOffsetTextWidth )
         return;
 
-    mDigitWidth = digitWidth;
+    mOffsetTextWidth = newOffsetTextWidth;
 
     recalcX();
 }
@@ -126,7 +126,7 @@ void OffsetColumnRenderer::setDigitWidth( PixelX digitWidth )
 void OffsetColumnRenderer::recalcX()
 {
     // recalculate depend sizes
-    setWidth( mCodingWidth * mDigitWidth + leftOffsetMargin + rightOffsetMargin );
+    setWidth( mOffsetTextWidth + leftOffsetMargin + rightOffsetMargin );
 }
 
 

@@ -38,6 +38,7 @@
 #include <KColorScheme>
 // Qt
 #include <QtGui/QPainter>
+#include <QtGui/QFontMetrics>
 
 
 namespace Okteta
@@ -61,6 +62,7 @@ AbstractByteArrayColumnRenderer::AbstractByteArrayColumnRenderer( AbstractColumn
    mBookmarks( qobject_cast<Bookmarkable*>(byteArrayModel) ),
    mDigitWidth( 0 ),
    mDigitBaseLine( 0 ),
+   mFontMetrics( QFont() ),
    mByteWidth( 0 ),
    mByteSpacingWidth( DefaultByteSpacingWidth ),
    mGroupSpacingWidth( DefaultGroupSpacingWidth ),
@@ -94,26 +96,18 @@ void AbstractByteArrayColumnRenderer::resetXBuffer()
 }
 
 
-void AbstractByteArrayColumnRenderer::setMetrics( PixelX digitWidth, PixelY DBL )
+void AbstractByteArrayColumnRenderer::setFontMetrics( const QFontMetrics& fontMetrics )
 {
-    mDigitBaseLine = DBL;
-    setDigitWidth( digitWidth );
-}
+    mFontMetrics = fontMetrics;
 
+    mDigitBaseLine = fontMetrics.ascent();
+    mDigitWidth = fontMetrics.maxWidth();
 
-bool AbstractByteArrayColumnRenderer::setDigitWidth( PixelX digitWidth )
-{
-    // no changes?
-    if( mDigitWidth == digitWidth )
-        return false;
-
-    mDigitWidth = digitWidth;
     // recalculate depend sizes
     recalcByteWidth();
 
     if( mLinePosLeftPixelX )
         recalcX();
-    return true;
 }
 
 

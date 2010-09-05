@@ -28,6 +28,8 @@
 #include "abstractcolumnrenderer.h"
 #include "line.h"
 
+class QFontMetrics;
+
 
 namespace Okteta
 {
@@ -51,14 +53,10 @@ class OKTETAGUI_EXPORT OffsetColumnRenderer : public AbstractColumnRenderer
 
   public:
     void setFormat( OffsetFormat::Format format );
-    /** sets width of digits and recalculates depend sizes  */
-    void setDigitWidth( PixelX digitWidth );
-    /** */
-    void setMetrics( PixelX DW, PixelY DBL );
+    void setFontMetrics( const QFontMetrics& fontMetrics );
 
   public: // read access
 //     int delta() const;
-    int codingWidth() const;
     OffsetFormat::print printFunction() const;
 
 
@@ -75,14 +73,13 @@ class OKTETAGUI_EXPORT OffsetColumnRenderer : public AbstractColumnRenderer
 
   protected: // pixel related
     /** */
-    PixelX mDigitWidth;
+    PixelX mOffsetTextWidth;
     /** */
     PixelY mDigitBaseLine;
 
   protected: // general layout
     OffsetFormat::Format mFormat;
 
-    int mCodingWidth;
     OffsetFormat::print PrintFunction;
 
     /** buffer to hold the formatted coding */
@@ -94,7 +91,6 @@ class OKTETAGUI_EXPORT OffsetColumnRenderer : public AbstractColumnRenderer
 };
 
 
-inline int OffsetColumnRenderer::codingWidth()                       const { return mCodingWidth; }
 inline OffsetFormat::print OffsetColumnRenderer::printFunction()    const { return PrintFunction; }
 
 }

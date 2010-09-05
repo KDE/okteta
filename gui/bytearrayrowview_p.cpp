@@ -258,12 +258,9 @@ void ByteArrayRowViewPrivate::changeEvent( QEvent* event )
 
     // get new values
     const QFontMetrics newFontMetrics = q->fontMetrics();
-    const PixelX digitWidth = newFontMetrics.maxWidth();
-    const PixelY digitBaseLine = newFontMetrics.ascent();
-    const PixelY digitHeight = newFontMetrics.height();
 
-    mOffsetColumn->setMetrics( digitWidth, digitBaseLine );
-    mByteArrayColumn->setMetrics( digitWidth, digitBaseLine, digitHeight );
+    mOffsetColumn->setFontMetrics( newFontMetrics );
+    mByteArrayColumn->setFontMetrics( newFontMetrics );
 
     const int rowHeight = mByteArrayColumn->rowHeight();
 

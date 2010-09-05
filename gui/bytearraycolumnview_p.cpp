@@ -282,13 +282,11 @@ void ByteArrayColumnViewPrivate::changeEvent( QEvent* event )
 
     // get new values
     const QFontMetrics newFontMetrics = q->fontMetrics();
-    const PixelX digitWidth = newFontMetrics.maxWidth();
-    const PixelY digitBaseLine = newFontMetrics.ascent();
     const PixelY digitHeight = newFontMetrics.height();
 
-    mOffsetColumn->setMetrics( digitWidth, digitBaseLine );
-    mValueColumn->setMetrics( digitWidth, digitBaseLine );
-    mCharColumn->setMetrics( digitWidth, digitBaseLine );
+    mOffsetColumn->setFontMetrics( newFontMetrics );
+    mValueColumn->setFontMetrics( newFontMetrics );
+    mCharColumn->setFontMetrics( newFontMetrics );
 
     q->setLineHeight( digitHeight );
 

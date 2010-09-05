@@ -39,6 +39,7 @@
 #include <KColorScheme>
 // Qt
 #include <QtGui/QPainter>
+#include <QtGui/QFontMetrics>
 
 
 namespace Okteta
@@ -74,6 +75,7 @@ ByteArrayRowColumnRenderer::ByteArrayRowColumnRenderer( AbstractColumnStylist* s
    mDigitWidth( 0 ),
    mDigitBaseLine( 0 ),
    mDigitHeight( 0 ),
+   mFontMetrics( QFont() ),
    mByteWidth( 0 ),
    mByteSpacingWidth( DefaultByteSpacingWidth ),
    mGroupSpacingWidth( DefaultGroupSpacingWidth ),
@@ -142,27 +144,19 @@ void ByteArrayRowColumnRenderer::setVisibleCodings( int visibleCodings )
 }
 
 
-void ByteArrayRowColumnRenderer::setMetrics( PixelX digitWidth, PixelY digitBaseLine, PixelY digitHeight )
+void ByteArrayRowColumnRenderer::setFontMetrics( const QFontMetrics& fontMetrics )
 {
-    mDigitBaseLine = digitBaseLine;
-    mDigitHeight = digitHeight;
-    setDigitWidth( digitWidth );
-}
+    mFontMetrics = fontMetrics;
 
+    mDigitBaseLine = fontMetrics.ascent();
+    mDigitHeight = fontMetrics.height();
+    mDigitWidth = fontMetrics.maxWidth();
 
-bool ByteArrayRowColumnRenderer::setDigitWidth( PixelX digitWidth )
-{
-    // no changes?
-    if( mDigitWidth == digitWidth )
-        return false;
-
-    mDigitWidth = digitWidth;
     // recalculate depend sizes
     recalcByteWidth();
 
     if( mLinePosLeftPixelX )
         recalcX();
-    return true;
 }
 
 
@@ -263,14 +257,16 @@ bool ByteArrayRowColumnRenderer::setBinaryGapWidth( PixelX binaryGapWidth )
 
 void ByteArrayRowColumnRenderer::recalcByteWidth()
 {
-    int byteWidth = mValueCodec->encodingWidth() * mDigitWidth;
-
+    // use 0 as reference, using a fixed font should always yield same width
+    mValueCodec->encode( mDecodedByteText, 0, Byte(0) );
     if( mValueCoding == BinaryCoding )
     {
-        mBinaryHalfOffset = 4 * mDigitWidth + mBinaryGapWidth;
-        byteWidth += mBinaryGapWidth;
+        const int binaryHalfWidth = mFontMetrics.width( mDecodedByteText.left(4) );
+        mBinaryHalfOffset = binaryHalfWidth + mBinaryGapWidth;
+        mByteWidth = mBinaryHalfOffset + binaryHalfWidth;
     }
-    setByteWidth( byteWidth );
+    else
+        mByteWidth = mFontMetrics.width( mDecodedByteText );
 }
 
 // perhaps sometimes there will be a grammar
@@ -329,13 +325,6 @@ void ByteArrayRowColumnRenderer::renderCode( QPainter* painter, const QString& c
     else
         painter->drawText( 0, mDigitBaseLine, code );
 }
-
-
-// char variant
-// void ByteArrayRowColumnRenderer::recalcByteWidth()
-// {
-//     setByteWidth( mDigitWidth );
-// }
 
 
 void ByteArrayRowColumnRenderer::recalcX()

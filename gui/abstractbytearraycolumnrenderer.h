@@ -31,6 +31,8 @@
 #include "oktetacore.h"
 #include "abstractbytearraymodel.h"
 #include "character.h"
+// Qt
+#include <QtGui/QFontMetrics>
 
 class QPainter;
 class QColor;
@@ -115,15 +117,9 @@ class OKTETAGUI_EXPORT AbstractByteArrayColumnRenderer : public AbstractColumnRe
       * returns true if there was a change
       */
     bool setGroupSpacingWidth( PixelX groupSpacingWidth );
-    /** sets width of digits and recalculates depend sizes
-      * returns true if there was a change
-      */
-    bool setDigitWidth( PixelX digitWidth );
     /** sets the metrics of the used font
-      * @param digitWidth the new width of a digit
-      * @param digitBaseLine the new baseline of the digits
       */
-    void setMetrics( PixelX digitWidth, PixelY digitBaseLine );
+    void setFontMetrics( const QFontMetrics& fontMetrics );
     /** */
     void set( AbstractByteArrayModel* byteArrayModel );
     /** creates new buffer for x-values; to be called on any change of NoOfBytesPerLine or metrics */
@@ -216,6 +212,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayColumnRenderer : public AbstractColumnRe
     /** */
     PixelY mDigitBaseLine;
 
+    QFontMetrics mFontMetrics;
 
   protected:  // individual data
     /** total width of byte display in pixel */

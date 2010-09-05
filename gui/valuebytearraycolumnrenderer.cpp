@@ -82,14 +82,16 @@ bool ValueByteArrayColumnRenderer::setBinaryGapWidth( PixelX binaryGapWidth )
 
 void ValueByteArrayColumnRenderer::recalcByteWidth()
 {
-    int byteWidth = mValueCodec->encodingWidth() * mDigitWidth;
-
-    if( mValueCoding == Okteta::BinaryCoding )
+    // use 0 as reference, using a fixed font should always yield same width
+    mValueCodec->encode( mDecodedByteText, 0, Byte(0) );
+    if( mValueCoding == BinaryCoding )
     {
-        mBinaryHalfOffset = 4 * mDigitWidth + mBinaryGapWidth;
-        byteWidth += mBinaryGapWidth;
+        const int binaryHalfWidth = mFontMetrics.width( mDecodedByteText.left(4) );
+        mBinaryHalfOffset = binaryHalfWidth + mBinaryGapWidth;
+        setByteWidth( mBinaryHalfOffset + binaryHalfWidth );
     }
-    setByteWidth( byteWidth );
+    else
+        setByteWidth( mFontMetrics.width(mDecodedByteText) );
 }
 
 
