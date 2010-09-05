@@ -338,17 +338,15 @@ void ByteArrayFrameRenderer::setFont( const QFont& font )
 
     // get new values
     QFontMetrics fontMetrics( font );
-    Okteta::PixelX digitWidth = fontMetrics.maxWidth();
-    Okteta::PixelY digitBaseLine = fontMetrics.ascent();
 
     setLineHeight( fontMetrics.height() );
 
     // update all dependant structures
     mLayout->setNoOfLinesPerPage( noOfLinesPerFrame() );
 
-    mOffsetColumnRenderer->setMetrics( digitWidth, digitBaseLine );
-    mValueColumnRenderer->setMetrics( digitWidth, digitBaseLine );
-    mCharColumnRenderer->setMetrics( digitWidth, digitBaseLine );
+    mOffsetColumnRenderer->setFontMetrics( fontMetrics );
+    mValueColumnRenderer->setFontMetrics( fontMetrics );
+    mCharColumnRenderer->setFontMetrics( fontMetrics );
 
     adjustToWidth();
 }
