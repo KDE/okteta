@@ -62,7 +62,7 @@ ViewProfileEdit::ViewProfileEdit( QWidget* parent )
     QFormLayout* titleFormLayout = new QFormLayout;
     // char for non-printable bytes
     mTitleEdit = new KLineEdit( this );
-    titleFormLayout->addRow( i18n("Titel:"), mTitleEdit );
+    titleFormLayout->addRow( i18n("Title:"), mTitleEdit );
 
     // display settings
     QGroupBox* displayBox = new QGroupBox( this );

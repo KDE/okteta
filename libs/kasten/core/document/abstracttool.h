@@ -53,7 +53,7 @@ class KASTENCORE_EXPORT AbstractTool : public QObject
     virtual void setTargetModel( AbstractModel* model ) = 0;
 
   Q_SIGNALS:
-    void titleChanged( const QString& newTitel );
+    void titleChanged( const QString& newTitle );
 
   protected:
     class Private;
