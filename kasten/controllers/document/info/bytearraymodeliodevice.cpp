@@ -87,6 +87,8 @@ qint64 ByteArrayModelIoDevice::readData( char* data, qint64 maxlength )
 
 qint64 ByteArrayModelIoDevice::writeData( const char* data, qint64 length )
 {
+    Q_UNUSED( data );
+    Q_UNUSED( length );
     return -1;
 }
 
