@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VERSIONTABLEMODEL_H
-#define VERSIONTABLEMODEL_H
+#ifndef VIEWPROFILETABLEMODEL_H
+#define VIEWPROFILETABLEMODEL_H
 
 
 // Qt
