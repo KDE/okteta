@@ -34,7 +34,7 @@ ByteArrayModelIoDevice::ByteArrayModelIoDevice( AbstractByteArrayModel* byteArra
     mByteArrayModel( byteArrayModel ),
     mReadOffset( 0 )
 {
-    open( ReadOnly );
+    open( ReadOnly ); // krazy:exclude=syscalls
 }
 
 qint64 ByteArrayModelIoDevice::size() const
