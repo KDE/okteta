@@ -49,7 +49,7 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
     baseLayout->setMargin( 0 );
 
     mByteTableView = new QTreeView( this );
-    mByteTableView->setObjectName( "ByteTable" );
+    mByteTableView->setObjectName( QLatin1String( "ByteTable" ) );
     mByteTableView->setRootIsDecorated( false );
     mByteTableView->setItemsExpandable( false );
     mByteTableView->setUniformRowHeights( true );

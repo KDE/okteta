@@ -80,7 +80,7 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
     baseLayout->addLayout( topLineLayout );
 
     mStatisticTableView = new QTreeView( this );
-    mStatisticTableView->setObjectName( "StatisticTable" );
+    mStatisticTableView->setObjectName( QLatin1String( "StatisticTable" ) );
     mStatisticTableView->setRootIsDecorated( false );
     mStatisticTableView->setItemsExpandable( false );
     mStatisticTableView->setUniformRowHeights( true );

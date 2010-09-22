@@ -108,7 +108,7 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
              mSortFilterProxyModel, SLOT(setFilterFixedString( const QString & )) );
 
     mContainedStringTableView = new QTreeView( this );
-    mContainedStringTableView->setObjectName( "ContainedStringTable" );
+    mContainedStringTableView->setObjectName( QLatin1String( "ContainedStringTable" ) );
     mContainedStringTableView->setRootIsDecorated( false );
     mContainedStringTableView->setItemsExpandable( false );
     mContainedStringTableView->setUniformRowHeights( true );

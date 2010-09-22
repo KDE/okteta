@@ -43,7 +43,7 @@ InfoTool::InfoTool()
  : mStatisticTableModel( new StatisticTableModel(mByteCount,this) ),
    mByteArrayView( 0 ), mByteArrayModel( 0 ), mSourceByteArrayModelUptodate( false ), mSourceByteArrayModel( 0 )
 {
-    setObjectName( "Info" );
+    setObjectName( QLatin1String( "Info" ) );
     updateStatistic();
 }
 

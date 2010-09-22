@@ -39,7 +39,7 @@ namespace Kasten
 FileSystemBrowserTool::FileSystemBrowserTool( DocumentManager* documentManager )
  : mDocument( 0 ), mDocumentManager( documentManager )
 {
-    setObjectName( "FileSystemBrowser" );
+    setObjectName( QLatin1String( "FileSystemBrowser" ) );
 }
 
 

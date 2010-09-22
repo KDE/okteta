@@ -42,7 +42,7 @@ GotoOffsetTool::GotoOffsetTool()
     mByteArrayView( 0 ),
     mByteArrayModel( 0 )
 {
-    setObjectName( "GotoOffset" );
+    setObjectName( QLatin1String( "GotoOffset" ) );
 }
 
 int GotoOffsetTool::currentOffset() const

@@ -47,7 +47,7 @@ ViewProfilesManageDialog::ViewProfilesManageDialog( QWidget* parent )
     mViewProfileTableView = new QTreeView( page );
     mViewProfiles << ByteArrayViewProfile() << ByteArrayViewProfile();
     mViewProfileTableModel = new ViewProfileTableModel( &mViewProfiles, 1, this );
-    mViewProfileTableView->setObjectName( "ViewProfileTableView" );
+    mViewProfileTableView->setObjectName( QLatin1String( "ViewProfileTableView" ) );
     mViewProfileTableView->setHeaderHidden( true );
     mViewProfileTableView->setRootIsDecorated( false );
     mViewProfileTableView->setItemsExpandable( false );

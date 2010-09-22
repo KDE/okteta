@@ -53,7 +53,7 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
     // table
     mPODTableModel = new PODTableModel( mTool, this );
     mPODTableView = new QTreeView( this );
-    mPODTableView->setObjectName( "PODTable" );
+    mPODTableView->setObjectName( QLatin1String( "PODTable" ) );
     mPODTableView->setRootIsDecorated( false );
     mPODTableView->setAlternatingRowColors( true );
     mPODTableView->setItemsExpandable( false );

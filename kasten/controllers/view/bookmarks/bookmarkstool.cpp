@@ -51,7 +51,7 @@ static const int MaxBookmarkNameSize = 40;
 BookmarksTool::BookmarksTool()
  : mByteArrayView( 0 ), mByteArray( 0 ), mBookmarks( 0 ), mCanCreateBookmark( false )
 {
-    setObjectName( "Bookmarks" );
+    setObjectName( QLatin1String( "Bookmarks" ) );
 }
 
 

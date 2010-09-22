@@ -51,7 +51,7 @@ StringsExtractTool::StringsExtractTool()
     mSourceByteArrayModel( 0 ),
     mSourceMinLength( 0 )
 {
-    setObjectName( "Strings" );
+    setObjectName( QLatin1String( "Strings" ) );
 }
 
 bool StringsExtractTool::isApplyable() const

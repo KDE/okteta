@@ -69,7 +69,7 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     mStructTreeModel = new StructTreeModel(mTool, this);
     //  mModeltest = new ModelTest(mStructTreeModel, this);
     mStructTreeView = new QTreeView(this);
-    mStructTreeView->setObjectName("StructTree");
+    mStructTreeView->setObjectName( QLatin1String("StructTree" ));
     mStructTreeView->setRootIsDecorated(true);
     mStructTreeView->setAlternatingRowColors(true);
     mStructTreeView->setItemsExpandable(true);
@@ -177,7 +177,7 @@ void StructView::openSettingsDlg(int page)
     QWidget* structsWidget = new QWidget();
     {
         QVBoxLayout* layout = new QVBoxLayout();
-        loadedStructuresSettings->setObjectName("kcfg_LoadedStructures");
+        loadedStructuresSettings->setObjectName( QLatin1String("kcfg_LoadedStructures" ));
         layout->addWidget(loadedStructuresSettings);
         structsWidget->setLayout(layout);
     }

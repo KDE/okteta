@@ -62,7 +62,7 @@ BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
     baseLayout->addWidget( toolbar );
 
     mBookmarkListView = new QTreeView( this );
-    mBookmarkListView->setObjectName( "BookmarkListView" );
+    mBookmarkListView->setObjectName( QLatin1String( "BookmarkListView" ) );
     mBookmarkListView->setRootIsDecorated( false );
     mBookmarkListView->setItemsExpandable( false );
     mBookmarkListView->setUniformRowHeights( true );

@@ -43,7 +43,7 @@ DocumentsView::DocumentsView( DocumentsTool* tool, QWidget* parent )
     baseLayout->setSpacing( 0 );
 
     mDocumentListView = new QTreeView( this );
-    mDocumentListView->setObjectName( "DocumentListView" );
+    mDocumentListView->setObjectName( QLatin1String( "DocumentListView" ) );
     mDocumentListView->setRootIsDecorated( false );
     mDocumentListView->setItemsExpandable( false );
     mDocumentListView->setUniformRowHeights( true );

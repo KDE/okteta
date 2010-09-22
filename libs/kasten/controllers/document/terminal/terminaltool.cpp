@@ -39,7 +39,7 @@ TerminalTool::TerminalTool( DocumentManager* documentManager )
   : mDocument( 0 ),
     mDocumentManager( documentManager )
 {
-    setObjectName( "Terminal" );
+    setObjectName( QLatin1String( "Terminal" ) );
 }
 
 

@@ -56,7 +56,7 @@ ChecksumTool::ChecksumTool()
     mSourceAlgorithmId( -1 ),
     mSourceByteArrayModel( 0 )
 {
-    setObjectName( "Checksum" );
+    setObjectName( QLatin1String( "Checksum" ) );
 
 // TODO: find a better place to do and store the initialization
 #ifdef HAVE_QCA2

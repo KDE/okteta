@@ -85,7 +85,7 @@ PODDecoderTool::PODDecoderTool()
     mDifferentSizeDialog( 0 ),
     mUnsignedAsHex( true )
 {
-    setObjectName( "PODDecoder" );
+    setObjectName( QLatin1String( "PODDecoder" ) );
 
     setupDecoder();
 }
