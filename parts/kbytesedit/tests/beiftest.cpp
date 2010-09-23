@@ -43,7 +43,7 @@ int main( int argc, char* argv[] )
   KApplication app;
 
   QWidget *BytesEditWidget = createBytesEditWidget();
-  // was kdeutils installed, so the widget could be found?
+  // was kdesdk installed, so the widget could be found?
   if( BytesEditWidget )
   {
     // fetch the editor interface
