@@ -32,13 +32,10 @@
 #include <bytearraydocument.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
-// KDE Utils
-#include <kdeutils-version.h>
 // KDE
 #include <KLocale>
 #include <KMessageBox>
 #include <kdeprintdialog.h>
-#include <kdeversion.h>
 // Qt
 #include <QtGui/QApplication>
 #include <QtGui/QPrintDialog>
@@ -86,7 +83,7 @@ void PrintTool::print()
     if( printDialog->exec() )
     {
         QString creator = QString::fromLatin1( "Print Plugin for Okteta " ); // no i18n(), keep space at end as separator
-        creator += KDEUTILS_VERSION_STRING; // TODO: change to OKTETA_VERSION_STRING
+//         creator += KDEUTILS_VERSION_STRING; // TODO: change to OKTETA_VERSION_STRING
         printer.setCreator( creator );
 
         FramesToPaperPrinter framesPrinter;
