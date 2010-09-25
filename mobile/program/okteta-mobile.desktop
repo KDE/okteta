@@ -2,6 +2,9 @@
 Version=1.0
 
 Name=Okteta Mobile
+Name[pt]=Okteta Móvel
+Name[pt_BR]=Okteta Móvel
+Name[uk]=Okteta для мобільних пристроїв
 Name[x-test]=xxOkteta Mobilexx
 
 Exec=okteta-mobile

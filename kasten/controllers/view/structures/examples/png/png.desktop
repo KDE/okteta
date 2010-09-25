@@ -5,8 +5,14 @@ Type=Service
 ServiceTypes=KPluginInfo
 
 Name=PNG file header
+Name[pt]=Cabeçalho do ficheiro PNG
+Name[pt_BR]=Cabeçalho do arquivo PNG
+Name[uk]=Заголовок файла PNG
 Name[x-test]=xxPNG file headerxx
 Comment=A test structure containing the PNG file header (file must be set to big-endian)
+Comment[pt]=Uma estrutura de testes que contém o cabeçalho do ficheiro PNG (o ficheiro deverá estar como 'big-endian')
+Comment[pt_BR]=Uma estrutura de testes que contém o cabeçalho de um arquivo PNG (o arquivo deve estar em big-endian)
+Comment[uk]=Тестова структура, що містить заголовок файла PNG (порядок байтів у файлі має бути зворотним)
 Comment[x-test]=xxA test structure containing the PNG file header (file must be set to big-endian)xx
 
 X-KDE-PluginInfo-Author=Alex Richardson
