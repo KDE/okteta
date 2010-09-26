@@ -2,6 +2,7 @@
 Type=Service
 Icon=okteta
 Name=Okteta Hex Viewer
+Name[en_GB]=Okteta Hex Viewer
 Name[pt]=Visualizador Hexadecimal Okteta
 Name[pt_BR]=Visualizador hexadecimal do Okteta
 Name[uk]=Шістнадцятковий переглядач Okteta

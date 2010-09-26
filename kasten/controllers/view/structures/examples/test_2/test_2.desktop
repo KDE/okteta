@@ -5,11 +5,13 @@ Type=Service
 ServiceTypes=KPluginInfo
 
 Name=Another simple test
+Name[en_GB]=Another simple test
 Name[pt]=Outro teste simples
 Name[pt_BR]=Outro teste simples
 Name[uk]=Ще один простий тест
 Name[x-test]=xxAnother simple testxx
 Comment=A few more test structures
+Comment[en_GB]=A few more test structures
 Comment[pt]=Mais algumas estruturas de testes
 Comment[pt_BR]=Mais algumas estruturas de testes
 Comment[uk]=Ще декілька тестових структур
