@@ -8,12 +8,14 @@ Name=Testing enums
 Name[en_GB]=Testing enums
 Name[pt]=Teste de enumerados
 Name[pt_BR]=Teste de enumerações
+Name[sv]=Testar uppräkningsvärden
 Name[uk]=Тестування переліків
 Name[x-test]=xxTesting enumsxx
 Comment=A test structure for enums
 Comment[en_GB]=A test structure for enums
 Comment[pt]=Uma estrutura de testes para tipos enumerados
 Comment[pt_BR]=Uma estrutura de testes para tipos enumerados
+Comment[sv]=En teststruktur för uppräkningsvärden
 Comment[uk]=Тестова структура для переліків (enum)
 Comment[x-test]=xxA test structure for enumsxx
 

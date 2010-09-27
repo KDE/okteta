@@ -10,12 +10,14 @@ Name=ELF structure
 Name[en_GB]=ELF structure
 Name[pt]=Estrutura ELF
 Name[pt_BR]=Estrutura ELF
+Name[sv]=ELF-struktur
 Name[uk]=Структура ELF
 Name[x-test]=xxELF structurexx
 Comment=Structure for Executable and Linkable Format (ELF)
 Comment[en_GB]=Structure for Executable and Linkable Format (ELF)
 Comment[pt]=Estrutura de Executáveis no Formato ELF
 Comment[pt_BR]=Estrutura para o ELF (Executable and Linkable Format)
+Comment[sv]=Struktur för formatet Executable and Linkable Format (ELF)
 Comment[uk]=Структура файлів у форматі Executable and Linkable Format (ELF)
 Comment[x-test]=xxStructure for Executable and Linkable Format (ELF)xx
 

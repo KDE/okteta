@@ -8,12 +8,14 @@ Name=Another simple test
 Name[en_GB]=Another simple test
 Name[pt]=Outro teste simples
 Name[pt_BR]=Outro teste simples
+Name[sv]=En annan enkel test
 Name[uk]=Ще один простий тест
 Name[x-test]=xxAnother simple testxx
 Comment=A few more test structures
 Comment[en_GB]=A few more test structures
 Comment[pt]=Mais algumas estruturas de testes
 Comment[pt_BR]=Mais algumas estruturas de testes
+Comment[sv]=Några fler teststrukturer
 Comment[uk]=Ще декілька тестових структур
 Comment[x-test]=xxA few more test structuresxx
 

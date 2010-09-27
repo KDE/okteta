@@ -8,12 +8,14 @@ Name=JavaScript test
 Name[en_GB]=JavaScript test
 Name[pt]=Teste de JavaScript
 Name[pt_BR]=Teste de JavaScript
+Name[sv]=Javascript-test
 Name[uk]=Тест JavaScript
 Name[x-test]=xxJavaScript testxx
 Comment=Just testing structures defined in JS
 Comment[en_GB]=Just testing structures defined in JS
 Comment[pt]=A testar estruturas definidas em JS
 Comment[pt_BR]=Apenas testando as estruturas definidas no JS
+Comment[sv]=Bara test av strukturer definierade med Javascript
 Comment[uk]=Проста перевірка структур, визначених у JS
 Comment[x-test]=xxJust testing structures defined in JSxx
 

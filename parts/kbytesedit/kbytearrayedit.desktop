@@ -4,6 +4,7 @@ Name=BytesEdit Widget
 Name[en_GB]=BytesEdit Widget
 Name[pt]=Item de Edição de 'Bytes'
 Name[pt_BR]=Widget do editor de bytes
+Name[sv]=Grafisk komponent för att redigera binärdata
 Name[uk]=Віджет побайтового редагування
 Name[x-test]=xxBytesEdit Widgetxx
 X-KDE-Library=libkbytearrayedit
