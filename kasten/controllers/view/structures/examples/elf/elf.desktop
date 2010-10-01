@@ -11,6 +11,7 @@ Name[pt_BR]=Estrutura ELF
 Name[sv]=ELF-struktur
 Name[uk]=Структура ELF
 Name[x-test]=xxELF structurexx
+Name[zh_TW]=ELF 結構
 Comment=Structure for Executable and Linkable Format (ELF)
 Comment[en_GB]=Structure for Executable and Linkable Format (ELF)
 Comment[pt]=Estrutura de Executáveis no Formato ELF
@@ -18,6 +19,7 @@ Comment[pt_BR]=Estrutura para o ELF (Executable and Linkable Format)
 Comment[sv]=Struktur för formatet Executable and Linkable Format (ELF)
 Comment[uk]=Структура файлів у форматі Executable and Linkable Format (ELF)
 Comment[x-test]=xxStructure for Executable and Linkable Format (ELF)xx
+Comment[zh_TW]=ELF （執行檔連結格式，Executable and Linkable Format）的結構
 
 X-KDE-PluginInfo-Author=Harald Fernengel
 X-KDE-PluginInfo-Email=harry@kdevelop.org

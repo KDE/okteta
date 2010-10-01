@@ -11,6 +11,7 @@ Name[pt_BR]=Testar as listas de tamanho dinâmico
 Name[sv]=Testar fält med dynamisk längd
 Name[uk]=Тестування масивів зі змінною розмірністю
 Name[x-test]=xxTesting dynamic length arraysxx
+Name[zh_TW]=測試動態長度陣列
 Comment=A test structure for dynamic arrays
 Comment[en_GB]=A test structure for dynamic arrays
 Comment[pt]=Uma estrutura de testes para listas dinâmicas
@@ -18,6 +19,7 @@ Comment[pt_BR]=Uma estrutura de testes para listas dinâmicas
 Comment[sv]=En teststruktur för dynamiska fält
 Comment[uk]=Тестова структура для динамічних масивів
 Comment[x-test]=xxA test structure for dynamic arraysxx
+Comment[zh_TW]=測試動態陣列的測試結構
 
 X-KDE-PluginInfo-Author=Alex Richardson
 X-KDE-PluginInfo-Email=alex.richardson@gmx.de
