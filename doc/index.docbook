@@ -41,8 +41,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2011-01-12</date>
-<releaseinfo>0.6.0</releaseinfo>
+<date>2010-01-12</date>
+<releaseinfo>0.6.0 (&kde; 4.6)</releaseinfo>
 
 <abstract>
   <para>&okteta; is a simple editor for the raw data of files. This type of program
