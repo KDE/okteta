@@ -6,6 +6,7 @@ ServiceTypes=KPluginInfo
 
 Name=Testing enums
 Name[en_GB]=Testing enums
+Name[nds]=Optellen pröven
 Name[pt]=Teste de enumerados
 Name[pt_BR]=Teste de enumerações
 Name[sv]=Testar uppräkningsvärden
@@ -14,6 +15,7 @@ Name[x-test]=xxTesting enumsxx
 Name[zh_TW]=測試列舉
 Comment=A test structure for enums
 Comment[en_GB]=A test structure for enums
+Comment[nds]=En Pröövstruktuur för Optellen
 Comment[pt]=Uma estrutura de testes para tipos enumerados
 Comment[pt_BR]=Uma estrutura de testes para tipos enumerados
 Comment[sv]=En teststruktur för uppräkningsvärden

@@ -6,6 +6,7 @@ ServiceTypes=KPluginInfo
 
 Name=PNG file header
 Name[en_GB]=PNG file header
+Name[nds]=PNG-Dateikopp
 Name[pt]=Cabeçalho do ficheiro PNG
 Name[pt_BR]=Cabeçalho do arquivo PNG
 Name[sv]=PNG-filhuvud
@@ -14,6 +15,7 @@ Name[x-test]=xxPNG file headerxx
 Name[zh_TW]=PNG 檔案標頭
 Comment=A test structure containing the PNG file header (file must be set to big-endian)
 Comment[en_GB]=A test structure containing the PNG file header (file must be set to big-endian)
+Comment[nds]=En Pröövstruktuur, de den PNG-Dateikopp bargt (de Datei mutt op »Big-Endian« sett wesen).
 Comment[pt]=Uma estrutura de testes que contém o cabeçalho do ficheiro PNG (o ficheiro deverá estar como 'big-endian')
 Comment[pt_BR]=Uma estrutura de testes que contém o cabeçalho de um arquivo PNG (o arquivo deve estar em big-endian)
 Comment[sv]=En teststruktur som innehåller PNG-filhuvudet (filen måste vara inställt till big endian)

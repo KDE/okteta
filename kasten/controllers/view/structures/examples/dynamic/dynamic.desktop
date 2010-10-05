@@ -6,6 +6,7 @@ ServiceTypes=KPluginInfo
 
 Name=Testing dynamic length arrays
 Name[en_GB]=Testing dynamic length arrays
+Name[nds]=Rebeden mit dünaamsch Längden pröven
 Name[pt]=Teste de listas de tamanho dinâmico
 Name[pt_BR]=Testar as listas de tamanho dinâmico
 Name[sv]=Testar fält med dynamisk längd
@@ -14,6 +15,7 @@ Name[x-test]=xxTesting dynamic length arraysxx
 Name[zh_TW]=測試動態長度陣列
 Comment=A test structure for dynamic arrays
 Comment[en_GB]=A test structure for dynamic arrays
+Comment[nds]=En Pröövstruktuur för dünaamsch Rebeden
 Comment[pt]=Uma estrutura de testes para listas dinâmicas
 Comment[pt_BR]=Uma estrutura de testes para listas dinâmicas
 Comment[sv]=En teststruktur för dynamiska fält
