@@ -7,6 +7,7 @@ ServiceTypes=KPluginInfo
 Name=PNG file header
 Name[en_GB]=PNG file header
 Name[nds]=PNG-Dateikopp
+Name[pa]=PNG ਫਾਇਲ ਹੈੱਡਰ
 Name[pt]=Cabeçalho do ficheiro PNG
 Name[pt_BR]=Cabeçalho do arquivo PNG
 Name[sv]=PNG-filhuvud
