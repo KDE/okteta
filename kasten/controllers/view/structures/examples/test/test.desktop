@@ -5,6 +5,7 @@ Type=Service
 ServiceTypes=KPluginInfo
 
 Name=Simple test
+Name[ca]=Prova simple
 Name[en_GB]=Simple test
 Name[nds]=Eenfach Prööv
 Name[pt]=Teste simples
@@ -14,6 +15,7 @@ Name[uk]=Простий тест
 Name[x-test]=xxSimple testxx
 Name[zh_TW]=簡單測試
 Comment=A few test structures
+Comment[ca]=Unes estructures de proves
 Comment[en_GB]=A few test structures
 Comment[nds]=En poor Pröövstrukturen
 Comment[pt]=Algumas estruturas de teste

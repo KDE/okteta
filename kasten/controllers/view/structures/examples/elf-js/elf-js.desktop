@@ -7,6 +7,7 @@ ServiceTypes=KPluginInfo
 #An implementation of the elf file header written in javascript (based on Harald Fernegels elf.osd)
 
 Name=ELF structure
+Name[ca]=Estructura ELF
 Name[en_GB]=ELF structure
 Name[nds]=ELF-Struktuur
 Name[pt]=Estrutura ELF
@@ -16,6 +17,7 @@ Name[uk]=Структура ELF
 Name[x-test]=xxELF structurexx
 Name[zh_TW]=ELF 結構
 Comment=Structure for Executable and Linkable Format (ELF)
+Comment[ca]=Estructura per a «Executable and Linkable Format» (ELF)
 Comment[en_GB]=Structure for Executable and Linkable Format (ELF)
 Comment[nds]=Struktuur för "Executable and Linkable Format" (ELF)
 Comment[pt]=Estrutura de Executáveis no Formato ELF
