@@ -61,4 +61,4 @@ target_link_libraries( okteta-mobile
 
 install( TARGETS okteta-mobile  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-install( FILES okteta-mobile.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
+install( PROGRAMS okteta-mobile.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
