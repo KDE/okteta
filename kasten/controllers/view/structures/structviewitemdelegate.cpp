@@ -72,20 +72,5 @@ void StructViewItemDelegate::setEditorData(QWidget * editor,
 QSize StructViewItemDelegate::sizeHint(const QStyleOptionViewItem & option,
         const QModelIndex & index) const
 {
-    Q_UNUSED(option)
-    if (!index.isValid())
-    {
-        kDebug()
-            << "invalid index";
-        return QSize();
-    }
-    DataInformation* data = static_cast<DataInformation*> (index.internalPointer());
-    if (!data)
-    {
-        kDebug()
-            << "data == NULL";
-        return QSize();
-    }
-    QScopedPointer<QWidget> ret(data->createEditWidget(NULL));
-    return ret->minimumSizeHint();
+    return QStyledItemDelegate::sizeHint(option, index) + QSize(0, 8);
 }

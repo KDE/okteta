@@ -23,12 +23,12 @@
 #ifndef STRUCTVIEWITEMDELEGATE_H_
 #define STRUCTVIEWITEMDELEGATE_H_
 
-#include <QStyledItemDelegate>
+#include <QtGui/QStyledItemDelegate>
 
 class StructViewItemDelegate: public QStyledItemDelegate
 {
 public:
-    StructViewItemDelegate(QObject * parent = NULL);
+    StructViewItemDelegate(QObject * parent = 0);
     virtual ~StructViewItemDelegate();
     virtual void setModelData(QWidget * editor, QAbstractItemModel * model,
             const QModelIndex & index) const;
