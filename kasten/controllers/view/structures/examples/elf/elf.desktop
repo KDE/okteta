@@ -6,6 +6,7 @@ ServiceTypes=KPluginInfo
 
 Name=ELF structure
 Name[ca]=Estructura ELF
+Name[de]=ELF-Struktur
 Name[en_GB]=ELF structure
 Name[et]=ELF struktuur
 Name[nds]=ELF-Struktuur
@@ -14,9 +15,11 @@ Name[pt_BR]=Estrutura ELF
 Name[sv]=ELF-struktur
 Name[uk]=Структура ELF
 Name[x-test]=xxELF structurexx
+Name[zh_CN]=ELF 结构
 Name[zh_TW]=ELF 結構
 Comment=Structure for Executable and Linkable Format (ELF)
 Comment[ca]=Estructura per a «Executable and Linkable Format» (ELF)
+Comment[de]=Struktur für das „Executable and Linkable Format“ (ELF)
 Comment[en_GB]=Structure for Executable and Linkable Format (ELF)
 Comment[et]=Täidetava ja lingitava failivormingu (ELF) struktuur
 Comment[nds]=Struktuur för "Executable and Linkable Format" (ELF)
@@ -25,6 +28,7 @@ Comment[pt_BR]=Estrutura para o ELF (Executable and Linkable Format)
 Comment[sv]=Struktur för formatet Executable and Linkable Format (ELF)
 Comment[uk]=Структура файлів у форматі Executable and Linkable Format (ELF)
 Comment[x-test]=xxStructure for Executable and Linkable Format (ELF)xx
+Comment[zh_CN]=可执行链接格式(ELF)的结构
 Comment[zh_TW]=ELF （執行檔連結格式，Executable and Linkable Format）的結構
 
 X-KDE-PluginInfo-Author=Harald Fernengel

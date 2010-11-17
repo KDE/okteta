@@ -6,6 +6,7 @@ ServiceTypes=KPluginInfo
 
 Name=Bitfields test
 Name[ca]=Prova de camps de bits
+Name[de]=Bitfelder-Test
 Name[en_GB]=Bitfields test
 Name[et]=Bitiväljade test
 Name[nds]=Bitfeller-Prööv
@@ -14,6 +15,7 @@ Name[pt_BR]=Teste de campos de 'bits'
 Name[sv]=Bitfälttest
 Name[uk]=Перевірка полів бітів
 Name[x-test]=xxBitfields testxx
+Name[zh_CN]=位域测试
 Name[zh_TW]=Bitfields 測試
 
 X-KDE-PluginInfo-Author=Alex Richardson

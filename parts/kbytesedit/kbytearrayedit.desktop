@@ -2,6 +2,7 @@
 Type=Service
 Name=BytesEdit Widget
 Name[ca]=Estri BytesEdit
+Name[de]=BytesEdit-Bedienelement
 Name[en_GB]=BytesEdit Widget
 Name[et]=Baitide redigeerimise komponent
 Name[nds]=BytesEdit-Bedeenelement
@@ -10,6 +11,7 @@ Name[pt_BR]=Widget do editor de bytes
 Name[sv]=Grafisk komponent för att redigera binärdata
 Name[uk]=Віджет побайтового редагування
 Name[x-test]=xxBytesEdit Widgetxx
+Name[zh_CN]=字节编辑部件
 Name[zh_TW]=位元編輯器元件
 X-KDE-Library=libkbytearrayedit
 X-KDE-ServiceTypes=KHexEdit/KBytesEdit

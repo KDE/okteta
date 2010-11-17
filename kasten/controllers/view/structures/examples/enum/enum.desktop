@@ -6,6 +6,7 @@ ServiceTypes=KPluginInfo
 
 Name=Testing enums
 Name[ca]=Proves d'enumeracions
+Name[de]=Testen von enums
 Name[en_GB]=Testing enums
 Name[et]=Väärtustike testimine
 Name[nds]=Optellen pröven
@@ -14,9 +15,11 @@ Name[pt_BR]=Teste de enumerações
 Name[sv]=Testar uppräkningsvärden
 Name[uk]=Тестування переліків
 Name[x-test]=xxTesting enumsxx
+Name[zh_CN]=测试枚举
 Name[zh_TW]=測試列舉
 Comment=A test structure for enums
 Comment[ca]=Una estructura de proves per a enumeracions
+Comment[de]=Eine Test-Struktur für enums
 Comment[en_GB]=A test structure for enums
 Comment[et]=Väärtustike teststruktuur
 Comment[nds]=En Pröövstruktuur för Optellen
@@ -25,6 +28,7 @@ Comment[pt_BR]=Uma estrutura de testes para tipos enumerados
 Comment[sv]=En teststruktur för uppräkningsvärden
 Comment[uk]=Тестова структура для переліків (enum)
 Comment[x-test]=xxA test structure for enumsxx
+Comment[zh_CN]=枚举测试结构
 Comment[zh_TW]=列舉的測試結構
 
 X-KDE-PluginInfo-Author=Alex Richardson
