@@ -427,7 +427,7 @@ target_link_libraries( oktetakastencontrollers
   oktetacore
   ${KDE4_KIO_LIBS}
   ${KDE4_KDEUI_LIBS}
-  ${KDE4_KUTILS_LIBS}
+  ${KDE4_KCMUTILS_LIBS}
   ${QT_QTSCRIPT_LIBRARY}
   ${QT_QTSCRIPTTOOLS_LIBRARY}
   ${KDE4_KNEWSTUFF3_LIBS}
