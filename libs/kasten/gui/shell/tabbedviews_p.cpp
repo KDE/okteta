@@ -47,7 +47,7 @@ void TabbedViewsPrivate::init()
     Q_Q( TabbedViews );
 
     mTabWidget = new KTabWidget();
-    mTabWidget->setCloseButtonEnabled( true );
+    mTabWidget->setTabsClosable( true );
     mTabWidget->setDocumentMode( true );
     mViewAreaBox = new ViewAreaBox( mTabWidget );
 
