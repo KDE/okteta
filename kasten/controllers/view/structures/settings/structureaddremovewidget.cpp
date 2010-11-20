@@ -25,7 +25,6 @@
 #include "../structuresmanager.h"
 #include "../structuredefinitionfile.h"
 
-#include <KArrowButton>
 #include <KPushButton>
 #include <QLabel>
 #include <QLayout>
