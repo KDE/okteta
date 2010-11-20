@@ -32,7 +32,7 @@
 
 
 
-KByteArrayEdit::KByteArrayEdit( QWidget *parent, const QStringList & )
+KByteArrayEdit::KByteArrayEdit( QWidget* parent, const QList<QVariant>& )
   : QWidget( parent )
 {
     Model = new Okteta::ByteArrayModel;

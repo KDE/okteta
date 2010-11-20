@@ -23,8 +23,7 @@
 #include "kbytearrayedit.h"
 
 // KDE
-#include <kgenericfactory.h>
+#include <KPluginFactory>
 
-
-typedef K_TYPELIST_1( KByteArrayEdit ) Product;
-K_EXPORT_COMPONENT_FACTORY( libkbytearrayedit, KGenericFactory<Product>( "kbytearrayedit" ) )
+K_PLUGIN_FACTORY(ProductFactory, registerPlugin<KByteArrayEdit>();)
+K_EXPORT_PLUGIN(ProductFactory("kbytearrayedit"))

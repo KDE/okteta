@@ -67,8 +67,8 @@ class KByteArrayEdit : public QWidget,
   Q_PROPERTY( bool AutoDelete READ isAutoDelete WRITE setAutoDelete DESIGNABLE false )
 
   public:
-    /** constructor API as demanded by KGenericFactory */
-    explicit KByteArrayEdit( QWidget *parent, const QStringList & = QStringList() );
+    /** constructor API as demanded by KPluginFactory */
+    explicit KByteArrayEdit( QWidget* parent, const QList<QVariant>& = QList<QVariant>() );
     virtual ~KByteArrayEdit();
 
   public: // bytesedit interface
