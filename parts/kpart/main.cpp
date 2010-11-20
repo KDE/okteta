@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta KPart module, part of the KDE project.
 
-    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,4 +23,4 @@
 #include "partfactory.h"
 
 
-K_EXPORT_COMPONENT_FACTORY( oktetapart, OktetaPartFactory )
+K_EXPORT_PLUGIN( OktetaPartFactory )
