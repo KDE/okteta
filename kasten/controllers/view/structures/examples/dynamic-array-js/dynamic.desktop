@@ -6,6 +6,7 @@ ServiceTypes=KPluginInfo
 
 Name=Testing dynamic length arrays (JS). Do not translate, it's a waste of time
 Name[ca]=Testing dynamic length arrays (JS). Do not translate, it's a waste of time
+Name[es]=Prueba de arrays de tamaño dinámico (JS).
 Name[et]=Testing dynamic length arrays (JS). Do not translate, it's a waste of time
 Name[nb]=-
 Name[nds]=Dünaamsch Längdenrebeden pröven (JS)
@@ -18,6 +19,7 @@ Name[zh_CN]=测试动态数组(JS)。
 Name[zh_TW]=Testing dynamic length arrays (JS). Do not translate, it's a waste of time
 Comment=A test structure for dynamic arrays (JS). Do not translate, it's a waste of time
 Comment[ca]=A test structure for dynamic arrays (JS). Do not translate, it's a waste of time
+Comment[es]=Una estructura de prueba para arrays dinámicos (JS).
 Comment[et]=A test structure for dynamic arrays (JS). Do not translate, it's a waste of time
 Comment[nb]=-
 Comment[nds]=En Pröövstruktuur för dünaamsch Rebeden (JS)
