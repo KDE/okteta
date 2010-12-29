@@ -30,6 +30,8 @@
 // Qt
 #include <QtCore/QString>
 
+class QTextStream;
+
 
 namespace Kasten
 {

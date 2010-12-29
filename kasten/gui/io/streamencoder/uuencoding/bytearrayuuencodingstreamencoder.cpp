@@ -35,6 +35,12 @@
 namespace Kasten
 {
 
+static const int defaultUuInputLineLength = 45;
+static const int uuInputLineLength = defaultUuInputLineLength;
+static const int uuInputGroupLength = 3;
+static const int maxInputGroupsPerLine = uuInputLineLength/uuInputGroupLength;
+
+
 static inline char uumapByteHistorical( char byte ) { return (byte > 0) ? (byte + 32) : '`'; }
 static inline char uumapByteBase64( char byte )     { return base64EncodeMap[(int)byte]; }
 
@@ -106,7 +112,7 @@ bool ByteArrayUuencodingStreamEncoder::encodeDataToStream( QIODevice* device,
     // header
     textStream << encodeData->header << " 644 " << mSettings.fileName.toAscii();
 
-    const int firstLineLength = qMin( range.width(), inputLineLength );
+    const int firstLineLength = qMin( range.width(), uuInputLineLength );
     if( firstLineLength > 0 )
     {
         textStream << '\n';
@@ -144,7 +150,7 @@ bool ByteArrayUuencodingStreamEncoder::encodeDataToStream( QIODevice* device,
             if( inputGroupsPerLine >= maxInputGroupsPerLine && i<range.end() )
             {
                 const int remainsCount = range.end() - i;
-                const int nextLineLength = qMin( remainsCount, inputLineLength );
+                const int nextLineLength = qMin( remainsCount, uuInputLineLength );
                 textStream << '\n';
                 if( encodeData->hasLength )
                     textStream << encodeData->mapByte( nextLineLength );
