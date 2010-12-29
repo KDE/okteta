@@ -29,10 +29,6 @@
 namespace Kasten
 {
 
-static const int DefaultTRByteSpacingWidth = 1;
-static const int TRGroupSpacingWidth = 2;
-
-
 AbstractByteArrayColumnTextRenderer::AbstractByteArrayColumnTextRenderer( const Okteta::AbstractByteArrayModel *byteArrayModel, Okteta::Address offset, const Okteta::CoordRange& coordRange,
     int noOfBytesPerLine )
  : mByteArrayModel( byteArrayModel ),

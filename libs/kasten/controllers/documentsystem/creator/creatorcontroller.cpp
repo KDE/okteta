@@ -49,7 +49,10 @@
 #include <QtCore/QMimeData>
 
 
+#ifndef ABSTRACTMODELDATAGENERATOR_METATYPE
+#define ABSTRACTMODELDATAGENERATOR_METATYPE
 Q_DECLARE_METATYPE(Kasten::AbstractModelDataGenerator*)
+#endif
 
 namespace Kasten
 {

@@ -48,6 +48,14 @@ class ByteArrayXxencodingStreamEncoder : public AbstractByteArrayStreamEncoder
     Q_OBJECT
 
   public:
+    static const int defaultInputLineLength = 45;
+    static const int inputLineLength = defaultInputLineLength;
+    static const int inputGroupLength = 3;
+    static const int maxInputGroupsPerLine = inputLineLength/inputGroupLength;
+
+    enum InputByteIndex { FirstByte, SecondByte, ThirdByte };
+
+  public:
     ByteArrayXxencodingStreamEncoder();
     virtual ~ByteArrayXxencodingStreamEncoder();
 

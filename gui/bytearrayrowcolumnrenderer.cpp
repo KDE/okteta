@@ -23,6 +23,7 @@
 #include "bytearrayrowcolumnrenderer.h"
 
 // lib
+#include "oktetagui.h"
 #include "bytearraytableranges.h"
 #include "bytearraytablecursor.h"
 #include "bytearraytablelayout.h"
@@ -44,25 +45,6 @@
 
 namespace Okteta
 {
-
-static const unsigned int StartsBefore = 1;
-static const unsigned int EndsLater = 2;
-static const Byte EmptyByte = ' ';
-
-static const AbstractByteArrayView::CodingTypes DefaultVisibleCodings =
-    (AbstractByteArrayView::CodingTypes)( AbstractByteArrayView::ValueCodingId | AbstractByteArrayView::CharCodingId );
-
-static const PixelX DefaultCursorWidth = 2;
-static const PixelX DefaultByteSpacingWidth = 3;
-static const PixelX DefaultGroupSpacingWidth = 9;
-static const PixelX DefaultRowSpacingHeight = 0;
-static const Size DefaultNoOfGroupedBytes = 4;
-
-static const int DefaultBinaryGapWidth = 1;
-
-static const bool      DefaultShowingNonprinting = false;
-static const QChar     DefaultSubstituteChar =  (char)'.';
-static const QChar     DefaultUndefinedChar =   (char)'?';
 
 ByteArrayRowColumnRenderer::ByteArrayRowColumnRenderer( AbstractColumnStylist* stylist,
     AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges )

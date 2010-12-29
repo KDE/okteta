@@ -33,7 +33,7 @@
 namespace Kasten
 {
 
-static const int MaxEventProcessTimeInMS = 100;
+static const int PrintMaxEventProcessTimeInMS = 100;
 
 #if 0
 PrintJob::PrintJob( FramesToPaperPrinter *framesPrinter, int firstPage, int lastPage, QPrinter *printer )
@@ -62,7 +62,7 @@ bool PrintJob::exec()
 
 void PrintJob::onPagePrinted()
 {
-    QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, MaxEventProcessTimeInMS );
+    QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, PrintMaxEventProcessTimeInMS );
 }
 
 #if 0

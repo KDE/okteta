@@ -45,6 +45,10 @@ namespace Kasten
 // in constructor instead take startOffset
 class ByteArrayRowsColumnTextRenderer : public AbstractColumnTextRenderer
 {
+  private:
+    static const int DefaultTRByteSpacingWidth = 1;
+    static const int TRGroupSpacingWidth = 2;
+
   public:
     ByteArrayRowsColumnTextRenderer( const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset,
         const Okteta::CoordRange& coordRange,

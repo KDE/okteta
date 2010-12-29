@@ -30,6 +30,8 @@
 // Qt
 #include <QtCore/QString>
 
+class QTextStream;
+
 
 namespace Kasten
 {
@@ -49,6 +51,39 @@ class SRecStreamEncoderSettings
 class ByteArraySRecStreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
+
+  private:
+    enum RecordType
+    {
+        BlockHeader=0,
+        DataSequence2B=1,
+        DataSequence3B=2,
+        DataSequence4B=3,
+        RecordCount=5,
+        EndOfBlock4B=7,
+        EndOfBlock3B=8,
+        EndOfBlock2B=9
+    };
+
+    static const char startCode = 'S';
+
+    static const int byteCountLineOffset = 0;
+    static const int byteCountLineSize = 1;
+    static const int addressLineOffset = byteCountLineOffset + byteCountLineSize;
+
+    static const char hexDigits[16];
+
+  private:
+    static char charOfRecordType( RecordType type );
+    static char hexValueOfNibble( int nibble );
+    static void writeBigEndian( unsigned char* line, quint32 value, int byteSize );
+    static void streamLine( QTextStream& textStream, RecordType recordType,
+                            const unsigned char* line );
+    static void streamBlockHeader( QTextStream& textStream, unsigned char* line );
+    static void streamRecordCount( QTextStream& textStream, unsigned char* line,
+                                    quint16 recordCount );
+    static void streamBlockEnd( QTextStream& textStream, unsigned char* line,
+                                RecordType recordType, quint32 startAddress = 0 ); // TODO: make address
 
   public:
     ByteArraySRecStreamEncoder();
@@ -74,6 +109,22 @@ inline void ByteArraySRecStreamEncoder::setSettings( const SRecStreamEncoderSett
 {
     mSettings = settings;
     emit settingsChanged();
+}
+
+inline char ByteArraySRecStreamEncoder::charOfRecordType( RecordType type )
+{ return (char)('0'+type); }
+inline char ByteArraySRecStreamEncoder::hexValueOfNibble( int nibble )
+{ return hexDigits[nibble & 0xF]; }
+
+inline void ByteArraySRecStreamEncoder::writeBigEndian( unsigned char* line,
+                                                        quint32 value, int byteSize )
+{
+    while( byteSize > 0 )
+    {
+        --byteSize;
+        line[byteSize] = value;
+        value >>= 8;
+    }
 }
 
 }

@@ -35,13 +35,6 @@
 namespace Kasten
 {
 
-static const int defaultInputLineLength = 45;
-static const int inputLineLength = defaultInputLineLength;
-static const int inputGroupLength = 3;
-static const int maxInputGroupsPerLine = inputLineLength/inputGroupLength;
-
-enum InputByteIndex { FirstByte, SecondByte, ThirdByte };
-
 static inline char uumapByteHistorical( char byte ) { return (byte > 0) ? (byte + 32) : '`'; }
 static inline char uumapByteBase64( char byte )     { return base64EncodeMap[(int)byte]; }
 
@@ -53,7 +46,7 @@ struct UumapEncodeData
     const char* paddingData[2];
     bool hasLength;
 
-    inline const char* padding( InputByteIndex index ) const
+    inline const char* padding( ByteArrayUuencodingStreamEncoder::InputByteIndex index ) const
     {
         return paddingData[(int)(index) - 1];
     }

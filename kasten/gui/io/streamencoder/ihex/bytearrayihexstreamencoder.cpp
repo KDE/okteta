@@ -41,53 +41,13 @@ IHexStreamEncoderSettings::IHexStreamEncoderSettings()
  : addressSizeId( Bits32Id )
 {}
 
-static const int outputLineLength = 78;
-static const int maxOutputBytesPerLine = outputLineLength;
 
-enum IHexRecordType
-{
-    DataRecord=0,
-    EndOfFileRecord=1,
-    ExtendedSegmentAddressRecord=2,
-    StartSegmentAddressRecord=3,
-    ExtendedLinearAddressRecord=4,
-    StartLinearAddressRecord=5
-};
-
-static const char startCode = ':';
-
-
-static const int byteCountLineOffset = 0;
-static const int byteCountLineSize = 1;
-static const int addressLineOffset = byteCountLineOffset + byteCountLineSize;
-static const int addressLineSize = 2;
-static const int recordTypeLineOffset = addressLineOffset + addressLineSize;
-static const int recordTypeLineSize = 1;
-static const int dataLineOffset = recordTypeLineOffset + recordTypeLineSize;
-
-static const char hexDigits[16] =
+const char ByteArrayIHexStreamEncoder::hexDigits[16] =
     { '0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F' };
 
-static inline char hexValueOfNibble( int nibble ) { return hexDigits[nibble & 0xF]; }
 
-static inline QTextStream& operator<<( QTextStream& textStream, unsigned char byte )
-{
-    return textStream << hexValueOfNibble( byte >> 4 )
-                      << hexValueOfNibble( byte );
-}
-
-static inline void writeBigEndian( unsigned char* line, quint32 value, int byteSize )
-{
-    while( byteSize > 0 )
-    {
-        --byteSize;
-        line[byteSize] = value;
-        value >>= 8;
-    }
-}
-
-static inline void streamLine( QTextStream& textStream,
-                               const unsigned char* line )
+void ByteArrayIHexStreamEncoder::streamLine( QTextStream& textStream,
+                                             const unsigned char* line )
 {
     // checksum is two's complement of sum of the values in the line
     unsigned char checksum = 0;
@@ -98,17 +58,19 @@ static inline void streamLine( QTextStream& textStream,
     for( uint i = 0; i < length; ++i )
     {
         const unsigned char byte = line[i];
-        textStream << byte;
+        textStream << hexValueOfNibble( byte >> 4 )
+                   << hexValueOfNibble( byte );
         checksum += byte;
     }
 
     checksum = (checksum ^ 0xFF) + 1;
-    textStream << checksum << '\n';
+    textStream << hexValueOfNibble( checksum >> 4 )
+               << hexValueOfNibble( checksum ) << '\n';
 }
 
-static inline
-void streamExtendedSegmentAddress( QTextStream& textStream, unsigned char* line,
-                                   quint16 upperSegmentBaseAddress )
+void ByteArrayIHexStreamEncoder::streamExtendedSegmentAddress( QTextStream& textStream,
+                                                               unsigned char* line,
+                                                               quint16 upperSegmentBaseAddress )
 {
     static const int nullAddress = 0;
     static const int upperSegmentBaseAddressSize = 2;
@@ -122,9 +84,9 @@ void streamExtendedSegmentAddress( QTextStream& textStream, unsigned char* line,
     streamLine( textStream, line );
 }
 
-static inline
-void streamExtendedLinearAddress( QTextStream& textStream, unsigned char* line,
-                                  quint16 upperLinearBaseAddress )
+void ByteArrayIHexStreamEncoder::streamExtendedLinearAddress( QTextStream& textStream,
+                                                              unsigned char* line,
+                                                              quint16 upperLinearBaseAddress )
 {
     static const int nullAddress = 0;
     static const int upperLinearBaseAddressSize = 2;
@@ -138,9 +100,9 @@ void streamExtendedLinearAddress( QTextStream& textStream, unsigned char* line,
     streamLine( textStream, line );
 }
 
-static inline
-void streamEndOfFile( QTextStream& textStream, unsigned char* line,
-                      quint16 startAddress = 0 )
+void ByteArrayIHexStreamEncoder::streamEndOfFile( QTextStream& textStream,
+                                                  unsigned char* line,
+                                                  quint16 startAddress )
 {
     static const int endOfFileByteCount = 0;
 

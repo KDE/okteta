@@ -32,7 +32,7 @@
 namespace Kasten
 {
 
-static const int MaxEventProcessTimeInMS = 100;
+static const int SearchMaxEventProcessTimeInMS = 100;
 
 
 SearchJob::SearchJob( const Okteta::AbstractByteArrayModel* model,
@@ -78,7 +78,7 @@ Okteta::Address SearchJob::exec()
 
 void SearchJob::onBytesSearched()
 {
-    QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, MaxEventProcessTimeInMS );
+    QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, SearchMaxEventProcessTimeInMS );
 }
 
 

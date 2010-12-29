@@ -50,8 +50,6 @@ class CharCodec;
 class ByteArrayTableRanges;
 class ByteArrayTableLayout;
 
-const LinePosition NoByteFound = -1;
-
 /** base class of all buffer column displayers
   * holds all information about the vertical layout of a buffer column
   * knows how to paint the data and the editing things (focus, cursor, selection)

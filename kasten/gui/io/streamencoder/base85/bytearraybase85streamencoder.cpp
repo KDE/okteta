@@ -33,13 +33,6 @@
 namespace Kasten
 {
 
-static const int inputGroupLength = 4;
-
-static const int outputLineLength = 72;
-static const int maxOutputBytesPerLine = outputLineLength;
-
-enum InputByteIndex { FirstByte=0, SecondByte, ThirdByte, FourthByte };
-
 static inline void streamEncoded( QTextStream& textStream, int& outputBytesPerLine,
                                   quint32 tuple, int inputByteCount )
 {
@@ -58,7 +51,7 @@ static inline void streamEncoded( QTextStream& textStream, int& outputBytesPerLi
     {
         textStream << (char)(data[i] + 33);
         ++outputBytesPerLine;
-        if( outputBytesPerLine >= maxOutputBytesPerLine )
+        if( outputBytesPerLine >= ByteArrayBase85StreamEncoder::maxOutputBytesPerLine )
         {
             textStream << '\n';
             outputBytesPerLine = 0;

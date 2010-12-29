@@ -51,6 +51,15 @@ class ByteArrayBase32StreamEncoder : public AbstractByteArrayStreamEncoder
     Q_OBJECT
 
   public:
+    static const int inputGroupLength = 5;
+
+    static const int outputLineLength = 76;
+    static const int outputGroupLength = 8;
+    static const int maxOutputGroupsPerLine = outputLineLength/outputGroupLength;
+
+    enum InputByteIndex { FirstByte = 0, SecondByte, ThirdByte, FourthByte, FifthByte };
+
+  public:
     ByteArrayBase32StreamEncoder();
     virtual ~ByteArrayBase32StreamEncoder();
 

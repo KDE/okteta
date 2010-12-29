@@ -77,6 +77,7 @@ set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/kcursor.cpp PROPERTIES L
 set( oktetagui_LIB_HDRS
   ${libcolumnsview_HDRS}
   oktetagui_export.h
+  oktetagui.h
   lineposition.h
   line.h
   linepositionrange.h

@@ -31,7 +31,7 @@
 namespace Kasten
 {
 
-static const int MaxEventProcessTimeInMS = 100;
+static const int FilterMaxEventProcessTimeInMS = 100;
 
 bool FilterJob::exec()
 {
@@ -47,7 +47,7 @@ bool FilterJob::exec()
 
 void FilterJob::onFilteredBytes()
 {
-    QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, MaxEventProcessTimeInMS );
+    QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, FilterMaxEventProcessTimeInMS );
 }
 
 }
