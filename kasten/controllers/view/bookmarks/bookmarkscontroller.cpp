@@ -51,8 +51,6 @@
 namespace Kasten
 {
 
-static const int MaxEntryLength = 150;
-static const int MaxBookmarkNameSize = 40;
 static const char BookmarkListActionListId[] = "bookmark_list";
 
 // TODO: Sortieren nach Offset oder Zeit

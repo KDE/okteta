@@ -46,7 +46,10 @@
 #include <QtGui/QApplication>
 
 
+#ifndef ABSTRACTMODELDATAGENERATOR_METATYPE
+#define ABSTRACTMODELDATAGENERATOR_METATYPE
 Q_DECLARE_METATYPE(Kasten::AbstractModelDataGenerator*)
+#endif
 
 namespace Kasten
 {

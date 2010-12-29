@@ -45,20 +45,12 @@ const char base64EncodeMap[64] =
   '4', '5', '6', '7', '8', '9', '+', '/'
 };
 
-static const int inputGroupLength = 3;
-
-static const int outputLineLength = 76;
-static const int outputGroupLength = 4;
-static const int maxOutputGroupsPerLine = outputLineLength/outputGroupLength;
-
-enum InputByteIndex { FirstByte, SecondByte, ThirdByte };
-
 static const char* const base64PaddingData[2] =
 {
     "==",
     "="
 };
-static inline const char* base64Padding( InputByteIndex index )
+static inline const char* base64Padding( ByteArrayBase64StreamEncoder::InputByteIndex index )
 {
     return base64PaddingData[(int)(index) - 1];
 }

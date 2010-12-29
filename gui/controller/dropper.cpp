@@ -40,7 +40,7 @@
 namespace Okteta
 {
 
-static const char OctetStreamFormatName[] = "application/octet-stream";
+static const char DropperOctetStreamFormatName[] = "application/octet-stream";
 
 
 Dropper::Dropper( AbstractByteArrayView* view )
@@ -183,7 +183,7 @@ void Dropper::handleInternalDrag( QDropEvent* dropEvent, AbstractByteArrayView* 
         // TODO: should this be a method of AbstractByteArrayModel, to reuse piece data?
 
         // get data
-        const QByteArray data = dropEvent->mimeData()->data( OctetStreamFormatName );
+        const QByteArray data = dropEvent->mimeData()->data( DropperOctetStreamFormatName );
 
         if( !data.isEmpty() )
         {

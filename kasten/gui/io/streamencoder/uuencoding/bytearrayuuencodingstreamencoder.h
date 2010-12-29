@@ -52,6 +52,9 @@ class ByteArrayUuencodingStreamEncoder : public AbstractByteArrayStreamEncoder
     Q_OBJECT
 
   public:
+    enum InputByteIndex { FirstByte, SecondByte, ThirdByte };
+
+  public:
     ByteArrayUuencodingStreamEncoder();
     virtual ~ByteArrayUuencodingStreamEncoder();
 

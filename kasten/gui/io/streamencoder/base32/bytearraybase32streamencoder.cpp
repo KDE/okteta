@@ -33,14 +33,6 @@
 namespace Kasten
 {
 
-static const int inputGroupLength = 5;
-
-static const int outputLineLength = 76;
-static const int outputGroupLength = 8;
-static const int maxOutputGroupsPerLine = outputLineLength/outputGroupLength;
-
-enum InputByteIndex { FirstByte = 0, SecondByte, ThirdByte, FourthByte, FifthByte };
-
 static const char base32ClassicEncodeMap[32] =
 {
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
@@ -71,11 +63,11 @@ static const char* const base32PaddingData[4] =
     "="
 };
 
-static inline const char* base32Padding( InputByteIndex index )
+static inline const char* base32Padding( ByteArrayBase32StreamEncoder::InputByteIndex index )
 {
     return base32PaddingData[index - 1];
 }
-static inline const char* noPadding( InputByteIndex index )
+static inline const char* noPadding( ByteArrayBase32StreamEncoder::InputByteIndex index )
 {
     Q_UNUSED(index);
 
@@ -85,7 +77,7 @@ static inline const char* noPadding( InputByteIndex index )
 struct Base32EncodingData
 {
     const char* const encodeMap;
-    const char* (*padding)( InputByteIndex );
+    const char* (*padding)( ByteArrayBase32StreamEncoder::InputByteIndex );
 };
 
 static const Base32EncodingData

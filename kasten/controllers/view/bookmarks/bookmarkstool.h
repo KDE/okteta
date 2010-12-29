@@ -48,6 +48,9 @@ class OKTETAKASTENCONTROLLERS_EXPORT BookmarksTool : public AbstractTool
 {
   Q_OBJECT
 
+  private:
+    static const int MaxBookmarkNameSize = 40;
+
   public:
     BookmarksTool();
     virtual ~BookmarksTool();

@@ -24,6 +24,7 @@
 
 // lib
 #include "helper.h"
+#include "oktetagui.h"
 // lib
 #include <abstractcolumnstylist.h>
 // Okteta core
@@ -37,8 +38,6 @@
 
 namespace Okteta
 {
-
-static const int DefaultBinaryGapWidth = 1;
 
 
 ValueByteArrayColumnRenderer::ValueByteArrayColumnRenderer( AbstractColumnStylist* stylist,

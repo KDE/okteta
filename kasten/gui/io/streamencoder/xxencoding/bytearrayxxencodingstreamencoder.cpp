@@ -45,16 +45,14 @@ static const char xxencodeMap[64] =
     's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
 };
 
-static const int defaultInputLineLength = 45;
-static const int inputLineLength = defaultInputLineLength;
-static const int inputGroupLength = 3;
-static const int maxInputGroupsPerLine = inputLineLength/inputGroupLength;
-
-enum InputByteIndex { FirstByte, SecondByte, ThirdByte };
+static const int defaultxxInputLineLength = 45;
+static const int xxInputLineLength = defaultxxInputLineLength;
+static const int xxInputGroupLength = 3;
+static const int maxXxInputGroupsPerLine = xxInputLineLength/xxInputGroupLength;
 
 static inline char xxmapByte( char byte )           { return xxencodeMap[(int)byte]; }
 
-static inline const char* xxpadding( InputByteIndex index )
+static inline const char* xxpadding( ByteArrayXxencodingStreamEncoder::InputByteIndex index )
 {
     const char* const paddingData[2] = {"++","+"};
 
@@ -94,7 +92,7 @@ bool ByteArrayXxencodingStreamEncoder::encodeDataToStream( QIODevice* device,
     // header
     textStream << header << " 644 " << mSettings.fileName.toAscii();
 
-    const int firstLineLength = qMin( range.width(), inputLineLength );
+    const int firstLineLength = qMin( range.width(), xxInputLineLength );
     if( firstLineLength > 0 )
     {
         textStream << '\n';
@@ -128,10 +126,10 @@ bool ByteArrayXxencodingStreamEncoder::encodeDataToStream( QIODevice* device,
             textStream << xxmapByte( byte & 0x3F );
             inputByteIndex = FirstByte;
             ++inputGroupsPerLine;
-            if( inputGroupsPerLine >= maxInputGroupsPerLine && i<range.end() )
+            if( inputGroupsPerLine >= maxXxInputGroupsPerLine && i<range.end() )
             {
                 const int remainsCount = range.end() - i;
-                const int nextLineLength = qMin( remainsCount, inputLineLength );
+                const int nextLineLength = qMin( remainsCount, xxInputLineLength );
                 textStream << '\n';
                 textStream << xxmapByte( nextLineLength );
                 inputGroupsPerLine = 0;

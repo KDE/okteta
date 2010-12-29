@@ -23,6 +23,7 @@
 #include "bytearraycolumnview_p.h"
 
 // lib
+#include "oktetagui.h"
 #include "bordercolumnrenderer.h"
 #include "widgetcolumnstylist.h"
 #include "controller/dropper.h"
@@ -38,8 +39,6 @@
 
 namespace Okteta
 {
-static const int InsertCursorWidth = 2;
-
 
 ByteArrayColumnViewPrivate::ByteArrayColumnViewPrivate( ByteArrayColumnView* parent )
   : AbstractByteArrayViewPrivate( parent )

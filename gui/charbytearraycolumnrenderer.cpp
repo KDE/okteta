@@ -22,16 +22,14 @@
 
 #include "charbytearraycolumnrenderer.h"
 
+// lib
+#include "oktetagui.h"
 // Qt
 #include <QtGui/QPainter>
 
 
 namespace Okteta
 {
-
-static const bool      DefaultShowingNonprinting = false;
-static const QChar     DefaultSubstituteChar =  (char)'.';
-static const QChar     DefaultUndefinedChar =   (char)'?';
 
 
 CharByteArrayColumnRenderer::CharByteArrayColumnRenderer( AbstractColumnStylist* stylist,

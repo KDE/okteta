@@ -41,42 +41,12 @@ SRecStreamEncoderSettings::SRecStreamEncoderSettings()
  : addressSizeId( FourBytesId )
 {}
 
-static const int outputLineLength = 78;
-static const int maxOutputBytesPerLine = outputLineLength;
+const char ByteArraySRecStreamEncoder::hexDigits[16] =
+{ '0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F' };
 
-enum RecordType { BlockHeader=0, DataSequence2B=1, DataSequence3B=2, DataSequence4B=3,
-                  RecordCount=5, EndOfBlock4B=7, EndOfBlock3B=8, EndOfBlock2B=9 };
 
-static const char startCode = 'S';
-
-static const int byteCountLineOffset = 0;
-static const int byteCountLineSize = 1;
-static const int addressLineOffset = byteCountLineOffset + byteCountLineSize;
-
-static const char hexDigits[16] =
-    { '0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F' };
-
-static inline char charOfRecordType( RecordType type ) { return (char)('0'+type); }
-static inline char hexValueOfNibble( int nibble ) { return hexDigits[nibble & 0xF]; }
-
-static inline QTextStream& operator<<( QTextStream& textStream, unsigned char byte )
-{
-    return textStream << hexValueOfNibble( byte >> 4 )
-                      << hexValueOfNibble( byte );
-}
-
-static inline void writeBigEndian( unsigned char* line, quint32 value, int byteSize )
-{
-    while( byteSize > 0 )
-    {
-        --byteSize;
-        line[byteSize] = value;
-        value >>= 8;
-    }
-}
-
-static inline void streamLine( QTextStream& textStream, RecordType recordType,
-                               const unsigned char* line )
+void ByteArraySRecStreamEncoder::streamLine( QTextStream& textStream, RecordType recordType,
+                                             const unsigned char* line )
 {
     // checksum is ones' complement of sum of the values in the line
     unsigned char checksum = 0;
@@ -87,17 +57,17 @@ static inline void streamLine( QTextStream& textStream, RecordType recordType,
     for( uint i = 0; i < length; ++i )
     {
         const unsigned char byte = line[i];
-        textStream << byte;
+        textStream << hexValueOfNibble( byte >> 4 )
+                   << hexValueOfNibble( byte );
         checksum += byte;
     }
 
     checksum = ~checksum;
-    textStream << checksum << '\n';
+    textStream << hexValueOfNibble( checksum >> 4 ) << hexValueOfNibble( checksum ) << '\n';
 }
 
 
-static inline
-void streamBlockHeader( QTextStream& textStream, unsigned char* line )
+void ByteArraySRecStreamEncoder::streamBlockHeader( QTextStream& textStream, unsigned char* line )
 //                         const char* moduleName = 0, const char* description = 0,
 //                         quint8 version = 0, quint8 revision = 0 )
 {
@@ -122,9 +92,8 @@ void streamBlockHeader( QTextStream& textStream, unsigned char* line )
     streamLine( textStream, BlockHeader, line );
 }
 
-static inline
-void streamRecordCount( QTextStream& textStream, unsigned char* line,
-                        quint16 recordCount )
+void ByteArraySRecStreamEncoder::streamRecordCount( QTextStream& textStream, unsigned char* line,
+                                                    quint16 recordCount )
 {
     static const int recordCountLineSize = 2;
     static const int recordCountByteCount = byteCountLineSize + recordCountLineSize;
@@ -146,9 +115,8 @@ void streamRecordCount( QTextStream& textStream, unsigned char* line,
 // data ﬁeld.
 
 // TODO: recordType is not limited to valid values, also brings recalculation of addressLineSize
-static inline
-void streamBlockEnd( QTextStream& textStream, unsigned char* line,
-                     RecordType recordType, quint32 startAddress = 0 ) // TODO: make address
+void ByteArraySRecStreamEncoder::streamBlockEnd( QTextStream& textStream, unsigned char* line,
+                                                 RecordType recordType, quint32 startAddress )
 {
     const int addressLineSize = 11 - recordType;
     const int blockEndByteCount = byteCountLineSize + addressLineSize;

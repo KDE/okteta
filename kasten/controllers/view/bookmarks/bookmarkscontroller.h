@@ -53,6 +53,10 @@ class OKTETAKASTENCONTROLLERS_EXPORT BookmarksController : public AbstractXmlGui
 {
   Q_OBJECT
 
+  private:
+    static const int MaxEntryLength = 150;
+    static const int MaxBookmarkNameSize = 40;
+
   public:
     explicit BookmarksController( KXMLGUIClient* guiClient );
     virtual ~BookmarksController();
