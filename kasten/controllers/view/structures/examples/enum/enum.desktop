@@ -6,6 +6,7 @@ ServiceTypes=KPluginInfo
 
 Name=Testing enums
 Name[ca]=Proves d'enumeracions
+Name[ca@valencia]=Proves d'enumeracions
 Name[da]=Test af enums
 Name[de]=Testen von enums
 Name[en_GB]=Testing enums
@@ -29,6 +30,7 @@ Name[zh_CN]=测试枚举
 Name[zh_TW]=測試列舉
 Comment=A test structure for enums
 Comment[ca]=Una estructura de proves per a enumeracions
+Comment[ca@valencia]=Una estructura de proves per a enumeracions
 Comment[da]=En teststruktur til enums
 Comment[de]=Eine Test-Struktur für enums
 Comment[en_GB]=A test structure for enums

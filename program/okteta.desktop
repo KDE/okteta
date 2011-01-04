@@ -2,6 +2,7 @@
 Name=Okteta
 Name[ast]=Okteta
 Name[ca]=Okteta
+Name[ca@valencia]=Okteta
 Name[da]=Okteta
 Name[de]=Okteta
 Name[en_GB]=Okteta
@@ -28,6 +29,7 @@ GenericName=Hex Editor
 GenericName[ast]=Editor Hexadecimal
 GenericName[bg]=Шестнадесетичен редактор
 GenericName[ca]=Editor hexadecimal
+GenericName[ca@valencia]=Editor hexadecimal
 GenericName[da]=Hex-editor
 GenericName[de]=Hex-Editor
 GenericName[en_GB]=Hex Editor

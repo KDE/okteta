@@ -6,6 +6,7 @@ ServiceTypes=KPluginInfo
 
 Name=Another simple test
 Name[ca]=Una altra prova senzilla
+Name[ca@valencia]=Una altra prova senzilla
 Name[da]=En anden simpel test
 Name[de]=Ein weiterer einfacher Test
 Name[en_GB]=Another simple test
@@ -29,6 +30,7 @@ Name[x-test]=xxAnother simple testxx
 Name[zh_TW]=另一個簡單測試
 Comment=A few more test structures
 Comment[ca]=Més estructures de proves
+Comment[ca@valencia]=Més estructures de proves
 Comment[da]=Lidt flere teststrukturer
 Comment[de]=Einige weitere Test-Strukturen
 Comment[en_GB]=A few more test structures
