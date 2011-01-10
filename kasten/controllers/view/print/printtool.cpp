@@ -148,6 +148,7 @@ void PrintTool::print()
         byteArrayFrameRenderer->setShowsNonprinting( mByteArrayView->showsNonprinting() );
         byteArrayFrameRenderer->setSubstituteChar( mByteArrayView->substituteChar() );
         byteArrayFrameRenderer->setUndefinedChar( mByteArrayView->undefinedChar() );
+        byteArrayFrameRenderer->showByteArrayColumns( mByteArrayView->visibleByteArrayCodings() );
 
 //     if( !confirmPrintPageNumber( byteArrayFrameRenderer->framesCount()) )
 //         return;
