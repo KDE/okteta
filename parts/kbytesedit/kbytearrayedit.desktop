@@ -2,6 +2,7 @@
 Type=Service
 Name=BytesEdit Widget
 Name[ca]=Estri BytesEdit
+Name[ca@valencia]=Estri BytesEdit
 Name[da]=BytesEdit-kontrol
 Name[de]=BytesEdit-Bedienelement
 Name[en_GB]=BytesEdit Widget
