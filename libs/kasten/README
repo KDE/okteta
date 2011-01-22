@@ -1,8 +1,8 @@
 libkasten
 =========
-part of the KDE project.
+made within the KDE community.
 
-Copyright: 2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+Copyright: 2007-2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
 Author/Maintainer: Friedrich W. H. Kossebau <kossebau@kde.org>
 
@@ -18,6 +18,6 @@ by the existing classes and their methods. There are a lot of unsketched ideas w
 will be tried and developed by the time.
 
 For other, currently more advanced (in code ;) systems look for
-Sublime in kdevplatform, Kate's doc/view system, or the one used by KOffice.
+Sublime in kdevplatform, Kate's doc/view system, or the one used by Calligra.
 Once libkasten is in a state where discussions make sense I will let the world
 know.

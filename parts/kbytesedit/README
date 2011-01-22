@@ -1,8 +1,8 @@
 KBytesEdit widget modul
 =======================
-part of the Okteta project, a part of the KDE project.
+part of the Okteta project, made within the KDE community.
 
-Copyright: 2003-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+Copyright: 2003-2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
 Author/Maintainer: Friedrich W. H. Kossebau <kossebau@kde.org>
 
@@ -19,8 +19,3 @@ ValueColumnInterface, CharColumnInterface, ZoomInterface, ClipBoardInterface.
 installing:
 -----------
 Installs the .desktop file describing the service and the module library.
-
-
-usage:
-------
-Only official known usage is by KPilot (kdepim/kpilot) for now.
