@@ -1,0 +1,163 @@
+Unimplemented Feature of KHexEdit:
+----------------------------------
+
++ <Action name="insert_file" />
+
++ Zugriffsrechte (Größe)
++ Transcoder
++ bitstream (navigating on bit-level)
+
+Nicht so wichtig:
+* Einstellung Anzeige voller Pfad in Titel
+* Einstellung Anzeige a-f/A-F
+* Einstellung Anzeige Offset Hex/Dez
+* Suchleiste
+* <Action name="paste_into_new_window" />
+
+Erledigt:
+- Zugriffsrechte (Verändern)
+- Rückgängig/Wiederherstellen
+- Speichern
+- revert
+- Dokumentenliste
+- Letzte Dateien
+- Bookmarks
+- Drucken
+- Binärfilter
+- Zeichenkettenextraktion
+- Exportieren
+- copy_as_text
+
+
+Next to work on:
+----------------------------------
+Important:
+* find good promotion terms, like "Okteta, Queen of Bytes", "Rules your Bytes", perhaps Chess-connected (array)
+* querying of changed byte range for pod editing
+* generator editors need to remember used settings
+* get maxEnums out of Designer combobox
+* implement find whole words only!
+* improve resize of status bar with priority-based limiting of shown items, use perhaps SqueezedLabel for Selection
+* width calculation for resize seems to need to include some margins
+* QActionGroups are cleared on setupGui, e.g. if toolbar gets edited
+* search previous does not work in a row, as the cursor is exactly after a full match
+* find/replace dialogs and ByteArrayComboBox need to handle change charcodec, but what to do with than invalid characters already entered?
+* fix input of non-arabic digits
+* query which mimetype in QMimeData to use, if octetstream not available but several
+Less important:
+* some more unit tests
+* fix wrong font width calculation for offset and selection in statusbar
+* do not show Paste from clipboard if not possible (at end or overwrite at line end), also for other tools
+* do not show Cut if in Overwrite mode
+* cursor does not get redone on color change
+* on tripple click turn into selecting just whole lines if button kept pressed
+* ask artists for own icon
+* scroll on drag in first and last line
+
+Later on:
+---------
+* DecodingTable/Structure tool: differ between invalid value and unavailable
+* bookmarks storing
+* stream encoders/generators/etc. should have access to the data if parameters depend on current data
+* extend Export method to set default file extension and list filter
+* add StackedViews and two-view-only layout
+* max size of bytearrays (e.g. 8.bit, 16-bit, 32-bit, 64-bit), also defines shown offset width
+* think about making the ByteArray* things interface only to the AbstractModel
+  for this improve template functions findDocument with multiple interfaces given
+* make offset 64-Bit, in the whole Api, best by using own datatype/define/typedef
+* add change description factory, as always attaching complete rendered strings to a change bloats memory, also breaks on language change
+* fix all the mouse pointer changes in the bytearray views
+* try to merge both bytearray views into one
+* add dialogplugins to DocumentSyncManager for the interaction
+* show parameter field disabled, if there are no parameters
+* selecting an operation/algorithm should move focus to parameter field (cmp. format input)
+  or execute button if there are no parameters
+* move search ignoreCase and whole words into ByteArrayService, and reenable Whole words only in Search Tool
+* make status bar tools more flat, e.g. see how the zoom tool of KOffice is done
+* for close all and exit make a collective list of unsaved in one dialog instead of single requests
+* add border to BookmarkEditPopup, perhaps like that of QMenu
+* add direction to tool views, so that e.g. the file info tool view puts the icon left to the data in vertical mode
+* see how Tool and Document menus can be turned into KActionMenu (and add clear() call to KActionMenu)
+* see how the cursor and the value editor could be turned into tool+view
+* fix info and string docker (all with update function) to just work on update, react to change of data origin
+* add option for offset and char comments to Source code encoder (cmp #163204)
+* Support for Drop, both Import into and Open, also not just url, but also data
+* snippets tool which can be used to put data aside (variant of clipboard)
+* rework import and paste as:
+    <!Menu name="import" append="open_merge">
+      <text context="@title:menu">Import</text>
+      <!- -Action name="import_clipboard" /- ->
+      <ActionList name="import_list" />
+    </Menu>
+    <Menu name="paste_as" append="edit_paste_merge">
+"Paste as" is like "Insert from Clipboard as", means it comes from a source
+See "Insert", is generated as well as from a source, so perhaps join there?
+      <text>Paste As</text>
+      <ActionList name="paste_as_list" />
+    </Menu>
+* Make tabs click proxies
+* make tabs movable between areas (like QDockWidgets)
+* Better handling of file errors:
+  exact problem descriptions,
+  options to solve problem (e.g. make file readable)
+* add proper support for blocking processes like printing, string search, loading or filter:
+  show progress, allow cancelling, block only related model
+* input of offset or data should detect type by prefixes like 0x or such,
+  by new variant Auto, e.g. for search/replace/goto
+* test handling of readonly files
+* more explicit titels for undo/redo actions (range, data), also paste, drag, and cut
+* add support for memory mapped files (includes enabling overwrite controller again)
+* think about turning insert pattern & Co. into a tool
+* add close button-on-hovering to Documents browser, also make unsynced button clickable
+* session support: full storing and restoring of view/model state
+* add support for more commandline options
+* complete work on input controllers for the bytearray view
+* add some generic virtual QVariant data( const QModelIndex& index, int role ) const to AbstractModel
+* rename AbstractDocument into AbstractObjectModel
+* add AbstractTool, ToolManager and ToolManagerControl
+* make controllers with one action generic, turn into tool&view
+  and have description/factory a xmlgui creator interface
+* Prepare libframesprint for inclusion into kdelibs
+* add profiles with loaded tools and their positions (environments)
+* templates
+* + and - operates on whole selections
+* better selection by mouse using the offset column 
+* syntax highlighting
+* support for formated bytearray formats, load/save as well as import/export
+* shellwindow:
+  * hovering of drag about tab changes to tab
+  * dropping next to tab creates new data object by the drop data
+* copy also for all tables, e.g. statistic
+* mouse shadow cursor, shows where cursor would be positioned, also useful for drops (for drops already done)
+* option to split in regular sections, than show only one section or all with a line between,
+  similar to page modi of Okular (so page=section)
+* make all jobs (searching, filter operations, ...) cancellable, e.g. using ESC
+* add versions to view model, to be synched with the data model (if created later, create prior versions on demand)
+* make status bar entries non-readonly, e.g. for offset->goto, selection,...
+* search for other ideas in Inkscape
+* make bookmarks program-wide, switch doc if needed.
+* hovering drag over bookmark in tool should select it
+* a "painting" cursor tool which stamps a pattern, chosen from a selection
+* option to paint foreground/background of color dependent on value (0-white, 255-black)
+* overview with pixels for bytes each in color of bytetext
+* store bookmarks for usage on further opening, similar to Okular's memory
+* bookmarks to load vs. bookmarks/marked regions in loaded documents? lokal vs. global perhaps? search inside.
+* in-place saving instead of new-and-delete-old (ZFS Snpashots work blockbased, so only changed blocks get snapshotted)
+* for processes show estimated rest time
+* goto tool shows shadow cursor to see where current would go
+* goto, search, replace and similar tools could be triggered by calls for handlers,
+  so a click on the offset status would trigger the goto tool
+  (or better do in-place/by-model editing, e.g. offset status would mean editing number?)
+* all KDE inputs should show state with colors (invalid, okay)
+* think about how per-user focus can be done
+* show local information in window if we have focus, otherwise use KNotification
+* multisection bytearrays
+* move data to a new base address
+* checksum calculation and insertion/appending
+* byte order swapping
+* splitting data files
+
+Future plans:
+-------------
+* a binary diff editor widget in the Okteta libs
+* binary diff editor widget based parts
