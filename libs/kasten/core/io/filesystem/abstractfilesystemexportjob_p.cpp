@@ -55,8 +55,7 @@ void AbstractFileSystemExportJobPrivate::exportToFile()
     else
     {
         q->setError( KJob::KilledJobError );
-        q->setErrorText( mFile ? mFile->errorString() : KIO::NetAccess::lastErrorString() );
-        delete mFile;
+        q->setErrorText( mFile->errorString() );
 
         q->completeExport( false );
     }
