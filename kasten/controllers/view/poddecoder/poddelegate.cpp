@@ -71,6 +71,9 @@ PODDelegate::PODDelegate( PODDecoderTool* tool, QObject* parent )
 }
 
 // make sure only editors are created which have a readOnly property
+// also beware that for subclasses of QLineEdit (all float editors) the signal
+// editingFinished() is only emitted if validator() returns QValidator::Acceptable
+// so onEditorDone() is not reached if QValidator::Intermediate
 QWidget* PODDelegate::createEditor( QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index ) const
 {
     QWidget* result;

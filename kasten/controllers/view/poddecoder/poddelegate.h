@@ -25,6 +25,7 @@
 
 // Qt
 #include <QtGui/QStyledItemDelegate>
+#include <QtCore/QPointer>
 
 
 namespace Kasten
@@ -61,7 +62,7 @@ class PODDelegate : public QStyledItemDelegate
   protected:
     PODDecoderTool* mTool;
 
-    mutable QWidget* mEditor;
+    mutable QPointer<QWidget> mEditor;
 };
 
 }
