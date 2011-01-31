@@ -49,6 +49,9 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
     baseLayout->setMargin( 0 );
 
     mByteTableView = new QTreeView( this );
+    connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
+             SLOT(setFixedFontByGlobalSettings()) );
+    setFixedFontByGlobalSettings(); //do this before setting model
     mByteTableView->setObjectName( QLatin1String( "ByteTable" ) );
     mByteTableView->setRootIsDecorated( false );
     mByteTableView->setItemsExpandable( false );
@@ -62,9 +65,6 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
     mByteTableView->setModel( mTool->byteTableModel() );
     connect( mByteTableView, SIGNAL(doubleClicked( const QModelIndex& )),
              SLOT(onDoubleClicked( const QModelIndex& )) );
-    connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
-             SLOT(setFixedFontByGlobalSettings()) );
-    setFixedFontByGlobalSettings();
 
     baseLayout->addWidget( mByteTableView, 10 );
 

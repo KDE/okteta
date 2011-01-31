@@ -108,6 +108,9 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
              mSortFilterProxyModel, SLOT(setFilterFixedString( const QString & )) );
 
     mContainedStringTableView = new QTreeView( this );
+    connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
+             SLOT(setFixedFontByGlobalSettings()) );
+    setFixedFontByGlobalSettings(); //do this before setting model
     mContainedStringTableView->setObjectName( QLatin1String( "ContainedStringTable" ) );
     mContainedStringTableView->setRootIsDecorated( false );
     mContainedStringTableView->setItemsExpandable( false );
@@ -126,9 +129,6 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
     connect( mContainedStringTableView->selectionModel(),
              SIGNAL(selectionChanged( const QItemSelection &, const QItemSelection & )),
              SLOT(onStringSelectionChanged()) );
-    connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
-             SLOT(setFixedFontByGlobalSettings()) );
-    setFixedFontByGlobalSettings();
 
     baseLayout->addWidget( mContainedStringTableView, 10 );
 

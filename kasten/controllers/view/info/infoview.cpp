@@ -80,6 +80,9 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
     baseLayout->addLayout( topLineLayout );
 
     mStatisticTableView = new QTreeView( this );
+    connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
+             SLOT(setFixedFontByGlobalSettings()) );
+    setFixedFontByGlobalSettings(); //do this before setting model
     mStatisticTableView->setObjectName( QLatin1String( "StatisticTable" ) );
     mStatisticTableView->setRootIsDecorated( false );
     mStatisticTableView->setItemsExpandable( false );
@@ -97,9 +100,6 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
     mStatisticTableView->setModel( proxyModel );
     mStatisticTableView->sortByColumn( StatisticTableModel::CountId, Qt::DescendingOrder );
     connect( mTool->statisticTableModel(), SIGNAL(headerChanged()), SLOT(updateHeader()) );
-    connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
-             SLOT(setFixedFontByGlobalSettings()) );
-    setFixedFontByGlobalSettings();
 
     baseLayout->addWidget( mStatisticTableView, 10 );
 
