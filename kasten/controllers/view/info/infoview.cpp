@@ -37,6 +37,7 @@
 #include <QtGui/QLayout>
 #include <QtGui/QHeaderView>
 #include <QtGui/QTreeView>
+#include <QtGui/QFontMetrics>
 
 
 namespace Kasten
@@ -91,7 +92,7 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
     mStatisticTableView->setSortingEnabled( true );
     QHeaderView* header = mStatisticTableView->header();
     header->setFont( font() );
-    header->setResizeMode( QHeaderView::ResizeToContents );
+    header->setResizeMode( QHeaderView::Interactive );
     header->setStretchLastSection( false );
     // TODO: write subclass to filter count and percent by num, not string
     QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel( this );
@@ -104,6 +105,14 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
     baseLayout->addWidget( mStatisticTableView, 10 );
 
     setByteArraySize( mTool->size() );
+    
+    //resize to fit width of contents
+    //this is much (!) faster than using setResizeMode(QHeaderView::ResizeToContents)
+    QFontMetrics metrics( KGlobalSettings::fixedFont() );
+    header->resizeSection( 0, metrics.width( QLatin1String( "0000" ) ) + 5 ); //Hex
+    header->resizeSection( 1, metrics.width( QLatin1String( "00000" ) ) + 5); //Char
+    header->resizeSection( 2, metrics.width( QLatin1String( "0123456789" ) ) + 5 ); //Count
+    header->resizeSection( 3, metrics.width( QLatin1String( "0,123456789" ) ) + 5 ); //Percent
 }
 
 void InfoView::updateHeader()

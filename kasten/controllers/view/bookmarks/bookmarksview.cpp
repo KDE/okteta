@@ -69,7 +69,7 @@ BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
     mBookmarkListView->setAllColumnsShowFocus( true );
     mBookmarkListView->setSelectionMode( QAbstractItemView::ExtendedSelection );
     mBookmarkListView->setModel( mBookmarkListModel );
-    mBookmarkListView->header()->setResizeMode( QHeaderView::ResizeToContents );
+    mBookmarkListView->header()->setResizeMode( QHeaderView::Interactive );
     connect( mBookmarkListView, SIGNAL(doubleClicked( const QModelIndex& )),
              SLOT(onBookmarkDoubleClicked( const QModelIndex& )) );
     connect( mBookmarkListView->selectionModel(),

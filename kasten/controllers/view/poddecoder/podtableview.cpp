@@ -37,6 +37,7 @@
 #include <QtGui/QTreeView>
 #include <QtGui/QHeaderView>
 #include <QtGui/QFocusEvent>
+#include <QtGui/QFontMetrics>
 
 #include <KDebug>
 namespace Kasten
@@ -66,7 +67,7 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
     mPODTableView->setModel( mPODTableModel );
     mPODTableView->installEventFilter( this );
     QHeaderView* header = mPODTableView->header();
-    header->setResizeMode( QHeaderView::ResizeToContents );
+    header->setResizeMode( QHeaderView::Interactive );
     header->setStretchLastSection( false );
     connect( mPODTableView->selectionModel(),
              SIGNAL(currentRowChanged( const QModelIndex&, const QModelIndex& )),
@@ -109,6 +110,15 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
     baseLayout->addLayout( settingsLayout );
 
     mTool->setDifferentSizeDialog( this );
+    
+    //resize to fit width of contents
+    //this is much (!) faster than using setResizeMode(QHeaderView::ResizeToContents)
+    QFont f;
+    QFontMetrics metrics( f );
+    //ideally we should check the width of the longest translated string, but this should be wide enough for most
+    //anyway this is just an initial setting and the width can be changed manually
+    header->resizeSection( 0, metrics.width( QLatin1String( "Hexadecimal 8-bit" ) ) + 30 );
+    header->resizeSection( 1, metrics.width( QLatin1String( "1.01234567890123456789e-111" ) ) + 15 );
 }
 
 Answer PODTableView::query( int newValueSize, int oldValueSize, int sizeLeft )

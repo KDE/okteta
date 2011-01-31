@@ -36,6 +36,7 @@
 #include <KIntNumInput>
 #include <QtGui/QHeaderView>
 #include <QtGui/QTreeView>
+#include <QtGui/QFontMetrics>
 
 
 namespace Kasten
@@ -60,7 +61,7 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
     mByteTableView->setSortingEnabled( false );
     QHeaderView* header = mByteTableView->header();
     header->setFont( font() );
-    header->setResizeMode( QHeaderView::ResizeToContents );
+    header->setResizeMode( QHeaderView::Interactive );
     header->setStretchLastSection( false );
     mByteTableView->setModel( mTool->byteTableModel() );
     connect( mByteTableView, SIGNAL(doubleClicked( const QModelIndex& )),
@@ -99,6 +100,15 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
     insertLayout->addWidget( mInsertButton );
 
     baseLayout->addLayout( insertLayout );
+    
+    //resize to fit width of contents
+    //this is much (!) faster than using setResizeMode(QHeaderView::ResizeToContents)
+    QFontMetrics metrics( KGlobalSettings::fixedFont() );
+    header->resizeSection( 0, metrics.width( QLatin1String( "0000" ) ) + 5 ); //Dec
+    header->resizeSection( 1, metrics.width( QLatin1String( "0000" ) ) ); //Hex
+    header->resizeSection( 2, metrics.width( QLatin1String( "0000" ) ) + 5 ); //Oct
+    header->resizeSection( 3, metrics.width( QLatin1String( "000000000" ) ) + 5 );
+    header->resizeSection( 4, metrics.width( QLatin1String( "0000" ) ) + 5 );
 }
 
 void ByteTableView::setFixedFontByGlobalSettings()
