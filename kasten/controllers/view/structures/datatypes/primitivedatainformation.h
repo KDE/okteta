@@ -33,11 +33,9 @@ Q_OBJECT
 Q_PROPERTY(QScriptValue value READ scriptValue())
 
 public:
-    explicit PrimitiveDataInformation(QString name, PrimitiveDataType type,
-            int index = -1, DataInformation* parent = NULL);
+    explicit PrimitiveDataInformation(QString name, int index = -1, DataInformation* parent = NULL);
     virtual ~PrimitiveDataInformation();
     virtual DataInformation* clone() const = 0;
-    virtual PrimitiveDataType type() const;
     virtual int size() const = 0;
     virtual QString typeName() const = 0;
     virtual int displayBase() const = 0;
@@ -50,6 +48,7 @@ public:
     readData(Okteta::AbstractByteArrayModel *input, ByteOrder byteOrder,
             Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset);
     virtual QString valueString() const = 0;
+    virtual PrimitiveDataType type() const = 0;
     virtual AllPrimitiveTypes value() const = 0;
     virtual void setValue(AllPrimitiveTypes newVal) = 0;
 
@@ -60,7 +59,6 @@ public:
 protected:
     virtual quint64 offset(unsigned int index) const;
 protected:
-    PrimitiveDataType mType; //TODO unnecessary?
     explicit PrimitiveDataInformation(const PrimitiveDataInformation& d);
 };
 
@@ -70,15 +68,9 @@ inline quint64 PrimitiveDataInformation::offset(unsigned int index) const
     return 0;
 }
 
-inline PrimitiveDataType PrimitiveDataInformation::type() const
-{
-    return mType;
-}
-
 #define PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(type,superType) public: \
-        type##DataInformation(QString name, PrimitiveDataType dataType,\
-                int index = -1, DataInformation* parent = NULL) :\
-                superType##DataInformation(name, dataType, index, parent), mValue(0) {}\
+        type##DataInformation(QString name, int index = -1, DataInformation* parent = NULL) :\
+                superType##DataInformation(name, index, parent), mValue(0) {}\
         virtual ~type##DataInformation() {} \
     protected: \
         type##DataInformation(const type##DataInformation& d) : \
@@ -86,9 +78,8 @@ inline PrimitiveDataType PrimitiveDataInformation::type() const
     private:
         
 #define NO_VALUE_PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(type,superType) public: \
-        type##DataInformation(QString name, PrimitiveDataType dataType,\
-                int index = -1, DataInformation* parent = NULL) :\
-                superType##DataInformation(name, dataType, index, parent) {}\
+        type##DataInformation(QString name, int index = -1, DataInformation* parent = NULL) :\
+                superType##DataInformation(name, index, parent) {}\
         virtual ~type##DataInformation() {} \
     protected: \
         type##DataInformation(const type##DataInformation& d) : \

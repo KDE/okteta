@@ -67,35 +67,35 @@ PrimitiveDataInformation* PrimitiveFactory::newInstance(QString name,
     switch (type)
     {
     case Type_Char:
-        return new CharDataInformation(name, type, index, parent);
+        return new CharDataInformation(name, index, parent);
     case Type_Int8:
-        return new Int8DataInformation(name, type, index, parent);
+        return new Int8DataInformation(name, index, parent);
     case Type_Int16:
-        return new Int16DataInformation(name, type, index, parent);
+        return new Int16DataInformation(name, index, parent);
     case Type_Int32:
-        return new Int32DataInformation(name, type, index, parent);
+        return new Int32DataInformation(name, index, parent);
     case Type_Int64:
-        return new Int64DataInformation(name, type, index, parent);
+        return new Int64DataInformation(name, index, parent);
     case Type_UInt8:
-        return new UInt8DataInformation(name, type, index, parent);
+        return new UInt8DataInformation(name, index, parent);
     case Type_UInt16:
-        return new UInt16DataInformation(name, type, index, parent);
+        return new UInt16DataInformation(name, index, parent);
     case Type_UInt32:
-        return new UInt32DataInformation(name, type, index, parent);
+        return new UInt32DataInformation(name, index, parent);
     case Type_UInt64:
-        return new UInt64DataInformation(name, type, index, parent);
+        return new UInt64DataInformation(name, index, parent);
     case Type_Bool8:
-        return new Bool8DataInformation(name, type, index, parent);
+        return new Bool8DataInformation(name, index, parent);
     case Type_Bool16:
-        return new Bool16DataInformation(name, type, index, parent);
+        return new Bool16DataInformation(name, index, parent);
     case Type_Bool32:
-        return new Bool32DataInformation(name, type, index, parent);
+        return new Bool32DataInformation(name, index, parent);
     case Type_Bool64:
-        return new Bool64DataInformation(name, type, index, parent);
+        return new Bool64DataInformation(name, index, parent);
     case Type_Float:
-        return new FloatDataInformation(name, type, index, parent);
+        return new FloatDataInformation(name, index, parent);
     case Type_Double:
-        return new DoubleDataInformation(name, type, index, parent);
+        return new DoubleDataInformation(name, index, parent);
     default:
         return NULL;
     }

@@ -35,6 +35,7 @@ public:
     virtual int size() const;
     virtual QString typeName() const;
     virtual QString valueString() const;
+    virtual PrimitiveDataType type() const;
     virtual AllPrimitiveTypes value() const;
     virtual void setValue(AllPrimitiveTypes newVal);
     
@@ -43,6 +44,10 @@ private:
     quint32 mValue;
 };
 
+inline PrimitiveDataType UInt32DataInformation::type() const
+{
+    return Type_UInt32;
+}
 
 inline int UInt32DataInformation::size() const
 {

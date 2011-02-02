@@ -31,12 +31,11 @@
 EnumDataInformation::EnumDataInformation(QString name,
         PrimitiveDataInformation* type, EnumDefinition::Ptr enumDef, int index,
         DataInformation* parent) :
-    PrimitiveDataInformation(name, type->type(), index, parent), mEnum(enumDef),
-            mValue(type)
+    PrimitiveDataInformation(name, index, parent), mEnum(enumDef), mValue(type)
 {
-    if (mType != mEnum->type())
+    if (enumDef->type() != type->type())
         kWarning() << "incompatible types in definition and value: "
-                << enumDef->type() << "and " << mType;
+                << enumDef->type() << "and " << type->type();
     connect(mValue, SIGNAL(dataChanged()), SIGNAL(dataChanged()));
 }
 

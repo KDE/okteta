@@ -35,6 +35,7 @@ public:
     virtual int size() const;
     virtual QString typeName() const;
     virtual QString valueString() const;
+    virtual PrimitiveDataType type() const;
     virtual AllPrimitiveTypes value() const;
     virtual void setValue(AllPrimitiveTypes newVal);
     
@@ -43,11 +44,16 @@ private:
     quint8 mValue;
 };
 
+inline PrimitiveDataType Bool8DataInformation::type() const
+{
+    return Type_Bool8;
+}
 
 inline int Bool8DataInformation::size() const
 {
     return 8;
 }
+
 inline QString Bool8DataInformation::typeName() const
 {
     return i18nc("Data type", "bool (1 byte)");

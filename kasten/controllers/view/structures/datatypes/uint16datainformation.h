@@ -35,6 +35,7 @@ public:
     virtual int size() const;
     virtual QString typeName() const;
     virtual QString valueString() const;
+    virtual PrimitiveDataType type() const;
     virtual AllPrimitiveTypes value() const;
     virtual void setValue(AllPrimitiveTypes newVal);
     
@@ -43,6 +44,10 @@ private:
     quint16 mValue;
 };
 
+inline PrimitiveDataType UInt16DataInformation::type() const
+{
+    return Type_UInt16;
+}
 
 inline int UInt16DataInformation::size() const
 {

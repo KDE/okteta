@@ -36,6 +36,7 @@ public:
     virtual QString typeName() const;
 
     virtual QString valueString() const;
+    virtual PrimitiveDataType type() const;
     virtual AllPrimitiveTypes value() const;
     virtual void setValue(AllPrimitiveTypes newVal);
     
@@ -47,6 +48,10 @@ private:
     double mValue;
 };
 
+inline PrimitiveDataType DoubleDataInformation::type() const
+{
+    return Type_Double;
+}
 
 inline int DoubleDataInformation::displayBase() const
 {

@@ -35,6 +35,7 @@ public:
     virtual int size() const;
     virtual QString typeName() const;
     virtual QString valueString() const;
+    virtual PrimitiveDataType type() const;
     virtual AllPrimitiveTypes value() const;
     virtual void setValue(AllPrimitiveTypes newVal);
     
@@ -43,6 +44,11 @@ public:
 private:
     qint8 mValue;
 };
+
+inline PrimitiveDataType Int8DataInformation::type() const
+{
+    return Type_Int8;
+}
 
 inline int Int8DataInformation::size() const
 {

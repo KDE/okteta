@@ -42,6 +42,7 @@ public:
 
     virtual int size() const;
     virtual int displayBase() const;
+    virtual PrimitiveDataType type() const;
     virtual AllPrimitiveTypes value() const;
     virtual void setValue(AllPrimitiveTypes newVal);
     
@@ -64,6 +65,11 @@ protected:
     EnumDefinition::Ptr mEnum;
     PrimitiveDataInformation* mValue; //to allow different enum sizes
 };
+
+inline PrimitiveDataType EnumDataInformation::type() const
+{
+    return mValue->type();
+}
 
 inline int EnumDataInformation::size() const
 {

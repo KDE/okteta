@@ -36,6 +36,7 @@ public:
     virtual int size() const;
     virtual QString typeName() const;
     virtual QString valueString() const;
+    virtual PrimitiveDataType type() const;
     virtual AllPrimitiveTypes value() const;
     virtual void setValue(AllPrimitiveTypes newVal);
     
@@ -43,6 +44,11 @@ public:
 private:
     quint64 mValue;
 };
+
+inline PrimitiveDataType Bool64DataInformation::type() const
+{
+    return Type_Bool64;
+}
 
 inline QString Bool64DataInformation::typeName() const
 {

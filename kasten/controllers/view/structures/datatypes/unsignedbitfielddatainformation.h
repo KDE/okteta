@@ -29,9 +29,8 @@ class UnsignedBitfieldDataInformation: public AbstractBitfieldDataInformation
 {
 Q_OBJECT
 public:
-    UnsignedBitfieldDataInformation(QString name, PrimitiveDataType dataType,
-            uint width, int index = -1, DataInformation* parent = 0) :
-        AbstractBitfieldDataInformation(name, dataType, width, index, parent)
+    UnsignedBitfieldDataInformation(QString name, uint width, int index = -1, DataInformation* parent = 0) :
+        AbstractBitfieldDataInformation(name, width, index, parent)
     {
     }
     virtual ~UnsignedBitfieldDataInformation()

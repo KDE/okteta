@@ -53,4 +53,7 @@ void AbstractBitfieldDataInformation::setValue(AllPrimitiveTypes newVal)
     mValue.ulongValue = newVal.ulongValue & mask();
 }
 
-
+PrimitiveDataType AbstractBitfieldDataInformation::type() const
+{
+    return Type_Bitfield;
+}

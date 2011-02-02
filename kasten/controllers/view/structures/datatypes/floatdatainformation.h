@@ -35,6 +35,7 @@ public:
     virtual int size() const;
     virtual QString typeName() const;
     virtual QString valueString() const;
+    virtual PrimitiveDataType type() const;
     virtual AllPrimitiveTypes value() const;
     virtual void setValue(AllPrimitiveTypes newVal);
     
@@ -46,6 +47,10 @@ private:
     float mValue;
 };
 
+inline PrimitiveDataType FloatDataInformation::type() const
+{
+    return Type_Float;
+}
 
 inline int FloatDataInformation::displayBase() const
 {

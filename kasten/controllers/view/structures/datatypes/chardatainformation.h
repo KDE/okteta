@@ -37,6 +37,7 @@ public:
     virtual QString valueString() const;
     virtual AllPrimitiveTypes
             qVariantToAllPrimitiveTypes(const QVariant& value) const;
+    virtual PrimitiveDataType type() const;
     virtual AllPrimitiveTypes value() const;
     virtual void setValue(AllPrimitiveTypes newVal);
     
@@ -47,11 +48,16 @@ private:
     quint8 mValue;
 };
 
+inline PrimitiveDataType CharDataInformation::type() const
+{
+    return Type_Char;
+}
 
 inline int CharDataInformation::size() const
 {
     return 8;
 }
+
 inline QString CharDataInformation::typeName() const
 {
     return i18nc("Data type", "char");

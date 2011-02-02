@@ -142,19 +142,13 @@ qint64 PrimitiveDataInformation::readData(Okteta::AbstractByteArrayModel *input,
 }
 
 PrimitiveDataInformation::PrimitiveDataInformation(QString name,
-        PrimitiveDataType type, int index, DataInformation* parent) :
-    DataInformation(name, index, parent), mType(type)
+        int index, DataInformation* parent) :
+    DataInformation(name, index, parent)
 {
-    if (type == Type_NotPrimitive)
-    {
-        kWarning() << "attempting to add non-primitive type to "
-            "PrimitiveDataInformation. Default value (int) will be used instead";
-        mType = Type_Int32;
-    }
 }
 
 PrimitiveDataInformation::PrimitiveDataInformation(const PrimitiveDataInformation& d) :
-    DataInformation(d), mType(d.mType)
+    DataInformation(d)
 {
 }
 
@@ -176,6 +170,6 @@ QScriptValue PrimitiveDataInformation::scriptValue() const
             return QScriptValue("fail");
     }
     QScriptValue wrapObj = eng->newObject();
-    ScriptUtils::object()->wrapAllPrimitiveTypes(wrapObj, value(), mType);
+    ScriptUtils::object()->wrapAllPrimitiveTypes(wrapObj, value(), type());
     return wrapObj;
 }
