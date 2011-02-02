@@ -37,10 +37,14 @@ public:
     virtual QString valueString() const;
     virtual AllPrimitiveTypes
             qVariantToAllPrimitiveTypes(const QVariant& value) const;
-
+    virtual AllPrimitiveTypes value() const;
+    virtual void setValue(AllPrimitiveTypes newVal);
+    
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
+private:
+    quint8 mValue;
 };
 
 

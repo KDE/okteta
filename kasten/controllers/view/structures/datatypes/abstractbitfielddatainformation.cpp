@@ -42,3 +42,15 @@ QString AbstractBitfieldDataInformation::typeName() const
     return i18ncp("Data type", "bitfield (%1 bit wide)", "bitfield (%1 bits wide)",
             width());
 }
+
+AllPrimitiveTypes AbstractBitfieldDataInformation::value() const
+{
+    return mValue;
+}
+
+void AbstractBitfieldDataInformation::setValue(AllPrimitiveTypes newVal)
+{
+    mValue.ulongValue = newVal.ulongValue & mask();
+}
+
+

@@ -41,7 +41,6 @@ int SignedBitfieldDataInformation::displayBase() const
 
 QString SignedBitfieldDataInformation::valueString() const
 {
-    //FIXME shift so that it is negative
     if (!mWasAbleToRead)
         return i18nc("invalid value (out of range)", "<invalid>");
     int base = displayBase();
@@ -84,6 +83,6 @@ void SignedBitfieldDataInformation::setWidgetData(QWidget* w) const
 {
     SIntSpinBox* spin = dynamic_cast<SIntSpinBox*> (w);
     if (spin)
-        spin->setValue(this->value().longValue & mask()); //& mask() not really necessary, just be on the safe side
+        spin->setValue(mValue.longValue & mask()); //& mask() not really necessary, just be on the safe side
 }
 

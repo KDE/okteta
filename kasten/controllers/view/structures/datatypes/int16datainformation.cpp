@@ -26,7 +26,7 @@ QString Int16DataInformation::valueString() const
     if (!mWasAbleToRead)
         return i18nc("invalid value (out of range)", "<invalid>");
     int base = displayBase();
-    QString num = QString::number(mValue.shortValue, base);
+    QString num = QString::number(mValue, base);
     num = correctSignedValue(num, base);
     if (base == 16)
         num = "0x" + num;
@@ -39,7 +39,7 @@ void Int16DataInformation::setWidgetData(QWidget* w) const
 {
     SIntSpinBox* spin = dynamic_cast<SIntSpinBox*> (w);
     if (spin)
-        spin->setValue(this->value().shortValue);
+        spin->setValue(mValue);
 }
 
 QWidget* Int16DataInformation::createEditWidget(QWidget* parent) const
@@ -47,4 +47,14 @@ QWidget* Int16DataInformation::createEditWidget(QWidget* parent) const
     SInt16Editor* ret = new SInt16Editor(parent);
     ret->setBase(displayBase());
     return ret;
+}
+
+AllPrimitiveTypes Int16DataInformation::value() const
+{
+    return AllPrimitiveTypes(mValue);
+}
+
+void Int16DataInformation::setValue(AllPrimitiveTypes newVal)
+{
+    mValue = newVal.shortValue;
 }

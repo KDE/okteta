@@ -26,14 +26,13 @@ QString Bool32DataInformation::valueString() const
     if (!mWasAbleToRead)
         return i18nc("invalid value (out of range)", "<invalid>");
     int base = displayBase();
-    quint32 val = mValue.uintValue;
-    if (val == 0)
+    if (mValue == 0)
         return i18nc("boolean value", "false");
-    else if (val == 1)
+    else if (mValue == 1)
         return i18nc("boolean value", "true");
     else
     {
-        QString num = QString::number(val, base);
+        QString num = QString::number(mValue, base);
         if (base == 16)
             num = "0x" + num;
         if (Kasten::StructViewPreferences::localeAwareDecimalFormatting() && base
@@ -48,4 +47,14 @@ QWidget* Bool32DataInformation::createEditWidget(QWidget* parent) const
     UInt32Editor* ret = new UInt32Editor(parent);
     ret->setBase(displayBase());
     return ret;
+}
+
+AllPrimitiveTypes Bool32DataInformation::value() const
+{
+    return AllPrimitiveTypes(mValue);
+}
+
+void Bool32DataInformation::setValue(AllPrimitiveTypes newVal)
+{
+    mValue = newVal.uintValue;
 }

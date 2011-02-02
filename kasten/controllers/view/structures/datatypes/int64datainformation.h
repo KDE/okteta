@@ -33,12 +33,16 @@ PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Int64,SignedPrimitive)
 public:
     DATAINFORMATION_CLONE(Int64)
 
-    int size() const;
-    QString typeName() const;
+    virtual int size() const;
+    virtual QString typeName() const;
     virtual QString valueString() const;
-
-    void setWidgetData(QWidget* w) const;
+    virtual AllPrimitiveTypes value() const;
+    virtual void setValue(AllPrimitiveTypes newVal);
+    
+    virtual void setWidgetData(QWidget* w) const;
     virtual QWidget* createEditWidget(QWidget* parent) const;
+private:
+    qint64 mValue;
 };
 
 

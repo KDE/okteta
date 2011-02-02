@@ -26,7 +26,7 @@ QString UInt8DataInformation::valueString() const
     if (!mWasAbleToRead)
         return i18nc("invalid value (out of range)", "<invalid>");
     int base = displayBase();
-    QString num = QString::number(mValue.ubyteValue, base);
+    QString num = QString::number(mValue, base);
     if (base == 16)
         num = "0x" + num;
     if (Kasten::StructViewPreferences::localeAwareDecimalFormatting() && base == 10)
@@ -39,4 +39,14 @@ QWidget* UInt8DataInformation::createEditWidget(QWidget* parent) const
     UInt8Editor* ret = new UInt8Editor(parent);
     ret->setBase(displayBase());
     return ret;
+}
+
+AllPrimitiveTypes UInt8DataInformation::value() const
+{
+    return AllPrimitiveTypes(mValue);
+}
+
+void UInt8DataInformation::setValue(AllPrimitiveTypes newVal)
+{
+    mValue = newVal.ubyteValue;
 }

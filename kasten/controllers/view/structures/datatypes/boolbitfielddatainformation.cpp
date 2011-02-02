@@ -98,6 +98,6 @@ void BoolBitfieldDataInformation::setWidgetData(QWidget* w) const
 {
     UIntSpinBox* spin = dynamic_cast<UIntSpinBox*> (w);
     if (spin)
-        spin->setValue(this->value().ulongValue & mask()); //& mask() not really necessary, just be on the safe side
+        spin->setValue(mValue.ulongValue & mask()); //& mask() not really necessary, just be on the safe side
 }
 

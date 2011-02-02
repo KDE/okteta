@@ -27,7 +27,7 @@
 class UnsignedPrimitiveDataInformation: public PrimitiveDataInformation
 {
 Q_OBJECT
-PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(UnsignedPrimitive,Primitive)
+NO_VALUE_PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(UnsignedPrimitive,Primitive)
 public:
     virtual int displayBase() const;
     virtual QVariant dataFromWidget(const QWidget* w) const;

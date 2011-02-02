@@ -27,13 +27,13 @@ QString CharDataInformation::valueString() const
     if (!mWasAbleToRead)
         return i18nc("invalid value (out of range)", "<invalid>");
     //TODO char codec
-    QChar qchar(mValue.ubyteValue, 0);
+    QChar qchar(mValue, 0);
     qchar = qchar.isPrint() ? qchar : QChar(QChar::ReplacementCharacter);
     QString charStr = '\'' + qchar + '\'';
     if (Kasten::StructViewPreferences::showCharNumericalValue())
     {
         int base = displayBase();
-        QString num = QString::number(mValue.ubyteValue, base);
+        QString num = QString::number(mValue, base);
         if (base == 16)
             num = "0x" + num;
         if (Kasten::StructViewPreferences::localeAwareDecimalFormatting() && base
@@ -111,7 +111,7 @@ void CharDataInformation::setWidgetData(QWidget* w) const
     KLineEdit* edit = dynamic_cast<KLineEdit*> (w);
     if (edit)
     {
-        QChar qchar = mValue.ubyteValue;
+        QChar qchar(mValue, 0);
         if (! qchar.isPrint())
             qchar = QChar(QChar::ReplacementCharacter);
         edit->setText( qchar );
@@ -144,4 +144,15 @@ int CharDataInformation::displayBase() const
         return 16;
     }
     return 10; //safe default value
+}
+
+AllPrimitiveTypes CharDataInformation::value() const
+{ 
+    return AllPrimitiveTypes(mValue);
+}
+
+
+void CharDataInformation::setValue(AllPrimitiveTypes newVal)
+{
+    mValue = newVal.ubyteValue;
 }

@@ -89,26 +89,26 @@ QVariant PrimitiveDataInformation::data(int column, int role) const
     return QVariant();
 }
 
-bool PrimitiveDataInformation::setData(const QVariant& value, DataInformation* inf,
+bool PrimitiveDataInformation::setData(const QVariant& valueVariant, DataInformation* inf,
         Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
         Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
 {
     if (this != inf)
     {
-        //make sure bitOffset is always incremented
+        //make sure bitOffset is always incremented, so that next item starts at correct offset
         *bitOffset = (*bitOffset + size()) % 8;
         return false;
     }
-    AllPrimitiveTypes oldVal(mValue);
+    AllPrimitiveTypes oldVal(value());
     bool wasValid = mWasAbleToRead;
     // this is implemented in the subclasses
-    AllPrimitiveTypes newVal = qVariantToAllPrimitiveTypes(value);
-
+    AllPrimitiveTypes valToWrite = qVariantToAllPrimitiveTypes(valueVariant);
+    AllPrimitiveTypes newVal(oldVal);
     //this handles remaining < size() for us
-    mWasAbleToRead = mValue.writeBits(size(), newVal, out, byteOrder, address,
+    mWasAbleToRead = newVal.writeBits(size(), valToWrite, out, byteOrder, address,
             bitsRemaining, bitOffset);
 
-    if (oldVal != mValue || wasValid != mWasAbleToRead)
+    if (oldVal != newVal || wasValid != mWasAbleToRead)
         emit dataChanged();
     return true;
 }
@@ -128,17 +128,20 @@ qint64 PrimitiveDataInformation::readData(Okteta::AbstractByteArrayModel *input,
     if (bitsRemaining < size()) //TODO make size() unsigned
     {
         mWasAbleToRead = false;
-        mValue = 0;
+        setValue(0);
         return -1;
     }
     bool wasValid = mWasAbleToRead;
-    AllPrimitiveTypes oldVal(mValue);
+    AllPrimitiveTypes oldVal(value());
+    AllPrimitiveTypes newVal(value());
 
-    mWasAbleToRead = mValue.readBits(size(), input, byteOrder, address,
+    mWasAbleToRead = newVal.readBits(size(), input, byteOrder, address,
             bitsRemaining, bitOffset);
 
-    if (oldVal != mValue || wasValid != mWasAbleToRead)
+    if (oldVal != newVal || wasValid != mWasAbleToRead) {
         emit dataChanged();
+        setValue(newVal);
+    }
 
     return size();
 }
@@ -178,6 +181,6 @@ QScriptValue PrimitiveDataInformation::scriptValue() const
             return QScriptValue("fail");
     }
     QScriptValue wrapObj = eng->newObject();
-    ScriptUtils::object()->wrapAllPrimitiveTypes(wrapObj, mValue, mType);
+    ScriptUtils::object()->wrapAllPrimitiveTypes(wrapObj, value(), mType);
     return wrapObj;
 }

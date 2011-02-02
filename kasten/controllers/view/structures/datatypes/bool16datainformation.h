@@ -33,11 +33,15 @@ PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Bool16,UnsignedPrimitive)
 public:
     DATAINFORMATION_CLONE(Bool16)
 
-    int size() const;
-    QString typeName() const;
+    virtual int size() const;
+    virtual QString typeName() const;
     virtual QString valueString() const;
-
+    virtual AllPrimitiveTypes value() const;
+    virtual void setValue(AllPrimitiveTypes newVal);
+    
     virtual QWidget* createEditWidget(QWidget* parent) const;
+private:
+    quint16 mValue;
 };
 
 

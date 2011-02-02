@@ -139,3 +139,13 @@ QScriptValue EnumDataInformation::scriptValue() const
             mValue->type());
     return wrapObj;
 }
+
+AllPrimitiveTypes EnumDataInformation::value() const
+{
+    return mValue->value();
+}
+
+void EnumDataInformation::setValue(AllPrimitiveTypes newVal)
+{
+    mValue->setValue(newVal);
+}

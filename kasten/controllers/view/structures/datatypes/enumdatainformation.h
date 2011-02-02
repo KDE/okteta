@@ -43,7 +43,9 @@ public:
 
     virtual int size() const;
     virtual int displayBase() const;
-
+    virtual AllPrimitiveTypes value() const;
+    virtual void setValue(AllPrimitiveTypes newVal);
+    
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input,
             ByteOrder byteOrder, Okteta::Address address, quint64 remaining,
             quint8* bitOffset);

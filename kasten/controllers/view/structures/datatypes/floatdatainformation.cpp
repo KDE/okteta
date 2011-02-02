@@ -30,12 +30,12 @@ QString FloatDataInformation::valueString() const
     QString number;
     if (Kasten::StructViewPreferences::localeAwareFloatFormatting())
     {
-        number = KGlobal::locale()->formatNumber(mValue.floatValue,
+        number = KGlobal::locale()->formatNumber(mValue,
                 Kasten::StructViewPreferences::floatPrecision());
     }
     else
     {
-        number = QString::number(mValue.floatValue, 'g',
+        number = QString::number(mValue, 'g',
                 Kasten::StructViewPreferences::floatPrecision());
     }
     return number;
@@ -67,10 +67,20 @@ void FloatDataInformation::setWidgetData(QWidget* w) const
 {
     KDoubleNumInput* spin = dynamic_cast<KDoubleNumInput*> (w);
     if (spin)
-        spin->setValue((double) this->value().floatValue);
+        spin->setValue(mValue);
 }
 
 AllPrimitiveTypes FloatDataInformation::qVariantToAllPrimitiveTypes(const QVariant& value) const
 {
     return AllPrimitiveTypes(value.toFloat());
+}
+
+AllPrimitiveTypes FloatDataInformation::value() const
+{
+    return AllPrimitiveTypes(mValue);
+}
+
+void FloatDataInformation::setValue(AllPrimitiveTypes newVal)
+{
+    mValue = newVal.floatValue;
 }

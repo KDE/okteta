@@ -32,12 +32,16 @@ PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Int8,SignedPrimitive)
 public:
     DATAINFORMATION_CLONE(Int8)
 
-    int size() const;
-    QString typeName() const;
+    virtual int size() const;
+    virtual QString typeName() const;
     virtual QString valueString() const;
-
+    virtual AllPrimitiveTypes value() const;
+    virtual void setValue(AllPrimitiveTypes newVal);
+    
     virtual void setWidgetData(QWidget* w) const;
     virtual QWidget* createEditWidget(QWidget* parent) const;
+private:
+    qint8 mValue;
 };
 
 inline int Int8DataInformation::size() const

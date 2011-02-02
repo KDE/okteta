@@ -51,7 +51,8 @@ public:
     readData(Okteta::AbstractByteArrayModel *input, ByteOrder byteOrder,
             Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset);
     virtual QString valueString() const = 0;
-    AllPrimitiveTypes value() const;
+    virtual AllPrimitiveTypes value() const = 0;
+    virtual void setValue(AllPrimitiveTypes newVal) = 0;
 
     virtual AllPrimitiveTypes
     qVariantToAllPrimitiveTypes(const QVariant& value) const = 0;
@@ -60,7 +61,6 @@ public:
 protected:
     virtual quint64 offset(unsigned int index) const;
 protected:
-    AllPrimitiveTypes mValue;
     PrimitiveDataType mType; //TODO unnecessary?
     explicit PrimitiveDataInformation(const PrimitiveDataInformation& d);
 };
@@ -76,12 +76,17 @@ inline PrimitiveDataType PrimitiveDataInformation::type() const
     return mType;
 }
 
-inline AllPrimitiveTypes PrimitiveDataInformation::value() const
-{
-    return mValue;
-}
-
 #define PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(type,superType) public: \
+        type##DataInformation(QString name, PrimitiveDataType dataType,\
+                int index = -1, DataInformation* parent = NULL) :\
+                superType##DataInformation(name, dataType, index, parent), mValue(0) {}\
+        virtual ~type##DataInformation() {} \
+    protected: \
+        type##DataInformation(const type##DataInformation& d) : \
+        superType##DataInformation(d) {} \
+    private:
+        
+#define NO_VALUE_PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(type,superType) public: \
         type##DataInformation(QString name, PrimitiveDataType dataType,\
                 int index = -1, DataInformation* parent = NULL) :\
                 superType##DataInformation(name, dataType, index, parent) {}\

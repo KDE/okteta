@@ -29,12 +29,12 @@ QString DoubleDataInformation::valueString() const
     QString number;
     if (Kasten::StructViewPreferences::localeAwareFloatFormatting())
     {
-        number = KGlobal::locale()->formatNumber(mValue.doubleValue,
+        number = KGlobal::locale()->formatNumber(mValue,
                 Kasten::StructViewPreferences::floatPrecision());
     }
     else
     {
-        number = QString::number(mValue.doubleValue, 'g',
+        number = QString::number(mValue, 'g',
                 Kasten::StructViewPreferences::floatPrecision());
     }
     return number;
@@ -58,7 +58,7 @@ void DoubleDataInformation::setWidgetData(QWidget* w) const
 {
     KDoubleNumInput* spin = dynamic_cast<KDoubleNumInput*> (w);
     if (spin)
-        spin->setValue((double) this->value().floatValue);
+        spin->setValue(mValue);
 }
 
 AllPrimitiveTypes DoubleDataInformation::qVariantToAllPrimitiveTypes(const QVariant& value) const
@@ -66,3 +66,12 @@ AllPrimitiveTypes DoubleDataInformation::qVariantToAllPrimitiveTypes(const QVari
     return AllPrimitiveTypes(value.toDouble());
 }
 
+AllPrimitiveTypes DoubleDataInformation::value() const
+{ 
+    return AllPrimitiveTypes(mValue);
+}
+
+void DoubleDataInformation::setValue(AllPrimitiveTypes newVal)
+{
+    mValue = newVal.doubleValue;
+}

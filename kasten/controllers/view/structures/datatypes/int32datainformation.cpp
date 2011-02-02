@@ -28,9 +28,9 @@ QString Int32DataInformation::valueString() const
     int base = displayBase();
     QString num;
     if (base != 10)
-        num = QString::number((unsigned) mValue.intValue, base);
+        num = QString::number((unsigned) mValue, base);
     else
-        num = QString::number(mValue.intValue, base);
+        num = QString::number(mValue, base);
     //no need to correct, since int is big enough not to have leading useless chars
     if (base == 16)
         num = "0x" + num;
@@ -43,7 +43,7 @@ void Int32DataInformation::setWidgetData(QWidget* w) const
 {
     SIntSpinBox* spin = dynamic_cast<SIntSpinBox*> (w);
     if (spin)
-        spin->setValue(this->value().intValue);
+        spin->setValue(mValue);
 }
 
 QWidget* Int32DataInformation::createEditWidget(QWidget* parent) const
@@ -51,4 +51,14 @@ QWidget* Int32DataInformation::createEditWidget(QWidget* parent) const
     SInt32Editor* ret = new SInt32Editor(parent);
     ret->setBase(displayBase());
     return ret;
+}
+
+AllPrimitiveTypes Int32DataInformation::value() const
+{
+    return AllPrimitiveTypes(mValue);
+}
+
+void Int32DataInformation::setValue(AllPrimitiveTypes newVal)
+{
+    mValue = newVal.intValue;
 }

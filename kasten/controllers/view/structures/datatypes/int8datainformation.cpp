@@ -26,7 +26,7 @@ QString Int8DataInformation::valueString() const
     if (!mWasAbleToRead)
         return i18nc("invalid value (out of range)", "<invalid>");
     int base = displayBase();
-    QString num = QString::number(mValue.byteValue, base);
+    QString num = QString::number(mValue, base);
     num = correctSignedValue(num, base);
     if (base == 16)
         num = "0x" + num;
@@ -39,7 +39,7 @@ void Int8DataInformation::setWidgetData(QWidget* w) const
 {
     SIntSpinBox* spin = dynamic_cast<SIntSpinBox*> (w);
     if (spin)
-        spin->setValue(this->value().byteValue);
+        spin->setValue(mValue);
 }
 
 QWidget* Int8DataInformation::createEditWidget(QWidget* parent) const
@@ -47,4 +47,14 @@ QWidget* Int8DataInformation::createEditWidget(QWidget* parent) const
     SInt8Editor* ret = new SInt8Editor(parent);
     ret->setBase(displayBase());
     return ret;
+}
+
+AllPrimitiveTypes Int8DataInformation::value() const
+{
+    return AllPrimitiveTypes(mValue);
+}
+
+void Int8DataInformation::setValue(AllPrimitiveTypes newVal)
+{
+    mValue = newVal.byteValue;
 }

@@ -31,16 +31,19 @@ PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Float,Primitive)
 public:
     DATAINFORMATION_CLONE(Float)
 
-    int displayBase() const;
-    int size() const;
-    QString typeName() const;
-    QString valueString() const;
-
+    virtual int displayBase() const;
+    virtual int size() const;
+    virtual QString typeName() const;
+    virtual QString valueString() const;
+    virtual AllPrimitiveTypes value() const;
+    virtual void setValue(AllPrimitiveTypes newVal);
+    
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
     virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const;
-
+private:
+    float mValue;
 };
 
 

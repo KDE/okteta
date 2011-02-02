@@ -42,20 +42,22 @@ protected:
         PrimitiveDataInformation(d), mWidth(d.mWidth)
     {
     }
-private:
-    unsigned mWidth :7; //cannot be more than 64 since a quint64 is used for storage
 public:
     uint width() const;
     void setWidth(uint newWidth);
     virtual int size() const;
     quint64 mask() const;
-
+    virtual AllPrimitiveTypes value() const;
+    virtual void setValue(AllPrimitiveTypes newVal);
     virtual QString sizeString() const;
     virtual QString typeName() const;
     virtual AllPrimitiveTypes
             qVariantToAllPrimitiveTypes(const QVariant& value) const;
 
     virtual Qt::ItemFlags flags(int column, bool fileLoaded) const;
+protected:
+    unsigned mWidth :7; //cannot be more than 64 since a quint64 is used for storage
+    AllPrimitiveTypes mValue;
 };
 
 

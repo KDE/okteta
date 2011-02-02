@@ -26,7 +26,7 @@ QString Int64DataInformation::valueString() const
     if (!mWasAbleToRead)
         return i18nc("invalid value (out of range)", "<invalid>");
     int base = displayBase();
-    QString num = QString::number(mValue.longValue, base);
+    QString num = QString::number(mValue, base);
     if (base == 16)
         num = "0x" + num;
     if (Kasten::StructViewPreferences::localeAwareDecimalFormatting() && base == 10)
@@ -38,7 +38,7 @@ void Int64DataInformation::setWidgetData(QWidget* w) const
 {
     SIntSpinBox* spin = dynamic_cast<SIntSpinBox*> (w);
     if (spin)
-        spin->setValue(this->value().longValue);
+        spin->setValue(mValue);
 }
 
 QWidget* Int64DataInformation::createEditWidget(QWidget* parent) const
@@ -46,4 +46,14 @@ QWidget* Int64DataInformation::createEditWidget(QWidget* parent) const
     SInt64Editor* ret = new SInt64Editor(parent);
     ret->setBase(displayBase());
     return ret;
+}
+
+AllPrimitiveTypes Int64DataInformation::value() const
+{
+    return AllPrimitiveTypes(mValue);
+}
+
+void Int64DataInformation::setValue(AllPrimitiveTypes newVal)
+{
+    mValue = newVal.longValue;
 }
