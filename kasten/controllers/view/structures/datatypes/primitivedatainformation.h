@@ -41,7 +41,6 @@ public:
     virtual int size() const = 0;
     virtual QString typeName() const = 0;
     virtual int displayBase() const = 0;
-    QVariant primitiveValue() const;
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
 
     virtual bool setData(const QVariant& value, DataInformation* inf,

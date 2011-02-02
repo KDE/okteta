@@ -39,7 +39,6 @@ public:
     virtual QString valueString() const;
     virtual QString getTypeString() const;
     virtual QString typeName() const;
-    virtual QVariant primitiveValue() const;
 
     virtual int size() const;
     virtual int displayBase() const;

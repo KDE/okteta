@@ -52,11 +52,6 @@ EnumDataInformation::~EnumDataInformation()
     delete mValue;
 }
 
-QVariant EnumDataInformation::primitiveValue() const
-{
-    return mValue->primitiveValue();
-}
-
 QString EnumDataInformation::valueString() const
 {
     QString enumVal = mEnum->value(mValue->value());

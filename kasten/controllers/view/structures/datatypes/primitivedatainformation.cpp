@@ -28,11 +28,6 @@
 #include <QtScript/QScriptEngine>
 #include <KIcon>
 
-QVariant PrimitiveDataInformation::primitiveValue() const //XXX: unused, remove?
-{
-    return mValue.toQByteArray();
-}
-
 QVariant PrimitiveDataInformation::data(int column, int role) const
 {
     if (role == Qt::DisplayRole)
