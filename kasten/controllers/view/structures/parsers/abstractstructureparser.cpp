@@ -26,11 +26,21 @@
 AbstractStructureParser::AbstractStructureParser(const Kasten::StructureDefinitionFile* const def) :
     mDef(def)
 {
-    // TODO Auto-generated constructor stub
-
+    Q_CHECK_PTR(def);
 }
 
-AbstractStructureParser::~AbstractStructureParser()
+AbstractStructureParser::~AbstractStructureParser() {}
+
+DataInformation::DataInformationEndianess AbstractStructureParser::byteOrderFromString(const QString& string) const
 {
-    // TODO Auto-generated destructor stub
+    const QString lower = string.toLower();
+    if (lower == "bigendian")
+        return DataInformation::EndiannessBig;
+    else if (lower == "littleendian")
+        return DataInformation::EndianessLittle;
+    else if (lower == "fromsettings")
+        return DataInformation::EndianessFromSettings;
+    else 
+        return DataInformation::EndianessInherit;
 }
+

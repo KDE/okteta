@@ -27,6 +27,7 @@
 #include <QtCore/QStringList>
 
 #include "../datatypes/enumdefinition.h"
+#include "../datatypes/datainformation.h"
 
 class TopLevelDataInformation;
 namespace Kasten
@@ -46,6 +47,8 @@ public:
 
 protected:
     const Kasten::StructureDefinitionFile* const mDef;
+    
+    DataInformation::DataInformationEndianess byteOrderFromString(const QString& string) const;
 private:
     Q_DISABLE_COPY(AbstractStructureParser)
 };

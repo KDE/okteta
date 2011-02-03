@@ -240,18 +240,20 @@ AbstractBitfieldDataInformation* OsdParser::bitfieldFromXML(
         kWarning() << "invalid width specified (width must be > 0)";
         return NULL;
     }
+    AbstractBitfieldDataInformation* bitf = 0;
     if (typeStr == "bool")
-        return new BoolBitfieldDataInformation(name, Type_Bitfield, width);
-    if (typeStr == "unsigned")
-        return new UnsignedBitfieldDataInformation(name, Type_Bitfield, width);
-    if (typeStr == "signed")
-        return new SignedBitfieldDataInformation(name, Type_Bitfield, width);
+        bitf = new BoolBitfieldDataInformation(name, Type_Bitfield, width);
+    else if (typeStr == "unsigned")
+        bitf = new UnsignedBitfieldDataInformation(name, Type_Bitfield, width);
+    else if (typeStr == "signed")
+        bitf = new SignedBitfieldDataInformation(name, Type_Bitfield, width);
     else
     {
-        kWarning() << "no (or invalid) type attribute defined,"
-            " defaulting to unsigned";
-        return new UnsignedBitfieldDataInformation(name, Type_Bitfield, width);
+        kWarning() << "no (or invalid) bitfield type attribute defined:" << typeStr
+             << " defaulting to unsigned";
+        bitf = new UnsignedBitfieldDataInformation(name, Type_Bitfield, width);
     }
+    return bitf;
 }
 
 UnionDataInformation* OsdParser::unionFromXML(const QDomElement& xmlElem)
@@ -308,10 +310,8 @@ EnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem)
         kWarning() << "no enum with name " << enumName << "found.";
         return NULL;
     }
-    kDebug()
-        << def->name();
-    PrimitiveDataInformation* prim = PrimitiveFactory::newInstance(name,
-            typeStr);
+    kDebug() << def->name();
+    PrimitiveDataInformation* prim = PrimitiveFactory::newInstance(name, typeStr);
     if (!prim)
     {
         kWarning() << "primitive type is null!!";
@@ -319,8 +319,7 @@ EnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem)
     }
     EnumDataInformation* enumd = new EnumDataInformation(name, prim, def);
     if (!enumd)
-        kDebug()
-            << "enum def is NULL!!!";
+        kError() << "enum def is NULL!!!";
     return enumd;
 }
 
@@ -342,8 +341,12 @@ DataInformation* OsdParser::parseNode(const QDomNode& n)
             data = primitiveFromXML(elem);
         else if (elem.tagName() == "union")
             data = unionFromXML(elem);
-        if (elem.tagName() == "enum")
+        else if (elem.tagName() == "enum")
             data = enumFromXML(elem);
+    }
+    if (data) {
+        QString byteOrder = elem.attribute("byteOrder", "inherit");
+        data->setByteOrder(byteOrderFromString(byteOrder));
     }
     return data;
 }
