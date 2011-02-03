@@ -50,8 +50,7 @@ DataInformation* DataInformationWithChildren::childAt(unsigned int idx) const
 
 bool DataInformationWithChildren::setData(const QVariant& value,
         DataInformation* inf, Okteta::AbstractByteArrayModel *out,
-        ByteOrder byteOrder, Okteta::Address address, quint64 bitsRemaining,
-        quint8* bitOffset)
+        Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
 {
     if (this == inf)
         return true; //do nothing since this is not editable
@@ -60,7 +59,7 @@ bool DataInformationWithChildren::setData(const QVariant& value,
     for (int i = 0; i < mChildren.size(); i++)
     {
 
-        if (mChildren[i]->setData(value, inf, out, byteOrder, address + readBytes,
+        if (mChildren[i]->setData(value, inf, out, address + readBytes,
                 bitsRemaining - readBits, bitOffset))
             return true; //found -> done job
         readBits += mChildren[i]->size();
@@ -71,8 +70,7 @@ bool DataInformationWithChildren::setData(const QVariant& value,
 }
 
 qint64 DataInformationWithChildren::readData(Okteta::AbstractByteArrayModel *input,
-        ByteOrder byteOrder, Okteta::Address address, quint64 bitsRemaining,
-        quint8* bitOffset)
+        Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
 {
     //first of all update the structure:
     topLevelDataInformation()->updateElement(this);
@@ -81,8 +79,8 @@ qint64 DataInformationWithChildren::readData(Okteta::AbstractByteArrayModel *inp
     qint64 readBits = 0;
     for (int i = 0; i < mChildren.size(); i++)
     {
-        qint64 currentReadBits = mChildren[i]->readData(input, byteOrder, address
-                + readBytes, bitsRemaining - readBits, bitOffset);
+        qint64 currentReadBits = mChildren[i]->readData(input, address + readBytes,
+                bitsRemaining - readBits, bitOffset);
         if (currentReadBits == -1)
         {
             mWasAbleToRead = false;

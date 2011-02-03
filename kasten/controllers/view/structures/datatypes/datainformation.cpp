@@ -31,15 +31,15 @@
 DataInformation::DataInformation(const QString& name, int index,
         DataInformation* parent) :
     QObject(parent), mIndex(index), mValidationSuccessful(false), mHasBeenValidated(
-            false), mWasAbleToRead(false), mAdditionalData(NULL)
+            false), mWasAbleToRead(false), mByteOrder(EndianessInherit), mAdditionalData(NULL)
 {
     setObjectName(name);
 }
 
 DataInformation::DataInformation(const DataInformation& d) :
     QObject(NULL), QScriptable(), mIndex(d.mIndex), mValidationSuccessful(d.mValidationSuccessful),
-            mHasBeenValidated(d.mHasBeenValidated),
-            mWasAbleToRead(d.mWasAbleToRead), mAdditionalData(NULL)
+            mHasBeenValidated(d.mHasBeenValidated), mByteOrder(d.mByteOrder),
+            mWasAbleToRead(d.mWasAbleToRead), mAdditionalData(NULL)            
 {
     setObjectName(d.objectName());
     if (d.mAdditionalData)

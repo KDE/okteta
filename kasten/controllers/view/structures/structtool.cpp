@@ -157,7 +157,7 @@ bool StructTool::setData(const QVariant& value, int role, DataInformation* item)
     for (int i = 0; i < mData.size(); ++i)
     {
         if (mData[i]->actualDataInformation()->setData(value, item, mByteArrayModel,
-                mByteOrder, mCursorIndex, remaining, bitOffset.data()))
+                mCursorIndex, remaining, bitOffset.data()))
         {
             found = true;
             break;
@@ -182,7 +182,7 @@ void StructTool::updateData(const Okteta::ArrayChangeMetricsList& list)
     for (int i = 0; i < mData.size(); i++)
     {
         TopLevelDataInformation* dat = mData.at(i);
-        dat->read(mByteArrayModel, mByteOrder, mCursorIndex, list);
+        dat->read(mByteArrayModel, mCursorIndex, list);
     }
 }
 
@@ -359,7 +359,7 @@ void StructTool::unlockStructure(QModelIndex idx)
     {
         top->unlockPosition(mByteArrayModel);
         //now read from the current position:
-        top->read(mByteArrayModel, mByteOrder, mCursorIndex);
+        top->read(mByteArrayModel, mCursorIndex);
     }
 }
 

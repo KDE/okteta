@@ -31,8 +31,7 @@ void DynamicLengthArrayDataInformation::resizeChildren()
     setArrayLength(len);
 }
 
-qint64 DynamicLengthArrayDataInformation::readData(
-        Okteta::AbstractByteArrayModel *input, ByteOrder byteOrder,
+qint64 DynamicLengthArrayDataInformation::readData(Okteta::AbstractByteArrayModel *input,
         Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
 {
     resizeChildren();
@@ -40,7 +39,7 @@ qint64 DynamicLengthArrayDataInformation::readData(
     quint64 readBits = 0;
     for (int i = 0; i < mChildren.size(); i++)
     {
-        qint64 currentReadBits = mChildren[i]->readData(input, byteOrder, address
+        qint64 currentReadBits = mChildren[i]->readData(input, address
                 + readBytes, bitsRemaining - readBits, bitOffset);
         if (currentReadBits < 0)
         {

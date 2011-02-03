@@ -33,9 +33,11 @@ EnumDataInformation::EnumDataInformation(QString name,
         DataInformation* parent) :
     PrimitiveDataInformation(name, index, parent), mEnum(enumDef), mValue(type)
 {
+    Q_CHECK_PTR(type);
     if (enumDef->type() != type->type())
         kWarning() << "incompatible types in definition and value: "
                 << enumDef->type() << "and " << type->type();
+    mValue->setParent(this);
     connect(mValue, SIGNAL(dataChanged()), SIGNAL(dataChanged()));
 }
 
@@ -43,6 +45,7 @@ EnumDataInformation::EnumDataInformation(const EnumDataInformation& e) :
     PrimitiveDataInformation(e), mEnum(e.mEnum)
 {
     mValue = static_cast<PrimitiveDataInformation*> (e.mValue->clone());
+    mValue->setParent(this);
     connect(mValue, SIGNAL(dataChanged()), this, SIGNAL(dataChanged()));
 }
 
@@ -71,24 +74,22 @@ QString EnumDataInformation::getTypeString() const
 }
 
 bool EnumDataInformation::setData(const QVariant& value, DataInformation* inf,
-        Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
-        Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
+        Okteta::AbstractByteArrayModel *out, Okteta::Address address,
+        quint64 bitsRemaining, quint8* bitOffset)
 {
     if (this != inf)
         return false;
-    //correct object -> use mValue so PrimitiveDataInformation::setData() returns true
-    bool ret = mValue->setData(value, mValue, out, byteOrder, address,
-            bitsRemaining, bitOffset);
+    //correct object -> use mValue as parameter so that PrimitiveDataInformation::setData() returns true
+    //endianess will also be correct since it is initialized to Inherit and will then use this endianess
+    bool ret = mValue->setData(value, mValue, out, address, bitsRemaining, bitOffset);
     return ret;
 }
 qint64 EnumDataInformation::readData(Okteta::AbstractByteArrayModel* input,
-        ByteOrder byteOrder, Okteta::Address address, quint64 bitsRemaining,
-        quint8* bitOffset)
+        Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
 {
     //update enum first (it is possible to change the enum definition this enum uses
     topLevelDataInformation()->updateElement(this);
-    qint64 retVal = mValue->readData(input, byteOrder, address, bitsRemaining,
-            bitOffset);
+    qint64 retVal = mValue->readData(input, address, bitsRemaining, bitOffset);
     mWasAbleToRead = retVal >= 0; //not able to read if mValue->readData returns -1
     return retVal;
 }

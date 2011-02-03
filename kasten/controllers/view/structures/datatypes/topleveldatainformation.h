@@ -61,10 +61,8 @@ public:
      * @param changesList the list with changes to @input, so that it is possible to check whether reading is necessary
      *      This parameter is only useful if the structure was locked to a specific position.
      */
-    void read(Okteta::AbstractByteArrayModel* input, ByteOrder byteOrder,
-            Okteta::Address address,
-            const Okteta::ArrayChangeMetricsList& changesList =
-                    Okteta::ArrayChangeMetricsList());
+    void read(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+            const Okteta::ArrayChangeMetricsList& changesList = Okteta::ArrayChangeMetricsList());
     void updateElement(DataInformation* elem);
     QScriptEngine* scriptEngine() const;
 

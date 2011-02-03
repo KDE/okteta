@@ -108,8 +108,7 @@ void TopLevelDataInformation::updateElement(DataInformation* elem)
 }
 
 void TopLevelDataInformation::read(Okteta::AbstractByteArrayModel* input,
-        ByteOrder byteOrder, Okteta::Address address,
-        const Okteta::ArrayChangeMetricsList& changesList)
+        Okteta::Address address, const Okteta::ArrayChangeMetricsList& changesList)
 {
     //first of all check if start offset is locked
     if (mLockedPositions.contains(input))
@@ -127,7 +126,7 @@ void TopLevelDataInformation::read(Okteta::AbstractByteArrayModel* input,
     quint8* bitOffset = new quint8(0);
     mData->beginRead(); //before reading set wasAbleToRead to false
     mData->resetValidationState(); //reading new data -> validation state is old
-    mData->readData(input, byteOrder, address, remainingBits, bitOffset);
+    mData->readData(input, address, remainingBits, bitOffset);
     delete bitOffset;
 
 }

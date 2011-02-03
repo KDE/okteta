@@ -79,6 +79,9 @@ public:
     {
         ColumnName = 0, ColumnType, ColumnValue, COLUMN_COUNT
     };
+    enum DataInformationEndianess {
+        EndianessFromSettings = 0, EndianessInherit, EndianessLittle, EndiannessBig
+    };
 
     //methods for children:
     /** true for unions and structs and arrays*/
@@ -121,7 +124,6 @@ public:
     /** Reads the necessary data from @p input and returns the number of bytes read
      *
      * @param input the byte array to read from
-     * @param byteOrder the byte order used to read the data (big/little endian)
      * @param address the starting offset to read from
      * @param bitsRemaining the number of bits remaining in @p out
      * @param bitOffset the bits that have already been read from the current byte
@@ -129,10 +131,8 @@ public:
      *
      * @return the number of bits read or @c -1 if none were read
      */
-    virtual qint64
-    readData(Okteta::AbstractByteArrayModel *input, ByteOrder byteOrder,
-            Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
-    =0;
+    virtual qint64 readData(Okteta::AbstractByteArrayModel *input, Okteta::Address address,
+             quint64 bitsRemaining, quint8* bitOffset) = 0;
     /** sets mWasAbleToRead to false for all children and this object.
      *  Gets called once before the reading of the whole structure starts. */
     void beginRead();
@@ -143,7 +143,6 @@ public:
      *  @param value a @link QVariant object holding the new data to write
      *  @param inf the object that should currently write the data
      *  @param out the byte array the value is read from
-     *  @param byteOrder the byteOrder used for reading values
      *  @param address the address in @p out
      *  @param bitsRemaining number of bits remaining in @p input
      *  @param bitOffset the bit to start at in the first byte
@@ -151,9 +150,8 @@ public:
      *  @return @c true on success, @c false otherwise
      */
     virtual bool setData(const QVariant& value, DataInformation* inf,
-            Okteta::AbstractByteArrayModel *input, ByteOrder byteOrder,
-            Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
-    = 0;
+            Okteta::AbstractByteArrayModel *input, Okteta::Address address,
+            quint64 bitsRemaining, quint8* bitOffset) = 0;
 
     virtual bool isDynamicArray() const;
     TopLevelDataInformation* topLevelDataInformation() const;
@@ -168,6 +166,9 @@ public:
     void setValidationSuccessful(bool validationSuccessful = true);
     bool hasBeenValidated() const;
     void setHasBeenValidated(bool hasBeen);
+    ByteOrder byteOrder() const;
+    void setByteOrder(DataInformationEndianess newEndianess);
+    void setByteOrder(ByteOrder newByteOrder);
 
     virtual void resetValidationState(); //virtual for datainformationwithchildren
     bool wasAbleToRead() const;
@@ -195,6 +196,7 @@ protected:
     bool mValidationSuccessful :1;
     bool mHasBeenValidated :1;
     bool mWasAbleToRead :1;
+    DataInformationEndianess mByteOrder : 2;
     AdditionalData* mAdditionalData;
 };
 
@@ -246,4 +248,32 @@ inline bool DataInformation::wasAbleToRead() const
 {
     return mWasAbleToRead;
 }
+
+inline ByteOrder DataInformation::byteOrder() const
+{
+    switch (mByteOrder)
+    {
+        case EndiannessBig: 
+            return ByteOrderEnumClass::BigEndian;
+        case EndianessLittle: 
+            return ByteOrderEnumClass::LittleEndian;
+        case EndianessFromSettings:
+            return Kasten::StructViewPreferences::byteOrder();
+        case EndianessInherit:
+            return parent() ? Kasten::StructViewPreferences::byteOrder() : 
+                static_cast<DataInformation*>(parent())->byteOrder();
+    }
+}
+
+inline void DataInformation::setByteOrder(DataInformation::DataInformationEndianess newByteOrder)
+{
+    mByteOrder = newByteOrder;
+}
+
+inline void DataInformation::setByteOrder(ByteOrder newByteOrder)
+{
+    //XXX is this method needed?
+    mByteOrder = newByteOrder == ByteOrderEnumClass::BigEndian ? EndiannessBig : EndianessLittle;
+}
+
 #endif /* DATAINFORMATION_H_ */

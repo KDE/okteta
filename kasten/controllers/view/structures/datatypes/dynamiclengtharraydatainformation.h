@@ -44,9 +44,8 @@ public:
     virtual ~DynamicLengthArrayDataInformation();
     DATAINFORMATION_CLONE(DynamicLengthArray)
 
-    virtual qint64
-    readData(Okteta::AbstractByteArrayModel *input, ByteOrder byteOrder,
-            Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset);
+    virtual qint64 readData(Okteta::AbstractByteArrayModel *input, Okteta::Address address,
+            quint64 bitsRemaining, quint8* bitOffset);
     virtual bool isDynamicArray() const;
 private:
     int calculateLength();

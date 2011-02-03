@@ -47,11 +47,10 @@ public:
     virtual void setValue(AllPrimitiveTypes newVal);
     
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input,
-            ByteOrder byteOrder, Okteta::Address address, quint64 remaining,
-            quint8* bitOffset);
+            Okteta::Address address, quint64 remaining, quint8* bitOffset);
     virtual bool setData(const QVariant& value, DataInformation* inf,
-            Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
-            Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset);
+            Okteta::AbstractByteArrayModel *out, Okteta::Address address,
+            quint64 bitsRemaining, quint8* bitOffset);
 
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;

@@ -39,8 +39,7 @@ int UnionDataInformation::size() const
 }
 
 qint64 UnionDataInformation::readData(Okteta::AbstractByteArrayModel *input,
-        ByteOrder byteOrder, Okteta::Address address, quint64 bitsRemaining,
-        quint8* bitOffset)
+        Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
 {
     //first of all update the structure:
     topLevelDataInformation()->updateElement(this);
@@ -51,8 +50,7 @@ qint64 UnionDataInformation::readData(Okteta::AbstractByteArrayModel *input,
     for (int i = 0; i < mChildren.size(); i++)
     {
         //bit offset always has to be reset to original value
-        qint64 currentReadBits = mChildren[i]->readData(input, byteOrder, address,
-                bitsRemaining, bitOffset);
+        qint64 currentReadBits = mChildren[i]->readData(input, address, bitsRemaining, bitOffset);
         if (currentReadBits == -1)
         {
             //could not read one element -> whole structure could not be read
@@ -71,24 +69,25 @@ qint64 UnionDataInformation::readData(Okteta::AbstractByteArrayModel *input,
 }
 
 bool UnionDataInformation::setData(const QVariant& value, DataInformation* inf,
-        Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
-        Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
+        Okteta::AbstractByteArrayModel *out, Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
 {
     if (this == inf)
         return true; //do nothing since this is not editable
-    quint64 readBits = 0;
-    uint readBytes = 0;
+        
+    bool success = false;
+    quint8 originalBitOffset = *bitOffset;
     for (int i = 0; i < mChildren.size(); i++)
     {
-        if (mChildren[i]->setData(value, inf, out, byteOrder, address + readBytes,
-                bitsRemaining - readBits, bitOffset))
-            return true; //found -> done job
-
-        //useless since only one write anyway?
-        readBits += mChildren[i]->size();
-        readBytes = (readBits + *bitOffset) / 8;
+        //only the value where inf is one of the children or contained in one of them will be written
+        success = mChildren.at(i)->setData(value, inf, out,
+            address, bitsRemaining, bitOffset);
+        if (success)
+            break;
+        *bitOffset = originalBitOffset; // start at beginning
     }
-    return false;
+    //after having set the value, some elements may have changed size -> update
+    topLevelDataInformation()->updateElement(this);
+    return success;
 }
 
 void UnionDataInformation::addDataTypeToUnion(DataInformation* field)

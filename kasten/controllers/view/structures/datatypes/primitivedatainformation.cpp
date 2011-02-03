@@ -85,8 +85,8 @@ QVariant PrimitiveDataInformation::data(int column, int role) const
 }
 
 bool PrimitiveDataInformation::setData(const QVariant& valueVariant, DataInformation* inf,
-        Okteta::AbstractByteArrayModel *out, ByteOrder byteOrder,
-        Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
+        Okteta::AbstractByteArrayModel *out, Okteta::Address address,
+        quint64 bitsRemaining, quint8* bitOffset)
 {
     if (this != inf)
     {
@@ -100,8 +100,7 @@ bool PrimitiveDataInformation::setData(const QVariant& valueVariant, DataInforma
     AllPrimitiveTypes valToWrite = qVariantToAllPrimitiveTypes(valueVariant);
     AllPrimitiveTypes newVal(oldVal);
     //this handles remaining < size() for us
-    mWasAbleToRead = newVal.writeBits(size(), valToWrite, out, byteOrder, address,
-            bitsRemaining, bitOffset);
+    mWasAbleToRead = newVal.writeBits(size(), valToWrite, out, byteOrder(), address, bitsRemaining, bitOffset);
 
     if (oldVal != newVal || wasValid != mWasAbleToRead)
         emit dataChanged();
@@ -117,8 +116,7 @@ Qt::ItemFlags PrimitiveDataInformation::flags(int column, bool fileLoaded) const
 }
 
 qint64 PrimitiveDataInformation::readData(Okteta::AbstractByteArrayModel *input,
-        ByteOrder byteOrder, Okteta::Address address, quint64 bitsRemaining,
-        quint8* bitOffset)
+        Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
 {
     if (bitsRemaining < size()) //TODO make size() unsigned
     {
@@ -130,8 +128,7 @@ qint64 PrimitiveDataInformation::readData(Okteta::AbstractByteArrayModel *input,
     AllPrimitiveTypes oldVal(value());
     AllPrimitiveTypes newVal(value());
 
-    mWasAbleToRead = newVal.readBits(size(), input, byteOrder, address,
-            bitsRemaining, bitOffset);
+    mWasAbleToRead = newVal.readBits(size(), input, byteOrder(), address, bitsRemaining, bitOffset);
 
     if (oldVal != newVal || wasValid != mWasAbleToRead) {
         emit dataChanged();
