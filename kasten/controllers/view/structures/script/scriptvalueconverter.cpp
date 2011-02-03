@@ -37,6 +37,7 @@
 #include "../datatypes/signedbitfielddatainformation.h"
 #include "../datatypes/primitivefactory.h"
 #include "../datatypes/additionaldata.h"
+#include "../parsers/abstractstructureparser.h"
 #include "scriptutils.h"
 
 ScriptValueConverter::ScriptValueConverter(QScriptValue& value, QString name) :
@@ -57,7 +58,7 @@ DataInformation* ScriptValueConverter::convert()
         QScriptValueList args;
         evaluatedVal = mValue.call(thisObj, args);
     }
-    else if (mValue.isObject()) //this must be called second since any function is also an object
+    else if (mValue.isObject()) //this must be checked second since any function is also an object
         evaluatedVal = mValue;
     else
     {
@@ -104,6 +105,9 @@ DataInformation* ScriptValueConverter::toDataInformation(QScriptValue& value,
         //successfully parsed -> add the validate and update functions to the additional data
         QScriptValue updateFunc = value.property("updateFunc");
         QScriptValue validationFunc = value.property("validationFunc");
+        QScriptValue byteOrder = value.property("byteOrder");
+        //TODO allow int values too
+        returnVal->setByteOrder(AbstractStructureParser::byteOrderFromString(byteOrder.toString()));
         AdditionalData* aData = new AdditionalData();
         if (updateFunc.isFunction())
             aData->setUpdateFunction(new QScriptValue(updateFunc));

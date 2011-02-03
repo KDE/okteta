@@ -31,7 +31,7 @@ AbstractStructureParser::AbstractStructureParser(const Kasten::StructureDefiniti
 
 AbstractStructureParser::~AbstractStructureParser() {}
 
-DataInformation::DataInformationEndianess AbstractStructureParser::byteOrderFromString(const QString& string) const
+DataInformation::DataInformationEndianess AbstractStructureParser::byteOrderFromString(const QString& string)
 {
     const QString lower = string.toLower();
     if (lower == "bigendian")

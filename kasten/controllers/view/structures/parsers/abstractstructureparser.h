@@ -44,11 +44,10 @@ public:
     virtual QStringList parseStructureNames() = 0;
     virtual QList<const TopLevelDataInformation*> parseStructures() = 0;
     virtual bool isFullyParsed() = 0;
+    static DataInformation::DataInformationEndianess byteOrderFromString(const QString& string);
 
 protected:
     const Kasten::StructureDefinitionFile* const mDef;
-    
-    DataInformation::DataInformationEndianess byteOrderFromString(const QString& string) const;
 private:
     Q_DISABLE_COPY(AbstractStructureParser)
 };
