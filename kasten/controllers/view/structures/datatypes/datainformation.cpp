@@ -38,8 +38,8 @@ DataInformation::DataInformation(const QString& name, int index,
 
 DataInformation::DataInformation(const DataInformation& d) :
     QObject(NULL), QScriptable(), mIndex(d.mIndex), mValidationSuccessful(d.mValidationSuccessful),
-            mHasBeenValidated(d.mHasBeenValidated), mByteOrder(d.mByteOrder),
-            mWasAbleToRead(d.mWasAbleToRead), mAdditionalData(NULL)            
+            mHasBeenValidated(d.mHasBeenValidated), mWasAbleToRead(d.mWasAbleToRead), 
+            mByteOrder(d.mByteOrder), mAdditionalData(NULL)            
 {
     setObjectName(d.objectName());
     if (d.mAdditionalData)
