@@ -21,7 +21,6 @@
  */
 #include "primitivedatainformation.h"
 #include "datainformation.h"
-#include "abstractarraydatainformation.h"
 #include "topleveldatainformation.h"
 #include "../script/scriptutils.h"
 
@@ -33,13 +32,7 @@ QVariant PrimitiveDataInformation::data(int column, int role) const
     if (role == Qt::DisplayRole)
     {
         if (column == ColumnName)
-        {
-            AbstractArrayDataInformation* par =
-                    dynamic_cast<AbstractArrayDataInformation*> (parent());
-            if (par)
-                return QString("[%1]").arg(row());
             return name();
-        }
         else if (column == ColumnType)
             return typeName();
         else if (column == ColumnValue)

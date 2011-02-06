@@ -25,7 +25,6 @@
 #include "structuredatainformation.h"
 #include "uniondatainformation.h"
 #include "primitivedatainformation.h"
-#include "staticlengtharraydatainformation.h"
 #include "topleveldatainformation.h"
 
 DataInformation::DataInformation(const QString& name, DataInformation* parent) :
@@ -171,3 +170,9 @@ int DataInformation::indexOf(const DataInformation* const data) const
     Q_ASSERT(false); //this should never happen!
     return 0;
 }
+
+QVariant DataInformation::childData(int row, int column, int role) const
+{
+    return QVariant(); //no children -> no child data
+}
+

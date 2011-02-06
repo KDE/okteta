@@ -48,6 +48,8 @@ public:
     virtual bool isDynamicArray() const;
     int length() const;
     const DataInformation* newChildType() const;
+    
+    virtual QVariant childData(int row, int column, int role) const;
 
     Q_INVOKABLE QScriptValue setArrayLength(int newLength);
     Q_INVOKABLE QScriptValue setArrayType(QScriptValue type);

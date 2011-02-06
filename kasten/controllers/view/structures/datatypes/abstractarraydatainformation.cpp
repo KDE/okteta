@@ -176,3 +176,18 @@ QScriptValue AbstractArrayDataInformation::childType() const
 AbstractArrayDataInformation::~AbstractArrayDataInformation()
 {
 }
+
+QVariant AbstractArrayDataInformation::childData(int row, int column, int role) const
+{
+    Q_ASSERT(row >= 0 && row < mChildren.size());
+    if (column == 0 && role == Qt::DisplayRole)
+    {
+        //name is asked for 
+        return '[' + QString::number(row) + ']';
+    }
+    else 
+    {
+        //just delegate to child
+        return mChildren.at(row)->data(column, role);
+    }
+}

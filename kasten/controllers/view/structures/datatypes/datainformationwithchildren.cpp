@@ -20,7 +20,6 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "datainformationwithchildren.h"
-#include "staticlengtharraydatainformation.h"
 #include "topleveldatainformation.h"
 #include "../script/scriptvalueconverter.h"
 #include "../script/scriptutils.h"
@@ -164,14 +163,7 @@ QVariant DataInformationWithChildren::data(int column, int role) const
     if (role == Qt::DisplayRole)
     {
         if (column == ColumnName)
-        {
-            //TODO rather add method childData(int row, int column, int role)
-            if (dynamic_cast<AbstractArrayDataInformation*> (parent()))
-            {
-                return QString("[%1]").arg(row());
-            }
             return name();
-        }
         else if (column == ColumnType)
             return typeName();
         else if (column == ColumnValue)
@@ -377,3 +369,9 @@ int DataInformationWithChildren::indexOf(const DataInformation* const data) cons
     return -1;
 }
 
+QVariant DataInformationWithChildren::childData(int row, int column, int role) const
+{
+    Q_ASSERT(row >= 0 && row < mChildren.size());
+    //just delegate to child
+    return mChildren.at(row)->data(column, role);
+}

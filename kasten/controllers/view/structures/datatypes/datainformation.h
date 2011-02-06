@@ -95,11 +95,11 @@ public:
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
     int row() const;
     /** get the necessary data (for the model) */
-    virtual QVariant data(int column, int role) const
-    = 0;
+    virtual QVariant data(int column, int role) const = 0;
+    /** the data of child at index @p row. Useful for arrays, or DataInformations with fake children*/
+    virtual QVariant childData(int row, int column, int role) const;
     /** The size of this DataInformation type in bits (to allow bitfields in future) */
-    virtual QString typeName() const
-    = 0;
+    virtual QString typeName() const = 0;
     /** by default just returns an empty QString */
     virtual QString valueString() const;
     virtual QString name() const;
@@ -108,14 +108,11 @@ public:
 
     //delegate functions:
     /** create a QWidget for the QItemDelegate */
-    virtual QWidget* createEditWidget(QWidget* parent) const
-    = 0;
+    virtual QWidget* createEditWidget(QWidget* parent) const = 0;
     /** get the needed data from the widget */
-    virtual QVariant dataFromWidget(const QWidget* w) const
-    = 0;
+    virtual QVariant dataFromWidget(const QWidget* w) const = 0;
     /** initialize the delegate widget with the correct data */
-    virtual void setWidgetData(QWidget* w) const
-    = 0;
+    virtual void setWidgetData(QWidget* w) const = 0;
 
     //reading and writing
     /** the size in bits of this element */

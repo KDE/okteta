@@ -42,6 +42,7 @@ public:
     virtual ~DataInformationWithChildren();
 
     virtual QVariant data(int, int) const;
+    virtual QVariant childData(int row, int column, int role) const;
 
     virtual int size() const;
     /** this is valid for structs and arrays, union has an own implementation */

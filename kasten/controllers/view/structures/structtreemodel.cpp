@@ -24,6 +24,7 @@
 #include "structtool.h"
 #include "datatypes/datainformationwithchildren.h"
 #include "datatypes/topleveldatainformation.h"
+#include "datatypes/abstractarraydatainformation.h"
 
 namespace Kasten
 {
@@ -105,6 +106,17 @@ QVariant StructTreeModel::data(const QModelIndex& index, int role) const
         else
             return QVariant();
     }
+    
+    //const QModelIndex& parent = index.parent();
+    //if (parent.isValid())
+    //{
+    const AbstractArrayDataInformation* array =
+        dynamic_cast<const AbstractArrayDataInformation*>(item->parent());
+    if (array)
+    {
+        return array->childData(index.row(), column, role);
+    }
+    //}
     else
         return item->data(column, role);
 }
