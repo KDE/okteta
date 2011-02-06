@@ -37,7 +37,7 @@ QVariant PrimitiveDataInformation::data(int column, int role) const
             AbstractArrayDataInformation* par =
                     dynamic_cast<AbstractArrayDataInformation*> (parent());
             if (par)
-                return QString("[%1]").arg(mIndex);
+                return QString("[%1]").arg(row());
             return name();
         }
         else if (column == ColumnType)

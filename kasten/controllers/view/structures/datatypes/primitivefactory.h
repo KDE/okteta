@@ -47,9 +47,9 @@ class PrimitiveFactory
 {
 public:
     static PrimitiveDataInformation* newInstance(QString name,
-            PrimitiveDataType type, int index = -1, DataInformation* parent = NULL);
+            PrimitiveDataType type, DataInformation* parent = NULL);
     static PrimitiveDataInformation* newInstance(QString name,
-            QString typeString, int index = -1, DataInformation* parent = NULL);
+            QString typeString, DataInformation* parent = NULL);
     static PrimitiveDataType typeStringToType(QString& typeStr);
 
 };

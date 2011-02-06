@@ -62,7 +62,7 @@ PrimitiveDataType PrimitiveFactory::typeStringToType(QString& string)
 }
 
 PrimitiveDataInformation* PrimitiveFactory::newInstance(QString name,
-        PrimitiveDataType type, int index, DataInformation* parent)
+        PrimitiveDataType type, DataInformation* parent)
 {
     switch (type)
     {
@@ -101,10 +101,10 @@ PrimitiveDataInformation* PrimitiveFactory::newInstance(QString name,
     }
 }
 PrimitiveDataInformation* PrimitiveFactory::newInstance(QString name,
-        QString typeName, int index, DataInformation* parent)
+        QString typeName, DataInformation* parent)
 {
     PrimitiveDataType type = typeStringToType(typeName);
     if (type == Type_NotPrimitive)
         return NULL; //invalid type
-    return newInstance(name, type, index, parent);
+    return newInstance(name, type, parent);
 }

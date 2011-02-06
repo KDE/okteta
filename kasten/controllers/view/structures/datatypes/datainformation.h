@@ -196,7 +196,6 @@ Q_SIGNALS:
     /** items are inserted before @p startIndex */
     void childrenRemoved(const QObject* sender, uint startIndex, uint endIndex);
 protected:
-    int mIndex;
     bool mValidationSuccessful :1;
     bool mHasBeenValidated :1;
     bool mWasAbleToRead :1;

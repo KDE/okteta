@@ -165,9 +165,10 @@ QVariant DataInformationWithChildren::data(int column, int role) const
     {
         if (column == ColumnName)
         {
+            //TODO rather add method childData(int row, int column, int role)
             if (dynamic_cast<AbstractArrayDataInformation*> (parent()))
             {
-                return QString("[%1]").arg(mIndex);
+                return QString("[%1]").arg(row());
             }
             return name();
         }
