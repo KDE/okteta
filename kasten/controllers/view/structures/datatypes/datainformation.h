@@ -42,6 +42,7 @@
 //Qt
 #include <QtScript/QScriptValue>
 #include <QtScript/QScriptable>
+#include "topleveldatainformation.h"
 
 #define DATAINFORMATION_CLONE(type) virtual inline DataInformation* clone() const {\
         return new type##DataInformation(*this); \
@@ -93,7 +94,7 @@ public:
 
     //for the model:
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
-    int row() const;
+    int row();
     /** get the necessary data (for the model) */
     virtual QVariant data(int column, int role) const
     = 0;
@@ -180,6 +181,10 @@ protected:
      *  @return 0 unless this DataInformation has children
      */
     virtual quint64 offset(unsigned int index) const = 0;
+    /**
+     * Find the index of a DataInformation in this object, needed to calculate the row
+     */ 
+    virtual int indexOf(DataInformation* const data) const;
 Q_SIGNALS:
     void dataChanged();
     // sender as parameter, so no cast is needed, also makes it safer since QObject::sender() may be risky
@@ -201,11 +206,16 @@ protected:
 };
 
 //inline functions
-inline int DataInformation::row() const
+inline int DataInformation::row()
 {
-    //if (mIndex == -1)
-    //    kWarning("DataInformation::row(): mIndex == -1");
-    return mIndex;
+    Q_CHECK_PTR(parent());
+    TopLevelDataInformation* top = dynamic_cast<TopLevelDataInformation*>(parent());
+    if (top) {
+        return top->indexOf(this);
+    }
+    else {
+        return static_cast<DataInformation*>(parent())->indexOf(this);
+    }
 }
 
 inline Qt::ItemFlags DataInformation::flags(int column, bool fileLoaded) const

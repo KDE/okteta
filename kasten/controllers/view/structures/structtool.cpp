@@ -224,7 +224,7 @@ void StructTool::addChildItem(TopLevelDataInformation* child)
 {
     if (child)
     {
-        child->actualDataInformation()->setIndex(mData.size());
+        child->setIndex(mData.size());
         child->setParent(this);
         mData.append(child);
         connect(child->actualDataInformation(), SIGNAL(dataChanged()), this,

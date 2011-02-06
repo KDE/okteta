@@ -21,6 +21,7 @@
  */
 
 #include "topleveldatainformation.h"
+#include "datainformation.h"
 #include "datainformationwithchildren.h"
 #include "../script/scripthandler.h"
 #include "primitivefactory.h"
@@ -33,7 +34,7 @@
 TopLevelDataInformation::TopLevelDataInformation(DataInformation* data,
         QFileInfo structureFile, bool dynamic, QString name) :
     QObject(), mData(data), mScriptHandler(NULL), mStructureFile(structureFile),
-            mWasAbleToParse(true)
+            mWasAbleToParse(true), mIndex(-1)
 {
 
     if (dynamic)
@@ -57,7 +58,7 @@ TopLevelDataInformation::TopLevelDataInformation(DataInformation* data,
 }
 TopLevelDataInformation::TopLevelDataInformation(const TopLevelDataInformation& d) :
     QObject(), mData(d.mData->clone()), mScriptHandler(d.mScriptHandler),
-            mStructureFile(d.mStructureFile), mWasAbleToParse(d.mWasAbleToParse)
+            mStructureFile(d.mStructureFile), mWasAbleToParse(d.mWasAbleToParse), mIndex(-1)
 {
     setObjectName(mData->name());
     mData->setParent(this);
@@ -220,5 +221,11 @@ quint64 TopLevelDataInformation::lockPositionFor(const Okteta::AbstractByteArray
     if (!mLockedPositions.contains(model))
         return 0; //XXX nullptr instead??
     return *mLockedPositions.value(model);
+}
+
+int TopLevelDataInformation::indexOf(const DataInformation* const data) const
+{
+    Q_ASSERT(data == mData);
+    return mIndex;
 }
 

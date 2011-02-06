@@ -170,3 +170,9 @@ void DataInformation::beginRead()
     mWasAbleToRead = false;
 }
 
+int DataInformation::indexOf(DataInformation* const data) const
+{
+    Q_UNUSED(data)
+    Q_ASSERT(false); //this should never happen!
+    return 0;
+}

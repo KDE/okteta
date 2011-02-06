@@ -365,3 +365,8 @@ void DataInformationWithChildren::setChildren(QScriptValue children)
     delete convertedVal;
 }
 
+int DataInformationWithChildren::indexOf(DataInformation* const data) const
+{
+    return mChildren.indexOf(data);
+}
+

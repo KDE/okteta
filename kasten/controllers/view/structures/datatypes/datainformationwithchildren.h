@@ -34,6 +34,7 @@ protected:
     QList<DataInformation*> mChildren;
     explicit DataInformationWithChildren(const DataInformationWithChildren& d);
     void appendChild(DataInformation* child); //not part of public API (no adding to array)
+    virtual int indexOf(DataInformation*const data) const;
 public:
 
     QList<DataInformation*> children() const;

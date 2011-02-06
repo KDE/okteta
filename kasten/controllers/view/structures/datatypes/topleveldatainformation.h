@@ -22,8 +22,6 @@
 #ifndef TOPLEVELDATAINFORMATION_H_
 #define TOPLEVELDATAINFORMATION_H_
 
-#include "datainformation.h"
-
 #include <QtCore/QMap>
 #include <QtCore/QFileInfo>
 #include <QtCore/QExplicitlySharedDataPointer>
@@ -37,6 +35,8 @@ class AbstractByteArrayModel;
 
 class QScriptEngine;
 class ScriptHandler;
+class DataInformation;
+
 class TopLevelDataInformation: public QObject
 {
 Q_OBJECT
@@ -68,19 +68,19 @@ public:
 
     DataInformation* actualDataInformation() const;
     bool wasAbleToParse() const;
-    void lockPositionToOffset(Okteta::Address offset,
-            const Okteta::AbstractByteArrayModel* model);
+    void lockPositionToOffset(Okteta::Address offset, const Okteta::AbstractByteArrayModel* model);
     void unlockPosition(const Okteta::AbstractByteArrayModel* model);
     bool isLockedFor(const Okteta::AbstractByteArrayModel* model) const;
     quint64 lockPositionFor(const Okteta::AbstractByteArrayModel* model) const;
+    int indexOf(const DataInformation* const data) const;
+    int index() const;
+    void setIndex(int newIndex);
 private:
     bool isReadingNecessary(const Okteta::ArrayChangeMetricsList& changesList,
             Okteta::Address address);
 public Q_SLOTS:
     void resetValidationState();
     void removeByteArrayModelFromList(QObject* model);
-    //the new methods of topLevelDataInformation
-
 private:
     DataInformation* mData;
     QExplicitlySharedDataPointer<ScriptHandler> mScriptHandler;
@@ -92,6 +92,7 @@ private:
      */
     QMap<const Okteta::AbstractByteArrayModel*, quint64*> mLockedPositions;
     bool mWasAbleToParse :1;
+    int mIndex;
 };
 
 inline DataInformation* TopLevelDataInformation::actualDataInformation() const
@@ -108,4 +109,15 @@ inline TopLevelDataInformation* TopLevelDataInformation::clone() const
 {
     return new TopLevelDataInformation(*this);
 }
+
+inline int TopLevelDataInformation::index() const
+{
+    return mIndex;
+}
+
+inline void TopLevelDataInformation::setIndex(int newIndex)
+{
+    mIndex = newIndex;
+}
+
 #endif /* TOPLEVELDATAINFORMATION_H_ */

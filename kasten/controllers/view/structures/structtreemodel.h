@@ -49,10 +49,7 @@ public:
     QModelIndex parent(const QModelIndex& index) const;
     int rowCount(const QModelIndex& parent = QModelIndex()) const;
     int columnCount(const QModelIndex& parent = QModelIndex()) const;
-    void addChild(DataInformation*);
-    bool
-            setData(const QModelIndex& index, const QVariant& value, int role =
-                    Qt::EditRole);
+    bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
     virtual bool hasChildren(const QModelIndex& parent = QModelIndex()) const;
 private:
     QModelIndex findItemInModel(QObject* obj) const;

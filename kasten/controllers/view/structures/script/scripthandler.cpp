@@ -24,6 +24,7 @@
 #include "scriptengineinitializer.h"
 #include "scriptvalueconverter.h"
 #include "scriptutils.h"
+#include "../datatypes/datainformation.h"
 #include "../datatypes/topleveldatainformation.h"
 
 #include <QtGui/QAction>
