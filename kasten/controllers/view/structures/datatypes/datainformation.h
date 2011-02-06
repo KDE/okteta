@@ -94,7 +94,7 @@ public:
 
     //for the model:
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
-    int row();
+    int row() const;
     /** get the necessary data (for the model) */
     virtual QVariant data(int column, int role) const
     = 0;
@@ -184,7 +184,7 @@ protected:
     /**
      * Find the index of a DataInformation in this object, needed to calculate the row
      */ 
-    virtual int indexOf(DataInformation* const data) const;
+    virtual int indexOf(const DataInformation* const data) const;
 Q_SIGNALS:
     void dataChanged();
     // sender as parameter, so no cast is needed, also makes it safer since QObject::sender() may be risky
@@ -206,15 +206,15 @@ protected:
 };
 
 //inline functions
-inline int DataInformation::row()
+inline int DataInformation::row() const
 {
     Q_CHECK_PTR(parent());
-    TopLevelDataInformation* top = dynamic_cast<TopLevelDataInformation*>(parent());
+    const TopLevelDataInformation* top = dynamic_cast<const TopLevelDataInformation*>(parent());
     if (top) {
         return top->indexOf(this);
     }
     else {
-        return static_cast<DataInformation*>(parent())->indexOf(this);
+        return static_cast<const DataInformation*>(parent())->indexOf(this);
     }
 }
 
