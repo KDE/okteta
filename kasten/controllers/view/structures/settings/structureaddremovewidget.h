@@ -37,7 +37,7 @@ class StructureAddRemoveWidget: public QWidget
 {
 Q_OBJECT
 
-    Q_PROPERTY(QStringList values READ values() USER true)
+    Q_PROPERTY(QStringList values READ values USER true)
     QLabel* mTree1Label;
     QTreeWidget* mTreeAvailable;
 

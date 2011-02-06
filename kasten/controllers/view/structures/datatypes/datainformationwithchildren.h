@@ -28,8 +28,8 @@
 class DataInformationWithChildren: public DataInformation
 {
 Q_OBJECT
-    Q_PROPERTY(int childCount READ childCount())
-    Q_PROPERTY(QScriptValue children READ childrenAsScriptValue())
+    Q_PROPERTY(int childCount READ childCount)
+    Q_PROPERTY(QScriptValue children READ childrenAsScriptValue)
 protected:
     QList<DataInformation*> mChildren;
     explicit DataInformationWithChildren(const DataInformationWithChildren& d);

@@ -30,7 +30,7 @@ class PrimitiveDataInformation: public DataInformation
 {
 Q_OBJECT
 
-Q_PROPERTY(QScriptValue value READ scriptValue())
+Q_PROPERTY(QScriptValue value READ scriptValue)
 
 public:
     explicit PrimitiveDataInformation(QString name, DataInformation* parent = NULL);

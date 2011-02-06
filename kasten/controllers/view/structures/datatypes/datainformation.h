@@ -64,9 +64,9 @@ class DataInformation: public QObject, public QScriptable
 Q_OBJECT
 public:
     //    Q_PROPERTY(bool hasBeenValidated READ hasBeenValidated() WRITE setHasBeenValidated)
-Q_PROPERTY(bool valid READ validationSuccessful() WRITE setValidationSuccessful)
-Q_PROPERTY(bool wasAbleToRead READ wasAbleToRead())
-Q_PROPERTY(QString validationError READ validationError() WRITE setValidationError)
+Q_PROPERTY(bool valid READ validationSuccessful WRITE setValidationSuccessful)
+Q_PROPERTY(bool wasAbleToRead READ wasAbleToRead)
+Q_PROPERTY(QString validationError READ validationError WRITE setValidationError)
 Q_PROPERTY(QObject* parent READ parent)
 
 protected:
