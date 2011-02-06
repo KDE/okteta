@@ -27,7 +27,7 @@ QString CharDataInformation::valueString() const
     if (!mWasAbleToRead)
         return i18nc("invalid value (out of range)", "<invalid>");
     //TODO char codec
-    QChar qchar(mValue, 0);
+    QChar qchar = QChar::fromLatin1(mValue);
     qchar = qchar.isPrint() ? qchar : QChar(QChar::ReplacementCharacter);
     QString charStr = '\'' + qchar + '\'';
     if (Kasten::StructViewPreferences::showCharNumericalValue())
