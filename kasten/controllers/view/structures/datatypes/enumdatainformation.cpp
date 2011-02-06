@@ -28,10 +28,9 @@
 #include <QtScript/QScriptEngine>
 #include <KDebug>
 
-EnumDataInformation::EnumDataInformation(QString name,
-        PrimitiveDataInformation* type, EnumDefinition::Ptr enumDef, int index,
-        DataInformation* parent) :
-    PrimitiveDataInformation(name, index, parent), mEnum(enumDef), mValue(type)
+EnumDataInformation::EnumDataInformation(QString name, PrimitiveDataInformation* type,
+            EnumDefinition::Ptr enumDef, DataInformation* parent) :
+    PrimitiveDataInformation(name, parent), mEnum(enumDef), mValue(type)
 {
     Q_CHECK_PTR(type);
     if (enumDef->type() != type->type())

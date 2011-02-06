@@ -155,13 +155,13 @@ AbstractBitfieldDataInformation* ScriptValueConverter::toBitfield(
     }
     QString bitfieldType = value.property("bitfieldType").toString();
     if (bitfieldType.toLower() == QLatin1String("bool"))
-        return new BoolBitfieldDataInformation(name, Type_Bitfield, width);
+        return new BoolBitfieldDataInformation(name, width);
 
     else if (bitfieldType.toLower() == QLatin1String("bool"))
-        return new BoolBitfieldDataInformation(name, Type_Bitfield, width);
+        return new BoolBitfieldDataInformation(name, width);
 
     else if (bitfieldType.toLower() == QLatin1String("bool"))
-        return new BoolBitfieldDataInformation(name, Type_Bitfield, width);
+        return new BoolBitfieldDataInformation(name, width);
 
     ScriptUtils::object()->logScriptError("invalid bitfield type specified:"
             + bitfieldType);

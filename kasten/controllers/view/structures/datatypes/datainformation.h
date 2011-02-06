@@ -73,7 +73,7 @@ protected:
     DataInformation(const DataInformation&);
 public:
     virtual DataInformation* clone() const = 0;
-    DataInformation(const QString& name, int index, DataInformation* parent = NULL);
+    DataInformation(const QString& name, DataInformation* parent = NULL);
     virtual ~DataInformation();
 
     enum Columns
@@ -89,7 +89,6 @@ public:
     virtual bool hasChildren() const;
     virtual unsigned int childCount() const;
     virtual DataInformation* childAt(unsigned int) const;
-    virtual void setIndex(int newIndex);
     virtual quint64 positionRelativeToParent() const;
 
     //for the model:

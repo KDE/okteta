@@ -53,10 +53,8 @@ qint64 DynamicLengthArrayDataInformation::readData(Okteta::AbstractByteArrayMode
     return readBits;
 }
 DynamicLengthArrayDataInformation::DynamicLengthArrayDataInformation(QString name,
-        const QString& lengthStr, const DataInformation& children, int index,
-        DataInformation* parent) :
-    AbstractArrayDataInformation(name, children, 0, index, parent), mLengthString(
-            lengthStr)
+        const QString& lengthStr, const DataInformation& children, DataInformation* parent) :
+    AbstractArrayDataInformation(name, children, 0, parent), mLengthString(lengthStr)
 {
     resizeChildren();
 }

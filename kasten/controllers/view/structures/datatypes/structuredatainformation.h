@@ -31,8 +31,7 @@ Q_OBJECT
 protected:
     explicit StructureDataInformation(const StructureDataInformation& d);
 public:
-    explicit StructureDataInformation(QString name, int index = -1,
-            DataInformation* parent = NULL);
+    explicit StructureDataInformation(QString name, DataInformation* parent = NULL);
     virtual ~StructureDataInformation();
     DATAINFORMATION_CLONE(Structure)
 public Q_SLOTS:

@@ -29,8 +29,8 @@ class AbstractBitfieldDataInformation: public PrimitiveDataInformation
 Q_OBJECT
 Q_PROPERTY(uint width READ width WRITE setWidth)
 public:
-    AbstractBitfieldDataInformation(QString name, uint width, int index = -1, DataInformation* parent = 0) :
-        PrimitiveDataInformation(name, index, parent), mWidth(width)
+    AbstractBitfieldDataInformation(QString name, uint width, DataInformation* parent = 0) :
+        PrimitiveDataInformation(name, parent), mWidth(width)
     {
     }
     virtual ~AbstractBitfieldDataInformation()

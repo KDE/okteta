@@ -108,9 +108,8 @@ UnionDataInformation::~UnionDataInformation()
 {
 }
 
-UnionDataInformation::UnionDataInformation(QString name, int index,
-        DataInformation* parent) :
-    DataInformationWithChildren(name, index, parent)
+UnionDataInformation::UnionDataInformation(QString name, DataInformation* parent) :
+    DataInformationWithChildren(name, parent)
 {
 }
 

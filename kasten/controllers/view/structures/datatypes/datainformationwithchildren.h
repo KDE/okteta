@@ -38,8 +38,7 @@ protected:
 public:
 
     QList<DataInformation*> children() const;
-    explicit DataInformationWithChildren(QString& name, int index = -1,
-            DataInformation* parent = NULL);
+    explicit DataInformationWithChildren(QString& name, DataInformation* parent = NULL);
     virtual ~DataInformationWithChildren();
 
     virtual QVariant data(int, int) const;

@@ -39,8 +39,7 @@ public:
      *  length should be > 0
      */
     DynamicLengthArrayDataInformation(QString name, const QString& lengthStr,
-            const DataInformation& childItem, int index = -1,
-            DataInformation* parent = NULL);
+            const DataInformation& childItem, DataInformation* parent = NULL);
     virtual ~DynamicLengthArrayDataInformation();
     DATAINFORMATION_CLONE(DynamicLengthArray)
 

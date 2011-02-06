@@ -41,8 +41,7 @@ public:
      *  length should be > 0
      */
     explicit AbstractArrayDataInformation(QString name,
-            const DataInformation& childType, uint length, int index = -1,
-            DataInformation* parent = NULL);
+            const DataInformation& childType, uint length, DataInformation* parent = NULL);
     virtual ~AbstractArrayDataInformation();
 public:
     virtual QString typeName() const;

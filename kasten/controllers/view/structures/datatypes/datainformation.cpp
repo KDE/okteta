@@ -28,16 +28,15 @@
 #include "staticlengtharraydatainformation.h"
 #include "topleveldatainformation.h"
 
-DataInformation::DataInformation(const QString& name, int index,
-        DataInformation* parent) :
-    QObject(parent), mIndex(index), mValidationSuccessful(false), mHasBeenValidated(
+DataInformation::DataInformation(const QString& name, DataInformation* parent) :
+    QObject(parent), mValidationSuccessful(false), mHasBeenValidated(
             false), mWasAbleToRead(false), mByteOrder(EndianessInherit), mAdditionalData(NULL)
 {
     setObjectName(name);
 }
 
 DataInformation::DataInformation(const DataInformation& d) :
-    QObject(NULL), QScriptable(), mIndex(d.mIndex), mValidationSuccessful(d.mValidationSuccessful),
+    QObject(NULL), QScriptable(), mValidationSuccessful(d.mValidationSuccessful),
             mHasBeenValidated(d.mHasBeenValidated), mWasAbleToRead(d.mWasAbleToRead), 
             mByteOrder(d.mByteOrder), mAdditionalData(NULL)            
 {
@@ -78,12 +77,8 @@ quint64 DataInformation::positionRelativeToParent() const
     {
         return 0;
     }
-    return par->offset(this->mIndex) + par->positionRelativeToParent();
-}
-
-void DataInformation::setIndex(int newIndex)
-{
-    mIndex = newIndex;
+    //TODO add a method offset(const DataInformation* const) for efficiency
+    return par->offset(row()) + par->positionRelativeToParent();
 }
 
 TopLevelDataInformation* DataInformation::topLevelDataInformation() const

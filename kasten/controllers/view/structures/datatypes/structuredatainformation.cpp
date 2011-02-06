@@ -45,9 +45,8 @@ StructureDataInformation::~StructureDataInformation()
 {
 }
 
-StructureDataInformation::StructureDataInformation(QString name, int index,
-        DataInformation* parent) :
-    DataInformationWithChildren(name, index, parent)
+StructureDataInformation::StructureDataInformation(QString name, DataInformation* parent) :
+    DataInformationWithChildren(name, parent)
 {
 }
 

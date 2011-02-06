@@ -30,8 +30,7 @@ Q_OBJECT
 public:
     /** this object takes ownership of @p type */
     EnumDataInformation(QString name, PrimitiveDataInformation* type,
-            EnumDefinition::Ptr enumDef, int index = -1, DataInformation* parent =
-                    NULL);
+            EnumDefinition::Ptr enumDef, DataInformation* parent = 0);
     EnumDataInformation(const EnumDataInformation& e);
     DATAINFORMATION_CLONE(Enum)
     virtual ~EnumDataInformation();

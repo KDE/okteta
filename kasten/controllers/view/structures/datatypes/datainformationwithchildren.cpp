@@ -32,7 +32,6 @@ void DataInformationWithChildren::appendChild(DataInformation* child)
 {
     if (child != NULL)
     {
-        child->setIndex(mChildren.size());
         child->setParent(this);
         mChildren.append(child);
         connect(child, SIGNAL(dataChanged()), this, SIGNAL(dataChanged()));
@@ -99,9 +98,8 @@ DataInformationWithChildren::~DataInformationWithChildren()
     //    qDeleteAll(mChildren); // no need since this is set to their parent
 }
 
-DataInformationWithChildren::DataInformationWithChildren(QString& name, int index,
-        DataInformation* parent) :
-    DataInformation(name, index, parent)
+DataInformationWithChildren::DataInformationWithChildren(QString& name, DataInformation* parent) :
+    DataInformation(name, parent)
 {
 }
 

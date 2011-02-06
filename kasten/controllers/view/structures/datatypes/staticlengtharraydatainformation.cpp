@@ -22,9 +22,8 @@
 #include "staticlengtharraydatainformation.h"
 
 StaticLengthArrayDataInformation::StaticLengthArrayDataInformation(QString name,
-        unsigned int length, const DataInformation& children, int index,
-        DataInformation* parent) :
-    AbstractArrayDataInformation(name, children, length, index, parent)
+        unsigned int length, const DataInformation& children, DataInformation* parent) :
+    AbstractArrayDataInformation(name, children, length, parent)
 {
 }
 

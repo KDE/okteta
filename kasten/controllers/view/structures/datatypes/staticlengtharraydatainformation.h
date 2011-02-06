@@ -35,8 +35,7 @@ public:
      *  length should be > 0
      */
     StaticLengthArrayDataInformation(QString name, unsigned int length,
-            const DataInformation& childItem, int index = -1,
-            DataInformation* parent = NULL);
+            const DataInformation& childItem, DataInformation* parent = 0);
     virtual ~StaticLengthArrayDataInformation();
     DATAINFORMATION_CLONE(StaticLengthArray)
 };

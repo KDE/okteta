@@ -242,16 +242,16 @@ AbstractBitfieldDataInformation* OsdParser::bitfieldFromXML(
     }
     AbstractBitfieldDataInformation* bitf = 0;
     if (typeStr == "bool")
-        bitf = new BoolBitfieldDataInformation(name, Type_Bitfield, width);
+        bitf = new BoolBitfieldDataInformation(name, width);
     else if (typeStr == "unsigned")
-        bitf = new UnsignedBitfieldDataInformation(name, Type_Bitfield, width);
+        bitf = new UnsignedBitfieldDataInformation(name, width);
     else if (typeStr == "signed")
-        bitf = new SignedBitfieldDataInformation(name, Type_Bitfield, width);
+        bitf = new SignedBitfieldDataInformation(name, width);
     else
     {
         kWarning() << "no (or invalid) bitfield type attribute defined:" << typeStr
              << " defaulting to unsigned";
-        bitf = new UnsignedBitfieldDataInformation(name, Type_Bitfield, width);
+        bitf = new UnsignedBitfieldDataInformation(name, width);
     }
     return bitf;
 }

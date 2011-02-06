@@ -138,9 +138,8 @@ qint64 PrimitiveDataInformation::readData(Okteta::AbstractByteArrayModel *input,
     return size();
 }
 
-PrimitiveDataInformation::PrimitiveDataInformation(QString name,
-        int index, DataInformation* parent) :
-    DataInformation(name, index, parent)
+PrimitiveDataInformation::PrimitiveDataInformation(QString name, DataInformation* parent) :
+    DataInformation(name, parent)
 {
 }
 

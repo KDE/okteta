@@ -33,7 +33,7 @@ Q_OBJECT
 Q_PROPERTY(QScriptValue value READ scriptValue())
 
 public:
-    explicit PrimitiveDataInformation(QString name, int index = -1, DataInformation* parent = NULL);
+    explicit PrimitiveDataInformation(QString name, DataInformation* parent = NULL);
     virtual ~PrimitiveDataInformation();
     virtual DataInformation* clone() const = 0;
     virtual int size() const = 0;
@@ -68,8 +68,8 @@ inline quint64 PrimitiveDataInformation::offset(unsigned int index) const
 }
 
 #define PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(type,superType) public: \
-        type##DataInformation(QString name, int index = -1, DataInformation* parent = NULL) :\
-                superType##DataInformation(name, index, parent), mValue(0) {}\
+        type##DataInformation(QString name, DataInformation* parent = NULL) :\
+                superType##DataInformation(name, parent), mValue(0) {}\
         virtual ~type##DataInformation() {} \
     protected: \
         type##DataInformation(const type##DataInformation& d) : \
@@ -77,8 +77,8 @@ inline quint64 PrimitiveDataInformation::offset(unsigned int index) const
     private:
         
 #define NO_VALUE_PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(type,superType) public: \
-        type##DataInformation(QString name, int index = -1, DataInformation* parent = NULL) :\
-                superType##DataInformation(name, index, parent) {}\
+        type##DataInformation(QString name, DataInformation* parent = NULL) :\
+                superType##DataInformation(name, parent) {}\
         virtual ~type##DataInformation() {} \
     protected: \
         type##DataInformation(const type##DataInformation& d) : \

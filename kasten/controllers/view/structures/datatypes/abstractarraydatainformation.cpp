@@ -43,9 +43,8 @@ QString AbstractArrayDataInformation::typeName() const
 }
 
 AbstractArrayDataInformation::AbstractArrayDataInformation(QString name,
-        const DataInformation& childType, uint length, int index,
-        DataInformation* parent) :
-    DataInformationWithChildren(name, index, parent), mChildType(0)
+        const DataInformation& childType, uint length, DataInformation* parent) :
+    DataInformationWithChildren(name, parent), mChildType(0)
 {
     mChildType = childType.clone();
     mChildType->setParent(this);
