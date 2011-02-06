@@ -46,19 +46,18 @@ public:
 public:
     virtual QString typeName() const;
     virtual bool isDynamicArray() const;
-    int length();
+    int length() const;
     const DataInformation* newChildType() const;
 
-    Q_INVOKABLE
-    QScriptValue setArrayLength(int newLength);Q_INVOKABLE
-    QScriptValue setArrayType(QScriptValue type);
+    Q_INVOKABLE QScriptValue setArrayLength(int newLength);
+    Q_INVOKABLE QScriptValue setArrayType(QScriptValue type);
     QScriptValue childType() const;
 
 protected:
     DataInformation* mChildType;
 };
 
-inline int AbstractArrayDataInformation::length()
+inline int AbstractArrayDataInformation::length() const
 {
     return childCount();
 }
