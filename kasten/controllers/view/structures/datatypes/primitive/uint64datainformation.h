@@ -19,38 +19,44 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "structuredatainformation.h"
+#ifndef UINT64DATAINFORMATION_H_
+#define UINT64DATAINFORMATION_H_
 
-QString StructureDataInformation::typeName() const
+#include "unsignedprimitivedatainformation.h"
+#include "../poddecoder/typeeditors/uint64editor.h"
+
+class UInt64DataInformation: public UnsignedPrimitiveDataInformation
 {
-    return i18nc("data type in C/C++", "struct");
+Q_OBJECT
+PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(UInt64,UnsignedPrimitive)
+public:
+    DATAINFORMATION_CLONE(UInt64)
+
+    virtual int size() const;
+    virtual QString typeName() const;
+    virtual QString valueString() const;
+    virtual PrimitiveDataType type() const;
+    virtual AllPrimitiveTypes value() const;
+    virtual void setValue(AllPrimitiveTypes newVal);
+    
+    virtual QWidget* createEditWidget(QWidget* parent) const;
+private:
+    quint64 mValue;
+};
+
+inline PrimitiveDataType UInt64DataInformation::type() const
+{
+    return Type_UInt64;
 }
 
-void StructureDataInformation::addDataTypeToStruct(DataInformation* field)
+inline int UInt64DataInformation::size() const
 {
-    appendChild(field);
+    return 64;
 }
 
-StructureDataInformation& StructureDataInformation::operator<<(
-        DataInformation* field)
+inline QString UInt64DataInformation::typeName() const
 {
-    if (field)
-    {
-        addDataTypeToStruct(field);
-    }
-    return *this;
+    return i18nc("Data type", "unsigned long");
 }
 
-StructureDataInformation::~StructureDataInformation()
-{
-}
-
-StructureDataInformation::StructureDataInformation(QString name, DataInformation* parent) :
-    DataInformationWithChildren(name, parent)
-{
-}
-
-StructureDataInformation::StructureDataInformation(const StructureDataInformation& d) :
-    DataInformationWithChildren(d)
-{
-}
+#endif /* UINT64DATAINFORMATION_H_ */

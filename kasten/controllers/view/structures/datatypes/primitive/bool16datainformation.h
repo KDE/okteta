@@ -19,38 +19,45 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "structuredatainformation.h"
+#ifndef BOOL16DATAINFORMATION_H_
+#define BOOL16DATAINFORMATION_H_
 
-QString StructureDataInformation::typeName() const
+#include "unsignedprimitivedatainformation.h"
+#include "../poddecoder/typeeditors/uint16editor.h"
+
+class Bool16DataInformation: public UnsignedPrimitiveDataInformation
 {
-    return i18nc("data type in C/C++", "struct");
+Q_OBJECT
+PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Bool16,UnsignedPrimitive)
+
+public:
+    DATAINFORMATION_CLONE(Bool16)
+
+    virtual int size() const;
+    virtual QString typeName() const;
+    virtual QString valueString() const;
+    virtual PrimitiveDataType type() const;
+    virtual AllPrimitiveTypes value() const;
+    virtual void setValue(AllPrimitiveTypes newVal);
+    
+    virtual QWidget* createEditWidget(QWidget* parent) const;
+private:
+    quint16 mValue;
+};
+
+inline PrimitiveDataType Bool16DataInformation::type() const
+{
+    return Type_Bool16;
 }
 
-void StructureDataInformation::addDataTypeToStruct(DataInformation* field)
+inline QString Bool16DataInformation::typeName() const
 {
-    appendChild(field);
+    return i18nc("Data type", "bool (2 bytes)");
 }
 
-StructureDataInformation& StructureDataInformation::operator<<(
-        DataInformation* field)
+inline int Bool16DataInformation::size() const
 {
-    if (field)
-    {
-        addDataTypeToStruct(field);
-    }
-    return *this;
+    return 16;
 }
 
-StructureDataInformation::~StructureDataInformation()
-{
-}
-
-StructureDataInformation::StructureDataInformation(QString name, DataInformation* parent) :
-    DataInformationWithChildren(name, parent)
-{
-}
-
-StructureDataInformation::StructureDataInformation(const StructureDataInformation& d) :
-    DataInformationWithChildren(d)
-{
-}
+#endif /* BOOL16DATAINFORMATION_H_ */

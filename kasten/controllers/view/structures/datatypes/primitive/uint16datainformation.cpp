@@ -19,38 +19,34 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "structuredatainformation.h"
+#include "uint16datainformation.h"
 
-QString StructureDataInformation::typeName() const
+QString UInt16DataInformation::valueString() const
 {
-    return i18nc("data type in C/C++", "struct");
+    if (!mWasAbleToRead)
+        return i18nc("invalid value (out of range)", "<invalid>");
+    int base = displayBase();
+    QString num = QString::number(mValue, base);
+    if (base == 16)
+        num = "0x" + num;
+    if (Kasten::StructViewPreferences::localeAwareDecimalFormatting() && base == 10)
+        num = KGlobal::locale()->formatNumber(num, false, 0);
+    return num;
 }
 
-void StructureDataInformation::addDataTypeToStruct(DataInformation* field)
+QWidget* UInt16DataInformation::createEditWidget(QWidget* parent) const
 {
-    appendChild(field);
+    UInt16Editor* ret = new UInt16Editor(parent);
+    ret->setBase(displayBase());
+    return ret;
 }
 
-StructureDataInformation& StructureDataInformation::operator<<(
-        DataInformation* field)
+AllPrimitiveTypes UInt16DataInformation::value() const
 {
-    if (field)
-    {
-        addDataTypeToStruct(field);
-    }
-    return *this;
+    return AllPrimitiveTypes(mValue);
 }
 
-StructureDataInformation::~StructureDataInformation()
+void UInt16DataInformation::setValue(AllPrimitiveTypes newVal)
 {
-}
-
-StructureDataInformation::StructureDataInformation(QString name, DataInformation* parent) :
-    DataInformationWithChildren(name, parent)
-{
-}
-
-StructureDataInformation::StructureDataInformation(const StructureDataInformation& d) :
-    DataInformationWithChildren(d)
-{
+    mValue = newVal.ushortValue;
 }

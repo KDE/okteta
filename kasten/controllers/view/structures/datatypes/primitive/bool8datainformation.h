@@ -19,38 +19,44 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "structuredatainformation.h"
+#ifndef BOOL8DATAINFORMATION_H_
+#define BOOL8DATAINFORMATION_H_
 
-QString StructureDataInformation::typeName() const
+#include "unsignedprimitivedatainformation.h"
+#include "../poddecoder/typeeditors/uint8editor.h"
+
+class Bool8DataInformation: public UnsignedPrimitiveDataInformation
 {
-    return i18nc("data type in C/C++", "struct");
+Q_OBJECT
+PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Bool8,UnsignedPrimitive)
+public:
+    DATAINFORMATION_CLONE(Bool8)
+
+    virtual int size() const;
+    virtual QString typeName() const;
+    virtual QString valueString() const;
+    virtual PrimitiveDataType type() const;
+    virtual AllPrimitiveTypes value() const;
+    virtual void setValue(AllPrimitiveTypes newVal);
+    
+    QWidget* createEditWidget(QWidget* parent) const;
+private:
+    quint8 mValue;
+};
+
+inline PrimitiveDataType Bool8DataInformation::type() const
+{
+    return Type_Bool8;
 }
 
-void StructureDataInformation::addDataTypeToStruct(DataInformation* field)
+inline int Bool8DataInformation::size() const
 {
-    appendChild(field);
+    return 8;
 }
 
-StructureDataInformation& StructureDataInformation::operator<<(
-        DataInformation* field)
+inline QString Bool8DataInformation::typeName() const
 {
-    if (field)
-    {
-        addDataTypeToStruct(field);
-    }
-    return *this;
+    return i18nc("Data type", "bool (1 byte)");
 }
 
-StructureDataInformation::~StructureDataInformation()
-{
-}
-
-StructureDataInformation::StructureDataInformation(QString name, DataInformation* parent) :
-    DataInformationWithChildren(name, parent)
-{
-}
-
-StructureDataInformation::StructureDataInformation(const StructureDataInformation& d) :
-    DataInformationWithChildren(d)
-{
-}
+#endif /* BOOL8DATAINFORMATION_H_ */

@@ -27,9 +27,9 @@
 #include "../datatypes/uniondatainformation.h"
 #include "../datatypes/structuredatainformation.h"
 #include "../datatypes/enumdatainformation.h"
-#include "../datatypes/boolbitfielddatainformation.h"
-#include "../datatypes/unsignedbitfielddatainformation.h"
-#include "../datatypes/signedbitfielddatainformation.h"
+#include "../datatypes/primitive/bitfield/boolbitfielddatainformation.h"
+#include "../datatypes/primitive/bitfield/unsignedbitfielddatainformation.h"
+#include "../datatypes/primitive/bitfield/signedbitfielddatainformation.h"
 #include "../datatypes/topleveldatainformation.h"
 
 #include "../datatypes/primitivefactory.h"

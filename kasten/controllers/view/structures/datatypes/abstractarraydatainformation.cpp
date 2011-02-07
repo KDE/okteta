@@ -20,7 +20,6 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "abstractarraydatainformation.h"
-#include "primitivedatainformation.h"
 #include "primitivefactory.h"
 #include "../script/scriptvalueconverter.h"
 

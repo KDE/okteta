@@ -21,7 +21,7 @@
  */
 
 #include "dynamiclengtharraydatainformation.h"
-#include "primitivedatainformation.h"
+#include "primitive/primitivedatainformation.h"
 
 void DynamicLengthArrayDataInformation::resizeChildren()
 {

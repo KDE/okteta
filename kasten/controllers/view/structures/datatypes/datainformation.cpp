@@ -20,12 +20,10 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "datainformation.h"
+
 #include <KLocale>
 #include <KLineEdit>
-#include "structuredatainformation.h"
-#include "uniondatainformation.h"
-#include "primitivedatainformation.h"
-#include "topleveldatainformation.h"
+
 
 DataInformation::DataInformation(const QString& name, DataInformation* parent) :
     QObject(parent), mValidationSuccessful(false), mHasBeenValidated(

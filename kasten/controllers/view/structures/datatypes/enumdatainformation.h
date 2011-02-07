@@ -22,8 +22,10 @@
 
 #ifndef ENUMDATAINFORMATION_H_
 #define ENUMDATAINFORMATION_H_
-#include "primitivedatainformation.h"
+
+#include "primitive/primitivedatainformation.h"
 #include "enumdefinition.h"
+
 class EnumDataInformation: public PrimitiveDataInformation
 {
 Q_OBJECT

@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, part of the KDE project.
  *
- *   Copyright 2009, 2010 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2010 Alex Richardson <alex.richardson@gmx.de>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -19,38 +19,41 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "structuredatainformation.h"
+#include "abstractbitfielddatainformation.h"
 
-QString StructureDataInformation::typeName() const
+QString AbstractBitfieldDataInformation::sizeString() const
 {
-    return i18nc("data type in C/C++", "struct");
+    return i18np("%1 bit", "%1 bits", width());
 }
 
-void StructureDataInformation::addDataTypeToStruct(DataInformation* field)
+AllPrimitiveTypes AbstractBitfieldDataInformation::qVariantToAllPrimitiveTypes(
+        const QVariant& value) const
 {
-    appendChild(field);
+    if (!value.isValid())
+        kDebug()
+            << "invalid QVariant passed.";
+
+    //This is fine since all the values are unsigned
+    return AllPrimitiveTypes(value.toULongLong());
 }
 
-StructureDataInformation& StructureDataInformation::operator<<(
-        DataInformation* field)
+QString AbstractBitfieldDataInformation::typeName() const
 {
-    if (field)
-    {
-        addDataTypeToStruct(field);
-    }
-    return *this;
+    return i18ncp("Data type", "bitfield (%1 bit wide)", "bitfield (%1 bits wide)",
+            width());
 }
 
-StructureDataInformation::~StructureDataInformation()
+AllPrimitiveTypes AbstractBitfieldDataInformation::value() const
 {
+    return mValue;
 }
 
-StructureDataInformation::StructureDataInformation(QString name, DataInformation* parent) :
-    DataInformationWithChildren(name, parent)
+void AbstractBitfieldDataInformation::setValue(AllPrimitiveTypes newVal)
 {
+    mValue.ulongValue = newVal.ulongValue & mask();
 }
 
-StructureDataInformation::StructureDataInformation(const StructureDataInformation& d) :
-    DataInformationWithChildren(d)
+PrimitiveDataType AbstractBitfieldDataInformation::type() const
 {
+    return Type_Bitfield;
 }

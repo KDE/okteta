@@ -260,39 +260,39 @@ set( STRUCTVIEW_SRCS
   view/structures/settings/structureaddremovewidget.cpp
   view/structures/settings/structviewdisplaysettingswidget.cpp
   view/structures/settings/structuresmanagerview.cpp
-  view/structures/datatypes/chardatainformation.cpp
+  view/structures/datatypes/additionaldata.cpp
+  view/structures/datatypes/topleveldatainformation.cpp
   view/structures/datatypes/datainformation.cpp
   view/structures/datatypes/datainformationwithchildren.cpp
-  view/structures/datatypes/doubledatainformation.cpp
-  view/structures/datatypes/floatdatainformation.cpp
-  view/structures/datatypes/bool8datainformation.cpp
-  view/structures/datatypes/bool16datainformation.cpp
-  view/structures/datatypes/bool32datainformation.cpp
-  view/structures/datatypes/bool64datainformation.cpp
-  view/structures/datatypes/int8datainformation.cpp
-  view/structures/datatypes/int16datainformation.cpp
-  view/structures/datatypes/int32datainformation.cpp
-  view/structures/datatypes/int64datainformation.cpp
-  view/structures/datatypes/uint8datainformation.cpp
-  view/structures/datatypes/uint16datainformation.cpp
-  view/structures/datatypes/uint32datainformation.cpp
-  view/structures/datatypes/uint64datainformation.cpp
-  view/structures/datatypes/enumdatainformation.cpp
-  view/structures/datatypes/enumdefinition.cpp
-  view/structures/datatypes/primitivedatainformation.cpp
-  view/structures/datatypes/signedprimitivedatainformation.cpp
   view/structures/datatypes/abstractarraydatainformation.cpp
   view/structures/datatypes/staticlengtharraydatainformation.cpp
   view/structures/datatypes/dynamiclengtharraydatainformation.cpp
   view/structures/datatypes/structuredatainformation.cpp
   view/structures/datatypes/uniondatainformation.cpp
-  view/structures/datatypes/unsignedprimitivedatainformation.cpp
-  view/structures/datatypes/abstractbitfielddatainformation.cpp
-  view/structures/datatypes/boolbitfielddatainformation.cpp
-  view/structures/datatypes/signedbitfielddatainformation.cpp
-  view/structures/datatypes/unsignedbitfielddatainformation.cpp
-  view/structures/datatypes/topleveldatainformation.cpp
-  view/structures/datatypes/additionaldata.cpp
+  view/structures/datatypes/primitive/chardatainformation.cpp
+  view/structures/datatypes/primitive/doubledatainformation.cpp
+  view/structures/datatypes/primitive/floatdatainformation.cpp
+  view/structures/datatypes/primitive/bool8datainformation.cpp
+  view/structures/datatypes/primitive/bool16datainformation.cpp
+  view/structures/datatypes/primitive/bool32datainformation.cpp
+  view/structures/datatypes/primitive/bool64datainformation.cpp
+  view/structures/datatypes/primitive/int8datainformation.cpp
+  view/structures/datatypes/primitive/int16datainformation.cpp
+  view/structures/datatypes/primitive/int32datainformation.cpp
+  view/structures/datatypes/primitive/int64datainformation.cpp
+  view/structures/datatypes/primitive/uint8datainformation.cpp
+  view/structures/datatypes/primitive/uint16datainformation.cpp
+  view/structures/datatypes/primitive/uint32datainformation.cpp
+  view/structures/datatypes/primitive/uint64datainformation.cpp
+  view/structures/datatypes/primitive/primitivedatainformation.cpp
+  view/structures/datatypes/primitive/signedprimitivedatainformation.cpp
+  view/structures/datatypes/primitive/unsignedprimitivedatainformation.cpp
+  view/structures/datatypes/primitive/bitfield/abstractbitfielddatainformation.cpp
+  view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp
+  view/structures/datatypes/primitive/bitfield/signedbitfielddatainformation.cpp
+  view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.cpp
+  view/structures/datatypes/enumdatainformation.cpp
+  view/structures/datatypes/enumdefinition.cpp
   view/structures/datatypes/primitivefactory.cpp
   view/structures/script/scriptengineinitializer.cpp
   view/structures/script/scripthandler.cpp

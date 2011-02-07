@@ -19,38 +19,23 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "structuredatainformation.h"
+#ifndef SIGNEDPRIMITIVEDATAINFORMATION_H_
+#define SIGNEDPRIMITIVEDATAINFORMATION_H_
 
-QString StructureDataInformation::typeName() const
-{
-    return i18nc("data type in C/C++", "struct");
-}
+#include "primitivedatainformation.h"
 
-void StructureDataInformation::addDataTypeToStruct(DataInformation* field)
+class SignedPrimitiveDataInformation: public PrimitiveDataInformation
 {
-    appendChild(field);
-}
+Q_OBJECT
+NO_VALUE_PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(SignedPrimitive,Primitive)
+protected:
+    QString correctSignedValue(QString& num, int base) const;
+public:
+    virtual int displayBase() const;
 
-StructureDataInformation& StructureDataInformation::operator<<(
-        DataInformation* field)
-{
-    if (field)
-    {
-        addDataTypeToStruct(field);
-    }
-    return *this;
-}
+    virtual QVariant dataFromWidget(const QWidget* w) const;
+    virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const;
 
-StructureDataInformation::~StructureDataInformation()
-{
-}
+};
 
-StructureDataInformation::StructureDataInformation(QString name, DataInformation* parent) :
-    DataInformationWithChildren(name, parent)
-{
-}
-
-StructureDataInformation::StructureDataInformation(const StructureDataInformation& d) :
-    DataInformationWithChildren(d)
-{
-}
+#endif /* SIGNEDPRIMITIVEDATAINFORMATION_H_ */

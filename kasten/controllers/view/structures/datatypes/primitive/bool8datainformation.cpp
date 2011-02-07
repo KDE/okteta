@@ -19,38 +19,42 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "structuredatainformation.h"
+#include "bool8datainformation.h"
 
-QString StructureDataInformation::typeName() const
+QString Bool8DataInformation::valueString() const
 {
-    return i18nc("data type in C/C++", "struct");
-}
-
-void StructureDataInformation::addDataTypeToStruct(DataInformation* field)
-{
-    appendChild(field);
-}
-
-StructureDataInformation& StructureDataInformation::operator<<(
-        DataInformation* field)
-{
-    if (field)
+    if (!mWasAbleToRead)
+        return i18nc("invalid value (out of range)", "<invalid>");
+    int base = displayBase();
+    if (mValue == 0)
+        return i18nc("boolean value", "false");
+    else if (mValue == 1)
+        return i18nc("boolean value", "true");
+    else
     {
-        addDataTypeToStruct(field);
+        QString num = QString::number(mValue, base);
+        if (base == 16)
+            num = "0x" + num;
+        if (Kasten::StructViewPreferences::localeAwareDecimalFormatting() && base
+                == 10)
+            num = KGlobal::locale()->formatNumber(num, false, 0);
+        return i18nc("boolean value with actual value", "true (%1)", num);
     }
-    return *this;
 }
 
-StructureDataInformation::~StructureDataInformation()
+QWidget* Bool8DataInformation::createEditWidget(QWidget* parent) const
 {
+    UInt8Editor* ret = new UInt8Editor(parent);
+    ret->setBase(displayBase());
+    return ret;
 }
 
-StructureDataInformation::StructureDataInformation(QString name, DataInformation* parent) :
-    DataInformationWithChildren(name, parent)
+AllPrimitiveTypes Bool8DataInformation::value() const
 {
+    return AllPrimitiveTypes(mValue);
 }
 
-StructureDataInformation::StructureDataInformation(const StructureDataInformation& d) :
-    DataInformationWithChildren(d)
+void Bool8DataInformation::setValue(AllPrimitiveTypes newVal)
 {
+    mValue = newVal.ubyteValue;
 }

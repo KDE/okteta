@@ -22,6 +22,22 @@
 
 #include "primitivefactory.h"
 
+#include "primitive/bool8datainformation.h"
+#include "primitive/bool16datainformation.h"
+#include "primitive/bool32datainformation.h"
+#include "primitive/bool64datainformation.h"
+#include "primitive/chardatainformation.h"
+#include "primitive/doubledatainformation.h"
+#include "primitive/floatdatainformation.h"
+#include "primitive/int8datainformation.h"
+#include "primitive/int16datainformation.h"
+#include "primitive/int32datainformation.h"
+#include "primitive/int64datainformation.h"
+#include "primitive/uint8datainformation.h"
+#include "primitive/uint16datainformation.h"
+#include "primitive/uint32datainformation.h"
+#include "primitive/uint64datainformation.h"
+
 PrimitiveDataType PrimitiveFactory::typeStringToType(QString& string)
 {
     QString typeStr = string.trimmed().toLower();

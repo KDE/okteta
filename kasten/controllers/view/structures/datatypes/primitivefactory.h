@@ -24,22 +24,7 @@
 #define PRIMITIVEFACTORY_H_
 
 #include "../allprimitivetypes.h"
-
-#include "bool8datainformation.h"
-#include "bool16datainformation.h"
-#include "bool32datainformation.h"
-#include "bool64datainformation.h"
-#include "chardatainformation.h"
-#include "doubledatainformation.h"
-#include "floatdatainformation.h"
-#include "int8datainformation.h"
-#include "int16datainformation.h"
-#include "int32datainformation.h"
-#include "int64datainformation.h"
-#include "uint8datainformation.h"
-#include "uint16datainformation.h"
-#include "uint32datainformation.h"
-#include "uint64datainformation.h"
+#include "primitive/primitivedatainformation.h"
 
 class PrimitiveDataInformation;
 

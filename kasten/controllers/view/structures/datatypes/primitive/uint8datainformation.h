@@ -19,38 +19,45 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "structuredatainformation.h"
+#ifndef UINT8DATAINFORMATION_H_
+#define UINT8DATAINFORMATION_H_
 
-QString StructureDataInformation::typeName() const
+#include "unsignedprimitivedatainformation.h"
+#include "../poddecoder/typeeditors/uint8editor.h"
+
+class UInt8DataInformation: public UnsignedPrimitiveDataInformation
 {
-    return i18nc("data type in C/C++", "struct");
+Q_OBJECT
+PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(UInt8,UnsignedPrimitive)
+public:
+    DATAINFORMATION_CLONE(UInt8)
+
+    virtual int size() const;
+    virtual QString typeName() const;
+
+    virtual QString valueString() const;
+    virtual PrimitiveDataType type() const;
+    virtual AllPrimitiveTypes value() const;
+    virtual void setValue(AllPrimitiveTypes newVal);
+    
+    virtual QWidget* createEditWidget(QWidget* parent) const;
+private:
+    quint8 mValue;
+};
+
+inline PrimitiveDataType UInt8DataInformation::type() const
+{
+    return Type_UInt8;
 }
 
-void StructureDataInformation::addDataTypeToStruct(DataInformation* field)
+inline int UInt8DataInformation::size() const
 {
-    appendChild(field);
+    return 8;
 }
 
-StructureDataInformation& StructureDataInformation::operator<<(
-        DataInformation* field)
+inline QString UInt8DataInformation::typeName() const
 {
-    if (field)
-    {
-        addDataTypeToStruct(field);
-    }
-    return *this;
+    return i18nc("Data type", "unsigned byte");
 }
 
-StructureDataInformation::~StructureDataInformation()
-{
-}
-
-StructureDataInformation::StructureDataInformation(QString name, DataInformation* parent) :
-    DataInformationWithChildren(name, parent)
-{
-}
-
-StructureDataInformation::StructureDataInformation(const StructureDataInformation& d) :
-    DataInformationWithChildren(d)
-{
-}
+#endif /* UINT8DATAINFORMATION_H_ */
