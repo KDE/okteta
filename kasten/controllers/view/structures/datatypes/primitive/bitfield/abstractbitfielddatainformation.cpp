@@ -57,3 +57,22 @@ PrimitiveDataType AbstractBitfieldDataInformation::type() const
 {
     return Type_Bitfield;
 }
+
+AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(QString name, uint width, DataInformation* parent) :
+    PrimitiveDataInformation(name, parent), mWidth(width)
+{
+    if (width > 64) 
+    {
+        kDebug() << "bitfield (" << name << ") width is greater 64: " << width << " , setting to 64";
+        mWidth = 64;
+    }
+}
+
+AbstractBitfieldDataInformation::~AbstractBitfieldDataInformation()
+{
+}
+
+AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(const AbstractBitfieldDataInformation& d) :
+    PrimitiveDataInformation(d), mWidth(d.mWidth)
+{
+}

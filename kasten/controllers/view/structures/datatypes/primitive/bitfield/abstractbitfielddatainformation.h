@@ -29,18 +29,10 @@ class AbstractBitfieldDataInformation: public PrimitiveDataInformation
 Q_OBJECT
 Q_PROPERTY(uint width READ width WRITE setWidth)
 public:
-    AbstractBitfieldDataInformation(QString name, uint width, DataInformation* parent = 0) :
-        PrimitiveDataInformation(name, parent), mWidth(width)
-    {
-    }
-    virtual ~AbstractBitfieldDataInformation()
-    {
-    }
+    AbstractBitfieldDataInformation(QString name, uint width, DataInformation* parent = 0);
+    virtual ~AbstractBitfieldDataInformation();
 protected:
-    AbstractBitfieldDataInformation(const AbstractBitfieldDataInformation& d) :
-        PrimitiveDataInformation(d), mWidth(d.mWidth)
-    {
-    }
+    AbstractBitfieldDataInformation(const AbstractBitfieldDataInformation& d);
 public:
     uint width() const;
     void setWidth(uint newWidth);
@@ -79,7 +71,7 @@ inline quint64 AbstractBitfieldDataInformation::mask() const
      *     ret |= 1 << i;
      * return ret;
      */
-    return (1 << width()) - 1;
+    return (1 << mWidth) - 1;
 }
 
 inline int AbstractBitfieldDataInformation::size() const
@@ -94,7 +86,7 @@ inline uint AbstractBitfieldDataInformation::width() const
 
 inline void AbstractBitfieldDataInformation::setWidth(uint newWidth)
 {
-    mWidth = newWidth;
+    mWidth = qMin(newWidth, 64u);
 }
 
 #endif /* ABSTRACTBITFIELDDATAINFORMATION_H_ */
