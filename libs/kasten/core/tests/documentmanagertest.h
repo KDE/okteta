@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -41,6 +41,8 @@ class DocumentManagerTest : public QObject
     void checkRemoving( QSignalSpy* changedSpy, Kasten::AbstractDocument* document );
 
   private Q_SLOTS: // test functions
+    void initTestCase();
+
     void testConstructor();
     void testAddRemove();
     void testCanClose();

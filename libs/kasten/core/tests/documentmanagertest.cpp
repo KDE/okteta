@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, part of the KDE project.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -31,24 +31,37 @@
 #include <QtTest/QSignalSpy>
 
 
-Q_DECLARE_METATYPE ( QList<Kasten::AbstractDocument*>  )
+Q_DECLARE_METATYPE( QList<Kasten::AbstractDocument*> )
 
 void DocumentManagerTest::checkAdded( QSignalSpy* changedSpy, Kasten::AbstractDocument* document )
 {
-   QVERIFY( changedSpy->isValid() );
-   QCOMPARE( changedSpy->count(), 1 );
-   QList<QVariant> arguments = changedSpy->takeFirst();
-   QCOMPARE( arguments.at(0).value<QList<Kasten::AbstractDocument*> >().at(0), document );
+    QVERIFY( changedSpy->isValid() );
+    QCOMPARE( changedSpy->count(), 1 );
+    const QList<QVariant> arguments = changedSpy->takeFirst();
+    QCOMPARE( arguments.count(), 1 );
+    const QVariant firstArgument = arguments.at(0);
+    const QList<Kasten::AbstractDocument*> documents =
+        arguments.at(0).value<QList<Kasten::AbstractDocument*> >();
+    QCOMPARE( documents.count(), 1 );
+    QCOMPARE( documents.at(0), document );
 }
 
 void DocumentManagerTest::checkRemoving( QSignalSpy* changedSpy, Kasten::AbstractDocument* document )
 {
-   QVERIFY( changedSpy->isValid() );
-   QCOMPARE( changedSpy->count(), 1 );
-   QList<QVariant> arguments = changedSpy->takeFirst();
-   QCOMPARE( arguments.at(0).value<QList<Kasten::AbstractDocument*> >().at(0), document );
+    QVERIFY( changedSpy->isValid() );
+    QCOMPARE( changedSpy->count(), 1 );
+    const QList<QVariant> arguments = changedSpy->takeFirst();
+    QCOMPARE( arguments.count(), 1 );
+    const QList<Kasten::AbstractDocument*> documents =
+        arguments.at(0).value<QList<Kasten::AbstractDocument*> >();
+    QCOMPARE( documents.count(), 1 );
+    QCOMPARE( documents.at(0), document );
 }
 
+void DocumentManagerTest::initTestCase()
+{
+    qRegisterMetaType<QList<Kasten::AbstractDocument*> >("QList<Kasten::AbstractDocument*>");
+}
 
 void DocumentManagerTest::testConstructor()
 {
@@ -58,8 +71,6 @@ void DocumentManagerTest::testConstructor()
 
 void DocumentManagerTest::testAddRemove()
 {
-    qRegisterMetaType<Kasten::AbstractDocument* >("QList<Kasten::AbstractDocument*>");
-
     Kasten::TestDocument* doc1 = new Kasten::TestDocument();
     Kasten::TestDocument* doc2 = new Kasten::TestDocument();
     Kasten::TestDocument* doc3 = new Kasten::TestDocument();
