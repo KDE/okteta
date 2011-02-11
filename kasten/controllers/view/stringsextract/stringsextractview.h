@@ -34,7 +34,6 @@ class QTreeView;
 class QSortFilterProxyModel;
 class QModelIndex;
 class QSpinBox;
-class QLabel;
 
 
 namespace Kasten
@@ -58,7 +57,6 @@ class StringsExtractView : public QWidget
     virtual bool eventFilter( QObject* object, QEvent* event );
 
   public Q_SLOTS: // gui
-//     void setDirty( bool dirty );
     void onStringDoubleClicked( const QModelIndex &index );
     void onStringSelectionChanged();
     void onGotoButtonClicked();
@@ -79,7 +77,6 @@ class StringsExtractView : public QWidget
     QSortFilterProxyModel *mSortFilterProxyModel;
 
     QTreeView *mContainedStringTableView;
-    QLabel *mDirtyLabel;
     QSpinBox *mMinLengthSpinBox;
     KPushButton *mUpdateButton;
     KPushButton *mCopyButton;

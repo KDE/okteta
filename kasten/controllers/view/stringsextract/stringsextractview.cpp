@@ -164,13 +164,6 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
     onStringSelectionChanged();
 }
 
-#if 0
-void StringsExtractView::setDirty( bool dirty )
-{
-    mUpdateButton->setToolTip( dirty ? i18nc("@info:tooltip","Warning: Byte Array has been modified since last update.") : QString() );
-}
-#endif
-
 bool StringsExtractView::eventFilter( QObject* object, QEvent* event )
 {
     if( object == mContainedStringTableView )
