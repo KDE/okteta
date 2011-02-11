@@ -1,4 +1,3 @@
-/***************************************************************************
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
