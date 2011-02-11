@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, part of the KDE project.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -61,6 +61,9 @@ static const char TestDataChar = 0;
 
 void ByteArrayRawFileSynchronizerTest::initTestCase()
 {
+    // TODO: see if this could be part of a QTEST_KDE* macro
+    KGlobal::locale();
+
     QByteArray byteArray( TestDataSize, TestDataChar );
     ::textureByteArray( &byteArray );
 
