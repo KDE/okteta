@@ -35,9 +35,6 @@ class CharCodecTest : public QObject
   Q_OBJECT
 
   private Q_SLOTS: // test functions
-    void initTestCase();
-    void cleanupTestCase();
-
     void testCreateCodec_data();
     void testCreateCodec();
 };

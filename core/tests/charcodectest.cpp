@@ -27,26 +27,11 @@
 // lib
 #include <character.h>
 // KDE
-#include <kcomponentdata.h>
-// Qt
-#include <QtTest/QtTest>
+#include <qtest_kde.h>
 
 
 namespace Okteta
 {
-
-KComponentData* componentData;
-
-
-void CharCodecTest::initTestCase()
-{
-    componentData = new KComponentData( "KTextCharCodecTest" );
-}
-
-void CharCodecTest::cleanupTestCase()
-{
-    delete componentData;
-}
 
 //---------------------------------------------------------------------------- Tests -----
 
@@ -56,7 +41,6 @@ void CharCodecTest::testCreateCodec_data()
 
     foreach( const QString& codecName, CharCodec::codecNames() )
         QTest::newRow(codecName.toLatin1().constData()) << codecName;
-
 }
 
 void CharCodecTest::testCreateCodec()
@@ -73,4 +57,4 @@ void CharCodecTest::testCreateCodec()
 
 }
 
-QTEST_MAIN( Okteta::CharCodecTest )
+QTEST_KDEMAIN_CORE( Okteta::CharCodecTest )
