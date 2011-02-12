@@ -28,7 +28,7 @@
 
 namespace Okteta
 {
-static const Byte octalDigitsFilledLimit = 31;
+static const Byte octalDigitsFilledLimit = 32;
 
 unsigned int OctalByteCodec::encodingWidth() const { return 3; }
 Byte OctalByteCodec::digitsFilledLimit() const { return octalDigitsFilledLimit; }
