@@ -1,7 +1,7 @@
 /*
-    This file is part of the Okteta Core library, part of the KDE project.
+    This file is part of the Okteta Core library, made within the KDE community.
 
-    Copyright 2004 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2004,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,10 +23,10 @@
 #include "valuecodec.h"
 
 // lib
-#include "kbinarybytecodec.h"
-#include "koctalbytecodec.h"
-#include "kdecimalbytecodec.h"
-#include "khexadecimalbytecodec.h"
+#include "binarybytecodec.h"
+#include "octalbytecodec.h"
+#include "decimalbytecodec.h"
+#include "hexadecimalbytecodec.h"
 // Qt
 #include <QtCore/QString>
 
@@ -38,16 +38,16 @@ ValueCodec *ValueCodec::createCodec( ValueCoding valueCoding )
     ValueCodec *result;
     switch( valueCoding )
     {
-        case DecimalCoding: result = new KDecimalByteCodec(); break;
-        case OctalCoding:   result = new KOctalByteCodec();   break;
-        case BinaryCoding:  result = new KBinaryByteCodec();  break;
+        case DecimalCoding: result = new DecimalByteCodec(); break;
+        case OctalCoding:   result = new OctalByteCodec();   break;
+        case BinaryCoding:  result = new BinaryByteCodec();  break;
         case HexadecimalCoding:
-        default:            result = new KHexadecimalByteCodec();
+        default:            result = new HexadecimalByteCodec();
     }
     return result;
 }
 
-unsigned int ValueCodec::decode( unsigned char *byte, const QString &digits, unsigned int pos ) const
+unsigned int ValueCodec::decode( unsigned char* byte, const QString& digits, unsigned int pos ) const
 {
     const unsigned int oldPos = pos;
     const unsigned int left = digits.size() - pos;

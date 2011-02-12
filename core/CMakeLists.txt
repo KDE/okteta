@@ -12,13 +12,13 @@ set( libcontroller_SRCS
 )
 
 set(libcodecs_SRCS
-  codecs/kbinarybytecodec.cpp
+  codecs/binarybytecodec.cpp
   codecs/valuecodec.cpp
   codecs/charcodec.cpp
-  codecs/kdecimalbytecodec.cpp
+  codecs/decimalbytecodec.cpp
   codecs/kebcdic1047charcodec.cpp
-  codecs/khexadecimalbytecodec.cpp
-  codecs/koctalbytecodec.cpp
+  codecs/hexadecimalbytecodec.cpp
+  codecs/octalbytecodec.cpp
   codecs/ktextcharcodec.cpp
 )
 

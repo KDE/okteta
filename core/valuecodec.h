@@ -34,11 +34,10 @@ class QString;
 namespace Okteta
 {
 
-/** class that is able to convert codings to and from
-  * hexadecimal, decimal, octal, and binary
+/** Class that is able to convert codings to and from
+  * hexadecimal, decimal, octal, and binary.
   *
-  * the buffer will be always filled up to CodingWidth, if not using shortCodingFunction
-  * a closing '\0' will be always added
+  * The buffer will be always filled up to CodingWidth, if not using shortCodingFunction.
   *
   *@author Friedrich W. H. Kossebau
   */
@@ -62,20 +61,20 @@ class OKTETACORE_EXPORT ValueCodec
     /**
      * @return largest value which could get another digit appended and stay below 256.
      */
-    virtual unsigned char digitsFilledLimit() const = 0;
+    virtual Byte digitsFilledLimit() const = 0;
 
     /**
-     * encodes the byte using full coding width, prefixing with 0s if needed,
+     * Encodes the byte using full coding width, prefixing with 0s if needed,
      * and writes the result to digits
-     * @param digits 
+     * @param digits string to write the digits into
      * @param pos offset in digits where to write the code to
      * @param byte data to encode
      */
     virtual void encode( QString& digits, unsigned int pos, Byte byte ) const = 0;
     // TODO: make this QString* digits
     /**
-     * encodes the byte and writes the result to digits, no leading 0s
-     * @param digits
+     * Encodes the byte and writes the result to digits, no leading 0s.
+     * @param digits string to write the digits into
      * @param pos offset in digits where to write the code to
      * @param byte data to encode
      */
@@ -83,26 +82,27 @@ class OKTETACORE_EXPORT ValueCodec
     // TODO: make this QString* digits
 
     /**
-     * encodes the byte and writes the result to digits, no leading 0s
-     * @param digits
+     * Tries to increase the byte value by appending a digit to the digits of
+     * the current encoding.
+     * @param digit digit to append to encoding of current value.
      * @param pos offset in digits where to write the code to
      * @return true if successful, false otherwise
      */
     virtual bool appendDigit( Byte* byte, unsigned char digit ) const = 0;
     /**
-     * tries to remove the last (least significant) digit from byte
+     * Tries to remove the last (least significant) digit from byte.
      * @param byte value to remove the last digit from
      * @return true if successful, false otherwise
      */
     virtual void removeLastDigit( Byte* byte ) const = 0;
     /**
-     * checks if the given digit is used in the encoding
+     * Checks if the given digit is used in the encoding.
      * @param digit value to check
      * @return true if digit is valid, false otherwise
      */
     virtual bool isValidDigit( unsigned char digit ) const = 0;
     /**
-     * turns the digit into a byte with the value of the digit
+     * Turns the digit into a byte with the value of the digit.
      * @param digit digit to turn into the value
      * @return true if successful, false otherwise
      */
@@ -111,7 +111,7 @@ class OKTETACORE_EXPORT ValueCodec
 
   public:
     /**
-     * tries to decode the digits in the text into a byte
+     * Tries to decode the digits in the text into a byte.
      * @param byte pointer to the variable to store the result in
      * @param text string to turn into the value
      * @param pos offset in the text to start with decoding
