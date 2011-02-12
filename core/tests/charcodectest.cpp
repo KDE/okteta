@@ -64,8 +64,10 @@ void CharCodecTest::testCreateCodec()
     QFETCH(QString, codecName);
 
     CharCodec* codec = CharCodec::createCodec( codecName );
-    QVERIFY( codec != 0);
+
+    QVERIFY( codec != 0 );
     QCOMPARE( codec->name(), codecName );
+
     delete codec;
 }
 
