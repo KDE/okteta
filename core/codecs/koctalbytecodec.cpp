@@ -69,7 +69,7 @@ bool KOctalByteCodec::appendDigit( unsigned char *Byte, unsigned char Digit ) co
   if( turnToValue(&Digit) )
   {
     unsigned char B = *Byte;
-    if( B < 64 )
+    if( B < 32 )
     {
       B <<= 3;
       B += Digit;

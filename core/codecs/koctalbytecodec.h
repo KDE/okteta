@@ -37,7 +37,7 @@ class KOctalByteCodec : public ValueCodec
 
   public: // ValueCodec API
     virtual unsigned int encodingWidth() const { return 3; }
-    virtual unsigned char digitsFilledLimit() const { return 64; }
+    virtual unsigned char digitsFilledLimit() const { return 32; }
 
     virtual void encode( QString &Digits, unsigned  int Pos, Byte Char ) const;
     virtual void encodeShort( QString &Digits, unsigned  int Pos, Byte Char ) const;
